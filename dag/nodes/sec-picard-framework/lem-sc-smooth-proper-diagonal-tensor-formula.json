@@ -4,7 +4,7 @@
   "is": null,
   "from": {
    "node": "lem-sc-finite-duality",
-   "place": "proof, diagonal projection formula: c(L pr_1^* K) equals L Delta^* L pr_1^* K tensor c(O_{X times_S X}) for perfect proper Delta",
+   "place": "diagonal projection formula",
    "via": [
     "lem-sc-smooth-proper-relative-dualizing-general"
    ]
@@ -13,7 +13,7 @@
  },
  "kind": "statement",
  "title": "Tensor formula for the right adjoint of a perfect proper immersion",
- "statement": "Let i:Z\\to Y be a closed immersion of Noetherian schemes [def-pc-scheme] that is proper and perfect, where perfect means that i_*\\mathcal O_Z is locally a perfect complex over Y [def-pc-perfect-complex]. Let c be a right adjoint to Ri_* on quasi-coherent derived categories [def-pc-derived-category], and let K be a quasi-coherent complex on Y. Then there is a canonical isomorphism c(K)\\cong Li^*K\\mathbin{\\otimes^L}c(\\mathcal O_Y) in the derived category of quasi-coherent complexes on Z.",
+ "statement": "Let i:Z\\to Y be a closed immersion of Noetherian schemes [def-pc-scheme] that is proper and perfect, where perfect means i_*\\mathcal O_Z is locally perfect over Y [def-pc-perfect-complex]. Let c be a right adjoint to Ri_* on quasi-coherent derived categories [def-pc-derived-category], and K a quasi-coherent complex on Y. The canonical comparison morphism Li^*K\\mathbin{\\otimes^L}c(\\mathcal O_Y)\\to c(K), defined as the mate under Ri_*\\dashv c of the projection-formula morphism Ri_*(Li^*K\\mathbin{\\otimes^L}c(\\mathcal O_Y))\\to K, is an isomorphism; equivalently c(K)\\cong Li^*K\\mathbin{\\otimes^L}c(\\mathcal O_Y).",
  "source": {
   "document": "literature/stacks-project/duality.tex",
   "place": "Tag 0A9U (projection formula for a perfect proper morphism and its right adjoint)"
@@ -25,41 +25,127 @@
   "def-pc-derived-direct-image",
   "def-pc-perfect-complex",
   "def-sbc-closed-immersion-ideal-sheaf",
-  "def-pc-module-pullback"
+  "def-pc-module-pullback",
+  "lem-pc-noetherian-derived-direct-image-right-adjoint"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "The closed immersion i is proper and of finite type between Noetherian schemes, and it is perfect in the sense of lem-sc-smooth-proper-tensor-direct-sums: for z\\in Z over y\\in Y, \\mathcal O_{Z,z}=(i_*\\mathcal O_Z)_y is, as an \\mathcal O_{Y,y}-module, quasi-isomorphic to a bounded complex of finite free modules because i_*\\mathcal O_Z is locally perfect, so it has finite Tor dimension. Hence by lem-sc-smooth-proper-tensor-direct-sums (Tag 0A9R) applied to f=i, c commutes with all set-indexed direct sums.",
+   "uses": [
+    "lem-sc-smooth-proper-tensor-direct-sums"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/duality.tex",
+    "place": "Tag 0A9R"
+   }
+  },
+  {
+   "text": "Direct sums exist in D_QCoh(O_Y) and D_QCoh(O_Z) by lem-pc-derived-qcoh-direct-sums. The full subcategory E of D_QCoh(O_Y) on which the comparison is an isomorphism is strictly full, saturated and triangulated: the comparison is a natural transformation between exact functors (Li^* and -\\otimes^L c(O_Y) are exact, and c is exact as right adjoint of the exact functor Ri_*), so its isomorphism locus is closed under shifts, cones and retracts. It is closed under direct sums because both functors commute with direct sums: K\\mapsto Li^*K\\otimes^L c(O_Y) does since Li^* is a left adjoint and \\otimes^L commutes with sums, and c does by step 1.",
+   "uses": [
+    "lem-sc-smooth-proper-tensor-direct-sums",
+    "lem-pc-derived-qcoh-direct-sums"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/duality.tex",
+    "place": "Tag 0A9U proof"
+   }
+  },
+  {
+   "text": "Applying lem-pc-derived-qcoh-perfect-generation with X=Y, the smallest strictly full subcategory containing all perfect complexes and closed under shifts, cones, retracts, and arbitrary sums is D_QCoh(O_Y). The right adjoint c for i exists by lem-pc-noetherian-derived-direct-image-right-adjoint.",
+   "uses": [
+    "lem-pc-derived-qcoh-perfect-generation",
+    "lem-pc-noetherian-derived-direct-image-right-adjoint"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/duality.tex",
+    "place": "Tag 0A9U proof"
+   }
+  },
+  {
+   "text": "By lem-sc-smooth-proper-tensor-perfect-case (Tag 0A9T) applied to f=i (perfect by step 1), the comparison is an isomorphism for every perfect K; its comparison morphism is the mate under Ri_*\\dashv c of the projection-formula morphism, the same as in the statement.",
+   "uses": [
+    "lem-sc-smooth-proper-tensor-perfect-case"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/duality.tex",
+    "place": "Tag 0A9T"
+   }
+  },
+  {
+   "text": "The localizing-subcategory argument in Tag 0A9U (the More on Algebra P-resolution remark) now applies: E contains every perfect complex by step 4 and is closed under shifts, cones, retracts and arbitrary sums by steps 1 and 2. Step 3 says these perfect complexes generate D_QCoh(O_Y), hence E=D_QCoh(O_Y). Thus the comparison is an isomorphism for K, and its inverse has the displayed orientation.",
+   "uses": [
+    "lem-pc-derived-qcoh-perfect-generation",
+    "lem-sc-smooth-proper-tensor-direct-sums"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/duality.tex",
+    "place": "Tag 0A9U proof; More on Algebra P-resolution remark"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sc-smooth-proper-tensor-direct-sums",
+  "lem-pc-derived-qcoh-perfect-generation",
+  "lem-pc-noetherian-derived-direct-image-right-adjoint",
+  "lem-sc-smooth-proper-tensor-perfect-case",
+  "lem-pc-derived-qcoh-direct-sums"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/duality.tex",
+  "place": "Tag 0A9U proof"
+ },
  "mathlib_searches": [
   {
-   "tool": "leansearch",
-   "query": "right adjoint perfect proper immersion projection formula derived pullback tensor dualizing",
-   "results": "no candidate",
-   "date": "2026-10-11",
+   "tool": "grep",
+   "query": "rg -n 'projection formula|right adjoint.*pullback|perfect proper' Mathlib/AlgebraicGeometry",
+   "results": "none",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "right adjoint perfect proper projection formula",
+   "results": "ordinary sheaf adjunctions only",
+   "date": "2026-10-10",
    "verdict": "no match"
   },
   {
    "tool": "loogle",
-   "query": "perfect proper map right adjoint tensor formula",
-   "results": "no candidate",
-   "date": "2026-10-11",
-   "verdict": "no match"
-  },
-  {
-   "tool": "grep",
-   "query": "rg -n 'projection formula|right adjoint.*pullback|dualizing' .lake/packages/mathlib/Mathlib/AlgebraicGeometry",
-   "results": "none",
-   "date": "2026-10-11",
+   "query": "CategoryTheory perfect proper right adjoint tensor pullback",
+   "results": "0 hits",
+   "date": "2026-10-10",
    "verdict": "no match"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-sc-smooth-proper-relative-dualizing-general",
   "by": "worker",
   "date": "2026-10-10"
  },
  "chapter": "sec-picard-framework",
- "unit": "sk-thm-picard-duality"
+ "unit": "sk-thm-picard-duality",
+ "split_report": {
+  "date": "2026-10-11",
+  "item": "lem-sc-smooth-proper-diagonal-tensor-formula",
+  "worker": "stage1",
+  "summary": "Repaired returned one-step proof with Tag 0A9R and 0A9T nodes, localizing-subcategory argument, and explicit comparison morphism.",
+  "blueprint": "Diagonal projection-formula clause of lem-sc-finite-duality.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-dtf1902",
+  "group": "E1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-dtf1902 (reviewer sub-agent of L); spot-checked: All return points repaired: (a) 0A9R node, (b) step 2 isomorphism locus, (c) perfect-generation node (localizing form of Bondal-van den Bergh/Neeman; not a duplicate of compact-generation, which only says compactly generated) + right-adjoint node, (d) 0A9T node, (e) step 5 localizing argument, comparison map defined in statement. No cycle. FIX more, RETURN less: B3 'perfect morphism' undefined in both new nodes -> defined as finite Tor dimension (Stacks perfect for finite type Noetherian); B3 comparison morphism undefined in perfect-case node -> defined via projection formula and counit, deps def-pc-derived-pullback, def-pc-kflat-complex; E step 1/4 hypothesis translation added (i_*O_Z locally perfect => finite Tor dimension); C1 step 2 now cites lem-pc-derived-qcoh-direct-sums and spells out exactness and sum-compatibility of Li^*(-)(x)^L c(O_Y).; 3 file(s) fixed by the reviewer"
+ }
 }
