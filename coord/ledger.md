@@ -1870,3 +1870,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 15:53 L: returned deliver/F1/lem-weil-pbc-etale-cohomology-over-open (reviewer RETURN: 1. C1/C4 (missing 03F3 step): step 3: the item compares cohomology OVER THE OBJECT j:U->X of X_Et (def-weil-pbc-sites-an)
 - 15:53 L: merged deliver/H1/lem-sc-fibre-dimension-after-base-change (reviewer PASS; after a return; new nodes: 0)
 - 15:53 L: returned deliver/K1/lem-weil-pbc-sets-etale-section-continuity (reviewer RETURN: Points 1(b), 2, 3 and 4 of the 15:35 return are repaired (step 1 cites the affine-site topos, the new comparison node, s)
+- 15:53 L: merged deliver/M1/lem-sc-local-section-quotient-finite-free (reviewer PASS; first push; new nodes: 0)

@@ -4,7 +4,7 @@
   "is": null,
   "from": {
    "node": "lem-sc-riemann-roch",
-   "place": "Proof of (*), determinant paragraph: local splitting of the short exact sequence of locally free modules",
+   "place": "Proof of (*), determinant paragraph: 'locally the sequence splits'",
    "via": [
     "lem-sc-local-splitting-finite-free"
    ]
@@ -13,18 +13,65 @@
  },
  "kind": "statement",
  "title": "A finite locally free quotient admits a local section",
- "statement": "Let $X$ be a scheme [def-pc-scheme] and let $0\\to\\mathcal E_1\\xrightarrow{u}\\mathcal E_2\\xrightarrow{q}\\mathcal E_3\\to0$ be a short exact sequence of $\\mathcal O_X$-modules, with $\\mathcal E_3$ locally free of constant finite rank in the sense of [def-amb-finite-locally-free-module]. For every point $x\\in X$ there is an open neighbourhood $U$ of $x$ and an $\\mathcal O_U$-linear map $s:\\mathcal E_3|_U\\to\\mathcal E_2|_U$ such that $q|_U\\circ s=\\mathrm{id}_{\\mathcal E_3|_U}$.",
+ "statement": "Let $X$ be a scheme [def-pc-scheme] and let $0\\to\\mathcal E_1\\xrightarrow{u}\\mathcal E_2\\xrightarrow{q}\\mathcal E_3\\to0$ be a short exact sequence [def-weil-pbc-exact-sequence] of $\\mathcal O_X$-modules [def-weil-sheaf-of-modules-category], with $\\mathcal E_3$ locally free of constant finite rank in the sense of [def-amb-finite-locally-free-module]. For every point $x\\in X$ there is an open neighbourhood $U$ of $x$ and an $\\mathcal O_U$-linear map $s:\\mathcal E_3|_U\\to\\mathcal E_2|_U$ such that $q|_U\\circ s=\\mathrm{id}_{\\mathcal E_3|_U}$.",
  "source": {
   "document": "literature/blueprint/master/blueprint/sec-picard-framework/sk-thm-picard-rr/lem-sc-riemann-roch.md",
   "place": "Proof of (*), determinant paragraph: local splitting"
  },
  "stmt_deps": [
   "def-pc-scheme",
+  "def-weil-pbc-exact-sequence",
+  "def-weil-sheaf-of-modules-category",
   "def-amb-finite-locally-free-module"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Fix $x\\in X$. By [def-amb-finite-locally-free-module], choose a Zariski open neighbourhood $V$ of $x$, a finite rank $d\\ge0$, and an $\\mathcal O_V$-linear isomorphism $t:\\mathcal O_V^{\\oplus d}\\xrightarrow{\\sim}\\mathcal E_3|_V$. Let $e_i=t(\\mathbf e_i)\\in\\mathcal E_3(V)$ for $1\\le i\\le d$, where $\\mathbf e_i$ is the $i$th standard basis section.",
+   "uses": [
+    "def-amb-finite-locally-free-module"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-picard-framework/sk-thm-picard-rr/lem-sc-riemann-roch.md",
+    "place": "Proof of (*), determinant paragraph: 'locally the sequence splits'; choose a trivialization of the quotient"
+   }
+  },
+  {
+   "text": "Exactness at $\\mathcal E_3$ makes $q$ an epimorphism [def-weil-pbc-exact-sequence]. For each $i$, apply [lem-weil-pbc-ringed-space-module-exactness-local-lifting] (1) to $q|_V$ and $e_i$: an open cover of $V$ carries local lifts of $e_i$. Choose a member $V_i$ containing $x$ and a section $b_i\\in\\mathcal E_2(V_i)$ with $q(b_i)=e_i|_{V_i}$. Since $d$ is finite, $U=V\\cap\\bigcap_{i=1}^d V_i$ is open and contains $x$; each $b_i|_U$ lifts $e_i|_U$. When $d=0$, take $U=V$ and there are no lifts to choose.",
+   "uses": [
+    "def-weil-pbc-exact-sequence",
+    "lem-weil-pbc-ringed-space-module-exactness-local-lifting"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/modules.tex",
+    "place": "Section Tag 01AF (section-kernels), cokernel and local surjectivity; Lemma Tag 01AG (lemma-abelian), exactness of sheaves of modules"
+   }
+  },
+  {
+   "text": "On $U$, define $s$ by $s(\\sum_{i=1}^d a_i e_i|_W)=\\sum_{i=1}^d a_i b_i|_W$ for every open $W\\subseteq U$ and $a_i\\in\\mathcal O_X(W)$. The basis from step 1 makes the coefficients unique; this formula is $\\mathcal O_W$-linear and commutes with restrictions, so it gives an $\\mathcal O_U$-module morphism. Applying $q$ gives $q(s(\\sum_i a_i e_i))=\\sum_i a_i q(b_i)=\\sum_i a_i e_i$, hence $q|_U\\circ s=\\mathrm{id}$. For $d=0$, both $\\mathcal E_3|_U$ and the sum are zero and the same identity holds.",
+   "uses": [
+    "def-amb-finite-locally-free-module",
+    "def-weil-sheaf-of-modules-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-picard-framework/sk-thm-picard-rr/lem-sc-riemann-roch.md",
+    "place": "Proof of (*), determinant paragraph: 'locally the sequence splits'; construct the section from lifted basis vectors"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-amb-finite-locally-free-module",
+  "def-weil-pbc-exact-sequence",
+  "lem-weil-pbc-ringed-space-module-exactness-local-lifting",
+  "def-weil-sheaf-of-modules-category"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/master/blueprint/sec-picard-framework/sk-thm-picard-rr/lem-sc-riemann-roch.md",
+  "place": "Proof of (*), determinant paragraph, expanded using Stacks Project Modules Tags 01AF and 01AG"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -49,12 +96,36 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-sc-local-splitting-finite-free",
   "by": "worker",
   "date": "2026-10-10"
  },
  "chapter": "sec-picard-framework",
- "unit": "sk-thm-picard-rr"
+ "unit": "sk-thm-picard-rr",
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "lem-sc-local-section-quotient-finite-free",
+  "worker": "stage1",
+  "summary": "Expanded local splitting into a quotient trivialization, finitely many local lifts of its basis through the surjective sheaf map, and the section defined on their common neighbourhood. The required lifting fact is already stated by lem-weil-pbc-ringed-space-module-exactness-local-lifting.",
+  "blueprint": "Realizes the sentence 'locally the sequence splits' in the determinant paragraph of the proof of (*) by lifting a local basis of the quotient.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-ringed-space-module-exactness-local-lifting",
+    "why": "Its ringed-space statement gives local lifts through the epimorphism q; this generic sheaf fact is not supplied by the Riemann--Roch unit."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-ringed-space-module-exactness-local-lifting"
+ ],
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-lsq",
+  "group": "M1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-lsq (reviewer sub-agent of L); spot-checked: Source: blueprint lem-sc-riemann-roch.md proof of (*), determinant paragraph line 145 'locally the sequence splits'; Stacks modules.tex section-kernels (01AF) and lemma-abelian (01AG) for step 2. Statement unchanged in mathematics; only stmt_deps def-weil-pbc-exact-sequence and def-weil-sheaf-of-modules-category added for notions already used; from.place reworded (split-owned). Step 1 carried by def-amb-finite-locally-free-module (Zariski cover with E|_V iso O_V^d, pick the member containing x). Step 2: def-weil-pbc-exact-sequence gives q epimorphism; lem-weil-pbc-ringed-space-module-exactness-local-lifting (1) applied to q with W=V, h=e_i gives a cover with local lifts; finitely many lifts intersect to an open U containing x. Step 3 elementary: sections of E3|_W are unique O(W)-combinations of the e_i|_W, the formula is O-linear and restriction-compatible (def-weil-sheaf-of-modules-category morphism), q o s = id coefficientwise. Small cases: d=0 (E3=0, s=0) handled in steps 2-3; d=1 with E2=E3, q=id gives s=id. Tool use lem-weil-pbc-ringed-space-module-exactness-local-lifting (unit sk-thm-p1) accepted as a generic sheaf fact used as a black box (C8). No new nodes, no Mathlib leaf. blueprint_refs search 'local splitting locally free quotient section': 0 matches, same_as [] correct. Report mentions a citations.json not in the commit (harmless). Start Sat Oct 10 03:53:18 PM UTC 2026, end Sat Oct 10 03:53:42 PM UTC 2026."
+ }
 }
