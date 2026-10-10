@@ -2,7 +2,7 @@
  "id": "lem-weil-pbc-formal-systems-graded-vanishing",
  "kind": "statement",
  "title": "Serre vanishing for a finite graded module on a proper scheme",
- "statement": "Let $A$ be Noetherian [def-weil-pbc-noetherian-ring], let $f:X\\to\\operatorname{Spec}(A)$ be proper [def-weil-proper-morphism], and let $B=\\bigoplus_{n\\ge0}B_n$ be a finitely generated graded commutative $A$-algebra (graded-algebra convention as in [def-pc-standard-graded-algebra]). Let $\\widetilde B$ be the quasi-coherent algebra associated to $B$ [def-weil-pbc-associated-module] and put $\\mathcal B=f^*\\widetilde B$ [def-pc-module-pullback]. If $\\mathcal G$ is a finite type [pqf-def-coherent] graded quasi-coherent $\\mathcal B$-module, and $\\mathcal L$ is an ample [def-weil-pbc-ample-invertible-module] invertible module [def-sc-invertible-module] on $X$, then there is $d_0$ such that $H^p(X,\\mathcal G\\otimes\\mathcal L^{\\otimes d})=0$ for all $p>0$ and $d\\ge d_0$, where $H^p$ is sheaf cohomology [pqf-def-cohomology].",
+ "statement": "Let $A$ be Noetherian [def-weil-pbc-noetherian-ring], let $f:X\\to\\operatorname{Spec}(A)$ be proper [def-weil-proper-morphism], and let $B=\\bigoplus_{n\\ge0}B_n$ be a finitely generated graded commutative $A$-algebra (the grading has $B_iB_j\\subseteq B_{i+j}$; no condition $B_0=A$ or generation in degree one is imposed). Let $\\widetilde B$ be the quasi-coherent algebra associated to $B$ [def-weil-pbc-associated-module] and put $\\mathcal B=f^*\\widetilde B$ [def-pc-module-pullback]. If $\\mathcal G$ is a finite type graded quasi-coherent $\\mathcal B$-module (locally admitting a surjection from a finite direct sum of graded shifts of $\\mathcal B$), and $\\mathcal L$ is an ample [def-weil-pbc-ample-invertible-module] invertible module [def-sc-invertible-module] on $X$, then there is $d_0$ such that $H^p(X,\\mathcal G\\otimes\\mathcal L^{\\otimes d})=0$ for all $p>0$ and $d\\ge d_0$, tensor products are those of [def-pur-sheaf-tensor-product], and $H^p$ is sheaf cohomology [pqf-def-cohomology].",
  "source": {
   "document": "literature/stacks-project/coherent.tex",
   "place": "Cohomology of Schemes, Lemma 0897 (lemma-graded-finiteness), part (2), using Properties Proposition 01Q3 (properties-proposition-characterize-ample), proper pushforward finiteness, and the Serre vanishing argument"
@@ -10,17 +10,109 @@
  "stmt_deps": [
   "def-weil-pbc-noetherian-ring",
   "def-weil-proper-morphism",
-  "def-pc-standard-graded-algebra",
   "def-weil-pbc-associated-module",
   "def-pc-module-pullback",
   "pqf-def-coherent",
   "def-sc-invertible-module",
   "pqf-def-cohomology",
-  "def-weil-pbc-ample-invertible-module"
+  "def-weil-pbc-ample-invertible-module",
+  "def-pur-sheaf-tensor-product"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Forget the grading. The hypothesis of graded finite type supplies local finite generating sections of the underlying $\\mathcal B$-module. Form $X'=\\operatorname{Spec}(B)\\times_{\\operatorname{Spec}(A)}X$ with projections $\\pi:X'\\to X$ and $f':X'\\to\\operatorname{Spec}(B)$. The morphism $\\pi$ is affine, since it is the base change of a morphism of affine schemes. Properness of $f'$ follows by base change. Since $B$ is a finite type algebra over Noetherian $A$, it is Noetherian, and $X'$ is Noetherian because $f'$ is proper, hence finite type.",
+   "uses": [
+    "lem-weil-pbc-morphism-affine-schemes-affine",
+    "lem-weil-pbc-affine-morphism-permanence",
+    "lem-weil-pbc-proper-fp-permanence",
+    "lem-weil-pbc-finite-type-algebra-noetherian",
+    "lem-weil-pbc-finite-type-over-noetherian",
+    "def-weil-proper-morphism"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/coherent.tex",
+    "place": "Lemma 0897 (coherent-lemma-graded-finiteness), proof of (2)"
+   }
+  },
+  {
+   "text": "On an affine open $U=\\operatorname{Spec}(R)\\subseteq X$, $\\pi^{-1}U=\\operatorname{Spec}(R\\otimes_A B)$; the associated-algebra and pullback constructions identify $\\mathcal B|_U$ with the sheaf associated to $R\\otimes_A B$. Thus $X'$ is the relative spectrum of $\\mathcal B$, and $\\pi_*\\mathcal O_{X'}=\\mathcal B$. By the affine module correspondence choose $\\mathcal G'$ quasi-coherent with $\\pi_*\\mathcal G'=\\mathcal G$. Finite type is preserved by that correspondence, so $\\mathcal G'$ is finite type; since $X'$ is locally Noetherian, it is coherent.",
+   "uses": [
+    "def-weil-pbc-associated-module",
+    "def-pc-module-pullback",
+    "lem-weil-pbc-affine-morphism-relative-spec",
+    "lem-weil-pbc-affine-module-correspondence",
+    "lem-weil-pbc-affine-module-finite-type",
+    "pqf-lem-coherent-ft-locnoeth"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/coherent.tex",
+    "place": "Lemma 0897 (coherent-lemma-graded-finiteness), proof of (2)"
+   }
+  },
+  {
+   "text": "Set $\\mathcal L'=\\pi^*\\mathcal L$. Pullback along the affine morphism $\\pi$ preserves ampleness. Apply coherent Serre vanishing to $f'$, $\\mathcal G'$ and $\\mathcal L'$: there is one $d_0\\ge0$ with $H^p(X',\\mathcal G'\\otimes(\\mathcal L')^{\\otimes d})=0$ for all $p>0$, $d\\ge d_0$.",
+   "uses": [
+    "def-pc-module-pullback",
+    "lem-weil-pbc-pullback-ample-invertible",
+    "lem-weil-pbc-coherent-serre-vanishing"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/coherent.tex",
+    "place": "Lemma 0897 (coherent-lemma-graded-finiteness), proof of (2)"
+   }
+  },
+  {
+   "text": "For every $d\\ge0$ there is a canonical isomorphism $\\pi_*(\\mathcal G'\\otimes\\pi^*\\mathcal L^{\\otimes d})=\\mathcal G\\otimes\\mathcal L^{\\otimes d}$. To verify it, take an open set on which $\\mathcal L$ is free of rank one. Both sides identify with $\\pi_*\\mathcal G'$ there; changing the generator by a unit $a$ multiplies both identifications by the same $a^d$, so the identifications glue. The same trivializations show $(\\pi^*\\mathcal L)^{\\otimes d}=\\pi^*(\\mathcal L^{\\otimes d})$.",
+   "uses": [
+    "def-sc-invertible-module",
+    "def-pc-module-pullback"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/coherent.tex",
+    "place": "Lemma 0897 (coherent-lemma-graded-finiteness), proof of (2)"
+   }
+  },
+  {
+   "text": "The tensor product upstairs is quasi-coherent: on the same trivializing opens it equals $\\mathcal G'$. The affine cohomology edge isomorphism for $\\pi$ therefore identifies $H^p(X,\\mathcal G\\otimes\\mathcal L^{\\otimes d})$ with $H^p(X',\\mathcal G'\\otimes(\\mathcal L')^{\\otimes d})$. The latter vanishes by Step 3 for every $p>0$ and $d\\ge d_0$, proving the assertion.",
+   "uses": [
+    "pqf-def-coherent",
+    "lem-weil-pbc-affine-morphism-cohomology-edge"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/coherent.tex",
+    "place": "Lemma 0897 (coherent-lemma-graded-finiteness), proof of (2)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-morphism-affine-schemes-affine",
+  "lem-weil-pbc-affine-morphism-permanence",
+  "lem-weil-pbc-proper-fp-permanence",
+  "lem-weil-pbc-finite-type-algebra-noetherian",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "def-weil-proper-morphism",
+  "def-weil-pbc-associated-module",
+  "def-pc-module-pullback",
+  "lem-weil-pbc-affine-morphism-relative-spec",
+  "lem-weil-pbc-affine-module-correspondence",
+  "lem-weil-pbc-affine-module-finite-type",
+  "pqf-lem-coherent-ft-locnoeth",
+  "lem-weil-pbc-pullback-ample-invertible",
+  "lem-weil-pbc-coherent-serre-vanishing",
+  "def-sc-invertible-module",
+  "pqf-def-coherent",
+  "lem-weil-pbc-affine-morphism-cohomology-edge"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/coherent.tex",
+  "place": "Lemma 0897 (coherent-lemma-graded-finiteness), proof of (2)"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -45,7 +137,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "stage1",
   "item": "lem-weil-pbc-grothendieck-existence-projective",
@@ -65,5 +157,21 @@
  },
  "chapter": "sec-proper-base-change",
  "unit": "sk-thm-p1",
- "lead_note": " L 2026-10-10: ampleness citation changed from def-sc-ample (over a field) to def-weil-pbc-ample-invertible-module (Stacks 01PS), the notion of the source 0897 (2) and of the citer lem-weil-pbc-vanishing-projective."
+ "lead_note": " L 2026-10-10: ampleness citation changed from def-sc-ample (over a field) to def-weil-pbc-ample-invertible-module (Stacks 01PS), the notion of the source 0897 (2) and of the citer lem-weil-pbc-vanishing-projective.",
+ "tool_uses": [
+  "pqf-lem-coherent-ft-locnoeth"
+ ],
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "lem-weil-pbc-formal-systems-graded-vanishing",
+  "worker": "stage1",
+  "summary": "Expanded Stacks 0897(2) using affine base change, affine module equivalence and finite-type preservation, affine pullback ampleness, coherent Serre vanishing, and an explicit local calculation for projection formula. Removed the incorrect standard graded algebra convention: B need not have degree-zero A or degree-one generators."
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "group": "G1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed by the lead of G1; spot-checked by L: L read the five steps (0897 (2)): base change to X' = Spec B x X, affine module correspondence 01SB (new unsplit), coherent Serre vanishing on X' (new unsplit, 02O1/0B5T; cf. lem-pc-serre-vanishing for the field case), projection formula checked on trivializations, affine cohomology edge; statement corrected to drop the standard-graded citation; tool use 01XZ recorded by G1."
+ }
 }
