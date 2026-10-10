@@ -1,8 +1,8 @@
 # Work queue
 
-826 items; claim with `tools/claim.py next <group> [--stage N]`.
+829 items; claim with `tools/claim.py next <group> [--stage N]`.
 
-## Stage 1: nodes to split (656)
+## Stage 1: nodes to split (659)
 
 | node | distance to a target | Lean state on the done branch |
 |---|---|---|
@@ -14,7 +14,6 @@
 | `lem-weil-pbc-idempotent-endomorphism-charpoly-field` | 1011 | none |
 | `lem-weil-pbc-idempotent-endomorphism-image-base-change` | 1011 | none |
 | `lem-weil-pbc-lft-over-field-isolated-point-residue-finite` | 1011 | none |
-| `lem-weil-pbc-popescu-delocalize-base` | 1011 | none |
 | `lem-weil-pbc-popescu-delocalize-height-zero` | 1011 | none |
 | `lem-weil-pbc-popescu-desingularize-strictly-standard` | 1011 | none |
 | `lem-weil-pbc-popescu-enlarge-solution-modulo` | 1011 | none |
@@ -134,6 +133,8 @@
 | `lem-weil-pbc-module-pullback-affine-sections` | 1012 | none |
 | `lem-weil-pbc-module-stalk-filtered-colimit` | 1012 | none |
 | `lem-weil-pbc-polynomial-local-completion-formally-smooth` | 1012 | none |
+| `lem-weil-pbc-popescu-delocalize-weak` | 1012 | none |
+| `lem-weil-pbc-popescu-height-zero-auxiliary-algebra-localizations` | 1012 | none |
 | `lem-weil-pbc-power-series-field-cohen-regular-complete` | 1012 | none |
 | `lem-weil-pbc-principal-localization-naive-cotangent` | 1012 | none |
 | `lem-weil-pbc-quasi-coherent-ideal-zero-set-affine` | 1012 | none |
@@ -147,7 +148,9 @@
 | `lem-weil-pbc-sheaf-hom-finite-presentation-kernel` | 1012 | none |
 | `lem-weil-pbc-sheaf-isomorphism-local-open-cover` | 1012 | none |
 | `lem-weil-pbc-smooth-algebra-filtered-colimit-descent` | 1012 | none |
+| `lem-weil-pbc-smooth-retract-standard-smooth` | 1012 | none |
 | `lem-weil-pbc-spec-local-ring-canonical-morphism` | 1012 | none |
+| `lem-weil-pbc-standard-smooth-include-generators` | 1012 | none |
 | `lem-weil-pbc-symmetric-degree-exact` | 1012 | none |
 | `lem-weil-pbc-tensor-field-extension-galois-invariants` | 1012 | none |
 | `lem-weil-pbc-tor-long-exact-first-variable` | 1012 | none |
@@ -838,7 +841,7 @@
 | `lem-weil-pbc-p1-field-dimension-one` | 4 | state |
 | `lem-weil-pbc-projective-space-zero-isomorphism` | 4 | state |
 
-Not open yet: 668 nodes that wait for stage 1, 457 nodes that wait for a statement dependency.
+Not open yet: 671 nodes that wait for stage 1, 458 nodes that wait for a statement dependency.
 
 ## Stage 3: modules to prove (0)
 
