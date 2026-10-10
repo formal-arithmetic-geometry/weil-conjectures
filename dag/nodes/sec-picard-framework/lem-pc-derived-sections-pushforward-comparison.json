@@ -25,9 +25,50 @@
   "def-pc-derived-direct-image",
   "def-sc-sheaf-cohomology-functor"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Fix an open subscheme U⊆Y and put V=f^{-1}U. By the definition of the underived direct image, Γ(U,(f_U)_*G)=Γ(V,G) naturally for every O_V-module sheaf G; this is the degree-zero section identity used in Tag 08D5.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/perfect.tex",
+    "place": "Tag 08D5, proof of part (2), displayed identity Γ(U,f_*G)=Γ(f^{-1}U,G)"
+   }
+  },
+  {
+   "text": "Let P be the one-point ringed space (pt,Z) with structure sheaf the ring Z, so Mod(Z_P)=Ab. Let π_U:(U,O_U)→P and π_V:(V,O_V)→P be the morphisms of ringed spaces [def-weil-locally-ringed-space-morphism] given by the constant map and the unique ring maps Z→O_U(U), Z→O_V(V). Uniqueness of ring maps out of Z gives π_V=π_U∘f_U as ringed-space morphisms (f_U is a morphism of schemes, hence of ringed spaces). By the direct image of [def-pc-ringed-spaces-derived-direct-image], (π_U)_*G=Γ(U,G) and (π_V)_*G=Γ(V,G); since R(π_U)_* is computed by applying (π_U)_* to any K-injective resolution, as is RΓ(U,-), we have RΓ(U,-)=R(π_U)_* and RΓ(V,-)=R(π_V)_* as functors to D(Ab). (Note P is not a scheme, and the structure morphism U→Spec Z would not do: its derived direct image lands in D(O_{Spec Z}), not in complexes of abelian groups.)",
+   "uses": [
+    "def-weil-locally-ringed-space-morphism",
+    "def-pc-ringed-spaces-derived-direct-image"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/cohomology.tex",
+    "place": "Tag 0D5T context: direct image to a one-point ringed space is global sections"
+   }
+  },
+  {
+   "text": "Apply [lem-pc-ringed-spaces-derived-direct-image-composition] to the composable morphisms of ringed spaces V→U→P (f_U then π_U). It gives R(π_U)_*∘R(f_U)_*≅R(π_U∘f_U)_*=R(π_V)_*. Evaluating at E|_V and using Step 2 yields RΓ(U,R(f_U)_*(E|_V))≅RΓ(V,E|_V), naturally in E; the identification is compatible with restriction to smaller opens U'⊆U by construction, giving naturality in U.",
+   "uses": [
+    "lem-pc-ringed-spaces-derived-direct-image-composition"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/cohomology.tex",
+    "place": "Tag 0D5T (lemma-derived-pushforward-composition), applied to V→U→(pt,Z)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-ringed-spaces-derived-direct-image-composition",
+  "def-weil-locally-ringed-space-morphism",
+  "def-pc-ringed-spaces-derived-direct-image"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/perfect.tex",
+  "place": "Tag 08D5, proof of part (2); derived mechanism via Tag 0D5T for V→U→(pt,Z)"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -59,12 +100,28 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-pc-derived-direct-image-uniform-truncation-bound",
   "by": "worker",
   "date": "2026-10-10"
  },
  "chapter": "sec-picard-framework",
- "unit": "sk-thm-picard-duality"
+ "unit": "sk-thm-picard-duality",
+ "split_report": {
+  "date": "2026-10-11",
+  "item": "lem-pc-derived-sections-pushforward-comparison",
+  "worker": "stage1",
+  "summary": "Repaired the returned split by dropping the incorrectly typed underived and abstract K-injective child nodes. Step 1 is now the elementary definition of direct image for O-modules on the Zariski space. Steps 2-3 (reviewer fix) use the morphisms to the one-point ringed space (pt,Z) and the ringed-space derived direct-image composition theorem Tag 0D5T, avoiding the false exact-left-adjoint hypothesis for f_U.",
+  "blueprint": "Realizes the first proof step of lem-sc-finite-duality: comparison of dualizing sheaves via derived direct-image composition and affine-open derived sections.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-dsp2039",
+  "group": "M1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-dsp2039 (reviewer sub-agent of L); spot-checked: Repaired re-push after the 19:22 return: (1) exact-left-adjoint claim gone, (2) underived etale child dropped, Step 1 elementary Zariski definition of f_*, (3) ill-ordered composition child dropped: all three repaired. Second reading by M1 missed a new fault it introduced: Step 2 claimed RΓ(U,-)=Rp_* for p:U->Spec Z, ill-typed (Rp_* lands in D(O_SpecZ), not D(Ab); recovering RΓ needs the item itself for p), and the cited lem-pc-derived-direct-image-composition is scheme-only. FIX more, RETURN less: item Steps 2-3 rewritten via the one-point ringed space (pt,Z), R(pi_U)_*=RΓ(U,-) by def-pc-ringed-spaces-derived-direct-image, pi_V=pi_U∘f_U; C1/C4: new statement-only node lem-pc-ringed-spaces-derived-direct-image-composition (Stacks 0D5T, ringed spaces; LeanFinder no derived match) cited in Step 3; tool use lem-pc-derived-direct-image-composition dropped; stmt_deps/proof_deps corrected. Item statement unchanged.; 2 file(s) fixed by the reviewer; 1 statement node(s) added by the reviewer (FIX more, RETURN less)"
+ }
 }
