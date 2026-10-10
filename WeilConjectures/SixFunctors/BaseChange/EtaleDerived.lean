@@ -25,13 +25,62 @@ scheme commutes with derived pushforward.
 
 @[expose] public section
 
-universe u
+universe u' u
 
 open CategoryTheory Category Limits
 
 namespace AlgebraicGeometry
 
 open Scheme Etale
+
+/-- The form of `AlgebraicGeometry.Etale.isIso_derivedBaseChangeMapPlus_of_etale` for a general
+coefficient category `A`, in which the pullback along `g'` is only assumed to preserve injective
+objects. Proving it for a general `A` and instantiating it is much cheaper for the kernel than
+the direct proof over `ModuleCat Λ`. -/
+theorem Etale.isIso_derivedBaseChangeMapPlus_of_injective_upperStar (A : Type u')
+    [Category.{u + 1} A] [Abelian A] [IsGrothendieckAbelian.{u + 1} A] [HasSmallSiteSheafify A]
+    {X' X Y' Y : Scheme.{u}} {g' : X' ⟶ X} {f' : X' ⟶ Y'} {f : X ⟶ Y} {g : Y' ⟶ Y}
+    (sq : IsPullback g' f' f g) [Etale g]
+    (hinj : ∀ I : Sheaf X.smallEtaleTopology A, Injective I → Injective ((g')^*[A].obj I)) :
+    IsIso (Etale.derivedBaseChangeMapPlus A sq.toCommSq) := by
+  have : Etale g' := MorphismProperty.of_isPullback sq.flip inferInstance
+  have : IsIso (Etale.baseChangeMap A sq.toCommSq) :=
+    Etale.isIso_baseChangeMap_flip_of_isPullback A sq.flip
+  have hK : ∀ K, IsIso
+      ((Etale.derivedBaseChangeMapPlus A sq.toCommSq).app K) := by
+    intro K
+    obtain ⟨n, hn⟩ := K.2
+    have : K.IsGE n := (K.isGE_ι_obj_iff n).1 hn
+    obtain ⟨L, _, ⟨e⟩⟩ := DerivedCategory.Plus.exists_injective_nonempty_iso K n
+    let M := (InjectiveObject.ι _).mapCochainComplexPlus.obj L
+    let P := (HomotopyCategory.Plus.quotient _).obj M
+    suffices IsIso ((Etale.derivedBaseChangeMapPlus A sq.toCommSq).app
+        (DerivedCategory.Plus.Qh.obj P)) by
+      rw [← NatTrans.isIso_app_iff_of_iso _ e]
+      exact this
+    have hM : ∀ m, (f')_*[A].rightAcyclic
+        ((((g')^*[A]).mapCochainComplexPlus.obj M).obj.X m) := fun m ↦
+      have hI : Injective (M.obj.X m) := (L.obj.X m).2
+      have : Injective ((((g')^*[A]).mapCochainComplexPlus.obj M).obj.X m) :=
+        hinj _ hI
+      (f')_*[A].rightAcyclic_of_injective _
+    have h₁ : IsIso ((f')_*[A].rightDerivedFunctorPlusUnit.app
+        (((g')^*[A]).mapHomotopyCategoryPlus.obj P)) :=
+      (f')_*[A].isIso_rightDerivedFunctorPlusUnit_app_of_rightAcyclic
+        (((g')^*[A]).mapCochainComplexPlus.obj M) hM
+    have h₂ : IsIso ((f)_*[A].rightDerivedFunctorPlusUnit.app P) := by
+      dsimp only [P, M]
+      infer_instance
+    have hfac := Etale.derivedBaseChangeMapPlus_fac_app A sq.toCommSq P
+    have : IsIso (((g)^*[A]).mapDerivedCategoryPlus.map
+        ((f)_*[A].rightDerivedFunctorPlusUnit.app P) ≫
+        (Etale.derivedBaseChangeMapPlus A sq.toCommSq).app
+          (DerivedCategory.Plus.Qh.obj P)) := by
+      rw [hfac]
+      infer_instance
+    exact IsIso.of_isIso_comp_left (((g)^*[A]).mapDerivedCategoryPlus.map
+        ((f)_*[A].rightDerivedFunctorPlusUnit.app P)) _
+  exact NatIso.isIso_of_isIso_app _
 
 variable (Λ : Type (u + 1)) [CommRing Λ]
 
@@ -57,44 +106,9 @@ morphism `g'` preserves injectives (`AlgebraicGeometry.Etale.injective_upperStar
 This is the compatibility of the higher direct images with étale localisation used in blueprint
 `sbc-lem-etale-locality` (Stacks 0D6G). -/
 theorem Etale.isIso_derivedBaseChangeMapPlus_of_etale (sq : IsPullback g' f' f g) [Etale g] :
-    IsIso (Etale.derivedBaseChangeMapPlus (ModuleCat.{u + 1} Λ) sq.toCommSq) := by
+    IsIso (Etale.derivedBaseChangeMapPlus (ModuleCat.{u + 1} Λ) sq.toCommSq) :=
   have : Etale g' := MorphismProperty.of_isPullback sq.flip inferInstance
-  have : IsIso (Etale.baseChangeMap (ModuleCat.{u + 1} Λ) sq.toCommSq) :=
-    Etale.isIso_baseChangeMap_flip_of_isPullback (ModuleCat.{u + 1} Λ) sq.flip
-  have hK : ∀ K, IsIso
-      ((Etale.derivedBaseChangeMapPlus (ModuleCat.{u + 1} Λ) sq.toCommSq).app K) := by
-    intro K
-    obtain ⟨n, hn⟩ := K.2
-    have : K.IsGE n := (K.isGE_ι_obj_iff n).1 hn
-    obtain ⟨L, _, ⟨e⟩⟩ := DerivedCategory.Plus.exists_injective_nonempty_iso K n
-    let M := (InjectiveObject.ι _).mapCochainComplexPlus.obj L
-    let P := (HomotopyCategory.Plus.quotient _).obj M
-    suffices IsIso ((Etale.derivedBaseChangeMapPlus (ModuleCat.{u + 1} Λ) sq.toCommSq).app
-        (DerivedCategory.Plus.Qh.obj P)) by
-      rw [← NatTrans.isIso_app_iff_of_iso _ e]
-      exact this
-    have hM : ∀ m, (f')_*[ModuleCat.{u + 1} Λ].rightAcyclic
-        ((((g')^*[ModuleCat.{u + 1} Λ]).mapCochainComplexPlus.obj M).obj.X m) := fun m ↦
-      have : Injective (M.obj.X m) := (L.obj.X m).2
-      have : Injective ((((g')^*[ModuleCat.{u + 1} Λ]).mapCochainComplexPlus.obj M).obj.X m) :=
-        Etale.injective_upperStar_obj_of_etale Λ g' (M.obj.X m)
-      (f')_*[ModuleCat.{u + 1} Λ].rightAcyclic_of_injective _
-    have h₁ : IsIso ((f')_*[ModuleCat.{u + 1} Λ].rightDerivedFunctorPlusUnit.app
-        (((g')^*[ModuleCat.{u + 1} Λ]).mapHomotopyCategoryPlus.obj P)) :=
-      (f')_*[ModuleCat.{u + 1} Λ].isIso_rightDerivedFunctorPlusUnit_app_of_rightAcyclic
-        (((g')^*[ModuleCat.{u + 1} Λ]).mapCochainComplexPlus.obj M) hM
-    have h₂ : IsIso ((f)_*[ModuleCat.{u + 1} Λ].rightDerivedFunctorPlusUnit.app P) := by
-      dsimp only [P, M]
-      infer_instance
-    have hfac := Etale.derivedBaseChangeMapPlus_fac_app (ModuleCat.{u + 1} Λ) sq.toCommSq P
-    have : IsIso (((g)^*[ModuleCat.{u + 1} Λ]).mapDerivedCategoryPlus.map
-        ((f)_*[ModuleCat.{u + 1} Λ].rightDerivedFunctorPlusUnit.app P) ≫
-        (Etale.derivedBaseChangeMapPlus (ModuleCat.{u + 1} Λ) sq.toCommSq).app
-          (DerivedCategory.Plus.Qh.obj P)) := by
-      rw [hfac]
-      infer_instance
-    exact IsIso.of_isIso_comp_left (((g)^*[ModuleCat.{u + 1} Λ]).mapDerivedCategoryPlus.map
-        ((f)_*[ModuleCat.{u + 1} Λ].rightDerivedFunctorPlusUnit.app P)) _
-  exact NatIso.isIso_of_isIso_app _
+  Etale.isIso_derivedBaseChangeMapPlus_of_injective_upperStar _ sq fun I _ ↦
+    Etale.injective_upperStar_obj_of_etale Λ g' I
 
 end AlgebraicGeometry

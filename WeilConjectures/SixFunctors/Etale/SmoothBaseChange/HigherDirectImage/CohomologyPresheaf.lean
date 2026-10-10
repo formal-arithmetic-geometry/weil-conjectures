@@ -42,7 +42,7 @@ vanishing criterion for `R^q h_* (Λ/dΛ)`.
 
 @[expose] public section
 
-universe u
+universe u' u
 
 open CategoryTheory Limits
 
@@ -110,6 +110,66 @@ noncomputable def Etale.freeSheafSections {X : Scheme.{u}}
           (uliftYoneda.{u + 1}.obj W.unop ⋙ ModuleCat.free Λ)).app W').hom x)) h₀).trans
         ((congr_arg (f.hom.app W').hom h₂).trans h₃))
 
+/-- The map `Hom(h^* Fr(W), K[q]) ⟶ Hom(Fr(W), H^q(Rh_* K))`, natural in `W`, for a functor
+`Fr : X.Etale ⥤ Sheaf X.smallEtaleTopology A` and a general coefficient category `A`: the
+construction of `AlgebraicGeometry.Etale.higherDirectImagePresheafToHom`, which is its value
+at the free sheaves. Defining it for a general `A` and instantiating it is much cheaper for the
+kernel than writing it out over `ModuleCat Λ`. -/
+noncomputable def Etale.higherDirectImagePresheafToHomOfFunctor (A : Type u') [Category.{u + 1} A]
+    [Abelian A] [IsGrothendieckAbelian.{u + 1} A] [HasSmallSiteSheafify A] [MonoidalCategory A]
+    [MonoidalPreadditive A] [SymmetricCategory A] [MonoidalClosed A]
+    [Abelian.HasFunctorialFlatResolution A] {X Y : Scheme.{u}}
+    (Fr : X.Etale ⥤ Sheaf X.smallEtaleTopology A) (h : Y ⟶ X) (q : ℤ)
+    (K : DerivedCategory.Plus (Sheaf Y.smallEtaleTopology A)) :
+    (Fr ⋙ (h)^*[A] ⋙ DerivedCategory.Plus.singleFunctor _ 0).op ⋙ preadditiveYoneda.obj (K⟦q⟧) ⟶
+      Fr.op ⋙ preadditiveYoneda.obj
+        ((DerivedCategory.Plus.homologyFunctor _ q).obj (R+((h)_*[A]).obj K)) :=
+  Functor.whiskerRight (NatTrans.op (Functor.whiskerLeft Fr
+    (((h)^*[A]).mapDerivedCategoryPlusSingleFunctor 0).hom))
+      (preadditiveYoneda.obj (K⟦q⟧)) ≫
+  ({ app W := AddCommGrpCat.ofHom
+      ((Etale.derivedUpperStarLowerStarAdjunctionPlus A h).homAddEquiv
+        _ _).toAddMonoidHom
+     naturality W W' g := by
+      ext f
+      exact (Etale.derivedUpperStarLowerStarAdjunctionPlus A
+        h).homEquiv_naturality_left _ _ } :
+    (Fr ⋙ DerivedCategory.Plus.singleFunctor _ 0 ⋙
+      D+((h)^*[A])).op ⋙ preadditiveYoneda.obj (K⟦q⟧) ⟶
+    (Fr ⋙ DerivedCategory.Plus.singleFunctor _ 0).op ⋙
+      preadditiveYoneda.obj (R+((h)_*[A]).obj (K⟦q⟧))) ≫
+  ({ app W := AddCommGrpCat.ofHom <|
+      (Preadditive.leftComp _
+        ((DerivedCategory.Plus.singleFunctorCompHomologyFunctorIso 0).inv.app _)).comp
+        (DerivedCategory.Plus.homologyFunctor _ 0).mapAddHom
+     naturality W W' g := by
+      have hs := (DerivedCategory.Plus.singleFunctorCompHomologyFunctorIso
+        (C := Sheaf X.smallEtaleTopology A) 0).inv.naturality
+          (Fr.map g.unop)
+      dsimp at hs
+      ext f
+      revert f
+      change ∀ f : (DerivedCategory.Plus.singleFunctor _ 0).obj (Fr.obj W.unop) ⟶
+          R+((h)_*[A]).obj (K⟦q⟧),
+        (DerivedCategory.Plus.singleFunctorCompHomologyFunctorIso 0).inv.app _ ≫
+          (DerivedCategory.Plus.homologyFunctor _ 0).map
+            ((DerivedCategory.Plus.singleFunctor _ 0).map (Fr.map g.unop) ≫ f) =
+        Fr.map g.unop ≫
+          (DerivedCategory.Plus.singleFunctorCompHomologyFunctorIso 0).inv.app
+            (Fr.obj W.unop) ≫
+          (DerivedCategory.Plus.homologyFunctor _ 0).map f
+      intro f
+      rw [Functor.map_comp, ← reassoc_of% hs] } :
+    (Fr ⋙ DerivedCategory.Plus.singleFunctor _ 0).op ⋙
+      preadditiveYoneda.obj (R+((h)_*[A]).obj (K⟦q⟧)) ⟶
+    Fr.op ⋙ preadditiveYoneda.obj ((DerivedCategory.Plus.homologyFunctor _ 0).obj
+      (R+((h)_*[A]).obj (K⟦q⟧)))) ≫
+  Functor.whiskerLeft Fr.op (preadditiveYoneda.map
+    ((DerivedCategory.Plus.homologyFunctor _ 0).map
+      ((R+((h)_*[A]).commShiftIso q).hom.app K) ≫
+    ((DerivedCategory.Plus.homologyFunctor _ 0).isoShiftZero ℤ).inv.app _ ≫
+      ((DerivedCategory.Plus.homologyFunctor _ 0).shiftIso q 0 q (add_zero q)).hom.app _))
+
 /-- The map `Hom(h^* Λ[W], K[q]) ⟶ Hom(Λ[W], H^q(Rh_* K))`, natural in `W`: the adjunction
 `Lh^* ⊣ Rh_*` (using `Lh^*(Λ[W][0]) ≅ (h^* Λ[W])[0]`), then the degree-`0` homology, using
 `H^0(Λ[W][0]) ≅ Λ[W]` and `H^0((Rh_* K)[q]) ≅ H^q(Rh_* K)`. -/
@@ -118,51 +178,7 @@ noncomputable def Etale.higherDirectImagePresheafToHom {X Y : Scheme.{u}} (h : Y
     Etale.higherDirectImagePresheaf Λ h q K ⟶
       (Etale.freeSheaf Λ X).op ⋙ preadditiveYoneda.obj
         ((DerivedCategory.Plus.homologyFunctor _ q).obj (R+((h)_*[ModuleCat.{u + 1} Λ]).obj K)) :=
-  Functor.whiskerRight (NatTrans.op (Functor.whiskerLeft (Etale.freeSheaf Λ X)
-    (((h)^*[ModuleCat.{u + 1} Λ]).mapDerivedCategoryPlusSingleFunctor 0).hom))
-      (preadditiveYoneda.obj (K⟦q⟧)) ≫
-  ({ app W := AddCommGrpCat.ofHom
-      ((Etale.derivedUpperStarLowerStarAdjunctionPlus (ModuleCat.{u + 1} Λ) h).homAddEquiv
-        _ _).toAddMonoidHom
-     naturality W W' g := by
-      ext f
-      exact (Etale.derivedUpperStarLowerStarAdjunctionPlus (ModuleCat.{u + 1} Λ)
-        h).homEquiv_naturality_left _ _ } :
-    (Etale.freeSheaf Λ X ⋙ DerivedCategory.Plus.singleFunctor _ 0 ⋙
-      D+((h)^*[ModuleCat.{u + 1} Λ])).op ⋙ preadditiveYoneda.obj (K⟦q⟧) ⟶
-    (Etale.freeSheaf Λ X ⋙ DerivedCategory.Plus.singleFunctor _ 0).op ⋙
-      preadditiveYoneda.obj (R+((h)_*[ModuleCat.{u + 1} Λ]).obj (K⟦q⟧))) ≫
-  ({ app W := AddCommGrpCat.ofHom <|
-      (Preadditive.leftComp _
-        ((DerivedCategory.Plus.singleFunctorCompHomologyFunctorIso 0).inv.app _)).comp
-        (DerivedCategory.Plus.homologyFunctor _ 0).mapAddHom
-     naturality W W' g := by
-      have hs := (DerivedCategory.Plus.singleFunctorCompHomologyFunctorIso
-        (C := Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)) 0).inv.naturality
-          ((Etale.freeSheaf Λ X).map g.unop)
-      dsimp at hs
-      ext f
-      revert f
-      change ∀ f : (DerivedCategory.Plus.singleFunctor _ 0).obj ((Etale.freeSheaf Λ X).obj W.unop) ⟶
-          R+((h)_*[ModuleCat.{u + 1} Λ]).obj (K⟦q⟧),
-        (DerivedCategory.Plus.singleFunctorCompHomologyFunctorIso 0).inv.app _ ≫
-          (DerivedCategory.Plus.homologyFunctor _ 0).map
-            ((DerivedCategory.Plus.singleFunctor _ 0).map ((Etale.freeSheaf Λ X).map g.unop) ≫ f) =
-        (Etale.freeSheaf Λ X).map g.unop ≫
-          (DerivedCategory.Plus.singleFunctorCompHomologyFunctorIso 0).inv.app
-            ((Etale.freeSheaf Λ X).obj W.unop) ≫
-          (DerivedCategory.Plus.homologyFunctor _ 0).map f
-      intro f
-      rw [Functor.map_comp, ← reassoc_of% hs] } :
-    (Etale.freeSheaf Λ X ⋙ DerivedCategory.Plus.singleFunctor _ 0).op ⋙
-      preadditiveYoneda.obj (R+((h)_*[ModuleCat.{u + 1} Λ]).obj (K⟦q⟧)) ⟶
-    (Etale.freeSheaf Λ X).op ⋙ preadditiveYoneda.obj ((DerivedCategory.Plus.homologyFunctor _ 0).obj
-      (R+((h)_*[ModuleCat.{u + 1} Λ]).obj (K⟦q⟧)))) ≫
-  Functor.whiskerLeft (Etale.freeSheaf Λ X).op (preadditiveYoneda.map
-    ((DerivedCategory.Plus.homologyFunctor _ 0).map
-      ((R+((h)_*[ModuleCat.{u + 1} Λ]).commShiftIso q).hom.app K) ≫
-    ((DerivedCategory.Plus.homologyFunctor _ 0).isoShiftZero ℤ).inv.app _ ≫
-      ((DerivedCategory.Plus.homologyFunctor _ 0).shiftIso q 0 q (add_zero q)).hom.app _))
+  Etale.higherDirectImagePresheafToHomOfFunctor _ (Etale.freeSheaf Λ X) h q K
 
 /-- The canonical map from the presheaf `W ↦ H^q(W ×_X Y, K|)` to the sheaf `H^q(Rh_* K)`, of
 presheaves of abelian groups on `X_ét`: a class `Λ[W ×_X Y][0] ⟶ K[q]` goes, by adjunction, to

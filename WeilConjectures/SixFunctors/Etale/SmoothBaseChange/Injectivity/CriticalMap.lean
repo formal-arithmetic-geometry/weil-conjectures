@@ -5,6 +5,7 @@ Authors: Nailin Guan
 -/
 module
 
+public import WeilConjectures.Mathlib.CategoryTheory.Abelian.DiagramLemmas.Four
 public import WeilConjectures.SixFunctors.Etale.SmoothBaseChange.Injectivity.LongExactSequence
 
 /-!
@@ -93,15 +94,8 @@ theorem Etale.mono_baseChangeHomologyMap (q : ℤ) (hq : 1 ≤ q)
   have hI := Etale.isZero_baseChangeSourceFunctor_obj_of_injective Λ p g (q := q) (by lia)
     (Injective.under F)
   have : Epi δS := hS₂.epi_f (hI.eq_of_tgt _ _)
-  exact Abelian.mono_of_epi_of_epi_of_mono
-    (ComposableArrows.homMk₂ (Etale.baseChangeHomologyMap Λ sq (q - 1) (Injective.under F))
-      (Etale.baseChangeHomologyMap Λ sq (q - 1) (cokernel (Injective.ι F)))
-      (Etale.baseChangeHomologyMap Λ sq q F)
-      (Etale.baseChangeHomologyMap_naturality Λ sq (q - 1) _).symm hδ :
-      ComposableArrows.mk₂ _ δS ⟶ ComposableArrows.mk₂ _ δT)
-    hS₁.exact_toComposableArrows hT₁.exact_toComposableArrows
-    (inferInstanceAs (Epi δS)) (inferInstanceAs (Epi (Etale.baseChangeHomologyMap Λ sq _ _)))
-    (inferInstanceAs (Mono (Etale.baseChangeHomologyMap Λ sq _ _)))
+  exact Abelian.mono_of_epi_of_epi_of_mono_of_comm _ _ _ _ _ _ _
+    (Etale.baseChangeHomologyMap_naturality Λ sq (q - 1) _) hδ.symm wS₁ wT₁ hT₁
 
 /-- Blueprint `sk-prop-injectivity` (3): the cokernel of the critical map sits inside the
 higher direct image of an injective sheaf.
@@ -128,23 +122,7 @@ theorem Etale.mono_cokernelDesc (q : ℤ) (hq : 1 ≤ q)
   have := hprev g e h sq (cokernel α)
   have hG := Etale.isZero_baseChangeSourceFunctor_obj_of_injective Λ p g (q := q) (by lia) G
   have : Epi δS := hS₂.epi_f (hG.eq_of_tgt _ _)
-  let φ : ShortComplex.mk (Etale.baseChangeHomologyMap Λ sq (q - 1) (cokernel α) ≫ δT)
-      ((Etale.baseChangeTargetFunctor Λ e h q).map α)
-      (by simp [wT₂]) ⟶
-      ShortComplex.mk (Etale.baseChangeHomologyMap Λ sq q F)
-        ((Etale.baseChangeTargetFunctor Λ e h q).map α) hα :=
-    { τ₁ := δS
-      τ₂ := 𝟙 _
-      τ₃ := 𝟙 _
-      comm₁₂ := by simp [hδ] }
-  refine ((ShortComplex.exact_iff_of_epi_of_isIso_of_mono φ).1 ?_).mono_cokernelDesc
-  let ψ : ShortComplex.mk (Etale.baseChangeHomologyMap Λ sq (q - 1) (cokernel α) ≫ δT)
-      ((Etale.baseChangeTargetFunctor Λ e h q).map α)
-      (by simp [wT₂]) ⟶ ShortComplex.mk _ _ wT₂ :=
-    { τ₁ := Etale.baseChangeHomologyMap Λ sq (q - 1) (cokernel α)
-      τ₂ := 𝟙 _
-      τ₃ := 𝟙 _ }
-  exact (ShortComplex.exact_iff_of_epi_of_isIso_of_mono ψ).2 hT₂
+  exact Abelian.mono_cokernelDesc_of_comm δS _ δT _ _ hδ wT₂ hT₂ _
 
 /-- Blueprint `sk-prop-injectivity` (2): the cokernel of the critical map grows with the
 coefficient sheaf.

@@ -821,6 +821,7 @@ public import WeilConjectures.Mathlib.Analysis.Analytic.ConvergenceRadius
 public import WeilConjectures.Mathlib.Analysis.Complex.Polynomial.Basic
 public import WeilConjectures.Mathlib.Analysis.Normed.Field.Basic
 public import WeilConjectures.Mathlib.CategoryTheory.Abelian.CommSq
+public import WeilConjectures.Mathlib.CategoryTheory.Abelian.DiagramLemmas.Four
 public import WeilConjectures.Mathlib.CategoryTheory.Abelian.GrothendieckAxioms.Sheaf
 public import WeilConjectures.Mathlib.CategoryTheory.Abelian.GrothendieckCategory.Basic
 public import WeilConjectures.Mathlib.CategoryTheory.Abelian.GrothendieckCategory.ModuleEmbedding.GabrielPopescu
