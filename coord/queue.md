@@ -2,7 +2,7 @@
 
 911 items; claim with `tools/claim.py next <group> [--stage N]`.
 
-## Stage 1: nodes to split (626)
+## Stage 1: nodes to split (625)
 
 | node | distance to a target | Lean state on the done branch |
 |---|---|---|
@@ -29,7 +29,6 @@
 | `lem-weil-pbc-cohomology-powers-ideal-application` | 1013 | none |
 | `lem-weil-pbc-conormal-module-principal-localization` | 1013 | none |
 | `lem-weil-pbc-criterion-flatness-fibre` | 1013 | none |
-| `lem-weil-pbc-degree-p-extension-regular` | 1013 | none |
 | `lem-weil-pbc-derivation-extends-finite-type-extension` | 1013 | none |
 | `lem-weil-pbc-differential-zero-iff-pth-power` | 1013 | none |
 | `lem-weil-pbc-etale-cohomology-local-ring-colimit` | 1013 | none |
@@ -633,7 +632,7 @@
 | `lem-pc-linear-pair-graded-finite` | - | none |
 | `def-exc-jacobian-presentation` | - | none |
 
-## Stage 2: nodes to state (285)
+## Stage 2: nodes to state (286)
 
 | node | distance to Mathlib | kind |
 |---|---|---|
@@ -698,6 +697,7 @@
 | `lem-weil-pbc-cotangent-complex-symmetric-algebra` | 1 | state |
 | `lem-weil-pbc-cover-module-exact` | 1 | state |
 | `lem-weil-pbc-criterion-flatness-fibre-noetherian` | 1 | state |
+| `lem-weil-pbc-degree-p-extension-regular` | 1 | state |
 | `lem-weil-pbc-derivation-extends` | 1 | state |
 | `lem-weil-pbc-derivation-nonzero-on-non-pth-power` | 1 | state |
 | `lem-weil-pbc-directed-colimit-base-change-elementwise` | 1 | state |
@@ -923,7 +923,7 @@
 | `lem-weil-pbc-p1-field-dimension-one` | 4 | state |
 | `lem-weil-pbc-projective-space-zero-isomorphism` | 4 | state |
 
-Not open yet: 638 nodes that wait for stage 1, 559 nodes that wait for a statement dependency.
+Not open yet: 637 nodes that wait for stage 1, 559 nodes that wait for a statement dependency.
 
 ## Stage 3: modules to prove (0)
 
