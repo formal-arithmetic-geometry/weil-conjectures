@@ -1333,3 +1333,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 11:44 L: merged C1 def-weil-pbc-curve-setting, E1 lem-weil-pbc-finite-ring-map-quasi-finite (00PM, 0 new), G1 lem-weil-pbc-normal-ring-integrally-closed-total (034M, 0 new).
 - 11:44 L: accepted thm-galois-lc-etale (6 steps along the Lean; 5 new nodes: 03RV, 03Q1 (4), two Mathlib leaves, torsors node closed on slopmaster2; def-weil-pbc-finite-torsors lacks the local-sections condition: lead note, HUMAN.md).
 - 11:44 L: lem-galois-descent and lem-galois-glue flagged unreachable (the thm-galois-lc-etale proof no longer uses them).
+- 2026-10-10, delivery of C1: def-sc-constant-sheaves merged from deliver/C1/def-sc-constant-sheaves (1 commit(s), 0 new node(s), spot-checked by L: L: definition checked (sheafification of the constant presheaf Z/n on C_et)); claim closed

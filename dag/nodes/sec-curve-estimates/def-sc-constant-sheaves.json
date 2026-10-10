@@ -3,25 +3,49 @@
  "blueprint": {
   "is": "def-sc-constant-sheaves",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "definition",
  "title": "Constant etale sheaves on a curve",
- "statement": "Let $C$ be a curve and let $n\\geq1$.\nThe *constant etale sheaf* $\\mathbf F_n$ on $C_{\\Et}$ is the\nsheaf $\\underline{\\mathbf Z/n\\mathbf Z}$ associated to the constant\npresheaf $U\\mapsto\\mathbf Z/n\\mathbf Z$ (see\n[def-weil-pbc-etale-sheaves]); its geometric stalks are\n$\\mathbf Z/n\\mathbf Z$.",
+ "statement": "Let $C$ be a curve [def-sc-curves] and let $n\\geq1$. The *constant etale sheaf* $\\mathbf F_n$ on the small etale site $C_{\\Et}$ [def-weil-pbc-etale-sheaves] is the constant sheaf [def-weil-pbc-constant-sheaf] with value $\\mathbf Z/n\\mathbf Z$: the sheafification of the constant presheaf $U\\mapsto\\mathbf Z/n\\mathbf Z$. Its geometric stalks are $\\mathbf Z/n\\mathbf Z$ by [lem-weil-pbc-constant-sheaf-geometric-stalk].",
  "source": {
   "document": "literature/blueprint/master/blueprint/sec-curve-estimates/sk-prop-cd/def-sc-constant-sheaves.md",
   "place": "node def-sc-constant-sheaves, order 1007"
  },
  "stmt_deps": [
   "def-weil-pbc-etale-sheaves",
-  "def-sc-curves"
+  "def-sc-curves",
+  "def-weil-pbc-constant-sheaf",
+  "lem-weil-pbc-constant-sheaf-geometric-stalk"
  ],
  "proof": [],
  "proof_deps": [],
  "proof_origin": null,
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "constant etale sheaf with value ZMod n on a scheme, sheafification of constant presheaf",
+   "results": "CategoryTheory.constantSheaf (Mathlib.CategoryTheory.Sites.ConstantSheaf), plus unrelated sheafification definitions",
+   "date": "2026-10-10",
+   "verdict": "match for the defining construction; the geometric-stalk assertion is a separate theorem"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.constantSheaf",
+   "results": "CategoryTheory.constantSheaf : D to Sheaf J D (Mathlib.CategoryTheory.Sites.ConstantSheaf); Sheaf.IsConstant and related declarations",
+   "date": "2026-10-10",
+   "verdict": "match for the defining construction"
+  },
+  {
+   "tool": "grep",
+   "query": "rg -n 'noncomputable def constantSheaf' Mathlib/CategoryTheory/Sites/ConstantSheaf.lean; sed -n '60,67p' Mathlib/CategoryTheory/Sites/ConstantSheaf.lean",
+   "results": "Mathlib/CategoryTheory/Sites/ConstantSheaf.lean:66: `constantSheaf J D` is the constant-presheaf functor followed by `presheafToSheaf J D`; its value at AddCommGrpCat.of (ZMod n) is the sheafification of the constant presheaf with value Z/nZ",
+   "date": "2026-10-10",
+   "verdict": "match for the defining construction"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [],
  "blueprint_kind": "definition",
@@ -45,6 +69,20 @@
    "missing": []
   }
  },
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "def-sc-constant-sheaves",
+  "worker": "stage1",
+  "summary": "The constant sheaf with value Z/nZ is the specialization of the general constant-sheaf construction in def-weil-pbc-constant-sheaf and Mathlib's CategoryTheory.constantSheaf. The imported geometric-stalk clause remains in the statement and cites the already split lem-weil-pbc-constant-sheaf-geometric-stalk, which proves it for any abelian group. No new node is needed. The read-only slopmaster2 source has Etale.constantModSheaf (SmoothBaseChange/Defs.lean:94), but it is formulated over an arbitrary coefficient ring and does not itself state the geometric-stalk assertion.",
+  "blueprint": "The definition sentence of def-sc-constant-sheaves defines F_n from the constant presheaf; its final geometric-stalk clause is covered by the existing lem-weil-pbc-constant-sheaf-geometric-stalk."
+ },
  "chapter": "sec-curve-estimates",
- "unit": "sk-prop-cd"
+ "unit": "sk-prop-cd",
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "group": "C1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed by the lead of C1; spot-checked by L: L: definition checked (sheafification of the constant presheaf Z/n on C_et)"
+ }
 }
