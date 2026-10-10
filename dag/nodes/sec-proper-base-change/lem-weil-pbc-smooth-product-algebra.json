@@ -1,0 +1,87 @@
+{
+ "id": "lem-weil-pbc-smooth-product-algebra",
+ "kind": "statement",
+ "title": "A product of two smooth algebras over one base is smooth",
+ "statement": "Let $R$ be a commutative ring and let $S'$, $S''$ be commutative $R$-algebras, with structure maps $\\psi':R\\to S'$ and $\\psi'':R\\to S''$. Make the product ring $S'\\times S''$ (componentwise operations, unit $(1,1)$) an $R$-algebra via $r\\mapsto(\\psi'(r),\\psi''(r))$. If $R\\to S'$ and $R\\to S''$ are smooth ring maps [def-weil-pbc-smooth-ring-map], then $R\\to S'\\times S''$ is a smooth ring map.",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Algebra, Lemma Tag 0GIF (lemma-product-smooth, line 37613), direction 'if' (both factors smooth implies the product smooth); Stacks' proof is 'Omitted' with a hint via Lemma lemma-locally-smooth and lemma-spec-product"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-smooth-ring-map"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "product of two smooth R-algebras A × B is a smooth R-algebra",
+   "results": "Algebra.FormallySmooth.comp, Prod.algebra (Mathlib.Algebra.Algebra.Prod), Algebra.Smooth, Algebra.FormallySmooth.pi_iff (Mathlib.RingTheory.Smooth.Pi), Subalgebra.prod, Algebra.Smooth.mk, Algebra.FormallySmooth.instForallOfFinite (Mathlib.RingTheory.Smooth.Pi), Algebra.Smooth.comp",
+   "date": "2026-10-10",
+   "verdict": "no match (formal smoothness of finite Pi products only)"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "a finite product of smooth algebras over R is smooth over R",
+   "results": "Algebra.FormallySmooth.pi_iff, Algebra.FormallySmooth.instForallOfFinite, Algebra.FormallySmooth.of_pi (Mathlib.RingTheory.Smooth.Pi), Algebra.FormallyEtale.instForallOfFinite, Algebra.FormallyEtale.pi_iff (Mathlib.RingTheory.Etale.Pi), Algebra.instSmoothOfIsStandardSmooth",
+   "date": "2026-10-10",
+   "verdict": "no match for Algebra.Smooth; ingredients only"
+  },
+  {
+   "tool": "loogle",
+   "query": "Algebra.Smooth ?R (?A × ?B)",
+   "results": "none",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "Algebra.Smooth ?R ((i : ?I) → ?A i)",
+   "results": "none",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "local_search",
+   "query": "Algebra.Smooth.pi (project ~/weil-conjectures-slopmaster2)",
+   "results": "no items; index: unavailable (not a proof of absence)",
+   "date": "2026-10-10",
+   "verdict": "inconclusive"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rnE 'Smooth R \\(Π|Smooth R \\(∀|Smooth.*Prod|piFinTwo' Mathlib/RingTheory Mathlib/Algebra/Algebra; grep -n theorem/instance Mathlib/RingTheory/Smooth/Pi.lean; sed -n 125,150p Mathlib/RingTheory/Finiteness/FinitePresentationLocal.lean; sed -n 535,560p Mathlib/RingTheory/Smooth/Basic.lean",
+   "results": "Smooth/Pi.lean:29 FormallySmooth.of_pi, :50 FormallySmooth.pi_iff [Finite I], :122 instance FormallySmooth R (Π i, A i); Finiteness/FinitePresentationLocal.lean:135 instance Algebra.FinitePresentation.pi [Finite ι] : FinitePresentation R (∀ a, S a); Smooth/Basic.lean:540 class Smooth (formallySmooth, finitePresentation), :554 Smooth.of_equiv (e : A ≃ₐ[R] B); only LinearEquiv.piFinTwo (LinearAlgebra/Pi.lean:611), no AlgEquiv between Π (i : Fin 2) and a binary product found; no Algebra.Smooth instance for Prod or Pi",
+   "date": "2026-10-10",
+   "verdict": "no match; candidate assembly recorded in mathlib_candidate"
+  }
+ ],
+ "mathlib_match": null,
+ "mathlib_candidate": {
+  "declaration": "Algebra.FormallySmooth.instForallOfFinite, Algebra.FinitePresentation.pi, Algebra.Smooth.of_equiv",
+  "file": "Mathlib/RingTheory/Smooth/Pi.lean",
+  "how": "for I = Fin 2 with A 0 = S', A 1 = S'': Algebra.Smooth R (Π i, A i) by Smooth.mk (Smooth/Basic.lean:540) from the instance FormallySmooth R (Π i, A i) (Smooth/Pi.lean:122) and FinitePresentation.pi (Mathlib/RingTheory/Finiteness/FinitePresentationLocal.lean:135), then transported to S' × S'' along an R-algebra isomorphism (Π i : Fin 2, A i) ≃ₐ[R] S' × S'' with Smooth.of_equiv (Smooth/Basic.lean:554); not a leaf: Mathlib states it for Pi, not for the binary product, and the transport needs an algebra isomorphism not found as one declaration (only LinearEquiv.piFinTwo, LinearAlgebra/Pi.lean:611)"
+ },
+ "status": "unsplit",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-smooth-over-product-ring",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1"
+}

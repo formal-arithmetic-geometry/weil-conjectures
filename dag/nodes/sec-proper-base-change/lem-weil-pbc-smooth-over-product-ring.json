@@ -10,9 +10,59 @@
  "stmt_deps": [
   "def-weil-pbc-smooth-ring-map"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "*Step 1 (the projections are smooth).* Put $R=R_1\\times R_2$, $e_1=(1,0)$, and let $p_1:R\\to R_1$, $(r_1,r_2)\\mapsto r_1$, be the first projection, a surjective ring homomorphism making $R_1$ an $R$-algebra. We show that $R_1$ has a standard smooth presentation over $R$ [def-weil-pbc-standard-smooth-algebra] with $n=c=1$ and $f_1=f=e_1x-1\\in R[x]$ [def-weil-pbc-mv-polynomial-ring]. Writing a polynomial $P=\\sum_k (a_k,b_k)x^k\\in R[x]$ as the pair $(P_1,P_2)=(\\sum_k a_kx^k,\\sum_k b_kx^k)$ identifies $R[x]$ with the product ring $R_1[x]\\times R_2[x]$ (sums and products of polynomials are computed from sums and products of coefficients, which are componentwise in $R$); under it $f=(x-1,-1)$. Let $\\pi:R[x]\\to R_1$, $P\\mapsto P_1(1)$; it is a ring homomorphism (evaluation at $1$ after the first projection), it restricts to $p_1$ on $R$, so it is an $R$-algebra map, and it is surjective (the constant $(r_1,0)$ maps to $r_1$). Its kernel is $(f)$: $\\pi(f)=1-1=0$; conversely if $P_1(1)=0$ then $P_1=(x-1)Q_1$ for some $Q_1\\in R_1[x]$ (division by the monic $x-1$, remainder $P_1(1)=0$), and then $P=(P_1,P_2)=(x-1,-1)\\cdot(Q_1,-P_2)=f\\cdot(Q_1,-P_2)$. So $\\pi$ induces an $R$-algebra isomorphism $\\alpha:R[x]/(f)\\xrightarrow{\\sim}R_1$. The $1\\times1$ Jacobian determinant is $g=\\partial f/\\partial x=e_1$, whose image in $R_1$ is $\\pi(e_1)=p_1(e_1)=1$, a unit. Hence $p_1:R\\to R_1$ is standard smooth, and smooth by [lem-weil-pbc-standard-smooth-is-smooth]. By symmetry (with $e_2=(0,1)$ and $f=e_2x-1$) the second projection $p_2:R\\to R_2$ is smooth.",
+   "uses": [
+    "def-weil-pbc-standard-smooth-algebra",
+    "def-weil-pbc-mv-polynomial-ring",
+    "lem-weil-pbc-standard-smooth-is-smooth",
+    "def-weil-pbc-smooth-ring-map"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra, Lemma Tag 00T7 (lemma-standard-smooth, line 37274), part (1), applied to the presentation R_1 = R[x]/((1,0)x-1) of the item's source line; the kernel computation is written out by the agent"
+   }
+  },
+  {
+   "text": "*Step 2 (each factor is smooth over $R$).* Make $A_1$ an $R$-algebra by $\\psi_1=\\varphi_1\\circ p_1:R\\to R_1\\to A_1$, $(r_1,r_2)\\mapsto\\varphi_1(r_1)$, and $A_2$ by $\\psi_2=\\varphi_2\\circ p_2$. Since $p_1$ is smooth (Step 1) and $\\varphi_1$ is smooth (hypothesis), the composite $\\psi_1$ is smooth by [lem-weil-pbc-smooth-ring-map-base-change-composition] (2); likewise $\\psi_2$ is smooth.",
+   "uses": [
+    "lem-weil-pbc-smooth-ring-map-base-change-composition",
+    "def-weil-pbc-smooth-ring-map"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra, Lemma Tag 00TD (lemma-compose-smooth, line 37597)"
+   }
+  },
+  {
+   "text": "*Step 3 (the product).* By Step 2, $A_1$ and $A_2$ are smooth $R$-algebras via $\\psi_1,\\psi_2$, so by [lem-weil-pbc-smooth-product-algebra] (with $S'=A_1$, $S''=A_2$) the product ring $A_1\\times A_2$ is smooth over $R$ via $r\\mapsto(\\psi_1(r),\\psi_2(r))$. For $r=(r_1,r_2)$ this is $(\\varphi_1(r_1),\\varphi_2(r_2))=(\\varphi_1\\times\\varphi_2)(r)$, so the structure map of $A_1\\times A_2$ over $R$ is exactly $\\varphi_1\\times\\varphi_2$, which is therefore a smooth ring map [def-weil-pbc-smooth-ring-map].",
+   "uses": [
+    "lem-weil-pbc-smooth-product-algebra",
+    "def-weil-pbc-smooth-ring-map"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra, Lemma Tag 0GIF (lemma-product-smooth, line 37613), direction 'if'"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-standard-smooth-algebra",
+  "def-weil-pbc-mv-polynomial-ring",
+  "lem-weil-pbc-standard-smooth-is-smooth",
+  "def-weil-pbc-smooth-ring-map",
+  "lem-weil-pbc-smooth-ring-map-base-change-composition",
+  "lem-weil-pbc-smooth-product-algebra"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "agent-written from Algebra, Lemmas Tag 00T7 (lemma-standard-smooth, line 37274), Tag 00TD (lemma-compose-smooth, line 37597) and Tag 0GIF (lemma-product-smooth, line 37613); no Stacks lemma states the item"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -41,10 +91,17 @@
    "results": "only the instances Algebra.Etale (R × S) R and Algebra.Etale (R × S) S via RingHom.fst/snd (Mathlib/RingTheory/Etale/Basic.lean lines 258-276, proved by Etale.of_isLocalizationAway (1,0) / (0,1)) and Algebra.FormallySmooth for finite Pi over one base (Smooth/Pi.lean lines 29, 50, 122); no smoothness statement for a product algebra over a product base, no Algebra.Smooth for products over one base",
    "date": "2026-10-10",
    "verdict": "no match; Lean candidates for the proof: Algebra.Etale (R × S) R instance (Etale/Basic.lean:264) + Algebra.Smooth.comp + FormallySmooth.pi_iff + finite presentation of a product"
+  },
+  {
+   "tool": "loogle",
+   "query": "Algebra.Smooth ?R (?A × ?B)",
+   "results": "none",
+   "date": "2026-10-10",
+   "verdict": "no match (no smoothness statement for a binary product algebra even over one base)"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "worker",
@@ -64,5 +121,17 @@
   }
  },
  "chapter": "sec-proper-base-change",
- "unit": "sk-thm-p1"
+ "unit": "sk-thm-p1",
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "lem-weil-pbc-smooth-over-product-ring",
+  "worker": "stage1",
+  "summary": "Definition used: def-weil-pbc-smooth-ring-map is Stacks 00T2 (finite presentation, H_1(NL)=0, Omega finite projective), so the proof goes only through stated lemmas about smooth maps, not through formal smoothness. Route as in the node's source: (1) the projection R_1 x R_2 -> R_1 has the standard smooth presentation R[x]/((1,0)x-1) with Jacobian (1,0) mapping to 1, kernel computation written out, smooth by lem-weil-pbc-standard-smooth-is-smooth (00T7); (2) R_1 x R_2 -> R_1 -> A_1 smooth by composition (00TD, existing leaf lem-weil-pbc-smooth-ring-map-base-change-composition); (3) the product over R_1 x R_2 by the 'if' direction of Stacks 0GIF, new unsplit node lem-weil-pbc-smooth-product-algebra (Mathlib has formal smoothness and finite presentation of finite Pi products, recorded as mathlib_candidate; no Algebra.Smooth for products), and the product structure map equals phi_1 x phi_2. The principal-localization route (lem-weil-pbc-smooth-ring-map-principal-localization) would need R -> R smooth for the identity, which the 00T2 definition does not give in one line; the standard smooth presentation avoids it. Citer lem-weil-pbc-popescu-product step 2 uses exactly the statement. Mathlib: no match (searches recorded on the node, one loogle added)."
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "result": "accepted",
+  "note": "3 steps (no Stacks lemma in this form; proof_origin agent): the projection R_1 x R_2 -> R_1 is standard smooth with presentation R[x]/(e_1 x - 1) (kernel computation checked by L: P_1(1) = 0 gives P = f (Q_1, -P_2)), hence smooth by the leaf; composition with phi_1; the product by a new unsplit node for the 'if' direction of 0GIF (candidate via Smooth/Pi.lean recorded, B8). Statement unchanged."
+ }
 }
