@@ -21,9 +21,112 @@
   "def-weil-pbc-simplicial-object",
   "def-weil-pbc-simplicial-coskeleton"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Notation. For a presheaf of sets $\\mathcal F$ write $R[\\mathcal F]$ for the presheaf $V\\mapsto R[\\mathcal F(V)]$ of free $R$-modules and $R[\\mathcal F]^\\#$ for its sheafification [def-weil-pbc-sheafification]. For a simplicial presheaf $M$ let $P(M)$ be the complex of presheaves of $R$-modules with $P(M)_k=R[M_k]$ and differential $\\sum_j(-1)^jR[d_j]$, and $C(M)=P(M)^\\#$ (termwise sheafification) the alternating-face complex of free $R$-module sheaves of the statement; $H_i(M)=H_i(C(M))$. Construction of $K'$. Let $K'_n\\subseteq K_n$ be the image subpresheaf of $f_n$, $K'_n(V)=f_n(L_n(V))$. Let $U$ be the $n$-truncated simplicial presheaf with $U_i=K_i$ for $i<n$, $U_n=K'_n$ and the simplicial operators of $K$. This is well defined: an operator $K(\\psi):K_n\\to K_i$ ($i\\le n$) restricts to $K'_n$; for $\\psi:[n]\\to[i]$ with $i<n$ and $x\\in K_i(V)$ write $x=f_i(y)$ ($f_i$ is an isomorphism), then $K(\\psi)(x)=f_n(L(\\psi)(y))\\in K'_n(V)$. So $U$ is an $n$-truncated simplicial subpresheaf of $\\mathrm{sk}_nK$ with inclusion $\\iota:U\\to\\mathrm{sk}_nK$, and $\\mathrm{sk}_nf$ factors as $\\iota\\circ\\phi$ with $\\phi:\\mathrm{sk}_nL\\to U$. The category of presheaves of sets has finite limits, so by [lem-weil-pbc-truncated-coskeleton-finite-limits] (1) $K'=\\operatorname{cosk}_nU$ exists and its counit $\\varepsilon_U:\\mathrm{sk}_nK'\\to U$ is an isomorphism. By the universal property of [def-weil-pbc-simplicial-coskeleton] let $f':L\\to K'$ correspond to $\\phi$. Let $c_K:K\\to\\operatorname{cosk}_n\\mathrm{sk}_nK$ be the canonical morphism, an isomorphism by hypothesis, and put $q=c_K^{-1}\\circ\\operatorname{cosk}_n(\\iota):K'\\to K$ with $\\operatorname{cosk}_n(\\iota)$ from [lem-weil-pbc-truncated-coskeleton-finite-limits] (3). Then $q\\circ f'=f$: the morphisms $\\operatorname{cosk}_n(\\iota)\\circ f'$ and $c_K\\circ f$ into $\\operatorname{cosk}_n\\mathrm{sk}_nK$ both correspond to $\\iota\\circ\\phi=\\mathrm{sk}_nf$ (the first by the defining identity of $\\operatorname{cosk}_n\\iota$, the second because $c_K$ corresponds to $\\mathrm{id}_{\\mathrm{sk}_nK}$), so they are equal. By functoriality of $C(-)$ and of homology, $H_i(f)=H_i(q)\\circ H_i(f')$.",
+   "uses": [
+    "def-weil-pbc-sheafification",
+    "def-weil-pbc-simplicial-object",
+    "def-weil-pbc-simplicial-coskeleton",
+    "lem-weil-pbc-truncated-coskeleton-finite-limits"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/hypercovering.tex",
+    "place": "Lemma 01GD (lemma-acyclicity), proof, first paragraph, lines 679-689: 'we first let K_n' ⊂ K_n be the sub presheaf which is the image ... Denote K' = cosk_n U'"
+   }
+  },
+  {
+   "text": "$q$ becomes an isomorphism after sheafification in every degree. Degree $n$ of $\\iota$: $K'_n\\to K_n$ is a monomorphism of presheaves of sets, i.e. its two kernel-pair projections agree; sheafification preserves finite limits [lem-weil-pbc-sheafification-sets-exact], so $(K'_n)^\\#\\to K_n^\\#$ is a monomorphism of sheaves. It is also an epimorphism, because its composite with $L_n^\\#\\to(K'_n)^\\#$ is $f_n^\\#$, an epimorphism of sheaves by the hypothesis that $L_n\\to K_n$ is surjective after sheafification. Hence it is an isomorphism [lem-weil-pbc-sheaf-sets-mono-epi-iso]. In degrees $i<n$, $\\iota_i$ is the identity. So the termwise sheafification $\\iota^\\#:U^\\#\\to(\\mathrm{sk}_nK)^\\#$, a morphism of $n$-truncated simplicial sheaves, is an isomorphism. Apply [lem-weil-pbc-truncated-coskeleton-finite-limits] (2), (3) to the functor $\\Phi=(-)^\\#$ from presheaves to sheaves of sets, which preserves finite limits [lem-weil-pbc-sheafification-sets-exact]: $(K')^\\#=\\Phi\\circ\\operatorname{cosk}_nU$ is an $n$-coskeleton of $U^\\#$, $\\Phi\\circ\\operatorname{cosk}_n\\mathrm{sk}_nK$ one of $(\\mathrm{sk}_nK)^\\#$, and $\\Phi\\circ\\operatorname{cosk}_n(\\iota)=\\operatorname{cosk}_n(\\iota^\\#)$ is an isomorphism since $\\iota^\\#$ is. As $c_K$ is an isomorphism, $q_m^\\#:(K'_m)^\\#\\to K_m^\\#$ is an isomorphism for every $m\\geq0$.",
+   "uses": [
+    "lem-weil-pbc-sheafification-sets-exact",
+    "lem-weil-pbc-sheaf-sets-mono-epi-iso",
+    "lem-weil-pbc-truncated-coskeleton-finite-limits",
+    "def-weil-pbc-sheafification"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/hypercovering.tex",
+    "place": "Lemma 01GD, proof, first paragraph, lines 681-692: 'Assumption (2) means that the sheafification of K_n' is equal to the sheafification of K_n ... Because we can construct K'_m as a finite limit, and since sheafification is exact, we see that (K'_m)^# = K_m [read: K_m^#]. In other words, (K')^# = K^#'"
+   }
+  },
+  {
+   "text": "By [lem-weil-pbc-free-module-sheaf-sheafify-first] applied to $q_m:K'_m\\to K_m$, whose sheafification is an isomorphism by the previous step, $R[q_m]^\\#:R[K'_m]^\\#\\to R[K_m]^\\#$ is an isomorphism for every $m$. These are the components of the morphism of complexes $C(q):C(K')\\to C(K)$ (they commute with the differentials because $q$ is a morphism of simplicial presheaves), so $C(q)$ is an isomorphism of complexes of sheaves of $R$-modules and $H_i(q):H_i(K')\\to H_i(K)$ is an isomorphism for every $i$. It therefore suffices to show that $H_i(f'):H_i(L)\\to H_i(K')$ is an isomorphism, where now $f'_n:L_n\\to K'_n$ is surjective as a map of presheaves.",
+   "uses": [
+    "lem-weil-pbc-free-module-sheaf-sheafify-first"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/hypercovering.tex",
+    "place": "Lemma 01GD, proof, first paragraph, lines 692-697: 'We conclude, by exactness of sheafification once more, that H_i(K) = H_i(K'). Thus it suffices to prove the lemma for the morphism L -> K''"
+   }
+  },
+  {
+   "text": "Fix an object $V$ of $\\mathcal C$; we show that $f'(V):L(V)\\to K'(V)$ is a trivial Kan fibration [def-weil-pbc-trivial-kan-fibration]. For $i\\le n$ the counit identifies $K'_i$ with $U_i$ (it is an isomorphism, [lem-weil-pbc-truncated-coskeleton-finite-limits] (1)), and under this identification $f'_i=\\phi_i$; so $f'(V)_i$ is bijective for $i<n$ ($\\phi_i=f_i$) and surjective for $i=n$ ($K'_n(V)=f_n(L_n(V))$ by definition). The canonical morphism $K'\\to\\operatorname{cosk}_n\\mathrm{sk}_nK'$ is an isomorphism: $\\operatorname{cosk}_n(\\varepsilon_U):\\operatorname{cosk}_n\\mathrm{sk}_nK'\\to\\operatorname{cosk}_nU=K'$ is an isomorphism by (3) of that node since $\\varepsilon_U$ is, and it is inverse to the canonical morphism because both composites correspond under the bijection of [def-weil-pbc-simplicial-coskeleton] to the counits, hence are identities. The canonical morphism of $L$ is an isomorphism by hypothesis. Evaluation at $V$ preserves finite limits ([lem-weil-pbc-truncated-coskeleton-finite-limits] (4)), so by (2) of that node the canonical morphisms $L(V)\\to\\operatorname{cosk}_n\\mathrm{sk}_nL(V)$ and $K'(V)\\to\\operatorname{cosk}_n\\mathrm{sk}_nK'(V)$ of simplicial sets are isomorphisms. Hence [lem-weil-pbc-coskeletal-map-trivial-kan] applies to $f'(V)$, and it is a trivial Kan fibration.",
+   "uses": [
+    "lem-weil-pbc-truncated-coskeleton-finite-limits",
+    "def-weil-pbc-simplicial-coskeleton",
+    "lem-weil-pbc-coskeletal-map-trivial-kan",
+    "def-weil-pbc-trivial-kan-fibration"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/hypercovering.tex",
+    "place": "Lemma 01GD, proof, second paragraph, lines 699-707: 'for any object U of C we see that the morphism of simplicial sets L(U) -> K(U) satisfies all the assumptions of Simplicial, Lemma 01A6. Hence it is a trivial Kan fibration'"
+   }
+  },
+  {
+   "text": "By [lem-weil-pbc-trivial-kan-homotopy-equivalence] there are $g_V:K'(V)\\to L(V)$ with $f'(V)\\circ g_V=\\mathrm{id}$ and a homotopy $h:L(V)\\times\\Delta[1]\\to L(V)$ from $\\mathrm{id}_{L(V)}$ to $g_V\\circ f'(V)$. Write $C_\\bullet(S;R)$ for the free $R$-module chain complex of a simplicial set $S$; by definition $P(M)(V)=C_\\bullet(M(V);R)$. By [lem-weil-pbc-simplicial-homotopy-free-chain-homotopy], $C_\\bullet(g_V;R)\\circ C_\\bullet(f'(V);R)=C_\\bullet(g_V\\circ f'(V);R)$ is chain homotopic to the identity, and $C_\\bullet(f'(V);R)\\circ C_\\bullet(g_V;R)=C_\\bullet(\\mathrm{id};R)$ is the identity. So $C_\\bullet(f'(V);R):P(L)(V)\\to P(K')(V)$ is a chain homotopy equivalence and induces isomorphisms $H_i(P(L)(V))\\to H_i(P(K')(V))$ for all $i$ (chain homotopic maps induce the same map on homology, the same node).",
+   "uses": [
+    "lem-weil-pbc-trivial-kan-homotopy-equivalence",
+    "lem-weil-pbc-simplicial-homotopy-free-chain-homotopy"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/hypercovering.tex",
+    "place": "Lemma 01GD, proof, second paragraph, lines 707-713: 'In particular it is a homotopy equivalence (Simplicial, Lemma 08NS). Thus Z_L(U) -> Z_K(U) is a homotopy equivalence too'"
+   }
+  },
+  {
+   "text": "By [lem-weil-pbc-site-module-presheaf-sheafification-exact] (1) the homology presheaves are computed objectwise, so the previous step (for every $V$; the inverses $g_V$ need not be natural, only $f'$ is) shows that $H_i(P(f')):H_i(P(L))\\to H_i(P(K'))$ is an isomorphism of presheaves of $R$-modules for every $i$. By (2) of the same node, $H_i(C(M))=H_i(P(M)^\\#)\\cong H_i(P(M))^\\#$ naturally in $M$; sheafifying the isomorphism $H_i(P(f'))$ shows that $H_i(f'):H_i(L)\\to H_i(K')$ is an isomorphism.",
+   "uses": [
+    "lem-weil-pbc-site-module-presheaf-sheafification-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/hypercovering.tex",
+    "place": "Lemma 01GD, proof, second paragraph, line 714: 'This for all U. The result follows.' (with the exactness of sheafification as in Lemma 01GC, lines 656-660)"
+   }
+  },
+  {
+   "text": "By steps 1, 3 and 6, $H_i(f)=H_i(q)\\circ H_i(f')$ is a composite of isomorphisms, for every $i$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/hypercovering.tex",
+    "place": "Lemma 01GD, proof, end"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-sheafification",
+  "def-weil-pbc-simplicial-object",
+  "def-weil-pbc-simplicial-coskeleton",
+  "lem-weil-pbc-truncated-coskeleton-finite-limits",
+  "lem-weil-pbc-sheafification-sets-exact",
+  "lem-weil-pbc-sheaf-sets-mono-epi-iso",
+  "lem-weil-pbc-free-module-sheaf-sheafify-first",
+  "lem-weil-pbc-coskeletal-map-trivial-kan",
+  "def-weil-pbc-trivial-kan-fibration",
+  "lem-weil-pbc-trivial-kan-homotopy-equivalence",
+  "lem-weil-pbc-simplicial-homotopy-free-chain-homotopy",
+  "lem-weil-pbc-site-module-presheaf-sheafification-exact"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/hypercovering.tex",
+  "place": "Hypercoverings, Lemma 01GD (label lemma-acyclicity), proof, lines 678-715, following Lemma 01GC (lemma-compare-cosk0), with coefficients R in place of Z"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -55,7 +158,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-weil-pbc-hypercover-free-resolution",
@@ -74,5 +177,13 @@
   }
  },
  "chapter": "sec-curve-estimates",
- "unit": "sk-prop-h2"
+ "unit": "sk-prop-h2",
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "lem-weil-pbc-coskeleton-free-homology-comparison",
+  "worker": "stage1",
+  "summary": "Split along Stacks 01GD (hypercovering.tex 662-715), read with 01GC, Simplicial 0183/0185 (coskeleta as finite limits), 01A6 (coskeletal criterion), 08NL/08NS/08NM (trivial Kan fibrations), 019S/019Y (homotopies to chain homotopies) and Sites 00WJ/00WN, Modules on Sites 03AB/03AC. Steps: construct K' = cosk_n of the image truncation and the factorisation f = q o f'; q is a degreewise isomorphism after sheafification (mono+epi of sheaves, sheafification preserves the finite limits giving the coskeleton terms); hence the free R-module sheaf complexes of K' and K are isomorphic (03AC with R); objectwise f' is a trivial Kan fibration (01A6), so has a section that is a homotopy inverse (08NS), giving a chain homotopy equivalence of free R-module complexes (Mathlib SSet.Homotopy.chainComplexMap); homology presheaves are objectwise and sheafification commutes with homology. Statement kept (n >= 1 as stated; the proof works for n >= 0). Stacks writes (K'_m)^# = K_m where K_m^# is meant. Eight new nodes: three Mathlib leaves (sheaves of sets balanced; R-module presheaf sheafification exact; free chain homotopy from simplicial homotopy), a definition leaf (trivial Kan fibration = I.rlp), four unsplit (coskeleton finite-limit formula with preservation, 03AC with R, 01A6, 08NS). LeanSearch returned HTTP 500 throughout; recorded, with LeanFinder, Loogle and grep for each new node.",
+  "blueprint": "The blueprint node lem-weil-pbc-hypercover-free-resolution proves exactness in its proof, first paragraph ('Exactness is a local assertion ... Thus every cycle is locally a boundary') by a local cone construction; the DAG's split of it replaces this by the Stacks coskeleton induction, of which this item is the inductive comparison step (its step 2, 'Thus [this node] identifies all free-module homology sheaves of K^n and K^{n-1}'). The steps here realize that comparison: steps 1-3 the passage to the image coskeleton (local surjectivity of the matching map, the blueprint's 'supplies a simplex with exactly those faces after an etale cover'), steps 4-6 the objectwise filling (the blueprint's cone/filling of simplices with given faces, here as the trivial Kan lifting) and the chain homotopy ('the alternating-face formula gives dh+hd=1')."
+ },
+ "reviewed": "2026-10-10 L: 7 steps along 01GD checked (K' = cosk_n of the truncation with image in degree n; q an isomorphism after sheafification by mono + epi in sheaves of sets and sheafification commuting with the finite limits of the coskeleton; free-module complexes compare by the sheafify-first node; objectwise f' a trivial Kan fibration by 01A6; section and homotopy by 08NS, chain homotopy by the Homotopy.chainComplexMap leaf; homology objectwise and commuting with sheafification; composite). 8 new nodes accepted: leaves SheafOfTypes.balanced (LeftExact.lean 336), the R-module sheafification exactness (composite of one-line declarations), def trivial Kan fibration (rlp of the boundary inclusions), Homotopy.chainComplexMap/congr_homologyMap; unsplit: truncated coskeleton finite limits (0183/0185), free-module sheafify-first (03AC), coskeletal map trivial Kan (01A6), trivial Kan homotopy equivalence (08NS). LeanSearch down. Brief tag 017V wrong (worker)."
 }

@@ -1,0 +1,79 @@
+{
+ "id": "lem-weil-pbc-simplicial-homotopy-free-chain-homotopy",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-hypercover-free-resolution",
+   "place": "proof, first paragraph: 'Exactness is a local assertion about the sheaves ... Thus every cycle is locally a boundary' (exactness of the augmented free complex), carried in the DAG by [lem-weil-pbc-coskeleton-free-homology-comparison]; this node serves step 5 of the item (chain homotopy inverse on free R-modules)",
+   "via": [
+    "lem-weil-pbc-coskeleton-free-homology-comparison"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Homotopic maps of simplicial sets induce chain homotopic maps of free R-module complexes",
+ "statement": "Let $R$ be a ring, let $f_0,f_1:X\\to Y$ be morphisms of simplicial sets [def-weil-pbc-simplicial-set], and suppose there is a morphism $h:X\\times\\Delta[1]\\to Y$ with $h\\circ i_0=f_0$ and $h\\circ i_1=f_1$, where $\\Delta[1]$ is the simplicial set with $\\Delta[1]_k$ the order-preserving maps $[k]\\to[1]$, $X\\times\\Delta[1]$ is the termwise product and $i_e(x)=(x,\\text{constant map }e)$. For a simplicial set $S$ let $C_\\bullet(S;R)$ be the chain complex of $R$-modules with $C_k(S;R)=R[S_k]$, the free $R$-module on $S_k$, and differential $\\sum_{j=0}^k(-1)^jR[d_j]:C_k\\to C_{k-1}$, and for a morphism $u$ of simplicial sets let $C_\\bullet(u;R)$ be the induced chain map. Then $C_\\bullet(f_0;R)$ and $C_\\bullet(f_1;R)$ are chain homotopic; in particular they induce the same maps $H_i(C_\\bullet(X;R))\\to H_i(C_\\bullet(Y;R))$ for all $i$.",
+ "source": {
+  "document": "literature/stacks-project/simplicial.tex",
+  "place": "Simplicial, Lemma 019Y (label lemma-functorial-homotopy, lines 5005-5025: the functor R[-] carries homotopic maps to homotopic maps of simplicial R-modules) and Lemma 019S (label lemma-homotopy-s-N, lines 4816-4846: homotopic maps of simplicial objects of an additive category give homotopic maps s(a), s(b)); as used in Hypercoverings, Lemma 01GD (hypercovering.tex lines 707-713: 'Thus Z_L(U) -> Z_K(U) is a homotopy equivalence too')"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-simplicial-set"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "simplicial homotopy induces chain homotopy on alternating face map complex",
+   "results": "service error HTTP 500 (leansearch.net, also by direct curl at 13:27 UTC); no results",
+   "date": "2026-10-10",
+   "verdict": "no verdict (service down); see the other searches"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "homotopy of simplicial sets induces chain homotopy of alternating face map complexes after applying a functor",
+   "results": "Functor.mapHomotopy, DoldKan.homotopyEquivNormalizedMooreComplexAlternatingFaceMapComplex (not the statement)",
+   "date": "2026-10-10",
+   "verdict": "no match by this query; see loogle"
+  },
+  {
+   "tool": "loogle",
+   "query": "SSet.Homotopy",
+   "results": "SSet.Homotopy.chainComplexMap, SSet.Homotopy.congr_homologyMap (Mathlib.AlgebraicTopology.SimplicialSet.Homology.HomotopyInvariance), SSet.Homotopy.toSimplicialObjectHomotopy; also CategoryTheory.SimplicialObject.Homotopy.toChainHomotopy (Mathlib.AlgebraicTopology.SimplicialObject.ChainHomotopy)",
+   "date": "2026-10-10",
+   "verdict": "match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -n 'def chainComplexMap\\|theorem congr_homologyMap\\|abbrev chainComplex' Mathlib/AlgebraicTopology/SimplicialSet/Homology/*.lean",
+   "results": "HomotopyInvariance.lean:103 SSet.Homotopy.chainComplexMap, :116 SSet.Homotopy.congr_homologyMap; Basic.lean:41 chainComplexFunctor (alternating face map complex of the degreewise coproduct of copies of R), :74 chainComplex, :80 chainComplexMap",
+   "date": "2026-10-10",
+   "verdict": "match"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "SSet.Homotopy.chainComplexMap; SSet.Homotopy.congr_homologyMap",
+  "file": "Mathlib/AlgebraicTopology/SimplicialSet/Homology/HomotopyInvariance.lean",
+  "how": "exact, with C = ModuleCat R and coefficient object R: SSet.Homotopy f g (Mathlib/AlgebraicTopology/SimplicialSet/Homotopy.lean line 48) is a morphism h : X ⊗ Δ[1] ⟶ Y (cartesian product) with ι₀ ≫ h = f and ι₁ ≫ h = g (ι₀, ι₁ at Monoidal.lean lines 174, 195); SSet.chainComplex X R (Homology/Basic.lean line 74) is the alternating face map complex of k ↦ ∐_{X_k} R = R[X_k]; chainComplexMap (HomotopyInvariance.lean line 103) gives the chain homotopy between chainComplexMap f R and chainComplexMap g R, congr_homologyMap (line 116) the equality on homology"
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-coskeleton-free-homology-comparison",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-curve-estimates",
+ "unit": "sk-prop-h2"
+}

@@ -1508,3 +1508,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 13:32 L: merged deliver/E1/def-pc-projective-morphism (reviewer PASS, first push); lem-pc-algebraic-closure-exists-unique unflagged (reached again)
 - 2026-10-10, delivery of J1: def-weil-pbc-strict-henselization-limit returned (35024028c): Reviewed in full (reviewer sub-agent of L). C4/B3/E1: the definition takes the colimit over the category of affine pointed etale neighbourhoods, which is not sm
 - 13:32 L: returned deliver/J1/def-weil-pbc-strict-henselization-limit (reviewer RETURN: C4/B3 colimit over a non-small index category, existence not cited)
+- 13:33 L: accepted lem-weil-pbc-coskeleton-free-homology-comparison: 7 steps (01GD), 8 new nodes (4 leaves incl. def trivial Kan fibration, 4 unsplit); exactness node overlaps the Cech worker's (merge candidate)

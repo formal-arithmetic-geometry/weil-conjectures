@@ -1,0 +1,81 @@
+{
+ "id": "lem-weil-pbc-trivial-kan-homotopy-equivalence",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-hypercover-free-resolution",
+   "place": "proof, first paragraph: 'Exactness is a local assertion about the sheaves ... Thus every cycle is locally a boundary' (exactness of the augmented free complex), carried in the DAG by [lem-weil-pbc-coskeleton-free-homology-comparison]; this node serves step 5 of the item (homotopy inverse of L(V) -> K'(V))",
+   "via": [
+    "lem-weil-pbc-coskeleton-free-homology-comparison"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "A trivial Kan fibration has a section that is a homotopy inverse",
+ "statement": "Let $p:X\\to Y$ be a trivial Kan fibration of simplicial sets [def-weil-pbc-trivial-kan-fibration], let $\\Delta[1]$ be the simplicial set of that node, $X\\times\\Delta[1]$ the termwise product, and for $e\\in\\{0,1\\}$ let $i_e:X\\to X\\times\\Delta[1]$ be $x\\mapsto(x,c_e)$ with $c_e\\in\\Delta[1]_k$ the constant map $[k]\\to[1]$ with value $e$. Then there are a morphism of simplicial sets $g:Y\\to X$ with $p\\circ g=\\mathrm{id}_Y$ and a morphism of simplicial sets $h:X\\times\\Delta[1]\\to X$ with $h\\circ i_0=\\mathrm{id}_X$ and $h\\circ i_1=g\\circ p$ (a homotopy from $\\mathrm{id}_X$ to $g\\circ p$); in particular $p$ is a homotopy equivalence.",
+ "source": {
+  "document": "literature/stacks-project/simplicial.tex",
+  "place": "Simplicial, Lemma 08NS (label lemma-trivial-kan-homotopy, lines 5641-5664), using Lemma 08NM (label lemma-trivial-kan, lines 5550-5585); homotopy as in Definition 019K (definition-homotopy)"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-simplicial-set",
+  "def-weil-pbc-trivial-kan-fibration"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "trivial fibration of simplicial sets is a homotopy equivalence",
+   "results": "service error HTTP 500 (leansearch.net, also by direct curl at 13:27 UTC); no results",
+   "date": "2026-10-10",
+   "verdict": "no verdict (service down); see the other searches"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "a trivial Kan fibration of simplicial sets is a homotopy equivalence",
+   "results": "HomotopicalAlgebra.FibrantObject.weakEquivalence_homMk_iff, BifibrantObject.weakEquivalence_homMk_iff, RightHomotopyClass.whitehead, LeftHomotopyClass.whitehead (abstract model categories; SSet has no model structure in Mathlib), SSet.modelCategoryQuillen.instCategoryWithFibrations",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "SSet.Homotopy",
+   "results": "11 declarations: SSet.Homotopy, toSimplicialObjectHomotopy, h₀, h₁, congr_homologyMap, chainComplexMap, ...; none produces a homotopy from a lifting property",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rn 'I.rlp\\|HomotopyEquiv\\|trivial fibration' Mathlib/AlgebraicTopology/SimplicialSet Mathlib/AlgebraicTopology/SimplicialObject",
+   "results": "CategoryWithFibrations.lean:128 rlp_monomorphisms (I.rlp = monomorphisms.rlp, the general lifting property 08NM); Homology/Nondegenerate.lean:86 a chain HomotopyEquiv; no homotopy inverse of an I.rlp map",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-coskeleton-free-homology-comparison",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-curve-estimates",
+ "unit": "sk-prop-h2",
+ "mathlib_candidate": {
+  "declaration": "SSet.rlp_monomorphisms",
+  "file": "Mathlib/AlgebraicTopology/SimplicialSet/CategoryWithFibrations.lean",
+  "how": "line 127-128: I.rlp = (monomorphisms).rlp, the lifting property 08NM that the proof applies twice; the homotopy inverse itself is not in Mathlib"
+ }
+}

@@ -1,0 +1,80 @@
+{
+ "id": "lem-weil-pbc-free-module-sheaf-sheafify-first",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-hypercover-free-resolution",
+   "place": "proof, first paragraph: 'Exactness is a local assertion about the sheaves ... Thus every cycle is locally a boundary' (exactness of the augmented free complex), carried in the DAG by [lem-weil-pbc-coskeleton-free-homology-comparison]; this node serves step 3 of the item (the free-module complexes of K' and K agree after sheafification)",
+   "via": [
+    "lem-weil-pbc-coskeleton-free-homology-comparison"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "The free module sheaf on a presheaf of sets depends only on its sheafification",
+ "statement": "Let $\\mathcal C$ be a site and $R$ a commutative ring. For a presheaf of sets $\\mathcal F$ on $\\mathcal C$ let $R[\\mathcal F]$ be the presheaf of $R$-modules $V\\mapsto R[\\mathcal F(V)]$, the free $R$-module on the set $\\mathcal F(V)$, with restriction maps the $R$-linear extensions of those of $\\mathcal F$, and let $R[\\mathcal F]^\\#$ be its sheafification as a presheaf of $R$-modules [def-weil-pbc-sheafification]; a morphism $\\varphi:\\mathcal F\\to\\mathcal G$ of presheaves of sets induces $R[\\varphi]:R[\\mathcal F]\\to R[\\mathcal G]$ and $R[\\varphi]^\\#:R[\\mathcal F]^\\#\\to R[\\mathcal G]^\\#$. If the sheafification $\\varphi^\\#:\\mathcal F^\\#\\to\\mathcal G^\\#$ of $\\varphi$ as a morphism of presheaves of sets [def-weil-pbc-sheafification] is an isomorphism, then $R[\\varphi]^\\#$ is an isomorphism of sheaves of $R$-modules.",
+ "source": {
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Modules on Sites, Lemma 03AC (label lemma-may-sheafify-before-abelianize, lines 399-409: Z_G^# = (Z_{G^#})^#, proof omitted), stated here with coefficients in R; the adjunction it rests on is Lemma 03AB (label lemma-obvious-adjointness-sheaves, lines 370-397)"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-sheafification"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "sheafification of free module presheaf depends only on sheafification of presheaf of sets",
+   "results": "service error HTTP 500 (leansearch.net, also by direct curl at 13:27 UTC); no results",
+   "date": "2026-10-10",
+   "verdict": "no verdict (service down); see the other searches"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "free sheaf of modules on a presheaf of sets is isomorphic to free sheaf on its sheafification",
+   "results": "SheafOfModules.freeHomEquiv, SheafOfModules.mapFree, SheafOfModules.freeHomEquiv_freeMap (Mathlib.Algebra.Category.ModuleCat.Sheaf.Free): free sheaves on a type of indices, not on a presheaf of sets",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "PresheafOfModules.free, CategoryTheory.presheafToSheaf",
+   "results": "Found 0 declarations",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rn 'sheafify.*free\\|free.*sheafif\\|freeObj' Mathlib/",
+   "results": "Algebra/Category/ModuleCat/Presheaf/Free.lean: freeObj (43), freeHomEquiv (87), freeAdjunction (103): free presheaf of modules left adjoint to the forgetful functor to presheaves of sets; nothing about sheafification of it",
+   "date": "2026-10-10",
+   "verdict": "no match; candidate for the adjunction used"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-coskeleton-free-homology-comparison",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-curve-estimates",
+ "unit": "sk-prop-h2",
+ "mathlib_candidate": {
+  "declaration": "PresheafOfModules.freeAdjunction",
+  "file": "Mathlib/Algebra/Category/ModuleCat/Presheaf/Free.lean",
+  "how": "line 103: the free presheaf of modules is left adjoint to the forgetful functor to presheaves of sets; with sheafificationAdjunction this gives the proof, but the statement itself is not in Mathlib"
+ }
+}

@@ -1,0 +1,79 @@
+{
+ "id": "lem-weil-pbc-sheaf-sets-mono-epi-iso",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-hypercover-free-resolution",
+   "place": "proof, first paragraph: 'Exactness is a local assertion about the sheaves ... Thus every cycle is locally a boundary' (exactness of the augmented free complex), carried in the DAG by [lem-weil-pbc-coskeleton-free-homology-comparison]; this node serves step 2 of the item (the image subpresheaf K'_n and K_n have the same sheafification)",
+   "via": [
+    "lem-weil-pbc-coskeleton-free-homology-comparison"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "A monomorphism and epimorphism of sheaves of sets is an isomorphism",
+ "statement": "Let $\\mathcal C$ be a site and $\\Sh(\\mathcal C)$ its category of sheaves of sets [def-weil-pbc-sites-and-cohomology]. If a morphism $\\varphi:\\mathcal F\\to\\mathcal G$ of $\\Sh(\\mathcal C)$ is both a monomorphism and an epimorphism of $\\Sh(\\mathcal C)$, then $\\varphi$ is an isomorphism.",
+ "source": {
+  "document": "literature/stacks-project/sites.tex",
+  "place": "Sites, Lemma 00WN (label lemma-mono-epi-sheaves, lines 2255-2266), last sentence ('A map of sheaves is an isomorphism if and only if it is both injective and surjective'), with the first sentence identifying injective/surjective with mono/epi"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-sites-and-cohomology"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "category of sheaves of types is balanced mono epi iso",
+   "results": "service error HTTP 500 (leansearch.net, also by direct curl at 13:27 UTC); no results",
+   "date": "2026-10-10",
+   "verdict": "no verdict (service down); see the other searches"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "sheaves of types form a balanced category: monomorphism and epimorphism is isomorphism",
+   "results": "CategoryTheory.SheafOfTypes.balanced (Mathlib.CategoryTheory.Sites.LeftExact): Balanced (Sheaf J (Type w)) given HasSheafify J (Type w); Sheaf.Hom.mono_iff_presheaf_mono",
+   "date": "2026-10-10",
+   "verdict": "match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.SheafOfTypes.balanced",
+   "results": "one declaration, Mathlib.CategoryTheory.Sites.LeftExact",
+   "date": "2026-10-10",
+   "verdict": "match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rn 'Balanced' Mathlib/CategoryTheory/Sites",
+   "results": "Sites/LeftExact.lean:336 instance SheafOfTypes.balanced; Sites/EpiMono.lean, Sites/RegularEpi.lean use Balanced (Sheaf J A) as a hypothesis",
+   "date": "2026-10-10",
+   "verdict": "match"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "CategoryTheory.SheafOfTypes.balanced",
+  "file": "Mathlib/CategoryTheory/Sites/LeftExact.lean",
+  "how": "exact: line 336, `instance SheafOfTypes.balanced [HasSheafify J (Type w)] : Balanced (Sheaf J (Type w))`; Balanced means every morphism that is mono and epi is an isomorphism (Balanced.isIso_of_mono_of_epi); HasSheafify J (Type (max u v)) holds for every site (LeftExact.lean line 313)"
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-coskeleton-free-homology-comparison",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-curve-estimates",
+ "unit": "sk-prop-h2"
+}

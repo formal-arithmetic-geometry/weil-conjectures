@@ -1,0 +1,79 @@
+{
+ "id": "def-weil-pbc-trivial-kan-fibration",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-hypercover-free-resolution",
+   "place": "proof, first paragraph: 'Exactness is a local assertion about the sheaves ... Thus every cycle is locally a boundary' (exactness of the augmented free complex), carried in the DAG by [lem-weil-pbc-coskeleton-free-homology-comparison]; this node serves step 4 of the item (the objectwise map L(V) -> K'(V) is a trivial Kan fibration)",
+   "via": [
+    "lem-weil-pbc-coskeleton-free-homology-comparison"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "definition",
+ "title": "Trivial Kan fibration of simplicial sets",
+ "statement": "For $n\\geq0$ let $\\Delta[n]$ be the simplicial set [def-weil-pbc-simplicial-set] with $\\Delta[n]_k$ the set of order-preserving maps $[k]\\to[n]$ and $\\Delta[n](\\varphi)(\\alpha)=\\alpha\\circ\\varphi$, and let $\\partial\\Delta[n]\\subseteq\\Delta[n]$ be the simplicial subset of the non-surjective maps $[k]\\to[n]$ (so $\\partial\\Delta[0]$ is empty). A morphism $p:X\\to Y$ of simplicial sets is a *trivial Kan fibration* if $p_0:X_0\\to Y_0$ is surjective and for every $n\\geq1$ and every pair of morphisms $a:\\partial\\Delta[n]\\to X$, $b:\\Delta[n]\\to Y$ with $p\\circ a=b|_{\\partial\\Delta[n]}$ there is a morphism $c:\\Delta[n]\\to X$ with $c|_{\\partial\\Delta[n]}=a$ and $p\\circ c=b$.",
+ "source": {
+  "document": "literature/stacks-project/simplicial.tex",
+  "place": "Simplicial, Definition 08NL (label definition-trivial-kan, lines 5533-5545); boundary of Delta[n] as described before it (lines 5520-5531)"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-simplicial-set"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "trivial Kan fibration right lifting property boundary inclusions simplicial sets",
+   "results": "service error HTTP 500 (leansearch.net, also by direct curl at 13:27 UTC); no results",
+   "date": "2026-10-10",
+   "verdict": "no verdict (service down); see the other searches"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "trivial Kan fibration of simplicial sets: right lifting property with respect to boundary inclusions",
+   "results": "SSet.modelCategoryQuillen.fibrations_eq, fibration_iff, instCategoryWithFibrations (horn inclusions J); the boundary family I is in the same file",
+   "date": "2026-10-10",
+   "verdict": "candidate: I.rlp"
+  },
+  {
+   "tool": "loogle",
+   "query": "SSet.modelCategoryQuillen.I",
+   "results": "4 declarations: SSet.modelCategoryQuillen.I, SSet.rlp_monomorphisms, boundary_ι_mem_I, I_le_monomorphisms (Mathlib.AlgebraicTopology.SimplicialSet.CategoryWithFibrations)",
+   "date": "2026-10-10",
+   "verdict": "match: I.rlp"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -n 'def I\\|def boundary\\|boundary_zero' Mathlib/AlgebraicTopology/SimplicialSet/CategoryWithFibrations.lean Boundary.lean",
+   "results": "CategoryWithFibrations.lean:38 def I := ofHoms (fun n => ∂Δ[n].ι); Boundary.lean:37 def boundary (non-surjective simplices), :92 boundary_zero : boundary 0 = ⊥",
+   "date": "2026-10-10",
+   "verdict": "match"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "SSet.modelCategoryQuillen.I; SSet.boundary; SSet.boundary_zero; CategoryTheory.MorphismProperty.rlp",
+  "file": "Mathlib/AlgebraicTopology/SimplicialSet/CategoryWithFibrations.lean; Mathlib/AlgebraicTopology/SimplicialSet/Boundary.lean",
+  "how": "specializes in one line: p is a trivial Kan fibration iff I.rlp p, where I (CategoryWithFibrations.lean line 38) is the family of boundary inclusions ∂Δ[n].ι for all n ≥ 0 and SSet.boundary (Boundary.lean line 37) is the subcomplex of non-surjective simplices; for n = 0, ∂Δ[0] = ⊥ (boundary_zero, line 92), and the lifting property against ∅ → Δ[0] is, by the Yoneda bijection Hom(Δ[0], X) = X_0, the surjectivity of p_0"
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-coskeleton-free-homology-comparison",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-curve-estimates",
+ "unit": "sk-prop-h2"
+}

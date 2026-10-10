@@ -1,0 +1,83 @@
+{
+ "id": "lem-weil-pbc-truncated-coskeleton-finite-limits",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-hypercover-free-resolution",
+   "place": "proof, first paragraph: 'Exactness is a local assertion about the sheaves ... Thus every cycle is locally a boundary' (exactness of the augmented free complex), carried in the DAG by [lem-weil-pbc-coskeleton-free-homology-comparison]; this node serves step 1 (construction of K'), step 2 (finite-limit description of the terms of K' and K) and step 4 (objectwise coskeletality) of the item",
+   "via": [
+    "lem-weil-pbc-coskeleton-free-homology-comparison"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Coskeleta of truncated simplicial objects as finite limits, and their preservation",
+ "statement": "Let $\\mathcal C$ be a category with finite limits [def-galois-finite-limits-colimits] and let $m\\geq0$. Let $\\Delta$ be the category of the ordered sets $[k]=\\{0<\\dots<k\\}$ and order-preserving maps [def-weil-pbc-simplicial-set]. For $n\\geq0$ let $(\\Delta/[n])_{\\leq m}$ be the finite category whose objects are the morphisms $\\alpha:[k]\\to[n]$ of $\\Delta$ with $k\\leq m$ and whose morphisms $(\\alpha':[k']\\to[n])\\to(\\alpha:[k]\\to[n])$ are the morphisms $\\psi:[k']\\to[k]$ of $\\Delta$ with $\\alpha\\circ\\psi=\\alpha'$. For an $m$-truncated simplicial object $U$ of $\\mathcal C$ [def-weil-pbc-simplicial-coskeleton] let $U(n):(\\Delta/[n])_{\\leq m}^{\\mathrm{op}}\\to\\mathcal C$ be the functor $(\\alpha:[k]\\to[n])\\mapsto U_k$, $\\psi\\mapsto U(\\psi)$. Then: (1) the $m$-coskeleton $\\operatorname{cosk}_mU$ of $U$ exists in the sense of [def-weil-pbc-simplicial-coskeleton]; one may take $(\\operatorname{cosk}_mU)_n=\\lim U(n)$, with $\\operatorname{cosk}_mU(\\varphi)$ for $\\varphi:[n]\\to[n']$ the morphism of limits induced by $\\alpha\\mapsto\\varphi\\circ\\alpha$, and the counit $\\varepsilon:\\mathrm{sk}_m\\operatorname{cosk}_mU\\to U$ is an isomorphism; (2) if $\\mathcal D$ is a category and $\\Phi:\\mathcal C\\to\\mathcal D$ is a functor preserving finite limits, then the simplicial object $\\Phi\\circ\\operatorname{cosk}_mU$ of $\\mathcal D$ [def-weil-pbc-simplicial-object] together with $\\Phi(\\varepsilon)$ is an $m$-coskeleton of the $m$-truncated simplicial object $\\Phi\\circ U$; consequently, if $K$ is a simplicial object of $\\mathcal C$ whose canonical morphism $K\\to\\operatorname{cosk}_m\\mathrm{sk}_mK$ is an isomorphism, then $\\operatorname{cosk}_m\\mathrm{sk}_m(\\Phi\\circ K)$ exists and the canonical morphism $\\Phi\\circ K\\to\\operatorname{cosk}_m\\mathrm{sk}_m(\\Phi\\circ K)$ is an isomorphism; (3) for a morphism $\\beta:U\\to U'$ of $m$-truncated simplicial objects of $\\mathcal C$ there is a unique morphism $\\operatorname{cosk}_m\\beta:\\operatorname{cosk}_mU\\to\\operatorname{cosk}_mU'$ with $\\varepsilon'\\circ\\mathrm{sk}_m(\\operatorname{cosk}_m\\beta)=\\beta\\circ\\varepsilon$; this is functorial, so $\\operatorname{cosk}_m\\beta$ is an isomorphism when $\\beta$ is, and when $\\Phi$ is as in (2), $\\Phi\\circ\\operatorname{cosk}_m\\beta=\\operatorname{cosk}_m(\\Phi\\circ\\beta)$ for the coskeleta of (2); (4) in particular, for a category $\\mathcal E$ and $\\mathcal C=\\mathrm{PSh}(\\mathcal E)$ the category of presheaves of sets on $\\mathcal E$ (which has finite limits, computed objectwise), every evaluation functor $\\mathcal F\\mapsto\\mathcal F(V)$, $V$ an object of $\\mathcal E$, preserves finite limits, so (2) and (3) apply to it, with $\\mathcal D$ the category of sets.",
+ "source": {
+  "document": "literature/stacks-project/simplicial.tex",
+  "place": "Simplicial, Lemma 0183 (label lemma-existence-cosk, lines 2234-2289: existence and the limit formula), Lemma 0185 (label lemma-recover-cosk, lines 2306-2316: sk_n cosk_n U -> U is an isomorphism), with Lemma 0184 (lemma-trivial-cosk); clauses (2)-(4) are the consequences of the limit formula used in Hypercoverings, Lemma 01GD (hypercovering.tex lines 685-689: 'Because we can construct K'_m as a finite limit, and since sheafification is exact')"
+ },
+ "stmt_deps": [
+  "def-galois-finite-limits-colimits",
+  "def-weil-pbc-simplicial-set",
+  "def-weil-pbc-simplicial-object",
+  "def-weil-pbc-simplicial-coskeleton"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "coskeleton commutes with functor preserving finite limits",
+   "results": "service error HTTP 500 (leansearch.net, also by direct curl at 13:27 UTC); no results",
+   "date": "2026-10-10",
+   "verdict": "no verdict (service down); see the other searches"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "functor preserving finite limits commutes with coskeleton of truncated simplicial object",
+   "results": "SimplicialObject.Truncated.cosk, SimplicialObject.cosk, SSet.Truncated.cosk, Truncated.sk, SimplicialObject.sk (Mathlib.AlgebraicTopology.SimplicialObject.Basic / SimplicialSet.Basic): the coskeleton as a right Kan extension; no preservation statement",
+   "date": "2026-10-10",
+   "verdict": "no match for (2)-(4); (1) candidate"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.SimplicialObject.Truncated.cosk, CategoryTheory.Limits.PreservesFiniteLimits",
+   "results": "Found 0 declarations",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rln 'Truncated.cosk\\|IsCoskeletal' Mathlib/",
+   "results": "AlgebraicTopology/SimplicialObject/Basic.lean (Truncated.cosk as ran, coskAdj), SimplicialObject/Coskeletal.lean (IsCoskeletal, isoCoskOfIsCoskeletal), SimplicialSet/Coskeletal.lean (StrictSegal is 2-coskeletal), SimplicialSet/NerveAdjunction.lean; none gives the finite-limit formula with preservation by left exact functors",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-coskeleton-free-homology-comparison",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-curve-estimates",
+ "unit": "sk-prop-h2",
+ "mathlib_candidate": {
+  "declaration": "CategoryTheory.SimplicialObject.Truncated.cosk; CategoryTheory.SimplicialObject.coskAdj",
+  "file": "Mathlib/AlgebraicTopology/SimplicialObject/Basic.lean",
+  "how": "clause (1) existence as the right Kan extension (pointwise, so given by the limit formula when the limits over StructuredArrow categories exist); clauses (2)-(4) not in Mathlib"
+ }
+}

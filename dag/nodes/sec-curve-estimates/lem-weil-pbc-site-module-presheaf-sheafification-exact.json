@@ -1,0 +1,80 @@
+{
+ "id": "lem-weil-pbc-site-module-presheaf-sheafification-exact",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-hypercover-free-resolution",
+   "place": "proof, first paragraph: 'Exactness is a local assertion about the sheaves ... Thus every cycle is locally a boundary' (exactness of the augmented free complex), carried in the DAG by [lem-weil-pbc-coskeleton-free-homology-comparison]; this node serves step 6 of the item (homology presheaves objectwise, and sheafification commutes with homology)",
+   "via": [
+    "lem-weil-pbc-coskeleton-free-homology-comparison"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Presheaves of R-modules on a site: sectionwise exactness, and sheafification is exact and commutes with homology",
+ "statement": "Let $\\mathcal C$ be a site and $R$ a ring. Let $\\mathrm{PMod}_R(\\mathcal C)$ be the category of presheaves of $R$-modules on $\\mathcal C$, $\\Mod_R(\\mathcal C)$ its full subcategory of sheaves, and $\\mathcal P\\mapsto\\mathcal P^\\#$ the sheafification $\\mathrm{PMod}_R(\\mathcal C)\\to\\Mod_R(\\mathcal C)$, left adjoint to the inclusion [def-weil-pbc-sheafification]. Then: (1) $\\mathrm{PMod}_R(\\mathcal C)$ and $\\Mod_R(\\mathcal C)$ are abelian categories, and for every object $V$ of $\\mathcal C$ the evaluation functor $\\mathcal P\\mapsto\\mathcal P(V)$ from $\\mathrm{PMod}_R(\\mathcal C)$ to $R$-modules is exact; in particular for a complex $\\mathcal P_\\bullet$ of presheaves of $R$-modules the $i$-th homology presheaf is $V\\mapsto H_i(\\mathcal P_\\bullet(V))$, and a morphism of complexes of presheaves inducing isomorphisms $H_i(\\mathcal P_\\bullet(V))\\to H_i(\\mathcal Q_\\bullet(V))$ for all $V$ induces an isomorphism of $i$-th homology presheaves; (2) sheafification is exact (it preserves finite limits, and all colimits as a left adjoint); hence for every complex $\\mathcal P_\\bullet$ of presheaves of $R$-modules there is an isomorphism $H_i(\\mathcal P_\\bullet^\\#)\\cong H_i(\\mathcal P_\\bullet)^\\#$ of sheaves of $R$-modules, natural in $\\mathcal P_\\bullet$, where $\\mathcal P_\\bullet^\\#$ is the complex of sheaves obtained by sheafifying termwise.",
+ "source": {
+  "document": "literature/stacks-project/sites.tex",
+  "place": "Sites, Lemma 00WJ (label lemma-sheafification-exact: sheafification is exact) and its consequence used in Hypercoverings, Lemma 01GC (hypercovering.tex lines 656-660: 'Since sheafification is an exact functor ... H_0(s(Z_K))^# = H_0(s(Z_K^#))'), here for presheaves of R-modules"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-sheafification"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "sheafification of presheaves of modules is exact and commutes with homology",
+   "results": "service error HTTP 500 (leansearch.net, also by direct curl at 13:27 UTC); no results",
+   "date": "2026-10-10",
+   "verdict": "no verdict (service down); see the other searches"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "sheafification of presheaves of modules preserves finite limits, exact functor, homology",
+   "results": "PresheafOfModules.instPreservesFiniteLimitsSheafOfModulesSheafification (Mathlib.Algebra.Category.ModuleCat.Presheaf.Sheafification), CategoryTheory.instPreservesFiniteLimitsFunctorOppositeSheafPresheafToSheaf (Mathlib.CategoryTheory.Sites.Sheafification)",
+   "date": "2026-10-10",
+   "verdict": "match (one declaration per clause)"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.presheafToSheaf, CategoryTheory.Limits.PreservesFiniteLimits",
+   "results": "one declaration: CategoryTheory.instPreservesFiniteLimitsFunctorOppositeSheafPresheafToSheaf (Mathlib.CategoryTheory.Sites.Sheafification)",
+   "date": "2026-10-10",
+   "verdict": "match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -n 'instance' Mathlib/CategoryTheory/Sites/Sheafification.lean Mathlib/CategoryTheory/Sites/LeftExact.lean Mathlib/CategoryTheory/Sites/Abelian.lean; grep -n mapHomologyIso Mathlib/Algebra/Homology/ShortComplex/PreservesHomology.lean",
+   "results": "Sheafification.lean:76 PreservesFiniteLimits (presheafToSheaf J A), :82 IsLeftAdjoint; LeftExact.lean:308 HasSheafify J D for D with limit-preserving forgetful functor (ModuleCat R); Sites/Abelian.lean:40 sheafIsAbelian; PreservesHomology.lean:455 ShortComplex.mapHomologyIso",
+   "date": "2026-10-10",
+   "verdict": "match"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "CategoryTheory.Abelian.functorCategoryAbelian; CategoryTheory.Limits.evaluation_preservesLimitsOfShape; CategoryTheory.Limits.evaluation_preservesColimitsOfShape; CategoryTheory.sheafIsAbelian; CategoryTheory.presheafToSheaf; CategoryTheory.ShortComplex.mapHomologyIso",
+  "file": "Mathlib/CategoryTheory/Abelian/FunctorCategory.lean; Mathlib/CategoryTheory/Limits/FunctorCategory/Basic.lean; Mathlib/CategoryTheory/Sites/Abelian.lean; Mathlib/CategoryTheory/Sites/Sheafification.lean; Mathlib/Algebra/Homology/ShortComplex/PreservesHomology.lean",
+  "how": "one declaration per clause, with A = ModuleCat R and presheaves Cᵒᵖ ⥤ ModuleCat R: (1) abelian by functorCategoryAbelian (FunctorCategory.lean line 96) and sheafIsAbelian (Sites/Abelian.lean line 40); evaluation preserves finite limits and colimits by evaluation_preservesLimitsOfShape (Limits/FunctorCategory/Basic.lean line 225) and evaluation_preservesColimitsOfShape (line 319), hence is exact and commutes with homology; (2) HasSheafify J (ModuleCat R) by the instance of Sites/LeftExact.lean line 308, presheafToSheaf preserves finite limits (Sheafification.lean line 76) and is a left adjoint (line 82), hence exact; an exact functor preserves homology, ShortComplex.mapHomologyIso (PreservesHomology.lean line 455) gives H_i(P^#) ≅ H_i(P)^# degree by degree"
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-coskeleton-free-homology-comparison",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-curve-estimates",
+ "unit": "sk-prop-h2",
+ "lead_note": "2026-10-10 L: overlaps lem-weil-pbc-site-r-module-presheaf-sheafification-exact (created the same hour by the Cech-nerve worker; this one adds the homology clauses): stage-3 merge candidate."
+}
