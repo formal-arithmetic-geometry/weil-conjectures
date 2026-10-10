@@ -23,9 +23,61 @@
   "def-weil-pbc-exterior-algebra",
   "def-weil-pbc-module-tensor-product"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Choose the displayed bases of $M$ and $N$. By the free-module exterior-power basis statement, the wedges indexed by $r$-element and $s$-element increasing subsets are bases of $\\bigwedge^r M$ and $\\bigwedge^s N$, while the concatenated basis of $M\\oplus N$ gives the corresponding wedge basis of $\\bigwedge^{r+s}(M\\oplus N)$. By the tensor-product product-basis statement, the tensors of the two first bases form a basis of $\\bigwedge^rM\\otimes_R\\bigwedge^sN$.",
+   "uses": [
+    "lem-weil-pbc-exterior-power-free-basis",
+    "lem-sc-tensor-product-free-basis",
+    "def-weil-pbc-free-module",
+    "def-weil-pbc-exterior-algebra",
+    "def-weil-pbc-module-tensor-product"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-picard-framework/sk-thm-picard-rr/lem-sc-riemann-roch.md",
+    "place": "Proof of (*), determinant paragraph: top exterior powers"
+   }
+  },
+  {
+   "text": "The alternating map in the statement sends each tensor of the source basis to the distinct concatenated wedge in the target basis, with coefficient $+1$. It therefore sends a basis bijectively to a basis and extends uniquely to an $R$-module isomorphism. The construction is the alternating multilinear map induced by the inclusions $M\\to M\\oplus N$ and $N\\to M\\oplus N$, so it is the stated canonical map.",
+   "uses": [
+    "lem-weil-pbc-exterior-power-free-basis",
+    "lem-sc-tensor-product-free-basis",
+    "def-weil-pbc-exterior-algebra",
+    "def-weil-pbc-module-tensor-product"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-picard-framework/sk-thm-picard-rr/lem-sc-riemann-roch.md",
+    "place": "Proof of (*), determinant paragraph: top exterior powers"
+   }
+  },
+  {
+   "text": "If the bases are changed, the same map is still characterized by sending $m_1\\wedge\\cdots\\wedge m_r$ tensored with $n_1\\wedge\\cdots\\wedge n_s$ to the wedge of their images under the two canonical inclusions: writing each $m_k$ and $n_l$ in the chosen bases and expanding by multilinearity, discarding terms with a repeated factor by alternation and reordering the others with $v\\wedge w=-w\\wedge v$, gives $m_1\\wedge\\cdots\\wedge m_r=c\\,e_1\\wedge\\cdots\\wedge e_r$ in $\\bigwedge^rM$ and $(m_1,0)\\wedge\\cdots\\wedge(m_r,0)=c\\,(e_1,0)\\wedge\\cdots\\wedge(e_r,0)$ in $\\bigwedge^r(M\\oplus N)$ with the same scalar $c\\in R$ (the two expansions are term by term identical), and likewise a common scalar $d$ for the $n_l$; so the basis-defined map sends the given tensor to $cd$ times the target basis vector, which is the stated wedge. Hence the basis calculation describes one basis-independent map; applying module isomorphisms to $M$ and $N$ commutes with these inclusions, tensor products, and exterior powers, proving naturality.",
+   "uses": [
+    "def-weil-pbc-exterior-algebra",
+    "def-weil-pbc-module-tensor-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-picard-framework/sk-thm-picard-rr/lem-sc-riemann-roch.md",
+    "place": "Proof of (*), determinant paragraph: top exterior powers"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-exterior-power-free-basis",
+  "lem-sc-tensor-product-free-basis",
+  "def-weil-pbc-free-module",
+  "def-weil-pbc-exterior-algebra",
+  "def-weil-pbc-module-tensor-product"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/master/blueprint/sec-picard-framework/sk-thm-picard-rr/lem-sc-riemann-roch.md",
+  "place": "Proof of (*), determinant paragraph: top exterior powers"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -50,12 +102,28 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-sc-determinant-short-exact",
   "by": "worker",
   "date": "2026-10-10"
  },
  "chapter": "sec-picard-framework",
- "unit": "sk-thm-picard-rr"
+ "unit": "sk-thm-picard-rr",
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "lem-sc-exterior-top-direct-sum",
+  "worker": "stage1",
+  "summary": "Split the top-exterior direct-sum isomorphism into basis construction, basis-to-basis identification, and basis-independent naturality. Added the Mathlib leaf for the product basis of a tensor product of finite free modules.",
+  "blueprint": "Realizes the determinant paragraph's top exterior powers step: choose free bases, identify the concatenated wedge basis with the tensor product basis, and observe that the canonical alternating map is natural.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-etd",
+  "group": "J1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-etd (reviewer sub-agent of L); spot-checked: Source: blueprint lem-sc-riemann-roch.md determinant paragraph (lines 144-147, local splitting and top exterior power of a direct sum); item statement unchanged (R commutative, M,N free of ranks r,s, canonical map, naturality). Step 1 carried by lem-weil-pbc-exterior-power-free-basis (wedges of increasing subsets form a basis, rank binom(r,n)) applied to M, N and the concatenated basis of M+N, and by new leaf lem-sc-tensor-product-free-basis; step 2: rank-1 free modules, basis vector to basis vector, iso; step 3 from multilinearity/alternation/anticommutation in def-weil-pbc-exterior-algebra and the universal property in def-weil-pbc-module-tensor-product. Mathlib leaf verified with sed: Module.Basis.tensorProduct at Mathlib/LinearAlgebra/TensorProduct/Basis.lean:38 (Basis (ι×κ) S (M⊗[R]N), S=R), tensorProduct_apply at :46. Blueprint search 'tensor product basis' and 'exterior power direct sum' found no same_as. Small cases r,s in {0,1}: R⊗R=R, M⊗R=M, R⊗N=N, (m,0)∧(0,n) for rank 1. Fixes: dag/nodes/sec-picard-framework/lem-sc-tensor-product-free-basis.json: mathlib_match.line: 29 -> 38 and mathlib_match.how: line numbers corrected to 38/46 (source.place 'lines 28-44' also off but is a maintainer field, left). FIX more, RETURN less: dag/nodes/sec-picard-framework/lem-sc-exterior-top-direct-sum.json: proof[2].text: added the expansion showing the basis-defined map satisfies the stated formula on arbitrary wedges (common scalar c, d from multilinearity, alternation and v^w=-w^v), which the step asserted without justification (C2). Start Sat Oct 10 03:34:22 PM UTC 2026, end Sat Oct 10 03:35:25 PM UTC 2026.; 2 file(s) fixed by the reviewer"
+ }
 }
