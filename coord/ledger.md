@@ -2315,3 +2315,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 19:00 L: returned deliver/H1/lem-pc-flat-base-change-cohom (reviewer RETURN: Reviewer R-fbc1903. (1) D2: new node lem-pc-cech-spectral-flat-base-change restates the item's clause (2): with S=Spec(A)
 - 19:00 L: merged deliver/K1/def-sp-grothendieck-abelian (reviewer FIX; first push; new nodes: 0)
 - 19:00 L: merged deliver/E1/lem-sc-smooth-proper-diagonal-tensor-formula (reviewer FIX; after a return; new nodes: 3)
+- 19:01 L: returned deliver/K1/lem-pc-compact-hom-hocolim (reviewer RETURN: Reviewer R-chh1901. 1 (E, hypothesis/typing): the statement assumes only countable coproducts but cites def-pc-compact-o)
