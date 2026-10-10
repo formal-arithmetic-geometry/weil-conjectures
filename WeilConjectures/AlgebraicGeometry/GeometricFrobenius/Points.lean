@@ -5,6 +5,7 @@ Authors: Claude
 -/
 module
 
+public import Mathlib.AlgebraicGeometry.Morphisms.Integral
 public import WeilConjectures.AlgebraicGeometry.GeometricFrobenius
 public import WeilConjectures.Mathlib.AlgebraicGeometry.ResidueField
 public import WeilConjectures.Mathlib.FieldTheory.Finite.Basic
@@ -42,6 +43,17 @@ open CategoryTheory
 namespace AlgebraicGeometry.Scheme.Hom
 
 variable {k : Type u} [Field k] {X : Scheme.{u}} (f : X ⟶ Spec (.of k))
+
+/-- The projection `X̄ ⟶ X` of the geometric fiber is universally closed, being the base change
+of the integral morphism `Spec k̄ ⟶ Spec k`. In particular it maps closed points to closed
+points. -/
+instance universallyClosed_geometricFiberProj : UniversallyClosed f.geometricFiberProj := by
+  have : IsIntegralHom (Scheme.specAlgebraicClosure k).hom := by
+    change IsIntegralHom (Spec.map (CommRingCat.ofHom (algebraMap k (AlgebraicClosure k))))
+    rw [IsIntegralHom.SpecMap_iff]
+    exact Algebra.IsIntegral.isIntegral (R := k) (A := AlgebraicClosure k)
+  unfold geometricFiberProj
+  infer_instance
 
 /-- The geometric point of the geometric fiber over a point `x` of `X` with finite residue
 field `κ(x)` (a closed point, for `X` of finite type over a finite field): the geometric point
