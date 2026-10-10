@@ -12,9 +12,64 @@
   "def-pc-scheme-fibre",
   "def-weil-connected-scheme"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Factor the proper morphism through the relative spectrum of its global sections using [lem-weil-pbc-stein-universally-closed-factor]. In the hypothesis $H^0(X,\\mathcal O_X)=R$, this relative spectrum is $\\operatorname{Spec}R$ itself, and the factorization lemma makes the resulting morphism surjective. Therefore every scheme-theoretic fibre is nonempty.",
+   "uses": [
+    "lem-weil-pbc-stein-universally-closed-factor"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Theorem 37.53.5 (Tag 03H2), setup and Lemma 37.53.4 (Tag 03GY)"
+   }
+  },
+  {
+   "text": "To prove connectedness, suppose a fibre has a nontrivial clopen decomposition and take its characteristic idempotent. The proper-fibre idempotent image lemma [lem-weil-pbc-stein-fibre-idempotent-image] lifts this idempotent to the stalk of $f_*\\mathcal O_X$. Properness gives quasi-compactness and quasi-separatedness [pqf-lem-proper-basic], so pushforward preserves quasi-coherent modules [pqf-lem-pushforward-qcoh]. The universal factorization [lem-weil-pbc-stein-universally-closed-factor], specialized to $B=H^0(X,\\mathcal O_X)=R$, identifies the pushforward algebra with $\\mathcal O_{\\operatorname{Spec}R}$; the affine relative-spectrum and tilde/global-sections identifications [lem-weil-pbc-affine-morphism-relative-spec] [lem-weil-pbc-affine-tilde-gamma-adjunction] therefore identify its stalk with the local ring $R_s$.",
+   "uses": [
+    "lem-weil-pbc-stein-fibre-idempotent-image",
+    "pqf-lem-proper-basic",
+    "pqf-lem-pushforward-qcoh",
+    "lem-weil-pbc-stein-universally-closed-factor",
+    "lem-weil-pbc-affine-morphism-relative-spec",
+    "lem-weil-pbc-affine-tilde-gamma-adjunction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Theorem 37.53.5 (Tag 03H2), normalized affine reduction, lines 15321--15342, using Lemma 37.53.4 (Tag 03GY)"
+   }
+  },
+  {
+   "text": "Let $r\\in R_s$ be the lifted idempotent. Since $R_s$ is local, either $r$ is a unit or $r\\in\\mathfrak m_s$. By the fibre definition [def-pc-scheme-fibre] and the residue-field quotient [def-weil-residue-field], the map $R_s\\to H^0(X_s,\\mathcal O_{X_s})$ factors through $\\kappa(s)=R_s/\\mathfrak m_s$. If $r$ is a unit, its image is a unit and an idempotent unit is $1$; if $r\\in\\mathfrak m_s$, its image is $0$. Thus the image is $0$ or $1$, contradicting the characteristic idempotent from [lem-weil-pbc-scheme-clopen-idempotent], which is $1$ on one nonempty clopen piece and $0$ on the other. Hence the fibre is connected.",
+   "uses": [
+    "def-pc-scheme-fibre",
+    "def-weil-residue-field",
+    "lem-weil-pbc-scheme-clopen-idempotent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Theorem 37.53.5 (Tag 03H2), formal-functions/idempotent conclusion, lines 15334--15357"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-stein-universally-closed-factor",
+  "lem-weil-pbc-stein-fibre-idempotent-image",
+  "pqf-lem-proper-basic",
+  "pqf-lem-pushforward-qcoh",
+  "lem-weil-pbc-affine-morphism-relative-spec",
+  "lem-weil-pbc-affine-tilde-gamma-adjunction",
+  "def-pc-scheme-fibre",
+  "def-weil-residue-field",
+  "lem-weil-pbc-scheme-clopen-idempotent"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/more-morphisms.tex",
+  "place": "Theorem 37.53.5 (Tag 03H2), proof lines 15312--15357; idempotent image is Derived Categories Lemma 21.16.1 (Tag 0G7X)"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -39,7 +94,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-weil-pbc-stein-factorization-affine",
@@ -59,5 +114,18 @@
   }
  },
  "chapter": "sec-proper-base-change",
- "unit": "sk-thm-p1"
+ "unit": "sk-thm-p1",
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "lem-weil-pbc-stein-normalized-fibre-idempotent",
+  "worker": "stage1",
+  "summary": "Split the normalized proper-fibre argument along More on Morphisms Tag 03H2 and Derived Categories Tag 0G7X: universal-closed Stein factorization gives nonemptiness; the proper-fibre idempotent image lemma exposes the formal-functions and Noetherian-limit route; affine global sections identify the pushforward with the base structure sheaf, and the local-ring idempotent criterion gives connectedness. Added public nodes for the formal lift, proper-limit idempotent descent, and proper-fibre idempotent image, each searched in LeanSearch, LeanFinder/Loogle, and Mathlib grep. No Lean was written or compiled."
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "group": "E1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed by the lead of E1; spot-checked by L: third delivery: lift r of the idempotent via the new 0G7X node (statement matches Stacks perfect-lemma-proper-idempotent-on-fibre), r unit or in m_s, image in kappa(s) is 1 or 0; stalk of f_*O_X = R_s via f_*O_X = R~"
+ }
 }
