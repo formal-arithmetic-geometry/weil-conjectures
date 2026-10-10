@@ -25,9 +25,59 @@
   "def-weil-abstract-derived-category",
   "def-pur-pseudo-coherent-complex"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Pseudo-coherence is local on Y [def-pur-pseudo-coherent-complex]. Choose open coverings on which A, respectively C, is quasi-isomorphic to a bounded-above complex of finite free modules, and refine them to a common covering of Y by open affines $U=\\operatorname{Spec}(R)$; restricting a finite free complex to a smaller open keeps it finite free, and restriction $D(\\mathcal O_Y)\\to D(\\mathcal O_U)$ is exact, so $A|_U\\to B|_U\\to C|_U\\to A|_U[1]$ is distinguished. It suffices to show $B|_U$ is quasi-isomorphic to a bounded-above complex of finite free $\\mathcal O_U$-modules.",
+   "uses": [
+    "def-pur-pseudo-coherent-complex"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/cohomology.tex",
+    "place": "Tag 08CD, lemma-cone-pseudo-coherent, part (2), local reduction"
+   }
+  },
+  {
+   "text": "On $U=\\operatorname{Spec}(R)$ a bounded-above complex of finite free $\\mathcal O_U$-modules is $\\widetilde{P^\\bullet}$ for a bounded-above complex $P^\\bullet$ of finite free $R$-modules (a map $\\mathcal O_U^{a}\\to\\mathcal O_U^{b}$ is a matrix over $R$), so $A|_U\\cong\\widetilde{P_A}$ and $C|_U\\cong\\widetilde{P_C}$ lie in $D_{\\mathrm{QCoh}}(\\mathcal O_U)$. Rotating by (TR2) of [def-weil-triangulated-category] gives a distinguished triangle $C|_U[-1]\\xrightarrow{u}A|_U\\to B|_U\\to C|_U$. Since $M^\\bullet\\mapsto\\widetilde{M^\\bullet}$ is an equivalence $D(R)\\to D_{\\mathrm{QCoh}}(\\mathcal O_U)$ [lem-pc-affine-qcoh-derived-equivalence], $u$ is the image of a unique morphism $u_R:P_C[-1]\\to P_A$ in $D(R)$. The complex $P_C[-1]$ is bounded above with projective terms, hence K-projective [lem-sc-bounded-above-projective-kprojective]; so $\\operatorname{Hom}_{K(R)}(P_C[-1],-)$ inverts quasi-isomorphisms and $u_R$ is represented by a chain map $g:P_C[-1]\\to P_A$ [def-weil-abstract-derived-category].",
+   "uses": [
+    "def-weil-triangulated-category",
+    "lem-pc-affine-qcoh-derived-equivalence",
+    "lem-sc-bounded-above-projective-kprojective",
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/cohomology.tex",
+    "place": "Tag 08CD, lemma-cone-pseudo-coherent, part (2), lifting the map to complexes (affine form via Tag 06Z0)"
+   }
+  },
+  {
+   "text": "The mapping cone $C(g)$ has terms $P_A^r\\oplus P_C^{r}$ (the $(r+1)$-st term of $P_C[-1]$), so it is bounded above with finite free terms, and $P_C[-1]\\xrightarrow{g}P_A\\to C(g)\\to P_C$ is distinguished in $D(R)$ [def-weil-abstract-derived-category]. The equivalence of [lem-pc-affine-qcoh-derived-equivalence] is triangulated, so its image $C|_U[-1]\\xrightarrow{u}A|_U\\to\\widetilde{C(g)}\\to C|_U$ is distinguished in $D(\\mathcal O_U)$; two distinguished triangles on the same morphism $u$ have isomorphic third terms ((TR3) of [def-weil-triangulated-category] and the five lemma on $\\operatorname{Hom}$), so $B|_U\\cong\\widetilde{C(g)}$, a bounded-above complex of finite free $\\mathcal O_U$-modules. By Step 1, B is pseudo-coherent on Y.",
+   "uses": [
+    "def-weil-abstract-derived-category",
+    "lem-pc-affine-qcoh-derived-equivalence",
+    "def-weil-triangulated-category",
+    "def-pur-pseudo-coherent-complex"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/cohomology.tex",
+    "place": "Tag 08CD, lemma-cone-pseudo-coherent, part (2), cone and conclusion"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pur-pseudo-coherent-complex",
+  "def-weil-triangulated-category",
+  "def-weil-abstract-derived-category",
+  "lem-pc-affine-qcoh-derived-equivalence",
+  "lem-sc-bounded-above-projective-kprojective"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Tag 08CD, lemma-cone-pseudo-coherent, part (2)"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -66,12 +116,32 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-pc-noetherian-bounded-coherent-pseudo-coherent",
   "by": "worker",
   "date": "2026-10-10"
  },
  "chapter": "sec-picard-framework",
- "unit": "sk-thm-picard-duality"
+ "unit": "sk-thm-picard-duality",
+ "split_report": {
+  "date": "2026-10-11",
+  "item": "lem-pc-pseudo-coherent-distinguished-triangle",
+  "worker": "stage1",
+  "summary": "Split Stacks Tag 08CD part (2) into a local finite-free representative argument. The only non-elementary categorical input is recorded as the Mathlib leaf lem-pc-distinguished-triangle-cone-representation, which is exactly DerivedCategory.mem_distTriang_iff. The mapping cone's bounded-above finite-free property and locality are written as proof steps.",
+  "blueprint": "The steps realize the ancestor lem-sc-finite-duality proof place 'Tag 08EV proof: over a Noetherian base, D^b_Coh implies pseudo-coherent' through the imported triangle-closure lemma used in the truncation induction.",
+  "tool_uses": []
+ },
+ "tool_uses": [
+  "lem-pc-affine-qcoh-derived-equivalence"
+ ],
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-pct2644",
+  "group": "E1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-pct2644 (reviewer sub-agent of L); spot-checked: Statement vs Tag 08CD(2) all m: agrees (one of three cases, as cited by the Noetherian D^b_Coh induction). Step 1 locality matches def-pur-pseudo-coherent-complex (C4 ok). No Mathlib pseudo-coherence (recorded greps). FIX more, RETURN less: C1 in Step 2 -- 'replacing representatives along quasi-isomorphisms gives a chain map' was uncited and on D(O_U) not automatic (Stacks needs the local lift lemma, which fails degreewise for unbounded complexes); rewrote Steps 1-3 to refine to affine U=Spec R, transfer via the existing equivalence D(R)=D_QCoh(O_U) [lem-pc-affine-qcoh-derived-equivalence, Tag 06Z0, generic tool use], lift by K-projectivity [lem-sc-bounded-above-projective-kprojective], cone and compare third terms by TR3; proof_deps updated. No new node needed.; 1 file(s) fixed by the reviewer"
+ },
+ "lead_note": "2026-10-10 L (R-pct2644): Second reading by E1 missed a C1 gap in Step 2 (lifting the D-morphism C[-1]->A to a chain map between finite-free models was asserted, uncited); repaired via existing nodes; lem-pc-affine-qcoh-derived-equivalence (Tag 06Z0) used as a generic tool (C7/C8)."
 }
