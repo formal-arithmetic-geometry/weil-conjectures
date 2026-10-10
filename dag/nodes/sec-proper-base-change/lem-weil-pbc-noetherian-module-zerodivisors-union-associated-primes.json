@@ -14,7 +14,7 @@
     "lem-weil-pbc-etale-colimit-normal-local-domain"
    ]
   },
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "Zero divisors on a module over a Noetherian ring form the union of its associated primes",
@@ -52,12 +52,14 @@
    "verdict": "candidate: the union theorem and the equivalence of associated-prime notions are separate declarations"
   }
  ],
- "mathlib_match": null,
- "mathlib_candidate": {
-  "declarations": "biUnion_associatedPrimes_eq_zero_divisors (Mathlib/RingTheory/Ideal/AssociatedPrime/Basic.lean:227-228); isAssociatedPrime_iff (same file:114-116)",
-  "why_not_leaf": "The first theorem uses Mathlib's IsAssociatedPrime, defined via a radical of an annihilator; the second theorem is needed to identify it with the stated prime-annihilator notion. This is a separate equivalence theorem, so the match is not exact or a one-line specialization under delivery-errors B8."
+ "mathlib_match": {
+  "declaration": "biUnion_associatedPrimes_eq_zero_divisors",
+  "file": "Mathlib/RingTheory/Ideal/AssociatedPrime/Basic.lean",
+  "line": 227,
+  "how": "specializes in one line: lines 227-228, [IsNoetherianRing R] : the union over p in associatedPrimes R M of p equals {r | exists x : M, x != 0 and r * x = 0}, the zerodivisors on M; membership in associatedPrimes is the annihilator definition of the statement by isAssociatedPrime_iff (lines 114-116) for Noetherian R, the same translation as the M = R leaf lem-weil-pbc-noetherian-zerodivisors-union-associated-primes. Lines read with sed -n on 2026-10-10."
  },
- "status": "unsplit",
+ "mathlib_candidate": null,
+ "status": "mathlib",
  "merged_into": null,
  "created": {
   "by": "worker",
@@ -78,5 +80,13 @@
  },
  "chapter": "sec-proper-base-change",
  "unit": "sk-thm-p1",
- "lead_note": "module version of lem-weil-pbc-noetherian-zerodivisors-union-associated-primes (M = R, Mathlib leaf); Mathlib biUnion_associatedPrimes_eq_zero_divisors (AssociatedPrime/Basic.lean:227) with isAssociatedPrime_iff is the candidate; stage 3 may make it a composed leaf as for the M = R node"
+ "lead_note": null,
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "lem-weil-pbc-noetherian-module-zerodivisors-union-associated-primes",
+  "worker": "L",
+  "summary": "Made a Mathlib leaf by L: biUnion_associatedPrimes_eq_zero_divisors for modules with the annihilator translation isAssociatedPrime_iff, as for the reviewed M = R leaf (point B8, one line).",
+  "blueprint": "the node serves lem-weil-pbc-normal-constant-generic at step 4 of its split (source: Lemma 59.73.13 (Tag 09Z5), proof of (1)); no blueprint node states 00LD (searched: 00LD, zerodivisor, associated prime)"
+ },
+ "reviewed": "2026-10-10 L: Mathlib leaf: biUnion_associatedPrimes_eq_zero_divisors (AssociatedPrime/Basic.lean:227) with isAssociatedPrime_iff (:114); same translation as the M = R leaf"
 }
