@@ -1,0 +1,88 @@
+{
+ "id": "lem-weil-pbc-dimension-preserved-field-extension",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-finite-etale-lifting",
+   "place": "step 7 of its split (source: Lemma 0GS2, proof: the essential-surjectivity paragraphs); within it, the proof of Lemma 00SS (1) used by the relative-global-complete-intersection chain: 'By Lemma 00P3 the fibres of a base change have the same dimension as the fibres of the original map'",
+   "via": [
+    "lem-weil-pbc-relative-global-complete-intersection-base-change",
+    "lem-weil-pbc-relative-global-complete-intersection-partial-local-flat",
+    "lem-weil-pbc-relative-global-complete-intersection-flat",
+    "lem-weil-pbc-equation-count-fibre-dimension-flat",
+    "lem-weil-pbc-popescu-lifting",
+    "lem-weil-pbc-popescu-reduce-to-field",
+    "lem-weil-pbc-popescu-smoothing",
+    "lem-weil-pbc-henselian-pair-approximation",
+    "lem-weil-pbc-finite-etale-lifting-approximation",
+    "lem-weil-pbc-finite-etale-lifting-essential-surjectivity"
+   ]
+  },
+  "same_as": [
+   "lem-pc-dim-base-change",
+   "lem-kun-dimension-extension"
+  ]
+ },
+ "kind": "statement",
+ "title": "Krull dimension of a finite type algebra over a field is preserved by field extension",
+ "statement": "Let $k$ be a field, $K/k$ a field extension [def-pc-field-extension] (a field $K$ with a ring homomorphism $k\\to K$), and $S$ a finite type $k$-algebra [def-weil-pbc-finite-type-algebra]. Let $K\\otimes_kS$ be the tensor product, a $K$-algebra. Then the Krull dimensions [def-kun-topological-krull-dimension] of the topological spaces $\\operatorname{Spec}S$ and $\\operatorname{Spec}(K\\otimes_kS)$ [def-weil-affine-spectrum] are equal: $\\dim\\operatorname{Spec}(K\\otimes_kS)=\\dim\\operatorname{Spec}S$ in $\\{-\\infty,0,1,2,\\ldots,\\infty\\}$.",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Algebra, Lemma Tag 00P3 (lemma-dimension-preserved-field-extension, algebra.tex line 28290), where $\\dim(S)$ is the Krull dimension of the ring $S$, i.e. of $\\operatorname{Spec}S$; tag verified in stacks-project/tags/tags (00P3,algebra-lemma-dimension-preserved-field-extension)"
+ },
+ "stmt_deps": [
+  "def-pc-field-extension",
+  "def-weil-pbc-finite-type-algebra",
+  "def-kun-topological-krull-dimension",
+  "def-weil-affine-spectrum"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Krull dimension of finite type algebra over a field is preserved by base change to a field extension",
+   "results": "RingHom.finiteType_isStableUnderBaseChange, ringKrullDim, RingEquiv.ringKrullDim, ringKrullDim_eq_of_ringEquiv, ringKrullDim_le_of_surjective, Polynomial.ringKrullDim_of_isNoetherianRing, MvPolynomial.ringKrullDim_of_isNoetherianRing, ringKrullDim_eq_zero_of_isField (Mathlib.RingTheory.KrullDimension.*)",
+   "date": "2026-10-10",
+   "verdict": "no match: no statement on the Krull dimension of K ⊗_k S"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "ringKrullDim (K ⊗[k] S) = ringKrullDim S for field extension K/k and finitely generated k-algebra S",
+   "results": "Algebra.IsAlgebraic.finrank_of_isFractionRing, Algebra.IsAlgebraic.lift_rank_of_isFractionRing, Algebra.IsAlgebraic.rank_of_isFractionRing (Mathlib.RingTheory.Algebraic.Integral), Module.finrank_baseChange (Mathlib.LinearAlgebra.Dimension.Constructions), Module.rankAtStalk_tensorProduct_of_isScalarTower: module ranks only",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rn 'ringKrullDim' Mathlib --include=*.lean | grep -i 'tensor\\|baseChange\\|⊗'; grep -rln 'NoetherNormalization' Mathlib; grep -rn 'topologicalKrullDim_eq_ringKrullDim' Mathlib (in ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib)",
+   "results": "only RingTheory/KrullDimension/Polynomial.lean:39 (ringKrullDim_eq_of_ringEquiv applied to polyEquivTensor, inside the proof of the polynomial dimension formula, for κ(p)[X] = κ(p) ⊗ R[X], not a field-extension statement); RingTheory/NoetherNormalization.lean exists (the tool of the source proof); PrimeSpectrum.topologicalKrullDim_eq_ringKrullDim at RingTheory/Spectrum/Prime/Topology.lean:1361",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-relative-global-complete-intersection-base-change",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "reviewed": "2026-10-10 L: statement checked against 00P3; same_as names lem-pc-dim-base-change and lem-kun-dimension-extension (blueprint nodes stating it in another form: dimension via local rings plus a curve clause, and a scheme version), not cited to keep the unit route"
+}

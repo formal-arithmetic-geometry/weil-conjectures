@@ -17,7 +17,7 @@
     "lem-weil-pbc-finite-etale-lifting-essential-surjectivity"
    ]
   },
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "Base change of a relative global complete intersection",
@@ -30,9 +30,89 @@
   "def-weil-pbc-mv-polynomial-ring",
   "def-weil-pbc-relative-global-complete-intersection"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "(Part (a).) Write $P=R[x_1,\\dots,x_n]$, $P'=R'[x_1,\\dots,x_n]$ [def-weil-pbc-mv-polynomial-ring], $\\kappa:P\\to P'$ the coefficient map along $\\rho$, so $f'_j=\\kappa(f_j)$, and $\\pi:P\\to S=P/(f_1,\\dots,f_c)$ the quotient map, a surjective $R$-algebra homomorphism with kernel $(f_1,\\dots,f_c)$. By [lem-weil-pbc-presentation-base-change] (with $A=S$, $m=c$, this $\\pi$ and $R\\to R'$ the map $\\rho$) the $R'$-algebra homomorphism $\\pi':P'\\to S\\otimes_RR'$, $x_j\\mapsto\\pi(x_j)\\otimes1$, is surjective with kernel $(f'_1,\\dots,f'_c)$; hence it induces an isomorphism of $R'$-algebras $S'=P'/(f'_1,\\dots,f'_c)\\xrightarrow{\\sim}S\\otimes_RR'$. Composing with the swap $S\\otimes_RR'\\to R'\\otimes_RS$, $s\\otimes r'\\mapsto r'\\otimes s$ (an isomorphism of rings, $R'$-linear for $r'\\mapsto 1\\otimes r'$ on the left and $r'\\mapsto r'\\otimes1$ on the right), gives the isomorphism of $R'$-algebras $S'\\to R'\\otimes_RS$, $x_j\\mapsto1\\otimes\\pi(x_j)$, of (a). (Source: proof of 00SS, '$R'\\otimes_RR[x_1,\\dots,x_n]/(f_1,\\dots,f_c)=R'[x_1,\\dots,x_n]/(f_1,\\dots,f_c)$'.)",
+   "uses": [
+    "def-weil-pbc-mv-polynomial-ring",
+    "lem-weil-pbc-presentation-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra, Lemma Tag 00SS (lemma-base-change-relative-global-complete-intersection, line 36639), proof of (1), lines 36658-36662"
+   }
+  },
+  {
+   "text": "(The residue field extension.) For (b), fix a prime $\\mathfrak p'\\subset R'$ and put $\\mathfrak p=\\rho^{-1}(\\mathfrak p')$, a prime of $R$. Let $\\pi_{\\mathfrak p}:R\\to\\kappa(\\mathfrak p)$ and $\\pi_{\\mathfrak p'}:R'\\to\\kappa(\\mathfrak p')$ be the maps to the residue fields [def-weil-pbc-localization-at-prime]. By [lem-weil-pbc-prime-residue-field-algebra] (a), $\\ker\\pi_{\\mathfrak p'}=\\mathfrak p'$; so the ring map $\\phi=\\pi_{\\mathfrak p'}\\circ\\rho:R\\to\\kappa(\\mathfrak p')$ has kernel $\\rho^{-1}(\\mathfrak p')=\\mathfrak p$, and for $s\\in R\\setminus\\mathfrak p$, $\\phi(s)\\neq0$ is a unit of the field $\\kappa(\\mathfrak p')$. By [lem-weil-pbc-prime-residue-field-algebra] (d) there is a ring map $\\lambda:\\kappa(\\mathfrak p)\\to\\kappa(\\mathfrak p')$ with $\\lambda\\circ\\pi_{\\mathfrak p}=\\pi_{\\mathfrak p'}\\circ\\rho$. Thus $\\kappa(\\mathfrak p')$ is a field extension of $\\kappa(\\mathfrak p)$ via $\\lambda$ [def-pc-field-extension], and the two $R$-algebra structures on $\\kappa(\\mathfrak p')$, through $R'$ and through $\\kappa(\\mathfrak p)$, coincide.",
+   "uses": [
+    "def-weil-pbc-localization-at-prime",
+    "lem-weil-pbc-prime-residue-field-algebra",
+    "def-pc-field-extension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra, Lemma Tag 00SS (line 36639), proof of (1), line 36658: the fibre of the base change over $\\mathfrak p'$ is a base change of the fibre over $\\mathfrak p$ along $\\kappa(\\mathfrak p)\\subset\\kappa(\\mathfrak p')$ (left implicit in the source)"
+   }
+  },
+  {
+   "text": "(The fibre of $S'$ is a field extension of the fibre of $S$.) Keep step 2 and let $F=S\\otimes_R\\kappa(\\mathfrak p)$ and $F'=S'\\otimes_{R'}\\kappa(\\mathfrak p')$ be the fibre rings [def-weil-pbc-localization-at-prime]; write $k=\\kappa(\\mathfrak p)$, $K=\\kappa(\\mathfrak p')$. There are ring isomorphisms\n$$F'\\cong K\\otimes_{R'}S'\\cong K\\otimes_{R'}(R'\\otimes_RS)\\cong K\\otimes_RS\\cong K\\otimes_k(k\\otimes_RS)\\cong K\\otimes_kF:$$\nthe first and last by the swaps $a\\otimes b\\mapsto b\\otimes a$; the second is $K\\otimes_{R'}-$ applied to the $R'$-algebra isomorphism of step 1; the third is [lem-weil-pbc-tensor-cancel-base-change] with its $R\\to S$ the map $\\rho:R\\to R'$, its $A=K$ (an $R'$-algebra via $\\pi_{\\mathfrak p'}$) and its $B=S$, where $K$ is an $R$-algebra via $\\pi_{\\mathfrak p'}\\circ\\rho$; the fourth is the inverse of [lem-weil-pbc-tensor-cancel-base-change] with its $R\\to S$ the map $\\pi_{\\mathfrak p}:R\\to k$, its $A=K$ (a $k$-algebra via $\\lambda$) and its $B=S$, where $K$ is an $R$-algebra via $\\lambda\\circ\\pi_{\\mathfrak p}$, which is the same $R$-algebra structure by step 2. A ring isomorphism $\\varphi:A_1\\to A_2$ gives the bijection $\\mathfrak P\\mapsto\\varphi(\\mathfrak P)$ of prime ideals, which preserves the closed sets $V(J)$, hence a homeomorphism $\\operatorname{Spec}A_1\\cong\\operatorname{Spec}A_2$ [def-weil-affine-spectrum]; so by [lem-weil-pbc-homeomorphism-krull-dimension] $\\dim\\operatorname{Spec}F'=\\dim\\operatorname{Spec}(K\\otimes_kF)$. Moreover, if $F=0$ then $K\\otimes_kF=0$ (every $a\\otimes b=a\\otimes0=0$), so $F'=0$; that is, $F'\\neq0$ implies $F\\neq0$.",
+   "uses": [
+    "def-weil-pbc-localization-at-prime",
+    "lem-weil-pbc-tensor-cancel-base-change",
+    "def-weil-affine-spectrum",
+    "lem-weil-pbc-homeomorphism-krull-dimension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra, Lemma Tag 00SS (line 36639), proof of (1), lines 36658-36660 ('the fibres of a base change ... the fibres of the original map')"
+   }
+  },
+  {
+   "text": "(The fibre of $S$ is of finite type over $k$.) By [lem-weil-pbc-presentation-base-change] applied to $\\pi:P\\to S$ (step 1) and the ring map $\\pi_{\\mathfrak p}:R\\to k=\\kappa(\\mathfrak p)$, the $k$-algebra homomorphism $k[x_1,\\dots,x_n]\\to S\\otimes_Rk=F$, $x_j\\mapsto\\pi(x_j)\\otimes1$, is surjective, $F$ being a $k$-algebra via $\\mu\\mapsto1\\otimes\\mu$. Hence $F$ is a finite type $k$-algebra [def-weil-pbc-finite-type-algebra].",
+   "uses": [
+    "lem-weil-pbc-presentation-base-change",
+    "def-weil-pbc-finite-type-algebra"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra, Lemma Tag 00SS (line 36639), proof of (1), lines 36660-36662; the finite type hypothesis of Lemma Tag 00P3 (line 28290)"
+   }
+  },
+  {
+   "text": "(Conclusion of (b).) Assume $S=R[x_1,\\dots,x_n]/(f_1,\\dots,f_c)$ is a relative global complete intersection over $R$ [def-weil-pbc-relative-global-complete-intersection], and let $\\mathfrak p'\\subset R'$ be a prime with $F'=S'\\otimes_{R'}\\kappa(\\mathfrak p')\\neq0$; let $\\mathfrak p,k,K,\\lambda,F$ be as in steps 2-3. By step 3, $F\\neq0$, so by the definition $\\dim\\operatorname{Spec}F=n-c$. By step 4, $F$ is a finite type $k$-algebra, and $K/k$ is a field extension via $\\lambda$ (step 2), so [lem-weil-pbc-dimension-preserved-field-extension] gives $\\dim\\operatorname{Spec}(K\\otimes_kF)=\\dim\\operatorname{Spec}F=n-c$, and by step 3 $\\dim\\operatorname{Spec}F'=n-c$. Since $\\mathfrak p'$ was arbitrary and $S'=R'[x_1,\\dots,x_n]/(f'_1,\\dots,f'_c)$ has $n$ variables and $c$ equations, $S'$ is a relative global complete intersection over $R'$ [def-weil-pbc-relative-global-complete-intersection]. (Source: proof of 00SS, 'By Lemma 00P3 the fibres of a base change have the same dimension as the fibres of the original map ... Thus (1) follows'.)",
+   "uses": [
+    "def-weil-pbc-relative-global-complete-intersection",
+    "lem-weil-pbc-dimension-preserved-field-extension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra, Lemma Tag 00SS (lemma-base-change-relative-global-complete-intersection, line 36639), proof of (1), lines 36658-36662"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-mv-polynomial-ring",
+  "lem-weil-pbc-presentation-base-change",
+  "def-weil-pbc-localization-at-prime",
+  "lem-weil-pbc-prime-residue-field-algebra",
+  "def-pc-field-extension",
+  "lem-weil-pbc-tensor-cancel-base-change",
+  "def-weil-affine-spectrum",
+  "lem-weil-pbc-homeomorphism-krull-dimension",
+  "def-weil-pbc-finite-type-algebra",
+  "def-weil-pbc-relative-global-complete-intersection",
+  "lem-weil-pbc-dimension-preserved-field-extension"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Algebra, Lemma Tag 00SS (lemma-base-change-relative-global-complete-intersection, line 36639), proof of (1), lines 36658-36662, with Lemma Tag 00P3 (lemma-dimension-preserved-field-extension, line 28290); the residue field map and the tensor identifications, implicit in the source, are written out"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -57,7 +137,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "worker",
@@ -78,5 +158,12 @@
  },
  "chapter": "sec-proper-base-change",
  "unit": "sk-thm-p1",
- "reviewed": "2026-10-10 L: statement checked against 00SS (1) with the explicit tensor isomorphism (a)"
+ "reviewed": "2026-10-10 L: 5 steps checked against 00SS (1): presentation base change gives (a), residue field map kappa(p) -> kappa(p'), fibre F' = kappa(p') (x) F by tensor cancellation, dimension preserved by the new 00P3 node; citer partial-local-flat uses (b)",
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "lem-weil-pbc-relative-global-complete-intersection-base-change",
+  "worker": "stage1",
+  "summary": "Read 00SS (algebra.tex line 36639) and its proof, 00P3 (line 28290) and its proof (Noether normalization), Definition 00SP (line 36506); tags 00SS, 00P3, 00SP verified in tags/tags. Statement kept. Five steps: (1) part (a) from the presentation base-change leaf plus the swap; (2) the residue field map lambda: kappa(p) -> kappa(p') with p = rho^{-1}(p') from the residue-field leaf (a),(d); (3) the fibre F' of S' is K (x)_k F (swaps, step 1, tensor-cancel-base-change twice), Spec homeomorphic, and F' != 0 forces F != 0; (4) F is of finite type over k (presentation base change); (5) conclusion by the new node for 00P3. New node lem-weil-pbc-dimension-preserved-field-extension (00P3, unsplit; same_as the blueprint nodes lem-pc-dim-base-change and lem-kun-dimension-extension, which state it with another dimension notion (def-pc-dimension, local rings) plus a curve clause, resp. for schemes with kundim, in other units, so it was not cited). No DAG node stated 00P3 (grep '00P3', 'dimension-preserved'); lem-weil-pbc-dimension-at-point-field-extension is 00P4 (dimension at a point), not 00P3. Item searches recorded at creation (no Mathlib notion of relative global complete intersection).",
+  "blueprint": "No blueprint node is this item; its ancestor thm-weil-pbc-finite-etale-lifting, step 7 of its split (0GS2, essential surjectivity): the steps realize the base-change clause of 00SS (1) used in the relative-global-complete-intersection chain below that step: step 1 the presentation identity, steps 2-5 the fibre-dimension argument through 00P3."
+ }
 }
