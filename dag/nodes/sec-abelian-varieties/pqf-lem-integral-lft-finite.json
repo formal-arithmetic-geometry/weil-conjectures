@@ -19,26 +19,53 @@
   ]
  },
  "stmt_deps": [],
- "proof": [
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
   {
-   "text": "We work ring-locally. If\n$A\\to B$ is an integral ring map and $B$ is a finite type\n$A$-algebra, then $B$ is a finite $A$-module: writing\n$B=A[b_1,\\dots,b_m]$, the case $m=1$ is the reduction of the monic\nequation of $b_1$ (every higher power reduces to a combination of\n$1,b_1,\\dots,b_1^{n-1}$), and for $m>1$ we iterate using that an\nintegral element over $A$ remains integral over a larger\n$A$-algebra, and that a finite module over a finite module is finite.\nNow let $f:X\\to S$ be integral and locally of\nfinite type; $f$ is affine, so for $V=\\operatorname{Spec}A$ affine\nopen of $S$ and $f^{-1}(V)=\\operatorname{Spec}B$, the map $A\\to B$ is\nintegral, and by local finite type of $f$, after shrinking $V$ and\n$f^{-1}(V)$ if necessary, $B$ is a finite type $A$-algebra (a\nmorphism between affines is locally of finite type exactly when the\nring map is such, and on a finite affine cover the source rings are\nfinite type over the target rings by\n[def-weil-pbc-scheme-conventions]); by the classical\nfact above $B$ is a finite $A$-module, so $f_*\\mathcal O_X$ is a\nfinite $\\mathcal O_S$-module locally, and $f$ is finite.",
-   "uses": [
-    "def-weil-pbc-scheme-conventions"
-   ],
-   "elementary": false
+   "tool": "leanfinder",
+   "query": "an integral morphism of schemes which is locally of finite type is finite",
+   "results": "AlgebraicGeometry.IsFinite.iff_isIntegralHom_and_locallyOfFiniteType (Mathlib/AlgebraicGeometry/Morphisms/Finite)",
+   "date": "2026-10-11",
+   "verdict": "generalization: the equivalence specializes to the stated implication"
+  },
+  {
+   "tool": "loogle",
+   "query": "IsFinite IsIntegralHom LocallyOfFiniteType",
+   "results": "none; unknown identifier IsFinite",
+   "date": "2026-10-11",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "iff_isIntegralHom_and_locallyOfFiniteType|IsFinite.*IsIntegralHom (Mathlib/AlgebraicGeometry/Morphisms)",
+   "results": "Mathlib/AlgebraicGeometry/Morphisms/Finite.lean:100-101, lemma iff_isIntegralHom_and_locallyOfFiniteType",
+   "date": "2026-10-11",
+   "verdict": "generalization: the equivalence specializes to the stated implication"
+  },
+  {
+   "tool": "leansearch",
+   "query": "integral scheme morphism locally of finite type finite",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-11",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "grep",
+   "query": "sed -n 99,101p ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicGeometry/Morphisms/Finite.lean",
+   "results": "Finite.lean:100 lemma iff_isIntegralHom_and_locallyOfFiniteType : IsFinite f ↔ IsIntegralHom f ∧ LocallyOfFiniteType f",
+   "date": "2026-10-11",
+   "verdict": "match: reverse implication is the item"
   }
  ],
- "proof_deps": [
-  "def-weil-pbc-scheme-conventions"
- ],
- "proof_origin": {
-  "by": "agent",
-  "document": "literature/blueprint/master/blueprint/sec-abelian-varieties/sk-prop-av-pqf-finite/pqf-lem-integral-lft-finite.md",
-  "place": "## Proof"
+ "mathlib_match": {
+  "declaration": "AlgebraicGeometry.IsFinite.iff_isIntegralHom_and_locallyOfFiniteType",
+  "file": "Mathlib/AlgebraicGeometry/Morphisms/Finite.lean",
+  "line": 100,
+  "how": "one-line specialization (B8): the reverse implication (.mpr ⟨hI, hL⟩) of IsFinite f ↔ IsIntegralHom f ∧ LocallyOfFiniteType f; the same declaration backs the existing leaf lem-weil-pbc-finite-iff-integral-lft"
  },
- "mathlib_searches": [],
- "mathlib_match": null,
- "status": "imported",
+ "status": "mathlib",
  "merged_into": null,
  "import_flags": [],
  "blueprint_kind": "lemma",
@@ -60,5 +87,21 @@
   }
  },
  "chapter": "sec-abelian-varieties",
- "unit": "sk-prop-av-pqf-finite"
+ "unit": "sk-prop-av-pqf-finite",
+ "split_report": {
+  "date": "2026-10-11",
+  "item": "pqf-lem-integral-lft-finite",
+  "worker": "stage1",
+  "summary": "Replaced the imported ring-local proof with the exact reverse implication of the existing stronger DAG node lem-weil-pbc-finite-iff-integral-lft, which is backed by Mathlib's IsFinite.iff_isIntegralHom_and_locallyOfFiniteType. Checked the Stacks Tag 01WJ source and recorded all required Mathlib searches, including LeanSearch unavailability.",
+  "blueprint": "The item realizes the single proof clause of blueprint node pqf-lem-integral-lft-finite: integral plus locally of finite type implies finite.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-ilf1921",
+  "group": "M1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-ilf1921 (reviewer sub-agent of L); spot-checked: Read Mathlib Finite.lean:100 (IsFinite f ↔ IsIntegralHom f ∧ LocallyOfFiniteType f) and the cited leaf lem-weil-pbc-finite-iff-integral-lft; statement matches Stacks 01WJ second clause. FIX more, RETURN less: the item is itself a Mathlib fact (one-line .mpr specialization), so converted the one-step split to a leaf: status mathlib, mathlib_match IsFinite.iff_isIntegralHom_and_locallyOfFiniteType line 100, proof/proof_deps emptied, proof_origin null, grep search recorded. Second reading missed this (it passed the split form).; 1 file(s) fixed by the reviewer"
+ }
 }
