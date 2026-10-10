@@ -2640,3 +2640,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 21:15 L: merged deliver/F1/lem-pc-ringed-space-pointwise-truncation-limit (reviewer FIX; first push; new nodes: 2)
 - 21:15 L: merged deliver/C1/lem-pur-sheaf-hom-is-sheaf (reviewer FIX; first push; new nodes: 1)
 - 21:15 L: merged deliver/J1/lem-pc-affine-containment-ideal (reviewer PASS; first push; new nodes: 0)
+- 21:16 L: returned deliver/H1/lem-sc-meromorphic-sheaf-generic-product (reviewer RETURN: Reviewer R-msg2530. 1. C1/D1: steps 1 and 3 prove the item by quoting Tag 0EMH, i.e. the item's own statement; the no-em)
