@@ -3,11 +3,11 @@
  "blueprint": {
   "is": "lem-pc-picard-functor-agrees-sc",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "Agreement with the affine Picard functor of file 06",
- "statement": "Let $k$ be a field and $X$ a\nsmooth projective curve over\n$k$. The restriction of\n$\\operatorname{Pic}_{X/k}$ to affine $k$-schemes\n$T=\\operatorname{Spec}(R)$ is canonically the sheafification presented in\n[def-sc-picard-functor], namely the fppf sheafification of\n$R\\mapsto\\operatorname{Pic}(X\\times_k\\operatorname{Spec} R)$;\nmore precisely\n$\\operatorname{Pic}_{X/k}(\\operatorname{Spec}(R))=\\operatorname{Pic}_{X/k}^{\\mathrm{sc}}(R)$ where\nthe right side is the value of the functor of [def-sc-picard-functor].",
+ "statement": "Let $k$ be a field and $X$ a\nsmooth projective curve over\n$k$ which is geometrically integral over $k$ [def-pc-geometrically-irreducible]. The restriction of\n$\\operatorname{Pic}_{X/k}$ to affine $k$-schemes\n$T=\\operatorname{Spec}(R)$ is canonically the sheafification presented in\n[def-sc-picard-functor], namely the fppf sheafification of\n$R\\mapsto\\operatorname{Pic}(X\\times_k\\operatorname{Spec} R)$;\nmore precisely\n$\\operatorname{Pic}_{X/k}(\\operatorname{Spec}(R))=\\operatorname{Pic}_{X/k}^{\\mathrm{sc}}(R)$ where\nthe right side is the value of the functor of [def-sc-picard-functor].",
  "source": {
   "document": "literature/blueprint/master/blueprint/sec-picard-framework/sk-def-picard-pic/lem-pc-picard-functor-agrees-sc.md",
   "place": "node lem-pc-picard-functor-agrees-sc, order 805",
@@ -20,6 +20,7 @@
  },
  "stmt_deps": [
   "def-sc-picard-functor",
+  "def-pc-geometrically-irreducible",
   "def-pc-fppf-site",
   "def-pc-picard-functor",
   "def-pc-picard-presheaf",
@@ -27,20 +28,83 @@
  ],
  "proof": [
   {
-   "text": "Both sides are the fppf sheafification of the same presheaf on the\ncategory of affine $k$-schemes: the left is the restriction of the fppf\nsheafification on $(\\mathit{Sch}/k)_{fppf}$, and fppf sheafification\ncommutes with restricting to the essentially full subcategory of affine\nschemes, because the $(\\mathit{Sch}/k)_{fppf}$-coverings of an affine\nscheme and the corresponding coverings by affines cofinalize (every\nscheme is covered by open affines in the Zariski, hence fppf, topology;\nand for our purposes the affine objects fully capture the value of a\nsheaf). More precisely: let\n$F_T=\\operatorname{Pic}(X_T)$ and let $\\pi:(\\mathit{Sch}/k)_{fppf}\\to(\\mathit{Aff}/k)_{fppf}$\nbe the restriction; the map of sites $\\pi$ induces for the sheafification\n$(\\pi^{-1}F^\\#)^\\#=(\\pi^{-1}F)^\\#$ for the restriction of the sheafified\nfunctor to affine schemes; the sheaves that are sheafifications of\npresheaves on the affine site are exactly the fppf sheaves on\n$(\\mathit{Aff}/k)_{fppf}$, the two prescriptions agree on affine inputs.\nThis is the standard construction of the big sites (see Topologies,\nSection 34.7, Tag [021S](https://stacks.math.columbia.edu/tag/021S)).",
-   "uses": [],
-   "elementary": null
+   "text": "On an affine k-scheme T = Spec(R), the big-site Picard presheaf and the affine-site presheaf both send T to Pic(X ×_k T), with identical pullback maps, by def-pc-picard-presheaf. Thus their restrictions are the same presheaf.",
+   "uses": [
+    "def-pc-picard-presheaf"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-picard-framework/sk-def-picard-pic/lem-pc-picard-functor-agrees-sc.md",
+    "place": "## Proof; Stacks Project, Tag 021S"
+   }
+  },
+  {
+   "text": "For the Picard presheaf, lem-pc-fppf-affine-sheafification-restriction gives a canonical and functorial identification of the restriction of its big-site fppf sheafification to affine objects with the fppf sheafification of its restriction to the affine site.",
+   "uses": [
+    "lem-pc-fppf-affine-sheafification-restriction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-picard-framework/sk-def-picard-pic/lem-pc-picard-functor-agrees-sc.md",
+    "place": "## Proof; Stacks Project, Tag 021S"
+   }
+  },
+  {
+   "text": "By def-pc-picard-functor, the left-hand sheaf is Pic_{X/k}; by def-sc-picard-functor, the affine-site sheafification of the common presheaf is Pic_{X/k}^{sc}. Evaluating the canonical identification from the preceding step at T = Spec(R) yields Pic_{X/k}(Spec(R)) = Pic_{X/k}^{sc}(R), naturally in affine k-schemes.",
+   "uses": [
+    "def-pc-picard-functor",
+    "def-sc-picard-functor"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-picard-framework/sk-def-picard-pic/lem-pc-picard-functor-agrees-sc.md",
+    "place": "## Proof; Stacks Project, Tag 021S"
+   }
   }
  ],
- "proof_deps": [],
+ "proof_deps": [
+  "def-pc-picard-presheaf",
+  "lem-pc-fppf-affine-sheafification-restriction",
+  "def-pc-picard-functor",
+  "def-sc-picard-functor"
+ ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/master/blueprint/sec-picard-framework/sk-def-picard-pic/lem-pc-picard-functor-agrees-sc.md",
   "place": "## Proof"
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "restriction of fppf Picard sheafification to affine schemes equals affine-site sheafification",
+   "results": "AffineZariskiSite.sheafEquiv and related affine Zariski declarations; no fppf Picard comparison",
+   "date": "2026-10-11",
+   "verdict": "no match; affine Zariski result has different topology"
+  },
+  {
+   "tool": "loogle",
+   "query": "Sheafification, Presheaf, fppfTopology",
+   "results": "0 hits; unknown identifier Sheafification",
+   "date": "2026-10-11",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "sheafification.*affine|affine.*sheafification in Mathlib/",
+   "results": "none",
+   "date": "2026-10-11",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Picard fppf sheafification restricted to affine schemes",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-11",
+   "verdict": "unavailable"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [
   "proof_cites_literature"
@@ -74,5 +138,20 @@
   }
  },
  "chapter": "sec-picard-framework",
- "unit": "sk-def-picard-pic"
+ "unit": "sk-def-picard-pic",
+ "split_report": {
+  "date": "2026-10-11",
+  "item": "lem-pc-picard-functor-agrees-sc",
+  "worker": "stage1",
+  "summary": "Repaired the imported statement by adding geometric integrality, then split the proof into the common affine Picard presheaf, the 021V big/affine fppf sheafification comparison, and evaluation of the two definitions.",
+  "blueprint": "The three steps realize the proof sentences in the blueprint node; step 2 makes the cited Topologies Lemma 34.7.11 (Tag 021V) comparison explicit."
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-pfa1909",
+  "group": "K1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-pfa1909 (reviewer sub-agent of L); spot-checked: Repaired re-push after 18:47 return, each point checked: (1) E1 repaired: statement now assumes geometrically integral [def-pc-geometrically-irreducible], in stmt_deps, named under Source error (E7), so def-sc-picard-functor applies in step 3; (2) C1/C4 repaired: step 2 now cites new statement-only node lem-pc-fppf-affine-sheafification-restriction ((F^#)|Aff = (F|Aff)^# canonically, functorially), sourced Tag 021V, true since u is continuous+cocontinuous (special cocontinuous), Mathlib searches recorded; (3) B source: lem-pc-fppf-affine-refinement dropped (allowed option, no step cites it; report's files list is stale on this but packet shows 1 new node). Steps 1 and 3 elementary as accepted before; C7/C8: def-sc-picard-functor (other unit) only gives the meaning of the right side, as an agrees bridge requires; no cycle (new node depends only on def-pc-fppf-site, def-pc-scheme)."
+ }
 }
