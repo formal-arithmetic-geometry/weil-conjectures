@@ -22,7 +22,6 @@
 | `lem-weil-pbc-flat-variant-local-criterion` | 1012 | none |
 | `lem-weil-pbc-formal-systems-graded-vanishing` | 1012 | none |
 | `lem-weil-pbc-formal-systems-kernel-rees-finite` | 1012 | none |
-| `lem-weil-pbc-module-finite-presentation-extension` | 1012 | none |
 | `lem-weil-pbc-module-finite-type-submodule-extension` | 1012 | none |
 | `lem-weil-pbc-module-pullback-affine-sections` | 1012 | none |
 | `lem-weil-pbc-module-stalk-filtered-colimit` | 1012 | none |
@@ -136,6 +135,7 @@
 | `lem-weil-pbc-pth-roots-extension-degree` | 1013 | none |
 | `lem-weil-pbc-purely-inseparable-base-change-local-ring` | 1013 | none |
 | `lem-weil-pbc-purely-inseparable-pth-root-tower` | 1013 | none |
+| `lem-weil-pbc-quasi-coherent-extension-qc-open` | 1013 | none |
 | `lem-weil-pbc-quasi-finite-at-finite-subalgebra-away` | 1013 | none |
 | `lem-weil-pbc-regular-sequence-conormal-free` | 1013 | none |
 | `lem-weil-pbc-relative-global-complete-intersection-smooth-jacobian` | 1013 | none |
@@ -909,7 +909,7 @@
 | `lem-weil-pbc-p1-field-dimension-one` | 4 | state |
 | `lem-weil-pbc-projective-space-zero-isomorphism` | 4 | state |
 
-Not open yet: 670 nodes that wait for stage 1, 525 nodes that wait for a statement dependency.
+Not open yet: 670 nodes that wait for stage 1, 526 nodes that wait for a statement dependency.
 
 ## Stage 3: modules to prove (0)
 
