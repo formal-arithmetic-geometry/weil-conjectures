@@ -1,8 +1,8 @@
 # Work queue
 
-809 items; claim with `tools/claim.py next <group> [--stage N]`.
+808 items; claim with `tools/claim.py next <group> [--stage N]`.
 
-## Stage 1: nodes to split (660)
+## Stage 1: nodes to split (659)
 
 | node | distance to a target | Lean state on the done branch |
 |---|---|---|
@@ -15,7 +15,6 @@
 | `lem-weil-pbc-completion-of-dvr-is-dvr` | 1011 | none |
 | `lem-weil-pbc-etale-ring-map-prescribed-residue-field` | 1011 | none |
 | `lem-weil-pbc-flat-over-regular-with-regular-fibre` | 1011 | none |
-| `lem-weil-pbc-formal-completion-exact` | 1011 | none |
 | `lem-weil-pbc-formal-functions-complete-base` | 1011 | none |
 | `lem-weil-pbc-formal-system-support-constant` | 1011 | none |
 | `lem-weil-pbc-formal-systems-annihilated-by-power` | 1011 | none |
@@ -821,7 +820,7 @@
 | `lem-weil-pbc-p1-field-dimension-one` | 4 | state |
 | `lem-weil-pbc-projective-space-zero-isomorphism` | 4 | state |
 
-Not open yet: 672 nodes that wait for stage 1, 434 nodes that wait for a statement dependency.
+Not open yet: 671 nodes that wait for stage 1, 435 nodes that wait for a statement dependency.
 
 ## Stage 3: modules to prove (0)
 
