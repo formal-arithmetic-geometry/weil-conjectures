@@ -1,0 +1,67 @@
+{
+ "id": "lem-weil-pbc-flat-module-faithfully-flat-maximal-ideals",
+ "kind": "statement",
+ "title": "A flat module with nonzero closed fibres is faithfully flat",
+ "statement": "Let $A$ be a commutative ring and $M$ a flat $A$-module [def-weil-pbc-flat-ring-map] such that for every maximal ideal $\\mathfrak n\\subset A$ one has $\\mathfrak nM\\neq M$ (equivalently $M\\otimes_A\\kappa(\\mathfrak n)=M/\\mathfrak nM\\neq0$). Then $M$ is a faithfully flat $A$-module [def-weil-pbc-faithfully-flat-ring-map]. In particular, if $A$ is a local ring with maximal ideal $\\mathfrak m_A$, a flat $A$-module $M$ with $M/\\mathfrak m_AM\\neq0$ is faithfully flat.",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Algebra, Lemma Tag 00HP (lemma-ff, line 9124), implication (4)$\\Rightarrow$(1); used in the proof of Lemma Tag 00MP (lemma-criterion-flatness-fibre-Noetherian, line 23978)"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-flat-ring-map",
+  "def-weil-pbc-faithfully-flat-ring-map"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "a flat module M over a commutative ring with m M ≠ M for every maximal ideal m is faithfully flat",
+   "results": "Module.FaithfullyFlat.mk (constructor: [Module.Flat R M] → (∀ m maximal, m • ⊤ ≠ ⊤) → Module.FaithfullyFlat R M), Module.FaithfullyFlat, Module.faithfullyFlat_iff, Module.FaithfullyFlat.toFlat, Module.FaithfullyFlat.iff_flat_and_proper_ideal, Module.FaithfullyFlat.iff_flat_and_ideal_smul_eq_top (all Mathlib.RingTheory.Flat.FaithfullyFlat.Basic)",
+   "date": "2026-10-10",
+   "verdict": "match: Module.FaithfullyFlat.mk / Module.faithfullyFlat_iff"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "flat module whose fibre M/mM is nonzero at every maximal ideal is faithfully flat",
+   "results": "Module.faithfullyFlat_iff, Module.FaithfullyFlat.iff_flat_and_proper_ideal, Module.FaithfullyFlat.iff_flat_and_ideal_smul_eq_top (Mathlib.RingTheory.Flat.FaithfullyFlat.Basic), Module.FaithfullyFlat.of_flat_of_isLocalHom (…FaithfullyFlat.Algebra, ring case only), Module.FaithfullyFlat.toFlat, Module.flat_of_isLocalized_maximal",
+   "date": "2026-10-10",
+   "verdict": "match: Module.faithfullyFlat_iff"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -n 'mk_iff\\] class FaithfullyFlat' /home/ubuntu/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/RingTheory/Flat/FaithfullyFlat/Basic.lean; sed -n 55,75p of the same file",
+   "results": "Basic.lean:63 @[mk_iff] class FaithfullyFlat : Prop extends Module.Flat R M where submodule_ne_top : ∀ ⦃m : Ideal R⦄ (_ : Ideal.IsMaximal m), m • (⊤ : Submodule R M) ≠ ⊤ (for CommRing R, AddCommGroup M, Module R M); :73 iff_flat_and_proper_ideal",
+   "date": "2026-10-10",
+   "verdict": "match"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "Module.FaithfullyFlat.mk, Module.faithfullyFlat_iff",
+  "file": "Mathlib/RingTheory/Flat/FaithfullyFlat/Basic.lean",
+  "line": 63,
+  "how": "exact: Mathlib's class Module.FaithfullyFlat R M (Basic.lean:63, @[mk_iff], for a commutative ring R and an R-module M) is constructed from Module.Flat R M and ∀ m maximal, m • ⊤ ≠ ⊤, i.e. mM ≠ M; its agreement with the node's exactness definition of faithful flatness is the match recorded on def-weil-pbc-faithfully-flat-ring-map (Module.FaithfullyFlat.iff_exact_iff_lTensor_exact). The local case: the only maximal ideal is m_A (IsLocalRing.eq_maximalIdeal). Source read 2026-10-10."
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-criterion-flatness-fibre-noetherian",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1"
+}
