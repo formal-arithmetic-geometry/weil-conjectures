@@ -27,9 +27,73 @@
   "def-pd-descent-datum",
   "def-weil-pbc-fpqc-covering"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Let $A\\subseteq S$ be an affine open. Pull the singleton fpqc covering $X\\to S$ and the descent datum $(V,\\varphi)$ back along $A\\to S$. By [lem-galois-fpqc-covering-base-change] the first projection $X_A=A\\times_SX\\to A$ is again a singleton fpqc covering, and hypothesis (1) preserves $\\mathcal P$ for the pulled-back morphism $V_A\\to X_A$. It therefore suffices to construct an effective descent of this pulled-back datum for every affine open $A$; the descended objects and their transition maps will be glued in Step 4. (Source: the general-base part of Lemma 02W3, after the affine case.)",
+   "uses": [
+    "lem-galois-fpqc-covering-base-change",
+    "def-pc-fibre-product"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/descent.tex",
+    "place": "Descent, Lemma Tag 02W3 (lemma-descending-types-morphisms, line 9028), proof lines 9097-9135: restrict to an affine open of the base and pull back the datum"
+   }
+  },
+  {
+   "text": "Fix an affine open $A\\subseteq S$. By [lem-galois-fpqc-singleton-affine-refinement] choose a finite coproduct $X'_A=\\coprod_jX_j$ of affine opens of $X_A$, a map $h_A:X'_A\\to X_A$, and a flat surjective morphism $g_A:X'_A\\to A$ with $g_A=(X_A\\to A)\\circ h_A$. Pulling the datum back along $h_A$ preserves $\\mathcal P$ by hypothesis (1). Hypothesis (3), applied to the affine flat surjective morphism $g_A$, produces a scheme $W_A\\to A$ and an isomorphism $\\psi'_A:W_A\\times_AX'_A\\xrightarrow{\\sim}V_A\\times_{X_A}X'_A$ compatible with the pulled-back descent data.",
+   "uses": [
+    "lem-galois-fpqc-singleton-affine-refinement",
+    "def-pd-descent-datum"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/descent.tex",
+    "place": "Descent, Lemma Tag 02W3, proof lines 9070-9091: refine an affine-base covering by a finite standard affine covering, form its coproduct, and apply hypothesis (3)"
+   }
+  },
+  {
+   "text": "The datum on $W_A\\times_AX_A$ and the datum on $V_A$ have pullbacks to $X'_A$ identified by $\\psi'_A$. The refinement map $h_A:X'_A\\to X_A$ is a refinement of singleton fpqc coverings, so [lem-galois-fpqc-refinement-fully-faithful] descends $\\psi'_A$ uniquely to an isomorphism $\\psi_A:W_A\\times_AX_A\\xrightarrow{\\sim}V_A$ over $X_A$ satisfying $\\varphi_A\\circ\\mathrm{pr}_0^*\\psi_A=\\mathrm{pr}_1^*\\psi_A\\circ\\mathrm{can}_{W_A}$. Thus the pulled-back descent datum is effective over every affine open $A$.",
+   "uses": [
+    "lem-galois-fpqc-refinement-fully-faithful",
+    "def-pd-descent-datum"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/descent.tex",
+    "place": "Descent, Lemma Tag 02W3, proof lines 9078-9088: the pullback functor along a refinement is fully faithful (Lemma 02W0), so effectiveness over the refinement descends"
+   }
+  },
+  {
+   "text": "For affine opens $B\\subseteq A\\subseteq S$, compare the two effective data over $B$: $(W_B,\\psi_B)$ and $(W_A\\times_AB,\\psi_A|_B)$. Their pullbacks to the singleton fpqc cover $X_B\\to B$ are canonically isomorphic through $\\psi_B$ and the restriction of $\\psi_A$. By [lem-galois-fpqc-morphisms-descend] this gives a unique transition morphism $\\rho^A_B:W_B\\to W_A$ over $B$; uniqueness gives $\\rho^A_A=\\mathrm{id}$ and $\\rho^A_C=\\rho^A_B\\circ\\rho^B_C$. The same argument applied to inverse isomorphisms shows that $\\rho^A_B$ identifies $W_B$ with the inverse image of $B$ in $W_A$. The relative gluing leaf [lem-weil-pbc-relative-glueing-affine-opens] therefore supplies a scheme $W\\to S$ with $W\\times_SA\\cong W_A$. The maps $\\psi_A$ agree on overlaps by the same uniqueness argument, so [lem-weil-pbc-scheme-morphism-gluing] glues them to an isomorphism $\\psi:W\\times_SX\\xrightarrow{\\sim}V$; the local compatibility equations glue as well. Taking $U=W$ proves the conclusion.",
+   "uses": [
+    "lem-galois-fpqc-morphisms-descend",
+    "lem-weil-pbc-relative-glueing-affine-opens",
+    "lem-weil-pbc-scheme-morphism-gluing",
+    "def-pd-descent-datum"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/descent.tex",
+    "place": "Descent, Lemma Tag 02W3, proof lines 9097-9135: compare affine descents on nested affine opens, glue by Constructions Lemma 01LH, and glue the compatible descent isomorphisms"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-galois-fpqc-covering-base-change",
+  "def-pc-fibre-product",
+  "lem-galois-fpqc-singleton-affine-refinement",
+  "def-pd-descent-datum",
+  "lem-galois-fpqc-refinement-fully-faithful",
+  "lem-galois-fpqc-morphisms-descend",
+  "lem-weil-pbc-relative-glueing-affine-opens",
+  "lem-weil-pbc-scheme-morphism-gluing"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/descent.tex",
+  "place": "Descent, Lemma Tag 02W3 (lemma-descending-types-morphisms, line 9028), proof lines 9047-9135; refinement by Topologies 022E, full faithfulness by 02W0, and relative gluing by Constructions 01LH"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -61,7 +125,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "worker",
@@ -81,5 +145,20 @@
   }
  },
  "chapter": "sec-curve-estimates",
- "unit": "sk-prop-h2"
+ "unit": "sk-prop-h2",
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "lem-galois-fpqc-descending-types-morphisms",
+  "worker": "stage1",
+  "summary": "Split the fpqc one-member reduction along Stacks Lemma 02W3. The proof restricts to affine opens, replaces each affine singleton cover by a finite coproduct of affine opens (Topologies 022E), applies the stated affine effectiveness hypothesis, descends the resulting isomorphism through the refinement using 02W0, and glues the local descents over affine opens using Constructions 01LH. Two unsplit supporting nodes record the finite affine refinement and the specialized refinement full-faithfulness statement; existing nodes supply fpqc base change, singleton morphism descent, relative gluing, and morphism gluing.",
+  "blueprint": "The steps realize the parent lem-galois-descent proof Step 2 effectivity replacement: affine reduction and finite refinement correspond to the 02W3 reduction, refinement full faithfulness to 02W0, and the final affine-open gluing to 01LH. The statement remains the one-member fpqc specialization recorded in the item."
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-fdm",
+  "group": "J1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-fdm (reviewer sub-agent of L); spot-checked: Source: Stacks descent.tex 02W3 (lemma-descending-types-morphisms, l.9028) with its proof l.9047-9135, 02W0 (lemma-refine-coverings-fully-faithful, l.8858), topologies.tex 022E (lemma-fpqc-affine, l.3151) read locally. Item statement agrees with 02W3 for tau=fpqc hypothesis by hypothesis ((1) any base change, (2) finite coproducts, (3) flat surjective affines), conclusion read for one-member coverings; (2) is unused on the singleton route, harmless. Step 1: lem-galois-fpqc-covering-base-change gives X_A->A fpqc, (1) gives P for V_A->X_A. Step 2: new lem-galois-fpqc-singleton-affine-refinement (022E plus finite coproduct; X' affine as finite coproduct of affines, g flat as open immersion then flat, surjective from the fpqc definition with V=S; m=0 for S empty fine) and (3) applied to V_A x_{X_A} X'_A which has P by (1). Step 3: new lem-galois-fpqc-refinement-fully-faithful (02W0 specialised to singletons and a map h over S, true) descends psi'_A and its inverse, faithfulness makes the composites identities. Step 4: lem-galois-fpqc-morphisms-descend applied to (psi_A|_B)^{-1} psi_B gives rho^A_B and its inverse, cocycle by uniqueness; lem-weil-pbc-relative-glueing-affine-opens (a),(b) met; lem-weil-pbc-scheme-morphism-gluing glues psi_A and checks the compatibility equation locally on X_2, as in the Stacks proof. Off-unit citations are Mathlib leaves (relative glueing, morphism gluing, coproduct) and the definition def-pd-descent-datum: generic tools, no tool_uses needed. Slopmaster2 searched (EffectiveDescent.lean, DescentDatum.lean, EtaleTopologicalInvariance/Descent.lean): no declaration of 02W3/02W0/022E, so no B10 attachment. Small cases: S empty (m=0), identity refinement h=id, trivial cover X=S. 14:34-14:35 UTC"
+ }
 }

@@ -1631,3 +1631,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 14:34 L: merged deliver/E1/lem-weil-pbc-coskeleton-matching-tuples (reviewer PASS; after a return; new nodes: 0)
 - 14:35 L: returned deliver/H1/lem-weil-pbc-direct-sum-extension-assembly (reviewer RETURN: Reviewed head 84e01c1ab (reviewer R-dsa). Repaired: the new node lem-weil-pbc-ext-one-direct-sum now defines the equival)
 - 14:35 L: returned deliver/K1/lem-sc-ext-locally-free (reviewer RETURN: 1. E2: lem-sc-ext-derived-composite: the statement is false. Counterexample: A = Z/4-modules, B = C = abelian groups, T )
+- 14:35 L: merged deliver/J1/lem-galois-fpqc-descending-types-morphisms (reviewer PASS; first push; new nodes: 2)

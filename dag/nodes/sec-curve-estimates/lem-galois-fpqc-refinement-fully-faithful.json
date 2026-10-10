@@ -1,0 +1,67 @@
+{
+ "id": "lem-galois-fpqc-refinement-fully-faithful",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-galois-descent",
+   "place": "Step 2 of the proof ('effectivity ... By [lem-galois-glue] the P_i glue to a Y-scheme P'), realized by Stacks 02W3: its affine-base proof invokes the full faithfulness of refinement in 02W0",
+   "via": [
+    "lem-galois-fpqc-descending-types-morphisms",
+    "lem-galois-fpqc-affine-descent-effective"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Descent data for a singleton fpqc cover remain fully faithful after a refinement",
+ "statement": "Let $S$ be a scheme [def-pc-scheme]. Let $f:X\\to S$ and $g:X'\\to S$ be morphisms such that both singleton families are fpqc coverings [def-weil-pbc-fpqc-covering], and let $h:X'\\to X$ be a morphism over $S$ with $g=f\\circ h$. Pulling a descent datum $(V,\\varphi)$ on a scheme $V$ over $X/S$ [def-pd-descent-datum] back along $h$ gives a descent datum over $X'/S$. The resulting pullback functor from descent data over $X/S$ to descent data over $X'/S$ is fully faithful: for any two data, compatible morphisms between their pullbacks arise uniquely from a compatible morphism between the original data.",
+ "source": {
+  "document": "literature/stacks-project/descent.tex",
+  "place": "Descent, Lemma Tag 02W0 (lemma-refine-coverings-fully-faithful, line 8858), last sentence, specialized to singleton fpqc coverings and a refinement $X'\\to X$"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-pbc-fpqc-covering",
+  "def-pd-descent-datum"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "pullback of descent data along a refinement of fpqc singleton coverings is fully faithful",
+   "results": "service returned HTTP 500; no result",
+   "date": "2026-10-10",
+   "verdict": "no match (service error)"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "fully faithful pullback between descent data for a refinement of fpqc covers",
+   "results": "CategoryTheory.Pseudofunctor.DescentData.nonempty_fullyFaithful_toDescentData_iff_of_sieve_eq and related abstract DescentData APIs; no scheme-over-fpqc instance or specialized statement",
+   "date": "2026-10-10",
+   "verdict": "abstract framework only; no direct match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Pseudofunctor.fullyFaithfulToDescentData",
+   "results": "CategoryTheory.Pseudofunctor.fullyFaithfulToDescentData in Mathlib/CategoryTheory/Sites/Descent/DescentData.lean; requires a prestack pseudofunctor and does not state the scheme refinement lemma",
+   "date": "2026-10-10",
+   "verdict": "abstract framework only; no direct match"
+  },
+  {
+   "tool": "grep",
+   "query": "rg -n 'DescentData|fullyFaithful|refinement' /home/ubuntu/weil-src-slopmaster2/.lake/packages/mathlib/Mathlib/CategoryTheory/Sites/Descent /home/ubuntu/weil-src-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicGeometry/Sites/Fpqc.lean",
+   "results": "Mathlib has generic DescentData.pullFunctor and sieve-equivalence lemmas, but no fpqc prestack instance for schemes and no specialized refinement statement",
+   "date": "2026-10-10",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "created": {
+  "item": "lem-galois-fpqc-descending-types-morphisms"
+ },
+ "chapter": "sec-curve-estimates",
+ "unit": "sk-prop-h2"
+}
