@@ -13,7 +13,7 @@
  },
  "kind": "statement",
  "title": "Filtered colimit of injective sheaves is Cech-acyclic on a quasi-compact basis",
- "statement": "Let X be a topological space whose quasi-compact opens form a basis and whose pairwise intersections of quasi-compact opens are quasi-compact. Let (I_i) be a filtered diagram [def-weil-pbc-category-colimit] of injective abelian sheaves and let I = colim_i I_i. For every quasi-compact open U and every finite covering of U by quasi-compact opens with all finite intersections quasi-compact, the Cech cohomology [def-weil-pbc-site-cech-complex] of I on that covering vanishes in every positive degree. Hence H^q(U,I)=0 for q>0, where H^q(U,-)=R^q\\Gamma(U,-) is cohomology over the object U of the open site of X [def-weil-pbc-sites-and-cohomology] (for U=X the cohomology of [def-sc-topological-abelian-cohomology]).",
+ "statement": "Let $X$ be a topological space whose quasi-compact opens form a basis and whose pairwise intersections of quasi-compact opens are quasi-compact. Let $I$ be a directed set (nonempty, every two elements have a common upper bound), $(\\mathcal I_i,\\varphi_{i'i})_{i\\le i'}$ a system of injective abelian sheaves on $X$ over $I$, and $\\mathcal I=\\varinjlim_i\\mathcal I_i$ its colimit in abelian sheaves [def-weil-pbc-category-colimit]. For every quasi-compact open $U$ and every finite covering $\\mathcal U=\\{U_t\\to U\\}_{t\\in T}$ of $U$ by quasi-compact opens with all finite intersections quasi-compact, the Cech cohomology [def-weil-pbc-site-cech-complex] satisfies $\\check H^p(\\mathcal U,\\mathcal I)=0$ for all $p>0$. Hence $H^q(U,\\mathcal I)=0$ for $q>0$, where $H^q(U,-)=R^q\\Gamma(U,-)$ is cohomology over the object $U$ of the open site of $X$ [def-weil-pbc-sites-and-cohomology] (for $U=X$ the cohomology of [def-sc-topological-abelian-cohomology]).",
  "source": {
   "document": "literature/stacks-project/cohomology.tex",
   "place": "Lemma 01FF proof, the claim and Lemma 01EW (Cech vanishing on a basis)"
@@ -22,41 +22,160 @@
   "def-weil-pbc-category-colimit",
   "def-sc-topological-abelian-cohomology",
   "def-weil-pbc-site-cech-complex",
+  "def-weil-pbc-sites-and-cohomology",
+  "lem-weil-pbc-site-injective-cech-acyclic",
+  "lem-weil-pbc-site-cech-vanishing-criterion"
+ ],
+ "proof": [
+  {
+   "text": "Fix a finite covering $\\{U_t\\to U\\}_{t\\in T}$ of a quasi-compact open $U$ by quasi-compact opens, with all finite intersections quasi-compact. By [lem-weil-pbc-module-directed-colimit-underlying-sets] (for the constant sheaf of rings $\\mathbf Z$, whose modules are the abelian sheaves) the underlying sheaf of sets of $\\mathcal I$, with the underlying maps of the colimit maps, is the colimit of the underlying sheaves of sets of the $\\mathcal I_i$ in sheaves of sets. For each iterated intersection $W=U_{t_0}\\cap\\cdots\\cap U_{t_p}$ occurring in the Cech terms, the finite coverings of $W$ by quasi-compact basis opens are cofinal among open coverings (refine an arbitrary covering pointwise by basis opens and choose a finite subcover by quasi-compactness of $W$), and their pairwise intersections are quasi-compact by hypothesis. Thus clause (2) of [lem-weil-pbc-sheaves-directed-colimit-sections] gives that $\\varinjlim_i\\mathcal I_i(W)\\to\\mathcal I(W)$ is bijective, hence an isomorphism of abelian groups. For $p\\ge0$ the $p$-th Cech term is the finite product $\\prod_{\\mathbf t\\in T^{p+1}}\\mathcal I(U_{\\mathbf t})$; a directed colimit of abelian groups commutes with finite products (represent a tuple at finitely many stages and pass to a common upper bound), so $\\varinjlim_i\\check{\\mathcal C}^p(\\mathcal U,\\mathcal I_i)\\to\\check{\\mathcal C}^p(\\mathcal U,\\mathcal I)$ is an isomorphism. These isomorphisms commute with the alternating restriction differentials by naturality of restriction, hence identify $\\check{\\mathcal C}^\\bullet(\\mathcal U,\\mathcal I)$ with $\\varinjlim_i\\check{\\mathcal C}^\\bullet(\\mathcal U,\\mathcal I_i)$.",
+   "uses": [
+    "def-weil-pbc-site-cech-complex",
+    "lem-weil-pbc-module-directed-colimit-underlying-sets",
+    "lem-weil-pbc-sheaves-directed-colimit-sections"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/cohomology.tex",
+    "place": "Lemma 01FF proof, claim and lines 3255-3275"
+   }
+  },
+  {
+   "text": "Each $\\mathcal I_i$ is injective, so $\\check{\\mathcal C}^\\bullet(\\mathcal U,\\mathcal I_i)$ is exact in every positive degree by [lem-weil-pbc-site-injective-cech-acyclic]. A directed set is a filtered category, so by [lem-weil-pbc-filtered-colimit-abelian-groups-exact] the colimit complex is exact in every positive degree as well. By Step 1, $\\check H^p(\\mathcal U,\\mathcal I)=0$ for $p>0$.",
+   "uses": [
+    "lem-weil-pbc-site-injective-cech-acyclic",
+    "lem-weil-pbc-filtered-colimit-abelian-groups-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/cohomology.tex",
+    "place": "Lemma 01FF proof, lines 3275-3290"
+   }
+  },
+  {
+   "text": "Let $\\mathcal B$ be the set of quasi-compact opens of $X$ and $\\mathrm{Cov}$ the set of finite coverings of a member of $\\mathcal B$ by members of $\\mathcal B$ whose finite intersections are quasi-compact. Condition (1) of [lem-weil-pbc-site-cech-vanishing-criterion] holds since fibre products in the open site are intersections, which lie in $\\mathcal B$ by induction on the number of factors. Condition (2): every open covering of $U\\in\\mathcal B$ is refined by a member of $\\mathrm{Cov}$ (refine pointwise by basis opens and take a finite subcover). Step 2 gives condition (3). The criterion yields $H^q(U,\\mathcal I)=0$ for every $q>0$ and $U\\in\\mathcal B$, with $H^q(U,-)=R^q\\Gamma(U,-)$ as in [def-weil-pbc-sites-and-cohomology].",
+   "uses": [
+    "lem-weil-pbc-site-cech-vanishing-criterion",
+    "def-weil-pbc-sites-and-cohomology"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/cohomology.tex",
+    "place": "Lemma 01FF proof via Lemma 01EW (Cech vanishing on a basis)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-site-cech-complex",
+  "lem-weil-pbc-module-directed-colimit-underlying-sets",
+  "lem-weil-pbc-sheaves-directed-colimit-sections",
+  "lem-weil-pbc-site-injective-cech-acyclic",
+  "lem-weil-pbc-filtered-colimit-abelian-groups-exact",
+  "lem-weil-pbc-site-cech-vanishing-criterion",
   "def-weil-pbc-sites-and-cohomology"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Lemma 01FF proof, claim and Lemma 01EW"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
-   "query": "Cech cohomology filtered colimit injective sheaves quasi-compact basis",
-   "results": "CategoryTheory.Sheaf.cohomologyPresheaf and filtered-colimit existence only; no Cech acyclicity theorem",
+   "query": "Cech cohomology of filtered colimit of injective sheaves on quasi-compact basis",
+   "results": "LightCondensed.isColimitLocallyConstantPresheaf, Condensed.isColimitLocallyConstantPresheaf, CategoryTheory.Sheaf.cohomologyPresheaf; none states the requested theorem",
    "date": "2026-10-11",
-   "verdict": "no exact match"
+   "verdict": "no match"
   },
   {
    "tool": "loogle",
-   "query": "Cech cohomology injective sheaf filtered colimit",
-   "results": "no matching declaration",
+   "query": "Cech, filtered colimit, injective sheaf",
+   "results": "unknown identifier 'Cech'",
    "date": "2026-10-11",
    "verdict": "no match"
   },
   {
    "tool": "grep",
-   "query": "Cech.*acyclic|filtered.*Cech|injective.*Cech Mathlib/CategoryTheory/Sites",
+   "query": "Cech.*filtered.*injective|injective.*Cech Mathlib/CategoryTheory/Sites",
+   "results": "no matching declarations",
+   "date": "2026-10-11",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "higher Cech cohomology vanishes for injective sheaf",
+   "results": "generic injective-complex declarations only; none about Cech cohomology",
+   "date": "2026-10-11",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "cechComplexFunctor, Injective",
+   "results": "unknown identifier 'cechComplexFunctor'",
+   "date": "2026-10-11",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "cechComplexFunctor|PreservesFilteredColimits|injective Mathlib/CategoryTheory/Sites/SheafCohomology",
    "results": "no matching declarations",
    "date": "2026-10-11",
    "verdict": "no match"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-sc-topological-filtered-cohomology",
   "by": "worker",
   "date": "2026-10-10"
  },
  "chapter": "sec-curve-estimates",
- "unit": "sk-thm-curveestimate"
+ "unit": "sk-thm-curveestimate",
+ "split_report": {
+  "date": "2026-10-11",
+  "item": "lem-sc-topological-filtered-injective-cech-acyclic",
+  "worker": "stage1",
+  "summary": "No sorry-free Lean declaration states this general topological-space result. The proof was split into sectionwise colimit identification on quasi-compact intersections, exactness after filtered colimits using the existing general-site injective Cech lemma, and application of the existing Cech-to-derived criterion to the finite quasi-compact basis coverings. No new nodes were needed.",
+  "blueprint": "Realizes the Cech vanishing claim in the proof of Lemma 01FF, specifically the finite-cover exactness argument and the invocation of Lemma 01EW.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-sheaves-directed-colimit-sections",
+    "why": "its statement gives sectionwise filtered-colimit isomorphisms on quasi-compact opens"
+   },
+   {
+    "node": "lem-weil-pbc-site-injective-cech-acyclic",
+    "why": "its general-site statement gives positive-degree Cech vanishing for each injective I_i"
+   },
+   {
+    "node": "lem-weil-pbc-filtered-colimit-abelian-groups-exact",
+    "why": "its statement preserves exactness of the filtered colimit of the Cech complexes"
+   },
+   {
+    "node": "lem-weil-pbc-site-cech-vanishing-criterion",
+    "why": "its statement converts Cech vanishing on the cofinal finite basis coverings into derived cohomology vanishing"
+   },
+   {
+    "node": "lem-weil-pbc-module-directed-colimit-underlying-sets",
+    "why": "its statement identifies the underlying sheaf of sets of a directed colimit of abelian sheaves (modules over Z) with the colimit in sheaves of sets, a generic tool"
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-module-directed-colimit-underlying-sets",
+  "lem-weil-pbc-sheaves-directed-colimit-sections",
+  "lem-weil-pbc-site-injective-cech-acyclic",
+  "lem-weil-pbc-filtered-colimit-abelian-groups-exact",
+  "lem-weil-pbc-site-cech-vanishing-criterion",
+  "lem-weil-pbc-module-directed-colimit-underlying-sets"
+ ],
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-tic2301",
+  "group": "J1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-tic2301 (reviewer sub-agent of L); spot-checked: Checked all three steps against 01FF claim/01EW and every cited statement; Cech-of-injectives (lem-weil-pbc-site-injective-cech-acyclic), sections-colimit and 01EW criterion are cited, not restated. FIX more, RETURN less: (1) C1 Step 1 applied the sheaves-of-sets sections-colimit node to a colimit taken in abelian sheaves; now cites lem-weil-pbc-module-directed-colimit-underlying-sets (O_X=Z) as a generic tool; (2) C4 cited colimit nodes need a directed set but the statement said filtered diagram; statement now a directed system (consumer is directed); (3) B4 plain-text arrows/>= rewritten in TeX throughout. Second reading by J1 missed (1) and (2).; 1 file(s) fixed by the reviewer"
+ },
+ "lead_note": "2026-10-10 L (R-tic2301): Statement narrowed from filtered diagram to directed set (E7): both cited colimit nodes are stated for directed sets; the only consumer lem-sc-topological-filtered-cohomology and Stacks 01FF use directed systems."
 }
