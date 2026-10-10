@@ -1584,3 +1584,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 14:03 L: lem-sc-negative-degree-no-sections corrected (connected; HUMAN.md); sorry map ts flag false everywhere (HUMAN.md; attachments are checked by the d edges, sorryfree.py for reviewers)
 - 14:04 L: returned deliver/G1/lem-galois-transitive (reviewer RETURN: The split now follows Stacks 0BN3 and no longer uses the Mathlib Galois-category leaf, so the B8 return is answered. Ste)
 - 14:08 L: TOOL USES DECLARABLE (split_report.tool_uses accepted by review_split/preflight, copied into tool_uses at merge, --drop-tool-uses); claim gate on open returns removed (cap 10 stays); return entries must say exactly what to change (reviewer brief); roles/remote-lead.md 3a, SETUP.md, coord/brief-stage1.md, README, notices to all groups
+- 14:08 L: accepted lem-pc-genus-base-change: 5 steps, statement made conditional on X_K being a curve, no new nodes
