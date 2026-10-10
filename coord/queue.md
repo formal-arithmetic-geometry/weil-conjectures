@@ -1,8 +1,8 @@
 # Work queue
 
-895 items; claim with `tools/claim.py next <group> [--stage N]`.
+902 items; claim with `tools/claim.py next <group> [--stage N]`.
 
-## Stage 1: nodes to split (638)
+## Stage 1: nodes to split (645)
 
 | node | distance to a target | Lean state on the done branch |
 |---|---|---|
@@ -15,19 +15,24 @@
 | `lem-weil-pbc-closed-pushforward-constant-stalks` | 1012 | none |
 | `lem-weil-pbc-coherent-formal-module-kernel` | 1012 | none |
 | `lem-weil-pbc-coherent-formal-modules-local-exactness` | 1012 | none |
+| `lem-weil-pbc-completion-finite-quotient` | 1012 | none |
+| `lem-weil-pbc-derivation-nonzero-on-non-pth-power` | 1012 | none |
 | `lem-weil-pbc-descend-finite-locally-free` | 1012 | none |
 | `lem-weil-pbc-descend-qc-open-fg-subalgebra` | 1012 | none |
 | `lem-weil-pbc-equation-count-fibre-dimension-flat` | 1012 | none |
+| `lem-weil-pbc-finite-purely-inseparable-degree-p-intermediate` | 1012 | none |
+| `lem-weil-pbc-finite-subalgebra-fraction-field` | 1012 | none |
 | `lem-weil-pbc-flat-base-change-map-sections` | 1012 | none |
 | `lem-weil-pbc-flat-variant-local-criterion` | 1012 | none |
 | `lem-weil-pbc-formal-systems-graded-vanishing` | 1012 | none |
 | `lem-weil-pbc-formal-systems-kernel-rees-finite` | 1012 | none |
+| `lem-weil-pbc-purely-inseparable-integral-prime-unique` | 1012 | none |
+| `lem-weil-pbc-radicial-prime-unique-degree-p` | 1012 | none |
 | `lem-weil-pbc-smooth-at-generic-point-over-field` | 1012 | none |
 | `lem-weil-pbc-smooth-at-prime-free-conormal-basis` | 1012 | none |
 | `lem-weil-pbc-smooth-fibre-regular-local` | 1012 | none |
 | `lem-weil-pbc-smooth-localization-conormal-split` | 1012 | none |
 | `lem-weil-pbc-smooth-over-field-dimension-differentials` | 1012 | none |
-| `lem-weil-pbc-smooth-over-field-local-complete-intersection` | 1012 | none |
 | `lem-weil-pbc-smooth-retract-standard-smooth` | 1012 | none |
 | `lem-weil-pbc-spec-local-ring-canonical-morphism` | 1012 | none |
 | `lem-weil-pbc-spectral-directed-limit-finite-sober` | 1012 | none |
@@ -91,6 +96,8 @@
 | `lem-weil-pbc-henselian-finite-type-product-decomposition` | 1013 | none |
 | `lem-weil-pbc-isolated-fibre-point-quasi-finite-affine-pairs` | 1013 | none |
 | `lem-weil-pbc-jacobi-zariski-connecting-map-naturality` | 1013 | none |
+| `lem-weil-pbc-lci-field-change` | 1013 | none |
+| `lem-weil-pbc-lci-regular-sequence-global-complete-intersection` | 1013 | none |
 | `lem-weil-pbc-lift-to-injective-unique-up-to-homotopy` | 1013 | none |
 | `lem-weil-pbc-lqf-locally-finite-type` | 1013 | none |
 | `lem-weil-pbc-mittag-leffler-limit-exact` | 1013 | none |
@@ -907,7 +914,7 @@
 | `lem-weil-pbc-p1-field-dimension-one` | 4 | state |
 | `lem-weil-pbc-projective-space-zero-isomorphism` | 4 | state |
 
-Not open yet: 650 nodes that wait for stage 1, 546 nodes that wait for a statement dependency.
+Not open yet: 657 nodes that wait for stage 1, 547 nodes that wait for a statement dependency.
 
 ## Stage 3: modules to prove (0)
 
