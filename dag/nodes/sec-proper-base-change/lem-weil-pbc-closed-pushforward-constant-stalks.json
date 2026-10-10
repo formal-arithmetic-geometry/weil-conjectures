@@ -8,11 +8,55 @@
   "place": "Sheaves, Definition Tag 006W (definition-constant-sheaf, line 588, with the preceding paragraph: locally constant maps form a sheaf), Example Tag 007B (example-stalk-constant-presheaf, line 995: the stalk of the constant sheaf is A) and Lemma Tag 00AE (lemma-stalks-closed-pushforward, line 4936: stalks of i_*F for the inclusion of a closed subset, {*} off Z and F_x on Z)"
  },
  "stmt_deps": [
-  "def-weil-pbc-category-colimit"
+  "def-weil-pbc-category-colimit",
+  "def-weil-pbc-sites-and-cohomology"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "For each open V in T, define L(V) as the locally constant maps from V intersected with C to R. Compatible maps on an open cover glue pointwise; local constancy is checked in the member containing each point. Uniqueness is pointwise, so the resulting presheaf is a sheaf by the locally constant maps sheaf node.",
+   "uses": [
+    "lem-weil-pbc-locally-constant-maps-sheaf"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sheaves.tex",
+    "place": "Definition Tag 006W, preceding paragraph"
+   }
+  },
+  {
+   "text": "Fix x in C. Every open neighbourhood W of x in C is V intersected with C for some open neighbourhood V of x in T, and restricting V in T restricts W in C. Conversely, equality of two sections after restriction to a neighbourhood W in C implies equality after restriction to its representing neighbourhood V in T. Therefore the germ equivalence relation for L at x is exactly the germ equivalence relation for locally constant maps on C. The map taking a representative g on V to its restriction on V intersected with C identifies these two stalks. Under this identification, the evaluation map is the evaluation map of the locally constant germ node applied to U = C: it is well defined, bijective and uniquely determined by evaluation of representatives.",
+   "uses": [
+    "def-weil-pbc-category-colimit",
+    "lem-weil-pbc-locally-constant-germ-evaluation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sheaves.tex",
+    "place": "Example Tag 007B and Definition Tag 006W"
+   }
+  },
+  {
+   "text": "For x outside C, the open complement of C is a neighbourhood of x and has empty intersection with C, so it carries the unique empty map. Restricting any germ to a smaller neighbourhood inside this complement gives that map; hence the stalk is a singleton.",
+   "uses": [
+    "def-weil-pbc-category-colimit"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sheaves.tex",
+    "place": "Lemma Tag 00AE (lemma-stalks-closed-pushforward), line 4936"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-category-colimit",
+  "lem-weil-pbc-locally-constant-maps-sheaf",
+  "lem-weil-pbc-locally-constant-germ-evaluation"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/sheaves.tex",
+  "place": "Definition Tag 006W, Example Tag 007B and Lemma Tag 00AE; the pointwise gluing and germ arguments are written out"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -37,7 +81,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "worker",
@@ -57,5 +101,18 @@
   }
  },
  "chapter": "sec-proper-base-change",
- "unit": "sk-thm-p1"
+ "unit": "sk-thm-p1",
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "lem-weil-pbc-closed-pushforward-constant-stalks",
+  "worker": "C1",
+  "summary": "Split into three explicit proof steps. Step 1 identifies the presheaf V ↦ locally constant maps V∩C → R and invokes the new unsplit sheaf node after spelling out pointwise gluing. Step 2 proves evaluation on the stalk over x∈C is well defined, injective by local constancy, and surjective via constant maps, with the new germ-evaluation node. Step 3 proves the off-C stalk is singleton using the open neighbourhood T\\C. Added two unsplit child nodes, each searched with LeanSearch, LeanFinder and Mathlib grep; no Mathlib match. Statement and source meaning unchanged."
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "group": "C1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed by the lead of C1; spot-checked by L: L read the three steps and both children (locally constant maps form a sheaf; germ evaluation bijective); stalk off C is a singleton via the complement."
+ }
 }
