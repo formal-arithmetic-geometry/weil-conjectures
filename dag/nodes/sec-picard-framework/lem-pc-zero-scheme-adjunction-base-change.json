@@ -15,7 +15,7 @@
  "chapter": "sec-picard-framework",
  "unit": "sk-lem-picard-zero-dictionary",
  "title": "Adjunction morphism is compatible with base change",
- "statement": "Let k be a separably closed field [def-pc-separably-closed], let X be a smooth projective curve over k with a k-rational point σ [def-pc-smooth-projective-curve] [def-pc-rational-point], let T and T' be k-schemes, let i : T' ⟶ T be a morphism, and let ℒ ∈ F(T) be an object of the Picard subfunctor [def-pc-f-subfunctor]. Thus its derived direct image is isomorphic to an invertible module placed in degree zero, in the sense of [def-pc-invertible-in-degree-zero]. Write i' : X_{T'} ⟶ X_T for the base change of i [def-pc-base-change]. Then the pullback along i' of the adjunction morphism f_T^* f_{T,*} ℒ ⟶ ℒ is isomorphic, as an arrow, to the adjunction morphism f_{T'}^* f_{T',*}(i'^*ℒ) ⟶ i'^*ℒ.",
+ "statement": "Let k be a separably closed field [def-pc-separably-closed], let X be a smooth projective curve over k with a k-rational point σ [def-pc-smooth-projective-curve] [def-pc-rational-point], and assume that for every k-scheme T the module category on X_T has injective resolutions [def-sp-injective-resolutions]. Let T and T' be k-schemes, let i : T' ⟶ T be a morphism, and let ℒ ∈ F(T) be an object of the Picard subfunctor [def-pc-f-subfunctor]. Thus its derived direct image is isomorphic to an invertible module placed in degree zero, in the sense of [def-pc-invertible-in-degree-zero]. Write i' : X_{T'} ⟶ X_T for the base change of i [def-pc-base-change]. Then the pullback along i' of the adjunction morphism f_T^* f_{T,*} ℒ ⟶ ℒ is isomorphic, as an arrow, to the adjunction morphism f_{T'}^* f_{T',*}(i'^*ℒ) ⟶ i'^*ℒ.",
  "source": {
   "document": "WeilConjectures/AlgebraicGeometry/Picard/ZeroScheme.lean",
   "place": "theorem nonempty_arrowIso_pullback_directImageCounit, lines 143-175"
@@ -25,14 +25,35 @@
   "def-pc-separably-closed",
   "def-pc-smooth-projective-curve",
   "def-pc-rational-point",
+  "def-sp-injective-resolutions",
   "def-pc-f-subfunctor",
   "def-pc-invertible-in-degree-zero",
   "def-pc-base-change",
   "def-sc-invertible-module"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Apply [lem-pc-arrow-iso-pullback-counit] to the same curve, rational point, family of module categories with injective resolutions, morphism i, and Picard-subfunctor object. Its field and geometrically integral hypotheses hold because k is a separably closed field and [prop-pc-xk-integral] states that a smooth projective curve over such a field is geometrically integral. The induced base-change map and pulled-back Picard object are the maps denoted i' and i'^*ℒ here, so the resulting Arrow isomorphism is exactly the asserted compatibility.",
+   "uses": [
+    "lem-pc-arrow-iso-pullback-counit",
+    "prop-pc-xk-integral"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "WeilConjectures/AlgebraicGeometry/Picard/ZeroScheme.lean",
+    "place": "theorem nonempty_arrowIso_pullback_directImageCounit, lines 156-175"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-arrow-iso-pullback-counit",
+  "prop-pc-xk-integral"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "WeilConjectures/AlgebraicGeometry/Picard/ZeroScheme.lean",
+  "place": "theorem nonempty_arrowIso_pullback_directImageCounit, lines 156-175"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -64,10 +85,41 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-pc-zero-scheme-recd",
   "by": "worker",
   "date": "2026-10-10"
+ },
+ "split_report": {
+  "date": "2026-10-11",
+  "item": "lem-pc-zero-scheme-adjunction-base-change",
+  "worker": "stage1",
+  "summary": "The source declaration nonempty_arrowIso_pullback_directImageCounit is still sorry, so it is not attachable. The DAG already contains the stronger theorem lem-pc-arrow-iso-pullback-counit. I specialized it to the present separably closed smooth-projective-curve hypotheses, using prop-pc-xk-integral for geometric integrality; no new nodes were created.",
+  "blueprint": "The single step realizes the blueprint's Step 2, identifying the restricted adjunction morphism after base change.",
+  "tool_uses": [
+   {
+    "node": "lem-pc-arrow-iso-pullback-counit",
+    "why": "The proof specializes this already-proved generic counit/base-change theorem; the zero-scheme dictionary unit has no replacement for the adjunction Arrow isomorphism."
+   },
+   {
+    "node": "prop-pc-xk-integral",
+    "why": "The proof uses its geometric-integrality consequence to discharge the stronger theorem's curve hypothesis; this general curve-base-change fact is supplied by another unit."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pc-arrow-iso-pullback-counit",
+  "prop-pc-xk-integral",
+  "lem-pc-arrow-iso-pullback-counit",
+  "prop-pc-xk-integral"
+ ],
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-zab1915",
+  "group": "C1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-zab1915 (reviewer sub-agent of L); spot-checked: Step 1 specializes lem-pc-arrow-iso-pullback-counit (field, geom. integral, injective resolutions, i, L in F(T)) with geometric integrality from prop-pc-xk-integral (2); injective-resolution hypothesis now in the item statement (E7 change named, source-required). No cycle: arrow-iso proof_deps (rf-base-change-flat-module, smooth-flat, module-pullback-*) do not reach this item or lem-pc-zero-scheme-recd; base change of the counit is argued in arrow-iso's proof via lem-pc-rf-base-change-flat-module. Tool uses accepted as generic. No repairs."
  }
 }
