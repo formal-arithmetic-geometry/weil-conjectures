@@ -2783,3 +2783,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 22:10 L: merged deliver/J1/lem-pc-affine-morphism-hom-out-of-perfect (reviewer FIX; first push; new nodes: 1)
 - 22:10 L: merged deliver/M1/lem-pc-tower-injective-embedding (reviewer FIX; first push; new nodes: 0)
 - 22:11 L: merged deliver/E1/lem-sc-locnoeth-components-locally-finite (reviewer FIX; first push; new nodes: 2)
+- 22:11 L: merged deliver/M1/def-sc-zariski-cohomology (reviewer FIX; first push; new nodes: 0)

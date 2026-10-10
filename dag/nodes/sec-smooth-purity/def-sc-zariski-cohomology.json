@@ -3,25 +3,59 @@
  "blueprint": {
   "is": "def-sc-zariski-cohomology",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "definition",
  "title": "Zariski sheaf cohomology",
- "statement": "For an abelian sheaf $F$ on the\nsmall Zariski site of $X$,\nlet $H^q(X_{\\rm Zar},F)$ be the $q$-th right derived\nfunctor of $F\\mapsto F(X)$. Equivalently take the\ncohomology of the section complex of an injective resolution,\nusing the ordinary resolution convention of\n[def-weil-pbc-kinjective-resolutions].",
+ "statement": "Let $X$ be a scheme [def-pc-scheme], and let $F$ be an abelian sheaf on its small Zariski site $X_{\\rm Zar}$ [def-sc-zariski-site]. Let $\\operatorname{Ab}(X_{\\rm Zar})$ be the category of such sheaves; it is an abelian category [def-sp-abelian] with enough injectives [lem-weil-pbc-site-sheaves-enough-injectives] (applied to the site $X_{\\rm Zar}$), and the global-sections functor $\\Gamma(X,-):\\operatorname{Ab}(X_{\\rm Zar})\\to\\operatorname{Ab}$, $F\\mapsto F(X)$, is additive and left exact [def-sp-left-exact-additive], [def-weil-pbc-sites-and-cohomology] (2) (for the object $X$ of $X_{\\rm Zar}$). Define $H^q(X_{\\rm Zar},F)$, $q\\ge0$, to be the $q$-th right derived functor $R^q\\Gamma(X,-)(F)$ [def-sp-left-exact-additive]; that is, by that definition, for an injective resolution [def-sp-injective-resolutions] $F\\to I^\\bullet$ in $\\operatorname{Ab}(X_{\\rm Zar})$, $H^q(X_{\\rm Zar},F)=H^q(\\Gamma(X,I^\\bullet))$, independent of the resolution up to canonical isomorphism [def-weil-pbc-sites-and-cohomology] (2).",
  "source": {
   "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/def-sc-zariski-cohomology.md",
   "place": "node def-sc-zariski-cohomology, order 1553"
  },
  "stmt_deps": [
-  "def-weil-pbc-kinjective-resolutions",
-  "def-sc-zariski-site"
+  "def-pc-scheme",
+  "def-sc-zariski-site",
+  "def-sp-abelian",
+  "lem-weil-pbc-site-sheaves-enough-injectives",
+  "def-sp-left-exact-additive",
+  "def-sp-injective-resolutions",
+  "def-weil-pbc-sites-and-cohomology"
  ],
  "proof": [],
  "proof_deps": [],
  "proof_origin": null,
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Zariski sheaf cohomology as right derived functor of global sections",
+   "results": "CategoryTheory.Sheaf.cohomologyPresheafFunctor; CategoryTheory.Sheaf.cohomologyPresheaf; CategoryTheory.Sheaf.H; CategoryTheory.HasGlobalSectionsFunctor; CategoryTheory.Sheaf.Γ; no project-specific definition",
+   "date": "2026-10-11",
+   "verdict": "no exact match; only general sheaf cohomology infrastructure"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory derived functor global sections sheaf cohomology",
+   "results": "0 hits; Unknown identifier CategoryTheory",
+   "date": "2026-10-11",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "Zariski|cohomology|derived in Mathlib/AlgebraicGeometry/",
+   "results": "25 hits, including Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean:14 and generic Zariski topology files; no exact right-derived global-sections definition",
+   "date": "2026-10-11",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Zariski sheaf cohomology right derived functor of global sections",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-11",
+   "verdict": "unavailable"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [],
  "blueprint_kind": "definition",
@@ -46,5 +80,26 @@
   }
  },
  "chapter": "sec-smooth-purity",
- "unit": "sk-prop-sf-cbc"
+ "unit": "sk-prop-sf-cbc",
+ "split_report": {
+  "date": "2026-10-11",
+  "item": "def-sc-zariski-cohomology",
+  "worker": "stage1",
+  "summary": "Checked the imported definition against its blueprint entry and the existing site and K-injective definition nodes. No project Lean declaration states this definition, and Mathlib searches found only general sheaf-cohomology infrastructure. The definition is complete as imported, so it is marked split without new nodes or proof steps.",
+  "blueprint": {
+   "node": "def-sc-zariski-cohomology",
+   "places": [
+    "right derived functor of global sections",
+    "cohomology of global sections of an injective resolution"
+   ]
+  }
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-zar2752",
+  "group": "M1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-zar2752 (reviewer sub-agent of L); spot-checked: Read packet, cited nodes (def-sp-abelian, def-sp-left-exact-additive, def-sp-injective-resolutions, lem-weil-pbc-site-sheaves-enough-injectives, def-sc-zariski-site, def-weil-pbc-sites-and-cohomology), possible duplicates (def-sc-topological-abelian-cohomology cites this node; def-sc-ringed-space-module-cohomology and def-sc-sheaf-cohomology-functor are O_X-module cohomology; def-weil-pbc-sites-and-cohomology (2) is the general site version, not a duplicate definition node), citers lem-weil-pbc-zariski-cohomology-locally-zero and lem-weil-pbc-gabber-strict-henselian-zariski-comparison (they use H^q=H^q(I(X)) for any injective resolution: matches). The 'equivalently' is the definition in def-sp-left-exact-additive (injective resolutions), no smuggled K-injective lemma. Mathlib grep for rightDerived in AlgebraicGeometry/Topology/Sheaves: none. FIX more, RETURN less: (1) C4: 'abelian category [def-sp-abelian]' - def-sp-abelian only defines abelian categories; abelianness and enough injectives of Ab(X_Zar) (hypothesis of def-sp-left-exact-additive) are lem-weil-pbc-site-sheaves-enough-injectives, which was in stmt_deps but uncited in text: now cited. (2) C4: left exactness of Gamma and resolution-independence of the 'equivalently' cited to def-weil-pbc-sites-and-cohomology (2) (added to stmt_deps); def-sp-injective-resolutions only defines resolutions.; 1 file(s) fixed by the reviewer"
+ }
 }
