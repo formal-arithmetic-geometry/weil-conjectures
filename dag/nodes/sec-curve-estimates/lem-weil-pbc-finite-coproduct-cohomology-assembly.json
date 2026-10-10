@@ -24,9 +24,64 @@
   "lem-weil-pbc-scheme-coproduct-family",
   "def-weil-pbc-inverse-image"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "By [lem-weil-pbc-scheme-coproduct-family], the coprojections \\iota_i identify the summands C_i with pairwise disjoint open-and-closed subschemes covering C. Thus every etale object over C restricts to etale objects over the C_i, and the restriction maps are componentwise.",
+   "uses": [
+    "lem-weil-pbc-scheme-coproduct-family"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "first paragraph of the proof of Lemma 0A5B (etale-cohomology-lemma-constant-smooth-statements), finite disjoint-union decomposition"
+   }
+  },
+  {
+   "text": "The sheaf condition on the finite family of open-and-closed inclusions says that a sheaf F on C is uniquely determined by the family of restrictions \\iota_i^{-1}F, and every family of component sheaves glues uniquely because intersections between distinct summands are empty. Hence restriction is an equivalence with the finite product of the component sheaf categories. On the final object C, this equivalence identifies F(C) with the finite product of the component sections (\\iota_i^{-1}F)(C_i). The inverse-image notation is the functor of [def-weil-pbc-inverse-image].",
+   "uses": [
+    "lem-weil-pbc-etale-sheaf-clopen-product",
+    "def-weil-pbc-inverse-image"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "first paragraph of the proof of Lemma 0A5B (etale-cohomology-lemma-constant-smooth-statements), finite-product assembly"
+   }
+  },
+  {
+   "text": "For every scheme T the category Ab(T_{Et}) has enough injectives [lem-weil-pbc-module-sheaves-enough-injectives], and the global-sections functor \\Gamma(T_{Et},-) [def-weil-pbc-global-sections-functor] is additive and left exact, being a right adjoint (of the constant-sheaf functor). Etale cohomology H^q(T_{Et},F) is defined [def-weil-pbc-etale-cohomology] as \\mathcal H^q(\\Gamma(T,I^\\bullet)) for a K-injective resolution F\\to I^\\bullet; an injective resolution of F is a bounded below complex of injectives, hence K-injective [lem-weil-pbc-bounded-below-injectives-kinjective], so H^q(T_{Et},F)=R^q\\Gamma(T_{Et},-)(F) in the sense of [def-sp-left-exact-additive]. The equivalence of Step 2 carries injective objects and injective resolutions in Ab(C_{Et}) to those of \\prod_i Ab((C_i)_{Et}) and carries \\Gamma(C_{Et},-) to the product functor of the \\Gamma((C_i)_{Et},-) [lem-weil-pbc-etale-sheaf-clopen-product]; so R^q\\Gamma(C_{Et},-)(F) is R^q of the product functor at (\\iota_i^{-1}F)_i. Applying [lem-weil-pbc-derived-finite-product] (each Ab((C_i)_{Et}) has enough injectives and each \\Gamma((C_i)_{Et},-) is additive left exact, as above) gives, naturally for every q\\ge0, H^q(C,F)\\cong\\prod_{i\\in I}H^q(C_i,\\iota_i^{-1}F). These isomorphisms are induced by restriction, so they are the canonical restriction maps in the statement; the product is finite.",
+   "uses": [
+    "def-weil-pbc-etale-cohomology",
+    "def-weil-pbc-global-sections-functor",
+    "lem-weil-pbc-module-sheaves-enough-injectives",
+    "lem-weil-pbc-bounded-below-injectives-kinjective",
+    "def-sp-left-exact-additive",
+    "lem-weil-pbc-etale-sheaf-clopen-product",
+    "lem-weil-pbc-derived-finite-product"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "first paragraph of the proof of Lemma 0A5B (etale-cohomology-lemma-constant-smooth-statements), finite-product assembly"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-scheme-coproduct-family",
+  "lem-weil-pbc-etale-sheaf-clopen-product",
+  "def-weil-pbc-inverse-image",
+  "def-weil-pbc-etale-cohomology",
+  "lem-weil-pbc-derived-finite-product",
+  "def-weil-pbc-global-sections-functor",
+  "lem-weil-pbc-module-sheaves-enough-injectives",
+  "lem-weil-pbc-bounded-below-injectives-kinjective",
+  "def-sp-left-exact-additive"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "first paragraph of the proof of Lemma 0A5B (etale-cohomology-lemma-constant-smooth-statements), finite-product assembly"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -51,12 +106,38 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-weil-pbc-finite-geometric-point-coproduct-cohomology",
   "by": "worker",
   "date": "2026-10-10"
  },
  "chapter": "sec-curve-estimates",
- "unit": "sk-prop-cd"
+ "unit": "sk-prop-cd",
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "lem-weil-pbc-finite-coproduct-cohomology-assembly",
+  "worker": "stage1",
+  "summary": "Split the finite-coproduct cohomology assembly into the clopen decomposition of abelian etale sheaves and the general finite-product right-derived-functor statement. The proof then applies these statements to the open-and-closed coprojections and identifies the resulting derived global-sections maps with the canonical restriction maps. Checked the first paragraph of Stacks Lemma 0A5B and the cited definitions; no exact Lean declaration exists.",
+  "blueprint": {
+   "statement": "proof, second paragraph: global sections on the finite disjoint union are the finite product of the exact point functors",
+   "steps": {
+    "1": "finite disjoint-union decomposition into open-and-closed summands",
+    "2": "sheaf-category and global-sections product assembly",
+    "3": "derived functors of the finite product are the product of derived functors"
+   }
+  },
+  "tool_uses": []
+ },
+ "tool_uses": [
+  "lem-weil-pbc-module-sheaves-enough-injectives"
+ ],
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-fca",
+  "group": "K1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-fca (reviewer sub-agent of L); spot-checked: Source: Stacks 0A5B (etale-cohomology-lemma-constant-smooth-statements), proof first paragraph (X a finite disjoint union of curves and points); the item statement is unchanged and the route (clopen decomposition of Ab(C_Et), then derived functors of a finite product) is the standard one. New nodes: lem-weil-pbc-etale-sheaf-clopen-product (true: a sheaf on the small etale site of a finite clopen coproduct is the family of its restrictions, glued uniquely since distinct summands are disjoint; Gamma is the product) and lem-weil-pbc-derived-finite-product (true: products of injectives are injective in the product category, so injective resolutions and R^q are componentwise; hypotheses finite I, enough injectives, additive left exact present); both tested on I empty (zero category, zero) and I singleton (identity). Step 1 carried by lem-weil-pbc-scheme-coproduct-family (open immersions, disjoint, covering, clopen); Step 2 by the clopen-product node and def-weil-pbc-inverse-image. FIX more, RETURN less: Step 3 (C4/C1): def-weil-pbc-etale-cohomology defines H^q by K-injective resolutions and does not say it is R^q Gamma via injective resolutions, which lem-weil-pbc-derived-finite-product uses, and the enough-injectives hypothesis of that node was not cited; repaired by citing lem-weil-pbc-bounded-below-injectives-kinjective (injective resolution is K-injective, so H^q = R^q Gamma of def-sp-left-exact-additive), lem-weil-pbc-module-sheaves-enough-injectives (Ab(T_Et) has enough injectives; off-unit sk-thm-reduction, generic tool, recorded in tool_uses), def-weil-pbc-global-sections-functor (Gamma a right adjoint, hence additive left exact). dag/nodes/sec-curve-estimates/lem-weil-pbc-finite-coproduct-cohomology-assembly.json: proof[2].text and uses, proof_deps: these four nodes added. No Mathlib leaf. Start Sat Oct 10 04:14:11 PM UTC 2026, end Sat Oct 10 04:15:28 PM UTC 2026.; 1 file(s) fixed by the reviewer"
+ }
 }
