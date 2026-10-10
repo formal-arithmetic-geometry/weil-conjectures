@@ -1541,3 +1541,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 13:48 L: merged deliver/J1/lem-sc-proper-dim-one-projective (reviewer PASS, first push; tool_uses lem-weil-pbc-proper-closed-image; new node lem-sc-dim-one-quasi-projective)
 - 13:48 L: G1 lem-galois-transitive re-checked by a reviewer: branch unchanged since the return (B8 stands)
 - 13:48 L: C1 lem-sc-flat-base-change-coherent re-push reviewed: byte-identical to the returned version, return stands
+- 13:49 L: K1 lem-weil-pbc-matching-object-coskeleton re-push reviewed: one line changed, return stands
