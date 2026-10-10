@@ -13,7 +13,7 @@
  },
  "kind": "statement",
  "title": "Cohomology and tensor invariance on a finite scheme",
- "statement": "Let $k$ be a field, let $A$ be a finite-dimensional $k$-algebra [def-weil-finite-dimensional-subspace] [def-weil-vector-space-dimension], let $T=\\operatorname{Spec}(A)$ [def-pc-scheme], let $\\mathcal G$ be a coherent $\\mathcal O_T$-module [pqf-def-coherent], and let $\\mathcal L$ be an invertible $\\mathcal O_T$-module [def-sc-invertible-module]. Then $H^q(T,\\mathcal G)=0$ and $H^q(T,\\mathcal G\\otimes_{\\mathcal O_T}\\mathcal L)=0$ for every $q>0$, both $\\Gamma(T,\\mathcal G)$ and $\\Gamma(T,\\mathcal G\\otimes\\mathcal L)$ are finite-dimensional $k$-vector spaces, and $\\dim_k\\Gamma(T,\\mathcal G\\otimes\\mathcal L)=\\dim_k\\Gamma(T,\\mathcal G)$. Consequently, the Euler characteristics of [def-pc-euler-characteristic] are defined and satisfy $\\chi(T,\\mathcal G)=\\dim_k\\Gamma(T,\\mathcal G)$ and $\\chi(T,\\mathcal G\\otimes\\mathcal L)=\\chi(T,\\mathcal G)$.",
+ "statement": "Let $k$ be a field, let $A$ be a finite-dimensional $k$-algebra [def-weil-finite-dimensional-subspace] [def-weil-vector-space-dimension], let $T=\\operatorname{Spec}(A)$ [def-pc-scheme], let $\\mathcal G$ be a coherent $\\mathcal O_T$-module [pqf-def-coherent], and let $\\mathcal L$ be an invertible $\\mathcal O_T$-module [def-sc-invertible-module]. Then $H^q(T,\\mathcal G)=0$ and $H^q(T,\\mathcal G\\otimes_{\\mathcal O_T}\\mathcal L)=0$ for every $q>0$ (cohomology of [pqf-def-cohomology], tensor product of [def-pur-sheaf-tensor-product]), both $\\Gamma(T,\\mathcal G)$ and $\\Gamma(T,\\mathcal G\\otimes\\mathcal L)$ are finite-dimensional $k$-vector spaces, and $\\dim_k\\Gamma(T,\\mathcal G\\otimes\\mathcal L)=\\dim_k\\Gamma(T,\\mathcal G)$. Consequently, the Euler characteristics of [def-pc-euler-characteristic] are defined and satisfy $\\chi(T,\\mathcal G)=\\dim_k\\Gamma(T,\\mathcal G)$ and $\\chi(T,\\mathcal G\\otimes\\mathcal L)=\\chi(T,\\mathcal G)$.",
  "source": {
   "document": "literature/stacks-project/varieties.tex",
   "place": "Tag 0AYT (varieties-lemma-chi-tensor-finite), parts (3), (4), and (5) with the locally free sheaf of rank one $\\mathcal L$"
@@ -24,11 +24,124 @@
   "def-weil-vector-space-dimension",
   "pqf-def-coherent",
   "def-sc-invertible-module",
+  "def-pc-euler-characteristic",
+  "pqf-def-cohomology",
+  "def-pur-sheaf-tensor-product"
+ ],
+ "proof": [
+  {
+   "text": "*$T$ is finite, discrete and Noetherian.* The field $k$ is a local ring whose only prime ideal is its maximal ideal $0$, and $A$ is a finite $k$-algebra: a finite $k$-basis of $A$ generates $A$ as a $k$-module [def-weil-finite-dimensional-subspace] [def-weil-finitely-generated-module]. By [lem-weil-pbc-finite-over-zero-dim-local-discrete-spectrum] (with $R=k$, $B=A$), $A$ has finitely many prime ideals $\\mathfrak q_1,\\dots,\\mathfrak q_r$, all maximal, and $\\operatorname{Spec}A$ is a finite discrete space [def-weil-affine-spectrum]: $T=\\{t_1,\\dots,t_r\\}$ with $t_j=\\mathfrak q_j$, and every singleton $\\{t_j\\}$ is open. Moreover $A$ is Noetherian: every ideal of $A$ is a $k$-subspace, so in a strictly increasing chain of ideals the dimensions strictly increase and are bounded by $\\dim_kA$ [def-weil-vector-space-dimension]. Hence $T$ is locally Noetherian [pqf-def-locnoeth] (it is covered by the single affine open $T=\\operatorname{Spec}A$ with $A$ Noetherian).",
+   "uses": [
+    "lem-weil-pbc-finite-over-zero-dim-local-discrete-spectrum",
+    "def-weil-finite-dimensional-subspace",
+    "def-weil-finitely-generated-module",
+    "def-weil-affine-spectrum",
+    "def-weil-vector-space-dimension",
+    "pqf-def-locnoeth"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 0AYT (varieties-lemma-chi-tensor-finite), proof: 'In fact, by Lemma 04MG (varieties-lemma-algebraic-scheme-dim-0) the scheme Z is a finite disjoint union of spectra of local Artinian rings'"
+   }
+  },
+  {
+   "text": "*$\\Gamma(T,\\mathcal G)$ is finite-dimensional.* Since $T$ is locally Noetherian (Step 1), the coherent module $\\mathcal G$ is quasi-coherent of finite type [pqf-lem-coherent-ft-locnoeth]. Apply [lem-weil-pbc-quasi-coherent-finite-type-affine](a) to the affine open $U=T$, whose ring of sections is $\\mathcal O_T(T)=A$ [def-weil-affine-spectrum]: $\\Gamma(T,\\mathcal G)$ is a finitely generated $A$-module. As $A$ is a finitely generated $k$-module (Step 1), [lem-weil-pbc-finite-module-over-finite-algebra] (with $R=k$, $B=A$, $M=\\Gamma(T,\\mathcal G)$) shows that $\\Gamma(T,\\mathcal G)$ is a finitely generated $k$-module, i.e. a finite-dimensional $k$-vector space [def-weil-finite-dimensional-subspace], so $\\dim_k\\Gamma(T,\\mathcal G)\\in\\mathbf Z_{\\ge0}$ is defined [def-weil-vector-space-dimension].",
+   "uses": [
+    "pqf-lem-coherent-ft-locnoeth",
+    "lem-weil-pbc-quasi-coherent-finite-type-affine",
+    "def-weil-affine-spectrum",
+    "lem-weil-pbc-finite-module-over-finite-algebra",
+    "def-weil-finite-dimensional-subspace",
+    "def-weil-vector-space-dimension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 0AYT (varieties-lemma-chi-tensor-finite), proof: 'G is a coherent O_Z-module ... Z is affine'"
+   }
+  },
+  {
+   "text": "*$\\mathcal L\\cong\\mathcal O_T$.* By [def-sc-invertible-module], each point $t_j$ has an open neighbourhood $U_j$ with an isomorphism of $\\mathcal O_{U_j}$-modules $\\mathcal L|_{U_j}\\cong\\mathcal O_{U_j}$; restricting it to the open subset $\\{t_j\\}\\subseteq U_j$ (Step 1) gives an isomorphism $\\varphi_j:\\mathcal L|_{\\{t_j\\}}\\to\\mathcal O_T|_{\\{t_j\\}}$. The opens $\\{t_1\\},\\dots,\\{t_r\\}$ are pairwise disjoint and cover $T$. For an open $V\\subseteq T$ the opens $V_j:=V\\cap\\{t_j\\}$ cover $V$ with empty pairwise intersections, so the sheaf axiom for $\\mathcal L$ and for $\\mathcal O_T$ [def-weil-sheaf-of-modules-category] says that restriction gives bijections $\\mathcal L(V)\\to\\prod_j\\mathcal L(V_j)$ and $\\mathcal O_T(V)\\to\\prod_j\\mathcal O_T(V_j)$ (the gluing condition on the overlaps is empty). Define $\\varphi_V:\\mathcal L(V)\\to\\mathcal O_T(V)$ as the map corresponding to $\\prod_j(\\varphi_j)_{V_j}$. It is $\\mathcal O_T(V)$-linear and commutes with restriction to $V'\\subseteq V$ because each $\\varphi_j$ is a morphism of $\\mathcal O_{\\{t_j\\}}$-modules; the same construction applied to the inverses $\\varphi_j^{-1}$ gives an inverse of $\\varphi$. So $\\varphi:\\mathcal L\\to\\mathcal O_T$ is an isomorphism of $\\mathcal O_T$-modules. (This is the source's 'since Z has dimension 0 the locally free sheaf $i^*\\mathcal E$ is isomorphic to $\\mathcal O_Z^{\\oplus n}$', for $n=1$.)",
+   "uses": [
+    "def-sc-invertible-module",
+    "def-weil-sheaf-of-modules-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 0AYT (varieties-lemma-chi-tensor-finite), proof: 'Since Z has dimension 0 the locally free sheaf i^*E is isomorphic to O_Z^{\\oplus n}'"
+   }
+  },
+  {
+   "text": "*$\\mathcal G\\otimes\\mathcal L\\cong\\mathcal G$.* By functoriality of the tensor product [def-pur-sheaf-tensor-product], $\\mathrm{id}_{\\mathcal G}\\otimes\\varphi$ (Step 3) is an isomorphism $\\mathcal G\\otimes_{\\mathcal O_T}\\mathcal L\\cong\\mathcal G\\otimes_{\\mathcal O_T}\\mathcal O_T$. On each open $V$ the presheaf tensor product has sections $\\mathcal G(V)\\otimes_{\\mathcal O_T(V)}\\mathcal O_T(V)$, and $g\\otimes a\\mapsto ag$ is an isomorphism onto $\\mathcal G(V)$ [def-weil-pbc-module-tensor-product], compatible with restrictions; so the presheaf tensor product is isomorphic to the sheaf $\\mathcal G$, and its sheafification $\\mathcal G\\otimes_{\\mathcal O_T}\\mathcal O_T$ is isomorphic to $\\mathcal G$. Hence there is an isomorphism of $\\mathcal O_T$-modules $\\psi:\\mathcal G\\otimes\\mathcal L\\cong\\mathcal G$. In particular $\\mathcal G\\otimes\\mathcal L$ is coherent [pqf-def-coherent] (the conditions there are invariant under isomorphism), $\\Gamma(T,\\psi)$ is an $A$-linear, hence $k$-linear, isomorphism $\\Gamma(T,\\mathcal G\\otimes\\mathcal L)\\cong\\Gamma(T,\\mathcal G)$, so by Step 2 $\\Gamma(T,\\mathcal G\\otimes\\mathcal L)$ is finite-dimensional with $\\dim_k\\Gamma(T,\\mathcal G\\otimes\\mathcal L)=\\dim_k\\Gamma(T,\\mathcal G)$, and since $H^q(T,-)$ is a functor [pqf-def-cohomology], $H^q(T,\\psi)$ is an isomorphism $H^q(T,\\mathcal G\\otimes\\mathcal L)\\cong H^q(T,\\mathcal G)$ of $A$-modules for every $q\\ge0$.",
+   "uses": [
+    "def-pur-sheaf-tensor-product",
+    "def-weil-pbc-module-tensor-product",
+    "pqf-def-coherent",
+    "pqf-def-cohomology",
+    "def-weil-vector-space-dimension"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 0AYT (varieties-lemma-chi-tensor-finite), proof: 'i_*(G \\otimes i^*E) = F \\otimes E ... arguing as above we see that (5) holds'"
+   }
+  },
+  {
+   "text": "*Vanishing.* $T=\\operatorname{Spec}A$ is affine and $\\mathcal G$ is quasi-coherent (Step 2), so $H^q(T,\\mathcal G)=0$ for all $q>0$ by [lem-pc-affine-vanishing]. By the isomorphisms $H^q(T,\\mathcal G\\otimes\\mathcal L)\\cong H^q(T,\\mathcal G)$ of Step 4, also $H^q(T,\\mathcal G\\otimes\\mathcal L)=0$ for all $q>0$.",
+   "uses": [
+    "lem-pc-affine-vanishing"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 0AYT (varieties-lemma-chi-tensor-finite), proof: 'Since the dimension of Z is 0, we see Z is affine ... the higher cohomology groups of G are zero (Lemma 01XB)'"
+   }
+  },
+  {
+   "text": "*Euler characteristics.* The structure morphism $f:T\\to\\operatorname{Spec}k$ is finite [def-weil-finite-integral-morphism]: $\\operatorname{Spec}k$ is affine with the single nonempty open $\\operatorname{Spec}k$ itself, its preimage $T=\\operatorname{Spec}A$ is affine (so $f$ is affine), and $k\\to A$ is finite (Step 1). Hence $f$ is proper [lem-weil-pbc-finite-proper], so $T$ is a proper $k$-scheme and, $\\mathcal G$ and $\\mathcal G\\otimes\\mathcal L$ being coherent (Step 4), [lem-pc-euler-characteristic-well-defined] shows that $\\chi(T,\\mathcal G)=\\sum_{i\\ge0}(-1)^i\\dim_kH^i(T,\\mathcal G)$ and $\\chi(T,\\mathcal G\\otimes\\mathcal L)=\\sum_{i\\ge0}(-1)^i\\dim_kH^i(T,\\mathcal G\\otimes\\mathcal L)$ of [def-pc-euler-characteristic] are well-defined integers. By Step 5 only $i=0$ contributes, and $H^0(T,-)=\\Gamma(T,-)$ (the $0$-th right derived functor of the left exact functor $\\Gamma(T,-)$ [pqf-def-cohomology]), so $\\chi(T,\\mathcal G)=\\dim_k\\Gamma(T,\\mathcal G)$ and $\\chi(T,\\mathcal G\\otimes\\mathcal L)=\\dim_k\\Gamma(T,\\mathcal G\\otimes\\mathcal L)$, which are equal by Step 4. Thus $\\chi(T,\\mathcal G\\otimes\\mathcal L)=\\chi(T,\\mathcal G)=\\dim_k\\Gamma(T,\\mathcal G)$.",
+   "uses": [
+    "def-weil-finite-integral-morphism",
+    "lem-weil-pbc-finite-proper",
+    "lem-pc-euler-characteristic-well-defined",
+    "def-pc-euler-characteristic",
+    "pqf-def-cohomology"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 0AYT (varieties-lemma-chi-tensor-finite), proof: 'We have (4) by definition of the Euler characteristic chi(X,F) and (3)'"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-finite-over-zero-dim-local-discrete-spectrum",
+  "def-weil-finite-dimensional-subspace",
+  "def-weil-finitely-generated-module",
+  "def-weil-affine-spectrum",
+  "def-weil-vector-space-dimension",
+  "pqf-def-locnoeth",
+  "pqf-lem-coherent-ft-locnoeth",
+  "lem-weil-pbc-quasi-coherent-finite-type-affine",
+  "lem-weil-pbc-finite-module-over-finite-algebra",
+  "def-sc-invertible-module",
+  "def-weil-sheaf-of-modules-category",
+  "def-pur-sheaf-tensor-product",
+  "def-weil-pbc-module-tensor-product",
+  "pqf-def-coherent",
+  "pqf-def-cohomology",
+  "lem-pc-affine-vanishing",
+  "def-weil-finite-integral-morphism",
+  "lem-weil-pbc-finite-proper",
+  "lem-pc-euler-characteristic-well-defined",
   "def-pc-euler-characteristic"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/varieties.tex",
+  "place": "Tag 0AYT (varieties-lemma-chi-tensor-finite), proof, parts (3)-(5), specialized to the affine finite scheme Z = Spec A and n = 1"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -50,13 +163,73 @@
    "results": "Only abstract CategoryTheory.Sheaf.H and unrelated algebraic EulerCharacteristic declarations; no finite-scheme coherent cohomology result",
    "date": "2026-10-10",
    "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "invertible sheaf of modules on a scheme with finite discrete underlying space is isomorphic to the structure sheaf; Picard group of an Artinian ring is trivial",
+   "results": "HTTP 500 from LeanSearch (both queries, 14:25 UTC); no declaration obtained",
+   "date": "2026-10-10",
+   "verdict": "no match (service down)"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "higher cohomology of a quasi-coherent sheaf on the spectrum of a finite-dimensional algebra vanishes and tensoring with a line bundle preserves the dimension of global sections",
+   "results": "Rep.isZero_Tor_succ_of_projective, AlgebraicGeometry.exists_of_res_zero_of_qcqs_of_top, CategoryTheory.Sheaf.H, AlgebraicGeometry.Scheme.Modules.instAbelian; none about cohomology of coherent modules on Spec of a finite algebra",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "rg -n 'Subsingleton \\(Pic|IsInvertible' Mathlib/RingTheory/PicardGroup.lean Mathlib/AlgebraicGeometry",
+   "results": "Mathlib/RingTheory/PicardGroup.lean:538 instance [IsLocalRing R] : Subsingleton (Pic R); :547 instance [Finite (MaximalSpectrum R)] : Subsingleton (Pic R) (semilocal rings, module level: an invertible R-module is free); no sheaf-level IsInvertible in Mathlib/AlgebraicGeometry, no cohomology/Euler characteristic of O_X-modules",
+   "date": "2026-10-10",
+   "verdict": "no match: only the ring-level fact behind Step 3 (Pic of a semilocal ring is trivial); the statement about sheaf cohomology and chi is not in Mathlib"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
-  "item": "lem-pc-chi-zero-dim-support"
+  "by": "worker",
+  "item": "lem-pc-chi-zero-dim-support",
+  "date": "2026-10-10"
  },
  "chapter": "sec-picard-framework",
- "unit": "sk-thm-picard-rr"
+ "unit": "sk-thm-picard-rr",
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "lem-pc-finite-scheme-cohomology-tensor",
+  "worker": "stage1",
+  "summary": "Read Stacks 0AYT (varieties.tex l.6208) and its proof. The item is parts (3)-(5) of 0AYT on the scheme Z = Spec A of the proof, with E invertible (n = 1). Six steps following the proof: (1) Spec A finite discrete and Noetherian (lem-weil-pbc-finite-over-zero-dim-local-discrete-spectrum with R = k; Noetherian by dimension count), standing for the source's 'Z is a finite disjoint union of spectra of local Artinian rings'; (2) G quasi-coherent of finite type (pqf-lem-coherent-ft-locnoeth), Gamma(T,G) finite over A (lem-weil-pbc-quasi-coherent-finite-type-affine (a)) hence over k (Module.Finite.trans leaf); (3) L = O_T, the source's 'since Z has dimension 0 ... i^*E is isomorphic to O_Z^n', written out as gluing over the disjoint open cover by the points; (4) G (x) L = G, so coherence, Gamma and H^q transfer; (5) vanishing by lem-pc-affine-vanishing (Lean-closed); (6) T proper over k (finite, lem-weil-pbc-finite-proper) so chi is defined by lem-pc-euler-characteristic-well-defined, and chi = dim Gamma by (5). Statement unchanged in substance; citations [pqf-def-cohomology] and [def-pur-sheaf-tensor-product] added for H^q and tensor product. No slopmaster2 declaration states the item: the nearest, AlgebraicGeometry.Scheme.Modules.finrankH_zero_eq_finrankΓ_of_isFinite (RiemannRoch.lean:276, the case G = O_T, only h^0), rests on sorry; its sorry-free ingredients finite_and_discreteTopology_of_isFinite, IsInvertible.nonempty_iso_unit, finrankH_eq_sum_of_pairwise_disjoint and subsingleton_H_succ_of_isAffine mirror Steps 1, 3 and 5. No new node.",
+  "blueprint": "The steps realize the place recorded in blueprint.from of lem-pc-degree-base-change (proof, part (2), the paragraph beginning 'The Euler characteristic of the quotient'): the computation of cohomology and Euler characteristic on the finite support scheme (Steps 1, 2, 5, 6) and the invariance under tensoring by an invertible module (Steps 3, 4).",
+  "tool_uses": [
+   {
+    "node": "pqf-lem-coherent-ft-locnoeth",
+    "why": "Step 2 takes 'coherent on a locally Noetherian scheme is quasi-coherent of finite type' (01XZ); same use already accepted on lem-pc-euler-characteristic-well-defined of this unit; no node of sk-thm-picard-rr states it"
+   },
+   {
+    "node": "lem-weil-pbc-quasi-coherent-finite-type-affine",
+    "why": "Step 2 takes clause (a): a quasi-coherent module of finite type on an affine scheme has finitely generated global sections; generic module fact, no node of sk-thm-picard-rr states it"
+   },
+   {
+    "node": "lem-weil-pbc-finite-proper",
+    "why": "Step 6 takes 'a finite morphism is proper' to put Spec A within the domain of def-pc-euler-characteristic; generic (Mathlib instance AlgebraicGeometry IsProper of IsFinite, Morphisms/Proper.lean:69), no node of sk-thm-picard-rr states it"
+   }
+  ]
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "tool_uses": [
+  "pqf-lem-coherent-ft-locnoeth",
+  "lem-weil-pbc-quasi-coherent-finite-type-affine",
+  "lem-weil-pbc-finite-proper"
+ ],
+ "reviewed": "2026-10-10 L: 6 steps along 0AYT checked (Spec A finite discrete Noetherian; Gamma(T,G) finite over A hence over k; L trivial by gluing trivializations over the open points; G tensor L = G; vanishing by lem-pc-affine-vanishing; chi via finite hence proper and the Euler-characteristic node). tool_uses from the declared list (coherent-ft-locnoeth, quasi-coherent-finite-type-affine, finite-proper). Citations of H^q and tensor added to the statement. Worker note: lem-weil-pbc-finite-proper could be a Mathlib leaf (Proper.lean 69). LeanSearch down."
 }

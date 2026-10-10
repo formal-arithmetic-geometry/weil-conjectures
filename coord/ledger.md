@@ -1614,3 +1614,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 14:26 L: merge_delivery.py copied no declared tool uses (a path bug, now fixed); the four merged nodes with declarations (riemann-roch, finite-over-henselian, second-kummer, nonzero-section) got their tool_uses from the lead; route warnings back to the standing 11
 - 14:27 L: returned deliver/G1/lem-sc-hilb-geometrically-integral (reviewer RETURN: 1. C4: lem-sc-hilb-geometrically-integral, proof step 2: the cited node lem-sc-hilb-dominating-power assumes X geometric)
 - 14:27 L: merged deliver/H1/lemma-weil-pbc-affine-neighbourhood-cofinal (reviewer FIX; after a return; new nodes: 0)
+- 14:27 L: accepted lem-pc-finite-scheme-cohomology-tensor: 6 steps (0AYT), tool_uses 3, no new nodes
