@@ -1,8 +1,8 @@
 # Work queue
 
-931 items; claim with `tools/claim.py next <group> [--stage N]`.
+929 items; claim with `tools/claim.py next <group> [--stage N]`.
 
-## Stage 1: nodes to split (222)
+## Stage 1: nodes to split (220)
 
 | node | distance to a target | Lean state on the done branch |
 |---|---|---|
@@ -12,7 +12,6 @@
 | `lem-pc-derived-functor-truncation-stabilization` | 3013 | none |
 | `lem-pc-derived-limit-milnor-sequence` | 3013 | none |
 | `lem-pc-qcoh-truncation-derived-limit` | 3013 | none |
-| `def-pc-essentially-constant-pro-diagram` | 3014 | none |
 | `lem-pc-ringed-space-module-stalk-tensor` | 3014 | none |
 | `lem-pc-stalk-direct-sums` | 3014 | none |
 | `lem-pc-ringed-spaces-derived-direct-image-composition` | 3015 | none |
@@ -24,7 +23,6 @@
 | `lem-sc-p1-rhom-hom-derived-connecting` | 3017 | none |
 | `lem-sc-p1-right-derived-triangle-connecting` | 3017 | none |
 | `lem-sc-proper-flat-right-adjoint-affine-basechange` | 3018 | none |
-| `lem-sc-proper-flat-right-adjoint-direct-sums` | 3019 | none |
 | `lem-sc-proper-flat-right-adjoint-open-support` | 3019 | none |
 | `lem-sc-right-adjoint-open-support-criterion` | 3019 | none |
 | `lem-pc-genus-agrees-sc` | 4007 | rests_on_sorry |
@@ -32,11 +30,11 @@
 | `cor-pc-sigma-pic-iso` | 4009 | rests_on_sorry |
 | `lem-pc-vanishing-above-dim` | 4009 | rests_on_sorry |
 | `lem-sc-finite-flat-surj-points` | 4009 | none |
-| `lem-sc-hom-etale-locus-translation` | 4009 | none |
 | `lem-sc-positive-ample-hilbert-degree` | 4009 | none |
 | `lem-weil-pbc-gm-pullback-strict-henselization` | 4009 | none |
 | `lem-weil-pbc-unrestricted-strict-henselization-stalk` | 4009 | none |
 | `lem-pc-universal-adjoint-section` | 4010 | rests_on_sorry |
+| `lem-sc-etale-base-change-geometric` | 4010 | none |
 | `lem-sc-etale-local-dimension` | 4010 | none |
 | `lem-sc-faithfully-flat-local-dimension` | 4010 | none |
 | `lem-sc-filtered-colimit-prime-chain-dimension` | 4010 | none |
@@ -943,7 +941,7 @@
 | `lem-weil-pbc-p1-field-dimension-one` | 4 | state |
 | `lem-weil-pbc-projective-space-zero-isomorphism` | 4 | state |
 
-Not open yet: 1396 nodes that wait for a statement dependency, 258 nodes that wait for stage 1.
+Not open yet: 1401 nodes that wait for a statement dependency, 256 nodes that wait for stage 1.
 
 ## Stage 3: modules to prove (0)
 
