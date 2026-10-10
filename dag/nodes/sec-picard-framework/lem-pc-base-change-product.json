@@ -24,8 +24,36 @@
   "def-pc-field-extension",
   "def-pc-base-change"
  ],
- "proof": [],
- "proof_deps": [],
+ "proof": [
+  {
+   "text": "Write $X_{k'}=X\\times_{\\operatorname{Spec}k}\\operatorname{Spec}k'$ and $Y_{k'}=Y\\times_{\\operatorname{Spec}k}\\operatorname{Spec}k'$ (base changes [def-pc-base-change], with projections $f_{k'}:X_{k'}\\to X$, $\\mathrm{pr}:X_{k'}\\to\\operatorname{Spec}k'$ and $g_{k'}:Y_{k'}\\to Y$, $\\mathrm{pr}:Y_{k'}\\to\\operatorname{Spec}k'$), $p,q$ for the projections of $X\\times_{\\operatorname{Spec}k}Y$, and $A=(X\\times_{\\operatorname{Spec}k}Y)\\times_{\\operatorname{Spec}k}\\operatorname{Spec}k'$ with projections $r:A\\to X\\times_{\\operatorname{Spec}k}Y$, $s:A\\to\\operatorname{Spec}k'$. By the universal property of $X_{k'}$ [def-pc-fibre-product] there are unique $\\pi_X=(p\\circ r,s):A\\to X_{k'}$ and $\\pi_Y=(q\\circ r,s):A\\to Y_{k'}$, and $\\mathrm{pr}\\circ\\pi_X=s=\\mathrm{pr}\\circ\\pi_Y$. Claim: $(A,\\pi_X,\\pi_Y)$ is a fibre product of $X_{k'}\\to\\operatorname{Spec}k'\\leftarrow Y_{k'}$. Given a scheme $T$ and $\\alpha:T\\to X_{k'}$, $\\beta:T\\to Y_{k'}$ with $\\mathrm{pr}\\circ\\alpha=\\mathrm{pr}\\circ\\beta=:t$, the morphisms $f_{k'}\\circ\\alpha:T\\to X$ and $g_{k'}\\circ\\beta:T\\to Y$ have the same composite $T\\xrightarrow{t}\\operatorname{Spec}k'\\to\\operatorname{Spec}k$, so give $c=(f_{k'}\\alpha,g_{k'}\\beta):T\\to X\\times_{\\operatorname{Spec}k}Y$, and $c$ and $t$ agree over $\\operatorname{Spec}k$, so give $\\gamma=(c,t):T\\to A$. Then $\\pi_X\\circ\\gamma$ has components $p\\circ c=f_{k'}\\circ\\alpha$ and $s\\circ\\gamma=t=\\mathrm{pr}\\circ\\alpha$, so $\\pi_X\\circ\\gamma=\\alpha$ by the uniqueness in the universal property of $X_{k'}$; likewise $\\pi_Y\\circ\\gamma=\\beta$. If $\\gamma':T\\to A$ also satisfies $\\pi_X\\gamma'=\\alpha$, $\\pi_Y\\gamma'=\\beta$, then $s\\gamma'=\\mathrm{pr}\\,\\alpha=t$, $p r\\gamma'=f_{k'}\\alpha$ and $q r\\gamma'=g_{k'}\\beta$, so $r\\gamma'=c$ and $\\gamma'=\\gamma$ by the uniqueness clauses for $X\\times_{\\operatorname{Spec}k}Y$ and $A$. This proves the claim.",
+   "uses": [
+    "def-pc-fibre-product",
+    "def-pc-base-change"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "general category theory of fibre products (Stacks treats such identifications so, e.g. the proof of Tag 01KR); no separate tag"
+   }
+  },
+  {
+   "text": "Let $B=X_{k'}\\times_{\\operatorname{Spec}k'}Y_{k'}$ be the chosen fibre product with its projections. By step 1, $(A,\\pi_X,\\pi_Y)$ is also a fibre product of $X_{k'}$ and $Y_{k'}$ over $\\operatorname{Spec}k'$, so by the uniqueness clause of [def-pc-fibre-product] there is a unique isomorphism $\\varphi:A\\to B$ compatible with the projections to $X_{k'}$ and $Y_{k'}$. The structure morphism of $A$ to $\\operatorname{Spec}k'$ is $s=\\mathrm{pr}\\circ\\pi_X$ and that of $B$ is $\\mathrm{pr}\\circ(\\text{first projection})$, so $\\varphi$ is a morphism of $k'$-schemes; this is the canonical isomorphism of the statement.",
+   "uses": [
+    "def-pc-fibre-product",
+    "def-pc-base-change"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "general category theory of fibre products (Stacks treats such identifications so, e.g. the proof of Tag 01KR); no separate tag"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-fibre-product",
+  "def-pc-base-change"
+ ],
  "proof_origin": {
   "by": "document",
   "document": "literature/stacks-project/varieties.tex",
@@ -55,12 +83,28 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-sc-geometrically-irreducible-product",
   "by": "worker",
   "date": "2026-10-10"
  },
  "chapter": "sec-picard-framework",
- "unit": "sk-prop-jacobian"
+ "unit": "sk-prop-jacobian",
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "lem-pc-base-change-product",
+  "worker": "stage1",
+  "summary": "Split the canonical identification of the base change of a fibre product with the fibre product of the base changes. The proof uses the universal properties of the two fibre products to classify the same pairs of morphisms and then obtains the unique projection-compatible isomorphism.",
+  "blueprint": "Realizes thm-sc-jacobian-representability proof step (4), the fibre-product/base-change identification used in the connectedness argument.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-bcp",
+  "group": "F1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-bcp (reviewer sub-agent of L); spot-checked: Source: the fact is the general-category-theory identification (X x_k Y)_{k'} = X_{k'} x_{k'} Y_{k'}; the cited tags 038F (varieties-lemma-bijection-irreducible-components) and 054P (varieties-lemma-geometrically-irreducible-check-after-extension) are where it is used, not where it is proved; Stacks proves no separate tag for it. The statement (k a field, X,Y k-schemes, k'/k a field extension, canonical k'-isomorphism compatible with the projections) is correct with no further hypotheses. Steps: both rest only on the universal property, existence and uniqueness-up-to-unique-projection-compatible-isomorphism clauses of def-pc-fibre-product (read; it says all three) and on def-pc-base-change (X_T := X x_S T with its projections; read). No new nodes; no tool uses; maintainer fields untouched (created.item unchanged, contrary to the report's sentence that it was corrected). Mathlib: searches recorded (Mathlib has it only as categorical pullback isomorphisms), no leaf. B10: no slopmaster2 declaration names the node (grep of WeilConjectures and Comparator for the id). Small cases: k'=k gives the identity; X=Spec k gives Y_{k'} = Spec k' x_{k'} Y_{k'}. FIX: dag/nodes/sec-picard-framework/lem-pc-base-change-product.json: proof[0].text: the delivered step said the base-changed projections 'identify the two factors of A with the corresponding factors of B', which is imprecise (A's factors are X x_k Y and Spec k'); rewritten, same mathematics, as the explicit verification that A with pi_X=(p r, s), pi_Y=(q r, s) satisfies the universal property of the fibre product of X_{k'} and Y_{k'} over Spec k' (existence and uniqueness of the induced map); proof[1].text: the isomorphism now comes from the uniqueness clause of def-pc-fibre-product applied to A and B, with the k'-structure checked; proof[*].elementary: true (each is a few lines from the cited statements); proof[*].source: place changed from 038F/054P (which do not prove it) to general category theory of fibre products. Start Sat Oct 10 03:41:35 PM UTC 2026, end Sat Oct 10 03:42:48 PM UTC 2026.; 1 file(s) fixed by the reviewer"
+ }
 }
