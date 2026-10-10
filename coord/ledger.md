@@ -1807,3 +1807,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 15:34 L: returned deliver/F1/lem-exc-rg-open-stabilizer-adjoint (reviewer RETURN: 1. E3/C2: proof step 1, second sentence (v carries monomorphisms to monomorphisms): the justification is invalid. 'If tw)
 - 15:34 L: retired uncited new node lem-weil-pbc-ringed-site-cech-vanishing-criterion (special case of lem-weil-pbc-site-cech-vanishing-criterion; reviewer R-ima)
 - 15:34 L: merged deliver/M1/def-sc-topological-abelian-cohomology (reviewer FIX; first push; new nodes: 0)
+- 15:35 L: returned deliver/C1/lem-weil-pbc-sections-base-field-extension (reviewer RETURN: 1. E (false new statement): lem-weil-pbc-field-tensor-irreducible: the claim that K tensor_k L is an integral domain for)
