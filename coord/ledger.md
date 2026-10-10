@@ -2151,3 +2151,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 17:40 L: merged deliver/E1/lem-sc-field-kummer-h2-brauer-injection (reviewer FIX; first push; new nodes: 0)
 - 17:40 L: merged deliver/C1/lem-sc-dvr-valuation-ring-characterization (reviewer PASS; first push; new nodes: 0)
 - 17:40 L: merged deliver/G1/lem-sc-support-dimension-cohomology-vanishing (reviewer FIX; first push; new nodes: 0)
+- 17:40 L: merged deliver/M1/lem-sc-ample-proj-local-chart (reviewer FIX; after a return; new nodes: 2)

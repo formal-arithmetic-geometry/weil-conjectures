@@ -26,9 +26,78 @@
   "def-weil-pbc-ample-invertible-module",
   "def-pc-proj"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "The section-ring construction in [lem-sc-ample-proj-canonical-map] applies because the positive-degree homogeneous nonvanishing opens cover $X$; it supplies the canonical morphism $f:X\\to\\operatorname{Proj}(S)$ and the identity $f^{-1}(D_+(s))=X_s$ for every such $s$.",
+   "uses": [
+    "lem-sc-ample-proj-canonical-map"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/properties.tex",
+    "place": "Properties Lemma 01PZ, existence and clause (1)"
+   }
+  },
+  {
+   "text": "By the definition of ampleness [def-weil-pbc-ample-invertible-module], $X$ is quasi-compact. The same ampleness hypothesis gives that $X$ is separated by [lem-weil-pbc-ample-scheme-separated], and hence quasi-separated (a separated morphism has quasi-compact diagonal).",
+   "uses": [
+    "def-weil-pbc-ample-invertible-module",
+    "lem-weil-pbc-ample-scheme-separated"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/properties.tex",
+    "place": "Properties Definition 01PS and Lemma 09MP"
+   }
+  },
+  {
+   "text": "Fix a positive-degree homogeneous $s\\in S$ of degree $d>0$ with $X_s$ affine. Regard $s$ as a degree-one section of the invertible module $\\mathcal L^{\\otimes d}$. Applying [lem-sc-invert-s-cohomology] with $p=0$, $F=\\mathcal O_X$, and $\\mathcal L^{\\otimes d}$ gives an isomorphism $\\Gamma_*(X,\\mathcal L^{\\otimes d})_{(s)}\\xrightarrow{\\sim}\\Gamma(X_s,\\mathcal O_X)$ sending $\\xi/s^n$ to $s^{-n}\\xi$. The degree-zero part of the localization of the Veronese section ring $\\Gamma_*(X,\\mathcal L^{\\otimes d})$ at $s$ is the same ring $S_{(s)}$ (elementary reindexing of degrees), so this is $S_{(s)}\\xrightarrow{\\sim}\\Gamma(X_s,\\mathcal O_X)$.",
+   "uses": [
+    "lem-sc-invert-s-cohomology"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/coherent.tex",
+    "place": "Cohomology of Schemes Lemma 09MR (p=0, applied to the Veronese module)"
+   }
+  },
+  {
+   "text": "By [def-pc-proj], $D_+(s)=\\operatorname{Spec}(S_{(s)})$. By the additional clause of [lem-sc-ample-proj-canonical-map], the ring map induced by $f|_{X_s}:X_s\\to D_+(s)$ is exactly $S_{(s)}\\to\\Gamma(X_s,\\mathcal O_X)$, $\\xi/s^n\\mapsto s^{-n}\\xi$; hence it is an isomorphism by step 3.",
+   "uses": [
+    "def-pc-proj",
+    "lem-sc-ample-proj-canonical-map"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/properties.tex",
+    "place": "Properties Lemma 01Q1, localization paragraph; Lemma 01PZ (3) and Constructions Lemma 01N8"
+   }
+  },
+  {
+   "text": "Both $X_s$ and $D_+(s)$ are affine, and their induced map on global sections is an isomorphism by step 3. Therefore $f|_{X_s}$ is an isomorphism by [lem-sc-affine-global-sections-iso].",
+   "uses": [
+    "lem-sc-affine-global-sections-iso"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Schemes Lemma 01I1 and affine Spec-Gamma criterion"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sc-ample-proj-canonical-map",
+  "def-weil-pbc-ample-invertible-module",
+  "lem-weil-pbc-ample-scheme-separated",
+  "lem-sc-invert-s-cohomology",
+  "def-pc-proj",
+  "lem-sc-affine-global-sections-iso"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/properties.tex",
+  "place": "Properties Lemmas 01PZ and 01Q1"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -53,12 +122,37 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-sc-ample-proj-open",
   "by": "worker",
   "date": "2026-10-10"
  },
  "chapter": "sec-curve-estimates",
- "unit": "sk-thm-curveestimate"
+ "unit": "sk-thm-curveestimate",
+ "split_report": {
+  "date": "2026-10-11",
+  "item": "lem-sc-ample-proj-local-chart",
+  "worker": "stage1",
+  "summary": "Repaired the returned split by deleting the child that restated the item's affine-chart clause. The canonical-map child now also states the induced localization map on global sections. The item proves the affine-chart isomorphism directly using ampleness (quasi-compactness and separatedness), the p=0 case of 09MR for the Veronese section ring, the Proj chart description, and the affine global-sections isomorphism criterion.",
+  "blueprint": "Step 1 realizes Properties Lemma 01PZ (canonical map and inverse-image clause). Steps 2-5 realize the inverse-image and localization paragraphs of Properties Lemma 01Q1 via Lemma 01PW, including the final affine chart isomorphism.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-ample-scheme-separated",
+    "why": "The route needs the general theorem that an ample invertible module makes a scheme separated; no node of sk-thm-curveestimate supplies this generic ampleness fact."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-ample-scheme-separated",
+  "lem-weil-pbc-ample-scheme-separated"
+ ],
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-apl1753",
+  "group": "M1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-apl1753 (reviewer sub-agent of L); spot-checked: Return of 17:08 D1 repaired: lem-sc-ample-proj-affine-chart deleted; item proof now runs 01Q1 argument (a) qc + separated via def/09MP, (b) 09MR p=0 on L^d with Veronese reindexing, (c) D_+(s)=Spec S_(s), (d) localization clause added to lem-sc-ample-proj-canonical-map (01PZ(3)/01N8), (e) new mathlib leaf lem-sc-affine-global-sections-iso; read Mathlib IsIso.lean:48 HasAffineProperty isomorphisms (IsAffine X and IsIso f.appTop), one-line specialization for affine target; leaf not a duplicate of the 01I1 nodes; tool_use ample=>separated accepted as generic. FIX more, RETURN less: step 4 cited 'step 2' for the localization isomorphism, corrected to 'step 3'.; 1 file(s) fixed by the reviewer"
+ }
 }
