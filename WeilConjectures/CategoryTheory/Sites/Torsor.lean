@@ -918,7 +918,8 @@ theorem classH1_eq_add_of_equivariant (P P' P'' : Torsor G)
   abel
 
 
-omit [J.WEqualsLocallyBijective AddCommGrpCat.{w}] in
+omit [J.WEqualsLocallyBijective AddCommGrpCat.{w}]
+  [EnoughInjectives (Sheaf J AddCommGrpCat.{w})] in
 /-- The connecting homomorphism `Γ(Q) → H¹(G)` is natural: for a morphism `(φ, χ, ψ)` from a
 short exact sequence `0 → G → I → Q → 0` to `0 → G' → I' → Q' → 0`, the image of `δ(s)` under
 `φ` is `δ'(ψ(s))`. -/

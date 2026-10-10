@@ -13,6 +13,8 @@ public import Mathlib.FieldTheory.IsSepClosed
 public import WeilConjectures.AlgebraicGeometry.Curve.Picard
 public import WeilConjectures.AlgebraicGeometry.Curve.RiemannRoch
 public import WeilConjectures.AlgebraicGeometry.DualNumbers
+public import WeilConjectures.AlgebraicGeometry.DualNumbersBaseChange
+public import WeilConjectures.AlgebraicGeometry.Picard.DualNumbers
 public import WeilConjectures.AlgebraicGeometry.EffectiveDescent
 public import WeilConjectures.AlgebraicGeometry.GroupScheme.Lie
 public import WeilConjectures.AlgebraicGeometry.GroupScheme.Separated
@@ -1241,6 +1243,80 @@ noncomputable instance : Module k (tangentSpaceAt P η[P]) where
 end GrpObj
 
 variable {X : Scheme.{u}} [X.Over (Spec (.of k))]
+
+section OnePoint
+
+variable [IsSepClosed k] [SmoothOfRelativeDimension 1 (X ↘ Spec (.of k))]
+  [IsProper (X ↘ Spec (.of k))] [GeometricallyIntegral (X ↘ Spec (.of k))]
+
+/-- **`Pic^0_{X/k}` over a one-point base.** If `T` is a `k`-scheme with a single point, every
+section of `Pic^0_{X/k}` over `T` is the image of a unique class of fibrewise degree zero on
+`X_T`: an invertible module on `T` is trivial, so `Pic (X_T) ≅ Pic_{X/k}(T)` by the split exact
+sequence (`AlgebraicGeometry.bijective_pic_split`). -/
+lemma bijective_toSheafify_app_picardSubfunctorDegree_zero (T : Over (Spec (.of k)))
+    [Subsingleton T.left] (t₀ : T.left) :
+    Function.Bijective ((toSheafify (fppfTopology.over (Spec (.of k)))
+      (picardSubfunctorDegree (X ↘ Spec (.of k)) 0).toFunctor).app (.op T)) := by
+  set f := X ↘ Spec (.of k)
+  let J := fppfTopology.over (Spec (.of k))
+  let S := picardSubfunctorDegree f 0
+  let α : S.toFunctor ⟶ (picardFunctor f).obj := S.ι ≫ toPicardFunctor f
+  let β : picardFunctorDegree f 0 ⟶ picardFunctor f :=
+    ⟨sheafifyLift J α (picardFunctor f).property⟩
+  have fac : toSheafify J S.toFunctor ≫ β.hom = α := toSheafify_sheafifyLift J α _
+  have : Presheaf.IsLocallyInjective J α := inferInstance
+  have : Presheaf.IsLocallyInjective J β.hom :=
+    Presheaf.isLocallyInjective_of_isLocallyInjective_of_isLocallySurjective_fac J α fac
+  have hβ : Function.Injective (β.hom.app (.op T)) :=
+    (Sheaf.isLocallyInjective_iff_injective β).1 this _
+  have hβS {T' : Over (Spec (.of k))} (M : S.toFunctor.obj (.op T')) :
+      β.hom.app _ ((toSheafify J S.toFunctor).app _ M) = (toPicardFunctor f).app _ M.1 :=
+    ConcreteCategory.congr_hom (NatTrans.congr_app fac (.op T')) M
+  have : Smooth f := SmoothOfRelativeDimension.smooth 1 f
+  have : IsIntegral X := GeometricallyIntegral.isIntegral_of_subsingleton f
+  obtain ⟨pt⟩ := Hom.nonempty_fieldPoints (k := k) f
+  have hσ : pt.1 ≫ f = 𝟙 _ := by
+    rw [pt.2, Algebra.algebraMap_self, CommRingCat.ofHom_id, Spec.map_id]
+  have hsplit := bijective_pic_split f pt.1 hσ
+    isIso_pushforwardUnitMap_pullback_snd_of_geometricallyIntegral T
+  have hone (a : T.left.Pic) : a = 1 := by
+    have := a.isInvertible
+    obtain ⟨e⟩ := Modules.IsInvertible.nonempty_iso_unit t₀ ((fromSkeleton _).obj a.val)
+    exact Pic.eq_iff_nonempty_iso.2 ⟨e ≪≫ Pic.oneIso.symm⟩
+  refine ⟨fun L₁ L₂ h ↦ ?_, fun s ↦ ?_⟩
+  · have h' := congrArg (β.hom.app _) h
+    rw [hβS, hβS] at h'
+    exact Subtype.ext (hsplit.1 (Prod.ext ((hone _).trans (hone _).symm) h'))
+  · have hdeg (t : T.left) : picardDegree f (β.hom.app _ s) t = 0 := by
+      obtain ⟨Z, g, ⟨a, ha⟩, -, -, z, rfl⟩ := exists_flat_mem_of_mem_fppfTopology_over
+        (Presheaf.imageSieve_mem J (toSheafify J S.toFunctor) s) t
+      rw [← picardDegree_map, ← NatTrans.naturality_apply β.hom,
+        show (picardFunctorDegree f 0).obj.map g.op s = (toSheafify J S.toFunctor).app _ a from
+          ha.symm, hβS, picardDegree_toPicardFunctor]
+      exact (mem_picardSubfunctorDegree_iff f 0 a.1).1 a.2 z
+    obtain ⟨M, hM⟩ := hsplit.2 (1, β.hom.app _ s)
+    have hM₂ : (toPicardFunctor f).app _ M = β.hom.app _ s := congrArg Prod.snd hM
+    have hMS : M ∈ S.obj (.op T) := (mem_picardSubfunctorDegree_iff f 0 M).2 fun t ↦ by
+      rw [← picardDegree_toPicardFunctor, hM₂]
+      exact hdeg t
+    exact ⟨⟨M, hMS⟩, hβ (by rw [hβS]; exact hM₂)⟩
+
+omit [IsSepClosed k] [GeometricallyIntegral (X ↘ Spec (.of k))] in
+/-- Over a one-point base `T`, a class which becomes trivial along some `φ : T' ⟶ T` has
+fibrewise degree zero. -/
+lemma mem_picardSubfunctorDegree_zero_of_map_eq_one {T T' : Over (Spec (.of k))} (φ : T' ⟶ T)
+    [Subsingleton T.left] (t' : T'.left) (L : (pullback (X ↘ Spec (.of k)) T.hom).Pic)
+    (hL : Pic.map (baseChangeMap (X ↘ Spec (.of k)) φ) L = 1) :
+    L ∈ (picardSubfunctorDegree (X ↘ Spec (.of k)) 0).obj (.op T) := by
+  have : Smooth (X ↘ Spec (.of k)) := SmoothOfRelativeDimension.smooth 1 _
+  refine (mem_picardSubfunctorDegree_iff _ 0 L).2 fun t ↦ ?_
+  rw [show t = φ.left t' from Subsingleton.elim _ _, ← picardPresheafDegree_map]
+  have h1 := (picardSubgroupDegreeZero (X ↘ Spec (.of k)) T').one_mem
+  have h2 := (mem_picardSubfunctorDegree_iff _ 0 _).1 h1 t'
+  convert h2 using 2
+  exact hL
+
+end OnePoint
 
 /-- **The tangent space of the Jacobian.** Let `X` be a smooth projective curve of genus `g`
 over a separably closed field `k` and let `J` be a group scheme over `k` representing the

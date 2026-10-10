@@ -140,7 +140,8 @@ noncomputable def dualNumbersUnitsInl : X.unitsSheaf ⟶ X.dualNumbersUnitsSheaf
       naturality U V i := by
         ext u
         refine congrArg Additive.ofMul (Units.ext ?_)
-        change (TrivSqZeroExt.inl (X.presheaf.map i ((Additive.toMul u : Γ(X, U.unop)ˣ) : Γ(X, U.unop))) :
+        change (TrivSqZeroExt.inl
+          (X.presheaf.map i ((Additive.toMul u : Γ(X, U.unop)ˣ) : Γ(X, U.unop))) :
           DualNumber Γ(X, V.unop)) = mapRingHom (X.presheaf.map i).hom (TrivSqZeroExt.inl _)
         ext <;> simp }
 
@@ -165,13 +166,10 @@ noncomputable def dualNumbersUnitsScale (c : Γ(X, ⊤)) :
         change scale _ (mapRingHom (X.presheaf.map i).hom _) =
           mapRingHom (X.presheaf.map i).hom (scale _ _)
         ext
-        · simp only [DualNumber.fst_scale]
-          exact (DualNumber.fst_mapRingHom (X.presheaf.map i).hom _).trans
-            ((congrArg _ (DualNumber.fst_scale _ _).symm).trans
-              (DualNumber.fst_mapRingHom (X.presheaf.map i).hom _).symm)
+        · simp only [DualNumber.fst_scale, DualNumber.fst_mapRingHom]
+          try rfl
         · simp only [DualNumber.snd_mapRingHom, DualNumber.snd_scale, map_mul]
-          exact congrArg₂ (· * ·) (X.presheaf_map_homOfLE_top_apply c i).symm
-            (DualNumber.snd_mapRingHom _ _) }
+          exact congrArg (· * _) (X.presheaf_map_homOfLE_top_apply c i).symm }
 
 @[reassoc (attr := simp)]
 lemma dualNumbersOneAddEps_comp_unitsRetract :
@@ -285,7 +283,8 @@ theorem exists_addEquiv_ker_picMap_dualNumbersι :
     ∃ Ψ : Additive (Pic.mapHom X.dualNumbersι).ker ≃+ (Modules.unit X).H 1,
       ∀ (c : Γ(X, ⊤)) (L L' : (Pic.mapHom X.dualNumbersι).ker),
         L'.1 = Pic.map (X.dualNumbersScale c) L.1 → Ψ (.ofMul L') = c • Ψ (.ofMul L) := by
-  let r : (Sheaf.H X.dualNumbersUnitsSheaf 1 : Type u) →+ (Sheaf.H X.structureAddSheaf 1 : Type u) :=
+  let r : (Sheaf.H X.dualNumbersUnitsSheaf 1 : Type u) →+
+      (Sheaf.H X.structureAddSheaf 1 : Type u) :=
     Sheaf.H.map X.dualNumbersUnitsRetract 1
   let Ψ₀ : Additive (Pic.mapHom X.dualNumbersι).ker →+ (Sheaf.H X.structureAddSheaf 1 : Type u) :=
     r.comp ((Pic.toH1UnitsDualNumbersAddEquiv X).toAddMonoidHom.comp

@@ -241,4 +241,25 @@ theorem isPullback_dualNumbersProj (f : X ⟶ Y) :
     apply liftSqZero_congr
     rw [← h₁, sqZeroParam_comp_dualNumbers]
 
+/-- Rescaling the infinitesimal commutes with the functoriality of the thickening:
+`f[ε] ∘ (ε ↦ f^♯(c) ε) = (ε ↦ c ε) ∘ f[ε]`. -/
+theorem dualNumbersScale_comp_dualNumbers (f : X ⟶ Y) (c : Γ(Y, ⊤)) :
+    X.dualNumbersScale (f.appTop c) ≫ f.dualNumbers = f.dualNumbers ≫ Y.dualNumbersScale c := by
+  refine Scheme.Hom.ext rfl fun U ↦ ?_
+  ext a : 2
+  simp only [eqToHom_op, eqToHom_map, Scheme.Hom.comp_app]
+  erw [eqToHom_refl, Category.comp_id]
+  let U' : Y.Opens := U
+  let a' : DualNumber Γ(Y, U') := a
+  change DualNumber.scale (X.presheaf.map (homOfLE le_top : f ⁻¹ᵁ U' ⟶ ⊤).op (f.appTop c))
+      (DualNumber.mapRingHom (f.app U').hom a') =
+    DualNumber.mapRingHom (f.app U').hom
+      (DualNumber.scale (Y.presheaf.map (homOfLE le_top : U' ⟶ ⊤).op c) a')
+  have hc : X.presheaf.map (homOfLE le_top : f ⁻¹ᵁ U' ⟶ ⊤).op (f.appTop c) =
+      f.app U' (Y.presheaf.map (homOfLE le_top : U' ⟶ ⊤).op c) :=
+    (ConcreteCategory.congr_hom (f.naturality (homOfLE le_top : U' ⟶ ⊤).op) c).symm
+  ext
+  · simp [DualNumber.fst_mapRingHom]
+  · simp only [DualNumber.snd_scale, DualNumber.snd_mapRingHom, map_mul, hc]
+
 end AlgebraicGeometry.Scheme
