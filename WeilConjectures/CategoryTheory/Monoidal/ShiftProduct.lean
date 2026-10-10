@@ -143,8 +143,8 @@ lemma shiftProduct_eq_zsmul (h : UnitorsCommShift C) {i j : ℤ} (x : 𝟙_ C �
           (shiftComm (𝟙_ C ⊗ 𝟙_ C) i j).hom) := by
     rw [reassoc_of% hc]
     simp only [CommShift₂Setup.int_ε, CatCenter.app_neg_one_zpow, Preadditive.comp_zsmul,
-      Preadditive.zsmul_comp, Units.smul_def, id_comp, smul_smul, ← Units.val_mul, ← Int.negOnePow_add, ← two_mul, Int.negOnePow_two_mul,
-      Units.val_one, one_smul]
+      Preadditive.zsmul_comp, Units.smul_def, id_comp, smul_smul, ← Units.val_mul,
+      ← Int.negOnePow_add, ← two_mul, Int.negOnePow_two_mul, Units.val_one, one_smul]
     simp only [curriedTensor_obj_obj, Iso.inv_hom_id, comp_id]
   have h₁ := NatTrans.shift_app_comm ((curriedTensor C).map x) j (𝟙_ C)
   have h₂ := (shiftFunctorComm C i j).hom.naturality (λ_ (𝟙_ C)).hom
