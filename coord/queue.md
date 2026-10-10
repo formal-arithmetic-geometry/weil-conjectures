@@ -1,8 +1,8 @@
 # Work queue
 
-899 items; claim with `tools/claim.py next <group> [--stage N]`.
+898 items; claim with `tools/claim.py next <group> [--stage N]`.
 
-## Stage 1: nodes to split (138)
+## Stage 1: nodes to split (135)
 
 | node | distance to a target | Lean state on the done branch |
 |---|---|---|
@@ -23,8 +23,8 @@
 | `lem-pc-base-change-rhom-perfect` | 3019 | none |
 | `lem-pc-global-hom-adjunction` | 3019 | none |
 | `lem-pc-koszul-affine-detection` | 3019 | none |
-| `lem-sc-flat-precompose-pus` | 3019 | none |
 | `def-pc-global-derived-rhom` | 3020 | none |
+| `lem-pc-global-hom-pullback-adjunction` | 3020 | none |
 | `lem-pc-qcqs-derived-direct-image-right-adjoint` | 3020 | none |
 | `lem-sc-affine-perfect-derived-tensor-hom` | 3020 | none |
 | `lem-sc-affine-perfect-open-represent-cohomology` | 3020 | none |
@@ -65,16 +65,13 @@
 | `def-nagata-morphism-equality-stage` | - | none |
 | `def-nagata-qc-open-equality-stage` | - | none |
 | `def-nagata-relative-gluing-datum-descent` | - | none |
-| `def-nagata-scheme-theoretically-dense-open` | - | none |
 | `lem-pc-coherent-hi` | - | sorry_here |
-| `lem-pod-lattice-stabilizer-open` | - | none |
 | `lem-sc-affine-generic-second` | - | sorry_here |
 | `lem-sc-global-functions` | - | rests_on_sorry |
 | `lem-sc-pic-affine-quotient` | - | none |
 | `lem-weil-pbc-constant-subsheaf-generic` | - | none |
 | `lem-weil-pbc-pullback-finite-locally-constant` | - | none |
 | `lemma-nagata-filtered-colimit-finite-data` | - | none |
-| `def-nagata-affine-fp-descent` | - | none |
 | `def-nagata-morphism-descent` | - | none |
 | `def-nagata-qc-open-descent` | - | none |
 | `def-nagata-relative-finite-affine-presentation` | - | none |
@@ -145,7 +142,7 @@
 | `lem-zl-noether-normalization-dimension` | - | none |
 | `lem-pur-rhom-global-sections` | - | none |
 
-## Stage 2: nodes to state (761)
+## Stage 2: nodes to state (763)
 
 | node | distance to Mathlib | kind |
 |---|---|---|
@@ -153,6 +150,7 @@
 | `cor-pqf-proper-quasifinite-finite` | 1 | state |
 | `def-galois-category` | 1 | state |
 | `def-kun-topological-dimension-at-point` | 1 | state |
+| `def-nagata-dense-compactification` | 1 | state |
 | `def-nagata-directed-finite-upper-bound` | 1 | state |
 | `def-nagata-extended-ideal` | 1 | state |
 | `def-nagata-homogeneous-localization-degree-zero` | 1 | state |
@@ -239,6 +237,7 @@
 | `lem-pc-affine-surjective-structure-map-closed-immersion` | 1 | state |
 | `lem-pc-alg-closed-reduced-algebra-no-idempotents-dim-one` | 1 | state |
 | `lem-pc-ample-affine-loci-criterion` | 1 | state |
+| `lem-pc-cartier-divisor-nowhere-dense` | 1 | state |
 | `lem-pc-cech-exact` | 1 | state |
 | `lem-pc-complex-hocolim-colimit` | 1 | state |
 | `lem-pc-derived-acyclic-resolution` | 1 | state |
@@ -911,7 +910,7 @@
 | `lem-weil-pbc-projective-space-zero-isomorphism` | 4 | state |
 | `def-nagata-fixed-base-separated-stage` | 6 | state |
 
-Not open yet: 1551 nodes that wait for a statement dependency, 178 nodes that wait for stage 1.
+Not open yet: 1552 nodes that wait for a statement dependency, 175 nodes that wait for stage 1.
 
 ## Stage 3: modules to prove (0)
 
