@@ -506,3 +506,122 @@ lemma frobeniusEnd_stalkAt_mul {m : ℕ} (hm : 1 ≤ m)
       (c₁.trans c₂.symm)).trans (toModuleCat_map_comp_hom _ _)
 
 end AlgebraicGeometry.WeilSheaf
+
+namespace AlgebraicGeometry.WeilSheaf
+
+open scoped AlgebraicGeometry.ProEtale
+
+variable {k₀ : Type u} [Field k₀] [Finite k₀] {l : ℕ} [Fact l.Prime] [Fact (ringChar k₀ ≠ l)]
+  {X : Scheme.{u}} [X.Over (Spec (CommRingCat.of k₀))]
+
+variable (F : WeilSheaf k₀ l X)
+
+/-- The Frobenius of the stalk relative to `𝔽_{q⁰}` is the identity. -/
+lemma frobeniusEnd_stalkAt_zero
+    (s : Spec (.of (AlgebraicClosure k₀)) ⟶ (X ↘ Spec (CommRingCat.of k₀)).geometricFiber)
+    (hs : s ≫ ((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius ^ 0).hom =
+      (specGeometricFrobenius k₀ ^ 0).hom ≫ s) :
+    (F.stalkAt s 0 hs).frobeniusEnd = LinearMap.id := by
+  rw [frobeniusEnd_stalkAt, globalSectionsTransport_frobeniusPowStr_zero F
+    (by rw [pow_zero]; rfl), CategoryTheory.Functor.map_id]
+  rfl
+
+/-- The transport along a square `g ≫ s = s' ≫ Frʲ` intertwines the Frobenius of the stalks
+at `s` and at `s'` relative to `𝔽_{qᵐ}`. -/
+lemma toModuleCat_map_globalSectionsTransport_comp_frobeniusEnd_stalkAt
+    {s s' : Spec (.of (AlgebraicClosure k₀)) ⟶ (X ↘ Spec (CommRingCat.of k₀)).geometricFiber}
+    {g : Spec (.of (AlgebraicClosure k₀)) ⟶ Spec (.of (AlgebraicClosure k₀))} {j m : ℕ}
+    (hj : 1 ≤ j) (hm : 1 ≤ m)
+    (hg : g ≫ s = s' ≫ ((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius ^ j).hom)
+    (hs : s ≫ ((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius ^ m).hom =
+      (specGeometricFrobenius k₀ ^ m).hom ≫ s)
+    (hs' : s' ≫ ((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius ^ m).hom =
+      (specGeometricFrobenius k₀ ^ m).hom ≫ s')
+    (hcomm : g ≫ (specGeometricFrobenius k₀ ^ m).hom = (specGeometricFrobenius k₀ ^ m).hom ≫ g) :
+    ((WeilCoefficients.toModuleCat l).map
+        (ProEtale.globalSectionsTransport _ hg (F.frobeniusPowStr j))).hom ∘ₗ
+        (F.stalkAt s m hs).frobeniusEnd =
+      (F.stalkAt s' m hs').frobeniusEnd ∘ₗ ((WeilCoefficients.toModuleCat l).map
+        (ProEtale.globalSectionsTransport _ hg (F.frobeniusPowStr j))).hom := by
+  rw [frobeniusEnd_stalkAt, frobeniusEnd_stalkAt, ← toModuleCat_map_comp_hom,
+    ← toModuleCat_map_comp_hom,
+    globalSectionsTransport_frobeniusPowStr_comm F j m hj hm hg hs.symm hs'.symm hcomm]
+
+/-- The stalks, with their Frobenius relative to `𝔽_{qᵐ}`, at two geometric points over the same
+point with finite residue field are isomorphic: the points are related by a square
+`g ≫ s = s' ≫ Frʲ`
+(`AlgebraicGeometry.Scheme.Hom.exists_iso_comp_eq_comp_geometricGaloisFrobenius_pow`), and the
+transport along it intertwines the two Frobenius. -/
+lemma nonempty_equiv_stalkAt
+    (s s' : Spec (.of (AlgebraicClosure k₀)) ⟶ (X ↘ Spec (CommRingCat.of k₀)).geometricFiber)
+    (hss' : (s ≫ (X ↘ Spec (CommRingCat.of k₀)).geometricFiberProj).base
+        (IsLocalRing.closedPoint (AlgebraicClosure k₀)) =
+      (s' ≫ (X ↘ Spec (CommRingCat.of k₀)).geometricFiberProj).base
+        (IsLocalRing.closedPoint (AlgebraicClosure k₀)))
+    (hx : (s ≫ (X ↘ Spec (CommRingCat.of k₀)).geometricFiberProj).base
+        (IsLocalRing.closedPoint (AlgebraicClosure k₀)) ∈ X.finitePoints) (m : ℕ)
+    (hs : s ≫ ((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius ^ m).hom =
+      (specGeometricFrobenius k₀ ^ m).hom ≫ s)
+    (hs' : s' ≫ ((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius ^ m).hom =
+      (specGeometricFrobenius k₀ ^ m).hom ≫ s') :
+    Nonempty ((F.stalkAt s m hs).Equiv (F.stalkAt s' m hs')) := by
+  obtain ⟨g, j, hj, hg, hcomm⟩ :=
+    (X ↘ Spec (CommRingCat.of k₀)).exists_iso_comp_eq_comp_geometricGaloisFrobenius_pow s s'
+      hss' hx
+  have := F.isIso_globalSectionsTransport_frobeniusPowStr j hg
+  let T := ProEtale.globalSectionsTransport _ hg (F.frobeniusPowStr j)
+  let eL := WeilCoefficients.linearEquivOfIso (asIso T)
+  refine ⟨.ofComp eL ?_⟩
+  rw [linearEquivOfIso_toLinearMap, asIso_hom]
+  rcases Nat.eq_zero_or_pos m with rfl | hm
+  · rw [frobeniusEnd_stalkAt_zero, frobeniusEnd_stalkAt_zero]
+    rfl
+  · exact F.toModuleCat_map_globalSectionsTransport_comp_frobeniusEnd_stalkAt hj hm hg hs hs'
+      (hcomm m)
+
+/-- The characteristic polynomial of the Frobenius on the stalk does not depend on the
+geometric point: for geometric points `s` and `s'` over the same point of `X` with finite
+residue field, fixed up to reparametrisation by `Frᵐ` and by `Fr^{m'}` with `m ∣ m'`, the
+Frobenius of `F_{s'}` relative to `𝔽_{q^{m'}}` has the characteristic polynomial of the
+`m' / m`-th power of the Frobenius of `F_s` relative to `𝔽_{qᵐ}`. -/
+theorem charpoly_frobeniusEnd_stalkAt_of_dvd
+    (s s' : Spec (.of (AlgebraicClosure k₀)) ⟶ (X ↘ Spec (CommRingCat.of k₀)).geometricFiber)
+    (hss' : (s ≫ (X ↘ Spec (CommRingCat.of k₀)).geometricFiberProj).base
+        (IsLocalRing.closedPoint (AlgebraicClosure k₀)) =
+      (s' ≫ (X ↘ Spec (CommRingCat.of k₀)).geometricFiberProj).base
+        (IsLocalRing.closedPoint (AlgebraicClosure k₀)))
+    (hx : (s ≫ (X ↘ Spec (CommRingCat.of k₀)).geometricFiberProj).base
+        (IsLocalRing.closedPoint (AlgebraicClosure k₀)) ∈ X.finitePoints)
+    {m m' : ℕ} (hmm' : m ∣ m')
+    (hs : s ≫ ((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius ^ m).hom =
+      (specGeometricFrobenius k₀ ^ m).hom ≫ s)
+    (hs' : s' ≫ ((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius ^ m').hom =
+      (specGeometricFrobenius k₀ ^ m').hom ≫ s') :
+    (F.stalkAt s' m' hs').frobeniusEnd.charpoly =
+      ((F.stalkAt s m hs).frobeniusEnd ^ (m' / m)).charpoly := by
+  have congr_index {t} {n n' : ℕ} (h : n = n')
+      (ht : t ≫ ((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius ^ n).hom =
+        (specGeometricFrobenius k₀ ^ n).hom ≫ t)
+      (ht' : t ≫ ((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius ^ n').hom =
+        (specGeometricFrobenius k₀ ^ n').hom ≫ t) :
+      (F.stalkAt t n ht).frobeniusEnd.charpoly = (F.stalkAt t n' ht').frobeniusEnd.charpoly := by
+    subst h
+    rfl
+  rcases Nat.eq_zero_or_pos m' with rfl | hm'
+  · have h₀ : s ≫ ((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius ^ 0).hom =
+        (specGeometricFrobenius k₀ ^ 0).hom ≫ s := by
+      rw [pow_zero, pow_zero]
+      exact (Category.comp_id _).trans (Category.id_comp _).symm
+    obtain ⟨e⟩ := F.nonempty_equiv_stalkAt s s' hss' hx 0 h₀ hs'
+    rw [e.charpoly_frobeniusEnd, frobeniusEnd_stalkAt_zero, Nat.zero_div, pow_zero]
+    rfl
+  · have hm : 1 ≤ m := Nat.pos_of_dvd_of_pos hmm' hm'
+    obtain ⟨c, rfl⟩ := hmm'
+    rw [Nat.mul_div_cancel_left c hm, ← frobeniusEnd_stalkAt_mul F s hm hs c]
+    have hs'' := comp_geometricGaloisFrobenius_pow_mul s hs c
+    rw [congr_index (Nat.mul_comm m c) hs'
+      ((Nat.mul_comm c m).symm ▸ hs' :)]
+    obtain ⟨e⟩ := F.nonempty_equiv_stalkAt s s' hss' hx (c * m) hs'' _
+    exact e.charpoly_frobeniusEnd
+
+end AlgebraicGeometry.WeilSheaf

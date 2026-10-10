@@ -175,26 +175,6 @@ noncomputable def stalkAt
       ((F.stalkObjSpecFrobeniusPowIso m s).symm ≪≫ eqToIso (congrArg F.stalkObj hs.symm) ≪≫
         F.stalkObjFrobeniusPowIso m s) }
 
-/-- The characteristic polynomial of the Frobenius on the stalk does not depend on the
-geometric point: for geometric points `s` and `s'` over the same point of `X`, fixed up to
-reparametrisation by `Frᵐ` and by `Fr^{m'}` with `m ∣ m'`, the Frobenius of `F_{s'}` relative
-to `𝔽_{q^{m'}}` has the characteristic polynomial of the `m' / m`-th power of the Frobenius
-of `F_s` relative to `𝔽_{qᵐ}`. -/
-theorem charpoly_frobeniusEnd_stalkAt_of_dvd
-    (s s' : Spec (.of (AlgebraicClosure k₀)) ⟶ (X ↘ Spec (CommRingCat.of k₀)).geometricFiber)
-    (hss' : (s ≫ (X ↘ Spec (CommRingCat.of k₀)).geometricFiberProj).base
-        (IsLocalRing.closedPoint (AlgebraicClosure k₀)) =
-      (s' ≫ (X ↘ Spec (CommRingCat.of k₀)).geometricFiberProj).base
-        (IsLocalRing.closedPoint (AlgebraicClosure k₀)))
-    {m m' : ℕ} (hmm' : m ∣ m')
-    (hs : s ≫ ((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius ^ m).hom =
-      (specGeometricFrobenius k₀ ^ m).hom ≫ s)
-    (hs' : s' ≫ ((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius ^ m').hom =
-      (specGeometricFrobenius k₀ ^ m').hom ≫ s') :
-    (F.stalkAt s' m' hs').frobeniusEnd.charpoly =
-      ((F.stalkAt s m hs).frobeniusEnd ^ (m' / m)).charpoly :=
-  sorry
-
 end GeometricStalk
 
 /-- The geometric stalk `F_x̄` of `F` at a closed point `x`, with its local geometric Frobenius
