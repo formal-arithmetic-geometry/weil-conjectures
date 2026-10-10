@@ -2697,3 +2697,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 21:37 L: merged deliver/J1/lem-pc-perfect-complex-descent (reviewer FIX+NODE(1); after a return; new nodes: 3)
 - 21:37 L: merged deliver/G1/pqf-lem-limit-qc-open-descends (reviewer PASS; first push; new nodes: 0)
 - 21:38 UTC L deleted lem-pc-perfect-affine-model (R-pcd2624, duplicate of lem-pc-perfect-affine-bounded-projective added by R-pcs2624 three minutes earlier, Tag 08EB); citer lem-pc-perfect-complex-descent redirected, cross-unit tool use declared
+- 21:38 L: merged deliver/F1/lem-pc-ringed-space-derived-limit-stalk-injective (reviewer FIX; first push; new nodes: 1)

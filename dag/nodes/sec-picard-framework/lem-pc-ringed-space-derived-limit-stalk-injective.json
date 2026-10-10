@@ -15,7 +15,7 @@
  "title": "Eventual cohomology stabilization gives stalk injectivity for a derived limit",
  "chapter": "sec-picard-framework",
  "unit": "sk-thm-picard-duality",
- "statement": "Let $(X,\\mathcal O_X)$ be a ringed space, let $(K_n)$ be an inverse system in $D(\\mathcal O_X)$, let $x\\in X$ and let $m\\in\\mathbf Z$. Suppose there are an index $n(x)$ and a fundamental system $\\mathfrak U_x$ of open neighborhoods of $x$ such that, for every $U\\in\\mathfrak U_x$, (i) $R^1\\varprojlim_n H^{m-1}(U,K_n)=0$, and (ii) for every $n\\ge n(x)$ the transition map $H^m(U,K_n)\\to H^m(U,K_{n(x)})$ is injective. Then the natural map on stalks $H^m(R\\varprojlim_n K_n)_x\\to H^m(K_{n(x)})_x$ is injective. Here cohomology is sheaf cohomology on opens [pqf-def-cohomology] and the derived limit is as in [def-weil-derived-limit].",
+ "statement": "Let $(X,\\mathcal O_X)$ be a ringed space, let $(K_n)$ be an inverse system in $D(\\mathcal O_X)$, and let $(K,p,\\delta)$ be a derived limit of it [def-weil-derived-limit], written $K=R\\varprojlim_nK_n$ (any one; derived limits are not unique up to canonical isomorphism). Let $x\\in X$ and $m\\in\\mathbf Z$. Suppose there are an index $n(x)$ and a fundamental system $\\mathfrak U_x$ of open neighborhoods of $x$ such that, for every $U\\in\\mathfrak U_x$, (i) $R^1\\varprojlim_n H^{m-1}(U,K_n)=0$, and (ii) for every $n\\ge n(x)$ the transition map $H^m(U,K_n)\\to H^m(U,K_{n(x)})$ is injective. Then the map on stalks $H^m(K)_x\\to H^m(K_{n(x)})_x$ induced by $\\mathrm{pr}_{n(x)}\\circ p:K\\to K_{n(x)}$ is injective. Here cohomology is sheaf cohomology on opens [pqf-def-cohomology].",
  "source": {
   "document": "literature/stacks-project/cohomology.tex",
   "place": "Tag 0D61, label lemma-cohomology-derived-limit-injective"
@@ -26,9 +26,48 @@
   "def-weil-derived-limit",
   "pqf-def-cohomology"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Let $\\gamma\\in H^m(K)_x$ map to zero in $H^m(K_{n(x)})_x$ under the map induced by $\\mathrm{pr}_{n(x)}\\circ p$. By [lem-pc-ringed-space-sheafification-cohomology], choose an open neighborhood $U_0$ of $x$ and a class $\\widetilde\\gamma_0\\in H^m(U_0,K)$ representing $\\gamma$. Its image in $H^m(K_{n(x)})_x$ is zero, so the final clause of that node (applied to $K_{n(x)}$) lets us shrink to an open $U_1\\subseteq U_0$ containing $x$ on which the image of $\\widetilde\\gamma_0$ in $H^m(U_1,K_{n(x)})$ is zero. Since $\\mathfrak U_x$ is a fundamental system, choose $U\\in\\mathfrak U_x$ with $U\\subseteq U_1$, and let $\\widetilde\\gamma\\in H^m(U,K)$ be the restriction of $\\widetilde\\gamma_0$; it still represents $\\gamma$, and its image $\\widetilde\\gamma_{n(x)}\\in H^m(U,K_{n(x)})$ is zero, being a restriction of zero. Hypotheses (i) and (ii) therefore apply to this $U$.",
+   "uses": [
+    "lem-pc-ringed-space-sheafification-cohomology"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/cohomology.tex",
+    "place": "Tag 0D61, proof, first paragraph; Tag 0BKJ"
+   }
+  },
+  {
+   "text": "For this $U\\in\\mathfrak U_x$, the short exact sequence of [lem-pc-ringed-space-rgamma-derived-limit] gives $0\\to R^1\\varprojlim_n H^{m-1}(U,K_n)\\to H^m(U,K)\\to\\varprojlim_n H^m(U,K_n)\\to0$, whose right map has components $H^m(U,\\mathrm{pr}_n\\circ p)$. The left term is zero by hypothesis (i). The map from the inverse limit on the right to $H^m(U,K_{n(x)})$ is injective: a compatible family whose $n(x)$-component is zero has zero $n$-component for every $n\\ge n(x)$ by hypothesis (ii), and each earlier component is the image of the zero $n(x)$-component under the transition maps. Since $\\widetilde\\gamma_{n(x)}=0$, $\\widetilde\\gamma$ maps to zero in the inverse limit and therefore is zero.",
+   "uses": [
+    "lem-pc-ringed-space-rgamma-derived-limit"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/cohomology.tex",
+    "place": "Tag 0D61, proof, short exact sequence and hypotheses (1), (2)"
+   }
+  },
+  {
+   "text": "Since the representative restricts to zero on a neighborhood of $x$, its germ $\\gamma$ is zero. Thus the natural map $H^m(R\\varprojlim_nK_n)_x\\to H^m(K_{n(x)})_x$ is injective.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/cohomology.tex",
+    "place": "Tag 0D61, proof, conclusion"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-ringed-space-sheafification-cohomology",
+  "lem-pc-ringed-space-rgamma-derived-limit"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Tag 0D61, label lemma-cohomology-derived-limit-injective"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -60,10 +99,27 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-pc-ringed-space-pointwise-truncation-limit",
   "by": "worker",
   "date": "2026-10-10"
- }
+ },
+ "split_report": {
+  "date": "2026-10-11",
+  "item": "lem-pc-ringed-space-derived-limit-stalk-injective",
+  "worker": "stage1",
+  "summary": "Split Tag 0D61 into the stalk representative/shrinking input from Tag 0BKJ and the derived-sections short exact sequence from Tag 0D60. The proof now follows the source: represent a stalk class, shrink until its level n(x) image vanishes, use the Milnor exact sequence and eventual injectivity to kill the representative, and conclude stalk injectivity.",
+  "blueprint": "The steps realize the first step of blueprint ancestor lem-sc-finite-duality, namely injectivity of the truncation-limit map on each cohomology stalk.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-dls2642",
+  "group": "F1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-dls2642 (reviewer sub-agent of L); spot-checked: Statement vs Tag 0D61 and citer lem-pc-ringed-space-pointwise-truncation-limit (C4 ok); new node lem-pc-ringed-space-sheafification-cohomology vs Tag 0BKJ: real lemma, not duplicate, no Mathlib (not b/c/d); no products/K-injective/stalk-product facts used. FIX more, RETURN less: (1) E hypothesis check missed by F1's second reading: Step 1 shrank to an arbitrary neighbourhood U, but (i),(ii) hold only for U in the fundamental system U_x; Step 1 now shrinks further to U in U_x. (2) E/def-weil-derived-limit: statement and steps no longer write 'the natural map' on R lim as if canonical; they fix a derived limit (K,p,delta) and the map induced by pr_{n(x)} o p; Step 2 names the right map of the 0D60 sequence as H^m(U, pr_n o p).; 1 file(s) fixed by the reviewer"
+ },
+ "lead_note": "2026-10-10 L (R-dls2642): E7: statement now names the derived limit (K,p,delta) as any one of def-weil-derived-limit and the stalk map as induced by pr_{n(x)} o p, which is what lem-pc-ringed-space-pointwise-truncation-limit uses; no 'the/natural' derived limit."
 }
