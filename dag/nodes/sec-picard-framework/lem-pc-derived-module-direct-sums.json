@@ -21,9 +21,56 @@
  "stmt_deps": [
   "def-weil-abstract-derived-category"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "For each degree r, define the termwise direct sum by $(\\bigoplus_i K_i)^r=\\bigoplus_i K_i^r$ and take the direct sum of the differentials. The differential squares to zero and the canonical inclusions are chain maps, by the cochain-complex definition.",
+   "uses": [
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/injectives.tex",
+    "place": "Injectives, Lemma 07D9 (lemma-derived-products), construction of the direct-sum complex"
+   }
+  },
+  {
+   "text": "By [lem-weil-pbc-ring-modules-grothendieck-abelian], the category of hmtBcmodules is Grothendieck abelian, so filtered colimits of hmtBcmodules are exact. A set-indexed direct sum $\bigoplus_{i\\in I}$ is the filtered colimit over finite subsets \\subseteq I$ of the finite direct sums $\bigoplus_{i\\in J}$, which are exact in any abelian category; hence set-indexed direct sums of hmtBcmodules are exact. Therefore kernels, images and cohomology of the termwise differential commute with the direct sum, ^r(\bigoplus_iK_i^\bullet)\\cong\bigoplus_iH^r(K_i^\bullet)$, and a family of quasi-isomorphisms [def-weil-abstract-derived-category] has a quasi-isomorphic termwise direct sum.",
+   "uses": [
+    "lem-weil-pbc-ring-modules-grothendieck-abelian",
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/injectives.tex",
+    "place": "Injectives, Lemma 07D9 (lemma-derived-products), clauses (1)-(2), exactness of direct sums in A-Mod"
+   }
+  },
+  {
+   "text": "Let $ be an object of (A)$. By [lem-weil-pbc-kinjective-functorial-existence] (Mod(A) is Grothendieck abelian by [lem-weil-pbc-ring-modules-grothendieck-abelian]) there is a quasi-isomorphism \to I^\bullet$ with ^\bullet$ K-injective, i.e. $\\operatorname{Hom}^\bullet(N,I^\bullet)$ is acyclic for every acyclic $; taking ^0$, every chain map from an acyclic complex to ^\bullet$ is null-homotopic, which is the K-injectivity hypothesis of [lem-weil-pbc-kinjective-hom-derived]. So \\cong QI^\bullet$ in (A)$ and it suffices to treat =QI^\bullet$. By [lem-weil-pbc-kinjective-hom-derived], applied to $\bigoplus_iK_i^\bullet$ and to each ^\bullet$, $\\operatorname{Hom}_{D(A)}(\bigoplus_iK_i^\bullet,I^\bullet)=\\operatorname{Hom}_{K(A)}(\bigoplus_iK_i^\bullet,I^\bullet)$ and $\\operatorname{Hom}_{K(A)}(K_i^\bullet,I^\bullet)=\\operatorname{Hom}_{D(A)}(K_i^\bullet,I^\bullet)$, compatibly with composition with the coprojections. The middle identification $\\operatorname{Hom}_{K(A)}(\bigoplus_iK_i^\bullet,I^\bullet)=\\prod_i\\operatorname{Hom}_{K(A)}(K_i^\bullet,I^\bullet)$ is the degreewise coproduct universal property for chain maps and for homotopies (a homotopy out of the direct sum is a family of homotopies). Hence the images of the coprojections satisfy the coproduct universal property in (A)$ [def-weil-abstract-derived-category].",
+   "uses": [
+    "lem-weil-pbc-kinjective-functorial-existence",
+    "lem-weil-pbc-ring-modules-grothendieck-abelian",
+    "lem-weil-pbc-kinjective-hom-derived",
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/injectives.tex",
+    "place": "Injectives, Lemma 07D9 (lemma-derived-products), clauses (1)-(2), coproduct universal property"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-abstract-derived-category",
+  "lem-weil-pbc-ring-modules-grothendieck-abelian",
+  "lem-weil-pbc-kinjective-functorial-existence",
+  "lem-weil-pbc-kinjective-hom-derived"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/injectives.tex",
+  "place": "Injectives, Lemma 07D9 (lemma-derived-products), clauses (1)-(2)"
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -31,13 +78,40 @@
    "results": "only GrothendieckAbelian.lean:72 (coproducts in the abelian category itself); nothing for DerivedCategory or HomotopyCategory",
    "date": "2026-10-10",
    "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rn -i 'coproduct|PreservesColimitsOfShape|HasCoproducts' Mathlib/Algebra/Homology/DerivedCategory Mathlib/Algebra/Homology/HomotopyCategory (slopmaster2 mathlib), reviewer R-dds2028",
+   "results": "no hits; Mathlib has AB4/AB5/IsGrothendieckAbelian for ModuleCat (Algebra/Category/ModuleCat/AB.lean) but nothing on coproducts in DerivedCategory",
+   "date": "2026-10-11",
+   "verdict": "no match"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-pc-derived-module-free-generation"
  },
  "chapter": "sec-picard-framework",
- "unit": "sk-thm-picard-f-representable"
+ "unit": "sk-thm-picard-f-representable",
+ "split_report": {
+  "date": "2026-10-11",
+  "item": "lem-pc-derived-module-direct-sums",
+  "worker": "stage1",
+  "summary": "Statement-only dependency for the parent free-generation proof, matching Stacks Lemma 07D9 clauses (1)-(2).",
+  "blueprint": "Realizes proof steps 2 and 3 of lem-pc-derived-module-free-generation: termwise direct sums of complexes compute direct sums in D(A)."
+ },
+ "tool_uses": [
+  "lem-weil-pbc-ring-modules-grothendieck-abelian",
+  "lem-weil-pbc-kinjective-functorial-existence",
+  "lem-weil-pbc-kinjective-hom-derived"
+ ],
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-dds2028",
+  "group": "E1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-dds2028 (reviewer sub-agent of L); spot-checked: Mathlib grep of DerivedCategory/HomotopyCategory for coproduct/HasCoproducts/PreservesColimitsOfShape: no match, so not a leaf. Statement matches Stacks 07D9 (1)-(2) for Mod(A). FIX more, RETURN less: C1 step 2 assumed exactness of direct sums in Mod(A): now cites lem-weil-pbc-ring-modules-grothendieck-abelian (Mathlib IsGrothendieckAbelian ModuleCat) with direct sum = filtered colimit of finite sums; C1 step 3 assumed K-injective resolutions ('the cited Stacks lemma' = 079P) and Hom_D=Hom_K for K-injective targets: now cites lem-weil-pbc-kinjective-functorial-existence and lem-weil-pbc-kinjective-hom-derived (generic tools, tool_uses), with the Hom-complex-acyclic vs null-homotopic K-injective definitions reconciled in the step; proof_deps updated; reviewer grep recorded in mathlib_searches.; 1 file(s) fixed by the reviewer"
+ }
 }
