@@ -1339,3 +1339,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 11:46 L: accepted lem-weil-pbc-tor-one-surjective-change-rings (00MN, 5 steps; new Mathlib leaf: base change of a free module is free).
 - 11:47 L: accepted lem-weil-pbc-tor-ideal-kernel-naturality (00M6 with naturality, 6 steps, 0 new).
 - 11:47 L: accepted lem-weil-pbc-torsion-cyclic-presentation (05E8, 4 steps, 0 new).
+- 2026-10-10, delivery of K1: lem-weil-pbc-flat-formally-smooth-closed-fibre-adic merged from deliver/K1/lem-weil-pbc-flat-formally-smooth-closed-fibre-adic (1 commit(s), 4 new node(s), spot-checked by L: L: 07NQ: reduction to complete rings, Cohen presentation, removing the regular-fibre part, base change, the square-zero lifting with the derivation correction; 4 new nodes, two near the 07NN/07NL nodes (lead notes)); claim closed
