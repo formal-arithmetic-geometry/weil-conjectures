@@ -9,7 +9,7 @@
     "def-weil-integral-derived-reduction"
    ]
   },
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "Derived change of rings along a morphism of sheaves of rings, computed by K-flat resolutions",
@@ -26,9 +26,65 @@
   "def-pc-kflat-complex",
   "lem-pc-kflat-resolution"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Choose a K-flat resolution $\\rho:\\mathcal R^\\bullet\\to\\mathcal O'$ ($\\mathcal O'$ in degree $0$) from [lem-pc-kflat-resolution]. A morphism of complexes is a quasi-isomorphism if and only if its mapping cone is acyclic (long exact cohomology sequence of the cone triangle of [def-weil-abstract-derived-category]); so $C^\\bullet=\\operatorname{Cone}(\\alpha)$ and $\\operatorname{Cone}(\\rho)$ are acyclic. Use the symmetry isomorphism $\\operatorname{Tot}(\\mathcal A^\\bullet\\otimes\\mathcal B^\\bullet)\\cong\\operatorname{Tot}(\\mathcal B^\\bullet\\otimes\\mathcal A^\\bullet)$, $a\\otimes b\\mapsto(-1)^{pq}b\\otimes a$ on $\\mathcal A^p\\otimes\\mathcal B^q$, of the total tensor complexes [def-pc-tensor-complex-sheaves], natural in both arguments. Consider the commutative square with top row $\\operatorname{Tot}(\\mathcal R^\\bullet\\otimes\\mathcal P^\\bullet)\\to\\operatorname{Tot}(\\mathcal R^\\bullet\\otimes\\mathcal Q^\\bullet)$ (induced by $\\alpha$), bottom row $\\operatorname{Tot}(\\mathcal O'\\otimes\\mathcal P^\\bullet)\\to\\operatorname{Tot}(\\mathcal O'\\otimes\\mathcal Q^\\bullet)$ and vertical maps induced by $\\rho$. Top row: by [lem-pc-tensor-mapping-cone-iso] with $\\mathcal A^\\bullet=\\mathcal R^\\bullet$ and the morphism $\\alpha$, its cone is $\\operatorname{Tot}(\\mathcal R^\\bullet\\otimes C^\\bullet)\\cong\\operatorname{Tot}(C^\\bullet\\otimes\\mathcal R^\\bullet)$, acyclic because $C^\\bullet$ is acyclic and $\\mathcal R^\\bullet$ is K-flat [def-pc-kflat-complex]; so the top row is a quasi-isomorphism. Left column: after the symmetry it is $\\operatorname{Tot}(\\mathcal P^\\bullet\\otimes\\mathcal R^\\bullet)\\to\\operatorname{Tot}(\\mathcal P^\\bullet\\otimes\\mathcal O')$, whose cone is $\\operatorname{Tot}(\\mathcal P^\\bullet\\otimes\\operatorname{Cone}(\\rho))\\cong\\operatorname{Tot}(\\operatorname{Cone}(\\rho)\\otimes\\mathcal P^\\bullet)$ by [lem-pc-tensor-mapping-cone-iso], acyclic because $\\operatorname{Cone}(\\rho)$ is acyclic and $\\mathcal P^\\bullet$ is K-flat [def-pc-kflat-complex]; likewise the right column with $\\mathcal Q^\\bullet$. Taking $H^n$ of the commutative square, three of the four maps are isomorphisms, hence so is the bottom row. Since $\\mathcal O'$ sits in degree $0$, $\\operatorname{Tot}(\\mathcal O'\\otimes_{\\mathcal O}\\mathcal P^\\bullet)$ is the complex $\\mathcal O'\\otimes_{\\mathcal O}\\mathcal P^n$ with differential $1\\otimes d$, identified with $\\mathcal P^\\bullet\\otimes_{\\mathcal O}\\mathcal O'$ by the symmetry of the tensor product of modules [def-pur-sheaf-tensor-product], and the bottom row becomes $\\alpha\\otimes1$. This proves (1).",
+   "uses": [
+    "lem-pc-kflat-resolution",
+    "lem-pc-tensor-mapping-cone-iso",
+    "def-pc-kflat-complex",
+    "def-pc-tensor-complex-sheaves",
+    "def-weil-abstract-derived-category",
+    "def-pur-sheaf-tensor-product"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 06YT (proof, with F = O' in degree 0)"
+   }
+  },
+  {
+   "text": "Let $F:K(\\mathcal O)\\to D(\\mathcal O')$ be $\\mathcal G^\\bullet\\mapsto\\mathcal G^\\bullet\\otimes_{\\mathcal O}\\mathcal O'$ followed by the localization functor of $D(\\mathcal O')$ [def-weil-abstract-derived-category]. It is an exact functor of triangulated categories: the termwise functor $-\\otimes_{\\mathcal O}\\mathcal O'$ is additive [def-pur-sheaf-tensor-product], so it preserves homotopies, commutes with the shift, and carries the cone $C(f)$ (termwise a direct sum with the matrix differential) to the cone $C(f\\otimes1)$, and the localization functor is exact. Let $\\mathcal P$ be the class of K-flat complexes [def-pc-kflat-complex]. Every complex has a quasi-isomorphism from an element of $\\mathcal P$ [lem-pc-kflat-resolution], and by Step 1 $F$ sends every quasi-isomorphism between elements of $\\mathcal P$ to an isomorphism. Hence [lem-pur-left-derived-from-kflat-class] applies: the left derived functor $L\\varphi^*:=LF:D(\\mathcal O)\\to D(\\mathcal O')$ is everywhere defined, is an exact functor of triangulated categories, and comes with its canonical transformation $LF\\circ Q\\to F$ whose component at every K-flat complex is an isomorphism.",
+   "uses": [
+    "lem-pur-left-derived-from-kflat-class",
+    "lem-pc-kflat-resolution",
+    "def-pc-kflat-complex",
+    "def-weil-abstract-derived-category",
+    "def-pur-sheaf-tensor-product"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tags 06XN and 05SE, as used in sites-cohomology Tag 06YY"
+   }
+  },
+  {
+   "text": "For a K-flat resolution $s:\\mathcal P^\\bullet\\to\\mathcal G^\\bullet$, $Q(s)$ is an isomorphism in $D(\\mathcal O)$, so $LF(Q s)$ is an isomorphism, and the component $LF(Q\\mathcal P^\\bullet)\\to F(\\mathcal P^\\bullet)=\\mathcal P^\\bullet\\otimes_{\\mathcal O}\\mathcal O'$ of the canonical transformation is an isomorphism by Step 2. The canonical map $L\\varphi^*\\mathcal G^\\bullet\\to\\mathcal P^\\bullet\\otimes_{\\mathcal O}\\mathcal O'$ is this component composed with $LF(Qs)^{-1}$, an isomorphism. For two resolutions the isomorphism $\\mathcal P^\\bullet\\otimes_{\\mathcal O}\\mathcal O'\\cong\\mathcal P'^\\bullet\\otimes_{\\mathcal O}\\mathcal O'$ is the canonical map for $\\mathcal P'^\\bullet$ composed with the inverse of the one for $\\mathcal P^\\bullet$; it depends only on the two resolutions, and for a third resolution $\\mathcal P''^\\bullet$ the composite of the comparisons $\\mathcal P\\to\\mathcal P'$ and $\\mathcal P'\\to\\mathcal P''$ is the comparison $\\mathcal P\\to\\mathcal P''$ since the middle factors cancel.",
+   "uses": [
+    "lem-pur-left-derived-from-kflat-class",
+    "lem-pc-kflat-resolution"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 06YY, last paragraph of the proof"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-kflat-resolution",
+  "lem-pc-tensor-mapping-cone-iso",
+  "def-pc-kflat-complex",
+  "def-pc-tensor-complex-sheaves",
+  "def-weil-abstract-derived-category",
+  "def-pur-sheaf-tensor-product",
+  "lem-pur-left-derived-from-kflat-class"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 06YT, 06YY; derived.tex Tag 06XN"
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -60,7 +116,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "worker",
@@ -80,5 +136,25 @@
   }
  },
  "chapter": "sec-smooth-purity",
- "unit": "sk-def-sf-operations"
+ "unit": "sk-def-sf-operations",
+ "split_report": {
+  "date": "2026-10-11",
+  "item": "lem-pur-derived-change-of-rings",
+  "worker": "stage1",
+  "summary": "Split the item into an explicit cone/K-flat argument for preservation of quasi-isomorphisms and the abstract total-left-derived localization construction. The only new node is the Mathlib leaf lem-pur-total-left-derived-localization; existing K-flat, cone, and resolution nodes supply the remaining hypotheses.",
+  "blueprint": "Realizes the two clauses of the imported proof: Tag 06YT for K-flat tensor invariance and Tags 06YY/06XN for the derived functor construction and canonical K-flat computations.",
+  "tool_uses": []
+ },
+ "tool_uses": [
+  "lem-pc-kflat-resolution",
+  "lem-pc-tensor-mapping-cone-iso"
+ ],
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-dcr3100",
+  "group": "F1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-dcr3100 (reviewer sub-agent of L); spot-checked: Read all cited statements, Stacks 06YT/06YY/06XN/05SE and Mathlib LeftDerived.lean:193; item statement unchanged and matches the uses in lem-pc-base-change-rhom-perfect steps 2-3, lem-pc-ringed-spaces-derived-adjoint-general step 1, def-pc-derived-pullback (no adjunction/RSheafHom clause is claimed or needed). FIX more, RETURN less: (1) C4 step 1 cited lem-pc-kflat-tensor-cone-two-out-of-three, whose hypothesis A acyclic fails (A = R, P, Q are K-flat, not acyclic): step rewritten with lem-pc-tensor-mapping-cone-iso (no acyclicity hypothesis), def-pc-kflat-complex, symmetry of Tot and cone-acyclic iff qis; (2) C1 step 2: the derivability condition from K-flat resolutions (Stacks 06XN) was asserted without a node, and the leaf lem-pur-total-left-derived-localization assumes it (its grep 'totalLeftDerived: no hits' was also false): new statement-only node lem-pur-left-derived-from-kflat-class (06XN + 05SE on K(A)) cited, leaf dropped; (3) C1 step 2: exactness of L phi^* asserted from 'commutes with shifts and cones' without a cited fact: now part of the new node (05SE), with exactness of F on K(O) shown; step 3 now uses the new node's counit and is elementary. Second reading by F1 missed (1)-(3).; 2 file(s) fixed by the reviewer; 1 statement node(s) added by the reviewer (FIX more, RETURN less)"
+ }
 }
