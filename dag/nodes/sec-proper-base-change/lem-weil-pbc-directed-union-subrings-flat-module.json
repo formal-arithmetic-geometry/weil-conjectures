@@ -1,0 +1,69 @@
+{
+ "id": "lem-weil-pbc-directed-union-subrings-flat-module",
+ "kind": "statement",
+ "title": "A module that is the directed union of flat modules over directed subrings is flat",
+ "statement": "Let $R$ be a commutative ring and $(R_\\lambda)_{\\lambda\\in\\Lambda}$ a family of subrings of $R$ indexed by a nonempty set $\\Lambda$ with a partial order such that $R_\\lambda\\subseteq R_\\mu$ for $\\lambda\\le\\mu$, any two elements of $\\Lambda$ have an upper bound, and $R=\\bigcup_\\lambda R_\\lambda$. Let $M$ be an $R$-module (an $R_\\lambda$-module by restriction of scalars for every $\\lambda$). For every $\\lambda$ let $M_\\lambda$ be an $R_\\lambda$-module and $\\iota_\\lambda:M_\\lambda\\to M$ an $R_\\lambda$-linear map, and for $\\lambda\\le\\mu$ let $t_{\\lambda\\mu}:M_\\lambda\\to M_\\mu$ be an $R_\\lambda$-linear map, such that $t_{\\lambda\\lambda}=\\mathrm{id}$, $t_{\\mu\\nu}\\circ t_{\\lambda\\mu}=t_{\\lambda\\nu}$ for $\\lambda\\le\\mu\\le\\nu$, and $\\iota_\\mu\\circ t_{\\lambda\\mu}=\\iota_\\lambda$ for $\\lambda\\le\\mu$. Assume (i) every element of $M$ is $\\iota_\\lambda(m)$ for some $\\lambda$ and some $m\\in M_\\lambda$, and (ii) if $m\\in M_\\lambda$ and $\\iota_\\lambda(m)=0$, then $t_{\\lambda\\mu}(m)=0$ for some $\\mu\\ge\\lambda$. If $M_\\lambda$ is a flat $R_\\lambda$-module [def-weil-pbc-flat-ring-map] for every $\\lambda$, then $M$ is a flat $R$-module.",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Algebra, Lemma Tag 05UU (lemma-colimit-rings-flat, algebra.tex line 8857), part (2), for the directed system of the subrings $R_\\lambda$ with colimit $R$; conditions (i) and (ii) say that $(M,\\iota_\\lambda)$ is the colimit of the system $(M_\\lambda,t_{\\lambda\\mu})$ (proof of 05UU uses Lemma Tag 00DB lemma-directed-colimit-exact). Tag verified in stacks-project/tags/tags (05UU,algebra-lemma-colimit-rings-flat). The existing node lem-weil-pbc-colimit-rings-flat states only part (1), with a single module flat over every $R_\\lambda$"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-flat-ring-map"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "directed colimit of flat modules over directed system of rings is flat",
+   "results": "ModuleCat.directLimitIsColimit, ModuleCat.directLimitIsColimit_desc, Ring.DirectLimit, ModuleCat.FilteredColimits.colimit, Module.DirectLimit.inhabited: constructions only, no flatness statement",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Module.Flat of a direct limit of modules over a direct limit of rings",
+   "results": "Module.Flat.directSum_iff, Module.Flat.directSum, Module.FaithfullyFlat.directSum, Module.Flat.dfinsupp_iff, Module.Flat.dfinsupp: direct sums only",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "Module.Flat, Module.DirectLimit",
+   "results": "no declarations",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rnE 'theorem .*[Ff]lat.*(directLimit|DirectLimit|colimit|iSup)' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib --include=*.lean ; ls RingTheory/Flat/",
+   "results": "no declaration; RingTheory/Flat/ (Basic, Stability, Localization, Tensor, EquationalCriterion, ...) has no colimit statement",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-relative-global-complete-intersection-partial-local-flat",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "reviewed": "2026-10-10 L: statement checked against 05UU (2) in the form of a directed union of subrings with the colimit conditions (i),(ii); lem-weil-pbc-colimit-rings-flat covers only part (1)"
+}
