@@ -7,6 +7,8 @@ module
 
 public import Mathlib.AlgebraicGeometry.Geometrically.Connected
 public import Mathlib.AlgebraicGeometry.Morphisms.Smooth
+public import WeilConjectures.AlgebraicGeometry.Curve.Boundary
+public import WeilConjectures.SixFunctors.ProEtale.Adic.LisseExtensionByZero
 public import WeilConjectures.WeilSheaf.Finiteness
 
 /-!
@@ -76,22 +78,52 @@ theorem subsingleton_compactlySupportedCohomology_zero_of_isZero (F : WeilSheaf 
   exact ModuleCat.subsingleton_of_isZero
     ((WeilCoefficients.toModuleCat l).map_isZero (h.of_iso e))
 
--- TODO(adic): prove once Weil sheaves carry genuine `ℓ`-adic coefficients
 /-- Blueprint `lem-a1-affine-hc0`: Vanishing of `H_c⁰` on a nonproper curve.
 
 Let `U₀` be a smooth geometrically connected affine curve and `ℱ` a lisse Weil sheaf on `U₀`.
 Then `H_c⁰ (U, ℱ) = 0`.
 
-A class in `H_c⁰` is a global section of `ℱ` whose support is proper over the base field. By
-lissity a global section of `ℱ` is locally constant, so on the connected curve `U` it vanishes
-as soon as it vanishes at one geometric point; the support of a nonzero section is therefore
-all of `U`, which is not proper. -/
+`H_c⁰` is the space of global sections of `ī_! ℱ` on the compactification `ī : U ⟶ Z`
+(`AlgebraicGeometry.WeilSheaf.subsingleton_compactlySupportedCohomology_zero_of_isZero`). The
+affine curve `U` is not proper, so a boundary point `z ∈ Z ∖ U` is a specialization of a point of
+`U` (`AlgebraicGeometry.exists_specializes_notMem_range_of_isProper`). A global section of
+`ī_! ℱ` vanishes near `z`, hence has a vanishing stalk at a geometric point of `U`; by lissity it
+vanishes on the connected curve `U`
+(`AlgebraicGeometry.ProEtale.IsAdicLisseSheaf.isZero_globalSections_adicOpenImmersionLowerShriek`).
+-/
 theorem subsingleton_compactlySupportedCohomology_zero [IsAffine U]
     [SmoothOfRelativeDimension 1 (U ↘ Spec (CommRingCat.of k₀))]
     [GeometricallyConnected (U ↘ Spec (CommRingCat.of k₀))] (F : WeilSheaf k₀ l U)
     (hF : F.IsLisse) :
     Subsingleton (F.compactlySupportedCohomology 0).carrier := by
-  sorry
+  refine subsingleton_compactlySupportedCohomology_zero_of_isZero F ?_
+  set c := HasCompactification.compactification (U ↘ Spec (CommRingCat.of k₀))
+    (hf := hasCompactification_of_over (k₀ := k₀) (U ↘ Spec (CommRingCat.of k₀)))
+  set p := (U ↘ Spec (CommRingCat.of k₀)).geometricFiberToAlgebraicClosure
+  set q := (c.Z ↘ Spec (CommRingCat.of k₀)).geometricFiberToAlgebraicClosure
+  set i := Scheme.Hom.geometricFiberMap c.i (comp_over c.i (Spec (CommRingCat.of k₀)))
+  have : IsProper c.g := c.isProper
+  have : IsProper (c.Z ↘ Spec (CommRingCat.of k₀)) := by
+    change IsProper (c.g ≫ _)
+    infer_instance
+  have : IsProper q := inferInstanceAs (IsProper (Limits.pullback.snd _ _))
+  have : GeometricallyConnected p :=
+    inferInstanceAs (GeometricallyConnected (Limits.pullback.snd _ _))
+  have : ConnectedSpace (U ↘ Spec (CommRingCat.of k₀)).geometricFiber :=
+    GeometricallyConnected.connectedSpace_of_subsingleton (f := p)
+  have : IsAffineHom p := inferInstanceAs (IsAffineHom (Limits.pullback.snd _ _))
+  have : IsAffine (U ↘ Spec (CommRingCat.of k₀)).geometricFiber := isAffine_of_isAffineHom p
+  have : SmoothOfRelativeDimension (0 + 1) (i ≫ q) := by
+    rw [Scheme.Hom.geometricFiberMap_comp_geometricFiberToAlgebraicClosure]
+    exact inferInstanceAs (SmoothOfRelativeDimension 1 (Limits.pullback.snd _ _))
+  have : LocallyOfFiniteType p := inferInstanceAs (LocallyOfFiniteType (Limits.pullback.snd _ _))
+  have : QuasiCompact p := inferInstanceAs (QuasiCompact (Limits.pullback.snd _ _))
+  have := LocallyOfFiniteType.isLocallyNoetherian p
+  have : CompactSpace (U ↘ Spec (CommRingCat.of k₀)).geometricFiber :=
+    (quasiCompact_iff_compactSpace p).mp inferInstance
+  have : IsNoetherian (U ↘ Spec (CommRingCat.of k₀)).geometricFiber := ⟨⟩
+  obtain ⟨x, z, hz, hxz⟩ := exists_specializes_notMem_range_of_isProper i q 0
+  exact ProEtale.IsAdicLisseSheaf.isZero_globalSections_adicOpenImmersionLowerShriek i hF hz hxz
 
 end WeilSheaf
 

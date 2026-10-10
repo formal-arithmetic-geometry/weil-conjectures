@@ -8,6 +8,8 @@ module
 public import Mathlib.Algebra.Category.ModuleCat.AB
 public import Mathlib.Algebra.Category.ModuleCat.FilteredColimits
 public import Mathlib.CategoryTheory.Sites.LocallySurjective
+public import WeilConjectures.SixFunctors.ProEtale.LowerShriek.Comparison
+public import WeilConjectures.SixFunctors.ProEtale.LowerShriek.OpenImmersion.Mono
 public import WeilConjectures.SixFunctors.ProEtale.LowerShriek.OpenImmersion.Projection
 
 /-!
@@ -69,5 +71,25 @@ lemma exists_map_eq_zero_openImmersionLowerShriek
   change ConcreteCategory.hom ((sheafify (ProEt.topology X) (L.op.leftKanExtension F.obj)).map
     (φ i).op) s = 0
   rw [← ht, Subsingleton.elim t 0, map_zero]
+
+section Mono
+
+variable (A : Type*) [Category.{u + 1} A] [Abelian A] [IsGrothendieckAbelian.{u + 1} A]
+
+/-- The unit `j_! F ⟶ j_* j^* j_! F` of the pullback along an open immersion is a monomorphism:
+the comparison `j_! F ⟶ j_* F` factors through it. -/
+instance mono_upperStarLowerStarAdjunction_unit_app_openImmersionLowerShriek
+    (F : Sheaf (ProEt.topology U) A) :
+    Mono ((upperStarLowerStarAdjunction A j).unit.app ((j)_!open[A].obj F)) := by
+  let adj := openImmersionRestrictionLowerStarAdjunction A j
+  have h₂ : Mono (adj.unit.app ((j)_!open[A].obj F)) := by
+    have h := adj.homEquiv_unit (X := (j)_!open[A].obj F) (Y := F)
+      ((adj.homEquiv _ _).symm ((openImmersionLowerShriekToLowerStar A j).app F))
+    rw [Equiv.apply_symm_apply] at h
+    exact mono_of_mono_fac h.symm
+  exact mono_of_mono_fac (Adjunction.unit_leftAdjointUniq_hom_app
+    (upperStarLowerStarAdjunction A j) adj ((j)_!open[A].obj F))
+
+end Mono
 
 end AlgebraicGeometry.ProEtale
