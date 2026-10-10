@@ -2,7 +2,7 @@
 
 941 items; claim with `tools/claim.py next <group> [--stage N]`.
 
-## Stage 1: nodes to split (588)
+## Stage 1: nodes to split (587)
 
 | node | distance to a target | Lean state on the done branch |
 |---|---|---|
@@ -11,7 +11,6 @@
 | `lem-weil-pbc-flat-module-pullback-exact-pushforward-injective` | 1013 | none |
 | `lem-weil-pbc-pullback-ample-invertible` | 1013 | none |
 | `lem-weil-pbc-fibre-dimension-bounded-open-upstairs` | 1014 | none |
-| `lem-weil-pbc-improve-presentation-smooth-conormal-free` | 1014 | none |
 | `lem-weil-pbc-jacobi-zariski-regular-sequence-left-injective` | 1014 | none |
 | `lem-weil-pbc-minimal-finite-free-resolution-local` | 1014 | none |
 | `lem-weil-pbc-module-injective-open-cover-cech-acyclic` | 1014 | none |
@@ -20,7 +19,6 @@
 | `lem-weil-pbc-normal-nagata-monogenic-n1` | 1014 | none |
 | `lem-weil-pbc-p-basis-differentials-basis` | 1014 | none |
 | `lem-weil-pbc-quasi-coherent-algebra-change-of-rings` | 1014 | none |
-| `lem-weil-pbc-quasi-coherent-iso-on-affine-cover` | 1014 | none |
 | `lem-weil-pbc-quasi-coherent-module-direct-sum` | 1014 | none |
 | `lem-weil-pbc-reduced-normal-iff-integrally-closed-total-fractions` | 1014 | none |
 | `lem-weil-pbc-regular-local-dim-one-iff-normal` | 1014 | none |
@@ -82,6 +80,7 @@
 | `lem-weil-pbc-separable-polynomial-quotient-reduced` | 1015 | none |
 | `lem-weil-pbc-smooth-at-maximal-ideal-alg-closed-differentials-bound` | 1015 | none |
 | `lem-weil-pbc-smooth-at-prime-field-extension-descent` | 1015 | none |
+| `lem-weil-pbc-symmetric-projective-presentation-conormal` | 1015 | none |
 | `lem-weil-pbc-injective-acyclicity-bounded-below` | 2002 | sorry_here |
 | `lem-weil-pbc-property-implies-acyclicity` | 2003 | none |
 | `lem-weil-pbc-qcqs-higher-direct-image` | 2003 | none |
@@ -595,7 +594,7 @@
 | `def-exc-jacobian-presentation` | - | none |
 | `def-nagata-rees-algebra` | - | none |
 
-## Stage 2: nodes to state (353)
+## Stage 2: nodes to state (354)
 
 | node | distance to Mathlib | kind |
 |---|---|---|
@@ -771,6 +770,7 @@
 | `lem-weil-pbc-idempotents-determined-modulo-radical` | 1 | state |
 | `lem-weil-pbc-immersion-affine-constructible-pieces` | 1 | state |
 | `lem-weil-pbc-improve-presentation` | 1 | state |
+| `lem-weil-pbc-improve-presentation-smooth-conormal-free` | 1 | state |
 | `lem-weil-pbc-integral-closure-finite-fibre-choose-g` | 1 | state |
 | `lem-weil-pbc-integral-closure-finite-fibre-image-clopen` | 1 | state |
 | `lem-weil-pbc-integral-extension-dimension` | 1 | state |
@@ -953,7 +953,7 @@
 | `lem-weil-pbc-p1-field-dimension-one` | 4 | state |
 | `lem-weil-pbc-projective-space-zero-isomorphism` | 4 | state |
 
-Not open yet: 599 nodes that wait for stage 1, 678 nodes that wait for a statement dependency.
+Not open yet: 598 nodes that wait for stage 1, 679 nodes that wait for a statement dependency.
 
 ## Stage 3: modules to prove (0)
 
