@@ -19,9 +19,59 @@
  "proof": [],
  "proof_deps": [],
  "proof_origin": null,
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "choose a separated finite presentation model at a later index from an existence theorem for a filtered inverse limit of schemes",
+   "results": "AlgebraicGeometry.Scheme.exists_hom_hom_comp_eq_comp_of_locallyOfFiniteType; AlgebraicGeometry.Scheme.exists_hom_comp_eq_comp_of_locallyOfFiniteType; AlgebraicGeometry.Scheme.exists_isPullback_of_finitePresentation_of_isSeparated (not returned)",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "Scheme.exists_isPullback_of_finitePresentation_of_isSeparated, Classical.choose",
+   "results": "unknown identifier Scheme.exists_isPullback_of_finitePresentation_of_isSeparated",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "separated.*[Dd]escen|[Dd]escen.*separated in AlgebraicGeometry",
+   "results": "none",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "choose an index and separated finite presentation model of a morphism over a limit scheme",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-10",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "noncomputably select a witness of eventual separatedness of a finite presentation descent model",
+   "results": "RingHom.EssFiniteType.exists_eq_comp_ι_app_of_isColimit; CommRingCat.isFinitelyPresentable_hom; isFinitelyPresentable; Algebra.FinitePresentation.of_span_eq_top_target_aux; Algebra.Presentation.exists_presentation_fin; Algebra.Presentation.instFinitePresentationModelOfHasCoeffsOfFinite; Algebra.FinitePresentation.of_span_eq_top_target_of_isLocalizationAway; Algebra.FinitePresentation.of_span_eq_top_target",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "Classical.choose",
+   "results": "Classical.choose; Classical.choose_spec; Classical.some_spec₂; Function.extend_def; other choose-based declarations",
+   "date": "2026-10-10",
+   "verdict": "generalization: Classical.choose provides witness selection but no domain-specific separated descent definition"
+  },
+  {
+   "tool": "grep",
+   "query": "exists_isSeparated|exists_isPullback_of_finitePresentation in AlgebraicGeometry",
+   "results": "none in Mathlib source search path",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [
   "bypassed"
@@ -55,5 +105,21 @@
   }
  },
  "chapter": "sec-nagata-compactification",
- "unit": "sk-prop-nagata-sketch-approximation"
+ "unit": "sk-prop-nagata-sketch-approximation",
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "def-nagata-separated-descent-stage",
+  "worker": "stage1",
+  "summary": "Checked the imported definition against its blueprint and the source Lean. The construction is a choice of one witness supplied by lemma-nagata-separated-descent-stage-exists; no additional proof node is needed, and no project declaration defines this named stage. Both statement dependencies are existing DAG nodes.",
+  "blueprint": "The definition clause choosing one witness from lemma-nagata-separated-descent-stage-exists and recording its index and model.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-nsd2352",
+  "group": "K1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-nsd2352 (reviewer sub-agent of L); spot-checked: Statement word for word as the blueprint clause (B3 ok); stmt_deps lemma-nagata-separated-descent-stage-exists + def-nagata-finite-presentation-descent kept: the statement cites the lemma by bracket as the source of the chosen witness and uses X^desc from the definition, neither created from the item, no cycle; no proof steps; no duplicate (lemma-nagata-separated-eventually states the properties, def-nagata-final-descended-model uses it). FIX more, RETURN less: blueprint.same_as [] -> null; split_report.date and the seven mathlib_searches dates 2026-10-11 (+08:00) -> 2026-10-10 UTC (commit 20:41 UTC). Second reading by K1 missed both metadata faults.; 1 file(s) fixed by the reviewer"
+ }
 }
