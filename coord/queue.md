@@ -1,6 +1,6 @@
 # Work queue
 
-901 items; claim with `tools/claim.py next <group> [--stage N]`.
+903 items; claim with `tools/claim.py next <group> [--stage N]`.
 
 ## Stage 1: nodes to split (156)
 
@@ -23,14 +23,17 @@
 | `lem-pc-ringed-space-derived-limit-stalk-injective` | 3016 | none |
 | `lem-pc-ringed-space-rgamma-derived-limit` | 3016 | none |
 | `lem-pc-perfect-generation-open-induction-step` | 3017 | none |
-| `lem-sc-p1-right-derived-triangle-connecting` | 3017 | none |
 | `lem-pc-perfect-rhom-tensor-comparison` | 3018 | none |
 | `lem-sc-proper-flat-right-adjoint-affine-basechange` | 3018 | none |
-| `lem-sc-pseudo-coherent-support-annihilation` | 3020 | none |
+| `lem-weil-pbc-complex-ses-connecting-formula` | 3018 | none |
+| `lem-weil-pbc-degreewise-split-derived-triangle` | 3018 | none |
+| `lem-pc-perfect-thick-closure` | 3021 | none |
 | `lem-pc-supported-perfect-generator` | 3021 | none |
 | `lem-sc-affine-perfect-map-lift` | 3021 | none |
 | `lem-sc-affine-perfect-support-extension` | 3021 | none |
 | `lem-sc-derived-open-gluing` | 3021 | none |
+| `lem-sc-rhom-supported-qcoherent` | 3021 | none |
+| `lem-sc-supported-factor-through-thick` | 3021 | none |
 | `lem-pc-genus-agrees-sc` | 4007 | rests_on_sorry |
 | `prop-av-tate-rank` | 4008 | rests_on_sorry |
 | `cor-pc-sigma-pic-iso` | 4009 | rests_on_sorry |
@@ -40,14 +43,12 @@
 | `lem-sc-etale-faithfully-flat-local` | 4011 | none |
 | `lem-sc-numerical-polynomial-leading-term` | 4011 | none |
 | `lem-sc-etale-triple-to-sh-completion-flat` | 4012 | none |
-| `lem-sc-hilbert-affine-denominator-module` | 5011 | none |
 | `lem-sc-hilbert-embedded-points-affine-removal` | 5011 | none |
 | `lem-sc-hilbert-embedded-points-gluing` | 5011 | none |
 | `lem-sc-hilbert-nowhere-dense-dimension-drop` | 5011 | none |
 | `lem-sc-meromorphic-sheaf-generic-product` | 5011 | none |
 | `lem-pc-perfect-complex-descent` | 5013 | none |
 | `lem-pc-rf-base-change-single-complex-criterion` | 5013 | none |
-| `lem-pc-proper-support-descent` | 5014 | none |
 | `lem-pc-sites-modules-sheafification-flat` | 5014 | none |
 | `lem-pc-flat-module-descent` | 5015 | none |
 | `lem-pc-fp-complex-descent` | 5015 | none |
@@ -77,7 +78,6 @@
 | `lem-weil-pbc-irreducible-lisse-strata` | - | none |
 | `pqf-def-locnoeth` | - | none |
 | `pqf-lem-finite-fp-locnoeth` | - | none |
-| `pqf-lem-limit-immersion-descends` | - | none |
 | `pqf-lem-limit-qc-open-descends` | - | none |
 | `pqf-lem-qs-intersection-qc` | - | none |
 | `thm-sc-affine-cohomology` | - | rests_on_sorry |
@@ -163,7 +163,7 @@
 | `lem-pur-rhom-well-defined` | - | none |
 | `lem-zl-noether-normalization-dimension` | - | none |
 
-## Stage 2: nodes to state (745)
+## Stage 2: nodes to state (747)
 
 | node | distance to Mathlib | kind |
 |---|---|---|
@@ -349,6 +349,7 @@
 | `lem-sc-going-down-surjective-dimension` | 1 | state |
 | `lem-sc-graded-localization-exact` | 1 | state |
 | `lem-sc-graded-prime-avoidance` | 1 | state |
+| `lem-sc-hilbert-affine-denominator-module` | 1 | state |
 | `lem-sc-hilbert-denominator-ideal-nowhere-dense` | 1 | state |
 | `lem-sc-integral-closure-dedekind-surjective-fibres` | 1 | state |
 | `lem-sc-integral-locally-algebraic-affine-opens-dimension` | 1 | state |
@@ -873,6 +874,7 @@
 | `pqf-lem-finite-qf` | 1 | state |
 | `pqf-lem-finite-type-algebra-finite-spectrum` | 1 | state |
 | `pqf-lem-image-proper` | 1 | state |
+| `pqf-lem-limit-immersion-descends` | 1 | state |
 | `pqf-lem-proper-basic` | 1 | state |
 | `pqf-lem-qf-finitefibres` | 1 | state |
 | `pqf-lem-sheaf-zero-stalks` | 1 | state |
@@ -913,7 +915,7 @@
 | `lem-weil-pbc-projective-space-zero-isomorphism` | 4 | state |
 | `def-nagata-fixed-base-separated-stage` | 6 | state |
 
-Not open yet: 1504 nodes that wait for a statement dependency, 196 nodes that wait for stage 1.
+Not open yet: 1507 nodes that wait for a statement dependency, 196 nodes that wait for stage 1.
 
 ## Stage 3: modules to prove (0)
 
