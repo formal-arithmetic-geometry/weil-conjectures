@@ -1,8 +1,8 @@
 # Work queue
 
-903 items; claim with `tools/claim.py next <group> [--stage N]`.
+900 items; claim with `tools/claim.py next <group> [--stage N]`.
 
-## Stage 1: nodes to split (152)
+## Stage 1: nodes to split (147)
 
 | node | distance to a target | Lean state on the done branch |
 |---|---|---|
@@ -30,7 +30,6 @@
 | `lem-sc-affine-perfect-support-extension` | 3019 | none |
 | `lem-sc-derived-open-gluing` | 3019 | none |
 | `lem-pc-perfect-thick-closure` | 3021 | none |
-| `lem-pc-supported-perfect-generator` | 3021 | none |
 | `lem-sc-rhom-supported-qcoherent` | 3021 | none |
 | `lem-sc-supported-factor-through-thick` | 3021 | none |
 | `lem-pc-genus-agrees-sc` | 4007 | rests_on_sorry |
@@ -43,7 +42,6 @@
 | `lem-sc-etale-triple-to-sh-completion-flat` | 4012 | none |
 | `lem-sc-generic-stalk-finite-length` | 4012 | none |
 | `lem-sc-hilbert-embedded-points-affine-removal` | 5011 | none |
-| `lem-sc-hilbert-embedded-points-gluing` | 5011 | none |
 | `lem-sc-meromorphic-sheaf-generic-product` | 5011 | none |
 | `lem-sc-locnoeth-components-locally-finite` | 5012 | none |
 | `lem-pc-perfect-complex-descent` | 5013 | none |
@@ -55,9 +53,7 @@
 | `thm-sp-spectral-object-yields` | 6006 | none |
 | `lem-sc-general-theorem-of-cube` | 6011 | none |
 | `pqf-lem-serre-criterion` | 6013 | none |
-| `lem-pqf-finite-spectrum-maximal-primes` | 6014 | none |
 | `thm-pqf-immersion-descent` | - | none |
-| `lem-pc-representable-unique` | - | none |
 | `lem-pod-adic-limit-finite-modules` | - | none |
 | `lem-pod-lisse-module-sheaves-as-module-objects` | - | none |
 | `lem-pod-lisse-tensor-and-scalar-extension` | - | none |
@@ -69,7 +65,6 @@
 | `lem-sc-base-change-curve` | - | none |
 | `lem-sc-pic-affine` | - | rests_on_sorry |
 | `lem-weil-pbc-constructible-subobjects-noetherian` | - | none |
-| `lem-weil-pbc-flat-lfp-open` | - | none |
 | `lem-weil-pbc-generic-finite-algebra-splitting` | - | none |
 | `lem-weil-pbc-irreducible-lisse-strata` | - | none |
 | `pqf-def-locnoeth` | - | none |
@@ -159,7 +154,7 @@
 | `lem-pur-rhom-well-defined` | - | none |
 | `lem-zl-noether-normalization-dimension` | - | none |
 
-## Stage 2: nodes to state (751)
+## Stage 2: nodes to state (753)
 
 | node | distance to Mathlib | kind |
 |---|---|---|
@@ -178,6 +173,7 @@
 | `def-pc-generators` | 1 | state |
 | `def-pc-kflat-complex` | 1 | state |
 | `def-pc-projective-morphism` | 1 | state |
+| `def-pc-representable-functor` | 1 | state |
 | `def-pc-standard-graded-algebra` | 1 | state |
 | `def-pc-zero-scheme` | 1 | state |
 | `def-pur-sheaf-modules-hom-module` | 1 | state |
@@ -302,6 +298,7 @@
 | `lem-pc-zero-scheme-recd` | 1 | state |
 | `lem-pc-zero-scheme-zero-iff` | 1 | state |
 | `lem-pod-equivalence-induces-module-objects` | 1 | state |
+| `lem-pqf-finite-spectrum-maximal-primes` | 1 | state |
 | `lem-sc-affine-cap-section-open-algebra` | 1 | state |
 | `lem-sc-affine-finite-module-free-locus` | 1 | state |
 | `lem-sc-affine-finite-projective-prime-membership` | 1 | state |
@@ -915,7 +912,7 @@
 | `lem-weil-pbc-projective-space-zero-isomorphism` | 4 | state |
 | `def-nagata-fixed-base-separated-stage` | 6 | state |
 
-Not open yet: 1514 nodes that wait for a statement dependency, 192 nodes that wait for stage 1.
+Not open yet: 1515 nodes that wait for a statement dependency, 187 nodes that wait for stage 1.
 
 ## Stage 3: modules to prove (0)
 
