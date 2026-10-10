@@ -1,6 +1,6 @@
 # Work queue
 
-905 items; claim with `tools/claim.py next <group> [--stage N]`.
+906 items; claim with `tools/claim.py next <group> [--stage N]`.
 
 ## Stage 1: nodes to split (265)
 
@@ -9,11 +9,11 @@
 | `lem-weil-pbc-injective-acyclicity-bounded-below` | 2002 | sorry_here |
 | `lem-weil-pbc-fpqc-affine-standard-refinement` | 2009 | none |
 | `lem-weil-pbc-standard-fpqc-quotient-topology` | 2009 | none |
-| `lem-sc-noetherian-extension-by-zero-reduction` | 2013 | none |
+| `lem-sc-constant-subsheaf-finite-filtration` | 2014 | none |
+| `lem-sc-topological-filtered-cohomology` | 2014 | none |
 | `lem-sc-integral-closure-dedekind-surjective-fibres` | 2016 | none |
 | `lem-sc-mayer-vietoris-ringed-space` | 2017 | none |
 | `lem-weil-pbc-cartesian-eilenberg-functorial` | 3007 | none |
-| `lem-exc-finite-galois-algebra-tensor-decomposition` | 3010 | none |
 | `lem-pc-derived-qcoh-compact-generation` | 3015 | none |
 | `lem-sc-affine-rhom-qcoherent` | 3015 | none |
 | `lem-sc-derived-hom-finite-free-model` | 3015 | none |
@@ -24,12 +24,12 @@
 | `lem-sc-smooth-proper-diagonal-tensor-formula` | 3015 | none |
 | `lem-pc-brown-cohomological-representability` | 3016 | none |
 | `lem-pc-derived-direct-image-uniform-truncation-bound` | 3016 | none |
-| `lem-pc-kflat-pullback-preservation` | 3016 | none |
 | `lem-pc-quasi-coherent-extension` | 3016 | none |
 | `lem-sc-derived-k-injective-restrict-open` | 3016 | none |
 | `lem-sc-koszul-regular-closed-immersion-perfect` | 3016 | none |
 | `lem-sc-koszul-regular-immersion-derived-hom` | 3016 | none |
 | `lem-sc-smooth-diagonal-regular-immersion` | 3016 | none |
+| `lem-pc-kflat-stalk-criterion` | 3017 | none |
 | `lem-pc-pre-derived-adjoint-functors-general` | 3017 | none |
 | `lem-pc-scheme-modules-grothendieck-abelian` | 3017 | none |
 | `lem-sc-proper-flat-right-adjoint-basechange` | 3017 | none |
@@ -272,7 +272,7 @@
 | `lem-pur-rhom-well-defined` | - | none |
 | `lem-zl-noether-normalization-dimension` | - | none |
 
-## Stage 2: nodes to state (640)
+## Stage 2: nodes to state (641)
 
 | node | distance to Mathlib | kind |
 |---|---|---|
@@ -324,6 +324,7 @@
 | `lem-exc-coinduced-functions-open-stabilizer` | 1 | state |
 | `lem-exc-etale-coproduct-etale` | 1 | state |
 | `lem-exc-etale-field-gsets` | 1 | state |
+| `lem-exc-finite-galois-algebra-tensor-decomposition` | 1 | state |
 | `lem-exc-finite-galois-sections-descent` | 1 | state |
 | `lem-galois-aut-profinite` | 1 | state |
 | `lem-galois-constant-sheaf-sets-representable` | 1 | state |
@@ -917,7 +918,7 @@
 | `lem-weil-pbc-p1-field-dimension-one` | 4 | state |
 | `lem-weil-pbc-projective-space-zero-isomorphism` | 4 | state |
 
-Not open yet: 1315 nodes that wait for a statement dependency, 293 nodes that wait for stage 1.
+Not open yet: 1317 nodes that wait for a statement dependency, 293 nodes that wait for stage 1.
 
 ## Stage 3: modules to prove (0)
 
