@@ -1,0 +1,71 @@
+{
+ "id": "lem-weil-pbc-popescu-delocalize-weak-localization-smooth",
+ "kind": "statement",
+ "title": "Smoothness of the localized auxiliary algebra in the weak delocalization",
+ "statement": "Let $R$ be a commutative ring, $n,m,c,t\\ge0$ integers with $c\\le n+m$, $f_1,\\dots,f_c\\in R[x_1,\\dots,x_{n+m}]$ and $g_1,\\dots,g_t\\in R[x_1,\\dots,x_n]$ (polynomial rings [def-weil-pbc-mv-polynomial-ring]), and $s_0,s_1,\\dots,s_t\\in R$, such that (i) $s_0-h\\Delta\\in(f_1,\\dots,f_c)R[x_1,\\dots,x_{n+m}]$ for some $h\\in R[x_1,\\dots,x_{n+m}]$, where $\\Delta=\\det(\\partial f_j/\\partial x_i)_{i,j=1,\\dots,c}$ is the determinant of the $c\\times c$ matrix of formal partial derivatives [def-weil-pbc-polynomial-partial-derivative] of $f_1,\\dots,f_c$ with respect to $x_1,\\dots,x_c$ ($\\Delta=1$ if $c=0$); (ii) $s_jg_j\\in(f_1,\\dots,f_c)R[x_1,\\dots,x_{n+m}]$ for $j=1,\\dots,t$. For $j=1,\\dots,c$ write $f_j=\\sum_{e\\in\\mathbf N^m}a_{j,e}\\,x_{n+1}^{e_1}\\cdots x_{n+m}^{e_m}$ with $a_{j,e}\\in R[x_1,\\dots,x_n]$ (finitely many nonzero), choose an integer $d_j\\ge e_1+\\dots+e_m$ for every $e$ with $a_{j,e}\\ne0$, and put $F_j=\\sum_ea_{j,e}\\,X_{n+1}^{e_1}\\cdots X_{n+m}^{e_m}X_{n+m+1}^{d_j-e_1-\\dots-e_m}\\in R[x_1,\\dots,x_n,X_{n+1},\\dots,X_{n+m+1}]$. Let $B=R[x_0,x_1,\\dots,x_n,X_{n+1},\\dots,X_{n+m+1}]/(g_1,\\dots,g_t,x_0F_1,\\dots,x_0F_c)$, let $b\\in B$ be the class of $x_0X_{n+m+1}s_0s_1\\cdots s_t$, and let $B_b$ be the localization of $B$ at $\\{1,b,b^2,\\dots\\}$ [def-weil-ring-localization-away], an $R$-algebra via $R\\to B\\to B_b$. Then $B_b$ is a smooth $R$-algebra [def-weil-pbc-smooth-ring-map].",
+ "source": {
+  "document": "literature/stacks-project/smoothing.tex",
+  "place": "Smoothing Ring Maps, proof of Lemma Tag 07F9 (lemma-delocalize-weak), lines 2189-2225: the algebra B, the element b and the sentence 'Then B_b is isomorphic to R_{s_0s_1...s_t}[x_0,...,x_{n+m+1},1/x_0x_{n+m+1}]/(f_1,...,f_c) which is smooth over R by construction' (the isomorphism involves the change of variables x_{n+i} -> X_{n+i}/X_{n+m+1}, which Stacks leaves implicit); definition of standard smooth: Algebra, Definition Tag 00T6 (definition-standard-smooth)"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-mv-polynomial-ring",
+  "def-weil-pbc-polynomial-partial-derivative",
+  "def-weil-ring-localization-away",
+  "def-weil-pbc-smooth-ring-map"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "localization of a quotient of a polynomial ring at an element is standard smooth when the Jacobian determinant is invertible after inverting s",
+   "results": "Algebra.IsStandardSmoothOfRelativeDimension.localization_away, Algebra.IsStandardSmooth.localization_away, Algebra.Smooth.of_isLocalization_Away (Mathlib.RingTheory.Smooth.StandardSmooth / Smooth.Basic: R -> R_r is standard smooth), RingHom.isStandardSmooth_holdsForLocalizationAway, IsLocalization.Away.mvPolynomialQuotientEquiv (Mathlib.RingTheory.MvPolynomial.Localization): localizations of the base, not this algebra",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "homogenization of a polynomial in some variables; algebra obtained by inverting x_0 and the homogenizing variable is smooth if the dehomogenized relations have invertible Jacobian determinant",
+   "results": "Algebra.SubmersivePresentation.isStandardSmooth (Mathlib.RingTheory.Smooth.StandardSmooth), Algebra.IsStandardSmooth, Algebra.instSmoothOfIsStandardSmooth (Smooth.StandardSmoothCotangent), RingHom.IsStandardSmoothOfRelativeDimension: the general tools a proof would use (a submersive presentation gives standard smooth gives smooth), not this statement",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "Algebra.IsStandardSmooth, Localization.Away",
+   "results": "Algebra.Smooth.exists_span_eq_top_isStandardSmooth, Algebra.IsSmoothAt.exists_notMem_isStandardSmooth (Mathlib.RingTheory.Smooth.StandardSmoothOfFree): smooth algebras are locally standard smooth; no statement about this specific algebra",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rlniE 'homogeniz' and grep -rnE 'theorem .*(isStandardSmooth|IsStandardSmooth).*(away|Away|localization|Localization)' in ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib --include=*.lean",
+   "results": "homogeniz: Mathlib/Algebra/Polynomial/Homogenize.lean (one-variable homogenization of univariate polynomials), Mathlib/NumberTheory/Height/MvPolynomial.lean, two Linarith files; second pattern: none",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-popescu-delocalize-weak",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1"
+}

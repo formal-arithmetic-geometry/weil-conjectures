@@ -860,3 +860,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 04:19 L: reviewed lem-weil-pbc-polynomial-local-completion-formally-smooth (5 steps, +04EG leaf, +07ED node): accepted.
 - 04:22 L: reviewed lem-weil-pbc-popescu-desingularize-lifting-apply (8 steps, 0 new; Stacks applies 07CP to pi^4 without the annihilator check): accepted.
 - 04:23 L: reviewed lem-weil-pbc-popescu-height-zero-auxiliary-algebra-localizations (7 steps, 0 new), lem-weil-pbc-popescu-artinian-flat-subalgebras (12 steps, +def essentially-finite-type leaf, +07DT, +0320 nodes): accepted.
+- 04:24 L: reviewed lem-weil-pbc-popescu-delocalize-weak (14 steps, +1 unsplit node; 07F9's minimality hypothesis unused): accepted.
