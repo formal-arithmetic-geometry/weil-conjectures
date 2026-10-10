@@ -1,8 +1,8 @@
 # Work queue
 
-882 items; claim with `tools/claim.py next <group> [--stage N]`.
+881 items; claim with `tools/claim.py next <group> [--stage N]`.
 
-## Stage 1: nodes to split (96)
+## Stage 1: nodes to split (94)
 
 | node | distance to a target | Lean state on the done branch |
 |---|---|---|
@@ -10,8 +10,8 @@
 | `lem-weil-pbc-injective-acyclicity-bounded-below` | 2002 | sorry_here |
 | `lem-pc-ringed-space-module-stalk-tensor` | 3013 | none |
 | `lem-pc-affine-pseudo-coherent-criterion` | 3015 | none |
-| `lem-pc-affine-tor-amplitude-criterion` | 3015 | none |
 | `lem-sc-derived-hom-mayer-vietoris` | 3015 | none |
+| `lem-pc-module-tor-amplitude-flat-model` | 3016 | none |
 | `lem-pc-perfect-rhom-tensor-comparison` | 3018 | none |
 | `lem-pc-global-hom-adjunction` | 3019 | none |
 | `lem-pc-tor-independent-perfect-tensor-base-change` | 3020 | none |
@@ -28,7 +28,6 @@
 | `lem-sc-finite-flat-surj-points` | 4009 | none |
 | `lem-sc-etale-triple-to-sh-completion-flat` | 4012 | none |
 | `lem-sc-etale-at-prime-flat-unramified-criterion` | 4013 | none |
-| `lem-sc-etale-local-ring-stalk-faithfully-flat` | 4013 | none |
 | `lem-sc-affine-totalquotient-minimal-product` | 5013 | none |
 | `lem-sc-affine-weakass-nonzerodivisors` | 5013 | none |
 | `lem-sc-ass-weakass-fg-stalk` | 5013 | none |
@@ -47,7 +46,6 @@
 | `pqf-lem-serre-criterion` | 6013 | none |
 | `lem-sc-base-change-curve` | - | none |
 | `lem-pc-coherent-hi` | - | sorry_here |
-| `lem-pod-etale-stalk-tensor-scalar` | - | none |
 | `lem-sc-global-functions` | - | rests_on_sorry |
 | `lem-sc-kummer-base-change-compatibility` | - | none |
 | `lem-sc-units-quotient-base-change` | - | none |
@@ -103,7 +101,7 @@
 | `lem-pur-rhom-well-defined` | - | none |
 | `lem-zl-noether-normalization-dimension` | - | none |
 
-## Stage 2: nodes to state (786)
+## Stage 2: nodes to state (787)
 
 | node | distance to Mathlib | kind |
 |---|---|---|
@@ -292,6 +290,7 @@
 | `lem-sc-etale-fibre-product-coproduct` | 1 | state |
 | `lem-sc-etale-local-dimension` | 1 | state |
 | `lem-sc-etale-local-ring-faithfully-flat-descent` | 1 | state |
+| `lem-sc-etale-local-ring-stalk-faithfully-flat` | 1 | state |
 | `lem-sc-etale-polynomial-diagonal-kernel-clearance` | 1 | state |
 | `lem-sc-exact-functor-higher-derived-vanishing` | 1 | state |
 | `lem-sc-ext-torsor` | 1 | state |
@@ -894,7 +893,7 @@
 | `lem-weil-pbc-projective-space-zero-isomorphism` | 4 | state |
 | `def-nagata-fixed-base-separated-stage` | 6 | state |
 
-Not open yet: 1610 nodes that wait for a statement dependency, 134 nodes that wait for stage 1.
+Not open yet: 1612 nodes that wait for a statement dependency, 132 nodes that wait for stage 1.
 
 ## Stage 3: modules to prove (0)
 
