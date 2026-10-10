@@ -1,8 +1,8 @@
 # Work queue
 
-861 items; claim with `tools/claim.py next <group> [--stage N]`.
+859 items; claim with `tools/claim.py next <group> [--stage N]`.
 
-## Stage 1: nodes to split (54)
+## Stage 1: nodes to split (51)
 
 | node | distance to a target | Lean state on the done branch |
 |---|---|---|
@@ -13,11 +13,10 @@
 | `lem-pc-module-flat-opcycles-tor-criterion` | 3017 | none |
 | `lem-sc-derived-open-mayer-vietoris-ses` | 3017 | none |
 | `lem-sc-derived-hom-tensor-total` | 3018 | none |
-| `lem-pc-tor-independent-perfect-pullback-comparison` | 3021 | none |
+| `lem-pc-tor-independent-projective-complex-tensor` | 3022 | none |
 | `lem-sc-affine-koszul-hom-alternating-cech` | 3022 | none |
 | `lem-sc-perfect-ext-bounded-qcoh-vanishing` | 3022 | none |
 | `lem-sc-qcoh-complex-alternating-cech-derived-sections` | 3022 | none |
-| `lem-sc-affine-truncation-kernel-flat` | 3023 | none |
 | `lem-sc-cone-pseudo-coherent` | 3023 | none |
 | `lem-sc-finite-cohomology` | 3023 | none |
 | `lem-sc-pseudo-coherent-qcoh` | 3023 | none |
@@ -31,7 +30,6 @@
 | `lem-sc-etale-triple-to-sh-completion-flat` | 4012 | none |
 | `lem-pc-derived-tensor-transitivity` | 5015 | none |
 | `lem-sc-associated-localization-fg` | 5015 | none |
-| `lem-sc-weakass-localization` | 5015 | none |
 | `lem-pc-affine-derived-base-change-comparison-map` | 5016 | none |
 | `lem-pc-affine-flat-module-descent` | 5016 | none |
 | `lem-pc-rf-mv-triangle-naturality` | 5016 | none |
@@ -51,7 +49,6 @@
 | `lem-sc-global-functions` | - | rests_on_sorry |
 | `lem-pc-chow-relative-ample` | - | none |
 | `lem-pc-coherent-property-devissage` | - | none |
-| `lem-pc-relative-kill-by-twisting` | - | none |
 | `lem-sc-pic-affine-base-change-compatibility` | - | none |
 | `lem-sc-etale-torsor-h1-functoriality` | - | none |
 | `lem-sc-local-dvr-base-change` | - | none |
@@ -61,7 +58,7 @@
 | `lem-wf-lie-algebra-derivation-bracket` | - | none |
 | `lem-pur-rhom-into-kinjective-local` | - | none |
 
-## Stage 2: nodes to state (807)
+## Stage 2: nodes to state (808)
 
 | node | distance to Mathlib | kind |
 |---|---|---|
@@ -328,6 +325,7 @@
 | `lem-sc-smooth-algebra-reduced-field` | 1 | state |
 | `lem-sc-strict-henselization-dimension` | 1 | state |
 | `lem-sc-strict-henselization-regular` | 1 | state |
+| `lem-sc-weakass-localization` | 1 | state |
 | `lem-sc-zero-dim-noetherian-closed-finite` | 1 | state |
 | `lem-sp-cart-eilenberg-left-exact-cohomology` | 1 | state |
 | `lem-sp-horseshoe-prescribed-resolutions` | 1 | state |
@@ -873,7 +871,7 @@
 | `lem-weil-pbc-projective-space-zero-isomorphism` | 4 | state |
 | `def-nagata-fixed-base-separated-stage` | 6 | state |
 
-Not open yet: 1691 nodes that wait for a statement dependency, 95 nodes that wait for stage 1.
+Not open yet: 1694 nodes that wait for a statement dependency, 92 nodes that wait for stage 1.
 
 ## Stage 3: modules to prove (0)
 
