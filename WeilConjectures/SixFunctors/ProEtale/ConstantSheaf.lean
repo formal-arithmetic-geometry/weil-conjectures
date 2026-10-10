@@ -92,4 +92,23 @@ noncomputable def upperStarConstantSheafIso {Y Z : Scheme.{u}} (g : Z ⟶ Y) :
         (globalSectionsLowerStarIso _ g).symm ≪≫
         Functor.isoWhiskerLeft _ (Sheaf.ΓNatIsoSheafSections _ _ (Scheme.ProEt.isTerminalMkId Y))))
 
+/-- The constant sheaf functor sends constant sections to constant sections. -/
+lemma constantSheaf_map_hom_app_toSheafify {V W : ModuleCat.{u + 1} Λ} (f : V ⟶ W) (U : X.ProEt)
+    (v : V) :
+    ((constantSheaf (Scheme.ProEt.topology X) (ModuleCat.{u + 1} Λ)).map f).hom.app (op U)
+        ((toSheafify (Scheme.ProEt.topology X) ((Functor.const _).obj V)).app (op U) v) =
+      (toSheafify (Scheme.ProEt.topology X) ((Functor.const _).obj W)).app (op U) (f v) := by
+  have h := congrArg (fun φ ↦ (φ.app (op U)) v)
+    (toSheafify_naturality (Scheme.ProEt.topology X) ((Functor.const X.ProEtᵒᵖ).map f))
+  exact h.symm
+
+/-- Over a nonempty scheme, the constant sheaf functor is faithful. -/
+lemma constantSheaf_map_injective [Nonempty X] {V W : ModuleCat.{u + 1} Λ} {f g : V ⟶ W}
+    (h : (constantSheaf (Scheme.ProEt.topology X) (ModuleCat.{u + 1} Λ)).map f =
+      (constantSheaf (Scheme.ProEt.topology X) (ModuleCat.{u + 1} Λ)).map g) : f = g := by
+  have : Nonempty (terminalProEt X).left := inferInstanceAs (Nonempty X)
+  ext v
+  apply constantSheaf_toSheafify_app_injective W (U := terminalProEt X)
+  rw [← constantSheaf_map_hom_app_toSheafify, ← constantSheaf_map_hom_app_toSheafify, h]
+
 end AlgebraicGeometry.ProEtale
