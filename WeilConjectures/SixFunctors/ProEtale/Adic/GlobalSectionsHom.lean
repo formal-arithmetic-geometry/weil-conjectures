@@ -53,7 +53,8 @@ lemma globalSectionOfHom_eq {N : Sheaf (Scheme.ProEt.topology Z) (WeilCoefficien
     globalSectionOfHom f =
       ((Sheaf.ΓNatIsoSheafSections _ _ (Scheme.ProEt.isTerminalMkId Z)).inv.app N).hom
         ((ε (sheafToPresheaf _ (WeilCoefficients.{u} l)) ≫
-          (sheafToPresheaf _ _).map f).app (op (Scheme.ProEt.mk (𝟙 Z))) |>.hom (1 : ULift.{u + 1} (PadicAlgCl l))) := by
+          (sheafToPresheaf _ _).map f).app (op (Scheme.ProEt.mk (𝟙 Z))) |>.hom
+            (1 : ULift.{u + 1} (PadicAlgCl l))) := by
   rw [globalSectionOfHom, ε_Γ, Category.assoc,
     ← (Sheaf.ΓNatIsoSheafSections _ _ (Scheme.ProEt.isTerminalMkId Z)).inv.naturality f]
   rfl

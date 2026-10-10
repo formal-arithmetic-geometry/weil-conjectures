@@ -44,8 +44,12 @@ The geometric coinvariants of `F` are the dual of the global sections of `F^∨`
   the Weil structure `AlgebraicGeometry.WeilSheaf.dualStr`.
 - `AlgebraicGeometry.WeilSheaf.geometricCoinvariants`: the geometric coinvariants of a lisse
   Weil sheaf, with the Frobenius induced from the Weil structure.
-- `AlgebraicGeometry.WeilSheaf.isPureOfWeightOver_geometricCoinvariants`: the geometric
-  coinvariants of a punctually pure lisse sheaf are pure of the same weight.
+- `AlgebraicGeometry.WeilSheaf.nonempty_equiv_stalk_dual`: the stalks of the dual of a lisse
+  Weil sheaf are the duals of its stalks.
+
+The purity of the geometric coinvariants is
+`AlgebraicGeometry.WeilSheaf.isPureOfWeightOver_geometricCoinvariants`, in
+`WeilConjectures.WeilSheaf.GeometricCoinvariants`.
 
 ## TODO
 
@@ -343,25 +347,6 @@ of `F^∨` at `x` is the inverse transpose of that of `F`. -/
 theorem nonempty_equiv_stalk_dual {F : WeilSheaf k₀ l X} (hF : F.IsLisse)
     (x : X.finitePoints) : Nonempty (((F.dual hF).stalk x).Equiv (F.stalk x).dual) :=
   ⟨stalkAtDualEquiv _ _ _ F hF⟩
-
-/-- *Purity of the geometric coinvariants.* If `F` is a lisse Weil sheaf, punctually `ι`-pure of
-weight `w`, then its geometric coinvariants `V_{π₁(X̄)}` with the induced Frobenius are `ι`-pure
-of weight `w` (possibly zero). The argument compares the coinvariants with the stalk at a closed
-point with finite residue field on each geometric component, as an equivariant quotient.
-
-The blueprint states this for `X` a nonempty smooth geometrically connected curve; here `X` is
-only assumed locally of finite type over `k₀`, which is what provides these closed points.
-Some such hypothesis is needed: `IsPunctuallyPureOfWeight` only sees the points of
-`X.finitePoints`, so for `X = Spec 𝔽_q(t)` it holds for every `w`, while the coinvariants of a
-rank-one sheaf need not be pure of every weight.
-(blueprint: `lem-a1-geometric-coinvariants-pure`) -/
-theorem isPureOfWeightOver_geometricCoinvariants
-    [QuasiCompact (X ↘ Spec (CommRingCat.of k₀))]
-    [LocallyOfFiniteType (X ↘ Spec (CommRingCat.of k₀))] (ι : PadicAlgCl l →+* ℂ)
-    (F : WeilSheaf k₀ l X) (hF : F.IsLisse) {w : ℝ} (hw : F.IsPunctuallyPureOfWeight ι w) :
-    (F.geometricCoinvariants hF).IsPureOfWeightOver k₀ ι w := by
-  -- TODO(adic): prove once Weil sheaves carry genuine `ℓ`-adic coefficients
-  sorry
 
 end WeilSheaf
 

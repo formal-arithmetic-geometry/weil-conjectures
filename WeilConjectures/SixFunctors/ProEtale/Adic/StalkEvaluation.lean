@@ -124,21 +124,21 @@ noncomputable def dualLinearMap
   toFun (m : M) :=
     { toFun (n : N) := (θ (p m n)).down
       map_add' (n n' : N) := by
-        show (θ (p m (n + n'))).down = (θ (p m n)).down + (θ (p m n')).down
+        change (θ (p m (n + n'))).down = (θ (p m n)).down + (θ (p m n')).down
         rw [map_add, map_add]
         rfl
       map_smul' c (n : N) := by
-        show (θ (p m ((ULift.up c : ULift (PadicAlgCl l)) • n))).down = c * (θ (p m n)).down
+        change (θ (p m ((ULift.up c : ULift (PadicAlgCl l)) • n))).down = c * (θ (p m n)).down
         rw [map_smul, map_smul]
         rfl }
   map_add' (m m' : M) := by
     ext (n : N)
-    show (θ (p (m + m') n)).down = (θ (p m n)).down + (θ (p m' n)).down
+    change (θ (p (m + m') n)).down = (θ (p m n)).down + (θ (p m' n)).down
     rw [map_add, LinearMap.add_apply, map_add]
     rfl
   map_smul' c (m : M) := by
     ext (n : N)
-    show (θ (p ((ULift.up c : ULift (PadicAlgCl l)) • m) n)).down = c * (θ (p m n)).down
+    change (θ (p ((ULift.up c : ULift (PadicAlgCl l)) • m) n)).down = c * (θ (p m n)).down
     rw [map_smul, LinearMap.smul_apply, map_smul]
     rfl
 
@@ -164,7 +164,7 @@ lemma bijective_dualLinearMap
     obtain ⟨m, hm⟩ := hp.2 ψ
     refine ⟨m, LinearMap.ext fun (n : N) ↦ ?_⟩
     rw [dualLinearMap_apply, hm]
-    show (θ (θ.symm (ULift.up (φ n)))).down = φ n
+    change (θ (θ.symm (ULift.up (φ n)))).down = φ n
     rw [LinearEquiv.apply_symm_apply]
 
 end AlgebraicGeometry.WeilCoefficients
@@ -190,7 +190,8 @@ lemma pairing_linearEquivOfIso {P Q T R : WeilCoefficients.{u} l} (eP : P ≅ P)
     (eR : R ≅ R) (g₁ : P ⊗ Q ⟶ T) (g₂ : T ⟶ R)
     (h : (eP.hom ⊗ₘ eQ.hom) ≫ g₁ ≫ g₂ = (g₁ ≫ g₂) ≫ eR.hom)
     (hR : linearEquivOfIso eR = LinearEquiv.refl _ _) (p : P) (q : Q) :
-    g₂.hom (g₁.hom (linearEquivOfIso eP p ⊗ₜ linearEquivOfIso eQ q)) = g₂.hom (g₁.hom (p ⊗ₜ q)) := by
+    g₂.hom (g₁.hom (linearEquivOfIso eP p ⊗ₜ linearEquivOfIso eQ q)) =
+      g₂.hom (g₁.hom (p ⊗ₜ q)) := by
   have h₁ := ModuleCat.tmul_eq_of_tensorHom_comp h p q
   have h₂ := congrArg (fun e ↦ e (g₂.hom (g₁.hom (p ⊗ₜ q)))) hR
   exact h₁.trans h₂
