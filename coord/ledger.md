@@ -949,3 +949,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 06:07 L: reviewed and accepted lem-weil-pbc-fibre-degree-bound-field-points (6 steps, no new nodes).
 - 06:09 L: reviewed and accepted lem-weil-pbc-etale-cohomology-local-ring-colimit (7 steps; +open-immersion-etale Mathlib leaf 02GP, +local-ring-spec-limit-affine-neighbourhoods node 0GWT/01YW; source gaps on restriction=pullback and the colimit sheaf written out; tool_uses on derived-inverse-image-composition (1)).
 - 06:10 L: reviewed and accepted lem-weil-pbc-field-char-p-h1-cotangent-vanishing (3 steps, no new nodes; 030Z replaced by 030R with k'=F_p; 07BQ written out; Mathlib candidate B8).
+- 06:12 L: reviewed and accepted lem-weil-pbc-finite-t0-space-sober (3 elementary steps by agent; no new nodes).

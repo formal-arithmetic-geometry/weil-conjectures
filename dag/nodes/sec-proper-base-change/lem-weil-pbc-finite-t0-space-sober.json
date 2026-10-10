@@ -10,9 +10,47 @@
  "stmt_deps": [
   "def-weil-irreducible-components"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "*Step 1 (an irreducible set in a finite union of closed sets lies in one of them).* Let $Z\\subseteq Y$ be irreducible [def-weil-irreducible-components] and let $F_1,\\dots,F_n$ ($n\\ge1$) be closed subsets of $Y$ with $Z\\subseteq F_1\\cup\\dots\\cup F_n$. We show by induction on $n$ that $Z\\subseteq F_i$ for some $i$. For $n=1$ there is nothing to prove. For $n\\ge2$ put $G=F_2\\cup\\dots\\cup F_n$, closed in $Y$ as a finite union of closed sets. Then $Z=(Z\\cap F_1)\\cup(Z\\cap G)$, and $Z\\cap F_1$, $Z\\cap G$ are closed in the subspace $Z$. As $Z$ is irreducible, $Z=Z\\cap F_1$ or $Z=Z\\cap G$, i.e. $Z\\subseteq F_1$ or $Z\\subseteq G=F_2\\cup\\dots\\cup F_n$; in the second case the induction hypothesis (for $n-1$ sets) gives $Z\\subseteq F_i$ for some $i\\ge2$.",
+   "uses": [
+    "def-weil-irreducible-components"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/topology.tex",
+    "place": "Topology, proof of Lemma Tag 09XX (label lemma-spectral-inverse-limit-finite-sober-spaces, line 4704): the images X_J are asserted to be finite sober spaces without argument; step written by the agent (the definition of irreducible, Definition Tag 004V, label definition-irreducible-components, line 855, applied n-1 times)"
+   }
+  },
+  {
+   "text": "*Step 2 (existence of a generic point).* Let $Z\\subseteq Y$ be irreducible and closed. Then $Z$ is nonempty (irreducible sets are nonempty [def-weil-irreducible-components]) and finite ($Y$ is finite). For $z\\in Z$ the closure $\\overline{\\{z\\}}$ is closed, contains $z$, and is contained in $Z$ because $Z$ is a closed set containing $z$. Hence $Z=\\bigcup_{z\\in Z}\\overline{\\{z\\}}$, a union of finitely many ($|Z|\\ge1$) closed subsets of $Y$. By Step 1 there is $\\eta\\in Z$ with $Z\\subseteq\\overline{\\{\\eta\\}}$; together with $\\overline{\\{\\eta\\}}\\subseteq Z$ this gives $\\overline{\\{\\eta\\}}=Z$.",
+   "uses": [
+    "def-weil-irreducible-components"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/topology.tex",
+    "place": "Topology, proof of Lemma Tag 09XX (label lemma-spectral-inverse-limit-finite-sober-spaces, line 4704): the images X_J are asserted to be finite sober spaces without argument; step written by the agent"
+   }
+  },
+  {
+   "text": "*Step 3 (uniqueness, from $T_0$).* Let $\\eta,\\eta'\\in Z$ with $\\overline{\\{\\eta\\}}=Z=\\overline{\\{\\eta'\\}}$, and suppose $\\eta\\ne\\eta'$. By the $T_0$ hypothesis there is an open $U\\subseteq Y$ containing exactly one of them; by symmetry of the hypotheses in $\\eta,\\eta'$ we may assume $\\eta\\in U$ and $\\eta'\\notin U$. Then $Y\\setminus U$ is a closed set containing $\\eta'$, hence it contains $\\overline{\\{\\eta'\\}}=Z\\ni\\eta$, so $\\eta\\notin U$: a contradiction. Hence $\\eta=\\eta'$. With Step 2, every irreducible closed $Z\\subseteq Y$ has exactly one point whose closure is $Z$, which is the statement.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/topology.tex",
+    "place": "Topology, the paragraph after Definition Tag 004X (label definition-generic-point, line 972; paragraph at line 989): Kolmogorov means x -> closure{x} is injective, so sober = quasi-sober + Kolmogorov; the T_0 argument written by the agent"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-irreducible-components"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/topology.tex",
+  "place": "Topology, proof of Lemma Tag 09XX (label lemma-spectral-inverse-limit-finite-sober-spaces, line 4704), where the sobriety of the finite T_0 spaces X_J is asserted without argument, and the paragraph at line 989 after Definition Tag 004X (sober = quasi-sober + Kolmogorov); the whole proof is written by the agent"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -62,11 +100,74 @@
    "results": "QuasiSober instances only for PrimeSpectrum, zeroLocus, schemes, R1 spaces, closed/open embeddings and open covers (Sober.lean:182,192,215,232,237,247); no instance for Finite or NoetherianSpace (Finite.to_noetherianSpace, NoetherianSpace.lean:149, gives Noetherian only); the ingredients isIrreducible_iff_sUnion_isClosed (Irreducible.lean:312, read: an irreducible set covered by a finite family of closed sets lies in one of them) and IsGenericPoint.eq (Sober.lean:79, read: generic points are unique in a T0 space)",
    "date": "2026-10-10",
    "verdict": "no match; candidate below"
+  },
+  {
+   "tool": "leansearch",
+   "query": "every finite topological space is quasi-sober",
+   "results": "QuasiSober, QuasiSober.mk, SpectralSpace.toQuasiSober, quasiSober_iff, R1Space.quasiSober, TopologicalSpace.IsOpenCover.quasiSober_iff_forall, QuasiSober.sober (Mathlib.Topology.Sober, Mathlib.Topology.Spectral.Basic), Finite.toAlexandrovDiscrete (Mathlib.Topology.AlexandrovDiscrete): no finite-space instance",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Finite α → T0Space α → QuasiSober α",
+   "results": "QuasiSober, QuasiSober.mk, R1Space.quasiSober, SpectralSpace.toQuasiSober, irreducibleSetEquivPoints, T1Space.t0Space, quasiSober_iff, SpectralSpace.toT0Space: none for finite spaces",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "irreducible set covered by finitely many closed sets is contained in one of them",
+   "results": "isIrreducible_iff_sUnion_isClosed (Mathlib.Topology.Irreducible, Irreducible.lean:312), isPreirreducible_iff_isClosed_union_isClosed, isIrreducible_iff_sInter",
+   "date": "2026-10-10",
+   "verdict": "match for Step 1 only (ingredient of the candidate), not for the node"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "In a finite topological space every irreducible closed subset is the closure of a single point",
+   "results": "genericPoints, quasiSober_iff, genericPoint_closure, IsIrreducible.closure_genericPoint, QuasiSober (Mathlib.Topology.Sober): all assume QuasiSober",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "finite T0 space is a spectral space / sober space instance for finite spaces",
+   "results": "SpectralSpace.toPrespectralSpace, PrespectralSpace, SpectralSpace, SpectralSpace.toT0Space, Stonean.mkFinite, FinTopCat.of, FinTopCat.fintype, instPrespectralSpaceOfNoetherianSpace: none gives QuasiSober or SpectralSpace for finite spaces",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "QuasiSober, Finite",
+   "results": "none",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "QuasiSober ?α, T0Space ?α",
+   "results": "genericPoints.equiv, genericPoints_eq_singleton, irreducibleSetEquivPoints, coe_irreducibleEquivPoints_symm_apply, Topology.IsOpenEmbedding.coheight_eq, coheightZeroSetOrderIsoIrreducibleComponents, NoetherianSpace.finite_coheight_one_of_closure_ne_univ (Mathlib.Topology.Sober, Mathlib.Topology.KrullDimension): all take QuasiSober as hypothesis",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "local_search",
+   "query": "quasiSober (project ~/weil-conjectures-slopmaster2; index unavailable, so not a proof of absence)",
+   "results": "PrimeSpectrum.quasiSober, TopologicalSpace.IsOpenCover.quasiSober(_iff_forall), Topology.IsClosedEmbedding.quasiSober, Topology.IsOpenEmbedding.quasiSober, quasiSober_of_open_cover (Mathlib); CategoryTheory.IsPullback.quasiSober, Homeomorph.quasiSober (package proetale)",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rn 'QuasiSober' Mathlib | grep -i finite; grep -rn -E 'instQuasiSober|quasiSober_of_finite|Finite\\.quasiSober|finite.*QuasiSober|QuasiSober.*Finite' Mathlib; files of Mathlib/Topology containing T0Space and QuasiSober and finite (only Topology/Sober.lean, read: lines 42-330, the finite there is genericPoints.finite at 313); grep -rn '(instance|theorem|lemma|def).*[Qq]uasi[Ss]ober' Mathlib and the proetale package",
+   "results": "no finite-space QuasiSober statement; QuasiSober instances only PrimeSpectrum/zeroLocus (RingTheory/Spectrum/Prime/Topology.lean:283,288), schemes (AlgebraicGeometry/Properties.lean:43), R1Space (Topology/Sober.lean:247), embeddings and open covers; SpectralSpace bundles QuasiSober (Topology/Spectral/Basic.lean:39); proetale: QuasiSober.prod, QuasiSober.pullback. Ingredients read: class QuasiSober (Sober.lean:109-110), IsGenericPoint.eq [T0Space] (Sober.lean:79-80), isIrreducible_iff_sUnion_isClosed (Irreducible.lean:312-314)",
+   "date": "2026-10-10",
+   "verdict": "no match; candidate unchanged"
   }
  ],
  "mathlib_match": null,
  "mathlib_candidate": "Existence: for Z irreducible closed in the finite space Y, apply isIrreducible_iff_sUnion_isClosed (Mathlib/Topology/Irreducible.lean:312) to the finite family of closures closure {z}, z in Z, which covers Z; Z lies in some closure {z} with z in Z, hence closure {z} = Z (Z closed), i.e. IsGenericPoint z Z, so QuasiSober Y (quasiSober_iff, Mathlib/Topology/Sober.lean). Uniqueness: IsGenericPoint.eq (Mathlib/Topology/Sober.lean:79) under T0Space Y. A few lines of Lean, not one declaration, so the node is unsplit (point B8).",
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "worker",
@@ -86,5 +187,12 @@
   }
  },
  "chapter": "sec-proper-base-change",
- "unit": "sk-thm-p1"
+ "unit": "sk-thm-p1",
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "lem-weil-pbc-finite-t0-space-sober",
+  "worker": "stage1",
+  "summary": "Mathlib re-searched with all three kinds (LeanSearch x3, LeanFinder x2, Loogle 'QuasiSober, Finite' (none) and 'QuasiSober ?α, T0Space ?α', local_search, grep of Mathlib and the proetale package): no QuasiSober instance or theorem for finite spaces exists, so the node is not a leaf; the mathlib_candidate (isIrreducible_iff_sUnion_isClosed + IsGenericPoint.eq) is kept. Stacks gives no argument (the claim inside the proof of 09XX), so the proof is written by the agent in three elementary steps citing only def-weil-irreducible-components: (1) an irreducible set contained in a finite union of closed sets lies in one of them, by induction from the two-set definition (no existing node for this; grep for irreducible-finite-union/irreducible-not-union found none); (2) Z = union of the finitely many closures of its points, so Z = closure of one point; (3) uniqueness from T_0 written out. Statement and stmt_deps unchanged; the citer lem-weil-pbc-spectral-directed-limit-finite-sober uses exactly the statement (Step 2 there)."
+ },
+ "reviewed": "Reviewed by L 2026-10-10: proof by agent (Stacks asserts the claim inside 09XX without argument); three elementary steps checked (irreducible set in a finite union of closed sets, finite union of point closures, T_0 uniqueness). No Mathlib match; candidate kept (B8)."
 }
