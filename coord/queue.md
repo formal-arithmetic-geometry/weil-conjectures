@@ -16,15 +16,15 @@
 | `lem-sc-affine-cap-section-open-algebra` | 2012 | none |
 | `lem-sc-affine-cap-section-open-dictionary` | 2012 | none |
 | `lem-sc-ample-finite-set-affine` | 2012 | none |
-| `lem-sc-boundary-derivation-square-zero` | 2012 | none |
 | `lem-sc-closed-subset-qc-ideal` | 2012 | none |
-| `lem-sc-exact-functor-higher-derived-vanishing` | 2012 | none |
 | `lem-sc-find-globally-generated` | 2012 | none |
 | `lem-sc-graded-prime-avoidance` | 2012 | none |
 | `lem-sc-leray-closed-pushforward-cohomology` | 2012 | none |
 | `lem-sc-noetherian-topological-cohomology-vanishing` | 2012 | none |
 | `lem-sc-torsor-h1-functoriality` | 2012 | none |
 | `lem-sc-abelian-sheaf-short-exact-stalkwise` | 2013 | none |
+| `lem-sc-boundary-cech-local-lifts` | 2013 | none |
+| `lem-sc-cech-h1-map-natural` | 2013 | none |
 | `lem-sc-closed-pushforward-abelian-stalks` | 2013 | none |
 | `lem-sc-finite-sections-cover-qc` | 2013 | none |
 | `lem-sc-invert-s-cohomology` | 2013 | none |
@@ -61,7 +61,6 @@
 | `lem-sc-product-irreducible-components-bijection` | 3013 | none |
 | `lem-sc-proper-upper-shriek-composition` | 3013 | none |
 | `lem-sc-regular-local-ext-vanishing` | 3013 | none |
-| `lem-sc-p1-koszul-resolution` | 3014 | none |
 | `lem-sc-p1-serre-section-module-comparison` | 3014 | none |
 | `lem-sc-p1-serre-section-module-finite` | 3014 | none |
 | `lem-sc-p1-tor-dimension-shifting` | 3014 | none |
@@ -69,6 +68,7 @@
 | `lem-sc-p1-graded-degree-component-exact` | 3015 | none |
 | `lem-sc-p1-graded-nakayama-generation` | 3015 | none |
 | `lem-sc-p1-graded-submodule-finite` | 3015 | none |
+| `lem-sc-p1-linear-syzygy` | 3015 | none |
 | `lem-sc-p1-minimal-presentation-tor` | 3015 | none |
 | `lem-sc-brauer-zero` | 4005 | rests_on_sorry |
 | `lem-sc-affine-open-proper` | 4006 | sorry_here |
@@ -910,7 +910,7 @@
 | `lem-weil-pbc-p1-field-dimension-one` | 4 | state |
 | `lem-weil-pbc-projective-space-zero-isomorphism` | 4 | state |
 
-Not open yet: 347 nodes that wait for stage 1, 1126 nodes that wait for a statement dependency.
+Not open yet: 347 nodes that wait for stage 1, 1129 nodes that wait for a statement dependency.
 
 ## Stage 3: modules to prove (0)
 
