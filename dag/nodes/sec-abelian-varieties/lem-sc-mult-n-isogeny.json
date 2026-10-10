@@ -3,7 +3,7 @@
  "blueprint": {
   "is": "lem-sc-mult-n-isogeny",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "Multiplication by $n$ is surjective with finite kernel",
@@ -36,10 +36,15 @@
    "elementary": false
   },
   {
-   "text": "*Surjectivity.* The image $H:=[n](A)\\subseteq A$ is a\nclosed subgroup scheme of $A$ by [lem-sc-image-subgroup] (the\nsource $A$ is proper over $k$ and the target $A$ is separated of\nfinite type over $k$), applied to the homomorphism $[n]$ of\n[lem-sc-mult-n-homomorphism]. Since $[n]$ is finite, its fibres\nhave dimension zero, and the dimension formula for the surjective\nmorphism $A\\to H$ gives\n$\\dim H=\\dim A-\\dim A[n]=\\dim A$. Thus $H\\subseteq A$ is a\nclosed subscheme of the irreducible scheme $A$ with\n$\\dim H=\\dim A$; the reduced subscheme\n$H_{\\mathrm{red}}\\subseteq A$ is then a closed subscheme of the\nreduced irreducible scheme $A$ of the same dimension, hence\n$H_{\\mathrm{red}}=A$, and therefore $H=A$. So\n$[n]:A\\to A$ is surjective.",
+   "text": "*Surjectivity.* By [def-sc-abelian-variety], $A$ is proper, smooth and connected over $k$; properness gives separatedness and finite type. The identity section makes $A$ nonempty. By [lem-sc-abelian-variety-characterization], $A$ is geometrically integral, hence irreducible and reduced [def-pc-reduced-scheme]. Apply [lem-sc-image-subgroup] to the homomorphism $[n]$ of [lem-sc-mult-n-homomorphism]: its scheme-theoretic image $H\\hookrightarrow A$ is a closed subgroup scheme of finite type over $k$, and the induced $g:A\\to H$ is surjective. The map $g$ is finite: on any affine open $U=\\operatorname{Spec}R$ of $A$, the image $H\\cap U$ is $\\operatorname{Spec}(R/I)$; because $[n]$ is finite by step 1, $[n]^{-1}(U)=\\operatorname{Spec}B$ for a finite $R$-module $B$. The factorization makes $I$ act by zero on $B$, so $B$ is finite over $R/I$. Thus [lem-sc-finite-surjective-dimension] gives equal finite topological Krull dimensions for $H$ and $A$. If the closed set $|H|$ were proper in irreducible $|A|$, every chain of irreducible closed subsets of $|H|$ could be extended by $|A|$, giving $\\dim H<\\dim A$ by [def-kun-topological-krull-dimension], a contradiction. Hence $|H|=|A|$. On each affine $U=\\operatorname{Spec}R\\subseteq A$, the ideal $I$ defining $H\\cap U$ lies in every prime of $R$, so it lies in the nilradical; since $A$ is reduced, $I=0$. Thus $H=A$ as schemes, and the surjection $g$ proves that $[n]:A\\to A$ is surjective.",
    "uses": [
     "lem-sc-image-subgroup",
-    "lem-sc-mult-n-homomorphism"
+    "lem-sc-mult-n-homomorphism",
+    "def-sc-abelian-variety",
+    "lem-sc-abelian-variety-characterization",
+    "def-pc-reduced-scheme",
+    "lem-sc-finite-surjective-dimension",
+    "def-kun-topological-krull-dimension"
    ],
    "elementary": false
   }
@@ -47,16 +52,43 @@
  "proof_deps": [
   "lem-sc-mult-n-finite-kernel",
   "lem-sc-image-subgroup",
-  "lem-sc-mult-n-homomorphism"
+  "lem-sc-mult-n-homomorphism",
+  "def-sc-abelian-variety",
+  "lem-sc-abelian-variety-characterization",
+  "def-pc-reduced-scheme",
+  "lem-sc-finite-surjective-dimension",
+  "def-kun-topological-krull-dimension"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/master/blueprint/sec-abelian-varieties/sk-prop-av-mult-surjective/lem-sc-mult-n-isogeny.md",
   "place": "## Proof"
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "surjective multiplication by n on an abelian variety group scheme with finite kernel",
+   "results": "Only finite-group homomorphism surjectivity results; no abelian-variety group-scheme declaration.",
+   "date": "2026-10-11",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "Surjective, IsFinite, npow, GroupScheme",
+   "results": "Loogle reported unknown identifier; this query did not test the intended proposition.",
+   "date": "2026-10-11",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "grep",
+   "query": "topologicalKrullDim|dimension.*finite.*surjective Mathlib",
+   "results": "none",
+   "date": "2026-10-11",
+   "verdict": "no match"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [
   "proof_cites_literature",
@@ -205,5 +237,21 @@
   }
  },
  "chapter": "sec-abelian-varieties",
- "unit": "sk-prop-av-mult-surjective"
+ "unit": "sk-prop-av-mult-surjective",
+ "split_report": {
+  "date": "2026-10-11",
+  "item": "lem-sc-mult-n-isogeny",
+  "worker": "stage1",
+  "summary": "Checked the imported proof against the Stacks Proposition 39.9.11 and Lemma 39.9.8 route. Kept the finite-kernel step, and made the surjectivity argument explicit by adding statement-only nodes for dimension preservation under finite surjections and for closed full-dimensional subschemes of irreducible reduced schemes.",
+  "blueprint": "Realizes the two proof paragraphs of node lem-sc-mult-n-isogeny, order 555.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-mni1857",
+  "group": "J1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-mni1857 (reviewer sub-agent of L); spot-checked: Read whole packet. Step 1 = statement of lem-sc-mult-n-finite-kernel exactly (finite [n], finite A[n]). Step 2: hypotheses of lem-sc-image-subgroup (A proper, A separated finite type), finite factorization A->H on affines, lem-sc-finite-surjective-dimension hypotheses (nonempty finite type), chain-extension strict drop, reducedness kills full-support ideal: correct. No class (b)/cycle: lem-sc-mult-n-finite-flat and lem-sc-isogeny-facts both cite lem-sc-mult-n-isogeny in their proofs, so the item is their input, not a restatement; neither is cited here; lem-sc-image-subgroup and lem-sc-mult-n-finite-kernel do not depend on the item. New node lem-sc-finite-surjective-dimension: true, real lemma (global version of 00OK plus finiteness via 00OY), not a one-step special case of lem-weil-pbc-integral-injective-dimension-equal. My search: {tool: leanfinder, query: 'finite surjective morphism of schemes topological Krull dimension equal', verdict: no match (only ringKrullDim_le_of_surjective, Order.krullDim_le_of_strictComono_and_surj)}. Second reading by J1: no missed fault found."
+ }
 }
