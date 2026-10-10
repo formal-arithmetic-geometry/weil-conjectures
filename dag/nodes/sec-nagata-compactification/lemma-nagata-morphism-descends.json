@@ -3,37 +3,101 @@
  "blueprint": {
   "is": "lemma-nagata-morphism-descends",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "Property of the descended morphism, [stacks-project]",
- "statement": "The base change of the constructed\n$\\varphi_{\\lambda_\\varphi}$ to $S$ is $\\varphi$.",
+ "statement": "Let $I$ be a nonempty directed set, let $(S_\\lambda)_{\\lambda\\in I}$ be an inverse system of schemes with affine transition morphisms, and let $S=\\varprojlim_{\\lambda\\in I}S_\\lambda$. Fix $\\lambda_0\\in I$ such that $S_{\\lambda_0}$ is quasi-compact and quasi-separated, and let $X_{\\lambda_0}$ and $Y_{\\lambda_0}$ be schemes of finite presentation over $S_{\\lambda_0}$. Put $X_\\lambda=X_{\\lambda_0}\\times_{S_{\\lambda_0}}S_\\lambda$, $Y_\\lambda=Y_{\\lambda_0}\\times_{S_{\\lambda_0}}S_\\lambda$, $X=X_{\\lambda_0}\\times_{S_{\\lambda_0}}S$, and $Y=Y_{\\lambda_0}\\times_{S_{\\lambda_0}}S$, with the canonical projections of [def-nagata-basechanged-system], and let $\\varphi\\colon X\\to Y$ be an $S$-morphism. Make the finite affine covers, descended opens, affine refinements, generator and relation lifts, rebased comparison maps, and finite overlap-equality witnesses fixed by [def-nagata-morphism-descent]; let $\\lambda_\\varphi=u(F)$ and let $\\varphi_{\\lambda_\\varphi}\\colon X_{\\lambda_\\varphi}\\to Y_{\\lambda_\\varphi}$ be the glued morphism defined there. Then the base change of $\\varphi_{\\lambda_\\varphi}$ along $S\\to S_{\\lambda_\\varphi}$ is the given morphism $\\varphi$.",
  "source": {
   "document": "literature/blueprint/master/blueprint/sec-nagata-compactification/sk-prop-nagata-sketch-approximation/lemma-nagata-morphism-descends.md",
   "place": "node lemma-nagata-morphism-descends, order 354"
  },
  "stmt_deps": [
+  "def-nagata-basechanged-system",
   "def-nagata-morphism-descent"
  ],
  "proof": [
   {
-   "text": "The inverse-image opens pull back to the original opens by the quasi-compact\nopen descent property. On each affine piece, the descended ring map pulls\nback to the original map by the affine finite-presentation property. The\nselected equality stages make those local maps agree on all overlaps, so\ntheir gluing pulls back to the gluing of the original local maps, namely\n$\\varphi$.",
-   "uses": [],
-   "elementary": null
+   "text": "For each target chart $V_{jk}$, the construction of [def-nagata-morphism-descent] descends the quasi-compact open $W_{jk}^\\infty=\\varphi^{-1}(V_{jk}\\times_{S_{\\lambda_0}}S)$ to $\\widetilde W_{jk,\\lambda_{jk}}$; by [lemma-nagata-qc-open-descends] this open is quasi-compact and its inverse image in $X$ is exactly $W_{jk}^\\infty$. The construction then replaces it by $W_{jk,\\lambda_{jk}}=\\widetilde W_{jk,\\lambda_{jk}}\\cap(X_{\\lambda_{jk}}\\times_{S_{\\lambda_{jk}}}T_{j,\\lambda_{jk}})$. The inverse image of the second factor in $X$ is $X\\times_ST_{j,S}$ ($T_{j,S}$ the inverse image of $T_j$ in $S$), and it contains $W_{jk}^\\infty$ because $\\varphi$ is an $S$-morphism and $V_{jk}$ maps into $T_j$; hence the inverse image of $W_{jk,\\lambda_{jk}}$ in $X$ is still $W_{jk}^\\infty$, and every affine refinement $U_{jkl}$ lies over $T_{j,\\lambda_{jk}}$. Inverse images commute with the transport to later stages by the compatibility of the canonical maps of [def-nagata-basechanged-system], so for every stage $\\lambda\\geq\\lambda_{jk}$ used below the inverse image $U_{jkl}^\\infty$ of $U_{jkl,\\lambda}$ in $X$ is the same open of $W_{jk}^\\infty$, and $W_{jk}^\\infty=\\bigcup_lU_{jkl}^\\infty$.",
+   "uses": [
+    "def-nagata-basechanged-system",
+    "def-nagata-morphism-descent",
+    "lemma-nagata-qc-open-descends"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-nagata-compactification/sk-prop-nagata-sketch-approximation/lemma-nagata-morphism-descends.md",
+    "place": "## Proof"
+   }
+  },
+  {
+   "text": "Fix $j,k,l$ and a stage $\\lambda$ at which [def-nagata-morphism-descent] has defined the $R_j$-algebra map $\\psi_\\lambda\\colon B_{jk}\\to\\Gamma(U_{jkl,\\lambda},\\mathcal O)$ (sending each generator $g\\in G_{jk}$ to its chosen lift; the relations vanish there, so $\\psi_\\lambda$ is well defined) and the $S_\\lambda$-morphism $U_{jkl,\\lambda}\\to V_{jk}\\times_{S_{\\lambda_0}}S_\\lambda$ it induces. Since $S\\to S_\\lambda$ is affine, $U_{jkl}^\\infty=U_{jkl,\\lambda}\\times_{S_\\lambda}S$ is affine, and the base change of this morphism to $S$ is the $S$-morphism $U_{jkl}^\\infty\\to V_{jk}\\times_{S_{\\lambda_0}}S$ induced by the composite $R_j$-algebra map $B_{jk}\\to\\Gamma(U_{jkl,\\lambda},\\mathcal O)\\to\\Gamma(U_{jkl}^\\infty,\\mathcal O)$. By the lifting property of [lemma-nagata-filtered-colimit-finite-data] (lifts map to the selected elements, and continue to do so after every transition), this composite sends each $g\\in G_{jk}$ to the image of $g$ under $\\varphi^\\sharp\\colon B_{jk}\\to\\Gamma(U_{jkl}^\\infty,\\mathcal O)$, the ring map of the restriction $\\varphi|_{U_{jkl}^\\infty}\\colon U_{jkl}^\\infty\\to V_{jk}\\times_{S_{\\lambda_0}}S$ (defined since $U_{jkl}^\\infty\\subseteq W_{jk}^\\infty$ by Step 1). Two $R_j$-algebra maps out of $B_{jk}$ that agree on the generators $G_{jk}$ are equal, and $S$-morphisms from the affine $U_{jkl}^\\infty$ (which lies over $T_{j,S}$) to $V_{jk}\\times_{S_{\\lambda_0}}S=V_{jk}\\times_{T_j}T_{j,S}$ correspond to $R_j$-algebra maps $B_{jk}\\to\\Gamma(U_{jkl}^\\infty,\\mathcal O)$. Hence the base change to $S$ of the descended chart map is $\\varphi|_{U_{jkl}^\\infty}$. Transporting the chart map to a later stage $\\mu\\geq\\lambda$ (in particular to $\\lambda_\\varphi$) by the canonical maps of [def-nagata-basechanged-system] does not change its base change to $S$, by transitivity of base change along $S\\to S_\\mu\\to S_\\lambda$.",
+   "uses": [
+    "def-nagata-basechanged-system",
+    "def-nagata-morphism-descent",
+    "lemma-nagata-filtered-colimit-finite-data"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-nagata-compactification/sk-prop-nagata-morphism-descends.md",
+    "place": "## Proof"
+   }
+  },
+  {
+   "text": "By [def-nagata-morphism-descent], $\\varphi_{\\lambda_\\varphi}\\colon X_{\\lambda_\\varphi}\\to Y_{\\lambda_\\varphi}$ is the morphism glued from the transported chart maps on the open cover $\\{U_{jkl,\\lambda_\\varphi}\\}$ of $X_{\\lambda_\\varphi}$, so its restriction to each $U_{jkl,\\lambda_\\varphi}$ is the transported chart map. Base change to $S$ commutes with restriction to opens, so the restriction of the base change $\\varphi_{\\lambda_\\varphi}\\times_{S_{\\lambda_\\varphi}}S$ to $U_{jkl}^\\infty$ (the inverse image of $U_{jkl,\\lambda_\\varphi}$) is the base change of the transported chart map, which is $\\varphi|_{U_{jkl}^\\infty}$ by Step 2. By Step 1 the $U_{jkl}^\\infty$ cover $\\bigcup_{j,k}W_{jk}^\\infty=\\varphi^{-1}(\\bigcup_{j,k}V_{jk}\\times_{S_{\\lambda_0}}S)=X$, as the $V_{jk}$ cover $Y_{\\lambda_0}$. Two morphisms of schemes $X\\to Y$ that agree on every member of an open cover of $X$ are equal, so the base change of $\\varphi_{\\lambda_\\varphi}$ to $S$ is $\\varphi$.",
+   "uses": [
+    "def-nagata-morphism-descent"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-nagata-compactification/sk-prop-nagata-sketch-approximation/lemma-nagata-morphism-descends.md",
+    "place": "## Proof"
+   }
   }
  ],
  "proof_deps": [
-  "lemma-nagata-affine-fp-descends",
-  "lemma-nagata-qc-open-descends"
+  "def-nagata-basechanged-system",
+  "def-nagata-morphism-descent",
+  "lemma-nagata-qc-open-descends",
+  "lemma-nagata-filtered-colimit-finite-data"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/master/blueprint/sec-nagata-compactification/sk-prop-nagata-sketch-approximation/lemma-nagata-morphism-descends.md",
+  "document": "literature/blueprint/master/blueprint/sec-nagata-compactification/sk-prop-nagata-morphism-descends.md",
   "place": "## Proof"
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "The base change of a descended morphism obtained by gluing affine maps equals the original morphism",
+   "results": "AlgebraicGeometry.Scheme.Pullback.gluing_ι; AlgebraicGeometry.Scheme.Cover.ι_glueMorphisms; AlgebraicGeometry.Scheme.Pullback.gluedLift; AlgebraicGeometry.Scheme.Pullback.gluedLift_p1",
+   "date": "2026-10-10",
+   "verdict": "no match: only generic gluing/pullback API"
+  },
+  {
+   "tool": "loogle",
+   "query": "Scheme.Hom pullback base change morphism equality gluing",
+   "results": "loogle: Unknown identifier `Scheme.Hom`",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "descends|baseChange|pullback [AlgebraicGeometry]",
+   "results": "25 hits, chiefly Mathlib/AlgebraicGeometry/Restrict.lean and ProjectiveSpectrum/Basic.lean; no exact theorem",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "base change of a morphism constructed by gluing local affine maps equals the original morphism",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-10",
+   "verdict": "unavailable"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [
   "bypassed"
@@ -71,5 +135,21 @@
   }
  },
  "chapter": "sec-nagata-compactification",
- "unit": "sk-prop-nagata-sketch-approximation"
+ "unit": "sk-prop-nagata-sketch-approximation",
+ "split_report": {
+  "date": "2026-10-11",
+  "item": "lemma-nagata-morphism-descends",
+  "worker": "stage1",
+  "summary": "Repaired the split against the H1 finite-stage construction: descended opens are intersected with the inverse image of the base chart, and affine morphisms are descended from generator lifts and relation equalities. The affine descent lemma is used only for the algebra comparison isomorphism; morphism-level equality uses the finite-data and elementwise filtered-colimit statements.",
+  "blueprint": "Realizes the blueprint proof sentences about inverse-image opens, affine ring maps, and overlap-compatible gluing in the node's ## Proof section.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-nmd2940",
+  "group": "M1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-nmd2940 (reviewer sub-agent of L); spot-checked: Checked against merged def-nagata-morphism-descent (cc5753175, statement identical on branch and sheaf-dag) and the citer def-nagata-relative-gluing-datum-descent (uses only 'base change of the glued morphism is phi', which the statement gives). 22:25/22:35 points addressed in Step 1 (intersection with T_j inverse image). FIX more, RETURN less: (1) C4 Step 2, missed by the second reading: still cited lemma-nagata-affine-fp-descends/def-nagata-affine-fp-descent for an 'algebra comparison isomorphism' that the merged construction never forms (B_jk is used as is); dropped them and wrote the morphism-level argument: composite B_jk->Gamma(U_lambda)->Gamma(U^infty) agrees with phi^# on generators by lemma-nagata-filtered-colimit-finite-data, hence equal as R_j-algebra maps, hence the base change of the chart map is phi|U^infty; transport to lambda_phi preserves this by transitivity of base change. (2) C1 Step 1: added why the T_j-intersection keeps inverse image W^infty (phi is an S-morphism, V_jk over T_j) and that the U^infty_jkl cover W^infty_jk. (3) C1/C5 Step 3: removed unused lem-pc-filtered-colimit-commrings-elementwise and def-nagata-directed-finite-upper-bound; the conclusion is restriction of the glued morphism to charts + agreement on the cover U^infty_jkl of X; proof_deps recomputed.; 1 file(s) fixed by the reviewer"
+ }
 }
