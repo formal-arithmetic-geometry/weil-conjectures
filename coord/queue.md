@@ -1,8 +1,8 @@
 # Work queue
 
-850 items; claim with `tools/claim.py next <group> [--stage N]`.
+851 items; claim with `tools/claim.py next <group> [--stage N]`.
 
-## Stage 1: nodes to split (388)
+## Stage 1: nodes to split (389)
 
 | node | distance to a target | Lean state on the done branch |
 |---|---|---|
@@ -45,6 +45,8 @@
 | `lem-weil-pbc-sets-etale-inverse-image-composition-units` | 2006 | none |
 | `lem-weil-pbc-sets-finite-surjective-descent` | 2006 | none |
 | `lemma-weil-pbc-finite-refinement-etale-cover` | 2006 | sorry_here |
+| `lem-weil-pbc-sets-etale-inverse-image-stalk-germ` | 2007 | none |
+| `lem-weil-pbc-sets-finite-pushforward-stalk` | 2007 | none |
 | `def-sp-etale-dictionary` | 3002 | none |
 | `def-weil-pbc-inverse-image` | 3002 | none |
 | `def-weil-pbc-etale-cohomology` | 3003 | none |
@@ -53,7 +55,6 @@
 | `def-sc-constant-sheaves` | 3004 | none |
 | `def-weil-pbc-curve-setting` | 3004 | none |
 | `def-weil-pbc-pointed-etale-neighbourhoods` | 3004 | none |
-| `lem-pc-homeo-pure-insep` | 3004 | none |
 | `lem-pc-module-pullback-adjunction` | 3004 | none |
 | `lem-pc-module-pullback-identity-composition` | 3004 | none |
 | `lem-weil-pbc-zero-dimensional-cohomology` | 3004 | none |
@@ -862,7 +863,7 @@
 | `lem-weil-pbc-p1-field-dimension-one` | 4 | state |
 | `lem-weil-pbc-projective-space-zero-isomorphism` | 4 | state |
 
-Not open yet: 405 nodes that wait for stage 1, 854 nodes that wait for a statement dependency.
+Not open yet: 406 nodes that wait for stage 1, 855 nodes that wait for a statement dependency.
 
 ## Stage 3: modules to prove (0)
 
