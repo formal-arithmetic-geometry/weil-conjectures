@@ -66,7 +66,7 @@ homogeneous element is `HomogeneousLocalization.mul_mem_degreePart` applied poin
 ## TODO
 
 - Construct `M~` for an arbitrary graded `A`-module `M` and recover `𝒪(m)` as `(A(m))~`. All
-  the proofs in this file go through with `a ∈ 𝒜 i` replaced by `a ∈ M i`.
+  the proofs in this module go through with `a ∈ 𝒜 i` replaced by `a ∈ M i`.
 - Construct the multiplication `𝒪(m) ⊗ 𝒪(n) ≅ 𝒪(m + n)` canonically, without the hypothesis that
   the `D₊(f)` with `f` of degree `1` cover `Proj 𝒜`; its existence under that hypothesis is
   `AlgebraicGeometry.Proj.nonempty_tensorObj_twist_iso`.

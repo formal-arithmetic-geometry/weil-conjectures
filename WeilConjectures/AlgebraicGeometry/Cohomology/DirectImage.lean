@@ -22,7 +22,7 @@ This module only re-exports its parts, which live in
 of each part cheap.
 
 Let `f : X ⟶ T` be a proper morphism of finite presentation and let `ℱ` be an `𝒪_X`-module of
-finite presentation which is flat over `T`. This file states the fundamental finiteness and
+finite presentation which is flat over `T`. This module states the fundamental finiteness and
 base-change results about the higher direct images `R^q f_* ℱ`.
 
 The higher direct images are the right derived functors of the pushforward functor
@@ -30,7 +30,7 @@ The higher direct images are the right derived functors of the pushforward funct
 and `T.Modules`. This is a different construction from the sheaf cohomology `ℱ.H q` of
 `WeilConjectures/AlgebraicGeometry/Cohomology/Defs.lean`, which is an `Ext`-group in abelian
 sheaves; `nonempty_sections_higherDirectImage_iso_H` below is the comparison between the two,
-and it is what lets the statements of this file be combined with the ones phrased through
+and it is what lets the statements of this module be combined with the ones phrased through
 `ℱ.H q`.
 
 ## Implementation notes

@@ -20,7 +20,7 @@ public import WeilConjectures.Blowup.FiniteDegree.UniformNumerator
 This module only re-exports its parts, which live in `WeilConjectures.Blowup.FiniteDegree`; it
 was split to keep the compilation of each part cheap.
 
-This file proves the finite-degree approximation of a finite-type center on a blow-up:
+This module proves the finite-degree approximation of a finite-type center on a blow-up:
 for finite-type centers `I` on a qcqs scheme `X` and `J` on the blow-up of `I`, there
 are `d ≥ 1` and a finite-type `L ≤ I^d` whose inverse image ideal on the blow-up is
 `I_E^d · J` (`Scheme.IdealSheafData.exists_finiteDegree_center_le_blowup`, Stacks

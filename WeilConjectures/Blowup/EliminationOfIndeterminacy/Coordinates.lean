@@ -14,6 +14,7 @@ public import WeilConjectures.Blowup.EliminationOfIndeterminacy.Gluing
 public import WeilConjectures.Blowup.Extension
 public import WeilConjectures.Mathlib.AlgebraicGeometry.AffineScheme
 public import WeilConjectures.Mathlib.AlgebraicGeometry.AffineSpace
+public import WeilConjectures.Mathlib.AlgebraicGeometry.GammaSpecAdjunction
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.Preimmersion
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.Separated
@@ -102,16 +103,6 @@ lemma AffineSpace.mul_appTop_coord_eq_of_chartOverlap {σ : Type u} {X Bl : Sche
   apply hinj
   rw [map_mul, hres, hres, ← hval, hstep, hstep2]
 
-/-- (Implementation) The identity `φ x * ψ y = ψ z` read on global sections of `Spec`, stated
-for abstract rings so that it is not checked on the concrete chart rings. -/
-private lemma specMap_appTop_ΓSpecIso_inv_mul_eq {R S T : CommRingCat.{u}} (φ : R ⟶ T)
-    (ψ : S ⟶ T) (x : R) (y z : S) (h : φ x * ψ y = ψ z) :
-    (Spec.map φ).appTop ((Scheme.ΓSpecIso R).inv x) *
-        (Spec.map ψ).appTop ((Scheme.ΓSpecIso S).inv y) =
-      (Spec.map ψ).appTop ((Scheme.ΓSpecIso S).inv z) := by
-  rw [Scheme.specMap_appTop_ΓSpecIso_inv, Scheme.specMap_appTop_ΓSpecIso_inv,
-    Scheme.specMap_appTop_ΓSpecIso_inv, Scheme.ΓSpecIso_inv_mul, h]
-
 /-- **The chart-local coordinate identity for the glued extension.** On the overlap of the
 `c`-chart with the `d`-chart of the blow-up, the `j`-th coordinate of the extension is the
 fraction `(b j / c) / (d / c)`. -/
@@ -147,9 +138,11 @@ lemma Scheme.IdealSheafData.mul_appTop_coord_awaySlope (K : X.IdealSheafData)
   have hex := exists_isIso_lift_of_mem_iff _ hpbi.isOpenImmersion_fst
     (AffineBlowup.mem_range_specMap_awayMap_iff hc hd)
   obtain ⟨m₁', hm₁'iso, hm₁'⟩ := hex
+  -- `Scheme.specMap_appTop_ΓSpecIso_inv_mul_eq` moves the identity to `Spec` over abstract rings,
+  -- so that it is not checked on the concrete chart rings.
   exact AffineSpace.mul_appTop_coord_eq_of_chartOverlap K.blowupMap g
     (K.blowupChart V hc) lam hlam (K.blowupChart V hd) cid hcid _ hgid hBle _ _ hpbi.w
-    m₁' hm₁' _ _ j (specMap_appTop_ΓSpecIso_inv_mul_eq _ _ _ _ _
+    m₁' hm₁' _ _ j (Scheme.specMap_appTop_ΓSpecIso_inv_mul_eq _ _ _ _ _
       (AffineBlowup.awayMap_awaySlope_mul hc hd (hb j)))
 
 end Closedness

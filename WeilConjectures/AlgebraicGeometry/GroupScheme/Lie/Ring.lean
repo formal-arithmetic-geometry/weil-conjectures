@@ -193,6 +193,8 @@ theorem GrpObj.dualNumbersToSpecOver_comp_mem_infPoints {x : points G (DualNumbe
     (hx : x ∈ tangentGroup G) :
     dualNumbersToSpecOver ≫ x ∈ GrpObj.infPoints G := by
   rw [mem_tangentGroup, points.map, specMap_fstHom_asOver_eq] at hx
+  -- Writing `Over.homMk (𝟙 (Spec (.of R)))` rather than `Over.homMk (𝟙 _)` avoids a slow kernel
+  -- check.
   let s : Over.mk (𝟙 (Spec (.of R))) ⟶ (Spec (.of R)).asOver (Spec (.of R)) :=
     Over.homMk (𝟙 (Spec (.of R))) (by simp [specOverSpec_over])
   have e : s ≫ CartesianMonoidalCategory.toUnit _ = 𝟙 _ :=

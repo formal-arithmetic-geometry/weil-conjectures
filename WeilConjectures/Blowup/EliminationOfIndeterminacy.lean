@@ -26,7 +26,7 @@ This module only re-exports its parts, which live in
 `WeilConjectures.Blowup.EliminationOfIndeterminacy`; it was split to keep the compilation of
 each part cheap.
 
-This file proves Cases 1 and 2 of Conrad's Theorem 2.4 (Conrad, *Deligne's notes on
+This module proves Cases 1 and 2 of Conrad's Theorem 2.4 (Conrad, *Deligne's notes on
 Nagata compactifications*, proof of Theorem 2.4, pp. 13–16): a partial map from a
 quasi-compact open to a quasi-affine target locally of finite type extends, after an
 admissible blow-up, to an open neighbourhood of the preserved open with closed graph.

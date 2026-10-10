@@ -20,7 +20,7 @@ cheap.
 The Fourier–Deligne transform of `WeilConjectures.FourierTransform.Defs` is stated for an
 arbitrary pair of `S`-schemes with a pairing. Its main case is affine `n`-space `𝔸(n; S)`
 paired with itself by the standard pairing `⟨x, ξ⟩ = ∑ᵢ xᵢ ξᵢ` and shifted by the relative
-dimension `r = #n`; this file records that datum and the computation of the transform of
+dimension `r = #n`; this module records that datum and the computation of the transform of
 the two simplest complexes, the constant sheaf and the skyscraper at the origin.
 
 The affine-space data themselves — the standard pairing, the zero section and the

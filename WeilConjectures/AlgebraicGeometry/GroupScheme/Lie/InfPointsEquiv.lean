@@ -81,7 +81,8 @@ theorem toLie_bijective : Function.Bijective (toLie G) := by
   · obtain ⟨D, hD⟩ := (homOfDerivation_bijective G (unitSection G)).2
       ((Scheme.Modules.pullbackCongr (rfl : unitSection G = unitSection G)).hom.app
         G.hom.cotangentSheaf ≫ φ)
-    -- Keeping `v` opaque avoids unfolding it in the kernel.
+    -- Keep `v` opaque, which stops the kernel from unfolding it. (`generalize` would do the same,
+    -- but it cannot elaborate the `Over.homMk` without an expected type.)
     obtain ⟨v, hvdef⟩ : ∃ v : Scheme.dualNumbersOver S ⟶ G,
         v = Over.homMk (pointOfDerivation G (unitSection G) D)
           (pointOfDerivation_comp_hom G _ D (unitSection_comp_hom G)) := ⟨_, rfl⟩
@@ -92,7 +93,9 @@ theorem toLie_bijective : Function.Bijective (toLie G) := by
       exact (ι_comp_pointOfDerivation G _ D).trans (one_left G).symm
     refine ⟨⟨v, hv⟩, ?_⟩
     rw [toLie, omegaHom_eq_homOfDerivation, pullbackCongr_inv_comp_homOfDerivation G
-      (ι_comp_left_eq G hv) rfl _ D (fun a ↦ by subst hvdef; exact heq_of_eq (zero_add _)), hD,
+      (ι_comp_left_eq G hv) rfl _ D (fun a ↦ by
+        subst hvdef
+        exact heq_of_eq (zero_add _)), hD,
       Iso.inv_hom_id_app_assoc]
 
 /-- The infinitesimal points of `G` are its Lie algebra. (blueprint: `sk-d-tangent`) -/

@@ -1791,9 +1791,7 @@ noncomputable def chartUIso (E : ExtensionData.{u}) (T₀ : E.Stage) :
   NatIso.ofComponents
     (fun S ↦ IsOpenImmersion.isoOfRangeEq (pushout.inl (E.Wι S.left.j) S.left.toSpec)
       (Scheme.Opens.ι (E.stageDiagram.map S.hom ⁻¹ᵁ T₀.chartU))
-      ((Scheme.Hom.coe_opensRange _).symm.trans
-        ((congrArg SetLike.coe (Stage.preimage_chartU S.hom).symm).trans
-          (Scheme.Opens.range_ι _).symm)))
+      (Scheme.Hom.range_eq_range_ι_of_opensRange_eq _ (Stage.preimage_chartU S.hom).symm))
     (fun {S S'} k ↦ by
       rw [← cancel_mono (Scheme.Opens.ι (E.stageDiagram.map S'.hom ⁻¹ᵁ T₀.chartU))]
       simp only [Category.assoc, IsOpenImmersion.isoOfRangeEq_hom_fac,
@@ -1838,10 +1836,9 @@ noncomputable def interIso (E : ExtensionData.{u}) (T₀ : E.Stage) :
     (fun S ↦ IsOpenImmersion.isoOfRangeEq
       (E.Wι S.left.j ≫ pushout.inl (E.Wι S.left.j) S.left.toSpec)
       (Scheme.Opens.ι (E.stageDiagram.map S.hom ⁻¹ᵁ (T₀.chartU ⊓ T₀.chartV)))
-      ((Scheme.Hom.coe_opensRange _).symm.trans
-        ((congrArg SetLike.coe ((congrArg₂ (· ⊓ ·) (Stage.preimage_chartU S.hom)
-          (Stage.preimage_chartV S.hom)).trans (Stage.chartU_inf_chartV _)).symm).trans
-            (Scheme.Opens.range_ι _).symm)))
+      (Scheme.Hom.range_eq_range_ι_of_opensRange_eq _ ((congrArg₂ (· ⊓ ·)
+        (Stage.preimage_chartU S.hom) (Stage.preimage_chartV S.hom)).trans
+          (Stage.chartU_inf_chartV _)).symm))
     (fun {S S'} k ↦ by
       rw [← cancel_mono (Scheme.Opens.ι (E.stageDiagram.map S'.hom ⁻¹ᵁ
         (T₀.chartU ⊓ T₀.chartV)))]
@@ -1978,9 +1975,7 @@ noncomputable def chartVIso (E : ExtensionData.{u}) (T₀ : E.Stage) :
   NatIso.ofComponents
     (fun S ↦ IsOpenImmersion.isoOfRangeEq (pushout.inr (E.Wι S.left.j) S.left.toSpec)
       (Scheme.Opens.ι (E.stageDiagram.map S.hom ⁻¹ᵁ T₀.chartV))
-      ((Scheme.Hom.coe_opensRange _).symm.trans
-        ((congrArg SetLike.coe (Stage.preimage_chartV S.hom).symm).trans
-          (Scheme.Opens.range_ι _).symm)))
+      (Scheme.Hom.range_eq_range_ι_of_opensRange_eq _ (Stage.preimage_chartV S.hom).symm))
     (fun {S S'} k ↦ by
       rw [← cancel_mono (Scheme.Opens.ι (E.stageDiagram.map S'.hom ⁻¹ᵁ T₀.chartV))]
       simp only [Category.assoc, IsOpenImmersion.isoOfRangeEq_hom_fac,

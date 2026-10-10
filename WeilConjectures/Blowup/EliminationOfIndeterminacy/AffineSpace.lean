@@ -92,18 +92,6 @@ theorem exists_isAdmissible_extend_affineSpace [IsAffine X]
     obtain ⟨i, hxi⟩ := TopologicalSpace.Opens.mem_iSup.mp hxU
     exact hxs (u i ^ N) (Ideal.subset_span ⟨Sum.inl i, rfl⟩)
       (by rwa [Scheme.basicOpen_pow _ _ hNpos])
-  have happLE : ∀ {T T' : Scheme.{u}} (q : T ⟶ T') (h : (⊤ : T.Opens) ≤ q ⁻¹ᵁ ⊤),
-      q.appLE ⊤ ⊤ h = q.appTop := by
-    intro T T' q h
-    simp [Scheme.Hom.appLE]
-  have happ : ∀ (k : ι ⊕ ι × σ) (r : Γ(X, ⊤)),
-      (K.blowupChart V₀ (hgen k) ≫ K.blowupMap).appTop r =
-        (Scheme.ΓSpecIso _).inv (AffineBlowup.awayAlgebraMap (K.ideal V₀)
-          (reesX (K.ideal V₀) (gen k) (hgen k)) r) := by
-    intro k r
-    have h := K.appLE_blowupChart_comp_blowupMap V₀ (hgen k)
-      (K.blowupChart_comp_blowupMap_preimage V₀ (hgen k))
-    exact congrArg (fun φ ↦ φ r) ((happLE _ _).symm.trans h)
   -- the charts at the `u i ^ N` cover the preimage of `U`
   have hPchart : ∀ i : ι, K.blowupMap ⁻¹ᵁ X.basicOpen (u i) ≤
       (K.blowupChart V₀ (hgen (Sum.inl i))).opensRange := by
@@ -128,9 +116,10 @@ theorem exists_isAdmissible_extend_affineSpace [IsAffine X]
     refine ⟨z, ?_⟩
     rw [Scheme.IdealSheafData.blowupChart, Scheme.IdealSheafData.blowupChart,
       Scheme.Hom.comp_apply, Scheme.Hom.comp_apply, hz]
-  -- the open `W`
-  let W : K.blowup.Opens := ⨆ i : ι, (K.blowupChart V₀ (hgen (Sum.inl i))).opensRange
-  have hWdef : W = ⨆ i : ι, (K.blowupChart V₀ (hgen (Sum.inl i))).opensRange := rfl
+  -- the open `W`; it is only used through `hWdef`, so it is kept opaque (a `set` would also
+  -- try to abstract the supremum in the goal and in all hypotheses)
+  obtain ⟨W, hWdef⟩ : ∃ W : K.blowup.Opens,
+      W = ⨆ i : ι, (K.blowupChart V₀ (hgen (Sum.inl i))).opensRange := ⟨_, rfl⟩
   have hWmem : K.blowupMap ⁻¹ᵁ U ≤ W := by
     intro x hx
     have hxU : K.blowupMap x ∈ ⨆ i : ι, X.basicOpen (u i) := by rw [← hUeq]; exact hx

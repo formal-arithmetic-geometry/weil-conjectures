@@ -45,7 +45,7 @@ section Closedness
 variable {A : Type u} [CommRing A] {I : Ideal A}
 variable {X : Scheme.{u}}
 
-set_option maxHeartbeats 1000000 in
+set_option maxHeartbeats 600000 in
 -- Unifying the `HomogeneousLocalization` chart rings exceeds the default heartbeat limit.
 /-- **Closedness of the graph of the glued extension.** -/
 lemma Scheme.IdealSheafData.isClosed_range_pullbackLift_of_awaySlope
@@ -138,11 +138,11 @@ lemma Scheme.IdealSheafData.isClosed_range_pullbackLift_of_awaySlope
       intro i
       exact (le_iSup (fun i ↦ PrimeSpectrum.basicOpen
         (AffineBlowup.awaySlope (K.ideal V) (hgen k) (ha i))) i).trans_eq hO.symm
-    refine AffineSpace.isClosed_range_of_basicOpen_fractions
+    -- `O` and `B` are passed explicitly: inferring them by unification is slow.
+    refine AffineSpace.isClosed_range_of_basicOpen_fractions (O := K.blowupChart V (hgen k) ⁻¹ᵁ W)
+      (B := fun i ↦ PrimeSpectrum.basicOpen (AffineBlowup.awaySlope (K.ideal V) (hgen k) (ha i)))
       (fun i ↦ AffineBlowup.awaySlope (K.ideal V) (hgen k) (ha i))
       (fun i j ↦ AffineBlowup.awaySlope (K.ideal V) (hgen k) (hb i j)) ?_ ?_
-      (O := K.blowupChart V (hgen k) ⁻¹ᵁ W)
-      (B := fun i ↦ PrimeSpectrum.basicOpen (AffineBlowup.awaySlope (K.ideal V) (hgen k) (ha i)))
       (fun i ↦ rfl) hO _ (AffineSpace.homOfVector_over _ _) hBle ?_
     · -- the slopes of the generators generate the unit ideal
       refine Ideal.span_mono ?_
@@ -157,9 +157,12 @@ lemma Scheme.IdealSheafData.isClosed_range_pullbackLift_of_awaySlope
       rw [mul_comm (a i), hrel i' i j, mul_comm]
     · -- the coordinate identity on each piece
       intro i j
-      have h := K.mul_appTop_coord_awaySlope V g (hgen k) lam hlam (ha i) (hb i) (ci i)
-        (hci i) (hgi i) rfl (hBle i) j
-      convert h using 2
+      -- The goal and the type of the lemma agree up to unfolding, but not syntactically.
+      -- `convert` matches them argument by argument and closes every resulting goal by `rfl`;
+      -- `exact` checks the definitional equality at once, unfolding the chart rings, and makes
+      -- the file about four times slower.
+      convert K.mul_appTop_coord_awaySlope V g (hgen k) lam hlam (ha i) (hb i) (ci i) (hci i)
+        (hgi i) rfl (hBle i) j using 2
 
 end Closedness
 
