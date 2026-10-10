@@ -1,6 +1,6 @@
 # Work queue
 
-885 items; claim with `tools/claim.py next <group> [--stage N]`.
+886 items; claim with `tools/claim.py next <group> [--stage N]`.
 
 ## Stage 1: nodes to split (105)
 
@@ -17,11 +17,11 @@
 | `lem-pc-perfect-rhom-tensor-comparison` | 3018 | none |
 | `lem-pc-global-hom-adjunction` | 3019 | none |
 | `lem-pc-tor-independent-perfect-tensor-base-change` | 3020 | none |
-| `lem-sc-affine-perfect-derived-tensor-hom` | 3020 | none |
 | `lem-sc-affine-perfect-open-represent-cohomology` | 3020 | none |
 | `lem-sc-perfect-into-support-on-T` | 3020 | none |
 | `lem-pc-derived-internal-hom-pullback-adjunction` | 3021 | none |
 | `lem-sc-affine-perfect-plus-locally-free` | 3021 | none |
+| `lem-sc-derived-internal-hom-adjunction` | 3021 | none |
 | `lem-pc-pseudo-coherent-summand` | 3023 | none |
 | `lem-pc-genus-agrees-sc` | 4007 | rests_on_sorry |
 | `prop-av-tate-rank` | 4008 | rests_on_sorry |
@@ -57,12 +57,12 @@
 | `lem-sc-units-quotient-base-change` | - | none |
 | `lem-weil-pbc-generic-separable-algebra-splitting` | - | none |
 | `lem-weil-pbc-spread-finite-separable-extension` | - | none |
-| `lem-weil-pbc-spread-purely-inseparable-factors` | - | none |
 | `lem-weil-separably-closed-geometrically-connected` | - | none |
 | `def-nagata-morphism-descent` | - | none |
 | `lem-pc-finite-support-hi` | - | sorry_here |
 | `lem-pc-projective-coherent-higher-images` | - | sorry_here |
 | `lem-sc-affine-constant-second` | - | rests_on_sorry |
+| `lem-weil-pbc-power-in-base-after-localization` | - | none |
 | `lemma-nagata-morphism-descends` | - | none |
 | `sbc-lem-higher-direct-image-limit` | - | none |
 | `lem-kun-closed-point-field` | - | none |
@@ -112,7 +112,7 @@
 | `lem-zl-noether-normalization-dimension` | - | none |
 | `lem-pur-rhom-global-sections` | - | none |
 
-## Stage 2: nodes to state (780)
+## Stage 2: nodes to state (781)
 
 | node | distance to Mathlib | kind |
 |---|---|---|
@@ -793,6 +793,7 @@
 | `lem-weil-pbc-spectral-sheaf-colimit-constant-embeddings` | 1 | state |
 | `lem-weil-pbc-split-extension-free-presentation` | 1 | state |
 | `lem-weil-pbc-split-injection-after-completion` | 1 | state |
+| `lem-weil-pbc-spread-purely-inseparable-factors` | 1 | state |
 | `lem-weil-pbc-standard-fpqc-quotient-topology` | 1 | state |
 | `lem-weil-pbc-standard-smooth-include-generators` | 1 | state |
 | `lem-weil-pbc-stein-fibre-idempotent-image` | 1 | state |
@@ -897,7 +898,7 @@
 | `lem-weil-pbc-projective-space-zero-isomorphism` | 4 | state |
 | `def-nagata-fixed-base-separated-stage` | 6 | state |
 
-Not open yet: 1597 nodes that wait for a statement dependency, 145 nodes that wait for stage 1.
+Not open yet: 1598 nodes that wait for a statement dependency, 145 nodes that wait for stage 1.
 
 ## Stage 3: modules to prove (0)
 
