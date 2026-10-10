@@ -14,18 +14,47 @@
  },
  "proof": [],
  "proof_deps": [],
- "proof_origin": null,
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/schemes.tex",
+  "place": "Schemes, Lemma Tags 01KN and 01KV"
+ },
  "mathlib_searches": [
   {
-   "tool": "grep",
-   "query": "grep -n 'IsSeparated' Mathlib/AlgebraicGeometry/Morphisms/Separated.lean",
-   "results": "Separated.lean:354 instance [IsAffine X] : X.IsSeparated; Separated.lean:359 instance [X.IsSeparated] : IsSeparated f",
+   "tool": "leansearch",
+   "query": "an affine scheme is separated, and every morphism whose source is separated is separated",
+   "results": "HTTP Error 500: Internal Server Error (service unavailable)",
    "date": "2026-10-10",
-   "verdict": "match by two declarations (affine scheme separated; any morphism from a separated scheme separated); the splitter should verify and record it as a Mathlib leaf"
+   "verdict": "not available (service error); other search kinds used"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "affine scheme separated morphism source separated",
+   "results": "AlgebraicGeometry.Scheme.instIsSeparatedOfIsAffine; AlgebraicGeometry.Scheme.instIsSeparatedOfIsSeparated; both in Mathlib.AlgebraicGeometry.Morphisms.Separated",
+   "date": "2026-10-10",
+   "verdict": "match"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Scheme.instIsSeparatedOfIsAffine",
+   "results": "AlgebraicGeometry.Scheme.instIsSeparatedOfIsAffine : {X : AlgebraicGeometry.Scheme} [AlgebraicGeometry.IsAffine X] : X.IsSeparated (Mathlib.AlgebraicGeometry.Morphisms.Separated)",
+   "date": "2026-10-10",
+   "verdict": "match for the affine-source clause"
+  },
+  {
+   "tool": "grep",
+   "query": "rg -n 'instance.*IsSeparated|IsSeparated.comp|iff_of_isAffine' /home/ubuntu/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicGeometry/Morphisms/Separated.lean",
+   "results": "Separated.lean:354 instance [IsAffine X] : X.IsSeparated; Separated.lean:359-362 instance [X.IsSeparated] : IsSeparated f; Separated.lean:75 composition permanence; declaration source read with nl -ba",
+   "date": "2026-10-10",
+   "verdict": "match by the two instances"
   }
  ],
- "mathlib_match": null,
- "status": "unsplit",
+ "mathlib_match": {
+  "declaration": "AlgebraicGeometry.Scheme.instIsSeparatedOfIsAffine; AlgebraicGeometry.Scheme.instIsSeparatedOfIsSeparated",
+  "file": "Mathlib/AlgebraicGeometry/Morphisms/Separated.lean",
+  "how": "exact conjunction of the two clauses: line 354 gives X.IsSeparated from [IsAffine X], and lines 359-362 give IsSeparated f from [X.IsSeparated]"
+ },
+ "status": "mathlib",
  "merged_into": null,
  "created": {
   "by": "R-fr3",
@@ -50,5 +79,20 @@
   "slopmaster2": {
    "state": "none"
   }
+ },
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "lem-weil-pbc-affine-source-morphism-separated",
+  "worker": "stage1",
+  "summary": "The statement is already a Mathlib leaf. Mathlib's affine-scheme separatedness instance (Separated.lean:354) and its instance lifting source-scheme separatedness to a morphism (Separated.lean:359-362) exactly cover the two clauses of the Stacks Tags 01KN and 01KV argument; no new nodes or proof steps are required.",
+  "blueprint": "The item realizes the imported proof's clause 'separatedness of the affine refinement E -> T' from blueprint ancestor lemma-weil-pbc-finite-refinement-etale-cover; the clause is discharged by the exact Mathlib instances above."
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-asm",
+  "group": "J1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-asm (reviewer sub-agent of L); spot-checked: Source: Stacks Schemes 01KN (affine scheme is separated) with 01KV (g o f separated implies f separated, g = structure morphism of Y); the item's statement (f: X -> Y, X affine, then f separated) is unchanged and agrees with it hypothesis by hypothesis. Mathlib leaf verified in the pinned Mathlib, Mathlib/AlgebraicGeometry/Morphisms/Separated.lean: line 354 'instance (priority := 900) {X : Scheme} [IsAffine X] : X.IsSeparated' and lines 359-362 'instance [X.IsSeparated] : IsSeparated f' (proved via IsSeparated.of_comp with terminal.from Y, exactly the 01KV route); one declaration per clause with lines in how (delivery-errors A6, A8); Mathlib IsSeparated (diagonal a closed immersion, line 44) is the Stacks notion, no notion-agreement theorem needed. No proof steps, no new nodes, only the item and report changed, review section present. Small case: X = Spec k, Y = affine line with doubled origin, f any point: separated since X affine, consistent. Start Sat Oct 10 03:22:01 PM UTC 2026, end Sat Oct 10 03:22:20 PM UTC 2026."
  }
 }
