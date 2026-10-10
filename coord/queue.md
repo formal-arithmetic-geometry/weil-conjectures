@@ -1,8 +1,8 @@
 # Work queue
 
-891 items; claim with `tools/claim.py next <group> [--stage N]`.
+889 items; claim with `tools/claim.py next <group> [--stage N]`.
 
-## Stage 1: nodes to split (121)
+## Stage 1: nodes to split (119)
 
 | node | distance to a target | Lean state on the done branch |
 |---|---|---|
@@ -15,8 +15,6 @@
 | `lem-pc-perfect-pseudo-coherent-locally-finite-tor` | 3015 | none |
 | `lem-sc-derived-hom-mayer-vietoris` | 3015 | none |
 | `lem-pc-injective-split-tower-injective` | 3016 | none |
-| `lem-pc-pseudo-coherent-bounded-finite-free-model` | 3016 | none |
-| `lem-pc-supported-open-pushforward` | 3016 | none |
 | `lem-pc-perfect-rhom-tensor-comparison` | 3018 | none |
 | `lem-pc-global-hom-adjunction` | 3019 | none |
 | `lem-pc-koszul-affine-detection` | 3019 | none |
@@ -25,7 +23,6 @@
 | `lem-sc-affine-perfect-derived-tensor-hom` | 3020 | none |
 | `lem-sc-affine-perfect-open-represent-cohomology` | 3020 | none |
 | `lem-sc-affine-support-iterated-cones` | 3020 | none |
-| `lem-sc-perfect-derived-tensor-perfect` | 3020 | none |
 | `lem-sc-perfect-into-support-on-T` | 3020 | none |
 | `lem-sc-affine-perfect-plus-locally-free` | 3021 | none |
 | `lem-pc-perfect-summand` | 3022 | none |
@@ -40,14 +37,13 @@
 | `lem-sc-ass-weakass-locally-noetherian` | 5012 | none |
 | `lem-sc-meromorphic-weakass-generic-product` | 5012 | none |
 | `lem-sc-components-open-injection` | 5013 | none |
-| `lem-pc-affine-perfect-colimit-descent` | 5014 | none |
 | `lem-pc-rf-single-complex-inherited-tensor-condition` | 5014 | none |
 | `lem-pc-rf-single-complex-qcqs-induction` | 5014 | none |
 | `lem-pc-affine-perfect-hom-colimit` | 5015 | none |
 | `lem-pc-flat-module-descent` | 5015 | none |
+| `lem-pc-fp-module-map-descent-affine` | 5015 | none |
 | `lem-pc-sites-module-sheafification-interface` | 5015 | none |
 | `lem-pc-sites-module-sheafification-tensor` | 5015 | none |
-| `lem-pc-fp-module-map-descent-affine` | 5017 | none |
 | `thm-sp-spectral-object-yields` | 6006 | none |
 | `lem-sp-cartan-eilenberg-double-complex-homotopy` | 6007 | none |
 | `lem-sc-picard-diagonal-locally-closed` | 6012 | none |
@@ -56,15 +52,18 @@
 | `lem-sc-proper-flat-global-sections` | 6012 | none |
 | `pqf-lem-serre-criterion` | 6013 | none |
 | `lem-sc-base-change-curve` | - | none |
-| `thm-sc-constant-invariance` | - | none |
 | `lem-pc-coherent-hi` | - | sorry_here |
 | `lem-pod-adic-tower-reconstruction` | - | none |
 | `lem-pod-etale-stalk-tensor-scalar` | - | none |
 | `lem-sc-global-functions` | - | rests_on_sorry |
+| `lem-sc-kummer-base-change-compatibility` | - | none |
+| `lem-sc-proper-or-affine` | - | none |
+| `lem-sc-units-quotient-base-change` | - | none |
 | `lem-weil-pbc-generic-separable-algebra-splitting` | - | none |
 | `lem-weil-pbc-pullback-finite-locally-constant` | - | none |
 | `lem-weil-pbc-spread-finite-separable-extension` | - | none |
 | `lem-weil-pbc-spread-purely-inseparable-factors` | - | none |
+| `lem-weil-separably-closed-geometrically-connected` | - | none |
 | `def-nagata-morphism-descent` | - | none |
 | `lem-fin-normal-generic-constant` | - | none |
 | `lem-pc-finite-support-hi` | - | sorry_here |
@@ -87,7 +86,6 @@
 | `lem-sc-zariski-flasque-acyclic` | - | none |
 | `lem-weil-geometrically-connected-check-after-extension` | - | none |
 | `lem-weil-pbc-lisse-generic-kernel` | - | none |
-| `lem-weil-separably-closed-geometrically-connected` | - | none |
 | `prop-pur-kinjective-resolutions-exist` | - | none |
 | `sbc-lem-smooth-geometrically-reduced` | - | none |
 | `def-pc-derived-category` | - | none |
@@ -903,7 +901,7 @@
 | `lem-weil-pbc-projective-space-zero-isomorphism` | 4 | state |
 | `def-nagata-fixed-base-separated-stage` | 6 | state |
 
-Not open yet: 1586 nodes that wait for a statement dependency, 161 nodes that wait for stage 1.
+Not open yet: 1591 nodes that wait for a statement dependency, 159 nodes that wait for stage 1.
 
 ## Stage 3: modules to prove (0)
 
