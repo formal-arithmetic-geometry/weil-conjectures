@@ -1,0 +1,68 @@
+{
+ "id": "lem-weil-pbc-sheaf-coproduct-finite-subcoproducts",
+ "kind": "statement",
+ "title": "A coproduct of sheaves of sets is the directed colimit of its finite subcoproducts, with injective transition maps",
+ "statement": "Let $X$ be a topological space (sheaves of sets on $X$ are those on the site of open subsets of $X$ with open coverings [def-weil-pbc-sites-and-cohomology]), $A$ a set and $(\\mathcal G_a)_{a\\in A}$ a family of sheaves of sets on $X$. For every subset $A'\\subseteq A$ let $(C_{A'},(\\iota^{A'}_a)_{a\\in A'})$ be a coproduct of $(\\mathcal G_a)_{a\\in A'}$ in the category of sheaves of sets on $X$ [def-weil-pbc-category-colimit] (coproducts of sheaves of sets exist), and for $A'\\subseteq A''\\subseteq A$ let $\\kappa_{A''A'}:C_{A'}\\to C_{A''}$ be the unique morphism with $\\kappa_{A''A'}\\circ\\iota^{A'}_a=\\iota^{A''}_a$ for all $a\\in A'$; write $C=C_A$ and $\\kappa_{A'}=\\kappa_{AA'}$. Then: (1) the finite subsets of $A$, ordered by inclusion, form a directed set (nonempty, any two have a common upper bound), $(C_{A'},\\kappa_{A''A'})$ is a system of sheaves over it ($\\kappa_{A'A'}=\\mathrm{id}$, $\\kappa_{A'''A''}\\kappa_{A''A'}=\\kappa_{A'''A'}$), and $(C,(\\kappa_{A'})_{A'\\text{ finite}})$ is a colimit of this system in the category of sheaves of sets on $X$; (2) for all subsets $A'\\subseteq A''\\subseteq A$ and every open $W\\subseteq X$ the map of sets $\\kappa_{A''A',W}:C_{A'}(W)\\to C_{A''}(W)$ is injective.",
+ "source": {
+  "document": "literature/stacks-project/modules.tex",
+  "place": "Modules, proof of Lemma Tag 0CAI (lemma-filtered-colimit-constructibles): 'we can view the right hand side as a filtered colimit with injective transition maps'; colimits of sheaves: Sites, Lemma Tag 00WI (lemma-colimit-sheaves)"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-sites-and-cohomology",
+  "def-weil-pbc-category-colimit"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "coproduct inclusion of sheaves of types is a monomorphism",
+   "results": "CategoryTheory.Limits.MonoCoprod.mono_inj, MonoCoprod.mono_ι, MonoCoprod.mono_of_injective' (Mathlib.CategoryTheory.Limits.MonoCoprod); CategoryTheory.instMonoCoprodOfFinitaryExtensive (Mathlib.CategoryTheory.Extensive)",
+   "date": "2026-10-10",
+   "verdict": "match for clause (2) (with the sheaf instances found by grep)"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "coproduct is the filtered colimit of the coproducts over finite subsets",
+   "results": "CategoryTheory.Limits.CoproductsFromFiniteFiltered.isColimitFiniteSubproductsCocone, finiteSubcoproductsCocone, liftToFinsetColimitCocone (Mathlib.CategoryTheory.Limits.Constructions.Filtered)",
+   "date": "2026-10-10",
+   "verdict": "match for clause (1)"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rn 'FinitaryExtensive (Sheaf\\|instance.*MonoCoprod\\|mono_of_injective\\|presheaf_mono_of_mono\\|mono_iff_mono_app\\|theorem mono_iff_injective' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/{CategoryTheory/Sites,CategoryTheory/Limits,CategoryTheory/Extensive.lean,CategoryTheory/Types}",
+   "results": "Sites/LeftExact.lean:329 instance SheafOfTypes.finitary_extensive : FinitaryExtensive (Sheaf J (Type w)); Extensive.lean:177 instance [FinitaryExtensive C] : MonoCoprod C; Limits/MonoCoprod.lean:197 MonoCoprod.mono_of_injective' (Mono (Sigma.desc fun j => Sigma.ι X (ι j)) for injective ι); Sites/ConcreteSheafification.lean:607 instance presheaf_mono_of_mono (Mono f -> Mono f.1); Limits/FunctorCategory/EpiMono.lean:38 NatTrans.mono_iff_mono_app; Types/Basic.lean:365 mono_iff_injective; Limits/Constructions/Filtered.lean:103 isColimitFiniteSubproductsCocone",
+   "date": "2026-10-10",
+   "verdict": "match: one Mathlib result per clause"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "CategoryTheory.Limits.CoproductsFromFiniteFiltered.isColimitFiniteSubproductsCocone; CategoryTheory.Limits.MonoCoprod.mono_of_injective'",
+  "file": "Mathlib/CategoryTheory/Limits/Constructions/Filtered.lean; Mathlib/CategoryTheory/Limits/MonoCoprod.lean",
+  "how": "specializes in one line per clause, for C = Sheaf (Opens.grothendieckTopology X) (Type u) (which has all small colimits): clause (1) is isColimitFiniteSubproductsCocone f, whose cocone finiteSubcoproductsCocone has legs Sigma.desc (fun s => Sigma.ι f s) = the maps kappa_{A'} over Finset (Discrete A); clause (2) is MonoCoprod.mono_of_injective' for the inclusion A' -> A'' (MonoCoprod (Sheaf J (Type w)) from SheafOfTypes.finitary_extensive, Mathlib/CategoryTheory/Sites/LeftExact.lean, and instMonoCoprodOfFinitaryExtensive, Mathlib/CategoryTheory/Extensive.lean), turned into injectivity on sections by presheaf_mono_of_mono (Mathlib/CategoryTheory/Sites/ConcreteSheafification.lean), NatTrans.mono_iff_mono_app and CategoryTheory.mono_iff_injective",
+  "line": 103
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-sheaf-finite-relation-truncations",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lead_note": "L 2026-10-10: composed match: clause (1) isColimitFiniteSubproductsCocone (Limits/Constructions/Filtered.lean:103); clause (2) is a chain (MonoCoprod.mono_of_injective' MonoCoprod.lean:197, MonoCoprod from SheafOfTypes.finitary_extensive LeftExact.lean:328, then mono iff injective on sections); verified by L; stage 3 derives clause (2) from the chain."
+}

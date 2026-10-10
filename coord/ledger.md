@@ -768,3 +768,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 01:46 L: reviewed lem-weil-pbc-sheaf-basis-surjection (5 steps, +1 leaf): accepted.
 - 01:47 L: reviewed lem-weil-pbc-singular-ideal-localization-smooth (3 steps, 0 new): accepted.
 - 01:48 L: reviewed lem-weil-pbc-sheaf-surjection-kernel-pair-coequalizer (3 steps, +086K leaf): accepted.
+- 01:49 L: reviewed lem-weil-pbc-sheaf-finite-relation-truncations (5 steps, +3: finite-subcoproducts leaf, 009F node, constant-sheaf maps node) and lem-weil-pbc-sheaf-finite-truncation-colimit (5 steps, 0 new): accepted. Stage 3: sheaf-directed-colimit-finite-coequalizers should cite the new 009F node.

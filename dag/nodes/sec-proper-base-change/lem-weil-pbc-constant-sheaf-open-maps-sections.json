@@ -1,0 +1,61 @@
+{
+ "id": "lem-weil-pbc-constant-sheaf-open-maps-sections",
+ "kind": "statement",
+ "title": "Maps out of the sheaf of locally constant maps on an open",
+ "statement": "Let $V$ be a topological space (sheaves of sets on $V$ are those on the site of open subsets of $V$ with open coverings [def-weil-pbc-sites-and-cohomology]), $T$ a set, and $\\underline T_V$ the sheaf of sets on $V$ with $\\underline T_V(W)=\\{$locally constant maps $W\\to T\\}$ ($W\\subseteq V$ open) and restriction of maps as restriction maps. For $t\\in T$ let $\\mathrm{const}_t\\in\\underline T_V(V)$ be the constant map with value $t$. Then for every sheaf of sets $\\mathcal G$ on $V$ the map $\\operatorname{Hom}(\\underline T_V,\\mathcal G)\\to\\operatorname{Map}(T,\\mathcal G(V))$, $\\varphi\\mapsto(t\\mapsto\\varphi_V(\\mathrm{const}_t))$, is bijective, and it is natural in $\\mathcal G$: for a morphism $\\alpha:\\mathcal G\\to\\mathcal G'$ of sheaves of sets on $V$, $\\alpha\\circ\\varphi$ is sent to $\\alpha_V\\circ(t\\mapsto\\varphi_V(\\mathrm{const}_t))$.",
+ "source": {
+  "document": "literature/stacks-project/sites.tex",
+  "place": "Sites, Example Tag 0H7J (example-constant-sheaf): Mor(E_underline, F) = Mor_Sets(E, Gamma(F)); with Sheaves, Example Tag 0081 (example-sheafify-constant): the sheafification of the constant presheaf is the sheaf of locally constant maps, and Sheaves, Definition Tag 006W (definition-constant-sheaf)"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-sites-and-cohomology"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "morphisms from constant sheaf of locally constant functions to a sheaf correspond to maps into global sections",
+   "results": "CategoryTheory.Sheaf.ΓHomEquiv, CategoryTheory.constantSheafΓAdj, CategoryTheory.Sheaf.ΓObjEquivHom (Mathlib.CategoryTheory.Sites.GlobalSections): stated for constantSheaf J A = sheafification of the constant presheaf, not for the sheaf of locally constant maps",
+   "date": "2026-10-10",
+   "verdict": "generalization: holds for the sheafified constant presheaf; the identification with locally constant maps (Stacks 0081) is not in Mathlib for topological spaces, so not a one-line specialization"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "morphisms of sheaves from the sheaf of locally constant functions with values in a set T to a sheaf G correspond to maps from T to global sections of G",
+   "results": "CompHausLike.LocallyConstant.presheaf_ext, CompHausLike.LocallyConstant.functorToPresheavesIso (Mathlib.Condensed.Discrete.LocallyConstant: locally constant maps on CompHausLike spaces, coherent topology), CategoryTheory.Sheaf.ΓObjEquivHom, ΓHomEquiv (Mathlib.CategoryTheory.Sites.GlobalSections)",
+   "date": "2026-10-10",
+   "verdict": "no match for the opens site of a topological space"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rln 'LocallyConstant' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/CategoryTheory/Sites ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/Topology/Sheaves ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/Condensed",
+   "results": "only Condensed/Discrete/{Characterization,Module,Colimit,LocallyConstant}.lean (condensed sets); nothing in Topology/Sheaves or CategoryTheory/Sites",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-sheaf-finite-relation-truncations",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1"
+}

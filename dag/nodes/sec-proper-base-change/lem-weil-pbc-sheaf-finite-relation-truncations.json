@@ -2,18 +2,93 @@
  "id": "lem-weil-pbc-sheaf-finite-relation-truncations",
  "kind": "statement",
  "title": "Finite relation maps have finite support over quasi-compact basis opens",
- "statement": "Let $X$ be a topological space and $\\mathcal B$ a basis whose members are quasi-compact. Let $A,B$ be sets, let $U_a,V_b\\in\\mathcal B$, and let $S_a,T_b$ be finite sets. For either morphism $h:\\coprod_{b\\in B}j_{V_b!}\\underline{T_b}\\to\\coprod_{a\\in A}j_{U_a!}\\underline{S_a}$ of sheaves of sets [def-weil-pbc-sites-and-cohomology], where $j_!$ is [def-weil-pbc-sets-extension-by-empty], and every finite subset $B'\\subset B$, there is a finite subset $A'\\subset A$ such that the restriction of $h$ to $\\coprod_{b\\in B'}j_{V_b!}\\underline{T_b}$ factors through $\\coprod_{a\\in A'}j_{U_a!}\\underline{S_a}$.",
+ "statement": "Let $X$ be a topological space and $\\mathcal B$ a basis of its topology whose members are quasi-compact. Let $A,B$ be sets, let $U_a\\in\\mathcal B$ ($a\\in A$) and $V_b\\in\\mathcal B$ ($b\\in B$), and let $S_a,T_b$ be finite sets; $j_{U!}\\underline S$ denotes the extension by the empty set [def-weil-pbc-sets-extension-by-empty] of the sheaf $\\underline S_U$ of locally constant maps to $S$ on $U$. Coproducts are coproducts in the category of sheaves of sets on $X$ [def-weil-pbc-sites-and-cohomology], [def-weil-pbc-category-colimit]; for subsets $A'\\subseteq A$, $B'\\subseteq B$ let $\\kappa_{A'}:\\coprod_{a\\in A'}j_{U_a!}\\underline{S_a}\\to\\coprod_{a\\in A}j_{U_a!}\\underline{S_a}$ and $\\lambda_{B'}:\\coprod_{b\\in B'}j_{V_b!}\\underline{T_b}\\to\\coprod_{b\\in B}j_{V_b!}\\underline{T_b}$ be the morphisms induced by the coprojections. Then for every morphism $h:\\coprod_{b\\in B}j_{V_b!}\\underline{T_b}\\to\\coprod_{a\\in A}j_{U_a!}\\underline{S_a}$ of sheaves of sets and every finite subset $B'\\subseteq B$ there are a finite subset $A'\\subseteq A$ and a morphism $g:\\coprod_{b\\in B'}j_{V_b!}\\underline{T_b}\\to\\coprod_{a\\in A'}j_{U_a!}\\underline{S_a}$ with $\\kappa_{A'}\\circ g=h\\circ\\lambda_{B'}$ (the restriction of $h$ to the finite subcoproduct over $B'$ factors through the finite subcoproduct over $A'$). In particular, for two such morphisms $h_1,h_2$ and finite $B'$ one finite $A'$ serves both (take the union of the two subsets, using $\\kappa_{A''}\\circ\\kappa_{A''A'}=\\kappa_{A'}$ for $A'\\subseteq A''$).",
  "source": {
   "document": "literature/stacks-project/modules.tex",
   "place": "Modules, Lemma Tag 0CAI (lemma-filtered-colimit-constructibles), proof at lines 3047-3058: finite subsets of B have finite supports in A because sections over quasi-compact V_b commute with the directed coproduct"
  },
  "stmt_deps": [
   "def-weil-pbc-sets-extension-by-empty",
-  "lem-weil-pbc-sets-extension-by-empty-adjunction"
+  "lem-weil-pbc-sets-extension-by-empty-adjunction",
+  "def-weil-pbc-sites-and-cohomology",
+  "def-weil-pbc-category-colimit"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "*Step 1 (the target coproduct as a directed colimit).* Write $C_{A'}=\\coprod_{a\\in A'}j_{U_a!}\\underline{S_a}$ for $A'\\subseteq A$, with coprojections $\\iota^{A'}_a$, $C=C_A$, $\\kappa_{A''A'}:C_{A'}\\to C_{A''}$ ($A'\\subseteq A''$) the morphism with $\\kappa_{A''A'}\\iota^{A'}_a=\\iota^{A''}_a$, and $\\kappa_{A'}=\\kappa_{AA'}$. By [lem-weil-pbc-sheaf-coproduct-finite-subcoproducts] (1), $(C,(\\kappa_{A'})_{A'})$ is the colimit in sheaves of sets of the system $(C_{A'},\\kappa_{A''A'})$ indexed by the directed set of finite subsets $A'\\subseteq A$ (ordered by inclusion), and by (2) of that lemma every transition map $\\kappa_{A''A',W}$ is injective on sections over every open $W$. Moreover $\\kappa_{A''}\\kappa_{A''A'}=\\kappa_{A'}$, since both sides agree after composing with every coprojection $\\iota^{A'}_a$ [def-weil-pbc-category-colimit].",
+   "uses": [
+    "lem-weil-pbc-sheaf-coproduct-finite-subcoproducts",
+    "def-weil-pbc-category-colimit"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/modules.tex",
+    "place": "Modules, proof of Lemma Tag 0CAI (lemma-filtered-colimit-constructibles), lines 3048-3055: 'we can view the right hand side as a filtered colimit with injective transition maps'"
+   }
+  },
+  {
+   "text": "*Step 2 (sections over a basis open come from a finite subcoproduct).* Let $V\\in\\mathcal B$; it is quasi-compact by hypothesis. Applying [lem-weil-pbc-sheaves-injective-directed-colimit-qc-sections] (2) to the system of Step 1 (directed, with injective transition maps, colimit $(C,(\\kappa_{A'}))$) and the quasi-compact open $V$: every $t\\in C(V)$ is of the form $\\kappa_{A',V}(s)$ for some finite $A'\\subseteq A$ and some $s\\in C_{A'}(V)$.",
+   "uses": [
+    "lem-weil-pbc-sheaves-injective-directed-colimit-qc-sections"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/modules.tex",
+    "place": "Modules, proof of Lemma Tag 0CAI (lemma-filtered-colimit-constructibles), lines 3048-3055: 'Hence taking sections over the quasi-compact opens $V_b$, $b\\in B'$ commutes with this coproduct' (Sheaves, Lemma Tag 009F, part (3), sheaves.tex line 3444)"
+   }
+  },
+  {
+   "text": "*Step 3 (a map out of $j_{V!}\\underline T$ is a map of sets $T\\to\\mathcal G(V)$).* Let $V\\subseteq X$ be open, $T$ a set and $\\theta:j_{V,p!}\\underline T_V\\to j_{V!}\\underline T$ the sheafification map [def-weil-pbc-sets-extension-by-empty]; for $t\\in T$ the constant map $\\mathrm{const}_t\\in\\underline T_V(V)=(j_{V,p!}\\underline T_V)(V)$ (as $V\\subseteq V$). For a sheaf of sets $\\mathcal G$ on $X$ define $\\beta_{\\mathcal G}:\\operatorname{Hom}(j_{V!}\\underline T,\\mathcal G)\\to\\operatorname{Map}(T,\\mathcal G(V))$, $\\psi\\mapsto(t\\mapsto\\psi_V(\\theta_V(\\mathrm{const}_t)))$. It is the composite of the bijection $\\psi\\mapsto(\\psi\\circ\\theta)|_V$ of [lem-weil-pbc-sets-extension-by-empty-adjunction] (2) onto $\\operatorname{Hom}_{\\Sh(V)}(\\underline T_V,\\mathcal G|_V)$ with the bijection $\\varphi\\mapsto(t\\mapsto\\varphi_V(\\mathrm{const}_t))$ of [lem-weil-pbc-constant-sheaf-open-maps-sections] for the sheaf $\\mathcal G|_V$ on $V$ (whose value on $V$ is $\\mathcal G(V)$); so $\\beta_{\\mathcal G}$ is bijective. It is natural: for $\\alpha:\\mathcal G\\to\\mathcal G'$, $\\beta_{\\mathcal G'}(\\alpha\\circ\\psi)=\\alpha_V\\circ\\beta_{\\mathcal G}(\\psi)$, directly from the formula ($(\\alpha\\circ\\psi)_V=\\alpha_V\\circ\\psi_V$).",
+   "uses": [
+    "lem-weil-pbc-sets-extension-by-empty-adjunction",
+    "lem-weil-pbc-constant-sheaf-open-maps-sections",
+    "def-weil-pbc-sets-extension-by-empty"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sheaves.tex",
+    "place": "Sheaves, Lemma Tag 00A3 (lemma-j-shriek, line 4549) (2), as used in Modules, proof of Lemma Tag 0CAH (lemma-surjection): a section over U corresponds to a map j_{U!}S -> F; with Sites, Example Tag 0H7J (example-constant-sheaf)"
+   }
+  },
+  {
+   "text": "*Step 4 (lifting each summand over $B'$).* Let $B'\\subseteq B$ be finite. For $b\\in B'$ let $\\varepsilon_b$ be the coprojection of $j_{V_b!}\\underline{T_b}$ into $\\coprod_{b\\in B}j_{V_b!}\\underline{T_b}$, $\\psi_b=h\\circ\\varepsilon_b:j_{V_b!}\\underline{T_b}\\to C$, and $\\tau_b=\\beta_C(\\psi_b):T_b\\to C(V_b)$ (Step 3). For each $b\\in B'$ and $t\\in T_b$, Step 2 (with $V=V_b\\in\\mathcal B$) gives a finite $A_{b,t}\\subseteq A$ and $s_{b,t}\\in C_{A_{b,t}}(V_b)$ with $\\tau_b(t)=\\kappa_{A_{b,t},V_b}(s_{b,t})$. Put $A'=\\bigcup_{b\\in B',t\\in T_b}A_{b,t}$, a finite union of finite sets (as $B'$ and all $T_b$ are finite), so $A'$ is finite. Define $\\tau'_b:T_b\\to C_{A'}(V_b)$ by $\\tau'_b(t)=\\kappa_{A'A_{b,t},V_b}(s_{b,t})$; by Step 1, $\\kappa_{A',V_b}\\circ\\tau'_b=\\tau_b$. Let $\\psi'_b=\\beta_{C_{A'}}^{-1}(\\tau'_b):j_{V_b!}\\underline{T_b}\\to C_{A'}$ (Step 3). By naturality, $\\beta_C(\\kappa_{A'}\\circ\\psi'_b)=\\kappa_{A',V_b}\\circ\\tau'_b=\\tau_b=\\beta_C(\\psi_b)$, and $\\beta_C$ is injective, so $\\kappa_{A'}\\circ\\psi'_b=\\psi_b=h\\circ\\varepsilon_b$.",
+   "uses": [
+    "lem-weil-pbc-sheaves-injective-directed-colimit-qc-sections",
+    "lem-weil-pbc-sets-extension-by-empty-adjunction",
+    "lem-weil-pbc-constant-sheaf-open-maps-sections",
+    "lem-weil-pbc-sheaf-coproduct-finite-subcoproducts"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/modules.tex",
+    "place": "Modules, proof of Lemma Tag 0CAI (lemma-filtered-colimit-constructibles), lines 3048-3055: 'For every finite subset $B'\\subset B$ there is a finite subset $A'\\subset A$ such that the coproduct over $b\\in B'$ maps into the coproduct over $a\\in A'$'"
+   }
+  },
+  {
+   "text": "*Step 5 (assembling).* Let $\\varepsilon^{B'}_b$ ($b\\in B'$) be the coprojections of $\\coprod_{b\\in B'}j_{V_b!}\\underline{T_b}$, so $\\lambda_{B'}\\varepsilon^{B'}_b=\\varepsilon_b$, and let $g:\\coprod_{b\\in B'}j_{V_b!}\\underline{T_b}\\to C_{A'}$ be the morphism with $g\\varepsilon^{B'}_b=\\psi'_b$ (universal property of the coproduct [def-weil-pbc-category-colimit]). Then $\\kappa_{A'}g\\varepsilon^{B'}_b=\\kappa_{A'}\\psi'_b=h\\varepsilon_b=h\\lambda_{B'}\\varepsilon^{B'}_b$ for all $b\\in B'$ (Step 4), hence $\\kappa_{A'}\\circ g=h\\circ\\lambda_{B'}$ by the uniqueness in the universal property. For two morphisms $h_1,h_2$ with finite subsets $A'_1,A'_2$ and maps $g_1,g_2$, $A''=A'_1\\cup A'_2$ is finite and $\\kappa_{A''A'_k}\\circ g_k$ ($k=1,2$) are factorizations through $C_{A''}$, since $\\kappa_{A''}\\kappa_{A''A'_k}=\\kappa_{A'_k}$ (Step 1).",
+   "uses": [
+    "def-weil-pbc-category-colimit"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/modules.tex",
+    "place": "Modules, proof of Lemma Tag 0CAI (lemma-filtered-colimit-constructibles), lines 3048-3055: 'via both maps'"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-sheaf-coproduct-finite-subcoproducts",
+  "def-weil-pbc-category-colimit",
+  "lem-weil-pbc-sheaves-injective-directed-colimit-qc-sections",
+  "lem-weil-pbc-sets-extension-by-empty-adjunction",
+  "lem-weil-pbc-constant-sheaf-open-maps-sections",
+  "def-weil-pbc-sets-extension-by-empty"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/modules.tex",
+  "place": "Modules, Lemma Tag 0CAI (lemma-filtered-colimit-constructibles), proof lines 3048-3055, with Sheaves, Lemma Tag 009F (3) and Lemma Tag 00A3 (2)"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -38,7 +113,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "worker",
@@ -59,5 +134,17 @@
  },
  "chapter": "sec-proper-base-change",
  "unit": "sk-thm-p1",
- "lead_note": "L (2026-10-10): removed a proof-hint sentence from the statement (The sectionwise directed-colimit input is [lem-weil-pbc-sheaves-directed-colimit-sections].)."
+ "lead_note": "L (2026-10-10): removed a proof-hint sentence from the statement (The sectionwise directed-colimit input is [lem-weil-pbc-sheaves-directed-colimit-sections].).",
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "lem-weil-pbc-sheaf-finite-relation-truncations",
+  "worker": "stage1",
+  "summary": "Checked against Stacks Modules 0CAI (proof, modules.tex 3048-3055) and the lemmas it cites (Sheaves 009F part (3), Sheaves 00A3 via 0CAH, Sites 0H7J). Statement: 'for either morphism' replaced by 'for every morphism', the restriction and the factorization made explicit (maps kappa_{A'}, lambda_{B'}, g with kappa g = h lambda), and the use for two maps at once stated as a remark; stmt_deps gained def-weil-pbc-sites-and-cohomology and def-weil-pbc-category-colimit. Proof in 5 steps: the coproduct is the directed colimit of finite subcoproducts with injective transitions (new Mathlib leaf lem-weil-pbc-sheaf-coproduct-finite-subcoproducts); sections over a quasi-compact open of such a colimit come from a finite stage (new unsplit lem-weil-pbc-sheaves-injective-directed-colimit-qc-sections = Stacks 009F (1),(3); the existing lem-weil-pbc-sheaves-directed-colimit-sections states only 009F (2),(4), whose bijectivity clause needs quasi-compact pairwise intersections not available for basis opens); maps j_{V!}T -> G are maps of sets T -> G(V) (adjunction node plus new unsplit lem-weil-pbc-constant-sheaf-open-maps-sections, Sites 0H7J for locally constant maps); lift summand by summand and assemble. lem-weil-pbc-sets-extension-by-empty-adjunction kept in stmt_deps as instructed although the statement itself does not use it (it is a proof dependency)."
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "result": "accepted",
+  "note": "5 steps following Stacks 0CAI: the coproduct is the directed colimit of its finite subcoproducts with injective transitions (new Mathlib leaf, composed; see its lead_note), sections over a quasi-compact basis open come from a finite subcoproduct (new unsplit 009F (1),(3) node; the existing directed-colimit-sections node covers only (2),(4)), maps out of j_{V!}T are maps of sets T -> G(V) (adjunction + new unsplit constant-sheaf node), lift summand by summand, assemble. Statement sharpened (every h, explicit factorization). Stage 3: the citer sheaf-directed-colimit-finite-coequalizers cites the directed-colimit-sections node where the new 009F node is needed."
+ }
 }
