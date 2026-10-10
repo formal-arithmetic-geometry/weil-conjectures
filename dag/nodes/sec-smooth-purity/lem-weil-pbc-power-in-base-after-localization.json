@@ -11,19 +11,72 @@
  },
  "kind": "statement",
  "title": "Powers of elements of a finite purely inseparable algebra lie in the base after localization",
- "statement": "Let $A'$ be a Noetherian integral domain with fraction field $K'$, and let $E$ be a finite $A'$-algebra [pqf-lem-finite-integral-lft] that is a domain with fraction field $L$. Assume that $L/K'$ is finite purely inseparable [def-pc-field-extension] [def-weil-pbc-finite-purely-inseparable-extension]. There is a nonzero $s\\in A'$ such that, writing $A''=A'[1/s]$ and $E''=E\\otimes_{A'}A''$, the following hold: if $K'$ has characteristic $0$, then $E''=A''$; if $K'$ has characteristic $p>0$, then for every $x\\in E''$ there is an $n\\ge 0$ with $x^{p^n}$ in the image of $A''$.",
+ "statement": "Let $A'$ be a Noetherian integral domain with fraction field $K'$, and let $E$ be a finite $A'$-algebra [def-weil-finite-integral-morphism] that is a domain with fraction field $L$. Assume that $L/K'$ is finite purely inseparable [def-pc-field-extension] [def-weil-pbc-finite-purely-inseparable-extension]. There is a nonzero $s\\in A'$ such that, writing $A''=A'[1/s]$ and $E''=E\\otimes_{A'}A''$, the following hold: if $K'$ has characteristic $0$, then $E''=A''$; if $K'$ has characteristic $p>0$, then for every $x\\in E''$ there is an $n\\ge 0$ with $x^{p^n}$ in the image of $A''$.",
  "source": {
   "document": "literature/stacks-project/algebra.tex",
   "place": "Algebra, Lemma 0BR5 (algebra-lemma-purely-inseparable), power calculation for a finite purely inseparable extension and localization"
  },
  "stmt_deps": [
-  "pqf-lem-finite-integral-lft",
+  "def-weil-finite-integral-morphism",
   "def-pc-field-extension",
   "def-weil-pbc-finite-purely-inseparable-extension"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Since E is a finite A'-algebra, it is a finitely generated A'-module [def-weil-finite-integral-morphism]; choose A'-module generators e_1,...,e_r, so every element of E is an A'-linear combination of the e_i. Since L/K' is a field extension [def-pc-field-extension], A' -> K' -> L is injective, so A' -> E is injective and E is a subring of its fraction field L; each e_i lies in L. By the definition [def-weil-pbc-finite-purely-inseparable-extension], in characteristic 0 we have L=K', so e_i=b_i/t_i with b_i,t_i in A', t_i nonzero; in characteristic p>0 there are n_i with e_i^{p^{n_i}} in K', and with N = max n_i also e_i^{p^N}=(e_i^{p^{n_i}})^{p^{N-n_i}} in K', say e_i^{p^N}=b_i/t_i with b_i,t_i in A', t_i nonzero. Put s = t_1...t_r, nonzero since A' is a domain. Then A''=A'[1/s] is a subring of K', E''=E[1/s] is a subring of L (localization of a domain at a nonzero element), and the image of A'' in E'' is A'' itself; in characteristic 0 each e_i lies in A'', in characteristic p each e_i^{p^N} lies in A''.",
+   "uses": [
+    "def-weil-finite-integral-morphism",
+    "def-pc-field-extension",
+    "def-weil-pbc-finite-purely-inseparable-extension"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra, Section 0BR5 (algebra-section-universal-homeomorphism): finite-algebra spreading input for Lemma 0BR8 (algebra-lemma-powers); the argument here is the elementary denominator clearing"
+   }
+  },
+  {
+   "text": "In characteristic 0, step 1 gives e_i in A'' for every module generator e_i, so E''=sum A'' e_i is contained in A''; the reverse inclusion is the structure map A''->E'', which is injective by step 1. Hence E''=A''.",
+   "uses": [
+    "def-weil-pbc-finite-purely-inseparable-extension"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra, Section 0BR5 (algebra-section-universal-homeomorphism): finite-algebra spreading input for Lemma 0BR8 (algebra-lemma-powers); the argument here is the elementary denominator clearing"
+   }
+  },
+  {
+   "text": "Assume characteristic p>0. The e_i generate E'' as an A''-module, so every x in E'' is x=sum a_i e_i with a_i in A''. Since the Frobenius y -> y^{p^N} is a ring endomorphism in characteristic p, x^{p^N}=sum a_i^{p^N} e_i^{p^N}, and by step 1 each e_i^{p^N} lies in A''; hence x^{p^N} lies in the image of A''. Thus every x in E'' has a p-power in the base, with the uniform exponent n=N.",
+   "uses": [
+    "def-weil-pbc-finite-purely-inseparable-extension"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra, Section 0BR5 (algebra-section-universal-homeomorphism): finite-algebra spreading input for Lemma 0BR8 (algebra-lemma-powers); the argument here is the elementary denominator clearing"
+   }
+  },
+  {
+   "text": "Localization preserves the displayed fraction-field identification: A'' has fraction field K' and E'' has fraction field L, since s is nonzero and E is a domain finite over A'. Therefore the two characteristic cases establish all clauses of the statement.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra, Section 0BR5 (algebra-section-universal-homeomorphism): finite-algebra spreading input for Lemma 0BR8 (algebra-lemma-powers); the argument here is the elementary denominator clearing"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-finite-integral-morphism",
+  "def-pc-field-extension",
+  "def-weil-pbc-finite-purely-inseparable-extension"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Algebra, Section 0BR5 (algebra-section-universal-homeomorphism): finite-algebra spreading input for Lemma 0BR8 (algebra-lemma-powers); the argument here is the elementary denominator clearing"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -55,12 +108,27 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-weil-pbc-spread-purely-inseparable-factors",
   "by": "worker",
   "date": "2026-10-10"
  },
  "chapter": "sec-smooth-purity",
- "unit": "sk-prop-sf-cbc"
+ "unit": "sk-prop-sf-cbc",
+ "split_report": {
+  "date": "2026-10-11",
+  "item": "lem-weil-pbc-power-in-base-after-localization",
+  "worker": "stage1",
+  "summary": "No sorry-free project declaration states this item. I kept the statement and split the Stacks 0BR5 argument into denominator clearing, the characteristic-zero case, the characteristic-p Frobenius calculation, and preservation of fraction fields. No new child node is needed: every non-elementary input is one of the existing statement dependencies, and the remaining algebra is elementary from those hypotheses.",
+  "blueprint": "Realizes the parent blueprint finite-algebra calculation: spread the purely inseparable generators, clear finitely many denominators, and apply Frobenius powers after localization."
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-pbl2944",
+  "group": "E1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-pbl2944 (reviewer sub-agent of L); spot-checked: Read whole packet; checked math: A' not normal handled since e_i^{p^N} in K' is written b_i/t_i and s=prod t_i clears denominators; statement matches what lem-weil-pbc-spread-purely-inseparable-factors step 2 uses (nonzero s' in A', E_1=A'_1 in char 0, x^{p^n} in A'_1 in char p). FIX more, RETURN less: (1) E/step 3: x=sum a_i e_i was asserted with e_i chosen as ALGEBRA generators (false; missed by second reading) - step 1 now chooses A'-MODULE generators from finiteness, step 3 uses them; (2) D1/step 1: elementary false quoting the item's own source 0BR5 - rewritten as an explicit elementary denominator-clearing argument (injectivity A'->E->L, common exponent N, s=prod t_i) with elementary true; (3) C1/B3: statement and step 1 cited pqf-lem-finite-integral-lft (finite morphisms are integral) for 'finite A'-algebra' - replaced by definition node def-weil-finite-integral-morphism in statement, stmt_deps, uses, proof_deps; also corrected source/proof_origin, which still named nonexistent label algebra-lemma-purely-inseparable as Lemma 0BR5 although the second reading said it was fixed (0BR5 is the section, 0BR8 algebra-lemma-powers is the consumer).; 1 file(s) fixed by the reviewer"
+ }
 }
