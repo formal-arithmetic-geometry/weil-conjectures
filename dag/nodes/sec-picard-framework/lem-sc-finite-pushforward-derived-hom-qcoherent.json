@@ -13,7 +13,7 @@
  },
  "kind": "statement",
  "title": "Finite pushforward algebra gives quasi-coherent derived Hom",
- "statement": "Let $f:X\\to Y$ be a finite morphism [def-weil-finite-integral-morphism] of Noetherian schemes [def-pc-scheme] and let $K$ be an object of $D^+_{\\mathrm{QCoh}}(Y)$ [def-pc-derived-category]. Then the sheaf algebra $f_*\\mathcal O_X$ is pseudo-coherent over $\\mathcal O_Y$, and the derived internal Hom $R\\mathcal H om_{\\mathcal O_Y}(f_*\\mathcal O_X,K)$ [def-pur-derived-internal-hom], viewed as a complex of $f_*\\mathcal O_X$-modules, belongs to $D^+_{\\mathrm{QCoh}}(f_*\\mathcal O_X)$ [def-pc-derived-category]; in particular its image in $D(\\mathcal O_Y)$ belongs to $D^+_{\\mathrm{QCoh}}(Y)$.",
+ "statement": "Let $f:X\\to Y$ be a finite morphism [def-weil-finite-integral-morphism] of Noetherian schemes [def-pc-scheme] and let $K$ be an object of $D^+_{\\mathrm{QCoh}}(Y)$ [def-pc-derived-category]. Then the sheaf algebra $B=f_*\\mathcal O_X$ is pseudo-coherent as an $\\mathcal O_Y$-module [def-pur-pseudo-coherent-complex], and the derived internal Hom $R\\mathcal H om_{\\mathcal O_Y}(B,K)$ [def-pur-derived-internal-hom], viewed via its natural $B$-module structure [def-pc-derived-rhom-algebra-module] as an object of $D(B)$, belongs to $D^+_{\\mathrm{QCoh}}(B)$ [def-pc-derived-category-qcoh-algebra]; after forgetting the $B$-module structure its image in $D(\\mathcal O_Y)$ belongs to $D^+_{\\mathrm{QCoh}}(Y).",
  "source": {
   "document": "literature/stacks-project/duality.tex",
   "place": "Tag 0AX2, lemma-finite-twisted (using Tags 0AUC and 0AUP for finite pseudo-coherence and quasi-coherence of internal Hom)"
@@ -22,48 +22,95 @@
   "def-weil-finite-integral-morphism",
   "def-pc-scheme",
   "def-pc-derived-category",
-  "def-pur-derived-internal-hom"
+  "def-pur-derived-internal-hom",
+  "def-pur-pseudo-coherent-complex",
+  "def-pc-derived-category-qcoh-algebra",
+  "def-pc-derived-rhom-algebra-module"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
- "mathlib_searches": [
+ "proof": [
   {
-   "tool": "leansearch",
-   "query": "finite morphism Noetherian pushforward structure sheaf pseudo-coherent derived internal Hom quasi-coherent",
-   "results": "service unavailable: Internal Server Error",
-   "date": "2026-10-11",
-   "verdict": "unavailable"
+   "text": "Because $f$ is finite and $Y$ is Noetherian, $B=f_*\\mathcal O_X$ is coherent quasi-coherent by [lem-weil-pbc-finite-pushforward-coherent]. By [lem-sc-coherent-pseudo-coherent] and [def-pur-pseudo-coherent-complex], $B$ is pseudo-coherent.",
+   "uses": [
+    "lem-weil-pbc-finite-pushforward-coherent",
+    "lem-sc-coherent-pseudo-coherent",
+    "def-pur-pseudo-coherent-complex"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/coherent.tex",
+    "place": "Tag 01Y6 and perfect.tex Tags 08E8, 08FT"
+   }
   },
   {
-   "tool": "leanfinder",
-   "query": "finite morphism pseudo-coherent derived internal Hom quasi-coherent",
-   "results": "Generic sheaf pushforward and finite-presentation declarations; no finite-morphism pseudo-coherent derived-Hom theorem",
-   "date": "2026-10-11",
-   "verdict": "no match"
+   "text": "Apply [lem-sc-pseudo-coherent-rhom-qcoherent] to the quasi-coherent algebra $B$ and $K$. By [def-pc-derived-rhom-algebra-module] its derived internal Hom has the natural $B$-module structure, and the lemma gives $D^+_{\\mathrm{QCoh}}(B)$ membership as defined in [def-pc-derived-category-qcoh-algebra].",
+   "uses": [
+    "lem-sc-pseudo-coherent-rhom-qcoherent",
+    "def-pc-derived-rhom-algebra-module",
+    "def-pc-derived-category-qcoh-algebra"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/duality.tex",
+    "place": "Tag 0AX2 and perfect.tex Tag 0A6H"
+   }
   },
   {
-   "tool": "loogle",
-   "query": "PseudoCoherent, RHom, QuasiCoherent",
-   "results": "Loogle reports unknown identifier PseudoCoherent",
-   "date": "2026-10-11",
-   "verdict": "unavailable"
-  },
-  {
-   "tool": "grep",
-   "query": "PseudoCoherent|derived.*internal.*Hom|quasi-coherent.*Hom",
-   "results": "No hits",
-   "date": "2026-10-11",
-   "verdict": "no match"
+   "text": "By [def-pc-derived-category-qcoh-algebra], a quasi-coherent $B$-module has quasi-coherent underlying $\\mathcal O_Y$-module. Restriction of scalars leaves cohomology unchanged, so the object belongs to $D^+_{\\mathrm{QCoh}}(Y)$. ",
+   "uses": [
+    "def-pc-derived-category-qcoh-algebra"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/cohomology.tex",
+    "place": "Tags 0A6A and 08DL"
+   }
   }
  ],
+ "proof_deps": [
+  "lem-weil-pbc-finite-pushforward-coherent",
+  "lem-sc-coherent-pseudo-coherent",
+  "def-pur-pseudo-coherent-complex",
+  "lem-sc-pseudo-coherent-rhom-qcoherent",
+  "def-pc-derived-rhom-algebra-module",
+  "def-pc-derived-category-qcoh-algebra"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/duality.tex",
+  "place": "Tag 0AX2"
+ },
+ "mathlib_searches": [],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-sc-finite-duality-derived-hom",
   "by": "worker",
   "date": "2026-10-10"
  },
  "chapter": "sec-picard-framework",
- "unit": "sk-thm-picard-duality"
+ "unit": "sk-thm-picard-duality",
+ "split_report": {
+  "date": "2026-10-11",
+  "item": "lem-sc-finite-pushforward-derived-hom-qcoherent",
+  "worker": "stage1",
+  "summary": "Repaired undefined algebraic derived-category and pseudo-coherence notions; added explicit typed definitions and citations.",
+  "blueprint": "finite pseudo-coherence makes derived internal Hom preserve bounded-below quasi-coherent complexes",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-finite-pushforward-coherent",
+    "why": "finite pushforward coherence is a generic scheme-theoretic input"
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-finite-pushforward-coherent"
+ ],
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-fpq1926",
+  "group": "G1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-fpq1926 (reviewer sub-agent of L); spot-checked: Return 18:48 points 1-4 repaired: (1) D(B), D^+_QCoh(B) and RHom_{O_Y}(B,-):D(O_Y)->D(B) now defined by def-pc-derived-category-qcoh-algebra and def-pc-derived-rhom-algebra-module and cited; (2) lem-sc-pseudo-coherent-rhom-qcoherent now takes A a quasi-coherent O_Y-algebra; (3) def-pur-pseudo-coherent-complex added (Tag 08FT, schemes: locally bounded-above finite free) and cited by both lemmas and the item; (4) Step 3 elementary from the definition (quasi-coherent B-module = underlying O_Y-module quasi-coherent). Steps 1-3 check against 0AX2, 08E8, 0A6H(1) (locally bounded below = bounded below on Noetherian Y). Not duplicate of lem-sc-affine-rhom-qcoherent (affine, finite modules). FIX more, RETURN less: (B3) def-pc-derived-rhom-algebra-module statement had a TAB control character in place of \\to and mis-typed the argument as 'A a B-module' while defining a functor on D(O_Y): restated via SheafHom(B,-):Mod(O_Y)->Mod(B) and its derived extension; (B3) source tags of both definition nodes cited unrelated 0A6A/08DL: replaced by duality.tex section-duality-finite, Tags 0BUZ/0BV0/0BV1 (and 0AX2). Second reading by G1 missed both.; 2 file(s) fixed by the reviewer"
+ }
 }
