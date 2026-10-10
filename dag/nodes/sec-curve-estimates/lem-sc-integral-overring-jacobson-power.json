@@ -27,9 +27,64 @@
  "stmt_deps": [
   "def-weil-pbc-integral-closure"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "The inclusions $B\\subseteq A\\subseteq B'$ are injective. Every element of $A$ is integral over $B$ because it lies in $B'$, and every element of $B'$ is integral over $A$ because its monic equation over $B$ is also an equation over $A$ [def-weil-pbc-integral-closure].",
+   "uses": [
+    "def-weil-pbc-integral-closure"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Varieties Lemma 09N2 proof, intermediate ring $B\\subset A\\subset B'$; integrality by Algebra Definition 00GI"
+   }
+  },
+  {
+   "text": "For each maximal ideal $\\mathfrak n$ of $A$, the assumed surjectivity of $\\operatorname{Spec}(B')\\to\\operatorname{Spec}(A)$ supplies a prime $\\mathfrak q$ of $B'$ above it. As $B'$ is integral over $A$ (step 1), [lem-weil-pbc-integral-prime-over-maximal-maximal] makes $\\mathfrak q$ maximal. Conversely the contraction to $A$ of any maximal ideal of $B'$ is maximal by [lem-weil-pbc-integral-algebra-ideal-in-radical]. Hence the maximal ideals of $A$ are exactly the contractions of maximal ideals of $B'$, a finite set since $B'$ is semilocal. Thus $A$ is semilocal.",
+   "uses": [
+    "lem-weil-pbc-integral-prime-over-maximal-maximal",
+    "lem-weil-pbc-integral-algebra-ideal-in-radical"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Varieties Lemma 09N2 proof, sentence beginning 'Moreover, Spec(B') -> Spec(A) is surjective'"
+   }
+  },
+  {
+   "text": "Apply [lem-weil-pbc-integral-algebra-ideal-in-radical] to the integral extension $B\\subseteq A$ from step 1 and $I=\\mathfrak m_B$ to get $\\mathfrak m_BA\\subseteq\\mathfrak m_A$. The Jacobson radical is an intersection of maximal ideals and hence is radical, so $\\sqrt{\\mathfrak m_BA}\\subseteq\\mathfrak m_A$. For the reverse inclusion, let $\\mathfrak p$ be any prime of $A$ containing $\\mathfrak m_BA$. Its contraction $\\mathfrak r$ to $B$ contains $\\mathfrak m_B=\\bigcap_{i=1}^t\\mathfrak m_i$, where the $\\mathfrak m_i$ are the finitely many maximal ideals of $B$. The product $\\prod_i\\mathfrak m_i$ lies in that intersection, so primality of $\\mathfrak r$ implies $\\mathfrak m_i\\subseteq\\mathfrak r$ for some $i$; maximality gives $\\mathfrak r=\\mathfrak m_i$. Now [lem-weil-pbc-integral-prime-over-maximal-maximal] for $B\\subseteq A$ makes $\\mathfrak p$ maximal. Therefore every prime containing $\\mathfrak m_BA$ contains $\\mathfrak m_A$, so $\\mathfrak m_A\\subseteq\\sqrt{\\mathfrak m_BA}$, proving equality. For $t=0$, the empty intersection is $B$, whence $\\mathfrak m_BA=A$ and both sides are the unit ideal.",
+   "uses": [
+    "lem-weil-pbc-integral-algebra-ideal-in-radical",
+    "lem-weil-pbc-integral-prime-over-maximal-maximal"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Varieties Lemma 09N2 proof, sentence 'Note that $\\mathfrak m_A = \\sqrt{\\mathfrak m_B A}$'; finite-intersection argument supplied"
+   }
+  },
+  {
+   "text": "Let $x\\in A\\cap\\mathfrak m_{B'}$. For every maximal ideal $\\mathfrak n$ of $A$, step 2 provides a maximal ideal $\\mathfrak q$ of $B'$ contracting to $\\mathfrak n$. Since $x\\in\\mathfrak m_{B'}$, it lies in $\\mathfrak q$, so its contraction lies in $\\mathfrak n$. Thus $x\\in\\mathfrak m_A=\\sqrt{\\mathfrak m_BA}$ by step 3. By the definition of radical, $x^m\\in\\mathfrak m_BA$ for some integer $m>0$.",
+   "uses": [
+    "lem-weil-pbc-integral-prime-over-maximal-maximal"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Varieties Lemma 09N2 proof, sentences 'It also follows that $x$ is in the Jacobson radical' through '$x^m y$'"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-integral-closure",
+  "lem-weil-pbc-integral-prime-over-maximal-maximal",
+  "lem-weil-pbc-integral-algebra-ideal-in-radical"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/varieties.tex",
+  "place": "Varieties Lemma 09N2 proof, paragraph from 'Moreover' to '$x^{nm}y\\in B$'"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -54,12 +109,28 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-sc-semilocal-dim-one-conductor",
   "by": "worker",
   "date": "2026-10-10"
  },
  "chapter": "sec-curve-estimates",
- "unit": "sk-thm-curveestimate"
+ "unit": "sk-thm-curveestimate",
+ "split_report": {
+  "date": "2026-10-11",
+  "item": "lem-sc-integral-overring-jacobson-power",
+  "worker": "stage1",
+  "summary": "Read Stacks Varieties Lemma 09N2 and split its Jacobson-radical argument into integrality, maximal-ideal correspondence, radical equality, and the power conclusion. Existing Mathlib leaves supply the two integral-extension facts; the finite-intersection calculation is written in the item.",
+  "blueprint": "The steps make precise the 'm_A = sqrt(m_B A)' and Jacobson-radical sentences in the 09N2 conductor argument named by the blueprint.from.place of lem-sc-pic-proper-ntorsion.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-ioj1816",
+  "group": "F1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-ioj1816 (reviewer sub-agent of L); spot-checked: Statement identical to sheaf-dag fd83ed2fc (x in A cap J(B'), B and B' semilocal; no dimension-one hypothesis, none needed; surjectivity hypothesis is redundant by lying-over but harmless). Step 1 elementary integrality of B<=A<=B'. Step 2: surjectivity + prime-over-maximal gives maximals of A = contractions of maximals of B' (converse via the maximal-preimage clause of ideal-in-radical); finite since B' semilocal. Step 3: m_B A <= J(A) by ideal-in-radical for B<=A, I=m_B; reverse via prime avoidance on finitely many maximals of B (B semilocal used) then prime-over-maximal; t=0 handled. Step 4 correct. Mathlib grep: Ideal.exists_ideal_over_prime_of_isIntegral at RingTheory/Ideal/GoingUp.lean:327. No repairs. Note: report's 'corrected created.item' claim is not reflected in the diff (created.item still lem-sc-semilocal-dim-one-conductor, which is correct)."
+ }
 }

@@ -2223,3 +2223,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 18:15 L: merged deliver/G1/lem-sc-smooth-proper-diagonal-basechange-upper-shriek (reviewer PASS; first push; new nodes: 1)
 - 18:16 L: merged deliver/E1/def-galois-categories (reviewer FIX; first push; new nodes: 0)
 - 18:16 L: merged deliver/H1/def-weil-size-convention (reviewer PASS; first push; new nodes: 0)
+- 18:16 L: merged deliver/F1/lem-sc-integral-overring-jacobson-power (reviewer PASS; first push; new nodes: 0)
