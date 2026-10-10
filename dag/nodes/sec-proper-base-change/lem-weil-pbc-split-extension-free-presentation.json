@@ -5,12 +5,62 @@
  "statement": "Let $R$ be a ring, $u:N\\to M$ an injective homomorphism of $R$-modules, $Q=M/u(N)$ with projection $p:M\\to Q$, and $F_1\\xrightarrow{d_1}F_0\\xrightarrow{\\pi}Q\\to0$ an exact sequence of $R$-modules with $F_0$ free. Let $\\alpha:F_0\\to M$ be an $R$-linear map with $p\\circ\\alpha=\\pi$, and let $\\beta:F_1\\to N$ be the unique $R$-linear map with $u\\circ\\beta=\\alpha\\circ d_1$ (it exists since $p\\circ\\alpha\\circ d_1=\\pi\\circ d_1=0$, so $\\alpha\\circ d_1$ takes values in $u(N)$, and it is unique since $u$ is injective). Then $u$ has an $R$-linear left inverse $v:M\\to N$ ($v\\circ u=\\mathrm{id}_N$) if and only if there is an $R$-linear map $\\gamma:F_0\\to N$ with $\\beta=\\gamma\\circ d_1$.",
  "source": {
   "document": "literature/stacks-project/algebra.tex",
-  "place": "Algebra, proof of Lemma Tag 02HO (lemma-split-injection-after-completion, lines 18148-18165): 'The extension above is split if and only if there exists a map gamma : F_0 -> N such that beta = gamma o d_1', stated there without proof"
+  "place": "Algebra, proof of Lemma Tag 02HO (lemma-split-injection-after-completion, lemma at line 18142, proof from line 18151, the sentence at lines 18166-18168): 'The extension above is split if and only if there exists a map gamma : F_0 -> N such that beta = gamma o d_1', stated there without proof"
  },
- "stmt_deps": [],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "stmt_deps": [
+  "def-weil-pbc-free-module",
+  "def-weil-pbc-exact-sequence"
+ ],
+ "proof": [
+  {
+   "text": "*($\\Rightarrow$).* Let $v:M\\to N$ be $R$-linear with $v\\circ u=\\mathrm{id}_N$ and put $\\gamma=v\\circ\\alpha:F_0\\to N$, an $R$-linear map. Then $\\gamma\\circ d_1=v\\circ\\alpha\\circ d_1=v\\circ u\\circ\\beta=\\beta$, using $u\\circ\\beta=\\alpha\\circ d_1$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra, proof of Lemma Tag 02HO (lemma-split-injection-after-completion, proof at lines 18151 ff., the sentence at lines 18166-18168), the sentence 'The extension above is split if and only if there exists a map gamma : F_0 -> N such that beta = gamma o d_1', asserted there without proof; the argument is written out here"
+   }
+  },
+  {
+   "text": "*($\\Leftarrow$), set-up: $M=u(N)+\\alpha(F_0)$.* Let $\\gamma:F_0\\to N$ be $R$-linear with $\\gamma\\circ d_1=\\beta$. Define the $R$-linear maps $\\Phi:N\\oplus F_0\\to M$, $\\Phi(n,x)=u(n)+\\alpha(x)$, and $\\Psi:N\\oplus F_0\\to N$, $\\Psi(n,x)=n+\\gamma(x)$. $\\Phi$ is surjective: given $m\\in M$, exactness of $F_1\\to F_0\\xrightarrow{\\pi}Q\\to0$ at $Q$ [def-weil-pbc-exact-sequence] says $\\pi$ is surjective, so there is $x\\in F_0$ with $\\pi(x)=p(m)$; then $p(m-\\alpha(x))=p(m)-\\pi(x)=0$, so $m-\\alpha(x)\\in\\ker p=u(N)$ ($Q=M/u(N)$), say $m-\\alpha(x)=u(n)$, and $m=\\Phi(n,x)$.",
+   "uses": [
+    "def-weil-pbc-exact-sequence"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra, proof of Lemma Tag 02HO (lemma-split-injection-after-completion, proof at lines 18151 ff., the sentence at lines 18166-18168), the sentence 'The extension above is split if and only if there exists a map gamma : F_0 -> N such that beta = gamma o d_1', asserted there without proof; the argument is written out here"
+   }
+  },
+  {
+   "text": "*($\\Leftarrow$), $\\ker\\Phi\\subseteq\\ker\\Psi$.* Let $(n,x)\\in N\\oplus F_0$ with $u(n)+\\alpha(x)=0$. Applying $p$ gives $\\pi(x)=p(\\alpha(x))=-p(u(n))=0$, so $x\\in\\ker\\pi$, and by exactness of $F_1\\xrightarrow{d_1}F_0\\xrightarrow{\\pi}Q$ at $F_0$ ($\\ker\\pi=\\operatorname{Im}d_1$) [def-weil-pbc-exact-sequence] there is $y\\in F_1$ with $x=d_1(y)$. Then $u(n)=-\\alpha(d_1(y))=-u(\\beta(y))$, so $n=-\\beta(y)$ because $u$ is injective. Hence $\\Psi(n,x)=n+\\gamma(d_1(y))=-\\beta(y)+\\beta(y)=0$, using $\\gamma\\circ d_1=\\beta$.",
+   "uses": [
+    "def-weil-pbc-exact-sequence"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra, proof of Lemma Tag 02HO (lemma-split-injection-after-completion, proof at lines 18151 ff., the sentence at lines 18166-18168), the sentence 'The extension above is split if and only if there exists a map gamma : F_0 -> N such that beta = gamma o d_1', asserted there without proof; the argument is written out here"
+   }
+  },
+  {
+   "text": "*($\\Leftarrow$), the left inverse.* By step 2, $\\Phi$ induces an $R$-linear isomorphism $(N\\oplus F_0)/\\ker\\Phi\\cong M$, and by step 3, $\\Psi$ factors through the quotient $(N\\oplus F_0)/\\ker\\Phi$ (homomorphism theorem for modules). So there is a unique $R$-linear $v:M\\to N$ with $v\\circ\\Phi=\\Psi$, explicitly $v(u(n)+\\alpha(x))=n+\\gamma(x)$. For $n\\in N$: $v(u(n))=v(\\Phi(n,0))=\\Psi(n,0)=n$, i.e. $v\\circ u=\\mathrm{id}_N$, so $u$ has an $R$-linear left inverse. (Neither direction uses that $F_0$ is free; freeness is what guarantees that a lift $\\alpha$ exists, and $\\alpha$ is given in the statement.)",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra, proof of Lemma Tag 02HO (lemma-split-injection-after-completion, proof at lines 18151 ff., the sentence at lines 18166-18168), the sentence 'The extension above is split if and only if there exists a map gamma : F_0 -> N such that beta = gamma o d_1', asserted there without proof; the argument is written out here"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-exact-sequence"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Algebra, proof of Lemma Tag 02HO (lemma-split-injection-after-completion, proof at lines 18151 ff., the sentence at lines 18166-18168), where the criterion is asserted without proof; the steps are written by the agent"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -32,10 +82,45 @@
    "results": "Function.Exact.split_tfae (Algebra/Exact.lean); ShortExact.extClass with comp_extClass, extClass_comp, extClass_naturality (Ext/ExtClass.lean) but no lemma 'extClass = 0 iff split' and nothing on presentations; LinearMap.exists_leftInverse_of_injective only over division rings",
    "date": "2026-10-10",
    "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "injective linear map has a left inverse iff the induced map from relations of a presentation of the cokernel factors through the relation map",
+   "results": "LinearMap.exists_leftInverse_of_injective, LinearMap.leftInverse_comp_of_inj, LinearMap.leftInverse (Mathlib.LinearAlgebra.Basis.VectorSpace, division rings only), MonoidAlgebra.exists_leftInverse_of_injective (Mathlib.RepresentationTheory.Maschke), Module.Relations.Solution.injective_fromQuotient_iff_ker_π_eq_span (Mathlib.Algebra.Module.Presentation.Basic), LinearMap.ker_eq_bot_of_inverse",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "exact sequence F1 → F0 → Q → 0, map M → N extends if it vanishes on the image, descend linear map along surjection whose kernel is contained in kernel",
+   "results": "LinearMap.exact_of_comp_of_mem_range, LinearMap.exact_of_comp_eq_zero_of_ker_le_range, LinearMap.exact_iff, Function.Exact.of_comp_of_mem_range, LinearMap.exact_zero_iff_surjective (Mathlib.Algebra.Exact)",
+   "date": "2026-10-10",
+   "verdict": "no match (only API for Function.Exact)"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "short exact sequence of modules splits iff connecting map Hom(N,N) → Ext^1(Q,N) sends identity to zero, extension class zero iff split",
+   "results": "ShortComplex.ShortExact.extClass_comp, comp_extClass, extClass_comp_assoc, comp_extClass_assoc (Mathlib.Algebra.Homology.DerivedCategory.Ext.ExtClass); Abelian.Ext.contravariant_sequence_exact₁/₂/₃, covariant_sequence_exact₃ (Mathlib.Algebra.Homology.DerivedCategory.Ext.ExactSequences)",
+   "date": "2026-10-10",
+   "verdict": "no match: derived-category Ext long exact sequences, nothing on a free presentation of the cokernel or on beta = gamma o d_1"
+  },
+  {
+   "tool": "loogle",
+   "query": "Function.Exact, Function.Injective, LinearMap.comp, Function.Surjective",
+   "results": "LinearMap.exact_iff_of_surjective_of_bijective_of_injective, Function.Exact.split_tfae, Function.Exact.split_tfae' (Mathlib.Algebra.Exact.Basic), SnakeLemma.δ', δ'_eq, exact_δ'_left, exact_δ'_right (Mathlib.Algebra.Module.SnakeLemma), LinearMap.injective_of_surjective_of_injective_of_right_exact and two more five-lemma variants (Mathlib.Algebra.FiveLemma)",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "sed -n 395,470p Mathlib/Algebra/Exact/Basic.lean; grep -rn 'exists_leftInverse\\|LeftInverse.*Exact\\|retraction.*exact' Mathlib/Algebra Mathlib/LinearAlgebra (Mathlib of ~/weil-conjectures-slopmaster2)",
+   "results": "Function.Exact.splitInjectiveEquiv (Algebra/Exact/Basic.lean:415-422: for M → N → P → 0 exact, retractions N → M ≃ splittings N ≃ M × P), Function.Exact.split_tfae' (line 451); LinearMap.exists_leftInverse_of_injective (LinearAlgebra/Basis/VectorSpace.lean:240, division rings); SnakeLemma retraction docstrings",
+   "date": "2026-10-10",
+   "verdict": "no match: the splitting lemma relates retractions to direct-sum decompositions, nothing tests a retraction on a presentation of the cokernel"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "worker",
@@ -55,5 +140,17 @@
   }
  },
  "chapter": "sec-proper-base-change",
- "unit": "sk-thm-p1"
+ "unit": "sk-thm-p1",
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "lem-weil-pbc-split-extension-free-presentation",
+  "worker": "stage1",
+  "summary": "Statement kept (checked against Stacks 02HO, where it is asserted without proof; the citer lem-weil-pbc-split-injection-after-completion uses only the 'if' direction). stmt_deps set to the new Mathlib-leaf definition def-weil-pbc-free-module (Module.Free) and def-weil-pbc-exact-sequence. Proof written out by the agent in four elementary steps: (=>) gamma = v o alpha; (<=) Phi(n,x)=u(n)+alpha(x) is surjective by exactness at Q, its kernel lies in the kernel of Psi(n,x)=n+gamma(x) by exactness at F_0 and injectivity of u, so Psi descends to v: M -> N with v o u = id. Freeness of F_0 is not used by the equivalence. Mathlib: searched with LeanSearch, LeanFinder, Loogle and grep; no match and no close candidate (Function.Exact.split_tfae / splitInjectiveEquiv only relate retractions to direct-sum splittings)."
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "result": "accepted",
+  "note": "4 elementary steps (proof_origin agent; Stacks 02HO asserts the criterion): gamma = v o alpha; Phi: N + F_0 -> M surjective by exactness at Q; ker Phi in ker Psi by exactness at F_0 and injectivity of u; v by the homomorphism theorem. New definition leaf for free modules (Module.Free, FreeModule/Basic.lean:43 verified by L). Source lines corrected by the worker."
+ }
 }

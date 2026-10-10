@@ -906,3 +906,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 05:18 L: reviewed lem-weil-pbc-radicial-prime-unique-degree-p (5 steps, no new node; lying-over citation repointed to the new 00GQ leaf): accepted.
 - 05:20 L: reviewed lem-weil-pbc-spectral-directed-limit-spectral (6 steps, +0A2V node, +0379 and 004W leaves): accepted.
 - 05:21 L: reviewed lem-weil-pbc-spectral-limit-descend-opens (5 steps, +0A2W node): accepted.
+- 05:22 L: reviewed lem-weil-pbc-split-extension-free-presentation (4 steps, +def free module leaf): accepted.

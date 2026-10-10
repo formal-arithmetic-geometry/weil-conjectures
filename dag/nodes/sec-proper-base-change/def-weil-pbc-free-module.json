@@ -1,0 +1,79 @@
+{
+ "id": "def-weil-pbc-free-module",
+ "kind": "definition",
+ "title": "Free modules",
+ "statement": "Let $R$ be a ring and $F$ an $R$-module. A *basis* of $F$ is a family $(e_i)_{i\\in I}$ of elements of $F$ such that every $x\\in F$ can be written in exactly one way as a finite $R$-linear combination $x=\\sum_{i\\in I}a_ie_i$ ($a_i\\in R$, almost all $a_i=0$); equivalently the $R$-linear map $\\bigoplus_{i\\in I}R\\to F$, $(a_i)_i\\mapsto\\sum_ia_ie_i$, is an isomorphism. $F$ is *free* if it has a basis (indexed by some set $I$, possibly infinite or empty).",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Algebra, Section Tag 00AQ (section-conventions), list of basic notions, item Tag 00C2 (item-free-module, line 192-193: 'M is a free R-module')"
+ },
+ "stmt_deps": [],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "free module: a module with a basis, Module.Free",
+   "results": "Module.Free, Module.Free.mk, Module.free_iff_set, Module.free_def, Module.Free.of_basis (Mathlib.LinearAlgebra.FreeModule.Basic)",
+   "date": "2026-10-10",
+   "verdict": "match: Module.Free"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "an R-module is free if it has a basis",
+   "results": "Module.free_iff_set, Module.free_def, Module.Free.of_basis, Module.Free, Module.Free.exists_basis (Mathlib.LinearAlgebra.FreeModule.Basic)",
+   "date": "2026-10-10",
+   "verdict": "match: Module.Free"
+  },
+  {
+   "tool": "loogle",
+   "query": "Module.Free",
+   "results": "Module.Free, Module.Free.self, Module.Free.ChooseBasisIndex, Module.Free.of_subsingleton (Mathlib.LinearAlgebra.FreeModule.Basic)",
+   "date": "2026-10-10",
+   "verdict": "match: Module.Free"
+  },
+  {
+   "tool": "local_search",
+   "query": "Module.Free",
+   "results": "Module.Free (class, .lake/packages/mathlib/Mathlib/LinearAlgebra/FreeModule/Basic.lean); index unavailable, used only as a name check",
+   "date": "2026-10-10",
+   "verdict": "match: name exists"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -n 'class Free' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/LinearAlgebra/FreeModule/Basic.lean; sed -n 35,46p of that file",
+   "results": "line 43-44: class Free (R : Type u) (M : Type v) [Semiring R] [AddCommMonoid M] [Module R M] : Prop where exists_basis (R M) : Nonempty <| (I : Type v) × Basis I R M (docstring line 42: '`Module.Free R M` is the statement that the `R`-module `M` is free.')",
+   "date": "2026-10-10",
+   "verdict": "match: exact (Module.Basis I R M is a linear equivalence M ≃ (I →₀ R), i.e. a basis in the sense of the node; the index type lives in the universe of M, which costs nothing since a basis is indexed by a subset of M, Module.free_iff_set)"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "Module.Free",
+  "file": "Mathlib/LinearAlgebra/FreeModule/Basic.lean",
+  "how": "exact: `Module.Free R M` (lines 43-44: there is a basis `Module.Basis I R M`, i.e. M ≃ₗ (I →₀ R)); the set-indexed form is `Module.free_iff_set` in the same file",
+  "line": 43
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-split-extension-free-presentation",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lead_note": "L 2026-10-10: definition leaf (Module.Free, FreeModule/Basic.lean:43); line verified."
+}
