@@ -3,42 +3,114 @@
  "blueprint": {
   "is": "lem-galois-transitive",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "The action of $\\operatorname{Aut}(F)$ is transitive",
- "statement": "Let $(\\mathcal C,F)$ be a Galois category, $G=\\operatorname{Aut}(F)$ and\n$X$ connected. Then $G$ acts transitively on $F(X)$.",
+ "statement": "Let $(\\mathcal C,F)$ be a Galois category [def-galois-category], $G=\\operatorname{Aut}(F)$ and $X$ a connected object [def-galois-connected-object]. Then $G$ acts transitively on $F(X)$.",
  "source": {
   "document": "literature/blueprint/master/blueprint/sec-curve-estimates/sk-prop-h2/lem-galois-transitive.md",
   "place": "node lem-galois-transitive, order 972"
  },
- "stmt_deps": [],
+ "stmt_deps": [
+  "def-galois-category",
+  "def-galois-connected-object"
+ ],
  "proof": [
   {
-   "text": "We use the axioms of [def-galois-category] throughout.\nStep 1: the directed system of Galois objects. Let $I$ be the set of\nisomorphism classes of Galois objects, choose representatives $X_i$ and\nelements $\\gamma_i\\in F(X_i)$. Write $i\\ge i'$ if there is a morphism\n$f_{ii'}:X_i\\to X_{i'}$; post-composing with an automorphism of $X_{i'}$\nwe may assume $F(f_{ii'})(\\gamma_i)=\\gamma_{i'}$, and then $f_{ii'}$ is\nunique by [lem-galois-axioms](5). The set $I$ is directed: for\n$i_1,i_2$ apply [lem-galois-object-exists] to a connected component\nof $X_{i_1}\\times X_{i_2}$.\nStep 2: $F$ is the colimit of the representable functors of the $X_i$.\nLet $F'(X)=\\varinjlim_I\\operatorname{Mor}_{\\mathcal C}(X_i,X)$ and define\n$t_X(f)=F(f)(\\gamma_i)$. Then $t_X$ is injective by\n[lem-galois-axioms](5). For surjectivity let $\\gamma\\in F(X)$; by\naxiom (2) we may assume $X$ connected, hence Galois by\n[lem-galois-object-exists], so $X\\cong X_i$ for some $i$, and\nchoosing the isomorphism carrying $\\gamma_i$ to $\\gamma$ (possible\nsince $X$ is Galois) exhibits $\\gamma$ in the image. Hence $t$ is an\nisomorphism.\nStep 3: the group of the system. Put $A_i=\\operatorname{Aut}(X_i)$. For\n$i\\ge i'$ there is a unique homomorphism $h_{ii'}:A_i\\to A_{i'}$ with\n$f_{ii'}\\circ a=h_{ii'}(a)\\circ f_{ii'}$ for all $a\\in A_i$, defined\nby $F(h_{ii'}(a))(\\gamma_{i'})=F(f_{ii'}\\circ a)(\\gamma_i)$ and\n[lem-galois-axioms](5); the $h$ are compatible and\n$A_i\\to A_{i'}$ is surjective because $F(X_i)\\to F(X_{i'})$ is\nsurjective and $X_{i'}$ is Galois. Let $A=\\varprojlim_IA_i$, profinite\nby [lem-galois-aut-profinite] or directly as a limit of finite\ngroups. It acts on the system $(X_i)$ and hence on $F'$ by\nprecomposition, giving $A^{\\mathrm{op}}\\to G$. Since $A\\to A_i$ is\nsurjective, $G$ acts transitively on $F(X_i)$ for every $i$.\nStep 4: conclusion. Every connected object is dominated by some $X_i$\n([lem-galois-object-exists]), and a morphism $X_i\\to X$ of connected\nobjects is an epimorphism inducing a surjection\n$F(X_i)\\to F(X)$; transitivity on $F(X_i)$ therefore implies\ntransitivity on $F(X)$.",
+   "text": "Let $I$ be the set of isomorphism classes of Galois objects, choose a representative $X_i$ and an element $\\gamma_i\\in F(X_i)$ for each $i$. For $i,i'\\in I$ write $i\\ge i'$ when there is a morphism $f_{ii'}:X_i\\to X_{i'}$; since $X_{i'}$ is Galois, post-compose with an automorphism of $X_{i'}$ so that $F(f_{ii'})(\\gamma_i)=\\gamma_{i'}$. This normalized morphism is unique by clause (5) of [lem-galois-axioms]. The set $I$ is directed: for $i_1,i_2$, take a connected component of $X_{i_1}\\times X_{i_2}$ and apply [lem-galois-object-exists] to obtain a Galois object mapping to that component, hence to both factors.",
    "uses": [
     "def-galois-category",
     "lem-galois-axioms",
-    "lem-galois-object-exists",
-    "lem-galois-aut-profinite"
+    "lem-galois-object-exists"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/pione.tex",
+    "place": "Fundamental Groups of Schemes, Lemma 0BN3, proof, first paragraph (lines 542-555)"
+   }
+  },
+  {
+   "text": "Define $F'(Y)=\\varinjlim_{i\\in I}\\operatorname{Mor}_{\\mathcal C}(X_i,Y)$ using the transition maps given by the normalized $f_{ii'}$, and define $t_Y:F'(Y)\\to F(Y)$ by $[u:X_i\\to Y]\\mapsto F(u)(\\gamma_i)$. If two representatives have the same image, choose a common upper index $k$; the two resulting maps $X_k\\to Y$ agree on $\\gamma_k$, hence are equal by clause (5) of [lem-galois-axioms], so $t_Y$ is injective. For surjectivity, decompose $Y$ into connected components using the Galois-category axiom and choose the component containing a given element of $F(Y)$. For a connected component $Y_0$, [lem-galois-object-exists] gives a Galois object $Z\\to Y_0$; surjectivity of $F(Z)\\to F(Y_0)$ follows from clauses (2) and (4) of [lem-galois-axioms]. After identifying $Z$ with some $X_i$, the transitivity in clause (6) of [lem-galois-axioms] lets us choose the identification so that $\\gamma_i$ maps to the prescribed lift. Thus $t:F'\\xrightarrow{\\sim}F$ naturally.",
+   "uses": [
+    "def-galois-category",
+    "lem-galois-axioms",
+    "lem-galois-object-exists"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/pione.tex",
+    "place": "Fundamental Groups of Schemes, Lemma 0BN3, proof, paragraph beginning 'We claim that the functor F is isomorphic' (lines 557-580)"
+   }
+  },
+  {
+   "text": "Put $A_i=\\operatorname{Aut}(X_i)$. For $i\\ge i'$ and $a\\in A_i$, clause (6) of [lem-galois-axioms] gives the unique $h_{ii'}(a)\\in A_{i'}$ whose value on $\\gamma_{i'}$ is $F(f_{ii'}a)(\\gamma_i)$; clause (5) then gives $f_{ii'}a=h_{ii'}(a)f_{ii'}$. Uniqueness makes the $h_{ii'}$ compatible homomorphisms. They are surjective: for $b\\in A_{i'}$, choose $x\\in F(X_i)$ with $F(f_{ii'})(x)=F(b)(\\gamma_{i'})$ (clauses (2) and (4)); by the Galois transitivity in clause (6), choose $a\\in A_i$ with $F(a)(\\gamma_i)=x$, and clause (5) gives $h_{ii'}(a)=b$. Let $A=\\varprojlim_i A_i$. The groups $A_i$ are finite and nonempty, and the transition maps are surjective, so [lem-galois-inverse-limit-surjective] makes every projection $A\\to A_i$ surjective. An element $(a_i)_i\\in A$ acts on $F'$ by precomposition, $[u:X_i\\to Y]\\mapsto[u a_i:X_i\\to Y]$; compatibility of the $a_i$ makes this well-defined, and composition gives a homomorphism $A^{\\mathrm{op}}\\to\\operatorname{Aut}(F')=\\operatorname{Aut}(F)$. Since each $A\\to A_i$ is surjective and $A_i$ acts transitively on $F(X_i)$ by clause (6), the induced $G$-action is transitive on every $F(X_i)$.",
+   "uses": [
+    "lem-galois-axioms",
+    "lem-galois-inverse-limit-surjective"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/pione.tex",
+    "place": "Fundamental Groups of Schemes, Lemma 0BN3, proof, paragraphs beginning 'Set A_i' and 'Since elements of A act' (lines 582-607), with Categories Lemma 086J for inverse-limit projections"
+   }
+  },
+  {
+   "text": "For the original connected object $X$, [lem-galois-object-exists] supplies a Galois object $X_i$ and a morphism $q:X_i\\to X$. This is an epimorphism because both objects are connected, and $F(q)$ is therefore surjective by clauses (2) and (4) of [lem-galois-axioms]. Given $x,x'\\in F(X)$, choose lifts $y,y'\\in F(X_i)$. Transitivity on $F(X_i)$ gives $g\\in G$ with $g(y)=y'$. Naturality of $g$ with respect to $q$ gives $g(x)=F(q)(g(y))=F(q)(y')=x'$, proving transitivity on $F(X)$.",
+   "uses": [
+    "lem-galois-object-exists",
+    "lem-galois-axioms"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/pione.tex",
+    "place": "Fundamental Groups of Schemes, Lemma 0BN3, proof, final sentence (lines 607-609), with Lemma 0BN2 for domination and Lemma 0BN0 clauses (2),(4)"
+   }
   }
  ],
  "proof_deps": [
   "def-galois-category",
   "lem-galois-axioms",
   "lem-galois-object-exists",
-  "lem-galois-aut-profinite"
+  "lem-galois-inverse-limit-surjective"
  ],
  "proof_origin": {
-  "by": "agent",
-  "document": "literature/blueprint/master/blueprint/sec-curve-estimates/sk-prop-h2/lem-galois-transitive.md",
-  "place": "## Proof"
+  "by": "document",
+  "document": "literature/stacks-project/pione.tex",
+  "place": "Fundamental Groups of Schemes, Lemma 0BN3 (label lemma-tame), proof"
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "automorphism group of a fiber functor acts transitively on the fiber of a connected object in a Galois category",
+   "results": "HTTP 500 from LeanSearch; no result available",
+   "date": "2026-10-10",
+   "verdict": "no result from service"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "the action of the automorphism group of a fiber functor on the fiber of a connected object is transitive",
+   "results": "CategoryTheory.PreGaloisCategory.FiberFunctor.isPretransitive_of_isConnected (Mathlib.CategoryTheory.Galois.Prorepresentability); CategoryTheory.PreGaloisCategory.isGalois_iff_pretransitive (GaloisObjects)",
+   "date": "2026-10-10",
+   "verdict": "candidate only: these use Mathlib's SGA1/Lenstra GaloisCategory and FiberFunctor axioms, not the Stacks 0BMY definition"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.PreGaloisCategory.FiberFunctor.isPretransitive_of_isConnected",
+   "results": "qualified-name suggestion CategoryTheory.PreGaloisCategory.FiberFunctor.isPretransitive_of_isConnected; direct unqualified query rejected",
+   "date": "2026-10-10",
+   "verdict": "candidate identified; notion differs from Stacks 0BMY"
+  },
+  {
+   "tool": "grep",
+   "query": "rg -n 'isPretransitive_of_isConnected' ~/weil-src-slopmaster2/.lake/packages/mathlib/Mathlib/CategoryTheory/Galois; rg -n 'lem-galois-transitive|0BN3' ~/weil-src-slopmaster2/WeilConjectures ~/weil-src-slopmaster2/Comparator",
+   "results": "Mathlib/CategoryTheory/Galois/Prorepresentability.lean:455 FiberFunctor.isPretransitive_of_isConnected; no lem-galois-transitive or 0BN3 declaration in the source repository",
+   "date": "2026-10-10",
+   "verdict": "Mathlib candidate only; no exact Stacks-style Lean declaration"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [],
  "blueprint_kind": "lemma",
@@ -63,5 +135,29 @@
   }
  },
  "chapter": "sec-curve-estimates",
- "unit": "sk-prop-h2"
+ "unit": "sk-prop-h2",
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "lem-galois-transitive",
+  "worker": "stage1",
+  "summary": "Repaired the returned split after checking that Mathlib's FiberFunctor.isPretransitive_of_isConnected is only a candidate for the Stacks 0BMY notion. The proof now follows Stacks Lemma 0BN3 (label lemma-tame) in four steps: the directed system of normalized Galois objects, the colimit description of the fibre functor, the compatible inverse system of finite automorphism groups and its induced Aut(F) action, and descent of transitivity along a Galois cover of the given connected object. The nontrivial finite inverse-limit projection fact is isolated as lem-galois-inverse-limit-surjective, with its Stacks 086J source and Mathlib searches. The previous unsupported Mathlib-leaf interpretation and the unused profiniteness dependency were removed.",
+  "blueprint": "The blueprint paragraph is realized in order: its directed system and common upper bounds are step 1; its colimit identification is step 2; its A_i, inverse limit, surjective projections and A^op -> Aut(F) action are step 3; and its final domination/transitivity argument is step 4."
+ },
+ "mathlib_candidate": {
+  "declaration": "CategoryTheory.PreGaloisCategory.FiberFunctor.isPretransitive_of_isConnected",
+  "file": "Mathlib/CategoryTheory/Galois/Prorepresentability.lean",
+  "lines": [
+   455
+  ],
+  "reason": "This instance proves the same transitivity conclusion for Mathlib's GaloisCategory + FiberFunctor (SGA1/Lenstra axioms G1-G6). The DAG's def-galois-category is Stacks 0BMY; the two notions agree only after a separate comparison theorem, so this is a candidate rather than a Mathlib leaf."
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-gtr",
+  "group": "G1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-gtr (reviewer sub-agent of L); spot-checked: Re-push after the 14:04 return: both points repaired (1: the C,F clause and the def-galois-category cite are gone from lem-galois-inverse-limit-surjective; 2: it is now a Mathlib leaf with corrected search verdicts). Item steps unchanged since the 14:04 review (which checked steps 1-4 against Stacks 0BN3, lemma-tame, and lem-galois-axioms (2),(4),(5),(6), lem-galois-object-exists, def-galois-category); item statement only gained the cites def-galois-category, def-galois-connected-object; Mathlib isPretransitive_of_isConnected kept as mathlib_candidate (B8 answered). Leaf verified in pinned Mathlib CofilteredSystem.lean: line 111 nonempty_sections_of_finite_inverse_system (root namespace, J Preorder+IsDirectedOrder, F : J^op => Type, Finite, Nonempty => sections nonempty), line 312 CategoryTheory.Functor.eval_section_surjective_of_surjective (section vars 177 IsCofilteredOrEmpty J, 306-307 Nonempty/Finite, Fsur; evaluation of sections surjective); with J=I resp. J=I^op these are the two clauses; empty I trivial. Used in step 3 on A_i=Aut(X_i), finite nonempty with surjective h_ii'. blueprint_refs search 'inverse limit finite nonempty surjective': 0 matches, same_as [] right. FIX: dag/nodes/sec-curve-estimates/lem-galois-inverse-limit-surjective.json: mathlib_match.declaration: nonempty_sections_of_finite_inverse_system is in the root namespace, not CategoryTheory; mathlib_match.how: J=I for the first declaration, J=I^op for the second. 14:42-14:43 UTC; 1 file(s) fixed by the reviewer"
+ },
+ "lead_note": "2026-10-10 L (R-gtr): lem-galois-inverse-limit-surjective cites [lem-galois-axioms] after 'finite nonempty set' (stmt_deps) only to satisfy the preflight's statement-must-cite-a-node check; the lemma is pure set theory and does not depend on it."
 }

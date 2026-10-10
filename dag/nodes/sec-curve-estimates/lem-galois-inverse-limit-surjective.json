@@ -1,0 +1,71 @@
+{
+ "id": "lem-galois-inverse-limit-surjective",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-galois-transitive",
+   "place": "Step 3: after forming the inverse limit A = lim_I A_i, the projections A -> A_i are surjective",
+   "via": []
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Projections from a finite inverse limit are surjective",
+ "statement": "Let $I$ be a preordered set in which every pair has a common upper bound (a directed preordered set), and let $(S_i,p_{ji})$ be an inverse system indexed by $I$: each $S_i$ is a finite nonempty set [lem-galois-axioms] and for $j\\ge i$ there is a transition map $p_{ji}:S_j\\to S_i$, compatible with identities and compositions. Assume every $p_{ji}$ is surjective. Then the inverse limit $S=\\varprojlim_i S_i$ is nonempty and each projection $S\\to S_i$ is surjective.",
+ "source": {
+  "document": "literature/stacks-project/categories.tex",
+  "place": "Categories, Lemma 086J (label lemma-nonempty-limit); apply it to the inverse systems of fibres over a chosen element"
+ },
+ "stmt_deps": [
+  "lem-galois-axioms"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "inverse limit of a directed system of finite nonempty sets has nonempty limit and surjective projections when transition maps are surjective",
+   "results": "HTTP 500 from LeanSearch; no result available",
+   "date": "2026-10-10",
+   "verdict": "no match from service"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "surjectivity of projections from inverse limit of finite sets with surjective transition maps",
+   "results": "CategoryTheory.Functor.eval_section_surjective_of_surjective (Mathlib.CategoryTheory.CofilteredSystem) and nonempty_sections_of_finite_inverse_system (Mathlib.CategoryTheory.CofilteredSystem)",
+   "date": "2026-10-10",
+   "verdict": "match by specializing the cofiltered functor to J = Iᵒᵖ; the two declarations give the projection and nonemptiness clauses"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.eval_section_surjective_of_surjective; nonempty_sections_of_finite_inverse_system",
+   "results": "Functor.eval_section_surjective_of_surjective (Mathlib/CategoryTheory/CofilteredSystem.lean:304-322); nonempty_sections_of_finite_inverse_system (Mathlib/CategoryTheory/CofilteredSystem.lean:111-113)",
+   "date": "2026-10-10",
+   "verdict": "match: the first declaration gives every projection surjective and the second gives nonemptiness"
+  },
+  {
+   "tool": "grep",
+   "query": "rg -n 'nonempty_sections_of_finite_inverse_system|eval_section_surjective_of_surjective' ~/weil-src-slopmaster2/.lake/packages/mathlib/Mathlib/CategoryTheory/CofilteredSystem.lean",
+   "results": "CategoryTheory/CofilteredSystem.lean:111-113 nonempty_sections_of_finite_inverse_system; CategoryTheory/CofilteredSystem.lean:304-322 Functor.eval_section_surjective_of_surjective",
+   "date": "2026-10-10",
+   "verdict": "match after specializing to J = Iᵒᵖ: nonemptiness is the 111-113 declaration and each projection is the 304-322 declaration"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "CategoryTheory.Functor.eval_section_surjective_of_surjective (projection clause); nonempty_sections_of_finite_inverse_system (root namespace, nonemptiness clause)",
+  "file": "Mathlib/CategoryTheory/CofilteredSystem.lean",
+  "line": 312,
+  "lines": [
+   111,
+   312
+  ],
+  "how": "Two declarations, one per clause. Encode the inverse system over the directed preordered set I as a functor S : Iᵒᵖ ⥤ Type. `nonempty_sections_of_finite_inverse_system` (lines 111-113, with J = I, [Preorder I] [IsDirectedOrder I]) gives a compatible section, hence the inverse limit is nonempty; `CategoryTheory.Functor.eval_section_surjective_of_surjective` (lines 304-322, theorem at 312, with J = Iᵒᵖ, which is cofiltered-or-empty since I is directed) gives surjectivity of evaluation at every index. Finite and nonempty values and surjective transition maps are exactly the hypotheses of these declarations, and sections/evaluation are the inverse limit and its projections."
+ },
+ "status": "mathlib",
+ "created": {
+  "item": "lem-galois-transitive"
+ },
+ "chapter": "sec-curve-estimates",
+ "unit": "sk-prop-h2"
+}
