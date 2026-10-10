@@ -2039,3 +2039,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 16:45 L: returned deliver/G1/lem-weil-pbc-etale-sections-fpqc-descent (reviewer RETURN: 1. E1/D1: lem-weil-pbc-etale-sections-fpqc-descent step 2 and new node lem-weil-pbc-etale-sections-generated-sieve: the )
 - 16:46 L: merged deliver/F1/def-constructible-torsor (reviewer PASS; first push; new nodes: 0)
 - 16:46 L: merged deliver/E1/lem-weil-pbc-etale-geometric-fibre-constant-sections (reviewer FIX; first push; new nodes: 2)
+- 16:47 L: merged deliver/G1/lem-sc-tensor-generating-sections (reviewer PASS; after a return; new nodes: 0)
