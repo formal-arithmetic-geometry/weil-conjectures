@@ -27,67 +27,116 @@
   "def-sc-gm-torsor",
   "lem-sc-torsor-h1"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Take a Zariski cover with a section t_0 of T. Write a\\in G for the section a\\cdot t_0 of T, and b\\in G for the section b\\cdot' t_0=(-b)\\cdot t_0 of T^{-1}. Negation makes the latter action free and transitive. On this cover the antidiagonal relation (g\\cdot x,(-g)\\cdot y) identifies a pair of coordinates (a,b) with (a+g,b-g); hence addition (a,b)\\mapsto a+b identifies the contracted product with the translation torsor G. Iterating this quotient gives a coordinate equal to the sum of the coordinates of every factor, for either sign, so every nonzero power is locally the translation torsor. Degree zero is G itself. These local torsor structures are those of the sheaf contracted products and thus restrict and glue.",
+   "uses": [
+    "def-sc-gm-torsor",
+    "lem-sc-torsor-h1"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-curve-estimates/sk-prop-hilbert90/lem-sc-torsor-h1.md",
+    "place": "Worker's argument: local trivializations and the contracted-product group law"
+   }
+  },
+  {
+   "text": "In the coordinates of step 1, define \\mu_{m,n} by addition G\\wedge G\\to G, [a,b]\\mapsto a+b. This is a G-equivariant isomorphism: the antidiagonal relation preserves the sum and every class has the unique representative [a+b,0]. To check independence of t_0, write another local section as t_1=c\\cdot t_0. The coordinate of a T-factor changes from a to a-c, while that of a T^{-1}-factor changes from b to b+c. Thus the coordinate of degree k changes by -kc (also for k=0), and the source sum changes by -(m+n)c, exactly as the target coordinate does. The local maps therefore agree on overlaps and glue to canonical sheaf isomorphisms. For degree zero, [g,a]\\mapsto g+a is precisely the original action; one factor gives T^{\\otimes1}=T.",
+   "uses": [
+    "def-sc-gm-torsor",
+    "lem-sc-torsor-h1"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-curve-estimates/sk-prop-hilbert90/lem-sc-torsor-h1.md",
+    "place": "Worker's argument: concatenation, cancellation, and degree-zero unit constraints"
+   }
+  },
+  {
+   "text": "On any trivializing open, both associative composites send [a,b,d] to a+b+d. The swapped composite sends [a,b] to b+a=a+b because G is abelian. The degree-zero maps send [0,a] and [a,0] to a, so both unit laws hold. Equality of sheaf morphisms can be checked on the trivializing cover; hence these identities hold globally for all signed degrees, including m=0 or n=0.",
+   "uses": [
+    "lem-sc-torsor-h1"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-curve-estimates/sk-prop-hilbert90/lem-sc-torsor-h1.md",
+    "place": "Worker's argument: associativity, commutativity, and units of contracted product"
+   }
+  },
+  {
+   "text": "For t=a\\cdot t_0 and s=b\\cdot' t_0=(-b)\\cdot t_0, the unique h with h\\cdot s=t is h=a+b, which is exactly \\mu_{1,-1} from step 2. Replacing the pair by (g\\cdot t,(-g)\\cdot' s) changes the two coordinates to a+g and b-g, so h is unchanged. Conversely h is represented locally by [h\\cdot s,s]; if s is replaced by d\\cdot' s, this pair changes by the antidiagonal relation with -d, so its class is independent of s. For degree n and -n the same coordinate formula sums all positive and inverse coordinates; it is \\mu_{n,-n}, whose inverse exists by step 2.",
+   "uses": [
+    "def-sc-gm-torsor",
+    "lem-sc-torsor-h1"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-curve-estimates/sk-prop-hilbert90/lem-sc-torsor-h1.md",
+    "place": "Worker's argument: inverse torsor and cancellation pairing"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sc-gm-torsor",
+  "lem-sc-torsor-h1"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/master/blueprint/sec-curve-estimates/sk-prop-hilbert90/lem-sc-torsor-h1.md",
+  "place": "Worker's argument developing the contracted-product group law"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
-   "query": "coherent tensor powers of an abelian sheaf torsor, contracted product and inverse torsor",
-   "results": "8 hits, led by PresheafOfModules.Monoidal.tensorObj and CategoryTheory.Sheaf.tensorProd_isSheaf; these concern module or Cartesian tensor products, not torsors",
-   "date": "2026-10-11",
-   "verdict": "no match"
-  },
-  {
-   "tool": "leanfinder",
-   "query": "the contracted product of two torsors under an abelian sheaf is a torsor with inverse and associativity",
-   "results": "8 hits, including CategoryTheory.Sheaf.Hom.addCommGroup and affine-space composition lemmas; none states contracted-product torsor coherence",
+   "query": "coherent integer powers of an abelian sheaf torsor with contracted products",
+   "results": "8 hits, none states torsor powers or contracted products",
    "date": "2026-10-11",
    "verdict": "no match"
   },
   {
    "tool": "loogle",
-   "query": "CategoryTheory.Sheaf.tensorProd_isSheaf",
-   "results": "CategoryTheory.Sheaf.tensorProd_isSheaf, Mathlib/CategoryTheory/Sites/CartesianMonoidal.lean:35; its type concerns the Cartesian product of sheaves, not torsors or contracted products",
+   "query": "Torsor contracted product inverse torsor",
+   "results": "0 hits; Unknown identifier contracted",
    "date": "2026-10-11",
    "verdict": "no match"
   },
   {
    "tool": "grep",
-   "query": "contracted.*torsor|torsor.*contracted|Torsor.*tensor",
-   "results": "No hits in CategoryTheory/Sites",
-   "date": "2026-10-11",
-   "verdict": "no match"
-  },
-  {
-   "tool": "grep",
-   "query": "Torsor|torsor|contracted",
-   "results": "No hits in CategoryTheory/Sites",
-   "date": "2026-10-11",
-   "verdict": "no match"
-  },
-  {
-   "tool": "grep",
-   "query": "tensorProd_isSheaf",
-   "results": "Mathlib/CategoryTheory/Sites/CartesianMonoidal.lean:35 and :49; Cartesian product of sheaves, not torsor contracted product",
+   "query": "contracted.*torsor|torsor.*contracted|Torsor.*tensor [CategoryTheory/Sites]",
+   "results": "No hits",
    "date": "2026-10-11",
    "verdict": "no match"
   },
   {
    "tool": "leansearch",
-   "query": "contracted products of sheaf torsors form coherent positive and negative integer powers",
+   "query": "coherent contracted powers of a sheaf torsor",
    "results": "service unavailable: Internal Server Error",
    "date": "2026-10-11",
    "verdict": "unavailable"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-sc-zariski-contracted-power-extension",
   "by": "worker",
   "date": "2026-10-10"
  },
  "chapter": "sec-curve-estimates",
- "unit": "sk-thm-curveestimate"
+ "unit": "sk-thm-curveestimate",
+ "split_report": {
+  "date": "2026-10-11",
+  "item": "lem-sc-zariski-contracted-power-torsor",
+  "worker": "stage1",
+  "summary": "Added a four-step proof of the coherent integer-power construction. Local trivializations and the contracted-product torsor statement give torsor powers; concatenation and cancellation define the canonical maps, and representative calculations establish units, associativity, commutativity, and inverse pairings. No new node was needed.",
+  "blueprint": "The steps realize the ancestor clause 'the representative-level torsor class used for naturality, namely the extension built from contracted powers of a torsor', specifically the worker's contracted-product group-law argument."
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-cpt1755",
+  "group": "C1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-cpt1755 (reviewer sub-agent of L); spot-checked: Recomputed coordinates: T^{-1} coord b->b+c and T coord a->a-c under t1=c.t0, so degree-k shift -kc and mu_{m,n} glues; antidiagonal (a,b)~(a+g,b-g) preserves sum; h=a+b matches mu_{1,-1}; assoc/comm/unit on representatives. Statement unchanged. No cycle: lem-sc-torsor-h1 -> lem-sc-ext-torsor (imported, no deps); parent contracted-power-extension cites this item, not conversely; no restatement. Second reading: no missed fault found. No repairs."
+ }
 }
