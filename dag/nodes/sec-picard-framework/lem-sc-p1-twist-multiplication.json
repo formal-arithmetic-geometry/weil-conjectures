@@ -12,9 +12,54 @@
   "document": "literature/stacks-project/constructions.tex",
   "place": "Constructions, Lemma 01MS (lemma-when-invertible) with d=1 and f=x_0,x_1, Lemma 01MU (lemma-where-invertible: W_1=P since D_+(x_i)=D_+(x_i\\cdot 1) with deg x_i = deg 1 + 1), Lemma 01MV (lemma-principal-open, n=d=1) for (2); Lemma 01NG (lemma-standard-covering-projective-space) for the cover"
  },
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Apply [lem-weil-pbc-proj-polynomial-twist-chart] with $A=k$, $m=1$ (only its clauses on the cover and on functions are used, not its glued module): $U_0=D_+(x_0)$ and $U_1=D_+(x_1)$ cover $P$, $\\Gamma(U_i,\\mathcal O_P)=S_{(x_i)}$, and for $i\\ne j$, $U_i\\cap U_j$ is the basic open of the function $x_i/x_j$ in $U_j$. By (2) of [def-weil-pbc-proj-twisting-sheaf], for every $n\\in\\mathbf Z$ and every homogeneous $f$ of positive degree with $D_+(f)\\subseteq U_i$, $\\Gamma(D_+(f),\\mathcal O_P(n))=(S_f)_n$ is free of rank one over $S_{(f)}$ with basis $x_i^n/1$ (elementary: $x_i$ is a unit of $S_f$, so $c=(c\\,x_i^{-n})\\cdot x_i^n$ with $c\\,x_i^{-n}\\in S_{(f)}$, uniquely), compatibly with the restriction maps, which are localization maps. Hence $a\\mapsto a\\cdot x_i^n$ is an isomorphism $\\mathcal O_{U_i}\\to\\mathcal O_P(n)|_{U_i}$; in particular $\\mathcal O_P(1)$ is quasi-coherent (by construction) and locally free of rank one, i.e. invertible [def-sc-invertible-module], with generator $x_i$ (the global section of (3) of [def-weil-pbc-proj-twisting-sheaf], equal to $x_i/1$ on every $D_+(f)$) on $U_i$. This is the computation of Stacks 01MS with $d=1$, $f=x_i$.",
+   "uses": [
+    "lem-weil-pbc-proj-polynomial-twist-chart",
+    "def-weil-pbc-proj-twisting-sheaf",
+    "def-sc-invertible-module"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/constructions.tex",
+    "place": "Constructions, Lemma 01MS (lemma-when-invertible) and Lemma 01NG"
+   }
+  },
+  {
+   "text": "Being a morphism of sheaves, $\\mu_{n,m}$ is an isomorphism if its restrictions to $U_0$ and $U_1$ are. On $U_i$, by Step 1, $\\mathcal O_P(n)|_{U_i}\\otimes\\mathcal O_P(m)|_{U_i}$ is free of rank one with basis $x_i^n\\otimes x_i^m$, and $\\mu_{n,m}$ sends it to $x_i^nx_i^m=x_i^{n+m}$, the basis of $\\mathcal O_P(n+m)|_{U_i}$; so $\\mu_{n,m}|_{U_i}$ is an isomorphism (Stacks 01MS). Consequently: for $n\\ge0$ the iterated multiplication $\\mathcal O_P(1)^{\\otimes n}\\to\\mathcal O_P(n)$ is an isomorphism (induction on $n$ via $\\mu_{n,1}$); $\\mu_{1,-1}:\\mathcal O_P(1)\\otimes\\mathcal O_P(-1)\\to\\mathcal O_P$ is an isomorphism of invertible modules, so its adjoint $\\mathcal O_P(-1)\\to\\mathcal Hom(\\mathcal O_P(1),\\mathcal O_P)=\\mathcal O_P(1)^\\vee$ is an isomorphism (on $U_i$ it sends the basis $x_i^{-1}$ to the dual basis of $x_i$), and for $n<0$ iterating $\\mu_{-1,-1}$ gives $(\\mathcal O_P(1)^\\vee)^{\\otimes(-n)}\\cong\\mathcal O_P(n)$. Tensoring with $\\mathcal G$ gives $\\mathcal G\\otimes\\mathcal O_P(1)^{\\otimes n}\\cong\\mathcal G\\otimes\\mathcal O_P(n)$. Under these isomorphisms $t\\otimes x_i$ goes to $\\mu(t\\otimes x_i)$ by associativity of multiplication in $S_f$ (for $n<0$ also using that the dual pairing is $\\mu_{1,-1}$). Elementary: a check on the bases over the two charts.",
+   "uses": [
+    "def-weil-pbc-proj-twisting-sheaf",
+    "def-sc-invertible-module"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/constructions.tex",
+    "place": "Constructions, Lemma 01MS (lemma-when-invertible) and Lemma 01MU (lemma-where-invertible)"
+   }
+  },
+  {
+   "text": "Let $x\\in P$. If $x\\in U_i$, then $x_i$ is a free generator of $\\mathcal O_P(1)$ near $x$ (Step 1), so its image in $\\mathcal O_P(1)_x\\otimes\\kappa(x)\\cong\\kappa(x)$ is nonzero. If $x\\in U_j$, $j\\ne i$, then on $U_j$ we have $x_i=(x_i/x_j)\\cdot x_j$ with $x_j$ a free generator, so $x_i$ does not vanish at $x$ iff the function $x_i/x_j$ does not vanish at $x$, iff $x$ lies in the basic open of $x_i/x_j$ in $U_j$, which is $U_i\\cap U_j$ by [lem-weil-pbc-proj-polynomial-twist-chart]. Since $U_0\\cup U_1=P$, $P_{x_i}=D_+(x_i)$ (Stacks 01MV with $n=d=1$). Elementary.",
+   "uses": [
+    "lem-weil-pbc-proj-polynomial-twist-chart"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/constructions.tex",
+    "place": "Constructions, Lemma 01MV (lemma-principal-open)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-proj-polynomial-twist-chart",
+  "def-weil-pbc-proj-twisting-sheaf",
+  "def-sc-invertible-module"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/constructions.tex",
+  "place": "Constructions, Lemmas 01MS, 01MU and 01MV"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -39,7 +84,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "R-smc",
@@ -66,5 +111,30 @@
   "slopmaster2": {
    "state": "none"
   }
+ },
+ "split_report": {
+  "date": "2026-10-11",
+  "item": "lem-sc-p1-twist-multiplication",
+  "worker": "stage1",
+  "summary": "Reviewer R-ptm1745 rewrote the proof: the three cited nodes (over Z, glued twist, base-change P) do not state the facts for Proj k[x_0,x_1] with O(n)=S(n)~; the item is now the local chart computation of Stacks 01MS/01MU/01MV, in three elementary steps citing the twisting-sheaf definition and the P^1 chart node.",
+  "blueprint": "Realizes the ancestor lem-sc-p1-graded-resolution proof's comparison on D_+(x_i), including the tensor-power identification and the coordinate non-vanishing chart.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-proj-polynomial-twist-chart",
+    "why": "Its statement supplies the cover of Proj A[x_0,..,x_m] by the D_+(x_k), the rings S_(x_k), and that D_+(x_k) cap D_+(x_l) is the basic open of x_l/x_k; used for A=k, m=1, only its clauses on functions."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-proj-polynomial-twist-chart",
+  "lem-weil-pbc-proj-polynomial-twist-chart"
+ ],
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-ptm1745",
+  "group": "C1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-ptm1745 (reviewer sub-agent of L); spot-checked: FIX more, RETURN less: C4 x3 repaired. Step 1 cited lem-weil-pbc-projective-space-twisting-sheaf-charts, stated only over Z (no base Spec k); step 2 cited lem-pc-twist-tensor, whose O(d) is the glued module of def-pc-projective-space-twist, identified with S(d)~ only for A=Z, d=1 (lem-weil-pbc-projective-space-twist-glued-identification), so not the item's mu_{n,m}; step 3 cited lem-weil-pbc-projective-space-standard-charts, about S x P^n_Z with rho^*O(1), not Proj k[x0,x1] with S(1)~. Repair: proof rewritten as the Stacks 01MS/01MU/01MV chart computation in three elementary steps: (S_f)_n free on x_i^n over D_+(x_i) from def-weil-pbc-proj-twisting-sheaf (2); mu basis-to-basis; dual via mu_{1,-1}; non-vanishing via x_i=(x_i/x_j)x_j and the basic-open clause of lem-weil-pbc-proj-polynomial-twist-chart (A=k, m=1; declared tool use, functions only). Three old tool uses dropped. Mathlib: existing searches (leanfinder, grep) found no twisting sheaves; no new nodes.; 1 file(s) fixed by the reviewer"
  }
 }
