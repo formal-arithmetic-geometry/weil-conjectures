@@ -13,7 +13,7 @@
  },
  "kind": "statement",
  "title": "Affine morphism gives a quasi-coherent derived equivalence",
- "statement": "Let $f:X\\to Y$ be an affine morphism of schemes [def-pc-scheme]. Regard $f_*\\mathcal O_X$ as an $\\mathcal O_Y$-algebra. Then $Rf_*$ [def-pc-derived-direct-image] induces an equivalence $\\Phi:D_{\\mathrm{QCoh}}(X)\\simeq D_{\\mathrm{QCoh}}(f_*\\mathcal O_X)$ [def-pc-derived-category], where the target is the derived category of complexes of $f_*\\mathcal O_X$-modules with quasi-coherent cohomology, and the composition of $\\Phi$ with the restriction functor $D_{\\mathrm{QCoh}}(f_*\\mathcal O_X)\\to D_{\\mathrm{QCoh}}(Y)$ is $Rf_*:D_{\\mathrm{QCoh}}(X)\\to D_{\\mathrm{QCoh}}(Y)$.",
+ "statement": "Let $f:X\\to Y$ be an affine morphism of schemes [def-pc-scheme]. Regard $f_*\\mathcal O_X$ as an $\\mathcal O_Y$-algebra. Then $Rf_*$ [def-pc-derived-direct-image] induces an equivalence $\\Phi:D_{\\mathrm{QCoh}}(X)\\simeq D_{\\mathrm{QCoh}}(f_*\\mathcal O_X)$ [def-pc-derived-category], where the target is the full subcategory of the derived category [def-weil-abstract-derived-category] of the abelian category of $f_*\\mathcal O_X$-modules on $Y$ [def-weil-sheaf-of-modules-category] consisting of the complexes whose cohomology sheaves are quasi-coherent $f_*\\mathcal O_X$-modules [lem-weil-pbc-affine-module-correspondence], and the composition of $\\Phi$ with the restriction functor $D_{\\mathrm{QCoh}}(f_*\\mathcal O_X)\\to D_{\\mathrm{QCoh}}(Y)$ is $Rf_*:D_{\\mathrm{QCoh}}(X)\\to D_{\\mathrm{QCoh}}(Y)$.",
  "source": {
   "document": "literature/stacks-project/perfect.tex",
   "place": "Tag 0AVW, perfect-lemma-affine-morphism-equivalence"
@@ -21,41 +21,130 @@
  "stmt_deps": [
   "def-pc-scheme",
   "def-pc-derived-direct-image",
-  "def-pc-derived-category"
+  "def-pc-derived-category",
+  "def-weil-abstract-derived-category",
+  "def-weil-sheaf-of-modules-category",
+  "lem-weil-pbc-affine-module-correspondence"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Put $\\mathcal A=f_*\\mathcal O_X$. The affine module correspondence [lem-weil-pbc-affine-module-correspondence] identifies quasi-coherent $\\mathcal O_X$-modules with quasi-coherent $\\mathcal A$-modules, via $f_*$. Regard this equivalence as the underived direct image for the ringed-space morphism $g$.",
+   "uses": [
+    "lem-weil-pbc-affine-module-correspondence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/perfect.tex",
+    "place": "Tag 0AVW, reduction to the affine module correspondence"
+   }
+  },
+  {
+   "text": "The morphism $g$ is flat: on affine stalks it is the localization map $\\mathcal A_q\\to\\mathcal O_{X,p}$. Thus $g^*=\\mathcal O_X\\otimes_{g^{-1}\\mathcal A}g^{-1}(-)$ is exact on the relevant quasi-coherent objects. By the displayed definition of $Lg^*$, a K-flat resolution $P\\to M$ computes it, and exactness gives $H^i(Lg^*M)=g^*H^i(M)$ by applying $g^*$ to kernels and images. The ringed-space adjunction [lem-pc-ringed-spaces-derived-adjoint-general] gives $Lg^*\\dashv Rg_*$. First restrict this adjunction's direct image to the underlying schemes: Step 4 identifies the restriction of $Rg_*$ with $Rf_*$. Therefore [lem-sc-affine-derived-cohomology] gives $H^i(Rg_*K)=f_*H^i(K)$, since restriction of scalars is exact and does not change cohomology sheaves. The affine correspondence makes these sheaves quasi-coherent $\\mathcal A$-modules, so $Rg_*$ lands in $D_{\\mathrm{QCoh}}(\\mathcal A)$.",
+   "uses": [
+    "lem-pc-ringed-spaces-derived-adjoint-general",
+    "lem-sc-affine-derived-cohomology",
+    "lem-weil-pbc-affine-module-correspondence",
+    "def-pc-ringed-spaces-derived-direct-image"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/perfect.tex",
+    "place": "Tag 0AVW, derived equivalence and cohomology comparison"
+   }
+  },
+  {
+   "text": "For $M\\in D_{\\mathrm{QCoh}}(\\mathcal A)$, the same exact-localization calculation gives $H^i(Lg^*M)=g^*H^i(M)$ and preserves quasi-coherence. The correspondence's $h(G)=f^*G\\otimes_{f^*\\mathcal A}\\mathcal O_X$ agrees naturally with $g^*G$: $h(G)=(\\mathcal O_X\\otimes_{f^{-1}\\mathcal O_Y}f^{-1}G)\\otimes_{\\mathcal O_X\\otimes f^{-1}\\mathcal A}\\mathcal O_X=\\mathcal O_X\\otimes_{f^{-1}\\mathcal A}f^{-1}G=g^*G$. Since $g^*$ and $g_*$ are exact on the relevant objects, the cohomology maps of the derived unit and counit are the underived maps $H^i(M)\\to g_*g^*H^i(M)$ and $g^*g_*H^i(K)\\to H^i(K)$. They are respectively the affine correspondence's $\\beta_{H^i(M)}$ and $\\alpha_{H^i(K)}$, hence isomorphisms. Thus $Lg^*$ and $Rg_*$ are mutually quasi-inverse.",
+   "uses": [
+    "lem-weil-pbc-affine-module-correspondence",
+    "lem-pc-ringed-spaces-derived-adjoint-general",
+    "def-pc-ringed-spaces-derived-direct-image"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/perfect.tex",
+    "place": "Tag 0AVW, unit and counit of the affine derived equivalence"
+   }
+  },
+  {
+   "text": "Restriction of scalars along $\\mathcal O_Y\\to\\mathcal A$ is exact because it does not change the underlying sheaf or its kernels and cokernels. By [def-pc-ringed-spaces-derived-direct-image], choose a K-injective representative $I$ of $K$; both $Rg_*K$ and $Rf_*K$ are represented by the same underlying complex $f_*I$, with only the module structure changed. The scheme-level derived direct image is the functor in [def-pc-derived-direct-image]. Hence restriction of $\\Phi=Rg_*$ is canonically $Rf_*$, and this comparison is used in Step 2 before applying the affine cohomology formula.",
+   "uses": [
+    "def-pc-ringed-spaces-derived-direct-image",
+    "def-pc-derived-direct-image"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/perfect.tex",
+    "place": "Tag 0AVW, final identification with derived pushforward"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-ringed-spaces-derived-direct-image",
+  "def-pc-derived-direct-image",
+  "lem-weil-pbc-affine-module-correspondence",
+  "lem-pc-ringed-spaces-derived-adjoint-general",
+  "lem-sc-affine-derived-cohomology"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/perfect.tex",
+  "place": "Tag 0AVW, lemma-affine-morphism-equivalence"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
    "query": "affine morphism derived category quasi coherent pushforward equivalence",
-   "results": "No usable declaration of the quasi-coherent derived equivalence for affine scheme morphisms",
+   "results": "No usable declaration",
    "date": "2026-10-11",
    "verdict": "no match"
   },
   {
    "tool": "loogle",
    "query": "affine, DerivedCategory, Equivalence",
-   "results": "Loogle reports no matching declaration; only unrelated affine equivalences",
+   "results": "No matching declaration",
    "date": "2026-10-11",
    "verdict": "no match"
   },
   {
    "tool": "grep",
    "query": "affine.*equivalence|Derived.*Affine",
-   "results": "AffineEtale topology equivalences and unrelated point equivalences; no derived quasi-coherent pushforward equivalence",
+   "results": "No derived quasi-coherent pushforward equivalence",
    "date": "2026-10-11",
    "verdict": "no match"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-sc-finite-duality-derived-hom",
   "by": "worker",
   "date": "2026-10-10"
  },
  "chapter": "sec-picard-framework",
- "unit": "sk-thm-picard-duality"
+ "unit": "sk-thm-picard-duality",
+ "split_report": {
+  "date": "2026-10-11",
+  "item": "lem-sc-finite-affine-derived-equivalence",
+  "worker": "stage1",
+  "summary": "Repaired the split along the Tag 0AVW ringed-space route. The proof now uses g:(X,O_X)->(Y,f_*O_X), proves the derived equivalence via the Lg^* -| Rg_* adjunction and affine module correspondence, and identifies restriction of Rg_* with Rf_* without treating termwise pushforward on arbitrary complexes as exact.",
+  "blueprint": "The four steps realize the ancestor proof clause affine derived equivalence for the finite morphism through the ringed-space morphism and its unit/counit.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-affine-module-correspondence",
+    "why": "The route requires the generic affine module equivalence and its alpha/beta isomorphisms."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-affine-module-correspondence",
+  "lem-weil-pbc-affine-module-correspondence"
+ ],
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-fad1913",
+  "group": "E1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-fad1913 (reviewer sub-agent of L); spot-checked: Third push: second-return points repaired. Pt2: new statement-only ringed-space adjunction lem-pc-ringed-spaces-derived-adjoint-general (079W, generalizes the scheme node, not a duplicate; Lg^* via def-weil-pbc-topological-inverse-image and lem-pur-derived-change-of-rings, valid on any site). Pt3: def-pc-derived-pullback no longer cited; Rg_* from new def-pc-ringed-spaces-derived-direct-image. Pt4: Step 4 (restriction of Rg_* is Rf_*, same K-injective complex) is used before lem-sc-affine-derived-cohomology, no cycle. Pt5: Step 3 now has h(G)=g^*G and the H^i of derived unit/counit as beta/alpha. def-sc-ringed-space-module-cohomology is global-section cohomology, not a duplicate. Tool use of the affine module correspondence accepted as generic. FIX more, RETURN less: (1) C1/B3 def-pc-ringed-spaces-derived-direct-image: resolution direction was reversed (I->K); now K->I K-injective resolution citing def-pur-kinjective-complex, prop-pur-kinjective-resolutions-exist (added to stmt_deps). (2) Pt1 / C1 item statement (restored original contract wording): D_QCoh(f_*O_X) was cited only to scheme-level def-pc-derived-category; added citations and stmt_deps def-weil-abstract-derived-category, def-weil-sheaf-of-modules-category, lem-weil-pbc-affine-module-correspondence (quasi-coherent A-modules); mathematics unchanged.; 2 file(s) fixed by the reviewer"
+ }
 }

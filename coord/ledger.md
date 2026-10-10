@@ -2347,3 +2347,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 19:11 L: merged deliver/C1/lem-sp-kinjective-computes (reviewer FIX; first push; new nodes: 1)
 - 19:11 L: merged deliver/K1/lem-sc-strict-henselization-dvr (reviewer FIX; first push; new nodes: 4)
 - 19:12 L: merged deliver/K1/def-pc-flat-sheaf-modules (reviewer PASS; first push; new nodes: 0)
+- 19:13 L: merged deliver/E1/lem-sc-finite-affine-derived-equivalence (reviewer FIX; after a return; new nodes: 2)
