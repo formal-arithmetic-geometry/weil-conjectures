@@ -2165,3 +2165,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 17:44 L: returned deliver/E1/lem-sc-smooth-proper-diagonal-tensor-formula (reviewer RETURN: R-dtf1744. 1 (D1, C2): no real split. The single step, marked elementary, carries the whole conclusion by invoking Tag 0)
 - 17:45 L: merged deliver/F1/lem-weil-pbc-proper-closed-image (reviewer FIX; first push; new nodes: 0)
 - 17:46 L: merged deliver/H1/lem-sc-smooth-proper-diagonal-conormal-differentials (reviewer FIX+NODE(1); first push; new nodes: 1)
+- 17:47 L: merged deliver/E1/lem-pc-structure-pushforward (reviewer FIX; first push; new nodes: 0)
