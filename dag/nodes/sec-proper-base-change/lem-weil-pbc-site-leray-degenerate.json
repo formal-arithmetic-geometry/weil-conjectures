@@ -13,9 +13,110 @@
   "def-sp-injective-resolutions",
   "lem-weil-pbc-site-cohomology-pullback"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "*Setting; $f_*$ is left exact additive.* Write $s:\\mathcal F\\to\\mathcal I^\\bullet$ for an injective resolution of $\\mathcal F$ in $\\textit{Ab}(\\mathcal C)$ with $\\mathcal I^q=0$ for $q<0$; it exists because $\\textit{Ab}(\\mathcal C)$ is abelian with enough injectives [lem-weil-pbc-site-sheaves-enough-injectives], [lem-weil-pbc-left-exact-injective-resolution-degree-zero] (1). By [def-weil-pbc-sites-and-cohomology] (3), $f_*=u^s$ is precomposition with $u$: $(f_*\\mathcal G)(W)=\\mathcal G(u(W))$ and $(f_*\\psi)_W=\\psi_{u(W)}$ for $W\\in\\operatorname{Ob}(\\mathcal D)$. Hence $f_*$ is additive (addition of morphisms is sectionwise), and it preserves kernels: kernels in $\\textit{Ab}(\\mathcal C)$ and $\\textit{Ab}(\\mathcal D)$ are sectionwise kernels [lem-weil-pbc-sheafification-exact] (1), so $(f_*\\ker\\psi)(W)=\\ker(\\psi_{u(W)})=\\ker((f_*\\psi)_W)$. So $f_*$ is left exact additive [def-sp-left-exact-additive] and, for every $W$, $\\Gamma(W,f_*\\mathcal G)=\\Gamma(u(W),\\mathcal G)$ and $\\Gamma(W,f_*\\psi)=\\Gamma(u(W),\\psi)$ as groups and maps; in particular $\\Gamma(V,f_*\\mathcal I^\\bullet)=\\Gamma(u(V),\\mathcal I^\\bullet)$ as complexes of abelian groups.",
+   "uses": [
+    "lem-weil-pbc-site-sheaves-enough-injectives",
+    "lem-weil-pbc-left-exact-injective-resolution-degree-zero",
+    "def-weil-pbc-sites-and-cohomology",
+    "lem-weil-pbc-sheafification-exact",
+    "def-sp-left-exact-additive"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Section 01FT (cohomology over an object) and Lemma Tag 0733 (lemma-apply-Leray, line 2347)"
+   }
+  },
+  {
+   "text": "*$f_*$ of the injective resolution is an injective resolution of $f_*\\mathcal F$.* (a) Each $f_*\\mathcal I^q$ is injective in $\\textit{Ab}(\\mathcal D)$: $f_*$ is right adjoint to $f^{-1}$ [def-weil-pbc-sites-and-cohomology] (3), and $f^{-1}:\\textit{Ab}(\\mathcal D)\\to\\textit{Ab}(\\mathcal C)$ is an exact additive functor of abelian categories [lem-weil-pbc-site-pullback-abelian-exact], so [lem-sp-right-adjoint-preserves-injectives] applies (Stacks Homology, Lemma Tag 015Z; for sites Cohomology on Sites, Lemma Tag 0730 with $\\mathcal O=\\mathbf Z$, and Lemma Tag 072Z, which gives the weaker total acyclicity for ringed topoi). (b) Exactness: by [lem-weil-pbc-derived-functor-map-via-lift] applied to $v=f_*$ and the resolution $s$, there are isomorphisms $\\iota^q:R^qf_*\\mathcal F\\xrightarrow{\\sim}H^q(f_*\\mathcal I^\\bullet)$; by hypothesis $R^qf_*\\mathcal F=0$ for $q>0$, so $f_*\\mathcal I^\\bullet$ is exact at $f_*\\mathcal I^q$ for every $q\\ge1$. In degree $0$, by [lem-weil-pbc-left-exact-injective-resolution-degree-zero] (2) for the left exact additive $f_*$ (step 1), $f_*(s)$ induces an isomorphism $f_*\\mathcal F\\to\\ker(f_*d^0)$; so $f_*(s)$ is a monomorphism with image $\\ker(f_*d^0)$. Hence $0\\to f_*\\mathcal F\\xrightarrow{f_*(s)}f_*\\mathcal I^0\\to f_*\\mathcal I^1\\to\\cdots$ is exact, and $f_*(s):f_*\\mathcal F\\to f_*\\mathcal I^\\bullet$ is an injective resolution [def-sp-injective-resolutions] with $f_*\\mathcal I^q=0$ for $q<0$.",
+   "uses": [
+    "def-weil-pbc-sites-and-cohomology",
+    "lem-weil-pbc-site-pullback-abelian-exact",
+    "lem-sp-right-adjoint-preserves-injectives",
+    "lem-weil-pbc-derived-functor-map-via-lift",
+    "lem-weil-pbc-left-exact-injective-resolution-degree-zero",
+    "def-sp-injective-resolutions"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Lemma Tag 072Z (lemma-direct-image-injective-sheaf, line 2212); Lemma Tag 0730 (lemma-pushforward-injective-flat); literature/stacks-project/homology.tex Lemma Tag 015Z (lemma-adjoint-preserve-injectives, line 7270)"
+   }
+  },
+  {
+   "text": "*The pullback computed from this resolution.* Let $r:f^{-1}f_*\\mathcal F\\to\\mathcal J^\\bullet$ be an injective resolution in $\\textit{Ab}(\\mathcal C)$ with $\\mathcal J^q=0$ for $q<0$ ([lem-weil-pbc-site-sheaves-enough-injectives], [lem-weil-pbc-left-exact-injective-resolution-degree-zero] (1)). Apply [lem-weil-pbc-site-cohomology-pullback] to $\\mathcal A=f_*\\mathcal F$ with the injective resolution $f_*(s):f_*\\mathcal F\\to f_*\\mathcal I^\\bullet$ of step 2 and the resolution $r$: there is a morphism of complexes $\\beta:f^{-1}f_*\\mathcal I^\\bullet\\to\\mathcal J^\\bullet$ with $\\beta^0\\circ f^{-1}(f_*s)=r$, and by its clause (1) (independence of the choices) $f^*:H^p(V,f_*\\mathcal F)\\to H^p(u(V),f^{-1}f_*\\mathcal F)$ is $f^*=(\\iota^p_{\\mathcal J})^{-1}\\circ H^p(c)\\circ\\iota^p_{f_*\\mathcal I}$ with $c=\\Gamma(u(V),\\beta)\\circ\\eta_{f_*\\mathcal I^\\bullet}(V):\\Gamma(V,f_*\\mathcal I^\\bullet)\\to\\Gamma(u(V),f^{-1}f_*\\mathcal I^\\bullet)\\to\\Gamma(u(V),\\mathcal J^\\bullet)$, where $\\eta_{f_*\\mathcal I^\\bullet}$ is the unit applied termwise and $\\iota^p_P$ are the identifications of [lem-weil-pbc-derived-functor-map-via-lift] for $v=\\Gamma(V,-)$, resp. $\\Gamma(u(V),-)$ (the identifications $H^p(W,\\mathcal G)=H^p(\\Gamma(W,P^\\bullet))$ of [def-weil-pbc-sites-and-cohomology] (2)).",
+   "uses": [
+    "lem-weil-pbc-site-sheaves-enough-injectives",
+    "lem-weil-pbc-left-exact-injective-resolution-degree-zero",
+    "lem-weil-pbc-site-cohomology-pullback",
+    "lem-weil-pbc-derived-functor-map-via-lift",
+    "def-weil-pbc-sites-and-cohomology"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Lemma Tag 0733 (lemma-apply-Leray, line 2347), part (1); the direct proof its proof calls 'a good exercise'"
+   }
+  },
+  {
+   "text": "*The map induced by the counit.* By [lem-weil-pbc-injective-resolution-lift-exists] (for $h=\\varepsilon_{\\mathcal F}:f^{-1}f_*\\mathcal F\\to\\mathcal F$ and the injective resolutions $r$ and $s$) there is a morphism of complexes $\\psi:\\mathcal J^\\bullet\\to\\mathcal I^\\bullet$ with $\\psi^0\\circ r=s\\circ\\varepsilon_{\\mathcal F}$, and by [lem-weil-pbc-derived-functor-map-via-lift] for $v=\\Gamma(u(V),-)$, $H^p(u(V),\\varepsilon_{\\mathcal F})=(\\iota^p_{\\mathcal I})^{-1}\\circ H^p(\\Gamma(u(V),\\psi))\\circ\\iota^p_{\\mathcal J}$. With step 3, $e^p_{V,\\mathcal F}=(\\iota^p_{\\mathcal I})^{-1}\\circ H^p\\bigl(\\Gamma(u(V),\\psi\\beta)\\circ\\eta_{f_*\\mathcal I^\\bullet}(V)\\bigr)\\circ\\iota^p_{f_*\\mathcal I}$.",
+   "uses": [
+    "lem-weil-pbc-injective-resolution-lift-exists",
+    "lem-weil-pbc-derived-functor-map-via-lift"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Lemma Tag 0733 (lemma-apply-Leray, line 2347), part (1); the direct proof its proof calls 'a good exercise'"
+   }
+  },
+  {
+   "text": "*$\\psi\\beta$ is homotopic to the counit of the complex.* Let $\\varepsilon_{\\mathcal I^\\bullet}:f^{-1}f_*\\mathcal I^\\bullet\\to\\mathcal I^\\bullet$ be the counit applied termwise; it is a morphism of complexes by naturality of $\\varepsilon$ at the differentials. Let $\\alpha:(f^{-1}f_*\\mathcal F)[0]\\to f^{-1}f_*\\mathcal I^\\bullet$ be the morphism given by $f^{-1}(f_*s)$ in degree $0$. Since $f^{-1}$ is exact [lem-weil-pbc-site-pullback-abelian-exact], it carries the exact sequence $0\\to f_*\\mathcal F\\to f_*\\mathcal I^0\\to f_*\\mathcal I^1\\to\\cdots$ of step 2 to an exact sequence, so $\\alpha$ is a quasi-isomorphism. In degree $0$, $\\psi^0\\beta^0f^{-1}(f_*s)=\\psi^0r=s\\,\\varepsilon_{\\mathcal F}$ (steps 3, 4) and $\\varepsilon_{\\mathcal I^0}\\circ f^{-1}f_*(s)=s\\circ\\varepsilon_{\\mathcal F}$ (naturality of $\\varepsilon$ at $s:\\mathcal F\\to\\mathcal I^0$); all other degrees of $(f^{-1}f_*\\mathcal F)[0]$ are $0$. So $(\\psi\\beta)\\circ\\alpha=\\varepsilon_{\\mathcal I^\\bullet}\\circ\\alpha$, and since $\\mathcal I^\\bullet$ is bounded below with injective terms, [lem-weil-pbc-lift-to-injective-unique-up-to-homotopy] gives a homotopy $\\psi\\beta\\simeq\\varepsilon_{\\mathcal I^\\bullet}$, $\\psi^n\\beta^n-\\varepsilon_{\\mathcal I^n}=d k^n+k^{n+1}d$. Applying the additive functor $\\Gamma(u(V),-)$ gives a homotopy $\\Gamma(u(V),\\psi\\beta)\\simeq\\Gamma(u(V),\\varepsilon_{\\mathcal I^\\bullet})$, and composing with the chain map $\\eta_{f_*\\mathcal I^\\bullet}(V)$, $H^p(\\Gamma(u(V),\\psi\\beta)\\circ\\eta_{f_*\\mathcal I^\\bullet}(V))=H^p(\\Gamma(u(V),\\varepsilon_{\\mathcal I^\\bullet})\\circ\\eta_{f_*\\mathcal I^\\bullet}(V))$.",
+   "uses": [
+    "lem-weil-pbc-site-pullback-abelian-exact",
+    "lem-weil-pbc-lift-to-injective-unique-up-to-homotopy",
+    "def-weil-pbc-sites-and-cohomology"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Lemma Tag 0733 (lemma-apply-Leray, line 2347), part (1); the direct proof its proof calls 'a good exercise'"
+   }
+  },
+  {
+   "text": "*Triangle identity; conclusion.* For each $n$, by step 1, $\\Gamma(u(V),\\varepsilon_{\\mathcal I^n})\\circ\\eta_{f_*\\mathcal I^n}(V)=(f_*\\varepsilon_{\\mathcal I^n})_V\\circ(\\eta_{f_*\\mathcal I^n})_V=(f_*\\varepsilon_{\\mathcal I^n}\\circ\\eta_{f_*\\mathcal I^n})_V=\\mathrm{id}$, by the triangle identity $f_*\\varepsilon\\circ\\eta_{f_*}=\\mathrm{id}_{f_*}$ of the adjunction $f^{-1}\\dashv f_*$ with unit $\\eta$ and counit $\\varepsilon$ [def-weil-pbc-sites-and-cohomology] (3). So the chain map of step 5 is the identity of the complex $\\Gamma(V,f_*\\mathcal I^\\bullet)=\\Gamma(u(V),\\mathcal I^\\bullet)$, and by steps 4 and 5 $e^p_{V,\\mathcal F}=(\\iota^p_{\\mathcal I})^{-1}\\circ\\iota^p_{f_*\\mathcal I}$, a composite of two isomorphisms $H^p(V,f_*\\mathcal F)\\to H^p(\\Gamma(V,f_*\\mathcal I^\\bullet))=H^p(\\Gamma(u(V),\\mathcal I^\\bullet))\\to H^p(u(V),\\mathcal F)$. Hence $e^p_{V,\\mathcal F}$ is an isomorphism for every $p\\ge0$. In degree $0$, $f^*=\\eta_{f_*\\mathcal F}(V)$ ([lem-weil-pbc-site-cohomology-pullback] (1)) and $H^0(u(V),\\varepsilon_{\\mathcal F})=\\varepsilon_{\\mathcal F}(u(V))$ under $H^0=\\Gamma$ ([def-weil-pbc-sites-and-cohomology] (2)), so $e^0=\\varepsilon_{\\mathcal F}(u(V))\\circ\\eta_{f_*\\mathcal F}(V)=(f_*\\varepsilon_{\\mathcal F}\\circ\\eta_{f_*\\mathcal F})_V=\\mathrm{id}$, the parenthetical remark of the statement.",
+   "uses": [
+    "def-weil-pbc-sites-and-cohomology",
+    "lem-weil-pbc-site-cohomology-pullback"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Lemma Tag 0733 (lemma-apply-Leray, line 2347), part (1); the direct proof its proof calls 'a good exercise'"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-site-sheaves-enough-injectives",
+  "lem-weil-pbc-left-exact-injective-resolution-degree-zero",
+  "def-weil-pbc-sites-and-cohomology",
+  "lem-weil-pbc-sheafification-exact",
+  "def-sp-left-exact-additive",
+  "lem-weil-pbc-site-pullback-abelian-exact",
+  "lem-sp-right-adjoint-preserves-injectives",
+  "lem-weil-pbc-derived-functor-map-via-lift",
+  "def-sp-injective-resolutions",
+  "lem-weil-pbc-site-cohomology-pullback",
+  "lem-weil-pbc-injective-resolution-lift-exists",
+  "lem-weil-pbc-lift-to-injective-unique-up-to-homotopy"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Lemma Tag 0733 (lemma-apply-Leray, line 2347) part (1), whose proof only says the statement follows from the Leray spectral sequence 0732 or 'directly (without using the spectral sequence)', left as an exercise; the direct argument here uses Tag 072Z/0730 and Homology Tag 015Z (f_* of injectives) and identifies the map with the edge map of the statement, which the source does not name"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -44,10 +145,52 @@
    "results": "no Leray / higher direct image; SheafCohomology/{Basic,Cech,MayerVietoris}.lean define Sheaf.H via Ext, cohomologyPresheaf, Mayer-Vietoris, nothing on direct images",
    "date": "2026-10-10",
    "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "cohomology of pushforward sheaf equals cohomology when higher direct images vanish, morphism of sites",
+   "results": "CategoryTheory.Functor.sheafPushforwardContinuous (Mathlib.CategoryTheory.Sites.Continuous), SheafOfModules.pushforward_map_val, SheafOfModules.pushforwardSections_unitHomEquiv, TopCat.Sheaf.pushforward (definitions/API of pushforward only)",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Sheaf.H of the pushforward along a continuous functor is isomorphic to Sheaf.H of the original sheaf when the derived pushforward is concentrated in degree 0",
+   "results": "SheafOfModules.pushforwardNatIso, Functor.sheafPushforwardContinuousCompSheafToPresheafIso, Functor.sheafPushforwardContinuousIso (no cohomology)",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Sheaf.H, CategoryTheory.Functor.sheafPushforwardContinuous",
+   "results": "no results",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Injective, CategoryTheory.Adjunction (for step 2)",
+   "results": "CategoryTheory.Injective.injective_of_adjoint (Mathlib/CategoryTheory/Preadditive/Injective/Basic.lean:195), CategoryTheory.Adjunction.map_injective (:279), Adjunction.injective_of_map_injective",
+   "date": "2026-10-10",
+   "verdict": "match for the step-2 ingredient [lem-sp-right-adjoint-preserves-injectives] only, not for the item"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rln -i 'leray\\|higherDirectImage\\|rightDerived.*pushforward' Mathlib --include=*.lean; ls Mathlib/CategoryTheory/Sites/SheafCohomology/",
+   "results": "no file; SheafCohomology/{Basic,Cech,MayerVietoris}.lean, nothing on direct images",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "local_search",
+   "query": "Sheaf.H (project ~/weil-conjectures-slopmaster2)",
+   "results": "CategoryTheory.Sheaf.H.mapFunctor and others in WeilConjectures/Mathlib/CategoryTheory/Sites/SheafCohomology/Basic.lean (source repository, not Mathlib); index: unavailable",
+   "date": "2026-10-10",
+   "verdict": "no match (not proof of absence: index unavailable)"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "worker",
@@ -67,5 +210,15 @@
   }
  },
  "chapter": "sec-proper-base-change",
- "unit": "sk-thm-p1"
+ "unit": "sk-thm-p1",
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "lem-weil-pbc-site-leray-degenerate",
+  "worker": "stage1",
+  "summary": "Not a Mathlib leaf (no Leray spectral sequence or higher direct images for sites in Mathlib; searches recorded). Split by the direct argument that Stacks 0733's proof leaves as an exercise, avoiding the spectral sequence 0732: f_* is left exact additive and f_* of an injective resolution F -> I is an injective resolution of f_*F (f_* of injectives is injective, right adjoint of the exact f^{-1}, Homology 015Z / Sites-Cohomology 0730; exactness from R^q f_*F = 0 and the degree-0 lemma). Computing the pullback f^* of lem-weil-pbc-site-cohomology-pullback with this resolution and H^p(u(V), counit) with a lift psi, psi.beta is homotopic to the termwise counit (lift-to-injective uniqueness), and the triangle identity makes the chain map the identity of Gamma(V,f_*I)=Gamma(u(V),I); so the stated edge map (not just some isomorphism) is the composite of the two identifications iota, hence an isomorphism; degree 0 is the identity. Statement unchanged; stmt_deps unchanged. No new nodes. Uses lem-sp-right-adjoint-preserves-injectives of unit sk-thm-groth-ss as a tool (already recorded as tool on lem-weil-pbc-colimit-of-sites-injective-system); that node has Mathlib candidate CategoryTheory.Injective.injective_of_adjoint (Preadditive/Injective/Basic.lean:195)."
+ },
+ "tool_uses": [
+  "lem-sp-right-adjoint-preserves-injectives"
+ ],
+ "reviewed": "pass (L, 2026-10-10): 6 steps, direct argument without the spectral sequence: f_* I is an injective resolution of f_* F (injectivity via the exact left adjoint f^{-1} and lem-sp-right-adjoint-preserves-injectives, recorded in tool_uses by L; exactness from the vanishing hypothesis), the pullback and the counit map are computed via lifts, psi beta is homotopic to the counit of the complex by uniqueness up to homotopy, and the triangle identity makes the composite chain map the identity. Statement unchanged."
 }
