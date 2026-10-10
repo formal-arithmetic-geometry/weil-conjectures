@@ -1338,3 +1338,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 11:45 L: merged C1 def-sc-constant-sheaves (0 new) and F1 lem-weil-pbc-regular-sequence-koszul-regular (062F, 0 new: the Koszul route of 0665 needs no cone lemma after all).
 - 11:46 L: accepted lem-weil-pbc-tor-one-surjective-change-rings (00MN, 5 steps; new Mathlib leaf: base change of a free module is free).
 - 11:47 L: accepted lem-weil-pbc-tor-ideal-kernel-naturality (00M6 with naturality, 6 steps, 0 new).
+- 11:47 L: accepted lem-weil-pbc-torsion-cyclic-presentation (05E8, 4 steps, 0 new).

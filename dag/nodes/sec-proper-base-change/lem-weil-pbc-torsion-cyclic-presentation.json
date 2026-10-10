@@ -22,18 +22,76 @@
  },
  "kind": "statement",
  "title": "An ideal-power torsion module has a presentation by cyclic ideal-power quotients",
- "statement": "Let $R$ be a commutative ring, $I\\subseteq R$ an ideal and $Q$ an $R$-module such that every $q\\in Q$ is annihilated by $I^n$ for some $n\\ge1$. There are a set $J$, positive integers $n_j$ for $j\\in J$, an $R$-module $P=\\bigoplus_{j\\in J}R/I^{n_j}$ [def-weil-pbc-direct-sum-modules], and a surjective $R$-linear map $p:P\\to Q$. Its kernel $K$ is itself $I$-power torsion. Consequently $0\\to K\\to P\\xrightarrow{p}Q\\to0$ is exact [def-weil-pbc-exact-sequence].",
+ "statement": "Let $R$ be a commutative ring, $I\\subseteq R$ an ideal and $Q$ an $R$-module such that every $q\\in Q$ is annihilated by $I^n$ for some $n\\ge1$. There are a set $J$, positive integers $n_j$ for $j\\in J$, the $R$-module $P=\\bigoplus_{j\\in J}R/I^{n_j}$ [def-weil-pbc-direct-sum-modules] of the quotient modules $R/I^{n_j}$ [def-weil-pbc-quotient-module], and a surjective $R$-linear map $p:P\\to Q$. Its kernel $K$ is itself $I$-power torsion: every $k\\in K$ is annihilated by $I^n$ for some $n\\ge1$. Consequently $0\\to K\\to P\\xrightarrow{p}Q\\to0$, with $K\\to P$ the inclusion, is a short exact sequence of $R$-modules [def-weil-pbc-exact-sequence].",
  "source": {
   "document": "literature/stacks-project/more-algebra.tex",
   "place": "More on Algebra, Lemma 05E8 (lemma-I-power-torsion-presentation, line 24002), first step of its proof"
  },
  "stmt_deps": [
   "def-weil-pbc-direct-sum-modules",
+  "def-weil-pbc-quotient-module",
   "def-weil-pbc-exact-sequence"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Take $J=Q$ as index set. For $q\\in Q$ let $n_q$ be the smallest integer $n\\ge1$ with $I^nq=0$, which exists by hypothesis (for $q=0$, $n_q=1$). Define $\\varphi_q:R/I^{n_q}\\to Q$ by $\\varphi_q(r+I^{n_q})=rq$. It is well defined: if $r-r'\\in I^{n_q}$ then $(r-r')q=0$ because $I^{n_q}q=0$ means that every element of $I^{n_q}$ kills $q$. It is $R$-linear since $(r+I^{n_q})+(r'+I^{n_q})=(r+r')+I^{n_q}$ and $s(r+I^{n_q})=sr+I^{n_q}$ [def-weil-pbc-quotient-module], and $\\varphi_q(1+I^{n_q})=q$.",
+   "uses": [
+    "def-weil-pbc-quotient-module"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "More on Algebra, Lemma 05E8 (lemma-I-power-torsion-presentation), proof, first two sentences"
+   }
+  },
+  {
+   "text": "Put $P=\\bigoplus_{q\\in Q}R/I^{n_q}$ [def-weil-pbc-direct-sum-modules] and define $p:P\\to Q$ by $p((x_q)_q)=\\sum_{q}\\varphi_q(x_q)$; the sum is finite because $x_q=0$ for all but finitely many $q$, and $p$ is $R$-linear because addition and scalar multiplication in $P$ are componentwise and each $\\varphi_q$ is $R$-linear (step 1). Then $p\\circ\\iota_q=\\varphi_q$ for the canonical inclusion $\\iota_q$, so $p(\\iota_q(1+I^{n_q}))=q$ for every $q\\in Q$ and $p$ is surjective. This is the canonical surjection $\\bigoplus_{m\\in M}R/I^{n_m}\\to M\\to0$ of the source.",
+   "uses": [
+    "def-weil-pbc-direct-sum-modules",
+    "def-weil-pbc-quotient-module"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "More on Algebra, Lemma 05E8 (lemma-I-power-torsion-presentation), proof, first two sentences"
+   }
+  },
+  {
+   "text": "$P$ is $I$-power torsion, hence so is $K=\\ker p\\subseteq P$. First, $I^{n}$ kills $R/I^{n}$: for $a\\in I^n$, $a(r+I^n)=ar+I^n=0+I^n$ since $ar\\in I^n$ [def-weil-pbc-quotient-module]. Let $x\\in P$; it is the finite sum $x=\\sum_{q\\in F}\\iota_q(x_q)$ over the finite set $F$ of $q$ with $x_q\\neq0$ [def-weil-pbc-direct-sum-modules]. Put $N=\\max(\\{1\\}\\cup\\{n_q:q\\in F\\})$. For $q\\in F$ we have $I^N\\subseteq I^{n_q}$, so every $a\\in I^N$ kills $x_q$, hence $a\\iota_q(x_q)=\\iota_q(ax_q)=0$, and $ax=0$. Thus $I^Nx=0$. In particular every $k\\in K$, being an element of $P$, is annihilated by some $I^N$, $N\\ge1$: the kernel is $I$-power torsion, as the source states.",
+   "uses": [
+    "def-weil-pbc-direct-sum-modules",
+    "def-weil-pbc-quotient-module"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "More on Algebra, Lemma 05E8 (lemma-I-power-torsion-presentation), proof, first two sentences"
+   }
+  },
+  {
+   "text": "Exactness. In the abelian category of $R$-modules [lem-weil-pbc-ring-modules-grothendieck-abelian], monomorphisms are the injective maps, epimorphisms the surjective maps, and kernels and images are the set-theoretic ones. The inclusion $k:K\\to P$ is injective, $p$ is surjective (step 2), $p\\circ k=0$, and the image of $k$ is $K=\\ker p$. So $0\\to K\\xrightarrow{k}P\\xrightarrow{p}Q\\to0$ is a short exact sequence [def-weil-pbc-exact-sequence].",
+   "uses": [
+    "lem-weil-pbc-ring-modules-grothendieck-abelian",
+    "def-weil-pbc-exact-sequence"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "More on Algebra, Lemma 05E8 (lemma-I-power-torsion-presentation), proof, first two sentences"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-quotient-module",
+  "def-weil-pbc-direct-sum-modules",
+  "lem-weil-pbc-ring-modules-grothendieck-abelian",
+  "def-weil-pbc-exact-sequence"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "More on Algebra, Lemma 05E8 (lemma-I-power-torsion-presentation, line 24002), proof, sentences 1-2 (the canonical surjection and its I-power torsion kernel)"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -50,15 +108,36 @@
    "verdict": "no match"
   },
   {
-   "tool": "grep",
-   "query": "rg 'IsTorsionBySet|directSum.*quotient|Quotient.*pow' Mathlib/RingTheory and Mathlib/Algebra/Homology in /home/ubuntu/Poincare-MorganTian/.work/helpers/codex-m47-line/.lake/packages/mathlib",
-   "results": "No presentation declaration found; checkout may differ from the project's pinned Mathlib, so no leaf verdict is inferred",
+   "tool": "leansearch",
+   "query": "module whose elements are each killed by a power of an ideal I is a quotient of a direct sum of R ⧸ I ^ n",
+   "results": "Module.IsTorsionBySet.module, Module.IsTorsionBy.module, Submodule.isInternal_prime_power_torsion_of_is_torsion_by_ideal (Mathlib.Algebra.Module.DedekindDomain), Ideal.quotientEquivDirectSum (Mathlib.LinearAlgebra.FreeModule.IdealQuotient); none is the presentation",
    "date": "2026-10-10",
-   "verdict": "no verified match; unsplit"
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "surjection from direct sum of cyclic modules R/I^n onto an I-primary torsion module (Ideal.primaryComponent = ⊤)",
+   "results": "AdicCompletion.exists_smodEq_pow_add_one_smul, AdicCompletion.eval_surjective, AdicCompletion.mk_surjective, surjective_of_mkQ_comp_surjective (Mathlib.RingTheory.AdicCompletion.*); unrelated",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "Ideal.primaryComponent, DirectSum",
+   "results": "none",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rn 'primaryComponent' and 'IsTorsionBySet R M (I ^|torsionBySet.*I \\^' in ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib; files of Mathlib/Algebra/Module/Torsion and Mathlib/RingTheory/AdicCompletion using DirectSum",
+   "results": "Ideal.primaryComponent (Mathlib/Algebra/Module/Torsion/PrimaryComponent.lean:50, the I-power torsion submodule ⨆ i, torsionBySet A M (I ^ i)), Submodule.torsionBySet_le_torsionBySet_of_le-type monotonicity (Torsion/Basic.lean:284); no surjection from a direct sum of R ⧸ I ^ n onto an I-power torsion module",
+   "date": "2026-10-10",
+   "verdict": "no match (the notion of I-power torsion exists as Ideal.primaryComponent; the presentation does not)"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "worker",
@@ -78,5 +157,13 @@
   }
  },
  "chapter": "sec-proper-base-change",
- "unit": "sk-thm-p1"
+ "unit": "sk-thm-p1",
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "lem-weil-pbc-torsion-cyclic-presentation",
+  "worker": "stage1",
+  "summary": "Read Stacks More on Algebra 05E8 (more-algebra-lemma-I-power-torsion-presentation, tag verified in tags/tags) and its proof; the item is its first two sentences. Split into four elementary steps following the proof: the maps R/I^{n_q}->Q, 1->q (well defined because I^{n_q}q=0), the canonical surjection from the direct sum over Q, the I-power torsion of P (finite support, I^{max n_q}) and hence of the kernel, and the short exact sequence in Mod(R). Statement kept, made explicit about the torsion of K and the inclusion; stmt_deps gains def-weil-pbc-quotient-module (R/I^{n_j}). lem-weil-pbc-quotient-by-power-torsion-no-torsion (needs I finitely generated, about M/M[I^infty]) is not used: the submodule argument needed is the one-line closure under finite sums written in step 3. No sorry-free slopmaster2 declaration states the item (grep by id, by 05E8 and by power-torsion keywords; only Submodule.powTorsion for a single element). Old grep search in an unrelated checkout replaced by one in the project's Mathlib.",
+  "blueprint": "No blueprint node states 05E8; the item serves thm-weil-pbc-finite-etale-lifting's proof, step (b), through the torsion-extension descent used in Proposition 05ER (via lem-weil-pbc-torsion-extension-flat-descent): steps 1-3 give the surjection with I-power torsion kernel that that descent tensors with S, step 4 the short exact sequence it uses."
+ },
+ "reviewed": "2026-10-10 L: 4 elementary steps (05E8, first sentences): the cyclic maps, the direct sum and its surjection, torsion of P and K, exactness; 0 new nodes"
 }
