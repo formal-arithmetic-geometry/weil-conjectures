@@ -24,9 +24,58 @@
   "def-pc-scheme",
   "def-kun-topological-krull-dimension"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Since Spec(A) is integral, A is a domain, so the nonzero element f is a nonzerodivisor. Since f is not a unit, (f) is a proper ideal, A/(f) is nonzero and there is a maximal ideal of A containing f. Since Spec(k) is locally Noetherian and Spec(A) is of finite type over k, Spec(A) is locally Noetherian [pqf-lem-locnoeth-lft], so the ring A is Noetherian and all localizations A_m at maximal ideals are Noetherian local rings.",
+   "uses": [
+    "def-pc-integral-scheme",
+    "def-weil-finite-type-morphism",
+    "pqf-lem-locnoeth-lft"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tags 00KV and 00KW, hypotheses for the principal ideal theorem"
+   }
+  },
+  {
+   "text": "For every maximal ideal m of A containing f, localize at m. The image of f lies in the maximal ideal of A_m and remains a nonzerodivisor (A_m is a domain). Applying the local principal-ideal dimension theorem [lem-weil-pbc-dimension-quotient-nonzerodivisor] gives dim(A_m/fA_m) + 1 = dim(A_m). Since A is a finite-type k-domain, dim(A_m) = dim(A), a non-negative integer, for every maximal ideal m [lem-weil-pbc-finite-type-domain-dimension-local-ring]. Under the canonical identification A_m/fA_m = (A/(f))_{m/(f)}, every maximal ideal n = m/(f) of A/(f) therefore has dim((A/(f))_n) = dim(A) - 1.",
+   "uses": [
+    "lem-weil-pbc-dimension-quotient-nonzerodivisor",
+    "lem-weil-pbc-finite-type-domain-dimension-local-ring"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00KW after localization, with the finite-type domain equality dim A_m = dim A (Tags 00OS, 00P0)"
+   }
+  },
+  {
+   "text": "For any scheme the Krull dimension of its underlying space is the supremum of the dimensions of its local rings [lem-pc-scheme-dimension-local-rings]. Apply this to X = Spec(A) and Y = Spec(A/(f)), both nonempty. Every prime p of a ring lies in a maximal ideal m, and the local ring at p is a localization of the local ring at m, so dim of the local ring at p is at most dim of the local ring at m (prime correspondence for localization); hence each supremum is attained over maximal ideals. By step 2 and lem-weil-pbc-finite-type-domain-dimension-local-ring, all local rings of X at maximal ideals have dimension dim(A) and all local rings of Y at maximal ideals have dimension dim(A) - 1 (and Y has at least one maximal ideal by step 1). Hence dim(Spec(A)) = dim(A) and dim(Spec(A/(f))) = dim(A) - 1 = dim(Spec(A)) - 1.",
+   "uses": [
+    "lem-pc-scheme-dimension-local-rings",
+    "lem-weil-pbc-finite-type-domain-dimension-local-ring"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tags 00KW, 00OS and 00P0; supremum of local dimensions"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-integral-scheme",
+  "def-weil-finite-type-morphism",
+  "pqf-lem-locnoeth-lft",
+  "lem-weil-pbc-dimension-quotient-nonzerodivisor",
+  "lem-weil-pbc-finite-type-domain-dimension-local-ring",
+  "lem-pc-scheme-dimension-local-rings"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Tags 00KW, 00OS and 00P0"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -55,15 +104,66 @@
    "results": "service unavailable",
    "date": "2026-10-11",
    "verdict": "unavailable"
+  },
+  {
+   "tool": "grep",
+   "query": "height_le_one|stacks 00KV|height_le_spanRank [Mathlib/RingTheory]",
+   "results": "Ideal.height_le_spanRank_toENat_of_mem_minimalPrimes, Ideal.map_height_le_one_of_mem_minimalPrimes (Mathlib/RingTheory/Ideal/KrullsHeightTheorem.lean): Krull height theorem, local/height form only; no affine finite-type quotient dimension theorem",
+   "date": "2026-10-10",
+   "verdict": "no match"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-sc-effective-cartier-dimension-drop",
   "by": "worker",
   "date": "2026-10-10"
  },
  "chapter": "sec-abelian-varieties",
- "unit": "sk-prop-av-isogeny"
+ "unit": "sk-prop-av-isogeny",
+ "split_report": {
+  "date": "2026-10-11",
+  "item": "lem-sc-effective-cartier-affine-dimension-drop",
+  "worker": "stage1",
+  "summary": "Split the affine principal-Cartier dimension claim into regularity, localization at maximal ideals using the existing Stacks 00KW Mathlib leaf, and the finite-type global dimension argument. No matching Lean declaration exists.",
+  "blueprint": "Realizes the blueprint ancestor lem-sc-mult-n-finite-flat place describing codimension one for an effective Cartier zero scheme on affine charts.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-dimension-quotient-nonzerodivisor",
+    "why": "Generic Noetherian local ring fact (Stacks 00KW, Mathlib leaf)."
+   },
+   {
+    "node": "lem-weil-pbc-finite-type-domain-dimension-local-ring",
+    "why": "Generic commutative algebra: every maximal ideal of a finite-type domain over a field has height dim A."
+   },
+   {
+    "node": "pqf-lem-locnoeth-lft",
+    "why": "Generic: finite type over a Noetherian base is locally Noetherian."
+   },
+   {
+    "node": "lem-pc-scheme-dimension-local-rings",
+    "why": "Generic: dimension of a scheme is the supremum of the dimensions of its local rings."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-dimension-quotient-nonzerodivisor",
+  "lem-weil-pbc-finite-type-domain-dimension-local-ring",
+  "pqf-lem-locnoeth-lft",
+  "lem-pc-scheme-dimension-local-rings",
+  "lem-weil-pbc-dimension-quotient-nonzerodivisor",
+  "lem-weil-pbc-finite-type-domain-dimension-local-ring",
+  "pqf-lem-locnoeth-lft",
+  "lem-pc-scheme-dimension-local-rings"
+ ],
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-ecad2914",
+  "group": "K1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-ecad2914 (reviewer sub-agent of L); spot-checked: Read packet and head JSON; checked 00KW leaf hypotheses (Noetherian local, nonzerodivisor in m). FIX more, RETURN less: (1) C1/D: step 3 took the sup only over maximal ideals containing f, which equals dim A only if every maximal ideal has height dim A; cited lem-weil-pbc-finite-type-domain-dimension-local-ring (Tags 00OS/00P0) in steps 2-3; (2) C4: lem-kun-dimension-formula (dim_x X = dim O + trdeg) does not give sup of local dimensions; replaced by lem-pc-scheme-dimension-local-rings plus elementary localization monotonicity, dropped kun tool use; (3) C1: Noetherianity of A cited via pqf-lem-locnoeth-lft. Recorded Mathlib grep for Krull height theorem (KrullsHeightTheorem.lean, no affine match). Second reading's claimed repairs were not in the head.; 1 file(s) fixed by the reviewer"
+ },
+ "lead_note": "2026-10-10 L (R-ecad2914): Second reading by K1 claims citation repairs (pqf-lem-locnoeth-lft, lem-pc-scheme-dimension-local-rings) that are absent from head 409dd6f56; reviewer made them and fixed the missed gap."
 }
