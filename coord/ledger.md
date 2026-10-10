@@ -1466,3 +1466,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 13:13 L: merged deliver/E1/lem-weil-pbc-simplicial-set-add-simplices (reviewer PASS, first push)
 - 2026-10-10, delivery of E1: lem-sc-sylow-module-filtration merged from deliver/E1/lem-sc-sylow-module-filtration (1 commit(s), 0 new node(s), spot-checked by L: L: reviewed in full by a reviewer sub-agent (PASS): blueprint proof and 0A3R/0GIZ/0GJ0 read, 4 steps checked against the cited statements, Sylow.not_dvd_index line 489 and the filtration declaration verified, small cases tested); claim closed
 - 13:13 L: merged deliver/E1/lem-sc-sylow-module-filtration (reviewer PASS, first push; tool_uses 2)
+- 2026-10-10, delivery of H1: lemma-weil-pbc-fibre-product-limit returned (2571a9ee8): Reviewed in full (reviewer sub-agent of L). E2/E4: the new node lem-weil-pbc-qcqs-fibre-product-gluing is ill-typed: S names both the base and the strict hensel
