@@ -1,0 +1,67 @@
+{
+ "id": "lem-weil-pbc-associated-prime-submodule",
+ "kind": "statement",
+ "title": "An associated prime of a submodule is an associated prime of the module",
+ "statement": "Let $R$ be a Noetherian ring [def-weil-pbc-noetherian-ring], $M$ an $R$-module and $N\\subseteq M$ an $R$-submodule. Call a prime ideal $\\mathfrak p\\subset R$ an *associated prime* of an $R$-module $P$ if there is $z\\in P$ with $\\operatorname{Ann}_R(z)=\\{a\\in R: az=0\\}=\\mathfrak p$, and write $\\operatorname{Ass}_R(P)$ for the set of them. Then $\\operatorname{Ass}_R(N)\\subseteq\\operatorname{Ass}_R(M)$.",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Algebra, Lemma Tag 02M3 (lemma-ass, line 15131), first assertion Ass(M') ⊂ Ass(M) for the submodule M' = N of M; associated primes as in Definition Tag 00LA (definition-associated, line 15108). Tags verified in stacks-project/tags/tags: 02M3,algebra-lemma-ass; 00LA,algebra-definition-associated"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-noetherian-ring"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "associated primes of a submodule are associated primes of the module",
+   "results": "associatedPrimes, associatedPrimes.subset_of_injective (Mathlib.RingTheory.Ideal.AssociatedPrime.Basic), Module.associatedPrimes.mem_associatedPrimes_atPrime_of_mem_associatedPrimes, ...mem_associatedPrimes_of_comap_mem_associatedPrimes_of_isLocalizedModule (AssociatedPrime.Localization), IsAssociatedPrime",
+   "date": "2026-10-10",
+   "verdict": "match: associatedPrimes.subset_of_injective"
+  },
+  {
+   "tool": "loogle",
+   "query": "associatedPrimes, Function.Injective",
+   "results": "associatedPrimes.subset_of_injective, associatedPrimes.subset_union_of_exact (Mathlib.RingTheory.Ideal.AssociatedPrime.Basic)",
+   "date": "2026-10-10",
+   "verdict": "match: associatedPrimes.subset_of_injective"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rn '02M3\\|subset_of_injective' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib; sed -n 85,170p ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/RingTheory/Ideal/AssociatedPrime/Basic.lean",
+   "results": "Basic.lean:162-164 `@[stacks 02M3 \"first part\"] theorem subset_of_injective (hf : Function.Injective f) : associatedPrimes R M ⊆ associatedPrimes R M'` in namespace associatedPrimes; Basic.lean:114-116 isAssociatedPrime_iff; Basic.lean:119 IsAssociatedPrime.map_of_injective",
+   "date": "2026-10-10",
+   "verdict": "match"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "associatedPrimes.subset_of_injective",
+  "file": "Mathlib/RingTheory/Ideal/AssociatedPrime/Basic.lean",
+  "line": 163,
+  "how": "specializes in one line: lines 162-164, `@[stacks 02M3 \"first part\"] theorem associatedPrimes.subset_of_injective {f : M →ₗ[R] M'} (hf : Function.Injective f) : associatedPrimes R M ⊆ associatedPrimes R M'`, applied to the inclusion N.subtype (injective: Submodule.injective_subtype). Mathlib's associatedPrimes (lines 101-104) is defined by IsAssociatedPrime (line 98, the radical of the colon); for Noetherian R, isAssociatedPrime_iff (lines 114-116) gives `I.IsPrime ∧ ∃ x, I = colon ⊥ {x}`, and colon ⊥ {x} = Ann(x), the definition of the statement (same translation as the reviewed leaf lem-weil-pbc-noetherian-minimal-prime-associated). Lines read with sed -n on 2026-10-10."
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-associated-prime-power-quotient",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "reviewed": "2026-10-10 L: Mathlib leaf checked: associatedPrimes.subset_of_injective, AssociatedPrime/Basic.lean:163 with isAssociatedPrime_iff :114 for Noetherian R (02M3)"
+}

@@ -1,0 +1,70 @@
+{
+ "id": "lem-weil-pbc-minimal-support-prime-associated",
+ "kind": "statement",
+ "title": "A minimal prime of the support of a finite module over a Noetherian ring is associated",
+ "statement": "Let $R$ be a Noetherian ring [def-weil-pbc-noetherian-ring] and $M$ a finite $R$-module [def-weil-finitely-generated-module]. Let $\\operatorname{Supp}(M)$ be the set of prime ideals $\\mathfrak p\\subset R$ with $M_{\\mathfrak p}\\neq0$, where $M_{\\mathfrak p}$ is the localization of $M$ at $\\mathfrak p$ [def-weil-pbc-module-localization]. Let $\\mathfrak q\\in\\operatorname{Supp}(M)$ be minimal in $\\operatorname{Supp}(M)$: no $\\mathfrak q'\\in\\operatorname{Supp}(M)$ satisfies $\\mathfrak q'\\subsetneq\\mathfrak q$. Then $\\mathfrak q$ is an associated prime of $M$: there is $z\\in M$ with $\\operatorname{Ann}_R(z)=\\{a\\in R: az=0\\}=\\mathfrak q$.",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Algebra, Lemma Tag 05BV (lemma-ass-minimal-prime-support, line 15260), for a finite module M (the case its proof reduces to Proposition 00L9's set equality); associated primes as in Definition Tag 00LA (definition-associated, line 15108). Tags verified in stacks-project/tags/tags: 05BV,algebra-lemma-ass-minimal-prime-support"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-noetherian-ring",
+  "def-weil-finitely-generated-module",
+  "def-weil-pbc-module-localization"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "a prime minimal in the support of a finite module over a Noetherian ring is an associated prime",
+   "results": "associatedPrimes, IsAssociatedPrime, Module.associatedPrimes.minimalPrimes_annihilator_subset_associatedPrimes (Mathlib.RingTheory.Ideal.AssociatedPrime.Localization), associatedPrimes.finite, Module.annihilator_le_of_mem_support (Mathlib.RingTheory.Support), isAssociatedPrime_iff_exists_injective_linearMap",
+   "date": "2026-10-10",
+   "verdict": "generalization: minimalPrimes_annihilator_subset_associatedPrimes with Supp = V(Ann)"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "minimal elements of the support of a finitely generated module over a Noetherian ring are associated primes",
+   "results": "Module.associatedPrimes.minimalPrimes_annihilator_subset_associatedPrimes, exists_le_isAssociatedPrime_of_isNoetherianRing, associatedPrimes.nonempty, associatedPrimes.finite, associatedPrimes",
+   "date": "2026-10-10",
+   "verdict": "generalization: minimalPrimes_annihilator_subset_associatedPrimes"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rn 'minimalPrimes' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib | grep -i support; grep -rn '05BV' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib; sed -n 196,216p ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/RingTheory/Support.lean; sed -n 125,130p ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/RingTheory/Ideal/AssociatedPrime/Localization.lean",
+   "results": "no declaration stated with Module.support and minimality directly (only KrullDimension/Regular.lean supportDim lemmas); no @[stacks 05BV]; Support.lean:200 Module.mem_support_iff_of_finite, :216 Module.support_eq_zeroLocus (@[stacks 00L2]); Localization.lean:128 minimalPrimes_annihilator_subset_associatedPrimes",
+   "date": "2026-10-10",
+   "verdict": "generalization: the two declarations compose in one line"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "Module.associatedPrimes.minimalPrimes_annihilator_subset_associatedPrimes",
+  "file": "Mathlib/RingTheory/Ideal/AssociatedPrime/Localization.lean",
+  "line": 128,
+  "how": "specializes in one line: lines 128-129, `[IsNoetherianRing R] [Module.Finite R M] : (Module.annihilator R M).minimalPrimes ⊆ associatedPrimes R M`. Translation of the hypothesis: for finite M, Module.mem_support_iff_of_finite (Mathlib/RingTheory/Support.lean:200, p ∈ Module.support R M ↔ Module.annihilator R M ≤ p.asIdeal; Module.support is {p | M_p nontrivial}, Support.lean:46-50) identifies Supp(M) with the primes containing Ann(M), so a minimal element of Supp(M) is a minimal prime over Ann(M), i.e. an element of (Module.annihilator R M).minimalPrimes (Mathlib/RingTheory/Ideal/MinimalPrime/Basic.lean:57-58, the primes minimal among primes containing the ideal). Membership in associatedPrimes is the annihilator definition for Noetherian R by isAssociatedPrime_iff (AssociatedPrime/Basic.lean:114-116). Lines read with sed -n on 2026-10-10."
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-associated-prime-power-quotient",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "reviewed": "2026-10-10 L: Mathlib leaf checked: Module.associatedPrimes.minimalPrimes_annihilator_subset_associatedPrimes, AssociatedPrime/Localization.lean:128 with Module.mem_support_iff_of_finite (Support.lean:200) (05BV)",
+ "lead_note": "composed leaf accepted (point B8): one-line translation of the hypothesis through mem_support_iff_of_finite"
+}
