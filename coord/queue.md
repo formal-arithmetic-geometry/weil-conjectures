@@ -1,6 +1,6 @@
 # Work queue
 
-813 items; claim with `tools/claim.py next <group> [--stage N]`.
+815 items; claim with `tools/claim.py next <group> [--stage N]`.
 
 ## Stage 1: nodes to split (657)
 
@@ -19,8 +19,6 @@
 | `lem-weil-pbc-ideal-times-quasi-coherent-affine-sections` | 1011 | none |
 | `lem-weil-pbc-idempotent-endomorphism-charpoly-field` | 1011 | none |
 | `lem-weil-pbc-idempotent-endomorphism-image-base-change` | 1011 | none |
-| `lem-weil-pbc-immersion-affine-constructible-pieces` | 1011 | none |
-| `lem-weil-pbc-improve-presentation` | 1011 | none |
 | `lem-weil-pbc-integral-closure-finite-fibre-image-clopen` | 1011 | none |
 | `lem-weil-pbc-integral-closure-finite-fibre-quasi-finite` | 1011 | none |
 | `lem-weil-pbc-inverse-image-closed-pushforward-constant` | 1011 | none |
@@ -118,6 +116,7 @@
 | `lem-weil-pbc-completion-at-quasi-finite-prime` | 1012 | none |
 | `lem-weil-pbc-completion-dimension` | 1012 | none |
 | `lem-weil-pbc-completion-finite-extension` | 1012 | none |
+| `lem-weil-pbc-cotangent-complex-symmetric-algebra` | 1012 | none |
 | `lem-weil-pbc-descend-finite-locally-free` | 1012 | none |
 | `lem-weil-pbc-descend-qc-open-fg-subalgebra` | 1012 | none |
 | `lem-weil-pbc-finite-length-module-simple-filtration` | 1012 | none |
@@ -145,6 +144,7 @@
 | `lem-weil-pbc-module-stalk-filtered-colimit` | 1012 | none |
 | `lem-weil-pbc-polynomial-local-completion-formally-smooth` | 1012 | none |
 | `lem-weil-pbc-power-series-field-cohen-regular-complete` | 1012 | none |
+| `lem-weil-pbc-principal-localization-naive-cotangent` | 1012 | none |
 | `lem-weil-pbc-quasi-coherent-ideal-zero-set-affine` | 1012 | none |
 | `lem-weil-pbc-quotient-henselian-pair` | 1012 | none |
 | `lem-weil-pbc-quotient-local-structure` | 1012 | none |
@@ -664,7 +664,7 @@
 | `lem-pc-finite-linear-avoidance` | - | none |
 | `lem-pc-linear-pair-graded-finite` | - | none |
 
-## Stage 2: nodes to state (156)
+## Stage 2: nodes to state (158)
 
 | node | distance to Mathlib | kind |
 |---|---|---|
@@ -756,6 +756,8 @@
 | `lem-weil-pbc-henselization-finite-separable-fibres` | 1 | state |
 | `lem-weil-pbc-idempotent-splitting-monic-factorization` | 1 | state |
 | `lem-weil-pbc-idempotents-determined-modulo-radical` | 1 | state |
+| `lem-weil-pbc-immersion-affine-constructible-pieces` | 1 | state |
+| `lem-weil-pbc-improve-presentation` | 1 | state |
 | `lem-weil-pbc-integral-closure-finite-fibre-choose-g` | 1 | state |
 | `lem-weil-pbc-integral-closure-finite-fibre-part-localization` | 1 | state |
 | `lem-weil-pbc-integral-idempotent-annihilating-polynomial` | 1 | state |
