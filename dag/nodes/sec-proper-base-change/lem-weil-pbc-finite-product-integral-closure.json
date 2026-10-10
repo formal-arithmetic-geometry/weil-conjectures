@@ -18,7 +18,7 @@
  },
  "kind": "statement",
  "title": "Integral closure commutes with finite products",
- "statement": "Let $R_i\\to S_i$ be homomorphisms of commutative rings for $i=1,\\dots,n$, let $R=\\prod_iR_i$ and $S=\\prod_iS_i$, and let $S_i'\\subseteq S_i$ be the subring of elements integral over $R_i$ [def-weil-pbc-integral-closure]. Then the subring of $S$ consisting of elements integral over $R$ is exactly $\\prod_iS_i'$. In particular, $R$ is integrally closed in $S$ if and only if each $R_i$ is integrally closed in $S_i$.",
+ "statement": "Let $R_i\\to S_i$ be homomorphisms of commutative rings for $i=1,\\dots,n$, let $R=\\prod_iR_i$ and $S=\\prod_iS_i$, and let $S_i'\\subseteq S_i$ be the subring of elements integral over $R_i$ [def-weil-pbc-integral-closure]. Then the subring of $S$ consisting of elements integral over $R$ is exactly $\\prod_iS_i'$. If every $R_i\\to S_i$ is injective, so that $R\\subseteq S$, then $R$ is integrally closed in $S$ if and only if each $R_i$ is integrally closed in $S_i$.",
  "source": {
   "document": "literature/stacks-project/algebra.tex",
   "place": "Algebra, Lemma Tag 0CY9 (lemma-finite-product-integral-closure, line 7583), using Tag 0CY8 for coordinatewise integrality"
@@ -26,9 +26,49 @@
  "stmt_deps": [
   "def-weil-pbc-integral-closure"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Let $s=(s_i)\\in S$ be integral over $R$. By [def-weil-pbc-integral-closure], a monic polynomial $P(T)\\in R[T]$ satisfies $P(s)=0$. Projecting each coefficient of $P$ to $R_i$ produces a monic polynomial $P_i(T)\\in R_i[T]$. Projection of the equality $P(s)=0$ gives $P_i(s_i)=0$, so every $s_i$ is integral over $R_i$.",
+   "uses": [
+    "def-weil-pbc-integral-closure"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra, Lemma Tag 0CY8 (lemma-finite-product-integral, forward implication; proof omitted)"
+   }
+  },
+  {
+   "text": "Conversely, suppose every $s_i$ is integral over $R_i$. For each $i$, choose a monic $P_i(T)\\in R_i[T]$ with $P_i(s_i)=0$ and degree $d_i$. Choose a common integer $D\\ge1$ with $D\\ge d_i$ for all $i$, and put $Q_i(T)=T^{D-d_i}P_i(T)$. Then $Q_i$ is monic of degree $D$ and $Q_i(s_i)=0$. At each degree $0,\\dots,D$, assemble the coefficients of the $Q_i$ into an element of $R=\\prod_iR_i$; the resulting $Q(T)\\in R[T]$ is monic and has $Q(s)=0$ coordinatewise. Hence $s$ is integral over $R$ by [def-weil-pbc-integral-closure]. For an empty product, $R$ and $S$ are zero rings and the same conclusion holds with $Q(T)=T$.",
+   "uses": [
+    "def-weil-pbc-integral-closure"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra, Lemma Tag 0CY8 (lemma-finite-product-integral, reverse implication; proof omitted)"
+   }
+  },
+  {
+   "text": "An element $s=(s_i)$ belongs to the integral closure of $R$ in $S$ exactly when every $s_i$ belongs to $S_i'$, by Steps 1 and 2 and [def-weil-pbc-integral-closure]. Equality of these subsets, hence of the subrings, follows. If all component maps are injective, their product is injective and identifies $R$ with $\\prod_iR_i\\subseteq S$. Under this identification the equality of integral closures says $R=\\prod_iS_i'$ exactly when $R_i=S_i'$ for every $i$, including the empty-product case.",
+   "uses": [
+    "def-weil-pbc-integral-closure"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra, Lemma Tag 0CY9 (lemma-finite-product-integral-closure), using Tag 0CY8"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-integral-closure"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Algebra, Lemmas Tags 0CY8 (proof omitted) and 0CY9"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -60,7 +100,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "worker",
@@ -80,5 +120,19 @@
   }
  },
  "chapter": "sec-proper-base-change",
- "unit": "sk-thm-p1"
+ "unit": "sk-thm-p1",
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "lem-weil-pbc-finite-product-integral-closure",
+  "worker": "stage1",
+  "summary": "Expanded the omitted proof of coordinatewise integrality (0CY8) using a common degree and a product polynomial, then identified the integral-closure subrings (0CY9). The final integrally-closed equivalence explicitly assumes the component maps injective, as required by the cited definition. No new nodes or exact slopmaster2 attachments were found.",
+  "blueprint": "This finite-product calculation supports the coordinatewise integral-closure step of lem-weil-pbc-reduced-normal-iff-integrally-closed-total-fractions, in the normality route through the second proof paragraph of lem-weil-pbc-normal-constant-generic. Steps 1-2 supply the omitted proof of Stacks 0CY8, and Step 3 supplies 0CY9; whole-blueprint searches for finite-product integrality and integral closure found no node with this statement."
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "group": "E1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed by the lead of E1; spot-checked by L: L: 0CY9 by the componentwise monic polynomials, padded to a common degree; 0 new"
+ }
 }
