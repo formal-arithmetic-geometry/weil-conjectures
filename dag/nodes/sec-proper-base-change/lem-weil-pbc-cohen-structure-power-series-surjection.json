@@ -1,0 +1,85 @@
+{
+ "id": "lem-weil-pbc-cohen-structure-power-series-surjection",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-finite-etale-lifting",
+   "place": "step 7 of its split (source: Lemma 0GS2, proof: the essential-surjectivity paragraphs)",
+   "via": [
+    "lem-weil-pbc-complete-local-flat-presentation",
+    "lem-weil-pbc-fs-adic-local-flat",
+    "lem-weil-pbc-fs-adic-flat-geometrically-regular-closed-fibre",
+    "lem-weil-pbc-formally-smooth-complete-local-regular",
+    "lem-weil-pbc-another-helper-g-ring",
+    "lem-weil-pbc-polynomial-complete-local-formal-fibres",
+    "lem-weil-pbc-finite-type-over-g-ring",
+    "lem-weil-pbc-finite-type-z-g-ring",
+    "lem-weil-pbc-finite-etale-lifting-limit-descent",
+    "lem-weil-pbc-finite-etale-lifting-essential-surjectivity"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Cohen structure theorem: a complete local ring is a quotient of a power series ring over a field or a Cohen ring",
+ "statement": "Let $(R,\\mathfrak m)$ be a local ring (a commutative ring with exactly one maximal ideal $\\mathfrak m$) whose maximal ideal $\\mathfrak m$ is finitely generated (for instance $R$ Noetherian [def-weil-pbc-noetherian-ring]) and which is $\\mathfrak m$-adically complete [def-weil-pbc-adically-complete-ring]. Let $p\\ge0$ be the characteristic of the residue field $\\kappa=R/\\mathfrak m$. Then there exist an integer $n\\ge0$, a ring $\\Lambda$ which is a field of characteristic $0$ if $p=0$ and a Cohen ring [def-weil-pbc-cohen-ring] with residue characteristic $p$ if $p>0$, and a surjective ring homomorphism $\\Lambda[[x_1,\\ldots,x_n]]\\to R$ from the formal power series ring [def-weil-pbc-multivariate-power-series].",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Algebra, Theorem Tag 032A (theorem-cohen-structure-theorem, line 44929), part (2), and the last paragraph of its proof (the map Lambda[[x_1..x_n]] -> R, x_i -> y_i for generators y_i of m, surjective by Lemma 0315 lemma-completion-generalities). The theorem says 'Lambda is either a field or a Cohen ring'; that Lambda is a field of characteristic 0 when p = 0 (a coefficient field, isomorphic to kappa) and a Cohen ring when p > 0 is the case distinction of the proof (paragraphs 1 and 2: Cohen ring from Lemma 0328 cohen-rings-exist). Part (1) is the existing node lem-weil-pbc-cohen-coefficient-ring-exists."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-noetherian-ring",
+  "def-weil-pbc-adically-complete-ring",
+  "def-weil-pbc-cohen-ring",
+  "def-weil-pbc-multivariate-power-series"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "complete Noetherian local ring is a quotient of a power series ring over a Cohen ring",
+   "results": "PowerSeries.isNoetherianRing, PowerSeries.algEquivQuotientWeierstrassDistinguished, PowerSeries.exists_isWeierstrassDivision (Mathlib.RingTheory.PowerSeries.WeierstrassPreparation), HenselianLocalRing.toIsLocalRing, PowerSeries.instIsLocalRing, PowerSeries.maximalIdeal_eq_span_X: no structure theorem",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Cohen structure theorem: a complete Noetherian local ring is a quotient of a power series ring over a field or a Cohen ring",
+   "results": "isLocalRing_of_isAdicComplete_maximal, IsAdicComplete.henselianRing, HenselianLocalRing, PowerSeries.exists_isWeierstrassFactorization, isUnit_iff_notMem_of_isAdicComplete_maximal: no structure theorem",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rln 'Cohen' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib ; grep -rn 'coefficient ring\\|CoefficientRing' RingTheory",
+   "results": "only RingTheory/Noetherian/OfPrime.lean (a reference to Cohen 1950, Noetherian-iff-primes-f.g.) and Combinatorics/Optimization/ValuedCSP.lean; no Cohen ring, no coefficient ring, no structure theorem",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-complete-local-flat-presentation",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "reviewed": "2026-10-10 L: statement checked against 032A (2) with the field/Cohen-ring dichotomy from its proof; no blueprint node states it (searched)"
+}

@@ -1,0 +1,89 @@
+{
+ "id": "lem-weil-pbc-power-series-universal-property-complete",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-finite-etale-lifting",
+   "place": "step 7 of its split (source: Lemma 0GS2, proof: the essential-surjectivity paragraphs)",
+   "via": [
+    "lem-weil-pbc-complete-local-flat-presentation",
+    "lem-weil-pbc-fs-adic-local-flat",
+    "lem-weil-pbc-fs-adic-flat-geometrically-regular-closed-fibre",
+    "lem-weil-pbc-formally-smooth-complete-local-regular",
+    "lem-weil-pbc-another-helper-g-ring",
+    "lem-weil-pbc-polynomial-complete-local-formal-fibres",
+    "lem-weil-pbc-finite-type-over-g-ring",
+    "lem-weil-pbc-finite-type-z-g-ring",
+    "lem-weil-pbc-finite-etale-lifting-limit-descent",
+    "lem-weil-pbc-finite-etale-lifting-essential-surjectivity"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Universal property of a power series ring mapping into a complete ring",
+ "statement": "Let $\\Lambda$ and $T$ be commutative rings, $\\mathfrak a\\subseteq T$ an ideal such that $T$ is $\\mathfrak a$-adically complete [def-weil-pbc-adically-complete-ring], $\\alpha:\\Lambda\\to T$ a ring homomorphism, $n\\ge0$, and $t_1,\\ldots,t_n\\in\\mathfrak a$. Write $t^E=t_1^{e_1}\\cdots t_n^{e_n}$ and $|E|=e_1+\\cdots+e_n$ for $E\\in\\mathbf N^n$. Then there is a ring homomorphism $\\Phi:\\Lambda[[x_1,\\ldots,x_n]]\\to T$ from the formal power series ring [def-weil-pbc-multivariate-power-series] such that $\\Phi(\\lambda)=\\alpha(\\lambda)$ for $\\lambda\\in\\Lambda$ (constant series) and $\\Phi(x_i)=t_i$ for $i=1,\\ldots,n$; for $F=\\sum_Ea_Ex^E$, $\\Phi(F)$ is the unique element of $T$ with $\\Phi(F)\\equiv\\sum_{|E|<m}\\alpha(a_E)t^E\\pmod{\\mathfrak a^m}$ for every $m\\ge1$. Moreover $\\Phi$ is the only ring homomorphism $\\Lambda[[x_1,\\ldots,x_n]]\\to T$ which agrees with $\\alpha$ on $\\Lambda$ and sends $x_i$ to $t_i$ for every $i$.",
+ "source": {
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "used without statement as 'the universal property of power series rings' in More on Algebra, proof of Lemma Tag 07NL (lemma-power-series-ring-over-Cohen-fs, line 9719), in the proof of Lemma Tag 07NN (lemma-embed-map-Noetherian-complete-local-rings, line 9769: the map phi' : Lambda[[x]] -> S[[y]], x_i -> phi(x_i) + y_i) and in Algebra, proof of Theorem Tag 032A (algebra.tex line 44929: Lambda[[x_1..x_n]] -> R, x_i -> y_i); agent-formulated"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-adically-complete-ring",
+  "def-weil-pbc-multivariate-power-series"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "ring homomorphism from multivariate power series ring to an adically complete ring sending variables to elements of the ideal",
+   "results": "IsAdicComplete.liftRingHom, AdicCompletion.liftRingHom, IsAdicComplete.mk_comp_liftRingHom (Mathlib.RingTheory.AdicCompletion.RingHom), MvPowerSeries.eval₂Hom, MvPowerSeries.aeval (Mathlib.RingTheory.MvPowerSeries.Evaluation), PowerSeries.eval₂Hom",
+   "date": "2026-10-10",
+   "verdict": "candidate MvPowerSeries.eval₂Hom (topological statement), see mathlib_candidate"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "evaluate a multivariate power series at topologically nilpotent elements of a complete ring gives a ring homomorphism, universal property",
+   "results": "MvPowerSeries.eval₂Hom, MvPowerSeries.aeval, MvPowerSeries.eval₂, MvPowerSeries.coe_eval₂Hom, MvPowerSeries.eval₂Hom_eq_extend (Mathlib.RingTheory.MvPowerSeries.Evaluation), PowerSeries.eval₂Hom, PowerSeries.aeval",
+   "date": "2026-10-10",
+   "verdict": "candidate, not one line"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -n 'def eval₂Hom\\|structure HasEval\\|theorem eval₂_unique\\|CompleteSpace' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/RingTheory/MvPowerSeries/Evaluation.lean; grep -rn 'IsAdicComplete' RingTheory/MvPowerSeries RingTheory/AdicCompletion/Completeness.lean",
+   "results": "Evaluation.lean:67 HasEval (each a s topologically nilpotent, a tends to 0 cofinitely), :230 eval₂Hom (hφ : Continuous φ) (ha : HasEval a) with [UniformSpace R] [UniformSpace S] [IsUniformAddGroup S] [CompleteSpace S] [T2Space S] [IsTopologicalRing S] [IsLinearTopology S S], :283 eval₂_unique (uniqueness among continuous maps); no version stated with IsAdicComplete; AdicCompletion/Completeness.lean:214 only gives completeness of MvPowerSeries itself for (X)",
+   "date": "2026-10-10",
+   "verdict": "no exact match; candidate recorded"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-complete-local-flat-presentation",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "mathlib_candidate": {
+  "declaration": "MvPowerSeries.eval₂Hom, MvPowerSeries.eval₂_unique",
+  "file": "Mathlib/RingTheory/MvPowerSeries/Evaluation.lean",
+  "line": 230,
+  "how": "Not one line. eval₂Hom (line 230) builds Λ[[σ]] →+* T from a continuous φ and a with HasEval a (line 67) when T is a complete Hausdorff uniform additive group with linear topology; here Λ would carry the discrete topology and T the 𝔞-adic topology, and turning `IsAdicComplete 𝔞 T` into `CompleteSpace T`, `T2Space T`, `IsLinearTopology T T` for that uniform structure is itself a lemma. The uniqueness clause of the node is for all ring homomorphisms; eval₂_unique (line 283) assumes continuity, which for a map sending x_i into 𝔞 is an extra argument (every series with no term of degree < m lies in (x)^m). Lines read 2026-10-10."
+ },
+ "reviewed": "2026-10-10 L: statement checked against the universal property used without statement in 07NL/07NN/032A; no blueprint node states it (searched)"
+}
