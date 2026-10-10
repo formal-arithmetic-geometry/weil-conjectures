@@ -822,8 +822,11 @@ theorem rightTranslationDeriv_eq_of_mul_eq_commutator {v w u : Scheme.dualNumber
     rightTranslationOp₂_projε hv', rightTranslationOp₂_projδ hw', rightTranslationDeriv_inv hv hv',
     rightTranslationDeriv_inv hw hw'] at hT
   have := congrArg (fun y : DualNumber (DualNumber (AddMonoid.End Γ(G.left, U))) ↦ y.snd.snd) hT
-  simp at this
-  rw [this]
+  have h2 : rightTranslationDeriv hu U =
+      -(rightTranslationDeriv hw U * rightTranslationDeriv hv U) +
+        rightTranslationDeriv hv U * rightTranslationDeriv hw U := by
+    simpa using this
+  rw [h2]
   abel
 
 end Two

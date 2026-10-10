@@ -437,9 +437,12 @@ theorem dualNumbers_dualNumbers_presheaf_map_top_inl_inr (U : X.Opens) :
       (inl (inr 1) : DualNumber (DualNumber Γ(X, ⊤))) =
         (inl (inr 1) : DualNumber (DualNumber Γ(X, U))) := by
   change DualNumber.mapRingHom _ _ = _
-  ext <;> simp
-  change DualNumber.mapRingHom _ _ = _
-  ext <;> simp
+  have : (X.dualNumbers.presheaf.map
+      (homOfLE (le_top : (U : X.dualNumbers.Opens) ≤ ⊤)).op).hom DualNumber.eps =
+        DualNumber.eps := by
+    change DualNumber.mapRingHom _ _ = _
+    ext <;> simp
+  ext <;> simp [this]
 
 
 theorem dualNumbers_dualNumbersProj_comp_appLE_self (U : X.Opens)
@@ -493,16 +496,20 @@ theorem appLE_dualNumbers_dualNumbers_self
     simp only [map_add, map_mul, hinl, hinr, hinlr]
   refine ⟨?_, ?_, ?_, ?_⟩
   · have h := congrArg (fun x ↦ x.fst.fst) key
-    simp at h
+    simp only [fst_add, fst_mul, fst_inl, fst_inr,
+      mul_zero, zero_mul, add_zero] at h
     exact h
   · have h := congrArg (fun x ↦ x.fst.snd) key
-    simp at h
+    simp only [fst_add, snd_add, fst_mul, snd_mul, fst_inl, fst_inr, snd_inr,
+      smul_eq_mul, op_smul_eq_mul, mul_zero, zero_mul, add_zero, zero_add, one_mul] at h
     exact h
   · have h := congrArg (fun x ↦ x.snd.fst) key
-    simp at h
+    simp only [fst_add, snd_add, fst_mul, snd_mul, fst_inl, snd_inl, fst_inr, snd_inr,
+      smul_eq_mul, op_smul_eq_mul, mul_zero, zero_mul, add_zero, zero_add, mul_one, one_mul] at h
     exact h
   · have h := congrArg (fun x ↦ x.snd.snd) key
-    simp at h
+    simp only [snd_add, fst_mul, snd_mul, fst_inl, snd_inl, fst_inr, snd_inr,
+      smul_eq_mul, op_smul_eq_mul, mul_zero, zero_mul, add_zero, zero_add, mul_one, one_mul] at h
     exact h
 
 end Scheme
