@@ -2787,3 +2787,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 22:12 L: merged deliver/G1/def-nagata-relative-finite-affine-presentation (reviewer FIX; first push; new nodes: 0)
 - 22:12 L: merged deliver/M1/lem-sc-general-theorem-of-cube (reviewer FIX; after a return; new nodes: 4)
 - 22:12 L: merged deliver/E1/lem-pc-rf-base-change-single-complex-criterion (reviewer FIX; after a return; new nodes: 2)
+- 22:12 L: returned deliver/F1/def-sc-zariski-site (reviewer RETURN: Not a fault: the site is Mathlib's Opens.grothendieckTopology on X.carrier (Mathlib/CategoryTheory/Sites/Spaces.lean:48;)
