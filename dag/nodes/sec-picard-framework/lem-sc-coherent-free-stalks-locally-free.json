@@ -23,9 +23,56 @@
   "pqf-def-coherent",
   "pqf-def-locnoeth"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "By [pqf-lem-coherent-ft-locnoeth], since $X$ is locally Noetherian, $\\mathcal F$ is quasi-coherent of finite type. By [pqf-def-locnoeth], $X$ has an affine open covering $X=\\bigcup_iU_i$ with $U_i=\\operatorname{Spec}(A_i)$ and $A_i$ Noetherian. Fix one such $U=\\operatorname{Spec}(A)$. By [lem-weil-pbc-quasi-coherent-finite-type-affine](c), $M=\\Gamma(U,\\mathcal F)$ is a finite $A$-module, and by [lem-weil-pbc-affine-tilde-gamma-adjunction](3), applied to the quasi-coherent $\\mathcal O_U$-module $\\mathcal F|_U$, the counit $\\widetilde M\\to\\mathcal F|_U$ is an isomorphism.",
+   "uses": [
+    "pqf-lem-coherent-ft-locnoeth",
+    "pqf-def-locnoeth",
+    "lem-weil-pbc-quasi-coherent-finite-type-affine",
+    "lem-weil-pbc-affine-tilde-gamma-adjunction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/cohomology-of-schemes.tex",
+    "place": "Tag 01XZ, coherent modules on locally Noetherian schemes"
+   }
+  },
+  {
+   "text": "For every prime $\\mathfrak p$ of $A$ with point $x\\in U$, [lem-weil-pbc-spec-tilde-stalk-localization] gives $\\mathcal F_x\\cong\\widetilde M_x\\cong M_{\\mathfrak p}$ as modules over $\\mathcal O_{X,x}\\cong A_{\\mathfrak p}$, so $M_{\\mathfrak p}$ is a finite free $A_{\\mathfrak p}$-module by hypothesis. The affine criterion [lem-sc-affine-finite-module-free-locus] then gives $f_1,\\ldots,f_n\\in A$ generating the unit ideal with each $M_{f_i}$ finite free over $A_{f_i}$; equivalently $\\widetilde M\\cong\\mathcal F|_U$ is finite locally free on $U$.",
+   "uses": [
+    "lem-weil-pbc-spec-tilde-stalk-localization",
+    "lem-sc-affine-finite-module-free-locus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 0GWM, algebra-lemma-finitely-presented-localization-free"
+   }
+  },
+  {
+   "text": "The $U_i$ of Step 1 cover $X$; collecting, over all $i$, the open covers of $U_i$ on which $\\mathcal F$ is finite free given by Step 2 yields an open cover of $X$ on which $\\mathcal F$ is finite free. This is precisely the definition of a finite locally free $\\mathcal O_X$-module.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 0GWM, conclusion that local freeness on principal opens is local"
+   }
+  }
+ ],
+ "proof_deps": [
+  "pqf-lem-coherent-ft-locnoeth",
+  "pqf-def-locnoeth",
+  "lem-weil-pbc-quasi-coherent-finite-type-affine",
+  "lem-weil-pbc-affine-tilde-gamma-adjunction",
+  "lem-weil-pbc-spec-tilde-stalk-localization",
+  "lem-sc-affine-finite-module-free-locus"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Tag 0GWM (algebra-lemma-finitely-presented-localization-free)"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -57,12 +104,45 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-sc-regular-curve-torsionfree-free",
   "by": "worker",
   "date": "2026-10-10"
  },
  "chapter": "sec-picard-framework",
- "unit": "sk-thm-picard-rr"
+ "unit": "sk-thm-picard-rr",
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "lem-sc-coherent-free-stalks-locally-free",
+  "worker": "stage1",
+  "summary": "Split the coherent free-stalk criterion into the existing coherence characterization, a new affine finite-module free-locus statement, and the open-cover conclusion. The item and new node were checked against Stacks Tags 0GWM and 01XZ; no exact sorry-free Lean declaration exists.",
+  "blueprint": [
+   "The torsion-free quotient: a coherent module with free stalks is locally free"
+  ],
+  "tool_uses": [
+   {
+    "node": "pqf-lem-coherent-ft-locnoeth",
+    "why": "Step 1 needs the generic equivalence between coherent and quasi-coherent finite-type modules, which is not supplied by this unit's route."
+   },
+   {
+    "node": "lem-weil-pbc-quasi-coherent-finite-type-affine",
+    "why": "Step 1 needs the affine sections characterization of finite-type quasi-coherent modules, which is not supplied by this unit's route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "pqf-lem-coherent-ft-locnoeth",
+  "lem-weil-pbc-quasi-coherent-finite-type-affine",
+  "pqf-lem-coherent-ft-locnoeth",
+  "lem-weil-pbc-quasi-coherent-finite-type-affine"
+ ],
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-cfs",
+  "group": "K1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-cfs (reviewer sub-agent of L); spot-checked: Source: Stacks Tag 0GWM (algebra-lemma-finitely-presented-localization-free: R ring, M finitely presented, M_p free => M_f free for some f not in p) applied on Noetherian affines where finite = finitely presented, with Tag 01XZ (coherent-lemma-coherent-Noetherian) for coherent = quasi-coherent of finite type; item statement unchanged (locally Noetherian X, coherent F, free stalks => finite locally free). New node lem-sc-affine-finite-module-free-locus (Noetherian A, M finite, all M_p finite free => f_1..f_n generating (1) with M_{f_i} free) is true: Tag 0GWM pointwise plus quasi-compactness of Spec A; tested M=A^r, M=0, and M=(x,y) in k[x,y] (not free at the origin, hypothesis fails); no exact Mathlib/slopmaster2 statement (Module.FinitePresentation.exists_free_localizedModule_powers and freeLocus_eq_univ_iff at Mathlib/RingTheory/Spectrum/Prime/FreeLocus.lean:154 are pointwise/projective forms), so unsplit is right. Steps: step 1 carried by pqf-lem-coherent-ft-locnoeth, pqf-def-locnoeth, lem-weil-pbc-quasi-coherent-finite-type-affine(c), lem-weil-pbc-affine-tilde-gamma-adjunction(3); step 2 by lem-weil-pbc-spec-tilde-stalk-localization and the new node; step 3 elementary gluing of covers. Tool uses pqf-lem-coherent-ft-locnoeth and lem-weil-pbc-quasi-coherent-finite-type-affine accepted as generic black boxes (C8). FIX more, RETURN less: (1) dag/nodes/sec-picard-framework/lem-sc-coherent-free-stalks-locally-free.json: proof step 1 text/uses: C4, pqf-def-locnoeth only gives a covering by Noetherian affines, not that every affine open has Noetherian ring; step now works on the covering U_i (step 3 text adjusted to cover by the U_i); C1, F|_U = tilde of Gamma(U,F) used with no node, now cites lem-weil-pbc-affine-tilde-gamma-adjunction(3); (2) same file step 2 uses: C1, stalk F_x = M_p now cites lem-weil-pbc-spec-tilde-stalk-localization; proof_deps updated to the union; (3) dag/nodes/sec-picard-framework/lem-sc-affine-finite-module-free-locus.json: statement/stmt_deps: B3, 'Noetherian ring' cited pqf-def-locnoeth (a scheme definition, absent from stmt_deps) -> def-weil-pbc-noetherian-ring; widetilde M now cites lem-weil-pbc-spec-module-tilde-sections; both added to stmt_deps. Not fixed (maintainer field): new node source.place names 01XZ label as coherent-lemma-quasi-coherent, actual label coherent-lemma-coherent-Noetherian. Start Sat Oct 10 03:43:06 PM UTC 2026, end Sat Oct 10 03:44:34 PM UTC 2026.; 2 file(s) fixed by the reviewer"
+ }
 }

@@ -1,0 +1,71 @@
+{
+ "id": "lem-sc-affine-finite-module-free-locus",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-riemann-roch",
+   "place": "The torsion-free quotient: a coherent module with free stalks is locally free",
+   "via": [
+    "lem-sc-coherent-free-stalks-locally-free",
+    "lem-sc-regular-curve-torsionfree-free"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Finite modules free at all primes are locally free on an affine cover",
+ "statement": "Let $A$ be a Noetherian ring [def-weil-pbc-noetherian-ring] and let $M$ be a finite $A$-module [def-weil-finitely-generated-module]. If for every prime ideal $\\mathfrak p$ of $A$ the localization $M_{\\mathfrak p}$ is a finite free $A_{\\mathfrak p}$-module [def-weil-pbc-free-module], then there are finitely many elements $f_1,\\ldots,f_n\\in A$ generating the unit ideal such that each localization $M_{f_i}$ is a finite free $A_{f_i}$-module. Equivalently, the quasi-coherent sheaf $\\widetilde M$ on $\\operatorname{Spec}(A)$ [def-pc-scheme, lem-weil-pbc-spec-module-tilde-sections] is finite locally free.",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Tag 0GWM (algebra-lemma-finitely-presented-localization-free), together with Tag 01XZ (coherent-lemma-quasi-coherent) for finite presentation on Noetherian affines"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-finitely-generated-module",
+  "def-weil-pbc-free-module",
+  "def-weil-pbc-noetherian-ring",
+  "lem-weil-pbc-spec-module-tilde-sections"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "finitely presented module that is free at every localization is locally free on principal opens",
+   "results": "HTTP 500 from LeanSearch service; no results returned",
+   "date": "2026-10-10",
+   "verdict": "service unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "finitely presented module free at every prime locally free",
+   "results": "Module.FinitePresentation.exists_free_localizedModule_powers; Module.mem_freeLocus; Module.freeLocus_eq_univ_iff in Mathlib.RingTheory.Localization.Free and Mathlib.RingTheory.Spectrum.Prime.FreeLocus",
+   "date": "2026-10-10",
+   "verdict": "generalization: affine module localization ingredients, no sheaf statement"
+  },
+  {
+   "tool": "loogle",
+   "query": "Module.FinitePresentation",
+   "results": "Module.FinitePresentation and related declarations in Mathlib.Algebra.Module.FinitePresentation; no complete affine-cover theorem",
+   "date": "2026-10-10",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "rg 'exists_free_localizedModule_powers|freeLocus_eq_univ|finite.*free' Mathlib/RingTheory/Spectrum/Prime Mathlib/RingTheory/Localization",
+   "results": "Localization/Free.lean:78 and Spectrum/Prime/FreeLocus.lean:160,224,571; no theorem stated for quasi-coherent sheaves",
+   "date": "2026-10-10",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "created": {
+  "item": "lem-sc-coherent-free-stalks-locally-free",
+  "by": "worker",
+  "date": "2026-10-10"
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-rr"
+}
