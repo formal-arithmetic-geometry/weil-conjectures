@@ -6,6 +6,7 @@ Authors: Claude
 module
 
 public import Mathlib.AlgebraicGeometry.Geometrically.Connected
+public import WeilConjectures.SixFunctors.ProEtale.Adic.TrivialRepresentation
 public import WeilConjectures.WeilSheaf.Cohomology
 public import WeilConjectures.WeilSheaf.Constant
 public import WeilConjectures.WeilSheaf.LowerStar
@@ -134,8 +135,45 @@ needed. -/
 theorem finrank_cohomology_zero_adicConstant
     [GeometricallyConnected (X ↘ Spec (CommRingCat.of k₀))] :
     Module.finrank (PadicAlgCl l) ((adicConstant k₀ l X).cohomology 0).carrier =
-      1 :=
-  sorry
+      1 := by
+  set a := X ↘ Spec (CommRingCat.of k₀)
+  set Xb := a.geometricFiber
+  -- `𝓗⁰(Ra_* ℚ̄_ℓ) ≅ a_* ℚ̄_ℓ`, `a_*` being left exact
+  let e₁ : (WeilComplex.homologySheaf 0).obj ((WeilComplex.derivedLowerStar a).obj
+      (toComplex.obj (adicConstant k₀ l X))) ≅ (lowerStar a).obj (adicConstant k₀ l X) :=
+    ObjectProperty.isoMk _
+      ((ProEtaleWeilSheaf.lowerStar k₀ l a).homologyRightDerivedFunctorObjSingleFunctorIso
+          (adicConstant k₀ l X).obj 0 ≪≫
+        (ProEtaleWeilSheaf.lowerStar k₀ l a).rightDerivedZeroIsoSelf.app _)
+  let G : WeilSheaf k₀ l (Spec (CommRingCat.of k₀)) ⥤ WeilCoefficients.{u} l :=
+    ObjectProperty.ι _ ⋙ Endofunctor.IsoAlgebra.forget _ ⋙ ProEtale.AdicSheaf.forget _ ⋙
+    Sheaf.Γ _ (WeilCoefficients.{u} l)
+  let e₂ : G.obj ((WeilComplex.homologySheaf 0).obj ((WeilComplex.derivedLowerStar a).obj
+      (toComplex.obj (adicConstant k₀ l X)))) ≅
+      ModuleCat.of _ (ULift.{u + 1} (PadicAlgCl.locallyFiniteFunctions l Xb)) :=
+    G.mapIso e₁ ≪≫
+      (ProEtale.globalSectionsLowerStarIso _ (Scheme.Hom.geometricFiberMap a (comp_over a _))).app
+        (ProEtale.adicConstantSheaf l Xb) ≪≫
+      (Sheaf.ΓNatIsoSheafSections _ _ (Scheme.ProEt.isTerminalMkId Xb)).app
+        (ProEtale.adicConstantSheaf l Xb)
+  have : Subsingleton (Scheme.specAlgebraicClosure k₀).left :=
+    inferInstanceAs (Subsingleton (Spec (CommRingCat.of (AlgebraicClosure k₀))))
+  have : Nonempty (Scheme.specAlgebraicClosure k₀).left :=
+    inferInstanceAs (Nonempty (Spec (CommRingCat.of (AlgebraicClosure k₀))))
+  have : ConnectedSpace Xb := GeometricallyConnected.connectedSpace_of_subsingleton
+    (f := Limits.pullback.snd a (Scheme.specAlgebraicClosure k₀).hom)
+  let e₃ : (WeilCoefficients.toModuleCat l).obj
+      (ModuleCat.of _ (ULift.{u + 1} (PadicAlgCl.locallyFiniteFunctions l Xb))) ≃ₗ[PadicAlgCl l]
+      PadicAlgCl.locallyFiniteFunctions l Xb :=
+    { toFun x := x.down
+      invFun x := ULift.up x
+      map_add' _ _ := rfl
+      map_smul' _ _ := rfl
+      left_inv _ := rfl
+      right_inv _ := rfl }
+  exact ((WeilCoefficients.linearEquivOfIso e₂).trans
+    (e₃.trans (PadicAlgCl.locallyFiniteFunctionsEquiv l Xb).toLinearEquiv)).finrank_eq.trans
+    (Module.finrank_self _)
 
 /-- Blueprint `prop-cohomological-finiteness`: Compact-support finiteness and Frobenius.
 
