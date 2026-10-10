@@ -3,7 +3,7 @@
  "blueprint": {
   "is": "lem-kun-finite-closed-subscheme",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "Closed subsets consisting of closed points",
@@ -13,24 +13,74 @@
   "place": "node lem-kun-finite-closed-subscheme, order 1704"
  },
  "stmt_deps": [
-  "def-kun-support"
+  "def-pc-scheme",
+  "def-weil-finite-type-morphism"
  ],
  "proof": [
   {
-   "text": "A scheme of finite type over a field is Noetherian, so a closed subset\n$E\\subseteq X$ has finitely many irreducible components\n$E_1,\\ldots,E_n$. Write $\\eta_j$ for the generic point of\n$E_j$; by hypothesis $\\eta_j$ is a closed point, so\n$E_j=\\overline{\\{\\eta_j\\}}=\\{\\eta_j\\}$, whence $E$ is a finite set\nof points.",
-   "uses": [],
-   "elementary": null
+   "text": "Let $E\\subseteq X$ be the given closed subset. Since $K$ is a field, $\\operatorname{Spec}K$ is Noetherian. The structure morphism $X\\to\\operatorname{Spec}K$ is of finite type, so [lem-weil-pbc-finite-type-over-noetherian] implies that $X$ is a Noetherian scheme.",
+   "uses": [
+    "lem-weil-pbc-finite-type-over-noetherian"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Lemma 01T6 (lemma-finite-type-noetherian), with the Noetherianity of Spec K"
+   }
+  },
+  {
+   "text": "Apply [lem-sc-noetherian-closed-points-finite] to the Noetherian scheme $X$ and the closed subset $E$. Its hypothesis that every point of $E$ is closed is exactly the hypothesis here, so it concludes that $E$ is finite.",
+   "uses": [
+    "lem-sc-noetherian-closed-points-finite"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/properties.tex",
+    "place": "Lemma 0BA8 (properties-lemma-Noetherian-irreducible-components), first paragraph"
+   }
   }
  ],
- "proof_deps": [],
+ "proof_deps": [
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-sc-noetherian-closed-points-finite"
+ ],
  "proof_origin": {
-  "by": "agent",
-  "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-kunneth-ordinary/lem-kun-finite-closed-subscheme.md",
-  "place": "## Proof"
+  "by": "document",
+  "document": "literature/stacks-project/properties.tex",
+  "place": "Lemma 0BA8, using Morphisms Lemma 01T6"
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "a closed subset of a finite type scheme over a field all of whose points are closed is finite",
+   "results": "AlgebraicGeometry.isClosed_singleton_iff_locallyOfFiniteType; no declaration stating the full finiteness conclusion",
+   "date": "2026-10-11",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "NoetherianSpace.finite_irreducibleComponents IsNoetherian",
+   "results": "Unknown identifier NoetherianSpace.finite_irreducibleComponents; no result",
+   "date": "2026-10-11",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "finite.*closed.*point|closed.*point.*finite in Mathlib/AlgebraicGeometry and Mathlib/Topology",
+   "results": "no matching declaration",
+   "date": "2026-10-11",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "finite type scheme over a field is Noetherian and a closed subset whose points are all closed is finite",
+   "results": "service unavailable",
+   "date": "2026-10-11",
+   "verdict": "unavailable"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [],
  "blueprint_kind": "lemma",
@@ -55,5 +105,34 @@
   }
  },
  "chapter": "sec-smooth-purity",
- "unit": "sk-prop-sf-kunneth-ordinary"
+ "unit": "sk-prop-sf-kunneth-ordinary",
+ "split_report": {
+  "date": "2026-10-11",
+  "item": "lem-kun-finite-closed-subscheme",
+  "worker": "stage1",
+  "summary": "Removed the unrelated support dependency and split the proof into finite type over a field implies Noetherian, followed by the existing general theorem that a closed subset of a Noetherian scheme consisting of closed points is finite. No new nodes were needed; both cited statements were read and match the steps.",
+  "blueprint": "Realizes the blueprint node's ## Proof sentence: finite type over a field is Noetherian, then finitely many irreducible components collapse to closed generic points.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-finite-type-over-noetherian",
+    "why": "The first step uses its finite-type-over-Noetherian conclusion to establish that X is Noetherian."
+   },
+   {
+    "node": "lem-sc-noetherian-closed-points-finite",
+    "why": "The second step uses its exact conclusion for a closed subset of a Noetherian scheme all of whose points are closed."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-sc-noetherian-closed-points-finite"
+ ],
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-fcs2938",
+  "group": "J1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-fcs2938 (reviewer sub-agent of L); spot-checked: Step 1: lem-weil-pbc-finite-type-over-noetherian applies (Spec K Noetherian, X->Spec K finite type) (C1/C4/E ok). Step 2: lem-sc-noetherian-closed-points-finite statement matches exactly, closed subset needs no scheme structure there; that node was created from lem-sc-component-intersections-finite and depends on lem-sc-noetherian-closed-subset-finite-components, lem-sc-scheme-sober, so no cycle (D ok). Statement text unchanged; only stmt_deps drops unrelated def-kun-support. Citers lem-kun-0f1h/lem-kun-cp-approximation use it with E=X, consistent (C4). Mathlib grep closedPoints+finite in AlgebraicGeometry: no exact match. No new nodes. Second reading missed no fault."
+ }
 }
