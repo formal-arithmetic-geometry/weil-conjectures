@@ -22,9 +22,55 @@
   "def-sp-acyclic",
   "def-sp-left-exact-additive"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Choose an injective resolution $M\\to I^\\bullet$ in $\\mathcal A$ [def-sp-injective-resolutions]. Since $T$ is exact, applying it to the augmented exact sequence gives an exact sequence $0\\to T(M)\\to T(I^0)\\to T(I^1)\\to\\cdots$. Thus $T(I^\\bullet)$ is a resolution of $T(M)$, bounded below and with the same degrees as $I^\\bullet$; its terms need not be injective in $\\mathcal B$.",
+   "uses": [
+    "def-sp-injective-resolutions"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Lemma 015M (derived-lemma-compose-derived-functors), proof: choose an injective resolution and apply the first functor"
+   }
+  },
+  {
+   "text": "By the hypothesis on $T$, every term $T(I^m)$ of the resolution in Step 1 is $U$-acyclic in the sense of [def-sp-acyclic]. Apply item 2 of [lemma-weil-pbc-leray-acyclicity] with $v=U$, $F=T(M)$ and the resolution $T(M)\\to T(I^\\bullet)$. Its natural comparison gives $R^iU(T(M))\\cong\\mathcal H^i(U(T(I^\\bullet)))$ for every $i\\geq0$; it does not require $T(I^m)$ to be injective.",
+   "uses": [
+    "def-sp-acyclic",
+    "lemma-weil-pbc-leray-acyclicity"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Lemma 015M (derived-lemma-compose-derived-functors), proof, final appeal to Lemma 015E (derived-lemma-leray-acyclicity)"
+   }
+  },
+  {
+   "text": "The composite $U\\circ T$ is left exact: $T$ preserves kernels and finite biproducts because it is exact, and $U$ preserves them by left exactness [def-sp-left-exact-additive]. Computing its right derived functor with the chosen injective resolution gives $R^i(U\\circ T)(M)=\\mathcal H^i(U(T(I^\\bullet)))$. The comparison of Step 2 therefore gives the claimed isomorphism. The isomorphism is the natural map of item 2 of [lemma-weil-pbc-leray-acyclicity], induced by any morphism of complexes $T(I^\\bullet)\\to J^\\bullet$ over $\\mathrm{id}_{T(M)}$ into an injective resolution $T(M)\\to J^\\bullet$ [def-sp-injective-resolutions]; it is in this sense canonical, the derived functors on both sides being those of the convention of [def-sp-left-exact-additive].",
+   "uses": [
+    "def-sp-left-exact-additive",
+    "lemma-weil-pbc-leray-acyclicity",
+    "def-sp-injective-resolutions"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Lemma 015M (derived-lemma-compose-derived-functors), proof, displayed canonical comparison"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sp-injective-resolutions",
+  "def-sp-acyclic",
+  "lemma-weil-pbc-leray-acyclicity",
+  "def-sp-left-exact-additive"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/derived.tex",
+  "place": "Lemma 015M (derived-lemma-compose-derived-functors), using Lemma 015E (derived-lemma-leray-acyclicity)"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -49,12 +95,38 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-sc-ext-locally-free",
   "by": "worker",
   "date": "2026-10-10"
  },
  "chapter": "sec-picard-framework",
- "unit": "sk-thm-picard-duality"
+ "unit": "sk-thm-picard-duality",
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "lem-sc-ext-derived-composite",
+  "worker": "stage1",
+  "summary": "Split the corrected acyclicity-conditioned derived composite comparison using an injective resolution, exactness of T, and the existing Leray acyclicity criterion. Stacks 015M gives this comparison; the earlier counterexample to the version without acyclicity does not satisfy the present hypotheses.",
+  "blueprint": [
+   "lem-sc-ext-locally-free proof, standard homological algebra parenthetical: the higher derived functors of an exact functor followed by a left-exact functor are the derived functors of the latter evaluated after the exact functor, subject to the injective-image acyclicity hypothesis"
+  ],
+  "tool_uses": [
+   {
+    "node": "lemma-weil-pbc-leray-acyclicity",
+    "why": "Its general acyclic-resolution clause computes R^iU on the resolution T(M) to T(I^bullet); no node of the Picard-duality unit states that homological-algebra criterion."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lemma-weil-pbc-leray-acyclicity"
+ ],
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-edc",
+  "group": "M1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-edc (reviewer sub-agent of L); spot-checked: Source Stacks 015M (derived.tex lemma-compose-derived-functors) read with its proof: A,B,C abelian, F,G left exact, A and B enough injectives, F(I) G-acyclic for injective I; the restated item has the same hypotheses with T exact (hence left exact, RT=T) and its degreewise conclusion is the H^i of 015M(2) on an object. Statement true; the 14:35 Z/4 counterexample (forgetful, Hom_Z(Z/2,-)) is excluded since Ext^1_Z(Z/2,Z/4)=Z/2 is nonzero; T=0, T=id, U=id checked. Step 1: def-sp-injective-resolutions plus exactness of T (elementary). Step 2: item 2 of lemma-weil-pbc-leray-acyclicity with v=U, F=T(M), resolution T(I^bullet), hypotheses (I^m=0 for m<0, augmented exact, termwise acyclic) met. Step 3: left exactness of U o T and the formula of def-sp-left-exact-additive (A has enough injectives). Only split fields changed; no new nodes; tool use lemma-weil-pbc-leray-acyclicity accepted as generic tool (C8). FIX more, RETURN less: dag/nodes/sec-picard-framework/lem-sc-ext-derived-composite.json: proof[2].text/uses, proof_deps, split_report.tool_uses: removed the citation of lem-sp-derived-well-defined (C4: it is stated for Grothendieck abelian categories only, the item has only enough injectives); canonicity now taken from the natural map of item 2 of lemma-weil-pbc-leray-acyclicity, def-sp-injective-resolutions added to uses; tool use dropped. Start Sat Oct 10 03:38:03 PM UTC 2026, end Sat Oct 10 03:38:46 PM UTC 2026.; 1 file(s) fixed by the reviewer"
+ }
 }
