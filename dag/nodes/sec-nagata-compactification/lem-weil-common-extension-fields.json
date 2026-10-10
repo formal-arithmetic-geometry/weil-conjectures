@@ -22,9 +22,62 @@
  "stmt_deps": [
   "def-pc-field-extension"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Regard $E$ and $F$ as $k$-algebras through their field-extension structures and put $T=E\\otimes_kF$. The canonical factor maps $E\\to T$ and $F\\to T$ are injective by [lem-weil-common-extension-fields-tensor-inclusions].",
+   "uses": [
+    "lem-weil-common-extension-fields-tensor-inclusions"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/fields.tex",
+    "place": "Fields, Lemma 9.2, tag 0H7K (construction via tensor product)"
+   }
+  },
+  {
+   "text": "Since $E$ and $F$ are fields, they are domains, so [lem-weil-common-extension-fields-tensor-nontrivial] gives that $T$ is nontrivial.",
+   "uses": [
+    "lem-weil-common-extension-fields-tensor-nontrivial"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/fields.tex",
+    "place": "Fields, Lemma 9.2, tag 0H7K (nonzero tensor product)"
+   }
+  },
+  {
+   "text": "Choose a maximal ideal $I$ of $T$ using [lem-weil-common-extension-fields-maximal-ideal], and set $M=T/I$. By [lem-weil-common-extension-fields-quotient-field], $M$ is a field.",
+   "uses": [
+    "lem-weil-common-extension-fields-maximal-ideal",
+    "lem-weil-common-extension-fields-quotient-field"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/fields.tex",
+    "place": "Fields, Lemma 9.2, tag 0H7K (take a residue field of the tensor product)"
+   }
+  },
+  {
+   "text": "The quotient map $T\\to M$ composed with the two canonical factor maps gives $k$-algebra homomorphisms $E\\to M$ and $F\\to M$. Their kernels are ideals of the fields $E$ and $F$; each map sends $1$ to $1$, so its kernel is not the whole ring and therefore is zero. Hence these maps are $k$-field embeddings.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/fields.tex",
+    "place": "Fields, Lemma 9.2, tag 0H7K (induced embeddings)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-common-extension-fields-tensor-inclusions",
+  "lem-weil-common-extension-fields-tensor-nontrivial",
+  "lem-weil-common-extension-fields-maximal-ideal",
+  "lem-weil-common-extension-fields-quotient-field"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/fields.tex",
+  "place": "Fields, Lemma 9.2, tag 0H7K (fields-lemma-common-extension-field)"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -64,12 +117,28 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-weil-geometrically-connected-check-after-extension",
   "by": "worker",
   "date": "2026-10-10"
  },
  "chapter": "sec-nagata-compactification",
- "unit": "sk-prop-nagata-sketch-comp-category"
+ "unit": "sk-prop-nagata-sketch-comp-category",
+ "split_report": {
+  "date": "2026-10-11",
+  "item": "lem-weil-common-extension-fields",
+  "worker": "stage1",
+  "summary": "Split the common-overfield lemma through the tensor product: the field factors inject into and make the tensor product nontrivial, a maximal ideal exists, and its quotient is a field; the induced unital maps from each factor are injective.",
+  "blueprint": "Realizes the common-field extension argument in the proof of lem-weil-geometrically-connected-check-after-extension.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-cef3129",
+  "group": "C1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-cef3129 (reviewer sub-agent of L); spot-checked: No single Mathlib decl states it (grep exists_common_extension/compositum: none; Subalgebra.LinearDisjoint.exists_field_of_isDomain_of_injective and IntermediateField.LinearDisjoint.exists_field_of_isDomain need IsDomain (E⊗F), not a match). Steps 1-4 checked against leaves read with sed: includeLeft/Right_injective Flat/Basic.lean:410/417 (flat+injective algebraMap hypotheses met), nontrivial_of_algebraMap_injective_of_isDomain TensorProduct/Nontrivial.lean:29, MaximalSpectrum Nonempty instance Spectrum/Maximal/Basic.lean:39 (via Ideal.exists_maximal), Ideal.Quotient.field Quotient/Basic.lean:145; Step 4 kernel/k-algebra-hom argument elementary and correct (C4 k-linearity holds). No repairs."
+ }
 }

@@ -2964,3 +2964,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 23:25 L: merged deliver/K1/lem-sp-cartan-eilenberg-double-complex-homotopy (reviewer FIX; after a return; new nodes: 2)
 - 23:26 L: returned deliver/E1/lem-pc-ring-pseudo-coherent-localization-glue (reviewer RETURN: 1. C4: Step 1 cites lem-sc-affine-standard-cover-finite-projective, whose hypothesis is that each N_{f_i} is finite FREE)
 - 23:27 L: merged deliver/G1/thm-sp-spectral-object-yields (reviewer PASS; after a return; new nodes: 1)
+- 23:27 L: merged deliver/C1/lem-weil-common-extension-fields (reviewer PASS; first push; new nodes: 4)
