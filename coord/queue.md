@@ -1,8 +1,8 @@
 # Work queue
 
-919 items; claim with `tools/claim.py next <group> [--stage N]`.
+921 items; claim with `tools/claim.py next <group> [--stage N]`.
 
-## Stage 1: nodes to split (622)
+## Stage 1: nodes to split (624)
 
 | node | distance to a target | Lean state on the done branch |
 |---|---|---|
@@ -25,7 +25,6 @@
 | `lem-weil-pbc-smooth-fibre-regular-local` | 1012 | none |
 | `lem-weil-pbc-smooth-localization-conormal-split` | 1012 | none |
 | `lem-weil-pbc-smooth-over-field-dimension-differentials` | 1012 | none |
-| `lem-weil-pbc-fs-adic-lift-over-finite-coefficient-map` | 1013 | none |
 | `lem-weil-pbc-global-complete-intersection-equidimensional` | 1013 | none |
 | `lem-weil-pbc-global-complete-intersection-local-regular-sequence` | 1013 | none |
 | `lem-weil-pbc-global-dimension-finite-modules-suffice` | 1013 | none |
@@ -106,15 +105,18 @@
 | `lem-weil-pbc-fpqc-descend-flat` | 1014 | none |
 | `lem-weil-pbc-fpqc-descend-locally-finite-presentation` | 1014 | none |
 | `lem-weil-pbc-fs-adic-field-geometrically-regular` | 1014 | none |
+| `lem-weil-pbc-fs-adic-lift-from-residue-field` | 1014 | none |
 | `lem-weil-pbc-fs-adic-lift-into-complete` | 1014 | none |
 | `lem-weil-pbc-fs-adic-local-flat` | 1014 | none |
 | `lem-weil-pbc-limit-tower-essentially-finite-presentation` | 1014 | none |
 | `lem-weil-pbc-local-ring-spec-limit-affine-neighbourhoods` | 1014 | none |
 | `lem-weil-pbc-nl-presentations-homotopy-equivalent` | 1014 | none |
 | `lem-weil-pbc-p-basis-differentials-basis` | 1014 | none |
+| `lem-weil-pbc-polynomial-ring-maximal-localization-dimension` | 1014 | none |
 | `lem-weil-pbc-torsion-module-flat-base-change-iso` | 1014 | none |
 | `lem-weil-pbc-torsion-submodule-flat-base-change-iso` | 1014 | none |
 | `lem-weil-pbc-two-term-homotopy-equivalence-direct-sum` | 1014 | none |
+| `lem-weil-pbc-well-ordered-union-projective-dimension` | 1014 | none |
 | `prop-weil-pbc-formal-glueing-equivalence` | 1014 | none |
 | `lem-weil-pbc-injective-acyclicity-bounded-below` | 2002 | sorry_here |
 | `lem-weil-pbc-property-implies-acyclicity` | 2003 | none |
@@ -931,7 +933,7 @@
 | `lem-weil-pbc-p1-field-dimension-one` | 4 | state |
 | `lem-weil-pbc-projective-space-zero-isomorphism` | 4 | state |
 
-Not open yet: 634 nodes that wait for stage 1, 573 nodes that wait for a statement dependency.
+Not open yet: 636 nodes that wait for stage 1, 574 nodes that wait for a statement dependency.
 
 ## Stage 3: modules to prove (0)
 
