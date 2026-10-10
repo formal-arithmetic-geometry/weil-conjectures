@@ -11,18 +11,63 @@
  },
  "kind": "statement",
  "title": "Spreading a finite separable extension over a localization",
- "statement": "Let A be a Noetherian integral domain with fraction field K and let K'/K be a finite separable field extension [def-pc-field-extension]. There is a nonzero c in A and a finite etale A[c^{-1}]-algebra A' [def-weil-etale-morphism] that is a domain with fraction field K'; consequently Spec(A') to Spec(A[c^{-1}]) is finite etale and surjective.",
+ "statement": "Let A be a Noetherian integral domain with fraction field K and let K'/K be a field extension [def-pc-field-extension] that is finite-dimensional as a K-vector space [def-weil-vector-space-dimension] and separable algebraic [def-weil-pbc-separable-algebraic-extension]. There is a nonzero c in A and a finite etale A[c^{-1}]-algebra A' [def-weil-etale-morphism] that is a domain with fraction field K'; consequently Spec(A') to Spec(A[c^{-1}]) is finite etale and surjective.",
  "source": {
   "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/lem-weil-pbc-finite-pushforward-generic-constructible.md",
   "place": "proof, finite-algebra calculation, spreading out the separable extension"
  },
  "stmt_deps": [
   "def-pc-field-extension",
+  "def-weil-vector-space-dimension",
+  "def-weil-pbc-separable-algebraic-extension",
   "def-weil-etale-morphism"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "By the primitive-element theorem, choose alpha in K' with K'=K(alpha). Let f in K[T] be the monic minimal polynomial of alpha. It has positive degree, is irreducible, and is separable because K'/K is separable. The existing minimal-polynomial quotient isomorphism identifies K[T]/(f) with K' and sends T to alpha.",
+   "uses": [
+    "lem-weil-pbc-finite-separable-primitive-element",
+    "lem-weil-pbc-minimal-polynomial-quotient-field-iso"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/fields.tex",
+    "place": "Fields, Lemma Tag 09GN and algebraic case of Tag 09G1"
+   }
+  },
+  {
+   "text": "Clear the finitely many denominators in the coefficients of f and in the coefficients of its derivative, and then invert one further nonzero element so that the discriminant of f is a unit. Thus for S=A[c^{-1}] the polynomial f lies in S[T], remains monic, and its derivative is a unit in S[T]/(f). The quotient A'=S[T]/(f) is finite free over S (basis 1,T,...,T^(deg f-1)), is a domain because it embeds into K' through T to alpha, and has fraction field K' because its localization at A\\{0} is K[T]/(f) = K'.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Lemma Tag 00UB (standard etale construction), denominator-clearing calculation"
+   }
+  },
+  {
+   "text": "The algebra A' is the standard etale algebra S[T][1/f']/(f), since f' is invertible modulo f; hence Spec(A') to Spec(S) is etale by [lem-weil-pbc-standard-etale-monic-derivative], and it is finite because A' is finite free over S by Step 2. For surjectivity: the map S to A' is injective, since A' is free over S with a basis containing 1 (deg f >= 1), and it is integral, since A' is a finite S-module. By [pqf-lem-lying-over] every prime of S is the contraction of a prime of A', so Spec(A') to Spec(S) is surjective.",
+   "uses": [
+    "lem-weil-pbc-standard-etale-monic-derivative",
+    "pqf-lem-lying-over"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Definition Tag 00UB and Lemma Tag 00UC; Lemma Tag 00GQ (lying over)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-finite-separable-primitive-element",
+  "lem-weil-pbc-minimal-polynomial-quotient-field-iso",
+  "lem-weil-pbc-standard-etale-monic-derivative",
+  "pqf-lem-lying-over"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Lemmas Tags 00UB, 00UC and finite-etale spreading calculation"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -54,12 +99,33 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-weil-pbc-generic-finite-algebra-splitting",
   "by": "worker",
   "date": "2026-10-10"
  },
  "chapter": "sec-smooth-purity",
- "unit": "sk-prop-sf-cbc"
+ "unit": "sk-prop-sf-cbc",
+ "split_report": {
+  "date": "2026-10-11",
+  "item": "lem-weil-pbc-spread-finite-separable-extension",
+  "worker": "stage1",
+  "summary": "Split the proof into primitive-element selection, denominator clearing and the standard-etale plus surjectivity conclusion. The only new node is the Mathlib primitive-element leaf; existing DAG leaves supply the minimal-polynomial quotient and standard-etale construction.",
+  "blueprint": "Realizes the parent proof's finite-algebra calculation clause 'spreading out the separable extension'.",
+  "tool_uses": []
+ },
+ "tool_uses": [
+  "lem-weil-pbc-standard-etale-monic-derivative",
+  "lem-weil-pbc-minimal-polynomial-quotient-field-iso",
+  "pqf-lem-lying-over"
+ ],
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-sfe3008",
+  "group": "H1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-sfe3008 (reviewer sub-agent of L); spot-checked: Math true: primitive element, min poly f, invert denominators and disc(f) so f in S[T] monic with f' unit mod f; S[T]/(f) finite free, domain via embedding in K[T]/(f)=K' (free bases), Frac K'; standard etale leaf gives etale. Noetherian hypothesis unused (harmless; statement is what M1 step 2 uses, C4 ok). Leaf Field.exists_primitive_element read at PrimitiveElement.lean:209, exact ([FiniteDimensional][Algebra.IsSeparable]). FIX more, RETURN less: (1) C1 missed by Second reading: Step 3 surjectivity used uncited 'finite morphisms are closed, etale morphisms are open'; replaced by S->A' injective (free, basis contains 1) and integral, then [pqf-lem-lying-over] (Tag 00GQ); finiteness of A' now explicitly from Step 2. (2) C7: standard-etale, min-poly-quotient leaves (unit sk-thm-p1) and pqf-lem-lying-over (sk-prop-av-pqf-finite) are generic tools, declared via --tool-uses. (3) B: primitive-element node source said Tag 09GN; corrected to Fields Tag 030N (lemma-primitive-element), my grep recorded.; 2 file(s) fixed by the reviewer"
+ }
 }
