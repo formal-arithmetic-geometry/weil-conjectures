@@ -1417,3 +1417,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 2026-10-10, delivery of F1: def-sc-divisor merged from deliver/F1/def-sc-divisor (1 commit(s), 1 new node(s), spot-checked by L: L: definition split (divisors, principal divisors via the DVR valuations of a smooth curve, Cl); new node for the finiteness of the support); claim closed
 - 12:31 L: merged F1 def-sc-divisor (definition, +1 node).
 - 12:31 L: accepted lem-weil-pbc-double-complex-row-cycle-lifts-to-zigzag (00M1 surjectivity, 5 steps, 0 new). G1 re-pushed lem-galois-transitive as the Mathlib leaf before reading the return: left on its branch.
+- 12:32 L: accepted def-weil-pbc-semi-representable-object (definition split; 3 Mathlib leaves, matching object and coskeleton comparison nodes, the one-member bridge node, now cited by lem-weil-pbc-hypercover-refinement step 5).

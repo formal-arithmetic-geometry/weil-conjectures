@@ -3,7 +3,7 @@
  "blueprint": {
   "is": "thm-av-final",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "Abelian-variety estimate",
@@ -15,88 +15,91 @@
  "stmt_deps": [
   "def-sc-abelian-variety",
   "def-sc-isogeny",
-  "def-sc-mult-n"
+  "def-sc-mult-n",
+  "def-sc-group-scheme",
+  "def-weil-pbc-scheme-conventions",
+  "def-wf-abelian-tate-module"
  ],
  "proof": [
   {
-   "text": "*(a)* This is exactly [lem-sc-isogeny-facts], [lem-sc-mult-n-finite-flat]: $[n]$ is a\nhomomorphism ([lem-sc-mult-n-homomorphism] with [lem-sc-av-commutative]), has\nfinite fibres ([lem-sc-mult-n-finite-kernel]) and is surjective\n([lem-sc-mult-n-isogeny]), is flat with locally free pushforward of\nrank the order of its kernel ([lem-sc-isogeny-degree]), and its\ndegree is computed as $n^{2g}$ from\n$[n]^*\\cN\\cong\\cN^{\\otimes n^2}$ ([lem-sc-mult-n-pullback],\n[lem-sc-ample-tensor]) together with\n$\\deg_{[n]^*\\cN}(A)=\\deg[n]\\deg_{\\cN}(A)$\n([lem-sc-deg-pullback-finite]).",
+   "text": "*(a)* Let $n\\geq1$. By [lem-sc-av-commutative] $A$ is a commutative group scheme, so by [lem-sc-mult-n-homomorphism](a) the map $[n]$ of [def-sc-mult-n] is a homomorphism of group schemes, acting on $R$-points by $x\\mapsto nx$. By [lem-sc-mult-n-finite-flat] (over the arbitrary field $k$) $[n]$ is finite and flat, $[n]_*\\mathcal O_A$ is a locally free $\\mathcal O_A$-module of rank $n^{2g}$, and the kernel $A[n]=A\\times_{[n],A,e}\\operatorname{Spec}k$ is a finite group scheme of order $\\dim_k\\Gamma(A[n],\\mathcal O_{A[n]})=n^{2g}$ ([def-sc-group-scheme]). Surjectivity: for $y\\in A$ the fibre $[n]^{-1}(y)$ is $\\operatorname{Spec}\\bigl(([n]_*\\mathcal O_A)_y\\otimes\\kappa(y)\\bigr)$, the spectrum of a $\\kappa(y)$-algebra of dimension $n^{2g}\\geq1$, which is a nonzero ring and so has a prime ideal; hence the fibre is nonempty. So $[n]$ is a surjective homomorphism with finite kernel, i.e. an isogeny in the sense of [def-sc-isogeny], whose degree, the order of its kernel, is $n^{2g}$. Finally $A[n]$ is flat over $k$ because every module over a field is free. (Stacks, Groupoids, Proposition 03RP parts (3) and (5), from Lemma 0BFG; the degree computation through $[n]^*\\mathcal N\\cong\\mathcal N^{\\otimes n^2}$ for a symmetric ample $\\mathcal N$ is the proof of [lem-sc-mult-n-finite-flat].)",
    "uses": [
-    "lem-sc-isogeny-facts",
-    "lem-sc-mult-n-finite-flat",
-    "lem-sc-mult-n-homomorphism",
     "lem-sc-av-commutative",
-    "lem-sc-mult-n-finite-kernel",
-    "lem-sc-mult-n-isogeny",
-    "lem-sc-isogeny-degree",
-    "lem-sc-mult-n-pullback",
-    "lem-sc-ample-tensor",
-    "lem-sc-deg-pullback-finite"
+    "lem-sc-mult-n-homomorphism",
+    "lem-sc-mult-n-finite-flat",
+    "def-sc-mult-n",
+    "def-sc-group-scheme",
+    "def-sc-isogeny"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/groupoids.tex",
+    "place": "Proposition 03RP (proposition-review-abelian-varieties), proof of parts (3) and (5); Lemma 0BFG (lemma-degree-multiplication-by-d)"
+   }
   },
   {
-   "text": "*(b)* The first clause is (a) with $n=p^e$. For the second,\n$A[n]$ is finite flat of order $n^{2g}$ by (a); write\n$G=A[n]$ and let $\\bar k$ be an algebraic closure of $k$. Then\n$G_{\\bar k}=A_{\\bar k}[n]$ is a finite flat group scheme over $\\bar k$\nof order $n^{2g}$, prime to $p$, so it is étale over $\\bar k$ by\n[lem-sc-fg-order-prime-etale] (for $p>0$: the identity component\n$(G_{\\bar k})^0$ is a connected finite flat group scheme, so its order\nis a power of $p$ by [lem-sc-connected-finite-order] and divides\n$n^{2g}$, whence $(G_{\\bar k})^0=\\Spec\\bar k$; every connected\ncomponent of $G_{\\bar k}$ is a translate of $(G_{\\bar k})^0$ by a\n$\\bar k$-point, so $G_{\\bar k}$ is reduced, hence étale over the\nalgebraically closed $\\bar k$; for $p=0$ this is Cartier's theorem).\nFinally étaleness descends to $k$: $G$ is flat over $k$ and\n$\\Omega_{G/k}\\otimes_k\\bar k\\cong\\Omega_{G_{\\bar k}/\\bar k}=0$, so\n$\\Omega_{G/k}=0$ and $G$ is étale over $k$. (The passage to\n$\\bar k$ is needed: over an imperfect $k$ a finite reduced $k$-scheme\nneed not be étale, so one cannot conclude directly from\n$G^0=\\Spec k$.)",
+   "text": "*(b)* First clause: for $p>0$ and $e\\geq1$ apply (a) with $n=p^e$: $A[p^e]$ is a finite flat group scheme of order $(p^e)^{2g}=p^{2ge}$. Second clause: let $n\\geq1$ with $p\\nmid n$ (for $p=0$ every $n\\geq1$). By (a), $A[n]$ is a finite flat group scheme over $k$ of order $n^{2g}$, and $p\\nmid n^{2g}$ since $p$ is prime (or $p=0$ and $n^{2g}\\neq0$). By [lem-sc-mult-n-etale-kernel] (over the arbitrary field $k$, with $\\operatorname{char}k\\nmid n$) $A[n]$ is étale over $k$; being finite of order $n^{2g}$, it is finite étale of rank $n^{2g}$ ([def-sc-group-scheme]). (The unit's argument for the étaleness, base change to $\\bar k$, [lem-sc-fg-order-prime-etale] there and descent of étaleness, is the proof of [lem-sc-mult-n-etale-kernel]; in the Lean this is `AlgebraicGeometry.etale_torsionSubgroupScheme`, from `etale_of_not_dvd_finrankΓ` over any field.)",
    "uses": [
-    "lem-sc-fg-order-prime-etale",
-    "lem-sc-connected-finite-order"
+    "lem-sc-mult-n-etale-kernel",
+    "def-sc-group-scheme"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/groupoids.tex",
+    "place": "Proposition 03RP, proof of part (6): 'if n is invertible in k, then [n] is étale and hence A[n] is étale over k' (Lemma 0BFH)"
+   }
   },
   {
-   "text": "*(c)* Assume $k$ algebraically closed and $n$ prime to $p$. By\n(b), $A[n]$ is finite étale of order $n^{2g}$, so\n$\\lvert A[n](k)\\rvert=n^{2g}$ and $A[n](k)\\to A[n](k')$ is bijective\nby [lem-sc-finite-etale-points]. The group structure\n$(\\Z/n\\Z)^{2g}$ is the content of [lem-sc-ntorsion-etale]: the\nprime-power case follows from divisibility of $A(k)$\n([lem-sc-finite-flat-surj-points], [lem-sc-finite-nonempty-point], [lem-sc-isogeny-surjective]) and the structure theorem for torsion of a\ndivisible group ([lem-sc-divisible-group-structure]), and the general case\nfrom the Chinese remainder theorem applied to the coprime-order\nsubgroup schemes $A[\\ell_i^{e_i}]$.",
+   "text": "*(c)* Let $k$ be algebraically closed and $p\\nmid n$. By (b), $A[n]$ is a finite étale group scheme over $k$ of order $n^{2g}$, so by [lem-sc-finite-etale-points] $\\lvert A[n](k)\\rvert=n^{2g}$ and, for every extension $k\\subseteq k'$ of algebraically closed fields, the canonical map $A[n](k)\\to A[n](k')$ is bijective; it is a group homomorphism (composition with $\\operatorname{Spec}k'\\to\\operatorname{Spec}k$ respects the group law on points), hence an isomorphism. The group structure $A[n](k)\\cong(\\mathbf Z/n\\mathbf Z)^{2g}$ is [lem-sc-ntorsion-etale] (whose proof is the unit's: divisibility of $A(k)$, [lem-sc-divisible-group-structure] on each prime power $\\ell^e\\,\\|\\,n$, and the Chinese remainder theorem).",
    "uses": [
     "lem-sc-finite-etale-points",
-    "lem-sc-ntorsion-etale",
-    "lem-sc-finite-flat-surj-points",
-    "lem-sc-finite-nonempty-point",
-    "lem-sc-isogeny-surjective",
-    "lem-sc-divisible-group-structure"
+    "lem-sc-ntorsion-etale"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/groupoids.tex",
+    "place": "Proposition 03RP, proof of part (7)"
+   }
   },
   {
-   "text": "*(d)* Still with $k$ algebraically closed:\n$A(k)$ is abelian by [lem-sc-av-commutative] and divisible by\n[lem-sc-finite-flat-surj-points], [lem-sc-finite-nonempty-point], [lem-sc-isogeny-surjective]; and $A(k)[n]\\cong(\\Z/n\\Z)^{2g}$ for $n$ prime to\n$p$ is clause (c). For the Tate module, each level\n$A[\\ell^n](k)\\cong(\\Z/\\ell^n\\Z)^{2g}$ by (c) and the transition maps\nare surjective by [lem-sc-finite-flat-surj-points], [lem-sc-finite-nonempty-point], [lem-sc-isogeny-surjective], so the inverse limit\n$T_\\ell A$ of [def-wf-abelian-tate-module] is $\\Z_\\ell^{2g}$; this is\n[prop-av-tate-rank], and $V_\\ell A=T_\\ell A\\otimes\\Q_\\ell$.",
+   "text": "*(d)* Let $k$ be algebraically closed. The group $A(k)$ is abelian by [lem-sc-av-commutative] and divisible by [lem-sc-isogeny-surjective] ($x\\mapsto nx$ is surjective on $A(k)$ for every $n\\geq1$). For $n\\geq1$ the $k$-points of $A[n]=A\\times_{[n],A,e}\\operatorname{Spec}k$ ([def-sc-mult-n]) are the $a\\in A(k)$ with $[n](a)=e$, i.e. with $na=0$ by [lem-sc-mult-n-homomorphism](a); so $A(k)[n]=A[n](k)$, which for $p\\nmid n$ is $\\cong(\\mathbf Z/n\\mathbf Z)^{2g}$ by (c). For a prime $\\ell\\neq p$, $T_\\ell A\\cong\\mathbf Z_\\ell^{2g}$ and $V_\\ell A\\cong\\mathbf Q_\\ell^{2g}$ for the Tate modules of [def-wf-abelian-tate-module] is [prop-av-tate-rank].",
    "uses": [
     "lem-sc-av-commutative",
-    "lem-sc-finite-flat-surj-points",
-    "lem-sc-finite-nonempty-point",
     "lem-sc-isogeny-surjective",
+    "def-sc-mult-n",
+    "lem-sc-mult-n-homomorphism",
     "def-wf-abelian-tate-module",
     "prop-av-tate-rank"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/groupoids.tex",
+    "place": "Proposition 03RP, proof of parts (2), (4) and (7) ('A[ℓ](k) = A(k)[ℓ]'); the Tate module clause from prop-av-tate-rank"
+   }
   }
  ],
  "proof_deps": [
-  "lem-sc-isogeny-facts",
-  "lem-sc-mult-n-finite-flat",
-  "lem-sc-mult-n-homomorphism",
   "lem-sc-av-commutative",
-  "lem-sc-mult-n-finite-kernel",
-  "lem-sc-mult-n-isogeny",
-  "lem-sc-isogeny-degree",
-  "lem-sc-mult-n-pullback",
-  "lem-sc-ample-tensor",
-  "lem-sc-deg-pullback-finite",
-  "lem-sc-fg-order-prime-etale",
-  "lem-sc-connected-finite-order",
+  "lem-sc-mult-n-homomorphism",
+  "lem-sc-mult-n-finite-flat",
+  "def-sc-mult-n",
+  "def-sc-group-scheme",
+  "def-sc-isogeny",
+  "lem-sc-mult-n-etale-kernel",
   "lem-sc-finite-etale-points",
   "lem-sc-ntorsion-etale",
-  "lem-sc-finite-flat-surj-points",
-  "lem-sc-finite-nonempty-point",
   "lem-sc-isogeny-surjective",
-  "lem-sc-divisible-group-structure",
   "def-wf-abelian-tate-module",
   "prop-av-tate-rank"
  ],
  "proof_origin": {
-  "by": "agent",
-  "document": "literature/blueprint/master/blueprint/sec-abelian-varieties/sk-thm-av-final/thm-av-final.md",
-  "place": "## Proof"
+  "by": "document",
+  "document": "literature/stacks-project/groupoids.tex",
+  "place": "Stacks Project, Groupoid Schemes, Proposition 03RP (proposition-review-abelian-varieties) with Lemmas 0BFG and 0BFH, parts (2)-(7); the Tate-module clause of (d) follows the blueprint (prop-av-tate-rank), as does the arrangement into clauses (a)-(d) of literature/blueprint/master/blueprint/sec-abelian-varieties/sk-thm-av-final/thm-av-final.md"
  },
  "mathlib_searches": [],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [
   "cites_outside_uses",
@@ -296,5 +299,12 @@
   }
  },
  "chapter": "sec-abelian-varieties",
- "unit": "sk-thm-av-final"
+ "unit": "sk-thm-av-final",
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "thm-av-final",
+  "worker": "stage1",
+  "summary": "Split along the slopmaster2 Lean, where AlgebraicGeometry.abelianVariety_estimate and abelianVariety_estimate_of_isAlgClosed (Final.lean) are conjunctions of eleven lemmas, each of which already has a DAG node: isIsogeny_npow_id, isogenyDegree_npow_id, finrankΓ_torsionSubgroupScheme, isFinite_torsionSubgroupScheme -> lem-sc-mult-n-finite-flat (any field; lem-sc-isogeny-facts states only the algebraically closed case and is not used); flat_torsionSubgroupScheme -> elementary (flat over a field; sorry-free in Lean); etale_torsionSubgroupScheme -> lem-sc-mult-n-etale-kernel; bijective_toUnit_comp_torsionSubgroupScheme, nonempty_addEquiv_torsionBy -> lem-sc-ntorsion-etale (with the closed lem-sc-finite-etale-points); surjective_npow_points -> lem-sc-isogeny-surjective; nonempty_linearEquiv_tateModule / rationalTateModule -> prop-av-tate-rank. Steps checked against Stacks 03RP and its proof (parts (2)-(7)), Lemmas 0BFG, 0BFH. Changes: stmt_deps gains def-sc-group-scheme (finite, order, étale, kernel), def-weil-pbc-scheme-conventions (finite, flat, surjective, étale morphisms) and def-wf-abelian-tate-module (T_ℓ, V_ℓ); the old steps cited nodes of units sk-prop-av-mult-finite, sk-prop-av-mult-surjective, sk-prop-av-mult-n-pullback, sk-prop-av-symmetric-ample, sk-prop-av-deg-pullback (outside this unit's uses; they are the route of sk-prop-av-isogeny) and lem-sc-finite-flat-surj-points, lem-sc-finite-nonempty-point (the proof of lem-sc-isogeny-surjective); these are now reached through lem-sc-mult-n-finite-flat and lem-sc-isogeny-surjective. Surjectivity of [n] is written out from positive rank, A(k)[n]=A[n](k) from the definition of the kernel. The ten open declarations of lean_audit are not used by any step of this item: each is reached only through the children (lem-sc-mult-n-finite-flat, lem-sc-mult-n-etale-kernel, lem-sc-ntorsion-etale, lem-sc-isogeny-surjective, prop-av-tate-rank), which carry the same open lists and are items themselves; no node was created here. Unit step 5 (the Jacobian instance) is a pointer with no mathematical content and is recorded as carried by the item itself.",
+  "blueprint": "Steps 1-4 realize the four clauses (a)-(d) of the proof of thm-av-final (= unit sk-thm-av-final steps 1-4): (a) 'This is exactly [lem-sc-isogeny-facts], [lem-sc-mult-n-finite-flat]' -> lem-sc-mult-n-finite-flat with lem-sc-mult-n-homomorphism, lem-sc-av-commutative, surjectivity written out; (b) 'The first clause is (a) with n=p^e' and the étaleness over k -> lem-sc-mult-n-etale-kernel; (c) 'by [lem-sc-finite-etale-points] ... the content of [lem-sc-ntorsion-etale]'; (d) 'abelian by [lem-sc-av-commutative] and divisible ...; this is [prop-av-tate-rank]'. The unit's fifth paragraph (Jacobian instance, not treated) has no proof content."
+ }
 }
