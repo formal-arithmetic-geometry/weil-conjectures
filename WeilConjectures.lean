@@ -837,6 +837,7 @@ public import WeilConjectures.Mathlib.CategoryTheory.Adjunction.Basic
 public import WeilConjectures.Mathlib.CategoryTheory.Adjunction.FullyFaithful
 public import WeilConjectures.Mathlib.CategoryTheory.Adjunction.Limits
 public import WeilConjectures.Mathlib.CategoryTheory.Adjunction.Mates
+public import WeilConjectures.Mathlib.CategoryTheory.Adjunction.MatesArrow
 public import WeilConjectures.Mathlib.CategoryTheory.Adjunction.Unique
 public import WeilConjectures.Mathlib.CategoryTheory.Comma.Arrow
 public import WeilConjectures.Mathlib.CategoryTheory.Comma.CardinalArrow

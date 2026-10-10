@@ -12,6 +12,7 @@ public import WeilConjectures.AlgebraicGeometry.Modules.ProjectionFormula
 public import WeilConjectures.AlgebraicGeometry.Modules.ZeroLocus
 public import WeilConjectures.AlgebraicGeometry.Picard.Representability
 public import WeilConjectures.AlgebraicGeometry.RelativeEffectiveCartier
+public import WeilConjectures.Mathlib.CategoryTheory.Adjunction.MatesArrow
 
 /-!
 # The zero-scheme dictionary and the representability of `F`
@@ -172,7 +173,33 @@ theorem nonempty_arrowIso_pullback_directImageCounit
         (Pic.directImageCounit (X ↘ Spec (.of k)) T ℒ.1.1)) ≅
       Arrow.mk (Pic.directImageCounit (X ↘ Spec (.of k)) T'
         (Pic.map (baseChangeMap (X ↘ Spec (.of k)) i) ℒ.1.1))) :=
-  sorry
+  by
+  let sT := Limits.pullback.snd (X ↘ Spec (.of k)) T.hom
+  let sT' := Limits.pullback.snd (X ↘ Spec (.of k)) T'.hom
+  let i' := baseChangeMap (X ↘ Spec (.of k)) i
+  have hw : sT' ≫ i.left = i' ≫ sT := (Limits.pullback.lift_snd _ _ _).symm
+  -- the square `i^* ⋙ f_{T'}^* ≅ f_T^* ⋙ i'^*` of pullbacks
+  let αi : Modules.pullback i.left ⋙ Modules.pullback sT' ≅
+      Modules.pullback sT ⋙ Modules.pullback i' :=
+    Modules.pullbackComp sT' i.left ≪≫ Modules.pullbackCongr hw ≪≫
+      (Modules.pullbackComp i' sT).symm
+  let α : TwoSquare (Modules.pullback i.left) (Modules.pullback sT) (Modules.pullback sT')
+    (Modules.pullback i') := αi.hom
+  let d := (fromSkeleton _).obj ℒ.1.1.val
+  have : IsIso (α.app ((Modules.pushforward sT).obj d)) :=
+    inferInstanceAs (IsIso (αi.app _).hom)
+  -- cohomology and base change for `F`: since `Rf_{T,*} ℒ ≅ 𝒩[0]` with `𝒩` invertible, the base
+  -- change morphism `i^* f_{T,*} ℒ ⟶ f_{T',*} i'^* ℒ`, the mate of `α`, is an isomorphism
+  have : IsIso ((mateEquiv (Modules.pullbackPushforwardAdjunction sT)
+      (Modules.pullbackPushforwardAdjunction sT') α).app d) :=
+    sorry
+  -- identify `i'^* ℒ` with the representative of its class
+  let e : (Modules.pullback i').obj d ≅ (fromSkeleton _).obj (Pic.map i' ℒ.1.1).val :=
+    (fromSkeletonToSkeletonIso _).symm
+  let adj := Modules.pullbackPushforwardAdjunction sT'
+  exact ⟨Adjunction.arrowIsoMapCounit (Modules.pullbackPushforwardAdjunction sT) adj α d ≪≫
+    Arrow.isoMk (((Modules.pullback sT').mapIso ((Modules.pushforward sT').mapIso e)))
+      e (adj.counit.naturality e.hom)⟩
 
 /-- **The zero-scheme dictionary is natural.** For `ℒ ∈ F(T)` and `i : T' ⟶ T`, the zero scheme
 of the adjunction morphism of `ℒ_{T'}` is the base change to `X_{T'}` of the zero scheme of the
