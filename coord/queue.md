@@ -2,7 +2,7 @@
 
 958 items; claim with `tools/claim.py next <group> [--stage N]`.
 
-## Stage 1: nodes to split (582)
+## Stage 1: nodes to split (579)
 
 | node | distance to a target | Lean state on the done branch |
 |---|---|---|
@@ -63,10 +63,7 @@
 | `lem-weil-pbc-fpqc-descend-universally-closed` | 1016 | none |
 | `lem-weil-pbc-localization-n2-domain` | 1016 | none |
 | `lem-weil-pbc-module-injects-localizations-associated-primes` | 1016 | none |
-| `lem-weil-pbc-normal-locus-open` | 1016 | none |
-| `lem-weil-pbc-power-series-universal-property-complete` | 1016 | none |
 | `lem-weil-pbc-sections-annihilated-by-ideal` | 1016 | none |
-| `lem-weil-pbc-associated-prime-localize-at-prime` | 1017 | none |
 | `lem-weil-pbc-associated-primes-exact-sequence` | 1017 | none |
 | `lem-weil-pbc-coherent-artin-rees` | 1017 | none |
 | `lem-weil-pbc-module-finite-type-surjective-on-stalk` | 1017 | none |
@@ -589,7 +586,7 @@
 | `def-exc-jacobian-presentation` | - | none |
 | `def-nagata-rees-algebra` | - | none |
 
-## Stage 2: nodes to state (376)
+## Stage 2: nodes to state (379)
 
 | node | distance to Mathlib | kind |
 |---|---|---|
@@ -627,6 +624,7 @@
 | `lem-weil-pbc-annihilator-localization-finite` | 1 | state |
 | `lem-weil-pbc-artinian-ideal-length-one-filtration` | 1 | state |
 | `lem-weil-pbc-artinian-local-essentially-finite-type-residue` | 1 | state |
+| `lem-weil-pbc-associated-prime-localize-at-prime` | 1 | state |
 | `lem-weil-pbc-associated-prime-power-quotient` | 1 | state |
 | `lem-weil-pbc-associated-primes-flat-base-change` | 1 | state |
 | `lem-weil-pbc-basis-sheaf-cofinal-coverings` | 1 | state |
@@ -827,6 +825,7 @@
 | `lem-weil-pbc-nonvanishing-section-trivializes` | 1 | state |
 | `lem-weil-pbc-nonzerodivisor-if-maximal-not-associated` | 1 | state |
 | `lem-weil-pbc-normal-extension-purely-inseparable-then-galois` | 1 | state |
+| `lem-weil-pbc-normal-locus-open` | 1 | state |
 | `lem-weil-pbc-ogoma` | 1 | state |
 | `lem-weil-pbc-p-basis-differentials-basis` | 1 | state |
 | `lem-weil-pbc-p-basis-exists` | 1 | state |
@@ -849,6 +848,7 @@
 | `lem-weil-pbc-power-series-onto-completion` | 1 | state |
 | `lem-weil-pbc-power-series-quotient-variables` | 1 | state |
 | `lem-weil-pbc-power-series-ring-subfields` | 1 | state |
+| `lem-weil-pbc-power-series-universal-property-complete` | 1 | state |
 | `lem-weil-pbc-power-set-complex-contractible` | 1 | state |
 | `lem-weil-pbc-prescribed-residue-basis-spreads` | 1 | state |
 | `lem-weil-pbc-presheaf-module-stalk-filtered-colimit` | 1 | state |
@@ -970,7 +970,7 @@
 | `lem-weil-pbc-p1-field-dimension-one` | 4 | state |
 | `lem-weil-pbc-projective-space-zero-isomorphism` | 4 | state |
 
-Not open yet: 593 nodes that wait for stage 1, 713 nodes that wait for a statement dependency.
+Not open yet: 590 nodes that wait for stage 1, 713 nodes that wait for a statement dependency.
 
 ## Stage 3: modules to prove (0)
 
