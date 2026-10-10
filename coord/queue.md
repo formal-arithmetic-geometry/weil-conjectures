@@ -26,7 +26,7 @@
 | `lem-sc-etale-affine-qcoherent` | 3007 | none |
 | `lem-sc-etale-zariski-qcoh-comparison` | 3007 | none |
 | `lem-exc-field-discrete-modules` | 3008 | none |
-| `lem-sc-generic-vanishing-acyclic` | 3008 | none |
+| `lem-sc-generic-vanishing-kernel-colimit` | 3009 | none |
 | `lem-sc-module-abelian-zariski-cohomology` | 3009 | none |
 | `lem-galois-fpqc-refinement-fully-faithful` | 3010 | none |
 | `lem-pc-cartier-divisor-nowhere-dense` | 3010 | none |
@@ -878,7 +878,7 @@
 | `lem-weil-pbc-p1-field-dimension-one` | 4 | state |
 | `lem-weil-pbc-projective-space-zero-isomorphism` | 4 | state |
 
-Not open yet: 337 nodes that wait for stage 1, 1028 nodes that wait for a statement dependency.
+Not open yet: 337 nodes that wait for stage 1, 1029 nodes that wait for a statement dependency.
 
 ## Stage 3: modules to prove (0)
 
