@@ -2,7 +2,7 @@
 
 886 items; claim with `tools/claim.py next <group> [--stage N]`.
 
-## Stage 1: nodes to split (105)
+## Stage 1: nodes to split (104)
 
 | node | distance to a target | Lean state on the done branch |
 |---|---|---|
@@ -32,9 +32,9 @@
 | `lem-sc-etale-triple-to-sh-completion-flat` | 4012 | none |
 | `lem-sc-etale-at-prime-flat-unramified-criterion` | 4013 | none |
 | `lem-sc-etale-local-ring-stalk-faithfully-flat` | 4013 | none |
-| `lem-sc-meromorphic-weakass-generic-product` | 5012 | none |
+| `lem-sc-affine-totalquotient-minimal-product` | 5013 | none |
+| `lem-sc-affine-weakass-nonzerodivisors` | 5013 | none |
 | `lem-sc-ass-weakass-fg-stalk` | 5013 | none |
-| `lem-sc-components-open-injection` | 5013 | none |
 | `lem-pc-rf-single-complex-inherited-tensor-condition` | 5014 | none |
 | `lem-pc-rf-single-complex-qcqs-induction` | 5014 | none |
 | `lem-pc-affine-perfect-hom-colimit` | 5015 | none |
@@ -55,7 +55,6 @@
 | `lem-sc-kummer-base-change-compatibility` | - | none |
 | `lem-sc-proper-or-affine` | - | none |
 | `lem-sc-units-quotient-base-change` | - | none |
-| `lem-weil-pbc-generic-separable-algebra-splitting` | - | none |
 | `lem-weil-pbc-spread-finite-separable-extension` | - | none |
 | `lem-weil-separably-closed-geometrically-connected` | - | none |
 | `def-nagata-morphism-descent` | - | none |
@@ -112,7 +111,7 @@
 | `lem-zl-noether-normalization-dimension` | - | none |
 | `lem-pur-rhom-global-sections` | - | none |
 
-## Stage 2: nodes to state (781)
+## Stage 2: nodes to state (782)
 
 | node | distance to Mathlib | kind |
 |---|---|---|
@@ -571,6 +570,7 @@
 | `lem-weil-pbc-free-resolution-ses-split` | 1 | state |
 | `lem-weil-pbc-gabber-finite-etale-section` | 1 | state |
 | `lem-weil-pbc-gabber-root-criterion-etale-section-lifting` | 1 | state |
+| `lem-weil-pbc-generic-separable-algebra-splitting` | 1 | state |
 | `lem-weil-pbc-global-complete-intersection-local-regular-sequence` | 1 | state |
 | `lem-weil-pbc-glue-sheaves-of-modules` | 1 | state |
 | `lem-weil-pbc-grothendieck-regular-sequence-flat` | 1 | state |
@@ -898,7 +898,7 @@
 | `lem-weil-pbc-projective-space-zero-isomorphism` | 4 | state |
 | `def-nagata-fixed-base-separated-stage` | 6 | state |
 
-Not open yet: 1598 nodes that wait for a statement dependency, 145 nodes that wait for stage 1.
+Not open yet: 1599 nodes that wait for a statement dependency, 144 nodes that wait for stage 1.
 
 ## Stage 3: modules to prove (0)
 
