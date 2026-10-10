@@ -1947,3 +1947,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 16:18 L: returned deliver/J1/lem-sc-boundary-cech-local-lifts (reviewer RETURN: 1. D1/D2: new node lem-sc-boundary-local-lift-rep: its statement is the item's statement minus the injectivity clause (t)
 - 16:18 L: merged deliver/J1/lem-weil-pbc-etale-sections-flat-qc-connected-fibres (reviewer FIX; first push; new nodes: 2)
 - 16:18 L: returned deliver/J1/lem-sc-ext-evaluation-first-naturality (reviewer RETURN: 1. B10: item lem-sc-ext-evaluation-first-naturality: the slopmaster2 declaration AlgebraicGeometry.Scheme.Modules.dualTe)
+- 16:18 L: returned deliver/F1/lem-weil-pbc-complex-spectral-sequence-comparison (reviewer RETURN: 1. E (missing hypothesis), statement of lem-weil-pbc-complex-spectral-sequence-comparison: the statement fixes the bideg)
