@@ -1,8 +1,8 @@
 # Work queue
 
-915 items; claim with `tools/claim.py next <group> [--stage N]`.
+914 items; claim with `tools/claim.py next <group> [--stage N]`.
 
-## Stage 1: nodes to split (285)
+## Stage 1: nodes to split (282)
 
 | node | distance to a target | Lean state on the done branch |
 |---|---|---|
@@ -13,7 +13,6 @@
 | `lem-sc-topological-flasque-acyclic` | 2014 | none |
 | `lem-sc-boundary-cech-injective-middle` | 2015 | none |
 | `lem-sc-finite-integral-conductor` | 2015 | none |
-| `lem-sc-integral-overring-jacobson-power` | 2015 | none |
 | `lem-sc-semilocal-dim-one-normalization` | 2015 | none |
 | `lem-sc-mayer-vietoris-ringed-space` | 2017 | none |
 | `lem-weil-pbc-cartesian-eilenberg-functorial` | 3007 | none |
@@ -61,8 +60,6 @@
 | `lem-pc-universal-adjoint-section` | 4010 | rests_on_sorry |
 | `lem-pc-zero-scheme-recd` | 4010 | rests_on_sorry |
 | `def-weil-pbc-etale-sheaves` | 5002 | none |
-| `def-weil-size-convention` | 5003 | none |
-| `def-galois-categories` | 5005 | none |
 | `def-weil-pbc-finite-torsors` | 5006 | none |
 | `lem-pc-flat-base-change-cohom` | 5008 | rests_on_sorry |
 | `lem-pc-picard-functor-agrees-sc` | 5008 | none |
@@ -292,7 +289,7 @@
 | `lem-pur-rhom-well-defined` | - | none |
 | `lem-zl-noether-normalization-dimension` | - | none |
 
-## Stage 2: nodes to state (630)
+## Stage 2: nodes to state (632)
 
 | node | distance to Mathlib | kind |
 |---|---|---|
@@ -338,6 +335,7 @@
 | `def-weil-pbc-strictly-standard-element` | 1 | state |
 | `def-weil-pbc-symmetric-product-morphism` | 1 | state |
 | `def-weil-pbc-torsion-etale-sheaf` | 1 | state |
+| `def-weil-size-convention` | 1 | state |
 | `def-wf-algebraic-representations` | 1 | state |
 | `etale-proposition-etale-reduced` | 1 | state |
 | `lem-exc-coinduced-functions-open-stabilizer` | 1 | state |
@@ -414,6 +412,7 @@
 | `lem-sc-graded-localization-exact` | 1 | state |
 | `lem-sc-graded-prime-avoidance` | 1 | state |
 | `lem-sc-integral-locally-algebraic-affine-opens-dimension` | 1 | state |
+| `lem-sc-integral-overring-jacobson-power` | 1 | state |
 | `lem-sc-irreducible-product-over-field` | 1 | state |
 | `lem-sc-jacobson-denominator-function-field` | 1 | state |
 | `lem-sc-local-domain-dim-one-principal-localization-fraction-field` | 1 | state |
@@ -927,7 +926,7 @@
 | `lem-weil-pbc-p1-field-dimension-one` | 4 | state |
 | `lem-weil-pbc-projective-space-zero-isomorphism` | 4 | state |
 
-Not open yet: 311 nodes that wait for stage 1, 1292 nodes that wait for a statement dependency.
+Not open yet: 1293 nodes that wait for a statement dependency, 308 nodes that wait for stage 1.
 
 ## Stage 3: modules to prove (0)
 
