@@ -21,26 +21,88 @@
  "stmt_deps": [],
  "proof": [
   {
-   "text": "*($\\Rightarrow$).* Quasi-finite means: of finite type and every\npoint of $X$ is isolated in its fibre, by\n[pqf-def-quasifinite]. Finite type in the sense of\n[def-weil-pbc-scheme-conventions] is quasi-compact plus locally of\nfinite type, so only the finiteness of the fibres remains. Let $s\\in S$\nand put $X_s=X\\times_S\\operatorname{Spec}\\kappa(s)$, a scheme\nlocally of finite type over the field $\\kappa(s)$ ($f$ is locally of\nfinite type). Every point of $X_s$ is isolated, so the open\n$X_s$ has dimension zero, and a locally finite type, quasi-compact,\nzero-dimensional scheme over a field is the spectrum of an Artinian\n$\\kappa(s)$-algebra, a finite ring; its spectrum is a finite discrete\nset (classical commutative algebra: finite type over a field with\ndimension zero is Artinian, and Artinian rings have finitely many\nprime ideals, all maximal). Hence $f^{-1}(\\{s\\})=|X_s|$ is finite.\n*($\\Leftarrow$).* Assume $f$ is locally of finite type and\nquasi-compact (so of finite type by\n[def-weil-pbc-scheme-conventions]) and has finite fibres. For\n$x\\in X$, with $s=f(x)$, the fibre $X_s$ is locally of finite type\nover $\\kappa(s)$ with finitely many points; restricting to an affine\nopen $\\operatorname{Spec}A\\subset X$ around $x$ with\n$f(\\operatorname{Spec}A)\\subset\\operatorname{Spec}R$ (which exists\nbecause $f$ is locally of finite type, by\n[pqf-def-quasifinite]), the ring\n$A\\otimes_R\\kappa(s)$ has finitely many prime ideals; being of\nfinite type over the field $\\kappa(s)$ it is Artinian, so all its\nprimes are maximal and $\\operatorname{Spec}(A\\otimes_R\\kappa(s))$ is a\nfinite discrete set. Thus $x$ is an isolated point of its fibre, and\n$R\\to A$ is quasi-finite at the prime of $x$ in the sense of\n[pqf-def-quasifinite]; hence $f$ is quasi-finite at every point,\nwhich together with finite type is the definition of quasi-finite.",
+   "text": "For the forward implication, [pqf-def-quasifinite] says that $f$ is of finite type and every point of each fibre $X_s$ is isolated in $X_s$. By [def-weil-pbc-scheme-conventions], finite type implies that $f$ is quasi-compact and locally of finite type. Fix $s\\in S$. By [lem-pc-quasi-compact-base-change] the base change $X_s\\to\\operatorname{Spec}\\kappa(s)$ is quasi-compact, so $X_s$, the preimage of the affine scheme $\\operatorname{Spec}\\kappa(s)$, is quasi-compact. The singletons $\\{\\xi\\}$, $\\xi\\in X_s$, are open and cover $X_s$, so a finite subcover exists and $X_s$ is a finite set. By [def-pc-scheme-fibre] the first projection maps $X_s$ bijectively (indeed homeomorphically) onto $f^{-1}(\\{s\\})$, so $f^{-1}(\\{s\\})$ is finite.",
    "uses": [
     "pqf-def-quasifinite",
-    "def-weil-pbc-scheme-conventions"
+    "def-weil-pbc-scheme-conventions",
+    "lem-pc-quasi-compact-base-change",
+    "def-pc-scheme-fibre"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-abelian-varieties/sk-prop-av-pqf-finite/pqf-lem-qf-finitefibres.md",
+    "place": "## Proof, forward implication; Stacks Project Tag 02NH"
+   }
+  },
+  {
+   "text": "Conversely, assume $f$ is locally of finite type, quasi-compact, and has finite fibres; by [def-weil-pbc-scheme-conventions] $f$ is of finite type. Let $x\\in X$, $s=f(x)$, and choose affine opens $V=\\operatorname{Spec}R\\ni s$ of $S$ and $U=\\operatorname{Spec}A\\ni x$ of $X$ with $f(U)\\subseteq V$. By [lem-weil-pbc-lft-affine-pairs] the ring map $R\\to A$ is of finite type, so $C=A\\otimes_R\\kappa(s)$ is a finitely generated $\\kappa(s)$-algebra. By [lem-weil-pbc-open-fibre-product] (with the opens $V\\subseteq S$, $U\\subseteq X$ and all of $\\operatorname{Spec}\\kappa(s)$) the scheme $U\\times_V\\operatorname{Spec}\\kappa(s)$ is identified with the open subscheme $p^{-1}(U)$ of $X_s$, where $p:X_s\\to X$ is the first projection, and by [lem-weil-pbc-fibre-product-affine-spectra] it is $\\operatorname{Spec}C$. By [def-pc-scheme-fibre] $p$ is a homeomorphism onto $f^{-1}(\\{s\\})$, which is finite, so $\\operatorname{Spec}C$ is a finite space. By [lem-sc-lft-over-field-jacobson-space], applied to $\\operatorname{Spec}C$ over $\\kappa(s)$, the closed points of $\\operatorname{Spec}C$ lying in the closure $Z$ of any point $\\eta$ are dense in $Z$; they form a finite, hence closed, set, so they exhaust $Z$ and $\\eta$ is closed. Thus every point of the finite space $\\operatorname{Spec}C$ is closed, every singleton is open, and the point $\\xi\\in X_s$ with $p(\\xi)=x$ is open in $p^{-1}(U)$, hence isolated in $X_s$. Now [lem-weil-pbc-isolated-fibre-point-quasi-finite-affine-pairs] gives that $R\\to A$ is of finite type and quasi-finite at the prime of $x$, i.e. $f$ is quasi-finite at $x$ in the sense of [pqf-def-quasifinite]. Thus $f$ is locally quasi-finite, and [pqf-lem-qf-locqf-qc] gives that the locally quasi-finite quasi-compact morphism $f$ is quasi-finite.",
+   "uses": [
+    "def-weil-pbc-scheme-conventions",
+    "lem-weil-pbc-lft-affine-pairs",
+    "lem-weil-pbc-isolated-fibre-point-quasi-finite-affine-pairs",
+    "lem-weil-pbc-open-fibre-product",
+    "lem-weil-pbc-fibre-product-affine-spectra",
+    "def-pc-scheme-fibre",
+    "lem-sc-lft-over-field-jacobson-space",
+    "pqf-def-quasifinite",
+    "pqf-lem-qf-locqf-qc"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-abelian-varieties/sk-prop-av-pqf-finite/pqf-lem-qf-finitefibres.md",
+    "place": "## Proof, converse implication; Stacks Project Tag 02NH"
+   }
   }
  ],
  "proof_deps": [
   "pqf-def-quasifinite",
-  "def-weil-pbc-scheme-conventions"
+  "def-weil-pbc-scheme-conventions",
+  "lem-pc-quasi-compact-base-change",
+  "def-pc-scheme-fibre",
+  "lem-weil-pbc-lft-affine-pairs",
+  "lem-weil-pbc-isolated-fibre-point-quasi-finite-affine-pairs",
+  "lem-weil-pbc-open-fibre-product",
+  "lem-weil-pbc-fibre-product-affine-spectra",
+  "lem-sc-lft-over-field-jacobson-space",
+  "pqf-lem-qf-locqf-qc"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/master/blueprint/sec-abelian-varieties/sk-prop-av-pqf-finite/pqf-lem-qf-finitefibres.md",
-  "place": "## Proof"
+  "place": "## Proof; Stacks Project Morphisms of Schemes, Lemma 29.21.10, Tag 02NH"
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "a finite type morphism of schemes is locally quasi-finite if and only if all fibers are finite",
+   "results": "AlgebraicGeometry.locallyQuasiFinite_iff_finite_preimage_singleton (Mathlib/AlgebraicGeometry/Morphisms/QuasiFinite.lean:325)",
+   "date": "2026-10-11",
+   "verdict": "generalization: exact under LocallyOfFiniteType and QuasiCompact hypotheses"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.locallyQuasiFinite, finite_preimage_singleton",
+   "results": "0 hits; identifier not recognized",
+   "date": "2026-10-11",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "locallyQuasiFinite_iff_finite_preimage_singleton in AlgebraicGeometry",
+   "results": "Mathlib/AlgebraicGeometry/Morphisms/QuasiFinite.lean:325",
+   "date": "2026-10-11",
+   "verdict": "generalization: finite-fibre equivalence"
+  },
+  {
+   "tool": "leansearch",
+   "query": "finite type quasi-finite morphism has finite fibers and finite fibers imply quasi-finite",
+   "results": "service unavailable",
+   "date": "2026-10-11",
+   "verdict": "unavailable"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [],
  "blueprint_kind": "lemma",
@@ -63,5 +125,67 @@
   }
  },
  "chapter": "sec-abelian-varieties",
- "unit": "sk-prop-av-pqf-finite"
+ "unit": "sk-prop-av-pqf-finite",
+ "split_report": {
+  "date": "2026-10-11",
+  "item": "pqf-lem-qf-finitefibres",
+  "worker": "stage1",
+  "summary": "Checked the imported statement against the blueprint and Stacks Tag 02NH. No project declaration with this blueprint tag exists in slopmaster2. Kept the statement and split the imported proof into forward and converse steps.",
+  "blueprint": "Realizes the complete proof paragraph of pqf-lem-qf-finitefibres.md, split at the two implications.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-isolated-fibre-point-quasi-finite-affine-pairs",
+    "why": "generic affine-pair local quasi-finiteness criterion used in the converse"
+   },
+   {
+    "node": "pqf-lem-qf-locqf-qc",
+    "why": "generic equivalence of quasi-finite with locally quasi-finite plus quasi-compact"
+   },
+   {
+    "node": "lem-pc-quasi-compact-base-change",
+    "why": "generic: base change of a quasi-compact morphism is quasi-compact"
+   },
+   {
+    "node": "lem-weil-pbc-open-fibre-product",
+    "why": "generic: open pieces of a fibre product"
+   },
+   {
+    "node": "lem-weil-pbc-fibre-product-affine-spectra",
+    "why": "generic: fibre product of affine spectra"
+   },
+   {
+    "node": "lem-sc-lft-over-field-jacobson-space",
+    "why": "generic: closed points dense in a scheme locally of finite type over a field"
+   },
+   {
+    "node": "lem-weil-pbc-lft-affine-pairs",
+    "why": "generic: locally of finite type on affine pairs"
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-isolated-fibre-point-quasi-finite-affine-pairs",
+  "pqf-lem-qf-locqf-qc",
+  "lem-pc-quasi-compact-base-change",
+  "lem-weil-pbc-open-fibre-product",
+  "lem-weil-pbc-fibre-product-affine-spectra",
+  "lem-sc-lft-over-field-jacobson-space",
+  "lem-weil-pbc-lft-affine-pairs",
+  "lem-weil-pbc-isolated-fibre-point-quasi-finite-affine-pairs",
+  "pqf-lem-qf-locqf-qc",
+  "lem-pc-quasi-compact-base-change",
+  "lem-weil-pbc-open-fibre-product",
+  "lem-weil-pbc-fibre-product-affine-spectra",
+  "lem-sc-lft-over-field-jacobson-space",
+  "lem-weil-pbc-lft-affine-pairs"
+ ],
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-qff2336",
+  "group": "H1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-qff2336 (reviewer sub-agent of L); spot-checked: Statement = Tag 02NH (redundant lft clause harmless). C4 checked for pqf-def-quasifinite, affine-pair lemma (isolated hypothesis), pqf-lem-qf-locqf-qc (imported, no cycle). FIX more, RETURN less: (1) C1 step 1: quasi-compactness of X_s was asserted bare; now cites lem-pc-quasi-compact-base-change, and def-pc-scheme-fibre for X_s ~ f^{-1}(s). (2) C1 step 2: 'finite-type fibre algebra with finitely many points is Artinian/discrete' and 'Spec(A ox kappa(s)) open in X_s' were bare; now cites lem-weil-pbc-lft-affine-pairs, lem-weil-pbc-open-fibre-product, lem-weil-pbc-fibre-product-affine-spectra, def-pc-scheme-fibre and lem-sc-lft-over-field-jacobson-space (closed points dense => finite fibre space T1 => discrete); proof_deps and tool_uses updated.; 1 file(s) fixed by the reviewer"
+ },
+ "lead_note": "2026-10-10 L (R-qff2336): Not a Mathlib leaf: locallyQuasiFinite_iff_finite_preimage_singleton concerns LocallyQuasiFinite, the project's quasi-finite needs finite type plus pqf-lem-qf-locqf-qc. pqf-lem-locqf-fibre-discrete not citable: it is imported and its proof uses this item (cycle); pqf-lem-finite-qf also uses this item."
 }
