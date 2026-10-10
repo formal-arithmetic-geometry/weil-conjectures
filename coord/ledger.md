@@ -2934,3 +2934,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 23:11 L: merged deliver/H1/lem-pc-dualizable-evaluation-criterion (reviewer FIX; first push; new nodes: 0)
 - 23:13 L: merged deliver/J1/lem-sc-units-quotient-base-change (reviewer FIX; first push; new nodes: 1)
 - 23:13 L: merged deliver/J1/lem-sc-affine-constant-second (reviewer FIX; first push; new nodes: 0)
+- 23:13 L: merged deliver/H1/lem-pc-sites-module-sheafification-tensor (reviewer FIX; after a return; new nodes: 2)

@@ -15,19 +15,93 @@
  "title": "Tensor and sheafification for modules over a presheaf of rings",
  "chapter": "sec-picard-framework",
  "unit": "sk-thm-picard-semicon",
- "statement": "Let $(\\mathcal C,J)$ be a site, let $\\mathcal O$ be a presheaf [def-weil-pbc-sheafification] of commutative rings, let $\\mathcal P$ be a presheaf [def-weil-presheaf-modules-sheafification] of $\\mathcal O$-modules, and let $\\mathcal G$ be a sheaf [def-weil-sheaf-of-modules-category] of $\\mathcal O^\\#$-modules, regarded as a presheaf of $\\mathcal O$-modules by restriction of scalars along $\\mathcal O\\to\\mathcal O^\\#$. There is a canonical natural isomorphism of sheaves of $\\mathcal O^\\#$-modules: $\\mathcal G\\otimes_{\\mathcal O^\\#}\\mathcal P^\\#\\cong(\\mathcal G\\otimes_{p,\\mathcal O}\\mathcal P)^\\#$, where the right side is the module sheafification and $\\mathcal G\\cong\\mathcal G^\\#$ is used for the sheaf factor.",
+ "statement": "Let $(\\mathcal C,J)$ be a site [def-weil-pbc-sites-and-cohomology], let $\\mathcal O$ be a presheaf [def-weil-pbc-sheafification] of commutative rings, and let $\\mathcal F,\\mathcal G$ be presheaves [def-weil-presheaf-modules-sheafification] of $\\mathcal O$-modules. Let $\\mathcal F\\otimes_{p,\\mathcal O}\\mathcal G$ be the presheaf of $\\mathcal O$-modules $U\\mapsto\\mathcal F(U)\\otimes_{\\mathcal O(U)}\\mathcal G(U)$, with restriction maps induced by those of $\\mathcal F$, $\\mathcal G$ and $\\mathcal O$, and let $\\mathcal F^\\#$, $\\mathcal G^\\#$, $(\\mathcal F\\otimes_{p,\\mathcal O}\\mathcal G)^\\#$ be the module sheafifications, sheaves of $\\mathcal O^\\#$-modules [lem-pc-sites-module-sheafification-interface]. There is a canonical isomorphism of sheaves of $\\mathcal O^\\#$-modules $\\mathcal F^\\#\\otimes_{\\mathcal O^\\#}\\mathcal G^\\#\\cong(\\mathcal F\\otimes_{p,\\mathcal O}\\mathcal G)^\\#$ [def-pur-sheaf-tensor-product], natural in $\\mathcal F$ and $\\mathcal G$. In particular, if $\\mathcal G$ is a sheaf of $\\mathcal O^\\#$-modules [def-weil-sheaf-of-modules-category] and $\\iota\\mathcal G$ denotes $\\mathcal G$ regarded as a presheaf of $\\mathcal O$-modules by restriction of scalars along $\\mathcal O\\to\\mathcal O^\\#$, then for every presheaf $\\mathcal F$ of $\\mathcal O$-modules there is an isomorphism $\\mathcal G\\otimes_{\\mathcal O^\\#}\\mathcal F^\\#\\cong(\\iota\\mathcal G\\otimes_{p,\\mathcal O}\\mathcal F)^\\#$, natural in $\\mathcal G$ and $\\mathcal F$.",
  "source": {
   "document": "literature/stacks-project/sites-modules.tex",
   "place": "Lemma 18.26.2 (Tag 0GMW, lemma-sheafification-tensor)"
  },
  "stmt_deps": [
-  "def-pur-presheaf-tensor-product",
+  "def-weil-pbc-sites-and-cohomology",
+  "def-weil-pbc-sheafification",
+  "def-weil-presheaf-modules-sheafification",
+  "lem-pc-sites-module-sheafification-interface",
   "def-pur-sheaf-tensor-product",
-  "lem-pc-sites-module-sheafification-interface"
+  "def-weil-sheaf-of-modules-category"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Define $(\\mathcal F\\otimes_{p,\\mathcal O}\\mathcal G)(U)=\\mathcal F(U)\\otimes_{\\mathcal O(U)}\\mathcal G(U)$ with restriction maps induced by $\\mathcal F$, $\\mathcal G$, and $\\mathcal O$. The module-sheafification maps are $\\mathcal O$-linear and $\\mathcal F^\\#$, $\\mathcal G^\\#$ are $\\mathcal O^\\#$-modules by [lem-pc-sites-module-sheafification-interface]. Pure tensors therefore define compatible balanced maps on sections, hence a morphism $\\mathcal F\\otimes_{p,\\mathcal O}\\mathcal G\\to\\mathcal F^\\#\\otimes_{p,\\mathcal O^\\#}\\mathcal G^\\#$.",
+   "uses": [
+    "lem-pc-sites-module-sheafification-interface"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Lemma 18.26.2 (Tag 0GMW), construction of the comparison map"
+   }
+  },
+  {
+   "text": "Sheafifying the morphism of Step 1 and using [def-pur-sheaf-tensor-product], which defines the sheaf tensor product as sheafification of the presheaf tensor, gives a canonical morphism $(\\mathcal F\\otimes_{p,\\mathcal O}\\mathcal G)^\\#\\to\\mathcal F^\\#\\otimes_{\\mathcal O^\\#}\\mathcal G^\\#$.",
+   "uses": [
+    "lem-pc-sites-module-sheafification-interface",
+    "def-pur-sheaf-tensor-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Lemma 18.26.2 (Tag 0GMW), passage to sheafification"
+   }
+  },
+  {
+   "text": "The pure-tensor map $\\mathcal F\\times\\mathcal G\\to(\\mathcal F\\otimes_{p,\\mathcal O}\\mathcal G)^\\#$ extends uniquely to an $\\mathcal O^\\#$-bilinear map $\\mathcal F^\\#\\times\\mathcal G^\\#\\to(\\mathcal F\\otimes_{p,\\mathcal O}\\mathcal G)^\\#$ by [lem-pc-sites-module-sheafification-bilinear-extension]. The universal property [lem-pc-sites-sheaf-tensor-bilinear-universal] then gives a unique morphism $\\mathcal F^\\#\\otimes_{\\mathcal O^\\#}\\mathcal G^\\#\\to(\\mathcal F\\otimes_{p,\\mathcal O}\\mathcal G)^\\#$.",
+   "uses": [
+    "lem-pc-sites-module-sheafification-bilinear-extension",
+    "lem-pc-sites-sheaf-tensor-bilinear-universal"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Lemma 18.26.2 (Tag 0GMW), inverse comparison map"
+   }
+  },
+  {
+   "text": "For the composite on $(\\mathcal F\\otimes_{p,\\mathcal O}\\mathcal G)^\\#$, precompose with its sheafification map from the presheaf tensor. Both the identity and the composite send a pure tensor $f\\otimes g$ to the class of the same pair of sheafification sections, so they agree on the presheaf tensor; the unique factorization through sheafification in [lem-pc-sites-module-sheafification-interface] makes the composite the identity. For the other composite, precompose its associated bilinear map with $\\mathcal F\\times\\mathcal G\\to\\mathcal F^\\#\\times\\mathcal G^\\#$; both maps are the original pure-tensor map, so uniqueness in [lem-pc-sites-module-sheafification-bilinear-extension] and the bijection of [lem-pc-sites-sheaf-tensor-bilinear-universal] make this composite the identity. The same descriptions commute with restriction maps, hence the isomorphism is natural.",
+   "uses": [
+    "lem-pc-sites-module-sheafification-interface",
+    "lem-pc-sites-module-sheafification-bilinear-extension",
+    "lem-pc-sites-sheaf-tensor-bilinear-universal"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Lemma 18.26.2 (Tag 0GMW), verification and naturality"
+   }
+  },
+  {
+   "text": "For the particular case, apply the isomorphism to the presheaves $\\iota\\mathcal G$ and $\\mathcal F$: $(\\iota\\mathcal G)^\\#\\otimes_{\\mathcal O^\\#}\\mathcal F^\\#\\cong(\\iota\\mathcal G\\otimes_{p,\\mathcal O}\\mathcal F)^\\#$. By [lem-pc-sites-module-sheafification-interface] the identity $\\iota\\mathcal G\\to\\iota\\mathcal G$ factors uniquely as $\\iota\\mathcal G\\xrightarrow{\\eta}(\\iota\\mathcal G)^\\#\\xrightarrow{r}\\mathcal G$ with $r$ $\\mathcal O^\\#$-linear, and the underlying abelian sheaf of $(\\iota\\mathcal G)^\\#$ is the abelian sheafification of $\\mathcal G$. Since $\\mathcal G$ is already a sheaf, $\\eta$ is an isomorphism of abelian sheaves by the uniqueness clause of [def-weil-pbc-sheafification] ($\\eta r\\eta=\\eta$ forces $\\eta r=\\mathrm{id}$); so $r=\\eta^{-1}$ is a bijective $\\mathcal O^\\#$-linear map, an isomorphism $(\\iota\\mathcal G)^\\#\\cong\\mathcal G$ natural in $\\mathcal G$. Substituting it gives $\\mathcal G\\otimes_{\\mathcal O^\\#}\\mathcal F^\\#\\cong(\\iota\\mathcal G\\otimes_{p,\\mathcal O}\\mathcal F)^\\#$.",
+   "uses": [
+    "lem-pc-sites-module-sheafification-interface",
+    "def-weil-pbc-sheafification"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Lemma 18.26.2 (Tag 0GMW) applied with a sheaf factor; sheafification of a sheaf"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-sites-module-sheafification-interface",
+  "def-pur-sheaf-tensor-product",
+  "lem-pc-sites-module-sheafification-bilinear-extension",
+  "lem-pc-sites-sheaf-tensor-bilinear-universal",
+  "def-weil-pbc-sheafification"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Lemma 18.26.2 (Tag 0GMW, lemma-sheafification-tensor)"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -59,10 +133,27 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-pc-sites-modules-sheafification-flat",
   "by": "worker",
   "date": "2026-10-10"
- }
+ },
+ "split_report": {
+  "date": "2026-10-11",
+  "item": "lem-pc-sites-module-sheafification-tensor",
+  "worker": "stage1",
+  "summary": "Second reading corrected the statement to the general Stacks lemma with two presheaf modules, then split its comparison into construction, sheafification, inverse, and uniqueness/naturality steps.",
+  "blueprint": "Realizes the blueprint ancestor def-weil-derived-tensor's sheafification step: identify tensoring a sheafified module with the sheafification of the presheaf tensor.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-smt3036",
+  "group": "H1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-smt3036 (reviewer sub-agent of L); spot-checked: Read Stacks sites-modules.tex 3600-3640: 0GMW statement agrees (F,G presheaf modules over presheaf ring); Bilin display after 0GMW matches new node lem-pc-sites-sheaf-tensor-bilinear-universal (C1/B10 point 2 repaired); bilinear-extension node repairs point 1 (true, real lemma, Stacks hint); Steps 1-4 checked, interface M1 cited for O^#-module structure. FIX more, RETURN less: (1) C4/b: statement now defines the presheaf tensor over the presheaf ring inline, cites def-pur-sheaf-tensor-product for the O^# tensor and the interface for sheafifications; dropped stmt_dep def-pur-presheaf-tensor-product (needs sheaf ring); stmt_deps = cited ids. (2) C4: added 'in particular' G otimes_{O^#} F^# = (iota G otimes_{p,O} F)^# (exact form cited by lem-pc-sites-modules-sheafification-flat step 2) with Step 5 (interface factorization + sheafification of a sheaf, elementary). (3) B4: both new node statements rewritten in TeX; grep of Mathlib ModuleCat/Sheaf recorded (no sheaf tensor).; 3 file(s) fixed by the reviewer"
+ },
+ "lead_note": "2026-10-10 L (R-smt3036): Re-push after R-smt2830: points 1-2 repaired by two new statement-only nodes; points 3-5 were NOT repaired (report claims a change to lem-pc-sites-modules-sheafification-flat that is not on the branch); reviewer fixed them."
 }
