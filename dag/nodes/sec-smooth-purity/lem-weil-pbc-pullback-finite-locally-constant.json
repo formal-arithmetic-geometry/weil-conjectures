@@ -20,9 +20,61 @@
   "def-weil-pbc-scheme-conventions",
   "def-weil-pbc-etale-sheaves"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "The base-change functors for the morphisms $f$ and $g$ define morphisms of the corresponding small etale sites. Applying the composition theorem for morphisms of sites gives the canonical natural isomorphism $(f\\circ g)^{-1}F\\cong g^{-1}(f^{-1}F)$ on abelian sheaves.",
+   "uses": [
+    "lem-weil-pbc-inverse-image-composition"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Lemma Tag 03CB and the sentence after Definition Tag 03CC"
+   }
+  },
+  {
+   "text": "Write $G=f^{-1}F$ and choose an etale covering $\\{j_i:U_i\\to Y\\}$ such that each restriction $G|_{U_i}=G\\circ\\iota_{j_i}$ is isomorphic, as a sheaf of sets, to a constant sheaf of sets $\\underline{E_i}_{U_i}$ [def-weil-pbc-etale-sheaves]. Put $U_i'=U_i\\times_YY'$ with projections $k_i:U_i'\\to Y'$ and $g_i:U_i'\\to U_i$, so $g\\circ k_i=j_i\\circ g_i$; the $k_i$ are etale and jointly surjective [lem-weil-pbc-etale-covering-base-change], i.e. an etale covering of $Y'$. For each $i$ there are isomorphisms of abelian sheaves on $(U_i')_{\\Et}$\n$$(g^{-1}G)|_{U_i'}\\cong k_i^{-1}g^{-1}G\\cong(g\\circ k_i)^{-1}G=(j_i\\circ g_i)^{-1}G\\cong g_i^{-1}j_i^{-1}G\\cong g_i^{-1}(G|_{U_i}),$$\nby [lem-weil-pbc-etale-inverse-image-restriction] (1) for the etale morphisms $k_i$ and $j_i$ (the latter transported by the functor $g_i^{-1}$) and [lem-weil-pbc-inverse-image-composition] (2) twice. Passing to underlying sheaves of sets, the underlying sheaf of sets of $g_i^{-1}(G|_{U_i})$ is the set-theoretic inverse image of the underlying sheaf of sets of $G|_{U_i}$ [lem-weil-pbc-etale-inverse-image-algebraic-structures] (3), hence (by functoriality of the set-theoretic inverse image) isomorphic to $g_i^{-1}\\underline{E_i}_{U_i}$, which is isomorphic to the constant sheaf $\\underline{E_i}_{U_i'}$ [lem-weil-pbc-sets-etale-inverse-image-constant-sheaf]. Thus $g^{-1}G$ is locally constant. For a geometric point $\\bar y'$ of $Y'$ with image $\\bar y=g\\circ\\bar y'$, [lem-weil-pbc-inverse-image-stalk-germ] gives $(g^{-1}G)_{\\bar y'}\\cong G_{\\bar y}$, which is finite since $G$ is finite locally constant; hence $g^{-1}G$ is finite locally constant [def-weil-pbc-etale-sheaves].",
+   "uses": [
+    "def-weil-pbc-etale-sheaves",
+    "lem-weil-pbc-etale-covering-base-change",
+    "lem-weil-pbc-etale-inverse-image-restriction",
+    "lem-weil-pbc-inverse-image-composition",
+    "lem-weil-pbc-etale-inverse-image-algebraic-structures",
+    "lem-weil-pbc-sets-etale-inverse-image-constant-sheaf",
+    "lem-weil-pbc-inverse-image-stalk-germ"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Lemma 095A (lemma-pullback-locally-constant) via Modules on Sites Lemma 093R, with Lemma 03Q1 (3); restriction to an etale U is j^{-1} (Section 03S2, after Definition 03S3)"
+   }
+  },
+  {
+   "text": "Combining the canonical isomorphism of Step 1 with the local constancy and finite-stalk conclusion of Step 2 proves $(f\\circ g)^{-1}F\\cong g^{-1}(f^{-1}F)$ and that this sheaf is finite locally constant on $Y'_{\\Et}$.",
+   "uses": [
+    "lem-weil-pbc-inverse-image-composition"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Lemma 095A (lemma-pullback-locally-constant), conclusion"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-inverse-image-composition",
+  "def-weil-pbc-etale-sheaves",
+  "lem-weil-pbc-etale-covering-base-change",
+  "lem-weil-pbc-inverse-image-stalk-germ",
+  "lem-weil-pbc-etale-inverse-image-restriction",
+  "lem-weil-pbc-etale-inverse-image-algebraic-structures",
+  "lem-weil-pbc-sets-etale-inverse-image-constant-sheaf"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Lemma 095A, with Lemma 03Q1 (3) and Sites Lemma 03CB"
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -30,10 +82,38 @@
    "results": "0 hits; Mathlib has no small etale site or locally constant etale sheaves",
    "date": "2026-10-10",
    "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "pullback of a finite locally constant sheaf on a small etale site remains finite locally constant",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-11",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "inverse image preserves locally constant sheaves and finite geometric stalks",
+   "results": "CompHausLike.LocallyConstant.functor, CompHausLike.LocallyConstant.functorToPresheavesIso, CompHausLike.LocallyConstant.incl_comap, CompHausLike.LocallyConstant.functorToPresheaves_obj_map, CompHausLike.LocallyConstant.functor_obj_val, CompHausLike.LocallyConstant.functorIso, CompHausLike.LocallyConstant.functor_map_val, LightCondensed.locallyConstantPresheaf; no small etale sheaf result",
+   "date": "2026-10-11",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Scheme.IsFiniteLocallyConstantSheaf.upperStar",
+   "results": "0 hits; unknown identifier",
+   "date": "2026-10-11",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "IsFiniteLocallyConstantSheaf|upperStar in Mathlib",
+   "results": "0 hits",
+   "date": "2026-10-11",
+   "verdict": "no match"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "reviewer",
@@ -49,5 +129,38 @@
   "slopmaster2": {
    "state": "none"
   }
+ },
+ "split_report": {
+  "date": "2026-10-11",
+  "item": "lem-weil-pbc-pullback-finite-locally-constant",
+  "worker": "stage1",
+  "summary": "Split the pullback lemma into the site-composition isomorphism, preservation of local constancy by pulling back a trivialising etale cover, and preservation of finite geometric stalks via the inverse-image stalk identification. Reused existing DAG nodes for site composition, etale base change, stalks, and the finite-locally-constant definition; no new nodes were created. Mathlib searches found no small-etale analogue (LeanSearch was unavailable).",
+  "blueprint": "Realizes the imported blueprint ancestor's second-paragraph step: restricting a finite locally constant sheaf on a stratum to irreducible pieces via pullback along the composite morphism.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-site-morphism-composition",
+    "why": "The item needs the generic composition isomorphism for inverse-image functors on sites, which is not supplied by the compact-support base-change route."
+   },
+   {
+    "node": "lem-weil-pbc-inverse-image-stalk-germ",
+    "why": "The item needs the generic geometric-stalk identification for inverse images, which is not supplied by the compact-support base-change route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-inverse-image-composition",
+  "lem-weil-pbc-etale-inverse-image-restriction",
+  "lem-weil-pbc-etale-inverse-image-algebraic-structures",
+  "lem-weil-pbc-sets-etale-inverse-image-constant-sheaf",
+  "lem-weil-pbc-etale-covering-base-change",
+  "lem-weil-pbc-inverse-image-stalk-germ"
+ ],
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-pfl2838",
+  "group": "J1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-pfl2838 (reviewer sub-agent of L); spot-checked: Statement matches 095A/03Q1(3)/03CB, pullback is def-weil-pbc-etale-sheaves' inverse image; C4 OK for lem-weil-pbc-irreducible-lisse-strata step 2 (its use of the item). Steps 1,3 OK (lem-weil-pbc-inverse-image-composition). FIX more, RETURN less: (1) C1 Step 2: identification of the restriction of g^{-1}G to U_i x_Y Y' (restriction along the localization functor, as in the definition) with g_i^{-1}(G|_{U_i}) was uncited; now via lem-weil-pbc-etale-inverse-image-restriction (1) for k_i and j_i plus lem-weil-pbc-inverse-image-composition (2) for g k_i = j_i g_i. (2) C1 Step 2: 'pullback of a constant sheaf is constant because the defining presheaf has the same value on every object' ignores sheafification and the sets/abelian switch (local constancy is defined on sheaves of sets); now cites lem-weil-pbc-etale-inverse-image-algebraic-structures (3) and lem-weil-pbc-sets-etale-inverse-image-constant-sheaf (Stacks 093R). proof_deps updated. Declared tool_use lem-weil-pbc-site-morphism-composition dropped (no longer cited); other-unit generic tools declared. Second reading by J1 missed both.; 1 file(s) fixed by the reviewer"
  }
 }
