@@ -1,0 +1,66 @@
+{
+ "id": "lem-weil-pbc-nonzerodivisor-if-maximal-not-associated",
+ "kind": "statement",
+ "title": "If the maximal ideal is not an associated prime of a finite module, it contains a nonzerodivisor on it",
+ "statement": "Let $(R,\\mathfrak m)$ be a Noetherian [def-weil-pbc-noetherian-ring] local ring and $M$ a finite $R$-module [def-weil-finitely-generated-module] such that $\\mathfrak m$ is not an associated prime of $M$, i.e. there is no $z\\in M$ with $\\{a\\in R: az=0\\}=\\mathfrak m$. Then there is an $x\\in\\mathfrak m$ which is a nonzerodivisor on $M$ (multiplication by $x$ on $M$ is injective).",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Algebra, Lemma Tag 00LL (lemma-ideal-nonzerodivisor, line 15471), implication (2) => (1) for $I=\\mathfrak m$ (for $I=\\mathfrak m$ the condition $\\mathfrak m\\not\\subset\\mathfrak q$ for all $\\mathfrak q\\in\\operatorname{Ass}(M)$ says $\\mathfrak m\\notin\\operatorname{Ass}(M)$, as $\\mathfrak m$ is maximal)"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-noetherian-ring",
+  "def-weil-finitely-generated-module"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Noetherian local ring with maximal ideal not an associated prime of a finite module contains a nonzerodivisor on the module",
+   "results": "Module.associatedPrimes.mem_associatePrimes_localizedModule_atPrime_of_mem_associated_primes, IsAssociatedPrime, associatedPrimes, Ideal.IsMaximal.mem_associatedPrimes_of_isFractionRing, biUnion_associatedPrimes_eq_compl_nonZeroDivisors, associatedPrimes.finite, exists_le_isAssociatedPrime_of_isNoetherianRing",
+   "date": "2026-10-10",
+   "verdict": "no match (ingredients only)"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "if the maximal ideal is not an associated prime of a finitely generated module over a Noetherian local ring then there is an element of the maximal ideal that is a nonzerodivisor on the module",
+   "results": "associatedPrimes.nonempty, exists_le_isAssociatedPrime_of_isNoetherianRing, biUnion_associatedPrimes_eq_compl_regular (Mathlib.RingTheory.Regular.IsSMulRegular), Ideal.bot_lt_annihilator_of_disjoint_nonZeroDivisors, IsLocalRing.isRegular_iff_isWeaklyRegular_of_subset_maximalIdeal",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rn 'associatedPrimes' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/RingTheory | grep -i 'maximalIdeal\\|notMem\\|subset_union\\|exists'; grep -rn 'isSMulRegular' -i ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/RingTheory | grep -i exists",
+   "results": "the argument appears inside proofs only (Ideal/AssociatedPrime/Finiteness.lean:197, Regular/LinearMap.lean:55, via Ideal.subset_union_prime_finite); no stated lemma",
+   "date": "2026-10-10",
+   "verdict": "no match; candidate recorded"
+  }
+ ],
+ "mathlib_match": null,
+ "mathlib_candidate": {
+  "declarations": "biUnion_associatedPrimes_eq_compl_regular (Mathlib/RingTheory/Regular/IsSMulRegular.lean:124), associatedPrimes.finite (Mathlib/RingTheory/Ideal/AssociatedPrime/Finiteness.lean:158), Ideal.subset_union_prime_finite (Mathlib/RingTheory/Ideal/Operations.lean:1217)",
+  "why_not_leaf": "three lemmas chained (zerodivisors = union of associated primes, finiteness, prime avoidance), not one per clause"
+ },
+ "status": "unsplit",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-serre-criterion-normal",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1"
+}
