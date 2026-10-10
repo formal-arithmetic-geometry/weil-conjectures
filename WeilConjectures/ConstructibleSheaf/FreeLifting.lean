@@ -22,6 +22,9 @@ public import WeilConjectures.ConstructibleSheaf.OpenClosed
 public import WeilConjectures.Mathlib.AlgebraicGeometry.IdealSheaf.Subscheme
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.FlatModuleCat
 public import WeilConjectures.SixFunctors.OpenClosed.Conservative
+public import WeilConjectures.SixFunctors.OpenClosed.ClosedImmersion
+public import WeilConjectures.SixFunctors.OpenClosed.Supported
+public import WeilConjectures.SixFunctors.OpenClosed.Vanishing
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Sites.Etale
 
 /-!
@@ -701,6 +704,28 @@ lemma exists_etale_isConstant_cover {Z : Scheme.{u}} (U : Z.Opens)
   change z ∈ Set.range (e (r (r.symm ⟨u, hu⟩) : U.toScheme))
   rw [this]
   exact hzu
+
+/-- For a closed immersion `i`, the unit `G ⟶ i_* i^* G` is an epimorphism: its cokernel
+vanishes on the open complement, where `i_* i^* G` does, and on `Z'`, where the unit becomes
+invertible. -/
+lemma epi_upperStarLowerStarAdjunction_unit_app {Z Z' : Scheme.{u}} (i : Z' ⟶ Z)
+    [IsClosedImmersion i] (G : Sheaf Z.smallEtaleTopology (ModuleCat.{u + 1} Λ)) :
+    Epi ((Etale.upperStarLowerStarAdjunction (ModuleCat.{u + 1} Λ) i).unit.app G) := by
+  let adj := Etale.upperStarLowerStarAdjunction (ModuleCat.{u + 1} Λ) i
+  let U : Z.Opens := ⟨(Set.range i)ᶜ, i.isClosedEmbedding.isClosed_range.isOpen_compl⟩
+  have hij : Set.range i = (Set.range U.ι)ᶜ := by simp [U]
+  refine Preadditive.epi_of_isZero_cokernel _ (Etale.isZero_of_isZero_upperStar (j := U.ι) i hij ?_ ?_)
+  · refine IsZero.of_iso ?_ (PreservesCokernel.iso (Etale.upperStar _ U.ι) (adj.unit.app G))
+    refine IsZero.of_epi (cokernel.π _) ?_
+    exact Etale.isZero_upperStar_lowerStar_of_disjoint_range _ U.ι i
+      (by rw [Scheme.Opens.range_ι]; exact disjoint_compl_left) _
+  · refine IsZero.of_iso ?_ (PreservesCokernel.iso (Etale.upperStar _ i) (adj.unit.app G))
+    have h := adj.left_triangle_components G
+    have : IsIso ((Etale.upperStar (ModuleCat.{u + 1} Λ) i).map (adj.unit.app G)) := by
+      have : IsIso ((Etale.upperStar (ModuleCat.{u + 1} Λ) i).map (adj.unit.app G) ≫
+          adj.counit.app _) := by rw [h]; exact IsIso.id _
+      exact IsIso.of_isIso_comp_right _ (adj.counit.app _)
+    exact isZero_cokernel_of_epi _
 
 end Generation
 
