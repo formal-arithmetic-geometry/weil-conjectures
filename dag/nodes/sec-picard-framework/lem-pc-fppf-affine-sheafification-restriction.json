@@ -20,9 +20,39 @@
   "def-pc-fppf-site",
   "def-pc-scheme"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "By lem-pc-fppf-affine-site-topos-equivalence, the inclusion $u$ is fully faithful, every object of $(\\mathit{Sch}/S)_{fppf}$ has an fppf covering by affine objects, and every fppf covering of an affine object is refined by a covering in $(\\mathit{Aff}/S)_{fppf}$; since conversely a covering in $(\\mathit{Aff}/S)_{fppf}$ is an fppf covering, a sieve on an affine $U$ covers in $(\\mathit{Aff}/S)_{fppf}$ iff the sieve it generates on $u(U)$ covers in $(\\mathit{Sch}/S)_{fppf}$, i.e. the affine fppf topology is the topology induced by $u$. The same node gives that restriction along $u$ is an equivalence of sheaf categories (sets, and likewise abelian groups).",
+   "uses": [
+    "lem-pc-fppf-affine-site-topos-equivalence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/topologies.tex",
+    "place": "Tag 021V, Topologies Lemma 34.7.11 (lemma-affine-big-site-fppf) and its proof"
+   }
+  },
+  {
+   "text": "These are the hypotheses of lem-pc-dense-subsite-sheafification-compatibility for $u$, $\\mathcal C=(\\mathit{Aff}/S)_{fppf}$, $\\mathcal D=(\\mathit{Sch}/S)_{fppf}$; it gives an isomorphism $(F|_{(\\mathit{Aff}/S)_{fppf}})^{\\#}\\cong F^{\\#}\\circ u^{op}$ natural in $F$, which is the claim.",
+   "uses": [
+    "lem-pc-dense-subsite-sheafification-compatibility"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "Mathlib",
+    "place": "Mathlib/CategoryTheory/Sites/DenseSubsite/Basic.lean:805, Functor.IsDenseSubsite.sheafEquivSheafificationCompatibility"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-fppf-affine-site-topos-equivalence",
+  "lem-pc-dense-subsite-sheafification-compatibility"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/topologies.tex",
+  "place": "Tag 021V, Lemma 34.7.11"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -54,12 +84,28 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-pc-picard-functor-agrees-sc",
   "by": "worker",
   "date": "2026-10-10"
  },
  "chapter": "sec-picard-framework",
- "unit": "sk-def-picard-pic"
+ "unit": "sk-def-picard-pic",
+ "split_report": {
+  "date": "2026-10-11",
+  "item": "lem-pc-fppf-affine-sheafification-restriction",
+  "worker": "stage1",
+  "summary": "No sorry-free Lean declaration states this comparison. I split the proof through the new statement that the affine fppf site is a dense subsite of the big fppf site and that restriction gives an equivalence of sheaf categories. The two proof steps apply that equivalence to the universal morphism into big-site sheafification and then use its universal property to identify the affine-site sheafification, with functoriality by uniqueness.",
+  "blueprint": "Realizes proof step 2 of lem-pc-picard-functor-agrees-sc: restriction of the big fppf sheafification to affine objects.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-fas1959",
+  "group": "C1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-fas1959 (reviewer sub-agent of L); spot-checked: New node lem-pc-fppf-affine-site-topos-equivalence vs Tag 021V text (statement includes the 021S affine-refinement fact; not a restatement of the item, which is a consequence; no existing fppf node). FIX more, RETURN less: C1 in step 2 (missed by the second reading): the claim that maps F|_Aff -> u^*H correspond to maps F -> H for a big-site sheaf H (dense-subsite sheafification compatibility) is not in the cited equivalence statement; added statement-only node lem-pc-dense-subsite-sheafification-compatibility (stmt_deps def-weil-pbc-sheafification as generic tool; Mathlib match recorded: IsDenseSubsite.sheafEquivSheafificationCompatibility, DenseSubsite/Basic.lean:805, induced-topology instance InducedTopology.lean:133), rewrote steps 1-2 to check its hypotheses (fully faithful, cover dense, induced topology from the refinement clause, equivalence) and cite it; proof_deps updated.; 2 file(s) fixed by the reviewer; 1 statement node(s) added by the reviewer (FIX more, RETURN less)"
+ }
 }
