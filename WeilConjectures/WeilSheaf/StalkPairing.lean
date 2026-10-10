@@ -118,7 +118,8 @@ theorem frobeniusPowIso_unit (R : WeilSheaf k₀ l X) (η : 𝟙_ _ ⟶ R.obj.ca
     (h : ε ((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.inv)_*[WeilCoefficients.{u} l] ≫
         ((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.inv)_*[_].map η ≫
           R.obj.str.hom.hom = η) (m : ℕ) :
-    ε (((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius ^ m).inv)_*[WeilCoefficients.{u} l] ≫
+    ε (((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius ^ m).inv)_*[
+        WeilCoefficients.{u} l] ≫
         (((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius ^ m).inv)_*[_].map η ≫
           (R.frobeniusPowIso m).hom.hom = η := by
   induction m with

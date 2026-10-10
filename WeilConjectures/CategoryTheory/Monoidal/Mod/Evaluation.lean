@@ -107,6 +107,10 @@ variable {C : Type u} [Category.{v} C] [MonoidalCategory C] {A : C} [MonObj A]
   (hβ : ∀ X Y : C, Functor.LaxMonoidal.μ G X Y ≫ G.map (β_ X Y).hom =
       (β_ (G.obj X) (G.obj Y)).hom ≫ Functor.LaxMonoidal.μ G Y X)
 
+omit [MonoidalPreadditive C]
+  [∀ X : C, PreservesColimitsOfSize.{v, v} (MonoidalCategory.tensorRight X)]
+  [MonoidalPreadditive D]
+  [∀ X : D, PreservesColimitsOfSize.{v', v'} (MonoidalCategory.tensorRight X)] in
 /-- The quotient map `P ⊗ M ⟶ P ⊗_A M` is compatible with `G`. -/
 @[reassoc]
 lemma map_tensorπ_comp_tensorLeftCompMapModComapIso_hom
@@ -139,8 +143,7 @@ lemma mapModComapCompIhomIso_inv_counit (M N : Mod C A) :
   simp only [mapModComapCompIhomIso, Iso.trans_inv, NatTrans.comp_app, Functor.leftUnitor_inv_app,
     Functor.isoWhiskerRight_inv, Functor.whiskerRight_app, Iso.symm_inv,
     Functor.associator_hom_app, Functor.isoWhiskerLeft_inv, Functor.whiskerLeft_app,
-    Category.id_comp, Functor.map_comp, Category.assoc, Adjunction.rightAdjointUniq_inv_app,
-    Functor.map_id]
+    Category.id_comp, Functor.map_comp, Category.assoc, Adjunction.rightAdjointUniq_inv_app]
   erw [Adjunction.rightAdjointUniq_hom_app_counit]
   simp only [Adjunction.ofNatIsoLeft_counit, Adjunction.comp_counit_app, NatTrans.comp_app,
     Functor.whiskerLeft_app, Iso.trans_inv, Functor.isoWhiskerLeft_inv, Iso.symm_inv,
@@ -157,7 +160,7 @@ lemma mapModComapCompIhomIso_inv_counit (M N : Mod C A) :
     Equivalence.counitInv_app_functor _ X
   have nτ := (tensorLeftCompMapModComapIso ρ hβ M).inv.naturality
   simp only [Functor.comp_map, Functor.comp_obj] at nτ
-  simp only [Functor.comp_obj, Functor.comp_map, Functor.map_id, Category.id_comp, e₁, e₂, e₃,
+  simp only [Functor.comp_obj, Functor.comp_map, Category.id_comp, e₁, e₂, e₃,
     Equivalence.counit_app_functor]
   erw [Functor.map_id, Category.id_comp, ← Functor.map_comp_assoc, ← Functor.map_comp,
     reassoc_of% nτ, ← Functor.map_comp, ← Functor.map_comp]
