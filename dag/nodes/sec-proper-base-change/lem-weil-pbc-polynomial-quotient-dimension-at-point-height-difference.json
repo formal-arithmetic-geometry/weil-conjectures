@@ -12,9 +12,111 @@
   "def-weil-affine-spectrum",
   "def-kun-topological-dimension-at-point"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "(Setting.) $P$ is a finite type $k$-algebra [def-weil-pbc-finite-type-algebra] (the identity $P\\to P$ is a surjection from a polynomial ring in $n$ variables [def-weil-pbc-mv-polynomial-ring]), and so is $S=P/I$ (via $\\pi$). $P$ is an integral domain [lem-weil-pbc-polynomial-ring-domain] (take $D=k$, $I=\\{1,\\dots,n\\}$ there). Hence $(0)$ is a prime ideal of $P$, contained in every prime ideal of $P$, so $(0)$ is the unique minimal prime ideal of $P$, and $P/(0)=P$. Also $\\mathfrak q'=\\pi^{-1}(\\mathfrak q)$ is a prime ideal of $P$ (the preimage of a prime ideal under a ring map) containing $I=\\pi^{-1}(0)$.",
+   "uses": [
+    "def-weil-pbc-finite-type-algebra",
+    "def-weil-pbc-mv-polynomial-ring",
+    "lem-weil-pbc-polynomial-ring-domain"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra, Lemma Tag 00P2 (label lemma-codimension, line 28270), proof 'Immediate from Lemma 00P1' (the hypotheses: S' = P -> S a surjection of finite type k-algebras)"
+   }
+  },
+  {
+   "text": "(Lemma 00P1 at both points; heights are finite.) Apply [lem-weil-pbc-dimension-at-point-local-ring-trdeg] to the finite type $k$-algebra $S$ at $\\mathfrak q$ and to the finite type $k$-algebra $P$ at $\\mathfrak q'$ (step 1): all quantities below are finite and $$\\dim_{\\mathfrak q}(\\operatorname{Spec}S)=\\dim S_{\\mathfrak q}+\\operatorname{trdeg}_k\\kappa(\\mathfrak q),\\qquad \\dim_{\\mathfrak q'}(\\operatorname{Spec}P)=\\dim P_{\\mathfrak q'}+\\operatorname{trdeg}_k\\kappa(\\mathfrak q').$$ By [lem-weil-pbc-localization-dimension-chains-below-prime] the Krull dimension [def-weil-pbc-krull-dimension-ring] of $S_{\\mathfrak q}$ is $\\operatorname{ht}(\\mathfrak q)$ (the supremum of lengths of chains of primes of $S$ ending inside $\\mathfrak q$, as in the statement), and that of $P_{\\mathfrak q'}$ is $\\operatorname{ht}(\\mathfrak q')$. So $\\operatorname{ht}(\\mathfrak q)$ and $\\operatorname{ht}(\\mathfrak q')$ are integers, both $\\ge0$ (the chain consisting of the single prime $\\mathfrak q$, resp. $\\mathfrak q'$, has length $0$), and $$\\dim_{\\mathfrak q}(\\operatorname{Spec}S)=\\operatorname{ht}(\\mathfrak q)+\\operatorname{trdeg}_k\\kappa(\\mathfrak q),\\qquad\\dim_{\\mathfrak q'}(\\operatorname{Spec}P)=\\operatorname{ht}(\\mathfrak q')+\\operatorname{trdeg}_k\\kappa(\\mathfrak q'),$$ with all terms integers $\\ge0$.",
+   "uses": [
+    "lem-weil-pbc-dimension-at-point-local-ring-trdeg",
+    "lem-weil-pbc-localization-dimension-chains-below-prime",
+    "def-weil-pbc-krull-dimension-ring",
+    "def-kun-topological-dimension-at-point"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra, Lemma Tag 00P2 (label lemma-codimension, line 28270), proof 'Immediate from Lemma 00P1'; Lemma Tag 00P1 (label lemma-dimension-at-a-point-finite-type-field, line 28222); height = dim of the localization, Definition Tag 00KF (label definition-height)"
+   }
+  },
+  {
+   "text": "(The residue fields agree: $\\operatorname{trdeg}_k\\kappa(\\mathfrak q)=\\operatorname{trdeg}_k\\kappa(\\mathfrak q')$.) By [lem-weil-pbc-localization-at-prime-of-quotient] (with $R=P$, the ideal $I$, $\\bar{\\mathfrak p}=\\mathfrak q$, $\\mathfrak p=\\mathfrak q'$) the map $\\lambda:P_{\\mathfrak q'}\\to S_{\\mathfrak q}$, $r/s\\mapsto\\pi(r)/\\pi(s)$, is a well defined surjective ring map; it is $k$-linear because $\\pi$ is a $k$-algebra map. Let $\\mu:P_{\\mathfrak q'}\\to\\kappa(\\mathfrak q)=S_{\\mathfrak q}/\\mathfrak qS_{\\mathfrak q}$ be $\\lambda$ followed by the quotient map [def-weil-pbc-localization-at-prime]; it is surjective onto a field, so $\\ker\\mu$ is a proper ideal of the local ring $P_{\\mathfrak q'}$, hence $\\ker\\mu\\subseteq\\mathfrak q'P_{\\mathfrak q'}$ (the maximal ideal). Conversely, for $r\\in\\mathfrak q'$ we have $\\pi(r)\\in\\mathfrak q$, so $\\lambda(r/s)=\\pi(r)/\\pi(s)\\in\\mathfrak qS_{\\mathfrak q}$; hence $\\mathfrak q'P_{\\mathfrak q'}\\subseteq\\ker\\mu$. So $\\ker\\mu=\\mathfrak q'P_{\\mathfrak q'}$ and $\\mu$ induces a bijective $k$-algebra map $\\kappa(\\mathfrak q')=P_{\\mathfrak q'}/\\mathfrak q'P_{\\mathfrak q'}\\to\\kappa(\\mathfrak q)$, an isomorphism of field extensions of $k$. A $k$-algebra isomorphism carries subsets algebraically independent over $k$ bijectively onto such subsets (a polynomial over $k$ vanishes on a family iff it vanishes on its image), so by the definition of transcendence degree [def-kun-transcendence-degree] $\\operatorname{trdeg}_k\\kappa(\\mathfrak q)=\\operatorname{trdeg}_k\\kappa(\\mathfrak q')$.",
+   "uses": [
+    "lem-weil-pbc-localization-at-prime-of-quotient",
+    "def-weil-pbc-localization-at-prime",
+    "def-kun-transcendence-degree"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra, Lemma Tag 00P2 (label lemma-codimension, line 28270), proof 'Immediate from Lemma 00P1' (the identification of the residue fields of p and p' left implicit in 'immediate')"
+   }
+  },
+  {
+   "text": "(Lemma 00P2.) Subtracting the two identities of step 2 and using step 3 (all terms are integers): $$\\dim_{\\mathfrak q'}(\\operatorname{Spec}P)-\\dim_{\\mathfrak q}(\\operatorname{Spec}S)=\\operatorname{ht}(\\mathfrak q')-\\operatorname{ht}(\\mathfrak q).$$",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra, Lemma Tag 00P2 (label lemma-codimension, line 28270), proof 'Immediate from Lemma 00P1'"
+   }
+  },
+  {
+   "text": "($\\dim_{\\mathfrak q'}(\\operatorname{Spec}P)=n$.) By [lem-weil-pbc-dimension-at-point-components] applied to the finite type $k$-algebra $P$ at $\\mathfrak q'$, $\\dim_{\\mathfrak q'}(\\operatorname{Spec}P)$ is the maximum of $\\dim(P/\\mathfrak r)$ over the minimal primes $\\mathfrak r$ of $P$ contained in $\\mathfrak q'$; by step 1 the only one is $\\mathfrak r=(0)$, so $\\dim_{\\mathfrak q'}(\\operatorname{Spec}P)=\\dim P$ [def-weil-pbc-krull-dimension-ring]. $P\\ne0$, so it has a maximal ideal $\\mathfrak M$ [lem-weil-pbc-proper-ideal-contained-in-maximal] (applied to the ideal $0\\ne P$). Since $P$ is a finite type $k$-algebra and a domain, [lem-weil-pbc-finite-type-domain-dimension-local-ring] gives $\\dim P=\\dim P_{\\mathfrak M}$, and [lem-weil-pbc-polynomial-ring-maximal-localization-dimension] gives $\\dim P_{\\mathfrak M}=n$. Hence $\\dim_{\\mathfrak q'}(\\operatorname{Spec}P)=n$.",
+   "uses": [
+    "lem-weil-pbc-dimension-at-point-components",
+    "def-weil-pbc-krull-dimension-ring",
+    "lem-weil-pbc-proper-ideal-contained-in-maximal",
+    "lem-weil-pbc-finite-type-domain-dimension-local-ring",
+    "lem-weil-pbc-polynomial-ring-maximal-localization-dimension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra, Lemma Tag 00OP (label lemma-dim-affine-space, line 27660: dim k[x_1..x_n]_m = n) with Lemma Tag 00OS (label lemma-dimension-spell-it-out, line 27763) and Lemma Tag 00OT (label lemma-dimension-at-a-point-finite-type-over-field, line 27787); the value dim_{x'} Spec P = n is what the statement of Lemma Tag 00SC (label lemma-lci, line 35909) uses when it writes 'dim_q(S) = n - c (see Lemma 00P2)'"
+   }
+  },
+  {
+   "text": "(Conclusion and $\\operatorname{ht}(\\mathfrak q')\\le n$.) By steps 4 and 5, $\\dim_{\\mathfrak q}(\\operatorname{Spec}S)=n-\\operatorname{ht}(\\mathfrak q')+\\operatorname{ht}(\\mathfrak q)$. By steps 2 and 5, $n=\\operatorname{ht}(\\mathfrak q')+\\operatorname{trdeg}_k\\kappa(\\mathfrak q')$ with $\\operatorname{trdeg}_k\\kappa(\\mathfrak q')\\ge0$, so $\\operatorname{ht}(\\mathfrak q')\\le n$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra, Lemma Tag 00P2 (label lemma-codimension, line 28270), proof 'Immediate from Lemma 00P1'; Lemma Tag 00SC (label lemma-lci, line 35909)"
+   }
+  },
+  {
+   "text": "($\\operatorname{ht}(\\mathfrak q)\\le\\operatorname{ht}(\\mathfrak q')$.) Let $\\mathfrak q_0\\subsetneq\\cdots\\subsetneq\\mathfrak q_t$ be a chain of prime ideals of $S$ with $\\mathfrak q_t\\subseteq\\mathfrak q$. Then $\\pi^{-1}(\\mathfrak q_0)\\subseteq\\cdots\\subseteq\\pi^{-1}(\\mathfrak q_t)\\subseteq\\pi^{-1}(\\mathfrak q)=\\mathfrak q'$ are prime ideals of $P$ (preimages of primes under a ring map), and the inclusions are strict because $\\pi$ is surjective, so $\\pi(\\pi^{-1}(J))=J$ for every ideal $J$ of $S$ and $\\pi^{-1}(\\mathfrak q_{i-1})=\\pi^{-1}(\\mathfrak q_i)$ would give $\\mathfrak q_{i-1}=\\mathfrak q_i$. So every length $t$ occurring in the supremum defining $\\operatorname{ht}(\\mathfrak q)$ occurs in that defining $\\operatorname{ht}(\\mathfrak q')$, and $\\operatorname{ht}(\\mathfrak q)\\le\\operatorname{ht}(\\mathfrak q')$. With step 2 and step 6: $0\\le\\operatorname{ht}(\\mathfrak q)\\le\\operatorname{ht}(\\mathfrak q')\\le n$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra, Lemma Tag 00P2 (label lemma-codimension, line 28270), proof 'Immediate from Lemma 00P1' (agent-written: the inequality is implicit in the source, where dim_x X >= 0 hides it)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-finite-type-algebra",
+  "def-weil-pbc-mv-polynomial-ring",
+  "lem-weil-pbc-polynomial-ring-domain",
+  "lem-weil-pbc-dimension-at-point-local-ring-trdeg",
+  "lem-weil-pbc-localization-dimension-chains-below-prime",
+  "def-weil-pbc-krull-dimension-ring",
+  "def-kun-topological-dimension-at-point",
+  "lem-weil-pbc-localization-at-prime-of-quotient",
+  "def-weil-pbc-localization-at-prime",
+  "def-kun-transcendence-degree",
+  "lem-weil-pbc-dimension-at-point-components",
+  "lem-weil-pbc-proper-ideal-contained-in-maximal",
+  "lem-weil-pbc-finite-type-domain-dimension-local-ring",
+  "lem-weil-pbc-polynomial-ring-maximal-localization-dimension"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Algebra, Lemma Tag 00P2 (label lemma-codimension, line 28270; proof 'Immediate from Lemma 00P1') applied to S' = P = k[x_1,...,x_n], with Lemma Tag 00P1 (label lemma-dimension-at-a-point-finite-type-field, line 28222) and, for dim_{x'} Spec P = n, Lemma Tag 00OP (label lemma-dim-affine-space, line 27660); the residue field identification (step 3) and the inequality ht(q) <= ht(q') (step 7) are written out by the agent"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -50,10 +152,38 @@
    "results": "no items; index: unavailable, so no verdict from it (the grep stands in)",
    "date": "2026-10-10",
    "verdict": "no verdict"
+  },
+  {
+   "tool": "leansearch",
+   "query": "height of a prime in a quotient ring plus height of image is at most height of preimage; Ideal.height comap surjective quotient",
+   "results": "Ideal.height_le_height_add_of_liesOver, Ideal.height_eq_height_add_of_liesOver_of_hasGoingDown, Ideal.height_le_height_add_one_of_mem, Ideal.height_le_height_add_encard_of_subset, Ideal.height_le_height_add_spanFinrank_of_le (Mathlib.RingTheory.Ideal.KrullsHeightTheorem), Ideal.height, Ideal.primeHeight (Mathlib.RingTheory.Ideal.Height)",
+   "date": "2026-10-10",
+   "verdict": "no match: upper bounds of heights by generators and going-down formulas; no dimension at a point, no difference formula for a quotient of a polynomial ring"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Krull dimension of Spec of a finitely generated algebra over a field near a point equals dimension of local ring plus transcendence degree of residue field",
+   "results": "IsLocalization.AtPrime.ringKrullDim_eq_height (Mathlib.RingTheory.Ideal.Height), Ring.krullDimLE_of_isLocalization_maximal, Ring.KrullDimLE.of_isLocalization (KrullDimension.Zero), ringKrullDim_le_ringKrullDim_add_card, ringKrullDim_le_ringKrullDim_add_spanFinrank (KrullDimension.Regular)",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "Ideal.height, Ideal.comap, Ideal.Quotient.mk",
+   "results": "none",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rnE 'theorem .*(height|krullDim).*(comap|quotient|Quotient)' Mathlib/RingTheory/Ideal/Height.lean Mathlib/RingTheory/KrullDimension/*.lean; grep -rnE 'MvPolynomial' Mathlib/RingTheory/KrullDimension/*.lean Mathlib/RingTheory/Ideal/Height.lean; grep -rln 'trdeg|transcendenceDegree' Mathlib/RingTheory/KrullDimension/ Mathlib/RingTheory/Ideal/Height.lean",
+   "results": "Ideal.krullDimLE_zero_quotient_iff_forall_minimalPrimes_isMaximal (KrullDimension/Zero.lean:70); MvPolynomial only in KrullDimension/NonZeroDivisors.lean:77-104 (ringKrullDim of MvPolynomial over empty sigma, and the lower bound ringKrullDim R + card sigma <= ringKrullDim (MvPolynomial sigma R)); no transcendence degree in the Krull dimension files",
+   "date": "2026-10-10",
+   "verdict": "no match: Mathlib has neither the dimension of a space at a point nor dim k[x_1..x_n] = n nor the height difference formula"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "worker",
@@ -74,5 +204,11 @@
  },
  "chapter": "sec-proper-base-change",
  "unit": "sk-thm-p1",
- "reviewed": "Reviewed by L 2026-10-10 (statement): Algebra 00P2 for S' = k[x_1..x_n] with 00P1/00OP (dim at every point of affine n-space is n). Unsplit."
+ "reviewed": "2026-10-10 L: 7 steps checked (00P2 via 00P1 at both points, heights as dimensions of the localizations, residue fields identified through localization-at-prime-of-quotient, dim_{q'} Spec P = n via dimension-at-point-components, 00OS and 00OP, ht(q) <= ht(q') by preimages of chains); five citers use only the stated clauses; no cycle with the 00OP lead note",
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "lem-weil-pbc-polynomial-quotient-dimension-at-point-height-difference",
+  "worker": "stage1",
+  "summary": "Not a Mathlib leaf (Mathlib has no Krull dimension of a space at a point; searches by LeanSearch, LeanFinder, Loogle and grep recorded). Split along Algebra 00P2, whose proof is 'immediate from 00P1': step 1 the setting (P, S of finite type, P a domain with unique minimal prime 0); step 2 applies the 00P1 node at q in S and at q' in P and identifies dim S_q, dim P_q' with the heights (so both are finite integers); step 3 identifies kappa(q') with kappa(q) as k-extensions via the surjection P_q' -> S_q (written out); step 4 subtracts (00P2); step 5 dim_q' Spec P = n via 00OT (only minimal prime 0), 00OS and 00OP; step 6 the formula and ht(q') <= n (trdeg >= 0); step 7 ht(q) <= ht(q') by lifting chains along the surjection. All clauses used by the five citers (integrality, 0 <= ht q <= ht q' <= n, the formula) are proved. No new node; all cited nodes are in unit sk-thm-p1."
+ }
 }
