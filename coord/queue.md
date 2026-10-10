@@ -1,8 +1,8 @@
 # Work queue
 
-914 items; claim with `tools/claim.py next <group> [--stage N]`.
+916 items; claim with `tools/claim.py next <group> [--stage N]`.
 
-## Stage 1: nodes to split (623)
+## Stage 1: nodes to split (624)
 
 | node | distance to a target | Lean state on the done branch |
 |---|---|---|
@@ -29,7 +29,6 @@
 | `lem-weil-pbc-field-char-p-nilpotent-lifting` | 1013 | none |
 | `lem-weil-pbc-finite-locally-free-degree-etale-descent` | 1013 | none |
 | `lem-weil-pbc-finite-surjective-affine-target-noetherian` | 1013 | none |
-| `lem-weil-pbc-finite-t0-space-sober` | 1013 | none |
 | `lem-weil-pbc-formal-glueing-complex-exact` | 1013 | none |
 | `lem-weil-pbc-formal-glueing-finite-modules` | 1013 | none |
 | `lem-weil-pbc-formal-glueing-isogeny` | 1013 | none |
@@ -109,6 +108,7 @@
 | `lem-weil-pbc-depth-le-support-dimension` | 1014 | none |
 | `lem-weil-pbc-essentially-constant-splitting` | 1014 | none |
 | `lem-weil-pbc-etale-splits-off-isolated-points-technical` | 1014 | none |
+| `lem-weil-pbc-field-char-p-separable-over-prime-field` | 1014 | none |
 | `lem-weil-pbc-finite-type-domain-dimension-local-ring` | 1014 | none |
 | `lem-weil-pbc-finitely-generated-field-complete-intersection-model` | 1014 | none |
 | `lem-weil-pbc-flat-local-extension-given-residue-field` | 1014 | none |
@@ -116,6 +116,7 @@
 | `lem-weil-pbc-local-ring-spec-limit-affine-neighbourhoods` | 1014 | none |
 | `lem-weil-pbc-nl-presentations-homotopy-equivalent` | 1014 | none |
 | `lem-weil-pbc-p-basis-differentials-basis` | 1014 | none |
+| `lem-weil-pbc-separable-field-extension-formally-smooth` | 1014 | none |
 | `lem-weil-pbc-two-term-homotopy-equivalence-direct-sum` | 1014 | none |
 | `lem-weil-pbc-injective-acyclicity-bounded-below` | 2002 | sorry_here |
 | `lem-weil-pbc-property-implies-acyclicity` | 2003 | none |
@@ -630,7 +631,7 @@
 | `def-exc-jacobian-presentation` | - | none |
 | `def-nagata-rees-algebra` | - | none |
 
-## Stage 2: nodes to state (291)
+## Stage 2: nodes to state (292)
 
 | node | distance to Mathlib | kind |
 |---|---|---|
@@ -751,6 +752,7 @@
 | `lem-weil-pbc-finite-separable-multiplication-etale` | 1 | state |
 | `lem-weil-pbc-finite-subalgebra-fraction-field` | 1 | state |
 | `lem-weil-pbc-finite-surjective-affine-target` | 1 | state |
+| `lem-weil-pbc-finite-t0-space-sober` | 1 | state |
 | `lem-weil-pbc-finite-type-z-domain-normalization-finite` | 1 | state |
 | `lem-weil-pbc-finite-unramified-etale-local` | 1 | state |
 | `lem-weil-pbc-finite-unramified-one-point-closed` | 1 | state |
@@ -926,7 +928,7 @@
 | `lem-weil-pbc-p1-field-dimension-one` | 4 | state |
 | `lem-weil-pbc-projective-space-zero-isomorphism` | 4 | state |
 
-Not open yet: 635 nodes that wait for stage 1, 566 nodes that wait for a statement dependency.
+Not open yet: 636 nodes that wait for stage 1, 566 nodes that wait for a statement dependency.
 
 ## Stage 3: modules to prove (0)
 
