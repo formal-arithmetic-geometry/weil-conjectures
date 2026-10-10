@@ -3,11 +3,11 @@
  "blueprint": {
   "is": "prop-weil-pbc-strict-henselization-stalk-formula",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "Strict-henselization stalk formula",
- "statement": "Let $f:X\\to S$ be quasi-compact and quasi-separated\n[def-weil-pbc-scheme-conventions], let $F$ be a torsion etale sheaf\n[def-weil-pbc-etale-sheaves], and let $\\bar s\\to S$ be geometric. Then\n\n$$\n (R^qf_*F)_{\\bar s}\\xrightarrow{\\sim}\n H^q(X\\times_SS_{(\\bar s)},F|)\n \\qquad(q\\geq0),\n$$\n\nwhere $S_{(\\bar s)}$ is the strict henselization limit\n[def-weil-pbc-strict-henselization-limit] at $\\bar s$. For\n$K\\in\\Dplus(X_{\\Et})$ with torsion cohomology, this assembles to\n\n$$\n (Rf_*K)_{\\bar s}\\xrightarrow{\\sim}\n \\RGamma(X\\times_SS_{(\\bar s)},K|)\n \\quad\\text{in }\\Dplus(\\Ab).\n$$",
+ "statement": "Let $f:X\\to S$ be a quasi-compact and quasi-separated morphism of schemes [def-weil-pbc-scheme-conventions], let $F\\in\\Ab(X_{\\Et})$ be a torsion abelian etale sheaf [def-weil-pbc-etale-sheaves], and let $\\bar s:\\operatorname{Spec}\\Omega\\to S$ be a geometric point. Put $S_{(\\bar s)}=\\operatorname{Spec}\\mathcal O^{\\mathrm{sh}}_{S,\\bar s}$ [def-weil-pbc-strict-henselization-limit], let $p:X\\times_SS_{(\\bar s)}\\to X$ be the projection, and use the higher direct image [def-weil-pbc-direct-image], geometric stalk [def-weil-pbc-geometric-stalks], inverse image [def-weil-pbc-inverse-image], and etale cohomology [def-weil-pbc-etale-cohomology]. Then the canonical restriction map is an isomorphism for every $q\\geq0$:\n\n$$\n (R^qf_*F)_{\\bar s}\\xrightarrow{\\sim}H^q((X\\times_SS_{(\\bar s)})_{\\Et},p^{-1}F).\n$$\n\nFor $K\\in D^+(\\Ab(X_{\\Et}))$ [def-weil-pbc-bounded-derived-subcategories] with torsion cohomology sheaves, the corresponding canonical map is an isomorphism in $D^+(\\Ab)$:\n\n$$\n (Rf_*K)_{\\bar s}\\xrightarrow{\\sim}R\\Gamma((X\\times_SS_{(\\bar s)})_{\\Et},p^{-1}K).\n$$",
  "source": {
   "document": "literature/blueprint/master/blueprint/sec-curve-estimates/sk-prop-h2/prop-weil-pbc-strict-henselization-stalk-formula.md",
   "place": "node prop-weil-pbc-strict-henselization-stalk-formula, order 956",
@@ -22,35 +22,129 @@
   "def-weil-pbc-scheme-conventions",
   "def-weil-pbc-etale-sheaves",
   "def-weil-pbc-strict-henselization-limit",
-  "def-weil-pbc-pointed-etale-neighbourhoods"
+  "def-weil-pbc-direct-image",
+  "def-weil-pbc-geometric-stalks",
+  "def-weil-pbc-inverse-image",
+  "def-weil-pbc-etale-cohomology",
+  "def-weil-pbc-bounded-derived-subcategories"
  ],
  "proof": [
   {
-   "text": "The stalk is the colimit over pointed etale neighbourhoods, whose inverse\nlimit is the strict henselization by\n[def-weil-pbc-strict-henselization-limit]; the fibre product\ncommutation of [lemma-weil-pbc-fibre-product-limit] replaces $X\\times_SS_{(\\bar\ns)}$ by the limit of the $X\\times_SV$, and\n[lemma-weil-pbc-etale-cohomology-continuity] identifies the colimit of\ncohomologies with the cohomology of the limit. On a bounded-below K-injective\n[def-weil-pbc-kinjective-resolutions] representative the same argument gives\nthe derived statement.",
+   "text": "By [sbc-lem-higher-direct-image-presheaf], $R^qf_*F$ is the sheafification of $V\\mapsto H^q(X\\times_SV,F|)$ on $S_{\\Et}$. Taking its geometric stalk [def-weil-pbc-geometric-stalks] gives the filtered colimit of those groups over pointed etale neighbourhoods [def-weil-pbc-pointed-etale-neighbourhoods]: sheafification does not change a stalk by [lem-weil-pbc-sheafification-geometric-stalk]. This is the first displayed equality in the proof of Stacks 03Q9.",
    "uses": [
+    "sbc-lem-higher-direct-image-presheaf",
+    "def-weil-pbc-geometric-stalks",
+    "def-weil-pbc-pointed-etale-neighbourhoods",
+    "lem-weil-pbc-sheafification-geometric-stalk"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Theorem Tag 03Q9, proof lines 8042-8050; Lemma Tag 03Q8"
+   }
+  },
+  {
+   "text": "By [lemma-weil-pbc-affine-neighbourhood-cofinal], the colimit may be restricted to affine pointed neighbourhoods $V$. Their inverse limit is $S_{(\\bar s)}$ by [def-weil-pbc-strict-henselization-limit], and [lemma-weil-pbc-fibre-product-limit] identifies $X\\times_SS_{(\\bar s)}$ with the inverse limit of $X\\times_SV$. Each $X\\times_SV$ is quasi-compact and quasi-separated because $f$ is so and $V$ is affine; a transition $X\\times_SV'\\to X\\times_SV$ is affine because $V'\\to V$ is a morphism of affine schemes. These are exactly the limit hypotheses used in the next step.",
+   "uses": [
+    "lemma-weil-pbc-affine-neighbourhood-cofinal",
     "def-weil-pbc-strict-henselization-limit",
     "lemma-weil-pbc-fibre-product-limit",
-    "lemma-weil-pbc-etale-cohomology-continuity",
-    "def-weil-pbc-kinjective-resolutions"
+    "def-weil-pbc-scheme-conventions"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Theorem Tag 03Q9, proof lines 8050-8061"
+   }
+  },
+  {
+   "text": "Apply [lemma-weil-pbc-etale-cohomology-continuity] to the system of Step 2, with the sheaf $F$ pulled back from $X$ to each $X\\times_SV$ and to the limit. It identifies the filtered colimit from Step 1 with $H^q(X\\times_SS_{(\\bar s)},p^{-1}F)$, and the composite is the canonical restriction map in the statement.",
+   "uses": [
+    "lemma-weil-pbc-etale-cohomology-continuity",
+    "def-weil-pbc-inverse-image"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Theorem Tag 03Q9, proof line 8062; Lemma Tag 03Q6"
+   }
+  },
+  {
+   "text": "For a bounded-below complex $K$, the complex version of the sheafified-presheaf formula [sbc-lem-higher-direct-image-presheaf] identifies $H^n((Rf_*K)_{\\bar s})$ with $\\varinjlim_V H^n(X\\times_SV,K|)$ for every integer $n$: take geometric stalks as in Step 1, where sheafification does not change a stalk by [lem-weil-pbc-sheafification-geometric-stalk], and use their exactness [prop-weil-pbc-geometric-stalks-exact]. The general continuity result [lem-weil-pbc-derived-etale-cohomology-limit] applies to Step 2's inverse system, with base scheme $X$ and complex $K$, and identifies that colimit with $H^n(X\\times_SS_{(\\bar s)},p^{-1}K)$. This proves the cohomology-group comparison without imposing a fixed finite coefficient ring on $K$.",
+   "uses": [
+    "sbc-lem-higher-direct-image-presheaf",
+    "def-weil-pbc-geometric-stalks",
+    "lem-weil-pbc-sheafification-geometric-stalk",
+    "prop-weil-pbc-geometric-stalks-exact",
+    "lem-weil-pbc-derived-etale-cohomology-limit"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Theorem Tag 03Q9, proof lines 8064-8067; Lemma Tag 0GIT"
+   }
+  },
+  {
+   "text": "Choose a bounded-below complex $J^\\bullet$ of injective abelian sheaves representing $K$ [lem-weil-pbc-dplus-injective-representative]. By [def-weil-pbc-direct-image], $f_*J^\\bullet$ represents $Rf_*K$, and [def-weil-pbc-geometric-stalks] makes its stalk the filtered colimit of the complexes $\\Gamma(X\\times_SV,J^\\bullet|)$. Restriction from each neighbourhood to $X\\times_SS_{(\\bar s)}$, followed by the canonical map to derived global sections there, is compatible with refinements and induces the canonical arrow of the statement. On each $H^n$ this arrow is the isomorphism of Step 4, so it is a quasi-isomorphism and hence an isomorphism in $D^+(\\Ab)$.",
+   "uses": [
+    "lem-weil-pbc-dplus-injective-representative",
+    "def-weil-pbc-direct-image",
+    "def-weil-pbc-geometric-stalks",
+    "lem-weil-pbc-derived-etale-cohomology-limit"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Theorem Tag 03Q9, proof lines 8068-8096"
+   }
   }
  ],
  "proof_deps": [
+  "sbc-lem-higher-direct-image-presheaf",
+  "def-weil-pbc-geometric-stalks",
+  "def-weil-pbc-pointed-etale-neighbourhoods",
+  "lem-weil-pbc-sheafification-geometric-stalk",
+  "lemma-weil-pbc-affine-neighbourhood-cofinal",
   "def-weil-pbc-strict-henselization-limit",
   "lemma-weil-pbc-fibre-product-limit",
+  "def-weil-pbc-scheme-conventions",
   "lemma-weil-pbc-etale-cohomology-continuity",
-  "def-weil-pbc-kinjective-resolutions",
-  "lemma-weil-pbc-affine-neighbourhood-cofinal"
+  "def-weil-pbc-inverse-image",
+  "prop-weil-pbc-geometric-stalks-exact",
+  "lem-weil-pbc-derived-etale-cohomology-limit",
+  "lem-weil-pbc-dplus-injective-representative",
+  "def-weil-pbc-direct-image"
  ],
  "proof_origin": {
-  "by": "agent",
-  "document": "literature/blueprint/master/blueprint/sec-curve-estimates/sk-prop-h2/prop-weil-pbc-strict-henselization-stalk-formula.md",
-  "place": "## Proof"
+  "by": "document",
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Theorem Tag 03Q9 (theorem-higher-direct-images), lines 8014-8096"
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "stalk of higher direct image etale sheaf at geometric point is etale cohomology over strict henselization",
+   "results": "Only general topological stalk and scheme local-ring results; no strict-henselization etale cohomology formula",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"sheafFiber\"",
+   "results": "GrothendieckTopology.Point.sheafFiber and general point-fiber lemmas in Mathlib.CategoryTheory.Sites.Point.Basic; no strict-henselization formula",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "rg -n 'higherDirectImage|sheafFiber|strictHensel|StrictHensel|cohomology.*stalk' Mathlib/AlgebraicGeometry/Sites Mathlib/CategoryTheory/Sites",
+   "results": "Point-fiber infrastructure only; no etale strict-henselization stalk theorem",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [
   "detailed_form",
@@ -98,5 +192,29 @@
   }
  },
  "chapter": "sec-curve-estimates",
- "unit": "sk-prop-h2"
+ "unit": "sk-prop-h2",
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "prop-weil-pbc-strict-henselization-stalk-formula",
+  "worker": "stage1",
+  "summary": "Read Stacks 03Q9 and split its presheaf, affine cofinality, inverse-limit, ordinary-continuity, derived-continuity and canonical-map arguments into five steps. Corrected the imported one-paragraph proof's missing 03Q8 presheaf citation, explicit affine cofinality citation and derived-continuity gap. Created the general bounded-below inverse-limit continuity statement of Stacks 0GIT because the existing finite-ring derived continuity node does not cover the stated complex. The source 03Q9 needs no torsion assumption, but the blueprint statement retains its torsion hypotheses.",
+  "blueprint": "The second Proof paragraph: sentence 1 (pointed-neighbourhood colimit) is step 1; sentence 2 (limit and continuity) is steps 2-3; sentence 3 (derived argument) is steps 4-5. The first Proof paragraph gives the same route with affine cofinality explicit.",
+  "tool_uses": [
+   {
+    "node": "sbc-lem-higher-direct-image-presheaf",
+    "why": "Step 1 and the complex argument use the generic higher-direct-image presheaf/sheafification formula; the sk-prop-h2 route has no node supplying this 03Q8 statement."
+   }
+  ]
+ },
+ "tool_uses": [
+  "sbc-lem-higher-direct-image-presheaf"
+ ],
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-shf",
+  "group": "E1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-shf (reviewer sub-agent of L); spot-checked: Source: Stacks etale-cohomology.tex Theorem 03Q9 (theorem-higher-direct-images, 8014-8096) and Lemma 0GIT (lemma-colimit-complexes, 7852-7881) read. Item statement: qcqs f, abelian sheaf, geometric point, D^+ complex as in 03Q9; it keeps the blueprint's torsion hypotheses (03Q9 needs none: weaker, harmless, named in the report). New node lem-weil-pbc-derived-etale-cohomology-limit agrees with 0GIT hypothesis by hypothesis (base T, qcqs X_i over T, affine transitions, K in D^+(T), all p; cofiltered for directed is standard), unsplit, statement only, stmt_deps define every notion; tested on a constant system (identity), K=0 and degrees below the bound. Steps: 1 uses sbc-lem-higher-direct-image-presheaf (03Q8, any morphism, sheaf and complex clauses) plus lem-weil-pbc-sheafification-geometric-stalk; 2 uses lemma-weil-pbc-affine-neighbourhood-cofinal, def-weil-pbc-strict-henselization-limit (limit over affine neighbourhoods), lemma-weil-pbc-fibre-product-limit (qcqs f), with qcqs of X x_S V (f qcqs, V affine) and affine transitions (base change of maps of affines) checked; 3 uses lemma-weil-pbc-etale-cohomology-continuity (torsion F restricted to X x_S V_0, colimit over V over V_0 cofinal); 4 uses the complex clause of 03Q8, prop-weil-pbc-geometric-stalks-exact and the new 0GIT node with T=X, Y_i=X x_S V, K; this avoids lem-weil-pbc-derived-cohomology-continuity, which needs a finite coefficient ring; 5 uses lem-weil-pbc-dplus-injective-representative and def-weil-pbc-direct-image (Rf_*K = f_*J), the map Gamma(X x_S V,J) -> Gamma(X^sh,p^{-1}J) -> RGamma, which is an iso on each H^n by step 4. Tool use sbc-lem-higher-direct-image-presheaf (unit sk-lem-failure-field) accepted under C8: a generic 03Q8 black box; sk-prop-h2 has no node stating it (the nearby lem-weil-pbc-higher-direct-image-sheafified-presheaf is off-unit too and has no complex clause). B10: slopmaster2 grep (ids, 03Q9, 0GIT, henselization) found no declaration stating the item or the new node. No Mathlib leaf is created. Fix: dag/nodes/sec-curve-estimates/prop-weil-pbc-strict-henselization-stalk-formula.json: proof[3] (Step 4) text and uses: Step 4 said only 'take geometric stalks as in Step 1', so I added the citation [lem-weil-pbc-sheafification-geometric-stalk] that makes the stalk of the sheafification the presheaf colimit (it is already in proof_deps). Start Sat Oct 10 02:49:00 PM UTC 2026, end Sat Oct 10 02:50:14 PM UTC 2026.; 1 file(s) fixed by the reviewer"
+ }
 }
