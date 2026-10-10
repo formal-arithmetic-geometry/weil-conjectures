@@ -80,8 +80,6 @@ lemma AffineBlowup.isPullback_chart {a b : A} (ha : a ∈ I) (hb : b ∈ I) :
 
 variable {X : Scheme.{u}}
 
-set_option maxHeartbeats 1000000 in
--- Unifying the `HomogeneousLocalization` chart rings exceeds the default heartbeat limit.
 /-- The chart of the blow-up at a product of two degree-one Rees elements is the
 intersection of the two charts. -/
 lemma Scheme.IdealSheafData.isPullback_blowupChart {X : Scheme.{u}} (K : X.IdealSheafData)
@@ -97,8 +95,6 @@ lemma Scheme.IdealSheafData.isPullback_blowupChart {X : Scheme.{u}} (K : X.Ideal
   rw [IsPullback.comp_mono_iff (K.blowupι V)]
   exact AffineBlowup.isPullback_chart _ _
 
-set_option maxHeartbeats 1000000 in
--- Unifying the `HomogeneousLocalization` chart rings exceeds the default heartbeat limit.
 /-- **The chart-local extensions agree on the overlap.** The exact relations
 `b j * a' = b' j * a` between the numerators make the two degree-one slopes restrict to the
 same section of the chart at `a · a'`. -/
@@ -123,7 +119,7 @@ lemma Scheme.IdealSheafData.homOfVector_awaySlope_compat {X : Scheme.{u}}
   · rw [← Category.assoc, ← Category.assoc, K.specMap_awayMap_blowupChart V ha ha']
   · exact AffineBlowup.awayMap_awaySlope_eq ha ha' (hb j) (hb' j) (hrel j)
 
-set_option maxHeartbeats 2000000 in
+set_option maxHeartbeats 400000 in
 -- Unifying the `HomogeneousLocalization` chart rings exceeds the default heartbeat limit.
 /-- **Gluing the chart-local extensions.** Let `a i` and `b i j` be sections of the centre
 `K` over an affine open `V` satisfying the exact relations `b i j * a i' = b i' j * a i`.
@@ -177,7 +173,7 @@ lemma Scheme.IdealSheafData.exists_hom_affineSpace_of_awaySlope {X : Scheme.{u}}
       exact K.isPullback_blowupChart V (ha i) (ha i')
     exact hpb.fst_comp_eq_snd_comp _ _
       (K.homOfVector_awaySlope_compat V (ha i) (ha i') (hb i) (hb i') (hrel i i'))
-  set 𝒰 : W.toScheme.OpenCover := Scheme.Cover.mkOfCovers ι _ ci hcov with h𝒰def
+  let 𝒰 : W.toScheme.OpenCover := Scheme.Cover.mkOfCovers ι _ ci hcov
   have hcompat' : ∀ i i' : ι, pullback.fst (𝒰.f i) (𝒰.f i') ≫ AffineSpace.homOfVector
         (K.blowupChart V (ha i) ≫ K.blowupMap)
         (fun j ↦ (Scheme.ΓSpecIso _).inv
@@ -192,8 +188,6 @@ lemma Scheme.IdealSheafData.exists_hom_affineSpace_of_awaySlope {X : Scheme.{u}}
   rw [← Category.assoc, ← Category.assoc, 𝒰.ι_glueMorphisms _ hcompat' i,
     AffineSpace.homOfVector_over, h2]
 
-set_option maxHeartbeats 4000000 in
--- Unifying the `HomogeneousLocalization` chart rings exceeds the default heartbeat limit.
 /-- The global sections of the blow-up chart over an affine scheme pull sections of `X` back
 through the structure map of the chart ring. -/
 lemma Scheme.IdealSheafData.appTop_blowupChart_comp_blowupMap {X : Scheme.{u}} [IsAffine X]
@@ -203,10 +197,10 @@ lemma Scheme.IdealSheafData.appTop_blowupChart_comp_blowupMap {X : Scheme.{u}} [
       (Scheme.ΓSpecIso _).inv (AffineBlowup.awayAlgebraMap
         (K.ideal ⟨⊤, isAffineOpen_top X⟩)
         (reesX (K.ideal ⟨⊤, isAffineOpen_top X⟩) d hd) r) := by
-  rw [← Scheme.Hom.appLE_top_top _
-      (K.blowupChart_comp_blowupMap_preimage ⟨⊤, isAffineOpen_top X⟩ hd),
-    K.appLE_blowupChart_comp_blowupMap ⟨⊤, isAffineOpen_top X⟩ hd]
-  rfl
+  have h := K.appLE_blowupChart_comp_blowupMap ⟨⊤, isAffineOpen_top X⟩ hd
+    (K.blowupChart_comp_blowupMap_preimage ⟨⊤, isAffineOpen_top X⟩ hd)
+  rw [Scheme.Hom.appLE_top_top] at h
+  exact congrArg (fun φ ↦ φ r) h
 
 /-- **The glued extension agrees with the partial map over a basic open of the centre.**
 On the preimage of `D(d)` the blow-up is covered by a single chart `Spec R`, on which the

@@ -93,8 +93,6 @@ lemma AffineBlowup.chart_preimage_opensRange {a b : A} (ha : a âˆˆ I) (hb : b âˆ
 
 variable {X : Scheme.{u}}
 
-set_option maxHeartbeats 1000000 in
--- Unifying the `HomogeneousLocalization` chart rings exceeds the default heartbeat limit.
 /-- The `a`-chart of the blow-up over an affine open meets the `b`-chart in the basic open of
 the slope `b / a`. -/
 lemma Scheme.IdealSheafData.blowupChart_preimage_opensRange (K : X.IdealSheafData)

@@ -45,8 +45,6 @@ section Closedness
 variable {A : Type u} [CommRing A] {I : Ideal A}
 variable {X : Scheme.{u}}
 
-set_option maxHeartbeats 1000000 in
--- The chart rings are large; unification exceeds the default heartbeat limit.
 /-- **The chart-local coordinate identity for the graph of the extension.** On the overlap of
 the `S`-chart with the `Ri`-chart, the `j`-th coordinate of the graph is the fraction
 `wS / vS`, which is the coordinate `si j` of the `Ri`-chart. -/
@@ -104,8 +102,16 @@ lemma AffineSpace.mul_appTop_coord_eq_of_chartOverlap {σ : Type u} {X Bl : Sche
   apply hinj
   rw [map_mul, hres, hres, ← hval, hstep, hstep2]
 
-set_option maxHeartbeats 16000000 in
--- The chart rings are large; unification exceeds the default heartbeat limit.
+/-- (Implementation) The identity `φ x * ψ y = ψ z` read on global sections of `Spec`, stated
+for abstract rings so that it is not checked on the concrete chart rings. -/
+private lemma specMap_appTop_ΓSpecIso_inv_mul_eq {R S T : CommRingCat.{u}} (φ : R ⟶ T)
+    (ψ : S ⟶ T) (x : R) (y z : S) (h : φ x * ψ y = ψ z) :
+    (Spec.map φ).appTop ((Scheme.ΓSpecIso R).inv x) *
+        (Spec.map ψ).appTop ((Scheme.ΓSpecIso S).inv y) =
+      (Spec.map ψ).appTop ((Scheme.ΓSpecIso S).inv z) := by
+  rw [Scheme.specMap_appTop_ΓSpecIso_inv, Scheme.specMap_appTop_ΓSpecIso_inv,
+    Scheme.specMap_appTop_ΓSpecIso_inv, Scheme.ΓSpecIso_inv_mul, h]
+
 /-- **The chart-local coordinate identity for the glued extension.** On the overlap of the
 `c`-chart with the `d`-chart of the blow-up, the `j`-th coordinate of the extension is the
 fraction `(b j / c) / (d / c)`. -/
@@ -137,18 +143,14 @@ lemma Scheme.IdealSheafData.mul_appTop_coord_awaySlope (K : X.IdealSheafData)
         (AffineBlowup.awaySlope (K.ideal V) hc (hb j)) := by
   subst hBdef
   have hpbi := K.isPullback_blowupChart V hc hd
-  obtain ⟨m₁', hm₁'iso, hm₁'⟩ := exists_isIso_lift_of_mem_iff
-    (Spec.map (CommRingCat.ofHom (HomogeneousLocalization.awayMap
-      (reesGrading (K.ideal V)) (reesX_mem (K.ideal V) d hd) rfl)))
-    hpbi.isOpenImmersion_fst (AffineBlowup.mem_range_specMap_awayMap_iff hc hd)
-  have := hm₁'iso
-  refine AffineSpace.mul_appTop_coord_eq_of_chartOverlap K.blowupMap g
+  -- Elaborating the lift before destructuring it avoids a slow unification.
+  have hex := exists_isIso_lift_of_mem_iff _ hpbi.isOpenImmersion_fst
+    (AffineBlowup.mem_range_specMap_awayMap_iff hc hd)
+  obtain ⟨m₁', hm₁'iso, hm₁'⟩ := hex
+  exact AffineSpace.mul_appTop_coord_eq_of_chartOverlap K.blowupMap g
     (K.blowupChart V hc) lam hlam (K.blowupChart V hd) cid hcid _ hgid hBle _ _ hpbi.w
-    m₁' hm₁' _ _ j ?_
-  rw [Scheme.specMap_appTop_ΓSpecIso_inv, Scheme.specMap_appTop_ΓSpecIso_inv,
-    Scheme.specMap_appTop_ΓSpecIso_inv, Scheme.ΓSpecIso_inv_mul]
-  congr 1
-  exact AffineBlowup.awayMap_awaySlope_mul hc hd (hb j)
+    m₁' hm₁' _ _ j (specMap_appTop_ΓSpecIso_inv_mul_eq _ _ _ _ _
+      (AffineBlowup.awayMap_awaySlope_mul hc hd (hb j)))
 
 end Closedness
 

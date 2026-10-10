@@ -45,7 +45,7 @@ section Closedness
 variable {A : Type u} [CommRing A] {I : Ideal A}
 variable {X : Scheme.{u}}
 
-set_option maxHeartbeats 8000000 in
+set_option maxHeartbeats 1000000 in
 -- Unifying the `HomogeneousLocalization` chart rings exceeds the default heartbeat limit.
 /-- **Closedness of the graph of the glued extension.** -/
 lemma Scheme.IdealSheafData.isClosed_range_pullbackLift_of_awaySlope
@@ -77,9 +77,9 @@ lemma Scheme.IdealSheafData.isClosed_range_pullbackLift_of_awaySlope
       AffineSpace.map σ (K.blowupChart V (hgen k) ≫ K.blowupMap) ≫ 𝔸(σ; X) ↘ X := by
     intro k
     rw [Category.assoc, AffineSpace.map_over]
-  set qk : ∀ k, 𝔸(σ; Spec (.of (HomogeneousLocalization.Away (reesGrading (K.ideal V))
+  let qk : ∀ k, 𝔸(σ; Spec (.of (HomogeneousLocalization.Away (reesGrading (K.ideal V))
       (reesX (K.ideal V) (gen k) (hgen k))))) ⟶ pullback K.blowupMap (𝔸(σ; X) ↘ X) :=
-    fun k ↦ pullback.lift _ _ (hlift k) with hqkdef
+    fun k ↦ pullback.lift _ _ (hlift k)
   have hqk_fst : ∀ k, qk k ≫ pullback.fst K.blowupMap (𝔸(σ; X) ↘ X) =
       (𝔸(σ; _) ↘ _) ≫ K.blowupChart V (hgen k) := fun k ↦ pullback.lift_fst _ _ _
   have hqk_snd : ∀ k, qk k ≫ pullback.snd K.blowupMap (𝔸(σ; X) ↘ X) =
@@ -136,12 +136,13 @@ lemma Scheme.IdealSheafData.isClosed_range_pullbackLift_of_awaySlope
         (AffineBlowup.awaySlope (K.ideal V) (hgen k) (ha i)) ≤
         K.blowupChart V (hgen k) ⁻¹ᵁ W := by
       intro i
-      rw [hO]
-      exact le_iSup (fun i ↦ PrimeSpectrum.basicOpen
-        (AffineBlowup.awaySlope (K.ideal V) (hgen k) (ha i))) i
+      exact (le_iSup (fun i ↦ PrimeSpectrum.basicOpen
+        (AffineBlowup.awaySlope (K.ideal V) (hgen k) (ha i))) i).trans_eq hO.symm
     refine AffineSpace.isClosed_range_of_basicOpen_fractions
       (fun i ↦ AffineBlowup.awaySlope (K.ideal V) (hgen k) (ha i))
       (fun i j ↦ AffineBlowup.awaySlope (K.ideal V) (hgen k) (hb i j)) ?_ ?_
+      (O := K.blowupChart V (hgen k) ⁻¹ᵁ W)
+      (B := fun i ↦ PrimeSpectrum.basicOpen (AffineBlowup.awaySlope (K.ideal V) (hgen k) (ha i)))
       (fun i ↦ rfl) hO _ (AffineSpace.homOfVector_over _ _) hBle ?_
     · -- the slopes of the generators generate the unit ideal
       refine Ideal.span_mono ?_
@@ -156,8 +157,9 @@ lemma Scheme.IdealSheafData.isClosed_range_pullbackLift_of_awaySlope
       rw [mul_comm (a i), hrel i' i j, mul_comm]
     · -- the coordinate identity on each piece
       intro i j
-      exact K.mul_appTop_coord_awaySlope V g (hgen k) lam hlam (ha i) (hb i) (ci i)
+      have h := K.mul_appTop_coord_awaySlope V g (hgen k) lam hlam (ha i) (hb i) (ci i)
         (hci i) (hgi i) rfl (hBle i) j
+      convert h using 2
 
 end Closedness
 

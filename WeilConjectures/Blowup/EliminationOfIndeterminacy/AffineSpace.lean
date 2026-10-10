@@ -46,8 +46,6 @@ section Statement
 
 variable {X : Scheme.{u}}
 
-set_option maxHeartbeats 3200000 in
--- Unifying the `HomogeneousLocalization` chart rings exceeds the default heartbeat limit.
 /-- **Extension to relative affine space after one admissible blow-up** (Conrad,
 Theorem 2.4, Case 1, the sub-case `Y = 𝔸ⁿ_X`; blueprint:
 `lemma:nagata-conrad-affine-space-extension`).
@@ -103,9 +101,9 @@ theorem exists_isAdmissible_extend_affineSpace [IsAffine X]
         (Scheme.ΓSpecIso _).inv (AffineBlowup.awayAlgebraMap (K.ideal V₀)
           (reesX (K.ideal V₀) (gen k) (hgen k)) r) := by
     intro k r
-    rw [← happLE _ (K.blowupChart_comp_blowupMap_preimage V₀ (hgen k)),
-      K.appLE_blowupChart_comp_blowupMap V₀ (hgen k)]
-    rfl
+    have h := K.appLE_blowupChart_comp_blowupMap V₀ (hgen k)
+      (K.blowupChart_comp_blowupMap_preimage V₀ (hgen k))
+    exact congrArg (fun φ ↦ φ r) ((happLE _ _).symm.trans h)
   -- the charts at the `u i ^ N` cover the preimage of `U`
   have hPchart : ∀ i : ι, K.blowupMap ⁻¹ᵁ X.basicOpen (u i) ≤
       (K.blowupChart V₀ (hgen (Sum.inl i))).opensRange := by
@@ -120,8 +118,7 @@ theorem exists_isAdmissible_extend_affineSpace [IsAffine X]
       have h1 : Spec.map (CommRingCat.ofHom (AffineBlowup.awayAlgebraMap (K.ideal V₀)
           (reesX (K.ideal V₀) (gen k) (hgen k)))) y ∈
           V₀.2.fromSpec ⁻¹ᵁ X.basicOpen (u i) := hxi
-      rw [V₀.2.fromSpec_preimage_basicOpen] at h1
-      exact h1
+      exact (V₀.2.fromSpec_preimage_basicOpen (u i)).le h1
     have hyN : y ∈ PrimeSpectrum.basicOpen (AffineBlowup.awayAlgebraMap (K.ideal V₀)
         (reesX (K.ideal V₀) (gen k) (hgen k)) (u i ^ N)) := by
       rw [map_pow, PrimeSpectrum.basicOpen_pow _ _ hNpos]
@@ -132,7 +129,8 @@ theorem exists_isAdmissible_extend_affineSpace [IsAffine X]
     rw [Scheme.IdealSheafData.blowupChart, Scheme.IdealSheafData.blowupChart,
       Scheme.Hom.comp_apply, Scheme.Hom.comp_apply, hz]
   -- the open `W`
-  set W : K.blowup.Opens := ⨆ i : ι, (K.blowupChart V₀ (hgen (Sum.inl i))).opensRange with hWdef
+  let W : K.blowup.Opens := ⨆ i : ι, (K.blowupChart V₀ (hgen (Sum.inl i))).opensRange
+  have hWdef : W = ⨆ i : ι, (K.blowupChart V₀ (hgen (Sum.inl i))).opensRange := rfl
   have hWmem : K.blowupMap ⁻¹ᵁ U ≤ W := by
     intro x hx
     have hxU : K.blowupMap x ∈ ⨆ i : ι, X.basicOpen (u i) := by rw [← hUeq]; exact hx
@@ -147,9 +145,9 @@ theorem exists_isAdmissible_extend_affineSpace [IsAffine X]
       rw [hWdef]
       exact le_iSup (fun i : ι ↦ (K.blowupChart V₀ (hgen (Sum.inl i))).opensRange) i
     exact ⟨⟨z, h1 hz⟩, rfl⟩
-  set ci : ∀ i : ι, Spec (.of (HomogeneousLocalization.Away (reesGrading (K.ideal V₀))
+  let ci : ∀ i : ι, Spec (.of (HomogeneousLocalization.Away (reesGrading (K.ideal V₀))
       (reesX (K.ideal V₀) (gen (Sum.inl i)) (hgen (Sum.inl i))))) ⟶ W.toScheme :=
-    fun i ↦ IsOpenImmersion.lift W.ι (K.blowupChart V₀ (hgen (Sum.inl i))) (hsub i) with hcidef
+    fun i ↦ IsOpenImmersion.lift W.ι (K.blowupChart V₀ (hgen (Sum.inl i))) (hsub i)
   have hci : ∀ i, ci i ≫ W.ι = K.blowupChart V₀ (hgen (Sum.inl i)) :=
     fun i ↦ IsOpenImmersion.lift_fac _ _ _
   obtain ⟨g, hg, hgi⟩ := K.exists_hom_affineSpace_of_awaySlope V₀
