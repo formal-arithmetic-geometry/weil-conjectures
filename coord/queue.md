@@ -2,7 +2,7 @@
 
 876 items; claim with `tools/claim.py next <group> [--stage N]`.
 
-## Stage 1: nodes to split (649)
+## Stage 1: nodes to split (648)
 
 | node | distance to a target | Lean state on the done branch |
 |---|---|---|
@@ -23,7 +23,6 @@
 | `lem-weil-pbc-formal-systems-graded-vanishing` | 1012 | none |
 | `lem-weil-pbc-formal-systems-kernel-rees-finite` | 1012 | none |
 | `lem-weil-pbc-formally-smooth-complete-local-regular` | 1012 | none |
-| `lem-weil-pbc-gabber-finite-etale-section` | 1012 | none |
 | `lem-weil-pbc-gabber-strict-henselian-zariski-comparison` | 1012 | none |
 | `lem-weil-pbc-geometrically-regular-h1-injective` | 1012 | none |
 | `lem-weil-pbc-geometrically-regular-over-field-flat` | 1012 | none |
@@ -656,7 +655,7 @@
 | `lem-pc-linear-pair-graded-finite` | - | none |
 | `def-exc-jacobian-presentation` | - | none |
 
-## Stage 2: nodes to state (227)
+## Stage 2: nodes to state (228)
 
 | node | distance to Mathlib | kind |
 |---|---|---|
@@ -773,6 +772,7 @@
 | `lem-weil-pbc-flat-permanence` | 1 | state |
 | `lem-weil-pbc-flat-ses-kernel-flat` | 1 | state |
 | `lem-weil-pbc-flat-under-regular` | 1 | state |
+| `lem-weil-pbc-gabber-finite-etale-section` | 1 | state |
 | `lem-weil-pbc-gabber-root-criterion-etale-section-lifting` | 1 | state |
 | `lem-weil-pbc-h0-spectral-closed-restriction` | 1 | state |
 | `lem-weil-pbc-henselian-factorization-locally-nilpotent` | 1 | state |
@@ -888,7 +888,7 @@
 | `lem-weil-pbc-p1-field-dimension-one` | 4 | state |
 | `lem-weil-pbc-projective-space-zero-isomorphism` | 4 | state |
 
-Not open yet: 661 nodes that wait for stage 1, 507 nodes that wait for a statement dependency.
+Not open yet: 660 nodes that wait for stage 1, 507 nodes that wait for a statement dependency.
 
 ## Stage 3: modules to prove (0)
 
