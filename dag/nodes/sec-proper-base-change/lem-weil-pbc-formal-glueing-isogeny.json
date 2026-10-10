@@ -11,9 +11,108 @@
   "def-weil-pbc-flat-ring-map",
   "def-weil-module-base-change"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "(Localizing a map with $I$-power torsion kernel and cokernel.) As $I$ is finitely generated, write $I=(f_1,\\dots,f_t)$. Let $T$ be an $I$-power torsion $R$-module and $f=f_i$. For $x\\in T$ pick $n\\ge1$ with $I^nx=0$; then $f^nx=0$ since $f^n\\in I^n$, so $x/1=0$ in $T_f$ and every element $x/f^e=(1/f^e)\\cdot(x/1)$ of $T_f$ is $0$ [def-weil-pbc-module-localization-away]: $T_f=0$. Now let $h:P\\to Q$ be an $R$-linear map with $I$-power torsion kernel and cokernel. Localizing the exact sequences $0\\to\\operatorname{Ker}h\\to P\\xrightarrow{h}Q$ and $P\\xrightarrow{h}Q\\to\\operatorname{Coker}h\\to0$ at $f$ gives exact sequences $(\\operatorname{Ker}h)_f\\to P_f\\xrightarrow{h_f}Q_f$ and $P_f\\xrightarrow{h_f}Q_f\\to(\\operatorname{Coker}h)_f$ [lem-weil-pbc-localization-module-exact] whose outer terms are $0$; so $h_f$ is injective and surjective, an isomorphism. If $h$ is $S$-linear between $S$-modules, $h_f$ is $S$-linear, because the $S$-action on $P_f$, $Q_f$ is by the localized multiplications and $h_f\\circ(s\\cdot)_f=(h\\circ s\\cdot)_f=(s\\cdot\\circ h)_f=(s\\cdot)_f\\circ h_f$. In particular, in (1) and (2), $\\varphi'_{f_i}$ is an $S$-linear isomorphism for every $i$.",
+   "uses": [
+    "def-weil-pbc-module-localization-away",
+    "lem-weil-pbc-localization-module-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "More on Algebra, proof of Lemma 0ALK (lemma-application-formal-glueing, line 24882): 'It is clear that the localization varphi_{f_i} is an isomorphism'; Algebra, Proposition 00CS (localization is exact)"
+   }
+  },
+  {
+   "text": "(Part (1): the glueing datum.) Use the category $\\mathrm{Glue}=\\mathrm{Glue}(R\\to S,f_1,\\dots,f_t)$ and the canonical maps $c^P_f$, $\\sigma^P_{f,g}$ of [def-weil-pbc-formal-glueing-data], and the functor $\\mathrm{Can}$ of [prop-weil-pbc-formal-glueing-equivalence] (1): $\\mathrm{Can}(N)=(N\\otimes_RS,(N_{f_i}),(c^N_{f_i}),(\\sigma^N_{f_i,f_j}))$ is an object. Put $\\mathbf D=(M',(N_{f_i})_i,(\\alpha_i)_i,(\\sigma^N_{f_i,f_j})_{i,j})$ with $\\alpha_i=c^N_{f_i}\\circ\\varphi'_{f_i}:M'_{f_i}\\to N_{f_i}\\otimes_RS$, an $S$-linear isomorphism by step 1 and (1) of the proposition. $\\mathbf D$ is an object of $\\mathrm{Glue}$: condition (b) involves only the $N_{f_i}$ and $\\sigma^N$, and is condition (b) for $\\mathrm{Can}(N)$. For (a): localizing the identity $\\sigma^{N\\otimes S}_{f_i,f_j}\\circ(\\varphi'_{f_i})_{f_j}=(\\varphi'_{f_j})_{f_i}\\circ\\sigma^{M'}_{f_i,f_j}$ (both send $(m/f_i^a)/f_j^b$ to $(\\varphi'(m)/f_j^b)/f_i^a$ [def-weil-pbc-module-localization-away]) and $(c\\circ\\varphi'_{f_i})_{f_j}=(c)_{f_j}\\circ(\\varphi'_{f_i})_{f_j}$ (localization is compatible with composition), we get $(\\sigma^N_{f_i,f_j}\\otimes S)\\circ c^{N_{f_i}}_{f_j}\\circ(\\alpha_i)_{f_j}=(\\sigma^N_{f_i,f_j}\\otimes S)\\circ c^{N_{f_i}}_{f_j}\\circ(c^N_{f_i})_{f_j}\\circ(\\varphi'_{f_i})_{f_j}=c^{N_{f_j}}_{f_i}\\circ(c^N_{f_j})_{f_i}\\circ\\sigma^{N\\otimes S}_{f_i,f_j}\\circ(\\varphi'_{f_i})_{f_j}=c^{N_{f_j}}_{f_i}\\circ(\\alpha_j)_{f_i}\\circ\\sigma^{M'}_{f_i,f_j}$, using (a) for $\\mathrm{Can}(N)$ in the middle. Moreover $\\Phi=(\\varphi',(\\mathrm{id}_{N_{f_i}})_i):\\mathbf D\\to\\mathrm{Can}(N)$ is a morphism of $\\mathrm{Glue}$: $c^N_{f_i}\\circ\\varphi'_{f_i}=(\\mathrm{id}\\otimes_RS)\\circ\\alpha_i$ by definition of $\\alpha_i$, and $\\sigma^N_{f_i,f_j}\\circ\\mathrm{id}=\\mathrm{id}\\circ\\sigma^N_{f_i,f_j}$.",
+   "uses": [
+    "def-weil-pbc-formal-glueing-data",
+    "prop-weil-pbc-formal-glueing-equivalence",
+    "def-weil-pbc-module-localization-away"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "More on Algebra, proof of Lemma 0ALK, part (1): the object (M', N_{f_i}, varphi_{f_i}, can_ij) of Glue (Remark 05EL, remark-glueing-data) and the morphism to (N tensor S, N_{f_i}, can_i, can_ij) which uses varphi in the first component"
+   }
+  },
+  {
+   "text": "(Part (1): conclusion.) By [prop-weil-pbc-formal-glueing-equivalence] (2) (essential surjectivity; its hypotheses are those of the lemma with $I=(f_1,\\dots,f_t)$) there are an $R$-module $M$ and an isomorphism $\\Theta=(\\theta',(\\theta_i)_i):\\mathrm{Can}(M)\\to\\mathbf D$ in $\\mathrm{Glue}$; since composition is componentwise [def-weil-pbc-formal-glueing-data], $\\theta':M\\otimes_RS\\to M'$ is an $S$-linear isomorphism and each $\\theta_i:M_{f_i}\\to N_{f_i}$ an isomorphism. The composite $\\Phi\\circ\\Theta:\\mathrm{Can}(M)\\to\\mathrm{Can}(N)$ (step 2) is, by full faithfulness in (2), equal to $\\mathrm{Can}(\\psi)=(\\psi\\otimes_RS,(\\psi_{f_i})_i)$ for a (unique) $R$-linear $\\psi:M\\to N$. Comparing components: $\\psi\\otimes_RS=\\varphi'\\circ\\theta'$ and $\\psi_{f_i}=\\theta_i$. Put $\\beta=\\theta'^{-1}:M'\\to M\\otimes_RS$; then $(\\psi\\otimes_RS)\\circ\\beta=\\varphi'$, which is (1). Record also: $\\psi_{f_i}$ is an isomorphism for every $i$.",
+   "uses": [
+    "prop-weil-pbc-formal-glueing-equivalence",
+    "def-weil-pbc-formal-glueing-data"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "More on Algebra, proof of Lemma 0ALK, part (1): 'By Proposition 05ER we conclude that there exists an R-module M such that M' = M tensor S ... This corresponds to an R-module map psi : M -> N (by the equivalence of categories of Proposition 05ER)'"
+   }
+  },
+  {
+   "text": "(Part (2), the dual argument.) Now $\\varphi':M\\otimes_RS\\to N'$ and by step 1 $\\varphi'_{f_i}$ is an $S$-linear isomorphism. Put $\\mathbf D'=(N',(M_{f_i})_i,(c^M_{f_i}\\circ(\\varphi'_{f_i})^{-1})_i,(\\sigma^M_{f_i,f_j})_{i,j})$. It is an object of $\\mathrm{Glue}$ [def-weil-pbc-formal-glueing-data]: (b) is (b) for $\\mathrm{Can}(M)$ [prop-weil-pbc-formal-glueing-equivalence] (1); for (a), the identity $\\sigma^{N'}_{f_i,f_j}\\circ(\\varphi'_{f_i})_{f_j}=(\\varphi'_{f_j})_{f_i}\\circ\\sigma^{M\\otimes S}_{f_i,f_j}$ (checked on $(m/f_i^a)/f_j^b$ [def-weil-pbc-module-localization-away]) and $((\\varphi'_{f_i})^{-1})_{f_j}=((\\varphi'_{f_i})_{f_j})^{-1}$ give $\\sigma^{M\\otimes S}_{f_i,f_j}\\circ((\\varphi'_{f_i})^{-1})_{f_j}=((\\varphi'_{f_j})^{-1})_{f_i}\\circ\\sigma^{N'}_{f_i,f_j}$, and (a) for $\\mathbf D'$ follows from (a) for $\\mathrm{Can}(M)$ exactly as in step 2. $\\Phi'=(\\varphi',(\\mathrm{id}_{M_{f_i}})_i):\\mathrm{Can}(M)\\to\\mathbf D'$ is a morphism, since $(c^M_{f_i}\\circ(\\varphi'_{f_i})^{-1})\\circ\\varphi'_{f_i}=(\\mathrm{id}\\otimes_RS)\\circ c^M_{f_i}$. By [prop-weil-pbc-formal-glueing-equivalence] (2) there are an $R$-module $N$ and an isomorphism $\\Theta=(\\theta',(\\theta_i)):\\mathrm{Can}(N)\\to\\mathbf D'$, and $\\Theta^{-1}\\circ\\Phi'=\\mathrm{Can}(\\psi)$ for a unique $R$-linear $\\psi:M\\to N$; componentwise $\\psi\\otimes_RS=\\theta'^{-1}\\circ\\varphi'$ and $\\psi_{f_i}=\\theta_i^{-1}$. Put $\\beta=\\theta':N\\otimes_RS\\to N'$, an $S$-linear isomorphism with $\\beta\\circ(\\psi\\otimes_RS)=\\varphi'$, which is (2); again every $\\psi_{f_i}$ is an isomorphism.",
+   "uses": [
+    "def-weil-pbc-formal-glueing-data",
+    "prop-weil-pbc-formal-glueing-equivalence",
+    "def-weil-pbc-module-localization-away"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "More on Algebra, proof of Lemma 0ALK, part (2): the object (N', M_{f_i}, varphi_{f_i}^{-1}, can_ij) and the morphism from (M tensor S, M_{f_i}, can_i, can_ij), with Proposition 05ER"
+   }
+  },
+  {
+   "text": "(Part (3): $\\operatorname{Ker}\\psi$ and $\\operatorname{Coker}\\psi$ are $I$-power torsion.) In both cases $\\psi:M\\to N$ has $\\psi_{f_i}$ an isomorphism for all $i$ (steps 3, 4). Let $K=\\operatorname{Ker}\\psi$, $Q=\\operatorname{Coker}\\psi$. Localizing $0\\to K\\to M\\xrightarrow{\\psi}N$ and $M\\xrightarrow{\\psi}N\\to Q\\to0$ at $f_i$ gives exact sequences $0\\to K_{f_i}\\to M_{f_i}\\xrightarrow{\\psi_{f_i}}N_{f_i}$ and $M_{f_i}\\xrightarrow{\\psi_{f_i}}N_{f_i}\\to Q_{f_i}\\to0$ [lem-weil-pbc-localization-module-exact] (applied at each spot); as $\\psi_{f_i}$ is injective and surjective, $K_{f_i}=0$ and $Q_{f_i}=0$. Let $x\\in K$ (or $x\\in Q$). As $x/1=0$ in $K_{f_i}$ there is $e_i\\ge1$ with $f_i^{e_i}x=0$ [def-weil-pbc-module-localization-away]. Put $e=e_1+\\dots+e_t$. The ideal $I^e$ is generated by the monomials $f_1^{a_1}\\cdots f_t^{a_t}$ with $a_1+\\dots+a_t=e$, and each has some $a_i\\ge e_i$ (otherwise $\\sum a_i\\le\\sum(e_i-1)<e$), hence kills $x$. So $I^ex=0$: $K$ and $Q$ are $I$-power torsion.",
+   "uses": [
+    "lem-weil-pbc-localization-module-exact",
+    "def-weil-pbc-module-localization-away"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "More on Algebra, proof of Lemma 0ALK, last sentence ('The final statement follows for example from Lemma 05EC'); written out here through the localizations psi_{f_i}, which the construction makes isomorphisms"
+   }
+  },
+  {
+   "text": "(Part (3): comparison with $\\psi\\otimes_RS$.) Since $\\varphi$ is flat, tensoring the exact sequence $0\\to K\\xrightarrow{\\iota}M\\xrightarrow{\\psi}N$ with $S$ gives an exact sequence $0\\to K\\otimes_RS\\to M\\otimes_RS\\xrightarrow{\\psi\\otimes S}N\\otimes_RS$ [lem-weil-pbc-flat-tensor-exact], so $\\iota\\otimes S:K\\otimes_RS\\to\\operatorname{Ker}(\\psi\\otimes_RS)$ is an isomorphism. Tensoring $M\\xrightarrow{\\psi}N\\xrightarrow{\\pi}Q\\to0$ gives the exact $M\\otimes_RS\\to N\\otimes_RS\\xrightarrow{\\pi\\otimes S}Q\\otimes_RS\\to0$ [lem-weil-pbc-tensor-right-exact], so $\\pi\\otimes S$ induces an isomorphism $\\operatorname{Coker}(\\psi\\otimes_RS)\\to Q\\otimes_RS$, $[n\\otimes s]\\mapsto\\pi(n)\\otimes s$. As $K$ and $Q$ are $I$-power torsion (step 5) and $R/I\\to S/IS$ is an isomorphism, $K\\to K\\otimes_RS$ and $Q\\to Q\\otimes_RS$, $x\\mapsto x\\otimes1$, are isomorphisms [lem-weil-pbc-torsion-module-flat-base-change-iso]. The composite $K\\to K\\otimes_RS\\to\\operatorname{Ker}(\\psi\\otimes_RS)$ is $x\\mapsto x\\otimes1$, and the composite of $Q\\to Q\\otimes_RS$ with the inverse of $\\operatorname{Coker}(\\psi\\otimes S)\\to Q\\otimes_RS$ is $\\pi(n)\\mapsto[n\\otimes1]$ [def-weil-module-base-change]; both are therefore isomorphisms of $R$-modules, which are the canonical maps of (3).",
+   "uses": [
+    "lem-weil-pbc-flat-tensor-exact",
+    "lem-weil-pbc-tensor-right-exact",
+    "lem-weil-pbc-torsion-module-flat-base-change-iso",
+    "def-weil-module-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "More on Algebra, Lemma 05E9 (lemma-neighbourhood-isomorphism, line 24264) (2) => (1), with flatness of R -> S; Algebra, Lemma 00DF (right exactness of tensor) and Lemma 00HD (flatness)"
+   }
+  },
+  {
+   "text": "(Part (3): via $\\beta$.) In case (1), $\\varphi'=(\\psi\\otimes_RS)\\circ\\beta$ with $\\beta$ an isomorphism, so $\\beta$ restricts to an isomorphism $\\operatorname{Ker}\\varphi'\\to\\operatorname{Ker}(\\psi\\otimes_RS)$ and $\\operatorname{Coker}\\varphi'=\\operatorname{Coker}(\\psi\\otimes_RS)$ (same image); in case (2), $\\varphi'=\\beta\\circ(\\psi\\otimes_RS)$, so $\\operatorname{Ker}\\varphi'=\\operatorname{Ker}(\\psi\\otimes_RS)$ and $\\beta$ induces an isomorphism $\\operatorname{Coker}(\\psi\\otimes_RS)\\to\\operatorname{Coker}\\varphi'$. With step 6, $\\operatorname{Ker}\\psi\\cong\\operatorname{Ker}\\varphi'$ and $\\operatorname{Coker}\\psi\\cong\\operatorname{Coker}\\varphi'$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "More on Algebra, Lemma 0ALK, last sentence of the statement ('In both cases we have Ker(varphi) = Ker(psi) and Coker(varphi) = Coker(psi)')"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-module-base-change",
+  "def-weil-pbc-formal-glueing-data",
+  "def-weil-pbc-module-localization-away",
+  "lem-weil-pbc-flat-tensor-exact",
+  "lem-weil-pbc-localization-module-exact",
+  "lem-weil-pbc-tensor-right-exact",
+  "lem-weil-pbc-torsion-module-flat-base-change-iso",
+  "prop-weil-pbc-formal-glueing-equivalence"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "More on Algebra, Lemma 0ALK (lemma-application-formal-glueing, line 24882) and its proof, via Proposition 05ER (proposition-equivalence) and Remark 05EL (remark-glueing-data); final statement via Lemma 05E9 (lemma-neighbourhood-isomorphism) and localization, in place of the source's pointer to Lemma 05EC"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -35,10 +134,31 @@
    "results": "no file mentions Beauville-Laszlo or formal glueing; only Flat/Localization.lean:87 (flatness checked on localizations)",
    "verdict": "no match",
    "date": "2026-10-10"
+  },
+  {
+   "tool": "leansearch",
+   "query": "linear map whose kernel and cokernel are I-power torsion descends; base change of linear map along flat map isomorphism modulo ideal",
+   "results": "LinearMap.reduceModIdeal, Submodule.factorPowSucc, LinearMap.tensorKerEquiv_apply, Module.Flat.isBaseChange, Submodule.factorPow, Module.Flat.iff_lTensor_injective': no descent of maps",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"BeauvilleLaszlo\"",
+   "results": "none",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rniE 'beauville|laszlo' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib",
+   "results": "none (this Mathlib has no Beauville-Laszlo files)",
+   "date": "2026-10-10",
+   "verdict": "no match"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "worker",
@@ -58,5 +178,12 @@
   }
  },
  "chapter": "sec-proper-base-change",
- "unit": "sk-thm-p1"
+ "unit": "sk-thm-p1",
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "lem-weil-pbc-formal-glueing-isogeny",
+  "worker": "stage1",
+  "summary": "Split along the proof of Stacks More on Algebra 0ALK (tags 0ALK, 05ER, 05EL, 05E9, 05E6, 05E7, 05EC checked in tags/tags). Seven steps: localizations phi'_{f_i} are isomorphisms (00CS, existing leaf lem-weil-pbc-localization-module-exact); part (1): the glueing datum (M', N_{f_i}, c o phi'_{f_i}, sigma) with its conditions (a),(b) checked from those of Can(N), and the morphism to Can(N); essential surjectivity and full faithfulness of Can give M, beta and psi, with psi_{f_i} isomorphisms; part (2) dually; part (3): Ker psi, Coker psi are I-power torsion because their localizations at the f_i vanish, and K -> K tensor S, Q -> Q tensor S are isomorphisms by 05E9, combined with flat exactness (lem-weil-pbc-flat-tensor-exact) and right exactness (lem-weil-pbc-tensor-right-exact). New nodes: def-weil-pbc-formal-glueing-data (Remark 05EL, with the canonical maps c, sigma made explicit), prop-weil-pbc-formal-glueing-equivalence (05ER: Can is a functor and, under the hypotheses, fully faithful and essentially surjective), lem-weil-pbc-torsion-module-flat-base-change-iso (05E9 (2)=>(1)); all unsplit, no Mathlib match. Statement unchanged. The source proves the final statement 'for example from Lemma 05EC'; 05EC alone does not give Ker psi I-power torsion (it needs Ker psi localized at f_i to vanish), so step 5 uses the localizations instead."
+ },
+ "reviewed": "Reviewed by L 2026-10-10: faithful to More on Algebra 0ALK via the glueing-data category (05EL) and the equivalence 05ER, both new unsplit nodes with the implicit canonical maps written out; part (3) uses the localizations psi_{f_i} being isomorphisms plus 05E9 (the source's bare citation of 05EC does not suffice, as the worker notes). The worker's duplicate 05E9 node lem-weil-pbc-torsion-module-base-change-iso was merged by L into the sibling's lem-weil-pbc-torsion-module-flat-base-change-iso (same statement). No Mathlib match (no Beauville-Laszlo in Mathlib)."
 }

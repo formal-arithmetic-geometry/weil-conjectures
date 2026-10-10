@@ -1,0 +1,86 @@
+{
+ "id": "prop-weil-pbc-formal-glueing-equivalence",
+ "kind": "statement",
+ "title": "Formal glueing: Can is an equivalence of R-modules with glueing data",
+ "statement": "Let $\\varphi:R\\to S$ be a homomorphism of commutative rings, $f_1,\\dots,f_t\\in R$, and let $\\mathrm{Glue}=\\mathrm{Glue}(R\\to S,f_1,\\dots,f_t)$ be the category of glueing data, with the canonical maps $c^P_f:(P\\otimes_RS)_f\\to P_f\\otimes_RS$ and $\\sigma^P_{f,g}:(P_f)_g\\to(P_g)_f$ and the localizations $P_f$, $h_f$ of [def-weil-pbc-formal-glueing-data]. For an $R$-module $M$ put $\\mathrm{Can}(M)=(M\\otimes_RS,(M_{f_i})_i,(c^M_{f_i})_i,(\\sigma^M_{f_i,f_j})_{i,j})$, and for an $R$-linear map $u:M\\to N$ put $\\mathrm{Can}(u)=(u\\otimes_RS,(u_{f_i})_i)$ [def-weil-module-base-change], [def-weil-pbc-module-localization-away].\n(1) For every $R$-module $P$ and $f,g\\in R$ the maps $c^P_f$ and $\\sigma^P_{f,g}$ are isomorphisms; $\\mathrm{Can}(M)$ is an object of $\\mathrm{Glue}$, $\\mathrm{Can}(u)$ is a morphism $\\mathrm{Can}(M)\\to\\mathrm{Can}(N)$, and $\\mathrm{Can}:\\mathrm{Mod}_R\\to\\mathrm{Glue}$ is a functor.\n(2) Assume moreover that $\\varphi$ is flat [def-weil-pbc-flat-ring-map] and that, for the ideal $I=(f_1,\\dots,f_t)$, the induced map $R/I\\to S/IS$ is an isomorphism. Then $\\mathrm{Can}$ is an equivalence of categories: it is fully faithful (for $R$-modules $M,N$, every morphism $\\mathrm{Can}(M)\\to\\mathrm{Can}(N)$ in $\\mathrm{Glue}$ equals $\\mathrm{Can}(u)$ for exactly one $R$-linear $u:M\\to N$) and essentially surjective (every object of $\\mathrm{Glue}$ is isomorphic in $\\mathrm{Glue}$ to $\\mathrm{Can}(M)$ for some $R$-module $M$).",
+ "source": {
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "More on Algebra, Proposition 05ER (proposition-equivalence, line 24813) and its proof (via Lemmas 05EK, 05EP, 05EQ, 05EI); part (1) is the definition of the functor Can in Remark 05EL (remark-glueing-data, line 24641), where c and sigma are called the canonical isomorphisms can_i, can_ij. Stacks states (2) as: Can and H^0 are quasi-inverse equivalences; only the equivalence property of Can is stated here"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-formal-glueing-data",
+  "def-weil-module-base-change",
+  "def-weil-pbc-module-localization-away",
+  "def-weil-pbc-flat-ring-map"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Beauville-Laszlo gluing: modules over R equivalent to glueing data of modules over S and localizations R_f",
+   "results": "AlgebraicGeometry.LocallyRingedSpace.GlueData, Scheme.Pullback.gluing, Scheme.LocalRepresentability.glueData, Scheme.IdealSheafData.glueDataObj: scheme glueing only",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "module over R reconstructed from its base change to S and localizations at f_i with compatible isomorphisms (fpqc-like descent for formal neighbourhood)",
+   "results": "IsLocalizedModule.isBaseChange, IsLocalization.Away.tensorRightEquiv, Module.Flat.of_isLocalizedModule, IsLocalization.tensor, IsLocalization.Away.tensorEquiv, Module.flat_iff_of_isLocalization (RingTheory.Localization.BaseChange, Flat.*): only the identification of localization with base change",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "flat ring map R -> S, f in R, R/fR = S/fS; the functor M -> (M tensor S, M_f) is an equivalence onto the fibre product category (Beauville-Laszlo)",
+   "results": "RingHom.FaithfullyFlat.codescendsAlong_bijective, RingHom.Flat, Module.flat_of_isLocalized_span, RingHom.FaithfullyFlat, Module.FaithfullyFlat.bijective_of_tensorProduct: no glueing equivalence",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"BeauvilleLaszlo\"",
+   "results": "none",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "local_search",
+   "query": "BeauvilleLaszlo (project ~/weil-conjectures-slopmaster2)",
+   "results": "none; index: unavailable (not a proof of absence)",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rliE 'beauville|laszlo|formal glu|glueing data|gluing data' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib",
+   "results": "only scheme/space glueing files (CategoryTheory/GlueData.lean, AlgebraicGeometry/Gluing.lean, Topology/Gluing.lean, Geometry/RingedSpace/PresheafedSpace/Gluing.lean); no Beauville-Laszlo",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-formal-glueing-isogeny",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "reviewed": "Reviewed by L 2026-10-10 (statement): More on Algebra 05ER (Can is an equivalence) with part (1) the functoriality of Can from 05EL; the quasi-inverse H^0 omitted. Unsplit."
+}
