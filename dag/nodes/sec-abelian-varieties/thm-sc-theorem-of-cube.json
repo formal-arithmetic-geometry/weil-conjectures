@@ -32,15 +32,21 @@
  ],
  "proof": [
   {
-   "text": "*Reference: Stacks Project, Groupoid Schemes, Lemma 39.9.6,\n[Tag 0BFE](https://stacks.math.columbia.edu/tag/0BFE).* Apply\nthe general theorem of the cube (More on Morphisms, Theorem\n37.33.8, [Tag 0BF4](https://stacks.math.columbia.edu/tag/0BF4)) to the difference\n\n$$\n\\mathcal M=m_{123}^*\\mathcal L\\otimes m_1^*\\mathcal L\\otimes\nm_2^*\\mathcal L\\otimes m_3^*\\mathcal L\\otimes\nm_{12}^*\\mathcal L^{-1}\\otimes m_{13}^*\\mathcal L^{-1}\\otimes\nm_{23}^*\\mathcal L^{-1}\n$$\n\nwith $X=Y=Z=A$ over $S=\\operatorname{Spec}k$ and the unit\nsections $x=y=e$. The hypotheses of [Tag 0BF4](https://stacks.math.columbia.edu/tag/0BF4) hold:\n$A\\to\\operatorname{Spec}k$ is flat, proper and of finite\npresentation with geometrically integral fibres ($A$ is smooth,\nproper and connected, hence geometrically integral by [lem-sc-abelian-variety-characterization] and Groupoid\nSchemes, Remark 39.9.12,\n[Tag 0H2U](https://stacks.math.columbia.edu/tag/0H2U)), and\n$A$ is connected, so it has a $k$-point (the unit). On\n$A\\times A\\times e$ the restriction of $\\mathcal M$ is\n\n$$\nn_{12}^*\\mathcal L\\otimes n_1^*\\mathcal L\\otimes n_2^*\\mathcal\nL\\otimes e^*\\mathcal L\\otimes n_{12}^*\\mathcal L^{-1}\\otimes\nn_1^*\\mathcal L^{-1}\\otimes n_2^*\\mathcal L^{-1}\\cong\\mathcal O,\n$$\n\nwhere $n_{i_1,\\dots,i_t}(x_1,x_2)=x_{i_1}+\\cdots+x_{i_t}$ and\n$e^*\\mathcal L\\cong\\mathcal O$ (an invertible module on the\npoint); the same computation on $A\\times e\\times A$ and\n$e\\times A\\times A$ shows $\\mathcal M$ trivial on the slices\nrequired by [Tag 0BF4](https://stacks.math.columbia.edu/tag/0BF4), and $\\mathcal M$ is trivial on the fibre\n$A\\times A\\times e$. Hence $\\mathcal M\\cong\\mathcal O$, which\nis the displayed relation.",
+   "text": "*Reference: Stacks Project, Groupoid Schemes, Lemma 39.9.6,\n[Tag 0BFE](https://stacks.math.columbia.edu/tag/0BFE).* Apply\nthe general theorem of the cube [lem-sc-general-theorem-of-cube] (More on Morphisms, Theorem\n37.33.8, [Tag 0BF4](https://stacks.math.columbia.edu/tag/0BF4)) to the difference\n\n$$\n\\mathcal M=m_{123}^*\\mathcal L\\otimes m_1^*\\mathcal L\\otimes\nm_2^*\\mathcal L\\otimes m_3^*\\mathcal L\\otimes\nm_{12}^*\\mathcal L^{-1}\\otimes m_{13}^*\\mathcal L^{-1}\\otimes\nm_{23}^*\\mathcal L^{-1}\n$$\n\nwith $X=Y=Z=A$ over $k$, the $k$-rational points $x=y=e$ given by the unit section of the group scheme $A$, and the point $z=e$ of $Z$ (residue field $k$). The hypotheses of [lem-sc-general-theorem-of-cube] hold:\n$A$ is proper over $k$ and connected [def-sc-abelian-variety], and geometrically integral over $k$ by [lem-sc-abelian-variety-characterization] (Groupoid\nSchemes, Remark 39.9.12,\n[Tag 0H2U](https://stacks.math.columbia.edu/tag/0H2U)). On\n$A\\times A\\times e$ the restriction of $\\mathcal M$ is\n\n$$\nn_{12}^*\\mathcal L\\otimes n_1^*\\mathcal L\\otimes n_2^*\\mathcal\nL\\otimes e^*\\mathcal L\\otimes n_{12}^*\\mathcal L^{-1}\\otimes\nn_1^*\\mathcal L^{-1}\\otimes n_2^*\\mathcal L^{-1}\\cong\\mathcal O,\n$$\n\nwhere $n_{i_1,\\dots,i_t}(x_1,x_2)=x_{i_1}+\\cdots+x_{i_t}$ and\n$e^*\\mathcal L\\cong\\mathcal O$ (an invertible module on the\npoint, pulled back along the constant map); this is the triviality on the fibre over $z=e$. The same computation on $e\\times A\\times A$ and\n$A\\times e\\times A$ shows $\\mathcal M$ trivial on the two slices through $x$ and $y$. Hence $\\mathcal M\\cong\\mathcal O$, which\nis the displayed relation.",
    "uses": [
-    "lem-sc-abelian-variety-characterization"
+    "def-sc-abelian-variety",
+    "def-sc-invertible-module",
+    "lem-sc-abelian-variety-characterization",
+    "lem-sc-general-theorem-of-cube"
    ],
    "elementary": false
   }
  ],
  "proof_deps": [
-  "lem-sc-abelian-variety-characterization"
+  "def-sc-abelian-variety",
+  "def-sc-invertible-module",
+  "lem-sc-abelian-variety-characterization",
+  "lem-sc-general-theorem-of-cube"
  ],
  "proof_origin": {
   "by": "agent",
@@ -49,7 +55,7 @@
  },
  "mathlib_searches": [],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [
   "proof_cites_literature",
@@ -153,5 +159,20 @@
   }
  },
  "chapter": "sec-abelian-varieties",
- "unit": "sk-prop-av-cube"
+ "unit": "sk-prop-av-cube",
+ "split_report": {
+  "date": "2026-10-11",
+  "item": "thm-sc-theorem-of-cube",
+  "worker": "stage1",
+  "summary": "Checked the abelian-variety cube relation against Stacks Tags 0BFE and 0BF4 and the source Lean declaration; recorded the general cube theorem application and all three slice calculations in the item proof, with geometric integrality cited from the existing characterization node. The Lean proof is transitively sorry-backed and cannot attach.",
+  "blueprint": "The sole proof step of blueprint node thm-sc-theorem-of-cube: apply Tag 0BF4 to the alternating tensor product, verify all three unit slices, and cancel the inverse factors."
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-toc2456",
+  "group": "M1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-toc2456 (reviewer sub-agent of L); spot-checked: Item statement = Stacks 0BFE exactly (C4 ok). Step 1 follows 0BFE's route: M alternating product, three unit slices cancel (checked; e^*L trivial on the point). Hypotheses of 0BF4 over S=Spec k checked: X=Y=A proper, geometrically integral via lem-sc-abelian-variety-characterization, x=y=e unit section, Z=A connected, z=e. No seesaw/cube node existed (grep dag/nodes), no restatement. FIX more, RETURN less: (1) C1: the general theorem of the cube (Tag 0BF4), the step's only non-elementary input, was cited by Stacks tag only; added statement-only node lem-sc-general-theorem-of-cube (0BF4 with S=Spec k, unsplit, Mathlib grep recorded: no match) and cited it in step 1 uses/proof_deps; the M1 report's claim that it restates a clause of the item is wrong (it is the general theorem, the item is its application). (2) step 1 said 'A is connected, so it has a k-point (the unit)'; the k-point is the unit section of the group scheme, connectedness is hypothesis (4) on Z; text corrected, flat/fp clause dropped as the new node is over a field.; 2 file(s) fixed by the reviewer; 1 statement node(s) added by the reviewer (FIX more, RETURN less)"
+ }
 }
