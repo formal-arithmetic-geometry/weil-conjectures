@@ -30,9 +30,75 @@
   "def-sc-mult-n",
   "def-sc-abelian-variety"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Let f = [n]. By [lem-sc-quasi-finite-points-open], the quasi-finite locus is open and its restriction is locally quasi-finite; hence f is locally quasi-finite exactly when this locus is all of A. If it were proper, properness of A from [def-sc-abelian-variety] and the algebraically closed finite-type hypothesis give a closed point x outside it. Put y = f(x).",
+   "uses": [
+    "def-sc-abelian-variety",
+    "lem-sc-quasi-finite-points-open"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-abelian-varieties/sk-prop-av-mult-finite/_section.md",
+    "place": "Step 1, the paragraph beginning ‘By [sk-prop-av-symmetric-ample] there is an ample N’"
+   }
+  },
+  {
+   "text": "The fibre F over y is locally Noetherian because f is locally of finite type, and x is not isolated in F: the quasi-finite-at-x criterion says that {x} is not open in the fibre. A locally Noetherian scheme with a non-open singleton at x has dimension at least one. The fibre is a closed subscheme of the proper finite-type scheme A, so its dimension is finite. Thus 1 ≤ topologicalKrullDim F and topologicalKrullDim F ≠ ⊤.",
+   "uses": [
+    "def-sc-abelian-variety"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-abelian-varieties/sk-prop-av-mult-finite/_section.md",
+    "place": "Step 1, the sentence ‘The fibre F of [n] over the closed point y ... has positive (and finite) dimension’"
+   }
+  },
+  {
+   "text": "Apply [lem-sc-mult-n-dim-one-closed-subscheme] to obtain a closed immersion i : C → F with topologicalKrullDim C = 1. Since x is a closed point of the finite-type K-scheme A and f is a K-morphism of finite type K-schemes, y = f(x) is a closed point with residue field K (K algebraically closed), so F is a closed subscheme of A and the composite j : C → A is a closed immersion. Hence C is a closed subscheme of the proper, separated, finite-type K-scheme A from [def-sc-abelian-variety], so C is a proper curve over K of dimension one in the sense of [def-sc-curves]. By [lem-sc-abelian-variety-projective], A carries an ample invertible module L, and by [lem-sc-ample-tensor] N = L ⊗ [-1]^*L is ample with [-1]^*N ≅ N. A closed immersion is an affine morphism, so by [lem-weil-pbc-pullback-ample-invertible] j^*N is ample on C (for the proper K-schemes A and C this is the notion of [def-sc-ample], which that definition identifies with the absolute one, Stacks Tag 01Q3).",
+   "uses": [
+    "lem-sc-mult-n-dim-one-closed-subscheme",
+    "def-sc-abelian-variety",
+    "def-sc-curves",
+    "lem-sc-abelian-variety-projective",
+    "lem-sc-ample-tensor",
+    "lem-weil-pbc-pullback-ample-invertible"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-abelian-varieties/sk-prop-av-mult-finite/_section.md",
+    "place": "Step 1, the sentence ‘contains a proper curve C of dimension one’"
+   }
+  },
+  {
+   "text": "Since C maps into the fibre over y, f∘j factors through the residue-field point y, so the pullback to C of any invertible module from y is trivial. The symmetry of N and [lem-sc-mult-n-pullback] give f^*N ≅ N^{⊗ n²}; pulling this isomorphism back along j and using the factorization gives (j^*N)^{⊗ n²} ≅ O_C. By [lem-sc-ample-positive-degree], deg(j^*N)>0, while tensor powers multiply degree by n² and O_C has degree zero. Since n≥1, n²>0, contradiction. Thus the quasi-finite locus is all of A.",
+   "uses": [
+    "lem-sc-mult-n-pullback",
+    "lem-sc-ample-positive-degree"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-abelian-varieties/sk-prop-av-mult-finite/_section.md",
+    "place": "Step 1, the final sentence beginning ‘On C the map [n] factors through Spec κ(y)’"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sc-abelian-variety",
+  "lem-sc-quasi-finite-points-open",
+  "lem-sc-mult-n-dim-one-closed-subscheme",
+  "def-sc-curves",
+  "lem-sc-abelian-variety-projective",
+  "lem-sc-ample-tensor",
+  "lem-weil-pbc-pullback-ample-invertible",
+  "lem-sc-mult-n-pullback",
+  "lem-sc-ample-positive-degree"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/blueprint/master/blueprint/sec-abelian-varieties/sk-prop-av-mult-finite/_section.md",
+  "place": "Step 1"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -64,12 +130,38 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-sc-mult-n-finite-kernel",
   "by": "worker",
   "date": "2026-10-10"
  },
  "chapter": "sec-abelian-varieties",
- "unit": "sk-prop-av-mult-finite"
+ "unit": "sk-prop-av-mult-finite",
+ "split_report": {
+  "date": "2026-10-11",
+  "item": "lem-sc-mult-n-locally-quasi-finite",
+  "worker": "stage1",
+  "summary": "Split the algebraically closed multiplication-map argument into the open-locus reduction, positive-dimensional fibre, dimension-one closed subscheme, and ample-degree contradiction; attached the sorry-free project theorem extracting a dimension-one closed subscheme.",
+  "blueprint": "Realizes Step 1's algebraically closed reduction, the positive-dimensional fibre sentence, the dimension-one curve extraction, and the final ample-degree contradiction.",
+  "tool_uses": [
+   {
+    "node": "lem-sc-quasi-finite-points-open",
+    "why": "The unit route invokes openness of the quasi-finite locus as the general geometric criterion needed to pass from a bad point to a closed bad point."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sc-quasi-finite-points-open",
+  "lem-weil-pbc-pullback-ample-invertible",
+  "lem-sc-quasi-finite-points-open"
+ ],
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-mlq2108",
+  "group": "F1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-mlq2108 (reviewer sub-agent of L); spot-checked: Statement unchanged from base (alg. closed was the original statement; consumer lem-sc-mult-n-finite-kernel does the base change to an algebraic closure itself, so no E7). Steps 1-4 checked against cited statements; new node lem-sc-mult-n-dim-one-closed-subscheme true and stated exactly by sorry-free project declaration Scheme.exists_isClosedImmersion_topologicalKrullDim_eq_one (sorryfree.py OK). FIX more, RETURN less: (1) C1 step 3: existence of an ample L on A was not cited (lem-sc-ample-tensor only builds N from a given ample L) - cited lem-sc-abelian-variety-projective; (2) C1 step 3: 'pullback of ampleness along j is ample by the definition' is not definitional - cited lem-weil-pbc-pullback-ample-invertible (closed immersion affine; def-sc-ample identifies notions, Tag 01Q3); (3) C4 step 3/4: lem-sc-ample-positive-degree needs C a proper curve over algebraically closed K in the sense of def-sc-curves - stated that y is closed with residue field K so C is a closed subscheme of A, cited def-sc-curves. proof_deps updated. Second reading by F1 missed (1)-(3).; 1 file(s) fixed by the reviewer"
+ }
 }
