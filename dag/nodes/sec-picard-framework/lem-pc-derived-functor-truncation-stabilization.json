@@ -25,8 +25,59 @@
   "def-pc-derived-category",
   "def-sbc-standard-tstructure-derived-category"
  ],
- "proof": [],
- "proof_deps": [],
+ "proof": [
+  {
+   "text": "For each integer n, the canonical lower-truncation triangle is $H^{-n}(E)[n]\\to E_n\\to E_{n-1}\\to H^{-n}(E)[n+1]$ by [lem-pc-derived-lower-truncation-step-triangle].",
+   "uses": [
+    "lem-pc-derived-lower-truncation-step-triangle"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/perfect.tex",
+    "place": "Tag 08D4 proof of part (2), truncation triangle"
+   }
+  },
+  {
+   "text": "Applying the right derived functor RF, which is a triangulated functor on bounded below derived categories [lem-weil-pbc-derived-direct-image-triangulated] (all of $E_n$, $E_{n-1}$ and $H^{-n}(E)[n]$ are bounded below), to this triangle gives a distinguished triangle, and the long exact cohomology sequence [lem-sf-derived-homology-long-exact] contains the segment $H^i(RF(H^{-n}(E)[n]))\\to H^i(RF(E_n))\\to H^i(RF(E_{n-1}))\\to H^{i+1}(RF(H^{-n}(E)[n]))$.",
+   "uses": [
+    "lem-weil-pbc-derived-direct-image-triangulated",
+    "lem-sf-derived-homology-long-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/perfect.tex",
+    "place": "Tag 08D4 proof of part (2), apply RF and use the long exact sequence"
+   }
+  },
+  {
+   "text": "By the shift identification for right derived functors [lem-sp-shift-identification], for every integer j the endpoint group $H^j(RF(H^{-n}(E)[n]))$ identifies with $R^{j+n}F(H^{-n}(E))$ when j+n\\ge0, and is zero when j+n<0. Since $n\\ge N-i$, both indices $i+n$ and $i+n+1$ are at least N, so the two endpoint groups around $H^i(RF(E_n))\\to H^i(RF(E_{n-1}))$ vanish by the hypothesis $R^pF(\\mathcal F)=0$ for p\\ge N$.",
+   "uses": [
+    "lem-sp-shift-identification"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/perfect.tex",
+    "place": "Tag 08D4 proof of part (2), the two shifted derived-functor vanishings"
+   }
+  },
+  {
+   "text": "Exactness of the long sequence at the two middle terms, together with the vanishing of the adjacent endpoint groups from Step 3, makes the transition map $H^i(RF(E_n))\\to H^i(RF(E_{n-1}))$ both injective and surjective, hence an isomorphism.",
+   "uses": [
+    "lem-sf-derived-homology-long-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/perfect.tex",
+    "place": "Tag 08D4 proof of part (2), conclusion from the long exact sequence"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-derived-lower-truncation-step-triangle",
+  "lem-sf-derived-homology-long-exact",
+  "lem-sp-shift-identification",
+  "lem-weil-pbc-derived-direct-image-triangulated"
+ ],
  "proof_origin": {
   "by": "document",
   "document": "literature/stacks-project/perfect.tex",
@@ -58,5 +109,37 @@
   "by": "worker",
   "date": "2026-10-10"
  },
- "status": "unsplit"
+ "status": "split",
+ "split_report": {
+  "date": "2026-10-11",
+  "item": "lem-pc-derived-functor-truncation-stabilization",
+  "worker": "stage1",
+  "summary": "Checked the Tag 08D4 stabilization argument. Added one statement-only node for the successive lower-truncation triangle, then used the derived-functor shift identification, the long exact cohomology sequence, and the assumed vanishing of R^pF in degrees p >= N to prove both endpoint groups vanish and the transition map is an isomorphism.",
+  "blueprint": "The steps realize the ancestor proof's first-step uniform truncation bound, specifically the truncation triangle and its two shifted vanishings.",
+  "tool_uses": [
+   {
+    "node": "lem-sp-shift-identification",
+    "why": "The generic shift-to-R^p identification for right derived functors is a reusable derived-category tool not supplied by this Picard-duality route."
+   },
+   {
+    "node": "lem-sf-derived-homology-long-exact",
+    "why": "The long exact sequence of cohomology for a distinguished triangle is a generic derived-category tool."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sp-shift-identification",
+  "lem-sf-derived-homology-long-exact",
+  "lem-weil-pbc-derived-direct-image-triangulated",
+  "lem-sp-shift-identification",
+  "lem-sf-derived-homology-long-exact"
+ ],
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-dts2234",
+  "group": "G1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-dts2234 (reviewer sub-agent of L); spot-checked: Index arithmetic n>=N-i gives endpoints R^{i+n}F, R^{i+n+1}F with both degrees >=N (C4 ok in Step 3); new lower-truncation triangle node is a real lemma, not a duplicate of the upper-truncation lem-weil-pbc-truncation-triangle, Mathlib grep found only generic t-structure triangleLEGE (TruncLEGT.lean:189) without the H^{-n}(E)[n] identification (grep, triangleLEGE|truncGE, partial: no exact match); item does not restate citing lem-pc-unbounded-derived-functor-cohomological-bound. FIX more, RETURN less: (1) C1 Step 2: RF being triangulated on D^+ was uncited, now cites lem-weil-pbc-derived-direct-image-triangulated (generic tool, other unit); (2) C4 Step 2: the preceding LES term was H^{i-1}(RF(H^{-n}(E)[n])), corrected to H^i(RF(H^{-n}(E)[n])) as the segment Step 3/4 need; dropped the unused shift-identification from Step 2 uses.; 1 file(s) fixed by the reviewer"
+ }
 }
