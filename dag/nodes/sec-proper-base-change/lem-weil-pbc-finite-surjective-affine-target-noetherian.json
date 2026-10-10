@@ -1,0 +1,72 @@
+{
+ "id": "lem-weil-pbc-finite-surjective-affine-target-noetherian",
+ "kind": "statement",
+ "title": "A Noetherian scheme receiving a finite surjective morphism from an affine scheme is affine",
+ "statement": "Let $f:Y\\to X$ be a morphism of schemes [def-pc-scheme]. Assume that (1) $f$ is finite [def-weil-finite-integral-morphism], (2) $f$ is surjective, i.e. $|Y|\\to|X|$ is surjective [def-weil-surjective-morphism], (3) $Y$ is an affine scheme [def-pc-scheme], and (4) $X$ is Noetherian, i.e. locally Noetherian [pqf-def-locnoeth] and quasi-compact [def-weil-pbc-scheme-conventions]. Then $X$ is an affine scheme.",
+ "source": {
+  "document": "literature/stacks-project/coherent.tex",
+  "place": "Cohomology of Schemes, Lemma 01YQ (label lemma-image-affine-finite-morphism-affine-Noetherian, coherent.tex line 3557), with its proof (H^1(X,F)=0 for every coherent F by the devissage Lemma lemma-property-higher-rank-cohomological, using Lemma lemma-finite-morphism-Noetherian, lemma-affine-morphism-projection-ideal, lemma-quasi-coherent-affine-cohomology-zero and lemma-relative-affine-cohomology; then X affine by Serre's criterion, Lemma 01XF lemma-quasi-compact-h1-zero-covering or lemma-quasi-separated-h1-zero-covering)"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-finite-integral-morphism",
+  "def-weil-surjective-morphism",
+  "pqf-def-locnoeth",
+  "def-weil-pbc-scheme-conventions"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Noetherian scheme X with a finite surjective morphism from an affine scheme Y is affine",
+   "results": "IsFinite.toIsAffineHom, IsAffine.recOn, isAffine_of_isAffineHom (target affine assumed), IsFinite.recOn, IsAffineHom, IsAffine.of_isIso, IsIntegralHom.toIsAffineHom, IsClosedImmersion.of_surjective_of_isAffine (Mathlib.AlgebraicGeometry.*)",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "If Y is affine, f : Y → X is finite and surjective, and X is a Noetherian scheme, then X is affine",
+   "results": "LocallyOfFiniteType.isLocallyNoetherian, isFinite_iff, IsFinite.toIsAffineHom, IsFinite HasAffineProperty instance, noetherianSpace_of_isAffine, isNoetherian_iff_of_finite_affine_openCover, locallyOfFiniteType_iff, IsFinite.iff_isProper_and_isAffineHom",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.IsAffine, AlgebraicGeometry.IsNoetherian, AlgebraicGeometry.IsFinite",
+   "results": "no results",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rn IsAffine Mathlib/AlgebraicGeometry | grep -i noetherian; grep -rln Serre Mathlib/AlgebraicGeometry; grep -rn 'theorem|lemma|instance' Mathlib/AlgebraicGeometry | grep -E ': IsAffine [A-Z]' | grep -iE 'noeth|finite|surj'; grep -rn '01YQ|01XF|01XG' Mathlib",
+   "results": "only Noetherian.lean:132,181,185 (affine covers / affine with Noetherian sections give Noetherian space, the converse direction) and Limits.lean:700 (finite discrete scheme affine); no Serre file, no tag 01YQ/01XF/01XG; Mathlib has no cohomology of quasi-coherent sheaves on schemes with which to state Serre's criterion",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-finite-surjective-affine-target",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1"
+}

@@ -818,3 +818,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 03:18 L: reviewed lem-weil-pbc-finite-open-cover-degree-sum (5 steps, 0 new): accepted.
 - 03:21 L: reviewed lem-weil-pbc-finite-over-complete-local-product (6 steps, +00GS leaf): accepted.
 - 03:22 L: reviewed lem-weil-pbc-finite-projective-prime-local-free (3 steps, +2 leaves): accepted.
+- 03:23 L: reviewed lem-weil-pbc-finite-surjective-affine-target (9 steps, +01YQ node, tool_uses thm-pd-spreading-out), lem-weil-pbc-first-order-thickening-base-change (6 steps, 0 new): accepted.
