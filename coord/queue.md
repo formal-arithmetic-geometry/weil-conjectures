@@ -1,8 +1,8 @@
 # Work queue
 
-870 items; claim with `tools/claim.py next <group> [--stage N]`.
+868 items; claim with `tools/claim.py next <group> [--stage N]`.
 
-## Stage 1: nodes to split (70)
+## Stage 1: nodes to split (67)
 
 | node | distance to a target | Lean state on the done branch |
 |---|---|---|
@@ -18,7 +18,7 @@
 | `lem-sc-derived-internal-hom-adjunction` | 3019 | none |
 | `lem-pc-dq-coherator-adjunction` | 3020 | none |
 | `lem-pc-qcqs-sheaf-rhom-adjunction` | 3020 | none |
-| `lem-pc-tor-independent-perfect-tensor-base-change` | 3020 | none |
+| `lem-pc-tor-independent-perfect-pullback-comparison` | 3021 | none |
 | `lem-sc-affine-koszul-cech-derived-comparison` | 3021 | none |
 | `lem-sc-affine-perfect-koszul-principal-unit` | 3021 | none |
 | `lem-sc-affine-pseudo-coherent-lift` | 3022 | none |
@@ -56,13 +56,11 @@
 | `lem-sc-affine-constant-second` | - | rests_on_sorry |
 | `lem-kun-cp-approximation` | - | none |
 | `lem-sc-zariski-flasque-acyclic` | - | none |
-| `lem-pc-flat-rf-open` | - | rests_on_sorry |
 | `lem-pur-kinjective-degreewise-existence` | - | none |
 | `lem-pur-ringed-site-grothendieck-abelian` | - | none |
 | `lem-weil-common-extension-fields` | - | none |
 | `def-wf-lie-algebra-derivation` | - | rests_on_sorry |
 | `lem-kun-separable-smooth-colimit` | - | none |
-| `lem-pc-perfect-locus` | - | sorry_here |
 | `lem-pur-derived-change-of-rings` | - | none |
 | `lem-sc-p1-hi-vanishing` | - | rests_on_sorry |
 | `def-wf-lie-algebra` | - | none |
@@ -71,13 +69,12 @@
 | `lem-sc-p1-twist-exists` | - | none |
 | `lem-pc-projective-curve-finite-projection` | - | rests_on_sorry |
 | `lem-sc-p1-coherent-finite` | - | rests_on_sorry |
-| `def-exc-etale-algebra-lift` | - | none |
 | `lem-pc-projective-coordinate-model` | - | sorry_here |
 | `def-pur-hom-complex` | - | none |
 | `lem-pur-rhom-global-sections` | - | none |
 | `lem-pur-rhom-well-defined` | - | none |
 
-## Stage 2: nodes to state (800)
+## Stage 2: nodes to state (801)
 
 | node | distance to Mathlib | kind |
 |---|---|---|
@@ -850,6 +847,7 @@
 | `lem-fet-locally-trivial` | 2 | state |
 | `lem-galois-flasque` | 2 | state |
 | `lem-pc-cartier-criterion` | 2 | state |
+| `lem-pc-flat-rf-open` | 2 | state |
 | `lem-pc-hilb-smooth` | 2 | state |
 | `lem-sc-affine-open-proper` | 2 | state |
 | `lem-sc-brauer-zero` | 2 | state |
@@ -882,7 +880,7 @@
 | `lem-weil-pbc-projective-space-zero-isomorphism` | 4 | state |
 | `def-nagata-fixed-base-separated-stage` | 6 | state |
 
-Not open yet: 1642 nodes that wait for a statement dependency, 108 nodes that wait for stage 1.
+Not open yet: 1644 nodes that wait for a statement dependency, 106 nodes that wait for stage 1.
 
 ## Stage 3: modules to prove (0)
 
