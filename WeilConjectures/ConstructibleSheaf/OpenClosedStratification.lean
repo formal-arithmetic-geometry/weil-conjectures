@@ -16,7 +16,8 @@ Let `X` be a noetherian scheme, `ι : Z ⟶ X` a closed immersion and `V ⊆ Z` 
 three locally closed subsets `X ∖ Z`, `V` and `Z ∖ V` form a stratification of `X`
 (`AlgebraicGeometry.Scheme.Stratification.ofClosedImmersionOpens`), with the open subscheme
 `X ∖ Z`, the open subscheme `V` of `Z` and the reduced closed subscheme on `Z ∖ V` as schemes.
-On a noetherian scheme every locally closed subset is constructible.
+On a noetherian scheme every locally closed subset is constructible
+(`IsLocallyClosed.isConstructible_of_noetherianSpace`).
 
 -/
 
@@ -29,16 +30,6 @@ universe u
 namespace AlgebraicGeometry.Scheme
 
 variable {X Z : Scheme.{u}} (ι : Z ⟶ X) [IsClosedImmersion ι] (V : Z.Opens)
-
-/-- In a noetherian space every open subset is constructible. -/
-lemma isConstructible_of_noetherianSpace_of_isOpen {T : Type*} [TopologicalSpace T]
-    [TopologicalSpace.NoetherianSpace T] {U : Set T} (hU : IsOpen U) : IsConstructible U :=
-  IsRetrocompact.isConstructible hU fun _ _ _ ↦ TopologicalSpace.NoetherianSpace.isCompact _
-
-/-- In a noetherian space every closed subset is constructible. -/
-lemma isConstructible_of_noetherianSpace_of_isClosed {T : Type*} [TopologicalSpace T]
-    [TopologicalSpace.NoetherianSpace T] {U : Set T} (hU : IsClosed U) : IsConstructible U := by
-  simpa using (isConstructible_of_noetherianSpace_of_isOpen hU.isOpen_compl).compl
 
 /-- The open complement `X ∖ Z` of a closed immersion `ι : Z ⟶ X`. -/
 noncomputable def openComplementOfIsClosedImmersion : X.Opens :=
@@ -66,15 +57,14 @@ noncomputable def Stratification.ofClosedImmersionOpens [IsNoetherian X] :
     · exact (ι.isClosedEmbedding.isClosedMap _ V.isOpen.isClosed_compl).isLocallyClosed
   isConstructible_stratum i := by
     fin_cases i
-    · exact isConstructible_of_noetherianSpace_of_isOpen
-        ι.isClosedEmbedding.isClosed_range.isOpen_compl
+    · exact ι.isClosedEmbedding.isClosed_range.isOpen_compl.isConstructible_of_noetherianSpace
     · dsimp
       rw [image_opens_eq]
-      exact (isConstructible_of_noetherianSpace_of_isClosed
-        ι.isClosedEmbedding.isClosed_range).sdiff (isConstructible_of_noetherianSpace_of_isClosed
-          (ι.isClosedEmbedding.isClosedMap _ V.isOpen.isClosed_compl))
-    · exact isConstructible_of_noetherianSpace_of_isClosed
-        (ι.isClosedEmbedding.isClosedMap _ V.isOpen.isClosed_compl)
+      exact ι.isClosedEmbedding.isClosed_range.isConstructible_of_noetherianSpace.sdiff
+        (ι.isClosedEmbedding.isClosedMap _
+          V.isOpen.isClosed_compl).isConstructible_of_noetherianSpace
+    · exact (ι.isClosedEmbedding.isClosedMap _
+        V.isOpen.isClosed_compl).isConstructible_of_noetherianSpace
   iUnion_stratum_eq_univ := by
     apply Set.eq_univ_of_forall
     intro x
