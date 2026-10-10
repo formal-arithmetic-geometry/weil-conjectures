@@ -1,8 +1,8 @@
 # Work queue
 
-911 items; claim with `tools/claim.py next <group> [--stage N]`.
+914 items; claim with `tools/claim.py next <group> [--stage N]`.
 
-## Stage 1: nodes to split (625)
+## Stage 1: nodes to split (626)
 
 | node | distance to a target | Lean state on the done branch |
 |---|---|---|
@@ -26,10 +26,7 @@
 | `lem-weil-pbc-smooth-fibre-regular-local` | 1012 | none |
 | `lem-weil-pbc-smooth-localization-conormal-split` | 1012 | none |
 | `lem-weil-pbc-smooth-over-field-dimension-differentials` | 1012 | none |
-| `lem-weil-pbc-cohomology-powers-ideal-application` | 1013 | none |
-| `lem-weil-pbc-conormal-module-principal-localization` | 1013 | none |
 | `lem-weil-pbc-criterion-flatness-fibre` | 1013 | none |
-| `lem-weil-pbc-derivation-extends-finite-type-extension` | 1013 | none |
 | `lem-weil-pbc-differential-zero-iff-pth-power` | 1013 | none |
 | `lem-weil-pbc-etale-cohomology-local-ring-colimit` | 1013 | none |
 | `lem-weil-pbc-etale-ring-map-quasi-finite` | 1013 | none |
@@ -114,12 +111,15 @@
 | `lem-weil-pbc-transitivity-gamma` | 1013 | none |
 | `lem-weil-pbc-zariski-etale-inclusion-morphism-of-sites` | 1013 | none |
 | `lem-weil-pbc-zariski-open-restriction-injectives` | 1013 | none |
+| `lem-weil-pbc-cohomology-powers-ideal-rees-finite` | 1014 | none |
 | `lem-weil-pbc-completion-noetherian-quotient-noetherian` | 1014 | none |
 | `lem-weil-pbc-depth-in-ses` | 1014 | none |
 | `lem-weil-pbc-depth-le-support-dimension` | 1014 | none |
 | `lem-weil-pbc-finite-type-domain-dimension-local-ring` | 1014 | none |
 | `lem-weil-pbc-finitely-generated-field-complete-intersection-model` | 1014 | none |
 | `lem-weil-pbc-flat-local-extension-given-residue-field` | 1014 | none |
+| `lem-weil-pbc-nl-presentations-homotopy-equivalent` | 1014 | none |
+| `lem-weil-pbc-two-term-homotopy-equivalence-direct-sum` | 1014 | none |
 | `lem-weil-pbc-injective-acyclicity-bounded-below` | 2002 | sorry_here |
 | `lem-weil-pbc-property-implies-acyclicity` | 2003 | none |
 | `lem-weil-pbc-qcqs-higher-direct-image` | 2003 | none |
@@ -631,8 +631,9 @@
 | `lem-pc-finite-linear-avoidance` | - | none |
 | `lem-pc-linear-pair-graded-finite` | - | none |
 | `def-exc-jacobian-presentation` | - | none |
+| `def-nagata-rees-algebra` | - | none |
 
-## Stage 2: nodes to state (286)
+## Stage 2: nodes to state (288)
 
 | node | distance to Mathlib | kind |
 |---|---|---|
@@ -690,6 +691,7 @@
 | `lem-weil-pbc-completion-finite-quotient` | 1 | state |
 | `lem-weil-pbc-completion-of-dvr-is-dvr` | 1 | state |
 | `lem-weil-pbc-completion-regular-local` | 1 | state |
+| `lem-weil-pbc-conormal-module-principal-localization` | 1 | state |
 | `lem-weil-pbc-constant-group-scheme-multiplication` | 1 | state |
 | `lem-weil-pbc-constructible-in-retrocompact-open` | 1 | state |
 | `lem-weil-pbc-constructible-intersection-in-constructible` | 1 | state |
@@ -699,6 +701,7 @@
 | `lem-weil-pbc-criterion-flatness-fibre-noetherian` | 1 | state |
 | `lem-weil-pbc-degree-p-extension-regular` | 1 | state |
 | `lem-weil-pbc-derivation-extends` | 1 | state |
+| `lem-weil-pbc-derivation-extends-finite-type-extension` | 1 | state |
 | `lem-weil-pbc-derivation-nonzero-on-non-pth-power` | 1 | state |
 | `lem-weil-pbc-directed-colimit-base-change-elementwise` | 1 | state |
 | `lem-weil-pbc-elementary-etale-finite-piece-persistence` | 1 | state |
@@ -923,7 +926,7 @@
 | `lem-weil-pbc-p1-field-dimension-one` | 4 | state |
 | `lem-weil-pbc-projective-space-zero-isomorphism` | 4 | state |
 
-Not open yet: 637 nodes that wait for stage 1, 559 nodes that wait for a statement dependency.
+Not open yet: 638 nodes that wait for stage 1, 560 nodes that wait for a statement dependency.
 
 ## Stage 3: modules to prove (0)
 
