@@ -24,9 +24,63 @@
   "def-weil-sheaf-of-modules-category",
   "pqf-def-coherent"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Quasi-coherence is local on the scheme, so it suffices to work over an affine open U = Spec(A). Restriction of the given short exact sequence to U remains short exact: kernels are computed sectionwise [def-weil-sheaf-of-modules-category], and restriction to an open preserves cokernels because it preserves colimits [lem-weil-pbc-module-restriction-open-immersion-colimits] (1); by its clause (2) F_1|_U and F_3|_U are quasi-coherent. The hypotheses identify the restricted end terms with associated modules M_1~ and M_3~, where M_i = F_i(U), by the affine quasi-coherent equivalence.",
+   "uses": [
+    "def-pc-scheme",
+    "def-weil-sheaf-of-modules-category",
+    "pqf-def-coherent",
+    "lem-weil-pbc-module-restriction-open-immersion-colimits",
+    "lem-weil-pbc-affine-tilde-gamma-adjunction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Schemes, Lemma 01IE and Lemmas 01IA-01IB (affine-locality and the affine quasi-coherent equivalence)"
+   }
+  },
+  {
+   "text": "Write the restricted end terms as M_1~ and M_3~ and put M_2 = Γ(U, F_2). To prove 0 → M_1 → M_2 → M_3 → 0, injectivity and exactness in the middle follow from the sheaf axioms and the corresponding stalk exactness. For surjectivity, let m ∈ M_3 and let I = {a ∈ A | am lifts to M_2}. If p is a prime, choose a principal open D(f) containing p on which m lifts; then f ∉ p and f ∈ I after multiplying by a power, using the localization identifications on principal opens. For each point of V(f), choose a second principal open on which m lifts; the quasi-compactness of V(f) gives finitely many such opens and one common exponent. The resulting local lifts differ by sections of M_1 on overlaps; localization again kills these differences after a further common power, so the lifts glue to a global lift of f^N m. Thus I is contained in no prime, hence I = A and 1 ∈ I. Since F_2|_U is not yet known to be quasi-coherent, clause (3) of [lem-weil-pbc-affine-tilde-gamma-adjunction] cannot be applied to it; instead let ε: M_2~ → F_2|_U be the map corresponding to id_{M_2} under the adjunction of clause (1). For r ∈ A, the principal open D(r) ≅ Spec(A_r) is affine, the sequence restricted to D(r) is still short exact, and its end terms are (M_1)_r~ and (M_3)_r~ by the localization identifications of [lem-weil-pbc-spec-module-tilde-sections]; so the argument above, run on D(r), gives an exact sequence 0 → (M_1)_r → F_2(D(r)) → (M_3)_r → 0. Localizing 0 → M_1 → M_2 → M_3 → 0 at r is also exact (localization is exact), and under M_2~(D(r)) = (M_2)_r the component ε_{D(r)} is the map (M_2)_r → F_2(D(r)) induced by restriction; it is compatible with the isomorphisms (M_i)_r ≅ F_i(D(r)) for i = 1, 3. By the five lemma ε_{D(r)} is bijective. The principal opens form a basis of U, and a morphism of sheaves bijective on a basis of opens is an isomorphism, so ε is an isomorphism and F_2|_U ≅ M_2~ is quasi-coherent by [lem-weil-pbc-spec-module-tilde-sections]. This is the principal-open argument of Schemes Lemma 01IE, written out rather than assumed.",
+   "uses": [
+    "lem-weil-pbc-affine-tilde-gamma-adjunction",
+    "lem-weil-pbc-spec-module-tilde-sections",
+    "def-weil-sheaf-of-modules-category",
+    "pqf-def-coherent",
+    "lem-weil-pbc-module-restriction-open-immersion-colimits"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Schemes, Lemma 01IE (schemes-lemma-extension-quasi-coherent), affine proof on principal opens"
+   }
+  },
+  {
+   "text": "Every point of X lies in an affine open of the preceding kind, and quasi-coherence is defined by the existence of such affine presentations. Therefore the local quasi-coherence of F_2|_U for the affine cover implies that F_2 is quasi-coherent on X.",
+   "uses": [
+    "def-pc-scheme",
+    "pqf-def-coherent"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Schemes, Lemma 01IE, locality clause"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-scheme",
+  "def-weil-sheaf-of-modules-category",
+  "pqf-def-coherent",
+  "lem-weil-pbc-module-restriction-open-immersion-colimits",
+  "lem-weil-pbc-affine-tilde-gamma-adjunction",
+  "lem-weil-pbc-spec-module-tilde-sections"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/schemes.tex",
+  "place": "Schemes, Lemma 01IE (schemes-lemma-extension-quasi-coherent)"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -34,10 +88,17 @@
    "results": "Scheme.Modules.instAbelian, SheafOfModules.isQuasicoherent / IsQuasicoherent / nonempty_quasicoherentData, SheafOfModules.instAbelian: definitions and abelianness only, no extension closure",
    "date": "2026-10-10",
    "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "IsQuasicoherent in Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent.lean and Mathlib/AlgebraicGeometry/Modules/",
+   "results": "definition, pushforward/restriction/of_coversTop stability, tilde instances, isQuasicoherent_iff_isIso_fromTildeΓ, tildeEquiv; no closure under extensions",
+   "date": "2026-10-10",
+   "verdict": "no match"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "reviewer",
@@ -45,5 +106,21 @@
   "date": "2026-10-10"
  },
  "chapter": "sec-picard-framework",
- "unit": "sk-thm-picard-duality"
+ "unit": "sk-thm-picard-duality",
+ "split_report": {
+  "date": "2026-10-11",
+  "item": "lem-pc-quasi-coherent-extension",
+  "worker": "stage1",
+  "summary": "Split the extension-closure statement into the affine-local reduction, the principal-open module extension argument of Stacks Lemma 01IE, and the final locality step. No new child node was introduced because the only substantive affine assertion is the item's own clause.",
+  "blueprint": "Realizes the imported proof route: apply Schemes Lemma 01IE on an affine open cover, using the affine quasi-coherent equivalence and locality.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-qce1849",
+  "group": "C1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-qce1849 (reviewer sub-agent of L); spot-checked: Checked steps against Stacks 01IE text and cited statements; principal-open trick (no H^1 vanishing needed, as Stacks says). Mathlib grep IsQuasicoherent: no extension closure, so not a leaf (search recorded). FIX more, RETURN less: (1) C4 step 2 applied the counit-iso clause (3) of lem-weil-pbc-affine-tilde-gamma-adjunction to F_2|_U, which is not yet known quasi-coherent (missed by the second reading); replaced by the adjunction map eps: M_2~ -> F_2|_U, the argument rerun on each D(r), exactness of localization, five lemma on D(r), iso on a basis, qc of M_2~ by lem-weil-pbc-spec-module-tilde-sections; (2) C4 step 1 claimed cokernels are sectionwise; now cites restriction preserving colimits and its clause (2) for qc of restricted end terms.; 1 file(s) fixed by the reviewer"
+ }
 }
