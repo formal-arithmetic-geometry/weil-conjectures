@@ -4,7 +4,7 @@
   "is": null,
   "from": {
    "node": "lem-sc-pic-proper-ntorsion",
-   "place": "09MR Mayer–Vietoris paragraph: the module category and injective-resolution construction used for Lemma 01EB",
+   "place": "09MR Mayer–Vietoris paragraph: the module category and injective-resolution construction used for Lemma 01DI",
    "via": [
     "lem-sc-mayer-vietoris-ringed-space"
    ]
@@ -25,14 +25,34 @@
   "def-weil-sheaf-of-modules-category",
   "def-sp-injective-resolutions"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Let $\\mathcal C$ be the category of open subsets of $X$ with inclusions and open coverings as coverings; it is small, and $\\mathcal O_X$ is a sheaf of commutative rings on it [def-weil-locally-ringed-space-morphism], so $\\operatorname{Mod}(\\mathcal O_X)$ is the category $\\Mod(\\mathcal O)$ of [def-weil-sheaf-of-modules-category] for this site. By the first clause of [prop-pur-kinjective-resolutions-exist], $\\operatorname{Mod}(\\mathcal O_X)$ is a Grothendieck abelian category, in particular abelian; by [lem-sp-grothendieck-enough-injectives] it has enough injectives, i.e. every $\\mathcal O_X$-module admits a monomorphism into an injective $\\mathcal O_X$-module [def-sp-injective-resolutions].",
+   "uses": [
+    "prop-pur-kinjective-resolutions-exist",
+    "lem-sp-grothendieck-enough-injectives"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/injectives.tex",
+    "place": "Lemma 01DI; via Injectives Theorem 079H (Grothendieck abelian categories have enough injectives) and Sites-cohomology Section 07A5 (Mod(O) is Grothendieck abelian)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "prop-pur-kinjective-resolutions-exist",
+  "lem-sp-grothendieck-enough-injectives"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Section 07A5 first paragraph (Mod(O) Grothendieck abelian) with Injectives Theorem 079H, specialised to the site of opens of X; replaces the skyscraper-product proof of Lemma 01DI"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
    "query": "category of sheaves of modules over a sheaf of rings has enough injectives",
-   "results": "SheafOfModules.instAbelian and CategoryTheory.Sheaf.instIsGrothendieckAbelian; no direct enough-injectives declaration for arbitrary ringed-space module sheaves",
+   "results": "SheafOfModules.instAbelian and SheafOfModules.isGrothendieckAbelian; no direct enough-injectives declaration for arbitrary ringed-space module sheaves",
    "date": "2026-10-11",
    "verdict": "no exact match"
   },
@@ -45,17 +65,49 @@
   },
   {
    "tool": "grep",
-   "query": "EnoughInjectives.*SheafOfModules",
-   "results": "no matches in Mathlib",
+   "query": "EnoughInjectives.*SheafOfModules in Mathlib",
+   "results": "no matches",
    "date": "2026-10-11",
    "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rn 'EnoughInjectives\\|IsGrothendieckAbelian' Mathlib/Algebra/Category/ModuleCat/Sheaf Mathlib/CategoryTheory/Sites; grep -rn 'isGrothendieckAbelian' Mathlib | grep -i SheafOfModules",
+   "results": "no EnoughInjectives or IsGrothendieckAbelian instance for SheafOfModules (the earlier leanfinder mention of SheafOfModules.isGrothendieckAbelian does not exist in this Mathlib)",
+   "date": "2026-10-11",
+   "verdict": "no match: not a Mathlib leaf"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-sc-mayer-vietoris-ringed-space",
   "by": "worker",
   "date": "2026-10-10"
+ },
+ "split_report": {
+  "date": "2026-10-11",
+  "item": "lem-sc-ringed-space-module-sheaves-enough-injectives",
+  "worker": "stage1",
+  "summary": "One step: the category of O_X-modules is Mod(O) for the site of opens of X, which is Grothendieck abelian by prop-pur-kinjective-resolutions-exist (first clause), hence has enough injectives by lem-sp-grothendieck-enough-injectives. (Reviewer R-rme2014 replaced the delivered six-step skyscraper-product proof and dropped its new skyscraper adjunction node.)",
+  "blueprint": "Realizes the 09MR Mayer–Vietoris paragraph's module-category and injective-resolution construction used by Lemma 01DI.",
+  "tool_uses": [
+   {
+    "node": "prop-pur-kinjective-resolutions-exist",
+    "why": "Generic tool: its first clause (Mod(O) on a small site is Grothendieck abelian) applied to the site of opens of X."
+   }
+  ]
+ },
+ "tool_uses": [
+  "prop-pur-kinjective-resolutions-exist",
+  "prop-pur-kinjective-resolutions-exist"
+ ],
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-rme2014",
+  "group": "F1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-rme2014 (reviewer sub-agent of L); spot-checked: Delivered 6-step skyscraper-product reproof of Stacks 01DI is correct but reproves at length. FIX more, RETURN less: (1) replaced proof by one step on the site of opens of X (small, O_X commutative per def-weil-locally-ringed-space-morphism): first clause of prop-pur-kinjective-resolutions-exist (Mod(O) Grothendieck abelian; declared generic tool_use) + lem-sp-grothendieck-enough-injectives (Mathlib leaf IsGrothendieckAbelian.enoughInjectives); proof_deps updated; no cycle (prop-pur unsplit, not created from this item); (2) dropped new node lem-sc-ringed-space-module-skyscraper-stalk-adjunction, now unused; delivered tool_uses dropped; (3) not a Mathlib leaf: grep of ModuleCat/Sheaf and CategoryTheory/Sites finds no EnoughInjectives/IsGrothendieckAbelian for SheafOfModules (search recorded; the delivered leanfinder note naming SheafOfModules.isGrothendieckAbelian is nonexistent). Second reading by F1 missed this and claims step-5/created.item edits absent from head d29b0ff2d.; 1 file(s) fixed by the reviewer"
  }
 }
