@@ -2,7 +2,7 @@
  "id": "lem-weil-pbc-module-finite-type-image-extension",
  "kind": "statement",
  "title": "Finite type modules on a ringed space: stable under epimorphic images and extensions (Stacks 01B7)",
- "statement": "Let $(X,\\mathcal O_X)$ be a ringed space (for instance a scheme [def-pc-scheme] with its structure sheaf) and $\\mathit{Mod}(\\mathcal O_X)$ the abelian category of sheaves of $\\mathcal O_X$-modules on the open sets of $X$ [def-weil-sheaf-of-modules-category]. An $\\mathcal O_X$-module $\\mathcal F$ is *of finite type* if every point $x\\in X$ has an open neighbourhood $U$ and finitely many sections $s_1,\\dots,s_n\\in\\mathcal F(U)$ such that the associated map $\\mathcal O_U^{\\oplus n}\\to\\mathcal F|_U$, $e_i\\mapsto s_i$, is an epimorphism of $\\mathcal O_U$-modules (Stacks, Modules, Definition 01B5; the notion of [pqf-def-coherent] (2)). Then: (1) if $p:\\mathcal F\\to\\mathcal G$ is an epimorphism of $\\mathcal O_X$-modules and $\\mathcal F$ is of finite type, then $\\mathcal G$ is of finite type (in particular the image of a morphism whose source is of finite type is of finite type); (2) if $0\\to\\mathcal F_1\\to\\mathcal F_2\\to\\mathcal F_3\\to0$ is a short exact sequence of $\\mathcal O_X$-modules [def-weil-pbc-exact-sequence] and $\\mathcal F_1$ and $\\mathcal F_3$ are of finite type, then $\\mathcal F_2$ is of finite type.",
+ "statement": "Let $(X,\\mathcal O_X)$ be a ringed space (for instance a scheme [def-pc-scheme] with its structure sheaf) and $\\mathit{Mod}(\\mathcal O_X)$ the abelian category of sheaves of $\\mathcal O_X$-modules on the open sets of $X$ [def-weil-sheaf-of-modules-category]. An $\\mathcal O_X$-module $\\mathcal F$ is *of finite type* if every point $x\\in X$ has an open neighbourhood $U$ and finitely many sections $s_1,\\dots,s_n\\in\\mathcal F(U)$ such that the associated map $\\mathcal O_U^{\\oplus n}\\to\\mathcal F|_U$, $e_i\\mapsto s_i$, is an epimorphism of $\\mathcal O_U$-modules ([def-weil-pbc-module-finite-type-presentation] (1); on a scheme this is the notion of [pqf-def-coherent] (2)). Then: (1) if $p:\\mathcal F\\to\\mathcal G$ is an epimorphism of $\\mathcal O_X$-modules and $\\mathcal F$ is of finite type, then $\\mathcal G$ is of finite type (in particular the image $\\operatorname{Im}\\varphi=\\operatorname{Ker}(\\mathcal H\\to\\operatorname{Coker}\\varphi)$ of a morphism $\\varphi:\\mathcal F\\to\\mathcal H$ whose source is of finite type is of finite type); (2) if $0\\to\\mathcal F_1\\to\\mathcal F_2\\to\\mathcal F_3\\to0$ is a short exact sequence of $\\mathcal O_X$-modules [def-weil-pbc-exact-sequence] and $\\mathcal F_1$ and $\\mathcal F_3$ are of finite type, then $\\mathcal F_2$ is of finite type.",
  "source": {
   "document": "literature/stacks-project/modules.tex",
   "place": "Modules, Lemma 01B7 (label lemma-extension-finite-type, line 855) with its proof ('the statement on images is trivial'; extensions: sections of F_3 locally lift to F_2, and the corresponding result for modules over a ring); Definition 01B5 (definition-finite-type, line 810). Tags verified in stacks-project/tags/tags: 01B7,modules-lemma-extension-finite-type; 01B5,modules-definition-finite-type"
@@ -10,12 +10,90 @@
  "stmt_deps": [
   "def-pc-scheme",
   "def-weil-sheaf-of-modules-category",
+  "def-weil-pbc-module-finite-type-presentation",
   "pqf-def-coherent",
   "def-weil-pbc-exact-sequence"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Generation tested on sections. Let $U\\subseteq X$ be open and $s_1,\\dots,s_n\\in\\mathcal F(U)$. The map $\\sigma:\\mathcal O_U^{\\oplus n}\\to\\mathcal F|_U$, $e_i\\mapsto s_i$ [def-weil-pbc-module-finite-type-presentation], sends $(a_1,\\dots,a_n)\\in\\mathcal O_X(W)^{\\oplus n}$, $W\\subseteq U$ open, to $\\sum_ia_is_i|_W$. Applying [lem-weil-pbc-ringed-space-module-exactness-local-lifting] (1) on the ringed space $(U,\\mathcal O_U)$, whose opens are the opens $W\\subseteq U$ of $X$: $\\sigma$ is an epimorphism of $\\mathcal O_U$-modules if and only if (*) for every open $W\\subseteq U$ and every $t\\in\\mathcal F(W)$ there are an open covering $W=\\bigcup_kW_k$ and $a_{ik}\\in\\mathcal O_X(W_k)$ with $t|_{W_k}=\\sum_ia_{ik}s_i|_{W_k}$. Likewise, by the same lemma (1) on $X$, a morphism $p:\\mathcal F\\to\\mathcal G$ of $\\mathcal O_X$-modules is an epimorphism if and only if for every open $W$ and $t\\in\\mathcal G(W)$ there are a covering $W=\\bigcup_kW_k$ and $f_k\\in\\mathcal F(W_k)$ with $p(f_k)=t|_{W_k}$. Throughout, morphisms of $\\mathcal O_X$-modules are $\\mathcal O_X(W)$-linear on sections and commute with restriction [def-weil-sheaf-of-modules-category].",
+   "uses": [
+    "def-weil-pbc-module-finite-type-presentation",
+    "lem-weil-pbc-ringed-space-module-exactness-local-lifting",
+    "def-weil-sheaf-of-modules-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/modules.tex",
+    "place": "Modules, Definition 01B5 (label definition-finite-type, line 810); Section 01AF (label section-kernels)"
+   }
+  },
+  {
+   "text": "Part (1). Let $p:\\mathcal F\\to\\mathcal G$ be an epimorphism and $\\mathcal F$ of finite type; let $x\\in X$. Choose an open $U\\ni x$ and $s_1,\\dots,s_n\\in\\mathcal F(U)$ whose map $\\mathcal O_U^{\\oplus n}\\to\\mathcal F|_U$ is an epimorphism [def-weil-pbc-module-finite-type-presentation] (1). We check (*) of step 1 for the sections $p(s_1),\\dots,p(s_n)\\in\\mathcal G(U)$. Let $W\\subseteq U$ be open and $t\\in\\mathcal G(W)$. Since $p$ is an epimorphism, step 1 gives a covering $W=\\bigcup_kW_k$ and $f_k\\in\\mathcal F(W_k)$ with $p(f_k)=t|_{W_k}$. Since the $s_i$ generate, step 1 (*) gives for each $k$ a covering $W_k=\\bigcup_lW_{kl}$ and $a_{ikl}\\in\\mathcal O_X(W_{kl})$ with $f_k|_{W_{kl}}=\\sum_ia_{ikl}s_i|_{W_{kl}}$. Applying $p$, which is linear and commutes with restriction, $t|_{W_{kl}}=p(f_k)|_{W_{kl}}=\\sum_ia_{ikl}\\,p(s_i)|_{W_{kl}}$, and the $W_{kl}$ cover $W$. By step 1 the map $\\mathcal O_U^{\\oplus n}\\to\\mathcal G|_U$, $e_i\\mapsto p(s_i)$, is an epimorphism; as $x$ was arbitrary, $\\mathcal G$ is of finite type. This is 'the statement on images is trivial' of the source.",
+   "uses": [
+    "def-weil-pbc-module-finite-type-presentation",
+    "lem-weil-pbc-ringed-space-module-exactness-local-lifting"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/modules.tex",
+    "place": "Modules, Lemma 01B7 (label lemma-extension-finite-type, line 855) and its proof ('The statement on images is trivial')"
+   }
+  },
+  {
+   "text": "Part (1), the image. Let $\\varphi:\\mathcal F\\to\\mathcal H$ with $\\mathcal F$ of finite type, $\\pi:\\mathcal H\\to\\operatorname{Coker}\\varphi$ its cokernel in the abelian category $\\mathit{Mod}(\\mathcal O_X)$ [def-weil-sheaf-of-modules-category], [def-sp-abelian], and $i:\\mathcal I\\to\\mathcal H$ a kernel of $\\pi$, which is the image $\\operatorname{Im}\\varphi$ [def-weil-pbc-exact-sequence]. Since $\\pi\\varphi=0$ there is a unique $\\varphi':\\mathcal F\\to\\mathcal I$ with $i\\varphi'=\\varphi$. The complex $\\mathcal F\\xrightarrow{\\varphi}\\mathcal H\\xrightarrow{\\pi}\\operatorname{Coker}\\varphi$ is exact at $\\mathcal H$, since $\\operatorname{Im}\\varphi$ is by definition $\\operatorname{Ker}\\pi$; so $\\varphi'$ is an epimorphism by [lem-weil-pbc-abelian-exact-iff-epi-kernel-lift], and $\\mathcal I$ is of finite type by step 2.",
+   "uses": [
+    "def-weil-sheaf-of-modules-category",
+    "def-sp-abelian",
+    "def-weil-pbc-exact-sequence",
+    "lem-weil-pbc-abelian-exact-iff-epi-kernel-lift"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/modules.tex",
+    "place": "Modules, Lemma 01B7 (label lemma-extension-finite-type, line 855) and its proof (first assertion: the image of a morphism of finite type modules)"
+   }
+  },
+  {
+   "text": "Part (2), choice of local generators. Let $0\\to\\mathcal F_1\\xrightarrow{f}\\mathcal F_2\\xrightarrow{g}\\mathcal F_3\\to0$ be short exact with $\\mathcal F_1,\\mathcal F_3$ of finite type, and $x\\in X$. By [def-weil-pbc-module-finite-type-presentation] (1) there are opens $U_1,U_3\\ni x$, sections $t_1,\\dots,t_m\\in\\mathcal F_1(U_1)$ and $u_1,\\dots,u_n\\in\\mathcal F_3(U_3)$ whose maps $\\mathcal O_{U_1}^{\\oplus m}\\to\\mathcal F_1|_{U_1}$ and $\\mathcal O_{U_3}^{\\oplus n}\\to\\mathcal F_3|_{U_3}$ are epimorphisms. Sections of $\\mathcal F_3$ lift locally: $g$ is an epimorphism [def-weil-pbc-exact-sequence], so by [lem-weil-pbc-ringed-space-module-exactness-local-lifting] (1) each $u_j$ has, on a member $W_j\\ni x$ of an open covering of $U_3$, a section $v_j\\in\\mathcal F_2(W_j)$ with $g(v_j)=u_j|_{W_j}$. Put $U=U_1\\cap U_3\\cap W_1\\cap\\dots\\cap W_n$, an open neighbourhood of $x$ (a finite intersection), and let $\\Psi:\\mathcal O_U^{\\oplus m}\\oplus\\mathcal O_U^{\\oplus n}\\to\\mathcal F_2|_U$ be the map of the $m+n$ sections $f(t_1)|_U,\\dots,f(t_m)|_U,v_1|_U,\\dots,v_n|_U\\in\\mathcal F_2(U)$.",
+   "uses": [
+    "def-weil-pbc-module-finite-type-presentation",
+    "def-weil-pbc-exact-sequence",
+    "lem-weil-pbc-ringed-space-module-exactness-local-lifting"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/modules.tex",
+    "place": "Modules, Lemma 01B7 (label lemma-extension-finite-type, line 855) and its proof ('sections of F_3 locally lift to sections of F_2')"
+   }
+  },
+  {
+   "text": "Part (2), $\\Psi$ is an epimorphism. We check (*) of step 1 for these $m+n$ sections. Let $W\\subseteq U$ be open and $s\\in\\mathcal F_2(W)$. (a) Since $W\\subseteq U_3$ and the $u_j$ generate $\\mathcal F_3|_{U_3}$, step 1 (*) gives a covering $W=\\bigcup_kW_k$ and $a_{jk}\\in\\mathcal O_X(W_k)$ with $g(s)|_{W_k}=\\sum_ja_{jk}u_j|_{W_k}$. Then $r_k:=s|_{W_k}-\\sum_ja_{jk}v_j|_{W_k}\\in\\mathcal F_2(W_k)$ satisfies $g(r_k)=g(s)|_{W_k}-\\sum_ja_{jk}u_j|_{W_k}=0$, using that $g$ is linear, commutes with restriction and $g(v_j)=u_j|_{W_j}$ with $W_k\\subseteq W_j$. (b) The complex $\\mathcal F_1\\xrightarrow{f}\\mathcal F_2\\xrightarrow{g}\\mathcal F_3$ is exact at $\\mathcal F_2$ ($\\operatorname{Im}f=\\operatorname{Ker}g$, part of the definition of a short exact sequence [def-weil-pbc-exact-sequence]), so by [lem-weil-pbc-ringed-space-module-exactness-local-lifting] (2) there are a covering $W_k=\\bigcup_lW_{kl}$ and $c_{kl}\\in\\mathcal F_1(W_{kl})$ with $f(c_{kl})=r_k|_{W_{kl}}$. (c) Since $W_{kl}\\subseteq U_1$ and the $t_i$ generate $\\mathcal F_1|_{U_1}$, step 1 (*) gives a covering $W_{kl}=\\bigcup_qW_{klq}$ and $b_{iklq}\\in\\mathcal O_X(W_{klq})$ with $c_{kl}|_{W_{klq}}=\\sum_ib_{iklq}t_i|_{W_{klq}}$. (d) On $W_{klq}$, applying the linear map $f$: $s|_{W_{klq}}=r_k|_{W_{klq}}+\\sum_ja_{jk}|_{W_{klq}}v_j|_{W_{klq}}=\\sum_ib_{iklq}f(t_i)|_{W_{klq}}+\\sum_ja_{jk}|_{W_{klq}}v_j|_{W_{klq}}$, and the $W_{klq}$ cover $W$. By step 1, $\\Psi$ is an epimorphism of $\\mathcal O_U$-modules; so every $x$ has a neighbourhood on which $\\mathcal F_2$ is generated by finitely many sections, i.e. $\\mathcal F_2$ is of finite type [def-weil-pbc-module-finite-type-presentation] (1). (This is the source's 'corresponding result in the category of modules over a ring': the generators of the submodule together with lifts of generators of the quotient generate the module, carried out on sections over the members of a covering instead of on stalks.)",
+   "uses": [
+    "def-weil-pbc-exact-sequence",
+    "lem-weil-pbc-ringed-space-module-exactness-local-lifting",
+    "def-weil-pbc-module-finite-type-presentation"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/modules.tex",
+    "place": "Modules, Lemma 01B7 (label lemma-extension-finite-type, line 855) and its proof (extension: local lifts and the result for modules over a ring)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-module-finite-type-presentation",
+  "lem-weil-pbc-ringed-space-module-exactness-local-lifting",
+  "def-weil-sheaf-of-modules-category",
+  "def-sp-abelian",
+  "def-weil-pbc-exact-sequence",
+  "lem-weil-pbc-abelian-exact-iff-epi-kernel-lift"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/modules.tex",
+  "place": "Modules, Lemma 01B7 (label lemma-extension-finite-type, line 855), proof at lines 866-873"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -44,10 +122,31 @@
    "results": "Algebra/Category/ModuleCat/Sheaf/Generators.lean:100 (instance (σ.ofEpi p).IsFiniteType for a global generating family), Sheaf/Quasicoherent.lean:142-143 (same, inside a presentation); nothing for IsFiniteType of a module under epi or extension",
    "date": "2026-10-10",
    "verdict": "no match"
+  },
+  {
+   "tool": "local_search",
+   "query": "SheafOfModules.IsFiniteType (project root ~/weil-conjectures-slopmaster2)",
+   "results": "SheafOfModules.IsFiniteType (class, Mathlib/Algebra/Category/ModuleCat/Sheaf/Generators.lean:142); index: unavailable, so not a proof of absence of other names",
+   "date": "2026-10-10",
+   "verdict": "no match: only the definition exists"
+  },
+  {
+   "tool": "leansearch",
+   "query": "sheaf of modules of finite type, short exact sequence, middle term is of finite type",
+   "results": "CategoryTheory.ShortComplex.Exact.ab_finite, ShortExact.ab_finite_iff (Mathlib.Algebra.Homology.ShortComplex.Ab: finiteness of abelian groups as sets, not finite type); SheafOfModules.IsFiniteType, IsFiniteType.mk, LocalGeneratorsData.IsFiniteType, GeneratingSections.IsFiniteType.mk (Generators.lean, definitions only)",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rn 'IsFiniteType\\|isFiniteType' --include=*.lean (in ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib)",
+   "results": "only Algebra/Category/ModuleCat/Sheaf/Generators.lean (95-178: definitions, the ofEpi instance at 100 for a global family, the map instance at 178) and Sheaf/Quasicoherent.lean (52-60, 142-143, 244-245, 282); no lemma on epimorphic images or extensions of SheafOfModules.IsFiniteType",
+   "date": "2026-10-10",
+   "verdict": "no match"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "worker",
@@ -67,5 +166,17 @@
   }
  },
  "chapter": "sec-proper-base-change",
- "unit": "sk-thm-p1"
+ "unit": "sk-thm-p1",
+ "mathlib_candidate": {
+  "declaration": "SheafOfModules.IsFiniteType",
+  "file": "Mathlib/Algebra/Category/ModuleCat/Sheaf/Generators.lean",
+  "how": "line 142: the Mathlib notion of a finite type sheaf of modules (local generators data with finite index sets, via J.over X); neither clause of the node is stated for it; the instance at line 100 ((σ.ofEpi p).IsFiniteType) is the global-generators form of clause (1) and would give clause (1) once the local data are pushed along p"
+ },
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "lem-weil-pbc-module-finite-type-image-extension",
+  "worker": "stage1",
+  "summary": "Split following Stacks 01B7 (modules.tex line 855) and its proof, read with Definition 01B5. Five elementary steps: (1) generation by finitely many sections tested on sections over a covering, from the existing same-unit lemma lem-weil-pbc-ringed-space-module-exactness-local-lifting (1) on (U,O_U); (2) clause (1): images of generators along an epimorphism generate ('trivial' in the source, written out with two refinements of coverings); (3) the image of a morphism with finite type source, via the cokernel and lem-weil-pbc-abelian-exact-iff-epi-kernel-lift, as the citers use it; (4)-(5) clause (2): sections of F_3 locally lift (local-lifting (1)), and the kernel of g is locally in the image of f (local-lifting (2)), so the generators of F_1 and the lifts of those of F_3 generate F_2 over a small open; the source's 'result for modules over a ring applied to stalks' is carried out on sections over coverings, which avoids stalks and any new node. Statement: kept, with the finite type notion now cited to def-weil-pbc-module-finite-type-presentation (1) (pqf-def-coherent is for schemes only) and the image made explicit as Ker(H -> Coker). No new nodes. Mathlib: SheafOfModules.IsFiniteType exists (definition only), recorded as mathlib_candidate; no lemma for images or extensions."
+ },
+ "reviewed": "Reviewed by L 2026-10-10: faithful to Modules 01B7 with both parts written out on sections over coverings via lem-weil-pbc-ringed-space-module-exactness-local-lifting (no stalk or ring-level node needed); the finite-type notion now cites the ringed-space definition node. No new nodes; Mathlib candidate recorded (B8)."
 }
