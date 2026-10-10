@@ -1608,3 +1608,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 14:21 L: merged deliver/E1/lem-sc-riemann-roch (reviewer FIX; first push; new nodes: 4)
 - 14:21 L: merged deliver/M1/lem-pc-chi-zero-dim-support (reviewer PASS; first push; new nodes: 2)
 - 14:21 L: merged deliver/G1/lem-exc-discrete-modules-abelian (reviewer PASS; first push; new nodes: 2)
+- 14:21 L: merged deliver/M1/lem-weil-pbc-qcqs-higher-direct-image (reviewer FIX; first push; new nodes: 0)
