@@ -51,7 +51,8 @@ lemma unitSection_eq (s : Spec (.of K) ⟶ Z) :
       η[adicConstantSheaf l (Spec (.of K))] ≫
         inv (((upperStarLowerStarAdjunction (WeilCoefficients.{u} l) s).homEquiv
           _ _).symm (adicConstantSheafToLowerStar l s)) :=
-    (IsMonHom.one_hom (f := inv (((upperStarLowerStarAdjunction (WeilCoefficients.{u} l) s).homEquiv
+    (IsMonHom.one_hom (f := inv (((upperStarLowerStarAdjunction (WeilCoefficients.{u} l)
+      s).homEquiv
           _ _).symm (adicConstantSheafToLowerStar l s)))).symm
   rw [unitSection, Functor.LaxMonoidal.comp_ε, Functor.comp_map, Category.assoc,
     ← Functor.map_comp, ← Functor.obj.η_def, h₁, Functor.map_comp, ε_Γ]

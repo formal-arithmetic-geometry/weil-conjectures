@@ -5,6 +5,8 @@ Authors: Claude
 -/
 module
 
+public import WeilConjectures.SixFunctors.ProEtale.Adic.UnitSection
+public import WeilConjectures.WeilSheaf.Constant
 public import WeilConjectures.WeilSheaf.StalkMonoidal
 
 /-!
@@ -152,5 +154,47 @@ theorem frobeniusPowIso_unit (R : WeilSheaf k₀ l X) (η : 𝟙_ _ ⟶ R.obj.ca
       reassoc_of% h₁, ← Functor.map_comp_assoc, ← Functor.map_comp_assoc, Category.assoc, ih, h]
 
 end IteratedWeilStructure
+
+section Constant
+
+open MonObj
+open scoped Obj
+
+/-- The Weil structure of the constant Weil sheaf preserves the unit section. -/
+lemma adicConstant_unit_str :
+    ε ((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.inv)_*[WeilCoefficients.{u} l] ≫
+        ((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.inv)_*[_].map
+          η[adicConstantSheaf l (X ↘ Spec (CommRingCat.of k₀)).geometricFiber] ≫
+        (adicConstant k₀ l X).obj.str.hom.hom =
+      η[adicConstantSheaf l (X ↘ Spec (CommRingCat.of k₀)).geometricFiber] := by
+  have : IsMonHom (adicConstantSheafLowerStarIso l
+      (X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.symm).inv :=
+    inferInstanceAs (IsMonHom (adicConstantSheafToLowerStar l _))
+  rw [adicConstant_str_hom_hom, ← Category.assoc, ← Functor.obj.η_def,
+    ← IsMonHom.one_hom (f := (adicConstantSheafLowerStarIso l
+      (X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.symm).inv), Category.assoc,
+    Iso.inv_hom_id, Category.comp_id]
+
+/-- The local Frobenius of the stalks of the constant Weil sheaf is the identity. -/
+theorem adicConstant_stalkAt_frobenius
+    (s : Spec (.of (AlgebraicClosure k₀)) ⟶ (X ↘ Spec (CommRingCat.of k₀)).geometricFiber)
+    (m : ℕ) (hs : s ≫ ((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius ^ m).hom =
+      (specGeometricFrobenius k₀ ^ m).hom ≫ s) :
+    ((adicConstant k₀ l X).stalkAt s m hs).frobenius = LinearEquiv.refl _ _ := by
+  have h := stalkUnit_frobenius s m hs _ _
+    (frobeniusPowIso_unit (adicConstant k₀ l X) _ adicConstant_unit_str m)
+  have h' : (stalkFrobeniusIso k₀ l X s m hs).app (adicConstant k₀ l X).obj.carrier.X ≪≫
+      (stalkSheafFunctor k₀ l X s).mapIso
+        ((ProEtale.AdicSheaf.forget _).mapIso ((adicConstant k₀ l X).frobeniusPowIso m)) =
+        Iso.refl _ := by
+    ext : 1
+    rw [← cancel_epi (ProEtale.unitSection l s)]
+    simp only [Iso.trans_hom, Iso.app_hom, Functor.mapIso_hom, Iso.refl_hom]
+    erw [Category.comp_id]
+    exact h
+  rw [stalkAt_frobenius_eq_stalkFrobeniusIso, h']
+  rfl
+
+end Constant
 
 end AlgebraicGeometry.WeilSheaf
