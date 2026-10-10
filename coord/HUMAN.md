@@ -101,3 +101,7 @@ The DAG's def-galois-category is Stacks 0BMY (finite limits and colimits, every 
 ## Route departure accepted: lem-sc-cohomological-dimension (2026-10-10 12:07 UTC)
 
 The unit sk-prop-cd proves cd(C) <= 2 through the generic point and the Grothendieck spectral sequence; the blueprint route has no error. The split follows the Lean of slopmaster2 instead (affine open with finite complement, acyclic envelopes, dimension shifting; 8 of the 9 new nodes are closed on slopmaster2, the ninth is the degree-2 vanishing on affine curves, resting on sorry). SETUP.md asks for an established error before leaving a unit's route; L accepted this departure because it is the Lean's own route and nearly finished. Say if you want the blueprint route restored (the nodes for the generic-point route exist and would be reconnected).
+
+## Blueprint statement error: lem-pd-morphisms-descend (2026-10-10 12:11 UTC, found by the worker of lem-galois-descent)
+
+The node states that morphisms descend along X -> S without the flat, surjective and quasi-compact hypotheses that its Lean (`existsUnique_hom_of_isPullback`) has; with X empty the descended morphism is not unique. Lead note set; to be corrected at its split. Also: the imported proof of lem-galois-descent glued along an etale cover with the Zariski gluing lemma; replaced by fpqc descent (Stacks 02W0, 0245, 02LA, 02VN).

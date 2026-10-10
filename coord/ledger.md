@@ -1372,3 +1372,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 12:08 L: accepted lem-galois-object-exists (0BN2, 4 steps, 0 new).
 - 12:08 L: accepted lem-galois-constant-sheaf-sets-representable (03P5/03YW for sets, 4 steps; new node: U-morphisms into a coproduct of copies of U are clopen decompositions; 1 tool use).
 - 12:10 L: accepted lem-galois-axioms (0BN0, 7 steps; 4 Mathlib leaves and 1 node).
+- 12:11 L: accepted lem-galois-descent (fpqc descent route, 6 steps; new nodes 02W0, 0245, 02VN; the imported Zariski-gluing proof was wrong; lem-galois-glue flagged unreachable again; lem-pd-morphisms-descend noted false as stated, HUMAN.md).
