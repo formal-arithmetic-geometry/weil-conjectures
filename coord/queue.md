@@ -1,8 +1,8 @@
 # Work queue
 
-897 items; claim with `tools/claim.py next <group> [--stage N]`.
+901 items; claim with `tools/claim.py next <group> [--stage N]`.
 
-## Stage 1: nodes to split (653)
+## Stage 1: nodes to split (656)
 
 | node | distance to a target | Lean state on the done branch |
 |---|---|---|
@@ -22,7 +22,6 @@
 | `lem-weil-pbc-flat-variant-local-criterion` | 1012 | none |
 | `lem-weil-pbc-formal-systems-graded-vanishing` | 1012 | none |
 | `lem-weil-pbc-formal-systems-kernel-rees-finite` | 1012 | none |
-| `lem-weil-pbc-popescu-lift-once` | 1012 | none |
 | `lem-weil-pbc-popescu-solution-modulo-choose` | 1012 | none |
 | `lem-weil-pbc-power-series-field-cohen-regular-complete` | 1012 | none |
 | `lem-weil-pbc-principal-localization-naive-cotangent` | 1012 | none |
@@ -73,6 +72,7 @@
 | `lem-weil-pbc-universal-thickening-affine-case` | 1012 | none |
 | `lem-weil-pbc-universal-thickening-open-pieces` | 1012 | none |
 | `lem-weil-pbc-zariski-cohomology-locally-zero` | 1012 | none |
+| `def-weil-pbc-cohen-ring` | 1013 | none |
 | `def-weil-pbc-essentially-constant-system` | 1013 | none |
 | `def-weil-pbc-japanese-domain` | 1013 | none |
 | `def-weil-pbc-nagata-ring` | 1013 | none |
@@ -86,6 +86,7 @@
 | `lem-weil-pbc-cohen-rings-exist` | 1013 | none |
 | `lem-weil-pbc-coherent-finite-type-sub-kernel` | 1013 | none |
 | `lem-weil-pbc-cohomology-powers-ideal-application` | 1013 | none |
+| `lem-weil-pbc-colimit-standard-smooth-algebras` | 1013 | none |
 | `lem-weil-pbc-conormal-module-principal-localization` | 1013 | none |
 | `lem-weil-pbc-degree-p-extension-regular` | 1013 | none |
 | `lem-weil-pbc-etale-cohomology-local-ring-colimit` | 1013 | none |
@@ -123,6 +124,8 @@
 | `lem-weil-pbc-module-stalk-exact` | 1013 | none |
 | `lem-weil-pbc-nagata-universally-japanese` | 1013 | none |
 | `lem-weil-pbc-popescu-delocalize-weak-localization-smooth` | 1013 | none |
+| `lem-weil-pbc-power-series-complete-over-complete-base` | 1013 | none |
+| `lem-weil-pbc-power-series-quotient-variables` | 1013 | none |
 | `lem-weil-pbc-presheaf-module-stalk-filtered-colimit` | 1013 | none |
 | `lem-weil-pbc-projective-resolution-kernel-projective` | 1013 | none |
 | `lem-weil-pbc-pth-root-presentation-differentials` | 1013 | none |
@@ -660,7 +663,7 @@
 | `lem-pc-linear-pair-graded-finite` | - | none |
 | `def-exc-jacobian-presentation` | - | none |
 
-## Stage 2: nodes to state (244)
+## Stage 2: nodes to state (245)
 
 | node | distance to Mathlib | kind |
 |---|---|---|
@@ -835,6 +838,7 @@
 | `lem-weil-pbc-popescu-find-sequence` | 1 | state |
 | `lem-weil-pbc-popescu-height-zero-auxiliary-algebra-localizations` | 1 | state |
 | `lem-weil-pbc-popescu-lift-nilpotent` | 1 | state |
+| `lem-weil-pbc-popescu-lift-once` | 1 | state |
 | `lem-weil-pbc-popescu-lift-twice` | 1 | state |
 | `lem-weil-pbc-popescu-product` | 1 | state |
 | `lem-weil-pbc-power-series-onto-completion` | 1 | state |
@@ -909,7 +913,7 @@
 | `lem-weil-pbc-p1-field-dimension-one` | 4 | state |
 | `lem-weil-pbc-projective-space-zero-isomorphism` | 4 | state |
 
-Not open yet: 665 nodes that wait for stage 1, 532 nodes that wait for a statement dependency.
+Not open yet: 668 nodes that wait for stage 1, 532 nodes that wait for a statement dependency.
 
 ## Stage 3: modules to prove (0)
 
