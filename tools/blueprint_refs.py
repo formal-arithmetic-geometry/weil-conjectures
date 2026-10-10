@@ -233,11 +233,13 @@ def search(words: list[str]) -> int:
     for i, d in sorted(nodes.items()):
         if not is_bp(d):
             continue
-        hay = " ".join([i, str(d.get("title") or ""), str(d.get("statement") or ""), json.dumps(d.get("source"), ensure_ascii=False),
-                        " ".join(map(str, d.get("blueprint_tags") or []))]).lower()
+        src = d.get("source") if isinstance(d.get("source"), dict) else {}
+        hay = " ".join([i, str(d.get("title") or ""), str(d.get("statement") or ""), str(src.get("place") or ""),
+                        " ".join(map(str, d.get("blueprint_tags") or []))]).lower()  # not the document path: it names the chapter
         if all(w in hay for w in ws):
             hits += 1
-            print(f"{i}\t{d.get('chapter')}\t{d.get('status')}\t{re.sub(r'\\s+', ' ', str(d.get('statement') or ''))[:220]}")
+            stmt = " ".join(str(d.get("statement") or "").split())
+            print(f"{i}\t{d.get('chapter')}\t{d.get('status')}\t{stmt[:220]}")
     print(f"{hits} blueprint nodes match {' '.join(words)!r}")
     return 0
 
