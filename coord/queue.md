@@ -1,8 +1,8 @@
 # Work queue
 
-922 items; claim with `tools/claim.py next <group> [--stage N]`.
+917 items; claim with `tools/claim.py next <group> [--stage N]`.
 
-## Stage 1: nodes to split (313)
+## Stage 1: nodes to split (308)
 
 | node | distance to a target | Lean state on the done branch |
 |---|---|---|
@@ -23,8 +23,6 @@
 | `lem-weil-pbc-site-extension-by-zero-exact` | 3011 | none |
 | `lem-weil-pbc-site-restriction-exact` | 3011 | none |
 | `lem-sc-dual-number-scheme-pushout` | 3014 | none |
-| `lem-sc-ext-locally-free-second-naturality` | 3014 | none |
-| `lem-sc-lft-over-field-jacobson-space` | 3014 | none |
 | `lem-sc-p1-boundary-one-extension-class` | 3014 | none |
 | `lem-sc-p1-pullback-extension-class` | 3014 | none |
 | `lem-sc-sheaf-ext-coherent` | 3014 | none |
@@ -50,12 +48,12 @@
 | `lem-sc-smooth-proper-diagonal-conormal-differentials` | 3015 | none |
 | `lem-sc-smooth-proper-diagonal-koszul-dual` | 3015 | none |
 | `lem-sc-smooth-proper-diagonal-koszul-regular` | 3015 | none |
-| `lem-sc-smooth-proper-diagonal-pushforward-structure` | 3015 | none |
 | `lem-sc-smooth-proper-diagonal-tensor-formula` | 3015 | none |
 | `lem-sc-affine-derived-cohomology` | 3016 | none |
 | `lem-sc-affine-derived-pushforward-conservative` | 3016 | none |
 | `lem-sc-p1-section-clearing-denominators-qcqs` | 3016 | none |
 | `lem-sc-p1-section-restriction-s-torsion` | 3016 | none |
+| `lem-sc-smooth-proper-diagonal-basechange-upper-shriek` | 3016 | none |
 | `lem-pc-genus-agrees-sc` | 4007 | rests_on_sorry |
 | `lem-sc-open-curve-boundary-higher-direct-image-vanishing` | 4007 | none |
 | `lem-sc-open-curve-etale-leray-low-degree` | 4007 | none |
@@ -73,7 +71,6 @@
 | `lem-pc-vanishing-above-dim` | 4009 | rests_on_sorry |
 | `lem-pd-degree-locally-constant` | 4009 | rests_on_sorry |
 | `lem-sc-finite-flat-surj-points` | 4009 | none |
-| `lem-sc-isogeny-facts` | 4009 | rests_on_sorry |
 | `thm-pc-f-representable` | 4009 | rests_on_sorry |
 | `thm-pc-hilb-curves` | 4009 | rests_on_sorry |
 | `def-pc-f-subfunctor` | 4010 | rests_on_sorry |
@@ -103,21 +100,19 @@
 | `lem-pc-pic-presheaf-functorial` | 5010 | none |
 | `lem-pc-rf-base-change-flat-module` | 5010 | none |
 | `lem-pc-rf-perfect-base-change` | 5010 | none |
-| `lem-sc-deg-pullback-finite` | 5010 | rests_on_sorry |
-| `lem-sc-finite-constant-length-flat` | 5010 | none |
-| `lem-sc-hilbert-polynomial` | 5010 | none |
 | `lem-sc-mult-n-isogeny` | 5010 | rests_on_sorry |
-| `lem-sc-mult-n-pullback` | 5010 | rests_on_sorry |
 | `thm-pc-semicontinuity-base-change` | 5010 | sorry_here |
 | `thm-picard-serre-a` | 5010 | rests_on_sorry |
 | `def-pc-derived-pullback` | 5011 | none |
 | `lem-pc-cech-resolution` | 5011 | none |
 | `lem-pc-projective-noetherian-rf-perfect` | 5011 | none |
+| `lem-sc-hilbert-polynomial` | 5011 | none |
 | `lem-sc-image-subgroup` | 5011 | none |
 | `lem-sc-mult-n-finite-kernel` | 5011 | rests_on_sorry |
 | `def-sc-group-scheme-subgroup` | 5012 | none |
 | `lem-pc-kflat-resolution` | 5012 | none |
 | `lem-pc-noetherian-flat-complex-perfect` | 5012 | none |
+| `lem-sc-mult-n-pullback` | 5012 | rests_on_sorry |
 | `lem-sp-page-induction` | 6001 | none |
 | `def-sp-convergence` | 6002 | none |
 | `def-sp-exact-couple` | 6002 | none |
@@ -163,7 +158,6 @@
 | `lem-pc-projective-space-cohomology-bound` | 6010 | sorry_here |
 | `lem-pc-serre-vanishing` | 6010 | rests_on_sorry |
 | `thm-pqf-finite-iff-proper-finite-fibres` | 6010 | none |
-| `thm-sc-theorem-of-cube` | 6010 | rests_on_sorry |
 | `lem-pc-projective-space-serre-vanishing` | 6011 | rests_on_sorry |
 | `lem-pc-projective-space-twist-cohomology` | 6011 | rests_on_sorry |
 | `lem-sc-ample-positive-degree` | 6011 | rests_on_sorry |
@@ -177,6 +171,7 @@
 | `pqf-lem-sheaf-zero-stalks` | 6011 | none |
 | `pqf-lem-locqf-fibre-discrete` | 6012 | none |
 | `lem-pc-projective-space-canonical` | 6013 | sorry_here |
+| `thm-sc-theorem-of-cube` | 6013 | rests_on_sorry |
 | `pqf-lem-going-up` | 6017 | none |
 | `pqf-lem-incomparability` | 6017 | none |
 | `pqf-def-affine-morphism` | - | none |
@@ -934,7 +929,7 @@
 | `lem-weil-pbc-p1-field-dimension-one` | 4 | state |
 | `lem-weil-pbc-projective-space-zero-isomorphism` | 4 | state |
 
-Not open yet: 331 nodes that wait for stage 1, 1268 nodes that wait for a statement dependency.
+Not open yet: 329 nodes that wait for stage 1, 1270 nodes that wait for a statement dependency.
 
 ## Stage 3: modules to prove (0)
 
