@@ -21,9 +21,59 @@
  "stmt_deps": [
   "def-weil-pbc-module-stalk"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "If p is the annihilator of an element m of M, then p is itself a prime ideal containing Ann(m), so it is minimal among the prime ideals containing Ann(m). Thus associated implies weakly associated.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra, Lemma 10.66.9, tag 058A, proof (the reverse implication is immediate from the definitions)"
+   }
+  },
+  {
+   "text": "Assume p is weakly associated to M. By [lem-sc-weakass-localization], the localized module M_p contains an element m whose annihilator I has radical p R_p.",
+   "uses": [
+    "lem-sc-weakass-localization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra, Lemma 10.66.2, tag 0566, applied in the proof of Lemma 10.66.9"
+   }
+  },
+  {
+   "text": "Write p = (g_1, ..., g_n). For each i, radical(I) = p R_p gives a least positive exponent e_i with g_i^{e_i} m = 0. Among all elements of M_p whose annihilator has radical p R_p, choose one for which the sum of these least exponents is minimal. If some e_i > 1, then m' = g_i^{e_i-1}m is nonzero by minimality of e_i. Every generator g_j has a power killing m', so p R_p is contained in radical(Ann(m')). Since m' is nonzero, Ann(m') is proper; because p R_p is the maximal ideal of R_p, this forces radical(Ann(m')) = p R_p. Thus m' is another admissible element with smaller exponent sum, a contradiction. Hence every e_i is 1, so p R_p is contained in Ann(m). Conversely Ann(m) is contained in radical(Ann(m)) = p R_p. Therefore Ann(m) = p R_p.",
+   "uses": [
+    "lem-sc-weakass-localization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra, Lemma 10.66.9, tag 058A, proof (finite-generator exponent descent), with the maximal-ideal property of R_p from the localization definition"
+   }
+  },
+  {
+   "text": "The maximal ideal of R_p is now the annihilator of an element of M_p. Since p is finitely generated, [lem-sc-associated-localization-fg] descends this associated prime from the localization and yields an element of M whose annihilator is p. Thus p is associated to M.",
+   "uses": [
+    "lem-sc-associated-localization-fg"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra, Lemma 10.66.9, tag 058A, final use of Lemma 10.66.3 (tag 0310)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sc-weakass-localization",
+  "lem-sc-associated-localization-fg"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Algebra, Lemma 10.66.9, tag 058A (lemma-ass-weakly-ass)"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -48,12 +98,28 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-sc-ass-weakass-fg-stalk",
   "by": "worker",
   "date": "2026-10-10"
  },
  "chapter": "sec-abelian-varieties",
- "unit": "sk-def-av-ample-degree"
+ "unit": "sk-def-av-ample-degree",
+ "split_report": {
+  "date": "2026-10-11",
+  "item": "lem-sc-ass-weakass-fg-prime",
+  "worker": "stage1",
+  "summary": "Split Tag 058A into the immediate associated-implies-weakly-associated direction, the localization characterization of weak association, the finite-generator exponent descent in the localized module, and descent of the resulting associated prime. Added two strict supporting nodes: the weak-association localization statement and the associated-prime localization fact (the latter is a Mathlib specialization).",
+  "blueprint": "Realizes the induction-step clause of lem-sc-hilbert-polynomial through the Tag 058A algebra lemma used by lem-sc-ass-weakass-fg-stalk.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-awp3135",
+  "group": "E1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-awp3135 (reviewer sub-agent of L); spot-checked: Item vs Tag 058A: hypotheses and Ass/WeakAss definitions match. Step 1 elementary. Step 2 cites lem-sc-weakass-localization (Tag 0566 clause 1=>3, statement read). Step 3 exponent-sum descent checked: m'=g_i^{e_i-1}m nonzero, every generator has power killing m', Ann(m') proper so radical = maximal pR_p, sum strictly drops (e_i' =1); then Ann(m)=pR_p; empty generator case fine. Step 4 cites lem-sc-associated-localization-fg (Tag 0310(2)). New node lem-sc-weakass-localization = Tag 0566, no Mathlib (grep weakly/WeakAss in slopmaster2 Mathlib: none; Mathlib has no WeakAss notion, so the item is not in Mathlib). FIX more, RETURN less: lem-sc-associated-localization-fg was a wrong Mathlib leaf (B8/C4): Mathlib IsAssociatedPrime is defined with the radical of the annihilator (AssociatedPrime/Basic.lean:61-63,96-98), so Localization.lean:80 only gives p = radical(Ann z), not p = Ann z; the node is now status unsplit (real lemma, Tag 0310(2)), mathlib_match removed, the mismatch recorded as a no-match search. The second reading by E1 missed this. Start 'Sat Oct 10 11:34:37 PM UTC 2026'; 1 file(s) fixed by the reviewer"
+ }
 }

@@ -1,0 +1,75 @@
+{
+ "id": "lem-sc-associated-localization-fg",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-hilbert-polynomial",
+   "place": "proof, induction step: descend an associated prime from the localization using finite generation, as in Algebra Lemma 10.66.9",
+   "via": [
+    "lem-sc-ass-weakass-fg-prime",
+    "lem-sc-ass-weakass-fg-stalk"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "A finitely generated prime associated after localization is associated before localization",
+ "statement": "Let R be a commutative ring, M an R-module, and p a finitely generated prime ideal of R. Let R_p and M_p denote localization at p [def-weil-pbc-localization-at-prime] [def-weil-pbc-module-localization]. If the maximal ideal of the local ring R_p is the annihilator of an element of the localized module M_p, then p is the annihilator of an element of M.",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Algebra, Lemma 10.66.9, tag 058A, using Lemma 10.66.3 (tag 0310)"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-localization-at-prime",
+  "def-weil-pbc-module-localization"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "associated prime localization finitely generated prime ideal module",
+   "results": "Module.associatedPrimes.comap_mem_associatedPrimes_of_mem_associatedPrimes_of_isLocalizedModule_of_fg in Mathlib/RingTheory/Ideal/AssociatedPrime/Localization.lean:80",
+   "date": "2026-10-11",
+   "verdict": "no match (reviewer R-awp3135: Mathlib IsAssociatedPrime is defined with the radical of the annihilator, Basic.lean:61-63,96-98; the declaration only gives p = radical(Ann z), not p = Ann z)"
+  },
+  {
+   "tool": "loogle",
+   "query": "associatedPrimes localization atPrime",
+   "results": "0 hits; Unknown identifier localization",
+   "date": "2026-10-11",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "rg -n 'associatedPrimes.*localiz|weakly ?associated|WeakAss' Mathlib/RingTheory/Ideal",
+   "results": "Mathlib/RingTheory/Ideal/AssociatedPrime/Localization.lean contains associatedPrimes localization declarations",
+   "date": "2026-10-11",
+   "verdict": "no match (reviewer R-awp3135: Mathlib IsAssociatedPrime is defined with the radical of the annihilator, Basic.lean:61-63,96-98; the declaration only gives p = radical(Ann z), not p = Ann z)"
+  },
+  {
+   "tool": "leansearch",
+   "query": "associated or weakly associated primes under localization at a prime",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-11",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "grep",
+   "query": "sed -n 18,40p,94,100p Mathlib/RingTheory/Ideal/AssociatedPrime/Basic.lean; sed -n 79,115p Mathlib/RingTheory/Ideal/AssociatedPrime/Localization.lean (slopmaster2 Mathlib)",
+   "results": "IsAssociatedPrime I M means I prime and I = (colon bot {x}).radical; comap_mem_associatedPrimes_of_mem_associatedPrimes_of_isLocalizedModule_of_fg (Localization.lean:80, stacks 0310 (2)) concludes only that p is the radical of an annihilator; the radical-free form needs IsNoetherianRing (isAssociatedPrime_iff)",
+   "date": "2026-10-11",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "created": {
+  "item": "lem-sc-ass-weakass-fg-prime",
+  "by": "worker",
+  "date": "2026-10-10"
+ },
+ "chapter": "sec-abelian-varieties",
+ "unit": "sk-def-av-ample-degree"
+}
