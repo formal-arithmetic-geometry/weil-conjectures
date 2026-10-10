@@ -1838,3 +1838,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 15:40 L: returned deliver/E1/lem-sc-boundary-derivation-square-zero (reviewer RETURN: 1. D1/D2: step 2 and lem-sc-boundary-derivation-ringed-space: the new node is the item itself with O',O renamed A,B (sam)
 - 15:40 L: merged deliver/G1/lem-sc-affine-cap-section-open (reviewer FIX; after a return; new nodes: 2)
 - 15:41 L: merged deliver/K1/lem-pc-affine-finite-type-algebra (reviewer PASS; first push; new nodes: 0)
+- 15:42 L: returned deliver/J1/lem-sc-point-tangent-separation-closed-immersion (reviewer RETURN: 1. D5/E (return point 1(b) not repaired): step 4: the 'small detail omitted' of Tag 0E8S is still not written. The step )
