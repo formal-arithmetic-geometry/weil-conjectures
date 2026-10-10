@@ -24,23 +24,127 @@
   "def-weil-quasi-separated-morphism",
   "def-pc-derived-category"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Let U be affine open in X and j:U\\to X its inclusion. Since X is quasi-separated, j is quasi-compact and separated, so pushforward sends every quasi-coherent O_U-module to a quasi-coherent O_X-module [pqf-lem-pushforward-qcoh]. Thus every quasi-coherent module on U is the restriction of a quasi-coherent module on X (take j_*G and use j^*j_*G = G for an open immersion). Restriction of derived tensor to an open [lem-pc-affine-derived-pullback-tensor-tilde, part (1)] gives (E tensor^L_{O_X} j_*G)|_U = E|_U tensor^L_{O_U} G, and restriction to U is exact, so commutes with cohomology sheaves. Restricting the assumed vanishing to U therefore gives H^i(E|_U tensor^L G)=0 for every quasi-coherent G on U and i outside [a,b]. Note also that E|_U lies in D_QCoh(O_U), since restrictions of quasi-coherent cohomology sheaves are quasi-coherent.",
+   "uses": [
+    "pqf-lem-pushforward-qcoh",
+    "lem-pc-affine-derived-pullback-tensor-tilde"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/perfect.tex",
+    "place": "Derived Categories of Schemes, Lemma 36.10.6 (Tag 08EA), proof, paragraph beginning 'Let U subset X be an affine open'"
+   }
+  },
+  {
+   "text": "Write U = Spec(A). By [lem-pc-affine-qcoh-derived-equivalence], E|_U is isomorphic to \\widetilde{M^bullet} for a complex M^bullet of A-modules. For each A-module N, [lem-pc-affine-derived-pullback-tensor-tilde, part (3)] gives E|_U tensor^L_{O_U} N~ = (M^bullet tensor_A^L N)~; since the associated-sheaf functor is exact and an A-module P is zero when P~ is zero, the preceding step applied to G = N~ says that H^i(M^bullet tensor_A^L N)=0 for i outside [a,b]. Hence M^bullet has Tor amplitude in [a,b]. The affine Tor-amplitude criterion [lem-pc-affine-tor-amplitude-criterion] then gives that E|_U has Tor amplitude in [a,b], that is H^i(E|_U tensor^L H)=0 for every O_U-module H and i outside [a,b].",
+   "uses": [
+    "lem-pc-affine-qcoh-derived-equivalence",
+    "lem-pc-affine-derived-pullback-tensor-tilde",
+    "lem-pc-affine-tor-amplitude-criterion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/perfect.tex",
+    "place": "Derived Categories of Schemes, Lemma 36.10.6 (Tag 08EA), proof, final paragraph invoking Lemma 36.10.4 (Tag 08E9)"
+   }
+  },
+  {
+   "text": "For any O_X-module G, restriction of derived tensor to U [lem-pc-affine-derived-pullback-tensor-tilde, part (1)] identifies (E tensor^L_{O_X} G)|_U with E|_U tensor^L_{O_U} G|_U. Step 2 makes the latter cohomology vanish outside [a,b] on every affine open U. Since a sheaf vanishes when all its restrictions to the opens of an affine open cover vanish, H^i(E tensor^L G)=0 for i outside [a,b]. This is the asserted Tor amplitude. (The quasi-separated hypothesis is used only in step 1.)",
+   "uses": [
+    "lem-pc-affine-derived-pullback-tensor-tilde"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/perfect.tex",
+    "place": "Derived Categories of Schemes, Lemma 36.10.6 (Tag 08EA), conclusion"
+   }
+  }
+ ],
+ "proof_deps": [
+  "pqf-lem-pushforward-qcoh",
+  "lem-pc-affine-qcoh-derived-equivalence",
+  "lem-pc-affine-derived-pullback-tensor-tilde",
+  "lem-pc-affine-tor-amplitude-criterion"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/perfect.tex",
+  "place": "Derived Categories of Schemes, Lemma 36.10.6 (Tag 08EA), implication (2) => (1); source packet unavailable locally"
+ },
  "mathlib_searches": [
   {
-   "tool": "grep",
-   "query": "grep -rlnE 'torAmplitude|TorAmplitude|HasTorAmplitude|tor_amplitude' Mathlib in ~/weil-conjectures-slopmaster2/.lake/packages/mathlib",
-   "results": "0 hits",
-   "date": "2026-10-10",
+   "tool": "leanfinder",
+   "query": "Tor amplitude of a derived quasi-coherent complex can be tested on quasi-coherent modules",
+   "results": "DerivedCategory.isGE_Q_obj_iff, isLE_Q_obj_iff and boundedness declarations; no scheme Tor-amplitude criterion",
+   "date": "2026-10-11",
    "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "TorAmplitude, QuasiCoherent, DerivedCategory",
+   "results": "0 hits; unknown identifier TorAmplitude",
+   "date": "2026-10-11",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "torAmplitude|TorAmplitude|finiteTorDimension Mathlib/",
+   "results": "0 hits",
+   "date": "2026-10-11",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Tor amplitude tested on quasi-coherent modules",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-11",
+   "verdict": "unavailable"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-pc-proper-direct-image-finite-tor"
  },
  "chapter": "sec-picard-framework",
- "unit": "sk-thm-picard-duality"
+ "unit": "sk-thm-picard-duality",
+ "split_report": {
+  "date": "2026-10-11",
+  "item": "lem-pc-tor-amplitude-qcoh-test",
+  "worker": "stage1",
+  "summary": "Split Tag 08EA into locality on affine opens, the affine Tor-amplitude criterion, and gluing of local vanishing. Added the missing statement-only affine criterion node and corrected the proof dependencies and citations.",
+  "blueprint": "Realizes lem-sc-finite-duality, Tag 08EV proof sentence invoking Lemma 08EA to reduce finite Tor dimension to quasi-coherent test modules.",
+  "tool_uses": [
+   {
+    "node": "pqf-lem-pushforward-qcoh",
+    "why": "Generic quasi-compact quasi-separated pushforward fact needed to make restriction from global quasi-coherent modules essentially surjective on affine opens; no node in this unit supplies it."
+   },
+   {
+    "node": "lem-pc-affine-qcoh-derived-equivalence",
+    "why": "Generic affine D_QCoh and D(A) equivalence needed to translate the local derived object to a module complex; no node in this unit supplies it."
+   },
+   {
+    "node": "lem-pc-affine-derived-pullback-tensor-tilde",
+    "why": "Generic restriction-of-derived-tensor and affine tilde-tensor comparison; no node in this unit supplies it."
+   }
+  ]
+ },
+ "tool_uses": [
+  "pqf-lem-pushforward-qcoh",
+  "lem-pc-affine-qcoh-derived-equivalence",
+  "lem-pc-affine-derived-pullback-tensor-tilde",
+  "pqf-lem-pushforward-qcoh",
+  "lem-pc-affine-qcoh-derived-equivalence",
+  "lem-pc-affine-derived-pullback-tensor-tilde"
+ ],
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-taq2722",
+  "group": "K1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-taq2722 (reviewer sub-agent of L); spot-checked: Statement matches Tag 08EA (2)=>(1) and exactly the use in lem-pc-proper-direct-image-finite-tor step 4 (S Noetherian => quasi-separated, Rf_*E in D_QCoh); quasi-separatedness used in step 1 only (j qc+separated for pqf-lem-pushforward-qcoh); no pc/O_X tor-amplitude definition node exists (only etale/proetale defs def-kun-tor-amplitude, def-weil-proetale-tor-amplitude), so spelled-out definition accepted; no existing node states Tag 08E9, new node not a duplicate (real lemma, needs bounded flat replacement), not Mathlib. Tool uses pqf-lem-pushforward-qcoh, lem-pc-affine-qcoh-derived-equivalence, lem-pc-affine-derived-pullback-tensor-tilde accepted as generic. FIX more, RETURN less: (1) C1 steps 1 and 3: restriction of derived tensor to an open was uncited; now cites lem-pc-affine-derived-pullback-tensor-tilde part (1). (2) C1 step 2: passing from vanishing of H^i(E|_U tensor^L N~) to H^i(M tensor_A^L N)=0 needs the tilde-tensor comparison, uncited; now cites the same node part (3) plus exactness/faithfulness of tilde. (3) B3 new node lem-pc-affine-tor-amplitude-criterion: 'E has Tor amplitude' was undefined; now spelled out (vanishing against every O_X-module), E placed in D_QCoh. Edge cases: E=0, a=b, X affine (U=X).; 2 file(s) fixed by the reviewer"
+ }
 }
