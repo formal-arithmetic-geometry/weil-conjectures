@@ -1,0 +1,85 @@
+{
+ "id": "lem-galois-fpqc-descending-types-morphisms",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-galois-descent",
+   "place": "lem-galois-descent, proof, Step 2 ('effectivity ... By [lem-galois-glue] the P_i glue to a Y-scheme P'), replaced by Stacks 0245 for the fpqc covering {Y' -> Y}: the first sentence of the proof of 0245, 'Hence Lemma 02W3 applies and it suffices to prove the statement ... in case the fpqc-covering is given by a single {X -> S} flat surjective morphism of affines'",
+   "via": [
+    "lem-galois-fpqc-affine-descent-effective"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Reduction of effective fpqc descent for a type of morphisms to flat surjective morphisms of affines (Stacks 02W3, one-member coverings)",
+ "statement": "Let $\\mathcal P$ be a property of morphisms of schemes [def-pc-scheme] such that\n(1) $\\mathcal P$ is stable under base change: if $Y\\to V$ has $\\mathcal P$ and $V'\\to V$ is any morphism of schemes, then the projection $Y\\times_VV'\\to V'$ [def-pc-fibre-product] has $\\mathcal P$;\n(2) if $m\\ge0$ and $h_j:Y_j\\to V_j$ ($j=1,\\dots,m$) are morphisms with $\\mathcal P$, then the induced morphism $\\coprod_jY_j\\to\\coprod_jV_j$ of coproducts of schemes [lem-weil-pbc-scheme-coproduct-family] has $\\mathcal P$;\n(3) for every flat [def-weil-flat-morphism] surjective [def-weil-surjective-morphism] morphism $X\\to S$ of affine schemes and every descent datum $(V,\\varphi)$ on a scheme $V$ over $X/S$ [def-pd-descent-datum] such that $V\\to X$ has $\\mathcal P$, the descent datum is effective in the sense of [def-pd-descent-datum].\nThen for every morphism of schemes $f:X\\to S$ such that the one-member family $\\{f:X\\to S\\}$ is an fpqc covering of $S$ [def-weil-pbc-fpqc-covering], and every descent datum $\\varphi:\\mathrm{pr}_0^*V\\to\\mathrm{pr}_1^*V$ on a scheme $V$ over $X/S$ [def-pd-descent-datum] (with $\\mathrm{pr}_0,\\mathrm{pr}_1:X\\times_SX\\to X$ the projections) such that $V\\to X$ has $\\mathcal P$, the descent datum is effective: there are a scheme $U$ with a morphism $U\\to S$ and an isomorphism $\\psi:U\\times_SX\\to V$ of schemes over $X$ such that $\\varphi\\circ\\mathrm{pr}_0^*\\psi=\\mathrm{pr}_1^*\\psi\\circ\\mathrm{can}_U$, where $\\mathrm{can}_U:\\mathrm{pr}_0^*(U\\times_SX)\\to\\mathrm{pr}_1^*(U\\times_SX)$ is the composite of the canonical isomorphisms of both sides with $U\\times_S(X\\times_SX)$.",
+ "source": {
+  "document": "literature/stacks-project/descent.tex",
+  "place": "Descent, Lemma Tag 02W3 (lemma-descending-types-morphisms, line 9028) for tau = fpqc, its conclusion read for the one-member covering {X -> S} (proof lines 9047-9135: refinement by a standard fpqc covering, Topologies Tag 022C; Lemma Tag 02W0 lemma-refine-coverings-fully-faithful; Lemma lemma-family-is-one, line 8250; relative glueing, Constructions Tag 01LH); descent datum as in Definition Tag 023V (definition-descent-datum, line 8101) and Remark remark-easier (line 8147)"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-pc-fibre-product",
+  "lem-weil-pbc-scheme-coproduct-family",
+  "def-weil-flat-morphism",
+  "def-weil-surjective-morphism",
+  "def-pd-descent-datum",
+  "def-weil-pbc-fpqc-covering"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "a property of morphisms of schemes stable under base change and disjoint unions satisfies fpqc descent if descent data over affine faithfully flat morphisms are effective",
+   "results": "AlgebraicGeometry.IsZariskiLocalAtTarget.descendsAlong_inf_quasiCompact, AlgebraicGeometry.IsLocalAtTarget.descendsAlong, AlgebraicGeometry.IsStableUnderBaseChange.of_pullback_fst_of_isAffine (Mathlib.AlgebraicGeometry.Morphisms.Descent), Flat.isStableUnderBaseChange, HasAffineProperty.isStableUnderBaseChange: all about a property descending (P after base change implies P), none about effectivity of descent data",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "reduction of effective fpqc descent for a class of morphisms of schemes to a single faithfully flat morphism of affine schemes",
+   "results": "AlgebraicGeometry.instDescendsAlong...LocallyOfFinitePresentation..., Flat.surjective_descendsAlong_surjective_inf_flat_inf_quasicompact, descendsAlong_isomorphisms_surjective_inf_flat_inf_quasicompact, descendsAlong_universallyOpen_..., HasAffineProperty.descendsAlong_of_affineAnd (Mathlib.AlgebraicGeometry.Morphisms.{FlatDescent,Descent}): descent of properties, not of objects",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"DescentDatum\"",
+   "results": "none (no Mathlib declaration with DescentDatum in its name)",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rln 'EffectiveEpi\\|isEffective\\|IsStack\\|HasEffectiveDescent' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicGeometry; grep -rn 'IsEffective' ~/weil-conjectures-slopmaster2/WeilConjectures",
+   "results": "Mathlib: AlgebraicGeometry/EffectiveEpi.lean and Sites/Fpqc.lean (effective epimorphisms, not descent data), IsStack only abstract in CategoryTheory/Sites/Descent; slopmaster2: CategoryTheory.Over.DescentDatum.IsEffective with the one instance isEffective_of_isFinite (finite locally free, quasi-projective V; Stacks 0CCJ), no reduction lemma of type 02W3",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-galois-fpqc-affine-descent-effective",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-curve-estimates",
+ "unit": "sk-prop-h2"
+}
