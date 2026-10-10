@@ -3,7 +3,7 @@
  "blueprint": {
   "is": "lemma-nagata-final-descended-model",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "Properties of the final descended model",
@@ -17,14 +17,24 @@
  ],
  "proof": [
   {
-   "text": "The first and third assertions are the property of the constructed separated\ndescent stage. The selected base stage belongs to $\\mathsf N_f$, so it is\nNoetherian by [lemma-nagata-final-noetherian-base-system].",
+   "text": "By the definition of $Y_{\\lambda_Y}$ and $\\epsilon_Y$, apply [lemma-nagata-separated-eventually] to the separated finite-presentation morphism $Y\\to S$. It gives that $Y_{\\lambda_Y}\\to S_{\\lambda_Y}$ is separated and of finite presentation, and that its base change to $S$ is canonically $Y\\to S$; under the defining notation this canonical comparison is the isomorphism $\\epsilon_Y$.",
    "uses": [
+    "def-nagata-final-descended-model",
+    "lemma-nagata-separated-eventually"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The chosen stage $S_{\\lambda_Y}$ is one of the stages in the final Noetherian base system, so [lemma-nagata-final-noetherian-base-system] says that it is Noetherian.",
+   "uses": [
+    "def-nagata-final-descended-model",
     "lemma-nagata-final-noetherian-base-system"
    ],
    "elementary": false
   }
  ],
  "proof_deps": [
+  "def-nagata-final-descended-model",
   "lemma-nagata-final-noetherian-base-system",
   "lemma-nagata-separated-eventually"
  ],
@@ -35,7 +45,7 @@
  },
  "mathlib_searches": [],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [
   "bypassed"
@@ -71,5 +81,20 @@
   }
  },
  "chapter": "sec-nagata-compactification",
- "unit": "sk-cor-nagata-sketch-fp"
+ "unit": "sk-cor-nagata-sketch-fp",
+ "split_report": {
+  "date": "2026-10-11",
+  "item": "lemma-nagata-final-descended-model",
+  "worker": "stage1",
+  "summary": "Replaced the imported one-line sketch by two complete steps: the separated-eventually lemma supplies separatedness, finite presentation, and the canonical base-change isomorphism, while the final Noetherian base-system lemma supplies Noetherianity of the selected base stage. The definition node identifies the notation and comparison map used in both steps.",
+  "blueprint": "The steps realize the blueprint proof sentence that the constructed separated descent stage has the first and third properties and that the selected base stage in N_f is Noetherian by lemma-nagata-final-noetherian-base-system."
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-nfm2345",
+  "group": "C1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-nfm2345 (reviewer sub-agent of L); spot-checked: Step 1: lemma-nagata-separated-eventually supplies separated+fp and canonical base change; def-nagata-final-descended-model (blueprint wording 'constructed base-change comparison', B3 ok) identifies Y_{lambda_Y}, epsilon_Y; separated-descent stage existence enters via def-nagata-separated-descent-stage, not restated (b ok). Step 2: def places S_{lambda_Y} in N_f=N(S); lemma-nagata-final-noetherian-base-system gives Noetherian (C4 ok). No limit argument made in the item itself, so no noetherian-approximation citation needed (C1 ok). No new nodes. No faults found; second reading agrees."
+ }
 }

@@ -2541,3 +2541,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 20:39 L: merged deliver/M1/lem-pc-bounded-above-flat-kflat-site (reviewer FIX; first push; new nodes: 2)
 - 20:40 L: merged deliver/H1/lem-pc-derived-qcoh-perfect-generation (reviewer FIX; first push; new nodes: 2)
 - 20:40 L: merged deliver/K1/lem-pc-sheaf-modules-tensor-closed (reviewer FIX; first push; new nodes: 0)
+- 20:41 L: merged deliver/C1/lemma-nagata-final-descended-model (reviewer PASS; first push; new nodes: 0)
