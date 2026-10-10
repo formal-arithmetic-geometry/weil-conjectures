@@ -2195,3 +2195,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 18:03 L: merged deliver/C1/lem-sc-affine-derived-pushforward-conservative (reviewer PASS; first push; new nodes: 0)
 - 18:03 L: merged deliver/K1/lem-sp-cartan-eilenberg-properties (reviewer FIX; after a return; new nodes: 1)
 - 18:03 L: merged deliver/K1/lem-sc-affine-derived-cohomology (reviewer FIX+NODE(1); first push; new nodes: 1)
+- 18:05 L: merged deliver/C1/lem-exc-finite-galois-tensor-decomposition (reviewer FIX; after a return; new nodes: 2)

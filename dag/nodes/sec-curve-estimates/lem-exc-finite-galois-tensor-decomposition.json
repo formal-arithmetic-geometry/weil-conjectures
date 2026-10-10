@@ -25,11 +25,97 @@
   "def-weil-affine-spectrum",
   "def-pc-fibre-product",
   "def-weil-pbc-etale-sheaf-of-sets",
-  "def-weil-etale-morphism"
+  "def-weil-etale-morphism",
+  "lem-exc-etale-coproduct-etale"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Choose alpha in E with E=L(alpha) by the finite separable primitive-element lemma. Let f be the minimal polynomial of alpha over L. The quotient description for a simple algebraic extension identifies L[T]/(f) with E, sending the class of T to alpha. The quotient has L-basis 1,T,...,T^(deg f-1), so deg f=[E:L].",
+   "uses": [
+    "lem-weil-pbc-finite-separable-extension-primitive-element",
+    "lem-weil-pbc-minimal-polynomial-quotient-field-iso"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/fields.tex",
+    "place": "Tags 030N and 09G1"
+   }
+  },
+  {
+   "text": "Write n=deg f and identify E with L[T]/(f) by Step 1, b=g(alpha) corresponding to the class of g in L[T]. Since f maps to 0 in E[T]/(f), the tensor universal property gives an L-algebra map psi: E tensor_L (L[T]/(f)) -> E[T]/(f) with psi(a tensor (g mod f)) = a g mod f. By Step 1, L[T]/(f) has L-basis 1,T,...,T^(n-1), so E tensor_L (L[T]/(f)) is a free E-module with basis 1 tensor T^i (i<n); E[T]/(f) is a free E-module with basis T^i (i<n) by division with remainder by the monic f. The E-linear map psi sends the first basis to the second, so it is an isomorphism, and a tensor b goes to a g mod f with g(alpha)=b.",
+   "uses": [
+    "lem-weil-pbc-algebra-tensor-pushout-universal-property"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "tensor product universal property and base change of a polynomial quotient"
+   }
+  },
+  {
+   "text": "Because E/L is normal, every root of f in E is q(alpha) for an L-automorphism q by the conjugate-root lemma, and conversely every q(alpha) is a root. Separability makes these roots pairwise distinct; the finite Galois fixed-field lemma gives |Q|=[E:L]=deg f, and q is determined by q(alpha) because E=L(alpha), so these roots are exactly the |Q| elements indexed by Q. Thus f=product_{q in Q}(T-q(alpha)) in E[T].",
+   "uses": [
+    "lem-weil-pbc-normal-extension-conjugate-by-automorphism",
+    "lem-weil-pbc-finite-galois-fixed-field"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/fields.tex",
+    "place": "Tags 030N, 031D and 03SF, conjugates in a finite normal separable extension"
+   }
+  },
+  {
+   "text": "Apply the distinct-linear-factor Chinese-remainder isomorphism to f over E. It sends the class of a polynomial g(T) to (g(q(alpha)))_q. Combining this with the preceding tensor identification sends a tensor a tensor b to (a q(b))_q, proving that phi is an L-algebra isomorphism.",
+   "uses": [
+    "lem-pc-polynomial-quotient-distinct-linear-crt"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00U3, Chinese-remainder factorization into distinct linear factors"
+   }
+  },
+  {
+   "text": "The algebra isomorphism just proved gives the affine fibre-product decomposition and the labels of the two projections by the child affine consequence node.",
+   "uses": [
+    "lem-exc-finite-galois-algebra-tensor-decomposition"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/pione.tex",
+    "place": "Tag 03SF, affine fibre-product/tensor correspondence"
+   }
+  },
+  {
+   "text": "The finite-separable-spectrum etale lemma makes Spec E and the finite coproduct decomposition etale over Spec L, so these are objects and morphisms of the small etale site. Apply the finite-coproduct sheaf-sections statement to the resulting open-and-closed coproduct. Its restriction bijection is beta, and the projection labels give beta(s|_{p_1})=(s)_q and beta(s|_{p_2})=((Spec q)^*s)_q.",
+   "uses": [
+    "lem-exc-etale-coproduct-etale",
+    "lem-exc-finite-galois-sheaf-sections-coproduct",
+    "lem-exc-finite-galois-algebra-tensor-decomposition"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/pione.tex",
+    "place": "Tag 03SF, finite Galois descent calculation"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-finite-separable-extension-primitive-element",
+  "lem-weil-pbc-minimal-polynomial-quotient-field-iso",
+  "lem-weil-pbc-algebra-tensor-pushout-universal-property",
+  "lem-weil-pbc-normal-extension-conjugate-by-automorphism",
+  "lem-weil-pbc-finite-galois-fixed-field",
+  "lem-pc-polynomial-quotient-distinct-linear-crt",
+  "lem-exc-etale-coproduct-etale",
+  "lem-exc-finite-galois-algebra-tensor-decomposition",
+  "lem-exc-finite-galois-sheaf-sections-coproduct"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/pione.tex",
+  "place": "Tag 03SF"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -78,12 +164,37 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-exc-finite-galois-sections-descent",
   "by": "worker",
   "date": "2026-10-10"
  },
  "chapter": "sec-curve-estimates",
- "unit": "sk-prop-h2"
+ "unit": "sk-prop-h2",
+ "split_report": {
+  "date": "2026-10-11",
+  "item": "lem-exc-finite-galois-tensor-decomposition",
+  "worker": "stage1",
+  "summary": "Split the finite Galois descent calculation into an algebraic tensor/fibre-product decomposition and the sheaf-of-sets sections-on-a-finite-coproduct bijection, then proved the item by applying these two statements and tracking both projections. Checked the Stacks Tag 03SF route and tested Q trivial and quadratic examples.",
+  "blueprint": "Realizes the ancestor proof's third paragraph: the finite Galois tensor decomposition and the resulting sections calculation.",
+  "tool_uses": [
+   {
+    "node": "lem-pc-polynomial-quotient-distinct-linear-crt",
+    "why": "Step 4 uses the general Chinese-remainder theorem for distinct linear factors; the Galois unit route does not replace this algebraic tool lemma."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pc-polynomial-quotient-distinct-linear-crt",
+  "lem-pc-polynomial-quotient-distinct-linear-crt"
+ ],
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-gtd1804",
+  "group": "C1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-gtd1804 (reviewer sub-agent of L); spot-checked: Return of 17:34 repaired: D2 part (1) now proved in steps 1-4 (primitive element, L[T]/(f)=E, tensor identification, roots = Q-orbit of alpha, distinct-linear CRT; composite a(x)b -> (a q(b))_q checked); algebra child now only the affine consequence (p1=id, p2=Spec q on component q checked); C4 sheaf child now on the small etale site of an arbitrary S, applied with S=Spec L. Tool use CRT accepted. FIX more, RETURN less: C4 step 2 cited lem-weil-pbc-polynomial-tensor-product (R[X] (x)_R R[Y], not E (x)_L L[T]) and tensor-quotient-base-change for E (x)_L L[T]/(f) = E[T]/(f); replaced by the explicit UP map plus E-basis comparison 1(x)T^i -> T^i, dropped both from uses/proof_deps; step 3 now says q is determined by q(alpha) (injectivity of q -> q(alpha)).; 1 file(s) fixed by the reviewer"
+ }
 }
