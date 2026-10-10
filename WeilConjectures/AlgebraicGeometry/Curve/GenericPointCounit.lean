@@ -7,6 +7,7 @@ module
 
 public import WeilConjectures.AlgebraicGeometry.Curve.GenericComparison
 public import WeilConjectures.SixFunctors.Etale.LowerShriek.Comparison
+public import WeilConjectures.AlgebraicGeometry.Sites.GaloisDescent
 
 /-!
 # Pushforward along the generic point
@@ -162,6 +163,68 @@ lemma isIso_affineOpenUnit_lowerStar (U : X.NonemptyAffineOpens)
   exact IsIso.of_isIso_comp_right (adj.unit.app _)
     (((j)^*[AddCommGrpCat.{u + 1}] ⋙ (j)_*[AddCommGrpCat.{u + 1}]).map e.hom)
 
+/-- **Field points of the generic fibre.** Let `X` be an integral scheme with generic point
+`η : Spec k(X) ⟶ X` and `E/k(X)` a finite separable extension. Then there is an étale `X`-scheme
+`V` with nonempty generic fibre `V ×_X Spec k(X)` admitting a `k(X)`-morphism to `Spec E`: the
+spectrum of the standard étale algebra of the minimal polynomial of a primitive element of `E`
+over a nonempty affine open of `X`
+(`exists_etale_algHom_tensorProduct`). -/
+theorem exists_hom_etaleSpec_of_fromSpecFunctionField (E : Type u) [Field E]
+    [Algebra X.functionField E] [Algebra.Etale X.functionField E] :
+    ∃ (V : X.Etale) (_ : (MorphismProperty.Over.pullback @AlgebraicGeometry.Etale ⊤
+      X.fromSpecFunctionField).obj V ⟶ etaleSpec X.functionField E),
+      Nonempty ((MorphismProperty.Over.pullback @AlgebraicGeometry.Etale ⊤
+        X.fromSpecFunctionField).obj V).left := by
+  let K := X.functionField
+  obtain ⟨_, ⟨U, hU, rfl⟩, hηU, -⟩ :=
+    X.isBasis_affineOpens.exists_subset_of_mem_open (Set.mem_univ (genericPoint X)) isOpen_univ
+  have : Nonempty U := ⟨⟨_, hηU⟩⟩
+  let R := Γ(X, U)
+  have : IsFractionRing R K := functionField_isFractionRing_of_isAffineOpen X U hU
+  have hi : X.fromSpecFunctionField =
+      Spec.map (CommRingCat.ofHom (algebraMap R K)) ≫ hU.fromSpec := by
+    change X.fromSpecStalk (genericPoint X) = _
+    rw [← hU.fromSpecStalk_eq_fromSpecStalk hηU]
+    rfl
+  have : Module.Finite K E := Algebra.FormallyUnramified.finite_of_free K E
+  have : Algebra.IsSeparable K E := (Algebra.FormallyEtale.iff_isSeparable K E).1 inferInstance
+  let : Algebra R E := ((algebraMap K E).comp (algebraMap R K)).toAlgebra
+  have : IsScalarTower R K E := IsScalarTower.of_algebraMap_eq' rfl
+  obtain ⟨T, _, _, hT, ⟨θ⟩, ⟨ψ⟩⟩ := exists_etale_algHom_tensorProduct (R := R) (K := K) (E := E)
+  have : Etale (Spec.map (CommRingCat.ofHom (algebraMap R T))) :=
+    (HasRingHomProperty.Spec_iff (P := @Etale)).2 (RingHom.etale_algebraMap.2 hT)
+  let V : X.Etale := Scheme.Etale.mk (Spec.map (CommRingCat.ofHom (algebraMap R T)) ≫ hU.fromSpec)
+  let Y := Limits.pullback V.hom X.fromSpecFunctionField
+  have w : pullback.fst V.hom X.fromSpecFunctionField ≫
+      Spec.map (CommRingCat.ofHom (algebraMap R T)) =
+      pullback.snd V.hom X.fromSpecFunctionField ≫ Spec.map (CommRingCat.ofHom (algebraMap R K)) := by
+    rw [← cancel_mono hU.fromSpec, Category.assoc, Category.assoc, ← hi]
+    exact pullback.condition
+  let ι : Y ⟶ Limits.pullback (Spec.map (CommRingCat.ofHom (algebraMap R K)))
+      (Spec.map (CommRingCat.ofHom (algebraMap R T))) := pullback.lift _ _ w.symm
+  refine ⟨V, MorphismProperty.Over.homMk (ι ≫ (pullbackSpecIso R K T).hom ≫
+    Spec.map (CommRingCat.ofHom ψ.toRingHom)) ?_, ?_⟩
+  · change (ι ≫ (pullbackSpecIso R K T).hom ≫ Spec.map (CommRingCat.ofHom ψ.toRingHom)) ≫
+      Spec.map (CommRingCat.ofHom (algebraMap K E)) = pullback.snd _ _
+    have hψ : Spec.map (CommRingCat.ofHom ψ.toRingHom) ≫
+        Spec.map (CommRingCat.ofHom (algebraMap K E)) =
+        Spec.map (CommRingCat.ofHom Algebra.TensorProduct.includeLeftRingHom) := by
+      rw [← Spec.map_comp]
+      congr 1
+      ext x
+      exact ψ.commutes x
+    rw [Category.assoc, Category.assoc, hψ, pullbackSpecIso_hom_fst]
+    exact pullback.lift_fst _ _ _
+  · have hc : Spec.map (CommRingCat.ofHom θ.toRingHom) ≫ V.hom =
+        Spec.map (CommRingCat.ofHom (algebraMap K E)) ≫ X.fromSpecFunctionField := by
+      change _ ≫ Spec.map _ ≫ _ = _
+      rw [hi, ← Category.assoc, ← Category.assoc, ← Spec.map_comp, ← Spec.map_comp]
+      congr 2
+      ext r
+      exact (θ.commutes r).trans (IsScalarTower.algebraMap_apply R K E r)
+    obtain ⟨z⟩ : Nonempty (Spec (.of E)) := inferInstance
+    exact ⟨pullback.lift _ _ hc z⟩
+
 lemma bijective_app_of_isIso {Y : Scheme.{u}} {F G : Sheaf Y.smallEtaleTopology AddCommGrpCat.{u + 1}}
     (φ : F ⟶ G) [IsIso φ] (W : Y.Etale) : Function.Bijective (φ.hom.app (op W)) := by
   have : IsIso ((sheafToPresheaf _ _).map φ) := inferInstance
@@ -212,6 +275,60 @@ theorem isIso_unit_app_lowerStar_fromSpecFunctionField
     refine ⟨g, ?_⟩
     rw [← hs, ← hτ U]
     rfl
+
+omit [QuasiSeparatedSpace X] in
+/-- Every point of an étale `k(X)`-scheme lies in the image of a morphism from the generic fibre
+`V ×_X Spec k(X)` of an étale `X`-scheme `V`. -/
+lemma exists_hom_mem_range_of_fromSpecFunctionField (W : (Spec X.functionField).Etale)
+    (w : W.left) :
+    ∃ (V : X.Etale) (h : (MorphismProperty.Over.pullback @AlgebraicGeometry.Etale ⊤
+      X.fromSpecFunctionField).obj V ⟶ W), w ∈ Set.range h.left := by
+  obtain ⟨E, _, _, _, e, ⟨z, hz⟩⟩ := exists_etaleSpec_hom_mem_range W w
+  obtain ⟨V, g, ⟨y⟩⟩ := exists_hom_etaleSpec_of_fromSpecFunctionField X E
+  refine ⟨V, g ≫ e, ⟨y, ?_⟩⟩
+  have : Subsingleton (Spec (.of E)) := inferInstanceAs (Subsingleton (PrimeSpectrum E))
+  change e.left (g.left y) = w
+  rw [@Subsingleton.elim (Spec (.of E)) this (g.left y) z, hz]
+
+/-- **The counit at the generic point is an isomorphism.** For an integral quasi-separated scheme
+`X` with generic point `η : Spec k(X) ⟶ X`, the counit `η^* η_* M ⟶ M` is an isomorphism for
+every abelian étale sheaf `M` on `Spec k(X)`, i.e. `η_*` is fully faithful. Its pushforward is
+inverse to the unit `η_* M ⟶ η_* η^* η_* M`, an isomorphism
+(`AlgebraicGeometry.Scheme.isIso_unit_app_lowerStar_fromSpecFunctionField`), so the counit is
+bijective on the sections over the generic fibres of étale `X`-schemes; these cover every étale
+`k(X)`-scheme (`AlgebraicGeometry.Scheme.exists_hom_mem_range_of_fromSpecFunctionField`). -/
+theorem isIso_counit_app_fromSpecFunctionField
+    (M : Sheaf (Spec X.functionField).smallEtaleTopology AddCommGrpCat.{u + 1}) :
+    IsIso ((upperStarLowerStarAdjunction AddCommGrpCat.{u + 1} X.fromSpecFunctionField).counit.app
+      M) := by
+  have : PreservesLimitsOfSize.{u, u + 1} (CategoryTheory.forget AddCommGrpCat.{u + 1}) :=
+    preservesLimitsOfSize_shrink.{u + 1, u + 1, u, u + 1} _
+  have : (Spec X.functionField).smallEtaleTopology.HasSheafCompose
+      (CategoryTheory.forget AddCommGrpCat.{u + 1}) := inferInstance
+  let adj := upperStarLowerStarAdjunction AddCommGrpCat.{u + 1} X.fromSpecFunctionField
+  let c := adj.counit.app M
+  have hε := isIso_unit_app_lowerStar_fromSpecFunctionField X M
+  have hc : IsIso ((X.fromSpecFunctionField)_*[AddCommGrpCat.{u + 1}].map c) := by
+    have h := adj.right_triangle_components M
+    have : IsIso (adj.unit.app ((X.fromSpecFunctionField)_*[AddCommGrpCat.{u + 1}].obj M) ≫
+        (X.fromSpecFunctionField)_*[AddCommGrpCat.{u + 1}].map c) := by
+      rw [h]
+      exact IsIso.id _
+    exact IsIso.of_isIso_comp_left (adj.unit.app _) _
+  -- the counit is bijective on the sections over generic fibres
+  have hb (V : X.Etale) := bijective_app_of_isIso
+    ((X.fromSpecFunctionField)_*[AddCommGrpCat.{u + 1}].map c) V
+  refine (Sheaf.isLocallyBijective_iff_isIso c).1 ⟨⟨fun {W} x y hxy ↦ ?_⟩, ⟨fun {W} s ↦ ?_⟩⟩
+  · refine (Scheme.mem_smallEtaleTopology_iff _).2 fun w ↦ ?_
+    obtain ⟨V, h, hw⟩ := exists_hom_mem_range_of_fromSpecFunctionField X W.unop w
+    refine ⟨_, h, (hb V).1 ?_, hw⟩
+    change c.hom.app _ (_ : _) = c.hom.app _ _
+    erw [NatTrans.naturality_apply, NatTrans.naturality_apply]
+    exact congrArg _ hxy
+  · refine (Scheme.mem_smallEtaleTopology_iff _).2 fun w ↦ ?_
+    obtain ⟨V, h, hw⟩ := exists_hom_mem_range_of_fromSpecFunctionField X W w
+    obtain ⟨t, ht⟩ := (hb V).2 (M.obj.map h.op s)
+    exact ⟨_, h, ⟨t, ht⟩, hw⟩
 
 end Scheme
 
