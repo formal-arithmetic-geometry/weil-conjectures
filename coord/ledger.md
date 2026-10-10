@@ -1058,3 +1058,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 08:09 L: accepted lem-weil-pbc-colimit-eventually-flat (7 steps; new unsplit node flat-another-variant-local-criterion 00MO).
 - 08:10 L: accepted lem-weil-pbc-depth-le-support-dimension (5 steps, no new nodes; induction on sequence length).
 - 08:10 L: accepted lem-weil-pbc-depth-in-ses (5 steps; new leaf ext-long-exact-second-variable 00LU, new unsplit node depth-ext 00LW).
+- 08:11 L: accepted lem-weil-pbc-dimension-at-point-field-extension (5 steps, no new nodes).
