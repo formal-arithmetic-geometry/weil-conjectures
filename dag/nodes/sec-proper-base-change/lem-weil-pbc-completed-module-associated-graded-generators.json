@@ -1,0 +1,59 @@
+{
+ "id": "lem-weil-pbc-completed-module-associated-graded-generators",
+ "kind": "statement",
+ "title": "The associated graded of a finite completed module is generated in degree zero",
+ "statement": "Let $A$ be a commutative Noetherian ring [def-weil-pbc-noetherian-ring], $I\\subseteq A$ an ideal, and $\\widehat A=\\varprojlim_{r\\ge1}A/I^r$ its $I$-adic completion [def-weil-pbc-adic-completion]. Let $M$ be a finitely generated $\\widehat A$-module [def-weil-finitely-generated-module]. Write $I^nM=(I\\widehat A)^nM$, with $I^0M=M$. Define the graded ring $B=\\bigoplus_{n\\ge0}I^n/I^{n+1}$, with unit $1\\bmod I$ in degree zero and multiplication $(a\\bmod I^{n+1})(b\\bmod I^{m+1})=ab\\bmod I^{n+m+1}$, and the graded $B$-module $G=\\bigoplus_{n\\ge0}I^nM/I^{n+1}M$, whose action on homogeneous elements is $(a\\bmod I^{m+1})(x\\bmod I^{n+1}M)=ax\\bmod I^{m+n+1}M$. Here direct sums consist of tuples of finite support, with componentwise addition and the displayed products extended distributively. Then $M/IM$ is a finitely generated $A/I$-module, and, for every finite family $\\bar x_1,\\ldots,\\bar x_t$ generating $M/IM$ over $A/I$, these elements, placed in degree zero, generate $G$ over $B$. Explicitly, for every $n\\ge0$ and $y\\in I^nM$, and any lifts $x_j\\in M$ of $\\bar x_j$, there exist $a_1,\\ldots,a_t\\in I^n$ such that $y-\\sum_{j=1}^ta_jx_j\\in I^{n+1}M$.",
+ "source": {
+  "document": "literature/stacks-project/coherent.tex",
+  "place": "Cohomology of Schemes, Lemma 087Z (label lemma-finite-over-rees-algebra), proof lines 6621-6630: the affine algebraic assertion; tags/tags confirms 087Z,coherent-lemma-finite-over-rees-algebra. The quotient of completion used here is Algebra 05GG (lemma-hathat-finitely-generated), part (2)."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-noetherian-ring",
+  "def-weil-pbc-adic-completion",
+  "def-weil-finitely-generated-module"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "If A is Noetherian, I an ideal and M finite over the I-adic completion, the module direct sum I^n M/I^(n+1) M is generated in degree zero over direct sum I^n/I^(n+1)",
+   "results": "AdicCompletion.module (RingTheory/AdicCompletion/Algebra), AdicCompletion, IsAdicComplete (Basic), AdicCompletion.ofTensorProductEquivOfFiniteNoetherian.congr_simp (AsTensorProduct), IsNoetherian.recOn (Noetherian/Defs). None asserts associated graded generation.",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "If A is Noetherian, I an ideal and M finite over the I-adic completion, the module direct sum I^n M/I^(n+1) M is generated in degree zero over direct sum I^n/I^(n+1)",
+   "results": "AdicCompletion.submodule, IsAdicComplete, AdicCompletion, Hausdorffification (Basic); AdicCompletion.exists_smodEq_pow_add_one_smul (Functoriality). Read Functoriality.lean lines 374-390: this gives a congruence for one linear map over one ring; it does not state the completed coefficient-ring comparison or construct the associated graded module. Useful candidate for a future split.",
+   "date": "2026-10-10",
+   "verdict": "no exact match; algebraic congruence candidate requires further constructions"
+  },
+  {
+   "tool": "grep",
+   "query": "rg -n associated.?graded|AssociatedGraded|graded.*[Ff]inite|[Ff]inite.*graded|kerProj_of|quotient /home/ubuntu/SHEAF/project/lean/.lake/packages/mathlib/Mathlib/RingTheory/{Filtration.lean,AdicCompletion/Basic.lean}; read AdicCompletion/Functoriality.lean:374-390",
+   "results": "Filtration.lean provides the Rees submodule (line 239) and Artin-Rees (389), not the associated graded quotient. Functoriality.lean:374-390 gives exists_smodEq_pow_add_one_smul, with no associated graded or completed scalar comparison.",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-formal-systems-kernel-rees-finite",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1"
+}
