@@ -1,0 +1,81 @@
+{
+ "id": "lem-weil-pbc-fraction-field-lift",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-normal-constant-generic",
+   "place": "step 4 of its split (source: Lemma 59.73.13 (Tag 09Z5), proof of (1)); within it, 'In the case k[[X_1,...,X_d]] we reduce to the statement that a field is N-2 by Lemma lemma-power-series-over-N-2' and the same reduction in the case Lambda[[X_1,...,X_d]], proof of Algebra 032W (via lem-weil-pbc-complete-local-nagata); within it, the proof of Algebra 032Q (lemma-power-series-over-N-2): 'By Lemma lemma-power-series-over-Noetherian-normal-domain we see that $R'[[x]]$ is a normal domain' (third sentence); within it, the proof of Algebra 0BI0 (lemma-power-series-over-Noetherian-normal-domain, algebra.tex 8155-8173): the identification of $w=f/g\\in\\operatorname{Frac}(R[[x]])$ with an element of $K((x))$ (lines 8157-8162, implicit in 'we can write $w = a_n x^n + \\ldots$')",
+   "via": [
+    "lem-weil-pbc-power-series-normal-domain",
+    "lem-weil-pbc-power-series-n2",
+    "lem-weil-pbc-complete-local-nagata",
+    "lem-weil-pbc-analytically-unramified-n1",
+    "lem-weil-pbc-normal-nagata-monogenic-n1",
+    "lem-weil-pbc-nagata-universally-japanese",
+    "lem-weil-pbc-finite-type-z-domain-normalization-finite",
+    "lem-weil-pbc-smooth-over-normal-ring-normal",
+    "lem-weil-pbc-etale-over-normal-ring-normal",
+    "lem-weil-pbc-etale-colimit-normal-local-domain"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "An injective ring map from a domain to a field extends to an embedding of its fraction field",
+ "statement": "Let $A$ be an integral domain with field of fractions $\\operatorname{Frac}(A)$, let $L$ be a field and let $g\\colon A\\to L$ be an injective ring homomorphism. Then there is a unique ring homomorphism $\\tilde g\\colon\\operatorname{Frac}(A)\\to L$ with $\\tilde g(a)=g(a)$ for $a\\in A$; it is given by $\\tilde g(a/s)=g(a)g(s)^{-1}$ for $a,s\\in A$, $s\\neq0$, and it is injective.",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Algebra, proof of Lemma Tag 0BI0 (lemma-power-series-over-Noetherian-normal-domain), lines 8157-8162: the quotient $w=f/g$ of elements of $R[[x]]$ is regarded as an element of the field $K((x))$"
+ },
+ "stmt_deps": [],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "injective ring hom from domain to field extends to fraction field",
+   "results": "IsFractionRing.liftAlgHom, IsFractionRing.lift, IsFractionRing.coe_liftAlgHom, IsFractionRing.liftAlgHom_apply (Mathlib.RingTheory.Localization.FractionRing)",
+   "date": "2026-10-10",
+   "verdict": "match: IsFractionRing.lift"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "an injective ring homomorphism from an integral domain to a field extends to the fraction field",
+   "results": "IsFractionRing.lift, IsFractionRing.map, IsFractionRing.liftAlgHom, FractionRing.algebraMap_liftAlgebra, IsFractionRing.lift_unique (Mathlib.RingTheory.Localization.FractionRing)",
+   "date": "2026-10-10",
+   "verdict": "match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -n 'def lift\\|theorem lift_unique\\|theorem lift_algebraMap' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/RingTheory/Localization/FractionRing.lean; grep -rn 'theorem _root_.RingHom.injective' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/RingTheory/SimpleRing/Basic.lean",
+   "results": "FractionRing.lean:347 IsFractionRing.lift, :350 lift_unique, :389 lift_algebraMap; SimpleRing/Basic.lean:67 RingHom.injective (source a simple ring, e.g. a field via DivisionRing.isSimpleRing line 52, target nontrivial)",
+   "date": "2026-10-10",
+   "verdict": "match"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "IsFractionRing.lift, IsFractionRing.lift_algebraMap, IsFractionRing.lift_unique, RingHom.injective",
+  "file": "Mathlib/RingTheory/Localization/FractionRing.lean",
+  "line": 347,
+  "how": "exact, one declaration per clause: existence `IsFractionRing.lift (hg : Injective g) : K →+* L` (FractionRing.lean:347, read with sed -n 340,392p; the docstring gives z = x/y ↦ g x * (g y)⁻¹), extension `lift_algebraMap` (line 389), uniqueness `lift_unique` (line 350); injectivity: `RingHom.injective` (Mathlib/RingTheory/SimpleRing/Basic.lean:67) for a ring hom out of the field Frac(A) (a field is simple, `DivisionRing.isSimpleRing`, line 52) into the nontrivial ring L."
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-power-series-normal-domain",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "reviewed": "2026-10-10 L: composed Mathlib leaf checked: IsFractionRing.lift, lift_unique"
+}

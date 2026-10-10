@@ -1,0 +1,83 @@
+{
+ "id": "def-weil-pbc-laurent-series",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-normal-constant-generic",
+   "place": "step 4 of its split (source: Lemma 59.73.13 (Tag 09Z5), proof of (1)); within it, 'In the case k[[X_1,...,X_d]] we reduce to the statement that a field is N-2 by Lemma lemma-power-series-over-N-2' and the same reduction in the case Lambda[[X_1,...,X_d]], proof of Algebra 032W (via lem-weil-pbc-complete-local-nagata); within it, the proof of Algebra 032Q (lemma-power-series-over-N-2): 'By Lemma lemma-power-series-over-Noetherian-normal-domain we see that $R'[[x]]$ is a normal domain' (third sentence); within it, the proof of Algebra 0BI0 (lemma-power-series-over-Noetherian-normal-domain, algebra.tex 8155-8173): 'Since the ring of Laurent series $K((x)) = K[[x]][1/x]$ is a field, we can write $w = a_n x^n + a_{n+1}x^{n+1} + \\ldots$' (the notion of Laurent series and its order)",
+   "via": [
+    "lem-weil-pbc-power-series-normal-domain",
+    "lem-weil-pbc-power-series-n2",
+    "lem-weil-pbc-complete-local-nagata",
+    "lem-weil-pbc-analytically-unramified-n1",
+    "lem-weil-pbc-normal-nagata-monogenic-n1",
+    "lem-weil-pbc-nagata-universally-japanese",
+    "lem-weil-pbc-finite-type-z-domain-normalization-finite",
+    "lem-weil-pbc-smooth-over-normal-ring-normal",
+    "lem-weil-pbc-etale-over-normal-ring-normal",
+    "lem-weil-pbc-etale-colimit-normal-local-domain"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "definition",
+ "title": "Formal Laurent series in one variable",
+ "statement": "Let $A$ be a commutative ring. A \\emph{formal Laurent series} in one variable $x$ over $A$ is a family $(a_i)_{i\\in\\mathbf Z}$ of elements of $A$ for which there is $n_0\\in\\mathbf Z$ with $a_i=0$ for all $i<n_0$; it is written $\\sum_{i}a_ix^i$. The set $A((x))$ of formal Laurent series is a commutative ring with coefficientwise addition and the product $\\bigl(\\sum_ia_ix^i\\bigr)\\bigl(\\sum_jb_jx^j\\bigr)=\\sum_k\\bigl(\\sum_{i+j=k}a_ib_j\\bigr)x^k$ (each inner sum is finite since both families vanish below some index). The ring $A[[x]]$ of formal power series [def-weil-pbc-multivariate-power-series] (the case $n=1$) maps to $A((x))$ by $\\sum_{i\\ge0}a_ix^i\\mapsto\\sum_ia_ix^i$ with $a_i=0$ for $i<0$; this is an injective ring homomorphism, by which $A[[x]]$ is regarded as the subring of Laurent series with $a_i=0$ for all $i<0$. A nonzero Laurent series $\\sum_ia_ix^i$ has an \\emph{order} $n=\\min\\{i: a_i\\neq0\\}$ and is written $a_nx^n+a_{n+1}x^{n+1}+\\cdots$ with $a_n\\neq0$.",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Algebra, proof of Lemma Tag 0BI0 (lemma-power-series-over-Noetherian-normal-domain), lines 8160-8163: 'the ring of Laurent series $K((x)) = K[[x]][1/x]$ ... $w = a_n x^n + a_{n+1}x^{n+1} + \\ldots$'"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-multivariate-power-series"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "formal Laurent series definition coefficients indexed by integers bounded below support",
+   "results": "LaurentSeries (Mathlib.RingTheory.LaurentSeries), LaurentSeries.Cauchy.coeff_support_bddBelow, PowerSeries.coeff_coe, LaurentPolynomial.T, HahnSeries.ofSuppBddBelow_coeff",
+   "date": "2026-10-10",
+   "verdict": "match: LaurentSeries"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "formal Laurent series ring R((X)) with power series embedded",
+   "results": "LaurentSeries, LaurentSeries.powerSeries_as_subring, LaurentSeries.instAlgebraPowerSeries, LaurentSeries.instCoePowerSeries (Mathlib.RingTheory.LaurentSeries)",
+   "date": "2026-10-10",
+   "verdict": "match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -n 'abbrev LaurentSeries' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/RingTheory/LaurentSeries.lean; grep -n 'def ofPowerSeries\\|ofPowerSeries_injective' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/RingTheory/HahnSeries/PowerSeries.lean; grep -n 'structure HahnSeries' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/RingTheory/HahnSeries/Basic.lean; grep -n 'BddBelow.isWF' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/Order/WellFoundedSet.lean",
+   "results": "LaurentSeries.lean:102 abbrev LaurentSeries (R) := R⟦ℤ⟧; HahnSeries/Basic.lean:53 structure HahnSeries (coeff, isPWO_support'); HahnSeries/PowerSeries.lean:90 ofPowerSeries, :97 ofPowerSeries_injective; WellFoundedSet.lean:741 BddBelow.isWF",
+   "date": "2026-10-10",
+   "verdict": "match"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "LaurentSeries, HahnSeries.ofPowerSeries, HahnSeries.ofPowerSeries_injective, HahnSeries.order",
+  "file": "Mathlib/RingTheory/LaurentSeries.lean",
+  "line": 102,
+  "how": "specializes in one line: `LaurentSeries R := R⟦ℤ⟧` (LaurentSeries.lean:102, read with sed -n 90,105p) is `HahnSeries ℤ R` (HahnSeries/Basic.lean:53: a coefficient function ℤ → R with partially well-ordered support), with the Cauchy product of HahnSeries; a subset of ℤ is partially well-ordered iff it is empty or bounded below (BddBelow.isWF, Order/WellFoundedSet.lean:741, and a nonempty well-founded subset has a minimum), so this is the bounded-below description of the node. The inclusion A[[x]] → A((x)) is `HahnSeries.ofPowerSeries ℤ R` (HahnSeries/PowerSeries.lean:90), injective by `ofPowerSeries_injective` (line 97); the order is `HahnSeries.order` (HahnSeries/Basic.lean)."
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-power-series-normal-domain",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "reviewed": "2026-10-10 L: Mathlib leaf (definition) checked: LaurentSeries (HahnSeries Z), ofPowerSeries"
+}

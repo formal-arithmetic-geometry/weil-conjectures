@@ -1,0 +1,85 @@
+{
+ "id": "lem-weil-pbc-almost-integral-integral",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-normal-constant-generic",
+   "place": "step 4 of its split (source: Lemma 59.73.13 (Tag 09Z5), proof of (1)); within it, 'In the case k[[X_1,...,X_d]] we reduce to the statement that a field is N-2 by Lemma lemma-power-series-over-N-2' and the same reduction in the case Lambda[[X_1,...,X_d]], proof of Algebra 032W (via lem-weil-pbc-complete-local-nagata); within it, the proof of Algebra 032Q (lemma-power-series-over-N-2): 'By Lemma lemma-power-series-over-Noetherian-normal-domain we see that $R'[[x]]$ is a normal domain' (third sentence); within it, the proof of Algebra 0BI0 (lemma-power-series-over-Noetherian-normal-domain, algebra.tex 8155-8173): 'By Lemma lemma-almost-integral we see there exists a nonzero element $h$' (integral implies almost integral, over $R[[x]]$) and 'Since $R$ is Noetherian this implies that $a_n \\in R$ by the same lemma' (almost integral implies integral, over $R$)",
+   "via": [
+    "lem-weil-pbc-power-series-normal-domain",
+    "lem-weil-pbc-power-series-n2",
+    "lem-weil-pbc-complete-local-nagata",
+    "lem-weil-pbc-analytically-unramified-n1",
+    "lem-weil-pbc-normal-nagata-monogenic-n1",
+    "lem-weil-pbc-nagata-universally-japanese",
+    "lem-weil-pbc-finite-type-z-domain-normalization-finite",
+    "lem-weil-pbc-smooth-over-normal-ring-normal",
+    "lem-weil-pbc-etale-over-normal-ring-normal",
+    "lem-weil-pbc-etale-colimit-normal-local-domain"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Integral elements are almost integral; over a Noetherian domain conversely (Stacks 00GX)",
+ "statement": "Let $R$ be an integral domain with field of fractions $K$, and let $g\\in K$. (1) If $g$ is integral over $R$ [def-weil-pbc-integral-closure], then $g$ is almost integral over $R$ [def-weil-pbc-almost-integral]: there is $r\\in R$, $r\\ne0$, with $rg^n\\in R$ for all $n\\ge0$. (2) If $R$ is Noetherian [def-weil-pbc-noetherian-ring] and $g$ is almost integral over $R$, then $g$ is integral over $R$.",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Algebra, Lemma Tag 00GX (lemma-almost-integral), lines 8017-8047, second and third assertions"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-integral-closure",
+  "def-weil-pbc-almost-integral",
+  "def-weil-pbc-noetherian-ring"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "almost integral element over Noetherian domain is integral",
+   "results": "isAlmostIntegral_iff_isIntegral, IsAlmostIntegral.isIntegral, IsAlmostIntegral.isIntegral_of_nonZeroDivisors_le_comap (Mathlib.RingTheory.IntegralClosure.IsIntegral.AlmostIntegral), integralClosure.isIntegral, isIntegral_of_noetherian",
+   "date": "2026-10-10",
+   "verdict": "match"
+  },
+  {
+   "tool": "loogle",
+   "query": "IsAlmostIntegral",
+   "results": "IsIntegral.isAlmostIntegral, isAlmostIntegral_iff_isIntegral, IsAlmostIntegral.isIntegral, completeIntegralClosure lemmas (Mathlib.RingTheory.IntegralClosure.IsIntegral.AlmostIntegral)",
+   "date": "2026-10-10",
+   "verdict": "match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -n 'stacks 00GX\\|lemma IsIntegral.isAlmostIntegral \\|lemma IsAlmostIntegral.isIntegral \\|lemma isAlmostIntegral_iff_isIntegral' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/RingTheory/IntegralClosure/IsIntegral/AlmostIntegral.lean",
+   "results": "line 77-79 @[stacks 00GX \"Part 2\"] IsIntegral.isAlmostIntegral [IsFractionRing R S]; line 114-116 @[stacks 00GX \"Part 3\"] IsAlmostIntegral.isIntegral [IsNoetherianRing R] [IsDomain S] [FaithfulSMul R S]; line 120 isAlmostIntegral_iff_isIntegral",
+   "date": "2026-10-10",
+   "verdict": "match"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "IsIntegral.isAlmostIntegral, IsAlmostIntegral.isIntegral",
+  "file": "Mathlib/RingTheory/IntegralClosure/IsIntegral/AlmostIntegral.lean",
+  "line": 78,
+  "how": "exact, one declaration per clause (read with sed -n 76,123p): (1) `IsIntegral.isAlmostIntegral [IsFractionRing R S] {s : S} (H : IsIntegral R s) : IsAlmostIntegral R s` (line 78, @[stacks 00GX \"Part 2\"]); (2) `IsAlmostIntegral.isIntegral [IsNoetherianRing R] [IsDomain S] [FaithfulSMul R S]` (line 115, @[stacks 00GX \"Part 3\"]), applied with S = FractionRing R; both together as `isAlmostIntegral_iff_isIntegral` (line 120) for R a Noetherian domain."
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-power-series-normal-domain",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "reviewed": "2026-10-10 L: Mathlib leaf checked: IsIntegral.isAlmostIntegral, IsAlmostIntegral.isIntegral (00GX)"
+}

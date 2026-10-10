@@ -1,0 +1,81 @@
+{
+ "id": "def-weil-pbc-almost-integral",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-normal-constant-generic",
+   "place": "step 4 of its split (source: Lemma 59.73.13 (Tag 09Z5), proof of (1)); within it, 'In the case k[[X_1,...,X_d]] we reduce to the statement that a field is N-2 by Lemma lemma-power-series-over-N-2' and the same reduction in the case Lambda[[X_1,...,X_d]], proof of Algebra 032W (via lem-weil-pbc-complete-local-nagata); within it, the proof of Algebra 032Q (lemma-power-series-over-N-2): 'By Lemma lemma-power-series-over-Noetherian-normal-domain we see that $R'[[x]]$ is a normal domain' (third sentence); within it, the proof of Algebra 0BI0 (lemma-power-series-over-Noetherian-normal-domain, algebra.tex 8155-8173): 'By Lemma lemma-almost-integral we see there exists a nonzero element $h$ ... such that $w^e h \\in R[[x]]$' and 'this implies that $a_n \\in R$ by the same lemma' (the notion used there)",
+   "via": [
+    "lem-weil-pbc-power-series-normal-domain",
+    "lem-weil-pbc-power-series-n2",
+    "lem-weil-pbc-complete-local-nagata",
+    "lem-weil-pbc-analytically-unramified-n1",
+    "lem-weil-pbc-normal-nagata-monogenic-n1",
+    "lem-weil-pbc-nagata-universally-japanese",
+    "lem-weil-pbc-finite-type-z-domain-normalization-finite",
+    "lem-weil-pbc-smooth-over-normal-ring-normal",
+    "lem-weil-pbc-etale-over-normal-ring-normal",
+    "lem-weil-pbc-etale-colimit-normal-local-domain"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "definition",
+ "title": "Almost integral elements (Stacks 00GW)",
+ "statement": "Let $R$ be an integral domain with field of fractions $K$. An element $g\\in K$ is \\emph{almost integral over $R$} if there exists $r\\in R$, $r\\neq0$, such that $rg^n\\in R$ for all integers $n\\geq0$.",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Algebra, Definition Tag 00GW (definition-almost-integral), lines 7999-8011, part (1)"
+ },
+ "stmt_deps": [],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "almost integral element over Noetherian domain is integral",
+   "results": "isAlmostIntegral_iff_isIntegral, IsAlmostIntegral.isIntegral, IsAlmostIntegral.isIntegral_of_nonZeroDivisors_le_comap (Mathlib.RingTheory.IntegralClosure.IsIntegral.AlmostIntegral), integralClosure.isIntegral, isIntegral_of_noetherian",
+   "date": "2026-10-10",
+   "verdict": "match: IsAlmostIntegral"
+  },
+  {
+   "tool": "loogle",
+   "query": "IsAlmostIntegral",
+   "results": "IsAlmostIntegral (def), IsIntegral.isAlmostIntegral, isAlmostIntegral_iff_isIntegral, IsAlmostIntegral.isIntegral, mem_completeIntegralClosure, IsIntegral.isAlmostIntegral_of_isLocalization, IsIntegral.isAlmostIntegral_of_exists_smul_mem_range, IsAlmostIntegral.isIntegral_of_nonZeroDivisors_le_comap (all Mathlib.RingTheory.IntegralClosure.IsIntegral.AlmostIntegral)",
+   "date": "2026-10-10",
+   "verdict": "match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -n 'def IsAlmostIntegral\\|stacks 00GW' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/RingTheory/IntegralClosure/IsIntegral/AlmostIntegral.lean",
+   "results": "AlmostIntegral.lean:24-26 @[stacks 00GW] def IsAlmostIntegral (s : S) : Prop := ∃ r ∈ R⁰, ∀ n, r • s ^ n ∈ (algebraMap R S).range",
+   "date": "2026-10-10",
+   "verdict": "match"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "IsAlmostIntegral",
+  "file": "Mathlib/RingTheory/IntegralClosure/IsIntegral/AlmostIntegral.lean",
+  "line": 26,
+  "how": "specializes in one line: `IsAlmostIntegral R s := ∃ r ∈ R⁰, ∀ n, r • s ^ n ∈ (algebraMap R S).range` (AlmostIntegral.lean:26, read with sed -n 20,27p, tagged @[stacks 00GW]); with S = FractionRing R and R a domain, R⁰ is the set of nonzero elements and n ranges over ℕ, which is the node's definition."
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-power-series-normal-domain",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "reviewed": "2026-10-10 L: Mathlib leaf (definition) checked: IsAlmostIntegral (00GW)"
+}

@@ -1,0 +1,83 @@
+{
+ "id": "lem-weil-pbc-laurent-series-field",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-normal-constant-generic",
+   "place": "step 4 of its split (source: Lemma 59.73.13 (Tag 09Z5), proof of (1)); within it, 'In the case k[[X_1,...,X_d]] we reduce to the statement that a field is N-2 by Lemma lemma-power-series-over-N-2' and the same reduction in the case Lambda[[X_1,...,X_d]], proof of Algebra 032W (via lem-weil-pbc-complete-local-nagata); within it, the proof of Algebra 032Q (lemma-power-series-over-N-2): 'By Lemma lemma-power-series-over-Noetherian-normal-domain we see that $R'[[x]]$ is a normal domain' (third sentence); within it, the proof of Algebra 0BI0 (lemma-power-series-over-Noetherian-normal-domain, algebra.tex 8155-8173): 'Since the ring of Laurent series $K((x)) = K[[x]][1/x]$ is a field'",
+   "via": [
+    "lem-weil-pbc-power-series-normal-domain",
+    "lem-weil-pbc-power-series-n2",
+    "lem-weil-pbc-complete-local-nagata",
+    "lem-weil-pbc-analytically-unramified-n1",
+    "lem-weil-pbc-normal-nagata-monogenic-n1",
+    "lem-weil-pbc-nagata-universally-japanese",
+    "lem-weil-pbc-finite-type-z-domain-normalization-finite",
+    "lem-weil-pbc-smooth-over-normal-ring-normal",
+    "lem-weil-pbc-etale-over-normal-ring-normal",
+    "lem-weil-pbc-etale-colimit-normal-local-domain"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Laurent series over a field form a field",
+ "statement": "Let $K$ be a field. Then the ring $K((x))$ of formal Laurent series over $K$ [def-weil-pbc-laurent-series] is a field.",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Algebra, proof of Lemma Tag 0BI0 (lemma-power-series-over-Noetherian-normal-domain), line 8160: 'Since the ring of Laurent series $K((x)) = K[[x]][1/x]$ is a field'"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-laurent-series"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Laurent series over a field form a field",
+   "results": "LaurentSeries.instIsFractionRingPowerSeries, LaurentSeries, LaurentSeries.LaurentSeriesPkg, LaurentSeries.powerSeriesRingEquiv_coe_apply (Mathlib.RingTheory.LaurentSeries)",
+   "date": "2026-10-10",
+   "verdict": "generalization: the field instance is HahnSeries.instField"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "the field of formal Laurent series over a field is a field",
+   "results": "LaurentSeries.instIsFractionRingPowerSeries, LaurentSeries.LaurentSeriesPkg, HahnSeries.instField (Mathlib.RingTheory.HahnSeries.Summable: Field (HahnSeries Γ R) for Γ a linearly ordered abelian group and R a field), LaurentSeries.RatFuncAdicCompl, LaurentSeries",
+   "date": "2026-10-10",
+   "verdict": "match: HahnSeries.instField with Γ = ℤ"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rn 'instance instField\\|Field (HahnSeries' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/RingTheory/HahnSeries ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/RingTheory/LaurentSeries.lean",
+   "results": "HahnSeries/Summable.lean:884 instance instField : Field R⟦Γ⟧ (section Field, line 865: [AddCommGroup Γ] [LinearOrder Γ] [IsOrderedAddMonoid Γ] [Field R])",
+   "date": "2026-10-10",
+   "verdict": "match"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "HahnSeries.instField",
+  "file": "Mathlib/RingTheory/HahnSeries/Summable.lean",
+  "line": 884,
+  "how": "specializes in one line: `instance instField : Field R⟦Γ⟧` (Summable.lean:884, read with sed -n 863,890p; variables at line 865: [AddCommGroup Γ] [LinearOrder Γ] [IsOrderedAddMonoid Γ] [Field R]) with Γ = ℤ gives `Field (LaurentSeries K)` since LaurentSeries K = K⟦ℤ⟧ (LaurentSeries.lean:102)."
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-power-series-normal-domain",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "reviewed": "2026-10-10 L: Mathlib leaf checked: HahnSeries.instField"
+}

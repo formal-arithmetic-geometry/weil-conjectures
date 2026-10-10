@@ -31,9 +31,92 @@
   "def-weil-pbc-normal-ring",
   "def-weil-pbc-multivariate-power-series"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "$R[[x]]$ is Noetherian by [lem-weil-pbc-power-series-noetherian] (case $n=1$), and it is an integral domain by [lem-weil-pbc-power-series-domain] (case $d=1$), since $R$ is a domain. In particular its field of fractions $\\operatorname{Frac}(R[[x]])$ is defined, and the normality to be shown is: every $w\\in\\operatorname{Frac}(R[[x]])$ integral over $R[[x]]$ lies in $R[[x]]$ [def-weil-pbc-normal-ring].",
+   "uses": [
+    "lem-weil-pbc-power-series-noetherian",
+    "lem-weil-pbc-power-series-domain",
+    "def-weil-pbc-normal-ring"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra, proof of Lemma Tag 0BI0 (lemma-power-series-over-Noetherian-normal-domain), lines 8156-8159: 'The power series ring is Noetherian by Lemma lemma-Noetherian-power-series (0306). Let $f, g \\in R[[x]]$ be nonzero elements such that $w = f/g$ is integral over $R[[x]]$.' (the source does not mention that $R[[x]]$ is a domain; it is needed for $f/g$ to make sense)"
+   }
+  },
+  {
+   "text": "Let $K=\\operatorname{Frac}(R)$. The coefficientwise inclusion $R[[x]]\\to K[[x]]$ followed by the inclusion $K[[x]]\\to K((x))$ of [def-weil-pbc-laurent-series] is an injective ring homomorphism $\\iota\\colon R[[x]]\\to K((x))$ (both maps keep all coefficients and $R\\to K$ is injective); its image is the set of Laurent series $\\sum_ia_ix^i$ with $a_i\\in R$ for all $i$ and $a_i=0$ for $i<0$. By [lem-weil-pbc-laurent-series-field], $K((x))$ is a field, so by [lem-weil-pbc-fraction-field-lift] applied to the domain $A=R[[x]]$ (step 1) and $g=\\iota$, $\\iota$ extends to an injective ring homomorphism $\\tilde\\iota\\colon\\operatorname{Frac}(R[[x]])\\to K((x))$. For $u\\in\\operatorname{Frac}(R[[x]])$ we write $\\tilde\\iota(u)=\\sum_ia_ix^i$ with $a_i\\in K$, and for $u\\ne0$ this is $a_nx^n+a_{n+1}x^{n+1}+\\cdots$ with $n\\in\\mathbf Z$ its order and $a_n\\neq0$.",
+   "uses": [
+    "def-weil-pbc-laurent-series",
+    "lem-weil-pbc-laurent-series-field",
+    "lem-weil-pbc-fraction-field-lift",
+    "lem-weil-pbc-power-series-domain"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra, proof of Lemma Tag 0BI0 (lemma-power-series-over-Noetherian-normal-domain), lines 8160-8163: 'Let $K$ be the fraction field of $R$. Since the ring of Laurent series $K((x)) = K[[x]][1/x]$ is a field, we can write $w = a_n x^n + a_{n+1}x^{n+1} + \\ldots$ for some $n \\in \\mathbf{Z}$, $a_i \\in K$, and $a_n \\neq 0$.'"
+   }
+  },
+  {
+   "text": "Claim: if $v\\in\\operatorname{Frac}(R[[x]])$ is nonzero and integral over $R[[x]]$, and $\\tilde\\iota(v)=c_nx^n+c_{n+1}x^{n+1}+\\cdots$ with $c_n\\ne0$, then $n\\ge0$ and $c_n\\in R$. Proof. Since $R[[x]]$ is a domain (step 1), [lem-weil-pbc-almost-integral-integral] (1) applied to $R[[x]]$ shows that $v$ is almost integral over $R[[x]]$ [def-weil-pbc-almost-integral]: there is a nonzero $h\\in R[[x]]$ with $hv^e\\in R[[x]]$ for all $e\\ge0$. Write $\\iota(h)=b_mx^m+b_{m+1}x^{m+1}+\\cdots$ with $m\\ge0$, $b_i\\in R$, $b_m\\ne0$. By the product formula of [def-weil-pbc-laurent-series], the coefficient of $\\tilde\\iota(hv^e)=\\iota(h)\\tilde\\iota(v)^e$ in degree $k<m+ne$ is $0$ and in degree $m+ne$ is $b_mc_n^e$, which is nonzero because $K$ is a field; so $\\tilde\\iota(hv^e)$ has order $m+ne$ and lowest coefficient $b_mc_n^e$. As $hv^e\\in R[[x]]$, $\\tilde\\iota(hv^e)=\\iota(hv^e)$ lies in the image of $\\iota$ (step 2), so $m+ne\\ge0$ and $b_mc_n^e\\in R$ for every $e\\ge0$. If $n<0$ then $m+ne<0$ for $e=m+1$, a contradiction; hence $n\\ge0$. The relation $b_mc_n^e\\in R$ for all $e\\ge0$ with $b_m\\in R\\setminus\\{0\\}$ says that $c_n\\in K$ is almost integral over $R$ [def-weil-pbc-almost-integral]; since $R$ is Noetherian [def-weil-pbc-noetherian-ring], [lem-weil-pbc-almost-integral-integral] (2) shows that $c_n$ is integral over $R$, and since $R$ is a normal domain [def-weil-pbc-normal-ring], $c_n\\in R$.",
+   "uses": [
+    "lem-weil-pbc-power-series-domain",
+    "lem-weil-pbc-almost-integral-integral",
+    "def-weil-pbc-almost-integral",
+    "def-weil-pbc-laurent-series",
+    "def-weil-pbc-noetherian-ring",
+    "def-weil-pbc-normal-ring"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra, proof of Lemma Tag 0BI0 (lemma-power-series-over-Noetherian-normal-domain), lines 8164-8170: 'By Lemma lemma-almost-integral (00GX) we see there exists a nonzero element $h = b_m x^m + \\ldots$ in $R[[x]]$ with $b_m \\neq 0$ such that $w^e h \\in R[[x]]$ for all $e \\geq 1$. We conclude that $n \\geq 0$ and that $b_m a_n^e \\in R$ for all $e \\geq 1$. Since $R$ is Noetherian this implies that $a_n \\in R$ by the same lemma.' (the last sentence also uses that $R$ is normal: 00GX gives integrality, normality gives membership)"
+   }
+  },
+  {
+   "text": "Let $w\\in\\operatorname{Frac}(R[[x]])$ be integral over $R[[x]]$ and write $\\tilde\\iota(w)=\\sum_ia_ix^i$ ($a_i\\in K$). We show by induction on $N\\ge0$ the statement $P(N)$: $a_i=0$ for all $i<0$ and $a_i\\in R$ for $0\\le i<N$. $P(0)$: if $w=0$ there is nothing to show; otherwise the claim of step 3 applied to $v=w$ gives that the order of $\\tilde\\iota(w)$ is $\\ge0$. $P(N)\\Rightarrow P(N+1)$: by $P(N)$, $p=\\sum_{0\\le i<N}a_ix^i$ is an element of $R[[x]]$ (a polynomial with coefficients in $R$), and $\\tilde\\iota(p)=\\iota(p)=\\sum_{0\\le i<N}a_ix^i$. Every element of $R[[x]]$ is integral over $R[[x]]$ and the elements of $\\operatorname{Frac}(R[[x]])$ integral over $R[[x]]$ form a subring [def-weil-pbc-integral-closure], so $w'=w-p$ is integral over $R[[x]]$, and $\\tilde\\iota(w')=\\sum_{i\\ge N}a_ix^i$. If $a_N=0$, then $a_N\\in R$. If $a_N\\ne0$, then $w'\\neq0$ ($\\tilde\\iota$ is injective) and $\\tilde\\iota(w')=a_Nx^N+a_{N+1}x^{N+1}+\\cdots$ has order $N$ and lowest coefficient $a_N$, so step 3 applied to $v=w'$ gives $a_N\\in R$. In both cases $P(N+1)$ holds.",
+   "uses": [
+    "def-weil-pbc-integral-closure",
+    "def-weil-pbc-laurent-series"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra, proof of Lemma Tag 0BI0 (lemma-power-series-over-Noetherian-normal-domain), lines 8170-8173: 'Now, if $a_n, a_{n+1}, \\ldots, a_{N-1} \\in R$, then we can apply the same argument to $w - a_n x^n - \\ldots - a_{N-1} x^{N-1} = a_N x^N + \\ldots$. In this way we see that all $a_i \\in R$' (the source leaves implicit that $w - a_nx^n - \\ldots$ is again integral over $R[[x]]$, which is the subring property of integral elements)"
+   }
+  },
+  {
+   "text": "By step 4, $a_i=0$ for $i<0$ and $a_i\\in R$ for all $i\\ge0$, so $f=\\sum_{i\\ge0}a_ix^i\\in R[[x]]$ and $\\iota(f)=\\tilde\\iota(w)$, i.e. $\\tilde\\iota(f)=\\tilde\\iota(w)$. Since $\\tilde\\iota$ is injective (step 2), $w=f\\in R[[x]]$. With step 1, $R[[x]]$ is a Noetherian integral domain integrally closed in its field of fractions, i.e. a Noetherian normal domain [def-weil-pbc-normal-ring].",
+   "uses": [
+    "lem-weil-pbc-fraction-field-lift",
+    "def-weil-pbc-normal-ring"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra, proof of Lemma Tag 0BI0 (lemma-power-series-over-Noetherian-normal-domain), line 8173: 'In this way we see that all $a_i \\in R$ and the lemma is proved.'"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-power-series-noetherian",
+  "lem-weil-pbc-power-series-domain",
+  "def-weil-pbc-normal-ring",
+  "def-weil-pbc-laurent-series",
+  "lem-weil-pbc-laurent-series-field",
+  "lem-weil-pbc-fraction-field-lift",
+  "lem-weil-pbc-almost-integral-integral",
+  "def-weil-pbc-almost-integral",
+  "def-weil-pbc-noetherian-ring",
+  "def-weil-pbc-integral-closure"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Algebra, Lemma Tag 0BI0 (lemma-power-series-over-Noetherian-normal-domain), proof, lines 8155-8174"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -65,7 +148,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "worker",
@@ -86,5 +169,12 @@
  },
  "chapter": "sec-proper-base-change",
  "unit": "sk-thm-p1",
- "reviewed": "2026-10-10 L: statement checked against 0BI0"
+ "reviewed": "2026-10-10 L: 5 steps checked against 0BI0: Noetherian domain, embedding into K((x)) extended to the fraction field, the lowest coefficient of an integral element is almost integral hence in R (00GX and normality), induction on coefficients using that integral elements form a subring",
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "lem-weil-pbc-power-series-normal-domain",
+  "worker": "stage1",
+  "summary": "Split following the proof of Stacks 0BI0 (algebra.tex 8149-8174), all tags checked in tags/tags (0BI0, 00GW definition-almost-integral, 00GX lemma-almost-integral, 0306 lemma-Noetherian-power-series). Step 1: Noetherian (existing leaf lem-weil-pbc-power-series-noetherian) and domain (existing leaf lem-weil-pbc-power-series-domain; the source omits that R[[x]] is a domain). Step 2: the embedding Frac(R[[x]]) into K((x)), which the source leaves implicit, made explicit with three new Mathlib leaves (def-weil-pbc-laurent-series, lem-weil-pbc-laurent-series-field, lem-weil-pbc-fraction-field-lift). Step 3: the lowest-term argument as a claim for any nonzero integral v, with 00GX split into two new leaves (def-weil-pbc-almost-integral for 00GW, lem-weil-pbc-almost-integral-integral for 00GX parts 2 and 3); the source's 'by the same lemma' also needs normality of R, written out. Step 4: the source's induction set up as P(N), using the subring property of integral elements (def-weil-pbc-integral-closure) that the source leaves implicit. Step 5: conclusion by injectivity of the embedding. No slopmaster2 declaration states the item (grep of WeilConjectures for the id, IsIntegrallyClosed with PowerSeries, LaurentSeries/IsAlmostIntegral: none relevant); Mathlib has no IsIntegrallyClosed (PowerSeries R) (searches recorded on the item).",
+  "blueprint": "The item is not a blueprint node; its ancestor lem-weil-pbc-normal-constant-generic reaches it through the chain in blueprint.from.via, at the sentence of the proof of Algebra 032Q 'By Lemma lemma-power-series-over-Noetherian-normal-domain we see that $R'[[x]]$ is a normal domain'. Steps 1-5 realize that cited lemma entirely: steps 1 and 5 its conclusion (Noetherian normal domain), steps 2-4 the argument through Laurent series and almost integrality that the sentence takes from 0BI0. blueprint_refs.py search (almost integral, 00GX, 0BI0, Laurent series, power series normal, integrally closed power, Noetherian normal domain power, completely normal): no blueprint node states the item, so same_as = []."
+ }
 }
