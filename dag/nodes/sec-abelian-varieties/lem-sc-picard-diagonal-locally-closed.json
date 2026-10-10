@@ -24,9 +24,64 @@
   "def-weil-scheme-over-base",
   "def-sbc-locally-finite-presentation"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "The universal pushforward hypothesis gives $H^0(X_s,\\mathcal O_{X_s})=\\kappa(s)$ for every field-valued fibre, so a nontrivial open-and-closed decomposition of a fibre would give a nontrivial idempotent in this field. Thus every fibre is connected and the locally constant rank of $\\mathcal E$ is constant on it. For each $r$, let $V_r\\subseteq X$ be the open-and-closed locus where $\\mathcal E$ has rank $r$. The image $S_r=f(V_r)$ is open by [lem-weil-pbc-flat-lfp-open] and closed because $V_r\\to S$ is proper and [lem-weil-pbc-proper-closed-image] applies. Connectedness of each fibre makes the $S_r$ disjoint, and their union is $S$ because every fibre is nonempty ($H^0(X_s,\\mathcal O_{X_s})=\\kappa(s)\\neq0$). Restrict to $S_r$ and write the rank as $r$.",
+   "uses": [
+    "lem-weil-pbc-flat-lfp-open",
+    "lem-weil-pbc-proper-closed-image"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "/home/ubuntu/c1-stacks-review/more-morphisms.tex",
+    "place": "Tag 0BDP proof, rank decomposition paragraph"
+   }
+  },
+  {
+   "text": "The sheaves $\\mathcal E$ and $\\mathcal E^\\vee=\\mathcal{H}om(\\mathcal E,\\mathcal O_X)$ are finite locally free, hence of finite presentation and flat over $S$ because $f$ is flat. By [lem-pc-rf-perfect-base-change], $E=Rf_*\\mathcal E$ and $E'=Rf_*\\mathcal E^\\vee$ are perfect and $Lg^*E\\cong Rp_*q^*\\mathcal E$, $Lg^*E'\\cong Rp_*q^*\\mathcal E^\\vee$ for every $g:T\\to S$; in particular $p_*q^*\\mathcal E=H^0(Lg^*E)$ and $p_*q^*\\mathcal E^\\vee=H^0(Lg^*E')$. Since $Lg^*E$ has no cohomology in negative degrees for every $g$ (in particular for $g=\\operatorname{Spec}\\kappa(s)\\to S$), a perfect complex with this property has, locally on $S$, tor-amplitude in $[0,b]$ for some $b$ (represent it near $s$ by a complex of finite free modules that is minimal at $s$, as in the Tag 0BDP proof); the construction below is local on $S$ and glues by its universal property. Apply [lem-sc-perfect-h0-locally-closed] with $a=0$ and the rank $r$ to $E$ and to $E'$, obtaining immersions $Z\\to S$, $Z'\\to S$ of finite presentation, and replace $S$ by $Z\\times_SZ'$ (the next step shows that every $g$ admitting an $\\mathcal N$ factors through both). On this replacement $f_*\\mathcal E$ and $f_*\\mathcal E^\\vee$ are finite locally free of rank $r$ and their formation commutes with arbitrary base change.",
+   "uses": [
+    "lem-pc-rf-perfect-base-change",
+    "lem-sc-perfect-h0-locally-closed"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "/home/ubuntu/c1-stacks-review/more-morphisms.tex",
+    "place": "Tag 0BDP proof, perfect direct-image and locally closed locus paragraphs"
+   }
+  },
+  {
+   "text": "Let $g:T\\to S$. If $q^*\\mathcal E\\cong p^*\\mathcal N$ with $\\mathcal N$ finite locally free, then by [lem-pc-projection-formula] and the item's hypothesis $\\mathcal O_T\\cong p_*\\mathcal O_{X_T}$ we get $p_*q^*\\mathcal E\\cong\\mathcal N\\otimes p_*\\mathcal O_{X_T}\\cong\\mathcal N$ and likewise $p_*q^*\\mathcal E^\\vee\\cong\\mathcal N^\\vee$, of rank $r$, and this persists after every further base change $T'\\to T$ (the hypothesis holds for $T'\\to S$ too); so $g$ factors through $Z\\times_SZ'$ and the cup-product pairing $p_*q^*\\mathcal E\\otimes p_*q^*\\mathcal E^\\vee\\to\\mathcal O_T$ is perfect. Conversely, if this pairing between the two rank-$r$ bundles is perfect, choose locally on $T$ bases $\\sigma_1,\\dots,\\sigma_r$ and $\\tau_1,\\dots,\\tau_r$ with $\\sigma_i\\tau_j=\\delta_{ij}$; the maps $(\\sigma_i):\\mathcal O_{X_T}^{\\oplus r}\\to q^*\\mathcal E$ and $(\\tau_j):q^*\\mathcal E\\to\\mathcal O_{X_T}^{\\oplus r}$ are inverse, so $q^*\\mathcal E\\cong p^*p_*q^*\\mathcal E$.",
+   "uses": [
+    "lem-pc-projection-formula"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "/home/ubuntu/c1-stacks-review/more-morphisms.tex",
+    "place": "Tag 0BDP proof, cup-product pairing paragraph"
+   }
+  },
+  {
+   "text": "Since $f_*\\mathcal E$ and $f_*\\mathcal E^\\vee$ commute with base change, the cup-product pairing over $T$ is the pullback of the pairing $f_*\\mathcal E\\otimes f_*\\mathcal E^\\vee\\to\\mathcal O_S$, and it is perfect exactly over the open locus of $S$ where its determinant (in local bases) is invertible; this open is retrocompact, so its inclusion is of finite presentation. Composing with the immersion of the preceding step and taking the disjoint union over the rank components $S_r$ gives an immersion $j:Z\\to S$ of finite presentation, and the preceding equivalence says that $g:T\\to S$ factors through $Z$ if and only if $q^*\\mathcal E\\cong p^*\\mathcal N$ for some finite locally free $\\mathcal N$ on $T$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "/home/ubuntu/c1-stacks-review/more-morphisms.tex",
+    "place": "Tag 0BDP proof, final determinant paragraph"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-flat-lfp-open",
+  "lem-weil-pbc-proper-closed-image",
+  "lem-pc-rf-perfect-base-change",
+  "lem-sc-perfect-h0-locally-closed",
+  "lem-pc-projection-formula"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "/home/ubuntu/c1-stacks-review/more-morphisms.tex",
+  "place": "More on Morphisms, Lemma diagonal-picard-flat-proper, Tag 0BDP"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -58,12 +113,41 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-sc-general-theorem-of-cube",
   "by": "worker",
   "date": "2026-10-10"
  },
  "chapter": "sec-abelian-varieties",
- "unit": "sk-prop-av-cube"
+ "unit": "sk-prop-av-cube",
+ "split_report": {
+  "date": "2026-10-11",
+  "item": "lem-sc-picard-diagonal-locally-closed",
+  "worker": "stage1",
+  "summary": "Split Tag 0BDP into the rank decomposition, perfect direct-image and degree-zero locally free loci, the cup-product criterion, and the determinant-open construction. Added the broader Tag 0BDL statement as the only new dependency.",
+  "blueprint": "Realizes thm-sc-theorem-of-cube proof clause obtaining the universal locally closed Picard locus from Tag 0BDP.",
+  "tool_uses": [
+   {
+    "node": "lem-pc-rf-perfect-base-change",
+    "why": "Tag 0BDP requires the generic proper-flat perfect direct-image/base-change theorem, which is not supplied by the cube unit route."
+   },
+   {
+    "node": "lem-pc-projection-formula",
+    "why": "The cup-product identification in Tag 0BDP uses the general derived projection formula, which is not supplied by the cube unit route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pc-rf-perfect-base-change",
+  "lem-pc-projection-formula"
+ ],
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-pdl2958",
+  "group": "G1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-pdl2958 (reviewer sub-agent of L); spot-checked: Item statement unchanged vs Tag 0BDP; citers lem-sc-general-theorem-of-cube and lem-sc-picard-locus-closed use exactly its universal factorization clause; new node lem-sc-perfect-h0-locally-closed matches Tag 0BDL (no other 0BDL node, not in Mathlib per recorded searches); tool_uses rf-perfect-base-change and projection-formula accepted as generic tools. FIX more, RETURN less: (1) C4: step 3 cited lem-sc-proper-flat-global-sections, whose geometrically reduced/connected fibre hypothesis the item does not supply; the identity O_T=p_*O_{X_T} is the item's own hypothesis, so the citation and proof_dep are dropped. (2) C4/E: step 2 applied Tag 0BDL without checking its tor-amplitude [0,b] hypothesis; added the local tor-amplitude argument and the identification p_*q^*E=H^0(Lg^*E). (3) step 1 union=S needs nonempty fibres (added); steps 2-4 rewritten in TeX, step 3 now shows the forward direction persists after base change (needed to replace S by ZxZ'), step 4 states the determinant locus is pulled back and retrocompact.; 1 file(s) fixed by the reviewer"
+ }
 }

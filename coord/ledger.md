@@ -2900,3 +2900,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 22:59 UTC L matched lem-kun-sep-closed-finite-extension-sep-closed to Mathlib Algebra.IsAlgebraic.isSepClosed (R-sfs2950) and lem-kun-sep-closed-finite-extension-purely-inseparable to Algebra.IsAlgebraic.isPurelyInseparable_of_isSepClosed (R-spi2952); F1 and E1 deliveries returned as unneeded
 - 23:01 L: merged deliver/J1/lemma-nagata-morphism-eq-eventually (reviewer FIX; first push; new nodes: 0)
 - 23:01 L: merged deliver/C1/lemma-nagata-qc-open-eq-eventually (reviewer FIX; first push; new nodes: 0)
+- 23:01 L: merged deliver/G1/lem-sc-picard-diagonal-locally-closed (reviewer FIX; first push; new nodes: 1)
