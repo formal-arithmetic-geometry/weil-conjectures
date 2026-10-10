@@ -2120,3 +2120,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 17:30 L: merged deliver/H1/lem-weil-pbc-etale-geometric-fibre-inverse-image-constant (reviewer FIX; first push; new nodes: 1)
 - 17:31 L: merged deliver/K1/lem-sc-affine-derived-pushforward-t-exact (reviewer FIX; first push; new nodes: 2)
 - 17:31 L: merged deliver/M1/lem-sc-p1-tor-dimension-shift-natural (reviewer PASS; first push; new nodes: 0)
+- 17:31 L: returned deliver/E1/lem-weil-pbc-cartesian-eilenberg-functorial (reviewer RETURN: R-cef1735. 1 (D2/D1): the whole content of the item is moved into the new node lem-weil-pbc-cartesian-eilenberg-comparis)
