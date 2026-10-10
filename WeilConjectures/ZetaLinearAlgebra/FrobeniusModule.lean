@@ -83,6 +83,13 @@ structure Equiv (M N : FrobeniusModule.{u, v} K) where
   map_frobenius (x : M.carrier) :
     toLinearEquiv (M.frobenius x) = N.frobenius (toLinearEquiv x)
 
+/-- An isomorphism of Frobenius modules from a linear isomorphism `L` intertwining the two
+Frobenius automorphisms, the intertwining being stated as an equality of linear isomorphisms
+`L ∘ F_M = F_N ∘ L`. -/
+def Equiv.ofTrans {M N : FrobeniusModule.{u, v} K} (L : M.carrier ≃ₗ[K] N.carrier)
+    (h : M.frobenius.trans L = L.trans N.frobenius) : M.Equiv N :=
+  ⟨L, fun x ↦ by simpa only [LinearEquiv.trans_apply] using DFunLike.congr_fun h x⟩
+
 /-- `M` is *`ι`-pure of weight `w` relative to `q`* if every eigenvalue `α` of its geometric
 Frobenius satisfies `|ι α| = q ^ (w / 2)`. -/
 def IsPureOfWeight (ι : K →+* ℂ) (q : ℕ) (M : FrobeniusModule.{u, v} K) (w : ℝ) : Prop :=
