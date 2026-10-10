@@ -33,7 +33,11 @@ open Limits
 variable {C D : Type*} [Category* C] [Category* D] [Abelian C] [Abelian D]
   {L Φ : C ⥤ D} [L.PreservesZeroMorphisms] [Φ.PreservesZeroMorphisms]
 
-/-- A natural retract of a functor preserving exact short complexes preserves them. -/
+/-- A natural retract of a functor preserving exact short complexes preserves them: given
+```
+L ──i──▶ Φ ──r──▶ L
+```
+with `i ≫ r = 𝟙 L`, if `Φ` maps exact short complexes to exact ones, so does `L`. -/
 lemma map_exact_of_retract (i : L ⟶ Φ) (r : Φ ⟶ L) (hir : i ≫ r = 𝟙 L)
     (hΦ : ∀ S : ShortComplex C, S.Exact → (S.map Φ).Exact) (S : ShortComplex C)
     (hS : S.Exact) : (S.map L).Exact := by

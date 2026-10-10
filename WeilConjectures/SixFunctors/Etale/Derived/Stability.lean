@@ -14,6 +14,7 @@ public import Mathlib.Topology.KrullDimension
 public import WeilConjectures.CategoryTheory.Abelian.Flat.Basic
 public import WeilConjectures.CategoryTheory.DerivedCategory.FlatModel
 public import WeilConjectures.ConstructibleSheaf.Defs
+public import WeilConjectures.ConstructibleSheaf.Monoidal
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.FiniteType
 public import WeilConjectures.SixFunctors.Etale.Derived.Dualizing
 public import WeilConjectures.SixFunctors.Etale.Derived.CoefficientsShift
@@ -1306,26 +1307,6 @@ theorem constructibleTorAmplitudeIn_rightDerivedUpperShriek_of_isClosedImmersion
   rwa [show b + 2 * (d : ℤ) + 1 = b + 2 * d + 1 by ring] at this
 
 omit [Finite Λ] in
-/-- A finite locally constant sheaf is constructible, for the stratification with the single
-stratum `X`. -/
-lemma isConstructibleSheaf_of_isFiniteLocallyConstantSheaf {X : Scheme.{u}}
-    (F : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)) [IsFiniteLocallyConstantSheaf F] :
-    IsConstructibleSheaf F := by
-  refine ⟨⟨{ n := 1
-             stratum := fun _ ↦ Set.univ
-             isLocallyClosed_stratum := fun _ ↦ isOpen_univ.isLocallyClosed
-             isConstructible_stratum := fun _ ↦ Topology.IsConstructible.univ
-             iUnion_stratum_eq_univ := Set.iUnion_const _
-             pairwise_disjoint_stratum := fun i j h ↦ (h (Subsingleton.elim i j)).elim
-             domain := fun _ ↦ X
-             immersion := fun _ ↦ 𝟙 X
-             range_immersion := fun _ ↦ Set.range_eq_univ.2 fun x ↦ ⟨x, rfl⟩ }, fun _ ↦ ?_⟩⟩
-  have : IsFiniteLocallyConstantSheaf
-      ((𝟭 (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))).obj F) :=
-    ‹_›
-  exact IsFiniteLocallyConstantSheaf.of_iso ((Etale.upperStarId (ModuleCat.{u + 1} Λ) X).app F).symm
-
-omit [Finite Λ] in
 /-- A locally constant sheaf of free rank-one `Λ`-modules, for a finite `Λ`, is constructible and
 flat. -/
 lemma isConstructibleSheaf_and_flat_of_sheafFiber_iso {X : Scheme.{u}}
@@ -1337,7 +1318,7 @@ lemma isConstructibleSheaf_and_flat_of_sheafFiber_iso {X : Scheme.{u}}
     (ConcreteCategory.isFinitelyGenerated_iff_of_iso (hL Ω s).some).2
       ((ModuleCat.isFinitelyGenerated_iff _).2 inferInstance)⟩
   have : IsFiniteLocallyConstantSheaf L := {}
-  refine ⟨isConstructibleSheaf_of_isFiniteLocallyConstantSheaf Λ L,
+  refine ⟨IsFiniteLocallyConstantSheaf.isConstructibleSheaf ‹_›,
     (flat_iff_forall_flat_sheafFiber_obj L).2 fun {Ω} _ _ s ↦ ?_⟩
   exact ObjectProperty.prop_of_iso _ ((GrothendieckTopology.Point.uliftSheafFiberIso _ _).app L ≪≫
     (hL Ω s).some).symm (ObjectProperty.prop_unit (ObjectProperty.flat (A := ModuleCat.{u + 1} Λ)))

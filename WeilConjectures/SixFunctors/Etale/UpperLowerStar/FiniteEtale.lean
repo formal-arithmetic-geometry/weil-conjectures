@@ -368,7 +368,11 @@ lemma Etale.localizationRestrictionLowerStarAdjunction_counit_app_hom_app
 
 omit [IsGrothendieckAbelian.{u + 1} A] in
 /-- Extension by zero off the graphs is a section of the counit of `f^* ⊣ f_*`, which is
-restriction to the graphs. -/
+restriction to the graphs: the composite
+```
+G ──η_G──▶ f^* f_* G ──ε_G──▶ G
+```
+is the identity of `G`. -/
 @[reassoc (attr := simp)]
 lemma Etale.lowerStarUnit_comp_counit :
     Etale.lowerStarUnit A f ≫ (Etale.localizationRestrictionLowerStarAdjunction A f ‹_›).counit =
@@ -447,7 +451,7 @@ lemma Etale.sheafFiberToLowerStar_stalkRestrict (t : Scheme.Hom.GeometricFiber f
   intro U x
   refine Eq.trans ?_ (Category.comp_id _).symm
   erw [Etale.toPresheafFiber_sheafFiberToLowerStar_assoc]
-  erw [Etale.toPresheafFiber_stalkRestrict A f y t G ⟨_, Etale.fiberMapPoint f t U x⟩]
+  rw [Etale.toPresheafFiber_stalkRestrict A f y t G ⟨_, Etale.fiberMapPoint f t U x⟩]
   have hx : x.left ≫ U.hom = t.1 := CategoryTheory.Over.w x
   have : ((Etale.baseChangeNbhd f y t).obj ⟨_, Etale.fiberMapPoint f t U x⟩).2 =
       (Scheme.pointSmallEtale t.1).fiber.map (Scheme.Etale.graph f U) x := by
@@ -458,7 +462,7 @@ lemma Etale.sheafFiberToLowerStar_stalkRestrict (t : Scheme.Hom.GeometricFiber f
     · change Scheme.Hom.basePt f _ t ≫ _ = (x.left ≫ (Scheme.Etale.graph f U).left) ≫ _
       rw [Category.assoc, Scheme.Etale.graph_left_snd, hx]
       exact pullback.lift_snd _ _ _
-  erw [this]
+  rw [this]
   rw [← (Scheme.pointSmallEtale t.1).toPresheafFiber_w (Scheme.Etale.graph f U) x G.obj]
   exact Scheme.Etale.graphExtend_graph_assoc f G U _
 
@@ -473,7 +477,7 @@ lemma Etale.sheafFiberToLowerStar_stalkRestrict_of_ne {t t' : Scheme.Hom.Geometr
   intro U x
   refine Eq.trans ?_ (comp_zero).symm
   erw [Etale.toPresheafFiber_sheafFiberToLowerStar_assoc]
-  erw [Etale.toPresheafFiber_stalkRestrict A f y t' G ⟨_, Etale.fiberMapPoint f t U x⟩]
+  rw [Etale.toPresheafFiber_stalkRestrict A f y t' G ⟨_, Etale.fiberMapPoint f t U x⟩]
   have hx : x.left ≫ U.hom = t.1 := CategoryTheory.Over.w x
   let b := Scheme.Hom.basePt f ⟨_, Etale.fiberMapPoint f t U x⟩ t'
   -- the point `(u, t')` lies off the graph
@@ -506,9 +510,9 @@ lemma Etale.sheafFiberToLowerStar_stalkRestrict_of_ne {t t' : Scheme.Hom.Geometr
   have : ((Etale.baseChangeNbhd f y t').obj ⟨_, Etale.fiberMapPoint f t U x⟩).2 =
       (Scheme.pointSmallEtale t'.1).fiber.map (Scheme.Etale.graphComplι f U) w :=
     CategoryTheory.Over.OverMorphism.ext (IsOpenImmersion.lift_fac _ _ _).symm
-  erw [this]
+  rw [this]
   rw [← (Scheme.pointSmallEtale t'.1).toPresheafFiber_w (Scheme.Etale.graphComplι f U) w G.obj]
-  erw [Scheme.Etale.graphExtend_graphComplι_assoc f G U]
+  rw [Scheme.Etale.graphExtend_graphComplι_assoc f G U]
   exact zero_comp
 end Stalk
 
@@ -568,7 +572,7 @@ lemma Etale.lowerStarUnit_comp_map_app_π {M : A}
       Etale.sheafFiberToLowerStar A f t G ≫
         ((Scheme.pointSmallEtale y).skyscraperSheafAdjunction.homEquiv _ _).symm φ := by
   erw [GrothendieckTopology.Point.skyscraperSheafAdjunction_homEquiv_symm_apply]
-  erw [Etale.toPresheafFiber_sheafFiberToLowerStar_assoc]
+  rw [Etale.toPresheafFiber_sheafFiberToLowerStar_assoc]
   rw [GrothendieckTopology.Point.toPresheafFiber_skyscraperPresheafHomEquiv_symm]
   rw [ObjectProperty.FullSubcategory.comp_hom, NatTrans.comp_app, Category.assoc]
   rfl
@@ -627,7 +631,7 @@ lemma Etale.bijective_lowerStarUnit_comp_map_skyscraperSheaf (M : A) :
     ext ⟨U⟩ : 3
     refine Pi.hom_ext _ _ fun p ↦ ?_
     obtain ⟨t, x, rfl⟩ := Etale.exists_fiberMapPoint_eq f y p
-    erw [Etale.lowerStarUnit_comp_map_app_π A f y G _ t U x, Equiv.symm_apply_apply]
+    rw [Etale.lowerStarUnit_comp_map_app_π A f y G _ t U x, Equiv.symm_apply_apply]
     have : Etale.sheafFiberToLowerStar A f t G =
         biproduct.ι _ t ≫ Etale.biproductSheafFiberToLowerStar A f y G := by
       simp [Etale.biproductSheafFiberToLowerStar]
