@@ -2388,3 +2388,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 19:27 L: merged deliver/H1/lem-sc-integral-closure-dedekind-surjective-fibres (reviewer FIX; first push; new nodes: 1)
 - 19:28 L: merged deliver/H1/lem-pc-flat-base-change-cohom (reviewer FIX; after a return; new nodes: 2)
 - 19:28 L: merged deliver/E1/lem-sc-smooth-proper-tensor-direct-sums (reviewer FIX; first push; new nodes: 2)
+- 19:29 L: merged deliver/J1/lem-sc-standard-smooth-affine-diagonal-generators (reviewer PASS; first push; new nodes: 4)
