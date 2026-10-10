@@ -2,10 +2,10 @@
  "id": "def-weil-pbc-japanese-domain",
  "kind": "definition",
  "title": "N-1 and N-2 (Japanese) domains",
- "statement": "Let $R$ be an integral domain with field of fractions $K$. (1) $R$ is *N-1* if the integral closure of $R$ in $K$ [def-weil-pbc-integral-closure] is a finitely generated $R$-module [def-weil-finitely-generated-module]. (2) $R$ is *N-2*, or *Japanese*, if for every finite field extension $L/K$ [def-pc-field-extension] (i.e. $\\dim_KL<\\infty$) the integral closure of $R$ in $L$ is a finitely generated $R$-module. Taking $L=K$ shows that an N-2 domain is N-1.",
+ "statement": "Let $R$ be an integral domain with field of fractions $K$. (1) $R$ is *N-1* if the integral closure of $R$ in $K$ [def-weil-pbc-integral-closure] is a finitely generated $R$-module [def-weil-finitely-generated-module]. (2) $R$ is *N-2*, or *Japanese*, if for every finite field extension $L/K$ [def-pc-field-extension] (i.e. $\\dim_KL<\\infty$) the integral closure of $R$ in $L$, where $L$ is an $R$-algebra through the composite $R\\subseteq K\\to L$, is a finitely generated $R$-module. Taking $L=K$ shows that an N-2 domain is N-1.",
  "source": {
   "document": "literature/stacks-project/algebra.tex",
-  "place": "Algebra, Definition Tag 032F (definition-N), line 45135"
+  "place": "Algebra, Definition Tag 032F (label definition-N), line 45135"
  },
  "stmt_deps": [
   "def-weil-pbc-integral-closure",
@@ -57,10 +57,73 @@
    "results": "none, index: unavailable (so not a proof of absence; the grep above is)",
    "date": "2026-10-10",
    "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Japanese domain: the integral closure of a domain in every finite extension of its fraction field is a finite module",
+   "results": "integralClosure.isIntegrallyClosedOfFiniteExtension, IsIntegralClosure.of_isIntegrallyClosed, IsDedekindRing.toIsIntegralClosure, IsDedekindDomainInv.integrallyClosed, IsIntegralClosure.isFractionRing_of_finite_extension, instIsIntegrallyClosedInSubtypeMemSubalgebraIntegralClosure, IsIntegralClosure.finite (Mathlib.RingTheory.DedekindDomain.IntegralClosure), Ring.NormalClosure",
+   "date": "2026-10-10",
+   "verdict": "no match: no predicate N-1/N-2/Japanese; IsIntegralClosure.finite is a sufficient condition (Noetherian integrally closed base, separable L/K), not the definition"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "definition of N-2 ring (Japanese ring): a domain whose integral closure in any finite field extension of its fraction field is finitely generated",
+   "results": "Ring.instFiniteNormalClosure_1, isDedekindRing_iff, Ring.instFiniteNormalClosure, isDedekindDomain_iff, IsIntegralClosure.finite, IsIntegralClosure.isNoetherianRing, Ring.DimensionLEOne.integralClosure, integralClosure.isNoetherianRing",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Japanese\" (name substring; MCP and https://loogle.lean-lang.org/json)",
+   "results": "none (0 hits)",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Nagata\" (name substring)",
+   "results": "none (0 hits)",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "Module.Finite, integralClosure (HTTP API)",
+   "results": "none (0 hits); control query `Module.Finite, IsIntegralClosure` gives 11 hits, first IsIntegralClosure.finite, so the service answered",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rn -i 'japanese\\|IsN1\\|IsN2\\|nagata' --include=*.lean ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib (excluding JapaneseBracket)",
+   "results": "only RingTheory/NoetherNormalization.lean (docstring: Nagata's proof of Noether normalization); no predicate",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rn 'Module.Finite' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/RingTheory/IntegralClosure and grep for IsIntegralClosure.finite",
+   "results": "IsIntegral.of_finite, Algebra.IsIntegral.of_finite (Algebra/Basic.lean:64,72), Module.Finite iff integral + finite type (IsIntegralClosure/Basic.lean:97-103), IsIntegralClosure.finite (DedekindDomain/IntegralClosure.lean:175, read with sed -n 150,182p)",
+   "date": "2026-10-10",
+   "verdict": "no match: finiteness theorems only, no definition"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rn -i 'japanese\\|IsN2\\|IsN1\\|Nagata' ~/weil-conjectures-slopmaster2/WeilConjectures",
+   "results": "only blueprint labels nagata-blowup-* / nagata-global-blowup-* (Nagata compactification, Blowup/*.lean); no N-1/N-2 predicate",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "local_search",
+   "query": "IsJapanese (project ~/weil-conjectures-slopmaster2)",
+   "results": "none, index: unavailable (not a proof of absence; the greps are)",
+   "date": "2026-10-10",
+   "verdict": "no match"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "worker",
@@ -80,5 +143,18 @@
   }
  },
  "chapter": "sec-proper-base-change",
- "unit": "sk-thm-p1"
+ "unit": "sk-thm-p1",
+ "mathlib_candidate": "No named predicate. Clause by clause the definition is a combination of Mathlib notions, not one declaration: N-1 is `Module.Finite R (integralClosure R K)` with `[IsDomain R] [Field K] [Algebra R K] [IsFractionRing R K]` (integralClosure: Mathlib/RingTheory/IntegralClosure/Algebra/Basic.lean:216, read with sed -n 210,222p; Module.Finite: Mathlib/RingTheory/Finiteness/Defs.lean:117; IsFractionRing: Mathlib/RingTheory/Localization/FractionRing.lean:53); N-2 is `∀ (L : Type u) [Field L] [Algebra K L] [Algebra R L] [IsScalarTower R K L] [FiniteDimensional K L], Module.Finite R (integralClosure R L)`, which has to be written as a new definition (quantification over a universe of fields L, the scalar-tower compatibility). The closest declaration, IsIntegralClosure.finite (Mathlib/RingTheory/DedekindDomain/IntegralClosure.lean:175, read with sed -n 150,182p), is a theorem giving the N-2 conclusion only for Noetherian integrally closed R and separable L/K; it is not the definition. Not a leaf (B8).",
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "def-weil-pbc-japanese-domain",
+  "worker": "stage1",
+  "summary": "Checked the statement against Stacks 032F (algebra.tex, label definition-N, line 45135; tag verified in tags/tags line 4018): domain R with fraction field K; N-1: integral closure in K finite over R; N-2/Japanese: for every finite extension L/K the integral closure of R in L finite over R. The statement agrees clause by clause; the only change is the explicit R-algebra structure on L (through R ⊆ K → L), so that def-weil-pbc-integral-closure, stated for any ring map R → S, applies verbatim. Stacks' 'finite R-module' is def-weil-finitely-generated-module, which also covers dim_K L < ∞ (finite K-module); field extension is def-pc-field-extension. The remark 'N-2 implies N-1' is the instance L = K of the definition, not a separate claim. Citers checked: def-weil-pbc-nagata-ring (N-2 for R/p and for finite type domains), lem-weil-pbc-nagata-universally-japanese (restates N-2 inline, consistent), lem-weil-pbc-finite-type-z-domain-normalization-finite (uses N-2 of Z/p, N-2 of A, and L = K); all use the definition as stated. Mathlib: no N-1/N-2/Japanese predicate (LeanSearch, LeanFinder, Loogle, grep, local_search recorded); candidate recorded in mathlib_candidate."
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "result": "accepted",
+  "note": "definition checked against Stacks 032F clause by clause; L made an R-algebra through K in (2) so that the integral-closure definition applies. No Mathlib definition of N-1/N-2 (candidate: Module.Finite R (integralClosure R K) for N-1; IsIntegralClosure.finite is a theorem under separability). Status split."
+ }
 }
