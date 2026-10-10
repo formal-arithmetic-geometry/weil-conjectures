@@ -26,9 +26,56 @@
   "def-weil-geometric-point",
   "def-weil-pbc-geometric-stalks"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "For each etale object $U\\to S$, the inclusion $H(U)\\subseteq\\{\\ast\\}$ makes $H(U)$ either empty or a singleton. Let $W$ be the union, over all etale objects $U\\to S$ and elements of $H(U)$, of the image of $U\\to S$. This is open because etale morphisms are open. The construction is independent of the chosen element, since the final sheaf has only one section.",
+   "uses": [
+    "def-weil-pbc-etale-sheaf-of-sets",
+    "lem-weil-pbc-etale-morphism-open-map"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Lemma Tag 04HV (lemma-support-subsheaf-final), proof, construction of the open locus"
+   }
+  },
+  {
+   "text": "If $V\\to S$ is etale and $H(V)$ is nonempty, then its image is contained in $W$ by construction. Conversely, if the image of $V$ is contained in $W$, every point of $V$ has an etale neighbourhood whose map to $S$ is one of the objects used in the union defining $W$; pulling back the corresponding singleton section gives a section of $H$ on an etale covering of $V$. On overlaps these sections agree because $H$ is a subsheaf of the final sheaf, so the sheaf equalizer condition glues them to a unique element of $H(V)$. Thus $H(V)$ is a singleton exactly when $V\\to S$ factors through the open subscheme $W$.",
+   "uses": [
+    "def-weil-pbc-etale-sheaf-of-sets",
+    "lem-weil-pbc-etale-morphism-open-map"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Lemma Tag 04HV (lemma-support-subsheaf-final), proof, local sections and sheaf gluing"
+   }
+  },
+  {
+   "text": "The open subscheme is unique: if $W'$ has the same factorization property, apply it to the open immersion $W\\to S$ to get $W\\subseteq W'$, and apply the stated property for $W$ to the open immersion $W'\\to S$ to get $W'\\subseteq W$. For a geometric point $\\bar{x}$, the stalk $H_{\\bar{x}}$ is nonempty exactly when some pointed etale neighbourhood of $\\bar{x}$ has a section of $H$, which is exactly the condition that the image point lies in the union defining $W$. Since $H_{\\bar{x}}$ is a subsingleton, nonempty is equivalent to being a singleton.",
+   "uses": [
+    "def-weil-pbc-etale-sheaf-of-sets",
+    "def-weil-pbc-geometric-stalks",
+    "def-weil-geometric-point"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Lemma Tag 04HV (lemma-support-subsheaf-final), proof, uniqueness and stalk criterion"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-etale-sheaf-of-sets",
+  "lem-weil-pbc-etale-morphism-open-map",
+  "def-weil-pbc-geometric-stalks",
+  "def-weil-geometric-point"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Lemma Tag 04HV (lemma-support-subsheaf-final), proof"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -53,10 +100,25 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-weil-pbc-etale-sections-equal-open",
   "by": "worker",
   "date": "2026-10-10"
+ },
+ "split_report": {
+  "date": "2026-10-11",
+  "item": "lem-weil-pbc-etale-subsheaf-final-open",
+  "worker": "stage1",
+  "summary": "Split Stacks Tag 04HV into the union-of-images construction of W, the local etale covering and sheaf-gluing argument proving the factorization criterion, and uniqueness plus the geometric-stalk criterion. No new node was needed; openness of etale images is cited from the existing lem-weil-pbc-etale-morphism-open-map.",
+  "blueprint": "Realizes the Tag 04HV proof place recorded in the item's blueprint ancestor lemma-weil-pbc-proper-underived-exchange."
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-sfo1756",
+  "group": "F1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-sfo1756 (reviewer sub-agent of L); spot-checked: No cycle: sections-equal-open appears only in blueprint.from.via and created.item, not in uses/proof_deps/stmt_deps. Step1 union of etale images open via etale-open-map; Step2 cover V by V x_S U (etale, H nonempty by restriction), glue subsingleton sections by sheaf equalizer; Step3 uniqueness by testing open immersions, stalk criterion from pointed neighbourhoods (x in W gives (W,xbar) with H(W) singleton; conversely image of U contains x), filtered colimit of subsingletons is subsingleton. Matches Tag 04HV. No new nodes. Second reading missed no fault."
  }
 }
