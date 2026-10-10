@@ -1,8 +1,8 @@
 # Work queue
 
-903 items; claim with `tools/claim.py next <group> [--stage N]`.
+908 items; claim with `tools/claim.py next <group> [--stage N]`.
 
-## Stage 1: nodes to split (331)
+## Stage 1: nodes to split (336)
 
 | node | distance to a target | Lean state on the done branch |
 |---|---|---|
@@ -21,15 +21,16 @@
 | `lem-sc-abelian-sheaf-short-exact-stalkwise` | 2013 | none |
 | `lem-sc-boundary-cech-local-lifts` | 2013 | none |
 | `lem-sc-cech-h1-map-natural` | 2013 | none |
-| `lem-sc-closed-pushforward-abelian-stalks` | 2013 | none |
 | `lem-sc-closed-pushforward-boundary-naturality` | 2013 | none |
 | `lem-sc-finite-sections-cover-qc` | 2013 | none |
-| `lem-sc-invert-s-cohomology` | 2013 | none |
 | `lem-sc-tensor-globally-generated` | 2013 | none |
 | `lem-sc-tensor-section-affine-open` | 2013 | none |
 | `lem-sc-torsor-h1-boundary-representative` | 2013 | none |
 | `lem-sc-torsor-h1-ext-pushforward` | 2013 | none |
 | `lem-sc-torsor-h1-ext-pushout` | 2013 | none |
+| `lem-sc-invert-s-cohomology-affine-case` | 2014 | none |
+| `lem-sc-invert-s-cohomology-gluing` | 2014 | none |
+| `lem-sc-invert-s-cohomology-induction` | 2014 | none |
 | `lem-weil-pbc-complex-spectral-sequence-comparison` | 3006 | none |
 | `lem-weil-pbc-finite-coproduct-cohomology-assembly` | 3006 | none |
 | `lem-weil-pbc-hypercohomology-e1-pullback-functorial` | 3006 | none |
@@ -42,7 +43,11 @@
 | `lem-weil-pbc-etale-site-localization-open` | 3009 | none |
 | `lem-exc-etale-coproduct-etale` | 3010 | none |
 | `lem-exc-etale-field-galois-classification` | 3010 | none |
-| `lem-sc-point-tangent-separation-closed-immersion` | 3010 | none |
+| `lem-sc-finite-type-nonclosed-closure-closed-points` | 3011 | none |
+| `lem-sc-point-tangent-closed-fibre-singleton` | 3011 | none |
+| `lem-sc-point-tangent-cotangent-surjective` | 3011 | none |
+| `lem-sc-point-tangent-finite-local-cotangent-surjective` | 3011 | none |
+| `thm-sc-proper-finite-fibre-finite-neighbourhood` | 3011 | none |
 | `lem-pc-clopen-smooth-proper-curve` | 3012 | none |
 | `lem-pc-fpqc-descend-closed-immersion` | 3012 | none |
 | `lem-pc-global-sections-separable` | 3012 | none |
@@ -915,7 +920,7 @@
 | `lem-weil-pbc-p1-field-dimension-one` | 4 | state |
 | `lem-weil-pbc-projective-space-zero-isomorphism` | 4 | state |
 
-Not open yet: 349 nodes that wait for stage 1, 1135 nodes that wait for a statement dependency.
+Not open yet: 354 nodes that wait for stage 1, 1138 nodes that wait for a statement dependency.
 
 ## Stage 3: modules to prove (0)
 
