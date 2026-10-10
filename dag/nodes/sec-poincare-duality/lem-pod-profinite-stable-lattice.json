@@ -7,7 +7,7 @@
    "place": "step 8 of its split (source: Proposition 1.1.9, first and second bullets, p. 2 (lisse E-sheaves correspond to representations defined over E; any lisse E-sheaf comes from a lisse O_E-sheaf, corresponding to a stable lattice); Weil II (1.1.1) c), p. 147)",
    "via": []
   },
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "A continuous representation of a profinite group stabilizes a lattice",
@@ -19,9 +19,57 @@
  "stmt_deps": [
   "def-weil-l-adic-coefficient-extension"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Choose an E-basis of V and let Lambda_0 be its O_E-span. This is an O_E-lattice. By lem-pod-lattice-stabilizer-open, its stabilizer U in GL_E(V) is open. In the chosen basis, the matrix entries of rho(g) are obtained by evaluating the continuous action map on basis vectors, so rho is continuous for the compact-open topology on linear maps; hence H=rho^{-1}(U) is an open subgroup of G.",
+   "uses": [
+    "lem-pod-lattice-stabilizer-open"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stanford-weil2-seminar/L19.pdf",
+    "place": "Proposition 1.1.9, second bullet, p. 2"
+   }
+  },
+  {
+   "text": "The compact group G is covered by the open cosets gH. A finite subcover gives representatives g_1,...,g_r with G=\\bigcup_i g_iH.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stanford-weil2-seminar/L19.pdf",
+    "place": "Proposition 1.1.9, second bullet, p. 2: the stabilizer has finite index in the profinite group"
+   }
+  },
+  {
+   "text": "Set Lambda=\\sum_i rho(g_i)Lambda_0. It is finitely generated and contains Lambda_0, so it spans V over E. It is torsion-free because it is a submodule of the E-vector space V. Since O_E is a discrete valuation ring, the existing Mathlib leaf lem-sc-dvr-fg-torsionfree-free gives that Lambda is finite free, hence an O_E-lattice. For g\\in G and each i, write gg_i=g_jh with h\\in H; then rho(g)rho(g_i)Lambda_0=rho(g_j)rho(h)Lambda_0=rho(g_j)Lambda_0, so rho(g)Lambda\\subseteq Lambda. Applying the same inclusion to g^{-1} gives equality.",
+   "uses": [
+    "lem-sc-dvr-fg-torsionfree-free"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stanford-weil2-seminar/L19.pdf",
+    "place": "Proposition 1.1.9, second bullet, pp. 2-3: add the finitely many translates of Lambda_0"
+   }
+  },
+  {
+   "text": "The action map G\\times Lambda\\to Lambda is continuous because it is the restriction of the given continuous map G\\times V\\to V to the subspace Lambda, and its image lies in Lambda by stability. Choose an O_E-basis of Lambda. Then Lambda is identified with O_E^r inside E^r, and the sets varpi_E^n O_E^r form both the m_E-adic neighborhood basis and the subspace neighborhood basis; therefore the two topologies agree.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stanford-weil2-seminar/L19.pdf",
+    "place": "Proposition 1.1.9, second bullet, p. 3"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-pod-lattice-stabilizer-open",
+  "lem-sc-dvr-fg-torsionfree-free"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stanford-weil2-seminar/L19.pdf",
+  "place": "Proposition 1.1.9, second bullet, pp. 2-3"
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -39,7 +87,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "worker",
@@ -59,5 +107,22 @@
   }
  },
  "chapter": "sec-poincare-duality",
- "unit": "sk-lem-finite"
+ "unit": "sk-lem-finite",
+ "split_report": {
+  "date": "2026-10-11",
+  "item": "lem-pod-profinite-stable-lattice",
+  "worker": "stage1",
+  "summary": "Split the compact-group invariant-lattice argument into four steps. The only non-elementary auxiliary fact is the openness of the stabilizer of a fixed lattice, recorded as lem-pod-lattice-stabilizer-open; finite torsion-free modules over O_E use the existing Mathlib leaf lem-sc-dvr-fg-torsionfree-free. The source and hypotheses were checked against Stanford Weil II seminar Lecture 19, Proposition 1.1.9.",
+  "blueprint": [
+   "step 8 of cor-galois-lisse-representations: choose an initial lattice, use its open stabilizer to obtain finitely many translates, and take their O_E-span"
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-psl2618",
+  "group": "H1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-psl2618 (reviewer sub-agent of L); spot-checked: Read packet whole. C4 citer: cor-galois-lisse-representations step 8 uses a pi_1-stable lattice (rho(g)Lambda=Lambda for all g) with continuous m_E-adic action, matching def-pod-l-adic-representations (1)/(2); item's compact-G hypothesis covers profinite pi_1; continuity/lattice notions are inlined in the statement and agree with that def. C4 lem-sc-dvr-fg-torsionfree-free: O_E is a DVR by def-weil-l-adic-coefficient-extension (2). D: coset argument gg_i=g_jh correct, g^{-1} gives equality, Lambda spans (contains rho(g_i)Lambda_0); step 4 topology identification correct. New node lem-pod-lattice-stabilizer-open: true, well-typed, not class (b) (grep dag/nodes for lattice/compact/GL open: no existing node), not (c) (my grep of slopmaster2 Mathlib for isOpen stabilizer/GL: only stabilizer_isOpen for discrete X, no match), not (d) (needs freeness of Lambda_0, compact-open = entrywise topology, det/inverse argument). No repairs. Second reading by H1: no fault missed."
+ }
 }
