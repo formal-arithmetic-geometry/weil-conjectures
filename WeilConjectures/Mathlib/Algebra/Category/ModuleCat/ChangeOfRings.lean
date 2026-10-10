@@ -6,6 +6,10 @@ Authors: Claude
 module
 
 public import Mathlib.Algebra.Category.ModuleCat.ChangeOfRings
+public import Mathlib.LinearAlgebra.TensorProduct.Basis
+public import Mathlib.RingTheory.TensorProduct.Free
+public import Mathlib.RingTheory.TensorProduct.Basic
+public import Mathlib.Algebra.Field.Basic
 
 /-!
 # Extension of scalars along an algebra map as a tensor product
@@ -75,3 +79,33 @@ lemma ModuleCat.tensorEquivExtendScalars_tmul (R S : Type u) [CommRing R] [CommR
         (M := (ModuleCat.restrictScalars (algebraMap R S)).obj (ModuleCat.of S S))
         s n :=
   rfl
+
+/-- Let `A` be a `k`-algebra and `K/k` a field extension with a basis `bK`. For an `A`-module `N`,
+the extension of scalars of `N` along `A ⟶ A ⊗[k] K` is the direct sum of copies of `N` indexed
+by the basis, `(1 ⊗ bK b) ⊗ x` corresponding to `x` in the summand `b`. -/
+lemma ModuleCat.exists_addEquiv_extendScalars_includeLeft {k A : Type u} [Field k] [CommRing A]
+    [Algebra k A] {K : Type u} [Field K] [Algebra k K] {ι : Type u} (bK : Module.Basis ι k K)
+    (N : ModuleCat.{u} A) :
+    ∃ E : (ModuleCat.extendScalars (Algebra.TensorProduct.includeLeftRingHom :
+          A →+* A ⊗[k] K)).obj N ≃+ (ι →₀ N), ∀ (b : ι) (x : N),
+      E (((1 : A) ⊗ₜ[k] bK b : A ⊗[k] K) ⊗ₜ[A] x) = Finsupp.single b x := by
+  classical
+  let f : A →+* A ⊗[k] K := Algebra.TensorProduct.includeLeftRingHom
+  let P := (ModuleCat.restrictScalars f).obj (ModuleCat.of (A ⊗[k] K) (A ⊗[k] K))
+  let e : (A ⊗[k] K) ≃ₗ[A] P :=
+    { toFun := fun x ↦ (x : A ⊗[k] K)
+      invFun := fun x ↦ (x : A ⊗[k] K)
+      map_add' := fun _ _ ↦ rfl
+      map_smul' := fun a x ↦ by
+        change a • x = f a * x
+        rw [Algebra.smul_def]
+        rfl
+      left_inv := fun _ ↦ rfl
+      right_inv := fun _ ↦ rfl }
+  let 𝒞 : Module.Basis ι A P := (Algebra.TensorProduct.basis A bK).map e
+  refine ⟨(TensorProduct.equivFinsuppOfBasisLeft (N := N) 𝒞).toAddEquiv, fun b x ↦ ?_⟩
+  have h𝒞 : 𝒞 b = e ((1 : A) ⊗ₜ[k] bK b) := by
+    simp only [𝒞, Module.Basis.map_apply, Algebra.TensorProduct.basis_apply]
+  change TensorProduct.equivFinsuppOfBasisLeft 𝒞 (e ((1 : A) ⊗ₜ[k] bK b) ⊗ₜ x) = _
+  rw [← h𝒞, TensorProduct.equivFinsuppOfBasisLeft_apply_tmul, Module.Basis.repr_self,
+    Finsupp.mapRange_single, one_smul]

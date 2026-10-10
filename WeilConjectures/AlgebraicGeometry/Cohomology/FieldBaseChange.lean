@@ -120,6 +120,41 @@ lemma opensRange_openImm {W : X.Opens} (hW : IsAffineOpen W) :
       (isPullback_openImm k K hW).isoPullback.hom.base).2, Set.image_univ,
     IsOpenImmersion.range_pullbackFst, hW.opensRange_fromSpec]
 
+variable {k K} {W : X.Opens} (hW : IsAffineOpen W) (M : X.Modules)
+
+open Modules
+
+lemma top_le_fromSpec_preimage : (⊤ : (Spec Γ(X, W)).Opens) ≤ hW.fromSpec ⁻¹ᵁ W :=
+  hW.fromSpec_preimage_self.ge
+
+/-- The sections of `M` over the affine open `W` are the global sections of its pullback to
+`Spec Γ(X, W)`. -/
+noncomputable def sectionsEquiv : Γ(M, W) ≃ₗ[Γ(X, W)]
+    Γ((Modules.pullback hW.fromSpec).obj M, ⊤) := by
+  refine LinearEquiv.ofBijective
+    { toFun m := ((Modules.pullback hW.fromSpec).obj M).presheaf.map
+        (homOfLE (top_le_fromSpec_preimage hW)).op (pullbackUnitApp hW.fromSpec M W m)
+      map_add' _ _ := by rw [map_add, map_add]
+      map_smul' a m := ?_ } ?_
+  · change _ = a • _
+    rw [pullbackUnitApp_smul, Modules.map_smul]
+    rw [smul_Spec_def, hW.fromSpec_app_self]
+    congr 1
+  · have h₁ := bijective_pullbackUnit_app_of_isOpenImmersion hW.fromSpec M
+      hW.opensRange_fromSpec.ge
+    have : IsIso (homOfLE (top_le_fromSpec_preimage hW)) := by
+      rw [show homOfLE (top_le_fromSpec_preimage hW) = eqToHom hW.fromSpec_preimage_self.symm
+        from Subsingleton.elim _ _]
+      infer_instance
+    exact (ConcreteCategory.bijective_of_isIso
+      (((Modules.pullback hW.fromSpec).obj M).presheaf.map
+        (homOfLE (top_le_fromSpec_preimage hW)).op)).comp h₁
+
+lemma sectionsEquiv_apply (m : Γ(M, W)) : sectionsEquiv hW M m =
+    ((Modules.pullback hW.fromSpec).obj M).presheaf.map
+      (homOfLE (top_le_fromSpec_preimage hW)).op (pullbackUnitApp hW.fromSpec M W m) :=
+  rfl
+
 end BaseChangeField
 
 end AlgebraicGeometry.Scheme

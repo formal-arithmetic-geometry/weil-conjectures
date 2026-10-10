@@ -37,6 +37,12 @@ namespace AlgebraicGeometry.Scheme.Modules
 
 variable {X Y Z : Scheme.{u}}
 
+/-- The unit of `f^* ⊣ f_*` on sections is semilinear along `f.app U`. -/
+lemma pullbackUnitApp_smul (f : Y ⟶ X) (M : X.Modules) (U : X.Opens) (a : Γ(X, U))
+    (m : Γ(M, U)) :
+    pullbackUnitApp f M U (a • m) = f.app U a • pullbackUnitApp f M U m :=
+  Hom.app_smul (pullbackUnit f M) a m
+
 /-- The comparison `pullbackCompOfEq` on sections over an open `V` contained in the preimage of
 `U`, in the image of the units: `(η_g (η_f m))|_V ↦ (η_fg m)|_V`. -/
 lemma pullbackCompOfEq_hom_app_map_pullbackUnit (g : Z ⟶ Y) (f : Y ⟶ X) (fg : Z ⟶ X)
