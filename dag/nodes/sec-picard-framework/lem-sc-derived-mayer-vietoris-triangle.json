@@ -13,7 +13,7 @@
  },
  "kind": "statement",
  "title": "Distinguished Mayer–Vietoris triangle from extension by zero",
- "statement": "Let (X, O_X) be a ringed space [def-weil-locally-ringed-space-morphism], let X = U union V be a cover by open subspaces, and let D(O_X) denote the derived category of sheaves of O_X-modules [def-weil-sheaf-of-modules-category, def-weil-abstract-derived-category]. For E in D(O_X), write j_U, j_V, and j_{UV} for the open inclusions and j_! for exact extension by zero [lem-sc-derived-open-restriction-adjunction-exact]. There is a distinguished triangle j_{UV,!}(E restricted to U intersection V) \\to j_{U,!}(E restricted to U) direct-sum j_{V,!}(E restricted to V) \\to E \\to j_{UV,!}(E restricted to U intersection V)[1], whose first map is the difference of the two extension-by-zero restriction maps and whose second map is the pair of counits.",
+ "statement": "Let $(X,\\mathcal O_X)$ be a ringed space [def-weil-locally-ringed-space-morphism], let $X=U\\cup V$ with $U,V\\subseteq X$ open, and let $D(\\mathcal O_X)$ be the derived category of sheaves of $\\mathcal O_X$-modules [def-weil-sheaf-of-modules-category, def-weil-abstract-derived-category]. For $E\\in D(\\mathcal O_X)$, let $j_U:U\\hookrightarrow X$, $j_V:V\\hookrightarrow X$, and $j_{UV}:U\\cap V\\hookrightarrow X$ be the open inclusions, and write $j_!$ for the exact extension-by-zero functor [lem-sc-derived-open-restriction-adjunction-exact], applied termwise to complexes to act on derived categories [lem-sc-derived-open-shriek-derived-adjunction]. Then there is a distinguished triangle\n$$\n j_{UV,!}(E|_{U\\cap V}) \\longrightarrow j_{U,!}(E|_U)\\oplus j_{V,!}(E|_V) \\longrightarrow E \\longrightarrow j_{UV,!}(E|_{U\\cap V})[1].\n$$\nThe first map is the difference of the two extension-by-zero restriction maps, the second map is the pair of counits, and the third map is the boundary morphism $\\delta$ that [lem-weil-pbc-complex-ses-triangle] attaches to the degreewise short exact sequence of complexes $0\\to j_{UV,!}(K^\\bullet|_{U\\cap V})\\to j_{U,!}(K^\\bullet|_U)\\oplus j_{V,!}(K^\\bullet|_V)\\to K^\\bullet\\to0$, for any complex $K^\\bullet$ of $\\mathcal O_X$-modules representing $E$.",
  "source": {
   "document": "literature/stacks-project/cohomology.tex",
   "place": "Tag 08BU (cohomology-lemma-exact-sequence-lower-shriek), distinguished triangle for a two-open cover"
@@ -22,11 +22,59 @@
   "def-weil-locally-ringed-space-morphism",
   "def-weil-sheaf-of-modules-category",
   "def-weil-abstract-derived-category",
-  "lem-sc-derived-open-restriction-adjunction-exact"
+  "lem-sc-derived-open-restriction-adjunction-exact",
+  "lem-sc-derived-open-shriek-derived-adjunction",
+  "lem-weil-pbc-complex-ses-triangle"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Choose a representative complex K^bullet for E. Applying the short exact Mayer–Vietoris sequence for extension by zero [lem-sc-derived-open-mayer-vietoris-ses] to each term K^n gives a degreewise short exact sequence of complexes 0 \\to j_{UV,!}(K^bullet restricted to U intersection V) \\to j_{U,!}(K^bullet restricted to U) direct-sum j_{V,!}(K^bullet restricted to V) \\to K^bullet \\to 0. Exactness of each j_! is the hypothesis supplied by [lem-sc-derived-open-restriction-adjunction-exact].",
+   "uses": [
+    "lem-sc-derived-open-mayer-vietoris-ses",
+    "lem-sc-derived-open-restriction-adjunction-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/cohomology.tex",
+    "place": "Tag 08BU proof, exact sequence of complexes obtained termwise from the lower-shriek short exact sequence"
+   }
+  },
+  {
+   "text": "Apply the generic theorem that a degreewise short exact sequence of complexes in an abelian category gives a distinguished triangle whose third map is its boundary morphism delta [lem-weil-pbc-complex-ses-triangle]. The resulting triangle in D(O_X) is j_{UV,!}(E restricted to U intersection V) \\to j_{U,!}(E restricted to U) direct-sum j_{V,!}(E restricted to V) \\to E \\to j_{UV,!}(E restricted to U intersection V)[1], with third map the boundary morphism delta of the sequence of Step 1, as stated.",
+   "uses": [
+    "lem-weil-pbc-complex-ses-triangle"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/cohomology.tex",
+    "place": "Tag 08BU, distinguished triangle associated to the lower-shriek short exact sequence"
+   }
+  },
+  {
+   "text": "The first map is the difference map and the second map is the pair of counits by the defining maps in the short exact sequence [lem-sc-derived-open-mayer-vietoris-ses]. The exact extension-by-zero and restriction functors induce the corresponding derived functors computed termwise, so the displayed terms are the stated derived functors of the restrictions of E [lem-sc-derived-open-shriek-derived-adjunction].",
+   "uses": [
+    "lem-sc-derived-open-mayer-vietoris-ses",
+    "lem-sc-derived-open-restriction-adjunction-exact",
+    "lem-sc-derived-open-shriek-derived-adjunction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/cohomology.tex",
+    "place": "Tag 08BU proof, identification of the two maps and passage from complexes to the derived category"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sc-derived-open-mayer-vietoris-ses",
+  "lem-sc-derived-open-restriction-adjunction-exact",
+  "lem-sc-derived-open-shriek-derived-adjunction",
+  "lem-weil-pbc-complex-ses-triangle"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Tag 08BU (cohomology-lemma-exact-sequence-lower-shriek)"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -58,12 +106,37 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-sc-derived-hom-mayer-vietoris",
   "by": "worker",
   "date": "2026-10-10"
  },
  "chapter": "sec-picard-framework",
- "unit": "sk-thm-picard-duality"
+ "unit": "sk-thm-picard-duality",
+ "split_report": {
+  "date": "2026-10-11",
+  "item": "lem-sc-derived-mayer-vietoris-triangle",
+  "worker": "stage1",
+  "summary": "Checked Tag 08BU against the ringed-space statement and split off the underlying short exact sequence of extension-by-zero sheaves. The item proof now applies that sequence degreewise to a representative complex, invokes the existing generic short-exact-complex distinguished-triangle theorem, and identifies the difference and counit maps and derived terms using exactness of j_! and restriction.",
+  "blueprint": "Realizes the proper-flat support proof clause 'use the distinguished Mayer–Vietoris triangle for the two-open cover' through the new short exact extension-by-zero node and the generic SES-to-triangle theorem.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-complex-ses-triangle",
+    "why": "The proof needs the generic derived-category theorem turning a degreewise short exact complex sequence into a distinguished triangle; this is a category-level tool outside the unit route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-complex-ses-triangle",
+  "lem-weil-pbc-complex-ses-triangle"
+ ],
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-dmv3140",
+  "group": "H1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-dmv3140 (reviewer sub-agent of L); spot-checked: Class (d): not a duplicate of lem-pc-derived-mayer-vietoris-triangle (that is Tag 08BV, Rj_* triangle E -> Rj_U* + Rj_V* -> Rj_UV* on qcqs schemes in D_QCoh; this is Tag 08BU, j_! triangle on any ringed space in D(O_X)); new SES node duplicates no merged node (checked lem-sc-mayer-vietoris-ringed-space, lem-sc-topological-extension-by-zero-stalks, extension-by-zero nodes). j_! exactness cited (new node + lem-sc-derived-open-restriction-adjunction-exact); triangle built via lem-weil-pbc-complex-ses-triangle (tool use accepted); no functoriality in E claimed. FIX more, RETURN less: (1) C1/C4 item statement did not identify the connecting map: added third map = boundary delta of lem-weil-pbc-complex-ses-triangle for the termwise SES of a representing complex, stmt_deps + that node and lem-sc-derived-open-shriek-derived-adjunction (derived j_!), Step 2 text says so; (2) B3 literal backslash-n sequences in the TeX of the item and the new node statement replaced by newlines; (3) Step 3 'differential' -> 'map'. Second reading missed (1) and (2) and claims a created.item correction that was not made (left as is, maintainer field).; 2 file(s) fixed by the reviewer"
+ }
 }
