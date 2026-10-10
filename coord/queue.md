@@ -1,8 +1,8 @@
 # Work queue
 
-855 items; claim with `tools/claim.py next <group> [--stage N]`.
+857 items; claim with `tools/claim.py next <group> [--stage N]`.
 
-## Stage 1: nodes to split (382)
+## Stage 1: nodes to split (384)
 
 | node | distance to a target | Lean state on the done branch |
 |---|---|---|
@@ -28,7 +28,6 @@
 | `lem-weil-pbc-fpqc-descend-affine` | 1016 | none |
 | `lem-weil-pbc-fpqc-descend-universally-closed` | 1016 | none |
 | `lem-weil-pbc-fs-adic-field-differentials-injective` | 1016 | none |
-| `lem-weil-pbc-power-series-field-cohen-fs-adic` | 1016 | none |
 | `lem-weil-pbc-power-series-parameter-quotient` | 1016 | none |
 | `lem-weil-pbc-projective-dimension-ext-characterization` | 1016 | none |
 | `lem-weil-pbc-tor-one-surjective-flat-middle` | 1016 | none |
@@ -80,6 +79,8 @@
 | `def-sc-divisor` | 3007 | none |
 | `lem-galois-action-continuous` | 3007 | none |
 | `lem-galois-axioms` | 3007 | none |
+| `lem-galois-constant-sheaf-sets-representable` | 3007 | none |
+| `lem-galois-descent` | 3007 | none |
 | `lem-galois-object-exists` | 3007 | none |
 | `lem-galois-transitive` | 3007 | none |
 | `lem-sc-ample-complement-affine` | 3007 | sorry_here |
@@ -98,6 +99,7 @@
 | `def-sc-function-field` | 3008 | none |
 | `def-sc-picard-functor` | 3008 | none |
 | `lem-exc-field-discrete-modules` | 3008 | none |
+| `lem-galois-glue` | 3008 | none |
 | `lem-pc-curves-are-sc` | 3008 | none |
 | `lem-sc-degree-2g1-very-ample` | 3008 | rests_on_sorry |
 | `lem-sc-group-cd-one` | 3008 | none |
@@ -867,7 +869,7 @@
 | `lem-weil-pbc-p1-field-dimension-one` | 4 | state |
 | `lem-weil-pbc-projective-space-zero-isomorphism` | 4 | state |
 
-Not open yet: 400 nodes that wait for stage 1, 869 nodes that wait for a statement dependency.
+Not open yet: 402 nodes that wait for stage 1, 870 nodes that wait for a statement dependency.
 
 ## Stage 3: modules to prove (0)
 
