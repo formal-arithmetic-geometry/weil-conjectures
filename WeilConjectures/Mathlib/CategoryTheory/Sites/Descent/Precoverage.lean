@@ -189,7 +189,8 @@ two objects `D₁ D₂ : F.DescentData f`, a morphism `φ` between the images in
 `F.DescentData f'` of `D₁` and `D₂` by a functor `pullFunctor`. This is
 a family of elements of the sheaf of morphisms from `D₁.obj i` to `D₂.obj i`
 that is deduced from `φ` over a covering sieve. See `hom` below for the glued
-morphism `D₁.obj i ⟶ D₂.obj i` when `f'` is a covering family and `F` is a prestack. -/
+morphism `D₁.obj i ⟶ D₂.obj i` when `f'` is a covering family and the presheaf of morphisms
+is a sheaf. -/
 noncomputable def familyOfElements (i : ι) :
     Presieve.FamilyOfElements (F.presheafHom (D₁.obj i) (D₂.obj i)) (sieve f f' i).arrows :=
   fun Z q hq ↦
@@ -225,8 +226,8 @@ lemma compatible_familyOfElements (i : ι) :
 include hf' in
 /-- Given two families of morphisms `f : X i ⟶ S` and `f' : X' j ⟶ S`,
 two objects `D₁ D₂ : F.DescentData f`, a morphism `φ` between the images in
-`F.DescentData f'` of `D₁` and `D₂` by a functor `pullFunctor`. When `F`
-is a prestack and `f'` a covering family, this is the morphism `D₁.obj i ⟶ D₂.obj i`
+`F.DescentData f'` of `D₁` and `D₂` by a functor `pullFunctor`. When the presheaf of morphisms
+is a sheaf and `f'` a covering family, this is the morphism `D₁.obj i ⟶ D₂.obj i`
 that is deduced from `φ` by gluing. -/
 noncomputable def hom (i : ι) : D₁.obj i ⟶ D₂.obj i :=
   F.presheafHomObjHomEquiv.symm
