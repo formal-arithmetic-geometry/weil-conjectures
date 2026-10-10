@@ -2338,3 +2338,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 19:08 L: merged deliver/G1/lem-pc-derived-pullback-tensor-qcoh (reviewer FIX+NODE(1); first push; new nodes: 1)
 - 19:08 L: merged deliver/G1/lem-sp-couple-morphism (reviewer FIX+NODE(1); first push; new nodes: 2)
 - 19:08 L: merged deliver/K1/lem-pc-picard-functor-agrees-sc (reviewer PASS; after a return; new nodes: 1)
+- 19:08 L: merged deliver/G1/lem-pc-noetherian-flat-complex-perfect (reviewer FIX; first push; new nodes: 1)
