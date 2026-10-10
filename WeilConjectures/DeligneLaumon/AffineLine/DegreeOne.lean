@@ -7,6 +7,9 @@ module
 
 public import WeilConjectures.DeligneLaumon.AffineLine.FourierWeight
 public import WeilConjectures.DeligneLaumon.AffineLine.Purity
+public import WeilConjectures.Mathlib.AlgebraicGeometry.Geometrically.Connected
+public import WeilConjectures.WeilSheaf.CohomologyShift
+public import WeilConjectures.WeilSheaf.UpperStarExact
 
 /-!
 # The degree-one estimate for an irreducible factor
@@ -107,9 +110,38 @@ theorem WeilSheaf.LisseOnDenseOpen.nonempty_equiv_stalk_fourierTransform_middleE
         (D.directImage.compactlySupportedCohomology 2)) ∧
     ∀ r : ℤ, r ∉ ({-1, 0} : Set ℤ) → Subsingleton ((((WeilComplex.homologySheaf r).obj
       ((fourierTransform ψ).obj D.middleExtension)).stalk (affineLine.origin k₀)).carrier) :=
-  -- TODO(adic): the case of `nonempty_equiv_stalk_homologySheaf_fourierTransform_origin` for
-  -- `K = (j_*M)[1]`, and `H_c^0(𝔸¹, j_*M) = 0`
-  sorry
+  by
+  have : SmoothOfRelativeDimension 1 (affineLine k₀ ↘ Spec (CommRingCat.of k₀)) := by
+    simpa using AffineSpace.smoothOfRelativeDimension_over PUnit.{u + 1} (Spec (.of k₀))
+  have : GeometricallyConnected (affineLine k₀ ↘ Spec (CommRingCat.of k₀)) :=
+    GeometricallyConnected.of_geometricallyIrreducible (𝔸(PUnit.{u + 1}; Spec (.of k₀)) ↘ _)
+  -- the stalk at the origin in degree `r` is `H_c^{r + 2}(𝔸¹, j_*M)`
+  have key (r : ℤ) : Nonempty ((((WeilComplex.homologySheaf r).obj
+      ((fourierTransform ψ).obj D.middleExtension)).stalk (affineLine.origin k₀)).Equiv
+        (D.directImage.compactlySupportedCohomology (r + 1 + 1))) := by
+    obtain ⟨e₁⟩ := nonempty_equiv_stalk_homologySheaf_fourierTransform_origin ψ
+      D.middleExtension r
+    obtain ⟨e₂⟩ := WeilComplex.nonempty_equiv_compactlySupportedCohomology_shift
+      (WeilSheaf.toComplex.obj D.directImage) (r + 1)
+    exact ⟨e₁.trans e₂⟩
+  refine ⟨?_, ?_, fun r hr ↦ ?_⟩
+  · obtain ⟨e⟩ := key (-1)
+    norm_num at e
+    exact ⟨e⟩
+  · obtain ⟨e⟩ := key 0
+    norm_num at e
+    exact ⟨e⟩
+  · obtain ⟨e⟩ := key r
+    have hr' : r + 1 + 1 < 0 ∨ 2 < r + 1 + 1 ∨ r + 1 + 1 = 0 := by
+      simp only [Set.mem_insert_iff, Set.mem_singleton_iff, not_or] at hr
+      omega
+    have hs : Subsingleton (D.directImage.compactlySupportedCohomology (r + 1 + 1)).carrier := by
+      rcases hr' with h | h | h
+      · exact subsingleton_compactlySupportedCohomology_directImage D.j D.sheaf D.lisse (Or.inl h)
+      · exact subsingleton_compactlySupportedCohomology_directImage D.j D.sheaf D.lisse (Or.inr h)
+      · rw [h]
+        exact subsingleton_compactlySupportedCohomology_directImage_zero D.j D.sheaf D.lisse
+    exact e.toLinearEquiv.toEquiv.subsingleton
 
 namespace WeilSheaf.LisseOnDenseOpen
 
@@ -138,7 +170,31 @@ theorem nonempty_equiv_stalk_origin_of_isFourierPartner (ψ : AddChar k₀ (Padi
     Nonempty ((D.directImage.compactlySupportedCohomology 1).Equiv
         (D'.directImage.stalk (affineLine.origin k₀))) ∧
       Subsingleton (D.directImage.compactlySupportedCohomology 2).carrier := by
-  sorry
+  obtain ⟨e⟩ := hFT
+  obtain ⟨h₁, h₂, -⟩ := D.nonempty_equiv_stalk_fourierTransform_middleExtension_origin ψ
+  obtain ⟨e₁⟩ := h₁
+  obtain ⟨e₂⟩ := h₂
+  -- the cohomology sheaves of `(j'_*M')[1]`: `j'_*M'` in degree `-1`, zero in degree `0`
+  let A : (WeilComplex.homologySheaf (-1)).obj ((fourierTransform ψ).obj D.middleExtension) ≅
+      D'.directImage :=
+    (WeilComplex.homologySheaf (-1)).mapIso e ≪≫
+      WeilComplex.homologySheafShiftIso _ 1 (-1) 0 (by norm_num) ≪≫
+      WeilSheaf.toComplexCompHomologySheafIso.app _
+  have : (((WeilSheaf.objectProperty k₀ l (affineLine k₀)).ι ⋙
+      DerivedCategory.singleFunctor (ProEtaleWeilSheaf k₀ l (affineLine k₀)) 0).obj
+        D'.directImage).IsLE 0 :=
+    inferInstanceAs (((DerivedCategory.singleFunctor _ 0).obj D'.directImage.obj).IsLE 0)
+  have : (WeilSheaf.toComplex.obj D'.directImage).obj.IsLE 0 :=
+    DerivedCategory.TStructure.t.isLE_of_iso (WeilSheaf.toComplexCompιIso.app _).symm 0
+  have hz : Limits.IsZero ((WeilComplex.homologySheaf 0).obj
+      ((fourierTransform ψ).obj D.middleExtension)) :=
+    (WeilComplex.isZero_homologySheaf_obj (DerivedCategory.isZero_of_isLE _ 0 1 one_pos)).of_iso
+      ((WeilComplex.homologySheaf 0).mapIso e ≪≫
+        WeilComplex.homologySheafShiftIso _ 1 0 1 (by norm_num))
+  obtain ⟨eA⟩ := WeilSheaf.nonempty_stalkAt_equiv_of_iso _ _ _ A
+  refine ⟨⟨e₁.symm.trans eA⟩, ?_⟩
+  have := WeilSheaf.subsingleton_stalk_of_isZero hz (affineLine.origin k₀)
+  exact e₂.symm.toLinearEquiv.toEquiv.subsingleton
 
 end WeilSheaf.LisseOnDenseOpen
 

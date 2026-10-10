@@ -354,7 +354,26 @@ theorem stalkAt_isPureOfWeight_of_epi {ι : PadicAlgCl l →+* ℂ} {q : ℕ} {w
   FrobeniusModule.IsPureOfWeight.of_surjective _ (stalkAtMap_frobenius s m hs f)
     (surjective_stalkAtMap s m hs f) h
 
+/-- Isomorphic Weil sheaves have equivalent stalks, with their Frobenius. -/
+theorem nonempty_stalkAt_equiv_of_iso (e : F ≅ G) :
+    Nonempty ((F.stalkAt s m hs).Equiv (G.stalkAt s m hs)) :=
+  ⟨{ toLinearEquiv := LinearEquiv.ofBijective (stalkAtMap s m hs e.hom)
+      ⟨injective_stalkAtMap s m hs e.hom, surjective_stalkAtMap s m hs e.hom⟩
+     map_frobenius x := (LinearEquiv.ofBijective_apply _ _).trans
+      ((stalkAtMap_frobenius s m hs e.hom x).trans
+        (congrArg (G.stalkAt s m hs).frobenius (LinearEquiv.ofBijective_apply _ _).symm)) }⟩
+
 end StalkAt
+
+omit [LocallyOfFiniteType (X ↘ Spec (CommRingCat.of k₀))] in
+/-- The stalks of a zero Weil sheaf vanish. -/
+theorem subsingleton_stalk_of_isZero (hF : IsZero F) (x : X.finitePoints) :
+    Subsingleton (F.stalk x).carrier := by
+  have hz (s) : IsZero ((WeilCoefficients.toModuleCat l).obj (F.stalkObj s)) :=
+    (WeilCoefficients.toModuleCat l).map_isZero ((Sheaf.Γ _ _).map_isZero
+      ((s)^*[WeilCoefficients.{u} l].map_isZero
+        ((ProEtale.AdicSheaf.forget _).map_isZero (isZero_iff_isZero_carrier.mp hF))))
+  exact ModuleCat.subsingleton_of_isZero (hz _)
 
 /-- A subobject of a punctually `ι`-pure Weil sheaf of weight `w` is punctually `ι`-pure of
 weight `w`: its stalks are Frobenius-stable subspaces. -/
@@ -367,5 +386,46 @@ weight `w`: its stalks are Frobenius-equivariant quotients. -/
 theorem IsPunctuallyPureOfWeight.of_epi {ι : PadicAlgCl l →+* ℂ} {w : ℝ} (f : F ⟶ G) [Epi f]
     (h : F.IsPunctuallyPureOfWeight ι w) : G.IsPunctuallyPureOfWeight ι w := fun x ↦
   stalkAt_isPureOfWeight_of_epi _ _ _ f (h x)
+
+section GlobalSections
+
+variable [QuasiCompact (X ↘ Spec (CommRingCat.of k₀))]
+
+/-- The map induced by a morphism of Weil sheaves on the global sections. -/
+noncomputable def globalSectionsMap (f : F ⟶ G) :
+    F.globalSections.carrier →ₗ[PadicAlgCl l] G.globalSections.carrier :=
+  ((WeilCoefficients.toModuleCat l).map
+    ((Sheaf.Γ _ _).map ((ProEtale.AdicSheaf.forget _).map f.hom.hom.f))).hom
+
+/-- The map induced on the global sections commutes with the Frobenius. -/
+theorem globalSectionsMap_frobenius (f : F ⟶ G) (a : F.globalSections.carrier) :
+    globalSectionsMap f (F.globalSections.frobenius a) =
+      G.globalSections.frobenius (globalSectionsMap f a) := by
+  let g := (X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.inv
+  let Γ := Sheaf.Γ (Scheme.ProEt.topology (X ↘ Spec (CommRingCat.of k₀)).geometricFiber)
+    (WeilCoefficients.{u} l)
+  let φ := (ProEtale.AdicSheaf.forget _).map f.hom.hom.f
+  have key : ((ProEtale.globalSectionsLowerStarIso _ g).app F.obj.carrier.X).inv ≫
+      Γ.map ((ProEtale.AdicSheaf.forget _).map F.obj.str.hom) ≫ Γ.map φ =
+      Γ.map φ ≫ ((ProEtale.globalSectionsLowerStarIso _ g).app G.obj.carrier.X).inv ≫
+        Γ.map ((ProEtale.AdicSheaf.forget _).map G.obj.str.hom) := by
+    have hh : (IsoAlgebra.str F.obj).hom ≫ f.hom.hom.f =
+        (frobeniusPullback k₀ l X).map f.hom.hom.f ≫ (IsoAlgebra.str G.obj).hom :=
+      f.hom.hom.h.symm
+    rw [← Γ.map_comp, ← Functor.map_comp, hh, Functor.map_comp, Γ.map_comp,
+      ← Category.assoc, ← Category.assoc]
+    congr 1
+    exact ((ProEtale.globalSectionsLowerStarIso _ g).inv.naturality φ).symm
+  exact congrArg (fun h ↦ ((WeilCoefficients.toModuleCat l).map h).hom a) key
+
+/-- Isomorphic Weil sheaves have equivalent global sections. -/
+noncomputable def globalSectionsEquivOfIso (e : F ≅ G) :
+    F.globalSections.Equiv G.globalSections where
+  toLinearEquiv := WeilCoefficients.linearEquivOfIso
+    ((Sheaf.Γ _ _).mapIso ((ProEtale.AdicSheaf.forget _).mapIso
+      ((Endofunctor.IsoAlgebra.forget _).mapIso ((ObjectProperty.ι _).mapIso e))))
+  map_frobenius x := globalSectionsMap_frobenius e.hom x
+
+end GlobalSections
 
 end AlgebraicGeometry.WeilSheaf

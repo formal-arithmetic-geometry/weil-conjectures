@@ -122,7 +122,16 @@ theorem isPureOfWeightOver_compactlySupportedCohomology_directImage_two
     (hw : F.IsPunctuallyPureOfWeight ι w) :
     (((WeilSheaf.directImage j).obj F).compactlySupportedCohomology 2).IsPureOfWeightOver
       k₀ ι (w + 2) := by
-  -- TODO(adic): prove once Weil sheaves carry genuine `ℓ`-adic coefficients
-  sorry
+  have : QuasiCompact (C ↘ Spec (CommRingCat.of k₀)) := inferInstance
+  have : QuasiCompact (U ↘ Spec (CommRingCat.of k₀)) := by
+    rw [← CategoryTheory.comp_over j (Spec (CommRingCat.of k₀))]; infer_instance
+  have : LocallyOfFiniteType (U ↘ Spec (CommRingCat.of k₀)) := by
+    rw [← CategoryTheory.comp_over j (Spec (CommRingCat.of k₀))]; infer_instance
+  obtain ⟨e⟩ := nonempty_equiv_compactlySupportedCohomology_directImage_two j F hF
+  have h := (WeilSheaf.isPureOfWeightOver_geometricCoinvariants ι F hF hw).tateTwist
+    Nat.card_pos (-1)
+  have h' : w - 2 * ((-1 : ℤ) : ℝ) = w + 2 := by push_cast; ring
+  rw [h'] at h
+  exact FrobeniusModule.IsPureOfWeight.of_equiv e h
 
 end AlgebraicGeometry
