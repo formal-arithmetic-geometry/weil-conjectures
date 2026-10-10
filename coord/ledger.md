@@ -1898,3 +1898,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 16:07 L: merged deliver/F1/lem-weil-pbc-etale-cohomology-over-open (reviewer FIX; after a return; new nodes: 3)
 - 16:07 L: merged deliver/K1/lem-sc-affine-open-proper (reviewer FIX; first push; new nodes: 0)
 - 16:07 L: lem-weil-pbc-etale-cohomology-over-open source tag 03S2 -> 00XZ (reviewer R-eco2)
+- 16:08 L: merged deliver/C1/lem-sc-p1-serre-section-module-finite (reviewer FIX; first push; new nodes: 0)
