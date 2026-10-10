@@ -1,8 +1,8 @@
 # Work queue
 
-882 items; claim with `tools/claim.py next <group> [--stage N]`.
+883 items; claim with `tools/claim.py next <group> [--stage N]`.
 
-## Stage 1: nodes to split (329)
+## Stage 1: nodes to split (330)
 
 | node | distance to a target | Lean state on the done branch |
 |---|---|---|
@@ -48,11 +48,11 @@
 | `lem-pc-zero-dimensional-closed-subscheme-finite` | 3011 | none |
 | `lem-sc-dimension-locally-algebraic` | 3011 | none |
 | `lem-sc-fibre-dimension-after-base-change` | 3011 | none |
-| `lem-sc-geometrically-irreducible-product` | 3011 | none |
 | `lem-exc-coinduced-functions-open-stabilizer` | 3012 | none |
 | `lem-exc-rg-adjoint-transfer-functorial-injectives` | 3012 | none |
 | `lem-exc-rg-group-algebra-functorial-injective-embeddings` | 3012 | none |
 | `lem-exc-rg-open-stabilizer-adjoint` | 3012 | none |
+| `lem-pc-base-change-product` | 3012 | none |
 | `lem-pc-complete-linear-system-closed` | 3012 | none |
 | `lem-pc-fpqc-descend-closed-immersion` | 3012 | none |
 | `lem-pc-grothendieck-edge-cocycle` | 3012 | none |
@@ -61,6 +61,7 @@
 | `lem-sc-dvr-fg-torsionfree-free` | 3012 | none |
 | `lem-sc-exterior-top-direct-sum` | 3012 | none |
 | `lem-sc-finite-duality-trace` | 3012 | none |
+| `lem-sc-irreducible-product-over-field` | 3012 | none |
 | `lem-sc-p1-duality-pairing-naturality` | 3012 | none |
 | `lem-sc-p1-ext-coherent-dim-one-vanishing` | 3012 | none |
 | `lem-sc-p1-ext-locally-free-naturality` | 3012 | none |
@@ -894,7 +895,7 @@
 | `lem-weil-pbc-p1-field-dimension-one` | 4 | state |
 | `lem-weil-pbc-projective-space-zero-isomorphism` | 4 | state |
 
-Not open yet: 350 nodes that wait for stage 1, 1062 nodes that wait for a statement dependency.
+Not open yet: 351 nodes that wait for stage 1, 1063 nodes that wait for a statement dependency.
 
 ## Stage 3: modules to prove (0)
 
