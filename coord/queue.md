@@ -1,12 +1,11 @@
 # Work queue
 
-857 items; claim with `tools/claim.py next <group> [--stage N]`.
+858 items; claim with `tools/claim.py next <group> [--stage N]`.
 
 ## Stage 1: nodes to split (647)
 
 | node | distance to a target | Lean state on the done branch |
 |---|---|---|
-| `lem-weil-pbc-z-localizations-dvr` | 1010 | none |
 | `lem-weil-pbc-helper-g-ring-char-p` | 1011 | none |
 | `lem-weil-pbc-small-etale-representable-presheaf-sheaf` | 1011 | none |
 | `lem-weil-pbc-affine-basic-sets-disjoint-refinement` | 1012 | none |
@@ -14,7 +13,6 @@
 | `lem-weil-pbc-closed-immersion-conormal-flat-base-change` | 1012 | none |
 | `lem-weil-pbc-closed-immersion-conormal-functorial` | 1012 | none |
 | `lem-weil-pbc-closed-pushforward-constant-stalks` | 1012 | none |
-| `lem-weil-pbc-cohen-coefficient-ring-exists` | 1012 | none |
 | `lem-weil-pbc-coherent-formal-module-kernel` | 1012 | none |
 | `lem-weil-pbc-coherent-formal-modules-local-exactness` | 1012 | none |
 | `lem-weil-pbc-coherent-modules-kernel-cokernel-sum` | 1012 | none |
@@ -141,6 +139,8 @@
 | `lem-weil-pbc-universal-thickening-affine-case` | 1012 | none |
 | `lem-weil-pbc-universal-thickening-open-pieces` | 1012 | none |
 | `lem-weil-pbc-zariski-cohomology-locally-zero` | 1012 | none |
+| `lem-weil-pbc-cohen-ring-mod-pn-formally-smooth` | 1013 | none |
+| `lem-weil-pbc-cohen-rings-exist` | 1013 | none |
 | `lem-weil-pbc-fibre-degree-bound-field-points` | 1013 | none |
 | `lem-weil-pbc-lift-to-injective-unique-up-to-homotopy` | 1013 | none |
 | `lem-weil-pbc-module-pushforward-injective-acyclic` | 1013 | none |
@@ -654,7 +654,7 @@
 | `lem-pc-finite-linear-avoidance` | - | none |
 | `lem-pc-linear-pair-graded-finite` | - | none |
 
-## Stage 2: nodes to state (210)
+## Stage 2: nodes to state (211)
 
 | node | distance to Mathlib | kind |
 |---|---|---|
@@ -689,6 +689,7 @@
 | `lem-weil-pbc-chow-noetherian` | 1 | state |
 | `lem-weil-pbc-closed-immersion-residue-field-iso` | 1 | state |
 | `lem-weil-pbc-closed-pushforward-constant-restriction` | 1 | state |
+| `lem-weil-pbc-cohen-coefficient-ring-exists` | 1 | state |
 | `lem-weil-pbc-colimit-etale-ring-map` | 1 | state |
 | `lem-weil-pbc-colimit-finite-ring-map` | 1 | state |
 | `lem-weil-pbc-colimit-rings-flat` | 1 | state |
@@ -869,7 +870,7 @@
 | `lem-weil-pbc-p1-field-dimension-one` | 4 | state |
 | `lem-weil-pbc-projective-space-zero-isomorphism` | 4 | state |
 
-Not open yet: 659 nodes that wait for stage 1, 499 nodes that wait for a statement dependency.
+Not open yet: 659 nodes that wait for stage 1, 500 nodes that wait for a statement dependency.
 
 ## Stage 3: modules to prove (0)
 
