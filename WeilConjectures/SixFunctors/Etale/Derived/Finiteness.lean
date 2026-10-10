@@ -8,11 +8,16 @@ module
 public import Mathlib.FieldTheory.IsSepClosed
 public import Mathlib.NumberTheory.Padics.Complex
 public import WeilConjectures.AlgebraicGeometry.InvertibleExponent
+public import WeilConjectures.CategoryTheory.DerivedCategory.FlatModel
 public import WeilConjectures.ConstructibleSheaf.KernelCokernel
 public import WeilConjectures.ConstructibleSheaf.Presentation
 public import WeilConjectures.FromJoel.CategoryTheory.Abelian.Flat.Basic
 public import WeilConjectures.SixFunctors.Etale.Derived.Coefficients
 public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriek
+public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriekToLowerStar
+public import WeilConjectures.SixFunctors.Etale.Derived.ProjectionFormula
+public import WeilConjectures.SixFunctors.Etale.Derived.Supports
+public import WeilConjectures.SixFunctors.Etale.Derived.Triangulated
 public import WeilConjectures.SixFunctors.Etale.Derived.UpperLowerStar
 
 /-!
@@ -75,6 +80,56 @@ section Finiteness
 
 variable [Finite Λ] {k : Type u} [Field k]
 
+/-- Blueprint `sbc-thm-finiteness-finite-type`: Finiteness of higher direct images of
+finite-type morphisms (the ordinary direct image of a sheaf)
+
+Let `f : X ⟶ Y` be a morphism of finite-type schemes over a field `k`, and let `F` be a
+constructible sheaf of `Λ`-modules on `X_ét`, for a finite ring `Λ` whose exponent is invertible
+in `k`. Then `Rf_* F` is bounded constructible. -/
+theorem boundedConstructible_rightDerivedLowerStar_singleFunctor_obj
+    [HasInvertibleExponent Λ (Spec (.of k))] (f : X ⟶ Y) (aX : X ⟶ Spec (.of k))
+    (aY : Y ⟶ Spec (.of k)) [LocallyOfFiniteType aX] [QuasiCompact aX] [LocallyOfFiniteType aY]
+    [QuasiCompact aY] (hf : f ≫ aY = aX) (F : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))
+    [IsConstructibleSheaf F] :
+    DerivedCategory.boundedConstructible (ModuleCat.{u + 1} Λ) Y
+      ((R((f)_*[ModuleCat.{u + 1} Λ])).obj ((_root_.DerivedCategory.singleFunctor _ 0).obj F)) :=
+  sorry
+
+/-- Blueprint `sbc-thm-finiteness-finite-type`: Finiteness of higher direct images of
+finite-type morphisms (the compactly supported direct image of a sheaf)
+
+Let `f : X ⟶ Y` be a separated finite-type morphism, admitting a compactification, of
+finite-type schemes over a field `k`, and let `F` be a constructible sheaf of `Λ`-modules on
+`X_ét`, for a finite ring `Λ` whose exponent is invertible in `k`. Then `Rf_! F` is bounded
+constructible. -/
+theorem boundedConstructible_rightDerivedLowerShriek_singleFunctor_obj
+    [HasInvertibleExponent Λ (Spec (.of k))] (f : X ⟶ Y) [HasCompactification f]
+    (aX : X ⟶ Spec (.of k)) (aY : Y ⟶ Spec (.of k)) [LocallyOfFiniteType aX] [QuasiCompact aX]
+    [LocallyOfFiniteType aY] [QuasiCompact aY] (hf : f ≫ aY = aX)
+    (F : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)) [IsConstructibleSheaf F] :
+    DerivedCategory.boundedConstructible (ModuleCat.{u + 1} Λ) Y
+      ((R(f)_![ModuleCat.{u + 1} Λ]).obj ((_root_.DerivedCategory.singleFunctor _ 0).obj F)) :=
+  sorry
+
+/-- **Dévissage for bounded constructible complexes.** A triangulated functor
+`Φ : D(X_ét, Λ) ⥤ D(Y_ét, Λ)` carries `D^b_c(X, Λ)` into `D^b_c(Y, Λ)` as soon as it carries
+every constructible sheaf, placed in degree `0`, into `D^b_c(Y, Λ)`. -/
+lemma boundedConstructible_obj_of_singleFunctor
+    (Φ : _root_.DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)) ⥤
+      _root_.DerivedCategory (Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ)))
+    [Φ.CommShift ℤ] [Φ.IsTriangulated]
+    (hΦ : ∀ (F : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)) [IsConstructibleSheaf F],
+      DerivedCategory.boundedConstructible (ModuleCat.{u + 1} Λ) Y
+        (Φ.obj ((_root_.DerivedCategory.singleFunctor _ 0).obj F)))
+    (K : _root_.DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)))
+    (hK : DerivedCategory.boundedConstructible (ModuleCat.{u + 1} Λ) X K) :
+    DerivedCategory.boundedConstructible (ModuleCat.{u + 1} Λ) Y (Φ.obj K) :=
+  _root_.DerivedCategory.prop_of_bounded
+    ((DerivedCategory.boundedConstructible (ModuleCat.{u + 1} Λ) Y).inverseImage Φ)
+    (Etale.constructibleSheaf (ModuleCat.{u + 1} Λ) X) (fun F hF ↦ by
+      have : IsConstructibleSheaf F := hF
+      exact hΦ F) K hK.1 hK.2
+
 /-- Blueprint `sk-prop-sf-finiteness`: Finiteness and constructibility
 
 **Finiteness of direct images.** Let `Λ` be a finite ring whose exponent is invertible on `X`
@@ -83,28 +138,68 @@ carries `D^b_c(X, Λ)` into `D^b_c(Y, Λ)`; separatedness of `f` is not needed.
 
 The underlying numerical input is that the torsion cohomological dimension of a finite-type
 `k`-scheme of dimension `d` over a field of torsion cohomological dimension at most `c` is
-bounded by `2d + c`; in particular it is `0` for the spectrum of a separably closed field. -/
+bounded by `2d + c`; in particular it is `0` for the spectrum of a separably closed field.
+
+The schemes have to be quasi-compact: for `Y` an infinite disjoint union of copies of `Spec k`
+and `X` the disjoint union of the projective spaces `ℙⁿ_k`, one over each copy, the direct image
+of the constant sheaf has nonzero cohomology sheaves in all even degrees.
+
+The proof reduces to a single constructible sheaf by dévissage
+(`AlgebraicGeometry.Etale.boundedConstructible_obj_of_singleFunctor`), where it is
+`AlgebraicGeometry.Etale.boundedConstructible_rightDerivedLowerStar_singleFunctor_obj`. -/
 theorem boundedConstructible_rightDerivedLowerStar_of_hasInvertibleExponent (f : X ⟶ Y)
     [QuasiCompact f] [HasInvertibleExponent Λ X] (aX : X ⟶ Spec (.of k)) (aY : Y ⟶ Spec (.of k))
-    [LocallyOfFiniteType aX] [LocallyOfFiniteType aY] (hf : f ≫ aY = aX)
+    [LocallyOfFiniteType aX] [LocallyOfFiniteType aY] [QuasiCompact aY] (hf : f ≫ aY = aX)
     (K : _root_.DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)))
     (hK : DerivedCategory.boundedConstructible (ModuleCat.{u + 1} Λ) X K) :
     DerivedCategory.boundedConstructible (ModuleCat.{u + 1} Λ) Y
-      ((R((f)_*[ModuleCat.{u + 1} Λ])).obj K) :=
-  sorry
+      ((R((f)_*[ModuleCat.{u + 1} Λ])).obj K) := by
+  by_cases hX : IsEmpty X
+  · exact (DerivedCategory.boundedConstructible _ Y).prop_of_isZero
+      (Functor.map_isZero _ (isZero_derivedCategory_of_isEmpty (ModuleCat.{u + 1} Λ) X K))
+  have : Nonempty X := not_isEmpty_iff.1 hX
+  have := HasInvertibleExponent.of_hom_of_nonempty (Λ := Λ) aX
+  have : QuasiCompact aX := hf ▸ inferInstance
+  exact boundedConstructible_obj_of_singleFunctor Λ _ (fun F _ ↦
+    boundedConstructible_rightDerivedLowerStar_singleFunctor_obj Λ f aX aY hf F) K hK
+
+omit [Finite Λ] [CommRing Λ] in
+/-- The source of a morphism admitting a compactification, to a quasi-compact scheme locally of
+finite type over a field, is a noetherian space: it is open in the compactification, which is
+of finite type over the field. -/
+lemma noetherianSpace_of_hasCompactification (f : X ⟶ Y) [HasCompactification f]
+    (aY : Y ⟶ Spec (.of k)) [LocallyOfFiniteType aY] [QuasiCompact aY] :
+    TopologicalSpace.NoetherianSpace X := by
+  let c := HasCompactification.compactification f
+  have : IsLocallyNoetherian c.Z := LocallyOfFiniteType.isLocallyNoetherian (c.g ≫ aY)
+  have : CompactSpace c.Z := QuasiCompact.compactSpace_of_compactSpace (c.g ≫ aY)
+  have : IsNoetherian c.Z := ⟨⟩
+  exact c.i.isOpenEmbedding.isInducing.noetherianSpace
 
 /-- Blueprint `sk-prop-sf-finiteness`: Finiteness and constructibility
 
 **Finiteness of compactly supported direct images.** For `f : X ⟶ Y` separated of finite type
-between finite-type `k`-schemes, `Rf_!` carries `D^b_c(X, Λ)` into `D^b_c(Y, Λ)`. -/
+between finite-type `k`-schemes, `Rf_!` carries `D^b_c(X, Λ)` into `D^b_c(Y, Λ)`.
+
+The base `Y` has to be quasi-compact, for the reason explained at
+`AlgebraicGeometry.Etale.boundedConstructible_rightDerivedLowerStar_of_hasInvertibleExponent`
+(there the morphism is proper, so that `Rf_! = Rf_*`). -/
 theorem boundedConstructible_rightDerivedLowerShriek (f : X ⟶ Y) [HasCompactification f]
     [HasInvertibleExponent Λ X] (aX : X ⟶ Spec (.of k)) (aY : Y ⟶ Spec (.of k))
-    [LocallyOfFiniteType aX] [LocallyOfFiniteType aY] (hf : f ≫ aY = aX)
+    [LocallyOfFiniteType aX] [LocallyOfFiniteType aY] [QuasiCompact aY] (hf : f ≫ aY = aX)
     (K : _root_.DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)))
     (hK : DerivedCategory.boundedConstructible (ModuleCat.{u + 1} Λ) X K) :
     DerivedCategory.boundedConstructible (ModuleCat.{u + 1} Λ) Y
-      ((R(f)_![ModuleCat.{u + 1} Λ]).obj K) :=
-  sorry
+      ((R(f)_![ModuleCat.{u + 1} Λ]).obj K) := by
+  by_cases hX : IsEmpty X
+  · exact (DerivedCategory.boundedConstructible _ Y).prop_of_isZero
+      (Functor.map_isZero _ (isZero_derivedCategory_of_isEmpty (ModuleCat.{u + 1} Λ) X K))
+  have : Nonempty X := not_isEmpty_iff.1 hX
+  have := HasInvertibleExponent.of_hom_of_nonempty (Λ := Λ) aX
+  have := noetherianSpace_of_hasCompactification f aY
+  have : QuasiCompact aX := ⟨fun _ _ _ ↦ TopologicalSpace.NoetherianSpace.isCompact _⟩
+  exact boundedConstructible_obj_of_singleFunctor Λ _ (fun F _ ↦
+    boundedConstructible_rightDerivedLowerShriek_singleFunctor_obj Λ f aX aY hf F) K hK
 
 /-- Blueprint `sk-prop-sf-finiteness`: Finiteness and constructibility
 
@@ -118,7 +213,7 @@ inverting `ℓ`; that passage is not formalised. -/
 theorem boundedConstructible_rightDerivedLowerShriek_padicAlgCl (l : ℕ) [Fact l.Prime]
     (hl : ringChar k ≠ l) (f : X ⟶ Y) [HasCompactification f] (aX : X ⟶ Spec (.of k))
     (aY : Y ⟶ Spec (.of k)) [LocallyOfFiniteType aX] [LocallyOfFiniteType aY]
-    (hf : f ≫ aY = aX)
+    [QuasiCompact aY] (hf : f ≫ aY = aX)
     (K : _root_.DerivedCategory
       (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} (ULift.{u + 1} (PadicAlgCl l)))))
     (hK : DerivedCategory.boundedConstructible
@@ -204,6 +299,37 @@ def IsBoundedFlatComplex (a b : ℤ)
     (P : CochainComplex (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)) ℤ) : Prop :=
   (∀ q : ℤ, q < a ∨ b < q → IsZero (P.X q)) ∧ ∀ q : ℤ, ObjectProperty.flat (P.X q)
 
+variable {Λ} in
+/-- Tor amplitude tested on one homology sheaf at a time
+(`AlgebraicGeometry.Etale.DerivedCategory.hasTorAmplitudeIn`) is Tor amplitude tested through
+the canonical t-structure (`AlgebraicGeometry.Etale.DerivedCategory.torAmplitudeIn`). -/
+lemma DerivedCategory.hasTorAmplitudeIn_iff_torAmplitudeIn {a b : ℤ}
+    {K : _root_.DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))} :
+    DerivedCategory.hasTorAmplitudeIn Λ X a b K ↔
+      DerivedCategory.torAmplitudeIn (ModuleCat.{u + 1} Λ) X a b K := by
+  refine ⟨fun h F ↦ ?_, fun h F q hq ↦ ?_⟩
+  · rw [_root_.DerivedCategory.homologyConcentratedIn_iff]
+    exact ⟨(_root_.DerivedCategory.isGE_iff _ a).2 fun q hq ↦ h F q (.inl hq),
+      (_root_.DerivedCategory.isLE_iff _ b).2 fun q hq ↦ h F q (.inr hq)⟩
+  · obtain ⟨h₁, h₂⟩ := h F
+    rcases hq with hq | hq
+    · exact (_root_.DerivedCategory.isGE_iff _ a).1 h₁ q hq
+    · exact (_root_.DerivedCategory.isLE_iff _ b).1 h₂ q hq
+
+variable {Λ} in
+/-- A bounded flat complex in degrees `[a, b]` is a complex of flat sheaves strictly
+concentrated in degrees `[a, b]`. -/
+lemma isBoundedFlatComplex_iff {a b : ℤ}
+    {P : CochainComplex (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)) ℤ} :
+    IsBoundedFlatComplex Λ a b P ↔
+      P.IsStrictlyGE a ∧ P.IsStrictlyLE b ∧ ∀ q : ℤ, ObjectProperty.flat (P.X q) := by
+  rw [CochainComplex.isStrictlyGE_iff, CochainComplex.isStrictlyLE_iff]
+  refine ⟨fun ⟨h₁, h₂⟩ ↦ ⟨fun q hq ↦ h₁ q (.inl hq), fun q hq ↦ h₁ q (.inr hq), h₂⟩,
+    fun ⟨h₁, h₂, h₃⟩ ↦ ⟨fun q hq ↦ ?_, h₃⟩⟩
+  rcases hq with hq | hq
+  · exact h₁ q hq
+  · exact h₂ q hq
+
 /-- Blueprint `sk-lem-sf-flat-model`: Bounded flat model of finite Tor amplitude
 
 **Finite Tor amplitude means a bounded flat model.** For `K ∈ D^b_c(X, Λ)` and integers
@@ -212,13 +338,18 @@ to a bounded flat complex `P` in degrees `[a, b]`.
 
 One direction is that a bounded-above complex of flat sheaves is K-flat; the other truncates a
 bounded-above free resolution and checks that the truncation is flat by the Tor criterion. -/
-theorem hasTorAmplitudeIn_iff_exists_flatModel (a b : ℤ) (hab : a ≤ b)
+theorem hasTorAmplitudeIn_iff_exists_flatModel (a b : ℤ) (_hab : a ≤ b)
     (K : _root_.DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)))
-    (hK : DerivedCategory.boundedConstructible (ModuleCat.{u + 1} Λ) X K) :
+    (_hK : DerivedCategory.boundedConstructible (ModuleCat.{u + 1} Λ) X K) :
     DerivedCategory.hasTorAmplitudeIn Λ X a b K ↔
       ∃ P : CochainComplex (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)) ℤ,
-        IsBoundedFlatComplex Λ a b P ∧ Nonempty (K ≅ (_root_.DerivedCategory.Q).obj P) :=
-  sorry
+        IsBoundedFlatComplex Λ a b P ∧ Nonempty (K ≅ (_root_.DerivedCategory.Q).obj P) := by
+  rw [DerivedCategory.hasTorAmplitudeIn_iff_torAmplitudeIn]
+  refine (_root_.DerivedCategory.torAmplitudeIn_iff_exists_iso_Q_obj_flat a b K).trans
+    ⟨fun ⟨P, h₁, h₂, h₃, ⟨e⟩⟩ ↦ ⟨P, isBoundedFlatComplex_iff.2 ⟨h₁, h₂, h₃⟩, ⟨e.symm⟩⟩,
+    fun ⟨P, hP, ⟨e⟩⟩ ↦ ?_⟩
+  obtain ⟨h₁, h₂, h₃⟩ := isBoundedFlatComplex_iff.1 hP
+  exact ⟨P, h₁, h₂, h₃, ⟨e.symm⟩⟩
 
 /-- Blueprint `sk-lem-sf-flat-model`: Bounded flat model of finite Tor amplitude
 
@@ -286,13 +417,18 @@ theorem nonempty_iso_kunneth {W : Scheme.{u}} (p₁ : W ⟶ X) (p₂ : W ⟶ Y)
           ((L((p₂)^*[ModuleCat.{u + 1} Λ])).obj K))) :=
   sorry
 
+omit [HasInvertibleExponent Λ X] [HasInvertibleExponent Λ Y] in
 /-- Blueprint `sk-prop-sf-kunneth-ordinary`: Künneth and the projection formula in ordinary
 étale cohomology
 
 **The projection formula for a proper morphism.** For `f : X ⟶ Y` proper between finite-type
 `k`-schemes and all `E ∈ D(X_ét, Λ)`, `L ∈ D(Y_ét, Λ)`,
 
-`Rf_* E ⊗^L L ≅ Rf_*(E ⊗^L Lf^* L)`. -/
+`Rf_* E ⊗^L L ≅ Rf_*(E ⊗^L Lf^* L)`.
+
+It is the projection formula for `Rf_!` at finite coefficients
+(`AlgebraicGeometry.Etale.hasProjectionFormula_of_finite`), transported along `Rf_! ≅ Rf_*`
+(`AlgebraicGeometry.Etale.rightDerivedLowerShriekIsoRightDerivedLowerStar`). -/
 theorem nonempty_iso_derivedTensor_rightDerivedLowerStar_of_isProper (f : X ⟶ Y) [IsProper f]
     (E : _root_.DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)))
     (L : _root_.DerivedCategory (Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ))) :
@@ -300,8 +436,12 @@ theorem nonempty_iso_derivedTensor_rightDerivedLowerStar_of_isProper (f : X ⟶ 
           ((R((f)_*[ModuleCat.{u + 1} Λ])).obj E)).obj L ≅
       (R((f)_*[ModuleCat.{u + 1} Λ])).obj
         (((derivedTensor (ModuleCat.{u + 1} Λ) X).obj E).obj
-          ((L((f)^*[ModuleCat.{u + 1} Λ])).obj L))) :=
-  sorry
+          ((L((f)^*[ModuleCat.{u + 1} Λ])).obj L))) := by
+  obtain ⟨e⟩ := nonempty_iso_derivedTensor_obj_rightDerivedLowerShriek (ModuleCat.{u + 1} Λ) f E
+    (hasProjectionFormula_of_finite Λ f E)
+  let φ := rightDerivedLowerShriekIsoRightDerivedLowerStar (ModuleCat.{u + 1} Λ) f
+  exact ⟨((derivedTensor (ModuleCat.{u + 1} Λ) Y).mapIso (φ.app E).symm).app L ≪≫ e.app L ≪≫
+    φ.app _⟩
 
 end Kunneth
 

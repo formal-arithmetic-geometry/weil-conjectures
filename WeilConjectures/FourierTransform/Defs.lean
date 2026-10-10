@@ -305,7 +305,7 @@ variable [Finite Λ] [HasInvertibleExponent Λ S]
   [LocallyOfFiniteType (pullback.snd π π')] [QuasiCompact (pullback.snd π π')]
 
 omit [QuasiCompact (pullback.snd π π')] in
-/-- For `V'` locally of finite type over a field `k`, the Fourier–Deligne transform sends the
+/-- For `V'` of finite type over a field `k`, the Fourier–Deligne transform sends the
 bounded constructible derived category `Dᵇc(V, Λ)` into `Dᵇc(V', Λ)`.
 
 Class: torsion; decided by Deligne finiteness of `Rp₂,!`
@@ -313,8 +313,8 @@ Class: torsion; decided by Deligne finiteness of `Rp₂,!`
 `[Finite Λ] [HasInvertibleExponent Λ S]`.
 (sketch blueprint: `sk-prop-well-defined`) -/
 theorem boundedConstructible_fourierTransform_obj_of_boundedConstructible {k : Type u}
-    [Field k] (aV' : V' ⟶ Spec (.of k)) [LocallyOfFiniteType aV'] (Ψ : AddChar (ZMod p) Λ)
-    (b : Γ(pullback π π', ⊤)) (r : ℤ)
+    [Field k] (aV' : V' ⟶ Spec (.of k)) [LocallyOfFiniteType aV'] [QuasiCompact aV']
+    (Ψ : AddChar (ZMod p) Λ) (b : Γ(pullback π π', ⊤)) (r : ℤ)
     (K : DerivedCategory (Sheaf V.smallEtaleTopology (ModuleCat.{u + 1} Λ)))
     (hK : DerivedCategory.boundedConstructible (ModuleCat.{u + 1} Λ) V K) :
     DerivedCategory.boundedConstructible (ModuleCat.{u + 1} Λ) V'
@@ -328,7 +328,7 @@ theorem boundedConstructible_fourierTransform_obj_of_boundedConstructible {k : T
     (pullback.snd π π' ≫ aV') aV' rfl _ h₂
   exact (DerivedCategory.boundedConstructible _ V').le_shift r _ h₃
 
-/-- For `V'` locally of finite type over a field, the Fourier–Deligne transform as a functor
+/-- For `V'` of finite type over a field, the Fourier–Deligne transform as a functor
 `Dᵇc(V, Λ) ⥤ Dᵇc(V', Λ)`, the functor whose existence `sk-prop-well-defined` asserts.
 
 Class: torsion; decided by Deligne finiteness of `Rp₂,!`, through
@@ -336,14 +336,15 @@ Class: torsion; decided by Deligne finiteness of `Rp₂,!`, through
 which needs `[Finite Λ] [HasInvertibleExponent Λ S]`.
 (sketch blueprint: `sk-prop-well-defined`) -/
 noncomputable def fourierTransformBoundedConstructible
-    (hV' : ∃ (k : Type u) (_ : Field k) (a : V' ⟶ Spec (.of k)), LocallyOfFiniteType a)
+    (hV' : ∃ (k : Type u) (_ : Field k) (a : V' ⟶ Spec (.of k)),
+      LocallyOfFiniteType a ∧ QuasiCompact a)
     (Ψ : AddChar (ZMod p) Λ) (b : Γ(pullback π π', ⊤)) (r : ℤ) :
     Dᵇc(V, ModuleCat.{u + 1} Λ) ⥤ Dᵇc(V', ModuleCat.{u + 1} Λ) :=
   ObjectProperty.lift _
     (Etale.DerivedCategoryBoundedConstructible.ι (ModuleCat.{u + 1} Λ) V ⋙
       fourierTransform Λ π π' Ψ b r)
     fun K ↦ by
-      obtain ⟨k, _, a, _⟩ := hV'
+      obtain ⟨k, _, a, _, _⟩ := hV'
       exact boundedConstructible_fourierTransform_obj_of_boundedConstructible Λ π π' a Ψ b r
         K.obj K.property
 
