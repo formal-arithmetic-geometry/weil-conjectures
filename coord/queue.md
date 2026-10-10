@@ -1,8 +1,8 @@
 # Work queue
 
-861 items; claim with `tools/claim.py next <group> [--stage N]`.
+856 items; claim with `tools/claim.py next <group> [--stage N]`.
 
-## Stage 1: nodes to split (421)
+## Stage 1: nodes to split (410)
 
 | node | distance to a target | Lean state on the done branch |
 |---|---|---|
@@ -10,26 +10,22 @@
 | `lem-weil-pbc-descend-qc-open-fg-subalgebra` | 1012 | none |
 | `lem-weil-pbc-flat-variant-local-criterion` | 1012 | none |
 | `lem-weil-pbc-pullback-ample-invertible` | 1013 | none |
-| `lem-weil-pbc-minimal-finite-free-resolution-local` | 1014 | none |
-| `lem-weil-pbc-complete-local-map-regular-presentation` | 1015 | none |
-| `lem-weil-pbc-depth-ext` | 1015 | none |
 | `lem-weil-pbc-essentially-finite-presentation-over-intermediate` | 1015 | none |
 | `lem-weil-pbc-finite-product-integral-closure` | 1015 | none |
 | `lem-weil-pbc-finite-product-normal` | 1015 | none |
 | `lem-weil-pbc-finite-type-etale-finite-factor-decomposition` | 1015 | none |
 | `lem-weil-pbc-flat-another-variant-local-criterion` | 1015 | none |
 | `lem-weil-pbc-flat-formally-smooth-closed-fibre-adic` | 1015 | none |
+| `lem-weil-pbc-free-complex-unit-entry-splits` | 1015 | none |
 | `lem-weil-pbc-fs-adic-field-regular-local` | 1015 | none |
 | `lem-weil-pbc-graded-finiteness-cohomology` | 1015 | none |
 | `lem-weil-pbc-grothendieck-regular-sequence-flat` | 1015 | none |
 | `lem-weil-pbc-limit-module-essentially-finite-presentation-over-system` | 1015 | none |
 | `lem-weil-pbc-local-nagata-domain-analytically-unramified` | 1015 | none |
 | `lem-weil-pbc-local-ring-colimit-essentially-finite-type-over-z` | 1015 | none |
-| `lem-weil-pbc-module-ses-cech-h1-surjective` | 1015 | none |
 | `lem-weil-pbc-normal-domain-fractional-principal-quotient-ass` | 1015 | none |
 | `lem-weil-pbc-normal-ring-integrally-closed-total` | 1015 | none |
 | `lem-weil-pbc-openness-of-flatness` | 1015 | none |
-| `lem-weil-pbc-p-independent-extends-to-p-basis` | 1015 | none |
 | `lem-weil-pbc-principal-maximal-dim-one-regular` | 1015 | none |
 | `lem-weil-pbc-quasi-finite-over-polynomial-algebra` | 1015 | none |
 | `lem-weil-pbc-quotient-by-power-torsion-no-torsion` | 1015 | none |
@@ -41,14 +37,17 @@
 | `lem-weil-pbc-torsion-extension-flat-descent` | 1015 | none |
 | `lem-weil-pbc-valuation-ring-normal` | 1015 | none |
 | `def-weil-pbc-analytically-unramified` | 1016 | none |
+| `lem-weil-pbc-cohen-power-series-presentation` | 1016 | none |
 | `lem-weil-pbc-coherent-stalk-map-extends` | 1016 | none |
 | `lem-weil-pbc-dimension-inequality-quasi-finite` | 1016 | none |
 | `lem-weil-pbc-dimension-preserved-field-extension` | 1016 | none |
+| `lem-weil-pbc-field-cohen-power-series-formally-smooth` | 1016 | none |
 | `lem-weil-pbc-flat-tor-ideal-criterion` | 1016 | none |
 | `lem-weil-pbc-fpqc-descend-affine` | 1016 | none |
 | `lem-weil-pbc-fpqc-descend-universally-closed` | 1016 | none |
 | `lem-weil-pbc-integral-injective-dimension-equal` | 1016 | none |
 | `lem-weil-pbc-module-injects-localizations-associated-primes` | 1016 | none |
+| `lem-weil-pbc-power-series-adic-evaluation` | 1016 | none |
 | `lem-weil-pbc-projective-dimension-ext-characterization` | 1016 | none |
 | `lem-weil-pbc-regular-quotient-ideal-intersection` | 1016 | none |
 | `lem-weil-pbc-sheaf-hom-finite-presentation-quasi-coherent` | 1017 | none |
@@ -67,7 +66,6 @@
 | `thm-weil-pbc-stein-inputs` | 2006 | sorry_here |
 | `def-sp-etale-dictionary` | 3002 | none |
 | `def-weil-pbc-direct-image` | 3002 | none |
-| `def-weil-pbc-geometric-stalks` | 3002 | none |
 | `def-weil-pbc-inverse-image` | 3002 | none |
 | `def-weil-pbc-kinjective-resolutions` | 3002 | none |
 | `def-pc-module-pullback` | 3003 | none |
@@ -166,7 +164,6 @@
 | `lem-pc-genus-base-change` | 3011 | rests_on_sorry |
 | `lem-pc-genus-well-defined` | 3011 | none |
 | `lem-pc-very-ample-descends` | 3011 | sorry_here |
-| `lem-sc-cartier-divisor-points` | 3011 | none |
 | `lem-sc-finite-duality` | 3011 | rests_on_sorry |
 | `thm-sc-p1-duality` | 3011 | sorry_here |
 | `lem-sc-ext-locally-free` | 3012 | sorry_here |
@@ -201,21 +198,15 @@
 | `prop-pc-xk-integral` | 4009 | rests_on_sorry |
 | `thm-pc-f-representable` | 4009 | rests_on_sorry |
 | `def-pc-f-subfunctor` | 4010 | rests_on_sorry |
-| `lem-pc-cartier-criterion` | 4010 | closed_part |
-| `lem-pc-divisor-line-bundle-properties` | 4010 | closed_part |
 | `lem-pc-flat-field` | 4010 | none |
 | `lem-pc-projection-formula` | 4010 | sorry_here |
 | `lem-pc-smooth-flat` | 4010 | none |
 | `lem-pc-structure-pushforward` | 4010 | sorry_here |
 | `lem-pc-universal-adjoint-section` | 4010 | rests_on_sorry |
-| `lem-pc-universal-divisor` | 4010 | none |
 | `lem-pc-zero-scheme-recd` | 4010 | rests_on_sorry |
 | `thm-pc-hilb-curves` | 4010 | rests_on_sorry |
-| `def-pc-relative-effective-cartier` | 4011 | none |
+| `lem-pc-closed-subscheme-base-change-ideal-image` | 4011 | none |
 | `lem-pc-degree-zero-properties` | 4011 | none |
-| `lem-pc-hilb-addition` | 4011 | closed_part |
-| `lem-pc-hilb-smooth` | 4011 | closed_part |
-| `lem-pc-recd-locally-principal` | 4011 | none |
 | `lem-pc-smooth-characterization` | 4011 | none |
 | `lem-pc-zero-scheme-properties` | 4011 | rests_on_sorry |
 | `def-weil-pbc-etale-sheaves` | 5002 | none |
@@ -305,7 +296,6 @@
 | `lem-pc-closed-immersion-coherent-cohomology` | 6011 | rests_on_sorry |
 | `lem-pc-projective-space-serre-vanishing` | 6011 | rests_on_sorry |
 | `pqf-def-cohomology` | 6011 | none |
-| `pqf-lem-locqf-fibre-discrete` | 6011 | none |
 | `lem-pc-projective-space-cohomology-bound` | 6012 | sorry_here |
 | `lem-pc-projective-space-twist-cohomology` | 6012 | rests_on_sorry |
 | `pqf-def-affine-morphism` | - | none |
@@ -318,7 +308,6 @@
 | `def-nagata-separated-descent-stage` | - | none |
 | `def-weil-pbc-C7` | - | none |
 | `def-weil-pbc-constructible-torsion` | - | none |
-| `def-weil-pbc-primary-torsion` | - | closed_part |
 | `lem-pc-kbar-pure-insep` | - | none |
 | `lem-weil-pbc-finite-pushforward-constructible-noetherian` | - | none |
 | `lemma-nagata-final-noetherian-base-system` | - | none |
@@ -428,7 +417,7 @@
 | `lem-exc-etale-jacobian-presentation` | - | none |
 | `def-exc-jacobian-presentation` | - | none |
 
-## Stage 2: nodes to state (440)
+## Stage 2: nodes to state (446)
 
 | node | distance to Mathlib | kind |
 |---|---|---|
@@ -468,6 +457,7 @@
 | `def-weil-pbc-torsion-etale-sheaf` | 1 | state |
 | `lem-pc-affine-cech-complex` | 1 | state |
 | `lem-pc-cech-exact` | 1 | state |
+| `lem-pc-flat-pullback-effective-cartier-ideal` | 1 | state |
 | `lem-pc-linear-pair-graded-finite` | 1 | state |
 | `lem-pc-linear-pair-morphism-finite` | 1 | state |
 | `lem-pc-projective-curve-linear-pair` | 1 | state |
@@ -516,6 +506,7 @@
 | `lem-weil-pbc-commshift-nattrans-triangle-morphism` | 1 | state |
 | `lem-weil-pbc-complete-local-domain-finite-over-regular` | 1 | state |
 | `lem-weil-pbc-complete-local-flat-presentation` | 1 | state |
+| `lem-weil-pbc-complete-local-map-regular-presentation` | 1 | state |
 | `lem-weil-pbc-complete-local-quotient` | 1 | state |
 | `lem-weil-pbc-completion-dimension` | 1 | state |
 | `lem-weil-pbc-completion-finite-extension` | 1 | state |
@@ -705,6 +696,7 @@
 | `lem-weil-pbc-p-basis-differentials-basis` | 1 | state |
 | `lem-weil-pbc-p-basis-exists` | 1 | state |
 | `lem-weil-pbc-p-independent-differentials-independent` | 1 | state |
+| `lem-weil-pbc-p-independent-extends-to-p-basis` | 1 | state |
 | `lem-weil-pbc-polynomial-ideal-coefficients-monomial` | 1 | state |
 | `lem-weil-pbc-polynomial-quotient-dimension-lower-bound` | 1 | state |
 | `lem-weil-pbc-polynomial-ring-maximal-chain-height-difference` | 1 | state |
@@ -851,6 +843,8 @@
 | `lemma-weil-pbc-finite-l-group-filtration` | 1 | state |
 | `cor-pqf-proper-quasifinite-finite` | 2 | state |
 | `lem-fet-locally-trivial` | 2 | state |
+| `lem-pc-cartier-criterion` | 2 | state |
+| `lem-pc-hilb-smooth` | 2 | state |
 | `lem-sc-c1-brauer-trivial` | 2 | state |
 | `lem-sc-c1-finite-extension` | 2 | state |
 | `lem-sc-regular-dim1-dvr` | 2 | state |
@@ -862,6 +856,7 @@
 | `def-sc-gm-torsor` | 3 | state |
 | `def-sc-quasi-projective` | 3 | state |
 | `lem-galois-flasque` | 3 | state |
+| `lem-pc-hilb-addition` | 3 | state |
 | `lem-sc-divisor-exact-sequence` | 3 | state |
 | `lem-sc-invertible-dual` | 3 | state |
 | `lem-sc-line-bundle-torsor` | 3 | state |
@@ -873,7 +868,7 @@
 | `lem-weil-pbc-p1-field-dimension-one` | 4 | state |
 | `lem-weil-pbc-projective-space-zero-isomorphism` | 4 | state |
 
-Not open yet: 435 nodes that wait for stage 1, 820 nodes that wait for a statement dependency.
+Not open yet: 426 nodes that wait for stage 1, 830 nodes that wait for a statement dependency.
 
 ## Stage 3: modules to prove (0)
 
