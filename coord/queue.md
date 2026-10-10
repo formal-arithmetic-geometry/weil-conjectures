@@ -1,8 +1,8 @@
 # Work queue
 
-859 items; claim with `tools/claim.py next <group> [--stage N]`.
+863 items; claim with `tools/claim.py next <group> [--stage N]`.
 
-## Stage 1: nodes to split (54)
+## Stage 1: nodes to split (57)
 
 | node | distance to a target | Lean state on the done branch |
 |---|---|---|
@@ -29,22 +29,25 @@
 | `lem-sc-finite-flat-surj-points` | 4009 | none |
 | `lem-sc-etale-triple-to-sh-completion-flat` | 4012 | none |
 | `lem-pc-affine-sections-flat-over-base` | 5014 | none |
-| `lem-sc-ass-weakass-fg-prime` | 5014 | none |
 | `lem-pc-derived-tensor-transitivity` | 5015 | none |
 | `lem-pc-rf-single-complex-affine-base-change` | 5015 | none |
 | `lem-pc-sites-module-sheafification-bilinear-extension` | 5015 | none |
+| `lem-sc-associated-localization-fg` | 5015 | none |
+| `lem-sc-weakass-localization` | 5015 | none |
 | `lem-pc-affine-flat-module-descent` | 5016 | none |
 | `lem-pc-rf-mv-triangle-naturality` | 5016 | none |
 | `lem-sp-filtered-complex-ZB-description` | 6007 | none |
 | `lem-sp-ce-horizontal-lift` | 6008 | none |
 | `lem-sp-ce-vertical-nullhomotopy` | 6008 | none |
-| `lem-sc-perfect-h0-locally-closed` | 6013 | none |
 | `lem-sc-picard-h1-multiple-locus` | 6013 | none |
 | `lem-sc-picard-h1-product-injective` | 6013 | none |
-| `lem-sc-picard-locus-closed-valuation-criterion` | 6013 | none |
 | `lem-sc-picard-locus-closed-valuation-triviality` | 6013 | none |
 | `pqf-lem-serre-criterion` | 6013 | none |
 | `lem-sc-perfect-degree-zero-fibre-criterion` | 6014 | none |
+| `lem-sc-perfect-finite-free-residue-model` | 6014 | none |
+| `lem-sc-perfect-jump-loci` | 6014 | none |
+| `lem-sc-picard-valuation-probe-closure` | 6014 | none |
+| `lem-sc-square-injective-free-map-dual-coker-zero` | 6014 | none |
 | `lem-sc-base-change-curve` | - | none |
 | `lem-sc-global-functions` | - | rests_on_sorry |
 | `lem-pc-chow-relative-ample` | - | none |
@@ -61,7 +64,7 @@
 | `lem-pur-hom-kflat-into-kinjective` | - | none |
 | `lem-pur-rhom-into-kinjective-local` | - | none |
 
-## Stage 2: nodes to state (805)
+## Stage 2: nodes to state (806)
 
 | node | distance to Mathlib | kind |
 |---|---|---|
@@ -241,6 +244,7 @@
 | `lem-sc-affine-weakass-nonzerodivisors` | 1 | state |
 | `lem-sc-ample-proj-canonical-map` | 1 | state |
 | `lem-sc-artin-schreier-k` | 1 | state |
+| `lem-sc-ass-weakass-fg-prime` | 1 | state |
 | `lem-sc-bounded-below-injective-resolution` | 1 | state |
 | `lem-sc-closed-affine-union-affine` | 1 | state |
 | `lem-sc-derived-hom-mayer-vietoris` | 1 | state |
@@ -871,7 +875,7 @@
 | `lem-weil-pbc-projective-space-zero-isomorphism` | 4 | state |
 | `def-nagata-fixed-base-separated-stage` | 6 | state |
 
-Not open yet: 1676 nodes that wait for a statement dependency, 94 nodes that wait for stage 1.
+Not open yet: 1678 nodes that wait for a statement dependency, 97 nodes that wait for stage 1.
 
 ## Stage 3: modules to prove (0)
 
