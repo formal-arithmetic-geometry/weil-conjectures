@@ -60,8 +60,8 @@
 | `lem-pur-derived-change-of-rings` | - | none |
 | `def-wf-lie-algebra` | - | none |
 | `lem-pc-flf-properties` | - | none |
-| `lem-pur-rhom-global-sections` | - | none |
 | `lem-pur-rhom-well-defined` | - | none |
+| `lem-pur-hom-kflat-into-kinjective` | - | none |
 
 ## Stage 2: nodes to state (802)
 
@@ -870,7 +870,7 @@
 | `lem-weil-pbc-projective-space-zero-isomorphism` | 4 | state |
 | `def-nagata-fixed-base-separated-stage` | 6 | state |
 
-Not open yet: 1660 nodes that wait for a statement dependency, 95 nodes that wait for stage 1.
+Not open yet: 1661 nodes that wait for a statement dependency, 95 nodes that wait for stage 1.
 
 ## Stage 3: modules to prove (0)
 
