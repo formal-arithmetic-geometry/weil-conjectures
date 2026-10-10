@@ -11,7 +11,7 @@
  },
  "kind": "statement",
  "title": "Point and tangent separation implies very ampleness on a curve",
- "statement": "Let $k$ be an algebraically closed field, let $C$ be a proper smooth connected curve over $k$, and let $\\mathcal M$ be a line bundle on $C$ [def-sc-curves] [def-sc-invertible-module]. Suppose that for every $k$-rational point $P$ one has $\\dim_k H^0(C,\\mathcal M(-P))=\\dim_k H^0(C,\\mathcal M)-1$, and for every pair of (not necessarily distinct) $k$-rational points $P,Q$ one has $\\dim_k H^0(C,\\mathcal M(-P-Q))=\\dim_k H^0(C,\\mathcal M)-2$, where the twists use the divisor-degree convention of [def-sc-pic0]. Then $\\mathcal M$ is very ample [def-sc-ample].",
+ "statement": "Let $k$ be an algebraically closed field, let $C$ be a proper smooth connected curve over $k$, and let $\\mathcal M$ be a line bundle on $C$ [def-sc-curves] [def-sc-invertible-module]. Suppose that for every $k$-rational point $P$ one has $\\dim_k H^0(C,\\mathcal M(-P))=\\dim_k H^0(C,\\mathcal M)-1$, and for every pair of (not necessarily distinct) $k$-rational points $P,Q$ one has $\\dim_k H^0(C,\\mathcal M(-P-Q))=\\dim_k H^0(C,\\mathcal M)-2$, where $\\mathcal M(-P-Q)=\\mathcal M\\otimes\\mathcal O_C(-[P]-[Q])$ uses the divisor-module convention of [def-sc-divisor] and the degree convention of [def-sc-pic0]. Then $\\mathcal M$ is very ample [def-sc-ample].",
  "source": {
   "document": "literature/stacks-project/varieties.tex",
   "place": "Tag 0E8S, lemma-separate-points-tangent-vectors (point and tangent separation implies very ampleness); equivalent dimension-drop hypotheses as stated by AlgebraicGeometry.Scheme.isVeryAmple_of_finrankH_zero_tensorObj_toModules_ker, WeilConjectures/AlgebraicGeometry/Curve/RiemannRoch.lean:1405-1511"
@@ -19,12 +19,76 @@
  "stmt_deps": [
   "def-sc-curves",
   "def-sc-invertible-module",
+  "def-sc-divisor",
   "def-sc-pic0",
   "def-sc-ample"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Set $V=H^0(C,\\mathcal M)$. For a closed point $P$, algebraic closedness makes $P$ $k$-rational. The divisor-module definition [def-sc-divisor] identifies $H^0(C,\\mathcal M(-P))$ with the sections of $V$ vanishing at $P$. The first dimension-drop hypothesis makes this subspace a hyperplane, so evaluation at $P$ is nonzero. In particular, $V$ has no base point at a closed point. The proper-coherent finiteness needed to take a basis of $V$ is included in [lem-sc-point-tangent-separation-closed-immersion].",
+   "uses": [
+    "def-sc-divisor",
+    "lem-sc-point-tangent-separation-closed-immersion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 0E8S, lemma-separate-points-tangent-vectors, proof, first paragraph; the dimension-drop translation follows the second paragraph of blueprint node lem-sc-degree-2g1-very-ample"
+   }
+  },
+  {
+   "text": "If $P\\ne Q$, [def-sc-divisor] identifies $H^0(C,\\mathcal M(-P-Q))$ with the subspace of $H^0(C,\\mathcal M(-P))$ whose sections also vanish at $Q$. The hypotheses give these nested spaces codimensions $2$ and $1$ in $V$, respectively. Choose $s$ in the latter but outside the former. Then $s(P)=0$ and $s(Q)\\ne0$, giving condition (1) of [lem-sc-point-tangent-separation-closed-immersion] for every ordered pair of distinct closed points.",
+   "uses": [
+    "def-sc-divisor",
+    "lem-sc-point-tangent-separation-closed-immersion"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-picard-framework/sk-thm-picard-rr/lem-sc-degree-2g1-very-ample.md",
+    "place": "proof, second paragraph: separation of distinct points"
+   }
+  },
+  {
+   "text": "Put $Q=P$. The same codimension calculation gives $s\\in H^0(C,\\mathcal M(-P))\\setminus H^0(C,\\mathcal M(-2P))$. By [lem-sc-point-cartier], $P$ is an effective Cartier divisor. Its ideal at $P$ is $\\mathfrak m_P=(t)$ with $t$ a uniformizer, because the smooth curve has a one-dimensional discrete valuation local ring by [lem-sc-smooth-regular] and [lem-sc-regular-dim1-dvr]. Hence [def-sc-divisor] says that, in a local frame of $\\mathcal M$, the germ of $s$ is $tu$ for some unit $u$: it lies in $\\mathfrak m_P$ but not $\\mathfrak m_P^2$. Its class in $\\mathfrak m_P/\\mathfrak m_P^2$ is nonzero. This cotangent space is one-dimensional, so every nonzero tangent vector evaluates it nontrivially. Thus $s$ satisfies condition (2) of [lem-sc-point-tangent-separation-closed-immersion].",
+   "uses": [
+    "lem-sc-point-cartier",
+    "lem-sc-smooth-regular",
+    "lem-sc-regular-dim1-dvr",
+    "def-sc-divisor",
+    "lem-sc-point-tangent-separation-closed-immersion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-picard-framework/sk-thm-picard-rr/lem-sc-degree-2g1-very-ample.md",
+    "place": "proof, second paragraph: separation of tangent vectors by subtracting the same point twice"
+   }
+  },
+  {
+   "text": "Apply [lem-sc-point-tangent-separation-closed-immersion] to the proper $k$-scheme $C$, the invertible module $\\mathcal M$, and the full finite-dimensional space $V=H^0(C,\\mathcal M)$. Step 1 gives (0), steps 2 and 3 give (1) and (2); the criterion gives a closed immersion of the complete linear system $C\\to\\mathbf P(V^\\vee)$ pulling $\\mathcal O(1)$ back to $\\mathcal M$. This is very ampleness by [def-sc-ample].",
+   "uses": [
+    "lem-sc-point-tangent-separation-closed-immersion",
+    "def-sc-ample"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 0E8S, lemma-separate-points-tangent-vectors, conclusion; blueprint node lem-sc-degree-2g1-very-ample, proof, third paragraph"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sc-divisor",
+  "lem-sc-point-tangent-separation-closed-immersion",
+  "lem-sc-point-cartier",
+  "lem-sc-smooth-regular",
+  "lem-sc-regular-dim1-dvr",
+  "def-sc-ample"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/master/blueprint/sec-picard-framework/sk-thm-picard-rr/lem-sc-degree-2g1-very-ample.md",
+  "place": "proof, second and third paragraphs, with Stacks Tag 0E8S for the separation criterion"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -56,10 +120,25 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-sc-degree-2g1-very-ample"
  },
  "chapter": "sec-picard-framework",
- "unit": "sk-thm-picard-rr"
+ "unit": "sk-thm-picard-rr",
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "lem-sc-very-ample-separation-criterion",
+  "worker": "stage1",
+  "summary": "Translated the one- and two-point dimension drops into sections separating closed points and tangent vectors, using the divisor-module description and the DVR local ring of a smooth curve. Isolated the general Stacks 0E8S closed-immersion criterion as one new unsplit node, explicitly for the complete linear system; it also carries the proper-coherent finiteness prerequisite of Tag 02O5. The related sorry-free Lean theorem concludes the weaker existential IsVeryAmple notion, so it was not attached as an exact statement.",
+  "blueprint": "Steps 1-3 realize the second paragraph of lem-sc-degree-2g1-very-ample (dimension drops imply generation and separation of points and tangent vectors); step 4 and the new node realize its third paragraph (the complete linear system is a closed immersion)."
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-vas",
+  "group": "E1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-vas (reviewer sub-agent of L); spot-checked: Repaired re-push after return of 14:14: point 1 repaired (new node now has hypothesis (0) 'some s in V nonvanishing at every closed point, equivalently V generates L', cites def-weil-pbc-generating-sections in statement and stmt_deps, conclusion no longer claims generation, keeps finite-dimensionality; report records E7 addition); point 2 repaired (item step 4 now reads 'Step 1 gives (0), steps 2 and 3 give (1) and (2)', so step 1's nonvanishing evaluation is used). Read Stacks varieties.tex label lemma-separate-points-tangent-vectors (0E8S): new node = Stacks' hypotheses (k alg closed, X proper, L invertible, V subspace, (1), (2)) plus (0); counterexample X=Spec k, V=0 now excluded by (0). Read cited statements def-weil-pbc-generating-sections, def-weil-pbc-morphism-to-projective-space-by-sections (needs generating sections, supplied by (0)), def-pc-projective-space-twist, def-sc-ample (complete linear system closed immersion, matches step 4 with V=H^0), def-sc-divisor (vanishing description used by steps 1-3). Steps 2 and 3 unchanged from the version the previous reviewer checked. No Mathlib leaf. FIX: dag/nodes/sec-picard-framework/lem-sc-point-tangent-separation-closed-immersion.json: source.place: appended the note that hypothesis (0) is added to Tag 0E8S (E7) and why, which the return asked for and the repair left out of source.place. 14:35-14:37 UTC.; 1 file(s) fixed by the reviewer"
+ }
 }
