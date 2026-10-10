@@ -156,6 +156,25 @@ theorem eq_zero_of_forall_unit_app_eq_zero {κ : Type*} [Finite κ] {Z : κ → 
   change F.obj.map (f p).op s = F.obj.map (f p).op 0
   rw [hf p, map_zero]
 
+variable (R) in
+/-- **Pullbacks along a quasi-compact jointly surjective family are jointly faithful.** A
+morphism of pro-étale sheaves of modules on `U` whose pullbacks along finitely many
+quasi-compact morphisms `g k : Z k ⟶ U` jointly covering `U` vanish is zero. -/
+theorem eq_zero_of_forall_upperStar_map_eq_zero {κ : Type*} [Finite κ] {Z : κ → Scheme.{u}}
+    (g : ∀ k, Z k ⟶ U) [∀ k, QuasiCompact (g k)] (hg : ∀ x, ∃ k, x ∈ Set.range (g k))
+    {F G : Sheaf (Scheme.ProEt.topology U) (ModuleCat.{u + 1} R)} (φ : F ⟶ G)
+    (h : ∀ k, (g k)^*[ModuleCat.{u + 1} R].map φ = 0) : φ = 0 := by
+  refine Sheaf.hom_ext (NatTrans.ext (funext fun V ↦ ModuleCat.hom_ext
+    (LinearMap.ext fun x ↦ ?_)))
+  refine eq_zero_of_forall_unit_app_eq_zero R g hg G (φ.hom.app V x) fun k ↦ ?_
+  have h0 : φ ≫ (upperStarLowerStarAdjunction (ModuleCat.{u + 1} R) (g k)).unit.app G = 0 := by
+    have := (upperStarLowerStarAdjunction (ModuleCat.{u + 1} R) (g k)).unit.naturality φ
+    simp only [Functor.id_obj, Functor.id_map, Functor.comp_obj, Functor.comp_map, h k,
+      Functor.map_zero, comp_zero] at this
+    exact this
+  have := congrArg (fun ψ ↦ (ψ.hom.app V).hom x) h0
+  simpa using this
+
 end ProEtale
 
 end AlgebraicGeometry

@@ -142,6 +142,42 @@ lemma Γ_map_adicUpperStarUnitIso_globalSectionsToUpperStar_oneGlobalSection (g 
   rw [oneGlobalSection_eq, oneGlobalSection_eq]
   exact (globalSectionsToUpperStar_adicConstantGlobalSection g 1).trans (by congr 1)
 
+/-- The restriction along `g : W ⟶ V` of the global section `β(1)` of a morphism
+`β : ℚ̄_ℓ ⟶ M` of sheaves of modules is the global section of the pullback of `β`. -/
+lemma globalSectionsToUpperStar_globalSectionOfModHom (g : W ⟶ V) {M : AdicSheaf l V}
+    (β : AdicSheaf.unit l V ⟶ M) :
+    ((globalSectionsToUpperStar _ g).app M.X).hom (globalSectionOfModHom β) =
+      globalSectionOfModHom ((adicUpperStarUnitIso l g).inv ≫ (g)^*ᵃ[l].map β) := by
+  have hhi : (adicUpperStarUnitIso l g).hom.hom ≫ (adicUpperStarUnitIso l g).inv.hom =
+      𝟙 _ := by
+    rw [← Mod.comp_hom', Iso.hom_inv_id]; rfl
+  have e1 : ((globalSectionsToUpperStar _ g).app (adicConstantSheaf l V)).hom
+      (oneGlobalSection V) = ((Sheaf.Γ _ _).map (adicUpperStarUnitIso l g).inv.hom).hom
+        (oneGlobalSection W) := by
+    have h2 := congrArg ((Sheaf.Γ _ _).map (adicUpperStarUnitIso l g).inv.hom).hom
+      (Γ_map_adicUpperStarUnitIso_globalSectionsToUpperStar_oneGlobalSection (l := l) g)
+    have h3 := congrArg (fun φ ↦ φ.hom (((globalSectionsToUpperStar _ g).app
+      (adicConstantSheaf l V)).hom (oneGlobalSection V)))
+        (((Sheaf.Γ _ _).map_comp _ _).symm.trans
+          ((congrArg (Sheaf.Γ _ _).map hhi).trans ((Sheaf.Γ _ _).map_id _)))
+    simp only [ModuleCat.hom_comp, LinearMap.comp_apply, ModuleCat.hom_id,
+      LinearMap.id_apply] at h3
+    exact h3.symm.trans h2
+  have e2 : ((globalSectionsToUpperStar _ g).app M.X).hom (globalSectionOfModHom β) =
+      ((Sheaf.Γ _ _).map ((adicUpperStarUnitIso l g).inv ≫ (g)^*ᵃ[l].map β).hom).hom
+        (oneGlobalSection W) := by
+    have n := congrArg (fun φ ↦ φ.hom (oneGlobalSection V))
+      ((globalSectionsToUpperStar _ g).naturality β.hom)
+    simp only [ModuleCat.hom_comp, LinearMap.comp_apply, Functor.comp_map] at n
+    refine (congrArg _ (globalSectionOfModHom_eq β)).trans (n.trans ?_)
+    refine (congrArg _ e1).trans ?_
+    have := congrArg (fun φ ↦ φ.hom (oneGlobalSection W))
+      ((Sheaf.Γ (Scheme.ProEt.topology W) (WeilCoefficients.{u} l)).map_comp
+        (adicUpperStarUnitIso l g).inv.hom ((g)^*ᵃ[l].map β).hom)
+    simp only [ModuleCat.hom_comp, LinearMap.comp_apply] at this
+    exact this.symm
+  exact e2.trans (globalSectionOfModHom_eq _).symm
+
 attribute [local instance] Abelian.hasFiniteBiproducts
 
 /-- Restrictions along the members of a pro-étale cover are jointly faithful. -/
@@ -253,34 +289,8 @@ theorem IsAdicLisseSheaf.eq_zero_of_globalSectionsToUpperStar_eq_zero {Y : Schem
     have c1 := congrArg (fun φ ↦ φ.hom b) (globalSectionsToUpperStar_comp _ t (f i) H.X)
     simp only [ModuleCat.hom_comp, LinearMap.comp_apply] at c1
     rw [hs, map_zero] at c1
-    have hhi : (adicUpperStarUnitIso l (f i)).hom.hom ≫ (adicUpperStarUnitIso l (f i)).inv.hom =
-        𝟙 _ := by
-      rw [← Mod.comp_hom', Iso.hom_inv_id]; rfl
-    have e1 : ((globalSectionsToUpperStar _ (f i)).app (adicConstantSheaf l Y)).hom
-        (oneGlobalSection Y) = ((Sheaf.Γ _ _).map (adicUpperStarUnitIso l (f i)).inv.hom).hom
-          (oneGlobalSection (V i)) := by
-      have h2 := congrArg ((Sheaf.Γ _ _).map (adicUpperStarUnitIso l (f i)).inv.hom).hom
-        (Γ_map_adicUpperStarUnitIso_globalSectionsToUpperStar_oneGlobalSection (l := l) (f i))
-      have h3 := congrArg (fun φ ↦ φ.hom (((globalSectionsToUpperStar _ (f i)).app
-        (adicConstantSheaf l Y)).hom (oneGlobalSection Y)))
-          (((Sheaf.Γ _ _).map_comp _ _).symm.trans
-            ((congrArg (Sheaf.Γ _ _).map hhi).trans ((Sheaf.Γ _ _).map_id _)))
-      simp only [ModuleCat.hom_comp, LinearMap.comp_apply, ModuleCat.hom_id,
-        LinearMap.id_apply] at h3
-      exact h3.symm.trans h2
-    have e2 : ((globalSectionsToUpperStar _ (f i)).app H.X).hom b =
-        ((Sheaf.Γ _ _).map ((adicUpperStarUnitIso l (f i)).inv ≫ (f i)^*ᵃ[l].map β).hom).hom
-          (oneGlobalSection (V i)) := by
-      have n := congrArg (fun φ ↦ φ.hom (oneGlobalSection Y))
-        ((globalSectionsToUpperStar _ (f i)).naturality β.hom)
-      simp only [ModuleCat.hom_comp, LinearMap.comp_apply, Functor.comp_map] at n
-      refine (congrArg _ (globalSectionOfModHom_eq β)).trans (n.trans ?_)
-      refine (congrArg _ e1).trans ?_
-      have := congrArg (fun φ ↦ φ.hom (oneGlobalSection (V i)))
-        ((Sheaf.Γ (Scheme.ProEt.topology (V i)) (WeilCoefficients.{u} l)).map_comp
-          (adicUpperStarUnitIso l (f i)).inv.hom ((f i)^*ᵃ[l].map β).hom)
-      simp only [ModuleCat.hom_comp, LinearMap.comp_apply] at this
-      exact this.symm
+    have e2 := (globalSectionsToUpperStar_globalSectionOfModHom (f i) β).trans
+      (globalSectionOfModHom_eq _)
     let φa := ((e i).some.hom ≫ biproduct.π (fun _ : Fin (n i) ↦ AdicSheaf.unit l (V i)) a).hom
     have e3 : ((Sheaf.Γ _ _).map φa).hom (((globalSectionsToUpperStar _ (f i)).app H.X).hom b) =
         adicConstantGlobalSection (AdicSheaf.unitEndFun ψ) := by
