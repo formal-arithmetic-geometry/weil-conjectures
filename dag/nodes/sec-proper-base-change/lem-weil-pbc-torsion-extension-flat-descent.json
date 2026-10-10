@@ -4,7 +4,7 @@
   "is": null,
   "from": {
    "node": "thm-weil-pbc-finite-etale-lifting",
-   "place": "step 7 of its split (source: Lemma 0GS2, proof: the essential-surjectivity paragraphs)",
+   "place": "## Proof, step (b) Essential surjectivity: algebraization through formal glueing, specifically the torsion-extension descent used in Proposition 05ER",
    "via": [
     "prop-weil-pbc-formal-glueing-equivalence",
     "lem-weil-pbc-formal-glueing-isogeny",
@@ -17,7 +17,7 @@
     "lem-weil-pbc-finite-etale-lifting-essential-surjectivity"
    ]
   },
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "Extensions by I-power torsion modules descend along a flat map that is an isomorphism mod I",
@@ -30,9 +30,91 @@
   "def-weil-pbc-flat-ring-map",
   "def-weil-module-base-change"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Choose a surjection $p:P=\\bigoplus_{j\\in J}R/I^{n_j}\\twoheadrightarrow Q$ with torsion kernel $K$ by [lem-weil-pbc-torsion-cyclic-presentation]. Write $k:K\\hookrightarrow P$ for its kernel inclusion. Since $S$ is flat, tensoring gives the exact sequence $0\\to K_S\\xrightarrow{k_S}P_S\\xrightarrow{p_S}Q_S\\to0$ [lem-weil-pbc-flat-tensor-exact], [lem-weil-pbc-tensor-right-exact], where a subscript $S$ denotes tensoring with $S$. In particular $K_S$ identifies with the kernel of $p_S$.",
+   "uses": [
+    "lem-weil-pbc-torsion-cyclic-presentation",
+    "lem-weil-pbc-flat-tensor-exact",
+    "lem-weil-pbc-tensor-right-exact",
+    "def-weil-module-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "More on Algebra, proof of Lemma 05EG (lemma-neighbourhood-extensions, lines 24504-24516), reduction to a direct sum of $R/I^n$"
+   }
+  },
+  {
+   "text": "Pull the given extension $0\\to N_S\\xrightarrow{\\iota}M'\\xrightarrow{\\pi}Q_S\\to0$ back along $p_S:P_S\\to Q_S$: put $T=\\{(m,x)\\in M'\\oplus P_S:\\pi(m)=p_S(x)\\}$ with inclusion $N_S\\to T$, $n\\mapsto(\\iota(n),0)$, and projection $T\\to P_S$, $(m,x)\\mapsto x$. This is exact: a pair in the kernel has $x=0$, hence $\\pi(m)=0$ and $m=\\iota(n)$ uniquely; for $x\\in P_S$ choose $m$ with $\\pi(m)=p_S(x)$. For each cyclic summand $C_j=R/I^{n_j}$, the pullback extension over $(C_j)_S$ descends by [lem-weil-pbc-cyclic-extension-flat-descent]. Apply [lem-weil-pbc-direct-sum-extension-assembly] to these descents and obtain an $R$-extension $0\\to N\\xrightarrow{a}E_P\\xrightarrow{b}P\\to0$ and an isomorphism of extensions $\\alpha:(E_P)_S\\xrightarrow{\\sim}T$, so $\\alpha a_S(n)=(\\iota(n),0)$ and $\\operatorname{pr}_2\\alpha=b_S$.",
+   "uses": [
+    "lem-weil-pbc-cyclic-extension-flat-descent",
+    "lem-weil-pbc-direct-sum-extension-assembly",
+    "def-weil-pbc-exact-sequence",
+    "def-weil-module-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "More on Algebra, proof of Lemma 05EG (lemma-neighbourhood-extensions, lines 24510-24527): pullback of the extension and Ext compatibility with direct sums"
+   }
+  },
+  {
+   "text": "The pullback extension has a canonical lift of $K_S$: define $t_S:K_S\\to T$ by $z\\mapsto(0,k_S(z))$. It lies in $T$ because $p_Sk_S=0$, and $\\operatorname{pr}_2t_S=k_S$. Transport it through $\\alpha$ to $s_S=\\alpha^{-1}t_S:K_S\\to(E_P)_S$. Since $K$ is $I$-power torsion (step 1), [lem-weil-pbc-torsion-hom-flat-comparison] with target $E_P$ gives a unique $R$-linear $s:K\\to E_P$ whose base change is $s_S$. The same Hom comparison with target $P$ is injective; after base change $b_Ss_S=k_S$, so $bs=k$. Thus $s$ is injective and its image meets $a(N)$ only at $0$: applying $b$ to $s(z)=a(n)$ gives $k(z)=0$, hence $z=0$ and then $n=0$.",
+   "uses": [
+    "lem-weil-pbc-torsion-hom-flat-comparison",
+    "def-weil-module-base-change",
+    "def-weil-pbc-exact-sequence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "More on Algebra, proof of Lemma 05EG (lemma-neighbourhood-extensions, lines 24510-24517): six-term Ext reduction using Hom comparison 05EC; the splitting-lift diagram chase is written out"
+   }
+  },
+  {
+   "text": "Set $E=E_P/s(K)$ [def-weil-pbc-quotient-module]. The injection $a:N\\to E_P$ remains injective after quotienting, by step 3, so it induces $j:N\\hookrightarrow E$. The map $pb:E_P\\to Q$ kills $s(K)$ because $pbs=pk=0$, and hence induces $q:E\\to Q$. It is surjective since both $p$ and $b$ are. If $q([e])=0$, then $b(e)=k(z)$ for some $z\\in K$ by exactness of $0\\to K\\xrightarrow{k}P\\xrightarrow{p}Q\\to0$; thus $b(e-s(z))=0$, and $e-s(z)=a(n)$ for some $n\\in N$ by exactness of the $E_P$ extension. Hence $[e]=j(n)$ and $0\\to N\\xrightarrow{j}E\\xrightarrow{q}Q\\to0$ is exact.",
+   "uses": [
+    "def-weil-pbc-quotient-module",
+    "def-weil-pbc-exact-sequence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "More on Algebra, proof of Lemma 05EG (lemma-neighbourhood-extensions, lines 24510-24517): descending the extension from the presentation, quotient construction spelling out its six-term Ext reduction"
+   }
+  },
+  {
+   "text": "Flatness identifies $E_S$ with $(E_P)_S/s_S(K_S)$: tensor the exact sequence $K\\xrightarrow{s}E_P\\to E\\to0$ and use [lem-weil-pbc-flat-tensor-exact], [lem-weil-pbc-tensor-right-exact]. Under $\\alpha$, the submodule $s_S(K_S)$ maps to $t_S(K_S)=\\{(0,k_S(z)):z\\in K_S\\}\\subset T$. The map $\\operatorname{pr}_1:T\\to M'$, $(m,x)\\mapsto m$, is surjective because $p_S:P_S\\to Q_S$ is surjective (step 1); its kernel is precisely $t_S(K_S)$, since $m=0$ forces $p_S(x)=0$ and $\\ker p_S=\\operatorname{im}k_S$. Therefore it induces an $S$-linear isomorphism $\\theta:E_S\\simeq T/t_S(K_S)\\simeq M'$. For $n\\in N_S$ its representative is $\\alpha(a_S(n))=(\\iota(n),0)$, so $\\theta j_S=\\iota$. For $[e]\\in E_S$, the equality $\\pi\\operatorname{pr}_1\\alpha(e)=p_S\\operatorname{pr}_2\\alpha(e)=p_Sb_S(e)=q_S([e])$ gives $\\pi\\theta=q_S$. This is the required isomorphism of extensions.",
+   "uses": [
+    "lem-weil-pbc-flat-tensor-exact",
+    "lem-weil-pbc-tensor-right-exact",
+    "def-weil-pbc-quotient-module",
+    "def-weil-module-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "More on Algebra, proof of Lemma 05EG (lemma-neighbourhood-extensions, lines 24510-24517): final descent from the presentation, quotient and base-change verification written out"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-torsion-cyclic-presentation",
+  "lem-weil-pbc-flat-tensor-exact",
+  "lem-weil-pbc-tensor-right-exact",
+  "def-weil-module-base-change",
+  "lem-weil-pbc-cyclic-extension-flat-descent",
+  "lem-weil-pbc-direct-sum-extension-assembly",
+  "def-weil-pbc-exact-sequence",
+  "lem-weil-pbc-torsion-hom-flat-comparison",
+  "def-weil-pbc-quotient-module"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Lemma 05EG (lemma-neighbourhood-extensions, lines 24477-24564), explicit Ext proof; pullback, splitting lift and quotient steps expanded"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -64,7 +146,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "worker",
@@ -85,6 +167,19 @@
  },
  "chapter": "sec-proper-base-change",
  "unit": "sk-thm-p1",
- "reviewed": "2026-10-10 L: statement checked against 05EH (Dualizing, Ext^1 form via extensions)",
- "lead_note": "the proof of 05EH needs local cohomology RGamma_Z (Dualizing 0A6Y-type lemmas)"
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "group": "K1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed by the lead of K1; spot-checked by L: L: 05EG: cyclic presentation of the torsion module, descent of extensions of cyclic modules and their direct sums, the Hom comparison; 4 new nodes"
+ },
+ "lead_note": "the proof of 05EH needs local cohomology RGamma_Z (Dualizing 0A6Y-type lemmas)",
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "lem-weil-pbc-torsion-extension-flat-descent",
+  "worker": "stage1",
+  "summary": "The direct module proof of More on Algebra Lemma 05EG proves exactly the extension statement used by 05ER. Split it into presentation by cyclic ideal-power quotients (05E8), the torsion-source Hom comparison (05EC(2)), the cyclic quotient extension calculation (05EG via 05EE/05EF), and assembly over arbitrary direct sums (the detail 05EG omits). The item retains the pullback, splitting lift through Hom, quotient by the lifted kernel, and verification after flat base change. The derived Lemma 05EH remains a valid alternative source but is not used in this proof.",
+  "blueprint": "The item's five steps serve the blueprint ancestor thm-weil-pbc-finite-etale-lifting, ## Proof step (b) Essential surjectivity, via the formal-glueing equivalence in the algebraization branch; specifically the extension-descent invocation in Proposition 05ER."
+ }
 }
