@@ -3,11 +3,11 @@
  "blueprint": {
   "is": "def-pc-smooth-projective-curve",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "definition",
  "title": "Smooth projective curves",
- "statement": "Let $k$ be a field. A *smooth projective curve over $k$* is a\ncurve $X$ over $k$ such that $X\\to\\operatorname{Spec}(k)$ is\nsmooth and\nprojective. In Stacks Project,\nChapter 44 (Picard Schemes of Curves) the phrase *smooth projective\ncurve over $k$* is used in exactly this sense;",
+ "statement": "Let $k$ be a field. A *smooth projective curve over $k$* is a\ncurve $X$ over $k$ [def-pc-curve] (an integral scheme, separated and of finite type over $k$, of dimension $1$) such that the structure morphism $X\\to\\operatorname{Spec}(k)$ is\nsmooth [def-sbc-smooth-morphisms] and\nprojective [def-pc-projective-morphism]. In Stacks Project,\nChapter 44 (Picard Schemes of Curves) the phrase *smooth projective\ncurve over $k$* is used in exactly this sense.",
  "source": {
   "document": "literature/blueprint/master/blueprint/sec-abelian-varieties/sk-def-av-jacobian/def-pc-smooth-projective-curve.md",
   "place": "node def-pc-smooth-projective-curve, order 454"
@@ -15,14 +15,50 @@
  "stmt_deps": [
   "def-pc-curve",
   "def-pc-projective-morphism",
-  "def-weil-scheme-morphism-properties"
+  "def-sbc-smooth-morphisms"
  ],
  "proof": [],
  "proof_deps": [],
  "proof_origin": null,
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "smooth projective curve over a field, scheme morphism projective",
+   "results": "AlgebraicGeometry.IsSmooth, AlgebraicGeometry.IsSmoothOfRelativeDimension (Mathlib.AlgebraicGeometry.Morphisms.Smooth), AlgebraicGeometry.Proj.fromOfGlobalSections (Mathlib.AlgebraicGeometry.ProjectiveSpectrum.Basic); no curve notion, no projective morphism",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "a smooth projective integral scheme of dimension one over a field (smooth projective curve)",
+   "results": "only WeierstrassCurve, WeierstrassCurve.Projective, WeierstrassCurve.IsIntegral, WeierstrassCurve.IsElliptic (Mathlib.AlgebraicGeometry.EllipticCurve.*): equations, not schemes over k",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsProjective\"",
+   "results": "CategoryTheory.isProjective, IsProjective.iff_projective, MeasureTheory.IsProjectiveMeasureFamily/IsProjectiveLimit: no projective morphism of schemes",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rn 'class IsProjective|def IsProjective|class IsCurve|SmoothProjectiveCurve|class IsQuasiProjective' and -i 'projective curve' in ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicGeometry and Mathlib",
+   "results": "none; Mathlib has the parts AlgebraicGeometry.Smooth (Morphisms/Smooth.lean:62), IsProper (Morphisms/Proper.lean:42), IsIntegral (Properties.lean:240), but no curve and no projective morphism",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "slopmaster2 (71d63dcf) ~/weil-conjectures-slopmaster2/WeilConjectures: node id, 'smooth projective curve', IsCurve, IsProjective; dag/lean_names_upstream.json for this node",
+   "results": "no declaration for the node id, none in lean_names_upstream.json. AlgebraicGeometry.IsCurve (AlgebraicGeometry/Curve.lean:75) is separated + locally of finite type + quasi-compact with topologicalKrullDim <= 1 (no integrality, dimension at most one): not the Stacks curve. Smooth projective curves appear only as hypothesis bundles: [IsCurve f] [Smooth f] [IsProper f] (AbelianVariety/Jacobian.lean:67, IsJacobian) and [SmoothOfRelativeDimension 1 f] [IsProper f] [GeometricallyIntegral f] (Picard/Scheme.lean:62, Picard/RationalPoint.lean:33); both replace projective by proper and differ from this notion",
+   "date": "2026-10-10",
+   "verdict": "no match; no declaration states exactly this notion (rule 0 does not apply)"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [],
  "blueprint_kind": "definition",
@@ -50,5 +86,14 @@
   }
  },
  "chapter": "sec-abelian-varieties",
- "unit": "sk-def-av-jacobian"
+ "unit": "sk-def-av-jacobian",
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "def-pc-smooth-projective-curve",
+  "worker": "stage1",
+  "summary": "Definition node; no proof. Checked that each notion is defined by a node it cites: 'curve over k' by def-pc-curve (Stacks 0A23 with variety 020D: integral, separated, finite type, dimension 1), 'projective' by def-pc-projective-morphism (Stacks 01W8; over Spec k the bundle P(E) of a finite-dimensional E is some P^n_k, so the two forms agree here), 'smooth' by def-sbc-smooth-morphisms. The statement dependency def-weil-scheme-morphism-properties (a collection node that fixes no notion of its own and points to def-sbc-smooth-morphisms for 'smooth') was replaced by def-sbc-smooth-morphisms directly; blueprint_uses kept. The statement now cites the three nodes inline and its trailing ';' (copied from the blueprint, where the sentence breaks off) is a full stop; the meaning is unchanged. Checked against Stacks pic.tex (Chapter 44, e.g. lemma-check-conditions, Tag 0B9U) and varieties.tex definition-curve: the usage agrees. No cycle: none of the three dependencies reaches this node through stmt_deps or proof_deps. Lean: no Mathlib or slopmaster2 declaration states this notion (slopmaster2's IsCurve is a weaker, non-integral notion, and its smooth projective curves are hypothesis bundles with IsProper in place of projective).",
+  "blueprint": "The blueprint node is this definition itself (no proof); the item realizes its single sentence: 'curve over k' -> def-pc-curve, 'smooth' -> def-sbc-smooth-morphisms, 'projective' -> def-pc-projective-morphism."
+ },
+ "reviewed": "2026-10-10 L: definition node checked: curve (def-pc-curve, Stacks 0A23), projective (def-pc-projective-morphism), smooth (def-sbc-smooth-morphisms) cited directly; wording only, trailing \";\" of the blueprint closed. No Lean declaration for the notion (slopmaster2 bundles IsCurve+Smooth+IsProper, proper for projective; IsCurve is weaker). Worker flag: def-sc-general-curve states no dimension-1 condition, check at its split.",
+ "lead_note": "2026-10-10 L: slopmaster2 states smooth projective curves as [IsCurve f] [Smooth f] [IsProper f] (proper, not projective); stage 2 should know."
 }
