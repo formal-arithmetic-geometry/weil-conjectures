@@ -1,0 +1,71 @@
+{
+ "id": "lem-sc-p1-ext-yoneda-functoriality",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-sc-p1-duality",
+   "place": "proof, Step 2: 'the pairings are induced by compositions in the derived category'",
+   "via": [
+    "lem-sc-p1-duality-pairing-naturality"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Functoriality of Ext as Yoneda composition with morphisms",
+ "statement": "Let $X$ be a scheme, with Ext as in [def-sc-ext-sheaf] and Yoneda composition of Ext classes as in [lem-sc-p1-ext-yoneda-associativity], a morphism of $\\mathcal O_X$-modules being an element of $\\operatorname{Ext}^0_X=\\operatorname{Hom}_{\\mathcal O_X}$. Let $i\\geq0$, $e\\in\\operatorname{Ext}^i_X(\\mathcal F,\\mathcal G)$, and let $u:\\mathcal F'\\to\\mathcal F$ and $\\varphi:\\mathcal G\\to\\mathcal G'$ be morphisms of $\\mathcal O_X$-modules. Then $\\operatorname{Ext}^i_X(u,\\mathcal G)(e)=e\\circ u$ and $\\operatorname{Ext}^i_X(\\mathcal F,\\varphi)(e)=\\varphi[i]\\circ e$. Moreover the identification $\\operatorname{Ext}^i_X(\\mathcal O_X,\\mathcal G)=H^i(X,\\mathcal G)$ of [lem-sc-ext-locally-free] is natural in $\\mathcal G$: under it, $\\operatorname{Ext}^i_X(\\mathcal O_X,\\varphi)$ is $H^i(\\varphi)$ of [def-sc-sheaf-cohomology-functor]; in particular $H^i(\\varphi)(x)=\\varphi[i]\\circ x$ for $x\\in H^i(X,\\mathcal G)$.",
+ "stmt_deps": [
+  "def-sc-ext-sheaf",
+  "lem-sc-p1-ext-yoneda-associativity",
+  "lem-sc-ext-locally-free",
+  "def-sc-sheaf-cohomology-functor"
+ ],
+ "source": {
+  "document": "literature/stacks-project/derived.tex",
+  "place": "Section Tag 06XP (Ext groups as Hom in D(A); composition of Ext classes), with Cohomology Lemma Tag 0B3A for H^1"
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Ext functoriality equals Yoneda composition with a morphism (mk₀)",
+   "results": "service error (HTTP 500); no result",
+   "date": "2026-10-10",
+   "verdict": "no result; other search kinds checked"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Abelian.Ext.comp, CategoryTheory.Abelian.Ext.mk₀",
+   "results": "CategoryTheory.Abelian.extFunctor_map_app (contravariant functoriality of Ext in an abelian category with HasExt is composition with mk₀), Ext.mk₀_comp_mk₀, Ext.comp_mk₀_id; nothing on sheaf Ext as R^i Hom or on Ext^i(O_X,-)=H^i(X,-)",
+   "date": "2026-10-10",
+   "verdict": "no match (abstract-category analogue only)"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rn 'mk₀_comp|comp_mk₀' Mathlib/Algebra/Homology/DerivedCategory/Ext/; grep -rln 'Sheaf.*Ext|sheafCohomology' Mathlib/AlgebraicGeometry Mathlib/CategoryTheory/Sites",
+   "results": "Ext/Basic.lean:191,196,303 abstract composition lemmas; Sites/SheafCohomology/Basic.lean defines sheaf cohomology as Ext from the constant sheaf, not for O_X-modules",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "merged_into": null,
+ "created": {
+  "by": "R-dp2",
+  "item": "lem-sc-p1-duality-pairing-naturality",
+  "date": "2026-10-10"
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ }
+}

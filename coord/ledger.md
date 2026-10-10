@@ -1911,3 +1911,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 16:10 L: thm-sp-grothendieck: construction clause added to the statement (which spectral sequence: the one of the double complex G(I) for a Cartan-Eilenberg resolution, 015N proof); reviewer R-gdc's doubt; J1 told in the return note
 - 16:10 L: merged deliver/E1/def-weil-pbc-sheaf-ext (reviewer PASS; first push; new nodes: 0)
 - 16:10 L: merged deliver/G1/lem-pc-field-extension-fpqc-cover (reviewer FIX; first push; new nodes: 3)
+- 16:10 L: merged deliver/C1/lem-sc-p1-duality-pairing-naturality (reviewer FIX+NODE(1); after a return; new nodes: 4)
