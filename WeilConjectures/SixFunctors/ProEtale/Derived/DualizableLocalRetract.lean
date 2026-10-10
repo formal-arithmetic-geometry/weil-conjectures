@@ -232,4 +232,60 @@ lemma Q_map_eq_of_singleUnitHomEquiv_eq_add
     exact h
   · exact (HomologicalComplex.isZero_single_obj_X _ _ _ _ hp).eq_of_src _ _
 
+/-! ### Covering families indexed by a small type -/
+
+instance Scheme.ProEt.precoverage_small :
+    Precoverage.Small.{u} (Scheme.ProEt.precoverage X) :=
+  have : Precoverage.Small.{u} proetalePrecoverage.{u} :=
+    inferInstanceAs (Precoverage.Small.{u} (propQCPrecoverage @WeaklyEtale))
+  inferInstanceAs (Precoverage.Small.{u} (proetalePrecoverage.comap _))
+
+/-- A covering sieve of the pro-étale topology contains a pro-étale covering family indexed by
+a `Type u`: the pro-étale precoverage is small, since a quasi-compact cover can be refined to one
+with finitely many members over each affine open. -/
+lemma Scheme.ProEt.exists_ofArrows_of_mem_topology {V : X.ProEt} {S : Sieve V}
+    (hS : S ∈ Scheme.ProEt.topology X V) :
+    ∃ (ι : Type u) (W : ι → X.ProEt) (g : ∀ i, W i ⟶ V),
+      Presieve.ofArrows W g ∈ Scheme.ProEt.precoverage X V ∧ ∀ i, S (g i) := by
+  obtain ⟨R, hR, hle⟩ := Scheme.ProEt.mem_topology_iff.1 hS
+  obtain ⟨E, rfl⟩ := Precoverage.mem_iff_exists_zeroHypercover.1 hR
+  refine ⟨_, _, _, E.restrictIndexOfSmall.{u}.mem₀, fun i ↦ hle _ _ ?_⟩
+  exact E.toPreZeroHypercover.presieve₀_restrictIndex_le _ _ _ (Presieve.ofArrows.mk i)
+
+/-- A covering sieve of the terminal object of the small pro-étale site of `X` contains a
+family `W i ⟶ X`, indexed by a `Type u`, whose structure morphisms form a pro-étale covering
+family of `X`. -/
+lemma exists_proetalePrecoverage_of_mem_topology_terminalProEt
+    {S : Sieve (terminalProEt X)} (hS : S ∈ Scheme.ProEt.topology X (terminalProEt X)) :
+    ∃ (ι : Type u) (W : ι → X.ProEt) (g : ∀ i, W i ⟶ terminalProEt X),
+      Presieve.ofArrows (fun i ↦ (W i).left) (fun i ↦ (W i).hom) ∈ proetalePrecoverage X ∧
+        ∀ i, S (g i) := by
+  obtain ⟨ι, W, g, hg, hS⟩ := Scheme.ProEt.exists_ofArrows_of_mem_topology hS
+  refine ⟨ι, W, g, ?_, hS⟩
+  rw [Scheme.ProEt.mem_precoverage_iff, Presieve.map_ofArrows] at hg
+  have e : (fun i ↦ (W i).hom) = fun i ↦ (g i).left :=
+    funext fun i ↦ (Over.w (g i).toCommaMorphism).symm.trans (Category.comp_id _)
+  rw [e]
+  exact hg
+
+/-! ### Sections of pullbacks along members of the site -/
+
+/-- The localization functor along the structure morphism of `V : X.ProEt` sends the terminal
+object of the small pro-étale site of `V.left` to `V`. -/
+noncomputable def Scheme.ProEt.overMapMkIdIso (V : X.ProEt) :
+    (MorphismProperty.Over.map ⊤ V.prop).obj (Scheme.ProEt.mk (𝟙 V.left)) ≅ V :=
+  MorphismProperty.Over.isoMk (Iso.refl _) (Category.id_comp _).symm
+
+/-- For `V : X.ProEt` with structure morphism `g : V.left ⟶ X`, the sections of `g^* G` over
+the terminal object of the small pro-étale site of `V.left` are the sections of `G` over `V`,
+naturally in `G`: `g` is weakly étale, so `g^*` is computed by restriction
+(`ProEtale.upperStarIsoLocalizationRestriction`). -/
+noncomputable def upperStarSectionsMkIdIso (A : Type*) [Category.{u + 1} A] [Abelian A]
+    [IsGrothendieckAbelian.{u + 1} A] (V : X.ProEt) :
+    (V.hom)^*[A] ⋙ (sheafSections _ A).obj (op (Scheme.ProEt.mk (𝟙 V.left))) ≅
+      (sheafSections _ A).obj (op V) :=
+  Functor.isoWhiskerRight (upperStarIsoLocalizationRestriction A V.hom V.prop) _ ≪≫
+    NatIso.ofComponents (fun _ ↦ Iso.refl _) ≪≫
+    ((sheafSections _ A).mapIso (Scheme.ProEt.overMapMkIdIso V).op).symm
+
 end AlgebraicGeometry.ProEtale
