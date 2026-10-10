@@ -412,8 +412,8 @@ functors. -/
 noncomputable def grothendieckE₂BaseChange (eF : F ⋙ β ≅ α ⋙ F') (eG : G ⋙ γ ≅ β ⋙ G')
     (p q : ℕ) :
     (F.rightDerived q ⋙ G.rightDerived p) ⋙ γ ⟶ α ⋙ F'.rightDerived q ⋙ G'.rightDerived p :=
-  Functor.whiskerLeft (F.rightDerived q) (rightDerivedBaseChange eG p) ≫
-    Functor.whiskerRight (rightDerivedBaseChange eF q) (G'.rightDerived p)
+  Functor.whiskerLeft (F.rightDerived q) (rightDerivedBaseChange eG.hom p) ≫
+    Functor.whiskerRight (rightDerivedBaseChange eF.hom q) (G'.rightDerived p)
 
 /-- **Base change for the Grothendieck spectral sequence.** Let `(F, G)` and `(F', G')` be
 composable pairs with acyclicity, related by exact functors `α : A ⥤ A'`, `β : B ⥤ B'`,

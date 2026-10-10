@@ -52,3 +52,14 @@ instance (priority := 100) IsSepClosed.instInfinite (k : Type u) [Field k] [IsSe
   obtain ⟨a, ha⟩ := IsSepClosed.exists_root_C_mul_X_pow_add_C_mul_X_add_C (1 : k) (-1) (-1)
     (FiniteField.cast_card_eq_zero k) (Fintype.one_lt_card (α := k)) (by simp)
   simp [FiniteField.pow_card] at ha
+
+/-! ### Ported from the `proetale` package (`Proetale.Mathlib.FieldTheory.IsSepClosed`) -/
+
+/-- `IsSepClosed` transfers along a ring isomorphism of fields. -/
+theorem IsSepClosed.of_ringEquiv {k k' : Type*} [Field k] [Field k']
+    (e : k ≃+* k') [IsSepClosed k] : IsSepClosed k' := by
+  refine ⟨fun p hp => ?_⟩
+  have hsplit : (p.map e.symm.toRingHom).Splits :=
+    IsSepClosed.splits_of_separable _ hp.map
+  have hpush := hsplit.map e.toRingHom
+  rwa [Polynomial.map_map, e.toRingHom_comp_symm_toRingHom, Polynomial.map_id] at hpush
