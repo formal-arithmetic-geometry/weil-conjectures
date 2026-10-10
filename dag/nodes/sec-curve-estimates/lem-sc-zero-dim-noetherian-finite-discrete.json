@@ -26,9 +26,54 @@
   "def-weil-pbc-quasi-compact-scheme",
   "def-kun-topological-krull-dimension"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "The underlying topological space $|Y|$ is Noetherian (every nonempty set of closed subsets has a minimal element) by [lem-weil-pbc-noetherian-scheme-closed-subsets-minimal]. By [lem-weil-pbc-locally-noetherian-quasi-separated], $Y$ is quasi-separated; therefore [lem-weil-pbc-qcqs-scheme-spectral] applies to the quasi-compact scheme $Y$ and gives that $|Y|$ is spectral, in particular sober [def-weil-spectral-space]. A sober space is $T_0$: if $x\\ne y$ lay in exactly the same open subsets, then $\\overline{\\{x\\}}=\\overline{\\{y\\}}$ would be an irreducible closed subset with two generic points $x$ and $y$, contradicting uniqueness.",
+   "uses": [
+    "lem-weil-pbc-noetherian-scheme-closed-subsets-minimal",
+    "lem-weil-pbc-locally-noetherian-quasi-separated",
+    "lem-weil-pbc-qcqs-scheme-spectral",
+    "def-weil-spectral-space"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/properties.tex",
+    "place": "Properties Lemma 0AAX (properties-lemma-locally-Noetherian-dimension-0), proof"
+   }
+  },
+  {
+   "text": "Apply [lem-sc-zero-dim-noetherian-closed-finite] to the closed subset $Z=|Y|$ of the T0 Noetherian space $|Y|$. The hypothesis $\\dim Y\\le0$ is exactly the required bound on $\\dim Z$, so $|Y|$ is finite and every singleton is closed.",
+   "uses": [
+    "lem-sc-zero-dim-noetherian-closed-finite"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/properties.tex",
+    "place": "Properties Lemma 0AAX (properties-lemma-locally-Noetherian-dimension-0), proof and conclusion"
+   }
+  },
+  {
+   "text": "A finite space in which every singleton is closed is discrete: for any point $y$, the complement of $\\{y\\}$ is a finite union of closed singletons and hence closed, so $\\{y\\}$ is open. The empty space satisfies the same conclusion vacuously.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/properties.tex",
+    "place": "Properties Lemma 0AAX (properties-lemma-locally-Noetherian-dimension-0), conclusion"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-noetherian-scheme-closed-subsets-minimal",
+  "lem-weil-pbc-locally-noetherian-quasi-separated",
+  "lem-weil-pbc-qcqs-scheme-spectral",
+  "def-weil-spectral-space",
+  "lem-sc-zero-dim-noetherian-closed-finite"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/properties.tex",
+  "place": "Properties Lemma 0AAX (properties-lemma-locally-Noetherian-dimension-0): statement only; the route (Noetherian T0 space, zero-dimensional closed subset finite with closed points) is the topological one of the slopmaster2 declaration, not the Artinian-ring proof of 0AAX"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -53,12 +98,28 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-sc-zero-dim-noetherian-affine",
   "by": "worker",
   "date": "2026-10-10"
  },
  "chapter": "sec-curve-estimates",
- "unit": "sk-thm-curveestimate"
+ "unit": "sk-thm-curveestimate",
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "lem-sc-zero-dim-noetherian-finite-discrete",
+  "worker": "stage1",
+  "summary": "Split the Stacks 0AAX argument into the Noetherian/T0 setup, the attached zero-dimensional closed-subset theorem, and the elementary finite-T1-to-discrete argument, including the empty-space case.",
+  "blueprint": "Realizes the parent blueprint's zero-dimensional component case: a Noetherian scheme of dimension zero has finitely many closed points and discrete underlying space.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-znf",
+  "group": "F1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-znf (reviewer sub-agent of L); spot-checked: Source: Stacks 0AAX (properties-lemma-locally-Noetherian-dimension-0, properties.tex:1286) read; its conclusion (dimension 0 locally Noetherian => discrete, disjoint union of Artinian spectra) contains the item (Noetherian, dim<=0, includes empty) hypothesis by hypothesis. Step 1 carried by lem-weil-pbc-noetherian-scheme-closed-subsets-minimal (minimal condition = Noetherian space), lem-weil-pbc-locally-noetherian-quasi-separated, lem-weil-pbc-qcqs-scheme-spectral (spectral, hence sober by def-weil-spectral-space); step 2 by the new node; step 3 elementary (finite union of closed singletons). New node checked against slopmaster2 IsClosed.finite_and_isClosed_singleton_of_topologicalKrullDim_le_zero, KrullDimension.lean:236-279, [NoetherianSpace X][T0Space X], IsClosed Z, topologicalKrullDim Z<=0 => Z.Finite and closed singletons; sorryfree.py OK; Mathlib has none. Small cases: empty space, one-point Spec k, Spec of k x k, Spec k[x]/x^2 (one point) all finite discrete; a non-T0 two-point indiscrete space shows T0 is needed for the new node. FIX more, RETURN less (B3): lem-sc-zero-dim-noetherian-closed-finite: statement: Noetherian and T0 were cited to def-weil-spectral-space, which defines neither; both now defined inline (as in lem-sc-noetherian-topological-cohomology-vanishing and lem-weil-pbc-finite-t0-space-sober), citation removed; stmt_deps: was empty although the statement cites def-kun-topological-krull-dimension, now [def-kun-topological-krull-dimension]; lean_candidates: added the attachment named in the report (it was only in the report). lem-sc-zero-dim-noetherian-finite-discrete: proof step 1: text: added the line sober => T0 (unique generic point of the closure) and def-weil-spectral-space to uses/proof_deps, since qcqs-scheme-spectral gives spectral, not T0; proof_origin: by agent, place 0AAX statement only, since the route is the topological one, not 0AAX's Artinian-ring proof. Start Sat Oct 10 03:40:52 PM UTC 2026, end Sat Oct 10 03:42:07 PM UTC 2026.; 2 file(s) fixed by the reviewer"
+ }
 }
