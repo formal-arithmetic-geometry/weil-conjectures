@@ -14,8 +14,11 @@ public import Mathlib.Topology.KrullDimension
 public import WeilConjectures.CategoryTheory.Abelian.Flat.Basic
 public import WeilConjectures.CategoryTheory.DerivedCategory.FlatModel
 public import WeilConjectures.ConstructibleSheaf.Defs
+public import WeilConjectures.ConstructibleSheaf.Monoidal
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.FiniteType
 public import WeilConjectures.SixFunctors.Etale.Derived.Dualizing
+public import WeilConjectures.SixFunctors.Etale.Derived.CoefficientsShift
+public import WeilConjectures.SixFunctors.Etale.Derived.SmoothDuality
 public import WeilConjectures.SixFunctors.Etale.Derived.Finiteness
 public import WeilConjectures.SixFunctors.Finite.Exact
 public import WeilConjectures.Mathlib.AlgebraicGeometry.AffineSpace
@@ -36,6 +39,7 @@ public import WeilConjectures.SixFunctors.Etale.Derived.Triangulated
 public import WeilConjectures.SixFunctors.Etale.Derived.UpperLowerStar
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.FlatModuleCat
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.KFlat
+public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.FiniteEtaleFlat
 public import WeilConjectures.SixFunctors.Etale.Derived.Stability.Basic
 public import WeilConjectures.SixFunctors.Etale.Derived.Stability.ClosedImmersion
 public import WeilConjectures.SixFunctors.Etale.Derived.Stability.OpenImmersion
@@ -104,6 +108,14 @@ imports; downstream files may import this module or just the pieces they need.
   independent of the compactification
   (`AlgebraicGeometry.Etale.rightDerivedLowerShriekIso`, proved for a finite ring and a
   quasi-compact `j`).
+* Clause (iv) of `sk-thm-sf-ctf-stability`, that `Rf_!` preserves `Dctf`, is stated in the
+  torsion setting of the blueprint: a finite `Λ` whose exponent is invertible on `Y`, and `Y`
+  of finite type over a field `k`. Over an arbitrary base it is false: for the proper morphism
+  `f : ⊔ₙ ℙⁿ_ℂ ⟶ ⊔ₙ Spec ℂ`, `Rf_! Λ` has `H²ⁿ ≠ 0` on the `n`-th point and is not bounded.
+* The smooth case of `sk-prop-sf-rf-shriek-preservation` is derived from
+  `AlgebraicGeometry.Etale.exists_dualizingComplex_iso_and_tensor` (`thm-asd-smooth-tensor`)
+  instead of smooth purity: only the shape of `ω_f`, a locally constant free rank-one sheaf in
+  degree `-2d`, matters, and this needs neither a base field nor a Tate twist.
 * Clause (vi) of `sk-thm-sf-ctf-stability` — that `𝔻_X` preserves `Dctf(X, A)` and is an
   anti-equivalence of it — is **not restated here**: it is
   `AlgebraicGeometry.Etale.constructibleFiniteTor_verdierDual` and

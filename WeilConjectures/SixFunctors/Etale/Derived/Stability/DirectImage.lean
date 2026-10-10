@@ -7,14 +7,17 @@ module
 
 public import WeilConjectures.Compactification.NagataCompactification
 public import WeilConjectures.SixFunctors.Etale.Derived.Coefficients
+public import WeilConjectures.SixFunctors.Etale.Derived.Finiteness
+public import WeilConjectures.SixFunctors.Etale.Derived.Stability.ClosedImmersion
 public import WeilConjectures.SixFunctors.Etale.Derived.Stability.OpenImmersion
 
 /-!
 # Stability of `Dctf`: direct image and internal hom
 
 For torsion coefficients `Λ` with invertible exponent and schemes of finite type over a field,
-this file proves that the direct image `Rf_*` and the internal hom preserve the bounded
-constructible complexes, with the shifts of the Tor amplitude recorded by the blueprint.
+this file proves that the direct image `Rf_*`, the compactly supported direct image `Rf_!` and
+the internal hom preserve the bounded constructible complexes, with the shifts of the Tor
+amplitude recorded by the blueprint.
 
 This file is part of `WeilConjectures.SixFunctors.Etale.Derived.Stability`, whose module
 documentation records the implementation notes.
@@ -100,12 +103,36 @@ theorem torAmplitudeIn_rightDerivedLowerStar [ConcreteCategory.FinitelyGenerated
     torAmplitudeIn A Y a (b + 2 * (d : ℤ)) ((R((f)_*[A])).obj K) :=
   sorry
 
+omit [Finite Λ] in
+/-- Blueprint `sk-prop-sf-finiteness`: Finiteness and constructibility.
+
+For a finite `Λ` whose exponent is invertible on `Y` and a morphism `f : X ⟶ Y` of finite-type
+`k`-schemes, `Rf_*` preserves bounded constructibility. This is the finite-coefficient case of
+`AlgebraicGeometry.Etale.boundedConstructible_rightDerivedLowerStar`, and is
+`AlgebraicGeometry.Etale.boundedConstructible_rightDerivedLowerStar_of_hasInvertibleExponent`
+once `f` is known to be quasi-compact. -/
+theorem boundedConstructible_rightDerivedLowerStar_of_finite [Finite Λ] {X Y : Scheme.{u}}
+    (aX : X ⟶ Spec (.of k)) (aY : Y ⟶ Spec (.of k)) [LocallyOfFiniteType aX] [QuasiCompact aX]
+    [LocallyOfFiniteType aY] [QuasiCompact aY] (f : X ⟶ Y) (hf : f ≫ aY = aX)
+    [HasInvertibleExponent Λ Y]
+    {K : _root_.DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))}
+    (hbc : boundedConstructible (ModuleCat.{u + 1} Λ) X K) :
+    boundedConstructible (ModuleCat.{u + 1} Λ) Y ((R((f)_*[ModuleCat.{u + 1} Λ])).obj K) := by
+  have : QuasiCompact f := by
+    subst hf
+    have : IsLocallyNoetherian Y := LocallyOfFiniteType.isLocallyNoetherian aY
+    have : CompactSpace Y := QuasiCompact.compactSpace_of_compactSpace aY
+    have : IsNoetherian Y := {}
+    exact QuasiCompact.of_comp f aY
+  have : HasInvertibleExponent Λ X := HasInvertibleExponent.of_hom f
+  exact boundedConstructible_rightDerivedLowerStar_of_hasInvertibleExponent Λ f aX aY hf K hbc
+
 /-- Blueprint `sk-thm-sf-ctf-stability`: Stability of the constructible finite-Tor
 subcategories.
 
 Clause (iii): `Rf_* : Dctf(X, Λ) ⥤ Dctf(Y, Λ)` is defined for every separated morphism of
 finite-type `k`-schemes, for a finite `Λ` whose exponent is invertible on `Y`. It is
-`AlgebraicGeometry.Etale.boundedConstructible_rightDerivedLowerStar` together with
+`AlgebraicGeometry.Etale.boundedConstructible_rightDerivedLowerStar_of_finite` together with
 `AlgebraicGeometry.Etale.torAmplitudeIn_rightDerivedLowerStar`, a finite-type `k`-scheme being
 finite dimensional. -/
 theorem constructibleFiniteTor_rightDerivedLowerStar {X Y : Scheme.{u}} (aX : X ⟶ Spec (.of k))
@@ -120,8 +147,34 @@ theorem constructibleFiniteTor_rightDerivedLowerStar {X Y : Scheme.{u}} (aX : X 
   have : NeZero N := ⟨hN0.ne'⟩
   have hN := nsmul_id_eq_zero_of_natCast_eq_zero hNΛ K
   have : IsNoetherianRing Λ := inferInstance
-  exact ⟨boundedConstructible_rightDerivedLowerStar _ aX aY f hf N hN hNY hbc, a, b + 2 * (d : ℤ),
+  exact ⟨boundedConstructible_rightDerivedLowerStar_of_finite Λ aX aY f hf hbc, a, b + 2 * (d : ℤ),
     torAmplitudeIn_rightDerivedLowerStar _ aX aY f hf d hd a b N hN hNY hbc hta⟩
+
+/-- Blueprint `sk-thm-sf-ctf-stability`: Stability of the constructible finite-Tor
+subcategories.
+
+Clause (iv): `Rf_! : Dctf(X, Λ) ⥤ Dctf(Y, Λ)` is defined for every separated finite-type `f`
+admitting a compactification, over a finite-type `k`-scheme `Y`, for a finite `Λ` whose exponent
+is invertible on `Y`. For the chosen compactification `X ⟶[j] Z ⟶[g] Y` of `f`, `Rf_!` is
+`Rg_* ∘ j_!`; extension by zero preserves `Dctf`
+(`AlgebraicGeometry.Etale.constructibleTorAmplitudeIn_mapDerivedCategory_openImmersionLowerShriek`)
+and so does the direct image along the proper `g`
+(`AlgebraicGeometry.Etale.constructibleFiniteTor_rightDerivedLowerStar`).
+
+Some finiteness hypothesis on `Y` is needed: for `f : ⊔ₙ ℙⁿ_ℂ ⟶ ⊔ₙ Spec ℂ`, which is proper,
+`Rf_! Λ` has `H²ⁿ ≠ 0` on the `n`-th point, so it is not bounded. -/
+theorem constructibleFiniteTor_rightDerivedLowerShriek {X Y : Scheme.{u}}
+    (aY : Y ⟶ Spec (.of k)) [LocallyOfFiniteType aY] [QuasiCompact aY]
+    [HasInvertibleExponent Λ Y] (f : X ⟶ Y) [HasCompactification f] [QuasiCompact f]
+    {K : _root_.DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))}
+    (hK : constructibleFiniteTor (ModuleCat.{u + 1} Λ) X K) :
+    constructibleFiniteTor (ModuleCat.{u + 1} Λ) Y ((R(f)_![ModuleCat.{u + 1} Λ]).obj K) := by
+  let c := HasCompactification.compactification f
+  have : QuasiCompact c.i := c.quasiCompact_openImmersion inferInstance
+  obtain ⟨hbc, a, b, hta⟩ := hK
+  have h := constructibleTorAmplitudeIn_mapDerivedCategory_openImmersionLowerShriek Λ c.i a b
+    ⟨⟨hbc, _root_.DerivedCategory.homologyConcentratedIn_of_torAmplitudeIn hta⟩, hta⟩
+  exact constructibleFiniteTor_rightDerivedLowerStar Λ (c.g ≫ aY) aY c.g rfl ⟨h.1.1, a, b, h.2⟩
 
 /-! #### Internal hom -/
 
@@ -279,15 +332,53 @@ include aX hm in
 
 If `K` and `M` have Tor amplitude in `[a, b]` and `[c, d]` and `dim X ≤ m`, then `RHom(K, M)`
 has Tor amplitude in `[c - b - 2m, d - a + 2m]`. The blueprint derives this from
-`RHom(K, M) ≅ 𝔻_X (K ⊗ᴸ 𝔻_X M)`, the dualizing complex having cohomology in `[-2m, 0]`. -/
+`RHom(K, M) ≅ 𝔻_X (K ⊗ᴸ 𝔻_X M)`, the dualizing complex having cohomology in `[-2m, 0]`. The
+statement is local on `X`, and on the separated affine opens it is
+`AlgebraicGeometry.Etale.constructibleFiniteTor_derivedHom_of_isSeparated`
+(`cor-weil-finite-constructible-hom`). -/
 theorem torAmplitudeIn_derivedHom
     (hK : boundedConstructible (ModuleCat.{u + 1} Λ) X K)
     (hKt : torAmplitudeIn (ModuleCat.{u + 1} Λ) X a b K)
     (hM : boundedConstructible (ModuleCat.{u + 1} Λ) X M)
     (hMt : torAmplitudeIn (ModuleCat.{u + 1} Λ) X c d M) :
     torAmplitudeIn (ModuleCat.{u + 1} Λ) X (c - b - 2 * (m : ℤ)) (d - a + 2 * (m : ℤ))
-      (((RHom(X)[ModuleCat.{u + 1} Λ]).obj (op K)).obj M) :=
-  sorry
+      (((RHom(X)[ModuleCat.{u + 1} Λ]).obj (op K)).obj M) := by
+  have : CompactSpace X := QuasiCompact.compactSpace_of_compactSpace aX
+  have : IsNoetherian X := { __ := LocallyOfFiniteType.isLocallyNoetherian aX }
+  by_cases hX : IsEmpty X
+  · exact torAmplitudeIn_of_openCover _ (n := 0) Fin.elim0
+      (fun x ↦ (hX.false x).elim) _ (fun i ↦ i.elim0)
+  rw [not_isEmpty_iff] at hX
+  have := HasInvertibleExponent.of_hom_of_nonempty (Λ := Λ) aX
+  -- a finite cover by affine opens
+  obtain ⟨t, ht⟩ := isCompact_univ.elim_finite_subcover (fun V : X.affineOpens ↦ (V : Set X))
+    (fun V ↦ V.1.isOpen) (fun x _ ↦ by
+      obtain ⟨V, hV, hxV, -⟩ := (TopologicalSpace.Opens.isBasis_iff_nbhd.mp X.isBasis_affineOpens)
+        (show x ∈ (⊤ : X.Opens) from trivial)
+      exact Set.mem_iUnion.2 ⟨⟨V, hV⟩, hxV⟩)
+  let U : Fin t.card → X.Opens := fun i ↦ (t.equivFin.symm i).1.1
+  refine torAmplitudeIn_of_openCover _ U (fun x ↦ ?_) _ (fun i ↦ ?_)
+  · obtain ⟨V, hV, hx⟩ := Set.mem_iUnion₂.1 (ht (Set.mem_univ x))
+    exact ⟨t.equivFin ⟨V, hV⟩, by simpa [U] using hx⟩
+  have : IsAffine (U i) := (t.equivFin.symm i).1.2
+  let aU := (U i).ι ≫ aX
+  have hmU : topologicalKrullDim (U i) ≤ (m : WithBot ℕ∞) :=
+    ((U i).ι.isOpenEmbedding.isInducing.topologicalKrullDim_le).trans hm
+  obtain ⟨e⟩ := nonempty_iso_mapDerivedCategory_upperStar_derivedHom _ (U i).ι K M
+  have hKt' : torAmplitudeIn (ModuleCat.{u + 1} Λ) (U i) a b
+      (D(((U i).ι)^*[ModuleCat.{u + 1} Λ]).obj K) :=
+    (torAmplitudeIn (ModuleCat.{u + 1} Λ) (U i) a b).prop_of_iso
+      ((leftDerivedUpperStarIsoMapDerivedCategory _ (U i).ι).app K)
+      (torAmplitudeIn_leftDerivedUpperStar _ (U i).ι a b hKt)
+  have hMt' : torAmplitudeIn (ModuleCat.{u + 1} Λ) (U i) c d
+      (D(((U i).ι)^*[ModuleCat.{u + 1} Λ]).obj M) :=
+    (torAmplitudeIn (ModuleCat.{u + 1} Λ) (U i) c d).prop_of_iso
+      ((leftDerivedUpperStarIsoMapDerivedCategory _ (U i).ι).app M)
+      (torAmplitudeIn_leftDerivedUpperStar _ (U i).ι c d hMt)
+  exact (torAmplitudeIn _ _ _ _).prop_of_iso e.symm
+    (constructibleFiniteTor_derivedHom_of_isSeparated (Λ := Λ) (a := aU) m hmU
+      (hK.mapDerivedCategory_upperStar (U i).ι) hKt'
+      (hM.mapDerivedCategory_upperStar (U i).ι) hMt').2
 
 -- `aX` and the coefficient hypotheses are part of the blueprint setting, unused by the proof
 set_option linter.unusedSectionVars false in

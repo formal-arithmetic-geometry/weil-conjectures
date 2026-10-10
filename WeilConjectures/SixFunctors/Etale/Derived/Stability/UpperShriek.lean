@@ -5,9 +5,11 @@ Authors: Claude
 -/
 module
 
+public import WeilConjectures.ConstructibleSheaf.Monoidal
 public import WeilConjectures.ConstructibleSheaf.OpenClosedStratification
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.Smooth
 public import WeilConjectures.SixFunctors.Etale.Derived.Composition
+public import WeilConjectures.SixFunctors.Etale.Derived.SmoothDuality
 public import WeilConjectures.SixFunctors.Etale.Derived.Stability.ClosedImmersion
 public import WeilConjectures.SixFunctors.Etale.Derived.Stability.DirectImage
 
@@ -16,7 +18,8 @@ public import WeilConjectures.SixFunctors.Etale.Derived.Stability.DirectImage
 
 For torsion coefficients `Λ` with invertible exponent and schemes of finite type over a field,
 this file proves that the exceptional inverse image `Rf^!` preserves `Dctf`, with the shifts
-of `sk-prop-sf-rf-shriek-preservation`, and constructs the descended functors `Rf_*` and `Rf^!`.
+of `sk-prop-sf-rf-shriek-preservation`, and constructs the descended functors `Rf_*`, `Rf_!`
+and `Rf^!`.
 
 This file is part of `WeilConjectures.SixFunctors.Etale.Derived.Stability`, whose module
 documentation records the implementation notes.
@@ -93,27 +96,57 @@ theorem constructibleTorAmplitudeIn_rightDerivedUpperShriek_of_isClosedImmersion
     hbc' ht'
   have hM : constructibleTorAmplitudeIn (ModuleCat.{u + 1} Λ) T a (b + 2 * d)
       ((R((V.ι)_*[ModuleCat.{u + 1} Λ])).obj ((L((V.ι)^*[ModuleCat.{u + 1} Λ])).obj K)) :=
-    ⟨⟨boundedConstructible_rightDerivedLowerStar _ (V.ι ≫ aT) aT V.ι rfl N hN hNT hbc',
+    ⟨⟨boundedConstructible_rightDerivedLowerStar_of_finite Λ (V.ι ≫ aT) aT V.ι rfl hbc',
       _root_.DerivedCategory.homologyConcentratedIn_of_torAmplitudeIn hMt⟩, hMt⟩
   have := constructibleTorAmplitudeIn_rightDerivedUpperShriek_of_isClosedImmersion_of_lowerStar
     (ModuleCat.{u + 1} Λ) i V.ι hij (by omega : b ≤ b + 2 * d) ⟨⟨hbc, hc⟩, ht⟩ hM
     (fun L ↦ hasProjectionFormula_of_finite Λ i _ L)
   rwa [show b + 2 * (d : ℤ) + 1 = b + 2 * d + 1 by ring] at this
 
+omit [Finite Λ] in
+/-- A locally constant sheaf of free rank-one `Λ`-modules, for a finite `Λ`, is constructible and
+flat. -/
+lemma isConstructibleSheaf_and_flat_of_sheafFiber_iso {X : Scheme.{u}}
+    (L : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)) [IsLocallyConstantSheaf L]
+    (hL : ∀ (Ω : Type u) [Field Ω] [IsSepClosed Ω] (s : Spec (.of Ω) ⟶ X),
+      Nonempty ((pointSmallEtale s).sheafFiber.obj L ≅ ModuleCat.of Λ Λ)) :
+    IsConstructibleSheaf L ∧ ObjectProperty.flat L := by
+  have : IsFiniteSheaf L := ⟨fun Ω _ _ s ↦
+    (ConcreteCategory.isFinitelyGenerated_iff_of_iso (hL Ω s).some).2
+      ((ModuleCat.isFinitelyGenerated_iff _).2 inferInstance)⟩
+  have : IsFiniteLocallyConstantSheaf L := {}
+  refine ⟨IsFiniteLocallyConstantSheaf.isConstructibleSheaf ‹_›,
+    (flat_iff_forall_flat_sheafFiber_obj L).2 fun {Ω} _ _ s ↦ ?_⟩
+  exact ObjectProperty.prop_of_iso _ ((GrothendieckTopology.Point.uliftSheafFiberIso _ _).app L ≪≫
+    (hL Ω s).some).symm (ObjectProperty.prop_unit (ObjectProperty.flat (A := ModuleCat.{u + 1} Λ)))
+
 /-- Blueprint `sk-prop-sf-rf-shriek-preservation`: Preservation for the exceptional inverse
 image.
 
 Clause (iii): for `f` smooth of pure relative dimension `d` and a finite `Λ` whose exponent is
 invertible on `Y`, the exceptional inverse image shifts both intervals by `-2d`,
-`D_c^[a, b] ↦ D_c^[a - 2d, b - 2d]`, by purity `Rf^! ≅ Lf^*(-)(d)[2d]`. -/
+`D_c^[a, b] ↦ D_c^[a - 2d, b - 2d]`, by purity `Rf^! ≅ Lf^*(-)(d)[2d]`. Without choosing an
+orientation, `Rf^! K ≅ Lf^* K ⊗ᴸ L[2d]` for a locally constant sheaf `L` of free rank-one
+`Λ`-modules (`AlgebraicGeometry.Etale.exists_dualizingComplex_iso_and_tensor`,
+`thm-asd-smooth-tensor`), and tensoring with the flat constructible `L` changes neither the
+constructible interval nor the Tor amplitude. -/
 theorem constructibleTorAmplitudeIn_rightDerivedUpperShriek_of_smoothOfRelativeDimension
     {X Y : Scheme.{u}} [HasInvertibleExponent Λ Y] (f : X ⟶ Y) [HasCompactification f] (d : ℕ)
     [SmoothOfRelativeDimension d f] (a b : ℤ)
     {K : _root_.DerivedCategory (Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ))}
     (hK : constructibleTorAmplitudeIn (ModuleCat.{u + 1} Λ) Y a b K) :
     constructibleTorAmplitudeIn (ModuleCat.{u + 1} Λ) X (a - 2 * d) (b - 2 * d)
-      ((R(f)^![ModuleCat.{u + 1} Λ]).obj K) :=
-  sorry
+      ((R(f)^![ModuleCat.{u + 1} Λ]).obj K) := by
+  have : IsNoetherianRing Λ := inferInstance
+  obtain ⟨L, _, hLs, ⟨eω⟩, htens⟩ := exists_dualizingComplex_iso_and_tensor Λ f d
+  obtain ⟨_, hLf⟩ := isConstructibleSheaf_and_flat_of_sheafFiber_iso Λ L hLs
+  obtain ⟨⟨hbc, -⟩, hta⟩ := hK
+  have hL₀ := torAmplitudeIn_singleFunctor_zero_of_flat _ L hLf
+  have hMbc := boundedConstructible_tensor Λ X (boundedConstructible_leftDerivedUpperStar _ f hbc)
+    (DerivedCategory.boundedConstructible_singleFunctor_obj L 0) ⟨0, 0, hL₀⟩
+  exact constructibleTorAmplitudeIn_of_iso_tensor_shift _ (htens K).some.symm eω
+    (torAmplitudeIn_leftDerivedUpperStar _ f a b hta) hL₀
+    ((boundedConstructible _ X).le_shift _ _ hMbc)
 
 omit [Finite Λ] in
 /-- Membership in `D_c^[a, b]` with Tor amplitude in `[a, b]` is local for a finite open cover
@@ -357,6 +390,19 @@ noncomputable def DerivedCategoryFiniteTor.rightDerivedLowerStar (aX : X ⟶ Spe
   ObjectProperty.lift _
     (DerivedCategoryFiniteTor.ι (ModuleCat.{u + 1} Λ) X ⋙ R((f)_*[ModuleCat.{u + 1} Λ]))
     fun K ↦ constructibleFiniteTor_rightDerivedLowerStar Λ aX aY f hf K.property
+
+/-- Blueprint `sk-thm-sf-ctf-stability`, clause (iv): the restriction
+`Rf_! : Dctf(X, Λ) ⥤ Dctf(Y, Λ)` of the compactly supported direct image to the small
+categories, for a separated finite-type `f` over a finite-type `k`-scheme `Y` and a finite `Λ`
+whose exponent is invertible on `Y`. -/
+noncomputable def DerivedCategoryFiniteTor.rightDerivedLowerShriek (aY : Y ⟶ Spec (.of k))
+    [LocallyOfFiniteType aY] [QuasiCompact aY] [HasInvertibleExponent Λ Y] (f : X ⟶ Y)
+    [HasCompactification f] [QuasiCompact f] :
+    DerivedCategoryFiniteTor (ModuleCat.{u + 1} Λ) X ⥤
+      DerivedCategoryFiniteTor (ModuleCat.{u + 1} Λ) Y :=
+  ObjectProperty.lift _
+    (DerivedCategoryFiniteTor.ι (ModuleCat.{u + 1} Λ) X ⋙ R(f)_![ModuleCat.{u + 1} Λ])
+    fun K ↦ constructibleFiniteTor_rightDerivedLowerShriek Λ aY f K.property
 
 /-- Blueprint `sk-thm-sf-ctf-stability`, clause (v): the restriction
 `Rf^! : Dctf(Y, Λ) ⥤ Dctf(X, Λ)` of the exceptional inverse image to the small categories, for

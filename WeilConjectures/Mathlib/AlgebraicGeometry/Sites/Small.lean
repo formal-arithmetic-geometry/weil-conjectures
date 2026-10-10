@@ -40,6 +40,8 @@ of `P`-schemes over `V`.
   `AlgebraicGeometry.Scheme.isContinuous_overMap` and
   `AlgebraicGeometry.Scheme.isCocontinuous_overMap`: the localization functor is continuous
   and cocontinuous for the small `Q`-topologies, with instances for `Q = P`.
+- `AlgebraicGeometry.Scheme.isContinuous_overForget`: the forgetful functor from the small
+  `Q`-site of `P`-schemes to `S`-schemes is continuous.
 - `AlgebraicGeometry.Scheme.isContinuous_overMap_comp_overPullback` and
   `AlgebraicGeometry.Scheme.isContinuous_overPullback_comp_overMap`: the two composites of
   base change and localization are continuous for the small `P`-topologies.
@@ -97,6 +99,25 @@ theorem isContinuous_overPullback (hQP : Q ≤ P) {W U : Scheme.{u}} (g : W ⟶ 
       (U.smallGrothendieckTopology Q (Q := P)) (W.smallGrothendieckTopology Q (Q := P)) :=
   Functor.isContinuous_of_coverPreserving
     (compatiblePreservingOfFlat _ _) (coverPreserving_overPullback P Q hQP g)
+
+/-! ### The forgetful functor -/
+
+/-- The forgetful functor from `P`-schemes over `S` to `S`-schemes is continuous for the small
+`Q`-topology and the `Q`-topology on `Over S`, for `Q ≤ P`: it preserves covers by definition
+of the small topology, and compatible families since it is representably flat. -/
+lemma isContinuous_overForget (hQP : Q ≤ P) (S : Scheme.{u}) :
+    (MorphismProperty.Over.forget P ⊤ S).IsContinuous
+      (S.smallGrothendieckTopology Q (Q := P)) (S.overGrothendieckTopology Q) :=
+  have := locallyCoverDense_of_le S hQP
+  have : RepresentablyFlat (MorphismProperty.Over.forget P ⊤ S) :=
+    flat_of_preservesFiniteLimits _
+  Functor.isContinuous_of_coverPreserving (compatiblePreservingOfFlat _ _)
+    (Functor.coverPreserving_restrictedTopology _ _)
+
+instance (S : Scheme.{u}) :
+    (MorphismProperty.Over.forget P ⊤ S).IsContinuous
+      (S.smallGrothendieckTopology P) (S.overGrothendieckTopology P) :=
+  isContinuous_overForget P P le_rfl S
 
 /-! ### The localization functor -/
 

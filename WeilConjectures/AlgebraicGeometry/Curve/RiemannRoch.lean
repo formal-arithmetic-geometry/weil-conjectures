@@ -155,18 +155,6 @@ theorem Modules.exists_ne_zero_of_nontrivial_H_zero {X : Scheme.{u}} (M : X.Modu
     M.val.map_id] at h1
   exact h1
 
-/-- **A morphism `𝒪_X ⟶ N` is determined by the image of `1`.** If `σ : 𝒪_X ⟶ N` sends the
-global section `1` to `0`, then `σ = 0`: every section of `𝒪_X` is a multiple of a restriction
-of `1`. -/
-theorem Modules.eq_zero_of_app_top_one {X : Scheme.{u}} {N : X.Modules} (σ : 𝟙_ X.Modules ⟶ N)
-    (h : σ.app ⊤ (1 : Γ(X, ⊤)) = 0) : σ = 0 := by
-  refine hom_ext _ _ fun U ↦ ?_
-  ext r
-  obtain ⟨a, rfl⟩ := ((isFreeGenerator_one (X := X) ⊤).map (le_top : U ≤ ⊤)).exists_smul_eq r
-  rw [Hom.app_smul]
-  erw [Hom.app_presheaf_map σ (homOfLE (le_top : U ≤ ⊤)) (1 : Γ(X, ⊤)), h]
-  simp
-
 /-- **A morphism `𝒪_X ⟶ N` which vanishes on `H⁰` is zero.** Under `H⁰(X, -) = Γ(X, -)` the
 map `H⁰(σ)` sends `1` to the image of `1` under `σ`. -/
 theorem Modules.eq_zero_of_forall_H_map_zero {X : Scheme.{u}} {N : X.Modules}
@@ -195,63 +183,6 @@ theorem Hom.finrankΓ_subschemeι_ker_fieldPoints {k : Type u} [Field k] {X : Sc
 
 end Sections
 
-section DivisorRestriction
-
-variable {X : Scheme.{u}}
-
-/-- **`𝒪_X ⟶ (ι_J)_* 𝒪_{V(J)}` is an epimorphism**: on every affine open `V` it is the map
-`Γ(X, V) ⟶ Γ(V(J), ι⁻¹ V)`, which is surjective since `ι` is a closed immersion. Hence
-`0 ⟶ J ⟶ 𝒪_X ⟶ (ι_J)_* 𝒪_{V(J)} ⟶ 0` is short exact. -/
-instance IdealSheafData.epi_toPushforwardSubscheme (J : X.IdealSheafData) :
-    Epi J.toPushforwardSubscheme := by
-  refine Modules.epi_of_forall_exists_app_eq _ fun W y x hx ↦ ?_
-  obtain ⟨V, hV, hxV, hVW⟩ := exists_isAffineOpen_mem_and_subset (U := W) hx
-  obtain ⟨z, hz⟩ := J.subschemeι.app_surjective V hV (J.subscheme.presheaf.map
-    ((TopologicalSpace.Opens.map J.subschemeι.base).map (homOfLE hVW)).op y)
-  exact ⟨V, hVW, hxV, z, hz⟩
-
-/-- **The restriction of a module to a closed subscheme.** For a quasi-coherent ideal sheaf `J`
-with closed subscheme `ι : D ⟶ X` and an invertible `𝒪_X`-module `M`, the cokernel of
-`J ⊗ M ⟶ 𝒪_X ⊗ M` is `ι_* ι^* M`.
-
-Tensoring with the invertible `M` is an equivalence, so it preserves the cokernel
-`ι_* 𝒪_D` of `J ⟶ 𝒪_X`, and `ι_* 𝒪_D ⊗ M ≅ ι_* ι^* M` is the projection formula. -/
-theorem IdealSheafData.nonempty_cokernel_whiskerRight_iso (J : X.IdealSheafData) (M : X.Modules)
-    [M.IsInvertible] :
-    Nonempty (cokernel (J.toModulesι ▷ M) ≅
-      (Modules.pushforward J.subschemeι).obj ((Modules.pullback J.subschemeι).obj M)) := by
-  let F := (BraidedCategory.tensorRightEquivalence M Mᵛ
-    (Modules.nonempty_tensorObj_dual_iso_unit M).some).functor
-  let e₁ : cokernel J.toModulesι ≅
-      (Modules.pushforward J.subschemeι).obj (𝟙_ J.subscheme.Modules) :=
-    (colimit.isColimit _).coconePointUniqueUpToIso
-      (Abelian.epiIsCokernelOfKernel _ (kernelIsKernel J.toPushforwardSubscheme))
-  let e₂ : cokernel (J.toModulesι ▷ M) ≅ F.obj (cokernel J.toModulesι) :=
-    (PreservesCokernel.iso F J.toModulesι).symm
-  obtain ⟨e₃⟩ := Modules.nonempty_pushforward_pullback_iso J.subschemeι M
-  exact ⟨e₂ ≪≫ whiskerRightIso e₁ M ≪≫ e₃.symm⟩
-
-variable (k : Type u) [Field k] [X.Over (Spec (.of k))]
-
-/-- **The cohomology of the restriction of a module to a closed subscheme.** For a closed
-subscheme `ι : D ⟶ X` of a `k`-scheme with ideal sheaf `J` and an invertible `M`, the cohomology
-of the cokernel `M|_D` of `J ⊗ M ⟶ 𝒪_X ⊗ M` is that of `ι^* M` on `D`: `M|_D ≅ ι_* ι^* M`
-(`AlgebraicGeometry.Scheme.IdealSheafData.nonempty_cokernel_whiskerRight_iso`), and pushforward
-along the affine morphism `ι` does not change the cohomology of quasi-coherent modules. -/
-theorem IdealSheafData.nonempty_H_cokernel_whiskerRight_linearEquiv (J : X.IdealSheafData)
-    (M : X.Modules) [M.IsInvertible] (q : ℕ) :
-    letI : J.subscheme.Over (Spec (.of k)) := ⟨J.subschemeι ≫ X ↘ Spec (.of k)⟩
-    Nonempty ((cokernel (J.toModulesι ▷ M)).H q ≃ₗ[k]
-      ((Modules.pullback J.subschemeι).obj M).H q) := by
-  let : J.subscheme.Over (Spec (.of k)) := ⟨J.subschemeι ≫ X ↘ Spec (.of k)⟩
-  have : J.subschemeι.IsOver (Spec (.of k)) := ⟨rfl⟩
-  obtain ⟨e⟩ := J.nonempty_cokernel_whiskerRight_iso M
-  obtain ⟨e'⟩ := Modules.nonempty_cohomologyFunctor_iso_pushforward_of_isAffineHom k
-    J.subschemeι q
-  exact ⟨((Modules.cohomologyFunctor k q).mapIso e).toLinearEquiv ≪≫ₗ
-    (e'.app ⟨(Modules.pullback J.subschemeι).obj M, inferInstance⟩).toLinearEquiv.symm⟩
-
-end DivisorRestriction
 
 section FiniteScheme
 

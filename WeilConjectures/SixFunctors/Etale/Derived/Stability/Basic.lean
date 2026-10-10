@@ -9,6 +9,7 @@ public import WeilConjectures.CategoryTheory.DerivedCategory.FlatModel
 public import WeilConjectures.SixFunctors.Etale.Derived.Dualizing
 public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriekToLowerStar
 public import WeilConjectures.SixFunctors.Etale.Derived.OpenImmersionLowerShriekProjection
+public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.FiniteEtaleFlat
 
 /-!
 # Stability of `Dctf`: pullback, tensor product and internal hom
@@ -60,18 +61,18 @@ lemma constructibleTorAmplitudeIn_of_iso {X : Scheme.{u}} {a b : ℤ}
 
 /-! ### The exceptional inverse image -/
 
-/-- Blueprint `sk-prop-sf-rf-shriek-preservation`: Preservation for the exceptional inverse
-image.
-
-Clause (i), finite étale case: for a finite étale `f`, `Rf^!` preserves the constructible
-interval and the Tor amplitude *unchanged*. -/
-theorem constructibleTorAmplitudeIn_rightDerivedUpperShriek_of_isFinite_of_etale
-    {X Y : Scheme.{u}} (f : X ⟶ Y) [IsFinite f] [_root_.AlgebraicGeometry.Etale f]
-    [HasCompactification f] [(R(f)_![A]).IsLeftAdjoint] (a b : ℤ)
-    {K : _root_.DerivedCategory (Sheaf Y.smallEtaleTopology A)}
-    (hK : constructibleTorAmplitudeIn A Y a b K) :
-    constructibleTorAmplitudeIn A X a b ((R(f)^![A]).obj K) :=
-  sorry
+/-- For a finite étale `f`, the exceptional inverse image is the pullback, `Rf^! ≅ D(f^*)`:
+`f` is proper, so `Rf_! ≅ Rf_*`; `f_*` is exact, so `Rf_* ≅ D(f_*)`; and `D(f_*) ⊣ D(f^*)`,
+`f_*` being left adjoint to `f^*`
+(`AlgebraicGeometry.Etale.lowerStarUpperStarAdjunctionOfIsFinite`). -/
+noncomputable def rightDerivedUpperShriekIsoOfIsFiniteOfEtale {X Y : Scheme.{u}} (f : X ⟶ Y)
+    [IsFinite f] [_root_.AlgebraicGeometry.Etale f] [HasCompactification f]
+    [(R(f)_![A]).IsLeftAdjoint] :
+    R(f)^![A] ≅ D((f)^*[A]) :=
+  (rightDerivedUpperShriekAdjunction A f).rightAdjointUniq
+    ((Etale.lowerStarUpperStarAdjunctionOfIsFinite A f).mapDerivedCategoryAdjunction.ofNatIsoLeft
+      (rightDerivedLowerShriekIsoRightDerivedLowerStar A f ≪≫
+        (f)_*[A].rightDerivedFunctorIsoMapDerivedCategory).symm)
 
 /-! ### Stability of `Dctf` under the six operations -/
 
@@ -95,11 +96,12 @@ subcategories.
 Clause (i), amplitude: `Lf^*` preserves the Tor amplitude interval unchanged, the pullback of
 a bounded flat model being a bounded flat model in the same degrees.
 
-The pullback is assumed to preserve flat sheaves (`AlgebraicGeometry.Etale.UpperStarPreservesFlat`,
-which holds for `A = ModuleCat Λ`). This is no restriction: the statement for `a = b = 0` and
-`K` a flat sheaf in degree `0` says exactly that `f^*` of a flat sheaf is flat. -/
-theorem torAmplitudeIn_leftDerivedUpperStar [UpperStarPreservesFlat A] {X Y : Scheme.{u}}
-    (f : X ⟶ Y) (a b : ℤ)
+The pullback is assumed to preserve flat sheaves, which holds for every `f` under
+`AlgebraicGeometry.Etale.UpperStarPreservesFlat A` (for instance for `A = ModuleCat Λ`), and for
+every `A` when `f` is an open immersion or finite étale. This is no restriction: the statement for
+`a = b = 0` and `K` a flat sheaf in degree `0` says exactly that `f^*` of a flat sheaf is flat. -/
+theorem torAmplitudeIn_leftDerivedUpperStar {X Y : Scheme.{u}} (f : X ⟶ Y)
+    [(f)^*[A].PreservesFlat] (a b : ℤ)
     {K : _root_.DerivedCategory (Sheaf Y.smallEtaleTopology A)}
     (hta : torAmplitudeIn A Y a b K) :
     torAmplitudeIn A X a b ((L((f)^*[A])).obj K) := by
@@ -125,6 +127,27 @@ theorem constructibleFiniteTor_leftDerivedUpperStar [UpperStarPreservesFlat A] {
   obtain ⟨hbc, a, b, hta⟩ := hK
   exact ⟨boundedConstructible_leftDerivedUpperStar A f hbc,
     a, b, torAmplitudeIn_leftDerivedUpperStar A f a b hta⟩
+
+/-- Blueprint `sk-prop-sf-rf-shriek-preservation`: Preservation for the exceptional inverse
+image.
+
+Clause (i), finite étale case: for a finite étale `f`, `Rf^!` preserves the constructible
+interval and the Tor amplitude *unchanged*, `Rf^! ≅ D(f^*)` being exact and `f^*` preserving
+flat sheaves. -/
+theorem constructibleTorAmplitudeIn_rightDerivedUpperShriek_of_isFinite_of_etale
+    {X Y : Scheme.{u}} (f : X ⟶ Y) [IsFinite f] [_root_.AlgebraicGeometry.Etale f]
+    [HasCompactification f] [(R(f)_![A]).IsLeftAdjoint] (a b : ℤ)
+    {K : _root_.DerivedCategory (Sheaf Y.smallEtaleTopology A)}
+    (hK : constructibleTorAmplitudeIn A Y a b K) :
+    constructibleTorAmplitudeIn A X a b ((R(f)^![A]).obj K) := by
+  obtain ⟨⟨hbc, hab⟩, hta⟩ := hK
+  refine constructibleTorAmplitudeIn_of_iso _
+    ((rightDerivedUpperShriekIsoOfIsFiniteOfEtale A f).app K).symm ⟨⟨?_,
+      ((f)^*[A]).homologyConcentratedIn_mapDerivedCategory_obj hab⟩, ?_⟩
+  · exact hbc.mapDerivedCategory_upperStar f
+  · exact (torAmplitudeIn A X a b).prop_of_iso
+      ((leftDerivedUpperStarIsoMapDerivedCategory _ f).app K)
+      (torAmplitudeIn_leftDerivedUpperStar _ f a b hta)
 
 omit [HasSmallSiteSheafify A] in
 /-- Blueprint `sk-thm-sf-ctf-stability`: Stability of the constructible finite-Tor
@@ -283,35 +306,6 @@ theorem constructibleFiniteTor_derivedHom_of_verdierDual {X S : Scheme.{u}} (a :
   obtain ⟨hbc, c, d, hcd⟩ := hD (htens (hD hM) hK)
   exact ⟨(boundedConstructible A X).prop_of_iso e'.symm hbc, c, d,
     (torAmplitudeIn A X c d).prop_of_iso e'.symm hcd⟩
-
-/-- The reduction of the finite étale case of `sk-prop-sf-rf-shriek-preservation`: if the direct
-image along a proper `f` is *left* adjoint to the pullback, then `Rf^! ≅ D(f^*)`, so `Rf^!`
-preserves the constructible interval and the Tor amplitude unchanged. For a finite étale `f`
-the adjunction `f_* ⊣ f^*` holds because `f_*` agrees with the étale extension by zero, but this
-is not available for a general coefficient category `A`. -/
-theorem constructibleTorAmplitudeIn_rightDerivedUpperShriek_of_adjunction
-    [UpperStarPreservesFlat A] {X Y : Scheme.{u}} (f : X ⟶ Y) [IsProper f]
-    [HasCompactification f] [(R(f)_![A]).IsLeftAdjoint] (adj : (f)_*[A] ⊣ (f)^*[A]) (a b : ℤ)
-    {K : _root_.DerivedCategory (Sheaf Y.smallEtaleTopology A)}
-    (hK : constructibleTorAmplitudeIn A Y a b K) :
-    constructibleTorAmplitudeIn A X a b ((R(f)^![A]).obj K) := by
-  have := adj.leftAdjoint_preservesColimits
-  have : PreservesFiniteColimits (f)_*[A] :=
-    PreservesColimitsOfSize.preservesFiniteColimits.{0, 0} _
-  -- `Rf_! ≅ Rf_* ≅ D(f_*)`, whose right adjoint is `D(f^*)`
-  let e : R(f)_![A] ≅ (f)_*[A].mapDerivedCategory :=
-    rightDerivedLowerShriekIsoRightDerivedLowerStar A f ≪≫
-      (f)_*[A].rightDerivedFunctorIsoMapDerivedCategory
-  let e' : R(f)^![A] ≅ (f)^*[A].mapDerivedCategory :=
-    (rightDerivedUpperShriekAdjunction A f).rightAdjointUniq
-      (adj.mapDerivedCategoryAdjunction.ofNatIsoLeft e.symm)
-  obtain ⟨⟨hbc, hab⟩, hta⟩ := hK
-  refine constructibleTorAmplitudeIn_of_iso _ (e'.app K).symm ⟨⟨?_,
-    ((f)^*[A]).homologyConcentratedIn_mapDerivedCategory_obj hab⟩, ?_⟩
-  · exact hbc.mapDerivedCategory_upperStar f
-  · exact (torAmplitudeIn A X a b).prop_of_iso
-      ((leftDerivedUpperStarIsoMapDerivedCategory _ f).app K)
-      (torAmplitudeIn_leftDerivedUpperStar _ f a b hta)
 
 end Etale
 

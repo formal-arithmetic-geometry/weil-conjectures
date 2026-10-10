@@ -59,3 +59,13 @@ theorem disjoint_of_mem_irreducibleComponents_of_forall_closedPoints [Noetherian
   obtain ⟨φ, hφ⟩ := h q hq p hp
   exact hne (φ.injective.image_injective (hUuniq p hpU _ (φ.image_mem_irreducibleComponents hZ₁)
     _ (φ.image_mem_irreducibleComponents hZ₂) ⟨q, hq₁, hφ⟩ ⟨q, hq₂, hφ⟩))
+
+/-! ### Ported from the `proetale` package (`Proetale.Mathlib.Topology.JacobsonSpace`) -/
+
+variable {X : Type*} [TopologicalSpace X]
+
+-- before `closedPoints_eq_univ`
+theorem closedPoints.isClosed_singleton (x : closedPoints X) :
+    IsClosed ({x} : Set (closedPoints X)) := by
+  simpa [Set.preimage, Subtype.val_inj] using
+      x.2.preimage (f := fun (x : closedPoints X) ↦ (x : X)) continuous_subtype_val

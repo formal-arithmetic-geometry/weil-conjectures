@@ -8,11 +8,13 @@ module
 public import Mathlib.AlgebraicGeometry.Geometrically.Connected
 public import Mathlib.AlgebraicGeometry.Morphisms.Smooth
 public import WeilConjectures.AlgebraicGeometry.Curve
+public import WeilConjectures.AlgebraicGeometry.Curve.RiemannRoch
 public import WeilConjectures.AlgebraicGeometry.ProjectiveSpace
 public import WeilConjectures.AlgebraicGeometry.ProjectiveSpace.QuasiProjective
 public import WeilConjectures.AlgebraicGeometry.Regular
 public import WeilConjectures.Compactification.Dense
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Geometrically.Connected
+public import WeilConjectures.Mathlib.AlgebraicGeometry.Geometrically.Reduced
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.FiniteType
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.Smooth
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Normalization
@@ -66,6 +68,8 @@ geometrically connected `U₀` as a dense open subscheme.
 universe u
 
 open CategoryTheory
+
+open scoped AlgebraicGeometry.Scheme.Modules
 
 namespace AlgebraicGeometry
 
@@ -260,7 +264,83 @@ positive degree, so `𝒪(D)` is ample, and `V = C ∖ D` is affine.
 (blueprint: `lem-sc-affine-open-proper`) -/
 theorem IsConnectedCurve.isAffine_of_ne_top [IsAlgClosed K] {C : Scheme.{u}}
     (p : C ⟶ Spec (.of K)) [IsConnectedCurve p] [Smooth p] [IsProper p] (V : C.Opens)
-    (hV : V ≠ ⊤) : IsAffine V :=
-  sorry
+    (hV : V ≠ ⊤) : IsAffine V := by
+  classical
+  have := IsConnectedCurve.connectedSpace' p
+  have : IsLocallyNoetherian C := LocallyOfFiniteType.isLocallyNoetherian p
+  have : IsRegular C := IsRegular.of_smooth p
+  have : IrreducibleSpace C := IsRegular.irreducibleSpace C
+  have hdim : topologicalKrullDim C = 1 := IsConnectedCurve.krullDim_eq_one (f := p)
+  have : SmoothOfRelativeDimension 1 p :=
+    (smoothOfRelativeDimension_iff_topologicalKrullDim_eq p 1).mpr hdim
+  rcases (V : Set C).eq_empty_or_nonempty with hVe | hne
+  · have : IsEmpty V := ⟨fun x ↦ by
+      have h : V.ι x ∈ Set.range V.ι := ⟨x, rfl⟩
+      rw [Scheme.Opens.range_ι, hVe] at h
+      exact h⟩
+    infer_instance
+  have : CompactSpace C := (quasiCompact_iff_compactSpace p).mp inferInstance
+  have : IsNoetherian C := ⟨⟩
+  -- the complement `S` of `V` is a finite set of closed points
+  have hfin := V.isOpen.finite_compl_of_topologicalKrullDim_le_one hdim.le hne
+  have hcl (x : C) (hx : x ∈ (V : Set C)ᶜ) : IsClosed ({x} : Set C) :=
+    V.isOpen.isClosed_singleton_of_mem_compl hdim.le hne hx
+  -- the effective Cartier divisor `D = ∑_{P ∈ S} [P]`
+  have key (S : Finset C) (hS : ∀ x ∈ S, IsClosed ({x} : Set C)) :
+      ∃ J : C.IdealSheafData, J.IsInvertible ∧ (J.support : Set C) = S := by
+    induction S using Finset.induction_on with
+    | empty => exact ⟨⊤, Scheme.IdealSheafData.isInvertible_top, by simp⟩
+    | insert Q S hQ ih =>
+      obtain ⟨J, hJ, hJS⟩ := ih fun x hx ↦ hS x (Finset.mem_insert_of_mem hx)
+      have hQc := hS Q (Finset.mem_insert_self Q S)
+      refine ⟨J * Scheme.IdealSheafData.vanishingIdeal ⟨{Q}, hQc⟩,
+        hJ.mul (isInvertible_vanishingIdeal_of_smoothOfRelativeDimension_one p hQc), ?_⟩
+      rw [Scheme.IdealSheafData.support_mul, TopologicalSpace.Closeds.coe_sup, hJS]
+      ext x
+      simp
+  obtain ⟨J, hJ, hJS⟩ := key hfin.toFinset fun x hx ↦ hcl x (hfin.mem_toFinset.1 hx)
+  rw [Set.Finite.coe_toFinset] at hJS
+  let : C.Over (Spec (.of K)) := ⟨p⟩
+  have hf : C ↘ Spec (.of K) = p := rfl
+  have : SmoothOfRelativeDimension 1 (C ↘ Spec (.of K)) := by rw [hf]; infer_instance
+  have : IsProper (C ↘ Spec (.of K)) := by rw [hf]; infer_instance
+  have : IsReduced C := isReduced_of_smooth p
+  have : Scheme.GlobalSectionsBijective K C := Scheme.GlobalSectionsBijective.of_isAlgClosed
+  -- `D` is finite and nonempty over `K`, so it has positive degree
+  have : Finite (Set.range J.subschemeι.base) := by
+    rw [J.range_subschemeι, hJS]
+    exact hfin.to_subtype
+  have : Finite J.subscheme :=
+    Finite.of_injective (Set.rangeFactorization J.subschemeι.base)
+      (Set.rangeFactorization_injective.mpr J.subschemeι.isEmbedding.injective)
+  have hne' : Nonempty J.subscheme := by
+    obtain ⟨Q, hQ⟩ : ((V : Set C)ᶜ).Nonempty := by
+      rw [Set.nonempty_compl]
+      exact fun h ↦ hV (SetLike.coe_injective h)
+    have : Q ∈ Set.range J.subschemeι.base := by rw [J.range_subschemeι, hJS]; exact hQ
+    obtain ⟨a, -⟩ := this
+    exact ⟨a⟩
+  have : LocallyQuasiFinite (J.subschemeι ≫ p) :=
+    .of_finite_preimage_singleton _ fun _ ↦ Set.toFinite _
+  have : IsFinite (J.subschemeι ≫ p) := .of_isProper_of_locallyQuasiFinite _
+  have hpos : 0 < (J.subschemeι ≫ p).finrankΓ := by
+    have hfin := (HasAffineProperty.iff_of_isAffine (P := @IsFinite)
+      (f := J.subschemeι ≫ p)).mp inferInstance
+    let := (J.subschemeι ≫ p).ΓAlgebra
+    have : Module.Finite K Γ(J.subscheme, ⊤) := by
+      have h2 : RingHom.Finite ((Scheme.ΓSpecIso (.of K)).inv ≫
+          (J.subschemeι ≫ p).appTop).hom := by
+        rw [CommRingCat.hom_comp]
+        exact hfin.2.comp (RingHom.Finite.of_surjective _
+          (ConcreteCategory.bijective_of_isIso (Scheme.ΓSpecIso (.of K)).inv).2)
+      exact h2
+    have : Nonempty (⊤ : J.subscheme.Opens) := ⟨⟨hne'.some, trivial⟩⟩
+    exact Module.finrank_pos
+  have hdeg : 0 < J.toModulesᵛ.degree K := by
+    rw [hJ.degree_dual_toModules]
+    exact_mod_cast hpos
+  have := hJ.isInvertible_dual_toModules
+  have hample := Scheme.isAmple_of_degree_pos_of_isAlgClosed (k := K) J.toModulesᵛ hdeg
+  exact Scheme.isAffine_compl_of_isAmple hJ hample V.ι (by simp [hJS])
 
 end AlgebraicGeometry
