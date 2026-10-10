@@ -12,9 +12,91 @@
   "def-weil-affine-spectrum",
   "def-kun-dimension"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "(Reduction to the presentation ring.) Let $P=k[x_1,\\dots,x_n]$, $I=(f_1,\\dots,f_c)\\subseteq P$ and $S=P/I$. Since $\\alpha:S\\to B$ is an isomorphism of $k$-algebras, the image of $\\det(\\partial f_j/\\partial x_i)_{1\\le i,j\\le c}$ in $S$ is $\\alpha^{-1}$ of its image in $B$, a unit; so $S$ with the identity map is itself a standard smooth presentation over $k$ with the same $n\\ge c\\ge0$ [def-weil-pbc-standard-smooth-algebra]. The map $\\operatorname{Spec}\\alpha:\\operatorname{Spec}B\\to\\operatorname{Spec}S$, $\\mathfrak Q\\mapsto\\alpha^{-1}(\\mathfrak Q)$, is a homeomorphism with inverse $\\operatorname{Spec}\\alpha^{-1}$ [def-weil-affine-spectrum]; put $\\mathfrak q=\\alpha^{-1}(\\mathfrak Q)$. By [def-kun-dimension] the dimension of the scheme $\\operatorname{Spec}B$ at $\\mathfrak Q$ is the Krull dimension at $\\mathfrak Q$ of its underlying topological space [def-kun-topological-dimension-at-point], and a homeomorphism carries open neighbourhoods of $\\mathfrak Q$ to open neighbourhoods of $\\mathfrak q$ and strict chains of irreducible closed subsets to strict chains of the same length. Hence $\\dim_{\\mathfrak Q}(\\operatorname{Spec}B)=\\dim_{\\mathfrak q}(\\operatorname{Spec}S)$, and it suffices to show $\\dim_{\\mathfrak q}(\\operatorname{Spec}S)=n-c$.",
+   "uses": [
+    "def-weil-pbc-standard-smooth-algebra",
+    "def-weil-affine-spectrum",
+    "def-kun-dimension",
+    "def-kun-topological-dimension-at-point"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra, proof of Lemma 00T7 (lemma-standard-smooth, line 37274), last paragraph (the statement is reduced to the standard smooth algebra k[x_1..x_n]/(f_1..f_c) itself)"
+   }
+  },
+  {
+   "text": "(Smoothness and the conormal module.) By [lem-weil-pbc-standard-smooth-is-smooth] the $k$-algebra $S$ is smooth [def-weil-pbc-smooth-ring-map]. By [lem-weil-pbc-standard-smooth-conormal-basis] the $S$-module $I/I^2$ is free with basis the classes of $f_1,\\dots,f_c$, so $I/I^2\\cong S^c$.",
+   "uses": [
+    "lem-weil-pbc-standard-smooth-is-smooth",
+    "def-weil-pbc-smooth-ring-map",
+    "lem-weil-pbc-standard-smooth-conormal-basis"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra, Lemma 00T7 (lemma-standard-smooth), parts (1) and (3) and the first paragraph of its proof"
+   }
+  },
+  {
+   "text": "(Local complete intersection near $\\mathfrak q$.) By [lem-weil-pbc-smooth-over-field-local-complete-intersection] applied to the smooth $k$-algebra $S$ of step 2, $S$ is a local complete intersection over $k$ [def-weil-pbc-complete-intersection-over-field]: there are $g_i\\in S$ ($i\\in J$) with $\\operatorname{Spec}S=\\bigcup_iD(g_i)$ and every $S_{g_i}$ a global complete intersection over $k$. Choose $i$ with $\\mathfrak q\\in D(g_i)$ and put $g=g_i$; then $g\\notin\\mathfrak q$ and $S_g$ is a global complete intersection over $k$.",
+   "uses": [
+    "lem-weil-pbc-smooth-over-field-local-complete-intersection",
+    "def-weil-pbc-complete-intersection-over-field"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra, proof of Lemma 00T7 (lemma-standard-smooth, line 37274), last paragraph: 'We already know that k[x_1..x_n]/(f_1..f_c) is a local complete intersection by Lemma 00T5 (lemma-smooth-over-field)'; Definition 00S9 (definition-lci-field)"
+   }
+  },
+  {
+   "text": "(The conormal module at $\\mathfrak q$ has rank $n-\\dim_{\\mathfrak q}$.) Apply [lem-weil-pbc-lci-conormal-free-rank-codimension] to the presentation $S=P/I$, the prime $\\mathfrak q$ and the element $g$ of step 3: $d:=\\dim_{\\mathfrak q}(\\operatorname{Spec}S)$ [def-kun-topological-dimension-at-point] is an integer with $0\\le d\\le n$, and $(I/I^2)_{\\mathfrak q}$ [def-weil-pbc-module-localization] is a free $S_{\\mathfrak q}$-module of rank $n-d$.",
+   "uses": [
+    "lem-weil-pbc-lci-conormal-free-rank-codimension",
+    "def-kun-topological-dimension-at-point",
+    "def-weil-pbc-module-localization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra, proof of Lemma 00T7 (lemma-standard-smooth, line 37274), last paragraph: 'since I/I^2 is free of rank c we see that k[x_1..x_n]/(f_1..f_c) has dimension n − c, by Lemma 00SC (lemma-lci)', implication (1) => (4) of 00SC with dim_q(S) = n − c' as in its statement"
+   }
+  },
+  {
+   "text": "(Comparing ranks; conclusion.) Localization at $S\\setminus\\mathfrak q$ commutes with finite direct sums [def-weil-pbc-module-localization], so by step 2 $(I/I^2)_{\\mathfrak q}\\cong(S^c)_{\\mathfrak q}\\cong S_{\\mathfrak q}^c$, while by step 4 $(I/I^2)_{\\mathfrak q}\\cong S_{\\mathfrak q}^{n-d}$. The ring $S_{\\mathfrak q}$ is local with maximal ideal $\\mathfrak qS_{\\mathfrak q}$ and residue field $\\kappa(\\mathfrak q)$ [def-weil-pbc-localization-at-prime], in particular nonzero; tensoring $S_{\\mathfrak q}^c\\cong S_{\\mathfrak q}^{n-d}$ with $\\kappa(\\mathfrak q)$ gives $\\kappa(\\mathfrak q)^c\\cong\\kappa(\\mathfrak q)^{n-d}$ as vector spaces, so $c=n-d$. Hence $\\dim_{\\mathfrak q}(\\operatorname{Spec}S)=d=n-c$, and by step 1 $\\dim_{\\mathfrak Q}(\\operatorname{Spec}B)=n-c$.",
+   "uses": [
+    "def-weil-pbc-module-localization",
+    "def-weil-pbc-localization-at-prime"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra, proof of Lemma 00T7 (lemma-standard-smooth, line 37274), last paragraph"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-standard-smooth-algebra",
+  "def-weil-affine-spectrum",
+  "def-kun-dimension",
+  "def-kun-topological-dimension-at-point",
+  "lem-weil-pbc-standard-smooth-is-smooth",
+  "def-weil-pbc-smooth-ring-map",
+  "lem-weil-pbc-standard-smooth-conormal-basis",
+  "lem-weil-pbc-smooth-over-field-local-complete-intersection",
+  "def-weil-pbc-complete-intersection-over-field",
+  "lem-weil-pbc-lci-conormal-free-rank-codimension",
+  "def-weil-pbc-module-localization",
+  "def-weil-pbc-localization-at-prime"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Algebra, Lemma 00T7 (lemma-standard-smooth, line 37274), last paragraph of the proof (proof of (7) over a field), with Lemmas 00T5 (lemma-smooth-over-field) and 00SC (lemma-lci) and Definition 00S9 (definition-lci-field)"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -50,10 +132,24 @@
    "results": "AlgebraicGeometry.topologicalKrullDimAt_eq_of_smoothOfRelativeDimension in WeilConjectures/Mathlib/AlgebraicGeometry/Morphisms/Smooth.lean (source repository, not Mathlib; rests on sorry); index unavailable",
    "date": "2026-10-10",
    "verdict": "not Mathlib; Lean candidate of the source repository reported to the lead"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "every prime of a standard smooth algebra over a field has dimension equal to number of variables minus number of equations",
+   "results": "Algebra.IsStandardSmooth.relativeDimension, Algebra.SubmersivePresentation.isStandardSmoothOfRelativeDimension, IsStandardSmoothOfRelativeDimension.out, IsStandardSmoothOfRelativeDimension.iff_of_isStandardSmooth (rank of Ω), IsStandardSmoothOfRelativeDimension.isStandardSmooth",
+   "date": "2026-10-10",
+   "verdict": "no match: relative dimension is only related to the rank of Ω, never to a Krull dimension"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rn 'topologicalKrullDim\\|krullDimAt\\|dimAt' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib --include=*.lean | grep 'def \\|theorem\\|lemma'",
+   "results": "Topology/KrullDimension.lean: topologicalKrullDim and its basic lemmas; PrimeSpectrum.topologicalKrullDim_eq_ringKrullDim; no notion of dimension at a point",
+   "date": "2026-10-10",
+   "verdict": "no match"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "worker",
@@ -73,5 +169,17 @@
   }
  },
  "chapter": "sec-proper-base-change",
- "unit": "sk-thm-p1"
+ "unit": "sk-thm-p1",
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "lem-weil-pbc-standard-smooth-over-field-dimension-at-points",
+  "worker": "stage1",
+  "summary": "Proof written in 5 steps following Stacks 00T7, last paragraph of the proof (Route B of the brief: the lci route). Route A (through lem-weil-pbc-smooth-over-field-dimension-differentials, Stacks 00TT (1)=>(3)) was rejected because the Stacks proof of 00TT (1)=>(3) itself uses this item (standard smooth over a field has dimension n−c), so it would create a cycle once 00TT is split. Steps: reduce from B to S=k[x]/(f) via the homeomorphism Spec alpha (identifying def-kun-dimension's dimension at a point with the topological one); S smooth and I/I^2 free on the f_j (00T7 (1),(3), two new Mathlib leaves); S lci over k (00T5, new unsplit node, with the new definition node for 00S9); (I/I^2)_q free of rank n − dim_q (00SC (1)=>(4) with 00P2, new unsplit node); compare ranks over the nonzero local ring S_q. Statement and stmt_deps kept."
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "result": "accepted",
+  "note": "5 steps following the lci route of Stacks 00T7: reduction to S = k[x]/(f) and the identification of the two notions of dimension at a point; S smooth (new leaf, StandardSmoothCotangent.lean:343 verified) with I/I^2 free on the f_j (new leaf, basisCotangent line 145 verified); smooth over a field is lci (new 00T5 node, with a new definition node 00S9); at an lci point the conormal module is free of rank n - dim_q (new 00SC node); compare ranks. Route A through the 00TT node avoided because Stacks proves 00TT from this item (stage 3: the 00TT node lem-weil-pbc-smooth-over-field-dimension-differentials must cite this item when split, not the converse)."
+ }
 }

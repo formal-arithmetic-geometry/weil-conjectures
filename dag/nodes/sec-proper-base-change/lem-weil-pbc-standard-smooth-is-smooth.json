@@ -1,0 +1,74 @@
+{
+ "id": "lem-weil-pbc-standard-smooth-is-smooth",
+ "kind": "statement",
+ "title": "A standard smooth algebra is smooth",
+ "statement": "Let $R$ be a commutative ring and $A$ an $R$-algebra which is standard smooth [def-weil-pbc-standard-smooth-algebra]. Then $A$ is a smooth $R$-algebra [def-weil-pbc-smooth-ring-map].",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Algebra, Lemma 00T7 (label lemma-standard-smooth, line 37274), part (1) and the first paragraph of its proof"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-standard-smooth-algebra",
+  "def-weil-pbc-smooth-ring-map"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "standard smooth ring homomorphism is smooth",
+   "results": "RingHom.IsStandardSmooth.smooth (Mathlib.RingTheory.RingHom.LocallyStandardSmooth), Algebra.instSmoothOfIsStandardSmooth (Mathlib.RingTheory.Smooth.StandardSmoothCotangent), RingHom.IsStandardSmoothOfRelativeDimension.isStandardSmooth, AlgebraicGeometry.isSmooth_iff",
+   "date": "2026-10-10",
+   "verdict": "match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "local complete intersection algebra over a field; smooth implies local complete intersection",
+   "results": "Algebra.instSmoothOfIsStandardSmooth ('Standard Smooth Algebras are Smooth'), RingHom.Smooth.locally_isStandardSmooth, RingHom.smooth_iff_locally_isStandardSmooth",
+   "date": "2026-10-10",
+   "verdict": "match: Algebra.instSmoothOfIsStandardSmooth"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsStandardSmooth\", \"smooth\"",
+   "results": "Algebra.IsStandardSmooth, Algebra.IsStandardSmooth.finitePresentation, IsStandardSmoothOfRelativeDimension.isStandardSmooth, ... (name-substring hits)",
+   "date": "2026-10-10",
+   "verdict": "no new candidate; the match is found by the other searches"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rn 'IsStandardSmooth.*Smooth\\|instance.*IsStandardSmooth' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib --include=*.lean; read RingTheory/Smooth/StandardSmoothCotangent.lean lines 300-347 and RingTheory/RingHom/LocallyStandardSmooth.lean lines 27-33",
+   "results": "StandardSmoothCotangent.lean line 343: instance (priority := 900) [IsStandardSmooth R S] : Smooth R S (auto-named Algebra.instSmoothOfIsStandardSmooth); LocallyStandardSmooth.lean line 29: RingHom.IsStandardSmooth.smooth",
+   "date": "2026-10-10",
+   "verdict": "match"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "Algebra.instSmoothOfIsStandardSmooth",
+  "file": "Mathlib/RingTheory/Smooth/StandardSmoothCotangent.lean",
+  "line": 343,
+  "how": "exact: instance [Algebra.IsStandardSmooth R S] : Algebra.Smooth R S, with Algebra.IsStandardSmooth the match of [def-weil-pbc-standard-smooth-algebra] and Algebra.Smooth the match of [def-weil-pbc-smooth-ring-map]; ring-hom form RingHom.IsStandardSmooth.smooth (Mathlib/RingTheory/RingHom/LocallyStandardSmooth.lean line 29)"
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-standard-smooth-over-field-dimension-at-points",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1"
+}

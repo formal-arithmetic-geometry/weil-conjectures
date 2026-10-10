@@ -1,0 +1,68 @@
+{
+ "id": "lem-weil-pbc-standard-smooth-conormal-basis",
+ "kind": "statement",
+ "title": "The conormal module of a standard smooth presentation is free on the equations",
+ "statement": "Let $R$ be a commutative ring, $n\\ge c\\ge0$ integers, $P=R[x_1,\\dots,x_n]$ the polynomial ring [def-weil-pbc-mv-polynomial-ring], $f_1,\\dots,f_c\\in P$, $I=(f_1,\\dots,f_c)\\subseteq P$ and $S=P/I$, and assume that $S$ with the identity is a standard smooth presentation [def-weil-pbc-standard-smooth-algebra], i.e. the image in $S$ of $\\det(\\partial f_j/\\partial x_i)_{1\\le i,j\\le c}$ [def-weil-pbc-polynomial-partial-derivative] is a unit of $S$. Then the conormal module $I/I^2$, an $S$-module, is a free $S$-module with basis the classes $f_1\\bmod I^2,\\dots,f_c\\bmod I^2$; in particular $I/I^2\\cong S^c$.",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Algebra, Lemma 00T7 (label lemma-standard-smooth, line 37274), part (3) and the first paragraph of its proof (the classes of the f_i map to a basis of the first c summands of the naive cotangent complex)"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-mv-polynomial-ring",
+  "def-weil-pbc-standard-smooth-algebra",
+  "def-weil-pbc-polynomial-partial-derivative"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "classes of the relations of a submersive presentation form a basis of the conormal module I/I^2",
+   "results": "Algebra.SubmersivePresentation.basisCotangent and basisCotangent_apply (Mathlib.RingTheory.Smooth.StandardSmoothCotangent), Algebra.SubmersivePresentation.basisDeriv",
+   "date": "2026-10-10",
+   "verdict": "match"
+  },
+  {
+   "tool": "loogle",
+   "query": "Algebra.SubmersivePresentation, Module.Basis _ _ (Algebra.Extension.Cotangent _)",
+   "results": "Algebra.SubmersivePresentation.basisCotangent, Algebra.SubmersivePresentation.basisCotangent_apply",
+   "date": "2026-10-10",
+   "verdict": "match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -n 'basisCotangent\\|free_cotangent' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/RingTheory/Smooth/StandardSmoothCotangent.lean; grep -n 'def Cotangent' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/RingTheory/Extension/Basic.lean",
+   "results": "StandardSmoothCotangent.lean line 145 (tagged @[stacks 00T7 \"(3)\"]): basisCotangent : Basis σ S P.toExtension.Cotangent, line 148 basisCotangent_apply: P.basisCotangent r = Cotangent.mk ⟨P.relation r, _⟩, line 157 free_cotangent; Extension/Basic.lean line 330: Cotangent := P.ker.Cotangent (I/I^2 for I the kernel of the presentation)",
+   "date": "2026-10-10",
+   "verdict": "match"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "Algebra.SubmersivePresentation.basisCotangent",
+  "file": "Mathlib/RingTheory/Smooth/StandardSmoothCotangent.lean",
+  "line": 145,
+  "how": "specializes in one line: for the SubmersivePresentation of S over R with variables ι={1..n}, relations σ={1..c} given by f_1..f_c and σ→ι the inclusion of 1..c (the match of [def-weil-pbc-standard-smooth-algebra]), P.toExtension.Cotangent is I/I^2 with I the kernel of R[x]→S, which is (f_1..f_c); basisCotangent_apply (line 148) says the basis vector r is the class of the relation f_r"
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-standard-smooth-over-field-dimension-at-points",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1"
+}

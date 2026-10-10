@@ -779,3 +779,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 01:58 L: reviewed lem-weil-pbc-spec-surjective-base-change (4 steps, +00E7 leaf): accepted.
 - 01:59 L: reviewed lem-weil-pbc-split-injection-after-completion (5 steps, +2: Krull 00IQ(2) leaf, split-extension-free-presentation): accepted.
 - 02:01 L: reviewed lem-weil-pbc-strictly-standard-base-change (5 steps, +2 Mathlib leaves): accepted.
+- 02:02 L: reviewed lem-weil-pbc-standard-smooth-over-field-dimension-at-points (5 steps, +5: two leaves, 00S9 definition, 00T5, 00SC): accepted. Stage 3: the 00TT node must be proved from this item (Stacks' order), not the other way round.

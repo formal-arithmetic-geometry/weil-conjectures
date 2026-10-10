@@ -1,0 +1,66 @@
+{
+ "id": "lem-weil-pbc-lci-conormal-free-rank-codimension",
+ "kind": "statement",
+ "title": "At a local complete intersection point the conormal module is free of rank n minus the dimension",
+ "statement": "Let $k$ be a field, $n\\ge0$, $P=k[x_1,\\dots,x_n]$ [def-weil-pbc-mv-polynomial-ring], $I\\subseteq P$ an ideal, $S=P/I$ and $\\mathfrak q\\subset S$ a prime ideal. Assume there is $g\\in S\\setminus\\mathfrak q$ such that the localization $S_g$ is a global complete intersection over $k$ [def-weil-pbc-complete-intersection-over-field]. Let $d=\\dim_{\\mathfrak q}(\\operatorname{Spec}S)$ be the Krull dimension of the topological space $\\operatorname{Spec}S$ [def-weil-affine-spectrum] at the point $\\mathfrak q$ [def-kun-topological-dimension-at-point]. Then $d$ is an integer with $0\\le d\\le n$, and the localization $(I/I^2)_{\\mathfrak q}$ of the $S$-module $I/I^2$ at $S\\setminus\\mathfrak q$ [def-weil-pbc-module-localization] is a free $S_{\\mathfrak q}$-module [def-weil-pbc-localization-at-prime] of rank $n-d$.",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Algebra, Lemma 00SC (label lemma-lci, line 35909), implication (1) => (4), with c = height(q') - height(q) = n - dim_q(S) as in its statement (Lemma 00P2 lemma-codimension, line 28270, and dim_x A^n = n, Lemma 00OT and lemma-dim-affine-space); proof: last paragraph of the proof of 00SC (regular sequence of length t in k[y]_{q''}, J/J^2 free, Lemma 00S6 lemma-conormal-module-localize)"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-mv-polynomial-ring",
+  "def-weil-pbc-complete-intersection-over-field",
+  "def-weil-affine-spectrum",
+  "def-kun-topological-dimension-at-point",
+  "def-weil-pbc-module-localization",
+  "def-weil-pbc-localization-at-prime"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "conormal module I/I^2 localized at a prime is free of rank equal to codimension, local complete intersection over a field",
+   "results": "Ideal.instModuleQuotientCotangent, LocalizedModule.AtPrime, Module.mem_freeLocus_of_isLocalization, Module.rankAtStalk_self, Module.freeLocus",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "I/I^2 localized at q is free of rank height(q') - height(q) for a complete intersection presentation over a field",
+   "results": "Algebra.instFreeCotangentToExtensionUnitLocalizationAway, Algebra.SubmersivePresentation.rank_kaehlerDifferential, IsLocalRing.finrank_cotangentSpace_le_one_iff, Algebra.Presentation.localizationAway_dimension_zero",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rln 'complete intersection\\|CompleteIntersection\\|IsLCI\\|lci' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib --include=*.lean; grep -rn 'topologicalKrullDim\\|krullDimAt\\|dimAt' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib --include=*.lean | grep 'def \\|theorem\\|lemma'",
+   "results": "no complete intersection notion; Topology/KrullDimension.lean has topologicalKrullDim (no dimension at a point); no rank formula for I/I^2",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-standard-smooth-over-field-dimension-at-points",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1"
+}
