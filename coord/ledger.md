@@ -904,3 +904,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 05:17 L: reviewed lem-weil-pbc-purely-inseparable-integral-prime-unique (3 steps, +00GQ lying-over leaf): accepted. Stage-3 note: pqf-lem-lying-over duplicates the new leaf.
 - 05:18 L: reviewed lem-weil-pbc-derivation-nonzero-on-non-pth-power (6 steps, +7 nodes: 07NA, 031W, 07P1/2, 07P5, 07P4, 07PE last sentence, dual-separates leaf): accepted; merged the duplicate lem-weil-pbc-find-derivation-not-pth-power (same statement, 07PH) into it: citer formally-smooth-complete-local-regular repointed, node deleted.
 - 05:18 L: reviewed lem-weil-pbc-radicial-prime-unique-degree-p (5 steps, no new node; lying-over citation repointed to the new 00GQ leaf): accepted.
+- 05:20 L: reviewed lem-weil-pbc-spectral-directed-limit-spectral (6 steps, +0A2V node, +0379 and 004W leaves): accepted.

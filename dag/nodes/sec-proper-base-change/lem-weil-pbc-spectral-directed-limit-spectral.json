@@ -10,9 +10,92 @@
  "stmt_deps": [
   "def-weil-spectral-space"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "*Step 1 (a basis of $X$; Tag 0A2P in the directed case).* Claim: the sets $p_i^{-1}(U_i)$ with $i\\in I$ and $U_i\\subseteq X_i$ quasi-compact open form a basis of the topology of $X$, and the intersection of two of them is again of this form. Since the topology of $X$ is the coarsest for which all $p_i$ are continuous, the sets $p_i^{-1}(V)$ ($i\\in I$, $V\\subseteq X_i$ open) form a subbase, so finite intersections of them form a basis ($X=p_i^{-1}(X_i)$ for any $i$, $I$ being nonempty). Given $p_{i_1}^{-1}(V_1),\\dots,p_{i_n}^{-1}(V_n)$, $n\\ge1$, choose $k\\in I$ with $k\\ge i_1,\\dots,i_n$ ($I$ directed); as $p_{i_l}=f_{i_lk}\\circ p_k$ we get $\\bigcap_lp_{i_l}^{-1}(V_l)=p_k^{-1}(V)$ with $V=\\bigcap_lf_{i_lk}^{-1}(V_l)$ open in $X_k$. So every open $W\\subseteq X$ is a union of sets $p_k^{-1}(V)$ with $V\\subseteq X_k$ open, and writing each such $V$ as a union of quasi-compact opens of $X_k$ (they form a basis of the spectral space $X_k$), $W$ is a union of sets $p_k^{-1}(U_k)$ with $U_k$ quasi-compact open. For two such sets $p_i^{-1}(U_i)$, $p_j^{-1}(U_j)$ choose $k\\ge i,j$: then $p_i^{-1}(U_i)\\cap p_j^{-1}(U_j)=p_k^{-1}(f_{ik}^{-1}(U_i)\\cap f_{jk}^{-1}(U_j))$, and $f_{ik}^{-1}(U_i)$, $f_{jk}^{-1}(U_j)$ are quasi-compact open ($f_{ik},f_{jk}$ spectral), so their intersection is quasi-compact open ($X_k$ is quasi-separated).",
+   "uses": [
+    "def-weil-spectral-space"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/topology.tex",
+    "place": "Topology, Lemma Tag 0A2P (lemma-describe-limits, line 2374), proof of (1), as quoted in the second paragraph of the proof of 0A2Z"
+   }
+  },
+  {
+   "text": "*Step 2 (the basic opens and $X$ are quasi-compact; Tag 0A2V and Stacks' 'formal argument').* Fix $i\\in I$ and a quasi-compact open $U_i\\subseteq X_i$. For $j\\in I$ put $Z_j=f_{ij}^{-1}(U_i)$ if $j\\ge i$ and $Z_j=X_j$ otherwise. Each $Z_j$ is closed in the constructible topology of $X_j$ [def-weil-pbc-constructible-topology]: $X_j$ is; and for $j\\ge i$ the set $f_{ij}^{-1}(U_i)$ is a quasi-compact open of $X_j$ ($f_{ij}$ spectral), so its complement is a member of the subbase of the constructible topology, i.e. $f_{ij}^{-1}(U_i)$ is constructibly closed. For $j\\le j'$ we have $f_{jj'}(Z_{j'})\\subseteq Z_j$: if $j\\not\\ge i$ this is trivial; if $j\\ge i$ then $j'\\ge i$ and $f_{ij}\\circ f_{jj'}=f_{ij'}$ gives $f_{jj'}(f_{ij'}^{-1}(U_i))\\subseteq f_{ij}^{-1}(U_i)$. By [lem-weil-pbc-spectral-limit-constructible-closed-quasi-compact] (a directed set is a preordered set) the subset $Z=\\{x\\in X:p_j(x)\\in Z_j\\ \\forall j\\}$ is quasi-compact. But $Z=p_i^{-1}(U_i)$: for $x\\in X$ and $j\\ge i$, $p_j(x)\\in f_{ij}^{-1}(U_i)$ iff $p_i(x)=f_{ij}(p_j(x))\\in U_i$, and $j=i$ is among these. So $p_i^{-1}(U_i)$ is quasi-compact. The same lemma with $Z_j=X_j$ for all $j$ shows that $X$ is quasi-compact.",
+   "uses": [
+    "lem-weil-pbc-spectral-limit-constructible-closed-quasi-compact",
+    "def-weil-pbc-constructible-topology",
+    "def-weil-spectral-space"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/topology.tex",
+    "place": "Topology, proof of Lemma Tag 0A2Z (lemma-directed-inverse-limit-spectral-spaces, line 4902), first and second paragraphs"
+   }
+  },
+  {
+   "text": "*Step 3 (every quasi-compact open of $X$ comes from some $X_k$; Tag 0A2Y, case of a quasi-compact open).* Let $U\\subseteq X$ be quasi-compact open. By Step 1, $U$ is a union of sets $p_i^{-1}(U_i)$ with $U_i\\subseteq X_i$ quasi-compact open, and by quasi-compactness of $U$ finitely many suffice: $U=\\bigcup_{l=1}^np_{i_l}^{-1}(U_l)$. If $n=0$ then $U=\\emptyset=p_i^{-1}(\\emptyset)$ for any $i\\in I$. Otherwise choose $k\\ge i_1,\\dots,i_n$ and put $U_k=\\bigcup_lf_{i_lk}^{-1}(U_l)$; it is a finite union of quasi-compact opens ($f_{i_lk}$ spectral), hence quasi-compact open, and $p_k^{-1}(U_k)=\\bigcup_l(f_{i_lk}\\circ p_k)^{-1}(U_l)=\\bigcup_lp_{i_l}^{-1}(U_l)=U$.",
+   "uses": [
+    "def-weil-spectral-space"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/topology.tex",
+    "place": "Topology, proof of Lemma Tag 0A2Y (lemma-inverse-limit-spectral-spaces-constructible, line 4862), first paragraph, cited in the third paragraph of the proof of 0A2Z"
+   }
+  },
+  {
+   "text": "*Step 4 (quasi-compact, quasi-separated, basis of quasi-compact opens; $p_i$ spectral).* $X$ is quasi-compact (Step 2). The quasi-compact opens of $X$ form a basis: the basis of Step 1 consists of opens that are quasi-compact by Step 2. If $U,U'\\subseteq X$ are quasi-compact open, Step 3 writes them as $p_i^{-1}(U_i)$ and $p_j^{-1}(U_j)$ with quasi-compact opens $U_i,U_j$; by Step 1 $U\\cap U'=p_k^{-1}(U_k)$ with $U_k\\subseteq X_k$ quasi-compact open, which is quasi-compact by Step 2. Finally for every $i$ and every quasi-compact open $W\\subseteq X_i$, $p_i^{-1}(W)$ is quasi-compact (Step 2), and $p_i$ is continuous: $p_i$ is spectral.",
+   "uses": [
+    "def-weil-spectral-space"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/topology.tex",
+    "place": "Topology, proof of Lemma Tag 0A2Z (lemma-directed-inverse-limit-spectral-spaces, line 4902), second and third paragraphs"
+   }
+  },
+  {
+   "text": "*Step 5 (existence of a generic point).* Let $Z\\subseteq X$ be an irreducible closed subset [def-weil-irreducible-components]. For $i\\in I$, $p_i(Z)$ is irreducible [lem-weil-pbc-irreducible-continuous-image], so its closure $Z_i=\\overline{p_i(Z)}$ is an irreducible closed subset of $X_i$ [lem-weil-pbc-irreducible-closure] and has a unique generic point $\\xi_i$ ($X_i$ is spectral, hence sober [def-weil-spectral-space]). For $i\\le j$: the closed set $f_{ij}^{-1}(Z_i)$ contains $p_j(Z)$ (as $f_{ij}\\circ p_j=p_i$), hence $Z_j$, so $f_{ij}(\\xi_j)\\in Z_i$ and $\\overline{\\{f_{ij}(\\xi_j)\\}}\\subseteq Z_i$; conversely the closed set $f_{ij}^{-1}(\\overline{\\{f_{ij}(\\xi_j)\\}})$ contains $\\xi_j$, hence $Z_j=\\overline{\\{\\xi_j\\}}\\supseteq p_j(Z)$, so $\\overline{\\{f_{ij}(\\xi_j)\\}}\\supseteq f_{ij}(p_j(Z))=p_i(Z)$ and, being closed, $\\supseteq Z_i$. Thus $f_{ij}(\\xi_j)$ is a generic point of $Z_i$ and $f_{ij}(\\xi_j)=\\xi_i$. By the description of the points of $X$ there is $\\xi\\in X$ with $p_i(\\xi)=\\xi_i$ for all $i$. Claim $\\xi\\in Z$: otherwise $X\\setminus Z$ is an open neighbourhood of $\\xi$, so by Step 1 it contains some $p_i^{-1}(U_i)\\ni\\xi$ with $U_i$ quasi-compact open; then $\\xi_i\\in U_i$, so the open $U_i$ meets $Z_i=\\overline{p_i(Z)}$ and therefore meets $p_i(Z)$, i.e. $p_i(z)\\in U_i$ for some $z\\in Z$, and $z\\in p_i^{-1}(U_i)\\subseteq X\\setminus Z$, a contradiction. So $\\overline{\\{\\xi\\}}\\subseteq Z$ ($Z$ closed). Conversely let $z\\in Z$ and $W$ an open neighbourhood of $z$; by Step 1 $z\\in p_i^{-1}(U_i)\\subseteq W$ for some $i$ and open $U_i$. Then $p_i(z)\\in U_i\\cap Z_i$, so the open $U_i$ meets $Z_i=\\overline{\\{\\xi_i\\}}$, hence contains $\\xi_i$, hence $\\xi\\in p_i^{-1}(U_i)\\subseteq W$. So $z\\in\\overline{\\{\\xi\\}}$, and $\\overline{\\{\\xi\\}}=Z$.",
+   "uses": [
+    "def-weil-irreducible-components",
+    "lem-weil-pbc-irreducible-continuous-image",
+    "lem-weil-pbc-irreducible-closure",
+    "def-weil-spectral-space"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/topology.tex",
+    "place": "Topology, proof of Lemma Tag 0A2Z (lemma-directed-inverse-limit-spectral-spaces, line 4902), fourth paragraph"
+   }
+  },
+  {
+   "text": "*Step 6 (uniqueness of the generic point, omitted in Stacks; conclusion).* Let $\\eta\\in Z$ be a second point with $\\overline{\\{\\eta\\}}=Z$, and $i\\in I$. Then $p_i(\\eta)\\in p_i(Z)\\subseteq Z_i$, so $\\overline{\\{p_i(\\eta)\\}}\\subseteq Z_i$; and the closed set $p_i^{-1}(\\overline{\\{p_i(\\eta)\\}})$ contains $\\eta$, hence $Z$, so $\\overline{\\{p_i(\\eta)\\}}\\supseteq p_i(Z)$ and therefore $\\supseteq Z_i$. Thus $p_i(\\eta)$ is a generic point of $Z_i$, and by uniqueness in the spectral space $X_i$, $p_i(\\eta)=\\xi_i=p_i(\\xi)$. This holds for every $i$, and $x\\mapsto(p_i(x))_i$ is injective, so $\\eta=\\xi$. Hence every irreducible closed subset of $X$ has a unique generic point, and with Step 4 $X$ is a spectral space [def-weil-spectral-space] whose projections $p_i$ are spectral.",
+   "uses": [
+    "def-weil-spectral-space"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/topology.tex",
+    "place": "Topology, proof of Lemma Tag 0A2Z (lemma-directed-inverse-limit-spectral-spaces, line 4902), last paragraph: Stacks omits the uniqueness and gives the hint written out here"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-spectral-space",
+  "lem-weil-pbc-spectral-limit-constructible-closed-quasi-compact",
+  "def-weil-pbc-constructible-topology",
+  "def-weil-irreducible-components",
+  "lem-weil-pbc-irreducible-continuous-image",
+  "lem-weil-pbc-irreducible-closure"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/topology.tex",
+  "place": "Topology, Lemma Tag 0A2Z (lemma-directed-inverse-limit-spectral-spaces, line 4902), proof, in the directed-set case, with the cited parts of Lemmas 0A2P (line 2374) and 0A2Y (line 4862) written out; the uniqueness of the generic point, omitted in Stacks, follows its hint"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -34,10 +117,38 @@
    "results": "no limit statements in Topology/Spectral; IsSpectralMap (Hom.lean:43) is only the predicate with composition lemmas",
    "date": "2026-10-10",
    "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "limit of a cofiltered diagram of spectral spaces with spectral transition maps is a spectral space",
+   "results": "TopCat.nonempty_limitCone_of_compact_t2_cofiltered_system, AlgebraicGeometry.Scheme.compactSpace_of_isLimit, AlgebraicGeometry.Scheme.nonempty_of_isLimit, SpectralSpace.toPrespectralSpace, PrespectralSpace.of_isInducing, PrespectralSpace.of_isClosedEmbedding, Topology.IsOpenEmbedding.spectralSpace, CompHaus.limitCone: no limit statement for spectral spaces",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "SpectralSpace, CategoryTheory.Limits.IsLimit",
+   "results": "no declarations",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "local_search",
+   "query": "spectralSpace (project ~/weil-conjectures-slopmaster2; index unavailable)",
+   "results": "Topology.IsOpenEmbedding.spectralSpace (Mathlib); outside Mathlib: CategoryTheory.IsPullback.spectralSpace, Homeomorph.spectralSpace, Topology.IsClosedEmbedding.spectralSpace (package proetale), none about limits",
+   "date": "2026-10-10",
+   "verdict": "no match in Mathlib"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rn 'instance.*SpectralSpace\\|theorem.*SpectralSpace\\|lemma.*SpectralSpace' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib; grep -rln 'IsLimit' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/Topology/Spectral ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/Topology/Sober.lean ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/Topology/Constructible.lean",
+   "results": "only `instance : SpectralSpace (PrimeSpectrum R)` (RingTheory/Spectrum/Prime/Topology.lean:844); no IsLimit in those files",
+   "date": "2026-10-10",
+   "verdict": "no match"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "worker",
@@ -57,5 +168,17 @@
   }
  },
  "chapter": "sec-proper-base-change",
- "unit": "sk-thm-p1"
+ "unit": "sk-thm-p1",
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "lem-weil-pbc-spectral-directed-limit-spectral",
+  "worker": "stage1",
+  "summary": "Proof written from Stacks 0A2Z (topology.tex line 4902) in the directed case, read with the lemmas it cites: 0A2P (describe-limits, line 2374), 0A2V (line 4779), 0A2Y (line 4862). Six steps: the basis p_i^{-1}(U_i) of X (0A2P, written out, elementary from the initial topology and directedness); quasi-compactness of these basic opens and of X via the new unsplit node for 0A2V(1)(2), with Stacks' 'formal argument' made explicit by choosing Z_j = f_{ij}^{-1}(U_i) for j >= i and Z_j = X_j otherwise; quasi-compact opens of X descend (first paragraph of 0A2Y, written out, so that 0A30 [lem-weil-pbc-spectral-limit-descend-opens], whose proof will use this item, is not cited); X quasi-compact, quasi-separated, with a basis of quasi-compact opens and spectral projections; existence of generic points (new Mathlib leaves for 0379 and 004W(1)); uniqueness, omitted in Stacks, written from its hint. Statement unchanged. New nodes: one unsplit (0A2V), two Mathlib leaves (IsIrreducible.image, IsIrreducible.closure). Mathlib has no limit statement for spectral spaces (searches recorded)."
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "result": "accepted",
+  "note": "6 steps following Topology 0A2Z: the basis p_i^{-1}(U_i) (0A2P in the directed case, written out); quasi-compactness of the basic opens and of X by a new node for 0A2V (1), (2) (the 'formal argument' made explicit with Z_j); every quasi-compact open comes from a stage (0A2Y written out, so that 0A30 is not cited); quasi-separatedness and spectrality of the p_i; generic points via two new Mathlib leaves (IsIrreducible.image line 228, IsIrreducible.closure line 84, verified by L) and the compatible family of generic points; uniqueness (omitted in Stacks). Statement unchanged; tags verified."
+ }
 }
