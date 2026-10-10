@@ -3,7 +3,7 @@
  "blueprint": {
   "is": "lem-sc-isogeny-facts",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "Basic facts about isogenies",
@@ -56,28 +56,116 @@
  },
  "stmt_deps": [
   "def-sc-mult-n",
-  "def-sc-abelian-variety"
- ],
- "proof": [],
- "proof_deps": [
-  "lem-sc-abelian-variety-projective",
-  "thm-sc-theorem-of-cube",
-  "lem-sc-mult-n-finite-flat",
-  "lem-sc-mult-n-isogeny",
-  "def-sc-mult-n",
+  "def-sc-abelian-variety",
   "def-sc-isogeny",
-  "lem-sc-finite-constant-length-flat",
-  "lem-sc-ample-tensor",
-  "lem-sc-mult-n-pullback",
-  "def-sc-hilbert-degree",
-  "lem-sc-hilbert-polynomial",
-  "lem-sc-deg-pullback-finite",
-  "lem-sc-isogeny-degree"
+  "def-pc-fppf-site"
  ],
- "proof_origin": null,
- "mathlib_searches": [],
+ "proof": [
+  {
+   "text": "By [lem-sc-mult-n-isogeny], [n] is a surjective group homomorphism with finite kernel A[n]. The defining criterion [def-sc-isogeny] therefore makes [n] an isogeny. Its kernel is the subgroup scheme specified by [def-sc-mult-n].",
+   "uses": [
+    "lem-sc-mult-n-isogeny",
+    "def-sc-isogeny",
+    "def-sc-mult-n"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-abelian-varieties/sk-prop-av-isogeny/lem-sc-isogeny-facts.md",
+    "place": "proof, paragraph (a), first sentences"
+   }
+  },
+  {
+   "text": "Apply [lem-sc-mult-n-finite-flat] to A and n: [n] is finite flat and finite locally free of rank n^{2g}, while A[n] is finite of order n^{2g}. Since [n] is an isogeny, [lem-sc-isogeny-degree] identifies its degree (the order of its kernel) with the rank of this finite flat map. Thus the degree of [n] is n^{2g}.",
+   "uses": [
+    "lem-sc-mult-n-finite-flat",
+    "lem-sc-isogeny-degree"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-abelian-varieties/sk-prop-av-isogeny/lem-sc-isogeny-facts.md",
+    "place": "proof, degree paragraph and conclusion"
+   }
+  },
+  {
+   "text": "The finite group scheme A[n] is flat over k because every module over a field is flat. The map [n] is finite locally free by step 2, hence flat and locally of finite presentation; it is surjective by step 1. Consequently its singleton family is an fppf covering in the sense of [def-pc-fppf-site].",
+   "uses": [
+    "lem-sc-mult-n-finite-flat",
+    "lem-sc-mult-n-isogeny",
+    "def-pc-fppf-site"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-abelian-varieties/sk-prop-av-isogeny/lem-sc-isogeny-facts.md",
+    "place": "proof, final sentence of (b)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sc-mult-n-isogeny",
+  "def-sc-isogeny",
+  "def-sc-mult-n",
+  "lem-sc-mult-n-finite-flat",
+  "lem-sc-isogeny-degree",
+  "def-pc-fppf-site"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/master/blueprint/sec-abelian-varieties/sk-prop-av-isogeny/lem-sc-isogeny-facts.md",
+  "place": "proof of clauses (a) and (b)"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "multiplication by a positive integer on an abelian variety is a finite flat surjective isogeny of degree n to the power twice its dimension",
+   "results": "8 hits; WeierstrassCurve.VariableChange.instMul and elliptic-curve variable-change declarations, no abelian-variety isogeny theorem",
+   "date": "2026-10-11",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "AbelianVariety, IsIsogeny, IsFinite",
+   "results": "0 hits; unknown identifier AbelianVariety",
+   "date": "2026-10-11",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "isogeny|Isogeny|multiplication.*finite|torsionSubgroupScheme AlgebraicGeometry",
+   "results": "0 hits",
+   "date": "2026-10-11",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "multiplication map on an abelian variety is finite flat surjective with degree n squared dimension",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-11",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "degree of the multiplication by n morphism on an abelian scheme and rank of its torsion group scheme",
+   "results": "8 hits; card_dvd_exponent_nsmul_rank', AddCircle.card_torsion_le_of_isSMulRegular_int and other unrelated group results",
+   "date": "2026-10-11",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "Isogeny, AbelianScheme",
+   "results": "0 hits; unknown identifier Isogeny",
+   "date": "2026-10-11",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "IsAbelianVariety|AbelianScheme|isogeny AlgebraicGeometry",
+   "results": "0 hits",
+   "date": "2026-10-11",
+   "verdict": "no match"
+  }
+ ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "import_flags": [
   "undischarged_input",
@@ -325,5 +413,29 @@
   }
  },
  "chapter": "sec-abelian-varieties",
- "unit": "sk-prop-av-isogeny"
+ "unit": "sk-prop-av-isogeny",
+ "split_report": {
+  "date": "2026-10-11",
+  "item": "lem-sc-isogeny-facts",
+  "worker": "stage1",
+  "summary": "Separated the item into the isogeny, degree, and fppf consequences. The same-unit finite-flat and kernel-order lemma carries the substantive degree calculation; no duplicate node was created. Corrected the statement dependencies to include isogeny and fppf terminology.",
+  "blueprint": "First paragraph of the blueprint proof for isogeny and surjectivity; degree paragraphs via lem-sc-mult-n-finite-flat; last sentence for the fppf consequence.",
+  "tool_uses": [
+   {
+    "node": "def-pc-fppf-site",
+    "why": "Its definition supplies the generic fppf-covering criterion, which the isogeny unit does not define."
+   }
+  ]
+ },
+ "tool_uses": [
+  "def-pc-fppf-site"
+ ],
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-isf1757",
+  "group": "H1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-isf1757 (reviewer sub-agent of L); spot-checked: Steps 1-3 against cited statements (mult-n-isogeny: surjective+finite kernel over any field; mult-n-finite-flat: finite flat locally free rank d^{2g}, kernel order d^{2g} for any d>=1, no invertibility needed; isogeny-degree; fppf-site def); alg. closed specialization keeps hypotheses; transitive closure of all cited nodes (234 nodes) contains neither lem-sc-isogeny-surjective nor the item: no cycle; tool_use def-pc-fppf-site accepted as generic. No faults beyond the second reading."
+ }
 }
