@@ -23,9 +23,39 @@
   "def-weil-pbc-etale-cohomology",
   "def-weil-open-immersion"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "For a geometric point x of Cbar lying in C, j is an isomorphism on an etale neighbourhood, so all higher direct-image stalks vanish. For x over a boundary point P in S, the stalk formula identifies (R^q j_* G_m)_x with H^q of the fraction field of the strict henselization of the DVR O_{Cbar,P}; q=1 vanishes by Hilbert 90 and q=2 vanishes because this field has zero Brauer group.",
+   "uses": [
+    "lem-sc-open-curve-boundary-higher-direct-image-vanishing"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Discussion preceding Tag 03RM (stalk computation)"
+   }
+  },
+  {
+   "text": "Apply the Leray spectral sequence for j to G_m. The vanishing of the R^1 and R^2 higher direct images from step 1 makes the edge map H^q(Cbar_et,j_*G_m) \\to H^q(C_et,G_m) an isomorphism for q=0,1,2 by the low-degree Leray comparison.",
+   "uses": [
+    "lem-sc-open-curve-etale-leray-low-degree"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Discussion preceding Tag 03RM (Leray comparison)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sc-open-curve-boundary-higher-direct-image-vanishing",
+  "lem-sc-open-curve-etale-leray-low-degree"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Discussion preceding Tag 03RM"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -50,12 +80,28 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-sc-brauer-zero",
   "by": "worker",
   "date": "2026-10-10"
  },
  "chapter": "sec-curve-estimates",
- "unit": "sk-thm-br"
+ "unit": "sk-thm-br",
+ "split_report": {
+  "date": "2026-10-11",
+  "item": "lem-sc-open-curve-gm-direct-image-cohomology",
+  "worker": "stage1",
+  "summary": "Split the comparison into boundary stalk vanishing and the low-degree Leray edge-map theorem. The first helper records the strict-henselization stalk calculation (Hilbert 90 in degree 1 and Brauer vanishing in degree 2); the second records the formal Leray consequence. Both helpers were searched against the DAG, blueprint, Lean source, and Mathlib.",
+  "blueprint": "Realizes the affine-case sentence of lem-sc-brauer-zero that identifies H^q(C_et,G_m) with H^q(Cbar_et,j_*G_m), using the stalk and Leray clauses in the cited Stacks discussion.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-ogd1748",
+  "group": "C1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-ogd1748 (reviewer sub-agent of L); spot-checked: Step1 helper: stalks of R^1,R^2 j_*G_m = H^q(K^sh,G_m), Hilbert 90 / Br(K^sh)=0 per Stacks discussion before 03RM; Step2 helper: E2 page with E^{p,1}=E^{p,2}=0 gives edge iso for q<=2 (correct). Helpers unsplit with no proof_deps, so no cycle through lem-sc-brauer-zero. Not duplicates: lem-weil-pbc-site-leray-degenerate needs R^q=0 for all q>0, pqf-lem-leray-lowdegree is quasi-coherent H^1 only. LeanFinder query for Leray low-degree: no match (recorded). FIX more, RETURN less: lem-sc-open-curve-etale-leray-low-degree stmt_deps: added def-weil-open-immersion (cited in statement, missing), removed lem-sc-topological-leray-spectral-sequence (a topological lemma, not used by the statement).; 1 file(s) fixed by the reviewer"
+ }
 }
