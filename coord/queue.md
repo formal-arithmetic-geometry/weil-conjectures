@@ -19,7 +19,6 @@
 | `lem-weil-pbc-descend-qc-open-fg-subalgebra` | 1012 | none |
 | `lem-weil-pbc-equation-count-fibre-dimension-flat` | 1012 | none |
 | `lem-weil-pbc-flat-base-change-map-sections` | 1012 | none |
-| `lem-weil-pbc-flat-smooth-fibre-smooth-at-prime` | 1012 | none |
 | `lem-weil-pbc-flat-under-regular` | 1012 | none |
 | `lem-weil-pbc-flat-variant-local-criterion` | 1012 | none |
 | `lem-weil-pbc-formal-systems-graded-vanishing` | 1012 | none |
@@ -134,6 +133,7 @@
 | `lem-weil-pbc-module-pushforward-injective-acyclic` | 1013 | none |
 | `lem-weil-pbc-module-pushforward-injectives-sections-quasi-iso` | 1013 | none |
 | `lem-weil-pbc-nagata-universally-japanese` | 1013 | none |
+| `lem-weil-pbc-projective-resolution-kernel-projective` | 1013 | none |
 | `lem-weil-pbc-quasi-finite-at-finite-subalgebra-away` | 1013 | none |
 | `lem-weil-pbc-relative-global-complete-intersection-smooth-jacobian` | 1013 | none |
 | `lem-weil-pbc-residue-field-pd-ge-embedding-dimension` | 1013 | none |
@@ -883,7 +883,7 @@
 | `lem-weil-pbc-p1-field-dimension-one` | 4 | state |
 | `lem-weil-pbc-projective-space-zero-isomorphism` | 4 | state |
 
-Not open yet: 657 nodes that wait for stage 1, 506 nodes that wait for a statement dependency.
+Not open yet: 657 nodes that wait for stage 1, 507 nodes that wait for a statement dependency.
 
 ## Stage 3: modules to prove (0)
 
