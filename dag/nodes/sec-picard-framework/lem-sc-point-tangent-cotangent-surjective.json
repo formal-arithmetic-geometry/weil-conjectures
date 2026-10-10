@@ -13,17 +13,48 @@
  },
  "kind": "statement",
  "title": "Injective tangent map gives surjective cotangent map",
- "statement": "Let $f:X\\to Y$ be a morphism locally of finite type between schemes over a field $k$ [def-weil-pbc-scheme-conventions], let $x\\in X$ and $y=f(x)$ be closed points with residue fields equal to $k$. If the induced map on tangent spaces $T_{X/k,x}\\to T_{Y/k,y}$ is injective, then the induced local-ring map gives a surjection $\\mathfrak m_y/\\mathfrak m_y^2\\to\\mathfrak m_x/\\mathfrak m_x^2$ on cotangent spaces. (Stacks Project, Varieties, Tag 0B2E.)",
+ "statement": "Let $f:X\\to Y$ be a morphism locally of finite type between schemes over a field $k$ [def-weil-pbc-scheme-conventions], let $x\\in X$ and $y=f(x)$ be closed points with residue fields equal to $k$. If the induced map on tangent spaces $T_{X/k,x}\\to T_{Y/k,y}$ [def-sc-scheme-tangent-space] is injective, then the induced local-ring map gives a surjection $\\mathfrak m_y/\\mathfrak m_y^2\\to\\mathfrak m_x/\\mathfrak m_x^2$ on cotangent spaces. (Stacks Project, Varieties, Tag 0B2E.)",
  "source": {
   "document": "literature/stacks-project/varieties.tex",
   "place": "Tag 0B2E, lemma-tangent-space-rational-point (with S = Spec k, T_{X/k,x} = Hom_k(m_x/m_x^2, k)); the dual of a linear map is injective iff the map is surjective"
  },
  "stmt_deps": [
-  "def-weil-pbc-scheme-conventions"
+  "def-weil-pbc-scheme-conventions",
+  "def-sc-scheme-tangent-space"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Apply [lem-sc-rational-tangent-cotangent-duality] to $f$ at $x$ and $y$. Because both residue fields are $k$, its canonical identifications make the given tangent map the dual of the local-ring map $u:\\mathfrak m_y/\\mathfrak m_y^2\\to\\mathfrak m_x/\\mathfrak m_x^2$.",
+   "uses": [
+    "lem-sc-rational-tangent-cotangent-duality"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 0B2E, lemma-tangent-space-rational-point; Tag 0B2C, dual-number definition and functoriality"
+   }
+  },
+  {
+   "text": "The hypothesis says that $u^*$ is injective under the identifications of step 1. Apply [lem-sc-dual-map-injective-iff-surjective] to the $k$-linear map $u$; it follows that $u$ is surjective, as required.",
+   "uses": [
+    "lem-sc-dual-map-injective-iff-surjective"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 0B2E, linear-algebra implication following the tangent-space identification"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sc-rational-tangent-cotangent-duality",
+  "lem-sc-dual-map-injective-iff-surjective"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/varieties.tex",
+  "place": "Tag 0B2E, lemma-tangent-space-rational-point; naturality from Tag 0B2C"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -48,12 +79,27 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-sc-point-tangent-separation-closed-immersion",
   "by": "worker",
   "date": "2026-10-10"
  },
  "chapter": "sec-picard-framework",
- "unit": "sk-thm-picard-rr"
+ "unit": "sk-thm-picard-rr",
+ "split_report": {
+  "date": "2026-10-11",
+  "item": "lem-sc-point-tangent-cotangent-surjective",
+  "worker": "stage1",
+  "summary": "Checked the rational-point tangent-space identification in Stacks Tag 0B2E and its functoriality from the dual-number definition in Tag 0B2C. Split the proof into the functorial identification and the exact Mathlib linear-duality implication. The locally finite type hypothesis is stronger than needed but was retained from the existing statement.",
+  "blueprint": "The two steps realize the tangent-vector separation argument in the third paragraph of lem-sc-degree-2g1-very-ample, via lem-sc-point-tangent-separation-closed-immersion."
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-pcs2",
+  "group": "M1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-pcs2 (reviewer sub-agent of L); spot-checked: Source: Stacks varieties.tex (present in the repository, contrary to the report's WANTED) Def 0B29, Lemma 0B2B, Def 0B2C, Lemma 0B2E (lemma-tangent-space-rational-point: with S=Spec k and kappa(x)=k, m_s=0 so T_{X/k,x}=Hom_k(m_x/m_x^2,k)) and Lemma 0B2F (varieties-lemma-map-tangent-spaces: df dual to the map on Omega tensor kappa, which with 0B2E is the map on m/m^2); the item statement holds with all hypotheses (locally finite type and closedness unneeded but harmless). Step 1 is carried by lem-sc-rational-tangent-cotangent-duality (true: 0B2E + 0B2F with S=Spec k), hypotheses kappa(x)=kappa(y)=k met. Step 2 by the leaf lem-sc-dual-map-injective-iff-surjective: verified LinearMap.dualMap_injective_iff at Mathlib/LinearAlgebra/Dual/Lemmas.lean:930 under [Field K] (line 830), statement Injective f.dualMap iff Surjective f, no finiteness, exactly the node. Small cases: identity of A^1 (both maps iso), t->t^2 at 0 (both zero, neither inj nor surj), Spec k (zero spaces). FIX more, RETURN less: B3, the notion T_{X/k,x} and the tangent map induced by f had no definition node (the duality node's identification is meaningless without the dual-number definition); added statement-only definition node dag/nodes/sec-picard-framework/def-sc-scheme-tangent-space.json (Stacks 0B29/0B2B/0B2C/0B2F with S=Spec k) and cited it: dag/nodes/sec-picard-framework/lem-sc-rational-tangent-cotangent-duality.json: statement, stmt_deps: cite [def-sc-scheme-tangent-space]; source.place: add Lemma 0B2F; dag/nodes/sec-picard-framework/lem-sc-point-tangent-cotangent-surjective.json: statement, stmt_deps: cite [def-sc-scheme-tangent-space] after the tangent map (citation only, mathematics unchanged). Start Sat Oct 10 04:23:29 PM UTC 2026, end Sat Oct 10 04:25:20 PM UTC 2026.; 3 file(s) fixed by the reviewer; 1 statement node(s) added by the reviewer (FIX more, RETURN less)"
+ }
 }

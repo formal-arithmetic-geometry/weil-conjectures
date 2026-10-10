@@ -1971,3 +1971,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 16:24 L: returned deliver/E1/lem-sc-brauer-zero (reviewer RETURN: 1. D/B (superfluous new node): lem-sc-field-brauer-cohomology-equivalence is not used by the mathematics. Step 2 needs o)
 - 16:25 L: G4 decision: lem-sc-finite-flat-duality-evaluation gets one more push (third return was report-only)
 - 16:25 L: merged deliver/C1/lem-sc-finite-type-nonclosed-closure-closed-points (reviewer FIX; first push; new nodes: 1)
+- 16:25 L: merged deliver/M1/lem-sc-point-tangent-cotangent-surjective (reviewer FIX+NODE(1); first push; new nodes: 3)
