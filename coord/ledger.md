@@ -1678,3 +1678,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 14:52 L: merged deliver/G1/lem-weil-pbc-simplicial-matching-object (reviewer FIX; first push; new nodes: 0)
 - 14:52 L: returned deliver/M1/lem-exc-field-discrete-modules (reviewer RETURN: Reviewed head 851cf2219 by R-fd2 against the 13:52 return; the new nodes are a reasonable set, but the item's proof was )
 - 14:52 L: returned deliver/E1/lem-sc-group-cd-one (reviewer RETURN: 1. B5: lem-sc-group-h2-transfer, lem-sc-group-cohomology-filtered-union, lem-sc-group-coinduced-acyclic, field source: t)
+- 14:52 L: returned deliver/J1/lem-sc-function-field-cd-one (reviewer RETURN: 1. B3/C4: lem-sc-brauer-algebraic-function-field-zero, lem-sc-field-kummer-h2-brauer-injection, lem-sc-field-artin-schre)
