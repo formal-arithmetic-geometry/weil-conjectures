@@ -1324,6 +1324,7 @@ public import WeilConjectures.SixFunctors.ProEtale.Derived.ClopenIdempotent
 public import WeilConjectures.SixFunctors.ProEtale.Derived.Comparison
 public import WeilConjectures.SixFunctors.ProEtale.Derived.Constructible
 public import WeilConjectures.SixFunctors.ProEtale.Derived.Duality
+public import WeilConjectures.SixFunctors.ProEtale.Derived.DualizableLocalRetract
 public import WeilConjectures.SixFunctors.ProEtale.Derived.DualizableRetract
 public import WeilConjectures.SixFunctors.ProEtale.Derived.ExternalProduct
 public import WeilConjectures.SixFunctors.ProEtale.Derived.Hom
