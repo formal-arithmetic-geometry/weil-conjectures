@@ -18,9 +18,10 @@
 | `lem-weil-pbc-affine-etale-site-base-change` | 2011 | none |
 | `lem-sc-noetherian-topological-cohomology-vanishing` | 2012 | none |
 | `lem-sc-affine-finite-projective-prime-membership` | 2013 | none |
-| `lem-sc-ample-proj-open` | 2013 | none |
 | `lem-sc-separated-affine-function-field-surjective` | 2013 | none |
 | `lem-sc-affine-standard-cover-finite-presentation-flat` | 2014 | none |
+| `lem-sc-ample-finite-affine-cover` | 2014 | none |
+| `lem-sc-ample-proj-local-chart` | 2014 | none |
 | `lem-sc-boundary-cech-compatibility` | 2014 | none |
 | `lem-sc-cech-h1-injective` | 2014 | none |
 | `lem-sc-dvr-tensor-surjective-negative-valuation` | 2014 | none |
@@ -34,7 +35,7 @@
 | `lem-exc-finite-galois-sections-descent` | 3008 | none |
 | `lem-weil-pbc-finite-product-injective-resolutions` | 3008 | none |
 | `lem-weil-pbc-cohomology-over-object-localization` | 3009 | none |
-| `lem-exc-etale-field-galois-classification` | 3010 | none |
+| `lem-exc-etale-open-subgroup-fixed-field` | 3011 | none |
 | `def-sc-scheme-tangent-space` | 3012 | none |
 | `lem-sc-positive-dimensional-locally-algebraic-closed-points` | 3012 | none |
 | `lem-sc-quasi-finite-points-open` | 3012 | none |
@@ -43,7 +44,6 @@
 | `lem-sc-p1-boundary-extension-composition` | 3013 | none |
 | `lem-sc-p1-ext-yoneda-associativity` | 3013 | none |
 | `lem-sc-p1-ext-yoneda-functoriality` | 3013 | none |
-| `lem-sc-p1-regular-dimension-one` | 3013 | none |
 | `lem-sc-rational-point-tangent-derivation-identification` | 3013 | none |
 | `lem-weil-pbc-ringed-site-module-sheafification-exact` | 3013 | none |
 | `lem-pc-field-extension-quasi-compact` | 3014 | none |
@@ -930,7 +930,7 @@
 | `lem-weil-pbc-p1-field-dimension-one` | 4 | state |
 | `lem-weil-pbc-projective-space-zero-isomorphism` | 4 | state |
 
-Not open yet: 345 nodes that wait for stage 1, 1208 nodes that wait for a statement dependency.
+Not open yet: 345 nodes that wait for stage 1, 1211 nodes that wait for a statement dependency.
 
 ## Stage 3: modules to prove (0)
 
