@@ -1200,3 +1200,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 10:01 L: accepted lem-weil-pbc-coherent-homs-over-open (01YB, 13 steps; new 01PQ, 01YA, 01LA (10), 01CN nodes; tool_uses [pqf-lem-coherent-ft-locnoeth]; the two omitted arguments written out).
 - 10:02 L: accepted lem-weil-pbc-power-series-cohen-formally-smooth-adic (07NL, 5 steps, 0 new).
 - 10:02 L: accepted lem-weil-pbc-normal-extension-purely-inseparable-then-galois (030M (2), proof omitted in Stacks, written out; 3 new Mathlib leaves for 0BME (2), 09HN, 09H3).
+- 10:02 L: accepted lem-weil-pbc-normal-locus-open (0332, 9 steps, 0 new). The worker's first write was overwritten by L's lean_status run at 10:02 (it rewrites every node file); rewritten by the worker, verified before commit.
