@@ -1,0 +1,81 @@
+{
+ "id": "lem-weil-pbc-site-sheaf-sets-epi-locally-surjective",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-hypercover-free-resolution",
+   "place": "proof, first paragraph: 'Choose locally a vertex in U_0, using its covering of X' (the degree-0 Cech-nerve case, step 1 of the split of lem-weil-pbc-hypercover-free-resolution); serves the step of lem-weil-pbc-image-presheaf-sheafification-iso that turns the hypothesis 'phi^# surjective' into 'phi^# is an epimorphism of Sh(C)', which Stacks 01GC's proof uses when it identifies Z_{G'}^# with Z_G^#",
+   "via": [
+    "lem-weil-pbc-image-presheaf-sheafification-iso",
+    "lem-weil-pbc-cech-nerve-free-homology"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "A morphism of sheaves of sets on a site is an epimorphism iff it is locally surjective",
+ "statement": "Let $\\mathcal C$ be a site and $\\Sh(\\mathcal C)$ its category of sheaves of sets [def-weil-pbc-sites-and-cohomology], and let $\\varphi:\\mathcal F\\to\\mathcal G$ be a morphism of $\\Sh(\\mathcal C)$. Then $\\varphi$ is an epimorphism of $\\Sh(\\mathcal C)$ (for every sheaf of sets $\\mathcal H$ and morphisms $a,b:\\mathcal G\\to\\mathcal H$ with $a\\circ\\varphi=b\\circ\\varphi$ one has $a=b$) if and only if $\\varphi$ is surjective in the sense of sheaves: for every object $U$ of $\\mathcal C$ and every $s\\in\\mathcal G(U)$ there is a covering $\\{U_i\\to U\\}_{i\\in I}$ of $\\mathcal C$ such that for every $i$ the restriction $s|_{U_i}$ lies in the image of $\\varphi_{U_i}:\\mathcal F(U_i)\\to\\mathcal G(U_i)$.",
+ "source": {
+  "document": "literature/stacks-project/sites.tex",
+  "place": "Sites, Definition Tag 00WM (label definition-sheaves-injective-surjective), part (2), and Lemma Tag 00WN (label lemma-mono-epi-sheaves), the clause 'the surjective maps are exactly the epimorphisms of Sh(C)' (proof omitted in the source)"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-sites-and-cohomology"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "a morphism of sheaves of types is an epimorphism iff it is locally surjective",
+   "results": "leansearch.net returned HTTP 500 (Internal Server Error) to the MCP tool on 2026-10-10 (two queries); no results",
+   "date": "2026-10-10",
+   "verdict": "no result (service down)"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Sheaf.IsLocallySurjective, CategoryTheory.Epi",
+   "results": "Sheaf.epi_of_isLocallySurjective', Sheaf.isLocallySurjective_iff_epi, Sheaf.epi_of_isLocallySurjective (Mathlib.CategoryTheory.Sites.LocallySurjective); Sheaf.isLocallySurjective_iff_epi' (Mathlib.CategoryTheory.Sites.EpiMono)",
+   "date": "2026-10-10",
+   "verdict": "match: Sheaf.isLocallySurjective_iff_epi"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "morphism of sheaves of sets on a site is an epimorphism if and only if every section is locally in the image",
+   "results": "instEpiSheafTypeToImage (Sites.Subsheaf), Sheaf.epi_of_isLocallySurjective', Sheaf.isLocallySurjective_iff_epi, Sheaf.epi_of_isLocallySurjective (Sites.LocallySurjective), Sheaf.Hom.epi_of_presheaf_epi (Sites.Sheaf)",
+   "date": "2026-10-10",
+   "verdict": "match: Sheaf.isLocallySurjective_iff_epi"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -n 'isLocallySurjective_iff_epi\\|class IsLocallySurjective\\|abbrev IsLocallySurjective' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/CategoryTheory/Sites/LocallySurjective.lean EpiMono.lean; sed -n 365,395p LocallySurjective.lean; sed -n 155,170p PrecoverageToGrothendieck.lean",
+   "results": "LocallySurjective.lean:378 lemma isLocallySurjective_iff_epi {F G : Sheaf J (Type w)} (φ) [HasSheafify J (Type w)] : IsLocallySurjective φ ↔ Epi φ; :329 abbrev Sheaf.IsLocallySurjective := Presheaf.IsLocallySurjective J φ.hom; :94 class Presheaf.IsLocallySurjective (imageSieve f s ∈ J U), imageSieve :49; EpiMono.lean:124 isLocallySurjective_iff_epi' (general concrete A); PrecoverageToGrothendieck.lean:166 mem_toGrothendieck_iff_of_isStableUnderComposition",
+   "date": "2026-10-10",
+   "verdict": "match: LocallySurjective.lean:378"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "CategoryTheory.Sheaf.isLocallySurjective_iff_epi",
+  "file": "Mathlib/CategoryTheory/Sites/LocallySurjective.lean",
+  "line": 378,
+  "how": "specializes in one line: isLocallySurjective_iff_epi (LocallySurjective.lean:378, read with sed -n 365,395p) states, for φ : F ⟶ G in Sheaf J (Type w) with HasSheafify J (Type w), Sheaf.IsLocallySurjective φ ↔ Epi φ. Sheaf.IsLocallySurjective φ (:329) is Presheaf.IsLocallySurjective J φ.hom (:94): the image sieve {V → U : s|_V ∈ im φ_V} (imageSieve, :49) of every s ∈ G(U) is J-covering. Setting as recorded on lem-weil-pbc-site-abelian-sheaf-epi-locally-surjective: C a small category, the coverings form a Precoverage K and J = K.toGrothendieck; by Precoverage.mem_toGrothendieck_iff_of_isStableUnderComposition (Sites/PrecoverageToGrothendieck.lean:166, hypotheses = site axioms (i)-(iii)) a sieve is J-covering iff it contains a covering family, which is the node's covering form; sheaves for J are the node's sheaves (isSheaf_toGrothendieck_iff, PrecoverageToGrothendieck.lean:98). HasSheafify J (Type (max u v)) is the instance at Sites/LeftExact.lean:313."
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-image-presheaf-sheafification-iso",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-curve-estimates",
+ "unit": "sk-prop-h2"
+}

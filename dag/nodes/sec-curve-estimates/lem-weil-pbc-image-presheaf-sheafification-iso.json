@@ -22,9 +22,92 @@
   "def-weil-pbc-sites-and-cohomology",
   "def-weil-pbc-sheafification"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Notation and functoriality. Write $\\theta_F:F\\to F^\\#$, $\\theta_G:G\\to G^\\#$, $\\theta_{G'}:G'\\to G'^\\#$ for the canonical maps of the sheafifications [def-weil-pbc-sheafification]. For a morphism of presheaves $\\alpha:P\\to Q$, $\\alpha^\\#:P^\\#\\to Q^\\#$ is by the universal property the unique morphism of sheaves with $\\alpha^\\#\\circ\\theta_P=\\theta_Q\\circ\\alpha$; uniqueness gives $(\\beta\\circ\\alpha)^\\#=\\beta^\\#\\circ\\alpha^\\#$. In particular $\\varphi^\\#\\circ\\theta_F=\\theta_G\\circ\\varphi$ and, from $\\varphi=\\iota\\circ\\psi$, $\\varphi^\\#=\\iota^\\#\\circ\\psi^\\#$. All of these are morphisms of presheaves, so they commute with restriction along every morphism of $\\mathcal C$.",
+   "uses": [
+    "def-weil-pbc-sheafification"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Sites, Section 00W1 (sheafification), the functoriality of F -> F^#, Lemma Tag 00WJ (label lemma-sheafification-exact) statement"
+   }
+  },
+  {
+   "text": "(a), first half: local lifts in $F$ of the image of $g$ in $G^\\#$. Let $U$ be an object and $g\\in G(U)$; put $t=\\theta_G(g)\\in G^\\#(U)$. By hypothesis there are a covering $\\{U_i\\to U\\}_{i\\in I}$ and $x_i\\in F^\\#(U_i)$ with $\\varphi^\\#(x_i)=t|_{U_i}$. By [lem-weil-pbc-site-sheafification-sections-local] (first assertion, for the presheaf $F$ and the section $x_i$) there are, for each $i$, a covering $\\{U_{ij}\\to U_i\\}_{j\\in J_i}$ and $f_{ij}\\in F(U_{ij})$ with $x_i|_{U_{ij}}=\\theta_F(f_{ij})$. Then, by step 1, $\\theta_G(\\varphi(f_{ij}))=\\varphi^\\#(\\theta_F(f_{ij}))=\\varphi^\\#(x_i)|_{U_{ij}}=t|_{U_{ij}}=\\theta_G(g|_{U_{ij}})$ in $G^\\#(U_{ij})$.",
+   "uses": [
+    "lem-weil-pbc-site-sheafification-sections-local",
+    "def-weil-pbc-sheafification",
+    "def-weil-pbc-sites-and-cohomology"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Sites, Lemma Tag 00WK (label lemma-sections-sheafification), assertion (1), applied to F; Definition Tag 00WM (label definition-sheaves-injective-surjective) (2) for the hypothesis"
+   }
+  },
+  {
+   "text": "(a), second half: from equality in $G^\\#$ to equality on a covering in $G$. The sections $\\varphi(f_{ij})$ and $g|_{U_{ij}}$ of $G(U_{ij})$ have the same image in $G^\\#(U_{ij})$ (step 2), so by the last assertion of [lem-weil-pbc-site-sheafification-sections-local] (for the presheaf $G$) there is a covering $\\{U_{ijk}\\to U_{ij}\\}_{k\\in K_{ij}}$ with $\\varphi(f_{ij})|_{U_{ijk}}=g|_{U_{ijk}}$. Put $f_{ijk}=f_{ij}|_{U_{ijk}}\\in F(U_{ijk})$; as $\\varphi$ is a morphism of presheaves, $\\varphi(f_{ijk})=\\varphi(f_{ij})|_{U_{ijk}}=g|_{U_{ijk}}$. By axiom (ii) of a site [def-weil-pbc-sites-and-cohomology], applied twice, $\\{U_{ijk}\\to U\\}_{i,j,k}$ (the composites $U_{ijk}\\to U_{ij}\\to U_i\\to U$) is a covering of $U$. This is (a).",
+   "uses": [
+    "lem-weil-pbc-site-sheafification-sections-local",
+    "def-weil-pbc-sites-and-cohomology"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Sites, Lemma Tag 00WK (label lemma-sections-sheafification), the uniqueness in its converse, applied to G; Definition Tag 00VH (label definition-site) axiom (2)"
+   }
+  },
+  {
+   "text": "(b), $\\iota^\\#$ is a monomorphism of $\\Sh(\\mathcal C)$. Each $\\iota_U:G'(U)\\to G(U)$ is an inclusion, so $\\iota$ is a monomorphism of presheaves of sets (if $\\iota\\circ a=\\iota\\circ b$ then $a_U=b_U$ for every $U$). Equivalently the commutative square with sides $\\mathrm{id}_{G'},\\mathrm{id}_{G'}$ and $\\iota,\\iota$ is a fibre product square $G'=G'\\times_GG'$ in presheaves. Sheafification commutes with finite limits [lem-weil-pbc-sheafification-sets-exact] (the site has a set of objects and morphisms by [def-weil-pbc-sites-and-cohomology]), so the square with sides $\\mathrm{id},\\mathrm{id}$ and $\\iota^\\#,\\iota^\\#$ is a fibre product square in $\\Sh(\\mathcal C)$. Hence $\\iota^\\#$ is a monomorphism: if $a,b:\\mathcal T\\to G'^\\#$ satisfy $\\iota^\\#a=\\iota^\\#b$, the induced $c:\\mathcal T\\to G'^\\#$ with $\\mathrm{id}\\circ c=a$ and $\\mathrm{id}\\circ c=b$ gives $a=c=b$.",
+   "uses": [
+    "lem-weil-pbc-sheafification-sets-exact",
+    "def-weil-pbc-sites-and-cohomology"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Sites, Lemma Tag 00WJ (label lemma-sheafification-exact)"
+   }
+  },
+  {
+   "text": "(b), $\\iota^\\#$ is an epimorphism of $\\Sh(\\mathcal C)$. The hypothesis says that the morphism of sheaves $\\varphi^\\#:F^\\#\\to G^\\#$ is surjective in the sense of sheaves, so it is an epimorphism of $\\Sh(\\mathcal C)$ by [lem-weil-pbc-site-sheaf-sets-epi-locally-surjective]. If $a,b:G^\\#\\to\\mathcal H$ are morphisms of sheaves with $a\\circ\\iota^\\#=b\\circ\\iota^\\#$, then $a\\circ\\varphi^\\#=a\\circ\\iota^\\#\\circ\\psi^\\#=b\\circ\\iota^\\#\\circ\\psi^\\#=b\\circ\\varphi^\\#$ by step 1, hence $a=b$.",
+   "uses": [
+    "lem-weil-pbc-site-sheaf-sets-epi-locally-surjective",
+    "def-weil-pbc-sheafification"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Sites, Lemma Tag 00WN (label lemma-mono-epi-sheaves), surjective = epimorphism"
+   }
+  },
+  {
+   "text": "(b), conclusion. By steps 4 and 5, $\\iota^\\#:G'^\\#\\to G^\\#$ is both a monomorphism and an epimorphism of $\\Sh(\\mathcal C)$, hence an isomorphism by [lem-weil-pbc-sheaf-sets-mono-epi-iso].",
+   "uses": [
+    "lem-weil-pbc-sheaf-sets-mono-epi-iso"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Sites, Lemma Tag 00WN (label lemma-mono-epi-sheaves), last sentence"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-sheafification",
+  "lem-weil-pbc-site-sheafification-sections-local",
+  "def-weil-pbc-sites-and-cohomology",
+  "lem-weil-pbc-sheafification-sets-exact",
+  "lem-weil-pbc-site-sheaf-sets-epi-locally-surjective",
+  "lem-weil-pbc-sheaf-sets-mono-epi-iso"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites.tex",
+  "place": "no Stacks lemma states it; written by an agent from Sites, Definition 00WM, Lemmas 00WJ, 00WK, 00WN (the argument of the source's own sentence 'Since G is the sheafification of G' by Lemma 00WN' in the proof of Lemma 086K (label lemma-coequalizer-surjection), there for F, G sheaves)"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -53,6 +136,13 @@
    "results": "LocallyBijective.lean:179 isLocallySurjective_presheafToSheaf_map_iff, :118 W_of_isLocallyBijective, :160 instance WEqualsLocallyBijective (Type _); LocallyInjective.lean:171 instance IsLocallyInjective J G.ι for a Subfunctor G; LocallySurjective.lean:150 isLocallySurjective_of_isLocallySurjective (f1 ≫ f2 loc. surj. => f2 loc. surj.)",
    "date": "2026-10-10",
    "verdict": "no single declaration; composite candidate"
+  },
+  {
+   "tool": "leansearch",
+   "query": "image subpresheaf of a morphism whose sheafification is locally surjective, inclusion becomes isomorphism after sheafification",
+   "results": "leansearch.net returned HTTP 500 (Internal Server Error) to the MCP tool on 2026-10-10 (retry); no results",
+   "date": "2026-10-10",
+   "verdict": "no result (service down)"
   }
  ],
  "mathlib_match": null,
@@ -66,7 +156,7 @@
   ],
   "note": "(a) is :179 with A = Type; (b): φ = ψ ≫ ι locally surjective gives ι locally surjective (:150), ι is locally injective (:171), hence J.W ι (:118, :160), i.e. ι^# iso (W_iff). Five declarations, so recorded as a candidate, not a leaf."
  },
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "worker",
@@ -82,5 +172,16 @@
   }
  },
  "chapter": "sec-curve-estimates",
- "unit": "sk-prop-h2"
+ "unit": "sk-prop-h2",
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "lem-weil-pbc-image-presheaf-sheafification-iso",
+  "worker": "stage1",
+  "summary": "Kept the statement (checked against Sites 00WM, 00WN, 00WJ, 00WK; it is correct, and for F, G sheaves its (b) is the sentence 'G is the sheafification of G'' of the proof of 086K (label lemma-coequalizer-surjection)). Proof in six steps: functoriality of sheafification (elementary); (a) by unwinding F^# with 00WK (lem-weil-pbc-site-sheafification-sections-local, both its first assertion for F and its last assertion for G) and site axiom (ii); (b) iota^# mono because sheafification preserves finite limits (lem-weil-pbc-sheafification-sets-exact), epi because phi^# is epi by the new Mathlib leaf lem-weil-pbc-site-sheaf-sets-epi-locally-surjective (00WN, Sheaf.isLocallySurjective_iff_epi) and phi^# = iota^# psi^#, iso by lem-weil-pbc-sheaf-sets-mono-epi-iso. (b) does not need (a): the epimorphism property comes from the hypothesis on phi^# directly. The Mathlib candidate (five declarations) is kept as a candidate; no single declaration states the item. lean_audit none on both branches; no slopmaster2 declaration found.",
+  "blueprint": "Steps 2-3 realize, in lem-weil-pbc-hypercover-free-resolution's proof, first paragraph, 'Choose locally a vertex in U_0, using its covering of X' (local lifts of a section through a map surjective after sheafification); steps 4-6 realize the identification of the sheafified image presheaf with the target used there (Stacks 01GC proof, 'Let G' be the image of F -> G' and the final identification Z_{G'}^# = Z_G^#)."
+ },
+ "tool_uses": [
+  "lem-weil-pbc-site-sheafification-sections-local"
+ ],
+ "reviewed": "2026-10-10 L: 6 steps checked (functoriality of sheafification; local lifts to F^# then to F by the sections-local node, used as a tool; agreement on a covering; iota^# mono since sheafification preserves finite limits; epi since phi^# is surjective hence epi by the new leaf; mono + epi = iso by lem-weil-pbc-sheaf-sets-mono-epi-iso). tool_uses lem-weil-pbc-site-sheafification-sections-local (sk-thm-p1). New Mathlib leaf lem-weil-pbc-site-sheaf-sets-epi-locally-surjective (Sheaf.isLocallySurjective_iff_epi, line 378 verified). LeanSearch down."
 }
