@@ -2824,3 +2824,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 22:27 L: merged deliver/H1/lem-sc-ass-weakass-locally-noetherian (reviewer FIX; first push; new nodes: 2)
 - 22:27 L: merged deliver/M1/def-pc-fppf-site (reviewer FIX; first push; new nodes: 0)
 - 22:28 L: merged deliver/J1/lem-weil-pbc-pullback-finite-locally-constant (reviewer FIX; first push; new nodes: 0)
+- 22:28 L: merged deliver/E1/lem-pc-global-hom-pullback-adjunction (reviewer FIX+NODE(1); first push; new nodes: 1)

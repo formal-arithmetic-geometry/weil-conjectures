@@ -14,7 +14,7 @@
  },
  "kind": "statement",
  "title": "Global derived Hom adjunction for derived pullback and direct image",
- "statement": "Let g:T\\to S be a morphism of schemes [def-pc-scheme], with derived pullback Lg^*:D(\\mathcal O_S)\\to D(\\mathcal O_T) [def-pc-derived-pullback] and derived direct image Rg_* [def-pc-derived-direct-image] on the derived categories of [def-pc-derived-category]. For M\\in D(\\mathcal O_S) and E\\in D(\\mathcal O_T) there is an isomorphism of global derived Hom complexes $$R\\operatorname{Hom}_S(M,Rg_*E)\\cong R\\operatorname{Hom}_T(Lg^*M,E)$$ [def-pc-global-derived-rhom] in the derived category of \\Gamma(S,\\mathcal O_S)-modules, natural in M and E, which on H^0 is the adjunction bijection \\operatorname{Hom}(M,Rg_*E)\\cong\\operatorname{Hom}(Lg^*M,E) [lem-pc-ringed-spaces-derived-adjoint-general] and which is the composite of the map R\\operatorname{Hom}_S(M,Rg_*E)\\to R\\operatorname{Hom}_T(Lg^*M,Lg^*Rg_*E) induced by derived pullback with postcomposition by the counit Lg^*Rg_*E\\to E.",
+ "statement": "Let g:T\\to S be a morphism of schemes [def-pc-scheme], with derived pullback Lg^*:D(\\mathcal O_S)\\to D(\\mathcal O_T) [def-pc-derived-pullback] and derived direct image Rg_* [def-pc-derived-direct-image] on the derived categories of [def-pc-derived-category]. Regard R\\operatorname{Hom}_T(-,-)\\in D(\\Gamma(T,\\mathcal O_T)) [def-pc-global-derived-rhom] as an object of D(\\Gamma(S,\\mathcal O_S)) by restriction of scalars along g^\\sharp:\\Gamma(S,\\mathcal O_S)\\to\\Gamma(T,\\mathcal O_T). For M\\in D(\\mathcal O_S) and E\\in D(\\mathcal O_T) there is an isomorphism of global derived Hom complexes $$R\\operatorname{Hom}_S(M,Rg_*E)\\cong R\\operatorname{Hom}_T(Lg^*M,E)$$ [def-pc-global-derived-rhom] in D(\\Gamma(S,\\mathcal O_S)), natural in M and E, which on H^0 is the adjunction bijection \\operatorname{Hom}(M,Rg_*E)\\cong\\operatorname{Hom}(Lg^*M,E),\\ \\varphi\\mapsto\\varepsilon_E\\circ Lg^*\\varphi [lem-pc-ringed-spaces-derived-adjoint-general] and which is the composite of the map R\\operatorname{Hom}_S(M,Rg_*E)\\to R\\operatorname{Hom}_T(Lg^*M,Lg^*Rg_*E) induced by derived pullback with postcomposition by the counit \\varepsilon_E:Lg^*Rg_*E\\to E.",
  "source": {
   "document": "literature/stacks-project/cohomology.tex",
   "place": "Cohomology, Section global-RHom (cohomology.tex line 11027) with Lemma 079W (cohomology-lemma-adjoint); used in duality.tex Tag 0AA8 case (1), final compatibility paragraph"
@@ -27,20 +27,127 @@
   "def-pc-global-derived-rhom",
   "lem-pc-ringed-spaces-derived-adjoint-general"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "A morphism of schemes is in particular a morphism of ringed spaces. Applying [lem-pc-ringed-spaces-derived-adjoint-general] to the structure-sheaf morphism induced by g gives the derived adjunction Lg^* ⊣ Rg_* and its derived counit Lg^*Rg_*E → E.",
+   "uses": [
+    "lem-pc-ringed-spaces-derived-adjoint-general"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/cohomology.tex",
+    "place": "Tag 079W, cohomology-lemma-adjoint"
+   }
+  },
+  {
+   "text": "Apply [lem-pc-derived-internal-hom-pullback-adjunction] to g, M and E: the composite of the canonical map R\\mathcal Hom_{\\mathcal O_S}(M,Rg_*E)\\to Rg_*R\\mathcal Hom_{\\mathcal O_T}(Lg^*M,Lg^*Rg_*E) (adjoint to the map of Tag 08I3) with Rg_*R\\mathcal Hom(Lg^*M,\\varepsilon_E) is an isomorphism R\\mathcal Hom_{\\mathcal O_S}(M,Rg_*E)\\cong Rg_*R\\mathcal Hom_{\\mathcal O_T}(Lg^*M,E) in D(\\mathcal O_S), natural in M and E.",
+   "uses": [
+    "lem-pc-derived-internal-hom-pullback-adjunction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/cohomology.tex",
+    "place": "Remark 08I3 and Tag 079W"
+   }
+  },
+  {
+   "text": "Apply the derived global sections R\\Gamma(S,-)=Rp_{S,*} of [def-pc-global-derived-rhom] to this isomorphism. The left side is R\\operatorname{Hom}_S(M,Rg_*E) by definition. For the right side, p_S\\circ g:T\\to(\\{pt\\},\\Gamma(S,\\mathcal O_S)) equals q\\circ p_T with q:(\\{pt\\},\\Gamma(T,\\mathcal O_T))\\to(\\{pt\\},\\Gamma(S,\\mathcal O_S)) given by g^\\sharp; [lem-pc-ringed-spaces-derived-direct-image-composition] twice gives Rp_{S,*}Rg_*\\cong R(p_S\\circ g)_*=R(q\\circ p_T)_*\\cong Rq_*Rp_{T,*}, and Rq_*=q_* is restriction of scalars since q_* is exact. Hence R\\Gamma(S,Rg_*R\\mathcal Hom(Lg^*M,E))\\cong R\\operatorname{Hom}_T(Lg^*M,E) in D(\\Gamma(S,\\mathcal O_S)), naturally, giving the asserted isomorphism. Under the same identification (applied with Lg^*Rg_*E in place of E) the first factor of step 2 becomes the map R\\operatorname{Hom}_S(M,Rg_*E)\\to R\\operatorname{Hom}_T(Lg^*M,Lg^*Rg_*E) induced by derived pullback (global sections of the map of Tag 08I3, Section global-RHom), and the second becomes postcomposition with \\varepsilon_E.",
+   "uses": [
+    "def-pc-global-derived-rhom",
+    "lem-pc-ringed-spaces-derived-direct-image-composition"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/cohomology.tex",
+    "place": "Section global-RHom (Tag 0B6A); Tag 0D5T"
+   }
+  },
+  {
+   "text": "On H^0, [lem-pur-rhom-global-sections] (on S and on T, using H^0(S,Rg_*K)=H^0(T,K) from step 3) identifies the two sides with \\operatorname{Hom}(M,Rg_*E) and \\operatorname{Hom}(Lg^*M,E); by the H^0 clause of [lem-pc-derived-internal-hom-pullback-adjunction] the induced map is \\varphi\\mapsto\\varepsilon_E\\circ Lg^*\\varphi, which is the Hom-set bijection of the adjunction of step 1 expressed through its counit (elementary category theory).",
+   "uses": [
+    "lem-pur-rhom-global-sections",
+    "lem-pc-derived-internal-hom-pullback-adjunction",
+    "lem-pc-ringed-spaces-derived-adjoint-general"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/cohomology.tex",
+    "place": "Section global-RHom (H^0(RHom_X(K,L))=Hom_{D(O_X)}(K,L)), Tag 079W"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-ringed-spaces-derived-adjoint-general",
+  "lem-pc-derived-internal-hom-pullback-adjunction",
+  "def-pc-global-derived-rhom",
+  "lem-pc-ringed-spaces-derived-direct-image-composition",
+  "lem-pur-rhom-global-sections"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Tag 079W and Section global-RHom"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
    "query": "global derived Hom complex adjunction RHom(M, Rg_* E) isomorphic to RHom(Lg^* M, E) for a morphism of schemes",
-   "results": "AlgebraicGeometry.Scheme.Modules.pullbackPushforwardAdjunction, pseudofunctor_map_adj, instIsRightAdjointPushforward, conjugateEquiv_pullbackComp_inv (Mathlib.AlgebraicGeometry.Modules.Sheaf); SheafOfModules.pullbackPushforwardAdjunction_homEquiv_symm_unitToPushforwardObjUnit: underived module-level adjunction only",
-   "date": "2026-10-10",
+   "results": "CategoryTheory.Functor.mapDerivedCategoryFactorsh_hom_app; CategoryTheory.Adjunction.derived; generic derived-adjunction declarations, no scheme-level global RHom theorem",
+   "date": "2026-10-11",
    "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "Adjunction derived RHom pushforward",
+   "results": "Unknown identifier Adjunction",
+   "date": "2026-10-11",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "grep",
+   "query": "derived.*Hom.*pullback|RHom.*direct.*image [Mathlib/AlgebraicGeometry]",
+   "results": "none",
+   "date": "2026-10-11",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "derived pullback direct image adjunction global derived Hom",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-11",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "derived global sections internal Hom adjunction under derived inverse image and direct image",
+   "results": "SheafOfModules.PullbackConstruction.adjunction; AlgebraicGeometry.Scheme.Modules.pullbackPushforwardAdjunction; underived sheaf/module adjunctions only",
+   "date": "2026-10-11",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.derived",
+   "results": "CategoryTheory.Adjunction.derived, derived_counit, derived_unit; generic derived adjunction only",
+   "date": "2026-10-11",
+   "verdict": "generalization: generic derived adjunction, not scheme global RHom"
+  },
+  {
+   "tool": "grep",
+   "query": "Adjunction\\.derived|derived.*RHom [Mathlib/CategoryTheory Mathlib/Algebra/Homology]",
+   "results": "none",
+   "date": "2026-10-11",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "RHom adjunction derived pullback pushforward",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-11",
+   "verdict": "unavailable"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "reviewer",
@@ -48,5 +155,30 @@
   "date": "2026-10-10"
  },
  "chapter": "sec-picard-framework",
- "unit": "sk-thm-picard-duality"
+ "unit": "sk-thm-picard-duality",
+ "split_report": {
+  "date": "2026-10-11",
+  "item": "lem-pc-global-hom-pullback-adjunction",
+  "worker": "stage1",
+  "summary": "No exact sorry-free declaration exists in WeilConjectures. The existing ringed-space derived adjunction and global derived Hom definition supply the three steps: specialize the adjunction, take its H^0 bijection, and identify the global-RHom map with pullback followed by the counit. No new child node was needed. Reviewer R-gpa2830: the RHom-level isomorphism is not elementary from the H^0 adjunction; it now cites the new statement-only node lem-pc-derived-internal-hom-pullback-adjunction (sheafified Rg_*RHom(Lg^*M,E)=RHom(M,Rg_*E), true for every morphism, no quasi-coherence needed), derived direct image composition for RGamma(S,Rg_*-)=RGamma(T,-), and lem-pur-rhom-global-sections for H^0; statement now names the restriction of scalars along g^sharp.",
+  "blueprint": "Realizes ancestor lem-sc-finite-duality at Tag 0AA8 case (1), final compatibility: the global-RHom adjunction and its pullback-counit description.",
+  "tool_uses": [
+   {
+    "node": "lem-pur-rhom-global-sections",
+    "why": "Generic site-level fact H^0(RGamma(RHom(L,M)))=Hom_D(L,M); this unit has no such statement."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pur-rhom-global-sections",
+  "lem-pur-rhom-global-sections"
+ ],
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-gpa2830",
+  "group": "E1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-gpa2830 (reviewer sub-agent of L); spot-checked: Read packet whole; Stacks 079W, Section global-RHom (0B6A), Remark 08I3, 0AA8 compatibility; cited statements lem-pc-ringed-spaces-derived-adjoint-general, def-pc-global-derived-rhom, lem-pur-rhom-global-sections, lem-pc-ringed-spaces-derived-direct-image-composition, lem-pc-derived-sections-pushforward-comparison; M1 lem-sc-flat-precompose-pus steps 1-2 use exactly the RHom iso given by Lg^* then counit (C4 ok; maps in D(A') reduce to D(A) by adjunction). No sheafified RHom claim about a right adjoint a; the new sheaf-level node concerns Lg^* -| Rg_* and holds for every morphism without DQ (Lipman 3.2.3). Second reading by E1 missed all three faults below. FIX more, RETURN less: (1) C1 step 3 asserted the RHom-level iso in D(Gamma(S,O_S)) as elementary from the definition, but the H^0 adjunction does not give it: added statement-only node lem-pc-derived-internal-hom-pullback-adjunction (Rg_*RHom(Lg^*M,E)=RHom(M,Rg_*E) via Remark 08I3 map then counit, with H^0 clause; leanfinder no match) and step 3 now applies RGamma(S,-) with lem-pc-ringed-spaces-derived-direct-image-composition (T->pt_T->pt_S) for RGamma(S,Rg_*-)=RGamma(T,-); (2) C1 step 2 H^0(RHom)=Hom used uncited: now cites lem-pur-rhom-global-sections (tool use, other unit) and the new node's H^0 clause; (3) E7 statement: RHom_T lies in D(Gamma(T,O_T)); statement now says it is regarded in D(Gamma(S,O_S)) by restriction along g^sharp, and names the map phi -> eps o Lg^*phi. Start 22:22 UTC, end 22:28 UTC.; 2 file(s) fixed by the reviewer; 1 statement node(s) added by the reviewer (FIX more, RETURN less)"
+ }
 }
