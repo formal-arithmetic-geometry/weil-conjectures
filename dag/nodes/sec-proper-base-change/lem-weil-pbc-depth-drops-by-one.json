@@ -4,7 +4,7 @@
   "is": null,
   "from": {
    "node": "lem-weil-pbc-normal-constant-generic",
-   "place": "step 4 of its split (source: Lemma 59.73.13 (Tag 09Z5), proof of (1))",
+   "place": "step 4 of its split (source: Stacks 09Z5, proof of (1)), through the flat-normal-fibres proof's use of the local depth formula",
    "via": [
     "lem-weil-pbc-flat-local-depth-formula",
     "lem-weil-pbc-serre-sk-goes-up",
@@ -14,7 +14,7 @@
     "lem-weil-pbc-etale-colimit-normal-local-domain"
    ]
   },
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "Depth drops by one modulo a nonzerodivisor in the maximal ideal",
@@ -28,9 +28,91 @@
   "def-weil-finitely-generated-module",
   "def-weil-pbc-depth"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Put $Q=M/xM$. Since $M$ is finite and $x\\in\\mathfrak m$, the ideal $(x)$ is contained in the Jacobson radical $\\mathfrak m$ of the local ring $R$. If $Q=0$, then $(x)M=M$, so Nakayama's lemma [lem-weil-pbc-nakayama-jacobson] would give $M=0$, contrary to the hypothesis. Thus $Q\\neq0$; it is finite: if $m_1,\\ldots,m_s$ generate $M$ [def-weil-finitely-generated-module], their images generate $Q$, because reducing any expression $m=\\sum_j a_jm_j$ modulo $xM$ expresses its class as the same combination of their classes.",
+   "uses": [
+    "lem-weil-pbc-nakayama-jacobson",
+    "def-weil-finitely-generated-module"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra, Lemma Tag 090R (lemma-depth-drops-by-one), proof lines 17952-17960; Algebra, Definition Tag 00LI (definition-depth), paragraph after the definition, for Nakayama"
+   }
+  },
+  {
+   "text": "Both $M$ and $Q$ are nonzero finite $R$-modules. By [lem-weil-pbc-depth-le-support-dimension] (Stacks 00LK), their depths are bounded by the dimensions of their supports; those supports are subsets of $\\operatorname{Spec}R$, whose dimension is finite by [lem-weil-pbc-noetherian-local-finite-krull-dimension] (Stacks 00KQ). Thus $d:=\\operatorname{depth}(M)$ and $e:=\\operatorname{depth}(Q)$ are finite nonnegative integers [def-weil-pbc-depth]. The singleton $(x)$ is $M$-regular [def-weil-pbc-regular-sequence]: $x$ is injective on $M$ and its quotient $Q$ is nonzero. Since $x\\in\\mathfrak m$, $d\\ge1$.",
+   "uses": [
+    "lem-weil-pbc-depth-le-support-dimension",
+    "lem-weil-pbc-noetherian-local-finite-krull-dimension",
+    "def-weil-pbc-regular-sequence",
+    "def-weil-pbc-depth"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra, Lemma Tag 00LK (lemma-bound-depth), Proposition Tag 00KQ (proposition-dimension), Definitions Tags 00LF and 00LI"
+   }
+  },
+  {
+   "text": "Multiplication by $x$ is injective on $M$ by hypothesis and has cokernel $Q$ by definition. Thus $0\\to M\\xrightarrow{x}M\\to Q\\to0$ is a short exact sequence [def-weil-pbc-exact-sequence]. Put $\\kappa=R/\\mathfrak m$ and $A_i=\\operatorname{Ext}^i_R(\\kappa,M)$, $B_i=\\operatorname{Ext}^i_R(\\kappa,Q)$ [def-pc-ext]. Apply the long exact Ext sequence [lem-weil-pbc-ext-long-exact-second-variable] to this short exact sequence. Since $x\\in\\mathfrak m$, it annihilates $\\kappa$, so every self-map $A_i\\xrightarrow{x}A_i$ is zero by [lem-weil-pbc-ext-annihilator-first-variable] (Stacks 00LV). Exactness then gives $0\\to A_i\\to B_i\\to A_{i+1}\\to0$ for every $i\\ge0$: at $A_i$ the kernel of $A_i\\to B_i$ is the image of the preceding zero map, while at $A_{i+1}$ the image of $B_i\\to A_{i+1}$ is the kernel of the following zero map.",
+   "uses": [
+    "def-weil-pbc-exact-sequence",
+    "def-pc-ext",
+    "lem-weil-pbc-ext-long-exact-second-variable",
+    "lem-weil-pbc-ext-annihilator-first-variable"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra, Lemma Tags 00LU (lemma-long-exact-seq-ext), 00LV (lemma-annihilate-ext), and 090R (lemma-depth-drops-by-one), proof line 17954"
+   }
+  },
+  {
+   "text": "Nakayama [lem-weil-pbc-nakayama-jacobson] with $I=\\mathfrak m$ gives $\\mathfrak mM\\neq M$ and $\\mathfrak mQ\\neq Q$. Since $d$ is the finite supremum of lengths of $M$-regular sequences in $\\mathfrak m$ [def-weil-pbc-depth], there is such a sequence of length $d$ and none of length $d+1$. Apply [lem-weil-pbc-rees-ext-regular-sequence] with $I=\\mathfrak m$, first at $n=d$ and then at $n=d+1$: $A_i=0$ for every $i<d$, and $A_d\\neq0$ (otherwise the Rees equivalence at $d+1$ would give a sequence of length $d+1$). No depth-via-Ext lemma is used here; the vanishing characterization comes directly from the Rees theorem.",
+   "uses": [
+    "lem-weil-pbc-nakayama-jacobson",
+    "def-weil-pbc-depth",
+    "lem-weil-pbc-rees-ext-regular-sequence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra, Definitions Tags 00LF and 00LI, with Mathlib RingTheory/Depth/Rees.lean:158 (Rees theorem); independent replacement for the cyclic appeal to Tag 00LX in Lemma 090R"
+   }
+  },
+  {
+   "text": "For each $i<d-1$, both $A_i$ and $A_{i+1}$ vanish by Step 4, so the short exact sequence in Step 3 forces $B_i=0$. At $i=d-1$, the same sequence has a surjection $B_{d-1}\\twoheadrightarrow A_d\\neq0$, so $B_{d-1}\\neq0$ (including the boundary case $d=1$, where $B_0\\neq0$). Rees [lem-weil-pbc-rees-ext-regular-sequence] for the nonzero finite module $Q$ and $I=\\mathfrak m$ now gives a $Q$-regular sequence of length $d-1$ from the vanishing below $d-1$, and rules out a $Q$-regular sequence of length $d$ because $B_{d-1}\\neq0$. Its finite depth $e$ is therefore $d-1$ by [def-weil-pbc-depth]. Hence $\\operatorname{depth}(M/xM)=\\operatorname{depth}(M)-1$.",
+   "uses": [
+    "def-weil-pbc-depth",
+    "lem-weil-pbc-rees-ext-regular-sequence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra, Lemma Tag 090R (lemma-depth-drops-by-one), desired conclusion; Mathlib RingTheory/Depth/Rees.lean:158 and Algebra, Definition Tag 00LI supply this independent calculation"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-nakayama-jacobson",
+  "def-weil-finitely-generated-module",
+  "lem-weil-pbc-depth-le-support-dimension",
+  "lem-weil-pbc-noetherian-local-finite-krull-dimension",
+  "def-weil-pbc-regular-sequence",
+  "def-weil-pbc-depth",
+  "def-weil-pbc-exact-sequence",
+  "def-pc-ext",
+  "lem-weil-pbc-ext-long-exact-second-variable",
+  "lem-weil-pbc-ext-annihilator-first-variable",
+  "lem-weil-pbc-rees-ext-regular-sequence"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Independent proof of Algebra, Lemma Tag 090R (lemma-depth-drops-by-one), part (1): Stacks 00LK and 00KQ for finite depth, Stacks 00LU and 00LV for Ext, and Mathlib RingTheory/Depth/Rees.lean:158 for the Rees equivalence. Avoids the 090R -> 00LX -> 00LW -> 090R source cycle."
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -52,10 +134,31 @@
    "results": "RingTheory/Depth/ holds only Rees.lean; RegularSequence.lean:21 lists depth as a TODO; the pinned Mathlib has no definition of depth",
    "date": "2026-10-10",
    "verdict": "no match: the pinned Mathlib has no notion of depth"
+  },
+  {
+   "tool": "leansearch",
+   "query": "depth of module drops by one after quotient by a nonzerodivisor in maximal ideal",
+   "results": "ringKrullDim_quotient_span_singleton_succ_eq_ringKrullDim_of_mem_nonZeroDivisors; ringKrullDim_quotSMulTop_succ_eq_ringKrullDim; Module.supportDim_quotSMulTop_succ_eq_supportDim (Mathlib.RingTheory.KrullDimension.Regular).",
+   "date": "2026-10-10",
+   "verdict": "no match: these measure dimension rather than depth"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "depth of finite module over local Noetherian ring modulo a regular element",
+   "results": "ringKrullDim_add_length_eq_ringKrullDim_of_isRegular; Module.supportDim_add_length_eq_supportDim_of_isRegular; ringKrullDim_quotSMulTop_succ_eq_ringKrullDim (Mathlib.RingTheory.KrullDimension.Regular).",
+   "date": "2026-10-10",
+   "verdict": "no match: dimension only"
+  },
+  {
+   "tool": "grep",
+   "query": "rg -n depth /tmp/mathlib-f1/Mathlib/RingTheory/Depth/Basic.lean; read lines 60-95 and regular-sequence characterization declarations",
+   "results": "Current upstream cache has ModuleCat.depth (line 66), Ideal.depth (line 73), IsLocalRing.depth (line 78), all Ext-based; IsLocalRing.depth_eq_sSup_length_isRegular line 369. No quotient-by-regular-element depth-drop declaration in this file. This cache is newer than the pinned Mathlib and cannot establish a pinned-library match; original pinned-library search retained.",
+   "date": "2026-10-10",
+   "verdict": "no exact match; upstream definitions require comparison with the regular-sequence convention"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "worker",
@@ -75,5 +178,19 @@
   }
  },
  "chapter": "sec-proper-base-change",
- "unit": "sk-thm-p1"
+ "unit": "sk-thm-p1",
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "lem-weil-pbc-depth-drops-by-one",
+  "worker": "stage1",
+  "summary": "Replaced the circular source route 090R -> 00LX -> 00LW -> 090R with an independent Rees/Ext calculation. Nakayama makes Q=M/xM nonzero; the existing 00LK depth bound plus finite dimension of a Noetherian local ring make both depths finite. Mathlib's Rees theorem converts depth thresholds to vanishing of Ext^i(kappa,-); 00LU and the 00LV annihilation lemma give short exact sequences 0 -> Ext^i(kappa,M) -> Ext^i(kappa,Q) -> Ext^{i+1}(kappa,M) -> 0. The first nonzero degree shifts from d to d-1, and Rees converts back to depth. New Mathlib leaves: Rees equivalence and first-variable Ext annihilation.",
+  "blueprint": "The proof serves step 4 of the split of blueprint node lem-weil-pbc-normal-constant-generic (normality of the strict henselization, Stacks 09Z5), through its normality, Serre-condition and flat-local-depth-formula descendants. The blueprint does not state the depth lemma separately; these steps fill the flat-local-depth-formula's use of Stacks 090R."
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "group": "C1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed by the lead of C1; spot-checked by L: L: 090R(1) chain read (Nakayama, 00LK bound, Ext long exact sequence and 00LV, Rees); Mathlib Ext/Basic.lean:35 and Depth/Rees.lean:158 read"
+ }
 }

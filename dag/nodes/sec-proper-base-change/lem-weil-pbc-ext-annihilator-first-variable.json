@@ -1,0 +1,73 @@
+{
+ "id": "lem-weil-pbc-ext-annihilator-first-variable",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-normal-constant-generic",
+   "place": "step 4 of its split (normality of the strict henselization), via the depth calculation for flat normal fibres; the vanishing of multiplication by x on Ext from R/m",
+   "via": [
+    "lem-weil-pbc-depth-drops-by-one",
+    "lem-weil-pbc-flat-local-depth-formula",
+    "lem-weil-pbc-serre-sk-goes-up",
+    "lem-weil-pbc-flat-normal-fibres-noetherian-normal",
+    "lem-weil-pbc-smooth-over-normal-ring-normal",
+    "lem-weil-pbc-etale-over-normal-ring-normal",
+    "lem-weil-pbc-etale-colimit-normal-local-domain"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "An element annihilating the first module acts trivially on Ext",
+ "statement": "Let $R$ be a commutative ring, $N$ and $M$ be $R$-modules, and $r\\in R$ annihilate $N$ (that is, $rn=0$ for every $n\\in N$). Then, for every integer $i\\ge0$, the endomorphism of $\\operatorname{Ext}^i_R(N,M)$ [def-pc-ext] induced by the map $M\\xrightarrow{r}M$ is zero.",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Algebra, Lemma Tag 00LV (lemma-annihilate-ext), lines 17723-17740, first-variable-annihilation clause; Mathlib/Algebra/Category/ModuleCat/Ext/Basic.lean:35-43"
+ },
+ "stmt_deps": ["def-pc-ext"],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "element annihilating first module annihilates Ext groups of modules",
+   "results": "Module.annihilator and CategoryTheory.Abelian.Ext.comp_zero, but not the specialized annihilation lemma; source grep identified it",
+   "date": "2026-10-10",
+   "verdict": "inconclusive"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "if r annihilates N then multiplication by r induces zero map on Ext N M i",
+   "results": "CategoryTheory.Abelian.Ext.smul_eq_comp_mk₀ and Ext.zero_comp; source grep identified the specialized lemma",
+   "date": "2026-10-10",
+   "verdict": "inconclusive"
+  },
+  {
+   "tool": "grep",
+   "query": "rg -n 'postcomp_smul_id_eq_zero_of_mem_annihilator' Mathlib/Algebra/Category/ModuleCat/Ext/Basic.lean; sed -n '30,43p' Mathlib/Algebra/Category/ModuleCat/Ext/Basic.lean",
+   "results": "Mathlib/Algebra/Category/ModuleCat/Ext/Basic.lean:35, Ext.postcomp_smul_id_eq_zero_of_mem_annihilator: r in Ann(N) implies postcomposition with r • id_M is zero on Ext N M i",
+   "date": "2026-10-10",
+   "verdict": "match"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "CategoryTheory.Abelian.Ext.postcomp_smul_id_eq_zero_of_mem_annihilator",
+  "file": "Mathlib/Algebra/Category/ModuleCat/Ext/Basic.lean",
+  "line": 35,
+  "how": "exact: lines 35-43, with N the first Ext argument, M the second and r in Module.annihilator R N. The conclusion says the map on Ext N M i induced by r • id_M is zero. Source read 2026-10-10."
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-depth-drops-by-one",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {"state": "none"},
+  "slopmaster2": {"state": "none"}
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1"
+}

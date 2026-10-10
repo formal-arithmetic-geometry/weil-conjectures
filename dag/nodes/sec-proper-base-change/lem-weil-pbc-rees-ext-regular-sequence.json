@@ -1,0 +1,78 @@
+{
+ "id": "lem-weil-pbc-rees-ext-regular-sequence",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-normal-constant-generic",
+   "place": "step 4 of its split (normality of the strict henselization), via the depth calculation for flat normal fibres; the Ext/regular-sequence bridge used in place of the cyclic 00LW route",
+   "via": [
+    "lem-weil-pbc-depth-drops-by-one",
+    "lem-weil-pbc-flat-local-depth-formula",
+    "lem-weil-pbc-serre-sk-goes-up",
+    "lem-weil-pbc-flat-normal-fibres-noetherian-normal",
+    "lem-weil-pbc-smooth-over-normal-ring-normal",
+    "lem-weil-pbc-etale-over-normal-ring-normal",
+    "lem-weil-pbc-etale-colimit-normal-local-domain"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Rees equivalence of Ext vanishing and existence of a regular sequence",
+ "statement": "Let $R$ be a Noetherian commutative ring [def-weil-pbc-noetherian-ring], $I\\subset R$ an ideal and $M\\neq0$ a finite $R$-module [def-weil-finitely-generated-module] such that $IM\\neq M$. For each integer $n\\ge0$, the following are equivalent: (1) $\\operatorname{Ext}^i_R(R/I,M)=0$ [def-pc-ext] for every $0\\le i<n$; (2) there is an $M$-regular sequence [def-weil-pbc-regular-sequence] of length $n$ all of whose terms lie in $I$.",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Algebra, Section Tag 00LE (section-depth), Definitions 00LF and 00LI; Mathlib/RingTheory/Depth/Rees.lean:145-166, theorem ModuleCat.exists_isRegular_tfae (the Rees theorem)"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-noetherian-ring",
+  "def-weil-finitely-generated-module",
+  "def-pc-ext",
+  "def-weil-pbc-regular-sequence"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Rees theorem Ext vanishing equivalent to existence regular sequence in ideal for finite module over Noetherian ring",
+   "results": "RingTheory.Sequence.IsRegular and IsLocalRing.isRegular_iff_isWeaklyRegular_of_subset_maximalIdeal, but the service did not surface ModuleCat.exists_isRegular_tfae; source grep identified it",
+   "date": "2026-10-10",
+   "verdict": "inconclusive"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "finite module over Noetherian ring Ext^i(R/I,M)=0 for i<n iff M regular sequence of length n in ideal I",
+   "results": "RingTheory.Sequence.isWeaklyRegular_iff_Fin and Module.supportDim_add_length_eq_supportDim_of_isRegular; the service did not surface the Rees theorem",
+   "date": "2026-10-10",
+   "verdict": "inconclusive"
+  },
+  {
+   "tool": "grep",
+   "query": "rg -n 'exists_isRegular_tfae|Rees theorem' Mathlib/RingTheory/Depth/Rees.lean; sed -n '145,170p' Mathlib/RingTheory/Depth/Rees.lean",
+   "results": "Mathlib/RingTheory/Depth/Rees.lean:158, ModuleCat.exists_isRegular_tfae: condition (2) Ext vanishing against Shrink(R/I) iff condition (4) existence of a list rs of length n in I with RingTheory.Sequence.IsRegular M rs; hypotheses [IsNoetherianRing R], [Module.Finite R M], I • top < top",
+   "date": "2026-10-10",
+   "verdict": "match"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "ModuleCat.exists_isRegular_tfae",
+  "file": "Mathlib/RingTheory/Depth/Rees.lean",
+  "line": 158,
+  "how": "specializes in one line: lines 145-166, select conditions (2) and (4) of exists_isRegular_tfae at the stated I,n,M. The hypothesis I • top < top is IM != M; condition (2) is Ext^i against Shrink(R/I) vanishing for i<n (canonically Ext^i(R/I,M)); condition (4) is an M-regular list rs of length n with rs contained in I. IsRegular is exactly Stacks 00LF by Mathlib/RingTheory/Regular/RegularSequence.lean:135-147. Source read 2026-10-10."
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-depth-drops-by-one",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {"state": "none"},
+  "slopmaster2": {"state": "none"}
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1"
+}
