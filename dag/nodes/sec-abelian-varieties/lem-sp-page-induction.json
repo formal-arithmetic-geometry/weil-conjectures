@@ -3,26 +3,52 @@
  "blueprint": {
   "is": "lem-sp-page-induction",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "Page induction",
- "statement": "Let $\\varphi:E\\to E'$ be a morphism of spectral sequences\n[def-sp-spectral-sequence]. If $\\varphi$ is an isomorphism on the\n$E_2$-page in every bidegree, then it is an isomorphism on all pages $E_r$,\n$2\\leq r\\leq\\infty$.",
+ "statement": "Let $\\varphi:E\\to E'$ be a morphism of spectral sequences\n[def-sp-spectral-sequence] with pages $E_r$, $E'_r$ for $r\\geq2$. If $\\varphi$ is an\nisomorphism on the $E_2$-page in every bidegree, then it is an isomorphism on\nevery page $E_r$, $2\\leq r<\\infty$. If moreover $E_\\infty$ and $E'_\\infty$ exist, formed\nas $Z_\\infty/B_\\infty$ by the recursive cycle and boundary subobjects of\n[def-sp-convergence] (that construction uses only the pages $E_r=Z_r/B_r$ and the\ndifferentials $d_r$, and is applied here to $E$ and $E'$ component by component), then\n$\\varphi$ also induces an isomorphism $E_\\infty\\cong E'_\\infty$.",
  "source": {
   "document": "literature/blueprint/master/blueprint/sec-abelian-varieties/sk-prop-av-pqf-finite/lem-sp-page-induction.md",
   "place": "node lem-sp-page-induction, order 512"
  },
  "stmt_deps": [
-  "def-sp-spectral-sequence"
+  "def-sp-spectral-sequence",
+  "def-sp-convergence"
  ],
  "proof": [
   {
-   "text": "Each $E_{r+1}$ is the homology of the page $E_r$\n([def-sp-spectral-sequence]); a morphism of complexes which is a\nquasi-isomorphism induces a homology isomorphism, and the page\nidentifications are compatible with the morphism. Hence the\n$E_2$-isomorphism gives the $E_3$-isomorphism, induction gives all $E_r$, and\nthe intersection and union formulas in [def-sp-convergence] give\n$E_\\infty\\cong E'_\\infty$.",
+   "text": "By [def-sp-spectral-sequence], every page $E_r$ is a complex with differential $d_r$, and the specified identification of its homology with $E_{r+1}$ is compatible with morphisms of spectral sequences. Thus the page map $\\varphi_r$ is a chain map and the next page map is the map induced on homology under these identifications.",
    "uses": [
-    "def-sp-spectral-sequence",
+    "def-sp-spectral-sequence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-abelian-varieties/sk-prop-av-pqf-finite/lem-sp-page-induction.md",
+    "place": "## Proof"
+   }
+  },
+  {
+   "text": "The map on page $2$ is an isomorphism by hypothesis. If $\\varphi_r$ is an isomorphism, its commutation with $d_r$ identifies the kernels of the differentials and the images of the differentials on the two complexes; therefore it induces an isomorphism on the quotient $\\ker(d_r)/\\operatorname{im}(d_r)$, i.e. on homology. The compatible page identifications from Step 1 then make $\\varphi_{r+1}$ an isomorphism. Induction on $r$ proves that $\\varphi_r$ is an isomorphism for every finite $r\\ge2$.",
+   "uses": [
+    "def-sp-spectral-sequence"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-abelian-varieties/sk-prop-av-pqf-finite/lem-sp-page-induction.md",
+    "place": "## Proof"
+   }
+  },
+  {
+   "text": "By [def-sp-convergence], the cycle and boundary subobjects $B_r\\subseteq Z_r\\subseteq E_2$ are defined recursively by $Z_2=E_2$, $B_2=0$, and $Z_{r+1}$, $B_{r+1}$ the inverse images of $\\ker d_r$ and $\\operatorname{im}d_r$ under $Z_r\\twoheadrightarrow E_r=Z_r/B_r$; the limiting page is $E_\\infty=Z_\\infty/B_\\infty$ with $Z_\\infty=\\bigcap_r Z_r$ and $B_\\infty=\\bigcup_r B_r$ when these limits exist. By induction on $r$, the isomorphism $\\varphi_2$ maps $Z_r$ onto $Z'_r$ and $B_r$ onto $B'_r$, and the map it induces on $Z_r/B_r$ is $\\varphi_r$: this holds for $r=2$, and if it holds for $r$, then since $\\varphi_r$ commutes with $d_r$ and is an isomorphism (Step 2) it maps $\\ker d_r$ onto $\\ker d'_r$ and $\\operatorname{im}d_r$ onto $\\operatorname{im}d'_r$, so $\\varphi_2$ maps their inverse images $Z_{r+1}$, $B_{r+1}$ onto $Z'_{r+1}$, $B'_{r+1}$, and the induced map on the quotient is $\\varphi_{r+1}$ by Step 1. An isomorphism $E_2\\cong E'_2$ carries intersections and unions of subobjects to intersections and unions, so $\\varphi_2(Z_\\infty)=Z'_\\infty$ and $\\varphi_2(B_\\infty)=B'_\\infty$, and $\\varphi_2$ induces an isomorphism $E_\\infty=Z_\\infty/B_\\infty\\cong Z'_\\infty/B'_\\infty=E'_\\infty$.",
+   "uses": [
     "def-sp-convergence"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-abelian-varieties/sk-prop-av-pqf-finite/lem-sp-page-induction.md",
+    "place": "## Proof"
+   }
   }
  ],
  "proof_deps": [
@@ -34,9 +60,38 @@
   "document": "literature/blueprint/master/blueprint/sec-abelian-varieties/sk-prop-av-pqf-finite/lem-sp-page-induction.md",
   "place": "## Proof"
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "a morphism of spectral sequences that is an isomorphism on page E2 is an isomorphism on every later page by induction on homology",
+   "results": "HomologicalComplex.HomologySequence.isIso_homologyMap_τ₃, QuasiIso, QuasiIso.quasiIsoAt, quasiIso_iff, quasiIsoAt_iff_isIso_homologyMap (Mathlib/Algebra/Homology/QuasiIso); no spectral-sequence page induction theorem",
+   "date": "2026-10-11",
+   "verdict": "no match (only general homological-complex quasi-isomorphism results)"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.ShortComplex.mapHomologyIso, SpectralSequence, homology",
+   "results": "0 hits; service reported unknown identifier SpectralSequence",
+   "date": "2026-10-11",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "SpectralSequence|spectralSequence|homology.*map|map.*homology in Mathlib/Algebra/Homology",
+   "results": "25 hits, chiefly Mathlib/Algebra/Homology/QuasiIso.lean (quasiIsoAt_iff_isIso_homologyMap) and unrelated homology sequence lemmas; no spectral-sequence page induction",
+   "date": "2026-10-11",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "morphism of spectral sequences isomorphism on E2 implies isomorphism on all pages",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-11",
+   "verdict": "unavailable"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [],
  "blueprint_kind": "lemma",
@@ -59,5 +114,21 @@
   }
  },
  "chapter": "sec-abelian-varieties",
- "unit": "sk-prop-av-pqf-finite"
+ "unit": "sk-prop-av-pqf-finite",
+ "split_report": {
+  "date": "2026-10-11",
+  "item": "lem-sp-page-induction",
+  "worker": "stage1",
+  "summary": "Expanded the imported one-paragraph argument into the page-level chain-map step, an explicit induction using kernels, images and homology quotients, and the limiting intersection/union argument. The statement was changed: the E_infinity clause now assumes that both limiting pages exist via the cycle/boundary construction of def-sp-convergence (applied to the pages and differentials of E and E'), and def-sp-convergence was added to stmt_deps; no new DAG nodes were needed. Reviewer R-pgi1856 made the E_infinity hypothesis type-correct for spectral sequences (def-sp-convergence is stated for exact couples) and wrote out the Z_r/B_r transport induction in Step 3.",
+  "blueprint": "Steps 1-3 realize the single paragraph under ## Proof: page homology and compatibility, induction from E2, and the def-sp-convergence intersection/union conclusion."
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-pgi1856",
+  "group": "G1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-pgi1856 (reviewer sub-agent of L); spot-checked: No cycle: def-sp-spectral-sequence (mathlib leaf) and def-sp-convergence (imported; deps def-sp-exact-couple, def-sp-filtration) do not depend on the item; lem-sp-derived-couple-exact is not cited. Steps 1-2 checked against def-sp-spectral-sequence; Z_r/B_r recursion is cited from def-sp-convergence. FIX more, RETURN less: (1) C4 statement/Step 3: def-sp-convergence is stated for exact couples, the item for general spectral sequences; E_infinity hypothesis restated as the def-sp-convergence cycle/boundary construction applied to the pages and differentials of E, E', finite-page and E_infinity conclusions separated; (2) C5/D Step 3: wrote out the induction that phi_2 carries Z_r, B_r onto Z'_r, B'_r and induces phi_r, then intersections/unions; (3) split_report summary said the statement was unchanged; corrected.; 1 file(s) fixed by the reviewer"
+ },
+ "lead_note": "2026-10-10 L (R-pgi1856): Consumer thm-weil-pbc-bounded-below cites the E_infinity clause; it now needs both limiting pages to exist."
 }

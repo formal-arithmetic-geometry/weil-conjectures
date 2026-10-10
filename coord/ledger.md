@@ -2301,3 +2301,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 18:54 L: merged deliver/G1/def-sp-exact-couple (reviewer FIX; first push; new nodes: 0)
 - 18:55 L: merged deliver/M1/lem-sc-mayer-vietoris-ringed-space (reviewer PASS; after a return; new nodes: 4)
 - 18:56 L: merged deliver/H1/lem-sc-mult-n-etale-kernel (reviewer FIX; after a return; new nodes: 4)
+- 18:56 L: merged deliver/G1/lem-sp-page-induction (reviewer FIX; first push; new nodes: 0)
