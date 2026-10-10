@@ -1,8 +1,8 @@
 # Work queue
 
-848 items; claim with `tools/claim.py next <group> [--stage N]`.
+856 items; claim with `tools/claim.py next <group> [--stage N]`.
 
-## Stage 1: nodes to split (313)
+## Stage 1: nodes to split (318)
 
 | node | distance to a target | Lean state on the done branch |
 |---|---|---|
@@ -11,7 +11,6 @@
 | `lem-weil-pbc-pullback-ample-invertible` | 1013 | none |
 | `lem-weil-pbc-direct-sum-extension-assembly` | 1016 | none |
 | `lem-weil-pbc-finite-type-field-finite-isolated-points` | 1016 | none |
-| `lem-weil-pbc-tor-one-surjective-flat-middle` | 1016 | none |
 | `lem-weil-pbc-injective-acyclicity-bounded-below` | 2002 | sorry_here |
 | `lem-weil-pbc-property-implies-acyclicity` | 2003 | none |
 | `lemma-weil-pbc-proper-underived-exchange` | 2003 | sorry_here |
@@ -40,10 +39,8 @@
 | `lem-pc-cartier-divisor-finite-over-field` | 3009 | none |
 | `lem-sc-hilb-geometrically-integral` | 3009 | rests_on_sorry |
 | `lem-sc-very-ample-separation-criterion` | 3009 | none |
-| `lem-weil-pbc-simplicial-index-finite-initial` | 3009 | none |
 | `lem-exc-cochains-derived-invariants` | 3010 | none |
 | `lem-galois-fpqc-descend-open-immersion` | 3010 | none |
-| `lem-pc-finite-scheme-cohomology-tensor` | 3010 | none |
 | `lem-pc-very-ample-ample` | 3010 | sorry_here |
 | `lem-pc-zero-support-finite-scheme` | 3010 | none |
 | `lem-sc-brauer-zero-all-curves` | 3010 | sorry_here |
@@ -288,6 +285,8 @@
 | `def-pc-derived-direct-image` | - | none |
 | `def-pc-fppf-site` | - | none |
 | `def-pc-subfunctor` | - | none |
+| `lem-kun-closed-point-field` | - | none |
+| `lem-kun-cp-approximation` | - | none |
 | `lem-pc-projective-coherent-finiteness` | - | sorry_here |
 | `lem-pd-picard-base-change` | - | sorry_here |
 | `lem-weil-geometrically-connected-check-after-extension` | - | none |
@@ -297,11 +296,17 @@
 | `sbc-lem-higher-direct-image-presheaf` | - | none |
 | `sbc-lem-smooth-geometrically-reduced` | - | none |
 | `def-pc-derived-category` | - | none |
+| `lem-kun-04ca` | - | none |
 | `lem-kun-fibre-product-limits` | - | none |
+| `lem-kun-finite-closed-subscheme` | - | none |
+| `lem-kun-sep-closed-finite-extension-purely-inseparable` | - | none |
+| `lem-kun-sep-closed-finite-extension-sep-closed` | - | none |
+| `lem-kun-support-geometric-point-independent` | - | none |
 | `lem-pc-flat-rf-open` | - | rests_on_sorry |
 | `lem-pc-projective-space-coherent-finiteness` | - | sorry_here |
 | `def-sc-kahler-differentials` | - | none |
 | `lem-kun-separable-smooth-colimit` | - | none |
+| `lem-kun-stalk-as-pullback` | - | none |
 | `lem-pc-perfect-locus` | - | sorry_here |
 | `lem-sc-p1-hi-vanishing` | - | rests_on_sorry |
 | `pqf-lem-qf-locqf-qc` | - | none |
@@ -320,7 +325,7 @@
 | `def-exc-jacobian-presentation` | - | none |
 | `lem-zl-noether-normalization-dimension` | - | none |
 
-## Stage 2: nodes to state (535)
+## Stage 2: nodes to state (538)
 
 | node | distance to Mathlib | kind |
 |---|---|---|
@@ -386,6 +391,7 @@
 | `lem-pc-scheme-connected-iff-idempotents` | 1 | state |
 | `lem-pc-scheme-dimension-local-rings` | 1 | state |
 | `lem-sc-affine-open-finite-complement` | 1 | state |
+| `lem-sc-dim-one-point-outside-open-closed` | 1 | state |
 | `lem-sc-dim0-finite` | 1 | state |
 | `lem-sc-divisible-quotient-torsion` | 1 | state |
 | `lem-sc-divisor-finite-support` | 1 | state |
@@ -747,6 +753,7 @@
 | `lem-weil-pbc-sheaf-on-basis-extends` | 1 | state |
 | `lem-weil-pbc-sheaf-tensor-closed` | 1 | state |
 | `lem-weil-pbc-sheaves-directed-colimit-sections` | 1 | state |
+| `lem-weil-pbc-simplicial-index-finite-initial` | 1 | state |
 | `lem-weil-pbc-simplicial-set-add-simplices` | 1 | state |
 | `lem-weil-pbc-simplicial-set-glue-simplex` | 1 | state |
 | `lem-weil-pbc-skyscraper-constant-on-point-closure` | 1 | state |
@@ -799,6 +806,7 @@
 | `lem-weil-pbc-tor-ideal-kernel-naturality` | 1 | state |
 | `lem-weil-pbc-tor-long-exact-first-variable` | 1 | state |
 | `lem-weil-pbc-tor-one-surjective-change-rings` | 1 | state |
+| `lem-weil-pbc-tor-one-surjective-flat-middle` | 1 | state |
 | `lem-weil-pbc-tor-strictly-pro-zero` | 1 | state |
 | `lem-weil-pbc-tor-symmetry` | 1 | state |
 | `lem-weil-pbc-torsion-cyclic-presentation` | 1 | state |
@@ -860,7 +868,7 @@
 | `lem-weil-pbc-p1-field-dimension-one` | 4 | state |
 | `lem-weil-pbc-projective-space-zero-isomorphism` | 4 | state |
 
-Not open yet: 333 nodes that wait for stage 1, 986 nodes that wait for a statement dependency.
+Not open yet: 338 nodes that wait for stage 1, 987 nodes that wait for a statement dependency.
 
 ## Stage 3: modules to prove (0)
 
