@@ -1,0 +1,81 @@
+{
+ "id": "lem-weil-pbc-simplicial-set-nondegenerate-decomposition",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-hypercover-refinement",
+   "place": "proof, fourth paragraph: 'Previously chosen faces prescribe compatible boundaries; the matching covers of U lift those boundaries after finite refinement': uniqueness of the degeneracies of the one simplex added along its boundary",
+   "via": [
+    "lem-weil-pbc-simplicial-set-glue-simplex",
+    "lem-weil-pbc-hypercover-one-more-simplex",
+    "lem-weil-pbc-hypercover-finite-simplex-lifting"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Unique nondegenerate decomposition of a simplex",
+ "statement": "Let $S$ be a simplicial set [def-weil-pbc-simplicial-set]. For every $q\\geq0$ and $z\\in S_q$ there exist a unique integer $r\\geq0$, a unique surjective order-preserving map $\\sigma:[q]\\to[r]$, and a unique nondegenerate simplex $y\\in S_r$ such that $z=S(\\sigma)(y)$.",
+ "source": {
+  "document": "literature/stacks-project/simplicial.tex",
+  "place": "Lemma 017R (lemma-splitting-simplicial-sets), statement and proof: its splitting is the disjoint union over surjections and nondegenerate simplices"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-simplicial-set"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Every simplex of a simplicial set uniquely decomposes as a degeneracy of a nondegenerate simplex; SSet.exists_nonDegenerate",
+   "results": "LeanSearch service returned HTTP 500 for both the natural-language query and the declaration-name query on 2026-10-10",
+   "date": "2026-10-10",
+   "verdict": "service error; match verified by Loogle, LeanFinder and source"
+  },
+  {
+   "tool": "loogle",
+   "query": "unique_nonDegenerate",
+   "results": "SSet.unique_nonDegenerate_dim, SSet.unique_nonDegenerate_simplex, SSet.unique_nonDegenerate_map in Mathlib.AlgebraicTopology.SimplicialSet.Degenerate",
+   "date": "2026-10-10",
+   "verdict": "match for uniqueness"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Eilenberg Zilber lemma every simplex uniquely degeneracy of a nondegenerate simplex",
+   "results": "SSet.unique_nonDegenerate_dim and SSet.unique_nonDegenerate_simplex in Mathlib.AlgebraicTopology.SimplicialSet.Degenerate",
+   "date": "2026-10-10",
+   "verdict": "match for uniqueness"
+  },
+  {
+   "tool": "grep",
+   "query": "rg -n 'exists_nonDegenerate|unique_nonDegenerate_dim|unique_nonDegenerate_simplex|unique_nonDegenerate_map' Mathlib/AlgebraicTopology/SimplicialSet/Degenerate.lean",
+   "results": "Degenerate.lean:114 exists_nonDegenerate; :217 unique_nonDegenerate_dim; :225 unique_nonDegenerate_simplex; :233 unique_nonDegenerate_map, source read through line 240",
+   "date": "2026-10-10",
+   "verdict": "match, one declaration per existence/uniqueness clause"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "SSet.exists_nonDegenerate; SSet.unique_nonDegenerate_dim; SSet.unique_nonDegenerate_simplex; SSet.unique_nonDegenerate_map",
+  "file": "Mathlib/AlgebraicTopology/SimplicialSet/Degenerate.lean",
+  "line": 114,
+  "how": "exact, one declaration per clause: existence at line 114; uniqueness of dimension at line 217, of nondegenerate simplex at line 225, and of the surjection at line 233. Epi maps of SimplexCategory are precisely surjective order-preserving maps."
+ },
+ "status": "mathlib",
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-simplicial-set-glue-simplex",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-curve-estimates",
+ "unit": "sk-prop-h2"
+}

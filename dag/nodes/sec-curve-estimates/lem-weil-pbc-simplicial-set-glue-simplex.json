@@ -22,9 +22,68 @@
  "stmt_deps": [
   "def-weil-pbc-simplicial-set"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "The simplex $x$ is nondegenerate: if $x=V(\\sigma)(y)$ for a map $\\sigma:[n]\\to[r]$ with $r<n$, then $y\\in V_r=U_r$, so simplicial stability of $U$ would give $x\\in U_n$. For $n=0$ there are no non-surjective maps to $[0]$. For $n>0$, if $\\varphi:[m]\\to[n]$ is not surjective, choose $i$ outside its image and factor $\\varphi=\\delta_i\\circ\\psi$ by [lem-weil-pbc-simplex-face-factorization]. The face $V(\\delta_i)(x)$ lies in $V_{n-1}=U_{n-1}$, hence $a(\\varphi)=U(\\psi)(V(\\delta_i)(x))\\in U_m$. This defines $b$ and makes the square commute.",
+   "uses": [
+    "def-weil-pbc-simplicial-set",
+    "lem-weil-pbc-simplex-face-factorization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/simplicial.tex",
+    "place": "Lemma 018R (lemma-glue-simplex), statement and proof, the sentence 'Since clearly x is nondegenerate'; Lemma 0166 (lemma-face-degeneracy), proof of factorization through a missing face"
+   }
+  },
+  {
+   "text": "Every $z\\in V_j\\setminus U_j$ has a unique expression $z=V(\\sigma)(x)$ for a surjective $\\sigma:[j]\\to[n]$. Indeed, apply [lem-weil-pbc-simplicial-set-nondegenerate-decomposition] to $z$. Its nondegenerate ancestor $y$ is outside $U$ (otherwise $z\\in U$); it cannot have degree below $n$ by (1), nor above $n$ by (3), and by (2) it is $x$ in degree $n$. Conversely, if $\\sigma$ is surjective and $V(\\sigma)(x)\\in U_j$, choose an order-preserving section $\\tau:[n]\\to[j]$ of $\\sigma$. Then $x=V(\\tau)(V(\\sigma)(x))\\in U_n$, a contradiction. Thus the simplices outside $U$ are exactly the distinct surjective degeneracies of $x$.",
+   "uses": [
+    "def-weil-pbc-simplicial-set",
+    "lem-weil-pbc-simplicial-set-nondegenerate-decomposition"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/simplicial.tex",
+    "place": "Lemma 018R (lemma-glue-simplex), proof, induction showing every new simplex is a degeneracy of x and injectivity via Lemma 017S; Lemma 017R (lemma-splitting-simplicial-sets) supplies uniqueness"
+   }
+  },
+  {
+   "text": "Let $g:U\\to Y$ and $h:\\Delta[n]\\to Y$ agree on the boundary. Define $f_j:V_j\\to Y_j$ by $f_j(z)=g_j(z)$ for $z\\in U_j$, and $f_j(V(\\sigma)(x))=h_j(\\sigma)$ for the unique surjection $\\sigma:[j]\\to[n]$ of step 2. To check naturality for $\\theta:[k]\\to[j]$, it is immediate for $z\\in U_j$. For $z=V(\\sigma)(x)$ outside $U$, write $\\rho=\\sigma\\circ\\theta$. If $\\rho$ is surjective, step 2 gives $V(\\theta)(z)=V(\\rho)(x)$ outside $U$ and both sides of naturality equal $h_k(\\rho)$. If $\\rho$ is not surjective, step 1 puts $V(\\theta)(z)=b_k(\\rho)$ in $U_k$ and the boundary agreement gives $g_k(b_k(\\rho))=h_k(\\rho)=Y(\\theta)(h_j(\\sigma))$. Thus $f$ is a simplicial morphism extending $g$.",
+   "uses": [
+    "def-weil-pbc-simplicial-set",
+    "lem-weil-pbc-simplicial-set-nondegenerate-decomposition",
+    "lem-weil-pbc-simplex-face-factorization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/simplicial.tex",
+    "place": "Lemma 018R (lemma-glue-simplex), proof, degreewise bijectivity of the pushout map; expanded here into the universal-property construction using the unique splitting of Lemma 017R"
+   }
+  },
+  {
+   "text": "For $\\varphi:[j]\\to[n]$, if $\\varphi$ is surjective then $a_j(\\varphi)$ lies outside $U$ by step 2 and $f_j(a_j(\\varphi))=h_j(\\varphi)$. Otherwise it lies on the boundary by step 1 and $f_j(a_j(\\varphi))=g_j(b_j(\\varphi))=h_j(\\varphi)$. Hence $f\\circ a=h$. Any other morphism with these restrictions agrees with $f$ on $U$, and on a new simplex $V(\\sigma)(x)$ it must take the value $Y(\\sigma)(h_n(\\mathrm{id}_{[n]}))=h_j(\\sigma)$; it is therefore $f$. This is the pushout universal property. When $n=0$, every map $[j]\\to[0]$ is surjective and $\\partial\\Delta[0]$ is empty, so the same argument says $V=U\\amalg\\Delta[0]$.",
+   "uses": [
+    "def-weil-pbc-simplicial-set",
+    "lem-weil-pbc-simplicial-set-nondegenerate-decomposition",
+    "lem-weil-pbc-simplex-face-factorization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/simplicial.tex",
+    "place": "Lemma 018R (lemma-glue-simplex), conclusion of the proof; the empty boundary for n=0 is immediate from its definition"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-simplicial-set",
+  "lem-weil-pbc-simplex-face-factorization",
+  "lem-weil-pbc-simplicial-set-nondegenerate-decomposition"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/simplicial.tex",
+  "place": "Lemma 018R (lemma-glue-simplex), proof, expanded through Lemma 017R (lemma-splitting-simplicial-sets) and Lemma 0166 (lemma-face-degeneracy)"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -55,7 +114,7 @@
   "line": 395,
   "why_not_leaf": "attaches all nondegenerate d-simplices outside a mono at once; that conditions (1)-(3) make U and V two consecutive relative skeleta is the content of 018R's proof"
  },
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "worker",
@@ -71,5 +130,19 @@
   }
  },
  "chapter": "sec-curve-estimates",
- "unit": "sk-prop-h2"
+ "unit": "sk-prop-h2",
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "lem-weil-pbc-simplicial-set-glue-simplex",
+  "worker": "stage1",
+  "summary": "Read Stacks 018R and expanded its degreewise pushout proof into the universal property: the new simplex has its boundary in U, unique nondegenerate decomposition identifies all new simplices as distinct degeneracies of x, and a compatible pair of maps defines a unique simplicial map on V. Added a Mathlib leaf for the decomposition in Stacks 017R and reused the existing face-factorization leaf for Stacks 0166. The source tree is absent from this clone; the Stacks text was read from the available local copy.",
+  "blueprint": "The four steps realize the fourth paragraph of lem-weil-pbc-hypercover-refinement's proof ('Previously chosen faces prescribe compatible boundaries; the matching covers of U lift those boundaries after finite refinement'), specifically the simplex-attachment clause used by lem-weil-pbc-hypercover-one-more-simplex: steps 1 and 2 identify the boundary and new degeneracies, and steps 3 and 4 prove the resulting pushout."
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "group": "F1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed by the lead of F1; spot-checked by L: L: reviewed in full by a reviewer sub-agent (PASS): 018R read, 4 steps checked, new Mathlib leaf lines 114/217/225/233 verified, small cases tested"
+ }
 }
