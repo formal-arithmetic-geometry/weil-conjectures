@@ -1,8 +1,8 @@
 # Work queue
 
-926 items; claim with `tools/claim.py next <group> [--stage N]`.
+930 items; claim with `tools/claim.py next <group> [--stage N]`.
 
-## Stage 1: nodes to split (221)
+## Stage 1: nodes to split (222)
 
 | node | distance to a target | Lean state on the done branch |
 |---|---|---|
@@ -35,16 +35,19 @@
 | `lem-sc-finite-flat-surj-points` | 4009 | none |
 | `lem-sc-hom-etale-locus-translation` | 4009 | none |
 | `lem-sc-positive-ample-hilbert-degree` | 4009 | none |
-| `lem-sc-strict-henselization-dimension` | 4009 | none |
 | `lem-weil-pbc-gm-pullback-strict-henselization` | 4009 | none |
 | `lem-weil-pbc-unrestricted-strict-henselization-stalk` | 4009 | none |
 | `lem-pc-universal-adjoint-section` | 4010 | rests_on_sorry |
+| `lem-sc-etale-local-dimension` | 4010 | none |
+| `lem-sc-faithfully-flat-local-dimension` | 4010 | none |
+| `lem-sc-filtered-colimit-prime-chain-dimension` | 4010 | none |
 | `lem-sc-product-tangent-space-direct-sum` | 4010 | none |
 | `lem-sc-strict-henselization-completion-noetherian` | 4010 | none |
 | `lem-sc-strict-henselization-cotangent-dimension` | 4010 | none |
 | `lem-sc-strict-henselization-faithfully-flat` | 4010 | none |
 | `lem-pc-hilb-containment-locus` | 4011 | none |
-| `lem-pc-derived-filtered-free-resolution` | 4012 | none |
+| `lem-pc-derived-free-complex-cover` | 4013 | none |
+| `lem-pc-derived-total-resolution-quasi-iso` | 4013 | none |
 | `lem-pc-flat-filtered-complex-comparison` | 5009 | none |
 | `lem-sc-hilbert-polynomial` | 5009 | none |
 | `lem-pc-derived-direct-image-composition` | 5010 | none |
@@ -56,12 +59,10 @@
 | `lem-pc-noetherian-approximation-data` | 5012 | none |
 | `lem-pc-noetherian-perfect-direct-image` | 5012 | none |
 | `lem-pc-rf-base-change-complex` | 5012 | none |
-| `lem-sc-mult-n-dim-one-closed-subscheme` | 5012 | none |
 | `lem-pc-complex-hocolim-colimit` | 5013 | none |
 | `lem-sp-cartan-eilenberg-comparison-independence` | 6005 | none |
 | `lem-sp-cartan-eilenberg-exists` | 6005 | none |
 | `thm-sp-spectral-object-yields` | 6006 | none |
-| `lem-sc-cech-spectral` | 6009 | sorry_here |
 | `pqf-lem-coherent-ft-locnoeth` | 6009 | none |
 | `lem-pc-affine-morphism-hi` | 6010 | rests_on_sorry |
 | `lem-pc-closed-immersion-coherent-cohomology` | 6010 | rests_on_sorry |
@@ -228,7 +229,7 @@
 | `lem-pur-rhom-well-defined` | - | none |
 | `lem-zl-noether-normalization-dimension` | - | none |
 
-## Stage 2: nodes to state (705)
+## Stage 2: nodes to state (708)
 
 | node | distance to Mathlib | kind |
 |---|---|---|
@@ -316,6 +317,7 @@
 | `lem-pc-cech-exact` | 1 | state |
 | `lem-pc-derived-acyclic-resolution` | 1 | state |
 | `lem-pc-derived-adjoint-functors` | 1 | state |
+| `lem-pc-derived-filtered-free-resolution` | 1 | state |
 | `lem-pc-derived-module-direct-sums` | 1 | state |
 | `lem-pc-field-extension-fpqc-cover` | 1 | state |
 | `lem-pc-flat-pullback-effective-cartier-ideal` | 1 | state |
@@ -397,6 +399,7 @@
 | `lem-sc-jacobson-denominator-function-field` | 1 | state |
 | `lem-sc-local-domain-dim-one-principal-localization-fraction-field` | 1 | state |
 | `lem-sc-local-ring-artin-schreier-kernel` | 1 | state |
+| `lem-sc-mult-n-dim-one-closed-subscheme` | 1 | state |
 | `lem-sc-normal-dim1-dvr` | 1 | state |
 | `lem-sc-p1-ext-resolution-derived-connecting` | 1 | state |
 | `lem-sc-p1-graded-degree-component-exact` | 1 | state |
@@ -420,6 +423,7 @@
 | `lem-sc-semilocal-dim-one-conductor` | 1 | state |
 | `lem-sc-semilocal-dim-one-normalization` | 1 | state |
 | `lem-sc-smooth-algebra-reduced-field` | 1 | state |
+| `lem-sc-strict-henselization-dimension` | 1 | state |
 | `lem-sc-strict-henselization-regular` | 1 | state |
 | `lem-sc-zero-dim-noetherian-closed-finite` | 1 | state |
 | `lem-sp-cart-eilenberg-left-exact-cohomology` | 1 | state |
@@ -938,7 +942,7 @@
 | `lem-weil-pbc-p1-field-dimension-one` | 4 | state |
 | `lem-weil-pbc-projective-space-zero-isomorphism` | 4 | state |
 
-Not open yet: 1393 nodes that wait for a statement dependency, 256 nodes that wait for stage 1.
+Not open yet: 1393 nodes that wait for a statement dependency, 258 nodes that wait for stage 1.
 
 ## Stage 3: modules to prove (0)
 
