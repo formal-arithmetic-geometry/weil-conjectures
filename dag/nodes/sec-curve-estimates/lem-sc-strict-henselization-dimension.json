@@ -22,9 +22,45 @@
  "stmt_deps": [
   "def-weil-pbc-krull-dimension-ring"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "The canonical map $R\\to R^{\\mathrm{sh}}$ is a local ring map, faithfully flat by [lem-sc-strict-henselization-faithfully-flat]. Therefore [lem-sc-faithfully-flat-local-dimension] gives $\\dim R\\le\\dim R^{\\mathrm{sh}}$.",
+   "uses": [
+    "lem-sc-strict-henselization-faithfully-flat",
+    "lem-sc-faithfully-flat-local-dimension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Lemma Tag 06LK, proof first sentence using Tag 07QM(1) and Algebra Tag 00OH"
+   }
+  },
+  {
+   "text": "Write $\\mathfrak m$ for the maximal ideal of $R$. By [lem-weil-pbc-strict-henselization-triples] applied with $\\mathfrak p=\\mathfrak m$ (so $R_{\\mathfrak p}=R$), $R^{\\mathrm{sh}}=C=\\varinjlim S$ is a filtered colimit over triples $(S,\\mathfrak q,\\phi)$ with $R\\to S$ etale and $\\mathfrak q$ over $\\mathfrak m$, and $\\mathfrak m_C=\\ker\\psi$ where $\\psi|_S$ is $S\\to\\kappa(\\mathfrak q)\\to K$; hence the contraction of $\\mathfrak m_C$ to $S$ is $\\mathfrak q$. Let $\\mathfrak Q_0\\subsetneq\\dots\\subsetneq\\mathfrak Q_n$ be a chain of primes of $C$. By [lem-sc-filtered-colimit-prime-chain-dimension] there is a stage $(S,\\mathfrak q,\\phi)$ in which the contractions form a strictly increasing chain; all of them lie in the contraction $\\mathfrak q$ of $\\mathfrak m_C\\supseteq\\mathfrak Q_n$, so they give a chain of length $n$ in $S_{\\mathfrak q}$ and $n\\le\\dim S_{\\mathfrak q}$. By [lem-sc-etale-local-dimension] applied to $R\\to S$ and $\\mathfrak q$ (lying over $\\mathfrak m$), $\\dim S_{\\mathfrak q}=\\dim R_{\\mathfrak m}=\\dim R$. Hence $n\\le\\dim R$ for every chain, so $\\dim R^{\\mathrm{sh}}\\le\\dim R$.",
+   "uses": [
+    "lem-weil-pbc-strict-henselization-triples",
+    "lem-sc-filtered-colimit-prime-chain-dimension",
+    "lem-sc-etale-local-dimension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Lemma Tag 06LK, proof converse inequality using the filtered etale presentation and Tag 07QP"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sc-strict-henselization-faithfully-flat",
+  "lem-weil-pbc-strict-henselization-triples",
+  "lem-sc-faithfully-flat-local-dimension",
+  "lem-sc-filtered-colimit-prime-chain-dimension",
+  "lem-sc-etale-local-dimension"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Lemma Tag 06LK (Lemma 45.7), proof"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -63,12 +99,37 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-sc-strict-henselization-dvr",
   "by": "worker",
   "date": "2026-10-10"
  },
  "chapter": "sec-curve-estimates",
- "unit": "sk-thm-br"
+ "unit": "sk-thm-br",
+ "split_report": {
+  "date": "2026-10-11",
+  "item": "lem-sc-strict-henselization-dimension",
+  "worker": "stage1",
+  "summary": "Split Tag 06LK into the faithful-flat lower bound and the filtered-etale upper bound. The lower bound cites a generic faithfully-flat local dimension lemma; the upper bound cites the strict-henselization filtered-colimit presentation, contraction of finite prime chains, and étale local dimension invariance.",
+  "blueprint": "The boundary stalk calculation in the proof of lem-sc-brauer-zero: the strict henselization has the same local dimension as the original local ring.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-strict-henselization-triples",
+    "why": "It supplies the filtered étale presentation and locality of the strict henselization used by Tag 06LK."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-strict-henselization-triples",
+  "lem-weil-pbc-strict-henselization-triples"
+ ],
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-shd2114",
+  "group": "M1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-shd2114 (reviewer sub-agent of L); spot-checked: Item vs 06LK; Step 1 and 2 vs cited statements; 00OH/07QP/07QM text; Mathlib grep for going-down dimension (only Noetherian 00ON leaf). FIX more, RETURN less: (1) B class (b): new lem-sc-strict-henselization-faithfully-flat-local duplicates merged lem-sc-strict-henselization-faithfully-flat (07QM(1), states the canonical local map is faithfully flat); dropped, step 1 cites the existing node. (2) C4: step 2 said the triples node presents R^sh by localizations (B_i)_{q_i}; it gives colim of etale S with m_C contracting to q; step rewritten so the contracted chain lies in q and passes to S_q, then 07QP gives dim S_q = dim R. (3) B3: lem-sc-faithfully-flat-local-dimension source 'Tag 112.1' is not a tag; corrected to Algebra Tag 00OH, Mathlib grep recorded. Closed-fibre description not used by this proof, so not needed.; 2 file(s) fixed by the reviewer"
+ }
 }

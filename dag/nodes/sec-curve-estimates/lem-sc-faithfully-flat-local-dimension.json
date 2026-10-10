@@ -1,0 +1,66 @@
+{
+ "id": "lem-sc-faithfully-flat-local-dimension",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-brauer-zero",
+   "place": "the lower bound in the proof of strict henselization dimension: faithful flatness and going down",
+   "via": [
+    "lem-sc-strict-henselization-dimension"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "chapter": "sec-curve-estimates",
+ "unit": "sk-thm-br",
+ "title": "Faithfully flat local maps do not lower Krull dimension",
+ "statement": "Let $A$ and $B$ be local commutative rings and let $A\\to B$ be a faithfully flat local ring homomorphism. Then $\\dim A\\le\\dim B$, where dimension is Krull dimension [def-weil-pbc-krull-dimension-ring].",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Algebra, Lemma Tag 00OH (lemma-dimension-going-up): going down and surjective Spec give dim R <= dim S; flat maps satisfy going down (Tag 00HS) and faithfully flat maps have surjective Spec"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-krull-dimension-ring"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "faithfully flat local homomorphism preserves Krull dimension inequality",
+   "results": "Algebra.HasGoingDown.of_flat; no exact dimension theorem",
+   "date": "2026-10-11",
+   "verdict": "generalization: flatness gives going down, but the stated local-dimension conclusion is not packaged"
+  },
+  {
+   "tool": "loogle",
+   "query": "ringKrullDim, FaithfullyFlat",
+   "results": "0 hits; unknown identifier FaithfullyFlat",
+   "date": "2026-10-11",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "going[ _-]down|ringKrullDim.*flat in Mathlib/RingTheory",
+   "results": "GoingDown.lean:24,104; no direct dimension inequality",
+   "date": "2026-10-11",
+   "verdict": "generalization: going-down infrastructure only"
+  },
+  {
+   "tool": "grep",
+   "query": "HasGoingDown.*(height|ringKrullDim) in Mathlib",
+   "results": "only Ideal.height_eq_height_add_of_liesOver_of_hasGoingDown (KrullsHeightTheorem.lean:462), which needs IsNoetherianRing S",
+   "date": "2026-10-10",
+   "verdict": "generalization only under a Noetherian hypothesis; no leaf for arbitrary local rings"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "created": {
+  "item": "lem-sc-strict-henselization-dimension",
+  "by": "worker",
+  "date": "2026-10-10"
+ }
+}
