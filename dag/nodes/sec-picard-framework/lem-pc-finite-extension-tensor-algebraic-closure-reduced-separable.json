@@ -1,0 +1,76 @@
+{
+ "id": "lem-pc-finite-extension-tensor-algebraic-closure-reduced-separable",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pc-ample-positive-degree",
+   "place": "proof, part (<=): the assertion that the global-sections field k' is separable over k, field-theory criterion in the final step",
+   "via": [
+    "lem-pc-proper-geometrically-reduced-global-sections-separable",
+    "lem-pc-global-sections-separable"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Reduced tensor with an algebraic closure detects separability of a finite field extension",
+ "statement": "Let k be a field, let K/k be a finite field extension [def-pc-field-extension], and let kbar be an algebraic closure of k [def-weil-algebraic-closure]. If K tensor_k kbar is reduced (has no nonzero nilpotent elements), then K/k is separable [def-weil-pbc-separable-field-extension].",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Algebra, Lemma Tag 030W (lemma-characterize-separable-field-extensions), implication (4) => (1), together with Tag 030V (lemma-separable-algebraic-extension)"
+ },
+ "stmt_deps": [
+  "def-pc-field-extension",
+  "def-weil-algebraic-closure",
+  "def-weil-pbc-separable-field-extension"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "finite field extension K/k and K tensor k algebraic closure reduced implies Algebra.IsSeparable k K",
+   "results": "No exact declaration; only Algebra.IsGeometricallyReduced.isReduced_algebraicClosure_tensorProduct and separability criteria in FieldTheory",
+   "date": "2026-10-11",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "IsReduced (K tensor kbar) implies Algebra.IsSeparable k K",
+   "results": "No declaration relating reduced algebraic-closure tensor products to IsSeparable for finite extensions",
+   "date": "2026-10-11",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "rg -n 'IsReduced.*IsSeparable|IsSeparable.*IsReduced|algebraicClosure.*tensor|tensor.*algebraicClosure' /home/ubuntu/weil-src-slopmaster2/.lake/packages/mathlib/Mathlib/FieldTheory /home/ubuntu/weil-src-slopmaster2/.lake/packages/mathlib/Mathlib/RingTheory",
+   "results": "Found geometric-reduced tensor and separability declarations separately, but no converse theorem for finite extensions",
+   "date": "2026-10-11",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "Algebra.IsSeparable, IsReduced, TensorProduct",
+   "results": "no declaration (empty result)",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rn IsGeometricallyReduced and grep -rn IsSeparable | grep -i 'reduced|TensorProduct' in ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib",
+   "results": "only Mathlib/RingTheory/Nilpotent/GeometricallyReduced.lean (IsGeometricallyReduced, isGeometricallyReduced_iff with AlgebraicClosure tensor); no statement deriving Algebra.IsSeparable from reducedness",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "created": {
+  "item": "lem-pc-proper-geometrically-reduced-global-sections-separable",
+  "by": "worker",
+  "date": "2026-10-10"
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-rr"
+}

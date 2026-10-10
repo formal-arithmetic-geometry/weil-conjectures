@@ -25,16 +25,82 @@
   "def-pc-field-extension",
   "def-weil-pbc-separable-field-extension"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "By [lem-pc-euler-characteristic-well-defined] with F=O_X and i=0, A=Gamma(X,O_X) is finite-dimensional over k. Together with the assumed field-extension structure, this says that A/k is a finite field extension.",
+   "uses": [
+    "lem-pc-euler-characteristic-well-defined"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Lemma 0BUG, proof of clause (1), citing Cohomology of Schemes Lemma Tag 02O6"
+   }
+  },
+  {
+   "text": "Choose an algebraic closure kbar of k. The map Spec(kbar) -> Spec(k) is flat, and X is quasi-compact and quasi-separated because X is proper over the affine scheme Spec(k). Hence [lem-weil-pbc-flat-base-change-global-sections-qcqs] identifies A tensor_k kbar with Gamma(X_kbar,O_{X_kbar}).",
+   "uses": [
+    "lem-pc-algebraic-closure-exists-unique",
+    "def-weil-algebraic-closure",
+    "def-weil-flat-morphism",
+    "def-weil-proper-morphism",
+    "lem-weil-pbc-qcqs-over-affine",
+    "lem-weil-pbc-flat-base-change-global-sections-qcqs"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Lemma 0BUG, proof of clause (4), lines 1980-1984, citing Cohomology of Schemes Lemma Tag 02KH"
+   }
+  },
+  {
+   "text": "Geometric reducedness means that X_kbar is reduced. A nilpotent global section of a reduced scheme is zero because its image in every stalk is nilpotent and every stalk is reduced; therefore Gamma(X_kbar,O_{X_kbar}) is reduced. By step 2, A tensor_k kbar is reduced.",
+   "uses": [
+    "def-pc-geometrically-irreducible",
+    "def-pc-reduced-scheme"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Lemma 0BUG, proof of clause (4), lines 1980-1986"
+   }
+  },
+  {
+   "text": "Apply [lem-pc-finite-extension-tensor-algebraic-closure-reduced-separable] to the finite extension A/k from step 1 and the reduced tensor product from step 3. It follows that A/k is separable, which is the claimed conclusion.",
+   "uses": [
+    "lem-pc-finite-extension-tensor-algebraic-closure-reduced-separable"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Lemma 0BUG, proof of clause (4), final sentence, using Algebra Lemmas Tags 030W and 030V"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-euler-characteristic-well-defined",
+  "lem-pc-algebraic-closure-exists-unique",
+  "def-weil-algebraic-closure",
+  "def-weil-flat-morphism",
+  "def-weil-proper-morphism",
+  "lem-weil-pbc-qcqs-over-affine",
+  "lem-weil-pbc-flat-base-change-global-sections-qcqs",
+  "def-pc-geometrically-irreducible",
+  "def-pc-reduced-scheme",
+  "lem-pc-finite-extension-tensor-algebraic-closure-reduced-separable"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/varieties.tex",
+  "place": "Lemma 0BUG (lemma-proper-geometrically-reduced-global-sections), proof of clauses (1), (3) and (4), literature/stacks-project/varieties.tex lines 1933-1988"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
    "query": "proper geometrically reduced scheme global sections field extension is separable",
    "results": "service unavailable (HTTP 500); no result",
    "date": "2026-10-11",
-   "verdict": "no match"
+   "verdict": "unavailable"
   },
   {
    "tool": "loogle",
@@ -52,12 +118,29 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-pc-global-sections-separable",
   "by": "worker",
   "date": "2026-10-10"
  },
  "chapter": "sec-picard-framework",
- "unit": "sk-thm-picard-rr"
+ "unit": "sk-thm-picard-rr",
+ "split_report": {
+  "date": "2026-10-11",
+  "item": "lem-pc-proper-geometrically-reduced-global-sections-separable",
+  "worker": "stage1",
+  "summary": "Repaired the returned split by deleting the non-smaller product-decomposition helper and rewriting the proof in four source-driven steps: finite-dimensional H^0, flat base change, reducedness after geometric base change, and the finite-extension separability criterion. Added one precise statement-only field-theory node for the missing 030W/030V converse. Read the Stacks proof in literature/stacks-project/varieties.tex lines 1933-1988.",
+  "blueprint": "The four steps realize the parent blueprint proof's assertion that the global-sections field k' is separable over k in the (<=) part of lem-pc-ample-positive-degree.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-pgr1659",
+  "group": "F1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-pgr1659 (reviewer sub-agent of L); spot-checked: Repaired re-push after the 16:45 return. Point 1 repaired: the product node is gone; the proof follows Stacks 0BUG (varieties.tex 1933-1988, lemma-proper-geometrically-reduced-global-sections) clauses (1),(3),(4): step 1 lem-pc-euler-characteristic-well-defined (F=O_X, i=0) gives dim_k A finite; step 2 lem-weil-pbc-flat-base-change-global-sections-qcqs with Spec kbar->Spec k flat and X qcqs by lem-weil-pbc-qcqs-over-affine (hypotheses checked against the statements); step 3 X_kbar reduced by def-pc-geometrically-irreducible (k'=kbar), Gamma reduced by def-pc-reduced-scheme; step 4 new node. New node lem-pc-finite-extension-tensor-algebraic-closure-reduced-separable checked against Stacks 030W (4)=>(1) with 030V (4)=>(5) (algebra.tex 10360, 10425): true (char 0 trivial; char p via k^{1/p} in kbar), finite hypothesis harmless; with def-weil-pbc-separable-field-extension a finite separable algebraic extension is separably generated with empty basis. My Mathlib check (pushed 16:57 UTC, before 17:00): loogle 'Algebra.IsSeparable, IsReduced, TensorProduct' empty; grep finds only RingTheory/Nilpotent/GeometricallyReduced.lean, no separability converse: stays unsplit. Point 2 repaired in proof_origin.document/step sources; the report still names a nonexistent path /home/ubuntu/c1-stacks-review. FIX more, RETURN less / fixes: dag/nodes/sec-picard-framework/lem-pc-proper-geometrically-reduced-global-sections-separable.json: statement: restored the committed TeX statement (the delivery rewrote it to plain text without naming an E7 change; mathematics identical); mathlib_searches[0]: restored results 'service unavailable (HTTP 500)' and verdict 'unavailable' (the delivery had rewritten it to 'No exact declaration'); proof_origin.place and split_report.summary: path replaced by literature/stacks-project/varieties.tex. dag/nodes/sec-picard-framework/lem-pc-finite-extension-tensor-algebraic-closure-reduced-separable.json: mathlib_searches: added my loogle and grep records. Start 2026-10-10 16:58:45 UTC (Sat Oct 10 04:58:45 PM UTC 2026), end Sat Oct 10 04:59:31 PM UTC 2026.; 2 file(s) fixed by the reviewer"
+ },
+ "lead_note": "2026-10-10 L (R-pgr1659): Source of lem-pc-finite-extension-tensor-algebraic-closure-reduced-separable names Tag 030V with the wrong label (lemma-separable-algebraic-extension); 030V is algebra-lemma-geometrically-reduced-finite-purely-inseparable-extension (algebra.tex 10425)."
 }
