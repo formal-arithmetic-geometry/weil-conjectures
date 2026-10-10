@@ -24,9 +24,63 @@
   "def-weil-pbc-fpqc-covering",
   "lem-sc-etale-qcoherent-presheaf-functorial"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Put $N=f^*\\mathcal F$, a quasi-coherent $\\mathcal O_T$-module by [lem-weil-pbc-module-pullback-quasi-coherent], and identify $g_i^*N$ with $f_i^*\\mathcal F$ by [lem-sc-etale-qcoherent-presheaf-functorial]. A section $s_i$ determines the $\\mathcal O_{T_i}$-linear map $\\varphi_i:\\mathcal O_{T_i}\\to g_i^*N$, $a\\mapsto a s_i$. Conversely an $\\mathcal O_{T_i}$-linear sheaf map from $\\mathcal O_{T_i}$ is determined by its value at $1$ on every open, since $\\varphi_i(a)=a\\varphi_i(1)$ and the local values of $1$ are restrictions of the global $1$. Thus sections and such module maps correspond, compatibly with pullback; the source is the structure sheaf under pullback by [lem-weil-pbc-module-pullback-structure-sheaf].",
+   "uses": [
+    "lem-weil-pbc-module-pullback-quasi-coherent",
+    "lem-weil-pbc-module-pullback-structure-sheaf",
+    "lem-sc-etale-qcoherent-presheaf-functorial",
+    "def-weil-sheaf-of-modules-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/descent.tex",
+    "place": "Tag 03DT, proof of lemma-sheaf-condition-holds, sentence reinterpreting the sections as maps from the structure sheaf"
+   }
+  },
+  {
+   "text": "On $T_i\\times_T T_j$, the two pullbacks of $\\varphi_i$ and $\\varphi_j$ are maps from the structure sheaf to the common pullback of $N$. Their values at $1$ are the two pullbacks of $s_i$ and $s_j$, equal by hypothesis; by the correspondence in step 1 the maps agree. These maps therefore form a morphism between the canonical descent data on $\\mathcal O_T$ and $N$ for the fpqc family $\\{g_i\\}$.",
+   "uses": [
+    "lem-sc-etale-qcoherent-presheaf-functorial",
+    "def-pc-fibre-product",
+    "def-weil-sheaf-of-modules-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/descent.tex",
+    "place": "Tag 03DT, proof of lemma-sheaf-condition-holds, compatibility with the canonical descent data"
+   }
+  },
+  {
+   "text": "Apply the full faithfulness clause of [lem-pc-fpqc-descent] (Stacks 023T) to the fpqc covering $\\{g_i:T_i\\to T\\}$ [def-weil-pbc-fpqc-covering] and to the two quasi-coherent modules $\\mathcal O_T$ and $N$. The compatible maps $\\varphi_i$ descend to a unique $\\mathcal O_T$-linear map $\\varphi:\\mathcal O_T\\to N$ whose pullbacks are $\\varphi_i$. Set $s=\\varphi_T(1)$. Step 1 shows that its pullback to each $T_i$ is $s_i$. If $s'$ has the same pullbacks, the associated map $a\\mapsto as'$ has the same pullbacks as $\\varphi$ and hence equals $\\varphi$ by faithfulness; evaluating at $1$ gives $s'=s$.",
+   "uses": [
+    "lem-pc-fpqc-descent",
+    "def-weil-pbc-fpqc-covering",
+    "def-weil-sheaf-of-modules-category",
+    "lem-sc-etale-qcoherent-presheaf-functorial"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/descent.tex",
+    "place": "Tag 03DT, proof of lemma-sheaf-condition-holds, final three sentences; Tag 023T, proposition-fpqc-descent-quasi-coherent, full faithfulness clause"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-module-pullback-quasi-coherent",
+  "lem-weil-pbc-module-pullback-structure-sheaf",
+  "lem-sc-etale-qcoherent-presheaf-functorial",
+  "def-weil-sheaf-of-modules-category",
+  "def-pc-fibre-product",
+  "lem-pc-fpqc-descent",
+  "def-weil-pbc-fpqc-covering"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/descent.tex",
+  "place": "Tag 03DT (lemma-sheaf-condition-holds), proof via Tag 023T (proposition-fpqc-descent-quasi-coherent)"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -51,10 +105,36 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-sc-etale-qcoherent-descent"
  },
  "chapter": "sec-curve-estimates",
- "unit": "sk-prop-h2"
+ "unit": "sk-prop-h2",
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "lem-sc-etale-qcoherent-descent-fpqc-sections",
+  "worker": "stage1",
+  "summary": "Checked the fpqc case of Stacks 03DT against 023T. A section of a pulled-back quasi-coherent module is a map from the structure sheaf; compatibility on pairwise fibre products makes the maps a morphism of descent data. Full faithfulness in 023T descends the map uniquely. No new nodes are needed: lem-pc-fpqc-descent states the required full faithfulness. The two sorry-free Lean theorems in FpqcSections.lean concern sieve-form existence and uniqueness separately and do not state this family-cover item exactly.",
+  "blueprint": "The steps realize the fpqc descent argument in the proof sentence of lem-sc-etale-qcoherent-descent: 'quasi-coherent modules descend along the etale topology', by the fpqc case of Stacks 03DT and its citation of 023T.",
+  "tool_uses": [
+   {
+    "node": "lem-pc-fpqc-descent",
+    "why": "Its general fpqc full faithfulness for quasi-coherent modules is the external descent input used by Stacks 03DT; no node of unit sk-prop-h2 gives it."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-module-pullback-quasi-coherent",
+  "lem-pc-fpqc-descent"
+ ],
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-eqs",
+  "group": "E1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-eqs (reviewer sub-agent of L); spot-checked: Source: Stacks 03DT (descent.tex label lemma-sheaf-condition-holds, lines 2158-2191), fpqc case; the node's statement (unchanged, committed) agrees with it hypothesis by hypothesis: f:T->S, F quasi-coherent on S, fpqc covering {T_i->T}, s_i in Gamma(T_i,f_i^*F) agreeing on T_i x_T T_j, unique s. Step 1 (sections <-> O-linear maps from the structure sheaf, a|->as, phi|->phi(1)) is elementary from def-weil-sheaf-of-modules-category, with quasi-coherence of f^*F carried by lem-weil-pbc-module-pullback-quasi-coherent and g^*O_T=O_{T_i} by lem-weil-pbc-module-pullback-structure-sheaf (Mathlib leaf, epsilon_g iso), composition isomorphisms from lem-sc-etale-qcoherent-presheaf-functorial. Step 2 (compatible sections give a morphism of the canonical descent data on T_i x_T T_j) is elementary from step 1 and def-pc-fibre-product. Step 3 uses clause 1 of lem-pc-fpqc-descent (equivalence, hence fully faithful, for an fpqc covering per def-weil-pbc-fpqc-covering), applied to O_T (quasi-coherent by definition pqf-def-coherent) and N; existence via phi(1), uniqueness via faithfulness; this is the 03DT/023T route. Tool uses: accepted the declared lem-pc-fpqc-descent (generic 023T, unit sk-thm-picard-descent); FIX: added lem-weil-pbc-module-pullback-quasi-coherent (unit sk-thm-p1, unsplit, a generic black-box fact) to tool_uses, which the worker had not declared. B10: the two FpqcSections.lean declarations are sieve-form (sections on every arrow of a sieve restricting to an fpqc cover of an open O, compatibility under all further pullbacks), existence and uniqueness separate; they do not state this family-form node exactly, so no attachment. Small cases: singleton identity cover gives s=s_1; empty T with empty cover gives the unique zero section. No new nodes, no Mathlib leaves. Start Sat Oct 10 03:00:44 PM UTC 2026, end Sat Oct 10 03:01:37 PM UTC 2026."
+ },
+ "lead_note": "2026-10-10 L (R-eqs): Not attached to AlgebraicGeometry.Scheme.Modules.exists_sections_of_mem_fpqcTopology / sections_ext_of_mem_fpqcTopology (FpqcSections.lean 199-295, both sorry-free per sorryfree.py): they take sections indexed by every arrow of a sieve whose restriction to an open O is in Scheme.fpqcTopology, compatible under every further pullback, and split existence and uniqueness; the node takes a family {g_i} with pairwise fibre-product compatibility, so passing from the family to the generated sieve (extending and checking well-definedness of sections) is real work and B10 does not apply. They remain the natural Lean route for this node."
 }
