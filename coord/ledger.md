@@ -2518,3 +2518,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 20:28 L: merged deliver/H1/lem-pc-derived-limit-milnor-sequence (reviewer FIX+NODE(1); first push; new nodes: 2)
 - 20:28 L: merged deliver/H1/lem-pc-affine-morphism-hi (reviewer PASS; after a return; new nodes: 0)
 - 20:28 L: merged deliver/C1/lem-sc-etale-local-dimension (reviewer PASS; first push; new nodes: 0)
+- 20:29 L: merged deliver/C1/pqf-lem-incomparability (reviewer FIX; first push; new nodes: 0)

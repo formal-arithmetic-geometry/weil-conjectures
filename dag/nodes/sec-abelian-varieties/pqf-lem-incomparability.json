@@ -3,7 +3,7 @@
  "blueprint": {
   "is": "pqf-lem-incomparability",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "Incomparability for an integral extension",
@@ -13,22 +13,57 @@
   "place": "node pqf-lem-incomparability, order 532"
  },
  "stmt_deps": [],
- "proof": [
-  {
-   "text": "Suppose $\\mathfrak q\\subseteq\\mathfrak q'$ have common contraction\n$\\mathfrak p$. Quotient by $\\mathfrak q$ and localize at the nonzero\nelements of $A/\\mathfrak p$. The resulting domain is integral over the\nfield $K=\\operatorname{Frac}(A/\\mathfrak p)$, hence is itself a field:\nfor a nonzero integral element $x$, an integral equation of least degree\nhas nonzero constant term and expresses $x^{-1}$ as a polynomial in\n$x$. The localization of $\\mathfrak q'/\\mathfrak q$ is therefore\nzero. If $b\\in\\mathfrak q'$, some $s\\in A\\setminus\\mathfrak p$ has\n$sb\\in\\mathfrak q$. Since $s\\notin\\mathfrak q$ and $\\mathfrak q$ is\nprime, $b\\in\\mathfrak q$. Thus $\\mathfrak q'=\\mathfrak q$.",
-   "uses": [],
-   "elementary": null
-  }
- ],
+ "proof": [],
  "proof_deps": [],
  "proof_origin": {
-  "by": "agent",
+  "by": "document",
   "document": "literature/blueprint/master/blueprint/sec-abelian-varieties/sk-prop-av-pqf-finite/pqf-lem-incomparability.md",
-  "place": "## Proof"
+  "place": "node statement; Mathlib generalization"
  },
- "mathlib_searches": [],
- "mathlib_match": null,
- "status": "imported",
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "integral extension comparable prime ideals with equal contraction are equal",
+   "results": "Ideal.exists_ideal_over_prime_of_isIntegral_of_isPrime; Ideal.exists_ideal_over_prime_of_isIntegral; Ideal.exists_ideal_over_prime_of_isIntegral_of_isDomain; Ideal.nonempty_primesOver; Ideal.primesOver.isPrime (Mathlib/RingTheory/Ideal/GoingUp)",
+   "date": "2026-10-11",
+   "verdict": "match via the comap_lt_comap family; the exact declaration was confirmed by grep"
+  },
+  {
+   "tool": "loogle",
+   "query": "Ideal.IsIntegral.comap_lt_comap, Ideal.comap",
+   "results": "0 hits",
+   "date": "2026-10-11",
+   "verdict": "no direct hit for this spelling"
+  },
+  {
+   "tool": "grep",
+   "query": "comap_lt_comap|incomparability in Mathlib/RingTheory/Ideal",
+   "results": "Mathlib/RingTheory/Ideal/GoingUp.lean:160 Ideal.comap_lt_comap_of_integral_mem_sdiff; :221 Ideal.IsIntegral.comap_lt_comap",
+   "date": "2026-10-11",
+   "verdict": "match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "For an integral ring map, strict inclusion of prime ideals gives strict inclusion of contractions",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-11",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "grep",
+   "query": "eq_of_le_of_liesOver|eq_of_comap_eq_comap|incompar|comap_eq_of_le in Mathlib/RingTheory",
+   "results": "no equality-form incomparability lemma for integral maps (only Ideal.eq_of_comap_eq_comap_of_bijective_residueFieldMap, unrelated); Ideal.IsIntegral.comap_lt_comap at GoingUp.lean:221 confirmed by sed",
+   "date": "2026-10-11",
+   "verdict": "match (reviewer R-pin2313)"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "Ideal.IsIntegral.comap_lt_comap",
+  "file": "Mathlib/RingTheory/Ideal/GoingUp.lean",
+  "line": 221,
+  "how": "specializes in one line: an integral map A -> B supplies Algebra A B and Algebra.IsIntegral A B; the theorem says q < q' implies q.comap (algebraMap A B) < q'.comap (algebraMap A B), whose contrapositive gives equality of comparable primes with the same contraction"
+ },
+ "status": "mathlib",
  "merged_into": null,
  "import_flags": [],
  "blueprint_kind": "lemma",
@@ -48,5 +83,21 @@
   }
  },
  "chapter": "sec-abelian-varieties",
- "unit": "sk-prop-av-pqf-finite"
+ "unit": "sk-prop-av-pqf-finite",
+ "split_report": {
+  "date": "2026-10-11",
+  "item": "pqf-lem-incomparability",
+  "worker": "stage1",
+  "summary": "The item is a Mathlib leaf. Ideal.IsIntegral.comap_lt_comap in Mathlib/RingTheory/Ideal/GoingUp.lean:221-224 states that strict inclusion of prime ideals in an integral algebra induces strict inclusion of their contractions; taking the contrapositive yields the item's incomparability formulation. The existing DAG leaf lem-weil-pbc-integral-incomparability records the same result, so no new node was created.",
+  "blueprint": "Realizes the complete proof paragraph: the localization argument is replaced by Mathlib's general strict-contraction theorem, with the final equality obtained by contrapositive.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-pin2313",
+  "group": "C1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-pin2313 (reviewer sub-agent of L); spot-checked: Read Ideal.IsIntegral.comap_lt_comap at Mathlib/RingTheory/Ideal/GoingUp.lean:221-224 (Algebra.IsIntegral R A, I prime, I<J gives strict comap): contrapositive is the item, one-line specialization (B8 ok); no equality-form lemma in Mathlib (grep recorded). FIX more, RETURN less: mathlib_match lacked the line field, added line 221; added reviewer grep search to mathlib_searches.; 1 file(s) fixed by the reviewer"
+ }
 }
