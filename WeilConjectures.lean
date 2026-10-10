@@ -51,6 +51,7 @@ public import WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage
 public import WeilConjectures.AlgebraicGeometry.Cohomology.DualityPairing
 public import WeilConjectures.AlgebraicGeometry.Cohomology.EulerChar
 public import WeilConjectures.AlgebraicGeometry.Cohomology.Exact
+public import WeilConjectures.AlgebraicGeometry.Cohomology.InjectiveFlasque
 public import WeilConjectures.AlgebraicGeometry.Cohomology.LongExact
 public import WeilConjectures.AlgebraicGeometry.Cohomology.Projective
 public import WeilConjectures.AlgebraicGeometry.Cohomology.ProjectiveLine
@@ -1124,6 +1125,7 @@ public import WeilConjectures.Mathlib.Topology.KrullDimension
 public import WeilConjectures.Mathlib.Topology.Maps.Basic
 public import WeilConjectures.Mathlib.Topology.NoetherianSpace
 public import WeilConjectures.Mathlib.Topology.Sets.Opens
+public import WeilConjectures.Mathlib.Topology.Sheaves.Flasque
 public import WeilConjectures.Mathlib.Topology.Sheaves.Presheaf
 public import WeilConjectures.Mathlib.Topology.Sober
 public import WeilConjectures.Mathlib.Topology.Spectral.ConstructibleTopology
