@@ -1,8 +1,8 @@
 # Work queue
 
-858 items; claim with `tools/claim.py next <group> [--stage N]`.
+857 items; claim with `tools/claim.py next <group> [--stage N]`.
 
-## Stage 1: nodes to split (372)
+## Stage 1: nodes to split (370)
 
 | node | distance to a target | Lean state on the done branch |
 |---|---|---|
@@ -52,9 +52,7 @@
 | `def-weil-pbc-finite-split-hypercover` | 3006 | none |
 | `lem-galois-aut-profinite` | 3006 | none |
 | `lem-galois-inverse-image-representable` | 3006 | none |
-| `lem-pc-presheaf-module-inverse-image-adjunction` | 3006 | none |
 | `lem-sc-flat-base-change-coherent` | 3006 | sorry_here |
-| `lem-weil-pbc-hypercover-finite-simplex-lifting` | 3006 | none |
 | `lem-weil-pbc-hypercover-free-resolution` | 3006 | none |
 | `def-sc-divisor` | 3007 | none |
 | `def-weil-pbc-semi-representable-object` | 3007 | none |
@@ -379,7 +377,7 @@
 | `def-exc-jacobian-presentation` | - | none |
 | `lem-zl-noether-normalization-dimension` | - | none |
 
-## Stage 2: nodes to state (486)
+## Stage 2: nodes to state (487)
 
 | node | distance to Mathlib | kind |
 |---|---|---|
@@ -427,6 +425,7 @@
 | `lem-pc-linear-pair-graded-finite` | 1 | state |
 | `lem-pc-linear-pair-morphism-finite` | 1 | state |
 | `lem-pc-presheaf-change-of-rings-adjunction` | 1 | state |
+| `lem-pc-presheaf-module-inverse-image-adjunction` | 1 | state |
 | `lem-pc-projective-curve-linear-pair` | 1 | state |
 | `lem-sc-affine-open-finite-complement` | 1 | state |
 | `lem-sc-dim0-finite` | 1 | state |
@@ -870,7 +869,7 @@
 | `lem-weil-pbc-p1-field-dimension-one` | 4 | state |
 | `lem-weil-pbc-projective-space-zero-isomorphism` | 4 | state |
 
-Not open yet: 390 nodes that wait for stage 1, 906 nodes that wait for a statement dependency.
+Not open yet: 388 nodes that wait for stage 1, 907 nodes that wait for a statement dependency.
 
 ## Stage 3: modules to prove (0)
 
