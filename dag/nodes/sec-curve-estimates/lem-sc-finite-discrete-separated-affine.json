@@ -26,9 +26,27 @@
   "def-weil-proper-morphism",
   "def-weil-affine-spectrum"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "The hypotheses give a scheme with finite discrete underlying space. Applying [lem-weil-pbc-finite-discrete-scheme-affine], whose statement asserts that every scheme with finite discrete underlying space is affine, proves that $Y$ is affine.",
+   "uses": [
+    "lem-weil-pbc-finite-discrete-scheme-affine"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/properties.tex",
+    "place": "Properties Lemma 0CKV (properties-lemma-dimension-zero), final assertion"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-finite-discrete-scheme-affine"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/properties.tex",
+  "place": "Properties Lemma 0CKV (properties-lemma-dimension-zero), final assertion"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -53,7 +71,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-sc-zero-dim-noetherian-affine",
   "by": "worker",
@@ -66,5 +84,21 @@
   "file": "Mathlib/AlgebraicGeometry/Limits.lean",
   "line": 700,
   "reason": "States that a scheme with finite discrete underlying space is affine, without the quasi-compact and separated hypotheses; the node is the immediate consequence (the next split should make it a Mathlib leaf or prove it in one step from this declaration)."
+ },
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "lem-sc-finite-discrete-separated-affine",
+  "worker": "stage1",
+  "summary": "Split the finite-discrete separated affineness criterion into one application of the existing stronger finite-discrete scheme affineness node. The existing node is a Mathlib leaf backed by the finite/discrete IsAffine instance.",
+  "blueprint": "Realizes the zero-dimensional component case in the parent blueprint proof by applying the quasi-compact separated dimension-zero affineness criterion.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-fds",
+  "group": "F1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-fds (reviewer sub-agent of L); spot-checked: Source: Stacks 0CKV (properties.tex label lemma-dimension-zero, line 1303), final assertion 'if X is quasi-compact (and separated, dimension zero) then X is affine'; the item's statement is unchanged and is the finite-discrete special case (finite discrete => dimension zero), hypotheses quasi-compact, separated over Spec Z, |Y| finite discrete, conclusion affine. Delivery touches only the item node and the report, one commit, no new nodes; only proof/proof_deps/proof_origin/status/split_report changed. Step 1 is carried entirely by the statement of lem-weil-pbc-finite-discrete-scheme-affine (sec-proper-base-change, status mathlib): any scheme with finite discrete underlying space is affine; its hypothesis is exactly the item's finite-discrete hypothesis, the quasi-compact and separated hypotheses are unused, and its conclusion (X -> Spec Gamma iso, def-weil-affine-spectrum) is the item's 'affine'. This is the expected specialization of the Mathlib instance AlgebraicGeometry.instIsAffineOfFiniteOfDiscreteTopologyCarrierCarrierCommRingCat, verified at Mathlib/AlgebraicGeometry/Limits.lean:700 ([Finite X] [DiscreteTopology X] : IsAffine X); no re-proof from scratch, so not B10-like. The cited node is off-unit (sk-thm-p1) but a generic Mathlib leaf used as a black box (C8 acceptable, no tool_uses needed). Small cases: empty scheme, Spec of a local Artinian ring, finite disjoint union of such: all affine, consistent. Report names the source and checked statements (F); it mentions a citations.json not in the commit, harmless. Start Sat Oct 10 03:22:06 PM UTC 2026, end Sat Oct 10 03:22:34 PM UTC 2026."
  }
 }
