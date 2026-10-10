@@ -15,7 +15,7 @@
  },
  "kind": "statement",
  "title": "Contracted powers of a Zariski torsor form an extension",
- "statement": "Let X be a scheme [def-pc-scheme] and G an abelian sheaf on the small Zariski site X_Zar [def-sc-zariski-site]. For a G-torsor T [def-sc-gm-torsor], the sheaf coproduct E = coproduct over n in Z of the contracted powers T^{\\otimes n} (iterated contracted products as in [lem-sc-torsor-h1]), with T^{\\otimes 0}=G and negative powers formed from the inverse torsor, has an abelian-sheaf structure by concatenation. The exponent map E \\to Z_X is a short exact sequence of abelian sheaves [def-sc-topological-abelian-cohomology] 0 \\to G \\to E \\to Z_X \\to 0, and its fibre over 1 is canonically T.",
+ "statement": "Let X be a scheme [def-pc-scheme] and G an abelian sheaf on the small Zariski site X_{\\mathrm{Zar}} [def-sc-zariski-site]. For a G-torsor T [def-sc-gm-torsor], let E be the sheaf coproduct over n\\in\\mathbf Z of the contracted powers T^{\\otimes n} of [lem-sc-zariski-contracted-power-torsor]. The canonical torsor isomorphisms T^{\\otimes m}\\wedge T^{\\otimes n}\\cong T^{\\otimes(m+n)} induce an abelian-sheaf structure on E. The exponent map E\\to\\mathbf Z_X is a short exact sequence of abelian sheaves [def-sc-topological-abelian-cohomology] 0\\to G\\to E\\to\\mathbf Z_X\\to0, and its fibre over 1 is canonically T.",
  "source": {
   "document": "literature/stacks-project/cohomology.tex",
   "place": "Lemma 02FQ (cohomology-lemma-torsors-h1), construction of the extension by contracted powers"
@@ -25,11 +25,57 @@
   "def-sc-zariski-site",
   "def-sc-gm-torsor",
   "def-sc-topological-abelian-cohomology",
-  "lem-sc-torsor-h1"
+  "lem-sc-zariski-contracted-power-torsor"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Form the sheaf coproduct E=\\coprod_{n\\in\\mathbf Z}T^{\\otimes n}, using the integer powers of [lem-sc-zariski-contracted-power-torsor]. A local section of E is locally in one summand. For local sections a of degree m and b of degree n, define a+b=\\mu_{m,n}([a,b]), where [a,b] is their class in the contracted product defined by [lem-sc-torsor-h1]; these local formulas agree under restriction and glue to addition on E. The zero is 0 in the degree-zero summand G. For a local section a of degree n, the torsor isomorphism \\mu_{n,-n}:T^{\\otimes n}\\wedge T^{\\otimes(-n)}\\cong G gives the unique local section a' of T^{\\otimes(-n)} for which \\mu_{n,-n}([a,a'])=0; define -a=a'. The unit, associativity and commutativity laws, and the inverse identity, follow from the unital, associative and commutative \\mu_{m,n} and their inverse-power pairing in [lem-sc-zariski-contracted-power-torsor].",
+   "uses": [
+    "lem-sc-zariski-contracted-power-torsor",
+    "lem-sc-torsor-h1"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-curve-estimates/sk-prop-hilbert90/lem-sc-torsor-h1.md",
+    "place": "Worker's argument from the contracted-product operation; Stacks 02FQ does not construct E by contracted powers"
+   }
+  },
+  {
+   "text": "Define p:E\\to\\mathbf Z_X by sending the summand T^{\\otimes n} to n. It is a homomorphism because the maps \\mu_{m,n} add degrees [lem-sc-zariski-contracted-power-torsor]. Each power is a torsor by the same node, hence locally nonempty by [def-sc-gm-torsor], so p is locally surjective and therefore an epimorphism of sheaves. On local sections, the kernel consists precisely of the degree-zero summand T^{\\otimes0}=G; its inclusion identifies G with ker(p). Thus 0\\to G\\to E\\xrightarrow{p}\\mathbf Z_X\\to0 is short exact in abelian sheaves [def-sc-topological-abelian-cohomology].",
+   "uses": [
+    "lem-sc-zariski-contracted-power-torsor",
+    "def-sc-gm-torsor",
+    "def-sc-topological-abelian-cohomology"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-curve-estimates/sk-prop-hilbert90/lem-sc-torsor-h1.md",
+    "place": "Worker's local-section argument for the exponent map and exactness; not the pushout argument of Stacks 02FQ"
+   }
+  },
+  {
+   "text": "The fibre of p over the global section 1 consists exactly of the degree-one summand T^{\\otimes1}, which is T by [lem-sc-zariski-contracted-power-torsor]. Addition by the degree-zero summand G is the original torsor action by its unit constraint, so this fibre is canonically T.",
+   "uses": [
+    "lem-sc-zariski-contracted-power-torsor"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-curve-estimates/sk-prop-hilbert90/lem-sc-torsor-h1.md",
+    "place": "Worker's degree-one fibre calculation; Stacks 02FQ identifies the fibre of its different pushout extension"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sc-torsor-h1",
+  "def-sc-gm-torsor",
+  "def-sc-topological-abelian-cohomology",
+  "lem-sc-zariski-contracted-power-torsor"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/master/blueprint/sec-curve-estimates/sk-prop-hilbert90/lem-sc-torsor-h1.md",
+  "place": "Worker's contracted-power construction; Stacks 02FQ constructs the extension by a pushout instead"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -54,12 +100,27 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-sc-zariski-ext-torsor",
   "by": "worker",
   "date": "2026-10-10"
  },
  "chapter": "sec-curve-estimates",
- "unit": "sk-thm-curveestimate"
+ "unit": "sk-thm-curveestimate",
+ "split_report": {
+  "date": "2026-10-11",
+  "item": "lem-sc-zariski-contracted-power-extension",
+  "worker": "stage1",
+  "summary": "Repaired the contracted-power construction: the supporting node now states coherent torsor isomorphisms for all integer powers, including inverse powers; the first step defines addition and inverses on local sections, the next two establish exactness and the degree-one fibre. This is the worker's argument, not the pushout proof in Stacks 02FQ. The later Zariski extension node cites this item, so it is not used here.",
+  "blueprint": "The three steps realize the ancestor blueprint clause 'the representative-level torsor class used for naturality, namely the extension built from contracted powers of a torsor'."
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-zcp1727",
+  "group": "M1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-zcp1727 (reviewer sub-agent of L); spot-checked: Earlier return points: (1) new node lem-sc-zariski-contracted-power-torsor restated with inverse torsor, contracted powers, mu_{m,n} unital/associative/commutative incl. T wedge T^{-1} = G; checked antidiagonal equivariance and that swap is the identity on T wedge T for abelian G, so the statement is true; (2) step 1 now takes mu and its laws from the new node, lem-sc-torsor-h1 only for wedge, group law written on local sections; (3) proof_origin and the three step sources corrected, citations.json gone from report. Steps 2-3 (exactness, fibre over 1) correct; no cycle with lem-sc-zariski-ext-torsor; new node not a duplicate of the 02FQ-tagged nodes, Mathlib grep 'contracted product|Torsor.*Sheaf|SheafTorsor' no match. FIX more, RETURN less: item source.place still claimed 02FQ constructs the extension by contracted powers (rest of return point 3, report says it was corrected but it was not); rewritten to name the extension of 02FQ, built there by pushout, contracted-power construction the worker's.; 1 file(s) fixed by the reviewer"
+ }
 }

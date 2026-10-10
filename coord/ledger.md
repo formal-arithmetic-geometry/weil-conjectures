@@ -2104,3 +2104,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 17:11 L: merged deliver/H1/lem-sc-smooth-proper-relative-dualizing-general (reviewer FIX+NODE(1); after a return; new nodes: 6)
 - 17:26 L: 30th account limit ~17:12 (R-srd1706 merged before; R-ndr1710, R-ncv1711, R-dva1711, R-qfo1712 cut off); REVIEW PACKET IN USE; REVIEW BEHIND 33, eight packet reviewers
 - 17:27 L: merged deliver/F1/lem-sc-p1-boundary-extension-composition (reviewer PASS; after a return; new nodes: 3)
+- 17:27 L: merged deliver/M1/lem-sc-zariski-contracted-power-extension (reviewer FIX; after a return; new nodes: 1)
