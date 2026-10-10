@@ -7,7 +7,7 @@
    "place": "step 6, 7, 9, 10 of its split (source: Proposition 1.1.9, third bullet, p. 3 (the lcc sheaves F_m correspond to the finite pi_1-modules Lambda/m^m Lambda); Milne LEC, Section 19, p. 125 ('to give a locally constant sheaf M on a connected variety X is to give a finitely generated Z_l-module M together with a continuous action of pi_1(X, x)'); Weil II (1.1.1) b), p. 146)",
    "via": []
   },
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "Adic systems of finite modules over a complete discrete valuation ring",
@@ -19,9 +19,88 @@
  "stmt_deps": [
   "def-weil-l-adic-coefficient-extension"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Apply the adic-tower reconstruction lemma to A=O_E and the finitely generated principal ideal I=(varpi_E). It gives M/varpi_E^n M isomorphic to M_n for every n, identifies the inverse-limit topology with the varpi_E-adic topology, and in particular makes M separated.",
+   "uses": [
+    "lem-pod-adic-tower-reconstruction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Lemma 09B8 (lemma-limit-complete), statement and proof"
+   }
+  },
+  {
+   "text": "The coefficient-extension completeness result gives that E is complete. A Cauchy sequence in O_E is therefore convergent in E, and its limit remains in O_E because O_E is the closed unit ball for the nonarchimedean absolute value; hence O_E is complete for the varpi_E-adic topology, which is the m_E-adic topology for a uniformizer. Since M/varpi_E M is the finite A_{E,1}-module M_1 and M is separated by Step 1, Lemma 031D applies and shows M is finitely generated over O_E.",
+   "uses": [
+    "def-weil-l-adic-coefficient-extension",
+    "lem-weil-l-adic-extension-complete",
+    "lem-weil-pbc-finite-over-complete-ring"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Lemma 031D (lemma-finite-over-complete-ring)"
+   }
+  },
+  {
+   "text": "Conversely, for finitely generated M, O_E is Noetherian because it is a discrete valuation ring, and it is complete for (varpi_E) by the argument in Step 2. The finite-module-completeness lemma therefore gives M isomorphic to lim_n M/varpi_E^n M. The canonical quotient maps induce the required isomorphisms between successive reductions, so this is a system as in (1), and M is complete and separated.",
+   "uses": [
+    "def-weil-l-adic-coefficient-extension",
+    "lem-weil-l-adic-extension-complete",
+    "lem-weil-pbc-finite-module-complete-over-complete-noetherian"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Lemma 031B (lemma-when-finite-module-complete-over-complete-ring) and Lemma 09B8"
+   }
+  },
+  {
+   "text": "An O_E-linear map f:M\\to N satisfies f(varpi_E^n M) \\subseteq varpi_E^n N, so it is continuous for the varpi_E-adic (= m_E-adic) topologies and induces reductions f_n: M/varpi_E^nM \\to N/varpi_E^nN, compatible in n. By Step 3, O_E is Noetherian and varpi_E-adically complete, so the finite-module-completeness lemma applied to the finitely generated N (R=O_E, J=(varpi_E)) shows that N \\to lim_n N/varpi_E^nN is bijective. Injectivity: if all f_n vanish then f(M) lies in the kernel of this map, so f=0. Surjectivity: a compatible family (g_n) gives the O_E-linear map M \\to lim_n N/varpi_E^nN, x \\mapsto (g_n(x mod varpi_E^nM))_n, which composed with the inverse of the bijection is an O_E-linear g:M\\to N whose reductions are the g_n. This is the displayed bijection.",
+   "uses": [
+    "def-weil-l-adic-coefficient-extension",
+    "lem-weil-l-adic-extension-complete",
+    "lem-weil-pbc-finite-module-complete-over-complete-noetherian"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Lemma 031B (lemma-when-finite-module-complete-over-complete-ring) applied to N"
+   }
+  },
+  {
+   "text": "Right exactness of tensor products applied to O_E \\to A_{E,n} gives (M tensor_{O_E} N)/varpi_E^n(M tensor N) isomorphic to (M/varpi_E^nM) tensor_{A_{E,n}} (N/varpi_E^nN), compatibly with n.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "right exactness of tensor product; Lemma 00MA (lemma-completion-tensor), quotient description"
+   }
+  },
+  {
+   "text": "The same right-exact tensor argument for the O_E-algebra O_L gives (M tensor_{O_E} O_L)/varpi_E^n(M tensor O_L) isomorphic to (M/varpi_E^nM) tensor_{A_{E,n}} (O_L/varpi_E^n O_L), compatibly with n.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "right exactness of tensor product"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-pod-adic-tower-reconstruction",
+  "def-weil-l-adic-coefficient-extension",
+  "lem-weil-l-adic-extension-complete",
+  "lem-weil-pbc-finite-over-complete-ring",
+  "lem-weil-pbc-finite-module-complete-over-complete-noetherian"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Lemmas 09B8, 031D, 031B and 00MA, with tensor quotient identities by right exactness"
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -39,7 +118,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "worker",
@@ -59,5 +138,21 @@
   }
  },
  "chapter": "sec-poincare-duality",
- "unit": "sk-lem-finite"
+ "unit": "sk-lem-finite",
+ "split_report": {
+  "date": "2026-10-11",
+  "item": "lem-pod-adic-limit-finite-modules",
+  "worker": "stage1",
+  "summary": "Checked the statement against the coefficient-extension definition and Stacks Lemmas 09B8, 031D, 031B and 00MA. Added two strictly more general unsplit inputs for abstract adic-tower reconstruction and finite-module Hom comparison; the proof separates reconstruction, finite generation, converse completeness, Hom continuity/comparison, and the two tensor quotient formulas.",
+  "blueprint": "Realizes cor-galois-lisse-representations steps 6, 7, 9 and 10: finite fibre reconstruction, integral Hom comparison, and tensor/scalar compatibility.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-alm2744",
+  "group": "M1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-alm2744 (reviewer sub-agent of L); spot-checked: Return point 1 (E) repaired: lem-pod-adic-tower-reconstruction now assumes I finitely generated, matching Stacks 09B8; Step 1 applies it with I=(varpi_E) principal (C4 met). Item statement, title, source and stmt_deps unchanged from base (E7); O_E, varpi_E, A_{E,n} still cite def-weil-l-adic-coefficient-extension. Steps 2-3 hypotheses (completeness of O_E, separatedness, Noetherian) checked against 031D/031B nodes. FIX more, RETURN less: (1) class (d) new node lem-pod-adic-hom-limit-finite folded into Step 4, which now derives continuity and the Hom bijection from lem-weil-pbc-finite-module-complete-over-complete-noetherian applied to N (with coefficient-extension and completeness leaf for its hypotheses), node dropped; (2) Steps 4 and 5 had '\\to' JSON-escaped as a tab character ('\\t'+'o'), repaired to '\\\\to'.; 1 file(s) fixed by the reviewer"
+ }
 }
