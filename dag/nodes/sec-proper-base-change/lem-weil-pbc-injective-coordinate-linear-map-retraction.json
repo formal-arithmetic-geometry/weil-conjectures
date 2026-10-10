@@ -1,0 +1,83 @@
+{
+ "id": "lem-weil-pbc-injective-coordinate-linear-map-retraction",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-finite-etale-lifting",
+   "place": "step 7 of its split (source: Lemma 0GS2, proof: the essential-surjectivity paragraphs); the injective field-linear map in the maximal-minor argument admits a linear retraction",
+   "via": [
+    "lem-weil-pbc-field-injective-matrix-nonzero-maximal-minor",
+    "lem-weil-pbc-depth-zero-injective-free-map-unit-minor",
+    "lem-weil-pbc-exact-free-complex-last-minors-regular-sequence",
+    "lem-weil-pbc-residue-field-pd-le-krull-dimension",
+    "lem-weil-pbc-finite-gl-dim-regular-local",
+    "lem-weil-pbc-regular-local-localization",
+    "lem-weil-pbc-complete-local-g-ring",
+    "lem-weil-pbc-g-ring-maximal-ideal-criterion",
+    "lem-weil-pbc-henselization-pair-g-ring",
+    "lem-weil-pbc-finite-etale-lifting-limit-descent",
+    "lem-weil-pbc-finite-etale-lifting-essential-surjectivity"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "An injective map of coordinate vector spaces has a linear retraction",
+ "statement": "Let $K$ be a field [def-weil-field], and let $n,p\\ge0$ be integers. Write $K^n$ and $K^p$ for the sets of tuples with coordinatewise addition and scalar multiplication. A map is $K$-linear if it preserves addition and scalar multiplication. For every injective $K$-linear map $f:K^n\\to K^p$, there is a $K$-linear map $g:K^p\\to K^n$ with $g(f(v))=v$ for every $v\\in K^n$.",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Tag 00MY, lemma-exact-depth-zero-local, applied over a field to a two-term injective complex; linear retraction consequence. Mathlib supplies the stronger vector-space theorem directly."
+ },
+ "stmt_deps": [
+  "def-weil-field"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "injective linear map has a linear left inverse",
+   "results": "LinearMap.exists_leftInverse_of_injective, LinearMap.leftInverse_comp_of_inj, LinearMap.leftInverse_apply_of_inj in Mathlib.LinearAlgebra.Basis.VectorSpace",
+   "date": "2026-10-10",
+   "verdict": "match: specializes to coordinate vector spaces"
+  },
+  {
+   "tool": "loogle",
+   "query": "LinearMap.exists_leftInverse_of_injective",
+   "results": "Same declaration, type f.ker = bot implies exists g with g.comp f = LinearMap.id",
+   "date": "2026-10-10",
+   "verdict": "match"
+  },
+  {
+   "tool": "grep",
+   "query": "rg -n -A 4 -B 2 exists_leftInverse_of_injective on official Mathlib source streamed from https://raw.githubusercontent.com/leanprover-community/mathlib4/0df444a360eaa60ab8c11dca51a86af692955474/Mathlib/LinearAlgebra/Basis/VectorSpace.lean (local advertised checkout absent; /tmp/mathlib-f1 sparse and lacks this file)",
+   "results": "Lines 240-241 give the theorem; lines 40-42 show DivisionRing, additive groups and module hypotheses. Read surrounding proof lines 238-260. Revision is pinned by /home/ubuntu/weil-src-slopmaster2/lake-manifest.json.",
+   "date": "2026-10-10",
+   "verdict": "match: field is a division ring; injectivity gives ker f = bot"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "LinearMap.exists_leftInverse_of_injective",
+  "file": "Mathlib/LinearAlgebra/Basis/VectorSpace.lean",
+  "line": 240,
+  "how": "specializes in one line: take V = Fin n → K and V' = Fin p → K; injectivity is LinearMap.ker_eq_bot. The declaration at lines 240-241 (hypotheses lines 40-42) gives g.comp f = LinearMap.id."
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-field-injective-matrix-nonzero-maximal-minor",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1"
+}
