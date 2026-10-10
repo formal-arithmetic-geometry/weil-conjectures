@@ -1634,3 +1634,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 14:35 L: merged deliver/J1/lem-galois-fpqc-descending-types-morphisms (reviewer PASS; first push; new nodes: 2)
 - 14:36 L: merged deliver/E1/lem-sc-very-ample-separation-criterion (reviewer FIX; after a return; new nodes: 1)
 - 14:36 L: merged deliver/J1/lem-pc-cartier-divisor-finite-over-field (reviewer FIX; first push; new nodes: 3)
+- 14:36 L: returned deliver/K1/lem-pc-genus-well-defined (reviewer RETURN: 1. C1/E1: lem-pc-genus-well-defined step 1: the sentence 'Thus X_{\bar k} is a smooth projective curve over \bar k' is n)
