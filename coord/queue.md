@@ -2,7 +2,7 @@
 
 909 items; claim with `tools/claim.py next <group> [--stage N]`.
 
-## Stage 1: nodes to split (628)
+## Stage 1: nodes to split (627)
 
 | node | distance to a target | Lean state on the done branch |
 |---|---|---|
@@ -27,7 +27,6 @@
 | `lem-weil-pbc-smooth-localization-conormal-split` | 1012 | none |
 | `lem-weil-pbc-smooth-over-field-dimension-differentials` | 1012 | none |
 | `lem-weil-pbc-cartier-equality` | 1013 | none |
-| `lem-weil-pbc-clopen-open-cover-section` | 1013 | none |
 | `lem-weil-pbc-closed-point-dimension-local-ring` | 1013 | none |
 | `lem-weil-pbc-cm-local-free-resolution-to-mcm` | 1013 | none |
 | `lem-weil-pbc-cohen-ring-mod-pn-formally-smooth` | 1013 | none |
@@ -635,7 +634,7 @@
 | `lem-pc-linear-pair-graded-finite` | - | none |
 | `def-exc-jacobian-presentation` | - | none |
 
-## Stage 2: nodes to state (281)
+## Stage 2: nodes to state (282)
 
 | node | distance to Mathlib | kind |
 |---|---|---|
@@ -674,6 +673,7 @@
 | `lem-weil-pbc-change-ideal-completion` | 1 | state |
 | `lem-weil-pbc-charpoly-locally-free-existence` | 1 | state |
 | `lem-weil-pbc-chow-noetherian` | 1 | state |
+| `lem-weil-pbc-clopen-open-cover-section` | 1 | state |
 | `lem-weil-pbc-closed-immersion-residue-field-iso` | 1 | state |
 | `lem-weil-pbc-closed-pushforward-constant-restriction` | 1 | state |
 | `lem-weil-pbc-cohen-coefficient-ring-exists` | 1 | state |
@@ -921,7 +921,7 @@
 | `lem-weil-pbc-p1-field-dimension-one` | 4 | state |
 | `lem-weil-pbc-projective-space-zero-isomorphism` | 4 | state |
 
-Not open yet: 640 nodes that wait for stage 1, 555 nodes that wait for a statement dependency.
+Not open yet: 639 nodes that wait for stage 1, 555 nodes that wait for a statement dependency.
 
 ## Stage 3: modules to prove (0)
 
