@@ -3,24 +3,83 @@
  "blueprint": {
   "is": "def-amb-finite-locally-free-module",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "definition",
  "title": "Locally free modules of constant finite rank",
- "statement": "An $\\mathcal O_S$-module $\\mathcal E$ on a scheme $S$ is\n*locally free of constant rank $d$* if $S$ has a Zariski\nopen cover $(V_a)$ with\n$\\mathcal E|_{V_a}\\cong\\mathcal O_{V_a}^{\\oplus d}$.\nIn particular it is a\nquasi-coherent module; this is the\nmodule convention used in the following vector-bundle definition.",
+ "statement": "Let $S$ be a scheme [def-pc-scheme], $\\mathcal E$ an $\\mathcal O_S$-module [def-weil-sheaf-of-modules-category] and $d\\geq0$ an integer. Then $\\mathcal E$ is\n*locally free of constant rank $d$* if $S$ has a Zariski\nopen cover $(V_a)$ with\n$\\mathcal E|_{V_a}\\cong\\mathcal O_{V_a}^{\\oplus d}$ for every $a$.\nIn particular $\\mathcal E$ is quasi-coherent [pqf-def-coherent]: on an affine open $\\operatorname{Spec}A=U\\subseteq V_a$ one has $\\mathcal E|_U\\cong\\widetilde{A^{\\oplus d}}$.\n(*Stacks Project, Sheaves of Modules, Tag 01C6 (finite locally free of rank $r$), Tag 01C7 (locally free implies quasi-coherent).*)",
  "source": {
   "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-an/def-amb-finite-locally-free-module.md",
   "place": "node def-amb-finite-locally-free-module, order 1967"
  },
  "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-sheaf-of-modules-category",
   "pqf-def-coherent"
  ],
  "proof": [],
  "proof_deps": [],
  "proof_origin": null,
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "scheme module locally free of constant finite rank on a Zariski open cover",
+   "results": "SheafOfModules.LocalGeneratorsData.coversTop; Module.isLocallyConstant_rankAtStalk_freeLocus; SheafOfModules.IsFiniteType.exists_localGeneratorsData; SheafOfModules.localGeneratorsDataOfIsFiniteType; SheafOfModules.LocalGeneratorsData; SheafOfModules.LocalGeneratorsData.I; SheafOfModules.LocalGeneratorsData.IsFiniteType",
+   "date": "2026-10-11",
+   "verdict": "no exact match; related abstract sheaf-of-modules declarations use local-generators data"
+  },
+  {
+   "tool": "loogle",
+   "query": "SheafOfModules.IsFiniteLocallyFreeOfRank, SheafOfModules.IsLocallyFree",
+   "results": "0 hits; unknown identifier SheafOfModules.IsFiniteLocallyFreeOfRank",
+   "date": "2026-10-11",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "IsFiniteLocallyFreeOfRank|locally free of constant rank [Mathlib/Algebra/Category/ModuleCat/Sheaf]",
+   "results": "0 hits from the requested subdirectory search",
+   "date": "2026-10-11",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "a sheaf of modules on a scheme is locally free of constant finite rank d when it is locally isomorphic to O^d on a Zariski open cover",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-11",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "finite locally free sheaf of modules of rank d",
+   "results": "SheafOfModules.IsFiniteType; SheafOfModules.LocalGeneratorsData.IsFiniteType; SheafOfModules.IsFiniteType.exists_localGeneratorsData; SheafOfModules.LocalGeneratorsData.IsFiniteType.isFiniteType; SheafOfModules.localGeneratorsDataOfIsFiniteType; SheafOfModules.GeneratingSections.IsFiniteType; SheafOfModules.isFinitePresentation",
+   "date": "2026-10-11",
+   "verdict": "no exact match; related abstract predicates only"
+  },
+  {
+   "tool": "loogle",
+   "query": "IsFiniteLocallyFreeOfRank",
+   "results": "0 hits; unknown identifier IsFiniteLocallyFreeOfRank",
+   "date": "2026-10-11",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "IsFiniteLocallyFreeOfRank|IsLocallyFree [Mathlib/Algebra/Category/ModuleCat/Sheaf]",
+   "results": "0 hits from the requested subdirectory search",
+   "date": "2026-10-11",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "finite locally free sheaf of modules of fixed rank on a scheme",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-11",
+   "verdict": "unavailable"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [],
  "blueprint_kind": "definition",
@@ -44,5 +103,20 @@
   }
  },
  "chapter": "sec-smooth-purity",
- "unit": "sk-prop-an"
+ "unit": "sk-prop-an",
+ "split_report": {
+  "date": "2026-10-11",
+  "item": "def-amb-finite-locally-free-module",
+  "worker": "stage1",
+  "summary": "Checked the imported definition against its recorded master-blueprint source and the project's use of the notion. The statement introduces a scheme S, an O_S-module E, a Zariski open trivializing cover, and the fixed rank d; its only existing statement dependency is pqf-def-coherent for the quasi-coherence convention. Mathlib searches found only related abstract local-generators predicates, so no child Mathlib or theorem node was created. The definition is split with no proof steps, following the repository pattern for definition nodes.",
+  "blueprint": "The item is itself the blueprint node; this split realizes the complete definition clause, including the final quasi-coherence convention."
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-flf2938",
+  "group": "M1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-flf2938 (reviewer sub-agent of L); spot-checked: Mathlib: SheafOfModules.IsLocallyFree (Mathlib/Algebra/Category/ModuleCat/Sheaf/LocallyFree.lean:61) has no rank, no constant-rank-d declaration exists (IsFiniteLocallyFreeOfRank named in the report is absent); not a leaf. No duplicate: def-pc-finite-locally-free is about morphisms, def-weil-pbc-charpoly-locally-free about ring modules, def-asd/def-pur vector-bundle nodes cite or use this notion. Citers: constant-rank users (lem-sc-local-splitting-finite-free, lem-sc-local-section-quotient-finite-free, lem-sc-smooth-omega-finite-locally-free, def-asd-vector-bundle-zero-section) match; varying-rank users (lem-sc-ext-evaluation, lem-sc-ext-tensor-exact, lem-sc-ext-locally-free) cite it only as 'compare' (C4 ok). Definition well-formed, d=0 and empty scheme fine. FIX more, RETURN less: (1) B3/class b: statement used scheme and O_S-module without citing their definition nodes; added [def-pc-scheme], [def-weil-sheaf-of-modules-category] to text and stmt_deps, d>=0 integer made explicit; (2) B3: 'in particular quasi-coherent' was justified only by a forward reference to 'the following vector-bundle definition' (not self-contained); replaced by the elementary affine-local remark citing [pqf-def-coherent] with Stacks Tags 01C6 and 01C7. Second reading by M1 missed both.; 1 file(s) fixed by the reviewer"
+ }
 }

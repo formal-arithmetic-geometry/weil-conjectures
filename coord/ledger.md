@@ -2880,3 +2880,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 22:53 L: merged deliver/J1/lem-kun-finite-closed-subscheme (reviewer PASS; first push; new nodes: 0)
 - 22:53 L: merged deliver/H1/lem-pc-perfect-rhom-tensor-comparison (reviewer FIX; after a return; new nodes: 2)
 - 22:53 L: returned deliver/M1/lem-weil-separably-closed-geometrically-connected (reviewer RETURN: 1. D1 (no real split; missed by the second reading): step 1 proves the nontrivial direction (connected => geometrically )
+- 22:53 L: merged deliver/M1/def-amb-finite-locally-free-module (reviewer FIX; first push; new nodes: 0)
