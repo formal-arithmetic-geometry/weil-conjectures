@@ -27,42 +27,66 @@
  ],
  "proof": [],
  "proof_deps": [],
- "proof_origin": null,
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Algebra, Lemma Tag 08YR (lemma-ext-noetherian)"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
-   "query": "Ext modules finite over a Noetherian ring for finite modules",
-   "results": "isNoetherian_linearMap and FGModuleCat instances only; no Ext finiteness theorem",
+   "query": "Ext of two finitely generated modules is finitely generated over a Noetherian ring",
+   "results": "FGModuleCat.instAbelian, CategoryTheory.Abelian.Ext.instModule, and six other generic Ext declarations; no finite Ext result among eight hits",
    "date": "2026-10-11",
    "verdict": "no match"
   },
   {
    "tool": "loogle",
-   "query": "Module.Finite, Ext",
-   "results": "0 hits",
+   "query": "CategoryTheory.Abelian.Ext, Module.Finite",
+   "results": "ModuleCat.finite_ext (Mathlib.Algebra.Category.ModuleCat.Ext.Finite), plus four other hits",
    "date": "2026-10-11",
-   "verdict": "no match"
+   "verdict": "match"
   },
   {
    "tool": "grep",
-   "query": "grep -rn 'Ext.*Noetherian|Noetherian.*Ext|Module.Finite' Mathlib/RingTheory",
-   "results": "no Ext finiteness match",
+   "query": "Ext.*(Finite|Noetherian)|Noetherian.*Ext Algebra",
+   "results": "Mathlib/Algebra/Category/ModuleCat/Ext/Finite.lean:27: instance ModuleCat.finite_ext; file header at line 15 states Ext finiteness",
    "date": "2026-10-11",
-   "verdict": "no match"
+   "verdict": "match"
   },
   {
-   "tool": "grep",
-   "query": "grep -rnE 'Module\\.Finite.*Ext|Ext.*Module\\.Finite' slopmaster2 Mathlib",
-   "results": "only Cotangent/FinitePresentation hits; no Ext finiteness",
+   "tool": "leansearch",
+   "query": "Ext groups of finitely generated modules over a noetherian ring are finitely generated",
+   "results": "service unavailable: Internal Server Error",
    "date": "2026-10-11",
-   "verdict": "no match"
+   "verdict": "unavailable"
   }
  ],
- "mathlib_match": null,
- "status": "unsplit",
+ "mathlib_match": {
+  "declaration": "ModuleCat.finite_ext",
+  "file": "Mathlib/Algebra/Category/ModuleCat/Ext/Finite.lean",
+  "line": 27,
+  "how": "exact: for the commutative Noetherian ring A, take N = ModuleCat.of A M and M = ModuleCat.of A N in the declaration, and i = q. Its two Module.Finite hypotheses are the item's finite-module hypotheses; its conclusion is Module.Finite A (CategoryTheory.Abelian.Ext _ _ q), the Ext of def-pc-ext. Read lines 15-36."
+ },
+ "status": "mathlib",
  "created": {
   "item": "lem-sc-sheaf-ext-coherent",
   "by": "worker",
   "date": "2026-10-10"
+ },
+ "split_report": {
+  "date": "2026-10-11",
+  "item": "lem-sc-ext-noetherian-finite",
+  "worker": "stage1",
+  "summary": "The pinned Mathlib has the exact result as ModuleCat.finite_ext, so this item is a Mathlib leaf; no proof split or new node is needed.",
+  "blueprint": "Realizes the parenthetical Ext-vanishing proof of thm-sc-p1-duality, specifically finiteness of affine module Ext."
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-enf1839",
+  "group": "J1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-enf1839 (reviewer sub-agent of L); spot-checked: Leaf: read ModuleCat.finite_ext at Mathlib/Algebra/Category/ModuleCat/Ext/Finite.lean:27 (CommRing R, Small.{v} R automatic at v=u, IsNoetherianRing, Module.Finite N M, i:Nat -> Module.Finite R (Abelian.Ext N M i)); exact match with def-pc-ext as Abelian.Ext, so no balancing lemma needed; no proof_deps so no cycle with lem-sc-sheaf-ext-coherent; statement agrees with Stacks 08YR; searches recorded. Second reading: no fault missed."
  }
 }
