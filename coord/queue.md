@@ -1,8 +1,8 @@
 # Work queue
 
-886 items; claim with `tools/claim.py next <group> [--stage N]`.
+887 items; claim with `tools/claim.py next <group> [--stage N]`.
 
-## Stage 1: nodes to split (319)
+## Stage 1: nodes to split (320)
 
 | node | distance to a target | Lean state on the done branch |
 |---|---|---|
@@ -16,7 +16,6 @@
 | `lem-sc-affine-cap-section-open-dictionary` | 2012 | none |
 | `lem-sc-ample-finite-set-affine` | 2012 | none |
 | `lem-sc-boundary-derivation-square-zero` | 2012 | none |
-| `lem-sc-closed-immersion-pushforward-exact` | 2012 | none |
 | `lem-sc-closed-subset-qc-ideal` | 2012 | none |
 | `lem-sc-enough-globally-generated-ample` | 2012 | none |
 | `lem-sc-exact-functor-higher-derived-vanishing` | 2012 | none |
@@ -25,6 +24,8 @@
 | `lem-sc-leray-closed-pushforward-cohomology` | 2012 | none |
 | `lem-sc-noetherian-topological-cohomology-vanishing` | 2012 | none |
 | `lem-sc-torsor-h1-functoriality` | 2012 | none |
+| `lem-sc-abelian-sheaf-short-exact-stalkwise` | 2013 | none |
+| `lem-sc-closed-pushforward-abelian-stalks` | 2013 | none |
 | `lem-sc-invert-s-cohomology` | 2013 | none |
 | `lem-weil-pbc-etale-cohomology-limit-complex-systems` | 3005 | none |
 | `lem-weil-pbc-finite-coproduct-cohomology-assembly` | 3006 | none |
@@ -898,7 +899,7 @@
 | `lem-weil-pbc-p1-field-dimension-one` | 4 | state |
 | `lem-weil-pbc-projective-space-zero-isomorphism` | 4 | state |
 
-Not open yet: 338 nodes that wait for stage 1, 1108 nodes that wait for a statement dependency.
+Not open yet: 339 nodes that wait for stage 1, 1109 nodes that wait for a statement dependency.
 
 ## Stage 3: modules to prove (0)
 
