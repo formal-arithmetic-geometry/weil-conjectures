@@ -1,8 +1,8 @@
 # Work queue
 
-843 items; claim with `tools/claim.py next <group> [--stage N]`.
+847 items; claim with `tools/claim.py next <group> [--stage N]`.
 
-## Stage 1: nodes to split (662)
+## Stage 1: nodes to split (664)
 
 | node | distance to a target | Lean state on the done branch |
 |---|---|---|
@@ -10,8 +10,6 @@
 | `lem-weil-pbc-etale-ring-map-prescribed-residue-field` | 1011 | none |
 | `lem-weil-pbc-helper-g-ring-char-p` | 1011 | none |
 | `lem-weil-pbc-lft-over-field-isolated-point-residue-finite` | 1011 | none |
-| `lem-weil-pbc-regular-local-localization` | 1011 | none |
-| `lem-weil-pbc-regular-ring-faithfully-flat-descent` | 1011 | none |
 | `lem-weil-pbc-regular-ring-smooth-ascent` | 1011 | none |
 | `lem-weil-pbc-regular-sequence-polynomial-variables` | 1011 | none |
 | `lem-weil-pbc-regular-sequence-powers` | 1011 | none |
@@ -54,6 +52,7 @@
 | `def-weil-pbc-ample-invertible-module` | 1012 | none |
 | `def-weil-pbc-constant-group-scheme` | 1012 | none |
 | `def-weil-pbc-fibre-degree-bound` | 1012 | none |
+| `def-weil-pbc-finite-global-dimension` | 1012 | none |
 | `def-weil-pbc-formally-smooth-adic` | 1012 | none |
 | `def-weil-pbc-module-cohomology-fmap` | 1012 | none |
 | `def-weil-pbc-ring-map-quasi-finite-at-prime` | 1012 | none |
@@ -82,6 +81,7 @@
 | `lem-weil-pbc-faithfully-flat-base-change` | 1012 | none |
 | `lem-weil-pbc-fibre-product-affine-transition` | 1012 | none |
 | `lem-weil-pbc-finite-free-resolution-noetherian` | 1012 | none |
+| `lem-weil-pbc-finite-gl-dim-regular-local` | 1012 | none |
 | `lem-weil-pbc-finite-length-module-simple-filtration` | 1012 | none |
 | `lem-weil-pbc-finite-module-complete-over-complete-noetherian` | 1012 | none |
 | `lem-weil-pbc-finite-module-localization-zero-annihilator` | 1012 | none |
@@ -114,6 +114,7 @@
 | `lem-weil-pbc-local-artinian-basis-when-flat` | 1012 | none |
 | `lem-weil-pbc-local-dimension-zero-henselian` | 1012 | none |
 | `lem-weil-pbc-localization-colimit-principal-localizations` | 1012 | none |
+| `lem-weil-pbc-localization-finite-gl-dim` | 1012 | none |
 | `lem-weil-pbc-lqf-restriction-to-opens` | 1012 | none |
 | `lem-weil-pbc-make-separably-generated` | 1012 | none |
 | `lem-weil-pbc-mittag-leffler-complex-limit-homology` | 1012 | none |
@@ -141,6 +142,7 @@
 | `lem-weil-pbc-quotient-henselian-pair` | 1012 | none |
 | `lem-weil-pbc-quotient-local-structure` | 1012 | none |
 | `lem-weil-pbc-reduced-source-factors-through-closed-subscheme` | 1012 | none |
+| `lem-weil-pbc-regular-local-finite-gl-dim` | 1012 | none |
 | `lem-weil-pbc-regular-local-hypersurface-criterion` | 1012 | none |
 | `lem-weil-pbc-ringed-space-colimit-restriction` | 1012 | none |
 | `lem-weil-pbc-separably-generated-separable` | 1012 | none |
@@ -669,7 +671,7 @@
 | `lem-pc-finite-linear-avoidance` | - | none |
 | `lem-pc-linear-pair-graded-finite` | - | none |
 
-## Stage 2: nodes to state (181)
+## Stage 2: nodes to state (183)
 
 | node | distance to Mathlib | kind |
 |---|---|---|
@@ -805,6 +807,8 @@
 | `lem-weil-pbc-reduced-noetherian-total-ring-fractions` | 1 | state |
 | `lem-weil-pbc-reduction-universal-homeomorphism` | 1 | state |
 | `lem-weil-pbc-regular-local-generators-regular-sequence` | 1 | state |
+| `lem-weil-pbc-regular-local-localization` | 1 | state |
+| `lem-weil-pbc-regular-ring-faithfully-flat-descent` | 1 | state |
 | `lem-weil-pbc-regular-ring-local-criterion` | 1 | state |
 | `lem-weil-pbc-root-lifting-etale-retraction` | 1 | state |
 | `lem-weil-pbc-scheme-clopen-idempotent` | 1 | state |
@@ -855,7 +859,7 @@
 | `lem-weil-pbc-p1-field-dimension-one` | 4 | state |
 | `lem-weil-pbc-projective-space-zero-isomorphism` | 4 | state |
 
-Not open yet: 674 nodes that wait for stage 1, 468 nodes that wait for a statement dependency.
+Not open yet: 676 nodes that wait for stage 1, 468 nodes that wait for a statement dependency.
 
 ## Stage 3: modules to prove (0)
 
