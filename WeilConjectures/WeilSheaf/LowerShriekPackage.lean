@@ -9,6 +9,8 @@ public import WeilConjectures.WeilSheaf.ExtensionByZero
 public import WeilConjectures.WeilSheaf.HomologySequence
 public import WeilConjectures.WeilSheaf.LowerShriek
 public import WeilConjectures.WeilSheaf.UpperStarExact
+public import WeilConjectures.WeilSheaf.ProperCohomology.OpenImmersion
+public import WeilConjectures.WeilSheaf.LowerStarComp
 
 /-!
 # Properties of the direct image with compact support of Weil complexes
@@ -94,15 +96,6 @@ theorem WeilComplex.nonempty_derivedLowerShriekCompι_iso (c : Compactification 
 
 end
 
-/-- **Properness law.** For a proper morphism `f`, the direct image with compact support of Weil
-complexes is the derived direct image: `Rf₀! ≅ Rf₀*`
-(blueprint: `prop-functor-package`, item 3). -/
-theorem WeilComplex.nonempty_derivedLowerShriek_iso_derivedLowerStar (f : X ⟶ Y) [IsProper f]
-    [f.IsOver (Spec (CommRingCat.of k₀))] [LocallyOfFiniteType (Y ↘ Spec (CommRingCat.of k₀))]
-    [QuasiCompact (Y ↘ Spec (CommRingCat.of k₀))]
-    [QuasiSeparated (Y ↘ Spec (CommRingCat.of k₀))] :
-    Nonempty (WeilComplex.derivedLowerShriek k₀ l f ≅ WeilComplex.derivedLowerStar (l := l) f) :=
-  sorry
 
 /-- **Composition law.** For composable morphisms `X ⟶[f] Z ⟶[g] Y` of `k₀`-schemes, the direct
 images with compact support of Weil complexes compose: `R(f ≫ g)₀! ≅ Rg₀! ∘ Rf₀!`
@@ -254,4 +247,43 @@ theorem WeilSheaf.nonempty_higherLowerShriek_iso_higherLowerStar (f : X ⟶ Y)
     (Functor.associator _ _ _).symm
   exact ⟨(((WeilSheaf.objectProperty k₀ l Y).fullyFaithfulι.whiskeringRight _).preimageIso E).app F⟩
 
+attribute [local instance] Compactification.over in
+/-- **Properness law.** For a proper morphism `f`, the direct image with compact support of Weil
+complexes is the derived direct image: `Rf₀! ≅ Rf₀*`. For the chosen compactification
+`X ⟶[i] Z ⟶[g] Y` of `f` the open immersion `i` is proper, so that
+`Rf₀! = Rg₀* ∘ i₀! ≅ Rg₀* ∘ Ri₀* ≅ R(i ≫ g)₀* = Rf₀*`
+(blueprint: `prop-functor-package`, item 3). -/
+theorem WeilComplex.nonempty_derivedLowerShriek_iso_derivedLowerStar (f : X ⟶ Y) [IsProper f]
+    [f.IsOver (Spec (CommRingCat.of k₀))] [LocallyOfFiniteType (Y ↘ Spec (CommRingCat.of k₀))]
+    [QuasiCompact (Y ↘ Spec (CommRingCat.of k₀))]
+    [QuasiSeparated (Y ↘ Spec (CommRingCat.of k₀))] :
+    Nonempty (WeilComplex.derivedLowerShriek k₀ l f ≅ WeilComplex.derivedLowerStar (l := l) f) := by
+  let c := HasCompactification.compactification f
+    (hf := hasCompactification_of_over (k₀ := k₀) f)
+  have : IsProper c.i := c.isProper_openImmersion inferInstance
+  have := IsGrothendieckAbelian.hasColimitsOfShape_discrete.{u + 2, u + 1, u + 1}
+    (ProEtale.AdicSheaf l (X ↘ Spec (CommRingCat.of k₀)).geometricFiber) ℤ
+  have := IsGrothendieckAbelian.hasExactColimitsOfShape_discrete.{u + 2, u + 1, u + 1}
+    (ProEtale.AdicSheaf l (X ↘ Spec (CommRingCat.of k₀)).geometricFiber) ℤ
+  have := IsGrothendieckAbelian.hasColimitsOfShape_discrete.{u + 2, u + 1, u + 1}
+    (ProEtale.AdicSheaf l (c.Z ↘ Spec (CommRingCat.of k₀)).geometricFiber) ℤ
+  have := IsGrothendieckAbelian.hasExactColimitsOfShape_discrete.{u + 2, u + 1, u + 1}
+    (ProEtale.AdicSheaf l (c.Z ↘ Spec (CommRingCat.of k₀)).geometricFiber) ℤ
+  let E : ProEtaleWeilSheaf.rightDerivedLowerShriek k₀ l f c ≅
+      (ProEtaleWeilSheaf.lowerStar k₀ l f).rightDerivedFunctor :=
+    Functor.isoWhiskerRight
+        (ProEtaleWeilSheaf.extensionByZero k₀ l c.i).rightDerivedFunctorIsoMapDerivedCategory.symm
+        _ ≪≫
+      (Endofunctor.IsoAlgebra.rightDerivedFunctorMapOfNatIsoCompIso
+        (ProEtale.adicOpenImmersionLowerShriekGeometricFiberMapCompFrobeniusIso l c.i
+          (comp_over c.i _))
+        (ProEtale.adicLowerStarGeometricFiberMapCompFrobeniusIso l c.g (comp_over c.g _))).symm ≪≫
+      Functor.rightDerivedFunctorNatIso (Functor.isoWhiskerRight
+        (asIso (ProEtaleWeilSheaf.extensionByZeroToLowerStar k₀ l c.i))
+        (ProEtaleWeilSheaf.lowerStar k₀ l c.g)) ≪≫
+      Functor.rightDerivedFunctorNatIso (ProEtaleWeilSheaf.lowerStarCompIso k₀ l c.i c.g) ≪≫
+      Functor.rightDerivedFunctorNatIso (ProEtaleWeilSheaf.lowerStarCongr k₀ l c.comm.symm)
+  exact ⟨((WeilComplex.objectProperty k₀ l Y).fullyFaithfulι.whiskeringRight _).preimageIso
+    (WeilComplex.derivedLowerShriekCompιIso f ≪≫ Functor.isoWhiskerLeft _ E ≪≫
+      (WeilComplex.derivedLowerStarCompιIso f).symm)⟩
 end AlgebraicGeometry
