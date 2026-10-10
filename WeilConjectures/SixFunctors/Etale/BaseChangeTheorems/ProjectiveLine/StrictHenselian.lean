@@ -7,6 +7,8 @@ module
 
 public import Mathlib.RingTheory.Henselian
 public import WeilConjectures.AlgebraicGeometry.ProjectiveSpace
+public import WeilConjectures.AlgebraicGeometry.ProjectiveSpace.Charts
+public import WeilConjectures.AlgebraicGeometry.ProjectiveSpace.OfSections
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Sites.EtalePoint
 public import WeilConjectures.SixFunctors.Etale.BaseChangeTheorems.TorsionSheaf
 public import WeilConjectures.SixFunctors.Etale.SmoothBaseChange.Defs
@@ -41,6 +43,8 @@ the `SixFunctors` folder.
   separated scheme of finite type over a henselian pair covered by `n + 1` affine opens.
 - `AlgebraicGeometry.Etale.exists_sum_eq_of_injective_projectiveLine`: the representation of
   an `H¹`-class of `I₀` by classes of finite pushforwards of constant sheaves.
+- `AlgebraicGeometry.Etale.subsingleton_H_one_projectiveLine_closedFibre_of_injective`: its
+  degree-one case.
 - `AlgebraicGeometry.Etale.subsingleton_H_projectiveLine_closedFibre_of_injective`: the
   acyclicity of `I₀` on `ℙ¹_κ`.
 - `AlgebraicGeometry.Etale.subsingleton_H_projectiveLine_residueField_of_injective`: an alias
@@ -125,9 +129,35 @@ theorem Etale.exists_sum_eq_of_injective_projectiveLine (r : ℕ) [Fact r.Prime]
             (ULift.{u + 1} (ZMod r))].map (ψ j))) 1 (x j) = c :=
   sorry
 
+/-- **Degree-one acyclicity on the closed projective line.** Let `A` be strictly henselian,
+`X = ℙ¹_A`, `ι : X₀ = ℙ¹_κ ⟶ X` the closed fibre and `r` a prime. For every injective sheaf `I`
+of `𝔽_r`-modules on `X`, `H¹(X₀, I₀) = 0`.
+
+This is the degree-one case of the blueprint node `prop-weil-pbc-p1-acyclicity`. By
+`AlgebraicGeometry.Etale.exists_sum_eq_of_injective_projectiveLine` a class of `H¹(X₀, I₀)` is a
+sum of images of classes of `H¹(X₀, ((hⱼ)_* Mⱼ)₀)` with `hⱼ : Vⱼ ⟶ X` finite; these lift to
+`H¹(X, (hⱼ)_* Mⱼ)` by the finite exchange `ι⁻¹ (hⱼ)_* = (hⱼ)₀_* ι⁻¹`, the finite Leray
+isomorphisms `Hᵠ(X, h_* G) ≅ Hᵠ(V, G)` and the `H¹` comparison for finite constant sheaves
+`AlgebraicGeometry.Etale.bijective_cohomologyMap_one_constantSheaf_of_henselianRing` on the
+proper `Vⱼ`, and their images in `H¹(X, I) = 0` vanish.
+(blueprint: `prop-weil-pbc-p1-acyclicity`) -/
+theorem Etale.subsingleton_H_one_projectiveLine_closedFibre_of_injective (r : ℕ) [Fact r.Prime]
+    (I : Sheaf (ProjectiveLine (Spec (.of A))).smallEtaleTopology
+      (ModuleCat.{u + 1} (ULift.{u + 1} (ZMod r)))) [Injective I] :
+    Subsingleton (Sheaf.H ((sheafCompose _ (forget₂ (ModuleCat.{u + 1} (ULift.{u + 1} (ZMod r)))
+      AddCommGrpCat.{u + 1})).obj ((ProjectiveSpace.map _
+        (Spec.map (CommRingCat.ofHom (IsLocalRing.residue A))))^*[ModuleCat.{u + 1}
+          (ULift.{u + 1} (ZMod r))].obj I)) 1) :=
+  sorry
+
 /-- **Acyclicity on the closed projective line.** Let `A` be strictly henselian, `X = ℙ¹_A`,
 `ι : X₀ = ℙ¹_κ ⟶ X` the closed fibre and `r` a prime. For every injective sheaf `I` of
 `𝔽_r`-modules on `X`, `Hᵠ(X₀, I₀) = 0` for `q > 0`.
+
+In degrees `q ≥ 2` this is the acyclicity bound
+`AlgebraicGeometry.Etale.subsingleton_H_upperStar_of_injective_of_iSup_eq_top` for the cover of
+`ℙ¹_A` by its two standard affine opens; degree one is
+`AlgebraicGeometry.Etale.subsingleton_H_one_projectiveLine_closedFibre_of_injective`.
 (blueprint: `prop-weil-pbc-p1-acyclicity`) -/
 theorem Etale.subsingleton_H_projectiveLine_closedFibre_of_injective (r : ℕ) [Fact r.Prime]
     (I : Sheaf (ProjectiveLine (Spec (.of A))).smallEtaleTopology
@@ -135,8 +165,21 @@ theorem Etale.subsingleton_H_projectiveLine_closedFibre_of_injective (r : ℕ) [
     Subsingleton (Sheaf.H ((sheafCompose _ (forget₂ (ModuleCat.{u + 1} (ULift.{u + 1} (ZMod r)))
       AddCommGrpCat.{u + 1})).obj ((ProjectiveSpace.map _
         (Spec.map (CommRingCat.ofHom (IsLocalRing.residue A))))^*[ModuleCat.{u + 1}
-          (ULift.{u + 1} (ZMod r))].obj I)) q) :=
-  sorry
+          (ULift.{u + 1} (ZMod r))].obj I)) q) := by
+  obtain rfl | hq := (Nat.one_le_iff_ne_zero.2 hq.ne').eq_or_lt
+  · exact Etale.subsingleton_H_one_projectiveLine_closedFibre_of_injective A r I
+  exact Etale.subsingleton_H_upperStar_of_injective_of_iSup_eq_top (ULift.{u + 1} (ZMod r))
+    (IsLocalRing.maximalIdeal A) (ProjectiveLine (Spec (.of A)) ↘ Spec (.of A))
+    (ProjectiveSpace.map _ (Spec.map (CommRingCat.ofHom (IsLocalRing.residue A))))
+    (show _ ⟶ Spec (.of (IsLocalRing.ResidueField A)) from
+      ProjectiveLine (Spec (.of (IsLocalRing.ResidueField A))) ↘ _)
+    (ProjectiveSpace.isPullback_map _ _) 1
+    (fun j ↦ ProjectiveSpace.standardOpen _ _ (ULift.up j))
+    (fun j ↦ ProjectiveSpace.isAffineOpen_standardOpen _ _ _)
+    (by
+      rw [← ProjectiveSpace.iSup_standardOpen _ (Spec (.of A))]
+      exact Equiv.ulift.symm.iSup_comp (g := ProjectiveSpace.standardOpen _ _))
+    I q hq
 
 /-- **Acyclicity of injectives on `ℙ¹_κ`.** Let `A` be strictly henselian, `X = ℙ¹_A` and
 `ι : X₀ = ℙ¹_κ ⟶ X` the closed fibre. For a prime `ℓ` and an injective sheaf `I` of
