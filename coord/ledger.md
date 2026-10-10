@@ -1887,3 +1887,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 15:58 L: merged deliver/G1/lem-sc-exact-functor-higher-derived-vanishing (reviewer PASS; first push; new nodes: 0)
 - 15:58 L: returned deliver/J1/lem-sc-affine-cap-section-open-dictionary (reviewer RETURN: 1. D1: steps 2 and 3 / lem-sc-affine-invertible-global-sections-finite-projective and lem-sc-affine-section-stalk-prime-)
 - 15:58 L: merged deliver/E1/lem-sc-boundary-derivation-square-zero (reviewer FIX+NODE(1); after a return; new nodes: 2)
+- 15:58 L: merged deliver/F1/lem-sc-affine-cap-section-open-algebra (reviewer FIX; first push; new nodes: 0)

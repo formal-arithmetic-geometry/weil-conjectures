@@ -24,9 +24,72 @@
   "lem-weil-pbc-symmetric-algebra-universal-property",
   "def-weil-affine-spectrum"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Choose a finite standard-open cover $D(f_i)$ of $\\operatorname{Spec}R$ on which $N_{f_i}$ is free of rank one, and choose a basis $e_i$ there. Write the image of $s$ as $a_i e_i$ for $a_i\\in R_{f_i}$. At a prime of $D(f_i)$, $s\\notin\\mathfrak pN$ exactly when $a_i\\notin\\mathfrak pR_{f_i}$, so $V\\cap D(f_i)=D(a_i)$ inside $\\operatorname{Spec}R_{f_i}$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/properties.tex",
+    "place": "Properties, Lemma 01PV, proof: invertible module and the open V"
+   }
+  },
+  {
+   "text": "Localize the defining quotient $B=\\operatorname{Sym}_R(N)/(\\iota(s)-1)$ at $f_i$. Localization of a quotient and symmetric-algebra base change give $B_{f_i}\\cong\\operatorname{Sym}_{R_{f_i}}(N_{f_i})/(\\iota(s_{f_i})-1)$. Since $N_{f_i}=R_{f_i}e_i$, the free-module symmetric-algebra identification makes this $R_{f_i}[t]/(a_it-1)$, with $t$ corresponding to $e_i$.",
+   "uses": [
+    "lem-weil-pbc-localization-quotient-commute",
+    "lem-weil-pbc-symmetric-algebra-base-change",
+    "lem-weil-pbc-symmetric-algebra-free-module-polynomial"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/properties.tex",
+    "place": "Properties, Lemma 01PV, proof: the construction of B commutes with base change"
+   }
+  },
+  {
+   "text": "By the affine fibre product identification, the base change of $\\operatorname{Spec}B\\to\\operatorname{Spec}R$ along $\\operatorname{Spec}R_{f_i}\\to\\operatorname{Spec}R$ is $\\operatorname{Spec}(B\\otimes_RR_{f_i})=\\operatorname{Spec}(B_{f_i})\\to\\operatorname{Spec}R_{f_i}$. The polynomial-quotient localization theorem identifies $R_{f_i}[t]/(a_it-1)$ with $(R_{f_i})_{a_i}$, compatibly with the map from $R_{f_i}$. Thus this base change is the principal-localization open immersion with image $D(a_i)=V\\cap D(f_i)$.",
+   "uses": [
+    "lem-weil-pbc-fibre-product-affine-spectra",
+    "lem-weil-pbc-localization-away-polynomial-quotient",
+    "lem-weil-pbc-principal-localization-open-immersion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/properties.tex",
+    "place": "Properties, Lemma 01PV, proof: the local identification of Spec B with V"
+   }
+  },
+  {
+   "text": "The finite standard-open cover $\\{D(f_i)\\}$ is fpqc: its maps are flat localizations, and every affine open has a finite affine refinement by intersections with the $D(f_i)$. The fpqc descent criterion for open immersions therefore makes $\\operatorname{Spec}B\\to\\operatorname{Spec}R$ an open immersion. Its image meets every $D(f_i)$ in $D(a_i)$ by the preceding steps, hence its image is exactly $V$. By the definition of an open immersion it identifies $\\operatorname{Spec}B$ with the open subscheme $V$, so $V$ is affine.",
+   "uses": [
+    "def-weil-pbc-fpqc-covering",
+    "lem-galois-fpqc-descend-open-immersion",
+    "def-weil-open-immersion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/properties.tex",
+    "place": "Properties, Lemma 01PV, proof: final identification of Spec B with V"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-localization-quotient-commute",
+  "lem-weil-pbc-symmetric-algebra-base-change",
+  "lem-weil-pbc-symmetric-algebra-free-module-polynomial",
+  "lem-weil-pbc-fibre-product-affine-spectra",
+  "lem-weil-pbc-localization-away-polynomial-quotient",
+  "lem-weil-pbc-principal-localization-open-immersion",
+  "def-weil-pbc-fpqc-covering",
+  "lem-galois-fpqc-descend-open-immersion",
+  "def-weil-open-immersion"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/properties.tex",
+  "place": "Properties, Lemma 01PV (properties-lemma-affine-cap-s-open), proof"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -51,12 +114,43 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-sc-affine-cap-section-open",
   "by": "worker",
   "date": "2026-10-10"
  },
  "chapter": "sec-curve-estimates",
- "unit": "sk-thm-curveestimate"
+ "unit": "sk-thm-curveestimate",
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "lem-sc-affine-cap-section-open-algebra",
+  "worker": "stage1",
+  "summary": "Expanded the Stacks 01PV algebra argument on a finite trivializing standard-open cover. Existing nodes supply symmetric-algebra base change, quotient localization, the free rank-one polynomial algebra, inversion of a polynomial relation, principal-open immersion, and descent of open immersion; no new node is needed.",
+  "blueprint": "The four steps justify the affine-intersection input of the final sentence of Stacks 09NX used at the first sentence of the proof of blueprint ancestor lem-sc-pic-proper-ntorsion.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-symmetric-algebra-base-change",
+    "why": "Step 2 needs symmetric-algebra base change for the localization R to R_f; no statement of this unit supplies that generic algebra fact."
+   },
+   {
+    "node": "lem-galois-fpqc-descend-open-immersion",
+    "why": "Step 4 needs fpqc target locality of open immersions; no statement of this unit supplies that generic descent fact."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-symmetric-algebra-base-change",
+  "lem-galois-fpqc-descend-open-immersion",
+  "lem-weil-pbc-symmetric-algebra-base-change",
+  "lem-galois-fpqc-descend-open-immersion"
+ ],
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-aca",
+  "group": "F1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-aca (reviewer sub-agent of L); spot-checked: Source Stacks 01PV (properties-lemma-affine-cap-s-open, properties.tex 4286-4318) read: R a ring, N invertible (locally free rank 1), s in N, B=Sym(N)/(s-1), V={p: s not in pN}; the item statement agrees hypothesis by hypothesis and is unchanged. Step 1 elementary (N projective so s in pN iff s/1 in pN_p; on D(f_i) with N_{f_i}=R_{f_i}e_i this is a_i in pR_{f_i}). Step 2 carried by lem-weil-pbc-localization-quotient-commute (B=Sym, b=f_i, J=(iota(s)-1)), lem-weil-pbc-symmetric-algebra-base-change (its R_f parenthetical), lem-weil-pbc-symmetric-algebra-free-module-polynomial (n=1). Step 3 by lem-weil-pbc-localization-away-polynomial-quotient (r=a_i over R_{f_i}, any a_i incl. 0) and lem-weil-pbc-principal-localization-open-immersion (image D(a_i)). Step 4 by def-weil-pbc-fpqc-covering (localizations flat since stalks are isomorphic; finite affine refinement by principal opens inside V cap D(f_i), V quasi-compact), lem-galois-fpqc-descend-open-immersion (accepts any fibre product), def-weil-open-immersion. Declared tool uses accepted as generic black boxes (C8): symmetric-algebra base change, fpqc descent of open immersions. FIX more, RETURN less: dag/nodes/sec-curve-estimates/lem-sc-affine-cap-section-open-algebra.json: proof[2].text/uses and proof_deps: step 3 used that the base change of Spec B to Spec R_{f_i} is Spec(B_{f_i}) with no node (C1); added a sentence citing the existing lem-weil-pbc-fibre-product-affine-spectra (mathlib leaf) and added it to uses and proof_deps. No new nodes, no Mathlib leaves. Small cases: N=R, s=a gives R[t]/(at-1)=R_a, V=D(a); a=0 gives zero ring and empty V; a=1 gives B=R. Start Sat Oct 10 03:55:14 PM UTC 2026, end Sat Oct 10 03:58:04 PM UTC 2026.; 1 file(s) fixed by the reviewer"
+ }
 }
