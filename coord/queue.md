@@ -1,8 +1,8 @@
 # Work queue
 
-934 items; claim with `tools/claim.py next <group> [--stage N]`.
+932 items; claim with `tools/claim.py next <group> [--stage N]`.
 
-## Stage 1: nodes to split (247)
+## Stage 1: nodes to split (245)
 
 | node | distance to a target | Lean state on the done branch |
 |---|---|---|
@@ -27,7 +27,6 @@
 | `lem-sc-pseudo-coherent-rhom-qcoherent` | 3016 | none |
 | `lem-sc-smooth-proper-tensor-direct-sums` | 3016 | none |
 | `lem-sc-smooth-proper-tensor-perfect-case` | 3016 | none |
-| `lem-pc-compact-hom-hocolim` | 3017 | none |
 | `lem-sc-finite-free-internal-hom-exact` | 3017 | none |
 | `lem-sc-koszul-regular-sequence-dual-complex` | 3017 | none |
 | `lem-sc-standard-smooth-affine-diagonal-generators` | 3017 | none |
@@ -75,7 +74,6 @@
 | `lem-sp-derived-well-defined` | 6004 | none |
 | `pqf-lem-integral-univclosed` | 6004 | none |
 | `thm-sp-grothendieck` | 6004 | none |
-| `def-sp-double-complex-total` | 6005 | none |
 | `lem-sp-edge-collapse` | 6005 | none |
 | `pqf-lem-lying-over` | 6005 | none |
 | `thm-sp-double-complex-spectral-sequences` | 6005 | sorry_here |
@@ -946,7 +944,7 @@
 | `lem-weil-pbc-p1-field-dimension-one` | 4 | state |
 | `lem-weil-pbc-projective-space-zero-isomorphism` | 4 | state |
 
-Not open yet: 1346 nodes that wait for a statement dependency, 282 nodes that wait for stage 1.
+Not open yet: 1348 nodes that wait for a statement dependency, 280 nodes that wait for stage 1.
 
 ## Stage 3: modules to prove (0)
 
