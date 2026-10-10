@@ -22,9 +22,49 @@
  "stmt_deps": [
   "def-pc-kflat-complex"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Assume first that $K^\\bullet$ is K-flat. Fix $x\\in X$ and let $M^\\bullet$ be any acyclic complex of $\\mathcal O_{X,x}$-modules. Form the termwise skyscraper complex $i_{x,*}M^\\bullet$. By [lem-pc-skyscraper-complex], this is acyclic and its stalk at $x$ is $M^\\bullet$. K-flatness of $K^\\bullet$ therefore makes $\\operatorname{Tot}(i_{x,*}M^\\bullet\\otimes_{\\mathcal O_X}K^\\bullet)$ acyclic. Since stalks of exact sequences are exact by [lem-weil-pbc-module-stalk-exact](5), applied at each degree (a complex is acyclic iff exact at every degree [def-pc-acyclic-complex-modules]), its stalk complex at $x$ is acyclic, and [lem-pc-stalk-tensor-complex] identifies that stalk with $\\operatorname{Tot}(M^\\bullet\\otimes_{\\mathcal O_{X,x}}K_x^\\bullet)$. Since $M^\\bullet$ was arbitrary, $K_x^\\bullet$ is K-flat.",
+   "uses": [
+    "def-pc-kflat-complex",
+    "lem-pc-skyscraper-complex",
+    "def-pc-acyclic-complex-modules",
+    "lem-weil-pbc-module-stalk-exact",
+    "lem-pc-stalk-tensor-complex"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/cohomology.tex",
+    "place": "Cohomology, Lemma Tag 06YB (label lemma-check-K-flat-stalks), forward implication"
+   }
+  },
+  {
+   "text": "Conversely, assume that every $K_x^\\bullet$ is K-flat. For any acyclic sheaf complex $F^\\bullet$, each stalk complex $F_x^\\bullet$ is acyclic by [lem-weil-pbc-module-stalk-exact](5), applied at each degree (a complex is acyclic iff exact at every degree [def-pc-acyclic-complex-modules]). The stalk tensor identification [lem-pc-stalk-tensor-complex] and K-flatness of $K_x^\\bullet$ then show that every stalk of $F^\\bullet\\otimes_{\\mathcal O_X}K^\\bullet$ is acyclic. By the converse direction of [lem-weil-pbc-module-stalk-exact](5), applied at each degree, the sheaf total tensor is acyclic. Since this holds for every acyclic $F^\\bullet$, the definition [def-pc-kflat-complex] implies that $K^\\bullet$ is K-flat.",
+   "uses": [
+    "def-pc-kflat-complex",
+    "def-pc-acyclic-complex-modules",
+    "lem-weil-pbc-module-stalk-exact",
+    "lem-pc-stalk-tensor-complex"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/cohomology.tex",
+    "place": "Cohomology, Lemma Tag 06YB (label lemma-check-K-flat-stalks), reverse implication"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-kflat-complex",
+  "def-pc-acyclic-complex-modules",
+  "lem-pc-skyscraper-complex",
+  "lem-weil-pbc-module-stalk-exact",
+  "lem-pc-stalk-tensor-complex"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Cohomology, Lemma Tag 06YB (label lemma-check-K-flat-stalks); source text unavailable in this checkout"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -60,15 +100,88 @@
    "results": "Only flatness of individual modules and scheme morphisms; no K-flat complex theorem.",
    "date": "2026-10-11",
    "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "K-flatness of a complex of sheaves is detected on stalks",
+   "results": "Flatness of scheme morphisms and individual modules only; no K-flat complex theorem.",
+   "date": "2026-10-11",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "KFlat stalk acyclic tensor",
+   "results": "Unknown identifier `KFlat`; no hit.",
+   "date": "2026-10-11",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "KFlat|K-flat|stalk.*acyclic in Mathlib/CategoryTheory Algebra/Homology",
+   "results": "No hit.",
+   "date": "2026-10-11",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "K-flatness of a complex of sheaves can be checked on stalks",
+   "results": "Service unavailable: Internal Server Error.",
+   "date": "2026-10-11",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "stalk of total tensor complex is total tensor of stalk complexes",
+   "results": "Only abstract HomologicalComplex tensor constructions and ModuleCat.Tilde stalk declarations; no sheaf-complex theorem.",
+   "date": "2026-10-11",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "stalk tensor complex",
+   "results": "Unknown identifier `stalk`; no hit.",
+   "date": "2026-10-11",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "stalk.*tensor|tensor.*stalk in Mathlib/CategoryTheory Algebra/Homology",
+   "results": "No hit.",
+   "date": "2026-10-11",
+   "verdict": "no match"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-pc-kflat-pullback-preservation",
   "by": "worker",
   "date": "2026-10-10"
  },
  "chapter": "sec-picard-framework",
- "unit": "sk-thm-picard-duality"
+ "unit": "sk-thm-picard-duality",
+ "split_report": {
+  "date": "2026-10-11",
+  "item": "lem-pc-kflat-stalk-criterion",
+  "worker": "stage1",
+  "summary": "No exact Lean declaration exists. Split Tag 06YB into the two genuine sheaf-theoretic inputs used by its proof: acyclicity is detected on stalks, and stalks commute with total tensor products. The forward and reverse implications then follow directly from the K-flat definition and these two statements.",
+  "blueprint": "The steps realize the stalkwise criterion needed by the pullback-preserves-K-flat route in lem-pc-kflat-pullback-preservation, reached from lem-sc-finite-duality.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-module-stalk-exact",
+    "why": "generic tool: exactness of a complex of O_X-modules on a ringed space is checked on stalks (reviewer R-kfs1919, replacing the duplicate lem-pc-acyclic-stalk-detection)"
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-module-stalk-exact"
+ ],
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-kfs1919",
+  "group": "C1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-kfs1919 (reviewer sub-agent of L); spot-checked: Both steps against Stacks 06YB text; skyscraper node (stalk at x and sectionwise exactness) and stalk-tensor-complex node true over ringed spaces (not special cases of scheme-only lem-weil-pbc-module-skyscraper-stalk-adjunction / lem-weil-pbc-module-stalk-tensor). FIX more, RETURN less: (1) B class (b)/(d): new lem-pc-acyclic-stalk-detection duplicates clause (5) of existing lem-weil-pbc-module-stalk-exact (ringed spaces: a complex of O_X-modules is exact iff stalkwise exact), applied degreewise via def-pc-acyclic-complex-modules; dropped, both steps now cite lem-weil-pbc-module-stalk-exact(5) and def-pc-acyclic-complex-modules, proof_deps updated, declared as tool_use (generic stalk-exactness tool, unit sk-thm-p1). The Second reading by C1 and the report's Not-duplicates section missed this.; 1 file(s) fixed by the reviewer"
+ }
 }
