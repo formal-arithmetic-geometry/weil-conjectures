@@ -22,7 +22,6 @@
 | `lem-weil-pbc-flat-variant-local-criterion` | 1012 | none |
 | `lem-weil-pbc-formal-systems-graded-vanishing` | 1012 | none |
 | `lem-weil-pbc-formal-systems-kernel-rees-finite` | 1012 | none |
-| `lem-weil-pbc-module-finite-type-submodule-extension` | 1012 | none |
 | `lem-weil-pbc-module-pullback-affine-sections` | 1012 | none |
 | `lem-weil-pbc-module-stalk-filtered-colimit` | 1012 | none |
 | `lem-weil-pbc-polynomial-local-completion-formally-smooth` | 1012 | none |
@@ -129,6 +128,7 @@
 | `lem-weil-pbc-module-pushforward-injectives-sections-quasi-iso` | 1013 | none |
 | `lem-weil-pbc-module-stalk-exact` | 1013 | none |
 | `lem-weil-pbc-nagata-universally-japanese` | 1013 | none |
+| `lem-weil-pbc-presheaf-module-stalk-filtered-colimit` | 1013 | none |
 | `lem-weil-pbc-projective-resolution-kernel-projective` | 1013 | none |
 | `lem-weil-pbc-pth-root-presentation-differentials` | 1013 | none |
 | `lem-weil-pbc-pth-roots-extension-degree` | 1013 | none |
@@ -909,7 +909,7 @@
 | `lem-weil-pbc-p1-field-dimension-one` | 4 | state |
 | `lem-weil-pbc-projective-space-zero-isomorphism` | 4 | state |
 
-Not open yet: 669 nodes that wait for stage 1, 526 nodes that wait for a statement dependency.
+Not open yet: 669 nodes that wait for stage 1, 527 nodes that wait for a statement dependency.
 
 ## Stage 3: modules to prove (0)
 
