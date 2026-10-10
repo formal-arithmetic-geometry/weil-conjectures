@@ -2,17 +2,108 @@
  "id": "lem-weil-pbc-mittag-leffler-complex-limit-homology",
  "kind": "statement",
  "title": "Limit of an inverse system of complexes with ML terms and essentially constant H^{-1} (Stacks 070E)",
- "statement": "For an inverse system $(B_i)_{i\\ge1}$ of abelian groups (transition homomorphisms $B_{i+1}\\to B_i$, hence composites $B_k\\to B_i$ for $k\\ge i$) let $\\varprojlim_iB_i=\\{(x_i)\\in\\prod_iB_i: x_{i+1}\\mapsto x_i\\}$. The system is *Mittag-Leffler* (ML) if for every $i$ there is $c(i)\\ge i$ with $\\operatorname{Im}(B_k\\to B_i)=\\operatorname{Im}(B_{c(i)}\\to B_i)$ for all $k\\ge c(i)$. It is *essentially constant* if there are an abelian group $X$ with homomorphisms $X\\to B_i$ compatible with the transition maps, an index $i_0$ and a homomorphism $B_{i_0}\\to X$ such that $X\\to B_{i_0}\\to X$ is the identity and for every $j$ there is $k\\ge\\max(i_0,j)$ such that $B_k\\to B_j$ equals the composite $B_k\\to B_{i_0}\\to X\\to B_j$.\n\nNow let $(A^{-2}_i\\xrightarrow{d^{-2}_i}A^{-1}_i\\xrightarrow{d^{-1}_i}A^0_i\\xrightarrow{d^0_i}A^1_i)_{i\\ge1}$ be an inverse system of complexes of abelian groups ($d^{j+1}_id^j_i=0$; transition maps $A^j_{i+1}\\to A^j_i$ commuting with the $d$'s), let $A^j=\\varprojlim_iA^j_i$ with the induced complex $A^{-2}\\to A^{-1}\\to A^0\\to A^1$, let $H^j_i=\\ker d^j_i/\\operatorname{im}d^{j-1}_i$ ($j=-1,0$) with the induced inverse systems, and let $H^{-1},H^0$ be the corresponding cohomology groups of the limit complex. If $(A^{-2}_i)$ and $(A^{-1}_i)$ are ML and $(H^{-1}_i)$ is essentially constant, then the canonical map $H^0\\to\\varprojlim_iH^0_i$, $[(x_i)_i]\\mapsto([x_i])_i$, is an isomorphism.",
+ "statement": "For an inverse system [def-weil-inverse-system] $(B_i)_{i\\ge1}$ of abelian groups (transition homomorphisms $B_{i+1}\\to B_i$, hence composites $B_k\\to B_i$ for $k\\ge i$) let $\\varprojlim_iB_i=\\{(x_i)\\in\\prod_iB_i: x_{i+1}\\mapsto x_i\\}$. The system is *Mittag-Leffler* (ML) [def-weil-pbc-mittag-leffler-system] if for every $i$ there is $c(i)\\ge i$ with $\\operatorname{Im}(B_k\\to B_i)=\\operatorname{Im}(B_{c(i)}\\to B_i)$ for all $k\\ge c(i)$. It is *essentially constant* [def-weil-pbc-essentially-constant-system] if there are an abelian group $X$ with homomorphisms $X\\to B_i$ compatible with the transition maps, an index $i_0$ and a homomorphism $B_{i_0}\\to X$ such that $X\\to B_{i_0}\\to X$ is the identity and for every $j$ there is $k\\ge\\max(i_0,j)$ such that $B_k\\to B_j$ equals the composite $B_k\\to B_{i_0}\\to X\\to B_j$.\n\nNow let $(A^{-2}_i\\xrightarrow{d^{-2}_i}A^{-1}_i\\xrightarrow{d^{-1}_i}A^0_i\\xrightarrow{d^0_i}A^1_i)_{i\\ge1}$ be an inverse system of complexes of abelian groups ($d^{j+1}_id^j_i=0$; transition maps $A^j_{i+1}\\to A^j_i$ commuting with the $d$'s), let $A^j=\\varprojlim_iA^j_i$ with the induced complex $A^{-2}\\to A^{-1}\\to A^0\\to A^1$, let $H^j_i=\\ker d^j_i/\\operatorname{im}d^{j-1}_i$ ($j=-1,0$) with the induced inverse systems, and let $H^{-1},H^0$ be the corresponding cohomology groups of the limit complex. If $(A^{-2}_i)$ and $(A^{-1}_i)$ are ML and $(H^{-1}_i)$ is essentially constant, then the canonical map $H^0\\to\\varprojlim_iH^0_i$, $[(x_i)_i]\\mapsto([x_i])_i$, is an isomorphism.",
  "source": {
   "document": "literature/stacks-project/homology.tex",
   "place": "Homology, Lemma Tag 070E (lemma-apply-Mittag-Leffler-again, line 7810), with its proof (lines 7826--7866: uses Lemma 02N1 (lemma-Mittag-Leffler), Lemma 070D (lemma-exact-sequence-ML) and Lemma 070C (lemma-essentially-constant)); ML is Definition 02N0 (definition-Mittag-Leffler, line 7652), essentially constant is Categories, Definition 05PU (definition-essentially-constant-diagram, categories.tex line 2928, part (2) for the cofiltered index category); inverse systems indexed by i >= 1 as in homology.tex lines 7605--7640. Tags verified in tags/tags: 070E,homology-lemma-apply-Mittag-Leffler-again; 02N0; 02N1; 070C; 070D; 05PU,categories-definition-essentially-constant-diagram"
  },
  "stmt_deps": [
-  "def-weil-inverse-system"
+  "def-weil-inverse-system",
+  "def-weil-pbc-mittag-leffler-system",
+  "def-weil-pbc-essentially-constant-system"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Notation and the three short exact sequences of systems. For $j\\in\\{-2,-1,0\\}$ and $i\\ge1$ put $Z^j_i=\\ker(d^j_i)\\subseteq A^j_i$ and, for $j\\in\\{-1,0\\}$, $I^j_i=\\operatorname{im}(d^{j-1}_i)\\subseteq A^j_i$; since $d^jd^{j-1}=0$, $I^j_i\\subseteq Z^j_i$ and $H^j_i=Z^j_i/I^j_i$. The transition maps $A^j_{i+1}\\to A^j_i$ commute with the differentials, so they map $Z^j_{i+1}$ into $Z^j_i$ and $I^j_{i+1}$ into $I^j_i$; thus $(Z^j_i)_i$, $(I^j_i)_i$ are inverse systems [def-weil-inverse-system], the inclusions $(I^j_i)\\to(Z^j_i)\\to(A^j_i)$ and the maps $d^{j-1}_i:A^{j-1}_i\\to I^j_i$ (corestriction) and $Z^j_i\\to H^j_i$ are morphisms of inverse systems, and the induced transition maps of $(H^j_i)$ are those of the statement. Levelwise exactness gives the short exact sequences of inverse systems of abelian groups (exact at every $i$): (a) $0\\to(Z^{-2}_i)\\to(A^{-2}_i)\\xrightarrow{d^{-2}}(I^{-1}_i)\\to0$; (b) $0\\to(Z^{-1}_i)\\to(A^{-1}_i)\\xrightarrow{d^{-1}}(I^0_i)\\to0$; (c) $0\\to(I^{-1}_i)\\to(Z^{-1}_i)\\to(H^{-1}_i)\\to0$; (d) $0\\to(I^0_i)\\to(Z^0_i)\\to(H^0_i)\\to0$.",
+   "uses": [
+    "def-weil-inverse-system"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/homology.tex",
+    "place": "Homology, proof of Lemma 070E, lines 7827--7828 (definition of Z^j_i and I^j_i) and lines 7837--7861 (the exact sequences)"
+   }
+  },
+  {
+   "text": "Kernels commute with limits. In $A^0=\\varprojlim_iA^0_i$ the kernel of $d^0=\\varprojlim_id^0_i:A^0\\to A^1$, $(x_i)\\mapsto(d^0_i(x_i))$, is the set of compatible families $(x_i)$ with $d^0_i(x_i)=0$ for all $i$, i.e. $\\ker(d^0)=\\varprojlim_iZ^0_i$ (a compatible family of elements of the subgroups $Z^0_i$). Likewise $\\varprojlim_iI^0_i\\subseteq\\varprojlim_iZ^0_i\\subseteq A^0$ as subgroups (the maps on limits induced by the inclusions are injective, being inclusions of sets of families).",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/homology.tex",
+    "place": "Homology, proof of Lemma 070E, lines 7829--7830 ('taking kernels commutes with limits')"
+   }
+  },
+  {
+   "text": "The image systems are ML. $(A^{-2}_i)$ and $(A^{-1}_i)$ are ML by hypothesis [def-weil-pbc-mittag-leffler-system]. Applying [lem-weil-pbc-mittag-leffler-limit-exact] (2) to the short exact sequences (a) and (b) of Step 1 (middle terms $(A^{-2}_i)$, $(A^{-1}_i)$), the quotient systems $(I^{-1}_i)$ and $(I^0_i)$ are ML.",
+   "uses": [
+    "lem-weil-pbc-mittag-leffler-limit-exact",
+    "def-weil-pbc-mittag-leffler-system"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/homology.tex",
+    "place": "Homology, proof of Lemma 070E, lines 7831--7833 (Lemma 02N1 (2))"
+   }
+  },
+  {
+   "text": "$(Z^{-1}_i)$ is ML. In the short exact sequence (c) of Step 1, $(I^{-1}_i)$ is ML (Step 3) and $(H^{-1}_i)$ is essentially constant by hypothesis [def-weil-pbc-essentially-constant-system]. By [lem-weil-pbc-exact-sequence-ml] (the direction 'if the kernel system is ML then the middle system is ML'), $(Z^{-1}_i)$ is ML.",
+   "uses": [
+    "lem-weil-pbc-exact-sequence-ml",
+    "def-weil-pbc-essentially-constant-system",
+    "def-weil-pbc-mittag-leffler-system"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/homology.tex",
+    "place": "Homology, proof of Lemma 070E, lines 7834--7840 (Lemma 070D)"
+   }
+  },
+  {
+   "text": "$\\operatorname{im}(d^{-1})=\\varprojlim_iI^0_i$. Apply [lem-weil-pbc-mittag-leffler-limit-exact] (3) to the short exact sequence (b) of Step 1, whose kernel system $(Z^{-1}_i)$ is ML (Step 4): the map $\\varprojlim_iA^{-1}_i\\to\\varprojlim_iI^0_i$, $(y_i)\\mapsto(d^{-1}_i(y_i))$, is surjective. Composed with the inclusion $\\varprojlim_iI^0_i\\subseteq A^0$ of Step 2 this map is $d^{-1}=\\varprojlim_id^{-1}_i:A^{-1}\\to A^0$. Hence the image of $d^{-1}$ in $A^0$ is exactly the subgroup $\\varprojlim_iI^0_i$.",
+   "uses": [
+    "lem-weil-pbc-mittag-leffler-limit-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/homology.tex",
+    "place": "Homology, proof of Lemma 070E, lines 7841--7848 (Lemma 02N1 (3))"
+   }
+  },
+  {
+   "text": "The limit of (d) is short exact. For the short exact sequence (d) of Step 1, the sequence $0\\to\\varprojlim_iI^0_i\\to\\varprojlim_iZ^0_i\\to\\varprojlim_iH^0_i$ is exact by [lem-weil-pbc-tower-limit-exact-surjective-kernels] (b), first assertion (with $R=\\mathbf Z$: abelian groups are $\\mathbf Z$-modules and homomorphisms are $\\mathbf Z$-linear); since $(I^0_i)$ is ML (Step 3), $\\varprojlim_iZ^0_i\\to\\varprojlim_iH^0_i$ is surjective by [lem-weil-pbc-mittag-leffler-limit-exact] (3). So $0\\to\\varprojlim_iI^0_i\\to\\varprojlim_iZ^0_i\\xrightarrow{q}\\varprojlim_iH^0_i\\to0$ is exact, where $q((x_i)_i)=([x_i])_i$.",
+   "uses": [
+    "lem-weil-pbc-tower-limit-exact-surjective-kernels",
+    "lem-weil-pbc-mittag-leffler-limit-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/homology.tex",
+    "place": "Homology, proof of Lemma 070E, lines 7849--7862 (Lemma 02N1 (1) and (3))"
+   }
+  },
+  {
+   "text": "Conclusion. By definition $H^0=\\ker(d^0)/\\operatorname{im}(d^{-1})$, which by Steps 2 and 5 is $\\varprojlim_iZ^0_i/\\varprojlim_iI^0_i$. By Step 6, $q$ induces an isomorphism $\\varprojlim_iZ^0_i/\\varprojlim_iI^0_i\\to\\varprojlim_iH^0_i$, and this isomorphism sends the class of $(x_i)\\in\\ker(d^0)$ to $([x_i])_i$: it is the canonical map $H^0\\to\\varprojlim_iH^0_i$ of the statement. Hence that map is an isomorphism.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/homology.tex",
+    "place": "Homology, proof of Lemma 070E, line 7863 ('Putting everything together we win')"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-inverse-system",
+  "lem-weil-pbc-mittag-leffler-limit-exact",
+  "def-weil-pbc-mittag-leffler-system",
+  "lem-weil-pbc-exact-sequence-ml",
+  "def-weil-pbc-essentially-constant-system",
+  "lem-weil-pbc-tower-limit-exact-surjective-kernels"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/homology.tex",
+  "place": "Homology, Lemma Tag 070E (lemma-apply-Mittag-Leffler-again, line 7810), proof lines 7826--7864"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -37,7 +128,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "worker",
@@ -57,5 +148,17 @@
   }
  },
  "chapter": "sec-proper-base-change",
- "unit": "sk-thm-p1"
+ "unit": "sk-thm-p1",
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "lem-weil-pbc-mittag-leffler-complex-limit-homology",
+  "worker": "stage1",
+  "summary": "Read Homology 070E (homology.tex 7810--7864) with 02N0, 02N1, 070C, 070D and Categories 05PU (2); the statement agrees with 070E (the canonical map H^0 -> lim H^0_i is an isomorphism; the inline definitions of ML and essentially constant agree with 02N0 and 05PU (2) for the poset Z_{>=1}), and was kept, with citations of the two new definition nodes and def-weil-inverse-system inserted (the text the citer lem-weil-pbc-limit-flat-modules refers to is unchanged). Proof split into the 7 steps of the Stacks proof: notation and the four short exact sequences of systems (elementary), kernels commute with limits (elementary), I^{-1}, I^0 ML by 02N1 (2), Z^{-1} ML by 070D, im(d^{-1}) = lim I^0 by 02N1 (3), 0 -> lim I^0 -> lim Z^0 -> lim H^0 -> 0 by 02N1 (1) (existing node lem-weil-pbc-tower-limit-exact-surjective-kernels (b), R = Z) and 02N1 (3), conclusion (elementary). New nodes: def-weil-pbc-mittag-leffler-system (02N0, Mathlib leaf Functor.IsMittagLeffler, one-line specialization), def-weil-pbc-essentially-constant-system (05PU (2), unsplit), lem-weil-pbc-mittag-leffler-limit-exact (02N1 (2),(3), unsplit), lem-weil-pbc-exact-sequence-ml (070D, unsplit). 070C is used only in the proof of 070D, so it gets no node here. Mathlib searches of the item kept (none found), all new nodes searched with LeanSearch, LeanFinder/Loogle and grep."
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "result": "accepted",
+  "note": "7 steps following Stacks 070E: kernels, images and the four short exact sequences of systems; kernels commute with limits; the image systems are ML (new unsplit 02N1 (2),(3) node); Z^{-1} is ML via 070D (new unsplit node, with the essentially-constant definition as a new unsplit definition node, Categories 05PU (2)); the image of the limit differential; the limit of (d) is short exact (existing tower node for left exactness, 02N1 (3) for surjectivity); conclusion. New definition leaf def-weil-pbc-mittag-leffler-system (Functor.IsMittagLeffler, CofilteredSystem.lean:132; agreement with Stacks' condition is the one-line remark that the images decrease, so accepted as a leaf under B8). Statement now cites the three definitions."
+ }
 }

@@ -1,0 +1,68 @@
+{
+ "id": "def-weil-pbc-essentially-constant-system",
+ "kind": "definition",
+ "title": "Essentially constant inverse system of abelian groups (Stacks 05PU (2))",
+ "statement": "Let $(B_i)_{i\\ge1}$ be an inverse system of abelian groups [def-weil-inverse-system], with composite transition homomorphisms $B_k\\to B_i$ for $k\\ge i$. The system is *essentially constant* (with *value* $X$) if there are an abelian group $X$ with homomorphisms $\\pi_i:X\\to B_i$ compatible with the transition maps ($B_{i+1}\\to B_i$ composed with $\\pi_{i+1}$ is $\\pi_i$), an index $i_0\\ge1$ and a homomorphism $r:B_{i_0}\\to X$ such that (a) $r\\circ\\pi_{i_0}=\\mathrm{id}_X$, and (b) for every $j\\ge1$ there is $k\\ge\\max(i_0,j)$ such that the transition map $B_k\\to B_j$ equals the composite $\\pi_j\\circ r\\circ(B_k\\to B_{i_0})$.",
+ "source": {
+  "document": "literature/stacks-project/categories.tex",
+  "place": "Categories, Definition Tag 05PU (definition-essentially-constant-diagram, categories.tex line 2928), part (2) (cofiltered index category, a cone (X, X -> M_i)), specialized to the index category (Z_{>=1}, >=) of an inverse system and the category of abelian groups (morphisms k -> i and k -> j exist iff k >= max(i, j)); used in Homology, Lemmas 070C, 070D, 070E. Tag verified in tags/tags: 05PU,categories-definition-essentially-constant-diagram"
+ },
+ "stmt_deps": [
+  "def-weil-inverse-system"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "essentially constant inverse system diagram with value X, retract of some term",
+   "results": "CategoryTheory.Retract (Mathlib.CategoryTheory.Retract), Retract.mk, Iso.retract, InverseSystem.limit, InverseSystem (Mathlib.Order.DirectedInverseSystem)",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "essentially constant inverse system: there is an index i and a retraction of the term onto the limit such that transition maps factor through the limit",
+   "results": "InverseSystem.globalEquiv, InverseSystem.invLimEquiv_apply_coe, InverseSystem.invLimEquiv, InverseSystem.isNatEquiv_piEquivLim, InverseSystem.piLTLim (Mathlib.Order.DirectedInverseSystem)",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rn 'EssentiallyConstant\\|essentiallyConstant\\|essentially constant\\|IsEventuallyConstant' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib --include=*.lean",
+   "results": "CategoryTheory/Limits/Constructions/EventuallyConstant.lean lines 38--45: Functor.IsEventuallyConstantTo j (every F.map f into j is an isomorphism), IsEventuallyConstantFrom; 'essentially constant' only in a comment of Algebra/Homology/Factorizations/CM5a.lean",
+   "date": "2026-10-10",
+   "verdict": "no match: IsEventuallyConstantTo (transition maps eventually isomorphisms) is strictly stronger than essentially constant (the system 0 <- Z <- Z <- ... with zero maps is essentially constant with value 0 but no transition map into any index is an iso)"
+  },
+  {
+   "tool": "local_search",
+   "query": "EssentiallyConstant (project ~/weil-conjectures-slopmaster2)",
+   "results": "none (index: unavailable, so not a proof of absence; the grep above covers it)",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-mittag-leffler-complex-limit-homology",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1"
+}

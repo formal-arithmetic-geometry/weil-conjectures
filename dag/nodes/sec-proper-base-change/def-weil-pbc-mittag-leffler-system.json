@@ -1,0 +1,74 @@
+{
+ "id": "def-weil-pbc-mittag-leffler-system",
+ "kind": "definition",
+ "title": "Mittag-Leffler inverse system of abelian groups (Stacks 02N0)",
+ "statement": "Let $(A_i)_{i\\ge1}$ be an inverse system of abelian groups [def-weil-inverse-system], with transition homomorphisms $A_{i+1}\\to A_i$ and their composites $A_k\\to A_i$ for $k\\ge i$ (the identity for $k=i$). The system $(A_i)$ satisfies the *Mittag-Leffler condition*, or is *ML*, if for every $i\\ge1$ there is an integer $c=c(i)\\ge i$ such that $\\operatorname{Im}(A_k\\to A_i)=\\operatorname{Im}(A_c\\to A_i)$ (as subgroups of $A_i$) for all $k\\ge c$. (For an inverse system of modules over a ring, being ML means that the inverse system of underlying abelian groups is ML.)",
+ "source": {
+  "document": "literature/stacks-project/homology.tex",
+  "place": "Homology, Definition Tag 02N0 (definition-Mittag-Leffler, homology.tex line 7652), stated there for an abelian category; inverse systems indexed by i >= 1 as in homology.tex lines 7595--7640. Tag verified in tags/tags: 02N0,homology-definition-Mittag-Leffler"
+ },
+ "stmt_deps": [
+  "def-weil-inverse-system"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Mittag-Leffler condition for an inverse system: images stabilize",
+   "results": "CategoryTheory.Functor.IsMittagLeffler, isMittagLeffler_of_exists_finite_range, isMittagLeffler_iff_subset_range_comp, isMittagLeffler_iff_eventualRange, isMittagLeffler_of_surjective (Mathlib.CategoryTheory.CofilteredSystem), InverseSystem.isNatEquiv_piEquivLim",
+   "date": "2026-10-10",
+   "verdict": "match: Functor.IsMittagLeffler (applied to the underlying-set functor)"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Mittag-Leffler condition: for every index the images of the transition maps stabilize",
+   "results": "CategoryTheory.Functor.IsMittagLeffler, isMittagLeffler_iff_eventualRange, IsMittagLeffler.subset_image_eventualRange, isMittagLeffler_iff_subset_range_comp, toEventualRanges_nonempty (Mathlib.CategoryTheory.CofilteredSystem)",
+   "date": "2026-10-10",
+   "verdict": "match: Functor.IsMittagLeffler"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.IsMittagLeffler",
+   "results": "all declarations mentioning it: Functor.IsMittagLeffler, IsMittagLeffler.toPreimages, toEventualRanges_nonempty, isMittagLeffler_of_surjective, IsMittagLeffler.eq_image_eventualRange, isMittagLeffler_of_exists_finite_range, isMittagLeffler_iff_eventualRange, IsMittagLeffler.subset_image_eventualRange, surjective_toEventualRanges, isMittagLeffler_iff_subset_range_comp (all Mathlib.CategoryTheory.CofilteredSystem, functors to Type only)",
+   "date": "2026-10-10",
+   "verdict": "match: the definition, CofilteredSystem.lean lines 132--138 (read with sed -n)"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rn \"MittagLeffler\\|Mittag\" ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib --include=*.lean",
+   "results": "only CategoryTheory/CofilteredSystem.lean (Functor.IsMittagLeffler for J => Type v, line 137, eventual ranges, nonempty sections), RingTheory/AdicCompletion/Exactness.lean line 27 (comment 'proven directly without using Mittag-Leffler systems'), Analysis/.../Cotangent.lean (unrelated)",
+   "date": "2026-10-10",
+   "verdict": "match: CategoryTheory/CofilteredSystem.lean line 137"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "CategoryTheory.Functor.IsMittagLeffler",
+  "file": "Mathlib/CategoryTheory/CofilteredSystem.lean",
+  "how": "specializes in one line (lines 132--138: `def IsMittagLeffler : Prop := ∀ j : J, ∃ (i : _) (f : i ⟶ j), ∀ ⦃k⦄ (g : k ⟶ j), range (F.map f) ⊆ range (F.map g)`): apply it to $J=\\mathbb N^{\\mathrm{op}}$ and the composite of the system $\\mathbb N^{\\mathrm{op}}\\to\\mathrm{Ab}$ (def-weil-inverse-system, `Functor.ofOpSequence`) with the forgetful functor to `Type`. A morphism $k\\to j$ exists iff $k\\ge j$, and the images $\\operatorname{Im}(A_k\\to A_j)$ decrease with $k$ (as $A_{k'}\\to A_j$ factors through $A_k$ for $k'\\ge k$); so Mathlib's condition with witness $i$ (Im$(A_i\\to A_j)\\subseteq$ Im$(A_k\\to A_j)$ for all $k\\ge j$) is the Stacks condition with $c(j)=i$, and conversely. Not used as a type class; the lead may prefer to keep it unsplit with this candidate (delivery-errors B8).",
+  "line": 132
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-mittag-leffler-complex-limit-homology",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lead_note": "L 2026-10-10: leaf accepted; Mathlib's condition agrees with Stacks' because the images Im(A_k -> A_j) decrease in k (one line); line 132 verified."
+}
