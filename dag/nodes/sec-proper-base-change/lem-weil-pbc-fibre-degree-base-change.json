@@ -1,0 +1,73 @@
+{
+ "id": "lem-weil-pbc-fibre-degree-base-change",
+ "kind": "statement",
+ "title": "The degree of a finite fibre is unchanged by base change (Stacks 03J5 proof, 03J7)",
+ "statement": "Let $f:X\\to S$ and $g:T\\to S$ be morphisms of schemes [def-pc-scheme], let $X_T=X\\times_ST$ be the fibre product [def-pc-fibre-product] with projection $f_T:X_T\\to T$, let $t\\in T$ and $s=g(t)$, with residue fields $\\kappa(s)$, $\\kappa(t)$ [def-weil-residue-field]. Suppose that the fibre $X_s=X\\times_S\\operatorname{Spec}\\kappa(s)$ [def-pc-scheme-fibre] is finite over $\\kappa(s)$ [def-weil-finite-integral-morphism] of degree $d=\\dim_{\\kappa(s)}\\Gamma(X_s,\\mathcal O_{X_s})$ (degree as in [def-weil-pbc-fibre-degree-bound]). Then the fibre $(X_T)_t=X_T\\times_T\\operatorname{Spec}\\kappa(t)$ of $f_T$ at $t$ is finite over $\\kappa(t)$ and $\\dim_{\\kappa(t)}\\Gamma((X_T)_t,\\mathcal O_{(X_T)_t})=d$. In particular, if an integer $n$ bounds the degrees of the fibres of $f$ [def-weil-pbc-fibre-degree-bound], then $n$ bounds the degrees of the fibres of $f_T$.",
+ "source": {
+  "document": "literature/stacks-project/morphisms.tex",
+  "place": "Morphisms, proof of Lemma Tag 03J5 (lemma-characterize-universally-bounded), line 15339 ('X_k = Spec(k) x_{Spec kappa(y)} X_y', and for X_y = Spec(B) the base change is Spec(B tensor k) with dim_k = dim_{kappa(y)} B), and Lemma Tag 03J7 (lemma-base-change-universally-bounded), line 15422"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-pc-fibre-product",
+  "def-weil-residue-field",
+  "def-pc-scheme-fibre",
+  "def-weil-finite-integral-morphism",
+  "def-weil-pbc-fibre-degree-bound"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "dimension of finite algebra over a field is preserved by base change to a field extension, finrank of tensor product",
+   "results": "Module.finrank_baseChange, Module.rank_baseChange (LinearAlgebra.Dimension.Constructions), IsBaseChange.finrank_eq (LinearAlgebra.Dimension.Localization): the linear algebra part only, nothing on scheme fibres",
+   "date": "2026-10-10",
+   "verdict": "no match (algebraic ingredient Module.finrank_baseChange only)"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "fibre of base change of a morphism of schemes over a point is base change of the fibre along the residue field extension; degree of finite fibre unchanged",
+   "results": "Scheme.Pullback.Triplet.tensor, Scheme.Pullback.ofPointTensor (PullbackCarrier), Scheme.Hom.fiber, fiberOverSpecResidueField, fiberToSpecResidueField (Fiber), IsFinite.instIsStableUnderBaseChange; no degree statement",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Scheme.Hom.fiber, Module.finrank",
+   "results": "none",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rn finrank ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicGeometry | grep -i 'fiber|pullback|baseChange'; sed -n 150,165p ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicGeometry/Morphisms/FlatRank.lean",
+   "results": "AlgebraicGeometry.Scheme.Hom.finrank_pullback_snd (FlatRank.lean:157): for f finite and flat, finrank (pullback.snd f g) y = finrank f (g y); it needs f finite flat globally (here only the fibre X_s is finite) and identifies Hom.finrank with the fibre degree only through FlatRank's own definition; applying it to X_s -> Spec kappa(s) needs the identification (X_T)_t = X_s x_{kappa(s)} kappa(t) (lem-weil-pbc-fibre-of-base-change), so more than one line",
+   "date": "2026-10-10",
+   "verdict": "no match (generalization in a different setting, not a one-line specialization)"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-flat-fp-lqf-bounded-stratification",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1"
+}

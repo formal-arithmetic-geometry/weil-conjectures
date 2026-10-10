@@ -1,0 +1,64 @@
+{
+ "id": "lem-weil-pbc-separated-lqf-base-change",
+ "kind": "statement",
+ "title": "Separated and locally quasi-finite morphisms are stable under base change (Stacks 01KU, 01TM)",
+ "statement": "Let $f:X\\to S$ and $g:S'\\to S$ be morphisms of schemes [def-pc-scheme] and $f':X'=X\\times_SS'\\to S'$ the base change [def-pc-fibre-product]. (1) If $f$ is separated [def-weil-pbc-scheme-conventions], then $f'$ is separated. (2) If $f$ is locally quasi-finite [pqf-def-quasifinite], then $f'$ is locally quasi-finite.",
+ "source": {
+  "document": "literature/stacks-project/schemes.tex",
+  "place": "Schemes, Lemma Tag 01KU (lemma-separated-permanence), line 4289, item (3); Morphisms (literature/stacks-project/morphisms.tex), Lemma Tag 01TM (lemma-base-change-quasi-finite), line 3925, item (2)"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-pc-fibre-product",
+  "def-weil-pbc-scheme-conventions",
+  "pqf-def-quasifinite"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "locally quasi-finite morphism stable under base change",
+   "results": "AlgebraicGeometry.instIsStableUnderBaseChangeSchemeLocallyQuasiFinite (Morphisms.QuasiFinite), RingHom.QuasiFinite.isStableUnderBaseChange, Algebra.QuasiFinite.baseChange, Algebra.QuasiFiniteAt.baseChange",
+   "date": "2026-10-10",
+   "verdict": "partial: Mathlib's LocallyQuasiFinite is stable under base change, but it does not include locally of finite type (QuasiFinite.lean docstring: 'does not require f to be ... locally of finite type'), so Stacks' notion is LocallyQuasiFinite together with LocallyOfFiniteType, and that agreement is itself a theorem"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "base change of a separated morphism of schemes is separated",
+   "results": "AlgebraicGeometry.IsSeparated.isStableUnderBaseChange, IsSeparated.instSndScheme, IsSeparated.instFstScheme (Morphisms.Separated)",
+   "date": "2026-10-10",
+   "verdict": "match for (1)"
+  },
+  {
+   "tool": "grep",
+   "query": "sed -n 80,86p ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicGeometry/Morphisms/Separated.lean; sed -n 55,80p,110,130p ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicGeometry/Morphisms/QuasiFinite.lean",
+   "results": "Separated.lean:82 instance isStableUnderBaseChange : IsStableUnderBaseChange @IsSeparated; QuasiFinite.lean:66 class LocallyQuasiFinite (Gamma(Y,U) -> Gamma(X,V) RingHom.QuasiFinite on affine opens, no finite type), QuasiFinite.lean:115 IsStableUnderBaseChange @LocallyQuasiFinite; FiniteType.lean locallyOfFiniteType_isStableUnderBaseChange (leaf lem-weil-pbc-lft-base-change)",
+   "date": "2026-10-10",
+   "verdict": "partial: (1) exact; (2) needs the identification of pqf-def-quasifinite's locally quasi-finite with LocallyQuasiFinite + LocallyOfFiniteType, not one line; kept unsplit"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-flat-fp-lqf-bounded-stratification",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1"
+}

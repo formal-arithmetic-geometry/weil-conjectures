@@ -822,3 +822,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 03:24 L: reviewed lem-weil-pbc-finite-type-z-domain-normalization-finite (3 steps, +6: finite-type and integral-closure definition leaves, 032L leaf, Japanese/Nagata definitions, 0334 node), lem-weil-pbc-flat-local-criterion-nonzerodivisor (2 steps, 0 new): accepted.
 - 03:26 L: reviewed lem-weil-pbc-flat-ses-kernel-flat (4 steps, 0 new; attached Module.Flat.of_exact_of_flat_of_flat_right, closed on slopmaster2): accepted.
 - 03:27 L: reviewed lem-weil-pbc-flat-normal-fibres-noetherian-normal (5 steps, +4: def depth, def (R_k)/(S_k), 031S, 0339): accepted. Stage 3: lem-weil-pbc-regularity-rk-goes-up should cite def-weil-pbc-serre-conditions-rk-sk (source line 46460).
+- 03:30 L: reviewed lem-weil-pbc-flat-fp-lqf-bounded-stratification (10 steps, +4 unsplit: 02LP, fibre-degree base change, 02VO descent, separated/lqf base change): accepted.
