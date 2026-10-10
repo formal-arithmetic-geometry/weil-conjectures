@@ -7,7 +7,7 @@ module
 
 public import WeilConjectures.CategoryTheory.ModuleObjects.ProjectionFormula
 public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.LowerShriek.Defs
-public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.UpperLowerStar.Defs
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.FiniteExtension.UpperLowerStar.Defs
 
 /-!
 

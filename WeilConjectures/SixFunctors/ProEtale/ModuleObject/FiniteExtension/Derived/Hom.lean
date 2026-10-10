@@ -6,7 +6,7 @@ Authors: Nailin Guan
 module
 
 public import WeilConjectures.CategoryTheory.DerivedCategory.Monoidal.Closed
-public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Tensor
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.FiniteExtension.Derived.Tensor
 
 /-!
 
@@ -15,8 +15,8 @@ public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Tensor
 Let `T` be a commutative topological ring and `X` a scheme, so that the derived category
 `D(Mod_{A_X(T)})` of module objects over the coefficient ring object `A_X(T) = C(-, T)` carries
 the derived tensor product `- ⊗ᴸ_{A_X(T)} -` of
-`WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Tensor`. Under the same hypotheses
-`D(Mod_{A_X(T)})` is monoidal closed
+`WeilConjectures.SixFunctors.ProEtale.ModuleObject.FiniteExtension.Derived.Tensor`. Under the
+same hypotheses `D(Mod_{A_X(T)})` is monoidal closed
 (`WeilConjectures.CategoryTheory.DerivedCategory.Monoidal.Closed`), and this file defines the
 *derived hom* `RHom_{A_X(T)}(-, -)` of module objects to be the internal hom of that closed
 structure, i.e. the right adjoint of the derived tensor product.

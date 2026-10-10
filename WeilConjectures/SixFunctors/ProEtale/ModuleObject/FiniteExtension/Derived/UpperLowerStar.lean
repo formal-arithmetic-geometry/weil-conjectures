@@ -13,7 +13,7 @@ public import WeilConjectures.CategoryTheory.GrothendieckAbelian.Monoidal.FlatRe
 public import WeilConjectures.CategoryTheory.GrothendieckAbelian.Monoidal.TensorColimits
 public import WeilConjectures.CategoryTheory.GrothendieckAbelian.Sheaf
 public import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.RightDerivedFunctorPlus
-public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.UpperLowerStar.Defs
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.FiniteExtension.UpperLowerStar.Defs
 
 /-!
 
@@ -25,7 +25,8 @@ pullback and pushforward on the derived categories `D(Mod_{A_X(T)})` of module o
 `WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.UpperLowerStar`, they are the
 *total* derived functors, i.e. the generic derived-functor constructions of the folder
 `WeilConjectures.CategoryTheory.DerivedCategory` applied to the underived functors `(f)^*⟦T⟧`
-and `(f)_*⟦T⟧` of `WeilConjectures.SixFunctors.ProEtale.ModuleObject.UpperLowerStar.Defs`:
+and `(f)_*⟦T⟧` of
+`WeilConjectures.SixFunctors.ProEtale.ModuleObject.FiniteExtension.UpperLowerStar.Defs`:
 
 | derived functor | notation | meaning |
 | --- | --- | --- |
@@ -70,8 +71,9 @@ The two displayed formulas are theorems about the total derived functors, not de
   described above.
 
 There is no bounded below derived adjunction in general, `f^*` on module objects not being
-exact; for an open immersion see
-`WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.OpenImmersionLowerShriek`.
+exact; for an open immersion see the file
+`WeilConjectures.SixFunctors.ProEtale.ModuleObject.FiniteExtension.Derived.OpenImmersionLowerShriek`
+of this folder.
 
 ## Sorried input
 

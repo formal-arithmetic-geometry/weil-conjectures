@@ -5,8 +5,8 @@ Authors: Nailin Guan
 -/
 module
 
-public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.UpperLowerStar
-public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.LowerShriek.Defs
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.FiniteExtension.Derived.UpperLowerStar
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.FiniteExtension.LowerShriek.Defs
 
 /-!
 
@@ -31,7 +31,8 @@ provides it, namely between the *total* derived functors
 with the corresponding levelwise functor; both steps are the general
 `Adjunction.mapDerivedCategoryAdjunction` and `Adjunction.mapDerivedCategoryPlusAdjunction` of
 `WeilConjectures.CategoryTheory.DerivedCategory.Adjunction`. In particular the derived pullback
-`L((j)^*⟦T⟧)` of `WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.UpperLowerStar` is,
+`L((j)^*⟦T⟧)` of
+`WeilConjectures.SixFunctors.ProEtale.ModuleObject.FiniteExtension.Derived.UpperLowerStar` is,
 for an open immersion, the levelwise functor `D((j)^*⟦T⟧)`
 (`ProEtale.ContinuousMapRing.leftDerivedUpperStarIsoMapDerivedCategory_of_isOpenImmersion`).
 

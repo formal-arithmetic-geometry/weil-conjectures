@@ -9,7 +9,7 @@ public import WeilConjectures.CategoryTheory.GrothendieckAbelian.Monoidal.FlatRe
 public import WeilConjectures.CategoryTheory.GrothendieckAbelian.Monoidal.TensorColimits
 public import WeilConjectures.CategoryTheory.GrothendieckAbelian.Sheaf
 public import WeilConjectures.CategoryTheory.ModuleObjects.DerivedCategory
-public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.ContinuousMap
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.FiniteExtension.ContinuousMap
 
 /-!
 

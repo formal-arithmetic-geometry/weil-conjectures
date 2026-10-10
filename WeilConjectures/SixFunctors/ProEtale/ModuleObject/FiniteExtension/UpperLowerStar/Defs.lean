@@ -6,7 +6,7 @@ Authors: Nailin Guan
 module
 
 public import WeilConjectures.CategoryTheory.ModuleObjects.DerivedExtendScalars
-public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.ContinuousMap
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.FiniteExtension.ContinuousMap
 
 /-!
 
@@ -15,9 +15,9 @@ public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.ContinuousMap
 Let `T` be a commutative topological ring, with coefficient ring objects
 `A_X(T) = C(-, T)` of abelian pro-étale sheaves and canonical coefficient morphisms
 `η_f : A_Y(T) ⟶ f_* A_X(T)` and `α_f : f^* A_Y(T) ⟶ A_X(T)`
-(`WeilConjectures.SixFunctors.ProEtale.ModuleObject.ContinuousMap`). This file defines the
-ordinary adjoint pair `f^* ⊣ f_*` on the categories `Mod_{A_X(T)}` of module objects, by the
-"`mapMod` followed by change of scalars" recipe:
+(`WeilConjectures.SixFunctors.ProEtale.ModuleObject.FiniteExtension.ContinuousMap`). This file
+defines the ordinary adjoint pair `f^* ⊣ f_*` on the categories `Mod_{A_X(T)}` of module
+objects, by the "`mapMod` followed by change of scalars" recipe:
 
 * the pushforward `f_* : Mod_{A_X(T)} ⥤ Mod_{A_Y(T)}` is `mapMod(f_*)`, which sends an
   `A_X(T)`-module to an `f_* A_X(T)`-module since `f_*` is lax monoidal, followed by restriction

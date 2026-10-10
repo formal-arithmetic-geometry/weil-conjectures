@@ -7,7 +7,7 @@ module
 
 public import WeilConjectures.CategoryTheory.RingObjects.EllAdic
 public import WeilConjectures.FromJoel.CategoryTheory.Abelian.Flat.Basic
-public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.UpperLowerStar.Monoidal
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.FiniteExtension.UpperLowerStar.Monoidal
 
 /-!
 
@@ -37,8 +37,9 @@ schemes `f : X ⟶ Y`, which is all that the six functors on module objects over
   `AlgebraicGeometry.ProEtale.continuousMapPushforwardHom_comp`).
 * `α_f : f^* A_Y(T) ⟶ A_X(T)` (`AlgebraicGeometry.ProEtale.continuousMapPullbackHom`): the mate
   of `η_f` under the adjunction `f^* ⊣ f_*`, a morphism of ring objects since `f^*` is strong
-  monoidal (`WeilConjectures.SixFunctors.ProEtale.ModuleObject.UpperLowerStar.Monoidal`). It
-  is an isomorphism for an open immersion `f` (indeed for `f` weakly étale, where `f^*` is
+  monoidal, see
+  `WeilConjectures.SixFunctors.ProEtale.ModuleObject.FiniteExtension.UpperLowerStar.Monoidal`.
+  It is an isomorphism for an open immersion `f` (indeed for `f` weakly étale, where `f^*` is
   restriction), but not in general.
 
 No adic completeness or Noetherian hypothesis on `T` is needed, and no inverse limit
@@ -47,10 +48,11 @@ subfield `E ⊆ ℚ̄_ℓ` and its ring of integers `𝒪_E` with their valuatio
 sheaves of rings `ProEtale.padicIntSheaf`, `ProEtale.padicSheaf`, `ProEtale.padicSubfieldSheaf`
 and `ProEtale.padicIntegersSheaf` of `WeilConjectures.CategoryTheory.RingObjects.EllAdic` are
 instances of `continuousMapRingSheaf` (see the examples at the end of the file). The sheaf
-`ℚ̄_ℓ,X` is not of this form and is treated separately.
+`ℚ̄_ℓ,X` is not of this form and is treated separately, in
+`WeilConjectures.SixFunctors.ProEtale.ModuleObject.PAdicAlgCl`.
 
 The six functors on module objects over `A_X(T)` are built from `η_f` and `α_f` in the other
-files of `WeilConjectures.SixFunctors.ProEtale.ModuleObject`.
+files of `WeilConjectures.SixFunctors.ProEtale.ModuleObject.FiniteExtension`.
 
 ## Sorried input
 

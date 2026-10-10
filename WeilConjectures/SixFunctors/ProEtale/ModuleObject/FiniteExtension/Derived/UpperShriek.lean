@@ -6,8 +6,8 @@ Authors: Nailin Guan
 module
 
 public import Mathlib.CategoryTheory.Adjunction.Restrict
-public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.LowerShriek
-public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.OpenImmersionLowerShriek
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.FiniteExtension.Derived.LowerShriek
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.FiniteExtension.Derived.OpenImmersionLowerShriek
 
 /-!
 
