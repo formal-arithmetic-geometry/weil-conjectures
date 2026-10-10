@@ -12,9 +12,70 @@
   "pqf-def-coherent",
   "def-weil-sheaf-of-modules-category"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "*Step 1 (transport to a spectrum).* Fix $a\\in A$ and put $R_a=\\mathcal O_Y(W_a)$. The open subscheme $W_a$ is affine [def-pc-scheme]: there are a commutative ring $B$ and an isomorphism of schemes $k:\\operatorname{Spec}B\\to W_a$; since $\\Gamma(\\operatorname{Spec}B,\\mathcal O)=B$ [def-weil-affine-spectrum], $k^\\sharp$ on global sections is a ring isomorphism $\\rho:R_a\\to B$, and composing $k$ with $\\operatorname{Spec}\\rho:\\operatorname{Spec}B\\to\\operatorname{Spec}R_a$ inverted (an isomorphism, by functoriality of $\\operatorname{Spec}$ [def-weil-affine-spectrum]) gives an isomorphism of schemes $h_a:X_a:=\\operatorname{Spec}R_a\\to W_a$ whose map on global sections $R_a=\\mathcal O_Y(W_a)\\to\\Gamma(X_a,\\mathcal O_{X_a})=R_a$ is the identity. Let $g_a:X_a\\to Y$ be $h_a$ followed by the inclusion of $W_a$, an open immersion with image $W_a$. Restrict along $g_a$ as in [lem-weil-pbc-module-restriction-open-immersion-colimits]: $\\mathcal F|_{X_a}$ and $\\mathcal G|_{X_a}$ are $\\mathcal O_{X_a}$-modules with $(\\mathcal F|_{X_a})(U)=\\mathcal F(g_a(U))$, quasi-coherent by clause (2) of that node, and $\\varphi|_{X_a}$ is a morphism between them by clause (1), with components $(\\varphi|_{X_a})_U=\\varphi_{g_a(U)}$. On global sections, $\\Gamma(X_a,\\mathcal F|_{X_a})=\\mathcal F(W_a)$ with $R_a$ acting through $g_a^\\sharp$, which on global sections is the identity of $R_a$; so $\\Gamma(X_a,\\mathcal F|_{X_a})=\\mathcal F(W_a)$ and $\\Gamma(X_a,\\mathcal G|_{X_a})=\\mathcal G(W_a)$ as $R_a$-modules, and $u_a:=(\\varphi|_{X_a})_{X_a}=\\varphi_{W_a}$, an $R_a$-linear map which is bijective by hypothesis.",
+   "uses": [
+    "def-pc-scheme",
+    "def-weil-affine-spectrum",
+    "lem-weil-pbc-module-restriction-open-immersion-colimits",
+    "pqf-def-coherent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Schemes, Section 01I6 (section-quasi-coherent-affine) and Lemma 01IA (lemma-quasi-coherent-affine): a quasi-coherent module on an affine open is studied on Spec of its ring of sections"
+   }
+  },
+  {
+   "text": "*Step 2 ($\\varphi|_{X_a}$ is an isomorphism).* Write $\\mathcal F'=\\mathcal F|_{X_a}$, $\\mathcal G'=\\mathcal G|_{X_a}$, $\\alpha=\\varphi|_{X_a}$, and let $\\tau$, $M\\mapsto\\widetilde M$, $\\varepsilon$ be as in [lem-weil-pbc-affine-tilde-gamma-adjunction] for $R=R_a$. The counit is natural: $\\alpha\\circ\\varepsilon_{\\mathcal F'}=\\varepsilon_{\\mathcal G'}\\circ\\widetilde{u_a}$ as maps $\\widetilde{\\mathcal F(W_a)}\\to\\mathcal G'$, because under the bijection $\\beta\\mapsto\\beta_{X_a}\\circ\\tau_{X_a}$ of clause (1) (with $M=\\mathcal F(W_a)$, target $\\mathcal G'$) both sides go to $u_a$: $(\\alpha\\circ\\varepsilon_{\\mathcal F'})_{X_a}\\circ\\tau_{X_a}=\\alpha_{X_a}\\circ\\mathrm{id}=u_a$ since $\\varepsilon_{\\mathcal F'}$ corresponds to $\\mathrm{id}_{\\mathcal F(W_a)}$, and $(\\varepsilon_{\\mathcal G'}\\circ\\widetilde{u_a})_{X_a}\\circ\\tau_{X_a}=(\\varepsilon_{\\mathcal G'})_{X_a}\\circ\\tau_{X_a}\\circ u_a=u_a$ by $\\widetilde{u_a}_{X_a}\\circ\\tau_{X_a}=\\tau_{X_a}\\circ u_a$ and since $\\varepsilon_{\\mathcal G'}$ corresponds to $\\mathrm{id}_{\\mathcal G(W_a)}$. By clause (3), $\\varepsilon_{\\mathcal F'}$ and $\\varepsilon_{\\mathcal G'}$ are isomorphisms ($\\mathcal F',\\mathcal G'$ are quasi-coherent by Step 1). The bijective $R_a$-linear $u_a$ has an $R_a$-linear inverse $u_a^{-1}$, and since $M\\mapsto\\widetilde M$ is a functor (clause (1)), $\\widetilde{u_a^{-1}}$ is a two-sided inverse of $\\widetilde{u_a}$. Hence $\\alpha=\\varepsilon_{\\mathcal G'}\\circ\\widetilde{u_a}\\circ\\varepsilon_{\\mathcal F'}^{-1}$ is an isomorphism of $\\mathcal O_{X_a}$-modules, with inverse $\\varepsilon_{\\mathcal F'}\\circ\\widetilde{u_a^{-1}}\\circ\\varepsilon_{\\mathcal G'}^{-1}$.",
+   "uses": [
+    "lem-weil-pbc-affine-tilde-gamma-adjunction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Schemes, Lemma 01IA (lemma-quasi-coherent-affine: a quasi-coherent module on Spec R is the tilde of its global sections) and Lemma 01IB (lemma-equivalence-quasi-coherent: tilde and global sections are quasi-inverse equivalences), with Lemma 01I7 (lemma-compare-constructions) for the adjunction"
+   }
+  },
+  {
+   "text": "*Step 3 (back to $W_a$).* The inverse $h_a^{-1}:W_a\\to X_a$ is an isomorphism of schemes, in particular an open immersion, so restriction along it is a functor $\\Mod(\\mathcal O_{X_a})\\to\\Mod(\\mathcal O_{W_a})$ [lem-weil-pbc-module-restriction-open-immersion-colimits] (1), and functors send isomorphisms to isomorphisms; thus $(\\varphi|_{X_a})|_{W_a}$ is an isomorphism of $\\mathcal O_{W_a}$-modules by Step 2. For an open $V\\subseteq W_a$, $(\\mathcal F|_{X_a})|_{W_a}(V)=\\mathcal F(g_a(h_a^{-1}(V)))=\\mathcal F(V)$, with $\\mathcal O_{W_a}(V)=\\mathcal O_Y(V)$ acting through the composite of $g_a^\\sharp$ and $(h_a^{-1})^\\sharp$, which is the structure map of the open immersion $g_a\\circ h_a^{-1}$, the inclusion $W_a\\subseteq Y$, i.e. the identity of $\\mathcal O_Y(V)$; and the component of $(\\varphi|_{X_a})|_{W_a}$ at $V$ is $\\varphi_{g_a(h_a^{-1}V)}=\\varphi_V$. So $(\\varphi|_{X_a})|_{W_a}$ is the restriction $\\varphi|_{W_a}:\\mathcal F|_{W_a}\\to\\mathcal G|_{W_a}$ of $\\varphi$ to the open $W_a$ in the sense of [lem-weil-pbc-sheaf-isomorphism-local-open-cover] ($V\\mapsto\\mathcal F(V)$, components $\\varphi_V$), and $\\varphi|_{W_a}$ is an isomorphism of $\\mathcal O_{W_a}$-modules.",
+   "uses": [
+    "lem-weil-pbc-module-restriction-open-immersion-colimits",
+    "def-weil-pbc-module-finite-type-presentation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Schemes, Lemma 01IB (lemma-equivalence-quasi-coherent), applied on the affine open W_a; transport along the isomorphism Spec R_a = W_a written by the agent"
+   }
+  },
+  {
+   "text": "*Step 4 (glue).* By Step 3, $\\varphi|_{W_a}$ is an isomorphism of $\\mathcal O_{W_a}$-modules for every $a\\in A$, and $Y=\\bigcup_aW_a$ is an open covering. By the 'if' direction of [lem-weil-pbc-sheaf-isomorphism-local-open-cover] (with $X=Y$, $\\mathcal O_X=\\mathcal O_Y$, $U_a=W_a$, $\\alpha=\\varphi$, $\\mathcal M=\\mathcal F$, $\\mathcal N=\\mathcal G$), $\\varphi$ is an isomorphism of $\\mathcal O_Y$-modules.",
+   "uses": [
+    "lem-weil-pbc-sheaf-isomorphism-local-open-cover"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sheaves.tex",
+    "place": "Sheaves, Lemma 04TN (lemma-glue-maps): the local inverses glue to an inverse"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-scheme",
+  "def-weil-affine-spectrum",
+  "lem-weil-pbc-module-restriction-open-immersion-colimits",
+  "pqf-def-coherent",
+  "lem-weil-pbc-affine-tilde-gamma-adjunction",
+  "def-weil-pbc-module-finite-type-presentation",
+  "lem-weil-pbc-sheaf-isomorphism-local-open-cover"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/schemes.tex",
+  "place": "Schemes, Lemmas 01IA (schemes-lemma-quasi-coherent-affine) and 01IB (schemes-lemma-equivalence-quasi-coherent) on each W_a, with Sheaves, Lemma 04TN (sheaves-lemma-glue-maps, sheaves.tex) for the covering; Stacks uses the statement without stating it, in the proof of Morphisms, Lemma 01SB ('this may be checked on the members of an affine covering'); the argument is assembled by the agent"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -43,10 +104,45 @@
    "results": "none; Modules/Tilde.lean has isIso_fromTildeΓ_of_isQuasicoherent (:850) and tildeEquiv (:899) on one Spec R only, Modules/Sheaf.lean:147 Hom.isIso_iff_isIso_app (all opens)",
    "date": "2026-10-10",
    "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "a morphism of sheaves of modules on a scheme which is an isomorphism on each open of an open cover is an isomorphism",
+   "results": "Scheme.Modules.Hom.isIso_iff_isIso_app, Scheme.Modules.instIsIsoAbApp, Scheme.Modules.instReflectsIsomorphisms...toPresheaf, Scheme.Modules.hom_ext (Mathlib.AlgebraicGeometry.Modules.Sheaf), Scheme.Cover.instIsIsoFromGlued (Gluing), TopCat.Presheaf.isIso_of_stalkFunctor_map_iso (Topology.Sheaves.Stalks)",
+   "date": "2026-10-10",
+   "verdict": "no match: isIso_iff_isIso_app needs all opens; isIso_of_stalkFunctor_map_iso is the stalk criterion (already the leaf lem-weil-pbc-module-iso-on-stalks); nothing from an affine cover"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "morphism of quasi-coherent modules on a scheme, bijective on sections over every affine open of a cover, is an isomorphism",
+   "results": "Scheme.Modules.Hom.isIso_iff_isIso_app, CategoryTheory.Sheaf.isLocallyBijective_iff_isIso, Scheme.Modules.instIsIsoAbApp, PresheafOfModules.homEquivOfIsLocallyBijective, isomorphisms_eq_stalkwise, HasRingHomProperty.iff_of_source_openCover, IsLocalIso",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Scheme.Modules.fromTildeΓ, CategoryTheory.IsIso",
+   "results": "isIso_fromTildeΓ_iff, isIso_fromTildeΓ_iff_isLocalizing, isIso_fromTildeΓ_pushforward, isIso_fromTildeΓ_of_presentation, Scheme.Modules.isIso_fromTildeΓ_of_isQuasicoherent, isQuasicoherent_iff_isIso_fromTildeΓ, instances for unit and free (all Mathlib.AlgebraicGeometry.Modules.Tilde, on one Spec R)",
+   "date": "2026-10-10",
+   "verdict": "no match: only the affine counit (already the leaf lem-weil-pbc-affine-tilde-gamma-adjunction), no statement over an affine cover"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rn 'isIso_of\\|is_iso_of' Mathlib/Topology/Sheaves; grep -rln 'IsQuasicoherent\\|QuasiCoherent' Mathlib/AlgebraicGeometry Mathlib/Algebra/Category/ModuleCat/Sheaf; grep -n 'IsAffineOpen\\|OpenCover\\|isIso' Mathlib/AlgebraicGeometry/Modules/Tilde.lean Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent.lean (under ~/weil-conjectures-slopmaster2/.lake/packages/mathlib)",
+   "results": "Topology/Sheaves/Stalks.lean:652 app_isIso_of_stalkFunctor_map_iso, :670 isIso_of_stalkFunctor_map_iso (stalk criterion); Tilde.lean:850 isIso_fromTildeΓ_of_isQuasicoherent, :876 isQuasicoherent_iff_isIso_fromTildeΓ, :600/:624 exists_isOpenCover_presentation / exists_affineOpenCover_presentation (presentations, not isomorphisms); Sheaf.lean:147 Hom.isIso_iff_isIso_app; no lemma deriving IsIso from bijectivity on an affine cover",
+   "date": "2026-10-10",
+   "verdict": "no match: not a Mathlib leaf (assembled from Tilde.lean:850 and a gluing/stalk criterion, which are separate nodes)"
+  },
+  {
+   "tool": "local_search",
+   "query": "isIso_of_isIso_restrict; isIso_fromTildeΓ (project root ~/weil-conjectures-slopmaster2)",
+   "results": "isIso_of_isIso_restrict: none (index unavailable, so not proof of absence); isIso_fromTildeΓ prefix: Mathlib Tilde.lean isIso_fromTilde lemmas and WeilConjectures/Mathlib/AlgebraicGeometry/Modules/Tilde.lean isIso_fromTilde",
+   "date": "2026-10-10",
+   "verdict": "no match"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "worker",
@@ -66,5 +162,12 @@
   }
  },
  "chapter": "sec-proper-base-change",
- "unit": "sk-thm-p1"
+ "unit": "sk-thm-p1",
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "lem-weil-pbc-quasi-coherent-iso-on-affine-cover",
+  "worker": "stage1",
+  "summary": "Read Schemes 01IA, 01IB (schemes.tex lines 1279, 1390), 01I7, and Sheaves 04TN (sheaves.tex line 5078); tags verified in tags/tags (007X named in the brief is sheaves-section-sheafification, not an iso-on-cover lemma, so it is not used). Statement and stmt_deps unchanged. Proof in 4 steps, citing only existing nodes, all of unit sk-thm-p1 apart from definitions: (1) each affine W_a is transported to X_a = Spec O_Y(W_a) by an isomorphism inducing the identity on global sections, and the restrictions of F, G along X_a -> Y are quasi-coherent (lem-weil-pbc-module-restriction-open-immersion-colimits (2)), with phi on global sections equal to phi_{W_a}; (2) on X_a, naturality of the counit (derived from the natural bijection of lem-weil-pbc-affine-tilde-gamma-adjunction (1)) and the counit isomorphisms (3) give phi|_{X_a} = eps o (phi_{W_a})~ o eps^{-1}, an isomorphism; (3) restricting back along the inverse isomorphism W_a -> X_a (a functor) gives that phi|_{W_a} is an isomorphism; (4) lem-weil-pbc-sheaf-isomorphism-local-open-cover (gluing of the local inverses, Sheaves 04TN) concludes. No new node. Not a Mathlib leaf (LeanSearch, LeanFinder, Loogle, local_search, grep recorded): Mathlib has the affine counit (Tilde.lean:850) and the all-opens and stalk criteria, not the affine-cover statement. Citer lem-weil-pbc-affine-module-correspondence steps 6 and 7 use exactly this statement (covers u^{-1}V of U and all affine opens of X, maps between quasi-coherent modules bijective on those sections)."
+ },
+ "reviewed": "2026-10-10 L: 4 steps checked (transport to Spec O(W_a) with identity on global sections, counit naturality derived from the tilde-Gamma adjunction clause (1), phi|_{X_a} = eps (phi_{W_a})~ eps^{-1} an isomorphism, back to W_a along the inverse isomorphism, glue by sheaf-isomorphism-local-open-cover); proof assembled by the agent since Stacks uses the fact inside 01SB without stating it; citer affine-module-correspondence steps 6-7 match"
 }
