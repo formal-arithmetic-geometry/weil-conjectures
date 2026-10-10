@@ -23,9 +23,79 @@
   "def-weil-algebraic-closure",
   "def-pc-field-tower"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Since $k'/k$ is finite, every $x\\in k'$ is algebraic over $k$ [def-weil-algebraic-element] (if $[k':k]=d$, the $d+1$ elements $1,x,\\dots,x^d$ are linearly dependent over $k$), so no element of $k'$ is algebraically independent over $k$ and the only transcendence basis of $k'/k$ is the empty family [def-weil-pbc-transcendence-basis]. As $k'$ is finitely generated over $k$ (by a $k$-basis), the separability hypothesis [def-weil-pbc-separable-field-extension] applied to $K'=k'$ therefore says exactly that $k'/k$ is separable algebraic [def-weil-pbc-separable-algebraic-extension]. By [lem-weil-pbc-finite-separable-extension-primitive-element], choose $\\alpha\\in k'$ with $k'=k(\\alpha)$. Let $P\\in k[T]$ be the monic minimal polynomial of $\\alpha$. The separability hypothesis says that $P$ is separable [def-weil-pbc-separable-algebraic-extension], and the power-basis statement [lem-weil-pbc-simple-algebraic-extension-power-basis] gives $k'\\cong k[T]/(P)$ as $k$-algebras.",
+   "uses": [
+    "def-weil-algebraic-element",
+    "def-weil-pbc-transcendence-basis",
+    "def-weil-pbc-separable-field-extension",
+    "lem-weil-pbc-finite-separable-extension-primitive-element",
+    "def-weil-pbc-separable-algebraic-extension",
+    "lem-weil-pbc-simple-algebraic-extension-power-basis"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/fields.tex",
+    "place": "Fields, Lemma Tag 030N (primitive element), together with the minimal-polynomial presentation in the proof of Algebra Tag 030U"
+   }
+  },
+  {
+   "text": "Tensoring the presentation with $\\Omega$ and using [lem-weil-pbc-polynomial-scalar-extension] and [lem-weil-pbc-tensor-quotient-base-change] gives an $\\Omega$-algebra isomorphism $k'\\otimes_k\\Omega\\cong\\Omega[T]/(\\overline P)$, where $\\overline P$ is the image of $P$ in $\\Omega[T]$.",
+   "uses": [
+    "lem-weil-pbc-polynomial-scalar-extension",
+    "lem-weil-pbc-tensor-quotient-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra, proof of Lemma Tag 030U, lines 10179-10181"
+   }
+  },
+  {
+   "text": "The coefficient map $k[T]\\to\\Omega[T]$ carries a Bezout identity for the separable polynomial $P$ to one for $\\overline P$, so $\\overline P$ is separable. Apply [lem-pc-separable-polynomial-alg-closed-quotient-product] to obtain a product decomposition of $\\Omega[T]/(\\overline P)$ into one copy of $\\Omega$ for each root of $\\overline P$.",
+   "uses": [
+    "def-pc-separable-polynomial",
+    "lem-pc-separable-polynomial-alg-closed-quotient-product"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra, proof of Lemma Tag 00U3 and the separability sentence in Tag 030U"
+   }
+  },
+  {
+   "text": "Evaluation at a root $\\rho$ of $\\overline P$ is the same as a $k$-embedding $k'\\to\\Omega$ sending $\\alpha$ to $\\rho$, and every such embedding is obtained uniquely this way. Thus the product is indexed by $k$-embeddings $\\sigma:k'\\hookrightarrow_k\\Omega$. The root count in the new node gives $[k':k]$ factors (equivalently, use [lem-pc-finrank-field-base-change] and the power basis), proving the final assertion.",
+   "uses": [
+    "lem-pc-separable-polynomial-alg-closed-quotient-product",
+    "lem-pc-finrank-field-base-change",
+    "lem-weil-pbc-simple-algebraic-extension-power-basis"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/fields.tex",
+    "place": "Fields, Lemma Tag 09GU (embeddings into an algebraic closure) and Lemma Tag 030N (primitive element)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-separable-field-extension",
+  "def-weil-pbc-transcendence-basis",
+  "def-weil-algebraic-element",
+  "lem-weil-pbc-finite-separable-extension-primitive-element",
+  "def-weil-pbc-separable-algebraic-extension",
+  "lem-weil-pbc-simple-algebraic-extension-power-basis",
+  "lem-weil-pbc-polynomial-scalar-extension",
+  "lem-weil-pbc-tensor-quotient-base-change",
+  "def-pc-separable-polynomial",
+  "lem-pc-separable-polynomial-alg-closed-quotient-product",
+  "lem-pc-finrank-field-base-change"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Algebra, proof of Lemma Tag 00U3 and Lemma Tag 030U, with Fields Lemmas 030N and 09GU"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -50,12 +120,27 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-pc-base-change-closure-components",
   "by": "worker",
   "date": "2026-10-10"
  },
  "chapter": "sec-picard-framework",
- "unit": "sk-thm-picard-rr"
+ "unit": "sk-thm-picard-rr",
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "lem-pc-separable-tensor-algebraic-closure",
+  "worker": "stage1",
+  "summary": "No Lean declaration states this item. I checked the imported statement against the sec-picard blueprint and the Stacks proof route. The split uses the existing primitive-element and power-basis nodes, scalar extension and tensor-quotient nodes, and one new statement-only node for the Chinese-remainder product decomposition of a separable polynomial quotient over an algebraically closed field. The final step identifies roots with k-embeddings and counts them by the degree.",
+  "blueprint": "lem-pc-ample-positive-degree proof, part (<=), factorization of k' tensor_k Omega by k-embeddings"
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-sta",
+  "group": "H1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-sta (reviewer sub-agent of L); spot-checked: Source: Stacks 030U (algebra-lemma-separable-extension-preserves-reducedness, proof: minimal polynomial presentation, separable quotient), 00U3 (algebra-lemma-etale-over-field), Fields 030N/09GU; item statement (finite separable k'/k, Omega alg. closed, k' tensor Omega = product of Omega over k-embeddings, [k':k] factors) unchanged and true. Step 1: primitive element (lem-weil-pbc-finite-separable-extension-primitive-element, needs finite separable algebraic), minimal polynomial as monic generator of the kernel and separable (def-weil-pbc-separable-algebraic-extension), power basis gives surjectivity of k[T]->k' hence k'=k[T]/(P) with deg P=[k':k]. Step 2: lem-weil-pbc-polynomial-scalar-extension (Omega tensor k[T]=Omega[T]) and lem-weil-pbc-tensor-quotient-base-change with A=k[T], B=Omega[T] (plus tensor associativity) give Omega[T]/(P bar). Step 3: new node lem-pc-separable-polynomial-alg-closed-quotient-product (F=k, P monic separable over F, so its hypotheses hold directly); the node is true (separable => n distinct roots in Omega, CRT; degree 0 gives the zero ring = empty product), self-contained, TeX, statement only, blueprint.from = lem-pc-ample-positive-degree (ancestor checked), same_as [] after my blueprint_refs search 'separable polynomial algebraically closed' / 'tensor algebraic closure' (nothing). Step 4: roots of P in Omega <-> k-embeddings k'=k[T]/(P)->Omega, elementary; count = deg P = [k':k]. Mathlib: Algebra.FormallyEtale.equivPiOfIsSepClosed (Mathlib/RingTheory/Etale/Field.lean:217) is a product indexed by PrimeSpectrum of an etale algebra over a sep. closed field, not the item (needs etaleness of the base change and the index identification); no exact declaration for the item or the new node; no slopmaster2 declaration by grep (B10). Small cases: k=R, k'=C, Omega=C gives C x C indexed by id and conjugation; degree 1 gives Omega. FIX more, RETURN less: dag/nodes/sec-picard-framework/lem-pc-separable-tensor-algebraic-closure.json: proof[0].text/uses, proof_deps: the item's hypothesis is separable in the sense of def-weil-pbc-separable-field-extension (separably generated f.g. subextensions) while step 1 used separable algebraic; added the derivation (finite => algebraic [def-weil-algebraic-element], empty transcendence basis [def-weil-pbc-transcendence-basis], so def-weil-pbc-separable-field-extension applied to K'=k' gives separable algebraic) and cited the three nodes (C4). Start Sat Oct 10 04:13:42 PM UTC 2026, end Sat Oct 10 04:15:13 PM UTC 2026.; 1 file(s) fixed by the reviewer"
+ }
 }
