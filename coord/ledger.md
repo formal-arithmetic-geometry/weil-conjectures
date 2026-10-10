@@ -2124,3 +2124,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 17:31 L: ATTACH TOOL READY (tools/attach.py; claim.py skips attached nodes and pending attachment releases); REVIEW PACKET reviewers so far: 4 to 12 tool uses each
 - 17:33 L: merged deliver/E1/lem-weil-pbc-etale-inverse-image-section-description (reviewer PASS; first push; new nodes: 0)
 - 17:33 L: merged deliver/C1/lem-sc-mayer-vietoris-open-cover (reviewer PASS; first push; new nodes: 1)
+- 17:34 L: merged deliver/J1/lem-pc-separable-polynomial-distinct-roots-alg-closed (reviewer FIX; first push; new nodes: 0)

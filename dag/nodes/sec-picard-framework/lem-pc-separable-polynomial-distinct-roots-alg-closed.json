@@ -29,34 +29,83 @@
  "proof_origin": null,
  "mathlib_searches": [
   {
-   "tool": "leansearch",
-   "query": "monic separable polynomial over a field has distinct roots and factors over an algebraically closed extension",
-   "results": "No exact service result; related Polynomial.Splits and separability lemmas",
+   "tool": "leanfinder",
+   "query": "monic separable polynomial over an algebraically closed field has exactly its degree many distinct roots and factors as product of linear terms",
+   "results": "Polynomial.natSepDegree_eq_of_isAlgClosed, Polynomial.exists_finset_of_splits, Polynomial.card_rootSet_eq_natDegree, IsAlgClosed.factors; no single exact combined declaration",
+   "date": "2026-10-11",
+   "verdict": "generalization: ingredients only"
+  },
+  {
+   "tool": "loogle",
+   "query": "Polynomial.Separable, Polynomial.nodup_roots, Polynomial.card_rootSet_eq_natDegree, IsAlgClosed.splits",
+   "results": "no hits for combined pattern; individual declarations found by semantic search",
    "date": "2026-10-11",
    "verdict": "no match"
   },
   {
-   "tool": "loogle",
-   "query": "Polynomial.Separable -> Splits -> natDegree_eq_card_roots",
-   "results": "Polynomial.Splits.natDegree_eq_card_roots and IsAlgClosed.splits, but no combined statement over an extension with explicit product",
+   "tool": "grep",
+   "query": "card_rootSet_eq_natDegree|nodup_roots|eq_prod_roots in Mathlib/FieldTheory and Mathlib/Algebra/Polynomial",
+   "results": "card_rootSet_eq_natDegree at FieldTheory/Separable.lean:442; nodup_roots at FieldTheory/Separable.lean:289; factorization in Algebra/Polynomial/Splits.lean",
    "date": "2026-10-11",
    "verdict": "generalization: ingredients only"
   },
   {
-   "tool": "grep",
-   "query": "rg -n 'card_roots_eq_natDegree|natDegree_eq_card_roots|splits_iff_card_roots|separable.*roots' /home/ubuntu/weil-src-slopmaster2/.lake/packages/mathlib/Mathlib/FieldTheory",
-   "results": "Mathlib/FieldTheory/IsAlgClosed/Basic.lean:110-130 (root count); Mathlib/FieldTheory/Separable.lean:318 (separable products), no exact quotient/factorization statement",
+   "tool": "loogle",
+   "query": "Polynomial.card_rootSet_eq_natDegree",
+   "results": "Polynomial.card_rootSet_eq_natDegree, Mathlib.FieldTheory.Separable",
    "date": "2026-10-11",
-   "verdict": "generalization: ingredients only"
+   "verdict": "generalization: ingredient only"
+  },
+  {
+   "tool": "grep",
+   "query": "card_rootSet_eq_natDegree in FieldTheory/Separable.lean",
+   "results": "Mathlib/FieldTheory/Separable.lean:442 theorem card_rootSet_eq_natDegree",
+   "date": "2026-10-11",
+   "verdict": "generalization: ingredient only"
+  },
+  {
+   "tool": "leansearch",
+   "query": "monic separable polynomial over an algebraically closed field has exactly its degree many distinct roots and factors as product of linear terms",
+   "results": "service unavailable",
+   "date": "2026-10-11",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "grep",
+   "query": "nodup_roots, card_rootSet_eq_natDegree, Splits.eq_prod_roots_of_monic, IsAlgClosed.splits in ~/weil-conjectures-slopmaster2/.lake/packages/mathlib (reviewer R-spr1740)",
+   "results": "Separable.lean:289 nodup_roots; Separable.lean:442 card_rootSet_eq_natDegree; Splits.lean:307 Splits.eq_prod_roots_of_monic; IsAlgClosed/Basic.lean:63 IsAlgClosed.splits",
+   "date": "2026-10-11",
+   "verdict": "match"
   }
  ],
- "mathlib_match": null,
- "status": "unsplit",
+ "mathlib_match": {
+  "declaration": "Polynomial.card_rootSet_eq_natDegree",
+  "file": "Mathlib/FieldTheory/Separable.lean",
+  "line": 442,
+  "how": "one declaration per clause, each specialized in one line with `IsAlgClosed.splits` (FieldTheory/IsAlgClosed/Basic.lean:63) and `hsep.map`: exactly n roots is `Polynomial.card_rootSet_eq_natDegree hsep ((IsAlgClosed.splits _))` with `natDegree_map`; pairwise distinct is `Polynomial.nodup_roots hsep.map` (Separable.lean:289); the factorization is `Polynomial.Splits.eq_prod_roots_of_monic (IsAlgClosed.splits _) (hmon.map _)` (Algebra/Polynomial/Splits.lean:307), a product over the nodup root multiset, i.e. over the root set"
+ },
+ "status": "mathlib",
  "created": {
   "item": "lem-pc-separable-polynomial-alg-closed-quotient-product",
   "by": "worker",
   "date": "2026-10-10"
  },
  "chapter": "sec-picard-framework",
- "unit": "sk-thm-picard-rr"
+ "unit": "sk-thm-picard-rr",
+ "split_report": {
+  "date": "2026-10-11",
+  "item": "lem-pc-separable-polynomial-distinct-roots-alg-closed",
+  "worker": "stage1",
+  "summary": "No Lean declaration states the item. I split the Stacks 00U3 separable-polynomial argument into preservation of separability and algebraic-closure factorization, the no-repeated-roots Mathlib leaf, the exact root-set cardinality Mathlib leaf, and the final monic reindexing. Existing algebraically closed factorization was reused.",
+  "blueprint": "lem-pc-ample-positive-degree proof, part (<=): factor the separable minimal polynomial after passage to the algebraic closure",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-spr1740",
+  "group": "J1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-spr1740 (reviewer sub-agent of L); spot-checked: Read Separable.lean:289 nodup_roots, :442 card_rootSet_eq_natDegree, Splits.lean:307 Splits.eq_prod_roots_of_monic, IsAlgClosed/Basic.lean:63 IsAlgClosed.splits with sed. Split is valid but the item is Mathlib with one declaration per clause (B8). FIX more, RETURN less: made the item a Mathlib leaf (status mathlib, mathlib_match card_rootSet_eq_natDegree with per-clause how, proof emptied, reviewer grep recorded in mathlib_searches); dropped the two new class (c) leaves nodup-roots and rootset-card, now unused.; 1 file(s) fixed by the reviewer"
+ }
 }
