@@ -24,9 +24,38 @@
   "def-weil-pbc-scheme-conventions",
   "def-weil-closed-points"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Fix a closed point $p\\in Y$ and write $F=f^{-1}(\\{p\\})$. The singleton $\\{p\\}$ is closed, so $F$ is closed because morphisms of schemes are continuous. If $F$ is nonempty, choose $z\\in F$. If $z$ were not closed, then [lem-sc-finite-type-nonclosed-closure-closed-points] would give infinitely many closed points in $\\overline{\\{z\\}}$; since $F$ is closed and contains $z$, this closure lies in $F$, and all those closed points have image $p$, contradicting the assumed distinction of images of closed points. Thus every nonempty fibre contains a closed point.",
+   "uses": [
+    "lem-sc-finite-type-nonclosed-closure-closed-points"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 0E8S, lemma-separate-points-tangent-vectors, proof after condition (1), using Tag 0478 for closed points in closures"
+   }
+  },
+  {
+   "text": "Every point $y\\in F$ is closed by the same argument: if it were nonclosed, its closure would supply infinitely many closed points of $F$, all mapping to $p$. Since any two closed points of $F$ have the same image $p$, the hypothesis that distinct closed points have distinct images implies that there is at most one such point. Combined with step 1, $F$ is empty or $\\{x\\}$ for one closed point $x\\in X$.",
+   "uses": [
+    "lem-sc-finite-type-nonclosed-closure-closed-points"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 0E8S, lemma-separate-points-tangent-vectors, proof after condition (1), using Tag 0478 for closed points in closures"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sc-finite-type-nonclosed-closure-closed-points"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/varieties.tex",
+  "place": "Tag 0E8S, lemma-separate-points-tangent-vectors, proof after condition (1), with Tag 0478"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -51,12 +80,28 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-sc-point-tangent-separation-closed-immersion",
   "by": "worker",
   "date": "2026-10-10"
  },
  "chapter": "sec-picard-framework",
- "unit": "sk-thm-picard-rr"
+ "unit": "sk-thm-picard-rr",
+ "split_report": {
+  "date": "2026-10-11",
+  "item": "lem-sc-point-tangent-closed-fibre-singleton",
+  "worker": "stage1",
+  "summary": "Split the closed-fibre argument into existence of a closed point and uniqueness. A nonclosed point in a fibre would have infinitely many closed specializations by the existing finite-type closure node; closedness of the fibre puts them in the same fibre, contradicting injectivity on closed points. No new nodes were needed.",
+  "blueprint": "Realizes the coordinate computation after point separation in the third paragraph of lem-sc-degree-2g1-very-ample.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-pcs",
+  "group": "K1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-pcs (reviewer sub-agent of L); spot-checked: Source: Stacks Tag 0E8S (varieties.tex, lemma-separate-points-tangent-vectors, proof after condition (1)) with Tag 0478; the item statement (k algebraically closed, X locally of finite type over k, f:X->Y, injective on closed points, p closed in Y => fibre empty or a single closed point) is unchanged from sheaf-dag and true. Step 1: F=f^{-1}(p) closed by continuity; a nonclosed z in F would by lem-sc-finite-type-nonclosed-closure-closed-points (statement read: k alg. closed, X loc. finite type, z nonclosed => closure has infinitely many closed points; hypotheses match the item's) give infinitely many closed points in closure(z) inside F, all mapping to p, contradicting injectivity; elementary topology otherwise. Step 2: so every point of F is closed and injectivity gives at most one; with step 1, empty or singleton. Only the item file changed besides the report; no maintainer field changed (created.item untouched despite the report's item 4, and the citations.json mentioned in the report is not in the delivery - harmless report inaccuracy). No new nodes, no Mathlib leaf, tool_uses empty. Small cases: empty fibre; X=Spec k[t] -> Spec k identity-like closed immersion, fibres singletons; A^1 -> point violates the hypothesis as expected. Start Sat Oct 10 04:21:36 PM UTC 2026, end Sat Oct 10 04:21:53 PM UTC 2026."
+ }
 }
