@@ -11,6 +11,7 @@ public import Mathlib.AlgebraicGeometry.Morphisms.Etale
 public import Mathlib.AlgebraicGeometry.Morphisms.Flat
 public import Mathlib.Data.ZMod.Basic
 public import WeilConjectures.AlgebraicGeometry.Sites.Gm
+public import WeilConjectures.AlgebraicGeometry.Sites.ConstantSheafSections
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Pullbacks
 public import WeilConjectures.Mathlib.RingTheory.Etale.StandardEtale
 public import WeilConjectures.Mathlib.RingTheory.Flat.FaithfullyFlat.Basic
@@ -386,9 +387,14 @@ noncomputable abbrev constantZMod : Sheaf X.smallEtaleTopology AddCommGrpCat.{u 
 `H⁰(X_ét, ℤ/n) ≅ ℤ/n`.
 (blueprint: `sk-thm-curveestimate`) -/
 theorem nonempty_addEquiv_sheafH_zero_constantZMod [ConnectedSpace X] :
-    Nonempty (Sheaf.H (X.constantZMod n) 0 ≃+ ZMod n) :=
-  -- Proof sketch: the sections of a constant étale sheaf over `X` are the locally constant
-  -- functions `X → ℤ/n`, and these are constant since `X` is connected.
-  sorry
+    Nonempty (Sheaf.H (X.constantZMod n) 0 ≃+ ZMod n) := by
+  -- the sections of a constant étale sheaf over `X` are the locally constant functions
+  -- `X → ℤ/n` (`AlgebraicGeometry.Scheme.bijective_toSheafify_app_terminal`), and these are
+  -- constant since `X` is connected
+  have hT : IsTerminal (Etale.mk (𝟙 X)) :=
+    MorphismProperty.Over.mkIdTerminal @AlgebraicGeometry.Etale _
+  exact ⟨(Sheaf.H.equiv₀ _ hT).trans ((AddEquiv.ofBijective _
+    (X.bijective_toSheafify_app_terminal (AddCommGrpCat.of (ULift.{u + 1} (ZMod n))))).symm.trans
+      AddEquiv.ulift)⟩
 
 end AlgebraicGeometry.Scheme

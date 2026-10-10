@@ -229,22 +229,6 @@ open PowerSeries
 
 open scoped ComplexOrder
 
-/-- The complex local polynomial takes the value `1` at `0`. -/
-theorem eval_zero_map_localPolynomial (x : C.finitePoints) :
-    ((W.localPolynomial l ρ x).map ι).eval 0 = 1 := by
-  rw [map_localPolynomial, Polynomial.eval_multiset_prod, Multiset.map_map]
-  exact Multiset.prod_eq_one fun a ha ↦ by
-    obtain ⟨c, -, rfl⟩ := Multiset.mem_map.1 ha
-    simp
-
-/-- The constant term of a local factor of the Euler series is `1`. -/
-theorem constantCoeff_eulerFactor (x : C.finitePoints) :
-    PowerSeries.constantCoeff (W.eulerFactor l ρ ι x) = 1 := by
-  rw [eulerFactor, PowerSeries.constantCoeff_inv, ← coeff_zero_eq_constantCoeff_apply,
-    Polynomial.coeff_coe, Polynomial.coeff_zero_eq_eval_zero, Polynomial.eval_comp,
-    Polynomial.eval_pow, Polynomial.eval_X, zero_pow (p.degreeOver_ne_zero x.2),
-    eval_zero_map_localPolynomial, inv_one]
-
 /-- The power sums of the pairwise products of two multisets are the products of their power
 sums. -/
 private theorem sum_map_pow_map_product_mul {R : Type*} [CommRing R] (s t : Multiset R) (n : ℕ) :

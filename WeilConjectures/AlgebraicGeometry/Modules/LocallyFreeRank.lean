@@ -106,6 +106,29 @@ theorem isFiniteLocallyFreeOfRank_of_rankAtStalk_eq {R : CommRingCat.{u}} (M : (
   rw [Hom.opensRange_localizationAway]
   exact ha p
 
+/-- **Finite local freeness of rank `r` from sections over affine opens.** A quasi-coherent
+`𝒪_X`-module whose sections over every affine open `U` form a finitely presented flat
+`Γ(X, U)`-module of rank `r` at every prime is finite locally free of rank `r`: its restriction to
+`Spec Γ(X, U)` is (`isFiniteLocallyFreeOfRank_of_rankAtStalk_eq`), and these cover `X`. -/
+theorem isFiniteLocallyFreeOfRank_of_isAffineOpen (M : X.Modules) [M.IsQuasicoherent] {r : ℕ}
+    (h : ∀ U : X.Opens, IsAffineOpen U →
+      Module.FinitePresentation Γ(X, U) Γ(M, U) ∧ Module.Flat Γ(X, U) Γ(M, U) ∧
+        ∀ p : PrimeSpectrum Γ(X, U), Module.rankAtStalk Γ(M, U) p = r) :
+    M.IsFiniteLocallyFreeOfRank r := by
+  refine isFiniteLocallyFreeOfRank_of_isOpenImmersion M (fun U : X.affineOpens ↦ U.2.fromSpec)
+    ?_ fun U ↦ ?_
+  · simp only [IsAffineOpen.opensRange_fromSpec]
+    exact iSup_affineOpens_eq_top X
+  · obtain ⟨hfp, hfl, hr⟩ := h U U.2
+    let N := M.restrict U.2.fromSpec
+    have : N.IsQuasicoherent := isQuasicoherent_restrictFunctor U.2.fromSpec M
+    let e := sectionsRestrictFromSpecLinearEquiv M U.2
+    have : Module.FinitePresentation Γ(X, U) Γ(N, ⊤) := Module.FinitePresentation.of_equiv e.symm
+    have : Module.Flat Γ(X, U) Γ(N, ⊤) := Module.Flat.of_linearEquiv e
+    have : N.IsFiniteLocallyFreeOfRank r := isFiniteLocallyFreeOfRank_of_rankAtStalk_eq N
+      fun p ↦ (congr_fun (Module.rankAtStalk_eq_of_equiv e) p).trans (hr p)
+    exact SheafOfModules.IsFiniteLocallyFreeOfRank.of_iso ((restrictFunctorIsoPullback _).app M)
+
 /-- The sections of a finite locally free module of rank `r` over an affine open `U` have rank
 `r` at every prime of `Γ(X, U)`: near every prime they localize to a free module of rank `r`. -/
 theorem rankAtStalk_sections_eq (M : X.Modules) {r : ℕ} [M.IsFiniteLocallyFreeOfRank r]
