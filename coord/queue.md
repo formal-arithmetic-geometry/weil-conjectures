@@ -2,12 +2,12 @@
 
 915 items; claim with `tools/claim.py next <group> [--stage N]`.
 
-## Stage 1: nodes to split (330)
+## Stage 1: nodes to split (329)
 
 | node | distance to a target | Lean state on the done branch |
 |---|---|---|
-| `lemma-constructible-flc-serre` | 6 | rests_on_sorry |
-| `def-constructible-torsor` | 8 | none |
+| `lem-constructible-constant-exact` | 7 | none |
+| `lem-constructible-shortexact-local-lift` | 7 | none |
 | `lem-weil-pbc-injective-acyclicity-bounded-below` | 2002 | sorry_here |
 | `lem-weil-pbc-field-tensor-irreducible` | 2005 | none |
 | `lem-weil-pbc-etale-geometric-fibre-constant-sections` | 2006 | none |
@@ -23,7 +23,6 @@
 | `lem-sc-boundary-cech-compatibility` | 2014 | none |
 | `lem-sc-cech-h1-injective` | 2014 | none |
 | `lem-sc-tensor-generating-sections` | 2014 | none |
-| `lem-sc-topological-pushforward-injective` | 2014 | none |
 | `lem-sc-zariski-ext-torsor` | 2014 | none |
 | `lem-sc-affine-section-localization` | 2015 | none |
 | `lem-sc-invert-s-cohomology-mayer-vietoris-diagram` | 2015 | none |
@@ -74,7 +73,7 @@
 | `lem-sc-p1-invertible-section-localization` | 3015 | none |
 | `lem-sc-p1-tor-dimension-shift-natural` | 3015 | none |
 | `lem-sc-p1-twist-multiplication` | 3015 | none |
-| `lem-sc-brauer-zero` | 4005 | rests_on_sorry |
+| `lem-sc-open-curve-gm-direct-image-cohomology` | 4006 | none |
 | `lem-pc-genus-agrees-sc` | 4007 | rests_on_sorry |
 | `lem-pc-zero-scheme-properties` | 4008 | rests_on_sorry |
 | `lem-sc-isogeny-surjective` | 4008 | rests_on_sorry |
@@ -337,7 +336,7 @@
 | `lem-pur-rhom-well-defined` | - | none |
 | `lem-zl-noether-normalization-dimension` | - | none |
 
-## Stage 2: nodes to state (585)
+## Stage 2: nodes to state (586)
 
 | node | distance to Mathlib | kind |
 |---|---|---|
@@ -902,6 +901,7 @@
 | `lem-pc-cartier-criterion` | 2 | state |
 | `lem-pc-hilb-smooth` | 2 | state |
 | `lem-sc-affine-open-proper` | 2 | state |
+| `lem-sc-brauer-zero` | 2 | state |
 | `lem-sc-c1-brauer-trivial` | 2 | state |
 | `lem-sc-c1-finite-extension` | 2 | state |
 | `lem-sc-degree-2g1-very-ample` | 2 | state |
