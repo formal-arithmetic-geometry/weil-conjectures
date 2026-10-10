@@ -2,7 +2,7 @@
 
 920 items; claim with `tools/claim.py next <group> [--stage N]`.
 
-## Stage 1: nodes to split (196)
+## Stage 1: nodes to split (195)
 
 | node | distance to a target | Lean state on the done branch |
 |---|---|---|
@@ -15,7 +15,6 @@
 | `lem-pc-derived-limit-roos-abelian-groups` | 3014 | none |
 | `lem-pc-derived-lower-truncation-step-triangle` | 3014 | none |
 | `lem-pc-ringed-space-truncation-derived-limit` | 3014 | none |
-| `lem-pc-stalk-direct-sums` | 3014 | none |
 | `lem-pc-derived-qcoh-perfect-generation` | 3016 | none |
 | `lem-pc-perfect-complexes-compact-set` | 3016 | none |
 | `lem-pc-perfect-tensor-hom-duality` | 3017 | none |
@@ -203,7 +202,7 @@
 | `lem-pur-rhom-well-defined` | - | none |
 | `lem-zl-noether-normalization-dimension` | - | none |
 
-## Stage 2: nodes to state (724)
+## Stage 2: nodes to state (725)
 
 | node | distance to Mathlib | kind |
 |---|---|---|
@@ -326,6 +325,7 @@
 | `lem-pc-scheme-modules-grothendieck-abelian` | 1 | state |
 | `lem-pc-separable-polynomial-alg-closed-quotient-product` | 1 | state |
 | `lem-pc-skyscraper-complex` | 1 | state |
+| `lem-pc-stalk-direct-sums` | 1 | state |
 | `lem-pc-stalk-tensor-complex` | 1 | state |
 | `lem-pc-zero-scheme-ideal-local` | 1 | state |
 | `lem-pc-zero-scheme-locally-principal` | 1 | state |
@@ -932,7 +932,7 @@
 | `lem-weil-pbc-p1-field-dimension-one` | 4 | state |
 | `lem-weil-pbc-projective-space-zero-isomorphism` | 4 | state |
 
-Not open yet: 1434 nodes that wait for a statement dependency, 234 nodes that wait for stage 1.
+Not open yet: 1434 nodes that wait for a statement dependency, 233 nodes that wait for stage 1.
 
 ## Stage 3: modules to prove (0)
 
