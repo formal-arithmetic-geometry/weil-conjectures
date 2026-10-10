@@ -236,10 +236,10 @@ lemma oplax_right_unitality_of_lax_square [∀ a, IsIso (e a)] [IsIso (ε Q₂)]
 an oplax monoidal functor `F : K₁ ⥤ K₂` through the lax monoidal functors `Q₁ : K₁ ⥤ D₁` and
 `Q₂ : K₂ ⥤ D₂`: see the module docstring. -/
 @[instance_reducible]
-noncomputable def ofLaxSquare [∀ a, IsIso (e a)] [IsIso (ε Q₂)] (S : ObjectProperty K₁)
+noncomputable def ofLaxSquare [∀ a, IsIso (e a)] [IsIso (ε Q₂)]
+    [∀ x, IsIso (μ Q₂ (𝟙_ K₂) x)] [∀ x, IsIso (μ Q₂ x (𝟙_ K₂))] (S : ObjectProperty K₁)
     (hS : ∀ X : D₁, ∃ a, S a ∧ Nonempty (Q₁.obj a ≅ X))
-    (hμ : ∀ (x : K₂) (b : K₁), S b → IsIso (μ Q₂ x (F.obj b)))
-    (hμ' : ∀ (x : K₂) (b : K₁), S b → IsIso (μ Q₂ (F.obj b) x)) :
+    (hμ : ∀ (x : K₂) (b : K₁), S b → IsIso (μ Q₂ x (F.obj b))) :
     G.OplaxMonoidal where
   η := G.map (ε Q₁) ≫ e (𝟙_ K₁) ≫ Q₂.map (η F) ≫ CategoryTheory.inv (ε Q₂)
   δ X Y := (δG.app X).app Y
@@ -254,12 +254,10 @@ noncomputable def ofLaxSquare [∀ a, IsIso (e a)] [IsIso (ε Q₂)] (S : Object
     exact oplax_associativity_of_iso δG iX iY iZ
       (oplax_associativity_of_lax_square δG e he hδ a b c)
   oplax_left_unitality X := by
-    obtain ⟨a, ha, ⟨iX⟩⟩ := hS X
-    have := hμ (𝟙_ K₂) a ha
+    obtain ⟨a, -, ⟨iX⟩⟩ := hS X
     exact oplax_left_unitality_of_iso δG iX (oplax_left_unitality_of_lax_square δG e he hδ a)
   oplax_right_unitality X := by
-    obtain ⟨a, ha, ⟨iX⟩⟩ := hS X
-    have := hμ' (𝟙_ K₂) a ha
+    obtain ⟨a, -, ⟨iX⟩⟩ := hS X
     exact oplax_right_unitality_of_iso δG iX (oplax_right_unitality_of_lax_square δG e he hδ a)
 
 end CategoryTheory.Functor.OplaxMonoidal
