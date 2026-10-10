@@ -40,6 +40,8 @@ the derived functor of `lim` applied to the tower.
   isomorphism compatible with the legs.
 - `CategoryTheory.Pretriangulated.IsHomotopyLimit.of_isIso_π`: a cone whose legs are all
   isomorphisms is a homotopy limit cone.
+- `CategoryTheory.Pretriangulated.IsHomotopyLimit.of_isIso_π_succ`: the same, for a cone whose
+  legs are isomorphisms in all positive degrees.
 -/
 
 @[expose] public section
@@ -170,6 +172,72 @@ lemma of_isIso_π {F : ℕᵒᵖ ⥤ C} (c : Cone F) [∀ n, IsIso (c.π.app n)]
       abel
   let e : P.pt ≅ c.pt ⊞ P.pt :=
     { hom := biprod.lift (g 0) (𝟙 P.pt - towerShift hP)
+      inv := biprod.desc ℓ σ
+      hom_inv_id := by rw [biprod.lift_desc, hsplit]
+      inv_hom_id := by
+        apply biprod.hom_ext' <;> apply biprod.hom_ext <;>
+          simp [hℓg, hℓt, hσg, hσt] }
+  refine ⟨P, hP, 0, isomorphic_distinguished _ (binaryBiproductTriangle_distinguished c.pt P.pt)
+    _ (Triangle.isoMk _ _ (Iso.refl _) e (Iso.refl _) ?_ ?_ ?_)⟩
+  · apply biprod.hom_ext <;> simp [e, hℓg, hℓt, ℓ]
+  · simp [e]
+  · simp
+
+set_option backward.defeqAttrib.useBackward true in
+/-- A cone over a tower whose legs are isomorphisms in all positive degrees is a homotopy limit
+cone: the term `F₀` does not matter. As in `IsHomotopyLimit.of_isIso_π`, the Milnor triangle
+is split, `1 - t` having the section `y ↦ (y₀, (-∑_{1 ≤ k < n} y_k)_{n ≥ 1})` (transported along
+the transition isomorphisms in positive degrees). -/
+lemma of_isIso_π_succ {F : ℕᵒᵖ ⥤ C} (c : Cone F) [∀ n : ℕ, IsIso (c.π.app (op (n + 1)))]
+    [HasProduct fun n : ℕ ↦ F.obj (op n)] : IsHomotopyLimit c := by
+  let P : Fan fun n : ℕ ↦ F.obj (op n) := Fan.mk _ (Pi.π _)
+  let hP : IsLimit P := productIsProduct _
+  let h (k : ℕ) : P.pt ⟶ c.pt := P.proj (k + 1) ≫ inv (c.π.app (op (k + 1)))
+  have hw (k : ℕ) : c.π.app (op (k + 1)) ≫ F.map (homOfLE k.le_succ).op = c.π.app (op k) :=
+    c.w _
+  have hτ (k : ℕ) : F.map (homOfLE (k + 1).le_succ).op ≫ inv (c.π.app (op (k + 1))) =
+      inv (c.π.app (op (k + 1 + 1))) := by
+    refine IsIso.eq_inv_of_hom_inv_id ?_
+    rw [← Category.assoc, hw, IsIso.hom_inv_id]
+  have hinv (k : ℕ) : inv (c.π.app (op (k + 1))) ≫ c.π.app (op k) =
+      F.map (homOfLE k.le_succ).op := by
+    rw [IsIso.inv_comp_eq, hw]
+  have hh (k : ℕ) : (𝟙 P.pt - towerShift hP) ≫ h k = h k - h (k + 1) := by
+    simp only [h, Preadditive.sub_comp, Category.id_comp, towerShift, Fan.IsLimit.fac_assoc,
+      Category.assoc, hτ]
+  have hhπ (n : ℕ) : h n ≫ c.π.app (op (n + 1)) = P.proj (n + 1) := by simp [h]
+  let ℓ : c.pt ⟶ P.pt := Fan.IsLimit.lift hP fun n ↦ c.π.app (op n)
+  let σc : ∀ n : ℕ, P.pt ⟶ F.obj (op n) := fun n ↦ match n with
+    | 0 => P.proj 0
+    | m + 1 => -(∑ k ∈ Finset.range m, h k) ≫ c.π.app (op (m + 1))
+  let σ : P.pt ⟶ P.pt := Fan.IsLimit.lift hP σc
+  have hℓg : ℓ ≫ h 0 = 𝟙 _ := by simp [ℓ, h]
+  have hℓt : ℓ ≫ (𝟙 P.pt - towerShift hP) = 0 := Fan.IsLimit.hom_ext hP _ _ fun n ↦ by
+    simp [ℓ, Preadditive.sub_comp, towerShift, c.w]
+  have hσg : σ ≫ h 0 = 0 := by simp [σ, h, σc]
+  have hσt : σ ≫ (𝟙 P.pt - towerShift hP) = 𝟙 _ := Fan.IsLimit.hom_ext hP _ _ fun n ↦ by
+    rcases n with _ | m
+    · simp [σ, σc, Preadditive.sub_comp, towerShift]
+    · simp only [Preadditive.comp_sub, Category.comp_id, Preadditive.sub_comp, Category.assoc,
+        towerShift, Fan.IsLimit.fac, Category.id_comp, σ, σc, Fan.IsLimit.fac_assoc, hw,
+        Finset.sum_range_succ, Preadditive.neg_comp, Preadditive.add_comp, hhπ, neg_add_rev]
+      abel
+  have hsplit : h 0 ≫ ℓ + (𝟙 P.pt - towerShift hP) ≫ σ = 𝟙 _ :=
+    Fan.IsLimit.hom_ext hP _ _ fun n ↦ by
+      rcases n with _ | m
+      · simp only [Preadditive.add_comp, Category.assoc, Fan.IsLimit.fac, ℓ, σ, σc,
+          Preadditive.sub_comp, Category.id_comp, towerShift, h, hinv]
+        simp
+      · have h₂ : ((𝟙 P.pt - towerShift hP) ≫ σ) ≫ P.proj (m + 1) =
+            -(h 0 - h m) ≫ c.π.app (op (m + 1)) := by
+          rw [Category.assoc, Fan.IsLimit.fac, Preadditive.comp_neg, ← Category.assoc,
+            Preadditive.comp_sum]
+          simp only [hh, Finset.sum_range_sub']
+        rw [Preadditive.add_comp, h₂, Category.assoc, Fan.IsLimit.fac]
+        simp only [Preadditive.sub_comp, hhπ, Category.id_comp]
+        abel
+  let e : P.pt ≅ c.pt ⊞ P.pt :=
+    { hom := biprod.lift (h 0) (𝟙 P.pt - towerShift hP)
       inv := biprod.desc ℓ σ
       hom_inv_id := by rw [biprod.lift_desc, hsplit]
       inv_hom_id := by
