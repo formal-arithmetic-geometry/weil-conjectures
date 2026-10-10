@@ -3,7 +3,7 @@
  "blueprint": {
   "is": "lem-kun-stalks-commute-colimits",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "Geometric stalks commute with colimits",
@@ -17,28 +17,84 @@
  ],
  "proof": [
   {
-   "text": "By [def-weil-pbc-geometric-stalks] the stalk $F_{\\bar t}$ is\nthe filtered colimit of the groups $F(U)$ over pointed etale\nneighbourhoods of $\\bar t$. Colimits of sheaves are computed as the\nsheafification of the objectwise colimit of the underlying presheaves,\nand sheafification is left adjoint to the inclusion of sheaves, so\nevaluation at a fixed etale object $U$ preserves colimits of sheaves;\na filtered colimit of functors preserving colimits preserves colimits,\nwhence the stalk functor preserves colimits. The exactness of the\nstalk functors recorded in\n[prop-weil-pbc-geometric-stalks-exact] is the finite case of the\nsame statement, and sheaves are those of\n[def-weil-pbc-etale-sheaves].",
+   "text": "Let $(F_i)_{i\\in I}$ be a small diagram of abelian sheaves on $T_{\\Et}$. Regard abelian groups as $\\mathbf Z$-modules. In the presheaf functor category, arbitrary colimits are computed objectwise (the coprojections and the universal map are defined section by section, and naturality follows from the restriction maps). Thus the presheaf colimit is $U\\mapsto\\operatorname{colim}_{i\\in I}F_i(U)$. By [lem-weil-pbc-site-r-module-presheaf-sheafification-exact], sheafification is a left adjoint and commutes with all colimits, so the colimit sheaf is the sheafification of this presheaf.",
+   "uses": [
+    "def-weil-pbc-etale-sheaves",
+    "lem-weil-pbc-site-r-module-presheaf-sheafification-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-kunneth-ordinary/lem-kun-stalks-commute-colimits.md",
+    "place": "Proof"
+   }
+  },
+  {
+   "text": "By [lem-weil-pbc-sheafification-geometric-stalk], taking the stalk at $\\bar t$ does not change this sheafification. Using [def-weil-pbc-geometric-stalks], the stalk of the colimit is therefore $\\varinjlim_{(U,\\bar u)}\\operatorname{colim}_{i\\in I}F_i(U)$, where the first colimit ranges over pointed etale neighbourhoods of $\\bar t$.",
    "uses": [
     "def-weil-pbc-geometric-stalks",
-    "prop-weil-pbc-geometric-stalks-exact",
-    "def-weil-pbc-etale-sheaves"
+    "lem-weil-pbc-sheafification-geometric-stalk"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-kunneth-ordinary/lem-kun-stalks-commute-colimits.md",
+    "place": "Proof"
+   }
+  },
+  {
+   "text": "The displayed iterated colimit is canonically isomorphic to $\\operatorname{colim}_{i\\in I}\\varinjlim_{(U,\\bar u)}F_i(U)$: both satisfy the same cocone universal property, since a cocone from the product indexing data is equivalently a compatible family of cocones in either order. The latter expression is $\\operatorname{colim}_{i\\in I}(F_i)_{\\bar t}$ by [def-weil-pbc-geometric-stalks]. Hence the stalk functor preserves arbitrary colimits. Applying this argument in each degree gives the asserted preservation of colimits of complexes computed termwise.",
+   "uses": [
+    "def-weil-pbc-geometric-stalks"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-kunneth-ordinary/lem-kun-stalks-commute-colimits.md",
+    "place": "Proof"
+   }
   }
  ],
  "proof_deps": [
+  "def-weil-pbc-etale-sheaves",
   "def-weil-pbc-geometric-stalks",
-  "prop-weil-pbc-geometric-stalks-exact",
-  "def-weil-pbc-etale-sheaves"
+  "lem-weil-pbc-site-r-module-presheaf-sheafification-exact",
+  "lem-weil-pbc-sheafification-geometric-stalk"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-kunneth-ordinary/lem-kun-stalks-commute-colimits.md",
   "place": "## Proof"
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "stalk functor on etale sheaves commutes with arbitrary colimits",
+   "results": "TopCat.Presheaf.stalkFunctor (Mathlib/Topology/Sheaves/Stalks); no declaration for arbitrary-colimit preservation on etale sheaves",
+   "date": "2026-10-11",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "PreservesColimitsOfShape sheafFiber, PreservesColimitsOfShape stalkFunctor",
+   "results": "0 hits; unknown identifier PreservesColimitsOfShape",
+   "date": "2026-10-11",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "preserves.*colimit|colimit.*stalk|sheafFiber.*Preserves in Mathlib/CategoryTheory/Sites",
+   "results": "0 hits",
+   "date": "2026-10-11",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "stalk functor preserves arbitrary colimits of sheaves",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-11",
+   "verdict": "unavailable"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [],
  "blueprint_kind": "lemma",
@@ -62,5 +118,37 @@
   }
  },
  "chapter": "sec-smooth-purity",
- "unit": "sk-prop-sf-kunneth-ordinary"
+ "unit": "sk-prop-sf-kunneth-ordinary",
+ "split_report": {
+  "date": "2026-10-11",
+  "item": "lem-kun-stalks-commute-colimits",
+  "worker": "stage1",
+  "summary": "Corrected the imported proof using existing nodes for sheafification colimits and invariance of stalks under sheafification. The proof computes the colimit sheaf from the objectwise presheaf colimit, removes sheafification inside the stalk, interchanges the two colimits by the cocone universal property, and applies the argument degreewise to complexes. No new nodes were needed.",
+  "blueprint": "Realizes the blueprint proof paragraph on filtered-neighbourhood stalks, sheafification and colimit interchange, with the complex conclusion termwise.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-site-r-module-presheaf-sheafification-exact",
+    "why": "Its statement gives the sheafification-of-objectwise-colimits construction for abelian sheaves after taking R = Z."
+   },
+   {
+    "node": "lem-weil-pbc-sheafification-geometric-stalk",
+    "why": "Its statement gives the stalk isomorphism from a presheaf to its sheafification, needed in the colimit calculation."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-site-r-module-presheaf-sheafification-exact",
+  "lem-weil-pbc-sheafification-geometric-stalk",
+  "lem-weil-pbc-site-r-module-presheaf-sheafification-exact",
+  "lem-weil-pbc-sheafification-geometric-stalk"
+ ],
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-scc2439",
+  "group": "H1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-scc2439 (reviewer sub-agent of L); spot-checked: C1: steps 1-2 are statements of lem-weil-pbc-site-r-module-presheaf-sheafification-exact (R=Z, clause 2: # preserves all colimits) and lem-weil-pbc-sheafification-geometric-stalk (same def-weil-pbc-sheafification, same pointed-neighbourhood index as def-weil-pbc-geometric-stalks); step 3 colimit interchange elementary. C4: site T_Et and arbitrary colimits cover the citers (filtered colimits of abelian etale sheaves in lem-weil-pbc-torsion-sheaf-characterizations, lem-kun-invertible-orders-colimit). Class b: not a restatement of lem-pc-stalk-direct-sums (ringed space, Zariski, coproducts) nor of lem-weil-pbc-module-stalk-filtered-colimit / lem-weil-pbc-sets-sheaf-colimit-stalks (Zariski); same 009E route via sheafification-keeps-stalks, cannot cite the Zariski node on the etale site. tool_uses accepted as generic. No repairs."
+ },
+ "lead_note": "2026-10-10 L (R-scc2439): Statement says 'sheaves on T_Et' but proof (and all citers: torsion-sheaf-characterizations, invertible-orders-colimit) are abelian sheaves; consider 'sheaves of abelian groups'. Report claims blueprint.from filled but it is null."
 }

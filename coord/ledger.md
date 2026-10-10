@@ -2593,3 +2593,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 20:57 L: merged deliver/J1/lem-sc-supported-derived-generated-perfect (reviewer FIX; first push; new nodes: 1)
 - 20:57 L: merged deliver/C1/lem-kun-03sa (reviewer PASS; first push; new nodes: 0)
 - 20:57 L: merged deliver/E1/lem-sc-regular-meromorphic-section-exists (reviewer FIX+NODE(1); first push; new nodes: 1)
+- 20:58 L: merged deliver/H1/lem-kun-stalks-commute-colimits (reviewer PASS; first push; new nodes: 0)
