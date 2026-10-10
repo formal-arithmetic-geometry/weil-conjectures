@@ -23,9 +23,68 @@
   "def-sc-invertible-module",
   "def-weil-pbc-ample-invertible-module"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Let V be any affine open of S, let j:V \\to S be its inclusion, and put X_V = X \\times_S V with induced morphism f_V:X_V \\to V. Properness of f is preserved by this base change [lem-pc-proper-base-change]. By the definition of proper morphism [def-weil-proper-morphism], f_V is separated and of finite type, hence quasi-compact and quasi-separated. Since S is Noetherian, V = Spec(A) has Noetherian coordinate ring; the restriction F_V is coherent and the restriction L_V is ample on X_V by the hypotheses and the definitions. Thus the affine-base Serre-vanishing statement [lem-weil-pbc-coherent-serre-vanishing] applies to f_V, F_V, and L_V.",
+   "uses": [
+    "lem-pc-proper-base-change",
+    "def-weil-proper-morphism",
+    "lem-weil-pbc-coherent-serre-vanishing"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/coherent.tex",
+    "place": "Cohomology of Schemes, Lemma 30.17.1 (Tag 02O1), proof: reduction to affine opens of the base"
+   }
+  },
+  {
+   "text": "For each affine V from Step 1, choose n_V such that H^p(X_V, F_V tensor L_V^n) = 0 for every p > 0 and n >= n_V. The affine-base comparison [lem-pc-cohomology-sections-affine-base] identifies this group with Gamma(V, R^p(f_V)_*(F_V tensor L_V^n)), so these sections vanish for all p > 0 and n >= n_V. The higher direct image is quasi-coherent by [lem-pc-finite-support-hi] (1), and a quasi-coherent module on an affine scheme whose global sections vanish is zero, by the affine tilde-global-sections equivalence [lem-weil-pbc-affine-tilde-gamma-adjunction] (3). Hence R^p(f_V)_*(F_V tensor L_V^n) = 0 for all p > 0 and n >= n_V.",
+   "uses": [
+    "lem-pc-cohomology-sections-affine-base",
+    "lem-pc-finite-support-hi",
+    "lem-weil-pbc-affine-tilde-gamma-adjunction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/coherent.tex",
+    "place": "Cohomology of Schemes, Lemma 30.17.1 (Tag 02O1), proof: affine-base vanishing and Lemma 01XK"
+   }
+  },
+  {
+   "text": "For E_n = F tensor L^{tensor n}, restriction of the derived direct image to V is canonically Rf_*E_n|_V isomorphic to R(f_V)_*(E_n|_{X_V}) by [lem-pc-restrict-derived-direct-image-open]. Taking p-th cohomology sheaves and using Step 2 gives (R^p f_*E_n)|_V = 0 for every p > 0 and n >= n_V.",
+   "uses": [
+    "lem-pc-restrict-derived-direct-image-open"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/coherent.tex",
+    "place": "Cohomology of Schemes, Lemma 30.17.1 (Tag 02O1), proof: passage from affine restrictions to higher direct images"
+   }
+  },
+  {
+   "text": "Because S is Noetherian, choose a finite affine open cover S = \\bigcup_j V_j. For each V_j, Steps 1--3 give a bound n_{V_j}; set n_0 = \\max_j n_{V_j}. Then Step 3 shows (R^p f_*E_n)|_{V_j} = 0 for every p > 0 and n >= n_0. A sheaf whose restrictions vanish on an open cover is zero, so R^p f_*E_n = 0 for every p > 0 and n >= n_0. This proves the asserted bound.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/coherent.tex",
+    "place": "Cohomology of Schemes, Lemma 30.17.1 (Tag 02O1), conclusion after the affine-local reduction"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-proper-base-change",
+  "def-weil-proper-morphism",
+  "lem-weil-pbc-coherent-serre-vanishing",
+  "lem-pc-cohomology-sections-affine-base",
+  "lem-pc-finite-support-hi",
+  "lem-weil-pbc-affine-tilde-gamma-adjunction",
+  "lem-pc-restrict-derived-direct-image-open"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/coherent.tex",
+  "place": "Cohomology of Schemes, Lemma 30.17.1 (Tag 02O1), proof"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -50,12 +109,51 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-pc-coherent-hi",
   "by": "worker",
   "date": "2026-10-10"
  },
  "chapter": "sec-picard-framework",
- "unit": "sk-thm-picard-coherence"
+ "unit": "sk-thm-picard-coherence",
+ "split_report": {
+  "date": "2026-10-11",
+  "item": "lem-pc-relative-kill-by-twisting",
+  "worker": "stage1",
+  "summary": "No new nodes were needed. The proof follows Tag 02O1: restrict to affine opens, apply the existing affine-base coherent Serre-vanishing node, identify higher-direct-image sections with cohomology, use quasi-coherence and the affine tilde-global-sections equivalence to obtain local zero sheaves, transport this through derived-image restriction, and take a finite-cover maximum bound.",
+  "blueprint": "Realizes the blueprint ancestor lem-pc-coherent-hi proof sentence 'the twisting vanishing' by supplying the relative vanishing input used for the Chow reduction.",
+  "tool_uses": [
+   {
+    "node": "lem-pc-proper-base-change",
+    "why": "Properness after restricting to an affine base open is a generic base-change fact not supplied by this unit's route."
+   },
+   {
+    "node": "lem-weil-pbc-coherent-serre-vanishing",
+    "why": "The affine-base Serre-vanishing theorem is the generic vanishing input used to prove the relative statement."
+   },
+   {
+    "node": "lem-pc-cohomology-sections-affine-base",
+    "why": "The affine comparison between cohomology and sections of higher direct images is a generic cohomological tool."
+   },
+   {
+    "node": "lem-pc-restrict-derived-direct-image-open",
+    "why": "Restriction of derived direct images to an open base is a generic derived-category tool."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pc-proper-base-change",
+  "lem-weil-pbc-coherent-serre-vanishing",
+  "lem-pc-cohomology-sections-affine-base",
+  "lem-pc-restrict-derived-direct-image-open"
+ ],
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-rkt3147",
+  "group": "C1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-rkt3147 (reviewer sub-agent of L); spot-checked: Hypothesis (L ample on f^{-1}(V) for every affine V, Tag 01VG form) is exactly what Step 1 feeds to lem-weil-pbc-coherent-serre-vanishing (affine Noetherian base, proper, coherent, ample; C4 ok; that node's proof_deps do not include this item, no cycle). Step 2: cohomology-sections-affine-base (qc+separated from proper), finite-support-hi (1) quasi-coherence, tilde counit (3): C1 ok. Step 3 restrict-derived-direct-image-open for R^p f_*|_V. Step 4 finite affine cover from Noetherian, n0 = max (E ok). No new nodes; grep kill-by-twisting/02O1 finds only the affine specialization, not a duplicate. tool_uses accepted. No repairs."
+ }
 }

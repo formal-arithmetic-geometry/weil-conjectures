@@ -3004,3 +3004,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 23:47 UTC L: reviewed under the lock since 23:44: J1 sites-module-sheafification-bilinear-extension FIX e12f32521 (R-sbe3142; new node lem-pc-sites-sheafification-underlying-sets), C1 derived-internal-hom-adjunction FIX 5f35dcb5e re-push (R-dha3142; abstract node dropped, lem-sc-derived-hom-tensor-total retagged 0A90/0A8M), C1 hom-kflat-into-kinjective FIX 06c6445e0 (R-hki3146); returned: E1 derived-tensor-transitivity 795ee064c (R-dtt3144: K ⊗^L_R B lives in D(A) unless A or B is R-flat). Second readings missed a fault in 4 of 4.
 - 23:47 L: merged deliver/M1/lem-sp-ce-horizontal-lift (reviewer FIX; first push; new nodes: 0)
 - 23:47 L: merged deliver/F1/lem-pc-tor-independent-perfect-pullback-comparison (reviewer FIX; first push; new nodes: 1)
+- 23:47 L: merged deliver/C1/lem-pc-relative-kill-by-twisting (reviewer PASS; first push; new nodes: 0)
