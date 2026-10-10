@@ -1,0 +1,75 @@
+{
+ "id": "lem-weil-pbc-flat-fp-lqf-bounded-stratification",
+ "kind": "statement",
+ "title": "Flat, locally finitely presented, separated, locally quasi-finite morphisms with universally bounded fibres are finite locally free on a finite stratification (Stacks 07RY)",
+ "statement": "Let $f:X\\to S$ be a morphism of schemes [def-pc-scheme] which is flat [def-weil-flat-morphism], locally of finite presentation [def-sbc-locally-finite-presentation], separated [def-weil-pbc-scheme-conventions] and locally quasi-finite [pqf-def-quasifinite], and whose fibres are universally bounded: there is an integer $n\\ge0$ such that for every $s\\in S$ the fibre $X_s=X\\times_S\\operatorname{Spec}\\kappa(s)$ (fibre product [def-pc-fibre-product], residue field $\\kappa(s)$ [def-weil-residue-field]) is a finite scheme over $\\kappa(s)$, $X_s=\\operatorname{Spec}B_s$ with $B_s$ a finite $\\kappa(s)$-algebra, of degree $\\dim_{\\kappa(s)}B_s\\le n$ (Stacks Morphisms, Definition 03J4). Then there exist closed subsets $\\emptyset=Z_{-1}\\subseteq Z_0\\subseteq Z_1\\subseteq\\cdots\\subseteq Z_n=S$ such that, with $S_r=Z_r\\setminus Z_{r-1}$ for $0\\le r\\le n$ and $S_r=\\emptyset$ for $r>n$, the sets $S_r$ are pairwise disjoint with union $S$, and the following universal property holds: for every morphism of schemes $g:T\\to S$ and every integer $r\\ge0$, the projection $X\\times_ST\\to T$ is finite locally free of degree $r$ [def-pc-finite-locally-free] if and only if $g(T)\\subseteq S_r$ (as sets). (Stacks Project, More on Morphisms, Lemma Tag 07RY.)",
+ "source": {
+  "document": "literature/stacks-project/more-morphisms.tex",
+  "place": "More on Morphisms, Lemma Tag 07RY (lemma-stratify-flat-fp-lqf-universally-bounded), line 12761, with its proof (induction on the bound n; uses Lemma lemma-etale-splits-off-quasi-finite-part, Morphisms Lemmas finite-flat and base-change-universally-bounded, Descent Lemma descending-property-finite-locally-free); Morphisms Definition Tag 03J4 for 'universally bounded'"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-flat-morphism",
+  "def-sbc-locally-finite-presentation",
+  "def-weil-pbc-scheme-conventions",
+  "pqf-def-quasifinite",
+  "def-pc-fibre-product",
+  "def-weil-residue-field",
+  "def-pc-finite-locally-free"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "stratification of base by degree of fibres of flat finitely presented quasi-finite morphism with universally bounded fibres, finite locally free of degree r locus",
+   "results": "AlgebraicGeometry.LocallyQuasiFinite (+ mk, recOn), instLocallyQuasiFiniteOfIsFinite (Morphisms.QuasiFinite), Module.isLocallyConstant_rankAtStalk(_freeLocus) (RingTheory.Spectrum.Prime.FreeLocus), AlgebraicGeometry.Flat.mk/casesOn; no stratification",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "flat locally quasi-finite separated morphism with bounded fibre degree: the locus where the fibre degree equals r is a stratum, base change finite locally free of degree r iff the map lands in the stratum",
+   "results": "AlgebraicGeometry.Flat, Flat.generalizingMap, UniversallyOpen.of_flat, instFiniteCarrier...FiberOfIsFinite (Fiber), IsFinite.of_comp, flat_iff, IsFinite.finite_preimage_singleton, Flat.isQuotientMap_of_surjective; no stratification",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Scheme.Hom.finrank, AlgebraicGeometry.LocallyQuasiFinite",
+   "results": "none",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "rg -n -i 'stratif|universally.?bounded|stacks 07RY|stacks 07RZ|stacks 03J4' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicGeometry ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/RingTheory; declarations of ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicGeometry/Morphisms/FlatRank.lean (Scheme.Hom.finrank, @[stacks 02KA], finrank_of_isPullback, ...)",
+   "results": "no stratification or universally-bounded notion; FlatRank.lean only has the rank function of a finite flat morphism (already the leaf lem-weil-pbc-finite-flat-rank-iso)",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-flat-fp-qf-stratification",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1"
+}
