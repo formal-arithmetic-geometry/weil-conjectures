@@ -2835,3 +2835,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 22:32 L: merged deliver/C1/lem-pc-perfect-summand (reviewer PASS; after a return; new nodes: 1)
 - 22:33 L: merged deliver/K1/def-pc-derived-direct-image (reviewer FIX; first push; new nodes: 0)
 - 22:33 L: merged deliver/H1/lemma-nagata-qc-open-descends (reviewer FIX; first push; new nodes: 0)
+- 22:33 L: returned deliver/G1/thm-sp-spectral-object-yields (reviewer RETURN: 1. E (wrong mathematics in the item statement, clause (a)): the Z_r/B_r display is false and ill-typed. For r=1, B_1 = i)
