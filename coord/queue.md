@@ -2,7 +2,7 @@
 
 906 items; claim with `tools/claim.py next <group> [--stage N]`.
 
-## Stage 1: nodes to split (265)
+## Stage 1: nodes to split (264)
 
 | node | distance to a target | Lean state on the done branch |
 |---|---|---|
@@ -31,12 +31,12 @@
 | `lem-sc-smooth-diagonal-regular-immersion` | 3016 | none |
 | `lem-pc-kflat-stalk-criterion` | 3017 | none |
 | `lem-pc-pre-derived-adjoint-functors-general` | 3017 | none |
-| `lem-pc-scheme-modules-grothendieck-abelian` | 3017 | none |
 | `lem-sc-proper-flat-right-adjoint-basechange` | 3017 | none |
 | `lem-sc-qcoh-acyclic-derived-pushforward-cohomology` | 3017 | none |
 | `lem-pc-genus-agrees-sc` | 4007 | rests_on_sorry |
-| `lem-sc-open-curve-boundary-higher-direct-image-vanishing` | 4007 | none |
 | `lem-sc-mult-n-etale-kernel` | 4008 | rests_on_sorry |
+| `lem-sc-strict-henselization-dvr` | 4008 | none |
+| `lem-weil-pbc-gm-strict-henselization-stalk-formula` | 4008 | none |
 | `prop-av-tate-rank` | 4008 | rests_on_sorry |
 | `prop-pd-picard-degree-decomposition` | 4008 | rests_on_sorry |
 | `cor-pc-sigma-pic-iso` | 4009 | rests_on_sorry |
@@ -53,7 +53,6 @@
 | `def-weil-pbc-etale-sheaves` | 5002 | none |
 | `lem-pc-flat-base-change-cohom` | 5008 | rests_on_sorry |
 | `lem-pc-picard-functor-agrees-sc` | 5008 | none |
-| `thm-pc-picard-representable` | 5008 | rests_on_sorry |
 | `lem-pc-zariski-coverings-are-fppf` | 5009 | none |
 | `lem-sc-deg-pullback-finite` | 5009 | rests_on_sorry |
 | `lem-sc-hilbert-polynomial` | 5009 | none |
@@ -272,7 +271,7 @@
 | `lem-pur-rhom-well-defined` | - | none |
 | `lem-zl-noether-normalization-dimension` | - | none |
 
-## Stage 2: nodes to state (641)
+## Stage 2: nodes to state (642)
 
 | node | distance to Mathlib | kind |
 |---|---|---|
@@ -361,6 +360,7 @@
 | `lem-pc-projective-curve-linear-pair` | 1 | state |
 | `lem-pc-scheme-connected-iff-idempotents` | 1 | state |
 | `lem-pc-scheme-dimension-local-rings` | 1 | state |
+| `lem-pc-scheme-modules-grothendieck-abelian` | 1 | state |
 | `lem-pc-separable-polynomial-alg-closed-quotient-product` | 1 | state |
 | `lem-pc-zero-scheme-ideal-local` | 1 | state |
 | `lem-pc-zero-scheme-locally-principal` | 1 | state |
@@ -918,7 +918,7 @@
 | `lem-weil-pbc-p1-field-dimension-one` | 4 | state |
 | `lem-weil-pbc-projective-space-zero-isomorphism` | 4 | state |
 
-Not open yet: 1317 nodes that wait for a statement dependency, 293 nodes that wait for stage 1.
+Not open yet: 1319 nodes that wait for a statement dependency, 293 nodes that wait for stage 1.
 
 ## Stage 3: modules to prove (0)
 
