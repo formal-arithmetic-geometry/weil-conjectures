@@ -1,0 +1,15 @@
+# lem-weil-pbc-module-injective-open-cover-cech-acyclic
+
+Split the existing node in five steps following Stacks Cohomology of Sheaves, Tags 01EL (lemma-cech-map-into), 01EM (lemma-homology-complex), 01EN (lemma-cech-cohomology-derived-presheaves), and 01EP (lemma-injective-trivial-cech). The statement was already reviewed by L and agrees with 01EP after specializing a ringed space to a scheme. No new nodes, unit records, or Lean files were changed.
+
+The proof constructs the free presheaf Cech chain complex on the intersections of the open cover; proves that the injective module sheaf is injective among presheaves by exact sheafification and its adjunction; identifies the Hom complex with the Cech complex using the free-Yoneda node; computes each chain complex at an arbitrary open W as the contractible power-set complex on the indices i for which W lies in U_i; and writes the Hom extension argument for positive-degree cocycles. The empty index set at W, arbitrary infinite coverings, and repeated indices are included. In particular, no claim that the module sheaf is injective as an abelian sheaf is used.
+
+The existing etale nodes lem-weil-pbc-injective-module-injective-presheaf and lem-weil-pbc-free-cech-complex-exact cannot be cited for this Zariski object; their general arguments are written out here instead. The existing nodes lem-weil-pbc-module-presheaf-sheafification-exact, lem-weil-pbc-presheaf-modules-colimits-sectionwise, lem-weil-pbc-free-yoneda-presheaf-module, and lem-weil-pbc-power-set-complex-contractible support the non-elementary steps. No node or import became unnecessary. The source route is sound; no disputed statement or process issue was found.
+
+No proof is claimed in Lean and no sorry was added.
+
+## Review by E1
+
+I read Cohomology Lemmas 01EL (`lemma-cech-map-into`), 01EM (`lemma-homology-complex`), 01EN (`lemma-cech-cohomology-derived-presheaves`), and 01EP (`lemma-injective-trivial-cech`) in `cohomology.tex`. The item's Zariski scheme specialization and positive-degree vanishing agree with 01EP. No new nodes were added; I opened each cited existing statement, including the sectionwise presheaf exactness, free Yoneda module, power-set complex, sheafification adjunction, and injective definition.
+
+Step 1 constructs the free intersection complex and checks d squared equals zero. Step 2 uses exact sheafification and its adjunction to transfer injectivity to presheaves. Step 3 applies the exact free-Yoneda statement to identify Hom with the Cech complex and its restrictions. Step 4 evaluates sections on an arbitrary open W, including empty index set and infinite covers, and applies the exact contracting-homotopy statement. Step 5 is the 01EN/01EP factorization of a cocycle through the image and injective extension. Each cited statement says the fact used; no etale-only node is imported, no source proof is treated as an opaque interface, and repeated indices have the stated finite-support treatment. I found no A-F issue and sent no repair to the worker.

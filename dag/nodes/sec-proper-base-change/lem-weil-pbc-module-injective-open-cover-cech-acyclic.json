@@ -31,9 +31,87 @@
   "def-sc-zariski-site",
   "def-weil-pbc-site-cech-complex"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "For every open $V\\subseteq X$, define the presheaf of $\\mathcal O_X$-modules $J_V$ by $J_V(W)=\\mathcal O_X(W)$ if $W\\subseteq V$ and $J_V(W)=0$ otherwise; restrictions within $V$ are those of $\\mathcal O_X$, and any restriction out of a zero group is zero. Since the Zariski site is the poset of opens [def-sc-zariski-site], $J_V(W)=\\bigoplus_{\\varphi\\in\\operatorname{Hom}(W,V)}\\mathcal O_X(W)$: there is exactly one summand when $W\\subseteq V$ and none otherwise. For $p\\geq0$ put $K_p=\\bigoplus_{(i_0,\\ldots,i_p)\\in I^{p+1}}J_{U_{i_0\\ldots i_p}}$ and $K_p=0$ for $p<0$. The inclusion $U_{i_0\\ldots i_{p+1}}\\subseteq U_{i_0\\ldots\\widehat{i_j}\\ldots i_{p+1}}$ gives $J_{U_{i_0\\ldots i_{p+1}}}\\to J_{U_{i_0\\ldots\\widehat{i_j}\\ldots i_{p+1}}}$, identity at an open contained in the source and zero otherwise. Let $d_{p+1}:K_{p+1}\\to K_p$ be the alternating sum of these maps. On a basis element at any open $W$ this is the alternating deletion differential, so $d_pd_{p+1}=0$ by cancellation of the two orders of deleting each pair of indices.",
+   "uses": [
+    "def-sc-zariski-site",
+    "def-weil-presheaf-modules-sheafification",
+    "lem-weil-pbc-presheaf-modules-colimits-sectionwise"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/cohomology.tex",
+    "place": "Lemma Tag 01EL (lemma-cech-map-into), statement and preceding description of the presheaf j_{p!}O_V"
+   }
+  },
+  {
+   "text": "The sheaf $\\mathcal I$ is injective also in $\\mathrm{PMod}(\\mathcal O_X)$. Indeed, let $a:\\mathcal P\\hookrightarrow\\mathcal Q$ be a monomorphism of presheaves of $\\mathcal O_X$-modules and $f:\\mathcal P\\to\\mathcal I$ a presheaf morphism. The sectionwise exactness of $\\mathrm{PMod}(\\mathcal O_X)$ and exactness of sheafification [lem-weil-pbc-module-presheaf-sheafification-exact] make $a^\\#:\\mathcal P^\\#\\hookrightarrow\\mathcal Q^\\#$ a monomorphism of sheaves. The adjunction [def-weil-presheaf-modules-sheafification] gives $f^\\#:\\mathcal P^\\#\\to\\mathcal I$ with $f^\\#\\eta_{\\mathcal P}=f$. Injectivity of $\\mathcal I$ [def-sp-injective-resolutions] extends $f^\\#$ across $a^\\#$ to $g^\\#:\\mathcal Q^\\#\\to\\mathcal I$. Then $g=g^\\#\\eta_{\\mathcal Q}:\\mathcal Q\\to\\mathcal I$ satisfies $ga=g^\\#a^\\#\\eta_{\\mathcal P}=f^\\#\\eta_{\\mathcal P}=f$ by naturality of the sheafification unit. This is the extension property for an injective presheaf.",
+   "uses": [
+    "lem-weil-pbc-module-presheaf-sheafification-exact",
+    "def-weil-presheaf-modules-sheafification",
+    "def-sp-injective-resolutions"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/cohomology.tex",
+    "place": "Lemma Tag 01EP (lemma-injective-trivial-cech), proof, first sentence; Homology Lemma Tag 015Z (lemma-adjoint-preserve-injectives), here expanded using the adjunction"
+   }
+  },
+  {
+   "text": "For any presheaf $\\mathcal P$ of $\\mathcal O_X$-modules, [lem-weil-pbc-free-yoneda-presheaf-module] applied to $X_{\\rm Zar}$ and $V$ identifies $\\operatorname{Hom}(J_V,\\mathcal P)$ with $\\mathcal P(V)$ by evaluating a morphism on $1\\in J_V(V)$. Thus $\\operatorname{Hom}(K_p,\\mathcal P)=\\prod_{(i_0,\\ldots,i_p)}\\mathcal P(U_{i_0\\ldots i_p})$. If $V'\\subseteq V$ and $s\\in\\mathcal P(V)$, the map corresponding to $s$ sends $1\\in J_V(V')$ to $s|_{V'}$; hence precomposition with $J_{V'}\\to J_V$ corresponds to the restriction $\\mathcal P(V)\\to\\mathcal P(V')$. Applied to every face of $d_{p+1}$, this identifies the differential $\\operatorname{Hom}(K_p,\\mathcal P)\\to\\operatorname{Hom}(K_{p+1},\\mathcal P)$ with $s\\mapsto(\\sum_{j=0}^{p+1}(-1)^j s_{i_0\\ldots\\widehat{i_j}\\ldots i_{p+1}}|_{U_{i_0\\ldots i_{p+1}}})$. Therefore $\\operatorname{Hom}(K_\\bullet,\\mathcal P)\\cong\\check{\\mathcal C}^\\bullet(\\mathcal U,\\mathcal P)$ as complexes of abelian groups [def-weil-pbc-site-cech-complex].",
+   "uses": [
+    "lem-weil-pbc-free-yoneda-presheaf-module",
+    "def-weil-pbc-site-cech-complex"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/cohomology.tex",
+    "place": "Lemma Tag 01EL (lemma-cech-map-into), proof, and preceding Hom(j_{p!}O_V,P)=P(V)"
+   }
+  },
+  {
+   "text": "Fix an arbitrary open $W\\subseteq X$ and put $I_W=\\{i\\in I\\mid W\\subseteq U_i\\}$. By the definition of $J_V$, $K_p(W)$ is the free $\\mathcal O_X(W)$-module on $I_W^{p+1}$: $W\\subseteq U_{i_0\\ldots i_p}$ holds exactly when every $i_j\\in I_W$. On these basis elements $d_{p+1}(W)$ deletes one index with sign $(-1)^j$, so $K_\\bullet(W)$ is the complex $C_\\bullet(I_W;\\mathcal O_X(W))$ of [lem-weil-pbc-power-set-complex-contractible]. If $I_W=\\varnothing$, every $K_p(W)$ is zero; if $I_W\\ne\\varnothing$, choose $i_*\\in I_W$ and use that node's homotopy $[(i_0,\\ldots,i_p)]\\mapsto[(i_*,i_0,\\ldots,i_p)]$ to obtain $H_p(K_\\bullet(W))=0$ for $p>0$. Since kernels and images of presheaves of modules are sectionwise [lem-weil-pbc-module-presheaf-sheafification-exact] (1), $\\operatorname{im}d_{p+1}=\\ker d_p$ as presheaves for every $p>0$. This holds even for an infinite cover, because each basis element and its homotopy have finite support.",
+   "uses": [
+    "lem-weil-pbc-presheaf-modules-colimits-sectionwise",
+    "lem-weil-pbc-power-set-complex-contractible",
+    "lem-weil-pbc-module-presheaf-sheafification-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/cohomology.tex",
+    "place": "Lemma Tag 01EM (lemma-homology-complex), proof, decomposition by I_1 and contracting homotopy"
+   }
+  },
+  {
+   "text": "Let $p>0$ and let $s:K_p\\to\\mathcal I$ represent a cocycle in $\\operatorname{Hom}(K_\\bullet,\\mathcal I)$, so $s d_{p+1}=0$. By Step 4, $\\operatorname{im}d_{p+1}=\\ker d_p$; hence $s$ vanishes on $\\ker d_p$ and factors uniquely through the epimorphism $K_p\\twoheadrightarrow B=\\operatorname{im}d_p$, giving $t:B\\to\\mathcal I$. The inclusion $B\\hookrightarrow K_{p-1}$ is a monomorphism, so injectivity of $\\mathcal I$ in $\\mathrm{PMod}(\\mathcal O_X)$ from Step 2 extends $t$ to $s':K_{p-1}\\to\\mathcal I$. Then $s=s'd_p$, a coboundary. Thus $H^p(\\operatorname{Hom}(K_\\bullet,\\mathcal I))=0$, and the isomorphism of complexes in Step 3 gives $\\check H^p(\\mathcal U,\\mathcal I)=0$ [def-weil-pbc-site-cech-complex]. This proves the assertion for every $p>0$.",
+   "uses": [
+    "def-sp-injective-resolutions",
+    "lem-weil-pbc-module-presheaf-sheafification-exact",
+    "def-weil-pbc-site-cech-complex"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/cohomology.tex",
+    "place": "Lemma Tag 01EN (lemma-cech-cohomology-derived-presheaves), proof, second paragraph (Hom into an injective presheaf applied to K); Lemma Tag 01EP (lemma-injective-trivial-cech), proof"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sc-zariski-site",
+  "def-weil-presheaf-modules-sheafification",
+  "lem-weil-pbc-presheaf-modules-colimits-sectionwise",
+  "lem-weil-pbc-module-presheaf-sheafification-exact",
+  "def-sp-injective-resolutions",
+  "lem-weil-pbc-free-yoneda-presheaf-module",
+  "def-weil-pbc-site-cech-complex",
+  "lem-weil-pbc-power-set-complex-contractible"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Lemmas Tag 01EL (lemma-cech-map-into), Tag 01EM (lemma-homology-complex), Tag 01EN (lemma-cech-cohomology-derived-presheaves), Tag 01EP (lemma-injective-trivial-cech)"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -72,7 +150,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "worker",
@@ -93,5 +171,17 @@
  },
  "chapter": "sec-proper-base-change",
  "unit": "sk-thm-p1",
- "reviewed": "Reviewed by L 2026-10-10 (statement): Cohomology 01EP for O_X-modules on the Zariski site of a scheme, Čech complex spelled out. Unsplit."
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "group": "E1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed by the lead of E1; spot-checked by L: 01EP: free presheaves J_V and the complex K_p, injectivity of I in PMod via exact sheafification and the adjunction, Hom(K_p, P) = Cech complex by the free Yoneda node, K(W) the contractible power-set complex on I_W, extension of cocycles by injectivity; delivered before the blueprint-refs rule: blueprint field backfilled by tools/blueprint_refs.py, same_as not yet searched"
+ },
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "lem-weil-pbc-module-injective-open-cover-cech-acyclic",
+  "worker": "stage1",
+  "summary": "Checked Cohomology 01EP and its source route 01EL, 01EM and 01EN. Constructed the free presheaf Cech chain complex on intersections of opens; used exact sheafification and its adjunction to prove injectivity in presheaves; identified its Hom complex with the Cech complex via the existing free-Yoneda Mathlib leaf; computed each chain complex on an arbitrary open W as the power-set complex for I_W, including I_W empty; and expanded the exact Hom argument. No new nodes or Lean code."
+ }
 }
