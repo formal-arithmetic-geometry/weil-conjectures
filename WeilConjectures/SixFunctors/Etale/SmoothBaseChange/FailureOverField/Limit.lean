@@ -61,9 +61,13 @@ lemma mapDerivedCategoryNatIso_hom_app_singleFunctor {F G : C ⥤ D} [F.Additive
         F.map (HomologicalComplex.singleObjXSelf (ComplexShape.up ℤ) 0 X).hom ≫ e.hom.app X ≫
           G.map (HomologicalComplex.singleObjXSelf (ComplexShape.up ℤ) 0 X).inv := by
       rw [e.hom.naturality_assoc, ← G.map_comp, Iso.hom_inv_id, G.map_id, Category.comp_id]
-    simp [Functor.mapCochainComplexSingleFunctor, CochainComplex.singleFunctors,
-      HomologicalComplex.single_map_f_self, h', HomologicalComplex.singleObjXSelf,
-      HomologicalComplex.singleObjXIsoOfEq]
+    simp only [mapHomologicalComplex_obj_X, comp_obj, mapCochainComplexSingleFunctor,
+      HomologicalComplex.comp_f, NatTrans.mapHomologicalComplex_app_f, h',
+      HomologicalComplex.singleObjXSelf, HomologicalComplex.singleObjXIsoOfEq, eqToIso_refl,
+      Iso.refl_hom, map_id, Iso.refl_inv, Category.id_comp,
+      HomologicalComplex.singleMapHomologicalComplex_hom_app_self, Category.assoc,
+      CochainComplex.singleFunctors, CochainComplex.shiftFunctor_obj_X',
+      HomologicalComplex.single_map_f_self]
     erw [G.map_id, Category.comp_id, Category.id_comp, Category.comp_id]
   · exact (HomologicalComplex.isZero_single_obj_X _ _ _ _ hi).eq_of_tgt _ _
 
@@ -90,12 +94,13 @@ lemma mapDerivedCategoryCompIso_hom_app_singleFunctor (F : C ⥤ D) (G : D ⥤ E
   ext i
   by_cases hi : i = 0
   · subst hi
-    simp [Functor.mapCochainComplexSingleFunctor, HomologicalComplex.singleObjXSelf,
-      HomologicalComplex.singleObjXIsoOfEq, eqToHom_map, Functor.mapHomologicalComplexCompIso,
-      HomologicalComplex.comp_f, NatIso.mapHomologicalComplex]
-    erw [Category.id_comp]
-    simp [HomologicalComplex.singleObjXSelf, HomologicalComplex.singleObjXIsoOfEq, eqToHom_map]
-    erw [eqToHom_map, eqToHom_trans]
+    simp only [comp_obj, mapCochainComplexSingleFunctor, HomologicalComplex.comp_f,
+      mapHomologicalComplex_map_f, HomologicalComplex.singleMapHomologicalComplex_hom_app_self,
+      HomologicalComplex.singleObjXSelf, HomologicalComplex.singleObjXIsoOfEq, eqToIso_refl,
+      Iso.refl_hom, map_id, Iso.refl_inv, Category.id_comp, mapHomologicalComplexCompIso,
+      NatIso.mapHomologicalComplex, NatTrans.mapHomologicalComplex_id, NatTrans.id_app,
+      HomologicalComplex.id_f, comp_map]
+    erw [Functor.map_id]
     rfl
   · exact (HomologicalComplex.isZero_single_obj_X _ _ _ _ hi).eq_of_tgt _ _
 
@@ -116,10 +121,12 @@ lemma ι_map_mapDerivedCategoryPlusSingleFunctor_hom_app (F : C ⥤ D) [F.Additi
       (F.mapDerivedCategorySingleFunctor n).hom.app X := by
   rw [mapDerivedCategoryPlusSingleFunctor, Functor.fullyFaithfulCancelRight_hom_app,
     Functor.map_preimage]
-  simp [mapDerivedCategoryPlusCompatibility, DerivedCategory.Plus.singleFunctorιIso]
-  erw [isoWhiskerRight_hom, whiskerRight_app, Iso.refl_hom, NatTrans.id_app, Functor.map_id,
-    Category.id_comp, Iso.symm_hom, Iso.refl_inv, NatTrans.id_app, Category.comp_id]
-  exact Category.id_comp _
+  simp only [comp_obj, ObjectProperty.ι_obj, mapDerivedCategoryPlusCompatibility,
+    isoWhiskerLeft_refl, DerivedCategory.Plus.singleFunctorιIso, isoWhiskerRight_refl,
+    Iso.refl_symm, Iso.refl_trans, Iso.trans_hom, Iso.symm_hom, isoWhiskerLeft_hom, Iso.refl_hom,
+    NatTrans.comp_app, associator_hom_app, associator_inv_app, whiskerLeft_app, NatTrans.id_app,
+    Category.comp_id, Category.id_comp]
+  erw [Category.id_comp, Category.comp_id]
 
 lemma mapDerivedCategoryPlusNatIso_hom_app_singleFunctor {F G : C ⥤ D} [F.Additive]
     [G.Additive] [PreservesFiniteLimits F] [PreservesFiniteColimits F]
@@ -167,8 +174,6 @@ lemma mapDerivedCategoryPlusNatIso_trans_compIso_hom_app_singleFunctor {F₁₂ 
   exact mapDerivedCategoryPlusNatIso_hom_app_singleFunctor e X
 
 end CategoryTheory.Functor
-
-
 
 open scoped CategoryTheory.Functor AlgebraicGeometry.Etale
 
@@ -252,7 +257,7 @@ lemma Etale.overLowerStarTransition_comp (g : T ⟶ S) {Tᵢ Tⱼ Tₖ : Scheme.
         (ρ' ≫ ρ ≫ πᵢ) (Category.assoc _ _ _).symm).hom.app K ≫
       (Etale.upperStarCompDerivedPlus (ModuleCat.{u + 1} Λ) ρ' ρ (ρ' ≫ ρ) rfl).hom.app
           (D+((πᵢ)^*[ModuleCat.{u + 1} Λ]).obj K)), ← A]
-    simp only [Category.assoc, Iso.hom_inv_id_app_assoc, Iso.hom_inv_id_app, Category.comp_id]
+    simp only [Category.assoc]
     rw [← Functor.map_comp_assoc, Iso.hom_inv_id_app]
     erw [CategoryTheory.Functor.map_id, Category.id_comp, Iso.hom_inv_id_app]
     rw [reassoc_of% A]
@@ -438,7 +443,7 @@ lemma Etale.upperStarCompDerivedPlus_coherence_inv {T₂ T₁ Y Y₂ Y₁ : Sche
         (Etale.upperStarCompDerivedPlus (ModuleCat.{u + 1} Λ) e₂ π₂ (a₂ ≫ e) wa₂).hom.app K))]
   simp only [Category.assoc] at C ⊢
   rw [reassoc_of% C]
-  simp only [Iso.hom_inv_id_app_assoc, Iso.inv_hom_id_app, Iso.inv_hom_id_app_assoc]
+  simp only [Iso.hom_inv_id_app_assoc, Iso.inv_hom_id_app]
   rw [← Functor.map_comp_assoc]
   simp only [Category.assoc, Iso.hom_inv_id_app_assoc, Iso.inv_hom_id_app]
   erw [CategoryTheory.Functor.map_id, Category.id_comp, Iso.hom_inv_id_app]
@@ -508,8 +513,8 @@ lemma Etale.homologyFunctor_map_overTargetTransition {X Y Tᵢ Tⱼ : Scheme.{u}
         (R+((V.hom ≫ h)_*[ModuleCat.{u + 1} Λ]).map
           (Etale.stageSingleIso Λ e V.hom eᵢ πᵢ waᵢ F).hom) ≫
       Etale.higherDirectImageOverMap Λ h (((e)^*[ModuleCat.{u + 1} Λ]).obj F) q φ := by
-  rw [← Functor.map_comp, Etale.overTargetTransition_stageSingleIso,
-    Etale.higherDirectImageOverMap, Etale.higherDirectImageTransition]
+  rw [← Functor.map_comp, Etale.overTargetTransition_stageSingleIso Λ e h φ eᵢ eⱼ πᵢ πⱼ ρ waᵢ waⱼ wa
+      hπ F, Etale.higherDirectImageOverMap, Etale.higherDirectImageTransition]
   simp only [Functor.map_comp]
   exact congrArg (_ ≫ ·) (Category.assoc _ _ _).symm
 
