@@ -388,7 +388,6 @@ noncomputable def etaleObjIsoTrivialCover {U' : Scheme.{u}} {g : U' ⟶ U} {V : 
     g.Etale.obj V ≅ trivialCover S :=
   MorphismProperty.Over.isoMk h.isoPullback.symm (by simp; rfl)
 
-variable [Finite Λ] in
 /-- **Free sheaves on finite étale schemes are finite locally constant.** For a finite étale
 `U`-scheme `V`, the free sheaf `Λ[V]` is finite locally constant: étale-locally `V` is a trivial
 cover (`AlgebraicGeometry.Scheme.FiniteEtale.exists_etale_isPullback_sigma`), on which the free
@@ -407,7 +406,8 @@ theorem isFiniteLocallyConstantSheaf_freeYoneda_of_isFinite (V : U.Etale) [IsFin
       Scheme.Cover.mkOfCovers U U' g (fun y ↦ ⟨y, hy y⟩) hg
     refine ⟨⟨⟨𝒰, fun y ↦ (Scheme.isConstant_over_iff_upperStar _ _ _).2 ?_⟩⟩⟩
     have := isConstant_freeYoneda_of_iso (Λ := Λ) (etaleObjIsoTrivialCover (hpb y))
-    exact (Sheaf.isConstant_congr (U' y).smallEtaleTopology (upperStarFreeYonedaIso (Λ := Λ) (g y) V).symm :)
+    exact (Sheaf.isConstant_congr (U' y).smallEtaleTopology
+      (upperStarFreeYonedaIso (Λ := Λ) (g y) V).symm :)
   have hfin : Scheme.IsFiniteSheaf
       (Sheaf.freeYoneda U.smallEtaleTopology V (ModuleCat.of Λ Λ)) := ⟨fun Ω _ _ s ↦ by
     obtain ⟨ι, _, -, ⟨e⟩⟩ := V.hom.exists_overIso_sigma_of_isSepClosed s
