@@ -13,7 +13,7 @@
     "lem-weil-pbc-etale-colimit-normal-local-domain"
    ]
   },
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "A reduced ring with finitely many minimal primes is normal iff integrally closed in its total ring of fractions",
@@ -27,9 +27,84 @@
   "def-weil-pbc-normal-ring",
   "def-weil-pbc-integral-closure"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "The total ring of fractions splits at the minimal primes. Let $\\mathfrak p_1,\\dots,\\mathfrak p_n$ be the finitely many minimal primes. In a reduced ring the nonzerodivisors are exactly the elements outside their union [lem-weil-pbc-reduced-zerodivisors-union-minimal-primes], so every denominator becomes a unit in each $R_{\\mathfrak p_i}$. The localization map therefore gives $Q(R)\\to\\prod_iR_{\\mathfrak p_i}$. The standard localization-prime correspondence identifies the primes of $Q(R)$ with the primes of $R$ disjoint from the denominators; prime avoidance forces each such prime to be one of the $\\mathfrak p_i$. By [lem-weil-pbc-minimal-prime-reduced-localization-field] each $R_{\\mathfrak p_i}$ is a field. The localization $Q(R)$ is reduced: if $(r/s)^m=0$, then some nonzerodivisor $u$ kills $r^m$, hence $r^m=0$ and then $r=0$. Therefore the intersection of the finitely many maximal ideals of $Q(R)$ is its nilradical and is zero [lem-weil-pbc-zero-locus-eq-iff-radical-eq]. The product-of-localizations decomposition [lem-weil-pbc-product-of-localizations-at-maximal] identifies the displayed map with an isomorphism. (If $n=0$, then $R=0$ and the assertion is the evident zero-ring case.)",
+   "uses": [
+    "lem-weil-pbc-reduced-zerodivisors-union-minimal-primes",
+    "lem-weil-pbc-minimal-prime-reduced-localization-field",
+    "lem-weil-pbc-product-of-localizations-at-maximal",
+    "lem-weil-pbc-localization-prime-residue-field-iso",
+    "lem-weil-pbc-prime-avoidance",
+    "lem-weil-pbc-zero-locus-eq-iff-radical-eq"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra, Lemma Tag 030C proof, using Lemmas Tags 00EW, 02LX, 00EU and the localization-prime correspondence"
+   }
+  },
+  {
+   "text": "Normality implies integral closedness in the total ring of fractions. If every localization $R_{\\mathfrak p}$ is a normal domain and $x\\in Q(R)$ is integral over $R$, then for every prime $\\mathfrak p$ the image of $x$ in $Q(R)_{\\mathfrak p}$ lies in the fraction field of the normal domain $R_{\\mathfrak p}$ and hence lies in $R_{\\mathfrak p}$. Let $I=\\{a\\in R\\mid ax\\in R\\}$. The local membership just obtained says that $I$ is contained in no prime ideal: for each $\\mathfrak p$ some $a\\notin\\mathfrak p$ lies in $I$. Therefore $I=R$, so $1\\in I$ and $x\\in R$. This is the argument of [lem-weil-pbc-normal-ring-integrally-closed-total].",
+   "uses": [
+    "lem-weil-pbc-normal-ring-integrally-closed-total"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra, Lemma Tag 030C proof, implication (1) => (2), via Lemma Tag 034M"
+   }
+  },
+  {
+   "text": "Assume $R$ is integrally closed in $Q(R)$. Under the isomorphism of step 1, each coordinate idempotent $e_i=(0,\\dots,1,\\dots,0)$ satisfies the monic equation $T^2-T=0$, so it is integral over $R$ and hence belongs to $R$. Multiplication by the $e_i$ gives a ring isomorphism $R\\xrightarrow{\\sim}\\prod_i e_iR$, with inverse $(r_i)\\mapsto\\sum_i r_i$, because the $e_i$ are orthogonal and sum to $1$. Each factor $e_iR$ identifies with $R/\\mathfrak p_i$, hence is a domain, and its fraction field identifies with $R_{\\mathfrak p_i}$ (the latter is a field by [lem-weil-pbc-minimal-prime-reduced-localization-field]).",
+   "uses": [
+    "lem-weil-pbc-minimal-prime-reduced-localization-field"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra, Lemma Tag 030C proof, middle paragraph after the total-fractions decomposition"
+   }
+  },
+  {
+   "text": "Each factor $e_iR$ is integrally closed in its fraction field. Transport the integral-closedness of $R\\subset Q(R)$ through the product isomorphisms of step 3 and the total-fractions isomorphism of step 1. The coordinatewise integral-closure statement [lem-weil-pbc-finite-product-integral-closure] then says that the product is integrally closed exactly when every $e_iR\\subset R_{\\mathfrak p_i}$ is integrally closed. Since each factor is a domain, it is a normal domain. This proves (2) $\\Rightarrow$ (3).",
+   "uses": [
+    "lem-weil-pbc-finite-product-integral-closure"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra, Lemma Tag 030C proof, final paragraph, using Lemma Tag 0CY9"
+   }
+  },
+  {
+   "text": "Finally, (3) implies (1): a finite product of normal domains is a normal ring by [lem-weil-pbc-finite-product-normal], since every prime of a finite product lies in exactly one factor and localization there is the corresponding localization of that factor. The implication (1) $\\Rightarrow$ (2) is step 2, so all three conditions are equivalent.",
+   "uses": [
+    "lem-weil-pbc-finite-product-normal"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra, Lemma Tag 030C proof, opening paragraph and Lemma Tag 0CYA"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-reduced-zerodivisors-union-minimal-primes",
+  "lem-weil-pbc-minimal-prime-reduced-localization-field",
+  "lem-weil-pbc-product-of-localizations-at-maximal",
+  "lem-weil-pbc-localization-prime-residue-field-iso",
+  "lem-weil-pbc-prime-avoidance",
+  "lem-weil-pbc-zero-locus-eq-iff-radical-eq",
+  "lem-weil-pbc-normal-ring-integrally-closed-total",
+  "lem-weil-pbc-finite-product-integral-closure",
+  "lem-weil-pbc-finite-product-normal"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Algebra, Lemma Tag 030C (lemma-characterize-reduced-ring-normal, line 8275), with its proof"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -61,7 +136,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "worker",
@@ -81,5 +156,19 @@
   }
  },
  "chapter": "sec-proper-base-change",
- "unit": "sk-thm-p1"
+ "unit": "sk-thm-p1",
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "lem-weil-pbc-reduced-normal-iff-integrally-closed-total-fractions",
+  "worker": "stage1",
+  "summary": "Split Stacks Algebra Lemma 030C into five steps: total-ring-of-fractions decomposition for a reduced ring with finitely many minimal primes; normal implies integral closedness (034M); idempotent decomposition after integral closedness; coordinatewise integral closure (0CY9); and finite-product normality (0CYA). Existing nodes supply minimal-prime fields, zerodivisors, localization prime correspondence and product of localizations. Three supporting unsplit nodes were created; no Lean declaration was attached.",
+  "blueprint": "The three equivalences refine the ring-theoretic normality used through the 06DI strict-henselization assertion in the second proof paragraph of lem-weil-pbc-normal-constant-generic. Step 1 supplies the finite-minimal-prime total-fractions decomposition, Step 2 supplies normality-to-integral-closedness, Steps 3-4 derive normal domains from coordinate idempotents and coordinatewise integral closure, and Step 5 supplies the converse product-normality implication. The whole-blueprint search found no blueprint node with the same statement."
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "group": "E1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed by the lead of E1; spot-checked by L: 030C: Q(R) = product of the residue fields at the finitely many minimal primes, normal => integrally closed in Q(R), idempotents split R into a product of domains each integrally closed, finite products of normal rings normal; three new support nodes"
+ }
 }
