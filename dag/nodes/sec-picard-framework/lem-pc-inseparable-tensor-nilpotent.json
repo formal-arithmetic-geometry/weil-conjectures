@@ -23,9 +23,54 @@
   "def-weil-algebraic-closure",
   "def-weil-pbc-separable-algebraic-extension"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Let $P\\in k[T]$ be the monic minimal polynomial of $\\alpha$ over $k$. Since $P$ is inseparable, over the algebraic closure $\\bar{k}$ it has a repeated root $\\beta\\in\\bar{k}$; write $P=(T-\\beta)^2Q$ in $\\bar{k}[T]$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra, Lemma Tag 030V, field-theory calculation for an inseparable minimal polynomial"
+   }
+  },
+  {
+   "text": "Put $g=P/(T-\\beta)=(T-\\beta)Q\\in\\bar{k}[T]$. The evaluation map $k[T]\\to K$, $T\\mapsto\\alpha$, induces $k[T]/(P)\\cong k(\\alpha)$ by [lem-weil-pbc-minimal-polynomial-quotient-field-iso]. After tensoring this isomorphism with $\\bar{k}$ over $k$, we identify $k(\\alpha)\\otimes_k\\bar{k}$ with $\\bar{k}[T]/(P)$. The class $\\bar g$ is nonzero, because $\\deg g<\\deg P$ so $P$ does not divide $g$, while $\\bar g^{\\,2}=0$ because $g^2=P Q$ is divisible by $P$. Thus $k(\\alpha)\\otimes_k\\bar{k}$ contains a nonzero nilpotent.",
+   "uses": [
+    "lem-weil-pbc-minimal-polynomial-quotient-field-iso"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra, Lemma Tag 030V, tensor calculation after factoring the inseparable minimal polynomial"
+   }
+  },
+  {
+   "text": "The inclusion $k(\\alpha)\\hookrightarrow K$ is injective, and tensoring an injection of $k$-vector spaces with the $k$-vector space $\\bar{k}$ remains injective. Hence the induced map $k(\\alpha)\\otimes_k\\bar{k}\\to K\\otimes_k\\bar{k}$ is injective, so the nonzero nilpotent from Step 2 remains nonzero in $K\\otimes_k\\bar{k}$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra, Lemma Tag 030V, passage from $k(\\alpha)\\otimes_k\\bar{k}$ to $K\\otimes_k\\bar{k}$"
+   }
+  },
+  {
+   "text": "Therefore $K\\otimes_k\\bar{k}$ has a nonzero nilpotent element. By the definition of a reduced ring, it is not reduced.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra, Lemma Tag 030V, conclusion"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-minimal-polynomial-quotient-field-iso"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Algebra, Lemma Tag 030V (algebra-lemma-geometrically-reduced-finite-purely-inseparable-extension), field-theory calculation"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -57,12 +102,28 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-pc-finite-extension-tensor-algebraic-closure-reduced-separable",
   "by": "worker",
   "date": "2026-10-10"
  },
  "chapter": "sec-picard-framework",
- "unit": "sk-thm-picard-rr"
+ "unit": "sk-thm-picard-rr",
+ "split_report": {
+  "date": "2026-10-11",
+  "item": "lem-pc-inseparable-tensor-nilpotent",
+  "worker": "stage1",
+  "summary": "No project declaration states the item. I split the Tag 030V calculation into the repeated-root factorization, the quotient calculation producing the nonzero nilpotent class of P/(T-beta), injectivity after tensoring the field inclusion with the algebraic closure, and the reducedness conclusion. The only non-elementary input is the existing minimal-polynomial quotient isomorphism leaf.",
+  "blueprint": "lem-pc-ample-positive-degree proof, part (<=): the 030V field-theory calculation producing a nilpotent after tensoring with an algebraic closure",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-itn1758",
+  "group": "F1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-itn1758 (reviewer sub-agent of L); spot-checked: Steps 1-4 checked: repeated root from inseparability, g=(T-beta)Q with g^2=PQ (F1's correction is right) and deg g<deg P so class nonzero, quotient iso cited exactly from lem-weil-pbc-minimal-polynomial-quotient-field-iso, flatness over a field for Step 3. Mathlib grep (Mathlib/RingTheory/Nilpotent/GeometricallyReduced.lean: isGeometricallyReduced_field_iff, IsGeometricallyReduced.of_injective): no separability converse, no exact match, no leaf. No repairs."
+ }
 }
