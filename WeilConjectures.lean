@@ -84,6 +84,7 @@ public import WeilConjectures.AlgebraicGeometry.Descent
 public import WeilConjectures.AlgebraicGeometry.Divisor.AffineComplement
 public import WeilConjectures.AlgebraicGeometry.Divisor.Image
 public import WeilConjectures.AlgebraicGeometry.DualNumbers
+public import WeilConjectures.AlgebraicGeometry.DualNumbersBaseChange
 public import WeilConjectures.AlgebraicGeometry.EffectiveCartier
 public import WeilConjectures.AlgebraicGeometry.EffectiveCartierSum
 public import WeilConjectures.AlgebraicGeometry.EffectiveDescent
@@ -234,6 +235,7 @@ public import WeilConjectures.AlgebraicGeometry.NoetherNormalizationChart
 public import WeilConjectures.AlgebraicGeometry.Picard.AffineSpaceRigidity
 public import WeilConjectures.AlgebraicGeometry.Picard.Defs
 public import WeilConjectures.AlgebraicGeometry.Picard.Degree
+public import WeilConjectures.AlgebraicGeometry.Picard.DualNumbers
 public import WeilConjectures.AlgebraicGeometry.Picard.Group
 public import WeilConjectures.AlgebraicGeometry.Picard.Jacobian
 public import WeilConjectures.AlgebraicGeometry.Picard.LocalizationAwayRigidity
@@ -772,6 +774,7 @@ public import WeilConjectures.Mathlib.AlgebraicGeometry.Fiber
 public import WeilConjectures.Mathlib.AlgebraicGeometry.FunctionField
 public import WeilConjectures.Mathlib.AlgebraicGeometry.GammaSpecAdjunction
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Geometrically.Connected
+public import WeilConjectures.Mathlib.AlgebraicGeometry.Geometrically.Irreducible
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Geometrically.Reduced
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Gluing
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Group.Affine
@@ -787,6 +790,7 @@ public import WeilConjectures.Mathlib.AlgebraicGeometry.Limits
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Modules.Presheaf
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Modules.Sheaf
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Modules.Tilde
+public import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.Basic
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.Etale
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.Finite
