@@ -33,6 +33,81 @@ universe u
 
 open CategoryTheory Limits Opposite
 
+section Spreading
+
+open Polynomial TensorProduct
+
+/-- **Spreading out a finite separable extension of a fraction field.** Let `R` be a domain with
+fraction field `K` and `E/K` a finite separable extension. Then there is an étale `R`-algebra `T`
+with an `R`-algebra map `T ⟶ E` and a `K`-algebra map `E ⟶ K ⊗_R T`: a primitive element of
+`E` has a minimal polynomial with coefficients in some `R[1/b]`, and `T` is the standard étale
+algebra of this polynomial over `R[1/b]`. -/
+theorem exists_etale_algHom_tensorProduct {R K E : Type u} [CommRing R] [IsDomain R] [Field K]
+    [Algebra R K] [IsFractionRing R K] [Field E] [Algebra K E] [FiniteDimensional K E]
+    [Algebra.IsSeparable K E] [Algebra R E] [IsScalarTower R K E] :
+    ∃ (T : Type u) (_ : CommRing T) (_ : Algebra R T), Algebra.Etale R T ∧
+      Nonempty (T →ₐ[R] E) ∧ Nonempty (E →ₐ[K] K ⊗[R] T) := by
+  classical
+  let pb := Field.powerBasisOfFiniteOfSeparable K E
+  set f := minpoly K pb.gen
+  have hfm : f.Monic := minpoly.monic pb.isIntegral_gen
+  obtain ⟨⟨b, hb⟩, hint⟩ := IsLocalization.exist_integer_multiples_of_finset (nonZeroDivisors R)
+    f.coeffs
+  have hbu : IsUnit (algebraMap R K b) := IsLocalization.map_units K ⟨b, hb⟩
+  let Rb := Localization.Away b
+  let φ : Rb →+* K := IsLocalization.Away.lift b hbu
+  have hφ : φ.comp (algebraMap R Rb) = algebraMap R K := IsLocalization.Away.lift_comp b hbu
+  have hrange (c : K) (hc : c ∈ f.coeffs) : c ∈ Set.range φ := by
+    obtain ⟨r, hr⟩ := hint c hc
+    refine ⟨IsLocalization.mk' Rb r (⟨b, 1, pow_one b⟩ : Submonoid.powers b), ?_⟩
+    have h₁ : φ (IsLocalization.mk' Rb r (⟨b, 1, pow_one b⟩ : Submonoid.powers b)) *
+        algebraMap R K b = algebraMap R K r := by
+      rw [← hφ, RingHom.comp_apply, RingHom.comp_apply, ← map_mul, IsLocalization.mk'_spec]
+    refine mul_right_cancel₀ hbu.ne_zero (h₁.trans ?_)
+    rw [hr, Algebra.smul_def, mul_comm]
+  obtain ⟨F, hF, -, hFm⟩ := Polynomial.lifts_and_natDegree_eq_and_monic
+    ((Polynomial.lifts_iff_coeffs_subset_range _).2 fun c hc ↦ hrange c hc) hfm
+  let P := StandardEtalePair.ofMonic hFm 1
+  let T := P.Ring
+  let : Algebra R T := ((algebraMap Rb T).comp (algebraMap R Rb)).toAlgebra
+  have : IsScalarTower R Rb T := IsScalarTower.of_algebraMap_eq' rfl
+  have : Algebra.Etale R Rb := Algebra.Etale.of_isLocalizationAway b
+  have : Algebra.Etale R T := Algebra.Etale.comp R Rb T
+  -- the point `T ⟶ E`
+  let : Algebra Rb E := ((algebraMap K E).comp φ).toAlgebra
+  have : IsScalarTower R Rb E := IsScalarTower.of_algebraMap_eq (fun r ↦ by
+    change algebraMap R E r = algebraMap K E (φ (algebraMap R Rb r))
+    rw [← RingHom.comp_apply φ, hφ, ← IsScalarTower.algebraMap_apply])
+  have haeval (q : Rb[X]) : aeval pb.gen q = aeval pb.gen (q.map φ) := by
+    rw [aeval_def, aeval_def, eval₂_map]
+    rfl
+  have hθ : P.HasMap pb.gen := by
+    refine ⟨?_, ?_⟩
+    · rw [StandardEtalePair.ofMonic_f, haeval, hF]
+      exact minpoly.aeval K pb.gen
+    · rw [StandardEtalePair.ofMonic_g, one_mul, haeval, ← Polynomial.derivative_map, hF]
+      exact (Algebra.IsSeparable.isSeparable K pb.gen).aeval_derivative_ne_zero
+        (minpoly.aeval K pb.gen) |>.isUnit
+  refine ⟨T, inferInstance, inferInstance, inferInstance,
+    ⟨(P.lift pb.gen hθ).restrictScalars R⟩, ⟨pb.lift (1 ⊗ₜ P.X) ?_⟩⟩
+  -- the two maps `R[1/b] ⟶ K ⊗_R T` agree
+  have hcomm : (algebraMap K (K ⊗[R] T)).comp φ =
+      Algebra.TensorProduct.includeRight.toRingHom.comp (algebraMap Rb T) := by
+    refine IsLocalization.ringHom_ext (Submonoid.powers b) (RingHom.ext fun r ↦ ?_)
+    simp only [RingHom.comp_apply]
+    rw [← RingHom.comp_apply φ, hφ, ← IsScalarTower.algebraMap_apply R Rb T]
+    change algebraMap R K r ⊗ₜ[R] (1 : T) = (1 : K) ⊗ₜ[R] algebraMap R T r
+    rw [Algebra.algebraMap_eq_smul_one, Algebra.algebraMap_eq_smul_one, TensorProduct.smul_tmul]
+  have h₀ : aeval P.X F = 0 := P.hasMap_X.1
+  change aeval _ f = 0
+  rw [← hF, aeval_def, eval₂_map, hcomm]
+  change eval₂ _ (Algebra.TensorProduct.includeRight.toRingHom P.X) F = 0
+  rw [← Polynomial.hom_eval₂]
+  change Algebra.TensorProduct.includeRight.toRingHom (aeval P.X F) = 0
+  rw [h₀, map_zero]
+
+end Spreading
+
 namespace AlgebraicGeometry
 
 open Etale
