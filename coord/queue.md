@@ -1,6 +1,6 @@
 # Work queue
 
-918 items; claim with `tools/claim.py next <group> [--stage N]`.
+919 items; claim with `tools/claim.py next <group> [--stage N]`.
 
 ## Stage 1: nodes to split (191)
 
@@ -14,7 +14,8 @@
 | `lem-pc-derived-functor-commutes-derived-limit` | 3014 | none |
 | `lem-pc-derived-limit-roos-abelian-groups` | 3014 | none |
 | `lem-pc-derived-lower-truncation-step-triangle` | 3014 | none |
-| `lem-pc-ringed-space-truncation-derived-limit` | 3014 | none |
+| `lem-pc-ringed-space-derived-products` | 3015 | none |
+| `lem-pc-ringed-space-pointwise-truncation-limit` | 3015 | none |
 | `lem-pc-perfect-complexes-compact-set` | 3016 | none |
 | `lem-pc-perfect-generation-affine-base` | 3017 | none |
 | `lem-pc-perfect-generation-open-induction-step` | 3017 | none |
@@ -37,7 +38,6 @@
 | `lem-sc-top-dimensional-reduction-intersection` | 4010 | none |
 | `lem-pc-hilb-containment-locus` | 4011 | none |
 | `lem-sc-etale-faithfully-flat-local` | 4011 | none |
-| `lem-sc-going-down-surjective-dimension` | 4011 | none |
 | `lem-sc-snapper-numerical-polynomial` | 4011 | none |
 | `lem-sc-strict-henselization-completion-flat` | 4011 | none |
 | `lem-sc-hilbert-difference` | 5010 | none |
@@ -57,9 +57,10 @@
 | `thm-sp-spectral-object-yields` | 6006 | none |
 | `pqf-lem-coherent-ft-locnoeth` | 6009 | none |
 | `thm-sc-theorem-of-cube` | 6010 | rests_on_sorry |
-| `lem-pc-projective-space-twist-cohomology` | 6011 | rests_on_sorry |
+| `lem-pc-monomial-cech-complex-homology` | 6012 | none |
+| `lem-pc-twist-cech-monomial-decomposition` | 6012 | none |
 | `lem-pqf-leray-five-term` | 6012 | none |
-| `pqf-lem-locqf-fibre-discrete` | 6012 | none |
+| `pqf-lem-finite-type-algebra-finite-spectrum` | 6013 | none |
 | `pqf-lem-serre-criterion` | 6013 | none |
 | `def-weil-t-structure` | - | none |
 | `def-nagata-fixed-base-separated-stage` | - | none |
@@ -68,7 +69,6 @@
 | `def-weil-pbc-constructible-torsion` | - | none |
 | `lem-pc-kbar-pure-insep` | - | none |
 | `lem-weil-pbc-finite-pushforward-constructible-noetherian` | - | none |
-| `lemma-nagata-final-noetherian-base-system` | - | none |
 | `pqf-lem-affine-local-target` | - | none |
 | `sbc-lem-higher-direct-image-presheaf` | - | none |
 | `thm-pqf-zmt-factorization` | - | none |
@@ -198,7 +198,7 @@
 | `lem-pur-rhom-well-defined` | - | none |
 | `lem-zl-noether-normalization-dimension` | - | none |
 
-## Stage 2: nodes to state (727)
+## Stage 2: nodes to state (728)
 
 | node | distance to Mathlib | kind |
 |---|---|---|
@@ -370,6 +370,7 @@
 | `lem-sc-glue-component-line-bundles` | 1 | state |
 | `lem-sc-glue-component-reduced-cover-sections` | 1 | state |
 | `lem-sc-glue-component-transition-cocycle` | 1 | state |
+| `lem-sc-going-down-surjective-dimension` | 1 | state |
 | `lem-sc-graded-localization-exact` | 1 | state |
 | `lem-sc-graded-prime-avoidance` | 1 | state |
 | `lem-sc-integral-closure-dedekind-surjective-fibres` | 1 | state |
@@ -930,7 +931,7 @@
 | `lem-weil-pbc-p1-field-dimension-one` | 4 | state |
 | `lem-weil-pbc-projective-space-zero-isomorphism` | 4 | state |
 
-Not open yet: 1444 nodes that wait for a statement dependency, 229 nodes that wait for stage 1.
+Not open yet: 1447 nodes that wait for a statement dependency, 230 nodes that wait for stage 1.
 
 ## Stage 3: modules to prove (0)
 
