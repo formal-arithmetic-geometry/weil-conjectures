@@ -2,7 +2,7 @@
 
 917 items; claim with `tools/claim.py next <group> [--stage N]`.
 
-## Stage 1: nodes to split (308)
+## Stage 1: nodes to split (307)
 
 | node | distance to a target | Lean state on the done branch |
 |---|---|---|
@@ -61,7 +61,6 @@
 | `lem-sc-mult-n-etale-kernel` | 4008 | rests_on_sorry |
 | `lem-sc-mult-n-finite-flat` | 4008 | rests_on_sorry |
 | `lem-sc-ntorsion-etale` | 4008 | rests_on_sorry |
-| `lem-weil-pbc-proper-closed-image` | 4008 | none |
 | `prop-av-tate-rank` | 4008 | rests_on_sorry |
 | `prop-pd-picard-degree-decomposition` | 4008 | rests_on_sorry |
 | `cor-pc-sigma-pic-iso` | 4009 | rests_on_sorry |
@@ -315,7 +314,7 @@
 | `lem-pur-rhom-well-defined` | - | none |
 | `lem-zl-noether-normalization-dimension` | - | none |
 
-## Stage 2: nodes to state (609)
+## Stage 2: nodes to state (610)
 
 | node | distance to Mathlib | kind |
 |---|---|---|
@@ -445,6 +444,7 @@
 | `lem-sc-positive-dimensional-locally-algebraic-closed-points` | 1 | state |
 | `lem-sc-principal-ideal-dvr` | 1 | state |
 | `lem-sc-product-irreducible-components-bijection` | 1 | state |
+| `lem-sc-proper-affine-finite` | 1 | state |
 | `lem-sc-reduced-ideals-zero-intersection` | 1 | state |
 | `lem-sc-regular-connected-integral` | 1 | state |
 | `lem-sc-regular-local-domain` | 1 | state |
@@ -896,6 +896,7 @@
 | `lemma-nagata-proper-to-separated-target` | 1 | state |
 | `lemma-nagata-scheme-image-ideal-qc` | 1 | state |
 | `lemma-weil-pbc-finite-l-group-filtration` | 1 | state |
+| `pqf-lem-image-proper` | 1 | state |
 | `cor-pqf-proper-quasifinite-finite` | 2 | state |
 | `lem-fet-galois-category` | 2 | state |
 | `lem-fet-locally-trivial` | 2 | state |
@@ -908,7 +909,6 @@
 | `lem-sc-c1-finite-extension` | 2 | state |
 | `lem-sc-degree-2g1-very-ample` | 2 | state |
 | `lem-sc-positive-degree-ample` | 2 | state |
-| `lem-sc-proper-affine-finite` | 2 | state |
 | `lem-sc-regular-dim1-dvr` | 2 | state |
 | `lem-sc-riemann-roch-large-degree` | 2 | state |
 | `lem-sc-smooth-regular` | 2 | state |
@@ -929,7 +929,7 @@
 | `lem-weil-pbc-p1-field-dimension-one` | 4 | state |
 | `lem-weil-pbc-projective-space-zero-isomorphism` | 4 | state |
 
-Not open yet: 329 nodes that wait for stage 1, 1270 nodes that wait for a statement dependency.
+Not open yet: 328 nodes that wait for stage 1, 1269 nodes that wait for a statement dependency.
 
 ## Stage 3: modules to prove (0)
 
