@@ -1649,3 +1649,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 14:43 L: returned deliver/F1/lem-pc-base-change-closure-components (reviewer RETURN: 1. D1: whole split: the three new nodes lem-pc-global-sections-finite-separable, lem-pc-base-change-component-decomposit)
 - 14:43 L: lem-sc-ample-on-reduction-noetherian accepted (7 steps per 09MS, 1 new node lem-sc-ample-square-zero-thickening; 5 tool uses copied)
 - 14:44 L: returned deliver/M1/lemma-weil-pbc-proper-underived-exchange (reviewer RETURN: 1. E3/C1: step 2: the claim that 'the two closed geometric fibres' are both identified with X x_Y Spec Omega is false as)
+- 14:44 L: merged deliver/M1/lem-weil-pbc-property-implies-acyclicity (reviewer FIX; first push; new nodes: 0)

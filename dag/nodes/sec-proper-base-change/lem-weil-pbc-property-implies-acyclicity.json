@@ -7,7 +7,7 @@
    "place": "step 1 of its split (source: Lemma 0A4B, proof of direction (1) => (2))",
    "via": []
   },
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "PBC implies injective acyclicity",
@@ -25,8 +25,87 @@
   "def-weil-pbc-derived-exchange",
   "def-weil-pbc-etale-sheaves"
  ],
- "proof": [],
- "proof_deps": [],
+ "proof": [
+  {
+   "text": "Fix a prime $r$, a morphism $g:Y'\\to Y$, a cartesian square with maps $f'$ and $g'$, and an injective $\\mathbf F_r$-module sheaf $I$ on $X_{\\Et}$. Its underlying abelian sheaf is torsion (it is killed by $r$), so the PBC hypothesis applies to the complex concentrated in degree $0$ with value $I$. The resulting specified derived exchange morphism is an isomorphism $g^{-1}Rf_*I\\xrightarrow{\\sim}Rf'_*g'^{-1}I$.",
+   "uses": [
+    "def-weil-pbc-property",
+    "def-weil-pbc-cartesian-square",
+    "def-weil-pbc-derived-exchange",
+    "def-weil-pbc-etale-sheaves"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 0A4B (Lemma 59.91.6), proof of (1) => (2), first sentence: apply the base-change hypothesis to the injective sheaf in degree zero"
+   }
+  },
+  {
+   "text": "The module-injective direct-image acyclicity lemma, applied to the morphism $f$ and $I$, gives $R^qf_*I=0$ for every $q>0$ (where these are the cohomology sheaves of $Rf_*I$). Thus the positive-degree cohomology of the source $Rf_*I$ is zero; its degree-zero cohomology is the ordinary direct image, by the degree-zero computation for a left exact functor and an injective resolution.",
+   "uses": [
+    "def-weil-pbc-direct-image",
+    "lem-weil-pbc-injective-module-direct-image-acyclic",
+    "lem-weil-pbc-left-exact-injective-resolution-degree-zero"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 0A4B (Lemma 59.91.6), proof of (1) => (2): the source has no homology outside degree zero because the injective sheaf is acyclic"
+   }
+  },
+  {
+   "text": "The inverse-image functor $g^{-1}$ on abelian etale sheaves is exact. On $\\Dplus$ the inverse image $g^{-1}$ is computed by applying $g^{-1}$ termwise to a representing bounded below complex, and $\\mathcal H^q$ of an object of $\\Dplus$ is the cohomology of any representing complex. Exact functors commute with the cohomology of complexes, so for $q>0$ we have $H^q(g^{-1}Rf_*I)\\cong g^{-1}H^q(Rf_*I)=0$.",
+   "uses": [
+    "prop-weil-pbc-inverse-image-exact",
+    "lem-weil-pbc-exact-functor-complex-cohomology",
+    "def-weil-pbc-derived-inverse-image",
+    "def-weil-pbc-derived-categories"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 0A4B (Lemma 59.91.6), proof of (1) => (2): exact inverse image preserves the concentration in degree zero"
+   }
+  },
+  {
+   "text": "Apply the cohomology functor $H^q$ to the exchange isomorphism from Step 1. For every $q>0$ its source is zero by Step 3, hence its target $H^q(Rf'_*g'^{-1}I)$ is zero as well, since an isomorphism carries a zero object to a zero object. Here $g'^{-1}$ of the complex $I$ in degree $0$ is represented by the sheaf $g'^{-1}I$ in degree $0$ (termwise inverse image), so by the definition of higher direct image this target is $R^qf'_*g'^{-1}I$.",
+   "uses": [
+    "def-weil-pbc-derived-exchange",
+    "def-weil-pbc-direct-image",
+    "def-weil-pbc-derived-inverse-image"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 0A4B (Lemma 59.91.6), proof of (1) => (2): transfer the vanishing across the base-change isomorphism"
+   }
+  },
+  {
+   "text": "The square, the prime $r$, and the injective $I$ were arbitrary. Therefore the vanishing in Step 4 is precisely $\\mathrm{IA}_r(f)$ for this prime, and varying $r$ gives $\\mathrm{IA}(f)$ as required.",
+   "uses": [
+    "def-weil-pbc-injective-acyclicity-property"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 0A4B (Lemma 59.91.6), conclusion of direction (1) => (2)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-property",
+  "def-weil-pbc-cartesian-square",
+  "def-weil-pbc-derived-exchange",
+  "def-weil-pbc-etale-sheaves",
+  "def-weil-pbc-direct-image",
+  "lem-weil-pbc-injective-module-direct-image-acyclic",
+  "lem-weil-pbc-left-exact-injective-resolution-degree-zero",
+  "prop-weil-pbc-inverse-image-exact",
+  "lem-weil-pbc-exact-functor-complex-cohomology",
+  "def-weil-pbc-injective-acyclicity-property",
+  "def-weil-pbc-derived-inverse-image",
+  "def-weil-pbc-derived-categories"
+ ],
  "proof_origin": {
   "by": "document",
   "document": "literature/stacks-project/etale-cohomology.tex",
@@ -65,7 +144,7 @@
  "mathlib_match": null,
  "chapter": "sec-proper-base-change",
  "unit": "sk-thm-iff",
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "worker",
@@ -90,5 +169,36 @@
    "AlgebraicGeometry.Etale.HasTorsionBaseChange.hasInjectiveAcyclicity"
   ],
   "note": "Related source declaration in BaseChangeProperty.lean:204-221 proves the module-valued generalization; it is not an exact attachment to the abelian-sheaf statement without the coefficient-forgetting comparison."
+ },
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "lem-weil-pbc-property-implies-acyclicity",
+  "worker": "stage1",
+  "summary": "Split the PBC-to-IA direction into five steps: specialize PBC to an injective prime-field module sheaf in degree zero, use module-injective direct-image acyclicity and the degree-zero derived identification, transport vanishing through exact inverse image and cohomology, transfer it across the exchange isomorphism, and conclude the quantified IA property. The source's sorry-free theorem is module-valued for arbitrary coefficients and was checked but retained as a related declaration rather than an exact attachment.",
+  "blueprint": "Realizes step 1 of lemma-weil-pbc-property-iff-acyclicity's split (Stacks Tag 0A4B, direction (1) => (2)); the five steps expand the blueprint's single paragraph into the degree-zero, acyclicity, exact-pullback, exchange, and quantified conclusion arguments.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-injective-module-direct-image-acyclic",
+    "why": "The forward implication uses the existing generic theorem that an injective module sheaf has vanishing higher direct images after forgetting to abelian sheaves; no node in this unit supplies that acyclicity fact."
+   },
+   {
+    "node": "prop-weil-pbc-inverse-image-exact",
+    "why": "The forward implication needs exactness of inverse image to preserve the source's degree-zero concentration; this is a generic sheaf-theoretic tool and is not supplied by the unit's PBC-to-IA route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-injective-module-direct-image-acyclic",
+  "prop-weil-pbc-inverse-image-exact",
+  "lem-weil-pbc-injective-module-direct-image-acyclic",
+  "prop-weil-pbc-inverse-image-exact"
+ ],
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-pia",
+  "group": "M1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-pia (reviewer sub-agent of L); spot-checked: Source Stacks Tag 0A4B (etale-cohomology lemma-proper-base-change-in-terms-of-injectives), direction (1)=>(2) (stated as clear): the node's statement agrees hypothesis by hypothesis (proper f, arbitrary cartesian base change, every prime r, injective F_r-module sheaf I, R^q f'_* g'^{-1} I = 0 for q>0), with PBC in the DAG's derived-exchange form [def-weil-pbc-property]. Step 1: I is killed by r hence torsion per def-weil-pbc-etale-sheaves, so def-weil-pbc-property gives Ex iso for I[0]. Step 2: lem-weil-pbc-injective-module-direct-image-acyclic states exactly R^q f_* I = 0 (q>0) for the underlying abelian sheaf of an injective R-module sheaf, H^q = R^q by def-weil-pbc-direct-image (degree-zero lemma, a mathlib leaf, superfluous but harmless). Step 3: prop-weil-pbc-inverse-image-exact + lem-weil-pbc-exact-functor-complex-cohomology (mathlib leaf). Step 4/5 elementary from the iso and def-weil-pbc-injective-acyclicity-property. Tool uses accepted as generic (no sk-thm-iff node states injective acyclicity or exactness of inverse image). Not attached: slopmaster2 HasTorsionBaseChange.hasInjectiveAcyclicity (BaseChangeProperty.lean 198-221, sorry-free OK) is Lambda-module PBC/IA over arbitrary Lambda, not this abelian/F_r statement. Small case f=id checked. FIX: dag/nodes/sec-proper-base-change/lem-weil-pbc-property-implies-acyclicity.json: proof[2].uses/text: cite def-weil-pbc-derived-inverse-image and def-weil-pbc-derived-categories (derived g^{-1} computed termwise, H^q of any representative) needed to apply the complex-level cohomology lemma; proof[3].uses/text: cite def-weil-pbc-derived-inverse-image for g'^{-1}(I[0]) = (g'^{-1}I)[0]; proof_deps: both added. 14:43-14:45 UTC.; 1 file(s) fixed by the reviewer"
  }
 }
