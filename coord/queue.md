@@ -1,8 +1,8 @@
 # Work queue
 
-928 items; claim with `tools/claim.py next <group> [--stage N]`.
+927 items; claim with `tools/claim.py next <group> [--stage N]`.
 
-## Stage 1: nodes to split (214)
+## Stage 1: nodes to split (213)
 
 | node | distance to a target | Lean state on the done branch |
 |---|---|---|
@@ -31,8 +31,6 @@
 | `lem-pc-vanishing-above-dim` | 4009 | rests_on_sorry |
 | `lem-sc-finite-flat-surj-points` | 4009 | none |
 | `lem-weil-pbc-gm-pullback-strict-henselization` | 4009 | none |
-| `lem-weil-pbc-unrestricted-strict-henselization-stalk` | 4009 | none |
-| `def-sc-intersection-number` | 4010 | none |
 | `lem-pc-universal-adjoint-section` | 4010 | rests_on_sorry |
 | `lem-sc-etale-base-change-geometric` | 4010 | none |
 | `lem-sc-etale-local-dimension` | 4010 | none |
@@ -41,6 +39,7 @@
 | `lem-sc-strict-henselization-completion-noetherian` | 4010 | none |
 | `lem-sc-top-dimensional-reduction-intersection` | 4010 | none |
 | `lem-pc-hilb-containment-locus` | 4011 | none |
+| `lem-sc-snapper-numerical-polynomial` | 4011 | none |
 | `lem-pc-derived-total-resolution-quasi-iso` | 4013 | none |
 | `lem-sc-generic-rank-leading-degree` | 5010 | none |
 | `lem-sc-hilbert-difference` | 5010 | none |
@@ -940,7 +939,7 @@
 | `lem-weil-pbc-p1-field-dimension-one` | 4 | state |
 | `lem-weil-pbc-projective-space-zero-isomorphism` | 4 | state |
 
-Not open yet: 1422 nodes that wait for a statement dependency, 251 nodes that wait for stage 1.
+Not open yet: 1424 nodes that wait for a statement dependency, 250 nodes that wait for stage 1.
 
 ## Stage 3: modules to prove (0)
 
