@@ -1,0 +1,72 @@
+{
+ "id": "lem-weil-pbc-cm-local-free-resolution-to-mcm",
+ "kind": "statement",
+ "title": "Over a Cohen–Macaulay local ring a finite module has a finite free resolution ending in a maximal Cohen–Macaulay module",
+ "statement": "Let $(R,\\mathfrak m)$ be a Noetherian local ring [def-weil-pbc-noetherian-ring] of finite Krull dimension $d$ [def-weil-pbc-krull-dimension-ring] with $\\operatorname{depth}(R)\\ge d$ [def-weil-pbc-depth] (that is, $\\mathfrak m$ contains an $R$-regular sequence of length $d$; such an $R$ is Cohen–Macaulay). Let $M$ be a nonzero finite $R$-module [def-weil-finitely-generated-module] and $e=\\operatorname{depth}(M)$. Then $e\\le d$, and there is an exact sequence of $R$-modules [def-weil-pbc-exact-sequence]\n\n$$\n0\\to K\\to F_{d-e-1}\\to\\cdots\\to F_0\\to M\\to 0\n$$\n\nin which every $F_i$ is a finite free $R$-module ($F_i\\cong R^{\\oplus n_i}$ for some integer $n_i\\ge0$) and $K$ is a finite $R$-module which is either $0$ or maximal Cohen–Macaulay, i.e. $\\operatorname{depth}(K)=d$. (When $e=d$ there are no $F_i$ and the sequence reads $0\\to K\\to M\\to0$, i.e. $K\\cong M$.)",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Algebra, Lemma Tag 00NG (lemma-mcm-resolution, line 25411), with Lemma Tag 00NE (lemma-dimension-shift, line 25396), Definition Tag 00NF (definition-maximal-CM, line 25135) and, for $e\\le d$, Lemma Tag 00LK (lemma-bound-depth, line 17814)"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-noetherian-ring",
+  "def-weil-pbc-krull-dimension-ring",
+  "def-weil-pbc-depth",
+  "def-weil-finitely-generated-module",
+  "def-weil-pbc-exact-sequence"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Cohen-Macaulay local ring finite module resolution by free modules with maximal Cohen-Macaulay syzygy",
+   "results": "ModuleCat.projectiveResolution (Algebra.Category.ModuleCat.LeftResolution), Module.free_of_flat_of_isLocalRing, Module.free_of_maximalIdeal_rTensor_injective (RingTheory.LocalRing.Module), Module.finitePresentation_of_finite, Module.Finite.exists_fin_quot_equiv: no depth or Cohen–Macaulay notion",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "depth of syzygy module increases by one over Cohen-Macaulay local ring, resolution ending in maximal Cohen-Macaulay module",
+   "results": "Module.supportDim_add_length_eq_supportDim_of_isRegular, Module.supportDim_quotSMulTop_succ_eq_supportDim, ringKrullDim_add_length_eq_ringKrullDim_of_isRegular (RingTheory.KrullDimension.Regular), Module.supportDim: dimension of supports under regular elements, nothing on depth of syzygies",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "RingTheory.Sequence.IsRegular, Module.Free, LinearMap.ker",
+   "results": "no declaration",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rni 'cohen.macaulay\\|syzyg\\|Auslander\\|def depth' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib --include=*.lean; cat RingTheory/Regular/Depth.lean",
+   "results": "no Cohen–Macaulay notion and no depth of modules in Mathlib (RingTheory/Regular/Depth.lean is a 10-line stub without declarations; Data/W/Basic.lean WType.depth is unrelated); syzygies only as CategoryTheory.Projective.syzygies (kernel of a projective cover), with no depth statement",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-regular-local-finite-gl-dim",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1"
+}

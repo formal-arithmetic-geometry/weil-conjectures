@@ -875,3 +875,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 04:43 L: reviewed lem-weil-pbc-regular-local-hypersurface-criterion (3 steps, no new node): accepted; attached IsRegularLocalRing.quotient_span_singleton (slopmaster2, sorry-free), closed.
 - 04:44 L: reviewed lem-weil-pbc-regular-sequence-short-exact-sequence (4 steps, no new node): accepted.
 - 04:44 L: reviewed lem-weil-pbc-regular-ring-normal (3 steps, no new node): accepted.
+- 04:45 L: reviewed lem-weil-pbc-regular-local-finite-gl-dim (5 steps, +00NG, +00NT, +065T nodes): accepted; cleared the unreachable flag of lem-weil-pbc-projective-dimension-well-defined; HUMAN.md: 00NG's proof does not show K != 0.

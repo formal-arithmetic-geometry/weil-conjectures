@@ -1,0 +1,69 @@
+{
+ "id": "lem-weil-pbc-global-dimension-finite-modules-suffice",
+ "kind": "statement",
+ "title": "Global dimension is tested on finite modules and on cyclic modules",
+ "statement": "Let $R$ be a ring and $n\\ge0$ an integer. The following are equivalent [def-weil-pbc-finite-global-dimension]: (1) $R$ has global dimension $\\le n$, i.e. every $R$-module has a projective resolution of length $\\le n$; (2) every finite $R$-module [def-weil-finitely-generated-module] has a projective resolution of length $\\le n$; (3) for every ideal $I\\subseteq R$ the cyclic $R$-module $R/I$ has a projective resolution of length $\\le n$.",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Algebra, Lemma Tag 065T (lemma-finite-gl-dim, line 26856), whose proof uses Lemma lemma-colimit-projective-dimension (line 26800)"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-finite-global-dimension",
+  "def-weil-finitely-generated-module"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "if every finitely generated module has projective dimension at most n then every module has projective dimension at most n",
+   "results": "CategoryTheory.projectiveDimension_ne_top_iff, hasProjectiveDimensionLT_of_ge, projectiveDimension, projectiveDimension_lt_iff, projectiveDimension_le_iff, HasProjectiveDimensionLT.mk (CategoryTheory.Abelian.Projective.Dimension): general API, no reduction to finite modules",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "ring has global dimension at most n iff every cyclic module R/I has projective dimension at most n",
+   "results": "CategoryTheory.projectiveDimension_le_iff, projectiveDimension_lt_iff, projectiveDimension_ne_top_iff, projectiveDimension_ge_iff, projective_iff_hasProjectiveDimensionLT_one",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.HasProjectiveDimensionLT, Module.Finite",
+   "results": "ModuleCat.hasProjectiveDimensionLT_of_forall_finite (RingTheory/Regular/ProjectiveDimension.lean line 46: over a Noetherian ring a FINITE module M has pd < n if Ext^n(M,L)=0 for all finite L); this tests one finite module against finite modules, not all modules against finite ones",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rln 'globalDimension\\|GlobalDimension\\|HasGlobalDimension' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib; grep -rln 'HasProjectiveDimensionLT\\|HasProjectiveDimensionLE' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib | xargs grep -ln 'Finite\\|Ideal'",
+   "results": "no notion of global dimension in Mathlib; the projective-dimension files with Finite/Ideal are RingTheory/LocalProperties/ProjectiveDimension.lean and RingTheory/Regular/ProjectiveDimension.lean, neither has a statement of Lemma 065T",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-regular-local-finite-gl-dim",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1"
+}

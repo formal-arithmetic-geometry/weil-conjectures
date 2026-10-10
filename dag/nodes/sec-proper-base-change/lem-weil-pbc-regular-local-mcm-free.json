@@ -1,0 +1,70 @@
+{
+ "id": "lem-weil-pbc-regular-local-mcm-free",
+ "kind": "statement",
+ "title": "A maximal Cohen–Macaulay module over a regular local ring is free",
+ "statement": "Let $(R,\\mathfrak m)$ be a regular local ring [def-weil-regular-scheme] of Krull dimension $d$, and let $M$ be a finite $R$-module [def-weil-finitely-generated-module] which is maximal Cohen–Macaulay, i.e. $\\operatorname{depth}(M)=d$ [def-weil-pbc-depth]. Then $M$ is a free $R$-module: $M\\cong R^{\\oplus r}$ for some integer $r\\ge0$.",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Algebra, Lemma Tag 00NT (lemma-regular-mcm-free, line 25800), with Definition Tag 00NF (definition-maximal-CM, line 25135)"
+ },
+ "stmt_deps": [
+  "def-weil-regular-scheme",
+  "def-weil-finitely-generated-module",
+  "def-weil-pbc-depth"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "finitely generated module of depth equal to dimension over regular local ring is free",
+   "results": "Module.free_of_flat_of_isLocalRing, Module.free_of_maximalIdeal_rTensor_injective, Module.free_of_flat_of_finrank_eq (RingTheory.LocalRing.Module), Module.free_of_finite_type_torsion_free, Module.free_iff_isTorsionFree (LinearAlgebra.FreeModule.PID): freeness from flatness or over a PID, nothing for regular local rings of higher dimension",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "maximal Cohen-Macaulay module over a regular local ring is free",
+   "results": "Module.free_of_flat_of_isLocalRing, Module.free_of_maximalIdeal_rTensor_injective, Module.free_of_flat_of_finrank_eq, Module.mem_freeLocus, Module.freeLocus_eq_univ_iff, IsLocalRing.isRegular_iff_isWeaklyRegular_of_subset_maximalIdeal",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "Module.Free, RingTheory.Sequence.IsRegular, IsRegularLocalRing",
+   "results": "no declaration",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rn 'IsRegularLocalRing' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib --include=*.lean | grep -i 'free\\|depth\\|projective'; sed -n 20,45p RingTheory/Regular/Free.lean",
+   "results": "no hit for IsRegularLocalRing with free/depth/projective; RingTheory/Regular/Free.lean has Module.free_quotSMulTop_iff_free (line 33: for M finitely presented, x in the Jacobson radical and M-regular, M/xM free over R/(x) iff M free over R), which is the induction step of the Stacks proof (Lemma 00NS) but not the statement",
+   "date": "2026-10-10",
+   "verdict": "no match (Module.free_quotSMulTop_iff_free is the key step of a proof)"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-regular-local-finite-gl-dim",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1"
+}
