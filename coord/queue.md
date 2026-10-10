@@ -2,7 +2,7 @@
 
 924 items; claim with `tools/claim.py next <group> [--stage N]`.
 
-## Stage 1: nodes to split (214)
+## Stage 1: nodes to split (213)
 
 | node | distance to a target | Lean state on the done branch |
 |---|---|---|
@@ -18,8 +18,8 @@
 | `lem-pc-stalk-direct-sums` | 3014 | none |
 | `lem-pc-derived-qcoh-perfect-generation` | 3016 | none |
 | `lem-pc-perfect-complexes-compact-set` | 3016 | none |
-| `lem-sc-pseudo-coherent-rhom-qcoherent` | 3016 | none |
 | `lem-pc-perfect-tensor-hom-duality` | 3017 | none |
+| `lem-sc-affine-pseudo-coherent-rhom-qcoherent` | 3017 | none |
 | `lem-sc-p1-right-derived-triangle-connecting` | 3017 | none |
 | `lem-sc-proper-flat-right-adjoint-affine-basechange` | 3018 | none |
 | `lem-sc-proper-flat-right-adjoint-open-support` | 3019 | none |
@@ -41,7 +41,6 @@
 | `lem-sc-strict-henselization-completion-noetherian` | 4010 | none |
 | `lem-sc-top-dimensional-reduction-intersection` | 4010 | none |
 | `lem-pc-hilb-containment-locus` | 4011 | none |
-| `lem-pc-derived-free-complex-cover` | 4013 | none |
 | `lem-pc-derived-total-resolution-quasi-iso` | 4013 | none |
 | `lem-sc-hilbert-polynomial` | 5009 | none |
 | `lem-sc-generic-rank-leading-degree` | 5010 | none |
@@ -221,7 +220,7 @@
 | `lem-pur-rhom-well-defined` | - | none |
 | `lem-zl-noether-normalization-dimension` | - | none |
 
-## Stage 2: nodes to state (710)
+## Stage 2: nodes to state (711)
 
 | node | distance to Mathlib | kind |
 |---|---|---|
@@ -310,6 +309,7 @@
 | `lem-pc-derived-acyclic-resolution` | 1 | state |
 | `lem-pc-derived-adjoint-functors` | 1 | state |
 | `lem-pc-derived-filtered-free-resolution` | 1 | state |
+| `lem-pc-derived-free-complex-cover` | 1 | state |
 | `lem-pc-derived-module-direct-sums` | 1 | state |
 | `lem-pc-field-extension-fpqc-cover` | 1 | state |
 | `lem-pc-flat-pullback-effective-cartier-ideal` | 1 | state |
@@ -936,7 +936,7 @@
 | `lem-weil-pbc-p1-field-dimension-one` | 4 | state |
 | `lem-weil-pbc-projective-space-zero-isomorphism` | 4 | state |
 
-Not open yet: 1415 nodes that wait for a statement dependency, 251 nodes that wait for stage 1.
+Not open yet: 1416 nodes that wait for a statement dependency, 250 nodes that wait for stage 1.
 
 ## Stage 3: modules to prove (0)
 
