@@ -1,8 +1,8 @@
 # Work queue
 
-927 items; claim with `tools/claim.py next <group> [--stage N]`.
+926 items; claim with `tools/claim.py next <group> [--stage N]`.
 
-## Stage 1: nodes to split (211)
+## Stage 1: nodes to split (208)
 
 | node | distance to a target | Lean state on the done branch |
 |---|---|---|
@@ -33,13 +33,12 @@
 | `lem-pc-universal-adjoint-section` | 4010 | rests_on_sorry |
 | `lem-sc-etale-base-change-geometric` | 4010 | none |
 | `lem-sc-etale-local-dimension` | 4010 | none |
-| `lem-sc-faithfully-flat-local-dimension` | 4010 | none |
 | `lem-sc-intersection-effective-cartier` | 4010 | none |
 | `lem-sc-top-dimensional-reduction-intersection` | 4010 | none |
 | `lem-pc-hilb-containment-locus` | 4011 | none |
+| `lem-sc-going-down-surjective-dimension` | 4011 | none |
 | `lem-sc-snapper-numerical-polynomial` | 4011 | none |
 | `lem-sc-strict-henselization-completion-flat` | 4011 | none |
-| `lem-sc-generic-rank-leading-degree` | 5010 | none |
 | `lem-sc-hilbert-difference` | 5010 | none |
 | `lem-sc-hilbert-embedded-points` | 5010 | none |
 | `lem-sc-regular-meromorphic-section-exists` | 5010 | none |
@@ -60,11 +59,9 @@
 | `pqf-lem-coherent-ft-locnoeth` | 6009 | none |
 | `lem-pc-affine-morphism-hi` | 6010 | rests_on_sorry |
 | `thm-sc-theorem-of-cube` | 6010 | rests_on_sorry |
-| `lem-pc-alternating-cech-computes` | 6011 | none |
 | `lem-pc-projective-space-twist-cohomology` | 6011 | rests_on_sorry |
 | `lem-sc-ample-positive-degree` | 6011 | rests_on_sorry |
 | `pqf-lem-fff-vanishing` | 6011 | none |
-| `pqf-lem-finite-qf` | 6011 | none |
 | `pqf-lem-leray` | 6011 | none |
 | `pqf-lem-leray-lowdegree` | 6011 | none |
 | `pqf-lem-qf-finitefibres` | 6011 | none |
@@ -218,7 +215,7 @@
 | `lem-pur-rhom-well-defined` | - | none |
 | `lem-zl-noether-normalization-dimension` | - | none |
 
-## Stage 2: nodes to state (716)
+## Stage 2: nodes to state (718)
 
 | node | distance to Mathlib | kind |
 |---|---|---|
@@ -369,6 +366,7 @@
 | `lem-sc-exact-functor-higher-derived-vanishing` | 1 | state |
 | `lem-sc-ext-torsor` | 1 | state |
 | `lem-sc-exterior-top-direct-sum` | 1 | state |
+| `lem-sc-faithfully-flat-local-dimension` | 1 | state |
 | `lem-sc-fg-domain-positive-dimension-infinite-maximals` | 1 | state |
 | `lem-sc-filtered-colimit-prime-chain-dimension` | 1 | state |
 | `lem-sc-finite-discrete-separated-affine` | 1 | state |
@@ -902,6 +900,7 @@
 | `lemma-nagata-scheme-image-ideal-qc` | 1 | state |
 | `lemma-weil-pbc-finite-l-group-filtration` | 1 | state |
 | `pqf-def-coherent` | 1 | state |
+| `pqf-lem-finite-qf` | 1 | state |
 | `pqf-lem-image-proper` | 1 | state |
 | `pqf-lem-proper-basic` | 1 | state |
 | `cor-pqf-proper-quasifinite-finite` | 2 | state |
@@ -939,7 +938,7 @@
 | `lem-weil-pbc-p1-field-dimension-one` | 4 | state |
 | `lem-weil-pbc-projective-space-zero-isomorphism` | 4 | state |
 
-Not open yet: 1426 nodes that wait for a statement dependency, 248 nodes that wait for stage 1.
+Not open yet: 1428 nodes that wait for a statement dependency, 245 nodes that wait for stage 1.
 
 ## Stage 3: modules to prove (0)
 
