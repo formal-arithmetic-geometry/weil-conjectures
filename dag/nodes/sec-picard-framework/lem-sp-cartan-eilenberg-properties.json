@@ -14,7 +14,7 @@
  },
  "kind": "statement",
  "title": "Cartan--Eilenberg resolution properties for a bounded-below complex",
- "statement": "Let $\\mathcal B$ be an abelian category [def-sp-grothendieck-abelian] with enough injectives, let $K^\\bullet$ be a bounded-below complex, and let $C^{\\bullet,\\bullet}$ be a Cartan--Eilenberg resolution in the convention of [thm-sp-if-e1], with the two indices exchanged (Stacks Project's $I^{p,q}$ is $C^{q,p}$). Thus, for every $q$, the row $(C^{\\bullet,q},d_I)$ is an injective resolution [def-sp-injective-resolutions] of $K^q$; for every $p$, the column $(C^{p,\\bullet},d_{II})$, whose differential is induced by that of $K^\\bullet$, has injective cycle, boundary, and cohomology objects. Consequently, for every left exact additive functor $G$ [def-sp-left-exact-additive], $H^q_{II}(G(C^{p,\\bullet}))=G(H^q_{II}(C^{p,\\bullet}))$. For every $q$, the complex $(H^q_{II}(C^{p,\\bullet}))_p$ with differential induced by $d_I$ is an injective resolution of $H^q(K^\\bullet).",
+ "statement": "Let $\\mathcal B$ be an abelian category [def-sp-grothendieck-abelian] with enough injectives, let $K^\\bullet$ be a bounded-below complex, and let $C^{\\bullet,\\bullet}$ be a Cartan--Eilenberg resolution in the following exchanged-index convention (Stacks Project's $I^{p,q}$ is $C^{q,p}$): it is a double complex with differentials $d_I:C^{p,q}\\to C^{p+1,q}$ and $d_{II}:C^{p,q}\\to C^{p,q+1}$, together with an augmentation $K^\\bullet\\to C^{0,\\bullet}$, such that (1) there is $i$ with $C^{p,q}=0$ for all $q<i$ and all $p$; (2) $C^{p,q}=0$ for $p<0$; (3) for every $q$, the row $(C^{\\bullet,q},d_I)$ augmented by $K^q$ is an injective resolution [def-sp-injective-resolutions] of $K^q$; (4) for every $q$, the complex $\\operatorname{Ker}(d_{II}:C^{\\bullet,q}\\to C^{\\bullet,q+1})$ is an injective resolution of $Z^q(K^\\bullet)$; (5) for every $q$, the complex $\\operatorname{Im}(d_{II}:C^{\\bullet,q}\\to C^{\\bullet,q+1})$ is an injective resolution of $B^{q+1}(K^\\bullet)$; and (6) for every $q$, the complex $H^q_{II}(C^{\\bullet,\\bullet})$ is an injective resolution of $H^q(K^\\bullet)$. Then for every left exact additive functor $G$ [def-sp-left-exact-additive], $H^q_{II}(G(C^{p,\\bullet}))=G(H^q_{II}(C^{p,\\bullet}))$. For every $q$, the complex $(H^q_{II}(C^{p,\\bullet}))_p$ with differential induced by $d_I$ is an injective resolution of $H^q(K^\\bullet)$.",
  "source": {
   "document": "literature/stacks-project/derived.tex",
   "place": "Definition 015H (definition-cartan-eilenberg) and Lemma 015I (lemma-cartan-eilenberg)"
@@ -23,12 +23,55 @@
   "def-sp-grothendieck-abelian",
   "def-sp-left-exact-additive",
   "def-sp-injective-resolutions",
-  "thm-sp-if-e1",
   "def-sp-double-complex-total"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Start with the Cartan--Eilenberg resolution in Stacks Definition 015H and exchange the two indices as specified in the statement. The row in the exchanged convention is the original column, so each row is an injective resolution of $K^q$. The original row conditions say that, in each exchanged column, the cycle, boundary, and cohomology objects are injective; the differential on these objects is induced by the differential of $K^\\bullet$. The bounded-below and first-quadrant conditions are unchanged by this reindexing.",
+   "uses": [
+    "def-sp-double-complex-total"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Definition 015H (definition-cartan-eilenberg) and Lemma 015I (lemma-cartan-eilenberg)"
+   }
+  },
+  {
+   "text": "For a fixed exchanged column, apply the left-exact cohomology comparison of [lem-sp-cart-eilenberg-left-exact-cohomology] to the complex $C^{p,\\bullet}$. Its hypotheses hold because the cycle and boundary objects of every such column are injective by Step 1. Therefore $H^q_{II}(G(C^{p,\\bullet}))=G(H^q_{II}(C^{p,\\bullet}))$ for every $p,q$.",
+   "uses": [
+    "lem-sp-cart-eilenberg-left-exact-cohomology",
+    "def-sp-left-exact-additive"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Lemma 015I (lemma-cartan-eilenberg)"
+   }
+  },
+  {
+   "text": "The final Cartan--Eilenberg condition in Definition 015H, after exchanging indices, says that the complex in the first index formed by the vertical cohomology objects $H^q_{II}(C^{p,\\bullet})$ is an injective resolution of $H^q(K^\\bullet)$, with differential induced by $d_I$. This gives the asserted resolution for every $q$.",
+   "uses": [
+    "def-sp-injective-resolutions"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Definition 015H (definition-cartan-eilenberg) and Lemma 015I (lemma-cartan-eilenberg)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sp-double-complex-total",
+  "lem-sp-cart-eilenberg-left-exact-cohomology",
+  "def-sp-left-exact-additive",
+  "def-sp-injective-resolutions"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/derived.tex",
+  "place": "Definition 015H and Lemma 015I"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -61,12 +104,46 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-pc-grothendieck-ss-double-complex-model",
   "by": "worker",
   "date": "2026-10-10"
  },
  "chapter": "sec-picard-framework",
- "unit": "sk-thm-picard-rr"
+ "unit": "sk-thm-picard-rr",
+ "split_report": {
+  "date": "2026-10-11",
+  "item": "lem-sp-cartan-eilenberg-properties",
+  "worker": "stage1",
+  "summary": "Repair E7: restated the Cartan--Eilenberg resolution in the item itself using all six Stacks 015H conditions after exchanging indices, so the row, cycle, boundary, and cohomology-resolution claims are hypotheses rather than imported from another unit. Removed the functorial and E1 theorem citations from Steps 1 and 3; retained the left-exact cohomology child and generic definitions.",
+  "blueprint": "lem-pc-euler-characteristic-well-defined proof, first sentence: Cartan--Eilenberg resolution properties used for the first-filtration E2 page",
+  "tool_uses": [
+   {
+    "node": "def-sp-double-complex-total",
+    "why": "Its statement supplies the double-complex indexing and induced differentials used in the reindexing argument."
+   },
+   {
+    "node": "def-sp-left-exact-additive",
+    "why": "Its statement supplies the left exact additive hypothesis used in Step 2."
+   },
+   {
+    "node": "def-sp-injective-resolutions",
+    "why": "Its statement supplies the meaning of the injective-resolution conclusion in Step 3."
+   }
+  ]
+ },
+ "tool_uses": [
+  "def-sp-double-complex-total",
+  "def-sp-left-exact-additive",
+  "def-sp-injective-resolutions"
+ ],
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-cep1802",
+  "group": "K1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-cep1802 (reviewer sub-agent of L); spot-checked: Return of 17:36 repaired: (1) item now states CE resolution inline with Stacks 015H (1)-(6), index exchange checked clause by clause (I^{p,q}=C^{q,p}: bound q<i, p<0 zero, rows resolve K^q, Ker/Im d_II rows resolve Z^q/B^{q+1}, H^q_II resolves H^q), E7 change named; (2) no citation of lem-weil-pbc-cartesian-eilenberg-functorial or thm-sp-if-e1 in steps/proof_deps. Step 2 hypotheses (Z,B injective, column bounded below) from (4),(5),(1); Step 3 from (6). FIX more, RETURN less: B3 closed unterminated TeX math at end of item statement and of new node lem-sp-cart-eilenberg-left-exact-cohomology; stmt_deps of item corrected (dropped stale thm-sp-if-e1 and proof-only lem-sp-cart-eilenberg-left-exact-cohomology).; 2 file(s) fixed by the reviewer"
+ }
 }
