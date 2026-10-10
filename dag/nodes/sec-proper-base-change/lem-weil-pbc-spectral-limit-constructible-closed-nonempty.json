@@ -1,0 +1,84 @@
+{
+ "id": "lem-weil-pbc-spectral-limit-constructible-closed-nonempty",
+ "kind": "statement",
+ "title": "A directed inverse system of nonempty constructible-closed subsets of spectral spaces has a compatible family of points",
+ "statement": "Let $K$ be a directed set (nonempty, any two elements have a common upper bound), let $(Y_k)_{k\\in K}$ be spectral spaces [def-weil-spectral-space] and for $k\\le k'$ let $g_{kk'}:Y_{k'}\\to Y_k$ be spectral maps (continuous, with $g_{kk'}^{-1}(W)$ quasi-compact for every quasi-compact open $W\\subseteq Y_k$), with $g_{kk}=\\mathrm{id}$ and $g_{kk'}\\circ g_{k'k''}=g_{kk''}$ for $k\\le k'\\le k''$. For every $k\\in K$ let $Z_k\\subseteq Y_k$ be a nonempty subset which is closed in the constructible topology of $Y_k$ [def-weil-pbc-constructible-topology] (the topology on $Y_k$ with subbase the quasi-compact open subsets of $Y_k$ and their complements), and assume $g_{kk'}(Z_{k'})\\subseteq Z_k$ for all $k\\le k'$. Then there is a family $(z_k)_{k\\in K}$ with $z_k\\in Z_k$ for every $k$ and $g_{kk'}(z_{k'})=z_k$ for all $k\\le k'$.",
+ "source": {
+  "document": "literature/stacks-project/topology.tex",
+  "place": "Topology, Lemma Tag 0A2W (label lemma-inverse-limit-spectral-spaces-nonempty, line 4810), part (1), stated there for a cofiltered index category; a directed set $K$ (the category with one arrow $k'\\to k$ for $k\\le k'$) is the special case used here. Stacks' proof uses Lemma Tag 0901 (lemma-constructible-hausdorff-quasi-compact, line 4305: the constructible topology of a spectral space is Hausdorff and quasi-compact) and Lemma Tag 0A2R (lemma-nonempty-limit, line 2507: a cofiltered limit of nonempty quasi-compact Hausdorff spaces is nonempty)"
+ },
+ "stmt_deps": [
+  "def-weil-spectral-space",
+  "def-weil-pbc-constructible-topology"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "inverse limit of nonempty subsets closed in the constructible topology of spectral spaces with spectral transition maps is nonempty",
+   "results": "InverseSystem.limit (Mathlib.Order.DirectedInverseSystem), TopCat.nonempty_limitCone_of_compact_t2_cofiltered_system (Mathlib.Topology.Category.TopCat.Limits.Konig), AlgebraicGeometry.Scheme.compactSpace_of_isLimit, AlgebraicGeometry.Scheme.nonempty_of_isLimit, AlgebraicGeometry.exists_mem_of_isClosed_of_nonempty(') (Mathlib.AlgebraicGeometry.AffineTransitionLimit: schemes with affine transition maps, closed sets in the Zariski topology), Profinite.lim, Profinite.asLimit",
+   "date": "2026-10-10",
+   "verdict": "no match (the scheme versions need schemes and affine transition maps; Konig needs compact Hausdorff spaces)"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "limit of a directed system of nonempty compact subsets in spectral spaces is nonempty, constructible topology",
+   "results": "TopCat.nonempty_limitCone_of_compact_t2_cofiltered_system (Konig), SpectralSpace.toCompactSpace, AlgebraicGeometry.Scheme.nonempty_of_isLimit, CompHaus.limitCone, PrespectralSpace.of_isTopologicalBasis('), AlgebraicGeometry.Scheme.compactSpace_of_isLimit, SpectralSpace.toPrespectralSpace",
+   "date": "2026-10-10",
+   "verdict": "no match (candidate ingredient: Konig's lemma for compact Hausdorff spaces)"
+  },
+  {
+   "tool": "loogle",
+   "query": "WithConstructibleTopology",
+   "results": "WithConstructibleTopology, compactSpace_withConstructibleTopology, WithConstructibleTopology.isClosed_iff, WithConstructibleTopology.isOpen_iff (Mathlib.Topology.Spectral.ConstructibleTopology); no T2Space instance, nothing about limits",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "IsSpectralMap, Set.Nonempty, Directed",
+   "results": "none",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "local_search",
+   "query": "nonempty_limitCone_of_compact_t2 (project ~/weil-conjectures-slopmaster2; index unavailable, so not a proof of absence)",
+   "results": "TopCat.nonempty_limitCone_of_compact_t2_cofiltered_system (Mathlib/Topology/Category/TopCat/Limits/Konig.lean)",
+   "date": "2026-10-10",
+   "verdict": "exists; ingredient only"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -n 'T2\\|Hausdorff\\|limit' Mathlib/Topology/Spectral/ConstructibleTopology.lean; grep -rln IsSpectralMap Mathlib/Topology | xargs grep -ln 'limit\\|Limit\\|InverseSystem\\|ofiltered'; grep -rn 'nonempty_limitCone_of_compact_t2' Mathlib; grep -rn 'stacks 0A2W\\|stacks 0A2R\\|stacks 0901' Mathlib",
+   "results": "ConstructibleTopology.lean has only the quasi-compactness (compactSpace_withConstructibleTopology, line 92, @[stacks 0901 \"quasi-compactness\"]); its TODO (line 27, read) says the Hausdorff property of the constructible topology of a spectral space is not yet proved; no file with IsSpectralMap mentions limits; TopCat.nonempty_limitCone_of_compact_t2_cofiltered_system at Topology/Category/TopCat/Limits/Konig.lean:125 (read lines 110-138); no stacks attribute 0A2W or 0A2R",
+   "date": "2026-10-10",
+   "verdict": "no match; candidate below"
+  }
+ ],
+ "mathlib_match": null,
+ "mathlib_candidate": "Apply TopCat.nonempty_limitCone_of_compact_t2_cofiltered_system (Mathlib/Topology/Category/TopCat/Limits/Konig.lean:125: the limit of a cofiltered diagram of nonempty compact T2 spaces is nonempty) to the functor on K^op sending k to Z_k with the subspace topology of WithConstructibleTopology Y_k; compactness from compactSpace_withConstructibleTopology (Mathlib/Topology/Spectral/ConstructibleTopology.lean:92) and IsClosed.isCompact; continuity of g_kk' for the constructible topologies from IsSpectralMap; the T2 property of the constructible topology of a spectral space (Stacks 0901, Hausdorff part) is a TODO of that file (line 27) and not in Mathlib. Not one declaration, so the node is unsplit (point B8).",
+ "status": "unsplit",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-spectral-limit-descend-opens",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1"
+}

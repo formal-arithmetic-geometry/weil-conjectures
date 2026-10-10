@@ -10,9 +10,71 @@
  "stmt_deps": [
   "def-weil-spectral-space"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "*Step 1 (a basis of quasi-compact opens pulled back from the stages).* Let $\\mathcal B$ be the set of subsets of $X$ of the form $p_i^{-1}(W)$ with $i\\in I$ and $W\\subseteq X_i$ a quasi-compact open. (a) Let $B_l=p_{i_l}^{-1}(W_l)\\in\\mathcal B$, $l=1,\\dots,r$ ($r\\ge0$), and let $k\\in I$ with $k\\ge i_1,\\dots,i_r$ (it exists since $I$ is nonempty and directed). As $p_{i_l}=f_{i_lk}\\circ p_k$ we have $B_l=p_k^{-1}(W'_l)$ with $W'_l=f_{i_lk}^{-1}(W_l)$, which is a quasi-compact open of $X_k$ because $f_{i_lk}$ is spectral. Hence $B_1\\cup\\dots\\cup B_r=p_k^{-1}(W'_1\\cup\\dots\\cup W'_r)$ and $B_1\\cap\\dots\\cap B_r=p_k^{-1}(W'_1\\cap\\dots\\cap W'_r)$ (for $r=0$: $\\emptyset=p_k^{-1}(\\emptyset)$ and $X=p_k^{-1}(X_k)$). A finite union of quasi-compact opens is a quasi-compact open; a finite intersection of quasi-compact opens of the spectral space $X_k$ is a quasi-compact open, since $X_k$ is quasi-compact and the intersection of two quasi-compact opens of $X_k$ is quasi-compact [def-weil-spectral-space]. So $\\mathcal B$ is closed under finite unions and finite intersections. (b) $\\mathcal B$ is a basis of the topology of $X$: its members are open since the $p_i$ are continuous; conversely the topology of $X$ is the coarsest for which all $p_i$ are continuous, so every open of $X$ is a union of finite intersections of sets $p_i^{-1}(V)$, $V\\subseteq X_i$ open. Each $p_i^{-1}(V)$ is the union of the $p_i^{-1}(W)$ over the quasi-compact opens $W\\subseteq V$, since these $W$ cover $V$ (the quasi-compact opens form a basis of $X_i$ [def-weil-spectral-space]); distributing, a finite intersection of such unions is a union of finite intersections of members of $\\mathcal B$, which lie in $\\mathcal B$ by (a). Hence every open of $X$ is a union of members of $\\mathcal B$.",
+   "uses": [
+    "def-weil-spectral-space"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/topology.tex",
+    "place": "Topology, proof of Lemma Tag 0A2Z (label lemma-directed-inverse-limit-spectral-spaces, line 4902), second paragraph (a basis of X is given by the p_i^{-1}(U_i) with U_i quasi-compact open), which rests on Lemma Tag 0A2P (label lemma-describe-limits, line 2374); for a directed set and the explicit limit topology of the statement this is the definition, written out here"
+   }
+  },
+  {
+   "text": "*Step 2 (part (1)).* Let $U\\subseteq X$ be a quasi-compact open. By Step 1 (b), $U$ is the union of the members of $\\mathcal B$ contained in $U$; as $U$ is quasi-compact, finitely many of them, $B_1,\\dots,B_r$, already cover $U$, so $U=B_1\\cup\\dots\\cup B_r$. By Step 1 (a) this union lies in $\\mathcal B$: $U=p_k^{-1}(U_k)$ for some $k\\in I$ and some quasi-compact open $U_k\\subseteq X_k$. This is (1) (with $i=k$).",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/topology.tex",
+    "place": "Topology, proof of Lemma Tag 0A30 (label lemma-descend-opens, line 4969): '(1) is a special case of Lemma 0A2Y'; proof of Lemma Tag 0A2Y (label lemma-inverse-limit-spectral-spaces-constructible, line 4862), first paragraph (write E = p_i^{-1}(U_i), cover U_i by quasi-compact opens, use the quasi-compactness of E)"
+   }
+  },
+  {
+   "text": "*Step 3 (part (2): the sets $Z_k$).* Let $U_i\\subseteq X_i$, $U_j\\subseteq X_j$ be quasi-compact opens with $p_i^{-1}(U_i)\\subseteq p_j^{-1}(U_j)$. Choose $k_0\\in I$ with $k_0\\ge i,j$ and let $K=\\{k\\in I:k\\ge k_0\\}$; $K$ is a directed set ($k_0\\in K$, and an upper bound in $I$ of two elements of $K$ lies in $K$). For $k\\in K$ put $A_k=f_{ik}^{-1}(U_i)$ and $B_k=f_{jk}^{-1}(U_j)$, quasi-compact opens of $X_k$ (the $f$'s are spectral), and $Z_k=A_k\\setminus B_k=A_k\\cap(X_k\\setminus B_k)$. In the constructible topology of $X_k$ every quasi-compact open of $X_k$ is both open and closed [def-weil-pbc-constructible-topology]; so $A_k$ is closed in it, and $X_k\\setminus B_k$, the complement of the open $B_k$, is closed in it; hence $Z_k$ is closed in the constructible topology of $X_k$. For $k\\le k'$ in $K$ we have $f_{ik'}=f_{ik}\\circ f_{kk'}$ and $f_{jk'}=f_{jk}\\circ f_{kk'}$, hence $A_{k'}=f_{kk'}^{-1}(A_k)$, $B_{k'}=f_{kk'}^{-1}(B_k)$ and $Z_{k'}=f_{kk'}^{-1}(Z_k)$; in particular $f_{kk'}(Z_{k'})\\subseteq Z_k$.",
+   "uses": [
+    "def-weil-pbc-constructible-topology"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/topology.tex",
+    "place": "Topology, proof of Lemma Tag 0A2X (label lemma-inverse-limit-spectral-spaces-equal, line 4836), with E = U_i closed and F = U_j open in the constructible topology, as in the proof of Lemma Tag 0A30 (2) ('quasi-compact opens are both open and closed in the constructible topology'); the two indices i, j are brought to the common stage k_0 here"
+   }
+  },
+  {
+   "text": "*Step 4 (part (2): some $Z_k$ is empty).* We claim $Z_k=\\emptyset$ for some $k\\in K$; then $k\\ge i,j$ and $A_k\\subseteq B_k$, i.e. $f_{ik}^{-1}(U_i)\\subseteq f_{jk}^{-1}(U_j)$, which is (2). Suppose instead that every $Z_k$, $k\\in K$, is nonempty. The directed set $K$, the spectral spaces $X_k$ ($k\\in K$) with the spectral maps $f_{kk'}$ ($k\\le k'$ in $K$), and the nonempty subsets $Z_k$, closed in the constructible topology with $f_{kk'}(Z_{k'})\\subseteq Z_k$ (Step 3), satisfy the hypotheses of [lem-weil-pbc-spectral-limit-constructible-closed-nonempty], which gives $z_k\\in Z_k$ ($k\\in K$) with $f_{kk'}(z_{k'})=z_k$ for $k\\le k'$ in $K$. Extend this to all of $I$: for $l\\in I$ choose $k\\in K$ with $k\\ge l$ and put $x_l=f_{lk}(z_k)$. This does not depend on $k$: for two choices $k,k'$ take $k''\\in K$ above both, then $f_{lk}(z_k)=f_{lk}(f_{kk''}(z_{k''}))=f_{lk''}(z_{k''})$ and likewise for $k'$. For $l\\in K$, taking $k=l$ gives $x_l=z_l$. For $l\\le l'$ in $I$, with $k\\in K$, $k\\ge l'$: $f_{ll'}(x_{l'})=f_{ll'}(f_{l'k}(z_k))=f_{lk}(z_k)=x_l$. By the description of $X$ in the statement there is $x\\in X$ with $p_l(x)=x_l$ for all $l\\in I$. Then $p_i(x)=x_i=f_{ik_0}(z_{k_0})\\in U_i$ because $z_{k_0}\\in A_{k_0}$, so $x\\in p_i^{-1}(U_i)\\subseteq p_j^{-1}(U_j)$; but $p_j(x)=f_{jk_0}(z_{k_0})\\notin U_j$ because $z_{k_0}\\notin B_{k_0}$. This contradiction proves the claim.",
+   "uses": [
+    "lem-weil-pbc-spectral-limit-constructible-closed-nonempty"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/topology.tex",
+    "place": "Topology, proof of Lemma Tag 0A2X (label lemma-inverse-limit-spectral-spaces-equal, line 4836): p_i^{-1}(E) minus p_i^{-1}(F) is the limit of the sets f_a^{-1}(E) minus f_a^{-1}(F), which is nonempty if each of them is by Lemma Tag 0A2W (label lemma-inverse-limit-spectral-spaces-nonempty, line 4810) (1); the identification of a compatible family over K with a point of X (K cofinal in I) is written out here"
+   }
+  },
+  {
+   "text": "*Step 5 (parts (3) and (4)).* Let $U_i,U_{1,i},\\dots,U_{n,i}\\subseteq X_i$ be quasi-compact opens and let $V=U_{1,i}\\cup\\dots\\cup U_{n,i}$ for (3), resp. $V=U_{1,i}\\cap\\dots\\cap U_{n,i}$ (with $V=X_i$ for $n=0$) for (4). $V$ is a quasi-compact open of $X_i$: a finite union of quasi-compact opens is one, and so is a finite intersection in the spectral space $X_i$ ($X_i$ is quasi-compact and the intersection of two quasi-compact opens is quasi-compact [def-weil-spectral-space]). Preimages commute with unions and intersections, so the hypothesis says $p_i^{-1}(U_i)=p_i^{-1}(V)$, and the conclusion to be shown is $f_{ii'}^{-1}(U_i)=f_{ii'}^{-1}(V)$ for some $i'\\ge i$. By (2) (Steps 3 and 4, with $j=i$) applied to $p_i^{-1}(U_i)\\subseteq p_i^{-1}(V)$ there is $k\\ge i$ with $f_{ik}^{-1}(U_i)\\subseteq f_{ik}^{-1}(V)$, and applied to $p_i^{-1}(V)\\subseteq p_i^{-1}(U_i)$ there is $k'\\ge i$ with $f_{ik'}^{-1}(V)\\subseteq f_{ik'}^{-1}(U_i)$. Choose $i'\\ge k,k'$. Taking preimages under $f_{ki'}$ and using $f_{ii'}=f_{ik}\\circ f_{ki'}$ gives $f_{ii'}^{-1}(U_i)\\subseteq f_{ii'}^{-1}(V)$; likewise with $f_{k'i'}$ gives $f_{ii'}^{-1}(V)\\subseteq f_{ii'}^{-1}(U_i)$. Hence $f_{ii'}^{-1}(U_i)=f_{ii'}^{-1}(V)$, which is $\\bigcup_lf_{ii'}^{-1}(U_{l,i})$ in case (3) and $\\bigcap_lf_{ii'}^{-1}(U_{l,i})$ in case (4).",
+   "uses": [
+    "def-weil-spectral-space"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/topology.tex",
+    "place": "Topology, proof of Lemma Tag 0A30 (label lemma-descend-opens, line 4969): 'Parts (3) and (4) follow formally from (1) and (2) and the fact that taking inverse images of subsets commutes with taking unions and intersections' (only (2) is needed)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-spectral-space",
+  "def-weil-pbc-constructible-topology",
+  "lem-weil-pbc-spectral-limit-constructible-closed-nonempty"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/topology.tex",
+  "place": "Topology, Lemma Tag 0A30 (label lemma-descend-opens, line 4969) and its proof, with the proofs of the lemmas it cites: Lemma Tag 0A2Y (label lemma-inverse-limit-spectral-spaces-constructible, line 4862) for (1), Lemma Tag 0A2X (label lemma-inverse-limit-spectral-spaces-equal, line 4836) for (2), and the basis statement of the proof of Lemma Tag 0A2Z (label lemma-directed-inverse-limit-spectral-spaces, line 4902); specialized from a cofiltered category to a directed set"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -34,10 +96,24 @@
    "results": "nothing in Topology/Spectral; only the scheme version AlgebraicGeometry.exists_preimage_eq",
    "date": "2026-10-10",
    "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "quasi-compact open subsets of an inverse limit of spectral spaces come from a finite stage; inclusion of opens descends to a finite stage",
+   "results": "AlgebraicGeometry.exists_preimage_eq, AlgebraicGeometry.Scheme.exists_isOpenCover_and_isAffine (Mathlib.AlgebraicGeometry.AffineTransitionLimit: schemes with affine transition maps), AlgebraicGeometry.isCompact_and_isOpen_iff_finite_and_eq_biUnion_basicOpen, IsCompactOpenCovered.of_finite_of_isSpectralMap, PrespectralSpace.isBasis_opens: no statement about limits of spectral spaces",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "compact open subset of the inverse limit of spectral spaces is the preimage of a compact open subset at some index",
+   "results": "IsOpenMap.exists_opens_image_eq_of_prespectralSpace, IsCompactOpenCovered.of_finite_of_isSpectralMap, IsRetrocompact_iff_isSpectralMap_subtypeVal, Topology.IsOpenEmbedding.spectralSpace, Profinite.indexFunctor, IsCompact.preimage_of_isOpen: other statements",
+   "date": "2026-10-10",
+   "verdict": "no match"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "worker",
@@ -57,5 +133,17 @@
   }
  },
  "chapter": "sec-proper-base-change",
- "unit": "sk-thm-p1"
+ "unit": "sk-thm-p1",
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "lem-weil-pbc-spectral-limit-descend-opens",
+  "worker": "stage1",
+  "summary": "Split along Stacks 0A30 and the proofs of the lemmas it cites (0A2Y for (1), 0A2X for (2), the basis paragraph of 0A2Z), specialized to a directed set, in 5 steps: the sets p_i^{-1}(W), W quasi-compact open, form a basis of X closed under finite unions and intersections (elementary from the explicit limit topology, directedness, spectrality of the f's and def-weil-spectral-space; this replaces 0A2P); (1) by quasi-compactness (elementary); (2) via the sets Z_k = f_ik^{-1}(U_i) minus f_jk^{-1}(U_j) for k above a common stage k_0, closed in the constructible topology (def-weil-pbc-constructible-topology) and stable under the transition maps (elementary), and the new unsplit node lem-weil-pbc-spectral-limit-constructible-closed-nonempty (Stacks 0A2W (1), directed version) giving a compatible family in the Z_k if all were nonempty, which extends to a point of X contradicting the inclusion (0A2X's argument written out; no node for 0A2X, which would restate (2)); (3) and (4) from (2) applied twice to the quasi-compact open union/intersection V (elementary). The proof does not use that X is spectral or the p_i spectral, so lem-weil-pbc-spectral-directed-limit-spectral (0A2Z) is not cited. Statement unchanged. Lean state none; five Mathlib searches of three kinds, no match (AlgebraicGeometry.exists_preimage_eq is the scheme version)."
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "result": "accepted",
+  "note": "5 steps following Topology 0A30 with 0A2Y and 0A2X written out: the basis of pulled-back quasi-compact opens, closed under finite unions and intersections (0A2P in the directed case); part (1) by quasi-compactness; parts (2): the constructibly closed Z_k = f_ik^{-1}(U_i) minus f_jk^{-1}(U_j) over the cofinal directed set K, some Z_k empty by a new node for 0A2W (1) (compatible points in nonempty constructibly closed sets; candidate via Konig.lean recorded, B8) and the extension of the family to I; parts (3), (4) from (2) applied twice. Statement unchanged; 0A2Z not needed."
+ }
 }
