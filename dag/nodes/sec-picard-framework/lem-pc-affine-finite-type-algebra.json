@@ -23,9 +23,29 @@
   "def-weil-finite-type-morphism",
   "def-weil-pbc-finite-type-algebra"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Let $f:Y\\to\\operatorname{Spec}k$ be the structure morphism. Since $f$ is of finite type, it is locally of finite type by [def-weil-finite-type-morphism]. Apply [lem-weil-pbc-lft-affine-pairs] to the affine open $V=\\operatorname{Spec}k$ of the base and the affine open $U=Y$ of the source; the inclusion $f(U)\\subseteq V$ is automatic. The induced ring map $\\mathcal O_{\\operatorname{Spec}k}(V)=k\\to\\mathcal O_Y(U)=B$ is therefore of finite type, which is exactly that the $k$-algebra $B$ is finitely generated.",
+   "uses": [
+    "def-weil-finite-type-morphism",
+    "lem-weil-pbc-lft-affine-pairs"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Morphisms, Lemma Tag 01T2 (lemma-locally-finite-type-characterize), (1) => (2) with U = Y and V = Spec k"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-finite-type-morphism",
+  "lem-weil-pbc-lft-affine-pairs"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/morphisms.tex",
+  "place": "Morphisms, Lemma Tag 01T2 (lemma-locally-finite-type-characterize), (1) => (2)"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -50,12 +70,36 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-pc-algebraic-dim-zero-affine-finite",
   "by": "worker",
   "date": "2026-10-10"
  },
  "chapter": "sec-picard-framework",
- "unit": "sk-thm-picard-rr"
+ "unit": "sk-thm-picard-rr",
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "lem-pc-affine-finite-type-algebra",
+  "worker": "stage1",
+  "summary": "Split the affine finite-type coordinate-algebra statement into one step following Stacks Morphisms Tag 01T2. The existing Mathlib-backed node lem-weil-pbc-lft-affine-pairs supplies the finite-type ring map for the affine pair (Y, Spec k); no new node was needed.",
+  "blueprint": "Realizes lem-pc-degree-base-change proof part (2), the sentence that the affine coordinate algebra in the algebraic zero-dimensional conclusion is finite type over the field.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-lft-affine-pairs",
+    "why": "The unit route needs the generic affine-pair characterization of locally finite type to obtain finite generation of the coordinate algebra."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-lft-affine-pairs"
+ ],
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-afa",
+  "group": "K1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-afa (reviewer sub-agent of L); spot-checked: Source Stacks 01T2 (morphisms-lemma-locally-finite-type-characterize) read in morphisms.tex: (1)=>(2) for affine U=Y, V=Spec k gives O(Spec k)=k -> O_Y(Y)=B of finite type; the item statement (Y affine, Y->Spec k finite type, B=Gamma(Y,O_Y) finite type k-algebra) agrees, statement unchanged. Single step: finite type => locally of finite type is carried by the statement of def-weil-finite-type-morphism (LFT and QC); the finite-type ring map for every affine pair U,V with f(U) in V is exactly the statement of lem-weil-pbc-lft-affine-pairs (Mathlib leaf locallyOfFiniteType_iff, FiniteType.lean), whose hypotheses (U=Y affine, V=Spec k affine, f(Y) in Spec k trivially) hold; def-weil-pbc-finite-type-algebra gives the meaning of the conclusion. Declared tool_use lem-weil-pbc-lft-affine-pairs (unit sk-thm-p1, a Mathlib leaf) is a generic black-box statement: accepted. Leaf question: Mathlib does not state the item exactly; nearest is HasRingHomProperty.iff_of_isAffine (RingHomProperties.lean:355) with the instance at FiniteType.lean:54, which needs dropping QC and the identification Gamma(Spec k) = k via Scheme.GammaSpecIso, so the one-step split through the existing leaf is acceptable (B8). B10: no slopmaster2 declaration mentions the item (grep of WeilConjectures, Comparator). Only the item's node and report changed; split_report with blueprint entry; same_as [] and from.place filled already. Small cases: Y=Spec k (B=k), Spec k[e]/(e^2), finite disjoint union of points, empty scheme (B=0), A^1_k. Start 2026-10-10 Sat Oct 10 03:40:29 PM UTC 2026, end Sat Oct 10 03:41:06 PM UTC 2026."
+ }
 }
