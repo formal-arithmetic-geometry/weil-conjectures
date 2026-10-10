@@ -708,3 +708,5 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 00:35 L: reviewed lem-weil-pbc-inverse-image-composition-module-linear (03D8; 5 steps; tool_uses prop-weil-pbc-inverse-image-modules-exact): accepted.
 - 00:37 L: reviewed lem-weil-pbc-inverse-image-closed-pushforward-constant (0CAL reduction; 5 steps; +007T leaf, +stalks node): accepted.
 - 00:37 L: reviewed lem-weil-pbc-integral-closure-finite-fibre-image-clopen (09XH middle part; 10 steps; +00E5 leaf): accepted; L dropped the unused hypothesis C'_1 = C_1 from lem-weil-pbc-integral-closure-finite-fibre-choose-g (its conclusion is this item's).
+- 00:38 L: reviewed lem-weil-pbc-jacobi-zariski-differential-maps: Mathlib leaf (00RU; lines verified); statement reworded: accepted.
+- 00:38 L: reviewed lem-weil-pbc-integral-closure-finite-fibre-quasi-finite (09XH first step; 7 steps; +definition node for 'quasi-finite at a prime', 00PL): accepted.
