@@ -2217,3 +2217,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 18:12 L: merged deliver/H1/lem-sc-topological-extension-by-zero-stalks (reviewer PASS; first push; new nodes: 0)
 - 18:13 L: merged deliver/G1/lem-sc-ample-proj-canonical-map (reviewer PASS; first push; new nodes: 0)
 - 18:13 L: merged deliver/F1/def-weil-pbc-etale-site (reviewer PASS; first push; new nodes: 0)
+- 18:14 L: merged deliver/K1/def-sc-group-scheme (reviewer PASS; first push; new nodes: 0)
