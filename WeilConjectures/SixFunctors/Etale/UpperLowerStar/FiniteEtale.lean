@@ -481,4 +481,124 @@ lemma Etale.sheafFiberToLowerStar_stalkRestrict_of_ne {t t' : Scheme.Hom.Geometr
   exact zero_comp
 end Stalk
 
+section Skyscraper
+
+attribute [local instance] Abelian.hasFiniteBiproducts
+
+variable [HasSmallSiteSheafify A] [IsFinite f] {Ω : Type u} [Field Ω] [IsAlgClosed Ω]
+  (y : Spec (.of Ω) ⟶ Y) (G : Sheaf X.smallEtaleTopology A)
+
+/-- The germs of extensions by zero identify the direct sum of the stalks of `G` at the
+geometric points over `y` with the stalk of `f_* G` at `y`. -/
+noncomputable def Etale.biproductSheafFiberToLowerStar :
+    (⨁ fun t : Scheme.Hom.GeometricFiber f y ↦ (Scheme.pointSmallEtale t.1).sheafFiber.obj G) ⟶
+      (Scheme.pointSmallEtale y).sheafFiber.obj ((f)_*[A].obj G) :=
+  biproduct.desc fun t ↦ Etale.sheafFiberToLowerStar A f t G
+
+lemma Etale.biproductSheafFiberToLowerStar_comp_lift_stalkRestrict :
+    Etale.biproductSheafFiberToLowerStar A f y G ≫
+        biproduct.lift (fun t ↦ Etale.stalkRestrict A f y t G) = 𝟙 _ := by
+  classical
+  ext t t'
+  simp only [Etale.biproductSheafFiberToLowerStar, biproduct.ι_desc_assoc, Category.assoc,
+    biproduct.lift_π, Category.id_comp, biproduct.ι_π]
+  by_cases h : t = t'
+  · subst h
+    simp
+  · rw [dif_neg (Ne.symm h)]
+    exact Etale.sheafFiberToLowerStar_stalkRestrict_of_ne A f (Ne.symm h) G
+
+instance Etale.isIso_biproductSheafFiberToLowerStar :
+    IsIso (Etale.biproductSheafFiberToLowerStar A f y G) := by
+  have hτ : biproduct.lift (fun t ↦ Etale.stalkRestrict A f y t G) =
+      Pi.lift (fun t ↦ Etale.stalkRestrict A f y t G) ≫ (biproduct.isoProduct _).inv := by
+    rw [Iso.eq_comp_inv]
+    ext t
+    simp
+  have : IsIso (biproduct.lift (fun t ↦ Etale.stalkRestrict A f y t G)) := by
+    rw [hτ]
+    infer_instance
+  have h := Etale.biproductSheafFiberToLowerStar_comp_lift_stalkRestrict A f y G
+  rw [← IsIso.eq_comp_inv, Category.id_comp] at h
+  rw [h]
+  infer_instance
+
+
+omit [IsFinite f] in
+lemma Etale.lowerStarUnit_comp_map_app_π {M : A}
+    (φ : (f)_*[A].obj G ⟶ (Scheme.pointSmallEtale y).skyscraperSheaf M)
+    (t : Scheme.Hom.GeometricFiber f y) (U : X.Etale)
+    (x : (Scheme.pointSmallEtale t.1).fiber.obj U) :
+    ((Etale.lowerStarUnit A f).app G ≫
+        (Etale.localizationRestriction A f ‹AlgebraicGeometry.Etale f›).map φ).hom.app (op U) ≫
+      Pi.π _ (Etale.fiberMapPoint f t U x) =
+    (Scheme.pointSmallEtale t.1).toPresheafFiber U x G.obj ≫
+      Etale.sheafFiberToLowerStar A f t G ≫
+        ((Scheme.pointSmallEtale y).skyscraperSheafAdjunction.homEquiv _ _).symm φ := by
+  erw [GrothendieckTopology.Point.skyscraperSheafAdjunction_homEquiv_symm_apply]
+  erw [Etale.toPresheafFiber_sheafFiberToLowerStar_assoc]
+  rw [GrothendieckTopology.Point.toPresheafFiber_skyscraperPresheafHomEquiv_symm]
+  rw [ObjectProperty.FullSubcategory.comp_hom, NatTrans.comp_app, Category.assoc]
+  rfl
+
+omit [IsFinite f] in
+lemma Etale.skyscraperSheaf_map_π {M : A} {V V' : Y.Etale} (g : V ⟶ V')
+    (z : (Scheme.pointSmallEtale y).fiber.obj V) :
+    ((Scheme.pointSmallEtale y).skyscraperSheaf M).obj.map g.op ≫ Pi.π _ z =
+      Pi.π _ ((Scheme.pointSmallEtale y).fiber.map g z) := by
+  exact (Pi.map'_comp_π _ _ z).trans (Category.comp_id _)
+
+
+/-- The geometric point of `U` over `y` underlying a geometric point of `U ⟶ X ⟶ Y`. -/
+lemma Etale.exists_fiberMapPoint_eq {U : X.Etale}
+    (p : (Scheme.pointSmallEtale y).fiber.obj
+      ((MorphismProperty.Over.map ⊤ ‹AlgebraicGeometry.Etale f›).obj U)) :
+    ∃ (t : Scheme.Hom.GeometricFiber f y) (x : (Scheme.pointSmallEtale t.1).fiber.obj U),
+      Etale.fiberMapPoint f t U x = p := by
+  have hp : p.left ≫ U.hom ≫ f = y := CategoryTheory.Over.w p
+  exact ⟨⟨p.left ≫ U.hom, by rw [Category.assoc, hp]⟩, CategoryTheory.Over.homMk p.left rfl,
+    CategoryTheory.Over.OverMorphism.ext rfl⟩
+
+/-- **Extension by zero off the graphs is the unit of an adjunction `f_* ⊣ f^*`, tested on
+skyscraper sheaves.** For a finite étale `f`, a geometric point `y` of `Y` and `M : A`, every
+morphism `G ⟶ f^* (y_* M)` is `η_G ≫ f^* φ` for a unique `φ : f_* G ⟶ y_* M`. -/
+lemma Etale.bijective_lowerStarUnit_comp_map_skyscraperSheaf (M : A) :
+    Function.Bijective
+      (fun φ : (f)_*[A].obj G ⟶ (Scheme.pointSmallEtale y).skyscraperSheaf M ↦
+        (Etale.lowerStarUnit A f).app G ≫
+          (Etale.localizationRestriction A f ‹AlgebraicGeometry.Etale f›).map φ) := by
+  let e := (Scheme.pointSmallEtale y).skyscraperSheafAdjunction.homEquiv ((f)_*[A].obj G) M
+  constructor
+  · intro φ₁ φ₂ h
+    apply e.symm.injective
+    rw [← cancel_epi (Etale.biproductSheafFiberToLowerStar A f y G)]
+    refine biproduct.hom_ext' _ _ fun t ↦ ?_
+    simp only [Etale.biproductSheafFiberToLowerStar, biproduct.ι_desc_assoc]
+    apply (Scheme.pointSmallEtale t.1).presheafFiber_hom_ext
+    intro U x
+    erw [← Etale.lowerStarUnit_comp_map_app_π A f y G φ₁ t U x,
+      ← Etale.lowerStarUnit_comp_map_app_π A f y G φ₂ t U x]
+    exact congrArg (fun ψ ↦ ψ.hom.app (op U) ≫ _) h
+  · intro ψ
+    let ψt (t : Scheme.Hom.GeometricFiber f y) :
+        (Scheme.pointSmallEtale t.1).sheafFiber.obj G ⟶ M :=
+      (Scheme.pointSmallEtale t.1).presheafFiberDesc
+        (fun U x ↦ ψ.hom.app (op U) ≫ Pi.π _ (Etale.fiberMapPoint f t U x))
+        (fun U V g x ↦ by
+          refine (Category.assoc _ _ _).symm.trans ?_
+          refine (congrArg (· ≫ Pi.π _ _) (ψ.hom.naturality g.op)).trans ?_
+          exact (Category.assoc _ _ _).trans
+            (congrArg (ψ.hom.app (op V) ≫ ·) (Etale.skyscraperSheaf_map_π A y _ _)))
+    refine ⟨e (inv (Etale.biproductSheafFiberToLowerStar A f y G) ≫ biproduct.desc ψt), ?_⟩
+    ext ⟨U⟩ : 3
+    refine Pi.hom_ext _ _ fun p ↦ ?_
+    obtain ⟨t, x, rfl⟩ := Etale.exists_fiberMapPoint_eq f y p
+    erw [Etale.lowerStarUnit_comp_map_app_π A f y G _ t U x, Equiv.symm_apply_apply]
+    have : Etale.sheafFiberToLowerStar A f t G =
+        biproduct.ι _ t ≫ Etale.biproductSheafFiberToLowerStar A f y G := by
+      simp [Etale.biproductSheafFiberToLowerStar]
+    rw [this, Category.assoc, IsIso.hom_inv_id_assoc, biproduct.ι_desc]
+    exact (Scheme.pointSmallEtale t.1).toPresheafFiber_presheafFiberDesc _ _ U x
+end Skyscraper
+
 end AlgebraicGeometry
