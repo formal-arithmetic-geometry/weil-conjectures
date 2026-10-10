@@ -25,9 +25,60 @@
   "def-sp-injective-resolutions",
   "lem-sp-cartan-eilenberg-exists"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Apply the horizontal comparison construction to the exact source rows and injective target rows. The augmentation identity and the given null-homotopy w = d_L s + s d_K give maps s1 with the prescribed augmentation identity, and the residual R = delta - d_h s1 - s1 d_h is a vertical-complex map whose augmented horizontal row is zero.",
+   "uses": [
+    "lem-sp-ce-horizontal-lift"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Lemma 015I comparison construction by boundary, cycle, and cohomology rows; Weibel Homological Algebra Lemma 5.7.10"
+   }
+  },
+  {
+   "text": "The residual map vanishes on the augmentation and is a morphism of double complexes: it commutes with d_h because delta does and d_h(d_hs_1+s_1d_h)=d_hs_1d_h=(d_hs_1+s_1d_h)d_h, and with d_v because delta and s_1 do. So the comparison theorem on the boundary, cycle, and horizontal-cohomology row resolutions supplies the row null-homotopies and the vertical child assembles them through the exact sequences into maps s2, zero in vertical degree zero, with R = d_v s2 + s2 d_v and s2 commuting with the horizontal differentials.",
+   "uses": [
+    "lem-sp-ce-vertical-nullhomotopy"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Lemma 015I compatibility with the second exact sequence and vertical differential; Weibel Homological Algebra Lemma 5.7.10"
+   }
+  },
+  {
+   "text": "Define H^{p,q}=s_1^{p,q}+(-1)^p s_2^{p,q}. Expanding d_Tot=d_h+(-1)^p d_v gives the three component identities: in bidegree (p,q), d_hs_1+s_1d_h=delta-d_vs_2-s_2d_v; in bidegree (p+1,q-1), s_2d_h=d_hs_2; and in bidegree (p-1,q+1), s_1d_v=d_vs_1. The first is the definition of R together with the vertical identity, the second is the horizontal compatibility of s2, and the third is the column-complex property of s1, so d_Tot H+Hd_Tot=delta.",
+   "uses": [
+    "lem-sp-ce-horizontal-lift",
+    "lem-sp-ce-vertical-nullhomotopy"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Remark 015K, filtered total-complex comparison"
+   }
+  },
+  {
+   "text": "The component s1 preserves vertical degree and s2 lowers it by one; therefore the resulting homotopy sends the q-th filtration piece in total degree n into the (q-1)-st piece in degree n-1. First-quadrant boundedness makes all total sums finite.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Remark 015K (remark-functorial-ss)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sp-ce-horizontal-lift",
+  "lem-sp-ce-vertical-nullhomotopy"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/derived.tex",
+  "place": "Lemma 015I and Remark 015K; row-by-row comparison-homotopy argument"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -59,12 +110,27 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-sp-cartan-eilenberg-comparison-homotopy",
   "by": "worker",
   "date": "2026-10-10"
  },
  "chapter": "sec-abelian-varieties",
- "unit": "sk-prop-av-pqf-finite"
+ "unit": "sk-prop-av-pqf-finite",
+ "split_report": {
+  "date": "2026-10-11",
+  "item": "lem-sp-cartan-eilenberg-double-complex-homotopy",
+  "worker": "stage1",
+  "summary": "Split the double-complex homotopy into horizontal comparison lifting and vertical null-homotopy of the residual defect, then assembled the total homotopy and checked its filtration shift. No sorry-free Lean declaration or Mathlib Cartan--Eilenberg theorem states the item.",
+  "blueprint": "Realizes thm-sp-grothendieck proof, final paragraph: comparison homotopies for the lifted Cartan--Eilenberg maps."
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-ceh3124",
+  "group": "K1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-ceh3124 (reviewer sub-agent of L); spot-checked: Re-push after 23:04 return: (1) vertical child now carries augmentations, exact augmented source B/Z/H columns with 0->Z->I->B->0, injective target, R vanishing on augmentation: repaired; (2) Step 2 now uses comparison-theorem null-homotopies assembled via split sequences into s2 commuting with d_I: repaired; (3) horizontal child concludes s1^{p,*} is a column map (comparison lift), Step 3 states all three components: repaired. Recomputed d_Tot H+H d_Tot with d=d_I+(-1)^p d_II (matches def-sp-double-complex-total, d_I d_II commute): components J^{p,q}, J^{p-1,q+1}, J^{p+1,q-1} check; R vanishes on augmentation from w=d_Ls+sd_K. No comparison-theorem node fits exactly (lem-weil-pbc-injective-resolution-lift-exists needs injective source), so children stay unsplit, not class b/d. FIX more, RETURN less: (C4) Step 2 added that R is a double-complex map (commutes with d_h since d_h^2=0, with d_v since s1 does), which the vertical child's hypothesis needs and the horizontal child only gives as vertical-complex map; (C4) Step 3 bidegree label (p-1,q) corrected to (p,q).; 1 file(s) fixed by the reviewer"
+ }
 }
