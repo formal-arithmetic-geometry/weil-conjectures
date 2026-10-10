@@ -1,8 +1,8 @@
 # Work queue
 
-934 items; claim with `tools/claim.py next <group> [--stage N]`.
+932 items; claim with `tools/claim.py next <group> [--stage N]`.
 
-## Stage 1: nodes to split (617)
+## Stage 1: nodes to split (615)
 
 | node | distance to a target | Lean state on the done branch |
 |---|---|---|
@@ -28,7 +28,6 @@
 | `lem-weil-pbc-smooth-fibre-regular-local` | 1012 | none |
 | `lem-weil-pbc-smooth-localization-conormal-split` | 1012 | none |
 | `lem-weil-pbc-smooth-over-field-dimension-differentials` | 1012 | none |
-| `lem-weil-pbc-residue-field-pd-ge-embedding-dimension` | 1013 | none |
 | `lem-weil-pbc-residue-field-pd-le-krull-dimension` | 1013 | none |
 | `lem-weil-pbc-ringed-space-open-restriction-adjunction` | 1013 | none |
 | `lem-weil-pbc-scheme-modules-enough-injectives` | 1013 | none |
@@ -52,7 +51,6 @@
 | `lem-weil-pbc-zariski-etale-inclusion-morphism-of-sites` | 1013 | none |
 | `lem-weil-pbc-zariski-open-restriction-injectives` | 1013 | none |
 | `def-weil-pbc-formal-glueing-data` | 1014 | none |
-| `lem-weil-pbc-add-trivial-complex` | 1014 | none |
 | `lem-weil-pbc-affine-pushforward-ideal-product` | 1014 | none |
 | `lem-weil-pbc-cm-local-dimension-drop-regular-sequence` | 1014 | none |
 | `lem-weil-pbc-cm-local-maximal-chain-length` | 1014 | none |
@@ -946,7 +944,7 @@
 | `lem-weil-pbc-p1-field-dimension-one` | 4 | state |
 | `lem-weil-pbc-projective-space-zero-isomorphism` | 4 | state |
 
-Not open yet: 629 nodes that wait for stage 1, 599 nodes that wait for a statement dependency.
+Not open yet: 627 nodes that wait for stage 1, 600 nodes that wait for a statement dependency.
 
 ## Stage 3: modules to prove (0)
 
