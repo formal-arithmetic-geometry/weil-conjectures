@@ -26,9 +26,34 @@
   "def-weil-pbc-site-cech-complex",
   "lem-sc-cech-h1-map-natural"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Write H_ab for the underlying abelian sheaf of H on the small Zariski site X_Zar. By [lem-sc-zariski-module-abelian-cohomology-agree] there is a canonical isomorphism H^1(X,H) \\cong H^1(X_{\\rm Zar},H_{ab}), natural in H, between the O_X-module cohomology of [pqf-def-cohomology] and the abelian-sheaf cohomology of [def-sc-zariski-cohomology]. The Cech groups of U with values in H and in H_ab are the same group, since the Cech complex [def-weil-pbc-site-cech-complex] uses only the abelian groups H(U_{i_0\\ldots i_p}) and the restriction maps. The canonical map c_H of the statement is the canonical Cech-to-cohomology map c of H_ab followed by this isomorphism, so it suffices to show that c: \\check H^1(U,H_{ab}) \\to H^1(X_{\\rm Zar},H_{ab}) is injective.",
+   "uses": [
+    "lem-sc-zariski-module-abelian-cohomology-agree",
+    "def-weil-pbc-site-cech-complex"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Apply [lem-sc-cech-spectral] on the Zariski site to the covering U and the abelian sheaf F=H_ab: there is a convergent spectral sequence E_2^{p,q}=\\check H^p(U,\\underline H^q(F)) \\Rightarrow H^{p+q}(X_{\\rm Zar},F), with E_2^{p,q}=0 for p<0 or q<0. Since \\underline H^0(F) is the presheaf V \\mapsto H^0(V,F)=F(V), E_2^{1,0}=\\check H^1(U,F). For r \\ge 2 the differential d_r into E_r^{1,0} starts at E_r^{1-r,r-1}=0 (p<0) and d_r out of E_r^{1,0} lands in E_r^{1+r,1-r}=0 (q<0), so E_\\infty^{1,0}=E_2^{1,0}. Convergence gives a filtration H^1(X_{\\rm Zar},F)=F^0 \\supset F^1 \\supset F^2=0 (F^2/F^3=E_\\infty^{2,-1}=0) with F^1=E_\\infty^{1,0}; the edge homomorphism \\check H^1(U,F)=E_2^{1,0}=E_\\infty^{1,0}=F^1 \\subset H^1(X_{\\rm Zar},F) is therefore injective, and it is the canonical Cech-to-cohomology map c. With step 1, c_H is injective.",
+   "uses": [
+    "lem-sc-cech-spectral",
+    "def-weil-pbc-site-cech-complex"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-sc-zariski-module-abelian-cohomology-agree",
+  "def-weil-pbc-site-cech-complex",
+  "lem-sc-cech-spectral"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Cohomology, Lemma 01ES (cohomology-lemma-cech-spectral-sequence), low-degree edge map of the Cech-to-cohomology spectral sequence; the injectivity of Lemma 0B8R (cohomology-lemma-cech-h1) as its degree-1 edge"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -53,12 +78,44 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-sc-boundary-cech-local-lifts",
   "by": "worker",
   "date": "2026-10-10"
  },
  "chapter": "sec-curve-estimates",
- "unit": "sk-thm-curveestimate"
+ "unit": "sk-thm-curveestimate",
+ "split_report": {
+  "date": "2026-10-11",
+  "item": "lem-sc-cech-h1-injective",
+  "worker": "stage1",
+  "summary": "Reviewer fix (R-chi): the item is the low-degree edge of the Cech-to-cohomology spectral sequence [lem-sc-cech-spectral]. Step 1 reduces from O_X-module cohomology to abelian-sheaf Zariski cohomology [lem-sc-zariski-module-abelian-cohomology-agree]; step 2 reads off E_2^{1,0}=E_infinity^{1,0}=F^1H^1 in the convergent first-quadrant spectral sequence, so the edge map is injective. The delivered torsor-gluing node lem-sc-cech-torsor-gluing (the 0B8R torsor route) is not merged.",
+  "blueprint": "The steps realize the ancestor proof place inherited through the 09MS square-zero argument: the 0B8R Cech-to-H^1 injectivity assertion used for boundary representatives.",
+  "tool_uses": [
+   {
+    "node": "lem-sc-cech-spectral",
+    "why": "generic Cech-to-cohomology spectral sequence for a covering of a site, applied to the Zariski site as a black box; only its E_2 terms and convergence are used"
+   },
+   {
+    "node": "lem-sc-zariski-module-abelian-cohomology-agree",
+    "why": "generic comparison of O_X-module and abelian-sheaf Zariski cohomology, used as a black box"
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sc-cech-spectral",
+  "lem-sc-zariski-module-abelian-cohomology-agree",
+  "lem-sc-cech-spectral",
+  "lem-sc-zariski-module-abelian-cohomology-agree"
+ ],
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-chi",
+  "group": "H1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-chi (reviewer sub-agent of L); spot-checked: Source: Stacks Cohomology 0B8R (cohomology-lemma-cech-h1, cohomology.tex l.1486): topological space, abelian sheaf, open covering, Cech H^1 -> H^1 injective; item specializes to the underlying abelian sheaf of an O_X-module, agrees hypothesis by hypothesis. Delivered split followed the 0B8R torsor route and created lem-sc-cech-torsor-gluing; per the 16:50 audit (coord/audit-new-nodes.md) the item is the low-degree edge of lem-sc-cech-spectral and must not create further nodes; the delivered route also left the O_X-module vs abelian H^1 identification uncited (C1: lem-sc-torsor-h1 is about H^1(X_Zar,G)), the new node used def-sc-gm-torsor (torsors on X_et/X_Zar of a scheme) for an arbitrary topological space (C4), and its clause 'glued torsors with chosen local sections are isomorphic iff cocycles differ by a coboundary' is false if the isomorphism must respect the sections. FIX more, RETURN less: dag/nodes/sec-curve-estimates/lem-sc-cech-h1-injective.json: proof: replaced by two elementary steps, (1) H^1(X,H) = H^1(X_Zar,H_ab) by lem-sc-zariski-module-abelian-cohomology-agree and equality of Cech groups by def-weil-pbc-site-cech-complex, (2) lem-sc-cech-spectral on the Zariski site: E_2^{1,0}=Cech H^1(U,F), no d_r into or out of (1,0) for r>=2 (first quadrant), F^1H^1=E_infty^{1,0}, so the edge map is injective; proof_deps, proof_origin (01ES edge map), split_report.summary and tool_uses updated; new node lem-sc-cech-torsor-gluing dropped (--drop-nodes, unneeded). Tool uses accepted: lem-sc-cech-spectral (sk-thm-picard-cech, generic SS, already a tool use of lem-sc-brauer-zero-all-curves), lem-sc-zariski-module-abelian-cohomology-agree (sk-prop-cd, generic comparison). No Mathlib leaf (Mathlib Sites/SheafCohomology/Cech.lean has no comparison map). Small cases: one-member cover (Cech H^1=0), zero sheaf. Start Sat Oct 10 04:54:44 PM UTC 2026, end Sat Oct 10 04:57:07 PM UTC 2026.; 1 file(s) fixed by the reviewer"
+ },
+ "lead_note": "2026-10-10 L (R-chi): c_H is taken to be the edge homomorphism E_2^{1,0} -> H^1 of lem-sc-cech-spectral composed with the module/abelian comparison; lem-sc-cech-h1-map-natural's c_H is assumed to be this map (0B8S/01ES)."
 }
