@@ -11,9 +11,121 @@
   "def-weil-pbc-finite-type-algebra",
   "def-weil-pbc-ring-map-quasi-finite-at-prime"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "*Setting and finite type.* Write $\\varphi:R\\to S$, $\\psi:R\\to R'$, $\\rho:R'\\to S'$, $\\sigma:S\\to S'$, so $\\sigma\\circ\\varphi=\\rho\\circ\\psi$. Put $\\mathfrak p=\\varphi^{-1}(\\mathfrak q)\\subset R$. Then $\\psi^{-1}(\\mathfrak p')=\\psi^{-1}\\rho^{-1}(\\mathfrak q')=\\varphi^{-1}\\sigma^{-1}(\\mathfrak q')=\\varphi^{-1}(\\mathfrak q)=\\mathfrak p$: the primes form the commutative diagram of the source. If $s_1,\\dots,s_n$ generate $S$ as an $R$-algebra [def-weil-pbc-finite-type-algebra], then $\\sigma(s_1),\\dots,\\sigma(s_n)$ generate $S'$ as an $R'$-algebra: an element of $S'$ is $\\sum_i\\sigma(t_i)\\rho(r'_i)$ with $t_i\\in S$, $r'_i\\in R'$, each $t_i$ is a polynomial in the $s_j$ with coefficients in $\\varphi(R)$, and $\\sigma(\\varphi(a))=\\rho(\\psi(a))$; so $R'\\to S'$ is of finite type, and quasi-finiteness of $R'\\to S'$ at $\\mathfrak q'$ is defined [def-weil-pbc-ring-map-quasi-finite-at-prime].",
+   "uses": [
+    "def-weil-pbc-finite-type-algebra",
+    "def-weil-pbc-ring-map-quasi-finite-at-prime"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra, Lemma Tag 00PN (lemma-four-rings, line 30293), the statement and its diagram of primes; finite type of $R'\\to S'$ is implicit in the source (it is needed for 'quasi-finite at $\\mathfrak q'$' to be defined, Definition Tag 00PL)"
+   }
+  },
+  {
+   "text": "*The fibre rings and the map between them.* Let $\\kappa(\\mathfrak p)=R_{\\mathfrak p}/\\mathfrak pR_{\\mathfrak p}$ and $\\kappa(\\mathfrak p')=R'_{\\mathfrak p'}/\\mathfrak p'R'_{\\mathfrak p'}$ [def-weil-pbc-localization-at-prime]. Since $\\psi(R\\setminus\\mathfrak p)\\subseteq R'\\setminus\\mathfrak p'$ and $\\psi(\\mathfrak p)\\subseteq\\mathfrak p'$ (step 1), $a/t\\mapsto\\psi(a)/\\psi(t)$ is a well defined ring map $R_{\\mathfrak p}\\to R'_{\\mathfrak p'}$ sending $\\mathfrak pR_{\\mathfrak p}$ into $\\mathfrak p'R'_{\\mathfrak p'}$, hence induces a field homomorphism $\\iota:\\kappa(\\mathfrak p)\\to\\kappa(\\mathfrak p')$ with $\\iota(\\bar a)=\\overline{\\psi(a)}$ for $a\\in R$. Let $F=S\\otimes_R\\kappa(\\mathfrak p)$ and $F'=S'\\otimes_{R'}\\kappa(\\mathfrak p')$ be the fibre rings, $j:S\\to F$, $s\\mapsto s\\otimes1$, and $j':S'\\to F'$, $s'\\mapsto s'\\otimes1$. The ring maps $j'\\circ\\sigma:S\\to F'$ and $\\kappa(\\mathfrak p)\\xrightarrow{\\iota}\\kappa(\\mathfrak p')\\to F'$, $\\lambda\\mapsto1\\otimes\\iota(\\lambda)$, are $R$-algebra maps: for $a\\in R$ the first sends $\\varphi(a)$ to $\\sigma\\varphi(a)\\otimes1=\\rho\\psi(a)\\otimes1=1\\otimes\\overline{\\psi(a)}$, the second sends $\\bar a$ to $1\\otimes\\iota(\\bar a)=1\\otimes\\overline{\\psi(a)}$. By [lem-weil-pbc-algebra-tensor-pushout-universal-property] (2) there is a ring map $\\alpha:F\\to F'$ with $\\alpha(s\\otimes\\lambda)=\\sigma(s)\\otimes\\iota(\\lambda)$; in particular $\\alpha\\circ j=j'\\circ\\sigma$ and $\\alpha(\\lambda x)=\\iota(\\lambda)\\alpha(x)$ for $\\lambda\\in\\kappa(\\mathfrak p)$, $x\\in F$.",
+   "uses": [
+    "def-weil-pbc-localization-at-prime",
+    "lem-weil-pbc-algebra-tensor-pushout-universal-property"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra, proof of Lemma Tag 00PN (lemma-four-rings, line 30293): the canonical map $(S\\otimes_R\\kappa(\\mathfrak p))\\otimes_{\\kappa(\\mathfrak p)}\\kappa(\\mathfrak p')\\to S'\\otimes_{R'}\\kappa(\\mathfrak p')$; here written as the map $\\alpha$ from the first factor, compatible with $\\kappa(\\mathfrak p)\\to\\kappa(\\mathfrak p')$"
+   }
+  },
+  {
+   "text": "*$F'$ is spanned over $\\kappa(\\mathfrak p')$ by $\\alpha(F)$.* Every element of $F'=S'\\otimes_{R'}\\kappa(\\mathfrak p')$ is a finite sum of tensors $s'\\otimes\\mu=\\mu\\cdot(s'\\otimes1)$ with $s'\\in S'$, $\\mu\\in\\kappa(\\mathfrak p')$. By hypothesis $s'=\\sum_i\\sigma(t_i)\\rho(r'_i)$ with $t_i\\in S$, $r'_i\\in R'$, and since the tensor product is over $R'$, $\\sigma(t_i)\\rho(r'_i)\\otimes1=\\sigma(t_i)\\otimes\\overline{r'_i}=\\overline{r'_i}\\cdot\\alpha(t_i\\otimes1)$, where $\\overline{r'_i}$ is the image of $r'_i$ in $\\kappa(\\mathfrak p')$. Hence every $x\\in F'$ is a finite sum $x=\\sum_k\\mu_k\\alpha(f_k)$ with $\\mu_k\\in\\kappa(\\mathfrak p')$, $f_k\\in F$. (This is the surjectivity of $F\\otimes_{\\kappa(\\mathfrak p)}\\kappa(\\mathfrak p')\\to F'$ in the source.)",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra, proof of Lemma Tag 00PN (lemma-four-rings, line 30293): 'Because $S\\otimes_RR'\\to S'$ is surjective the canonical map $(S\\otimes_R\\kappa(\\mathfrak p))\\otimes_{\\kappa(\\mathfrak p)}\\kappa(\\mathfrak p')\\to S'\\otimes_{R'}\\kappa(\\mathfrak p')$ is surjective'"
+   }
+  },
+  {
+   "text": "*The points of the two fibres.* By [lem-weil-pbc-fibre-ring-primes-bijection] let $\\overline{\\mathfrak q}\\subset F$ be the unique prime with $j^{-1}(\\overline{\\mathfrak q})=\\mathfrak q$ (as $\\varphi^{-1}(\\mathfrak q)=\\mathfrak p$) and $\\overline{\\mathfrak q}'\\subset F'$ the unique prime with $j'^{-1}(\\overline{\\mathfrak q}')=\\mathfrak q'$ (as $\\rho^{-1}(\\mathfrak q')=\\mathfrak p'$); these are the points of [def-weil-pbc-ring-map-quasi-finite-at-prime]. The ideal $\\alpha^{-1}(\\overline{\\mathfrak q}')$ is a prime of $F$, and $j^{-1}(\\alpha^{-1}(\\overline{\\mathfrak q}'))=(\\alpha j)^{-1}(\\overline{\\mathfrak q}')=(j'\\sigma)^{-1}(\\overline{\\mathfrak q}')=\\sigma^{-1}(\\mathfrak q')=\\mathfrak q$ (step 2). By the injectivity of $\\mathfrak Q\\mapsto j^{-1}(\\mathfrak Q)$ in [lem-weil-pbc-fibre-ring-primes-bijection], $\\alpha^{-1}(\\overline{\\mathfrak q}')=\\overline{\\mathfrak q}$. So for $x\\in F$: $x\\notin\\overline{\\mathfrak q}$ implies $\\alpha(x)\\notin\\overline{\\mathfrak q}'$.",
+   "uses": [
+    "lem-weil-pbc-fibre-ring-primes-bijection",
+    "def-weil-pbc-ring-map-quasi-finite-at-prime"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra, proof of Lemma Tag 00PN (lemma-four-rings, line 30293): 'The map $S'\\otimes_{R'}\\kappa(\\mathfrak p')\\to\\kappa(\\mathfrak q')$ factors through $S'_1$ ... because the map $S\\otimes_R\\kappa(\\mathfrak p)\\to\\kappa(\\mathfrak q)$ factors through $S_1$'; Remark Tag 00E6 (remark-fundamental-diagram) for the points of the fibre"
+   }
+  },
+  {
+   "text": "*An idempotent cutting out $\\overline{\\mathfrak q}$.* $F$ is a $\\kappa(\\mathfrak p)$-algebra of finite type [def-weil-pbc-finite-type-algebra], generated by the $j(s_i)$ for generators $s_i$ of $S$ over $R$ (every $s\\otimes\\lambda=\\lambda\\,j(s)$). By hypothesis $R\\to S$ is quasi-finite at $\\mathfrak q$, i.e. $\\{\\overline{\\mathfrak q}\\}$ is open in $\\operatorname{Spec}F$ [def-weil-pbc-ring-map-quasi-finite-at-prime]. By [lem-weil-pbc-isolated-prime-finite-type-algebra-residue-finite] (with $k=\\kappa(\\mathfrak p)$, $B=F$) $\\overline{\\mathfrak q}$ is a maximal ideal of $F$, so $\\{\\overline{\\mathfrak q}\\}=V(\\overline{\\mathfrak q})$ is also closed. By [lem-weil-pbc-spec-clopen-idempotent] there is an idempotent $e\\in F$ with $D(e)=\\{\\overline{\\mathfrak q}\\}$; in particular $e\\notin\\overline{\\mathfrak q}$, and $e\\in\\mathfrak Q$ for every prime $\\mathfrak Q\\ne\\overline{\\mathfrak q}$ of $F$.",
+   "uses": [
+    "def-weil-pbc-finite-type-algebra",
+    "def-weil-pbc-ring-map-quasi-finite-at-prime",
+    "lem-weil-pbc-isolated-prime-finite-type-algebra-residue-finite",
+    "lem-weil-pbc-spec-clopen-idempotent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra, proof of Lemma Tag 00PN (line 30293), first sentence ('Write $S\\otimes_R\\kappa(\\mathfrak p)=S_1\\times S_2$ ... as in Lemma 00PJ'), and proof of Lemma Tag 00PJ (lemma-isolated-point, line 30106), (1) => (2): Spec of a finite type algebra over a field is Jacobson, so the isolated point is closed, hence open and closed, and Lemma Tag 00EE (lemma-disjoint-decomposition, line 3858) gives the idempotent"
+   }
+  },
+  {
+   "text": "*The factor $eF$ is finite over $\\kappa(\\mathfrak p)$.* For every prime $\\mathfrak Q$ of $F$ exactly one of $e$, $1-e$ lies in $\\mathfrak Q$ (their product $0$ lies in $\\mathfrak Q$, their sum $1$ does not), so $V(1-e)=D(e)=\\{\\overline{\\mathfrak q}\\}$. Let $B=F/(1-e)F$. By [lem-weil-pbc-spec-quotient-homeomorphism-zero-locus] the primes of $B$ correspond to the points of $V(1-e)$, so $B$ has exactly one prime ideal; $B\\ne0$, so a maximal ideal of $B$ exists, is prime, and equals that prime: every prime of $B$ is maximal. $B$ is a $\\kappa(\\mathfrak p)$-algebra of finite type (images of generators of $F$) [def-weil-pbc-finite-type-algebra], so by [lem-weil-pbc-finite-type-algebra-dim-zero-finite] $B$ is finite-dimensional over $\\kappa(\\mathfrak p)$; choose $b_1,\\dots,b_n\\in F$ whose images span $B$. For $f\\in F$ write $f-\\sum_i\\lambda_ib_i=(1-e)y$ with $\\lambda_i\\in\\kappa(\\mathfrak p)$, $y\\in F$; multiplying by $e$ and using $e(1-e)=0$ gives $ef=\\sum_i\\lambda_i\\,eb_i$. So $eF$ is spanned over $\\kappa(\\mathfrak p)$ by $eb_1,\\dots,eb_n$ (in the source: $S_1=eF$ is finite over $\\kappa(\\mathfrak p)$).",
+   "uses": [
+    "lem-weil-pbc-spec-quotient-homeomorphism-zero-locus",
+    "def-weil-pbc-finite-type-algebra",
+    "lem-weil-pbc-finite-type-algebra-dim-zero-finite"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra, proof of Lemma Tag 00PJ (lemma-isolated-point, line 30106), (1) => (2): '$S_1=S_{\\mathfrak q}$ is a zero dimensional ring of finite type over $k$. Hence it is finite over $k$'; here by Lemma Tag 0ALW (lemma-finite-type-algebra-finite-nr-primes, line 14791) (1) => (5)"
+   }
+  },
+  {
+   "text": "*The factor $e'F'$ is finite over $\\kappa(\\mathfrak p')$.* Put $e'=\\alpha(e)$, an idempotent of $F'$; by steps 4 and 5 ($e\\notin\\overline{\\mathfrak q}$) $e'\\notin\\overline{\\mathfrak q}'$. Let $B'=F'/(1-e')F'$. For $x\\in F'$ write $x=\\sum_k\\mu_k\\alpha(f_k)$ (step 3) and $ef_k=\\sum_i\\lambda_{ki}eb_i$ (step 6). Then $x\\equiv e'x=\\sum_k\\mu_k\\alpha(ef_k)=\\sum_k\\sum_i\\mu_k\\iota(\\lambda_{ki})\\alpha(eb_i)\\pmod{(1-e')F'}$, using that $\\alpha$ is a ring map with $\\alpha(\\lambda y)=\\iota(\\lambda)\\alpha(y)$ (step 2). Hence the images of $\\alpha(eb_1),\\dots,\\alpha(eb_n)$ span $B'$ over $\\kappa(\\mathfrak p')$: $B'$ is a finite $\\kappa(\\mathfrak p')$-algebra (the source's $S'_1$, a quotient of $S_1\\otimes_{\\kappa(\\mathfrak p)}\\kappa(\\mathfrak p')$).",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra, proof of Lemma Tag 00PN (lemma-four-rings, line 30293): 'This product decomposition induces a corresponding product decomposition for any $S\\otimes_R\\kappa(\\mathfrak p)$-algebra ... hence $S_i\\otimes_{\\kappa(\\mathfrak p)}\\kappa(\\mathfrak p')\\to S'_i$ is surjective. It follows that $S'_1$ is finite over $\\kappa(\\mathfrak p')$'"
+   }
+  },
+  {
+   "text": "*$\\overline{\\mathfrak q}'$ is isolated.* As in step 6, $V(1-e')=D(e')$ in $\\operatorname{Spec}F'$, and $D(e')$ is open in the Zariski topology [def-weil-affine-spectrum]; $\\overline{\\mathfrak q}'\\in D(e')$ by step 7. The field $\\kappa(\\mathfrak p')$ is a local ring whose only prime ideal is its maximal ideal $0$, and $B'$ is a finite $\\kappa(\\mathfrak p')$-algebra (step 7), so by [lem-weil-pbc-finite-over-zero-dim-local-discrete-spectrum] $\\operatorname{Spec}B'$ is a finite discrete space. By [lem-weil-pbc-spec-quotient-homeomorphism-zero-locus] $\\operatorname{Spec}B'$ is homeomorphic to $V(1-e')=D(e')$ with the subspace topology; hence $D(e')$ is discrete, $\\{\\overline{\\mathfrak q}'\\}$ is open in $D(e')$, and, $D(e')$ being open in $\\operatorname{Spec}F'$, $\\{\\overline{\\mathfrak q}'\\}$ is open in $\\operatorname{Spec}F'=\\operatorname{Spec}(S'\\otimes_{R'}\\kappa(\\mathfrak p'))$. Since $R'\\to S'$ is of finite type (step 1), this says that $R'\\to S'$ is quasi-finite at $\\mathfrak q'$ [def-weil-pbc-ring-map-quasi-finite-at-prime].",
+   "uses": [
+    "def-weil-affine-spectrum",
+    "lem-weil-pbc-finite-over-zero-dim-local-discrete-spectrum",
+    "lem-weil-pbc-spec-quotient-homeomorphism-zero-locus",
+    "def-weil-pbc-ring-map-quasi-finite-at-prime"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra, proof of Lemma Tag 00PN (lemma-four-rings, line 30293): '$\\mathfrak q'$ corresponds to a point of $\\Spec(S'_1)$ in the disjoint union decomposition $\\Spec(S'\\otimes_{R'}\\kappa(\\mathfrak p'))=\\Spec(S'_1)\\amalg\\Spec(S'_2)$ (Lemma Tag 00ED, lemma-spec-product, line 3822). Since $S'_1$ is finite over a field ... $\\Spec(S'_1)$ is a finite discrete set (Proposition Tag 00KJ). We conclude $\\mathfrak q'$ is isolated in its fibre'"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-finite-type-algebra",
+  "def-weil-pbc-ring-map-quasi-finite-at-prime",
+  "def-weil-pbc-localization-at-prime",
+  "lem-weil-pbc-algebra-tensor-pushout-universal-property",
+  "lem-weil-pbc-fibre-ring-primes-bijection",
+  "lem-weil-pbc-isolated-prime-finite-type-algebra-residue-finite",
+  "lem-weil-pbc-spec-clopen-idempotent",
+  "lem-weil-pbc-spec-quotient-homeomorphism-zero-locus",
+  "lem-weil-pbc-finite-type-algebra-dim-zero-finite",
+  "def-weil-affine-spectrum",
+  "lem-weil-pbc-finite-over-zero-dim-local-discrete-spectrum"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Algebra, proof of Lemma Tag 00PN (lemma-four-rings, line 30293), with the proof of Lemma Tag 00PJ (lemma-isolated-point, line 30106) (1) => (2) for the decomposition of the fibre ring; the product decompositions $S_1\\times S_2$, $S'_1\\times S'_2$ of the source are written with the idempotents $e$, $e'=\\alpha(e)$ and the quotients by $1-e$, $1-e'$"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -35,10 +147,24 @@
    "results": "Basic.lean:361 QuasiFiniteAt.baseChange (to A ⊗[R] S), :381 QuasiFiniteAt.of_surjectiveOnStalks (along S →ₐ[R] T surjective on stalks, same base R); no single lemma for the four-ring square",
    "date": "2026-10-10",
    "verdict": "no exact match; candidate = composite of the two (B8)"
+  },
+  {
+   "tool": "loogle",
+   "query": "Algebra.QuasiFiniteAt, Function.Surjective",
+   "results": "Ideal.Fiber.lift_residueField_surjective, Polynomial.not_ker_le_map_C_of_surjective_of_quasiFiniteAt (Mathlib.RingTheory.QuasiFinite.Basic / .Polynomial)",
+   "date": "2026-10-10",
+   "verdict": "no match for the four-ring square"
+  },
+  {
+   "tool": "local_search",
+   "query": "Algebra.QuasiFiniteAt.of_surjectiveOnStalks (project ~/weil-conjectures-slopmaster2); source read at Basic.lean:350-400",
+   "results": "Algebra.QuasiFiniteAt.of_surjectiveOnStalks, Algebra.QuasiFiniteAt.of_surjectiveOnStalks_of_liesOver (Mathlib/RingTheory/QuasiFinite/Basic.lean; index unavailable, names found); QuasiFiniteAt is an abbrev for QuasiFinite R (Localization.AtPrime p) (:357)",
+   "date": "2026-10-10",
+   "verdict": "candidate for Mathlib's QuasiFiniteAt only (B8); not a leaf"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "worker",
@@ -64,5 +190,11 @@
   "file": "Mathlib/RingTheory/QuasiFinite/Basic.lean",
   "how": "Basic.lean:361-377 (base change to R' ⊗_R S at a prime over p) followed by :381-388 (along the surjection R' ⊗_R S → S', surjective maps are surjective on stalks) gives the node for Mathlib's QuasiFiniteAt. Not a leaf (coord/delivery-errors.md B8): Mathlib's `Algebra.QuasiFiniteAt R p` is `QuasiFinite R (Localization.AtPrime p)` (Mathlib/RingTheory/QuasiFinite/Basic.lean:358), which agrees with the DAG's isolated-point notion [def-weil-pbc-ring-map-quasi-finite-at-prime] only through `Algebra.quasiFiniteAt_iff_isOpen_singleton_fiber` (ZariskisMainTheorem.lean:754) and the fibre homeomorphism, a theorem with no node."
  },
- "reviewed": "Reviewed by L 2026-10-10 (statement): Algebra 00PN, stated with the DAG's quasi-finite-at-prime notion. Unsplit; Mathlib candidates, if any, are for Mathlib's QuasiFiniteAt (B8)."
+ "reviewed": "pass (L, 2026-10-10): 8 steps follow 00PN with the clopen-point idempotent in place of the source's product decomposition; the fibre-ring map alpha, the matching of points via the primes bijection, and finiteness of the factor (new 0ALW leaf) are all written out.",
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "lem-weil-pbc-quasi-finite-four-rings",
+  "worker": "stage1",
+  "summary": "Split following Algebra 00PN's proof (read at algebra.tex:30293) with 00PJ (1)=>(2) for the decomposition of the fibre ring. Eight steps: finite type of R'->S' and the compatibility of primes (elementary); the map alpha: F=S(x)_R k(p) -> F'=S'(x)_{R'} k(p') from the tensor universal property; F' spanned over k(p') by alpha(F) (the source's surjectivity, elementary); alpha^{-1} of the point of q' is the point of q (fibre-ring bijection); idempotent e with D(e)={q-bar} (isolated prime is maximal + clopen-idempotent); eF finite over k(p) via the quotient F/(1-e) with one prime and the new Mathlib leaf lem-weil-pbc-finite-type-algebra-dim-zero-finite (0ALW (1)=>(5)); e'=alpha(e) not in the point of q' and F'/(1-e') finite over k(p') (elementary); its Spec finite discrete and homeomorphic to the open D(e'), so q' is isolated. The source's products S_1 x S_2 are written with idempotents and quotients by 1-e. Statement unchanged; it already states that R'->S' is of finite type, which the source leaves implicit. Mathlib: candidate for Mathlib's QuasiFiniteAt kept (B8); loogle and local_search records added. Checked against the citer lem-weil-pbc-integral-closure-zariski-main-away step 7 (R->S, R->R/(R cap sqrt J), S->S/sqrt J): hypotheses hold there."
+ }
 }

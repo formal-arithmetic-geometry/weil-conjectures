@@ -1,0 +1,82 @@
+{
+ "id": "lem-weil-pbc-finite-type-algebra-dim-zero-finite",
+ "kind": "statement",
+ "title": "A finite type algebra over a field in which every prime is maximal is finite-dimensional",
+ "statement": "Let $k$ be a field and let $B$ be a commutative $k$-algebra of finite type [def-weil-pbc-finite-type-algebra] (the zero ring is allowed) in which every prime ideal is a maximal ideal, i.e. $\\dim B\\le0$. Then $B$ is a finite-dimensional $k$-vector space: $\\dim_kB<\\infty$.",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Algebra, Lemma Tag 0ALW (lemma-finite-type-algebra-finite-nr-primes, line 14791), implication (1) => (5) for $S\\neq0$ (for $B=0$ the statement is trivial); tag verified in literature/stacks-project/tags/tags (0ALW algebra-lemma-finite-type-algebra-finite-nr-primes)"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-finite-type-algebra"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "finite type algebra over a field with finitely many prime ideals is finite dimensional",
+   "results": "Algebra.QuasiFinite.iff_finite_primesOver, Algebra.QuasiFinite.finite_primeSpectrum (Mathlib.RingTheory.QuasiFinite.Basic); Algebra.finite_of_essFiniteType_of_isAlgebraic (Mathlib.FieldTheory.IntermediateField.Adjoin.Algebra, fields only); IsArtinianRing.instFinitePrimeSpectrum (Mathlib.RingTheory.Artinian.Module); FiniteDimensional.finiteDimensional_subalgebra",
+   "date": "2026-10-10",
+   "verdict": "no direct match; leads to the Artinian/Jacobson file"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "a finitely generated algebra over a field whose prime spectrum is finite is a finite-dimensional vector space",
+   "results": "finite_of_algHom_finiteType_of_isJacobsonRing, finite_of_finite_type_of_isJacobsonRing (Mathlib.RingTheory.Jacobson.Ring, target a field); Algebra.QuasiFinite.finite_primeSpectrum; Algebra.EssFiniteType.of_finiteType; Algebra.finite_of_essFiniteType_of_isAlgebraic",
+   "date": "2026-10-10",
+   "verdict": "no direct match"
+  },
+  {
+   "tool": "loogle",
+   "query": "Module.Finite, Ring.KrullDimLE",
+   "results": "Module.finite_iff_krullDimLE_zero (R A) [CommRing R] [CommRing A] [Algebra R A] [Algebra.FiniteType R A] [IsArtinianRing R] : Module.Finite R A ↔ Ring.KrullDimLE 0 A (Mathlib.RingTheory.Jacobson.Artinian)",
+   "date": "2026-10-10",
+   "verdict": "match (generalization: base ring Artinian; a field is Artinian)"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rn 'Finite (PrimeSpectrum\\|Module.finite_of_isArtinianRing\\|IsArtinianRing.*FiniteType' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib; sed -n 1,60p RingTheory/Jacobson/Artinian.lean; grep -n 'mk₀' RingTheory/KrullDimension/Basic.lean; grep -n 'instIsArtinianRing' RingTheory/Artinian/Module.lean",
+   "results": "RingTheory/Jacobson/Artinian.lean:35 Module.finite_of_isArtinianRing, :44 Module.finite_iff_isArtinianRing, :49 Module.finite_iff_krullDimLE_zero; RingTheory/KrullDimension/Basic.lean:115 Ring.KrullDimLE.mk₀ (H : ∀ I : Ideal R, I.IsPrime → I.IsMaximal) : Ring.KrullDimLE 0 R; RingTheory/Artinian/Module.lean:376 instance DivisionRing.instIsArtinianRing; RingTheory/Spectrum/Prime/Topology.lean:301 PrimeSpectrum.discreteTopology_iff_finite_and_krullDimLE_zero",
+   "date": "2026-10-10",
+   "verdict": "match (sources read)"
+  },
+  {
+   "tool": "local_search",
+   "query": "Module.finite_iff_krullDimLE_zero (project ~/weil-conjectures-slopmaster2)",
+   "results": "Module.finite_iff_krullDimLE_zero, lemma, .lake/packages/mathlib/Mathlib/RingTheory/Jacobson/Artinian.lean (index: unavailable, name found)",
+   "date": "2026-10-10",
+   "verdict": "exists"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "Module.finite_iff_krullDimLE_zero",
+  "file": "Mathlib/RingTheory/Jacobson/Artinian.lean",
+  "how": "specializes in one line: Module.finite_iff_krullDimLE_zero (Jacobson/Artinian.lean:49-54, R Artinian, A of finite type over R) with R = k, which is Artinian by the instance DivisionRing.instIsArtinianRing (Artinian/Module.lean:376); its right side Ring.KrullDimLE 0 B is supplied from 'every prime is maximal' by Ring.KrullDimLE.mk₀ (KrullDimension/Basic.lean:115); Module.Finite k B is finite-dimensionality over the field k",
+  "line": 49
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-quasi-finite-four-rings",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lead_note": "Composed leaf accepted by L (2026-10-10): Module.finite_iff_krullDimLE_zero (Jacobson/Artinian.lean:49, checked with sed) with R = k a field (instance DivisionRing.instIsArtinianRing, Artinian/Module.lean:376) and the hypothesis Ring.KrullDimLE 0 B from Ring.KrullDimLE.mk0 (KrullDimension/Basic.lean:115).",
+ "reviewed": "pass (L, 2026-10-10): leaf, declaration and the two auxiliary ones checked by sed."
+}
