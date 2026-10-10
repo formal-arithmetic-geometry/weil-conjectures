@@ -1,8 +1,8 @@
 # Work queue
 
-915 items; claim with `tools/claim.py next <group> [--stage N]`.
+916 items; claim with `tools/claim.py next <group> [--stage N]`.
 
-## Stage 1: nodes to split (330)
+## Stage 1: nodes to split (331)
 
 | node | distance to a target | Lean state on the done branch |
 |---|---|---|
@@ -22,16 +22,18 @@
 | `lem-sc-jacobson-denominator-function-field` | 2013 | none |
 | `lem-sc-separated-affine-function-field-surjective` | 2013 | none |
 | `lem-sc-topological-leray-spectral-sequence` | 2013 | none |
-| `lem-sc-invert-s-cohomology-affine-case` | 2014 | none |
 | `lem-sc-tensor-generating-sections` | 2014 | none |
-| `lem-sc-torsor-h1-zariski-boundary-class` | 2014 | none |
 | `lem-sc-zariski-ext-torsor` | 2014 | none |
+| `lem-sc-affine-section-localization` | 2015 | none |
 | `lem-sc-invert-s-cohomology-mayer-vietoris-diagram` | 2015 | none |
 | `lem-sc-invert-s-cohomology-separated-induction` | 2015 | none |
+| `lem-sc-invertible-tensor-qcoherent` | 2015 | none |
 | `lem-weil-pbc-hypercohomology-e1-pullback-functorial` | 3006 | none |
 | `lem-exc-field-sections-stalk-invariants` | 3007 | none |
-| `lem-weil-pbc-derived-finite-product` | 3007 | none |
 | `lem-weil-pbc-etale-sheaf-clopen-product` | 3007 | none |
+| `lem-weil-pbc-finite-product-complex-cohomology` | 3008 | none |
+| `lem-weil-pbc-finite-product-functor-left-exact` | 3008 | none |
+| `lem-weil-pbc-finite-product-injective-resolutions` | 3008 | none |
 | `lem-weil-pbc-cohomology-over-object-localization` | 3009 | none |
 | `lem-exc-etale-field-galois-classification` | 3010 | none |
 | `lem-sc-etale-fibre-product-base-change-coproduct` | 3010 | none |
@@ -40,7 +42,6 @@
 | `def-sc-scheme-tangent-space` | 3012 | none |
 | `lem-sc-positive-dimensional-locally-algebraic-closed-points` | 3012 | none |
 | `lem-sc-rational-tangent-cotangent-duality` | 3012 | none |
-| `lem-weil-pbc-ringed-site-free-cech-complex-exact` | 3012 | none |
 | `lem-weil-pbc-ringed-site-injective-module-injective-presheaf` | 3012 | none |
 | `def-sc-sheaf-cohomology-functor` | 3013 | none |
 | `lem-pc-affine-surjective-structure-map-closed-immersion` | 3013 | none |
@@ -927,7 +928,7 @@
 | `lem-weil-pbc-p1-field-dimension-one` | 4 | state |
 | `lem-weil-pbc-projective-space-zero-isomorphism` | 4 | state |
 
-Not open yet: 347 nodes that wait for stage 1, 1182 nodes that wait for a statement dependency.
+Not open yet: 348 nodes that wait for stage 1, 1186 nodes that wait for a statement dependency.
 
 ## Stage 3: modules to prove (0)
 
