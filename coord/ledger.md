@@ -1743,3 +1743,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 15:12 L: lem-sc-brauer-zero NOT attached (K1 release; rests on sorry), notice to K1
 - 15:12 L: merged deliver/K1/lem-pc-projective-base-change (reviewer FIX; first push; new nodes: 1)
 - 15:13 L: merged deliver/K1/lem-sc-ext-locally-free (reviewer PASS; after a return; new nodes: 3)
+- 15:13 L: merged deliver/M1/thm-sc-p1-duality (reviewer FIX; after a return; new nodes: 3)
