@@ -3,7 +3,7 @@
  "blueprint": {
   "is": "lem-pc-degree-zero-properties",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "Cohomology of a module in degree zero",
@@ -20,9 +20,31 @@
  ],
  "proof": [
   {
-   "text": "By definition of the shift, $H^j(\\mathcal{N}[0])$ is the $j$-th cohomology of\nthe complex with $\\mathcal{N}$ in degree $0$, i.e. $0$ for $j e0$ and $H^0$ is\n$\\mathcal{N}$; cohomology is invariant under quasi-isomorphism, and\n$M\\cong\\mathcal{N}[0]$ is an isomorphism in $D(\\mathcal{O}_X)$, which means that the\ntwo complexes are connected by a zig-zag of quasi-isomorphisms (that\neach induces an isomorphism of all cohomology sheaves). The second\nassertion is the same argument applied to the complex $E$ in degree\n$-i$.",
+   "text": "An isomorphism in the derived category is represented by a zig-zag of quasi-isomorphisms, and each quasi-isomorphism induces isomorphisms on all cohomology sheaves. Therefore the cohomology of $M$ may be computed from either displayed representative.",
    "uses": [],
-   "elementary": null
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-picard-framework/sk-def-picard-f/lem-pc-degree-zero-properties.md",
+    "place": "Proof, first sentence"
+   }
+  },
+  {
+   "text": "The complex $\\mathcal{N}[0]$ has $\\mathcal{N}$ in degree $0$ and the zero object in every other degree, so its degree-$0$ cohomology is $\\mathcal{N}$ and its cohomology in every degree $i\\ne0$ is zero. Thus $H^0(M)\\cong\\mathcal{N}$ and $H^i(M)=0$ for $i\\ne0$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-picard-framework/sk-def-picard-f/lem-pc-degree-zero-properties.md",
+    "place": "Proof, first assertion"
+   }
+  },
+  {
+   "text": "The shift $E[-i]$ is the complex with $E$ in degree $i$ and the zero object in every other degree. Its degree-$i$ cohomology is therefore $E$, while all other cohomology objects vanish. Using the first step for the isomorphism $M\\cong E[-i]$ gives $H^i(M)\\cong E$ and $H^j(M)=0$ for $j\\ne i$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-picard-framework/sk-def-picard-f/lem-pc-degree-zero-properties.md",
+    "place": "Proof, second assertion"
+   }
   }
  ],
  "proof_deps": [],
@@ -31,9 +53,66 @@
   "document": "literature/blueprint/master/blueprint/sec-picard-framework/sk-def-picard-f/lem-pc-degree-zero-properties.md",
   "place": "## Proof"
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "cohomology sheaves of a complex isomorphic in the derived category to an object concentrated in degree zero or shifted by i",
+   "results": "DerivedCategory.exists_iso_singleFunctor_obj_of_isGE_of_isLE; DerivedCategory.instIsGEObjCochainComplexIntQOfIsGE; DerivedCategory.instIsLEObjCochainComplexIntQOfIsLE; CochainComplex.exists_iso_single; DerivedCategory.isGE_Q_obj_iff; DerivedCategory.exists_iso_Q_obj_of_isGE; DerivedCategory.exists_iso_Q_obj_of_isLE",
+   "date": "2026-10-11",
+   "verdict": "no exact match; general single-degree support results"
+  },
+  {
+   "tool": "loogle",
+   "query": "DerivedCategory.singleFunctorCompHomologyFunctorIso, DerivedCategory.homologyFunctor.shiftIso, HomologicalComplex.isZero_single_obj_homology",
+   "results": "unknown identifier DerivedCategory.homologyFunctor.shiftIso; no hits",
+   "date": "2026-10-11",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "singleFunctorCompHomologyFunctorIso|isZero_single_obj_homology|isZero_homologySheaf_singleComplex in Mathlib/Algebra/Homology",
+   "results": "no hits from launcher grep",
+   "date": "2026-10-11",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "cohomology of a derived category object isomorphic to a sheaf placed in degree i",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-11",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "homology of single complex in degree n is zero outside n and isomorphic to the object in degree n",
+   "results": "HomologicalComplex.singleObjHomologySelfIso; HomologicalComplex.singleObjOpcyclesSelfIso; HomologicalComplex.homologyFunctorSingleIso_hom_app; HomologicalComplex.instHasHomologyObjSingle; HomologicalComplex.isZero_single_obj_homology; HomologicalComplex.homologyFunctorSingleIso",
+   "date": "2026-10-11",
+   "verdict": "generalization: single-complex homology lemmas"
+  },
+  {
+   "tool": "loogle",
+   "query": "singleFunctorCompHomologyFunctorIso, isZero_homologySheaf_singleComplex",
+   "results": "unknown identifier singleFunctorCompHomologyFunctorIso; no hits",
+   "date": "2026-10-11",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "singleFunctorCompHomologyFunctorIso|isZero_single_obj_homology|isZero_homologySheaf_singleComplex in Mathlib",
+   "results": "no hits from launcher grep",
+   "date": "2026-10-11",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "shiftIso in Mathlib/Algebra/Homology/DerivedCategory",
+   "results": "no hits from launcher grep",
+   "date": "2026-10-11",
+   "verdict": "no match"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [
   "cites_outside_uses"
@@ -63,5 +142,20 @@
   }
  },
  "chapter": "sec-picard-framework",
- "unit": "sk-def-picard-f"
+ "unit": "sk-def-picard-f",
+ "split_report": {
+  "date": "2026-10-11",
+  "item": "lem-pc-degree-zero-properties",
+  "worker": "stage1",
+  "summary": "Rewrote the imported proof as three explicit elementary steps: derived-category isomorphisms preserve cohomology, a complex concentrated in degree zero has only its degree-zero cohomology, and shifting a single-term complex moves that cohomology to degree i. No new nodes were needed; the imported statement and its hypotheses were retained.",
+  "blueprint": "Realizes the proof paragraph's first sentence (quasi-isomorphism invariance), the degree-zero computation, and the shifted-complex computation."
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-dzp1811",
+  "group": "J1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-dzp1811 (reviewer sub-agent of L); spot-checked: No cycle (no uses, proof_deps empty); steps 1-3 elementary and correct (zig-zag of qis preserves cohomology; single-term complex; E[-i] has E in degree i). FIX more, RETURN less: (1) E7/C7: delivery changed the statement by citing def-amb-finite-locally-free-module (sec-smooth-purity, unit sk-prop-an, not in stmt_deps, needless for a statement already pointing to def-pc-finite-locally-free); reverted to the imported statement. (2) steps 2-3 source.document pointed to a nonexistent path sec-picard-f/...; corrected to sec-picard-framework/sk-def-picard-f/.... Second reading missed both.; 1 file(s) fixed by the reviewer"
+ }
 }
