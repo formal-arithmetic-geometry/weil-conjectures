@@ -1,8 +1,8 @@
 # Work queue
 
-860 items; claim with `tools/claim.py next <group> [--stage N]`.
+858 items; claim with `tools/claim.py next <group> [--stage N]`.
 
-## Stage 1: nodes to split (644)
+## Stage 1: nodes to split (640)
 
 | node | distance to a target | Lean state on the done branch |
 |---|---|---|
@@ -18,10 +18,6 @@
 | `lem-weil-pbc-descend-finite-locally-free` | 1012 | none |
 | `lem-weil-pbc-descend-qc-open-fg-subalgebra` | 1012 | none |
 | `lem-weil-pbc-equation-count-fibre-dimension-flat` | 1012 | none |
-| `lem-weil-pbc-fibre-product-affine-transition` | 1012 | none |
-| `lem-weil-pbc-finite-gl-dim-regular-local` | 1012 | none |
-| `lem-weil-pbc-finite-length-module-simple-filtration` | 1012 | none |
-| `lem-weil-pbc-finite-module-localization-zero-annihilator` | 1012 | none |
 | `lem-weil-pbc-finite-open-cover-degree-sum` | 1012 | none |
 | `lem-weil-pbc-finite-over-complete-local-product` | 1012 | none |
 | `lem-weil-pbc-finite-projective-prime-local-free` | 1012 | none |
@@ -651,7 +647,7 @@
 | `lem-pc-finite-linear-avoidance` | - | none |
 | `lem-pc-linear-pair-graded-finite` | - | none |
 
-## Stage 2: nodes to state (216)
+## Stage 2: nodes to state (218)
 
 | node | distance to Mathlib | kind |
 |---|---|---|
@@ -741,7 +737,9 @@
 | `lem-weil-pbc-finite-free-resolution-noetherian` | 1 | state |
 | `lem-weil-pbc-finite-galois-receiving-separable-extensions` | 1 | state |
 | `lem-weil-pbc-finite-geometric-point-lift` | 1 | state |
+| `lem-weil-pbc-finite-length-module-simple-filtration` | 1 | state |
 | `lem-weil-pbc-finite-module-complete-over-complete-noetherian` | 1 | state |
+| `lem-weil-pbc-finite-module-localization-zero-annihilator` | 1 | state |
 | `lem-weil-pbc-finite-over-complete-ring` | 1 | state |
 | `lem-weil-pbc-finite-projective-standard-free-cover` | 1 | state |
 | `lem-weil-pbc-finite-purely-inseparable-scalar-descent` | 1 | state |
@@ -872,7 +870,7 @@
 | `lem-weil-pbc-p1-field-dimension-one` | 4 | state |
 | `lem-weil-pbc-projective-space-zero-isomorphism` | 4 | state |
 
-Not open yet: 656 nodes that wait for stage 1, 502 nodes that wait for a statement dependency.
+Not open yet: 652 nodes that wait for stage 1, 504 nodes that wait for a statement dependency.
 
 ## Stage 3: modules to prove (0)
 
