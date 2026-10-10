@@ -1,0 +1,85 @@
+{
+ "id": "lem-weil-pbc-presentation-split-conormal-smooth",
+ "kind": "statement",
+ "title": "A presentation whose conormal map is split injective gives a smooth algebra",
+ "statement": "Let $R$ be a commutative ring, $n\\ge0$, $P=R[x_1,\\dots,x_n]$ the polynomial ring [def-weil-pbc-mv-polynomial-ring], $S$ a commutative $R$-algebra and $\\alpha:P\\to S$ a surjective homomorphism of $R$-algebras whose kernel $I$ is a finitely generated ideal of $P$. Then $I/I^2$ is an $S=P/I$-module, and the map $\\mathrm d_\\alpha:I/I^2\\to S\\otimes_P\\Omega_{P/R}$, $g\\bmod I^2\\mapsto1\\otimes\\mathrm dg$ ($\\Omega_{P/R}$ and $\\mathrm d$ as in [def-weil-pbc-kahler-differentials], $S\\otimes_P-$ the base change along $\\alpha$ [def-weil-module-base-change]), is well defined and $S$-linear. If $\\mathrm d_\\alpha$ has an $S$-linear left inverse, i.e. there is an $S$-linear map $\\lambda:S\\otimes_P\\Omega_{P/R}\\to I/I^2$ with $\\lambda\\circ\\mathrm d_\\alpha=\\mathrm{id}_{I/I^2}$, then $S$ is a smooth $R$-algebra [def-weil-pbc-smooth-ring-map].",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Algebra, the paragraph after Definition Tag 00T2 (definition-smooth, line 37084), lines 37107-37110: 'Conversely, if R -> S is of finite presentation and we have a surjection alpha : R[x_1, ..., x_n] -> S with kernel I such that the displayed arrow is a split injection, then R -> S is smooth' (the displayed arrow is I/I^2 -> Omega_{R[x_1..x_n]/R} (x) S). Mathlib tags the declaration it matches with Stacks 031I (lemma-characterize-formally-smooth-again). Tags 00T2 and 031I verified in stacks-project/tags/tags."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-mv-polynomial-ring",
+  "def-weil-pbc-kahler-differentials",
+  "def-weil-module-base-change",
+  "def-weil-pbc-smooth-ring-map"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "quotient of polynomial ring is smooth if the conormal map I/I^2 to S tensor Kaehler differentials is split injective",
+   "results": "Algebra.FormallySmooth.iff_split_injection, Algebra.FormallySmooth.iff_split_surjection, Algebra.FormallySmooth.of_split, Algebra.Extension.formallySmooth_iff_split_injection (Mathlib.RingTheory.Smooth.Basic), Algebra.FormallySmooth.polynomial, Algebra.FormallySmooth.iff_injective_lTensor_residueField (Mathlib.RingTheory.Smooth.Local), RingHom.Smooth",
+   "date": "2026-10-10",
+   "verdict": "match: Algebra.FormallySmooth.iff_split_injection for the formal smoothness, with Algebra.Smooth / Algebra.FinitePresentation for the rest"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "presentation of an algebra by a polynomial ring; if the map from conormal module I/I^2 to differentials has a left inverse, the algebra is formally smooth",
+   "results": "Algebra.FormallySmooth.iff_split_injection, Algebra.Smooth.formallySmooth, Algebra.Extension.formallySmooth_iff_split_injection, Algebra.FormallySmooth.of_split, Algebra.smooth_iff (Smooth <-> FormallySmooth and FinitePresentation) (Mathlib.RingTheory.Smooth.Basic)",
+   "date": "2026-10-10",
+   "verdict": "match (same declarations)"
+  },
+  {
+   "tool": "loogle",
+   "query": "Algebra.FormallySmooth, KaehlerDifferential.kerCotangentToTensor",
+   "results": "Algebra.FormallySmooth.kerCotangentToTensor_injective_iff, Algebra.FormallySmooth.iff_split_injection (Mathlib.RingTheory.Smooth.Basic)",
+   "date": "2026-10-10",
+   "verdict": "match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rn 'iff_split_injection' Mathlib/RingTheory; sed -n 270,340p and 530,560p Mathlib/RingTheory/Smooth/Basic.lean; sed -n 770,792p Mathlib/RingTheory/Kaehler/Basic.lean; sed -n 40,50p Mathlib/RingTheory/FinitePresentation.lean; grep -n FormallySmooth.*MvPolynomial Mathlib/RingTheory/Smooth/Basic.lean",
+   "results": "Smooth/Basic.lean:291 theorem Algebra.FormallySmooth.iff_split_injection [FormallySmooth R P] (hf : Surjective (algebraMap P A)) : FormallySmooth R A <-> exists l, l o kerCotangentToTensor R P A = id (l P-linear); Smooth/Basic.lean:112 instance instFormallySmoothMvPolynomial; Smooth/Basic.lean:540 class Algebra.Smooth (formallySmooth, finitePresentation; mk_iff Algebra.smooth_iff); Kaehler/Basic.lean:776 def KaehlerDifferential.kerCotangentToTensor : (ker (algebraMap A B)).Cotangent ->[A] B (x)[A] Omega[A/R], value 1 (x) D x (line 789); FinitePresentation.lean:44 class Algebra.FinitePresentation (exists n and f : MvPolynomial (Fin n) R ->a[R] A surjective with FG kernel)",
+   "date": "2026-10-10",
+   "verdict": "match"
+  },
+  {
+   "tool": "local_search",
+   "query": "Algebra.FormallySmooth.iff_split_injection (project root ~/weil-conjectures-slopmaster2)",
+   "results": "found in .lake/packages/mathlib/Mathlib/RingTheory/Smooth/Basic.lean (index: unavailable, but the name was returned)",
+   "date": "2026-10-10",
+   "verdict": "match"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "Algebra.FormallySmooth.iff_split_injection",
+  "file": "Mathlib/RingTheory/Smooth/Basic.lean",
+  "line": 291,
+  "how": "one declaration per clause: formal smoothness is (Algebra.FormallySmooth.iff_split_injection hα).mpr ⟨λ.restrictScalars P, h⟩ (Smooth/Basic.lean line 291) with P = MvPolynomial (Fin n) R, formally smooth by the instance instFormallySmoothMvPolynomial (Smooth/Basic.lean line 112), its map KaehlerDifferential.kerCotangentToTensor R P S (Kaehler/Basic.lean line 776, value 1 ⊗ D x by line 789) being d_alpha and an S-linear left inverse being in particular P-linear; finite presentation is the constructor of Algebra.FinitePresentation (RingTheory/FinitePresentation.lean line 44) applied to ⟨n, α, surjective, ker FG⟩; smoothness is the constructor of Algebra.Smooth (Smooth/Basic.lean line 540) from the two, Algebra.Smooth being the Mathlib match of [def-weil-pbc-smooth-ring-map]"
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-strictly-standard-localization-smooth",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lead_note": "Composed leaf accepted by L (2026-10-10): Algebra.FormallySmooth.iff_split_injection (Smooth/Basic.lean:291, checked with sed) with P = MvPolynomial (formally smooth by the instance at :112) gives formal smoothness from the split conormal map kerCotangentToTensor; finite presentation from the presentation; Algebra.Smooth from both (:540).",
+ "reviewed": "pass (L, 2026-10-10): leaf, declarations checked by sed; statement is the one-line specialization of the split-injection criterion to a polynomial presentation."
+}
