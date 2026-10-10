@@ -26,9 +26,73 @@
   "def-pc-fibre-product",
   "def-weil-pbc-fpqc-covering"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "By the fibre-product point description [lem-weil-pbc-fibre-product-points], the compatibility equalities imply that the union $W=$\\bigcup_i g_i(W_i)$ is a well-defined subset of $S$ and that $g_i^{-1}(W)=W_i$ for every $i$; uniqueness of such a subset follows from the fpqc family being jointly surjective.",
+   "uses": [
+    "lem-weil-pbc-fibre-product-points",
+    "def-weil-pbc-fpqc-covering"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/descent.tex",
+    "place": "Lemma Tag 03N0 proof, first paragraph, using Descent Lemma Tag 02KI"
+   }
+  },
+  {
+   "text": "Openness of $W$ is local on the target, so fix an affine open $U$ and replace the family and the opens by their restrictions over $U$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/descent.tex",
+    "place": "Lemma Tag 03N0 proof, second paragraph: work Zariski locally on the base"
+   }
+  },
+  {
+   "text": "The affine fpqc refinement statement [lem-weil-pbc-fpqc-affine-standard-refinement] supplies a finite standard fpqc family refining the restricted family. Pulling back the equality $g_i^{-1}(W)=W_i$ along the refinement gives an open inverse image in each refinement member.",
+   "uses": [
+    "lem-weil-pbc-fpqc-affine-standard-refinement"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/descent.tex",
+    "place": "Lemma Tag 03N0 proof, affine reduction and choice of a standard fpqc covering refining the given family"
+   }
+  },
+  {
+   "text": "Apply the standard-fpqc quotient-topology statement [lem-weil-pbc-standard-fpqc-quotient-topology] to conclude that $W$ is open on the affine neighborhood $U$. Since this holds on every affine open $U$, $W$ is open in $S$ and hence defines an open subscheme.",
+   "uses": [
+    "lem-weil-pbc-standard-fpqc-quotient-topology"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/descent.tex",
+    "place": "Lemma Tag 03N0 proof, final paragraph, applying Morphisms Lemma Tag 02JY"
+   }
+  },
+  {
+   "text": "The descended open subscheme is unique because its underlying open subset is uniquely determined by the equalities $g_i^{-1}(W)=W_i$, and an open subscheme is determined by its open subset with the restricted structure sheaf.",
+   "uses": [
+    "def-weil-pbc-fpqc-covering"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/descent.tex",
+    "place": "Lemma Tag 03N0 statement and first proof paragraph"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-fibre-product-points",
+  "def-weil-pbc-fpqc-covering",
+  "lem-weil-pbc-fpqc-affine-standard-refinement",
+  "lem-weil-pbc-standard-fpqc-quotient-topology"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/descent.tex",
+  "place": "Lemma Tag 03N0 (descent-lemma-open-fpqc-covering), proof"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -60,10 +124,26 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-weil-pbc-etale-open-fpqc-descent",
   "by": "worker",
   "date": "2026-10-10"
+ },
+ "split_report": {
+  "date": "2026-10-11",
+  "item": "lem-weil-pbc-open-subscheme-fpqc-descent",
+  "worker": "stage1",
+  "summary": "Split Tag 03N0 into set-theoretic descent, affine-local reduction, finite standard fpqc refinement, quotient-topology openness, and uniqueness. Reused the existing fibre-product-points leaf and added two statement-only dependencies for the affine refinement and quotient-topology ingredients.",
+  "blueprint": "Realizes the Tag 09XN proof sentence that equal opens on T_i\\times_S T_j\\times_S V descend to a unique open of V by Tag 03N0; the steps follow the proof of Tag 03N0 in descent.tex.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-osd1819",
+  "group": "H1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-osd1819 (reviewer sub-agent of L); spot-checked: Steps 1-5 against Tag 03N0: set-theoretic descent via fibre-product points (pr_0^{-1}W_i=pr_1^{-1}W_j gives g_i^{-1}(W)=W_i), affine reduction, refinement node true (flat + images cover U => R->prod A_j faithfully flat), f_j^{-1}(W)=V_j cap W_{a(j)} open, quotient-topology node = Tag 02JY on Spec(prod A_j); no cycle: etale-open-fpqc-descent and etale-sections-fpqc-descent depend on the item, not conversely; grep Submersive|isQuotientMap in Mathlib/AlgebraicGeometry/Morphisms: only one-morphism Flat.isQuotientMap_of_surjective (Flat.lean:124), family version needs the coproduct identification, kept as statement node; no repairs"
  }
 }
