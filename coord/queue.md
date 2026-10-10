@@ -2,7 +2,7 @@
 
 857 items; claim with `tools/claim.py next <group> [--stage N]`.
 
-## Stage 1: nodes to split (660)
+## Stage 1: nodes to split (659)
 
 | node | distance to a target | Lean state on the done branch |
 |---|---|---|
@@ -14,7 +14,6 @@
 | `lem-weil-pbc-site-plus-of-separated-is-sheaf` | 1011 | none |
 | `lem-weil-pbc-small-etale-representable-presheaf-sheaf` | 1011 | none |
 | `def-weil-pbc-ample-invertible-module` | 1012 | none |
-| `def-weil-pbc-complete-intersection-over-field` | 1012 | none |
 | `def-weil-pbc-constant-group-scheme` | 1012 | none |
 | `def-weil-pbc-fibre-degree-bound` | 1012 | none |
 | `def-weil-pbc-finite-global-dimension` | 1012 | none |
@@ -667,7 +666,7 @@
 | `lem-pc-finite-linear-avoidance` | - | none |
 | `lem-pc-linear-pair-graded-finite` | - | none |
 
-## Stage 2: nodes to state (197)
+## Stage 2: nodes to state (198)
 
 | node | distance to Mathlib | kind |
 |---|---|---|
@@ -675,6 +674,7 @@
 | `def-pc-kflat-complex` | 1 | state |
 | `def-sbc-first-order-thickening` | 1 | state |
 | `def-weil-pbc-associated-module` | 1 | state |
+| `def-weil-pbc-complete-intersection-over-field` | 1 | state |
 | `def-weil-pbc-essentially-smooth-ring-map` | 1 | state |
 | `def-weil-pbc-g-ring` | 1 | state |
 | `def-weil-pbc-generating-sections` | 1 | state |
@@ -869,7 +869,7 @@
 | `lem-weil-pbc-p1-field-dimension-one` | 4 | state |
 | `lem-weil-pbc-projective-space-zero-isomorphism` | 4 | state |
 
-Not open yet: 672 nodes that wait for stage 1, 489 nodes that wait for a statement dependency.
+Not open yet: 671 nodes that wait for stage 1, 489 nodes that wait for a statement dependency.
 
 ## Stage 3: modules to prove (0)
 
