@@ -15,17 +15,45 @@
  "title": "Prime chains in a filtered ring colimit occur at one stage",
  "chapter": "sec-curve-estimates",
  "unit": "sk-thm-br",
- "statement": "Let S be a filtered colimit of rings R_i. Every finite strictly increasing chain of prime ideals in S contracts, for some sufficiently large index i, to a strictly increasing chain of prime ideals in R_i. Consequently dim S <= sup_i dim R_i, for Krull dimension [def-weil-pbc-krull-dimension-ring].",
+ "statement": "Let $I$ be a small filtered category [def-weil-pbc-category-colimit], let $R:I\\to\\mathrm{CRing}$ be a diagram of commutative rings, and let $S=\\varinjlim_I R$ be its colimit, with coprojections $\\iota_i:R(i)\\to S$. For every finite strictly increasing chain $\\mathfrak p_0\\subsetneq\\cdots\\subsetneq\\mathfrak p_n$ of prime ideals in $S$ there is an object $i$ of $I$ such that the contractions $\\iota_i^{-1}(\\mathfrak p_0)\\subsetneq\\cdots\\subsetneq\\iota_i^{-1}(\\mathfrak p_n)$ form a strictly increasing chain of prime ideals in $R(i)$. Consequently $\\dim S\\leq\\sup_{i\\in I}\\dim R(i)$, for Krull dimension [def-weil-pbc-krull-dimension-ring].",
  "source": {
   "document": "literature/stacks-project/more-algebra.tex",
   "place": "Lemma Tag 06LK, proof: contraction of a finite prime chain in R^{sh}=colim R_i to a sufficiently large étale stage"
  },
  "stmt_deps": [
+  "def-weil-pbc-category-colimit",
   "def-weil-pbc-krull-dimension-ring"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Let $\\mathfrak p_0\\subsetneq\\cdots\\subsetneq\\mathfrak p_n$ be a finite chain of primes in $S$. For each $j<n$ choose $x_j\\in\\mathfrak p_{j+1}\\setminus\\mathfrak p_j$. By [lem-pc-filtered-colimit-commrings-elementwise], each $x_j$ is represented by an element at some stage. Filteredness gives one stage $R_i$ receiving all these finitely many stages. The contractions $\\mathfrak p_j\\cap R_i:=\\iota_i^{-1}(\\mathfrak p_j)$ are prime (preimages of primes under a ring map) and form an increasing chain, and the chosen representative of $x_j$ lies in $\\mathfrak p_{j+1}\\cap R_i$ but not in $\\mathfrak p_j\\cap R_i$; hence the chain is strictly increasing at $R_i$.",
+   "uses": [
+    "lem-pc-filtered-colimit-commrings-elementwise"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Lemma Tag 06LK, proof of the converse inequality: contraction of a finite prime chain in a directed colimit to a sufficiently large stage"
+   }
+  },
+  {
+   "text": "Every finite chain in $S$ therefore has length at most $\\dim R_i$ for some stage $i$, and so at most $\\sup_i\\dim R_i$. Taking the supremum over all finite prime chains gives $\\dim S\\leq\\sup_i\\dim R_i$ by the definition of Krull dimension [def-weil-pbc-krull-dimension-ring].",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Lemma Tag 06LK, conclusion of the converse inequality"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-filtered-colimit-commrings-elementwise"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Lemma Tag 06LK (lemma-henselization-dimension), filtered-colimit contraction argument"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -50,10 +78,25 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-sc-strict-henselization-dimension",
   "by": "worker",
   "date": "2026-10-10"
+ },
+ "split_report": {
+  "date": "2026-10-11",
+  "item": "lem-sc-filtered-colimit-prime-chain-dimension",
+  "worker": "stage1",
+  "summary": "Expanded the Tag 06LK filtered-colimit argument into the finite-chain contraction step and the resulting Krull-dimension bound. The existing Mathlib-backed elementwise filtered-colimit node supplies representatives for the finitely many separating elements; filteredness and the dimension supremum are then used directly.",
+  "blueprint": "The proof clause 'the contraction of a finite prime chain to one etale stage in the upper-bound argument' in lem-sc-brauer-zero, via lem-sc-strict-henselization-dimension."
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-fcp2236",
+  "group": "J1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-fcp2236 (reviewer sub-agent of L); spot-checked: Item vs Tag 06LK converse paragraph and vs M1 lem-sc-strict-henselization-dimension step 2 (needs exactly: some stage where contractions of a finite chain are strictly increasing; then lies in q and passes to S_q): matches. Step 1 vs lem-pc-filtered-colimit-commrings-elementwise (mathlib leaf, clause 1 representatives): correct; preimage of prime is prime is elementary, so the Spec-colimit leaves (lem-weil-pbc-spec-colimit-limit, lem-weil-pbc-spec-small-colimit-limit) are not needed (C1 ok). Class (b): grep of colimit nodes mentioning primes/dimension finds no node stating chain contraction or the dimension bound. FIX more, RETURN less: (1) B3/E: the second reading's statement said 'for some object i receiving maps from the finitely many stages used below', referring to the proof; restated self-contained with coprojections iota_i and 'there is an object i such that iota_i^{-1}(p_0) strictly in ... iota_i^{-1}(p_n)'; step 1 defines the contraction notation. (2) stmt_deps listed lem-pc-filtered-colimit-commrings-elementwise, which the statement does not use; removed (kept in proof_deps).; 1 file(s) fixed by the reviewer"
  }
 }
