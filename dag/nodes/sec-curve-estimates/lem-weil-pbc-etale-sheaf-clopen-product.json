@@ -23,39 +23,123 @@
   "def-weil-pbc-abelian-etale-sheaves",
   "def-weil-pbc-inverse-image"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "For an object U \\to C of C_Et put U_i = U x_C C_i. By [lem-weil-pbc-scheme-coproduct-family] the U_i are pairwise disjoint open and closed subschemes covering U, so {U_i \\to U}_i is a covering of C_Et and U_i x_U U_j is empty for i != j. The equalizer sheaf condition in [def-weil-pbc-abelian-etale-sheaves], together with F(empty)=0 obtained from the empty covering of the empty scheme, therefore gives a natural isomorphism F(U) ~= product_i F(U_i).",
+   "uses": [
+    "lem-weil-pbc-scheme-coproduct-family",
+    "def-weil-pbc-abelian-etale-sheaves"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Lemma 0A5B proof, first paragraph, finite disjoint-union decomposition"
+   }
+  },
+  {
+   "text": "For each i, the localized site C_Et/C_i is equivalent to (C_i)_Et by [lem-weil-pbc-etale-site-localization-open]. The restriction theorem [lem-weil-pbc-etale-inverse-image-restriction] identifies the inverse-image sheaf iota_i^{-1}F evaluated on U_i with F(U_i), naturally in U and F. Thus the preceding decomposition identifies F(U) with product_i (iota_i^{-1}F)(U_i).",
+   "uses": [
+    "lem-weil-pbc-etale-site-localization-open",
+    "lem-weil-pbc-etale-inverse-image-restriction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Section 00XZ, localization of the etale site and inverse-image restriction"
+   }
+  },
+  {
+   "text": "Conversely, for a family (G_i)_i with G_i in Ab((C_i)_Et), define G on C_Et by G(U)=product_i G_i(U x_C C_i), with restriction maps induced by base change. The decomposition in step 1 shows that G satisfies the sheaf equalizer condition. The same componentwise formula gives natural isomorphisms from each G_i to the restriction of G and from F to the sheaf reconstructed from its restrictions; hence restriction and this construction are quasi-inverse functors.",
+   "uses": [
+    "lem-weil-pbc-scheme-coproduct-family",
+    "def-weil-pbc-abelian-etale-sheaves"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Lemma 0A5B proof, first paragraph, finite-product assembly"
+   }
+  },
+  {
+   "text": "A morphism between two sheaves is determined by its components on the U_i because the isomorphism of step 1 is natural; conversely, a family of component morphisms defines a morphism by the product formula. Taking U=C in step 2 gives F(C) ~= product_i (iota_i^{-1}F)(C_i), which is the asserted global-sections identification.",
+   "uses": [
+    "lem-weil-pbc-etale-inverse-image-restriction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Lemma 0A5B proof, first paragraph, finite-product assembly and final object"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-scheme-coproduct-family",
+  "def-weil-pbc-abelian-etale-sheaves",
+  "lem-weil-pbc-etale-site-localization-open",
+  "lem-weil-pbc-etale-inverse-image-restriction"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "first paragraph of the proof of Lemma 0A5B (etale-cohomology-lemma-constant-smooth-statements), finite-product assembly"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
-   "query": "category of sheaves on a finite disjoint union is the product of the categories of sheaves on the components",
-   "results": "No etale-site sheaf category decomposition; only generic coproduct presheaf isomorphisms",
-   "date": "2026-10-10",
+   "query": "category of sheaves on a finite disjoint union is the product of categories of sheaves on components",
+   "results": "No etale-site sheaf category decomposition",
+   "date": "2026-10-11",
    "verdict": "no match"
   },
   {
    "tool": "leanfinder",
-   "query": "sheaf category on a finite disjoint union of schemes decomposes as a product",
-   "results": "No declaration for small etale sheaf categories on scheme coproducts",
-   "date": "2026-10-10",
+   "query": "sheaf category finite coproduct schemes product",
+   "results": "No declaration for etale sheaf-category decomposition",
+   "date": "2026-10-11",
    "verdict": "no match"
   },
   {
    "tool": "grep",
-   "query": "rg -n -i 'sheaf.*finite.*coproduct|etale.*site.*product|coprodPresheafObjIso' Mathlib/CategoryTheory Mathlib/AlgebraicGeometry",
-   "results": "Only generic coproduct presheaf and scheme coproduct declarations; no etale sheaf-category decomposition",
-   "date": "2026-10-10",
+   "query": "rg -n -i 'sheaf.*finite.*coproduct|etale.*site.*product' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib",
+   "results": "No matching theorem",
+   "date": "2026-10-11",
    "verdict": "no match"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-weil-pbc-finite-coproduct-cohomology-assembly",
   "by": "worker",
   "date": "2026-10-10"
  },
  "chapter": "sec-curve-estimates",
- "unit": "sk-prop-cd"
+ "unit": "sk-prop-cd",
+ "split_report": {
+  "date": "2026-10-11",
+  "item": "lem-weil-pbc-etale-sheaf-clopen-product",
+  "worker": "stage1",
+  "summary": "Removed the duplicative gluing node and expanded the proof into objectwise decomposition, inverse-image restriction, explicit inverse sheaf construction, componentwise morphisms, and evaluation at C. Cites the existing abelian etale inverse-image restriction node lem-weil-pbc-etale-inverse-image-restriction and the site-localization node.",
+  "blueprint": {
+   "statement": "proof, second paragraph: the etale site of the finite disjoint union is the finite product of the etale sites of its open-and-closed summands",
+   "steps": {
+    "1": "finite clopen decomposition of every etale object and sheaf equalizer",
+    "2": "identify inverse-image sheaves with restrictions",
+    "3": "construct inverse functor and verify quasi-inverse",
+    "4": "componentwise morphisms and global sections"
+   }
+  },
+  "tool_uses": []
+ },
+ "tool_uses": [
+  "lem-weil-pbc-etale-inverse-image-restriction"
+ ],
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-ecp1658",
+  "group": "G1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-ecp1658 (reviewer sub-agent of L); spot-checked: Repaired re-push after the 16:34 return; all three points repaired: (1) the gluing node is gone and the steps now carry the argument (a)-(d) of the return; (2) step 2 cites lem-weil-pbc-etale-inverse-image-restriction, whose clause 1 states j^{-1}G ~= G|_Y with G|_Y(V)=G(V->X), naturally in G, exactly the identification (iota_i^{-1}F)(U_i)=F(U_i) needed (iota_i is an open immersion hence etale), and step 4 cites it for U=C; (3) the report no longer claims a created change. Source: Stacks 0A5B (etale-cohomology-lemma-constant-smooth-statements) proof, first paragraph, finite disjoint union reduction; the statement is the standard sheaf decomposition. Step 1: lem-weil-pbc-scheme-coproduct-family gives disjoint clopen images covering C, pulled back to U they give a jointly surjective open covering with empty pairwise overlaps; the equalizer of def-weil-pbc-abelian-etale-sheaves with F(empty)=0 (empty covering) gives F(U)=prod F(U_i). Step 3: products of equalizers are equalizers, restriction of G to C_i is G_i since V x_C C_j is empty for j != i and G_j(empty)=0. Small cases checked: |I|=1 (identity), I empty (C empty, Ab(C_Et) zero category = empty product). lem-weil-pbc-etale-inverse-image-restriction (unit sk-thm-p1) is used as a generic black-box tool (C8), added via --tool-uses. FIX: dag/nodes/sec-curve-estimates/lem-weil-pbc-etale-sheaf-clopen-product.json: statement: restored the committed TeX statement (the delivery had stripped the TeX to plain text without naming a change, E7/B4; mathematics unchanged); stmt_deps: restored to the three nodes the statement cites (the two added ones are cited only by the proof and are in proof_deps); split_report.summary: corrected 'Added the missing ... restriction statement' to 'Cites the existing ... node' (no node was added). Start Sat Oct 10 04:57:59 PM UTC 2026, end Sat Oct 10 04:58:37 PM UTC 2026.; 1 file(s) fixed by the reviewer"
+ }
 }
