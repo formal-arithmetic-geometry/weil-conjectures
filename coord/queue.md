@@ -1,8 +1,8 @@
 # Work queue
 
-931 items; claim with `tools/claim.py next <group> [--stage N]`.
+932 items; claim with `tools/claim.py next <group> [--stage N]`.
 
-## Stage 1: nodes to split (233)
+## Stage 1: nodes to split (231)
 
 | node | distance to a target | Lean state on the done branch |
 |---|---|---|
@@ -12,7 +12,6 @@
 | `lem-sc-krull-akizuki-noetherian` | 2017 | none |
 | `lem-pc-derived-functor-truncation-stabilization` | 3013 | none |
 | `lem-pc-derived-limit-milnor-sequence` | 3013 | none |
-| `lem-pc-essentially-constant-pro-hom-colimit` | 3013 | none |
 | `lem-pc-left-localization-hom-colimit` | 3013 | none |
 | `lem-pc-qcoh-truncation-derived-limit` | 3013 | none |
 | `lem-pc-stalk-tensor-complex` | 3013 | none |
@@ -40,18 +39,18 @@
 | `lem-sc-hom-etale-locus-translation` | 4009 | none |
 | `lem-sc-positive-ample-hilbert-degree` | 4009 | none |
 | `lem-sc-strict-henselization-dimension` | 4009 | none |
-| `lem-sc-strict-henselization-noetherian` | 4009 | none |
 | `lem-weil-pbc-gm-pullback-strict-henselization` | 4009 | none |
 | `lem-weil-pbc-unrestricted-strict-henselization-stalk` | 4009 | none |
 | `lem-pc-universal-adjoint-section` | 4010 | rests_on_sorry |
 | `lem-sc-product-tangent-space-direct-sum` | 4010 | none |
 | `lem-sc-rational-unramified-cotangent-criterion` | 4010 | none |
+| `lem-sc-strict-henselization-completion-noetherian` | 4010 | none |
 | `lem-sc-strict-henselization-cotangent-dimension` | 4010 | none |
+| `lem-sc-strict-henselization-faithfully-flat` | 4010 | none |
 | `lem-pc-hilb-containment-locus` | 4011 | none |
 | `lem-pc-derived-filtered-free-resolution` | 4012 | none |
 | `lem-pc-affine-tilde-kflat` | 4013 | none |
 | `lem-pc-flat-filtered-complex-comparison` | 5009 | none |
-| `lem-pc-flat-tensor-complex-cohom` | 5009 | none |
 | `lem-sc-hilbert-polynomial` | 5009 | none |
 | `lem-pc-derived-direct-image-composition` | 5010 | none |
 | `lem-pc-fppf-affine-site-topos-equivalence` | 5010 | none |
@@ -71,7 +70,6 @@
 | `thm-sp-spectral-object-yields` | 6006 | none |
 | `pqf-def-coherent` | 6007 | none |
 | `pqf-def-cohomology` | 6007 | none |
-| `pqf-lem-pushforward-qcoh` | 6008 | none |
 | `lem-sc-cech-spectral` | 6009 | sorry_here |
 | `pqf-lem-associated-sections-localize` | 6009 | none |
 | `pqf-lem-coherent-ft-locnoeth` | 6009 | none |
@@ -240,7 +238,7 @@
 | `lem-pur-rhom-well-defined` | - | none |
 | `lem-zl-noether-normalization-dimension` | - | none |
 
-## Stage 2: nodes to state (698)
+## Stage 2: nodes to state (701)
 
 | node | distance to Mathlib | kind |
 |---|---|---|
@@ -328,8 +326,10 @@
 | `lem-pc-derived-acyclic-resolution` | 1 | state |
 | `lem-pc-derived-adjoint-functors` | 1 | state |
 | `lem-pc-derived-module-direct-sums` | 1 | state |
+| `lem-pc-essentially-constant-pro-hom-colimit` | 1 | state |
 | `lem-pc-field-extension-fpqc-cover` | 1 | state |
 | `lem-pc-flat-pullback-effective-cartier-ideal` | 1 | state |
+| `lem-pc-flat-tensor-complex-cohom` | 1 | state |
 | `lem-pc-fpqc-descend-closed-immersion` | 1 | state |
 | `lem-pc-h0-geom-connected` | 1 | state |
 | `lem-pc-ideal-sheaf-comap-affine-extension` | 1 | state |
@@ -927,6 +927,7 @@
 | `lem-sc-smooth-regular` | 2 | state |
 | `lem-weil-pbc-finite-type-lift-nilpotent` | 2 | state |
 | `lem-weil-pbc-integral-closure-finite-fibre-part-localization` | 2 | state |
+| `pqf-lem-pushforward-qcoh` | 2 | state |
 | `thm-pd-spreading-out` | 2 | state |
 | `def-sc-effective-cartier-divisor` | 3 | state |
 | `def-sc-gm-torsor` | 3 | state |
@@ -943,7 +944,7 @@
 | `lem-weil-pbc-p1-field-dimension-one` | 4 | state |
 | `lem-weil-pbc-projective-space-zero-isomorphism` | 4 | state |
 
-Not open yet: 1380 nodes that wait for a statement dependency, 268 nodes that wait for stage 1.
+Not open yet: 1381 nodes that wait for a statement dependency, 266 nodes that wait for stage 1.
 
 ## Stage 3: modules to prove (0)
 
