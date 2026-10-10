@@ -107,7 +107,7 @@ lemma lowerStarComp_id_right_hom_app (t : X ⟶ Y) (M : Sheaf (Scheme.ProEt.topo
   ext V
   simp only [NatTrans.comp_app, ObjectProperty.FullSubcategory.comp_hom,
     lowerStarComp_hom_app_hom_app, lowerStarCongr_hom_app_hom_app,
-    lowerStar_obj_obj_map, lowerStarId_hom_app_hom_app]
+    lowerStar_obj_obj_map', lowerStarId_hom_app_hom_app]
   rw [MorphismProperty.Over.pullbackComp_id_right t (t ≫ 𝟙 Y) rfl]
   simp only [Iso.trans_hom, NatTrans.comp_app, Iso.symm_hom, Functor.leftUnitor_inv_app,
     Functor.isoWhiskerRight_hom, Functor.whiskerRight_app, Category.id_comp,

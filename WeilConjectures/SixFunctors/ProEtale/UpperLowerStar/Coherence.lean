@@ -70,7 +70,7 @@ section Components
 
 omit [Abelian A] [IsGrothendieckAbelian.{u + 1} A] in
 /-- The restriction maps of `g_* G` are those of `G` along the base changes. -/
-lemma lowerStar_obj_obj_map {Z W : Scheme.{u}} (g : Z ⟶ W) (G : Sheaf (ProEt.topology Z) A)
+lemma lowerStar_obj_obj_map' {Z W : Scheme.{u}} (g : Z ⟶ W) (G : Sheaf (ProEt.topology Z) A)
     {V V' : W.ProEtᵒᵖ} (φ : V ⟶ V') :
     ((g)_*[A].obj G).obj.map φ =
       G.obj.map ((MorphismProperty.Over.pullback @WeaklyEtale ⊤ g).map φ.unop).op :=
@@ -95,7 +95,7 @@ lemma lowerStarComp_assoc :
     Functor.isoWhiskerLeft_hom, Functor.whiskerLeft_app, Functor.isoWhiskerRight_hom,
     Functor.whiskerRight_app, Category.id_comp, ObjectProperty.FullSubcategory.comp_hom,
     lowerStarComp_hom_app_hom_app, lowerStarCongr_hom_app_hom_app, lowerStar_map_hom_app',
-    lowerStar_obj_obj_map, ← Functor.map_comp, ← op_comp]
+    lowerStar_obj_obj_map', ← Functor.map_comp, ← op_comp]
   congr 1
   apply Quiver.Hom.unop_inj
   apply MorphismProperty.Over.Hom.ext
@@ -300,7 +300,7 @@ lemma lowerStarUnit_app_comp_map_lowerStarFactor_inv {W : Scheme.{u}} {a : X ⟶
   simp only [lowerStarUnit, Iso.trans_inv, NatTrans.comp_app,
     ObjectProperty.FullSubcategory.comp_hom, lowerStarFactor_hom_app_hom_app,
     lowerStarFactor_inv_app_hom_app, lowerStarId_inv_app_hom_app, lowerStar_map_hom_app',
-    lowerStar_obj_obj_map, ← Functor.map_comp, ← op_comp, Category.assoc]
+    lowerStar_obj_obj_map', ← Functor.map_comp, ← op_comp, Category.assoc]
   congr 1
   apply Quiver.Hom.unop_inj
   apply MorphismProperty.Over.Hom.ext

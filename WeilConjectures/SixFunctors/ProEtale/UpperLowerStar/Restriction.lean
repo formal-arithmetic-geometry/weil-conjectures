@@ -29,7 +29,7 @@ section LowerStar
 variable {R S T : Scheme.{u}}
 
 set_option backward.isDefEq.respectTransparency.types false in
-lemma globalSectionsLowerStarIso_hom_app (g : S ⟶ R) (G : Sheaf (ProEt.topology S) A) :
+lemma globalSectionsLowerStarIso_hom_app' (g : S ⟶ R) (G : Sheaf (ProEt.topology S) A) :
     (globalSectionsLowerStarIso A g).hom.app G =
       (Sheaf.ΓNatIsoSheafSections _ _ (ProEt.isTerminalMkId R)).hom.app ((g)_*[A].obj G) ≫
         G.obj.map (Iso.inv (C := S.ProEt) (overPullbackObjMkIdIso g)).op ≫
@@ -44,8 +44,8 @@ lemma globalSectionsLowerStarIso_comp (h₁ : T ⟶ S) (h₂ : S ⟶ R)
         (globalSectionsLowerStarIso A (h₁ ≫ h₂)).hom.app G =
       (globalSectionsLowerStarIso A h₂).hom.app ((h₁)_*[A].obj G) ≫
         (globalSectionsLowerStarIso A h₁).hom.app G := by
-  rw [globalSectionsLowerStarIso_hom_app, globalSectionsLowerStarIso_hom_app,
-    globalSectionsLowerStarIso_hom_app]
+  rw [globalSectionsLowerStarIso_hom_app', globalSectionsLowerStarIso_hom_app',
+    globalSectionsLowerStarIso_hom_app']
   have := (Sheaf.ΓNatIsoSheafSections (ProEt.topology R) A (ProEt.isTerminalMkId R)).hom.naturality
     ((lowerStarComp A h₁ h₂).hom.app G)
   simp only [Category.assoc, Iso.inv_hom_id_app_assoc]
@@ -67,7 +67,7 @@ set_option backward.isDefEq.respectTransparency.types false in
 lemma globalSectionsLowerStarIso_id (G : Sheaf (ProEt.topology R) A) :
     (globalSectionsLowerStarIso A (𝟙 R)).hom.app G =
       (Sheaf.Γ _ A).map ((lowerStarId A R).hom.app G) := by
-  rw [globalSectionsLowerStarIso_hom_app]
+  rw [globalSectionsLowerStarIso_hom_app']
   have := (Sheaf.ΓNatIsoSheafSections (ProEt.topology R) A (ProEt.isTerminalMkId R)).hom.naturality
     ((lowerStarId A R).hom.app G)
   rw [← cancel_mono ((Sheaf.ΓNatIsoSheafSections (ProEt.topology R) A
