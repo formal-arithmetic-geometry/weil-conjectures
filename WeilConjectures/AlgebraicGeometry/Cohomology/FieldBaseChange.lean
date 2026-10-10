@@ -155,6 +155,73 @@ lemma sectionsEquiv_apply (m : Γ(M, W)) : sectionsEquiv hW M m =
       (homOfLE (top_le_fromSpec_preimage hW)).op (pullbackUnitApp hW.fromSpec M W m) :=
   rfl
 
+variable (K) in
+lemma top_le_openImm_preimage :
+    (⊤ : (Spec (tensorRing k K hW)).Opens) ≤ openImm k K hW ⁻¹ᵁ proj ⁻¹ᵁ W := by
+  rw [← opensRange_openImm k K hW, Scheme.Hom.preimage_opensRange]
+
+variable (K) in
+/-- The first step of `BaseChangeField.sectionsBaseChange`: sections of `p^* M` over `p⁻¹ W` are
+the global sections of the pullback to `Spec (Γ(X, W) ⊗[k] K)`. -/
+noncomputable def sectionsBaseChange₁ :
+    Γ((Modules.pullback (proj (k := k) (K := K))).obj M, proj ⁻¹ᵁ W) ≃+
+      Γ((Modules.pullback (openImm k K hW)).obj ((Modules.pullback proj).obj M), ⊤) := by
+  refine AddEquiv.ofBijective (({
+      toFun x := ((Modules.pullback (openImm k K hW)).obj
+          ((Modules.pullback proj).obj M)).presheaf.map
+        (homOfLE (top_le_openImm_preimage (k := k) K hW)).op
+          (pullbackUnitApp (openImm k K hW) _ (proj ⁻¹ᵁ W) x)
+      map_zero' := by rw [map_zero, map_zero]
+      map_add' _ _ := by rw [map_add, map_add] }) :
+        Γ((Modules.pullback (proj (k := k) (K := K))).obj M, proj ⁻¹ᵁ W) →+
+          Γ((Modules.pullback (openImm k K hW)).obj ((Modules.pullback proj).obj M), ⊤)) ?_
+  have h₁ := bijective_pullbackUnit_app_of_isOpenImmersion (openImm k K hW)
+    ((Modules.pullback proj).obj M) (opensRange_openImm k K hW).ge
+  have : IsIso (homOfLE (top_le_openImm_preimage (k := k) K hW)) := by
+    rw [show homOfLE (top_le_openImm_preimage (k := k) K hW) = eqToHom (by
+      rw [← opensRange_openImm k K hW, Scheme.Hom.preimage_opensRange]) from
+        Subsingleton.elim _ _]
+    infer_instance
+  exact (ConcreteCategory.bijective_of_isIso
+    (((Modules.pullback (openImm k K hW)).obj ((Modules.pullback proj).obj M)).presheaf.map
+      (homOfLE (top_le_openImm_preimage (k := k) K hW)).op)).comp h₁
+
+variable (K) in
+/-- **Sections of a pullback along a field extension over an affine open.** For an affine open
+`W` of `X`, the sections of `p^* M` over `p⁻¹ W` are the global sections of the pullback of
+`M|_W` along `Spec (Γ(X, W) ⊗[k] K) ⟶ Spec Γ(X, W)`. -/
+noncomputable def sectionsBaseChange :
+    Γ((Modules.pullback (proj (k := k) (K := K))).obj M, proj ⁻¹ᵁ W) ≃+
+      Γ((Modules.pullback (Spec.map (inclLeft k K hW))).obj
+        ((Modules.pullback hW.fromSpec).obj M), ⊤) :=
+  (sectionsBaseChange₁ K hW M).trans ((appLinearEquivOfIso (pullbackCompOfEq (openImm k K hW)
+    proj _ rfl M) ⊤).toAddEquiv.trans (appLinearEquivOfIso (pullbackCompOfEq
+      (Spec.map (inclLeft k K hW)) hW.fromSpec _ (openImm_fst k K hW).symm M).symm ⊤).toAddEquiv)
+
+lemma sectionsBaseChange_pullbackUnitApp (m : Γ(M, W)) :
+    sectionsBaseChange K hW M (pullbackUnitApp proj M W m) =
+      pullbackUnitApp (Spec.map (inclLeft k K hW)) _ ⊤ (sectionsEquiv hW M m) := by
+  have hV₂ : (⊤ : (Spec (tensorRing k K hW)).Opens) ≤ (openImm k K hW ≫ proj) ⁻¹ᵁ W :=
+    top_le_openImm_preimage (k := k) K hW
+  have hV₃ : (⊤ : (Spec (tensorRing k K hW)).Opens) ≤
+      Spec.map (inclLeft k K hW) ⁻¹ᵁ hW.fromSpec ⁻¹ᵁ W := by
+    rw [hW.fromSpec_preimage_self, Scheme.Hom.preimage_top]
+  have h₂ := pullbackCompOfEq_hom_app_map_pullbackUnit (openImm k K hW) proj _ rfl M m
+    (top_le_openImm_preimage (k := k) K hW) hV₂
+  have h₃ := pullbackCompOfEq_hom_app_map_pullbackUnit (Spec.map (inclLeft k K hW))
+    hW.fromSpec _ (openImm_fst k K hW).symm M m hV₃ hV₂
+  change ((pullbackCompOfEq (Spec.map (inclLeft k K hW)) hW.fromSpec _
+    (openImm_fst k K hW).symm M).inv).app ⊤ (((pullbackCompOfEq (openImm k K hW) proj _ rfl
+      M).hom).app ⊤ _) = _
+  erw [h₂, ← h₃]
+  rw [← ConcreteCategory.comp_apply]
+  erw [← Modules.Hom.comp_app, Iso.hom_inv_id, Modules.Hom.id_app, ConcreteCategory.id_apply]
+  have key := Hom.app_presheaf_map (pullbackUnit (Spec.map (inclLeft k K hW))
+    ((Modules.pullback hW.fromSpec).obj M)) (homOfLE (top_le_fromSpec_preimage hW))
+      (pullbackUnitApp hW.fromSpec M W m)
+  rw [pushforward_obj_presheaf_map] at key
+  exact key.symm
+
 end BaseChangeField
 
 end AlgebraicGeometry.Scheme
