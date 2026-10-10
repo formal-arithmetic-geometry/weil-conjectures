@@ -1,8 +1,8 @@
 # Work queue
 
-897 items; claim with `tools/claim.py next <group> [--stage N]`.
+900 items; claim with `tools/claim.py next <group> [--stage N]`.
 
-## Stage 1: nodes to split (661)
+## Stage 1: nodes to split (664)
 
 | node | distance to a target | Lean state on the done branch |
 |---|---|---|
@@ -23,7 +23,6 @@
 | `lem-weil-pbc-formal-systems-graded-vanishing` | 1012 | none |
 | `lem-weil-pbc-formal-systems-kernel-rees-finite` | 1012 | none |
 | `lem-weil-pbc-make-separably-generated` | 1012 | none |
-| `lem-weil-pbc-mittag-leffler-complex-limit-homology` | 1012 | none |
 | `lem-weil-pbc-ml-cohomology-powers-ideal` | 1012 | none |
 | `lem-weil-pbc-module-cohomology-fmap-basic-properties` | 1012 | none |
 | `lem-weil-pbc-module-cohomology-fmap-functorial` | 1012 | none |
@@ -93,6 +92,7 @@
 | `lem-weil-pbc-universal-thickening-affine-case` | 1012 | none |
 | `lem-weil-pbc-universal-thickening-open-pieces` | 1012 | none |
 | `lem-weil-pbc-zariski-cohomology-locally-zero` | 1012 | none |
+| `def-weil-pbc-essentially-constant-system` | 1013 | none |
 | `def-weil-pbc-japanese-domain` | 1013 | none |
 | `def-weil-pbc-nagata-ring` | 1013 | none |
 | `def-weil-pbc-relative-global-complete-intersection` | 1013 | none |
@@ -103,11 +103,13 @@
 | `lem-weil-pbc-cohen-ring-mod-pn-formally-smooth` | 1013 | none |
 | `lem-weil-pbc-cohen-rings-exist` | 1013 | none |
 | `lem-weil-pbc-coherent-finite-type-sub-kernel` | 1013 | none |
+| `lem-weil-pbc-cohomology-powers-ideal-application` | 1013 | none |
 | `lem-weil-pbc-conormal-module-principal-localization` | 1013 | none |
 | `lem-weil-pbc-degree-p-extension-regular` | 1013 | none |
 | `lem-weil-pbc-etale-cohomology-local-ring-colimit` | 1013 | none |
 | `lem-weil-pbc-etale-ring-map-quasi-finite` | 1013 | none |
 | `lem-weil-pbc-etale-splits-off-quasi-finite-part` | 1013 | none |
+| `lem-weil-pbc-exact-sequence-ml` | 1013 | none |
 | `lem-weil-pbc-fibre-degree-base-change` | 1013 | none |
 | `lem-weil-pbc-fibre-degree-bound-field-points` | 1013 | none |
 | `lem-weil-pbc-field-char-p-h1-cotangent-vanishing` | 1013 | none |
@@ -129,6 +131,7 @@
 | `lem-weil-pbc-jacobi-zariski-connecting-map-naturality` | 1013 | none |
 | `lem-weil-pbc-lift-to-injective-unique-up-to-homotopy` | 1013 | none |
 | `lem-weil-pbc-lqf-locally-finite-type` | 1013 | none |
+| `lem-weil-pbc-mittag-leffler-limit-exact` | 1013 | none |
 | `lem-weil-pbc-module-finite-type-image-extension` | 1013 | none |
 | `lem-weil-pbc-module-open-restriction-injectives` | 1013 | none |
 | `lem-weil-pbc-module-pushforward-injective-acyclic` | 1013 | none |
@@ -909,7 +912,7 @@
 | `lem-weil-pbc-p1-field-dimension-one` | 4 | state |
 | `lem-weil-pbc-projective-space-zero-isomorphism` | 4 | state |
 
-Not open yet: 673 nodes that wait for stage 1, 520 nodes that wait for a statement dependency.
+Not open yet: 676 nodes that wait for stage 1, 521 nodes that wait for a statement dependency.
 
 ## Stage 3: modules to prove (0)
 
