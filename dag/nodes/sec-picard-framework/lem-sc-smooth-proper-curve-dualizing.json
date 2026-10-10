@@ -24,9 +24,36 @@
   "def-pc-derived-direct-image",
   "def-sc-kahler-differentials"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Apply [lem-sc-smooth-proper-relative-dualizing-general] with $S=\\operatorname{Spec}k$, $X=C$, $f=g$, and $d=1$. The hypotheses match: $\\operatorname{Spec}k$ is Noetherian, and the given morphism is smooth and proper of pure relative dimension one. This gives $g^!\\mathcal O_{\\operatorname{Spec}k}\\cong\\Omega^1_{C/k}[1]$ since for $S=\\operatorname{Spec}k$ and $X=C$ the sheaf $\\Omega^1_{X/S}=\\Delta^*(\\mathcal I/\\mathcal I^2)$ of the cited node is by definition the sheaf $\\Omega^1_{C/k}$ of [def-sc-kahler-differentials].",
+   "uses": [
+    "lem-sc-smooth-proper-relative-dualizing-general"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/duality.tex",
+    "place": "Tag 0BRT, Lemma 48.15.7, specialization to $S=\\operatorname{Spec}k$ and $d=1$"
+   }
+  },
+  {
+   "text": "For $d=1$, the first exterior power is the module itself, so $\\Omega^1_{C/k}=\\bigwedge^1\\Omega^1_{C/k}$ by the defining property of the exterior algebra; the shift $[d]$ is therefore $[1]$. Rewriting the conclusion of Step 1 with these identities is exactly the displayed isomorphism.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/duality.tex",
+    "place": "Tag 0BRT, Lemma 48.15.7, the $d=1$ specialization"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sc-smooth-proper-relative-dualizing-general"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/duality.tex",
+  "place": "Tag 0BRT, Lemma 48.15.7"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -58,12 +85,28 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-sc-finite-duality-trace",
   "by": "worker",
   "date": "2026-10-10"
  },
  "chapter": "sec-picard-framework",
- "unit": "sk-thm-picard-duality"
+ "unit": "sk-thm-picard-duality",
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "lem-sc-smooth-proper-curve-dualizing",
+  "worker": "stage1",
+  "summary": "Split the curve statement as the d=1 specialization of a new broader smooth-proper relative duality statement. Step 1 applies the general theorem to Spec(k), and Step 2 performs the elementary identification of the first exterior power and the shift.",
+  "blueprint": "The steps realize the first proof step of lem-sc-finite-duality: identifying the canonical sheaf with relative differentials on a smooth proper curve, using the smooth-proper duality result of Tag 0BRT.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-spd",
+  "group": "M1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-spd (reviewer sub-agent of L); spot-checked: Source: Stacks Tag 0BRT = duality-lemma-smooth-proper (duality.tex l.3662): S Noetherian, f smooth proper of relative dimension d, a right adjoint of Rf_* on D_QCoh, iso wedge^d Omega_{X/S}[d] -> a(O_S) in D(O_X); the new node lem-sc-smooth-proper-relative-dualizing-general states exactly this, hypothesis by hypothesis, and the item is its S=Spec k, d=1 case. Step 1 is carried by the new node's statement (Spec k Noetherian; smooth of rel. dim 1 and proper are the item's hypotheses); Step 2 is wedge^1 E = E from def-weil-pbc-exterior-algebra, elementary. No cycle (new node cites only definitions). No Mathlib leaf; B10: slopmaster2 has only etale dualizing complexes, no coherent f^! declaration. Small cases: P^1_k gives O(-2)[1], consistent with Serre duality H^1(O(-2))=k; d=0 finite etale gives f^!O_S = O_X via the trace. FIX more, RETURN less (B3, three faults, repaired): dag/nodes/sec-picard-framework/lem-sc-smooth-proper-relative-dualizing-general.json: statement+stmt_deps: (1) Omega^1_{X/S} was cited to def-sc-kahler-differentials, which defines it only for a smooth curve over k: now defined inline as Delta^*(I/I^2) as in that node, with the affine description via def-weil-pbc-kahler-differentials and def-pc-base-change; (2) wedge^d of a sheaf had no definition: now defined affine-locally via def-weil-pbc-exterior-algebra; (3) 'Noetherian scheme' had no node: now quasi-compact [def-weil-pbc-quasi-compact-scheme] and locally Noetherian [pqf-def-locnoeth]; smooth of relative dimension d and proper cited inline. dag/nodes/sec-picard-framework/lem-sc-smooth-proper-curve-dualizing.json: proof step 1 text: the identification of Omega^1_{X/S} with Omega^1_{C/k} now says it is by definition of the cited nodes. Start Sat Oct 10 03:40:36 PM UTC 2026, end Sat Oct 10 03:42:05 PM UTC 2026.; 2 file(s) fixed by the reviewer"
+ }
 }

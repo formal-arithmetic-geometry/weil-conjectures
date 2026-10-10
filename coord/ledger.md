@@ -1839,3 +1839,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 15:40 L: merged deliver/G1/lem-sc-affine-cap-section-open (reviewer FIX; after a return; new nodes: 2)
 - 15:41 L: merged deliver/K1/lem-pc-affine-finite-type-algebra (reviewer PASS; first push; new nodes: 0)
 - 15:42 L: returned deliver/J1/lem-sc-point-tangent-separation-closed-immersion (reviewer RETURN: 1. D5/E (return point 1(b) not repaired): step 4: the 'small detail omitted' of Tag 0E8S is still not written. The step )
+- 15:42 L: merged deliver/M1/lem-sc-smooth-proper-curve-dualizing (reviewer FIX; first push; new nodes: 1)
