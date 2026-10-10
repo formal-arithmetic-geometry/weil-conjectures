@@ -10,5 +10,9 @@ lake exe mk_all --lib WeilConjectures --git --check || exit 1
 # Fetch build cache
 lake exe cache get
 
-# Verify everything builds.
+# Verify everything builds. Agent pods have a 4-CPU / 8 GiB limit but Lean sees all host cores;
+# without a cap the full build runs one Lean process per core and the container is OOM-killed
+# (exit 137), which kills the task: three Lean processes already reach ~7.5 GB of anonymous
+# memory on the heavier modules. Cap the parallelism unless the environment already sets it.
+export LEAN_NUM_THREADS="${LEAN_NUM_THREADS:-2}"
 lake build --wfail

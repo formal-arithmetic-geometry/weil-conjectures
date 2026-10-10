@@ -10,7 +10,7 @@ public import WeilConjectures.Mathlib.AlgebraicGeometry.Geometrically.Reduced
 public import WeilConjectures.Mathlib.Topology.Spectral.ConstructibleTopology
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.SmoothFiber
 public import WeilConjectures.AlgebraicGeometry.Morphisms.UniversalHomeomorphism.Algebra
-public import WeilConjectures.RingTheory.RelativeComponentConstructible
+public import WeilConjectures.RingTheory.RelativeComponentGeneralization
 public import Mathlib.AlgebraicGeometry.Morphisms.LocalFlatDescent
 public import Mathlib.FieldTheory.PurelyInseparable.PerfectClosure
 public import Mathlib.FieldTheory.IsAlgClosed.AlgebraicClosure
@@ -63,7 +63,7 @@ contains a point over `x`.
 
 universe u
 
-open CategoryTheory Limits Topology
+open CategoryTheory Limits Topology TensorProduct
 
 namespace AlgebraicGeometry
 
@@ -274,19 +274,48 @@ geometrically reduced fibres, and let `σ` be a section of `f`. The points `x` l
 connected component of `σ (f x)` in their fibre form a subset of `X` stable under
 generalization.
 
-The proof is still missing. It goes through the Noetherian case, via DVRs dominating
-specialisations (Krull–Akizuki) and
-`IsDiscreteValuationRing.exists_eq_algebraMap_of_isIdempotentElem`, together with the descent
-of flatness and of geometric reducedness of fibres along Noetherian approximation
-(`Algebra.FinitePresentation.exists_fg_subalgebra_with_section`, Stacks `04AI`) and the
-compatibility with base change (`preimage_setOf_mem_connectedComponentIn_preimage_singleton`,
-Stacks `055M`). -/
+Writing `f = Spec (A → B)` and `σ = Spec s`, this set is the relative component
+`PrimeSpectrum.relativeComponent s`, and we conclude by
+`PrimeSpectrum.stableUnderGeneralization_relativeComponent`. -/
 @[stacks 055Q]
 theorem stableUnderGeneralization_setOf_mem_connectedComponentIn_preimage_singleton
     {X Y : Scheme.{u}} (f : X ⟶ Y) [Flat f] [LocallyOfFinitePresentation f]
     [GeometricallyReduced f] [IsAffine X] [IsAffine Y] (σ : Y ⟶ X) (hσ : σ ≫ f = 𝟙 Y) :
-    StableUnderGeneralization {x : X | x ∈ connectedComponentIn (f ⁻¹' {f x}) (σ (f x))} :=
-  sorry
+    StableUnderGeneralization {x : X | x ∈ connectedComponentIn (f ⁻¹' {f x}) (σ (f x))} := by
+  algebraize [f.appTop.hom]
+  have : Algebra.FinitePresentation Γ(Y, ⊤) Γ(X, ⊤) :=
+    (HasRingHomProperty.iff_of_isAffine (P := @LocallyOfFinitePresentation) (f := f)).mp ‹_›
+  have : Module.Flat Γ(Y, ⊤) Γ(X, ⊤) :=
+    (HasRingHomProperty.iff_of_isAffine (P := @Flat) (f := f)).mp ‹_›
+  let s : Γ(X, ⊤) →ₐ[Γ(Y, ⊤)] Γ(Y, ⊤) :=
+    { σ.appTop.hom with commutes' a := congr(CommRingCat.Hom.hom (Scheme.Hom.appTop $hσ) a) }
+  have heq := setOf_mem_connectedComponentIn_preimage_singleton_eq_preimage
+    (f' := Spec.map f.appTop) (σ' := Spec.map σ.appTop) X.isoSpec.hom.homeomorph
+    Y.isoSpec.hom.homeomorph (fun x ↦ by
+      rw [Scheme.Hom.homeomorph_apply, Scheme.Hom.homeomorph_apply, ← Scheme.Hom.comp_apply,
+        Scheme.isoSpec_hom_naturality, Scheme.Hom.comp_apply])
+    (fun y ↦ by
+      rw [Scheme.Hom.homeomorph_apply, Scheme.Hom.homeomorph_apply, ← Scheme.Hom.comp_apply,
+        Scheme.isoSpec_hom_naturality, Scheme.Hom.comp_apply])
+  rw [heq]
+  refine (PrimeSpectrum.stableUnderGeneralization_relativeComponent (fun L _ _ ↦ ?_)
+    s).preimage X.isoSpec.hom.homeomorph.continuous
+  -- the fibre `Spec (L ⊗ Γ(X, ⊤))` of `f` over `Spec L ⟶ Y` is reduced
+  have hpb := isPullback_SpecMap_of_isPushout _ _ _ _
+    (CommRingCat.isPushout_tensorProduct Γ(Y, ⊤) L Γ(X, ⊤))
+  have hpb' : IsPullback (Spec.map (CommRingCat.ofHom (S := L ⊗[Γ(Y, ⊤)] Γ(X, ⊤))
+        Algebra.TensorProduct.includeRight.toRingHom) ≫ X.isoSpec.inv)
+      (Spec.map (CommRingCat.ofHom (S := L ⊗[Γ(Y, ⊤)] Γ(X, ⊤))
+        Algebra.TensorProduct.includeLeftRingHom)) f
+      (Spec.map (CommRingCat.ofHom (algebraMap Γ(Y, ⊤) L)) ≫ Y.isoSpec.inv) := by
+    refine IsPullback.of_iso hpb.flip (Iso.refl _) X.isoSpec.symm (Iso.refl _) Y.isoSpec.symm
+      (by simp) (by simp) ?_ (by simp)
+    simp only [Iso.symm_hom]
+    change Spec.map f.appTop ≫ Y.isoSpec.inv = _
+    rw [← cancel_epi X.isoSpec.hom, Scheme.isoSpec_hom_naturality_assoc]
+    simp
+  exact (affine_isReduced_iff _).mp
+    (GeometricallyReduced.geometrically_isReduced (f := f) _ _ _ hpb')
 
 /-- **The relative connected component of a section is open** (Stacks `055R`). Let `f : X ⟶ Y`
 be a flat morphism of finite presentation between affine schemes, with geometrically reduced

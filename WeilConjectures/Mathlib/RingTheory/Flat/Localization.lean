@@ -10,6 +10,7 @@ public import Mathlib.RingTheory.Flat.Localization
 public import Mathlib.RingTheory.Ideal.Quotient.Noetherian
 public import Mathlib.RingTheory.Localization.BaseChange
 public import Mathlib.RingTheory.Localization.AtPrime.Basic
+public import Mathlib.RingTheory.Localization.LocalizationLocalization
 public import Mathlib.Algebra.Module.LocalizedModule.Submodule
 public import WeilConjectures.Mathlib.RingTheory.Filtration
 public import WeilConjectures.Mathlib.RingTheory.Spectrum.Prime.FreeLocus
@@ -33,6 +34,13 @@ Theorem 24.3).
   is flat.
 - `Algebra.exists_notMem_forall_pow_smul_eq_zero`: the local criterion for regular elements of
   the fibre over a noetherian base, for all base changes.
+- `Module.Flat.localization_of_isPushout`: flatness at a point is stable under base change.
+- `Module.Flat.localization_of_forall_mem_isClosed`: localizing away from a closed set of
+  flat points gives a flat algebra.
+- `Module.Flat.localization_tensorProduct_map`: flatness of `R ⊗[R₀] S₀` over `R` at a point is
+  preserved by a map of `R₀`-algebras `R → R'`.
+- `PrimeSpectrum.isOpen_setOf_flat_localization`: the flat locus of a finite type algebra over a
+  noetherian ring is open (Stacks, Tag 00RC).
 -/
 
 @[expose] public section
@@ -671,3 +679,118 @@ theorem _root_.Algebra.exists_notMem_forall_pow_smul_eq_zero [IsNoetherianRing R
   exact ⟨n, hn⟩
 
 end Module
+
+/-- **Flatness at a point is stable under base change.** Let `S' = R' ⊗[R] S` and let `Q` be a
+prime of `S'` lying over the prime `Q ∩ S` of `S`. If `S` is flat over `R` at `Q ∩ S`, then `S'` is
+flat over `R'` at `Q`. -/
+theorem Module.Flat.localization_of_isPushout {R R' S S' : Type*} [CommRing R] [CommRing R']
+    [CommRing S] [CommRing S'] [Algebra R R'] [Algebra R S] [Algebra R' S'] [Algebra S S']
+    [Algebra R S'] [IsScalarTower R R' S'] [IsScalarTower R S S'] [Algebra.IsPushout R R' S S']
+    (Q : Ideal S') [Q.IsPrime]
+    (h : Module.Flat R (Localization.AtPrime (Q.comap (algebraMap S S')))) :
+    Module.Flat R' (Localization.AtPrime Q) := by
+  set Q₁ := Q.comap (algebraMap S S')
+  set M := Algebra.algebraMapSubmonoid S' Q₁.primeCompl
+  have hle : M ≤ Q.primeCompl := by
+    rintro _ ⟨s, hs, rfl⟩
+    exact hs
+  let : Algebra (Localization M) (Localization.AtPrime Q) :=
+    IsLocalization.localizationAlgebraOfSubmonoidLe _ _ M Q.primeCompl hle
+  have : IsScalarTower S' (Localization M) (Localization.AtPrime Q) :=
+    IsLocalization.localization_isScalarTower_of_submonoid_le _ _ M Q.primeCompl hle
+  have : IsScalarTower R' (Localization M) (Localization.AtPrime Q) :=
+    .of_algebraMap_eq fun x ↦ by
+      rw [IsScalarTower.algebraMap_apply R' S' (Localization M), ← IsScalarTower.algebraMap_apply,
+        ← IsScalarTower.algebraMap_apply]
+  have : IsLocalization (Q.primeCompl.map (algebraMap S' (Localization M)))
+      (Localization.AtPrime Q) :=
+    IsLocalization.isLocalization_of_submonoid_le _ _ M Q.primeCompl hle
+  have : Module.Flat (Localization M) (Localization.AtPrime Q) :=
+    IsLocalization.flat _ (Q.primeCompl.map (algebraMap S' (Localization M)))
+  have : Algebra.IsPushout S (Localization.AtPrime Q₁) S' (Localization M) :=
+    (Algebra.isPushout_of_isLocalization Q₁.primeCompl (Localization.AtPrime Q₁) S'
+      (Localization M)).symm
+  have : Algebra.IsPushout R S R' S' := Algebra.IsPushout.symm inferInstance
+  have : IsScalarTower R (Localization.AtPrime Q₁) (Localization M) :=
+    .of_algebraMap_eq fun x ↦ by
+      rw [IsScalarTower.algebraMap_apply R S (Localization.AtPrime Q₁),
+        ← IsScalarTower.algebraMap_apply, IsScalarTower.algebraMap_apply R S' (Localization M),
+        IsScalarTower.algebraMap_apply R S S', ← IsScalarTower.algebraMap_apply S S']
+  have : Algebra.IsPushout R (Localization.AtPrime Q₁) R' (Localization M) :=
+    (Algebra.IsPushout.comp_iff R S R' S').mpr inferInstance
+  have : Module.Flat R' (Localization M) :=
+    Module.Flat.isBaseChange R R' (Localization.AtPrime Q₁) (Localization M)
+      (Algebra.IsPushout.symm this).out
+  exact Module.Flat.trans R' (Localization M) (Localization.AtPrime Q)
+
+/-- Let `Z` be a closed subset of `Spec C` such that `C` is flat over `R` at every point of `Z`, and
+`T` a submonoid of `C` containing every element lying in no prime of `Z`. Then the localization
+`C_T` is flat over `R`. -/
+theorem Module.Flat.localization_of_forall_mem_isClosed {R C : Type*} [CommRing R] [CommRing C]
+    [Algebra R C] {Z : Set (PrimeSpectrum C)} (hZ : IsClosed Z)
+    (hflat : ∀ q ∈ Z, Module.Flat R (Localization.AtPrime q.asIdeal)) (T : Submonoid C)
+    (hT : ∀ c : C, (∀ q ∈ Z, c ∉ q.asIdeal) → c ∈ T) :
+    Module.Flat R (Localization T) := by
+  refine Module.Flat.iff_lTensor_injective'.2 fun J ↦ ?_
+  rw [Module.lTensor_injective_iff_of_isLocalizedModule T (Algebra.linearMap C (Localization T))]
+  intro y hy
+  have hI : LinearMap.ker (LinearMap.toSpanSingleton C _ y) ⊔
+      PrimeSpectrum.vanishingIdeal Z = ⊤ := by
+    by_contra h
+    obtain ⟨m, hm, hle⟩ := Ideal.exists_le_maximal _ h
+    have hmZ : (⟨m, hm.isPrime⟩ : PrimeSpectrum C) ∈ Z := by
+      rw [← hZ.closure_eq, ← PrimeSpectrum.zeroLocus_vanishingIdeal_eq_closure]
+      exact le_sup_right.trans hle
+    have := hflat _ hmZ
+    obtain ⟨t, ht, hty⟩ := (Module.lTensor_injective_iff_of_isLocalizedModule m.primeCompl
+      (Algebra.linearMap C (Localization.AtPrime m)) J.subtype).1
+      (Module.Flat.iff_lTensor_injective'.1 this J) y hy
+    exact ht (le_sup_left.trans hle (LinearMap.mem_ker.2 hty))
+  obtain ⟨t, ht, j, hj, htj⟩ := Submodule.mem_sup.1 (hI ▸ Submodule.mem_top (x := (1 : C)))
+  refine ⟨t, hT t fun q hq htq ↦ q.isPrime.ne_top ((Ideal.eq_top_iff_one _).2 ?_), ht⟩
+  rw [← htj]
+  exact add_mem htq ((PrimeSpectrum.mem_vanishingIdeal Z j).1 hj q hq)
+
+/-- **Flatness at a point along an enlargement of the base.** Let `f : R → R'` be a map of
+`R₀`-algebras and `Q` a prime of `R' ⊗[R₀] S₀`. If `R ⊗[R₀] S₀` is flat over `R` at the prime
+below `Q`, then `R' ⊗[R₀] S₀` is flat over `R'` at `Q`. -/
+theorem Module.Flat.localization_tensorProduct_map {R₀ R R' S₀ : Type*} [CommRing R₀]
+    [CommRing R] [CommRing R'] [CommRing S₀] [Algebra R₀ R] [Algebra R₀ R'] [Algebra R₀ S₀]
+    (f : R →ₐ[R₀] R') (Q : Ideal (R' ⊗[R₀] S₀)) [Q.IsPrime] (P : Ideal (R ⊗[R₀] S₀)) [P.IsPrime]
+    (hPQ : Q.comap (Algebra.TensorProduct.map f (AlgHom.id R₀ S₀)).toRingHom = P)
+    (h : Module.Flat R (Localization.AtPrime P)) :
+    Module.Flat R' (Localization.AtPrime Q) := by
+  subst hPQ
+  let : Algebra R R' := f.toRingHom.toAlgebra
+  have : IsScalarTower R₀ R R' := .of_algebraMap_eq fun r ↦ (f.commutes r).symm
+  let : Algebra (R ⊗[R₀] S₀) (R' ⊗[R₀] S₀) :=
+    (Algebra.TensorProduct.map f (AlgHom.id R₀ S₀)).toRingHom.toAlgebra
+  have : IsScalarTower R (R ⊗[R₀] S₀) (R' ⊗[R₀] S₀) := .of_algebraMap_eq fun r ↦ by
+    simp [RingHom.algebraMap_toAlgebra, Algebra.TensorProduct.algebraMap_apply]
+  have : Algebra.IsPushout R R' (R ⊗[R₀] S₀) (R' ⊗[R₀] S₀) :=
+    Algebra.IsPushout.tensorProduct_tensorProduct R₀ S₀ R R' (by
+      ext x
+      simp [RingHom.algebraMap_toAlgebra])
+  exact Module.Flat.localization_of_isPushout Q h
+
+namespace PrimeSpectrum
+
+/-- **Openness of the flat locus** (Stacks `00RC`). For a finite type algebra `S` over a
+noetherian ring `R`, the set of primes `q` of `S` such that `S_q` is flat over `R` is open. -/
+theorem isOpen_setOf_flat_localization {R S : Type*} [CommRing R] [CommRing S] [Algebra R S]
+    [IsNoetherianRing R] [Algebra.FiniteType R S] :
+    IsOpen {q : PrimeSpectrum S | Module.Flat R (Localization.AtPrime q.asIdeal)} := by
+  rw [isOpen_iff_forall_mem_open]
+  intro q (hq : Module.Flat R _)
+  have hP : Module.Flat R (LocalizedModule q.asIdeal.primeCompl S) := Module.Flat.of_linearEquiv
+    ((IsLocalizedModule.iso q.asIdeal.primeCompl
+      (Algebra.linearMap S (Localization.AtPrime q.asIdeal))).restrictScalars R)
+  obtain ⟨g, hg, hopen⟩ :=
+    Module.Flat.exists_notMem_forall_flat_localizedModule (M := S) q.asIdeal hP
+  refine ⟨basicOpen g, fun Q hQ ↦ ?_, isOpen_basicOpen, hg⟩
+  have := hopen Q.asIdeal hQ
+  exact Module.Flat.of_linearEquiv
+    ((IsLocalizedModule.iso Q.asIdeal.primeCompl
+      (Algebra.linearMap S (Localization.AtPrime Q.asIdeal))).restrictScalars R).symm
+
+end PrimeSpectrum

@@ -7,12 +7,14 @@ module
 
 public import Mathlib.Algebra.Homology.LeftResolution.Reduced
 public import Mathlib.CategoryTheory.Abelian.Refinements
+public import Mathlib.CategoryTheory.Monoidal.Rigid.Basic
 public import WeilConjectures.CategoryTheory.Abelian.Flat.Basic
 public import WeilConjectures.CategoryTheory.DerivedCategory.HasMonoidalDerivedCategory
 public import WeilConjectures.CategoryTheory.DerivedCategory.Monoidal.Shift
 public import WeilConjectures.CategoryTheory.DerivedCategory.TorAmplitude
 public import WeilConjectures.FromJoel.Algebra.Homology.BifunctorSingle
 public import WeilConjectures.FromJoel.Algebra.Homology.LeftResolution.CochainComplexMinus
+public import WeilConjectures.Mathlib.Algebra.Homology.Monoidal
 
 /-!
 
@@ -46,6 +48,8 @@ concentrated in degrees `[a, b]`.
 - `DerivedCategory.exists_iso_Q_obj_flat_of_torAmplitudeIn` and
   `DerivedCategory.torAmplitudeIn_iff_exists_iso_Q_obj_flat`: an object has Tor amplitude in
   `[a, b]` exactly when it is represented by a complex of flat objects in degrees `[a, b]`.
+- `DerivedCategory.torAmplitudeIn_tensor`: Tor amplitudes add under the derived tensor
+  product.
 
 -/
 
@@ -164,6 +168,27 @@ lemma exists_quasiIso_flat_of_isStrictlyLE (L : CochainComplex C ℤ) (b : ℤ)
   exact ⟨_, inferInstance, Λ.totalπ K, inferInstance, fun n ↦ (((Λ.bicomplexFunctor.obj
     K.obj).total (.up ℤ)).X n).property⟩
 
+/-- Every complex has a K-flat resolution by a complex of flat objects: the functorial flat
+resolution of an unbounded complex is a colimit of bounded above complexes of flat objects. -/
+lemma exists_quasiIso_flat_kFlat (L : CochainComplex C ℤ) :
+    ∃ (P : CochainComplex C ℤ) (π : P ⟶ L), QuasiIso π ∧ (∀ n, ObjectProperty.flat (P.X n)) ∧
+      (HomologicalComplex.quasiIso C (.up ℤ)).kFlat P := by
+  have (X : C) : PreservesColimitsOfShape ℤ ((curriedTensor C).flip.obj X) :=
+    preservesColimitsOfShape_of_natIso (F := tensorLeft X)
+      (NatIso.ofComponents (fun Y ↦ β_ X Y) (by intros; simp [curriedTensor]))
+  let Λ := (Classical.arbitrary (Abelian.LeftResolution
+    (ObjectProperty.flat.ι : _ ⥤ C))).reduced
+  have hι : (ObjectProperty.flat.ι : _ ⥤ C).essImage ≤ ObjectProperty.flat := by
+    rintro X ⟨Y, ⟨e⟩⟩
+    exact ObjectProperty.prop_of_iso _ e Y.property
+  refine ⟨Λ.resolutionFunctor.obj L, Λ.resolutionNatTrans.app L, inferInstance, fun n ↦ ?_,
+    Λ.kFlat_resolutionFunctor_obj hι L⟩
+  have := CochainComplex.closedUnderColimitsOfShape_flat C ℤ
+  let c := Λ.colimitOfShapeResolutionFunctorObj L
+  exact ObjectProperty.prop_of_isColimit _
+    (isColimitOfPreserves (HomologicalComplex.eval C (.up ℤ) n) c.isColimit)
+    (fun i ↦ hι _ ((c.prop_diag_obj i).1 n))
+
 end CochainComplex
 
 namespace DerivedCategory
@@ -281,5 +306,166 @@ lemma torAmplitudeIn_iff_exists_iso_Q_obj_flat (a b : ℤ) (K : DerivedCategory 
   refine ⟨exists_iso_Q_obj_flat_of_torAmplitudeIn, ?_⟩
   rintro ⟨P, _, _, hP, ⟨e⟩⟩
   exact (torAmplitudeIn C a b).prop_of_iso e (torAmplitudeIn_Q_obj_of_flat P a b hP)
+
+/-- For a K-flat complex `P` and any complex `L`, the derived tensor product `P ⊗ᴸ L` is the
+tensor product of complexes `P ⊗ L`. -/
+noncomputable def QObjTensorQObjIsoOfKFlatLeft (P L : CochainComplex C ℤ)
+    (hP : (HomologicalComplex.quasiIso C (.up ℤ)).kFlat P) :
+    Q.obj P ⊗ Q.obj L ≅ Q.obj (P ⊗ L) :=
+  have hP' : (HomotopyCategory.quasiIso C (.up ℤ)).kFlat
+      ((HomotopyCategory.quotient C (.up ℤ)).obj P) :=
+    (HomotopyCategory.kFlat_quotient_obj_iff _).2 hP
+  have := isIso_tensorLeftCounit _ hP'
+  tensorIso ((quotientCompQhIso C).symm.app P) ((quotientCompQhIso C).symm.app L) ≪≫
+    (asIso (tensorLeftCounit ((HomotopyCategory.quotient C (.up ℤ)).obj P))).app
+      ((HomotopyCategory.quotient C (.up ℤ)).obj L) ≪≫
+    Qh.mapIso (Functor.Monoidal.μIso (HomotopyCategory.quotient C (.up ℤ)) _ _) ≪≫
+    (quotientCompQhIso C).app _
+
+/-- For any complex `L` and a K-flat complex `P`, the derived tensor product `L ⊗ᴸ P` is the
+tensor product of complexes `L ⊗ P`. -/
+noncomputable def QObjTensorQObjIsoOfKFlatRight (L P : CochainComplex C ℤ)
+    (hP : (HomologicalComplex.quasiIso C (.up ℤ)).kFlat P) :
+    Q.obj L ⊗ Q.obj P ≅ Q.obj (L ⊗ P) :=
+  have hP' : (HomotopyCategory.quasiIso C (.up ℤ)).kFlat
+      ((HomotopyCategory.quotient C (.up ℤ)).obj P) :=
+    (HomotopyCategory.kFlat_quotient_obj_iff _).2 hP
+  have := isIso_tensorRightCounit _ hP'
+  tensorIso ((quotientCompQhIso C).symm.app L) ((quotientCompQhIso C).symm.app P) ≪≫
+    (asIso (tensorRightCounit ((HomotopyCategory.quotient C (.up ℤ)).obj P))).app
+      ((HomotopyCategory.quotient C (.up ℤ)).obj L) ≪≫
+    Qh.mapIso (Functor.Monoidal.μIso (HomotopyCategory.quotient C (.up ℤ)) _ _) ≪≫
+    (quotientCompQhIso C).app _
+
+/-- The isomorphism `L ⊗ᴸ P ≅ L ⊗ P` for a K-flat complex `P` is natural in `L`: for
+`f : L ⟶ L'` the square
+```
+  Q(L) ⊗ᴸ Q(P) ──≅──▶ Q(L ⊗ P)
+       │                  │
+  Q(f) ▷ Q(P)          Q(f ▷ P)
+       ▼                  ▼
+  Q(L') ⊗ᴸ Q(P) ─≅──▶ Q(L' ⊗ P)
+```
+commutes. -/
+@[reassoc]
+lemma qObjTensorQObjIsoOfKFlatRight_hom_naturality {L L' : CochainComplex C ℤ} (f : L ⟶ L')
+    (P : CochainComplex C ℤ) (hP : (HomologicalComplex.quasiIso C (.up ℤ)).kFlat P) :
+    Q.map f ▷ Q.obj P ≫ (QObjTensorQObjIsoOfKFlatRight L' P hP).hom =
+      (QObjTensorQObjIsoOfKFlatRight L P hP).hom ≫ Q.map (f ▷ P) := by
+  have h₁ := (tensorRightCounit ((HomotopyCategory.quotient C (.up ℤ)).obj P)).naturality
+    ((HomotopyCategory.quotient C (.up ℤ)).map f)
+  have h₂ := Functor.LaxMonoidal.μ_natural_left (HomotopyCategory.quotient C (.up ℤ)) f P
+  have h₃ := (quotientCompQhIso C).hom.naturality (f ▷ P)
+  have h₄ := (quotientCompQhIso C).inv.naturality f
+  dsimp at h₁ h₂ h₃ h₄
+  simp only [QObjTensorQObjIsoOfKFlatRight, Iso.trans_hom, tensorIso_hom, Iso.app_hom,
+    Iso.symm_hom, asIso_hom, Functor.mapIso_hom, Category.assoc]
+  have key : Q.map f ▷ Q.obj P ≫
+      ((quotientCompQhIso C).inv.app L' ⊗ₘ (quotientCompQhIso C).inv.app P) =
+      ((quotientCompQhIso C).inv.app L ⊗ₘ (quotientCompQhIso C).inv.app P) ≫
+        Qh.map ((HomotopyCategory.quotient C (.up ℤ)).map f) ▷ _ := by
+    rw [← tensorHom_id, ← tensorHom_id, tensorHom_comp_tensorHom, tensorHom_comp_tensorHom, h₄,
+      Category.comp_id, Category.id_comp]
+  rw [reassoc_of% key, reassoc_of% h₁, ← h₃, Functor.Monoidal.μIso_hom, ← Qh.map_comp_assoc,
+    h₂, Qh.map_comp_assoc, Functor.Monoidal.μIso_hom]
+
+/-- If `K` has Tor amplitude in `[a, b]` and `N` has homology concentrated in `[c, d]`, then
+`K ⊗ᴸ N` has homology concentrated in `[a + c, b + d]`: represent `K` by a complex of flat
+objects in degrees `[a, b]` and `N` by a complex in degrees `[c, d]`. -/
+lemma homologyConcentratedIn_tensor_of_torAmplitudeIn_left {a b c d : ℤ}
+    {K N : DerivedCategory C}
+    (hK : torAmplitudeIn C a b K) (hN : homologyConcentratedIn c d N) :
+    homologyConcentratedIn (a + c) (b + d) (K ⊗ N) := by
+  obtain ⟨P, _, _, hP, ⟨e⟩⟩ := exists_iso_Q_obj_flat_of_torAmplitudeIn hK
+  have : N.IsGE c := hN.1
+  have : N.IsLE d := hN.2
+  obtain ⟨L, _, _, ⟨e'⟩⟩ := N.exists_iso_Q_obj_of_isGE_of_isLE c d
+  have hPk := CochainComplex.kFlat_of_bounded_of_flat P a b hP
+  have := CochainComplex.isStrictlyGE_tensorObj P L a c
+  have := CochainComplex.isStrictlyLE_tensorObj P L b d
+  have e'' : K ⊗ N ≅ Q.obj (P ⊗ L) :=
+    tensorIso e.symm e' ≪≫ QObjTensorQObjIsoOfKFlatLeft P L hPk
+  exact ⟨TStructure.t.isGE_of_iso e''.symm _, TStructure.t.isLE_of_iso e''.symm _⟩
+
+/-- If `N` has homology concentrated in `[c, d]` and `M` has Tor amplitude in `[a, b]`, then
+`N ⊗ᴸ M` has homology concentrated in `[c + a, d + b]`. -/
+lemma homologyConcentratedIn_tensor_of_torAmplitudeIn_right {a b c d : ℤ}
+    {N M : DerivedCategory C} (hN : homologyConcentratedIn c d N)
+    (hM : torAmplitudeIn C a b M) :
+    homologyConcentratedIn (c + a) (d + b) (N ⊗ M) := by
+  obtain ⟨P, _, _, hP, ⟨e⟩⟩ := exists_iso_Q_obj_flat_of_torAmplitudeIn hM
+  have : N.IsGE c := hN.1
+  have : N.IsLE d := hN.2
+  obtain ⟨L, _, _, ⟨e'⟩⟩ := N.exists_iso_Q_obj_of_isGE_of_isLE c d
+  have hPk := CochainComplex.kFlat_of_bounded_of_flat P a b hP
+  have := CochainComplex.isStrictlyGE_tensorObj L P c a
+  have := CochainComplex.isStrictlyLE_tensorObj L P d b
+  have e'' : N ⊗ M ≅ Q.obj (L ⊗ P) :=
+    tensorIso e' e.symm ≪≫ QObjTensorQObjIsoOfKFlatRight L P hPk
+  exact ⟨TStructure.t.isGE_of_iso e''.symm _, TStructure.t.isLE_of_iso e''.symm _⟩
+
+/-- **Tor amplitudes add under the derived tensor product.** If `K` and `M` have Tor amplitude
+in `[a, b]` and `[c, d]`, then `K ⊗ᴸ M` has Tor amplitude in `[a + c, b + d]`. -/
+lemma torAmplitudeIn_tensor {a b c d : ℤ} {K M : DerivedCategory C}
+    (hK : torAmplitudeIn C a b K) (hM : torAmplitudeIn C c d M) :
+    torAmplitudeIn C (a + c) (b + d) (K ⊗ M) := fun F ↦ by
+  obtain ⟨h₁, h₂⟩ := homologyConcentratedIn_tensor_of_torAmplitudeIn_left hK (hM F)
+  exact ⟨TStructure.t.isGE_of_iso (α_ K M _).symm _,
+    TStructure.t.isLE_of_iso (α_ K M _).symm _⟩
+
+/-- If `K` has Tor amplitude in `[a, b]` and `N` vanishes above `d`, then `K ⊗ᴸ N` vanishes
+above `b + d`. -/
+lemma isLE_tensor_of_torAmplitudeIn {a b : ℤ} {K : DerivedCategory C}
+    (hK : torAmplitudeIn C a b K) (N : DerivedCategory C) (d : ℤ) [N.IsLE d] :
+    (K ⊗ N).IsLE (b + d) := by
+  obtain ⟨P, _, _, hP, ⟨e⟩⟩ := exists_iso_Q_obj_flat_of_torAmplitudeIn hK
+  obtain ⟨L, _, ⟨e'⟩⟩ := N.exists_iso_Q_obj_of_isLE d
+  have := CochainComplex.isStrictlyLE_tensorObj P L b d
+  exact TStructure.t.isLE_of_iso (tensorIso e.symm e' ≪≫
+    QObjTensorQObjIsoOfKFlatLeft P L (CochainComplex.kFlat_of_bounded_of_flat P a b hP)).symm _
+
+/-- The derived tensor product of an object vanishing above `b` and one vanishing above `d`
+vanishes above `b + d`: represent the first by a bounded above complex of flat objects. -/
+lemma isLE_tensor (K N : DerivedCategory C) (b d : ℤ) [K.IsLE b] [N.IsLE d] :
+    (K ⊗ N).IsLE (b + d) := by
+  obtain ⟨L, _, ⟨e⟩⟩ := K.exists_iso_Q_obj_of_isLE b
+  obtain ⟨P, _, π, _, hP⟩ := L.exists_quasiIso_flat_of_isStrictlyLE b
+  have : IsIso (Q.map π) := by rwa [isIso_Q_map_iff_quasiIso]
+  obtain ⟨M, _, ⟨e'⟩⟩ := N.exists_iso_Q_obj_of_isLE d
+  have := CochainComplex.isStrictlyLE_tensorObj P M b d
+  exact TStructure.t.isLE_of_iso (tensorIso (e ≪≫ (asIso (Q.map π)).symm) e' ≪≫
+    QObjTensorQObjIsoOfKFlatLeft P M (CochainComplex.kFlat_of_isStrictlyLE_of_flat P b hP)).symm _
+
+/-- If `K` has Tor amplitude in `[a, b]` and `N` vanishes below `c`, then `K ⊗ᴸ N` vanishes
+below `a + c`. -/
+lemma isGE_tensor_of_torAmplitudeIn {a b : ℤ} {K : DerivedCategory C}
+    (hK : torAmplitudeIn C a b K) (N : DerivedCategory C) (c : ℤ) [N.IsGE c] :
+    (K ⊗ N).IsGE (a + c) := by
+  obtain ⟨P, _, _, hP, ⟨e⟩⟩ := exists_iso_Q_obj_flat_of_torAmplitudeIn hK
+  obtain ⟨L, _, ⟨e'⟩⟩ := N.exists_iso_Q_obj_of_isGE c
+  have := CochainComplex.isStrictlyGE_tensorObj P L a c
+  exact TStructure.t.isGE_of_iso (tensorIso e.symm e' ≪≫
+    QObjTensorQObjIsoOfKFlatLeft P L (CochainComplex.kFlat_of_bounded_of_flat P a b hP)).symm _
+
+/-- **The dual of an object of Tor amplitude in `[a, b]` has Tor amplitude in `[-b, -a]`.**
+If `L` is dual to `K` on both sides, maps `G ⟶ L ⊗ᴸ F[0]` correspond to maps
+`K ⊗ᴸ G ⟶ F[0]`, and maps `L ⊗ᴸ F[0] ⟶ G` to maps `F[0] ⟶ K ⊗ᴸ G`; the Tor amplitude of `K`
+makes these vanish for `G` above `-b - 1`, respectively below `-a + 1`. -/
+lemma torAmplitudeIn_of_exactPairing {a b : ℤ} {K L : DerivedCategory C} [ExactPairing L K]
+    [ExactPairing K L] (hK : torAmplitudeIn C a b K) : torAmplitudeIn C (-b) (-a) L := by
+  intro F
+  refine ⟨(TStructure.t.isGE_iff_orthogonal (-b - 1) (-b) (by omega) _).2 fun Y f hY ↦ ?_,
+    (TStructure.t.isLE_iff_orthogonal (-a) (-a + 1) rfl _).2 fun Y f hY ↦ ?_⟩
+  · have : Y.IsLE (-b - 1) := hY
+    have := isLE_tensor_of_torAmplitudeIn hK Y (-b - 1)
+    obtain ⟨g, rfl⟩ := (tensorLeftHomEquiv Y L K ((singleFunctor C 0).obj F)).surjective f
+    rw [TStructure.t.zero g (b + (-b - 1)) 0 (by omega)]
+    simp [tensorLeftHomEquiv]
+  · have : Y.IsGE (-a + 1) := hY
+    have := isGE_tensor_of_torAmplitudeIn hK Y (-a + 1)
+    have h := TStructure.t.zero
+      (tensorLeftHomEquiv ((singleFunctor C 0).obj F) K L Y f) 0 (a + (-a + 1)) (by omega)
+    rw [← (tensorLeftHomEquiv ((singleFunctor C 0).obj F) K L Y).symm_apply_apply f, h]
+    simp [tensorLeftHomEquiv]
 
 end DerivedCategory
