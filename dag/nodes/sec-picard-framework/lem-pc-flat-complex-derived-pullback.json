@@ -3,7 +3,7 @@
  "blueprint": {
   "is": "lem-pc-flat-complex-derived-pullback",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "Termwise derived pullback of a bounded above flat complex",
@@ -24,26 +24,40 @@
  ],
  "proof": [
   {
-   "text": "By [def-pc-derived-pullback],\n$Lg^*E=\\mathcal{O}_T\\otimes^{\\mathbf L}_{g^{-1}\\mathcal{O}_S}g^{-1}E$,\nand by [def-weil-derived-tensor] this derived tensor product is\ncomputed by a K-flat resolution of $g^{-1}E$. Inverse image along a\nmorphism of schemes is exact and preserves flatness, so $g^{-1}E$ is a\nbounded above complex of flat $g^{-1}\\mathcal{O}_S$-modules; a bounded\nabove complex of flat modules over a ringed space is K-flat (Cohomology\nof Sheaves, Lemma 20.26.9, Tag\n[06YD](https://stacks.math.columbia.edu/tag/06YD)). Hence\n$g^{-1}E$ is a K-flat resolution of itself and\n\n$$\nLg^*E=\\mathcal{O}_T\\otimes_{g^{-1}\\mathcal{O}_S}g^{-1}E=g^*E,\n$$\n\nwhich is the termwise pullback of $E$, as claimed.",
+   "text": "The bounded-above flat complex $E$ is K-flat over $\\mathcal O_S$ by [lem-pc-bounded-above-flat-kflat].",
    "uses": [
-    "def-pc-derived-pullback",
-    "def-weil-derived-tensor"
+    "lem-pc-bounded-above-flat-kflat"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/cohomology.tex",
+    "place": "Tag 06YD, Cohomology Lemma 20.26.9"
+   }
+  },
+  {
+   "text": "Since $E$ is K-flat (Step 1), the identity $E\\to E$ is a K-flat resolution of $E$, so [def-pc-derived-pullback] applied with $\\mathcal P^\\bullet=E$ gives $Lg^*E\\cong g^*E=\\mathcal O_T\\otimes_{g^{-1}\\mathcal O_S}g^{-1}E$, the termwise pullback, canonically in $D(\\mathcal O_T)$. This canonical identification is the comparison map $g^*E\\to Lg^*E$, which is therefore an isomorphism in $D(\\mathcal O_T)$, i.e. a quasi-isomorphism.",
+   "uses": [
+    "def-pc-derived-pullback"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/cohomology.tex",
+    "place": "Tag 06YD, Cohomology Lemma 20.26.9"
+   }
   }
  ],
  "proof_deps": [
-  "def-pc-derived-pullback",
-  "def-weil-derived-tensor"
+  "lem-pc-bounded-above-flat-kflat",
+  "def-pc-derived-pullback"
  ],
  "proof_origin": {
-  "by": "agent",
-  "document": "literature/blueprint/master/blueprint/sec-picard-framework/sk-thm-picard-semicon/lem-pc-flat-complex-derived-pullback.md",
-  "place": "## Proof"
+  "by": "document",
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Tag 06YD, Cohomology Lemma 20.26.9"
  },
  "mathlib_searches": [],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [
   "proof_cites_literature"
@@ -72,5 +86,22 @@
   }
  },
  "chapter": "sec-picard-framework",
- "unit": "sk-thm-picard-semicon"
+ "unit": "sk-thm-picard-semicon",
+ "split_report": {
+  "date": "2026-10-11",
+  "item": "lem-pc-flat-complex-derived-pullback",
+  "worker": "stage1",
+  "summary": "Replaced the imported proof's unsupported appeal to exactness and flatness preservation under inverse image with two explicit dependencies. The new unsplit node lem-pc-bounded-above-flat-kflat records Stacks Tag 06YD, and the existing lem-pc-kflat-pullback-preservation records that inverse image preserves K-flat complexes. The derived pullback definition then computes the result on the K-flat complex g^{-1}E, giving the ordinary termwise tensor complex and its canonical quasi-isomorphism. Reviewer R-fdp1859: Step 2 now applies def-pc-derived-pullback to the identity K-flat resolution of E; lem-pc-kflat-pullback-preservation (which concerns f^*, not f^{-1}) is no longer cited.",
+  "blueprint": "Realizes the sole proof paragraph: bounded-above flat complexes are K-flat, then the derived pullback is computed termwise.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-fdp1859",
+  "group": "H1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-fdp1859 (reviewer sub-agent of L); spot-checked: Step 1 vs new node (hypotheses match, Stacks 06YD verbatim); new node not a duplicate (lem-kun-kflat-criteria(1) is on T_et with Lambda_T, not a ringed space), K-flat Mathlib search: none, sorryfree OK for slopmaster2 abstract lemma but not an exact match; no cycle (def-pc-derived-pullback deps and proof_deps do not reach the item or new node). FIX more, RETURN less: C4 in Step 2 - lem-pc-kflat-pullback-preservation states f^*K is K-flat over O_X, not that g^{-1}E is K-flat over g^{-1}O_S; repaired by applying def-pc-derived-pullback to the identity K-flat resolution P=E (Lg^*E = g^*E canonically), citation and tool_use of lem-pc-kflat-pullback-preservation dropped, proof_deps corrected.; 1 file(s) fixed by the reviewer"
+ },
+ "lead_note": "2026-10-10 L (R-fdp1859): Second reading claims CochainComplex.kFlat_of_isStrictlyLE_of_flat was attached to lem-pc-bounded-above-flat-kflat; the delivered file has no attachment (status unsplit, mathlib_match null). Left unsplit: the Lean lemma is for an abstract monoidal abelian category with categorical flatness, not an exact statement for O_X-module sheaves (B10 not met without instantiation work)."
 }
