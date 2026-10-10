@@ -200,4 +200,68 @@ lemma conjugateIsoEquiv_lowerStarComp_symm {X Y Z : Scheme.{u}} (e : X ≅ Y) (e
   exact (Category.assoc _ _ _).trans
     (lowerStarComp_unit_aux A e.hom e.inv e'.hom e'.inv e.inv_hom_id e'.inv_hom_id _ M)
 
+
+/-- The pullback along an isomorphism is conjugate to the identity of the pushforward. -/
+lemma conjugateIsoEquiv_upperStarIsoLowerStarInv {X Y : Scheme.{u}} (e : X ≅ Y) :
+    conjugateIsoEquiv (lowerStarEquivalence A e).symm.toAdjunction
+      (upperStarLowerStarAdjunction A e.hom) (upperStarIsoLowerStarInv A e) = Iso.refl _ := by
+  ext : 1
+  exact conjugateEquiv_leftAdjointUniq_hom _ _
+
+set_option maxHeartbeats 1000000 in
+/-- The identification `e^* ≅ (e⁻¹)_*` of the pullback along an isomorphism with the pushforward
+along its inverse is compatible with composition:
+`(e ≫ e')^* ≅ e'^* ⋙ e^* ≅ (e'⁻¹)_* ⋙ (e⁻¹)_* ≅ (e'⁻¹ ≫ e⁻¹)_*`. -/
+lemma upperStarIsoLowerStarInv_trans {X Y Z : Scheme.{u}} (e : X ≅ Y) (e' : Y ≅ Z) :
+    upperStarIsoLowerStarInv A (e ≪≫ e') ≪≫ (lowerStarComp A e'.inv e.inv).symm =
+      upperStarComp A e.hom e'.hom ≪≫
+        Functor.isoWhiskerRight (upperStarIsoLowerStarInv A e') (e.hom)^*[A] ≪≫
+        Functor.isoWhiskerLeft (e'.inv)_*[A] (upperStarIsoLowerStarInv A e) := by
+  refine (conjugateIsoEquiv ((lowerStarEquivalence A e').symm.toAdjunction.comp
+    (lowerStarEquivalence A e).symm.toAdjunction)
+    (upperStarLowerStarAdjunction A (e.hom ≫ e'.hom))).injective ?_
+  rw [conjugateIsoEquiv_trans _ (lowerStarEquivalence A (e ≪≫ e')).symm.toAdjunction _,
+    conjugateIsoEquiv_trans _ ((upperStarLowerStarAdjunction A e'.hom).comp
+      (upperStarLowerStarAdjunction A e.hom)) _,
+    conjugateIsoEquiv_trans _ ((lowerStarEquivalence A e').symm.toAdjunction.comp
+      (upperStarLowerStarAdjunction A e.hom)) _,
+    conjugateIsoEquiv_lowerStarComp_symm]
+  erw [conjugateIsoEquiv_upperStarIsoLowerStarInv A (e ≪≫ e')]
+  erw [conjugateIsoEquiv_isoWhiskerLeft, conjugateIsoEquiv_isoWhiskerRight,
+    conjugateIsoEquiv_upperStarIsoLowerStarInv, conjugateIsoEquiv_upperStarIsoLowerStarInv,
+    conjugateIsoEquiv_upperStarComp]
+  ext : 2
+  simp
+
+/-- Transport of the identification `e^* ≅ (e⁻¹)_*` along an equality of isomorphisms. -/
+lemma upperStarIsoLowerStarInv_congr {X Y : Scheme.{u}} {e₁ e₂ : X ≅ Y} (h : e₁ = e₂) :
+    upperStarIsoLowerStarInv A e₁ ≪≫ lowerStarCongr A (congrArg Iso.inv h) =
+      upperStarCongr A (congrArg Iso.hom h) ≪≫ upperStarIsoLowerStarInv A e₂ := by
+  subst h
+  ext : 2
+  simp [upperStarCongr]
+
+omit [Abelian A] [IsGrothendieckAbelian.{u + 1} A] in
+set_option maxHeartbeats 2000000 in
+/-- The left unit law for the composition isomorphism of pushforwards, along a morphism `a`
+equal to the identity. -/
+lemma lowerStarComp_id_left_aux {X Y : Scheme.{u}} (a : X ⟶ X) (b c : X ⟶ Y) (ha : a = 𝟙 X)
+    (hc : c = a ≫ b) (hb : c = b) (M : Sheaf (Scheme.ProEt.topology X) A) :
+    (lowerStarCongr A hc).hom.app M ≫ (lowerStarComp A a b).inv.app M ≫
+        (b)_*[A].map ((lowerStarCongr A ha).hom.app M ≫ (lowerStarId A X).hom.app M) =
+      (lowerStarCongr A hb).hom.app M := by
+  ext W
+  simp only [NatTrans.comp_app, ObjectProperty.FullSubcategory.comp_hom, Functor.map_comp,
+    lowerStarComp_inv_app_hom_app, lowerStarCongr_hom_app_hom_app, lowerStarId_hom_app_hom_app,
+    lowerStar_map_hom_app']
+  simp only [lowerStar, Functor.sheafPushforwardContinuous_obj_obj_map, Quiver.Hom.unop_op,
+    ← Functor.map_comp, ← op_comp]
+  congr 2
+  apply MorphismProperty.Over.Hom.ext
+  repeat' apply pullback.hom_ext
+  all_goals simp [MorphismProperty.Over.pullback, MorphismProperty.Over.mk,
+    MorphismProperty.Over.pullbackCongr, MorphismProperty.Over.pullbackComp,
+    MorphismProperty.Over.pullbackId]
+  all_goals exact Category.id_comp _
+
 end AlgebraicGeometry.ProEtale
