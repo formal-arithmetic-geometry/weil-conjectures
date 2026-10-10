@@ -19,9 +19,76 @@
  "stmt_deps": [
   "def-sc-p1-standard"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Put $Y=\\mathbf P^1_k$, $g:Y\\to\\operatorname{Spec}k$, and $h=g\\circ f$. The standard projective line is projective over $k$, so [lem-pc-projective-proper] makes $g$ proper. Since $f$ is finite, [lem-weil-pbc-finite-proper] makes $f$ proper, and [lem-weil-pbc-proper-composition] makes $h$ proper. A field is Noetherian; $g$ and $h$ are of finite type because they are proper, so [lem-weil-pbc-finite-type-over-noetherian] makes both $Y$ and $X$ Noetherian. The affine charts $\\operatorname{Spec}k[t]$, $\\operatorname{Spec}k[s]$ of [def-sc-p1-standard] show $g$ is smooth of relative dimension one in the sense of [def-sbc-smooth-morphisms], while smoothness of $h$ is assumed.",
+   "uses": [
+    "lem-pc-projective-proper",
+    "lem-weil-pbc-finite-proper",
+    "lem-weil-pbc-proper-composition",
+    "lem-weil-pbc-finite-type-over-noetherian",
+    "def-sc-p1-standard",
+    "def-sbc-smooth-morphisms"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/duality.tex",
+    "place": "Tags 0BRT and 0ATX, proper and Noetherian hypotheses checked for the application"
+   }
+  },
+  {
+   "text": "Apply [lem-sc-smooth-proper-curve-dualizing] to $g$ and $h$: $g^!k\\cong\\Omega^1_{Y/k}[1]$ and $h^!k\\cong\\Omega^1_{X/k}[1]$. Apply [lem-sc-proper-upper-shriek-composition] to $X\\xrightarrow fY\\xrightarrow g\\operatorname{Spec}k$: $f^!(g^!k)\\cong h^!k$. As a derived right adjoint $f^!$ commutes with shifts, so cancelling $[1]$ gives an isomorphism $\\alpha:f^!\\Omega^1_{Y/k}\\cong\\Omega^1_{X/k}$. This is an isomorphism of $\\mathcal O_X$-modules because the right side is concentrated in degree zero.",
+   "uses": [
+    "lem-sc-smooth-proper-curve-dualizing",
+    "lem-sc-proper-upper-shriek-composition"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/duality.tex",
+    "place": "Tags 0BRT and 0ATX, transitivity of dualizing complexes"
+   }
+  },
+  {
+   "text": "The $n=1$ clause of [lem-pc-projective-space-canonical] says $\\Omega^1_{Y/k}$ is invertible. Apply [lem-sc-finite-flat-duality-evaluation] with $L=\\Omega^1_{Y/k}$ and transfer its isomorphism through $f_*\\alpha^{-1}$ from Step 2. This yields an $f_*\\mathcal O_X$-linear isomorphism $\\Phi:f_*\\Omega^1_{X/k}\\xrightarrow{\\sim}\\mathcal H om_{\\mathcal O_Y}(f_*\\mathcal O_X,\\Omega^1_{Y/k})$.",
+   "uses": [
+    "lem-pc-projective-space-canonical",
+    "lem-sc-finite-flat-duality-evaluation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/discriminant.tex",
+    "place": "Tags 0BVI and 0FKW, finite duality with an invertible target"
+   }
+  },
+  {
+   "text": "Define $\\tau(\\omega)=\\Phi(\\omega)(1)$. Evaluation at $1$ is $\\mathcal O_Y$-linear, so $\\tau$ is a morphism of the asserted sheaves. The final clause of [lem-sc-finite-flat-duality-evaluation], or $f_*\\mathcal O_X$-linearity of $\\Phi$, gives $\\Phi(\\omega)(a)=\\Phi(a\\omega)(1)=\\tau(a\\omega)$ on every open. Thus the comparison map displayed in the statement is exactly $\\Phi$, which is an isomorphism by Step 3.",
+   "uses": [
+    "lem-sc-finite-flat-duality-evaluation"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/discriminant.tex",
+    "place": "Tag 0FKW, evaluation-at-one formula"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-projective-proper",
+  "lem-weil-pbc-finite-proper",
+  "lem-weil-pbc-proper-composition",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "def-sc-p1-standard",
+  "lem-sc-smooth-proper-curve-dualizing",
+  "lem-sc-proper-upper-shriek-composition",
+  "lem-pc-projective-space-canonical",
+  "lem-sc-finite-flat-duality-evaluation",
+  "def-sbc-smooth-morphisms"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/duality.tex",
+  "place": "Tags 0BRT, 0ATX; literature/stacks-project/discriminant.tex, Tags 0BVI and 0FKW"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -60,12 +127,47 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-sc-finite-duality",
   "by": "worker",
   "date": "2026-10-10"
  },
  "chapter": "sec-picard-framework",
- "unit": "sk-thm-picard-duality"
+ "unit": "sk-thm-picard-duality",
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "lem-sc-finite-duality-trace",
+  "worker": "stage1",
+  "summary": "Separated the smooth-curve dualizing identification, transitivity of upper shriek, and finite-flat evaluation duality; verified properness and Noetherian hypotheses and identified the resulting evaluation-at-one counit with the claimed trace comparison.",
+  "blueprint": "The four steps realize the first step of lem-sc-finite-duality's proof: its trace identification of f_*Omega^1_X with Hom(f_*O_X, Omega^1_P1), including the ramified case.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-finite-proper",
+    "why": "The finite morphism must be proper to apply upper-shriek composition; the unit contains no finite-implies-proper lemma."
+   },
+   {
+    "node": "lem-weil-pbc-finite-type-over-noetherian",
+    "why": "The duality source requires Noetherian schemes; this is the generic finite-type-over-Noetherian result."
+   },
+   {
+    "node": "lem-pc-projective-space-canonical",
+    "why": "Its rank-one differential-sheaf clause verifies that the invertible-target hypothesis of finite duality applies to the projective line."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pc-projective-proper",
+  "lem-weil-pbc-finite-proper",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-pc-projective-space-canonical"
+ ],
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-fdt",
+  "group": "K1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-fdt (reviewer sub-agent of L); spot-checked: Sources read: Stacks duality.tex lemma-smooth-proper (0BRT: S Noetherian, f smooth proper of rel. dim d, a(O_S)=wedge^d Omega[d]; the new node is the case S=Spec k, d=1, pure rel. dim one), lemma-upper-shriek-composition (0ATX; in the proper case it is composition of right adjoints of Rf_*, as the new node states), discriminant.tex lemma-compare-trace (0BVI: finite flat Noetherian, f^! single sheaf in degree 0 with f_*f^!O = Hom(f_*O_Y,O_X), extended to invertible L since f_*O is finite locally free; counit = evaluation at 1, f_*O_X-linearity gives the last clause); 0FKW is the section on finite morphisms, a loose but harmless place. Item statement unchanged; agrees with the sorried slopmaster2 exists_isIso_pushforwardHomObjComparison_unit (SerreDuality.lean:536). Step 1: lem-pc-projective-proper, lem-weil-pbc-finite-proper, lem-weil-pbc-proper-composition, def-weil-proper-morphism (proper => finite type) and lem-weil-pbc-finite-type-over-noetherian give g, h proper and X, Y Noetherian (X proper over k since f finite); P^1 smooth of rel. dim 1 from the k[t], k[s] charts. Step 2: the two new nodes give f^!(Omega_Y[1]) = Omega_X[1], shift cancels, alpha O_X-linear. Step 3: lem-pc-projective-space-canonical (n=1, A=k: Omega^1 locally free rank 1, same Proj k[x0,x1] as def-sc-p1-standard) gives the invertible-target hypothesis of lem-sc-finite-flat-duality-evaluation; f_*alpha is f_*O_X-linear. Step 4: tau = evaluation at 1 of Phi, Phi(omega)(a)=tau(a omega) from the node's last clause; elementary. Tests: identity of P^1, Frobenius t->t^p (trace exists, no division by p), empty X. No Mathlib leaves; B10: no slopmaster2 declaration states the new coherent-duality nodes (only etale upper-shriek ones). Tool uses: the three declared ones accepted as generic; lem-pc-projective-proper (off-unit sk-thm-picard-twist, imported) added as generic tool. FIX more, RETURN less (B3, smooth used without a definition node): dag/nodes/sec-picard-framework/lem-sc-smooth-proper-curve-dualizing.json: statement, stmt_deps: cite [def-sbc-smooth-morphisms] for 'smooth'; dag/nodes/sec-picard-framework/lem-sc-finite-duality-trace.json: proof[0].text, uses, proof_deps: cite [def-sbc-smooth-morphisms] for the smoothness of P^1 from its charts. Start Sat Oct 10 03:23:01 PM UTC 2026, end Sat Oct 10 03:24:35 PM UTC 2026.; 2 file(s) fixed by the reviewer"
+ }
 }

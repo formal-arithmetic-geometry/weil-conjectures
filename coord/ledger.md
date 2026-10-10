@@ -1777,3 +1777,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 15:23 L: lem-pc-grothendieck-edge-cocycle source corrected to Derived 015N (maintainer field; return point 4 now concerns only the steps' sources)
 - 15:23 L: merged deliver/G1/lem-sc-geometrically-irreducible-product (reviewer FIX; first push; new nodes: 2)
 - 15:24 L: merged deliver/E1/lem-pc-zero-dimensional-closed-subscheme-finite (reviewer FIX; first push; new nodes: 0)
+- 15:24 L: merged deliver/K1/lem-sc-finite-duality-trace (reviewer FIX; first push; new nodes: 3)
