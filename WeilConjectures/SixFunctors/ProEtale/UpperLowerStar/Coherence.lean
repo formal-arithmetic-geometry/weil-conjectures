@@ -6,459 +6,458 @@ Authors: Claude
 module
 
 public import WeilConjectures.Mathlib.CategoryTheory.Adjunction.Mates
-public import WeilConjectures.SixFunctors.ProEtale.UpperLowerStar.GlobalSections
+public import WeilConjectures.Mathlib.CategoryTheory.MorphismProperty.OverAdjunction
+public import WeilConjectures.SixFunctors.ProEtale.UpperLowerStar.Iso
 
 /-!
-# Coherence of the composition isomorphisms of pro-étale pushforwards and pullbacks
+# Coherence of the pushforwards and pullbacks on the small pro-étale sites
 
-The pushforwards `g_*` and pullbacks `g^*` of sheaves on small pro-étale sites form
-pseudofunctors up to the composition isomorphisms `ProEtale.lowerStarComp` and
-`ProEtale.upperStarComp`. This file proves the coherence laws needed to compare composites of
-these isomorphisms, together with their compatibility with the identifications
-`(e.hom)^* ≅ (e.inv)_*` for an isomorphism `e` and with global sections.
+The composition isomorphisms `(h₁)_* ⋙ (h₂)_* ≅ (h₁ ≫ h₂)_*`
+(`AlgebraicGeometry.ProEtale.lowerStarComp`) and `(h₁ ≫ h₂)^* ≅ (h₂)^* ⋙ (h₁)^*`
+(`AlgebraicGeometry.ProEtale.upperStarComp`) satisfy the associativity law: the two ways of
+identifying the pushforward (resp. pullback) along `f ≫ g ≫ h` with the composite of the three
+pushforwards (resp. pullbacks) agree, up to the identification `(f ≫ g) ≫ h = f ≫ (g ≫ h)`.
+For the pushforwards this is the associativity of base change
+(`CategoryTheory.MorphismProperty.Over.pullbackComp_assoc`); it passes to the pullbacks by
+conjugation along the adjunctions `g^* ⊣ g_*`.
+
+This is the pro-étale counterpart of `CategoryTheory.GrothendieckTopology.upperStarComp_assoc`.
 
 ## Main results
 
 - `AlgebraicGeometry.ProEtale.lowerStarComp_assoc` and
   `AlgebraicGeometry.ProEtale.upperStarComp_assoc`: the associativity laws.
-- `AlgebraicGeometry.ProEtale.upperStarIsoLowerStarInv_trans`: the identification
-  `(e.hom)^* ≅ (e.inv)_*` is compatible with composition of isomorphisms.
-- `AlgebraicGeometry.ProEtale.globalSectionsLowerStarIso_comp_hom_app` and
-  `AlgebraicGeometry.ProEtale.globalSectionsUpperStarIso_trans_hom_app`: the identifications
-  of global sections of pushforwards and of pullbacks along isomorphisms are compatible with
-  composition.
-
-All proofs on pushforwards are computations of restriction maps along the pasting
-isomorphisms of base change; those on pullbacks pass to the conjugate isomorphisms of the
-right adjoints.
+- `AlgebraicGeometry.ProEtale.upperStarComp_hom_app_assoc`: the associativity law for the
+  pullbacks, evaluated at a sheaf.
 -/
 
 @[expose] public section
 
 universe u' u
 
-open CategoryTheory Limits Opposite
+open CategoryTheory Category Limits Opposite
 
-namespace AlgebraicGeometry
+namespace AlgebraicGeometry.ProEtale
 
 open Scheme
 
 variable (A : Type u') [Category.{u + 1} A] [Abelian A] [IsGrothendieckAbelian.{u + 1} A]
 
-namespace ProEtale
+section Conjugate
 
-omit [Abelian A] [IsGrothendieckAbelian.{u + 1} A] in
-/-- The associativity law for the composition isomorphisms of pushforwards: the two ways of
-identifying `f_* ⋙ g_* ⋙ h_*` with `(f ≫ g ≫ h)_*` agree. -/
-lemma lowerStarComp_assoc {X Y Z V : Scheme.{u}} (f : X ⟶ Y) (g : Y ⟶ Z) (h : Z ⟶ V) :
-    Functor.isoWhiskerRight (lowerStarComp A f g) (h)_*[A] ≪≫ lowerStarComp A (f ≫ g) h =
-      (f)_*[A].associator (g)_*[A] (h)_*[A] ≪≫
-        Functor.isoWhiskerLeft (f)_*[A] (lowerStarComp A g h) ≪≫ lowerStarComp A f (g ≫ h) ≪≫
-          lowerStarCongr A (Category.assoc f g h).symm := by
-  ext M b
-  simp only [Iso.trans_hom, NatTrans.comp_app, Functor.isoWhiskerRight_hom,
-    Functor.whiskerRight_app, Functor.isoWhiskerLeft_hom, Functor.whiskerLeft_app,
-    Functor.associator_hom_app, Category.id_comp, ObjectProperty.FullSubcategory.comp_hom,
-    lowerStarComp_hom_app_hom_app, lowerStarCongr_hom_app_hom_app, lowerStar_map_hom_app']
-  change _ = M.obj.map ((MorphismProperty.Over.pullback @WeaklyEtale ⊤ f).map _).op ≫ _
-  simp only [← Functor.map_comp, ← op_comp]
-  congr 2
-  apply MorphismProperty.Over.Hom.ext
-  apply pullback.hom_ext
-  · apply pullback.hom_ext
-    · apply pullback.hom_ext <;> simp [MorphismProperty.Over.pullback, MorphismProperty.Over.mk,
-        MorphismProperty.Over.pullbackComp, MorphismProperty.Over.pullbackCongr]
-    · simp [MorphismProperty.Over.pullback, MorphismProperty.Over.mk,
-        MorphismProperty.Over.pullbackComp, MorphismProperty.Over.pullbackCongr]
-  · simp [MorphismProperty.Over.pullback, MorphismProperty.Over.mk,
-      MorphismProperty.Over.pullbackComp, MorphismProperty.Over.pullbackCongr]
+variable {R S T : Scheme.{u}}
 
-/-- The composition isomorphism of pullbacks is conjugate to that of pushforwards. -/
-lemma conjugateIsoEquiv_upperStarComp {R S T : Scheme.{u}} (h₁ : T ⟶ S) (h₂ : S ⟶ R) :
+/-- The composition isomorphism of the pullbacks is conjugate to that of the pushforwards. -/
+lemma conjugateIsoEquiv_upperStarComp (h₁ : T ⟶ S) (h₂ : S ⟶ R) :
     conjugateIsoEquiv ((upperStarLowerStarAdjunction A h₂).comp
         (upperStarLowerStarAdjunction A h₁)) (upperStarLowerStarAdjunction A (h₁ ≫ h₂))
       (upperStarComp A h₁ h₂) = lowerStarComp A h₁ h₂ := by
-  rw [upperStarComp, conjugateIsoEquiv_iso_symm, Equiv.apply_symm_apply, Iso.symm_symm_eq]
+  ext : 1
+  exact conjugateEquiv_upperStarComp_hom A h₁ h₂
 
-/-- The congruence isomorphism of pullbacks is conjugate to that of pushforwards. -/
-lemma conjugateIsoEquiv_upperStarCongr {Z W : Scheme.{u}} {g g' : Z ⟶ W} (h : g = g') :
+/-- The congruence isomorphism of the pullbacks is conjugate to the inverse of that of the
+pushforwards. -/
+lemma conjugateIsoEquiv_upperStarCongr {g g' : S ⟶ R} (h : g = g') :
     conjugateIsoEquiv (upperStarLowerStarAdjunction A g') (upperStarLowerStarAdjunction A g)
-      (upperStarCongr A h) = lowerStarCongr A h.symm := by
+      (upperStarCongr A h) = (lowerStarCongr A h).symm := by
   subst h
   ext : 1
   simp [upperStarCongr, lowerStarCongr]
 
-/-- The associativity law for the composition isomorphisms of pullbacks, obtained from
-`AlgebraicGeometry.ProEtale.lowerStarComp_assoc` by passing to conjugates. -/
-lemma upperStarComp_assoc {X Y Z V : Scheme.{u}} (f : X ⟶ Y) (g : Y ⟶ Z) (h : Z ⟶ V) :
-    upperStarComp A (f ≫ g) h ≪≫ Functor.isoWhiskerLeft (h)^*[A] (upperStarComp A f g) =
-      upperStarCongr A (Category.assoc f g h) ≪≫ upperStarComp A f (g ≫ h) ≪≫
-        Functor.isoWhiskerRight (upperStarComp A g h) (f)^*[A] ≪≫
-          ((h)^*[A]).associator (g)^*[A] (f)^*[A] := by
-  refine (conjugateIsoEquiv ((upperStarLowerStarAdjunction A h).comp
-    ((upperStarLowerStarAdjunction A g).comp (upperStarLowerStarAdjunction A f)))
-    (upperStarLowerStarAdjunction A ((f ≫ g) ≫ h))).injective ?_
-  rw [conjugateIsoEquiv_trans _ ((upperStarLowerStarAdjunction A h).comp
-      (upperStarLowerStarAdjunction A (f ≫ g))) _,
-    conjugateIsoEquiv_trans _ (upperStarLowerStarAdjunction A (f ≫ g ≫ h)) _,
-    conjugateIsoEquiv_trans _ ((upperStarLowerStarAdjunction A (g ≫ h)).comp
-      (upperStarLowerStarAdjunction A f)) _,
-    conjugateIsoEquiv_trans _ (((upperStarLowerStarAdjunction A h).comp
-      (upperStarLowerStarAdjunction A g)).comp (upperStarLowerStarAdjunction A f)) _]
-  simp only [conjugateIsoEquiv_upperStarComp, conjugateIsoEquiv_isoWhiskerRight,
-    conjugateIsoEquiv_isoWhiskerLeft, conjugateIsoEquiv_associator,
-    conjugateIsoEquiv_upperStarCongr]
-  simpa only [Iso.trans_assoc] using lowerStarComp_assoc A f g h
+end Conjugate
+
+section Components
 
 omit [Abelian A] [IsGrothendieckAbelian.{u + 1} A] in
-/-- The restriction maps of a pushforward are those of the sheaf along base change. -/
-@[simp]
-lemma lowerStar_obj_obj_map {Z Y : Scheme.{u}} (g : Z ⟶ Y) (G : Sheaf (ProEt.topology Z) A)
-    {V W : Y.ProEtᵒᵖ} (f : V ⟶ W) :
-    ((g)_*[A].obj G).obj.map f =
-      G.obj.map ((MorphismProperty.Over.pullback @WeaklyEtale ⊤ g).map f.unop).op :=
+/-- The restriction maps of `g_* G` are those of `G` along the base changes. -/
+lemma lowerStar_obj_obj_map' {Z W : Scheme.{u}} (g : Z ⟶ W) (G : Sheaf (ProEt.topology Z) A)
+    {V V' : W.ProEtᵒᵖ} (φ : V ⟶ V') :
+    ((g)_*[A].obj G).obj.map φ =
+      G.obj.map ((MorphismProperty.Over.pullback @WeaklyEtale ⊤ g).map φ.unop).op :=
   rfl
 
-omit [Abelian A] [IsGrothendieckAbelian.{u + 1} A] in
-/-- The left unit law for the composition isomorphisms of pushforwards. -/
-lemma lowerStarComp_id_left {S R : Scheme.{u}} (h : S ⟶ R) :
-    lowerStarComp A (𝟙 S) h = Functor.isoWhiskerRight (lowerStarId A S) (h)_*[A] ≪≫
-      (h)_*[A].leftUnitor ≪≫ lowerStarCongr A (Category.id_comp h).symm := by
-  ext M b
-  simp only [Iso.trans_hom, NatTrans.comp_app, Functor.isoWhiskerRight_hom,
-    Functor.whiskerRight_app, Functor.leftUnitor_hom_app,
-    ObjectProperty.FullSubcategory.comp_hom, lowerStarComp_hom_app_hom_app,
-    lowerStarCongr_hom_app_hom_app, lowerStar_map_hom_app']
-  simp only [lowerStarId, Functor.sheafPushforwardContinuousId'_hom_app_hom_app]
-  erw [Category.id_comp (M.obj.map ((MorphismProperty.Over.pullbackCongr _).inv.app (unop b)).op)]
-  rw [← M.obj.map_comp]
-  congr 1
-  apply Quiver.Hom.unop_inj
-  apply MorphismProperty.Over.Hom.ext
-  apply pullback.hom_ext
-  · apply pullback.hom_ext <;> simp [MorphismProperty.Over.pullback, MorphismProperty.Over.mk,
-        MorphismProperty.Over.pullbackComp, MorphismProperty.Over.pullbackCongr,
-        MorphismProperty.Over.pullbackId]
-  · simp [MorphismProperty.Over.pullback, MorphismProperty.Over.mk,
-      MorphismProperty.Over.pullbackComp, MorphismProperty.Over.pullbackCongr]
+end Components
 
+section Assoc
+
+variable {X Y Z V : Scheme.{u}} (f : X ⟶ Y) (g : Y ⟶ Z) (h : Z ⟶ V)
+
+set_option backward.isDefEq.respectTransparency.types false in
 omit [Abelian A] [IsGrothendieckAbelian.{u + 1} A] in
-/-- The right unit law for the composition isomorphisms of pushforwards. -/
-lemma lowerStarComp_id_right {T S : Scheme.{u}} (h : T ⟶ S) :
-    lowerStarComp A h (𝟙 S) = Functor.isoWhiskerLeft (h)_*[A] (lowerStarId A S) ≪≫
-      (h)_*[A].rightUnitor ≪≫ lowerStarCongr A (Category.comp_id h).symm := by
+/-- The associativity law for the composition isomorphisms of the pushforwards. -/
+lemma lowerStarComp_assoc :
+    (f)_*[A].associator (g)_*[A] (h)_*[A] ≪≫
+        Functor.isoWhiskerLeft (f)_*[A] (lowerStarComp A g h) ≪≫ lowerStarComp A f (g ≫ h) =
+      Functor.isoWhiskerRight (lowerStarComp A f g) (h)_*[A] ≪≫ lowerStarComp A (f ≫ g) h ≪≫
+        lowerStarCongr A (Category.assoc f g h) := by
   ext M b
-  simp only [Iso.trans_hom, NatTrans.comp_app, Functor.isoWhiskerLeft_hom,
-    Functor.whiskerLeft_app, Functor.rightUnitor_hom_app,
-    ObjectProperty.FullSubcategory.comp_hom, lowerStarComp_hom_app_hom_app,
-    lowerStarCongr_hom_app_hom_app]
-  simp only [lowerStarId, Functor.sheafPushforwardContinuousId'_hom_app_hom_app]
-  rw [lowerStar_obj_obj_map]
-  erw [Category.id_comp (M.obj.map ((MorphismProperty.Over.pullbackCongr _).inv.app (unop b)).op)]
-  rw [← M.obj.map_comp]
+  simp only [Iso.trans_hom, NatTrans.comp_app, Functor.associator_hom_app,
+    Functor.isoWhiskerLeft_hom, Functor.whiskerLeft_app, Functor.isoWhiskerRight_hom,
+    Functor.whiskerRight_app, Category.id_comp, ObjectProperty.FullSubcategory.comp_hom,
+    lowerStarComp_hom_app_hom_app, lowerStarCongr_hom_app_hom_app, lowerStar_map_hom_app',
+    lowerStar_obj_obj_map', ← Functor.map_comp, ← op_comp]
   congr 1
   apply Quiver.Hom.unop_inj
   apply MorphismProperty.Over.Hom.ext
+  simp only [Quiver.Hom.unop_op]
   apply pullback.hom_ext
   · apply pullback.hom_ext
+    · apply pullback.hom_ext <;> simp [MorphismProperty.Over.pullback, MorphismProperty.Over.mk,
+        MorphismProperty.Over.pullbackCongr, MorphismProperty.Over.pullbackComp]
     · simp [MorphismProperty.Over.pullback, MorphismProperty.Over.mk,
-        MorphismProperty.Over.pullbackComp, MorphismProperty.Over.pullbackCongr,
-        MorphismProperty.Over.pullbackId]
-    · simpa [MorphismProperty.Over.pullback, MorphismProperty.Over.mk,
-        MorphismProperty.Over.pullbackComp, MorphismProperty.Over.pullbackCongr,
-        MorphismProperty.Over.pullbackId] using
-        (pullback.condition (f := (unop b).hom) (g := h ≫ 𝟙 S)).symm
+        MorphismProperty.Over.pullbackCongr, MorphismProperty.Over.pullbackComp]
   · simp [MorphismProperty.Over.pullback, MorphismProperty.Over.mk,
-      MorphismProperty.Over.pullbackComp, MorphismProperty.Over.pullbackCongr]
+      MorphismProperty.Over.pullbackCongr, MorphismProperty.Over.pullbackComp]
 
-omit [Abelian A] [IsGrothendieckAbelian.{u + 1} A] in
-/-- The unit of `lowerStarEquivalence e` is the composite of identity, congruence and
-composition isomorphisms it is built from: that composite already satisfies the triangle
-identity, so adjointification does not change it. -/
-lemma lowerStarEquivalence_unitIso {X Y : Scheme.{u}} (e : X ≅ Y) :
-    (lowerStarEquivalence A e).unitIso = (lowerStarId A X).symm ≪≫
-      lowerStarCongr A e.hom_inv_id.symm ≪≫ (lowerStarComp A e.hom e.inv).symm :=
-  Equivalence.adjointifyη_eq _ _ (lowerStar_map_unit_comp_counit A e)
-
-omit [Abelian A] [IsGrothendieckAbelian.{u + 1} A] in
-/-- The counit of `lowerStarEquivalence e`. -/
-lemma lowerStarEquivalence_counitIso {X Y : Scheme.{u}} (e : X ≅ Y) :
-    (lowerStarEquivalence A e).counitIso = lowerStarComp A e.inv e.hom ≪≫
-      lowerStarCongr A e.inv_hom_id ≪≫ lowerStarId A Y :=
-  rfl
-
-/-- The adjunction `(e.inv)_* ⊣ (e.hom)_*` of the equivalence `lowerStarEquivalence e`. -/
-noncomputable def lowerStarInvAdjunction {X Y : Scheme.{u}} (e : X ≅ Y) :
-    (e.inv)_*[A] ⊣ (e.hom)_*[A] :=
-  (lowerStarEquivalence A e).symm.toAdjunction
-
-set_option linter.flexible false in
-omit [Abelian A] [IsGrothendieckAbelian.{u + 1} A] in
-/-- The composition isomorphism of pushforwards along the inverses of isomorphisms
-`e₁ : X ≅ Y` and `e₂ : Y ≅ Z` is conjugate to the inverse of the composition isomorphism of
-pushforwards along `e₁` and `e₂`. -/
-lemma conjugateIsoEquiv_lowerStarComp_inv {X Y Z : Scheme.{u}} (e₁ : X ≅ Y) (e₂ : Y ≅ Z) :
-    conjugateIsoEquiv (lowerStarInvAdjunction A (e₁ ≪≫ e₂))
-      ((lowerStarInvAdjunction A e₂).comp (lowerStarInvAdjunction A e₁))
-      (lowerStarComp A e₂.inv e₁.inv) = (lowerStarComp A e₁.hom e₂.hom).symm := by
-  ext M b
-  simp only [lowerStarInvAdjunction, conjugateIsoEquiv_apply_hom, conjugateEquiv_apply_app,
-    Adjunction.comp_unit_app,
-    Equivalence.toAdjunction_unit, Equivalence.toAdjunction_counit, Equivalence.symm_unit,
-    Equivalence.symm_counit, Equivalence.unitInv, Equivalence.counitInv,
-    lowerStarEquivalence_unitIso, lowerStarEquivalence_counitIso, lowerStarEquivalence_functor,
-    lowerStarEquivalence_inverse, Iso.trans_hom, Iso.trans_inv, Iso.symm_hom, Iso.symm_inv,
-    NatTrans.comp_app, Functor.comp_map, Functor.map_comp,
-    ObjectProperty.FullSubcategory.comp_hom, lowerStarComp_hom_app_hom_app,
-    lowerStarComp_inv_app_hom_app, lowerStar_map_hom_app']
-  simp only [lowerStarId, lowerStarCongr_eq,
-    Functor.sheafPushforwardContinuousId'_hom_app_hom_app,
-    Functor.sheafPushforwardContinuousId'_inv_app_hom_app,
-    Functor.sheafPushforwardContinuousIso_inv, Functor.sheafPushforwardContinuousNatTrans_app_hom,
-    Functor.whiskerRight_app, NatTrans.op_app, Category.assoc]
-  simp only [Functor.comp_obj, lowerStar_obj_obj_map, Quiver.Hom.unop_op]
-  change M.obj.map _ ≫ M.obj.map _ ≫ M.obj.map _ ≫ M.obj.map _ ≫ M.obj.map _ ≫ M.obj.map _ ≫
-    M.obj.map _ ≫ M.obj.map _ ≫ M.obj.map _ ≫ M.obj.map _ = _
-  rw [← M.obj.map_comp, ← M.obj.map_comp, ← M.obj.map_comp, ← M.obj.map_comp, ← M.obj.map_comp,
-    ← M.obj.map_comp, ← M.obj.map_comp, ← M.obj.map_comp, ← M.obj.map_comp]
-  congr 1
-  apply Quiver.Hom.unop_inj
-  simp only [unop_comp, Quiver.Hom.unop_op, Functor.op_map]
-  apply MorphismProperty.Over.Hom.ext
-  apply pullback.hom_ext
-  · simp [MorphismProperty.Over.pullback, MorphismProperty.Over.mk,
-      MorphismProperty.Over.pullbackComp, MorphismProperty.Over.pullbackCongr]
-    exact Category.id_comp _
-  · simp [MorphismProperty.Over.pullback, MorphismProperty.Over.mk,
-      MorphismProperty.Over.pullbackComp, MorphismProperty.Over.pullbackCongr]
-
-/-- The identification `(e.hom)^* ≅ (e.inv)_*` is conjugate to the identity of `(e.hom)_*`. -/
-lemma conjugateIsoEquiv_upperStarIsoLowerStarInv {X Y : Scheme.{u}} (e : X ≅ Y) :
-    conjugateIsoEquiv (lowerStarInvAdjunction A e)
-      (upperStarLowerStarAdjunction A e.hom) (upperStarIsoLowerStarInv A e) = Iso.refl _ := by
-  change (conjugateIsoEquiv (upperStarLowerStarAdjunction A e.hom)
-    (lowerStarEquivalence A e).symm.toAdjunction
-    ((conjugateIsoEquiv _ _).symm (Iso.refl _))).symm = _
-  exact congrArg Iso.symm (Equiv.apply_symm_apply _ (Iso.refl _))
-
-/-- The identification `(e.hom)^* ≅ (e.inv)_*` of the pullback along an isomorphism with the
-pushforward along its inverse is compatible with composition:
-`(e₁ ≫ e₂)^* ≅ e₂^* ⋙ e₁^* ≅ (e₂⁻¹)_* ⋙ e₁^* ≅ (e₂⁻¹)_* ⋙ (e₁⁻¹)_* ≅ (e₂⁻¹ ≫ e₁⁻¹)_*`. -/
-lemma upperStarIsoLowerStarInv_trans {X Y Z : Scheme.{u}} (e₁ : X ≅ Y) (e₂ : Y ≅ Z) :
-    upperStarIsoLowerStarInv A (e₁ ≪≫ e₂) = upperStarComp A e₁.hom e₂.hom ≪≫
-      Functor.isoWhiskerRight (upperStarIsoLowerStarInv A e₂) (e₁.hom)^*[A] ≪≫
-      Functor.isoWhiskerLeft (e₂.inv)_*[A] (upperStarIsoLowerStarInv A e₁) ≪≫
-      lowerStarComp A e₂.inv e₁.inv := by
-  refine (conjugateIsoEquiv (lowerStarInvAdjunction A (e₁ ≪≫ e₂))
-    (upperStarLowerStarAdjunction A (e₁.hom ≫ e₂.hom))).injective
-    ((conjugateIsoEquiv_upperStarIsoLowerStarInv A (e₁ ≪≫ e₂)).trans ?_)
-  rw [conjugateIsoEquiv_trans _ ((upperStarLowerStarAdjunction A e₂.hom).comp
-      (upperStarLowerStarAdjunction A e₁.hom)) _,
-    conjugateIsoEquiv_trans _ ((lowerStarInvAdjunction A e₂).comp
-      (upperStarLowerStarAdjunction A e₁.hom)) _,
-    conjugateIsoEquiv_trans _ ((lowerStarInvAdjunction A e₂).comp
-      (lowerStarInvAdjunction A e₁)) _]
-  rw [conjugateIsoEquiv_lowerStarComp_inv, conjugateIsoEquiv_isoWhiskerLeft,
-    conjugateIsoEquiv_upperStarIsoLowerStarInv, conjugateIsoEquiv_isoWhiskerRight,
-    conjugateIsoEquiv_upperStarIsoLowerStarInv, conjugateIsoEquiv_upperStarComp]
-  ext : 2
-  simp
-
-/-- The identification `Γ(R, (g₁ ≫ g₂)_* H) ≅ Γ(T, H)` is the composite of the
-identifications for `g₂` and for `g₁`. -/
-lemma globalSectionsLowerStarIso_comp_hom_app {R S T : Scheme.{u}} (g₁ : T ⟶ S) (g₂ : S ⟶ R)
-    (H : Sheaf (ProEt.topology T) A) :
-    (globalSectionsLowerStarIso A (g₁ ≫ g₂)).hom.app H =
-      (Sheaf.Γ _ A).map ((lowerStarComp A g₁ g₂).inv.app H) ≫
-        (globalSectionsLowerStarIso A g₂).hom.app ((g₁)_*[A].obj H) ≫
-          (globalSectionsLowerStarIso A g₁).hom.app H := by
-  simp only [globalSectionsLowerStarIso, Iso.trans_hom, NatTrans.comp_app,
-    Functor.isoWhiskerLeft_hom, Functor.whiskerLeft_app, NatIso.ofComponents_hom_app,
-    Iso.refl_hom, Iso.symm_hom, Functor.mapIso_inv, Category.id_comp, Category.assoc]
-  rw [Iso.inv_hom_id_app_assoc]
-  erw [(Sheaf.ΓNatIsoSheafSections (ProEt.topology R) A
-    (ProEt.isTerminalMkId R)).hom.naturality_assoc]
-  congr 1
-  simp only [← Category.assoc]
-  congr 1
-  dsimp only [Functor.flip_obj_map, Functor.flip_map_app]
-  erw [lowerStarComp_inv_app_hom_app, lowerStar_obj_obj_map, ← H.obj.map_comp]
-  erw [← H.obj.map_comp]
-  congr 1
-  apply Quiver.Hom.unop_inj
-  exact ((ProEt.isTerminalMkId T).ofIso (overPullbackObjMkIdIso (g₁ ≫ g₂)).symm).hom_ext _ _
-
-/-- The identification `Γ(Z₁, (e₁ ≫ e₂)^* H) ≅ Γ(Z₃, H)` is the composite of the
-identifications for `e₁` and for `e₂`. -/
-lemma globalSectionsUpperStarIso_trans_hom_app {Z₁ Z₂ Z₃ : Scheme.{u}} (e₁ : Z₁ ≅ Z₂)
-    (e₂ : Z₂ ≅ Z₃) (H : Sheaf (ProEt.topology Z₃) A) :
-    (globalSectionsUpperStarIso A (e₁ ≪≫ e₂)).hom.app H =
-      (Sheaf.Γ _ A).map ((upperStarComp A e₁.hom e₂.hom).hom.app H) ≫
-        (globalSectionsUpperStarIso A e₁).hom.app ((e₂.hom)^*[A].obj H) ≫
-          (globalSectionsUpperStarIso A e₂).hom.app H := by
-  simp only [globalSectionsUpperStarIso, Iso.trans_hom, NatTrans.comp_app,
-    Functor.isoWhiskerRight_hom, Functor.whiskerRight_app, upperStarIsoLowerStarInv_trans,
-    Iso.trans_inv, globalSectionsLowerStarIso_comp_hom_app, Functor.isoWhiskerLeft_hom,
-    Functor.whiskerLeft_app, Functor.map_comp, Category.assoc]
-  congr 1
-  rw [← Functor.map_comp_assoc, (upperStarIsoLowerStarInv A e₁).hom.naturality,
-    Functor.map_comp_assoc, ← Functor.map_comp_assoc _ ((lowerStarComp A _ _).hom.app H),
-    Iso.hom_inv_id_app, CategoryTheory.Functor.map_id, Category.id_comp]
-  congr 1
-  exact (globalSectionsLowerStarIso A e₁.inv).hom.naturality_assoc _ _
-
-omit [Abelian A] [IsGrothendieckAbelian.{u + 1} A] in
-/-- The right unit law for the composition isomorphisms of pushforwards, at a component and
-with `𝟙` replaced by a morphism `g₀` equal to it. -/
-lemma lowerStarComp_inv_app_comp_lowerStarId_hom_app {T S : Scheme.{u}} (a : T ⟶ S)
-    (g₀ : S ⟶ S) (hg₀ : g₀ = 𝟙 S) {M : Sheaf (Scheme.ProEt.topology T) A}
-    {N : Sheaf (Scheme.ProEt.topology S) A} (f : (a)_*[A].obj M ⟶ N) :
-    (lowerStarComp A a g₀).inv.app M ≫ (g₀)_*[A].map f ≫ eqToHom (by rw [hg₀]) ≫
-      (lowerStarId A S).hom.app N = eqToHom (by rw [hg₀, Category.comp_id]) ≫ f := by
-  subst hg₀
-  rw [lowerStarComp_id_right]
-  simp only [Functor.id_obj, Functor.comp_obj, lowerStarCongr_rfl, Iso.trans_refl, Iso.trans_inv,
-    Functor.isoWhiskerLeft_inv, NatTrans.comp_app, Functor.rightUnitor_inv_app,
-    Functor.whiskerLeft_app, eqToHom_refl, Category.id_comp, NatTrans.naturality, Functor.id_map,
-    Category.assoc, Iso.inv_hom_id_app_assoc]
-  exact Category.id_comp f
-
-omit [Abelian A] [IsGrothendieckAbelian.{u + 1} A] in
-/-- Naturality of the inverse of the composition isomorphism of pushforwards `(c ≫ g)_* ≅
-c_* ⋙ g_*`, for a morphism `d` equal to `c ≫ g`. -/
-@[reassoc]
-lemma lowerStar_map_eqToHom_lowerStarComp_inv_app {T S R : Scheme.{u}} (c : T ⟶ S) (g : S ⟶ R)
-    (d : T ⟶ R) (hd : d = c ≫ g) {P Q : Sheaf (Scheme.ProEt.topology T) A} (f : P ⟶ Q) :
-    (d)_*[A].map f ≫ eqToHom (by rw [hd]) ≫ (lowerStarComp A c g).inv.app Q =
-      eqToHom (by rw [hd]) ≫ (lowerStarComp A c g).inv.app P ≫ (g)_*[A].map ((c)_*[A].map f) := by
-  subst hd
-  simp
-
-omit [Abelian A] [IsGrothendieckAbelian.{u + 1} A] in
-/-- The associativity law for the inverses of the composition isomorphisms of pushforwards, at a
-component and for morphisms `b`, `d`, `e` equal to the composites `a ≫ c`, `c ≫ g`, `b ≫ g`. -/
-@[reassoc]
-lemma eqToHom_lowerStarComp_inv_app_assoc {T S R Q : Scheme.{u}} (a : T ⟶ S) (c : S ⟶ R)
-    (g : R ⟶ Q) (b : T ⟶ R) (hb : b = a ≫ c) (d : S ⟶ Q) (hd : d = c ≫ g) (e : T ⟶ Q)
-    (he : e = b ≫ g) (M : Sheaf (Scheme.ProEt.topology T) A) :
-    eqToHom (show (e)_*[A].obj M = (b ≫ g)_*[A].obj M by rw [he]) ≫
-      (lowerStarComp A b g).inv.app M ≫
-        (g)_*[A].map (eqToHom (by rw [hb])) ≫ (g)_*[A].map ((lowerStarComp A a c).inv.app M) =
-      eqToHom (show (e)_*[A].obj M = (a ≫ d)_*[A].obj M by rw [he, hb, hd, Category.assoc]) ≫
-        (lowerStarComp A a d).inv.app M ≫
-        eqToHom (show (d)_*[A].obj ((a)_*[A].obj M) = (c ≫ g)_*[A].obj ((a)_*[A].obj M) by
-          rw [hd]) ≫ (lowerStarComp A c g).inv.app ((a)_*[A].obj M) := by
-  subst hb hd he
-  have := congrArg (fun e ↦ e.inv.app M) (lowerStarComp_assoc A a c g)
-  simpa [lowerStarCongr] using this
-
-/-- Pulling back along `s` the composite `E^* M ≅ (E⁻¹)_* M ⟶ M` of a map `ψ`, for
-`E = e₂ ≫ e₁` and `ψ` the composite of `ψ₁` and `ψ₂`, is the composite of the pullbacks along
-`s ≫ e₂` of `ψ₁` and along `s` of `ψ₂`. -/
-lemma upperStarComp_hom_app_map_comp_of_eq {P Y : Scheme.{u}} (s : P ⟶ Y) (e₁ e₂ E : Y ≅ Y)
-    (hE : E = e₂ ≪≫ e₁) (M : Sheaf (Scheme.ProEt.topology Y) A)
-    (ψ₁ : (e₁.inv)_*[A].obj M ⟶ M) (ψ₂ : (e₂.inv)_*[A].obj M ⟶ M) (ψ : (E.inv)_*[A].obj M ⟶ M)
-    (hψ : ψ = eqToHom (by rw [hE]; rfl) ≫ (lowerStarComp A e₁.inv e₂.inv).inv.app M ≫
-      (e₂.inv)_*[A].map ψ₁ ≫ ψ₂) :
-    (upperStarComp A s E.hom).hom.app M ≫
-        (s)^*[A].map ((upperStarIsoLowerStarInv A E).hom.app M ≫ ψ) =
-      eqToHom (by rw [hE]; rfl) ≫ (upperStarComp A (s ≫ e₂.hom) e₁.hom).hom.app M ≫
-        (s ≫ e₂.hom)^*[A].map ((upperStarIsoLowerStarInv A e₁).hom.app M ≫ ψ₁) ≫
-        (upperStarComp A s e₂.hom).hom.app M ≫
-        (s)^*[A].map ((upperStarIsoLowerStarInv A e₂).hom.app M ≫ ψ₂) := by
-  subst hE hψ
-  have h₁ := congrArg (fun e ↦ e.hom.app M) (upperStarComp_assoc A s e₂.hom e₁.hom)
-  simp only [Iso.trans_hom, NatTrans.comp_app, Functor.isoWhiskerLeft_hom,
-    Functor.whiskerLeft_app, Functor.isoWhiskerRight_hom, Functor.whiskerRight_app,
-    Functor.associator_hom_app, upperStarCongr, eqToIso.hom, eqToHom_app, Category.comp_id] at h₁
-  have h₂ : (upperStarIsoLowerStarInv A (e₂ ≪≫ e₁)).hom.app M =
-      (upperStarComp A e₂.hom e₁.hom).hom.app M ≫
-        (upperStarIsoLowerStarInv A e₂).hom.app ((e₁.hom)^*[A].obj M) ≫
-        (e₂.inv)_*[A].map ((upperStarIsoLowerStarInv A e₁).hom.app M) ≫
-        (lowerStarComp A e₁.inv e₂.inv).hom.app M := by
-    simpa using congrArg (fun e ↦ e.hom.app M) (upperStarIsoLowerStarInv_trans A e₂ e₁)
-  rw [h₂, (upperStarComp A s e₂.hom).hom.naturality_assoc, reassoc_of% h₁]
-  simp only [Functor.comp_map, ← Functor.map_comp, Category.assoc, Iso.hom_inv_id_app_assoc,
-    eqToHom_refl, Category.id_comp]
-  rw [(upperStarIsoLowerStarInv A e₂).hom.naturality_assoc]
-  simp only [Functor.map_comp, Category.assoc]
-  rfl
-
-/-- `AlgebraicGeometry.ProEtale.globalSectionsUpperStarIso_trans_hom_app` for an isomorphism
-`E` equal to `e₂ ≪≫ e₁`. -/
-lemma globalSectionsUpperStarIso_hom_app_of_eq {P : Scheme.{u}} (e₁ e₂ E : P ≅ P)
-    (hE : E = e₂ ≪≫ e₁) (H : Sheaf (Scheme.ProEt.topology P) A) :
-    (globalSectionsUpperStarIso A E).hom.app H =
-      (Sheaf.Γ _ A).map (eqToHom (by rw [hE]; rfl) ≫ (upperStarComp A e₂.hom e₁.hom).hom.app H) ≫
-        (globalSectionsUpperStarIso A e₂).hom.app ((e₁.hom)^*[A].obj H) ≫
-        (globalSectionsUpperStarIso A e₁).hom.app H := by
-  subst hE
-  rw [globalSectionsUpperStarIso_trans_hom_app, eqToHom_refl, Category.id_comp]
-
-/-- The composition isomorphism of pullbacks along equal morphisms. -/
-lemma upperStarComp_hom_app_congr {P Q Y : Scheme.{u}} (f f' : P ⟶ Q) (hf : f = f') (t : Q ⟶ Y)
-    (M : Sheaf (Scheme.ProEt.topology Y) A) :
-    (upperStarComp A f t).hom.app M = eqToHom (by rw [hf]) ≫ (upperStarComp A f' t).hom.app M ≫
-      eqToHom (by rw [hf]) := by
-  subst hf
-  simp
-
-/-- The identification `Γ((E ≫ t)^* M) ≅ Γ(t^* M)` for an automorphism `E = e₂ ≪≫ e₁` is the
-composite of those for `e₂` and for `e₁`. -/
-lemma globalSections_map_upperStarComp_comp_globalSectionsUpperStarIso_of_eq {P Y : Scheme.{u}}
-    (t : P ⟶ Y) (e₁ e₂ E : P ≅ P) (hE : E = e₂ ≪≫ e₁) (M : Sheaf (Scheme.ProEt.topology Y) A) :
-    (Sheaf.Γ _ A).map ((upperStarComp A E.hom t).hom.app M) ≫
-        (globalSectionsUpperStarIso A E).hom.app ((t)^*[A].obj M) =
-      eqToHom (by rw [hE, Iso.trans_hom, Category.assoc]) ≫
-        (Sheaf.Γ _ A).map ((upperStarComp A e₂.hom (e₁.hom ≫ t)).hom.app M) ≫
-        (globalSectionsUpperStarIso A e₂).hom.app ((e₁.hom ≫ t)^*[A].obj M) ≫
-        (Sheaf.Γ _ A).map ((upperStarComp A e₁.hom t).hom.app M) ≫
-        (globalSectionsUpperStarIso A e₁).hom.app ((t)^*[A].obj M) := by
-  have h := congrArg (fun e ↦ e.hom.app M) (upperStarComp_assoc A e₂.hom e₁.hom t)
-  simp only [Iso.trans_hom, NatTrans.comp_app, Functor.isoWhiskerLeft_hom,
-    Functor.whiskerLeft_app, Functor.isoWhiskerRight_hom, Functor.whiskerRight_app,
-    Functor.associator_hom_app, upperStarCongr, eqToIso.hom, eqToHom_app, Category.comp_id] at h
-  have hn := (globalSectionsUpperStarIso A e₂).hom.naturality
-    (X := (e₁.hom ≫ t)^*[A].obj M) (Y := (e₁.hom)^*[A].obj ((t)^*[A].obj M))
-    ((upperStarComp A e₁.hom t).hom.app M)
-  simp only [Functor.comp_map] at hn
-  rw [globalSectionsUpperStarIso_hom_app_of_eq A e₁ e₂ E hE,
-    upperStarComp_hom_app_congr A E.hom (e₂.hom ≫ e₁.hom) (by rw [hE]; rfl)]
-  simp only [Functor.map_comp, Category.assoc, eqToHom_map, eqToHom_trans_assoc, eqToHom_refl,
-    Category.id_comp]
-  rw [← Functor.map_comp_assoc, h]
-  simp only [Functor.map_comp, Category.assoc, eqToHom_map, eqToHom_trans_assoc]
+/-- The associativity law for the composition isomorphisms of the pullbacks, obtained from
+`AlgebraicGeometry.ProEtale.lowerStarComp_assoc` by conjugation. -/
+lemma upperStarComp_assoc :
+    upperStarComp A f (g ≫ h) ≪≫ Functor.isoWhiskerRight (upperStarComp A g h) (f)^*[A] ≪≫
+        (h)^*[A].associator (g)^*[A] (f)^*[A] =
+      upperStarCongr A (Category.assoc f g h).symm ≪≫ upperStarComp A (f ≫ g) h ≪≫
+        Functor.isoWhiskerLeft (h)^*[A] (upperStarComp A f g) := by
+  refine (conjugateIsoEquiv ((upperStarLowerStarAdjunction A h).comp
+    ((upperStarLowerStarAdjunction A g).comp (upperStarLowerStarAdjunction A f)))
+    (upperStarLowerStarAdjunction A (f ≫ g ≫ h))).injective ?_
+  rw [conjugateIsoEquiv_trans _ ((upperStarLowerStarAdjunction A (g ≫ h)).comp
+      (upperStarLowerStarAdjunction A f)) _,
+    conjugateIsoEquiv_trans _ (((upperStarLowerStarAdjunction A h).comp
+      (upperStarLowerStarAdjunction A g)).comp (upperStarLowerStarAdjunction A f)) _,
+    conjugateIsoEquiv_trans _ (upperStarLowerStarAdjunction A ((f ≫ g) ≫ h)) _,
+    conjugateIsoEquiv_trans _ ((upperStarLowerStarAdjunction A h).comp
+      (upperStarLowerStarAdjunction A (f ≫ g))) _]
+  simp only [conjugateIsoEquiv_upperStarComp, conjugateIsoEquiv_isoWhiskerRight,
+    conjugateIsoEquiv_isoWhiskerLeft, conjugateIsoEquiv_associator,
+    conjugateIsoEquiv_upperStarCongr, Iso.trans_assoc]
+  rw [lowerStarComp_assoc]
   congr 2
-  exact (reassoc_of% hn) _
 
-/-- The identification `Γ((e ≫ t)^* M) ≅ Γ(t^* M)` along an automorphism `e` commutes with the
-map `Γ((t ≫ g)^* M) ⟶ Γ(t^* M)` induced by a map `χ : g^* M ⟶ M`. -/
-lemma globalSections_map_upperStarComp_comm {P Y : Scheme.{u}} (t : P ⟶ Y) (e : P ≅ P)
-    (g : Y ⟶ Y) (M : Sheaf (Scheme.ProEt.topology Y) A) (χ : (g)^*[A].obj M ⟶ M) :
-    (Sheaf.Γ _ A).map ((upperStarComp A e.hom (t ≫ g)).hom.app M) ≫
-        (globalSectionsUpperStarIso A e).hom.app ((t ≫ g)^*[A].obj M) ≫
-        (Sheaf.Γ _ A).map ((upperStarComp A t g).hom.app M ≫ (t)^*[A].map χ) =
-      eqToHom (by rw [Category.assoc]) ≫
-        (Sheaf.Γ _ A).map ((upperStarComp A (e.hom ≫ t) g).hom.app M ≫ (e.hom ≫ t)^*[A].map χ) ≫
-        (Sheaf.Γ _ A).map ((upperStarComp A e.hom t).hom.app M) ≫
-        (globalSectionsUpperStarIso A e).hom.app ((t)^*[A].obj M) := by
-  have h := congrArg (fun e ↦ e.hom.app M) (upperStarComp_assoc A e.hom t g)
-  simp only [Iso.trans_hom, NatTrans.comp_app, Functor.isoWhiskerLeft_hom,
-    Functor.whiskerLeft_app, Functor.isoWhiskerRight_hom, Functor.whiskerRight_app,
-    Functor.associator_hom_app, upperStarCongr, eqToIso.hom, eqToHom_app, Category.comp_id] at h
-  have hn := (globalSectionsUpperStarIso A e).hom.naturality
-    ((upperStarComp A t g).hom.app M ≫ (t)^*[A].map χ)
-  simp only [Functor.comp_map] at hn
-  have key : ((upperStarComp A (e.hom ≫ t) g).hom.app M ≫ (e.hom ≫ t)^*[A].map χ) ≫
-      (upperStarComp A e.hom t).hom.app M = eqToHom (by rw [Category.assoc]) ≫
-        (upperStarComp A e.hom (t ≫ g)).hom.app M ≫
-          (e.hom)^*[A].map ((upperStarComp A t g).hom.app M ≫ (t)^*[A].map χ) := by
-    rw [Category.assoc ((upperStarComp A (e.hom ≫ t) g).hom.app M),
-      (upperStarComp A e.hom t).hom.naturality, reassoc_of% h]
-    simp
-  rw [← hn, ← Functor.map_comp_assoc, ← Functor.map_comp_assoc, key]
-  simp
+/-- The associativity law for the composition isomorphisms of the pullbacks, evaluated at a
+sheaf. -/
+lemma upperStarComp_hom_app_comp_upperStarComp_hom_app (M : Sheaf (ProEt.topology V) A) :
+    (upperStarComp A (f ≫ g) h).hom.app M ≫ (upperStarComp A f g).hom.app ((h)^*[A].obj M) =
+      (upperStarCongr A (Category.assoc f g h)).hom.app M ≫
+        (upperStarComp A f (g ≫ h)).hom.app M ≫ (f)^*[A].map ((upperStarComp A g h).hom.app M) := by
+  have := congrArg (fun e ↦ e.hom.app M) (upperStarComp_assoc A f g h)
+  simp only [Iso.trans_hom, NatTrans.comp_app, Functor.isoWhiskerRight_hom,
+    Functor.whiskerRight_app, Functor.associator_hom_app, Functor.isoWhiskerLeft_hom,
+    Functor.whiskerLeft_app, Category.comp_id] at this
+  rw [this, ← Category.assoc, ← NatTrans.comp_app, ← Iso.trans_hom]
+  simp [upperStarCongr]
 
-end ProEtale
+end Assoc
 
-end AlgebraicGeometry
+
+section Paste
+
+variable {P P' P'' Y Y' Y'' Z : Scheme.{u}}
+
+/-- The composition isomorphism `a^* ≅ c^* ⋙ b^*` of pullbacks along a factorisation
+`b ≫ c = a`. -/
+noncomputable def upperStarFactor {a : P ⟶ Y} {b : P ⟶ Z} {c : Z ⟶ Y} (e : b ≫ c = a) :
+    (a)^*[A] ≅ (c)^*[A] ⋙ (b)^*[A] :=
+  upperStarCongr A e.symm ≪≫ upperStarComp A b c
+
+/-- The factorisation isomorphism of the trivial factorisation is the composition isomorphism. -/
+lemma upperStarFactor_rfl (b : P ⟶ Z) (c : Z ⟶ Y) :
+    upperStarFactor A (rfl : b ≫ c = b ≫ c) = upperStarComp A b c := by
+  simp only [upperStarFactor, upperStarCongr, eqToIso_refl, Iso.refl_trans]
+
+/-- The isomorphism of a commutative square `a ≫ b = c ≫ d` in terms of factorisations of a
+common composite `k`. -/
+lemma upperStarCompIso_eq_upperStarFactor {Z₁ Z₂ : Scheme.{u}} {a : P ⟶ Z₁} {b : Z₁ ⟶ Y}
+    {c : P ⟶ Z₂} {d : Z₂ ⟶ Y} (h : a ≫ b = c ≫ d) {k : P ⟶ Y} (e₁ : a ≫ b = k)
+    (e₂ : c ≫ d = k) :
+    upperStarCompIso A h = (upperStarFactor A e₁).symm ≪≫ upperStarFactor A e₂ := by
+  subst e₁
+  rw [upperStarFactor_rfl]
+  rfl
+
+/-- The associativity law for the factorisation isomorphisms. -/
+lemma upperStarFactor_hom_app_assoc {a : P'' ⟶ Y} {x : P'' ⟶ P'} {y : P' ⟶ Z} {z : Z ⟶ Y}
+    {b : P' ⟶ Y} {c : P'' ⟶ Z} (e_b : y ≫ z = b) (e_a : x ≫ b = a) (e_c : x ≫ y = c)
+    (e_a' : c ≫ z = a) (M : Sheaf (ProEt.topology Y) A) :
+    (upperStarFactor A e_a).hom.app M ≫ (x)^*[A].map ((upperStarFactor A e_b).hom.app M) =
+      (upperStarFactor A e_a').hom.app M ≫ (upperStarFactor A e_c).hom.app ((z)^*[A].obj M) := by
+  subst e_b e_c e_a
+  simp only [upperStarFactor, upperStarCongr, Iso.trans_hom, eqToIso.hom, eqToHom_refl,
+    Category.id_comp]
+  rw [upperStarComp_hom_app_comp_upperStarComp_hom_app]
+  simp only [upperStarCongr, eqToIso.hom, eqToHom_refl, NatTrans.id_app, Category.id_comp]
+
+/-- Factorisations through equal morphisms give the same isomorphism. -/
+lemma upperStarFactor_hom_app_comp_congr {a : P'' ⟶ Y} {g : Y' ⟶ Y} {c₁ c₂ : P'' ⟶ Y'}
+    {t'' : P'' ⟶ Y''} {g' : Y'' ⟶ Y'} (p : c₁ = c₂) (e₁ : c₁ ≫ g = a) (e₂ : c₂ ≫ g = a)
+    (f₁ : t'' ≫ g' = c₁) (f₂ : t'' ≫ g' = c₂) (M : Sheaf (ProEt.topology Y) A) :
+    (upperStarFactor A e₁).hom.app M ≫ (upperStarFactor A f₁).hom.app ((g)^*[A].obj M) =
+      (upperStarFactor A e₂).hom.app M ≫ (upperStarFactor A f₂).hom.app ((g)^*[A].obj M) := by
+  subst p
+  have : e₁ = e₂ := rfl
+  have : f₁ = f₂ := rfl
+  subst_vars
+  rfl
+
+/-- The pasting law for the isomorphisms `b^* ⋙ a^* ≅ d^* ⋙ c^*` attached to commutative
+squares: the isomorphisms of two squares `τ ≫ t = t' ≫ g` and `τ' ≫ t' = t'' ≫ g'` paste to the
+isomorphism of the composite square `(τ' ≫ τ) ≫ t = t'' ≫ (g' ≫ g)`. -/
+lemma upperStarCompIso_hom_app_paste {τ : P' ⟶ P} {τ' : P'' ⟶ P'} {t : P ⟶ Y} {t' : P' ⟶ Y'}
+    {t'' : P'' ⟶ Y''} {g : Y' ⟶ Y} {g' : Y'' ⟶ Y'}
+    (h : τ ≫ t = t' ≫ g) (h' : τ' ≫ t' = t'' ≫ g') (h'' : (τ' ≫ τ) ≫ t = t'' ≫ (g' ≫ g))
+    (M : Sheaf (ProEt.topology Y) A) :
+    (upperStarComp A τ' τ).hom.app ((t)^*[A].obj M) ≫
+        (τ')^*[A].map ((upperStarCompIso A h).hom.app M) ≫
+        (upperStarCompIso A h').hom.app ((g)^*[A].obj M) =
+      (upperStarCompIso A h'').hom.app M ≫ (t'')^*[A].map ((upperStarComp A g' g).hom.app M) := by
+  have ea : (τ' ≫ t') ≫ g = (τ' ≫ τ) ≫ t := by simp only [Category.assoc, h]
+  have ea' : (t'' ≫ g') ≫ g = (τ' ≫ τ) ≫ t := by simp only [Category.assoc, h'']
+  have e₁ := upperStarFactor_hom_app_assoc A (rfl : τ ≫ t = τ ≫ t)
+    (Category.assoc τ' τ t).symm (rfl : τ' ≫ τ = τ' ≫ τ) (rfl : (τ' ≫ τ) ≫ t = (τ' ≫ τ) ≫ t) M
+  have e₂ := upperStarFactor_hom_app_assoc A h.symm (Category.assoc τ' τ t).symm
+    (rfl : τ' ≫ t' = τ' ≫ t') ea M
+  have e₃ := upperStarFactor_hom_app_assoc A (rfl : g' ≫ g = g' ≫ g) h''.symm
+    (rfl : t'' ≫ g' = t'' ≫ g') ea' M
+  have e₄ := upperStarFactor_hom_app_comp_congr A h' ea ea' h'.symm rfl M
+  rw [upperStarCompIso_eq_upperStarFactor A h rfl h.symm,
+    upperStarCompIso_eq_upperStarFactor A h' rfl h'.symm,
+    upperStarCompIso_eq_upperStarFactor A h'' rfl h''.symm,
+    ← upperStarFactor_rfl A τ' τ, ← upperStarFactor_rfl A g' g,
+    ← cancel_epi ((upperStarFactor A (rfl : (τ' ≫ τ) ≫ t = (τ' ≫ τ) ≫ t)).hom.app M)]
+  simp only [Iso.trans_hom, Iso.symm_hom, NatTrans.comp_app, Functor.map_comp]
+  rw [reassoc_of% e₁.symm]
+  simp only [Category.assoc, ← Functor.map_comp_assoc, Iso.hom_inv_id_app_assoc]
+  rw [reassoc_of% e₂, e₃]
+  simp only [Iso.hom_inv_id_app_assoc]
+  exact e₄
+
+end Paste
+
+
+section Factor
+
+variable {X Y Z : Scheme.{u}}
+
+/-- The composition isomorphism `b_* ⋙ c_* ≅ a_*` of pushforwards along a factorisation
+`b ≫ c = a`. -/
+noncomputable def lowerStarFactor {a : Z ⟶ X} {b : Z ⟶ Y} {c : Y ⟶ X} (e : b ≫ c = a) :
+    (b)_*[A] ⋙ (c)_*[A] ≅ (a)_*[A] :=
+  Functor.sheafPushforwardContinuousComp'
+    (eFG := (MorphismProperty.Over.pullbackComp (P := @WeaklyEtale) (Q := ⊤) b c a e.symm).symm) A
+    (Scheme.ProEt.topology X) (Scheme.ProEt.topology Y) (Scheme.ProEt.topology Z)
+
+omit [Abelian A] [IsGrothendieckAbelian.{u + 1} A] in
+lemma lowerStarFactor_hom_app_hom_app {a : Z ⟶ X} {b : Z ⟶ Y} {c : Y ⟶ X} (e : b ≫ c = a)
+    (G : Sheaf (ProEt.topology Z) A) (V : X.ProEtᵒᵖ) :
+    ((lowerStarFactor A e).hom.app G).hom.app V =
+      G.obj.map ((MorphismProperty.Over.pullbackComp b c a e.symm).hom.app V.unop).op := by
+  simp only [lowerStarFactor, Functor.sheafPushforwardContinuousComp']
+  exact Category.id_comp _
+
+omit [Abelian A] [IsGrothendieckAbelian.{u + 1} A] in
+lemma lowerStarFactor_inv_app_hom_app {a : Z ⟶ X} {b : Z ⟶ Y} {c : Y ⟶ X} (e : b ≫ c = a)
+    (G : Sheaf (ProEt.topology Z) A) (V : X.ProEtᵒᵖ) :
+    ((lowerStarFactor A e).inv.app G).hom.app V =
+      G.obj.map ((MorphismProperty.Over.pullbackComp b c a e.symm).inv.app V.unop).op := by
+  simp only [lowerStarFactor, Functor.sheafPushforwardContinuousComp']
+  exact Category.comp_id _
+
+omit [Abelian A] [IsGrothendieckAbelian.{u + 1} A] in
+/-- The composition isomorphism followed by a congruence is a factorisation isomorphism. -/
+lemma lowerStarComp_trans_lowerStarCongr {a : Z ⟶ X} {b : Z ⟶ Y} {c : Y ⟶ X}
+    (e : b ≫ c = a) : lowerStarComp A b c ≪≫ lowerStarCongr A e = lowerStarFactor A e := by
+  subst e
+  rw [lowerStarCongr_rfl, Iso.trans_refl]
+  rfl
+
+omit [Abelian A] [IsGrothendieckAbelian.{u + 1} A] in
+set_option backward.isDefEq.respectTransparency.types false in
+lemma lowerStarId_hom_app_hom_app (G : Sheaf (ProEt.topology X) A) (V : X.ProEtᵒᵖ) :
+    ((lowerStarId A X).hom.app G).hom.app V =
+      G.obj.map ((MorphismProperty.Over.pullbackId @WeaklyEtale ⊤ X).inv.app V.unop).op := by
+  simp [lowerStarId]
+
+omit [Abelian A] [IsGrothendieckAbelian.{u + 1} A] in
+set_option backward.isDefEq.respectTransparency.types false in
+lemma lowerStarId_inv_app_hom_app (G : Sheaf (ProEt.topology X) A) (V : X.ProEtᵒᵖ) :
+    ((lowerStarId A X).inv.app G).hom.app V =
+      G.obj.map ((MorphismProperty.Over.pullbackId @WeaklyEtale ⊤ X).hom.app V.unop).op := by
+  simp [lowerStarId]
+
+/-- The unit `M ⟶ f_* i_* M` of pushforwards along morphisms with `i ≫ f = 𝟙`. -/
+noncomputable def lowerStarUnit {i : X ⟶ Y} {f : Y ⟶ X} (h : i ≫ f = 𝟙 X) :
+    𝟭 (Sheaf (ProEt.topology X) A) ⟶ (i)_*[A] ⋙ (f)_*[A] :=
+  (lowerStarFactor A h ≪≫ lowerStarId A X).inv
+
+omit [Abelian A] [IsGrothendieckAbelian.{u + 1} A] in
+/-- The units of pushforwards along inverse morphisms are compatible with composition. -/
+lemma lowerStarUnit_app_comp_map_lowerStarFactor_inv {W : Scheme.{u}} {a : X ⟶ Y} {ai : Y ⟶ X}
+    {b : Y ⟶ W} {bi : W ⟶ Y} {ab : X ⟶ W} {abi : W ⟶ X} (ha : ai ≫ a = 𝟙 Y)
+    (hb : bi ≫ b = 𝟙 W) (hab : abi ≫ ab = 𝟙 W) (e₁ : a ≫ b = ab) (e₂ : bi ≫ ai = abi)
+    (M : Sheaf (ProEt.topology W) A) :
+    (lowerStarUnit A hab).app M ≫ (ab)_*[A].map ((lowerStarFactor A e₂).inv.app M) =
+      (lowerStarUnit A hb).app M ≫ (b)_*[A].map ((lowerStarUnit A ha).app ((bi)_*[A].obj M)) ≫
+        (lowerStarFactor A e₁).hom.app _ := by
+  ext V
+  simp only [lowerStarUnit, Iso.trans_inv, NatTrans.comp_app,
+    ObjectProperty.FullSubcategory.comp_hom, lowerStarFactor_hom_app_hom_app,
+    lowerStarFactor_inv_app_hom_app, lowerStarId_inv_app_hom_app, lowerStar_map_hom_app',
+    lowerStar_obj_obj_map', ← Functor.map_comp, ← op_comp, Category.assoc]
+  congr 1
+  apply Quiver.Hom.unop_inj
+  apply MorphismProperty.Over.Hom.ext
+  simp [MorphismProperty.Over.pullback, MorphismProperty.Over.mk,
+    MorphismProperty.Over.pullbackComp, MorphismProperty.Over.pullbackId]
+
+end Factor
+
+
+section IsoTrans
+
+variable {P X Y Z W : Scheme.{u}}
+
+/-- The adjoint transpose of the identification `e^* ≅ (e⁻¹)_*` is the unit of the
+pushforwards along `e⁻¹` and `e`. -/
+lemma upperStarLowerStarAdjunction_unit_app_comp_map_upperStarIsoLowerStarInv (e : X ≅ Y)
+    (M : Sheaf (ProEt.topology Y) A) :
+    (upperStarLowerStarAdjunction A e.hom).unit.app M ≫
+        (e.hom)_*[A].map ((upperStarIsoLowerStarInv A e).hom.app M) =
+      (lowerStarUnit A e.inv_hom_id).app M := by
+  rw [upperStarIsoLowerStarInv, Adjunction.unit_leftAdjointUniq_hom_app, lowerStarUnit,
+    ← lowerStarComp_trans_lowerStarCongr, Iso.trans_assoc]
+  rfl
+
+/-- The adjoint transpose of a factorisation isomorphism of pullbacks is the corresponding
+factorisation isomorphism of pushforwards, applied to the composite of the units. -/
+lemma upperStarLowerStarAdjunction_unit_app_comp_map_upperStarFactor {a : P ⟶ Y} {b : P ⟶ Z}
+    {c : Z ⟶ Y} (e : b ≫ c = a) (M : Sheaf (ProEt.topology Y) A) :
+    (upperStarLowerStarAdjunction A a).unit.app M ≫
+        (a)_*[A].map ((upperStarFactor A e).hom.app M) =
+      (upperStarLowerStarAdjunction A c).unit.app M ≫
+        (c)_*[A].map ((upperStarLowerStarAdjunction A b).unit.app ((c)^*[A].obj M)) ≫
+        (lowerStarFactor A e).hom.app ((b)^*[A].obj ((c)^*[A].obj M)) := by
+  subst e
+  have h := unit_conjugateEquiv ((upperStarLowerStarAdjunction A c).comp
+    (upperStarLowerStarAdjunction A b)) (upperStarLowerStarAdjunction A (b ≫ c))
+    (upperStarComp A b c).hom M
+  rw [conjugateEquiv_upperStarComp_hom, Adjunction.comp_unit_app] at h
+  rw [upperStarFactor_rfl, ← h, ← lowerStarComp_trans_lowerStarCongr, lowerStarCongr_rfl,
+    Iso.trans_refl, Category.assoc]
+  rfl
+
+/-- The identifications `e^* ≅ (e⁻¹)_*` are compatible with composition of isomorphisms. -/
+lemma upperStarIsoLowerStarInv_hom_app_trans (e₁ : X ≅ Y) (e₂ : Y ≅ W) (E : X ≅ W)
+    (hE : e₁.hom ≫ e₂.hom = E.hom) (hEi : e₂.inv ≫ e₁.inv = E.inv)
+    (M : Sheaf (ProEt.topology W) A) :
+    (upperStarIsoLowerStarInv A E).hom.app M ≫ (lowerStarFactor A hEi).inv.app M =
+      (upperStarFactor A hE).hom.app M ≫
+        (e₁.hom)^*[A].map ((upperStarIsoLowerStarInv A e₂).hom.app M) ≫
+        (upperStarIsoLowerStarInv A e₁).hom.app ((e₂.inv)_*[A].obj M) := by
+  apply ((upperStarLowerStarAdjunction A E.hom).homEquiv _ _).injective
+  simp only [Adjunction.homEquiv_unit, Functor.map_comp]
+  rw [reassoc_of% upperStarLowerStarAdjunction_unit_app_comp_map_upperStarIsoLowerStarInv,
+    reassoc_of% upperStarLowerStarAdjunction_unit_app_comp_map_upperStarFactor,
+    lowerStarUnit_app_comp_map_lowerStarFactor_inv A e₁.inv_hom_id e₂.inv_hom_id E.inv_hom_id hE
+      hEi]
+  have n₁ := (lowerStarFactor A hE).hom.naturality
+    ((e₁.hom)^*[A].map ((upperStarIsoLowerStarInv A e₂).hom.app M) ≫
+      (upperStarIsoLowerStarInv A e₁).hom.app ((e₂.inv)_*[A].obj M))
+  have n₂ := (upperStarLowerStarAdjunction A e₁.hom).unit_naturality
+    ((upperStarIsoLowerStarInv A e₂).hom.app M)
+  simp only [Functor.comp_map] at n₁
+  rw [← Functor.map_comp (E.hom)_*[A], ← n₁, ← Functor.map_comp_assoc,
+    Functor.map_comp (e₁.hom)_*[A], reassoc_of% n₂,
+    upperStarLowerStarAdjunction_unit_app_comp_map_upperStarIsoLowerStarInv, Functor.map_comp,
+    Category.assoc,
+    reassoc_of% upperStarLowerStarAdjunction_unit_app_comp_map_upperStarIsoLowerStarInv]
+
+end IsoTrans
+
+
+section Misc
+
+variable {X Y Z : Scheme.{u}}
+
+omit [Abelian A] [IsGrothendieckAbelian.{u + 1} A] in
+lemma lowerStarCongr_hom_app_comp_lowerStarComp_inv_app {a : Z ⟶ X} {b : Z ⟶ Y} {c : Y ⟶ X}
+    (h : a = b ≫ c) (M : Sheaf (ProEt.topology Z) A) :
+    (lowerStarCongr A h).hom.app M ≫ (lowerStarComp A b c).inv.app M =
+      (lowerStarFactor A h.symm).inv.app M := by
+  subst h
+  simp only [lowerStarCongr_rfl, Iso.refl_hom, NatTrans.id_app, Category.id_comp]
+  rw [← lowerStarComp_trans_lowerStarCongr, lowerStarCongr_rfl, Iso.trans_refl]
+
+omit [Abelian A] [IsGrothendieckAbelian.{u + 1} A] in
+/-- Pushing forward along `i = 𝟙` and then along `f` is pushing forward along `f`. -/
+lemma lowerStarCongr_hom_app_comp_lowerStarComp_inv_app_comp_map_lowerStarId {i : Z ⟶ Z}
+    {f a : Z ⟶ Y} (h₀ : i = 𝟙 Z) (h₁ : a = i ≫ f) (h : a = f)
+    (M : Sheaf (ProEt.topology Z) A) :
+    (lowerStarCongr A h₁).hom.app M ≫ (lowerStarComp A i f).inv.app M ≫
+        (f)_*[A].map ((lowerStarCongr A h₀).hom.app M ≫ (lowerStarId A Z).hom.app M) =
+      (lowerStarCongr A h).hom.app M := by
+  subst h₀ h₁
+  ext V
+  simp only [lowerStarCongr_rfl, Iso.refl_hom, NatTrans.id_app, Category.id_comp,
+    ObjectProperty.FullSubcategory.comp_hom, ObjectProperty.FullSubcategory.id_hom,
+    NatTrans.comp_app, lowerStarComp_inv_app_hom_app, lowerStar_map_hom_app',
+    lowerStarId_hom_app_hom_app, ← Functor.map_comp, ← op_comp]
+  refine (congrArg M.obj.map ?_).trans (M.obj.map_id _)
+  apply Quiver.Hom.unop_inj
+  apply MorphismProperty.Over.Hom.ext
+  apply pullback.hom_ext <;>
+    simp [MorphismProperty.Over.pullback, MorphismProperty.Over.mk,
+      MorphismProperty.Over.pullbackComp, MorphismProperty.Over.pullbackId] <;> rfl
+
+/-- The identifications `e^* ≅ (e⁻¹)_*` along equal isomorphisms. -/
+lemma upperStarIsoLowerStarInv_hom_app_congr {e e' : X ≅ Y} (p : e = e')
+    (M : Sheaf (ProEt.topology Y) A) :
+    (upperStarIsoLowerStarInv A e).hom.app M ≫
+        (lowerStarCongr A (congrArg Iso.inv p)).hom.app M =
+      (upperStarCongr A (congrArg Iso.hom p)).hom.app M ≫
+        (upperStarIsoLowerStarInv A e').hom.app M := by
+  subst p
+  simp [upperStarCongr]
+
+variable {P : Scheme.{u}}
+
+/-- A factorisation isomorphism followed by a congruence in the first factor. -/
+lemma upperStarFactor_hom_app_comp_upperStarCongr_hom_app {a : P ⟶ Y} {b b' : P ⟶ Z}
+    {c : Z ⟶ Y} (e : b ≫ c = a) (p : b = b') (e' : b' ≫ c = a)
+    (M : Sheaf (ProEt.topology Y) A) :
+    (upperStarFactor A e).hom.app M ≫ (upperStarCongr A p).hom.app ((c)^*[A].obj M) =
+      (upperStarFactor A e').hom.app M := by
+  subst p
+  have : e = e' := rfl
+  subst this
+  simp [upperStarCongr]
+
+end Misc
+
+
+section Congr
+
+variable {P Q R : Scheme.{u}}
+
+/-- The congruence isomorphisms of the pullbacks compose. -/
+lemma upperStarCongr_trans {g g' g'' : P ⟶ Q} (h : g = g') (h' : g' = g'') :
+    upperStarCongr A h ≪≫ upperStarCongr A h' = upperStarCongr A (h.trans h') := by
+  subst h h'
+  simp [upperStarCongr]
+
+/-- The composition isomorphism of the pullbacks is natural in the first morphism. -/
+lemma upperStarCongr_hom_app_comp_upperStarComp_hom_app {x y : P ⟶ Q} (p : x = y) (g : Q ⟶ R)
+    (M : Sheaf (ProEt.topology R) A) :
+    (upperStarCongr A (congrArg (· ≫ g) p)).hom.app M ≫ (upperStarComp A y g).hom.app M =
+      (upperStarComp A x g).hom.app M ≫ (upperStarCongr A p).hom.app ((g)^*[A].obj M) := by
+  subst p
+  simp [upperStarCongr]
+
+/-- The composition isomorphism of the pullbacks is natural in the second morphism. -/
+lemma upperStarCongr_hom_app_comp_upperStarComp_hom_app' (g : P ⟶ Q) {x y : Q ⟶ R} (p : x = y)
+    (M : Sheaf (ProEt.topology R) A) :
+    (upperStarCongr A (congrArg (g ≫ ·) p)).hom.app M ≫ (upperStarComp A g y).hom.app M =
+      (upperStarComp A g x).hom.app M ≫ (g)^*[A].map ((upperStarCongr A p).hom.app M) := by
+  subst p
+  simp [upperStarCongr]
+
+end Congr
+
+end AlgebraicGeometry.ProEtale
