@@ -13,7 +13,7 @@
  },
  "kind": "statement",
  "title": "Morphisms in a right localization are a colimit of ordinary Hom sets",
- "statement": "Let $\\mathcal C$ be a category, $S$ a multiplicative system, and $Q':\\mathcal C\\to S^{-1}\\mathcal C$ its right localization [def-weil-abstract-derived-category]. For objects $M,N$ of $\\mathcal C$, the canonical map $\\varinjlim_{t:P\\to M\\,\\in S}\\operatorname{Hom}_{\\mathcal C}(P,N)\\to\\operatorname{Hom}_{S^{-1}\\mathcal C}(M,N)$ is a bijection.",
+ "statement": "Let $\\mathcal C$ be a category, let $S$ be a right multiplicative system of arrows, and let $Q':\\mathcal C\\to S^{-1}\\mathcal C$ be its right localization [def-weil-abstract-derived-category]. For objects $M,N$ of $\\mathcal C$, let $S/M$ be the category of arrows $t:P\\to M$ in $S$, with morphisms the commuting triangles, and index by $(S/M)^{\\mathrm{opp}}$. Then the canonical map $\\varinjlim_{(t:P\\to M)\\in(S/M)^{\\mathrm{opp}}}\\operatorname{Hom}_{\\mathcal C}(P,N)\\to\\operatorname{Hom}_{S^{-1}\\mathcal C}(Q'(M),Q'(N))$, sending $f:P\\to N$ to $Q'(f)\\circ Q'(t)^{-1}$, is a bijection.",
  "source": {
   "document": "literature/stacks-project/derived.tex",
   "place": "Stacks Tag 0FND, label lemma-pre-derived-adjoint-functors-general, proof line 9515, second equality; Categories Tag 05Q4, label categories-remark-right-localization-morphisms-colimit"
@@ -21,9 +21,57 @@
  "stmt_deps": [
   "def-weil-abstract-derived-category"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "The displayed colimit is the colimit of sets of the functor $(S/M)^{\\mathrm{opp}}\\to\\mathrm{Sets}$, $(t:P\\to M)\\mapsto\\operatorname{Hom}_{\\mathcal C}(P,N)$, with transition maps given by precomposition along morphisms of $S/M$; every element of it is the class of some $f:P\\to N$ at some index $t$, and two pairs related by an index morphism have the same class. (By Stacks Tag 05Q4 the index category $S/M$ is cofiltered, so this colimit is filtered; the argument below does not use this.) The assignment $f\\mapsto Q'(f)\\circ Q'(t)^{-1}$ is compatible with these transition maps because a commuting triangle $t=t'\\circ a$ gives $Q'(f\\circ a)\\circ Q'(t)^{-1}=Q'(f)\\circ Q'(t')^{-1}$, so it defines the canonical map.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/categories.tex",
+    "place": "Categories, Remark 05Q4, definition of S/X and cofilteredness"
+   }
+  },
+  {
+   "text": "The assignment is surjective: for any $g:Q'(M)\\to Q'(N)$, the right-fraction representation lemma supplies $P$, $t:P\\to M$ in $S$, and $f:P\\to N$ with $g=Q'(f)\\circ Q'(t)^{-1}$, so $g$ is the image of the colimit class of $f$.",
+   "uses": [
+    "lem-pc-right-fraction-representation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/categories.tex",
+    "place": "Categories, Lemma 04VI and Remark 05Q4"
+   }
+  },
+  {
+   "text": "For injectivity, suppose representatives $f_i:P_i\\to N$ over denominators $t_i:P_i\\to M$ have the same localized morphism. The common-refinement lemma gives $R$ and $a_i:R\\to P_i$ such that $t_1\\circ a_1=t_2\\circ a_2$ is in $S$ and $f_1\\circ a_1=f_2\\circ a_2$. These equalities say exactly that the two representatives become equal at the object $R$ of the indexing category, hence define the same element of the colimit.",
+   "uses": [
+    "lem-pc-right-fraction-common-refinement"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/categories.tex",
+    "place": "Categories, Lemma 04VJ and Remark 05Q4"
+   }
+  },
+  {
+   "text": "The surjectivity and injectivity just proved show that the canonical map is a bijection. For the terminal case $S$ consisting only of identities, $S/M$ has terminal object $\\mathrm{id}_M$ and the map reduces to the identity bijection $\\operatorname{Hom}_{\\mathcal C}(M,N)\\cong\\operatorname{Hom}_{\\mathcal C}(M,N)$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/categories.tex",
+    "place": "Categories, Remark 05Q4, formula (categories-equation-right-localization-morphisms-colimit)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-right-fraction-representation",
+  "lem-pc-right-fraction-common-refinement"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "Stacks Project online Tags 05Q4, 04VI, and 04VJ",
+  "place": "Remark 05Q4 and the two right-localization fraction lemmas; the source TeX is not present in literature/"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -52,15 +100,37 @@
    "results": "service unavailable: Internal Server Error",
    "date": "2026-10-11",
    "verdict": "unavailable"
+  },
+  {
+   "tool": "grep",
+   "query": "colimit|IsFiltered|IsCofiltered in Mathlib/CategoryTheory/Localization/CalculusOfFractions*",
+   "results": "no hits: CalculusOfFractions.lean and CalculusOfFractions/Fractions.lean have exists_rightFraction and RightFraction.map_eq_iff but no Hom-as-filtered-colimit statement",
+   "date": "2026-10-10",
+   "verdict": "no exact match"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-pc-pre-derived-adjoint-functors-general",
   "by": "worker",
   "date": "2026-10-10"
  },
  "chapter": "sec-picard-framework",
- "unit": "sk-thm-picard-duality"
+ "unit": "sk-thm-picard-duality",
+ "split_report": {
+  "date": "2026-10-11",
+  "item": "lem-pc-right-localization-hom-colimit",
+  "worker": "stage1",
+  "summary": "Split the Stacks right-localization Hom-colimit formula into the explicit canonical map, surjectivity from right-fraction representatives, and injectivity from common refinements. Added two Mathlib leaves for the representation and equality-of-fractions inputs; no exact full colimit theorem was found.",
+  "blueprint": "Realizes the second equality in the proof of the ancestor pre-derived adjunction: the right-localization Hom set is the colimit over arrows in S/M, with the representative and equality arguments supplied by the two Mathlib leaves."
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-rlh2028",
+  "group": "E1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-rlh2028 (reviewer sub-agent of L); spot-checked: Both leaves read at CalculusOfFractions.lean:895-898,963-979 (exists_rightFraction, RightFraction.map_eq_iff with RightFractionRel incl. W(t1>>s1)): exact. Grep of Localization/CalculusOfFractions* for colimit/IsFiltered: no Hom-colimit theorem in Mathlib, so the split stands (recorded in mathlib_searches). Injectivity zigzag via R is a valid colimit-of-sets relation; filteredness not needed. FIX more, RETURN less: C1 Step 1 asserted cofilteredness of S/M as elementary without citation; reworded Step 1 to describe the colimit of sets explicitly and cite Stacks Tag 05Q4 for cofilteredness as an unused remark. Second reading missed this.; 1 file(s) fixed by the reviewer"
+ }
 }
