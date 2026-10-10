@@ -2540,3 +2540,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 20:39 L: returned deliver/K1/lem-sp-cartan-eilenberg-comparison-independence (reviewer RETURN: Reviewer R-cci2340. (1) E, false new statement: lem-sp-cartan-eilenberg-comparison-homotopy claims the two CE lifts phi,)
 - 20:39 L: merged deliver/M1/lem-pc-bounded-above-flat-kflat-site (reviewer FIX; first push; new nodes: 2)
 - 20:40 L: merged deliver/H1/lem-pc-derived-qcoh-perfect-generation (reviewer FIX; first push; new nodes: 2)
+- 20:40 L: merged deliver/K1/lem-pc-sheaf-modules-tensor-closed (reviewer FIX; first push; new nodes: 0)
