@@ -1,6 +1,6 @@
 # Work queue
 
-900 items; claim with `tools/claim.py next <group> [--stage N]`.
+901 items; claim with `tools/claim.py next <group> [--stage N]`.
 
 ## Stage 1: nodes to split (156)
 
@@ -10,8 +10,9 @@
 | `lem-weil-pbc-injective-acyclicity-bounded-below` | 2002 | sorry_here |
 | `lem-pc-ringed-space-module-stalk-tensor` | 3013 | none |
 | `lem-pc-derived-functor-commutes-derived-limit` | 3014 | none |
-| `lem-pc-direct-image-bounded-coherent` | 3014 | none |
 | `lem-pc-proper-direct-image-finite-tor` | 3014 | none |
+| `lem-pc-coherent-support-proper-higher-direct-image` | 3015 | none |
+| `lem-pc-direct-image-qc-support-reduction` | 3015 | none |
 | `lem-pc-pseudo-coherent-distinguished-triangle` | 3015 | none |
 | `lem-pc-ring-pseudo-coherent-finite-tor-perfect` | 3015 | none |
 | `lem-pc-tower-abelian` | 3015 | none |
@@ -46,18 +47,17 @@
 | `lem-sc-meromorphic-sheaf-generic-product` | 5011 | none |
 | `lem-pc-perfect-complex-descent` | 5013 | none |
 | `lem-pc-rf-base-change-single-complex-criterion` | 5013 | none |
-| `lem-pc-kflat-tensor-cone-two-out-of-three` | 5014 | none |
 | `lem-pc-proper-support-descent` | 5014 | none |
 | `lem-pc-sites-modules-sheafification-flat` | 5014 | none |
 | `lem-pc-flat-module-descent` | 5015 | none |
 | `lem-pc-fp-complex-descent` | 5015 | none |
+| `lem-pc-tensor-mapping-cone-iso` | 5015 | none |
 | `lem-sp-cartan-eilenberg-comparison-homotopy` | 6006 | none |
 | `lem-sp-filtered-homotopy-spectral-sequence` | 6006 | none |
 | `thm-sp-spectral-object-yields` | 6006 | none |
 | `lem-sc-general-theorem-of-cube` | 6011 | none |
 | `pqf-lem-serre-criterion` | 6013 | none |
 | `lem-pqf-finite-spectrum-maximal-primes` | 6014 | none |
-| `sbc-lem-higher-direct-image-presheaf` | - | none |
 | `thm-pqf-immersion-descent` | - | none |
 | `def-sbc-normal-dominant-galois` | - | none |
 | `lem-pc-representable-unique` | - | none |
@@ -163,7 +163,7 @@
 | `lem-pur-rhom-well-defined` | - | none |
 | `lem-zl-noether-normalization-dimension` | - | none |
 
-## Stage 2: nodes to state (744)
+## Stage 2: nodes to state (745)
 
 | node | distance to Mathlib | kind |
 |---|---|---|
@@ -276,6 +276,7 @@
 | `lem-pc-invertible-common-free-generator` | 1 | state |
 | `lem-pc-invertible-sheaf-instance` | 1 | state |
 | `lem-pc-kflat-hocolim-truncations` | 1 | state |
+| `lem-pc-kflat-tensor-cone-two-out-of-three` | 1 | state |
 | `lem-pc-left-localization-hom-colimit` | 1 | state |
 | `lem-pc-linear-pair-graded-finite` | 1 | state |
 | `lem-pc-linear-pair-morphism-finite` | 1 | state |
@@ -912,7 +913,7 @@
 | `lem-weil-pbc-projective-space-zero-isomorphism` | 4 | state |
 | `def-nagata-fixed-base-separated-stage` | 6 | state |
 
-Not open yet: 1502 nodes that wait for a statement dependency, 196 nodes that wait for stage 1.
+Not open yet: 1504 nodes that wait for a statement dependency, 196 nodes that wait for stage 1.
 
 ## Stage 3: modules to prove (0)
 
