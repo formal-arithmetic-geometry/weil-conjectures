@@ -11,17 +11,101 @@
  },
  "kind": "statement",
  "title": "Intersection with an effective Cartier divisor",
- "statement": "Let $X$ be an integral proper scheme over a field [def-pc-integral-scheme] [def-weil-proper-morphism] of dimension $d>0$, let $\\mathcal L$ be an ample invertible sheaf [def-sc-invertible-module] [def-sc-ample], and let $s$ be a nonzero section whose zero scheme $D=Z(s)$ [def-pc-zero-scheme] is a nonempty effective Cartier divisor [def-nagata-effective-cartier-ideal]. Then $D$ is proper of dimension $d-1$, the restriction of $\\mathcal L$ to $D$ is ample, and $(\\mathcal L^{d}\\cdot X)=(\\mathcal L^{d-1}\\cdot D).",
+ "statement": "Let $k$ be a field [def-weil-field], let $X$ be a scheme proper over $k$ [def-weil-proper-morphism], let $Z\\hookrightarrow X$ be a closed subscheme of dimension $d\\ge 1$ [def-weil-closed-immersion] [def-kun-topological-krull-dimension], and let $\\mathcal L_1,\\ldots,\\mathcal L_d$ be invertible $\\mathcal O_X$-modules [def-sc-invertible-module]. Let $D\\hookrightarrow Z$ be a nonempty effective Cartier divisor [def-nagata-effective-cartier-ideal] with $\\mathcal L_1|_Z \\cong \\mathcal O_Z(D)$ [def-pc-divisor-line-bundle]; this isomorphism holds in particular when $D=Z(s)$ is the zero scheme [def-pc-zero-scheme] of a section $s\\in\\Gamma(Z,\\mathcal L_1|_Z)$ and $Z(s)$ is an effective Cartier divisor. Assume that $\\dim D=d-1$ or that $Z$ is integral [def-pc-integral-scheme]. Then: (a) $D$ is proper over $k$ and $\\dim D=d-1$; (b) for every ample invertible $\\mathcal O_X$-module $\\mathcal M$ [def-sc-ample], the restriction $\\mathcal M|_D$ is ample on $D$ in the sense of [def-sc-ample]; (c) $(\\mathcal L_1\\cdots\\mathcal L_d\\cdot Z)=(\\mathcal L_2\\cdots\\mathcal L_d\\cdot D)$, with intersection numbers defined by [def-sc-intersection-number].",
  "source": {
   "document": "literature/stacks-project/varieties.tex",
   "place": "Tag 0BEU (varieties intersection with an effective Cartier divisor), used in the proof of Tag 0BEV"
  },
  "stmt_deps": [
-  "def-sc-intersection-number"
+  "def-weil-field",
+  "def-weil-proper-morphism",
+  "def-sc-invertible-module",
+  "def-nagata-effective-cartier-ideal",
+  "def-pc-divisor-line-bundle",
+  "def-sc-intersection-number",
+  "def-weil-closed-immersion",
+  "def-kun-topological-krull-dimension",
+  "def-pc-zero-scheme",
+  "def-pc-integral-scheme",
+  "def-sc-ample"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Replace X by Z and restrict all invertible modules. If $D=Z(s)$ for a section $s$ of $\\mathcal L_1|_Z$ whose zero scheme is effective Cartier, the last sentence of [lem-pc-zero-scheme-divisor-iso] applied on $Z$ gives $\\mathcal L_1|_Z\\cong\\mathcal O_Z(D)$. The closed immersion D\\hookrightarrow Z\\hookrightarrow X and properness of X over k give that D is proper over k by [lem-weil-pbc-closed-immersion-proper]. If I_D is the ideal of D, then D effective Cartier gives I_D invertible and the exact sequence 0 \\to I_D \\to \\mathcal O_Z \\to \\mathcal O_D \\to 0. Tensoring by an invertible module is exact because it is locally tensoring with a free rank-one module; using \\mathcal L_1|_Z \\cong I_D^\\vee gives the Euler-characteristic difference formula.",
+   "uses": [
+    "lem-weil-pbc-closed-immersion-proper",
+    "lemma-nagata-effective-cartier-is-invertible",
+    "def-weil-closed-immersion",
+    "def-sbc-closed-immersion-ideal-sheaf",
+    "lem-pc-divisor-line-bundle-invertible",
+    "lem-pc-zero-scheme-divisor-iso"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 0BEU proof"
+   }
+  },
+  {
+   "text": "Dimension of $D$. If $\\dim D=d-1$ is assumed there is nothing to do. Otherwise $Z$ is integral; $Z$ is proper over $k$ by [lem-weil-pbc-closed-immersion-proper](c), hence of finite type over $k$ by [def-weil-proper-morphism], and $\\dim Z=d\\ge1$. So [lem-sc-effective-cartier-dimension-drop], applied to the integral finite-type $k$-scheme $Z$ and the nonempty effective Cartier divisor $D\\hookrightarrow Z$, gives $\\dim D=d-1$. With the preceding step this proves (a).",
+   "uses": [
+    "lem-weil-pbc-closed-immersion-proper",
+    "def-weil-proper-morphism",
+    "lem-sc-effective-cartier-dimension-drop"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 0BEV proof: Z(s) effective Cartier on the variety X, hence of codimension 1 and dimension d-1"
+   }
+  },
+  {
+   "text": "Euler-characteristic additivity and the numerical-polynomial bound for coherent twists show that the quotient term supported on D has total degree at most d-1: its support is D, so dim Supp(O_D)=dim D=d-1 by (a), and [lem-sc-snapper-numerical-polynomial] applies. Thus the coefficient of n_1\\cdots n_d in the first difference equals the coefficient of n_2\\cdots n_d on D. By the definition of intersection numbers this is (L_1\\cdots L_d\\cdot Z)=(L_2\\cdots L_d\\cdot D). This proves (c).",
+   "uses": [
+    "lem-pc-euler-additive",
+    "lem-sc-snapper-numerical-polynomial",
+    "def-sc-intersection-number"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 0BEU proof"
+   }
+  },
+  {
+   "text": "Ampleness of $\\mathcal M|_D$. By [def-sc-ample] choose $m\\ge1$ with $\\mathcal M^{\\otimes m}$ very ample, giving a closed immersion $i:X\\hookrightarrow\\mathbf P^N_k$ with $i^*\\mathcal O(1)\\cong\\mathcal M^{\\otimes m}$. The composite $D\\hookrightarrow Z\\hookrightarrow X\\hookrightarrow\\mathbf P^N_k$ is a closed immersion (composites of homeomorphisms onto closed subsets are such, and composites of surjections of structure sheaves are surjective, [def-weil-closed-immersion]), and it pulls $\\mathcal O(1)$ back to $\\mathcal M^{\\otimes m}|_D$, which is therefore ample by [lem-pc-very-ample-ample]. Since $D$ is proper over $k$ by (a), [def-sc-ample] gives $m'\\ge1$ with $(\\mathcal M|_D)^{\\otimes mm'}$ very ample, so $\\mathcal M|_D$ is ample. This proves (b); the same argument is used in the proof of Tag 0BEV.",
+   "uses": [
+    "def-sc-ample",
+    "lem-pc-very-ample-ample",
+    "def-weil-closed-immersion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 0BEV proof: restriction of an ample invertible module to a closed subscheme stays ample"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-closed-immersion-proper",
+  "lemma-nagata-effective-cartier-is-invertible",
+  "def-weil-closed-immersion",
+  "def-sbc-closed-immersion-ideal-sheaf",
+  "lem-pc-divisor-line-bundle-invertible",
+  "lem-pc-zero-scheme-divisor-iso",
+  "def-weil-proper-morphism",
+  "lem-sc-effective-cartier-dimension-drop",
+  "lem-pc-euler-additive",
+  "lem-sc-snapper-numerical-polynomial",
+  "def-sc-intersection-number",
+  "def-sc-ample",
+  "lem-pc-very-ample-ample"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/varieties.tex",
+  "place": "Tag 0BEU (varieties intersection with an effective Cartier divisor)"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -53,12 +137,37 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-sc-positive-ample-hilbert-degree",
   "by": "worker",
   "date": "2026-10-10"
  },
  "chapter": "sec-abelian-varieties",
- "unit": "sk-prop-av-isogeny"
+ "unit": "sk-prop-av-isogeny",
+ "split_report": {
+  "date": "2026-10-11",
+  "item": "lem-sc-intersection-effective-cartier",
+  "worker": "stage1",
+  "summary": "Repaired Tag 0BEU with the hypotheses required by the intersection-number definition: d >= 1, D nonempty, and dim D=d-1. The split proves properness of D and the intersection identity; dimension is now an explicit hypothesis. Added a statement-only dimension-drop node so the consumer can discharge dim D=g-1 from integrality and finite type.",
+  "blueprint": "Realizes the ancestor proof of Tag 0BEV at the sentence invoking Tag 0BEU for the divisor Z(s).",
+  "tool_uses": [
+   {
+    "node": "lem-pc-very-ample-ample",
+    "why": "conclusion (b) uses its statement that the pullback of O(1) under a closed immersion into projective space is ample, to restrict ampleness to D, as the consumer lem-sc-positive-ample-hilbert-degree (same unit) already declares for its step 2"
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pc-very-ample-ample"
+ ],
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-iec2616",
+  "group": "G1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-iec2616 (reviewer sub-agent of L); spot-checked: Returns 20:53/21:10: points 1,2 (d>=1, D nonempty, dim D=d-1, Step 2 support bound) repaired; E7 open. Compared consumer lem-sc-positive-ample-hilbert-degree step 6 clause by clause (D proper of dim g-1, L|_D ample, equality; also L=O(Z(s))). FIX more, RETURN less: E7/C4 repaired by option (a): statement adds 'dim D=d-1 or Z integral', conclusions (a) proper+dim d-1 via new node lem-sc-effective-cartier-dimension-drop (checked true: Hauptidealsatz + finite-type dimension theory; searches recorded), (b) M ample => M|_D ample via def-sc-ample + lem-pc-very-ample-ample (tool use declared, as the consumer in the same unit does) + composite closed immersion, (c) equality; plus the D=Z(s) case via lem-pc-zero-scheme-divisor-iso; stmt_deps completed (closed immersion, Krull dim, zero scheme, integral, ample). Second reading by G1 missed that the consumer still cites the item for conclusions it did not state.; 1 file(s) fixed by the reviewer"
+ },
+ "lead_note": "2026-10-10 L (R-iec2616): Item statement now carries (a) D proper with dim D=d-1 (hypothesis or Z integral), (b) restriction of an ample M to D ample, (c) the equality, and the D=Z(s) case of L_1|_Z=O_Z(D); consumer lem-sc-positive-ample-hilbert-degree step 6 is now covered clause by clause (it applies the item with Z=X integral)."
 }
