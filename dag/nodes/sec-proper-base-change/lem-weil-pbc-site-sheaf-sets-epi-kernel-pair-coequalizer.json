@@ -1,0 +1,76 @@
+{
+ "id": "lem-weil-pbc-site-sheaf-sets-epi-kernel-pair-coequalizer",
+ "kind": "statement",
+ "title": "An epimorphism of sheaves of sets is the coequalizer of its kernel pair",
+ "statement": "Let $\\mathcal C$ be a site and $\\Sh(\\mathcal C)$ its category of sheaves of sets [def-weil-pbc-sites-and-cohomology] (for a topological space $X$, $\\mathcal C$ may be the site $\\operatorname{Opens}(X)$ of open subsets of $X$ with inclusions as morphisms and open covers as coverings, whose sheaves of sets are the sheaves of sets on $X$). Let $p:\\mathcal P\\to\\mathcal F$ be an epimorphism of $\\Sh(\\mathcal C)$, and let $(K,r,s)$ be a fibre product of $p$ with itself in $\\Sh(\\mathcal C)$, i.e. $r,s:K\\rightrightarrows\\mathcal P$ with $p\\circ r=p\\circ s$ such that for every sheaf of sets $\\mathcal T$ and morphisms $a,b:\\mathcal T\\to\\mathcal P$ with $p\\circ a=p\\circ b$ there is exactly one $c:\\mathcal T\\to K$ with $r\\circ c=a$, $s\\circ c=b$ (such a fibre product exists and may be computed sectionwise, $K(U)=\\mathcal P(U)\\times_{\\mathcal F(U)}\\mathcal P(U)$, by [lem-weil-pbc-site-sheaf-sets-limits-sectionwise]). Then $(\\mathcal F,p)$ is a coequalizer of $r,s$ in $\\Sh(\\mathcal C)$ [def-weil-pbc-category-colimit]: for every sheaf of sets $\\mathcal G$ and every morphism $q:\\mathcal P\\to\\mathcal G$ with $q\\circ r=q\\circ s$ there is exactly one morphism $u:\\mathcal F\\to\\mathcal G$ with $u\\circ p=q$.",
+ "source": {
+  "document": "literature/stacks-project/sites.tex",
+  "place": "Sites, Lemma Tag 086K (lemma-coequalizer-surjection), stated for a surjection of sheaves of sets, which is the same as an epimorphism of Sh(C) by Sites, Lemma Tag 00WN (lemma-mono-epi-sheaves)"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-sites-and-cohomology",
+  "lem-weil-pbc-site-sheaf-sets-limits-sectionwise",
+  "def-weil-pbc-category-colimit"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "an epimorphism of sheaves of types is the coequalizer of its kernel pair",
+   "results": "CategoryTheory.IsKernelPair.toCoequalizer' and IsKernelPair.toCoequalizer (Mathlib.CategoryTheory.Limits.Shapes.KernelPair), effectiveEpi_of_kernelPair, regularEpiOfKernelPair (Limits.Shapes.RegularMono), instIsRegularEpiCategorySheafTypeOfHasSheafify (Mathlib.CategoryTheory.Sites.RegularEpi)",
+   "date": "2026-10-10",
+   "verdict": "match: IsKernelPair.toCoequalizer' together with the instance IsRegularEpiCategory (Sheaf J (Type u))"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "category of type-valued sheaves on a site is a regular epi category: every epimorphism of sheaves is a regular epimorphism",
+   "results": "CategoryTheory.isRegularEpiCategory_sheaf, CategoryTheory.instIsRegularEpiCategorySheafTypeOfHasSheafify (Mathlib.CategoryTheory.Sites.RegularEpi); regularTopology lemmas (unrelated)",
+   "date": "2026-10-10",
+   "verdict": "match (the regular-epi half)"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rn 'regular\\|effective\\|kernelPair\\|IsKernelPair' Mathlib/CategoryTheory/Sites/*.lean | grep -i 'epi\\|kernel'; grep -n 'toCoequalizer' Mathlib/CategoryTheory/Limits/Shapes/KernelPair.lean",
+   "results": "Sites/RegularEpi.lean:50 isRegularEpiCategory_sheaf, :106 instance IsRegularEpiCategory (Sheaf J (Type u)) [HasSheafify J (Type u)]; Limits/Shapes/KernelPair.lean:168 IsKernelPair.toCoequalizer' (k : IsKernelPair f a b) [IsRegularEpi f] : IsColimit (Cofork.ofπ f k.w); Limits/Shapes/RegularMono.lean:498 isColimitCoforkOfEffectiveEpi",
+   "date": "2026-10-10",
+   "verdict": "match"
+  },
+  {
+   "tool": "local_search",
+   "query": "isColimitCoforkOfEffectiveEpi (project root ~/weil-conjectures-slopmaster2)",
+   "results": "CategoryTheory.isColimitCoforkOfEffectiveEpi in Mathlib/CategoryTheory/Limits/Shapes/RegularMono.lean (index: unavailable; existence confirmed by reading the file)",
+   "date": "2026-10-10",
+   "verdict": "exists"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "CategoryTheory.IsKernelPair.toCoequalizer'",
+  "file": "Mathlib/CategoryTheory/Limits/Shapes/KernelPair.lean",
+  "how": "specializes in one line: in Sheaf J (Type u) every epimorphism is a regular epimorphism (instance IsRegularEpiCategory (Sheaf J (Type u)) given HasSheafify J (Type u), Mathlib/CategoryTheory/Sites/RegularEpi.lean:106, so IsRegularEpiCategory.regularEpiOfEpi p : IsRegularEpi p); the fibre product (K,r,s) of p with itself is IsKernelPair p r s (= IsPullback r s p p, KernelPair.lean:55); then IsKernelPair.toCoequalizer' (KernelPair.lean:168) gives IsColimit (Cofork.ofπ p _), i.e. (F,p) is a coequalizer of r,s. Setting of the site as recorded on lem-weil-pbc-site-sheaves-enough-injectives and lem-weil-pbc-site-abelian-sheaf-epi-locally-surjective: C a small category, J = K.toGrothendieck for the precoverage of the covering families; HasSheafify J (Type (max u v)) is the instance Mathlib/CategoryTheory/Sites/LeftExact.lean:313 (for Opens X with X : TopCat.{u}, max u u = u). For a topological space, TopCat.Sheaf (Type u) X is the sheaf category of Opens.grothendieckTopology X.",
+  "line": 168
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-sheaf-surjection-kernel-pair-coequalizer",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lead_note": "L 2026-10-10: composed match (IsKernelPair.toCoequalizer' KernelPair.lean:168 with the instance IsRegularEpiCategory (Sheaf J (Type u)) Sites/RegularEpi.lean:106); lines verified by L; line field set to the first."
+}

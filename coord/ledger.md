@@ -767,3 +767,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 01:46 L: merged G1 etale-ring-map-prescribed-residue-field (2nd push; +primitive-element leaf, +denominator-lift node) and G1 lft-over-field-isolated-point-residue-finite (+00PJ ring-level node). Applied F1's one-word wording change (c3325cad8) to step 3 of local-gluing; that branch is otherwise identical to the merged content.
 - 01:46 L: reviewed lem-weil-pbc-sheaf-basis-surjection (5 steps, +1 leaf): accepted.
 - 01:47 L: reviewed lem-weil-pbc-singular-ideal-localization-smooth (3 steps, 0 new): accepted.
+- 01:48 L: reviewed lem-weil-pbc-sheaf-surjection-kernel-pair-coequalizer (3 steps, +086K leaf): accepted.

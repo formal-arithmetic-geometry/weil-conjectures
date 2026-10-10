@@ -8,11 +8,56 @@
   "place": "Modules, Lemma Tag 0CAI (lemma-filtered-colimit-constructibles), proof at lines 3038-3046: apply Lemma 0CAH to the fibre product and use the resulting surjection to present F as a coequalizer"
  },
  "stmt_deps": [
+  "def-weil-pbc-sites-and-cohomology",
   "def-weil-pbc-category-colimit"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "*Step 1 (the setting).* The sheaves of sets on $X$ are the sheaves of sets on the site $\\operatorname{Opens}(X)$ (objects the open subsets of $X$, morphisms the inclusions, coverings the open covers $\\{U_i\\subseteq U\\}$ with $\\bigcup_iU_i=U$), a site in the sense of [def-weil-pbc-sites-and-cohomology] (1), with $U_i\\times_UU_j=U_i\\cap U_j$; the category of sheaves of sets on $X$ is $\\Sh(\\operatorname{Opens}(X))$. By [lem-weil-pbc-site-sheaf-sets-limits-sectionwise] the fibre product $K=\\mathcal P\\times_{\\mathcal F}\\mathcal P$ exists in this category, is given by $K(U)=\\{(a,b)\\in\\mathcal P(U)^2: p_U(a)=p_U(b)\\}$ with $r,s$ the two projections, and has the universal property of a fibre product of $p$ with itself: $p\\circ r=p\\circ s$, and for morphisms $a,b:\\mathcal T\\to\\mathcal P$ of sheaves with $p\\circ a=p\\circ b$ there is exactly one $c:\\mathcal T\\to K$ with $r\\circ c=a$, $s\\circ c=b$.",
+   "uses": [
+    "def-weil-pbc-sites-and-cohomology",
+    "lem-weil-pbc-site-sheaf-sets-limits-sectionwise"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Sites, Lemma Tag 086K (lemma-coequalizer-surjection)"
+   }
+  },
+  {
+   "text": "*Step 2 (the kernel pair).* Since $p$ is an epimorphism of $\\Sh(\\operatorname{Opens}(X))$ and $(K,r,s)$ is a fibre product of $p$ with itself (Step 1), [lem-weil-pbc-site-sheaf-sets-epi-kernel-pair-coequalizer] applied to the site $\\operatorname{Opens}(X)$ shows that $(\\mathcal F,p)$ is a coequalizer of $r,s:K\\rightrightarrows\\mathcal P$: for every sheaf of sets $\\mathcal G$ and every $q:\\mathcal P\\to\\mathcal G$ with $q\\circ r=q\\circ s$ there is exactly one $u:\\mathcal F\\to\\mathcal G$ with $u\\circ p=q$.",
+   "uses": [
+    "lem-weil-pbc-site-sheaf-sets-epi-kernel-pair-coequalizer"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Sites, Lemma Tag 086K (lemma-coequalizer-surjection)"
+   }
+  },
+  {
+   "text": "*Step 3 (precomposition with the epimorphism $e$).* First $p\\circ(r\\circ e)=(p\\circ r)\\circ e=(p\\circ s)\\circ e=p\\circ(s\\circ e)$, so $(\\mathcal F,p)$ is a cocone on the pair $r\\circ e,s\\circ e$. Let $\\mathcal G$ be a sheaf of sets and $q:\\mathcal P\\to\\mathcal G$ with $q\\circ r\\circ e=q\\circ s\\circ e$, i.e. $(q\\circ r)\\circ e=(q\\circ s)\\circ e$. Since $e:R\\to K$ is an epimorphism, $q\\circ r=q\\circ s$. By Step 2 there is exactly one $u:\\mathcal F\\to\\mathcal G$ with $u\\circ p=q$. Thus every morphism $q$ equalizing $r\\circ e,s\\circ e$ factors uniquely through $p$; since a cocone on the parallel pair $R\\rightrightarrows\\mathcal P$ is determined by its component on $\\mathcal P$ (the component on $R$ being $q\\circ r\\circ e$), this is the statement that $(\\mathcal F,p)$ is a colimit of the diagram $r\\circ e,s\\circ e:R\\rightrightarrows\\mathcal P$, i.e. a coequalizer, in the sense of [def-weil-pbc-category-colimit].",
+   "uses": [
+    "def-weil-pbc-category-colimit"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/modules.tex",
+    "place": "Modules, Lemma Tag 0CAI (lemma-filtered-colimit-constructibles), proof, lines 3038-3046 (the coequalizer presentation of F from the surjection onto F_0 x_F F_0)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-category-colimit",
+  "def-weil-pbc-sites-and-cohomology",
+  "lem-weil-pbc-site-sheaf-sets-epi-kernel-pair-coequalizer",
+  "lem-weil-pbc-site-sheaf-sets-limits-sectionwise"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/sites.tex",
+  "place": "Sites, Lemma Tag 086K (lemma-coequalizer-surjection), used as in Modules, Lemma Tag 0CAI, proof (modules.tex lines 3038-3046); Step 3 (precomposition with an epimorphism) is the one-line categorical argument the Modules proof leaves implicit"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -34,10 +79,17 @@
    "results": "No explicit sheaf-of-sets kernel-pair effectiveness result found.",
    "date": "2026-10-10",
    "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "an epimorphism of sheaves of types is the coequalizer of its kernel pair",
+   "results": "CategoryTheory.IsKernelPair.toCoequalizer' (Mathlib.CategoryTheory.Limits.Shapes.KernelPair:168), instIsRegularEpiCategorySheafTypeOfHasSheafify (Mathlib.CategoryTheory.Sites.RegularEpi:106), effectiveEpi_of_kernelPair, regularEpiOfKernelPair (Limits.Shapes.RegularMono)",
+   "date": "2026-10-10",
+   "verdict": "match for the kernel-pair clause (Step 2, recorded as the leaf lem-weil-pbc-site-sheaf-sets-epi-kernel-pair-coequalizer); the precomposition with e is not a separate Mathlib lemma but Epi cancellation (cancel_epi)"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "worker",
@@ -57,5 +109,17 @@
   }
  },
  "chapter": "sec-proper-base-change",
- "unit": "sk-thm-p1"
+ "unit": "sk-thm-p1",
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "lem-weil-pbc-sheaf-surjection-kernel-pair-coequalizer",
+  "worker": "stage1",
+  "summary": "Checked against Modules 0CAI (modules.tex 3038-3046), which uses without proof that F is the coequalizer of the composites of the projections of F_0 x_F F_0 with a surjection onto it, and against Sites 086K (an epimorphism/surjection of sheaves of sets is the coequalizer of its kernel pair). Split into three steps: the opens site and the sectionwise fibre product K (lem-weil-pbc-site-sheaf-sets-limits-sectionwise), the kernel-pair coequalizer (new Mathlib leaf lem-weil-pbc-site-sheaf-sets-epi-kernel-pair-coequalizer: IsKernelPair.toCoequalizer' with the instance IsRegularEpiCategory (Sheaf J (Type u))), and the elementary cancellation of the epimorphism e. stmt_deps: added def-weil-pbc-sites-and-cohomology, which the statement cites in its text but was missing. Statement unchanged. Mathlib: the item itself is a two-line consequence of the leaf (cancel e, then toCoequalizer'); the existing three searches stand, their 'no match' verdict is superseded by the leaf found here."
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "result": "accepted",
+  "note": "3 steps: fibre product of sheaves of sets sectionwise (existing node), an epimorphism of sheaves of sets on a site is the coequalizer of its kernel pair (new Mathlib leaf: Sites 086K; IsKernelPair.toCoequalizer' + IsRegularEpiCategory for Sheaf J (Type u); lines verified by L), cancelling the epimorphism e. Tags verified."
+ }
 }
