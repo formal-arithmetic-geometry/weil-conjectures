@@ -27,9 +27,40 @@
   "pqf-def-coherent",
   "pqf-def-cohomology"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Apply the localization isomorphism of [lem-sc-invert-s-cohomology] to p, F, L, and s. Since X_s is affine and the restriction of a quasi-coherent module to an open subscheme is quasi-coherent, [pqf-lem-affine-vanishing] gives H^p(X_s,F restricted to X_s)=0 for p>0. Therefore the image of xi in the localized graded cohomology module is zero.",
+   "uses": [
+    "lem-sc-invert-s-cohomology",
+    "pqf-lem-affine-vanishing"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/coherent.tex",
+    "place": "Cohomology of Schemes, Lemma 01XR proof, first paragraph, using Lemmas 09MR and 01XB"
+   }
+  },
+  {
+   "text": "By the definition of localization of a module, the vanishing of the image of the homogeneous class xi/1 means that some power s^e annihilates xi. In degree e this says exactly that the map H^p(X,F) to H^p(X,F tensor L^{tensor e}) induced by f maps f to f tensor s^e and sends xi to zero.",
+   "uses": [
+    "lem-sc-invert-s-cohomology"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/coherent.tex",
+    "place": "Cohomology of Schemes, Lemma 01XR statement and proof, conclusion from localization"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sc-invert-s-cohomology",
+  "pqf-lem-affine-vanishing"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/coherent.tex",
+  "place": "Cohomology of Schemes, Lemma 01XR (coherent-lemma-section-affine-open-kills-classes), using Lemma 09MR"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -54,12 +85,28 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-sc-ample-square-zero-thickening",
   "by": "worker",
   "date": "2026-10-10"
  },
  "chapter": "sec-curve-estimates",
- "unit": "sk-thm-curveestimate"
+ "unit": "sk-thm-curveestimate",
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "lem-sc-section-affine-open-kills-cohomology",
+  "worker": "stage1",
+  "summary": "Split Lemma 01XR into the localization theorem 09MR and the affine-vanishing consequence. The first step applies the localization isomorphism and existing affine cohomology vanishing; the second extracts an annihilating power from zero in the localization and identifies the induced multiplication map.",
+  "blueprint": "Realizes the proof place 'Cohomology of Schemes Lemma 01XR square-zero proof: Lemma 01XR kills a cohomology class after multiplying by a power of the affine-open section' from blueprint ancestor lem-sc-pic-proper-ntorsion.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-sak",
+  "group": "E1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-sak (reviewer sub-agent of L); spot-checked: Source: Stacks coherent.tex Lemma 01XR (lemma-section-affine-open-kills-classes) and Lemma 09MR (lemma-invert-s-cohomology), read in literature/stacks-project; the item statement agrees with 01XR hypothesis by hypothesis (X qc+qs, L invertible, s in Gamma(X,L), X_s affine, F quasi-coherent, p>0, conclusion s^e xi=0); the new node lem-sc-invert-s-cohomology states 09MR with its hypotheses (X qc+qs, F quasi-coherent). Step 1 is carried by lem-sc-invert-s-cohomology (localization iso) and pqf-lem-affine-vanishing (H^p(U,F)=0 for p>0 on any affine open U, applied to U=X_s); step 2 is the definition of a localization (xi/1=0 in the degree-zero part iff s^e xi=0 for some e), elementary. No Mathlib leaf; no blueprint node found by blueprint_refs.py search (localization graded cohomology section; invert s cohomology); no slopmaster2 declaration for 09MR/01XR. Small case: X=P^1, L=O(1), s=x_0, X_s=A^1, H^1(P^1,O(-2))=k is killed by s since H^1(O(-1))=0. FIX more, RETURN less: dag/nodes/sec-curve-estimates/lem-sc-invert-s-cohomology.json: statement: (B3) X_s and L^{tensor n} for n>=0 now cited to def-weil-pbc-ample-invertible-module, L^{tensor n} for n<0 defined as a power of the dual of def-sc-invertible-module, quasi-compact cited to def-weil-pbc-quasi-compact-scheme (both added to stmt_deps); formula: the source of the map is now the degree-zero part H_*^p(X,L,F)_{(s)} of the localization (fractions xi/s^n with xi of degree n), as in 09MR, since the map xi/s^n -> s^{-n}xi is defined only there; created: by/date added; lean_audit: none/none added. Start 2026-10-10 Sat Oct 10 03:39:15 PM UTC 2026, end Sat Oct 10 03:40:25 PM UTC 2026.; 1 file(s) fixed by the reviewer"
+ }
 }
