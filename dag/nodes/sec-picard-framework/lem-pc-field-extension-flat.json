@@ -46,15 +46,43 @@
    "results": "Generic flatness declarations, but no field-extension spectrum morphism theorem",
    "date": "2026-10-10",
    "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "sed -n 66,68p Mathlib/AlgebraicGeometry/Morphisms/Flat.lean; grep -n of_isField Mathlib/RingTheory/RingHom/Flat.lean; sed -n 114,115p Mathlib/AlgebraicGeometry/Morphisms/Flat.lean",
+   "results": "Flat.lean:67 lemma SpecMap_iff : Flat (Spec.map f) <-> f.hom.Flat; RingHom/Flat.lean:128 lemma RingHom.Flat.of_isField (hR : IsField R) (f : R ->+* S) : f.Flat; Morphisms/Flat.lean:115 instance [Subsingleton Y] [IsIntegral Y] : Flat f. Checked with lean_run_code: `Flat (Spec.map (CommRingCat.ofHom (algebraMap k K)))` closes by `inferInstance` and by `rw [Flat.SpecMap_iff]; exact RingHom.Flat.of_isField (Field.toIsField k) _`",
+   "date": "2026-10-10",
+   "verdict": "match: specializes in one line (reviewer R-fef)"
   }
  ],
- "mathlib_match": null,
- "status": "unsplit",
+ "mathlib_match": {
+  "declaration": "AlgebraicGeometry.Flat.SpecMap_iff",
+  "file": "Mathlib/AlgebraicGeometry/Morphisms/Flat.lean",
+  "line": 67,
+  "how": "specializes in one line: Flat (Spec.map f) <-> f.hom.Flat (Morphisms/Flat.lean:66-68) with f = algebraMap k K, and the right side is RingHom.Flat.of_isField (Mathlib/RingTheory/RingHom/Flat.lean:128) applied to Field.toIsField k; alternatively the instance at Morphisms/Flat.lean:115 (Flat f for Y subsingleton and integral, the Mathlib leaf of lem-pc-flat-field) gives it by inferInstance. Lines read with sed -n and the specialization compiled with lean_run_code by reviewer R-fef, 2026-10-10."
+ },
+ "status": "mathlib",
  "created": {
   "item": "lem-pc-field-extension-fpqc-cover",
   "by": "worker",
   "date": "2026-10-10"
  },
  "chapter": "sec-picard-framework",
- "unit": "sk-thm-picard-rr"
+ "unit": "sk-thm-picard-rr",
+ "split_report": {
+  "date": "2026-10-11",
+  "item": "lem-pc-field-extension-flat",
+  "worker": "stage1",
+  "summary": "Mathlib leaf (reviewer fix R-fef): the statement is the one-line specialization of AlgebraicGeometry.Flat.SpecMap_iff with RingHom.Flat.of_isField. The worker's two-step route through the leaves lem-weil-field-scalar-extension-exact and lem-weil-pbc-flat-ring-map-iff-flat-affine was correct but is not needed.",
+  "blueprint": "Mathlib leaf; the preliminary fact of the ancestor blueprint proof (Spec K -> Spec k is flat) is AlgebraicGeometry.Flat.SpecMap_iff with RingHom.Flat.of_isField.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-fef",
+  "group": "J1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-fef (reviewer sub-agent of L); spot-checked: Statement (Spec K -> Spec k flat for a field extension k in K) checked: true, source Algebra 00HB / Morphisms 01U5. The worker's two steps were correct (lem-weil-field-scalar-extension-exact states L free hence flat over K; lem-weil-pbc-flat-ring-map-iff-flat-affine is Flat.SpecMap_iff), both cited nodes Mathlib leaves, no tool uses. But the statement is a one-line Mathlib specialization (B8), so the reviewer made it a leaf. Fix: dag/nodes/sec-picard-framework/lem-pc-field-extension-flat.json: status split -> mathlib; proof, proof_deps, proof_origin emptied; mathlib_match = AlgebraicGeometry.Flat.SpecMap_iff (Mathlib/AlgebraicGeometry/Morphisms/Flat.lean:67, read with sed -n 66,68p) with RingHom.Flat.of_isField (Mathlib/RingTheory/RingHom/Flat.lean:128); also the instance at Morphisms/Flat.lean:115 (the leaf of lem-pc-flat-field) gives it by inferInstance; both proofs of Flat (Spec.map (CommRingCat.ofHom (algebraMap k K))) compiled with lean_run_code; mathlib_searches: a grep entry with verdict match added (the worker's three said no match); split_report summary/blueprint rewritten for the leaf. Small case K = k: identity, flat. Start Sat Oct 10 04:43:51 PM UTC 2026, end Sat Oct 10 04:44:45 PM UTC 2026.; 1 file(s) fixed by the reviewer"
+ }
 }
