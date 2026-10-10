@@ -101,6 +101,7 @@ lemma Etale.lowerStarPlusTransition_naturality (a : Y₁ ⟶ Y) (h : Y ⟶ X) (h
 /-- **The cocycle condition for the transition maps.** For `a₂ : Y₂ ⟶ Y₁` and `a₁ : Y₁ ⟶ Y`
 over `X`, the transition map along `a₁₂ = a₂ ≫ a₁` followed by the composition isomorphism
 `a₁₂^* ≅ a₁^* ⋙ a₂^*` is the transition map along `a₁` followed by the one along `a₂`. -/
+@[reassoc]
 lemma Etale.lowerStarPlusTransition_comp (a₁ : Y₁ ⟶ Y) (a₂ : Y₂ ⟶ Y₁) (a₁₂ : Y₂ ⟶ Y)
     (ha : a₁₂ = a₂ ≫ a₁) (h : Y ⟶ X) (h₁ : Y₁ ⟶ X) (h₂ : Y₂ ⟶ X) (w₁ : a₁ ≫ h = h₁)
     (w₂ : a₂ ≫ h₁ = h₂) (w₁₂ : a₁₂ ≫ h = h₂)
