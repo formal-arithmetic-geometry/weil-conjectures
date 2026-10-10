@@ -15,18 +15,56 @@
  },
  "kind": "statement",
  "title": "A smooth morphism has standard-smooth affine charts of its relative dimension",
- "statement": "Let $f:X\\to S$ be a smooth morphism of schemes [def-sbc-smooth-morphisms] of pure relative dimension $d$. For every $x\\in X$ there are affine open neighbourhoods $V=\\operatorname{Spec}A$ of $x$ and $T=\\operatorname{Spec}R$ of $f(x)$, with $f(V)\\subseteq T$, such that the ring map $R\\to A$ of $f|_V$ is standard smooth of relative dimension $d$ (equivalently, locally it factors through an etale map to $\\mathbf A^d_R$).",
+ "statement": "Let $f:X\\to S$ be a smooth morphism of schemes [def-sbc-smooth-morphisms] of pure relative dimension $d$. For every $x\\in X$ there are affine open neighbourhoods $V=\\operatorname{Spec}A$ of $x$ and $T=\\operatorname{Spec}R$ of $f(x)$, with $f(V)\\subseteq T$, such that the ring map $R\\to A$ of $f|_V$ is standard smooth of relative dimension $d$, i.e. $A$ has a standard smooth presentation over $R$ [def-weil-pbc-standard-smooth-algebra] whose relative dimension $n-c$ equals $d$.",
  "source": {
   "document": "literature/stacks-project/morphisms.tex",
   "place": "Tags 02G2 (Definition: smooth of relative dimension d) and 054L (etale-local normal form)"
  },
  "stmt_deps": [
   "def-sbc-smooth-morphisms",
-  "def-weil-affine-spectrum"
+  "def-weil-affine-spectrum",
+  "def-weil-pbc-standard-smooth-algebra"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Apply [lem-weil-pbc-smooth-locally-standard-smooth] to $f$ at $x$: there are affine opens $T=\\operatorname{Spec}R\\subseteq S$ and $V=\\operatorname{Spec}A\\subseteq X$ with $x\\in V$, $f(V)\\subseteq T$ and $R\\to A$ the ring map of $f|_V$, such that $A$ is standard smooth over $R$. Choose a standard smooth presentation [def-weil-pbc-standard-smooth-algebra] with $n\\ge c\\ge0$ and $f_1,\\dots,f_c\\in R[x_1,\\dots,x_n]$. By [lem-weil-pbc-standard-smooth-kahler-basis], $\\Omega_{A/R}$ is a free $A$-module of rank $n-c$.",
+   "uses": [
+    "lem-weil-pbc-smooth-locally-standard-smooth",
+    "def-weil-pbc-standard-smooth-algebra",
+    "lem-weil-pbc-standard-smooth-kahler-basis"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Morphisms, Lemma 01V7; Algebra, Lemma 00T7(2)"
+   }
+  },
+  {
+   "text": "By hypothesis $f$ is smooth of relative dimension $d$ in the sense of [def-sbc-smooth-morphisms], so [lem-sc-smooth-omega-finite-locally-free] applies: $\\Omega^1_{X/S}$ is locally free of constant rank $d$, and its restriction to the affine pair $V\\subseteq X$, $T\\subseteq S$ is the sheaf associated with $\\Omega_{A/R}$, which by Step 1 is $\\mathcal O_V^{\\oplus(n-c)}$. Hence there is an open $U\\subseteq V$ containing $x$ with $\\mathcal O_U^{\\oplus d}\\cong\\Omega^1_{X/S}|_U\\cong\\mathcal O_U^{\\oplus(n-c)}$; taking the stalk at $x$ and tensoring with $\\kappa(x)$ gives $\\kappa(x)^{d}\\cong\\kappa(x)^{n-c}$, so $n-c=d$. Thus the presentation of Step 1 has relative dimension $d$ [def-weil-pbc-standard-smooth-algebra], which is the claim.",
+   "uses": [
+    "def-sbc-smooth-morphisms",
+    "lem-sc-smooth-omega-finite-locally-free",
+    "def-weil-pbc-standard-smooth-algebra"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Morphisms, Lemma 02G1 and Definition 02G2"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-smooth-locally-standard-smooth",
+  "def-weil-pbc-standard-smooth-algebra",
+  "lem-weil-pbc-standard-smooth-kahler-basis",
+  "def-sbc-smooth-morphisms",
+  "lem-sc-smooth-omega-finite-locally-free"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/morphisms.tex",
+  "place": "Morphisms, Lemmas 01V7 and 02G1, with Algebra, Definition 00T6 and Lemma 00T7(2)"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -72,12 +110,43 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-sc-smooth-diagonal-regular-immersion",
   "by": "worker",
   "date": "2026-10-10"
  },
  "chapter": "sec-picard-framework",
- "unit": "sk-thm-picard-duality"
+ "unit": "sk-thm-picard-duality",
+ "split_report": {
+  "date": "2026-10-11",
+  "item": "lem-sc-standard-smooth-local-relative-dimension",
+  "worker": "stage1",
+  "summary": "Filled the item using the existing affine-local standard-smooth lemma and the existing differential-rank lemma. The proof refines the affine neighborhoods and compares the rank n-c from a standard smooth presentation with the fibre dimension d.",
+  "blueprint": "Realizes lem-sc-finite-duality proof, diagonal step: choose affine standard-smooth coordinates of the stated relative dimension before treating the diagonal.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-smooth-locally-standard-smooth",
+    "why": "Generic tool: supplies the affine standard-smooth chart at x."
+   },
+   {
+    "node": "lem-weil-pbc-standard-smooth-kahler-basis",
+    "why": "Generic tool: Kaehler differentials of a standard smooth presentation are free of rank n-c."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-smooth-locally-standard-smooth",
+  "lem-weil-pbc-standard-smooth-kahler-basis",
+  "lem-weil-pbc-smooth-locally-standard-smooth",
+  "lem-weil-pbc-standard-smooth-kahler-basis"
+ ],
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-ssl1919",
+  "group": "C1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-ssl1919 (reviewer sub-agent of L); spot-checked: Checked statement vs Tags 02G2/054L and def-sbc-smooth-morphisms (relative dimension = fibre dimension at every point); no cycle (lem-sc-smooth-omega-finite-locally-free created from another item, does not cite this one). FIX more, RETURN less: (1) C1 fault missed by the second reading: old Step 2/3 asserted without citation that Omega_{A/R} on the refined chart V (affine open of W_1, over a smaller base T in T_1) is a localization of Omega_{A_1/R_1}, which is neither a cited statement nor literally true (V need not be a principal open); repaired by citing lem-sc-smooth-omega-finite-locally-free (Omega^1_{X/S} locally free of constant rank d, restricting to Omega_{A/R}~ on affine pairs) and comparing ranks at kappa(x), proof now two steps, lem-weil-pbc-smooth-differentials-free-rank-fibre-dimension no longer used; (2) E7 statement change: dropped the unproved parenthetical 'equivalently, locally it factors through an etale map to A^d_R' (neither direction was proved and the dependent lem-sc-smooth-diagonal-regular-immersion does not use it) and spelled out 'relative dimension d' as a presentation with n-c=d; (3) tool_uses: kept local-standard-smooth, added standard-smooth Kaehler basis (generic tools), dropped differential-rank lemma.; 1 file(s) fixed by the reviewer"
+ }
 }

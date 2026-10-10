@@ -2363,3 +2363,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 19:19 L: merged deliver/C1/lem-pc-derived-module-free-generation (reviewer FIX+NODE(1); first push; new nodes: 2)
 - 19:19 L: merged deliver/C1/lem-pc-kflat-stalk-criterion (reviewer FIX; first push; new nodes: 2)
 - 19:20 L: merged deliver/M1/pqf-lem-integral-lft-finite (reviewer FIX; first push; new nodes: 0)
+- 19:20 L: merged deliver/C1/lem-sc-standard-smooth-local-relative-dimension (reviewer FIX; first push; new nodes: 0)
