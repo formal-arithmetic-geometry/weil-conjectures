@@ -28,14 +28,123 @@
   "def-pc-hilb-functor",
   "def-pc-representable-functor",
   "def-pc-geometrically-irreducible",
-  "def-pc-base-change",
   "def-weil-proper-morphism",
   "def-sbc-smooth-morphisms",
   "def-pc-integral-scheme"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "*Setup.* Let $p:X\\to\\operatorname{Spec}k$ be the structure morphism. Since $X$ is geometrically integral, every base change $X_{k'}$ ($k'/k$ a field extension) is integral, hence irreducible by [lem-pc-integral-scheme-irreducible]; so $X$ is geometrically irreducible over $k$ [def-pc-geometrically-irreducible]. The morphism $p$ is separated, $X$ being a curve, hence a variety [def-pc-curve], and proper by hypothesis. Applying [lem-sc-curve-base-change-relative-dimension-one] with $T=\\operatorname{Spec}k$ (so $X_T=X\\times_{\\operatorname{Spec}k}\\operatorname{Spec}k\\cong X$ over $k$) shows that $p$ is smooth of relative dimension $1$. Thus $X$ is a geometrically irreducible smooth proper curve over $k$, and by [thm-pc-hilb-curves] (1) the functor $\\operatorname{Hilb}^e_{X/k}$ [def-pc-hilb-functor] is representable for every $e\\geq0$. For $e\\neq d$ choose a $k$-scheme $H_e$ representing $\\operatorname{Hilb}^e_{X/k}$ [def-pc-representable-functor], and put $H_d:=H$; write $h_e:H_e\\to\\operatorname{Spec}k$ for the structure morphisms.",
+   "uses": [
+    "lem-pc-integral-scheme-irreducible",
+    "def-pc-geometrically-irreducible",
+    "def-pc-integral-scheme",
+    "def-pc-curve",
+    "lem-sc-curve-base-change-relative-dimension-one",
+    "thm-pc-hilb-curves",
+    "def-pc-hilb-functor",
+    "def-pc-representable-functor"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/pic.tex",
+    "place": "Tag 0B9I (proposition-hilb-d), proof, first sentence (representability by 0B9A and Varieties 0A26) and 'Starting with ... the morphisms of Lemma 0B9G'"
+   }
+  },
+  {
+   "text": "*The addition morphisms are surjective.* By the previous step $p$ is separated and smooth of relative dimension $1$ and all $\\operatorname{Hilb}^e_{X/k}$ are representable, so [lem-pc-hilb-addition] (with $S=\\operatorname{Spec}k$, applied to the representing schemes $H_e$, $H_{e+1}$) gives for every $e\\geq0$ a morphism $a_e:H_e\\times_{\\operatorname{Spec}k}X\\to H_{e+1}$ which is finite locally free of degree $e+1$ [def-pc-finite-locally-free]. It is a morphism over $k$: the lemma defines it on $T$-valued points for $k$-schemes $T$ (a pair $(Z,x)$ goes to $Z+x$), i.e. as a transformation of functors on $(\\mathit{Sch}/k)$, which by the Yoneda lemma is a morphism of $k$-schemes, $h_{e+1}\\circ a_e=h_e\\circ\\mathrm{pr}_1$. Each $a_e$ is surjective: for $s\\in H_{e+1}$ the fibre $F_s=(H_e\\times_kX)\\times_{H_{e+1}}\\operatorname{Spec}\\kappa(s)$ has $\\dim_{\\kappa(s)}\\Gamma(F_s,\\mathcal O_{F_s})=e+1\\geq1$ by [def-pc-finite-locally-free], so $F_s$ is not empty; for a point $z\\in F_s$, its image $y$ in $H_e\\times_kX$ satisfies $a_e(y)=s$, because the fibre square commutes and $\\operatorname{Spec}\\kappa(s)\\to H_{e+1}$ has image $\\{s\\}$.",
+   "uses": [
+    "lem-pc-hilb-addition",
+    "def-pc-finite-locally-free",
+    "def-pc-representable-functor"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/pic.tex",
+    "place": "Tag 0B9I (proposition-hilb-d), proof of (1): 'Starting with ..., the morphisms of Lemma 0B9G (lemma-universal-object), and induction we find a morphism X^d -> Hilb^d ... which is finite locally free of degree d!'; Tag 0B9G for the degree"
+   }
+  },
+  {
+   "text": "*Inductive claim and base.* We prove by induction on $e\\geq0$: (P$_e$) there are a $k$-scheme $Y_e$ with proper structure morphism $q_e:Y_e\\to\\operatorname{Spec}k$ [def-weil-proper-morphism], geometrically irreducible over $k$ [def-pc-geometrically-irreducible], and a surjective morphism $\\pi_e:Y_e\\to H_e$ [def-weil-surjective-morphism] with $h_e\\circ\\pi_e=q_e$. For $e=0$: by [lem-sc-hilb-zero-base] (with $S=\\operatorname{Spec}k$), $h_0:H_0\\to\\operatorname{Spec}k$ is an isomorphism. Take $Y_0=\\operatorname{Spec}k$, $q_0=\\mathrm{id}$, $\\pi_0=h_0^{-1}$. Then $\\pi_0$ is an isomorphism, hence surjective, and $h_0\\circ\\pi_0=\\mathrm{id}=q_0$. The identity is a closed immersion, hence proper by [lem-weil-pbc-closed-immersion-proper]. For every field extension $k'/k$ the base change $\\operatorname{Spec}k\\times_{\\operatorname{Spec}k}\\operatorname{Spec}k'\\cong\\operatorname{Spec}k'$ [def-pc-base-change] is a single point, hence irreducible; so $Y_0$ is geometrically irreducible over $k$.",
+   "uses": [
+    "def-weil-proper-morphism",
+    "def-pc-geometrically-irreducible",
+    "def-weil-surjective-morphism",
+    "lem-sc-hilb-zero-base",
+    "lem-weil-pbc-closed-immersion-proper",
+    "def-pc-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/pic.tex",
+    "place": "Tag 0B9G (lemma-universal-object), preceding text: 'Observe that Hilb^0_{X/S} = S and Hilb^1_{X/S} = X'; Tag 0B9I proof of (1), 'and induction'"
+   }
+  },
+  {
+   "text": "*Induction step: the scheme $Y_{e+1}$.* Assume (P$_e$). Put $Y_{e+1}:=Y_e\\times_{\\operatorname{Spec}k}X$, the fibre product [def-pc-fibre-product] of $q_e$ and $p$, with projections $\\mathrm{pr}_1,\\mathrm{pr}_2$, and $q_{e+1}:=q_e\\circ\\mathrm{pr}_1$ (equal to $p\\circ\\mathrm{pr}_2$). The projection $\\mathrm{pr}_1:Y_{e+1}\\to Y_e$ is the base change of the proper morphism $p$ along $q_e$, hence proper by [lem-weil-pbc-proper-base-change]; so $q_{e+1}$ is proper by [lem-weil-pbc-proper-composition]. Since $Y_e$ (by (P$_e$)) and $X$ (by the first step) are geometrically irreducible over $k$, $Y_{e+1}$ is geometrically irreducible over $k$ by [lem-sc-geometrically-irreducible-product].",
+   "uses": [
+    "def-pc-fibre-product",
+    "lem-weil-pbc-proper-base-change",
+    "lem-weil-pbc-proper-composition",
+    "lem-sc-geometrically-irreducible-product"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/pic.tex",
+    "place": "Tag 0B9I (proposition-hilb-d), proof of (1): 'Since X is proper over k, so is X^d' and 'Since X is geometrically irreducible over k, the product X^d is irreducible (Varieties, Lemma 038F)'"
+   }
+  },
+  {
+   "text": "*Induction step: the morphism $\\pi_{e+1}$.* Since $h_e\\circ\\pi_e=q_e$, the morphisms $\\pi_e\\circ\\mathrm{pr}_1$ and $\\mathrm{pr}_2$ define $\\pi_e\\times\\mathrm{id}_X:Y_e\\times_kX\\to H_e\\times_kX$ [def-pc-fibre-product]. The square with sides $\\pi_e\\times\\mathrm{id}_X$, $\\mathrm{pr}_1:Y_e\\times_kX\\to Y_e$, $\\mathrm{pr}_1:H_e\\times_kX\\to H_e$ and $\\pi_e$ is cartesian: by the universal properties, a morphism $T\\to Y_e\\times_{H_e}(H_e\\times_kX)$ is a pair $(y,(\\eta,x))$ with $\\pi_e y=\\eta$ and $h_e\\eta=p x$, i.e. a pair $(y,x)$ with $q_e y=h_e\\pi_e y=px$, i.e. a morphism $T\\to Y_e\\times_kX$. Hence $\\pi_e\\times\\mathrm{id}_X$ is the base change of the surjective $\\pi_e$ along $H_e\\times_kX\\to H_e$, and is surjective by [lem-weil-pbc-surjective-base-change]. Put $\\pi_{e+1}:=a_e\\circ(\\pi_e\\times\\mathrm{id}_X):Y_{e+1}\\to H_{e+1}$; it is surjective as a composite of surjective maps (second step). Finally $h_{e+1}\\circ\\pi_{e+1}=h_e\\circ\\mathrm{pr}_1\\circ(\\pi_e\\times\\mathrm{id}_X)=h_e\\circ\\pi_e\\circ\\mathrm{pr}_1=q_e\\circ\\mathrm{pr}_1=q_{e+1}$, using that $a_e$ is over $k$ (second step). This proves (P$_{e+1}$). On points, $\\pi_{e+1}(y,x)=\\pi_e(y)+x$, so for $e\\geq1$, $Y_e=X^e$ and $\\pi_e$ is $(x_1,\\dots,x_e)\\mapsto x_1+\\cdots+x_e$, the morphism of the source.",
+   "uses": [
+    "def-pc-fibre-product",
+    "lem-weil-pbc-surjective-base-change",
+    "def-weil-surjective-morphism",
+    "lem-pc-hilb-addition"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/pic.tex",
+    "place": "Tag 0B9I (proposition-hilb-d), proof of (1): 'we find a morphism X^d -> Hilb^d, (x_1,...,x_d) -> x_1+...+x_d, which is finite locally free of degree d!' (here only surjectivity is kept, obtained from the degrees e+1 >= 1 of the factors)"
+   }
+  },
+  {
+   "text": "*Conclusion.* (P$_d$) gives $Y:=Y_d$ (the $d$-fold fibre product $X^d=X\\times_k\\cdots\\times_kX$ for $d\\geq1$, $\\operatorname{Spec}k$ for $d=0$), the proper morphism $q:=q_d:Y\\to\\operatorname{Spec}k$, with $Y$ geometrically irreducible over $k$, and the surjective $\\pi:=\\pi_d:Y\\to H_d=H$ with $h_d\\circ\\pi=q$, which is the statement.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/pic.tex",
+    "place": "Tag 0B9I (proposition-hilb-d), proof of (1)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-integral-scheme-irreducible",
+  "def-pc-geometrically-irreducible",
+  "def-pc-integral-scheme",
+  "def-pc-curve",
+  "lem-sc-curve-base-change-relative-dimension-one",
+  "thm-pc-hilb-curves",
+  "def-pc-hilb-functor",
+  "def-pc-representable-functor",
+  "lem-pc-hilb-addition",
+  "def-pc-finite-locally-free",
+  "def-weil-proper-morphism",
+  "def-weil-surjective-morphism",
+  "lem-sc-hilb-zero-base",
+  "lem-weil-pbc-closed-immersion-proper",
+  "def-pc-base-change",
+  "def-pc-fibre-product",
+  "lem-weil-pbc-proper-base-change",
+  "lem-weil-pbc-proper-composition",
+  "lem-sc-geometrically-irreducible-product",
+  "lem-weil-pbc-surjective-base-change"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/pic.tex",
+  "place": "Tag 0B9I (proposition-hilb-d), proof of (1), with Tag 0B9G (lemma-universal-object) and its preceding text; Varieties Tag 038F"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -60,10 +169,25 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
-  "item": "lem-sc-hilb-geometrically-integral"
+  "item": "lem-sc-hilb-geometrically-integral",
+  "by": "worker",
+  "date": "2026-10-10"
  },
  "chapter": "sec-picard-framework",
- "unit": "sk-prop-jacobian"
+ "unit": "sk-prop-jacobian",
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "lem-sc-hilb-dominating-power",
+  "worker": "stage1",
+  "summary": "Checked the statement against pic.tex 0B9I proof of (1) and the slopmaster2 declaration AlgebraicGeometry.exists_surjective_of_representableBy_hilbertPresheaf_curve (Curve.lean 1049-1077): the Lean statement matches the node (proper q, geometrically irreducible Y, surjective pi, pi then H -> Spec k equals q), but the declaration rests on sorry only through isRepresentable_hilbertPresheaf_curve (representability of Hilb^e for curves), so it is not attached. Split following the source and the Lean route: representability of every Hilb^e by thm-pc-hilb-curves (1); the addition morphisms H_e x X -> H_{e+1} of lem-pc-hilb-addition (0B9G, Lean-closed), finite locally free of degree e+1 >= 1 hence surjective (written out from def-pc-finite-locally-free); induction from Hilb^0 = Spec k (new node lem-sc-hilb-zero-base, attached to the sorry-free isIso_of_representableBy_hilbertPresheaf_zero) instead of the source's start Hilb^1 = X; surjectivity of pi_e x id by base change; properness by base change and composition; geometric irreducibility of the products by the new unsplit node lem-sc-geometrically-irreducible-product (Varieties 038F with 054P). The source proves the stronger 'finite locally free of degree d!' (the citer only needs surjectivity), which is not reproduced. Removed def-pc-base-change from stmt_deps (the statement does not cite it).",
+  "blueprint": "The steps realize, in thm-sc-jacobian-representability's proof, step (4) 'Connectedness': the assertion that Hilb^g is irreducible and maps onto Pic^g, in its part 'Hilb^g is dominated by the irreducible X^g' (the place recorded in from.place): steps 1-2 the existence and surjectivity of the addition morphisms, steps 3-5 the construction of X^d -> Hilb^d with properness and geometric irreducibility of X^d, step 6 the conclusion."
+ },
+ "reviewed": {
+  "by": "L",
+  "date": "2026-10-10",
+  "note": "split read in full against 0B9I (1) along the Lean route: induction from Hilb^0 = Spec k (new node, Lean-closed) through the addition morphisms (lem-pc-hilb-addition, surjective because finite locally free of positive degree), Y_{e+1} = Y_e x_k X proper and geometrically irreducible (new node, 038F), surjectivity by the cartesian square; 2 new nodes; the Lean theorem stating the item rests on sorry, so no attachment"
+ },
+ "lead_note": "lem-pc-hilb-addition does not say the addition morphism is over S and has empty stmt_deps (worker of this item, 15:07 UTC); its Lean states it."
 }

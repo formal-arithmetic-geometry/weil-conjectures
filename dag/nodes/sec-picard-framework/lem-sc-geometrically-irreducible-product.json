@@ -1,0 +1,94 @@
+{
+ "id": "lem-sc-geometrically-irreducible-product",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-sc-jacobian-representability",
+   "place": "proof, step (4) 'Connectedness': the assertion that Hilb^g is irreducible, made precise by the power-of-the-curve domination; here 'X^d is geometrically irreducible' (the product of geometrically irreducible schemes)",
+   "via": [
+    "lem-sc-hilb-dominating-power",
+    "lem-sc-hilb-geometrically-integral"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "A product of geometrically irreducible schemes is geometrically irreducible",
+ "statement": "Let $k$ be a field and let $X$ and $Y$ be schemes over $k$ [def-weil-scheme-over-base] which are geometrically irreducible over $k$ [def-pc-geometrically-irreducible]. Then the fibre product $X\\times_{\\operatorname{Spec}k}Y$ [def-pc-fibre-product], a scheme over $k$ through either projection followed by the structure morphism, is geometrically irreducible over $k$: for every field extension $k'/k$ [def-pc-field-extension] the base change $(X\\times_{\\operatorname{Spec}k}Y)\\times_{\\operatorname{Spec}k}\\operatorname{Spec}k'$ [def-pc-base-change] is irreducible [def-weil-irreducible-components].",
+ "source": {
+  "document": "literature/stacks-project/varieties.tex",
+  "place": "Tag 038F (lemma-bijection-irreducible-components), applied after base change to k' together with Tag 054P (lemma-geometrically-irreducible-check-after-extension); used in pic.tex Tag 0B9I (proposition-hilb-d), proof of (1): 'the product X^d is irreducible'"
+ },
+ "stmt_deps": [
+  "def-weil-scheme-over-base",
+  "def-pc-geometrically-irreducible",
+  "def-pc-fibre-product",
+  "def-pc-field-extension",
+  "def-pc-base-change",
+  "def-weil-irreducible-components"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "fibre product of two geometrically irreducible schemes over a field is geometrically irreducible; GeometricallyIrreducible pullback over field product irreducible",
+   "results": "LeanSearch HTTP 500 (server error, both queries)",
+   "date": "2026-10-10",
+   "verdict": "no match (search unavailable; see Loogle and grep)"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "product X ×_k Y of geometrically irreducible schemes over a field k is geometrically irreducible",
+   "results": "quasiSeparatedSpace_iff_quasiCompact_prod_lift, Scheme.Pullback.Triplet.instNontrivialCarrierTensor, instCartesianMonoidalCategoryScheme, instQuasiSeparatedFstScheme: none about irreducibility",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.GeometricallyIrreducible, CategoryTheory.CategoryStruct.comp",
+   "results": "AlgebraicGeometry.GeometricallyIrreducible.comp (Mathlib.AlgebraicGeometry.Geometrically.Irreducible, line 124: f, g geometrically irreducible and universally open imply f ≫ g geometrically irreducible); instGeometricallyIrreducibleCompSchemeOfIsOpenImmersionOfSurjective",
+   "date": "2026-10-10",
+   "verdict": "generalization, not one line: with the base-change instance (line 52-54) applied to Y ×_k X -> Y, it gives the node once both structure morphisms and the projection are universally open; universal openness of an arbitrary scheme over a field (Stacks 0383) is not in Mathlib (only UniversallyOpen.of_flat for flat locally finitely presented morphisms, Morphisms/UniversallyOpen.lean:147), so the agreement needs more than one line"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rn 'GeometricallyIrreducible' and grep -rn 'UniversallyOpen' | grep -i field in ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicGeometry",
+   "results": "Geometrically/Irreducible.lean (class line 42, base change instances 52-58, product irreducible instances 111-117 needing UniversallyOpen, comp line 124), Geometrically/Integral.lean:58, AffineSpace.lean:407; no universal openness over a field",
+   "date": "2026-10-10",
+   "verdict": "no match (candidate GeometricallyIrreducible.comp recorded)"
+  }
+ ],
+ "mathlib_match": null,
+ "mathlib_candidate": {
+  "declaration": "AlgebraicGeometry.GeometricallyIrreducible.comp",
+  "file": "Mathlib/AlgebraicGeometry/Geometrically/Irreducible.lean",
+  "lines": [
+   124,
+   130
+  ],
+  "how": "apply to pullback.fst (Y ×_k X -> Y, geometrically irreducible as a base change) and Y -> Spec k; needs both universally open (Stacks 0383, not in Mathlib in general; UniversallyOpen.of_flat covers the locally finitely presented case)"
+ },
+ "status": "unsplit",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-sc-hilb-dominating-power",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-prop-jacobian"
+}

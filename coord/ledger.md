@@ -1723,3 +1723,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 15:07 L: merged deliver/K1/lem-sc-p1-proj-shifted-free-twist (reviewer PASS; first push; new nodes: 0)
 - 15:07 L: merged deliver/J1/lem-exc-coinduced-discrete-embedding (reviewer FIX; after a return; new nodes: 1)
 - 15:07 L: merged deliver/E1/lem-sc-regular-curve-torsionfree-free (reviewer FIX; first push; new nodes: 2)
+- 15:07 L: lem-sc-hilb-dominating-power accepted (6 steps per 0B9I along the Lean route, 2 new nodes: lem-sc-hilb-zero-base closed in Lean, lem-sc-geometrically-irreducible-product)
