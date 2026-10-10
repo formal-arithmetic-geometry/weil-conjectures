@@ -3,11 +3,11 @@
  "blueprint": {
   "is": "def-nagata-qc-open-descent",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "definition",
  "title": "Finite-stage model of a quasi-compact open",
- "statement": "Fix $\\lambda_0$, assume $Y_{\\lambda_0}$ is qcqs, and put\n$Y=S\\times_{S_{\\lambda_0}}Y_{\\lambda_0}$, and let $W\\subseteq Y$ be a\nquasi-compact open. Select finitely many affine opens of\n$Y_{\\lambda_0}$ meeting the image of $W$. On their inverse limits, write\n$W$ as a finite union of basic opens $D(f_{ak})$. Choose finite-stage\nlifts $f_{ak,\\lambda_{ak}}$ and define\n\n$$\n\\lambda_W=u(\\{\\lambda_0\\}\\cup\\{\\lambda_{ak}\\}_{a,k}),\n\\qquad\nW_{\\lambda_W}=\\bigcup_{a,k}D(f_{ak,\\lambda_W})\n\\subseteq Y_{\\lambda_W}.\n$$\n\nQuasi-compactness supplies a finite affine cover; on each chart the inverse\nlimit identifies the coordinate ring with the filtered colimit, so the open\nhas a finite basic-open presentation. Record those functions and lifts in\nthe witness before taking the common upper bound.",
+ "statement": "Fix the base-changed system of [def-nagata-basechanged-system] with $\\lambda_0\\in I$. Assume that $I$ is directed, $S=\\varprojlim_\\lambda S_\\lambda$, every transition $S_\\mu\\to S_\\lambda$ is affine, and $Y_{\\lambda_0}$ is quasi-compact and quasi-separated (as a scheme; this holds when $S_{\\lambda_0}$ is quasi-compact and quasi-separated and $Y_{\\lambda_0}\\to S_{\\lambda_0}$ is quasi-compact and quasi-separated, e.g. $S_{\\lambda_0}$ of finite type over $\\mathbf Z$). Let $W\\subseteq Y$ be a quasi-compact open. Choose a finite affine cover $Y_{\\lambda_0}=\\bigcup_{a=1}^m U_a$ and write $U_{a,\\lambda}$ for its inverse image in $Y_\\lambda$ and $U_a^\\infty$ for its inverse image in $Y$. Since $Y\\to Y_{\\lambda_0}$ is affine and $Y_{\\lambda_0}$ is quasi-separated, each $W\\cap U_a^\\infty$ is quasi-compact; choose a finite basic-open presentation $W\\cap U_a^\\infty=\\bigcup_{k=1}^{r_a}D(f_{ak})$ with $f_{ak}\\in\\Gamma(U_a^\\infty,\\mathcal O)$. By [lem-weil-pbc-limit-affine-transition] and [lem-weil-pbc-limit-global-sections-colimit] (Tags 01YW/01Z0), $\\Gamma(U_a^\\infty,\\mathcal O)\\cong\\varinjlim_{\\lambda\\geq\\lambda_0}\\Gamma(U_{a,\\lambda},\\mathcal O)$. For each $a$, apply [lemma-nagata-filtered-colimit-finite-data] to this directed system and the finitely many $f_{ak}$ (with no equalities) to obtain a stage $\\lambda_a\\geq\\lambda_0$ and lifts $f_{ak,\\lambda_a}\\in\\Gamma(U_{a,\\lambda_a},\\mathcal O)$. Set $\\lambda_W:=u(\\{\\lambda_0\\}\\cup\\{\\lambda_a\\}_a)$ using [def-nagata-directed-finite-upper-bound]; the separately proved property [lemma-nagata-directed-finite-upper-bound] gives $\\lambda_a\\leq\\lambda_W$, so transport each lift to $f_{ak,\\lambda_W}$ and define $W_{\\lambda_W}:=\\bigcup_{a,k}D(f_{ak,\\lambda_W})\\subseteq Y_{\\lambda_W}$. This witness depends on the chosen finite affine cover, presentations, and lifts; [pqf-lem-limit-qc-open-descends], clause (2), makes any two choices agree at a later stage.",
  "source": {
   "document": "literature/blueprint/master/blueprint/sec-nagata-compactification/sk-prop-nagata-sketch-approximation/def-nagata-qc-open-descent.md",
   "place": "node def-nagata-qc-open-descent, order 347"
@@ -15,14 +15,47 @@
  "stmt_deps": [
   "def-nagata-basechanged-system",
   "def-nagata-directed-finite-upper-bound",
-  "lemma-nagata-filtered-colimit-finite-data"
+  "lemma-nagata-directed-finite-upper-bound",
+  "lemma-nagata-filtered-colimit-finite-data",
+  "lem-weil-pbc-limit-affine-transition",
+  "lem-weil-pbc-limit-global-sections-colimit",
+  "pqf-lem-limit-qc-open-descends"
  ],
  "proof": [],
  "proof_deps": [],
  "proof_origin": null,
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "finite-stage model of a quasi-compact open in an inverse limit of schemes with affine transitions",
+   "results": "AlgebraicGeometry.Scheme.exists_isQuasiAffine_of_isLimit; AlgebraicGeometry.Scheme.exists_isAffine_of_isLimit; AlgebraicGeometry.Scheme.exists_isOpenCover_and_isAffine; AlgebraicGeometry.exists_preimage_eq; AlgebraicGeometry.exists_isAffineOpen_preimage_eq",
+   "date": "2026-10-11",
+   "verdict": "no exact match: Mathlib has general affine-transition limit/open preimage lemmas, but no selected finite-stage witness with the stated base-changed system"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry Scheme open quasiCompact inverse limit affine transition",
+   "results": "0 hits; parser rejected the supplied pattern",
+   "date": "2026-10-11",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "quasi.?compact.*open|isCompactOpen_iff_eq_finset_affine_union [Mathlib/AlgebraicGeometry]",
+   "results": "0 hits from msearch grep",
+   "date": "2026-10-11",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "finite-stage descent of quasi-compact open in inverse limit",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-11",
+   "verdict": "unavailable"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [
   "bypassed"
@@ -59,5 +92,20 @@
   }
  },
  "chapter": "sec-nagata-compactification",
- "unit": "sk-prop-nagata-sketch-approximation"
+ "unit": "sk-prop-nagata-sketch-approximation",
+ "split_report": {
+  "date": "2026-10-11",
+  "item": "def-nagata-qc-open-descent",
+  "worker": "stage1",
+  "summary": "Repaired the returned imported definition by stating the full directed affine-transition base-changed setting, replacing 'affines meeting the image' with a finite affine cover of Y_lambda0, proving chartwise quasi-compactness and finite basic-open presentations, citing the affine-limit and global-sections-colimit nodes, naming finite-data lifts and the selected common upper bound, and recording dependence on choices with the existing compact-open descent lemma. No new child node is needed.",
+  "blueprint": "The item realizes blueprint node def-nagata-qc-open-descent, order 347; the finite affine cover, chartwise basic-open presentations, finite lifts, and common upper bound expand its witness-construction paragraph. The blueprint status note still records that this stage-by-stage bookkeeping is bypassed by the formalized approximation route."
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-qod2822",
+  "group": "J1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-qod2822 (reviewer sub-agent of L); spot-checked: All four points of R-qod2740's 22:05 return repaired: (1) setting sentence identical to merged def-nagata-qc-open-equality-stage (directed I, S=lim S_lambda, affine transitions, Y_lambda0 qcqs as a scheme); (2) finite affine cover Y_lambda0=U_1..U_m with U_a^infty, U_{a,lambda}, so the union of D(f_{ak,lambda_W}) pulls back to W as lemma-nagata-qc-open-descends needs; (3) W cap U_a^infty qc (Y->Y_lambda0 affine, Y_lambda0 qs) and Gamma(U_a^infty)=colim Gamma(U_{a,lambda}) cited to lem-weil-pbc-limit-affine-transition / lem-weil-pbc-limit-global-sections-colimit, both in stmt_deps; (4) stages/lifts via lemma-nagata-filtered-colimit-finite-data (no equalities), lambda_W=u(...) via def-nagata-directed-finite-upper-bound with lambda_a<=lambda_W from lemma-nagata-directed-finite-upper-bound, choice dependence stated with pqf-lem-limit-qc-open-descends clause (2) (hypotheses hold: Y_lambda qcqs, affine transitions). Choice conventions match def-nagata-affine-fp-descent and def-nagata-qc-open-equality-stage; citers lemma-nagata-qc-open-descends and def-nagata-relative-gluing-datum-descent use exactly this object. Second reading by J1: no fault missed."
+ }
 }
