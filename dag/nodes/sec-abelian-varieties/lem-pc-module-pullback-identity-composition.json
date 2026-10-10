@@ -24,9 +24,44 @@
   "def-weil-pbc-topological-inverse-image",
   "def-pur-sheaf-tensor-product"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "For the identity morphism $\\mathrm{id}_X$, the sectionwise pushforward in [lem-pc-module-pullback-adjunction] is the identity functor on $\\mathrm{Mod}(\\mathcal O_X)$: both the inverse image on opens and restriction of scalars along the identity ring map are identities. The same node gives $P_{\\mathrm{id}_X}\\dashv\\mathrm{id}$. The identity functor is left adjoint to itself with its identity unit and counit [def-weil-pbc-composite-adjunction]. The canonical uniqueness isomorphism between left adjoints, applied to these two adjunctions, therefore gives $P_{\\mathrm{id}_X}\\cong\\mathrm{id}_{\\mathrm{Mod}(\\mathcal O_X)}$.",
+   "uses": [
+    "lem-pc-module-pullback-adjunction",
+    "def-weil-pbc-composite-adjunction",
+    "lem-weil-pbc-conjugate-iso-unit-equation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sheaves.tex",
+    "place": "Tag 0095, definition-pushforward, lines 3116-3152, together with the identity-adjunction argument used in Tag 0097's pullback proof (lines 3197-3202)"
+   }
+  },
+  {
+   "text": "For $g:X\\to Y$ and $h:Y\\to Z$, the sectionwise definition of pushforward gives $(h\\circ g)_*=h_*\\circ g_*$: on an open $W\\subseteq Z$ both sides evaluate a module on $(h\\circ g)^{-1}(W)=g^{-1}(h^{-1}(W))$, and the module action is restricted along the same composite ring map. By [lem-pc-module-pullback-adjunction], $P_g\\dashv g_*$ and $P_h\\dashv h_*$. Their composite adjunction, whose left adjoint is $P_g\\circ P_h$ and right adjoint is $h_*\\circ g_*$, is [def-weil-pbc-composite-adjunction]. Thus $P_{h\\circ g}$ and $P_g\\circ P_h$ are left adjoints to the same functor; the canonical uniqueness isomorphism of left adjoints gives the required natural isomorphism $P_{h\\circ g}\\cong P_g\\circ P_h$.",
+   "uses": [
+    "lem-pc-module-pullback-adjunction",
+    "def-weil-pbc-composite-adjunction",
+    "lem-weil-pbc-conjugate-iso-unit-equation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sheaves.tex",
+    "place": "Tag 0097, lemma-push-pull-composition-modules and proof, lines 3189-3202; pushforward equality is the sectionwise calculation from Tag 0095"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-module-pullback-adjunction",
+  "def-weil-pbc-composite-adjunction",
+  "lem-weil-pbc-conjugate-iso-unit-equation"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/sheaves.tex",
+  "place": "Tag 0097, lemma-push-pull-composition-modules, lines 3189-3202; identity case from Tag 0095 and uniqueness of left adjoints"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -56,8 +91,22 @@
   "file": "Mathlib/AlgebraicGeometry/Modules/Sheaf.lean",
   "reason": "Both isomorphisms concern the abstract pullback. The formula comparison is the adjunction of lem-pc-module-pullback-adjunction."
  },
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "lem-pc-module-pullback-identity-composition",
+  "worker": "G1 worker",
+  "summary": "Split the identity and composition assertions using the Stacks module pullback adjunction and the sectionwise equality of pushforwards. The identity and composite pullbacks are both identified as left adjoints to the same right adjoint, so uniqueness of left adjoints supplies the canonical natural isomorphisms. No new DAG node was needed.",
+  "blueprint": {
+   "ancestor": "def-pc-base-change",
+   "steps": {
+    "1": "The item serves the module base-change clause of def-pc-base-change; its identity instance supplies the unit law for the notation $g_X^*$.",
+    "2": "The same clause uses functorial base change along a composite; the Stacks 0097 composition assertion realizes this functoriality."
+   },
+   "same_as": []
+  }
+ },
  "created": {
   "by": "worker",
   "item": "def-pc-module-pullback",
@@ -76,5 +125,12 @@
   }
  },
  "chapter": "sec-abelian-varieties",
- "unit": "sk-def-av-jacobian"
+ "unit": "sk-def-av-jacobian",
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "group": "G1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed by the lead of G1; spot-checked by L: L: 0097 via uniqueness of left adjoints of id and of h_* g_* (conjugate isomorphisms); 0 new"
+ }
 }
