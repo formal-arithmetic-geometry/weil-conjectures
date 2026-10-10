@@ -209,28 +209,6 @@ noncomputable def globalSectionsConstantTwistEquiv (G : WeilSheaf k₀ l X) (b :
 
 end AlgebraicGeometry.WeilSheaf
 
-namespace FrobeniusModule
-
-variable {K : Type} [Field K]
-
-/-- The composite of two isomorphisms of Frobenius modules. -/
-@[simps toLinearEquiv]
-def Equiv.trans {M N P : FrobeniusModule.{u, 0} K} (e : M.Equiv N) (e' : N.Equiv P) :
-    M.Equiv P where
-  toLinearEquiv := e.toLinearEquiv.trans e'.toLinearEquiv
-  map_frobenius x := by
-    simp only [LinearEquiv.trans_apply, e.map_frobenius, e'.map_frobenius]
-
-/-- The inverse of an isomorphism of Frobenius modules. -/
-@[simps toLinearEquiv]
-def Equiv.symm {M N : FrobeniusModule.{u, 0} K} (e : M.Equiv N) : N.Equiv M where
-  toLinearEquiv := e.toLinearEquiv.symm
-  map_frobenius y := by
-    obtain ⟨x, rfl⟩ := e.toLinearEquiv.surjective y
-    rw [← e.map_frobenius, LinearEquiv.symm_apply_apply, LinearEquiv.symm_apply_apply]
-
-end FrobeniusModule
-
 namespace AlgebraicGeometry
 
 open ProEtale

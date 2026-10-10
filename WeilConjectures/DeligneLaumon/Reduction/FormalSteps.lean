@@ -11,6 +11,7 @@ public import WeilConjectures.Compactification.QuasiFinite
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Noetherian
 public import WeilConjectures.DeligneLaumon.Reduction.Weights
 public import WeilConjectures.WeilSheaf.LowerShriekPackage
+public import WeilConjectures.WeilSheaf.StalkUpperStar
 
 /-!
 # The formal reductions of the Deligne–Laumon direct-image bound

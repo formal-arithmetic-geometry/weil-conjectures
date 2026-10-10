@@ -84,12 +84,14 @@ structure Equiv (M N : FrobeniusModule.{u, v} K) where
     toLinearEquiv (M.frobenius x) = N.frobenius (toLinearEquiv x)
 
 /-- The inverse of an isomorphism of Frobenius modules. -/
+@[simps toLinearEquiv]
 def Equiv.symm {M N : FrobeniusModule.{u, v} K} (e : M.Equiv N) : N.Equiv M where
   toLinearEquiv := e.toLinearEquiv.symm
   map_frobenius y := e.toLinearEquiv.injective (by
     rw [e.map_frobenius, LinearEquiv.apply_symm_apply, LinearEquiv.apply_symm_apply])
 
 /-- The composite of two isomorphisms of Frobenius modules. -/
+@[simps toLinearEquiv]
 def Equiv.trans {M N P : FrobeniusModule.{u, v} K} (e : M.Equiv N) (e' : N.Equiv P) :
     M.Equiv P where
   toLinearEquiv := e.toLinearEquiv.trans e'.toLinearEquiv
