@@ -2398,3 +2398,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 19:31 L: merged deliver/K1/lem-sc-group-addition-tangent-differential (reviewer FIX; after a return; new nodes: 1)
 - 19:32 L: merged deliver/H1/lem-pc-quasi-isomorphisms-multiplicative-system (reviewer PASS; first push; new nodes: 0)
 - 19:32 L: merged deliver/M1/pqf-lem-lying-over (reviewer FIX; first push; new nodes: 0)
+- 19:32 L: merged deliver/H1/lem-pc-restrict-derived-direct-image-open (reviewer PASS; first push; new nodes: 0)
