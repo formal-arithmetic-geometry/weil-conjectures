@@ -21,9 +21,45 @@
   "def-weil-pbc-geometric-stalks",
   "def-weil-pbc-etale-sheaves"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "By the sheaf-of-sets point equivalence, taking the geometric stalk at Spec K^sep identifies sheaves of sets on the small etale site of Spec K with discrete G-sets, where G = Gal(K^sep/K), and the identification is the stalk functor used in the statement.",
+   "uses": [
+    "lem-exc-etale-sheaves-gsets-point",
+    "def-weil-pbc-geometric-stalks",
+    "def-weil-pbc-etale-sheaves"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 03QT, Theorem theorem-equivalence-sheaves-point"
+   }
+  },
+  {
+   "text": "An abelian sheaf is a sheaf of sets equipped with a commutative group law, and a discrete G-module is a discrete G-set equipped with a commutative group law whose operations are G-equivariant. The product-preserving equivalence therefore transports the addition, zero, and inverse operations and their morphisms, giving an equivalence of the corresponding abelian categories, compatible with the underlying sheaf-of-sets/G-set equivalence and with all abelian group operations.",
+   "uses": [
+    "lem-pod-equivalence-induces-module-objects",
+    "lem-exc-etale-sheaves-gsets-point",
+    "def-weil-pbc-etale-sheaves"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 04JQ, Lemma lemma-equivalence-abelian-sheaves-point and its proof"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-exc-etale-sheaves-gsets-point",
+  "def-weil-pbc-geometric-stalks",
+  "def-weil-pbc-etale-sheaves",
+  "lem-pod-equivalence-induces-module-objects"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tag 04JQ, Lemma lemma-equivalence-abelian-sheaves-point and its proof, using Tag 03QT"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -48,12 +84,36 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-exc-field-discrete-modules",
   "by": "worker",
   "date": "2026-10-10"
  },
  "chapter": "sec-curve-estimates",
- "unit": "sk-prop-h2"
+ "unit": "sk-prop-h2",
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "lem-exc-abelian-sheaves-gmodules",
+  "worker": "stage1",
+  "summary": "The item had no Lean declaration. I split the Stacks Tag 04JQ proof into the underlying sheaf-of-sets/G-set equivalence (Tag 03QT) and the formal transport of commutative group/module operations along that product-preserving equivalence. No new nodes were needed; the generic module-object equivalence already exists as lem-pod-equivalence-induces-module-objects.",
+  "blueprint": "proof, fourth paragraph: passage from sheaves of sets to abelian sheaves and modules",
+  "tool_uses": [
+   {
+    "node": "lem-pod-equivalence-induces-module-objects",
+    "why": "its statement supplies the categorical fact that an equivalence preserving finite products transports module objects and their operations"
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pod-equivalence-induces-module-objects"
+ ],
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-asg",
+  "group": "M1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-asg (reviewer sub-agent of L); spot-checked: Source: Stacks Tag 04JQ (etale-cohomology.tex lemma-equivalence-abelian-sheaves-point, l.9078): S=Spec K, geometric point, G absolute Galois group, stalk functor Ab(S_et)->Mod_G an equivalence; the node's statement agrees hypothesis by hypothesis (K field, K^sep, G=Gal(K^sep/K), discrete G-modules = Mod_G). Only fields proof, proof_deps, proof_origin, status, split_report changed. Step 1 is carried by lem-exc-etale-sheaves-gsets-point (i): stalk functor is an equivalence Sh(Spec K_et) -> G-sets with open stabilizers (= discrete G-sets), with the stalk of def-weil-pbc-geometric-stalks. Step 2 is carried by lem-pod-equivalence-induces-module-objects part 1 with Lambda=Z (any equivalence between categories with finite products induces an equivalence of module objects with underlying functor Phi); identifying Z-module objects of Sh(Spec K_et) with abelian sheaves (def-weil-pbc-etale-sheaves; products of sheaves are sectionwise) and of discrete G-sets with discrete G-modules is elementary (C2); part 2 of that node (finite sets only) is not used. tool_uses lem-pod-equivalence-induces-module-objects (unit sk-lem-finite) accepted: generic categorical black box, does not replace a step of the unit's route (C7/C8). No new nodes, no Mathlib leaf. Small cases: K separably closed gives G trivial and the equivalence is evaluation at Spec K; K finite gives G=Zhat and discrete Zhat-modules (torsion orbits finite). Start Sat Oct 10 03:25:58 PM UTC 2026, end Sat Oct 10 03:26:13 PM UTC 2026."
+ }
 }
