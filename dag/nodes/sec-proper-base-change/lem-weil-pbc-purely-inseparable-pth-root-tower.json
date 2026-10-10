@@ -2,18 +2,112 @@
  "id": "lem-weil-pbc-purely-inseparable-pth-root-tower",
  "kind": "statement",
  "title": "A finite purely inseparable extension is a tower of p-th roots",
- "statement": "Let $p$ be a prime number, $F$ a field of characteristic $p$ and $E/F$ a finite purely inseparable field extension [def-weil-pbc-finite-purely-inseparable-extension] [def-pc-field-extension]. Then there are elements $\\alpha_1,\\dots,\\alpha_n\\in E$ ($n\\ge0$) with $E=F(\\alpha_1,\\dots,\\alpha_n)$ such that for $i=1,\\dots,n$, writing $F_{i-1}=F(\\alpha_1,\\dots,\\alpha_{i-1})$ ($F_0=F$): $\\alpha_i^p\\in F_{i-1}$, $\\alpha_i^p$ is not a $p$-th power in $F_{i-1}$, and $[F_{i-1}(\\alpha_i):F_{i-1}]=p$. In particular, if $E\\ne F$, then $M=F_{n-1}$ is an intermediate field $F\\subseteq M\\subsetneq E$, finite and purely inseparable over $F$ with $[M:F]<[E:F]$, and $E=M(\\beta)$ with $\\beta=\\alpha_n$, $\\beta^p\\in M$ not a $p$-th power in $M$, and $E\\cong M[z]/(z^p-\\beta^p)$ as $M$-algebras.",
+ "statement": "Let $p$ be a prime number, $F$ a field of characteristic $p$ and $E/F$ a finite purely inseparable field extension [def-weil-pbc-finite-purely-inseparable-extension] [def-pc-field-extension]. Then there are elements $\\alpha_1,\\dots,\\alpha_n\\in E$ ($n\\ge0$) with $E=F(\\alpha_1,\\dots,\\alpha_n)$ such that for $i=1,\\dots,n$, writing $F_{i-1}=F(\\alpha_1,\\dots,\\alpha_{i-1})$ ($F_0=F$): $\\alpha_i^p\\in F_{i-1}$, $\\alpha_i^p$ is not a $p$-th power in $F_{i-1}$, and $[F_{i-1}(\\alpha_i):F_{i-1}]=p$. In particular, if $E\\ne F$, then $M=F_{n-1}$ is an intermediate field $F\\subseteq M\\subsetneq E$, finite and purely inseparable over $F$ with $[M:F]<[E:F]$, and $E=M(\\beta)$ with $\\beta=\\alpha_n$, $\\beta^p\\in M$ not a $p$-th power in $M$, and $E\\cong M[z]/(z^p-\\beta^p)$ as $M$-algebras, where $M[z]$ is the polynomial ring in one variable over $M$ [def-weil-polynomial-ring].",
  "source": {
   "document": "literature/stacks-project/fields.tex",
   "place": "Fields, Lemma Tag 09HI (lemma-finite-purely-inseparable, line 1669) and its proof (Lemmas nr-roots-unchanged, take-pth-root); used without citation in the proof of More on Algebra Proposition 07PM ('Let K subset M subset L be a subfield such that L is a degree p extension of M obtained by adjoining a pth root of an element f in M')"
  },
  "stmt_deps": [
   "def-weil-pbc-finite-purely-inseparable-extension",
-  "def-pc-field-extension"
+  "def-pc-field-extension",
+  "def-weil-polynomial-ring"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "(The inductive claim and its base.) For an integer $d\\ge1$ let $P(d)$ be the assertion: for every field $F$ of characteristic $p$ and every finite purely inseparable extension $E/F$ [def-weil-pbc-finite-purely-inseparable-extension] with $[E:F]=d$ there are $\\alpha_1,\\dots,\\alpha_n\\in E$ as in the first sentence of the statement. We prove $P(d)$ by strong induction on $d$, assuming $P(d')$ for all $1\\le d'<d$. If $d=1$, then $F\\subseteq E$ is a nonzero $F$-subspace of the $1$-dimensional $F$-space $E$, so $E=F$, and $n=0$ does the job ($E=F_0=F$, no conditions). From now on $d>1$, so $E\\ne F$.",
+   "uses": [
+    "def-weil-pbc-finite-purely-inseparable-extension"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/fields.tex",
+    "place": "Fields, proof of Lemma Tag 09HI (lemma-finite-purely-inseparable, line 1669), first two sentences"
+   }
+  },
+  {
+   "text": "(An element $\\alpha_1\\notin F$ with $\\alpha_1^p\\in F$, and $t=\\alpha_1^p$ is not a $p$-th power in $F$.) Choose $\\alpha\\in E$ with $\\alpha\\notin F$. By [def-weil-pbc-finite-purely-inseparable-extension] there is $m\\ge0$ with $\\alpha^{p^m}\\in F$; $m\\ne0$ since $\\alpha\\notin F$. Let $r\\ge1$ be the least integer with $\\alpha^{p^r}\\in F$ and put $\\alpha_1=\\alpha^{p^{r-1}}$. Then $\\alpha_1\\notin F$ (for $r=1$, $\\alpha_1=\\alpha$; for $r>1$ by minimality of $r$) and $\\alpha_1^p=\\alpha^{p^r}\\in F$. Put $t=\\alpha_1^p$. If $t=c^p$ with $c\\in F$, then, since $p=0$ in $E$ and $p$ divides $\\binom pj$ for $0<j<p$, $(\\alpha_1-c)^p=\\alpha_1^p-c^p=0$, so $\\alpha_1-c=0$ in the field $E$ and $\\alpha_1=c\\in F$, a contradiction. So $t$ is not a $p$-th power in $F$. (The source refers here to Lemma 09H4 'or its proof'; the computation just made is that proof in this case.)",
+   "uses": [
+    "def-weil-pbc-finite-purely-inseparable-extension"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/fields.tex",
+    "place": "Fields, proof of Lemma Tag 09HI (lemma-finite-purely-inseparable, line 1669), sentences 3-5"
+   }
+  },
+  {
+   "text": "($[F(\\alpha_1):F]=p$.) The element $\\alpha_1$ is algebraic over $F$ [def-weil-algebraic-element], a root of the nonzero polynomial $x^p-t\\in F[x]$ [def-weil-polynomial-ring]. By [lem-weil-pbc-simple-algebraic-extension-power-basis] (fields $F\\subseteq E$, $\\theta=\\alpha_1$), $F(\\alpha_1)$ is finite over $F$ and, with $e=[F(\\alpha_1):F]\\ge1$, the elements $1,\\alpha_1,\\dots,\\alpha_1^{e-1}$ form an $F$-basis of $F(\\alpha_1)$. Writing $\\alpha_1^e=\\sum_{j<e}c_j\\alpha_1^j$ in this basis gives the monic polynomial $m=x^e-\\sum_{j<e}c_jx^j\\in F[x]$ of degree $e\\ge1$ with $m(\\alpha_1)=0$. Every $g\\in F[x]$ with $g(\\alpha_1)=0$ is divisible by $m$: division by the monic $m$ gives $g=qm+s$ with $\\deg s<e$, and $s(\\alpha_1)=0$ forces $s=0$ by the linear independence of $1,\\dots,\\alpha_1^{e-1}$. So $x^p-t=qm$ for some $q\\in F[x]$. By [lem-weil-pbc-x-pow-p-minus-t-irreducible] (applicable by Step 2) $x^p-t$ is irreducible; $m$ has degree $e\\ge1$, so it is not a nonzero constant, hence $q$ is a nonzero constant. Comparing leading coefficients of the monic polynomials $x^p-t$ and $m$ gives $q=1$, so $m=x^p-t$ and $e=\\deg m=p$.",
+   "uses": [
+    "def-weil-algebraic-element",
+    "def-weil-polynomial-ring",
+    "lem-weil-pbc-simple-algebraic-extension-power-basis",
+    "lem-weil-pbc-x-pow-p-minus-t-irreducible"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/fields.tex",
+    "place": "Fields, proof of Lemma Tag 09HI (lemma-finite-purely-inseparable, line 1669), sentence 6 ('Thus F subset F(alpha) is a subextension of degree p (Lemma 09HF)'), with the minimal-polynomial argument written out"
+   }
+  },
+  {
+   "text": "($E/F_1$ is finite purely inseparable of degree $<d$.) Put $F_1=F(\\alpha_1)\\subseteq E$, a field of characteristic $p$. $E$ is spanned over $F$ by finitely many elements, which then also span $E$ over $F_1\\supseteq F$, so $E/F_1$ is finite. Every $x\\in E$ has $x^{p^m}\\in F\\subseteq F_1$ for some $m\\ge0$ [def-weil-pbc-finite-purely-inseparable-extension], so $E/F_1$ is purely inseparable. By [lem-weil-pbc-field-degree-multiplicativity] for $F\\subseteq F_1\\subseteq E$ and Step 3, $d=[E:F]=[E:F_1]\\,[F_1:F]=p\\,[E:F_1]$, so $1\\le[E:F_1]=d/p<d$.",
+   "uses": [
+    "def-weil-pbc-finite-purely-inseparable-extension",
+    "lem-weil-pbc-field-degree-multiplicativity"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/fields.tex",
+    "place": "Fields, proof of Lemma Tag 09HI (lemma-finite-purely-inseparable, line 1669), sentence 7 ('By induction ...'): the induction hypothesis applies to E/F(alpha)"
+   }
+  },
+  {
+   "text": "(Concatenating the towers.) By $P([E:F_1])$ (Step 4) applied to $E/F_1$ there are $\\gamma_1,\\dots,\\gamma_{k}\\in E$ with $E=F_1(\\gamma_1,\\dots,\\gamma_k)$ such that, with $G_{j-1}=F_1(\\gamma_1,\\dots,\\gamma_{j-1})$, $\\gamma_j^p\\in G_{j-1}$ is not a $p$-th power in $G_{j-1}$ and $[G_{j-1}(\\gamma_j):G_{j-1}]=p$. Put $n=k+1$ and $\\alpha_{j+1}=\\gamma_j$ for $1\\le j\\le k$. For $1\\le i\\le n$, $F(\\alpha_1,\\dots,\\alpha_{i-1})$ and $F_1(\\gamma_1,\\dots,\\gamma_{i-2})$ are both the smallest subfield of $E$ containing $F$ and $\\alpha_1,\\dots,\\alpha_{i-1}$ (for $i\\ge2$; for $i=1$ the field is $F$), so $F_{i-1}=G_{i-2}$ for $i\\ge2$, and $E=F_1(\\gamma_1,\\dots,\\gamma_k)=F(\\alpha_1,\\dots,\\alpha_n)$. The conditions for $i=1$ are Steps 2 and 3 ($F_0=F$), those for $i\\ge2$ are those for $j=i-1$ just obtained. This proves $P(d)$, hence the first assertion for every finite purely inseparable $E/F$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/fields.tex",
+    "place": "Fields, proof of Lemma Tag 09HI (lemma-finite-purely-inseparable, line 1669), last sentence ('The sequence alpha, alpha_1, ..., alpha_n does the job')"
+   }
+  },
+  {
+   "text": "(In particular: $M$.) Let $E\\ne F$ and take $\\alpha_1,\\dots,\\alpha_n$ as in the first assertion. If $n=0$ then $E=F_0=F$; so $n\\ge1$. Put $M=F_{n-1}$ and $\\beta=\\alpha_n$: $F\\subseteq M\\subseteq E$, $E=F_n=M(\\beta)$, $\\beta^p\\in M$ is not a $p$-th power in $M$, and $[E:M]=p$ (clause $i=n$). $M$ is an $F$-subspace of the finite-dimensional $F$-space $E$, hence finite over $F$, and each element of $M$ is an element of $E$, so has a $p$-power power in $F$ [def-weil-pbc-finite-purely-inseparable-extension]: $M/F$ is finite purely inseparable. By [lem-weil-pbc-field-degree-multiplicativity] for $F\\subseteq M\\subseteq E$, $[E:F]=[E:M][M:F]=p[M:F]>[M:F]$ since $p\\ge2$; in particular $M\\ne E$.",
+   "uses": [
+    "def-weil-pbc-finite-purely-inseparable-extension",
+    "lem-weil-pbc-field-degree-multiplicativity"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/fields.tex",
+    "place": "Fields, Lemma Tag 09HI, the last extension of the tower; agent-written consequence"
+   }
+  },
+  {
+   "text": "(In particular: $E\\cong M[z]/(z^p-\\beta^p)$.) Let $\\varphi:M[z]\\to E$ be the $M$-algebra homomorphism $g\\mapsto g(\\beta)$ of the polynomial ring [def-weil-polynomial-ring]. By [lem-weil-pbc-simple-algebraic-extension-power-basis] (fields $M\\subseteq E$, $\\theta=\\beta$, a root of $z^p-\\beta^p\\in M[z]$) and $[M(\\beta):M]=p$ (Step 6), the elements $1,\\beta,\\dots,\\beta^{p-1}$ form an $M$-basis of $M(\\beta)=E$; they are $\\varphi(1),\\dots,\\varphi(z^{p-1})$, so $\\varphi$ is surjective. Its kernel contains $z^p-\\beta^p$. Conversely let $g\\in\\ker\\varphi$; division by the monic $z^p-\\beta^p$ gives $g=q\\,(z^p-\\beta^p)+s$ with $\\deg s<p$, and $s(\\beta)=g(\\beta)=0$ forces $s=0$ by the linear independence of $1,\\dots,\\beta^{p-1}$. So $\\ker\\varphi=(z^p-\\beta^p)$, and $\\varphi$ induces an isomorphism of $M$-algebras $M[z]/(z^p-\\beta^p)\\cong E$ (first isomorphism theorem).",
+   "uses": [
+    "def-weil-polynomial-ring",
+    "lem-weil-pbc-simple-algebraic-extension-power-basis"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/fields.tex",
+    "place": "Fields, discussion before Lemma Tag 09HF (line 1597: K = F[x]/(P) = F[t^{1/p}]); agent-written"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-finite-purely-inseparable-extension",
+  "def-weil-algebraic-element",
+  "def-weil-polynomial-ring",
+  "lem-weil-pbc-simple-algebraic-extension-power-basis",
+  "lem-weil-pbc-x-pow-p-minus-t-irreducible",
+  "lem-weil-pbc-field-degree-multiplicativity"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/fields.tex",
+  "place": "Fields, Lemma Tag 09HI (lemma-finite-purely-inseparable, line 1669) and its proof, with Lemma 09HF (lemma-take-pth-root, line 1617); the 'in particular' clause (steps 6-7) written by an agent"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -42,10 +136,45 @@
    "results": "only proof-internal uses (PerfectClosure.lean:397-399, Basic.lean:333, 358, 454): no tower lemma",
    "date": "2026-10-10",
    "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "finite purely inseparable extension is a tower of degree p extensions obtained by adjoining p-th roots",
+   "results": "IsPurelyInseparable, IsPurelyInseparable.mk, isPurelyInseparable_iff, isPurelyInseparable_iff_natSepDegree_eq_one, IsPurelyInseparable.tower_bot, tower_top (Mathlib.FieldTheory.PurelyInseparable.Basic), IsPurelyInseparable.hasExponent_of_finiteDimensional (…Exponent): no tower of p-th roots",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "purely inseparable extension E/F, E ≠ F, exists intermediate field M with [E:M] = p and E = M(b), b^p ∈ M",
+   "results": "perfectClosure.isPurelyInseparable, isPurelyInseparable_iff_fd_isPurelyInseparable, IntermediateField.isPurelyInseparable_tower_bot/top, IntermediateField.isPurelyInseparable_adjoin_simple_iff_pow_mem, isPurelyInseparable_adjoin_iff_pow_mem (Mathlib.FieldTheory.PurelyInseparable.*): permanence and simple-adjunction criteria, no degree-p step",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "purely inseparable element not in base field, x^p in base field, degree of F(x) over F equals p",
+   "results": "IsPurelyInseparable.isAlgebraic, isPurelyInseparable_iff_natSepDegree_eq_one, IsPurelyInseparable.instOfHasExponent, IsPurelyInseparable.sepDegree_eq_one, IsPurelyInseparable.isIntegral",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rn 'theorem\\|lemma' /home/ubuntu/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/FieldTheory/PurelyInseparable/*.lean | grep -i 'finrank\\|tower\\|adjoin_pow\\|exists_\\|induction'; grep -rln '09HI' /home/ubuntu/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib",
+   "results": "IsPurelyInseparable.tower_bot/tower_top/trans (Basic.lean:239,248,260), IsPurelyInseparable.finrank_eq_pow (Basic.lean:322), finSepDegree_mul_finInsepDegree (Basic.lean:588), adjoin_eq_adjoin_pow_expChar_* (PerfectClosure.lean:232-294), separable/insep degree tower lemmas (Tower.lean): no tower of p-th roots; no Mathlib declaration tagged 09HI",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "local_search",
+   "query": "IsPurelyInseparable.minpoly_eq (project root ~/weil-conjectures-slopmaster2)",
+   "results": "IsPurelyInseparable.minpoly_eq, minpoly_eq' (PurelyInseparable/Exponent.lean), IsPurelyInseparable.minpoly_eq_X_pow_sub_C, minpoly_eq_X_sub_C_pow (PurelyInseparable/Basic.lean); index: unavailable. Ingredients (minimal polynomial x^{p^n}-a of one element), not the tower",
+   "date": "2026-10-10",
+   "verdict": "no match (ingredients only)"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "worker",
@@ -65,5 +194,12 @@
   }
  },
  "chapter": "sec-proper-base-change",
- "unit": "sk-thm-p1"
+ "unit": "sk-thm-p1",
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "lem-weil-pbc-purely-inseparable-pth-root-tower",
+  "worker": "stage1",
+  "summary": "Checked against Fields 09HI (fields.tex line 1669) and its proof, with 09HF (line 1617) and 09H4. Seven steps: strong induction on [E:F] with the claim P(d) stated and the base d=1 (step 1); choice of alpha_1 = alpha^{p^{r-1}} with r least, and t = alpha_1^p not a p-th power by the Frobenius computation the source delegates to 09H4 (step 2); [F(alpha_1):F] = p from the power-basis leaf, the division argument for the minimal polynomial written out, and the new Mathlib leaf lem-weil-pbc-x-pow-p-minus-t-irreducible (09HF, X_pow_sub_C_irreducible_of_prime, KummerPolynomial.lean:99) (step 3); E/F(alpha_1) finite purely inseparable of smaller degree by the definition and the degree-multiplicativity leaf (step 4); concatenation of the towers (step 5); the 'in particular' clause (steps 6-7, agent-written: M = F_{n-1}, M/F finite purely inseparable with [M:F] < [E:F], and E = M[z]/(z^p - beta^p) by evaluation at beta, surjective by the power basis, kernel by division). Statement unchanged except that def-weil-polynomial-ring is now cited for M[z] (added to stmt_deps). Both citers (lem-weil-pbc-finite-purely-inseparable-degree-p-intermediate, lem-weil-pbc-formally-smooth-complete-local-regular) use only clauses stated here. Mathlib: no tower statement after leansearch, leanfinder, loogle, grep and local_search."
+ },
+ "reviewed": "Reviewed by L 2026-10-10: faithful to Fields 09HI by strong induction on the degree with 09HF (new exact Mathlib leaf) for [F(α_1):F] = p and the power-basis leaf; the 'in particular' clauses written out (steps 6-7). Statement gained a citation only. No Mathlib match for the tower. Note: lem-weil-pbc-finite-purely-inseparable-degree-p-intermediate restates the 'in particular' clause (stage 3)."
 }

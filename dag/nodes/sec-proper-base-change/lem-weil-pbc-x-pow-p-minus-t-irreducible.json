@@ -1,0 +1,82 @@
+{
+ "id": "lem-weil-pbc-x-pow-p-minus-t-irreducible",
+ "kind": "statement",
+ "title": "$x^p-t$ is irreducible when $t$ has no $p$-th root",
+ "statement": "Let $p$ be a prime number, $F$ a field [def-weil-field] of characteristic $p$, and $t\\in F$ an element which is not a $p$-th power in $F$ (there is no $c\\in F$ with $c^p=t$). Then the polynomial $x^p-t$ of the polynomial ring $F[x]$ [def-weil-polynomial-ring] is irreducible: it is not a unit of $F[x]$, and whenever $x^p-t=gh$ with $g,h\\in F[x]$, one of $g,h$ is a unit of $F[x]$, i.e. a nonzero constant polynomial.",
+ "source": {
+  "document": "literature/stacks-project/fields.tex",
+  "place": "Fields, Lemma Tag 09HF (lemma-take-pth-root, line 1617) and its proof"
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-weil-polynomial-ring"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "X^p - a is irreducible over a field when a has no p-th root, p prime",
+   "results": "X_pow_sub_C_irreducible_of_prime, X_pow_sub_C_irreducible_iff_of_prime (Mathlib.FieldTheory.KummerPolynomial); X_pow_sub_C_irreducible_of_prime_pow, X_pow_sub_C_irreducible_iff_of_prime_pow, X_pow_sub_C_irreducible_of_odd (Mathlib.FieldTheory.KummerExtension)",
+   "date": "2026-10-10",
+   "verdict": "match: X_pow_sub_C_irreducible_of_prime"
+  },
+  {
+   "tool": "loogle",
+   "query": "Irreducible (Polynomial.X ^ _ - Polynomial.C _)",
+   "results": "ne_zero_of_irreducible_X_pow_sub_C, X_pow_sub_C_irreducible_of_prime, X_pow_sub_C_irreducible_iff_of_prime, pow_ne_of_irreducible_X_pow_sub_C, root_X_pow_sub_C_eq_zero_iff (Mathlib.FieldTheory.KummerPolynomial), X_pow_sub_C_irreducible_of_odd (Mathlib.FieldTheory.KummerExtension)",
+   "date": "2026-10-10",
+   "verdict": "match: X_pow_sub_C_irreducible_of_prime"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "the polynomial x^p - t is irreducible over a field K if t has no p-th root in K, p prime",
+   "results": "X_pow_sub_C_irreducible_of_prime, X_pow_sub_C_irreducible_iff_of_prime (Mathlib.FieldTheory.KummerPolynomial), X_pow_sub_C_irreducible_of_prime_pow, X_pow_sub_C_irreducible_iff_of_prime_pow (Mathlib.FieldTheory.KummerExtension)",
+   "date": "2026-10-10",
+   "verdict": "match: X_pow_sub_C_irreducible_of_prime"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rn 'theorem X_pow_sub_C_irreducible_of_prime' /home/ubuntu/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/ ; sed -n 90,127p FieldTheory/KummerPolynomial.lean",
+   "results": "FieldTheory/KummerPolynomial.lean:99 theorem X_pow_sub_C_irreducible_of_prime {p : ℕ} (hp : p.Prime) {a : K} (ha : ∀ b : K, b ^ p ≠ a) : Irreducible (X ^ p - C a), with [Field K] (line 24) and attribute @[stacks 09HF \"We proved the result without the condition that K is char p in 09HF.\"] (line 98); FieldTheory/KummerExtension.lean:145,152 (prime-power variants)",
+   "date": "2026-10-10",
+   "verdict": "match (read)"
+  },
+  {
+   "tool": "local_search",
+   "query": "X_pow_sub_C_irreducible_of_prime (project root ~/weil-conjectures-slopmaster2)",
+   "results": "X_pow_sub_C_irreducible_of_prime (Mathlib/FieldTheory/KummerPolynomial.lean), X_pow_sub_C_irreducible_of_prime_pow (Mathlib/FieldTheory/KummerExtension.lean); index: unavailable",
+   "date": "2026-10-10",
+   "verdict": "name exists"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "X_pow_sub_C_irreducible_of_prime",
+  "file": "Mathlib/FieldTheory/KummerPolynomial.lean",
+  "line": 99,
+  "how": "specializes in one line: X_pow_sub_C_irreducible_of_prime hp ha : Irreducible (X ^ p - C t) for any field K (line 24: variable {K : Type u} [Field K]), prime p (hp : p.Prime) and t with ha : ∀ b : K, b ^ p ≠ t; the characteristic-p hypothesis of the node is not needed (the declaration is tagged @[stacks 09HF], line 98). Mathlib's Irreducible (Mathlib/Algebra/Group/Irreducible/Defs.lean) (line 44) is 'not a unit, and in every factorization one factor is a unit', and the units of K[X] are the nonzero constants (Polynomial.isUnit_iff, Mathlib/Algebra/Polynomial/Degree/Units.lean:48). Lines 90-127 read 2026-10-10."
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-purely-inseparable-pth-root-tower",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "reviewed": "Reviewed by L 2026-10-10: exact Mathlib leaf X_pow_sub_C_irreducible_of_prime (KummerPolynomial.lean line 99, @[stacks 09HF], read); the characteristic hypothesis is not needed by Mathlib."
+}
