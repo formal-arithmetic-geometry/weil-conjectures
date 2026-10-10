@@ -386,6 +386,13 @@ public import WeilConjectures.Blowup.EliminationOfIndeterminacy.Slope
 public import WeilConjectures.Blowup.EliminationOfIndeterminacy.ZeroLocus
 public import WeilConjectures.Blowup.Extension
 public import WeilConjectures.Blowup.FiniteDegree
+public import WeilConjectures.Blowup.FiniteDegree.Algebra
+public import WeilConjectures.Blowup.FiniteDegree.ChartIdeal
+public import WeilConjectures.Blowup.FiniteDegree.ChartProbe
+public import WeilConjectures.Blowup.FiniteDegree.Generation
+public import WeilConjectures.Blowup.FiniteDegree.LocalAlgebra
+public import WeilConjectures.Blowup.FiniteDegree.Main
+public import WeilConjectures.Blowup.FiniteDegree.UniformNumerator
 public import WeilConjectures.Blowup.Gluing
 public import WeilConjectures.Blowup.GraphQuasiFinite
 public import WeilConjectures.Blowup.InvertibleCenter
