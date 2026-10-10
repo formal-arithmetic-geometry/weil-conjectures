@@ -1,0 +1,67 @@
+{
+ "id": "lem-galois-yoneda-hom-bijection",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-galois-lc-etale",
+   "place": "proof, Step 2 ('full faithfulness'): the comparison map between morphisms of schemes and morphisms of representable sheaves",
+   "via": []
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Yoneda evaluation for every presheaf of sets",
+ "statement": "Let $\\mathcal C$ be a category and let $\\mathcal F:\\mathcal C^{\\mathrm{op}}\\to\\mathrm{Sets}$ be a presheaf of sets. For every object $A$ of $\\mathcal C$, write $h_A=\\operatorname{Mor}_{\\mathcal C}(-,A)$ as in [lem-galois-yoneda-fully-faithful]. Evaluation at the identity gives a bijection $\\operatorname{Hom}(h_A,\\mathcal F)\\xrightarrow{\\sim}\\mathcal F(A)$, $\\tau\\mapsto\\tau_A(\\mathrm{id}_A)$. For a morphism $g:B\\to A$ in $\\mathcal C$, this bijection is natural in the representing object in the sense that $\\mathcal F(g)(\\tau_A(\\mathrm{id}_A))=(\\tau\\circ h_g)_B(\\mathrm{id}_B)$, where $h_g:h_B\\to h_A$ is postcomposition by $g$. For a morphism of presheaves $\\beta:\\mathcal F\\to\\mathcal G$, it is natural in the presheaf in the sense that $\\beta_A(\\tau_A(\\mathrm{id}_A))=(\\beta\\circ\\tau)_A(\\mathrm{id}_A)$.",
+ "source": {
+  "document": "literature/stacks-project/categories.tex",
+  "place": "Lemma Tag 001P (categories-lemma-yoneda), with the naturality formulas supplied by Mathlib's Yoneda API"
+ },
+ "stmt_deps": [
+  "lem-galois-yoneda-fully-faithful"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Yoneda lemma natural bijection transformations from representable presheaf Hom(-, X) to arbitrary presheaf F equals F(X) natural in X and F; retried with 'yonedaEquiv'",
+   "results": "LeanSearch service returned HTTP 500 on both queries; match independently verified by LeanFinder, Loogle and Mathlib source",
+   "date": "2026-10-10",
+   "verdict": "service unavailable; match verified independently"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Yoneda lemma for an arbitrary category: natural transformations from Hom(-, A) to a set-valued presheaf F correspond naturally in A and F to elements of F(A)",
+   "results": "CategoryTheory.yonedaEquiv and CategoryTheory.yonedaEquiv_apply (Mathlib.CategoryTheory.Yoneda)",
+   "date": "2026-10-10",
+   "verdict": "match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.yonedaEquiv; CategoryTheory.yonedaEquiv_naturality; CategoryTheory.yonedaEquiv_comp",
+   "results": "yonedaEquiv : (yoneda.obj X ⟶ F) ≃ F.obj (op X) (Yoneda.lean:724); yonedaEquiv_naturality (Yoneda.lean:747-749); yonedaEquiv_comp (Yoneda.lean:758-760)",
+   "date": "2026-10-10",
+   "verdict": "match"
+  },
+  {
+   "tool": "grep",
+   "query": "rg -n 'def yonedaEquiv|yonedaEquiv_naturality|yonedaEquiv_comp|def yonedaLemma' /home/ubuntu/weil-src-slopmaster2/.lake/packages/mathlib/Mathlib/CategoryTheory/Yoneda.lean",
+   "results": "Yoneda.lean:724 defines yonedaEquiv; lines 747-756 give naturality in the representing object; lines 758-760 give naturality in the presheaf target; lines 839-846 package the same bijection as yonedaLemma",
+   "date": "2026-10-10",
+   "verdict": "match"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "CategoryTheory.yonedaEquiv",
+  "file": "Mathlib/CategoryTheory/Yoneda.lean",
+  "line": 724,
+  "how": "exact: yonedaEquiv (line 724) evaluates a natural transformation at op A and id_A; yonedaEquiv_naturality (lines 747-756) is naturality in A; yonedaEquiv_comp (lines 758-760) is naturality in the presheaf F. The equivalent packaged natural isomorphism is yonedaLemma (lines 839-846)."
+ },
+ "status": "mathlib",
+ "created": {
+  "item": "lem-galois-inverse-image-representable"
+ },
+ "chapter": "sec-curve-estimates",
+ "unit": "sk-prop-h2"
+}

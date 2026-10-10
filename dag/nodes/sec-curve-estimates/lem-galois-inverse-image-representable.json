@@ -23,9 +23,71 @@
   "def-weil-pbc-etale-sheaf-of-sets",
   "lem-weil-pbc-small-etale-representable-presheaf-sheaf"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "The first projection $X\\times_YV\\to X$ is etale: it is the base change of the etale morphism $V\\to Y$ along $f$, by [lem-weil-pbc-etale-scheme-base-change]. Hence $X\\times_YV$ is an object of $X_{\\Et}$, and the assignment $V\\mapsto X\\times_YV$ is functorial in $Y$-morphisms by the universal property of fibre products [def-pc-fibre-product].",
+   "uses": [
+    "lem-weil-pbc-etale-scheme-base-change",
+    "def-pc-fibre-product"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Lemma Tag 03Q1 (lemma-stalk-pullback), part (4), lines 4648-4665"
+   }
+  },
+  {
+   "text": "For every sheaf of sets $\\mathcal F$ on $X_{\\Et}$, the assumed adjunction gives a natural bijection $\\operatorname{Hom}_{X_{\\Et}}(f^{-1}h_V,\\mathcal F)\\cong\\operatorname{Hom}_{Y_{\\Et}}(h_V,f_*\\mathcal F)$. The representable presheaf $h_V$ is a sheaf by [lem-weil-pbc-small-etale-representable-presheaf-sheaf], and $\\mathrm{Sh}(T_{\\Et})$ is a full subcategory of presheaves by [def-weil-pbc-etale-sheaf-of-sets]. Therefore the general Yoneda evaluation bijection [lem-galois-yoneda-hom-bijection] identifies the latter Hom-set with $(f_*\\mathcal F)(V)$.",
+   "uses": [
+    "def-weil-pbc-etale-sheaf-of-sets",
+    "lem-weil-pbc-small-etale-representable-presheaf-sheaf",
+    "lem-galois-yoneda-hom-bijection"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Lemma Tag 03Q1 (lemma-stalk-pullback), proof of part (4), lines 4700-4714; Sites, Lemma Tag 04D3 (sites-lemma-pullback-representable-sheaf)"
+   }
+  },
+  {
+   "text": "By the definition of the direct image in the statement, $(f_*\\mathcal F)(V)=\\mathcal F(X\\times_YV)$. Since $X\\times_YV$ is an object of $X_{\\Et}$, the representable presheaf $h_{X\\times_YV}$ is a sheaf by [lem-weil-pbc-small-etale-representable-presheaf-sheaf]. The general Yoneda evaluation bijection [lem-galois-yoneda-hom-bijection] therefore identifies this set with $\\operatorname{Hom}_{X_{\\Et}}(h_{X\\times_YV},\\mathcal F)$, naturally in $\\mathcal F$. Combining with Step 2 gives a bijection $\\operatorname{Hom}_{X_{\\Et}}(f^{-1}h_V,\\mathcal F)\\cong\\operatorname{Hom}_{X_{\\Et}}(h_{X\\times_YV},\\mathcal F)$ natural in $\\mathcal F$.",
+   "uses": [
+    "lem-weil-pbc-small-etale-representable-presheaf-sheaf",
+    "lem-galois-yoneda-hom-bijection"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Lemma Tag 03Q1 (lemma-stalk-pullback), proof of part (4), lines 4704-4717"
+   }
+  },
+  {
+   "text": "Write $A_V=f^{-1}h_V$ and $B_V=h_{X\\times_YV}$. The natural Hom-bijection of Step 3, $\\Phi_{V,\\mathcal F}:\\operatorname{Hom}(A_V,\\mathcal F)\\to\\operatorname{Hom}(B_V,\\mathcal F)$, gives the unique isomorphism $\\theta_V=\\Phi_{V,A_V}(\\mathrm{id}_{A_V}):B_V\\to A_V$ by [lem-weil-pbc-coyoneda-iso-of-natural-hom-bijection]; its inverse is the claimed $A_V\\cong B_V$. For a $Y$-morphism $g:V\\to V'$, the fibre-product universal property [def-pc-fibre-product] gives $g_X:X\\times_YV\\to X\\times_YV'$. For every sheaf $\\mathcal F$ the two routes from $\\operatorname{Hom}(A_{V'},\\mathcal F)$ to $\\operatorname{Hom}(B_V,\\mathcal F)$ agree: adjunction is natural in $h_g$, Yoneda evaluation is natural in the representing object by [lem-galois-yoneda-hom-bijection], and the direct-image restriction along $g$ is $\\mathcal F(g_X)$. Thus $f^{-1}h_g\\circ\\theta_V=\\theta_{V'}\\circ h_{g_X}$ by the uniqueness clause of [lem-weil-pbc-coyoneda-iso-of-natural-hom-bijection]. Inverting this equality proves naturality of $\\theta_V^{-1}:A_V\\to B_V$ in $V$.",
+   "uses": [
+    "lem-weil-pbc-coyoneda-iso-of-natural-hom-bijection",
+    "def-pc-fibre-product",
+    "lem-galois-yoneda-hom-bijection"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Sites, Lemma Tag 04D3 (sites-lemma-pullback-representable-sheaf), lines 2619-2628; Etale Cohomology, Tag 03Q1, part (4)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-etale-sheaf-of-sets",
+  "lem-weil-pbc-small-etale-representable-presheaf-sheaf",
+  "lem-galois-yoneda-hom-bijection",
+  "lem-weil-pbc-coyoneda-iso-of-natural-hom-bijection",
+  "def-pc-fibre-product",
+  "lem-weil-pbc-etale-scheme-base-change"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Lemma Tag 03Q1 (lemma-stalk-pullback), part (4), lines 4648-4723; Sites, Lemma Tag 04D3"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -57,7 +119,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "worker",
@@ -77,5 +139,29 @@
   }
  },
  "chapter": "sec-curve-estimates",
- "unit": "sk-prop-h2"
+ "unit": "sk-prop-h2",
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "lem-galois-inverse-image-representable",
+  "worker": "stage1",
+  "summary": "The four-step split follows etale base change, the adjunction, the general Yoneda evaluation of a presheaf, and the co-Yoneda uniqueness of the resulting isomorphism. Added the general Yoneda evaluation and its naturality as a Mathlib leaf; cited the existing representable-sheaf and co-Yoneda leaves at the precise steps that use them.",
+  "blueprint": "Realizes thm-galois-lc-etale's base-change compatibility clause: the four steps establish the pullback representable formula that the blueprint proof leaves as 'as in the statement'.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-small-etale-representable-presheaf-sheaf",
+    "why": "Steps 2 and 3 need the generic fact that representable presheaves on the small etale sites are sheaves; this is supplied by the other unit and is not replaced by a node in the base-change route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-small-etale-representable-presheaf-sheaf"
+ ],
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-iir",
+  "group": "C1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-iir (reviewer sub-agent of L); spot-checked: Repaired re-push; every point of the 13:28 return is repaired: (1) new Mathlib leaf lem-galois-yoneda-hom-bijection (general Yoneda, any category, any presheaf, tau -> tau_A(id_A), naturality in A and in F) cited in steps 2 and 3; verified CategoryTheory.yonedaEquiv at Mathlib/CategoryTheory/Yoneda.lean:724, yonedaEquiv_naturality 747-749 (F(g)(yonedaEquiv f) = yonedaEquiv(yoneda.map g >> f), the node's first formula), yonedaEquiv_comp 758-760 (the second); statement agrees with Stacks 001P plus these two naturality equations; three searches recorded (LeanSearch HTTP 500 recorded honestly, LeanFinder, Loogle, grep; the grep log names a wrong path /home/ubuntu/weil-src-slopmaster2, harmless); blueprint_refs search Yoneda gives only lem-pc-yoneda (Sch/S specialization, not same_as). (2) step 4 cites lem-weil-pbc-coyoneda-iso-of-natural-hom-bijection in category Sh(X_et), A=f^{-1}h_V, B=h_{X x_Y V}, Phi natural in F from steps 2-3; the naturality-in-V equality f^{-1}h_g o theta_V = theta_V' o h_{g_X} follows from that node's formula clause Phi(f)=f o theta applied to f^{-1}h_g (the step says 'uniqueness clause', imprecise but the cited node carries it). (3) minor points: lem-weil-pbc-small-etale-representable-presheaf-sheaf cited in steps 2 and 3 (accepted tool use, generic sheaf fact, unit sk-thm-p1), stray capital and idle def-pc-fibre-product in step 3 removed. Source Stacks 03Q1 (4) etale-cohomology.tex 4648-4723: f^{-1}h_V = h_{X x_Y V} for any f and V etale over Y; proof is exactly the chain Mor(f^{-1}h_V,F)=Mor(h_V,f_*F)=f_*F(V)=F(X x_Y V) with Yoneda and representable sheaves; item statement unchanged, hypotheses agree. Step 1 carried by lem-weil-pbc-etale-scheme-base-change (02GO) and def-pc-fibre-product; step 2 by the adjunction hypothesis, def-weil-pbc-etale-sheaf-of-sets (full subcategory), the new leaf with target f_*F. Only split-owned fields of the item changed (proof, proof_deps, proof_origin, split_report, status); new node created.item = item, TeX ascii. Small cases: one-object category (bijection = evaluation of maps from a singleton), F(A) empty, identity g in both naturality formulas. 14:41-14:42 UTC"
+ }
 }

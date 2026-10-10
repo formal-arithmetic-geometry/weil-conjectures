@@ -1,0 +1,26 @@
+# Worker report: `lem-galois-inverse-image-representable`
+
+## Files written
+
+- `dag/nodes/sec-curve-estimates/lem-galois-inverse-image-representable.json`: repaired split of the item.
+- `dag/nodes/sec-curve-estimates/lem-galois-yoneda-hom-bijection.json`: new statement and Mathlib leaf, `CategoryTheory.yonedaEquiv` with `yonedaEquiv_naturality` and `yonedaEquiv_comp` in `Mathlib/CategoryTheory/Yoneda.lean:724,747,758`.
+
+No Lean attachment and no `WANTED` document. The source repository has no declaration tagged with this item; its `lean_audit.slopmaster2` is `none`.
+
+## Repair
+
+The return identified a missing general Yoneda lemma in Steps 2 and 3. I added the leaf for arbitrary categories and set-valued presheaves, including the evaluation formula and naturality in both the representing object and the presheaf. `lem-pc-yoneda` is only for `Sch/S`, and `lem-galois-yoneda-fully-faithful` only compares two representables, so neither states the needed evaluation for arbitrary `f_*F` or `F`. Step 4 now cites the existing contravariant uniqueness leaf `lem-weil-pbc-coyoneda-iso-of-natural-hom-bijection`. Steps 2 and 3 cite `lem-weil-pbc-small-etale-representable-presheaf-sheaf`; Step 3 no longer cites the fibre-product definition without using it, and its stray capital is fixed. The naturality square in Step 4 is explicit.
+
+I searched the DAG by `yonedaEquiv`, presheaf, and Tag 001P, and searched all blueprint nodes with `tools/blueprint_refs.py search 'Yoneda'` and `search '001P'`. The only blueprint match, `lem-pc-yoneda`, is the `Sch/S` specialization; no existing DAG node has the general statement. LeanFinder returned `CategoryTheory.yonedaEquiv`, Loogle returned it with its naturality lemmas, and `rg` plus reading `Mathlib/CategoryTheory/Yoneda.lean` verified lines 724–760 and the packaged `yonedaLemma` at 839–846. LeanSearch was attempted twice and returned HTTP 500; the new node records that failure rather than claiming a result from it.
+
+## Review by C1
+
+I read Stacks Tags 03Q1 (part 4), 04D3, and 001P directly. Tag 03Q1 says for every scheme morphism `f` and every etale `V -> Y` that the inverse image of `h_V` is represented by `X x_Y V`; its proof gives exactly the chain `Hom(f^{-1}h_V,F) = Hom(h_V,f_*F) = (f_*F)(V) = F(X x_Y V)` and notes that representables are sheaves. Tag 04D3 states the analogous general-site pullback formula. Tag 001P states the arbitrary-category bijection `Hom(h_A,F) = F(A)` by evaluation at `id_A`; the new node adds the two naturality equations verified in the cited Mathlib lines. I checked that the item's morphism of schemes, etale object, direct-image evaluation, left-adjoint hypothesis, and naturality in `V` are exactly the hypotheses used by the source. There is no extra finiteness or connectedness assumption.
+
+Step 1 uses `lem-weil-pbc-etale-scheme-base-change` to make the first projection etale, and `def-pc-fibre-product` for the induced map under `V -> V'`; these are the cited statements' claims. Step 2 uses the assumed adjunction, `lem-weil-pbc-small-etale-representable-presheaf-sheaf` for `h_V`, `def-weil-pbc-etale-sheaf-of-sets` for fullness, and the new general Yoneda leaf with target `f_*F`. Step 3 uses the item's direct-image evaluation, the same sheaf lemma for `h_{X x_Y V}`, and general Yoneda with target `F`; `yonedaEquiv_comp` supplies naturality in `F`. Step 4 uses `lem-weil-pbc-coyoneda-iso-of-natural-hom-bijection` for the unique isomorphism `B_V -> A_V` attached to the natural Hom-bijection, `def-pc-fibre-product` for `g_X`, and `yonedaEquiv_naturality` for the naturality square in `V`. Its inverse has the direction stated in the item. All four steps are non-elementary and their `uses` union is `proof_deps`.
+
+For the new node I checked B1–B7: it has a self-contained statement for any category and presheaf, no proof or proof dependencies, one TeX rendering, Tag 001P with its label, and Mathlib's exact declaration, file, and verified lines. The leaf is strictly smaller than the item and has no DAG cycle. Edge cases: in the terminal one-object category the bijection is the identity between functions from a singleton and elements of `F(A)`; when `F(A)` is empty there is no transformation from `h_A`; for identity maps in either naturality variable both formulas reduce to equality. For `f = id` and `V` initial or terminal when present, the item's two representing sheaves coincide through the fibre-product identity, and the Step 4 square is still the identity square. This checks the orientation of the co-Yoneda arrow and rules out an accidental assumption that the site objects are nonempty.
+
+The earlier report had incorrectly called fully faithful Yoneda the arbitrary-target evaluation theorem and had called it the contravariant uniqueness theorem. Those two citations are replaced as the return required. There are no remaining known mathematical or process exceptions in this delivery.
+
+The representable-sheaf lemma is a generic tool from unit `sk-thm-p1`, so I recorded it explicitly in `split_report.tool_uses`: Steps 2 and 3 use only its stated sheaf conclusion, and the base-change route has no replacement node for that generic site fact. This addresses the route check without moving the fact into a restatement of the item.
