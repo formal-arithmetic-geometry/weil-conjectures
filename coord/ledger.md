@@ -982,3 +982,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 06:48 L: reviewed and accepted lem-weil-pbc-module-open-restriction-injectives (4 steps; +module-extension-by-zero-adjunction node 00A7; tool_uses lem-sp-right-adjoint-preserves-injectives as for colimit-of-sites-injective-system). Stage 3: lem-sp-right-adjoint-preserves-injectives (imported) is likely the Mathlib leaf Adjunction.map_injective.
 - 06:48 L: reviewed and accepted lem-weil-pbc-module-pushforward-injective-acyclic (4 steps; +module-injective-open-cover-cech-acyclic 01EP, +module-cech-vanishing-criterion 01EV nodes).
 - 06:50 L: reviewed and accepted lem-weil-pbc-module-pushforward-injectives-sections-quasi-iso (5 steps; +leray-acyclicity-quasi-iso node 015E with the source repository's quasiIso_map_of_rightAcyclic attached, closed on slopmaster2).
+- 06:50 L: reviewed and accepted lem-weil-pbc-module-stalk-exact (9 steps, no new nodes; 01AF/01AG written out).
