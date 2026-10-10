@@ -1,8 +1,8 @@
 # Work queue
 
-932 items; claim with `tools/claim.py next <group> [--stage N]`.
+931 items; claim with `tools/claim.py next <group> [--stage N]`.
 
-## Stage 1: nodes to split (223)
+## Stage 1: nodes to split (222)
 
 | node | distance to a target | Lean state on the done branch |
 |---|---|---|
@@ -12,7 +12,6 @@
 | `lem-pc-derived-functor-truncation-stabilization` | 3013 | none |
 | `lem-pc-derived-limit-milnor-sequence` | 3013 | none |
 | `lem-pc-qcoh-truncation-derived-limit` | 3013 | none |
-| `def-pc-essentially-constant-ind-diagram` | 3014 | none |
 | `def-pc-essentially-constant-pro-diagram` | 3014 | none |
 | `lem-pc-ringed-space-module-stalk-tensor` | 3014 | none |
 | `lem-pc-stalk-direct-sums` | 3014 | none |
@@ -944,7 +943,7 @@
 | `lem-weil-pbc-p1-field-dimension-one` | 4 | state |
 | `lem-weil-pbc-projective-space-zero-isomorphism` | 4 | state |
 
-Not open yet: 1395 nodes that wait for a statement dependency, 259 nodes that wait for stage 1.
+Not open yet: 1396 nodes that wait for a statement dependency, 258 nodes that wait for stage 1.
 
 ## Stage 3: modules to prove (0)
 
