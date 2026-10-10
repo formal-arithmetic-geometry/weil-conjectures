@@ -1,8 +1,8 @@
 # Work queue
 
-901 items; claim with `tools/claim.py next <group> [--stage N]`.
+899 items; claim with `tools/claim.py next <group> [--stage N]`.
 
-## Stage 1: nodes to split (140)
+## Stage 1: nodes to split (138)
 
 | node | distance to a target | Lean state on the done branch |
 |---|---|---|
@@ -19,12 +19,10 @@
 | `lem-pc-derived-mayer-vietoris-triangle` | 3017 | none |
 | `lem-pc-ringed-space-sheafification-cohomology` | 3017 | none |
 | `lem-pc-perfect-rhom-tensor-comparison` | 3018 | none |
-| `def-sc-duality-equation-base-change-map` | 3019 | none |
 | `lem-pc-affine-morphism-hom-out-of-perfect` | 3019 | none |
 | `lem-pc-base-change-rhom-perfect` | 3019 | none |
 | `lem-pc-global-hom-adjunction` | 3019 | none |
 | `lem-pc-koszul-affine-detection` | 3019 | none |
-| `lem-pc-perfect-generator-exists` | 3019 | none |
 | `lem-sc-flat-precompose-pus` | 3019 | none |
 | `def-pc-global-derived-rhom` | 3020 | none |
 | `lem-pc-qcqs-derived-direct-image-right-adjoint` | 3020 | none |
@@ -45,8 +43,9 @@
 | `lem-sc-etale-local-ring-faithfully-flat-descent` | 4012 | none |
 | `lem-sc-etale-triple-to-sh-completion-flat` | 4012 | none |
 | `lem-sc-lfp-field-extension-pointwise-descent` | 4012 | none |
-| `lem-sc-meromorphic-sheaf-generic-product` | 5011 | none |
+| `lem-sc-ass-weakass-locally-noetherian` | 5012 | none |
 | `lem-sc-locnoeth-components-locally-finite` | 5012 | none |
+| `lem-sc-meromorphic-weakass-generic-product` | 5012 | none |
 | `lem-pc-rf-base-change-single-complex-criterion` | 5013 | none |
 | `lem-pc-affine-perfect-colimit-descent` | 5014 | none |
 | `lem-pc-perfect-descend-morphisms` | 5014 | none |
@@ -75,7 +74,6 @@
 | `lem-weil-pbc-constant-subsheaf-generic` | - | none |
 | `lem-weil-pbc-pullback-finite-locally-constant` | - | none |
 | `lemma-nagata-filtered-colimit-finite-data` | - | none |
-| `cor-pd-pic0-base-change` | - | sorry_here |
 | `def-nagata-affine-fp-descent` | - | none |
 | `def-nagata-morphism-descent` | - | none |
 | `def-nagata-qc-open-descent` | - | none |
@@ -913,7 +911,7 @@
 | `lem-weil-pbc-projective-space-zero-isomorphism` | 4 | state |
 | `def-nagata-fixed-base-separated-stage` | 6 | state |
 
-Not open yet: 1547 nodes that wait for a statement dependency, 180 nodes that wait for stage 1.
+Not open yet: 1551 nodes that wait for a statement dependency, 178 nodes that wait for stage 1.
 
 ## Stage 3: modules to prove (0)
 
