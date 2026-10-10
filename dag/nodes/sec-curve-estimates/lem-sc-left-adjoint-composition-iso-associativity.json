@@ -1,0 +1,81 @@
+{
+ "id": "lem-sc-left-adjoint-composition-iso-associativity",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "def-sc-etale-qcoherent-module",
+   "place": "statement, clause 'with the usual pullback restrictions': that the restrictions $\\rho_g(s)=c_{g,u}(g^*s)$ of $U\\mapsto\\Gamma(U,u^*\\mathcal F)$ compose, $\\rho_{g\\circ h}=\\rho_h\\circ\\rho_g$, which needs the associativity of the composition isomorphisms $c_{a,b}$ of pullbacks",
+   "via": [
+    "lem-sc-etale-qcoherent-presheaf-functorial"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Associativity of the composition isomorphisms of left adjoints",
+ "statement": "Let $\\mathcal C_0,\\mathcal C_1,\\mathcal C_2,\\mathcal C_3$ be categories and, for each pair $0\\le i<j\\le 3$, let $L_{ij}:\\mathcal C_i\\to\\mathcal C_j$ be a functor left adjoint to a functor $R_{ji}:\\mathcal C_j\\to\\mathcal C_i$, with unit $\\eta_{ij}:\\mathrm{id}_{\\mathcal C_i}\\to R_{ji}L_{ij}$. Assume $R_{ki}=R_{ji}\\circ R_{kj}$ (equality of functors) for all $0\\le i<j<k\\le3$. For $i<j<k$, $L_{jk}L_{ij}\\dashv R_{ji}R_{kj}=R_{ki}$ is the composite adjunction [def-weil-pbc-composite-adjunction], with unit $R_{ji}(\\eta_{jk,L_{ij}M})\\circ\\eta_{ij,M}$; let $c_{ijk}:L_{jk}L_{ij}\\to L_{ik}$ be the unique natural transformation such that\n$$R_{ki}(c_{ijk,M})\\circ R_{ji}(\\eta_{jk,L_{ij}M})\\circ\\eta_{ij,M}=\\eta_{ik,M}\\qquad\\text{for every object }M\\text{ of }\\mathcal C_i,$$\nwhich exists and is a natural isomorphism by [lem-weil-pbc-conjugate-iso-unit-equation] (applied with $L_1=L_{jk}L_{ij}$ and the composite adjunction, $L_2=L_{ik}$, $R_1=R_2=R_{ki}$, $\\delta=\\mathrm{id}$). Then for every object $M$ of $\\mathcal C_0$\n$$c_{023,M}\\circ L_{23}(c_{012,M})=c_{013,M}\\circ c_{123,L_{01}M}\\colon L_{23}L_{12}L_{01}M\\longrightarrow L_{03}M.$$",
+ "source": {
+  "document": "literature/stacks-project/descent.tex",
+  "place": "Descent, Section 35.8, Tag 03DR (label section-quasi-coherent-sheaves), equation (35.8.1) (label equation-quasi-coherent-presheaf): the functoriality of $(f:T\\to S)\\mapsto\\Gamma(T,f^*\\mathcal F)$, taken for granted there, rests on this coherence of the composition isomorphisms of pullbacks; the statement is the general categorical form, Mathlib's CategoryTheory.Adjunction.leftAdjointCompIso_assoc"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-composite-adjunction",
+  "lem-weil-pbc-conjugate-iso-unit-equation"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "associativity of the isomorphisms between composites of left adjoints induced by isomorphisms of composites of right adjoints",
+   "results": "CategoryTheory.Adjunction.leftAdjointCompIso, leftAdjointCompNatTrans_assoc, leftAdjointCompIso_assoc, leftAdjointCompIso_hom_app, leftAdjointCompIso_hom, leftAdjointCompIso_id_comp (Mathlib.CategoryTheory.Adjunction.CompositionIso); Bicategory.Adj.Bicategory.associator",
+   "date": "2026-10-10",
+   "verdict": "match: leftAdjointCompIso_assoc"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.leftAdjointCompIso",
+   "results": "leftAdjointCompIso, leftAdjointCompIso_hom, leftAdjointCompIso_comp_id, leftAdjointCompIso_id_comp, conjugateEquiv_leftAdjointCompIso_inv, leftAdjointCompIso_inv_app, leftAdjointCompIso_hom_app, leftAdjointCompIso_assoc (Mathlib.CategoryTheory.Adjunction.CompositionIso)",
+   "date": "2026-10-10",
+   "verdict": "match: leftAdjointCompIso_assoc, with hypothesis h on the right-adjoint isomorphisms"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "left adjoints of composable right adjoint functors satisfy pseudofunctor associativity of the composition isomorphisms",
+   "results": "Bicategory.Adjunction.ofCat_comp, Adjunction.leftAdjointCompIso_assoc, Bicategory.Adj.comp_adj, Bicategory.Adj.forget₁_mapComp, Adjunction.leftAdjointCompNatTrans_assoc",
+   "date": "2026-10-10",
+   "verdict": "match: leftAdjointCompIso_assoc"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -n 'lemma leftAdjointCompIso_assoc\\|def leftAdjointCompIso\\|lemma leftAdjointCompIso_hom\\|def leftAdjointCompNatTrans' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/CategoryTheory/Adjunction/CompositionIso.lean; grep -n 'unit_conjugateEquiv' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/CategoryTheory/Adjunction/Mates.lean",
+   "results": "CompositionIso.lean:64 leftAdjointCompNatTrans := (conjugateEquiv adj₀₂ (adj₀₁.comp adj₁₂)).symm τ, :72 leftAdjointCompIso, :76 leftAdjointCompIso_hom, :157 leftAdjointCompNatTrans_assoc, :170 leftAdjointCompIso_assoc; Mates.lean:300 unit_conjugateEquiv, :311 unit_conjugateEquiv_symm; used in Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean:193 pullback_assoc and Mathlib/AlgebraicGeometry/Modules/Sheaf.lean:273 Scheme.Modules.pseudofunctor_associativity (for Mathlib's abstract pullback)",
+   "date": "2026-10-10",
+   "verdict": "match: leftAdjointCompIso_assoc (line 170)"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "CategoryTheory.Adjunction.leftAdjointCompIso_assoc",
+  "file": "Mathlib/CategoryTheory/Adjunction/CompositionIso.lean",
+  "how": "specializes in one line: take adj_{ij} : L_{ij} ⊣ R_{ji}, all four isomorphisms e₀₁₂, e₁₂₃, e₀₁₃, e₀₂₃ the identities of the assumed equalities R_{ki} = R_{ji}∘R_{kj} (eqToIso), so that the hypothesis h holds (the associator of functors is the identity); then c_{ijk} = (leftAdjointCompIso adj_{ij} adj_{jk} adj_{ik} e_{ijk}).hom (line 72; by leftAdjointCompIso_hom, line 76, and leftAdjointCompNatTrans, line 64, it is (conjugateEquiv adj_{ik} (adj_{ij}.comp adj_{jk})).symm of the identity, which satisfies the unit equation by unit_conjugateEquiv_symm, Mates.lean:311, so it is the c_{ijk} of the statement by the uniqueness clause of [lem-weil-pbc-conjugate-iso-unit-equation]); the component at M of the equality of isomorphisms in leftAdjointCompIso_assoc (line 170) is the displayed equation",
+  "line": 170
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-sc-etale-qcoherent-presheaf-functorial",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-curve-estimates",
+ "unit": "sk-prop-h2"
+}
