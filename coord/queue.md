@@ -1,6 +1,6 @@
 # Work queue
 
-859 items; claim with `tools/claim.py next <group> [--stage N]`.
+860 items; claim with `tools/claim.py next <group> [--stage N]`.
 
 ## Stage 1: nodes to split (361)
 
@@ -61,7 +61,6 @@
 | `def-sc-picard-functor` | 3008 | none |
 | `lem-exc-field-discrete-modules` | 3008 | none |
 | `lem-galois-coproduct-copies-morphisms-clopen` | 3008 | none |
-| `lem-galois-fpqc-affine-descent-effective` | 3008 | none |
 | `lem-galois-fpqc-morphisms-descend` | 3008 | none |
 | `lem-pc-curves-are-sc` | 3008 | none |
 | `lem-pc-degree-base-change` | 3008 | rests_on_sorry |
@@ -88,6 +87,7 @@
 | `def-pc-projective-morphism` | 3009 | none |
 | `def-sc-rational-functions` | 3009 | none |
 | `lem-galois-fpqc-descend-unramified` | 3009 | none |
+| `lem-galois-fpqc-descending-types-morphisms` | 3009 | none |
 | `lem-pc-closed-imm-base-change` | 3009 | sorry_here |
 | `lem-pc-divisor-line-bundle-agrees-sc` | 3009 | none |
 | `lem-pc-euler-characteristic-well-defined` | 3009 | none |
@@ -368,7 +368,7 @@
 | `def-exc-jacobian-presentation` | - | none |
 | `lem-zl-noether-normalization-dimension` | - | none |
 
-## Stage 2: nodes to state (498)
+## Stage 2: nodes to state (499)
 
 | node | distance to Mathlib | kind |
 |---|---|---|
@@ -410,6 +410,7 @@
 | `def-weil-pbc-strictly-standard-element` | 1 | state |
 | `def-weil-pbc-symmetric-product-morphism` | 1 | state |
 | `def-weil-pbc-torsion-etale-sheaf` | 1 | state |
+| `lem-galois-flat-algebra-descent` | 1 | state |
 | `lem-galois-fpqc-descend-etale` | 1 | state |
 | `lem-pc-affine-cech-complex` | 1 | state |
 | `lem-pc-cech-exact` | 1 | state |
@@ -871,7 +872,7 @@
 | `lem-weil-pbc-p1-field-dimension-one` | 4 | state |
 | `lem-weil-pbc-projective-space-zero-isomorphism` | 4 | state |
 
-Not open yet: 381 nodes that wait for stage 1, 925 nodes that wait for a statement dependency.
+Not open yet: 381 nodes that wait for stage 1, 926 nodes that wait for a statement dependency.
 
 ## Stage 3: modules to prove (0)
 
