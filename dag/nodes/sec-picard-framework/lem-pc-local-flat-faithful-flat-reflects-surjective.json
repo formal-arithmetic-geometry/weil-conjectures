@@ -23,7 +23,11 @@
  ],
  "proof": [],
  "proof_deps": [],
- "proof_origin": null,
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Lemma Tag 00HR (algebra-lemma-local-flat-ff) and Definition Tag 00HB (definition-flat)"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -47,13 +51,32 @@
    "verdict": "match"
   }
  ],
- "mathlib_match": null,
- "status": "unsplit",
+ "mathlib_match": {
+  "declaration": "Module.FaithfullyFlat.of_flat_of_isLocalHom; Module.FaithfullyFlat.lTensor_surjective_iff_surjective",
+  "file": "Mathlib/RingTheory/Flat/FaithfullyFlat/Algebra.lean; Mathlib/RingTheory/Flat/FaithfullyFlat/Basic.lean",
+  "how": "one declaration per clause: `Module.FaithfullyFlat.of_flat_of_isLocalHom` (Algebra.lean:60) gives faithful flatness from localness and flatness; `Module.FaithfullyFlat.lTensor_surjective_iff_surjective` (Basic.lean:392) identifies surjectivity of the induced left-tensor map with surjectivity of the original module map, specializing the tensor product notation in the statement"
+ },
+ "status": "mathlib",
  "created": {
   "item": "lem-pc-fpqc-descend-closed-immersion",
   "by": "worker",
   "date": "2026-10-10"
  },
  "chapter": "sec-picard-framework",
- "unit": "sk-thm-picard-rr"
+ "unit": "sk-thm-picard-rr",
+ "split_report": {
+  "date": "2026-10-11",
+  "item": "lem-pc-local-flat-faithful-flat-reflects-surjective",
+  "worker": "stage1",
+  "summary": "The item is a Mathlib leaf. The local flat-to-faithfully-flat clause matches Module.FaithfullyFlat.of_flat_of_isLocalHom, and the tensor-surjectivity reflection clause matches Module.FaithfullyFlat.lTensor_surjective_iff_surjective. Both source signatures were read, and the existing statement dependencies already name the flatness, faithful-flatness, and module-tensor notions; no new node or proof branch is needed.",
+  "blueprint": "The item supplies the faithfully flat stalk reflection used in the closed-immersion descent proof at the sentence beginning 'the descent of the immersion property along a faithfully flat (field) base extension'."
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-ffr",
+  "group": "F1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-ffr (reviewer sub-agent of L); spot-checked: Leaf check. Source Stacks Tag 00HR (algebra-lemma-local-flat-ff: a flat local homomorphism of local rings is faithfully flat) and Tag 00HB (faithful flatness reflects exactness); the statement is unchanged from sheaf-dag and agrees with them hypothesis by hypothesis (local rings, local homomorphism, flat). Mathlib lines verified in the pinned Mathlib: Mathlib/RingTheory/Flat/FaithfullyFlat/Algebra.lean:60 Module.FaithfullyFlat.of_flat_of_isLocalHom [IsLocalRing A] [IsLocalRing B] [Flat A B] [IsLocalHom (algebraMap A B)] : FaithfullyFlat A B states clause 1 exactly; Mathlib/RingTheory/Flat/FaithfullyFlat/Basic.lean:392 Module.FaithfullyFlat.lTensor_surjective_iff_surjective [FaithfullyFlat R M] : Surjective (f.lTensor M) <-> Surjective f gives clause 2 (B tensor M vs M tensor B differ only by the commutativity isomorphism; one declaration per clause). Cited definition nodes def-weil-pbc-flat-ring-map, def-weil-pbc-faithfully-flat-ring-map, def-weil-pbc-module-tensor-product read. Only the item file and report changed; changed fields are split-owned (status, mathlib_match, proof_origin, split_report). Small cases: identity map, field extension k->k'. Start Sat Oct 10 04:36:32 PM UTC 2026, end Sat Oct 10 04:36:48 PM UTC 2026."
+ }
 }

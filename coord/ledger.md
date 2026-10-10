@@ -2007,3 +2007,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 16:35 L: merged deliver/K1/lem-weil-pbc-ringed-site-injective-module-injective-presheaf (reviewer PASS; first push; new nodes: 1)
 - 16:36 L: merged deliver/K1/lem-sc-etale-fibre-product-base-change-coproduct (reviewer FIX; first push; new nodes: 0)
 - 16:36 L: merge_delivery.py --drop-nodes a,b (delivered duplicate nodes dropped at merge, citations replaced by the reviewer's fixes); brief-review updated
+- 16:36 L: merged deliver/F1/lem-pc-local-flat-faithful-flat-reflects-surjective (reviewer PASS; first push; new nodes: 0)
