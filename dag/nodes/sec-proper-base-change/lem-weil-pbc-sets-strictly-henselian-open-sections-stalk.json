@@ -29,9 +29,61 @@
   "def-weil-pbc-etale-sheaf-of-sets",
   "def-weil-pbc-geometric-stalks"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Represent a germ in the stalk by a section over an object (V, vbar) of N_tbar, with structure morphism f: V -> T. Let v be the image of vbar and let u = f(v), which lies in U. Apply the affine-shrink lemma with the open W = f^{-1}(U) containing v. It gives an open immersion j: Spec A -> V through v, with f o j etale. Since j(Spec A) is contained in W, f o j factors through the open immersion U = Spec R -> T (def-weil-open-immersion); write the factor as Spec(phi): Spec A -> Spec R for the induced ring map phi: R -> A (def-weil-affine-spectrum). The factored morphism is etale because the local rings of the open U and T agree, so the etale condition is unchanged (def-weil-etale-morphism). If q is the prime of A corresponding to the lifted marked point, then phi^{-1}(q) = m because f(v) = u and u corresponds to m.",
+   "uses": [
+    "lem-weil-pbc-pointed-etale-neighbourhood-affine-shrink"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Lemma Tag 03QO and the affine-neighbourhood reduction in its proof"
+   }
+  },
+  {
+   "text": "The residue extension at q is finite separable by the etale-algebra residue-field lemma, and the residue field kappa of R is separably closed, so the extension is an isomorphism by finite separable triviality. Via the open immersion j, the residue map f^#: kappa(u) -> kappa(v) is this isomorphism. The henselian root-lifting criterion and the etale retraction lemma then give an R-algebra retraction tau: A -> R with tau^{-1}(m) = q. Let sigma be j o Spec(tau), viewed as a map U = Spec R -> V. It is a T-morphism because f o sigma is the inclusion U -> T: on rings this is tau o phi = id_R. Moreover sigma(u) = v, since tau^{-1}(m) = q. Let alpha: kappa(u) -> Omega and beta: kappa(v) -> Omega be the field maps of tbar and vbar. The equality f o vbar = tbar gives beta o f^# = alpha; the equality f o sigma = inclusion gives sigma^# o f^# = id, so sigma^# = (f^#)^{-1}. Thus the field map of sigma o tbar is alpha o sigma^# = beta o f^# o (f^#)^{-1} = beta, and both geometric points have image v. By def-weil-geometric-point and def-weil-residue-field, sigma o tbar = vbar. Hence sigma is a morphism (U, tbar) -> (V, vbar) in N_tbar (def-weil-pbc-pointed-etale-neighbourhoods).",
+   "uses": [
+    "lem-weil-pbc-etale-algebra-residue-field-separable",
+    "lem-pc-sepclosed-finite-sep-trivial",
+    "lem-weil-pbc-henselian-local-root-lifting",
+    "lem-weil-pbc-root-lifting-etale-retraction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Lemma Tag 03QO proof, using Theorem Tag 04GG"
+   }
+  },
+  {
+   "text": "The category N_tbar of pointed etale neighbourhoods is cofiltered by lem-weil-pbc-pointed-etale-neighbourhoods-cofiltered. The object (U, tbar) receives a morphism from it to every object by step 2. Its singleton full subcategory has only the identity endomorphism: a T-morphism h: U -> U satisfies j o h = j, and the open immersion j is injective on points and an isomorphism onto its image, hence h = id. Therefore lem-weil-pbc-colimit-initial-full-subcategory (1) applies. With the colimit of the resulting constant diagram (G(U), id) computed by lem-weil-pbc-colimit-constant-connected-diagram, the canonical map is the coprojection iota_(U, tbar), namely the germ map. Hence G(U) -> G_tbar is bijective.",
+   "uses": [
+    "lem-weil-pbc-pointed-etale-neighbourhoods-cofiltered",
+    "lem-weil-pbc-colimit-initial-full-subcategory",
+    "lem-weil-pbc-colimit-constant-connected-diagram"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Lemma Tag 03QO conclusion: Gamma(S,F) = F_sbar"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-pointed-etale-neighbourhood-affine-shrink",
+  "lem-weil-pbc-etale-algebra-residue-field-separable",
+  "lem-pc-sepclosed-finite-sep-trivial",
+  "lem-weil-pbc-henselian-local-root-lifting",
+  "lem-weil-pbc-root-lifting-etale-retraction",
+  "lem-weil-pbc-pointed-etale-neighbourhoods-cofiltered",
+  "lem-weil-pbc-colimit-initial-full-subcategory",
+  "lem-weil-pbc-colimit-constant-connected-diagram"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Lemma Tag 03QO and its proof"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -56,7 +108,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "worker",
@@ -72,5 +124,64 @@
   }
  },
  "chapter": "sec-proper-base-change",
- "unit": "sk-thm-iff"
+ "unit": "sk-thm-iff",
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "lem-weil-pbc-sets-strictly-henselian-open-sections-stalk",
+  "worker": "H1",
+  "summary": "Repaired the three returned gaps. Step 1 now chooses W = f^{-1}(U), factors the affine etale neighbourhood through U = Spec R, identifies phi: R -> A and phi^{-1}(q) = m, and explains preservation of etaleness on the open. Step 2 explicitly constructs sigma = j o Spec(tau), verifies its T-morphism and pointed conditions by the residue-field calculation, and concludes it is a morphism in N_tbar. Step 3 cites cofilteredness, uses (U, tbar), proves its only endomorphism is the identity, and identifies the canonical colimit coprojection with the germ map.",
+  "blueprint": "The steps realize the 03QO invocation in the ancestor strict-henselian H0 proof and its identity-neighbourhood cofinality argument.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-pointed-etale-neighbourhood-affine-shrink",
+    "why": "Affine pointed-neighbourhood shrinking is a generic etale-site tool used to represent an arbitrary germ."
+   },
+   {
+    "node": "lem-weil-pbc-etale-algebra-residue-field-separable",
+    "why": "The finite separability of residue extensions for etale morphisms is used to trivialize the marked residue field."
+   },
+   {
+    "node": "lem-pc-sepclosed-finite-sep-trivial",
+    "why": "The separably closed residue field turns the finite separable residue extension into an isomorphism; this generic field lemma is in another unit."
+   },
+   {
+    "node": "lem-weil-pbc-henselian-local-root-lifting",
+    "why": "The henselian simple-root lifting criterion supplies the lift used in the etale retraction."
+   },
+   {
+    "node": "lem-weil-pbc-root-lifting-etale-retraction",
+    "why": "The lifted root is packaged as the retraction of the etale algebra, a generic henselian tool from another unit."
+   },
+   {
+    "node": "lem-weil-pbc-pointed-etale-neighbourhoods-cofiltered",
+    "why": "Cofilteredness of N_tbar is required by the hypotheses of the initial-full-subcategory colimit lemma."
+   },
+   {
+    "node": "lem-weil-pbc-colimit-initial-full-subcategory",
+    "why": "Cofinality of the singleton identity-neighbourhood subcategory is the categorical reduction of the stalk colimit."
+   },
+   {
+    "node": "lem-weil-pbc-colimit-constant-connected-diagram",
+    "why": "The reduced singleton colimit is computed as a constant connected diagram."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-pointed-etale-neighbourhood-affine-shrink",
+  "lem-weil-pbc-etale-algebra-residue-field-separable",
+  "lem-pc-sepclosed-finite-sep-trivial",
+  "lem-weil-pbc-henselian-local-root-lifting",
+  "lem-weil-pbc-root-lifting-etale-retraction",
+  "lem-weil-pbc-pointed-etale-neighbourhoods-cofiltered",
+  "lem-weil-pbc-colimit-initial-full-subcategory",
+  "lem-weil-pbc-colimit-constant-connected-diagram"
+ ],
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-sh2",
+  "group": "H1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-sh2 (reviewer sub-agent of L); spot-checked: Repaired re-push after the 14:38 return; all three points repaired. (1) Step 1 now applies lem-weil-pbc-pointed-etale-neighbourhood-affine-shrink with S=T and W=f^{-1}(U), factors f o j through U=Spec R (open immersion), gives phi: R->A with Spec(phi) etale (local rings of U and T agree) and phi^{-1}(q)=m. (2) Step 2: q over m, kappa(m)->kappa(q) finite separable by lem-weil-pbc-etale-algebra-residue-field-separable (hypotheses: Spec A -> Spec R etale, q prime), iso by lem-pc-sepclosed-finite-sep-trivial (kappa sep. closed by def-weil-pbc-henselian-terminology), R satisfies root lifting by lem-weil-pbc-henselian-local-root-lifting (i)=>(ii), so lem-weil-pbc-root-lifting-etale-retraction gives tau with tau^{-1}(m)=q; sigma=j o Spec(tau): f o sigma = incl from tau o phi = id_R, sigma(u)=v, field map alpha o sigma^# = beta o f^# o (f^#)^{-1} = beta checked by hand, so sigma: (U,tbar)->(V,vbar) is a morphism of def-weil-pbc-pointed-etale-neighbourhoods. (3) Step 3 cites lem-weil-pbc-pointed-etale-neighbourhoods-cofiltered (same category as N_tbar; in proof_deps and tool_uses) for hypothesis (1) of lem-weil-pbc-colimit-initial-full-subcategory, the full subcategory {(U,tbar)} receives maps to all objects by step 2, End = {id} since j o h = j and j mono, and the constant connected-diagram colimit (G(U),id) identifies the canonical map with the germ map iota_(U,tbar). Statement unchanged, agrees with Stacks 03QO (etale-cohomology.tex, lemma-vanishing-etale-cohomology-strictly-henselian) for sets on the open U. Tool uses (8, all generic) accepted (C8). Shape: one commit, only item node and report, only split-owned fields changed (proof, proof_deps, proof_origin, status, split_report); report has Review by H1 and the per-step repair account. Small case: U=T=Spec R reduces to 03QO. Start Sat Oct 10 02:52:53 PM UTC 2026, end Sat Oct 10 02:53:33 PM UTC 2026."
+ }
 }
