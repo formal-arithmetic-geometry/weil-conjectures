@@ -838,6 +838,50 @@ lemma isFinite_approxP (hα : ∀ U, (α.app U).hom.IsIntegral) (j : ApproxIndex
     IsFinite (approxP H j) :=
   isFinite_toBase _ fun U ↦ subAlgMap_app_finite H hα _ j.unop.2.1 j.unop.2.2 _
 
+
+/-- The diagram of the rings `B_J(U)`, for an affine open `U`. -/
+noncomputable def approxRingDiagram (U : S.AffineZariskiSite) :
+    ApproxIndex H ⥤ CommRingCat.{u}ᵒᵖ where
+  obj j := Opposite.op ((subAlgFunctor j.unop.1).obj (.op U))
+  map {j j'} f := ((subAlgInclusion (leOfHom f.unop)).app (.op U)).op
+  map_id j := by
+    rw [show subAlgInclusion (leOfHom (𝟙 j).unop) = subAlgInclusion (le_refl j.unop.1) from rfl,
+      subAlgInclusion_refl]
+    rfl
+  map_comp {j j' j''} f g := by
+    rw [show subAlgInclusion (leOfHom (f ≫ g).unop) = subAlgInclusion
+        ((leOfHom g.unop).trans (leOfHom f.unop)) from rfl,
+      subAlgInclusion_trans H (leOfHom g.unop) (leOfHom f.unop)]
+    rfl
+
+/-- `F(U)` as a cocone over the rings `B_J(U)`. -/
+noncomputable def approxRingCocone (U : S.AffineZariskiSite) (j₀ : ApproxIndex H) :
+    Cocone (Over.forget j₀ ⋙ approxRingDiagram H U).leftOp where
+  pt := F.obj (.op U)
+  ι.app j := (subAlgι j.unop.left.unop.1).app (.op U)
+  ι.naturality {j j'} f := by
+    dsimp [approxRingDiagram]
+    rw [Category.comp_id, ← NatTrans.comp_app, subAlgInclusion_comp_subAlgι]
+
+/-- `F(U)` is the filtered union of the subalgebras `B_J(U)`. -/
+noncomputable def isColimitApproxRingCocone [CompactSpace S] [QuasiSeparatedSpace S]
+    (U : S.AffineZariskiSite) (j₀ : ApproxIndex H) : IsColimit (approxRingCocone H U j₀) := by
+  have : ReflectsColimit (Over.forget j₀ ⋙ approxRingDiagram H U).leftOp
+      (CategoryTheory.forget CommRingCat) := reflectsColimit_of_reflectsIsomorphisms _ _
+  refine isColimitOfReflects (CategoryTheory.forget CommRingCat)
+    (Types.FilteredColimit.isColimitOf' _ _ ?_ ?_)
+  · intro a
+    obtain ⟨J, hJ⟩ := exists_fgSub_mem_subAlg H U a
+    obtain ⟨k, hk₀, hkJ, -⟩ := IsCofilteredOrEmpty.cone_objs j₀ (Opposite.op J)
+    have hb : a ∈ subAlg k.unop.1 U := subAlg_mono H (leOfHom hkJ.unop) U hJ
+    refine ⟨Opposite.op (Over.mk hk₀), ⟨a, hb⟩, ?_⟩
+    exact (subAlgιApp_apply H k.unop.1 (.op U) ⟨a, hb⟩).symm
+  · intro i x y hxy
+    refine ⟨i, 𝟙 i, ?_⟩
+    have : x = y := Subtype.ext ((subAlgιApp_apply H _ _ x).symm.trans
+      (hxy.trans (subAlgιApp_apply H _ _ y)))
+    rw [this]
+
 end Approximation
 
 end AlgebraicGeometry.Scheme.AffineZariskiSite
