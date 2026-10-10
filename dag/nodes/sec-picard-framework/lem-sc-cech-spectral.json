@@ -3,43 +3,51 @@
  "blueprint": {
   "is": "lem-sc-cech-spectral",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "The Cech-to-cohomology spectral sequence",
- "statement": "Let $X$ be a scheme, $\\mathfrak U=\\{U_i\\to X\\}$ an etale covering\n(or any covering of a site; we apply the statement below also to the\nZariski site), and $F$ an abelian sheaf on $X_{\\Et}$. There is\na convergent spectral sequence\n\n$$\nE_2^{pq}=\\check H^p(\\mathfrak U,\\underline H^q(F))\n\\Longrightarrow H^{p+q}(X_{\\Et},F),\n$$\n\nwhere $\\underline H^q(F)$ is the presheaf\n$V\\mapsto H^q(V_{\\Et},F)$ and $\\check H^p(\\mathfrak U,-)$ is\nCech cohomology with respect to the covering $\\mathfrak U$.",
+ "statement": "Let $\\mathcal C$ be a site, let $X$ be an object of $\\mathcal C$, let $\\mathfrak U=\\{U_i\\to X\\}_{i\\in I}$ be a covering, and let $F$ be an abelian sheaf on $\\mathcal C$. There is a convergent first-quadrant spectral sequence\n\n$$\nE_2^{p,q}=\\check H^p(\\mathfrak U,\\underline H^q(F))\\Longrightarrow H^{p+q}(X,F),\n$$\n\nwhere $\\underline H^q(F)$ is the presheaf $V\\mapsto H^q(V,F)$ and $\\check H^p(\\mathfrak U,-)$ is Cech cohomology with respect to the covering $\\mathfrak U$.",
  "source": {
   "document": "literature/blueprint/master/blueprint/sec-picard-framework/sk-thm-picard-cech/lem-sc-cech-spectral.md",
   "place": "node lem-sc-cech-spectral, order 600"
  },
- "stmt_deps": [],
+ "stmt_deps": [
+  "thm-sp-double-complex-spectral-sequences",
+  "lem-weil-pbc-site-injective-cech-acyclic"
+ ],
  "proof": [
   {
-   "text": "Choose an injective resolution $F\\to I^{\\bullet}$ and consider the\ndouble complex $C^{pq}:=C^p(\\mathfrak U,I^q)$, where\n$C^p(\\mathfrak U,-)$ is the (alternating) Cech complex of the\ncovering $\\mathfrak U$. Its cohomology in the first direction is\n$C^p(\\mathfrak U,\\underline H^q(F))$, because taking cohomology\ncommutes with the finite direct products defining the Cech complex;\nso the first spectral sequence of the double complex\n[thm-sp-double-complex-spectral-sequences] has\n\n$$\nE_1^{pq}=C^p(\\mathfrak U,\\underline H^q(F)),\\qquad\nE_2^{pq}=\\check H^p(\\mathfrak U,\\underline H^q(F)).\n$$",
+   "text": "Choose an injective resolution $F\\to I^{\\bullet}$ in $\\textit{Ab}(\\mathcal C)$ and consider the first-quadrant double complex $D^{p,q}:=C^p(\\mathfrak U,I^q)=\\prod_{i_0,\\ldots,i_p}I^q(U_{i_0\\cdots i_p})$, with $d_I$ the Cech differential and $d_{II}$ induced by the resolution; they commute because the Cech differential is natural in the presheaf. Cycles and boundaries of a product of complexes of abelian groups are computed coordinatewise, so $H^q_{II}(D^{p,\\bullet})=\\prod_{i_0,\\ldots,i_p}H^q(\\Gamma(U_{i_0\\cdots i_p},I^\\bullet))$, and by [def-weil-pbc-sites-and-cohomology] (2) $H^q(\\Gamma(V,I^\\bullet))=H^q(V,F)$, naturally in $V$; hence $H^q_{II}(D^{p,\\bullet})=C^p(\\mathfrak U,\\underline H^q(F))$ with the map induced by $d_I$ the Cech differential. The first spectral sequence of [thm-sp-double-complex-spectral-sequences] therefore has ${}'E_1^{p,q}=C^p(\\mathfrak U,\\underline H^q(F))$ and ${}'E_2^{p,q}=\\check H^p(\\mathfrak U,\\underline H^q(F))$, and it converges to $H^{p+q}(\\operatorname{Tot}D)$.",
    "uses": [
+    "def-weil-pbc-sites-and-cohomology",
     "thm-sp-double-complex-spectral-sequences"
    ],
    "elementary": false
   },
   {
-   "text": "The total complex of $C^{\\bullet\\bullet}$ computes\n$H^{p+q}(X_{\\Et},F)$: for each $q$, the complex\n$C^{\\bullet}(\\mathfrak U,I^q)$ is the Cech resolution of the\ninjective sheaf $I^q$, and an injective sheaf is acyclic for Cech\ncohomology with respect to every covering (the Cech complex of a\ncovering applied to an injective sheaf computes its cohomology,\nwhich vanishes in positive degrees by injectivity), so the natural\nmap from the complex $F\\to I^{\\bullet}$ to the total complex is a\nquasi-isomorphism, and the total cohomology is the hypercohomology\n$H^{p+q}(X_{\\Et},F)$. This is the first spectral sequence of\na double complex, which converges to the cohomology of the total\ncomplex by [thm-sp-double-complex-spectral-sequences] (*reference: Stacks Project, Homological\nAlgebra: spectral sequences of double complexes*).",
+   "text": "Each $I^q$ is injective in $\\textit{Ab}(\\mathcal C)$, so by [lem-weil-pbc-site-injective-cech-acyclic] the row $D^{\\bullet,q}=C^\\bullet(\\mathfrak U,I^q)$ has $H^0_I=I^q(X)$ and $H^p_I=0$ for $p>0$. So the second spectral sequence of [thm-sp-double-complex-spectral-sequences] has ${}''E_1^{q,p}=0$ for $p>0$ and ${}''E_1^{q,0}=I^q(X)$ with $d_1$ induced by $d_{II}$; hence ${}''E_2^{q,0}=H^q(\\Gamma(X,I^\\bullet))=H^q(X,F)$ [def-weil-pbc-sites-and-cohomology] (2), all other entries vanish, so all later differentials are zero and the abutment filtration of $H^n(\\operatorname{Tot}D)$ has the single nonzero graded piece ${}''E_2^{n,0}$. Thus $H^n(\\operatorname{Tot}D)\\cong H^n(X,F)$, and with Step 1 this is the spectral sequence of the statement.",
    "uses": [
-    "thm-sp-double-complex-spectral-sequences"
+    "thm-sp-double-complex-spectral-sequences",
+    "lem-weil-pbc-site-injective-cech-acyclic",
+    "def-weil-pbc-sites-and-cohomology"
    ],
    "elementary": false
   }
  ],
  "proof_deps": [
-  "thm-sp-double-complex-spectral-sequences"
+  "thm-sp-double-complex-spectral-sequences",
+  "lem-weil-pbc-site-injective-cech-acyclic",
+  "def-weil-pbc-sites-and-cohomology"
  ],
  "proof_origin": {
-  "by": "agent",
-  "document": "literature/blueprint/master/blueprint/sec-picard-framework/sk-thm-picard-cech/lem-sc-cech-spectral.md",
-  "place": "## Proof"
+  "by": "document",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Lemma Tag 03AZ (lemma-cech-spectral-sequence); the source proves it as a Grothendieck spectral sequence, this proof uses the Cech double complex of an injective resolution instead"
  },
  "mathlib_searches": [],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [
   "proof_cites_literature"
@@ -121,5 +129,46 @@
   }
  },
  "chapter": "sec-picard-framework",
- "unit": "sk-thm-picard-cech"
+ "unit": "sk-thm-picard-cech",
+ "split_report": {
+  "date": "2026-10-11",
+  "item": "lem-sc-cech-spectral",
+  "worker": "stage1",
+  "summary": "Split the Cech-to-cohomology spectral sequence into the double-complex page calculation and the identification of the total cohomology with sheaf cohomology. Reused the existing general double-complex spectral-sequence node, the general-site injective Cech-acyclicity node, and the localized-site exact restriction node; no new nodes were needed. The source Lean declaration remains sorry-bearing, so this is a split rather than an attachment.",
+  "blueprint": {
+   "statement": "node lem-sc-cech-spectral, order 600",
+   "steps": {
+    "1": "proof paragraph: choose an injective resolution and form the Cech double complex; identify the E1 and E2 pages",
+    "2": "proof paragraph: Cech acyclicity of injectives identifies the total cohomology and the abutment"
+   }
+  },
+  "tool_uses": [
+   {
+    "node": "thm-sp-double-complex-spectral-sequences",
+    "why": "The unit's Step 1 explicitly invokes the general double-complex spectral-sequence construction."
+   },
+   {
+    "node": "lem-weil-pbc-site-injective-cech-acyclic",
+    "why": "The total-complex argument needs Cech acyclicity of injective sheaves on coverings."
+   },
+   {
+    "node": "def-weil-pbc-sites-and-cohomology",
+    "why": "Definition of H^q(V,F) as the cohomology of Gamma(V,I^bullet), used to identify the E1 page and the abutment."
+   }
+  ]
+ },
+ "tool_uses": [
+  "def-weil-pbc-sites-and-cohomology",
+  "thm-sp-double-complex-spectral-sequences",
+  "lem-weil-pbc-site-injective-cech-acyclic",
+  "def-weil-pbc-sites-and-cohomology"
+ ],
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-csp2116",
+  "group": "G1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-csp2116 (reviewer sub-agent of L); spot-checked: Route is the Cech double complex of an injective resolution (not Grothendieck for Cech H0 after forgetting to presheaves; lem-pc-cech-computes and lem-sc-boundary-cech-compatibility are not used). E1/E2 checked against thm-sp-double-complex-spectral-sequences first filtration ('E_1=H_II, d_1 from d_I = Cech differential) and the second-filtration collapse; total-complex sign (-1)^p d_II of def-sp-double-complex-total does not affect the graded cohomology. Statement generalisation to an object X of a site matches Stacks 03AZ and the Lean declaration, named in the second reading (E7). FIX more, RETURN less: (1) C1: Step 1 identified H^q(Gamma(V,I^bullet)) with H^q(V,F) silently; now cites def-weil-pbc-sites-and-cohomology (2), also for the abutment in Step 2; (2) C7/C8: lem-weil-pbc-site-restriction-injectives is not needed (H^q(V,F) is R^q Gamma(V,-) on Ab(C), and Cech acyclicity applies to I^q in Ab(C) directly); sentence removed, dropped from uses/stmt_deps/proof_deps/tool_uses; (3) unclosed math in Step 1 closed, degeneration of the second spectral sequence spelled out, and proof_origin place corrected: Stacks 03AZ proves it via Grothendieck, not via double complexes. The second reading missed (1)-(3).; 1 file(s) fixed by the reviewer"
+ }
 }
