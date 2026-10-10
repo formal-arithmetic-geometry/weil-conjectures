@@ -11,6 +11,8 @@ public import WeilConjectures.WeilSheaf.Cohomology
 public import WeilConjectures.WeilSheaf.Constant
 public import WeilConjectures.WeilSheaf.LowerStar
 public import WeilConjectures.WeilSheaf.PoincareDuality
+public import WeilConjectures.SixFunctors.ProEtale.Adic.GlobalSectionsHom
+public import WeilConjectures.WeilSheaf.StalkPairing
 
 /-!
 # Finiteness of the cohomology of Weil complexes and Frobenius
@@ -85,6 +87,188 @@ theorem WeilComplex.exists_subsingleton_cohomologyFrobeniusModule
   · exact _root_.DerivedCategory.isZero_of_isGE (hX := ha) _ a r hr
   · exact _root_.DerivedCategory.isZero_of_isLE (hX := hb) _ b r hr
 
+section UnitSection
+
+open MonoidalCategory Functor.LaxMonoidal ProEtale
+
+variable {Y : Scheme.{u}} [Y.Over (Spec (CommRingCat.of k₀))]
+
+/-- A unit `η : 𝟙 ⟶ R` of the underlying sheaf of a Weil sheaf `R` is *compatible with the Weil
+structure* if `𝟙 ⟶ Fr^* 𝟙 ⟶ Fr^* R ⟶ R` is `η`, the first map being the unit of the lax
+monoidal `Fr^* = (Fr⁻¹)_*`. -/
+def WeilSheaf.IsUnitCompatible (R : WeilSheaf k₀ l Y) (η : 𝟙_ _ ⟶ R.obj.carrier.X) : Prop :=
+  ε ((Y ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.inv)_*[WeilCoefficients.{u} l] ≫
+      ((Y ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.inv)_*[_].map η ≫
+        R.obj.str.hom.hom = η
+
+/-- A compatible unit transports along a morphism of Weil sheaves. -/
+lemma WeilSheaf.IsUnitCompatible.comp {R R' : WeilSheaf k₀ l Y} {η : 𝟙_ _ ⟶ R.obj.carrier.X}
+    (hη : R.IsUnitCompatible η) (f : R ⟶ R') : R'.IsUnitCompatible (η ≫ f.hom.hom.f.hom) := by
+  have h : ((Y ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.inv)_*[_].map
+      f.hom.hom.f.hom ≫ R'.obj.str.hom.hom = R.obj.str.hom.hom ≫ f.hom.hom.f.hom :=
+    congrArg (fun φ ↦ φ.hom) f.hom.hom.h
+  rw [IsUnitCompatible, Functor.map_comp, Category.assoc, h]
+  simpa only [Category.assoc] using congrArg (· ≫ f.hom.hom.f.hom) hη
+
+/-- The Frobenius of the global sections of a Weil sheaf fixes the global section of a unit
+compatible with the Weil structure. -/
+lemma WeilSheaf.IsUnitCompatible.globalSections_frobenius
+    [QuasiCompact (Y ↘ Spec (CommRingCat.of k₀))]
+    [LocallyOfFiniteType (Y ↘ Spec (CommRingCat.of k₀))] {R : WeilSheaf k₀ l Y}
+    {η : 𝟙_ _ ⟶ R.obj.carrier.X} (hη : R.IsUnitCompatible η) :
+    R.globalSections.frobenius (globalSectionOfHom η) = globalSectionOfHom η := by
+  have hε := NatTrans.IsMonoidal.unit (τ := (globalSectionsLowerStarIso (WeilCoefficients.{u} l)
+    (Y ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.inv).hom)
+  have key : ε (Sheaf.Γ _ (WeilCoefficients.{u} l)) ≫ (Sheaf.Γ _ _).map η ≫
+      (globalSectionsLowerStarIso _
+        (Y ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.inv).inv.app _ ≫
+      (Sheaf.Γ _ _).map R.obj.str.hom.hom =
+      ε (Sheaf.Γ _ (WeilCoefficients.{u} l)) ≫ (Sheaf.Γ _ _).map η := by
+    have n := (globalSectionsLowerStarIso (WeilCoefficients.{u} l)
+      (Y ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.inv).inv.naturality η
+    have hε' : ε (Sheaf.Γ _ (WeilCoefficients.{u} l)) ≫ (globalSectionsLowerStarIso _
+        (Y ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.inv).inv.app (𝟙_ _) =
+        ε (((Y ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.inv)_*[_] ⋙
+          Sheaf.Γ _ (WeilCoefficients.{u} l)) := by
+      rw [← hε, Category.assoc, Iso.hom_inv_id_app, Category.comp_id]
+    erw [reassoc_of% n, reassoc_of% hε']
+    rw [Functor.LaxMonoidal.comp_ε, Category.assoc]
+    erw [← Functor.map_comp_assoc, ← Functor.map_comp]
+    rw [Category.assoc] at *
+    exact congrArg (fun m ↦ ε (Sheaf.Γ _ (WeilCoefficients.{u} l)) ≫ (Sheaf.Γ _ _).map m) hη
+  exact congrArg (fun m ↦ m.hom (1 : ULift.{u + 1} (PadicAlgCl l))) key
+
+set_option maxHeartbeats 1600000 in
+-- The Weil structure of the pushforward unfolds through several module-object isomorphisms.
+/-- A compatible unit of a Weil sheaf pushes forward to a compatible unit of its direct image:
+`𝟙 ⟶ φ̄_* 𝟙 ⟶ φ̄_* F`. -/
+lemma WeilSheaf.IsUnitCompatible.lowerStar {Z : Scheme.{u}} [Z.Over (Spec (CommRingCat.of k₀))]
+    (φ : Y ⟶ Z) [φ.IsOver (Spec (CommRingCat.of k₀))] [QuasiCompact φ] [QuasiSeparated φ]
+    [LocallyOfFiniteType φ] [LocallyOfFiniteType (Z ↘ Spec (CommRingCat.of k₀))]
+    {F : WeilSheaf k₀ l Y} {η : 𝟙_ _ ⟶ F.obj.carrier.X} (hη : F.IsUnitCompatible η) :
+    ((WeilSheaf.lowerStar (k₀ := k₀) (l := l) φ).obj F).IsUnitCompatible
+      (ε (Scheme.Hom.geometricFiberMap φ (comp_over φ (Spec (CommRingCat.of k₀))))_*[
+          WeilCoefficients.{u} l] ≫
+        (Scheme.Hom.geometricFiberMap φ (comp_over φ (Spec (CommRingCat.of k₀))))_*[_].map η) := by
+  set φ' := Scheme.Hom.geometricFiberMap φ (comp_over φ (Spec (CommRingCat.of k₀)))
+  set FY := (Z ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.inv
+  set FX := (Y ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.inv
+  have hc : φ' ≫ FY = FX ≫ φ' :=
+    Scheme.Hom.geometricFiberMap_comp_geometricGaloisFrobenius_inv φ
+      (comp_over φ (Spec (CommRingCat.of k₀)))
+  have h₁ := NatTrans.IsMonoidal.unit (τ := (lowerStarComp (WeilCoefficients.{u} l) φ' FY).hom)
+  have h₂ := NatTrans.IsMonoidal.unit (τ := (lowerStarCongr (WeilCoefficients.{u} l) hc).hom)
+  have h₃ := NatTrans.IsMonoidal.unit (τ := (lowerStarComp (WeilCoefficients.{u} l) FX φ').inv)
+  have n₁ := (lowerStarComp (WeilCoefficients.{u} l) φ' FY).hom.naturality η
+  have n₂ := (lowerStarCongr (WeilCoefficients.{u} l) hc).hom.naturality η
+  have n₃ := (lowerStarComp (WeilCoefficients.{u} l) FX φ').inv.naturality η
+  simp only [Functor.comp_map] at n₁ n₃
+  simp only [Functor.LaxMonoidal.comp_ε, Category.assoc] at h₁ h₃
+  rw [IsUnitCompatible, lowerStar_obj_obj_str]
+  rw [Iso.trans_hom, Mod.comp_hom', Iso.app_hom, Functor.mapIso_hom, adicLowerStar_map_hom]
+  unfold adicLowerStarGeometricFiberMapCompFrobeniusIso
+  rw [Iso.trans_hom, Iso.trans_hom, NatTrans.comp_app, NatTrans.comp_app, Mod.comp_hom',
+    Mod.comp_hom', adicLowerStarComp_hom_app_hom, adicLowerStarCongr_hom_app_hom, Iso.symm_hom,
+    adicLowerStarComp_inv_app_hom]
+  rw [Functor.map_comp]
+  simp only [Category.assoc]
+  rw [reassoc_of% n₁, reassoc_of% h₁, reassoc_of% n₂, reassoc_of% h₂, reassoc_of% n₃,
+    reassoc_of% h₃]
+  rw [← Functor.map_comp, ← Functor.map_comp]
+  exact congrArg (fun m ↦ ε (φ')_*[WeilCoefficients.{u} l] ≫ (φ')_*[_].map m) hη
+
+end UnitSection
+
+section ConstantSections
+
+open ProEtale
+
+/-- The global sections of the constant `ℓ`-adic sheaf on a connected scheme form a line: they
+are the locally finite functions, which are constant. -/
+lemma finrank_globalSections_adicConstantSheaf (Z : Scheme.{u}) [ConnectedSpace Z] :
+    Module.finrank (PadicAlgCl l) ((WeilCoefficients.toModuleCat l).obj
+      ((Sheaf.Γ (Scheme.ProEt.topology Z) (WeilCoefficients.{u} l)).obj
+        (adicConstantSheaf l Z))) = 1 := by
+  let e₃ : (WeilCoefficients.toModuleCat l).obj
+      (ModuleCat.of _ (ULift.{u + 1} (PadicAlgCl.locallyFiniteFunctions l Z))) ≃ₗ[PadicAlgCl l]
+      PadicAlgCl.locallyFiniteFunctions l Z :=
+    { toFun x := x.down
+      invFun x := ULift.up x
+      map_add' _ _ := rfl
+      map_smul' _ _ := rfl
+      left_inv _ := rfl
+      right_inv _ := rfl }
+  exact ((WeilCoefficients.linearEquivOfIso ((Sheaf.ΓNatIsoSheafSections _ _
+    (Scheme.ProEt.isTerminalMkId Z)).app (adicConstantSheaf l Z))).trans
+    (e₃.trans (PadicAlgCl.locallyFiniteFunctionsEquiv l Z).toLinearEquiv)).finrank_eq.trans
+    (Module.finrank_self _)
+
+/-- The global section `1` of the constant `ℓ`-adic sheaf on a connected scheme is nonzero. -/
+lemma oneGlobalSection_ne_zero (Z : Scheme.{u}) [ConnectedSpace Z] :
+    oneGlobalSection (l := l) Z ≠ 0 := by
+  intro h
+  have h₁ := finrank_globalSections_adicConstantSheaf (l := l) Z
+  have : Subsingleton ((WeilCoefficients.toModuleCat l).obj
+      ((Sheaf.Γ (Scheme.ProEt.topology Z) (WeilCoefficients.{u} l)).obj
+        (adicConstantSheaf l Z))) := by
+    refine ⟨fun s t ↦ ?_⟩
+    obtain ⟨v, rfl⟩ := (bijective_globalSectionOfModHom (AdicSheaf.unit l Z)).2 s
+    obtain ⟨w, rfl⟩ := (bijective_globalSectionOfModHom (AdicSheaf.unit l Z)).2 t
+    change globalSectionOfModHom v = globalSectionOfModHom w
+    rw [globalSectionOfModHom_eq, globalSectionOfModHom_eq, h, map_zero, map_zero]
+  rw [Module.finrank_zero_of_subsingleton] at h₁
+  exact zero_ne_one h₁
+
+open MonoidalCategory Functor.LaxMonoidal in
+/-- The identification `Γ(W, g_* G) ≅ Γ(Z, G)` carries the global section of the pushforward
+`𝟙 ⟶ g_* 𝟙 ⟶ g_* G` of a unit `f : 𝟙 ⟶ G` to the global section of `f`. -/
+lemma globalSectionsLowerStarIso_hom_app_globalSectionOfHom {Z W : Scheme.{u}} (g : Z ⟶ W)
+    {G : Sheaf (Scheme.ProEt.topology Z) (WeilCoefficients.{u} l)}
+    (f : 𝟙_ (Sheaf (Scheme.ProEt.topology Z) (WeilCoefficients.{u} l)) ⟶ G) :
+    ((globalSectionsLowerStarIso (WeilCoefficients.{u} l) g).hom.app G).hom
+      (globalSectionOfHom (ε (g)_*[WeilCoefficients.{u} l] ≫ (g)_*[_].map f)) =
+      globalSectionOfHom f := by
+  have hε := NatTrans.IsMonoidal.unit
+    (τ := (globalSectionsLowerStarIso (WeilCoefficients.{u} l) g).hom)
+  have n := (globalSectionsLowerStarIso (WeilCoefficients.{u} l) g).hom.naturality f
+  rw [Functor.LaxMonoidal.comp_ε] at hε
+  simp only [Category.assoc] at hε
+  have key : ε (Sheaf.Γ _ (WeilCoefficients.{u} l)) ≫
+      (Sheaf.Γ _ _).map (ε (g)_*[WeilCoefficients.{u} l] ≫ (g)_*[_].map f) ≫
+        (globalSectionsLowerStarIso _ g).hom.app G =
+      ε (Sheaf.Γ _ (WeilCoefficients.{u} l)) ≫ (Sheaf.Γ _ _).map f := by
+    rw [Functor.map_comp, Category.assoc]
+    erw [n]
+    rw [reassoc_of% hε]
+  exact congrArg (fun m ↦ m.hom (1 : ULift.{u + 1} (PadicAlgCl l))) key
+
+end ConstantSections
+
+omit [Finite k₀] in
+/-- The geometric fiber of a geometrically connected `k₀`-scheme is connected. -/
+lemma connectedSpace_geometricFiber {Y : Scheme.{u}} [Y.Over (Spec (CommRingCat.of k₀))]
+    [GeometricallyConnected (Y ↘ Spec (CommRingCat.of k₀))] :
+    ConnectedSpace (Y ↘ Spec (CommRingCat.of k₀)).geometricFiber :=
+  have : Subsingleton (Scheme.specAlgebraicClosure k₀).left :=
+    inferInstanceAs (Subsingleton (Spec (CommRingCat.of (AlgebraicClosure k₀))))
+  have : Nonempty (Scheme.specAlgebraicClosure k₀).left :=
+    inferInstanceAs (Nonempty (Spec (CommRingCat.of (AlgebraicClosure k₀))))
+  GeometricallyConnected.connectedSpace_of_subsingleton
+    (f := Limits.pullback.snd (Y ↘ Spec (CommRingCat.of k₀)) (Scheme.specAlgebraicClosure k₀).hom)
+
+/-- The cohomology sheaf `𝓗⁰(Rφ_* F)` of the derived pushforward of a Weil sheaf is its
+pushforward `φ_* F`, the pushforward being left exact. -/
+noncomputable def WeilSheaf.homologySheafZeroDerivedLowerStarIso {Y Z : Scheme.{u}}
+    [Y.Over (Spec (CommRingCat.of k₀))] [Z.Over (Spec (CommRingCat.of k₀))]
+    (φ : Y ⟶ Z) [φ.IsOver (Spec (CommRingCat.of k₀))] [QuasiCompact φ] [QuasiSeparated φ]
+    [LocallyOfFiniteType φ] [LocallyOfFiniteType (Z ↘ Spec (CommRingCat.of k₀))]
+    [QuasiCompact (Z ↘ Spec (CommRingCat.of k₀))] (F : WeilSheaf k₀ l Y) :
+    (WeilComplex.homologySheaf 0).obj ((WeilComplex.derivedLowerStar φ).obj
+      (toComplex.obj F)) ≅ (lowerStar φ).obj F :=
+  ObjectProperty.isoMk _
+    ((ProEtaleWeilSheaf.lowerStar k₀ l φ).homologyRightDerivedFunctorObjSingleFunctorIso
+        F.obj 0 ≪≫ (ProEtaleWeilSheaf.lowerStar k₀ l φ).rightDerivedZeroIsoSelf.app _)
+
 section Separated
 
 variable {X : Scheme.{u}} [X.Over (Spec (CommRingCat.of k₀))]
@@ -137,44 +321,21 @@ theorem finrank_cohomology_zero_adicConstant
     Module.finrank (PadicAlgCl l) ((adicConstant k₀ l X).cohomology 0).carrier =
       1 := by
   set a := X ↘ Spec (CommRingCat.of k₀)
-  set Xb := a.geometricFiber
-  -- `𝓗⁰(Ra_* ℚ̄_ℓ) ≅ a_* ℚ̄_ℓ`, `a_*` being left exact
-  let e₁ : (WeilComplex.homologySheaf 0).obj ((WeilComplex.derivedLowerStar a).obj
-      (toComplex.obj (adicConstant k₀ l X))) ≅ (lowerStar a).obj (adicConstant k₀ l X) :=
-    ObjectProperty.isoMk _
-      ((ProEtaleWeilSheaf.lowerStar k₀ l a).homologyRightDerivedFunctorObjSingleFunctorIso
-          (adicConstant k₀ l X).obj 0 ≪≫
-        (ProEtaleWeilSheaf.lowerStar k₀ l a).rightDerivedZeroIsoSelf.app _)
+  have := connectedSpace_geometricFiber (k₀ := k₀) (Y := X)
   let G : WeilSheaf k₀ l (Spec (CommRingCat.of k₀)) ⥤ WeilCoefficients.{u} l :=
     ObjectProperty.ι _ ⋙ Endofunctor.IsoAlgebra.forget _ ⋙ ProEtale.AdicSheaf.forget _ ⋙
     Sheaf.Γ _ (WeilCoefficients.{u} l)
-  let e₂ : G.obj ((WeilComplex.homologySheaf 0).obj ((WeilComplex.derivedLowerStar a).obj
+  -- `H⁰ = Γ(Spec k̄, 𝓗⁰(Ra_* ℚ̄_ℓ)) ≅ Γ(Spec k̄, a_* ℚ̄_ℓ) ≅ Γ(X̄, ℚ̄_ℓ)`
+  let e : G.obj ((WeilComplex.homologySheaf 0).obj ((WeilComplex.derivedLowerStar a).obj
       (toComplex.obj (adicConstant k₀ l X)))) ≅
-      ModuleCat.of _ (ULift.{u + 1} (PadicAlgCl.locallyFiniteFunctions l Xb)) :=
-    G.mapIso e₁ ≪≫
+      (Sheaf.Γ _ (WeilCoefficients.{u} l)).obj (ProEtale.adicConstantSheaf l a.geometricFiber) :=
+    G.mapIso (homologySheafZeroDerivedLowerStarIso a _) ≪≫
       (ProEtale.globalSectionsLowerStarIso _ (Scheme.Hom.geometricFiberMap a (comp_over a _))).app
-        (ProEtale.adicConstantSheaf l Xb) ≪≫
-      (Sheaf.ΓNatIsoSheafSections _ _ (Scheme.ProEt.isTerminalMkId Xb)).app
-        (ProEtale.adicConstantSheaf l Xb)
-  have : Subsingleton (Scheme.specAlgebraicClosure k₀).left :=
-    inferInstanceAs (Subsingleton (Spec (CommRingCat.of (AlgebraicClosure k₀))))
-  have : Nonempty (Scheme.specAlgebraicClosure k₀).left :=
-    inferInstanceAs (Nonempty (Spec (CommRingCat.of (AlgebraicClosure k₀))))
-  have : ConnectedSpace Xb := GeometricallyConnected.connectedSpace_of_subsingleton
-    (f := Limits.pullback.snd a (Scheme.specAlgebraicClosure k₀).hom)
-  let e₃ : (WeilCoefficients.toModuleCat l).obj
-      (ModuleCat.of _ (ULift.{u + 1} (PadicAlgCl.locallyFiniteFunctions l Xb))) ≃ₗ[PadicAlgCl l]
-      PadicAlgCl.locallyFiniteFunctions l Xb :=
-    { toFun x := x.down
-      invFun x := ULift.up x
-      map_add' _ _ := rfl
-      map_smul' _ _ := rfl
-      left_inv _ := rfl
-      right_inv _ := rfl }
-  exact ((WeilCoefficients.linearEquivOfIso e₂).trans
-    (e₃.trans (PadicAlgCl.locallyFiniteFunctionsEquiv l Xb).toLinearEquiv)).finrank_eq.trans
-    (Module.finrank_self _)
+        (ProEtale.adicConstantSheaf l a.geometricFiber)
+  exact (WeilCoefficients.linearEquivOfIso e).finrank_eq.trans
+    (finrank_globalSections_adicConstantSheaf _)
 
+open MonoidalCategory Functor.LaxMonoidal ProEtale in
 /-- Blueprint `prop-cohomological-finiteness`: Compact-support finiteness and Frobenius.
 
 If `X` is geometrically connected over `k₀`, the geometric Frobenius acts as the identity on
@@ -182,8 +343,43 @@ If `X` is geometrically connected over `k₀`, the geometric Frobenius acts as t
 constants. -/
 theorem frobenius_cohomology_zero_adicConstant
     [GeometricallyConnected (X ↘ Spec (CommRingCat.of k₀))] :
-    ((adicConstant k₀ l X).cohomology 0).frobenius = LinearEquiv.refl _ _ :=
-  sorry
+    ((adicConstant k₀ l X).cohomology 0).frobenius = LinearEquiv.refl _ _ := by
+  set a := X ↘ Spec (CommRingCat.of k₀)
+  have := connectedSpace_geometricFiber (k₀ := k₀) (Y := X)
+  set e₁ := homologySheafZeroDerivedLowerStarIso a (adicConstant k₀ l X)
+  set a' := Scheme.Hom.geometricFiberMap a (comp_over a (Spec (CommRingCat.of k₀)))
+  -- the unit section `1` of `H⁰`, image of the unit of `ℚ̄_ℓ`
+  have hX : (adicConstant k₀ l X).IsUnitCompatible
+      (MonObj.one (X := ProEtale.adicConstantSheaf l a.geometricFiber)) :=
+    adicConstant_unit_str
+  have hW := (hX.lowerStar a).comp e₁.inv
+  set η := ((ε (a')_*[WeilCoefficients.{u} l] ≫ (a')_*[_].map
+    (MonObj.one (X := ProEtale.adicConstantSheaf l a.geometricFiber))) ≫ e₁.inv.hom.hom.f.hom)
+  have hfix := hW.globalSections_frobenius
+  -- it is nonzero: it maps to the global section `1` of `ℚ̄_ℓ` on `X̄`
+  let v : ((adicConstant k₀ l X).cohomology 0).carrier := globalSectionOfHom η
+  have hne : v ≠ 0 := by
+    intro h
+    have h' := congrArg (fun s ↦
+      ((ProEtale.globalSectionsLowerStarIso (WeilCoefficients.{u} l) a').hom.app _).hom
+        (((Sheaf.Γ _ _).map e₁.symm.inv.hom.hom.f.hom).hom s)) h
+    simp only [map_zero] at h'
+    have hinv : e₁.inv.hom.hom.f.hom ≫ e₁.symm.inv.hom.hom.f.hom = 𝟙 _ := by
+      exact congrArg (fun m ↦ m.hom.hom.f.hom) e₁.inv_hom_id
+    refine oneGlobalSection_ne_zero (l := l) a.geometricFiber ?_
+    rw [← h']
+    change _ = ((globalSectionsLowerStarIso (WeilCoefficients.{u} l) a').hom.app _).hom
+      (((Sheaf.Γ _ (WeilCoefficients.{u} l)).map e₁.symm.inv.hom.hom.f.hom).hom
+        (globalSectionOfHom η))
+    rw [← globalSectionOfHom_comp, Category.assoc, hinv]
+    erw [Category.comp_id, globalSectionsLowerStarIso_hom_app_globalSectionOfHom]
+    rfl
+  have h1 : Module.finrank (PadicAlgCl l) ((adicConstant k₀ l X).cohomology 0).carrier = 1 :=
+    finrank_cohomology_zero_adicConstant k₀ l X
+  refine LinearEquiv.ext fun x ↦ ?_
+  obtain ⟨c, rfl⟩ := (finrank_eq_one_iff_of_nonzero' _ hne).1 h1 x
+  rw [map_smul]
+  exact congrArg (c • ·) hfix
 
 end WeilSheaf
 
