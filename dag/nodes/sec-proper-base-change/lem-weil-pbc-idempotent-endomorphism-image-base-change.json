@@ -8,9 +8,45 @@
   "place": "More on Algebra, proof of Lemma Tag 07M5 (lemma-lift-projective-module, line 2020), last sentences: 'is an idempotent element p which lifts p-bar. Setting P = Im(p) we win.' (that Im(p) is finite projective and that it lifts P-bar, i.e. that the image of an idempotent commutes with base change, is left to the reader there)"
  },
  "stmt_deps": [],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Put $q=1-p$. Then $q^2=q$ and $pq=qp=0$, while $p+q=1$. Every $v\\in R^{\\oplus n}$ therefore has the decomposition $v=p(v)+q(v)$ with the two terms in $\\operatorname{Im}(p)$ and $\\operatorname{Im}(q)$. If a vector lies in both images, write it as $p(a)=q(b)$; applying $p$ gives the vector equal to $0$, so the sum is direct. Moreover $q(v)=v$ whenever $p(v)=0$, and $p(q(v))=0$, hence $\\operatorname{Im}(q)=\\ker(p)$. Thus $R^{\\oplus n}=\\operatorname{Im}(p)\\oplus\\operatorname{Im}(1-p)$, and the first summand is finite projective because it is a direct summand of the finite free module $R^{\\oplus n}$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "More on Algebra, proof of Lemma Tag 07M5 (lemma-lift-projective-module), line 2020: the lifted projector p and the conclusion 'Setting P = Im(p) we win'; the direct-sum calculation is written out here"
+   }
+  },
+  {
+   "text": "Apply $-\\otimes_RS$ to the split decomposition in Step 1. The two inclusion and projection maps remain split after tensoring, so the canonical map $(\\operatorname{Im}(p)\\otimes_RS)\\oplus(\\operatorname{Im}(q)\\otimes_RS)\\to R^{\\oplus n}\\otimes_RS\\cong S^{\\oplus n}$ is an isomorphism; the induced map from the first summand is the map $v\\otimes s\\mapsto s\\,\\rho(v)$ by the tensor universal property [lem-weil-pbc-module-base-change-universal-property]. Under this decomposition, the base-changed map $p\\otimes1$ is the identity on $\\operatorname{Im}(p)\\otimes_RS$ and zero on $\\operatorname{Im}(q)\\otimes_RS$.",
+   "uses": [
+    "lem-weil-pbc-module-base-change-universal-property"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "More on Algebra, proof of Lemma Tag 07M5 (lemma-lift-projective-module), line 2020: the image of the lifted idempotent after reduction; tensoring the split projector decomposition is the explicit base-change argument"
+   }
+  },
+  {
+   "text": "The matrix of $p\\otimes1$ in the base-changed standard basis is the entrywise image $\\rho(X)$, so it is exactly $p_S$; in particular $p_S^2=p_S$. Since it is identity on the first summand and zero on the second, its image is precisely the first summand. Consequently the displayed map $\\operatorname{Im}(p)\\otimes_RS\\to S^{\\oplus n}$ is injective and has image $\\operatorname{Im}(p_S)$, and therefore identifies $\\operatorname{Im}(p)\\otimes_RS$ with $\\operatorname{Im}(p_S)$ as $S$-modules.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "More on Algebra, proof of Lemma Tag 07M5 (lemma-lift-projective-module), line 2020: the lifted projector and 'Setting P = Im(p) we win'; the matrix and image computation is written out here"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-module-base-change-universal-property"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "More on Algebra, proof of Lemma Tag 07M5 (lemma-lift-projective-module), line 2020; the omitted projector-image/base-change calculation is supplied explicitly"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -42,7 +78,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "worker",
@@ -62,5 +98,18 @@
   }
  },
  "chapter": "sec-proper-base-change",
- "unit": "sk-thm-p1"
+ "unit": "sk-thm-p1",
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "lem-weil-pbc-idempotent-endomorphism-image-base-change",
+  "worker": "stage1",
+  "summary": "Split the idempotent projector lemma into the direct-sum/projectivity calculation, tensoring of the split decomposition, and identification of the base-changed matrix image. No new DAG nodes were required; the canonical tensor map uses the existing module base-change universal-property node."
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "group": "E1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed by the lead of E1; spot-checked by L: 3 steps: the projector identities give R^n = Im p + Im(1-p) with Im(1-p) = ker p; tensoring the split decomposition with S and identifying the map by the base-change universal property; the base-changed matrix is rho(X). Correct."
+ }
 }
