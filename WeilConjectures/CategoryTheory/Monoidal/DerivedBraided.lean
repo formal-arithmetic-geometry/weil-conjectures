@@ -40,7 +40,8 @@ local notation "L'" => toDerivedMonoidal L W
 
 variable [L.HasDerivedMonoidalCategory W]
 
-/-- (Implementation) The map `L'Y ⊗ᴸ L'X ⟶ L'(Y ⊗ X) ⟶ L'(X ⊗ Y)` induced by the braiding. -/
+/-- (Implementation) The map `L'Y ⊗ᴸ L'X ⟶ L'(Y ⊗ X) ⟶ L'(X ⊗ Y)` whose second map is
+`L'((β_ Y X).hom)`. -/
 noncomputable def braidingCounit :
     (((whiskeringLeft₂ D).obj L').obj L').obj (bifunctor L W).flip ⟶
       curriedTensor C ⋙ (whiskeringRight _ _ _).obj L' :=
@@ -48,8 +49,8 @@ noncomputable def braidingCounit :
     whiskerRight ((flipFunctor _ _ _).map (BraidedCategory.curriedBraidingNatIso C).hom)
       ((whiskeringRight C C _).obj L')
 
-/-- (Implementation) The map `L'Y ⊗ᴸ L'X ⟶ L'(Y ⊗ X) ⟶ L'(X ⊗ Y)` induced by the inverse
-of the braiding. -/
+/-- (Implementation) The map `L'Y ⊗ᴸ L'X ⟶ L'(Y ⊗ X) ⟶ L'(X ⊗ Y)` whose second map is
+`L'((β_ X Y).inv)`. -/
 noncomputable def braidingInvCounit :
     (((whiskeringLeft₂ D).obj L').obj L').obj (bifunctor L W).flip ⟶
       curriedTensor C ⋙ (whiskeringRight _ _ _).obj L' :=

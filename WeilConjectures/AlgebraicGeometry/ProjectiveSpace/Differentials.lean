@@ -7,7 +7,9 @@ module
 
 public import WeilConjectures.AlgebraicGeometry.Modules.Differentials
 public import WeilConjectures.AlgebraicGeometry.ProjectiveSpace
+public import WeilConjectures.AlgebraicGeometry.ProjectiveSpace.Charts
 public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Sheaf.LocallyFree
+public import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.Smooth
 
 /-!
 # The sheaf of differentials of projective space
@@ -18,6 +20,8 @@ The sheaf of relative differentials `Ω¹_{ℙ/S}` of `ℙ = ℙ(n; S)` is local
 
 ## Main statements
 
+- `AlgebraicGeometry.ProjectiveSpace.smoothOfRelativeDimension`: `ℙ(n; S) ⟶ S` is smooth of
+  relative dimension `d`.
 - `AlgebraicGeometry.ProjectiveSpace.isFiniteLocallyFreeOfRank_relativeDifferentials`:
   `Ω¹_{ℙ(n; S)/S}` is finite locally free of rank `d`.
 
@@ -33,15 +37,42 @@ The sheaf of relative differentials `Ω¹_{ℙ/S}` of `ℙ = ℙ(n; S)` is local
 
 universe u
 
+open CategoryTheory
+
 namespace AlgebraicGeometry.ProjectiveSpace
 
 variable (n : Type u) (S : Scheme.{u})
+
+/-- **Projective space is smooth.** For `n` with `Nat.card n = d + 1`, the projective space
+`ℙ(n; S) ⟶ S` is smooth of relative dimension `d`: on the standard open `D₊(xᵢ)` it is the affine
+space `𝔸({k // k ≠ i}; S)`. -/
+theorem smoothOfRelativeDimension {d : ℕ} (hn : Nat.card n = d + 1) :
+    SmoothOfRelativeDimension d (ℙ(n; S) ↘ S) := by
+  have : Finite n := Nat.finite_of_card_ne_zero (by omega)
+  refine smoothOfRelativeDimension_of_forall_exists_mem _ d fun y ↦ ?_
+  have : y ∈ (⊤ : ℙ(n; S).Opens) := trivial
+  rw [← iSup_standardOpen, TopologicalSpace.Opens.mem_iSup] at this
+  obtain ⟨i, hi⟩ := this
+  refine ⟨_, hi, ?_⟩
+  rw [← standardOpenIso_hom_over]
+  have h : Nat.card {j : n // j ≠ i} = d := by
+    have := Fintype.ofFinite n
+    classical
+    rw [Nat.card_eq_fintype_card, Fintype.card_subtype_compl, Fintype.card_subtype_eq,
+      ← Nat.card_eq_fintype_card, hn, Nat.add_sub_cancel]
+  have := AffineSpace.smoothOfRelativeDimension_over {j : n // j ≠ i} S
+  rw [h] at this
+  have h' : SmoothOfRelativeDimension (0 + d)
+      ((standardOpenIso n S i).hom ≫ (𝔸({j : n // j ≠ i}; S) ↘ S)) :=
+    inferInstance
+  rwa [zero_add] at h'
 
 /-- **The differentials of projective space are locally free of rank `d`.** For `n` with
 `Nat.card n = d + 1`, the sheaf of relative differentials `Ω¹_{ℙ(n; S)/S}` is finite locally
 free of rank `d`: on the standard open `Uᵢ`, the affine space `𝔸({k // k ≠ i}; S)`, it is free
 on the differentials `d(x_k / xᵢ)`, since Kähler differentials of a polynomial ring are free on
-the differentials of the variables and commute with localization.
+the differentials of the variables and commute with localization. Here this follows from the
+smoothness of `ℙ(n; S) ⟶ S` of relative dimension `d`.
 
 This is the first assertion of the blueprint lemma; its main assertion `ω_ℙ ≅ 𝒪(-d-1)` needs
 the top exterior power `ω_ℙ = Λᵈ Ω¹_{ℙ/S}`, see the TODO in the module docstring.
@@ -49,6 +80,7 @@ the top exterior power `ω_ℙ = Λᵈ Ω¹_{ℙ/S}`, see the TODO in the module
 (blueprint: `lem-pc-projective-space-canonical`) -/
 theorem isFiniteLocallyFreeOfRank_relativeDifferentials {d : ℕ} (hn : Nat.card n = d + 1) :
     (ℙ(n; S) ↘ S).relativeDifferentials.IsFiniteLocallyFreeOfRank d :=
-  sorry
+  have := smoothOfRelativeDimension n S hn
+  Scheme.Hom.isFiniteLocallyFreeOfRank_relativeDifferentials _ d
 
 end AlgebraicGeometry.ProjectiveSpace

@@ -13,6 +13,7 @@ public import Mathlib.RepresentationTheory.Semisimple
 public import WeilConjectures.AlgebraicGeometry.GroupScheme.GeneralLinear.ClosedSubgroup.Lie
 public import WeilConjectures.Mathlib.RepresentationTheory.Basic
 public import WeilConjectures.Mathlib.RepresentationTheory.Semisimple
+public import WeilConjectures.RingTheory.HopfAlgebra.GeneralLinearGroup.IdentityComponent
 
 /-!
 # Degree data and their monodromy groups
@@ -817,7 +818,7 @@ noncomputable def frobeniusConjIso :
 /-- Conjugation by the Frobenius is an automorphism of the group scheme `H`.
 (blueprint: `lem-wf-conjugation-geometric-monodromy`) -/
 instance : IsMonHom D.frobeniusConjIso.hom :=
-  inferInstanceAs (IsMonHom (subgroupSchemeConjIso _ _ _).hom)
+  inferInstanceAs (IsMonHom (subgroupSchemeConjIso (I := D.geometricMonodromy) D.frobenius _ _).hom)
 
 /-- The automorphism `frobeniusConjIso` of `H` is the restriction of the conjugation `conjHom F` of
 `GL_n`. -/
@@ -851,6 +852,7 @@ variable {W : Type*} [Group W] {n k : Type u} [Fintype n] [DecidableEq n] [Field
 open CategoryTheory AlgebraicGeometry
 open scoped MonObj
 
+omit [CharZero k] in
 /-- A semisimple datum acts semisimply through the identity component of its arithmetic monodromy
 group: the standard representation of `G°(k)` on `kⁿ` is semisimple.
 
@@ -862,8 +864,31 @@ theorem isSemisimpleRepresentation_standardRepresentation_identityComponent
     (hD : D.IsSemisimple) :
     Representation.IsSemisimpleRepresentation
       (standardRepresentation (identityComponent D.arithmeticMonodromy)) := by
-  sorry
-
+  set A := D.arithmeticMonodromy
+  have := D.isSemisimpleRepresentation_arithmeticMonodromy hD
+  have := normal_zeroLocus_identityComponent (I := A) (isRadical_vanishingIdeal _) k
+  have hC := Representation.isSemisimpleRepresentation_comp_subtype
+    ((toRepresentation n k).comp (zeroLocus A k).subtype)
+    ((zeroLocus (identityComponent A) k).subgroupOf (zeroLocus A k))
+  -- a point of `G°` acts on `kⁿ` through its matrix
+  have hpt (g : points (subgroupScheme (identityComponent A)) k) (v : n → k) :
+      standardRepresentation (identityComponent A) g v =
+        (((zeroLocusMulEquiv (identityComponent A) k).symm g : GL n k) : Matrix n n k) *ᵥ v := by
+    rw [standardRepresentation, RationalHom.representation_apply, RationalHom.points_apply,
+      Matrix.toLin'_apply]
+    congr 3
+    conv_lhs => rw [← (zeroLocusMulEquiv (identityComponent A) k).apply_symm_apply g]
+    exact homMulEquiv_zeroLocusMulEquiv_comp _
+  refine (Subrepresentation.orderIsoOfForallIff fun U ↦ ⟨fun h g v hv ↦ ?_,
+    fun h g v hv ↦ ?_⟩).complementedLattice_iff.1 hC
+  · set g' := (zeroLocusMulEquiv (identityComponent A) k).symm g
+    have hg' : (g' : GL n k) ∈ zeroLocus A k := zeroLocus_anti (le_identityComponent A) g'.2
+    rw [hpt]
+    exact h ⟨⟨g', hg'⟩, Subgroup.mem_subgroupOf.2 g'.2⟩ v hv
+  · have hg := h (zeroLocusMulEquiv (identityComponent A) k
+      ⟨g.1.1, Subgroup.mem_subgroupOf.1 g.2⟩) v hv
+    rw [hpt, MulEquiv.symm_apply_apply] at hg
+    exact hg
 /-- For a semisimple represented degree datum the identity component of the arithmetic monodromy
 group is the central–geometric product `G° = Z(G°)° H°`: the multiplication morphism
 `Z(G°)° ×ₖ H° ⟶ G°` of group schemes is surjective. This is the general
@@ -886,7 +911,28 @@ theorem exists_mem_center_mul_mem_geometricMonodromy_eq (hD : D.IsSemisimple) {g
     ∃ c ∈ zeroLocus (identityComponent (center (identityComponent D.arithmeticMonodromy))) k,
       ∃ h ∈ zeroLocus (identityComponent D.geometricMonodromy) k, c * h = g := by
   have := D.isSemisimpleRepresentation_standardRepresentation_identityComponent hD
-  sorry
+  obtain ⟨t, x, htx⟩ := exists_mul_eq_of_containsCommutators
+    D.arithmeticMonodromy_le_geometricMonodromy (zeroLocusMulEquiv _ k ⟨g, hg⟩)
+  -- the matrix of a point does not change when the point is viewed in a larger subgroup
+  have hM {J J' : Ideal (CoordinateRing n k)} [J.IsHopfIdeal k] [J'.IsHopfIdeal k] (hJ : J ≤ J')
+      (p : points (subgroupScheme J') k) :
+      (((zeroLocusMulEquiv J k).symm (p ≫ subgroupSchemeHom hJ) : zeroLocus J k) : GL n k) =
+        ((zeroLocusMulEquiv J' k).symm p : GL n k) := by
+    calc (((zeroLocusMulEquiv J k).symm (p ≫ subgroupSchemeHom hJ) : zeroLocus J k) : GL n k)
+        = GeneralLinearGroup.homMulEquiv n k k (zeroLocusMulEquiv J k
+            ((zeroLocusMulEquiv J k).symm (p ≫ subgroupSchemeHom hJ)) ≫ subgroupSchemeι J) :=
+          (homMulEquiv_zeroLocusMulEquiv_comp _).symm
+      _ = GeneralLinearGroup.homMulEquiv n k k (p ≫ subgroupSchemeι J') := by
+          rw [MulEquiv.apply_symm_apply, Category.assoc, subgroupSchemeHom_comp_subgroupSchemeι]
+      _ = ((zeroLocusMulEquiv J' k).symm p : GL n k) := by
+          conv_lhs => rw [← (zeroLocusMulEquiv J' k).apply_symm_apply p]
+          exact homMulEquiv_zeroLocusMulEquiv_comp _
+  have hc := hM ((le_center _).trans (le_identityComponent _)) t
+  have hh := hM (identityComponent_mono _ D.arithmeticMonodromy_le_geometricMonodromy) x
+  have hgx := congrArg (fun p ↦ (((zeroLocusMulEquiv (identityComponent D.arithmeticMonodromy)
+    k).symm p : zeroLocus _ k) : GL n k)) htx
+  simp only [map_mul, Subgroup.coe_mul, MulEquiv.symm_apply_apply, hc, hh] at hgx
+  exact ⟨_, SetLike.coe_mem _, _, SetLike.coe_mem _, hgx⟩
 
 /-- The group theory behind `exists_isPositiveCentralPair`: let `H` be a subgroup of `Γ` containing
 the commutators and `G₀` a subgroup of finite index such that every element of `G₀` is a product
