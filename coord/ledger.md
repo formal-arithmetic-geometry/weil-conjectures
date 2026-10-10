@@ -1836,3 +1836,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 15:40 L: merged deliver/E1/lem-sc-cohomology-closed-immersion-pushforward (reviewer FIX; first push; new nodes: 3)
 - 15:40 L: merged deliver/E1/lem-sc-section-affine-open-kills-cohomology (reviewer FIX; first push; new nodes: 1)
 - 15:40 L: returned deliver/E1/lem-sc-boundary-derivation-square-zero (reviewer RETURN: 1. D1/D2: step 2 and lem-sc-boundary-derivation-ringed-space: the new node is the item itself with O',O renamed A,B (sam)
+- 15:40 L: merged deliver/G1/lem-sc-affine-cap-section-open (reviewer FIX; after a return; new nodes: 2)

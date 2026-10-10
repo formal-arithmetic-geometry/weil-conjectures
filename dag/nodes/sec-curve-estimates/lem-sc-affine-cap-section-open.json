@@ -25,9 +25,53 @@
   "def-sc-invertible-module",
   "def-weil-pbc-ample-invertible-module"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Restrict the affine open U and the invertible module M to the affine scheme U. Writing U=Spec(R), the affine dictionary gives N=Gamma(U,M) as a finite projective R-module of rank 1, identifies M|_U with the sheaf tilde(N), and identifies U intersect Y_s with the set of primes p for which s is not in pN.",
+   "uses": [
+    "lem-weil-pbc-affine-tilde-gamma-adjunction",
+    "lem-sc-affine-cap-section-open-dictionary"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/properties.tex",
+    "place": "Properties, Lemma 01PV proof, first paragraph: translation to the algebra problem"
+   }
+  },
+  {
+   "text": "By [lem-sc-affine-cap-section-open-algebra] applied to R, N, s, the set V={p : s not in pN} is affine, hence U cap Y_s is affine.",
+   "uses": [
+    "lem-sc-affine-cap-section-open-algebra"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/properties.tex",
+    "place": "Properties, Lemma 01PV proof, construction and identification of the affine algebra"
+   }
+  },
+  {
+   "text": "Let n>=1 and t a global section of M^{tensor n}. M^{tensor n} is an invertible O_Y-module [def-weil-pbc-ample-invertible-module]; applying the first clause to M^{tensor n} and t gives that U cap Y_t is affine.",
+   "uses": [
+    "def-weil-pbc-ample-invertible-module"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/properties.tex",
+    "place": "Properties, Lemma 01PV and the positive tensor-power clause"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-affine-tilde-gamma-adjunction",
+  "lem-sc-affine-cap-section-open-dictionary",
+  "lem-sc-affine-cap-section-open-algebra",
+  "def-weil-pbc-ample-invertible-module"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/properties.tex",
+  "place": "Properties, Lemma 01PV (properties-lemma-affine-cap-s-open), proof"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -52,12 +96,28 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-sc-reduced-dim-le-one-ample",
   "by": "worker",
   "date": "2026-10-10"
  },
  "chapter": "sec-curve-estimates",
- "unit": "sk-thm-curveestimate"
+ "unit": "sk-thm-curveestimate",
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "lem-sc-affine-cap-section-open",
+  "worker": "stage1",
+  "summary": "Repaired the split by isolating the affine dictionary in a new statement-only node, making the item invoke the algebra node as a black box, defining invertible R-module inline in the algebra statement, and applying the first clause directly to M^{tensor n} for the positive-power case.",
+  "blueprint": "The three repaired steps realize the first sentence of the blueprint ancestor lem-sc-pic-proper-ntorsion proof, specifically the 09NX final-sentence claim that the intersection (Z_1)_{t_1t_2} is affine.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-ac2",
+  "group": "G1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-ac2 (reviewer sub-agent of L); spot-checked: Repaired re-push after the 15:19 return: all four points repaired (1 D1/C3: steps 2-5 replaced by one black-box step citing lem-sc-affine-cap-section-open-algebra, pbc symmetric-algebra-base-change and nonvanishing-section-trivializes removed from proof_deps and tool_uses; 2 C4/C1: new unsplit node lem-sc-affine-cap-section-open-dictionary (invertible M on Spec R is tilde(N), N finite projective rank 1, s_p in pN_p iff s in pN, true since pN = N cap pF for N a summand of free F) cited in step 1 with lem-weil-pbc-affine-tilde-gamma-adjunction clause (3); 3 B3: invertible R-module defined inline, base-change dep dropped, created.by/date are filled by the merge; 4 E3: step 3 applies the first clause to M^{tensor n}, whose invertibility def-weil-pbc-ample-invertible-module states). Source Stacks Properties 01PV (properties-lemma-affine-cap-s-open, properties.tex 4288-4318) read: item statement and algebra node agree hypothesis by hypothesis (algebra node: Spec(A/(s-1)A) -> Spec R open immersion onto V). Cited statements read: def-weil-pbc-ample-invertible-module, def-sc-invertible-module, lem-weil-pbc-affine-tilde-gamma-adjunction, lem-weil-pbc-symmetric-algebra-universal-property, lem-weil-pbc-finite-projective-rank-locally-constant, pqf-def-coherent, def-weil-affine-spectrum; tags 01IA/01IB/01CY exist. Small cases: N=R, s=f gives B=R_f, V=D(f); s=0 gives B=0, V empty. No Mathlib leaf. FIXES: dag/nodes/sec-curve-estimates/lem-sc-affine-cap-section-open-algebra.json: stmt_deps: added def-weil-affine-spectrum (cited in the statement text); dag/nodes/sec-curve-estimates/lem-sc-affine-cap-section-open.json: proof[2].text: introduced n>=1 and t before use. Start Sat Oct 10 03:40:05 PM UTC 2026, end Sat Oct 10 03:40:44 PM UTC 2026.; 2 file(s) fixed by the reviewer"
+ }
 }
