@@ -23,9 +23,65 @@
   "def-pc-fibre-product",
   "def-weil-pbc-finite-split-hypercover"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "For $n=0$, the matching scheme of each augmented object is $X$ [def-weil-pbc-finite-split-hypercover]. Either projection $X\\times_XX\\to X$ is inverse to the unique map $X\\to X\\times_XX$ induced by $(\\mathrm{id}_X,\\mathrm{id}_X)$ [def-pc-fibre-product]. Under this identification the induced map from $W_0=U_0\\times_XV_0$ is the pair of the two augmentations, namely $\\mu_0^U\\times_{\\mathrm{id}_X}\\mu_0^V$.",
+   "uses": [
+    "def-weil-pbc-finite-split-hypercover",
+    "def-pc-fibre-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/simplicial.tex",
+    "place": "Lemma 018D (lemma-cosk-fibre-product), degree-zero case, expanded from the omitted proof; Hypercoverings Lemma 01GH (lemma-funny-gamma), proof"
+   }
+  },
+  {
+   "text": "Fix $n\\geq1$, and let $D_n$ be the finite boundary indexing category in the statement. For a test $X$-scheme $T$, a cone from $T$ to the diagram $\\delta\\mapsto W_k=U_k\\times_XV_k$ consists of maps $c^W_\\delta:T\\to W_k$ compatible with every arrow of $D_n$. Taking the two projections gives cones $(c^U_\\delta)$ and $(c^V_\\delta)$ to the boundary diagrams of $U$ and $V$: the diagram maps of $W$ are induced by the corresponding diagram maps of $U$ and $V$ [def-pc-fibre-product], so all compatibility equations hold after projection. Conversely, given those two cones, for every $\\delta:[k]\\to[n]$ the pair $(c^U_\\delta,c^V_\\delta)$ has the same composite to $X$, because both are morphisms over $X$, and therefore defines a unique $c^W_\\delta:T\\to U_k\\times_XV_k$. For each arrow of $D_n$, the required equation between the $c^W_\\delta$ holds after both projections by compatibility of the two given cones; hence it holds by uniqueness in [def-pc-fibre-product]. These two constructions are inverse and natural in $T$.",
+   "uses": [
+    "def-weil-pbc-finite-split-hypercover",
+    "def-pc-fibre-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/simplicial.tex",
+    "place": "Lemma 018D (lemma-cosk-fibre-product), omitted proof, expanded using the hom-set argument of Lemma 018C (lemma-cosk-product)"
+   }
+  },
+  {
+   "text": "By the limit property in [def-weil-pbc-finite-split-hypercover], maps $T\\to M_n(W)$ are exactly cones of the first kind in step 2, while maps $T\\to M_n(U)$ and $T\\to M_n(V)$ are exactly the two cones of the second kind. By [def-pc-fibre-product], maps $T\\to M_n(U)\\times_XM_n(V)$ are exactly pairs of the latter cones (their maps to $X$ agree since $T$ and all boundary terms lie over $X$). The natural inverse correspondence of step 2 thus produces inverse morphisms between these matching schemes: apply it to the identity map of each matching scheme, then use its naturality to see both composites act as the identity on every map from a test $T$. The forward morphism is $(M_n(p),M_n(q))$, since its two projected boundary cones are precisely those obtained from the simplicial projections $p,q$. Hence this is the claimed isomorphism.",
+   "uses": [
+    "def-weil-pbc-finite-split-hypercover",
+    "def-pc-fibre-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/simplicial.tex",
+    "place": "Lemma 018D (lemma-cosk-fibre-product), universal-property proof omitted there; compare Lemma 018C (lemma-cosk-product), displayed hom-set calculation"
+   }
+  },
+  {
+   "text": "For each boundary index $\\delta:[k]\\to[n]$, the $\\delta$-component of the cone defining $\\mu_n^W:W_n\\to M_n(W)$ is the simplicial operator $W_n\\to W_k$, which by the definition of $W$ is the induced product of $U_n\\to U_k$ and $V_n\\to V_k$ [def-pc-fibre-product]. Projecting this cone gives exactly the boundary cones defining $\\mu_n^U\\circ p_n$ and $\\mu_n^V\\circ q_n$ [def-weil-pbc-finite-split-hypercover]. Thus the isomorphism of step 3 sends $\\mu_n^W$ to the unique morphism into $M_n(U)\\times_XM_n(V)$ with these two projections, namely $\\mu_n^U\\times_{\\mathrm{id}_X}\\mu_n^V$; uniqueness follows from [def-pc-fibre-product]. Together with step 1 this proves the compatibility for all $n\\geq0$.",
+   "uses": [
+    "def-pc-fibre-product",
+    "def-weil-pbc-finite-split-hypercover"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/hypercovering.tex",
+    "place": "Lemma 01GH (lemma-funny-gamma), proof, second paragraph, identification of the matching target for a fibre product via Simplicial Lemma 018D (lemma-cosk-fibre-product)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-finite-split-hypercover",
+  "def-pc-fibre-product"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/simplicial.tex",
+  "place": "Lemma 018D (lemma-cosk-fibre-product), proof omitted; expanded by the hom-set argument in Lemma 018C (lemma-cosk-product), and the matching-map use in hypercovering.tex Lemma 01GH (lemma-funny-gamma)"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -55,7 +111,7 @@
   "file": "Mathlib/AlgebraicTopology/SimplicialObject/Basic.lean",
   "how": "line 330; with CategoryTheory.Adjunction.rightAdjoint_preservesLimits (Mathlib/CategoryTheory/Adjunction/Limits.lean:207) Truncated.cosk preserves pullbacks; the node needs in addition the identification of M_n with the n-th term of cosk_{n-1} of the truncation, in the augmented setting over X"
  },
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "worker",
@@ -71,5 +127,19 @@
   }
  },
  "chapter": "sec-curve-estimates",
- "unit": "sk-prop-h2"
+ "unit": "sk-prop-h2",
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "lem-weil-pbc-matching-object-fibre-product",
+  "worker": "stage1",
+  "summary": "Expanded the omitted proof of Stacks 018D from the hom-set argument of 018C: cones to the boundary diagram of the termwise fibre product are naturally pairs of cones to the factors. The universal properties give the matching-scheme isomorphism and identify the matching maps; degree zero is handled separately. No additional node is needed for this direct calculation.",
+  "blueprint": "Realizes the fourth proof paragraph of lem-weil-pbc-hypercover-refinement, 'For two hypercovers, perform this construction with the product of their matching covers': steps 1-3 identify the product matching cover and step 4 identifies its covering map."
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "group": "C1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed by the lead of C1; spot-checked by L: L: 4 steps (n=0, cones into the product diagram are pairs of cones, limit property, matching maps) read; the elementary steps are the cone argument of 018C"
+ }
 }
