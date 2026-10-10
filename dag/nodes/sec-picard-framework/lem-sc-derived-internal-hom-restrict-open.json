@@ -24,10 +24,89 @@
   "def-weil-sheaf-of-modules-category",
   "def-pur-derived-internal-hom"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Represent $L$ by a complex $\\mathcal L^\\bullet$ and choose a functorial K-injective resolution $\\mathcal L^\\bullet\\to I^\\bullet$ in the category of $\\mathcal O_X$-modules. By the definition of derived internal Hom, $R\\mathcal Hom_{\\mathcal O_X}(K,L)$ is represented by the sheaf Hom complex $\\mathcal Hom^\\bullet(K^\\bullet,I^\\bullet)$ for any representative $K^\\bullet$ of $K$.",
+   "uses": [
+    "def-pur-derived-internal-hom",
+    "prop-pur-kinjective-resolutions-exist"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/cohomology.tex",
+    "place": "Section 08J7 and Lemma 08DL"
+   }
+  },
+  {
+   "text": "By the open-restriction K-injective lemma [lem-sc-derived-k-injective-restrict-open], $j^{-1}I^\\bullet$ is K-injective on $U$. Restriction to an open is exact (the cohomology sheaves of $j^{-1}$ of a complex are the restrictions of its cohomology sheaves, as sections and stalks over opens of $U$ are unchanged), so $j^{-1}\\mathcal L^\\bullet\\to j^{-1}I^\\bullet$ is still a quasi-isomorphism and hence a K-injective resolution of $L|_U$. It therefore represents the restriction $L|_U$ and, by the definition of derived internal Hom, computes $R\\mathcal Hom_{\\mathcal O_U}(K|_U,L|_U)$.",
+   "uses": [
+    "lem-sc-derived-k-injective-restrict-open",
+    "def-pur-derived-internal-hom"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/cohomology.tex",
+    "place": "Lemma 08BS used in Lemma 08DL"
+   }
+  },
+  {
+   "text": "For each open $V\\subseteq U$, the definition of sheaf Hom gives $\\mathcal Hom_{\\mathcal O_X}(A,B)(V)=\\operatorname{Hom}_{\\mathcal O_V}(A|_V,B|_V)=\\mathcal Hom_{\\mathcal O_U}(A|_U,B|_U)(V)$. These equalities commute with restriction maps. In degree $n$, the Hom complex is the product over $p\\in\\mathbf Z$ of these Hom sheaves; products of sheaves of modules are computed sectionwise, so restriction identifies that product with the product on $U$. The differential $d(f)^p=d_I^{p+n}\\circ f^p-(-1)^n f^{p+1}\\circ d_K^p$ is unchanged on $V$. Thus $j^{-1}\\mathcal Hom^\\bullet(K^\\bullet,I^\\bullet)\\cong\\mathcal Hom^\\bullet(j^{-1}K^\\bullet,j^{-1}I^\\bullet)$ as complexes.",
+   "uses": [
+    "def-pur-sheaf-hom",
+    "def-pur-hom-complex"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/cohomology.tex",
+    "place": "Lemma lemma-restriction-RHom-to-U (Tag 08DL), construction of the Hom complex"
+   }
+  },
+  {
+   "text": "The complex isomorphism of Step 3 gives an isomorphism in $D(\\mathcal O_U)$. By Steps 1 and 2, its source and target represent $R\\mathcal Hom_{\\mathcal O_X}(K,L)|_U$ and $R\\mathcal Hom_{\\mathcal O_U}(K|_U,L|_U)$ respectively. Each component is restriction of a local module map; hence it is natural in both arguments and in successive open inclusions. Independence of the chosen representatives and K-injective resolution follows from the canonical independence clause of the derived internal Hom definition.",
+   "uses": [
+    "def-pur-derived-internal-hom"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/cohomology.tex",
+    "place": "Lemma lemma-restriction-RHom-to-U (Tag 08DL), conclusion"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pur-derived-internal-hom",
+  "prop-pur-kinjective-resolutions-exist",
+  "lem-sc-derived-k-injective-restrict-open",
+  "def-pur-sheaf-hom",
+  "def-pur-hom-complex"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Lemma lemma-restriction-RHom-to-U (Tag 08DL), using Lemma lemma-restrict-K-injective-to-open (Tag 08BS)"
+ },
  "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "derived internal Hom sheaves of modules commutes with restriction to an open subset",
+   "results": "SheafOfModules.unitHomEquiv lemmas, LightCondensed.ihom lemmas, Sheaf.GammaHomEquiv; no derived internal Hom or restriction statement",
+   "date": "2026-10-11",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "DerivedCategory.internalHom, restriction, open immersion",
+   "results": "0 hits; malformed pattern rejected by Loogle",
+   "date": "2026-10-11",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "grep",
+   "query": "derived internal hom|RHom|restriction in Mathlib",
+   "results": "0 hits",
+   "date": "2026-10-11",
+   "verdict": "no match"
+  },
   {
    "tool": "leanfinder",
    "query": "derived internal Hom of sheaves of modules commutes with restriction to an open subset",
@@ -37,12 +116,37 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-sc-derived-internal-hom-stalk-localization",
   "by": "reviewer",
   "date": "2026-10-10"
  },
  "chapter": "sec-picard-framework",
- "unit": "sk-thm-picard-duality"
+ "unit": "sk-thm-picard-duality",
+ "split_report": {
+  "date": "2026-10-11",
+  "item": "lem-sc-derived-internal-hom-restrict-open",
+  "worker": "stage1",
+  "summary": "Checked the target against Stacks Cohomology Lemma 08DL and its K-injective restriction input 08BS, and against the source tree (no exact declaration or blueprint duplicate). The proof now spells out the K-injective resolution, preservation under open restriction, termwise sheaf-Hom identification, and passage to the derived category. Added one statement-only dependency for 08BS and recorded all Mathlib searches.",
+  "blueprint": "Realizes the parenthetical Ext-vanishing proof of thm-sc-p1-duality at the clause 'localize the derived internal Hom to an affine neighbourhood'.",
+  "tool_uses": [
+   {
+    "node": "prop-pur-kinjective-resolutions-exist",
+    "why": "generic existence of functorial K-injective resolutions for sheaves of modules; the Picard unit route does not provide a separate resolution construction"
+   }
+  ]
+ },
+ "tool_uses": [
+  "prop-pur-kinjective-resolutions-exist",
+  "prop-pur-kinjective-resolutions-exist"
+ ],
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-hro1808",
+  "group": "M1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-hro1808 (reviewer sub-agent of L); spot-checked: Item vs 08DL and new node vs 08BS (verbatim in packet): faithful; new node is a real lemma (adjoint with exact left adjoint j_! preserves K-injectives), not a duplicate (only etale-site restriction nodes share the topic), not elementary, Mathlib searches recorded. No cycle: item and new node do not cite lem-sc-derived-internal-hom-stalk-localization (it appears only in blueprint.from.via / created.item); def-pur-derived-internal-hom, prop-pur-kinjective-resolutions-exist, def-pur-kinjective-complex deps checked. Steps 1,3,4 match cited statements; tool_use prop-pur-kinjective-resolutions-exist accepted as generic. FIX more, RETURN less: C1 at Step 2 - the step asserted j^{-1}I represents L|_U without saying j^{-1}L -> j^{-1}I is still a quasi-isomorphism; added the exactness of restriction to opens (cohomology sheaves restrict) to the step text (missed by the second reading, which argued it only in its notes).; 1 file(s) fixed by the reviewer"
+ }
 }
