@@ -38,6 +38,9 @@ two-sided tensor inverse (`CategoryTheory.IsInvertible.isDualizable`).
   the evaluation of an exact pairing of `Y` and `X` is an isomorphism.
 - `CategoryTheory.MonoidalClosed.isIso_ihomUnitTensorToIhom`: the comparison map is an
   isomorphism when `X` has a left dual.
+- `CategoryTheory.MonoidalClosed.exactPairingOfIsIso`: conversely, if the comparison map
+  `(ihom X).obj (𝟙_ C) ⊗ X ⟶ (ihom X).obj X` is an isomorphism, `(ihom X).obj (𝟙_ C)` is a
+  left dual of `X`.
 
 -/
 
@@ -221,6 +224,62 @@ theorem isIso_ihomUnitTensorToIhom (Y X : C) [ExactPairing Y X] (Z : C) :
     IsIso (ihomUnitTensorToIhom X Z) := by
   rw [ihomUnitTensorToIhom_eq Y X]
   infer_instance
+
+/-- The transpose of `ihomUnitTensorToIhom X Z`. -/
+lemma whiskerLeft_ihomUnitTensorToIhom_ev (X Z : C) :
+    X ◁ ihomUnitTensorToIhom X Z ≫ (ihom.ev X).app Z =
+      (α_ _ _ _).inv ≫ (ihom.ev X).app (𝟙_ C) ▷ Z ≫ (λ_ Z).hom := by
+  rw [← uncurry_eq, ihomUnitTensorToIhom, uncurry_curry]
+
+variable (X : C) [IsIso (ihomUnitTensorToIhom X X)]
+
+/-- If the comparison map `(ihom X).obj (𝟙_ C) ⊗ X ⟶ (ihom X).obj X` is an isomorphism, the
+coevaluation `𝟙_ C ⟶ (ihom X).obj (𝟙_ C) ⊗ X` is the preimage of the transpose of `ρ_ X`. -/
+noncomputable def coevaluationOfIsIso : 𝟙_ C ⟶ (ihom X).obj (𝟙_ C) ⊗ X :=
+  curry (ρ_ X).hom ≫ inv (ihomUnitTensorToIhom X X)
+
+/-- The first zigzag identity for `coevaluationOfIsIso`. -/
+lemma coevaluationOfIsIso_evaluation :
+    X ◁ coevaluationOfIsIso X ≫ (α_ _ _ _).inv ≫ (ihom.ev X).app (𝟙_ C) ▷ X =
+      (ρ_ X).hom ≫ (λ_ X).inv := by
+  rw [← cancel_mono (λ_ X).hom, Category.assoc, Category.assoc, Category.assoc,
+    Iso.inv_hom_id, Category.comp_id, ← whiskerLeft_ihomUnitTensorToIhom_ev, coevaluationOfIsIso,
+    ← MonoidalCategory.whiskerLeft_comp_assoc, Category.assoc, IsIso.inv_hom_id,
+    Category.comp_id, ← uncurry_eq, uncurry_curry]
+
+/-- The second zigzag identity for `coevaluationOfIsIso`. -/
+lemma evaluation_coevaluationOfIsIso :
+    coevaluationOfIsIso X ▷ (ihom X).obj (𝟙_ C) ≫ (α_ _ _ _).hom ≫
+      (ihom X).obj (𝟙_ C) ◁ (ihom.ev X).app (𝟙_ C) =
+      (λ_ _).hom ≫ (ρ_ _).inv := by
+  apply (cancel_mono (ρ_ _).hom).1
+  apply cancel_epi (λ_ _).inv |>.1
+  apply uncurry_injective
+  simp only [uncurry_eq, Category.assoc, Iso.inv_hom_id, Category.comp_id,
+    MonoidalCategory.whiskerLeft_comp]
+  set D := (ihom X).obj (𝟙_ C)
+  set e : X ⊗ D ⟶ 𝟙_ C := (ihom.ev X).app (𝟙_ C)
+  have key : X ◁ D ◁ e ≫ X ◁ (ρ_ D).hom ≫ e =
+      (α_ X D (X ⊗ D)).inv ≫ e ▷ (X ⊗ D) ≫ (λ_ _).hom ≫ e := by
+    rw [MonoidalCategory.whiskerLeft_rightUnitor, Category.assoc,
+      associator_inv_naturality_right_assoc, ← rightUnitor_naturality, whisker_exchange_assoc,
+      ← unitors_equal, leftUnitor_naturality]
+  rw [key, MonoidalCategory.whiskerLeft_id, Category.id_comp]
+  have z := coevaluationOfIsIso_evaluation X
+  calc _ = X ◁ (λ_ D).inv ≫ (α_ X (𝟙_ C) D).inv ≫
+        (X ◁ coevaluationOfIsIso X ≫ (α_ _ _ _).inv ≫ e ▷ X) ▷ D ≫ (α_ (𝟙_ C) X D).hom ≫
+          (λ_ _).hom ≫ e := by monoidal
+    _ = e := by rw [z]; monoidal
+
+/-- **A criterion for left duals**: if the comparison map
+`(ihom X).obj (𝟙_ C) ⊗ X ⟶ (ihom X).obj X` is an isomorphism, then `(ihom X).obj (𝟙_ C)` is a
+left dual of `X`, with evaluation the evaluation of the internal hom. -/
+@[instance_reducible]
+noncomputable def exactPairingOfIsIso : ExactPairing ((ihom X).obj (𝟙_ C)) X where
+  coevaluation' := coevaluationOfIsIso X
+  evaluation' := (ihom.ev X).app (𝟙_ C)
+  coevaluation_evaluation' := coevaluationOfIsIso_evaluation X
+  evaluation_coevaluation' := evaluation_coevaluationOfIsIso X
 
 end MonoidalClosed
 
