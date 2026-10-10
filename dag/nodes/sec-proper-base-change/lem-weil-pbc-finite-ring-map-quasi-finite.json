@@ -1,0 +1,96 @@
+{
+ "id": "lem-weil-pbc-finite-ring-map-quasi-finite",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-finite-etale-lifting",
+   "place": "Step (b), essential-surjectivity sentence: 'approximation in the G-ring case and a limit argument'; through the fibre-dimension bound in the cited route; within it, Stacks 00QA proof sentence 'Since $S''$ is finite over $R$ ... we see that $S''$ is quasi-finite over $R$ (see Lemma 00PM)'",
+   "via": [
+    "lem-weil-pbc-ring-quasi-finite-locus-open",
+    "lem-weil-pbc-quasi-finite-over-polynomial-algebra",
+    "lem-weil-pbc-fibre-dimension-bounded-open-upstairs",
+    "lem-weil-pbc-equation-count-localize-relative-global-complete-intersection",
+    "lem-weil-pbc-syntomic-at-prime-relative-global-complete-intersection",
+    "lem-weil-pbc-flat-smooth-fibre-smooth-at-prime",
+    "lem-weil-pbc-popescu-lifting",
+    "lem-weil-pbc-popescu-reduce-to-field",
+    "lem-weil-pbc-popescu-smoothing",
+    "lem-weil-pbc-henselian-pair-approximation",
+    "lem-weil-pbc-finite-etale-lifting-approximation",
+    "lem-weil-pbc-finite-etale-lifting-essential-surjectivity"
+   ]
+  },
+  "same_as": [
+   "pqf-lem-finite-qf"
+  ]
+ },
+ "kind": "statement",
+ "title": "A finite ring map is of finite type and quasi-finite at every prime",
+ "statement": "Let $\\varphi:R\\to T$ be a homomorphism of commutative rings such that $T$, viewed as an $R$-module via $\\varphi$, is finitely generated [def-weil-finitely-generated-module]. Then $R\\to T$ is of finite type [def-weil-pbc-finite-type-algebra], and $R\\to T$ is quasi-finite at every prime ideal $\\mathfrak q\\subset T$ in the sense of [def-weil-pbc-ring-map-quasi-finite-at-prime].",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Algebra, Lemma Tag 00PM (lemma-quasi-finite, line 30265), direction 'fibres finite implies quasi-finite', via Lemma Tag 0H8X (lemma-quasi-finite-above-p, line 30245, (2) implies (1)); applied to a finite ring map, whose fibre rings $T\\otimes_R\\kappa(\\mathfrak p)$ are finite $\\kappa(\\mathfrak p)$-algebras; as used in the proof of Lemma Tag 00QA (lemma-quasi-finite-open, line 30891). Tags verified in literature/stacks-project/tags/tags."
+ },
+ "stmt_deps": [
+  "def-weil-finitely-generated-module",
+  "def-weil-pbc-finite-type-algebra",
+  "def-weil-pbc-ring-map-quasi-finite-at-prime"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "finite algebra is quasi-finite at every prime",
+   "results": "AlgebraicGeometry.instLocallyQuasiFiniteOfIsFinite (Mathlib.AlgebraicGeometry.Morphisms.QuasiFinite); RingHom.QuasiFinite.of_finite (Mathlib.RingTheory.RingHom.QuasiFinite); Algebra.QuasiFinite.iff_finite_primesOver, Algebra.quasiFinite_iff (Mathlib.RingTheory.QuasiFinite.Basic)",
+   "date": "2026-10-10",
+   "verdict": "candidate with a different notion: Mathlib's Algebra.QuasiFinite is 'every fibre ring is a finite module over the residue field', not the pointwise isolated-point notion of the node"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "a finite ring map is quasi-finite at every prime: each prime is an isolated point of its fibre",
+   "results": "Algebra.QuasiFinite.iff_finite_comap_preimage_singleton, Algebra.QuasiFinite.finite_primeSpectrum, Algebra.QuasiFinite.iff_finite_primesOver, Algebra.QuasiFiniteAt (abbrev: QuasiFinite R S_p), RingHom.QuasiFinite.of_finite",
+   "date": "2026-10-10",
+   "verdict": "no exact match for the isolated-point notion"
+  },
+  {
+   "tool": "loogle",
+   "query": "Algebra.QuasiFiniteAt",
+   "results": "Algebra.QuasiFiniteAt, QuasiFiniteAt.isClopen_singleton, QuasiFiniteAt.of_isOpen_singleton (Artinian base), QuasiFiniteAt.comap_algEquiv, QuasiFiniteAt.exists_basicOpen_eq_singleton, Ideal.exists_notMem_forall_mem_of_ne_of_liesOver (Mathlib.RingTheory.QuasiFinite.Basic)",
+   "date": "2026-10-10",
+   "verdict": "no exact match; comparison lemmas exist"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rn 'QuasiFinite.of_finite|instance.*Module.Finite.*QuasiFinite|FiniteType.of_finite|quasiFiniteAt_iff_isOpen_singleton_fiber' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib",
+   "results": "RingTheory/QuasiFinite/Basic.lean:107 instance [Module.Finite R S] : QuasiFinite R S; RingTheory/RingHom/QuasiFinite.lean:51 RingHom.QuasiFinite.of_finite; RingTheory/FiniteType.lean:256 of_finite (RingHom.Finite -> RingHom.FiniteType); RingTheory/ZariskisMainTheorem.lean:754 Algebra.quasiFiniteAt_iff_isOpen_singleton_fiber [FiniteType R S]",
+   "date": "2026-10-10",
+   "verdict": "candidate: finite-type clause is FiniteType.lean:256; the quasi-finite clause needs Basic.lean:107 plus the comparison of Mathlib's QuasiFiniteAt with the isolated-point definition (ZariskisMainTheorem.lean:754 and the homeomorphism of the fibre with Spec of the fibre ring), which is a theorem, not one line"
+  }
+ ],
+ "mathlib_match": null,
+ "mathlib_candidate": {
+  "declaration": "Algebra.QuasiFinite (instance of Module.Finite) with Algebra.quasiFiniteAt_iff_isOpen_singleton_fiber; RingHom.FiniteType.of_finite",
+  "file": "Mathlib/RingTheory/QuasiFinite/Basic.lean; Mathlib/RingTheory/ZariskisMainTheorem.lean; Mathlib/RingTheory/FiniteType.lean",
+  "line": "107; 754; 256",
+  "how": "finite type: FiniteType.lean:256. Quasi-finite at q: Basic.lean:107 gives QuasiFinite R T, hence QuasiFinite R T_q (localization instance, Basic.lean:220) = QuasiFiniteAt R q, and ZariskisMainTheorem.lean:754 turns it into openness of {q} in the fibre of Spec T -> Spec R; agreement with the node's definition (isolated point of Spec(T tensor kappa(p))) needs the fibre homeomorphism, so not a one-line specialization (delivery-errors B8)."
+ },
+ "status": "unsplit",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-ring-quasi-finite-locus-open",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1"
+}
