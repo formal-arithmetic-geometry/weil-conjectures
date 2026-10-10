@@ -2386,3 +2386,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 19:27 L: lemma-weil-pbc-leray-acyclicity step 3: comparison citation moved from the leaf lem-sp-derived-well-defined to the lifting nodes (C5 noted by R-dwd1939)
 - 19:27 L: merged deliver/H1/lem-sc-deg-pullback-finite (reviewer FIX; after a return; new nodes: 1)
 - 19:27 L: merged deliver/H1/lem-sc-integral-closure-dedekind-surjective-fibres (reviewer FIX; first push; new nodes: 1)
+- 19:28 L: merged deliver/H1/lem-pc-flat-base-change-cohom (reviewer FIX; after a return; new nodes: 2)
