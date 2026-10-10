@@ -2,13 +2,13 @@
  "id": "def-weil-pbc-complete-intersection-over-field",
  "kind": "definition",
  "title": "Global and local complete intersections over a field",
- "statement": "Let $k$ be a field and $S$ a finitely generated $k$-algebra. For $g\\in S$ let $S_g$ be the localization of $S$ at the multiplicative subset $\\{1,g,g^2,\\dots\\}$ [def-weil-pbc-module-localization]; for a ring $T$ let $\\dim T$ be the Krull dimension [def-kun-topological-krull-dimension] of the topological space $\\operatorname{Spec}T$ [def-weil-affine-spectrum]. (1) $S$ is a *global complete intersection over $k$* if $S=0$, or if there are integers $n,c\\ge0$, polynomials $f_1,\\dots,f_c\\in k[x_1,\\dots,x_n]$ [def-weil-pbc-mv-polynomial-ring] and an isomorphism of $k$-algebras $k[x_1,\\dots,x_n]/(f_1,\\dots,f_c)\\cong S$ such that $\\dim S=n-c$. (2) $S$ is a *local complete intersection over $k$* if there is a family $(g_i)_{i\\in J}$ of elements of $S$ such that $\\operatorname{Spec}S=\\bigcup_{i\\in J}D(g_i)$, $D(g)=\\{\\mathfrak q:g\\notin\\mathfrak q\\}$, and each $S_{g_i}$ is a global complete intersection over $k$.",
+ "statement": "Let $k$ be a field. For a commutative ring $T$ and $g\\in T$ let $T_g=T[1/g]$ be the localization of $T$ at the element $g$, i.e. at the multiplicative subset $\\{1,g,g^2,\\dots\\}$ [def-weil-ring-localization-away], a $k$-algebra when $T$ is; let $\\dim T$ be the Krull dimension [def-kun-topological-krull-dimension] of the topological space $\\operatorname{Spec}T$ [def-weil-affine-spectrum] (so $\\dim T=-\\infty$ iff $T=0$), and $D(g)=\\{\\mathfrak q\\in\\operatorname{Spec}T:g\\notin\\mathfrak q\\}$. (1) A commutative $k$-algebra $T$ is a *global complete intersection over $k$* if $T=0$, or if there are integers $n,c\\ge0$, polynomials $f_1,\\dots,f_c\\in k[x_1,\\dots,x_n]$ [def-weil-pbc-mv-polynomial-ring] and an isomorphism of $k$-algebras $k[x_1,\\dots,x_n]/(f_1,\\dots,f_c)\\cong T$ such that $\\dim T=n-c$. (Such a $T$ is in particular a finitely generated $k$-algebra; the convention that the zero ring is a global complete intersection is part of the definition, Stacks 00S9.) (2) Let $S$ be a finitely generated $k$-algebra. $S$ is a *local complete intersection over $k$* if there is a family $(g_i)_{i\\in J}$ of elements of $S$ such that $\\operatorname{Spec}S=\\bigcup_{i\\in J}D(g_i)$ and each $S_{g_i}$ is a global complete intersection over $k$ in the sense of (1).",
  "source": {
   "document": "literature/stacks-project/algebra.tex",
-  "place": "Algebra, Definition 00S9 (label definition-lci-field, line 35817), including the convention that the zero ring is a global complete intersection"
+  "place": "Algebra, Section 00S8 (section-lci), Definition 00S9 (label definition-lci-field, line 35817; tag 00S9 = algebra-definition-lci-field in tags/tags line 1031), including the convention that the zero ring is a global complete intersection over k"
  },
  "stmt_deps": [
-  "def-weil-pbc-module-localization",
+  "def-weil-ring-localization-away",
   "def-kun-topological-krull-dimension",
   "def-weil-affine-spectrum",
   "def-weil-pbc-mv-polynomial-ring"
@@ -37,10 +37,38 @@
    "results": "only a comment in RingTheory/Extension/Presentation/Basic.lean line 103 (on Presentation.dimension); no definition",
    "date": "2026-10-10",
    "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rn 'CompleteIntersection\\|IsCompleteIntersection' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/RingTheory/; grep -rni 'complete intersection' and grep -rn 'IsLCI\\|LocalCompleteIntersection' over Mathlib/",
+   "results": "only the docstring of Algebra.Presentation.dimension (RingTheory/Extension/Presentation/Basic.lean:96-106: 'Nat.card ι - Nat.card σ ... you should assume that the presentation is a complete intersection'); no definition. Ingredients present: ringKrullDim (RingTheory/KrullDimension/Basic.lean:30), PrimeSpectrum.topologicalKrullDim_eq_ringKrullDim (RingTheory/Spectrum/Prime/Topology.lean:1361), PrimeSpectrum.iSup_basicOpen_eq_top_iff (Topology.lean:620), Localization.Away, MvPolynomial, Ideal.span",
+   "date": "2026-10-10",
+   "verdict": "no match (Lean candidate: `def IsGlobalCompleteIntersection k T : Prop := Subsingleton T ∨ ∃ (n c : ℕ) (f : Fin c → MvPolynomial (Fin n) k), Nonempty ((MvPolynomial (Fin n) k ⧸ Ideal.span (Set.range f)) ≃ₐ[k] T) ∧ ringKrullDim T = (n : WithBot ℕ∞) - c` (with care: n - c computed in ℤ, as WithBot ℕ∞ truncates), and local: `∃ s : Set S, Ideal.span s = ⊤ ∧ ∀ g ∈ s, IsGlobalCompleteIntersection k (Localization.Away g)` (span = ⊤ iff the D(g) cover Spec S, iSup_basicOpen_eq_top_iff'))"
+  },
+  {
+   "tool": "leansearch",
+   "query": "finite type algebra over a field is a complete intersection: quotient of polynomial ring by c elements with Krull dimension n - c",
+   "results": "Algebra.FiniteType.iff_quotient_mvPolynomial, _', _'' (Mathlib.RingTheory.FiniteType), algebra_finiteType_of_liesOver, Algebra.FiniteType.quotient, Algebra.QuasiFinite.recOn: no complete intersection notion",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"CompleteIntersection\"",
+   "results": "none",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "local complete intersection over a field: Spec covered by basic opens D(g_i) with each localization a global complete intersection",
+   "results": "AlgebraicGeometry.Scheme.affineOpenCoverOfSpanRangeEqTop (+ _X_carrier, _f, _idx), isAffine_of_isAffineOpen_basicOpen, Scheme.affineBasisCoverOfAffine (Mathlib.AlgebraicGeometry.Cover.Open): covers by D(g_i) only, no complete intersection",
+   "date": "2026-10-10",
+   "verdict": "no match"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "worker",
@@ -60,5 +88,17 @@
   }
  },
  "chapter": "sec-proper-base-change",
- "unit": "sk-thm-p1"
+ "unit": "sk-thm-p1",
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "def-weil-pbc-complete-intersection-over-field",
+  "worker": "stage1",
+  "summary": "Checked against Stacks Algebra Definition 00S9 (algebra.tex 35817-35831; tag verified in tags/tags) and the remark after it (35833-35849). Content agrees: presentation k[x_1..x_n]/(f_1..f_c) with dim = n - c, zero ring a global complete intersection by convention, local complete intersection via a covering Spec S = U D(g_i) with each S_{g_i} global c.i. Two changes: (a) stmt_deps: S_g is the localization of a ring at an element, so def-weil-pbc-module-localization (localization of modules at a multiplicative subset) is replaced by the ring node def-weil-ring-localization-away (Mathlib leaf Localization.Away); (b) clause (1) is now stated for any commutative k-algebra T rather than for a finitely generated one, so that applying it to S_{g_i} in clause (2) needs no hidden claim that S_{g_i} is finitely generated (a presentation makes T finitely generated anyway; Stacks applies (1) to S_{g_i} tacitly); the meaning of dim for T = 0 (-infinity) is made explicit. No claim inside the definition: the definition is two existence conditions and a convention, so nothing moved to statement nodes and no pointers. Not added (not part of the definition): the remark after 00S9 that a global c.i. of dimension n - c has dim S_m = n - c at every maximal ideal and is equidimensional, and Lemma 00SA (localization preserves global/local c.i.). Citers: lem-weil-pbc-standard-smooth-over-field-dimension-at-points (step 2) uses only the bare definition (2); lem-weil-pbc-smooth-over-field-local-complete-intersection states the bare definition; lem-weil-pbc-lci-conormal-free-rank-codimension (Stacks 00SC (1)=>(4)) will need, when split, the equidimensionality remark after 00S9 (t = m - dim S_g = height(q'') - height(q) uses dim (S_g)_q-local = dim S_g) and Lemma 00SA-type facts: these are for its split, not this node. Mathlib: no complete intersection notion (grep, LeanSearch, Loogle, LeanFinder); Lean candidate recorded in the grep search."
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "result": "accepted",
+  "note": "Definition node (Stacks 00S9): notions named (ring localization at an element, Krull dimension, Spec, polynomial ring); no claims inside, so no pointers; clause (1) restated for any k-algebra T to avoid the hidden claim that S_{g_i} is finitely generated. Stage 3: the splitter of lem-weil-pbc-lci-conormal-free-rank-codimension needs the equidimensionality remark after 00S9 as a statement node."
+ }
 }
