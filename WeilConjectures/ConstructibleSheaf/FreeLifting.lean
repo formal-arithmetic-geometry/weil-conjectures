@@ -10,7 +10,9 @@ public import Mathlib.CategoryTheory.Generator.Sheaf
 public import Mathlib.CategoryTheory.ObjectProperty.FiniteProducts
 public import WeilConjectures.Algebra.Homology.ResolutionByClass
 public import Mathlib.CategoryTheory.Sites.EpiMono
+public import WeilConjectures.CategoryTheory.Abelian.Flat.Basic
 public import WeilConjectures.ConstructibleSheaf.Defs
+public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.FlatModuleCat
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Sites.Etale
 
 /-!
@@ -31,7 +33,7 @@ quasi-compact étale `X`-scheme `W` lifts, after refining `W` by finitely many a
 
 universe u
 
-open CategoryTheory Limits Opposite
+open CategoryTheory Limits Opposite MonoidalCategory
 
 namespace AlgebraicGeometry.Etale
 
@@ -177,5 +179,40 @@ theorem liftsAlongEpi_of_exists_epi_sigma_freeYoneda
   · ext j
     simp only [Sigma.ι_desc_assoc, Category.assoc, pullback.condition]
     rw [← Category.assoc, he, Category.assoc]
+
+omit [CommRing Λ] in
+/-- A colimit of flat objects of shape `J`, for colimits of shape `J` exact, is flat: tensoring
+with it is the colimit of the left exact functors of tensoring with the terms. -/
+lemma _root_.CategoryTheory.ObjectProperty.flat_colimit {A : Type*} [Category* A] [Abelian A]
+    [MonoidalCategory A] [BraidedCategory A] [MonoidalClosed A] {J : Type*} [Category* J]
+    [HasColimitsOfShape J A] [HasExactColimitsOfShape J A] (F : J ⥤ A)
+    (hF : ∀ j, ObjectProperty.flat (F.obj j)) : ObjectProperty.flat (colimit F) := by
+  have (j : J) : PreservesFiniteLimits (tensorLeft (F.obj j)) :=
+    (ObjectProperty.flat_iff_preservesFiniteLimits (F.obj j)).1 (hF j)
+  rw [ObjectProperty.flat_iff_preservesFiniteLimits]
+  have : PreservesColimit F (MonoidalCategory.curriedTensor A) :=
+    MonoidalCategory.Limits.preservesCoLimit_curriedTensor _
+  have e : tensorLeft (colimit F) ≅ (F ⋙ MonoidalCategory.curriedTensor A).flip ⋙ colim :=
+    preservesColimitIso (MonoidalCategory.curriedTensor A) F ≪≫ colimitIsoFlipCompColim _
+  have : PreservesFiniteLimits ((F ⋙ MonoidalCategory.curriedTensor A).flip) :=
+    preservesFiniteLimits_of_evaluation _ (fun j ↦
+      inferInstanceAs (PreservesFiniteLimits (tensorLeft (F.obj j))))
+  exact preservesFiniteLimits_of_natIso e.symm
+
+/-- **Free sheaves are flat.** The free étale sheaf of `Λ`-modules `Λ[W]` on an étale
+`X`-scheme `W` is flat: its stalks are filtered colimits of free `Λ`-modules. -/
+theorem flat_freeYoneda (W : X.Etale) :
+    ObjectProperty.flat (Sheaf.freeYoneda X.smallEtaleTopology W (ModuleCat.of Λ Λ)) := by
+  rw [flat_iff_forall_flat_sheafFiber_obj]
+  intro Ω _ _ s
+  let Φ := (Scheme.pointSmallEtale s).ulift.{u + 1}
+  refine ObjectProperty.prop_of_iso _
+    ((Φ.presheafToSheafCompSheafFiberIso _).app (Presheaf.freeYoneda W (ModuleCat.of Λ Λ))).symm
+    (ObjectProperty.flat_colimit _ fun j ↦ ?_)
+  have hunit : ObjectProperty.flat (ModuleCat.of Λ Λ) :=
+    ObjectProperty.flat_of_tensorIso (λ_ (𝟙_ (ModuleCat.{u + 1} Λ)))
+  let f (_ : ULift.{u + 1} ((yoneda.obj W).obj (op j.unop.1))) := ModuleCat.of Λ Λ
+  exact ObjectProperty.prop_of_iso _ (Sigma.whiskerEquiv Equiv.ulift (fun _ ↦ Iso.refl _))
+    (ObjectProperty.flat_coproduct f fun _ ↦ hunit)
 
 end AlgebraicGeometry.Etale
