@@ -17,7 +17,7 @@
     "lem-weil-pbc-module-sheaf-colimit-constructible"
    ]
   },
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "Maps of finitely presented algebras over a directed colimit of rings come from a stage",
@@ -30,9 +30,60 @@
   "def-weil-pbc-category-colimit",
   "def-weil-pbc-finitely-presented-algebra"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "*Step 1 (the base-changed target is a colimit).* Restrict the system to the directed upper set $\\Lambda_{\\ge\\lambda}=\\{\\mu:\\mu\\ge\\lambda\\}$, which is cofinal: for any $\\nu$ choose a common upper bound of $\\nu$ and $\\lambda$. Write $B_\\mu=A'\\otimes_{R_\\lambda}R_\\mu$ and $B=A'\\otimes_{R_\\lambda}R$. We verify that $B$, with the maps $B_\\mu\\to B$, is a colimit in commutative $R_\\lambda$-algebras [def-weil-pbc-category-colimit]. For any commutative $R_\\lambda$-algebra $T$, an $R_\\lambda$-algebra map $B_\\mu\\to T$ is, by the tensor-product pushout property [lem-weil-pbc-algebra-tensor-pushout-universal-property], exactly a pair of $R_\\lambda$-algebra maps $A'\\to T$ and $R_\\mu\\to T$. A compatible family over $\\mu\\ge\\lambda$ has one common map $A'\\to T$ and a compatible family $R_\\mu\\to T$; the colimit property of $R$ yields exactly one $R_\\lambda$-algebra map $R\\to T$ for the latter. Such pairs correspond by the same pushout property to maps $B\\to T$, and the correspondence respects the coprojections. Thus $B=\\varinjlim_{\\mu\\ge\\lambda}B_\\mu$ in $R_\\lambda$-algebras and, by [lem-weil-pbc-filtered-colimit-algebras-elementwise](1), also in commutative rings. The upper-set colimit of the $R_\\mu$ is $R$: a cocone on the upper set extends to the whole directed system by choosing a common upper bound with $\\lambda$, and independence of that choice follows at a further common upper bound. (This is the base-change colimit used in the proof of Stacks 05N8(3).)",
+   "uses": [
+    "def-weil-pbc-category-colimit",
+    "lem-weil-pbc-algebra-tensor-pushout-universal-property",
+    "lem-weil-pbc-filtered-colimit-algebras-elementwise"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Lemma Tag 05N8 (lemma-algebra-map-property-in-colimit, lines 32149-32166), proof of (3), using the colimit of base changes; Lemma Tag 05N9 (lemma-colimit-category-fp-algebras), proof line 32215"
+   }
+  },
+  {
+   "text": "*Step 2 (a map descends: clause (2)).* Choose a presentation $A\\cong R_\\lambda[x_1,\\dots,x_n]/(f_1,\\dots,f_m)$ from [def-weil-pbc-finitely-presented-algebra]. Restrict $u:A_R\\to A'_R=B$ to $A\\to A_R$, $a\\mapsto a\\otimes1$; this is an $R_\\lambda$-algebra map $g:A\\to B$. Apply [lem-weil-pbc-finite-presentation-algebra-factors-filtered-colimit] to $R_\\lambda$, the presentation of $A$, and the colimit $(B_\\mu)_{\\mu\\ge\\lambda}$ from step 1. It gives $\\mu\\ge\\lambda$ and an $R_\\lambda$-algebra map $g_\\mu:A\\to B_\\mu$ whose composite to $B$ is $g$. Since $B_\\mu$ is an $R_\\mu$-algebra, the base-change adjunction [lem-weil-pbc-algebra-tensor-base-change-universal-property] extends $g_\\mu$ uniquely to an $R_\\mu$-algebra map $u_\\mu:A\\otimes_{R_\\lambda}R_\\mu\\to B_\\mu$ with $u_\\mu(a\\otimes r)=g_\\mu(a)(1\\otimes r)$. Its extension to $R$ agrees with $u$ on $a\\otimes1$ by construction and on $1\\otimes r$ since both are $R$-algebra maps. Pure tensors are products of these elements, so $u_\\mu\\otimes1_R=u$.",
+   "uses": [
+    "def-weil-pbc-finitely-presented-algebra",
+    "lem-weil-pbc-finite-presentation-algebra-factors-filtered-colimit",
+    "lem-weil-pbc-algebra-tensor-base-change-universal-property"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Lemma Tag 05N9 (lemma-colimit-category-fp-algebras, lines 32187-32193), proof line 32215 via Lemma Tag 05N8 (lemma-algebra-map-property-in-colimit), part (3), lines 32119-32123 and 32149-32166"
+   }
+  },
+  {
+   "text": "*Step 3 (equality descends: clause (3)).* Choose generators $x_1,\\dots,x_n$ of $A$ as an $R_\\lambda$-algebra from its finite presentation [def-weil-pbc-finitely-presented-algebra], and put $d_j=v(x_j)-w(x_j)\\in A'$. The hypothesis $v\\otimes1_R=w\\otimes1_R$ gives $1\\otimes d_j=0$ in $A'\\otimes_{R_\\lambda}R$ for each $j$. Apply [lem-weil-pbc-directed-colimit-base-change-elementwise](2) with initial index $\\lambda$ and $M_0=A'$ as an $R_\\lambda$-module: for each $j$ there is $\\mu_j\\ge\\lambda$ where $1\\otimes d_j=0$ in $A'\\otimes_{R_\\lambda}R_{\\mu_j}$. Directedness gives a common $\\mu\\ge\\mu_1,\\dots,\\mu_n$; the same equalities hold there by the transition maps. The maps $v\\otimes1_{R_\\mu}$ and $w\\otimes1_{R_\\mu}$ agree on $x_j\\otimes1$, and both are $R_\\mu$-algebra maps, hence agree on $1\\otimes r$ for $r\\in R_\\mu$. These elements generate $A\\otimes_{R_\\lambda}R_\\mu$ as a ring, so the two maps agree. For $n=0$ they agree on the coefficient ring already, and one may take $\\mu=\\lambda$.",
+   "uses": [
+    "def-weil-pbc-finitely-presented-algebra",
+    "lem-weil-pbc-directed-colimit-base-change-elementwise"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Lemma Tag 05N9 (lemma-colimit-category-fp-algebras, lines 32194-32200), proof line 32215 via Lemma Tag 05N8 (lemma-algebra-map-property-in-colimit), part (1), lines 32108-32112 and 32129-32136"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-category-colimit",
+  "def-weil-pbc-finitely-presented-algebra",
+  "lem-weil-pbc-algebra-tensor-pushout-universal-property",
+  "lem-weil-pbc-filtered-colimit-algebras-elementwise",
+  "lem-weil-pbc-finite-presentation-algebra-factors-filtered-colimit",
+  "lem-weil-pbc-algebra-tensor-base-change-universal-property",
+  "lem-weil-pbc-directed-colimit-base-change-elementwise"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Lemma Tag 05N9 (lemma-colimit-category-fp-algebras), parts (2)-(3), proof line 32215 referring to Lemma Tag 05N8 (lemma-algebra-map-property-in-colimit), parts (3) and (1); the colimit identification is written out from the tensor pushout and colimit universal properties"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -70,7 +121,7 @@
   "line": 81,
   "how": "(2) from line 81 and (3) from line 45, applied to A -> colim_mu A'_mu = A'_R after the base change adjunction Hom_R(A_R, A'_R) = Hom_{R_lambda}(A, A'_R); more than one line"
  },
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "worker",
@@ -90,5 +141,19 @@
   }
  },
  "chapter": "sec-proper-base-change",
- "unit": "sk-thm-p1"
+ "unit": "sk-thm-p1",
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "lem-weil-pbc-colimit-category-fp-algebras",
+  "worker": "stage1",
+  "summary": "Split Stacks 05N9(2)-(3) in three steps along its reference to 05N8: first identify the base-changed target as a filtered colimit using the tensor-product pushout; then descend a map by the existing finite-presentation factorization Mathlib leaf and the base-change adjunction; finally descend equality on a finite generating set by the existing base-change elementwise node. No new nodes: all needed public statements already exist.",
+  "blueprint": "Indirect tool for lemma-weil-pbc-h1-constructible-representation step 2 (filtered colimit of constructible sheaves via Stacks 03SA, as cited in 0A5H proof paragraph 2), through the recorded via chain. Steps 1-3 supply the filtered-algebra colimit map descent and eventual equality used in that chain; no blueprint node states these clauses of Stacks 05N9."
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "group": "F1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed by the lead of F1; spot-checked by L: 05N9 (2),(3): base-changed target as a colimit over the cofinal upper set, maps from a finitely presented algebra descend (05N8), equality descends on generators"
+ }
 }
