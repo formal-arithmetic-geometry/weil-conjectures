@@ -1,0 +1,63 @@
+{
+ "id": "def-weil-pbc-projective-module",
+ "kind": "definition",
+ "title": "Projective modules",
+ "statement": "Let $R$ be a ring and $P$ an $R$-module. $P$ is *projective* if the functor $\\operatorname{Hom}_R(P,-)$ from $R$-modules to $R$-modules is exact; equivalently (Stacks Lemma 05CF, which Mathlib proves as `Module.Projective.iff_split`) $P$ is a direct summand of a free $R$-module $F=\\bigoplus_{i\\in I}R$, i.e. there are $R$-linear maps $i:P\\to F$ and $s:F\\to P$ with $s\\circ i=\\mathrm{id}_P$; equivalently every $R$-linear map from $P$ lifts along every surjection of $R$-modules.",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Algebra, Definition Tag 05CE (definition-projective, line 18781) and Lemma Tag 05CF (lemma-characterize-projective, line 18795: projective <=> direct summand of a free module <=> Ext^1(P,-)=0)"
+ },
+ "stmt_deps": [],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "projective module is a direct summand of a free module",
+   "results": "Module.Projective (Mathlib.Algebra.Module.Projective), Module.Projective.iff_split, Module.Projective.iff_split', ModuleCat.projective_of_categoryTheory_projective (Mathlib.Algebra.Category.ModuleCat.Projective), Module.Projective.of_free, Module.Invertible.instProjective",
+   "date": "2026-10-10",
+   "verdict": "match: Module.Projective"
+  },
+  {
+   "tool": "loogle",
+   "query": "Module.Projective; Module.Projective.iff_split",
+   "results": "Module.Projective (R) [Semiring R] (P) [AddCommMonoid P] [Module R P] : Prop; Module.Projective.of_free, .of_basis, instProjectiveULift, of_ulift, instProjectiveShrink; Module.Projective.iff_split : Module.Projective R P <-> exists free M, i : P ->l M, s : M ->l P, s comp i = id (Mathlib.Algebra.Module.Projective)",
+   "date": "2026-10-10",
+   "verdict": "match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -n 'class Module.Projective\\|theorem projective_lifting_property\\|theorem Projective.iff_split' /home/ubuntu/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/Algebra/Module/Projective.lean; grep -n 'IsProjective.iff_projective' /home/ubuntu/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/Algebra/Category/ModuleCat/Projective.lean",
+   "results": "Algebra/Module/Projective.lean:71 class Module.Projective (out: the surjection linearCombination : (P ->0 R) -> P has an R-linear section, i.e. P is a direct summand of the free module on P); :91 projective_lifting_property (lifts along surjections); :236 Projective.iff_split (direct summand of a free module); ModuleCat/Projective.lean:41 IsProjective.iff_projective (agrees with CategoryTheory.Projective in ModuleCat R)",
+   "date": "2026-10-10",
+   "verdict": "match (read the source: Mathlib's definition is the split-surjection-from-free form; Hom-exactness and direct-summand forms are the lemmas named; the node's 'equivalently' clauses are exactly these Mathlib lemmas, and Stacks 05CF proves them)"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "Module.Projective",
+  "file": "Mathlib/Algebra/Module/Projective.lean",
+  "how": "exact: `Module.Projective R P` (line 71: the canonical surjection from the free module R^(P) onto P splits); direct-summand-of-free form is `Module.Projective.iff_split` (line 236), lifting along surjections `Module.projective_lifting_property` (line 91), and in the abelian category `ModuleCat R` it is `CategoryTheory.Projective` by `IsProjective.iff_projective` (Mathlib/Algebra/Category/ModuleCat/Projective.lean:41)"
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "def-weil-pbc-finite-global-dimension",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1"
+}

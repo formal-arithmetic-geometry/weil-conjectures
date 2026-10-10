@@ -2,12 +2,15 @@
  "id": "def-weil-pbc-finite-global-dimension",
  "kind": "definition",
  "title": "Projective dimension of a module and finite global dimension of a ring",
- "statement": "Let $R$ be a commutative ring and $M$ an $R$-module. A *projective resolution of $M$ of length $\\le n$* ($n\\ge0$ an integer) is an exact sequence of $R$-modules $0\\to P_n\\to P_{n-1}\\to\\dots\\to P_0\\to M\\to0$ with every $P_i$ a projective $R$-module (a direct summand of a free $R$-module). $M$ has *finite projective dimension* if it has a projective resolution of length $\\le n$ for some $n$; the minimal such $n$ is the *projective dimension* $\\operatorname{pd}_R M$. The ring $R$ has *finite global dimension* if there is an integer $n\\ge0$ such that every $R$-module (not only every finite one) has a projective resolution of length $\\le n$; the minimal such $n$ is the *global dimension* $\\operatorname{gl.dim}R$, and $R$ *has global dimension $\\le n$* if every $R$-module has a projective resolution of length $\\le n$.",
+ "statement": "Let $R$ be a commutative ring and $M$ an $R$-module. A *projective resolution of $M$ of length $\\le n$* ($n\\ge0$ an integer) is an exact sequence of $R$-modules $0\\to P_n\\to P_{n-1}\\to\\dots\\to P_0\\to M\\to0$ with every $P_i$ a projective $R$-module (a direct summand of a free $R$-module) [def-weil-pbc-projective-module], exactness as in [def-weil-pbc-exact-sequence]. $M$ has *finite projective dimension* if it has a projective resolution of length $\\le n$ for some $n$; the minimal such $n$ is the *projective dimension* $\\operatorname{pd}_R M$. The ring $R$ has *finite global dimension* if there is an integer $n\\ge0$ such that every $R$-module (not only every finite one) has a projective resolution of length $\\le n$; the minimal such $n$ is the *global dimension* $\\operatorname{gl.dim}R$, and $R$ *has global dimension $\\le n$* if every $R$-module has a projective resolution of length $\\le n$. (That the minima exist, and that $\\operatorname{pd}_RM\\le n$, resp. $\\operatorname{gl.dim}R\\le n$, holds exactly when $M$ has, resp. every $R$-module has, a projective resolution of length $\\le n$, is the statement lem-weil-pbc-projective-dimension-well-defined, recorded in pointers; it is not part of the definition.)",
  "source": {
   "document": "literature/stacks-project/algebra.tex",
   "place": "Algebra, Definition Tag 00O4 (definition-finite-proj-dim, line 26568: finite projective dimension, projective dimension) and Definition Tag 00O6 (definition-finite-gl-dim, line 26785: finite global dimension, global dimension)"
  },
- "stmt_deps": [],
+ "stmt_deps": [
+  "def-weil-pbc-exact-sequence",
+  "def-weil-pbc-projective-module"
+ ],
  "proof": [],
  "proof_deps": [],
  "proof_origin": null,
@@ -39,10 +42,31 @@
    "results": "no hit for global dimension, Auslander-Buchsbaum or Serre's regularity theorem; projective dimension files: CategoryTheory/Abelian/Projective/Dimension.lean (HasProjectiveDimensionLT/LE via Ext vanishing, projectiveDimension : WithBot ℕ∞), Algebra/Category/ModuleCat/ProjectiveDimension.lean (transport along (semi)linear equivalences), RingTheory/LocalProperties/ProjectiveDimension.lean (localization of modules), RingTheory/Regular/ProjectiveDimension.lean (quotients by regular sequences)",
    "date": "2026-10-10",
    "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "Module.Projective; Module.Projective.iff_split",
+   "results": "Module.Projective (Mathlib.Algebra.Module.Projective) and its instances; Module.Projective.iff_split: projective <-> direct summand of a free module",
+   "date": "2026-10-10",
+   "verdict": "match for the notion 'projective module' only (new leaf def-weil-pbc-projective-module); no resolution length or global dimension"
+  },
+  {
+   "tool": "leansearch",
+   "query": "projective resolution of finite length of a module; module has a projective resolution of length at most n",
+   "results": "CategoryTheory.projective_iff_hasProjectiveDimensionLT_one, CategoryTheory.projectiveDimension_le_iff, projectiveDimension_ne_top_iff, HasProjectiveDimensionLE, HasProjectiveDimensionLT (Mathlib.CategoryTheory.Abelian.Projective.Dimension), ModuleCat.projectiveResolution (Mathlib.Algebra.Category.ModuleCat.LeftResolution: the unbounded functorial resolution)",
+   "date": "2026-10-10",
+   "verdict": "no match for the resolution-length definition"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rn 'globalDimension\\|HasProjectiveDimensionLE\\|projectiveDimension' /home/ubuntu/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/CategoryTheory/Abelian/Projective/*.lean /home/ubuntu/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/Algebra/Homology/*.lean; grep -rln 'GlobalDimension\\|globalDimension\\|global dimension' /home/ubuntu/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib; grep -n '^lemma\\|^abbrev\\|^class\\|^noncomputable def' /home/ubuntu/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/CategoryTheory/Abelian/Projective/Dimension.lean",
+   "results": "35 hits, all in CategoryTheory/Abelian/Projective/Dimension.lean: class HasProjectiveDimensionLT X n (line 45: Ext^i(X,Y)=0 for all i>=n, all Y), abbrev HasProjectiveDimensionLE X n := HasProjectiveDimensionLT X (n+1) (line 52), projectiveDimension X : WithBot ℕ∞ (line 265, sInf; = ⊥ for X = 0), projectiveDimension_le_iff (296), hasProjectiveDimensionLT_X₃_iff (223: dimension shifting along 0->X1->X2->X3->0 with X2 projective); nothing in Algebra/Homology/*.lean; no file mentions global dimension",
+   "date": "2026-10-10",
+   "verdict": "no match. HasProjectiveDimensionLE (for M in ModuleCat R) is defined by Ext vanishing, not by the length of a projective resolution; that the two agree is Stacks Lemma 065R (lemma-projective-dimension-ext, algebra.tex line 26725), a theorem, so the projective-dimension clause is not a Mathlib leaf (convention of 2026-10-09: agreement that is a theorem stays split). Global dimension is absent from Mathlib. Also differs at M = 0: Mathlib's projectiveDimension 0 = ⊥, the node's pd 0 = 0"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "worker",
@@ -62,5 +86,25 @@
   }
  },
  "chapter": "sec-proper-base-change",
- "unit": "sk-thm-p1"
+ "unit": "sk-thm-p1",
+ "pointers": [
+  {
+   "to": "lem-weil-pbc-projective-dimension-well-defined",
+   "was": [],
+   "reason": "well-definedness of the data, not a dependency: the minima 'pd_R M' and 'gl.dim R' exist (well-ordering of N) and 'length <= n' is upward closed by padding with zeros, so pd_R M <= n, resp. gl.dim R <= n, iff a resolution of length <= n exists, resp. R has global dimension <= n (claim moved out of the definition, stages/1-dag.md §2)",
+   "date": "2026-10-10"
+  }
+ ],
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "def-weil-pbc-finite-global-dimension",
+  "worker": "stage1",
+  "summary": "Checked against Stacks Algebra Definition 00O4 (definition-finite-proj-dim, algebra.tex 26569) and Definition 00O6 (definition-finite-gl-dim, 26785); tags verified in tags/tags (00O4, 00O6, 065R, 05CE, 05CF). The definition agrees with Stacks (Stacks: 'finite length resolution by projective modules', 'minimal length'; 'resolution of length at most n', 'minimal such n'); the node additionally names 'has global dimension <= n', the form its citers use. stmt_deps were empty: added def-weil-pbc-exact-sequence (existing Mathlib leaf; R-modules form an abelian category) and the new Mathlib leaf def-weil-pbc-projective-module (Stacks 05CE/05CF, Module.Projective). The only claims inside the definition are that the minima exist and (implicitly, for the notation 'global dimension <= n' to match gl.dim R <= n) that 'resolution of length <= n' is upward closed by padding with zeros; both moved to the new statement node lem-weil-pbc-projective-dimension-well-defined (unsplit, flagged unreachable), recorded in pointers, with a parenthetical in the statement; no proof steps in the definition. Mathlib: Module.Projective matches 'projective'; CategoryTheory.HasProjectiveDimensionLE/projectiveDimension (Abelian/Projective/Dimension.lean) are defined by Ext vanishing, and agreement with resolution length is Stacks 065R, a theorem, so no leaf; global dimension absent (LeanSearch, LeanFinder, Loogle, local_search, grep recorded). The four citers (lem-weil-pbc-regular-local-finite-gl-dim: 'global dimension at most d', every module has a resolution of length <= d; lem-weil-pbc-localization-finite-gl-dim: resolutions of length <= n, global dimension <= n, and gl.dim S^-1 R <= gl.dim R; lem-weil-pbc-finite-gl-dim-regular-local and lem-weil-pbc-regular-local-localization: finite global dimension, global dimension <= d) use the definition as stated; the inequality of gl.dim in lem-weil-pbc-localization-finite-gl-dim needs part (3) of the new lemma."
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "result": "accepted",
+  "note": "Definition node (Stacks 00O4/00O6): notions named (exact sequences leaf, new projective-module leaf Module.Projective Projective.lean:71 verified by L); the minima and the padding claim moved to the new unsplit lemma projective-dimension-well-defined (pointer; flagged unreachable until lem-weil-pbc-localization-finite-gl-dim cites it at its split). Not a Mathlib leaf: Mathlib's projective dimension is Ext-defined (Stacks 065R is the bridge)."
+ }
 }
