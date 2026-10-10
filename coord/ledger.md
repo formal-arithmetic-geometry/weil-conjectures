@@ -1597,3 +1597,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 14:14 L: merged deliver/M1/lem-weil-pbc-fpqc-descend-universally-closed (reviewer FIX; first push; new nodes: 3)
 - 14:14 L: returned deliver/E1/lem-sc-very-ample-separation-criterion (reviewer RETURN: 1. E1/E7: node lem-sc-point-tangent-separation-closed-immersion, statement: false as written when X has exactly one clos)
 - 14:15 L: accepted lem-galois-flc-set-stalk-finite: 5 steps, no new nodes
+- 14:15 L: Stacks 0E8S gap (sections must generate L) recorded in HUMAN.md (reviewer of E1 very-ample separation criterion, returned)

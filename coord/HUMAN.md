@@ -117,3 +117,7 @@ In `local/sorry_map_slopmaster2_71d63dcf.jsonl.gz` the transitive flag `ts` is f
 ## Blueprint proof error: lem-pc-ample-positive-degree (2026-10-10 14:13 UTC)
 
 The blueprint's proof of "deg > 0 implies ample" for a smooth projective curve $X$ over a field $k$ claims that $X_{\bar k}$ is connected and integral. False without $H^0(X,\mathcal O_X)=k$: $X=\mathbf P^1_{k'}$ viewed over $k$ with $k'/k$ separable of degree 2 becomes two disjoint lines over $\bar k$. The statement itself (Stacks 0B5X) is true; the split proves it in general through the components of $X_{\bar k}$ (new node lem-pc-base-change-closure-components) and very ampleness on a finite clopen decomposition. The blueprint's external tag 01IQ was wrong (0B5X). The Lean isAmple_iff_degree_pos assumes $H^0=k$ (GlobalSectionsBijective) and proper rather than projective.
+
+## Literature gap: Stacks 0E8S (2026-10-10 14:16 UTC)
+
+Varieties, Lemma 0E8S (sections separating points and tangent vectors give a closed immersion) is stated without the hypothesis that the sections generate $\mathcal L$; for $X=\operatorname{Spec}k$ and $V=0$ the dimension conditions hold vacuously and the conclusion fails. Found by the reviewer of E1's delivery of lem-sc-very-ample-separation-criterion (returned with the repair: add "V generates L", which the proof's first step supplies). Any node citing 0E8S must carry that hypothesis.
