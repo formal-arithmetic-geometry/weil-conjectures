@@ -885,3 +885,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 04:55 L: reviewed lem-weil-pbc-sets-inverse-image-composition (5 steps, no new node): accepted; widened def-weil-pbc-topological-inverse-image to sheaves of sets (13 citers use it so; Mathlib declarations are generic in C).
 - 04:56 L: reviewed lem-weil-pbc-sheaf-isomorphism-local-open-cover (5 steps, no new node; source 00WY -> 04TN): accepted. Stage-3 note: lem-weil-pbc-sheaf-hom-finite-presentation-colimit step 1 quotes the wrong tag 00WY.
 - 04:57 L: reviewed lem-weil-pbc-sets-inverse-image-extension-by-empty-constant (5 steps, no new node): accepted.
+- 04:58 L: reviewed lem-weil-pbc-sheaves-injective-directed-colimit-qc-sections (5 steps, no new node): accepted.

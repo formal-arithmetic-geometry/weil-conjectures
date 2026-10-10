@@ -2,7 +2,7 @@
  "id": "lem-weil-pbc-sheaves-injective-directed-colimit-qc-sections",
  "kind": "statement",
  "title": "Sections over a quasi-compact open of a directed colimit of sheaves with injective transition maps",
- "statement": "Let $X$ be a topological space (sheaves of sets on the site of open subsets of $X$ with open coverings [def-weil-pbc-sites-and-cohomology]), $I$ a directed set (nonempty, every two elements have a common upper bound), and $(\\mathcal F_i,\\varphi_{i'i}:\\mathcal F_i\\to\\mathcal F_{i'})_{i\\le i'}$ a system of sheaves of sets on $X$ over $I$ ($\\varphi_{ii}=\\mathrm{id}$, $\\varphi_{i''i'}\\varphi_{i'i}=\\varphi_{i''i}$) whose transition maps are injective on sections: $\\varphi_{i'i,W}:\\mathcal F_i(W)\\to\\mathcal F_{i'}(W)$ is injective for all $i\\le i'$ and all opens $W\\subseteq X$. Let $(\\mathcal F,(c_i:\\mathcal F_i\\to\\mathcal F)_i)$ be a colimit of the system in the category of sheaves of sets on $X$ [def-weil-pbc-category-colimit]. Then: (1) for every open $W\\subseteq X$ and every $i$ the map $c_{i,W}:\\mathcal F_i(W)\\to\\mathcal F(W)$ is injective; (2) if $U\\subseteq X$ is a quasi-compact open, then every $t\\in\\mathcal F(U)$ is of the form $c_{i,U}(s)$ for some $i\\in I$ and $s\\in\\mathcal F_i(U)$; that is, the canonical map $\\varinjlim_i\\mathcal F_i(U)\\to\\mathcal F(U)$ is bijective.",
+ "statement": "Let $X$ be a topological space (sheaves of sets on the site of open subsets of $X$ with open coverings [def-weil-pbc-sites-and-cohomology]), $I$ a directed set (nonempty, every two elements have a common upper bound), and $(\\mathcal F_i,\\varphi_{i'i}:\\mathcal F_i\\to\\mathcal F_{i'})_{i\\le i'}$ a system of sheaves of sets on $X$ over $I$ ($\\varphi_{ii}=\\mathrm{id}$, $\\varphi_{i''i'}\\varphi_{i'i}=\\varphi_{i''i}$) whose transition maps are injective on sections: $\\varphi_{i'i,W}:\\mathcal F_i(W)\\to\\mathcal F_{i'}(W)$ is injective for all $i\\le i'$ and all opens $W\\subseteq X$. Let $(\\mathcal F,(c_i:\\mathcal F_i\\to\\mathcal F)_i)$ be a colimit of the system in the category of sheaves of sets on $X$ [def-weil-pbc-category-colimit]. Then: (1) for every open $W\\subseteq X$ and every $i$ the map $c_{i,W}:\\mathcal F_i(W)\\to\\mathcal F(W)$ is injective; (2) if $U\\subseteq X$ is a quasi-compact open (every covering of $U$ by open subsets has a finite subcovering), then every $t\\in\\mathcal F(U)$ is of the form $c_{i,U}(s)$ for some $i\\in I$ and $s\\in\\mathcal F_i(U)$; that is, the canonical map $\\varinjlim_i\\mathcal F_i(U)\\to\\mathcal F(U)$ is bijective.",
  "source": {
   "document": "literature/stacks-project/sheaves.tex",
   "place": "Sheaves, Lemma Tag 009F (lemma-directed-colimits-sections), parts (1) and (3) with their proofs"
@@ -11,9 +11,81 @@
   "def-weil-pbc-sites-and-cohomology",
   "def-weil-pbc-category-colimit"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "*Step 1 (the colimit is the sheafified presheaf colimit).* Regard $I$ as a category (one arrow $i\\to i'$ when $i\\le i'$); it is filtered since $I$ is nonempty and directed [def-weil-pbc-category-colimit], and the system is a functor $i\\mapsto\\mathcal F_i$ to sheaves of sets on the site $\\operatorname{Opens}(X)$ [def-weil-pbc-sites-and-cohomology]. Let $\\mathcal P(V)=\\varinjlim_i\\mathcal F_i(V)$ with coprojections $\\iota_{i,V}$ and restriction maps induced by those of the $\\mathcal F_i$ (so $\\iota_{i,V}(s)|_{V'}=\\iota_{i,V'}(s|_{V'})$ and $\\iota_{i',V}\\circ\\varphi_{i'i,V}=\\iota_{i,V}$), and let $\\eta:\\mathcal P\\to\\mathcal P^\\#$ be its sheafification [def-weil-pbc-sheafification]. By [lem-weil-pbc-sheaves-colimit-sheafification], $(\\mathcal P^\\#,(\\eta\\circ\\iota_i)_i)$ is a colimit of the system in sheaves of sets. By uniqueness of colimits [def-weil-pbc-category-colimit] there is an isomorphism of sheaves $\\theta:\\mathcal P^\\#\\to\\mathcal F$ with $\\theta\\circ\\eta\\circ\\iota_i=c_i$ for all $i$; thus $c_{i,V}=\\theta_V\\circ\\eta_V\\circ\\iota_{i,V}$ for every open $V$, with $\\theta_V$ bijective. Let $\\Psi_V:\\mathcal P(V)=\\varinjlim_i\\mathcal F_i(V)\\to\\mathcal F(V)$ be the canonical map, i.e. the map with $\\Psi_V\\circ\\iota_{i,V}=c_{i,V}$ for all $i$; then $\\Psi_V=\\theta_V\\circ\\eta_V$ by the uniqueness in the universal property of the colimit of sets.",
+   "uses": [
+    "def-weil-pbc-category-colimit",
+    "def-weil-pbc-sites-and-cohomology",
+    "def-weil-pbc-sheafification",
+    "lem-weil-pbc-sheaves-colimit-sheafification"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sheaves.tex",
+    "place": "Sheaves, Lemma Tag 009F (lemma-directed-colimits-sections), proof of part (1); Section Tag 009E (section-limits-sheaves) item (3)"
+   }
+  },
+  {
+   "text": "*Step 2 (each $\\iota_{i,V}$ is injective and $\\mathcal P$ is separated).* Let $V$ be open. If $s,s'\\in\\mathcal F_i(V)$ and $\\iota_{i,V}(s)=\\iota_{i,V}(s')$, then by [lem-weil-pbc-filtered-colimit-sets-elementwise] (3) there is $i'\\ge i$ with $\\varphi_{i'i,V}(s)=\\varphi_{i'i,V}(s')$, and $\\varphi_{i'i,V}$ is injective by hypothesis, so $s=s'$: $\\iota_{i,V}$ is injective. Now let $x,y\\in\\mathcal P(V)$ and let $V=\\bigcup_{k\\in K}W_k$ be an open covering with $x|_{W_k}=y|_{W_k}$ for all $k$. By [lem-weil-pbc-filtered-colimit-sets-elementwise] (1) $x=\\iota_{i_1,V}(s_1)$, $y=\\iota_{i_2,V}(s_2)$; choosing $i\\ge i_1,i_2$ ($I$ directed) and replacing $s_1,s_2$ by $\\varphi_{ii_1,V}(s_1),\\varphi_{ii_2,V}(s_2)$ we get $x=\\iota_{i,V}(s)$, $y=\\iota_{i,V}(s')$ with $s,s'\\in\\mathcal F_i(V)$. Then $\\iota_{i,W_k}(s|_{W_k})=x|_{W_k}=y|_{W_k}=\\iota_{i,W_k}(s'|_{W_k})$, so $s|_{W_k}=s'|_{W_k}$ by injectivity of $\\iota_{i,W_k}$, for every $k$. Since $\\mathcal F_i$ is a sheaf on $\\operatorname{Opens}(X)$ [def-weil-pbc-sites-and-cohomology] and $\\{W_k\\to V\\}_k$ is a covering, $s=s'$, hence $x=y$. So two sections of $\\mathcal P$ that agree on the members of an open covering are equal ($\\mathcal P$ is separated; equivalently, in the sense of Stacks, $\\mathcal P(V)\\to\\prod_{x\\in V}\\mathcal P_x$ is injective, since two sections with the same germs at all points agree on an open covering). No finiteness is used here.",
+   "uses": [
+    "lem-weil-pbc-filtered-colimit-sets-elementwise",
+    "def-weil-pbc-sites-and-cohomology"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sheaves.tex",
+    "place": "Sheaves, Lemma Tag 009F (lemma-directed-colimits-sections), proof of part (1): the presheaf colimit is separated (Definition Tag 007A, definition-separated) and a separated presheaf injects into its sheafification (Lemma Tag 0082, lemma-separated-presheaf-into-sheaf)"
+   }
+  },
+  {
+   "text": "*Step 3 (clause (1)).* Let $V$ be open and $p,q\\in\\mathcal P(V)$ with $\\eta_V(p)=\\eta_V(q)$. By [lem-weil-pbc-site-sheafification-sections-local] (last clause, for the site $\\operatorname{Opens}(X)$, whose coverings are the open coverings) there is an open covering $V=\\bigcup_kW_k$ with $p|_{W_k}=q|_{W_k}$ for all $k$, so $p=q$ by Step 2: $\\eta_V$ is injective. Hence $c_{i,V}=\\theta_V\\circ\\eta_V\\circ\\iota_{i,V}$ (Step 1) is a composite of injective maps ($\\iota_{i,V}$ by Step 2, $\\theta_V$ bijective), so $c_{i,V}$ is injective for every open $V$ and every $i$; this is clause (1). In the same way $\\Psi_V=\\theta_V\\circ\\eta_V$ is injective for every open $V$ (Stacks 009F (1)).",
+   "uses": [
+    "lem-weil-pbc-site-sheafification-sections-local"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sheaves.tex",
+    "place": "Sheaves, Lemma Tag 009F (lemma-directed-colimits-sections), proof of part (1): the presheaf colimit is separated (Definition Tag 007A, definition-separated) and a separated presheaf injects into its sheafification (Lemma Tag 0082, lemma-separated-presheaf-into-sheaf)"
+   }
+  },
+  {
+   "text": "*Step 4 (local lifts of a section of $\\mathcal F$).* Let $U$ be open and $t\\in\\mathcal F(U)$, and put $u=\\theta_U^{-1}(t)\\in\\mathcal P^\\#(U)$ (Step 1). By [lem-weil-pbc-site-sheafification-sections-local] (first clause) there are an open covering $U=\\bigcup_{k\\in K}W_k$ and $p_k\\in\\mathcal P(W_k)$ with $u|_{W_k}=\\eta_{W_k}(p_k)$; by [lem-weil-pbc-filtered-colimit-sets-elementwise] (1), $p_k=\\iota_{i_k,W_k}(s_k)$ with $i_k\\in I$ and $s_k\\in\\mathcal F_{i_k}(W_k)$. As $\\theta$ is a morphism of sheaves, $t|_{W_k}=\\theta_{W_k}(u|_{W_k})=\\theta_{W_k}\\eta_{W_k}\\iota_{i_k,W_k}(s_k)=c_{i_k,W_k}(s_k)$ (Step 1).",
+   "uses": [
+    "lem-weil-pbc-site-sheafification-sections-local",
+    "lem-weil-pbc-filtered-colimit-sets-elementwise"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sheaves.tex",
+    "place": "Sheaves, Lemma Tag 009F (lemma-directed-colimits-sections), proof of part (3)"
+   }
+  },
+  {
+   "text": "*Step 5 (clause (2): surjectivity over a quasi-compact open, and bijectivity).* Let $U$ be quasi-compact and $t\\in\\mathcal F(U)$, with $W_k,i_k,s_k$ as in Step 4. Since $U$ is quasi-compact, finitely many $U_1=W_{k_1},\\dots,U_m=W_{k_m}$ cover $U$ ($m=0$ when $U=\\emptyset$); write $i_j=i_{k_j}$, $s_j=s_{k_j}$. As $I$ is nonempty and directed choose $i\\in I$ with $i\\ge i_1,\\dots,i_m$, and put $\\sigma_j=\\varphi_{ii_j,U_j}(s_j)\\in\\mathcal F_i(U_j)$. Since $c_i\\circ\\varphi_{ii_j}=c_{i_j}$ (the $c$'s form a cocone) and $c_i$ commutes with restriction, $c_{i,U_j}(\\sigma_j)=c_{i_j,U_j}(s_j)=t|_{U_j}$; hence for all $j,j'$, $c_{i,U_j\\cap U_{j'}}(\\sigma_j|_{U_j\\cap U_{j'}})=t|_{U_j\\cap U_{j'}}=c_{i,U_j\\cap U_{j'}}(\\sigma_{j'}|_{U_j\\cap U_{j'}})$, and by clause (1) (Step 3, injectivity of $c_{i,U_j\\cap U_{j'}}$) $\\sigma_j$ and $\\sigma_{j'}$ agree on $U_j\\cap U_{j'}$. By the sheaf property of $\\mathcal F_i$ [def-weil-pbc-sites-and-cohomology] for the covering $\\{U_j\\to U\\}_{j}$ they glue to $s\\in\\mathcal F_i(U)$ with $s|_{U_j}=\\sigma_j$. Then $c_{i,U}(s)|_{U_j}=c_{i,U_j}(\\sigma_j)=t|_{U_j}$ for all $j$, so $c_{i,U}(s)=t$ by the sheaf property of $\\mathcal F$. So every $t\\in\\mathcal F(U)$ is $c_{i,U}(s)=\\Psi_U(\\iota_{i,U}(s))$: $\\Psi_U$ is surjective, and it is injective by Step 3; hence $\\varinjlim_i\\mathcal F_i(U)\\to\\mathcal F(U)$ is bijective. (Unlike Stacks 009F (4), no quasi-compactness of $U_j\\cap U_{j'}$ is needed: the agreement on overlaps comes from the injectivity of clause (1) at the single index $i$.)",
+   "uses": [
+    "def-weil-pbc-sites-and-cohomology"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sheaves.tex",
+    "place": "Sheaves, Lemma Tag 009F (lemma-directed-colimits-sections), proof of part (3)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-category-colimit",
+  "def-weil-pbc-sites-and-cohomology",
+  "def-weil-pbc-sheafification",
+  "lem-weil-pbc-sheaves-colimit-sheafification",
+  "lem-weil-pbc-filtered-colimit-sets-elementwise",
+  "lem-weil-pbc-site-sheafification-sections-local"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/sheaves.tex",
+  "place": "Sheaves, Lemma Tag 009F (lemma-directed-colimits-sections), proofs of parts (1) and (3); Section Tag 009E (section-limits-sheaves) item (3); Definition Tag 007A and Lemma Tag 0082 for the separated presheaf"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -35,10 +107,45 @@
    "results": "none",
    "date": "2026-10-10",
    "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "filtered colimit of sheaves of types with injective transition maps, the colimit coprojection is injective on sections",
+   "results": "CategoryTheory.Functor.CoconeTypes.descColimitType_injective_iff_of_isFiltered(') (Mathlib.CategoryTheory.Limits.Types.ColimitTypeFiltered), Types.FilteredColimit.isColimitOf(') (Mathlib.CategoryTheory.Limits.Types.Filtered), Sheaf.hasFilteredColimitsOfSize, TopCat.Presheaf.app_injective_iff_stalkFunctor_map_injective (Mathlib.Topology.Sheaves.Stalks): colimits of types and stalk criteria only, nothing on sections of a colimit sheaf",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "TopCat.Presheaf.stalk, CategoryTheory.Limits.colimit",
+   "results": "TopCat.stalkToFiber_ι (Mathlib.Topology.Sheaves.LocalPredicate), smoothSheafCommRing.ι_forgetStalk_* (Mathlib.Geometry.Manifold.Sheaf.Smooth): no statement on stalks or sections of a colimit of sheaves",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "sections over a compact open set of a filtered colimit of sheaves equal the colimit of sections",
+   "results": "Condensed.isColimitLocallyConstantPresheaf, LightCondensed.isColimitLocallyConstantPresheaf(Diagram) (Mathlib.Condensed.Discrete.Colimit): locally constant presheaves on profinite sets, not sheaves on a space",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rln 'IsCompact' Mathlib/CategoryTheory/Sites/ Mathlib/Topology/Sheaves/; grep -rn colimit Mathlib/Topology/Sheaves/*.lean | grep -i 'sheaf|filtered'; grep -rn 'injective' Mathlib/CategoryTheory/Sites/*.lean | grep -i 'colim|sheafif|separated'",
+   "results": "no file of Topology/Sheaves or CategoryTheory/Sites mentions IsCompact; colimit hits only stalk definitions (Stalks.lean 79, 430) and skyscraper sheaves; injectivity hit only CategoryTheory/Sites/LocallyInjective.lean:163 isLocallyInjective_iff_injective_of_separated (locally injective morphisms, not the statement)",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "local_search",
+   "query": "isCompact_colimit (project root ~/weil-conjectures-slopmaster2)",
+   "results": "empty, index: unavailable (no running language server), so not a proof of absence",
+   "date": "2026-10-10",
+   "verdict": "inconclusive"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "worker",
@@ -58,5 +165,17 @@
   }
  },
  "chapter": "sec-proper-base-change",
- "unit": "sk-thm-p1"
+ "unit": "sk-thm-p1",
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "lem-weil-pbc-sheaves-injective-directed-colimit-qc-sections",
+  "worker": "stage1",
+  "summary": "Checked against Stacks Sheaves Lemma 009F (lemma-directed-colimits-sections) parts (1) and (3) with their proofs, Section 009E item (3), Definition 007A and Lemma 0082 (tags verified in literature/stacks-project/tags/tags). Statement kept except that 'quasi-compact open' is now spelled out inline (every open covering has a finite subcovering), as no definition node for quasi-compact topological spaces exists. Proof in five steps along the Stacks proof: (1) the given colimit is the sheafification of the sectionwise presheaf colimit P [lem-weil-pbc-sheaves-colimit-sheafification], c_i = theta eta iota_i; (2) injective transition maps make each iota_{i,V} injective and P separated [lem-weil-pbc-filtered-colimit-sets-elementwise] plus the sheaf axiom of F_i; (3) a separated presheaf injects into its sheafification via the local-equality clause of [lem-weil-pbc-site-sheafification-sections-local], giving clause (1) and injectivity of Psi_V for every open V; (4) a section of F is locally c_{i_k}(s_k) [lem-weil-pbc-site-sheafification-sections-local, lem-weil-pbc-filtered-colimit-sets-elementwise]; (5) for quasi-compact U take a finite subcover and a common index, the transported sections agree on overlaps by clause (1), glue in F_i, and the glued section maps to t by the sheaf property of F. No new nodes; all cited nodes are in unit sk-thm-p1. Mathlib re-searched (LeanSearch, Loogle, LeanFinder, grep, local_search unavailable): no match."
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "result": "accepted",
+  "note": "5 steps following Stacks 009F (1), (3) by the separated-presheaf route: the colimit is the sheafified presheaf colimit (colimit-sheafification leaf, uniqueness of colimits); injective transitions make the coprojections injective and P separated (elementwise leaf (1), (3) and the sheaf axiom); clause (1) from the local-equality clause of the sections-local node; local lifts of a section; over a quasi-compact open a finite subcover, a common index, agreement on overlaps by clause (1), gluing in F_i and in F. Statement: quasi-compact defined inline. No new node."
+ }
 }
