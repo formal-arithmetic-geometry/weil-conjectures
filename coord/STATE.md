@@ -53,20 +53,20 @@ REMOTE LAUNCHER READY (2026-10-09 16:22: `roles/remote-launcher.md` committed; `
 
 **REVIEW MODE STANDING** (2026-10-10 14:33 UTC, human's order via the launcher): the eight remote groups are run by a dispatcher script (no leads), 40 workers at all times, returns first; deliveries expected to rise from ~50/h to well over 100/h. All five sub-agent slots of L are reviewers that run the whole path themselves (brief-review.md: checks, full review, merge or return with the locked tool, one-line answer); L writes no splits and claims nothing while three or more unreviewed deliveries wait; oldest first, repaired returns first of all. Attachments arrive as releases `abandon: attachment <item>: <declaration>, <file>:<line>` in coord/deliveries.log; L verifies transitive sorry-freeness (sorryfree) and the statement, and closes the node or writes a notice to the group. If five reviewers cannot keep the unreviewed count under ten, L writes **REVIEW BEHIND <count>** here at once and goes to eight reviewers (accounts added by the human).
 
-**Direct delivery** (decision of the human, 2026-10-10 evening; numbers since 13:05 UTC, when L read it; updated 14:34 UTC; content returns = sections C, D, E; the threshold is one content return in four deliveries over an hour, or reviews more than twenty minutes behind):
+**Direct delivery** (decision of the human, 2026-10-10 evening; numbers since 13:05 UTC, when L read it; updated 14:43 UTC; content returns = sections C, D, E; the threshold is one content return in four deliveries over an hour, or reviews more than twenty minutes behind):
 
 | group | merged at first push | merged after a return | returned |
 |---|---|---|---|
-| C1 | 4 | 1 | 3 |
-| E1 | 17 | 2 | 4 |
-| F1 | 6 | 0 | 0 |
-| G1 | 4 | 0 | 3 |
-| H1 | 0 | 2 | 6 |
-| J1 | 4 | 2 | 1 |
-| K1 | 5 | 2 | 3 |
+| C1 | 4 | 2 | 3 |
+| E1 | 18 | 4 | 4 |
+| F1 | 8 | 0 | 1 |
+| G1 | 4 | 2 | 3 |
+| H1 | 0 | 3 | 8 |
+| J1 | 6 | 2 | 1 |
+| K1 | 6 | 2 | 5 |
 | M1 | 6 | 1 | 2 |
 
-Oldest delivery awaiting review: 2 min deliver/K1/lem-sc-ext-locally-free
+Oldest delivery awaiting review: 3 min deliver/M1/lemma-weil-pbc-proper-underived-exchange
 
 **In progress** (2026-10-09 22:29 UTC): the review-commit-claim loop on the queue of the target, five opus workers at effort medium (items claimed with `claim.py next L --stage 1` in queue order; claims in `coord/claims/`); one commit per reviewed item, per-item timings in `local/target-stats.txt` (opus-relaunch6 lines). Remote groups C1, D1, E1, F1, G1 (5 claims each; G1 holds 6) deliver on deliver/<group>/<item> and are reviewed per roles/remote-lead.md; since 19:55 UTC the human's rule applies: a group with an open entry in coord/returns/<group>.md is refused new claims by `tools/claim.py next` until it repairs the item or abandons it with a reason starting with 'abandon:' (release is otherwise refused while a return entry or a delivery branch exists; merge, release and abandonment delete the entries, so the returns files are exact; abandonments are counted in the groups table); the merge tool runs only with SHEAF_LEAD=L-only in the lead's shell. Deliveries are checked after each review (`tools/merge_delivery.py list`) and a background watch of refs/heads/deliver/ runs. Since the decision of ~20:22 UTC a remote group cannot release an item with an open return entry or a delivery branch except by abandoning it ('abandon: <reason>', counted per group); a claim obtained through a bypass is released by the maintainer. Since ~22:22 UTC (decision of the human): group D1 is stopped (claims abandoned, branches deleted, returns cleared); the remote groups run tools/preflight_delivery.py on their clone before every push (one commit on the current tip, only the item's files, a real group review, new nodes without proof steps and with cited statements, verified Mathlib lines, steps citing nodes rather than quoting tags, review_split and check_dag); a delivery that fails it is not pushed. Open returns at 21:32 UTC: D1 sheaves-directed-colimit-sections, E1 complex-injective-resolution-mono and descend-separated, F1 etale-free-sheaf-constructible (third return), G1 stein-factorization-affine (second return) and unramified-etale-local-decomposition. Pending for a quiet moment: re-search with the new tools the unsplit new nodes created before the search rule (grep only); stage-3 merge candidates accumulate in the ledger (relative Gabber node, the two superseded finite-etale nodes, lem-weil-pbc-projective-space-twist-glued-identification vs the charts node's clause (v), lemma-weil-pbc-constructible-finite-pushforward vs its Lambda-module form, the two definitions of etale now reconciled by the two smooth-of-relative-dimension-0 items). The Wanted documents of `literature/LIST.md` (Weibel 2.4.6/2.2.8 added) and the questions in `coord/HUMAN.md` are open; nothing waits on them.
 
