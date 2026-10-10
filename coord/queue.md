@@ -1,6 +1,6 @@
 # Work queue
 
-923 items; claim with `tools/claim.py next <group> [--stage N]`.
+924 items; claim with `tools/claim.py next <group> [--stage N]`.
 
 ## Stage 1: nodes to split (613)
 
@@ -26,7 +26,6 @@
 | `lem-weil-pbc-smooth-localization-conormal-split` | 1012 | none |
 | `lem-weil-pbc-smooth-over-field-dimension-differentials` | 1012 | none |
 | `lem-weil-pbc-projective-resolution-kernel-projective` | 1013 | none |
-| `lem-weil-pbc-pth-root-presentation-differentials` | 1013 | none |
 | `lem-weil-pbc-pth-roots-extension-degree` | 1013 | none |
 | `lem-weil-pbc-purely-inseparable-base-change-local-ring` | 1013 | none |
 | `lem-weil-pbc-purely-inseparable-pth-root-tower` | 1013 | none |
@@ -102,6 +101,7 @@
 | `lem-weil-pbc-polynomial-quotient-dimension-at-point-height-difference` | 1014 | none |
 | `lem-weil-pbc-polynomial-ring-maximal-localization-dimension` | 1014 | none |
 | `lem-weil-pbc-polynomial-ring-n2` | 1014 | none |
+| `lem-weil-pbc-schanuel` | 1014 | none |
 | `lem-weil-pbc-torsion-module-flat-base-change-iso` | 1014 | none |
 | `lem-weil-pbc-torsion-submodule-flat-base-change-iso` | 1014 | none |
 | `lem-weil-pbc-two-term-homotopy-equivalence-direct-sum` | 1014 | none |
@@ -620,7 +620,7 @@
 | `def-exc-jacobian-presentation` | - | none |
 | `def-nagata-rees-algebra` | - | none |
 
-## Stage 2: nodes to state (310)
+## Stage 2: nodes to state (311)
 
 | node | distance to Mathlib | kind |
 |---|---|---|
@@ -843,6 +843,7 @@
 | `lem-weil-pbc-principal-localization-naive-cotangent` | 1 | state |
 | `lem-weil-pbc-projective-dimension-well-defined` | 1 | state |
 | `lem-weil-pbc-proper-coproduct` | 1 | state |
+| `lem-weil-pbc-pth-root-presentation-differentials` | 1 | state |
 | `lem-weil-pbc-purely-inseparable-integral-prime-unique` | 1 | state |
 | `lem-weil-pbc-radicial-prime-unique-degree-p` | 1 | state |
 | `lem-weil-pbc-reduced-induced-closed-subscheme` | 1 | state |
