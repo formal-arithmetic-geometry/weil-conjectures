@@ -1,8 +1,8 @@
 # Work queue
 
-866 items; claim with `tools/claim.py next <group> [--stage N]`.
+865 items; claim with `tools/claim.py next <group> [--stage N]`.
 
-## Stage 1: nodes to split (59)
+## Stage 1: nodes to split (58)
 
 | node | distance to a target | Lean state on the done branch |
 |---|---|---|
@@ -55,14 +55,13 @@
 | `lem-pc-chow-relative-ample` | - | none |
 | `lem-pc-coherent-property-devissage` | - | none |
 | `lem-pc-relative-kill-by-twisting` | - | none |
-| `lem-sc-affine-unit-divisor-base-change` | - | none |
-| `lem-sc-h1-gm-pic-pullback` | - | none |
 | `lem-sc-pic-affine-base-change-compatibility` | - | none |
+| `lem-sc-etale-torsor-h1-functoriality` | - | none |
+| `lem-sc-local-dvr-base-change` | - | none |
 | `lem-pur-kinjective-degreewise-existence` | - | none |
-| `lem-pur-ringed-site-grothendieck-abelian` | - | none |
-| `def-wf-lie-algebra-derivation` | - | rests_on_sorry |
 | `lem-pc-flf-properties` | - | none |
 | `lem-pur-left-derived-from-kflat-class` | - | none |
+| `lem-wf-lie-algebra-derivation-bracket` | - | none |
 | `lem-pur-hom-kflat-into-kinjective` | - | none |
 | `lem-pur-rhom-into-kinjective-local` | - | none |
 
@@ -878,7 +877,7 @@
 | `lem-weil-pbc-projective-space-zero-isomorphism` | 4 | state |
 | `def-nagata-fixed-base-separated-stage` | 6 | state |
 
-Not open yet: 1683 nodes that wait for a statement dependency, 99 nodes that wait for stage 1.
+Not open yet: 1686 nodes that wait for a statement dependency, 99 nodes that wait for stage 1.
 
 ## Stage 3: modules to prove (0)
 
