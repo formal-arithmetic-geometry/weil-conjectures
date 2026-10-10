@@ -1,0 +1,71 @@
+{
+ "id": "lem-weil-pbc-smooth-at-generic-point-over-field",
+ "kind": "statement",
+ "title": "A domain of finite type over a field with separable fraction field is smooth at the generic point",
+ "statement": "Let $k$ be a field and $S$ a $k$-algebra of finite type ($S\\cong k[x_1,\\dots,x_n]/\\mathfrak a$ as $k$-algebras) which is a domain, and let $L$ be the fraction field of $S$, a field extension of $k$ [def-pc-field-extension] via $k\\to S\\subseteq L$. If $L/k$ is separable in the sense of [def-weil-pbc-separable-field-extension], then $k\\to S$ is smooth at the prime ideal $(0)\\subset S$ [def-weil-pbc-singular-ideal]: there is $g\\in S$, $g\\neq0$, such that the localization $S_g$ of $S$ at $\\{1,g,g^2,\\dots\\}$ is a smooth $k$-algebra [def-weil-pbc-smooth-ring-map].",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Algebra, Lemma Tag 07ND (lemma-smooth-at-generic-point, line 38891), implication 'L/K separable => R -> S smooth at (0)', in the case R = k a field (k -> S is injective since S is a nonzero domain, and K = k); its proof there: reduce to finite presentation (Lemma 5730 lemma-generic-finite-presentation; automatic here since k is Noetherian), reduce to K -> S (x)_R K (Lemma Tag 07ND cites lemma-flat-base-change-locus-smooth, line 37713; trivial here since R = K = k), then Lemma Tag 00TV (lemma-separable-smooth, line 38740) with q = (0), S_(0) = L a field hence regular, kappa((0)) = L separable over k; smooth at a prime: Definition Tag 00TB (definition-smooth-at-prime, line 37511)"
+ },
+ "stmt_deps": [
+  "def-pc-field-extension",
+  "def-weil-pbc-separable-field-extension",
+  "def-weil-pbc-singular-ideal",
+  "def-weil-pbc-smooth-ring-map"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "domain of finite type over a field with separable fraction field is smooth at the generic point",
+   "results": "Algebra.FormallySmooth.of_algebraicIndependent_of_isSeparable and Algebra.FormallySmooth.of_perfectField (Mathlib/RingTheory/Smooth/Field.lean), Algebra.smoothLocus and Algebra.smoothLocus_eq_univ_iff (RingTheory/Smooth/Locus.lean), Algebra.FormallyEtale.of_isSeparable_aux, Algebra.FormallyEtale.iff_isSeparable (RingTheory/Etale/Field.lean), Algebra.FormallyUnramified.iff_isSeparable",
+   "date": "2026-10-10",
+   "verdict": "no match (ingredients only)"
+  },
+  {
+   "tool": "leansearch",
+   "query": "finite type algebra over a field, localization at prime is regular local ring and residue field separable, then smooth at the prime (Stacks 00TV, the route of the source)",
+   "results": "Algebra.smoothLocus, Algebra.IsSmoothAt (RingTheory/Smooth/Locus.lean), Algebra.Smooth.of_isLocalization_Away, Algebra.FormallySmooth.of_isLocalization, RingHom.Smooth.holdsForLocalizationAway; nothing relating IsRegularLocalRing and smoothness",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "if the fraction field of a finitely generated k-domain A is separable over k, then there is nonzero f in A with A_f smooth over k",
+   "results": "Algebra.IsSmoothAt.exists_notMem_smooth (RingTheory/Smooth/Locus.lean:150: [FinitePresentation R A], p prime, [IsSmoothAt R p] (= FormallySmooth R (Localization.AtPrime p)) gives f not in p with Smooth R (Localization.Away f)), Algebra.IsSmoothAt.exists_notMem_isStandardSmooth, Algebra.Smooth.exists_span_eq_top_isStandardSmooth",
+   "date": "2026-10-10",
+   "verdict": "no match; Lean candidate route: p = (0), Localization.AtPrime (0) = Frac S = L, FormallySmooth k L from Algebra.FormallySmooth.of_algebraicIndependent_of_isSeparable (L separably generated over k by [def-weil-pbc-separable-field-extension] (2) applied to L itself), FinitePresentation k S from finite type over a Noetherian ring, then exists_notMem_smooth; several lemmas and a transport along Localization.AtPrime (0) = L, not a one-line specialization"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rn 'IsSeparable.*FormallySmooth\\|FormallySmooth.*IsSeparable\\|separable.*smooth' Mathlib/RingTheory/Smooth/*.lean Mathlib/RingTheory/Unramified/*.lean; grep -rln 'IsRegularLocalRing' Mathlib/; grep -rn 'FractionRing\\|IsFractionRing' Mathlib/RingTheory/Smooth/*.lean Mathlib/RingTheory/Etale/*.lean; grep -rln 'smoothLocus\\|IsSmoothAt' Mathlib/ (in /home/ubuntu/weil-conjectures-slopmaster2/.lake/packages/mathlib)",
+   "results": "first grep: none on one line (Smooth/Field.lean:44 Algebra.FormallySmooth.of_algebraicIndependent_of_isSeparable read directly); IsRegularLocalRing only in RingTheory/RegularLocalRing/Defs.lean and Polynomial.lean (no link to smoothness); no fraction field in Smooth/ or Etale/; IsSmoothAt in Smooth/Locus.lean, StandardSmoothOfFree.lean, Fiber.lean, IntegralClosure.lean, Etale/Locus.lean, Unramified/LocalStructure.lean, RingHom/Smooth.lean, AlgebraicGeometry/Morphisms/Smooth.lean; none states smoothness at the generic point of a domain with separable fraction field",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-separable-extension-fraction-field-of-smooth-algebra",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1"
+}
