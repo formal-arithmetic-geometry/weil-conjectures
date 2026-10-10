@@ -19,9 +19,53 @@
  "stmt_deps": [
   "def-sp-injective-resolutions"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "For the group ring $R[G]$, the category of left modules has functorial injective embeddings by [lem-exc-rg-group-algebra-functorial-injective-embeddings].",
+   "uses": [
+    "lem-exc-rg-group-algebra-functorial-injective-embeddings"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/injectives.tex",
+    "place": "Section G-modules, paragraph immediately before Tag 04JF"
+   }
+  },
+  {
+   "text": "The category of $R$-modules with a $G$-action whose elements have open stabilizer is related to the group-ring module category by the fully faithful mono-preserving forgetful functor and its right adjoint given by the open-stabilizer submodule, as stated in [lem-exc-rg-open-stabilizer-adjoint].",
+   "uses": [
+    "lem-exc-rg-open-stabilizer-adjoint"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/injectives.tex",
+    "place": "Tag 04JF, proof of lemma-G-modules, definition of v and u"
+   }
+  },
+  {
+   "text": "Applying the adjoint transfer lemma [lem-exc-rg-adjoint-transfer-functorial-injectives] to the data in steps 1 and 2 gives a functor $J$ on the open-stabilizer category, a natural transformation $j:\\operatorname{id}\\to J$ whose components are monomorphisms, and injective objects $J(M)$. This is the asserted functorial injective embedding.",
+   "uses": [
+    "lem-exc-rg-adjoint-transfer-functorial-injectives",
+    "lem-exc-rg-group-algebra-functorial-injective-embeddings",
+    "lem-exc-rg-open-stabilizer-adjoint"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/injectives.tex",
+    "place": "Tag 04JF, proof of lemma-G-modules, final sentence invoking Homology Lemma 0161"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-exc-rg-group-algebra-functorial-injective-embeddings",
+  "lem-exc-rg-open-stabilizer-adjoint",
+  "lem-exc-rg-adjoint-transfer-functorial-injectives"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/injectives.tex",
+  "place": "Tag 04JF, label lemma-G-modules"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -46,12 +90,42 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-exc-discrete-modules-abelian-injective-embeddings",
   "by": "worker",
   "date": "2026-10-10"
  },
  "chapter": "sec-curve-estimates",
- "unit": "sk-prop-h2"
+ "unit": "sk-prop-h2",
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "lem-exc-rg-discrete-modules-functorial-injective-embeddings",
+  "worker": "stage1",
+  "summary": "Split Tag 04JF into the group-ring functorial embedding input, the open-stabilizer adjunction, and the generic adjoint transfer lemma. The item then follows in three cited steps and retains the original general topological-group and ring statement.",
+  "blueprint": "Realizes the blueprint clause of def-exc-continuous-cohomology asserting enough injectives for discrete G-modules: steps 1-3 expand the cited functorial-embedding lemma and its adjunction argument.",
+  "tool_uses": [
+   {
+    "node": "def-sp-injective-resolutions",
+    "why": "The statement uses the generic definition of injective object, which is outside this unit's route."
+   }
+  ],
+  "blueprint_steps": [
+   "the group-ring functorial embedding input",
+   "the open-stabilizer right adjoint",
+   "the adjoint-functorial-injectives transfer"
+  ]
+ },
+ "tool_uses": [
+  "def-sp-injective-resolutions"
+ ],
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-rgd",
+  "group": "H1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-rgd (reviewer sub-agent of L); spot-checked: Source: Stacks Tag 04JF (injectives.tex, label lemma-G-modules) and Homology Tag 0161 (homology.tex, label lemma-adjoint-functorial-injectives), read in literature/stacks-project (the files are present; the report's WANTED lines are unnecessary). Item statement agrees with 04JF hypothesis by hypothesis: G topological group, R any ring, R-G-modules in the sense of Etale Cohomology Definition definition-G-module-continuous (R-linear action, continuous for the discrete topology = open stabilizers), conclusion functorial injective embeddings; unchanged from sheaf-dag. Step 1 is carried by lem-exc-rg-group-algebra-functorial-injective-embeddings (the remark before 04JF: modules over an algebra, here R[G], have functorial injective embeddings). Step 2 by lem-exc-rg-open-stabilizer-adjoint (v forgetful, fully faithful, mono-preserving, right adjoint u(M) = open-stabilizer elements; checked u(M) is an R[G]-submodule: Stab(x+y) contains Stab(x) cap Stab(y), Stab(rx) contains Stab(x) as G acts R-linearly, Stab(gx)=g Stab(x) g^-1). Step 3 by lem-exc-rg-adjoint-transfer-functorial-injectives, whose hypotheses (fully faithful hence faithful so vB=0 implies B=0; mono-preserving; right adjoint; target has functorial embeddings, hence enough injectives; a left adjoint is additive) give 0161's (1)-(5); construction B -> uJ(vB) as in 0161. Tool use def-sp-injective-resolutions (generic definition of injective object) accepted. No Mathlib leaf; no slopmaster2 declaration states these (grep of WeilConjectures for EnoughInjectives/functorial gives only Grothendieck-category infrastructure). Small cases: G trivial (D = R-modules, u = id), G finite discrete (D = R[G]-modules, u = id), M = 0. Wording note: the transfer node says 'module categories' where Stacks says abelian categories; D_{R,G} is the category of R-G-modules so the application is within its scope, and the proof of 0161 works for abelian categories. Start 2026-10-10 15:13:17 UTC (Sat Oct 10 03:13:17 PM UTC 2026), end Sat Oct 10 03:14:19 PM UTC 2026."
+ },
+ "lead_note": "2026-10-10 L (R-rgd): lem-exc-rg-adjoint-transfer-functorial-injectives says 'module categories'; it is applied with D = category of R-G-modules (open stabilizers), and Stacks 0161 is for abelian categories: its splitter should prove it for abelian categories (or at least cover D_{R,G})."
 }
