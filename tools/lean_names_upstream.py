@@ -26,7 +26,8 @@ import collections, gzip, json, pathlib, re, subprocess, sys, tomllib
 ROOT = pathlib.Path(__file__).resolve().parent.parent
 OUT = ROOT / "dag" / "lean_names_upstream.json"
 REPO = pathlib.Path.home() / "weil-conjectures-slopmaster2"
-SEG = re.compile(r"\(blueprint:([^)]*)")           # the text after "(blueprint:" up to ")" (or the end of the line)
+SEG = re.compile(r"blueprint:([^)]*)")             # the text after "blueprint:" up to ")" (or the end of the line); the
+                                                   # tag may follow other text in its parenthesis: "(Stacks, Tag 0B9G; blueprint: `id`)"
 ID = re.compile(r"`?([a-z][a-z0-9]*(?:[-:][a-z0-9.]+)+)`?")
 
 

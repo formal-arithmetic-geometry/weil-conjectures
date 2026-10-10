@@ -303,7 +303,10 @@ def main() -> int:
         if "PASS" not in out.splitlines()[0] if out else True:
             f("tools/review_split.py does not pass:\n   " + "\n   ".join(out.splitlines()[:12]))
         r = subprocess.run([sys.executable, "tools/check_dag.py"], cwd=ROOT, capture_output=True, text=True)
-        bad = [l for l in (r.stdout + r.stderr).splitlines() if l.startswith(("error", "unit", "route", "cycle", "deps")) or "ERROR" in l]
+        # a "route:" warning counts only when it names the item or a new node; standing ones belong to the lead
+        bad = [l for l in (r.stdout + r.stderr).splitlines()
+               if l.startswith(("error", "unit", "cycle", "deps")) or "ERROR" in l
+               or (l.startswith("route") and any(i in l for i in [item, *new_nodes]))]
         last = (r.stdout.strip().splitlines() or [""])[-1]
         if bad or "0 cycles" not in last:
             f("tools/check_dag.py reports a problem:\n   " + "\n   ".join((bad or [last])[:12]))
