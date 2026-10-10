@@ -1,0 +1,72 @@
+{
+ "id": "lem-weil-pbc-coherent-local-isomorphism",
+ "kind": "statement",
+ "title": "A map of coherent modules injective, surjective or bijective on one stalk is so on a neighbourhood",
+ "statement": "Let $X$ be a locally Noetherian scheme [pqf-def-locnoeth], $\\mathcal F,\\mathcal G$ coherent $\\mathcal O_X$-modules [pqf-def-coherent], $\\varphi:\\mathcal G\\to\\mathcal F$ a homomorphism of $\\mathcal O_X$-modules [def-weil-sheaf-of-modules-category] and $x\\in X$, with stalks and stalk maps $\\varphi_x:\\mathcal G_x\\to\\mathcal F_x$ as in [def-weil-pbc-module-stalk]; for an open $U\\subseteq X$, $\\mathcal F|_U$ is the restriction ($\\mathcal F|_U(V)=\\mathcal F(V)$ for $V\\subseteq U$ open). (1) If $\\mathcal F_x=0$, there is an open neighbourhood $U$ of $x$ with $\\mathcal F|_U=0$. (2) If $\\varphi_x$ is injective, there is an open neighbourhood $U$ of $x$ such that $\\varphi|_U$ is injective (on the sections over every open $V\\subseteq U$). (3) If $\\varphi_x$ is surjective, there is an open neighbourhood $U$ of $x$ such that $\\varphi|_U$ is surjective (as a map of sheaves). (4) If $\\varphi_x$ is bijective, there is an open neighbourhood $U$ of $x$ such that $\\varphi|_U:\\mathcal G|_U\\to\\mathcal F|_U$ is an isomorphism of $\\mathcal O_U$-modules.",
+ "source": {
+  "document": "literature/stacks-project/coherent.tex",
+  "place": "Cohomology of Schemes, Lemma 01Y3 (label lemma-local-isomorphism); its proof cites Modules, Lemmas finite-type-surjective-on-stalk, finite-type-stalk-zero and finite-type-to-coherent-injective-on-stalk"
+ },
+ "stmt_deps": [
+  "pqf-def-locnoeth",
+  "pqf-def-coherent",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-pbc-module-stalk"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "morphism of coherent sheaves bijective on stalk at a point is an isomorphism on an open neighbourhood",
+   "results": "TopCat.Presheaf.app_bijective_of_stalkFunctor_map_bijective, isIso_of_stalkFunctor_map_iso, app_surjective_of_stalkFunctor_map_bijective, app_isIso_of_stalkFunctor_map_iso, isIso_iff_stalkFunctor_map_iso (Mathlib.Topology.Sheaves.Stalks), AlgebraicGeometry.isomorphisms_eq_stalkwise (Morphisms.IsIso)",
+   "date": "2026-10-10",
+   "verdict": "no match: these need the stalk maps bijective at every point of the open set, not at one point"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "if a map of finitely presented sheaves of modules is an isomorphism on the stalk at x then it is an isomorphism on a neighbourhood of x",
+   "results": "TopCat.Presheaf.app_isIso_of_stalkFunctor_map_iso, isIso_of_stalkFunctor_map_iso, isIso_iff_stalkFunctor_map_iso (Mathlib.Topology.Sheaves.Stalks), AlgebraicGeometry.stalkwise_respectsIso, stalkwiseIsLocalAtTarget_of_respectsIso (Morphisms.Constructors)",
+   "date": "2026-10-10",
+   "verdict": "no match (all-points criteria only)"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Scheme.Modules, AlgebraicGeometry.Scheme.Opens",
+   "results": "Scheme.Modules.Hom.app, instIsIsoAbApp, Hom.isIso_iff_isIso_app, hom_ext, hom_ext_iff, restrictAppIso, restrict_obj, pushforward_obj_obj (Mathlib.AlgebraicGeometry.Modules.Sheaf)",
+   "date": "2026-10-10",
+   "verdict": "no match: no local-at-a-point isomorphism criterion for Scheme.Modules"
+  },
+  {
+   "tool": "grep",
+   "query": "rg -ni 'coherent' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicGeometry; rg -n 'stalk' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicGeometry/Modules/Sheaf.lean ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/Algebra/Category/ModuleCat/Sheaf/",
+   "results": "no coherent modules in Mathlib.AlgebraicGeometry (only quasi-coherent, Modules/Tilde.lean); stalks of Scheme.Modules only in restrictStalkNatIso (Modules/Sheaf.lean:509)",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-coherent-generic-point-ideal-inclusion",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "reviewed": "2026-10-10 L: statement checked against 01Y3; no existing node for 01Y3"
+}

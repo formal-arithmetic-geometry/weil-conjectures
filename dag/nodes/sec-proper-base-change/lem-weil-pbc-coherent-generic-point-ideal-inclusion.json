@@ -20,9 +20,148 @@
   "def-weil-sheaf-of-modules-category",
   "def-pc-module-pullback"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "(Preliminaries on $Z$ and the ideal sheaf $\\mathcal J$.) $i$ is an immersion, hence locally of finite type [lem-weil-pbc-immersion-base-change-lft](2), so $Z$ is locally Noetherian [pqf-lem-locnoeth-lft]; $i$ is a homeomorphism onto the closed subset $i(Z)$ of the quasi-compact space $X$ [def-weil-closed-immersion], and a closed subset of a quasi-compact space is quasi-compact, so $Z$ is quasi-compact, i.e. $Z$ is a Noetherian scheme. On $X$ and on $Z$, $\\mathcal O$ is coherent and coherent means quasi-coherent of finite type [pqf-lem-coherent-ft-locnoeth]; kernels, cokernels and finite direct sums of maps of coherent modules, and quasi-coherent submodules of coherent modules, are coherent [lem-weil-pbc-coherent-kernel-cokernel-locnoeth](1),(2); in particular $\\mathcal O_Z^{\\oplus r}$ is coherent, and the restriction of a coherent module to an open subscheme is coherent (the conditions of [pqf-def-coherent] concern only the opens of that subscheme). Let $\\mathcal J=\\ker(i^\\sharp:\\mathcal O_X\\to i_*\\mathcal O_Z)$ be the ideal sheaf of $i$; it is a quasi-coherent sheaf of ideals [def-sbc-closed-immersion-ideal-sheaf], hence coherent and so of finite type. Claim: $\\mathcal J_\\xi=\\mathfrak m_\\xi$. The ring map $\\rho:\\mathcal O_{X,\\xi}\\to\\mathcal O_{Z,\\eta}$, $a_\\xi\\mapsto(i^\\sharp a)_\\eta$, is the composite of the stalk map $i^\\sharp_\\xi:\\mathcal O_{X,\\xi}\\to(i_*\\mathcal O_Z)_\\xi$ and the bijection $c_\\eta:(i_*\\mathcal O_Z)_\\xi\\to\\mathcal O_{Z,\\eta}$ of [lem-weil-pbc-closed-pushforward-stalks](2). $i^\\sharp$ is surjective as a map of sheaves [def-weil-closed-immersion], so $i^\\sharp_\\xi$ is surjective [lem-weil-pbc-locally-surjective-iff-stalks], and $\\ker(i^\\sharp_\\xi)=\\mathcal J_\\xi$ [lem-weil-pbc-module-stalk-exact](2). Hence $\\rho$ is a surjective ring map with kernel $\\mathcal J_\\xi$ onto $\\mathcal O_{Z,\\eta}$, which is a field because $Z$ is integral with generic point $\\eta$ [lem-weil-pbc-integral-scheme-ideal-generic-stalk]. So $\\mathcal J_\\xi$ is a maximal ideal of the local ring $\\mathcal O_{X,\\xi}$, i.e. $\\mathcal J_\\xi=\\mathfrak m_\\xi$ [def-weil-residue-field].",
+   "uses": [
+    "lem-weil-pbc-immersion-base-change-lft",
+    "pqf-lem-locnoeth-lft",
+    "def-weil-closed-immersion",
+    "pqf-lem-coherent-ft-locnoeth",
+    "lem-weil-pbc-coherent-kernel-cokernel-locnoeth",
+    "pqf-def-coherent",
+    "def-sbc-closed-immersion-ideal-sheaf",
+    "lem-weil-pbc-closed-pushforward-stalks",
+    "lem-weil-pbc-locally-surjective-iff-stalks",
+    "lem-weil-pbc-module-stalk-exact",
+    "lem-weil-pbc-integral-scheme-ideal-generic-stalk",
+    "def-weil-residue-field"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/coherent.tex",
+    "place": "Cohomology of Schemes, Lemma 01YE (lemma-prepare-filter-irreducible, coherent.tex line 2982), proof, first paragraph ('J_xi = m_xi'); the Noetherianity of Z and the computation of J_xi are written out here"
+   }
+  },
+  {
+   "text": "(Replacing $\\mathcal F$ by the sections killed by $\\mathcal J$.) Let $\\mathcal F'\\subseteq\\mathcal F$ be the subsheaf of sections annihilated by $\\mathcal J$ [lem-weil-pbc-sections-annihilated-by-ideal] ($\\mathcal J$ is quasi-coherent of finite type and $\\mathcal F$ quasi-coherent, step 1). By (1) of that lemma $\\mathcal F'$ is a quasi-coherent submodule of the coherent $\\mathcal F$, hence coherent [lem-weil-pbc-coherent-kernel-cokernel-locnoeth](2). By (3), $\\mathcal F'_\\xi=\\{s\\in\\mathcal F_\\xi:\\mathcal J_\\xi s=0\\}=\\{s\\in\\mathcal F_\\xi:\\mathfrak m_\\xi s=0\\}=\\mathcal F_\\xi$ (step 1 and the hypothesis on $\\mathcal F_\\xi$). So the stalk at $\\xi$ of the inclusion $\\iota:\\mathcal F'\\to\\mathcal F$, which is injective [lem-weil-pbc-module-stalk-exact](1), is bijective, and by [lem-weil-pbc-coherent-local-isomorphism](4) there is an open neighbourhood $W_1$ of $\\xi$ in $X$ with $\\iota|_{W_1}$ an isomorphism. Moreover $\\mathcal J\\mathcal F'=0$ (the image of $\\mathcal J\\otimes\\mathcal F'\\to\\mathcal F'$): for every $x\\in X$, $(\\mathcal J\\mathcal F')_x=\\mathcal J_x\\mathcal F'_x$ [lem-weil-pbc-ideal-module-product-stalk](2), which is $0$ by [lem-weil-pbc-sections-annihilated-by-ideal](3); a module whose stalks all vanish is $0$, since its map to $0$ is bijective on stalks [lem-weil-pbc-module-iso-on-stalks].",
+   "uses": [
+    "lem-weil-pbc-sections-annihilated-by-ideal",
+    "lem-weil-pbc-coherent-kernel-cokernel-locnoeth",
+    "lem-weil-pbc-module-stalk-exact",
+    "lem-weil-pbc-coherent-local-isomorphism",
+    "lem-weil-pbc-ideal-module-product-stalk",
+    "lem-weil-pbc-module-iso-on-stalks"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/coherent.tex",
+    "place": "Cohomology of Schemes, Lemma 01YE (lemma-prepare-filter-irreducible, coherent.tex line 2982), proof, first paragraph (Properties 01PO, Lemma 01Y3)"
+   }
+  },
+  {
+   "text": "(Descent to $Z$.) $X$ and $Z$ are locally Noetherian (step 1), $\\mathcal F'$ is coherent and $\\mathcal J\\mathcal F'=0$ (step 2). By the essential surjectivity in [lem-weil-pbc-closed-immersion-coherent-equivalence](1) (Stacks 087T) there are a coherent $\\mathcal O_Z$-module $\\mathcal G$ and an isomorphism of $\\mathcal O_X$-modules $\\theta:i_*\\mathcal G\\to\\mathcal F'$. In particular $\\mathcal G_\\eta\\cong(i_*\\mathcal G)_\\xi\\cong\\mathcal F'_\\xi$ [lem-weil-pbc-closed-pushforward-stalks](2).",
+   "uses": [
+    "lem-weil-pbc-closed-immersion-coherent-equivalence",
+    "lem-weil-pbc-closed-pushforward-stalks"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/coherent.tex",
+    "place": "Cohomology of Schemes, Lemma 01YE (lemma-prepare-filter-irreducible, coherent.tex line 2982), proof, second paragraph (Lemma 087T)"
+   }
+  },
+  {
+   "text": "(A map $\\mathcal O_Z^{\\oplus r}\\to\\mathcal G$ near $\\eta$.) Let $K=\\mathcal O_{Z,\\eta}$, a field (step 1). As $\\mathcal G$ is of finite type [pqf-def-coherent], there are an open $U_0\\ni\\eta$ and a surjection of sheaves $\\mathcal O_{U_0}^{\\oplus m}\\to\\mathcal G|_{U_0}$; its stalk $K^{\\oplus m}\\to\\mathcal G_\\eta$ is surjective [lem-weil-pbc-locally-surjective-iff-stalks] (the stalk of a finite direct sum is the direct sum of the stalks, filtered colimits commuting with finite sums [def-weil-pbc-module-stalk]). So $\\mathcal G_\\eta$ is a finite-dimensional $K$-vector space; let $r=\\dim_K\\mathcal G_\\eta\\ge0$ and choose a $K$-linear isomorphism $\\psi_0:(\\mathcal O_Z^{\\oplus r})_\\eta=K^{\\oplus r}\\to\\mathcal G_\\eta$. $Z$ is locally Noetherian and $\\mathcal O_Z^{\\oplus r}$, $\\mathcal G$ are coherent (step 1). By [lem-weil-pbc-coherent-stalk-map-extends] (Stacks 01Y4) there are an open $U\\ni\\eta$ of $Z$ and an $\\mathcal O_U$-linear $\\varphi:\\mathcal O_Z^{\\oplus r}|_U\\to\\mathcal G|_U$ with $\\varphi_\\eta=\\psi_0$. Applying [lem-weil-pbc-coherent-local-isomorphism](4) on the locally Noetherian open subscheme $U$ to the coherent modules $\\mathcal O_U^{\\oplus r}$, $\\mathcal G|_U$ (step 1) gives an open $V$ with $\\eta\\in V\\subseteq U$ and $\\varphi|_V$ an isomorphism.",
+   "uses": [
+    "pqf-def-coherent",
+    "lem-weil-pbc-locally-surjective-iff-stalks",
+    "def-weil-pbc-module-stalk",
+    "lem-weil-pbc-coherent-stalk-map-extends",
+    "lem-weil-pbc-coherent-local-isomorphism"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/coherent.tex",
+    "place": "Cohomology of Schemes, Lemma 01YE (lemma-prepare-filter-irreducible, coherent.tex line 2982), proof, third paragraph (r = dim F_xi finite; Lemmas 01Y4 and 01Y3)"
+   }
+  },
+  {
+   "text": "(Extending $\\varphi$ over $Z$.) Let $T=Z\\setminus U$, a closed subset of $Z$, and $\\mathcal I_T\\subseteq\\mathcal O_Z$ the quasi-coherent sheaf of ideals of the reduced induced structure on $T$ [lem-weil-pbc-reduced-induced-closed-subscheme](1) (Stacks 01J3): $\\mathcal I_T(U')=\\{f\\in\\mathcal O_Z(U'):f(t)=0\\text{ in }\\kappa(t)\\ \\forall t\\in T\\cap U'\\}$. Then $\\{z\\in Z:(\\mathcal I_T)_z\\neq\\mathcal O_{Z,z}\\}=T$: for $z\\in U$, $1\\in\\mathcal I_T(U)=\\mathcal O_Z(U)$ (the condition is empty), so $(\\mathcal I_T)_z=\\mathcal O_{Z,z}$; for $z\\in T$ every element of $(\\mathcal I_T)_z$ is a germ $f_z$ with $f(z)=0$, i.e. $f_z\\in\\mathfrak m_z$ [def-weil-residue-field], so $(\\mathcal I_T)_z\\subseteq\\mathfrak m_z$. Thus $U=Z\\setminus V(\\mathcal I_T)$ in the notation of [lem-weil-pbc-coherent-homs-over-open] (Stacks 01YB). Apply that lemma on the Noetherian scheme $Z$ (step 1) to the quasi-coherent $\\mathcal G$, the coherent $\\mathcal O_Z^{\\oplus r}$, the ideal $\\mathcal I_T$ and $\\psi=\\varphi$: there are $n\\ge0$ and an $\\mathcal O_Z$-linear $\\chi:\\mathcal I_T^n\\mathcal O_Z^{\\oplus r}\\to\\mathcal G$ with $\\chi|_U=\\varphi$ under $(\\mathcal I_T^n\\mathcal O_Z^{\\oplus r})|_U=\\mathcal O_U^{\\oplus r}$. Put $\\mathcal I=\\mathcal I_T^n$ ($\\mathcal I=\\mathcal O_Z$ if $n=0$): a quasi-coherent sheaf of ideals [lem-weil-pbc-ideal-times-quasi-coherent-affine-sections](1), coherent since $Z$ is locally Noetherian (step 1) [lem-weil-pbc-coherent-kernel-cokernel-locnoeth](2). Moreover $\\mathcal I\\,\\mathcal O_Z^{\\oplus r}=\\mathcal I^{\\oplus r}$ as submodules of $\\mathcal O_Z^{\\oplus r}$: the tensor product commutes with finite direct sums and $\\mathcal I\\otimes_{\\mathcal O_Z}\\mathcal O_Z\\cong\\mathcal I$ (both hold for the presheaf tensor product and pass to sheafifications [def-pur-sheaf-tensor-product]), and under $\\mathcal I\\otimes\\mathcal O_Z^{\\oplus r}\\cong\\mathcal I^{\\oplus r}$ the multiplication map is the componentwise inclusion $\\mathcal I^{\\oplus r}\\to\\mathcal O_Z^{\\oplus r}$, whose image is $\\mathcal I^{\\oplus r}$. So $\\chi:\\mathcal I^{\\oplus r}\\to\\mathcal G$, $\\chi|_U=\\varphi$; in particular $\\chi|_V=\\varphi|_V$ is an isomorphism and $\\chi_\\eta=\\varphi_\\eta$ is bijective.",
+   "uses": [
+    "lem-weil-pbc-reduced-induced-closed-subscheme",
+    "def-weil-residue-field",
+    "lem-weil-pbc-coherent-homs-over-open",
+    "lem-weil-pbc-ideal-times-quasi-coherent-affine-sections",
+    "lem-weil-pbc-coherent-kernel-cokernel-locnoeth",
+    "def-pur-sheaf-tensor-product"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/coherent.tex",
+    "place": "Cohomology of Schemes, Lemma 01YE (lemma-prepare-filter-irreducible, coherent.tex line 2982), proof, third paragraph (Schemes 01J3, Lemma 01YB, 'I^n(O_X^r) = (I^n)^r')"
+   }
+  },
+  {
+   "text": "($\\chi$ is injective; the 'easy proof omitted' of the source.) Let $\\mathcal K=\\operatorname{Ker}\\chi\\subseteq\\mathcal I^{\\oplus r}\\subseteq\\mathcal O_Z^{\\oplus r}$ (sectionwise kernel). It is coherent [lem-weil-pbc-coherent-kernel-cokernel-locnoeth](1), and $\\mathcal K_\\eta=\\ker(\\chi_\\eta)=0$ [lem-weil-pbc-module-stalk-exact](2) (step 5). For $j=1,\\dots,r$ let $p_j:\\mathcal K\\to\\mathcal O_Z$ be the inclusion into $\\mathcal O_Z^{\\oplus r}$ followed by the $j$-th projection. Its image $\\operatorname{Im}p_j$ is a quasi-coherent sheaf of ideals of $\\mathcal O_Z$ [lem-weil-pbc-quasi-coherent-module-cokernel-image](1),(2), with $(\\operatorname{Im}p_j)_\\eta=(p_j)_\\eta(\\mathcal K_\\eta)=0$ [lem-weil-pbc-module-stalk-exact](4). As $Z$ is integral with generic point $\\eta$, [lem-weil-pbc-integral-scheme-ideal-generic-stalk] ((a)$\\Leftrightarrow$(c)) gives $\\operatorname{Im}p_j=0$, so $p_j=0$ for every $j$. A section of $\\mathcal K$ over an open $V'$ is a section of $\\mathcal O_Z^{\\oplus r}(V')=\\mathcal O_Z(V')^{\\oplus r}$ all of whose coordinates $p_j(s)$ vanish, hence $\\mathcal K=0$: $\\chi$ is injective on the sections over every open of $Z$.",
+   "uses": [
+    "lem-weil-pbc-coherent-kernel-cokernel-locnoeth",
+    "lem-weil-pbc-module-stalk-exact",
+    "lem-weil-pbc-quasi-coherent-module-cokernel-image",
+    "lem-weil-pbc-integral-scheme-ideal-generic-stalk"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/coherent.tex",
+    "place": "Cohomology of Schemes, Lemma 01YE (lemma-prepare-filter-irreducible, coherent.tex line 2982), proof, last sentence ('injective because X is integral and it is injective at the generic point (easy proof omitted)'), written out here"
+   }
+  },
+  {
+   "text": "(Pushing forward; conclusion.) Let $\\alpha=\\iota\\circ\\theta\\circ i_*\\chi:i_*(\\mathcal I^{\\oplus r})\\to i_*\\mathcal G\\to\\mathcal F'\\to\\mathcal F$. It is $\\mathcal O_X$-linear, $i_*$ being a functor from $\\mathcal O_Z$-modules to $\\mathcal O_X$-modules [def-pc-module-pullback]. On an open $W'\\subseteq X$, $(i_*\\chi)_{W'}=\\chi_{i^{-1}W'}$, since $(i_*\\mathcal H)(W')=\\mathcal H(i^{-1}W')$ [lem-weil-pbc-closed-pushforward-stalks]; so $i_*\\chi$ is injective on every open (step 6), and $\\alpha$, a composite with the isomorphism $\\theta$ (step 3) and the inclusion $\\iota$, is injective. The set $i(Z\\setminus V)$ is closed in $X$, because $Z\\setminus V$ is closed in $Z$ and $i$ is a homeomorphism onto the closed subset $i(Z)$ [def-weil-closed-immersion]; let $W_2=X\\setminus i(Z\\setminus V)$, an open set containing $\\xi=i(\\eta)$ ($\\eta\\in V$, $i$ injective), with $i^{-1}(W_2)=V$. For every open $W'\\subseteq W_2$, $(i_*\\chi)_{W'}=\\chi_{i^{-1}W'}$ with $i^{-1}W'\\subseteq V$ is bijective (step 5), so $(i_*\\chi)|_{W_2}$ is an isomorphism. Let $W=W_1\\cap W_2$, an open neighbourhood of $\\xi$ (step 2). Then $\\alpha|_W=\\iota|_W\\circ\\theta|_W\\circ(i_*\\chi)|_W$ is a composite of isomorphisms. With $r\\ge0$ (step 4) and the coherent ideal $\\mathcal I\\subseteq\\mathcal O_Z$ (step 5) this proves the lemma.",
+   "uses": [
+    "def-pc-module-pullback",
+    "lem-weil-pbc-closed-pushforward-stalks",
+    "def-weil-closed-immersion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/coherent.tex",
+    "place": "Cohomology of Schemes, Lemma 01YE (lemma-prepare-filter-irreducible, coherent.tex line 2982), proof, second paragraph ('applying i_*, which is left exact, we get the result')"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-immersion-base-change-lft",
+  "pqf-lem-locnoeth-lft",
+  "def-weil-closed-immersion",
+  "pqf-lem-coherent-ft-locnoeth",
+  "lem-weil-pbc-coherent-kernel-cokernel-locnoeth",
+  "pqf-def-coherent",
+  "def-sbc-closed-immersion-ideal-sheaf",
+  "lem-weil-pbc-closed-pushforward-stalks",
+  "lem-weil-pbc-locally-surjective-iff-stalks",
+  "lem-weil-pbc-module-stalk-exact",
+  "lem-weil-pbc-integral-scheme-ideal-generic-stalk",
+  "def-weil-residue-field",
+  "lem-weil-pbc-sections-annihilated-by-ideal",
+  "lem-weil-pbc-coherent-local-isomorphism",
+  "lem-weil-pbc-ideal-module-product-stalk",
+  "lem-weil-pbc-module-iso-on-stalks",
+  "lem-weil-pbc-closed-immersion-coherent-equivalence",
+  "def-weil-pbc-module-stalk",
+  "lem-weil-pbc-coherent-stalk-map-extends",
+  "lem-weil-pbc-reduced-induced-closed-subscheme",
+  "lem-weil-pbc-coherent-homs-over-open",
+  "lem-weil-pbc-ideal-times-quasi-coherent-affine-sections",
+  "def-pur-sheaf-tensor-product",
+  "lem-weil-pbc-quasi-coherent-module-cokernel-image",
+  "def-pc-module-pullback"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/coherent.tex",
+  "place": "Cohomology of Schemes, Lemma 01YE (lemma-prepare-filter-irreducible, line 2982) and its proof; the steps the source omits ('easy proof omitted', J_xi = m_xi, I^n(O^r) = (I^n)^r, the neighbourhood W) written out"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -44,10 +183,17 @@
    "results": "Scheme.Modules only in StructureSheaf.lean, Modules/Tilde.lean, Modules/Sheaf.lean; no pushforward along closed immersions of ideal sheaves, no coherent modules",
    "date": "2026-10-10",
    "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "rg -ni 'coherent' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicGeometry; ls ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicGeometry/Modules/",
+   "results": "only quasi-coherence: Modules/Tilde.lean (IsQuasicoherent, line 415-466), Sites/SmallAffineZariski.lean (quasi-coherent algebras, comments), IdealSheaf/Basic.lean:690 (comment); Modules/ has Presheaf.lean, Sheaf.lean, Tilde.lean; no coherent modules, no pushforward of ideal sheaves along closed immersions; not a Mathlib leaf (delivery-errors B8)",
+   "date": "2026-10-10",
+   "verdict": "no match"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "worker",
@@ -67,5 +213,16 @@
   }
  },
  "chapter": "sec-proper-base-change",
- "unit": "sk-thm-p1"
+ "unit": "sk-thm-p1",
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "lem-weil-pbc-coherent-generic-point-ideal-inclusion",
+  "worker": "stage1",
+  "summary": "Source read: Stacks 01YE = coherent-lemma-prepare-filter-irreducible (coherent.tex 2982) and its proof; cited lemmas read with statements and proofs and tags verified in tags/tags: 01PO = properties-lemma-sections-annihilated-by-ideal, 01Y3 = coherent-lemma-local-isomorphism, 087T = coherent-lemma-i-star-equivalence, 01Y4 = coherent-lemma-map-stalks-local-map, 01YB = coherent-lemma-homs-over-open, 01J3 = schemes-lemma-reduced-closed-subscheme. Statement kept (it agrees with 01YE, with the open W made explicit, which the citer lem-weil-pbc-coherent-property-devissage-integral-subschemes uses in its step 6 together with r >= 0, the coherent ideal I and the injective alpha, all proved here). Not a Mathlib leaf: no coherent modules in Mathlib.AlgebraicGeometry (grep added to the three earlier searches). Split in seven steps following the proof: (1) Z Noetherian, J coherent of finite type, J_xi = m_xi (written out: the surjective stalk map O_{X,xi} -> O_{Z,eta} onto a field); (2) F' = sections killed by J (01PO, new node), coherent, F'_xi = F_xi, iso near xi by 01Y3 (new node), J F' = 0 via stalks; (3) F' = i_* G by 087T (existing node lem-weil-pbc-closed-immersion-coherent-equivalence); (4) r = dim G_eta, a map O_Z^r -> G near eta by 01Y4 (new node) and 01Y3; (5) the reduced induced ideal I_T of T = Z \\ U (existing 01J3 node), V(I_T) = T, extension chi: (I_T^n)^r -> G by 01YB (new node), I^n O^r = (I^n)^r written out; (6) injectivity of chi, the source's 'easy proof omitted', via the coordinate images and the generic stalk of ideals; (7) push forward, injectivity and the neighbourhood W = W_1 cap (X \\ i(Z \\ V)). New nodes (unsplit, three kinds of Mathlib search each): lem-weil-pbc-sections-annihilated-by-ideal (01PO), lem-weil-pbc-coherent-local-isomorphism (01Y3), lem-weil-pbc-coherent-stalk-map-extends (01Y4), lem-weil-pbc-coherent-homs-over-open (01YB). Tools of another unit: pqf-lem-coherent-ft-locnoeth and pqf-lem-locnoeth-lft (sk-prop-av-pqf-finite), as in the citer."
+ },
+ "reviewed": "2026-10-10 L: 7 steps checked against the 01YE proof: J_xi = m_xi, sections killed by J (01PO) agree with F near xi (01Y3), descent to Z by 087T, a map O_Z^r -> G near eta (01Y4, 01Y3), extension over Z with a power of the reduced ideal of the complement (01YB, 01J3), injectivity of chi written out via the generic stalk of an integral scheme, push forward and the neighbourhood W; citer devissage step 6 matches",
+ "tool_uses": [
+  "pqf-lem-coherent-ft-locnoeth",
+  "pqf-lem-locnoeth-lft"
+ ]
 }
