@@ -1,6 +1,6 @@
 # Work queue
 
-856 items; claim with `tools/claim.py next <group> [--stage N]`.
+857 items; claim with `tools/claim.py next <group> [--stage N]`.
 
 ## Stage 1: nodes to split (54)
 
@@ -28,7 +28,7 @@
 | `lem-pc-vanishing-above-dim` | 4009 | rests_on_sorry |
 | `lem-sc-finite-flat-surj-points` | 4009 | none |
 | `lem-sc-etale-triple-to-sh-completion-flat` | 4012 | none |
-| `lem-sc-etale-at-prime-flat-unramified-criterion` | 4013 | none |
+| `lem-pc-affine-sections-flat-over-base` | 5014 | none |
 | `lem-sc-ass-weakass-fg-prime` | 5014 | none |
 | `lem-pc-derived-tensor-transitivity` | 5015 | none |
 | `lem-pc-rf-single-complex-affine-base-change` | 5015 | none |
@@ -61,7 +61,7 @@
 | `lem-pur-rhom-well-defined` | - | none |
 | `lem-pur-hom-kflat-into-kinjective` | - | none |
 
-## Stage 2: nodes to state (802)
+## Stage 2: nodes to state (803)
 
 | node | distance to Mathlib | kind |
 |---|---|---|
@@ -255,6 +255,7 @@
 | `lem-sc-effective-cartier-affine-dimension-drop` | 1 | state |
 | `lem-sc-effective-cartier-dimension-drop` | 1 | state |
 | `lem-sc-etale-affine-over-curve` | 1 | state |
+| `lem-sc-etale-at-prime-flat-unramified-criterion` | 1 | state |
 | `lem-sc-etale-coproduct-etale` | 1 | state |
 | `lem-sc-etale-fibre-product-coproduct` | 1 | state |
 | `lem-sc-etale-local-dimension` | 1 | state |
