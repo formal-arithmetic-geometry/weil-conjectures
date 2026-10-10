@@ -1,13 +1,12 @@
 # Work queue
 
-887 items; claim with `tools/claim.py next <group> [--stage N]`.
+886 items; claim with `tools/claim.py next <group> [--stage N]`.
 
-## Stage 1: nodes to split (324)
+## Stage 1: nodes to split (321)
 
 | node | distance to a target | Lean state on the done branch |
 |---|---|---|
 | `thm-constructible-serre` | 5 | rests_on_sorry |
-| `lem-weil-pbc-ext-one-direct-sum` | 1017 | none |
 | `lem-weil-pbc-injective-acyclicity-bounded-below` | 2002 | sorry_here |
 | `lem-weil-pbc-sections-base-field-extension` | 2004 | none |
 | `lem-weil-pbc-etale-fibre-specialization-bound` | 2007 | none |
@@ -28,7 +27,6 @@
 | `lem-sc-noetherian-topological-cohomology-vanishing` | 2012 | none |
 | `lem-sc-torsor-h1-functoriality` | 2012 | none |
 | `lem-sc-invert-s-cohomology` | 2013 | none |
-| `lem-sc-reduced-ideals-zero-intersection` | 2013 | none |
 | `lem-sc-zero-dim-noetherian-closed-finite` | 2013 | none |
 | `lem-weil-pbc-etale-cohomology-limit-complex-systems` | 3005 | none |
 | `lem-weil-pbc-finite-coproduct-cohomology-assembly` | 3006 | none |
@@ -41,7 +39,6 @@
 | `lem-pc-affine-nonzerodivisor-complement-dense` | 3011 | none |
 | `lem-sc-fibre-dimension-after-base-change` | 3011 | none |
 | `lem-weil-pbc-ringed-site-injective-module-cech-acyclic` | 3011 | none |
-| `lem-exc-rg-open-stabilizer-adjoint` | 3012 | none |
 | `lem-galois-descent-datum-diagonal-identity` | 3012 | none |
 | `lem-pc-clopen-smooth-proper-curve` | 3012 | none |
 | `lem-pc-fpqc-descend-closed-immersion` | 3012 | none |
@@ -331,7 +328,7 @@
 | `def-exc-jacobian-presentation` | - | none |
 | `lem-zl-noether-normalization-dimension` | - | none |
 
-## Stage 2: nodes to state (563)
+## Stage 2: nodes to state (565)
 
 | node | distance to Mathlib | kind |
 |---|---|---|
@@ -427,6 +424,7 @@
 | `lem-sc-pic-proper-ntorsion` | 1 | state |
 | `lem-sc-point-z-cohomology` | 1 | state |
 | `lem-sc-principal-ideal-dvr` | 1 | state |
+| `lem-sc-reduced-ideals-zero-intersection` | 1 | state |
 | `lem-sc-regular-connected-integral` | 1 | state |
 | `lem-sc-regular-local-domain` | 1 | state |
 | `lem-sc-smooth-algebra-reduced-field` | 1 | state |
@@ -528,6 +526,7 @@
 | `lem-weil-pbc-etale-section-idempotent-splitting` | 1 | state |
 | `lem-weil-pbc-exact-free-complex-last-minors-regular-sequence` | 1 | state |
 | `lem-weil-pbc-exact-functor-bounded-below` | 1 | state |
+| `lem-weil-pbc-ext-one-direct-sum` | 1 | state |
 | `lem-weil-pbc-factorization-criterion-filtered-colimit` | 1 | state |
 | `lem-weil-pbc-fibre-product-point-residue-field` | 1 | state |
 | `lem-weil-pbc-fibre-ring-local-ring-natural-iso` | 1 | state |
@@ -899,7 +898,7 @@
 | `lem-weil-pbc-p1-field-dimension-one` | 4 | state |
 | `lem-weil-pbc-projective-space-zero-isomorphism` | 4 | state |
 
-Not open yet: 343 nodes that wait for stage 1, 1105 nodes that wait for a statement dependency.
+Not open yet: 340 nodes that wait for stage 1, 1106 nodes that wait for a statement dependency.
 
 ## Stage 3: modules to prove (0)
 
