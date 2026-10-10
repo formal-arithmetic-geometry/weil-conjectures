@@ -12,9 +12,105 @@
   "def-weil-pbc-formally-smooth-adic",
   "def-weil-pbc-flat-ring-map"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Let $A^\\wedge$ and $B^\\wedge$ be the completions of $A$ and $B$ at their maximal ideals [def-weil-pbc-adic-completion]. Since $A$ and $B$ are Noetherian, their maximal ideals are finitely generated [def-weil-pbc-noetherian-ring]. The completions are local rings with maximal ideals $\\mathfrak m_AA^\\wedge$ and $\\mathfrak m_BB^\\wedge$ [lem-weil-pbc-local-completion-local-ring], are Noetherian [lem-weil-pbc-adic-completion-noetherian], and are complete for those ideals [lem-weil-pbc-adic-completion-mod-ideal]. The induced local map $A^\\wedge\\to B^\\wedge$ is formally smooth for the $\\mathfrak m_BB^\\wedge$-adic topology by [lem-weil-pbc-fs-adic-complete-source-target]. It therefore suffices first to prove the theorem for complete Noetherian local rings; Steps 2--5 do so.",
+   "uses": [
+    "def-weil-pbc-adic-completion",
+    "def-weil-pbc-noetherian-ring",
+    "lem-weil-pbc-local-completion-local-ring",
+    "lem-weil-pbc-adic-completion-noetherian",
+    "lem-weil-pbc-adic-completion-mod-ideal",
+    "lem-weil-pbc-fs-adic-complete-source-target"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "proof of Lemma Tag 07NP, first sentence, citing Lemma 07ED and Algebra Lemma 0316"
+   }
+  },
+  {
+   "text": "Assume now that $A$ and $B$ are complete. By [lem-weil-pbc-complete-local-flat-presentation], choose a commutative square of local homomorphisms $R\\to S$, $R\\twoheadrightarrow A$, $S\\twoheadrightarrow B$, $A\\to B$ in which $R,S$ are complete Noetherian local rings, the vertical maps are surjective, and $R\\to S$ is flat. Put $I=\\ker(R\\to A)$; commutativity makes the composite $I\\to S\\to B$ zero, so the surjection $S\\to B$ factors through a surjective homomorphism of $A$-algebras $q:S/IS\\twoheadrightarrow B$.",
+   "uses": [
+    "lem-weil-pbc-complete-local-flat-presentation"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "proof of Lemma Tag 07NP, 'Choose a commutative diagram ... as in Lemma 07NN ... Let I be the kernel of R -> A'"
+   }
+  },
+  {
+   "text": "The canonical map $S\\otimes_RA\\to S/IS$, $s\\otimes a\\mapsto s\\widetilde a\\bmod IS$ (where $\\widetilde a$ is any lift of $a$ to $R$), is an isomorphism [lem-weil-pbc-tensor-quotient-base-change]. Since $S$ is flat over $R$, its base change $S\\otimes_RA$ is flat over $A$ [lem-weil-pbc-flat-module-base-change]; transporting the module structure through this isomorphism, $S/IS$ is a flat $A$-module.",
+   "uses": [
+    "lem-weil-pbc-tensor-quotient-base-change",
+    "lem-weil-pbc-flat-module-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "proof of Lemma Tag 07NP, parenthesis citing Algebra Lemma 00HI for base change of flatness"
+   }
+  },
+  {
+   "text": "The $A$-algebra surjection $q:S/IS\\twoheadrightarrow B$ has an $A$-algebra section. Indeed, $S/IS$ is a complete Noetherian local ring by [lem-weil-pbc-complete-local-quotient]. Let $C=S/IS$ and $J=\\ker q$. Because $q:C\\to B$ is a surjective local homomorphism, $q^{-1}(\\mathfrak m_B)=\\mathfrak m_C$ and surjectivity gives $q(\\mathfrak m_C)=\\mathfrak m_B$: the inclusion into $\\mathfrak m_B$ is locality, while for $b\\in\\mathfrak m_B$ a lift $c\\in C$ cannot be a unit, since then $b=q(c)$ would be a unit, so $c\\in\\mathfrak m_C$. Hence $q(\\mathfrak m_C^n)=q(\\mathfrak m_C)^n=\\mathfrak m_B^n$ for every $n\\ge1$. Therefore $q^{-1}(\\mathfrak m_B^n)=J+\\mathfrak m_C^n$: one inclusion is clear; if $q(c)=q(x)$ for some $x\\in\\mathfrak m_C^n$, then $c-x\\in J$. Since the complete local ring $B$ is $\\mathfrak m_B$-adically separated, $\\bigcap_{n\\ge1}\\mathfrak m_B^n=0$, and consequently $\\bigcap_{n\\ge1}(J+\\mathfrak m_C^n)=q^{-1}(\\bigcap_{n\\ge1}\\mathfrak m_B^n)=J$. Thus $J$ is closed for the $\\mathfrak m_C$-adic topology; also $J\\subseteq\\mathfrak m_C$. The identity map $B\\to C/J\\cong B$ is continuous because it sends $\\mathfrak m_B$ into $q(\\mathfrak m_C)$. Apply [lem-weil-pbc-fs-adic-lift-into-complete] with target $C$, ideal of definition $\\mathfrak m_C$, closed ideal $J$, and $t=1$ to lift that identity to an $A$-algebra map $s:B\\to C$ satisfying $q\\circ s=\\operatorname{id}_B$.",
+   "uses": [
+    "lem-weil-pbc-complete-local-quotient",
+    "lem-weil-pbc-fs-adic-lift-into-complete"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "proof of Lemma Tag 07NP, 'Because B is formally smooth over A ... S/IS -> B has a section, see Lemma 07NJ'"
+   }
+  },
+  {
+   "text": "The $A$-linear maps $s:B\\to S/IS$ and $q:S/IS\\to B$ satisfy $q\\circ s=\\operatorname{id}_B$ by Step 4. Thus $B$ is a retract of the flat $A$-module $S/IS$ from Step 3, and [lem-weil-pbc-flat-module-retract] shows that $B$ is flat over $A$. This proves the complete case.",
+   "uses": [
+    "lem-weil-pbc-flat-module-retract"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "proof of Lemma Tag 07NP, final sentence, 'Hence B is a direct summand of the flat A-module S/IS ... whence flat'"
+   }
+  },
+  {
+   "text": "Return to the original $A$ and $B$. Steps 1--5 show that $A^\\wedge\\to B^\\wedge$ is flat. The completion map $A\\to A^\\wedge$ is flat and $B\\to B^\\wedge$ is faithfully flat [lem-weil-pbc-local-completion-faithfully-flat]. Hence the composite $A\\to A^\\wedge\\to B^\\wedge$ is flat [lem-weil-pbc-flat-ring-map-comp]. Regarding $B^\\wedge$ as a $B$-module through $B\\to B^\\wedge$, [lem-weil-pbc-flat-permanence] applies: it is flat over $A$ and faithfully flat over $B$, so $A\\to B$ is flat.",
+   "uses": [
+    "lem-weil-pbc-local-completion-faithfully-flat",
+    "lem-weil-pbc-flat-ring-map-comp",
+    "lem-weil-pbc-flat-permanence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "proof of Lemma Tag 07NP, first sentence, citing Algebra Lemmas 0584 and 00MC to descend flatness from completions"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-adic-completion",
+  "def-weil-pbc-noetherian-ring",
+  "lem-weil-pbc-local-completion-local-ring",
+  "lem-weil-pbc-adic-completion-noetherian",
+  "lem-weil-pbc-adic-completion-mod-ideal",
+  "lem-weil-pbc-fs-adic-complete-source-target",
+  "lem-weil-pbc-complete-local-flat-presentation",
+  "lem-weil-pbc-tensor-quotient-base-change",
+  "lem-weil-pbc-flat-module-base-change",
+  "lem-weil-pbc-complete-local-quotient",
+  "lem-weil-pbc-fs-adic-lift-into-complete",
+  "lem-weil-pbc-flat-module-retract",
+  "lem-weil-pbc-local-completion-faithfully-flat",
+  "lem-weil-pbc-flat-ring-map-comp",
+  "lem-weil-pbc-flat-permanence"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "More on Algebra, Lemma Tag 07NP (lemma-formally-smooth-flat), proof"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -53,7 +149,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "worker",
@@ -75,5 +171,17 @@
  "chapter": "sec-proper-base-change",
  "unit": "sk-thm-p1",
  "mathlib_candidate": "Algebra.FormallySmooth.flat_of_algHom_of_isNoetherianRing (Mathlib/RingTheory/Smooth/Flat.lean:41-48, read with sed -n): for the discrete Algebra.FormallySmooth R A and a surjective R-algebra map from a flat Noetherian R-algebra, A is R-flat, as a retract of an adic completion. Discrete formal smoothness is strictly stronger than the adic notion of the node (k -> k[[x]] is formally smooth for the (x)-adic topology but not formally smooth), so this is an analogue, not a generalization; the adic notion is not in Mathlib. Not a leaf (B8).",
- "reviewed": "Reviewed by L 2026-10-10 (statement): More on Algebra 07NP; Mathlib candidate is the non-adic analogue only (B8). Unsplit."
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "lem-weil-pbc-fs-adic-local-flat",
+  "worker": "stage1",
+  "summary": "Split Stacks 07NP in six steps: reduce to completions using 07ED and faithful-flat descent; choose the flat Cohen presentation of 07NN; identify S/IS with the flat base change S tensor_R A; obtain the section S/IS -> B from adic formal smoothness via 07NJ with the closed-kernel check written out; and conclude by the Mathlib retract lemma. Added unsplit nodes for the exact 07ED and 07NN inputs and a Mathlib leaf for Module.Flat.of_retract. The statement and existing Mathlib searches were retained."
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "group": "E1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed by the lead of E1; spot-checked by L: 07NP route; step 4 application of fs-adic-lift-into-complete checked clause by clause (C = S/IS complete by complete-local-quotient, J closed, r = t = 1); step 6 flat-permanence with M = B^; new 07ED(1=>3) and 07NN (without regularity) statements read against more-algebra.tex; Module.Flat.of_retract at Flat/Basic.lean:172 verified"
+ }
 }
