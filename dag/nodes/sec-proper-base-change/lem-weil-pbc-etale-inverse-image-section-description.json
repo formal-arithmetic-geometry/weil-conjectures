@@ -24,9 +24,52 @@
   "def-weil-pbc-etale-sheaf-of-sets",
   "lem-weil-pbc-sets-etale-inverse-image-composition-units"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "By the definition of the etale inverse image, $g^{-1}F$ is the sheafification of the presheaf $P$ on $T_{\\Et}$ with $P(T')$ the filtered colimit over pairs $(V\\to S,\\,T'\\to V\\times_ST)$ of $F(V)$. Thus a section of $g^{-1}F$ is a section of the sheafification of this presheaf.",
+   "uses": [
+    "lem-weil-pbc-etale-inverse-image-algebraic-structures"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Lemma Tag 09XN (lemma-describe-pullback), proof, paragraph beginning 'By construction of g_{i, small}^{-1}G'"
+   }
+  },
+  {
+   "text": "Apply the local-section clause of sheafification to the section over $T$. There is an etale covering $\\{T_a\\to T\\}$ and, for each $a$, an element $p_a\\in P(T_a)$ whose image in the sheafification is the restriction of the original section.",
+   "uses": [
+    "lem-weil-pbc-site-sheafification-sections-local"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Lemma Tag 09XN (lemma-describe-pullback), proof, paragraph beginning 'By construction of g_{i, small}^{-1}G'"
+   }
+  },
+  {
+   "text": "For each $a$, the filtered-colimit representation of $p_a$ supplies an etale object $V_a\\to S$, a morphism $T_a\\to V_a\\times_ST$, and a section $t_a\\in F(V_a)$ representing $p_a$. Composing $T_a\\to V_a\\times_ST$ with the projection gives a factorization $T_a\\to V_a\\to S$, and the image of $t_a$ in the inverse image is exactly the restriction of the original section to $T_a$. Hence the claimed local description holds.",
+   "uses": [
+    "lem-weil-pbc-filtered-colimit-sets-elementwise",
+    "lem-weil-pbc-etale-inverse-image-algebraic-structures"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Lemma Tag 09XN (lemma-describe-pullback), proof, paragraph beginning 'By construction of g_{i, small}^{-1}G'"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-etale-inverse-image-algebraic-structures",
+  "lem-weil-pbc-site-sheafification-sections-local",
+  "lem-weil-pbc-filtered-colimit-sets-elementwise"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Lemma Tag 09XN (lemma-describe-pullback), proof paragraph beginning 'By construction of g_{i, small}^{-1}G'"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -55,13 +98,45 @@
    "results": "IsOpenImmersion.lift and pullback cone lemmas only",
    "date": "2026-10-10",
    "verdict": "no match (reviewer R-fpd1703)"
+  },
+  {
+   "tool": "leansearch",
+   "query": "a section of an inverse image sheaf is locally pulled back from a section on an etale object",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-11",
+   "verdict": "unavailable"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-weil-pbc-etale-sections-fpqc-descent",
   "by": "worker",
   "date": "2026-10-10"
+ },
+ "split_report": {
+  "date": "2026-10-11",
+  "item": "lem-weil-pbc-etale-inverse-image-section-description",
+  "worker": "stage1",
+  "summary": "Split the local description into the inverse-image presheaf construction, local representatives after sheafification, and representatives of filtered-colimit elements. Existing nodes state all facts used; no duplicate node was created.",
+  "blueprint": "Realizes the ancestor blueprint proof for lemma-weil-pbc-proper-underived-exchange at the Tag 09XN paragraph beginning 'By construction of g_{i, small}^{-1}G'.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-site-sheafification-sections-local",
+    "why": "Step 2 takes the local representative covering supplied by the general sheafification theorem; the sk-thm-iff route has no replacement for this generic sheaf tool."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-site-sheafification-sections-local",
+  "lem-weil-pbc-site-sheafification-sections-local"
+ ],
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-iis1740",
+  "group": "E1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-iis1740 (reviewer sub-agent of L); spot-checked: Read whole packet; step 1 matches the inverse-image node's sheafified colimit presheaf over pairs (V/S, T'->V x_S T); step 2 is exactly the local-representative clause of the sheafification node (generic tool, accepted); step 3 uses clause (1) of the colimit-elementwise node (surjectivity of the colimit maps, which holds for any colimit of sets, so the unstated filteredness is not needed); factorization T_a->V_a x_S T->V_a over S checked. No new nodes. PASS."
  }
 }
