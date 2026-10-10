@@ -848,3 +848,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 04:04 L: reviewed lem-weil-pbc-mittag-leffler-complex-limit-homology (7 steps, +4: ML and essentially-constant definitions, 02N1, 070D): accepted.
 - 04:05 L: reviewed lem-weil-pbc-ml-cohomology-powers-ideal (6 steps, +02OA (2),(3) node; Stacks 02OB cites 02OA (4) where (3) is used): accepted.
 - 04:06 L: reviewed lem-weil-pbc-make-separably-generated (10 steps, +5 leaves, +031V node): accepted.
+- 04:08 L: reviewed lem-weil-pbc-module-cohomology-fmap-basic-properties (8 steps, 0 new): accepted.
