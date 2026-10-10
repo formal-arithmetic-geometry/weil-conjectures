@@ -1365,3 +1365,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 12:03 L: merged G1 lem-pc-module-pullback-identity-composition (0097, 0 new).
 - 12:04 L: accepted def-galois-category (7 Mathlib-leaf definitions; the Stacks vs SGA1 axioms gap recorded in HUMAN.md).
 - 12:04 L: accepted lem-galois-action-continuous as a Mathlib leaf (continuousSMul_aut_fiber).
+- 12:04 L: accepted def-sc-etale-qcoherent-module (definition split; new node for the presheaf functoriality of the pullback restrictions).
