@@ -706,3 +706,5 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 00:34 L: merged F1 closed-subset-proper-over-base-universally-closed-image (2nd delivery; +0356 node, +07RK leaf, +01W4 leaf); the 07RK leaf duplicates lem-weil-pbc-closed-immersion-from-composite (other unit), cross-referenced by lead_notes.
 - 2026-10-10, delivery of F1: lem-weil-pbc-etale-stratification-local-gluing returned (ba222b45): step 3 cites the construction inside lemma-constructible-common-refinement for the morphism X_i -> W_{a,b}, which its statement does not give (use Z_i = X_i x_X
 - 00:35 L: reviewed lem-weil-pbc-inverse-image-composition-module-linear (03D8; 5 steps; tool_uses prop-weil-pbc-inverse-image-modules-exact): accepted.
+- 00:37 L: reviewed lem-weil-pbc-inverse-image-closed-pushforward-constant (0CAL reduction; 5 steps; +007T leaf, +stalks node): accepted.
+- 00:37 L: reviewed lem-weil-pbc-integral-closure-finite-fibre-image-clopen (09XH middle part; 10 steps; +00E5 leaf): accepted; L dropped the unused hypothesis C'_1 = C_1 from lem-weil-pbc-integral-closure-finite-fibre-choose-g (its conclusion is this item's).

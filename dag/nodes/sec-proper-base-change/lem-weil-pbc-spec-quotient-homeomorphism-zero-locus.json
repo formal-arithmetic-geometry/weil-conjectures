@@ -1,0 +1,67 @@
+{
+ "id": "lem-weil-pbc-spec-quotient-homeomorphism-zero-locus",
+ "kind": "statement",
+ "title": "Spec of a quotient ring is homeomorphic to the zero locus",
+ "statement": "Let $R$ be a commutative ring, $J\\subseteq R$ an ideal and $q:R\\to R/J$ the quotient map; more generally let $q:R\\to S$ be a surjective ring homomorphism with kernel $J$. Then the map $\\operatorname{Spec}q:\\operatorname{Spec}S\\to\\operatorname{Spec}R$, $\\bar{\\mathfrak p}\\mapsto q^{-1}(\\bar{\\mathfrak p})$ [def-weil-affine-spectrum], is injective, its image is the closed subset $V(J)=\\{\\mathfrak p\\in\\operatorname{Spec}R: J\\subseteq\\mathfrak p\\}$, and it is a homeomorphism of $\\operatorname{Spec}S$ onto $V(J)$ with the subspace topology (a closed embedding); the inverse sends $\\mathfrak p\\in V(J)$ to $q(\\mathfrak p)$.",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Algebra, section \"The spectrum of a ring\", Lemma Tag 00E5 (lemma-spec-closed), algebra.tex:3227-3235"
+ },
+ "stmt_deps": [
+  "def-weil-affine-spectrum"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Spec of quotient ring R/I is homeomorphic to the closed subset V(I) of Spec R",
+   "results": "AlgebraicGeometry.IsClosedImmersion.spec_of_quotient_mk (Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion), Ideal.primeSpectrumQuotientOrderIsoZeroLocus (Mathlib.RingTheory.Spectrum.Prime.RingHom), PrimeSpectrum.isClosedEmbedding_comap_of_surjective (Mathlib.RingTheory.Spectrum.Prime.Topology), PrimeSpectrum.homeomorphOfRingEquiv",
+   "date": "2026-10-10",
+   "verdict": "match: PrimeSpectrum.isClosedEmbedding_comap_of_surjective with range_comap_of_surjective"
+  },
+  {
+   "tool": "loogle",
+   "query": "Topology.IsClosedEmbedding (PrimeSpectrum.comap _)",
+   "results": "PrimeSpectrum.isClosedEmbedding_comap_fst, PrimeSpectrum.isClosedEmbedding_comap_snd, PrimeSpectrum.isClosedEmbedding_comap_of_surjective (Mathlib.RingTheory.Spectrum.Prime.Topology)",
+   "date": "2026-10-10",
+   "verdict": "match: isClosedEmbedding_comap_of_surjective"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rn 'isClosedEmbedding_comap_of_surjective\\|range_comap_of_surjective\\|theorem mk_ker' Mathlib/RingTheory/Spectrum/Prime/ Mathlib/RingTheory/Ideal/Quotient/",
+   "results": "Topology.lean:440 lemma isClosedEmbedding_comap_of_surjective (hf : Surjective f) : IsClosedEmbedding (comap f); RingHom.lean:237 theorem range_comap_of_surjective (hf : Surjective f) : Set.range (comap f) = zeroLocus (ker f); Ideal/Quotient/Operations.lean:133 theorem mk_ker : ker (Quotient.mk I) = I",
+   "date": "2026-10-10",
+   "verdict": "match (sources read)"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "PrimeSpectrum.isClosedEmbedding_comap_of_surjective, PrimeSpectrum.range_comap_of_surjective",
+  "file": "Mathlib/RingTheory/Spectrum/Prime/Topology.lean",
+  "how": "a few Mathlib lemmas, one per clause: isClosedEmbedding_comap_of_surjective (Topology.lean:440: injective, inducing, closed range, i.e. a homeomorphism onto its closed image) and range_comap_of_surjective (RingHom.lean:237: range (comap f) = zeroLocus (ker f)), with ker f = J (Ideal.mk_ker, Ideal/Quotient/Operations.lean:133, for the quotient map); the inverse q(p) is the preimage-image identity Ideal.map_comap_of_surjective. Sources read 2026-10-10",
+  "line": 440
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-integral-closure-finite-fibre-image-clopen",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lead_note": "L 2026-10-10: file/line fields set to the main declaration (isClosedEmbedding_comap_of_surjective, Topology.lean:440; range_comap_of_surjective RingHom.lean:237 verified with sed)."
+}
