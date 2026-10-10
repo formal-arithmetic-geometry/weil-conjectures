@@ -1703,3 +1703,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 14:58 L: returned deliver/C1/lem-sc-curve-base-change-relative-dimension-one (reviewer RETURN: 1. C1/C4: proof step 3 of lem-sc-curve-base-change-relative-dimension-one: the sentence 'Since C is a curve, every local)
 - 14:59 L: merged deliver/E1/lem-sc-finite-duality (reviewer FIX; after a return; new nodes: 1)
 - 15:00 L: merged deliver/G1/lem-sc-canonical-degree (reviewer PASS; after a return; new nodes: 0)
+- 15:00 L: returned deliver/H1/lem-sc-torsion-sections-generic (reviewer RETURN: 1. C4: lem-sc-torsion-sections-generic, proof step 1: the step chooses 'an affine open V=Spec A with x in V contained in)
