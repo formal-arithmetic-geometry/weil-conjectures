@@ -1,8 +1,8 @@
 # Work queue
 
-919 items; claim with `tools/claim.py next <group> [--stage N]`.
+921 items; claim with `tools/claim.py next <group> [--stage N]`.
 
-## Stage 1: nodes to split (620)
+## Stage 1: nodes to split (621)
 
 | node | distance to a target | Lean state on the done branch |
 |---|---|---|
@@ -25,7 +25,6 @@
 | `lem-weil-pbc-smooth-fibre-regular-local` | 1012 | none |
 | `lem-weil-pbc-smooth-localization-conormal-split` | 1012 | none |
 | `lem-weil-pbc-smooth-over-field-dimension-differentials` | 1012 | none |
-| `lem-weil-pbc-intersection-subfields-differentials` | 1013 | none |
 | `lem-weil-pbc-jacobi-zariski-connecting-map-naturality` | 1013 | none |
 | `lem-weil-pbc-lci-field-change` | 1013 | none |
 | `lem-weil-pbc-lci-regular-sequence-global-complete-intersection` | 1013 | none |
@@ -104,10 +103,12 @@
 | `lem-weil-pbc-fs-adic-lift-from-residue-field` | 1014 | none |
 | `lem-weil-pbc-fs-adic-lift-into-complete` | 1014 | none |
 | `lem-weil-pbc-fs-adic-local-flat` | 1014 | none |
+| `lem-weil-pbc-intersection-subfields-subspace` | 1014 | none |
 | `lem-weil-pbc-limit-tower-essentially-finite-presentation` | 1014 | none |
 | `lem-weil-pbc-local-ring-spec-limit-affine-neighbourhoods` | 1014 | none |
 | `lem-weil-pbc-nl-presentations-homotopy-equivalent` | 1014 | none |
 | `lem-weil-pbc-p-basis-differentials-basis` | 1014 | none |
+| `lem-weil-pbc-p-independent-differentials-independent` | 1014 | none |
 | `lem-weil-pbc-polynomial-ring-maximal-localization-dimension` | 1014 | none |
 | `lem-weil-pbc-torsion-module-flat-base-change-iso` | 1014 | none |
 | `lem-weil-pbc-torsion-submodule-flat-base-change-iso` | 1014 | none |
@@ -627,7 +628,7 @@
 | `def-exc-jacobian-presentation` | - | none |
 | `def-nagata-rees-algebra` | - | none |
 
-## Stage 2: nodes to state (299)
+## Stage 2: nodes to state (300)
 
 | node | distance to Mathlib | kind |
 |---|---|---|
@@ -790,6 +791,7 @@
 | `lem-weil-pbc-integral-closure-finite-fibre-part-localization` | 1 | state |
 | `lem-weil-pbc-integral-extension-dimension` | 1 | state |
 | `lem-weil-pbc-integral-idempotent-annihilating-polynomial` | 1 | state |
+| `lem-weil-pbc-intersection-subfields-differentials` | 1 | state |
 | `lem-weil-pbc-inverse-image-closed-pushforward-constant` | 1 | state |
 | `lem-weil-pbc-isolated-fibre-point-base-change` | 1 | state |
 | `lem-weil-pbc-isolated-fibre-point-residue-finite` | 1 | state |
@@ -931,7 +933,7 @@
 | `lem-weil-pbc-p1-field-dimension-one` | 4 | state |
 | `lem-weil-pbc-projective-space-zero-isomorphism` | 4 | state |
 
-Not open yet: 632 nodes that wait for stage 1, 578 nodes that wait for a statement dependency.
+Not open yet: 633 nodes that wait for stage 1, 578 nodes that wait for a statement dependency.
 
 ## Stage 3: modules to prove (0)
 
