@@ -1813,3 +1813,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 15:35 L: merged deliver/G1/lem-sc-noetherian-closed-points-finite (reviewer FIX; first push; new nodes: 1)
 - 15:35 L: lem-sc-tensor-product-free-basis source lines corrected (reviewer R-etd)
 - 15:36 L: merged deliver/H1/lem-galois-fpqc-singleton-fully-faithful-0241 (reviewer FIX+NODE(1); first push; new nodes: 1)
+- 15:36 L: merged deliver/F1/lem-pc-base-change-closure-components (reviewer FIX; after a return; new nodes: 3)

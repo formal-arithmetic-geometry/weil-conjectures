@@ -4,14 +4,14 @@
   "is": null,
   "from": {
    "node": "lem-pc-ample-positive-degree",
-   "place": "proof, part (⇐): 'and $X_{\\bar k}$ is a smooth projective curve over the algebraically closed field $\\bar k$ (smooth ... integral by [lem-pc-h0-geom-connected] and the regularity (reducedness) argument of [prop-pc-xk-integral] ... so $X_{\\bar k}$ is connected, normal and reduced and hence integral)': the claim that X_{\\bar k} is connected is false unless H^0(X,O_X)=k; this node states what is true (the components of X_{\\bar k} and their degrees)",
+   "place": "proof, part (<=), paragraph beginning 'and X_bar is a smooth projective curve': corrected component decomposition and degree comparison",
    "via": []
   },
   "same_as": []
  },
  "kind": "statement",
  "title": "Components of a smooth projective curve over an algebraic closure",
- "statement": "Let $k$ be a field [def-weil-field], $X$ a smooth projective curve over $k$ [def-pc-smooth-projective-curve], and $k':=\\Gamma(X,\\mathcal O_X)$, a $k$-algebra through the structure morphism $X\\to\\operatorname{Spec}k$. Let $\\Omega$ be an algebraically closed field [def-weil-algebraic-closure] containing $k$, let $X_\\Omega:=X\\times_{\\operatorname{Spec}k}\\operatorname{Spec}\\Omega$ with projection $p:X_\\Omega\\to X$ [def-pc-base-change]. Then:\n\n1. $k'$ is a field, finite and separable over $k$ [def-pc-field-extension] [def-weil-pbc-separable-field-extension]; put $r:=[k':k]\\geq1$.\n1. $X_\\Omega$ is the disjoint union $X_1\\amalg\\cdots\\amalg X_r$ of $r$ nonempty open and closed subschemes, and each $X_j$ is a proper smooth connected curve over $\\Omega$ in the sense of [def-sc-curves]: separated, of finite type, smooth [def-sbc-smooth-morphisms] and proper [def-weil-proper-morphism] over $\\Omega$, connected [def-weil-connected-scheme] and of dimension one [def-pc-dimension]; moreover $\\Gamma(X_j,\\mathcal O_{X_j})=\\Omega$.\n1. For every invertible $\\mathcal O_X$-module $\\mathcal L$ [def-sc-invertible-module] and every $j$, with $\\mathcal L_j:=(p^*\\mathcal L)|_{X_j}$ [def-pc-module-pullback], one has\n$$r\\cdot\\deg_{X_j}(\\mathcal L_j)=\\deg_X(\\mathcal L),$$\nwhere $\\deg_{X_j}$ and $\\deg_X$ are the degrees $\\chi(\\mathcal L_j)-\\chi(\\mathcal O_{X_j})$ over $\\Omega$ and $\\chi(\\mathcal L)-\\chi(\\mathcal O_X)$ over $k$ of [def-pc-degree-line-bundle].",
+ "statement": "Let $k$ be a field [def-weil-field], $X$ a smooth projective curve over $k$ [def-pc-smooth-projective-curve], and $k':=\\Gamma(X,\\mathcal O_X)$. Let $\\Omega$ be an algebraically closed field containing $k$ [def-weil-algebraic-closure], let $X_\\Omega:=X\\times_{\\operatorname{Spec}k}\\operatorname{Spec}\\Omega$ with projection $p:X_\\Omega\\to X$ [def-pc-base-change]. Then: (1) $k'$ is a finite separable field extension of $k$ [def-pc-field-extension] [def-weil-pbc-separable-field-extension]; put $r:=[k':k]$. (2) $X_\\Omega$ is the disjoint union $X_1\\amalg\\cdots\\amalg X_r$ of $r$ nonempty open and closed subschemes, each a proper smooth connected curve over $\\Omega$ [def-sc-curves], with $\\Gamma(X_j,\\mathcal O_{X_j})=\\Omega$. (3) For every invertible $\\mathcal O_X$-module $\\mathcal L$ [def-sc-invertible-module], with $\\mathcal L_j:=(p^*\\mathcal L)|_{X_j}$ [def-pc-module-pullback], one has $r\\deg_{X_j}(\\mathcal L_j)=\\deg_X(\\mathcal L)$, with degree the Euler-characteristic difference [def-pc-degree-line-bundle].",
  "source": {
   "document": "literature/stacks-project/varieties.tex",
   "place": "Varieties, Lemma 0BUG (lemma-proper-geometrically-reduced-global-sections), parts (1), (3), (4), for (1); Lemma 0FD1 (lemma-baby-stein) and its proof (the factors $\\kappa(s_i)\\otimes_k\\overline k\\to\\overline k$) for (2); (3) is written by an agent: $\\chi$ over $k$ is $r$ times $\\chi$ over $k'$ (same cohomology groups), and each $X_j=X\\times_{k',\\sigma_j}\\Omega$ has the $\\chi$ over $k'$ by flat base change (Cohomology of Schemes, Lemma 02KH)"
@@ -24,49 +24,99 @@
   "def-pc-field-extension",
   "def-weil-pbc-separable-field-extension",
   "def-sc-curves",
-  "def-sbc-smooth-morphisms",
-  "def-weil-proper-morphism",
-  "def-weil-connected-scheme",
-  "def-pc-dimension",
   "def-sc-invertible-module",
   "def-pc-module-pullback",
   "def-pc-degree-line-bundle"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Since $X$ is projective, [lem-pc-projective-proper] makes it proper; since it is a curve, [def-pc-curve] makes it a variety. Thus [lem-pc-h0-proper-variety](1) makes $k'=\\Gamma(X,\\mathcal O_X)$ a finite field extension of $k$. Smoothness gives geometric reducedness; [lem-pc-global-sections-separable] makes this extension separable. Thus $r=[k':k]\\ge1$.",
+   "uses": [
+    "lem-pc-projective-proper",
+    "def-pc-curve",
+    "lem-pc-h0-proper-variety",
+    "lem-pc-global-sections-separable"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Lemma 0BUG (lemma-proper-geometrically-reduced-global-sections), clauses (1), (3), (4)"
+   }
+  },
+  {
+   "text": "By [lem-pc-separable-tensor-algebraic-closure], $k'\\otimes_k\\Omega\\cong\\prod_{\\sigma:k'\\hookrightarrow_k\\Omega}\\Omega$, with $r$ factors. [lem-pc-flat-base-change-cohom] at $i=0$ identifies this algebra with $\\Gamma(X_\\Omega,\\mathcal O_{X_\\Omega})$. Its primitive idempotents give $r$ pairwise disjoint nonempty open-and-closed subschemes $X_j$ covering $X_\\Omega$; restriction gives $\\Gamma(X_j,\\mathcal O_{X_j})=\\Omega$. Each $X_j$ is connected by [lem-pc-scheme-connected-iff-idempotents]. Smoothness and properness persist under field base change by [lem-pc-proper-base-change]. Moreover $X$ is integral, separated and of finite type over $k'$: integrality is [def-pc-curve], while separatedness and finite type descend from the corresponding properties over $k$ along the finite extension $k'/k$; hence [def-pc-curve] applies to $X$ over $k'$. Since $X\\to\\operatorname{Spec}k$ factors through $\\operatorname{Spec}k'$, transitivity of fibre products gives $X_\\Omega=X\\times_{\\operatorname{Spec}k'}\\operatorname{Spec}(k'\\otimes_k\\Omega)$, and the product decomposition above gives $\\operatorname{Spec}(k'\\otimes_k\\Omega)=\\coprod_j\\operatorname{Spec}\\Omega$ (the $j$-th factor via $\\sigma_j$); hence $X_\\Omega=\\coprod_jX\\times_{\\operatorname{Spec}k',\\sigma_j}\\operatorname{Spec}\\Omega$, the $j$-th piece being the locus where the $j$-th primitive idempotent is $1$, so $X_j=X\\times_{\\operatorname{Spec}k',\\sigma_j}\\operatorname{Spec}\\Omega$. This identification and [lem-pc-dim-base-change] give $\\dim X_j=1$. Finally, [lem-pc-clopen-smooth-proper-curve] gives smoothness and properness for each nonempty open-and-closed restriction.",
+   "uses": [
+    "lem-pc-separable-tensor-algebraic-closure",
+    "lem-pc-flat-base-change-cohom",
+    "lem-pc-scheme-connected-iff-idempotents",
+    "lem-pc-proper-base-change",
+    "lem-pc-dim-base-change",
+    "lem-pc-clopen-smooth-proper-curve"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Lemma 0FD1 (lemma-baby-stein), proof; Lemma 0BUG, clause (2); Morphisms Lemmas 01VC (lemma-open-immersion-smooth), 01VA (lemma-composition-smooth), 01W5 (lemma-closed-immersion-proper), 01W3 (lemma-composition-proper)"
+   }
+  },
+  {
+   "text": "For $\\mathcal F=\\mathcal L$ and $\\mathcal O_X$, [lem-pc-flat-base-change-cohom] gives $H^i(X_j,\\mathcal F_j)\\cong H^i(X,\\mathcal F)\\otimes_{k',\\sigma_j}\\Omega$. The schemes $X$ and $X_j$ are proper over fields, and $\\mathcal L$, $\\mathcal O_X$ are coherent, so [lem-pc-euler-characteristic-well-defined] gives finite-dimensional cohomology groups and finite alternating sums; $X\\to\\operatorname{Spec}k'$ is quasi-compact and quasi-separated because it is finite type and separated, as required by [lem-pc-flat-base-change-cohom]. By [lem-pc-finrank-field-base-change] the dimension over $\\Omega$ is $\\dim_{k'}H^i(X,\\mathcal F)$, while $\\dim_kH^i(X,\\mathcal F)=r\\dim_{k'}H^i(X,\\mathcal F)$. Taking finite alternating sums for both sheaves gives $\\chi_k(X,\\mathcal F)=r\\chi_\\Omega(X_j,\\mathcal F_j)$, and subtraction gives $\\deg_X(\\mathcal L)=r\\deg_{X_j}(\\mathcal L_j)$ for every $j$.",
+   "uses": [
+    "lem-pc-flat-base-change-cohom",
+    "lem-pc-finrank-field-base-change",
+    "lem-pc-euler-characteristic-well-defined"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/coherent.tex",
+    "place": "Cohomology of Schemes, Lemma 02KH (lemma-flat-base-change-cohomology); agent-written dimension calculation"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-projective-proper",
+  "def-pc-curve",
+  "lem-pc-h0-proper-variety",
+  "lem-pc-global-sections-separable",
+  "lem-pc-separable-tensor-algebraic-closure",
+  "lem-pc-flat-base-change-cohom",
+  "lem-pc-scheme-connected-iff-idempotents",
+  "lem-pc-proper-base-change",
+  "lem-pc-dim-base-change",
+  "lem-pc-clopen-smooth-proper-curve",
+  "lem-pc-finrank-field-base-change",
+  "lem-pc-euler-characteristic-well-defined"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/master/blueprint/sec-picard-framework/sk-thm-picard-rr/lem-pc-ample-positive-degree.md",
+  "place": "proof, part (<=), component paragraph and corrected degree calculation"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
-   "query": "global sections of proper geometrically reduced scheme over field separable extension",
-   "results": "service error HTTP 500 (also via https://leansearch.net/search with curl at 14:08 UTC); no result",
+   "query": "proper curve components after algebraic closure and degree",
+   "results": "service unavailable (HTTP 500)",
    "date": "2026-10-10",
-   "verdict": "no verdict from this tool (service down); see the other two kinds"
+   "verdict": "no match"
   },
   {
    "tool": "leanfinder",
-   "query": "base change of a proper scheme over k to algebraic closure decomposes into connected components indexed by embeddings of H^0(X,O_X)",
-   "results": "AlgebraicGeometry.isField_of_universallyClosed, AlgebraicGeometry.finite_appTop_of_universallyClosed (Mathlib.AlgebraicGeometry.Morphisms.Proper), AlgebraicGeometry.compactSpace_of_universallyClosed, Scheme.Pullback.Triplet.instNontrivialCarrierTensor, PrimeSpectrum.isHomeomorph_comap_of_isPurelyInseparable",
-   "date": "2026-10-10",
-   "verdict": "no match: Mathlib has that Gamma of a universally closed integral K-scheme is a field finite over K (part of (1) without separability), nothing on the decomposition of X_Omega or on degrees"
-  },
-  {
-   "tool": "grep",
-   "query": "grep -rln 'IsSeparable' Mathlib/AlgebraicGeometry; grep -rn 'GeometricallyConnected' Mathlib/AlgebraicGeometry (in ~/weil-conjectures-slopmaster2/.lake/packages/mathlib)",
-   "results": "IsSeparable occurs only in AlgebraicGeometry/Morphisms/FormallyUnramified.lean (unrelated); GeometricallyConnected is defined in AlgebraicGeometry/Geometrically/Connected.lean, no lemma on global sections or components of the base change; no Euler characteristic or degree of invertible modules in Mathlib",
+   "query": "global sections geometric components finite separable field extension",
+   "results": "no exact match",
    "date": "2026-10-10",
    "verdict": "no match"
   },
   {
    "tool": "grep",
-   "query": "slopmaster2 WeilConjectures: grep -rn 'GlobalSectionsBijective\\|GeometricallyConnected\\|IsSeparable' (rule 0)",
-   "results": "GeometricallyConnected.of_universallyClosed_of_section (GeometricallyConnected.lean), GeometricallyIrreducible.of_smooth_of_geometricallyConnected (Regular.lean); nothing stating (1)-(3)",
+   "query": "rg GeometricallyConnected Mathlib/AlgebraicGeometry",
+   "results": "no exact match",
    "date": "2026-10-10",
-   "verdict": "no slopmaster2 declaration states this node"
+   "verdict": "no match"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "worker",
@@ -82,5 +132,30 @@
   }
  },
  "chapter": "sec-picard-framework",
- "unit": "sk-thm-picard-rr"
+ "unit": "sk-thm-picard-rr",
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "lem-pc-base-change-closure-components",
+  "worker": "stage1",
+  "summary": "Removed three clause-sized nodes; wrote the finite-separable, idempotent decomposition and componentwise degree arguments in the parent, with smaller cited facts.",
+  "blueprint": "The corrected decomposition and degree comparison in the part (<=) paragraph of lem-pc-ample-positive-degree.",
+  "tool_uses": [
+   {
+    "node": "lem-pc-flat-base-change-cohom",
+    "why": "The degree and global-sections steps require the generic flat cohomology base-change theorem, which is a tool lemma from another unit and is not replaced by this unit route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pc-flat-base-change-cohom",
+  "lem-pc-flat-base-change-cohom"
+ ],
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-bc3",
+  "group": "F1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-bc3 (reviewer sub-agent of L); spot-checked: Re-push after the 15:17 return: all four points repaired (1: lem-pc-clopen-smooth-proper-curve now states only smooth+proper for a nonempty clopen Z of a smooth proper Y over K, true by open immersion smooth/closed immersion proper and composition; step 2 gets dim X_j=1 from X_j = X x_{k',sigma_j} Omega and lem-pc-dim-base-change applied to X as a curve over k' via def-pc-curve; 2: clopen node cited in text, uses, proof_deps; 3: lem-pc-projective-proper and def-pc-curve cited in step 1, lem-pc-euler-characteristic-well-defined for finiteness and qcqs stated in step 3; 4: WANTED dropped, Stacks sources read). Source: Varieties 0BUG (varieties.tex lemma-proper-geometrically-reduced-global-sections, clauses (1),(3),(4) give k' finite separable for proper geometrically reduced X) and 0FD1; Cohomology 02KH for flat base change. Statement agrees: (1) via lem-pc-h0-proper-variety(1) (proper variety) and lem-pc-global-sections-separable; (2) via lem-pc-separable-tensor-algebraic-closure, lem-pc-flat-base-change-cohom at i=0 (X->Spec k qcqs, Omega flat over k), lem-pc-scheme-connected-iff-idempotents (Gamma(X_j)=Omega), lem-pc-proper-base-change, lem-pc-clopen-smooth-proper-curve, lem-pc-dim-base-change, matching def-sc-curves (connected curve: nonempty, connected, dim one); (3) via flat base change along sigma_j, lem-pc-finrank-field-base-change, dim_k = r dim_k', def-pc-degree-line-bundle. New nodes true (0BUG(4); separable tensor algebraically closed = product over embeddings; clopen permanence); declared tool use lem-pc-flat-base-change-cohom accepted. Small cases: r=1; P^1_C over R (r=2, two lines, deg O(1) over R = 2 = 2*1). FIX more, RETURN less / FIX: dag/nodes/sec-picard-framework/lem-pc-base-change-closure-components.json: proof[1].text: added the sentence deriving X_Omega = X x_{k'} Spec(k' tensor Omega) = coprod_j X x_{k',sigma_j} Omega (the identification the 15:17 return point 1 asked to be written in step 2, previously only asserted); proof[1].source.place: wrong Morphisms tags 01V6/01W6 replaced by 01VC, 01VA, 01W5, 01W3. dag/nodes/sec-picard-framework/lem-pc-clopen-smooth-proper-curve.json: source.place: same tag correction and stale dimension clause removed. Not fixed: report cites the Stacks files at a remote path without line numbers (not a reason). Start Sat Oct 10 03:34:51 PM UTC 2026, end Sat Oct 10 03:36:04 PM UTC 2026; 2 file(s) fixed by the reviewer"
+ }
 }
