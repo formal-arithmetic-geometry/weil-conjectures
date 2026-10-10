@@ -49,4 +49,34 @@ theorem convMul_apply_eq_zero {I : Ideal A} [I.IsHopfIdeal R] {f g : A →ₐ[R]
   have : q a = 0 := Ideal.Quotient.eq_zero_iff_mem.2 ha
   simp [this]
 
+omit [CommRing B] [Algebra R B] in
+/-- The supremum of a set of Hopf ideals is a Hopf ideal: the counit, comultiplication and antipode
+conditions are additive, and they hold on each ideal of the set. -/
+theorem sSup {S : Set (Ideal A)} (hS : ∀ J ∈ S, J.IsHopfIdeal R) :
+    (SupSet.sSup S).IsHopfIdeal R := by
+  have hind {P : A → Prop} (h0 : P 0) (hadd : ∀ x y, P x → P y → P (x + y))
+      (hmem : ∀ J ∈ S, ∀ x ∈ J, P x) {x : A} (hx : x ∈ SupSet.sSup S) : P x := by
+    rw [sSup_eq_iSup'] at hx
+    exact Submodule.iSup_induction _ (motive := P) hx (fun J x hx ↦ hmem J.1 J.2 x hx) h0 hadd
+  have hle (J : Ideal A) (hJ : J ∈ S) :
+      J.restrictScalars R ≤ (SupSet.sSup S).restrictScalars R := fun x hx ↦ le_sSup hJ hx
+  have : ((SupSet.sSup S).restrictScalars R).IsCoideal := by
+    refine (Submodule.isCoideal_iff_comul_mem _).2 ⟨fun x hx ↦ ?_, fun x hx ↦ ?_⟩
+    · exact hind (P := fun x ↦ Coalgebra.counit (R := R) x = 0) (map_zero _)
+        (fun x y hx hy ↦ by simp only [map_add, hx, hy, add_zero])
+        (fun J hJ x hx ↦ (hS J hJ).counit_eq_zero hx) hx
+    · refine hind (P := fun x ↦ Coalgebra.comul (R := R) x ∈
+        LinearMap.range (LinearMap.lTensor A ((SupSet.sSup S).restrictScalars R).subtype) ⊔
+          LinearMap.range (LinearMap.rTensor A ((SupSet.sSup S).restrictScalars R).subtype))
+        (by simp only [map_zero]; exact zero_mem _)
+        (fun x y hx hy ↦ by simp only [map_add]; exact add_mem hx hy) (fun J hJ x hx ↦ ?_) hx
+      have := ((Submodule.isCoideal_iff_comul_mem _).1 (hS J hJ).toIsCoideal).2 x hx
+      refine SetLike.le_def.1 (sup_le_sup ?_ ?_) this
+      · rw [← Submodule.subtype_comp_inclusion _ _ (hle J hJ), LinearMap.lTensor_comp]
+        exact LinearMap.range_comp_le_range _ _
+      · rw [← Submodule.subtype_comp_inclusion _ _ (hle J hJ), LinearMap.rTensor_comp]
+        exact LinearMap.range_comp_le_range _ _
+  exact ⟨fun x hx ↦ hind (P := fun x ↦ HopfAlgebra.antipode R x ∈ SupSet.sSup S) (by simp)
+    (fun x y hx hy ↦ by simp only [map_add]; exact add_mem hx hy)
+    (fun J hJ x hx ↦ le_sSup hJ ((hS J hJ).antipode_mem hx)) hx⟩
 end Ideal.IsHopfIdeal

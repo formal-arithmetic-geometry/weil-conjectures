@@ -422,20 +422,58 @@ theorem le_derivedIdeal : I ≤ derivedIdeal I :=
   le_sSup ⟨inferInstance, le_refl I,
     IsMonHom.ContainsCommutators.of_eq (subgroupSchemeHom_refl (I := I)).symm⟩
 
-/-- The sum of Hopf ideals is a Hopf ideal, so the derived subgroup is a closed subgroup scheme.
-
-Proof sketch (not formalised): if `Δ(a) ∈ J ⊗ A + A ⊗ J` and `Δ(b) ∈ J' ⊗ A + A ⊗ J'`, then
-`Δ(a + b) ∈ (J + J') ⊗ A + A ⊗ (J + J')`; likewise for the counit and the antipode. -/
-instance : (derivedIdeal I).IsHopfIdeal k := by
-  sorry
+/-- The sum of Hopf ideals is a Hopf ideal, so the derived subgroup is a closed subgroup scheme:
+the counit, comultiplication and antipode conditions are additive
+(`Ideal.IsHopfIdeal.sSup`). -/
+instance : (derivedIdeal I).IsHopfIdeal k :=
+  Ideal.IsHopfIdeal.sSup fun _ ⟨hJ, _, _⟩ ↦ hJ
 
 /-- The derived subgroup contains the commutators of `G`: `G ⧸ [G, G]` is commutative.
 
-Proof sketch (not formalised): a morphism `X ⟶ V(I)` factors through `V(J)` if and only if `J`
-maps to zero in `Γ(X, 𝒪_X)`; this holds for every `J` in the family defining `derivedIdeal I`,
-hence for their sum. (blueprint: `sk-i-restriction`) -/
+Two points `X ⟶ V(I)` factor through the affine scheme `Spec Γ(X)`, where they are matrices over
+`Γ(X)`. Their commutator satisfies the equations of every Hopf ideal in the family defining
+`derivedIdeal I`, hence those of their sum. (blueprint: `sk-i-restriction`) -/
 instance : IsMonHom.ContainsCommutators (subgroupSchemeHom (le_derivedIdeal I)) := by
-  sorry
+  refine ⟨fun {X} a b ↦ ?_⟩
+  -- Both points factor through the affine scheme `Spec Γ(X)`, so we may assume `X` affine.
+  let adj := algΓAlgSpecAdjunction (.of k)
+  have hfac {Y : (CommAlgCat k)ᵒᵖ} (f : X ⟶ (algSpec (.of k)).obj Y) :
+      ∃ f' : (algSpec (.of k)).obj ((algΓ (.of k)).obj X) ⟶ (algSpec (.of k)).obj Y,
+        f = adj.unit.app X ≫ f' :=
+    ⟨_, ((adj.homEquiv_unit (f := (adj.homEquiv X Y).symm f)).symm.trans
+      ((adj.homEquiv X Y).apply_symm_apply f)).symm⟩
+  obtain ⟨a, rfl⟩ : ∃ a' : (algSpec (.of k)).obj ((algΓ (.of k)).obj X) ⟶
+      subgroupScheme I, a = (adj.unit.app X : X ⟶ _) ≫ a' :=
+    hfac (Y := .op (.of k (CoordinateRing n k ⧸ I))) a
+  obtain ⟨b, rfl⟩ : ∃ b' : (algSpec (.of k)).obj ((algΓ (.of k)).obj X) ⟶
+      subgroupScheme I, b = (adj.unit.app X : X ⟶ _) ≫ b' :=
+    hfac (Y := .op (.of k (CoordinateRing n k ⧸ I))) b
+  -- For `X = Spec R`, the points are matrices over `R`.
+  let R := ((algΓ (.of k)).obj X).unop
+  obtain ⟨g, rfl⟩ := (zeroLocusMulEquiv I R).surjective a
+  obtain ⟨g', rfl⟩ := (zeroLocusMulEquiv I R).surjective b
+  have hD : (g : GL n R) * g' * (g : GL n R)⁻¹ * (g' : GL n R)⁻¹ ∈
+      zeroLocus (derivedIdeal I) R := fun x hx ↦ by
+    refine (sSup_le fun J ⟨hJ, hIJ, hc⟩ ↦ ?_ : derivedIdeal I ≤ RingHom.ker _) hx
+    obtain ⟨c, hc⟩ := hc.exists_comp_eq_commutator (zeroLocusMulEquiv I R g)
+      (zeroLocusMulEquiv I R g')
+    have h := congrArg (fun z ↦ GeneralLinearGroup.homMulEquiv n k R (z ≫ subgroupSchemeι I)) hc
+    simp only [Category.assoc, subgroupSchemeHom_comp_subgroupSchemeι, MonObj.mul_comp,
+      GrpObj.inv_comp, map_mul, map_inv, homMulEquiv_zeroLocusMulEquiv_comp] at h
+    have hmem : (g : GL n R) * g' * (g : GL n R)⁻¹ * (g' : GL n R)⁻¹ ∈ zeroLocus J R := by
+      rw [← h, ← SetLike.mem_coe, ← range_homMulEquiv_comp]
+      exact ⟨c, rfl⟩
+    exact fun y hy ↦ hmem y hy
+  refine ⟨(adj.unit.app X : X ⟶ _) ≫ zeroLocusMulEquiv (derivedIdeal I) R ⟨_, hD⟩, ?_⟩
+  rw [← GrpObj.comp_inv, ← GrpObj.comp_inv, ← MonObj.comp_mul, ← MonObj.comp_mul,
+    ← MonObj.comp_mul, Category.assoc]
+  refine congrArg _ ?_
+  apply injective_homMulEquiv_comp I R
+  dsimp only
+  rw [Category.assoc, subgroupSchemeHom_comp_subgroupSchemeι, homMulEquiv_zeroLocusMulEquiv_comp,
+    MonObj.mul_comp, MonObj.mul_comp, MonObj.mul_comp, GrpObj.inv_comp, GrpObj.inv_comp, map_mul,
+    map_mul, map_mul, map_inv, map_inv, homMulEquiv_zeroLocusMulEquiv_comp,
+    homMulEquiv_zeroLocusMulEquiv_comp]
 
 variable {I} {J : Ideal (CoordinateRing n k)} [J.IsHopfIdeal k] (h : I ≤ J)
 
