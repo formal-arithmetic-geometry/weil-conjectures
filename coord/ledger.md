@@ -2945,3 +2945,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 23:16 L: merged deliver/M1/lem-kun-cp-approximation (reviewer FIX; after a return; new nodes: 0)
 - 23:16 L: merged deliver/M1/lem-pc-curve-coherent-finiteness (reviewer FIX; first push; new nodes: 0)
 - 23:16 L: merged deliver/K1/lem-sc-p1-twist-exists (reviewer PASS; first push; new nodes: 0)
+- 23:17 L: merged deliver/F1/lem-pc-dq-coherator-adjunction (reviewer FIX; first push; new nodes: 0)

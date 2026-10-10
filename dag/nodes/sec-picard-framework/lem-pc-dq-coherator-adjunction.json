@@ -22,9 +22,54 @@
  "stmt_deps": [
   "def-pc-derived-category"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "For qcqs Y, [lem-pc-derived-qcoh-compact-generation] says that D_QCoh(O_Y), with the shifts and distinguished triangles of D(O_Y), is compactly generated, and [lem-pc-derived-qcoh-direct-sums] says that it has all set-indexed coproducts. Its inclusion j into D(O_Y) is exact because the shifts and distinguished triangles of this full subcategory are those of the ambient derived category. The ambient category D(O_Y) has set-indexed coproducts by [lem-pc-derived-ambient-direct-sums]. The functor j preserves coproducts: for a family (E_i)_{i\\in I} in D_QCoh(O_Y), the ambient sum E has H^q(E)\\cong\\bigoplus_i H^q(E_i) for every q by [lem-pc-derived-ambient-direct-sums]. This sheaf is the colimit, over the directed set of finite subsets J of I, of the finite sums \\bigoplus_{i\\in J}H^q(E_i). These finite sums are quasi-coherent by induction on |J| using [lem-weil-pbc-quasi-coherent-module-direct-sum], the empty sum 0 being quasi-coherent. Hence the colimit is quasi-coherent by [lem-weil-pbc-quasi-coherent-module-colimit-affine-sections], so E lies in D_QCoh(O_Y) [def-pc-derived-category]. Because the subcategory is full, the ambient bijection Hom(E,G)\\cong\\prod_i Hom(E_i,G) for G in D_QCoh(O_Y) makes E a coproduct there. Thus every coproduct in D_QCoh(O_Y) is isomorphic to E, and j sends it to an ambient coproduct. Apply [lem-pc-brown-representability-right-adjoint] to j to obtain a right adjoint DQ_Y and its natural Hom bijection. The only scheme hypothesis needed here is qcqs, used by compact generation.",
+   "uses": [
+    "def-pc-derived-category",
+    "lem-pc-derived-qcoh-compact-generation",
+    "lem-pc-derived-qcoh-direct-sums",
+    "lem-pc-derived-ambient-direct-sums",
+    "lem-pc-brown-representability-right-adjoint",
+    "lem-weil-pbc-quasi-coherent-module-direct-sum",
+    "lem-weil-pbc-quasi-coherent-module-colimit-affine-sections"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/duality.tex",
+    "place": "Tag 0B6I (Lemma 48.1.1), proof after the sheaf comparison; Derived Categories of Schemes, Lemma perfect-lemma-better-coherator"
+   }
+  },
+  {
+   "text": "Let u:E\\to E' have DQ_Y(u) an isomorphism. Choose a K-injective complex I representing E. By [def-pc-global-derived-rhom], R\\Gamma(Y,E) is represented by the complex of global sections of I, so its degree-i cohomology is the group of chain maps O_Y[-i] to I modulo homotopy (a map is an i-cocycle of global sections and a null homotopy is an i-coboundary). By [lem-sc-kinjective-quasi-iso-comparison], this group is Hom_{D(O_Y)}(O_Y[-i],E), naturally in E; the same holds for E'. The shift O_Y[-i] has only the quasi-coherent cohomology sheaf O_Y, hence belongs to D_QCoh(O_Y) by [def-pc-derived-category]. The adjunction of Step 1 identifies both Hom groups with Hom_{D_QCoh(O_Y)}(O_Y[-i],DQ_Y(-)), and DQ_Y(u) makes the induced map bijective. Thus every cohomology map of R\\Gamma(Y,u) is an isomorphism, which is precisely a quasi-isomorphism.",
+   "uses": [
+    "def-pc-global-derived-rhom",
+    "lem-sc-kinjective-quasi-iso-comparison",
+    "def-pc-derived-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/duality.tex",
+    "place": "Tag 0B6I (Lemma 48.1.1), final paragraph of the proof"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-derived-category",
+  "lem-pc-derived-qcoh-compact-generation",
+  "lem-pc-derived-qcoh-direct-sums",
+  "lem-pc-derived-ambient-direct-sums",
+  "lem-weil-pbc-quasi-coherent-module-direct-sum",
+  "lem-weil-pbc-quasi-coherent-module-colimit-affine-sections",
+  "lem-pc-brown-representability-right-adjoint",
+  "def-pc-global-derived-rhom",
+  "lem-sc-kinjective-quasi-iso-comparison"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/duality.tex",
+  "place": "Tag 0B6I (Lemma 48.1.1)"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -49,12 +94,49 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-pc-global-hom-adjunction",
   "by": "worker",
   "date": "2026-10-10"
  },
  "chapter": "sec-picard-framework",
- "unit": "sk-thm-picard-duality"
+ "unit": "sk-thm-picard-duality",
+ "split_report": {
+  "date": "2026-10-11",
+  "item": "lem-pc-dq-coherator-adjunction",
+  "worker": "stage1",
+  "summary": "Checked the target against Stacks duality.tex Tag 0B6I and the Derived Categories of Schemes coherator lemma. No exact project declaration or valid Mathlib generalization exists. The proof constructs the right adjoint via compact generation and Brown representability, then detects its isomorphisms on derived global sections using K-injective representatives. No new clause node was introduced.",
+  "blueprint": "Realizes the ancestor clause 'the coherator DQ_Y is right adjoint to the inclusion of D_QCoh and detects global quasi-isomorphisms'.",
+  "tool_uses": [
+   {
+    "node": "lem-sc-kinjective-quasi-iso-comparison",
+    "why": "The general K-injective homotopy-to-derived Hom comparison computes global cohomology and is not specific to the Picard unit."
+   },
+   {
+    "node": "lem-weil-pbc-quasi-coherent-module-direct-sum",
+    "why": "Generic quasi-coherence of finite direct sums and of directed colimits of quasi-coherent modules; used to see that the ambient coproduct of objects of D_QCoh lies in D_QCoh (as in lem-pc-derived-qcoh-direct-sums)."
+   },
+   {
+    "node": "lem-weil-pbc-quasi-coherent-module-colimit-affine-sections",
+    "why": "Generic quasi-coherence of finite direct sums and of directed colimits of quasi-coherent modules; used to see that the ambient coproduct of objects of D_QCoh lies in D_QCoh (as in lem-pc-derived-qcoh-direct-sums)."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sc-kinjective-quasi-iso-comparison",
+  "lem-weil-pbc-quasi-coherent-module-direct-sum",
+  "lem-weil-pbc-quasi-coherent-module-colimit-affine-sections",
+  "lem-sc-kinjective-quasi-iso-comparison",
+  "lem-weil-pbc-quasi-coherent-module-direct-sum",
+  "lem-weil-pbc-quasi-coherent-module-colimit-affine-sections"
+ ],
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-dqc3052",
+  "group": "F1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-dqc3052 (reviewer sub-agent of L); spot-checked: Statement has Y qcqs (E7 point of R-gha2856 resolved) and matches the DQ_Y clause used in lem-pc-global-hom-adjunction step 2; Brown representability cited from lem-pc-brown-representability-right-adjoint, the node J1 used; compact generation cited with X qcqs; no helper nodes; step 2 K-injective computation checked. FIX more, RETURN less: C4 in step 1 - lem-pc-derived-qcoh-direct-sums only states that D_QCoh has coproducts, not that they are the ambient ones; repaired by showing the ambient sum (lem-pc-derived-ambient-direct-sums) has quasi-coherent cohomology via lem-weil-pbc-quasi-coherent-module-direct-sum and -colimit-affine-sections (generic tools from sk-thm-p1, as in lem-pc-derived-qcoh-direct-sums) and is a coproduct in the full subcategory. Missed by F1's second reading.; 1 file(s) fixed by the reviewer"
+ }
 }
