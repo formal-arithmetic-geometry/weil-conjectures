@@ -2298,3 +2298,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 18:53 L: merged deliver/J1/lem-sc-koszul-regular-immersion-derived-hom (reviewer FIX; first push; new nodes: 1)
 - 18:54 L: merged deliver/M1/lem-pc-derived-direct-image-direct-sums (reviewer PASS; first push; new nodes: 0)
 - 18:54 L: merged deliver/K1/lem-pc-zero-scheme-recd (reviewer FIX; first push; new nodes: 1)
+- 18:54 L: merged deliver/G1/def-sp-exact-couple (reviewer FIX; first push; new nodes: 0)
