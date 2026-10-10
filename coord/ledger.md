@@ -1682,3 +1682,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 14:53 L: merged deliver/H1/lem-weil-pbc-direct-sum-extension-assembly (reviewer PASS; after a return; new nodes: 1)
 - 14:53 L: merged deliver/H1/lem-weil-pbc-sets-strictly-henselian-open-sections-stalk (reviewer PASS; after a return; new nodes: 0)
 - 14:53 L: thm-sc-serre-duality-curve NOT attached (K1 release; serreDuality rests on sorry), lem-sc-hilb-dominating-power NOT attached (E1 release; rests on sorry); notices to K1 and E1
+- 14:53 L: merged deliver/H1/prop-weil-pbc-kinjective-resolutions-exist (reviewer FIX; first push; new nodes: 2)
