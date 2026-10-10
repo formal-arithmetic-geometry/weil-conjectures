@@ -13,7 +13,7 @@
  },
  "kind": "statement",
  "title": "Closed-pushforward cohomology comparison preserves connecting maps",
- "statement": "Let $i:Z\\to X$ be a closed immersion of schemes [def-weil-closed-immersion], and let $0\\to A\\to B\\to C\\to0$ be a short exact sequence of abelian sheaves on $Z_{\\mathrm{Zar}}$ [def-sc-zariski-site, def-sc-topological-abelian-cohomology]. Define $(i_*D)(U)=D(U\\cap Z)$ for every open $U\\subseteq X$. Since $i_*$ is exact [lem-sc-closed-immersion-pushforward-exact], there is an image short exact sequence $0\\to i_*A\\to i_*B\\to i_*C\\to0$. For every global section $c\\in H^0(Z_{\\mathrm{Zar}},C)$, the isomorphism $H^1(Z_{\\mathrm{Zar}},A)\\cong H^1(X_{\\mathrm{Zar}},i_*A)$ of [lem-sc-cohomology-closed-immersion-pushforward] takes the connecting class $\\delta_Z(c)$ of the first sequence to the connecting class $\\delta_X(i_*c)$ of the image sequence. In particular, if $C=\\mathbf Z_Z$ is the constant integer sheaf and $u:\\mathbf Z_X\\to i_*\\mathbf Z_Z$ is restriction, the boundary of $1$ for the pullback of the image sequence along $u$ is the image of $\\delta_Z(1)$ under this isomorphism.",
+ "statement": "Let $i:Z\\to X$ be a closed immersion of schemes [def-weil-closed-immersion], and let $0\\to A\\to B\\to C\\to0$ be a short exact sequence of abelian sheaves on $Z_{\\mathrm{Zar}}$ [def-sc-zariski-site, def-sc-topological-abelian-cohomology]. Define $(i_*D)(U)=D(U\\cap Z)$ for every open $U\\subseteq X$. Since $i_*$ is exact [lem-sc-closed-immersion-pushforward-exact], there is an image short exact sequence $0\\to i_*A\\to i_*B\\to i_*C\\to0$. The functors $T^p(D)=H^p(X_{\\mathrm{Zar}},i_*D)$, with connecting maps from image sequences, form a delta-functor, and in degree zero identify with $H^0(Z_{\\mathrm{Zar}},D)$. Let $t^p:H^p(Z_{\\mathrm{Zar}},D)\\to H^p(X_{\\mathrm{Zar}},i_*D)$ be the unique morphism of delta-functors whose degree-zero component is this identity; each $t^p$ is an isomorphism. For every global section $c\\in H^0(Z_{\\mathrm{Zar}},C)$, one has $t^1(\\delta_Z(c))=\\delta_X(i_*c)$. In particular, if $C=\\mathbf Z_Z$ is the constant integer sheaf and $u:\\mathbf Z_X\\to i_*\\mathbf Z_Z$ is restriction, the boundary of $1$ for the pullback of the image sequence along $u$ is $t^1(\\delta_Z(1))\\in H^1(X_{\\mathrm{Zar}},i_*A)$.",
  "source": {
   "document": "literature/stacks-project/cohomology.tex",
   "place": "Lemma 02UV (cohomology-lemma-cohomology-and-closed-immersions), exact direct image and Leray comparison as a morphism of cohomological delta-functors"
@@ -23,41 +23,125 @@
   "def-sc-zariski-site",
   "def-sc-topological-abelian-cohomology",
   "lem-sc-closed-immersion-pushforward-exact",
-  "lem-sc-cohomology-closed-immersion-pushforward"
+  "lem-sc-cohomology-closed-immersion-pushforward",
+  "lem-weil-pbc-right-derived-universal-delta-functor",
+  "lem-weil-pbc-effaceable-delta-functor-universal",
+  "def-weil-pbc-delta-functor"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Applying exact $i_*$ to the short exact sequence gives the image short exact sequence by [lem-sc-closed-immersion-pushforward-exact].",
+   "uses": [
+    "lem-sc-closed-immersion-pushforward-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/cohomology.tex",
+    "place": "Lemma 02UV proof: exactness of direct image"
+   }
+  },
+  {
+   "text": "The functors $T^p(D)=H^p(X,i_*D)$ with image-sequence connecting maps form a delta-functor by exactness of $i_*$ and the natural long exact cohomology sequence [def-sc-topological-abelian-cohomology]. Their degree-zero functor is naturally $H^0(Z,D)$ because $(i_*D)(X)=D(Z)$. The source $H^p(Z,-)$ is universal by [lem-weil-pbc-right-derived-universal-delta-functor]. The target is universal by [lem-weil-pbc-effaceable-delta-functor-universal], since for an injective $I$ on $Z$, [lem-sc-cohomology-closed-immersion-pushforward] gives $T^p(I)=H^p(Z,I)=0$ for $p>0$. Hence the unique morphism $t^p$ with identity degree-zero component exists and is an isomorphism, with inverse supplied by the two universal properties.",
+   "uses": [
+    "lem-sc-closed-immersion-pushforward-exact",
+    "def-sc-topological-abelian-cohomology",
+    "lem-weil-pbc-right-derived-universal-delta-functor",
+    "lem-weil-pbc-effaceable-delta-functor-universal",
+    "lem-sc-cohomology-closed-immersion-pushforward"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/cohomology.tex",
+    "place": "Lemma 02UV, comparison as a morphism of cohomological delta-functors"
+   }
+  },
+  {
+   "text": "By the defining equation for a morphism of delta-functors [def-weil-pbc-delta-functor], $t^1(\\delta_Z(c))=\\delta_X(i_*c)$. For $C=\\mathbf Z_Z$ and $c=1$, $u(1)=i_*1$ because $u$ is restriction. The pulled-back sequence maps to the image sequence by $(\\mathrm{id},?,u)$, so naturality of connecting maps [def-sc-topological-abelian-cohomology] identifies its boundary of $1$ with $\\delta_X(i_*1)=t^1(\\delta_Z(1))$.",
+   "uses": [
+    "def-weil-pbc-delta-functor",
+    "def-sc-topological-abelian-cohomology"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/cohomology.tex",
+    "place": "Lemma 02UV, naturality of connecting maps and pullback"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sc-closed-immersion-pushforward-exact",
+  "def-sc-topological-abelian-cohomology",
+  "lem-weil-pbc-right-derived-universal-delta-functor",
+  "lem-weil-pbc-effaceable-delta-functor-universal",
+  "lem-sc-cohomology-closed-immersion-pushforward",
+  "def-weil-pbc-delta-functor"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Lemma 02UV proof and delta-functor naturality"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
    "query": "closed immersion exact pushforward sheaf cohomology comparison commutes with connecting morphisms",
    "results": "No exact declaration",
-   "date": "2026-10-10",
+   "date": "2026-10-11",
    "verdict": "no match"
   },
   {
    "tool": "leanfinder",
-   "query": "Leray edge isomorphism for exact direct image commutes with boundary maps",
+   "query": "naturality of Leray cohomology comparison with boundary maps",
    "results": "No exact declaration",
-   "date": "2026-10-10",
+   "date": "2026-10-11",
    "verdict": "no match"
   },
   {
    "tool": "grep",
    "query": "rg -n 'pushforward.*boundary|connecting.*pushforward' /home/ubuntu/weil-src-slopmaster2/.lake/packages/mathlib/Mathlib",
    "results": "No matching theorem",
-   "date": "2026-10-10",
+   "date": "2026-10-11",
    "verdict": "no match"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-sc-torsor-h1-functoriality",
   "by": "worker",
   "date": "2026-10-10"
  },
  "chapter": "sec-curve-estimates",
- "unit": "sk-thm-curveestimate"
+ "unit": "sk-thm-curveestimate",
+ "split_report": {
+  "date": "2026-10-11",
+  "item": "lem-sc-closed-pushforward-boundary-naturality",
+  "worker": "stage1",
+  "summary": "Deleted the ill-typed generic comparison child. Replaced it with the direct universal-delta-functor construction of the closed-immersion comparison, proved its isomorphism by universality and the existing cohomology comparison, and made pullback naturality explicit.",
+  "blueprint": "Realizes the parent blueprint's final-step compatibility of the closed-immersion cohomology comparison with torsor classes.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-right-derived-universal-delta-functor",
+    "why": "The route needs universality of the source cohomology delta-functor, which is a generic derived-functor theorem."
+   },
+   {
+    "node": "lem-weil-pbc-effaceable-delta-functor-universal",
+    "why": "The route needs the generic effaceability criterion to prove universality of the target delta-functor."
+   }
+  ]
+ },
+ "tool_uses": [
+  "def-weil-pbc-delta-functor",
+  "lem-weil-pbc-right-derived-universal-delta-functor",
+  "lem-weil-pbc-effaceable-delta-functor-universal"
+ ],
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-cb3",
+  "group": "E1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-cb3 (reviewer sub-agent of L); spot-checked: Re-push after return cf4ef1912; all four points repaired: (1) the ill-typed child lem-sc-cohomology-comparison-delta-naturality is deleted, no new node; (2) route rebuilt as returned: T^p=H^p(X,i_*-) is a delta-functor by lem-sc-closed-immersion-pushforward-exact and the LES of def-sc-topological-abelian-cohomology, source universal by lem-weil-pbc-right-derived-universal-delta-functor, target universal by lem-weil-pbc-effaceable-delta-functor-universal (effacement into injectives, enough injectives from def-sc-topological-abelian-cohomology, T^p(I)=H^p(Z,I)=0 via lem-sc-cohomology-closed-immersion-pushforward), so t^p exists, is unique and an isomorphism; statement changed to t^1 and named in the report (item 4, summary); (3) step 3 writes the morphism (id,?,u) of short exact sequences, naturality of delta from def-weil-pbc-delta-functor (2)/def-sc-topological-abelian-cohomology, u(1)=i_*1; (4) no new node, step texts in TeX. Source Stacks 02UV (cohomology-lemma-cohomology-and-closed-immersions) agrees: closed immersion, abelian sheaves, exact direct image. Each cited statement read and says what its step takes. Small cases: Z=X (t=id), Z empty (all zero). Tool uses: the two declared sk-thm-p1 generic delta-functor lemmas accepted; def-weil-pbc-delta-functor added as a generic definition. FIX: dag/nodes/sec-curve-estimates/lem-sc-closed-pushforward-boundary-naturality.json: statement: unclosed TeX math in the last sentence ('$t^1(\\delta_Z(1)) after identifying ... by $t^1$') replaced by '$t^1(\\delta_Z(1))\\in H^1(X_{\\mathrm{Zar}},i_*A)$' (same mathematics). Start Sat Oct 10 04:41:53 PM UTC 2026, end Sat Oct 10 04:42:41 PM UTC 2026.; 1 file(s) fixed by the reviewer"
+ },
+ "lead_note": "2026-10-10 L (R-cb3): Parent lem-sc-torsor-h1-functoriality (2) and its step cite 'the natural isomorphism of lem-sc-cohomology-closed-immersion-pushforward'; this item now proves compatibility for the delta-functor comparison t^1 (an isomorphism, proved here). The parent's statement/step should name t^1 of this item as the comparison, or the comparison node should state that its isomorphism is that delta-functor morphism."
 }
