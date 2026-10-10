@@ -1,6 +1,6 @@
 # Work queue
 
-944 items; claim with `tools/claim.py next <group> [--stage N]`.
+945 items; claim with `tools/claim.py next <group> [--stage N]`.
 
 ## Stage 1: nodes to split (583)
 
@@ -25,7 +25,6 @@
 | `lem-weil-pbc-two-term-homotopy-equivalence-direct-sum` | 1014 | none |
 | `prop-weil-pbc-formal-glueing-equivalence` | 1014 | none |
 | `def-pc-ext` | 1015 | none |
-| `lem-weil-pbc-associated-prime-power-quotient` | 1015 | none |
 | `lem-weil-pbc-cm-local-associated-prime-minimal` | 1015 | none |
 | `lem-weil-pbc-cm-module-good-sequence-element-nonzerodivisor` | 1015 | none |
 | `lem-weil-pbc-coherent-filtration-integral-subschemes` | 1015 | none |
@@ -77,6 +76,7 @@
 | `lem-weil-pbc-smooth-at-maximal-ideal-alg-closed-differentials-bound` | 1015 | none |
 | `lem-weil-pbc-smooth-at-prime-field-extension-descent` | 1015 | none |
 | `lem-weil-pbc-symmetric-projective-presentation-conormal` | 1015 | none |
+| `lem-weil-pbc-depth-le-dim-associated-prime` | 1016 | none |
 | `lem-weil-pbc-injective-acyclicity-bounded-below` | 2002 | sorry_here |
 | `lem-weil-pbc-property-implies-acyclicity` | 2003 | none |
 | `lem-weil-pbc-qcqs-higher-direct-image` | 2003 | none |
@@ -590,7 +590,7 @@
 | `def-exc-jacobian-presentation` | - | none |
 | `def-nagata-rees-algebra` | - | none |
 
-## Stage 2: nodes to state (361)
+## Stage 2: nodes to state (362)
 
 | node | distance to Mathlib | kind |
 |---|---|---|
@@ -628,6 +628,7 @@
 | `lem-weil-pbc-annihilator-localization-finite` | 1 | state |
 | `lem-weil-pbc-artinian-ideal-length-one-filtration` | 1 | state |
 | `lem-weil-pbc-artinian-local-essentially-finite-type-residue` | 1 | state |
+| `lem-weil-pbc-associated-prime-power-quotient` | 1 | state |
 | `lem-weil-pbc-basis-sheaf-cofinal-coverings` | 1 | state |
 | `lem-weil-pbc-basis-sheaf-sections-germs` | 1 | state |
 | `lem-weil-pbc-cartier-equality` | 1 | state |
