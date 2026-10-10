@@ -1,8 +1,8 @@
 # Work queue
 
-957 items; claim with `tools/claim.py next <group> [--stage N]`.
+955 items; claim with `tools/claim.py next <group> [--stage N]`.
 
-## Stage 1: nodes to split (585)
+## Stage 1: nodes to split (583)
 
 | node | distance to a target | Lean state on the done branch |
 |---|---|---|
@@ -40,11 +40,9 @@
 | `lem-weil-pbc-local-nagata-domain-analytically-unramified` | 1015 | none |
 | `lem-weil-pbc-local-ring-colimit-essentially-finite-type-over-z` | 1015 | none |
 | `lem-weil-pbc-module-ses-cech-h1-surjective` | 1015 | none |
-| `lem-weil-pbc-n1-descends-finite-domain-extension` | 1015 | none |
 | `lem-weil-pbc-n1-local-characterization` | 1015 | none |
 | `lem-weil-pbc-n2-char-p-purely-inseparable-criterion` | 1015 | none |
 | `lem-weil-pbc-nagata-localization` | 1015 | none |
-| `lem-weil-pbc-noetherian-module-zerodivisors-union-associated-primes` | 1015 | none |
 | `lem-weil-pbc-normal-domain-fractional-principal-quotient-ass` | 1015 | none |
 | `lem-weil-pbc-openness-of-flatness` | 1015 | none |
 | `lem-weil-pbc-p-independent-extends-to-p-basis` | 1015 | none |
@@ -969,7 +967,7 @@
 | `lem-weil-pbc-p1-field-dimension-one` | 4 | state |
 | `lem-weil-pbc-projective-space-zero-isomorphism` | 4 | state |
 
-Not open yet: 596 nodes that wait for stage 1, 701 nodes that wait for a statement dependency.
+Not open yet: 594 nodes that wait for stage 1, 702 nodes that wait for a statement dependency.
 
 ## Stage 3: modules to prove (0)
 
