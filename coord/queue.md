@@ -1,20 +1,20 @@
 # Work queue
 
-928 items; claim with `tools/claim.py next <group> [--stage N]`.
+930 items; claim with `tools/claim.py next <group> [--stage N]`.
 
-## Stage 1: nodes to split (241)
+## Stage 1: nodes to split (242)
 
 | node | distance to a target | Lean state on the done branch |
 |---|---|---|
 | `lem-weil-pbc-injective-acyclicity-bounded-below` | 2002 | sorry_here |
 | `lem-sc-topological-filtered-cohomology` | 2014 | none |
-| `lem-sc-integral-closure-dedekind-surjective-fibres` | 2016 | none |
+| `lem-sc-krull-akizuki-noetherian` | 2017 | none |
 | `lem-sc-ringed-space-injective-restriction-surjective` | 2018 | none |
 | `lem-sc-ringed-space-module-sheaves-enough-injectives` | 2019 | none |
 | `lem-pc-unbounded-derived-functor-cohomological-bound` | 3012 | none |
+| `lem-pc-skyscraper-complex` | 3013 | none |
+| `lem-pc-stalk-tensor-complex` | 3013 | none |
 | `lem-pc-derived-sections-pushforward-comparison` | 3014 | none |
-| `lem-pc-skyscraper-complex` | 3014 | none |
-| `lem-pc-stalk-tensor-complex` | 3014 | none |
 | `lem-pc-derived-qcoh-compact-generation` | 3015 | none |
 | `def-pc-derived-category-qcoh-algebra` | 3016 | none |
 | `def-pc-derived-rhom-algebra-module` | 3016 | none |
@@ -56,17 +56,18 @@
 | `lem-pc-derived-filtered-free-resolution` | 4012 | none |
 | `lem-pc-derived-module-direct-sums` | 4012 | none |
 | `lem-pc-restrict-derived-direct-image-open` | 4012 | none |
-| `lem-pc-flat-base-change-cohom` | 5008 | rests_on_sorry |
+| `lem-pc-base-change-map-cech` | 5009 | none |
+| `lem-pc-flat-filtered-complex-comparison` | 5009 | none |
+| `lem-pc-flat-tensor-complex-cohom` | 5009 | none |
 | `lem-pc-fppf-affine-sheafification-restriction` | 5009 | none |
 | `lem-sc-hilbert-polynomial` | 5009 | none |
 | `lem-sc-generic-rank-leading-degree` | 5010 | none |
-| `lem-pc-base-change-map-cech` | 5011 | none |
 | `lem-pc-bounded-above-flat-kflat` | 5011 | none |
 | `lem-pc-proper-support-perfect-direct-image` | 5011 | none |
 | `lem-sc-mult-n-locally-quasi-finite` | 5011 | none |
-| `lem-pc-kflat-bounded-flat-replacement` | 5013 | none |
-| `lem-pc-kflat-closure` | 5013 | none |
-| `lem-pc-kflat-hocolim-truncations` | 5013 | none |
+| `lem-pc-kflat-bounded-flat-replacement` | 5012 | none |
+| `lem-pc-kflat-closure` | 5012 | none |
+| `lem-pc-kflat-hocolim-truncations` | 5012 | none |
 | `lem-sp-derived-couple-functoriality` | 6003 | none |
 | `pqf-lem-integral-univclosed` | 6004 | none |
 | `thm-sp-grothendieck` | 6004 | none |
@@ -81,7 +82,6 @@
 | `def-sp-homological-functor` | 6008 | none |
 | `pqf-lem-locnoeth-lft` | 6008 | none |
 | `pqf-lem-pushforward-qcoh` | 6008 | none |
-| `lem-pc-affine-morphism-hi` | 6009 | rests_on_sorry |
 | `lem-sc-cech-spectral` | 6009 | sorry_here |
 | `pqf-lem-associated-sections-localize` | 6009 | none |
 | `pqf-lem-coherent-ft-locnoeth` | 6009 | none |
@@ -90,6 +90,7 @@
 | `lem-pc-serre-vanishing` | 6010 | rests_on_sorry |
 | `thm-pqf-finite-iff-proper-finite-fibres` | 6010 | none |
 | `thm-sc-theorem-of-cube` | 6010 | rests_on_sorry |
+| `lem-pc-affine-morphism-hi` | 6011 | rests_on_sorry |
 | `lem-pc-projective-space-serre-vanishing` | 6011 | rests_on_sorry |
 | `lem-pc-projective-space-twist-cohomology` | 6011 | rests_on_sorry |
 | `lem-sc-ample-positive-degree` | 6011 | rests_on_sorry |
@@ -221,21 +222,21 @@
 | `lem-pc-flat-rf-open` | - | rests_on_sorry |
 | `lem-pc-projective-space-coherent-finiteness` | - | sorry_here |
 | `lem-sc-zariski-filtered-cohomology` | - | none |
+| `prop-pur-kinjective-resolutions-exist` | - | none |
 | `def-amb-finite-locally-free-module` | - | none |
 | `def-sc-kahler-differentials` | - | none |
 | `def-wf-lie-algebra-derivation` | - | rests_on_sorry |
 | `lem-kun-separable-smooth-colimit` | - | none |
 | `lem-kun-stalk-as-pullback` | - | none |
 | `lem-pc-perfect-locus` | - | sorry_here |
+| `lem-pur-derived-change-of-rings` | - | none |
 | `lem-sc-p1-hi-vanishing` | - | rests_on_sorry |
 | `def-wf-lie-algebra` | - | none |
 | `lem-kun-algebraic-separable-smooth` | - | none |
 | `lem-kun-fg-separable-smooth` | - | none |
 | `lem-pc-curve-coherent-finiteness` | - | rests_on_sorry |
 | `lem-pc-flf-properties` | - | none |
-| `lem-pur-derived-change-of-rings` | - | none |
 | `lem-sc-p1-twist-exists` | - | none |
-| `prop-pur-kinjective-resolutions-exist` | - | none |
 | `def-weil-extension-by-zero-presheaf` | - | none |
 | `lem-exc-etale-algebra-lift` | - | none |
 | `lem-pc-projective-curve-finite-projection` | - | rests_on_sorry |
@@ -248,7 +249,7 @@
 | `lem-pur-rhom-well-defined` | - | none |
 | `lem-zl-noether-normalization-dimension` | - | none |
 
-## Stage 2: nodes to state (687)
+## Stage 2: nodes to state (688)
 
 | node | distance to Mathlib | kind |
 |---|---|---|
@@ -399,6 +400,7 @@
 | `lem-sc-glue-component-transition-cocycle` | 1 | state |
 | `lem-sc-graded-localization-exact` | 1 | state |
 | `lem-sc-graded-prime-avoidance` | 1 | state |
+| `lem-sc-integral-closure-dedekind-surjective-fibres` | 1 | state |
 | `lem-sc-integral-locally-algebraic-affine-opens-dimension` | 1 | state |
 | `lem-sc-integral-overring-jacobson-power` | 1 | state |
 | `lem-sc-irreducible-product-over-field` | 1 | state |
@@ -940,7 +942,7 @@
 | `lem-weil-pbc-p1-field-dimension-one` | 4 | state |
 | `lem-weil-pbc-projective-space-zero-isomorphism` | 4 | state |
 
-Not open yet: 1352 nodes that wait for a statement dependency, 277 nodes that wait for stage 1.
+Not open yet: 1353 nodes that wait for a statement dependency, 278 nodes that wait for stage 1.
 
 ## Stage 3: modules to prove (0)
 
