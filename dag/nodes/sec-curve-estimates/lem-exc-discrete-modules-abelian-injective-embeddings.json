@@ -19,9 +19,39 @@
  "stmt_deps": [
   "def-sp-injective-resolutions"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "A profinite group is a topological group and a finite ring is a ring, so [lem-exc-rg-discrete-modules-functorial-injective-embeddings] applies with $(G,R)=(G,A)$; its category of left $R$-modules with $R$-linear $G$-action whose elements have open stabilizers, with $R$-linear $G$-equivariant maps, is then exactly $\\mathcal C$. It gives a functor $J:\\mathcal C\\to\\mathcal C$ and a natural transformation $j:\\operatorname{id}_{\\mathcal C}\\to J$ with every $j_M$ a monomorphism and every $J(M)$ injective in $\\mathcal C$.",
+   "uses": [
+    "lem-exc-rg-discrete-modules-functorial-injective-embeddings"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/injectives.tex",
+    "place": "Tag 04JF, label lemma-G-modules: the functorial embedding and its open-stabilizer specialization"
+   }
+  },
+  {
+   "text": "For each object $M$ of $\\mathcal C$, the component $j_M$ of step 1 is a monomorphism into $J(M)$, which is an injective object of $\\mathcal C$ in the sense of [def-sp-injective-resolutions]. Thus every object of $\\mathcal C$ admits a monomorphism into an injective object, which is what it means for $\\mathcal C$ to have enough injectives (the notion presupposed in [def-sp-injective-resolutions]).",
+   "uses": [
+    "def-sp-injective-resolutions"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/injectives.tex",
+    "place": "Tag 04JF, conclusion of lemma-G-modules, together with the definition of enough injectives"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-exc-rg-discrete-modules-functorial-injective-embeddings",
+  "def-sp-injective-resolutions"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/injectives.tex",
+  "place": "Tag 04JF, label lemma-G-modules"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -46,10 +76,35 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-exc-discrete-modules-abelian"
  },
  "chapter": "sec-curve-estimates",
- "unit": "sk-prop-h2"
+ "unit": "sk-prop-h2",
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "lem-exc-discrete-modules-abelian-injective-embeddings",
+  "worker": "stage1",
+  "summary": "Split the specialized discrete-module claim into the general functorial injective-embedding theorem of Stacks Tag 04JF and the immediate enough-injectives consequence. The new node is strictly more general, allowing an arbitrary topological group and ring; the item specializes it to a profinite group and finite ring.",
+  "blueprint": "Realizes the parent blueprint clause asserting enough injectives for discrete G-modules: step 1 realizes the cited 04JF functorial embedding and its open-stabilizer specialization, and step 2 realizes the enough-injectives consequence.",
+  "tool_uses": [
+   {
+    "node": "def-sp-injective-resolutions",
+    "why": "The final conversion from a monomorphism into an injective to the phrase enough injectives uses this generic definition, which is outside the unit route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "def-sp-injective-resolutions",
+  "def-sp-injective-resolutions"
+ ],
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-die",
+  "group": "G1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-die (reviewer sub-agent of L); spot-checked: Source read: literature/stacks-project/injectives.tex Tag 04JF (label lemma-G-modules), which is present locally (the report wrongly says it is absent), and etale-cohomology.tex Definition definition-G-module-continuous with the remark that continuity of the action equals open stabilizers. New node lem-exc-rg-discrete-modules-functorial-injective-embeddings agrees with 04JF hypothesis by hypothesis: G any topological group, R any ring, Mod_{R,G} = R-modules with R-linear G-action with open stabilizers, equivariant R-linear maps, functorial injective embeddings (functor J, natural j, j_M mono, J(M) injective); allowing a noncommutative ring keeps it true (Mod_{R[G]} has functorial injective embeddings for any ring, u = open-stabilizer part is right adjoint to the exact faithful inclusion). Item: step 1 is the specialization G profinite, A finite, carried by the new node; step 2 uses def-sp-injective-resolutions for 'injective object' and the standard meaning of enough injectives (that node defines injective objects and presupposes, but does not state, enough injectives; the report's claim that it states it is wrong). Tested: trivial group and finite discrete G (every stabilizer open, category = R[G]-modules, true); A = Z/l^n with profinite Galois group is the case used. No blueprint node states it (blueprint_refs search 'functorial injective embeddings G-modules', 'injective embedding', 'enough injectives': nothing). tool_use def-sp-injective-resolutions accepted as a generic definition. Fixes: dag/nodes/sec-curve-estimates/lem-exc-rg-discrete-modules-functorial-injective-embeddings.json: stmt_deps: added def-sp-injective-resolutions, cited in its statement; dag/nodes/sec-curve-estimates/lem-exc-discrete-modules-abelian-injective-embeddings.json: proof[0].text: replaced 'Apply Tag 04JF' and the description of the cited node's proof construction by the specialization from the cited node's statement (C1, C3); proof[1].text: no longer claims def-sp-injective-resolutions states the enough-injectives condition (C4), says it gives 'injective' and that enough injectives means every object embeds in an injective. Start 'Sat Oct 10 02:48:47 PM UTC 2026', end 'Sat Oct 10 02:49:47 PM UTC 2026'.; 2 file(s) fixed by the reviewer"
+ }
 }
