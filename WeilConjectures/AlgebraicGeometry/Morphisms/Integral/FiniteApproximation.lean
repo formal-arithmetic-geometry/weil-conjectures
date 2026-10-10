@@ -791,6 +791,53 @@ lemma exists_fgSub_mem_subAlg [CompactSpace S] [QuasiSeparatedSpace S] (U : S.Af
   obtain ⟨J, hJK, hJfg, hJ⟩ := (dualGluedι H).ker.exists_finiteType_le_of_mem _ hs
   exact ⟨⟨J, hJK, hJfg⟩, subMod_subset_subAlg H J U hJ⟩
 
+
+/-- The index category of the finite approximation: the subideal sheaves of finite type of the
+kernel of `Spec_S F ⟶ Spec_S (𝒪_S + ε F)`, ordered by reverse inclusion. -/
+abbrev ApproxIndex : Type u := ((dualGluedι H).ker.FGSub)ᵒᵖ
+
+example : IsCofiltered (ApproxIndex H) := inferInstance
+
+lemma coequifibered_approx (j : ApproxIndex H) : (subAlgMap (H := H) j.unop.1).Coequifibered :=
+  coequifibered_subAlgMap H j.unop.1 j.unop.2.1
+
+/-- The stages `Spec_S B_J` of the finite approximation. -/
+noncomputable def approxDiagram : ApproxIndex H ⥤ Scheme.{u} where
+  obj j := (relativeGluingData (coequifibered_approx H j)).glued
+  map {j j'} f := relativeGluingMap (coequifibered_approx H j') (coequifibered_approx H j)
+    (subAlgInclusion (leOfHom f.unop))
+  map_id j := by
+    rw [show subAlgInclusion (leOfHom (𝟙 j).unop) = subAlgInclusion (le_refl j.unop.1) from rfl,
+      subAlgInclusion_refl, relativeGluingMap_id]
+  map_comp {j j' j''} f g := by
+    rw [show subAlgInclusion (leOfHom (f ≫ g).unop) = subAlgInclusion
+        ((leOfHom g.unop).trans (leOfHom f.unop)) from rfl, subAlgInclusion_trans,
+      relativeGluingMap_comp]
+
+/-- The structure morphisms of the stages. -/
+noncomputable def approxP (j : ApproxIndex H) : (approxDiagram H).obj j ⟶ S :=
+  (relativeGluingData (coequifibered_approx H j)).toBase
+
+lemma approxDiagram_map_approxP {j j' : ApproxIndex H} (f : j ⟶ j') :
+    (approxDiagram H).map f ≫ approxP H j' = approxP H j :=
+  relativeGluingMap_toBase _ _ _ (subAlgMap_comp_subAlgInclusion H _)
+
+/-- The projections from `Spec_S F` to the stages. -/
+noncomputable def approxπ : (Functor.const (ApproxIndex H)).obj (relativeGluingData H).glued ⟶
+    approxDiagram H where
+  app j := relativeGluingMap (coequifibered_approx H j) H (subAlgι j.unop.1)
+  naturality {j j'} f := by
+    dsimp only [Functor.const_obj_obj, Functor.const_obj_map, approxDiagram]
+    rw [Category.id_comp, ← relativeGluingMap_comp, subAlgInclusion_comp_subAlgι]
+
+lemma approxπ_approxP (j : ApproxIndex H) :
+    (approxπ H).app j ≫ approxP H j = (relativeGluingData H).toBase :=
+  relativeGluingMap_toBase _ _ _ (subAlgMap_comp_subAlgι H _)
+
+lemma isFinite_approxP (hα : ∀ U, (α.app U).hom.IsIntegral) (j : ApproxIndex H) :
+    IsFinite (approxP H j) :=
+  isFinite_toBase _ fun U ↦ subAlgMap_app_finite H hα _ j.unop.2.1 j.unop.2.2 _
+
 end Approximation
 
 end AlgebraicGeometry.Scheme.AffineZariskiSite
