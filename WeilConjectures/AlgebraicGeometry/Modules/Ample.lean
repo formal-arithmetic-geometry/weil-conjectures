@@ -398,6 +398,29 @@ theorem isAffine_compl_of_isAmple_dual_toModules {k : Type u} [Field k]
   have : IsAffine j.opensRange.toScheme := hU
   exact IsAffine.of_isIso j.isoOpensRange.hom
 
+/-- **An ample module has positive degree.** Let `X` be a nonempty proper scheme over a field
+`K` and `M` an ample invertible `𝒪_X`-module. Then the degree of `X` with respect to `M` is
+positive.
+
+This is Stacks 0BEV, cited as classical input in the proof of blueprint `sk-prop-av-isogeny`
+(also `lem-sc-isogeny-facts`). -/
+@[stacks 0BEV]
+theorem Scheme.Hom.degree_pos_of_isAmple_of_nonempty (f : X ⟶ Spec (.of K)) [IsProper f]
+    [Nonempty X] (M : X.Modules) (hample : IsAmple f M) : 0 < f.degree M := by
+  let : X.Over (Spec (.of K)) := ⟨f⟩
+  have : IsProper (X ↘ Spec (.of K)) := ‹IsProper f›
+  obtain ⟨P, hnat, hlc, hP⟩ :=
+    Scheme.Modules.exists_polynomial_natDegree_eq_leadingCoeff_pos K hample
+  have hPM (m : ℕ) : P.eval (m : ℚ) = f.hilbertFunction M m := by
+    rw [hP m, Scheme.Modules.eulerChar_congr K (λ_ _)]
+    rfl
+  have h := f.degree_eq_factorial_mul_coeff M hnat.le hPM
+  rw [← hnat] at h
+  have : (0 : ℚ) < f.degree M := by
+    rw [h]
+    exact mul_pos (by exact_mod_cast Nat.factorial_pos _) hlc
+  exact_mod_cast this
+
 /-- **An ample module on a connected proper curve has positive degree.** Let `K` be
 algebraically closed, `X` a connected proper curve over `K` and `L` an ample invertible
 `𝒪_X`-module. Then `deg L = χ(L) - χ(𝒪_X) > 0`.
@@ -407,8 +430,10 @@ classical input without a separate proof. -/
 @[stacks 0B5X]
 theorem Scheme.Hom.degree_pos_of_isAmple_of_connectedSpace [IsAlgClosed K]
     (f : X ⟶ Spec (.of K)) [IsProper f] [ConnectedSpace X] (hdim : topologicalKrullDim X = 1)
-    (L : X.Modules) (hample : IsAmple f L) : 0 < f.degree L :=
-  sorry
+    (L : X.Modules) (hample : IsAmple f L) : 0 < f.degree L := by
+  -- the dimension hypothesis is not needed
+  have _ := hdim
+  exact f.degree_pos_of_isAmple_of_nonempty L hample
 
 /-- Blueprint `sk-prop-av-ample-positive`: Ample modules on proper curves have positive degree.
 
@@ -492,17 +517,6 @@ theorem Scheme.Hom.degree_pos_of_isAmple [IsAlgClosed K] (f : X ⟶ Spec (.of K)
   have := topologicalKrullDim_zero_of_discreteTopology X
   rw [hdim] at this
   exact absurd this (by decide)
-
-/-- **An ample module has positive degree.** Let `X` be a nonempty proper scheme over a field
-`K` and `M` an ample invertible `𝒪_X`-module. Then the degree of `X` with respect to `M` is
-positive.
-
-This is Stacks 0BEV, cited as classical input in the proof of blueprint `sk-prop-av-isogeny`
-(also `lem-sc-isogeny-facts`). -/
-@[stacks 0BEV]
-theorem Scheme.Hom.degree_pos_of_isAmple_of_nonempty (f : X ⟶ Spec (.of K)) [IsProper f]
-    [Nonempty X] (M : X.Modules) (hample : IsAmple f M) : 0 < f.degree M :=
-  sorry
 
 /-- **An ample module on a proper curve is not trivial.** Let `K` be algebraically closed, `X` a
 proper curve over `K` and `L` an ample invertible `𝒪_X`-module. Then `L ≇ 𝒪_X`: `L` has positive

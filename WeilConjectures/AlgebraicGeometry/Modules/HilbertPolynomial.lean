@@ -848,7 +848,7 @@ theorem le_degree_of_isIntegral (d : ℕ) (Y : Scheme.{u}) [Y.Over (Spec (.of K)
       refine Polynomial.eq_of_infinite_eval_eq _ _
         (Set.infinite_range_of_injective Nat.cast_injective |>.mono ?_)
       rintro _ ⟨n, rfl⟩
-      simp only [Set.mem_setOf_eq, Polynomial.eval_sub, Polynomial.eval_add,
+      simp only [Set.mem_ofPred_eq, Polynomial.eval_sub, Polynomial.eval_add,
         Polynomial.eval_comp, Polynomial.eval_X, Polynomial.eval_C]
       have := key n
       rw [← hP, ← hP, ← hQ, ← hP'] at this
@@ -873,6 +873,95 @@ theorem le_degree_of_isIntegral (d : ℕ) (Y : Scheme.{u}) [Y.Over (Spec (.of K)
     rw [hpoly, add_comm]
     exact (hdP'.trans hdeg.le).trans (Polynomial.degree_le_degree_add_of_eventually_nonneg
       hP'₀ hQ₀)
+
+/-- A nonempty proper scheme over a field has dimension exactly
+`((topologicalKrullDim X).unbotD 0).toNat`. -/
+lemma unbotD_toNat_le_topologicalKrullDim {X : Scheme.{u}} [X.Over (Spec (.of K))]
+    [IsProper (X ↘ Spec (.of K))] [Nonempty X] :
+    (((topologicalKrullDim X).unbotD 0).toNat : WithBot ℕ∞) ≤ topologicalKrullDim X := by
+  have := QuasiCompact.compactSpace_of_compactSpace (X ↘ Spec (.of K))
+  have h := topologicalKrullDim_ne_top_of_compactSpace (X ↘ Spec (.of K))
+  have h' : topologicalKrullDim X ≠ ⊥ := by
+    obtain ⟨x⟩ := ‹Nonempty X›
+    have : Nonempty (IrreducibleCloseds X) :=
+      ⟨⟨closure {x}, isIrreducible_singleton.closure, isClosed_closure⟩⟩
+    exact Order.krullDim_eq_bot_iff.not.mpr (not_isEmpty_of_nonempty _)
+  generalize topologicalKrullDim X = n at h h' ⊢
+  induction n using WithBot.recBotCoe with
+  | bot => exact absurd rfl h'
+  | coe n =>
+    induction n using ENat.recTopCoe with
+    | top => exact absurd rfl h
+    | coe n => simp
+
+/-- **The Hilbert polynomial has degree `dim X` and positive leading coefficient.** Let `X` be a
+nonempty proper scheme over `K` of dimension `g` and `ℒ` ample. The Hilbert polynomial `P` of
+`ℒ` has degree `g` and positive leading coefficient: choose a point `x` whose closure has
+dimension `g`, with integral closed subscheme `Z` and ideal `J`; then
+`χ(ℒ^{⊗ n}) = χ(J ⊗ ℒ^{⊗ n}) + χ(Z, ℒ|_Z^{⊗ n})`, a sum of two eventually nonnegative
+polynomials, the second of degree `≥ g` by
+`AlgebraicGeometry.Scheme.Modules.le_degree_of_isIntegral`, while `P` has degree `≤ g`. -/
+theorem exists_polynomial_natDegree_eq_leadingCoeff_pos {X : Scheme.{u}} [X.Over (Spec (.of K))]
+    [IsProper (X ↘ Spec (.of K))] [Nonempty X] {ℒ : X.Modules}
+    (hℒ : IsAmple (X ↘ Spec (.of K)) ℒ) :
+    ∃ P : Polynomial ℚ, P.natDegree = ((topologicalKrullDim X).unbotD 0).toNat ∧
+      0 < P.leadingCoeff ∧
+      ∀ n : ℕ, P.eval (n : ℚ) = (𝟙_ X.Modules ⊗ ℒ.tensorPow n).eulerChar K := by
+  have := hℒ.isInvertible
+  have := isNoetherian_of_isProper K (X := X)
+  have := SheafOfModules.isQuasicoherent_unit (R := X.ringCatSheaf)
+  have := IsInvertible.sheafOfModules_isInvertible (𝟙_ X.Modules)
+  set g := ((topologicalKrullDim X).unbotD 0).toNat
+  obtain ⟨P, hP, hP'⟩ := exists_polynomial_eulerChar_tensorObj_tensorPow_of_le K hℒ
+    (𝟙_ X.Modules) (topologicalKrullDim_le_unbotD_toNat K)
+  obtain ⟨x, hx⟩ := exists_le_topologicalKrullDim_closure_singleton
+    (unbotD_toNat_le_topologicalKrullDim K (X := X))
+  let J := IdealSheafData.vanishingIdeal ⟨closure {x}, isClosed_closure⟩
+  let Y' := J.subscheme
+  let j := J.subschemeι
+  let : Y'.Over (Spec (.of K)) := ⟨j ≫ X ↘ Spec (.of K)⟩
+  have : IsProper (Y' ↘ Spec (.of K)) := inferInstanceAs (IsProper (j ≫ X ↘ Spec (.of K)))
+  have : IsIntegral Y' := IdealSheafData.isIntegral_subscheme_vanishingIdeal_closure x
+  have hdY' : (g : WithBot ℕ∞) ≤ topologicalKrullDim Y' := by
+    rw [IdealSheafData.topologicalKrullDim_subscheme_vanishingIdeal_closure]
+    exact hx
+  have hℒ' : IsAmple (Y' ↘ Spec (.of K)) ((pullback j).obj ℒ) := hℒ.pullback j
+  have := SheafOfModules.isQuasicoherent_unit (R := Y'.ringCatSheaf)
+  have := IsInvertible.sheafOfModules_isInvertible (𝟙_ Y'.Modules)
+  obtain ⟨P', -, hP''⟩ := exists_polynomial_eulerChar_tensorObj_tensorPow_of_le K hℒ'
+    (𝟙_ Y'.Modules) (topologicalKrullDim_le_unbotD_toNat K)
+  have hdP' := le_degree_of_isIntegral K g Y' _ hℒ' hdY' P' hP''
+  have := isQuasicoherent_toModules J
+  have := isFinitePresentation_toModules J
+  obtain ⟨Q, -, hQ⟩ := exists_polynomial_eulerChar_tensorObj_tensorPow_of_le K hℒ
+    J.toModules (topologicalKrullDim_le_unbotD_toNat K)
+  have hpoly : P = Q + P' := by
+    refine Polynomial.eq_of_infinite_eval_eq _ _
+      (Set.infinite_range_of_injective Nat.cast_injective |>.mono ?_)
+    rintro _ ⟨n, rfl⟩
+    simp only [Set.mem_ofPred_eq, Polynomial.eval_add]
+    have h₂ := eulerChar_tensorObj_eq_add K J (ℒ.tensorPow n)
+    obtain ⟨e'⟩ := nonempty_pullback_tensorPow_iso j ℒ n
+    rw [eulerChar_congr K (e' ≪≫ (λ_ _).symm)] at h₂
+    rw [hP', hQ, hP'', h₂]
+    push_cast
+    ring
+  obtain ⟨n₁, hn₁⟩ := exists_forall_eulerChar_nonneg K hℒ J.toModules
+  obtain ⟨n₂, hn₂⟩ := exists_forall_eulerChar_nonneg K hℒ' (𝟙_ Y'.Modules)
+  obtain ⟨n₃, hn₃⟩ := exists_forall_eulerChar_nonneg K hℒ (𝟙_ X.Modules)
+  have hdeg : (g : WithBot ℕ) ≤ P.degree := by
+    rw [hpoly, add_comm]
+    exact hdP'.trans (Polynomial.degree_le_degree_add_of_eventually_nonneg
+      ⟨n₂, fun n hn ↦ by rw [hP'']; exact_mod_cast hn₂ n hn⟩
+      ⟨n₁, fun n hn ↦ by rw [hQ]; exact_mod_cast hn₁ n hn⟩)
+  have hP₀ : P ≠ 0 := by
+    rintro rfl
+    simp at hdeg
+  have hnat : P.natDegree = g :=
+    le_antisymm hP (Polynomial.le_natDegree_of_coe_le_degree hdeg)
+  refine ⟨P, hnat, lt_of_le_of_ne (Polynomial.leadingCoeff_nonneg_of_eventually_nonneg
+    ⟨n₃, fun n hn ↦ by rw [hP']; exact_mod_cast hn₃ n hn⟩)
+    (Polynomial.leadingCoeff_ne_zero.mpr hP₀).symm, hP'⟩
 
 end LowerBound
 
