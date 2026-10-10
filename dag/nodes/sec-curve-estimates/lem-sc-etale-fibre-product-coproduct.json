@@ -23,9 +23,65 @@
   "def-pc-fibre-product",
   "lem-weil-pbc-scheme-coproduct-family"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Write $\\iota_i:U_i\\to V$ for the coprojections of [lem-weil-pbc-scheme-coproduct-family], and for $p\\ge0$ let $V^{p+1}=V\\times_X\\cdots\\times_XV$ and $U_J=U_{j_0}\\times_X\\cdots\\times_XU_{j_p}$ for $J=(j_0,\\ldots,j_p)\\in I^{p+1}$, the iterated fibre products [def-pc-fibre-product] being formed from the left, $V^{p+2}=V^{p+1}\\times_XV$ and $U_{(J,i)}=U_J\\times_XU_i$. Let $\\varphi_J:U_J\\to V^{p+1}$ be the morphism $\\iota_{j_0}\\times_X\\cdots\\times_X\\iota_{j_p}$, i.e. the unique morphism whose $r$-th projection is $\\iota_{j_r}$ composed with the $r$-th projection of $U_J$; it is a morphism over $X$ since $u\\circ\\iota_{j_r}=u_{j_r}$. By the universal property of the coproduct [lem-weil-pbc-scheme-coproduct-family] the $\\varphi_J$ glue to a unique morphism $\\varphi_p:\\coprod_{J\\in I^{p+1}}U_J\\to V^{p+1}$ over $X$ with $\\varphi_p$ restricted to the summand $J$ equal to $\\varphi_J$.",
+   "uses": [
+    "def-pc-fibre-product",
+    "lem-weil-pbc-scheme-coproduct-family"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Schemes, Section 26.17 (universal property of fibre products), with the coproduct of schemes of Tags 01JB and 01JC (lemma-glue, lemma-glue-schemes)"
+   }
+  },
+  {
+   "text": "We prove by induction on $p\\ge0$ that $\\varphi_p$ is an isomorphism. For $p=0$, $\\varphi_0$ is the morphism $\\coprod_iU_i\\to V$ with $\\varphi_0\\circ\\iota_i=\\iota_i$ for every $i$, so $\\varphi_0=\\mathrm{id}_V$ by the uniqueness in [lem-weil-pbc-scheme-coproduct-family].",
+   "uses": [
+    "lem-weil-pbc-scheme-coproduct-family"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Schemes, Tags 01JB and 01JC (lemma-glue, lemma-glue-schemes): base of the induction"
+   }
+  },
+  {
+   "text": "Inductive step: assume $\\varphi_p$ is an isomorphism. By [lem-sc-etale-fibre-product-base-change-coproduct] applied to the family $(U_i\\to X)_{i\\in I}$ and $T=V^{p+1}$, the morphism $\\alpha:\\coprod_{i\\in I}V^{p+1}\\times_XU_i\\to V^{p+1}\\times_XV=V^{p+2}$ which is $\\mathrm{id}\\times_X\\iota_i$ on the summand $i$ is an isomorphism. For each $i$, $\\varphi_p$ is an isomorphism over $X$ from the coproduct $\\coprod_JU_J$ (with its induced morphism to $X$) to $V^{p+1}$, so $\\varphi_p\\times_X\\mathrm{id}_{U_i}$ is an isomorphism (functoriality in [def-pc-fibre-product], applied to $\\varphi_p$ and its inverse); and [lem-sc-etale-fibre-product-base-change-coproduct] applied to the family $(U_J\\to X)_{J\\in I^{p+1}}$ and $T=U_i$, followed on both sides by the exchange of the two factors (an isomorphism by the uniqueness in [def-pc-fibre-product]), shows that the morphism $\\beta_i:\\coprod_JU_J\\times_XU_i\\to(\\coprod_JU_J)\\times_XU_i$ which is $\\iota_J\\times_X\\mathrm{id}_{U_i}$ on the summand $J$ is an isomorphism. Hence $\\alpha\\circ\\coprod_i((\\varphi_p\\times_X\\mathrm{id}_{U_i})\\circ\\beta_i)$ is an isomorphism from $\\coprod_i\\coprod_JU_{(J,i)}=\\coprod_{(J,i)\\in I^{p+2}}U_{(J,i)}$ (a coproduct of coproducts is the coproduct over the union of the index sets, by the universal property in [lem-weil-pbc-scheme-coproduct-family]) to $V^{p+2}$. On the summand $(J,i)$ it is $(\\varphi_J\\times_X\\mathrm{id}_{U_i})$ followed by $\\mathrm{id}\\times_X\\iota_i$, i.e. $\\varphi_J\\times_X\\iota_i=\\varphi_{(J,i)}$: both have the same projections to $V^{p+1}$ and to $V$, so they agree by the uniqueness in [def-pc-fibre-product]. By the uniqueness in [lem-weil-pbc-scheme-coproduct-family] this isomorphism is $\\varphi_{p+1}$, which completes the induction. So for every $p\\ge0$, $\\varphi_p$ is an isomorphism of schemes over $X$, the canonical isomorphism of the statement.",
+   "uses": [
+    "lem-sc-etale-fibre-product-base-change-coproduct",
+    "def-pc-fibre-product",
+    "lem-weil-pbc-scheme-coproduct-family"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Schemes, Tags 01JB and 01JC (lemma-glue, lemma-glue-schemes) and Section 26.17, applied inductively after base change"
+   }
+  },
+  {
+   "text": "Let $\\pi:V^{p+1}\\to V^{p}$ be a projection omitting the $r$-th factor ($p\\ge1$), and $\\pi_J:U_J\\to U_{J'}$ the corresponding projection, $J'$ being $J$ with $j_r$ omitted. Then $\\pi\\circ\\varphi_J$ and $\\varphi_{J'}\\circ\\pi_J$ have the same projections to each remaining factor $V$, namely $\\iota_{j_s}$ composed with the $s$-th projection of $U_J$ ($s\\ne r$), so they are equal by the uniqueness in [def-pc-fibre-product]. Thus under the isomorphism $\\varphi_p$ of Step 3, $\\pi$ restricts on the summand $J$ to $\\pi_J$ followed by the coprojection of the summand $J'$.",
+   "uses": [
+    "def-pc-fibre-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Schemes, Section 26.17, universal property of fibre products"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-fibre-product",
+  "lem-weil-pbc-scheme-coproduct-family",
+  "lem-sc-etale-fibre-product-base-change-coproduct"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/schemes.tex",
+  "place": "Schemes, Lemmas Tags 01JB and 01JC (lemma-glue and lemma-glue-schemes), together with Section 26.17"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -50,12 +106,29 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-sc-etale-standard-cover-cech",
   "by": "worker",
   "date": "2026-10-10"
  },
  "chapter": "sec-curve-estimates",
- "unit": "sk-prop-h2"
+ "unit": "sk-prop-h2",
+ "split_report": {
+  "date": "2026-10-11",
+  "item": "lem-sc-etale-fibre-product-coproduct",
+  "worker": "stage1",
+  "summary": "Split the finite-coproduct fibre-product distribution lemma into the construction of the indexed component maps, an induction using the base-change coproduct statement, gluing and uniqueness of the canonical isomorphism, and compatibility of omitted-factor projections. Added one statement-only base-change supporting node after searching the DAG, blueprint and Mathlib.",
+  "blueprint": "The four proof steps realize the blueprint ancestor lem-sc-etale-affine-qcoherent's passage from a finite affine etale covering family to its disjoint union and its Cech complex, specifically the identification of iterated fibre products of the coproduct with the coproduct of indexed iterated fibre products.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-efp",
+  "group": "G1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-efp (reviewer sub-agent of L); spot-checked: Source: Stacks Schemes Tags 01JB/01JC (lemma-glue, lemma-glue-schemes) and Section 26.17; the item statement (finite family, coproduct V, (p+1)-fold fibre products, omitted-factor projections) and the new base-change node are true statements (tested on I empty, |I|=1, p=0, p=1). Cited statements read: def-pc-fibre-product (universal property, uniqueness, functoriality u x_w v), lem-weil-pbc-scheme-coproduct-family (coproduct universal property, open disjoint covering coprojections). No existing DAG node or blueprint node states base change of a coproduct (grep of statements, blueprint_refs.py search 'coproduct fibre product', 'disjoint union base change': nothing). FIX more, RETURN less: (1) C1 in step 3: the inverse morphism was taken from Tags 01JB/01JC with no node, and step 2 used without a node that the inverse image of the disjoint open cover is the fibre products; (2) C4 in step 2: the new node gave only an unspecified 'canonical' isomorphism compatible with the projection to T, not that it is induced by id_T x iota_i, which the identification of the summands needs. Fixes: dag/nodes/sec-curve-estimates/lem-sc-etale-fibre-product-base-change-coproduct.json: statement: the isomorphism is now stated as the morphism coprod(T x_X U_i) -> T x_X V that is id_T x_X iota_i on summand i (what 'canonical' meant; same mathematics), with both projection compatibilities; stmt_deps unchanged; mathlib_candidate added (FinitaryExtensive Scheme, Limits.lean:456 + isUniversal_finiteCoproducts, Extensive.lean:451, lines verified). dag/nodes/sec-curve-estimates/lem-sc-etale-fibre-product-coproduct.json: proof: steps rewritten as Step 1 define phi_J = iota_{j_0} x ... x iota_{j_p} and glue to phi_p (def-pc-fibre-product, coproduct node; elementary), Step 2 induction claim 'phi_p is an isomorphism' with base p=0 phi_0=id (coproduct uniqueness), Step 3 inductive step: new node with T=V^{p+1} splits the last factor, new node with T=U_i plus factor exchange and phi_p x id splits the first, coproduct of coproducts, and the composite equals phi_{p+1} by fibre-product uniqueness; Step 4 omitted-factor projections by fibre-product uniqueness (elementary); no tag carries a step any more; proof_deps unchanged. Report check: maintainer fields of the item unchanged (created untouched despite the report's wording). Start Sat Oct 10 04:18:34 PM UTC 2026, end Sat Oct 10 04:20:47 PM UTC 2026.; 2 file(s) fixed by the reviewer"
+ },
+ "lead_note": "2026-10-10 L (R-efp): New node lem-sc-etale-fibre-product-base-change-coproduct is very likely a Mathlib leaf: instance FinitaryExtensive Scheme (Mathlib/AlgebraicGeometry/Limits.lean:456) with FinitaryPreExtensive.isUniversal_finiteCoproducts (Mathlib/CategoryTheory/Extensive.lean:451); recorded as mathlib_candidate, the worker's three searches said no match."
 }
