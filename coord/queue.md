@@ -1,8 +1,8 @@
 # Work queue
 
-846 items; claim with `tools/claim.py next <group> [--stage N]`.
+844 items; claim with `tools/claim.py next <group> [--stage N]`.
 
-## Stage 1: nodes to split (312)
+## Stage 1: nodes to split (310)
 
 | node | distance to a target | Lean state on the done branch |
 |---|---|---|
@@ -18,7 +18,6 @@
 | `lemma-weil-pbc-proper-underived-exchange` | 2003 | sorry_here |
 | `lemma-weil-pbc-finite-refinement-etale-cover` | 2006 | sorry_here |
 | `lem-sc-dim-one-quasi-projective` | 2008 | none |
-| `lem-weil-pbc-finite-over-henselian-local-product` | 2008 | none |
 | `lem-weil-pbc-sets-pushforward-stalk-strict-henselization` | 2008 | none |
 | `lem-weil-pbc-sets-strictly-henselian-open-sections-stalk` | 2008 | none |
 | `prop-weil-pbc-strict-henselization-stalk-formula` | 3003 | none |
@@ -48,7 +47,6 @@
 | `lem-weil-pbc-simplicial-index-finite-initial` | 3009 | none |
 | `lem-exc-cochains-derived-invariants` | 3010 | none |
 | `lem-exc-discrete-modules-abelian` | 3010 | none |
-| `lem-pc-nonzero-section-integral-cartier` | 3010 | none |
 | `lem-pc-very-ample-ample` | 3010 | sorry_here |
 | `lem-sc-brauer-zero-all-curves` | 3010 | sorry_here |
 | `lem-sc-canonical-degree` | 3010 | rests_on_sorry |
@@ -858,7 +856,7 @@
 | `lem-weil-pbc-p1-field-dimension-one` | 4 | state |
 | `lem-weil-pbc-projective-space-zero-isomorphism` | 4 | state |
 
-Not open yet: 331 nodes that wait for stage 1, 980 nodes that wait for a statement dependency.
+Not open yet: 329 nodes that wait for stage 1, 982 nodes that wait for a statement dependency.
 
 ## Stage 3: modules to prove (0)
 
