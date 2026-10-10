@@ -3024,3 +3024,5 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 23:54 L: merged deliver/M1/lem-pc-chow-relative-ample (reviewer FIX; first push; new nodes: 0)
 - 23:54 UTC L: reviewed under the lock since 23:53: K1 filtered-complex-ZB-description FIX 9dfd52373 (R-zbd3152; image formula's converse direction supplied), K1 qc-open-derived-lift FIX f48e827f1 (R-qol3153). Second readings missed a fault in 2 of 2.
 - 23:55 L: merged deliver/H1/lem-sc-picard-valuation-probe-closure (reviewer PASS; first push; new nodes: 2)
+- 23:55 UTC L: reviewed under the lock since 23:54: J1 module-flat-opcycles-tor-criterion PASS 3ecbb8f1e (R-fot3153), M1 chow-relative-ample FIX 0bd58c332 (R-cra3152; graph argument needs g separated, TeX tabs repaired). Second readings missed a fault in 1 of 2.
+- 23:55 UTC L: H1 picard-valuation-probe-closure PASS ab6f09155 (R-pvp3154; two new nodes matching sorry-free slopmaster2 declarations exists_specializes_of_mem_closure_range and ValuativeCommSqWithPt.ofSpecializes).
