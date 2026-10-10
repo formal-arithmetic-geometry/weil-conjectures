@@ -1,8 +1,8 @@
 # Work queue
 
-896 items; claim with `tools/claim.py next <group> [--stage N]`.
+892 items; claim with `tools/claim.py next <group> [--stage N]`.
 
-## Stage 1: nodes to split (130)
+## Stage 1: nodes to split (126)
 
 | node | distance to a target | Lean state on the done branch |
 |---|---|---|
@@ -17,7 +17,6 @@
 | `lem-pc-supported-open-pushforward` | 3016 | none |
 | `lem-pc-tower-injective-embedding` | 3016 | none |
 | `lem-pc-derived-mayer-vietoris-triangle` | 3017 | none |
-| `lem-pc-ringed-space-sheafification-cohomology` | 3017 | none |
 | `lem-pc-perfect-rhom-tensor-comparison` | 3018 | none |
 | `lem-pc-affine-morphism-hom-out-of-perfect` | 3019 | none |
 | `lem-pc-global-hom-adjunction` | 3019 | none |
@@ -31,7 +30,6 @@
 | `lem-sc-perfect-derived-tensor-perfect` | 3020 | none |
 | `lem-sc-perfect-into-support-on-T` | 3020 | none |
 | `lem-pc-perfect-summand` | 3022 | none |
-| `lem-pc-perfect-two-out-of-three` | 3022 | none |
 | `lem-pc-genus-agrees-sc` | 4007 | rests_on_sorry |
 | `prop-av-tate-rank` | 4008 | rests_on_sorry |
 | `cor-pc-sigma-pic-iso` | 4009 | rests_on_sorry |
@@ -50,7 +48,6 @@
 | `lem-pc-sites-module-sheafification-interface` | 5015 | none |
 | `lem-pc-sites-module-sheafification-tensor` | 5015 | none |
 | `lem-pc-fp-module-map-descent` | 5016 | none |
-| `lem-pc-fp-relation-descent` | 5016 | none |
 | `lem-sp-cartan-eilenberg-comparison-homotopy` | 6006 | none |
 | `thm-sp-spectral-object-yields` | 6006 | none |
 | `lem-sc-general-theorem-of-cube` | 6011 | none |
@@ -61,7 +58,6 @@
 | `lem-pc-coherent-hi` | - | sorry_here |
 | `lem-pod-adic-tower-reconstruction` | - | none |
 | `lem-sc-global-functions` | - | rests_on_sorry |
-| `lem-sc-pic-affine-quotient` | - | none |
 | `lem-weil-pbc-generic-separable-algebra-splitting` | - | none |
 | `lem-weil-pbc-pullback-finite-locally-constant` | - | none |
 | `lem-weil-pbc-spread-finite-separable-extension` | - | none |
@@ -908,7 +904,7 @@
 | `lem-weil-pbc-projective-space-zero-isomorphism` | 4 | state |
 | `def-nagata-fixed-base-separated-stage` | 6 | state |
 
-Not open yet: 1563 nodes that wait for a statement dependency, 170 nodes that wait for stage 1.
+Not open yet: 1567 nodes that wait for a statement dependency, 166 nodes that wait for stage 1.
 
 ## Stage 3: modules to prove (0)
 
