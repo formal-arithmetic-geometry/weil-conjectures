@@ -3,7 +3,7 @@
  "blueprint": {
   "is": "thm-sp-half-plane-convergence",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "Half-plane convergence",
@@ -32,37 +32,71 @@
    "text": "The page region gives $p\\geq0$ and $q\\geq a$; on $p+q=n$ these inequalities\ngive the finite interval $a\\leq q\\leq n$, so each total degree contains\nfinitely many entries. For an entry $(p,q)$, the incoming differentials at\npage $r$ are\n\n$$\n  d_r:E_r^{p-r,q+r-1}\\longrightarrow E_r^{p,q},\n$$\n\nwhose source has first index $p-r<0$, hence vanishes when $r>p$; the outgoing\ndifferentials are\n\n$$\n  d_r:E_r^{p,q}\\longrightarrow E_r^{p+r,q-r+1},\n$$\n\nwhose target has second index $q-r+1<a$, hence vanishes when $r>q-a+1$. The\ndegrees are those of [def-sp-exact-couple]. For $r>\\max(q-a+1,p)$, taking\npage cohomology identifies the two successive entries. The recursive\nsubobjects of [def-sp-convergence] therefore stabilize, giving regularity.\nFor completeness,\n\n$$\n \\operatorname{im}(\\alpha^r)^{p,q}\n =\\operatorname{im}\\bigl(\\alpha^r:D^{p+r,q-r}\\to D^{p,q}\\bigr)=0\n$$\n\nfor $r>q-a$, by the stated hypothesis on $D$. Exactness of the original\ncouple shows that $\\alpha:D^{n-q+1,q-1}\\to D^{n-q,q}$ is an isomorphism for\n$q>n$: both adjacent $E_2$-terms have negative first index. Thus $A^n$ is the\nstable value of this system. Its image filtration has $G_q=0$ for $q<a$ and\n$G_q=A^n$ for $q\\geq n$.",
    "uses": [
     "def-sp-exact-couple",
-    "def-sp-convergence"
+    "def-sp-convergence",
+    "lem-sp-derived-couple-exact"
    ],
    "elementary": false
   },
   {
-   "text": "For completeness, the associated graded calculation can be read directly in\nthe iterated exact couple. At page $r$, its $D_r$ term at $(u,v)$ is\n$\\operatorname{im}(D^{u+r-2,v-r+2}\\to D^{u,v})$. For $r$ sufficiently large,\nthe term which maps to $E_r^{p,q}$ is consequently $G_qA^{p+q}$; the image of\nthe preceding $\\alpha_r$-map is $G_{q-1}A^{p+q}$. The following $D_r$-term is\nzero, since its source has second index $q-r+1<a$. Exactness therefore gives\n$E_r^{p,q}=G_qA^{p+q}/G_{q-1}A^{p+q}$. This is the asserted associated graded\nof [def-sp-filtration], and proves convergence in the sense of\n[def-sp-convergence].",
+   "text": "For the associated graded, fix $(p,q)$ with $p\\geq0$ and choose $r$ so large that\n$r>\\max(q-a+1,p)$ and $u:=p-r+2\\leq0$. Put $v:=q+r-2$, so $u+v=p+q$. By\n[lem-sp-derived-couple-exact], $D_r^{u,v}=\\operatorname{im}(D^{p,q}\\xrightarrow{\\alpha^{r-2}}D^{u,v})$.\nExactness of the iterated couple identifies this image, via the isomorphism\n$\\alpha^{-u}:D^{0,p+q}=A^{p+q}\\xrightarrow{\\sim}D^{u,v}$ from Step 1, with\n$G_qA^{p+q}=\\operatorname{im}(D^{p,q}\\to A^{p+q})$. Likewise the image of\n$\\alpha_r:D_r^{u+1,v-1}\\to D_r^{u,v}$ corresponds to\n$G_{q-1}A^{p+q}$. The next term in the exact sequence is\n$D_r^{p+2,q-1}=\\operatorname{im}(D^{p+r,q-r+1}\\to D^{p+2,q-1})$, which is zero\nbecause $q-r+1<a$. Hence exactness gives a short exact sequence\n$D_r^{u+1,v-1}\\xrightarrow{\\alpha_r}D_r^{u,v}\\xrightarrow{g_r}E_r^{p,q}\\to0$,\nso $E_r^{p,q}\\cong G_qA^{p+q}/G_{q-1}A^{p+q}$. This isomorphism is the canonical one: iterating the defining property $g'\\circ\\bar\\alpha=\\pi\\circ\\hat g$ of [lem-sp-derived-couple-exact] gives $g_r(\\alpha^{r-2}y)=\\overline{g(y)}$ for $y\\in D^{p,q}$, so the maps $D^{p,q}\\to E_\\infty^{p,q}=E_r^{p,q}$ (Step 1: $Z$ and $B$ are constant from page $r$ on) and $D^{p,q}\\to\\operatorname{gr}^pA^{p+q}$ of [def-sp-convergence] are both onto with the same kernel. The filtration is finite ($F^pA^n=A^n$ for $p\\leq0$, $F^pA^n=0$ for $p>n-a$), hence exhaustive, separated and complete. For $p<0$, both sides are\nzero by the half-plane hypothesis. This is the asserted associated graded of\n[def-sp-filtration], and proves convergence in the sense of\n[def-sp-convergence].",
    "uses": [
     "def-sp-filtration",
-    "def-sp-convergence"
+    "def-sp-convergence",
+    "lem-sp-derived-couple-exact"
    ],
    "elementary": false
   },
   {
-   "text": "(Stacks Project: Lemma 12.21.4 (Tag\n[011T](https://stacks.math.columbia.edu/tag/011T): $Z_r$, $B_r$ and the rule\nfor $d_{r+1}$); Lemma 12.23.5 (Tag\n[012F](https://stacks.math.columbia.edu/tag/012F): $E_\\infty$ and the\nassociated graded of the cohomology).)",
-   "uses": [],
-   "elementary": null
+   "text": "(Stacks Project: Tag\n[011T](https://stacks.math.columbia.edu/tag/011T) ($Z_r$, $B_r$ and the rule\nfor $d_{r+1}$ of an exact couple); compare Tag\n[012F](https://stacks.math.columbia.edu/tag/012F) ($E_\\infty$ and the\nassociated graded of the cohomology).)",
+   "uses": [
+    "lem-sp-derived-couple-exact"
+   ],
+   "elementary": true
   }
  ],
  "proof_deps": [
   "def-sp-exact-couple",
   "def-sp-convergence",
-  "def-sp-filtration"
+  "def-sp-filtration",
+  "lem-sp-derived-couple-exact"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/master/blueprint/sec-abelian-varieties/sk-prop-av-pqf-finite/thm-sp-half-plane-convergence.md",
   "place": "## Proof"
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "half-plane convergence for an exact couple spectral sequence with vanishing region and finite filtration",
+   "results": "CochainComplex exactAt lemmas; no spectral-sequence convergence theorem",
+   "date": "2026-10-11",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "SpectralSequence, ExactCouple, pageInfinity, AbutsTo",
+   "results": "0 hits; unknown identifier SpectralSequence",
+   "date": "2026-10-11",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "ExactCouple|pageInfinity|AbutsTo in Mathlib/Algebra/Homology/SpectralSequence",
+   "results": "0 hits",
+   "date": "2026-10-11",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "spectral sequence exact couple stabilizes in a half plane and converges to a finite filtration",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-11",
+   "verdict": "unavailable"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [
   "proof_cites_literature"
@@ -88,5 +122,30 @@
   }
  },
  "chapter": "sec-abelian-varieties",
- "unit": "sk-prop-av-pqf-finite"
+ "unit": "sk-prop-av-pqf-finite",
+ "split_report": {
+  "date": "2026-10-11",
+  "item": "thm-sp-half-plane-convergence",
+  "worker": "stage1",
+  "summary": "Reworked the imported proof into explicit stabilization, regularity/completeness, filtration, and associated-graded steps. No new nodes were needed: the existing exact-couple iteration lemma supplies the non-elementary page-cohomology and iteration facts.",
+  "blueprint": "Realizes proof paragraphs 1-2 of thm-sp-half-plane-convergence: the half-plane differential bounds, recursive stabilization, image filtration, and associated graded identification.",
+  "tool_uses": [
+   {
+    "node": "lem-sp-derived-couple-exact",
+    "why": "Its statement supplies the iterated exact-couple bidegrees, page cohomology, and the D_r image formula used in Steps 1, 2, and 4."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sp-derived-couple-exact",
+  "lem-sp-derived-couple-exact"
+ ],
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-hpc1907",
+  "group": "K1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-hpc1907 (reviewer sub-agent of L); spot-checked: Checked bidegrees (d_r (r,1-r), g_r (r-2,2-r)), stabilization bound max(q-a+1,p), alpha iso for p<=0 so colimit A^n=D^{0,n} matches def-sp-convergence, image filtration F^p=G_{n-p}, D_r^{u,v} exact sequence with D_r^{p+2,q-1}=0; no cycle (def-sp-convergence/lem-sp-derived-couple-exact do not depend on item). FIX more, RETURN less: (1) B5 Step 3 quoted section numbers 12.21.4/12.23.5, replaced by Tags 011T/012F only (012F marked 'compare', it is about filtered differential objects); (2) E Step 2 identified E_r with G_q/G_{q-1} but not the canonical maps of def-sp-convergence weak convergence: added g_r(alpha^{r-2}y)=[g(y)] from lem-sp-derived-couple-exact, E_infty=E_r, and finiteness => exhaustive/separated/complete; Step 2 opening 'For completeness' renamed.; 1 file(s) fixed by the reviewer"
+ }
 }

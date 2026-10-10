@@ -2333,3 +2333,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 19:06 L: merged deliver/E1/def-sp-injective-resolutions (reviewer FIX; first push; new nodes: 1)
 - 19:06 L: merged deliver/H1/lem-pc-cech-resolution (reviewer FIX; first push; new nodes: 1)
 - 19:07 L: merged deliver/E1/def-pc-generators (reviewer FIX; first push; new nodes: 0)
+- 19:07 L: merged deliver/K1/thm-sp-half-plane-convergence (reviewer FIX; first push; new nodes: 0)
