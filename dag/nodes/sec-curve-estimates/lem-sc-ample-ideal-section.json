@@ -27,9 +27,114 @@
   "def-weil-pbc-ample-invertible-module",
   "pqf-def-coherent"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "*Setup: a principal affine open around $y$.* By condition (2) of [def-weil-pbc-ample-invertible-module] there are $d\\ge1$ and $s\\in\\Gamma(Y,\\mathcal M^{\\otimes d})$ with $y\\in Y_s$ and $U:=Y_s$ an affine open of $Y$, where $Y_s=\\{x\\in Y: s_x\\notin\\mathfrak m_x(\\mathcal M^{\\otimes d})_x\\}$. Put $\\mathcal L:=\\mathcal M^{\\otimes d}$; it is invertible [def-sc-invertible-module], [def-pur-sheaf-tensor-product]. Let $A=\\mathcal O_Y(U)$ and, for $x\\in U$, let $\\mathfrak p_x\\subset A$ be the prime of $x$ under $U\\cong\\operatorname{Spec}A$ [lem-weil-pbc-affine-open-spec-points].",
+   "uses": [
+    "def-weil-pbc-ample-invertible-module",
+    "def-sc-invertible-module",
+    "def-pur-sheaf-tensor-product",
+    "lem-weil-pbc-affine-open-spec-points"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/properties.tex",
+    "place": "Properties Proposition 01Q3 (properties-proposition-characterize-ample), proof, second paragraph: 'Choose $s\\in S_+$ homogeneous such that $X_s$ is affine'; Definition 01PS (properties-definition-ample)"
+   }
+  },
+  {
+   "text": "*A function in $\\mathcal J(U)$ which is a unit at $y$.* $\\mathcal J$ is a quasi-coherent sheaf of ideals and $y\\in U$ with $y\\notin V(\\mathcal J)$, i.e. $\\mathcal J_y=\\mathcal O_{Y,y}$. By [lem-weil-pbc-quasi-coherent-ideal-zero-set-affine] (applied to $\\mathcal K=\\mathcal J$ and the affine open $U$), $\\mathcal J(U)\\not\\subseteq\\mathfrak p_y$; choose $f\\in\\mathcal J(U)\\subseteq A$ with $f\\notin\\mathfrak p_y$. By [lem-weil-pbc-affine-open-stalk-localization] (c) the germ $f_y\\in\\mathcal O_{Y,y}$ is a unit.",
+   "uses": [
+    "lem-weil-pbc-quasi-coherent-ideal-zero-set-affine",
+    "lem-weil-pbc-affine-open-stalk-localization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/properties.tex",
+    "place": "Properties Proposition 01Q3, proof, second paragraph (a section $m\\in\\Gamma(X_s,\\mathcal F)$ for $\\mathcal F=\\mathcal I$ a quasi-coherent ideal, (5) $\\Rightarrow$ (6)); the choice of $m$ nonzero at $x$ is implicit in the third paragraph: 'a section $s$ ... such that $s$ does not vanish at $x$'"
+   }
+  },
+  {
+   "text": "*$Y$ is quasi-compact and separated over an affine scheme.* $Y$ is quasi-compact by hypothesis (also by condition (1) of [def-weil-pbc-ample-invertible-module]) and separated, i.e. $Y\\to\\operatorname{Spec}\\mathbf Z$ is separated, by [lem-weil-pbc-ample-scheme-separated]; $\\operatorname{Spec}\\mathbf Z$ is affine.",
+   "uses": [
+    "def-weil-pbc-ample-invertible-module",
+    "lem-weil-pbc-ample-scheme-separated",
+    "def-weil-pbc-quasi-compact-scheme"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/properties.tex",
+    "place": "Properties Proposition 01Q3, proof, second paragraph: 'Note that in particular $X$ is separated (as an open subscheme of the separated scheme $\\operatorname{Proj}(S)$)'; here via Lemma 09MP (properties-lemma-ample-separated)"
+   }
+  },
+  {
+   "text": "*$Y_s$ is the complement of the zero scheme of $s$.* Let $Z(s)$ be the zero scheme of $s\\in\\Gamma(Y,\\mathcal L)$ [def-pc-zero-scheme], cut out by the quasi-coherent ideal $\\mathcal I=\\operatorname{im}(s^\\vee:\\mathcal L^\\vee\\to\\mathcal O_Y)$. On an open $W$ with a trivialization $\\mathcal L|_W\\cong\\mathcal O_W$ [def-sc-invertible-module] sending $s|_W$ to $a\\in\\mathcal O_Y(W)$, one has $\\mathcal I|_W=a\\mathcal O_W$, so for $x\\in W$: $\\mathcal I_x=\\mathcal O_{Y,x}$ iff $a_x$ is a unit iff $s_x\\notin\\mathfrak m_x\\mathcal L_x$. By [lem-weil-pbc-quasi-coherent-ideal-zero-set-affine] the underlying set of $Z(s)$ is $V(\\mathcal I)=\\{x:\\mathcal I_x\\ne\\mathcal O_{Y,x}\\}$; hence $Y\\setminus Z(s)=Y_s=U$.",
+   "uses": [
+    "def-pc-zero-scheme",
+    "def-sc-invertible-module",
+    "lem-weil-pbc-quasi-coherent-ideal-zero-set-affine"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/properties.tex",
+    "place": "Properties, Section 01PR (properties-section-ample), opening paragraph ($X_s$ is where $s$ does not vanish)"
+   }
+  },
+  {
+   "text": "*Clearing the denominator.* Apply [lem-pc-section-clearing-denominators] to the quasi-compact scheme $Y$, separated over the affine scheme $\\operatorname{Spec}\\mathbf Z$ (Step 3), the invertible module $\\mathcal L$, its section $s$ (with $Y\\setminus Z(s)=U$ by Step 4), the quasi-coherent module $\\mathcal F=\\mathcal J$ and $t=f\\in\\mathcal J(U)=\\Gamma(Y_s,\\mathcal J)$ (Step 2): there are $m\\ge0$ and $u'\\in\\Gamma(Y,\\mathcal J\\otimes\\mathcal L^{\\otimes m})$ with $u'|_U=f\\otimes s^m$. Since $\\mathcal L^{\\otimes m}=(\\mathcal M^{\\otimes d})^{\\otimes m}=\\mathcal M^{\\otimes dm}$ (associativity of the tensor product [def-pur-sheaf-tensor-product]), $u'$ is a section of $\\mathcal J\\otimes\\mathcal M^{\\otimes dm}$.",
+   "uses": [
+    "lem-pc-section-clearing-denominators",
+    "def-pur-sheaf-tensor-product"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/properties.tex",
+    "place": "Properties Proposition 01Q3, proof, second paragraph: 'by Lemma 01PW (properties-lemma-invert-s-sections) we may write $m$ as the image of $m'\\otimes s^{-n}$ for some $n\\ge1$, some $m'\\in\\Gamma(X,\\mathcal F\\otimes\\mathcal L^{\\otimes n})$'"
+   }
+  },
+  {
+   "text": "*The section $u$ and $n>0$.* Put $n=d(m+1)\\ge1$. Let $\\mu:\\mathcal J\\otimes\\mathcal M^{\\otimes n}\\to\\mathcal M^{\\otimes n}$ be the multiplication map (the inclusion $\\mathcal J\\subseteq\\mathcal O_Y$ tensored with $\\mathcal M^{\\otimes n}$, followed by $\\mathcal O_Y\\otimes\\mathcal M^{\\otimes n}=\\mathcal M^{\\otimes n}$); $\\mathcal J\\mathcal M^{\\otimes n}\\subseteq\\mathcal M^{\\otimes n}$ is its image sheaf. Set $u:=\\mu(u'\\otimes s)\\in\\Gamma(Y,\\mathcal M^{\\otimes n})$, where $u'\\otimes s\\in\\Gamma(Y,\\mathcal J\\otimes\\mathcal M^{\\otimes dm}\\otimes\\mathcal M^{\\otimes d})=\\Gamma(Y,\\mathcal J\\otimes\\mathcal M^{\\otimes n})$ [def-pur-sheaf-tensor-product]. As $u$ is the image under $\\mu$ of a global section, $u\\in\\Gamma(Y,\\mathcal J\\mathcal M^{\\otimes n})$ (the image presheaf is contained in the image sheaf). By Step 5, $u|_U=f\\cdot s^{m+1}|_U$, with $s^{m+1}=s\\otimes\\dots\\otimes s\\in\\Gamma(Y,\\mathcal M^{\\otimes n})$.",
+   "uses": [
+    "def-pur-sheaf-tensor-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/properties.tex",
+    "place": "Properties Proposition 01Q3, proof, third paragraph: 'there exists an $n\\ge1$ and a section $s\\in\\Gamma(X,\\mathcal I\\otimes\\mathcal L^{\\otimes n})$ ... We may think of $s$ as a section of $\\mathcal L^{\\otimes n}$'"
+   }
+  },
+  {
+   "text": "*$y\\in Y_u$.* By [lem-weil-pbc-nonvanishing-section-trivializes] applied to $\\mathcal L$ and $s$, $\\mathcal O_U\\to\\mathcal L|_U$, $a\\mapsto a\\,s|_U$, is an isomorphism; tensoring $m+1$ copies, $\\mathcal O_U\\to\\mathcal M^{\\otimes n}|_U$, $a\\mapsto a\\,s^{m+1}|_U$, is an isomorphism [def-pur-sheaf-tensor-product]. On stalks at $y$ it is an isomorphism $\\mathcal O_{Y,y}\\to(\\mathcal M^{\\otimes n})_y$ of $\\mathcal O_{Y,y}$-modules carrying $\\mathfrak m_y$ onto $\\mathfrak m_y(\\mathcal M^{\\otimes n})_y$ and $f_y$ to $u_y$ (Step 6). Since $f_y$ is a unit (Step 2), $f_y\\notin\\mathfrak m_y$, hence $u_y\\notin\\mathfrak m_y(\\mathcal M^{\\otimes n})_y$, i.e. $y\\in Y_u$ in the sense of [def-weil-pbc-ample-invertible-module]. Thus $n>0$ and $u\\in\\Gamma(Y,\\mathcal J\\mathcal M^{\\otimes n})$ are as claimed.",
+   "uses": [
+    "lem-weil-pbc-nonvanishing-section-trivializes",
+    "def-pur-sheaf-tensor-product",
+    "def-weil-pbc-ample-invertible-module"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/properties.tex",
+    "place": "Properties Proposition 01Q3, proof, third paragraph: 'such that $s$ does not vanish at $x$ (more precisely such that $s\\notin\\mathfrak m_x\\mathcal I_x\\otimes\\mathcal L_x^{\\otimes n}$)'"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-ample-invertible-module",
+  "def-sc-invertible-module",
+  "def-pur-sheaf-tensor-product",
+  "lem-weil-pbc-affine-open-spec-points",
+  "lem-weil-pbc-quasi-coherent-ideal-zero-set-affine",
+  "lem-weil-pbc-affine-open-stalk-localization",
+  "lem-weil-pbc-ample-scheme-separated",
+  "def-weil-pbc-quasi-compact-scheme",
+  "def-pc-zero-scheme",
+  "lem-pc-section-clearing-denominators",
+  "lem-weil-pbc-nonvanishing-section-trivializes"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/properties.tex",
+  "place": "Proposition 01Q3 (properties-proposition-characterize-ample), proof, paragraphs 2-3: (1) => (5) => (6) and the use of (6) at a point; the argument is specialized to the quasi-coherent ideal J and one point, with Lemma 01PW (properties-lemma-invert-s-sections) applied to F = J, and separatedness via Lemma 09MP (properties-lemma-ample-separated) in place of the open immersion into Proj (Lemma 01Q1)"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -51,13 +156,72 @@
    "results": "No exact theorem for this statement in Mathlib/AlgebraicGeometry; generic Noetherian irreducible-component and affine-open APIs only",
    "date": "2026-10-10",
    "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "ample line bundle: for a quasi-coherent ideal sheaf and a point outside its zero locus there is a global section of the ideal twisted by a power not vanishing at the point",
+   "results": "LeanSearch HTTP 500 (Internal Server Error) again; no declaration returned",
+   "date": "2026-10-10",
+   "verdict": "service unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "ample invertible sheaf, section of ideal sheaf tensor power nonvanishing at a point outside the closed subscheme",
+   "results": "AlgebraicGeometry.exists_pow_mul_eq_zero_of_res_basicOpen_eq_zero_of_isAffineOpen, exists_of_res_zero_of_qcqs(_of_top), exists_eq_pow_mul_of_isAffineOpen (Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated/QuasiCompact), Scheme.IdealSheafData.mkOfMemSupportIff_ideal (Mathlib.AlgebraicGeometry.IdealSheaf.Basic): clearing denominators for functions only; no ample invertible modules",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rn -w -i 'ample\\|IsAmple' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicGeometry",
+   "results": "none: Mathlib has no notion of ample invertible module",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rn 'lem-sc-ample-ideal-section\\|09MP\\|01PW\\|01Q3\\|IsAmple' ~/weil-conjectures-slopmaster2/WeilConjectures",
+   "results": "only AlgebraicGeometry.Scheme.Modules.exists_tensorPowSection_eq_restrict (Modules/ClearDenominators.lean 247-384, Stacks 01PW, used in step 5 via lem-pc-section-clearing-denominators) and IsAmple in Modules/Ample.lean:185 (ample over a field via very ample powers, a different notion); no declaration states the item",
+   "date": "2026-10-10",
+   "verdict": "no match"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-sc-reduced-dim-le-one-ample"
  },
  "chapter": "sec-curve-estimates",
- "unit": "sk-thm-curveestimate"
+ "unit": "sk-thm-curveestimate",
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "lem-sc-ample-ideal-section",
+  "worker": "stage1",
+  "summary": "Split following Stacks 01Q3 (properties-proposition-characterize-ample), the part (1) => (5) => (6) of its proof specialized to F = J and the point y: choose s in Gamma(Y, M^d) with y in Y_s affine (definition 01PS); pick f in J(Y_s) not in p_y (zero set of a quasi-coherent ideal on an affine); Y is separated (09MP); Lemma 01PW (the Lean-closed lem-pc-section-clearing-denominators, with Y_s identified with the complement of Z(s)) gives u' in Gamma(Y, J (x) M^{dm}) restricting to f s^m; u = mu(u' (x) s) lies in Gamma(Y, J M^{d(m+1)}) and its germ at y is f_y times a basis. Statement kept (the hypothesis 'quasi-compact' is redundant, ampleness includes it). No new nodes; no slopmaster2 declaration states the item. The source deduces separatedness from the open immersion into Proj (01Q1); the split uses 09MP instead, which is the same fact by a shorter route. A factor s is multiplied in to make n = d(m+1) > 0 since 01PW may return m = 0.",
+  "blueprint": "Realizes, in lem-sc-pic-proper-ntorsion's proof (first sentence: C proper must be shown projective, via 09NZ/09NX), the place of the 09NX proof's final paragraph 'obtain t_1 in I_1 L_1^{m_1} nonvanishing at x from 01Q3': steps 1-7 give that section for any quasi-coherent ideal and point outside its zero set.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-ample-scheme-separated",
+    "why": "step 3: ample implies separated (09MP), needed to apply 01PW; no node of sk-thm-curveestimate states it"
+   },
+   {
+    "node": "lem-weil-pbc-quasi-coherent-ideal-zero-set-affine",
+    "why": "steps 2, 4: V(K) cap U = V(K(U)) on an affine U and V(K) is the support of the closed subscheme of K; generic scheme fact, no node of the unit gives it"
+   },
+   {
+    "node": "lem-weil-pbc-nonvanishing-section-trivializes",
+    "why": "step 7: s trivializes L over Y_s (01CY); generic, no node of the unit gives it"
+   }
+  ]
+ },
+ "reviewed": {
+  "by": "L",
+  "date": "2026-10-10",
+  "note": "split read in full against 01Q3 (1)=>(6), paragraphs 2-3: principal affine open Y_s, unit of J at y, separatedness via 09MP, Y_s = complement of Z(s), 01PW through lem-pc-section-clearing-denominators (Lean-closed), extra factor s for m=0, trivialization gives u_y a unit; 0 new nodes; 3 declared tool uses accepted"
+ },
+ "tool_uses": [
+  "lem-weil-pbc-ample-scheme-separated",
+  "lem-weil-pbc-nonvanishing-section-trivializes",
+  "lem-weil-pbc-quasi-coherent-ideal-zero-set-affine"
+ ]
 }
