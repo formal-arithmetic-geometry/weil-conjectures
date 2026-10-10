@@ -201,6 +201,7 @@ public import WeilConjectures.Mathlib.CategoryTheory.Endofunctor.Algebra
 public import WeilConjectures.Mathlib.CategoryTheory.Functor.Basic
 public import WeilConjectures.Mathlib.CategoryTheory.Functor.KanExtension.Adjunction
 public import WeilConjectures.Mathlib.CategoryTheory.Functor.KanExtension.Preserves
+public import WeilConjectures.Mathlib.CategoryTheory.Functor.SquareTransport
 public import WeilConjectures.Mathlib.CategoryTheory.Limits.MorphismProperty
 public import WeilConjectures.Mathlib.CategoryTheory.Linear.LinearFunctor
 public import WeilConjectures.Mathlib.CategoryTheory.Monoidal.Braided.Basic
@@ -272,6 +273,10 @@ public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.LowerShriek
 public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.LowerShriek.Proper
 public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.UpperLowerStar.Defs
 public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.UpperLowerStar.Monoidal
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.FiniteExtension.BaseChangeTheorems.LowerShriek.CompactlySupported
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.FiniteExtension.BaseChangeTheorems.LowerShriek.MorphismDefs
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.FiniteExtension.BaseChangeTheorems.MorphismDefs
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.FiniteExtension.BaseChangeTheorems.Proper
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.FiniteExtension.ContinuousMap
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.FiniteExtension.Derived.BoundedConstructible
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.FiniteExtension.Derived.Hom
@@ -283,6 +288,10 @@ public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.FiniteExtension.
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.FiniteExtension.LowerShriek.Defs
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.FiniteExtension.UpperLowerStar.Defs
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.FiniteExtension.UpperLowerStar.Monoidal
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.PAdicAlgCl.BaseChangeTheorems.LowerShriek.CompactlySupported
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.PAdicAlgCl.BaseChangeTheorems.LowerShriek.MorphismDefs
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.PAdicAlgCl.BaseChangeTheorems.MorphismDefs
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.PAdicAlgCl.BaseChangeTheorems.Proper
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.PAdicAlgCl.Basic
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.PAdicAlgCl.Derived.BoundedConstructible
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.PAdicAlgCl.Derived.Hom

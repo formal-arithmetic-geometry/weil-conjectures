@@ -111,6 +111,13 @@ noncomputable def baseChange : Compactification f' where
 
 @[simp] lemma baseChange_i : (c.baseChange sq).i = c.baseChangeOpenImmersion sq := rfl
 
+/-- The scheme of the base-changed compactification is noetherian as soon as the fiber product
+`Z ×_Y Y'` is: the two are the same scheme. This lets noetherianity hypotheses be stated on
+either form. -/
+instance noetherianSpace_baseChange_Z [h : TopologicalSpace.NoetherianSpace ↥(pullback c.g g)] :
+    TopologicalSpace.NoetherianSpace (c.baseChange sq).Z :=
+  h
+
 /-- The open-immersion square of the base-changed compactification is Cartesian, stated
 for the fields of `Compactification.baseChange`. -/
 theorem baseChange_isPullback_i :
