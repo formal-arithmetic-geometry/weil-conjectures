@@ -3,7 +3,7 @@
  "blueprint": {
   "is": "pqf-lem-locnoeth-lft",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "Finite type over a locally Noetherian base",
@@ -19,28 +19,71 @@
   ]
  },
  "stmt_deps": [],
- "proof": [
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/morphisms.tex",
+  "place": "Morphisms of Schemes, Lemma 29.15.6 (lemma-finite-type-noetherian), Tag 01T6; Mathlib theorem checked against this result"
+ },
+ "mathlib_searches": [
   {
-   "text": "Let $x\\in X$ and put $s=f(x)$. Since $S$ is locally Noetherian\n([pqf-def-locnoeth]) there\nis an affine open neighbourhood $V=\\operatorname{Spec}R$ of $s$ with\n$R$ Noetherian, and since $f$ is locally of finite type there is an\naffine open neighbourhood $U=\\operatorname{Spec}A$ of $x$ with\n$f(U)\\subset V$ and such that $A$ is a finite type $R$-algebra,\ni.e. $A=R[y_1,\\dots,y_n]/I$ for some ideal $I$ (the ring-level\nexistence of such a pair $(U,V)$ is the content of the local finite\ntype condition in [def-weil-pbc-scheme-conventions]; shrinking\n$U$ around $x$ preserves it). By the Hilbert basis theorem, $R$\nNoetherian implies the polynomial ring $R[y_1,\\dots,y_n]$ Noetherian,\nhence its quotient $A$ is Noetherian; the localization $A_{\\mathfrak p}$ at the prime $\\mathfrak p$ of $x$ is Noetherian (ideals of\n$S^{-1}A$ are extended ideals: $\\mathfrak b\\mapsto S^{-1}\\mathfrak b$ is a bijection onto the ideals of $S^{-1}A$, so a\nchain of ideals in $S^{-1}A$ lifts to a finite chain in $A$). Hence\n$\\mathcal O_{X,x}$ is Noetherian for every $x$, i.e. $X$ is locally\nNoetherian.",
-   "uses": [
-    "pqf-def-locnoeth",
-    "def-weil-pbc-scheme-conventions"
-   ],
-   "elementary": false
+   "tool": "leanfinder",
+   "query": "a locally Noetherian scheme X over a locally Noetherian scheme S via a locally finite type morphism is locally Noetherian",
+   "results": "AlgebraicGeometry.LocallyOfFiniteType.isLocallyNoetherian (Mathlib/AlgebraicGeometry/Noetherian): exact type and documentation match; also LocallyOfFiniteType, IsLocallyNoetherian, isLocallyNoetherian_of_isOpenImmersion, and related declarations",
+   "date": "2026-10-11",
+   "verdict": "match"
+  },
+  {
+   "tool": "loogle",
+   "query": "LocallyOfFiniteType.isLocallyNoetherian, IsLocallyNoetherian",
+   "results": "0 hits; loogle reports unknown identifier 'LocallyOfFiniteType.isLocallyNoetherian'",
+   "date": "2026-10-11",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "isLocallyNoetherian Mathlib/AlgebraicGeometry/Noetherian.lean",
+   "results": "0 hits from msearch grep",
+   "date": "2026-10-11",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "finite type morphism over locally Noetherian scheme gives locally Noetherian scheme",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-11",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "loogle",
+   "query": "IsLocallyNoetherian X",
+   "results": "0 hits; loogle reports unknown identifier 'IsLocallyNoetherian'",
+   "date": "2026-10-11",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "theorem LocallyOfFiniteType.isLocallyNoetherian Mathlib/AlgebraicGeometry",
+   "results": "0 hits from msearch grep",
+   "date": "2026-10-11",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "locally finite type scheme morphism preserves local Noetherianity",
+   "results": "AlgebraicGeometry.LocallyOfFiniteType.isLocallyNoetherian (Mathlib/AlgebraicGeometry/Noetherian): exact type and documentation match; also isLocallyNoetherian_of_isOpenImmersion, LocallyOfFiniteType, IsNoetherian.toIsLocallyNoetherian, and locallyOfFiniteType_iff",
+   "date": "2026-10-11",
+   "verdict": "match"
   }
  ],
- "proof_deps": [
-  "pqf-def-locnoeth",
-  "def-weil-pbc-scheme-conventions"
- ],
- "proof_origin": {
-  "by": "agent",
-  "document": "literature/blueprint/master/blueprint/sec-abelian-varieties/sk-prop-av-pqf-finite/pqf-lem-locnoeth-lft.md",
-  "place": "## Proof"
+ "mathlib_match": {
+  "declaration": "AlgebraicGeometry.LocallyOfFiniteType.isLocallyNoetherian",
+  "file": "Mathlib/AlgebraicGeometry/Noetherian.lean",
+  "line": "239",
+  "how": "exact: theorem LocallyOfFiniteType.isLocallyNoetherian has hypotheses [LocallyOfFiniteType f] and [IsLocallyNoetherian Y] and conclusion IsLocallyNoetherian X, exactly the item statement. Source lines 239-242 read with sed."
  },
- "mathlib_searches": [],
- "mathlib_match": null,
- "status": "imported",
+ "status": "mathlib",
  "merged_into": null,
  "import_flags": [],
  "blueprint_kind": "lemma",
@@ -63,5 +106,21 @@
   }
  },
  "chapter": "sec-abelian-varieties",
- "unit": "sk-prop-av-pqf-finite"
+ "unit": "sk-prop-av-pqf-finite",
+ "split_report": {
+  "date": "2026-10-11",
+  "item": "pqf-lem-locnoeth-lft",
+  "worker": "stage1",
+  "summary": "Converted the imported item to a Mathlib leaf after verifying the exact theorem LocallyOfFiniteType.isLocallyNoetherian and its hypotheses against Stacks Tag 01T6. No new nodes were needed.",
+  "blueprint": "The item is the blueprint lemma itself; the exact Mathlib theorem supplies its complete conclusion.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-pll2019",
+  "group": "K1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-pll2019 (reviewer sub-agent of L); spot-checked: Read Mathlib/AlgebraicGeometry/Noetherian.lean:239-241 with sed: LocallyOfFiniteType.isLocallyNoetherian (f : X ⟶ Y) [LocallyOfFiniteType f] [IsLocallyNoetherian Y] : IsLocallyNoetherian X, exact match to Stacks 01T6 (local version); one declaration, B8 ok; sorryfree.py: no slopmaster2 declaration (B10 n/a); no new nodes; stmt_deps empty. Minor: report says proof_origin null but node keeps the document proof_origin, harmless."
+ }
 }
