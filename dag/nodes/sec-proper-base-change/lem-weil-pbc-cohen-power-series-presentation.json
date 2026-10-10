@@ -34,9 +34,99 @@
   "def-weil-pbc-multivariate-power-series",
   "def-weil-regular-scheme"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "(The surjection.) $A$ is Noetherian, so its maximal ideal $\\mathfrak m$ is finitely generated, and $A$ is $\\mathfrak m$-adically complete. Let $p\\ge0$ be the characteristic of $k=A/\\mathfrak m$. By [lem-weil-pbc-cohen-structure-power-series-surjection] there are $n\\ge0$, a ring $\\Lambda$ which is a field of characteristic $0$ if $p=0$ and a Cohen ring [def-weil-pbc-cohen-ring] with residue characteristic $p$ if $p>0$ (a discrete valuation ring with maximal ideal $p\\Lambda$, $p\\Lambda$-adically complete), and a surjective ring homomorphism $q:R=\\Lambda[[X_1,\\ldots,X_n]]\\to A$ [def-weil-pbc-multivariate-power-series]. (The clauses below are derived from the statement of that node alone, for every surjection $q$ of this form; how $q$ is built is not used.) Write $\\mathfrak m_\\Lambda$ for the maximal ideal of $\\Lambda$: $\\mathfrak m_\\Lambda=0$ in the field case, $\\mathfrak m_\\Lambda=p\\Lambda$ in the Cohen case.",
+   "uses": [
+    "lem-weil-pbc-cohen-structure-power-series-surjection",
+    "def-weil-pbc-cohen-ring",
+    "def-weil-pbc-multivariate-power-series",
+    "def-weil-pbc-noetherian-ring",
+    "def-weil-pbc-adically-complete-ring"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra, Theorem Tag 032A (theorem-cohen-structure-theorem, line 44929), part (2) and the last paragraph of the proof ('if $y_1,\\ldots,y_n$ are generators of the ideal $\\mathfrak m$ ... this map is surjective')"
+   }
+  },
+  {
+   "text": "(The ring $R$.) By [lem-weil-pbc-power-series-field-cohen-regular-complete] applied to $\\Lambda$ and $d=n$: (1) $R$ is a Noetherian [def-weil-pbc-noetherian-ring] local domain with maximal ideal $\\mathfrak m_R=(X_1,\\ldots,X_n)$ in the field case and $\\mathfrak m_R=(p,X_1,\\ldots,X_n)$ in the Cohen case; (2) the composite $\\Lambda\\to R\\to R/\\mathfrak m_R$ induces an isomorphism $\\Lambda/\\mathfrak m_\\Lambda\\xrightarrow{\\sim}R/\\mathfrak m_R$; (3) $R$ is $\\mathfrak m_R$-adically complete [def-weil-pbc-adically-complete-ring]; (4) $R$ is a regular local ring [def-weil-regular-scheme] of Krull dimension [def-weil-pbc-krull-dimension-ring] $n$ in the field case and $n+1$ in the Cohen case.",
+   "uses": [
+    "lem-weil-pbc-power-series-field-cohen-regular-complete",
+    "def-weil-pbc-noetherian-ring",
+    "def-weil-pbc-adically-complete-ring",
+    "def-weil-regular-scheme",
+    "def-weil-pbc-krull-dimension-ring"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra, Remark Tag 032C (remark-Noetherian-complete-local-ring-universally-catenary, line 45023) (stated there without proof; proved in the cited node)"
+   }
+  },
+  {
+   "text": "($q$ is local and $q(\\mathfrak m_R)=\\mathfrak m$.) Let $\\mathfrak p=q^{-1}(\\mathfrak m)$. Since $q$ is surjective, $\\bar q:R\\to A\\to A/\\mathfrak m=k$ is surjective with kernel $\\mathfrak p$, so $R/\\mathfrak p\\cong k$ is a field and $\\mathfrak p$ is a maximal ideal of $R$. As $R$ is local (step 2), $\\mathfrak p=\\mathfrak m_R$. Hence $q(\\mathfrak m_R)\\subseteq\\mathfrak m$, i.e. $q$ is a local homomorphism; and since $q$ is surjective, $q(\\mathfrak m_R)=q(q^{-1}(\\mathfrak m))=\\mathfrak m$.",
+   "uses": [
+    "lem-weil-pbc-power-series-field-cohen-regular-complete"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra, Theorem Tag 032A (theorem-cohen-structure-theorem, line 44929), part (2) (the clause 'local' is left implicit in Stacks; written out here)"
+   }
+  },
+  {
+   "text": "(Residue isomorphisms.) By step 3, $q$ induces $\\bar q:R/\\mathfrak m_R\\to A/\\mathfrak m=k$, $F\\bmod\\mathfrak m_R\\mapsto q(F)\\bmod\\mathfrak m$; it is surjective since $q$ is, and its kernel is $q^{-1}(\\mathfrak m)/\\mathfrak m_R=\\mathfrak m_R/\\mathfrak m_R=0$; so $R/\\mathfrak m_R\\to k$ is an isomorphism. Composing with the isomorphism $\\Lambda/\\mathfrak m_\\Lambda\\xrightarrow{\\sim}R/\\mathfrak m_R$ of step 2 (2), the map $\\Lambda/\\mathfrak m_\\Lambda\\to k$, $\\lambda\\bmod\\mathfrak m_\\Lambda\\mapsto q(\\lambda)\\bmod\\mathfrak m$, is an isomorphism: in the field case $\\mathfrak m_\\Lambda=0$ and $\\Lambda\\to k$ is an isomorphism; in the Cohen case $\\mathfrak m_\\Lambda=p\\Lambda$ and $\\Lambda/p\\Lambda\\to k$ is an isomorphism.",
+   "uses": [
+    "lem-weil-pbc-power-series-field-cohen-regular-complete"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra, Theorem Tag 032A (theorem-cohen-structure-theorem, line 44929), proof, last paragraph ('surjective modulo $(x_1,\\ldots,x_n)$ by construction'): the residue isomorphisms, written out here"
+   }
+  },
+  {
+   "text": "(Generators of $\\mathfrak m$.) For a surjective ring homomorphism $q$ and an ideal $I=(s_1,\\ldots,s_r)$ of $R$, $q(I)=\\{\\sum q(c_i)q(s_i)\\}=\\{\\sum a_iq(s_i):a_i\\in A\\}$ is the ideal $(q(s_1),\\ldots,q(s_r))$ of $A$, since every $a_i$ is some $q(c_i)$. Apply this to $I=\\mathfrak m_R$ with the generators of step 2 (1), and use $q(\\mathfrak m_R)=\\mathfrak m$ (step 3): in the field case $\\mathfrak m$ is generated by $q(X_1),\\ldots,q(X_n)$; in the Cohen case by $q(p)=p\\cdot1_A,q(X_1),\\ldots,q(X_n)$.",
+   "uses": [
+    "lem-weil-pbc-power-series-field-cohen-regular-complete"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra, Theorem Tag 032A (theorem-cohen-structure-theorem, line 44929), proof, last paragraph ('$x_i\\mapsto y_i$' with $y_1,\\ldots,y_n$ generators of $\\mathfrak m$)"
+   }
+  },
+  {
+   "text": "($R$ complete regular with its parameters.) By step 2, $R$ is Noetherian, local and $\\mathfrak m_R$-adically complete, and it is a regular local ring [def-weil-regular-scheme]: its maximal ideal is generated by $\\dim R$ elements. Explicitly, in the field case $\\dim R=n$ and $\\mathfrak m_R$ is generated by the $n$ elements $X_1,\\ldots,X_n$; in the Cohen case $\\dim R=n+1$ and $\\mathfrak m_R$ is generated by the $n+1$ elements $p,X_1,\\ldots,X_n$. So these elements are a set of $\\dim R$ generators of $\\mathfrak m_R$, i.e. a regular system of parameters of $R$, which is what 'with parameters' means in the statement.",
+   "uses": [
+    "lem-weil-pbc-power-series-field-cohen-regular-complete",
+    "def-weil-regular-scheme",
+    "def-weil-pbc-krull-dimension-ring"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra, Remark Tag 032C (remark-Noetherian-complete-local-ring-universally-catenary, line 45023)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-cohen-structure-power-series-surjection",
+  "def-weil-pbc-cohen-ring",
+  "def-weil-pbc-multivariate-power-series",
+  "def-weil-pbc-noetherian-ring",
+  "def-weil-pbc-adically-complete-ring",
+  "lem-weil-pbc-power-series-field-cohen-regular-complete",
+  "def-weil-regular-scheme",
+  "def-weil-pbc-krull-dimension-ring"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Algebra, Theorem Tag 032A (theorem-cohen-structure-theorem, line 44929), part (2) and last paragraph of the proof, for the surjection (cited node); Algebra, Remark Tag 032C (remark-Noetherian-complete-local-ring-universally-catenary, line 45023) for R (cited node); the clauses local, residue isomorphisms and generators are not in the source and are written by the agent from the statements of the cited nodes"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -58,10 +148,31 @@
    "results": "No Cohen ring or Cohen structure theorem; hits concern coefficient terminology, an unrelated Cohen citation in RingTheory/Noetherian/OfPrime.lean, and regular local definitions",
    "date": "2026-10-10",
    "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "surjective ring homomorphism between local rings is a local homomorphism and maps maximal ideal onto maximal ideal",
+   "results": "IsLocalHom.of_surjective / Function.Surjective.isLocalHom (Mathlib.RingTheory.LocalRing.RingHom.Basic), Ideal.map_eq_top_or_isMaximal_of_surjective (Mathlib.RingTheory.Ideal.Maps); no Cohen presentation",
+   "date": "2026-10-10",
+   "verdict": "no match for the item (clause 'local' of step 3 is IsLocalHom.of_surjective; the existence of the presentation is not in Mathlib)"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "complete noetherian local ring is a quotient of a power series ring over a field or Cohen ring, regular local ring presentation",
+   "results": "isLocalRing_of_isAdicComplete_maximal (Mathlib.RingTheory.AdicCompletion.LocalRing), IsAdicComplete.henselianRing (Mathlib.RingTheory.Henselian), tfae_of_isNoetherianRing_of_isLocalRing_of_isDomain, IsDiscreteValuationRing.TFAE (Mathlib.RingTheory.DiscreteValuationRing.TFAE)",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rln 'Cohen' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/RingTheory; grep -rn 'IsLocalHom.of_surjective' Mathlib/RingTheory/LocalRing/RingHom/Basic.lean",
+   "results": "only RingTheory/Noetherian/OfPrime.lean (Cohen's theorem on prime ideals, unrelated); RingTheory/LocalRing/RingHom/Basic.lean:126 alias Function.Surjective.isLocalHom",
+   "date": "2026-10-10",
+   "verdict": "no match"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "worker",
@@ -82,5 +193,13 @@
    "missing": []
   }
  },
- "lead_note": "2026-10-10 L: refines lem-weil-pbc-cohen-structure-power-series-surjection (032A, split): that node gives the surjection; this one adds that it is local, the residue isomorphisms, the generators of m and the regularity of R with its parameters. Its split should cite that node and lem-weil-pbc-cohen-coefficient-ring-exists, not reprove 032A."
+ "lead_note": "2026-10-10 L: refines lem-weil-pbc-cohen-structure-power-series-surjection (032A, split): that node gives the surjection; this one adds that it is local, the residue isomorphisms, the generators of m and the regularity of R with its parameters. Its split should cite that node and lem-weil-pbc-cohen-coefficient-ring-exists, not reprove 032A.",
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "lem-weil-pbc-cohen-power-series-presentation",
+  "worker": "stage1",
+  "summary": "Statement kept. Following the lead_note, 032A (2) is not reproved: step 1 takes the surjection q: Lambda[[X]] -> A from lem-weil-pbc-cohen-structure-power-series-surjection (which itself uses the coefficient ring of lem-weil-pbc-cohen-coefficient-ring-exists). The extra clauses are derived from the statement of that node alone, for any such surjection, with no appeal to its construction: step 2 cites lem-weil-pbc-power-series-field-cohen-regular-complete (Remark 032C, already split and reviewed) for R local Noetherian complete regular of dim n / n+1 with maximal ideal (X) / (p,X) and Lambda/m_Lambda = R/m_R; step 3 q^{-1}(m) is maximal hence m_R, so q is local and q(m_R)=m; step 4 the residue isomorphisms; step 5 the generators of m as images of the generators of m_R; step 6 regularity with the regular system of parameters. No new nodes. No slopmaster2 declaration (grep of WeilConjectures and Comparator for Cohen/coefficient ring/power series presentation found none).",
+  "blueprint": "The blueprint ancestor thm-weil-pbc-finite-etale-lifting, step 7 (essential surjectivity via complete-local algebraization), uses the Cohen presentation inside the proof of Stacks 07NN through lem-weil-pbc-complete-local-map-regular-presentation; steps 1-6 realize that presentation: the surjection (step 1), the regular complete source ring (steps 2, 6), and the local/residue/generator clauses (steps 3-5) that 07NN's proof uses."
+ },
+ "reviewed": "2026-10-10 L: 6 steps on the split nodes 032A (surjection) and 032C (R regular complete local with its parameters); q local since q^{-1}(m) is maximal, residue isomorphisms, generators of m as images; 0 new nodes. The coefficient-ring node is not cited (the surjection node carries it), as the worker argued: right."
 }
