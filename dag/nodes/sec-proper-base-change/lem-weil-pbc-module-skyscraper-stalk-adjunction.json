@@ -1,0 +1,82 @@
+{
+ "id": "lem-weil-pbc-module-skyscraper-stalk-adjunction",
+ "kind": "statement",
+ "title": "The skyscraper sheaf of modules at a point is right adjoint to the stalk",
+ "statement": "Let $X$ be a scheme [def-pc-scheme] with structure sheaf $\\mathcal O_X$, $x\\in X$ a point, $\\mathcal O_{X,x}$ the local ring at $x$ with germ maps $\\mathcal O_X(U)\\to\\mathcal O_{X,x}$, $r\\mapsto r_x$, and for an $\\mathcal O_X$-module $\\mathcal G$ [def-weil-sheaf-of-modules-category] let $\\mathcal G_x$ be its stalk, an $\\mathcal O_{X,x}$-module, with germs $s\\mapsto s_x$ and, for a morphism $\\varphi$, the $\\mathcal O_{X,x}$-linear stalk map $\\varphi_x$ [def-weil-pbc-module-stalk]. For an $\\mathcal O_{X,x}$-module $A$ define $i_{x,*}A$ by $(i_{x,*}A)(U)=A$ if $x\\in U$ and $(i_{x,*}A)(U)=0$ if $x\\notin U$ ($U\\subseteq X$ open), with restriction map along $V\\subseteq U$ the identity of $A$ if $x\\in V$ and $0$ otherwise, and with $r\\in\\mathcal O_X(U)$ acting on $(i_{x,*}A)(U)=A$ (when $x\\in U$) by $r\\cdot a=r_x a$; for an $\\mathcal O_{X,x}$-linear map $h:A\\to A'$ let $i_{x,*}h$ be $h$ on the opens containing $x$ and $0$ on the others. Then: (1) $i_{x,*}A$ is a sheaf of $\\mathcal O_X$-modules (the *skyscraper sheaf at $x$ with value $A$*), and $A\\mapsto i_{x,*}A$, $h\\mapsto i_{x,*}h$ is an additive functor from $\\mathcal O_{X,x}$-modules to $\\Mod(\\mathcal O_X)$; (2) for every $\\mathcal O_X$-module $\\mathcal G$ and every $\\mathcal O_{X,x}$-module $A$ the map $\\Phi:\\Hom_{\\mathcal O_X}(\\mathcal G,i_{x,*}A)\\to\\Hom_{\\mathcal O_{X,x}}(\\mathcal G_x,A)$, $\\Phi(\\varphi)(s_x)=\\varphi_U(s)$ for $s\\in\\mathcal G(U)$, $x\\in U$, is well defined and bijective, its inverse sending $\\psi:\\mathcal G_x\\to A$ to the morphism with components $s\\mapsto\\psi(s_x)$ on opens $U\\ni x$ and $0$ on opens $U\\not\\ni x$; (3) $\\Phi$ is natural in both variables: $\\Phi(\\varphi\\circ g)=\\Phi(\\varphi)\\circ g_x$ for every morphism $g:\\mathcal G'\\to\\mathcal G$ of $\\mathcal O_X$-modules, and $\\Phi(i_{x,*}h\\circ\\varphi)=h\\circ\\Phi(\\varphi)$ for every $\\mathcal O_{X,x}$-linear $h:A\\to A'$. In other words the stalk functor $\\mathcal G\\mapsto\\mathcal G_x$ from $\\Mod(\\mathcal O_X)$ to $\\mathcal O_{X,x}$-modules is left adjoint to $A\\mapsto i_{x,*}A$.",
+ "source": {
+  "document": "literature/stacks-project/sheaves.tex",
+  "place": "Sheaves, Definition 009A (label definition-skyscraper-sheaf, line 3273) (4), and Lemma 009C (label lemma-stalk-skyscraper-adjoint, line 3332), the case of sheaves of modules: Hom_{O_{X,x}}(F_x, A) = Hom_{O_X}(F, i_{x,*}A); the proof there is 'Omitted' with the hint that the stalk is the pullback along i_x : {x} -> X; Section 0099 (label section-skyscraper-sheaves)"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-pbc-module-stalk"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "skyscraper sheaf of modules adjunction with stalk functor",
+   "results": "stalkSkyscraperSheafAdjunction, skyscraperPresheafStalkAdjunction, StalkSkyscraperPresheafAdjunctionAuxs.toSkyscraperPresheaf / to_skyscraper_fromStalk / unit_app / counit, instIsLeftAdjointPresheafStalkFunctor (Mathlib.Topology.Sheaves.Skyscraper)",
+   "date": "2026-10-10",
+   "verdict": "no match: all for sheaves valued in a fixed category C (with terminal object and colimits), not for sheaves of modules over a sheaf of rings O_X with value a module over the stalk O_{X,x}"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "skyscraper sheaf of O_X-modules at a point with value an O_{X,x}-module, right adjoint to the stalk functor on sheaves of modules",
+   "results": "ModuleCat.Tilde.toStalk, ModuleCat.tildeInModuleCat, ModuleCat.Tilde.stalkToFiberLinearMap (Mathlib.AlgebraicGeometry.Modules.Tilde); stalkSkyscraperSheafAdjunction (Mathlib.Topology.Sheaves.Skyscraper); Scheme.Modules.instIsRightAdjointPresheafOfModulesToPresheafOfModules (Mathlib.AlgebraicGeometry.Modules.Sheaf)",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "skyscraperSheafFunctor, SheafOfModules",
+   "results": "none",
+   "date": "2026-10-10",
+   "verdict": "no match: no skyscraper construction mentions SheafOfModules"
+  },
+  {
+   "tool": "local_search",
+   "query": "skyscraperSheaf (project ~/weil-conjectures-slopmaster2)",
+   "results": "skyscraperSheaf, skyscraperSheafFunctor, skyscraperSheafForgetAdjunction (Mathlib/Topology/Sheaves/Skyscraper.lean); GrothendieckTopology.Point.skyscraperSheaf, .skyscraperSheafFunctor, .skyscraperSheafAdjunction (Mathlib/CategoryTheory/Sites/Point/Skyscraper.lean); index: unavailable",
+   "date": "2026-10-10",
+   "verdict": "no match: C-valued only"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rln 'skyscraper' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib; grep -rni 'skyscraper' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/Algebra/Category/ModuleCat ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicGeometry",
+   "results": "only Topology/Sheaves/{Skyscraper,Sheafify,Flasque}.lean and CategoryTheory/Sites/{LocalSite,Point/Comap,Point/Skyscraper}.lean; nothing in ModuleCat/ or AlgebraicGeometry/",
+   "date": "2026-10-10",
+   "verdict": "no match: Mathlib has the skyscraper sheaf and stalk ⊣ skyscraper adjunction only for sheaves valued in a fixed category C (Topology/Sheaves/Skyscraper.lean:402 stalkSkyscraperSheafAdjunction; Sites/Point/Skyscraper.lean:222), not for SheafOfModules / X.Modules"
+  }
+ ],
+ "mathlib_match": null,
+ "mathlib_candidate": {
+  "declaration": "stalkSkyscraperSheafAdjunction",
+  "file": "Mathlib/Topology/Sheaves/Skyscraper.lean",
+  "how": "line 402: for X : TopCat, p₀ : X and a category C with a terminal object and colimits, (Sheaf.forget C X ⋙ Presheaf.stalkFunctor C p₀) ⊣ skyscraperSheafFunctor p₀, where skyscraperPresheaf p₀ A (line 60) is A on opens containing p₀ and terminal otherwise. With C = AddCommGrpCat this is the abelian-group case; the module case (value an O_{X,x}-module, O_X(U) acting through germs, morphisms O_X-linear) is not covered: transferring it is itself an argument (B8), so not a leaf."
+ },
+ "status": "unsplit",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-scheme-modules-enough-injectives",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1"
+}

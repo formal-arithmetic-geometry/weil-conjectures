@@ -1,0 +1,76 @@
+{
+ "id": "lem-weil-pbc-ring-modules-enough-injectives",
+ "kind": "statement",
+ "title": "Modules over a ring form an abelian category with enough injectives",
+ "statement": "Let $R$ be a ring and $\\Mod(R)$ the category of $R$-modules and $R$-linear maps. Then $\\Mod(R)$ is an abelian category [def-sp-abelian], with kernels, cokernels and images the usual ones (so a morphism is a monomorphism iff it is injective), and it has enough injectives: for every $R$-module $M$ there are an injective object $J$ of $\\Mod(R)$ (an *injective $R$-module*) [def-sp-injective-resolutions] and an injective $R$-linear map $j:M\\to J$.",
+ "source": {
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "More on Algebra, Lemma 01DD (label lemma-injectives-modules, line 13849), in Section 01D8 (label section-injectives-modules, line 13617); the abelian structure: Homology, Definition 0109 (label definition-abelian-category), which the category of R-modules satisfies (the source takes this as known, e.g. homology.tex line 7667 'the abelian category of abelian groups, modules over a ring')"
+ },
+ "stmt_deps": [
+  "def-sp-abelian",
+  "def-sp-injective-resolutions"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "category of modules over a ring has enough injectives",
+   "results": "ModuleCat.enoughInjectives, instEnoughInjectivesModuleCatOfSmall (Mathlib.Algebra.Category.ModuleCat.EnoughInjectives); IsGrothendieckAbelian.enoughInjectives; Module.injective_object_of_injective_module (Mathlib.Algebra.Category.ModuleCat.Injective); HasInjectiveResolutions; EnoughInjectives.mk",
+   "date": "2026-10-10",
+   "verdict": "match: ModuleCat.enoughInjectives"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.EnoughInjectives (ModuleCat _)",
+   "results": "instEnoughInjectivesModuleCatInt, ModuleCat.enoughInjectives, instEnoughInjectivesModuleCatOfSmall (Mathlib.Algebra.Category.ModuleCat.EnoughInjectives)",
+   "date": "2026-10-10",
+   "verdict": "match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "every module over a ring embeds into an injective module",
+   "results": "ModuleCat.enoughInjectives, instEnoughInjectivesModuleCatOfSmall (Mathlib.Algebra.Category.ModuleCat.EnoughInjectives); Module.Baer.iff_injective, Module.injective_iff, Module.Baer.of_injective (Mathlib.Algebra.Module.Injective)",
+   "date": "2026-10-10",
+   "verdict": "match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rn 'EnoughInjectives' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib ; grep -n 'instance abelian' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/Algebra/Category/ModuleCat/Abelian.lean; grep -n 'mono_iff_injective' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/Algebra/Category/ModuleCat/EpiMono.lean",
+   "results": "Algebra/Category/ModuleCat/EnoughInjectives.lean:30 lemma ModuleCat.enoughInjectives, :34 instance [Small.{v} R] : EnoughInjectives (ModuleCat.{v} R); Algebra/Category/ModuleCat/Abelian.lean:75 instance abelian : Abelian (ModuleCat.{v} R); Algebra/Category/ModuleCat/EpiMono.lean:43 mono_iff_injective; EnoughInjectives (Preadditive/Injective/Basic.lean:64) is `∀ X, Nonempty (InjectivePresentation X)`, InjectivePresentation (line 49) = J, Injective J, f : X ⟶ J, Mono f",
+   "date": "2026-10-10",
+   "verdict": "match (lines read)"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "ModuleCat.enoughInjectives",
+  "file": "Mathlib/Algebra/Category/ModuleCat/EnoughInjectives.lean",
+  "how": "one declaration per clause: abelian: ModuleCat.abelian (Mathlib/Algebra/Category/ModuleCat/Abelian.lean:75, instance Abelian (ModuleCat.{v} R)), monomorphisms are the injective maps: ModuleCat.mono_iff_injective (Mathlib/Algebra/Category/ModuleCat/EpiMono.lean:43); enough injectives: ModuleCat.enoughInjectives (EnoughInjectives.lean:30, EnoughInjectives (ModuleCat.{max v u} R) for R : Type u) and the instance at line 34 (EnoughInjectives (ModuleCat.{v} R) when Small.{v} R, e.g. v = u), unfolded by EnoughInjectives.presentation (Mathlib/CategoryTheory/Preadditive/Injective/Basic.lean:64-65) to an InjectivePresentation (line 49: J, Injective J, f : M ⟶ J, Mono f), f injective by mono_iff_injective",
+  "line": 30
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-scheme-modules-enough-injectives",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lead_note": "Composed leaf accepted by L (2026-10-10): ModuleCat.abelian (ModuleCat/Abelian.lean:75), ModuleCat.mono_iff_injective (EpiMono.lean:43), ModuleCat.enoughInjectives (EnoughInjectives.lean:30) and its instance at :34; all checked with sed. One declaration per clause of the statement.",
+ "reviewed": "pass (L, 2026-10-10): leaf, three declarations checked by sed."
+}
