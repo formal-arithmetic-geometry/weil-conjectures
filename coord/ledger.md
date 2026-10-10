@@ -1526,3 +1526,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 2026-10-10, delivery of K1: def-sc-rational-section-divisor merged from deliver/K1/def-sc-rational-section-divisor (1 commit(s), 0 new node(s), spot-checked by L: L: reviewed in full by a reviewer sub-agent (PASS): 02SF/0BE6 read, every claim inside the definition carried by a cited statement, no cycle); claim closed
 - 13:41 L: merged deliver/K1/def-sc-rational-section-divisor (reviewer PASS, first push)
 - 2026-10-10, delivery of H1: lem-weil-pbc-direct-sum-extension-assembly returned (5d2953fcb): Reviewed in full (reviewer sub-agent of L). C4/B3: the new node lem-weil-pbc-ext-one-direct-sum says only that extension classes of a direct sum are 'naturally 
+- 13:43 L: returned deliver/H1/lem-weil-pbc-direct-sum-extension-assembly (reviewer RETURN: C4/B3 new node's bijection unspecified and extension classes undefined, E5 flat base change of the class not written, B4)
