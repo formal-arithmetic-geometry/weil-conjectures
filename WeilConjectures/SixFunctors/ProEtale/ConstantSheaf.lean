@@ -38,7 +38,7 @@ open CategoryTheory Limits Opposite MonoidalCategory
 
 namespace AlgebraicGeometry.ProEtale
 
-open Scheme
+open _root_.AlgebraicGeometry.Scheme
 
 variable {X : Scheme.{u}} {Λ : Type (u + 1)} [CommRing Λ]
 
@@ -80,6 +80,16 @@ lemma subsingleton_of_isZero_constantSheaf_obj [Nonempty X] {V : ModuleCat.{u + 
       (congrArg (fun f ↦ f.hom.app (op (terminalProEt X))
         ((toSheafify _ ((Functor.const _).obj V)).app _ b)) (h.eq_of_src (𝟙 _) 0)).symm
 
+/-- The sections over the terminal object of `Z_proét` are the sections of the pushforward along
+`g : Z ⟶ Y` over the terminal object of `Y_proét`. -/
+noncomputable def sectionsLowerStarIso {Y Z : Scheme.{u}} (g : Z ⟶ Y) :
+    (sheafSections (Scheme.ProEt.topology Z) (ModuleCat.{u + 1} Λ)).obj (op (terminalProEt Z)) ≅
+      (g)_*[ModuleCat.{u + 1} Λ] ⋙
+        (sheafSections (Scheme.ProEt.topology Y) (ModuleCat.{u + 1} Λ)).obj
+          (op (terminalProEt Y)) :=
+  (sheafSections _ _).mapIso (show (_ : Z.ProEt) ≅ terminalProEt Z from overPullbackObjMkIdIso g).op ≪≫
+    NatIso.ofComponents (fun _ ↦ Iso.refl _)
+
 /-- The pullback of a constant sheaf is the constant sheaf: both `c_Y ⋙ g^*` and `c_Z` are left
 adjoint to `G ↦ Γ(Z, G) = Γ(Y, g_* G)`. -/
 noncomputable def upperStarConstantSheafIso {Y Z : Scheme.{u}} (g : Z ⟶ Y) :
@@ -87,10 +97,7 @@ noncomputable def upperStarConstantSheafIso {Y Z : Scheme.{u}} (g : Z ⟶ Y) :
         (g)^*[ModuleCat.{u + 1} Λ] ≅
       constantSheaf (Scheme.ProEt.topology Z) (ModuleCat.{u + 1} Λ) :=
   ((constantSheafAdjunction Y).comp (upperStarLowerStarAdjunction _ g)).leftAdjointUniq
-    ((constantSheafAdjunction Z).ofNatIsoRight
-      ((Sheaf.ΓNatIsoSheafSections _ _ (Scheme.ProEt.isTerminalMkId Z)).symm ≪≫
-        (globalSectionsLowerStarIso _ g).symm ≪≫
-        Functor.isoWhiskerLeft _ (Sheaf.ΓNatIsoSheafSections _ _ (Scheme.ProEt.isTerminalMkId Y))))
+    ((constantSheafAdjunction Z).ofNatIsoRight (sectionsLowerStarIso g))
 
 /-- The constant sheaf functor sends constant sections to constant sections. -/
 lemma constantSheaf_map_hom_app_toSheafify {V W : ModuleCat.{u + 1} Λ} (f : V ⟶ W) (U : X.ProEt)
