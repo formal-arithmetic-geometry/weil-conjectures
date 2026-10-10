@@ -64,8 +64,12 @@ public import WeilConjectures.CategoryTheory.Monoidal.Instances.CochainComplex
 public import WeilConjectures.CategoryTheory.Monoidal.Instances.DerivedCategory
 public import WeilConjectures.CategoryTheory.Monoidal.Instances.HomotopyCategory
 public import WeilConjectures.CategoryTheory.RingObjects.Ab
+public import WeilConjectures.CategoryTheory.RingObjects.CommRingPresheaf
 public import WeilConjectures.CategoryTheory.RingObjects.ContinuousMap
 public import WeilConjectures.CategoryTheory.RingObjects.EllAdic
+public import WeilConjectures.CategoryTheory.RingObjects.Profinite.ContinuousMap
+public import WeilConjectures.CategoryTheory.RingObjects.Profinite.EllAdic
+public import WeilConjectures.CategoryTheory.RingObjects.ProfiniteToScheme
 public import WeilConjectures.CategoryTheory.RingObjects.RingPresheaf
 public import WeilConjectures.ClosedPoints
 public import WeilConjectures.Compactification.BaseChange
@@ -219,7 +223,9 @@ public import WeilConjectures.Mathlib.CategoryTheory.Sites.GlobalSections
 public import WeilConjectures.Mathlib.CategoryTheory.Sites.Monoidal
 public import WeilConjectures.Mathlib.CategoryTheory.Sites.Over
 public import WeilConjectures.Mathlib.CategoryTheory.Sites.Sheaf
+public import WeilConjectures.Mathlib.CategoryTheory.Sites.Sheafification
 public import WeilConjectures.Mathlib.FieldTheory.Finite.Basic
+public import WeilConjectures.Mathlib.RingTheory.Etale.Weakly
 public import WeilConjectures.Mathlib.RingTheory.GradedAlgebra.Homogeneous.Maps
 public import WeilConjectures.Mathlib.RingTheory.GradedAlgebra.HomogeneousLocalization
 public import WeilConjectures.Mathlib.RingTheory.GradedAlgebra.RingHom
@@ -232,6 +238,7 @@ public import WeilConjectures.Mathlib.RingTheory.ReesAlgebra
 public import WeilConjectures.Mathlib.RingTheory.Spectrum.Prime.Topology
 public import WeilConjectures.Mathlib.RingTheory.Valuation.LocalSubring
 public import WeilConjectures.Mathlib.RingTheory.Valuation.ValuationSubring
+public import WeilConjectures.Mathlib.Topology.LocallyConstant.Algebra
 public import WeilConjectures.NumberTheory.Padics.Extension
 public import WeilConjectures.PointCount
 public import WeilConjectures.SixFunctors.Etale.BaseChangeTheorems.LowerShriek.CompactlySupported
@@ -244,7 +251,6 @@ public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriek
 public import WeilConjectures.SixFunctors.Etale.Derived.OpenImmersionLowerShriek
 public import WeilConjectures.SixFunctors.Etale.Derived.Tensor
 public import WeilConjectures.SixFunctors.Etale.Derived.UpperLowerStar
-public import WeilConjectures.SixFunctors.Etale.Derived.UpperShriek
 public import WeilConjectures.SixFunctors.Etale.LowerShriek.Comparison
 public import WeilConjectures.SixFunctors.Etale.LowerShriek.Defs
 public import WeilConjectures.SixFunctors.Etale.LowerShriek.OpenImmersion.Complement
@@ -259,7 +265,6 @@ public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.Low
 public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.OpenImmersionLowerShriek
 public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.Tensor
 public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.UpperLowerStar
-public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.UpperShriek
 public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.LowerShriek.Comparison
 public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.LowerShriek.Defs
 public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.LowerShriek.OpenImmersion.Complement
@@ -275,7 +280,6 @@ public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.FiniteExtension.
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.FiniteExtension.Derived.OpenImmersionLowerShriek
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.FiniteExtension.Derived.Tensor
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.FiniteExtension.Derived.UpperLowerStar
-public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.FiniteExtension.Derived.UpperShriek
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.FiniteExtension.LowerShriek.Defs
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.FiniteExtension.UpperLowerStar.Defs
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.FiniteExtension.UpperLowerStar.Monoidal
@@ -285,7 +289,6 @@ public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.PAdicAlgCl.Deriv
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.PAdicAlgCl.Derived.OpenImmersionLowerShriek
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.PAdicAlgCl.Derived.Tensor
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.PAdicAlgCl.Derived.UpperLowerStar
-public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.PAdicAlgCl.Derived.UpperShriek
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.PAdicAlgCl.LowerShriek.Defs
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.PAdicAlgCl.UpperLowerStar.Defs
 public import WeilConjectures.SpecialValues
