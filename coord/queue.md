@@ -1,8 +1,8 @@
 # Work queue
 
-943 items; claim with `tools/claim.py next <group> [--stage N]`.
+954 items; claim with `tools/claim.py next <group> [--stage N]`.
 
-## Stage 1: nodes to split (581)
+## Stage 1: nodes to split (589)
 
 | node | distance to a target | Lean state on the done branch |
 |---|---|---|
@@ -12,20 +12,13 @@
 | `lem-weil-pbc-pullback-ample-invertible` | 1013 | none |
 | `lem-weil-pbc-minimal-finite-free-resolution-local` | 1014 | none |
 | `lem-weil-pbc-module-injective-open-cover-cech-acyclic` | 1014 | none |
-| `lem-weil-pbc-nonzerodivisor-if-maximal-not-associated` | 1014 | none |
-| `lem-weil-pbc-normal-nagata-monogenic-n1` | 1014 | none |
-| `lem-weil-pbc-p-basis-differentials-basis` | 1014 | none |
 | `lem-weil-pbc-quasi-coherent-module-direct-sum` | 1014 | none |
 | `lem-weil-pbc-reduced-normal-iff-integrally-closed-total-fractions` | 1014 | none |
 | `lem-weil-pbc-regular-local-dim-one-iff-normal` | 1014 | none |
-| `lem-weil-pbc-schanuel` | 1014 | none |
-| `lem-weil-pbc-separable-residue-cotangent-injective` | 1014 | none |
-| `lem-weil-pbc-separably-generated-differentials-dimension` | 1014 | none |
 | `lem-weil-pbc-serre-criterion-reduced` | 1014 | none |
 | `lem-weil-pbc-two-term-homotopy-equivalence-direct-sum` | 1014 | none |
-| `prop-weil-pbc-formal-glueing-equivalence` | 1014 | none |
-| `def-pc-ext` | 1015 | none |
-| `lem-weil-pbc-coherent-filtration-integral-subschemes` | 1015 | none |
+| `lem-weil-pbc-analytic-unramified-principal-criterion` | 1015 | none |
+| `lem-weil-pbc-analytically-unramified-n1` | 1015 | none |
 | `lem-weil-pbc-coherent-generic-point-ideal-inclusion` | 1015 | none |
 | `lem-weil-pbc-colimit-category-fp-algebras` | 1015 | none |
 | `lem-weil-pbc-complete-local-flat-presentation` | 1015 | none |
@@ -45,6 +38,8 @@
 | `lem-weil-pbc-flat-another-variant-local-criterion` | 1015 | none |
 | `lem-weil-pbc-flat-formally-smooth-closed-fibre-adic` | 1015 | none |
 | `lem-weil-pbc-flat-mod-injective` | 1015 | none |
+| `lem-weil-pbc-formal-glueing-H0-localization` | 1015 | none |
+| `lem-weil-pbc-formal-glueing-canonical-maps` | 1015 | none |
 | `lem-weil-pbc-fpqc-descend-integral` | 1015 | none |
 | `lem-weil-pbc-fpqc-descend-locally-finite-type` | 1015 | none |
 | `lem-weil-pbc-fpqc-local-on-base-criterion` | 1015 | none |
@@ -56,9 +51,15 @@
 | `lem-weil-pbc-integral-scheme-ideal-generic-stalk` | 1015 | none |
 | `lem-weil-pbc-limit-finite-presentation` | 1015 | none |
 | `lem-weil-pbc-limit-module-essentially-finite-presentation-over-system` | 1015 | none |
+| `lem-weil-pbc-local-nagata-domain-analytically-unramified` | 1015 | none |
 | `lem-weil-pbc-local-ring-colimit-essentially-finite-type-over-z` | 1015 | none |
 | `lem-weil-pbc-module-ses-cech-h1-surjective` | 1015 | none |
+| `lem-weil-pbc-n1-descends-finite-domain-extension` | 1015 | none |
+| `lem-weil-pbc-n1-local-characterization` | 1015 | none |
 | `lem-weil-pbc-n2-char-p-purely-inseparable-criterion` | 1015 | none |
+| `lem-weil-pbc-nagata-localization` | 1015 | none |
+| `lem-weil-pbc-noetherian-module-zerodivisors-union-associated-primes` | 1015 | none |
+| `lem-weil-pbc-normal-domain-fractional-principal-quotient-ass` | 1015 | none |
 | `lem-weil-pbc-openness-of-flatness` | 1015 | none |
 | `lem-weil-pbc-p-independent-extends-to-p-basis` | 1015 | none |
 | `lem-weil-pbc-polynomial-ring-maximal-chain-height-difference` | 1015 | none |
@@ -74,7 +75,14 @@
 | `lem-weil-pbc-smooth-at-maximal-ideal-alg-closed-differentials-bound` | 1015 | none |
 | `lem-weil-pbc-smooth-at-prime-field-extension-descent` | 1015 | none |
 | `lem-weil-pbc-symmetric-projective-presentation-conormal` | 1015 | none |
+| `lem-weil-pbc-torsion-extension-flat-descent` | 1015 | none |
+| `def-weil-pbc-analytically-unramified` | 1016 | none |
+| `lem-weil-pbc-coherent-homs-over-open` | 1016 | none |
+| `lem-weil-pbc-coherent-local-isomorphism` | 1016 | none |
+| `lem-weil-pbc-coherent-stalk-map-extends` | 1016 | none |
+| `lem-weil-pbc-coherent-support-union-exact-sequence` | 1016 | none |
 | `lem-weil-pbc-depth-le-dim-associated-prime` | 1016 | none |
+| `lem-weil-pbc-sections-annihilated-by-ideal` | 1016 | none |
 | `lem-weil-pbc-injective-acyclicity-bounded-below` | 2002 | sorry_here |
 | `lem-weil-pbc-property-implies-acyclicity` | 2003 | none |
 | `lem-weil-pbc-qcqs-higher-direct-image` | 2003 | none |
@@ -588,7 +596,7 @@
 | `def-exc-jacobian-presentation` | - | none |
 | `def-nagata-rees-algebra` | - | none |
 
-## Stage 2: nodes to state (362)
+## Stage 2: nodes to state (365)
 
 | node | distance to Mathlib | kind |
 |---|---|---|
@@ -816,7 +824,9 @@
 | `lem-weil-pbc-nl-presentations-homotopy-equivalent` | 1 | state |
 | `lem-weil-pbc-noether-normalization-over-domain` | 1 | state |
 | `lem-weil-pbc-nonvanishing-section-trivializes` | 1 | state |
+| `lem-weil-pbc-nonzerodivisor-if-maximal-not-associated` | 1 | state |
 | `lem-weil-pbc-ogoma` | 1 | state |
+| `lem-weil-pbc-p-basis-differentials-basis` | 1 | state |
 | `lem-weil-pbc-p-basis-exists` | 1 | state |
 | `lem-weil-pbc-p-independent-differentials-independent` | 1 | state |
 | `lem-weil-pbc-polynomial-ideal-coefficients-monomial` | 1 | state |
@@ -869,6 +879,7 @@
 | `lem-weil-pbc-ringed-space-module-exactness-local-lifting` | 1 | state |
 | `lem-weil-pbc-ringed-space-open-restriction-adjunction` | 1 | state |
 | `lem-weil-pbc-root-lifting-etale-retraction` | 1 | state |
+| `lem-weil-pbc-schanuel` | 1 | state |
 | `lem-weil-pbc-scheme-clopen-idempotent` | 1 | state |
 | `lem-weil-pbc-scheme-theoretic-union` | 1 | state |
 | `lem-weil-pbc-separable-root-pth-power` | 1 | state |
@@ -955,7 +966,7 @@
 | `lem-weil-pbc-p1-field-dimension-one` | 4 | state |
 | `lem-weil-pbc-projective-space-zero-isomorphism` | 4 | state |
 
-Not open yet: 592 nodes that wait for stage 1, 689 nodes that wait for a statement dependency.
+Not open yet: 600 nodes that wait for stage 1, 694 nodes that wait for a statement dependency.
 
 ## Stage 3: modules to prove (0)
 
