@@ -1,8 +1,8 @@
 # Work queue
 
-910 items; claim with `tools/claim.py next <group> [--stage N]`.
+913 items; claim with `tools/claim.py next <group> [--stage N]`.
 
-## Stage 1: nodes to split (176)
+## Stage 1: nodes to split (177)
 
 | node | distance to a target | Lean state on the done branch |
 |---|---|---|
@@ -10,7 +10,6 @@
 | `lem-weil-pbc-injective-acyclicity-bounded-below` | 2002 | sorry_here |
 | `lem-pc-ringed-space-module-stalk-tensor` | 3013 | none |
 | `lem-pc-derived-functor-commutes-derived-limit` | 3014 | none |
-| `lem-pc-derived-limit-roos-abelian-groups` | 3014 | none |
 | `lem-pc-direct-image-bounded-coherent` | 3014 | none |
 | `lem-pc-noetherian-bounded-coherent-pseudo-coherent` | 3014 | none |
 | `lem-pc-proper-direct-image-finite-tor` | 3014 | none |
@@ -18,6 +17,10 @@
 | `lem-pc-derived-lower-truncation-step-ses` | 3015 | none |
 | `lem-pc-ringed-space-derived-products` | 3015 | none |
 | `lem-pc-ringed-space-pointwise-truncation-limit` | 3015 | none |
+| `lem-pc-tower-abelian` | 3015 | none |
+| `lem-pc-tower-enough-injectives` | 3015 | none |
+| `lem-pc-tower-limit-left-exact` | 3015 | none |
+| `lem-pc-tower-surjective-lim-acyclic` | 3015 | none |
 | `lem-pc-perfect-complexes-compact-set` | 3016 | none |
 | `lem-pc-perfect-generation-affine-base` | 3017 | none |
 | `lem-pc-perfect-generation-open-induction-step` | 3017 | none |
@@ -39,7 +42,6 @@
 | `lem-sc-intersection-effective-cartier` | 4010 | none |
 | `lem-sc-etale-faithfully-flat-local` | 4011 | none |
 | `lem-sc-numerical-polynomial-leading-term` | 4011 | none |
-| `lem-sc-snapper-numerical-polynomial` | 4011 | none |
 | `lem-sc-strict-henselization-completion-flat` | 4011 | none |
 | `lem-pc-affine-containment-ideal` | 4012 | none |
 | `lem-sc-hilbert-affine-denominator-module` | 5011 | none |
@@ -52,21 +54,20 @@
 | `lem-pc-derived-pullback-tor-independent-flat-complex` | 5013 | none |
 | `lem-pc-perfect-complex-descent` | 5013 | none |
 | `lem-pc-rf-base-change-single-complex-criterion` | 5013 | none |
-| `lem-pc-sites-modules-quotient-j-shriek` | 5013 | none |
 | `lem-pc-bounded-above-flat-tensor-acyclic` | 5014 | none |
 | `lem-pc-flat-bounded-complex-descent` | 5014 | none |
 | `lem-pc-kflat-tensor-cone-two-out-of-three` | 5014 | none |
 | `lem-pc-module-filtered-colimits-tensor` | 5014 | none |
 | `lem-pc-proper-support-descent` | 5014 | none |
 | `lem-pc-sites-modules-sheafification-flat` | 5014 | none |
-| `lem-sp-cartan-eilenberg-comparison-independence` | 6005 | none |
+| `lem-sp-cartan-eilenberg-comparison-homotopy` | 6006 | none |
+| `lem-sp-filtered-homotopy-spectral-sequence` | 6006 | none |
 | `thm-sp-spectral-object-yields` | 6006 | none |
 | `thm-sc-theorem-of-cube` | 6010 | rests_on_sorry |
 | `lem-pc-monomial-cech-complex-homology` | 6012 | none |
 | `lem-pc-twist-cech-monomial-decomposition` | 6012 | none |
 | `pqf-lem-finite-type-algebra-finite-spectrum` | 6013 | none |
 | `pqf-lem-serre-criterion` | 6013 | none |
-| `def-weil-t-structure` | - | none |
 | `sbc-lem-higher-direct-image-presheaf` | - | none |
 | `thm-pqf-zmt-factorization` | - | none |
 | `def-weil-pbc-C1` | - | none |
@@ -183,7 +184,7 @@
 | `lem-pur-rhom-well-defined` | - | none |
 | `lem-zl-noether-normalization-dimension` | - | none |
 
-## Stage 2: nodes to state (734)
+## Stage 2: nodes to state (736)
 
 | node | distance to Mathlib | kind |
 |---|---|---|
@@ -279,6 +280,7 @@
 | `lem-pc-derived-adjoint-functors` | 1 | state |
 | `lem-pc-derived-filtered-free-resolution` | 1 | state |
 | `lem-pc-derived-free-complex-cover` | 1 | state |
+| `lem-pc-derived-limit-roos-abelian-groups` | 1 | state |
 | `lem-pc-derived-module-direct-sums` | 1 | state |
 | `lem-pc-derived-total-resolution-quasi-iso` | 1 | state |
 | `lem-pc-field-extension-fpqc-cover` | 1 | state |
@@ -307,6 +309,7 @@
 | `lem-pc-scheme-dimension-local-rings` | 1 | state |
 | `lem-pc-scheme-modules-grothendieck-abelian` | 1 | state |
 | `lem-pc-separable-polynomial-alg-closed-quotient-product` | 1 | state |
+| `lem-pc-sites-modules-quotient-j-shriek` | 1 | state |
 | `lem-pc-skyscraper-complex` | 1 | state |
 | `lem-pc-stalk-direct-sums` | 1 | state |
 | `lem-pc-stalk-tensor-complex` | 1 | state |
@@ -922,7 +925,7 @@
 | `lem-weil-pbc-projective-space-zero-isomorphism` | 4 | state |
 | `def-nagata-fixed-base-separated-stage` | 6 | state |
 
-Not open yet: 1477 nodes that wait for a statement dependency, 215 nodes that wait for stage 1.
+Not open yet: 1479 nodes that wait for a statement dependency, 216 nodes that wait for stage 1.
 
 ## Stage 3: modules to prove (0)
 
