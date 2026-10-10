@@ -11,9 +11,82 @@
   "def-weil-pbc-complete-intersection-over-field",
   "def-weil-ring-localization-away"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "If $T_g=0$, it is a global complete intersection by the zero-ring clause of [def-weil-pbc-complete-intersection-over-field]. Otherwise choose, from the global complete intersection hypothesis, a surjective $k$-algebra homomorphism $\\alpha:P=k[x_1,\\dots,x_n]\\to T$ [def-weil-pbc-mv-polynomial-ring] with kernel $I=(f_1,\\dots,f_c)$ and $\\dim T=n-c$ [def-kun-topological-krull-dimension]. The induced map $P/I\\to T$, $[u]\\mapsto\\alpha(u)$, is a $k$-algebra isomorphism: it is surjective with zero kernel, so from now on use it to identify $T$ with the displayed quotient $P/I$. Fix a polynomial $h\\in P$ with $\\alpha(h)=g$; such a lift exists because $\\alpha$ is surjective.",
+   "uses": [
+    "def-weil-pbc-complete-intersection-over-field",
+    "def-weil-pbc-mv-polynomial-ring",
+    "def-kun-topological-krull-dimension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra, proof of Lemma Tag 00SA (lemma-localize-lci), lines 35868-35876; Definition Tag 00S9 (definition-lci-field), lines 35817-35831"
+   }
+  },
+  {
+   "text": "Since $T_g\\neq0$, its spectrum has a point $q$. By [lem-weil-pbc-principal-localization-open-immersion], the localization map gives a homeomorphism $u:\\operatorname{Spec}T_g\\to D(g)$ onto the open subspace $D(g)\\subseteq\\operatorname{Spec}T$. Let $p=u(q)$. The homeomorphism restricts, for every open neighborhood $V$ of $q$, to a homeomorphism $V\\to u(V)$ onto an open neighborhood of $p$, and its inverse takes every open neighborhood of $p$ in $D(g)$ back to one of $q$; [lem-weil-pbc-homeomorphism-krull-dimension] gives $\\dim V=\\dim u(V)$. Taking minima over these paired neighborhoods [def-kun-topological-dimension-at-point] yields $\\dim_q\\operatorname{Spec}T_g=\\dim_p D(g)$. By [lem-weil-pbc-dimension-at-point-open-subspace] this is $\\dim_p\\operatorname{Spec}T$, and by [lem-weil-pbc-global-complete-intersection-equidimensional] the latter is $n-c$ for every such $p$. Apply [lem-weil-pbc-dimension-supremum-local-dimensions] to the nonempty space $\\operatorname{Spec}T_g$: all its local dimensions are $n-c$, hence $\\dim T_g=n-c$ [def-kun-topological-krull-dimension].",
+   "uses": [
+    "lem-weil-pbc-principal-localization-open-immersion",
+    "lem-weil-pbc-homeomorphism-krull-dimension",
+    "def-kun-topological-dimension-at-point",
+    "lem-weil-pbc-dimension-at-point-open-subspace",
+    "lem-weil-pbc-global-complete-intersection-equidimensional",
+    "lem-weil-pbc-dimension-supremum-local-dimensions",
+    "def-kun-topological-krull-dimension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra, proof of Lemma Tag 00SA (lemma-localize-lci), lines 35871-35876, using the paragraph after Definition Tag 00S9 (definition-lci-field), lines 35833-35849"
+   }
+  },
+  {
+   "text": "Let $y$ be one new variable and define $\\beta:P[y]\\to T_g$ by $\\beta|_P=(T\\to T_g)\\circ\\alpha$ and $\\beta(y)=g^{-1}$. The coefficientwise map $\\alpha[y]:P[y]\\to T[y]$ is surjective with kernel $I P[y]$ by [lem-weil-pbc-polynomial-coefficient-map-kernel]. By [lem-weil-pbc-localization-away-polynomial-quotient], evaluation $\\lambda:T[y]\\to T_g$ at $y=g^{-1}$ is surjective with kernel $(gy-1)T[y]$. Thus $\\beta=\\lambda\\circ\\alpha[y]$ is surjective. For $u\\in\\ker\\beta$, write $\\alpha[y](u)=(gy-1)v$ and lift $v$ to $v'\\in P[y]$; then $u-(hy-1)v'\\in I P[y]$. Conversely $I P[y]$ and $hy-1$ map to zero. Hence $\\ker\\beta=(f_1,\\dots,f_c,hy-1)$ and $T_g\\cong k[x_1,\\dots,x_n,y]/(f_1,\\dots,f_c,hy-1)$ as $k$-algebras.",
+   "uses": [
+    "def-weil-pbc-mv-polynomial-ring",
+    "def-weil-ring-localization-away",
+    "lem-weil-pbc-polynomial-coefficient-map-kernel",
+    "lem-weil-pbc-localization-away-polynomial-quotient"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra, proof of Lemma Tag 00SA (lemma-localize-lci), lines 35876-35881; the kernel calculation is expanded as in the proof of Lemma Tag 08JZ (lemma-principal-localization-NL), lines 35631-35634"
+   }
+  },
+  {
+   "text": "The presentation in step 3 has $n+1$ variables and $c+1$ displayed generators. Step 2 gives $\\dim T_g=n-c=(n+1)-(c+1)$. Therefore it meets the nonzero clause of [def-weil-pbc-complete-intersection-over-field], proving that $T_g$ is a global complete intersection; together with step 1 this covers both cases.",
+   "uses": [
+    "def-weil-pbc-complete-intersection-over-field"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra, proof of Lemma Tag 00SA (lemma-localize-lci), lines 35876-35881"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-complete-intersection-over-field",
+  "def-weil-pbc-mv-polynomial-ring",
+  "def-kun-topological-krull-dimension",
+  "lem-weil-pbc-principal-localization-open-immersion",
+  "lem-weil-pbc-homeomorphism-krull-dimension",
+  "def-kun-topological-dimension-at-point",
+  "lem-weil-pbc-dimension-at-point-open-subspace",
+  "lem-weil-pbc-global-complete-intersection-equidimensional",
+  "lem-weil-pbc-dimension-supremum-local-dimensions",
+  "def-weil-ring-localization-away",
+  "lem-weil-pbc-polynomial-coefficient-map-kernel",
+  "lem-weil-pbc-localization-away-polynomial-quotient"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Algebra, Lemma Tag 00SA (lemma-localize-lci), proof lines 35868-35881; dimension argument uses the paragraph after Definition Tag 00S9 (definition-lci-field), lines 35833-35849"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -45,7 +118,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "worker",
@@ -65,5 +138,18 @@
   }
  },
  "chapter": "sec-proper-base-change",
- "unit": "sk-thm-p1"
+ "unit": "sk-thm-p1",
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "lem-weil-pbc-global-complete-intersection-principal-localization",
+  "worker": "stage1",
+  "summary": "Checked the statement against Stacks Algebra Lemma 00SA (lemma-localize-lci) and the complete-intersection definition 00S9. The proof handles the zero localization by the definition; for the nonzero case it extracts a presentation, gets the unchanged dimension n-c from the equidimensionality, open-subspace local-dimension and supremum nodes, calculates the kernel of P[y] -> T_g from two existing polynomial localization leaves, and counts n+1 variables and c+1 equations. One exact Mathlib leaf records invariance of global topological Krull dimension under homeomorphism; applying it to neighborhoods justifies invariance of local dimension."
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "group": "G1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed by the lead of G1; spot-checked by L: 00SA (1); step 2 dimension via homeomorphism Spec T_g ~ D(g), dimension-at-point-open-subspace and equidimensionality; step 3 kernel (f_1..f_c, hy-1) via polynomial-coefficient-map-kernel and localization-away-polynomial-quotient; IsHomeomorph.topologicalKrullDim_eq at Topology/KrullDimension.lean:53 verified"
+ }
 }
