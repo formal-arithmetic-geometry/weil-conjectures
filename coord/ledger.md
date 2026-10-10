@@ -2254,3 +2254,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 18:32 L: merged deliver/G1/lem-pc-derived-ambient-direct-sums (reviewer PASS; first push; new nodes: 1)
 - 18:32 L: merged deliver/J1/lem-exc-finite-galois-sheaf-sections-coproduct (reviewer FIX; first push; new nodes: 0)
 - 18:33 L: merged deliver/M1/lem-pc-pic-of-field (reviewer PASS; first push; new nodes: 0)
+- 18:33 L: merged deliver/K1/lem-sc-semilocal-dim-one-normalization (reviewer FIX; first push; new nodes: 1)
