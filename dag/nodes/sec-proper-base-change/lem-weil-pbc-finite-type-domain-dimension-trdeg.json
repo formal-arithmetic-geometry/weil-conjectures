@@ -4,7 +4,7 @@
   "is": null,
   "from": {
    "node": "thm-weil-pbc-finite-etale-lifting",
-   "place": "step 7 of its split (source: Lemma 0GS2, proof: the essential-surjectivity paragraphs)",
+   "place": "step 7 of its split (source: Lemma 0GS2, proof: the essential-surjectivity paragraphs); the dimension-at-point comparison uses Algebra 00P0 through the regular-local and smoothness chain",
    "via": [
     "lem-weil-pbc-dimension-at-point-local-ring-trdeg",
     "lem-weil-pbc-regular-local-separable-residue-smooth",
@@ -17,7 +17,7 @@
     "lem-weil-pbc-finite-etale-lifting-essential-surjectivity"
    ]
   },
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "Dimension of a finite type domain over a field equals the transcendence degree of its fraction field",
@@ -32,9 +32,72 @@
   "def-kun-transcendence-degree",
   "def-weil-pbc-localization-at-prime"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Write $A=k[x_1,\\ldots,x_n]/\\mathfrak p$, where $\\mathfrak p$ is prime because $A$ is a domain. By [lem-weil-pbc-finite-type-domain-dimension-local-ring] (Algebra 00OS), $\\dim A$ is a finite non-negative integer and $\\dim A_{\\mathfrak m}=\\dim A$ for every maximal ideal $\\mathfrak m$ of $A$. This proves the local-ring assertion, leaving the comparison with transcendence degree.",
+   "uses": [
+    "lem-weil-pbc-finite-type-domain-dimension-local-ring"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra, proof of Lemma 00P0 (lemma-dimension-prime-polynomial-ring), first two sentences: the source invokes Lemma 00OR (lemma-dimension-height-polynomial-ring); the cited 00OS node states the needed local-dimension consequence, proved from 00OR"
+   }
+  },
+  {
+   "text": "By Noether normalization [lem-weil-pbc-noether-normalization-field] (Algebra 00OY), there are $d\\ge0$ and an injective $k$-algebra map $P=k[Y_1,\\ldots,Y_d]\\hookrightarrow A$ such that $A$ is a finite $P$-module. The finite ring map is integral [lem-weil-pbc-finite-algebra-is-integral], so [lem-weil-pbc-integral-injective-dimension-equal] gives $\\dim A=\\dim P$. The polynomial ring $P$ is a finite type domain over $k$, hence [lem-weil-pbc-finite-type-domain-dimension-local-ring] identifies its dimension with that of the localization at the maximal ideal $(Y_1,\\ldots,Y_d)$; [lem-weil-pbc-polynomial-ring-maximal-localization-dimension] computes the latter as $d$. Thus $d=\\dim A$, the dimension clause of 00OY. Write $y_i$ for the images of $Y_i$; their algebraic independence follows from injectivity.",
+   "uses": [
+    "lem-weil-pbc-noether-normalization-field",
+    "lem-weil-pbc-finite-algebra-is-integral",
+    "lem-weil-pbc-integral-injective-dimension-equal",
+    "lem-weil-pbc-finite-type-domain-dimension-local-ring",
+    "lem-weil-pbc-polynomial-ring-maximal-localization-dimension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra, proof of Lemma 00P0, 'Apply Lemma [00OY]. We get a finite injective ring map ... with d = dim(S)'"
+   }
+  },
+  {
+   "text": "Put $F=\\operatorname{Frac}(P)=k(y_1,\\ldots,y_d)\\subseteq K$. Localizing the finite $P$-module $A$ at $P\\setminus\\{0\\}$ gives a finite-dimensional $F$-algebra $B=F\\otimes_PA$; it remains a nonzero domain because $P\\hookrightarrow A$ and $A$ is a domain. By [lem-weil-pbc-finite-dimensional-domain-is-field], $B$ is a field. It contains $A$, and each element of $B$ is a fraction $a/s$ with $a\\in A$ and $0\\ne s\\in P$; thus $B\\subseteq K$, while, being a field containing $A$, it contains $K$. Hence $B=K$ and $K/F$ is finite-dimensional, therefore algebraic.",
+   "uses": [
+    "lem-weil-pbc-finite-dimensional-domain-is-field"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra, proof of Lemma 00P0, 'Clearly, k(y_1, ..., y_d) subset K is a finite extension' (finite-module localization expanded)"
+   }
+  },
+  {
+   "text": "The $y_i$ are algebraically independent over $k$ (Step 2), and $K$ is algebraic over $k(y_1,\\ldots,y_d)$ (Step 3). Thus $(y_1,\\ldots,y_d)$ is a transcendence basis of $K/k$ [def-weil-pbc-transcendence-basis]. By the cardinality clause of [def-kun-transcendence-degree], $\\operatorname{trdeg}_kK=d=\\dim A$; Step 1 gives the same value for every $A_{\\mathfrak m}$.",
+   "uses": [
+    "def-weil-pbc-transcendence-basis",
+    "def-kun-transcendence-degree"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra, proof of Lemma 00P0, last sentence '... finite extension and we win'; Fields, Definition 030E and Definition 030G"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-finite-type-domain-dimension-local-ring",
+  "lem-weil-pbc-noether-normalization-field",
+  "lem-weil-pbc-finite-algebra-is-integral",
+  "lem-weil-pbc-integral-injective-dimension-equal",
+  "lem-weil-pbc-polynomial-ring-maximal-localization-dimension",
+  "lem-weil-pbc-finite-dimensional-domain-is-field",
+  "def-weil-pbc-transcendence-basis",
+  "def-kun-transcendence-degree"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Algebra, Lemma Tag 00P0 (lemma-dimension-prime-polynomial-ring), proof, via 00OR (used through its 00OS consequence) and 00OY"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -66,7 +129,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "worker",
@@ -86,5 +149,27 @@
   }
  },
  "chapter": "sec-proper-base-change",
- "unit": "sk-thm-p1"
+ "unit": "sk-thm-p1",
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "lem-weil-pbc-finite-type-domain-dimension-trdeg",
+  "worker": "stage1",
+  "summary": "Split Stacks Algebra 00P0 into four steps: local dimensions via the existing 00OS node, which derives the source's 00OR consequence; Noether normalization with d=dim A via finite-is-integral, the new 00OK node and polynomial-ring dimension; finite fraction-field extension by localizing a finite module and using the finite-dimensional-domain field lemma; transcendence basis and degree. Added the unsplit 00OK node after Mathlib searches found no general match.",
+  "blueprint": {
+   "steps": [
+    "Algebra 00P0 proof: local dimensions at maximal ideals follow from 00OR; the existing 00OS node packages this consequence",
+    "Algebra 00P0 proof: Noether normalization 00OY gives a finite polynomial subalgebra whose number of variables is the dimension, expanded using 00OK",
+    "Algebra 00P0 proof: the fraction field is finite over the rational function field in the normalization coordinates",
+    "Algebra 00P0 proof: those coordinates form a transcendence basis, yielding dimension equal to transcendence degree"
+   ],
+   "same_as_search": "Searched all blueprint nodes by dimension, trdeg, fraction field and finite type domain; no node states Algebra 00P0 in full."
+  }
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "group": "J1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed by the lead of J1; spot-checked by L: L: 00P0 via 00OS, Noether normalization, 00OK checked; new 00OK node"
+ }
 }
