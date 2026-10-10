@@ -11,7 +11,7 @@
  },
  "kind": "statement",
  "title": "Torsion-free coherent modules on regular curves are locally free",
- "statement": "Let $X$ be an integral [def-pc-integral-scheme] regular scheme of topological dimension at most one and let $\\mathcal F$ be a coherent $\\mathcal O_X$-module [pqf-def-coherent]. Then $\\mathcal F$ is torsion-free if and only if it is finite locally free. The rank of this locally free module is constant and equals $\\dim_{k(X)}\\mathcal F_\\eta$ at the generic point $\\eta$, where $k(X)$ is the function field [def-sc-function-field].",
+ "statement": "Let $X$ be an integral [def-pc-integral-scheme] regular [def-weil-regular-scheme] scheme of topological dimension at most one and let $\\mathcal F$ be a coherent $\\mathcal O_X$-module [pqf-def-coherent]. Then $\\mathcal F$ is torsion-free (its torsion subsheaf $\\mathcal F_{\\mathrm{tors}}$ of [lem-sc-torsion-subsheaf-quotient] is zero) if and only if it is finite locally free. The rank of this locally free module is constant and equals $\\dim_{k(X)}\\mathcal F_\\eta$ at the generic point $\\eta$, where $k(X)$ is the function field [def-sc-function-field].",
  "source": {
   "document": "literature/stacks-project/divisors.tex",
   "place": "Tag 0CC4 (divisors-lemma-torsion-free-over-regular-dim-1); constant rank on connected schemes is immediate from local constancy"
@@ -19,11 +19,77 @@
  "stmt_deps": [
   "def-pc-integral-scheme",
   "pqf-def-coherent",
-  "def-sc-function-field"
+  "def-sc-function-field",
+  "def-weil-regular-scheme",
+  "lem-sc-torsion-subsheaf-quotient"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "For every point $x\\in X$, regularity makes $R=\\mathcal O_{X,x}$ a regular Noetherian local domain. The topological dimension bound gives $\\dim R\\le1$. If $\\dim R=0$, then the maximal ideal is zero and $R$ is a field. If $\\dim R=1$, then $R$ is a discrete valuation ring by [lem-sc-regular-dim1-dvr]. Coherence makes $\\mathcal F_x$ a finitely generated $R$-module.",
+   "uses": [
+    "def-weil-regular-scheme",
+    "lem-sc-regular-dim1-dvr",
+    "pqf-def-coherent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/divisors.tex",
+    "place": "Tag 0CC4, proof: regular local rings on a scheme of dimension at most one are fields or discrete valuation rings"
+   }
+  },
+  {
+   "text": "Assume $\\mathcal F$ is torsion-free. By [lem-sc-torsion-subsheaf-quotient] the stalk at $x$ of $\\mathcal F_{\\mathrm{tors}}$, which is zero, is the torsion submodule of $\\mathcal F_x$ over the domain $R$, so each $\\mathcal F_x$ is torsion-free over $R$. In the field case it is automatically finite free; in the DVR case [lem-sc-dvr-fg-torsionfree-free] makes it finite free. Thus every stalk is finite free, and [lem-sc-coherent-free-stalks-locally-free] gives that $\\mathcal F$ is finite locally free.",
+   "uses": [
+    "lem-sc-torsion-subsheaf-quotient",
+    "lem-sc-dvr-fg-torsionfree-free",
+    "lem-sc-coherent-free-stalks-locally-free"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/divisors.tex",
+    "place": "Tag 0CC4, proof: finitely generated torsion-free stalks over DVRs are free and a coherent sheaf with free stalks is locally free"
+   }
+  },
+  {
+   "text": "Conversely, if $\\mathcal F$ is finite locally free, every stalk is a finite free module over the domain $\\mathcal O_{X,x}$ (integrality gives the domain property), hence has no nonzero element killed by a nonzero scalar. So the torsion submodule of every stalk is zero, and by [lem-sc-torsion-subsheaf-quotient] every stalk of $\\mathcal F_{\\mathrm{tors}}$ is zero; a sheaf with zero stalks is zero, so $\\mathcal F_{\\mathrm{tors}}=0$ and $\\mathcal F$ is torsion-free.",
+   "uses": [
+    "def-pc-integral-scheme",
+    "lem-sc-torsion-subsheaf-quotient"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/divisors.tex",
+    "place": "Tag 0CC4, converse: a locally free sheaf on an integral scheme is torsion-free"
+   }
+  },
+  {
+   "text": "The rank of a finite locally free sheaf is locally constant. Since an integral scheme is irreducible and therefore connected, this locally constant rank is constant. On the generic point, the stalk is a vector space over $k(X)=\\mathcal O_{X,\\eta}$, and its dimension is exactly that constant rank. Hence the rank equals $\\dim_{k(X)}\\mathcal F_\\eta$.",
+   "uses": [
+    "def-pc-integral-scheme",
+    "def-sc-function-field"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/divisors.tex",
+    "place": "Tag 0CC4; constant rank on connected schemes is immediate from local constancy"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-regular-scheme",
+  "lem-sc-regular-dim1-dvr",
+  "pqf-def-coherent",
+  "lem-sc-dvr-fg-torsionfree-free",
+  "lem-sc-coherent-free-stalks-locally-free",
+  "def-pc-integral-scheme",
+  "def-sc-function-field",
+  "lem-sc-torsion-subsheaf-quotient"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/divisors.tex",
+  "place": "Tag 0CC4 (divisors-lemma-torsion-free-over-regular-dim-1)"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -55,10 +121,28 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-sc-riemann-roch"
  },
  "chapter": "sec-picard-framework",
- "unit": "sk-thm-picard-rr"
+ "unit": "sk-thm-picard-rr",
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "lem-sc-regular-curve-torsionfree-free",
+  "worker": "stage1",
+  "summary": "Split Tag 0CC4 into the local-ring reduction, the DVR finite torsion-free module fact, the coherent free-stalk criterion, the converse, and constant-rank identification. Added two unsplit supporting nodes after searches of the whole DAG and blueprint; no exact Lean declaration exists.",
+  "blueprint": [
+   "The torsion-free quotient paragraph: regular curve stalks are DVRs, finitely generated torsion-free modules are free, and coherent sheaves with free stalks are locally free."
+  ],
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-rtf",
+  "group": "E1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-rtf (reviewer sub-agent of L); spot-checked: Source: Stacks Divisors Tag 0CC4 (divisors.tex:1798, divisors-lemma-torsion-free-over-regular-dim-1): integral, regular, dim <= 1, coherent; torsion free iff finite locally free; the item keeps these hypotheses, the constant-rank/generic-rank clause is the elementary addition. Steps: (1) def-weil-regular-scheme (locally Noetherian, regular local rings), dim O_{X,x} <= dim X, dim 0 regular local = field, lem-sc-regular-dim1-dvr for dim 1, coherence for finite stalks; (2) lem-sc-dvr-fg-torsionfree-free (true: More on Algebra 0AUW(3), DVR is a PID) and lem-sc-coherent-free-stalks-locally-free (true: Algebra 0GWM on affines, coherent = finitely presented on locally Noetherian; Stacks uses 00NX); (3) converse elementary over the domain stalks; (4) rank locally constant on connected X, generic stalk k(X)^r with k(X)=O_{X,eta} from def-sc-function-field. Small cases: field, DVR with R/(t) (excluded), R^2, F=0 (rank 0). No sorry-free slopmaster2 declaration on torsion free (grep), blueprint search 'torsion free' gives no duplicate. FIX more, RETURN less: C1/B3 'torsion-freeness is stalkwise' and the notion of torsion-free sheaf had no node: cited existing lem-sc-torsion-subsheaf-quotient (stalk of F_tors = torsion submodule of F_x) in the statement, steps 2 and 3, stmt_deps and proof_deps. Fixes: lem-sc-regular-curve-torsionfree-free: statement: [def-weil-regular-scheme] cited in text (already in stmt_deps), torsion-free glossed as F_tors=0 with [lem-sc-torsion-subsheaf-quotient] (no change of mathematics); lem-sc-dvr-fg-torsionfree-free: source: algebra.tex/0CC4 -> more-algebra.tex Tag 0AUW; lem-sc-coherent-free-stalks-locally-free: source: modules.tex -> algebra.tex Tag 0GWM (label is algebra-lemma-...), statement/stmt_deps: locally Noetherian cited [pqf-def-locnoeth]. Start 2026-10-10 Sat Oct 10 03:05:57 PM UTC 2026, end Sat Oct 10 03:07:34 PM UTC 2026.; 3 file(s) fixed by the reviewer"
+ }
 }

@@ -1722,3 +1722,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 15:06 L: lem-sc-generic-vanishing-kernel-colimit created.by/date filled (maintainer field; reviewer R-gva's retry without it was fine)
 - 15:07 L: merged deliver/K1/lem-sc-p1-proj-shifted-free-twist (reviewer PASS; first push; new nodes: 0)
 - 15:07 L: merged deliver/J1/lem-exc-coinduced-discrete-embedding (reviewer FIX; after a return; new nodes: 1)
+- 15:07 L: merged deliver/E1/lem-sc-regular-curve-torsionfree-free (reviewer FIX; first push; new nodes: 2)
