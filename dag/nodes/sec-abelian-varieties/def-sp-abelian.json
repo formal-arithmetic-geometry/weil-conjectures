@@ -3,7 +3,7 @@
  "blueprint": {
   "is": "def-sp-abelian",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "definition",
  "title": "Abelian categories",
@@ -12,13 +12,70 @@
   "document": "literature/blueprint/master/blueprint/sec-abelian-varieties/sk-prop-av-pqf-finite/def-sp-abelian.md",
   "place": "node def-sp-abelian, order 497"
  },
- "stmt_deps": [],
+ "stmt_deps": [
+  "def-weil-preadditive-category"
+ ],
  "proof": [],
  "proof_deps": [],
  "proof_origin": null,
- "mathlib_searches": [],
- "mathlib_match": null,
- "status": "unsplit",
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "abelian category: preadditive, zero object, finite biproducts, kernels and cokernels, every monomorphism kernel and epimorphism cokernel",
+   "results": "CategoryTheory.Abelian (Mathlib/CategoryTheory/Abelian/Basic); CategoryTheory.Abelian.toIsNormalMonoCategory; CategoryTheory.Abelian.toIsNormalEpiCategory",
+   "date": "2026-10-11",
+   "verdict": "match: CategoryTheory.Abelian gives the structural definition; the same file derives zero objects and finite biproducts"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Mathlib CategoryTheory Abelian class definition normal monomorphisms normal epimorphisms",
+   "results": "CategoryTheory.Abelian; CategoryTheory.Abelian.toIsNormalMonoCategory; CategoryTheory.Abelian.toIsNormalEpiCategory",
+   "date": "2026-10-11",
+   "verdict": "match: normal mono and epi classes are the Mathlib formulation of every mono being a kernel and every epi a cokernel"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Abelian, CategoryTheory.Preadditive, HasZeroObject, HasFiniteBiproducts, HasKernels, HasCokernels",
+   "results": "no hits (unknown identifier HasZeroObject in combined pattern)",
+   "date": "2026-10-11",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Abelian",
+   "results": "CategoryTheory.Abelian in Mathlib.CategoryTheory.Abelian.Basic; hasZeroObject, hasFiniteBiproducts, has_kernels, has_cokernels",
+   "date": "2026-10-11",
+   "verdict": "match: declaration and derived instances read in Basic.lean"
+  },
+  {
+   "tool": "grep",
+   "query": "class Abelian extends Preadditive C [Mathlib/CategoryTheory/Abelian/Basic.lean]",
+   "results": "no hits from msearch grep service",
+   "date": "2026-10-11",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "hasFiniteBiproducts|hasZeroObject [Mathlib/CategoryTheory/Abelian/Basic.lean]",
+   "results": "no hits from msearch grep service",
+   "date": "2026-10-11",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "abelian category structure in Mathlib with preadditive category, zero object, kernels, cokernels, and normal mono/epi",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-11",
+   "verdict": "unavailable"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "CategoryTheory.Abelian",
+  "file": "Mathlib/CategoryTheory/Abelian/Basic.lean",
+  "line": 112,
+  "how": "specializes in one line: Mathlib's class requires finite products, kernels, cokernels, and normal monos/epis; in the same file finite products in a preadditive category yield a zero object and finite biproducts (lines 107-109 and 274-284)."
+ },
+ "status": "mathlib",
  "merged_into": null,
  "import_flags": [],
  "blueprint_kind": "definition",
@@ -37,5 +94,21 @@
   }
  },
  "chapter": "sec-abelian-varieties",
- "unit": "sk-prop-av-pqf-finite"
+ "unit": "sk-prop-av-pqf-finite",
+ "split_report": {
+  "date": "2026-10-11",
+  "item": "def-sp-abelian",
+  "worker": "stage1",
+  "summary": "No project declaration tagged (blueprint: def-sp-abelian) exists in the supplied WeilConjectures source. Mathlib's CategoryTheory.Abelian class states the same abelian-category structure in the equivalent finite-products/normal-mono-normal-epi formulation; Basic.lean derives the zero object and finite biproducts required by this node. The node is therefore a Mathlib leaf and needs no subordinate split.",
+  "blueprint": "This item is the imported blueprint definition at order 497; it has no proof steps. Searched the imported DAG and blueprint for duplicate abelian-category definitions and found no second statement of this definition.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-dab1903",
+  "group": "E1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-dab1903 (reviewer sub-agent of L); spot-checked: B8 leaf: sed Mathlib/CategoryTheory/Abelian/Basic.lean 100-125 and 270-290: class Abelian at line 112 (Preadditive, IsNormalMono/EpiCategory, finite products, kernels, cokernels); hasFiniteBiproducts and hasZeroObject derived at 274-284; one-line specialization of the node's statement. No cycle: stmt_dep def-weil-preadditive-category is a mathlib leaf with empty stmt_deps. No repairs needed; second reading missed nothing."
+ }
 }

@@ -2320,3 +2320,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 19:02 L: returned deliver/K1/lem-pc-base-change-map-cech (reviewer RETURN: Reviewer R-bcm1901, head d32b73d17. 1. D2/C1 (Step 4): the item's only substantive claim is not split: Step 4 asserts th)
 - 19:02 L: merged deliver/G1/def-sp-left-exact-additive (reviewer FIX; first push; new nodes: 0)
 - 19:02 L: merged deliver/E1/lem-pc-ideal-sheaf-comap-affine-extension (reviewer FIX; first push; new nodes: 0)
+- 19:02 L: merged deliver/E1/def-sp-abelian (reviewer PASS; first push; new nodes: 0)
