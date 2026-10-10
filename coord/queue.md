@@ -1,14 +1,13 @@
 # Work queue
 
-908 items; claim with `tools/claim.py next <group> [--stage N]`.
+916 items; claim with `tools/claim.py next <group> [--stage N]`.
 
-## Stage 1: nodes to split (336)
+## Stage 1: nodes to split (342)
 
 | node | distance to a target | Lean state on the done branch |
 |---|---|---|
 | `lemma-constructible-flc-serre` | 6 | rests_on_sorry |
 | `lemma-constructible-torsor-trivialises` | 7 | none |
-| `def-weil-pbc-sheaf-ext` | 1014 | none |
 | `lem-weil-pbc-injective-acyclicity-bounded-below` | 2002 | sorry_here |
 | `lem-weil-pbc-etale-sections-flat-qc-connected-fibres` | 2005 | none |
 | `lem-weil-pbc-field-tensor-irreducible` | 2005 | none |
@@ -53,10 +52,9 @@
 | `lem-pc-global-sections-separable` | 3012 | none |
 | `lem-pc-principal-open-dense-of-nonzerodivisor` | 3012 | none |
 | `lem-pc-separable-tensor-algebraic-closure` | 3012 | none |
-| `lem-sc-p1-duality-pairing-naturality` | 3012 | none |
 | `lem-weil-pbc-ringed-site-free-cech-complex-exact` | 3012 | none |
 | `lem-weil-pbc-ringed-site-injective-module-injective-presheaf` | 3012 | none |
-| `lem-pc-field-extension-fpqc-cover` | 3013 | none |
+| `def-sc-sheaf-cohomology-functor` | 3013 | none |
 | `lem-pc-grothendieck-ss-double-complex-model` | 3013 | none |
 | `lem-sc-affine-finite-module-free-locus` | 3013 | none |
 | `lem-sc-cech-comparison-natural` | 3013 | none |
@@ -66,18 +64,26 @@
 | `lem-sc-ext-stalk-localization` | 3013 | none |
 | `lem-sc-ext-support-cohomology-vanishing` | 3013 | none |
 | `lem-sc-finite-flat-duality-evaluation` | 3013 | none |
+| `lem-sc-p1-boundary-extension-composition` | 3013 | none |
+| `lem-sc-p1-ext-yoneda-associativity` | 3013 | none |
+| `lem-sc-p1-ext-yoneda-functoriality` | 3013 | none |
 | `lem-sc-p1-regular-dimension-one` | 3013 | none |
 | `lem-sc-product-irreducible-components-bijection` | 3013 | none |
-| `lem-sc-proper-upper-shriek-composition` | 3013 | none |
 | `lem-sc-regular-local-ext-vanishing` | 3013 | none |
+| `def-pc-upper-shriek-right-adjoint` | 3014 | none |
+| `lem-pc-field-extension-flat` | 3014 | none |
+| `lem-pc-field-extension-quasi-compact` | 3014 | none |
+| `lem-pc-field-extension-surjective` | 3014 | none |
+| `lem-pc-noetherian-derived-direct-image-right-adjoint` | 3014 | none |
+| `lem-pc-proper-derived-direct-image-composition` | 3014 | none |
 | `lem-sc-p1-serre-section-module-comparison` | 3014 | none |
-| `lem-sc-p1-tor-dimension-shifting` | 3014 | none |
 | `lem-sc-smooth-proper-relative-dualizing-general` | 3014 | none |
 | `lem-sc-p1-graded-degree-component-exact` | 3015 | none |
 | `lem-sc-p1-graded-nakayama-generation` | 3015 | none |
 | `lem-sc-p1-graded-submodule-finite` | 3015 | none |
 | `lem-sc-p1-linear-syzygy` | 3015 | none |
 | `lem-sc-p1-minimal-presentation-tor` | 3015 | none |
+| `lem-sc-p1-tor-dimension-shift-natural` | 3015 | none |
 | `lem-sc-brauer-zero` | 4005 | rests_on_sorry |
 | `lem-pc-genus-agrees-sc` | 4007 | rests_on_sorry |
 | `prop-pc-xk-integral` | 4007 | rests_on_sorry |
@@ -343,7 +349,7 @@
 | `lem-pur-rhom-well-defined` | - | none |
 | `lem-zl-noether-normalization-dimension` | - | none |
 
-## Stage 2: nodes to state (572)
+## Stage 2: nodes to state (574)
 
 | node | distance to Mathlib | kind |
 |---|---|---|
@@ -407,6 +413,7 @@
 | `lem-pc-alg-closed-reduced-algebra-no-idempotents-dim-one` | 1 | state |
 | `lem-pc-ample-affine-loci-criterion` | 1 | state |
 | `lem-pc-cech-exact` | 1 | state |
+| `lem-pc-field-extension-fpqc-cover` | 1 | state |
 | `lem-pc-flat-pullback-effective-cartier-ideal` | 1 | state |
 | `lem-pc-h0-geom-connected` | 1 | state |
 | `lem-pc-integral-radicial-surjective-universal-homeomorphism` | 1 | state |
@@ -439,6 +446,7 @@
 | `lem-sc-irreducible-product-over-field` | 1 | state |
 | `lem-sc-local-ring-artin-schreier-kernel` | 1 | state |
 | `lem-sc-normal-dim1-dvr` | 1 | state |
+| `lem-sc-p1-tor-dimension-shifting` | 1 | state |
 | `lem-sc-pic-proper-decomposition` | 1 | state |
 | `lem-sc-pic-proper-ntorsion` | 1 | state |
 | `lem-sc-point-z-cohomology` | 1 | state |
@@ -920,7 +928,7 @@
 | `lem-weil-pbc-p1-field-dimension-one` | 4 | state |
 | `lem-weil-pbc-projective-space-zero-isomorphism` | 4 | state |
 
-Not open yet: 354 nodes that wait for stage 1, 1138 nodes that wait for a statement dependency.
+Not open yet: 360 nodes that wait for stage 1, 1141 nodes that wait for a statement dependency.
 
 ## Stage 3: modules to prove (0)
 
