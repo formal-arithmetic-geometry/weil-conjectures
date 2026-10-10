@@ -1540,3 +1540,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 2026-10-10, delivery of J1: lem-sc-proper-dim-one-projective merged from deliver/J1/lem-sc-proper-dim-one-projective (1 commit(s), 1 new node(s), spot-checked by L: L: reviewed in full by a reviewer sub-agent (PASS): 0A26/0A25 read, 2 steps checked, new node lem-sc-dim-one-quasi-projective (0A25) checked); claim closed
 - 13:48 L: merged deliver/J1/lem-sc-proper-dim-one-projective (reviewer PASS, first push; tool_uses lem-weil-pbc-proper-closed-image; new node lem-sc-dim-one-quasi-projective)
 - 13:48 L: G1 lem-galois-transitive re-checked by a reviewer: branch unchanged since the return (B8 stands)
+- 13:48 L: C1 lem-sc-flat-base-change-coherent re-push reviewed: byte-identical to the returned version, return stands
