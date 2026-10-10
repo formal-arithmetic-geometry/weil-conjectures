@@ -3,7 +3,7 @@
  "blueprint": {
   "is": "def-sp-composite-acyclicity",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "definition",
  "title": "Composable pairs with an acyclicity condition",
@@ -21,9 +21,31 @@
  "proof": [],
  "proof_deps": [],
  "proof_origin": null,
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "composable pair of left exact additive functors between Grothendieck abelian categories",
+   "results": "CategoryTheory.ShortComplex.ShortExact.map_of_exact; CategoryTheory.Functor.preservesFiniteLimits_iff_forall_exact_map_and_mono; CategoryTheory.Functor.exact_tfae; no declaration for the bundled composable-pair acyclicity definition",
+   "date": "2026-10-11",
+   "verdict": "no match: hits concern exact functors and short complexes, not this bundled definition"
+  },
+  {
+   "tool": "loogle",
+   "query": "Functor.LeftExact, Functor.Additive, Grothendieck",
+   "results": "0 hits; loogle reports unknown identifier 'Functor.LeftExact'",
+   "date": "2026-10-11",
+   "verdict": "unavailable/no match: no declaration for this project-specific definition"
+  },
+  {
+   "tool": "grep",
+   "query": "Grothendieck.*abelian|left exact additive|rightAcyclic in Mathlib",
+   "results": "0 hits",
+   "date": "2026-10-11",
+   "verdict": "no match: Mathlib has no declaration bundling these project notions"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [],
  "blueprint_kind": "definition",
@@ -47,5 +69,20 @@
   }
  },
  "chapter": "sec-abelian-varieties",
- "unit": "sk-prop-av-pqf-finite"
+ "unit": "sk-prop-av-pqf-finite",
+ "split_report": {
+  "date": "2026-10-11",
+  "item": "def-sp-composite-acyclicity",
+  "worker": "stage1",
+  "summary": "Checked the imported definition against its statement, dependencies, blueprint search, and the project source. No sorry-free project declaration states the full bundled notion, and Mathlib has no matching declaration. The statement itself introduces the composable pair of left exact additive functors between Grothendieck abelian categories and the condition that the first sends injectives to objects acyclic for the second; these are definition clauses, so no proof steps or new subordinate nodes are required.",
+  "blueprint": "The definition node itself: the composable-pair clause and the final clause that F sends every injective I to a G-acyclic object."
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-dca1900",
+  "group": "J1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-dca1900 (reviewer sub-agent of L); spot-checked: Definition split, no proof steps or new nodes. stmt_deps (left-exact-additive, grothendieck-abelian, acyclic, injective-resolutions) checked on sheaf-dag: none cites thm-sp-grothendieck or this item, so no cycle; def-sp-acyclic gives G-acyclic as R^nG(X)=0 for n>0 with R^nG via injective resolutions, defined since B is Grothendieck abelian (enough injectives). Statement matches Stacks 015M/015N hypothesis. Mathlib searches recorded. No repairs."
+ }
 }
