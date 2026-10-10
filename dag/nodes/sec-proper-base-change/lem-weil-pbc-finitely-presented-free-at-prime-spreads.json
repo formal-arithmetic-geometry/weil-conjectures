@@ -1,0 +1,76 @@
+{
+ "id": "lem-weil-pbc-finitely-presented-free-at-prime-spreads",
+ "kind": "statement",
+ "title": "A finitely presented module free at a prime is free on a principal open neighbourhood",
+ "statement": "Let $A$ be a commutative ring, $\\mathfrak p\\subset A$ a prime ideal and $M$ a finitely presented $A$-module (there is an exact sequence $A^{\\oplus m}\\to A^{\\oplus n}\\to M\\to0$ for some $m,n\\ge0$; in particular $M$ is finitely generated [def-weil-finitely-generated-module]). Suppose that the localization $M_{\\mathfrak p}$ [def-weil-pbc-module-localization] is a free $A_{\\mathfrak p}$-module [def-weil-pbc-localization-at-prime]; since $M_{\\mathfrak p}$ is finitely generated it then has a finite basis, of $r$ elements say. Then there is an element $f\\in A$, $f\\notin\\mathfrak p$, such that the localization $M_f$ [def-weil-pbc-module-localization-away] is a finite free $A_f$-module of the same rank: $M_f\\cong A_f^{\\oplus r}$.",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Lemma Tag 0GWM (lemma-finitely-presented-localization-free, line 19447): lift a basis of $M_{\\mathfrak p}$ to $\\varphi:R^{\\oplus n}\\to M$, then Lemma 05GF (lemma-map-between-finitely-presented) and Lemma 00HN (lemma-characterize-zero-local) make $\\varphi_f$ an isomorphism"
+ },
+ "stmt_deps": [
+  "def-weil-finitely-generated-module",
+  "def-weil-pbc-module-localization",
+  "def-weil-pbc-localization-at-prime",
+  "def-weil-pbc-module-localization-away"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "finitely presented module whose localization at a submonoid has a basis; lift the basis to localization away from an element of the submonoid",
+   "results": "Module.FinitePresentation.exists_basis_localizedModule_powers (Mathlib.RingTheory.Localization.Free); Module.FinitePresentation.exists_lift_of_isLocalizedModule; Module.Basis.ofIsLocalizedModule; instFinitePresentationLocalizationLocalizedModule",
+   "date": "2026-10-10",
+   "verdict": "generalization: exists_basis_localizedModule_powers / exists_free_localizedModule_powers for any submonoid S"
+  },
+  {
+   "tool": "loogle",
+   "query": "Module.FinitePresentation.exists_basis_localizedModule_powers",
+   "results": "Module.FinitePresentation.exists_basis_localizedModule_powers (S : Submonoid R) (f : M ->l[R] M') [IsLocalizedModule S f] (Rs) [IsLocalization S Rs] [Module.FinitePresentation R M] {I} [Finite I] (b : Basis I Rs M') : exists r in S and a basis b' : Basis I (Localization (powers r)) (LocalizedModule.Away r M) lifting b (Mathlib.RingTheory.Localization.Free)",
+   "date": "2026-10-10",
+   "verdict": "generalization: specialize S = A minus p"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "finite projective module over commutative ring: for each prime p there is f not in p with the localization away from f free",
+   "results": "Module.FinitePresentation.exists_free_localizedModule_powers (Mathlib.RingTheory.Localization.Free): M finitely presented, M_S free over R_S (R_S nontrivial) => exists r in S with M_r free over R_r and finrank M_r = finrank M_S; Module.basicOpen_subset_freeLocus_iff; Module.freeLocus_eq_univ_iff; Module.mem_freeLocus",
+   "date": "2026-10-10",
+   "verdict": "generalization: exists_free_localizedModule_powers with S = p.primeCompl"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rn 'exists_basis_localizedModule_powers\\|exists_free_localizedModule_powers\\|lemma of_isLocalizedModule' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/RingTheory",
+   "results": "RingTheory/Localization/Free.lean:41 exists_basis_localizedModule_powers, :78 exists_free_localizedModule_powers; used in RingTheory/Spectrum/Prime/FreeLocus.lean:175 (isOpen_freeLocus, with S = x.asIdeal.primeCompl, Rs = Localization.AtPrime) and :190; RingTheory/Localization/Finiteness.lean:171 Module.Finite.of_isLocalizedModule",
+   "date": "2026-10-10",
+   "verdict": "generalization specializing in one line, source read"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "Module.FinitePresentation.exists_free_localizedModule_powers",
+  "file": "Mathlib/RingTheory/Localization/Free.lean",
+  "line": 78,
+  "how": "specializes in one line: take S = p.primeCompl, f = LocalizedModule.mkLinearMap S M, Rs = Localization.AtPrime p (nontrivial, a local ring), with [Module.FinitePresentation R M] and [Module.Free Rs M_p]; it gives r in S (r not in p) with Module.Free (Localization.Away r) (LocalizedModule.Away r M) and finrank equal to finrank of M_p; M_r is finite over R_r by Module.Finite.of_isLocalizedModule (RingTheory/Localization/Finiteness.lean:171), so M_r is finite free of rank r. This is exactly how Mathlib's own isOpen_freeLocus (FreeLocus.lean:171-177) uses it. The basis-lifting form is exists_basis_localizedModule_powers (same file, line 41). Source read 2026-10-10 (sed -n 30,100p)"
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-finite-projective-prime-local-free",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1"
+}

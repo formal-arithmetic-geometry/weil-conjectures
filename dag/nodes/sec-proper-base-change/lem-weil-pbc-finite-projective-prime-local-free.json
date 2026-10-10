@@ -2,15 +2,67 @@
  "id": "lem-weil-pbc-finite-projective-prime-local-free",
  "kind": "statement",
  "title": "A finite projective module is free after localizing away from each prime",
- "statement": "Let $A$ be a commutative ring and $M$ a finite projective $A$-module. For every prime ideal $\\mathfrak p\\subset A$ there exists an element $f\\in A\\setminus\\mathfrak p$ such that the localization $M_f$ is a finite free $A_f$-module.",
+ "statement": "Let $A$ be a commutative ring and $M$ a finite projective $A$-module, i.e. $M$ is finitely generated [def-weil-finitely-generated-module] and projective [def-weil-pbc-projective-module]. For every prime ideal $\\mathfrak p\\subset A$ there exists an element $f\\in A\\setminus\\mathfrak p$ such that the localization $M_f$ [def-weil-pbc-module-localization-away] is a finite free $A_f$-module, i.e. $M_f\\cong A_f^{\\oplus r}$ as $A_f$-modules for some integer $r\\ge0$.",
  "source": {
   "document": "literature/stacks-project/algebra.tex",
   "place": "Lemma Tag 00NX (lemma-finite-projective, line 19027), implication (3)\\Rightarrow(7): the finite locally free standard-open neighbourhood of each prime"
  },
- "stmt_deps": [],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "stmt_deps": [
+  "def-weil-finitely-generated-module",
+  "def-weil-pbc-projective-module",
+  "def-weil-pbc-module-localization-away"
+ ],
+ "proof": [
+  {
+   "text": "$M$ is finitely presented: since $M$ is finitely generated and projective, a surjection $A^{\\oplus n}\\to M$ splits, its kernel $K$ is a direct summand of $A^{\\oplus n}$, hence finitely generated, and $A^{\\oplus m}\\to A^{\\oplus n}\\to M\\to0$ is exact for a surjection $A^{\\oplus m}\\to K$ [lem-weil-pbc-finite-projective-finitely-presented].",
+   "uses": [
+    "lem-weil-pbc-finite-projective-finitely-presented"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Lemma Tag 00NX (lemma-finite-projective, line 19027), proof, (2)$\\Rightarrow$(3)$\\Rightarrow$(1), lines 19064-19072"
+   }
+  },
+  {
+   "text": "Fix the prime $\\mathfrak p$. Since $M$ is finite projective, its localization $M_{\\mathfrak p}$ [def-weil-pbc-module-localization] is a finite free module over the local ring $A_{\\mathfrak p}$ [def-weil-pbc-localization-at-prime] [lem-weil-pbc-finite-projective-rank-locally-constant, first clause]; say $M_{\\mathfrak p}\\cong A_{\\mathfrak p}^{\\oplus r}$.",
+   "uses": [
+    "lem-weil-pbc-finite-projective-rank-locally-constant",
+    "def-weil-pbc-module-localization",
+    "def-weil-pbc-localization-at-prime"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Lemma Tag 00NX (lemma-finite-projective, line 19027): (2)$\\Rightarrow$(1)$\\Rightarrow$(7)$\\Rightarrow$(4), $M_{\\mathfrak p}$ free for every prime"
+   }
+  },
+  {
+   "text": "By step 1 $M$ is finitely presented and by step 2 $M_{\\mathfrak p}$ is free of rank $r$ over $A_{\\mathfrak p}$. Hence [lem-weil-pbc-finitely-presented-free-at-prime-spreads] (lift a basis of $M_{\\mathfrak p}$ to a map $\\varphi:A^{\\oplus r}\\to M$ whose localization at $\\mathfrak p$ is an isomorphism; as source and target are finitely presented, $\\varphi_f$ is an isomorphism for some $f\\notin\\mathfrak p$) there is $f\\in A\\setminus\\mathfrak p$ with $M_f\\cong A_f^{\\oplus r}$ [def-weil-pbc-module-localization-away], which is the claim.",
+   "uses": [
+    "lem-weil-pbc-finitely-presented-free-at-prime-spreads",
+    "def-weil-pbc-module-localization-away"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Lemma Tag 0GWM (lemma-finitely-presented-localization-free, line 19447)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-finite-projective-finitely-presented",
+  "lem-weil-pbc-finite-projective-rank-locally-constant",
+  "def-weil-pbc-module-localization",
+  "def-weil-pbc-localization-at-prime",
+  "lem-weil-pbc-finitely-presented-free-at-prime-spreads",
+  "def-weil-pbc-module-localization-away"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Lemma Tag 00NX (lemma-finite-projective, line 19027), (2)$\\Rightarrow$(3)$\\Rightarrow$(1) for finite presentation and freeness of $M_{\\mathfrak p}$; Lemma Tag 0GWM (lemma-finitely-presented-localization-free, line 19447) for spreading freeness from $\\mathfrak p$ to $D(f)$. Stacks proves (1)$\\Rightarrow$(7) of 00NX directly by Nakayama (line 19073); 0GWM is the same conclusion for a finitely presented module free at $\\mathfrak p$, and is the form Mathlib has."
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -39,10 +91,24 @@
    "results": "RingTheory/Localization/Free.lean:78 exists_free_localizedModule_powers; RingTheory/Spectrum/Prime/FreeLocus.lean:160 freeLocus_eq_univ and :224 isLocallyConstant_rankAtStalk; RingTheory/LocalRing/Module.lean:304 free_of_flat_of_isLocalRing; Algebra/Module/FinitePresentation.lean finitePresentation_of_projective; no theorem combining them into the stated conclusion",
    "date": "2026-10-10",
    "verdict": "no exact match: pieces only"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Module.Projective and Module.Finite implies exists r not in prime ideal with Module.Free (Localization.Away r) (LocalizedModule.Away r M)",
+   "results": "Module.projective_of_localization_maximal'; Module.mem_freeLocus_of_isLocalization; Module.freeLocus; Module.FinitePresentation.exists_free_localizedModule_powers; Module.projective_of_isLocalizedModule; Module.freeLocus_eq_univ_iff",
+   "date": "2026-10-10",
+   "verdict": "no single declaration: a chain of three Mathlib lemmas (finitePresentation_of_projective, free_of_flat_of_isLocalRing via freeLocus_eq_univ, exists_free_localizedModule_powers), not one line; split into two Mathlib leaves plus an existing leaf"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "finite projective module over commutative ring: for each prime p there is f not in p with the localization away from f free",
+   "results": "Module.projective_of_localization_maximal; Module.basicOpen_subset_freeLocus_iff; Module.FinitePresentation.exists_free_localizedModule_powers; Module.freeLocus_eq_univ_iff; Module.mem_freeLocus",
+   "date": "2026-10-10",
+   "verdict": "no single declaration; pieces only (re-check 2026-10-10)"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "worker",
@@ -62,5 +128,17 @@
   }
  },
  "chapter": "sec-proper-base-change",
- "unit": "sk-thm-p1"
+ "unit": "sk-thm-p1",
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "lem-weil-pbc-finite-projective-prime-local-free",
+  "worker": "stage1",
+  "summary": "Re-searched Mathlib (LeanSearch, LeanFinder; earlier Loogle and grep kept): no single declaration states the item; it is a chain of three Mathlib lemmas (Module.finitePresentation_of_projective, freeness of M_p via Module.free_of_flat_of_isLocalRing, Module.FinitePresentation.exists_free_localizedModule_powers), so split rather than declared a one-line leaf. Statement unchanged in content; it now cites def-weil-finitely-generated-module, def-weil-pbc-projective-module and def-weil-pbc-module-localization-away (stmt_deps were empty), and spells out finite free as M_f = A_f^r. Proof in three steps following Stacks: 00NX (2)=>(3)=>(1) gives finite presentation (new Mathlib leaf lem-weil-pbc-finite-projective-finitely-presented, Module.finitePresentation_of_projective); M_p finite free by the existing leaf lem-weil-pbc-finite-projective-rank-locally-constant; Stacks Lemma 0GWM spreads freeness from p to some D(f) (new Mathlib leaf lem-weil-pbc-finitely-presented-free-at-prime-spreads, exists_free_localizedModule_powers with S = A minus p plus Module.Finite.of_isLocalizedModule). algebra.tex is present in this checkout (the citer's split said it was absent), so the proof is by document."
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "result": "accepted",
+  "note": "3 steps via Stacks 00NX (2)=>(3)=>(1) and 0GWM instead of the Nakayama argument of 00NX (1)=>(7): finitely presented (new leaf Module.finitePresentation_of_projective, FinitePresentation.lean:161 verified by L); M_p free of rank r (existing rank-locally-constant leaf); spreading to D(f) (new leaf, one-line specialization of exists_free_localizedModule_powers, Localization/Free.lean:78 and Finiteness.lean:171 verified by L). Statement now cites the three definitions (was empty stmt_deps)."
+ }
 }
