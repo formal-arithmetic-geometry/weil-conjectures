@@ -1940,3 +1940,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 16:15 L: merged deliver/K1/lem-weil-pbc-finite-coproduct-cohomology-assembly (reviewer FIX; first push; new nodes: 2)
 - 16:16 L: merged deliver/C1/lem-sc-finite-sections-cover-qc (reviewer FIX; first push; new nodes: 1)
 - 16:16 L: merged deliver/M1/lem-sc-etale-coproduct-etale (reviewer PASS; first push; new nodes: 0)
+- 16:16 L: returned deliver/H1/lemma-constructible-flc-serre (reviewer RETURN: 1. E3/E7: lemma-constructible-flc-serre step 2: the claim that the sheaf P of splittings has local sections, i.e. that a)
