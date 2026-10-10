@@ -12,34 +12,117 @@
   "document": "literature/stacks-project/algebra.tex",
   "place": "Algebra, Section Tag 00LY (section-tor) with Lemma Tag 00LZ (lemma-tor-welldefined, maps of resolutions induce the functoriality) and Lemma Tag 00M0 (lemma-long-exact-sequence-tor); the dimension shift is stated in the proof of Lemma Tag 00S2 ('Since $N^0$ is free, we also see that Tor_2^B(H^0,C)=Tor_1^B(M,C)'); naturality in N: the isomorphism is the connecting map of the long exact Tor sequence in the first variable, which commutes with maps in the second variable"
  },
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Apply [lem-weil-pbc-free-resolution-ses-split] to the exact sequence $0\\to K\\xrightarrow{\\mathrm{id}}K\\to0\\to0$. Its first augmented complex supplies one free resolution $\\cdots\\to G_2\\xrightarrow{e_2}G_1\\xrightarrow{e_1}G_0\\xrightarrow{\\eta}K\\to0$. Fix this resolution once for all $N$; in particular the choice does not depend on a map $g:N\\to N'$.",
+   "uses": [
+    "lem-weil-pbc-free-resolution-ses-split"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra, Section Tag 00LY (section-tor), free resolutions; proof of Lemma Tag 00S2 (lemma-exact-sequence-NL), free-presentation dimension shift"
+   }
+  },
+  {
+   "text": "Write the given exact sequence as $0\\to K\\xrightarrow{j}F\\xrightarrow{p}M\\to0$ [def-weil-pbc-exact-sequence]. Splice the fixed resolution to it: put $P_0=F$, $P_{n+1}=G_n$ for $n\\ge0$, $d_1=j\\eta$, $d_{n+1}=e_n$ for $n\\ge1$, and augment by $p$. All $P_n$ are free [def-weil-pbc-free-module]. This is an exact augmented complex: $\\operatorname{im}(j\\eta)=j(K)=\\ker p$, $\\ker(j\\eta)=\\ker\\eta=\\operatorname{im}e_1$ since $j$ is injective, and exactness in every higher degree is that of $G_\\bullet$. Thus $P_\\bullet$ is a free resolution of $M$, also fixed independently of $N$.",
+   "uses": [
+    "def-weil-pbc-exact-sequence",
+    "def-weil-pbc-free-module"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra, proof of Lemma Tag 00S2 (lemma-exact-sequence-NL), free-presentation dimension shift; splicing detail supplied by the agent"
+   }
+  },
+  {
+   "text": "Compute Tor from these fixed free resolutions [def-weil-pbc-tor-modules]. For $i\\ge1$, $P_{i+2}=G_{i+1}$, $P_{i+1}=G_i$, $P_i=G_{i-1}$, and the two differentials around degree $i+1$ in $P_\\bullet\\otimes_RN$ are exactly $e_{i+1}\\otimes1_N$ and $e_i\\otimes1_N$. Consequently the identity on $G_i\\otimes_RN$ induces an $R$-linear isomorphism $H_{i+1}(P_\\bullet\\otimes_RN)=\\ker(e_i\\otimes1_N)/\\operatorname{im}(e_{i+1}\\otimes1_N)\\xrightarrow{\\sim}H_i(G_\\bullet\\otimes_RN)$. Compose it with the canonical resolution identifications of [def-weil-pbc-tor-modules] to define $\\theta_N$.",
+   "uses": [
+    "def-weil-pbc-tor-modules"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra, Section Tag 00LY (section-tor), Lemma Tag 00LZ (lemma-tor-welldefined), and proof of Lemma Tag 00S2 (lemma-exact-sequence-NL)"
+   }
+  },
+  {
+   "text": "For $g:N\\to N'$, the functorial maps of [def-weil-pbc-tor-modules] on these chosen resolutions come from the chain maps $1_{P_n}\\otimes g$ and $1_{G_n}\\otimes g$. At the three terms used in Step 3, $P_{i+2}=G_{i+1}$, $P_{i+1}=G_i$, $P_i=G_{i-1}$, so the two chain maps are literally the same maps $1_{G_{i+1}}\\otimes g$, $1_{G_i}\\otimes g$, $1_{G_{i-1}}\\otimes g$. They carry cycles to cycles and boundaries to boundaries, and the identity isomorphism between the two quotient modules in Step 3 therefore commutes with the induced homology maps. The canonical resolution identifications are functorial in $N$ by [def-weil-pbc-tor-modules], giving $\\theta_{N'}\\circ\\operatorname{Tor}^R_{i+1}(M,g)=\\operatorname{Tor}^R_i(K,g)\\circ\\theta_N$.",
+   "uses": [
+    "def-weil-pbc-tor-modules"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra, Section Tag 00LY (section-tor) and Lemma Tag 00LZ (lemma-tor-welldefined), functoriality of Tor; naturality calculation supplied by the agent"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-free-resolution-ses-split",
+  "def-weil-pbc-exact-sequence",
+  "def-weil-pbc-free-module",
+  "def-weil-pbc-tor-modules"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Algebra, Section Tags 00LY and 00LZ and proof of Lemma Tag 00S2; explicit splicing and naturality argument supplied by the agent"
+ },
  "mathlib_searches": [
   {
+   "tool": "leanfinder",
+   "query": "Natural isomorphism Tor_{i+1}(M,-) to Tor_i(K,-) from short exact 0 to K to free F to M to 0",
+   "results": "8 hits: CategoryTheory.isZero_Tor'_succ_of_projective, isZero_Tor_succ_of_projective, Tor', Tor'_obj_obj, Tor, Tor_obj, Rep.isZero_Tor_succ_of_projective, Rep.torIso; none states a dimension shift",
+   "date": "2026-10-11",
+   "verdict": "no match"
+  },
+  {
    "tool": "loogle",
-   "query": "CategoryTheory.Tor",
-   "results": "CategoryTheory.Tor, Tor_obj, Tor_map, isZero_Tor_succ_of_projective (Mathlib/CategoryTheory/Monoidal/Tor.lean): Tor as left derived functor and vanishing on projectives; no dimension-shift isomorphism",
-   "date": "2026-10-10",
+   "query": "CategoryTheory.Tor, CategoryTheory.Tor_map",
+   "results": "1 hit: CategoryTheory.Tor_map",
+   "date": "2026-10-11",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "Tor.*(shift|natur|exact)|dimension.shift.*Tor CategoryTheory",
+   "results": "25 capped hits, mostly unrelated category naturality; no Tor shift",
+   "date": "2026-10-11",
    "verdict": "no match"
   },
   {
    "tool": "leansearch",
-   "query": "Tor connecting homomorphism isomorphism for short exact sequence with projective middle term, natural in second variable",
-   "results": "HTTP 500 from leansearch.net (search not available)",
-   "date": "2026-10-10",
-   "verdict": "no match (search failed)"
+   "query": "Tor dimension shifting naturally in tensor variable along free presentation",
+   "results": "Internal Server Error",
+   "date": "2026-10-11",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Tor connecting homomorphism for exact sequence of modules commutes with module homomorphisms in second argument",
+   "results": "8 hits: SnakeLemma.δ variants and ShortComplex.ShortExact.δ variants; no Tor connecting map",
+   "date": "2026-10-11",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.ShortComplex.ShortExact, CategoryTheory.Tor",
+   "results": "0 hits",
+   "date": "2026-10-11",
+   "verdict": "no match"
   },
   {
    "tool": "grep",
-   "query": "grep -n 'def |theorem |lemma ' Mathlib/CategoryTheory/Monoidal/Tor.lean; grep -rn 'leftDerivedδ' Mathlib",
-   "results": "Tor.lean has only Tor, Tor', isZero_Tor_succ_of_projective, isZero_Tor'_succ_of_projective; no Tor connecting-map isomorphism",
-   "date": "2026-10-10",
+   "query": "Tor.*|leftDerived.* CategoryTheory/Monoidal/Tor.lean",
+   "results": "5 capped hits in Tor.lean; no dimension-shift declaration",
+   "date": "2026-10-11",
    "verdict": "no match"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "R-tds",
@@ -64,5 +147,29 @@
   "slopmaster2": {
    "state": "none"
   }
+ },
+ "split_report": {
+  "date": "2026-10-11",
+  "item": "lem-sc-p1-tor-dimension-shift-natural",
+  "worker": "stage1",
+  "summary": "Splice a fixed free resolution of K to the free presentation of M; the shifted chain complexes agree in positive degrees. Fixing the resolutions before varying N makes the identity on homology natural under 1 tensor g. Corrected doubled TeX backslashes in the imported statement. No new nodes.",
+  "blueprint": "The four steps supply the free-presentation dimension shift, including naturality, used by the dimension-shifting sentence in the proof of lem-sc-p1-graded-resolution.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-free-resolution-ses-split",
+    "why": "Step 1 takes its existence of a free resolution of K; this generic resolution tool is not supplied by the Serre duality unit."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-free-resolution-ses-split"
+ ],
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-tds1735",
+  "group": "M1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-tds1735 (reviewer sub-agent of L); spot-checked: Checked splice indices (P_{n+1}=G_n, d_1=j eta; for i>=1 both differentials around degree i+1 are e_{i+1},e_i so H_{i+1}(P⊗N)=H_i(G⊗N)); exactness at splice; naturality via fixed resolutions and literal equality of 1⊗g chain maps; tool_use lem-weil-pbc-free-resolution-ses-split accepted as generic resolution existence (applied to 0->K->K->0->0); def-weil-pbc-tor-modules states resolution-independence and functoriality in N (C4 ok). Mathlib grep: CategoryTheory/Monoidal/Tor.lean has only Tor, Tor', isZero_Tor_succ_of_projective; no dimension-shift declaration, split justified. Statement change limited to TeX backslash encoding, named in report (E7). No new nodes. PASS."
  }
 }
