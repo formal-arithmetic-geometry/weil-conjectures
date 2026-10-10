@@ -3,7 +3,7 @@
  "blueprint": {
   "is": "pqf-lem-going-up",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "Going up for an integral extension",
@@ -13,26 +13,50 @@
   "place": "node pqf-lem-going-up, order 533"
  },
  "stmt_deps": [],
- "proof": [
-  {
-   "text": "The induced map $A/\\mathfrak p\\hookrightarrow B/\\mathfrak q$ is injective\nand integral. Localize it at the complement of\n$\\mathfrak p'/\\mathfrak p$. Apply lying over\n([pqf-lem-lying-over]) to the maximal ideal of the localized\nsource. Pulling the resulting prime first back to $B/\\mathfrak q$ and\nthen to $B$ gives $\\mathfrak q'$; localization shows that its\ncontraction is exactly $\\mathfrak p'$, and the quotient construction\ngives $\\mathfrak q\\subseteq\\mathfrak q'$.",
-   "uses": [
-    "pqf-lem-lying-over"
-   ],
-   "elementary": false
-  }
- ],
- "proof_deps": [
-  "pqf-lem-lying-over"
- ],
+ "proof": [],
+ "proof_deps": [],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/master/blueprint/sec-abelian-varieties/sk-prop-av-pqf-finite/pqf-lem-going-up.md",
   "place": "## Proof"
  },
- "mathlib_searches": [],
- "mathlib_match": null,
- "status": "imported",
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "going up for an integral extension of commutative rings lifting a prime inclusion",
+   "results": "Ideal.exists_ideal_over_prime_of_isIntegral_of_isPrime (Mathlib/RingTheory/Ideal/GoingUp); Ideal.exists_ideal_over_prime_of_isIntegral; Ideal.exists_ideal_over_prime_of_isIntegral_of_isDomain",
+   "date": "2026-10-11",
+   "verdict": "match: Ideal.exists_ideal_over_prime_of_isIntegral_of_isPrime gives Q ≥ I prime with comap Q = P whenever comap I ≤ P"
+  },
+  {
+   "tool": "loogle",
+   "query": "Ideal.exists_ideal_ge_liesOver_of_le, Algebra.HasGoingUp.of_isIntegral",
+   "results": "none",
+   "date": "2026-10-11",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "exists_ideal_ge_liesOver_of_le|HasGoingUp.of_isIntegral (RingTheory/Ideal)",
+   "results": "Mathlib/RingTheory/Ideal/HasGoingUp.lean:24,35,46,59,104; theorem Ideal.exists_ideal_over_prime_of_isIntegral_of_isPrime at Mathlib/RingTheory/Ideal/GoingUp.lean:307",
+   "date": "2026-10-11",
+   "verdict": "match: Ideal.exists_ideal_over_prime_of_isIntegral_of_isPrime at line 307"
+  },
+  {
+   "tool": "leansearch",
+   "query": "going up theorem integral ring map prime ideals",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-11",
+   "verdict": "unavailable"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "Ideal.exists_ideal_over_prime_of_isIntegral_of_isPrime",
+  "file": "Mathlib/RingTheory/Ideal/GoingUp.lean",
+  "line": 307,
+  "how": "specializes in one line: take P = p' and I = q; q.comap = p ≤ p' supplies hIP, and the resulting Q is q' with q ≤ Q, Q prime, and Q.comap = p'"
+ },
+ "status": "mathlib",
  "merged_into": null,
  "import_flags": [],
  "blueprint_kind": "lemma",
@@ -54,5 +78,21 @@
   }
  },
  "chapter": "sec-abelian-varieties",
- "unit": "sk-prop-av-pqf-finite"
+ "unit": "sk-prop-av-pqf-finite",
+ "split_report": {
+  "date": "2026-10-11",
+  "item": "pqf-lem-going-up",
+  "worker": "stage1",
+  "summary": "The item is a one-line specialization of Mathlib's Ideal.exists_ideal_over_prime_of_isIntegral_of_isPrime. Setting its target prime P to p' and its starting prime I to q, the hypothesis that q lies over p together with p ⊆ p' gives the required contraction inequality; the theorem returns a prime q' containing q and lying over p'. No new nodes are needed.",
+  "blueprint": "The item realizes the sole going-up proof paragraph in the imported blueprint node; Mathlib supplies the complete argument.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-pgu2320",
+  "group": "M1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-pgu2320 (reviewer sub-agent of L); spot-checked: Leaf B8: read Ideal.exists_ideal_over_prime_of_isIntegral_of_isPrime at Mathlib/RingTheory/Ideal/GoingUp.lean:307 by sed; one-line specialization P=p', I=q (q.comap=p<=p' gives hIP; output Q>=q prime with comap=p'); integral ring map A->B as Algebra.IsIntegral via toAlgebra is an inferred instance, not a step. Statement matches Stacks 00GU. No new nodes, no citations. Second reading: no fault missed."
+ }
 }
