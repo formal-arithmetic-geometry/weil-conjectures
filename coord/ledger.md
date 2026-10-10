@@ -2282,3 +2282,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 18:47 L: returned deliver/E1/def-sp-convergence (reviewer RETURN: 1. E (imprecise definition, missed by the second reading): the abutment clause 'converges to the filtration of an object)
 - 18:47 L: returned deliver/K1/lem-pc-picard-functor-agrees-sc (reviewer RETURN: 1. E1 (hypothesis used that is not there): step 3 applies def-sc-picard-functor to X, but that definition is made only f)
 - 18:47 L: merged deliver/J1/def-sp-spectral-sequence (reviewer PASS; first push; new nodes: 0)
+- 18:47 L: returned deliver/C1/lem-sc-qcoh-acyclic-derived-pushforward-cohomology (reviewer RETURN: Reviewer R-qac1847, head 1de1fbb9b. Point 1 of the 18:30 return (qcqs, E7, Leray + 01XJ + 01XB + countable products in S)
