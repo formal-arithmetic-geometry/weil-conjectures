@@ -22,11 +22,59 @@
   "def-weil-finite-integral-morphism",
   "def-pc-scheme",
   "def-pc-derived-direct-image",
-  "def-pc-derived-category"
+  "def-pc-derived-category",
+  "def-pur-derived-internal-hom"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Because $f$ is finite between Noetherian schemes, the finite pseudo-coherence and internal-Hom quasi-coherence argument gives $R\\mathcal H om_{\\mathcal O_Y}(f_*\\mathcal O_X,K)\\in D^+_{\\mathrm{QCoh}}(f_*\\mathcal O_X)$, and hence its image lies in $D^+_{\\mathrm{QCoh}}(Y)$, exactly as stated in [lem-sc-finite-pushforward-derived-hom-qcoherent].",
+   "uses": [
+    "lem-sc-finite-pushforward-derived-hom-qcoherent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/duality.tex",
+    "place": "Tag 0AX2, lemma-finite-twisted: pseudo-coherence and quasi-coherence paragraphs"
+   }
+  },
+  {
+   "text": "The finite morphism is affine, and $Rf_*:D_{\\mathrm{QCoh}}(X)\\to D_{\\mathrm{QCoh}}(Y)$ has a right adjoint $f^!$ by [lem-pc-noetherian-derived-direct-image-right-adjoint] ($X,Y$ Noetherian). By [lem-sc-finite-affine-derived-equivalence], $Rf_*$ induces an equivalence $\\Phi:D_{\\mathrm{QCoh}}(X)\\simeq D_{\\mathrm{QCoh}}(f_*\\mathcal O_X)$ whose composition with restriction is $Rf_*$; hence $\\Phi\\circ f^!$ is right adjoint to restriction $D_{\\mathrm{QCoh}}(f_*\\mathcal O_X)\\to D_{\\mathrm{QCoh}}(Y)$, with the counit of $Rf_*\\dashv f^!$ as counit. By [lem-sc-finite-twisted-inverse-bounded-below], $f^!K\\in D^+_{\\mathrm{QCoh}}(X)$, so $\\Phi f^!K\\in D^+_{\\mathrm{QCoh}}(f_*\\mathcal O_X)$. By [lem-sc-finite-sheafhom-affine-adjoint], $R\\mathcal H om_{\\mathcal O_Y}(f_*\\mathcal O_X,-)$ is right adjoint to restriction, with counit evaluation at $1$, and by Step 1 it sends $K$ into $D^+_{\\mathrm{QCoh}}(f_*\\mathcal O_X)$. Hence, restricting both adjunctions to the full subcategories $D^+_{\\mathrm{QCoh}}$, uniqueness of right adjoints gives a canonical isomorphism $\\Phi f^!K\\simeq R\\mathcal H om_{\\mathcal O_Y}(f_*\\mathcal O_X,K)$ in $D^+_{\\mathrm{QCoh}}(f_*\\mathcal O_X)$ carrying the counit of $Rf_*\\dashv f^!$ to the evaluation counit. The uniqueness argument is elementary: two right adjoints to the same functor are uniquely isomorphic by composing one unit with the other counit, and the resulting isomorphism is the unique one preserving counits.",
+   "uses": [
+    "lem-pc-noetherian-derived-direct-image-right-adjoint",
+    "lem-sc-finite-affine-derived-equivalence",
+    "lem-sc-finite-twisted-inverse-bounded-below",
+    "lem-sc-finite-sheafhom-affine-adjoint"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/duality.tex",
+    "place": "Tag 0AX2, lemma-finite-twisted: lemma-sheafhom-affine-adjoint, lemma-twisted-inverse-image-bounded-below, and comparison of right adjoints"
+   }
+  },
+  {
+   "text": "Applying the restriction (forgetful) functor from $D(f_*\\mathcal O_X)$ to $D(\\mathcal O_Y)$, which sends $\\Phi f^!K$ to $Rf_*f^!K$, preserves this canonical comparison and its counit. Therefore the displayed isomorphism $Rf_*f^!K\\simeq R\\mathcal H om_{\\mathcal O_Y}(f_*\\mathcal O_X,K)$ in $D_{\\mathrm{QCoh}}(Y)$ is compatible with the $f_*\\mathcal O_X$-module structure, and its counit is evaluation at $1\\in f_*\\mathcal O_X$ by the counit clause of [lem-sc-finite-sheafhom-affine-adjoint].",
+   "uses": [
+    "lem-sc-finite-sheafhom-affine-adjoint"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/duality.tex",
+    "place": "Tag 0AX3, remark-trace-map-finite"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sc-finite-pushforward-derived-hom-qcoherent",
+  "lem-pc-noetherian-derived-direct-image-right-adjoint",
+  "lem-sc-finite-affine-derived-equivalence",
+  "lem-sc-finite-twisted-inverse-bounded-below",
+  "lem-sc-finite-sheafhom-affine-adjoint"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/duality.tex",
+  "place": "Tags 0AX2 and 0AX3"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -51,12 +99,28 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-sc-finite-flat-duality-evaluation",
   "by": "worker",
   "date": "2026-10-10"
  },
  "chapter": "sec-picard-framework",
- "unit": "sk-thm-picard-duality"
+ "unit": "sk-thm-picard-duality",
+ "split_report": {
+  "date": "2026-10-11",
+  "item": "lem-sc-finite-duality-derived-hom",
+  "worker": "stage1",
+  "summary": "Repaired the returned split by replacing two circular conclusion nodes with independent statements for the affine sheaf-Hom adjunction and counit, boundedness of finite twisted inverse image, and affine derived equivalence; retained the finite pseudo-coherence consequence with its internal-Hom definition dependency.",
+  "blueprint": "The three steps realize the finite-twisted proof paragraph of lem-sc-finite-duality: preservation of D+_QCoh, comparison of the two right adjoints using affine equivalence and boundedness, and transfer of the counit evaluation.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-fdd1727",
+  "group": "F1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-fdd1727 (reviewer sub-agent of L); spot-checked: Earlier return points 1-3 repaired: circular nodes deleted; new nodes (a) sheafhom-affine-adjoint with evaluation counit, (b) twisted-inverse-bounded-below, (c) affine-derived-equivalence (0AVW; existing t-exact/concentration nodes do not state the equivalence), (d) qcoherent node kept with def-pur-derived-internal-hom in stmt_deps; counit comparison stated in Step 2. Checked against Stacks 0AX2/0AX3/0AVW text. FIX more, RETURN less: (1) C1: Step 2 used the existence of f^! uncited (asked in the earlier return) - cite lem-pc-noetherian-derived-direct-image-right-adjoint, added to uses/proof_deps; (2) C4/B3: lem-sc-finite-affine-derived-equivalence lacked the 0AVW clause that Phi followed by restriction is Rf_* (needed to make Phi f^! right adjoint to restriction) and def-pc-scheme in stmt_deps - both added; (3) C4: Step 2 compares adjoints on D+_QCoh(f_*O_X) but Step 1 node gave only D+_QCoh(Y) - node statement now says D+_QCoh(f_*O_X) as in 0AX2, Steps 1-3 rewritten accordingly.; 3 file(s) fixed by the reviewer"
+ }
 }
