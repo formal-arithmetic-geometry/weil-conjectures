@@ -14,6 +14,7 @@ public import WeilConjectures.CategoryTheory.GrothendieckAbelian.Sheaf
 public import Mathlib.Algebra.Homology.DerivedCategory.SingleTriangle
 public import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.HomologyProperty
 public import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.TStructure
+public import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.QuasiCompact
 public import WeilConjectures.SixFunctors.ProEtale.Adic.Abelian
 public import WeilConjectures.SixFunctors.ProEtale.Adic.BaseChange
 public import WeilConjectures.SixFunctors.ProEtale.Adic.Constructible
@@ -358,26 +359,12 @@ lemma FiniteFor.finsetSup [IsLocallyNoetherian Y] {T : Scheme.{u}} (g : T ⟶ Y)
   rintro _ ⟨O, ⟨-, hO⟩, rfl⟩
   exact hP _ _ (hS U hU) (hS O hO)
 
-/-- A quasi-compact scheme is a finite union of affine opens. -/
-lemma exists_finset_isAffineOpen_sup_eq_top (T : Scheme.{u}) [CompactSpace T] :
-    ∃ S : Finset T.Opens, (∀ O ∈ S, IsAffineOpen O) ∧ S.sup id = ⊤ := by
-  classical
-  obtain ⟨s, hs, hsU⟩ := (isCompact_iff_finite_and_eq_biUnion_affineOpens
-    (U := (⊤ : T.Opens))).1 (by simpa using isCompact_univ)
-  refine ⟨hs.toFinset.image Subtype.val, ?_, le_antisymm le_top ?_⟩
-  · simp only [Finset.mem_image, Set.Finite.mem_toFinset]
-    rintro _ ⟨O, -, rfl⟩
-    exact O.2
-  · rw [hsU]
-    exact iSup₂_le fun i hi ↦ Finset.le_sup (f := id)
-      (Finset.mem_image_of_mem _ (hs.mem_toFinset.2 hi))
-
 /-- **The separated case**: on a quasi-compact scheme with affine diagonal, the finiteness
 theorem follows from the case of its affine opens, these being stable under intersections. -/
 lemma FiniteFor.of_isAffineHom_diagonal [IsLocallyNoetherian Y] {T : Scheme.{u}} (g : T ⟶ Y)
     [CompactSpace T] [IsAffineHom (pullback.diagonal (terminal.from T))]
     (h : ∀ O : T.Opens, IsAffineOpen O → FiniteFor l (O.ι ≫ g)) : FiniteFor l g := by
-  obtain ⟨S, hSa, hS⟩ := exists_finset_isAffineOpen_sup_eq_top T
+  obtain ⟨S, hSa, hS⟩ := Scheme.exists_finset_isAffineOpen_sup_eq_top T
   exact FiniteFor.of_top g (FiniteFor.congr_opens g hS
     (FiniteFor.finsetSup g IsAffineOpen (fun _ _ hO hO' ↦ hO.inf hO') h S hSa))
 
@@ -404,7 +391,7 @@ lemma FiniteFor.of_quasiSeparatedSpace [IsLocallyNoetherian Y] {T : Scheme.{u}} 
     refine FiniteFor.of_isAffineHom_diagonal (O.ι ≫ g) fun O' hO' ↦ ?_
     have : IsAffine O'.toScheme := hO'
     exact h O'.toScheme (O'.ι ≫ O.ι ≫ g)
-  obtain ⟨S, hSa, hS⟩ := exists_finset_isAffineOpen_sup_eq_top T
+  obtain ⟨S, hSa, hS⟩ := Scheme.exists_finset_isAffineOpen_sup_eq_top T
   exact FiniteFor.of_top g (FiniteFor.congr_opens g hS
     (FiniteFor.finsetSup g P hP hPF S fun O hO ↦ ⟨(hSa O hO).isCompact, O, hSa O hO, le_rfl⟩))
 
@@ -419,7 +406,8 @@ variable {l : ℕ} [Fact l.Prime] {K : Type u} [Field K] [IsAlgClosed K] {X Y : 
 (SGA 4½, *Th. finitude*): over an algebraically closed field of characteristic `≠ ℓ`, the
 derived pushforward `Rg_* F` of a constructible `ℓ`-adic sheaf along a morphism `g` locally of
 finite type between affine schemes, with target of finite type, is bounded with constructible
-cohomology sheaves `Rⁿg_* F`. -/
+cohomology sheaves `Rⁿg_* F`. This is the affine `ℚ̄_ℓ` case of blueprint
+`sk-prop-sf-finiteness`. -/
 theorem finiteLowerStar_singleFunctor_of_isAffine (hK : ringChar K ≠ l) [LocallyOfFiniteType s]
     [IsAffine Y] {T : Scheme.{u}} [IsAffine T] (g : T ⟶ Y) [LocallyOfFiniteType g]
     {F : AdicSheaf l T} (hF : IsAdicConstructibleSheaf F) :
@@ -534,7 +522,7 @@ theorem exists_isLE_rightDerivedFunctor_lowerStar (hK : ringChar K ≠ l) [Local
     ∃ b : ℤ, ((f)_*ᵃ[l].rightDerivedFunctor.obj
       ((DerivedCategory.singleFunctor _ 0).obj F)).IsLE b := by
   have : CompactSpace Y := QuasiCompact.compactSpace_of_compactSpace s
-  obtain ⟨S, hSa, hS⟩ := exists_finset_isAffineOpen_sup_eq_top Y
+  obtain ⟨S, hSa, hS⟩ := Scheme.exists_finset_isAffineOpen_sup_eq_top Y
   have hb (O : S) : ∃ b : ℤ, ((O.1.ι)^*ᵃ[l].mapDerivedCategory.obj
       ((f)_*ᵃ[l].rightDerivedFunctor.obj ((DerivedCategory.singleFunctor _ 0).obj F))).IsLE b := by
     have : IsAffine O.1.toScheme := hSa O.1 O.2

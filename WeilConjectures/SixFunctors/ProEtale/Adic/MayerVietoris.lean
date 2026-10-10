@@ -109,12 +109,6 @@ lemma pairCover_mem_proetalePrecoverage
       ⟨fun x ↦ (hcov x).elim (fun h ↦ ⟨true, h⟩) (fun h ↦ ⟨false, h⟩),
         fun b ↦ inferInstanceAs (IsOpenImmersion (pairCover jU jV b))⟩)
 
-omit [Fact l.Prime] in
-lemma isIso_of_isZero_of_isZero {C : Type*} [Category C] {A B : C} (f : A ⟶ B)
-    (hA : IsZero A) (hB : IsZero B) : IsIso f := by
-  rw [hA.eq_of_src f (hA.iso hB).hom]
-  infer_instance
-
 /-- **Objects supported on the complement of an open subscheme.** Let `X = U ∪ V` be an open
 cover and `I` a K-injective complex of `ℓ`-adic sheaves on `X` whose restriction to `U`
 vanishes in the derived category. Then the unit `I ⟶ j_{V*} j_V^* I` is a quasi-isomorphism:
@@ -148,7 +142,7 @@ lemma isIso_Q_map_unit_of_isZero (hcov : ∀ x, x ∈ Set.range jU.base ∨ x �
       exact (jU)^*ᵃ[l].mapDerivedCategory.mapIso
           ((jV)_*ᵃ[l].rightDerivedFunctorObjQIso J).symm ≪≫
         (adicDerivedBaseChangeIso l hsq).app _
-    exact isIso_of_isZero_of_isZero _ hI h₂
+    exact hI.isIso h₂ _
 
 open ZeroObject in
 /-- **Restrictions along a pro-étale cover detect zero objects.** -/
@@ -156,7 +150,7 @@ lemma isZero_of_isZero_adicUpperStar {ι : Type*} {W : ι → Scheme.{u}} (g : �
     [∀ i, WeaklyEtale (g i)] (hg : Presieve.ofArrows W g ∈ Scheme.proetalePrecoverage X)
     {M : AdicSheaf l X} (h : ∀ i, IsZero ((g i)^*ᵃ[l].obj M)) : IsZero M := by
   have : IsIso (0 : M ⟶ 0) := isIso_of_isIso_adicUpperStar l g hg _ fun i ↦
-    isIso_of_isZero_of_isZero _ (h i) ((g i)^*ᵃ[l].map_isZero (isZero_zero _))
+    (h i).isIso ((g i)^*ᵃ[l].map_isZero (isZero_zero _)) _
   exact (isZero_zero _).of_iso (asIso (0 : M ⟶ 0))
 
 end MayerVietoris

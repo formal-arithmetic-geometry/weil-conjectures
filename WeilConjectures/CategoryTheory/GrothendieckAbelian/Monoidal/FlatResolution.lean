@@ -7,6 +7,7 @@ module
 
 public import Mathlib.Algebra.Category.ModuleCat.AB
 public import Mathlib.Algebra.Category.ModuleCat.Monoidal.Closed
+public import Mathlib.CategoryTheory.Generator.Sheaf
 public import WeilConjectures.CategoryTheory.Abelian.Flat.Basic
 public import WeilConjectures.CategoryTheory.GrothendieckAbelian.Monoidal.TensorColimits
 public import WeilConjectures.CategoryTheory.GrothendieckAbelian.Sheaf
@@ -62,13 +63,15 @@ pro-étale site are such sites, so the étale and pro-étale instances are obtai
 general one by `inferInstance`.
 
 For an object `U` of `C` and a flat separator `G` of `A`, let `G_U` be the free presheaf
-`V ↦ ∐_{V ⟶ U} G`, so that `Hom (G_U, F) ≅ Hom (G, F(U))`. Its sheafification `L G_U` is flat:
-tensoring with it is `F ↦ L (G_U ⊗ F)`, and the objectwise tensor product with `G_U` is left
-exact because each `G_U(V)` is a coproduct of copies of `G`
+`V ↦ ∐_{V ⟶ U} G` (`CategoryTheory.Presheaf.freeYoneda`), so that
+`Hom (G_U, F) ≅ Hom (G, F(U))`. Its sheafification `L G_U` (`CategoryTheory.Sheaf.freeYoneda`)
+is flat: tensoring with it is `F ↦ L (G_U ⊗ F)`, and the objectwise tensor product with `G_U`
+is left exact because each `G_U(V)` is a coproduct of copies of `G`
 (`CategoryTheory.GrothendieckTopology.flat_presheafToSheaf_obj`). The sheaves `L G_U`, for `U`
-ranging over a small model of the site, form a separating family, so their coproduct is a flat
-separator of `Sheaf J A`. On the small étale site with `A = ModuleCat.{u + 1} Λ` this is the
-construction by local free covers `⊕ j_{U!} Λ_U` of the Stacks Project, Tag 06YL.
+ranging over the site, form a separating family (`CategoryTheory.Sheaf.isSeparating`), so
+their coproduct is a flat separator of `Sheaf J A`. On the small étale site with
+`A = ModuleCat.{u + 1} Λ` this is the construction by local free covers `⊕ j_{U!} Λ_U` of the
+Stacks Project, Tag 06YL.
 
 ## Main results
 
@@ -172,79 +175,25 @@ lemma flat_presheafToSheaf_obj (P : Cᵒᵖ ⥤ A) (hP : ∀ U, ObjectProperty.f
       Functor.isoWhiskerLeft (sheafToPresheaf J A) (Sheaf.presheafToSheafCompTensorLeftIso P)
   exact preservesFiniteLimits_of_natIso e.symm
 
-variable {A} in
-/-- The free presheaf `V ↦ ∐_{V ⟶ U} G` on an object `U` of the site with values in an object
-`G` of `A`: morphisms out of it into a presheaf `F` are the morphisms `G ⟶ F(U)`. -/
-noncomputable abbrev freePresheaf (U : C) (G : A) : Cᵒᵖ ⥤ A :=
-  CategoryTheory.yoneda.obj U ⋙ uliftFunctor.{u + 1} ⋙ sigmaConst.obj G
-
-variable {A} in
-/-- The morphism `∐_{V ⟶ U} G ⟶ F(V)` out of the free presheaf induced by a morphism
-`G ⟶ F(U)`. -/
-noncomputable def freePresheafDesc {U : C} {G : A} {F : Cᵒᵖ ⥤ A} (h : G ⟶ F.obj (op U)) :
-    freePresheaf U G ⟶ F where
-  app V := Sigma.desc fun φ ↦ h ≫ F.map φ.down.op
-  naturality V W ψ := Sigma.hom_ext _ _ fun φ ↦ by
-    simp [sigmaConst, ← Functor.map_comp]
-    try rfl
-
-omit [EssentiallySmall.{u + 1} C] [MonoidalCategory A] [MonoidalPreadditive A]
-  [SymmetricCategory A] [MonoidalClosed A] in
-variable {A} in
-@[reassoc (attr := simp)]
-lemma ι_freePresheafDesc_app {U : C} {G : A} {F : Cᵒᵖ ⥤ A} (h : G ⟶ F.obj (op U)) (V : Cᵒᵖ)
-    (φ : ULift.{u + 1} (V.unop ⟶ U)) :
-    Sigma.ι (fun _ ↦ G) φ ≫ (freePresheafDesc h).app V = h ≫ F.map φ.down.op :=
-  Sigma.ι_desc (fun φ : ULift.{u + 1} (V.unop ⟶ U) ↦ h ≫ F.map φ.down.op) φ
-
-omit [EssentiallySmall.{u + 1} C] [MonoidalCategory A] [MonoidalPreadditive A]
-  [SymmetricCategory A] [MonoidalClosed A] in
-variable {A} in
-/-- Two morphisms out of `F` agree on a morphism `h : G ⟶ F(U)` as soon as they agree after
-composition with the morphism out of the free presheaf induced by `h`. -/
-lemma comp_app_eq_of_freePresheafDesc_comp_eq {U : C} {G : A} {F F' : Cᵒᵖ ⥤ A}
-    (h : G ⟶ F.obj (op U)) {α β : F ⟶ F'}
-    (H : freePresheafDesc h ≫ α = freePresheafDesc h ≫ β) :
-    h ≫ α.app (op U) = h ≫ β.app (op U) := by
-  let ι : G ⟶ (freePresheaf U G).obj (op U) :=
-    Sigma.ι (fun _ : ULift.{u + 1} (U ⟶ U) ↦ G) (ULift.up (𝟙 U))
-  have hι : ι ≫ (freePresheafDesc h).app (op U) = h :=
-    (ι_freePresheafDesc_app h (op U) (ULift.up (𝟙 U))).trans (by simp)
-  calc h ≫ α.app (op U) = ι ≫ (freePresheafDesc h).app (op U) ≫ α.app (op U) := by
-        rw [← Category.assoc, hι]
-    _ = ι ≫ (freePresheafDesc h).app (op U) ≫ β.app (op U) := by
-        rw [← NatTrans.comp_app, H, NatTrans.comp_app]
-    _ = h ≫ β.app (op U) := by rw [← Category.assoc, hι]
-
 omit [MonoidalPreadditive A] in
 /-- A flat separator of the coefficient category `A` induces a flat separator of the
-category of `A`-valued sheaves on an essentially small site, obtained by applying
-extension by zero to it and summing over the site; see the module docstring. -/
+category of `A`-valued sheaves on an essentially small site: the coproduct of the free sheaves
+`Sheaf.freeYoneda J U G`; see the module docstring. -/
 theorem exists_flat_separator_sheaf_of_essentiallySmall
     (hA : ∃ G : A, IsSeparator G ∧ ObjectProperty.flat G) :
     ∃ G : Sheaf J A, IsSeparator G ∧ ObjectProperty.flat G := by
   obtain ⟨G, hG, hG'⟩ := hA
-  let e := equivSmallModel.{u + 1} C
-  let S : SmallModel.{u + 1} C → Sheaf J A := fun U ↦
-    (presheafToSheaf J A).obj (freePresheaf (e.inverse.obj U) G)
-  have := IsGrothendieckAbelian.hasColimitsOfShape_discrete.{_, _, u + 1} (Sheaf J A)
-    (SmallModel.{u + 1} C)
-  refine ⟨∐ S, ?_, ObjectProperty.flat_coproduct _ fun U ↦
-    flat_presheafToSheaf_obj A J _ fun V ↦ ObjectProperty.flat_coproduct _ fun _ ↦ hG'⟩
-  rw [isSeparator_sigma]
-  intro X Y f g hfg
-  have key (U : SmallModel.{u + 1} C) :
-      f.hom.app (op (e.inverse.obj U)) = g.hom.app (op (e.inverse.obj U)) := by
-    refine hG.def _ _ fun k ↦ ?_
-    have h := congrArg ((sheafificationAdjunction J A).homEquiv _ _)
-      (hfg (S U) (ObjectProperty.ofObj_apply _ U)
-        (((sheafificationAdjunction J A).homEquiv _ _).symm (freePresheafDesc k)))
-    simp only [Adjunction.homEquiv_naturality_right, Equiv.apply_symm_apply] at h
-    exact comp_app_eq_of_freePresheafDesc_comp_eq k h
-  ext ⟨W⟩ : 3
-  let i : W ≅ e.inverse.obj (e.functor.obj W) := e.unitIso.app W
-  rw [← cancel_epi (X.obj.map i.hom.op), f.hom.naturality, g.hom.naturality]
-  exact congrArg (· ≫ _) (key (e.functor.obj W))
+  have : HasCoproducts.{u} A := hasCoproducts_shrink.{u, u + 1}
+  have := IsGrothendieckAbelian.hasColimitsOfShape_discrete.{_, _, u + 1} (Sheaf J A) (C × Unit)
+  have hflat (U : C) (V : Cᵒᵖ) : ObjectProperty.flat ((Presheaf.freeYoneda U G).obj V) := by
+    have := IsGrothendieckAbelian.hasColimitsOfShape_discrete.{_, _, u + 1} A
+      (ULift.{u + 1} (V.unop ⟶ U))
+    exact ObjectProperty.prop_of_iso _
+      (Sigma.whiskerEquiv (f := fun _ : ULift.{u + 1} (V.unop ⟶ U) ↦ G) Equiv.ulift
+        fun _ ↦ Iso.refl G)
+      (ObjectProperty.flat_coproduct _ fun _ ↦ hG')
+  exact ⟨_, Sheaf.isSeparator J (S := fun _ : Unit ↦ G) (by simpa using! hG),
+    ObjectProperty.flat_coproduct _ fun _ ↦ flat_presheafToSheaf_obj A J _ (hflat _)⟩
 
 /-- Functorial flat resolutions of `A`-valued sheaves on an essentially small site: by
 `Abelian.hasFunctorialFlatResolution_iff_exists_flat_separator` this is the existence of a
