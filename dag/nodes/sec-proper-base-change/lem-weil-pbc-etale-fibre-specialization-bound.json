@@ -25,9 +25,68 @@
   "def-weil-geometric-point",
   "def-weil-geometric-fibre"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Work over an affine open of $Y$ containing the image of the specialization. The etale morphism is flat and locally of finite presentation, and its separated quasi-compact restriction is quasi-finite; hence the restriction satisfies the hypotheses of [lem-weil-pbc-flat-fp-qf-stratification].",
+   "uses": [
+    "lem-weil-pbc-etale-algebra-flat",
+    "lem-weil-pbc-etale-algebra-finite-presentation-localization",
+    "lem-weil-pbc-etale-ring-map-quasi-finite",
+    "lem-weil-pbc-flat-fp-qf-stratification"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Lemma 37.45.7 (Tag 09Z0), induction proof, using Lemma 07RZ after restricting to an affine open"
+   }
+  },
+  {
+   "text": "Let $\\emptyset=Z_{-1}\\subseteq Z_0\\subseteq\\cdots$ and $S_r=Z_r\\setminus Z_{r-1}$ be the stratification supplied by [lem-weil-pbc-flat-fp-qf-stratification]. Applying its universal property to $T=\\operatorname{Spec}\\kappa(y)$ shows that the fibre over $y$ is finite locally free of degree $r$ exactly when $y\\in S_r$. The fibre $X_y\\to\\operatorname{Spec}\\kappa(y)$ is etale by [lem-weil-pbc-etale-scheme-base-change] and finite, hence $X_y=\\operatorname{Spec}C$ is affine. By [lem-weil-pbc-etale-algebra-over-field-product], such an etale fibre algebra $C$ is a finite product of finite separable field extensions, so this degree is the number of geometric points in the fibre. Consequently the locus where the geometric fibre has cardinality at most $r$ is the closed set $Z_r$.",
+   "uses": [
+    "lem-weil-pbc-flat-fp-qf-stratification",
+    "lem-weil-pbc-etale-algebra-over-field-product",
+    "lem-weil-pbc-etale-scheme-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Lemma 37.45.7 (Tag 09Z0), induction proof: apply Lemma 07RZ to the residue-field point and use the etale-over-a-field decomposition"
+   }
+  },
+  {
+   "text": "If $\\bar y_{\\mathrm{gen}}\\leadsto\\bar y_{\\mathrm{sp}}$ lies over $y_{\\mathrm{gen}}\\leadsto y_{\\mathrm{sp}}$ and the generic fibre has finite cardinality $r$, then $y_{\\mathrm{gen}}\\in Z_r$. Since $Z_r$ is closed and closed sets are stable under specialization, $y_{\\mathrm{sp}}\\in Z_r$, proving that the special fibre is finite with cardinality at most that of the generic fibre.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Lemma 37.45.7 (Tag 09Z0), conclusion of the specialization argument"
+   }
+  },
+  {
+   "text": "For the strict-bound clause, on each affine open the closed set $Z_{d-1}$ contains the dense open locus where the fibre cardinality is less than $d$. Therefore it equals the whole affine open, and these local conclusions cover $Y$; every geometric fibre has cardinality strictly less than $d$.",
+   "uses": [
+    "lem-weil-pbc-flat-fp-qf-stratification"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Lemma 37.45.7 (Tag 09Z0), strict-bound conclusion via the closed stratum $Z_{d-1}$"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-etale-algebra-flat",
+  "lem-weil-pbc-etale-algebra-finite-presentation-localization",
+  "lem-weil-pbc-etale-ring-map-quasi-finite",
+  "lem-weil-pbc-flat-fp-qf-stratification",
+  "lem-weil-pbc-etale-algebra-over-field-product",
+  "lem-weil-pbc-etale-scheme-base-change"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/more-morphisms.tex",
+  "place": "Lemma 37.45.7 (Tag 09Z0), induction via Lemma 07RZ (Tag 07RZ)"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -52,10 +111,44 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lemma-weil-pbc-finite-refinement-etale-cover",
   "by": "worker",
   "date": "2026-10-10"
+ },
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "lem-weil-pbc-etale-fibre-specialization-bound",
+  "worker": "stage1",
+  "summary": "Repaired the proof to follow Tag 09Z0 through Lemma 07RZ (Tag 07RZ): etale implies flat, locally of finite presentation and quasi-finite; the universal stratification property identifies the closed degree loci; closedness gives specialization monotonicity and the dense-open strict bound. Removed the unsupported idempotent-specialization node and corrected the source attribution.",
+  "blueprint": "Step 1 realizes the affine reduction and invocation of the flat, finite-presentation, quasi-finite stratification; Step 2 realizes the residue-field degree identification and closed degree loci; Steps 3-4 realize the specialization and dense-open strict-bound conclusions.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-etale-ring-map-quasi-finite",
+    "why": "The affine reduction needs the etale-implies-quasi-finite fact from sk-thm-p1, which this unit's route does not provide."
+   },
+   {
+    "node": "lem-weil-pbc-flat-fp-qf-stratification",
+    "why": "The route uses its universal property to identify the closed fibre-degree loci; no node in this unit supplies that stratification."
+   },
+   {
+    "node": "lem-weil-pbc-etale-algebra-over-field-product",
+    "why": "The route uses its finite separable product decomposition to identify finite-locally-free degree with geometric fibre-point cardinality; no node in this unit supplies that field calculation."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-etale-ring-map-quasi-finite",
+  "lem-weil-pbc-flat-fp-qf-stratification",
+  "lem-weil-pbc-etale-algebra-over-field-product"
+ ],
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-ef2",
+  "group": "H1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-ef2 (reviewer sub-agent of L); spot-checked: Re-push after return 15:31 (c85387dd5): all three points repaired: (1) steps 1-2 now follow the 07RZ route named in the proof of 09Z0 (more-morphisms-lemma-there-is-a-scheme-integral-over, sentence 'the degree of the fibres of a quasi-compact separated etale morphism does not go up under specialization', citing 07RY/07RZ = lemma-stratify-flat-fp-qf), no Zariski finite-etale shrinking; (2) strict clause now from closedness of Z_{d-1} on each affine open containing the dense open, no generization quantifier; (3) the idempotent node is gone and step/item sources name 07RZ. Statement unchanged. Step 1: flat and lfp from def-weil-etale-morphism and the cited etale-algebra leaves, locally quasi-finite from lem-weil-pbc-etale-ring-map-quasi-finite (isolated in fibre ring per def-weil-pbc-ring-map-quasi-finite-at-prime), plus quasi-compact gives quasi-finite per pqf-def-quasifinite; separated by hypothesis; hypotheses of lem-weil-pbc-flat-fp-qf-stratification checked one by one; an affine open containing y_sp contains y_gen. Step 2: universal property with T=Spec kappa(y) gives degree r iff y in S_r, S = disjoint union so every fibre finite; Z_r = S_0 u...u S_r. Step 3 elementary (closed sets stable under specialization). Step 4: Z_{d-1} closed in V and contains the dense subset U n V, so equals V. Tool uses (sk-thm-p1 nodes: etale-ring-map-quasi-finite, flat-fp-qf-stratification, etale-algebra-over-field-product) are generic black boxes, accepted. Small cases: empty fibre, identity, the A^1 example of the return (two points over y=0, one point removed: degrees 2 generic, 1 at y=0, consistent). FIX more, RETURN less (C1): dag/nodes/sec-proper-base-change/lem-weil-pbc-etale-fibre-specialization-bound.json: proof[1].text/uses and proof_deps: added the citation of the existing leaf lem-weil-pbc-etale-scheme-base-change (02GO) for the etaleness of the fibre X_y -> Spec kappa(y) and the sentence that X_y is finite hence affine, needed to apply lem-weil-pbc-etale-algebra-over-field-product. Note: the report lists a citations.json that is not in the commit. Start Sat Oct 10 03:54:25 PM UTC 2026, end Sat Oct 10 03:55:15 PM UTC 2026.; 1 file(s) fixed by the reviewer"
  }
 }

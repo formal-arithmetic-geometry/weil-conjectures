@@ -1876,3 +1876,5 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 15:55 L: merged deliver/C1/lem-weil-pbc-sections-base-field-extension (reviewer FIX; after a return; new nodes: 2)
 - 15:55 L: returned deliver/G1/lem-sc-noetherian-topological-cohomology-vanishing (reviewer RETURN: 1. D1/D2: item step 1 and new node lem-sc-noetherian-cohomology-dimension-induction-step: the whole theorem is moved int)
 - 15:55 L: merged deliver/M1/lem-sc-p1-graded-nakayama-free (reviewer FIX; first push; new nodes: 2)
+- 15:55 L: K1 re-push of merged lem-sc-conductor-ideal-restriction deleted again (third push), notice
+- 15:55 L: merged deliver/H1/lem-weil-pbc-etale-fibre-specialization-bound (reviewer FIX; after a return; new nodes: 0)
