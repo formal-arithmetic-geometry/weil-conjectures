@@ -5,7 +5,7 @@
  "statement": "Let $(B_i)_{i\\ge1}$ be an inverse system of abelian groups [def-weil-inverse-system], with composite transition homomorphisms $B_k\\to B_i$ for $k\\ge i$. The system is *essentially constant* (with *value* $X$) if there are an abelian group $X$ with homomorphisms $\\pi_i:X\\to B_i$ compatible with the transition maps ($B_{i+1}\\to B_i$ composed with $\\pi_{i+1}$ is $\\pi_i$), an index $i_0\\ge1$ and a homomorphism $r:B_{i_0}\\to X$ such that (a) $r\\circ\\pi_{i_0}=\\mathrm{id}_X$, and (b) for every $j\\ge1$ there is $k\\ge\\max(i_0,j)$ such that the transition map $B_k\\to B_j$ equals the composite $\\pi_j\\circ r\\circ(B_k\\to B_{i_0})$.",
  "source": {
   "document": "literature/stacks-project/categories.tex",
-  "place": "Categories, Definition Tag 05PU (definition-essentially-constant-diagram, categories.tex line 2928), part (2) (cofiltered index category, a cone (X, X -> M_i)), specialized to the index category (Z_{>=1}, >=) of an inverse system and the category of abelian groups (morphisms k -> i and k -> j exist iff k >= max(i, j)); used in Homology, Lemmas 070C, 070D, 070E. Tag verified in tags/tags: 05PU,categories-definition-essentially-constant-diagram"
+  "place": "Categories, Definition Tag 05PU (definition-essentially-constant-diagram, categories.tex line 2928), part (2) (cofiltered index category, a cone (X, X -> M_i), an index i and M_i -> X with (a) X -> M_i -> X = id_X and (b) for all j some k with morphisms k -> i, k -> j and M_k -> M_j = M_k -> M_i -> X -> M_j), and Definition Tag 05PV (definition-essentially-constant-system, categories.tex line 2971: an inverse system is essentially constant if it is so as a diagram over I^opp), specialized to the index category (Z_{>=1}, >=) of an inverse system and the category of abelian groups (morphisms k -> i and k -> j exist, and are unique, iff k >= max(i, j)); used in Homology, Lemmas 070C, 070D, 070E. Tags verified in tags/tags: 05PU,categories-definition-essentially-constant-diagram; 05PV,categories-definition-essentially-constant-system"
  },
  "stmt_deps": [
   "def-weil-inverse-system"
@@ -41,10 +41,45 @@
    "results": "none (index: unavailable, so not a proof of absence; the grep above covers it)",
    "date": "2026-10-10",
    "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "essentially constant pro-object: cofiltered diagram with a cone X and a retraction M_i → X such that transition maps factor through X",
+   "results": "CategoryTheory.IsCofiltered.IsEventuallyConstant (+ .mk, .exists_isEventuallyConstantTo), Functor.IsEventuallyConstantTo.cone, Functor.IsEventuallyConstantFrom.isColimitCocone (Mathlib.CategoryTheory.Limits.Constructions.EventuallyConstant), IsCofiltered.cone (Mathlib.CategoryTheory.Filtered.Basic), Limits.constCone, constCocone (Mathlib.CategoryTheory.Limits.Connected)",
+   "date": "2026-10-10",
+   "verdict": "no match: IsCofiltered.IsEventuallyConstant (EventuallyConstant.lean:278) asks that every F.map f into some j be an isomorphism, strictly stronger (see the grep entry)"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "inverse system essentially constant: a cone from X, an index i0 and a retraction B_{i0} → X such that every transition map B_k → B_j factors through X",
+   "results": "Functor.IsEventuallyConstantTo.cone, .isLimitCone, .coneπApp, .cone_pt, .cone_π_app, IsCofiltered.IsEventuallyConstant (Mathlib.CategoryTheory.Limits.Constructions.EventuallyConstant), InverseSystem.limit (Mathlib.Order.DirectedInverseSystem)",
+   "date": "2026-10-10",
+   "verdict": "no match (only the eventually-isomorphic notion)"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"EssentiallyConstant\"",
+   "results": "none",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rn -i 'EssentiallyConstant\\|essentially constant\\|essentially_constant\\|IsEventuallyConstant\\|ProObject\\|IsProConstant' and grep -rln -i 'pro-object\\|ProObject\\|procategory' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib --include=*.lean; sed -n 30,60p and 270,300p CategoryTheory/Limits/Constructions/EventuallyConstant.lean",
+   "results": "Functor.IsEventuallyConstantTo (EventuallyConstant.lean:38, def: ∀ f : i ⟶ j, IsIso (F.map f)), IsEventuallyConstantFrom (:44), IsCofiltered.IsEventuallyConstant (:278, class: ∃ j, F.IsEventuallyConstantTo j), IsFiltered.IsEventuallyConstant (:291); uses in Subobject/NoetherianObject.lean, ArtinianObject.lean, Algebra/Homology/HomologicalComplexLimitsEventuallyConstant.lean, Factorizations/CM5a.lean ('essentially constant' there only in a comment, line 45); no pro-category in Mathlib (only CategoryTheory/Galois/Prorepresentability.lean, pro-representable functors, unrelated); CategoryTheory.Retract (Retract.lean:28) is only the retract notion",
+   "date": "2026-10-10",
+   "verdict": "no match: IsCofiltered.IsEventuallyConstant implies essentially constant with value F(j) (by EventuallyConstant's limit cone), but not conversely: the system Z <- Z <- ... with all transition maps 0 is essentially constant with value 0 (i_0 = 1, r = 0, k = j+1) while no transition map B_k -> B_j (k > j) is an isomorphism; and Stacks' example Z^2 -> Z^2 with (a,b) -> (a+b,0) (categories.tex after 05PV). Not a mathlib_candidate: the notions are not equivalent"
+  },
+  {
+   "tool": "local_search",
+   "query": "IsEssentiallyConstant (project ~/weil-conjectures-slopmaster2)",
+   "results": "none (index: unavailable, so not a proof of absence; the grep above covers it)",
+   "date": "2026-10-10",
+   "verdict": "no match"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "worker",
@@ -64,5 +99,17 @@
   }
  },
  "chapter": "sec-proper-base-change",
- "unit": "sk-thm-p1"
+ "unit": "sk-thm-p1",
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "def-weil-pbc-essentially-constant-system",
+  "worker": "stage1",
+  "summary": "Read Categories 05PU (2) and 05PV (categories.tex 2911--2980) and the two citers' sources (Homology 070C, 070D, 070E, homology.tex 7733--7866). The statement is kept unchanged: for the index category (Z_{>=1}, >=) the morphisms k -> i_0 and k -> j of 05PU (2)(b) exist (uniquely) iff k >= max(i_0, j), the cone condition of 05PU is compatibility with the maps B_{i+1} -> B_i (equivalent to compatibility with all composites B_k -> B_i, by def-weil-inverse-system), and (a), (b) are 05PU (2)(a), (b) with M_k -> M_i -> X -> M_j written pi_j o r o (B_k -> B_{i_0}); 05PV only says an inverse system is essentially constant when its diagram over I^opp is. Both citers use exactly this notion as a hypothesis (070E inline text agrees word for word; 070D uses it through 070C, whose proof uses the same factorisation for j >= i). The statement is self-contained; its only notion besides abelian groups and homomorphisms is the inverse system with its composite transition maps, which def-weil-inverse-system defines (stmt_deps kept). Source place extended by 05PV. Mathlib: no counterpart; the nearest, IsCofiltered.IsEventuallyConstant / Functor.IsEventuallyConstantTo (Limits/Constructions/EventuallyConstant.lean:278, :38), is strictly stronger (counterexample in the grep search entry), so no mathlib_match or mathlib_candidate. Searches added: LeanSearch, LeanFinder, Loogle, grep, local_search."
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "result": "accepted",
+  "note": "definition checked against Categories 05PU (2) / 05PV specialized to inverse systems of abelian groups: cone, retraction at i_0, factorization of B_k -> B_j through X for k >= max(i_0, j). No Mathlib counterpart (IsEventuallyConstant is strictly stronger: zero transition maps on Z are essentially constant with value 0 but never eventually constant). Status split. Note for the split of lem-weil-pbc-exact-sequence-ml: Stacks 070C takes the value to be the limit (0G2V), which has no node."
+ }
 }
