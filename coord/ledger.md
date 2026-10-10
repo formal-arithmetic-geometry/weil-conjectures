@@ -1717,3 +1717,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 15:05 L: merged deliver/E1/lem-sc-group-cd-one (reviewer PASS; after a return; new nodes: 3)
 - 15:05 L: merged deliver/J1/lem-sc-function-field-cd-one (reviewer FIX; after a return; new nodes: 3)
 - 15:05 L: returned deliver/E1/lem-pc-grothendieck-edge-cocycle (reviewer RETURN: 1. D1/D3 + C4: step 2 carries the whole content of the item (the left edge map equals the cocycle map H^n(G(F(I^.))) -> )
+- 15:06 L: merged deliver/C1/lem-sc-generic-vanishing-acyclic (reviewer FIX; first push; new nodes: 1)

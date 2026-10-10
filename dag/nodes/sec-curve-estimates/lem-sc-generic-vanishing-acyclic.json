@@ -25,9 +25,60 @@
   "def-pc-integral-scheme",
   "def-weil-pbc-etale-site"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "For every nonempty affine open U, form the kernel K_U of the adjunction unit G \\to j_{U*}j_U^{-1}G. Compatibility of the units for nested affine opens gives the transition maps, and the generic-vanishing covering hypothesis makes the canonical map from the filtered colimit of the K_U to G both monic and locally surjective; hence it is an isomorphism.",
+   "uses": [
+    "lem-sc-generic-vanishing-kernel-colimit"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-curve-estimates/sk-prop-cd/lem-sc-generic-cohomology-comparison.md",
+    "place": "## Proof, acyclicity sentence; Lean GenericComparison.lean:164-211"
+   }
+  },
+  {
+   "text": "For each U, the inverse image of K_U on U is zero: after pulling the unit back along j_U, the left triangle identity makes the resulting map an isomorphism, so its kernel is zero. The complement of U in the integral curve is a finite set of closed points with separably closed residue fields. Therefore the finite-support acyclicity lemma applies to K_U and gives H^q(C,K_U)=0 for every q>0.",
+   "uses": [
+    "lem-sc-finite-support-acyclic"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-curve-estimates/sk-prop-cd/lem-sc-zero-generic-acyclic.md",
+    "place": "## Proof, finite-support argument; Lean GenericComparison.lean:211-232"
+   }
+  },
+  {
+   "text": "The curve C is quasi-compact and quasi-separated, so filtered colimits of abelian etale sheaves commute with H^q(C,-). Applying the canonical colimit isomorphism from the first step gives H^q(C,G) as the filtered colimit of the groups H^q(C,K_U).",
+   "uses": [
+    "lem-weil-pbc-cohomology-filtered-colimit"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Lemma 03Q5 (filtered colimits and etale cohomology), as used for the curve in the Lean proof"
+   }
+  },
+  {
+   "text": "Every group in that filtered colimit is zero in positive degree by the second step, so the colimit is zero. Hence H^q(C,G)=0 for every q>0.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-curve-estimates/sk-prop-cd/lem-sc-generic-cohomology-comparison.md",
+    "place": "## Proof, acyclicity conclusion"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sc-generic-vanishing-kernel-colimit",
+  "lem-sc-finite-support-acyclic",
+  "lem-weil-pbc-cohomology-filtered-colimit"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Lemma 0F1F (generic-vanishing/finite-support argument), together with GenericComparison.lean:164-232"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -59,10 +110,38 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-sc-generic-cohomology-comparison"
  },
  "chapter": "sec-curve-estimates",
- "unit": "sk-prop-cd"
+ "unit": "sk-prop-cd",
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "lem-sc-generic-vanishing-acyclic",
+  "worker": "stage1",
+  "summary": "Split the acyclicity argument into the filtered-colimit-of-affine-kernels construction, finite-support acyclicity of each kernel, filtered-colimit compatibility of etale cohomology, and the final zero-colimit conclusion. The statement and hypotheses were checked against AlgebraicGeometry.IsCurve.subsingleton_H_of_genericVanishing in GenericComparison.lean:140-232; no torsion hypothesis was added.",
+  "blueprint": "The first step realizes the blueprint sentence that a generically vanishing sheaf is the filtered union of kernels of the affine-open units; the second realizes the finite-support argument in the acyclicity sentence; the third and fourth realize passage to cohomology and the vanishing conclusion.",
+  "tool_uses": [
+   {
+    "node": "lem-sc-finite-support-acyclic",
+    "why": "Step 2 uses the finite-support acyclicity theorem as the black-box calculation for each affine-open kernel."
+   },
+   {
+    "node": "lem-weil-pbc-cohomology-filtered-colimit",
+    "why": "Step 3 uses the general filtered-colimit theorem to commute curve etale cohomology with the kernel diagram."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-cohomology-filtered-colimit"
+ ],
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-gva",
+  "group": "C1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-gva (reviewer sub-agent of L); spot-checked: Source: the item follows AlgebraicGeometry.IsCurve.subsingleton_H_of_genericVanishing (GenericComparison.lean:140-232, read in full; transitively sorried via Scheme.H_map_isColimit_of_isFiltered, so not attachable) and the blueprint lem-sc-generic-cohomology-comparison proof; statement unchanged, hypotheses (alg. closed k, integral curve, sieve condition hG, no torsion) agree with the Lean theorem. Step 1 carried by new node lem-sc-generic-vanishing-kernel-colimit (matches Lean K, Dg over NonemptyAffineOpens^op, cG, phi mono+locally surjective). Step 2 by lem-sc-finite-support-acyclic (unit sk-prop-cd): j_U^{-1}K_U=0 by triangle identity + counit iso for an open immersion; complement of a nonempty open in an integral curve over alg. closed k is finitely many closed points with residue field k (Stacks 0F1F = etale-cohomology-lemma-supported-in-closed-points). Step 3 by lem-weil-pbc-cohomology-filtered-colimit (Stacks 03Q5), C qcqs since separated of finite type over k. Step 4 elementary. Small cases: C a point (U=C, K_U=0); constant nonzero sheaf fails the hypothesis. Tool uses: lem-weil-pbc-cohomology-filtered-colimit (sk-prop-h2) accepted as generic tool; lem-sc-finite-support-acyclic dropped from tool_uses since it is in the item's own unit. Fixes: dag/nodes/sec-curve-estimates/lem-sc-generic-vanishing-kernel-colimit.json: statement: 'filtered category under inclusion' corrected to reverse inclusion with explicit transition inclusions K_U subset K_V for V subset U (the Lean diagram is over NonemptyAffineOpens^op); lean_audit and merged_into added per template (created left as delivered: the tool refuses a change of created; it lacks by/date). Start Sat Oct 10 03:04:50 PM UTC 2026, end Sat Oct 10 03:05:46 PM UTC 2026.; 1 file(s) fixed by the reviewer"
+ }
 }

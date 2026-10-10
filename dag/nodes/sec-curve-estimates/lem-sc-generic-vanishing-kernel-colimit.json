@@ -1,0 +1,71 @@
+{
+ "id": "lem-sc-generic-vanishing-kernel-colimit",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-generic-cohomology-comparison",
+   "place": "## Proof, acyclicity sentence: the generically vanishing sheaf is the filtered colimit of the kernels of the affine-open units.",
+   "via": []
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Generic-vanishing sheaves are filtered colimits of affine-open kernels",
+ "statement": "Let $k$ be an algebraically closed field and let $C$ be an integral [def-pc-integral-scheme] curve over $k$ [def-sc-curves]. Let $G$ be an abelian sheaf on $C_{\\Et}$ [def-weil-pbc-abelian-etale-sheaves]. For each nonempty affine open $U\\subset C$, let $j_U:U\\to C$ be the inclusion, let $u_U:G\\to j_{U*}j_U^{-1}G$ be the adjunction unit [def-weil-pbc-inverse-image] [def-weil-pbc-direct-image], and put $K_U=\\ker(u_U)$ [def-pur-abelian-sheaf-kernel]. Order the nonempty affine opens by reverse inclusion; this is a filtered poset since $C$ is irreducible. For nonempty affine opens $V\\subseteq U$ the unit $u_V$ factors through $u_U$, so $K_U\\subseteq K_V$, and these inclusions form a filtered diagram $(K_U)$. If every section of $G$ is, after an etale covering in $C_{\\Et}$ [def-weil-pbc-etale-site], killed by some $u_U$ (with $U$ allowed to depend on the covering member), then the canonical morphism $\\varinjlim_U K_U\\to G$ is an isomorphism in the category of abelian etale sheaves on $C$ [def-weil-pbc-category-colimit].",
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-curve-estimates/sk-prop-cd/lem-sc-generic-cohomology-comparison.md",
+  "place": "## Proof, acyclicity sentence; precise Lean construction in WeilConjectures/AlgebraicGeometry/Curve/GenericComparison.lean, lines 164-211"
+ },
+ "stmt_deps": [
+  "def-sc-curves",
+  "def-pc-integral-scheme",
+  "def-weil-pbc-abelian-etale-sheaves",
+  "def-weil-pbc-inverse-image",
+  "def-weil-pbc-direct-image",
+  "def-weil-pbc-etale-site",
+  "def-pur-abelian-sheaf-kernel",
+  "def-weil-pbc-category-colimit"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "filtered colimit of kernels of restriction-to-affine-open adjunction units for an etale sheaf",
+   "results": "No declaration for generic-vanishing sheaves or affine-open kernel colimits; only general colimit and kernel API results.",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.colimit.desc kernel adjunction Sheaf",
+   "results": "General CategoryTheory kernel/colimit declarations and Sheaf.H results; no theorem asserting this generic-vanishing colimit.",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "rg -n 'genericVanishingSieve|affineOpenUnit|colimit.*kernel|kernel.*affineOpen' Mathlib/AlgebraicGeometry Mathlib/CategoryTheory/Sites",
+   "results": "No matching theorem in Mathlib; the construction occurs only in WeilConjectures/AlgebraicGeometry/Curve/GenericComparison.lean:164-211.",
+   "date": "2026-10-10",
+   "verdict": "no match in local Mathlib source"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "chapter": "sec-curve-estimates",
+ "unit": "sk-prop-cd",
+ "created": {
+  "item": "lem-sc-generic-vanishing-acyclic"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "merged_into": null
+}
