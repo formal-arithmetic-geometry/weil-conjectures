@@ -1,0 +1,85 @@
+{
+ "id": "lem-weil-pbc-colimit-eventually-flat",
+ "kind": "statement",
+ "title": "A flat colimit of finite modules over Noetherian local stages is flat at some stage",
+ "statement": "Let $(\\Lambda,\\le)$ be a nonempty directed set. Suppose given, for every $\\lambda\\in\\Lambda$, Noetherian local rings [def-weil-pbc-noetherian-ring] $(A_\\lambda,\\mathfrak m_\\lambda)$ and $B_\\lambda$, a local homomorphism $A_\\lambda\\to B_\\lambda$ (it maps $\\mathfrak m_\\lambda$ into the maximal ideal of $B_\\lambda$) and a finitely generated $B_\\lambda$-module $N_\\lambda$ [def-weil-finitely-generated-module]; and, for $\\lambda\\le\\mu$, local homomorphisms $A_\\lambda\\to A_\\mu$ and $B_\\lambda\\to B_\\mu$ commuting with $A_\\lambda\\to B_\\lambda$ and $A_\\mu\\to B_\\mu$, and an additive map $N_\\lambda\\to N_\\mu$, $x\\mapsto\\bar x$, with $\\overline{bx}=\\bar b\\,\\bar x$ for $b\\in B_\\lambda$; all transition maps equal to the identity for $\\lambda=\\mu$ and compatible with composition. Let $A$ and $B$ be the colimits [def-weil-pbc-category-colimit] of the rings $A_\\lambda$ and $B_\\lambda$ in the category of commutative rings, with the induced ring map $A\\to B$, and let $N$ be the colimit of the abelian groups $N_\\lambda$, a $B$-module by $\\bar b\\,\\bar x=\\overline{bx}$ (and an $A$-module through $A\\to B$). Assume that for all $\\lambda\\le\\mu$: (a) the ring map $B_\\lambda\\otimes_{A_\\lambda}A_\\mu\\to B_\\mu$, $b\\otimes a\\mapsto\\bar b\\,\\bar a$, is a localization of $B_\\lambda\\otimes_{A_\\lambda}A_\\mu$ at some multiplicative subset (a ring map $C\\to D$ is a *localization of $C$ at* a multiplicative subset $W\\subseteq C$ if every element of $W$ maps to a unit of $D$, every element of $D$ is the image of $c$ times the inverse of the image of $w$ for some $c\\in C$, $w\\in W$, and $c\\mapsto0$ implies $wc=0$ for some $w\\in W$); (b) the map $N_\\lambda\\otimes_{B_\\lambda}B_\\mu\\to N_\\mu$, $x\\otimes b\\mapsto b\\,\\bar x$, is an isomorphism. If $N$ is a flat $A$-module [def-weil-pbc-flat-ring-map], then there is $\\lambda\\in\\Lambda$ such that $N_\\lambda$ is a flat $A_\\lambda$-module.",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Algebra, Lemma Tag 00R6 (lemma-colimit-eventually-flat, line 32723), for a system 'as in' Lemma Tag 00QX (lemma-limit-module-essentially-finite-presentation, line 32427). Stated with the hypotheses that the proof of 00R6 uses: Noetherian local stages in place of 00QX (2), (3) (essentially of finite type over Z, resp. over A_lambda, which give Noetherian by Lemma Tag 00FN), and 'a localization' in place of 00QX (5) 'the localization at a prime ideal', since the lemma the proof applies, Tag 00MO (lemma-another-variant-local-criterion-flatness, line 23921), asks only that the target be a localization of the tensor product and that the diagram consist of local homomorphisms of Noetherian local rings. The proof of 00R6 uses Remark Tag 00M6 (Tor_1^R(M,R/I) = Ker(I (x)_R M -> M)), the commutation of tensor products with colimits, and Lemma 00MO."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-noetherian-ring",
+  "def-weil-finitely-generated-module",
+  "def-weil-pbc-category-colimit",
+  "def-weil-pbc-flat-ring-map"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "module flat over a directed colimit of rings is flat over some stage of the system, finitely presented module, flatness descends to a finite stage",
+   "results": "Module.Flat.of_flat_tensorProduct (Mathlib.RingTheory.Flat.FaithfullyFlat.Basic), Module.Flat.of_forall_exists_factorization (Mathlib.RingTheory.Flat.EquationalCriterion), Module.FaithfullyFlat.toFlat, Module.Flat, Module.Flat.mk (Mathlib.RingTheory.Flat.Basic), Module.Flat.of_isLocalizedModule (Mathlib.RingTheory.Flat.Stability), RingHom.Flat, Module.flat_of_isLocalized_span (Mathlib.RingTheory.Flat.Localization): no descent of flatness to a stage of a colimit",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "If M is flat over the colimit ring R = colim R_i and M comes from a finite module M_i over a Noetherian stage, then M_j is flat over R_j for some j",
+   "results": "AdicCompletion.flat_of_isNoetherian (Mathlib.RingTheory.AdicCompletion.AsTensorProduct), Algebra.FormallySmooth.flat_of_algHom_of_isNoetherianRing, Algebra.Smooth.flat_of_isNoetherianRing (Mathlib.RingTheory.Smooth.Flat), Module.flat_iff (Mathlib.RingTheory.Flat.Basic), Module.Flat.iff_lift_lsmul_comp_subtype_injective (Mathlib.RingTheory.Flat.Tensor)",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "Module.Flat, Ring.DirectLimit",
+   "results": "no results",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "Module.Flat, CategoryTheory.Limits.IsColimit",
+   "results": "no results",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rnE 'theorem .*(flat.*(colimit|directLimit|DirectLimit)|(colimit|DirectLimit|directLimit).*[Ff]lat)' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/RingTheory Mathlib/Algebra; ls Mathlib/RingTheory/Flat/",
+   "results": "no theorem; RingTheory/Flat/ has Basic, CategoryTheory, Domain, Equalizer, EquationalCriterion, FaithfullyFlat, IsBaseChange, Localization, LocallyFree, Rank, Stability, Tensor, TorsionFree: no local criterion of flatness and no colimit statement",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "local_search",
+   "query": "Module.Flat.of_directLimit (project root ~/weil-conjectures-slopmaster2)",
+   "results": "none; index: unavailable (so not a proof of absence)",
+   "date": "2026-10-10",
+   "verdict": "no match (not conclusive)"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-criterion-flatness-fibre",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1"
+}

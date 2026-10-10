@@ -61,3 +61,6 @@ Its conclusion says K is maximal Cohen-Macaulay, but its proof ("immediate from 
 
 ## Resolved: the gap in Stacks 00NG (K maximal Cohen-Macaulay) — 2026-10-10 05:52 UTC
 The split of lem-weil-pbc-cm-local-free-resolution-to-mcm proves K != 0 directly (a nonzero finite module of depth < d is not free, so each syzygy is nonzero, and 00LX (2), (3) give depth K_1 = depth N + 1 exactly). So the conclusion of 00NG holds as stated; only its proof's citation of 00NE is short. No action needed.
+
+## Source gaps: Stacks 00R7 (critere de platitude par fibres) — 2026-10-10 06:03 UTC
+Its last sentence says S = S_lambda (x)_{R_lambda} R and M = M_lambda (x)_{S_lambda} S; these are only localizations (counterexample found by the opus worker: R_lambda = Z_(p), S_lambda = Z_(p)[x]_(p,x), R = Z_(p)[t]_(p,t): 1 + xt is a unit of S but not of S_lambda (x) R). And 00R6 gives flatness at some stage, while 00R7 needs both flatness conditions at one stage; the persistence to larger stages is not argued. The split of lem-weil-pbc-criterion-flatness-fibre proves both (Claim P: flatness passes along base change followed by a localization), so the lemma holds as stated. No action needed.
