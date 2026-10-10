@@ -34,7 +34,7 @@ variable {M : Type*} [AddCommGroup M] [Module R M] {n : ℕ} (ξ : Fin n → Mod
   (m : Fin n → M) (h : ∀ q, ∑ j, ξ j q • m j = q)
 include h
 
-private lemma contractLeft_zig (q : M) :
+private lemma contractLeft_zig' (q : M) :
     LinearMap.lTensor M (contractLeft R M)
       (TensorProduct.assoc R M (Module.Dual R M) M ((∑ j, m j ⊗ₜ[R] ξ j) ⊗ₜ[R] q)) =
       q ⊗ₜ[R] (1 : R) := by
@@ -44,7 +44,16 @@ private lemma contractLeft_zig (q : M) :
   refine Finset.sum_congr rfl fun j _ ↦ ?_
   rw [smul_tmul, smul_eq_mul, mul_one]
 
-private lemma contractLeft_zag (φ : Module.Dual R M) :
+private lemma contractLeft_zig :
+    (contractLeft R M).lTensor M ∘ₗ (TensorProduct.assoc R _ _ _).toLinearMap ∘ₗ
+      (LinearMap.toSpanSingleton R _ (∑ j, m j ⊗ₜ[R] ξ j)).rTensor M =
+      (TensorProduct.rid R M).symm.toLinearMap ∘ₗ (TensorProduct.lid R M).toLinearMap := by
+  refine TensorProduct.ext' fun r q ↦ ?_
+  simp only [LinearMap.coe_comp, Function.comp_apply, LinearEquiv.coe_coe,
+    LinearMap.rTensor_tmul, LinearMap.toSpanSingleton_apply, TensorProduct.lid_tmul,
+    TensorProduct.rid_symm_apply, ← smul_tmul', map_smul, contractLeft_zig' ξ m h q]
+
+private lemma contractLeft_zag' (φ : Module.Dual R M) :
     LinearMap.rTensor (Module.Dual R M) (contractLeft R M)
       ((TensorProduct.assoc R (Module.Dual R M) M (Module.Dual R M)).symm
         (φ ⊗ₜ[R] ∑ j, m j ⊗ₜ[R] ξ j)) = (1 : R) ⊗ₜ[R] φ := by
@@ -59,6 +68,16 @@ private lemma contractLeft_zag (φ : Module.Dual R M) :
   conv_rhs => rw [← hφ, tmul_sum]
   refine Finset.sum_congr rfl fun j _ ↦ ?_
   rw [← smul_tmul, smul_eq_mul, mul_one]
+private lemma contractLeft_zag :
+    (contractLeft R M).rTensor (Module.Dual R M) ∘ₗ
+      (TensorProduct.assoc R _ _ _).symm.toLinearMap ∘ₗ
+        (LinearMap.toSpanSingleton R _ (∑ j, m j ⊗ₜ[R] ξ j)).lTensor (Module.Dual R M) =
+      (TensorProduct.lid R _).symm.toLinearMap ∘ₗ (TensorProduct.rid R _).toLinearMap := by
+  refine TensorProduct.ext' fun φ r ↦ ?_
+  simp only [LinearMap.coe_comp, Function.comp_apply, LinearEquiv.coe_coe,
+    LinearMap.lTensor_tmul, LinearMap.toSpanSingleton_apply, TensorProduct.rid_tmul,
+    TensorProduct.lid_symm_apply, tmul_smul, map_smul, contractLeft_zag' ξ m h φ]
+
 
 end
 
@@ -72,34 +91,16 @@ theorem isDualizable_of_projective (Q : ModuleCat.{u} R) [Module.Finite R Q]
       LinearMap.id_apply] at this
     refine Eq.trans (Finset.sum_congr rfl fun j _ ↦ ?_) this
     rw [← map_smul, smul_eq_mul, mul_one]
-  let t : Q ⊗ ModuleCat.of R (Module.Dual R Q) :=
-    ∑ j, (m j).hom 1 ⊗ₜ[R] (show Module.Dual R Q from (ξ j).hom)
   refine ⟨{ rightDual := ModuleCat.of R (Module.Dual R Q)
-            exact := { coevaluation' := ofHom (LinearMap.toSpanSingleton R _ t)
+            exact := { coevaluation' := ofHom (LinearMap.toSpanSingleton R
+                         (Q ⊗[R] Module.Dual R Q)
+                         (∑ j, (m j).hom 1 ⊗ₜ[R] (ξ j).hom))
                        evaluation' := ofHom (contractLeft R Q)
                        coevaluation_evaluation' := ?_
                        evaluation_coevaluation' := ?_ } }⟩
-  · apply MonoidalCategory.tensor_ext
-    intro φ r
-    have := contractLeft_zag (fun j ↦ (ξ j).hom) (fun j ↦ (m j).hom 1) h' φ
-    simp only [t, hom_comp, LinearMap.comp_apply, hom_whiskerLeft, hom_inv_associator,
-      hom_whiskerRight, hom_ofHom, hom_inv_leftUnitor, hom_hom_rightUnitor]
-    rw [LinearMap.lTensor_tmul]
-    erw [LinearMap.toSpanSingleton_apply]
-    erw [tmul_smul]
-    rw [LinearEquiv.coe_coe, map_smul, map_smul, this]
-    erw [TensorProduct.rid_tmul]
-    rw [LinearEquiv.coe_coe, TensorProduct.lid_symm_apply, tmul_smul]
-  · apply MonoidalCategory.tensor_ext
-    intro r q
-    have := contractLeft_zig (fun j ↦ (ξ j).hom) (fun j ↦ (m j).hom 1) h' q
-    simp only [t, hom_comp, LinearMap.comp_apply, hom_whiskerLeft, hom_hom_associator,
-      hom_whiskerRight, hom_ofHom, hom_hom_leftUnitor, hom_inv_rightUnitor]
-    rw [LinearMap.rTensor_tmul]
-    erw [LinearMap.toSpanSingleton_apply]
-    erw [← smul_tmul']
-    rw [LinearEquiv.coe_coe, map_smul, map_smul, this]
-    erw [TensorProduct.lid_tmul]
-    rw [LinearEquiv.coe_coe, TensorProduct.rid_symm_apply, smul_tmul']
+  · ext : 1
+    exact contractLeft_zag (fun j ↦ (ξ j).hom) (fun j ↦ (m j).hom 1) h'
+  · ext : 1
+    exact contractLeft_zig (fun j ↦ (ξ j).hom) (fun j ↦ (m j).hom 1) h'
 
 end ModuleCat

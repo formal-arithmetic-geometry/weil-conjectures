@@ -62,6 +62,19 @@ lemma rightDual_X (n : ℤ) : K.rightDual.X n = (K.X (-n))ᘁ := rfl
 
 lemma rightDual_d (i j : ℤ) : K.rightDual.d i j = j.negOnePow • (K.d (-j) (-i))ᘁ := rfl
 
+lemma rightDual.isZero_X (n : ℤ) (hn : IsZero (K.X (-n))) : IsZero (K.rightDual.X n) := by
+  rw [IsZero.iff_id_eq_zero]
+  change 𝟙 ((K.X (-n))ᘁ) = 0
+  rw [← rightAdjointMate_id, hn.eq_of_src (𝟙 _) 0, rightAdjointMate_zero']
+
+instance rightDual.isStrictlyGE (b : ℤ) [K.IsStrictlyLE b] : K.rightDual.IsStrictlyGE (-b) := by
+  rw [isStrictlyGE_iff]
+  exact fun n hn ↦ rightDual.isZero_X K n (K.isZero_of_isStrictlyLE b (-n) (by omega))
+
+instance rightDual.isStrictlyLE (a : ℤ) [K.IsStrictlyGE a] : K.rightDual.IsStrictlyLE (-a) := by
+  rw [isStrictlyLE_iff]
+  exact fun n hn ↦ rightDual.isZero_X K n (K.isZero_of_isStrictlyGE a (-n) (by omega))
+
 variable [∀ (X₁ X₂ : GradedObject ℤ C), X₁.HasTensor X₂]
   [∀ X₁, PreservesColimit (Functor.empty.{0} C) ((curriedTensor C).obj X₁)]
   [∀ X₂, PreservesColimit (Functor.empty.{0} C) ((curriedTensor C).flip.obj X₂)]
@@ -313,11 +326,6 @@ lemma coev_whiskerRight_comp :
   · rfl
   · exact (isZero_X_of_notMem K a b n hn).eq_of_src _ _
 
-lemma isZero_rightDual_X (n : ℤ) (hn : IsZero (K.X (-n))) : IsZero (K.rightDual.X n) := by
-  rw [IsZero.iff_id_eq_zero]
-  change 𝟙 ((K.X (-n))ᘁ) = 0
-  rw [← rightAdjointMate_id, hn.eq_of_src (𝟙 _) 0, rightAdjointMate_zero']
-
 lemma coevEval_term (n p q k : ℤ) (hpq : p + q = 0) (hk : n + p = k) (hkq : k + q = n) :
     (ρ_ (K.rightDual.X n)).inv ≫ K.rightDual.X n ◁ coevPQ K p q hpq ≫ (α_ _ _ _).inv ≫
       (HomologicalComplex.ιTensorObj K.rightDual K n p k hk ≫ (eval K).f k) ▷ K.rightDual.X q ≫
@@ -368,7 +376,7 @@ lemma whiskerLeft_coev_comp :
   rw [Finset.sum_congr rfl h, Finset.sum_ite_eq']
   split_ifs with hn
   · rfl
-  · exact (isZero_rightDual_X K n (isZero_X_of_notMem K a b (-n) hn)).eq_of_src _ _
+  · exact (rightDual.isZero_X K n (isZero_X_of_notMem K a b (-n) hn)).eq_of_src _ _
 
 end rightDual
 
