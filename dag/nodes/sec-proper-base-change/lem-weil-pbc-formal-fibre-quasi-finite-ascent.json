@@ -14,9 +14,94 @@
   "def-weil-pbc-adic-completion",
   "def-weil-pbc-g-ring"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "(Splitting the completed base change.) Put $S=R'$, $\\mathfrak q_S=\\mathfrak p'$; then $\\varphi^{-1}(\\mathfrak p')=\\mathfrak p$, $R$ is Noetherian, $R'$ is a finitely generated $R$-algebra and $R\\to R'$ is quasi-finite at $\\mathfrak p'$. By [lem-weil-pbc-completion-at-quasi-finite-prime] there are a ring $B$ and a ring map $\\beta$ such that $(\\phi,\\beta):(R_{\\mathfrak p})^\\wedge\\otimes_RR'\\to(R'_{\\mathfrak p'})^\\wedge\\times B$ is a ring isomorphism, where $\\phi(x\\otimes y)=\\hat\\varphi(x)\\iota(y)$ is the natural map. Make $B$ an $R'$-algebra via $y\\mapsto\\beta(1\\otimes y)$ and $(R'_{\\mathfrak p'})^\\wedge$ via the canonical map $\\iota:R'\\to R'_{\\mathfrak p'}\\to(R'_{\\mathfrak p'})^\\wedge$; then $(\\phi,\\beta)$ is an isomorphism of $R'$-algebras, since $\\phi(1\\otimes y)=\\iota(y)$. (Stacks: $R'_{\\mathfrak p'}\\to(R'_{\\mathfrak p'})^\\wedge$ is a factor of a base change of $R_{\\mathfrak p}\\to(R_{\\mathfrak p})^\\wedge$.)",
+   "uses": [
+    "lem-weil-pbc-completion-at-quasi-finite-prime"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "More on Algebra, Lemma Tag 07PP (lemma-G-ring-goes-up-quasi-finite), proof of (1), first display (Algebra Lemma Tag 07NC)"
+   }
+  },
+  {
+   "text": "(Tensoring with $\\kappa(\\mathfrak q')$.) Write $k=\\kappa(\\mathfrak q)$, $k'=\\kappa(\\mathfrak q')$, $F=(R'_{\\mathfrak p'})^\\wedge\\otimes_{R'}k'$ and $B'=B\\otimes_{R'}k'$. Applying $-\\otimes_{R'}k'$ to the $R'$-algebra isomorphism of the previous step, and using that $-\\otimes_{R'}k'$ commutes with finite products ($(X\\times Y)\\otimes_{R'}k'\\cong(X\\otimes_{R'}k')\\times(Y\\otimes_{R'}k')$, the tensor product being additive and the product of two modules their direct sum, compatibly with the multiplications), gives an isomorphism of $k'$-algebras $((R_{\\mathfrak p})^\\wedge\\otimes_RR')\\otimes_{R'}k'\\cong F\\times B'$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "More on Algebra, Lemma Tag 07PP (lemma-G-ring-goes-up-quasi-finite), proof of (1), 'It follows that ... is a factor of'"
+   }
+  },
+  {
+   "text": "(Rewriting the left side.) Since $\\mathfrak q=\\varphi^{-1}(\\mathfrak q')$, $\\varphi$ maps $R\\setminus\\mathfrak q$ into $R'\\setminus\\mathfrak q'$, so it induces a local homomorphism $R_{\\mathfrak q}\\to R'_{\\mathfrak q'}$ and a field map $k\\to k'$ [def-weil-pbc-localization-at-prime], and the structure map $R\\to R'\\to k'$ equals $R\\to k\\to k'$. By [lem-weil-pbc-tensor-cancel-base-change] for $R\\to R'$ with the $R'$-algebra $k'$ and the $R$-algebra $(R_{\\mathfrak p})^\\wedge$ (together with the symmetry $X\\otimes Y\\cong Y\\otimes X$), $((R_{\\mathfrak p})^\\wedge\\otimes_RR')\\otimes_{R'}k'\\cong k'\\otimes_{R'}(R'\\otimes_R(R_{\\mathfrak p})^\\wedge)\\cong k'\\otimes_R(R_{\\mathfrak p})^\\wedge$ as $k'$-algebras; by the same lemma for $R\\to k$ with the $k$-algebra $k'$, $k'\\otimes_k(k\\otimes_R(R_{\\mathfrak p})^\\wedge)\\cong k'\\otimes_R(R_{\\mathfrak p})^\\wedge$ as $k'$-algebras. With $A=(R_{\\mathfrak p})^\\wedge\\otimes_Rk$, the $k$-algebra of the hypothesis, this gives an isomorphism of $k'$-algebras $C:=k'\\otimes_kA\\cong F\\times B'$.",
+   "uses": [
+    "def-weil-pbc-localization-at-prime",
+    "lem-weil-pbc-tensor-cancel-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "More on Algebra, Lemma Tag 07PP (lemma-G-ring-goes-up-quasi-finite), proof of (1), second display $R_\\mathfrak p^\\wedge\\otimes_RR'\\otimes_{R'}\\kappa(\\mathfrak q')=R_\\mathfrak p^\\wedge\\otimes_R\\kappa(\\mathfrak q)\\otimes_{\\kappa(\\mathfrak q)}\\kappa(\\mathfrak q')$"
+   }
+  },
+  {
+   "text": "($k'/k$ is finitely generated.) Let $y_1,\\dots,y_n$ generate $R'$ as an $R$-algebra. Every element of $k'=\\kappa(\\mathfrak q')$ is $\\bar a/\\bar s$ with $a\\in R'$, $s\\in R'\\setminus\\mathfrak q'$ [def-weil-pbc-localization-at-prime], and $a,s$ are polynomials in the $y_i$ with coefficients in $R$, whose images lie in $k$; hence $k'=k(\\bar y_1,\\dots,\\bar y_n)$ is a finitely generated field extension of $k$ [def-pc-field-extension].",
+   "uses": [
+    "def-weil-pbc-localization-at-prime",
+    "def-pc-field-extension"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "More on Algebra, Lemma Tag 07PP (lemma-G-ring-goes-up-quasi-finite), proof of (1) (implicit: needed for the base field extension of Algebra Lemma Tag 0381)"
+   }
+  },
+  {
+   "text": "(Extension of the base field preserves geometric regularity.) By hypothesis $A$ is a Noetherian $k$-algebra, geometrically regular over $k$ [def-weil-pbc-g-ring]. Let $L/k'$ be either $L=k'$ or a finite purely inseparable extension [def-weil-pbc-finite-purely-inseparable-extension]. Then $L\\otimes_{k'}C=L\\otimes_{k'}(k'\\otimes_kA)\\cong L\\otimes_kA$ as $L$-algebras [lem-weil-pbc-tensor-cancel-base-change], and $L$ is a finitely generated field extension of $k$ [def-pc-field-extension] (generated by $\\bar y_1,\\dots,\\bar y_n$ of the previous step and a finite $k'$-basis of $L$). By [lem-weil-pbc-geometrically-regular-finitely-generated-extensions] (Algebra Lemma Tag 0381, (2)$\\Rightarrow$(1)) $L\\otimes_kA$ is Noetherian and regular. With $L=k'$: $C$ is a regular, in particular Noetherian, ring; with $L$ finite purely inseparable: $L\\otimes_{k'}C$ is regular. So $C$ is Noetherian and geometrically regular over $k'$.",
+   "uses": [
+    "def-weil-pbc-g-ring",
+    "def-weil-pbc-finite-purely-inseparable-extension",
+    "lem-weil-pbc-tensor-cancel-base-change",
+    "def-pc-field-extension",
+    "lem-weil-pbc-geometrically-regular-finitely-generated-extensions"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "More on Algebra, Lemma Tag 07PP (lemma-G-ring-goes-up-quasi-finite), proof of (1), last sentence: 'extension of base field preserves geometric regularity, see Algebra, Lemma 0381'"
+   }
+  },
+  {
+   "text": "(Passing to the factor.) Let $L$ be $k'$ or a finite purely inseparable extension of $k'$. By the isomorphism of step 3 and since $L\\otimes_{k'}-$ commutes with finite products, $L\\otimes_{k'}C\\cong(L\\otimes_{k'}F)\\times(L\\otimes_{k'}B')$ as rings, and the latter is regular by the previous step. The projection $\\pi:(L\\otimes_{k'}F)\\times(L\\otimes_{k'}B')\\to L\\otimes_{k'}F$ is a localization at the multiplicative subset $M=\\{(1,1),(1,0)\\}$ in the sense of [lem-weil-pbc-localization-of-regular-ring]: $\\pi(1,0)=1$ is a unit, every element of $L\\otimes_{k'}F$ is $\\pi(f,0)$, and $\\pi(f,b)=0$ means $f=0$, so $(1,0)\\cdot(f,b)=0$. By [lem-weil-pbc-localization-of-regular-ring] $L\\otimes_{k'}F$ is a regular ring. With $L=k'$ this shows that $F$ is Noetherian (and regular); with $L$ finite purely inseparable it shows that $L\\otimes_{k'}F$ is regular. Hence $F=(R'_{\\mathfrak p'})^\\wedge\\otimes_{R'}\\kappa(\\mathfrak q')$ is a Noetherian $\\kappa(\\mathfrak q')$-algebra which is geometrically regular over $\\kappa(\\mathfrak q')$ [def-weil-pbc-g-ring].",
+   "uses": [
+    "lem-weil-pbc-localization-of-regular-ring",
+    "def-weil-pbc-g-ring"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "More on Algebra, Lemma Tag 07PP (lemma-G-ring-goes-up-quasi-finite), proof of (1), 'is a factor of ... Thus the result follows'"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-completion-at-quasi-finite-prime",
+  "def-weil-pbc-localization-at-prime",
+  "lem-weil-pbc-tensor-cancel-base-change",
+  "def-pc-field-extension",
+  "def-weil-pbc-g-ring",
+  "def-weil-pbc-finite-purely-inseparable-extension",
+  "lem-weil-pbc-geometrically-regular-finitely-generated-extensions",
+  "lem-weil-pbc-localization-of-regular-ring"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "More on Algebra, Lemma Tag 07PP (lemma-G-ring-goes-up-quasi-finite), proof of (1), using Algebra Lemmas Tag 07NC and 0381"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -41,7 +126,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "worker",
@@ -61,5 +146,17 @@
   }
  },
  "chapter": "sec-proper-base-change",
- "unit": "sk-thm-p1"
+ "unit": "sk-thm-p1",
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "lem-weil-pbc-formal-fibre-quasi-finite-ascent",
+  "worker": "stage1",
+  "summary": "Checked the statement against Stacks 07PP(1) (agrees; q, p are the contractions of q', p'). Proof follows the Stacks proof of (1) in six steps: the 07NC splitting R_p^ (x)_R R' = (R'_{p'})^ x B (new unsplit node lem-weil-pbc-completion-at-quasi-finite-prime, stated with the natural first projection as in the 'sanity check' of the Stacks proof, so the splitting is one of R'-algebras), tensoring with kappa(q') (finite products, elementary), rewriting the left side as kappa(q') (x)_{kappa(q)} (R_p^ (x)_R kappa(q)) by lem-weil-pbc-tensor-cancel-base-change twice, kappa(q')/kappa(q) finitely generated (elementary), base field extension preserves geometric regularity written out from lem-weil-pbc-geometrically-regular-finitely-generated-extensions (Stacks cites Algebra 0381 for this), and passage to the factor written out via the factor being a localization at the idempotent (lem-weil-pbc-localization-of-regular-ring). Mathlib searches of the item (three kinds, 2026-10-10) kept: no match."
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "result": "accepted",
+  "note": "6 steps follow Stacks 07PP(1): 07NC splitting (new unsplit node; its statement adds that the first projection is the natural map, which Stacks proves in its closing remark), tensor with kappa(q'), cancel base change, kappa(q')/kappa(q) finitely generated, 0381 node for the field extension, factor of a regular ring regular via the localization node. Tags 07PP, 07NC, 0381, 00QB verified."
+ }
 }

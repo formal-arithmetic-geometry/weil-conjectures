@@ -1,0 +1,71 @@
+{
+ "id": "lem-weil-pbc-completion-at-quasi-finite-prime",
+ "kind": "statement",
+ "title": "Completion at a quasi-finite prime is a direct factor of the completed base change",
+ "statement": "Let $\\varphi:R\\to S$ be a ring map where $R$ is a Noetherian ring [def-weil-pbc-noetherian-ring] and $S$ is a finitely generated $R$-algebra. Let $\\mathfrak q\\subset S$ be a prime ideal and $\\mathfrak p=\\varphi^{-1}(\\mathfrak q)$, and assume that $R\\to S$ is quasi-finite at $\\mathfrak q$ in the sense of [pqf-def-quasifinite] (affine case, Stacks Algebra Definition 00PL). Let $R_{\\mathfrak p}$, $S_{\\mathfrak q}$ be the localizations [def-weil-pbc-localization-at-prime] and $(R_{\\mathfrak p})^\\wedge=\\varprojlim_nR_{\\mathfrak p}/\\mathfrak p^nR_{\\mathfrak p}$, $(S_{\\mathfrak q})^\\wedge=\\varprojlim_nS_{\\mathfrak q}/\\mathfrak q^nS_{\\mathfrak q}$ their completions [def-weil-pbc-adic-completion]. Let $\\phi:(R_{\\mathfrak p})^\\wedge\\otimes_RS\\to(S_{\\mathfrak q})^\\wedge$ be the natural ring map $x\\otimes y\\mapsto\\hat\\varphi(x)\\cdot\\iota(y)$, where $\\hat\\varphi:(R_{\\mathfrak p})^\\wedge\\to(S_{\\mathfrak q})^\\wedge$ is induced by the local homomorphism $R_{\\mathfrak p}\\to S_{\\mathfrak q}$ and $\\iota:S\\to S_{\\mathfrak q}\\to(S_{\\mathfrak q})^\\wedge$ is the canonical map. Then there are a ring $B$ and a ring map $\\beta:(R_{\\mathfrak p})^\\wedge\\otimes_RS\\to B$ such that $(\\phi,\\beta):(R_{\\mathfrak p})^\\wedge\\otimes_RS\\to(S_{\\mathfrak q})^\\wedge\\times B$ is a ring isomorphism. In particular $(R_{\\mathfrak p})^\\wedge\\otimes_RS\\cong(S_{\\mathfrak q})^\\wedge\\times B$ as $S$-algebras and as $(R_{\\mathfrak p})^\\wedge$-algebras, with $B$ an $(R_{\\mathfrak p})^\\wedge$-algebra via $\\beta$.",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Algebra, Lemma Tag 07NC (lemma-completion-at-quasi-finite-prime) and its proof, including the final 'sanity check' that the projection to $S_{\\mathfrak q}^\\wedge$ is the natural map (uses Lemma Tag 00QB lemma-quasi-finite-open-integral-closure and Lemma Tag 07N9 lemma-completion-finite-extension); cited in More on Algebra Lemma Tag 07PP"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-noetherian-ring",
+  "pqf-def-quasifinite",
+  "def-weil-pbc-localization-at-prime",
+  "def-weil-pbc-adic-completion"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "completion of localization tensor finite type quasi-finite algebra is product with completion of localization at prime",
+   "results": "AdicCompletion.tensor_map_id_left_eq_map, AdicCompletion.ofTensorProductEquivOfFiniteNoetherian (Mathlib.RingTheory.AdicCompletion.AsTensorProduct: $\\hat R\\otimes_RM\\cong\\hat M$ for finite $M$ over Noetherian $R$), Algebra.QuasiFinite.mk/casesOn (Mathlib.RingTheory.QuasiFinite.Basic): no product decomposition at a quasi-finite prime",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "adic completion of local ring base changed along quasi-finite finite type algebra splits as product, one factor the completion at a prime",
+   "results": "Algebra.QuasiFiniteAt.baseChange (Mathlib.RingTheory.QuasiFinite.Basic), Algebra.exists_etale_isIdempotentElem_forall_liesOver_eq (Mathlib.RingTheory.Etale.QuasiFinite), AdicCompletion.ofTensorProduct_bijective_of_pi_of_fintype, AdicCompletion.ofTensorProductEquivOfPiFintype (Mathlib.RingTheory.AdicCompletion.AsTensorProduct): none states the splitting",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "AdicCompletion, Algebra.QuasiFiniteAt",
+   "results": "none",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rnE 'QuasiFiniteAt' Mathlib | grep -iE 'complet|adic|prod'; grep -rlE 'AdicCompletion' Mathlib | xargs grep -lE 'QuasiFinite|Localization.AtPrime' (in ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib)",
+   "results": "only a comment in Mathlib/RingTheory/QuasiFinite/Weakly.lean:21 and Mathlib/RingTheory/DedekindDomain/AdicValuation.lean (valuation completions): no completion of a localization at a quasi-finite prime",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-formal-fibre-quasi-finite-ascent",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1"
+}
