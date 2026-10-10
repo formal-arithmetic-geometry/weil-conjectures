@@ -1,8 +1,8 @@
 # Work queue
 
-886 items; claim with `tools/claim.py next <group> [--stage N]`.
+888 items; claim with `tools/claim.py next <group> [--stage N]`.
 
-## Stage 1: nodes to split (324)
+## Stage 1: nodes to split (326)
 
 | node | distance to a target | Lean state on the done branch |
 |---|---|---|
@@ -11,19 +11,22 @@
 | `lem-weil-pbc-injective-acyclicity-bounded-below` | 2002 | sorry_here |
 | `lem-weil-pbc-sections-base-field-extension` | 2004 | none |
 | `lem-weil-pbc-etale-fibre-specialization-bound` | 2007 | none |
-| `lem-weil-pbc-sets-etale-inverse-image-restriction` | 2009 | none |
 | `lem-weil-pbc-sets-etale-section-continuity` | 2009 | none |
-| `lem-sc-affine-cap-section-open` | 2011 | none |
+| `lem-weil-pbc-sets-adjoint-continuous-restriction-adjunction` | 2010 | none |
 | `lem-sc-ample-finite-principal-affine` | 2011 | none |
-| `lem-sc-cohomology-closed-immersion-pushforward` | 2011 | none |
+| `lem-sc-affine-cap-section-open-algebra` | 2012 | none |
+| `lem-sc-affine-cap-section-open-dictionary` | 2012 | none |
 | `lem-sc-affine-complement-finite-on-integral-curve` | 2012 | none |
 | `lem-sc-boundary-derivation-square-zero` | 2012 | none |
+| `lem-sc-closed-immersion-pushforward-exact` | 2012 | none |
 | `lem-sc-enough-globally-generated-ample` | 2012 | none |
+| `lem-sc-exact-functor-higher-derived-vanishing` | 2012 | none |
 | `lem-sc-find-globally-generated` | 2012 | none |
+| `lem-sc-leray-closed-pushforward-cohomology` | 2012 | none |
 | `lem-sc-noetherian-topological-cohomology-vanishing` | 2012 | none |
-| `lem-sc-section-affine-open-kills-cohomology` | 2012 | none |
 | `lem-sc-torsor-h1-functoriality` | 2012 | none |
 | `lem-sc-zero-dim-noetherian-finite-discrete` | 2012 | none |
+| `lem-sc-invert-s-cohomology` | 2013 | none |
 | `lem-sc-reduced-ideals-zero-intersection` | 2013 | none |
 | `lem-weil-pbc-etale-cohomology-limit-complex-systems` | 3005 | none |
 | `lem-weil-pbc-finite-coproduct-cohomology-assembly` | 3006 | none |
@@ -57,7 +60,6 @@
 | `lem-sc-product-irreducible-components-bijection` | 3013 | none |
 | `lem-sc-proper-upper-shriek-composition` | 3013 | none |
 | `lem-sc-smooth-proper-curve-dualizing` | 3013 | none |
-| `lem-sc-p1-finite-homogeneous-generators` | 3014 | none |
 | `lem-sc-p1-graded-kernel-finite` | 3014 | none |
 | `lem-sc-p1-graded-nakayama-free` | 3014 | none |
 | `lem-sc-p1-koszul-resolution` | 3014 | none |
@@ -898,7 +900,7 @@
 | `lem-weil-pbc-p1-field-dimension-one` | 4 | state |
 | `lem-weil-pbc-projective-space-zero-isomorphism` | 4 | state |
 
-Not open yet: 343 nodes that wait for stage 1, 1091 nodes that wait for a statement dependency.
+Not open yet: 345 nodes that wait for stage 1, 1096 nodes that wait for a statement dependency.
 
 ## Stage 3: modules to prove (0)
 
