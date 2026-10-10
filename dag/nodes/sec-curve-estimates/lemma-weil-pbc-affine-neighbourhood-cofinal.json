@@ -3,7 +3,7 @@
  "blueprint": {
   "is": "lemma-weil-pbc-affine-neighbourhood-cofinal",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "Affine pointed neighbourhoods are cofinal",
@@ -18,24 +18,53 @@
  ],
  "proof": [
   {
-   "text": "Given $(V,\\bar v)$, an affine open $V_0\\subseteq V$ containing the image of\n$\\bar v$ gives a morphism $(V_0,\\bar v)\\to(V,\\bar v)$; given two affine\nrefinements, an affine open of their fibre product around the lifted point\nrefines both. These two facts are exactly the nonemptiness and connectedness\nof the comma categories required for initiality in the sense of\n[def-weil-pbc-pointed-etale-neighbourhoods].",
+   "text": "For every pointed etale neighbourhood $(V,\\bar v)$, the affine-shrink lemma gives an affine pointed etale neighbourhood $(V_0,\\bar v_0)$ and a point-preserving morphism $(V_0,\\bar v_0)\\to(V,\\bar v)$; applying it with $W=V$ supplies the required object of the affine full subcategory.",
    "uses": [
-    "def-weil-pbc-pointed-etale-neighbourhoods"
+    "lem-weil-pbc-pointed-etale-neighbourhood-affine-shrink"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "proof of Lemma Tag 04HX (lemma-describe-etale-local-ring): affine opens form a basis of the etale neighbourhoods"
+   }
+  },
+  {
+   "text": "Write $\\mathcal N=\\mathcal N_{\\bar s}$ for the ambient pointed etale-neighbourhood category and $\\mathcal N^{\\mathrm{aff}}\\subset\\mathcal N$ for its full subcategory of affine objects. Initiality of the inclusion means that for every object $i$ of $\\mathcal N$, the comma category $(\\mathcal N^{\\mathrm{aff}}\\downarrow i)$, whose objects are morphisms $a:j\\to i$ with $j$ affine and whose morphisms $(j,a)\\to(j',a')$ are morphisms $g:j\\to j'$ with $a'\\circ g=a$, is nonempty and connected. It is nonempty by step 1. For connectedness, given two objects $a_1:j_1\\to i$ and $a_2:j_2\\to i$ of this comma category, use the fibre-product clause of cofilteredness of $\\mathcal N$ to obtain an object $k$ with morphisms $p_1:k\\to j_1$, $p_2:k\\to j_2$, and its equalizer clause applied to $a_1\\circ p_1,a_2\\circ p_2:k\\to i$ to obtain $h:k'\\to k$ with $a_1\\circ p_1\\circ h=a_2\\circ p_2\\circ h$. Step 1 supplies an affine object $j$ with a morphism $q:j\\to k'$. Fullness of $\\mathcal N^{\\mathrm{aff}}$ makes $p_1\\circ h\\circ q:j\\to j_1$ and $p_2\\circ h\\circ q:j\\to j_2$ morphisms of the affine subcategory, and with $a=a_1\\circ p_1\\circ h\\circ q=a_2\\circ p_2\\circ h\\circ q$ they are morphisms $(j,a)\\to(j_1,a_1)$ and $(j,a)\\to(j_2,a_2)$ of the comma category; thus the two comma objects are joined by a zigzag through $(j,a)$, so the comma category is connected. Hence the affine inclusion is initial. The ambient category is cofiltered by the cited node, and the initial-full-subcategory criterion (1), whose hypothesis is step 1, then gives cofilteredness of the affine subcategory.",
+   "uses": [
+    "lem-weil-pbc-pointed-etale-neighbourhoods-cofiltered",
+    "lem-weil-pbc-colimit-initial-full-subcategory"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/categories.tex",
+    "place": "Lemma Tag 0BUC (lemma-cofinal-in-filtered, dual form) and Lemma Tag 04E7 (lemma-cofinal)"
+   }
+  },
+  {
+   "text": "Passing to opposite categories turns this initial inclusion into a final functor, so the canonical comparison identifies the colimit over the opposite-indexed affine neighbourhoods with the colimit over all pointed etale neighbourhoods. This is the stalk-colimit cofinality assertion.",
+   "uses": [
+    "lem-weil-pbc-colimit-initial-full-subcategory"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/categories.tex",
+    "place": "Lemma Tag 04E7 (lemma-cofinal), applied to the opposite inclusion"
+   }
   }
  ],
  "proof_deps": [
-  "def-weil-pbc-pointed-etale-neighbourhoods"
+  "lem-weil-pbc-pointed-etale-neighbourhood-affine-shrink",
+  "lem-weil-pbc-pointed-etale-neighbourhoods-cofiltered",
+  "lem-weil-pbc-colimit-initial-full-subcategory"
  ],
  "proof_origin": {
-  "by": "agent",
-  "document": "literature/blueprint/master/blueprint/sec-curve-estimates/sk-prop-h2/lemma-weil-pbc-affine-neighbourhood-cofinal.md",
-  "place": "## Proof"
+  "by": "document",
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "proof of Lemma Tag 04HX (lemma-describe-etale-local-ring)"
  },
  "mathlib_searches": [],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [
   "detailed_form",
@@ -68,5 +97,20 @@
   }
  },
  "chapter": "sec-curve-estimates",
- "unit": "sk-prop-h2"
+ "unit": "sk-prop-h2",
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "lemma-weil-pbc-affine-neighbourhood-cofinal",
+  "worker": "stage1",
+  "summary": "No exact declaration for affine pointed-neighbourhood cofinality occurs in the read-only slopmaster2 source. The imported sketch was expanded using existing affine-shrink, pointed-neighbourhood cofilteredness, and initial-full-subcategory nodes; no new node was needed.",
+  "blueprint": "The proof realizes the blueprint proof paragraph: affine shrinking supplies refinements, cofilteredness plus the full-subcategory criterion supplies initiality, and the opposite-category colimit clause supplies stalk cofinality."
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-affcof2",
+  "group": "H1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-affcof2 (reviewer sub-agent of L); spot-checked: Re-push after the 13:15 UTC return; tip 0de7a586b committed 14:22 UTC, after it. Return points repaired: step 2 now defines initial (every comma category (N_aff down i) nonempty and connected) and writes the comma-category argument: nonempty by step 1 (lem-weil-pbc-pointed-etale-neighbourhood-affine-shrink with W=V), connectedness by the fibre-product clause then the equalizer clause of lem-weil-pbc-pointed-etale-neighbourhoods-cofiltered applied to the two composites to i, an affine shrink by step 1 and fullness, giving the zigzag; the false report paragraph is gone and the review says the comma argument was checked. Full review: statement agrees with Stacks 04HX proof (affine etale neighbourhoods cofinal) and 0BUC dual (full subcategory, every object receives a map from it, cofiltered ambient); step 2 cofilteredness of N_aff and step 3 colimit comparison are lem-weil-pbc-colimit-initial-full-subcategory (1), whose hypothesis is step 1 and whose ambient category N^all is N_sbar of def-weil-pbc-pointed-etale-neighbourhoods (cofiltered node says so; field Omega arbitrary there, algebraically closed here: fine); affine = Spec R per def-weil-pbc-scheme-conventions. No new nodes, no Mathlib leaf; only split-owned fields changed. Fix: dag/nodes/sec-curve-estimates/lemma-weil-pbc-affine-neighbourhood-cofinal.json: proof[1].text: plain-text formulas (j1 -> i, N_aff down-arrow i) rewritten in TeX with the morphisms named (B4), and the superfluous sentence on equalizing parallel comma morphisms dropped; mathematics unchanged. Small case: S=Spec of an algebraically closed field, N_sbar has S itself affine as object; comma objects over any etale V reach Spec R by the shrink. Review 14:23-14:27 UTC.; 1 file(s) fixed by the reviewer"
+ }
 }

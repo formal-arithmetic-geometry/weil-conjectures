@@ -1613,3 +1613,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 14:25 L: accepted lem-galois-fpqc-descend-unramified: 6 steps (02VM), new node lem-galois-fpqc-descend-open-immersion (02L3), tool_uses 2
 - 14:26 L: merge_delivery.py copied no declared tool uses (a path bug, now fixed); the four merged nodes with declarations (riemann-roch, finite-over-henselian, second-kummer, nonzero-section) got their tool_uses from the lead; route warnings back to the standing 11
 - 14:27 L: returned deliver/G1/lem-sc-hilb-geometrically-integral (reviewer RETURN: 1. C4: lem-sc-hilb-geometrically-integral, proof step 2: the cited node lem-sc-hilb-dominating-power assumes X geometric)
+- 14:27 L: merged deliver/H1/lemma-weil-pbc-affine-neighbourhood-cofinal (reviewer FIX; after a return; new nodes: 0)
