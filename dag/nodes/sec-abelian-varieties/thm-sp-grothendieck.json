@@ -3,11 +3,11 @@
  "blueprint": {
   "is": "thm-sp-grothendieck",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "Grothendieck spectral sequence",
- "statement": "Let $(F,G)$ be a composable pair [def-sp-composite-acyclicity] with $F$\nsending injectives to $G$-acyclics. For every $X\\in\\mathcal A$ there is a\nfunctorial first-quadrant spectral sequence whose $E_2$-page is\n\n$$\n E_2^{p,q}=R^pG\\bigl(R^qF(X)\\bigr)\n$$\n\nand which converges to $R^{p+q}(G\\circ F)(X)$; its edge maps in degree $n$\nhave directions $R^nG(F(X))\\to R^n(G\\circ F)(X)\\to G(R^nF(X))$, and the\nspectral sequence depends functorially on $X$. \\emph{Construction (part of the statement).} The spectral sequence is the one obtained as follows: choose an injective resolution $X\\to J^\\bullet$ in $\\mathcal A$ and a Cartan--Eilenberg resolution $F(J^\\bullet)\\to I^{\\bullet,\\bullet}$ of the complex $F(J^\\bullet)$ (a first-quadrant double complex of injectives whose columns $I^{p,\\bullet}$ resolve $F(J^p)$ and whose rows of boundaries, cycles and cohomology objects are injective resolutions of those of $F(J^\\bullet)$, Stacks Derived Categories 015G); the spectral sequence of the theorem is the second spectral sequence (the one of the filtration by the resolution degree of $I^{\\bullet,\\bullet}$, i.e. with $E_1$-term $R^pG$ applied rowwise) of the double complex $G(I^{\\bullet,\\bullet})$ in the sense of [thm-sp-double-complex-spectral-sequences], [def-sp-double-complex-total], whose total complex computes $R(G\\circ F)(X)$ because $F$ sends injectives to $G$-acyclics; the $E_2$-identification and the abutment are the ones this construction gives (Stacks 015N, proof).",
+ "statement": "Let $(F,G)$ be a composable pair [def-sp-composite-acyclicity] with $F$\nsending injectives to $G$-acyclics. For every $X\\in\\mathcal A$ there is a\nfunctorial first-quadrant spectral sequence whose $E_2$-page is\n\n$$\n E_2^{p,q}=R^pG\\bigl(R^qF(X)\\bigr)\n$$\n\nand which converges to $R^{p+q}(G\\circ F)(X)$; its edge maps in degree $n$\nhave directions $R^nG(F(X))\\to R^n(G\\circ F)(X)\\to G(R^nF(X))$, and the\nspectral sequence depends functorially on $X$. \\emph{Construction (part of the statement).} The spectral sequence is the one obtained as follows: choose an injective resolution $X\\to J^\\bullet$ in $\\mathcal A$ and a Cartan--Eilenberg resolution $F(J^\\bullet)\\to I^{\\bullet,\\bullet}$ of the complex $F(J^\\bullet)$ (a first-quadrant double complex of injectives whose columns $I^{p,\\bullet}$ resolve $F(J^p)$ and whose rows of boundaries, cycles and cohomology objects are injective resolutions of those of $F(J^\\bullet)$); the spectral sequence of the theorem is the second spectral sequence (the one of the filtration by the resolution degree of $I^{\\bullet,\\bullet}$, whose $E_1$-term is horizontal cohomology of $G(I^{\\bullet,q})$ and whose $E_2$-term is $R^qG$ of the cohomology of $F(J^\\bullet)$) of the double complex $G(I^{\\bullet,\\bullet})$ in the sense of [thm-sp-double-complex-spectral-sequences], [def-sp-double-complex-total], whose total complex computes $R(G\\circ F)(X)$ because $F$ sends injectives to $G$-acyclics; the $E_2$-identification and the abutment are the ones this construction gives.",
  "source": {
   "document": "literature/blueprint/master/blueprint/sec-abelian-varieties/sk-prop-av-pqf-finite/thm-sp-grothendieck.md",
   "place": "node thm-sp-grothendieck, order 524",
@@ -37,50 +37,161 @@
  ],
  "proof": [
   {
-   "text": "Choose an injective resolution $X\\to I^\\bullet$\n([def-sp-injective-resolutions]) and put $C^\\bullet=F(I^\\bullet)$ in\n$\\mathcal B$, so that $R^qF(X)=\\mathcal H^q(C^\\bullet)$. Let\n$C^{\\bullet,\\bullet}$ be a Cartan--Eilenberg resolution of $C^\\bullet$\n([thm-sp-if-e1]) and put $D^{p,q}=G(C^{p,q})$; since $G$ is left exact,\n$R^qG(C^p)=\\mathcal H^q(G(C^{p,\\bullet}))$. Filtering the total complex of\n$D$ ([def-sp-double-complex-total]) by the second degree, the $E_1$-page is\n\n$$\n E_1^{p,q}=R^qG\\bigl(F(I^p)\\bigr),\n$$\n\nwhich vanishes for $q>0$ precisely because every $F(I^p)$ is $G$-acyclic\n([def-sp-composite-acyclicity]). By the bottom-edge collapse, i.e.\n[lem-sp-edge-collapse] applied to the bidegree transposition\n$(p,q)\\mapsto(q,p)$ (which preserves the [def-sp-exact-couple]-structure and\nthe first-quadrant convergence of [def-sp-convergence]), this sequence\ndegenerates at $E_2$: $E_2^{p,q}=0$ for $q>0$, no differential begins at\n$E_2$, and\n\n$$\n E_2^{n,0}\\cong R^n(G\\circ F)(X),\n$$\n\nvia the edge isomorphisms and $E_2^{n,0}=H^n\\bigl(GF(I^\\bullet)\\bigr)$\n([def-sp-left-exact-additive]); this is the convergence computation. The\nstated $E_2$-page $R^pG(R^qF(X))$ is the page of the first-degree filtration\nof the same double complex, whose identification with the horizontal\ncohomology of the $C^{\\bullet,q}$-columns is the Cartan--Eilenberg\ncomputation of [thm-sp-if-e1]; the two spectral sequences of the double\ncomplex ([thm-sp-double-complex-spectral-sequences]) converge to the same abutment, so the stated sequence converges to\n$R^{p+q}(G\\circ F)(X)$ as claimed. The induced filtration on the abutment is\nthe image filtration of [def-sp-image-filtration], convergence is the\nhalf-plane case of [def-sp-convergence], and everything is functorial in\n$X$.",
+   "text": "Choose an injective resolution $X\\to J^\\bullet$ [def-sp-injective-resolutions]; $\\mathcal A$ has enough injectives by [lem-sp-grothendieck-enough-injectives], so $R^nF(X)=H^n(F(J^\\bullet))$ and $R^n(G\\circ F)(X)=H^n(GF(J^\\bullet))$ for this choice by [lem-sp-derived-well-defined]. Since $F$ is additive by [def-sp-composite-acyclicity], $K^\\bullet=F(J^\\bullet)$ is a nonnegative cochain complex. The category $\\mathcal B$ has enough injectives by [lem-sp-grothendieck-enough-injectives], so [lem-sp-cartan-eilenberg-exists] gives a Cartan--Eilenberg resolution $K^\\bullet\\to I^{\\bullet,\\bullet}$ whose columns $I^{p,\\bullet}$ resolve $K^p$.",
    "uses": [
+    "lem-sp-grothendieck-enough-injectives",
     "def-sp-injective-resolutions",
-    "thm-sp-if-e1",
-    "def-sp-double-complex-total",
     "def-sp-composite-acyclicity",
-    "lem-sp-edge-collapse",
-    "def-sp-exact-couple",
-    "def-sp-convergence",
-    "def-sp-left-exact-additive",
-    "thm-sp-double-complex-spectral-sequences",
-    "def-sp-image-filtration"
+    "lem-sp-cartan-eilenberg-exists",
+    "lem-sp-derived-well-defined"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Definition 015H and Lemma 015I; Lemma 015N, proof"
+   }
   },
   {
-   "text": "(*References: Weibel, An Introduction to Homological Algebra, Theorem 5.8.3;\nStacks Project, Lemma 13.22.1 (Tag\n[015M](https://stacks.math.columbia.edu/tag/015M)) identifies the acyclicity\ncondition with the canonical map $R(G\\circ F)\\to RG\\circ RF$ being an\nisomorphism, and Lemma 13.22.2 (Tag\n[015N](https://stacks.math.columbia.edu/tag/015N)) is the bounded, converging\nspectral sequence with finite induced filtration. The relative Leray form\n$E_2^{p,q}=R^pg_*(R^qf_*\\mathcal F)\\Rightarrow R^{p+q}(g\\circ f)_*\\mathcal\nF$, functorial in $\\mathcal F$ and available for bounded-below complexes, is\nLemma 20.13.8 (Tag [01F6](https://stacks.math.columbia.edu/tag/01F6)); the\ntopoi (site) form is Lemma 21.14.6, see the dictionary\n[def-sp-etale-dictionary] for the specialization.*)",
+   "text": "Put $D^{p,q}=G(I^{p,q})$. By [def-sp-double-complex-total] it has a finite direct-sum total complex with two filtrations. [thm-sp-double-complex-spectral-sequences] gives both spectral sequences and their common abutment $H^n(\\operatorname{Tot}D)$. For the filtration by the original complex degree $p$, its first page is $H^q(G(I^{p,\\bullet}))=R^qG(K^p)$, since the column is an injective resolution by [lem-sp-cartan-eilenberg-exists] and $R^qG$ is computed on such a resolution by [def-sp-left-exact-additive] and [lem-sp-derived-well-defined].",
    "uses": [
-    "def-sp-etale-dictionary"
+    "def-sp-double-complex-total",
+    "thm-sp-double-complex-spectral-sequences",
+    "lem-sp-cartan-eilenberg-exists",
+    "def-sp-left-exact-additive",
+    "lem-sp-derived-well-defined"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Lemma 015N, proof: the collapsing filtration"
+   }
+  },
+  {
+   "text": "The first page of Step 2 is zero for $q>0$ by the acyclicity in [def-sp-composite-acyclicity]. In degree $q=0$ it is $GF(J^p)$ because $R^0G=G$ by [lem-sp-derived-well-defined]. Its horizontal differential is induced by $J^\\bullet$, so its second page is $H^p(GF(J^\\bullet))=R^p(G\\circ F)(X)$ by Step 1, and vanishes for $q>0$. The first-quadrant stabilization and the finite filtration with $\\operatorname{gr}^pH^n\\cong E_\\infty^{p,n-p}$ of [thm-sp-double-complex-spectral-sequences] are the convergence hypotheses of [lem-weil-pbc-first-quadrant-row-collapse], which then gives $H^n(\\operatorname{Tot}D)\\cong E_2^{n,0}=R^n(G\\circ F)(X)$.",
+   "uses": [
+    "def-sp-composite-acyclicity",
+    "lem-sp-derived-well-defined",
+    "thm-sp-double-complex-spectral-sequences",
+    "lem-weil-pbc-first-quadrant-row-collapse"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Lemma 015N, proof: acyclic collapse and abutment"
+   }
+  },
+  {
+   "text": "For the filtration by resolution degree $q$, [thm-sp-double-complex-spectral-sequences] gives $E_1^{q,p}=H^p_I(G(I^{\\bullet,q}))$. By [lem-sp-cartan-eilenberg-exists], horizontal cycles and boundaries in each row are injective, so [lem-sp-cart-eilenberg-left-exact-cohomology] applied to that row gives $H^p_I(G(I^{\\bullet,q}))\\cong G(H^p_I(I^{\\bullet,q}))$. The complex in $q$ of $H^p_I(I^{\\bullet,q})$ is an injective resolution of $H^p(F(J^\\bullet))$, again by [lem-sp-cartan-eilenberg-exists]. Thus [def-sp-left-exact-additive] and [lem-sp-derived-well-defined], with $H^p(F(J^\\bullet))=R^pF(X)$ from Step 1, identify the next page, after index relabeling $(q,p)\\mapsto(p,q)$, with $R^pG(R^qF(X))$. The common-abutment clause of [thm-sp-double-complex-spectral-sequences] and Step 3 give convergence to $R^{p+q}(G\\circ F)(X)$.",
+   "uses": [
+    "thm-sp-double-complex-spectral-sequences",
+    "lem-sp-cartan-eilenberg-exists",
+    "lem-sp-cart-eilenberg-left-exact-cohomology",
+    "def-sp-left-exact-additive",
+    "lem-sp-derived-well-defined"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Definition 015H, Lemma 015I, and Lemma 015N, proof: derived E2 page"
+   }
+  },
+  {
+   "text": "The first-quadrant finite image filtration and $E_\\infty^{p,q}\\cong\\operatorname{gr}^pH^{p+q}$ are stated by [thm-sp-double-complex-spectral-sequences] and [def-sp-convergence]. No differential leaves the bottom position $(n,0)$ on pages $r\\geq2$, and none enters the left position $(0,n)$. The page-to-page quotient at the bottom gives $E_2^{n,0}\\twoheadrightarrow E_\\infty^{n,0}=F^nH^n\\hookrightarrow H^n$; the left edge is $H^n\\twoheadrightarrow H^n/F^1H^n=E_\\infty^{0,n}\\hookrightarrow E_2^{0,n}$. Using the identifications of Steps 3-4 and $R^0F=F$, $R^0G=G$ from [lem-sp-derived-well-defined] gives exactly the two directions in the statement.",
+   "uses": [
+    "thm-sp-double-complex-spectral-sequences",
+    "def-sp-convergence",
+    "lem-sp-derived-well-defined"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Lemma 015N, proof: finite filtration and edge maps"
+   }
+  },
+  {
+   "text": "For $f:X\\to Y$, lift $f$ to a map of injective resolutions $J_X^\\bullet\\to J_Y^\\bullet$ by [lem-weil-pbc-injective-resolution-lift-exists], apply $F$, and use [lem-weil-pbc-cartesian-eilenberg-functorial] with the identity exact functor of $\\mathcal B$ to lift the resulting complex map to a map of Cartan--Eilenberg resolutions. The cited lemma is stated with the two indices exchanged; it gives a morphism of double complexes, and a morphism of double complexes preserves both degree filtrations of [def-sp-double-complex-total], in particular the one by resolution degree, so it gives a filtered map of total complexes, so [thm-sp-double-complex-spectral-sequences] gives compatible maps of spectral sequences. Comparison homotopies make these maps independent of the chosen lifts from the second page onward; this independence is [lem-sp-cartan-eilenberg-comparison-independence]. Hence the page, abutment and edge identifications are natural in $X$.",
+   "uses": [
+    "def-sp-injective-resolutions",
+    "lem-weil-pbc-injective-resolution-lift-exists",
+    "lem-weil-pbc-cartesian-eilenberg-functorial",
+    "def-sp-double-complex-total",
+    "thm-sp-double-complex-spectral-sequences",
+    "lem-sp-cartan-eilenberg-comparison-independence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Remark 015K (remark-functorial-ss) and Lemma 015N"
+   }
   }
  ],
  "proof_deps": [
+  "lem-sp-grothendieck-enough-injectives",
   "def-sp-injective-resolutions",
-  "thm-sp-if-e1",
-  "def-sp-double-complex-total",
   "def-sp-composite-acyclicity",
-  "lem-sp-edge-collapse",
-  "def-sp-exact-couple",
-  "def-sp-convergence",
-  "def-sp-left-exact-additive",
+  "lem-sp-cartan-eilenberg-exists",
+  "lem-sp-derived-well-defined",
+  "def-sp-double-complex-total",
   "thm-sp-double-complex-spectral-sequences",
-  "def-sp-image-filtration",
-  "def-sp-etale-dictionary"
+  "def-sp-left-exact-additive",
+  "lem-weil-pbc-first-quadrant-row-collapse",
+  "lem-sp-cart-eilenberg-left-exact-cohomology",
+  "def-sp-convergence",
+  "lem-weil-pbc-injective-resolution-lift-exists",
+  "lem-weil-pbc-cartesian-eilenberg-functorial",
+  "lem-sp-cartan-eilenberg-comparison-independence"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/master/blueprint/sec-abelian-varieties/sk-prop-av-pqf-finite/thm-sp-grothendieck.md",
-  "place": "## Proof"
+  "document": "literature/stacks-project/derived.tex",
+  "place": "Lemma 015N, proof, with Definition 015H and Lemma 015I"
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Grothendieck spectral sequence of two left exact additive functors via Cartan Eilenberg resolution with E2 derived functors and functorial edge maps",
+   "results": "Only right-derived functor and exact-functor declarations, no Grothendieck spectral sequence.",
+   "date": "2026-10-11",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "Functor.rightDerived, SpectralSequence, CartanEilenberg",
+   "results": "0 hits; unknown identifier Functor.rightDerived in this pattern.",
+   "date": "2026-10-11",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "Grothendieck spectral sequence|Cartan.Eilenberg|grothendieckSpectralSequence CategoryTheory",
+   "results": "Only bibliographic reference in Mathlib/CategoryTheory/SmallObject/Basic.lean:65.",
+   "date": "2026-10-11",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Grothendieck spectral sequence of derived functors constructed by Cartan Eilenberg double complex",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-11",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "natural Grothendieck spectral sequence from double complex of injective Cartan Eilenberg resolutions",
+   "results": "Only injective-resolution infrastructure, no matching spectral sequence.",
+   "date": "2026-10-11",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Abelian.SpectralObject, rightDerived",
+   "results": "0 hits; unknown identifier rightDerived in this pattern.",
+   "date": "2026-10-11",
+   "verdict": "no match"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [
   "cites_outside_uses",
@@ -115,5 +226,46 @@
  },
  "chapter": "sec-abelian-varieties",
  "unit": "sk-prop-av-pqf-finite",
- "lead_note": "16:11 UTC: construction clause added to the statement by L (reviewer R-gdc of J1's lem-pc-grothendieck-ss-double-complex-model: the item needs which spectral sequence it is, the statement only asserted existence); Stacks 015N proof; the Cartan-Eilenberg resolution is described inline (no node defines it; Stacks 015G) and a definition node is wanted."
+ "lead_note": "16:11 UTC: construction clause added to the statement by L (reviewer R-gdc of J1's lem-pc-grothendieck-ss-double-complex-model: the item needs which spectral sequence it is, the statement only asserted existence); Stacks 015N proof; the Cartan-Eilenberg resolution is described inline (no node defines it; Stacks 015G) and a definition node is wanted.",
+ "split_report": {
+  "date": "2026-10-11",
+  "item": "thm-sp-grothendieck",
+  "worker": "stage1",
+  "summary": "Corrected the imported construction's reversed first-page identification; split the proof into resolution choice, acyclic collapse, derived E2 computation, edges, and functoriality. New nodes state Cartan--Eilenberg existence and comparison independence. The existing Cartan--Eilenberg properties node has incompatible index clauses, so the split uses the precise existence statement and the existing left-exact cohomology lemma.",
+  "blueprint": "The blueprint proof's first paragraph supplies both filtrations, the acyclic collapse and E2 page; its last sentence supplies functoriality. The imported second paragraph is bibliographic commentary, not a proof step.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-cartesian-eilenberg-functorial",
+    "why": "Step 6 specializes its filtered comparison map to the identity exact functor of B."
+   },
+   {
+    "node": "lem-sp-cart-eilenberg-left-exact-cohomology",
+    "why": "Step 4 applies its left-exact cohomology comparison to horizontal rows with injective cycles and boundaries."
+   },
+   {
+    "node": "lem-weil-pbc-first-quadrant-row-collapse",
+    "why": "Step 3 applies its generic first-quadrant row-collapse edge isomorphism."
+   },
+   {
+    "node": "lem-weil-pbc-injective-resolution-lift-exists",
+    "why": "Step 6 lifts f to a map of injective resolutions (Mathlib leaf)."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-first-quadrant-row-collapse",
+  "lem-weil-pbc-injective-resolution-lift-exists",
+  "lem-weil-pbc-cartesian-eilenberg-functorial",
+  "lem-sp-cart-eilenberg-left-exact-cohomology",
+  "lem-weil-pbc-first-quadrant-row-collapse",
+  "lem-weil-pbc-injective-resolution-lift-exists"
+ ],
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-tsg2026",
+  "group": "G1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-tsg2026 (reviewer sub-agent of L); spot-checked: Read packet whole. Math checked: corrected statement (resolution-degree filtration has horizontal-cohomology E1, E2=R^qG(H^p FJ)) is right per Stacks 015J/015N; collapse of the other filtration; Step 4 via left-exact-cohomology lemma; edge directions; new nodes lem-sp-cartan-eilenberg-exists (true, 015H/015I, not a duplicate: existing CE nodes assume a given resolution) and comparison-independence (true, 015K) are real lemmas. FIX more, RETURN less: (1) C4 Step 3 cited lem-sp-edge-collapse, whose hypothesis is vanishing off the column p=0, for a spectral sequence concentrated in row q=0 ('transposing bidegrees' is not an operation on exact couples) -> cite lem-weil-pbc-first-quadrant-row-collapse (generic tool), hypotheses from thm-sp-double-complex-spectral-sequences; (2) C1/C4 Steps 1-5 took R^0G=G, R^0F=F and computation on the chosen resolutions from def-sp-left-exact-additive, which defers both to the well-definedness lemma -> cite lem-sp-derived-well-defined; (3) C1 Step 6 lifted f to J_X->J_Y uncited -> cite lem-weil-pbc-injective-resolution-lift-exists (Mathlib leaf), and noted the CE-functorial lemma's exchanged indices (a double-complex morphism preserves both filtrations). Convergence: filtration is the image filtration named via the construction clause and thm-sp-double-complex-spectral-sequences. G1 second reading missed (1)-(3); its claim that lem-sp-cartan-eilenberg-properties has incompatible clauses is mistaken (consistent in its exchanged convention) but harmless.; 1 file(s) fixed by the reviewer"
+ }
 }
