@@ -1,8 +1,8 @@
 # Work queue
 
-946 items; claim with `tools/claim.py next <group> [--stage N]`.
+945 items; claim with `tools/claim.py next <group> [--stage N]`.
 
-## Stage 1: nodes to split (586)
+## Stage 1: nodes to split (584)
 
 | node | distance to a target | Lean state on the done branch |
 |---|---|---|
@@ -12,7 +12,6 @@
 | `lem-weil-pbc-pullback-ample-invertible` | 1013 | none |
 | `lem-weil-pbc-minimal-finite-free-resolution-local` | 1014 | none |
 | `lem-weil-pbc-module-injective-open-cover-cech-acyclic` | 1014 | none |
-| `lem-weil-pbc-nl-presentations-homotopy-equivalent` | 1014 | none |
 | `lem-weil-pbc-nonzerodivisor-if-maximal-not-associated` | 1014 | none |
 | `lem-weil-pbc-normal-nagata-monogenic-n1` | 1014 | none |
 | `lem-weil-pbc-p-basis-differentials-basis` | 1014 | none |
@@ -24,8 +23,6 @@
 | `lem-weil-pbc-separably-generated-differentials-dimension` | 1014 | none |
 | `lem-weil-pbc-serre-criterion-reduced` | 1014 | none |
 | `lem-weil-pbc-two-term-homotopy-equivalence-direct-sum` | 1014 | none |
-| `lem-weil-pbc-well-ordered-union-projective-dimension` | 1014 | none |
-| `lem-weil-pbc-zariski-extension-by-zero-adjunction` | 1014 | none |
 | `lem-weil-pbc-zariski-extension-by-zero-exact` | 1014 | none |
 | `prop-weil-pbc-formal-glueing-equivalence` | 1014 | none |
 | `def-pc-ext` | 1015 | none |
@@ -69,6 +66,7 @@
 | `lem-weil-pbc-openness-of-flatness` | 1015 | none |
 | `lem-weil-pbc-p-independent-extends-to-p-basis` | 1015 | none |
 | `lem-weil-pbc-polynomial-ring-maximal-chain-height-difference` | 1015 | none |
+| `lem-weil-pbc-projective-dimension-ses-kernel` | 1015 | none |
 | `lem-weil-pbc-quasi-finite-over-polynomial-algebra` | 1015 | none |
 | `lem-weil-pbc-quotient-by-power-torsion-no-torsion` | 1015 | none |
 | `lem-weil-pbc-regular-local-quotient-kernel-parameters` | 1015 | none |
@@ -593,7 +591,7 @@
 | `def-exc-jacobian-presentation` | - | none |
 | `def-nagata-rees-algebra` | - | none |
 
-## Stage 2: nodes to state (360)
+## Stage 2: nodes to state (361)
 
 | node | distance to Mathlib | kind |
 |---|---|---|
@@ -817,6 +815,7 @@
 | `lem-weil-pbc-module-stalk-exact` | 1 | state |
 | `lem-weil-pbc-module-stalk-filtered-colimit` | 1 | state |
 | `lem-weil-pbc-nakayama-nilpotent` | 1 | state |
+| `lem-weil-pbc-nl-presentations-homotopy-equivalent` | 1 | state |
 | `lem-weil-pbc-noether-normalization-over-domain` | 1 | state |
 | `lem-weil-pbc-nonvanishing-section-trivializes` | 1 | state |
 | `lem-weil-pbc-ogoma` | 1 | state |
@@ -958,7 +957,7 @@
 | `lem-weil-pbc-p1-field-dimension-one` | 4 | state |
 | `lem-weil-pbc-projective-space-zero-isomorphism` | 4 | state |
 
-Not open yet: 597 nodes that wait for stage 1, 684 nodes that wait for a statement dependency.
+Not open yet: 595 nodes that wait for stage 1, 686 nodes that wait for a statement dependency.
 
 ## Stage 3: modules to prove (0)
 
