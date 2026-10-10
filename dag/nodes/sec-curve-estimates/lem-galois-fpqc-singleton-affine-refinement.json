@@ -26,9 +26,75 @@
   "def-weil-surjective-morphism",
   "lem-weil-pbc-scheme-coproduct-family"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Apply the definition of the singleton fpqc covering [def-weil-pbc-fpqc-covering] to the affine open $S\\subseteq S$. It supplies $m\\ge0$ and affine opens $X_1,\\ldots,X_m\\subseteq X$ such that $S=\\bigcup_{j=1}^m f(X_j)$; also $f$ is flat. These are precisely the opens in the refinement of Topologies 022E. If $S$ is empty, $m=0$ is allowed.",
+   "uses": [
+    "def-weil-pbc-fpqc-covering"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/topologies.tex",
+    "place": "Topologies, Definition Tag 022B (definition-fpqc-covering), applied to the affine open S; Lemma Tag 022E (lemma-fpqc-affine), proof 'follows directly from the definition'"
+   }
+  },
+  {
+   "text": "Form $X'=\\coprod_{j=1}^m X_j$ and let $\\iota_j:X_j\\to X'$ be its coprojections. By [lem-weil-pbc-scheme-coproduct-family] the open inclusions $e_j:X_j\\hookrightarrow X$ induce the unique map $h:X'\\to X$ with $h\\circ\\iota_j=e_j$. Put $g=f\\circ h$; thus $g\\circ\\iota_j=f|_{X_j}$, and $h$ is over $S$. The finite coproduct $X'$ is affine by clause (4) of [lem-weil-pbc-affine-morphism-permanence], including the empty coproduct $\\operatorname{Spec}(0)$.",
+   "uses": [
+    "lem-weil-pbc-scheme-coproduct-family",
+    "lem-weil-pbc-affine-morphism-permanence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/topologies.tex",
+    "place": "Topologies, Lemma Tag 022E (lemma-fpqc-affine), finite affine-open refinement; finite coproduct packaging of that refinement"
+   }
+  },
+  {
+   "text": "The image of $g$ is $\\bigcup_j f(X_j)=S$, so $g$ is surjective [def-weil-surjective-morphism]. To check flatness [def-weil-flat-morphism], take $u\\in X'$ in the $j$th component and write $x=\\iota_j^{-1}(u)\\in X_j$. The coprojection $\\iota_j$ and the inclusion $e_j$ are open immersions [lem-weil-pbc-scheme-coproduct-family], [def-weil-open-immersion], hence identify $\\mathcal O_{X',u}$ and $\\mathcal O_{X_j,x}$ with $\\mathcal O_{X,e_j(x)}$. Under these identifications the local ring map for $g$ is the local ring map for $f$ at $e_j(x)$, which is flat by Step 1. Thus $g$ is flat at every point. If $X'$ is empty, flatness holds vacuously and Step 1 forces $S$ empty as well.",
+   "uses": [
+    "def-weil-pbc-fpqc-covering",
+    "lem-weil-pbc-scheme-coproduct-family",
+    "def-weil-open-immersion",
+    "def-weil-flat-morphism",
+    "def-weil-surjective-morphism"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/topologies.tex",
+    "place": "Topologies, Definition Tag 022B (definition-fpqc-covering), flatness and image condition; Lemma Tag 022E (lemma-fpqc-affine), refinement is fpqc"
+   }
+  },
+  {
+   "text": "It remains to verify the asserted singleton fpqc condition, including its condition over affine opens other than $S$. Since $X'$ and $S$ are affine, $g$ is an affine morphism by [lem-weil-pbc-morphism-affine-schemes-affine]. For any affine open $U\\subseteq S$, the inverse image $g^{-1}(U)$ is therefore an affine open of $X'$, and $g(g^{-1}(U))=U$ by surjectivity. This one affine open witnesses the finite-image condition of [def-weil-pbc-fpqc-covering] for $U$, while Step 3 supplies flatness. Hence $\\{g:X'\\to S\\}$ is an fpqc covering.",
+   "uses": [
+    "lem-weil-pbc-morphism-affine-schemes-affine",
+    "pqf-def-affine-morphism",
+    "def-weil-pbc-fpqc-covering",
+    "def-weil-surjective-morphism"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/topologies.tex",
+    "place": "Topologies, Definition Tag 022B (definition-fpqc-covering) and Lemma Tag 022E (lemma-fpqc-affine); the singleton condition checked from the definition"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-fpqc-covering",
+  "lem-weil-pbc-scheme-coproduct-family",
+  "lem-weil-pbc-affine-morphism-permanence",
+  "def-weil-open-immersion",
+  "def-weil-flat-morphism",
+  "def-weil-surjective-morphism",
+  "lem-weil-pbc-morphism-affine-schemes-affine",
+  "pqf-def-affine-morphism"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/topologies.tex",
+  "place": "Topologies, Definition Tag 022B (definition-fpqc-covering) and Lemma Tag 022E (lemma-fpqc-affine), with the finite coproduct and singleton covering check written out"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -60,10 +126,25 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-galois-fpqc-descending-types-morphisms"
  },
  "chapter": "sec-curve-estimates",
- "unit": "sk-prop-h2"
+ "unit": "sk-prop-h2",
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "lem-galois-fpqc-singleton-affine-refinement",
+  "worker": "stage1",
+  "summary": "Split Topologies 022E using the finite affine-open image condition in Definition 022B, then packaged the opens into their finite affine coproduct, checked the induced map is flat and surjective on local rings and images, and verified the singleton fpqc condition on every affine open of the base. Existing definition nodes and Mathlib leaves cover every supporting fact; no new node is needed.",
+  "blueprint": "All four steps realize the finite affine refinement used in Step 2 of the proof of ancestor lem-galois-descent (effectivity), through lem-galois-fpqc-descending-types-morphisms Step 2: Stacks 02W3 invokes Topologies 022E to replace a singleton fpqc covering over an affine base with a flat surjective morphism of affines."
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-sar",
+  "group": "M1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-sar (reviewer sub-agent of L); spot-checked: Source: Stacks Topologies Lemma 022E (topologies-lemma-fpqc-affine, topologies.tex line 3151, read locally) and Definition 022B (line 2888); the item's statement (affine S, singleton fpqc {f}, finite affine opens X_j of X, coproduct X' affine, g=f h flat and surjective, {g} fpqc) is 022E for a one-member family plus the coproduct packaging, hypothesis by hypothesis; statement, stmt_deps, blueprint and maintainer fields unchanged, only proof/proof_deps/proof_origin/split_report/status changed. Step 1: def-weil-pbc-fpqc-covering applied to V=S gives flatness of f and affine opens V_j of X with union of images S (singleton family, so all V_j in X). Step 2: lem-weil-pbc-scheme-coproduct-family gives h with h iota_j=e_j and open coprojections covering X'; clause (4) of lem-weil-pbc-affine-morphism-permanence gives X' affine. Step 3: surjectivity from X'=union iota_j(X_j) and g iota_j=f|X_j (def-weil-surjective-morphism); flatness by identifying local rings along open immersions (def-weil-open-immersion, def-weil-flat-morphism), elementary from the cited statements. Step 4: lem-weil-pbc-morphism-affine-schemes-affine / pqf-def-affine-morphism give g^{-1}(U) affine for affine U, and surjectivity gives g(g^{-1}(U))=U, which is exactly the finite-image clause of def-weil-pbc-fpqc-covering. All cited nodes are mathlib/imported leaves whose statements I read and which say what each step takes (C1-C4); no off-unit tool use beyond generic definitions/leaves; no new nodes, no Mathlib leaf to verify. Small cases: S empty (m=0, X'=Spec 0, vacuous), f=id on affine S (m=1), f flat surjective of affines (X_1=X). Start 2026-10-10 Sat Oct 10 02:49:22 PM UTC 2026, end Sat Oct 10 02:49:44 PM UTC 2026."
+ }
 }
