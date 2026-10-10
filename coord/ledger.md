@@ -1392,3 +1392,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 12:18 L: accepted lem-sc-divisor-class-curve (0BE9/0BE8, 6 steps; 2 new nodes; 1 tool use; blueprint sign slip in the injectivity noted).
 - 12:19 L: accepted lem-pc-module-inverse-image-adjunction (008Y, 4 steps; new nodes: presheaf module adjunction 008T/008U, sheafification of presheaves of modules 0089 as a Mathlib leaf).
 - 2026-10-10, delivery of C1: lem-weil-pbc-projective-dimension-ext-characterization merged from deliver/C1/lem-weil-pbc-projective-dimension-ext-characterization (1 commit(s), 1 new node(s), spot-checked by L: L: 065R by induction with the Ext long exact sequence and the Ext^1 criterion for projectivity (new Mathlib leaf projective_iff_subsingleton_ext_one)); claim closed
+- 12:19 L: merged C1 lem-weil-pbc-projective-dimension-ext-characterization (065R, +1 Mathlib leaf).
