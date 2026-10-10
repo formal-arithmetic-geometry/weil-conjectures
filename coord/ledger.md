@@ -2288,3 +2288,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 18:48 L: merged deliver/K1/prop-pd-picard-degree-decomposition (reviewer FIX; first push; new nodes: 0)
 - 18:49 L: STATE: RINGED-SPACE DERIVED FUNCTORS MISSING (gap behind three finite-duality returns)
 - 18:49 L: merged deliver/M1/def-sp-truncation-couple (reviewer PASS; first push; new nodes: 0)
+- 18:49 L: merged deliver/J1/def-sp-image-filtration (reviewer FIX; first push; new nodes: 0)

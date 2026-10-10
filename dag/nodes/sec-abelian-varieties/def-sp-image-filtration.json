@@ -7,7 +7,7 @@
  },
  "kind": "definition",
  "title": "Image filtrations",
- "statement": "Let $(A,F)$ be a filtered object [def-sp-filtration] and let $A\\to B$ be a\nmorphism in the abelian category [def-sp-abelian] $\\mathcal A$. The *image\nfiltration* on $B$ is the filtration\n\n$$\n F^nB:=\\operatorname{im}\\bigl(F^nA\\to B\\bigr).\n$$\n\n(*Stacks Project:* the case of this construction used below is the induced\nfiltration on the homology of a filtered differential object, Definition\n12.23.4, Tag [012E](https://stacks.math.columbia.edu/tag/012E)\n($F^pH(K,d)=\\operatorname{im}(H(F^pK,d)\\to H(K,d))$); the definition above is\nthe same recipe for an arbitrary morphism $A\\to B$.)",
+ "statement": "Let $(A,F)$ be a filtered object [def-sp-filtration] and let $A\\to B$ be a\nmorphism in the abelian category [def-sp-abelian] $\\mathcal A$. The *image\nfiltration* on $B$ is the filtration\n\n$$\n F^nB:=\\operatorname{im}\\bigl(F^nA\\to B\\bigr).\n$$\n\nSince $F^{n+1}A\\subseteq F^nA$, one has $F^{n+1}B\\subseteq F^nB$, so this is a\ndecreasing filtration on $B$ in the sense of [def-sp-filtration].\n\n(*Stacks Project:* the analogous construction is the induced filtration on the\nhomology of a filtered differential object, Tag [012E](https://stacks.math.columbia.edu/tag/012E),\n$F^pH(K,d)=\\operatorname{im}(H(F^pK,d)\\to H(K,d))$. That is not literally a case of the\ndefinition above, since the objects $H(F^pK,d)$ need not be subobjects of one filtered\nobject; it follows the same recipe of taking images of a decreasing system of maps into $B$.)",
  "source": {
   "document": "literature/blueprint/master/blueprint/sec-abelian-varieties/sk-prop-av-pqf-finite/def-sp-image-filtration.md",
   "place": "node def-sp-image-filtration, order 508",
@@ -25,9 +25,59 @@
  "proof": [],
  "proof_deps": [],
  "proof_origin": null,
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "image filtration on the codomain induced by a morphism from a filtered object in an abelian category",
+   "results": "CategoryTheory.Abelian.imageFunctor (Mathlib/CategoryTheory/Abelian/Basic), CategoryTheory.Abelian.im (Mathlib/CategoryTheory/Abelian/Basic), and unrelated filtered-colimit declarations",
+   "date": "2026-10-11",
+   "verdict": "no match: Mathlib has the abelian image functor but no filtered-object image-filtration definition"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Subobject, image, filtration, Filtered",
+   "results": "0 hits; loogle reported unknown identifier 'image'",
+   "date": "2026-10-11",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "imageFiltration|image filtration|Filtered in Mathlib",
+   "results": "No matches",
+   "date": "2026-10-11",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "image filtration induced by a morphism in an abelian category",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-11",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "given a filtration and a morphism, define filtration on target by images of filtered subobjects",
+   "results": "CategoryTheory.IsGrothendieckAbelian.generatingMonomorphisms.functor and unrelated filtered-category declarations",
+   "date": "2026-10-11",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Abelian.imageFunctor, CategoryTheory.Subobject",
+   "results": "0 hits; loogle reported unknown identifier 'CategoryTheory.Abelian.imageFunctor'",
+   "date": "2026-10-11",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "imageFiltration|image.*filtration|filtration.*image in Mathlib",
+   "results": "No matches",
+   "date": "2026-10-11",
+   "verdict": "no match"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [],
  "blueprint_kind": "definition",
@@ -49,5 +99,22 @@
   }
  },
  "chapter": "sec-abelian-varieties",
- "unit": "sk-prop-av-pqf-finite"
+ "unit": "sk-prop-av-pqf-finite",
+ "split_report": {
+  "date": "2026-10-11",
+  "item": "def-sp-image-filtration",
+  "worker": "stage1",
+  "summary": "Checked the imported definition against its blueprint source and the existing prerequisite nodes def-sp-filtration and def-sp-abelian. The definition is the direct image recipe F^nB = im(F^nA -> B), so it has no proof steps or additional lemma nodes. Searched the whole blueprint for duplicate formulations and searched Mathlib twice by semantic search, by name pattern, and by source grep; no exact Mathlib definition was found.",
+  "blueprint": "node def-sp-image-filtration, order 508; the split realizes the node statement and its two statement dependencies",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-dif1849",
+  "group": "J1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-dif1849 (reviewer sub-agent of L); spot-checked: Statement faithful to blueprint node order 508; well-typed; deps def-sp-filtration (decreasing Z-filtration by subobjects) and def-sp-abelian supply all notions; no cycle (no proof, deps are upstream definitions); Mathlib searches recorded, no match. FIX more, RETURN less: (1) Stacks note claimed Tag 012E is 'the case of this construction' and the second reading said the recipe 'correctly specializes' to it; false, since H(F^pK) are not subobjects of a filtered object: reworded as an analogous construction and said why. (2) Added the one-line check that F^{n+1}B is contained in F^nB so the result is a filtration in the sense of [def-sp-filtration].; 1 file(s) fixed by the reviewer"
+ },
+ "lead_note": "2026-10-10 L (R-dif1849): Item is the general image filtration F^nB=im(F^nA->B) per its blueprint node (deps def-sp-filtration, def-sp-abelian); it does not and should not define the abutment A^n=colim, its filtration, or E_infty=gr, and does not cite def-sp-spectral-sequence: those belong to def-sp-convergence (E1 return 18:47), which must define them itself (its F^pA^n=im(D^{p,n-p}->A^n) is not literally an instance of this node either, since the D^{p,n-p} are not subobjects of one filtered object)."
 }
