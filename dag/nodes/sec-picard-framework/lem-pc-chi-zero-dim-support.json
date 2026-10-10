@@ -1,0 +1,74 @@
+{
+ "id": "lem-pc-chi-zero-dim-support",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pc-degree-base-change",
+   "place": "proof, part (2): 'such a skyscraper ... is flasque ..., hence $H^i(X,\\mathcal{O}_D)=0$ for $i\\ge1$ and $\\chi(X,\\mathcal{O}_D)=\\dim_kH^0(X,\\mathcal{O}_D)$', and the identification $\\mathcal{L}\\otimes\\mathcal{O}_D\\cong\\mathcal{O}_D$ used to compute $\\chi(\\mathcal{L}\\otimes\\mathcal{O}_D)$",
+   "via": []
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Cohomology of a coherent module with zero-dimensional support",
+ "statement": "Let $k$ be a field, $X$ a scheme proper over $k$ [def-weil-proper-morphism] and $\\mathcal F$ a coherent $\\mathcal O_X$-module [pqf-def-coherent] whose support $\\operatorname{Supp}(\\mathcal F)=\\{x\\in X:\\mathcal F_x\\ne0\\}$ has dimension $\\le0$ [def-kun-topological-krull-dimension]. Then, with the cohomology $H^i(X,-)$ and Euler characteristic $\\chi(X,-)$ of [def-pc-euler-characteristic]:\\n\\n1. $H^i(X,\\mathcal F)=0$ for all $i>0$;\\n1. $\\chi(X,\\mathcal F)=\\dim_kH^0(X,\\mathcal F)=\\dim_k\\Gamma(X,\\mathcal F)$;\\n1. for every invertible $\\mathcal O_X$-module $\\mathcal N$ [def-sc-invertible-module] the module $\\mathcal F\\otimes_{\\mathcal O_X}\\mathcal N$ is coherent with the same support, and $\\chi(X,\\mathcal F\\otimes_{\\mathcal O_X}\\mathcal N)=\\chi(X,\\mathcal F)$.",
+ "source": {
+  "document": "literature/stacks-project/varieties.tex",
+  "place": "Tag 0AYT (varieties-lemma-chi-tensor-finite), parts (3), (4) and (5) with $\\mathcal E$ invertible ($n=1$)"
+ },
+ "stmt_deps": [
+  "def-weil-proper-morphism",
+  "pqf-def-coherent",
+  "def-kun-topological-krull-dimension",
+  "def-pc-euler-characteristic",
+  "def-sc-invertible-module"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "sheaf cohomology of a coherent sheaf with zero-dimensional support vanishes in positive degrees",
+   "results": "CochainComplex.isZero_of_isStrictlyGE, CochainComplex.isStrictlyLE_iff, CochainComplex.isZero_of_isStrictlyLE (Mathlib.Algebra.Homology.Embedding.CochainComplex), Algebra.IsStandardSmoothOfRelationDimension.subsingleton_kaehlerDifferential",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Euler characteristic of a coherent sheaf supported on finitely many points equals dimension of global sections",
+   "results": "Module.rankAtStalk_eq_zero_iff_notMem_support, Module.isLocallyConstant_rankAtStalk_freeLocus (Mathlib.RingTheory.Spectrum.Prime.FreeLocus), Module.supportDim (Mathlib.RingTheory.KrullDimension.Module), exists_of_res_zero_of_qcqs_of_top",
+   "date": "2026-10-10",
+   "verdict": "no match (commutative algebra of supports only)"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rln 'eulerChar\\|EulerChar' Mathlib/; grep -rn 'Sheaf.H ' Mathlib/CategoryTheory/Sites/SheafCohomology/",
+   "results": "Mathlib/Algebra/Homology/EulerCharacteristic.lean (complexes only), Combinatorics/Enumerative/IncidenceAlgebra.lean; Sheaf.H in CategoryTheory/Sites/SheafCohomology/Basic.lean (abstract sheaf cohomology, nothing on coherent modules on schemes)",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-pc-degree-base-change",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-rr"
+}

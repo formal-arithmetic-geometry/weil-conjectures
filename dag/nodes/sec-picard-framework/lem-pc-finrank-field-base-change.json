@@ -1,0 +1,75 @@
+{
+ "id": "lem-pc-finrank-field-base-change",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pc-degree-base-change",
+   "place": "proof, part (1): 'because $\\dim_K(V\\otimes_kK)=\\dim_kV$ for a finite-dimensional $k$-vector space $V$'",
+   "via": []
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Dimension is invariant under extension of scalars of fields",
+ "statement": "Let $k$ be a field, $K/k$ a field extension [def-pc-field-extension] and $V$ a finite-dimensional $k$-vector space. Then $K\\otimes_kV$ is a finite-dimensional $K$-vector space and $\\dim_K(K\\otimes_kV)=\\dim_kV$ [def-weil-vector-space-dimension].",
+ "source": {
+  "document": "literature/stacks-project/varieties.tex",
+  "place": "Tag 0B59 (varieties-lemma-degree-base-change), proof: 'Hence we see that the Euler characteristics are unchanged' (the dimension count behind it); also Tag 08AB (varieties-lemma-euler-characteristic-extend-base-field), proof"
+ },
+ "stmt_deps": [
+  "def-pc-field-extension",
+  "def-weil-vector-space-dimension"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "dimension of the base change K ⊗_k V of a vector space along a field extension equals dimension of V",
+   "results": "IsBaseChange.lift_rank_eq (Mathlib.LinearAlgebra.Dimension.Localization), IntermediateField.rank_bot', Algebra.Extension.baseChange, IsBaseChange.basis",
+   "date": "2026-10-10",
+   "verdict": "generalization: IsBaseChange.lift_rank_eq (rank version); exact finrank version found by loogle"
+  },
+  {
+   "tool": "loogle",
+   "query": "Module.finrank_baseChange",
+   "results": "Module.finrank_baseChange : Module.finrank R (TensorProduct S R M') = Module.finrank S M' [StrongRankCondition R, StrongRankCondition S, Module.Free S M', Algebra S R] (Mathlib.LinearAlgebra.Dimension.Constructions)",
+   "date": "2026-10-10",
+   "verdict": "match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rn 'finrank_baseChange' Mathlib/",
+   "results": "Mathlib/LinearAlgebra/Dimension/Constructions.lean:379 theorem Module.finrank_baseChange (section TensorProduct, variables lines 350-353); uses in RingTheory/Spectrum/Prime/FreeLocus.lean:335,385",
+   "date": "2026-10-10",
+   "verdict": "match"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "Module.finrank_baseChange",
+  "file": "Mathlib/LinearAlgebra/Dimension/Constructions.lean",
+  "how": "specializes in one line: line 379 `theorem Module.finrank_baseChange : finrank R (R ⊗[S] M') = finrank S M'` under the variables of lines 350-353 ([StrongRankCondition R] [StrongRankCondition S] [Module.Free S M'] [Algebra S R]); take S = k, R = K (fields have the strong rank condition) and M' = V (every k-vector space is free: instance Module.Free.of_divisionRing, Mathlib/LinearAlgebra/Basis/VectorSpace.lean:156). Finite-dimensionality of K ⊗_k V: instance Module.Finite.base_change, Mathlib/RingTheory/TensorProduct/Finite.lean:81. Lines read with sed -n 2026-10-10"
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-pc-degree-base-change",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-rr"
+}
