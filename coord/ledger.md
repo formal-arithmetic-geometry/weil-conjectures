@@ -2736,3 +2736,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 21:55 L: merged deliver/C1/lem-sc-genus-invariant (reviewer FIX; first push; new nodes: 0)
 - 21:55 L: merged deliver/C1/lem-pc-perfect-generation-koszul-orthogonal (reviewer FIX; first push; new nodes: 1)
 - 21:56 L: merged deliver/K1/lem-pc-tor-amplitude-qcoh-test (reviewer FIX; first push; new nodes: 1)
+- 21:56 L: returned deliver/E1/lem-pc-rf-base-change-single-complex-criterion (reviewer RETURN: Reviewer R-bcc2722. Four faults (more than three) on head 1830eac21: (1) C4/E: Step 4 applies lem-pc-rf-single-complex-q)
