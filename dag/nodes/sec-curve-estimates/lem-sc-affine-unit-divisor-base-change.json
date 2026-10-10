@@ -21,11 +21,68 @@
   "def-sc-curves",
   "def-sc-divisor",
   "lem-sc-compactification",
-  "lem-sc-global-functions"
+  "lem-sc-local-dvr-base-change"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Write $X=\\overline C$ and $X'=\\overline C'$. By [lem-sc-pic-affine-base-change-compatibility] (1), $X'$ is a smooth proper connected compactification of $C'$ whose boundary is $S'=\\{P':P\\in S\\}$, where each $P\\in S$ (a $k$-rational closed point, $k$ being algebraically closed) pulls back to a single $k'$-point $P'$. Hence $P\\mapsto P'$ is a bijection $S\\to S'$, and it induces the canonical identification $\\iota:\\bigoplus_{P\\in S}\\mathbf Z[P]\\xrightarrow{\\sim}\\bigoplus_{P'\\in S'}\\mathbf Z[P']$.",
+   "uses": [
+    "lem-sc-pic-affine-base-change-compatibility",
+    "lem-sc-compactification",
+    "def-sc-field-extension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-curve-estimates/sk-prop-ext-invariance/thm-sc-constant-invariance.md",
+    "place": "Affine-case proof, compactification and boundary setup"
+   }
+  },
+  {
+   "text": "Let $u\\in\\mathcal O_C(C)^\\times$ and view $u$ as a nonzero rational function on the proper curve $X$. At each $P\\in S$ the coefficient of $[P]$ in $\\operatorname{div}(u)$ is the normalized order $v_P(u)$ [def-sc-divisor]. By [lem-sc-local-dvr-base-change] the pullback $u'$ has $v_{P'}(u')=v_P(u)$. Hence the boundary part of $\\operatorname{div}(u')$ is $\\iota$ of the boundary part of $\\operatorname{div}(u)$.",
+   "uses": [
+    "lem-sc-local-dvr-base-change",
+    "def-sc-divisor"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-curve-estimates/sk-prop-ext-invariance/thm-sc-constant-invariance.md",
+    "place": "Affine-case proof, unit quotient paragraph"
+   }
+  },
+  {
+   "text": "Let $L$ and $L'$ be the subgroups of boundary divisors of units on $C$ and on $C'$. Step 2 gives $\\iota(L)\\subseteq L'$. Conversely let $D'=\\sum_{P\\in S}n_P[P']\\in L'$ and $D=\\sum_{P\\in S}n_P[P]$ on $X$. Since $D'$ is the divisor of a unit on $C'$, it is principal on $X'$, so $\\mathcal O_{X'}(D')$ is trivial [lem-sc-divisor-class-curve], and $\\deg D=\\deg D'=0$ [lem-sc-deg-principal-zero]. Since $\\mathcal O_X(P)$ pulls back to $\\mathcal O_{X'}(P')$ for each $P\\in S$ [lem-sc-pic-affine-base-change-compatibility] (1), $\\mathcal O_X(D)$ pulls back to $\\mathcal O_{X'}(D')$, so the class of $\\mathcal O_X(D)$ in $\\operatorname{Pic}^0(X)$ maps to $0$ in $\\operatorname{Pic}^0(X')$. By [lem-sc-pic-affine-base-change-compatibility] (3) this pullback is the Jacobian base-change map $J_X(k)\\to J_{X'}(k')=J_X(k')$ [lem-sc-genus-invariant], [thm-sc-jacobian-representability], which is injective because $\\operatorname{Spec}k'\\to\\operatorname{Spec}k$ is an epimorphism (so $Y(k)\\to Y(k')$ is injective for every $k$-scheme $Y$). Hence $\\mathcal O_X(D)$ is trivial, and $D=\\operatorname{div}(f)$ for some $f\\in k(X)^*$ [lem-sc-divisor-class-curve]. Then $v_Q(f)=0$ at every closed point $Q\\in C$, so $f\\in\\mathcal O_C(C)^\\times$ by exactness of $0\\to\\mathbf G_m\\to j_*\\mathbf G_{m,\\eta}\\xrightarrow{\\operatorname{div}}\\bigoplus_x i_{x*}\\mathbf Z$ on sections over $C$ [lem-sc-divisor-sequence-general], and $D\\in L$. Thus $L'=\\iota(L)$.",
+   "uses": [
+    "lem-sc-pic-affine-base-change-compatibility",
+    "lem-sc-divisor-class-curve",
+    "lem-sc-deg-principal-zero",
+    "thm-sc-jacobian-representability",
+    "lem-sc-genus-invariant",
+    "lem-sc-divisor-sequence-general"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-curve-estimates/sk-prop-ext-invariance/thm-sc-constant-invariance.md",
+    "place": "Affine-case proof, unit quotient paragraph"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sc-pic-affine-base-change-compatibility",
+  "lem-sc-compactification",
+  "def-sc-field-extension",
+  "lem-sc-local-dvr-base-change",
+  "def-sc-divisor",
+  "lem-sc-divisor-class-curve",
+  "lem-sc-deg-principal-zero",
+  "thm-sc-jacobian-representability",
+  "lem-sc-genus-invariant",
+  "lem-sc-divisor-sequence-general"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/master/blueprint/sec-curve-estimates/sk-prop-ext-invariance/thm-sc-constant-invariance.md",
+  "place": "Affine-case proof, unit quotient paragraph"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -57,12 +114,28 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-sc-units-quotient-base-change",
   "by": "worker",
   "date": "2026-10-10"
  },
  "chapter": "sec-curve-estimates",
- "unit": "sk-prop-ext-invariance"
+ "unit": "sk-prop-ext-invariance",
+ "split_report": {
+  "date": "2026-10-11",
+  "item": "lem-sc-affine-unit-divisor-base-change",
+  "worker": "stage1",
+  "summary": "Checked the item against the affine unit-quotient paragraph and the existing Lean source. Added one statement-only local-DVR comparison node, split the proof into boundary setup, order comparison, and equality of the unit-divisor subgroups, and recorded all Mathlib searches and verbatim citations.",
+  "blueprint": "Realizes the affine-case proof paragraph: identify the boundary after compactification and base change, compare orders of units at corresponding points, and conclude that the boundary principal-divisor subgroup is unchanged.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-udb3141",
+  "group": "J1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-udb3141 (reviewer sub-agent of L); spot-checked: Statement read in full (C4): both clauses (boundary part of div(u') = iota(div u); iota(L)=L') hold. FIX more, RETURN less: (1) C1 step 1: rationality of S and the single point P' over P were uncited; now cite lem-sc-pic-affine-base-change-compatibility (1). (2) C1/C4 step 3 (missed by the second reading): thm-sc-jacobian-representability/lem-sc-genus-invariant give J_{X_k'}=(J_X)_k' but not that line-bundle pullback Pic^0(X)->Pic^0(X') is the Jacobian map, nor that O_X(P) pulls back to O_X'(P'), nor deg 0 of principal divisors, nor divisor-0 => unit on C; now cite lem-sc-pic-affine-base-change-compatibility (1),(3), lem-sc-deg-principal-zero, lem-sc-divisor-sequence-general; injectivity of J(k)->J(k') made explicit (Spec k'->Spec k epi). (3) B3: new node lem-sc-local-dvr-base-change rewritten in TeX ({P'}(f')=v_P(f)$); true (uniformizer stays a uniformizer, fibre over P is Spec k'); not a duplicate of an existing node (class b/d checked), one Mathlib grep recorded. (4) B4: plain-text arrow and plain text in steps 2-3 written in TeX. No cycle: pic-affine-base-change-compatibility does not depend on the item.; 2 file(s) fixed by the reviewer"
+ }
 }
