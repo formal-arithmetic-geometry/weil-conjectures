@@ -3,29 +3,35 @@
  "blueprint": {
   "is": "lem-kun-04ca",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "Pushforward along a closed immersion",
- "statement": "Let $i:Z\\to X$ be a\nclosed immersion of\nschemes. The functor $i_*:\\Ab(Z_{\\Et})\\to\\Ab(X_{\\Et})$ of\n[def-weil-pbc-direct-image] is fully faithful, $i^{-1}$ is a\nleft inverse, and the essential image consists of those abelian sheaves\non $X_{\\Et}$ whose\nsupport is contained in $Z$.",
+ "statement": "Let $i:Z\\to X$ be a\nclosed immersion of\nschemes [def-weil-pbc-scheme-conventions]. The functor $i_*:\\Ab(Z_{\\Et})\\to\\Ab(X_{\\Et})$ of\n[def-weil-pbc-direct-image] is fully faithful, $i^{-1}$ [def-weil-pbc-inverse-image] is a\nleft inverse, and the essential image consists of those abelian sheaves $F$\non $X_{\\Et}$ whose support is contained in $Z$, that is, with $F_{\\bar x}=0$ [def-weil-pbc-geometric-stalks] for every geometric point $\\bar x$ of $X$ [def-weil-geometric-point] lying over a point of $X\\setminus Z$. (For $X$ of finite type over a field this is the condition $\\kunsupp F\\subseteq Z$ of [def-kun-support].)",
  "source": {
   "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-kunneth-ordinary/lem-kun-04ca.md",
   "place": "node lem-kun-04ca, order 1693"
  },
  "stmt_deps": [
   "def-weil-pbc-direct-image",
+  "def-weil-pbc-inverse-image",
+  "def-weil-pbc-geometric-stalks",
+  "def-weil-geometric-point",
   "def-kun-support",
   "def-weil-pbc-scheme-conventions"
  ],
  "proof": [
   {
-   "text": "For an etale $V\\to X$ one has $(i_*F)(V)=F(V\\times_XZ)$ by\n[def-weil-pbc-direct-image]; for an etale $V\\to Z$ the composite\n$V\\to Z\\to X$ is etale and $V\\times_XZ=V$, so the restriction of\n$i_*F$ to $Z_{\\Et}$ is $F$, i.e. $i^{-1}i_*=\\mathrm{id}$ by [def-weil-pbc-inverse-image]; in\nparticular $i_*$ is fully faithful ([prop-openclosed-lowerstar-fully-faithful]).\nFor the essential image, let $F$ be a sheaf on $X_{\\Et}$ with\n$\\kunsupp F\\subseteq Z$ and consider the canonical map\n$F\\to i_*i^{-1}F$. At a geometric point $\\bar x$ of $X$ with\n$x\\in Z$, the pointed etale neighbourhoods $W\\to X$ of $\\bar x$\nhave $W\\times_XZ$ cofinal among the pointed etale neighbourhoods of\n$\\bar x$ in $Z$ by [lemma-openclosed-stalk-lowerstar] (an etale neighbourhood of $\\bar x$ in $Z$\nextends to one in $X$ by composing with $i$), so\n$(i_*i^{-1}F)_{\\bar x}=F_{\\bar x}$ by\n[def-weil-pbc-geometric-stalks]; at a geometric point with\n$x\\notin Z$, the open complement $X\\setminus Z$ provides cofinal\nneighbourhoods $W\\subseteq X\\setminus Z$ with $W\\times_XZ=\\emptyset$,\nso both stalks vanish (for $F$ this is the support hypothesis).\nHence $F\\to i_*i^{-1}F$ is an isomorphism on every geometric stalk,\nand therefore an isomorphism by\nlem:weil-pbc-geometric-stalk-conservative.",
+   "text": "For an etale $V\\to X$ one has $(i_*F)(V)=F(V\\times_XZ)$ by [def-weil-pbc-direct-image]. The closed-immersion full-faithfulness proposition [prop-openclosed-lowerstar-fully-faithful] gives an isomorphism $i^{-1}i_*F\\cong F$, so $i^{-1}$ is a left inverse and $i_*$ is fully faithful. Every object of the essential image has support in $Z$: for $G\\in\\Ab(Z_{\\Et})$ and $\\bar x$ lying over a point of $X\\setminus Z$, the open complement $X\\setminus Z$ gives a cofinal system of pointed etale neighbourhoods $(V,\\bar v)$ of $\\bar x$ with $V\\to X$ factoring through $X\\setminus Z$ (replace $V$ by its open subscheme $V\\times_X(X\\setminus Z)$, which contains $\\bar v$), and for these $V\\times_XZ=\\varnothing$, so $(i_*G)(V)=G(\\varnothing)=0$ and $(i_*G)_{\\bar x}=0$ [def-weil-pbc-geometric-stalks]; an isomorphism of sheaves induces isomorphisms of stalks, so the same holds for every sheaf isomorphic to $i_*G$. Conversely, let $F$ be a sheaf on $X_{\\Et}$ with support contained in $Z$ and consider the canonical unit map $\\eta:F\\to i_*i^{-1}F$. If $\\bar x$ lies over a point of $Z$, write $\\bar x=i\\circ\\bar z$. The stalk comparison for inverse image [lem-weil-pbc-inverse-image-stalk-germ] identifies $(i^{-1}F)_{\\bar z}$ with $F_{\\bar x}$, while [lemma-openclosed-stalk-lowerstar] identifies $(i_*i^{-1}F)_{\\bar x}$ with $(i^{-1}F)_{\\bar z}$; the unit induces the identity under these identifications. If $\\bar x$ lies over $X\\setminus Z$, then $(i_*i^{-1}F)_{\\bar x}=0$ by the previous paragraph's computation with $G=i^{-1}F$, and $F_{\\bar x}=0$ by the support hypothesis. Thus $\\eta$ is an isomorphism at every geometric stalk, hence an isomorphism by [lemma-weil-pbc-geometric-stalk-conservative].",
    "uses": [
     "def-weil-pbc-direct-image",
     "def-weil-pbc-inverse-image",
     "prop-openclosed-lowerstar-fully-faithful",
     "lemma-openclosed-stalk-lowerstar",
-    "def-weil-pbc-geometric-stalks"
+    "def-weil-pbc-geometric-stalks",
+    "lem-weil-pbc-inverse-image-stalk-germ",
+    "lemma-weil-pbc-geometric-stalk-conservative",
+    "def-weil-geometric-point"
    ],
    "elementary": false
   }
@@ -36,16 +42,68 @@
   "prop-openclosed-lowerstar-fully-faithful",
   "lemma-openclosed-stalk-lowerstar",
   "def-weil-pbc-geometric-stalks",
-  "lemma-weil-pbc-geometric-stalk-conservative"
+  "lemma-weil-pbc-geometric-stalk-conservative",
+  "lem-weil-pbc-inverse-image-stalk-germ",
+  "def-weil-geometric-point"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-kunneth-ordinary/lem-kun-04ca.md",
   "place": "## Proof"
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "pushforward along a closed immersion of schemes is fully faithful and essential image consists of sheaves supported on the closed subscheme",
+   "results": "AlgebraicGeometry.IsClosedImmersion.overEquivIdealSheaf; AlgebraicGeometry.Scheme.Modules.instFullPushforward; AlgebraicGeometry.Scheme.IdealSheafData.support_map; AlgebraicGeometry.instIsClosedImmersionInclusion; AlgebraicGeometry.IsClosedImmersion.instSubschemeι; AlgebraicGeometry.Scheme.IdealSheafData.range_subschemeι; AlgebraicGeometry.Scheme.Hom.range_subset_ker_support",
+   "date": "2026-10-11",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.FullyFaithful, Sheaf, closed immersion, support",
+   "results": "0 hits; unknown identifier Sheaf",
+   "date": "2026-10-11",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "fullyFaithfulLowerStar|faithful_lowerStar_of_isClosedImmersion|stalk in Mathlib/AlgebraicGeometry Mathlib/CategoryTheory",
+   "results": "0 hits",
+   "date": "2026-10-11",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "closed immersion direct image sheaves fully faithful essential image supported",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-11",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "étale sheaf direct image closed immersion fully faithful restriction inverse image",
+   "results": "AlgebraicGeometry.Scheme.Etale.forgetFullyFaithful; AlgebraicGeometry.Scheme.Modules.restrictAdjunction_counit_app_app; AlgebraicGeometry.Scheme.Modules.restrictFunctorIsoPullback; AlgebraicGeometry.Scheme.Hom.appIso; AlgebraicGeometry.Scheme.Modules.restrictFunctorComp; AlgebraicGeometry.Scheme.Modules.restrictFunctorComp_inv_app_app; AlgebraicGeometry.instFullEtaleOverForget",
+   "date": "2026-10-11",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "Functor.FullyFaithful, lowerStar, IsClosedImmersion",
+   "results": "0 hits; unknown identifier Functor.FullyFaithful",
+   "date": "2026-10-11",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "lowerStar.*IsClosedImmersion|isClosedImmersion.*lowerStar in Mathlib",
+   "results": "0 hits",
+   "date": "2026-10-11",
+   "verdict": "no match"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [],
  "blueprint_kind": "lemma",
@@ -79,5 +137,29 @@
   }
  },
  "chapter": "sec-smooth-purity",
- "unit": "sk-prop-sf-kunneth-ordinary"
+ "unit": "sk-prop-sf-kunneth-ordinary",
+ "split_report": {
+  "date": "2026-10-11",
+  "item": "lem-kun-04ca",
+  "worker": "stage1",
+  "summary": "Replaced the imported paragraph with a complete stalkwise proof. The direct-image definition and the existing closed-immersion full-faithfulness proposition give the left-inverse claim; the essential-image converse is proved from the inverse-image stalk comparison, closed-immersion stalk cofinality, the support definition, and stalk conservativity. The incorrect claim that an etale neighbourhood of Z extends by composing with i was removed.",
+  "blueprint": "Realizes the blueprint proof paragraph: restriction of i_* and the stalkwise characterization of sheaves supported on Z.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-inverse-image-stalk-germ",
+    "why": "The essential-image stalk calculation needs the generic inverse-image stalk comparison, which is filed in the proper-base-change unit and is not supplied by this unit's route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-inverse-image-stalk-germ"
+ ],
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-k4c3002",
+  "group": "M1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-k4c3002 (reviewer sub-agent of L); spot-checked: Checked statement vs Stacks 04CA and each cited statement (prop-openclosed-lowerstar-fully-faithful, lemma-openclosed-stalk-lowerstar, lem-weil-pbc-inverse-image-stalk-germ tool use accepted, geometric-stalk conservativity); citers (lem-kun-cp-approximation, lem-kun-0f1f-vanish/-gen) use only 'support in Z => F = i_*(F|_Z)' with X finite type over a field. FIX more, RETURN less: (1) B3/C4: statement used def-kun-support (defined only for X of finite type over a field) for arbitrary schemes X; support-in-Z now defined inline via geometric stalks, with def-kun-support named as the same condition in the finite-type case; stmt_deps updated. (2) D/C: the inclusion 'essential image has support in Z' was not proved; added the vanishing of (i_*G) stalks off Z via the cofinal neighbourhoods in X\\Z, and the converse step now reuses it. Second reading missed both.; 1 file(s) fixed by the reviewer"
+ }
 }

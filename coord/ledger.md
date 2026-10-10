@@ -2902,3 +2902,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 23:01 L: merged deliver/C1/lemma-nagata-qc-open-eq-eventually (reviewer FIX; first push; new nodes: 0)
 - 23:01 L: merged deliver/G1/lem-sc-picard-diagonal-locally-closed (reviewer FIX; first push; new nodes: 1)
 - 23:01 L: returned deliver/K1/lem-sc-etale-at-prime-flat-unramified-criterion (reviewer RETURN: 1. D1 (no real split): steps 1 and 3 prove (1)<=>(2) and (1)<=>(3) by quoting 'the finite-presentation pointwise criteri)
+- 23:02 L: merged deliver/M1/lem-kun-04ca (reviewer FIX; first push; new nodes: 0)
