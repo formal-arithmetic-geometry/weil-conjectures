@@ -2617,3 +2617,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 21:06 L: returned deliver/G1/lem-sc-etale-faithfully-flat-local (reviewer RETURN: 1 (E1/C4, missing hypothesis): Step 2 applies lem-sc-etale-local-ring-faithfully-flat-descent to 'the finitely presented)
 - 21:08 L: merged deliver/M1/lem-pc-twist-cech-monomial-decomposition (reviewer PASS; first push; new nodes: 0)
 - 21:08 L: attached AlgebraicGeometry.IsCurve.VanishingAboveTwo to def-weil-pbc-C1 (Assertions.lean:84-89, sorry-free; reviewer R-dc12509); coord/returns/C1.md change left by the C2 abandonment committed
+- 21:08 L: returned deliver/J1/def-weil-pbc-C1 (reviewer RETURN: Reviewer R-dc12509 (packet review, 21:08 UTC), head 412951ea9. B10: nothing to split; the sorry-free declaration Algebra)
