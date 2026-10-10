@@ -1,0 +1,84 @@
+{
+ "id": "lem-weil-pbc-quotient-module-induced-map",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-normal-constant-generic",
+   "place": "within the proof of Stacks 00M1 (lemma-no-spectral-sequence), reached through Tor symmetry 00M3 as in the item's from.place: 'Naturally, we divide out by \"trivial\" zig-zags' and 'it is clear that this induces morphisms' (lines 18391-18395, 18447-18449): the passage from a linear map preserving the zig-zags and the trivial zig-zags to the induced map $\\mathbf H_i(A)\\to\\mathbf H_i(B)$, and its compatibility with composition and identities (clauses (c), (d) of the item)",
+   "via": [
+    "lem-weil-pbc-double-complex-zigzag-module-functorial",
+    "def-weil-pbc-double-complex-zigzag-module",
+    "lem-weil-pbc-double-complex-cokernel-homology-iso",
+    "lem-weil-pbc-tor-symmetry",
+    "lem-weil-pbc-flat-tor-ideal-criterion",
+    "lem-weil-pbc-flat-mod-injective",
+    "lem-weil-pbc-flat-local-depth-formula",
+    "lem-weil-pbc-serre-sk-goes-up",
+    "lem-weil-pbc-flat-normal-fibres-noetherian-normal",
+    "lem-weil-pbc-smooth-over-normal-ring-normal",
+    "lem-weil-pbc-etale-over-normal-ring-normal",
+    "lem-weil-pbc-etale-colimit-normal-local-domain"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "A linear map preserving submodules induces a map of quotient modules, functorially",
+ "statement": "Let $R$ be a commutative ring, $M$, $M'$, $M''$ $R$-modules with submodules $N\\subseteq M$, $N'\\subseteq M'$, $N''\\subseteq M''$, and let $q:M\\to M/N$, $q':M'\\to M'/N'$, $q'':M''\\to M''/N''$ be the quotient maps [def-weil-pbc-quotient-module]. (1) If $f:M\\to M'$ is $R$-linear with $f(N)\\subseteq N'$, there is a unique $R$-linear map $\\bar f:M/N\\to M'/N'$ with $\\bar f\\circ q=q'\\circ f$, i.e. $\\bar f(m+N)=f(m)+N'$. (2) If moreover $g:M'\\to M''$ is $R$-linear with $g(N')\\subseteq N''$, then $\\overline{g\\circ f}=\\bar g\\circ\\bar f$; and $\\overline{\\mathrm{id}_M}=\\mathrm{id}_{M/N}$.",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Algebra, Section Tag 00LY (section-tor), the paragraph before Lemma Tag 00M1 (lemma-no-spectral-sequence; tags/tags: 00M1,algebra-lemma-no-spectral-sequence), lines 18391-18395 ('it is clear that this induces morphisms'), and the proof of 00M1, lines 18447-18449 (quotient by the trivial zig-zags); Stacks uses induced maps on quotient modules without a labelled statement"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-quotient-module"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "linear map f : M → M₂ with p ≤ comap f q induces linear map M ⧸ p → M₂ ⧸ q, compatible with composition and identity",
+   "results": "Submodule.mapQ, Submodule.mapQLinear, Submodule.mapQ_apply, Submodule.liftQ, Submodule.mapQ_mkQ, Submodule.factor_comp_mk (Mathlib.LinearAlgebra.Quotient.Basic)",
+   "date": "2026-10-10",
+   "verdict": "match: Submodule.mapQ"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "a linear map sending submodule N into N' induces a unique linear map M/N → M'/N' on quotient modules",
+   "results": "Submodule.mapQLinear, Submodule.mapQ, Submodule.mapQ_apply, Submodule.liftQ, Submodule.liftQ_apply (Mathlib.LinearAlgebra.Quotient.Basic), Submodule.linearMap_qext_iff (Mathlib.LinearAlgebra.Quotient.Defs)",
+   "date": "2026-10-10",
+   "verdict": "match: Submodule.mapQ; uniqueness by Submodule.linearMap_qext"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -n 'def mapQ\\b\\|theorem mapQ_apply\\|theorem mapQ_mkQ\\|theorem mapQ_comp\\|theorem mapQ_id' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/LinearAlgebra/Quotient/Basic.lean; grep -n 'theorem linearMap_qext\\|theorem mkQ_surjective' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/LinearAlgebra/Quotient/Defs.lean",
+   "results": "Basic.lean:174 def mapQ (f) (h : p ≤ comap f q) : M ⧸ p →ₛₗ M₂ ⧸ q; :178 mapQ_apply; :182 mapQ_mkQ; :195 mapQ_comp; :204 mapQ_id; Defs.lean:236 mkQ_surjective; :248 linearMap_qext",
+   "date": "2026-10-10",
+   "verdict": "match"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "Submodule.mapQ, Submodule.mapQ_mkQ, Submodule.linearMap_qext, Submodule.mapQ_comp, Submodule.mapQ_id",
+  "file": "Mathlib/LinearAlgebra/Quotient/Basic.lean",
+  "line": 174,
+  "how": "one declaration per clause (lines read with sed -n 170-210 of Mathlib/LinearAlgebra/Quotient/Basic.lean and grep of Defs.lean, 2026-10-10): (1) existence: Submodule.mapQ N N' f h with h : N ≤ N'.comap f (Basic.lean:174), and \\bar f∘q=q'∘f is Submodule.mapQ_mkQ (Basic.lean:182; on elements mapQ_apply, :178); uniqueness: Submodule.linearMap_qext (Mathlib/LinearAlgebra/Quotient/Defs.lean:248: two linear maps out of M ⧸ p agreeing after mkQ are equal); (2) Submodule.mapQ_comp (Basic.lean:195) with τ = RingHom.id R, and Submodule.mapQ_id (Basic.lean:204). Mathlib states it for Ring R and semilinear maps; the commutative ring and R-linear maps of the node are the one-line specialization."
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-double-complex-zigzag-module-functorial",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1"
+}
