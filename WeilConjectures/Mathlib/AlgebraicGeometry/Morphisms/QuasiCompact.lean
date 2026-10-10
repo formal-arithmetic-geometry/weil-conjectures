@@ -23,6 +23,9 @@ point of the range (`AlgebraicGeometry.exists_specializes_of_mem_closure_range`)
 the topological content of Stacks Project Tag 02JQ; it is deduced from the corresponding
 statement about prime spectra,
 `PrimeSpectrum.exists_specializes_of_mem_closure_range_comap`.
+
+A quasi-compact scheme is the union of finitely many affine opens
+(`AlgebraicGeometry.Scheme.exists_finset_isAffineOpen_sup_eq_top`).
 -/
 
 @[expose] public section
@@ -92,5 +95,19 @@ theorem Scheme.Hom.isRetrocompact_range {X Y : Scheme.{u}} (f : X ⟶ Y) [QuasiC
 theorem Scheme.Hom.isConstructible_range {X Y : Scheme.{u}} (f : X ⟶ Y) [IsOpenImmersion f]
     [QuasiCompact f] : Topology.IsConstructible (Set.range f.base) :=
   f.isRetrocompact_range.isConstructible f.isOpenEmbedding.isOpen_range
+
+/-- A quasi-compact scheme is the union of finitely many affine opens. -/
+lemma Scheme.exists_finset_isAffineOpen_sup_eq_top (T : Scheme.{u}) [CompactSpace T] :
+    ∃ S : Finset T.Opens, (∀ O ∈ S, IsAffineOpen O) ∧ S.sup id = ⊤ := by
+  classical
+  obtain ⟨s, hs, hsU⟩ := (isCompact_iff_finite_and_eq_biUnion_affineOpens
+    (U := (⊤ : T.Opens))).1 (by simpa using isCompact_univ)
+  refine ⟨hs.toFinset.image Subtype.val, ?_, le_antisymm le_top ?_⟩
+  · simp only [Finset.mem_image, Set.Finite.mem_toFinset]
+    rintro _ ⟨O, -, rfl⟩
+    exact O.2
+  · rw [hsU]
+    exact iSup₂_le fun i hi ↦ Finset.le_sup (f := id)
+      (Finset.mem_image_of_mem _ (hs.mem_toFinset.2 hi))
 
 end AlgebraicGeometry

@@ -198,6 +198,15 @@ lemma forget_obj (K : IsoAlgebra F) : (forget F).obj K = K.carrier :=
 lemma forget_map {K K' : IsoAlgebra F} (φ : K ⟶ K') : (forget F).map φ = φ.hom.f :=
   rfl
 
+@[simp]
+lemma id_hom_f (K : IsoAlgebra F) : (𝟙 K : K ⟶ K).hom.f = 𝟙 K.carrier :=
+  rfl
+
+@[simp, reassoc]
+lemma comp_hom_f {K K' K'' : IsoAlgebra F} (φ : K ⟶ K') (ψ : K' ⟶ K'') :
+    (φ ≫ ψ).hom.f = φ.hom.f ≫ ψ.hom.f :=
+  rfl
+
 /-- The coherently iterated structure isomorphism `Φ^[n] : Fⁿ a ≅ a`, defined recursively
 by `Φ^[0] = 𝟙 a` and `Φ^[n + 1] = Φ ∘ F(Φ^[n])`:
 
