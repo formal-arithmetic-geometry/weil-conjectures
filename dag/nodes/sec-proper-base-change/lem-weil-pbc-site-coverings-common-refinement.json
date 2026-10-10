@@ -11,9 +11,61 @@
   "def-weil-pbc-sites-and-cohomology",
   "def-weil-pbc-site-plus-construction"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "*Pull back the second covering along each member of the first.* For every $i\\in I$, apply axiom (iii) of the site [def-weil-pbc-sites-and-cohomology] to the covering $\\{V_j\\to U\\}_{j\\in J}$ and the morphism $U_i\\to U$. Choose the resulting fibre products $W_{ij}=V_j\\times_UU_i$ with projections $q_{ij}:W_{ij}\\to U_i$ and $p_{ij}:W_{ij}\\to V_j$. For each fixed $i$, the family $\\{q_{ij}:W_{ij}\\to U_i\\}_{j\\in J}$ is a covering.",
+   "uses": [
+    "def-weil-pbc-sites-and-cohomology"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Sites, Lemma 00W6 and proof: the first sentence, applying the base-change axiom to \\{V_j\\to U\\} along each U_i\\to U"
+   }
+  },
+  {
+   "text": "*Compose the pulled-back coverings.* Apply axiom (ii) of [def-weil-pbc-sites-and-cohomology] to the covering $\\{U_i\\to U\\}_{i\\in I}$ and the covering $\\{q_{ij}:W_{ij}\\to U_i\\}_{j\\in J}$ for each $i$. The family $\\{W_{ij}\\to U\\}_{(i,j)\\in I\\times J}$, whose maps are the composites $W_{ij}\\xrightarrow{q_{ij}}U_i\\to U$, is therefore a covering of $U$.",
+   "uses": [
+    "def-weil-pbc-sites-and-cohomology"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Sites, Lemma 00W6 and proof: the second sentence, applying the composition axiom to the pulled-back families"
+   }
+  },
+  {
+   "text": "*Refinement maps.* The projection $q_{ij}:W_{ij}\\to U_i$ together with the index map $(i,j)\\mapsto i$ is a morphism of coverings from $\\mathcal W$ to $\\mathcal U$ over $\\mathrm{id}_U$, because $(U_i\\to U)\\circ q_{ij}$ is the structure map of $W_{ij}$. Likewise $p_{ij}:W_{ij}\\to V_j$ and $(i,j)\\mapsto j$ define a morphism from $\\mathcal W$ to $\\mathcal V$ over $\\mathrm{id}_U$. These are precisely the canonical projections of the fibre products, so $\\mathcal W$ is a common refinement.",
+   "uses": [
+    "def-weil-pbc-site-plus-construction"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Sites, Lemma 00W6 (00W6) and the definition of morphism of coverings in Definition 00VT"
+   }
+  },
+  {
+   "text": "*Finitely many coverings.* Iterating the binary construction gives a common refinement for any finite list of coverings: refine the first two, then refine the result with the third, and so on. The induction uses only the just-proved binary case and the transitivity of morphisms of coverings [def-weil-pbc-site-plus-construction] (b).",
+   "uses": [
+    "def-weil-pbc-site-plus-construction"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Sites, Lemma 00W6; finite-family assertion is the immediate finite induction on the binary common-refinement construction"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-site-plus-construction",
+  "def-weil-pbc-sites-and-cohomology"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/sites.tex",
+  "place": "Sites, Lemma 00W6 (Lemma 7.10.5), proof"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -38,7 +90,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "worker",
@@ -58,5 +110,18 @@
   }
  },
  "chapter": "sec-proper-base-change",
- "unit": "sk-thm-p1"
+ "unit": "sk-thm-p1",
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "lem-weil-pbc-site-coverings-common-refinement",
+  "worker": "F1",
+  "summary": "Split the imported common-refinement statement into four elementary steps following Stacks Sites, Lemma 00W6 (tag 00W6): pull back the second covering along each U_i, compose the resulting coverings with the first covering, identify the two projection families as morphisms of coverings, and iterate for finitely many coverings. No new DAG nodes were needed; the only dependencies are the existing site axioms and covering-morphism definition. Mathlib searches already recorded on the item find no direct theorem for Stacks-style indexed covering families."
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "group": "F1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed by the lead of F1; spot-checked by L: 4 elementary steps following Sites 00W6: pull back the second covering along each member of the first (axiom (iii)), compose (axiom (ii)), the projections are morphisms of coverings over id_U, finite lists by iteration. Correct."
+ }
 }
