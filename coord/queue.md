@@ -1,8 +1,8 @@
 # Work queue
 
-917 items; claim with `tools/claim.py next <group> [--stage N]`.
+921 items; claim with `tools/claim.py next <group> [--stage N]`.
 
-## Stage 1: nodes to split (621)
+## Stage 1: nodes to split (624)
 
 | node | distance to a target | Lean state on the done branch |
 |---|---|---|
@@ -25,7 +25,6 @@
 | `lem-weil-pbc-smooth-fibre-regular-local` | 1012 | none |
 | `lem-weil-pbc-smooth-localization-conormal-split` | 1012 | none |
 | `lem-weil-pbc-smooth-over-field-dimension-differentials` | 1012 | none |
-| `lem-weil-pbc-formal-glueing-isogeny` | 1013 | none |
 | `lem-weil-pbc-fs-adic-flat-geometrically-regular-closed-fibre` | 1013 | none |
 | `lem-weil-pbc-fs-adic-lift-derivation` | 1013 | none |
 | `lem-weil-pbc-fs-adic-lift-over-finite-coefficient-map` | 1013 | none |
@@ -92,6 +91,7 @@
 | `lem-weil-pbc-transitivity-gamma` | 1013 | none |
 | `lem-weil-pbc-zariski-etale-inclusion-morphism-of-sites` | 1013 | none |
 | `lem-weil-pbc-zariski-open-restriction-injectives` | 1013 | none |
+| `def-weil-pbc-formal-glueing-data` | 1014 | none |
 | `lem-weil-pbc-affine-pushforward-ideal-product` | 1014 | none |
 | `lem-weil-pbc-coherent-property-devissage-integral-subschemes` | 1014 | none |
 | `lem-weil-pbc-cohomology-powers-ideal-rees-finite` | 1014 | none |
@@ -108,6 +108,8 @@
 | `lem-weil-pbc-fpqc-descend-finite` | 1014 | none |
 | `lem-weil-pbc-fpqc-descend-flat` | 1014 | none |
 | `lem-weil-pbc-fpqc-descend-locally-finite-presentation` | 1014 | none |
+| `lem-weil-pbc-fs-adic-field-geometrically-regular` | 1014 | none |
+| `lem-weil-pbc-fs-adic-local-flat` | 1014 | none |
 | `lem-weil-pbc-limit-tower-essentially-finite-presentation` | 1014 | none |
 | `lem-weil-pbc-local-ring-spec-limit-affine-neighbourhoods` | 1014 | none |
 | `lem-weil-pbc-nl-presentations-homotopy-equivalent` | 1014 | none |
@@ -115,6 +117,7 @@
 | `lem-weil-pbc-torsion-module-flat-base-change-iso` | 1014 | none |
 | `lem-weil-pbc-torsion-submodule-flat-base-change-iso` | 1014 | none |
 | `lem-weil-pbc-two-term-homotopy-equivalence-direct-sum` | 1014 | none |
+| `prop-weil-pbc-formal-glueing-equivalence` | 1014 | none |
 | `lem-weil-pbc-injective-acyclicity-bounded-below` | 2002 | sorry_here |
 | `lem-weil-pbc-property-implies-acyclicity` | 2003 | none |
 | `lem-weil-pbc-qcqs-higher-direct-image` | 2003 | none |
@@ -628,7 +631,7 @@
 | `def-exc-jacobian-presentation` | - | none |
 | `def-nagata-rees-algebra` | - | none |
 
-## Stage 2: nodes to state (296)
+## Stage 2: nodes to state (297)
 
 | node | distance to Mathlib | kind |
 |---|---|---|
@@ -770,6 +773,7 @@
 | `lem-weil-pbc-flat-under-regular` | 1 | state |
 | `lem-weil-pbc-formal-glueing-complex-exact` | 1 | state |
 | `lem-weil-pbc-formal-glueing-finite-modules` | 1 | state |
+| `lem-weil-pbc-formal-glueing-isogeny` | 1 | state |
 | `lem-weil-pbc-free-resolution-ses-split` | 1 | state |
 | `lem-weil-pbc-gabber-finite-etale-section` | 1 | state |
 | `lem-weil-pbc-gabber-root-criterion-etale-section-lifting` | 1 | state |
@@ -929,7 +933,7 @@
 | `lem-weil-pbc-p1-field-dimension-one` | 4 | state |
 | `lem-weil-pbc-projective-space-zero-isomorphism` | 4 | state |
 
-Not open yet: 633 nodes that wait for stage 1, 570 nodes that wait for a statement dependency.
+Not open yet: 636 nodes that wait for stage 1, 570 nodes that wait for a statement dependency.
 
 ## Stage 3: modules to prove (0)
 
