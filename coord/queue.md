@@ -1,8 +1,8 @@
 # Work queue
 
-870 items; claim with `tools/claim.py next <group> [--stage N]`.
+874 items; claim with `tools/claim.py next <group> [--stage N]`.
 
-## Stage 1: nodes to split (321)
+## Stage 1: nodes to split (325)
 
 | node | distance to a target | Lean state on the done branch |
 |---|---|---|
@@ -34,11 +34,11 @@
 | `lem-exc-etale-field-gsets` | 3009 | none |
 | `lem-exc-etale-sheaves-gsets-point` | 3009 | none |
 | `lem-sc-generic-vanishing-kernel-colimit` | 3009 | none |
-| `lem-sc-module-abelian-zariski-cohomology` | 3009 | none |
 | `lem-galois-fpqc-refinement-fully-faithful` | 3010 | none |
 | `lem-pc-cartier-divisor-nowhere-dense` | 3010 | none |
 | `lem-pc-nowhere-dense-dim-zero` | 3010 | none |
 | `lem-sc-curve-base-change-relative-dimension-one` | 3010 | none |
+| `lem-sc-injective-module-abelian-acyclic-zariski` | 3010 | none |
 | `lem-sc-point-tangent-separation-closed-immersion` | 3010 | none |
 | `lem-exc-rg-discrete-modules-functorial-injective-embeddings` | 3011 | none |
 | `lem-pc-algebraic-dim-zero-affine-finite` | 3011 | none |
@@ -47,7 +47,6 @@
 | `lem-pc-very-ample-descends` | 3011 | sorry_here |
 | `lem-pc-zero-dimensional-closed-subscheme-finite` | 3011 | none |
 | `lem-sc-geometrically-irreducible-product` | 3011 | none |
-| `thm-sc-p1-duality` | 3011 | sorry_here |
 | `lem-exc-coinduced-functions-open-stabilizer` | 3012 | none |
 | `lem-exc-coinduced-homotopy-continuous` | 3012 | none |
 | `lem-exc-coinduced-homotopy-identity` | 3012 | none |
@@ -55,11 +54,16 @@
 | `lem-sc-coherent-free-stalks-locally-free` | 3012 | none |
 | `lem-sc-dvr-fg-torsionfree-free` | 3012 | none |
 | `lem-sc-dvr-saturation-line` | 3012 | none |
-| `lem-sc-ext-locally-free` | 3012 | sorry_here |
 | `lem-sc-exterior-top-direct-sum` | 3012 | none |
 | `lem-sc-finite-duality-trace` | 3012 | none |
 | `lem-sc-local-splitting-finite-free` | 3012 | none |
+| `lem-sc-p1-duality-pairing-naturality` | 3012 | none |
+| `lem-sc-p1-ext-coherent-dim-one-vanishing` | 3012 | none |
+| `lem-sc-p1-ext-locally-free-naturality` | 3012 | none |
 | `lem-sc-torsion-sections-generic` | 3012 | none |
+| `lem-sc-ext-derived-composite` | 3013 | none |
+| `lem-sc-ext-evaluation` | 3013 | none |
+| `lem-sc-ext-tensor-exact` | 3013 | none |
 | `lem-sc-p1-coherent-proj-representation` | 3013 | none |
 | `lem-sc-p1-graded-syzygy` | 3013 | none |
 | `lem-sc-p1-proj-sheafification-exact` | 3013 | none |
@@ -882,7 +886,7 @@
 | `lem-weil-pbc-p1-field-dimension-one` | 4 | state |
 | `lem-weil-pbc-projective-space-zero-isomorphism` | 4 | state |
 
-Not open yet: 342 nodes that wait for stage 1, 1043 nodes that wait for a statement dependency.
+Not open yet: 346 nodes that wait for stage 1, 1046 nodes that wait for a statement dependency.
 
 ## Stage 3: modules to prove (0)
 
