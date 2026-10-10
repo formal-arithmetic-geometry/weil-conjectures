@@ -7,7 +7,9 @@
    "place": "proof, paragraph (2): 'The ideal sheaf of the base change is the pullback of the ideal sheaf ([lem-pc-closed-imm-base-change]: $\\mathcal{I}_{D_Y}=\\operatorname{im}(g^*\\mathcal{I}_D\\to\\mathcal{O}_Y)$'",
    "via": []
   },
-  "same_as": []
+  "same_as": [
+   "lem-pc-closed-imm-base-change"
+  ]
  },
  "kind": "statement",
  "title": "Ideal sheaf of a base-changed closed subscheme",
@@ -23,9 +25,27 @@
   "def-pc-fibre-product",
   "def-pc-module-pullback"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Apply [lem-pc-closed-imm-base-change] to the closed immersion i:Z\\to S and the morphism g:Y\\to S. Its projection and ideal-sheaf image conclusion specialize exactly to q:Z\\times_SY\\to Y and the displayed composite g^*\\mathcal I\\to\\mathcal O_Y.",
+   "uses": [
+    "lem-pc-closed-imm-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Schemes, Lemma 01JU (lemma-fibre-product-immersion), part (1)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-closed-imm-base-change"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/schemes.tex",
+  "place": "Schemes, Lemma 01JU (lemma-fibre-product-immersion), part (1)"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -50,7 +70,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "worker",
@@ -81,5 +101,30 @@
    ],
    "note": "sorry-free; states the affine-local form (the ideal of J.comap f on an affine V over an affine U is J(U) extended along f.appLE U V), equivalent to the image description on affines but not the sheaf statement; not attached"
   }
- ]
+ ],
+ "split_report": {
+  "date": "2026-10-11",
+  "item": "lem-pc-closed-subscheme-base-change-ideal-image",
+  "worker": "stage1",
+  "summary": "No project declaration states this item under its exact tag. The existing node lem-pc-closed-imm-base-change states the same closed-immersion and ideal-image conclusion for arbitrary schemes and morphisms, so this item is proved by direct specialization and no new node is created. Mathlib searches found only the kernel/comap formulation, not the image statement.",
+  "blueprint": "The item’s parent blueprint proof paragraph (2), sentence identifying the ideal sheaf of the base change as the image of g^*I -> O_Y.",
+  "tool_uses": [
+   {
+    "node": "lem-pc-closed-imm-base-change",
+    "why": "Its statement is the general arbitrary-base-change theorem; specializing Z, S, Y, and g gives every clause of this item."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pc-closed-imm-base-change",
+  "lem-pc-closed-imm-base-change"
+ ],
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-csb1806",
+  "group": "C1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-csb1806 (reviewer sub-agent of L); spot-checked: Packet read whole. Item = Stacks 01JU (1) image form (not pullback equality), matches source. Step 1 is an exact specialization (X:=S, X':=Y) of lem-pc-closed-imm-base-change, whose corrected statement gives both closed-immersion and image clauses for arbitrary g (C1/C4 ok). No cycle: cited node's proof_deps are lem-weil-pbc-* and defs only, not this item nor lem-pc-zero-scheme-properties; it only mentions this item in a lead_note. Right-exactness not needed here (image form, no flatness). Cross-unit tool use (picard-rr node in hilb-curves item): generic base-change lemma, no node of the unit gives it; accepted via --tool-uses. Mathlib grep Morphisms/ClosedImmersion.lean: only IsClosedImmersion instances (comp, iso, subschemeι), no image-ideal statement; not a leaf. Fault missed by second reading: it says the worker-written split_report.tool_uses was removed, but the delivered file still carries it (rule 8); recorded by the maintainer through --tool-uses instead, no math impact."
+ }
 }
