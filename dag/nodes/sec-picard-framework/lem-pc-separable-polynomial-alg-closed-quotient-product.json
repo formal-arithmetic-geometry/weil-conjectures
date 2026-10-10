@@ -22,9 +22,50 @@
   "def-pc-separable-polynomial",
   "def-weil-algebraic-closure"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "By [lem-pc-separable-polynomial-distinct-roots-alg-closed], the image of $P$ in $\\Omega[T]$ factors as $\\prod_{P(\\rho)=0}(T-\\rho)$, where the roots $\\rho$ are pairwise distinct and their set has exactly $n$ elements.",
+   "uses": [
+    "lem-pc-separable-polynomial-distinct-roots-alg-closed"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra, Lemma Tag 00U3, separable polynomial case"
+   }
+  },
+  {
+   "text": "Apply [lem-pc-polynomial-quotient-distinct-linear-crt] to this product of pairwise distinct linear factors. The Chinese-remainder map sends the class of $f(T)$ to $(f(\\rho))_{P(\\rho)=0}$ and is an $\\Omega$-algebra isomorphism from $R=\\Omega[T]/(P)$ to the product of one copy of $\\Omega$ for each root.",
+   "uses": [
+    "lem-pc-polynomial-quotient-distinct-linear-crt"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra, Lemma Tag 00U3, Chinese-remainder factorization"
+   }
+  },
+  {
+   "text": "The factor index set in the preceding step is exactly $\\{\\rho\\in\\Omega\\mid P(\\rho)=0\\}$, and step 1 gives its cardinality as $n$; hence this is the asserted evaluation isomorphism and root count.",
+   "uses": [
+    "lem-pc-separable-polynomial-distinct-roots-alg-closed"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra, Lemma Tag 00U3, conclusion"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-separable-polynomial-distinct-roots-alg-closed",
+  "lem-pc-polynomial-quotient-distinct-linear-crt"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Algebra, Lemma Tag 00U3 (lemma-etale-over-field), separable polynomial case"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -49,12 +90,27 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-pc-separable-tensor-algebraic-closure",
   "by": "worker",
   "date": "2026-10-10"
  },
  "chapter": "sec-picard-framework",
- "unit": "sk-thm-picard-rr"
+ "unit": "sk-thm-picard-rr",
+ "split_report": {
+  "date": "2026-10-11",
+  "item": "lem-pc-separable-polynomial-alg-closed-quotient-product",
+  "worker": "stage1",
+  "summary": "No Lean declaration states the item. I split the Stacks 00U3 argument into distinct-root factorization over an algebraically closed field and the Chinese-remainder product decomposition for distinct linear factors, then composed them by evaluation. The factorization child also records the exact root count, so every non-elementary step has a cited statement.",
+  "blueprint": "lem-pc-ample-positive-degree proof, part (<=): factor the separable minimal polynomial after passage to the algebraic closure and apply Chinese remainder"
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-spq",
+  "group": "K1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-spq (reviewer sub-agent of L); spot-checked: Source: Stacks Tag 00U3 (algebra-lemma-etale-over-field, algebra.tex), whose separable case writes k'=k[x]/(P) and decomposes it; item statement unchanged from sheaf-dag (F field, P monic separable deg n per def-pc-separable-polynomial, Omega algebraically closed over F per def-weil-algebraic-closure). Step 1 carried by new child lem-pc-separable-polynomial-distinct-roots-alg-closed (exactly n pairwise distinct roots, P = prod (T-rho) in Omega[T]; hypotheses identical to the item's). Step 2 carried by new child lem-pc-polynomial-quotient-distinct-linear-crt (Omega field, pairwise distinct rho_i, evaluation Omega[T]/(prod(T-rho_i)) = prod Omega), hypotheses supplied by step 1 with Q=P. Step 3 elementary reindexing by the root set with count from step 1. Both children self-contained, stmt_deps exist (def-weil-field, def-weil-polynomial-ring, def-pc-separable-polynomial, def-weil-algebraic-closure), same_as [] confirmed by blueprint_refs search (separable polynomial chinese remainder: 0; chinese remainder: 0; distinct roots: only lem-sc-primitive-root, unrelated), from = lem-pc-ample-positive-degree (exists). Mathlib: no single declaration states either child or the item; Polynomial.card_rootSet_eq_natDegree (FieldTheory/Separable.lean:442) gives only the root count, CRT in Mathlib is Ideal.quotientInfRingEquivPiQuotient / Dedekind quotientEquivPiOfProdEq, not the evaluation isomorphism; no slopmaster2 sorry-map declaration states it (B10 n/a). Small cases: n=0 (P=1, R=0, empty product) and n=1 (Omega[T]/(T-rho)=Omega via evaluation) both hold for item and CRT child. Report mentions a citations.json not in the delivery (harmless). Start Sat Oct 10 04:44:08 PM UTC 2026, end Sat Oct 10 04:44:43 PM UTC 2026."
+ }
 }

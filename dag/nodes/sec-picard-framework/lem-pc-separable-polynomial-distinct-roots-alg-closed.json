@@ -1,0 +1,62 @@
+{
+ "id": "lem-pc-separable-polynomial-distinct-roots-alg-closed",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pc-ample-positive-degree",
+   "place": "proof, part (<=): factor the separable minimal polynomial after passage to the algebraic closure",
+   "via": [
+    "lem-pc-separable-polynomial-alg-closed-quotient-product"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "A separable polynomial splits into distinct linear factors over an algebraically closed field",
+ "statement": "Let $F$ be a field [def-weil-field], let $P\\in F[T]$ be monic and separable [def-pc-separable-polynomial] of degree $n$, and let $\\Omega$ be an algebraically closed field containing $F$ [def-weil-algebraic-closure]. Viewing $P$ in $\\Omega[T]$, there are exactly $n$ pairwise distinct elements $\\rho$ of $\\Omega$ with $P(\\rho)=0$, and $P=\\prod_{P(\\rho)=0}(T-\\rho)$ in $\\Omega[T]$.",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Algebra, Lemma Tag 00U3 (lemma-etale-over-field), separable polynomial case; factorization over an algebraic closure"
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-weil-polynomial-ring",
+  "def-pc-separable-polynomial",
+  "def-weil-algebraic-closure"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "monic separable polynomial over a field has distinct roots and factors over an algebraically closed extension",
+   "results": "No exact service result; related Polynomial.Splits and separability lemmas",
+   "date": "2026-10-11",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "Polynomial.Separable -> Splits -> natDegree_eq_card_roots",
+   "results": "Polynomial.Splits.natDegree_eq_card_roots and IsAlgClosed.splits, but no combined statement over an extension with explicit product",
+   "date": "2026-10-11",
+   "verdict": "generalization: ingredients only"
+  },
+  {
+   "tool": "grep",
+   "query": "rg -n 'card_roots_eq_natDegree|natDegree_eq_card_roots|splits_iff_card_roots|separable.*roots' /home/ubuntu/weil-src-slopmaster2/.lake/packages/mathlib/Mathlib/FieldTheory",
+   "results": "Mathlib/FieldTheory/IsAlgClosed/Basic.lean:110-130 (root count); Mathlib/FieldTheory/Separable.lean:318 (separable products), no exact quotient/factorization statement",
+   "date": "2026-10-11",
+   "verdict": "generalization: ingredients only"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "created": {
+  "item": "lem-pc-separable-polynomial-alg-closed-quotient-product",
+  "by": "worker",
+  "date": "2026-10-10"
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-rr"
+}
