@@ -1,8 +1,8 @@
 # Work queue
 
-913 items; claim with `tools/claim.py next <group> [--stage N]`.
+911 items; claim with `tools/claim.py next <group> [--stage N]`.
 
-## Stage 1: nodes to split (177)
+## Stage 1: nodes to split (174)
 
 | node | distance to a target | Lean state on the done branch |
 |---|---|---|
@@ -22,7 +22,6 @@
 | `lem-pc-tower-limit-left-exact` | 3015 | none |
 | `lem-pc-tower-surjective-lim-acyclic` | 3015 | none |
 | `lem-pc-perfect-complexes-compact-set` | 3016 | none |
-| `lem-pc-perfect-generation-affine-base` | 3017 | none |
 | `lem-pc-perfect-generation-open-induction-step` | 3017 | none |
 | `lem-sc-p1-right-derived-triangle-connecting` | 3017 | none |
 | `lem-pc-perfect-rhom-tensor-comparison` | 3018 | none |
@@ -63,8 +62,7 @@
 | `lem-sp-cartan-eilenberg-comparison-homotopy` | 6006 | none |
 | `lem-sp-filtered-homotopy-spectral-sequence` | 6006 | none |
 | `thm-sp-spectral-object-yields` | 6006 | none |
-| `thm-sc-theorem-of-cube` | 6010 | rests_on_sorry |
-| `lem-pc-monomial-cech-complex-homology` | 6012 | none |
+| `lem-sc-general-theorem-of-cube` | 6011 | none |
 | `lem-pc-twist-cech-monomial-decomposition` | 6012 | none |
 | `pqf-lem-finite-type-algebra-finite-spectrum` | 6013 | none |
 | `pqf-lem-serre-criterion` | 6013 | none |
@@ -72,7 +70,6 @@
 | `thm-pqf-zmt-factorization` | - | none |
 | `def-weil-pbc-C1` | - | none |
 | `def-weil-pbc-C5` | - | none |
-| `lem-fin-dense-normal-open` | - | none |
 | `lem-pur-sheaf-hom-is-sheaf` | - | none |
 | `lem-weil-pbc-finite-pushforward-generic-constructible` | - | none |
 | `pqf-def-quasifinite` | - | none |
@@ -184,7 +181,7 @@
 | `lem-pur-rhom-well-defined` | - | none |
 | `lem-zl-noether-normalization-dimension` | - | none |
 
-## Stage 2: nodes to state (736)
+## Stage 2: nodes to state (737)
 
 | node | distance to Mathlib | kind |
 |---|---|---|
@@ -297,6 +294,7 @@
 | `lem-pc-left-localization-hom-colimit` | 1 | state |
 | `lem-pc-linear-pair-graded-finite` | 1 | state |
 | `lem-pc-linear-pair-morphism-finite` | 1 | state |
+| `lem-pc-monomial-cech-complex-homology` | 1 | state |
 | `lem-pc-pic-of-field` | 1 | state |
 | `lem-pc-polynomial-quotient-distinct-linear-crt` | 1 | state |
 | `lem-pc-pre-derived-adjoint-functors-general` | 1 | state |
@@ -925,7 +923,7 @@
 | `lem-weil-pbc-projective-space-zero-isomorphism` | 4 | state |
 | `def-nagata-fixed-base-separated-stage` | 6 | state |
 
-Not open yet: 1479 nodes that wait for a statement dependency, 216 nodes that wait for stage 1.
+Not open yet: 1481 nodes that wait for a statement dependency, 214 nodes that wait for stage 1.
 
 ## Stage 3: modules to prove (0)
 
