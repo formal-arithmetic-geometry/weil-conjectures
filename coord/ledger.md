@@ -3005,3 +3005,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 23:47 L: merged deliver/M1/lem-sp-ce-horizontal-lift (reviewer FIX; first push; new nodes: 0)
 - 23:47 L: merged deliver/F1/lem-pc-tor-independent-perfect-pullback-comparison (reviewer FIX; first push; new nodes: 1)
 - 23:47 L: merged deliver/C1/lem-pc-relative-kill-by-twisting (reviewer PASS; first push; new nodes: 0)
+- 23:48 UTC L: reviewed under the lock since 23:47: M1 ce-horizontal-lift FIX 5e719f10a (R-chl3146; spurious hypothesis K^p=L^p=0 for p<0 dropped), F1 tor-independent-perfect-pullback-comparison FIX 502603da5 (R-tip3146). Second readings missed a fault in 2 of 2.
