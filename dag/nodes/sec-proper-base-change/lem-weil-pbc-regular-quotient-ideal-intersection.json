@@ -30,9 +30,63 @@
  "stmt_deps": [
   "def-weil-pbc-regular-sequence"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "*The images are $H_1$-regular in $A/I$.* Write $A$ for the ring $R$ of the statement (the source's notation), $\\bar A=A/I$, and $\\bar x$ for the image of $x\\in A$ in $\\bar A$; the Koszul complexes below are written $K_\\bullet(-)$, not to be confused with the ideal $K=(g_1,\\dots,g_m)$. By hypothesis $\\bar g_1,\\dots,\\bar g_m$ is a regular sequence in $\\bar A$ [def-weil-pbc-regular-sequence]: for each $i$, multiplication by $\\bar g_i$ is injective on $\\bar A/(\\bar g_1,\\dots,\\bar g_{i-1})$. So [lem-weil-pbc-regular-sequence-koszul-regular] (Stacks 062F, with ring $\\bar A$ and $M=\\bar A$) shows that $\\bar g_1,\\dots,\\bar g_m$ is Koszul-regular, i.e. $H_i(K_\\bullet(\\bar A,\\bar g_1,\\dots,\\bar g_m))=0$ for all $i\\neq0$ [def-weil-pbc-koszul-regular-sequence]. Taking $i=1$, it is $H_1$-regular (Stacks 0CEM: 'immediate from the definition'): $H_1(K_\\bullet(\\bar A,\\bar g_\\bullet))=0$.",
+   "uses": [
+    "def-weil-pbc-regular-sequence",
+    "lem-weil-pbc-regular-sequence-koszul-regular",
+    "def-weil-pbc-koszul-regular-sequence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Lemma Tag 062F (lemma-regular-koszul-regular, line 7265) and Lemma Tag 0CEM (lemma-koszul-regular-H1-regular, line 7301), turning the hypothesis of the item into the hypothesis of Lemma Tag 0665"
+   }
+  },
+  {
+   "text": "*The two Koszul complexes in degrees $\\le2$ and reduction modulo $I$.* By [def-weil-pbc-koszul-complex], $K_0(A,g_\\bullet)=A$, $K_1(A,g_\\bullet)=A^{\\oplus m}$ with basis $e_1,\\dots,e_m$ and $d_1(e_i)=g_i$, so $d_1(\\sum_ia_ie_i)=\\sum_ia_ig_i$; $K_2(A,g_\\bullet)$ is free on $e_i\\wedge e_j$ ($i<j$) with $d_2(e_i\\wedge e_j)=g_ie_j-g_je_i$, so $d_1d_2=0$. The same holds over $\\bar A$ with $\\bar g_i$. Reducing coordinates modulo $I$ in these bases gives surjections $\\pi_n:K_n(A,g_\\bullet)\\to K_n(\\bar A,\\bar g_\\bullet)$ for $n=0,1,2$ with $\\pi_{n-1}d_n=\\bar d_n\\pi_n$ (the matrices of $\\bar d_n$ are those of $d_n$ reduced mod $I$), and $\\ker\\pi_1=I^{\\oplus m}=\\{\\sum_ic_ie_i: c_i\\in I\\}$. This is the low-degree part of the source's exact sequence of complexes $0\\to I\\otimes_AK_\\bullet(A,g_\\bullet)\\to K_\\bullet(A,g_\\bullet)\\to K_\\bullet(A/I,g_\\bullet)\\to0$ (exact because each $K_n(A,g_\\bullet)$ is free).",
+   "uses": [
+    "def-weil-pbc-koszul-complex"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Lemma Tag 0665 (lemma-H1-regular-in-quotient, line 7472), proof, first display (the exact sequence of complexes), with Definitions 0622/0623 (lines 6566-6600)"
+   }
+  },
+  {
+   "text": "*$I\\cap K\\subseteq IK$ (the source's injectivity of $\\operatorname{Coker}(I^{\\oplus m}\\to I)\\to\\operatorname{Coker}(A^{\\oplus m}\\to A)$, written out).* Let $x\\in I\\cap K$. As $K=(g_1,\\dots,g_m)$, write $x=\\sum_ia_ig_i$ with $a_i\\in A$ and put $a=\\sum_ia_ie_i\\in K_1(A,g_\\bullet)$, so $d_1(a)=x$. By step 2, $\\bar d_1(\\pi_1(a))=\\pi_0(d_1a)=\\bar x=0$ since $x\\in I$; so $\\pi_1(a)$ is a $1$-cycle of $K_\\bullet(\\bar A,\\bar g_\\bullet)$, and by step 1 ($H_1=0$) there is $\\beta\\in K_2(\\bar A,\\bar g_\\bullet)$ with $\\bar d_2(\\beta)=\\pi_1(a)$. Choose $b\\in K_2(A,g_\\bullet)$ with $\\pi_2(b)=\\beta$ (lift each coordinate). Put $c=a-d_2(b)=\\sum_ic_ie_i$. Then $\\pi_1(c)=\\pi_1(a)-\\bar d_2(\\pi_2b)=0$, so every $c_i\\in I$ (step 2), and $\\sum_ic_ig_i=d_1(c)=d_1(a)-d_1d_2(b)=x$. Hence $x=\\sum_ic_ig_i\\in IK$.",
+   "uses": [
+    "def-weil-pbc-koszul-complex"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Lemma Tag 0665 (lemma-H1-regular-in-quotient), proof, lines 7487-7494: 'Since the complex on the right has H_1 = 0 ... is injective. This is equivalent to the assertion of the lemma.'"
+   }
+  },
+  {
+   "text": "*Conclusion.* Conversely $IK\\subseteq I$ and $IK\\subseteq K$ because both are ideals, so $IK\\subseteq I\\cap K$; with step 3, $I\\cap K=IK$. (For $m=0$ both sides are $0$.)",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Lemma Tag 0665, proof, last sentence"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-koszul-complex",
+  "def-weil-pbc-koszul-regular-sequence",
+  "def-weil-pbc-regular-sequence",
+  "lem-weil-pbc-regular-sequence-koszul-regular"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "More on Algebra, Lemma Tag 0665 (lemma-H1-regular-in-quotient, lines 7471-7494) with its proof, the hypothesis supplied by Lemma Tag 062F (line 7265) and Lemma Tag 0CEM (line 7301)"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -78,7 +132,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "worker",
@@ -98,5 +152,14 @@
   }
  },
  "chapter": "sec-proper-base-change",
- "unit": "sk-thm-p1"
+ "unit": "sk-thm-p1",
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "lem-weil-pbc-regular-quotient-ideal-intersection",
+  "worker": "stage1",
+  "summary": "Read Stacks 0665 and its proof, 062F, 0CEM, Definitions 0622/0623/062E and 0629 (cited in 062F); tags verified in tags/tags. The item states 0665 for a sequence regular modulo I, so step 1 converts the hypothesis via 062F (new unsplit node) and 0CEM (immediate from the definition, written in the step). The source's exact sequence of Koszul complexes and the cokernel-injectivity, which it calls 'equivalent to the assertion', are written out as an explicit chase in degrees 0-2 (steps 2-3). Created the definition nodes for the Koszul complex (0622/0623) and Koszul-/H_1-regular sequences (062E), and the lemma node for 062F; none is in Mathlib (Mathlib's RegularSequence.lean lists Koszul and H_1-regular sequences as TODO). No slopmaster2 Lean for any of these. Statement unchanged; stmt_deps unchanged.",
+  "blueprint": "The item is not a blueprint node; its ancestor is thm-weil-pbc-finite-etale-lifting (via the conormal/Jacobi-Zariski/Popescu chain). The steps realize the place recorded in blueprint.from.place: the regular-sequence conormal argument made precise by Stacks 0665 (steps 2-4 are 0665's proof, step 1 the specialization to regular sequences by 062F and 0CEM). Blueprint search for 0665, 062F, 0CEM, 062E, 0623, 'Koszul', 'H_1-regular', 'Koszul-regular', 'regular sequence intersection' found no node stating the item."
+ },
+ "reviewed": "2026-10-10 L: 4 steps following 0665 (Koszul H_1 over A/I vanishes by 062F/0CEM, the low-degree exact sequence of Koszul complexes, the diagram chase written out); 3 new nodes (Koszul complex 0622, Koszul-regular 062E, regular implies Koszul-regular 062F). Accepted on the source route; see lead_note for the shorter route.",
+ "lead_note": "2026-10-10 L: a route without Koszul complexes exists (worker): induction on m with Mathlib smul_top_inf_eq_smul_of_isSMulRegular_on_quot (RingTheory/Regular/IsSMulRegular.lean 164-169) as the case m = 1; the step: x = sum a_i g_i in I cap K gives a_m in I + (g_1..g_{m-1}) by regularity of g_m modulo it, so x - i g_m lies in I cap (g_1..g_{m-1}) = I (g_1..g_{m-1}). If the Koszul nodes (062F needs the cone lemma 0629) grow heavy, replace the proof by this induction and drop them."
 }

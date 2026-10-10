@@ -177,7 +177,20 @@ def cmd_merge(group, item, spot_note=None):
         # blueprint references (stages/1-dag.md §6): fill the field mechanically on the delivered nodes; a delivery whose
         # base predates the rule (commit BLUEPRINT_RULE) is accepted when the strict blueprint checks are all that fail
         subprocess.run([sys.executable, "tools/blueprint_refs.py", "backfill"], cwd=ROOT, capture_output=True)
-        pre_rule = subprocess.run(["git", "merge-base", "--is-ancestor", BLUEPRINT_RULE, base], cwd=ROOT, capture_output=True).returncode != 0
+        # lean_audit is the lead's (tools/lean_status.py rewrites it at every audit): a delivery based before an audit
+        # carries the old one; take the committed version, unless the worker attached Lean the way the lead does
+        for f, k in kinds.items():
+            if k == "item":
+                d0 = load_json_at("HEAD", f)
+                p0 = ROOT / f
+                d1 = json.loads(p0.read_text())
+                if d0 and "lean_audit" in d0 and d1.get("lean_audit") != d0["lean_audit"] \
+                        and not str((d1.get("lean") or {}).get("note", "")).startswith("attached by the lead"):
+                    d1["lean_audit"] = d0["lean_audit"]
+                    p0.write_text(json.dumps(d1, ensure_ascii=False, indent=1) + "\n")
+                    git("add", "--", f)
+                    print(f"lean_audit of {f} taken from the committed version (the delivery predates the audit)")
+        pre_rule =subprocess.run(["git", "merge-base", "--is-ancestor", BLUEPRINT_RULE, base], cwd=ROOT, capture_output=True).returncode != 0
         rs = subprocess.run([sys.executable, "tools/review_split.py", item], cwd=ROOT, text=True, capture_output=True)
         fails = [l.strip() for l in rs.stdout.splitlines()[1:] if l.startswith("  ")]
         if rs.returncode != 0 or "FAIL" in rs.stdout:

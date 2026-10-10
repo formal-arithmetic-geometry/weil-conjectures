@@ -1,0 +1,85 @@
+{
+ "id": "def-weil-pbc-koszul-complex",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-finite-etale-lifting",
+   "place": "step 7 of its split: essential surjectivity via Stacks 0GS2; the regular-sequence conormal argument needed in its approximation and Popescu smoothing chain, made precise by Stacks 0665; the Koszul complex in whose degree-1 homology the hypothesis of Stacks 0665 (H_1-regularity) is stated",
+   "via": [
+    "lem-weil-pbc-regular-quotient-ideal-intersection",
+    "lem-weil-pbc-conormal-intersection-regular-quotient",
+    "lem-weil-pbc-jacobi-zariski-regular-sequence-left-injective",
+    "lem-weil-pbc-transitivity-gamma",
+    "lem-weil-pbc-geometrically-regular-over-field-flat",
+    "lem-weil-pbc-popescu-solution-modulo",
+    "lem-weil-pbc-popescu-resolve-char-p",
+    "lem-weil-pbc-popescu-smoothing",
+    "lem-weil-pbc-henselian-pair-approximation",
+    "lem-weil-pbc-finite-etale-lifting-approximation",
+    "lem-weil-pbc-finite-etale-lifting-essential-surjectivity"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "definition",
+ "title": "Koszul complex of a finite sequence of ring elements",
+ "statement": "Let $R$ be a commutative ring, $r\\ge0$, and $f_1,\\dots,f_r\\in R$. Let $E=R^{\\oplus r}$ be the free $R$-module [def-weil-pbc-free-module] with standard basis $e_1,\\dots,e_r$, and $\\varphi:E\\to R$ the $R$-linear map with $\\varphi(e_i)=f_i$. The *Koszul complex* $K_\\bullet(f_1,\\dots,f_r)=K_\\bullet(R,f_1,\\dots,f_r)$ is the chain complex of $R$-modules with $K_n=\\wedge^n_R E$ (the $n$-th exterior power; $K_0=R$, $K_1=E$, $K_n=0$ for $n>r$ and $n<0$) and differential $d_n:K_n\\to K_{n-1}$ the $R$-linear map given on generators by $$d(v_1\\wedge\\dots\\wedge v_n)=\\sum_{i=1}^n(-1)^{i+1}\\varphi(v_i)\\,v_1\\wedge\\dots\\wedge\\widehat{v_i}\\wedge\\dots\\wedge v_n\\qquad(v_1,\\dots,v_n\\in E),$$ which is well defined and satisfies $d_{n-1}\\circ d_n=0$. Explicitly, $K_n$ is free with basis $e_{i_1}\\wedge\\dots\\wedge e_{i_n}$, $1\\le i_1<\\dots<i_n\\le r$; in low degrees $d_1(e_i)=f_i$ and $d_2(e_i\\wedge e_j)=f_ie_j-f_je_i$. For an $R$-module $M$ write $K_\\bullet(f_1,\\dots,f_r)\\otimes_RM$ for the complex with terms $K_n\\otimes_RM$ and differentials $d_n\\otimes\\mathrm{id}_M$, and $H_i(-)=\\ker d_i/\\operatorname{im}d_{i+1}$ for the homology of a complex.",
+ "source": {
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "More on Algebra, Definition Tag 0622 (definition-koszul, line 6566) with the explicit differential that follows it (lines 6579-6586), and Definition Tag 0623 (definition-koszul-complex, line 6597). Tags verified in tags/tags."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-free-module"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Koszul complex of a sequence of elements in a commutative ring",
+   "results": "RingTheory.Sequence.IsRegular (Mathlib.RingTheory.Regular.RegularSequence), ringKrullDim_add_length_eq_ringKrullDim_of_isRegular, IsSMulRegular.smulShortComplex_shortExact (Mathlib.RingTheory.Regular.Category: the one-element complex 0 -> M -r-> M -> M/rM -> 0), Rep.barComplex, HomologicalComplex.Acyclic; no Koszul complex",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Koszul complex of a sequence f_1..f_r: exterior powers of R^r with differential contracting against (f_1,...,f_r)",
+   "results": "exteriorPower.presentation, exteriorPower.presentation_R, ExteriorAlgebra, exteriorPower.presentation.relations (Mathlib.LinearAlgebra.ExteriorPower.Basic, Mathlib.LinearAlgebra.ExteriorAlgebra.Basic): the exterior powers themselves, no differential",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"koszul\"",
+   "results": "none (empty result)",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rn -i 'koszul' and grep -rn -i 'H1.regular\\|H_1.regular\\|KoszulRegular\\|koszulComplex' in ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib",
+   "results": "only RingTheory/Regular/RegularSequence.lean:21 ('TODO: Koszul regular sequences, H_1-regular sequences, quasi-regular sequences, depth.') and a docstring mention in Algebra/Homology/LocalCohomology.lean:45; no Koszul complex and no Koszul- or H_1-regularity in Mathlib. Exterior powers exist (LinearAlgebra/ExteriorPower/Basic.lean, with a basis of the exterior powers of a free module in LinearAlgebra/ExteriorPower/Basis.lean), but no differential on them.",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-regular-quotient-ideal-intersection",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1"
+}
