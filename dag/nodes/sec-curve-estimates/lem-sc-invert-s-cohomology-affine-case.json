@@ -27,9 +27,55 @@
   "pqf-def-cohomology",
   "def-weil-pbc-ample-invertible-module"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Because $Y$ is affine, [lem-sc-affine-cap-section-open] applied with $U=Y$ shows that the principal nonvanishing open $Y_s=Y\\cap Y_s$ is affine.",
+   "uses": [
+    "lem-sc-affine-cap-section-open"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/properties.tex",
+    "place": "Properties, Lemma 01PV (properties-lemma-affine-cap-s-open), applied to U=Y"
+   }
+  },
+  {
+   "text": "For every integer $n$, the sheaf $\\mathcal F\\otimes\\mathcal L^{\\otimes n}$ is quasi-coherent by [lem-sc-invertible-tensor-qcoherent], so [pqf-lem-affine-vanishing] gives $H^p(Y,\\mathcal F\\otimes\\mathcal L^{\\otimes n})=0$ for $p>0$. The restriction $\\mathcal F|_{Y_s}$ is quasi-coherent by [lem-weil-pbc-module-restriction-open-immersion-colimits], and Step 1 plus [pqf-lem-affine-vanishing] gives $H^p(Y_s,\\mathcal F|_{Y_s})=0$ for $p>0$. Therefore the graded direct sum and its localization have zero degree-$p$ part for $p>0$, and the target is zero as well.",
+   "uses": [
+    "lem-sc-invertible-tensor-qcoherent",
+    "pqf-lem-affine-vanishing",
+    "lem-weil-pbc-module-restriction-open-immersion-colimits"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/coherent.tex",
+    "place": "Cohomology of Schemes, Lemma 09MR proof, affine-open paragraph (using Tag 01XB)"
+   }
+  },
+  {
+   "text": "In degree $p=0$, the canonical map is an isomorphism by [lem-sc-affine-section-localization], which is the section-localization theorem of [01PW]. Its map sends each homogeneous fraction $\\xi/s^n$ to the section $s^{-n}\\xi$ on $Y_s$, exactly the map $c^0_Y$ in the statement.",
+   "uses": [
+    "lem-sc-affine-section-localization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/coherent.tex",
+    "place": "Cohomology of Schemes, Lemma 09MR proof, p = 0 affine paragraph; Properties, Lemma 01PW"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sc-affine-cap-section-open",
+  "lem-sc-invertible-tensor-qcoherent",
+  "pqf-lem-affine-vanishing",
+  "lem-weil-pbc-module-restriction-open-immersion-colimits",
+  "lem-sc-affine-section-localization"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/coherent.tex",
+  "place": "Cohomology of Schemes, Lemma 09MR (coherent-lemma-invert-s-cohomology), affine case"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -54,10 +100,30 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-sc-invert-s-cohomology",
   "by": "worker",
   "date": "2026-10-10"
- }
+ },
+ "split_report": {
+  "date": "2026-10-11",
+  "item": "lem-sc-invert-s-cohomology-affine-case",
+  "worker": "stage1",
+  "summary": "Split the affine case of Stacks Lemma 09MR into affineness of the nonvanishing open, vanishing of all positive cohomology groups, and the degree-zero section-localization theorem. Reused the existing affine-open, affine-vanishing, tensor quasi-coherence, and open-restriction nodes, and added one statement-only node for the missing 01PW localization fact.",
+  "blueprint": "Realizes the affine-open paragraph of the blueprint ancestor lem-sc-pic-proper-ntorsion through the item’s 09MR affine-case route.",
+  "tool_uses": []
+ },
+ "tool_uses": [
+  "pqf-lem-affine-vanishing"
+ ],
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-isa",
+  "group": "F1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-isa (reviewer sub-agent of L); spot-checked: Source: Stacks 09MR (coherent.tex lemma-invert-s-cohomology), affine-U paragraph of the proof (both sides zero for p>0 by 01XB and 01PV; p=0 is 01PW, properties.tex lemma-invert-s-sections, iso for qcqs X so for affine Y). Item statement unchanged from sheaf-dag; it is the 09MR affine case hypothesis by hypothesis (affine Y, invertible L, s in Gamma(Y,L), quasi-coherent F, all n in Z, degree-zero localization, map xi/s^n -> s^{-n}xi). Step 1: lem-sc-affine-cap-section-open with U=Y gives Y_s affine (statement read). Step 2: lem-sc-invertible-tensor-qcoherent (new, true: L^n and its dual powers invertible hence qc, tensor of qc is qc) + pqf-lem-affine-vanishing (01XB, off-unit generic tool, recorded via --tool-uses) give H^p(Y,F(x)L^n)=0, p>0; lem-weil-pbc-module-restriction-open-immersion-colimits (2) (Mathlib leaf) gives F|_{Y_s} qc, then 01XB on affine Y_s; localization of zero module is zero: elementary. Step 3: lem-sc-affine-section-localization (new) states exactly the c^0_Y isomorphism, same map. New nodes: statement-only, self-contained, TeX, true (affine special case of 01PW; checked against source), blueprint from/same_as filled, my blueprint_refs search found nothing; three Mathlib searches each; no sorry-free slopmaster2 declaration states them (ClearDenominators.exists_tensorPowSection_eq_restrict is only the surjectivity half, B10 not triggered). Noted C5 overlap: lem-sc-p1-invertible-section-localization (qcqs 01PW, other unit) already existed at the base; kept the in-unit affine node (not deletable by a fix, avoids an extra qcqs node) and recorded it in lead_note. Small cases: L=O_Y, s=f gives M_f = Gamma(D(f),~M); s=0 both sides 0; p>0 both 0. Start Sat Oct 10 04:29:55 PM UTC 2026, end Sat Oct 10 04:31:26 PM UTC 2026."
+ },
+ "lead_note": "2026-10-10 L (R-isa): lem-sc-affine-section-localization (new, affine case of 01PW) is a special case of the pre-existing lem-sc-p1-invertible-section-localization (unit sk-thm-picard-duality, qcqs case of 01PW): its split should cite that node as a tool plus affine => qcqs, not re-prove 01PW. lem-sc-invertible-tensor-qcoherent: for n>=0 it follows from lem-weil-pbc-quasi-coherent-tensor-product-affine-sections; only the dual (n<0) needs more."
 }
