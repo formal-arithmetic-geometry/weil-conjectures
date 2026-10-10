@@ -1,8 +1,8 @@
 # Work queue
 
-891 items; claim with `tools/claim.py next <group> [--stage N]`.
+889 items; claim with `tools/claim.py next <group> [--stage N]`.
 
-## Stage 1: nodes to split (112)
+## Stage 1: nodes to split (109)
 
 | node | distance to a target | Lean state on the done branch |
 |---|---|---|
@@ -61,13 +61,11 @@
 | `lem-weil-pbc-spread-purely-inseparable-factors` | - | none |
 | `lem-weil-separably-closed-geometrically-connected` | - | none |
 | `def-nagata-morphism-descent` | - | none |
-| `lem-fin-normal-generic-constant` | - | none |
 | `lem-pc-finite-support-hi` | - | sorry_here |
 | `lem-pc-projective-coherent-higher-images` | - | sorry_here |
 | `lem-sc-affine-constant-second` | - | rests_on_sorry |
 | `lemma-nagata-morphism-descends` | - | none |
 | `lemma-nagata-qc-open-descends` | - | none |
-| `pqf-lem-qf-locqf-qc` | - | none |
 | `sbc-lem-higher-direct-image-limit` | - | none |
 | `def-pc-derived-direct-image` | - | none |
 | `lem-fin-etale-normal-components` | - | none |
@@ -80,7 +78,6 @@
 | `lem-weil-geometrically-connected-check-after-extension` | - | none |
 | `lem-weil-pbc-lisse-generic-kernel` | - | none |
 | `prop-pur-kinjective-resolutions-exist` | - | none |
-| `sbc-lem-smooth-geometrically-reduced` | - | none |
 | `def-pc-derived-category` | - | none |
 | `lem-kun-04ca` | - | none |
 | `lem-kun-fibre-product-limits` | - | none |
@@ -119,7 +116,7 @@
 | `lem-zl-noether-normalization-dimension` | - | none |
 | `lem-pur-rhom-global-sections` | - | none |
 
-## Stage 2: nodes to state (779)
+## Stage 2: nodes to state (780)
 
 | node | distance to Mathlib | kind |
 |---|---|---|
@@ -886,6 +883,7 @@
 | `lem-weil-pbc-finite-type-lift-nilpotent` | 2 | state |
 | `lem-weil-pbc-integral-closure-finite-fibre-part-localization` | 2 | state |
 | `pqf-lem-pushforward-qcoh` | 2 | state |
+| `pqf-lem-qf-locqf-qc` | 2 | state |
 | `thm-pd-spreading-out` | 2 | state |
 | `def-sc-effective-cartier-divisor` | 3 | state |
 | `def-sc-gm-torsor` | 3 | state |
@@ -903,7 +901,7 @@
 | `lem-weil-pbc-projective-space-zero-isomorphism` | 4 | state |
 | `def-nagata-fixed-base-separated-stage` | 6 | state |
 
-Not open yet: 1590 nodes that wait for a statement dependency, 152 nodes that wait for stage 1.
+Not open yet: 1592 nodes that wait for a statement dependency, 149 nodes that wait for stage 1.
 
 ## Stage 3: modules to prove (0)
 
