@@ -13,6 +13,8 @@ public import WeilConjectures.AlgebraicGeometry.Sites.Gm
 public import WeilConjectures.AlgebraicGeometry.Sites.PointFunctions
 public import WeilConjectures.Mathlib.AlgebraicGeometry.FunctionField
 public import WeilConjectures.Mathlib.RingTheory.OrderOfVanishing.Noetherian
+public import WeilConjectures.Mathlib.RingTheory.Localization.BaseChange
+public import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.Flat
 
 /-!
 # The divisor map on the small étale site
@@ -210,30 +212,22 @@ lemma isDiscreteValuationRing_stalk [IsRegular X] (V : X.Etale) {y : V.left}
   rw [ringKrullDim_stalk_eq_coheight, ← coheight_hom_apply, hy]
   rfl
 
-/-- **The local generic ring is the fraction field of the local ring.** Let `X` be an integral
-regular locally noetherian scheme and `V` an étale `X`-scheme. At a point `y` of `V` over a
-point `x` of `X` of codimension one, the local generic ring
-`Γ(Spec 𝒪_{V,y} ×_X Spec k(X), 𝒪) = 𝒪_{V,y} ⊗_{𝒪_{X,x}} k(X)` is a fraction ring of
-`𝒪_{V,y}`: a uniformiser of the discrete valuation ring `𝒪_{X,x}` stays a uniformiser of the
-discrete valuation ring `𝒪_{V,y}`, and inverting it gives the fraction field
-(`IsDiscreteValuationRing.isFractionRing_tensorProduct`). -/
-lemma isFractionRing_localGenericRing (V : X.Etale) {y : V.left}
-    (hy : coheight (V.hom y) = 1) :
-    letI := (stalkToLocalGenericRing V y).hom.toAlgebra
-    IsFractionRing (V.left.presheaf.stalk y) (localGenericRing V y) := by
-  have : IsReduced X := isReduced_of_isReduced_stalk X
-  have : IsIntegral X := isIntegral_of_irreducibleSpace_of_isReduced X
+omit [IsRegular X] in
+/-- The local generic ring `Γ(Spec 𝒪_{V,y} ×_X Spec k(X), 𝒪)` of an étale `X`-scheme `V` over an
+integral scheme `X` is the base change `𝒪_{V,y} ⊗_{𝒪_{X,x}} k(X)` of the local ring at `y`, where
+`x` is the image of `y`: the generic fibre of `Spec 𝒪_{V,y}` is the fibre product of the
+spectra. -/
+lemma nonempty_algEquiv_tensorProduct_localGenericRing [IsIntegral X] (V : X.Etale) (y : V.left) :
+    letI : Algebra (V.left.presheaf.stalk y) (localGenericRing V y) :=
+      (stalkToLocalGenericRing V y).hom.toAlgebra
+    letI : Algebra (X.presheaf.stalk (V.hom y)) (V.left.presheaf.stalk y) :=
+      (V.hom.stalkMap y).hom.toAlgebra
+    Nonempty ((V.left.presheaf.stalk y) ⊗[X.presheaf.stalk (V.hom y)] X.functionField ≃ₐ[
+      V.left.presheaf.stalk y] localGenericRing V y) := by
   let R := X.presheaf.stalk (V.hom y)
   let O := V.left.presheaf.stalk y
   let φ : R ⟶ O := V.hom.stalkMap y
   let : Algebra R O := φ.hom.toAlgebra
-  have : IsDiscreteValuationRing R := IsRegularLocalRing.isDiscreteValuationRing _ (by
-    rw [ringKrullDim_stalk_eq_coheight, hy]
-    rfl)
-  have : IsDiscreteValuationRing O := isDiscreteValuationRing_stalk V hy
-  have hm : (IsLocalRing.maximalIdeal R).map (algebraMap R O) = IsLocalRing.maximalIdeal O :=
-    FormallyUnramified.map_maximalIdeal_stalkMap V.hom y
-  have hT := IsDiscreteValuationRing.isFractionRing_tensorProduct hm X.functionField
   -- the generic fibre of `Spec 𝒪_{V,y}` is `Spec (𝒪_{V,y} ⊗ k(X))`
   have hη : genericPoint X ⤳ V.hom y := (genericPoint_spec X).specializes trivial
   have h₁ : V.left.fromSpecStalk y ≫ V.hom =
@@ -264,7 +258,8 @@ lemma isFractionRing_localGenericRing (V : X.Etale) {y : V.left}
       pullback.fst _ _ := by
     simp only [e, Category.assoc]
     rw [← pullbackSpecIso_inv_fst, Iso.hom_inv_id_assoc, pullback.lift_fst]
-  let G := (Scheme.ΓSpecIso (.of (O ⊗[R] X.functionField))).symm ≪≫ Scheme.Γ.mapIso e.op
+  let G : CommRingCat.of (O ⊗[R] X.functionField) ≅ localGenericRing V y :=
+    (Scheme.ΓSpecIso (.of (O ⊗[R] X.functionField))).symm ≪≫ Scheme.Γ.mapIso e.op
   have hG : stalkToLocalGenericRing V y =
       CommRingCat.ofHom Algebra.TensorProduct.includeLeftRingHom ≫ G.hom := by
     simp only [stalkToLocalGenericRing, G, Iso.trans_hom, Iso.symm_hom, Functor.mapIso_hom,
@@ -273,10 +268,73 @@ lemma isFractionRing_localGenericRing (V : X.Etale) {y : V.left}
     congr 1
     rw [← he, Scheme.Hom.comp_appTop]
     rfl
+  let : Algebra O (localGenericRing V y) := (stalkToLocalGenericRing V y).hom.toAlgebra
+  exact ⟨AlgEquiv.ofRingEquiv (f := G.commRingCatIsoToRingEquiv) fun o ↦
+    (congrArg (fun g ↦ g.hom o) hG).symm⟩
+
+omit [IsRegular X] in
+/-- **Primes of a local ring of an étale neighbourhood over the generic point.** Let `X` be an
+integral scheme and `V` an étale `X`-scheme. A prime ideal `𝔮` of `𝒪_{V,y}` lying over the zero
+ideal of `𝒪_{X,x}`, `x` the image of `y`, is zero if `𝒪_{V,y}` is a domain: the point of `V` it
+defines lies over the generic point of `X`, so it has codimension zero
+(`AlgebraicGeometry.Scheme.Etale.coheight_hom_apply`) and is the generic point of `Spec 𝒪_{V,y}`.
+-/
+lemma eq_bot_of_comap_stalkMap_eq_bot [IsIntegral X] (V : X.Etale) (y : V.left)
+    [IsDomain (V.left.presheaf.stalk y)] (q : Ideal (V.left.presheaf.stalk y)) [hq : q.IsPrime]
+    (hq0 : q.comap (V.hom.stalkMap y).hom = ⊥) : q = ⊥ := by
+  let w := V.left.fromSpecStalk y ⟨q, hq⟩
+  let w₀ := V.left.fromSpecStalk y ⟨⊥, Ideal.isPrime_bot⟩
+  -- the image of `w` in `X` is the generic point
+  have hw : V.hom w = X.fromSpecStalk (V.hom y) ⟨⊥, Ideal.isPrime_bot⟩ := by
+    have e := congrArg (fun f ↦ f (⟨q, hq⟩ : PrimeSpectrum (V.left.presheaf.stalk y)))
+      (SpecMap_stalkMap_fromSpecStalk V.hom (x := y))
+    exact e.symm.trans (congrArg (X.fromSpecStalk (V.hom y)) (PrimeSpectrum.ext hq0))
+  have hgen : X.fromSpecStalk (V.hom y) ⟨⊥, Ideal.isPrime_bot⟩ = genericPoint X := by
+    have hη : genericPoint X ∈ Set.range (X.fromSpecStalk (V.hom y)) := by
+      rw [range_fromSpecStalk]
+      exact (genericPoint_spec X).specializes trivial
+    obtain ⟨p, hp⟩ := hη
+    have h₁ : X.fromSpecStalk (V.hom y) ⟨⊥, Ideal.isPrime_bot⟩ ⤳ genericPoint X := by
+      rw [← hp]
+      exact ((PrimeSpectrum.le_iff_specializes _ _).1 bot_le).map
+        (X.fromSpecStalk (V.hom y)).continuous
+    exact (h₁.antisymm ((genericPoint_spec X).specializes trivial)).eq
+  -- so `w` is a maximal point
+  have hmax : IsMax w := by
+    rw [← Order.coheight_eq_zero, ← coheight_hom_apply, hw, hgen, Order.coheight_eq_zero]
+    intro b hb
+    rw [le_iff_specializes] at hb ⊢
+    exact (genericPoint_spec X).specializes trivial
+  have hw₀ : w ≤ w₀ := le_iff_specializes.2
+    (((PrimeSpectrum.le_iff_specializes _ _).1 bot_le).map (V.left.fromSpecStalk y).continuous)
+  have := (V.left.fromSpecStalk y).isEmbedding.injective
+    ((le_iff_specializes.1 hw₀).antisymm (le_iff_specializes.1 (hmax hw₀))).eq.symm
+  exact congrArg PrimeSpectrum.asIdeal this
+
+/-- **The local generic ring is the fraction field of the local ring.** Let `X` be an integral
+regular scheme and `V` an étale `X`-scheme. At every point `y` of `V`, with image `x` in `X`, the
+local generic ring `Γ(Spec 𝒪_{V,y} ×_X Spec k(X), 𝒪) = 𝒪_{V,y} ⊗_{𝒪_{X,x}} k(X)` is a fraction
+ring of the domain `𝒪_{V,y}`: the map `𝒪_{X,x} ⟶ 𝒪_{V,y}` is flat and local, hence injective,
+and every nonzero prime of `𝒪_{V,y}` meets `𝒪_{X,x}` in a nonzero prime
+(`AlgebraicGeometry.Scheme.Etale.eq_bot_of_comap_stalkMap_eq_bot`), so inverting the nonzero
+elements of `𝒪_{X,x}` inverts all nonzero elements of `𝒪_{V,y}`
+(`IsFractionRing.tensorProduct_of_comap_eq_bot`). -/
+lemma isFractionRing_localGenericRing (V : X.Etale) (y : V.left) :
+    letI := (stalkToLocalGenericRing V y).hom.toAlgebra
+    IsFractionRing (V.left.presheaf.stalk y) (localGenericRing V y) := by
+  have : IsReduced X := isReduced_of_isReduced_stalk X
+  have : IsIntegral X := isIntegral_of_irreducibleSpace_of_isReduced X
+  let R := X.presheaf.stalk (V.hom y)
+  let O := V.left.presheaf.stalk y
+  let : Algebra R O := (V.hom.stalkMap y).hom.toAlgebra
+  obtain ⟨F⟩ := nonempty_algEquiv_tensorProduct_localGenericRing V y
+  have : Module.Flat R O := Flat.stalkMap V.hom y
+  have : IsLocalHom (algebraMap R O) := inferInstanceAs (IsLocalHom (V.hom.stalkMap y).hom)
+  have : Module.FaithfullyFlat R O := Module.FaithfullyFlat.of_flat_of_isLocalHom
+  have hT := IsFractionRing.tensorProduct_of_comap_eq_bot (R := R) (O := O)
+    (FaithfulSMul.algebraMap_injective R O)
+    (fun q hq hq0 ↦ eq_bot_of_comap_stalkMap_eq_bot V y q hq0) X.functionField
   let := (stalkToLocalGenericRing V y).hom.toAlgebra
-  let F : (O ⊗[R] X.functionField) ≃ₐ[O] localGenericRing V y :=
-    AlgEquiv.ofRingEquiv (f := G.commRingCatIsoToRingEquiv) fun o ↦
-      (congrArg (fun g ↦ g.hom o) hG).symm
   exact IsLocalization.isLocalization_of_algEquiv (nonZeroDivisors O) F
 
 omit [IsRegular X] in
@@ -302,8 +360,8 @@ lemma ord_map {V W : X.Etale} (φ : W ⟶ V) (y : W.left)
     have := isDiscreteValuationRing_stalk W hy
     let := (stalkToLocalGenericRing V (φ.left y)).hom.toAlgebra
     let := (stalkToLocalGenericRing W y).hom.toAlgebra
-    have := isFractionRing_localGenericRing V hy'
-    have := isFractionRing_localGenericRing W hy
+    have := isFractionRing_localGenericRing V (φ.left y)
+    have := isFractionRing_localGenericRing W y
     have h₂ : toLocalGenericRing W y
         (((MorphismProperty.Over.pullback @Etale ⊤ X.fromSpecFunctionField).map
           φ).left.appTop f.val) = localGenericRingMap φ y (toLocalGenericRing V (φ.left y) f.val) :=

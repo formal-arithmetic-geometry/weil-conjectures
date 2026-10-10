@@ -194,4 +194,42 @@ theorem isClopen_preimage_connectedComponentIn {X Y : Type*} [TopologicalSpace X
   · rw [connectedComponentIn_eq_empty hx, Set.preimage_empty]
     exact isClopen_empty
 
+/-- **Generisations in a closed set near a point.** In a noetherian quasi-sober space, a point `y`
+has an open neighbourhood `W` such that every point of a given closed set `Z` lying in `W` is a
+specialisation of a point of `Z` which generalises `y`: remove from the space the finitely many
+irreducible components of `Z` which do not contain `y`. -/
+theorem exists_isOpen_forall_exists_specializes [QuasiSober α] {Z : Set α} (hZ : IsClosed Z)
+    (y : α) : ∃ W : Set α, IsOpen W ∧ y ∈ W ∧ ∀ z ∈ W, z ∈ Z → ∃ g ∈ Z, g ⤳ z ∧ g ⤳ y := by
+  obtain ⟨S, hSf, hSc, hSi, rfl⟩ := exists_finite_set_isClosed_irreducible hZ
+  have hfin : Set.Finite {t | t ∈ S ∧ y ∉ t} := hSf.subset fun _ ht ↦ ht.1
+  have hcl : IsClosed (⋃₀ {t | t ∈ S ∧ y ∉ t}) := by
+    rw [Set.sUnion_eq_biUnion]
+    exact hfin.isClosed_biUnion fun t ht ↦ hSc t ht.1
+  refine ⟨(⋃₀ {t | t ∈ S ∧ y ∉ t})ᶜ, hcl.isOpen_compl, fun hy' ↦ ?_, ?_⟩
+  · obtain ⟨t, ht, hyt⟩ := hy'
+    exact ht.2 hyt
+  rintro z hzW ⟨t, ht, hzt⟩
+  have hyt : y ∈ t := by
+    by_contra hyt
+    exact hzW ⟨t, ⟨ht, hyt⟩, hzt⟩
+  obtain ⟨g, hg⟩ := QuasiSober.sober (hSi t ht) (hSc t ht)
+  exact ⟨g, ⟨t, ht, hg.mem⟩, hg.specializes hzt, hg.specializes hyt⟩
+
+/-- **Points of a closed set with no proper generisation but one.** In a noetherian quasi-sober
+space, let `Z` be a closed set not containing a point `ξ`. Then there are only finitely many
+points of `Z` whose only generisations are themselves and `ξ`: each of them is the generic point
+of an irreducible component of `Z`. -/
+theorem finite_setOf_forall_specializes [QuasiSober α] {Z : Set α} (hZ : IsClosed Z) {ξ : α}
+    (hξ : ξ ∉ Z) : {z | z ∈ Z ∧ ∀ c, c ⤳ z → c = z ∨ c = ξ}.Finite := by
+  obtain ⟨S, hSf, hSc, hSi, rfl⟩ := exists_finite_set_isClosed_irreducible hZ
+  refine (hSf.biUnion' (t := fun t ht ↦ {(hSi t ht).genericPoint})
+    fun _ _ ↦ Set.finite_singleton _).subset ?_
+  rintro z ⟨⟨t, ht, hzt⟩, hz⟩
+  have hg := (hSi t ht).isGenericPoint_genericPoint_closure
+  rw [(hSc t ht).closure_eq] at hg
+  rcases hz _ (hg.specializes hzt) with h | h
+  · simp only [Set.mem_iUnion, Set.mem_singleton_iff]
+    exact ⟨t, ht, h.symm⟩
+  · exact absurd ⟨t, ht, h ▸ hg.mem⟩ hξ
+
 end TopologicalSpace.NoetherianSpace

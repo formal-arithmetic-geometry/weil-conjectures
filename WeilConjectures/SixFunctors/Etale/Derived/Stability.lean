@@ -14,8 +14,11 @@ public import Mathlib.Topology.KrullDimension
 public import WeilConjectures.CategoryTheory.Abelian.Flat.Basic
 public import WeilConjectures.CategoryTheory.DerivedCategory.FlatModel
 public import WeilConjectures.ConstructibleSheaf.Defs
+public import WeilConjectures.ConstructibleSheaf.Monoidal
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.FiniteType
 public import WeilConjectures.SixFunctors.Etale.Derived.Dualizing
+public import WeilConjectures.SixFunctors.Etale.Derived.CoefficientsShift
+public import WeilConjectures.SixFunctors.Etale.Derived.SmoothDuality
 public import WeilConjectures.SixFunctors.Etale.Derived.Finiteness
 public import WeilConjectures.SixFunctors.Finite.Exact
 public import WeilConjectures.Mathlib.AlgebraicGeometry.AffineSpace
@@ -36,6 +39,7 @@ public import WeilConjectures.SixFunctors.Etale.Derived.Triangulated
 public import WeilConjectures.SixFunctors.Etale.Derived.UpperLowerStar
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.FlatModuleCat
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.KFlat
+public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.FiniteEtaleFlat
 
 /-!
 
@@ -93,6 +97,14 @@ restrictions of `Lf^*`, `Rf_*`, `Rf_!`, `Rf^!` and `𝔻_X` to `Dctf`.
   independent of the compactification
   (`AlgebraicGeometry.Etale.rightDerivedLowerShriekIso`, proved for a finite ring and a
   quasi-compact `j`).
+* Clause (iv) of `sk-thm-sf-ctf-stability`, that `Rf_!` preserves `Dctf`, is stated in the
+  torsion setting of the blueprint: a finite `Λ` whose exponent is invertible on `Y`, and `Y`
+  of finite type over a field `k`. Over an arbitrary base it is false: for the proper morphism
+  `f : ⊔ₙ ℙⁿ_ℂ ⟶ ⊔ₙ Spec ℂ`, `Rf_! Λ` has `H²ⁿ ≠ 0` on the `n`-th point and is not bounded.
+* The smooth case of `sk-prop-sf-rf-shriek-preservation` is derived from
+  `AlgebraicGeometry.Etale.exists_dualizingComplex_iso_and_tensor` (`thm-asd-smooth-tensor`)
+  instead of smooth purity: only the shape of `ω_f`, a locally constant free rank-one sheaf in
+  degree `-2d`, matters, and this needs neither a base field nor a Tate twist.
 * Clause (vi) of `sk-thm-sf-ctf-stability` — that `𝔻_X` preserves `Dctf(X, A)` and is an
   anti-equivalence of it — is **not restated here**: it is
   `AlgebraicGeometry.Etale.constructibleFiniteTor_verdierDual` and
@@ -203,18 +215,18 @@ lemma constructibleTorAmplitudeIn_of_iso {X : Scheme.{u}} {a b : ℤ}
 
 /-! ### The exceptional inverse image -/
 
-/-- Blueprint `sk-prop-sf-rf-shriek-preservation`: Preservation for the exceptional inverse
-image.
-
-Clause (i), finite étale case: for a finite étale `f`, `Rf^!` preserves the constructible
-interval and the Tor amplitude *unchanged*. -/
-theorem constructibleTorAmplitudeIn_rightDerivedUpperShriek_of_isFinite_of_etale
-    {X Y : Scheme.{u}} (f : X ⟶ Y) [IsFinite f] [_root_.AlgebraicGeometry.Etale f]
-    [HasCompactification f] [(R(f)_![A]).IsLeftAdjoint] (a b : ℤ)
-    {K : _root_.DerivedCategory (Sheaf Y.smallEtaleTopology A)}
-    (hK : constructibleTorAmplitudeIn A Y a b K) :
-    constructibleTorAmplitudeIn A X a b ((R(f)^![A]).obj K) :=
-  sorry
+/-- For a finite étale `f`, the exceptional inverse image is the pullback, `Rf^! ≅ D(f^*)`:
+`f` is proper, so `Rf_! ≅ Rf_*`; `f_*` is exact, so `Rf_* ≅ D(f_*)`; and `D(f_*) ⊣ D(f^*)`,
+`f_*` being left adjoint to `f^*`
+(`AlgebraicGeometry.Etale.lowerStarUpperStarAdjunctionOfIsFinite`). -/
+noncomputable def rightDerivedUpperShriekIsoOfIsFiniteOfEtale {X Y : Scheme.{u}} (f : X ⟶ Y)
+    [IsFinite f] [_root_.AlgebraicGeometry.Etale f] [HasCompactification f]
+    [(R(f)_![A]).IsLeftAdjoint] :
+    R(f)^![A] ≅ D((f)^*[A]) :=
+  (rightDerivedUpperShriekAdjunction A f).rightAdjointUniq
+    ((Etale.lowerStarUpperStarAdjunctionOfIsFinite A f).mapDerivedCategoryAdjunction.ofNatIsoLeft
+      (rightDerivedLowerShriekIsoRightDerivedLowerStar A f ≪≫
+        (f)_*[A].rightDerivedFunctorIsoMapDerivedCategory).symm)
 
 /-! ### Stability of `Dctf` under the six operations -/
 
@@ -238,11 +250,12 @@ subcategories.
 Clause (i), amplitude: `Lf^*` preserves the Tor amplitude interval unchanged, the pullback of
 a bounded flat model being a bounded flat model in the same degrees.
 
-The pullback is assumed to preserve flat sheaves (`AlgebraicGeometry.Etale.UpperStarPreservesFlat`,
-which holds for `A = ModuleCat Λ`). This is no restriction: the statement for `a = b = 0` and
-`K` a flat sheaf in degree `0` says exactly that `f^*` of a flat sheaf is flat. -/
-theorem torAmplitudeIn_leftDerivedUpperStar [UpperStarPreservesFlat A] {X Y : Scheme.{u}}
-    (f : X ⟶ Y) (a b : ℤ)
+The pullback is assumed to preserve flat sheaves, which holds for every `f` under
+`AlgebraicGeometry.Etale.UpperStarPreservesFlat A` (for instance for `A = ModuleCat Λ`), and for
+every `A` when `f` is an open immersion or finite étale. This is no restriction: the statement for
+`a = b = 0` and `K` a flat sheaf in degree `0` says exactly that `f^*` of a flat sheaf is flat. -/
+theorem torAmplitudeIn_leftDerivedUpperStar {X Y : Scheme.{u}} (f : X ⟶ Y)
+    [(f)^*[A].PreservesFlat] (a b : ℤ)
     {K : _root_.DerivedCategory (Sheaf Y.smallEtaleTopology A)}
     (hta : torAmplitudeIn A Y a b K) :
     torAmplitudeIn A X a b ((L((f)^*[A])).obj K) := by
@@ -268,6 +281,27 @@ theorem constructibleFiniteTor_leftDerivedUpperStar [UpperStarPreservesFlat A] {
   obtain ⟨hbc, a, b, hta⟩ := hK
   exact ⟨boundedConstructible_leftDerivedUpperStar A f hbc,
     a, b, torAmplitudeIn_leftDerivedUpperStar A f a b hta⟩
+
+/-- Blueprint `sk-prop-sf-rf-shriek-preservation`: Preservation for the exceptional inverse
+image.
+
+Clause (i), finite étale case: for a finite étale `f`, `Rf^!` preserves the constructible
+interval and the Tor amplitude *unchanged*, `Rf^! ≅ D(f^*)` being exact and `f^*` preserving
+flat sheaves. -/
+theorem constructibleTorAmplitudeIn_rightDerivedUpperShriek_of_isFinite_of_etale
+    {X Y : Scheme.{u}} (f : X ⟶ Y) [IsFinite f] [_root_.AlgebraicGeometry.Etale f]
+    [HasCompactification f] [(R(f)_![A]).IsLeftAdjoint] (a b : ℤ)
+    {K : _root_.DerivedCategory (Sheaf Y.smallEtaleTopology A)}
+    (hK : constructibleTorAmplitudeIn A Y a b K) :
+    constructibleTorAmplitudeIn A X a b ((R(f)^![A]).obj K) := by
+  obtain ⟨⟨hbc, hab⟩, hta⟩ := hK
+  refine constructibleTorAmplitudeIn_of_iso _
+    ((rightDerivedUpperShriekIsoOfIsFiniteOfEtale A f).app K).symm ⟨⟨?_,
+      ((f)^*[A]).homologyConcentratedIn_mapDerivedCategory_obj hab⟩, ?_⟩
+  · exact hbc.mapDerivedCategory_upperStar f
+  · exact (torAmplitudeIn A X a b).prop_of_iso
+      ((leftDerivedUpperStarIsoMapDerivedCategory _ f).app K)
+      (torAmplitudeIn_leftDerivedUpperStar _ f a b hta)
 
 omit [HasSmallSiteSheafify A] in
 /-- Blueprint `sk-thm-sf-ctf-stability`: Stability of the constructible finite-Tor
@@ -427,35 +461,6 @@ theorem constructibleFiniteTor_derivedHom_of_verdierDual {X S : Scheme.{u}} (a :
   obtain ⟨hbc, c, d, hcd⟩ := hD (htens (hD hM) hK)
   exact ⟨(boundedConstructible A X).prop_of_iso e'.symm hbc, c, d,
     (torAmplitudeIn A X c d).prop_of_iso e'.symm hcd⟩
-
-/-- The reduction of the finite étale case of `sk-prop-sf-rf-shriek-preservation`: if the direct
-image along a proper `f` is *left* adjoint to the pullback, then `Rf^! ≅ D(f^*)`, so `Rf^!`
-preserves the constructible interval and the Tor amplitude unchanged. For a finite étale `f`
-the adjunction `f_* ⊣ f^*` holds because `f_*` agrees with the étale extension by zero, but this
-is not available for a general coefficient category `A`. -/
-theorem constructibleTorAmplitudeIn_rightDerivedUpperShriek_of_adjunction
-    [UpperStarPreservesFlat A] {X Y : Scheme.{u}} (f : X ⟶ Y) [IsProper f]
-    [HasCompactification f] [(R(f)_![A]).IsLeftAdjoint] (adj : (f)_*[A] ⊣ (f)^*[A]) (a b : ℤ)
-    {K : _root_.DerivedCategory (Sheaf Y.smallEtaleTopology A)}
-    (hK : constructibleTorAmplitudeIn A Y a b K) :
-    constructibleTorAmplitudeIn A X a b ((R(f)^![A]).obj K) := by
-  have := adj.leftAdjoint_preservesColimits
-  have : PreservesFiniteColimits (f)_*[A] :=
-    PreservesColimitsOfSize.preservesFiniteColimits.{0, 0} _
-  -- `Rf_! ≅ Rf_* ≅ D(f_*)`, whose right adjoint is `D(f^*)`
-  let e : R(f)_![A] ≅ (f)_*[A].mapDerivedCategory :=
-    rightDerivedLowerShriekIsoRightDerivedLowerStar A f ≪≫
-      (f)_*[A].rightDerivedFunctorIsoMapDerivedCategory
-  let e' : R(f)^![A] ≅ (f)^*[A].mapDerivedCategory :=
-    (rightDerivedUpperShriekAdjunction A f).rightAdjointUniq
-      (adj.mapDerivedCategoryAdjunction.ofNatIsoLeft e.symm)
-  obtain ⟨⟨hbc, hab⟩, hta⟩ := hK
-  refine constructibleTorAmplitudeIn_of_iso _ (e'.app K).symm ⟨⟨?_,
-    ((f)^*[A]).homologyConcentratedIn_mapDerivedCategory_obj hab⟩, ?_⟩
-  · exact hbc.mapDerivedCategory_upperStar f
-  · exact (torAmplitudeIn A X a b).prop_of_iso
-      ((leftDerivedUpperStarIsoMapDerivedCategory _ f).app K)
-      (torAmplitudeIn_leftDerivedUpperStar _ f a b hta)
 
 /-! ### Closed immersions: reduction to the open complement -/
 
@@ -712,21 +717,6 @@ theorem constructibleFiniteTor_tensor (X : Scheme.{u})
 
 end Tensor
 
-/-- Blueprint `sk-thm-sf-ctf-stability`: Stability of the constructible finite-Tor
-subcategories.
-
-Clause (iv): `Rf_! : Dctf(X, A) ⥤ Dctf(Y, A)` is defined for every separated finite-type `f`
-admitting a compactification. One assembles the open-immersion case
-(`AlgebraicGeometry.Etale.constructibleTorAmplitudeIn_rightDerivedLowerShriek`) with the proper
-case, where `Rf_! = Rf_*`, along a compactification of `f`. -/
-theorem constructibleFiniteTor_rightDerivedLowerShriek {X Y : Scheme.{u}} (f : X ⟶ Y)
-    [ConcreteCategory.FiniteOfIsFinitelyGenerated A]
-    [HasCompactification f] [QuasiCompact f]
-    {K : _root_.DerivedCategory (Sheaf X.smallEtaleTopology A)}
-    (hK : constructibleFiniteTor A X K) :
-    constructibleFiniteTor A Y ((R(f)_![A]).obj K) :=
-  sorry
-
 /-! ### Open immersions -/
 
 section OpenImmersion
@@ -746,25 +736,19 @@ noncomputable def rightDerivedLowerShriekIsoOfIsOpenImmersion :
         Functor.mapDerivedCategoryIdIso _) ≪≫
     Functor.rightUnitor _
 
-/-- Blueprint `sk-lem-sf-open-ctf`: Extension by zero preserves the finite-Tor constructible
-category.
-
-For a quasi-compact open immersion `j : U ⟶ Y` admitting a compactification and a finite ring
-`Λ`, extension by zero sends `Dctf(U, Λ)` into `Dctf(Y, Λ)` *without moving the interval*: if
-`K` is bounded constructible with homology concentrated in `[a, b]` and Tor amplitude in
-`[a, b]`, then so is `Rj_! K`. Indeed `Rj_! = j_!` is exact, the extension by zero of a
+omit [Finite Λ] [HasCompactification j] in
+/-- Extension by zero along a quasi-compact open immersion `j` preserves membership in
+`D_c^[a, b]` with Tor amplitude in `[a, b]`: `j_!` is exact, the extension by zero of a
 constructible sheaf is constructible, and `j_!K ⊗ᴸ F ≅ j_!(K ⊗ᴸ j^*F)` by the projection
 formula. -/
-theorem constructibleTorAmplitudeIn_rightDerivedLowerShriek (a b : ℤ)
+theorem constructibleTorAmplitudeIn_mapDerivedCategory_openImmersionLowerShriek (a b : ℤ)
     {K : _root_.DerivedCategory (Sheaf U.smallEtaleTopology (ModuleCat.{u + 1} Λ))}
     (hK : constructibleTorAmplitudeIn (ModuleCat.{u + 1} Λ) U a b K) :
     constructibleTorAmplitudeIn (ModuleCat.{u + 1} Λ) Y a b
-      ((R(j)_![ModuleCat.{u + 1} Λ]).obj K) := by
+      (D((j)_!open[ModuleCat.{u + 1} Λ]).obj K) := by
   obtain ⟨⟨hbc, hab⟩, hta⟩ := hK
   let F := (j)_!open[ModuleCat.{u + 1} Λ]
-  refine constructibleTorAmplitudeIn_of_iso _
-    ((rightDerivedLowerShriekIsoOfIsOpenImmersion Λ j).app K).symm ⟨⟨⟨?_, fun n ↦ ?_⟩,
-      F.homologyConcentratedIn_mapDerivedCategory_obj hab⟩, fun G ↦ ?_⟩
+  refine ⟨⟨⟨?_, fun n ↦ ?_⟩, F.homologyConcentratedIn_mapDerivedCategory_obj hab⟩, fun G ↦ ?_⟩
   · exact F.bounded_mapDerivedCategory_obj hbc.1
   · have := hbc.2 n
     have : IsConstructibleSheaf ((_root_.DerivedCategory.homologyFunctor _ n ⋙ F).obj K) :=
@@ -785,6 +769,24 @@ theorem constructibleTorAmplitudeIn_rightDerivedLowerShriek (a b : ℤ)
           _root_.DerivedCategory.singleFunctor _ 0).obj G))) b := h₂
     exact ⟨_root_.DerivedCategory.TStructure.t.isGE_of_iso e.symm a,
       _root_.DerivedCategory.TStructure.t.isLE_of_iso e.symm b⟩
+
+/-- Blueprint `sk-lem-sf-open-ctf`: Extension by zero preserves the finite-Tor constructible
+category.
+
+For a quasi-compact open immersion `j : U ⟶ Y` admitting a compactification and a finite ring
+`Λ`, extension by zero sends `Dctf(U, Λ)` into `Dctf(Y, Λ)` *without moving the interval*: if
+`K` is bounded constructible with homology concentrated in `[a, b]` and Tor amplitude in
+`[a, b]`, then so is `Rj_! K`. Indeed `Rj_! = j_!` is exact, the extension by zero of a
+constructible sheaf is constructible, and `j_!K ⊗ᴸ F ≅ j_!(K ⊗ᴸ j^*F)` by the projection
+formula. -/
+theorem constructibleTorAmplitudeIn_rightDerivedLowerShriek (a b : ℤ)
+    {K : _root_.DerivedCategory (Sheaf U.smallEtaleTopology (ModuleCat.{u + 1} Λ))}
+    (hK : constructibleTorAmplitudeIn (ModuleCat.{u + 1} Λ) U a b K) :
+    constructibleTorAmplitudeIn (ModuleCat.{u + 1} Λ) Y a b
+      ((R(j)_![ModuleCat.{u + 1} Λ]).obj K) :=
+  constructibleTorAmplitudeIn_of_iso _
+    ((rightDerivedLowerShriekIsoOfIsOpenImmersion Λ j).app K).symm
+    (constructibleTorAmplitudeIn_mapDerivedCategory_openImmersionLowerShriek Λ j a b hK)
 
 /-- For a quasi-compact open immersion `j`, the exceptional inverse image is the restriction,
 `Rj^! ≅ D(j^*)`: both are right adjoint to `Rj_! ≅ D(j_!)`. -/
@@ -830,16 +832,6 @@ noncomputable def DerivedCategoryFiniteTor.leftDerivedUpperStar [UpperStarPreser
   ObjectProperty.lift _ (DerivedCategoryFiniteTor.ι A Y ⋙ L((f)^*[A]))
     fun K ↦ constructibleFiniteTor_leftDerivedUpperStar A f K.property
 
-/-- Blueprint `sk-thm-sf-ctf-stability`, clause (iv): the restriction
-`Rf_! : Dctf(X, A) ⥤ Dctf(Y, A)` of the compactly supported direct image to the small
-categories. -/
-noncomputable def DerivedCategoryFiniteTor.rightDerivedLowerShriek (f : X ⟶ Y)
-    [ConcreteCategory.FiniteOfIsFinitelyGenerated A]
-    [HasCompactification f] [QuasiCompact f] :
-    DerivedCategoryFiniteTor A X ⥤ DerivedCategoryFiniteTor A Y :=
-  ObjectProperty.lift _ (DerivedCategoryFiniteTor.ι A X ⋙ R(f)_![A])
-    fun K ↦ constructibleFiniteTor_rightDerivedLowerShriek A f K.property
-
 /-- Blueprint `sk-thm-sf-ctf-stability`, clause (vi): the restriction
 `𝔻_X : Dctf(X, A)ᵒᵖ ⥤ Dctf(X, A)` of the Verdier dual to the small categories, given that `𝔻_X`
 preserves `Dctf(X, A)`. For a finite `Λ` whose exponent is invertible on `k` and `X` separated of
@@ -855,6 +847,60 @@ noncomputable def DerivedCategoryFiniteTor.verdierDual {S : Scheme.{u}} (a : X �
     fun K ↦ h K.unop.property
 
 end Functors
+
+/-! ### Tensoring with a shifted flat object -/
+
+omit [HasSmallSiteSheafify A] in
+/-- Shifting moves the Tor amplitude: if `K` has Tor amplitude in `[a, b]`, then `K⟦n⟧` has
+Tor amplitude in `[a - n, b - n]`. -/
+lemma torAmplitudeIn_shift {X : Scheme.{u}}
+    {K : _root_.DerivedCategory (Sheaf X.smallEtaleTopology A)} {a b : ℤ}
+    (hK : torAmplitudeIn A X a b K) (n : ℤ) : torAmplitudeIn A X (a - n) (b - n) (K⟦n⟧) := by
+  intro F
+  obtain ⟨h₁, h₂⟩ := hK F
+  set F' := (_root_.DerivedCategory.singleFunctor _ 0).obj F
+  let e : ((-⊗ᴸ-(X)[A]).obj (K⟦n⟧)).obj F' ≅ (((-⊗ᴸ-(X)[A]).obj K).obj F')⟦n⟧ :=
+    (((-⊗ᴸ-(X)[A]).flip.obj F').commShiftIso n).app K
+  have : _root_.DerivedCategory.TStructure.t.IsGE (((-⊗ᴸ-(X)[A]).obj K).obj F') a := h₁
+  have : _root_.DerivedCategory.TStructure.t.IsLE (((-⊗ᴸ-(X)[A]).obj K).obj F') b := h₂
+  have := _root_.DerivedCategory.TStructure.t.isGE_shift
+    (((-⊗ᴸ-(X)[A]).obj K).obj F') a n (a - n)
+  have := _root_.DerivedCategory.TStructure.t.isLE_shift
+    (((-⊗ᴸ-(X)[A]).obj K).obj F') b n (b - n)
+  exact ⟨_root_.DerivedCategory.TStructure.t.isGE_of_iso e.symm _,
+    _root_.DerivedCategory.TStructure.t.isLE_of_iso e.symm _⟩
+
+omit [HasSmallSiteSheafify A] in
+/-- A flat sheaf placed in degree `0` has Tor amplitude in `[0, 0]`: the single complex is a
+bounded complex of flat objects concentrated in degree `0`. -/
+lemma torAmplitudeIn_singleFunctor_zero_of_flat {X : Scheme.{u}}
+    (L : Sheaf X.smallEtaleTopology A) (hL : ObjectProperty.flat L) :
+    torAmplitudeIn A X 0 0 ((_root_.DerivedCategory.singleFunctor _ 0).obj L) :=
+  (torAmplitudeIn A X 0 0).prop_of_iso
+    ((_root_.DerivedCategory.singleFunctorIsoCompQ _ 0).app L).symm
+    (_root_.DerivedCategory.torAmplitudeIn_Q_obj_of_flat _ 0 0 fun q ↦ by
+      by_cases hq : q = 0
+      · subst hq
+        exact ObjectProperty.prop_of_iso _ (HomologicalComplex.singleObjXSelf _ 0 L).symm hL
+      · exact ObjectProperty.flat_of_isZero (HomologicalComplex.isZero_single_obj_X _ _ _ _ hq))
+
+omit [HasSmallSiteSheafify A] in
+/-- If `N ≅ K ⊗ᴸ ω` with `ω ≅ L⟦m⟧`, where `K` has Tor amplitude in `[a, b]`, `L` has Tor
+amplitude in `[0, 0]` and `(K ⊗ᴸ L)⟦m⟧` is bounded constructible, then `N` lies in
+`D_c^[a - m, b - m]` with Tor amplitude in `[a - m, b - m]`. -/
+lemma constructibleTorAmplitudeIn_of_iso_tensor_shift {X : Scheme.{u}}
+    {N K ω L : _root_.DerivedCategory (Sheaf X.smallEtaleTopology A)} {a b m : ℤ}
+    (e₁ : N ≅ ((-⊗ᴸ-(X)[A]).obj K).obj ω) (e₂ : ω ≅ L⟦m⟧) (hK : torAmplitudeIn A X a b K)
+    (hL : torAmplitudeIn A X 0 0 L)
+    (hbc : boundedConstructible A X ((((-⊗ᴸ-(X)[A]).obj K).obj L)⟦m⟧)) :
+    constructibleTorAmplitudeIn A X (a - m) (b - m) N := by
+  let e : N ≅ (((-⊗ᴸ-(X)[A]).obj K).obj L)⟦m⟧ :=
+    e₁ ≪≫ ((-⊗ᴸ-(X)[A]).obj K).mapIso e₂ ≪≫ ((((-⊗ᴸ-(X)[A]).obj K).commShiftIso m).app L)
+  have ht : torAmplitudeIn A X a b (((-⊗ᴸ-(X)[A]).obj K).obj L) := by
+    simpa using torAmplitudeIn_tensor A X a b 0 0 hK hL
+  have ht' := torAmplitudeIn_shift A ht m
+  exact constructibleTorAmplitudeIn_of_iso A e.symm
+    ⟨⟨hbc, _root_.DerivedCategory.homologyConcentratedIn_of_torAmplitudeIn ht'⟩, ht'⟩
 
 /-! ### Torsion coefficients with invertible exponent
 
@@ -912,12 +958,36 @@ theorem torAmplitudeIn_rightDerivedLowerStar [ConcreteCategory.FinitelyGenerated
     torAmplitudeIn A Y a (b + 2 * (d : ℤ)) ((R((f)_*[A])).obj K) :=
   sorry
 
+omit [Finite Λ] in
+/-- Blueprint `sk-prop-sf-finiteness`: Finiteness and constructibility.
+
+For a finite `Λ` whose exponent is invertible on `Y` and a morphism `f : X ⟶ Y` of finite-type
+`k`-schemes, `Rf_*` preserves bounded constructibility. This is the finite-coefficient case of
+`AlgebraicGeometry.Etale.boundedConstructible_rightDerivedLowerStar`, and is
+`AlgebraicGeometry.Etale.boundedConstructible_rightDerivedLowerStar_of_hasInvertibleExponent`
+once `f` is known to be quasi-compact. -/
+theorem boundedConstructible_rightDerivedLowerStar_of_finite [Finite Λ] {X Y : Scheme.{u}}
+    (aX : X ⟶ Spec (.of k)) (aY : Y ⟶ Spec (.of k)) [LocallyOfFiniteType aX] [QuasiCompact aX]
+    [LocallyOfFiniteType aY] [QuasiCompact aY] (f : X ⟶ Y) (hf : f ≫ aY = aX)
+    [HasInvertibleExponent Λ Y]
+    {K : _root_.DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))}
+    (hbc : boundedConstructible (ModuleCat.{u + 1} Λ) X K) :
+    boundedConstructible (ModuleCat.{u + 1} Λ) Y ((R((f)_*[ModuleCat.{u + 1} Λ])).obj K) := by
+  have : QuasiCompact f := by
+    subst hf
+    have : IsLocallyNoetherian Y := LocallyOfFiniteType.isLocallyNoetherian aY
+    have : CompactSpace Y := QuasiCompact.compactSpace_of_compactSpace aY
+    have : IsNoetherian Y := {}
+    exact QuasiCompact.of_comp f aY
+  have : HasInvertibleExponent Λ X := HasInvertibleExponent.of_hom f
+  exact boundedConstructible_rightDerivedLowerStar_of_hasInvertibleExponent Λ f aX aY hf K hbc
+
 /-- Blueprint `sk-thm-sf-ctf-stability`: Stability of the constructible finite-Tor
 subcategories.
 
 Clause (iii): `Rf_* : Dctf(X, Λ) ⥤ Dctf(Y, Λ)` is defined for every separated morphism of
 finite-type `k`-schemes, for a finite `Λ` whose exponent is invertible on `Y`. It is
-`AlgebraicGeometry.Etale.boundedConstructible_rightDerivedLowerStar` together with
+`AlgebraicGeometry.Etale.boundedConstructible_rightDerivedLowerStar_of_finite` together with
 `AlgebraicGeometry.Etale.torAmplitudeIn_rightDerivedLowerStar`, a finite-type `k`-scheme being
 finite dimensional. -/
 theorem constructibleFiniteTor_rightDerivedLowerStar {X Y : Scheme.{u}} (aX : X ⟶ Spec (.of k))
@@ -932,8 +1002,34 @@ theorem constructibleFiniteTor_rightDerivedLowerStar {X Y : Scheme.{u}} (aX : X 
   have : NeZero N := ⟨hN0.ne'⟩
   have hN := nsmul_id_eq_zero_of_natCast_eq_zero hNΛ K
   have : IsNoetherianRing Λ := inferInstance
-  exact ⟨boundedConstructible_rightDerivedLowerStar _ aX aY f hf N hN hNY hbc, a, b + 2 * (d : ℤ),
+  exact ⟨boundedConstructible_rightDerivedLowerStar_of_finite Λ aX aY f hf hbc, a, b + 2 * (d : ℤ),
     torAmplitudeIn_rightDerivedLowerStar _ aX aY f hf d hd a b N hN hNY hbc hta⟩
+
+/-- Blueprint `sk-thm-sf-ctf-stability`: Stability of the constructible finite-Tor
+subcategories.
+
+Clause (iv): `Rf_! : Dctf(X, Λ) ⥤ Dctf(Y, Λ)` is defined for every separated finite-type `f`
+admitting a compactification, over a finite-type `k`-scheme `Y`, for a finite `Λ` whose exponent
+is invertible on `Y`. For the chosen compactification `X ⟶[j] Z ⟶[g] Y` of `f`, `Rf_!` is
+`Rg_* ∘ j_!`; extension by zero preserves `Dctf`
+(`AlgebraicGeometry.Etale.constructibleTorAmplitudeIn_mapDerivedCategory_openImmersionLowerShriek`)
+and so does the direct image along the proper `g`
+(`AlgebraicGeometry.Etale.constructibleFiniteTor_rightDerivedLowerStar`).
+
+Some finiteness hypothesis on `Y` is needed: for `f : ⊔ₙ ℙⁿ_ℂ ⟶ ⊔ₙ Spec ℂ`, which is proper,
+`Rf_! Λ` has `H²ⁿ ≠ 0` on the `n`-th point, so it is not bounded. -/
+theorem constructibleFiniteTor_rightDerivedLowerShriek {X Y : Scheme.{u}}
+    (aY : Y ⟶ Spec (.of k)) [LocallyOfFiniteType aY] [QuasiCompact aY]
+    [HasInvertibleExponent Λ Y] (f : X ⟶ Y) [HasCompactification f] [QuasiCompact f]
+    {K : _root_.DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))}
+    (hK : constructibleFiniteTor (ModuleCat.{u + 1} Λ) X K) :
+    constructibleFiniteTor (ModuleCat.{u + 1} Λ) Y ((R(f)_![ModuleCat.{u + 1} Λ]).obj K) := by
+  let c := HasCompactification.compactification f
+  have : QuasiCompact c.i := c.quasiCompact_openImmersion inferInstance
+  obtain ⟨hbc, a, b, hta⟩ := hK
+  have h := constructibleTorAmplitudeIn_mapDerivedCategory_openImmersionLowerShriek Λ c.i a b
+    ⟨⟨hbc, _root_.DerivedCategory.homologyConcentratedIn_of_torAmplitudeIn hta⟩, hta⟩
+  exact constructibleFiniteTor_rightDerivedLowerStar Λ (c.g ≫ aY) aY c.g rfl ⟨h.1.1, a, b, h.2⟩
 
 /-! #### Internal hom -/
 
@@ -1092,15 +1188,53 @@ include aX hm in
 
 If `K` and `M` have Tor amplitude in `[a, b]` and `[c, d]` and `dim X ≤ m`, then `RHom(K, M)`
 has Tor amplitude in `[c - b - 2m, d - a + 2m]`. The blueprint derives this from
-`RHom(K, M) ≅ 𝔻_X (K ⊗ᴸ 𝔻_X M)`, the dualizing complex having cohomology in `[-2m, 0]`. -/
+`RHom(K, M) ≅ 𝔻_X (K ⊗ᴸ 𝔻_X M)`, the dualizing complex having cohomology in `[-2m, 0]`. The
+statement is local on `X`, and on the separated affine opens it is
+`AlgebraicGeometry.Etale.constructibleFiniteTor_derivedHom_of_isSeparated`
+(`cor-weil-finite-constructible-hom`). -/
 theorem torAmplitudeIn_derivedHom
     (hK : boundedConstructible (ModuleCat.{u + 1} Λ) X K)
     (hKt : torAmplitudeIn (ModuleCat.{u + 1} Λ) X a b K)
     (hM : boundedConstructible (ModuleCat.{u + 1} Λ) X M)
     (hMt : torAmplitudeIn (ModuleCat.{u + 1} Λ) X c d M) :
     torAmplitudeIn (ModuleCat.{u + 1} Λ) X (c - b - 2 * (m : ℤ)) (d - a + 2 * (m : ℤ))
-      (((RHom(X)[ModuleCat.{u + 1} Λ]).obj (op K)).obj M) :=
-  sorry
+      (((RHom(X)[ModuleCat.{u + 1} Λ]).obj (op K)).obj M) := by
+  have : CompactSpace X := QuasiCompact.compactSpace_of_compactSpace aX
+  have : IsNoetherian X := { __ := LocallyOfFiniteType.isLocallyNoetherian aX }
+  by_cases hX : IsEmpty X
+  · exact torAmplitudeIn_of_openCover _ (n := 0) Fin.elim0
+      (fun x ↦ (hX.false x).elim) _ (fun i ↦ i.elim0)
+  rw [not_isEmpty_iff] at hX
+  have := HasInvertibleExponent.of_hom_of_nonempty (Λ := Λ) aX
+  -- a finite cover by affine opens
+  obtain ⟨t, ht⟩ := isCompact_univ.elim_finite_subcover (fun V : X.affineOpens ↦ (V : Set X))
+    (fun V ↦ V.1.isOpen) (fun x _ ↦ by
+      obtain ⟨V, hV, hxV, -⟩ := (TopologicalSpace.Opens.isBasis_iff_nbhd.mp X.isBasis_affineOpens)
+        (show x ∈ (⊤ : X.Opens) from trivial)
+      exact Set.mem_iUnion.2 ⟨⟨V, hV⟩, hxV⟩)
+  let U : Fin t.card → X.Opens := fun i ↦ (t.equivFin.symm i).1.1
+  refine torAmplitudeIn_of_openCover _ U (fun x ↦ ?_) _ (fun i ↦ ?_)
+  · obtain ⟨V, hV, hx⟩ := Set.mem_iUnion₂.1 (ht (Set.mem_univ x))
+    exact ⟨t.equivFin ⟨V, hV⟩, by simpa [U] using hx⟩
+  have : IsAffine (U i) := (t.equivFin.symm i).1.2
+  let aU := (U i).ι ≫ aX
+  have hmU : topologicalKrullDim (U i) ≤ (m : WithBot ℕ∞) :=
+    ((U i).ι.isOpenEmbedding.isInducing.topologicalKrullDim_le).trans hm
+  obtain ⟨e⟩ := nonempty_iso_mapDerivedCategory_upperStar_derivedHom _ (U i).ι K M
+  have hKt' : torAmplitudeIn (ModuleCat.{u + 1} Λ) (U i) a b
+      (D(((U i).ι)^*[ModuleCat.{u + 1} Λ]).obj K) :=
+    (torAmplitudeIn (ModuleCat.{u + 1} Λ) (U i) a b).prop_of_iso
+      ((leftDerivedUpperStarIsoMapDerivedCategory _ (U i).ι).app K)
+      (torAmplitudeIn_leftDerivedUpperStar _ (U i).ι a b hKt)
+  have hMt' : torAmplitudeIn (ModuleCat.{u + 1} Λ) (U i) c d
+      (D(((U i).ι)^*[ModuleCat.{u + 1} Λ]).obj M) :=
+    (torAmplitudeIn (ModuleCat.{u + 1} Λ) (U i) c d).prop_of_iso
+      ((leftDerivedUpperStarIsoMapDerivedCategory _ (U i).ι).app M)
+      (torAmplitudeIn_leftDerivedUpperStar _ (U i).ι c d hMt)
+  exact (torAmplitudeIn _ _ _ _).prop_of_iso e.symm
+    (constructibleFiniteTor_derivedHom_of_isSeparated (Λ := Λ) (a := aU) m hmU
+      (hK.mapDerivedCategory_upperStar (U i).ι) hKt'
+      (hM.mapDerivedCategory_upperStar (U i).ι) hMt').2
 
 -- `aX` and the coefficient hypotheses are part of the blueprint setting, unused by the proof
 set_option linter.unusedSectionVars false in
@@ -1165,27 +1299,57 @@ theorem constructibleTorAmplitudeIn_rightDerivedUpperShriek_of_isClosedImmersion
     hbc' ht'
   have hM : constructibleTorAmplitudeIn (ModuleCat.{u + 1} Λ) T a (b + 2 * d)
       ((R((V.ι)_*[ModuleCat.{u + 1} Λ])).obj ((L((V.ι)^*[ModuleCat.{u + 1} Λ])).obj K)) :=
-    ⟨⟨boundedConstructible_rightDerivedLowerStar _ (V.ι ≫ aT) aT V.ι rfl N hN hNT hbc',
+    ⟨⟨boundedConstructible_rightDerivedLowerStar_of_finite Λ (V.ι ≫ aT) aT V.ι rfl hbc',
       _root_.DerivedCategory.homologyConcentratedIn_of_torAmplitudeIn hMt⟩, hMt⟩
   have := constructibleTorAmplitudeIn_rightDerivedUpperShriek_of_isClosedImmersion_of_lowerStar
     (ModuleCat.{u + 1} Λ) i V.ι hij (by omega : b ≤ b + 2 * d) ⟨⟨hbc, hc⟩, ht⟩ hM
     (fun L ↦ hasProjectionFormula_of_finite Λ i _ L)
   rwa [show b + 2 * (d : ℤ) + 1 = b + 2 * d + 1 by ring] at this
 
+omit [Finite Λ] in
+/-- A locally constant sheaf of free rank-one `Λ`-modules, for a finite `Λ`, is constructible and
+flat. -/
+lemma isConstructibleSheaf_and_flat_of_sheafFiber_iso {X : Scheme.{u}}
+    (L : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)) [IsLocallyConstantSheaf L]
+    (hL : ∀ (Ω : Type u) [Field Ω] [IsSepClosed Ω] (s : Spec (.of Ω) ⟶ X),
+      Nonempty ((pointSmallEtale s).sheafFiber.obj L ≅ ModuleCat.of Λ Λ)) :
+    IsConstructibleSheaf L ∧ ObjectProperty.flat L := by
+  have : IsFiniteSheaf L := ⟨fun Ω _ _ s ↦
+    (ConcreteCategory.isFinitelyGenerated_iff_of_iso (hL Ω s).some).2
+      ((ModuleCat.isFinitelyGenerated_iff _).2 inferInstance)⟩
+  have : IsFiniteLocallyConstantSheaf L := {}
+  refine ⟨IsFiniteLocallyConstantSheaf.isConstructibleSheaf ‹_›,
+    (flat_iff_forall_flat_sheafFiber_obj L).2 fun {Ω} _ _ s ↦ ?_⟩
+  exact ObjectProperty.prop_of_iso _ ((GrothendieckTopology.Point.uliftSheafFiberIso _ _).app L ≪≫
+    (hL Ω s).some).symm (ObjectProperty.prop_unit (ObjectProperty.flat (A := ModuleCat.{u + 1} Λ)))
+
 /-- Blueprint `sk-prop-sf-rf-shriek-preservation`: Preservation for the exceptional inverse
 image.
 
 Clause (iii): for `f` smooth of pure relative dimension `d` and a finite `Λ` whose exponent is
 invertible on `Y`, the exceptional inverse image shifts both intervals by `-2d`,
-`D_c^[a, b] ↦ D_c^[a - 2d, b - 2d]`, by purity `Rf^! ≅ Lf^*(-)(d)[2d]`. -/
+`D_c^[a, b] ↦ D_c^[a - 2d, b - 2d]`, by purity `Rf^! ≅ Lf^*(-)(d)[2d]`. Without choosing an
+orientation, `Rf^! K ≅ Lf^* K ⊗ᴸ L[2d]` for a locally constant sheaf `L` of free rank-one
+`Λ`-modules (`AlgebraicGeometry.Etale.exists_dualizingComplex_iso_and_tensor`,
+`thm-asd-smooth-tensor`), and tensoring with the flat constructible `L` changes neither the
+constructible interval nor the Tor amplitude. -/
 theorem constructibleTorAmplitudeIn_rightDerivedUpperShriek_of_smoothOfRelativeDimension
     {X Y : Scheme.{u}} [HasInvertibleExponent Λ Y] (f : X ⟶ Y) [HasCompactification f] (d : ℕ)
     [SmoothOfRelativeDimension d f] (a b : ℤ)
     {K : _root_.DerivedCategory (Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ))}
     (hK : constructibleTorAmplitudeIn (ModuleCat.{u + 1} Λ) Y a b K) :
     constructibleTorAmplitudeIn (ModuleCat.{u + 1} Λ) X (a - 2 * d) (b - 2 * d)
-      ((R(f)^![ModuleCat.{u + 1} Λ]).obj K) :=
-  sorry
+      ((R(f)^![ModuleCat.{u + 1} Λ]).obj K) := by
+  have : IsNoetherianRing Λ := inferInstance
+  obtain ⟨L, _, hLs, ⟨eω⟩, htens⟩ := exists_dualizingComplex_iso_and_tensor Λ f d
+  obtain ⟨_, hLf⟩ := isConstructibleSheaf_and_flat_of_sheafFiber_iso Λ L hLs
+  obtain ⟨⟨hbc, -⟩, hta⟩ := hK
+  have hL₀ := torAmplitudeIn_singleFunctor_zero_of_flat _ L hLf
+  have hMbc := boundedConstructible_tensor Λ X (boundedConstructible_leftDerivedUpperStar _ f hbc)
+    (DerivedCategory.boundedConstructible_singleFunctor_obj L 0) ⟨0, 0, hL₀⟩
+  exact constructibleTorAmplitudeIn_of_iso_tensor_shift _ (htens K).some.symm eω
+    (torAmplitudeIn_leftDerivedUpperStar _ f a b hta) hL₀
+    ((boundedConstructible _ X).le_shift _ _ hMbc)
 
 omit [Finite Λ] in
 /-- Membership in `D_c^[a, b]` with Tor amplitude in `[a, b]` is local for a finite open cover
@@ -1430,6 +1594,19 @@ noncomputable def DerivedCategoryFiniteTor.rightDerivedLowerStar (aX : X ⟶ Spe
   ObjectProperty.lift _
     (DerivedCategoryFiniteTor.ι (ModuleCat.{u + 1} Λ) X ⋙ R((f)_*[ModuleCat.{u + 1} Λ]))
     fun K ↦ constructibleFiniteTor_rightDerivedLowerStar Λ aX aY f hf K.property
+
+/-- Blueprint `sk-thm-sf-ctf-stability`, clause (iv): the restriction
+`Rf_! : Dctf(X, Λ) ⥤ Dctf(Y, Λ)` of the compactly supported direct image to the small
+categories, for a separated finite-type `f` over a finite-type `k`-scheme `Y` and a finite `Λ`
+whose exponent is invertible on `Y`. -/
+noncomputable def DerivedCategoryFiniteTor.rightDerivedLowerShriek (aY : Y ⟶ Spec (.of k))
+    [LocallyOfFiniteType aY] [QuasiCompact aY] [HasInvertibleExponent Λ Y] (f : X ⟶ Y)
+    [HasCompactification f] [QuasiCompact f] :
+    DerivedCategoryFiniteTor (ModuleCat.{u + 1} Λ) X ⥤
+      DerivedCategoryFiniteTor (ModuleCat.{u + 1} Λ) Y :=
+  ObjectProperty.lift _
+    (DerivedCategoryFiniteTor.ι (ModuleCat.{u + 1} Λ) X ⋙ R(f)_![ModuleCat.{u + 1} Λ])
+    fun K ↦ constructibleFiniteTor_rightDerivedLowerShriek Λ aY f K.property
 
 /-- Blueprint `sk-thm-sf-ctf-stability`, clause (v): the restriction
 `Rf^! : Dctf(Y, Λ) ⥤ Dctf(X, Λ)` of the exceptional inverse image to the small categories, for

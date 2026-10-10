@@ -13,11 +13,16 @@ public import Mathlib.FieldTheory.IsSepClosed
 public import WeilConjectures.AlgebraicGeometry.Curve.Picard
 public import WeilConjectures.AlgebraicGeometry.Curve.RiemannRoch
 public import WeilConjectures.AlgebraicGeometry.DualNumbers
+public import WeilConjectures.AlgebraicGeometry.DualNumbersBaseChange
+public import WeilConjectures.AlgebraicGeometry.Picard.DualNumbers
 public import WeilConjectures.AlgebraicGeometry.EffectiveDescent
+public import WeilConjectures.AlgebraicGeometry.GroupScheme.Lie
+public import WeilConjectures.AlgebraicGeometry.GroupScheme.Separated
 public import WeilConjectures.AlgebraicGeometry.Picard.Degree
 public import WeilConjectures.AlgebraicGeometry.Picard.Scheme
 public import WeilConjectures.AlgebraicGeometry.Regular
 public import WeilConjectures.Mathlib.Algebra.DualNumber
+public import WeilConjectures.Mathlib.AlgebraicGeometry.Geometrically.Irreducible
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Geometrically.Reduced
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Modules.Sheaf
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.Smooth
@@ -83,9 +88,10 @@ Several clauses of the blueprint statements cannot be expressed and are dropped:
   `P(k[ε]) → P(k)` and the addition is the group law. The standard construction instead puts a
   `k`-vector space structure on the tangent space at any `k`-point of any `k`-scheme, and then
   identifies its addition with the group law at the unit; that comparison is not formalised.
-  Two facts are left `sorry`: the commutativity of `tangentSubgroup P` and the axiom
-  `(c + d) • v = c • v + d • v`. The instance `Module k (tangentSpaceAt P η[P])`, and with it
-  the statement of `nonempty_tangentSpaceAt_linearEquiv_H_one`, depends on them.
+  The commutativity of `tangentSubgroup P` and the axiom `(c + d) • v = c • v + d • v` are
+  transported from the Lie algebra of `P`: `tangentSubgroup P` is the group
+  `AlgebraicGeometry.GrpObj.infPoints P` of infinitesimal points, in bijection with
+  `AlgebraicGeometry.GrpObj.Lie P` (`AlgebraicGeometry.GrpObj.lieEquiv`).
 * Mathlib has no `AbelianVariety` class, so "abelian variety of dimension `g`" is spelled out
   as `CategoryTheory.CommGrpObj` together with `AlgebraicGeometry.IsProper`,
   `AlgebraicGeometry.SmoothOfRelativeDimension g` and
@@ -147,6 +153,9 @@ value at an algebraically closed point — are stated separately.
   `AlgebraicGeometry.smoothOfRelativeDimension_of_representableBy_picardFunctorDegree`: the
   theorem of the base, every `Pic^d_{X/k}` is proper and smooth of dimension `g` (blueprint
   `thm-sc-theorem-of-the-base`).
+- `AlgebraicGeometry.exists_surjective_of_representableBy_picardFunctorDegree_genus`: the Abel map
+  `Hilb^g ⟶ Pic^g`, `D ↦ 𝒪_X(D)`, is surjective; with `AlgebraicGeometry.exists_abelClass_eq` (a
+  class of degree `g` is effective) this gives properness and geometric integrality of `Pic^g`.
 - `AlgebraicGeometry.exists_jacobian`: the Jacobian is an abelian variety (blueprint
   `sk-prop-jacobian`, `thm-sc-jacobian-representability`).
 - `AlgebraicGeometry.exists_jacobian_pullback`: the Jacobian over a separable closure (blueprint
@@ -431,6 +440,309 @@ theorem exists_mulEquiv_of_isPicardZeroMul {G : Type*} [Group G] {T : Over (Spec
 
 end GroupLaw
 
+section DegreeShift
+
+variable {k : Type u} [Field k] {X : Scheme.{u}} [X.Over (Spec (.of k))]
+
+/-- **The fibrewise degree of a class pulled back from `X`** is its degree: for `ℒ ∈ Pic X`, a
+`k`-scheme `T` and a field-valued point `t : Spec K ⟶ T`, the pullback of `ℒ` to `X_T` has degree
+`deg ℒ` on the fibre `X_K`, the degree being invariant under extension of the base field
+(`AlgebraicGeometry.Scheme.Modules.degree_pullback`). -/
+theorem picardFibreDegree_map_fst [IsProper (X ↘ Spec (.of k))] {T : Over (Spec (.of k))}
+    (L : X.Pic) {K : Type u} [Field K] [Algebra k K]
+    (t : Over.mk (Spec.map (CommRingCat.ofHom (algebraMap k K))) ⟶ T) :
+    picardFibreDegree (X ↘ Spec (.of k)) (Pic.map (pullback.fst (X ↘ Spec (.of k)) T.hom) L) t =
+      Modules.degree k ((fromSkeleton X.Modules).obj L.val) := by
+  have hb : baseChangeMap (X ↘ Spec (.of k)) t ≫ pullback.fst (X ↘ Spec (.of k)) T.hom =
+      pullback.fst (X ↘ Spec (.of k)) (Spec.map (CommRingCat.ofHom (algebraMap k K))) :=
+    pullback.lift_fst _ _ _ |>.trans (Category.comp_id _)
+  let : (pullback (X ↘ Spec (.of k))
+      (Over.mk (Spec.map (CommRingCat.ofHom (algebraMap k K)))).hom).Over (Spec (.of K)) :=
+    ⟨pullback.snd _ _⟩
+  change Modules.degree K ((fromSkeleton _).obj
+    (Pic.map (baseChangeMap _ t) (Pic.map (pullback.fst _ T.hom) L)).val) = _
+  rw [← Pic.map_comp, hb]
+  exact (Modules.degree_congr K (fromSkeletonToSkeletonIso _)).trans
+    (Modules.degree_pullback k K ((fromSkeleton X.Modules).obj L.val))
+
+variable [SmoothOfRelativeDimension 1 (X ↘ Spec (.of k))] [IsProper (X ↘ Spec (.of k))]
+
+/-- Tensoring with the pullback of a class `M ∈ Pic X` of degree `e` sends classes of fibrewise
+degree `d` to classes of fibrewise degree `d + e`. -/
+lemma mul_map_fst_mem_picardSubfunctorDegree {T : Over (Spec (.of k))} {d e : ℤ} (M : X.Pic)
+    (hM : picDegreeHom k X M = .ofAdd e) {L : (pullback (X ↘ Spec (.of k)) T.hom).Pic}
+    (hL : L ∈ (picardSubfunctorDegree (X ↘ Spec (.of k)) d).obj (.op T)) :
+    L * Pic.map (pullback.fst (X ↘ Spec (.of k)) T.hom) M ∈
+      (picardSubfunctorDegree (X ↘ Spec (.of k)) (d + e)).obj (.op T) := fun K _ _ t ↦ by
+  rw [picardFibreDegree_mul, hL K t, picardFibreDegree_map_fst]
+  rw [picDegreeHom_apply, Hom.picDegree_eq] at hM
+  rw [Multiplicative.ofAdd.injective hM]
+
+omit [SmoothOfRelativeDimension 1 (X ↘ Spec (.of k))] [IsProper (X ↘ Spec (.of k))] in
+/-- Pulling a class back along `X_{T'} ⟶ X_T` commutes with tensoring by a class pulled back from
+`X`. -/
+lemma pic_map_baseChangeMap_mul_map_fst {T T' : Over (Spec (.of k))} (φ : T' ⟶ T)
+    (L : (pullback (X ↘ Spec (.of k)) T.hom).Pic) (M : X.Pic) :
+    Pic.map (baseChangeMap (X ↘ Spec (.of k)) φ)
+        (L * Pic.map (pullback.fst (X ↘ Spec (.of k)) T.hom) M) =
+      Pic.map (baseChangeMap (X ↘ Spec (.of k)) φ) L *
+        Pic.map (pullback.fst (X ↘ Spec (.of k)) T'.hom) M := by
+  have hb : baseChangeMap (X ↘ Spec (.of k)) φ ≫ pullback.fst (X ↘ Spec (.of k)) T.hom =
+      pullback.fst (X ↘ Spec (.of k)) T'.hom :=
+    pullback.lift_fst _ _ _ |>.trans (Category.comp_id _)
+  rw [Pic.map_mul, ← Pic.map_comp, hb]
+
+/-- Tensoring with the pullback of a class `M ∈ Pic X` of degree `e`, as a map from the
+degree-`d` subfunctor of the Picard presheaf to the degree-`d'` subfunctor, `d' = d + e`. -/
+noncomputable def picardSubfunctorDegreeMulMapFst {d d' e : ℤ} (M : X.Pic)
+    (hM : picDegreeHom k X M = .ofAdd e) (h : d' = d + e) :
+    (picardSubfunctorDegree (X ↘ Spec (.of k)) d).toFunctor ⟶
+      (picardSubfunctorDegree (X ↘ Spec (.of k)) d').toFunctor where
+  app T := TypeCat.ofHom fun L ↦
+    ⟨(show (pullback (X ↘ Spec (.of k)) T.unop.hom).Pic from L.1) *
+        Pic.map (pullback.fst (X ↘ Spec (.of k)) T.unop.hom) M, by
+      rw [h]
+      exact mul_map_fst_mem_picardSubfunctorDegree M hM L.2⟩
+  naturality {T T'} φ := by
+    ext L
+    exact Subtype.ext (pic_map_baseChangeMap_mul_map_fst φ.unop L.1 M).symm
+
+lemma picardSubfunctorDegreeMulMapFst_app_val {d d' e : ℤ} (M : X.Pic)
+    (hM : picDegreeHom k X M = .ofAdd e) (h : d' = d + e) (T : (Over (Spec (.of k)))ᵒᵖ)
+    (L : (picardSubfunctorDegree (X ↘ Spec (.of k)) d).toFunctor.obj T) :
+    ((picardSubfunctorDegreeMulMapFst M hM h).app T L).1 =
+      (show (pullback (X ↘ Spec (.of k)) T.unop.hom).Pic from L.1) *
+        Pic.map (pullback.fst (X ↘ Spec (.of k)) T.unop.hom) M :=
+  rfl
+
+/-- **Translating the degree.** Tensoring with the pullback of a class `M ∈ Pic X` of degree `e`
+is an isomorphism from the degree-`d` subfunctor of the Picard presheaf onto the degree-`d'`
+subfunctor, `d' = d + e`, with inverse the tensor product with the pullback of `M⁻¹`. -/
+noncomputable def picardSubfunctorDegreeIsoOfDegree {d d' e : ℤ} (M : X.Pic)
+    (hM : picDegreeHom k X M = .ofAdd e) (h : d' = d + e) :
+    (picardSubfunctorDegree (X ↘ Spec (.of k)) d).toFunctor ≅
+      (picardSubfunctorDegree (X ↘ Spec (.of k)) d').toFunctor where
+  hom := picardSubfunctorDegreeMulMapFst M hM h
+  inv := picardSubfunctorDegreeMulMapFst M⁻¹ (by rw [map_inv, hM, ofAdd_neg]) (e := -e)
+    (by omega)
+  hom_inv_id := by
+    ext T L
+    refine Subtype.ext ?_
+    change _ * _ * _ = _
+    rw [show Pic.map _ M⁻¹ = (Pic.map _ M)⁻¹ from map_inv (Pic.mapHom _) M,
+      mul_inv_cancel_right]
+    rfl
+  inv_hom_id := by
+    ext T L
+    refine Subtype.ext ?_
+    change _ * _ * _ = _
+    rw [show Pic.map _ M⁻¹ = (Pic.map _ M)⁻¹ from map_inv (Pic.mapHom _) M,
+      inv_mul_cancel_right]
+    rfl
+
+end DegreeShift
+
+section AbelMap
+
+open scoped AlgebraicGeometry.Scheme.Modules
+
+variable {k : Type u} [Field k] {X : Scheme.{u}}
+
+/-- The fibrewise degree of a class at a point `t` of the base is the degree of its restriction
+to the fibre `X_t` over the residue field `κ(t)`. -/
+lemma picardPresheafDegree_eq_degree (f : X ⟶ Spec (.of k)) {T : Over (Spec (.of k))}
+    (L : (picardPresheaf f).obj (.op T)) (t : T.left) :
+    letI := (pullback.snd f T.hom).fiberOverSpecResidueField t
+    picardPresheafDegree f L t = Modules.degree (T.left.residueField t)
+      ((Modules.pullback ((pullback.snd f T.hom).fiberι t)).obj
+        ((fromSkeleton _).obj (Pic.val (Y := pullback f T.hom) L))) := by
+  let := (pullback.snd f T.hom).fiberOverSpecResidueField t
+  refine congrArg (_ - ·) ?_
+  exact Modules.eulerChar_congr _ (Modules.pullbackObjUnitIso _)
+
+variable (f : X ⟶ Spec (.of k)) [SmoothOfRelativeDimension 1 f]
+
+/-- The class `𝒪_{X_T}(D)` in `Pic (X_T)` of a point `D` of the Hilbert functor `Hilb^d_{X/k}(T)`:
+`D` is a relative effective Cartier divisor (`AlgebraicGeometry.IsHilbertSubscheme.isInvertible`),
+and `𝒪(D)` is the dual of its ideal sheaf. -/
+noncomputable def abelClass {d : ℕ} {T : Over (Spec (.of k))}
+    (D : (hilbertPresheaf f d).obj (.op T)) : (pullback f T.hom).Pic :=
+  have := D.2.isInvertible.isInvertible_dual_toModules
+  Pic.ofIsInvertible D.1.toModulesᵛ
+
+/-- The chosen representative of `𝒪(D)` is the dual of the ideal sheaf of `D`. -/
+noncomputable def abelClassIso {d : ℕ} {T : Over (Spec (.of k))}
+    (D : (hilbertPresheaf f d).obj (.op T)) :
+    (fromSkeleton _).obj (abelClass f D).val ≅ D.1.toModulesᵛ :=
+  have := D.2.isInvertible.isInvertible_dual_toModules
+  Pic.ofIsInvertibleIso _
+
+/-- The class `𝒪(D)` is compatible with base change: `𝒪(D)_{T'} = 𝒪(D_{T'})`. -/
+lemma pic_map_abelClass {d : ℕ} {T T' : Over (Spec (.of k))} (φ : T' ⟶ T)
+    (D : (hilbertPresheaf f d).obj (.op T)) :
+    Pic.map (baseChangeMap f φ) (abelClass f D) =
+      abelClass f ((hilbertPresheaf f d).map φ.op D) := by
+  have := D.2.isInvertible.isInvertible_dual_toModules
+  have := ((hilbertPresheaf f d).map φ.op D).2.isInvertible.isInvertible_dual_toModules
+  obtain ⟨e⟩ := D.2.isInvertible.nonempty_pullback_dual_toModules_iso (baseChangeMap f φ)
+    ((hilbertPresheaf f d).map φ.op D).2.isInvertible
+  exact Pic.eq_iff_nonempty_iso.2 ⟨fromSkeletonToSkeletonIso _ ≪≫
+    (Modules.pullback _).mapIso (abelClassIso f D) ≪≫ e ≪≫
+    (abelClassIso f ((hilbertPresheaf f d).map φ.op D)).symm⟩
+
+variable [IsProper f]
+
+/-- **`𝒪(D)` has fibrewise degree `d`** for a point `D` of `Hilb^d_{X/k}(T)`: on the fibre `X_t`,
+`𝒪(D)_t = 𝒪(D_t)` has degree `dim_{κ(t)} Γ(D_t, 𝒪) = d` by Riemann–Roch
+(`AlgebraicGeometry.Scheme.IdealSheafData.IsInvertible.degree_dual_toModules`). -/
+lemma abelClass_mem {d : ℕ} {T : Over (Spec (.of k))} (D : (hilbertPresheaf f d).obj (.op T)) :
+    abelClass f D ∈ (picardSubfunctorDegree f d).obj (.op T) := by
+  have : Smooth f := SmoothOfRelativeDimension.smooth 1 f
+  refine (mem_picardSubfunctorDegree_iff f d _).2 fun t ↦ ?_
+  let π := pullback.snd f T.hom
+  let κ := T.left.residueField t
+  let := π.fiberOverSpecResidueField t
+  have := smoothOfRelativeDimension_isStableUnderBaseChange 1
+  have : SmoothOfRelativeDimension 1 π :=
+    MorphismProperty.pullback_snd (P := @SmoothOfRelativeDimension 1) _ _ ‹_›
+  have : IsProper π := MorphismProperty.pullback_snd (P := @IsProper) _ _ ‹_›
+  have : SmoothOfRelativeDimension 1 (π.fiber t ↘ Spec κ) :=
+    MorphismProperty.pullback_snd (P := @SmoothOfRelativeDimension 1) _ _ ‹_›
+  have : IsProper (π.fiber t ↘ Spec κ) :=
+    MorphismProperty.pullback_snd (P := @IsProper) _ _ ‹_›
+  obtain ⟨hfin, hflat, -, hrank⟩ := D.2
+  have hI := D.2.isInvertible
+  have := hI.isInvertible_dual_toModules
+  -- the fibre `D_t` is an effective Cartier divisor on `X_t`
+  have hDt : (D.1.comap (π.fiberι t)).IsInvertible :=
+    (IdealSheafData.IsRelativeEffectiveCartier.isRelativeEffectiveCartier_comap_of_isPullback
+      ⟨hI, hflat⟩
+      (IsPullback.of_hasPullback π (T.left.fromSpecResidueField t))).1
+  obtain ⟨e⟩ := hI.nonempty_pullback_dual_toModules_iso (π.fiberι t) hDt
+  rw [picardPresheafDegree_eq_degree, Modules.degree_congr κ
+    ((Modules.pullback _).mapIso (abelClassIso f D) ≪≫ e), hDt.degree_dual_toModules]
+  exact_mod_cast ((Scheme.IdealSheafData.finrank_subschemeι_comp_eq_finrankΓ π D.1 t).symm.trans
+    (hrank t))
+
+/-- **The Abel map** `Hilb^d_{X/k} ⟶ Pic^d_{X/k}` at the level of presheaves: a relative effective
+Cartier divisor `D ⊆ X_T` of degree `d` is sent to the class of `𝒪_{X_T}(D)`, which has fibrewise
+degree `d` (`AlgebraicGeometry.abelClass_mem`). The Hilbert functor is `Type u`-valued, so it is
+composed with `CategoryTheory.uliftFunctor`. -/
+noncomputable def abelMapPresheaf (d : ℕ) :
+    hilbertPresheaf f d ⋙ uliftFunctor.{u + 1, u} ⟶ (picardSubfunctorDegree f d).toFunctor where
+  app T := TypeCat.ofHom fun D ↦ ⟨abelClass f D.down, abelClass_mem f D.down⟩
+  naturality {T T'} φ := by
+    ext D
+    exact Subtype.ext (pic_map_abelClass f φ.unop D.down).symm
+
+lemma abelMapPresheaf_app_val (d : ℕ) (T : (Over (Spec (.of k)))ᵒᵖ)
+    (D : (hilbertPresheaf f d ⋙ uliftFunctor.{u + 1, u}).obj T) :
+    ((abelMapPresheaf f d).app T D).1 = abelClass f D.down :=
+  rfl
+
+end AbelMap
+
+section GeometricPoints
+
+open scoped AlgebraicGeometry.Scheme.Modules
+
+variable {k : Type u} [Field k]
+
+/-- **Sections of an fppf sheafification over an algebraically closed field.** Let `K` be an
+algebraically closed field over `k`. Every section over `Spec K` of the fppf sheafification of a
+presheaf `P` on `k`-schemes comes from a section of `P`: an fppf covering of `Spec K` has a member
+with a closed point, which is a `K`-rational point (Hilbert's Nullstellensatz), i.e. a section of
+the covering. -/
+lemma exists_toSheafify_app_eq_of_isAlgClosed {K : Type u} [Field K] [Algebra k K]
+    [IsAlgClosed K] (P : (Over (Spec (.of k)))ᵒᵖ ⥤ Type (u + 1))
+    (s : (sheafify (fppfTopology.over (Spec (.of k))) P).obj
+      (.op (Over.mk (Spec.map (CommRingCat.ofHom (algebraMap k K)))))) :
+    ∃ a, (toSheafify (fppfTopology.over (Spec (.of k))) P).app _ a = s := by
+  let J := fppfTopology.over (Spec (.of k))
+  let T := Over.mk (Spec.map (CommRingCat.ofHom (algebraMap k K)))
+  obtain ⟨t₀⟩ : Nonempty T.left := inferInstanceAs (Nonempty (Spec (.of K)))
+  obtain ⟨Z, g, ⟨a, ha⟩, -, hg, z, -⟩ := exists_flat_mem_of_mem_fppfTopology_over
+    (Presheaf.imageSieve_mem J (toSheafify J P) s) t₀
+  have : JacobsonSpace Z.left := LocallyOfFiniteType.jacobsonSpace g.left
+  obtain ⟨x, -, hx⟩ := nonempty_inter_closedPoints (Z := Set.univ) ⟨z, trivial⟩
+    isClosed_univ.isLocallyClosed
+  let τ : T ⟶ Z := Over.homMk (pointOfClosedPoint g.left x hx) (by
+    rw [← Over.w g, pointOfClosedPoint_comp_assoc]
+    rfl)
+  have hτ : τ ≫ g = 𝟙 T := by
+    ext1
+    exact pointOfClosedPoint_comp g.left x hx
+  refine ⟨P.map τ.op a, ?_⟩
+  refine (NatTrans.naturality_apply (toSheafify J P) τ.op a).trans ?_
+  rw [ha, ← Functor.map_comp_apply, ← op_comp, hτ, op_id]
+  exact Functor.map_id_apply (sheafify J P) _ _
+
+variable {X : Scheme.{u}} [X.Over (Spec (.of k))] [SmoothOfRelativeDimension 1 (X ↘ Spec (.of k))]
+  [IsProper (X ↘ Spec (.of k))] [GeometricallyIntegral (X ↘ Spec (.of k))]
+
+/-- **A class of degree `g` is effective.** Let `X` be a smooth projective curve of genus `g` over
+`k`, let `K/k` be a field extension and let `ℒ ∈ Pic (X_K)` have degree `g`. Then `ℒ ≅ 𝒪(D)` for a
+point `D` of `Hilb^g_{X/k}(K)`: by Riemann–Roch `h⁰(ℒ) ≥ χ(ℒ) = g + 1 - g = 1`, and the zero
+scheme of a nonzero section of `ℒ` on the integral curve `X_K` is an effective Cartier divisor of
+degree `deg ℒ = g`.
+
+(blueprint: `thm-sc-theorem-of-the-base`, surjectivity of `Hilb^g ⟶ Pic^g`) -/
+theorem exists_abelClass_eq (K : Type u) [Field K] [Algebra k K]
+    (L : (picardSubfunctorDegree (X ↘ Spec (.of k)) (arithmeticGenus k X)).toFunctor.obj
+      (.op (Over.mk (Spec.map (CommRingCat.ofHom (algebraMap k K)))))) :
+    ∃ D : (hilbertPresheaf (X ↘ Spec (.of k)) (arithmeticGenus k X)).obj
+      (.op (Over.mk (Spec.map (CommRingCat.ofHom (algebraMap k K))))),
+      abelClass (X ↘ Spec (.of k)) D = L.1 := by
+  let T := Over.mk (Spec.map (CommRingCat.ofHom (algebraMap k K)))
+  let XK := pullback (X ↘ Spec (.of k)) (Spec.map (CommRingCat.ofHom (algebraMap k K)))
+  let π : XK ⟶ Spec (.of K) :=
+    pullback.snd (X ↘ Spec (.of k)) (Spec.map (CommRingCat.ofHom (algebraMap k K)))
+  let : XK.Over (Spec (.of K)) := ⟨π⟩
+  obtain ⟨h₁, h₂, h₃, h₄⟩ :=
+    smoothOfRelativeDimension_and_isProper_and_geometricallyIntegral_pullback_snd
+      (X ↘ Spec (.of k)) K
+  have : SmoothOfRelativeDimension 1 (XK ↘ Spec (.of K)) := h₁
+  have : IsProper (XK ↘ Spec (.of K)) := h₂
+  have : GeometricallyIntegral (XK ↘ Spec (.of K)) := h₃
+  have : IsIntegral XK := h₄
+  have : GlobalSectionsBijective K XK := .of_geometricallyIntegral
+  let ℒ : XK.Modules := (fromSkeleton _).obj (Pic.val (Y := XK) L.1)
+  have : SheafOfModules.IsInvertible.{u, u, u} ℒ := Pic.isInvertible (Y := XK) L.1
+  have : Modules.IsInvertible ℒ := Modules.IsInvertible.of_sheafOfModules _
+  -- `deg ℒ = g`
+  have hdeg : ℒ.degree K = arithmeticGenus k X := by
+    have h := L.2 K (𝟙 T)
+    rwa [picardFibreDegree, baseChangeMap_id, Pic.map_id] at h
+  -- `h⁰(ℒ) ≥ χ(ℒ) = 1`
+  have hχ := Modules.eulerChar_eq_degree_add (k := K) ℒ
+  have hg : arithmeticGenus K XK = arithmeticGenus k X := arithmeticGenus_pullback (k := k) K
+  rw [hdeg, hg] at hχ
+  have h01 := Modules.eulerChar_eq_finrankH_zero_sub_finrankH_one (k := K) ℒ
+  have hpos : 0 < ℒ.finrankH K 0 := by omega
+  have : Nontrivial (ℒ.H 0) := Module.nontrivial_of_finrank_pos (R := K) hpos
+  obtain ⟨s, hs⟩ := Modules.exists_ne_zero_of_nontrivial_H_zero ℒ
+  -- the zero scheme `D` of `s`
+  have := Modules.IsInvertible.sheafOfModules_isInvertible (𝟙_ XK.Modules)
+  let D := Modules.Hom.zeroLocus s
+  have hD : D.IsInvertible := (Modules.Hom.isLocallyPrincipal_zeroLocus s).isInvertible
+    fun h ↦ hs ((Modules.Hom.zeroLocus_eq_bot_iff s).1 h)
+  have := hD.isInvertible_dual_toModules
+  obtain ⟨e⟩ := Modules.Hom.nonempty_iso_dual_toModules_tensorObj s hD
+  have hfin : IsFinite (D.subschemeι ≫ π) := hD.isFinite_subschemeι_comp (k := K)
+  have hrank : (D.subschemeι ≫ π).finrankΓ = arithmeticGenus k X := by
+    have h := hD.degree_dual_toModules (k := K)
+    rw [← Modules.degree_congr K (e ≪≫ ρ_ _), hdeg] at h
+    exact_mod_cast h.symm
+  have hflat : Flat (D.subschemeι ≫ π) := inferInstance
+  have hlfp : LocallyOfFinitePresentation (D.subschemeι ≫ π) := inferInstance
+  refine ⟨⟨D, hfin, hflat, hlfp, fun t ↦ ?_⟩, ?_⟩
+  · exact (Scheme.Hom.finrank_eq_fiberDegree (D.subschemeι ≫ π) t).trans
+      ((fiberDegree_eq_finrankΓ _ t).trans hrank)
+  · refine Pic.eq_iff_nonempty_iso.2 ⟨abelClassIso (X ↘ Spec (.of k)) _ ≪≫ ?_⟩
+    exact (e ≪≫ ρ_ _).symm
+
+end GeometricPoints
+
 section Decomposition
 
 variable {k : Type u} [Field k] {X : Scheme.{u}} [X.Over (Spec (.of k))] [IsSepClosed k]
@@ -573,34 +885,144 @@ rational point `P`, which cannot be named for lack of the twisting sheaf.
 theorem nonempty_iso_of_representableBy (d : ℤ) (P₀ Pd : Over (Spec (.of k)))
     (hP₀ : (picardFunctorDegree (X ↘ Spec (.of k)) 0).obj.RepresentableBy P₀)
     (hPd : (picardFunctorDegree (X ↘ Spec (.of k)) d).obj.RepresentableBy Pd) :
-    Nonempty (P₀ ≅ Pd) :=
-  sorry
-
-/-- **`Pic^g` is proper.** A `k`-scheme representing the degree-`g` part `Pic^g_{X/k}` of the
-Picard functor, `g` the genus, is proper over `k`.  The universal divisor of the Hilbert scheme
-defines `Hilb^g_{X/k} ⟶ Pic^g_{X/k}`, `D ↦ 𝒪_X(D)`; it is surjective because by Riemann–Roch
-an invertible module of degree `g` has `h⁰ ≥ χ = 1`, hence is `𝒪_X(D)` for the zero divisor `D`
-of a nonzero section.  So `Pic^g_{X/k}` is the image of the proper `Hilb^g_{X/k}` in a
-separated `k`-scheme, hence proper (Stacks `03GN`).
-
-(blueprint: `thm-sc-theorem-of-the-base`, properness of `Pic^g`) -/
-theorem isProper_of_representableBy_picardFunctorDegree_genus (P : Over (Spec (.of k)))
-    (hP : (picardFunctorDegree (X ↘ Spec (.of k)) (arithmeticGenus k X)).obj.RepresentableBy P) :
-    IsProper P.hom :=
-  sorry
+    Nonempty (P₀ ≅ Pd) := by
+  -- a class `M = 𝒪_X(x)^d` of degree `d`, for a rational point `x`
+  have : Smooth (X ↘ Spec (.of k)) := SmoothOfRelativeDimension.smooth 1 _
+  have : IsIntegral X := GeometricallyIntegral.isIntegral_of_subsingleton (X ↘ Spec (.of k))
+  obtain ⟨x⟩ := Hom.nonempty_fieldPoints (k := k) (X ↘ Spec (.of k))
+  have hJ := Hom.isInvertible_ker_fieldPoints x
+  have := hJ.isInvertible_toModules
+  let M : X.Pic := Pic.ofIsInvertible x.1.ker.toModules ^ (-d)
+  have hM : picDegreeHom k X M = .ofAdd d := by
+    rw [map_zpow, picDegreeHom_ofIsInvertible, degree_toModules_ker_fieldPoints, ← ofAdd_zsmul,
+      smul_eq_mul, neg_mul_neg, _root_.mul_one]
+  -- tensoring with `M` identifies `Pic^0_{X/k}` with `Pic^d_{X/k}`
+  let e := picardSubfunctorDegreeIsoOfDegree M hM (d := 0) (d' := d) (zero_add d).symm
+  exact ⟨hP₀.uniqueUpToIso (hPd.ofIso ((sheafToPresheaf _ _).mapIso
+    ((presheafToSheaf (fppfTopology.over (Spec (.of k))) (Type (u + 1))).mapIso e)).symm)⟩
 
 /-- **`Pic^g` is smooth of dimension `g`.** A `k`-scheme representing the degree-`g` part
-`Pic^g_{X/k}` of the Picard functor, `g` the genus, is smooth of relative dimension `g` over `k`.
-The subfunctor `F` of the normalized Picard functor is represented by an open subscheme `U` of
-the smooth `g`-dimensional `Hilb^g_{X/k}`, and its classes have degree `g`, so `U` is open in
-`Pic^g_{X/k}`; by the twist lemma the translates of `U` by `k`-points cover `Pic^g_{X/k}`.
+`Pic^g_{X/k}` of the Picard functor, `g` the genus, is smooth of relative dimension `g` over `k`:
+it is an open subscheme of the Picard scheme
+(`AlgebraicGeometry.exists_decomposition_picardFunctor`),
+which is smooth of dimension `g`, being covered by translates of an open subscheme of the smooth
+`g`-dimensional `Hilb^g_{X/k}`
+(`AlgebraicGeometry.smoothOfRelativeDimension_of_representableBy_picardFunctor`).
 
 (blueprint: `thm-sc-theorem-of-the-base`, smoothness of `Pic^g`) -/
 theorem smoothOfRelativeDimension_of_representableBy_picardFunctorDegree_genus
     (P : Over (Spec (.of k)))
     (hP : (picardFunctorDegree (X ↘ Spec (.of k)) (arithmeticGenus k X)).obj.RepresentableBy P) :
-    SmoothOfRelativeDimension (arithmeticGenus k X) P.hom :=
-  sorry
+    SmoothOfRelativeDimension (arithmeticGenus k X) P.hom := by
+  obtain ⟨A, -, hA, -⟩ := isRepresentable_picardFunctor (X ↘ Spec (.of k))
+  obtain ⟨Pd, j, hj, -, -, -, hPd⟩ := exists_decomposition_picardFunctor A hA
+  obtain ⟨hg⟩ := hPd (arithmeticGenus k X)
+  have := smoothOfRelativeDimension_of_representableBy_picardFunctor A hA
+  have := hj (arithmeticGenus k X)
+  have := smoothOfRelativeDimension_comp (n := 0) (m := arithmeticGenus k X)
+    (j (arithmeticGenus k X)).left A.hom
+  rw [zero_add, Over.w (j _)] at this
+  let e := hP.uniqueUpToIso hg
+  rw [← Over.w e.hom, MorphismProperty.cancel_left_of_respectsIso
+    (P := @SmoothOfRelativeDimension (arithmeticGenus k X))]
+  exact this
+
+omit [IsSepClosed k] in
+/-- **The Abel map `Hilb^g ⟶ Pic^g` is surjective.** For a `k`-scheme `P` representing
+`Pic^g_{X/k}`, `g` the genus, there are a proper geometrically integral `k`-scheme `H` (the
+Hilbert scheme `Hilb^g_{X/k}`) and a morphism `a : H ⟶ P` of `k`-schemes, `D ↦ 𝒪_X(D)`
+(`AlgebraicGeometry.abelMapPresheaf`), which is surjective: a point `p` of `P` gives a class of
+degree `g` over an algebraic closure `K` of `κ(p)`, which comes from `Pic (X_K)`
+(`AlgebraicGeometry.exists_toSheafify_app_eq_of_isAlgClosed`) and is effective by Riemann–Roch
+(`AlgebraicGeometry.exists_abelClass_eq`).
+
+(blueprint: `thm-sc-theorem-of-the-base`, the map `γ_g : Hilb^g ⟶ Pic^g`) -/
+theorem exists_surjective_of_representableBy_picardFunctorDegree_genus (P : Over (Spec (.of k)))
+    (hP : (picardFunctorDegree (X ↘ Spec (.of k)) (arithmeticGenus k X)).obj.RepresentableBy P) :
+    ∃ (H : Over (Spec (.of k))) (a : H ⟶ P), IsProper H.hom ∧ GeometricallyIntegral H.hom ∧
+      Surjective a.left := by
+  obtain ⟨H, q, -, hq, hqi, eH, -⟩ :=
+    hilbertPresheaf_curve_representable (X ↘ Spec (.of k)) (arithmeticGenus k X)
+  let J := fppfTopology.over (Spec (.of k))
+  let S := picardSubfunctorDegree (X ↘ Spec (.of k)) (arithmeticGenus k X)
+  let Φ := abelMapPresheaf (X ↘ Spec (.of k)) (arithmeticGenus k X)
+  -- the class of the universal divisor, and the Abel morphism `a`
+  let ab : (picardFunctorDegree (X ↘ Spec (.of k)) (arithmeticGenus k X)).obj.obj
+      (.op (Over.mk q)) :=
+    (toSheafify J S.toFunctor).app _ (Φ.app _ (ULift.up (eH.homEquiv (𝟙 _))))
+  let a : Over.mk q ⟶ P := hP.homEquiv.symm ab
+  have hab {T : Over (Spec (.of k))} (h : T ⟶ Over.mk q) :
+      hP.homEquiv (h ≫ a) =
+        (toSheafify J S.toFunctor).app _ (Φ.app _ (ULift.up (eH.homEquiv h))) := by
+    rw [hP.homEquiv_comp, hP.homEquiv.apply_symm_apply]
+    have h₃ : eH.homEquiv h = (hilbertPresheaf _ _).map h.op (eH.homEquiv (𝟙 _)) := by
+      simpa using eH.homEquiv_comp h (𝟙 _)
+    rw [h₃]
+    refine (NatTrans.naturality_apply (toSheafify J S.toFunctor) h.op _).symm.trans ?_
+    exact congrArg _ (NatTrans.naturality_apply Φ h.op _).symm
+  refine ⟨Over.mk q, a, hq, hqi, ⟨fun p ↦ ?_⟩⟩
+  -- a geometric point `x : Spec K ⟶ P` over `p`
+  let κ := P.left.residueField p
+  let φ : CommRingCat.of k ⟶ κ := Spec.preimage (P.left.fromSpecResidueField p ≫ P.hom)
+  let K := AlgebraicClosure κ
+  let : Algebra k K := ((algebraMap κ K).comp φ.hom).toAlgebra
+  have hK : Spec.map (CommRingCat.ofHom (algebraMap k K)) =
+      Spec.map (CommRingCat.ofHom (algebraMap κ K)) ≫ P.left.fromSpecResidueField p ≫ P.hom := by
+    rw [← Spec.map_preimage (P.left.fromSpecResidueField p ≫ P.hom), ← Spec.map_comp]
+    rfl
+  let x : Over.mk (Spec.map (CommRingCat.ofHom (algebraMap k K))) ⟶ P :=
+    Over.homMk (Spec.map (CommRingCat.ofHom (algebraMap κ K)) ≫ P.left.fromSpecResidueField p)
+      (by rw [Category.assoc]; exact hK.symm)
+  -- the class of `x` comes from an effective divisor of degree `g` on `X_K`
+  obtain ⟨L, hL⟩ := exists_toSheafify_app_eq_of_isAlgClosed S.toFunctor (hP.homEquiv x)
+  obtain ⟨D, hD⟩ := exists_abelClass_eq K L
+  let h : Over.mk (Spec.map (CommRingCat.ofHom (algebraMap k K))) ⟶ Over.mk q :=
+    eH.homEquiv.symm D
+  have hx : h ≫ a = x := by
+    refine hP.homEquiv.injective ?_
+    rw [hab, ← hL]
+    refine congrArg _ (Subtype.ext ?_)
+    rw [abelMapPresheaf_app_val]
+    simpa [h] using hD
+  obtain ⟨pt⟩ : Nonempty (Spec (.of K)) := inferInstance
+  refine ⟨h.left pt, ?_⟩
+  rw [← Scheme.Hom.comp_apply, ← Over.comp_left, hx]
+  change (P.left.fromSpecResidueField p) _ = p
+  exact Scheme.fromSpecResidueField_apply _ _
+
+/-- **`Pic^g` is proper.** A `k`-scheme `P` representing the degree-`g` part `Pic^g_{X/k}` of
+the Picard functor, `g` the genus, is proper over `k`. The Abel map `Hilb^g_{X/k} ⟶ P`,
+`D ↦ 𝒪_X(D)`, is surjective
+(`AlgebraicGeometry.exists_surjective_of_representableBy_picardFunctorDegree_genus`), so `P` is
+the image of the proper `Hilb^g_{X/k}`; it is locally of finite type, being smooth, and separated,
+being an open subscheme of the Picard scheme, a group scheme over a field. Hence `P` is proper
+(Stacks `03GN`).
+
+(blueprint: `thm-sc-theorem-of-the-base`, properness of `Pic^g`) -/
+theorem isProper_of_representableBy_picardFunctorDegree_genus (P : Over (Spec (.of k)))
+    (hP : (picardFunctorDegree (X ↘ Spec (.of k)) (arithmeticGenus k X)).obj.RepresentableBy P) :
+    IsProper P.hom := by
+  obtain ⟨H, a, hH, -, ha⟩ := exists_surjective_of_representableBy_picardFunctorDegree_genus P hP
+  -- `P` is separated: an open subscheme of the Picard scheme, a group scheme over `k`
+  obtain ⟨A, hAg, hA, -⟩ := isRepresentable_picardFunctor (X ↘ Spec (.of k))
+  obtain ⟨Pd, j, hj, -, -, -, hPd⟩ := exists_decomposition_picardFunctor A hA
+  obtain ⟨hg⟩ := hPd (arithmeticGenus k X)
+  have := hj (arithmeticGenus k X)
+  have hsep : IsSeparated P.hom := by
+    rw [← Over.w (hP.uniqueUpToIso hg).hom, MorphismProperty.cancel_left_of_respectsIso
+      (P := @IsSeparated), ← Over.w (j _)]
+    have : IsSeparated A.hom := GrpObj.isSeparated_hom A
+    have : IsSeparated (j (arithmeticGenus k X)).left := inferInstance
+    infer_instance
+  -- `P` is locally of finite type, being smooth
+  have := smoothOfRelativeDimension_of_representableBy_picardFunctorDegree_genus P hP
+  have : Smooth P.hom := SmoothOfRelativeDimension.smooth (arithmeticGenus k X) _
+  -- `P` is universally closed, being the image of the proper `H`
+  have : UniversallyClosed (a.left ≫ P.hom) := by
+    rw [Over.w a]
+    infer_instance
+  have : UniversallyClosed P.hom := .of_comp_surjective a.left P.hom
+  exact ⟨⟩
 
 /-- Two representing objects of degree components of the Picard functor are isomorphic over
 `k`: both are isomorphic to a representing object of `Pic^0_{X/k}`. -/
@@ -665,8 +1087,16 @@ irreducible, and it is smooth, hence geometrically reduced.
 theorem geometricallyIntegral_of_representableBy_picardFunctorDegree_genus
     (P : Over (Spec (.of k)))
     (hP : (picardFunctorDegree (X ↘ Spec (.of k)) (arithmeticGenus k X)).obj.RepresentableBy P) :
-    GeometricallyIntegral P.hom :=
-  sorry
+    GeometricallyIntegral P.hom := by
+  obtain ⟨H, a, -, hH, ha⟩ := exists_surjective_of_representableBy_picardFunctorDegree_genus P hP
+  have := smoothOfRelativeDimension_of_representableBy_picardFunctorDegree_genus P hP
+  have : Smooth P.hom := SmoothOfRelativeDimension.smooth (arithmeticGenus k X) _
+  have : GeometricallyIrreducible (a.left ≫ P.hom) := by
+    rw [Over.w a]
+    infer_instance
+  have := GeometricallyIrreducible.of_surjective a.left P.hom
+  exact .of_geometricallyReduced_of_geometricallyIrreducible _
+
 
 /-- **Every degree component is geometrically integral.** A `k`-scheme representing a degree
 component `Pic^d_{X/k}` of the Picard functor is geometrically integral over `k`, being isomorphic
@@ -744,9 +1174,18 @@ def tangentSubgroup : Subgroup (Scheme.dualNumbersOver (Spec (.of k)) ⟶ P) whe
   inv_mem' {v} (hv : _ = _) := by
     rw [Set.mem_ofPred_eq, GrpObj.comp_inv, hv, MonObj.one_eq_one, _root_.inv_one]
 
-/-- The kernel of `P(k[ε]) → P(k)` is commutative, even when `P` is not. -/
-instance : IsMulCommutative (tangentSubgroup P) :=
-  sorry
+/-- The tangent subgroup is the subgroup `AlgebraicGeometry.GrpObj.infPoints P` of infinitesimal
+points of the group scheme `P`. -/
+lemma tangentSubgroup_eq_infPoints : tangentSubgroup P = GrpObj.infPoints P := by
+  ext v
+  rw [GrpObj.mem_infPoints, ← MonObj.one_eq_one]
+  rfl
+
+/-- The kernel of `P(k[ε]) → P(k)` is commutative, even when `P` is not: it is the group of
+infinitesimal points of `P` (`AlgebraicGeometry.GrpObj.isMulCommutative_infPoints`). -/
+instance : IsMulCommutative (tangentSubgroup P) := by
+  rw [tangentSubgroup_eq_infPoints]
+  exact GrpObj.isMulCommutative_infPoints P
 
 open scoped IsMulCommutative in
 /-- The tangent space of a group scheme at the unit is the commutative group
@@ -780,8 +1219,21 @@ lemma tangentSpaceAt.val_smul (c : k) (v : tangentSpaceAt P η[P]) :
 
 /-- The scalar action is additive in the scalar: `(c + d) • v = c • v + d • v`. -/
 theorem tangentSpaceAt.add_smul (c d : k) (v : tangentSpaceAt P η[P]) :
-    (c + d) • v = c • v + d • v :=
-  sorry
+    (c + d) • v = c • v + d • v := by
+  -- transport along the bijection `GrpObj.lieEquiv` with the Lie algebra, which turns the group
+  -- law into the addition and rescaling into the scalar action of `Γ(Spec k, 𝒪)`
+  have hv : v.1 ∈ GrpObj.infPoints P := by
+    rw [← tangentSubgroup_eq_infPoints]
+    exact v.2
+  let r : k →+* Γ(Spec (.of k), ⊤) := (Scheme.ΓSpecIso (.of k)).inv.hom
+  have key : GrpObj.infPointsScale P (r (c + d)) ⟨v.1, hv⟩ =
+      GrpObj.infPointsScale P (r c) ⟨v.1, hv⟩ * GrpObj.infPointsScale P (r d) ⟨v.1, hv⟩ := by
+    refine (GrpObj.lieEquiv P).injective ?_
+    rw [GrpObj.lieEquiv_mul]
+    change GrpObj.toLie P _ = GrpObj.toLie P _ + GrpObj.toLie P _
+    rw [GrpObj.toLie_infPointsScale, GrpObj.toLie_infPointsScale, GrpObj.toLie_infPointsScale,
+      map_add, _root_.add_smul]
+  exact Subtype.ext congr(Subtype.val $key)
 
 /-- The tangent space of a group scheme `P` over `k` at the unit is a `k`-vector space: the
 addition is the group law of `P(k[ε])` and `c • v` is `v` precomposed with `ε ↦ c ε`. -/
@@ -799,6 +1251,80 @@ end GrpObj
 
 variable {X : Scheme.{u}} [X.Over (Spec (.of k))]
 
+section OnePoint
+
+variable [IsSepClosed k] [SmoothOfRelativeDimension 1 (X ↘ Spec (.of k))]
+  [IsProper (X ↘ Spec (.of k))] [GeometricallyIntegral (X ↘ Spec (.of k))]
+
+/-- **`Pic^0_{X/k}` over a one-point base.** If `T` is a `k`-scheme with a single point, every
+section of `Pic^0_{X/k}` over `T` is the image of a unique class of fibrewise degree zero on
+`X_T`: an invertible module on `T` is trivial, so `Pic (X_T) ≅ Pic_{X/k}(T)` by the split exact
+sequence (`AlgebraicGeometry.bijective_pic_split`). -/
+lemma bijective_toSheafify_app_picardSubfunctorDegree_zero (T : Over (Spec (.of k)))
+    [Subsingleton T.left] (t₀ : T.left) :
+    Function.Bijective ((toSheafify (fppfTopology.over (Spec (.of k)))
+      (picardSubfunctorDegree (X ↘ Spec (.of k)) 0).toFunctor).app (.op T)) := by
+  set f := X ↘ Spec (.of k)
+  let J := fppfTopology.over (Spec (.of k))
+  let S := picardSubfunctorDegree f 0
+  let α : S.toFunctor ⟶ (picardFunctor f).obj := S.ι ≫ toPicardFunctor f
+  let β : picardFunctorDegree f 0 ⟶ picardFunctor f :=
+    ⟨sheafifyLift J α (picardFunctor f).property⟩
+  have fac : toSheafify J S.toFunctor ≫ β.hom = α := toSheafify_sheafifyLift J α _
+  have : Presheaf.IsLocallyInjective J α := inferInstance
+  have : Presheaf.IsLocallyInjective J β.hom :=
+    Presheaf.isLocallyInjective_of_isLocallyInjective_of_isLocallySurjective_fac J α fac
+  have hβ : Function.Injective (β.hom.app (.op T)) :=
+    (Sheaf.isLocallyInjective_iff_injective β).1 this _
+  have hβS {T' : Over (Spec (.of k))} (M : S.toFunctor.obj (.op T')) :
+      β.hom.app _ ((toSheafify J S.toFunctor).app _ M) = (toPicardFunctor f).app _ M.1 :=
+    ConcreteCategory.congr_hom (NatTrans.congr_app fac (.op T')) M
+  have : Smooth f := SmoothOfRelativeDimension.smooth 1 f
+  have : IsIntegral X := GeometricallyIntegral.isIntegral_of_subsingleton f
+  obtain ⟨pt⟩ := Hom.nonempty_fieldPoints (k := k) f
+  have hσ : pt.1 ≫ f = 𝟙 _ := by
+    rw [pt.2, Algebra.algebraMap_self, CommRingCat.ofHom_id, Spec.map_id]
+  have hsplit := bijective_pic_split f pt.1 hσ
+    isIso_pushforwardUnitMap_pullback_snd_of_geometricallyIntegral T
+  have hone (a : T.left.Pic) : a = 1 := by
+    have := a.isInvertible
+    obtain ⟨e⟩ := Modules.IsInvertible.nonempty_iso_unit t₀ ((fromSkeleton _).obj a.val)
+    exact Pic.eq_iff_nonempty_iso.2 ⟨e ≪≫ Pic.oneIso.symm⟩
+  refine ⟨fun L₁ L₂ h ↦ ?_, fun s ↦ ?_⟩
+  · have h' := congrArg (β.hom.app _) h
+    rw [hβS, hβS] at h'
+    exact Subtype.ext (hsplit.1 (Prod.ext ((hone _).trans (hone _).symm) h'))
+  · have hdeg (t : T.left) : picardDegree f (β.hom.app _ s) t = 0 := by
+      obtain ⟨Z, g, ⟨a, ha⟩, -, -, z, rfl⟩ := exists_flat_mem_of_mem_fppfTopology_over
+        (Presheaf.imageSieve_mem J (toSheafify J S.toFunctor) s) t
+      rw [← picardDegree_map, ← NatTrans.naturality_apply β.hom,
+        show (picardFunctorDegree f 0).obj.map g.op s = (toSheafify J S.toFunctor).app _ a from
+          ha.symm, hβS, picardDegree_toPicardFunctor]
+      exact (mem_picardSubfunctorDegree_iff f 0 a.1).1 a.2 z
+    obtain ⟨M, hM⟩ := hsplit.2 (1, β.hom.app _ s)
+    have hM₂ : (toPicardFunctor f).app _ M = β.hom.app _ s := congrArg Prod.snd hM
+    have hMS : M ∈ S.obj (.op T) := (mem_picardSubfunctorDegree_iff f 0 M).2 fun t ↦ by
+      rw [← picardDegree_toPicardFunctor, hM₂]
+      exact hdeg t
+    exact ⟨⟨M, hMS⟩, hβ (by rw [hβS]; exact hM₂)⟩
+
+omit [IsSepClosed k] [GeometricallyIntegral (X ↘ Spec (.of k))] in
+/-- Over a one-point base `T`, a class which becomes trivial along some `φ : T' ⟶ T` has
+fibrewise degree zero. -/
+lemma mem_picardSubfunctorDegree_zero_of_map_eq_one {T T' : Over (Spec (.of k))} (φ : T' ⟶ T)
+    [Subsingleton T.left] (t' : T'.left) (L : (pullback (X ↘ Spec (.of k)) T.hom).Pic)
+    (hL : Pic.map (baseChangeMap (X ↘ Spec (.of k)) φ) L = 1) :
+    L ∈ (picardSubfunctorDegree (X ↘ Spec (.of k)) 0).obj (.op T) := by
+  have : Smooth (X ↘ Spec (.of k)) := SmoothOfRelativeDimension.smooth 1 _
+  refine (mem_picardSubfunctorDegree_iff _ 0 L).2 fun t ↦ ?_
+  rw [show t = φ.left t' from Subsingleton.elim _ _, ← picardPresheafDegree_map]
+  have h1 := (picardSubgroupDegreeZero (X ↘ Spec (.of k)) T').one_mem
+  have h2 := (mem_picardSubfunctorDegree_iff _ 0 _).1 h1 t'
+  convert h2 using 2
+  exact hL
+
+end OnePoint
+
 /-- **The tangent space of the Jacobian.** Let `X` be a smooth projective curve of genus `g`
 over a separably closed field `k` and let `J` be a group scheme over `k` representing the
 degree-zero part `Pic^0_{X/k}` of the Picard functor, the representation respecting the group
@@ -812,8 +1338,141 @@ theorem nonempty_tangentSpaceAt_linearEquiv_H_one [IsSepClosed k]
     [GeometricallyIntegral (X ↘ Spec (.of k))] (J : Over (Spec (.of k))) [GrpObj J]
     (e : (picardFunctorDegree (X ↘ Spec (.of k)) 0).obj.RepresentableBy J)
     (he : IsPicardZeroMul (X ↘ Spec (.of k)) e) :
-    Nonempty (tangentSpaceAt J η[J] ≃ₗ[k] (Modules.unit X).H 1) :=
-  sorry
+    Nonempty (tangentSpaceAt J η[J] ≃ₗ[k] (Modules.unit X).H 1) := by
+  let f := X ↘ Spec (.of k)
+  let Jt := fppfTopology.over (Spec (.of k))
+  let S := picardSubfunctorDegree f 0
+  let Tε := Scheme.dualNumbersOver (Spec (.of k))
+  let T₀ := 𝟙_ (Over (Spec (.of k)))
+  let iε := Scheme.dualNumbersιOver (Spec (.of k))
+  have : Subsingleton (Spec (.of k)).dualNumbers := inferInstanceAs (Subsingleton (Spec (.of k)))
+  have : Subsingleton Tε.left := inferInstanceAs (Subsingleton (Spec (.of k)))
+  have : Subsingleton T₀.left := inferInstanceAs (Subsingleton (Spec (.of k)))
+  obtain ⟨p₀⟩ : Nonempty (Spec (.of k)) := inferInstance
+  -- the points of `J` over `T` are the classes of fibrewise degree zero on `X_T`
+  have hpts (T : Over (Spec (.of k))) [Subsingleton T.left] (t : T.left) :
+      ∃ ψ : picardSubgroupDegreeZero f T ≃* (T ⟶ J), ∀ L,
+        ψ L = e.homEquiv.symm ((toSheafify Jt S.toFunctor).app (.op T) L) := by
+    obtain ⟨ψ, hψ⟩ := exists_mulEquiv_of_isPicardZeroMul f e he (T := T)
+      (G := picardSubgroupDegreeZero f T) Subtype.val (fun _ _ ↦ rfl)
+      (Equiv.ofBijective (fun L : picardSubgroupDegreeZero f T ↦
+        (toSheafify Jt S.toFunctor).app (.op T) L)
+        (bijective_toSheafify_app_picardSubfunctorDegree_zero T t))
+      (fun g ↦ ⟨g.2, rfl⟩)
+    exact ⟨ψ, hψ⟩
+  obtain ⟨ψε, hψε⟩ := hpts Tε p₀
+  obtain ⟨ψ₀, hψ₀⟩ := hpts T₀ p₀
+  -- pulling back classes along a morphism of one-point bases
+  have hnat {T T' : Over (Spec (.of k))} (φ : T' ⟶ T) (L : picardSubgroupDegreeZero f T) :
+      φ ≫ e.homEquiv.symm ((toSheafify Jt S.toFunctor).app (.op T) L) =
+        e.homEquiv.symm ((toSheafify Jt S.toFunctor).app (.op T')
+          ⟨Pic.map (baseChangeMap f φ) L.1, S.map φ.op L.2⟩) := by
+    rw [e.comp_homEquiv_symm]
+    exact congrArg e.homEquiv.symm
+      (NatTrans.naturality_apply (toSheafify Jt S.toFunctor) φ.op L).symm
+  let res : picardSubgroupDegreeZero f Tε →* picardSubgroupDegreeZero f T₀ :=
+    { toFun L := ⟨Pic.map (baseChangeMap f iε) L.1, S.map iε.op L.2⟩
+      map_one' := Subtype.ext (Pic.map_one _)
+      map_mul' L L' := Subtype.ext (Pic.map_mul _ L.1 L'.1) }
+  have hres (L : picardSubgroupDegreeZero f Tε) : iε ≫ ψε L = ψ₀ (res L) := by
+    rw [hψε, hψ₀]
+    exact hnat iε L
+  have hη : η[J] = ψ₀ 1 := by
+    rw [map_one]
+    exact MonObj.one_eq_one (M := J)
+  -- the tangent space is the kernel of `res`
+  let E₁ : tangentSubgroup J ≃* res.ker :=
+    { toFun v := ⟨ψε.symm v.1, by
+        rw [MonoidHom.mem_ker, ← ψ₀.injective.eq_iff, ← hres, MulEquiv.apply_symm_apply,
+          map_one, ← MonObj.one_eq_one]
+        exact v.2⟩
+      invFun K := ⟨ψε K.1, by
+        change iε ≫ ψε K.1 = η[J]
+        rw [hres, K.2, hη]⟩
+      left_inv v := Subtype.ext (ψε.apply_symm_apply v.1)
+      right_inv K := Subtype.ext (ψε.symm_apply_apply K.1)
+      map_mul' v w := Subtype.ext (map_mul ψε.symm v.1 w.1) }
+  -- the base change `X_ε` is the thickening `X[ε]`, and `X_k` is `X`
+  have hpb := Scheme.isPullback_dualNumbersProj f
+  let eD : X.dualNumbers ≅ pullback f Tε.hom := hpb.isoPullback
+  have hDfst : eD.hom ≫ pullback.fst f Tε.hom = X.dualNumbersProj := hpb.isoPullback_hom_fst
+  have hDsnd : eD.hom ≫ pullback.snd f Tε.hom = f.dualNumbers := hpb.isoPullback_hom_snd
+  have : IsIso (pullback.fst f T₀.hom) := by
+    change IsIso (pullback.fst f (𝟙 _))
+    infer_instance
+  let e₀ : X ≅ pullback f T₀.hom := (asIso (pullback.fst f T₀.hom)).symm
+  have hbfst {T T' : Over (Spec (.of k))} (φ : T' ⟶ T) :
+      baseChangeMap f φ ≫ pullback.fst f T.hom = pullback.fst f T'.hom :=
+    pullback.lift_fst _ _ _ |>.trans (Category.comp_id _)
+  have hbsnd {T T' : Over (Spec (.of k))} (φ : T' ⟶ T) :
+      baseChangeMap f φ ≫ pullback.snd f T.hom = pullback.snd f T'.hom ≫ φ.left :=
+    pullback.lift_snd _ _ _
+  have hiε : X.dualNumbersι ≫ eD.hom = e₀.hom ≫ baseChangeMap f iε := by
+    refine pullback.hom_ext ?_ ?_
+    · rw [Category.assoc, Category.assoc, hbfst, hDfst,
+        Scheme.dualNumbersι_comp_proj]
+      exact (asIso (pullback.fst f T₀.hom)).inv_hom_id.symm
+    · rw [Category.assoc, Category.assoc, hbsnd, hDsnd,
+        Scheme.Hom.ι_comp_dualNumbers]
+      have he₀ : e₀.hom ≫ pullback.snd f T₀.hom = f := by
+        change inv (pullback.fst f T₀.hom) ≫ pullback.snd f T₀.hom = f
+        rw [IsIso.inv_comp_eq, pullback.condition]
+        exact (Category.comp_id _).symm
+      rw [← Category.assoc, he₀]
+      rfl
+  have hmapiε (L : (pullback f Tε.hom).Pic) :
+      Pic.map X.dualNumbersι (Pic.map eD.hom L) =
+        Pic.map e₀.hom (Pic.map (baseChangeMap f iε) L) := by
+    rw [← Pic.map_comp, ← Pic.map_comp, hiε]
+  have hmap₀ (L : (pullback f T₀.hom).Pic) : Pic.map e₀.hom L = 1 ↔ L = 1 := by
+    refine ⟨fun h ↦ ?_, fun h ↦ h ▸ Pic.map_one _⟩
+    rw [← Pic.map_id L, ← e₀.inv_hom_id, Pic.map_comp, h, Pic.map_one]
+  let E₂ : res.ker ≃* (Pic.mapHom X.dualNumbersι).ker :=
+    { toFun K := ⟨Pic.map eD.hom K.1.1, by
+        rw [MonoidHom.mem_ker, Pic.mapHom_apply, hmapiε, hmap₀]
+        exact congrArg Subtype.val K.2⟩
+      invFun M := ⟨⟨Pic.map eD.inv M.1, mem_picardSubfunctorDegree_zero_of_map_eq_one iε p₀ _ (by
+          rw [← hmap₀, ← hmapiε]
+          simp only [← Pic.map_comp, Iso.hom_inv_id, Pic.map_id]
+          exact M.2)⟩, by
+          refine Subtype.ext ?_
+          change Pic.map (baseChangeMap f iε) (Pic.map eD.inv M.1) = 1
+          rw [← hmap₀, ← hmapiε]
+          simp only [← Pic.map_comp, Iso.hom_inv_id, Pic.map_id]
+          exact M.2⟩
+      left_inv K := by
+        refine Subtype.ext (Subtype.ext ?_)
+        change Pic.map eD.inv (Pic.map eD.hom K.1.1) = K.1.1
+        simp only [← Pic.map_comp, Iso.inv_hom_id, Pic.map_id]
+      right_inv M := by
+        refine Subtype.ext ?_
+        change Pic.map eD.hom (Pic.map eD.inv M.1) = M.1
+        simp only [← Pic.map_comp, Iso.hom_inv_id, Pic.map_id]
+      map_mul' K K' := Subtype.ext (Pic.map_mul _ K.1.1 K'.1.1) }
+  obtain ⟨Ψ, hΨ⟩ := Scheme.exists_addEquiv_ker_picMap_dualNumbersι X
+  let A : tangentSpaceAt J η[J] ≃+ (Modules.unit X).H 1 :=
+    ((E₁.trans E₂).toAdditive : Additive (tangentSubgroup J) ≃+ _).trans Ψ
+  refine ⟨{ A with map_smul' := fun c v ↦ ?_ }⟩
+  -- rescaling `ε` corresponds to multiplication by `c`
+  let sc := dualNumbersScale k c
+  let c' := Scheme.globalSectionsRingHom k (X := X) c
+  have hsc : X.dualNumbersScale c' ≫ eD.hom = eD.hom ≫ baseChangeMap f sc := by
+    refine pullback.hom_ext ?_ ?_
+    · rw [Category.assoc, Category.assoc, hbfst, hDfst,
+        Scheme.dualNumbersScale_comp_proj]
+    · rw [Category.assoc, Category.assoc, hbsnd, hDsnd, ← Category.assoc,
+        hDsnd]
+      exact Scheme.dualNumbersScale_comp_dualNumbers f _
+  let L := ψε.symm v.1
+  have hscL : ψε.symm (c • v).1 =
+      ⟨Pic.map (baseChangeMap f sc) L.1, S.map sc.op L.2⟩ := by
+    rw [MulEquiv.symm_apply_eq, hψε]
+    change sc ≫ v.1 = _
+    rw [← hnat, ← hψε, MulEquiv.apply_symm_apply]
+  change Ψ (.ofMul (E₂ (E₁ (c • v)))) = c • Ψ (.ofMul (E₂ (E₁ v)))
+  refine (hΨ c' _ _ ?_).trans rfl
+  change Pic.map eD.hom (ψε.symm (c • v).1).1 = Pic.map (X.dualNumbersScale c') (Pic.map eD.hom L.1)
+  rw [hscL, ← Pic.map_comp, ← Pic.map_comp, hsc]
 
 end TangentSpace
 
@@ -832,27 +1491,6 @@ underlying set is `AlgebraicGeometry.Scheme.Hom.picZero`
 noncomputable abbrev picardZero [SmoothOfRelativeDimension 1 (X ↘ Spec (.of k))]
     [IsProper (X ↘ Spec (.of k))] : Subgroup X.Pic :=
   (picDegreeHom k X).ker
-
-/-- **The fibrewise degree of a class pulled back from `X`** is its degree: for `ℒ ∈ Pic X`, a
-`k`-scheme `T` and a field-valued point `t : Spec K ⟶ T`, the pullback of `ℒ` to `X_T` has degree
-`deg ℒ` on the fibre `X_K`, the degree being invariant under extension of the base field
-(`AlgebraicGeometry.Scheme.Modules.degree_pullback`). -/
-theorem picardFibreDegree_map_fst [IsProper (X ↘ Spec (.of k))] {T : Over (Spec (.of k))}
-    (L : X.Pic) {K : Type u} [Field K] [Algebra k K]
-    (t : Over.mk (Spec.map (CommRingCat.ofHom (algebraMap k K))) ⟶ T) :
-    picardFibreDegree (X ↘ Spec (.of k)) (Pic.map (pullback.fst (X ↘ Spec (.of k)) T.hom) L) t =
-      Modules.degree k ((fromSkeleton X.Modules).obj L.val) := by
-  have hb : baseChangeMap (X ↘ Spec (.of k)) t ≫ pullback.fst (X ↘ Spec (.of k)) T.hom =
-      pullback.fst (X ↘ Spec (.of k)) (Spec.map (CommRingCat.ofHom (algebraMap k K))) :=
-    pullback.lift_fst _ _ _ |>.trans (Category.comp_id _)
-  let : (pullback (X ↘ Spec (.of k))
-      (Over.mk (Spec.map (CommRingCat.ofHom (algebraMap k K)))).hom).Over (Spec (.of K)) :=
-    ⟨pullback.snd _ _⟩
-  change Modules.degree K ((fromSkeleton _).obj
-    (Pic.map (baseChangeMap _ t) (Pic.map (pullback.fst _ T.hom) L)).val) = _
-  rw [← Pic.map_comp, hb]
-  exact (Modules.degree_congr K (fromSkeletonToSkeletonIso _)).trans
-    (Modules.degree_pullback k K ((fromSkeleton X.Modules).obj L.val))
 
 /-- **The `k`-points of `Pic^0_{X/k}`.** For a smooth projective curve `X` over a separably
 closed field `k`, the value of the degree-zero part `Pic^0_{X/k}` of the Picard functor on
@@ -1066,8 +1704,34 @@ theorem nonempty_picardFunctorDegree_iso_of_isPullback {K : Type u} [Field K] [A
       (Spec.map (CommRingCat.ofHom (algebraMap k K)))) (d : ℤ) :
     Nonempty ((Over.map (Spec.map (CommRingCat.ofHom (algebraMap k K)))).op ⋙
       (picardFunctorDegree (C ↘ Spec (.of k)) d).obj ≅
-        (picardFunctorDegree (C' ↘ Spec (.of K)) d).obj) :=
-  sorry
+        (picardFunctorDegree (C' ↘ Spec (.of K)) d).obj) := by
+  set f := C ↘ Spec (.of k)
+  set f' := C' ↘ Spec (.of K)
+  set g := Spec.map (CommRingCat.ofHom (algebraMap k K))
+  have : IsProper f' := IsProper.isStableUnderBaseChange.of_isPullback h ‹_›
+  have : LocallyOfFinitePresentation f' :=
+    MorphismProperty.of_isPullback (P := @LocallyOfFinitePresentation) h inferInstance
+  -- the identification of the Picard presheaves preserves the fibrewise degrees
+  let eP := picardPresheafIsoOfIsPullback h
+  have hmem (T : Over (Spec (.of K))) (L : (picardPresheaf f).obj (.op ((Over.map g).obj T))) :
+      L ∈ (picardSubfunctorDegree f d).obj (.op ((Over.map g).obj T)) ↔
+        eP.hom.app (.op T) L ∈ (picardSubfunctorDegree f' d).obj (.op T) := by
+    rw [mem_picardSubfunctorDegree_iff, mem_picardSubfunctorDegree_iff]
+    refine forall_congr' fun t ↦ ?_
+    rw [picardPresheafIsoOfIsPullback_hom_app,
+      picardPresheafDegree_pic_map_of_isPullback f f' (𝟙 T.left) _
+        (IsPullback.of_horiz_isIso ⟨by simp⟩) L t]
+    rfl
+  let eS : (Over.map g).op ⋙ (picardSubfunctorDegree f d).toFunctor ≅
+      (picardSubfunctorDegree f' d).toFunctor :=
+    NatIso.ofComponents
+      (fun T ↦ Equiv.toIso ((eP.app T).toEquiv.subtypeEquiv fun L ↦ hmem T.unop L))
+      fun {T T'} φ ↦ by
+        ext L
+        apply Subtype.ext
+        exact NatTrans.naturality_apply eP.hom φ L.1
+  exact ⟨overMapOpCompSheafifyIso g _ ≪≫
+    (sheafToPresheaf _ _).mapIso ((presheafToSheaf _ _).mapIso eS)⟩
 
 omit [Field k] in
 lemma specMap_algebraMap_comp_specMap_algebraMap (k K L : Type u) [CommRing k] [CommRing K]
