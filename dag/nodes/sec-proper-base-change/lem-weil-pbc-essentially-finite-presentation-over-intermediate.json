@@ -1,0 +1,78 @@
+{
+ "id": "lem-weil-pbc-essentially-finite-presentation-over-intermediate",
+ "kind": "statement",
+ "title": "Essentially of finite presentation over an intermediate algebra essentially of finite type",
+ "statement": "Let $\\varphi:R\\to S$ and $\\psi:S\\to S'$ be homomorphisms of commutative rings. Assume that $S$ is essentially of finite type over $R$ via $\\varphi$ [def-weil-pbc-essentially-finite-type-algebra], and that $S'$ is essentially of finite presentation over $R$ via $\\psi\\circ\\varphi$: $S'$ is isomorphic, as an $R$-algebra, to a localization $W^{-1}P$ of a finitely presented $R$-algebra $P$ [def-weil-pbc-finitely-presented-algebra] at a multiplicative subset $W\\subseteq P$. Then $S'$ is essentially of finite presentation over $S$ via $\\psi$: there are a finitely presented $S$-algebra $P'$ and a multiplicative subset $V\\subseteq P'$ such that $S'\\cong V^{-1}P'$ as $S$-algebras.",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Algebra, proof of Lemma Tag 00R7 (lemma-criterion-flatness-fibre, line 32992), first paragraph, where it is used without statement ('there exist $g_{j,\\lambda_2}$ ... such that $S'=\\colim S'_\\lambda$, with $S'_\\lambda=(S_\\lambda[y_1,\\dots,y_m]/(\\bar g_{1,\\lambda},\\dots,\\bar g_{v,\\lambda}))_{\\bar{\\mathfrak q}'_\\lambda}$', which presents $S'$ as a localization of a finitely presented $S$-algebra); it is the analogue, for 'essentially of finite type/presentation' (definition-essentially-finite-p-t, line 12836), of Lemma Tag 00F4 (4) (lemma-compose-finite-type, line 540). Stacks states no such lemma."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-essentially-finite-type-algebra",
+  "def-weil-pbc-finitely-presented-algebra"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "if R → S is essentially of finite type and R → T is essentially of finite presentation then S → T is essentially of finite presentation",
+   "results": "Algebra.EssFiniteType.comp, Algebra.EssFiniteType, RingHom.EssFiniteType, Algebra.EssFiniteType.mk (Mathlib.RingTheory.EssentialFiniteness); Module.FinitePresentation.trans; Algebra.FinitePresentation.trans (Mathlib.RingTheory.FinitePresentation): no essentially-finite-presentation notion",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "essentially of finite presentation algebra: cancellation, A → B → C with C essentially finitely presented over A implies over B",
+   "results": "AlgHom.FinitePresentation.of_comp_finiteType, RingHom.FinitePresentation.of_comp_finiteType, Algebra.FinitePresentation.trans, AlgHom.FinitePresentation.comp, RingHom.FinitePresentation.comp (Mathlib.RingTheory.FinitePresentation); RingHom.finitePresentation_stableUnderComposition: the finite presentation version (Stacks 00F4 (4)) only, not the localized one",
+   "date": "2026-10-10",
+   "verdict": "generalization: no (finite presentation only; the localized form is not a one-line specialization)"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"EssFinitePresentation\"",
+   "results": "none",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "local_search",
+   "query": "Algebra.EssFiniteType (project root ~/weil-conjectures-slopmaster2)",
+   "results": "Algebra.EssFiniteType, .aux, .comp, .of_id, .finset, .of_comp, .comp_iff, .submonoid, .algHom_ext, .baseChange (Mathlib/RingTheory/EssentialFiniteness.lean); index: unavailable",
+   "date": "2026-10-10",
+   "verdict": "no match (essentially finite type only)"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rnE 'EssFinitePresentation|essentially of finite presentation' and grep -nE 'theorem .*(of_comp|cancel)' RingTheory/EssentialFiniteness.lean in ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib",
+   "results": "RingTheory/Smooth/Fiber.lean:22,67,143,146,152 (comments; line 146: no 'essentially of finite presentation' type class yet); RingTheory/Extension/Cotangent/Basic.lean:534 (TODO); no lemma",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-limit-tower-essentially-finite-presentation",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "reviewed": "2026-10-10 L: statement checked (localized form of 00F4 (4), used silently in the 00R7 proof)",
+ "lead_note": "prove via 00F4 (4) applied to R -> S -> P and a localization; Mathlib has only the non-localized RingHom.FinitePresentation.of_comp_finiteType"
+}
