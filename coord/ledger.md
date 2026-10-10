@@ -2095,3 +2095,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 17:08 L: merged deliver/C1/lem-sc-global-sections-left-exact (reviewer FIX; first push; new nodes: 0)
 - 17:08 L: merged deliver/K1/lem-sc-p1-ext-yoneda-functoriality (reviewer FIX; first push; new nodes: 2)
 - 17:08 L: merged deliver/C1/lem-sc-ample-finite-affine-cover (reviewer PASS; first push; new nodes: 0)
+- 17:08 L: returned deliver/M1/lem-sc-ample-proj-local-chart (reviewer RETURN: 1. D1: step 2 and node lem-sc-ample-proj-affine-chart: the new node restates the item's second clause word for word (amp)
