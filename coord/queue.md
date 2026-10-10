@@ -26,9 +26,11 @@
 | `lem-sc-affine-projective-complex-derived-hom` | 3018 | none |
 | `lem-sc-proper-flat-right-adjoint-affine-basechange` | 3018 | none |
 | `lem-sc-open-restriction-support-triangle` | 3020 | none |
-| `lem-sc-perfect-support-map-lift` | 3020 | none |
 | `lem-sc-pseudo-coherent-support-annihilation` | 3020 | none |
 | `lem-pc-supported-perfect-generator` | 3021 | none |
+| `lem-sc-affine-perfect-map-lift` | 3021 | none |
+| `lem-sc-affine-perfect-support-extension` | 3021 | none |
+| `lem-sc-derived-open-gluing` | 3021 | none |
 | `lem-pc-genus-agrees-sc` | 4007 | rests_on_sorry |
 | `prop-av-tate-rank` | 4008 | rests_on_sorry |
 | `cor-pc-sigma-pic-iso` | 4009 | rests_on_sorry |
@@ -74,7 +76,6 @@
 | `lem-fin-dense-normal-open` | - | none |
 | `lem-pur-sheaf-hom-is-sheaf` | - | none |
 | `lem-weil-pbc-finite-pushforward-generic-constructible` | - | none |
-| `lem-weil-pbc-noetherian-finite-components` | - | none |
 | `pqf-def-quasifinite` | - | none |
 | `thm-pqf-immersion-descent` | - | none |
 | `def-nagata-relative-gluing-valid-stage` | - | none |
@@ -108,7 +109,6 @@
 | `def-nagata-relative-gluing-datum-descent` | - | none |
 | `def-nagata-scheme-theoretically-dense-open` | - | none |
 | `lem-pc-coherent-hi` | - | sorry_here |
-| `lem-pc-sepclosed-finite-sep-trivial` | - | none |
 | `lem-sc-affine-generic-second` | - | sorry_here |
 | `lem-sc-genus-invariant` | - | none |
 | `lem-sc-global-functions` | - | rests_on_sorry |
@@ -924,7 +924,7 @@
 | `lem-weil-pbc-projective-space-zero-isomorphism` | 4 | state |
 | `def-nagata-fixed-base-separated-stage` | 6 | state |
 
-Not open yet: 1473 nodes that wait for a statement dependency, 217 nodes that wait for stage 1.
+Not open yet: 1474 nodes that wait for a statement dependency, 217 nodes that wait for stage 1.
 
 ## Stage 3: modules to prove (0)
 
