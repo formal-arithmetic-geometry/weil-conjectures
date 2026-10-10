@@ -1419,3 +1419,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 12:31 L: accepted lem-weil-pbc-double-complex-row-cycle-lifts-to-zigzag (00M1 surjectivity, 5 steps, 0 new). G1 re-pushed lem-galois-transitive as the Mathlib leaf before reading the return: left on its branch.
 - 12:32 L: accepted def-weil-pbc-semi-representable-object (definition split; 3 Mathlib leaves, matching object and coskeleton comparison nodes, the one-member bridge node, now cited by lem-weil-pbc-hypercover-refinement step 5).
 - 2026-10-10, delivery of C1: lem-weil-pbc-openness-of-flatness merged from deliver/C1/lem-weil-pbc-openness-of-flatness (1 commit(s), 2 new node(s), spot-checked by L: L: 00RC by Noetherian approximation (00R1 node) and the Noetherian flat-locus neighbourhood node; 2 new nodes); claim closed
+- 12:32 L: merged C1 lem-weil-pbc-openness-of-flatness (00RC, +2 nodes).
