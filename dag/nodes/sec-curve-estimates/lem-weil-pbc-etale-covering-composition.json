@@ -1,0 +1,73 @@
+{
+ "id": "lem-weil-pbc-etale-covering-composition",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-hypercover-refinement",
+   "place": "proof, fourth paragraph: 'For two hypercovers, perform this construction with the product of their matching covers' (the matching map of the product is a composite of two coverings)",
+   "via": [
+    "lem-weil-pbc-hypercover-product"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "A composite of etale coverings is an etale covering",
+ "statement": "Let $T$ be a scheme [def-pc-scheme]. Let $(f_i:T_i\\to T)_{i\\in I}$ be a family of etale morphisms [def-weil-etale-morphism] which is jointly surjective ($T=\\bigcup_i f_i(T_i)$), and for every $i\\in I$ let $(g_{ij}:T_{ij}\\to T_i)_{j\\in J_i}$ be a jointly surjective family of etale morphisms. Then the family $(f_i\\circ g_{ij}:T_{ij}\\to T)_{i\\in I,\\,j\\in J_i}$ consists of etale morphisms and is jointly surjective. In particular, a composite of two surjective etale morphisms is surjective and etale.",
+ "source": {
+  "document": "literature/stacks-project/topologies.tex",
+  "place": "Lemma 0217 (lemma-etale), part (2); used in Hypercoverings, Lemma 01GH (lemma-funny-gamma), proof, last sentence 'a composition of coverings is a covering'"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-etale-morphism"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "composition of jointly surjective families of etale morphisms of schemes is an etale covering",
+   "results": "AlgebraicGeometry.Scheme.jointlySurjectivePrecoverage (Mathlib.AlgebraicGeometry.Sites.MorphismProperty); AlgebraicGeometry.instSurjectiveCompScheme, instIsStableUnderCompositionSchemeSurjective (Mathlib.AlgebraicGeometry.Morphisms.UnderlyingMap); Scheme.surjectiveFamiliesPretopology",
+   "date": "2026-10-10",
+   "verdict": "pieces (surjective composition); see loogle"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Precoverage.IsStableUnderComposition (AlgebraicGeometry.Scheme.precoverage _)",
+   "results": "AlgebraicGeometry.Scheme.instIsStableUnderCompositionPrecoverageOfIsStableUnderComposition (Mathlib.AlgebraicGeometry.Sites.MorphismProperty)",
+   "date": "2026-10-10",
+   "verdict": "match (generalization over P, specialize to P = @Etale)"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -n 'IsStableUnderComposition\\|instance' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicGeometry/Sites/MorphismProperty.lean; grep -n 'comp_mem_coverings' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/CategoryTheory/Sites/Precoverage.lean; grep -n instance ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicGeometry/Morphisms/Etale.lean",
+   "results": "MorphismProperty.lean:82 ofArrows_mem_precoverage_iff, :102 instance [P.IsStableUnderComposition] : (precoverage P).IsStableUnderComposition; Precoverage.lean:154 Precoverage.comp_mem_coverings; Etale.lean:63 instance MorphismProperty.IsMultiplicative @Etale",
+   "date": "2026-10-10",
+   "verdict": "match"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "AlgebraicGeometry.Scheme.instIsStableUnderCompositionPrecoverageOfIsStableUnderComposition",
+  "file": "Mathlib/AlgebraicGeometry/Sites/MorphismProperty.lean",
+  "how": "specializes in one line: with P = @AlgebraicGeometry.Etale, which is stable under composition by the instance MorphismProperty.IsMultiplicative @Etale (Mathlib/AlgebraicGeometry/Morphisms/Etale.lean:63), the instance at MorphismProperty.lean:102 gives (Scheme.precoverage @Etale).IsStableUnderComposition; Precoverage.comp_mem_coverings (Mathlib/CategoryTheory/Sites/Precoverage.lean:154) then puts the composite family ofArrows (g_ij ≫ f_i) in the precoverage, and ofArrows_mem_precoverage_iff (MorphismProperty.lean:82) reads membership as 'jointly surjective with every member etale', both for the hypotheses and the conclusion. Source read 2026-10-10 (MorphismProperty.lean:70-112, Precoverage.lean:100-158, Etale.lean:60-66)."
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-hypercover-product",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-curve-estimates",
+ "unit": "sk-prop-h2"
+}

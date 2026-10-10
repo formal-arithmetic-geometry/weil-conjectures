@@ -1,0 +1,75 @@
+{
+ "id": "lem-weil-pbc-matching-object-fibre-product",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-hypercover-refinement",
+   "place": "proof, fourth paragraph: 'For two hypercovers, perform this construction with the product of their matching covers' (the matching object of the product is the product of the matching objects)",
+   "via": [
+    "lem-weil-pbc-hypercover-product"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "The matching scheme of a termwise fibre product is the fibre product of the matching schemes",
+ "statement": "Let $X$ be a scheme [def-pc-scheme] and let $U_\\bullet\\to X$, $V_\\bullet\\to X$ be augmented simplicial $X$-schemes [def-weil-pbc-finite-split-hypercover]. Let $W_\\bullet\\to X$ be the augmented simplicial $X$-scheme with $W_n=U_n\\times_XV_n$ (fibre product [def-pc-fibre-product] of the structure morphisms to $X$), whose face and degeneracy maps are the induced morphisms $d_i\\times_{\\mathrm{id}_X}d_i$, $s_i\\times_{\\mathrm{id}_X}s_i$ and whose augmentation is the structure morphism $W_0\\to X$, and let $p:W_\\bullet\\to U_\\bullet$, $q:W_\\bullet\\to V_\\bullet$ be the termwise projections. For $n\\geq0$ write $M_n(-)$ for the matching scheme of [def-weil-pbc-finite-split-hypercover]: $M_0(-)=X$, and for $n\\geq1$ the limit, in schemes over $X$, of the diagram formed by the terms in degrees $k<n$ indexed by the injective non-identity order-preserving maps $\\delta:[k]\\to[n]$ (with the simplicial operators between them), and write $\\mu_n^U:U_n\\to M_n(U)$ for the matching map whose $\\delta$-component is the simplicial operator of $\\delta$ (for $n=0$ the augmentation). Then for every $n\\geq0$ the morphism $(M_n(p),M_n(q)):M_n(W)\\to M_n(U)\\times_XM_n(V)$ induced by $p$ and $q$ is an isomorphism, and under it $\\mu_n^W$ corresponds to the induced morphism $\\mu_n^U\\times_{\\mathrm{id}_X}\\mu_n^V:U_n\\times_XV_n\\to M_n(U)\\times_XM_n(V)$.",
+ "source": {
+  "document": "literature/stacks-project/simplicial.tex",
+  "place": "Lemma 018D (lemma-cosk-fibre-product), proof omitted there ('very similar to the proof of Lemma lemma-cosk-product'); applied in literature/stacks-project/hypercovering.tex, Lemma 01GH (lemma-funny-gamma), proof, second paragraph: 'The functor cosk_n sk_n commutes with fibre products ... Thus the right hand side above is equal to A x_B C', with $M_{n+1}=(\\mathrm{cosk}_n\\mathrm{sk}_n\\,\\cdot)_{n+1}$ and the base the final object $X$"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-pc-fibre-product",
+  "def-weil-pbc-finite-split-hypercover"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "coskeleton of a fibre product of truncated simplicial objects is the fibre product of coskeleta",
+   "results": "CategoryTheory.SimplicialObject.cosk, SimplicialObject.Truncated.cosk (Mathlib.AlgebraicTopology.SimplicialObject.Basic); SSet.Truncated.cosk, SSet.coskAdj (Mathlib.AlgebraicTopology.SimplicialSet.Basic); SimplicialObject.IsCoskeletal.mk",
+   "date": "2026-10-10",
+   "verdict": "no match (definitions only; no statement on fibre products or matching objects)"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "coskeleton functor preserves limits / fibre products of simplicial objects; matching object of product",
+   "results": "SimplicialObject.cosk, cechNerveTerminalFrom, SSet.cosk, SimplicialObject.Truncated.cosk, SimplicialObject.instHasLimits, SimplicialObject.sk",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rn 'coskAdj\\|matching\\|cosk.*pullback\\|PreservesLimit.*cosk' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicTopology; grep -rln 'MatchingObject\\|matchingObject' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib",
+   "results": "AlgebraicTopology/SimplicialObject/Basic.lean:330 coskAdj : truncation n ⊣ Truncated.cosk n (so Truncated.cosk preserves limits by Adjunction.rightAdjoint_preservesLimits, CategoryTheory/Adjunction/Limits.lean:207); no matching object and no fibre-product statement for cosk",
+   "date": "2026-10-10",
+   "verdict": "no match; candidate route: matching object = ((cosk (n-1)).obj U)_n for non-augmented objects, limits of simplicial objects are pointwise, cosk is a right adjoint composed with truncation; the augmented version over X and the identification with M_n are not in Mathlib"
+  }
+ ],
+ "mathlib_match": null,
+ "mathlib_candidate": {
+  "declaration": "CategoryTheory.SimplicialObject.coskAdj",
+  "file": "Mathlib/AlgebraicTopology/SimplicialObject/Basic.lean",
+  "how": "line 330; with CategoryTheory.Adjunction.rightAdjoint_preservesLimits (Mathlib/CategoryTheory/Adjunction/Limits.lean:207) Truncated.cosk preserves pullbacks; the node needs in addition the identification of M_n with the n-th term of cosk_{n-1} of the truncation, in the augmented setting over X"
+ },
+ "status": "unsplit",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-hypercover-product",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-curve-estimates",
+ "unit": "sk-prop-h2"
+}

@@ -11,25 +11,133 @@
  },
  "kind": "statement",
  "title": "The termwise product of two etale hypercovers is a hypercover",
- "statement": "Let $X$ be a quasi-compact quasi-separated scheme [def-weil-pbc-scheme-conventions], and let $U_\\bullet\\to X$ and $V_\\bullet\\to X$ be augmented simplicial objects in the small etale site [def-weil-pbc-etale-site] whose degree-$n$ maps to their matching objects are etale coverings for every $n\\geq0$. The augmented simplicial object with degree-$n$ term $U_n\\times_XV_n$ and structure maps induced by those of $U$ and $V$ is an etale hypercover of $X$. Its two projections are morphisms of hypercovers to $U$ and $V$.",
+ "statement": "Let $X$ be a quasi-compact quasi-separated scheme [def-weil-pbc-scheme-conventions], and let $U_\\bullet\\to X$ and $V_\\bullet\\to X$ be augmented simplicial objects in the small etale site [def-weil-pbc-etale-site] of $X$ (augmented simplicial $X$-schemes [def-weil-pbc-finite-split-hypercover] with all terms etale over $X$) whose degree-$n$ maps $U_n\\to M_n(U)$, $V_n\\to M_n(V)$ to their matching schemes [def-weil-pbc-finite-split-hypercover] are etale coverings (surjective etale morphisms) for every $n\\geq0$. Let $W_\\bullet$ be the augmented simplicial object with degree-$n$ term the fibre product $W_n=U_n\\times_XV_n$ [def-pc-fibre-product], face and degeneracy maps the induced morphisms $d_i\\times_{\\mathrm{id}_X}d_i$, $s_i\\times_{\\mathrm{id}_X}s_i$, and augmentation the structure morphism $W_0\\to X$. Then $W_\\bullet$ is an augmented simplicial object of the small etale site of $X$ whose maps $W_n\\to M_n(W)$ are etale coverings for every $n\\geq0$ (an etale hypercover of $X$), and the two termwise projections $W_\\bullet\\to U_\\bullet$, $W_\\bullet\\to V_\\bullet$ are morphisms of augmented simplicial $X$-schemes.",
  "source": {
   "document": "literature/stacks-project/hypercovering.tex",
   "place": "Lemma 01GI (lemma-product-hypercoverings), statement and proof; the covering-pullback argument is Lemma 01GH (lemma-funny-gamma)"
  },
- "stmt_deps": ["def-weil-pbc-scheme-conventions", "def-weil-pbc-etale-site", "def-weil-pbc-finite-split-hypercover", "def-pc-fibre-product"],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "stmt_deps": [
+  "def-weil-pbc-scheme-conventions",
+  "def-weil-pbc-etale-site",
+  "def-weil-pbc-finite-split-hypercover",
+  "def-pc-fibre-product"
+ ],
+ "proof": [
+  {
+   "text": "*$W_\\bullet$ is an augmented simplicial object of $X_{\\Et}$ and the projections are morphisms.* Each $U_n\\to X$, $V_n\\to X$ is an object of $X_{\\Et}$, and fibre products in $X_{\\Et}$ exist and are the scheme-theoretic ones [def-weil-pbc-etale-site]; so $W_n=U_n\\times_XV_n$, with its structure morphism to $X$, is an object of $X_{\\Et}$, and the induced morphisms $d_i\\times_{\\mathrm{id}_X}d_i$, $s_i\\times_{\\mathrm{id}_X}s_i$ are morphisms of $X_{\\Et}$. Every simplicial identity (for instance $d_id_j=d_{j-1}d_i$ for $i<j$, and the identities involving the augmentation $\\varepsilon:W_0\\to X$, $\\varepsilon d_0=\\varepsilon d_1$) is an equality of two morphisms into a fibre product $W_k=U_k\\times_XV_k$ (or into $X$); after composing with the projections $p_k$, $q_k$ it becomes the same identity in $U_\\bullet$ and in $V_\\bullet$, which hold, so it holds in $W_\\bullet$ by the uniqueness clause of the universal property of the fibre product [def-pc-fibre-product]. The defining equations $p_{k}\\circ(d_i\\times d_i)=d_i\\circ p_{k+1}$, $q_k\\circ(d_i\\times d_i)=d_i\\circ q_{k+1}$ (and the same for $s_i$ and the augmentations) say exactly that $p=(p_n)_n:W_\\bullet\\to U_\\bullet$ and $q=(q_n)_n:W_\\bullet\\to V_\\bullet$ are morphisms of augmented simplicial $X$-schemes [def-weil-pbc-finite-split-hypercover].",
+   "uses": [
+    "def-weil-pbc-etale-site",
+    "def-pc-fibre-product",
+    "def-weil-pbc-finite-split-hypercover"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/hypercovering.tex",
+    "place": "Section 01GG (section-covering), first paragraph: the category of simplicial objects of SR(C,X) has fibre products (Simplicial, Lemma 016U, lemma-fibre-product), computed termwise; Lemma 01GI (lemma-product-hypercoverings), proof: 'verify this directly'"
+   }
+  },
+  {
+   "text": "*The matching map of $W$.* Fix $n\\geq0$. By [lem-weil-pbc-matching-object-fibre-product], applied to $U_\\bullet$, $V_\\bullet$ and $W_\\bullet$ of step 1, the morphism $M_n(W)\\to M_n(U)\\times_XM_n(V)$ induced by $p$ and $q$ is an isomorphism, and it carries the matching map $\\mu_n^W:W_n\\to M_n(W)$ to the induced morphism $\\mu_n^U\\times_{\\mathrm{id}_X}\\mu_n^V:U_n\\times_XV_n\\to M_n(U)\\times_XM_n(V)$. (For $n=0$: $M_0=X$, $X\\times_XX=X$, and $\\mu_0^W$ is the augmentation of $W$.) Since a composite of a surjective etale morphism with an isomorphism is surjective etale, it suffices to show that $\\mu_n^U\\times_{\\mathrm{id}_X}\\mu_n^V$ is surjective and etale.",
+   "uses": [
+    "lem-weil-pbc-matching-object-fibre-product"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/hypercovering.tex",
+    "place": "Lemma 01GH (lemma-funny-gamma), proof, second paragraph: 'The functor cosk_n sk_n commutes with fibre products ... Thus the right hand side above is equal to A x_B C' (Simplicial, Lemma 018D)"
+   }
+  },
+  {
+   "text": "*Factorization into two base changes.* Write $A=M_n(U)$, $C=M_n(V)$, $\\alpha=\\mu_n^U:U_n\\to A$, $\\gamma=\\mu_n^V:V_n\\to C$, all over $X$. Then $\\alpha\\times_{\\mathrm{id}_X}\\gamma=b\\circ a$ with $a=\\alpha\\times_{\\mathrm{id}_X}\\mathrm{id}_{V_n}:U_n\\times_XV_n\\to A\\times_XV_n$ and $b=\\mathrm{id}_A\\times_{\\mathrm{id}_X}\\gamma:A\\times_XV_n\\to A\\times_XC$; both sides agree after the two projections, so they agree by [def-pc-fibre-product]. The square with top $a$, left the projection $U_n\\times_XV_n\\to U_n$, right the projection $\\mathrm{pr}_A:A\\times_XV_n\\to A$ and bottom $\\alpha$ is cartesian: given $u:T\\to U_n$ and $(a',v):T\\to A\\times_XV_n$ with $\\alpha u=a'$, the morphism $(u,v):T\\to U_n\\times_XV_n$ (defined since $U_n\\to X$ is $A\\to X$ composed with $\\alpha$) is the unique one with both composites as given, again by the universal property of [def-pc-fibre-product]. So $a$ is the base change of $\\alpha$ along $\\mathrm{pr}_A$, i.e. $U_n\\times_XV_n\\cong U_n\\times_A(A\\times_XV_n)$ with $a$ the second projection. Since $\\alpha$ is surjective etale (an etale covering of $A$ with one member), [lem-weil-pbc-etale-covering-base-change] applied to the family $(\\alpha)$ and $g=\\mathrm{pr}_A$ shows that $a$ is etale and surjective. In the same way $b$ is the base change of $\\gamma$ along the projection $A\\times_XC\\to C$ (the square $A\\times_XV_n\\to V_n$, $A\\times_XC\\to C$ is cartesian by the same argument with the roles of the factors exchanged), so $b$ is etale and surjective by [lem-weil-pbc-etale-covering-base-change].",
+   "uses": [
+    "def-pc-fibre-product",
+    "lem-weil-pbc-etale-covering-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/hypercovering.tex",
+    "place": "Lemma 01GH (lemma-funny-gamma), proof, second paragraph: 'K_{n+1} x_B C -> A x_B C is a base change of the covering K_{n+1} -> A ... is a covering as a base change of a covering' (Lemma 01G4, lemma-covering-permanence), specialized to L = the constant object X as in Lemma 01GI (lemma-product-hypercoverings), proof"
+   }
+  },
+  {
+   "text": "*Conclusion.* By step 3, $a$ and $b$ are surjective etale, so $b\\circ a=\\mu_n^U\\times_{\\mathrm{id}_X}\\mu_n^V$ is surjective etale by [lem-weil-pbc-etale-covering-composition] (one-member families). By step 2, $\\mu_n^W:W_n\\to M_n(W)$ is an etale covering for every $n\\geq0$; together with step 1 this is the statement, the projections $p,q$ being the morphisms of hypercovers to $U_\\bullet$ and $V_\\bullet$.",
+   "uses": [
+    "lem-weil-pbc-etale-covering-composition"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/hypercovering.tex",
+    "place": "Lemma 01GH (lemma-funny-gamma), proof, last sentence: 'The lemma follows as a composition of coverings is a covering' (Topologies, Lemma 0217 (2))"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-etale-site",
+  "def-pc-fibre-product",
+  "def-weil-pbc-finite-split-hypercover",
+  "lem-weil-pbc-matching-object-fibre-product",
+  "lem-weil-pbc-etale-covering-base-change",
+  "lem-weil-pbc-etale-covering-composition"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/hypercovering.tex",
+  "place": "Lemma 01GI (lemma-product-hypercoverings), proof: 'verify this directly, or use Lemma 01GH'; the direct verification written out follows the proof of Lemma 01GH (lemma-funny-gamma) with L the constant simplicial object X"
+ },
  "mathlib_searches": [
-  {"tool": "leansearch", "query": "Product of two hypercovers of an object of a Grothendieck site is a hypercover", "results": "CategoryTheory.GrothendieckTopology.OneHypercover and OneHypercover.inter (Mathlib.CategoryTheory.Sites.Hypercover.One), only for 1-hypercovers", "date": "2026-10-10", "verdict": "no match for all-degree hypercovers"},
-  {"tool": "leanfinder", "query": "product of simplicial hypercovers", "results": "CategoryTheory.PreOneHypercover.inter and PreZeroHypercover.inter (Mathlib.CategoryTheory.Sites.Hypercover.One), only truncated degree 1 or 0", "date": "2026-10-10", "verdict": "no match for all-degree hypercovers"},
-  {"tool": "grep", "query": "rg -n 'Hypercover|inter' /tmp/mathlib-f1/Mathlib/CategoryTheory/Sites/Hypercover/One.lean /tmp/mathlib-f1/Mathlib/CategoryTheory/Sites/Hypercover/Homotopy.lean", "results": "One.lean:1008 OneHypercover.inter; Homotopy.lean:13-28 declares scope is 1-hypercovers; no all-degree hypercover", "date": "2026-10-10", "verdict": "no match"}
+  {
+   "tool": "leansearch",
+   "query": "Product of two hypercovers of an object of a Grothendieck site is a hypercover",
+   "results": "CategoryTheory.GrothendieckTopology.OneHypercover and OneHypercover.inter (Mathlib.CategoryTheory.Sites.Hypercover.One), only for 1-hypercovers",
+   "date": "2026-10-10",
+   "verdict": "no match for all-degree hypercovers"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "product of simplicial hypercovers",
+   "results": "CategoryTheory.PreOneHypercover.inter and PreZeroHypercover.inter (Mathlib.CategoryTheory.Sites.Hypercover.One), only truncated degree 1 or 0",
+   "date": "2026-10-10",
+   "verdict": "no match for all-degree hypercovers"
+  },
+  {
+   "tool": "grep",
+   "query": "rg -n 'Hypercover|inter' /tmp/mathlib-f1/Mathlib/CategoryTheory/Sites/Hypercover/One.lean /tmp/mathlib-f1/Mathlib/CategoryTheory/Sites/Hypercover/Homotopy.lean",
+   "results": "One.lean:1008 OneHypercover.inter; Homotopy.lean:13-28 declares scope is 1-hypercovers; no all-degree hypercover",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "ls ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/CategoryTheory/Sites/Hypercover/; grep -rln 'structure Hypercover\\|def Hypercover\\|IsHypercover' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib",
+   "results": "Hypercover/: Homotopy, IsSheaf, One, Saturate, SheafOfTypes, Subcanonical, Zero, ZeroFamily (0- and 1-hypercovers only); no all-degree hypercover structure",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
- "created": {"by": "worker", "item": "lem-weil-pbc-hypercover-refinement", "date": "2026-10-10"},
- "lean_audit": {"master": {"state": "none"}, "slopmaster2": {"state": "none"}},
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-hypercover-refinement",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
  "chapter": "sec-curve-estimates",
- "unit": "sk-prop-h2"
+ "unit": "sk-prop-h2",
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "lem-weil-pbc-hypercover-product",
+  "worker": "stage1",
+  "summary": "Read Hypercoverings 01GI (lemma-product-hypercoverings; proof: 'verify directly or use 01GH'), 01GH (lemma-funny-gamma) and its proof, Simplicial 016U and 018D, Topologies 0217; tags checked in tags/tags. Wrote the direct verification following the proof of 01GH with L the constant object X: (1) termwise fibre product is an augmented simplicial object of X_Et and the projections are morphisms (elementary, universal property of fibre products); (2) the matching scheme of W is M_n(U) x_X M_n(V) with matching map mu^U x mu^V (new unsplit node lem-weil-pbc-matching-object-fibre-product, Simplicial 018D, proof omitted in the source); (3) mu^U x mu^V = (id x mu^V) o (mu^U x id), each a base change of an etale covering (lem-weil-pbc-etale-covering-base-change, a Mathlib leaf of sk-thm-reduction used as a tool; the cartesian squares are written out); (4) composite of coverings (new Mathlib leaf lem-weil-pbc-etale-covering-composition, Topologies 0217(2)). Statement made explicit (matching schemes, structure maps, 'etale hypercover' spelled out as the covering condition), no hypothesis changed; def-pc-fibre-product kept in stmt_deps. The qcqs hypothesis on X is not used by the proof. No slopmaster2 Lean found (grep of the id and 'hypercover'). No existing DAG or blueprint node for 01GI, 018D, 0217 or composition of etale coverings.",
+  "blueprint": "Realizes, in lem-weil-pbc-hypercover-refinement, the proof's fourth paragraph 'For two hypercovers, perform this construction with the product of their matching covers' (used in its step 5: U x_X V is a hypercover mapping to both): steps 1 and 4 give the product hypercover and its two projections, steps 2-3 make precise 'the product of their matching covers'."
+ },
+ "reviewed": "2026-10-10 L: 4 steps following 01GI/01GH (the termwise product is a simplicial object; its matching map is the product of the matching maps (new node 018D); the product of coverings as a composite of two base changes; composites of coverings (new Mathlib leaf)); 2 new nodes"
 }
