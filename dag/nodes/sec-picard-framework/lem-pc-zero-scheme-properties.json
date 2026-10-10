@@ -3,11 +3,11 @@
  "blueprint": {
   "is": "lem-pc-zero-scheme-properties",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "Properties of the zero scheme",
- "statement": "Let $X$ be a scheme, $\\mathcal{M}$ a\ninvertible $\\mathcal{O}_X$-module and\n$s\\in H^0(X,\\mathcal{M})$.\n\n1. $Z(s)$ is a closed subscheme of $X$ (a locally principal closed\nsubscheme), and affine-locally, for $U=\\operatorname{Spec}(A)$ with $\\mathcal{M}$ free on\n$e$ and $s|_U=a\\cdot e$, $Z(s)\\cap U=\\operatorname{Spec}(A/(a))$.\n1. For a flat morphism $g:Y\\to X$ with\n$s_Y=g^*s\\in H^0(Y,g^*\\mathcal{M})$: $Z(s_Y)=Z(s)\\times_XY$, i.e. $g^*\\mathcal{I}_{Z(s)}=\\mathcal{I}_{Z(s_Y)}$.\n1. $Z(s)=X$ if and only if $s=0$.",
+ "statement": "Let $X$ be a scheme, $\\mathcal{M}$ an invertible $\\mathcal{O}_X$-module and $s\\in H^0(X,\\mathcal{M})$. 1. $Z(s)$ is a closed subscheme of $X$ (a locally principal closed subscheme), and affine-locally, for $U=\\operatorname{Spec}(A)$ with $\\mathcal{M}$ free on $e$ and $s|_U=a\\cdot e$, $Z(s)\\cap U=\\operatorname{Spec}(A/(a))$. 1. For a flat morphism $g:Y\\to X$ with $s_Y=g^*s\\in H^0(Y,g^*\\mathcal{M})$: $Z(s_Y)=Z(s)\\times_XY$, i.e. $g^*\\mathcal{I}_{Z(s)}=\\mathcal{I}_{Z(s_Y)}$. 1. $Z(s)=X$ if and only if $s=0$.",
  "source": {
   "document": "literature/blueprint/master/blueprint/sec-picard-framework/sk-lem-picard-zero-dictionary/lem-pc-zero-scheme-properties.md",
   "place": "node lem-pc-zero-scheme-properties, order 826"
@@ -19,37 +19,54 @@
  ],
  "proof": [
   {
-   "text": "(1) $\\mathcal{I}_{Z(s)}=\\operatorname{im}(s^\\vee)$ is a quasi-coherent\n$\\mathcal{O}_X$-module (an image of a quasi-coherent module in a\nquasi-coherent module is quasi-coherent) and an ideal sheaf (the image\nof $\\mathcal{M}^\\vee\\to\\mathcal{O}_X$ is a submodule of $\\mathcal{O}_X$), so it defines a closed\nsubscheme. Locally: $\\mathcal{M}|_U=\\mathcal{O}_U\\cdot e$, $s^\\vee$ sends the dual\nbasis $e^\\vee$ to $a$; hence the image is $a\\cdot\\mathcal{O}_U$ and\n$Z(s)\\cap U=\\operatorname{Spec}(A/(a))$.",
-   "uses": [],
-   "elementary": null
+   "text": "(1) The zero scheme is closed by its definition as the closed subscheme cut out by the zero-locus ideal. The locally principal assertion is exactly the theorem that for every morphism of invertible modules phi, phi.zeroLocus.IsLocallyPrincipal. On an affine trivializing open U, writing the morphism in the chosen generators as multiplication by b, the ideal is Ideal.span {b}; hence the closed subscheme is Spec(A/(b)). Apply these two statements to the section morphism O_X \\to M associated to s.",
+   "uses": [
+    "lem-pc-zero-scheme-locally-principal",
+    "lem-pc-zero-scheme-ideal-local"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "WeilConjectures/AlgebraicGeometry/Modules/ZeroLocus.lean",
+    "place": "theorems Hom.isLocallyPrincipal_zeroLocus and Hom.ideal_zeroLocus, lines 491-576"
+   }
   },
   {
-   "text": "(2) $g^*$ is right exact, so\n$g^*\\mathcal{I}_{Z(s)}=g^*\\operatorname{im}(s^\\vee)=\\operatorname{im}(g^*(s^\\vee)) =\\operatorname{im}((g^*s)^\\vee)=\\mathcal{I}_{Z(s_Y)}$, where\n$g^*(s^\\vee)=(g^*s)^\\vee$ is the canonical identification of the pullback\nof the dual with the dual of the pullback (valid for $\\mathcal{M}$ invertible,\nsee the local check in [lem-pc-divisor-line-bundle-properties]).",
+   "text": "(2) The zero scheme commutes with pullback: for any g : Y \\to X and any morphism phi of invertible modules, phi.zeroLocus.comap g = ((Modules.pullback g).map phi).zeroLocus. Applying this to the section morphism O_X \\to M associated to s gives Z(s_Y)=Z(s) \\times_X Y, i.e. the ideal of Z(s_Y) is the image of g^*\\mathcal{I}_{Z(s)} \\to g^*\\mathcal{O}_X=\\mathcal{O}_Y. Since g is flat, pulling back the injection \\mathcal{I}_{Z(s)} \\to \\mathcal{O}_X keeps it injective, so g^*\\mathcal{I}_{Z(s)} \\to \\mathcal{O}_Y is an isomorphism onto this image and g^*\\mathcal{I}_{Z(s)}=\\mathcal{I}_{Z(s_Y)}; flatness is used only for this last identification.",
    "uses": [
-    "lem-pc-divisor-line-bundle-properties"
+    "lem-pc-zero-scheme-pullback"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "WeilConjectures/AlgebraicGeometry/Modules/ZeroLocus.lean",
+    "place": "theorem Hom.comap_zeroLocus, lines 502-533"
+   }
   },
   {
-   "text": "(3) If $s=0$, then $s^\\vee=0$ and $\\mathcal{I}_{Z(s)}=0$, so $Z(s)=X$. If\n$s\\neq0$, choose $x\\in X$ with $s_x\\neq0$ in $\\mathcal{M}_x\\cong\\mathcal{O}_x$ after a\ntrivialization; then $s_x$ is a unit of $\\mathcal{O}_x$ and\n$(\\mathcal{I}_{Z(s)})_x=\\mathcal{O}_x$, so $x otin Z(s)$. (Contrapositive: if\n$Z(s)=X$, then $\\mathcal{I}=0$, $s^\\vee=0$, and $s=0$ because the canonical map\n$\\mathcal{M}\\to\\mathcal{M}^{\\vee\\vee}$ is an isomorphism\n([lem-pc-tensor-dual-invertible]) and its\ncomposition with $s^{\\vee\\vee}$ is the original $s$.)",
+   "text": "(3) The zero scheme is all of X exactly when the corresponding section morphism is zero: phi.zeroLocus = bottom iff phi = 0. Under the canonical identification between sections of M and morphisms O_X \\to M, this is precisely Z(s)=X iff s=0.",
    "uses": [
-    "lem-pc-tensor-dual-invertible"
+    "lem-pc-zero-scheme-zero-iff"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "WeilConjectures/AlgebraicGeometry/Modules/ZeroLocus.lean",
+    "place": "theorem Hom.zeroLocus_eq_bot_iff, lines 535-568"
+   }
   }
  ],
  "proof_deps": [
-  "lem-pc-divisor-line-bundle-properties",
-  "lem-pc-tensor-dual-invertible"
+  "lem-pc-zero-scheme-locally-principal",
+  "lem-pc-zero-scheme-ideal-local",
+  "lem-pc-zero-scheme-pullback",
+  "lem-pc-zero-scheme-zero-iff"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/master/blueprint/sec-picard-framework/sk-lem-picard-zero-dictionary/lem-pc-zero-scheme-properties.md",
-  "place": "## Proof"
+  "document": "WeilConjectures/AlgebraicGeometry/Modules/ZeroLocus.lean",
+  "place": "theorems realizing blueprint parts (1)-(3)"
  },
  "mathlib_searches": [],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [],
  "blueprint_kind": "lemma",
@@ -235,5 +252,21 @@
   }
  },
  "chapter": "sec-picard-framework",
- "unit": "sk-lem-picard-zero-dictionary"
+ "unit": "sk-lem-picard-zero-dictionary",
+ "split_report": {
+  "date": "2026-10-11",
+  "item": "lem-pc-zero-scheme-properties",
+  "worker": "stage1",
+  "summary": "Replaced the imported informal proof by four exact closed slopmaster2 declarations for local principalness, affine local ideal, pullback compatibility, and the zero iff criterion. The section formulation is obtained by applying the general morphism results to the section morphism O_X -> M.",
+  "blueprint": "The three proof steps realize parts (1), (2), and (3) of the blueprint proof; the general morphism lemmas are their precise Lean realizations.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-zsp1752",
+  "group": "C1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-zsp1752 (reviewer sub-agent of L); spot-checked: Read ZeroLocus.lean 491-576: the four cited declarations state exactly the four new nodes (general phi:M->N of invertible modules, specialized to O_X->M); sorryfree.py OK on all four (B10 attached). Mathlib grep: only set-level Scheme.zeroLocus for functions, no line-bundle zero scheme, so no class (c). FIX more, RETURN less: E7 the delivery silently dropped from part (2) of the item statement the clause 'i.e. g^*I_{Z(s)} = I_{Z(s_Y)}' (and the typing s_Y in H^0(Y,g^*M)) with no reason given; restored the original statement and added to step 2 the flat-pullback argument (g^* of I->O_X stays injective, so g^*I equals the image ideal given by comap_zeroLocus) that proves the restored clause.; 1 file(s) fixed by the reviewer"
+ }
 }
