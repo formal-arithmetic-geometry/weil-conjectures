@@ -24,9 +24,56 @@
   "def-weil-pbc-module-stalk",
   "lem-sc-invertible-module-generic-stalk"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "*Independence of the generator.* Fix a closed point $P$. Since $e$ and $e'$ both generate the free rank-one $\\mathcal O_{C,P}$-module $\\mathcal L_P$ [lem-sc-invertible-module-generic-stalk], there is a unit $u\\in\\mathcal O_{C,P}^*$ with $e'=ue$. Thus $g'=gu^{-1}$ in $k(C)^*$. The normalized DVR valuation $v_P$ in the statement sends $u$ and $u^{-1}$ to $0$ (the exponent of a unit in its uniformizer factorization is $0$), so $v_P(g')=v_P(g)$.",
+   "uses": [
+    "lem-sc-invertible-module-generic-stalk"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/divisors.tex",
+    "place": "Section 02SE, paragraph immediately before Definition 02SF: two generators differ by a unit, so the ratio of a meromorphic section to a generator is defined up to a unit"
+   }
+  },
+  {
+   "text": "*A nonzero rational section generates on a nonempty open.* Choose an open neighbourhood of the generic point $\\eta$ on which $\\mathcal L$ is free with generator $e$ [def-sc-invertible-module], then a nonempty affine open $V=\\operatorname{Spec}A$ inside it. Since $\\eta$ is generic, it lies in $V$. The image of $e$ is a basis of $\\mathcal L_\\eta$ [lem-sc-invertible-module-generic-stalk], so $s=g e_\\eta$ for some $g\\in k(C)^*$. By [lem-sc-integral-function-field-affine-fraction], write $g=a/b$ with $a,b\\in A\\setminus\\{0\\}$. The principal open $U=D(ab)\\subseteq V$ is nonempty (it contains $\\eta$), and both $a$ and $b$ are units on $U$. Hence $g$ and $g^{-1}$ are regular on $U$, and $s=(a/b)e$ is a generator of $\\mathcal L|_U$.",
+   "uses": [
+    "def-sc-invertible-module",
+    "lem-sc-invertible-module-generic-stalk",
+    "lem-sc-integral-function-field-affine-fraction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/divisors.tex",
+    "place": "Proof of Lemma 02SG, first sentence: a nonzero meromorphic section generates the invertible module on a nonempty open; the affine fraction and principal-open construction makes this sentence explicit"
+   }
+  },
+  {
+   "text": "*Finite support.* For every closed point $P\\in U$, the germ $s_P$ generates $\\mathcal L_P$, so writing $s=g_P\\lambda_P(e_P)$ for any generator $e_P$ gives $g_P\\in\\mathcal O_{C,P}^*$ and $v_P(g_P)=0$ by the normalized DVR valuation in the statement. Therefore the closed points with nonzero order lie in $Z=C\\setminus U$. This is a proper closed subset of the integral curve $C$, since $\\eta\\in U$. If $Z$ contained a strict chain of two nonempty irreducible closed subsets, appending $C$ would give a chain of length two in $C$, contrary to $\\dim C=1$ [def-sc-curves]; thus $\\dim Z\\le0$. Since $C$ is of finite type over $k$ [def-sc-curves], [lem-sc-dim0-finite] gives that $Z$ is a finite set of closed points. The set of $P$ with nonzero order is a subset of this finite set.",
+   "uses": [
+    "def-sc-curves",
+    "lem-sc-dim0-finite"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/divisors.tex",
+    "place": "Lemma 02SG, proof: all nonzero-order prime divisors lie outside the open where the section generates; specialization to a finite-type integral curve, with finite zero-dimensional closed subsets as in [lem-sc-dim0-finite]"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sc-invertible-module-generic-stalk",
+  "def-sc-invertible-module",
+  "lem-sc-integral-function-field-affine-fraction",
+  "def-sc-curves",
+  "lem-sc-dim0-finite"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/divisors.tex",
+  "place": "Section 02SE before Definition 02SF; Lemma 02SG and its proof"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -51,7 +98,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "worker",
@@ -71,5 +118,19 @@
   }
  },
  "chapter": "sec-picard-framework",
- "unit": "sk-thm-picard-rr"
+ "unit": "sk-thm-picard-rr",
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "lem-sc-rational-section-order",
+  "worker": "stage1",
+  "summary": "Verified the two clauses against Stacks 02SE/02SG and expanded its generic-open assertion using a local trivialization and the affine fraction-field description. The complement is a zero-dimensional closed subset of a finite-type curve, finite by the existing lem-sc-dim0-finite. The DVR valuation facts already recorded in the item's statement suffice; no new nodes are needed.",
+  "blueprint": "The generator comparison and finite-support steps make precise the second sentence of the proof of lem-sc-line-bundle-rational-section: 'Writing D=div(s) for the divisor of zeros and poles of s'."
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "group": "F1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed by the lead of F1; spot-checked by L: L: reviewed in full by a reviewer sub-agent (PASS): 02SE/02SF/02SG read, 3 steps checked, small cases"
+ }
 }
