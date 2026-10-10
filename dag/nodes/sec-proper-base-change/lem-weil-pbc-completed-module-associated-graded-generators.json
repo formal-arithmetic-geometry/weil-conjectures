@@ -1,59 +1,165 @@
 {
- "id": "lem-weil-pbc-completed-module-associated-graded-generators",
- "kind": "statement",
- "title": "The associated graded of a finite completed module is generated in degree zero",
- "statement": "Let $A$ be a commutative Noetherian ring [def-weil-pbc-noetherian-ring], $I\\subseteq A$ an ideal, and $\\widehat A=\\varprojlim_{r\\ge1}A/I^r$ its $I$-adic completion [def-weil-pbc-adic-completion]. Let $M$ be a finitely generated $\\widehat A$-module [def-weil-finitely-generated-module]. Write $I^nM=(I\\widehat A)^nM$, with $I^0M=M$. Define the graded ring $B=\\bigoplus_{n\\ge0}I^n/I^{n+1}$, with unit $1\\bmod I$ in degree zero and multiplication $(a\\bmod I^{n+1})(b\\bmod I^{m+1})=ab\\bmod I^{n+m+1}$, and the graded $B$-module $G=\\bigoplus_{n\\ge0}I^nM/I^{n+1}M$, whose action on homogeneous elements is $(a\\bmod I^{m+1})(x\\bmod I^{n+1}M)=ax\\bmod I^{m+n+1}M$. Here direct sums consist of tuples of finite support, with componentwise addition and the displayed products extended distributively. Then $M/IM$ is a finitely generated $A/I$-module, and, for every finite family $\\bar x_1,\\ldots,\\bar x_t$ generating $M/IM$ over $A/I$, these elements, placed in degree zero, generate $G$ over $B$. Explicitly, for every $n\\ge0$ and $y\\in I^nM$, and any lifts $x_j\\in M$ of $\\bar x_j$, there exist $a_1,\\ldots,a_t\\in I^n$ such that $y-\\sum_{j=1}^ta_jx_j\\in I^{n+1}M$.",
- "source": {
-  "document": "literature/stacks-project/coherent.tex",
-  "place": "Cohomology of Schemes, Lemma 087Z (label lemma-finite-over-rees-algebra), proof lines 6621-6630: the affine algebraic assertion; tags/tags confirms 087Z,coherent-lemma-finite-over-rees-algebra. The quotient of completion used here is Algebra 05GG (lemma-hathat-finitely-generated), part (2)."
- },
- "stmt_deps": [
-  "def-weil-pbc-noetherian-ring",
-  "def-weil-pbc-adic-completion",
-  "def-weil-finitely-generated-module"
- ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
- "mathlib_searches": [
-  {
-   "tool": "leansearch",
-   "query": "If A is Noetherian, I an ideal and M finite over the I-adic completion, the module direct sum I^n M/I^(n+1) M is generated in degree zero over direct sum I^n/I^(n+1)",
-   "results": "AdicCompletion.module (RingTheory/AdicCompletion/Algebra), AdicCompletion, IsAdicComplete (Basic), AdicCompletion.ofTensorProductEquivOfFiniteNoetherian.congr_simp (AsTensorProduct), IsNoetherian.recOn (Noetherian/Defs). None asserts associated graded generation.",
-   "date": "2026-10-10",
-   "verdict": "no match"
+  "id": "lem-weil-pbc-completed-module-associated-graded-generators",
+  "kind": "statement",
+  "title": "The associated graded of a finite completed module is generated in degree zero",
+  "statement": "Let $A$ be a commutative Noetherian ring [def-weil-pbc-noetherian-ring], $I\\subseteq A$ an ideal, and $\\widehat A=\\varprojlim_{r\\ge1}A/I^r$ its $I$-adic completion [def-weil-pbc-adic-completion]. Let $M$ be a finitely generated $\\widehat A$-module [def-weil-finitely-generated-module]. Write $I^nM=(I\\widehat A)^nM$, with $I^0M=M$. Let $B=\\operatorname{gr}_I(A)=\\bigoplus_{n\\ge0}I^n/I^{n+1}$ be the associated graded ring [def-weil-pbc-associated-graded-ring], with unit $1\\bmod I$ in degree zero and multiplication $(a\\bmod I^{n+1})(b\\bmod I^{m+1})=ab\\bmod I^{n+m+1}$, and the graded $B$-module $G=\\bigoplus_{n\\ge0}I^nM/I^{n+1}M$, whose action on homogeneous elements is $(a\\bmod I^{m+1})(x\\bmod I^{n+1}M)=ax\\bmod I^{m+n+1}M$. Here direct sums consist of tuples of finite support, with componentwise addition and the displayed products extended distributively. Then $M/IM$ is a finitely generated $A/I$-module, and, for every finite family $\\bar x_1,\\ldots,\\bar x_t$ generating $M/IM$ over $A/I$, these elements, placed in degree zero, generate $G$ over $B$. Explicitly, for every $n\\ge0$ and $y\\in I^nM$, and any lifts $x_j\\in M$ of $\\bar x_j$, there exist $a_1,\\ldots,a_t\\in I^n$ such that $y-\\sum_{j=1}^ta_jx_j\\in I^{n+1}M$.",
+  "source": {
+    "document": "literature/stacks-project/coherent.tex",
+    "place": "Cohomology of Schemes, Lemma 087Z (label lemma-finite-over-rees-algebra), proof lines 6621-6630: the affine algebraic assertion; tags/tags confirms 087Z,coherent-lemma-finite-over-rees-algebra. The quotient of completion used here is Algebra 05GG (lemma-hathat-finitely-generated), part (2)."
   },
-  {
-   "tool": "leanfinder",
-   "query": "If A is Noetherian, I an ideal and M finite over the I-adic completion, the module direct sum I^n M/I^(n+1) M is generated in degree zero over direct sum I^n/I^(n+1)",
-   "results": "AdicCompletion.submodule, IsAdicComplete, AdicCompletion, Hausdorffification (Basic); AdicCompletion.exists_smodEq_pow_add_one_smul (Functoriality). Read Functoriality.lean lines 374-390: this gives a congruence for one linear map over one ring; it does not state the completed coefficient-ring comparison or construct the associated graded module. Useful candidate for a future split.",
-   "date": "2026-10-10",
-   "verdict": "no exact match; algebraic congruence candidate requires further constructions"
+  "stmt_deps": [
+    "def-weil-pbc-noetherian-ring",
+    "def-weil-pbc-adic-completion",
+    "def-weil-finitely-generated-module",
+    "def-weil-pbc-associated-graded-ring"
+  ],
+  "proof": [
+    {
+      "text": "*The objects.* $I\\widehat A$ is the ideal of $\\widehat A$ generated by the image of $I$ under $\\iota:A\\to\\widehat A$, and $(I\\widehat A)^n=I^n\\widehat A$ is generated by $\\iota(I^n)$. $B$ is the ring $\\operatorname{gr}_I(A)$ of [def-weil-pbc-associated-graded-ring]. The action on $G$ is well defined: for $a\\in I^m$ and $x\\in I^nM$ we have $ax\\in I^{m+n}M$, and replacing $a$ by $a+a'$ with $a'\\in I^{m+1}$, or $x$ by $x+x'$ with $x'\\in I^{n+1}M$, changes $ax$ by $a'x+ax'+a'x'\\in I^{m+n+1}M$. Associativity, unit and distributivity are inherited from those of $M$ over $\\widehat A$.",
+      "uses": [
+        "def-weil-pbc-associated-graded-ring",
+        "def-weil-pbc-adic-completion"
+      ],
+      "elementary": true,
+      "source": {
+        "document": "literature/stacks-project/coherent.tex",
+        "place": "Cohomology of Schemes, Lemma 087Z (lemma-finite-over-rees-algebra), proof lines 6621-6630 ('which is clearly a finite module over $\\bigoplus I^n/I^{n+1}$')"
+      }
+    },
+    {
+      "text": "*$M/IM$ is finite over $A/I$, and $\\widehat A=\\iota(A)+I\\widehat A$.* Since $A$ is Noetherian, $I$ is finitely generated [def-weil-pbc-noetherian-ring]. By [lem-weil-pbc-adic-completion-mod-ideal] (2) the map $\\pi:\\widehat A\\to A/I$, $(x_r)_r\\mapsto x_1$, is surjective with kernel $I\\widehat A$ and $\\pi\\circ\\iota$ is the quotient map $A\\to A/I$; so $\\widehat A/I\\widehat A\\cong A/I$ as $A$-algebras. Hence for $b\\in\\widehat A$, choosing $c\\in A$ with $c\\bmod I=\\pi(b)$, we get $b-\\iota(c)\\in\\ker\\pi=I\\widehat A$, i.e. $\\widehat A=\\iota(A)+I\\widehat A$. If $m_1,\\ldots,m_s$ generate $M$ over $\\widehat A$ [def-weil-finitely-generated-module], their images generate $M/IM$ over $\\widehat A/I\\widehat A$, hence over $A/I$ through the isomorphism (the $A/I$-module structure on $M/IM$ is the one through $\\iota$, since $\\pi\\circ\\iota$ is the quotient map). This is the first assertion.",
+      "uses": [
+        "def-weil-pbc-noetherian-ring",
+        "lem-weil-pbc-adic-completion-mod-ideal",
+        "def-weil-finitely-generated-module"
+      ],
+      "elementary": false,
+      "source": {
+        "document": "literature/stacks-project/algebra.tex",
+        "place": "Algebra, Lemma 05GG (lemma-hathat-finitely-generated, algebra.tex line 22645), 'R^/I^nR^ = R/I^n' for n = 1"
+      }
+    },
+    {
+      "text": "*Reduction to $A$-modules.* Regard $M$ as an $A$-module through $\\iota$, and for an ideal $J\\subseteq A$ let $J\\cdot M$ be the $A$-submodule generated by the $am$, $a\\in J$, $m\\in M$. Then $(J\\widehat A)M=J\\cdot M$: an element of $J\\widehat A$ is $\\sum_k\\iota(a_k)b_k$ with $a_k\\in J$, $b_k\\in\\widehat A$, and $(\\sum_k\\iota(a_k)b_k)m=\\sum_ka_k(b_km)$; conversely $am=\\iota(a)m$. With $J=I^n$ this gives $I^nM=(I\\widehat A)^nM=I^n\\cdot M$ for all $n\\ge0$ ($I^0=A$, $I^0M=M$). Let $f:A^{\\oplus t}\\to M$, $(c_j)\\mapsto\\sum_jc_jx_j$, an $A$-linear map. Then $M=f(A^{\\oplus t})+I\\cdot M$: for $m\\in M$ write $m\\bmod IM=\\sum_j\\bar c_j\\bar x_j$ with $\\bar c_j\\in A/I$ (step 2), lift $\\bar c_j$ to $c_j\\in A$; then $m-\\sum_jc_jx_j\\in IM=I\\cdot M$. Finally $I^n\\cdot A^{\\oplus t}=(I^n)^{\\oplus t}$, the tuples with all entries in $I^n$.",
+      "uses": [],
+      "elementary": true,
+      "source": {
+        "document": "literature/stacks-project/coherent.tex",
+        "place": "Cohomology of Schemes, Lemma 087Z (lemma-finite-over-rees-algebra), proof lines 6621-6630 ('which is clearly a finite module over $\\bigoplus I^n/I^{n+1}$')"
+      }
+    },
+    {
+      "text": "*The congruence.* Let $n\\ge0$ and $y\\in I^nM=I^n\\cdot M$ (step 3). Apply [lem-weil-pbc-module-graded-lift-mod-ideal-power] to $R=A$, the ideal $I$ and the $A$-linear map $f:A^{\\oplus t}\\to M$ of step 3, whose hypothesis $M=f(A^{\\oplus t})+I\\cdot M$ is step 3. It gives $x=(a_1,\\ldots,a_t)\\in I^n\\cdot A^{\\oplus t}=(I^n)^{\\oplus t}$, so $a_j\\in I^n$, with $\\sum_ja_jx_j-y\\in I^{n+1}\\cdot M=I^{n+1}M$. This is the explicit assertion, for any choice of lifts $x_j$. For $n=0$ it reads: every $y\\in M$ is $\\sum_ja_jx_j$ modulo $IM$ with $a_j\\in A$, which is the generation of $M/IM$ by the $\\bar x_j$ again.",
+      "uses": [
+        "lem-weil-pbc-module-graded-lift-mod-ideal-power"
+      ],
+      "elementary": false,
+      "source": {
+        "document": "literature/stacks-project/coherent.tex",
+        "place": "Cohomology of Schemes, Lemma 087Z (lemma-finite-over-rees-algebra), proof lines 6621-6630 ('which is clearly a finite module over $\\bigoplus I^n/I^{n+1}$')"
+      }
+    },
+    {
+      "text": "*Generation in degree zero.* An element of $G$ is a finite sum of homogeneous elements $y\\bmod I^{n+1}M$ with $y\\in I^nM$. By step 4 and the definition of the action (step 1), $y\\bmod I^{n+1}M=\\sum_j(a_j\\bmod I^{n+1})\\cdot(x_j\\bmod IM)=\\sum_j(a_j\\bmod I^{n+1})\\cdot\\bar x_j$ with $a_j\\bmod I^{n+1}\\in B_n$. So the $\\bar x_j$, in degree zero, generate $G$ over $B$.",
+      "uses": [],
+      "elementary": true,
+      "source": {
+        "document": "literature/stacks-project/coherent.tex",
+        "place": "Cohomology of Schemes, Lemma 087Z (lemma-finite-over-rees-algebra), proof lines 6621-6630 ('which is clearly a finite module over $\\bigoplus I^n/I^{n+1}$')"
+      }
+    }
+  ],
+  "proof_deps": [
+    "def-weil-pbc-associated-graded-ring",
+    "def-weil-pbc-adic-completion",
+    "def-weil-pbc-noetherian-ring",
+    "lem-weil-pbc-adic-completion-mod-ideal",
+    "def-weil-finitely-generated-module",
+    "lem-weil-pbc-module-graded-lift-mod-ideal-power"
+  ],
+  "proof_origin": {
+    "by": "document",
+    "document": "literature/stacks-project/coherent.tex",
+    "place": "Cohomology of Schemes, Lemma 087Z (lemma-finite-over-rees-algebra), proof lines 6621-6630 ('which is clearly a finite module over $\\bigoplus I^n/I^{n+1}$'); with Algebra, Lemma 05GG (lemma-hathat-finitely-generated, algebra.tex line 22645), 'R^/I^nR^ = R/I^n' for n = 1. The source says 'clearly'; steps 2-5 write out that argument."
   },
-  {
-   "tool": "grep",
-   "query": "rg -n associated.?graded|AssociatedGraded|graded.*[Ff]inite|[Ff]inite.*graded|kerProj_of|quotient /home/ubuntu/SHEAF/project/lean/.lake/packages/mathlib/Mathlib/RingTheory/{Filtration.lean,AdicCompletion/Basic.lean}; read AdicCompletion/Functoriality.lean:374-390",
-   "results": "Filtration.lean provides the Rees submodule (line 239) and Artin-Rees (389), not the associated graded quotient. Functoriality.lean:374-390 gives exists_smodEq_pow_add_one_smul, with no associated graded or completed scalar comparison.",
-   "date": "2026-10-10",
-   "verdict": "no match"
-  }
- ],
- "mathlib_match": null,
- "status": "unsplit",
- "merged_into": null,
- "created": {
-  "by": "worker",
-  "item": "lem-weil-pbc-formal-systems-kernel-rees-finite",
-  "date": "2026-10-10"
- },
- "lean_audit": {
-  "master": {
-   "state": "none"
+  "mathlib_searches": [
+    {
+      "tool": "leansearch",
+      "query": "If A is Noetherian, I an ideal and M finite over the I-adic completion, the module direct sum I^n M/I^(n+1) M is generated in degree zero over direct sum I^n/I^(n+1)",
+      "results": "AdicCompletion.module (RingTheory/AdicCompletion/Algebra), AdicCompletion, IsAdicComplete (Basic), AdicCompletion.ofTensorProductEquivOfFiniteNoetherian.congr_simp (AsTensorProduct), IsNoetherian.recOn (Noetherian/Defs). None asserts associated graded generation.",
+      "date": "2026-10-10",
+      "verdict": "no match"
+    },
+    {
+      "tool": "leanfinder",
+      "query": "If A is Noetherian, I an ideal and M finite over the I-adic completion, the module direct sum I^n M/I^(n+1) M is generated in degree zero over direct sum I^n/I^(n+1)",
+      "results": "AdicCompletion.submodule, IsAdicComplete, AdicCompletion, Hausdorffification (Basic); AdicCompletion.exists_smodEq_pow_add_one_smul (Functoriality). Read Functoriality.lean lines 374-390: this gives a congruence for one linear map over one ring; it does not state the completed coefficient-ring comparison or construct the associated graded module. Useful candidate for a future split.",
+      "date": "2026-10-10",
+      "verdict": "no exact match; algebraic congruence candidate requires further constructions"
+    },
+    {
+      "tool": "grep",
+      "query": "rg -n associated.?graded|AssociatedGraded|graded.*[Ff]inite|[Ff]inite.*graded|kerProj_of|quotient /home/ubuntu/SHEAF/project/lean/.lake/packages/mathlib/Mathlib/RingTheory/{Filtration.lean,AdicCompletion/Basic.lean}; read AdicCompletion/Functoriality.lean:374-390",
+      "results": "Filtration.lean provides the Rees submodule (line 239) and Artin-Rees (389), not the associated graded quotient. Functoriality.lean:374-390 gives exists_smodEq_pow_add_one_smul, with no associated graded or completed scalar comparison.",
+      "date": "2026-10-10",
+      "verdict": "no match"
+    },
+    {
+      "tool": "leansearch",
+      "query": "module over adic completion: I^n M is generated modulo I^(n+1) M by images of generators of M / I M with coefficients in I^n",
+      "results": "AdicCompletion.module (RingTheory/AdicCompletion/Algebra), IsAdicComplete, AdicCompletion, AdicCompletion.instAddCommGroup, AdicCompletion.of_surjective_iff, of_apply, of (RingTheory/AdicCompletion/Basic): none states the item",
+      "date": "2026-10-10",
+      "verdict": "no match"
+    },
+    {
+      "tool": "leanfinder",
+      "query": "associated graded module of a filtered module generated in degree zero by lifts of generators of M/IM",
+      "results": "IsModuleFiltration.toGradedSMul (RingTheory/FilteredAlgebra/Basic), TensorAlgebra.GradedAlgebra.ι, HomogeneousSubmodule, Ideal.Filtration.submodule, Ideal.Filtration.submodule_span_single, submodule_closure_single (RingTheory/Filtration), DirectSum.GradeZero.module: no associated graded module of I^nM",
+      "date": "2026-10-10",
+      "verdict": "no match"
+    },
+    {
+      "tool": "loogle",
+      "query": "AdicCompletion.exists_smodEq_pow_add_one_smul (after LeanSearch for the congruence)",
+      "results": "found, Mathlib.RingTheory.AdicCompletion.Functoriality: for f : M →ₗ[R] N with M → N/IN surjective, y ∈ I^n • ⊤ gives x ∈ I^n • ⊤ with f x ≡ y mod I^(n+1) • ⊤. Over the base ring A it is the explicit congruence once M = f(A^t) + IM is known, which needs the comparison Â/IÂ = A/I (05GG); recorded as the new leaf lem-weil-pbc-module-graded-lift-mod-ideal-power used in step 4",
+      "date": "2026-10-10",
+      "verdict": "no match for the item (needs step 2-3); generalization of step 4 only"
+    },
+    {
+      "tool": "grep",
+      "query": "grep -rnE 'AssociatedGraded|associatedGraded|GradedPiece|gradedPiece' --include=*.lean ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib; ls RingTheory/FilteredAlgebra RingTheory/AdicCompletion; grep theorem names in RingTheory/AdicCompletion/Completeness.lean",
+      "results": "no associated graded object in Mathlib; FilteredAlgebra has only Basic.lean (filtration classes); Completeness.lean has pow_smul_top_eq_ker_eval (155), isAdicComplete (185), ker_evalOneₐ_eq_map (199), nothing on gr",
+      "date": "2026-10-10",
+      "verdict": "no match"
+    }
+  ],
+  "mathlib_match": null,
+  "status": "split",
+  "merged_into": null,
+  "created": {
+    "by": "worker",
+    "item": "lem-weil-pbc-formal-systems-kernel-rees-finite",
+    "date": "2026-10-10"
   },
-  "slopmaster2": {
-   "state": "none"
-  }
- },
- "chapter": "sec-proper-base-change",
- "unit": "sk-thm-p1"
+  "lean_audit": {
+    "master": {
+      "state": "none",
+      "decls": [],
+      "missing": []
+    },
+    "slopmaster2": {
+      "state": "none",
+      "decls": [],
+      "missing": []
+    }
+  },
+  "chapter": "sec-proper-base-change",
+  "unit": "sk-thm-p1",
+  "split_report": {
+    "date": "2026-10-10",
+    "item": "lem-weil-pbc-completed-module-associated-graded-generators",
+    "worker": "stage1",
+    "summary": "Source 087Z (coherent.tex 6612-6630) says only 'clearly'; the argument is written out. Statement kept, except that B now cites def-weil-pbc-associated-graded-ring (same ring, explicit description kept). Proof in 5 steps: (1) objects and well-definedness of the action, elementary; (2) I finitely generated, Â/IÂ = A/I via lem-weil-pbc-adic-completion-mod-ideal (05GG), hence Â = ι(A)+IÂ and M/IM finite over A/I; (3) (JÂ)M equals the A-submodule J·M, and M = f(A^t)+I·M for f:(c_j) ↦ Σ c_j x_j, elementary; (4) new Mathlib leaf lem-weil-pbc-module-graded-lift-mod-ideal-power (AdicCompletion.exists_smodEq_pow_add_one_smul) gives a_j ∈ I^n with y − Σ a_j x_j ∈ I^{n+1}M, n = 0 included; (5) generation of G in degree zero, elementary. Item not a Mathlib leaf: Mathlib has no associated graded module, and the leaf covers only step 4. Citer lem-weil-pbc-formal-systems-kernel-rees-finite step 3 uses exactly the generation in degree zero: consistent."
+  },
+  "reviewed": "pass (L, 2026-10-10): 5 steps write out the \"clearly\" of 087Z: B is gr_I(A) (definition node), M/IM finite over A/I via 05GG, (J A-hat)M = J.M, the lifting congruence y - sum a_j x_j in I^{n+1}M from the new leaf, generation in degree zero."
 }
