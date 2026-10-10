@@ -1,14 +1,15 @@
 {
  "id": "lem-weil-pbc-jacobi-zariski-surjection-h1",
  "kind": "statement",
- "title": "First cotangent homology of a surjection (Stacks Tag 07BP)",
- "statement": "Let $A\\twoheadrightarrow B$ be a surjective homomorphism of commutative rings with kernel $I$. Using the canonical polynomial-ring presentation and the degree-one homology convention in [def-weil-pbc-smooth-ring-map], **Stacks Tag 07BP (lemma-NL-surjection)** gives a canonical identification $$H_1(L_{B/A})\\;\\cong\\;I/I^2.$$",
+ "title": "First cotangent homology of a surjection",
+ "statement": "Let $A\\twoheadrightarrow B$ be a surjective homomorphism of commutative rings with kernel $I$, and let $\\mathrm{NL}_{B/A}=(J/J^2\\xrightarrow{\\ \\delta\\ }\\bigoplus_{b\\in B}B\\,\\mathrm d[b])$ be the naive cotangent complex of the canonical presentation $\\gamma:A[B]\\to B$, $[b]\\mapsto b$, with kernel $J$, and $H_1(L_{B/A})=\\ker\\delta$, as in [def-weil-pbc-smooth-ring-map]. Then there is a canonical isomorphism of $B$-modules $$H_1(L_{B/A})\\;\\cong\\;I/I^2,$$ namely: choose for each $b\\in B$ a preimage $\\sigma(b)\\in A$; the $A$-algebra map $\\varphi:A[B]\\to A$, $[b]\\mapsto\\sigma(b)$, satisfies $\\varphi(J)\\subseteq I$, and the isomorphism sends the class of $g\\in J$ with $g\\bmod J^2\\in\\ker\\delta$ to $\\varphi(g)\\bmod I^2$; it does not depend on the choice of $\\sigma$. Moreover the module of K\\\"ahler differentials vanishes, $\\Omega_{B/A}=0$ [def-weil-pbc-kahler-differentials], so the cokernel of $\\delta$ is zero.",
  "source": {
   "document": "literature/stacks-project/algebra.tex",
-  "place": "Algebra, Lemma Tag 07BP (lemma-NL-surjection), lines 35505--35515"
+  "place": "Algebra, Lemma Tag 07BP (lemma-NL-surjection), lines 35505--35515, with its proof from Lemma Tag 00S1 (lemma-NL-homotopy, line 35274; morphism of presentations from the canonical presentation of Definition Tag 07BN (definition-naive-cotangent-complex, line 35144) to the presentation A -> B with no variables) and the cokernel identification of Lemma Tag 00RU (lemma-differential-seq)"
  },
  "stmt_deps": [
-  "def-weil-pbc-smooth-ring-map"
+  "def-weil-pbc-smooth-ring-map",
+  "def-weil-pbc-kahler-differentials"
  ],
  "proof": [],
  "proof_deps": [],
@@ -34,10 +35,36 @@
    "results": "ExtendScalars.lean:109 gives H1Cotangent ≃ Cotangent for a surjective presentation; no ideal-square quotient theorem",
    "date": "2026-10-10",
    "verdict": "no exact match as stated"
+  },
+  {
+   "tool": "leansearch",
+   "query": "first homology of naive cotangent complex of S over P is isomorphic to cotangent space I/I^2 of the kernel",
+   "results": "Algebra.H1Cotangent, Algebra.Extension.H1Cotangent (Mathlib.RingTheory.Extension.Cotangent.Basic), FormallySmooth.subsingleton_h1Cotangent, Extension.subsingleton_h1Cotangent",
+   "date": "2026-10-10",
+   "verdict": "no direct match in the top results; leads to the Extension API"
+  },
+  {
+   "tool": "loogle",
+   "query": "Algebra.H1Cotangent _ _ ≃ₗ[_] _",
+   "results": "Algebra.H1Cotangent.mapEquiv; Algebra.Extension.h1CotangentEquivCotangent (P : Extension R S) : Algebra.H1Cotangent P.Ring S ≃ₗ[S] P.Cotangent (Mathlib.RingTheory.Extension.ExtendScalars)",
+   "date": "2026-10-10",
+   "verdict": "match: h1CotangentEquivCotangent with P = Extension.ofSurjective of A -> B"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rn 'H1Cotangent' Mathlib/RingTheory | grep -i 'surj\\|cotangentEquiv'; sed -n 95,160 Mathlib/RingTheory/Extension/ExtendScalars.lean; grep -n 'def ofSurjective' Mathlib/RingTheory/Extension/Basic.lean",
+   "results": "ExtendScalars.lean:109 h1CotangentEquivOfSurjective, :121 h1CotangentEquivCotangent, :146 h1CotangentEquivCotangent_comp_map (the map is h1Cotangentι ∘ H1Cotangent.map P.defaultHom); Extension/Basic.lean:102 Extension.ofSurjective; Extension/Basic.lean:330 Extension.Cotangent := P.ker.Cotangent; Ideal/Cotangent.lean:42 Ideal.Cotangent I := I ⧸ I • ⊤; Kaehler/Basic.lean:247 KaehlerDifferential.subsingleton_of_surjective",
+   "date": "2026-10-10",
+   "verdict": "match (one line), checked against the source"
   }
  ],
- "mathlib_match": null,
- "status": "unsplit",
+ "mathlib_match": {
+  "declaration": "Algebra.Extension.h1CotangentEquivCotangent",
+  "file": "Mathlib/RingTheory/Extension/ExtendScalars.lean",
+  "line": 121,
+  "how": "specializes in one line, one Mathlib declaration per clause: with Mathlib's (R, S, P) := (A, B, Extension.ofSurjective (Algebra.ofId A B) h) (Mathlib/RingTheory/Extension/Basic.lean:102; P.Ring = A, P.ker = RingHom.ker (algebraMap A B) = I), h1CotangentEquivCotangent P : Algebra.H1Cotangent A B ≃ₗ[B] P.Cotangent, where P.Cotangent = P.ker.Cotangent (Extension/Basic.lean:330) = Ideal.Cotangent I = I ⧸ I • ⊤ = I/I^2 (Ideal/Cotangent.lean:42) and Algebra.H1Cotangent A B (Extension/Cotangent/Basic.lean:561) is H_1 of the canonical presentation Generators.self A B, i.e. H_1(L_{B/A}) of def-weil-pbc-smooth-ring-map (its own match). The map is the one of the statement: h1CotangentEquivCotangent_comp_map (ExtendScalars.lean:146) gives it as h1Cotangentι ∘ H1Cotangent.map P.defaultHom, where defaultHom (Extension/Generators.lean:813) is MvPolynomial.aeval P.σ : A[B] → A, [b] ↦ σ(b), a chosen lift (Stacks 00S1(1)); independence of σ is that H1Cotangent.map does not depend on the hom (Extension.H1Cotangent.map_eq, Stacks 00S1(2)). Omega_{B/A} = 0: KaehlerDifferential.subsingleton_of_surjective (Mathlib/RingTheory/Kaehler/Basic.lean:247), as in the node lem-weil-pbc-jacobi-zariski-surjection-differentials."
+ },
+ "status": "mathlib",
  "created": {
   "by": "worker",
   "item": "lem-weil-pbc-jacobi-zariski-quotient-smooth",
@@ -56,5 +83,17 @@
   }
  },
  "chapter": "sec-proper-base-change",
- "unit": "sk-thm-p1"
+ "unit": "sk-thm-p1",
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "lem-weil-pbc-jacobi-zariski-surjection-h1",
+  "worker": "stage1",
+  "summary": "Checked Stacks 07BP (lemma-NL-surjection, algebra.tex 35505-35515; proof: 00S1 lemma-NL-homotopy applied to the presentation A -> B with no variables, whose NL is (I/I^2 -> 0)). Reworded the statement: the bold 'Stacks Tag 07BP' inside the mathematics is moved to the source; the statement now introduces NL_{B/A} of the canonical presentation, gives the canonical map H_1(L_{B/A}) -> I/I^2 induced by A[B] -> A, [b] -> sigma(b), and adds the clause Omega_{B/A}=0 (cokernel zero) asked for by the lead; stmt_deps gains def-weil-pbc-kahler-differentials. Mathlib states it: Algebra.Extension.h1CotangentEquivCotangent (ExtendScalars.lean:121) for Extension.ofSurjective of A -> B gives H1Cotangent A B = I/I^2, with the map identified by h1CotangentEquivCotangent_comp_map (line 146); Omega=0 is KaehlerDifferential.subsingleton_of_surjective. So the node is a Mathlib leaf and has no proof; no node for 00S1 was created (none exists in the DAG, and the leaf does not need one)."
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "result": "accepted",
+  "note": "Mathlib leaf: Algebra.Extension.h1CotangentEquivCotangent (ExtendScalars.lean:121) with Extension.ofSurjective (Basic.lean:102), h1CotangentEquivCotangent_comp_map (:146) for the map, subsingleton_of_surjective (Kaehler/Basic.lean:247) for Omega = 0; lines verified with sed. Statement reworded as a plain statement with the canonical map described. Tags 07BP, 00S1 verified. The Omega = 0 clause duplicates the leaf lem-weil-pbc-jacobi-zariski-surjection-differentials (harmless)."
+ }
 }
