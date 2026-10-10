@@ -1,0 +1,74 @@
+{
+ "id": "lem-weil-pbc-kahler-differentials-first-exact-sequence",
+ "kind": "statement",
+ "title": "First fundamental exact sequence of Kähler differentials",
+ "statement": "Let $A\\to B\\to C$ be homomorphisms of commutative rings, $C$ an $A$-algebra through the composite, and let $\\Omega$ and $\\mathrm d$ be the Kähler differentials and universal derivations of [def-weil-pbc-kahler-differentials]. Then there are unique $C$-linear maps $u:C\\otimes_B\\Omega_{B/A}\\to\\Omega_{C/A}$ with $u(c\\otimes\\mathrm d_{B/A}b)=c\\,\\mathrm d_{C/A}(\\bar b)$ ($\\bar b$ the image of $b\\in B$ in $C$) and $v:\\Omega_{C/A}\\to\\Omega_{C/B}$ with $v(c\\,\\mathrm d_{C/A}c')=c\\,\\mathrm d_{C/B}c'$ ($c,c'\\in C$), and the sequence of $C$-modules $$C\\otimes_B\\Omega_{B/A}\\xrightarrow{\\ u\\ }\\Omega_{C/A}\\xrightarrow{\\ v\\ }\\Omega_{C/B}\\to0$$ is exact: $v$ is surjective and the kernel of $v$ is the image of $u$.",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Algebra, Lemma Tag 00RS (lemma-exact-sequence-differentials), lines 34057-34076 (tag verified in stacks-project/tags/tags: 00RS,algebra-lemma-exact-sequence-differentials)"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-kahler-differentials"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "exact sequence of Kähler differentials B ⊗ Ω[A/R] → Ω[B/R] → Ω[B/A] → 0",
+   "results": "KaehlerDifferential.exact_mapBaseChange_map, KaehlerDifferential.range_mapBaseChange, KaehlerDifferential.map_surjective (Mathlib.RingTheory.Kaehler.Basic); tensorKaehlerEquiv, CommRingCat.KaehlerDifferential(.map)",
+   "date": "2026-10-10",
+   "verdict": "match: exact_mapBaseChange_map with map_surjective"
+  },
+  {
+   "tool": "loogle",
+   "query": "Function.Exact (KaehlerDifferential.mapBaseChange _ _ _) _",
+   "results": "KaehlerDifferential.exact_mapBaseChange_map (Mathlib.RingTheory.Kaehler.Basic): Function.Exact (mapBaseChange R A B) (map R A B B)",
+   "date": "2026-10-10",
+   "verdict": "match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -n 'def KaehlerDifferential.map \\|map_D\\|mapBaseChange\\|exact_mapBaseChange_map\\|map_surjective' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/RingTheory/Kaehler/Basic.lean; sed -n 640,760p",
+   "results": "KaehlerDifferential.map (line 658), map_D (668), map_surjective (713), mapBaseChange (719), mapBaseChange_tmul (723), range_mapBaseChange (733), exact_mapBaseChange_map (756; docstring: 'The sequence B ⊗[A] Ω[A⁄R] → Ω[B⁄R] → Ω[B⁄A] → 0 is exact')",
+   "date": "2026-10-10",
+   "verdict": "match"
+  },
+  {
+   "tool": "local_search",
+   "query": "KaehlerDifferential.exact_mapBaseChange_map (project root ~/weil-conjectures-slopmaster2)",
+   "results": "KaehlerDifferential.exact_mapBaseChange_map, lemma, .lake/packages/mathlib/Mathlib/RingTheory/Kaehler/Basic.lean (index: unavailable, name found)",
+   "date": "2026-10-10",
+   "verdict": "name exists"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "KaehlerDifferential.exact_mapBaseChange_map",
+  "file": "Mathlib/RingTheory/Kaehler/Basic.lean",
+  "line": 756,
+  "how": "exact, one Mathlib declaration per clause, with Mathlib's (R, A, B) := (A, B, C) (lines read 2026-10-10 with sed -n 640,760p): u = KaehlerDifferential.mapBaseChange A B C : C ⊗[B] Ω[B⁄A] →ₗ[C] Ω[C⁄A] (line 719) with mapBaseChange_tmul (line 723: c ⊗ₜ y ↦ c • map A A B C y) and map_D (line 668: map (D b) = D (algebraMap B C b)); v = KaehlerDifferential.map A B C C : Ω[C⁄A] →ₗ[C] Ω[C⁄B] (line 658, map_D line 668: D_{C/A} c ↦ D_{C/B} c); exactness at Ω[C⁄A]: exact_mapBaseChange_map (line 756); surjectivity of v: KaehlerDifferential.map_surjective (line 713). Uniqueness of u and v: the elements c ⊗ d b, resp. c d c', span the source (elementary). Mathlib's Ω, D is the node def-weil-pbc-kahler-differentials (its own Mathlib match)."
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-kahler-differentials-polynomial-extension",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lead_note": "L 2026-10-10: composed Mathlib leaf, one declaration per clause; lines 719, 723, 658, 668, 713, 756 verified."
+}

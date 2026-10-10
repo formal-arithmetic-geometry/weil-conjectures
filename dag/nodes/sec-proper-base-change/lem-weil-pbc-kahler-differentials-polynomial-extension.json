@@ -8,11 +8,89 @@
   "place": "no single Stacks lemma; follows from Algebra, Lemmas Tag 00RS (lemma-exact-sequence-differentials, line 34057), 00RV (lemma-differentials-base-change, line 34213: B = A (x)_R R[z]) and 00RX (lemma-differentials-polynomial-ring, line 34310); needed for 'relative dimension' in Smoothing 07CP (lines 1568-1576)"
  },
  "stmt_deps": [
+  "def-weil-pbc-kahler-differentials",
+  "def-weil-pbc-mv-polynomial-ring"
+ ],
+ "proof": [
+  {
+   "text": "(Notation and the two maps.) Write $P=R[z_1,\\dots,z_e]$ and let $u:B\\otimes_A\\Omega_{A/R}\\to\\Omega_{B/R}$, $u(b\\otimes\\mathrm d\\alpha)=b\\,\\mathrm d\\alpha$, and $v:\\Omega_{B/R}\\to\\Omega_{B/A}$, $v(b\\,\\mathrm d_{B/R}\\beta)=b\\,\\mathrm d_{B/A}\\beta$, be the $B$-linear maps of [lem-weil-pbc-kahler-differentials-first-exact-sequence] for the ring maps $R\\to A\\to B$ (constants $A\\subset B=A[z_1,\\dots,z_e]$ [def-weil-pbc-mv-polynomial-ring]); that lemma says $v$ is surjective and $\\ker v=\\operatorname{im}u$. Let $s:B^e\\to\\Omega_{B/R}$, $s(b_1,\\dots,b_e)=\\sum_jb_j\\,\\mathrm dz_j$. The map $\\varphi$ of the statement is $\\varphi(x,b)=u(x)+s(b)$.",
+   "uses": [
+    "lem-weil-pbc-kahler-differentials-first-exact-sequence",
+    "def-weil-pbc-mv-polynomial-ring"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra, Lemma Tag 00RS (lemma-exact-sequence-differentials), lines 34057-34076"
+   }
+  },
+  {
+   "text": "($\\Omega_{B/A}$ is free on the $\\mathrm dz_j$.) Applying [lem-weil-pbc-polynomial-ring-kahler-basis] with base ring $A$ and $n=e$, $\\Omega_{B/A}$ is a free $B$-module with basis $\\mathrm d_{B/A}z_1,\\dots,\\mathrm d_{B/A}z_e$. Since $v(s(b))=\\sum_jb_j\\,\\mathrm d_{B/A}z_j$, the composite $v\\circ s:B^e\\to\\Omega_{B/A}$ is the isomorphism sending the $j$-th standard basis vector to $\\mathrm d_{B/A}z_j$.",
+   "uses": [
+    "lem-weil-pbc-polynomial-ring-kahler-basis"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra, Lemma Tag 00RX (lemma-differentials-polynomial-ring), lines 34310-34340"
+   }
+  },
+  {
+   "text": "($\\varphi$ is surjective, and $\\varphi$ is injective as soon as $u$ is.) Surjective: given $\\omega\\in\\Omega_{B/R}$ put $b=(v\\circ s)^{-1}(v(\\omega))\\in B^e$ (Step 2); then $v(\\omega-s(b))=0$, so $\\omega-s(b)=u(x)$ for some $x\\in B\\otimes_A\\Omega_{A/R}$ because $\\ker v=\\operatorname{im}u$ (Step 1), and $\\omega=\\varphi(x,b)$. Injective: if $u(x)+s(b)=0$, apply $v$: since $v\\circ u=0$ (as $\\operatorname{im}u=\\ker v$) we get $(v\\circ s)(b)=0$, so $b=0$ by Step 2, and then $u(x)=0$; so if $u$ is injective, $x=0$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra, Lemmas Tags 00RS and 00RX as in Steps 1-2 (the splitting argument is written by the agent)"
+   }
+  },
+  {
+   "text": "($B$ as a base change of $A$ along $R\\to P$.) By [lem-weil-pbc-polynomial-scalar-extension] (with its $A\\to R$ taken to be our $R\\to A$ and $J=\\{1,\\dots,e\\}$), the map $A\\otimes_RP\\to B$, $a\\otimes p\\mapsto a\\cdot\\bar p$ ($\\bar p$ the image of $p$ under the coefficient map $R\\to A$) is an isomorphism of rings, sending $a\\otimes1\\mapsto a$ and $1\\otimes z_j\\mapsto z_j$. Transporting along it, [lem-weil-pbc-kahler-differentials-base-change] (with its $R\\to R'$ our $R\\to P$ and its $R\\to S$ our $R\\to A$, so $S'=P\\otimes_RA\\cong B$) gives an isomorphism of $B$-modules $\\mu:B\\otimes_A\\Omega_{A/R}\\xrightarrow{\\ \\sim\\ }\\Omega_{B/P}$, where $B$ is a $P$-algebra via $p\\mapsto\\bar p$ (i.e. $z_j\\mapsto z_j$), with $\\mu(1\\otimes\\mathrm d\\alpha)=\\mathrm d_{B/P}\\alpha$ for $\\alpha\\in A$ (the formula $r'\\otimes\\mathrm ds\\mapsto r'\\,\\mathrm d(1\\otimes s)$ of that lemma with $r'=1$, and $B$-linearity, $B\\otimes_A\\Omega_{A/R}$ being identified with $P\\otimes_R\\Omega_{A/R}$ with the $S'$-module structure stated there via $b\\otimes\\omega\\leftrightarrow$ the $S'$-multiple $b\\cdot(1\\otimes\\omega)$).",
+   "uses": [
+    "lem-weil-pbc-polynomial-scalar-extension",
+    "lem-weil-pbc-kahler-differentials-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra, Lemma Tag 00RV (lemma-differentials-base-change), lines 34213-34232"
+   }
+  },
+  {
+   "text": "($u$ is injective.) The ring maps $R\\to P\\to B$ are a factorization of the structure map $R\\to A\\to B$ (constants of $R$ go to constants), so [lem-weil-pbc-kahler-differentials-first-exact-sequence] for $R\\to P\\to B$ gives the $B$-linear map $c:\\Omega_{B/R}\\to\\Omega_{B/P}$, $c(b\\,\\mathrm d_{B/R}\\beta)=b\\,\\mathrm d_{B/P}\\beta$. The $B$-linear maps $c\\circ u$ and $\\mu$ (Step 4) agree on the elements $1\\otimes\\mathrm d\\alpha$, $\\alpha\\in A$: both give $\\mathrm d_{B/P}\\alpha$. These elements generate $B\\otimes_A\\Omega_{A/R}$ as a $B$-module (the $\\mathrm d\\alpha$ generate $\\Omega_{A/R}$ as an $A$-module by the construction in [def-weil-pbc-kahler-differentials]), so $c\\circ u=\\mu$, which is an isomorphism. Hence $u$ is injective (with left inverse $\\mu^{-1}\\circ c$), and by Step 3 $\\varphi$ is an isomorphism.",
+   "uses": [
+    "lem-weil-pbc-kahler-differentials-first-exact-sequence",
+    "def-weil-pbc-kahler-differentials"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra, Lemmas Tags 00RS and 00RV (lines 34057-34076, 34213-34232); the factorization through R[z] is the base change B = A ⊗_R R[z] named in the node's source"
+   }
+  },
+  {
+   "text": "(Free of rank $d+e$.) If $\\omega_1,\\dots,\\omega_d$ is a basis of the $A$-module $\\Omega_{A/R}$, then $\\Omega_{A/R}\\cong A^d$ and $B\\otimes_A\\Omega_{A/R}\\cong B\\otimes_AA^d\\cong B^d$ (tensor product commutes with finite direct sums and $B\\otimes_AA\\cong B$), with basis $1\\otimes\\omega_1,\\dots,1\\otimes\\omega_d$. By Step 5, $\\Omega_{B/R}\\cong B^d\\oplus B^e=B^{d+e}$, with basis $\\omega_1,\\dots,\\omega_d$ (images $u(1\\otimes\\omega_i)$) and $\\mathrm dz_1,\\dots,\\mathrm dz_e$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "consequence of Steps 1-5 (written by the agent)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-kahler-differentials-first-exact-sequence",
+  "def-weil-pbc-mv-polynomial-ring",
+  "lem-weil-pbc-polynomial-ring-kahler-basis",
+  "lem-weil-pbc-polynomial-scalar-extension",
+  "lem-weil-pbc-kahler-differentials-base-change",
   "def-weil-pbc-kahler-differentials"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "no single Stacks lemma: assembled from Algebra Lemmas Tags 00RS (lines 34057-34076), 00RV (lines 34213-34232) and 00RX (lines 34310-34340); the splitting (Step 3) and the injectivity via B = A ⊗_R R[z] (Steps 4-5) are written by the agent"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -34,10 +112,31 @@
    "results": "mvPolynomialEquiv, mvPolynomialBasis (Omega of MvPolynomial sigma R over R), polynomialEquiv, tensorKaehlerEquiv(Base); Algebra.IsPushout R S (MvPolynomial σ R) (MvPolynomial σ S) (TensorProduct/MvPolynomial.lean:178); no decomposition of Omega_{A[z]/R}",
    "date": "2026-10-10",
    "verdict": "no match (assembled in a few lines from mvPolynomialBasis, tensorKaehlerEquiv and the Jacobi-Zariski sequence; not one line)"
+  },
+  {
+   "tool": "leansearch",
+   "query": "KaehlerDifferential.mapBaseChange injective when B is a polynomial algebra over A / formally smooth",
+   "results": "Algebra.FormallySmooth.iff_injective_cotangentComplexBaseChange (Smooth.Local, local rings only), KaehlerDifferential.mapBaseChange, tensorKaehlerEquiv(Base), map_surjective, Algebra.Generators.liftBaseChange_injective_of_isLocalizationAway, ker_map_of_surjective",
+   "date": "2026-10-10",
+   "verdict": "no match: no injectivity of mapBaseChange for A → A[z], no decomposition of Ω_{A[z]/R}"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a polynomial algebra B = A[X] over A, the map B ⊗_A Ω_{A/R} → Ω_{B/R} is injective and Ω_{B/R} splits as direct sum with free module on dX_i",
+   "results": "Algebra.Generators.toKaehler_tmul_D, Algebra.Generators.cotangentSpaceBasis_repr_one_tmul (Extension.Cotangent.Basic), instFreeMvPolynomialKaehlerDifferential, KaehlerDifferential.polynomialEquiv (Kaehler.Polynomial)",
+   "date": "2026-10-10",
+   "verdict": "no match: only Ω of a polynomial ring over its own coefficient ring"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rn 'Injective.*mapBaseChange\\|mapBaseChange.*Injective\\|mapBaseChange_injective' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib; grep -rn mapBaseChange ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib --include=*.lean",
+   "results": "no injectivity statement; mapBaseChange used only in Kaehler/Basic.lean and Kaehler/JacobiZariski.lean (H1Cotangent.exact_δ_mapBaseChange, line 556)",
+   "date": "2026-10-10",
+   "verdict": "no match"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "worker",
@@ -57,5 +156,17 @@
   }
  },
  "chapter": "sec-proper-base-change",
- "unit": "sk-thm-p1"
+ "unit": "sk-thm-p1",
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "lem-weil-pbc-kahler-differentials-polynomial-extension",
+  "worker": "stage1",
+  "summary": "Lean state none; Mathlib re-searched (leansearch, leanfinder, grep): no statement of the decomposition or of injectivity of mapBaseChange for A -> A[z], so not a leaf. Proof written in six steps from Stacks 00RS, 00RX and 00RV: the exact sequence B⊗Ω_{A/R} -u-> Ω_{B/R} -v-> Ω_{B/A} -> 0 (new Mathlib leaf lem-weil-pbc-kahler-differentials-first-exact-sequence = KaehlerDifferential.exact_mapBaseChange_map + map_surjective), Ω_{B/A} free on dz_j (existing leaf lem-weil-pbc-polynomial-ring-kahler-basis), a splitting argument reducing the isomorphism to injectivity of u, and injectivity of u by writing B = A ⊗_R R[z] (existing leaf lem-weil-pbc-polynomial-scalar-extension, a tool of unit sk-thm-reduction) so that Ω_{B/R[z]} ≅ B⊗_AΩ_{A/R} (existing leaf lem-weil-pbc-kahler-differentials-base-change, 00RV) and the canonical map Ω_{B/R} -> Ω_{B/R[z]} (00RS again) composed with u is that isomorphism. The rank statement is elementary. Statement unchanged; def-weil-pbc-mv-polynomial-ring added to stmt_deps (the statement uses A[z_1..z_e]). Citer lem-weil-pbc-popescu-lifting step 11 uses exactly the 'in particular' clause."
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "result": "accepted",
+  "note": "6 steps (agent proof from Stacks 00RS, 00RX, 00RV): the first fundamental exact sequence (new composed leaf: mapBaseChange, map, exact_mapBaseChange_map, map_surjective, Kaehler/Basic.lean:719/658/756/713 verified by L); Omega_{B/A} free on dz_j (00RX leaf); the splitting argument; B = A (x)_R R[z] and the base-change isomorphism mu (00RV node); c o u = mu forces u injective; the rank clause. Tool: lem-weil-pbc-polynomial-scalar-extension is a Mathlib leaf of another unit (passes the route check)."
+ }
 }
