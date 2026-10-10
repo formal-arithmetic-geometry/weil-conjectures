@@ -13,7 +13,7 @@
  },
  "kind": "statement",
  "title": "Naturality of the derived-composite isomorphism in the exact functor",
- "statement": "Let $\\mathcal A,\\mathcal B,\\mathcal C$ be abelian categories [def-sp-abelian], $\\mathcal A$ and $\\mathcal B$ with enough injectives, and $U:\\mathcal B\\to\\mathcal C$ left exact [def-sp-left-exact-additive]. Let $T,T':\\mathcal A\\to\\mathcal B$ be exact functors such that $T(I)$ and $T'(I)$ are $U$-acyclic [def-sp-acyclic] for every injective $I$ of $\\mathcal A$, and let $\\alpha:T\\to T'$ be a natural transformation. For an object $M$ of $\\mathcal A$ with injective resolution $M\\to I^\\bullet$ [def-sp-injective-resolutions], let $R^i(U\\alpha)_M:R^i(U\\circ T)(M)\\to R^i(U\\circ T')(M)$ be the map $\\mathcal H^i(U(\\alpha_{I^\\bullet}))$. Then for every $i\\geq0$ the canonical isomorphisms $R^i(U\\circ T)(M)\\cong R^iU(T(M))$ and $R^i(U\\circ T')(M)\\cong R^iU(T'(M))$ of [lem-sc-ext-derived-composite] carry $R^i(U\\alpha)_M$ to $R^iU(\\alpha_M)$.",
+ "statement": "Let $\\mathcal A,\\mathcal B,\\mathcal C$ be abelian categories [def-sp-abelian], $\\mathcal A$ and $\\mathcal B$ with enough injectives, and $U:\\mathcal B\\to\\mathcal C$ left exact [def-sp-left-exact-additive]. Let $T,T':\\mathcal A\\to\\mathcal B$ be exact functors such that $T(I)$ and $T'(I)$ are $U$-acyclic [def-sp-acyclic] for every injective $I$ of $\\mathcal A$, and let $\\alpha:T\\to T'$ be a natural transformation. For an object $M$ of $\\mathcal A$ with injective resolution $M\\to I^\\bullet$ [def-sp-injective-resolutions], let $R^i(U\\alpha)_M:R^i(U\\circ T)(M)\\to R^i(U\\circ T')(M)$ be the map $\\mathcal H^i(U(\\alpha_{I^\\bullet}))$. Since $T$ and $T'$ are exact, $T(M)\\to T(I^\\bullet)$ and $T'(M)\\to T'(I^\\bullet)$ are resolutions by $U$-acyclic objects; let $c_T^i:R^i(U\\circ T)(M)=\\mathcal H^i(U(T(I^\\bullet)))\\xrightarrow{\\sim}R^iU(T(M))$ and $c_{T'}^i:R^i(U\\circ T')(M)=\\mathcal H^i(U(T'(I^\\bullet)))\\xrightarrow{\\sim}R^iU(T'(M))$ be the comparison isomorphisms of item 2 of [lemma-weil-pbc-leray-acyclicity] for these resolutions (the canonical isomorphisms of [lem-sc-ext-derived-composite]). Then for every $i\\geq0$ one has $c_{T'}^i\\circ R^i(U\\alpha)_M=R^iU(\\alpha_M)\\circ c_T^i$.",
  "source": {
   "document": "literature/stacks-project/derived.tex",
   "place": "Derived Categories, Lemma Tag 015E (derived-lemma-leray-acyclicity, line 5717): the canonical map $F(A^\\bullet)\\to RF(A^\\bullet)$ for a bounded below complex of $F$-acyclics, natural in $A^\\bullet$; applied to the map of acyclic resolutions $\\alpha_{I^\\bullet}:T(I^\\bullet)\\to T'(I^\\bullet)$ lifting $\\alpha_M$"
@@ -23,22 +23,78 @@
   "def-sp-left-exact-additive",
   "def-sp-acyclic",
   "def-sp-injective-resolutions",
-  "lem-sc-ext-derived-composite"
+  "lem-sc-ext-derived-composite",
+  "lemma-weil-pbc-leray-acyclicity"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Choose an injective resolution $M\\to I^\\bullet$ in $\\mathcal A$. Exactness of $T$ and $T'$ carries it to exact bounded-below resolutions $T(M)\\to T(I^\\bullet)$ and $T'(M)\\to T'(I^\\bullet)$, and the components of $\\alpha$ give a morphism over $\\alpha_M$. By the hypotheses, every term is $U$-acyclic.",
+   "uses": [
+    "def-sp-injective-resolutions",
+    "def-sp-acyclic"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Lemma Tag 015M, proof: choose an injective resolution and apply the exact first functor"
+   }
+  },
+  {
+   "text": "Apply [lem-sc-acyclic-comparison-natural] with $v=U$ (on $\\mathcal B$, which has enough injectives), $F=T(M)$, $F'=T'(M)$, the $U$-acyclic resolutions $r:T(M)\\to T(I^\\bullet)$ and $r':T'(M)\\to T'(I^\\bullet)$ of Step 1, $h=\\alpha_M$ and $\\varphi=\\alpha_{I^\\bullet}$; the hypothesis $\\varphi^0\\circ r=r'\\circ h$ is the naturality square of $\\alpha$ for the augmentation $M\\to I^0$. Its comparison isomorphisms are the maps $c_T^i,c_{T'}^i$ of the statement (both are the comparison isomorphisms of item 2 of [lemma-weil-pbc-leray-acyclicity] for these resolutions), and its conclusion $c_{T'}^i\\circ\\mathcal H^i(U(\\alpha_{I^\\bullet}))=R^iU(\\alpha_M)\\circ c_T^i$ is the claim, since $R^i(U\\alpha)_M=\\mathcal H^i(U(\\alpha_{I^\\bullet}))$ by definition.",
+   "uses": [
+    "lem-sc-acyclic-comparison-natural",
+    "lemma-weil-pbc-leray-acyclicity"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Lemma Tag 015E, line 5717, naturality of the canonical map for a morphism of acyclic resolutions"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sp-injective-resolutions",
+  "def-sp-acyclic",
+  "lem-sc-acyclic-comparison-natural",
+  "lemma-weil-pbc-leray-acyclicity"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/derived.tex",
+  "place": "Lemma Tag 015E, naturality of the acyclic-resolution comparison"
+ },
  "mathlib_searches": [
   {
+   "tool": "leansearch",
+   "query": "naturality of derived functor comparison after an exact functor and an acyclic resolution",
+   "results": "No exact theorem found; only the injective-resolution formula was found.",
+   "date": "2026-10-11",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.rightDerived_map_eq",
+   "results": "CategoryTheory.Functor.rightDerived_map_eq; injective-resolution case only.",
+   "date": "2026-10-11",
+   "verdict": "generalization: injective-resolution case only"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "naturality of right derived functor isomorphism computed by an acyclic resolution",
+   "results": "CategoryTheory.InjectiveResolution.rightDerived_app_eq and rightDerived_map_eq; no arbitrary acyclic-resolution comparison theorem.",
+   "date": "2026-10-11",
+   "verdict": "generalization: injective-resolution case only"
+  },
+  {
    "tool": "grep",
-   "query": "grep -n 'label{lemma-leray-acyclicity}' literature/stacks-project/derived.tex",
-   "results": "Tag 015E found; no DAG node states naturality of the composite isomorphism.",
-   "date": "2026-10-10",
-   "verdict": "source located; Mathlib search left to the splitter"
+   "query": "rg -n 'rightDerived_map_eq|rightDerived_app_eq|derived.*composite' /home/ubuntu/weil-src-slopmaster2/.lake/packages/mathlib/Mathlib/CategoryTheory/Abelian",
+   "results": "RightDerived.lean contains injective-resolution formulas but no arbitrary acyclic-resolution naturality theorem.",
+   "date": "2026-10-11",
+   "verdict": "no match"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "R-eln",
@@ -54,5 +110,33 @@
   "slopmaster2": {
    "state": "none"
   }
- }
+ },
+ "split_report": {
+  "date": "2026-10-11",
+  "item": "lem-sc-ext-derived-composite-natural",
+  "worker": "stage1",
+  "summary": "Split the derived-composite naturality argument into the exact-functor resolution construction, a general acyclic-resolution comparison naturality statement, and the injective-resolution formula for the induced right-derived map.",
+  "blueprint": [
+   "thm-sc-p1-duality proof, Step 1: the locally free Ext/cohomology identification used for the Yoneda pairing; naturality in the first locally free argument"
+  ],
+  "tool_uses": [
+   {
+    "node": "lemma-weil-pbc-leray-acyclicity",
+    "why": "Generic acyclic-resolution comparison (Stacks 015E) defining the comparison isomorphisms of the statement; no Picard-duality node states it."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lemma-weil-pbc-leray-acyclicity",
+  "lemma-weil-pbc-leray-acyclicity"
+ ],
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-edn",
+  "group": "G1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-edn (reviewer sub-agent of L); spot-checked: Start Sat Oct 10 04:19:20 PM UTC 2026. Source Stacks derived.tex Tag 015E (derived-lemma-leray-acyclicity) and 015M; the item is abstract homological algebra (T,T' exact, alpha: T->T', U left exact, T(I),T'(I) U-acyclic) and true independently of the def-sc-ext-sheaf problem (in the consumer T=F^vee(x)-, Ext read as R^i Hom(F,-)(G)). New node lem-sc-acyclic-comparison-natural checked true: b.a and a'.phi are two maps I->J' over h from a resolution into an injective complex, hence homotopic, so H^n(v) of them agree; enough injectives on the source suffice (Stacks 015E; lemma-weil-pbc-leray-acyclicity's 'both categories' wording is its own lead_note). Cases n=0, alpha=id, T'=0 checked. No Mathlib match (rightDerived_map_eq line 164 is the injective case only); no slopmaster2 declaration (grep); blueprint_refs search found nothing. Tool uses: lemma-weil-pbc-leray-acyclicity accepted as generic tool; lem-weil-pbc-derived-functor-map-via-lift dropped (no longer used). FIX more, RETURN less: (C5) Step 2 identified the isomorphisms of lem-sc-ext-derived-composite with the Leray comparison from that node's proof; repaired by naming them in the item statement as the comparisons c_T, c_T' of item 2 of lemma-weil-pbc-leray-acyclicity (E7: precision only, same mathematics; stmt_deps + lemma-weil-pbc-leray-acyclicity). Fixes: dag/nodes/sec-picard-framework/lem-sc-ext-derived-composite-natural.json: statement: comparison isos named; proof: Step 2 rewritten to instantiate r,r',h,phi with the hypothesis phi^0 r = r' h from naturality of alpha, Step 3 removed (redundant: the new node's conclusion already contains R^iU(alpha_M)); proof_deps updated; split_report.tool_uses: via-lift entry removed; Step 1 TeX typo \\mathcal A without dollars. dag/nodes/sec-picard-framework/lem-sc-acyclic-comparison-natural.json: statement: plain-text (B4) rewritten in TeX, unused choices a,a',b removed, comparison isos c_I,c_I' named, same mathematics. End Sat Oct 10 04:20:52 PM UTC 2026.; 2 file(s) fixed by the reviewer"
+ },
+ "lead_note": "2026-10-10 L (R-edn): R-edn: lem-sc-ext-derived-composite states its isomorphism only as 'canonical' (its proof Step 3 makes it the comparison of item 2 of lemma-weil-pbc-leray-acyclicity); this item now names the isomorphisms c_T, c_T' as those comparisons. When lem-sc-ext-derived-composite is next touched, state that in its statement. The item is abstract and true independently of def-sc-ext-sheaf; its consumer lem-sc-p1-ext-locally-free-naturality reads Ext as R^i Hom(F,-)(G)."
 }

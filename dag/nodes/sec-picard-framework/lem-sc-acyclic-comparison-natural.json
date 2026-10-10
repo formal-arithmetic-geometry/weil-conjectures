@@ -1,0 +1,71 @@
+{
+ "id": "lem-sc-acyclic-comparison-natural",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-sc-p1-duality",
+   "place": "proof, Step 1: naturality of the acyclic-resolution comparison used to prove naturality of the derived-composite isomorphism",
+   "via": [
+    "lem-sc-ext-derived-composite-natural",
+    "lem-sc-p1-ext-locally-free-naturality"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Naturality of the acyclic-resolution comparison",
+ "statement": "Let $\\mathcal A,\\mathcal B$ be abelian categories [def-sp-abelian], $\\mathcal A$ with enough injectives, and let $v:\\mathcal A\\to\\mathcal B$ be a left exact additive functor [def-sp-left-exact-additive]. Let $F,F'$ be objects of $\\mathcal A$ and let $r:F\\to I^\\bullet$, $r':F'\\to I'^\\bullet$ be resolutions by $v$-acyclic objects [def-sp-acyclic] (that is, $I^m=I'^m=0$ for $m<0$ and the augmented complexes $0\\to F\\to I^0\\to I^1\\to\\cdots$, $0\\to F'\\to I'^0\\to I'^1\\to\\cdots$ are exact). Let $h:F\\to F'$ be a morphism and $\\varphi:I^\\bullet\\to I'^\\bullet$ a morphism of complexes with $\\varphi^0\\circ r=r'\\circ h$. Let $c_I^n:\\mathcal H^n(v(I^\\bullet))\\xrightarrow{\\sim}R^nv(F)$ and $c_{I'}^n:\\mathcal H^n(v(I'^\\bullet))\\xrightarrow{\\sim}R^nv(F')$ be the comparison isomorphisms of item 2 of [lemma-weil-pbc-leray-acyclicity] (induced by a morphism of complexes over the identity into an injective resolution [def-sp-injective-resolutions]). Then for every $n\\geq0$ one has $c_{I'}^n\\circ\\mathcal H^n(v(\\varphi))=R^nv(h)\\circ c_I^n$.",
+ "source": {
+  "document": "literature/stacks-project/derived.tex",
+  "place": "Derived Categories, Lemma Tag 015E (derived-lemma-leray-acyclicity, line 5717), naturality of the canonical map for morphisms of bounded-below acyclic complexes"
+ },
+ "stmt_deps": [
+  "def-sp-abelian",
+  "def-sp-left-exact-additive",
+  "def-sp-acyclic",
+  "def-sp-injective-resolutions",
+  "lemma-weil-pbc-leray-acyclicity"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "naturality of the comparison from an acyclic resolution to a right derived functor",
+   "results": "Search service returned an HTTP 500; no result could be verified.",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.rightDerived_map_eq",
+   "results": "CategoryTheory.Functor.rightDerived_map_eq in Mathlib.CategoryTheory.Abelian.RightDerived; this computes maps using injective resolutions but does not state the acyclic-resolution comparison naturality used here.",
+   "date": "2026-10-10",
+   "verdict": "generalization: injective-resolution case only"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "natural map from cohomology of an acyclic resolution to a right derived functor",
+   "results": "CategoryTheory.Functor.rightDerived_map_eq and CategoryTheory.InjectiveResolution.rightDerived_app_eq; neither states comparison naturality for arbitrary acyclic resolutions.",
+   "date": "2026-10-10",
+   "verdict": "generalization: injective-resolution case only"
+  },
+  {
+   "tool": "grep",
+   "query": "rg -n 'rightDerived_map_eq|acyclic.*resolution|comparison.*derived' /home/ubuntu/weil-src-slopmaster2/.lake/packages/mathlib/Mathlib/CategoryTheory",
+   "results": "Mathlib/CategoryTheory/Abelian/RightDerived.lean contains rightDerived_map_eq, but no theorem for arbitrary v-acyclic resolutions.",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "created": {
+  "item": "lem-sc-ext-derived-composite-natural",
+  "by": "worker",
+  "date": "2026-10-10"
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality"
+}

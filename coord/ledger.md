@@ -1954,3 +1954,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 16:20 L: merged deliver/K1/lem-sc-torsor-h1-ext-pushout (reviewer FIX; first push; new nodes: 0)
 - 16:20 L: merged deliver/H1/lem-sc-invert-s-cohomology-induction (reviewer FIX; first push; new nodes: 1)
 - 16:21 L: merged deliver/G1/lem-sc-etale-fibre-product-coproduct (reviewer FIX; first push; new nodes: 1)
+- 16:21 L: merged deliver/G1/lem-sc-ext-derived-composite-natural (reviewer FIX; first push; new nodes: 1)
