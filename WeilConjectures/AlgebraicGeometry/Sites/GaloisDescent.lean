@@ -8,6 +8,7 @@ module
 public import WeilConjectures.AlgebraicGeometry.Sites.CohomologyColimit
 public import WeilConjectures.AlgebraicGeometry.Sites.Hilbert90
 public import WeilConjectures.AlgebraicGeometry.Sites.PointCohomology
+public import WeilConjectures.SixFunctors.Etale.LowerShriek.OpenImmersion.Defs
 public import WeilConjectures.Mathlib.FieldTheory.Normal.Basic
 
 /-!
@@ -150,69 +151,82 @@ theorem existsUnique_map_eq_of_forall_map_eq
 
 section Product
 
-/-- The structure morphism of an étale `K`-scheme, as a morphism to the terminal object. -/
-noncomputable abbrev toEtalePoint (U : (Spec (.of K)).Etale) : U ⟶ etalePoint K :=
-  isTerminalEtalePoint.from U
-
 variable (L : Type u) [Field L] [Algebra K L] [Algebra.Etale K L]
 
 /-- The product `U ×_K Spec L` of an étale `K`-scheme `U` with the spectrum of a finite separable
-field extension `L`, as an object of the small étale site of `Spec K`. -/
+field extension `L`, as an object of the small étale site of `Spec K`: the base change of `U` to
+`Spec L`, viewed over `Spec K`. Its sections are the sections of the pushforward along
+`Spec L ⟶ Spec K` of the restriction of a sheaf to `Spec L`. -/
 noncomputable abbrev prodEtaleSpec (U : (Spec (.of K)).Etale) : (Spec (.of K)).Etale :=
-  pullback (toEtalePoint U) (toEtalePoint (etaleSpec K L))
+  (MorphismProperty.Over.map ⊤ (etaleSpec K L).prop).obj
+    ((MorphismProperty.Over.pullback @AlgebraicGeometry.Etale ⊤ (etaleSpec K L).hom).obj U)
+
+/-- The projection `U ×_K Spec L ⟶ U`. -/
+noncomputable def prodEtaleSpecFst (U : (Spec (.of K)).Etale) : prodEtaleSpec L U ⟶ U :=
+  MorphismProperty.Over.homMk (pullback.fst U.hom (etaleSpec K L).hom) pullback.condition
+
+/-- The projection `U ×_K Spec L ⟶ Spec L`. -/
+noncomputable def prodEtaleSpecSnd (U : (Spec (.of K)).Etale) :
+    prodEtaleSpec L U ⟶ etaleSpec K L :=
+  MorphismProperty.Over.homMk (pullback.snd U.hom (etaleSpec K L).hom) rfl
+
+variable {L} in
+lemma prodEtaleSpec_hom_ext {U W : (Spec (.of K)).Etale} {g₁ g₂ : W ⟶ prodEtaleSpec L U}
+    (h₁ : g₁ ≫ prodEtaleSpecFst L U = g₂ ≫ prodEtaleSpecFst L U)
+    (h₂ : g₁ ≫ prodEtaleSpecSnd L U = g₂ ≫ prodEtaleSpecSnd L U) : g₁ = g₂ := by
+  apply MorphismProperty.Over.Hom.ext
+  exact pullback.hom_ext congr($(h₁).left) congr($(h₂).left)
 
 /-- The projection `U ×_K Spec L ⟶ U` is surjective. -/
-lemma surjective_fst_prodEtaleSpec (U : (Spec (.of K)).Etale) :
-    Function.Surjective
-      (pullback.fst (toEtalePoint U) (toEtalePoint (etaleSpec K L))).left := by
-  let F := Etale.forget (Spec (.of K)) ⋙ Over.forget (Spec (.of K))
-  have e := PreservesPullback.iso_hom_fst F (toEtalePoint U)
-    (toEtalePoint (etaleSpec K L))
-  have : Nonempty (Spec (.of L)) := inferInstance
-  have hs : Surjective (F.map (toEtalePoint (etaleSpec K L))) := by
+lemma surjective_prodEtaleSpecFst (U : (Spec (.of K)).Etale) :
+    Function.Surjective (prodEtaleSpecFst L U).left := by
+  have : Surjective (etaleSpec K L).hom := by
     refine ⟨fun y ↦ ?_⟩
-    obtain ⟨z⟩ := ‹Nonempty (Spec (.of L))›
-    have : Subsingleton (F.obj (etalePoint K)) := inferInstanceAs (Subsingleton (Spec (.of K)))
-    exact ⟨z, Subsingleton.elim _ _⟩
-  have : Surjective (Limits.pullback.fst (F.map (toEtalePoint U))
-      (F.map (toEtalePoint (etaleSpec K L)))) := inferInstance
-  have : Surjective (F.map (pullback.fst (toEtalePoint U) (toEtalePoint (etaleSpec K L)))) := by
-    rw [← e]
-    infer_instance
-  exact this.surj
+    obtain ⟨z⟩ : Nonempty (Spec (.of L)) := inferInstance
+    have : Subsingleton (Spec (.of K)) := inferInstanceAs (Subsingleton (PrimeSpectrum K))
+    exact ⟨z, @Subsingleton.elim (Spec (.of K)) this _ _⟩
+  have h : Surjective (pullback.fst U.hom (etaleSpec K L).hom) := inferInstance
+  exact h.surj
 
 variable {L}
 
 /-- The action of a `K`-automorphism `σ` of `L` on `U ×_K Spec L`. -/
 noncomputable def prodEtaleSpecMap (U : (Spec (.of K)).Etale) (σ : L ≃ₐ[K] L) :
     prodEtaleSpec L U ⟶ prodEtaleSpec L U :=
-  pullback.map _ _ _ _ (𝟙 U) (etaleSpecMap σ.toAlgHom) (𝟙 _)
-    (isTerminalEtalePoint.hom_ext _ _) (isTerminalEtalePoint.hom_ext _ _)
+  MorphismProperty.Over.homMk (pullback.map _ _ _ _ (𝟙 _) (etaleSpecMap σ.toAlgHom).left (𝟙 _)
+    (by simp) (MorphismProperty.Over.w (etaleSpecMap σ.toAlgHom)).symm) (by
+      change pullback.map _ _ _ _ _ _ _ _ _ ≫ pullback.snd _ _ ≫ (etaleSpec K L).hom =
+        pullback.snd _ _ ≫ (etaleSpec K L).hom
+      rw [pullback.lift_snd_assoc, Category.assoc,
+        MorphismProperty.Over.w (etaleSpecMap σ.toAlgHom)])
 
 @[reassoc (attr := simp)]
 lemma prodEtaleSpecMap_fst (U : (Spec (.of K)).Etale) (σ : L ≃ₐ[K] L) :
-    prodEtaleSpecMap U σ ≫ pullback.fst _ _ = pullback.fst _ _ := by
-  rw [prodEtaleSpecMap, pullback.lift_fst, Category.comp_id]
+    prodEtaleSpecMap U σ ≫ prodEtaleSpecFst L U = prodEtaleSpecFst L U := by
+  apply MorphismProperty.Over.Hom.ext
+  exact (pullback.lift_fst _ _ _).trans (Category.comp_id _)
 
 @[reassoc (attr := simp)]
 lemma prodEtaleSpecMap_snd (U : (Spec (.of K)).Etale) (σ : L ≃ₐ[K] L) :
-    prodEtaleSpecMap U σ ≫ pullback.snd _ _ = pullback.snd _ _ ≫ etaleSpecMap σ.toAlgHom := by
-  rw [prodEtaleSpecMap, pullback.lift_snd]
+    prodEtaleSpecMap U σ ≫ prodEtaleSpecSnd L U =
+      prodEtaleSpecSnd L U ≫ etaleSpecMap σ.toAlgHom := by
+  apply MorphismProperty.Over.Hom.ext
+  exact pullback.lift_snd _ _ _
 
 /-- **Galois descent along `U ×_K Spec L ⟶ U`.** For a finite Galois extension `L/K`, a section
 of an abelian étale sheaf over `U ×_K Spec L` which is invariant under the automorphisms of
 `L/K` is the pullback of a unique section over `U`. -/
-theorem existsUnique_map_fst_eq [Normal K L]
+theorem existsUnique_map_prodEtaleSpecFst_eq [Normal K L]
     (F : Sheaf (Spec (.of K)).smallEtaleTopology AddCommGrpCat.{u + 1})
     (U : (Spec (.of K)).Etale) (x : F.obj.obj (op (prodEtaleSpec L U)))
     (hx : ∀ σ, F.obj.map (prodEtaleSpecMap U σ).op x = x) :
-    ∃! y, F.obj.map (pullback.fst _ _).op y = x := by
-  refine existsUnique_map_eq_of_forall_map_eq F _ (surjective_fst_prodEtaleSpec L U)
+    ∃! y, F.obj.map (prodEtaleSpecFst L U).op y = x := by
+  refine existsUnique_map_eq_of_forall_map_eq F _ (surjective_prodEtaleSpecFst L U)
     (prodEtaleSpecMap U) (fun E _ _ _ g₁ g₂ hg ↦ ?_) x hx
-  obtain ⟨φ₁, hφ₁⟩ := exists_etaleSpecMap_eq (g₁ ≫ pullback.snd _ _)
-  obtain ⟨φ₂, hφ₂⟩ := exists_etaleSpecMap_eq (g₂ ≫ pullback.snd _ _)
+  obtain ⟨φ₁, hφ₁⟩ := exists_etaleSpecMap_eq (g₁ ≫ prodEtaleSpecSnd L U)
+  obtain ⟨φ₂, hφ₂⟩ := exists_etaleSpecMap_eq (g₂ ≫ prodEtaleSpecSnd L U)
   obtain ⟨σ, hσ⟩ := φ₁.exists_comp_eq_of_normal φ₂
-  refine ⟨σ, pullback.hom_ext ?_ ?_⟩
+  refine ⟨σ, prodEtaleSpec_hom_ext ?_ ?_⟩
   · rw [Category.assoc, prodEtaleSpecMap_fst, hg]
   · rw [Category.assoc, prodEtaleSpecMap_snd, ← Category.assoc, ← hφ₁, ← hφ₂,
       etaleSpecMap_comp, hσ]
