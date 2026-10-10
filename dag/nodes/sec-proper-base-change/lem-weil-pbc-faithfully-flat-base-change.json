@@ -2,7 +2,7 @@
  "id": "lem-weil-pbc-faithfully-flat-base-change",
  "kind": "statement",
  "title": "Faithful flatness is stable under ring base change",
- "statement": "Let R -> S be a faithfully flat map of commutative rings [def-weil-pbc-faithfully-flat-ring-map], and let R -> R' be any ring map. Then the base-changed map R' -> R' tensor_R S, r' |-> r' tensor 1, is faithfully flat [def-weil-pbc-faithfully-flat-ring-map].",
+ "statement": "Let $R\\to S$ be a faithfully flat homomorphism of commutative rings [def-weil-pbc-faithfully-flat-ring-map], and let $R\\to R'$ be any homomorphism of commutative rings. Then the base-change map $R'\\to R'\\otimes_RS$, $r'\\mapsto r'\\otimes1$, is faithfully flat [def-weil-pbc-faithfully-flat-ring-map]; equivalently, $R'\\otimes_RS$, an $R'$-module through the first factor, is a faithfully flat $R'$-module.",
  "source": {
   "document": "literature/stacks-project/algebra.tex",
   "place": "Algebra, Lemma Tag 00HI (lemma-flat-base-change, line 8889), Lemma Tag 00FI (lemma-surjective-spec-radical-ideal, line 5822), and Lemma Tag 00HQ (lemma-ff-rings, line 9164)"
@@ -34,10 +34,36 @@
    "results": "No declaration combines faithful flatness with the tensor-product base-change map; only separate flatness and spectrum criteria occur",
    "date": "2026-10-10",
    "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rn 'baseChange\\|instFaithfullyFlatTensorProduct\\|FaithfullyFlat.*tensor\\|IsStableUnderBaseChange' Mathlib/RingTheory/Flat/FaithfullyFlat/*.lean Mathlib/RingTheory/RingHom/FaithfullyFlat.lean; then sed -n 540,575p Mathlib/RingTheory/Flat/FaithfullyFlat/Basic.lean and sed -n 1,90p Mathlib/RingTheory/RingHom/FaithfullyFlat.lean",
+   "results": "Basic.lean:558-566: `/-- Faithful flatness is preserved by arbitrary base change. -/ instance (S : Type*) [CommRing S] [Algebra R S] [Module.FaithfullyFlat R M] : Module.FaithfullyFlat S (S ⊗[R] M)` (unnamed, auto-name Module.FaithfullyFlat.instTensorProduct); RingHom/FaithfullyFlat.lean:75 `lemma isStableUnderBaseChange : IsStableUnderBaseChange FaithfullyFlat`; RingHom/FaithfullyFlat.lean:29 faithfullyFlat_algebraMap_iff",
+   "date": "2026-10-10",
+   "verdict": "match: Module.FaithfullyFlat.instTensorProduct (Basic.lean:559); the earlier grep pattern 'FaithfullyFlat.*baseChange' missed it because the instance is unnamed and RingHom.FaithfullyFlat.isStableUnderBaseChange lies outside the Mathlib/RingTheory/Flat pattern match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "faithful flatness is preserved by arbitrary base change S ⊗[R] M faithfully flat over S",
+   "results": "Module.FaithfullyFlat.instTensorProduct (Mathlib.RingTheory.Flat.FaithfullyFlat.Basic, ∀ R M [CommRing R] [AddCommGroup M] [Module R M] (S) [CommRing S] [Algebra R S] [Module.FaithfullyFlat R M], Module.FaithfullyFlat S (S ⊗[R] M)); RingHom.FaithfullyFlat.isStableUnderBaseChange (Mathlib.RingTheory.RingHom.FaithfullyFlat); Module.Flat.baseChange; RingHom.Flat.isStableUnderBaseChange",
+   "date": "2026-10-10",
+   "verdict": "match: Module.FaithfullyFlat.instTensorProduct"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "If M is a faithfully flat R-module and S is an R-algebra then S ⊗_R M is a faithfully flat S-module",
+   "results": "Module.FaithfullyFlat.instTensorProduct (informal: 'Faithful Flatness is Preserved under Base Change'); Module.Flat.of_flat_tensorProduct; Module.Flat.iff_flat_tensorProduct; RingHom.FaithfullyFlat.isStableUnderBaseChange; RingHom.faithfullyFlat_algebraMap_iff; Module.FaithfullyFlat.trans",
+   "date": "2026-10-10",
+   "verdict": "match: Module.FaithfullyFlat.instTensorProduct"
   }
  ],
- "mathlib_match": null,
- "status": "unsplit",
+ "mathlib_match": {
+  "declaration": "Module.FaithfullyFlat.instTensorProduct",
+  "file": "Mathlib/RingTheory/Flat/FaithfullyFlat/Basic.lean",
+  "line": 559,
+  "how": "specializes in one line: the instance `instance (S : Type*) [CommRing S] [Algebra R S] [Module.FaithfullyFlat R M] : Module.FaithfullyFlat S (S ⊗[R] M)` (Basic.lean:558-566, docstring 'Faithful flatness is preserved by arbitrary base change') with its R := R, its S := R' (algebra via R → R') and M := S (R-module via R → S, faithfully flat by [def-weil-pbc-faithfully-flat-ring-map], matched to Module.FaithfullyFlat) gives Module.FaithfullyFlat R' (R' ⊗[R] S) for the left R'-module structure, which is the module structure of the ring map r' ↦ r' ⊗ 1 (Algebra.TensorProduct.includeLeft); RingHom.faithfullyFlat_algebraMap_iff (Mathlib/RingTheory/RingHom/FaithfullyFlat.lean:29) turns it into RingHom.FaithfullyFlat of that map. Ring-map form for any pushout square: RingHom.FaithfullyFlat.isStableUnderBaseChange (Mathlib/RingTheory/RingHom/FaithfullyFlat.lean:75). Source read with sed -n 2026-10-10."
+ },
+ "status": "mathlib",
  "merged_into": null,
  "created": {
   "by": "worker",
@@ -57,5 +83,17 @@
   }
  },
  "chapter": "sec-proper-base-change",
- "unit": "sk-thm-p1"
+ "unit": "sk-thm-p1",
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "lem-weil-pbc-faithfully-flat-base-change",
+  "worker": "stage1",
+  "summary": "Statement rewritten from plain text into the DAG's TeX style, content unchanged (plus the equivalent module form). The earlier three searches (created by the worker of lem-weil-pbc-geometrically-regular-descent) reported no match; repeated with grep, LeanSearch and LeanFinder they find the exact statement Module.FaithfullyFlat.instTensorProduct (Mathlib/RingTheory/Flat/FaithfullyFlat/Basic.lean:559), source read, and the ring-map form RingHom.FaithfullyFlat.isStableUnderBaseChange. The node is made a Mathlib leaf instead of split; no proof steps, no new nodes. The Stacks route it would follow (00HI flat base change, 00HQ faithfully flat iff flat and Spec surjective, 00FI-style surjectivity under base change) is carried by the existing nodes lem-weil-pbc-flat-module-base-change, lem-weil-pbc-faithfully-flat-surjective-spectrum, lem-weil-pbc-spec-surjective-base-change and lem-weil-pbc-flat-surjective-spectrum-faithfully-flat, not needed here. Tags 00HI, 00HQ, 00FI verified in stacks-project/tags/tags."
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "result": "accepted",
+  "note": "Mathlib leaf: the base-change instance Module.FaithfullyFlat S (S (x)[R] M) (FaithfullyFlat/Basic.lean:559, verified by L) with RingHom.faithfullyFlat_algebraMap_iff; statement rewritten in TeX."
+ }
 }
