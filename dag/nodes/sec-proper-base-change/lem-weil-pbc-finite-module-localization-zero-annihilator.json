@@ -11,9 +11,48 @@
   "def-weil-finitely-generated-module",
   "def-weil-pbc-module-localization"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Since $M$ is finitely generated [def-weil-finitely-generated-module], choose $m_1,\\dots,m_n\\in M$ ($n\\ge 0$) such that every $m\\in M$ can be written $m=\\sum_{i=1}^n a_im_i$ with $a_i\\in A$.",
+   "uses": [
+    "def-weil-finitely-generated-module"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/exercises.tex",
+    "place": "Exercise 076A (exercise-localize-finite-module-zero), stated without proof; the form sM=0 as used in smoothing.tex, proof of Lemma 07FC"
+   }
+  },
+  {
+   "text": "For each $i$, $m_i/1=0$ in $S^{-1}M=0$; by the description of the kernel of the localization map in [def-weil-pbc-module-localization] ($m/1=0$ iff $um=0$ for some $u\\in S$; this is the hypothesis as phrased in the statement) there is $t_i\\in S$ with $t_im_i=0$.",
+   "uses": [
+    "def-weil-pbc-module-localization"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/exercises.tex",
+    "place": "Exercise 076A (exercise-localize-finite-module-zero), stated without proof; the form sM=0 as used in smoothing.tex, proof of Lemma 07FC"
+   }
+  },
+  {
+   "text": "Put $s=t_1t_2\\cdots t_n$ ($s=1$ if $n=0$); $s\\in S$ since $S$ is multiplicative and contains $1$. For $m=\\sum_i a_im_i\\in M$, commutativity of $A$ gives $sm=\\sum_i a_i\\big(\\prod_{j\\ne i}t_j\\big)(t_im_i)=0$. Hence $sM=0$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/exercises.tex",
+    "place": "Exercise 076A (exercise-localize-finite-module-zero), stated without proof; the form sM=0 as used in smoothing.tex, proof of Lemma 07FC"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-finitely-generated-module",
+  "def-weil-pbc-module-localization"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/exercises.tex",
+  "place": "Exercise 076A (an exercise: the Stacks project gives no proof); the standard generator argument written by the worker"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -49,10 +88,45 @@
    "results": "no uniform-annihilator statement; IsTorsion' lemmas only for Submonoid.powers p (Torsion/Basic.lean:892, :900; PID.lean:172); LocalizedModule.exists_subsingleton_away (Support.lean:222) for p.primeCompl with conclusion Subsingleton (LocalizedModule.Away f M), proved via Module.support_eq_zeroLocus",
    "date": "2026-10-10",
    "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "If M is a finite R-module and LocalizedModule S M is trivial then there exists s in S annihilating M",
+   "results": "IsLocalization.map_eq_zero_iff, LocalizedModule.mem_ker_mkLinearMap_iff, LocalizedModule.subsingleton_iff (elementwise only), LocalizedModule.exists_subsingleton_away (Mathlib.RingTheory.Support, S = p.primeCompl only), LocalizedModule.subsingleton_iff_ker_eq_top, LocalizedModule.subsingleton_iff_disjoint (Mathlib.RingTheory.Spectrum.Prime.Module, S = powers f)",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "finitely generated module with zero localization at multiplicative set S: the annihilator of M meets S",
+   "results": "Module.mem_support_iff_of_finite (Mathlib.RingTheory.Support; primes only), Module.Finite.of_localizationSpan*, Submodule.fg_of_localized_maximal",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "Module.Finite, LocalizedModule, Module.annihilator",
+   "results": "none",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "local_search",
+   "query": "subsingleton_iff_disjoint",
+   "results": "LocalizedModule.subsingleton_iff_disjoint (RingTheory/Spectrum/Prime/Module.lean:37; S = powers f, conclusion about support)",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rn subsingleton Algebra/Module/LocalizedModule/*.lean RingTheory/Localization/*.lean | grep -i 'finite|FG|annihilator|exists'; grep -rn annihilator Mathlib | grep -i 'disjoint|submonoid|localized'; grep -rn \"IsTorsion'\" Mathlib | grep -i 'finite|annihilator|exists'; sed -n 199,232p RingTheory/Support.lean; sed -n 803,813p Algebra/Module/Torsion/Basic.lean",
+   "results": "no general-S statement; the generator-product argument occurs only inside proofs: Module.mem_support_iff_of_finite (Support.lean:199, S = p.primeCompl), Submodule.annihilator_top_inter_nonZeroDivisors (Torsion/Basic.lean:803, S = R⁰ only), AlgebraicGeometry SpreadingOut.lean:180 (inline)",
+   "date": "2026-10-10",
+   "verdict": "no match (special cases S = primeCompl, R⁰ only)"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "worker",
@@ -72,5 +146,17 @@
   }
  },
  "chapter": "sec-proper-base-change",
- "unit": "sk-thm-p1"
+ "unit": "sk-thm-p1",
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "lem-weil-pbc-finite-module-localization-zero-annihilator",
+  "worker": "stage1",
+  "summary": "Re-searched Mathlib with LeanSearch, LeanFinder, Loogle, local_search and grep: Mathlib has LocalizedModule.subsingleton_iff (S^{-1}M=0 iff every m is killed by some r in S, the node's phrasing) but the uniform annihilator for finite M only for S = p.primeCompl (Module.mem_support_iff_of_finite, LocalizedModule.exists_subsingleton_away) and S = R⁰ (Submodule.annihilator_top_inter_nonZeroDivisors); no general-S statement, so not a leaf. Split into three elementary steps (generators m_i, t_i m_i = 0 from the kernel of m -> m/1, s = prod t_i). Stacks 076A is an exercise without proof and states the conclusion as M_f = 0 for some f in S, which is equivalent (f^k M = 0 with f^k in S) and weaker-looking than the node's sM = 0; the node's form is the one used in 07FC. Statement unchanged; stmt_deps unchanged."
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "result": "accepted",
+  "note": "3 elementary steps (agent proof of Stacks Exercise 076A): generators; each killed by some t_i in S by the kernel description in def-weil-pbc-module-localization; s = product. Not a leaf: Mathlib has the single annihilator only for S = p.primeCompl or nonzerodivisors."
+ }
 }
