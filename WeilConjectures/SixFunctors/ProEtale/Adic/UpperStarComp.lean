@@ -66,4 +66,32 @@ lemma adicUpperStarIsoLowerStarInv_hom_app_hom {X Y : Scheme.{u}} (e : X ≅ Y)
   simp only [adicLowerStarEquivalence, lowerStarEquivalence]
   rfl
 
+/-- The inverse of the composition isomorphism of `ℓ`-adic pullbacks on underlying sheaves. -/
+lemma adicUpperStarComp_inv_app_hom {R S T : Scheme.{u}} (h₁ : T ⟶ S) (h₂ : S ⟶ R)
+    (M : AdicSheaf l R) :
+    ((adicUpperStarComp l h₁ h₂).inv.app M).hom =
+      (upperStarComp (WeilCoefficients.{u} l) h₁ h₂).inv.app M.X := by
+  have := Iso.ext (α := (AdicSheaf.forget _).mapIso ((adicUpperStarComp l h₁ h₂).app M))
+    (β := (upperStarComp (WeilCoefficients.{u} l) h₁ h₂).app M.X)
+    (adicUpperStarComp_hom_app_hom h₁ h₂ M)
+  exact congrArg Iso.inv this
+
+/-- The inverse of `e^* ≅ (e⁻¹)_*` for `ℓ`-adic sheaves on underlying sheaves. -/
+lemma adicUpperStarIsoLowerStarInv_inv_app_hom {X Y : Scheme.{u}} (e : X ≅ Y)
+    (M : AdicSheaf l Y) :
+    ((adicUpperStarIsoLowerStarInv l e).inv.app M).hom =
+      (upperStarIsoLowerStarInv (WeilCoefficients.{u} l) e).inv.app M.X := by
+  have := Iso.ext (α := (AdicSheaf.forget _).mapIso ((adicUpperStarIsoLowerStarInv l e).app M))
+    (β := (upperStarIsoLowerStarInv (WeilCoefficients.{u} l) e).app M.X)
+    (adicUpperStarIsoLowerStarInv_hom_app_hom e M)
+  exact congrArg Iso.inv this
+
+/-- The inverse of the congruence isomorphism of `ℓ`-adic pullbacks on underlying sheaves. -/
+lemma adicUpperStarCongr_inv_app_hom {Z Y : Scheme.{u}} {g g' : Z ⟶ Y} (h : g = g')
+    (M : AdicSheaf l Y) :
+    ((adicUpperStarCongr l h).inv.app M).hom =
+      (upperStarCongr (WeilCoefficients.{u} l) h).inv.app M.X := by
+  subst h
+  rfl
+
 end AlgebraicGeometry.ProEtale
