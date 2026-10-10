@@ -159,6 +159,37 @@ noncomputable def mapHom (g : X ⟶ Y) : Y.Pic →* X.Pic :=
 lemma mapHom_apply (g : X ⟶ Y) (L : Y.Pic) : mapHom g L = map g L :=
   rfl
 
+/-- Isomorphic invertible modules have the same class. -/
+lemma ofIsInvertible_eq_of_iso {M N : Y.Modules} [Modules.IsInvertible M]
+    [Modules.IsInvertible N] (e : M ≅ N) : ofIsInvertible M = ofIsInvertible N :=
+  (eq_ofIsInvertible_iff _ N).2 ⟨ofIsInvertibleIso M ≪≫ e⟩
+
+/-- Invertible modules with the same class are isomorphic. -/
+lemma nonempty_iso_of_ofIsInvertible_eq {M N : Y.Modules} [Modules.IsInvertible M]
+    [Modules.IsInvertible N] (h : ofIsInvertible M = ofIsInvertible N) : Nonempty (M ≅ N) := by
+  obtain ⟨e⟩ := (eq_ofIsInvertible_iff _ N).1 h
+  exact ⟨(ofIsInvertibleIso M).symm ≪≫ e⟩
+
+/-- Every class is the class of its representative. -/
+lemma ofIsInvertible_fromSkeleton (L : Y.Pic) :
+    ofIsInvertible ((fromSkeleton Y.Modules).obj L.val) = L :=
+  ((eq_ofIsInvertible_iff L _).2 ⟨Iso.refl _⟩).symm
+
+lemma ofIsInvertible_unit : ofIsInvertible (𝟙_ Y.Modules) = 1 :=
+  rfl
+
+/-- The class of a tensor product of invertible modules is the product of their classes. -/
+lemma ofIsInvertible_tensorObj (M N : Y.Modules) [Modules.IsInvertible M]
+    [Modules.IsInvertible N] : ofIsInvertible (M ⊗ N) = ofIsInvertible M * ofIsInvertible N :=
+  ofIsInvertible_eq_of_iso ((ofIsInvertibleIso M).symm ⊗ᵢ (ofIsInvertibleIso N).symm)
+
+/-- The class of the dual of an invertible module is the inverse of its class. -/
+lemma ofIsInvertible_dual (M : Y.Modules) [Modules.IsInvertible M] :
+    ofIsInvertible Mᵛ = (ofIsInvertible M)⁻¹ := by
+  obtain ⟨d⟩ := Modules.nonempty_tensorObj_dual_iso_unit M
+  refine eq_inv_of_mul_eq_one_right ?_
+  rw [← ofIsInvertible_tensorObj, ofIsInvertible_eq_of_iso d, ofIsInvertible_unit]
+
 end Scheme.Pic
 
 variable {X S : Scheme.{u}}
