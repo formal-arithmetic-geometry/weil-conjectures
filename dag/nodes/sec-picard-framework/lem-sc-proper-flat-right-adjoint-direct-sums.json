@@ -22,12 +22,57 @@
   "def-weil-pbc-scheme-conventions",
   "def-weil-proper-morphism",
   "def-weil-flat-morphism",
+  "def-sbc-locally-finite-presentation",
   "def-pc-derived-category",
   "def-pc-derived-direct-image"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Since f is proper and Y is quasi-compact and quasi-separated, X is quasi-compact and quasi-separated, so the statements about D_QCoh below apply on X as well as on Y. Let P be any perfect object of D_QCoh(X). Apply [lem-pc-proper-support-perfect-direct-image] with $E=P$ and $\\mathcal G^\\bullet=\\mathcal O_X$ in degree 0: $\\mathcal O_X$ is of finite presentation, flat over Y because f is flat, and its support X is proper over Y because f is proper; as $P\\otimes^L\\mathcal O_X=P$, this gives that Rf_*P is perfect on Y (Stacks 0B91 argument). By [lem-pc-perfect-object-compact] on Y it is compact. Therefore for every family (K_i) in D_QCoh(Y), the canonical map $\\bigoplus_i \\operatorname{Hom}(Rf_*P,K_i) \\to \\operatorname{Hom}(Rf_*P,\\bigoplus_i K_i)$ is an isomorphism.",
+   "uses": [
+    "lem-pc-proper-support-perfect-direct-image",
+    "lem-pc-perfect-object-compact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/duality.tex",
+    "place": "Tag 0E4H (Lemma 48.12.1), proof"
+   }
+  },
+  {
+   "text": "Let $u:\\bigoplus_i a(K_i)\\to a(\\bigoplus_i K_i)$ be the canonical morphism induced by the coproduct inclusions and functoriality of a. Adjunction gives $\\operatorname{Hom}(P,a(\\bigoplus_i K_i))\\cong\\operatorname{Hom}(Rf_*P,\\bigoplus_i K_i)$ and $\\operatorname{Hom}(P,a(K_i))\\cong\\operatorname{Hom}(Rf_*P,K_i)$. By [lem-pc-perfect-object-compact], P is compact, so $\\operatorname{Hom}(P,\\bigoplus_i a(K_i))\\cong\\bigoplus_i\\operatorname{Hom}(P,a(K_i))$; by Step 1 and the compactness of $Rf_*P$, the resulting map to $\\operatorname{Hom}(P,a(\\bigoplus_i K_i))$ is an isomorphism for every perfect P.",
+   "uses": [
+    "lem-pc-proper-support-perfect-direct-image",
+    "lem-pc-perfect-object-compact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/duality.tex",
+    "place": "Tag 0E4H (Lemma 48.12.1), adjunction Hom calculation"
+   }
+  },
+  {
+   "text": "Let C be the cone of u. By Step 2 and the long exact Hom sequence, $\\operatorname{Hom}(P[n],C)=0$ for every perfect P and every $n\\in\\mathbf Z$. The class of A with $\\operatorname{Hom}(A[n],C)=0$ for all n is closed under shifts, cones, retracts, and arbitrary direct sums, and contains all perfect objects. By [lem-pc-derived-qcoh-perfect-generation] it contains every object, hence it contains C; the identity of C is zero and C=0. Thus u is an isomorphism, so a commutes with the family of direct sums.",
+   "uses": [
+    "lem-pc-derived-qcoh-perfect-generation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/duality.tex",
+    "place": "Tag 0E4H (Lemma 48.12.1), conclusion after the Hom calculation"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-proper-support-perfect-direct-image",
+  "lem-pc-perfect-object-compact",
+  "lem-pc-derived-qcoh-perfect-generation"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/duality.tex",
+  "place": "Tag 0E4H (Lemma 48.12.1); local source unavailable"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -52,12 +97,31 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-sc-proper-flat-right-adjoint-restriction-open",
   "by": "worker",
   "date": "2026-10-10"
  },
  "chapter": "sec-picard-framework",
- "unit": "sk-thm-picard-duality"
+ "unit": "sk-thm-picard-duality",
+ "split_report": {
+  "date": "2026-10-11",
+  "item": "lem-sc-proper-flat-right-adjoint-direct-sums",
+  "worker": "stage1",
+  "summary": "Split Tag 0E4H into the perfect direct-image prerequisite, the adjunction and compactness Hom calculation, and the perfect-generation argument proving the canonical direct-sum map is an isomorphism.",
+  "blueprint": "The three steps realize the direct-sum preservation input to the proper-flat support argument in lem-sc-finite-duality.",
+  "tool_uses": []
+ },
+ "tool_uses": [
+  "lem-pc-proper-support-perfect-direct-image"
+ ],
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-pfd2203",
+  "group": "F1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-pfd2203 (reviewer sub-agent of L); spot-checked: Steps 1-3 against Tag 0E4H: adjunction Hom calculation, compactness of P on X and Rf_*P on Y (lem-pc-perfect-object-compact), cone argument via lem-pc-derived-qcoh-perfect-generation (Hom-orthogonal class closed under shifts/cones/retracts/sums); X qcqs since f proper over qcqs Y (now stated in Step 1). FIX more, RETURN less: class (b) new node lem-sc-proper-flat-perfect-direct-image-perfect is a special case of existing lem-pc-proper-support-perfect-direct-image (Tag 0A1H, finite presentation, E perfect, G=O_X flat with proper support; this is how Stacks 0B91 is proved), and its source tag 0B6G was the Noetherian version; dropped it, Step 1 now cites lem-pc-proper-support-perfect-direct-image with E=P, G=O_X, hypotheses checked; uses/proof_deps updated; that sk-thm-picard-semicon node accepted as a generic tool use (C7/C8: perfectness of a proper flat direct image).; 1 file(s) fixed by the reviewer"
+ }
 }
