@@ -1,0 +1,75 @@
+{
+ "id": "lem-weil-pbc-fibre-product-map-affine",
+ "kind": "statement",
+ "title": "Product over a fixed base of affine morphisms is affine",
+ "statement": "Let $S$ be a scheme [def-pc-scheme], let $X'\\to S$, $X\\to S$, $T'\\to S$, $T\\to S$ be morphisms of schemes, and let $a:X'\\to X$ and $c:T'\\to T$ be morphisms over $S$ (commuting with the maps to $S$). If $a$ and $c$ are affine [pqf-def-affine-morphism], then the induced morphism $a\\times_Sc:X'\\times_ST'\\to X\\times_ST$ of fibre products [def-pc-fibre-product] (with components $a\\circ\\mathrm{pr}_1$ and $c\\circ\\mathrm{pr}_2$) is affine.",
+ "source": {
+  "document": "literature/stacks-project/morphisms.tex",
+  "place": "Morphisms, Lemmas 01SD (morphisms-lemma-base-change-affine, line 1982) and 01SC (morphisms-lemma-composition-affine, line 1970): a x_S c is the composite of X' x_S T' -> X x_S T' (base change of a along X x_S T' -> X) and X x_S T' -> X x_S T (base change of c along X x_S T -> T)"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "pqf-def-affine-morphism",
+  "def-pc-fibre-product"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "morphism property stable under base change and composition, pullback.map of two morphisms satisfying P satisfies P",
+   "results": "CategoryTheory.MorphismProperty.pullback_map, IsStableUnderBaseChange.mk', baseChange_map' (Mathlib.CategoryTheory.MorphismProperty.Limits)",
+   "date": "2026-10-10",
+   "verdict": "generalization: MorphismProperty.pullback_map (now pullbackMap) for P = IsAffineHom"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "map between fibre products X' ×_S Y' → X ×_S Y induced by morphisms with property P stable under base change and composition has property P",
+   "results": "MorphismProperty.baseChange_map', baseChange_map, pullback_fst, pullback_map, baseChange_obj (Mathlib.CategoryTheory.MorphismProperty.Limits)",
+   "date": "2026-10-10",
+   "verdict": "generalization: MorphismProperty.pullback_map"
+  },
+  {
+   "tool": "local_search",
+   "query": "CategoryTheory.MorphismProperty.pullbackMap (project ~/weil-conjectures-slopmaster2)",
+   "results": "CategoryTheory.MorphismProperty.pullbackMap in .lake/packages/mathlib/Mathlib/CategoryTheory/MorphismProperty/Limits.lean (index: unavailable, name found)",
+   "date": "2026-10-10",
+   "verdict": "exists"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -n 'theorem pullbackMap\\|alias pullback_map\\|isAffineHom_isStableUnderBaseChange\\|IsMultiplicative @IsAffineHom' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/CategoryTheory/MorphismProperty/Limits.lean and AlgebraicGeometry/Morphisms/Affine.lean",
+   "results": "Limits.lean:254 theorem pullbackMap [IsStableUnderBaseChange P] [P.IsStableUnderComposition] ... (h₁ : P i₁) (h₂ : P i₂) (e₁ : f = i₁ ≫ f') (e₂ : g = i₂ ≫ g') : P (pullback.map f g f' g' i₁ i₂ (𝟙 _) _ _); deprecated alias pullback_map (line 275); Affine.lean:172 instance isAffineHom_isStableUnderBaseChange; Affine.lean:69 instance IsMultiplicative @IsAffineHom (gives IsStableUnderComposition)",
+   "date": "2026-10-10",
+   "verdict": "generalization that specializes in one line"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "CategoryTheory.MorphismProperty.pullbackMap",
+  "file": "Mathlib/CategoryTheory/MorphismProperty/Limits.lean",
+  "line": 254,
+  "how": "specializes in one line: MorphismProperty.pullbackMap (P := @IsAffineHom) ha hc e₁ e₂, the instances IsStableUnderBaseChange @IsAffineHom (isAffineHom_isStableUnderBaseChange, Morphisms/Affine.lean:172) and IsStableUnderComposition @IsAffineHom (from IsMultiplicative, Affine.lean:69) being found automatically; schemes have all pullbacks. Its conclusion is IsAffineHom (pullback.map f g f' g' a c (𝟙 S) _ _), the map a ×_S c. Source read 2026-10-10."
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-fibre-product-affine-transition",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1"
+}

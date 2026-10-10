@@ -1,0 +1,67 @@
+{
+ "id": "lem-weil-pbc-affine-composition",
+ "kind": "statement",
+ "title": "Composition of affine morphisms is affine",
+ "statement": "Let $f:X\\to Y$ and $g:Y\\to Z$ be affine morphisms of schemes [pqf-def-affine-morphism] [def-pc-scheme]. Then $g\\circ f:X\\to Z$ is affine.",
+ "source": {
+  "document": "literature/stacks-project/morphisms.tex",
+  "place": "Morphisms, Lemma 01SC (morphisms-lemma-composition-affine, morphisms.tex line 1970)"
+ },
+ "stmt_deps": [
+  "pqf-def-affine-morphism",
+  "def-pc-scheme"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "composition of affine morphisms of schemes is affine",
+   "results": "AlgebraicGeometry.instIsAffineHomCompScheme, instIsMultiplicativeSchemeIsAffineHom (Mathlib.AlgebraicGeometry.Morphisms.Affine); IsAffineHom.comp_iff, IsAffineHom.of_comp (Morphisms.Separated)",
+   "date": "2026-10-10",
+   "verdict": "match: instIsAffineHomCompScheme"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.IsAffineHom (CategoryTheory.CategoryStruct.comp _ _)",
+   "results": "AlgebraicGeometry.instIsAffineHomCompScheme (Morphisms.Affine), IsAffineHom.of_comp, IsAffineHom.comp_iff (Morphisms.Separated)",
+   "date": "2026-10-10",
+   "verdict": "match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -n 'instance\\|IsAffineHom (f ≫ g)' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicGeometry/Morphisms/Affine.lean",
+   "results": "Affine.lean:61 instance [IsAffineHom f] [IsAffineHom g] : IsAffineHom (f ≫ g); Affine.lean:69 instance MorphismProperty.IsMultiplicative @IsAffineHom",
+   "date": "2026-10-10",
+   "verdict": "match"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "AlgebraicGeometry.instIsAffineHomCompScheme",
+  "file": "Mathlib/AlgebraicGeometry/Morphisms/Affine.lean",
+  "line": 61,
+  "how": "exact: the instance [IsAffineHom f] [IsAffineHom g] : IsAffineHom (f ≫ g) (Mathlib writes g∘f as f ≫ g); IsAffineHom is Mathlib's affine morphism, the match of pqf-def-affine-morphism. Source read 2026-10-10."
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-fibre-product-affine-transition",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1"
+}

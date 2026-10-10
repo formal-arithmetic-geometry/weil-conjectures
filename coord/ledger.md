@@ -813,3 +813,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 03:09 L: reviewed lem-weil-pbc-completion-at-quasi-finite-prime (8 steps, +1 node, leaf demoted), lem-weil-pbc-cotangent-complex-symmetric-algebra (statement corrected: Stacks 07EV false, HUMAN.md), lem-weil-pbc-coherent-modules-kernel-cokernel-sum (7 steps, +3), lem-weil-pbc-etale-residue-polynomial-lift (4 steps), lem-weil-pbc-faithfully-flat-base-change (Mathlib leaf): accepted.
 - 03:14 L: reviewed lem-weil-pbc-finite-free-resolution-noetherian (4 steps, 0 new): accepted.
 - 03:15 L: reviewed lem-weil-pbc-finite-module-complete-over-complete-noetherian (3 steps, 0 new): accepted.
+- 03:16 L: reviewed lem-weil-pbc-fibre-product-affine-transition (4 steps, +3 leaves), lem-weil-pbc-finite-gl-dim-regular-local (5 steps, +00OA, +00OB): accepted.

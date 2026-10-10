@@ -1,0 +1,76 @@
+{
+ "id": "lem-weil-pbc-fibre-product-change-of-base-closed-immersion",
+ "kind": "statement",
+ "title": "Change of base of a fibre product along a separated morphism is a closed immersion",
+ "statement": "Let $f:X\\to T$ and $g:Y\\to T$ be morphisms of schemes [def-pc-scheme] with the same target, and let $h:T\\to S$ be a separated morphism of schemes [def-weil-proper-morphism]. Then the induced morphism $X\\times_TY\\to X\\times_SY$ of fibre products [def-pc-fibre-product] (the fibre product over $S$ formed with $h\\circ f$ and $h\\circ g$; the morphism has components the two projections) is a closed immersion [def-weil-closed-immersion].",
+ "source": {
+  "document": "literature/stacks-project/schemes.tex",
+  "place": "Schemes, Lemma 01KR (schemes-lemma-fibre-product-after-map, schemes.tex line 4238), the clause 'If T -> S is separated, then i is a closed immersion'; proof: X x_T Y is the base change of the diagonal Delta_{T/S} along X x_S Y -> T x_S T"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-proper-morphism",
+  "def-pc-fibre-product",
+  "def-weil-closed-immersion"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "X ×_T Y → X ×_S Y is a closed immersion when T → S is separated",
+   "results": "AlgebraicGeometry.IsSeparated.instIsClosedImmersionMapDescScheme, IsSeparated.isClosedImmersion_diagonal, IsSeparated.instIsClosedImmersionLiftSchemeId (Mathlib.AlgebraicGeometry.Morphisms.Separated)",
+   "date": "2026-10-10",
+   "verdict": "match: IsSeparated.instIsClosedImmersionMapDescScheme"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.IsClosedImmersion (CategoryTheory.Limits.pullback.mapDesc _ _ _)",
+   "results": "AlgebraicGeometry.IsSeparated.instIsClosedImmersionMapDescScheme (Mathlib.AlgebraicGeometry.Morphisms.Separated)",
+   "date": "2026-10-10",
+   "verdict": "match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "induced morphism of fibre products over different bases X ×_T Y → X ×_S Y closed immersion separated",
+   "results": "AlgebraicGeometry.IsSeparated.instIsClosedImmersionMapDescScheme first; instIsClosedImmersionLiftSchemeId, instIsClosedImmersionFstScheme",
+   "date": "2026-10-10",
+   "verdict": "match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -n 'mapDesc' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicGeometry/Morphisms/Separated.lean and CategoryTheory/Limits/Shapes/Pullback/HasPullback.lean",
+   "results": "Separated.lean:130 instance IsClosedImmersion (pullback.mapDesc f g i) for [IsSeparated i], proved from pullback_map_diagonal_isPullback (Limits/Shapes/Diagonal.lean:309); HasPullback.lean:277 pullback.mapDesc f g i : pullback f g ⟶ pullback (f ≫ i) (g ≫ i) := pullback.map ... (𝟙 _) (𝟙 _) i",
+   "date": "2026-10-10",
+   "verdict": "match"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "AlgebraicGeometry.IsSeparated.instIsClosedImmersionMapDescScheme",
+  "file": "Mathlib/AlgebraicGeometry/Morphisms/Separated.lean",
+  "line": 130,
+  "how": "exact: for f : X ⟶ T, g : Y ⟶ T, i : T ⟶ S with [IsSeparated i], IsClosedImmersion (pullback.mapDesc f g i), where pullback.mapDesc (CategoryTheory/Limits/Shapes/Pullback/HasPullback.lean:277) is the canonical map pullback f g ⟶ pullback (f ≫ i) (g ≫ i) with identity components. Source read 2026-10-10."
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-fibre-product-affine-transition",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1"
+}

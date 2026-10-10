@@ -12,9 +12,67 @@
   "pqf-def-affine-morphism",
   "def-pc-fibre-product"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "(Notation; $S'\\to S$ is separated.) Write $f:X\\to S$, $g:T\\to S$, $f':X'\\to S'$, $g':T'\\to S'$ for the structure maps and $a:X'\\to X$, $h:S'\\to S$, $c:T'\\to T$ for the comparison morphisms, so that compatibility reads $f\\circ a=h\\circ f'$ and $g\\circ c=h\\circ g'$. The morphism $h$ is affine by hypothesis, hence separated by clause (3) of [lem-weil-pbc-affine-morphism-permanence] (Morphisms, Lemma 01S7: an affine morphism is separated and quasi-compact).",
+   "uses": [
+    "lem-weil-pbc-affine-morphism-permanence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Morphisms, Lemma 01S7 (morphisms-lemma-affine-separated, line 1721)"
+   }
+  },
+  {
+   "text": "(First factor: change of base from $S'$ to $S$.) Regard $X'$ and $T'$ as $S$-schemes via $h\\circ f'$ and $h\\circ g'$. Since $h$ is separated (first step), the induced morphism $j:X'\\times_{S'}T'\\to X'\\times_ST'$, with components the two projections, is a closed immersion by [lem-weil-pbc-fibre-product-change-of-base-closed-immersion] (Schemes, Lemma 01KR: $j$ is the base change of the diagonal $\\Delta_{S'/S}:S'\\to S'\\times_SS'$ along $X'\\times_ST'\\to S'\\times_SS'$). A closed immersion is affine by clause (b) of [lem-weil-pbc-closed-immersion-integral-separated-uc] (Morphisms, Lemma 01SE). So $j$ is affine.",
+   "uses": [
+    "lem-weil-pbc-fibre-product-change-of-base-closed-immersion",
+    "lem-weil-pbc-closed-immersion-integral-separated-uc"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Schemes, Lemma 01KR (schemes-lemma-fibre-product-after-map, line 4238); Morphisms, Lemma 01SE (morphisms-lemma-closed-immersion-affine, morphisms.tex line 2000)"
+   }
+  },
+  {
+   "text": "(Second factor: the product of the comparison maps over $S$.) By compatibility, $f\\circ a=h\\circ f'$ and $g\\circ c=h\\circ g'$, so $a:X'\\to X$ and $c:T'\\to T$ are morphisms of $S$-schemes, $X'$ and $T'$ carrying the structure maps of the first step. Both are affine by hypothesis, so the induced morphism $k=a\\times_Sc:X'\\times_ST'\\to X\\times_ST$, with components $a\\circ\\mathrm{pr}_1$ and $c\\circ\\mathrm{pr}_2$, is affine by [lem-weil-pbc-fibre-product-map-affine] (it is the composite of the base change of $a$ along $X\\times_ST'\\to X$ and the base change of $c$ along $X\\times_ST\\to T$; Morphisms, Lemmas 01SD and 01SC).",
+   "uses": [
+    "lem-weil-pbc-fibre-product-map-affine"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Morphisms, Lemmas 01SD (morphisms-lemma-base-change-affine, line 1982) and 01SC (morphisms-lemma-composition-affine, line 1970)"
+   }
+  },
+  {
+   "text": "(Conclusion.) Let $\\varphi:X'\\times_{S'}T'\\to X\\times_ST$ be the induced morphism, i.e. the unique morphism whose composites with the projections to $X$ and $T$ are $a\\circ\\mathrm{pr}_1$ and $c\\circ\\mathrm{pr}_2$ [def-pc-fibre-product]. The composite $k\\circ j$ has the same two composites, since $j$ commutes with the projections to $X'$ and $T'$; by the uniqueness in the universal property of $X\\times_ST$, $\\varphi=k\\circ j$. As $j$ (second step) and $k$ (third step) are affine, $\\varphi$ is affine by [lem-weil-pbc-affine-composition] (Morphisms, Lemma 01SC).",
+   "uses": [
+    "def-pc-fibre-product",
+    "lem-weil-pbc-affine-composition"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Morphisms, Lemma 01SC (morphisms-lemma-composition-affine, line 1970)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-affine-morphism-permanence",
+  "lem-weil-pbc-fibre-product-change-of-base-closed-immersion",
+  "lem-weil-pbc-closed-immersion-integral-separated-uc",
+  "lem-weil-pbc-fibre-product-map-affine",
+  "def-pc-fibre-product",
+  "lem-weil-pbc-affine-composition"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/morphisms.tex",
+  "place": "Morphisms, Lemmas 01S7, 01SE, 01SD, 01SC, with Schemes, Lemma 01KR (schemes.tex line 4238) for the change of base S' -> S; assembled from these Stacks lemmas, the source naming no single lemma for the whole statement"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -39,7 +97,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "worker",
@@ -59,5 +117,17 @@
   }
  },
  "chapter": "sec-proper-base-change",
- "unit": "sk-thm-p1"
+ "unit": "sk-thm-p1",
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "lem-weil-pbc-fibre-product-affine-transition",
+  "worker": "stage1",
+  "summary": "Lean state none on both branches. Proof written in four steps: S'->S affine hence separated (existing leaf lem-weil-pbc-affine-morphism-permanence, 01S7); the change-of-base map X' x_{S'} T' -> X' x_S T' is a closed immersion (new Mathlib leaf lem-weil-pbc-fibre-product-change-of-base-closed-immersion, Schemes 01KR, IsSeparated.instIsClosedImmersionMapDescScheme) hence affine (existing leaf lem-weil-pbc-closed-immersion-integral-separated-uc (b), 01SE); the product a x_S c of the comparison maps over S is affine (new Mathlib leaf lem-weil-pbc-fibre-product-map-affine, 01SD+01SC, MorphismProperty.pullbackMap with P = IsAffineHom); the induced map equals the composite by the universal property and is affine by composition (new Mathlib leaf lem-weil-pbc-affine-composition, 01SC, instIsAffineHomCompScheme). The source place previously named 01SG (affine permanence), which the proof does not need: only 01S7 (affine implies separated) is used for the diagonal; the affineness hypothesis on S'->S can be weakened to separatedness. Statement and stmt_deps kept. No single Mathlib declaration states the item (whole-item searches recorded at creation; the three constituent leaves are separate declarations)."
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "result": "accepted",
+  "note": "4 steps: S'->S affine hence separated (01S7 leaf); X' x_{S'} T' -> X' x_S T' is a closed immersion (new 01KR leaf, Separated.lean:130 verified) hence affine (01SE leaf); a x_S c affine (new leaf: MorphismProperty.pullbackMap with IsAffineHom stable under base change and composition, Limits.lean:254, Affine.lean:172/69 verified); the induced map is the composite (new 01SC leaf, Affine.lean:61 verified). Only separatedness of S'->S is used; the affine hypothesis on it is stronger than needed (kept)."
+ }
 }
