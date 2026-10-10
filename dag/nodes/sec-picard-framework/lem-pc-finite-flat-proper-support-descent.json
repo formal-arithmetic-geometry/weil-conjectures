@@ -11,7 +11,7 @@
  },
  "kind": "statement",
  "title": "Descent of a flat complex with proper support",
- "statement": "Let R be a filtered colimit of Noetherian rings R_i, let X_i be a finitely presented R_i-scheme [def-pc-scheme] whose base change to R is X, and let G^\\bullet be a bounded complex of finitely presented O_X-modules flat over Spec(R) [def-pc-scheme, def-weil-pbc-closed-subset-proper-over-base], with every term having support proper over Spec(R) [def-weil-pbc-closed-subset-proper-over-base]. Then, after increasing i, there is a bounded complex G_i^\\bullet of finitely presented O_{X_i}-modules flat over Spec(R_i), with every term having support proper over Spec(R_i), together with an isomorphism from its base change to G^\\bullet.",
+ "statement": "Let I be a directed set and let (S_i)_{i\\in I} be an inverse system of quasi-compact, quasi-separated schemes with affine transition morphisms, where S_i=\\operatorname{Spec}(R_i) for Noetherian rings R_i, and let S=\\varprojlim_i S_i=\\operatorname{Spec}(R). Let X_i be a finitely presented S_i-scheme [def-pc-scheme] and write X=X_i\\times_{S_i}S. Let G^\\bullet be a bounded complex of finitely presented \\mathcal{O}_X-modules flat over S [def-pc-morphism-conventions, def-pc-base-change], with every term having support proper over S [def-weil-pbc-closed-subset-proper-over-base]. Then there are j\\geq i and a bounded complex G_j^\\bullet of finitely presented \\mathcal{O}_{X_j}-modules flat over S_j, where X_j=X_i\\times_{S_i}S_j, such that every term has support proper over S_j and the base change of G_j^\\bullet to X is isomorphic to G^\\bullet.",
  "source": {
   "document": "literature/stacks-project/limits.tex; literature/stacks-project/cohomology.tex",
   "place": "Lemma 32.10.2, Tag 01ZR; Lemma 32.10.4, Tag 05LY; Lemma 32.13.5, Tag 081G, together with Cohomology of Schemes Lemma 30.26.7"
@@ -19,11 +19,42 @@
  "stmt_deps": [
   "def-pc-scheme",
   "def-pc-morphism-conventions",
+  "def-pc-base-change",
   "def-weil-pbc-closed-subset-proper-over-base"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Apply the bounded-complex descent statement to the finitely presented scheme X_i and the bounded complex G^\\bullet. After increasing i, obtain a bounded complex G_i^\\bullet of finitely presented O_{X_i}-modules flat over Spec(R_i), together with an isomorphism from its base change to G^\\bullet.",
+   "uses": [
+    "lem-pc-flat-bounded-complex-descent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/limits.tex",
+    "place": "Lemmas 32.10.2 and 32.10.4, Tags 01ZR and 05LY"
+   }
+  },
+  {
+   "text": "Apply eventual proper-support descent to each already chosen term of G_i^\\bullet. Each term is finitely presented and its base change has proper support by hypothesis. Since only finitely many terms are nonzero, directedness gives one later stage where every base-changed term has proper support. Base-changing the whole complex retains its differentials, boundedness, finite presentation, flatness, and identification with G^\\bullet.",
+   "uses": [
+    "lem-pc-proper-support-descent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/limits.tex; literature/stacks-project/cohomology.tex",
+    "place": "Lemma 32.13.5, Tag 081G, together with Cohomology of Schemes Lemma 30.26.7"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-flat-bounded-complex-descent",
+  "lem-pc-proper-support-descent"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/limits.tex; literature/stacks-project/cohomology.tex",
+  "place": "Tags 01ZR, 05LY, 081G and Cohomology Lemma 30.26.7"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -55,12 +86,27 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-pc-noetherian-approximation-data",
   "by": "worker",
   "date": "2026-10-10"
  },
  "chapter": "sec-picard-framework",
- "unit": "sk-thm-picard-semicon"
+ "unit": "sk-thm-picard-semicon",
+ "split_report": {
+  "date": "2026-10-11",
+  "item": "lem-pc-finite-flat-proper-support-descent",
+  "worker": "stage1",
+  "summary": "No sorry-free declaration states this item. The combined descent assertion was split into statement-only nodes for bounded finitely presented flat complexes and for properness of supports; the item proof applies them termwise and uses directedness to choose a common stage.",
+  "blueprint": "Realizes the parent Noetherian-approximation sentence on descent of the bounded flat complex and descent of proper supports (Tags 01ZR, 05LY, 081G and Cohomology Lemma 30.26.7)."
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-fpd2343",
+  "group": "J1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-fpd2343 (reviewer sub-agent of L); spot-checked: Read packet whole; checked citing node lem-pc-noetherian-approximation-data step 2 (directed system, support proper per def-weil-pbc-closed-subset-proper-over-base), Tags 01ZR/05LY/081G against both new nodes (true statements, narrower than item, not duplicates of 01ZR/081G-tagged nodes), step 2 common-stage base change keeps differentials/flatness/fp. FIX more, RETURN less: C4/B3 - item and lem-pc-proper-support-descent said 'scheme-theoretic support proper over S [def-weil-pbc-closed-subset-proper-over-base]' but the cited definition defines only (set) support proper over S, and the citing node lem-pc-noetherian-approximation-data assumes support proper; replaced by 'support' (equivalent for finite type modules, Morphisms 29.5.3, so statements stay true and now match the citing node and definition). Missed by J1 second reading (it introduced the wording).; 2 file(s) fixed by the reviewer"
+ }
 }
