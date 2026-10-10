@@ -1,8 +1,8 @@
 # Work queue
 
-862 items; claim with `tools/claim.py next <group> [--stage N]`.
+866 items; claim with `tools/claim.py next <group> [--stage N]`.
 
-## Stage 1: nodes to split (344)
+## Stage 1: nodes to split (348)
 
 | node | distance to a target | Lean state on the done branch |
 |---|---|---|
@@ -54,10 +54,14 @@
 | `lem-sc-degree-2g1-very-ample` | 3008 | rests_on_sorry |
 | `lem-sc-noetherian-cohomology-above-dimension` | 3008 | sorry_here |
 | `lem-sc-zero-generic-acyclic` | 3008 | rests_on_sorry |
+| `lem-weil-pbc-coskeletal-map-trivial-kan` | 3008 | none |
+| `lem-weil-pbc-free-module-sheaf-sheafify-first` | 3008 | none |
 | `lem-weil-pbc-image-presheaf-sheafification-iso` | 3008 | none |
 | `lem-weil-pbc-set-cech-nerve-free-resolution` | 3008 | none |
 | `lem-weil-pbc-simplicial-hom-object-exists` | 3008 | none |
 | `lem-weil-pbc-simplicial-hom-object-standard-simplex` | 3008 | none |
+| `lem-weil-pbc-trivial-kan-homotopy-equivalence` | 3008 | none |
+| `lem-weil-pbc-truncated-coskeleton-finite-limits` | 3008 | none |
 | `thm-sc-theorem-of-the-base` | 3008 | rests_on_sorry |
 | `def-sc-rational-functions` | 3009 | none |
 | `def-sc-rational-section-divisor` | 3009 | none |
@@ -874,7 +878,7 @@
 | `lem-weil-pbc-p1-field-dimension-one` | 4 | state |
 | `lem-weil-pbc-projective-space-zero-isomorphism` | 4 | state |
 
-Not open yet: 364 nodes that wait for stage 1, 948 nodes that wait for a statement dependency.
+Not open yet: 368 nodes that wait for stage 1, 948 nodes that wait for a statement dependency.
 
 ## Stage 3: modules to prove (0)
 
