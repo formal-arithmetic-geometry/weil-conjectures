@@ -25,20 +25,76 @@
   "def-pc-perfect-complex",
   "def-pur-pseudo-coherent-complex"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Choose the open covering supplied by [def-pc-perfect-complex] and refine it by affine opens. On an affine member U=Spec(A), the affine clause of [def-pc-perfect-complex] represents E|_U by a bounded complex P^bullet of finite projective A-modules. For each term, [lem-weil-pbc-finite-projective-standard-free-cover] gives a finite principal-open cover on which that term is finite free; intersecting the finitely many covers over the finitely many nonzero degrees gives an open cover of U on each member of which P^bullet is a bounded-above complex of finite free O_U-modules. Thus the local condition in [def-pur-pseudo-coherent-complex] holds, and E is pseudo-coherent.",
+   "uses": [
+    "def-pc-perfect-complex",
+    "lem-weil-pbc-finite-projective-standard-free-cover",
+    "def-pur-pseudo-coherent-complex"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/cohomology.tex",
+    "place": "Cohomology of Sheaves, Lemma 08CQ, proof of (1) => (2): perfect implies pseudo-coherent"
+   }
+  },
+  {
+   "text": "On the same U, every term of P^bullet is flat because it is a direct summand of a finite free module. The bounded-above flat complex is K-flat by [lem-pc-bounded-above-flat-kflat], so for every O_U-module G the derived tensor E|_U tensor^L G is represented by the ordinary tensor complex P^bullet tensor G. Since P^bullet is bounded, this tensor complex is zero outside one finite interval [a_U,b_U] independent of G; therefore H^i(E|_U tensor^L G)=0 for i outside [a_U,b_U]. The chosen U form an open cover, proving locally finite Tor dimension.",
+   "uses": [
+    "def-pc-perfect-complex",
+    "lem-pc-bounded-above-flat-kflat"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/cohomology.tex",
+    "place": "Cohomology of Sheaves, Lemma 08CQ, proof of (1) => (2): perfect implies finite Tor dimension"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-perfect-complex",
+  "def-pur-pseudo-coherent-complex",
+  "lem-weil-pbc-finite-projective-standard-free-cover",
+  "lem-pc-bounded-above-flat-kflat"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Cohomology of Sheaves, Lemma 08CQ (cohomology-lemma-perfect), implication (1) => (2)"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
-   "query": "pseudo-coherent complex on affine scheme Spec A iff complex of A-modules pseudo-coherent; perfect complex of sheaves is pseudo-coherent with locally finite Tor dimension",
-   "results": "SheafOfModules.IsFiniteType, DerivedCategory.isGE_Q_obj_iff, QuasicoherentData.IsFinitePresentation; no pseudo-coherent or Tor-amplitude declaration for complexes of sheaves",
-   "date": "2026-10-10",
+   "query": "perfect complex on a scheme is pseudo-coherent and has locally finite Tor dimension",
+   "results": "DerivedCategory.instIsGEObjCochainComplexIntQOfIsGE; DerivedCategory.instIsLEObjCochainComplexIntQOfIsLE; CochainComplex.IsKProjective; DerivedCategory.isGE_Q_obj_iff; no scheme-level pseudo-coherent or Tor-dimension declaration",
+   "date": "2026-10-11",
    "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "IsPerfect pseudo-coherent finite Tor dimension",
+   "results": "0 hits; Unknown identifier IsPerfect",
+   "date": "2026-10-11",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "pseudo.?coherent|Tor.?amplitude|Perfect in Mathlib/AlgebraicGeometry",
+   "results": "0 hits",
+   "date": "2026-10-11",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "perfect complex on a scheme is pseudo-coherent and has locally finite Tor dimension",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-11",
+   "verdict": "unavailable"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "R-pab2756",
@@ -54,5 +110,34 @@
   "slopmaster2": {
    "state": "none"
   }
+ },
+ "split_report": {
+  "date": "2026-10-11",
+  "item": "lem-pc-perfect-pseudo-coherent-locally-finite-tor",
+  "worker": "stage1",
+  "summary": "Checked the item against Stacks Cohomology Lemma 08CQ, implication (1) => (2). The proof now has two steps: a strictly perfect local model is bounded-above finite free, hence pseudo-coherent; and its bounded flat tensor model is K-flat and bounded, giving a local finite Tor interval. No child node was created because the first step is elementary from the definitions and the second uses the existing K-flat lemma.",
+  "blueprint": "Realizes the affine perfectness proof clause invoking the forward implication of Stacks Tag 08CQ: a perfect complex is pseudo-coherent and locally of finite Tor dimension.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-finite-projective-standard-free-cover",
+    "why": "The affine strictly perfect model has finite projective terms; this existing module lemma supplies the finite principal-open refinement needed to meet the finite-free local formulation of pseudo-coherence."
+   },
+   {
+    "node": "lem-pc-bounded-above-flat-kflat",
+    "why": "The proof needs the generic K-flatness theorem for bounded-above flat complexes to identify derived tensor with the ordinary tensor model; that theorem belongs to the semicontinuity unit and is not restated in this Picard unit."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-finite-projective-standard-free-cover",
+  "lem-pc-bounded-above-flat-kflat"
+ ],
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-ppl2916",
+  "group": "J1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-ppl2916 (reviewer sub-agent of L); spot-checked: Statement = Stacks 08CQ (1)=>(2) specialized to schemes; Tor clause is the 08CF tor-amplitude condition stated pointwise-locally, exactly what both citers use (lem-pc-perfect-affine-bounded-projective takes min/max over a finite affine cover; lem-pc-perfect-summand uses 'Tor amplitude in [a,b] near every point'). Step 1: affine refinement of a strictly perfect model has terms = direct summands of finite free = tilde of finite projective (the elementary clause of def-pc-perfect-complex, not the 08EB converse, so no cycle with the citer), lem-weil-pbc-finite-projective-standard-free-cover gives finite-free principal opens, matches def-pur-pseudo-coherent-complex (C4 ok). Step 2: summands of free are flat, lem-pc-bounded-above-flat-kflat (generic tool, hypotheses ringed space + bounded-above flat met) gives derived = ordinary tensor, bounded so G-independent interval. No new nodes. Second reading: no missed fault found. No repairs."
  }
 }
