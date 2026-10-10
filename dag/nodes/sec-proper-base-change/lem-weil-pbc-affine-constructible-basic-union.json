@@ -1,0 +1,75 @@
+{
+ "id": "lem-weil-pbc-affine-constructible-basic-union",
+ "kind": "statement",
+ "title": "Constructible subsets of an affine spectrum are finite unions of sets D(f) ∩ V(g_1,…,g_n)",
+ "statement": "Let $A$ be a commutative ring and $\\operatorname{Spec}A$ its spectrum [def-weil-affine-spectrum]; for $f\\in A$ write $D(f)=\\{\\mathfrak p:f\\notin\\mathfrak p\\}$ (an open subset) and for $g_1,\\dots,g_n\\in A$ ($n\\ge0$) write $V(g_1,\\dots,g_n)=\\{\\mathfrak p:g_1,\\dots,g_n\\in\\mathfrak p\\}$ (a closed subset). A subset $E\\subseteq\\operatorname{Spec}A$ is constructible [def-weil-constructible-subset] if and only if it is a finite union of subsets of the form $D(f)\\cap V(g_1,\\dots,g_n)$ with $f,g_1,\\dots,g_n\\in A$ (Stacks Algebra, Lemma 0G1P).",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Algebra, Lemma Tag 0G1P (lemma-constructible), line 5434"
+ },
+ "stmt_deps": [
+  "def-weil-affine-spectrum",
+  "def-weil-constructible-subset"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "constructible subset of prime spectrum is a finite union of sets zeroLocus g minus zeroLocus f",
+   "results": "PrimeSpectrum.ConstructibleSetData, PrimeSpectrum.BasicConstructibleSetData.toSet, PrimeSpectrum.ConstructibleSetData.toSet (Mathlib.RingTheory.Spectrum.Prime.ConstructibleSet), PrimeSpectrum.zeroLocus_singleton_mul",
+   "date": "2026-10-10",
+   "verdict": "match: the data type whose toSet is the finite union; the iff is exists_constructibleSetData_iff"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "every constructible subset of Spec R is a finite disjoint union of locally closed sets of the form D(f) ∩ V(g1,...,gn)",
+   "results": "PrimeSpectrum.exists_constructibleSetData_iff, PrimeSpectrum.ConstructibleSetData.isConstructible_toSet, PrimeSpectrum.BasicConstructibleSetData, PrimeSpectrum.isConstructible_basicOpen (Mathlib.RingTheory.Spectrum.Prime.ConstructibleSet / Topology)",
+   "date": "2026-10-10",
+   "verdict": "match (exists_constructibleSetData_iff, without disjointness)"
+  },
+  {
+   "tool": "loogle",
+   "query": "PrimeSpectrum.ConstructibleSetData.toSet",
+   "results": "PrimeSpectrum.ConstructibleSetData.toSet, isConstructible_toSet, PrimeSpectrum.exists_constructibleSetData_iff, ConstructibleSetData.toSet_map, ChevalleyThm.chevalley_polynomialC",
+   "date": "2026-10-10",
+   "verdict": "match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rn 'exists_constructibleSetData_iff\\|BasicConstructibleSetData' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib",
+   "results": "RingTheory/Spectrum/Prime/ConstructibleSet.lean:29 (structure BasicConstructibleSetData: f, n, g : Fin n → R), :62 (toSet = zeroLocus (range g) \\ zeroLocus {f}), :94 (ConstructibleSetData.toSet = finite union), :118 (exists_constructibleSetData_iff); source read",
+   "date": "2026-10-10",
+   "verdict": "match"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "PrimeSpectrum.exists_constructibleSetData_iff",
+  "file": "Mathlib/RingTheory/Spectrum/Prime/ConstructibleSet.lean",
+  "how": "exact: exists_constructibleSetData_iff (ConstructibleSet.lean:118, any CommSemiring R) says (∃ S : ConstructibleSetData R, S.toSet = s) ↔ IsConstructible s, where ConstructibleSetData R is a Finset of BasicConstructibleSetData (f, n, g : Fin n → R) and S.toSet = ⋃_{C ∈ S} (zeroLocus (range C.g) \\ zeroLocus {C.f}) = ⋃ V(g_1..g_n) ∩ D(f) (lines 62, 94); Topology.IsConstructible is the node's constructibility (def-weil-constructible-subset). Source read 2026-10-10.",
+  "line": 118
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-immersion-affine-constructible-pieces",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lead_note": "L 2026-10-10: line field added (exists_constructibleSetData_iff, ConstructibleSet.lean:118, verified with sed)."
+}

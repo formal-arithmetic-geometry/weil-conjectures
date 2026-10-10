@@ -5,7 +5,7 @@
  "statement": "Let $X$ be an affine scheme [def-pc-scheme] and let $\\iota:Z\\to X$ be an immersion [def-weil-closed-immersion] whose image $E=\\iota(Z)$ is a constructible subset of $X$ [def-weil-constructible-subset]. Then there are a finite set $K$ (possibly empty), affine schemes $Z_k$ and immersions $\\kappa_k:Z_k\\to Z$ ($k\\in K$) such that each composite $\\iota\\circ\\kappa_k:Z_k\\to X$ is an immersion, its image $E_k=\\iota(\\kappa_k(Z_k))$ is a locally closed [def-weil-locally-closed-subset] and constructible subset of $X$, the sets $E_k$ ($k\\in K$) are pairwise disjoint, and $E=\\bigcup_{k\\in K}E_k$.",
  "source": {
   "document": "literature/stacks-project/etale-cohomology.tex",
-  "place": "Etale Cohomology, Lemma Tag 03S9 (lemma-etale-stratified-finite), proof, line 12049: 'After refining the partition further we may assume $X_i$ affine as well' (the refinement step stated without proof)"
+  "place": "Etale Cohomology, Lemma Tag 03S0 (lemma-etale-stratified-finite), proof, line 12049: 'After refining the partition further we may assume $X_i$ affine as well' (the refinement step stated without proof)"
  },
  "stmt_deps": [
   "def-pc-scheme",
@@ -13,9 +13,109 @@
   "def-weil-constructible-subset",
   "def-weil-locally-closed-subset"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Reduction to $X=\\operatorname{Spec}A$. Since $X$ is affine there are a commutative ring $A$ and an isomorphism of schemes $\\varphi:X\\to\\operatorname{Spec}A$ [def-pc-scheme], [def-weil-affine-spectrum]. An isomorphism is an open immersion onto the whole target [def-weil-open-immersion], hence an immersion (with the identity as closed immersion) [def-weil-closed-immersion], and so is $\\varphi^{-1}$; compositions of immersions are immersions [lem-weil-pbc-proper-fp-permanence] (e). Hence $\\iota'=\\varphi\\circ\\iota:Z\\to\\operatorname{Spec}A$ is an immersion. The underlying map of $\\varphi$ is a homeomorphism, so it maps open sets, quasi-compact open sets, hence retrocompact open sets, closed sets, finite unions, intersections and complements to the same kind of sets; therefore $\\varphi$ maps constructible subsets [def-weil-constructible-subset] and locally closed subsets [def-weil-locally-closed-subset] of $X$ bijectively onto those of $\\operatorname{Spec}A$, and preserves disjointness and unions. In particular $\\iota'(Z)=\\varphi(E)$ is constructible. If $(Z_k,\\kappa_k)_{k\\in K}$ satisfy the conclusion for $\\iota'$ with images $E'_k$, then $\\iota\\circ\\kappa_k=\\varphi^{-1}\\circ(\\iota'\\circ\\kappa_k)$ is an immersion (composition again) with image $E_k=\\varphi^{-1}(E'_k)$, and the $E_k$ are locally closed, constructible, pairwise disjoint with union $\\varphi^{-1}(\\varphi(E))=E$. So we may and do assume $X=\\operatorname{Spec}A$ and $\\iota$ an immersion with constructible image $E$.",
+   "uses": [
+    "def-pc-scheme",
+    "def-weil-affine-spectrum",
+    "def-weil-open-immersion",
+    "def-weil-closed-immersion",
+    "lem-weil-pbc-proper-fp-permanence",
+    "def-weil-constructible-subset",
+    "def-weil-locally-closed-subset"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Etale Cohomology, Lemma Tag 03S0, proof, line 12049 (the step is stated without proof there); Schemes, Lemma Tag 02V0 (composition of immersions)"
+   }
+  },
+  {
+   "text": "Disjoint basic pieces. Since $E\\subseteq\\operatorname{Spec}A$ is constructible, it is a finite union $E=B_1\\cup\\dots\\cup B_m$ of basic sets $B_j=D(f_j)\\cap V(g_{j,1},\\dots,g_{j,n_j})$ [lem-weil-pbc-affine-constructible-basic-union]. By [lem-weil-pbc-affine-basic-sets-disjoint-refinement] there are finitely many pairwise disjoint basic sets $C_k=D(f_k)\\cap V(g_{k,1},\\dots,g_{k,n_k})$, $k\\in K=\\{1,\\dots,p\\}$ ($p=0$, $K=\\emptyset$, allowed, e.g. when $E=\\emptyset$), with $E=\\bigcup_{k\\in K}C_k$. Put $E_k=C_k$.",
+   "uses": [
+    "lem-weil-pbc-affine-constructible-basic-union",
+    "lem-weil-pbc-affine-basic-sets-disjoint-refinement"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra, Lemma Tag 0G1P (lemma-constructible), line 5434; the disjoint refinement is the refinement step of Etale Cohomology, Lemma Tag 03S0, line 12049"
+   }
+  },
+  {
+   "text": "The pieces are images of immersions of affine schemes. For $k\\in K$ let $J_k=(g_{k,1},\\dots,g_{k,n_k})$, $R_k=(A/J_k)_{\\bar f_k}$, $W_k=\\operatorname{Spec}R_k$ and $w_k:W_k\\to X$ the morphism induced by $A\\to A/J_k\\to R_k$. By [lem-weil-pbc-basic-subset-immersion-image], $w_k$ is an immersion and $w_k(W_k)=D(f_k)\\cap V(g_{k,1},\\dots,g_{k,n_k})=E_k$.",
+   "uses": [
+    "lem-weil-pbc-basic-subset-immersion-image"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra, proof of Lemma Tag 00F8 (lemma-constructible-is-image), lines 5467-5471, with Lemmas Tag 00E4 and 00E5"
+   }
+  },
+  {
+   "text": "Definition of $Z_k$ and $\\kappa_k$. Let $Z_k=Z\\times_XW_k$ be the fibre product of $\\iota$ and $w_k$ [def-pc-fibre-product], with projections $\\kappa_k:Z_k\\to Z$ and $q_k:Z_k\\to W_k$, so $\\iota\\circ\\kappa_k=w_k\\circ q_k$. The projection $\\kappa_k$ is the base change of the immersion $w_k$ along $\\iota$, hence an immersion; the projection $q_k$ is the base change of the immersion $\\iota$ along $w_k$ (the fibre product is symmetric in its two factors), hence an immersion [lem-weil-pbc-immersion-base-change-lft] (1).",
+   "uses": [
+    "def-pc-fibre-product",
+    "lem-weil-pbc-immersion-base-change-lft"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Schemes, Lemma Tag 01JY (lemma-base-change-immersion)"
+   }
+  },
+  {
+   "text": "$Z_k$ is affine. By [lem-weil-pbc-base-change-image] (with $f=\\iota$, $g=w_k$, $P=Z_k$, $q=q_k$), $q_k(Z_k)=w_k^{-1}(\\iota(Z))=w_k^{-1}(E)$, and $w_k^{-1}(E)=W_k$ because $w_k(W_k)=E_k\\subseteq E$ (steps 2, 3). So $q_k$ is an immersion whose image $W_k$ is closed in $W_k$, hence a closed immersion [lem-weil-pbc-immersion-closed-image-closed-immersion]. Applying [lem-weil-pbc-closed-immersion-affine-cover-criterion] (1) to $q_k$ and the affine open $V=W_k=\\operatorname{Spec}R_k$ of $W_k$ [def-weil-affine-spectrum], the scheme $Z_k=q_k^{-1}(W_k)$ is affine.",
+   "uses": [
+    "lem-weil-pbc-base-change-image",
+    "lem-weil-pbc-immersion-closed-image-closed-immersion",
+    "lem-weil-pbc-closed-immersion-affine-cover-criterion",
+    "def-weil-affine-spectrum"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Morphisms, Lemma Tag 01QO (lemma-closed-immersion); Schemes, Lemma Tag 01JT (points of fibre products), used through the cited node"
+   }
+  },
+  {
+   "text": "Conclusion. For $k\\in K$, $\\iota\\circ\\kappa_k=w_k\\circ q_k$ is a composition of immersions (steps 3, 4), hence an immersion [lem-weil-pbc-proper-fp-permanence] (e), and its image is $w_k(q_k(Z_k))=w_k(W_k)=E_k$ (steps 3, 5). Each $E_k=D(f_k)\\cap V(g_{k,1},\\dots,g_{k,n_k})$ is the intersection of an open and a closed subset of $X$, hence locally closed [def-weil-locally-closed-subset], and is constructible, being a (one-term) finite union of basic sets [lem-weil-pbc-affine-constructible-basic-union]. The $E_k$ are pairwise disjoint and $E=\\bigcup_{k\\in K}E_k$ by step 2; each $Z_k$ is affine by step 5. This is the assertion.",
+   "uses": [
+    "lem-weil-pbc-proper-fp-permanence",
+    "def-weil-locally-closed-subset",
+    "lem-weil-pbc-affine-constructible-basic-union"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Schemes, Lemma Tag 02V0 (lemma-composition-immersion); Algebra, Lemma Tag 0G1P"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-scheme",
+  "def-weil-affine-spectrum",
+  "def-weil-open-immersion",
+  "def-weil-closed-immersion",
+  "lem-weil-pbc-proper-fp-permanence",
+  "def-weil-constructible-subset",
+  "def-weil-locally-closed-subset",
+  "lem-weil-pbc-affine-constructible-basic-union",
+  "lem-weil-pbc-affine-basic-sets-disjoint-refinement",
+  "lem-weil-pbc-basic-subset-immersion-image",
+  "def-pc-fibre-product",
+  "lem-weil-pbc-immersion-base-change-lft",
+  "lem-weil-pbc-base-change-image",
+  "lem-weil-pbc-immersion-closed-image-closed-immersion",
+  "lem-weil-pbc-closed-immersion-affine-cover-criterion"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Etale Cohomology, Lemma Tag 03S0, proof, line 12049: the refinement is asserted without proof; steps written by an agent from Algebra Lemmas 0G1P, 00F8 and Schemes Lemmas 01JY, 02V0"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -40,7 +140,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "worker",
@@ -60,5 +160,17 @@
   }
  },
  "chapter": "sec-proper-base-change",
- "unit": "sk-thm-p1"
+ "unit": "sk-thm-p1",
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "lem-weil-pbc-immersion-affine-constructible-pieces",
+  "worker": "stage1",
+  "summary": "Statement kept (checked against 03S0: the refinement to affine pieces). Proof written in six steps: reduce to X = Spec A by an isomorphism; write E as a finite union of basic sets D(f) ∩ V(g) (Algebra 0G1P, new Mathlib leaf lem-weil-pbc-affine-constructible-basic-union = PrimeSpectrum.exists_constructibleSetData_iff) and refine to a pairwise disjoint finite union of basic sets (new unsplit node lem-weil-pbc-affine-basic-sets-disjoint-refinement; Mathlib candidate MeasureTheory.IsSetSemiring.disjointOfUnion_props once the basic sets are shown to form a set semiring); each basic set is the image of the immersion Spec((A/J)_f) → Spec A (new Mathlib leaf lem-weil-pbc-basic-subset-immersion-image); Z_k = Z ×_X W_k: κ_k is an immersion by base change (01JY), Z_k → W_k is a surjective immersion (base-change image node), hence a closed immersion, so Z_k is affine (01QO); ι∘κ_k is a composite of immersions with image E_k. Mathlib search of the item itself was already recorded (no match). stmt_deps kept. Source tag corrected: lemma-etale-stratified-finite is Stacks Tag 03S0 (tags/tags line 4949), not 03S9 (no such tag in tags/tags); the same wrong tag is in lem-weil-pbc-etale-stratified-finite, lem-weil-pbc-etale-separated-stratified-finite, lem-weil-pbc-etale-stratification-local-gluing, lem-weil-pbc-etale-free-sheaf-constructible, lem-weil-pbc-etale-affine-cover-gluing (not changed: not this item's files)."
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "result": "accepted",
+  "note": "6 steps (agent proof of the unproved refinement in Stacks 03S0): reduction to Spec A, basic sets (new 0G1P leaf, line added by L) refined to disjoint basic sets (new unsplit node), each basic set the image of an immersion of an affine scheme (new leaf, composed match noted), Z_k = Z x_X W_k affine since the surjective immersion Z_k -> W_k is a closed immersion. Source tag corrected 03S9 -> 03S0. Tags 0G1P, 03S0 verified."
+ }
 }

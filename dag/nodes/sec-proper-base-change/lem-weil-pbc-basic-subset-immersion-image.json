@@ -1,0 +1,76 @@
+{
+ "id": "lem-weil-pbc-basic-subset-immersion-image",
+ "kind": "statement",
+ "title": "D(f) ∩ V(g_1,…,g_n) is the image of the immersion Spec((A/(g))_f) → Spec A",
+ "statement": "Let $A$ be a commutative ring, $f,g_1,\\dots,g_n\\in A$ ($n\\ge0$), $J=(g_1,\\dots,g_n)\\subseteq A$, $\\bar f$ the image of $f$ in $A/J$, and $B=(A/J)_{\\bar f}$ the localization of $A/J$ at the powers of $\\bar f$. Let $w:\\operatorname{Spec}B\\to\\operatorname{Spec}A$ be the morphism of affine schemes [def-weil-affine-spectrum] induced by the composite ring map $A\\to A/J\\to B$. Then $w$ is an immersion [def-weil-closed-immersion] (the open immersion $\\operatorname{Spec}B\\to\\operatorname{Spec}(A/J)$ onto $D(\\bar f)$ [def-weil-open-immersion] followed by the closed immersion $\\operatorname{Spec}(A/J)\\to\\operatorname{Spec}A$), and its image is $w(\\operatorname{Spec}B)=D(f)\\cap V(g_1,\\dots,g_n)=\\{\\mathfrak p\\in\\operatorname{Spec}A:f\\notin\\mathfrak p,\\ g_1,\\dots,g_n\\in\\mathfrak p\\}$.",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Algebra, proof of Lemma Tag 00F8 (lemma-constructible-is-image), line 5467-5471, with Algebra Lemmas Tag 00E4 (lemma-standard-open, line 3207) and Tag 00E5 (lemma-spec-closed, line 3227); Schemes, Example Tag 01IG (closed immersion of affines) and Lemma Tag 02V0 (composition of immersions)"
+ },
+ "stmt_deps": [
+  "def-weil-affine-spectrum",
+  "def-weil-closed-immersion",
+  "def-weil-open-immersion"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Spec of localization of quotient ring is an immersion into Spec R with range basicOpen f intersect zeroLocus I",
+   "results": "AlgebraicGeometry.IsClosedImmersion.spec_of_quotient_mk (Morphisms/ClosedImmersion.lean), IsPreimmersion.of_isLocalization, Scheme.basic_open_isOpenImmersion, IsOpenImmersion.of_isLocalization, Scheme.isOpenImmersion_SpecMap_localizationAway (OpenImmersion.lean), basicOpenIsoSpecAway",
+   "date": "2026-10-10",
+   "verdict": "match per clause (closed and open immersion parts)"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.IsImmersion (AlgebraicGeometry.Spec.map _)",
+   "results": "none",
+   "date": "2026-10-10",
+   "verdict": "no single declaration; the immersion follows from the closed/open instances and IsImmersion.comp"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "image of Spec of (R/I) localized at f in Spec R equals D(f) ∩ V(I)",
+   "results": "PrimeSpectrum.localization_away_comap_range, PrimeSpectrum.range_comap_algebraMap_localization_compl_eq_range_comap_quotientMk, PrimeSpectrum.localization_comap_range, IsAffineOpen.fromSpec_image_zeroLocus",
+   "date": "2026-10-10",
+   "verdict": "match per clause for the image: localization_away_comap_range (range = basicOpen) and range_comap_of_surjective (range = zeroLocus ker)"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rn 'range_comap_of_surjective\\|localization_away_comap_range\\|spec_of_surjective\\|IsMultiplicative @IsImmersion' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib",
+   "results": "RingTheory/Spectrum/Prime/RingHom.lean:237 range_comap_of_surjective; RingTheory/Spectrum/Prime/Topology.lean:592 localization_away_comap_range, :615 comap_basicOpen; AlgebraicGeometry/Morphisms/ClosedImmersion.lean:101 spec_of_surjective, :115 instance spec_of_quotient_mk; AlgebraicGeometry/Morphisms/Immersion.lean:132,135 (open and closed immersions are immersions), :138 IsMultiplicative, :146 instance comp; RingTheory/Spectrum/Prime/ConstructibleSet.lean:146-157 (proof of exists_range_eq_of_isConstructible) carries out exactly this image computation for (A/J)_{\\bar f}; source read",
+   "date": "2026-10-10",
+   "verdict": "match per clause"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "AlgebraicGeometry.IsClosedImmersion.spec_of_quotient_mk; AlgebraicGeometry.Scheme.isOpenImmersion_SpecMap_localizationAway; AlgebraicGeometry.IsImmersion.comp; PrimeSpectrum.localization_away_comap_range; PrimeSpectrum.range_comap_of_surjective",
+  "file": "Mathlib/AlgebraicGeometry/Morphisms/Immersion.lean",
+  "how": "specializes in a few Mathlib lemmas, one per clause: immersion: Spec(A/J) → Spec A is a closed immersion (instance IsClosedImmersion.spec_of_quotient_mk, Morphisms/ClosedImmersion.lean:115), Spec B → Spec(A/J) an open immersion (instance Scheme.isOpenImmersion_SpecMap_localizationAway, OpenImmersion.lean:329), both are immersions (Immersion.lean:132, 135) and immersions compose (instance IsImmersion.comp, Immersion.lean:146; Spec.map of the composite is the composite of Spec.map by functoriality); image: the underlying map of Spec.map φ is PrimeSpectrum.comap φ (Spec.map_base, Scheme.lean:536), the range of the composite is comap(A→A/J) '' range(comap(A/J→B)) (Set.range_comp) = comap(A→A/J) '' D(\\bar f) (localization_away_comap_range, Topology.lean:592) = comap(A→A/J) '' (comap(A→A/J)⁻¹' D(f)) (comap_basicOpen, :615) = D(f) ∩ range(comap(A→A/J)) (Set.image_preimage_eq_inter_range) = D(f) ∩ V(J) (range_comap_of_surjective, RingHom.lean:237, with Ideal.mk_ker and zeroLocus_span); this rewrite chain is literally the proof of PrimeSpectrum.exists_range_eq_of_isConstructible (ConstructibleSet.lean:150-157) for one basic set. Source read 2026-10-10. The image clause is a six-lemma rewrite chain, not one lemma: the lead may prefer status unsplit.",
+  "line": 146
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-immersion-affine-constructible-pieces",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lead_note": "L 2026-10-10: line field added (IsImmersion.comp, Immersion.lean:146; ClosedImmersion.lean:115, OpenImmersion.lean:329, Topology.lean:592, RingHom.lean:237 verified with sed). The image clause is a six-lemma rewrite chain (the proof of PrimeSpectrum.exists_range_eq_of_isConstructible, ConstructibleSet.lean:150-157); stage 3 should treat the Lean proof as that chain."
+}
