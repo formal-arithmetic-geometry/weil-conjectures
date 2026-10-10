@@ -1,0 +1,78 @@
+{
+ "id": "lem-weil-pbc-finite-limits-from-terminal-pullbacks",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-hypercover-refinement",
+   "place": "proof, fourth paragraph: 'Previously chosen faces prescribe compatible boundaries; the matching covers of $U$ lift those boundaries after finite refinement': the matching schemes $M_n(U)$ are finite limits; this node carries the comparison of finite limits in $X_{\\Et}$, in schemes over $X$, and in SR(X) through the inclusions, which preserve the final object and fibre products",
+   "via": [
+    "lem-weil-pbc-sr-matching-object-one-member",
+    "def-weil-pbc-semi-representable-object",
+    "lem-weil-pbc-hypercover-finite-simplex-lifting"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Final object and fibre products give finite limits, and functors preserving them preserve finite limits",
+ "statement": "Let $\\mathcal C$ and $\\mathcal D$ be categories, and assume $\\mathcal C$ has a final object and fibre products. Then: (1) $\\mathcal C$ has finite limits [def-galois-finite-limits-colimits]; (2) let $F:\\mathcal C\\to\\mathcal D$ be a functor which carries every final object of $\\mathcal C$ to a final object of $\\mathcal D$ and every fibre product square of $\\mathcal C$ (a commutative square $P\\to A$, $P\\to B$, $A\\to S$, $B\\to S$ exhibiting $P$ as a fibre product $A\\times_SB$) to a fibre product square of $\\mathcal D$. Then $F$ preserves finite limits: for every finite category $\\mathcal I$, every functor $M:\\mathcal I\\to\\mathcal C$ and every limit cone $(L,(\\lambda_i:L\\to M(i))_{i})$ of $M$, the cone $(F(L),(F(\\lambda_i))_i)$ is a limit cone of $F\\circ M$ in $\\mathcal D$.",
+ "source": {
+  "document": "literature/stacks-project/categories.tex",
+  "place": "Lemma 002O (lemma-finite-limits-exist) for (1); for (2) the same construction of finite limits from products and equalizers (Lemma 002N, lemma-limits-products-equalizers), which are built from the final object and fibre products, and are therefore carried to limits by $F$"
+ },
+ "stmt_deps": [
+  "def-galois-finite-limits-colimits"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "a functor preserving terminal objects and pullbacks preserves finite limits",
+   "results": "CategoryTheory.Limits.preservesFiniteLimits_of_preservesTerminal_and_pullbacks, CategoryTheory.Limits.hasFiniteLimits_of_hasTerminal_and_pullbacks (Mathlib.CategoryTheory.Limits.Constructions.LimitsOfProductsAndEqualizers), PreservesLimitsOfSize.preservesFiniteLimits",
+   "date": "2026-10-10",
+   "verdict": "match: the first two results are clauses (2) and (1)"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Limits.PreservesFiniteLimits, CategoryTheory.Limits.WalkingCospan",
+   "results": "CategoryTheory.Limits.preservesFiniteLimits_of_preservesTerminal_and_pullbacks (Mathlib.CategoryTheory.Limits.Constructions.LimitsOfProductsAndEqualizers); StructuredArrow.projectSubobject_mk",
+   "date": "2026-10-10",
+   "verdict": "match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rn 'of_preservesTerminal_and_pullbacks\\|hasFiniteLimits_of_hasTerminal_and_pullbacks' Mathlib/",
+   "results": "Mathlib/CategoryTheory/Limits/Constructions/LimitsOfProductsAndEqualizers.lean lines 270 (hasFiniteLimits_of_hasTerminal_and_pullbacks) and 279 (preservesFiniteLimits_of_preservesTerminal_and_pullbacks); uses in Galois/Basic.lean:148, Limits/MorphismProperty.lean:313",
+   "date": "2026-10-10",
+   "verdict": "match (read with sed -n 265,290p)"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "CategoryTheory.Limits.hasFiniteLimits_of_hasTerminal_and_pullbacks; CategoryTheory.Limits.preservesFiniteLimits_of_preservesTerminal_and_pullbacks",
+  "file": "Mathlib/CategoryTheory/Limits/Constructions/LimitsOfProductsAndEqualizers.lean",
+  "lines": [
+   270,
+   279
+  ],
+  "how": "exact, one declaration per clause: (1) hasFiniteLimits_of_hasTerminal_and_pullbacks (line 270, [HasTerminal C] [HasPullbacks C] : HasFiniteLimits C); (2) preservesFiniteLimits_of_preservesTerminal_and_pullbacks (line 279: [HasTerminal C] [HasPullbacks C] (G : C ⥤ D) [PreservesLimitsOfShape (Discrete PEmpty) G] [PreservesLimitsOfShape WalkingCospan G] : PreservesFiniteLimits G); PreservesLimitsOfShape (Discrete PEmpty) G says G carries final objects (limit cones of the empty diagram) to final objects, PreservesLimitsOfShape WalkingCospan G says G carries pullback cones to pullback cones, and PreservesFiniteLimits G is preservation of limits of diagrams indexed by finite categories"
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-sr-matching-object-one-member",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-curve-estimates",
+ "unit": "sk-prop-h2"
+}

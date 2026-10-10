@@ -1,0 +1,72 @@
+{
+ "id": "lem-weil-pbc-matching-object-proper-faces",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-hypercover-refinement",
+   "place": "proof, fourth paragraph: 'Previously chosen faces prescribe compatible boundaries; the matching covers of $U$ lift those boundaries after finite refinement': the matching scheme $M_n(U)$ of def-weil-pbc-finite-split-hypercover is the limit over all proper faces, while the matching object of SR(X) is that of the codimension-1/2 diagram; this node identifies the two (Stacks 0186)",
+   "via": [
+    "lem-weil-pbc-sr-matching-object-one-member",
+    "def-weil-pbc-semi-representable-object",
+    "lem-weil-pbc-hypercover-finite-simplex-lifting"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Matching object as the limit over all proper faces",
+ "statement": "Let $\\mathcal C$ be a category with finite limits [def-galois-finite-limits-colimits], let $K$ be a simplicial object of $\\mathcal C$ with simplicial operators $K(\\varphi)$ and face maps $d_i$ [def-weil-pbc-simplicial-object], and let $n\\geq1$. Let $\\mathcal I_n$ be the finite category whose objects are the injective order-preserving maps $\\delta:[k]\\to[n]$ with $0\\leq k<n$, a morphism from $\\delta':[k']\\to[n]$ to $\\delta:[k]\\to[n]$ being an order-preserving map $\\varepsilon:[k']\\to[k]$ with $\\delta\\circ\\varepsilon=\\delta'$; let $P_n(K):\\mathcal I_n^{\\mathrm{op}}\\to\\mathcal C$ be the diagram $\\delta\\mapsto K_k$ (for $\\delta$ with source $[k]$), $\\varepsilon\\mapsto K(\\varepsilon):K_k\\to K_{k'}$. Let $\\delta_i:[n-1]\\to[n]$ be the increasing injection omitting $i$, and let $M_n(K)$, $\\mathrm{pr}_i:M_n(K)\\to K_{n-1}$ ($0\\leq i\\leq n$) and $\\mu_n:K_n\\to M_n(K)$ be the matching object, its projections and the matching morphism of [lem-weil-pbc-simplicial-matching-object]. Then: (1) for every object $W$ of $\\mathcal C$, the map $(x_\\delta)_\\delta\\mapsto(x_{\\delta_0},\\dots,x_{\\delta_n})$ is a bijection, natural in $W$, from the families $(x_\\delta:W\\to K_k)_{\\delta}$ indexed by the objects $\\delta:[k]\\to[n]$ of $\\mathcal I_n$ with $K(\\varepsilon)\\circ x_\\delta=x_{\\delta\\circ\\varepsilon}$ for every morphism $\\varepsilon$ of $\\mathcal I_n$, onto the tuples $(x_0,\\dots,x_n)$ of morphisms $x_i:W\\to K_{n-1}$ with $d_{j-1}\\circ x_i=d_i\\circ x_j$ for all $0\\leq i<j\\leq n$; (2) for every object $\\delta$ of $\\mathcal I_n$ and every factorization $\\delta=\\delta_i\\circ\\varepsilon$ the morphism $\\pi_\\delta=K(\\varepsilon)\\circ\\mathrm{pr}_i:M_n(K)\\to K_k$ does not depend on the factorization, and $(M_n(K),(\\pi_\\delta)_\\delta)$ is a limit cone of $P_n(K)$; (3) $\\pi_\\delta\\circ\\mu_n=K(\\delta)$ for every object $\\delta$ of $\\mathcal I_n$, so $\\mu_n$ is the unique morphism $K_n\\to M_n(K)$ whose $\\delta$-component is $K(\\delta)$ for every $\\delta$.",
+ "source": {
+  "document": "literature/stacks-project/simplicial.tex",
+  "place": "Lemma 0186 (lemma-formula-limit) and its proof, there for all maps $\\alpha:[k]\\to[n]$ with $k<n$; the same argument restricted to the injective $\\alpha$ (the factorization $\\alpha=\\delta_i\\circ\\psi$ and $\\alpha=\\delta_{i,j}\\circ\\xi$ keeps $\\psi$, $\\xi$ injective)"
+ },
+ "stmt_deps": [
+  "def-galois-finite-limits-colimits",
+  "def-weil-pbc-simplicial-object",
+  "lem-weil-pbc-simplicial-matching-object"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "matching object of simplicial object as limit over proper faces equals limit over codimension one faces",
+   "results": "SimplicialObject.instHasLimitsOfShape, SimplicialObject.instHasLimits (Mathlib.AlgebraicTopology.SimplicialObject.Basic), SSet.S.IsUniquelyCodimOneFace.iff, SSet.boundary_eq_iSup",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "the limit over all injective non-surjective maps [k] -> [n] of a simplicial object is the limit of the faces d_i with relations d_{j-1} x_i = d_i x_j (matching object, boundary of simplex)",
+   "results": "cechNerveTerminalFrom, NormalizedMooreComplex.objX, SSet.S1, DoldKan.Γ₀.Obj.summand, NormalizedMooreComplex.objX_add_one, SimplicialObject.Splitting.IndexSet",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rln 'matching\\|Matching' Mathlib/AlgebraicTopology Mathlib/CategoryTheory; grep -rn boundary Mathlib/AlgebraicTopology/SimplicialSet/Boundary.lean",
+   "results": "no matching objects of simplicial objects (hits only in Bicategory/Coherence, Monoidal/Mon, Join/Basic, Sites/IsSheafFor in other senses); SSet.boundary is the boundary subcomplex of Δ[n] (simplicial sets only), no limit formula for simplicial objects",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-sr-matching-object-one-member",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-curve-estimates",
+ "unit": "sk-prop-h2"
+}
