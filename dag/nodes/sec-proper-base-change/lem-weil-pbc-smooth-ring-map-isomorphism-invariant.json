@@ -1,0 +1,82 @@
+{
+ "id": "lem-weil-pbc-smooth-ring-map-isomorphism-invariant",
+ "kind": "statement",
+ "title": "Smoothness of an algebra is invariant under isomorphism of algebras",
+ "statement": "Let $R$ be a commutative ring, let $A$ and $B$ be commutative $R$-algebras, and let $\\alpha:A\\to B$ be an isomorphism of $R$-algebras (a ring isomorphism with $\\alpha(r\\cdot 1_A)=r\\cdot 1_B$ for all $r\\in R$). If $R\\to A$ is a smooth ring map [def-weil-pbc-smooth-ring-map], then $R\\to B$ is a smooth ring map.",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Algebra, Definition Tag 00T2 (definition-smooth, line 37084), with Definition Tag 07BN (definition-naive-cotangent-complex, line 35144): the invariance under isomorphism of R-algebras is implicit in the definition; Stacks has no separate lemma for it"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-smooth-ring-map"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "smooth algebra is preserved under algebra isomorphism",
+   "results": "Algebra.Smooth.of_equiv (Mathlib.RingTheory.Smooth.Basic), Algebra.FormallySmooth.of_equiv, Algebra.FormallySmooth.iff_of_equiv (Mathlib.RingTheory.Smooth.Basic), Algebra.IsStandardSmooth.of_algEquiv, Algebra.IsStandardSmoothOfRelativeDimension.of_algEquiv (Mathlib.RingTheory.Smooth.StandardSmooth), RingHom.isStandardSmooth_respectsIso",
+   "date": "2026-10-10",
+   "verdict": "match: Algebra.Smooth.of_equiv"
+  },
+  {
+   "tool": "loogle",
+   "query": "Algebra.Smooth, AlgEquiv",
+   "results": "Algebra.Smooth.of_equiv (Mathlib.RingTheory.Smooth.Basic), Algebra.Smooth.exists_finiteType, Algebra.Smooth.exists_subalgebra_fg (Mathlib.RingTheory.Smooth.NoetherianDescent)",
+   "date": "2026-10-10",
+   "verdict": "match: Algebra.Smooth.of_equiv"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "if A and B are isomorphic R-algebras and A is smooth over R then B is smooth over R",
+   "results": "Algebra.Smooth.of_equiv (Mathlib.RingTheory.Smooth.Basic), Algebra.IsStandardSmooth.of_algEquiv, Algebra.IsStandardSmoothOfRelativeDimension.of_algEquiv, RingHom.isStandardSmooth_respectsIso",
+   "date": "2026-10-10",
+   "verdict": "match: Algebra.Smooth.of_equiv"
+  },
+  {
+   "tool": "local_search",
+   "query": "Algebra.Smooth.of_equiv (project ~/weil-conjectures-slopmaster2)",
+   "results": "Algebra.Smooth.of_equiv, theorem, .lake/packages/mathlib/Mathlib/RingTheory/Smooth/Basic.lean (index: unavailable, but the name was found)",
+   "date": "2026-10-10",
+   "verdict": "match exists"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -n 'theorem of_equiv\\|^class Smooth' Mathlib/RingTheory/Smooth/Basic.lean; sed -n 530,560p Mathlib/RingTheory/Smooth/Basic.lean",
+   "results": "Smooth/Basic.lean:540 class Smooth (formallySmooth, finitePresentation); :554 theorem Smooth.of_equiv [Smooth R A] (e : A ≃ₐ[R] B) : Smooth R B (formallySmooth := FormallySmooth.of_equiv e, line 383; finitePresentation := FinitePresentation.equiv e)",
+   "date": "2026-10-10",
+   "verdict": "match: exact"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "Algebra.Smooth.of_equiv",
+  "file": "Mathlib/RingTheory/Smooth/Basic.lean",
+  "line": 554,
+  "how": "exact: theorem of_equiv [Smooth R A] (e : A ≃ₐ[R] B) : Smooth R B (lines 554-556 read 2026-10-10), with smooth ring map = Algebra.Smooth by the match of def-weil-pbc-smooth-ring-map (Smooth/Basic.lean:540)"
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-smooth-product-algebra",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lead_note": "Leaf accepted by L (2026-10-10): Algebra.Smooth.of_equiv (Smooth/Basic.lean:554, checked with sed).",
+ "reviewed": "pass (L, 2026-10-10): leaf, declaration checked by sed."
+}

@@ -5,14 +5,68 @@
  "statement": "Let $R$ be a commutative ring and let $S'$, $S''$ be commutative $R$-algebras, with structure maps $\\psi':R\\to S'$ and $\\psi'':R\\to S''$. Make the product ring $S'\\times S''$ (componentwise operations, unit $(1,1)$) an $R$-algebra via $r\\mapsto(\\psi'(r),\\psi''(r))$. If $R\\to S'$ and $R\\to S''$ are smooth ring maps [def-weil-pbc-smooth-ring-map], then $R\\to S'\\times S''$ is a smooth ring map.",
  "source": {
   "document": "literature/stacks-project/algebra.tex",
-  "place": "Algebra, Lemma Tag 0GIF (lemma-product-smooth, line 37613), direction 'if' (both factors smooth implies the product smooth); Stacks' proof is 'Omitted' with a hint via Lemma lemma-locally-smooth and lemma-spec-product"
+  "place": "Algebra, Lemma Tag 0GIF (lemma-product-smooth, line 37613), hint of the omitted proof: Lemma Tag 00TC (lemma-locally-smooth, line 37572) and Lemma Tag 00ED (lemma-spec-product, line 3822, whose proof says R_1 = R_{e_1})"
  },
  "stmt_deps": [
   "def-weil-pbc-smooth-ring-map"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "*Step 1 (the idempotents and the projections).* Put $S=S'\\times S''$, $e_1=(1,0)$, $e_2=(0,1)$. Then $e_1^2=e_1$, $e_2=1-e_1$, and $e_1+e_2=1$, so $e_1,e_2$ generate the unit ideal of $S$. Let $p_1:S\\to S'$, $(a,b)\\mapsto a$, and $p_2:S\\to S''$, $(a,b)\\mapsto b$, be the projections. They are surjective ring homomorphisms, and homomorphisms of $R$-algebras: $p_1(\\psi'(r),\\psi''(r))=\\psi'(r)$ and $p_2(\\psi'(r),\\psi''(r))=\\psi''(r)$. Their kernels are $\\ker p_1=\\{(0,b)\\}=e_2S=(1-e_1)S$ and $\\ker p_2=\\{(a,0)\\}=e_1S=(1-e_2)S$, since $(0,b)=(0,1)(a',b)$ and $(a,0)=(1,0)(a,b')$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra, Lemma Tag 00ED (lemma-spec-product, line 3822), first line of its proof ('Write 1 = e_1 + e_2 with e_1 = (1, 0) and e_2 = (0, 1)')"
+   }
+  },
+  {
+   "text": "*Step 2 (the factors are the localizations $S_{e_1}$, $S_{e_2}$).* By Step 1, $e_1$ is idempotent and $p_1:S\\to S'$ is surjective with $\\ker p_1=(1-e_1)S$; so by [lem-weil-pbc-fg-idempotent-ideal-idempotent-generator] (2) $p_1(e_1)=1$ and the ring map $\\bar p_1:S_{e_1}=S[1/e_1]\\to S'$, $x/e_1^n\\mapsto p_1(x)$, induced by $p_1$ is an isomorphism. It is a homomorphism of $R$-algebras, where $S_{e_1}$ is an $R$-algebra via $R\\to S\\to S_{e_1}$: the image $(\\psi'(r),\\psi''(r))/1$ of $r$ goes to $p_1(\\psi'(r),\\psi''(r))=\\psi'(r)$ (Step 1). In the same way (with $e_2$, $\\ker p_2=(1-e_2)S$) $\\bar p_2:S_{e_2}\\to S''$ is an isomorphism of $R$-algebras.",
+   "uses": [
+    "lem-weil-pbc-fg-idempotent-ideal-idempotent-generator"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra, Lemma Tag 00ED (lemma-spec-product, line 3822), proof: 'We leave it to the reader to show that R_1 = R_{e_1} is the localization of R at e_1'; the fact is Lemma Tag 00EH (2)"
+   }
+  },
+  {
+   "text": "*Step 3 (the localizations are smooth).* $R\\to S'$ is smooth by hypothesis and $\\bar p_1^{-1}:S'\\to S_{e_1}$ is an isomorphism of $R$-algebras (Step 2), so $R\\to S_{e_1}$ is a smooth ring map by [lem-weil-pbc-smooth-ring-map-isomorphism-invariant] (with $A=S'$, $B=S_{e_1}$, $\\alpha=\\bar p_1^{-1}$). Likewise $R\\to S_{e_2}$ is smooth, from $R\\to S''$ smooth and $\\bar p_2^{-1}:S''\\to S_{e_2}$.",
+   "uses": [
+    "lem-weil-pbc-smooth-ring-map-isomorphism-invariant",
+    "def-weil-pbc-smooth-ring-map"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra, Lemma Tag 0GIF (lemma-product-smooth, line 37613), hint: 'smoothness of R -> S at q corresponds to ... smoothness of R -> S' at the corresponding prime'"
+   }
+  },
+  {
+   "text": "*Step 4 (conclusion).* The elements $g_1=e_1$, $g_2=e_2$ of $S$ generate the unit ideal (Step 1) and $R\\to S_{g_1}$, $R\\to S_{g_2}$ are smooth ring maps (Step 3). By [lem-weil-pbc-smooth-ring-map-local-on-cover] (with $m=2$), $R\\to S=S'\\times S''$ is a smooth ring map [def-weil-pbc-smooth-ring-map]. (This is the finite-cover form of Stacks' hint 'by Lemma 00TC we can check smoothness one prime at a time': every prime of $S$ lies in $D(e_1)$ or $D(e_2)$, Lemma 00ED.)",
+   "uses": [
+    "lem-weil-pbc-smooth-ring-map-local-on-cover",
+    "def-weil-pbc-smooth-ring-map"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra, Lemma Tag 00TC (lemma-locally-smooth, line 37572), its proof ('there exists a finite covering Spec(S) = union D(g_i) such that each S_{g_i} is smooth ...')"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-fg-idempotent-ideal-idempotent-generator",
+  "lem-weil-pbc-smooth-ring-map-isomorphism-invariant",
+  "def-weil-pbc-smooth-ring-map",
+  "lem-weil-pbc-smooth-ring-map-local-on-cover"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Algebra, Lemma Tag 0GIF (lemma-product-smooth): Stacks' proof is 'Omitted' with a hint (Lemmas 00TC and 00ED); the steps carry out that hint, written by the agent"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -55,15 +109,43 @@
    "results": "Smooth/Pi.lean:29 FormallySmooth.of_pi, :50 FormallySmooth.pi_iff [Finite I], :122 instance FormallySmooth R (Π i, A i); Finiteness/FinitePresentationLocal.lean:135 instance Algebra.FinitePresentation.pi [Finite ι] : FinitePresentation R (∀ a, S a); Smooth/Basic.lean:540 class Smooth (formallySmooth, finitePresentation), :554 Smooth.of_equiv (e : A ≃ₐ[R] B); only LinearEquiv.piFinTwo (LinearAlgebra/Pi.lean:611), no AlgEquiv between Π (i : Fin 2) and a binary product found; no Algebra.Smooth instance for Prod or Pi",
    "date": "2026-10-10",
    "verdict": "no match; candidate assembly recorded in mathlib_candidate"
+  },
+  {
+   "tool": "loogle",
+   "query": "Algebra.FormallySmooth ?R (?A × ?B)",
+   "results": "none",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "Algebra.FinitePresentation ?R (?A × ?B)",
+   "results": "none",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "product of two smooth algebras S × T is smooth over R",
+   "results": "Algebra.FormallySmooth.comp, Algebra.Smooth.baseChange, Algebra.FormallySmooth.instTensorProduct (Mathlib.RingTheory.Smooth.Basic), Algebra.FormallySmooth.pi_iff (Mathlib.RingTheory.Smooth.Pi), Algebra.Smooth, Algebra.instSmoothOfIsStandardSmooth",
+   "date": "2026-10-10",
+   "verdict": "no match for the binary product; Pi ingredients only"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rn 'def piFinTwo\\|piFinTwo.*≃ₐ' Mathlib; grep -rn 'Smooth.*Prod\\|Prod.*Smooth' Mathlib/RingTheory Mathlib/AlgebraicGeometry; sed -n 20,35p Mathlib/Algebra/Ring/Fin.lean",
+   "results": "RingEquiv.piFinTwo (Mathlib/Algebra/Ring/Fin.lean:27) : (∀ i : Fin 2, R i) ≃+* R 0 × R 1, a ring isomorphism only (no ≃ₐ version found); no Algebra.Smooth / FormallySmooth / FinitePresentation instance for Prod",
+   "date": "2026-10-10",
+   "verdict": "no match; corrects the earlier note that only LinearEquiv.piFinTwo exists"
   }
  ],
  "mathlib_match": null,
  "mathlib_candidate": {
-  "declaration": "Algebra.FormallySmooth.instForallOfFinite, Algebra.FinitePresentation.pi, Algebra.Smooth.of_equiv",
+  "declaration": "Algebra.FormallySmooth.instForallOfFinite, Algebra.FinitePresentation.pi, RingEquiv.piFinTwo, Algebra.Smooth.of_equiv",
   "file": "Mathlib/RingTheory/Smooth/Pi.lean",
-  "how": "for I = Fin 2 with A 0 = S', A 1 = S'': Algebra.Smooth R (Π i, A i) by Smooth.mk (Smooth/Basic.lean:540) from the instance FormallySmooth R (Π i, A i) (Smooth/Pi.lean:122) and FinitePresentation.pi (Mathlib/RingTheory/Finiteness/FinitePresentationLocal.lean:135), then transported to S' × S'' along an R-algebra isomorphism (Π i : Fin 2, A i) ≃ₐ[R] S' × S'' with Smooth.of_equiv (Smooth/Basic.lean:554); not a leaf: Mathlib states it for Pi, not for the binary product, and the transport needs an algebra isomorphism not found as one declaration (only LinearEquiv.piFinTwo, LinearAlgebra/Pi.lean:611)"
+  "how": "for I = Fin 2 with A 0 = S', A 1 = S'': Algebra.Smooth R (Π i, A i) by Smooth.mk (Smooth/Basic.lean:540) from the instance FormallySmooth R (Π i, A i) (Smooth/Pi.lean:122) and FinitePresentation.pi (Mathlib/RingTheory/Finiteness/FinitePresentationLocal.lean:135), then transported to S' × S'' with Smooth.of_equiv (Smooth/Basic.lean:554) along RingEquiv.piFinTwo (Mathlib/Algebra/Ring/Fin.lean:27) upgraded to an R-algebra isomorphism (AlgEquiv.ofRingEquiv, commutes by rfl); several lines, not a one-line specialization, so not a leaf: the item is split along Stacks' hint instead"
  },
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "worker",
@@ -83,5 +165,12 @@
   }
  },
  "chapter": "sec-proper-base-change",
- "unit": "sk-thm-p1"
+ "unit": "sk-thm-p1",
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "lem-weil-pbc-smooth-product-algebra",
+  "worker": "stage1",
+  "summary": "Checked the statement against Stacks 0GIF ('if' direction; tags 0GIF, 00TC, 00ED, 00EH verified in tags/tags) and kept it. def-weil-pbc-smooth-ring-map is the Stacks definition (finite presentation, H_1(NL)=0, Omega finite projective) and is already a Mathlib leaf for Algebra.Smooth (Mathlib's FormallySmooth is defined as Omega projective + H1Cotangent = 0, Smooth/Basic.lean:70), so the notions agree; still, the Mathlib assembly for S' x S'' (Pi instance, FinitePresentation.pi, RingEquiv.piFinTwo upgraded to an AlgEquiv, Smooth.of_equiv) is several lines, not a one-line specialization (B8): the candidate is kept and corrected (RingEquiv.piFinTwo exists, Algebra/Ring/Fin.lean:27). Wrote the omitted proof following Stacks' hint in 4 steps: idempotents e_1=(1,0), e_2=(0,1) generate the unit ideal and are the kernels' complements of the projections (elementary); S_{e_i} is the factor via the projection by the existing leaf lem-weil-pbc-fg-idempotent-ideal-idempotent-generator (2) (00EH); smoothness transfers along that R-algebra isomorphism by a new Mathlib leaf lem-weil-pbc-smooth-ring-map-isomorphism-invariant (Algebra.Smooth.of_equiv, exact); conclusion by the existing leaf lem-weil-pbc-smooth-ring-map-local-on-cover (finite-cover form of 00TC). All cited nodes are in unit sk-thm-p1. The citer lem-weil-pbc-smooth-over-product-ring step 3 uses exactly this statement (S'=A_1, S''=A_2 with structure maps psi_1, psi_2); no error found there."
+ },
+ "reviewed": "pass (L, 2026-10-10): 4 steps by agent following the 0GIF hint: the factors are the localizations at the idempotents, smoothness transfers along the isomorphism (new leaf Smooth.of_equiv) and is local on a finite cover by D(e_i)."
 }
