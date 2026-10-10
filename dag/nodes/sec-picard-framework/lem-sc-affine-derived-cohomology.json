@@ -23,46 +23,103 @@
   "def-pc-derived-category",
   "def-pc-derived-direct-image"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Since $f$ is affine, the affine higher-direct-image statement [lem-pc-affine-morphism-hi] gives $R^pf_*\\mathcal F=0$ for all $p>0$ and every quasi-coherent $\\mathcal O_X$-module $\\mathcal F$. This is exactly the hypothesis of the cohomology comparison for derived direct images with quasi-coherently acyclic pushforward [lem-sc-qcoh-acyclic-derived-pushforward-cohomology], which applies to every (possibly unbounded) $E\\in D_{\\mathrm{QCoh}}(X)$ and gives a natural isomorphism $H^i(Rf_*E)\\cong f_*H^i(E)$ for every integer $i$, where $Rf_*$ and its cohomology sheaves are those of [def-pc-derived-direct-image]. (A representative of $E$ need not have quasi-coherent terms, and for unbounded $E$ termwise pushforward does not compute $Rf_*E$; this is why the comparison is a cited statement, Stacks Tag 08D4 applied to $\\Gamma(f^{-1}V,-)$ for affine opens $V\\subseteq Y$, the 'small detail omitted' of Tag 0AVW.)",
+   "uses": [
+    "lem-pc-affine-morphism-hi",
+    "lem-sc-qcoh-acyclic-derived-pushforward-cohomology",
+    "def-pc-derived-direct-image"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/perfect.tex",
+    "place": "Tag 0AVW, lemma-affine-morphism-equivalence, proof (display H^i(Rf_*K)=f_*H^i(K), citing coherent-lemma-relative-affine-vanishing and Tag 08D4 lemma-application-nice-K-injective)"
+   }
+  },
+  {
+   "text": "The same affine higher-direct-image statement also says that $f_*\\mathcal F$ is quasi-coherent whenever $\\mathcal F$ is quasi-coherent. Taking $\\mathcal F=H^i(E)$, which is quasi-coherent because $E\\in D_{\\mathrm{QCoh}}(X)$, shows that the sheaf $f_*H^i(E)$ in the comparison is quasi-coherent.",
+   "uses": [
+    "lem-pc-affine-morphism-hi"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/perfect.tex",
+    "place": "Tag 0AVW, lemma-affine-morphism-equivalence, proof"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-derived-direct-image",
+  "lem-pc-affine-morphism-hi",
+  "lem-sc-qcoh-acyclic-derived-pushforward-cohomology"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/perfect.tex",
+  "place": "Tag 0AVW, lemma-affine-morphism-equivalence, proof"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
    "query": "affine morphism derived pushforward cohomology sheaves",
-   "results": "Ordinary Scheme.Modules.pushforward and adjunction declarations only; no derived theorem",
+   "results": "AlgebraicGeometry.Scheme.Modules.pushforward and related ordinary pushforward declarations; no derived theorem",
    "date": "2026-10-11",
    "verdict": "no match"
   },
   {
    "tool": "loogle",
-   "query": "pushforward",
-   "results": "No matching declaration for the derived statement; query returned unknown identifier",
+   "query": "pushforward derived cohomology",
+   "results": "0 hits; unknown identifier pushforward",
    "date": "2026-10-11",
    "verdict": "no match"
   },
   {
    "tool": "grep",
-   "query": "derived.*pushforward|higherDirectImage|pushforward AlgebraicGeometry",
-   "results": "Ordinary pushforward declarations in Mathlib/AlgebraicGeometry/Modules/Sheaf.lean:165-171; no derived affine cohomology theorem",
+   "query": "derived.*pushforward|higherDirectImage|cohomology.*Rf in Mathlib/AlgebraicGeometry",
+   "results": "0 hits",
    "date": "2026-10-11",
    "verdict": "no match"
   },
   {
    "tool": "leansearch",
-   "query": "affine pushforward derived category quasi coherent",
+   "query": "affine pushforward derived category quasi coherent cohomology",
    "results": "service unavailable: Internal Server Error",
    "date": "2026-10-11",
    "verdict": "unavailable"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-sc-affine-derived-pushforward-t-exact",
   "by": "worker",
   "date": "2026-10-10"
  },
  "chapter": "sec-picard-framework",
- "unit": "sk-thm-picard-duality"
+ "unit": "sk-thm-picard-duality",
+ "split_report": {
+  "date": "2026-10-11",
+  "item": "lem-sc-affine-derived-cohomology",
+  "worker": "stage1",
+  "summary": "Checked the affine derived cohomology statement against Stacks Tag 0AVW and found no exact sorry-free Lean declaration. The proof is split into the derived-functor cohomology comparison, using the definition of derived direct image and affine higher-direct-image vanishing, and the quasi-coherence conclusion for the direct image of each quasi-coherent cohomology sheaf. No new node was needed because both inputs already exist in the DAG.",
+  "blueprint": "The two steps realize the passage in the ancestor lem-sc-finite-duality from the derived right adjoint to the degree-zero/cohomology sheaf for an affine morphism: identify cohomology of Rf_* and verify quasi-coherence.",
+  "tool_uses": [
+   {
+    "node": "lem-pc-affine-morphism-hi",
+    "why": "The proof needs the generic affine vanishing and quasi-coherence theorem for ordinary pushforward; the Picard-duality unit route supplies no replacement for this foundational affine cohomology fact."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pc-affine-morphism-hi"
+ ],
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-adc1801",
+  "group": "K1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-adc1801 (reviewer sub-agent of L); spot-checked: Item statement read against Stacks 0AVW (perfect.tex 713-772) incl. display H^i(Rf_*K)=f_*H^i(K) and its citation of 08D4; cited statements def-pc-derived-direct-image and lem-pc-affine-morphism-hi read; no cycle: item does not cite lem-sc-affine-derived-pushforward-t-exact (which cites the item, its creator) nor lem-sc-affine-derived-concentration; not a restatement of either or of lem-pc-cech-computes; lem-pc-derived-direct-image-preserves-qcoh checked and does not contain the comparison. Step 2 correct. FIX more, RETURN less: dag/nodes/sec-picard-framework/lem-sc-affine-derived-cohomology.json step 1 and proof_deps: the passage from sheaf-level vanishing R^pf_*F=0 (F quasi-coherent) to H^i(Rf_*E)=f_*H^i(E) for possibly unbounded E in D_QCoh was hidden as 'apply the exact functor termwise to a representative' (false as stated: representatives need not be termwise quasi-coherent, and termwise f_* does not compute Rf_* for unbounded E; Stacks needs 08D4 here) (C1); now cites new statement-only node lem-sc-qcoh-acyclic-derived-pushforward-cohomology (Stacks 08D4 with N=1 applied to Gamma(f^{-1}V,-), as in 08D5 proof), status unsplit, one LeanFinder search recorded (no match). Start 'Sat Oct 10 05:59 PM UTC 2026', end 'Sat Oct 10 06:03:50 PM UTC 2026'.; 2 file(s) fixed by the reviewer; 1 statement node(s) added by the reviewer (FIX more, RETURN less)"
+ }
 }
