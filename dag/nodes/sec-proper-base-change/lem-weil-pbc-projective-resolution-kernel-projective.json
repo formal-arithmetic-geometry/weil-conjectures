@@ -1,0 +1,70 @@
+{
+ "id": "lem-weil-pbc-projective-resolution-kernel-projective",
+ "kind": "statement",
+ "title": "The d-th syzygy of a module of projective dimension at most d is projective",
+ "statement": "Let $R$ be a commutative ring, $M$ an $R$-module and $d\\ge0$ an integer such that $M$ has a projective resolution of length $\\le d$ [def-weil-pbc-finite-global-dimension]. Let $e\\ge d-1$ and let $F_e\\to F_{e-1}\\to\\dots\\to F_0\\to M\\to0$ be an exact sequence [def-weil-pbc-exact-sequence] of $R$-modules with every $F_i$ projective [def-weil-pbc-projective-module]. Then $\\operatorname{Ker}(F_e\\to F_{e-1})$ (for $e=0$: $\\operatorname{Ker}(F_0\\to M)$) is a projective $R$-module. In particular (taking $e=d-1$ when $d\\ge1$): if $0\\to K\\to F_{d-1}\\to\\dots\\to F_0\\to M\\to0$ is exact with all $F_i$ projective, then $K$ is projective; and if $d=0$, $M$ itself is projective.",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Algebra, Lemma Tag 00O5 (lemma-independent-resolution, line 26585) and its proof (induction on d using Schanuel's Lemma Tag 00O3, lemma-Schanuel). Tag verified in tags/tags: 00O5,algebra-lemma-independent-resolution"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-finite-global-dimension",
+  "def-weil-pbc-exact-sequence",
+  "def-weil-pbc-projective-module"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "kernel of a projective resolution of a module of projective dimension at most n is projective (syzygy of length n is projective)",
+   "results": "CategoryTheory.Projective.instSyzygies, CategoryTheory.ProjectiveResolution.projective, CategoryTheory.Projective.syzygies, ProjectiveResolution.instProjectiveXNatOfComplex, ModuleCat.projectiveResolution, ProjectiveResolution.ofComplex, ProjectiveResolution.self (all about the canonical resolution, none about the kernel of an arbitrary one)",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "If M has projective dimension ≤ d and 0 → K → P_{d-1} → ... → P_0 → M → 0 is exact with P_i projective then K is projective",
+   "results": "CategoryTheory.ShortComplex.ShortExact.hasProjectiveDimensionLT_X₃_iff, hasProjectiveDimensionLT_X₁, hasProjectiveDimensionLT_X₂, hasProjectiveDimensionLT_X₃ (Mathlib.CategoryTheory.Abelian.Projective.Dimension), projective_iff_hasProjectiveDimensionLT_one, HasProjectiveDimensionLE",
+   "date": "2026-10-10",
+   "verdict": "no match: Mathlib's projective dimension is Ext-vanishing (HasProjectiveDimensionLT), and hasProjectiveDimensionLT_X₃_iff gives one step of dimension shifting; iterating it d times and identifying the Ext definition with the node's resolution definition is a theorem, not a one-line specialization"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.HasProjectiveDimensionLE, CategoryTheory.Projective",
+   "results": "CategoryTheory.projective_iff_hasProjectiveDimensionLE_zero (Mathlib.CategoryTheory.Abelian.Projective.Dimension)",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rn 'stacks 00O5\\|Schanuel' Mathlib --include=*.lean; grep -n 'theorem\\|lemma' Mathlib/CategoryTheory/Abelian/Projective/Dimension.lean Mathlib/Algebra/Category/ModuleCat/ProjectiveDimension.lean",
+   "results": "no 00O5 tag, no Schanuel lemma; Dimension.lean has the short-exact-sequence lemmas hasProjectiveDimensionLT_X₁/X₂/X₃/X₃_iff and projective_iff_hasProjectiveDimensionLE_zero; ModuleCat/ProjectiveDimension.lean only invariance under (semi)linear equivalence",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-flat-under-regular",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1"
+}

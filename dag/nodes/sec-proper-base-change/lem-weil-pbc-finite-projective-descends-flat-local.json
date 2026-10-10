@@ -1,0 +1,76 @@
+{
+ "id": "lem-weil-pbc-finite-projective-descends-flat-local",
+ "kind": "statement",
+ "title": "Finite projective modules descend along flat local homomorphisms",
+ "statement": "Let $(R,\\mathfrak m_R)$ and $(S,\\mathfrak m_S)$ be local rings and $\\varphi:R\\to S$ a local homomorphism ($\\varphi(\\mathfrak m_R)\\subseteq\\mathfrak m_S$) which is flat [def-weil-pbc-flat-ring-map]. Let $M$ be a finitely generated $R$-module [def-weil-finitely-generated-module]. Then $M$ is a projective $R$-module [def-weil-pbc-projective-module] if and only if $M\\otimes_RS$ is a projective $S$-module; and in that case $M$ is a finite free $R$-module, $M\\cong R^{\\oplus r}$ for some $r\\ge0$.",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Algebra, Lemma Tag 00O1 (lemma-finite-projective-descends, line 19269) and its proof (finite projective over a local ring = finite free, Lemma Tag 00NX; a basis of M/m_R M lifts to a basis of M by faithful flatness, Lemma Tag 00HR). Tag verified in tags/tags: 00O1,algebra-lemma-finite-projective-descends"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-flat-ring-map",
+  "def-weil-finitely-generated-module",
+  "def-weil-pbc-projective-module"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "finite module M over local ring is free if base change M ⊗ S is projective along flat local homomorphism R → S",
+   "results": "Module.free_of_maximalIdeal_rTensor_injective, Module.free_of_flat_of_isLocalRing (Mathlib.RingTheory.LocalRing.Module), IsBaseChange.free, Module.free_of_flat_of_finrank_eq, Module.Flat.of_flat_tensorProduct (Mathlib.RingTheory.Flat.FaithfullyFlat.Basic), Module.Flat.projective_of_finitePresentation, Module.Flat.isBaseChange, Module.Flat.iff_flat_tensorProduct",
+   "date": "2026-10-10",
+   "verdict": "generalization: free_of_flat_of_isLocalRing + Flat.of_flat_tensorProduct give the statement in one term (see mathlib_match)"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Let R → S be a flat local homomorphism of local rings and M a finite R-module. If M ⊗_R S is projective over S then M is projective over R",
+   "results": "Module.Flat.of_projective (instance, Mathlib.RingTheory.Flat.Basic), Module.Flat.projective_of_finitePresentation, Algebra.FormallyUnramified.projective_of_restrictScalars, Module.Flat.of_flat_tensorProduct, Module.Flat.iff_flat_tensorProduct, Module.Projective.tensorProduct, Module.flat_of_isLocalized_span, Module.FaithfullyFlat",
+   "date": "2026-10-10",
+   "verdict": "generalization: same chain"
+  },
+  {
+   "tool": "loogle",
+   "query": "Module.Free, Module.FaithfullyFlat, TensorProduct",
+   "results": "none",
+   "date": "2026-10-10",
+   "verdict": "no single declaration"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rn 'theorem\\|lemma\\|instance' Mathlib --include=*.lean | grep -i faithfullyFlat | grep -i 'proj\\|free\\|flat_of\\|of_tensor'; grep -n of_flat_tensorProduct Mathlib/RingTheory/Flat/FaithfullyFlat/Basic.lean; grep -n free_of_flat_of_isLocalRing Mathlib/RingTheory/LocalRing/Module.lean; grep -rn 'stacks 00O1' Mathlib",
+   "results": "Module.FaithfullyFlat.of_flat_of_isLocalHom (RingTheory/Flat/FaithfullyFlat/Algebra.lean:60), Module.Flat.of_flat_tensorProduct (RingTheory/Flat/FaithfullyFlat/Basic.lean:588), Module.free_of_flat_of_isLocalRing (RingTheory/LocalRing/Module.lean:304, @[stacks 00NZ]); no declaration tagged 00O1; no Projective/Free descent lemma in RingTheory/Flat/FaithfullyFlat/Descent.lean or RingTheory/Finiteness/Descent.lean",
+   "date": "2026-10-10",
+   "verdict": "match by one-term composition"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "Module.free_of_flat_of_isLocalRing, Module.Flat.of_flat_tensorProduct, Module.FaithfullyFlat.of_flat_of_isLocalHom",
+  "file": "Mathlib/RingTheory/LocalRing/Module.lean",
+  "line": 304,
+  "how": "specializes in one line: with phi.toAlgebra, `Module.FaithfullyFlat.of_flat_of_isLocalHom` (Mathlib/RingTheory/Flat/FaithfullyFlat/Algebra.lean:60; [IsLocalRing A] [IsLocalRing B] [Flat A B] [IsLocalHom (algebraMap A B)]) makes S faithfully flat over R; S ⊗[R] M projective over S is flat over S (instance `Module.Flat.of_projective`, Mathlib/RingTheory/Flat/Basic.lean:227); `Module.Flat.of_flat_tensorProduct R M S` (Mathlib/RingTheory/Flat/FaithfullyFlat/Basic.lean:588) gives M flat over R; `Module.free_of_flat_of_isLocalRing` ([IsLocalRing R] [Module.Finite R P] [Flat R P] : Free R P, Mathlib/RingTheory/LocalRing/Module.lean:304) gives M free, hence projective (`Module.Projective.of_free`, Mathlib/Algebra/Module/Projective.lean:161). Converse: `Module.Projective.tensorProduct` (Mathlib/Algebra/Module/Projective.lean:242). A one-term composition of three lemmas, not a single declaration; sources read with sed -n on 2026-10-10."
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-flat-under-regular",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lead_note": "L 2026-10-10: composed Mathlib leaf (accepted as on earlier composed matches): a one-term composition of three declarations, faithful flatness of a flat local homomorphism, descent of flatness along it, and free = finite flat over a local ring; lines 60, 588, 304 verified."
+}
