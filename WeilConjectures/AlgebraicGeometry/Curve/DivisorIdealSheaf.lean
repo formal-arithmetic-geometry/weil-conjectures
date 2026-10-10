@@ -19,8 +19,13 @@ soon as its order of vanishing is nonnegative at every point of `V`
 (`AlgebraicGeometry.Scheme.exists_germToFunctionField_eq_of_ord_nonneg`).
 
 An effective divisor `E = ∑_P n_P [P]` defines the invertible ideal sheaf
-`𝒪_C(-E) = ∏_P 𝓘_P^{n_P}` (`AlgebraicGeometry.Scheme.Divisor.idealSheaf`). Every invertible
-ideal sheaf is of this form, and the order of a local generator of `𝒪_C(-E)` at `P` is `n_P`.
+`𝒪_C(-E) = ∏_P 𝓘_P^{n_P}` (`AlgebraicGeometry.Scheme.Divisor.idealSheaf`). The order at `P` of a
+local generator of `𝒪_C(-E)` is `n_P`, and every invertible ideal sheaf is of this form. These
+ideal sheaves give a concrete description of line bundles on `C`: `𝒪_C(-E₁) ≅ 𝒪_C(-E₂)` if and
+only if `E₁ - E₂` is principal, and every invertible module is `𝒪_C(E₁) ⊗ 𝒪_C(-E₂)`. This is the
+input for the identification of the divisor class group with the Picard group
+(`AlgebraicGeometry.Scheme.exists_divisorClassGroup_addEquiv_pic`, blueprint
+`lem-sc-divisor-class-curve`).
 
 ## Main definitions
 
@@ -28,14 +33,26 @@ ideal sheaf is of this form, and the order of a local generator of `𝒪_C(-E)` 
   order of vanishing of a local generator.
 - `AlgebraicGeometry.Scheme.Divisor.idealSheaf`: the ideal sheaf `𝒪_C(-E)` of an effective
   divisor `E`.
+- `AlgebraicGeometry.Scheme.IdealSheafData.toModulesOfLE`: the inclusion `I ⊆ J` of ideal sheaves
+  as a morphism of modules.
+- `AlgebraicGeometry.Scheme.Modules.IsFreeGenerator.ratCoord`: the coordinate in the function
+  field of a section of an invertible module with respect to a trivialization.
 
 ## Main statements
 
 - `AlgebraicGeometry.Scheme.exists_germToFunctionField_eq_of_ord_nonneg`: a rational function
   with nonnegative orders on `V` is regular on `V`.
 - `AlgebraicGeometry.Scheme.Divisor.ordAt_idealSheaf`: `𝒪_C(-E)` has order `n_P` at `P`.
-- `AlgebraicGeometry.Scheme.IdealSheafData.exists_eq_idealSheaf`: every invertible ideal sheaf is
-  `𝒪_C(-E)` for an effective divisor `E`.
+- `AlgebraicGeometry.Scheme.IdealSheafData.IsInvertible.nonempty_toModules_iso_dual_tensorObj_mul`:
+  `I ≅ Jᵛ ⊗ I J` for invertible ideal sheaves `I` and `J`.
+- `AlgebraicGeometry.Scheme.IdealSheafData.IsInvertible.exists_eq_idealSheaf`: every invertible
+  ideal sheaf is `𝒪_C(-E)` for an effective divisor `E`.
+- `AlgebraicGeometry.Scheme.Divisor.nonempty_toModules_idealSheaf_iso_of_ord_eq`,
+  `AlgebraicGeometry.Scheme.Divisor.exists_ord_eq_of_nonempty_iso`: `𝒪_C(-E₂) ≅ 𝒪_C(-E₁)` if and
+  only if `E₁ - E₂` is the divisor of a rational function.
+- `AlgebraicGeometry.Scheme.Modules.exists_nonempty_iso_dual_toModules_idealSheaf_tensorObj`:
+  every invertible module is `𝒪_C(E₁) ⊗ 𝒪_C(-E₂)` (blueprint
+  `lem-sc-line-bundle-rational-section`).
 -/
 
 @[expose] public section
