@@ -62,7 +62,8 @@ lemma frobeniusPowIso_constantTwist_hom (F : WeilSheaf k₀ l X) (b : (PadicAlgC
     simp only [Category.assoc]
     rw [reassoc_of% ProEtale.AdicSheaf.smul_comp, ProEtale.AdicSheaf.smul_smul]
     have hb : (ULift.up (b : PadicAlgCl l) * ULift.up ((b ^ m : (PadicAlgCl l)ˣ) : PadicAlgCl l) :
-        ULift.{u + 1} (PadicAlgCl l)) = ULift.up ((b ^ (m + 1) : (PadicAlgCl l)ˣ) : PadicAlgCl l) := by
+        ULift.{u + 1} (PadicAlgCl l)) =
+          ULift.up ((b ^ (m + 1) : (PadicAlgCl l)ˣ) : PadicAlgCl l) := by
       rw [pow_succ', Units.val_mul]
       rfl
     rw [hb]
