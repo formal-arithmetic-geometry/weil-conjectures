@@ -1,14 +1,15 @@
 # Work queue
 
-908 items; claim with `tools/claim.py next <group> [--stage N]`.
+911 items; claim with `tools/claim.py next <group> [--stage N]`.
 
-## Stage 1: nodes to split (153)
+## Stage 1: nodes to split (155)
 
 | node | distance to a target | Lean state on the done branch |
 |---|---|---|
 | `lem-weil-derived-limit-existence` | 14 | none |
 | `lem-weil-pbc-injective-acyclicity-bounded-below` | 2002 | sorry_here |
 | `lem-pc-ringed-space-module-stalk-tensor` | 3013 | none |
+| `lem-sc-derived-open-gluing` | 3014 | none |
 | `lem-pc-coherent-support-proper-higher-direct-image` | 3015 | none |
 | `lem-pc-direct-image-qc-support-reduction` | 3015 | none |
 | `lem-pc-pseudo-coherent-distinguished-triangle` | 3015 | none |
@@ -17,9 +18,10 @@
 | `lem-pc-tor-amplitude-qcoh-test` | 3015 | none |
 | `lem-pc-tower-enough-injectives` | 3015 | none |
 | `lem-pc-tower-surjective-lim-acyclic` | 3015 | none |
-| `lem-pc-perfect-complexes-compact-set` | 3016 | none |
 | `lem-pc-ringed-space-derived-limit-stalk-injective` | 3016 | none |
 | `lem-pc-ringed-space-rgamma-derived-limit` | 3016 | none |
+| `lem-pc-derived-mayer-vietoris-triangle` | 3017 | none |
+| `lem-pc-perfect-affine-bounded-projective` | 3017 | none |
 | `lem-pc-perfect-generation-koszul-orthogonal` | 3018 | none |
 | `lem-pc-perfect-rhom-tensor-comparison` | 3018 | none |
 | `lem-pc-supported-open-pushforward` | 3018 | none |
@@ -33,7 +35,6 @@
 | `lem-pc-perfect-generator-pullback` | 3019 | none |
 | `lem-sc-affine-perfect-map-lift` | 3019 | none |
 | `lem-sc-affine-perfect-support-extension` | 3019 | none |
-| `lem-sc-derived-open-gluing` | 3019 | none |
 | `lem-sc-flat-precompose-pus` | 3019 | none |
 | `def-pc-global-derived-rhom` | 3020 | none |
 | `lem-pc-qcqs-derived-direct-image-right-adjoint` | 3020 | none |
@@ -52,8 +53,10 @@
 | `lem-sc-lfp-field-extension-pointwise-descent` | 4012 | none |
 | `lem-sc-meromorphic-sheaf-generic-product` | 5011 | none |
 | `lem-sc-locnoeth-components-locally-finite` | 5012 | none |
-| `lem-pc-perfect-complex-descent` | 5013 | none |
 | `lem-pc-rf-base-change-single-complex-criterion` | 5013 | none |
+| `lem-pc-affine-perfect-colimit-descent` | 5014 | none |
+| `lem-pc-perfect-affine-model` | 5014 | none |
+| `lem-pc-perfect-descend-morphisms` | 5014 | none |
 | `lem-pc-sites-modules-sheafification-flat` | 5014 | none |
 | `lem-pc-flat-module-descent` | 5015 | none |
 | `lem-pc-fp-complex-descent` | 5015 | none |
@@ -66,7 +69,6 @@
 | `lem-pod-lisse-module-sheaves-as-module-objects` | - | none |
 | `lem-pod-lisse-tensor-and-scalar-extension` | - | none |
 | `lem-pur-sheaf-hom-cover-gluing` | - | none |
-| `lem-sc-affine-unit-quotient` | - | rests_on_sorry |
 | `lem-sc-artin-schreier-k` | - | none |
 | `lem-sc-base-change-curve` | - | none |
 | `lem-weil-pbc-constructible-subobjects-noetherian` | - | none |
@@ -160,7 +162,7 @@
 | `lem-pur-rhom-well-defined` | - | none |
 | `lem-zl-noether-normalization-dimension` | - | none |
 
-## Stage 2: nodes to state (755)
+## Stage 2: nodes to state (756)
 
 | node | distance to Mathlib | kind |
 |---|---|---|
@@ -313,6 +315,7 @@
 | `lem-sc-affine-regular-immersion-kernel-criterion` | 1 | state |
 | `lem-sc-affine-standard-cover-finite-presentation-flat` | 1 | state |
 | `lem-sc-affine-standard-cover-finite-projective` | 1 | state |
+| `lem-sc-affine-unit-quotient` | 1 | state |
 | `lem-sc-ample-proj-canonical-map` | 1 | state |
 | `lem-sc-bounded-below-injective-resolution` | 1 | state |
 | `lem-sc-closed-affine-union-affine` | 1 | state |
@@ -920,7 +923,7 @@
 | `lem-weil-pbc-projective-space-zero-isomorphism` | 4 | state |
 | `def-nagata-fixed-base-separated-stage` | 6 | state |
 
-Not open yet: 1521 nodes that wait for a statement dependency, 193 nodes that wait for stage 1.
+Not open yet: 1523 nodes that wait for a statement dependency, 195 nodes that wait for stage 1.
 
 ## Stage 3: modules to prove (0)
 
