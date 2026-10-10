@@ -11,7 +11,7 @@
  },
  "kind": "statement",
  "title": "Kummer sequences and affine Picard torsion commute with algebraically closed base change",
- "statement": "Let $k\\subseteq k'$ be an extension of algebraically closed fields [def-sc-field-extension], let $C$ be a smooth separated connected curve over $k$ [def-sc-curves], and let $n\\geq1$ be prime to $\\operatorname{char}k$. Under the canonical pullback maps, the Kummer long exact sequences [lem-sc-kummer-les] for $C$ and $C_{k'}$ form a commutative morphism of exact sequences. If $C$ is affine, then pullback induces an isomorphism $\\operatorname{Pic}(C)[n]\\xrightarrow{\\sim}\\operatorname{Pic}(C_{k'})[n]$.",
+ "statement": "Let $k\\subseteq k'$ be an extension of algebraically closed fields [def-sc-field-extension], let $C$ be a smooth separated connected curve over $k$ [def-sc-curves], and let $n\\geq1$ be prime to $\\operatorname{char}k$. Write $\\pi:C_{k'}\\to C$ for the base-change morphism and let $c:\\pi^{-1}\\mathbf G_{m,C}\\to\\mathbf G_{m,C_{k'}}$ be the comparison map adjoint to pullback of units; let $c|_{\\mu_n}:\\pi^{-1}\\mu_{n,C}\\to\\mu_{n,C_{k'}}$ be its restriction. Then $(c|_{\\mu_n},c,c)$ is a morphism of short exact Kummer sequences [def-sc-kummer-sequence] for $C$ and $C_{k'}$, and the maps of the resulting Kummer long exact sequences are $H^q(c|_{\\mu_n})\\circ\\rho^q_{k'/k}(C,\\mu_n)$ and $H^q(c)\\circ\\rho^q_{k'/k}(C,\\mathbf G_m)$ (with the evident analogous map on the final $\\mathbf G_m$ term). In degree zero the latter is pullback of global units [lem-weil-pbc-cohomology-pullback-degree-zero]. Under [lem-sc-h1-gm-pic-pullback], $H^1(c)\\circ\\rho^1_{k'/k}(C,\\mathbf G_m)$ corresponds to $\\mathcal L\\mapsto\\pi^*\\mathcal L$. If $C$ is affine, then pullback induces an isomorphism $\\operatorname{Pic}(C)[n]\\xrightarrow{\\sim}\\operatorname{Pic}(C_{k'})[n]$.",
  "source": {
   "document": "literature/blueprint/master/blueprint/sec-curve-estimates/sk-prop-ext-invariance/thm-sc-constant-invariance.md",
   "place": "Proper-case Kummer naturality sentence and affine-case Picard-torsion paragraph"
@@ -19,11 +19,72 @@
  "stmt_deps": [
   "def-sc-field-extension",
   "def-sc-curves",
-  "lem-sc-kummer-les"
+  "lem-sc-kummer-les",
+  "def-sc-kummer-sequence",
+  "lem-sc-kummer-exact",
+  "lem-sc-brauer-zero",
+  "lem-sc-pic-affine",
+  "thm-sc-jacobian-representability",
+  "thm-av-final",
+  "lem-sc-divisible-quotient-torsion",
+  "lem-weil-pbc-cohomology-pullback-degree-zero",
+  "lem-sc-h1-gm-pic-pullback"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Write $\\pi:C_{k'}\\to C$; by [lem-sc-base-change-curve] $C_{k'}$ is a smooth separated connected curve over the algebraically closed field $k'$, and $n$ is prime to $\\operatorname{char}k'=\\operatorname{char}k$. The comparison map $c:\\pi^{-1}\\mathbf G_{m,C}\\to\\mathbf G_{m,C_{k'}}$ is adjoint to pullback of units, and it carries $\\pi^{-1}\\mu_{n,C}$ into $\\mu_{n,C_{k'}}$ and commutes with $t\\mapsto t^n$ because $t\\mapsto t^n$ commutes with every ring homomorphism (elementary). The source sequence $0\\to\\pi^{-1}\\mu_{n,C}\\to\\pi^{-1}\\mathbf G_{m,C}\\to\\pi^{-1}\\mathbf G_{m,C}\\to0$ is exact by [lem-sc-kummer-exact] for $C$ and clause 1 of [lem-weil-pbc-pullback-cohomology-long-exact-ladder]; the target Kummer sequence of $C_{k'}$ is exact by [lem-sc-kummer-exact] for $C_{k'}$. Hence $(c|_{\\mu_n},c,c)$ is a morphism of short exact sequences of abelian sheaves on $(C_{k'})_{\\Et}$. Clause 3 of the ladder makes $\\rho^q_{k'/k}$ a morphism from the Kummer long exact sequence of $C$ to that of the pulled-back sequence (commuting with $H^q$ of the sheaf maps and with the connecting maps), and the $\\delta$-functor property of $H^q((C_{k'})_{\\Et},-)$ as right derived functors of $\\Gamma(C_{k'},-)$ [lem-weil-pbc-right-derived-universal-delta-functor] makes $H^q(c|_{\\mu_n}),H^q(c),H^q(c)$ a morphism from the long exact sequence of the pulled-back sequence to that of the Kummer sequence of $C_{k'}$. Composing, the maps $H^q(c|_{\\mu_n})\\circ\\rho^q_{k'/k}(C,\\mu_n)$ and $H^q(c)\\circ\\rho^q_{k'/k}(C,\\mathbf G_m)$ form a morphism of long exact sequences. In degree zero, clause 2 of [lem-weil-pbc-cohomology-pullback-degree-zero] identifies $\\rho^0$ with pulling back global sections, so $H^0(c)\\circ\\rho^0$ is pullback of global units; the $H^1$ Picard interpretation is [lem-sc-h1-gm-pic-pullback] for $u=\\pi$. Finally [lem-sc-brauer-zero-all-curves] applies to both $C$ and $C_{k'}$, so [lem-sc-kummer-les] applies to both long exact sequences.",
+   "uses": [
+    "def-sc-kummer-sequence",
+    "lem-sc-kummer-exact",
+    "lem-weil-pbc-pullback-cohomology-long-exact-ladder",
+    "lem-weil-pbc-cohomology-pullback-degree-zero",
+    "lem-sc-h1-gm-pic-pullback",
+    "lem-sc-kummer-les",
+    "lem-sc-brauer-zero-all-curves",
+    "lem-sc-base-change-curve",
+    "def-sc-field-extension",
+    "lem-weil-pbc-right-derived-universal-delta-functor"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-curve-estimates/sk-prop-ext-invariance/_section.md",
+    "place": "Proof, first paragraph: naturality of the Kummer sequence under base-field extension"
+   }
+  },
+  {
+   "text": "Assume $C$ is affine. Choose a smooth compactification $\\overline C$ and boundary $S=\\overline C\\setminus C$, and fix $P_0\\in S$. The compactification, boundary, pullback of the divisor line bundles, and compatibility of the quotient presentations with the Jacobian base-change map are exactly [lem-sc-pic-affine-base-change-compatibility]. Thus the map on Picard groups is the map between $G/\\Lambda$ and $G'/\\Lambda'$ induced by $G=J_{\\overline C}(k)\\to G'=J_{\\overline C_{k'}}(k')$, and it carries $\\Lambda$ isomorphically to $\\Lambda'$. Clause (d) of [thm-av-final] makes multiplication by $n$ surjective on $G$ and $G'$, while clause (c) gives an isomorphism $G[n]\\xrightarrow{\\sim}G'[n]$. Apply [lem-sc-divisible-quotient-torsion] to both pairs $(G,\\Lambda)$ and $(G',\\Lambda')$: naturality of the quotient maps and of $\\delta(g+\\Lambda)=ng+n\\Lambda$ makes their exact sequences a commutative diagram. Its left and right vertical maps are isomorphisms, so the middle map is an isomorphism by exactness (or the short five lemma), namely $\\operatorname{Pic}(C)[n]\\xrightarrow{\\sim}\\operatorname{Pic}(C_{k'})[n]$.",
+   "uses": [
+    "lem-sc-pic-affine-base-change-compatibility",
+    "thm-av-final",
+    "lem-sc-divisible-quotient-torsion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-curve-estimates/sk-prop-ext-invariance/_section.md",
+    "place": "Proof, affine case: compactification, Jacobian quotient, and n-torsion comparison"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sc-kummer-sequence",
+  "lem-sc-kummer-exact",
+  "lem-weil-pbc-pullback-cohomology-long-exact-ladder",
+  "lem-weil-pbc-cohomology-pullback-degree-zero",
+  "lem-sc-h1-gm-pic-pullback",
+  "lem-sc-kummer-les",
+  "lem-sc-brauer-zero-all-curves",
+  "def-sc-field-extension",
+  "lem-sc-base-change-curve",
+  "lem-sc-pic-affine-base-change-compatibility",
+  "thm-av-final",
+  "lem-sc-divisible-quotient-torsion",
+  "lem-weil-pbc-right-derived-universal-delta-functor"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/master/blueprint/sec-curve-estimates/sk-prop-ext-invariance/_section.md",
+  "place": "Proof, first paragraph and affine case"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -55,12 +116,47 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "thm-sc-constant-invariance",
   "by": "worker",
   "date": "2026-10-10"
  },
  "chapter": "sec-curve-estimates",
- "unit": "sk-prop-ext-invariance"
+ "unit": "sk-prop-ext-invariance",
+ "split_report": {
+  "date": "2026-10-11",
+  "item": "lem-sc-kummer-base-change-compatibility",
+  "worker": "stage1",
+  "summary": "Filled the item's proof in two steps: functoriality of the Kummer sheaf sequence and the induced long exact sequence, followed by the affine Picard n-torsion comparison using the existing Jacobian quotient and divisible-quotient torsion lemma. No new node was needed.",
+  "blueprint": "The two steps realize the blueprint ancestor thm-sc-constant-invariance proof's naturality sentence and affine-case Picard-torsion paragraph.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-pullback-cohomology-long-exact-ladder",
+    "why": "The item requires the generic derived-cohomology long-exact-sequence naturality and connecting-map compatibility for the pulled-back Kummer sequence."
+   },
+   {
+    "node": "lem-weil-pbc-cohomology-pullback-degree-zero",
+    "why": "The item requires the generic degree-zero interpretation of cohomology pullback as pullback of global units."
+   },
+   {
+    "node": "lem-weil-pbc-right-derived-universal-delta-functor",
+    "why": "Naturality of the connecting maps of etale cohomology on C_{k'} for the morphism of short exact sequences (c|mu_n,c,c) (added by reviewer R-kbc3124)."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-right-derived-universal-delta-functor",
+  "lem-weil-pbc-pullback-cohomology-long-exact-ladder",
+  "lem-weil-pbc-cohomology-pullback-degree-zero",
+  "lem-weil-pbc-right-derived-universal-delta-functor"
+ ],
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-kbc3124",
+  "group": "E1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-kbc3124 (reviewer sub-agent of L); spot-checked: Checked all four points of R-kbc2928 against the head. (2) comparison map c and c|mu_n introduced, H^q(c)∘rho^q, H^0 clause via degree-zero clause 2: repaired. (3) new node lem-sc-h1-gm-pic-pullback is a real lemma, not a duplicate of lem-sc-h1-gm-pic (single curve) or lem-sc-picard-h1-restriction-compatibility (Zariski, closed immersion); statement-only, stmt_deps cite lem-sc-h1-gm-pic (Isom-torsor construction) and lem-sc-torsor-h1-functoriality. FIX more, RETURN less: (a) C1 step 1: the delta-naturality on C_{k'} for the morphism (c|,c,c) (return point 1) was still uncited and clause 2 was miscited for target exactness; rewrote step 1 with clause 1 for source exactness, lem-sc-kummer-exact for C_{k'} via lem-sc-base-change-curve, and cited lem-weil-pbc-right-derived-universal-delta-functor (tool use). (b) C4 lem-sc-h1-gm-pic-pullback: 'morphism of curves' under def-sc-curves (fixed k) does not cover pi:C_{k'}->C; restated for X over k, Y over k', u a morphism of schemes, c_u adjoint to units pullback, torsor form Isom(O,L)->Isom(O,u^*L) made explicit. (c) C4 lem-sc-pic-affine-base-change-compatibility (return point 4 not repaired): it referred to 'the quotient isomorphisms of lem-sc-pic-affine', which are unspecified; restated with the isomorphism induced by restriction Pic^0(C̄)->Pic(C) with kernel Lambda and its compatibility with pullback. Item stmt_deps gained the two nodes its statement cites. Step 2 checked against thm-av-final (c),(d) and lem-sc-divisible-quotient-torsion: correct. Second reading by E1 missed (a)-(c).; 3 file(s) fixed by the reviewer"
+ }
 }
