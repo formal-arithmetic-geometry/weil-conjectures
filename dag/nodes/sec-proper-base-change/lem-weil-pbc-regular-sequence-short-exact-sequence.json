@@ -1,0 +1,68 @@
+{
+ "id": "lem-weil-pbc-regular-sequence-short-exact-sequence",
+ "kind": "statement",
+ "title": "Regular sequences and short exact sequences",
+ "statement": "Let $R$ be a commutative ring, $0\\to M_1\\xrightarrow{\\alpha}M_2\\xrightarrow{\\beta}M_3\\to0$ a short exact sequence of $R$-modules and $f_1,\\dots,f_r\\in R$. For $0\\le i\\le r$ write $I_i=(f_1,\\dots,f_i)\\subset R$. (a) Suppose that for every $i=1,\\dots,r$ the element $f_i$ is a nonzerodivisor on $M_1/I_{i-1}M_1$ and on $M_3/I_{i-1}M_3$ (condition (1) of [def-weil-pbc-regular-sequence] for $M_1$ and for $M_3$). Then for every $i=1,\\dots,r$ the element $f_i$ is a nonzerodivisor on $M_2/I_{i-1}M_2$, and for every $0\\le i\\le r$ the sequence $0\\to M_1/I_iM_1\\to M_2/I_iM_2\\to M_3/I_iM_3\\to0$ induced by $\\alpha,\\beta$ is exact. (b) Consequently, if $f_1,\\dots,f_r$ is an $M_1$-regular sequence and an $M_3$-regular sequence [def-weil-pbc-regular-sequence], then it is an $M_2$-regular sequence.",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Algebra, Lemma Tag 0F1T (lemma-regular-sequence-short-exact-sequence), with its proof (snake lemma, Tag 07JW, and induction on r); part (a) is what that proof establishes, part (b) is the statement of the tag. Tag verified in stacks-project/tags/tags: 0F1T,algebra-lemma-regular-sequence-short-exact-sequence"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-regular-sequence"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "short exact sequence of modules, if a sequence is weakly regular on the submodule and the quotient then it is weakly regular on the middle module",
+   "results": "RingTheory.Sequence.IsRegular.toIsWeaklyRegular, IsRegular.mk, isWeaklyRegular_append_iff, isWeaklyRegular_append_iff', IsWeaklyRegular.mk, isWeaklyRegular_cons_iff' (Mathlib.RingTheory.Regular.RegularSequence), IsSMulRegular.smulShortComplex_shortExact (Mathlib.RingTheory.Regular.Category): none about the middle term of a short exact sequence",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "regular sequence on M1 and M3 in a short exact sequence 0 -> M1 -> M2 -> M3 -> 0 is regular on M2",
+   "results": "RingTheory.Sequence.map_first_exact_on_four_term_right_exact_of_isSMulRegular_last (exactness of M/IM -> M2/IM2 -> M3/IM3 when rs is weakly regular on the fourth term of an exact M -> M2 -> M3 -> M4 -> 0), QuotSMulTop.map_first_exact_on_four_term_exact_of_isSMulRegular_last (Mathlib.RingTheory.Regular.IsSMulRegular), IsSMulRegular.smulShortComplex_shortExact, IsRegular.cons, IsRegular.cons', isRegular_cons_iff, isRegular_cons_iff'",
+   "date": "2026-10-10",
+   "verdict": "no match (map_first_exact_on_four_term_right_exact_of_isSMulRegular_last is a related right-exactness statement, not regularity on M2)"
+  },
+  {
+   "tool": "loogle",
+   "query": "RingTheory.Sequence.IsWeaklyRegular, Function.Exact",
+   "results": "RingTheory.Sequence.map_first_exact_on_four_term_right_exact_of_isSMulRegular_last only",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rn 'IsWeaklyRegular\\|IsRegular M' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib --include=*.lean | grep -i 'exact\\|injective\\|surjective\\|ShortExact'; declaration list of Mathlib/RingTheory/Regular/RegularSequence.lean",
+   "results": "no declaration about IsWeaklyRegular/IsRegular of the middle term of a short exact sequence; RegularSequence.lean has only map_first_exact_on_four_term_right_exact_of_isSMulRegular_last (line 550)",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-regular-sequence-powers",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1"
+}
