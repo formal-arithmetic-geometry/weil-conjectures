@@ -3,11 +3,11 @@
  "blueprint": {
   "is": "lem-kun-03sa",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "Constructible generation",
- "statement": "Let $X$ be a scheme of\nfinite type over a field and\n$\\Lambda$ a finite commutative ring. A sheaf of $\\Lambda$-modules on\n$X_{\\Et}$ is a filtered colimit of\nconstructible\n$\\Lambda$-module sheaves.\n(*Source:* Stacks Project,\n[Lemma 59.73.2, Tag\n`03SA`](https://stacks.math.columbia.edu/tag/03SA), stated there for quasi-compact and quasi-separated\nschemes, the finite-type case being the one used here.) In the Stacks Project the proof uses Modules on Sites, Lemma 18.30.7,\n[Tag `093C`](https://stacks.math.columbia.edu/tag/093C)\n(every sheaf of modules is a filtered colimit of cokernels of maps\nbetween finite direct sums of the sheaves $j_{U!}\\Lambda_U$ for $U$\nin a basis), together with Lemma 59.73.1,\n[Tag `03S8`](https://stacks.math.columbia.edu/tag/03S8)\n(those cokernels are constructible); the weak-Serre property used there,\nLemma 59.71.6, [Tag\n`03RZ`](https://stacks.math.columbia.edu/tag/03RZ), is proved in this chapter as [thm-constructible-serre].",
+ "statement": "Let $X$ be a scheme of finite type over a field [def-weil-pbc-scheme-conventions], let $\\Lambda$ be a finite commutative ring, and let $F$ be a sheaf of $\\Lambda$-modules on the small etale site $X_{\\Et}$ [def-weil-pbc-etale-sheaves, def-weil-sheaf-of-modules-category]. Then $F$ is a filtered colimit of constructible $\\Lambda$-module sheaves [def-weil-pbc-etale-constructible-sheaf]: there are a small filtered category $\\mathcal A$, a diagram $\\alpha \\mapsto F_\\alpha$ from $\\mathcal A$ to the category of sheaves of $\\Lambda$-modules on $X_{\\Et}$, every $F_\\alpha$ constructible, and morphisms $a_\\alpha:F_\\alpha \\to F$ forming a colimit cocone with value $F$ [def-weil-pbc-category-colimit]. (This is the finite-type-over-a-field specialization of Stacks Project Lemma 59.73.2, Tag `03SA`, whose statement is for quasi-compact and quasi-separated schemes and Noetherian $\\Lambda$.)",
  "source": {
   "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-kunneth-ordinary/lem-kun-03sa.md",
   "place": "node lem-kun-03sa, order 1772",
@@ -31,19 +31,65 @@
   ]
  },
  "stmt_deps": [
-  "thm-constructible-serre",
-  "def-weil-pbc-constructible-complexes",
+  "def-weil-pbc-scheme-conventions",
   "def-weil-pbc-etale-sheaves",
-  "def-weil-pbc-scheme-conventions"
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-pbc-etale-constructible-sheaf",
+  "def-weil-pbc-category-colimit"
  ],
- "proof": [],
+ "proof": [
+  {
+   "text": "A scheme of finite type over a field is quasi-compact and quasi-separated. Therefore the existing filtered-colimit theorem for a sheaf of modules on any quasi-compact and quasi-separated scheme, applied to this X and the finite ring Lambda, supplies a small filtered diagram of constructible Lambda-module sheaves and a colimit cocone with value F. This is exactly the asserted conclusion.",
+   "uses": [
+    "lem-weil-pbc-module-sheaf-colimit-constructible"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Lemma 03SA (lemma-torsion-colimit-constructible), part (3), and the preceding quasi-compact and quasi-separated formulation"
+   }
+  }
+ ],
  "proof_deps": [
-  "thm-constructible-serre"
+  "lem-weil-pbc-module-sheaf-colimit-constructible"
  ],
- "proof_origin": null,
- "mathlib_searches": [],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Lemma 03SA (lemma-torsion-colimit-constructible), part (3)"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "sheaf of modules on a finite-type scheme over a field is a filtered colimit of constructible sheaves",
+   "results": "SheafOfModules.IsFiniteType, SheafOfModules.GeneratingSections.IsFiniteType, SheafOfModules.LocalGeneratorsData.IsFiniteType, SheafOfModules.IsFinitePresentation, and related generic finiteness predicates; no constructible-colimit theorem",
+   "date": "2026-10-11",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Sheaf filtered colimit constructible sheaf",
+   "results": "0 hits; loogle reported unknown identifier filtered",
+   "date": "2026-10-11",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "constructible.*filtered colimit in Mathlib",
+   "results": "0 hits",
+   "date": "2026-10-11",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "sheaf of modules on a finite-type scheme over a field is a filtered colimit of constructible sheaves",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-11",
+   "verdict": "unavailable"
+  }
+ ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "import_flags": [
   "undischarged_input",
@@ -85,5 +131,20 @@
   }
  },
  "chapter": "sec-smooth-purity",
- "unit": "sk-prop-sf-kunneth-ordinary"
+ "unit": "sk-prop-sf-kunneth-ordinary",
+ "split_report": {
+  "date": "2026-10-11",
+  "item": "lem-kun-03sa",
+  "worker": "stage1",
+  "summary": "No Lean declaration states this item. The item is the finite-type-over-a-field specialization of the existing general node lem-weil-pbc-module-sheaf-colimit-constructible, which covers every quasi-compact and quasi-separated scheme and finite commutative ring. I added one proof step citing that node, filled the blueprint reference, and recorded all required Mathlib searches.",
+  "blueprint": "The single step realizes the blueprint sentence identifying Tag 03SA as the classical input and specializing its quasi-compact, quasi-separated statement to schemes of finite type over a field."
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-k3s2439",
+  "group": "C1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-k3s2439 (reviewer sub-agent of L); spot-checked: Statement vs Tag 03SA(3): finite-type over field is qcqs, finite ring is Noetherian; E7 change (explicit F, def citations, stale thm-constructible-serre dep removed) named in report. Step 1 cites lem-weil-pbc-module-sheaf-colimit-constructible (C1/C4 hypotheses match); no cycle (its proof uses constructible-generation/finitely-presented only, neither reaches lem-kun-03sa). Citer lem-weil-pbc-curve-constructible-reduction uses it for C finite type over k, Z/n finite: matches. No new nodes, no class (b). Second reading: no missed fault."
+ }
 }
