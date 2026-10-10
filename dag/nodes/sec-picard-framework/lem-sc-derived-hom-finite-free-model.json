@@ -23,9 +23,53 @@
   "def-weil-sheaf-of-modules-category",
   "def-pur-derived-internal-hom"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "By [lem-sc-bounded-below-injective-resolution], choose a quasi-isomorphism $\\mathcal G^\\bullet\\to\\mathcal I^\\bullet$ with $\\mathcal I^\\bullet$ bounded below, termwise injective, and K-injective.",
+   "uses": [
+    "lem-sc-bounded-below-injective-resolution"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Section 07A5 and Theorem 079P"
+   }
+  },
+  {
+   "text": "The cone of $\\mathcal G^\\bullet\\to\\mathcal I^\\bullet$ is bounded below and acyclic. Applying [lem-sc-bounded-above-finite-free-hom-acyclic] to this cone shows that the induced map $\\mathcal H om^\\bullet(E^\\bullet,\\mathcal G^\\bullet)\\to\\mathcal H om^\\bullet(E^\\bullet,\\mathcal I^\\bullet)$ is a quasi-isomorphism.",
+   "uses": [
+    "lem-sc-bounded-above-finite-free-hom-acyclic"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/cohomology.tex",
+    "place": "Lemma 0GM8, case (2)"
+   }
+  },
+  {
+   "text": "By [def-pur-derived-internal-hom], derived internal Hom is computed by applying the sheaf Hom complex to a K-injective replacement of the second complex. The canonical localization map from the homotopy category to the derived category is bijective on morphisms into $\\mathcal I^\\bullet$ by [lem-sc-kinjective-quasi-iso-comparison]; hence the Hom complex in Step 2 represents the derived internal Hom of $E^\\bullet$ and $\\mathcal G^\\bullet$. Since $E^\\bullet\\to\\mathcal K^\\bullet$ is a quasi-isomorphism, it represents the same derived object, so this is also $R\\mathcal Hom_{\\mathcal O_U}(\\mathcal K^\\bullet,\\mathcal G^\\bullet)$.",
+   "uses": [
+    "def-pur-derived-internal-hom",
+    "lem-sc-kinjective-quasi-iso-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 08J7 (Section 21.35) and Tag 0A95 (Lemma 21.34.7)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sc-bounded-below-injective-resolution",
+  "lem-sc-bounded-above-finite-free-hom-acyclic",
+  "def-pur-derived-internal-hom",
+  "lem-sc-kinjective-quasi-iso-comparison"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Lemma 0GM8, case (2), using Section 08J7 and Theorem 079P"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -57,12 +101,27 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-sc-derived-internal-hom-stalk-localization",
   "by": "worker",
   "date": "2026-10-10"
  },
  "chapter": "sec-picard-framework",
- "unit": "sk-thm-picard-duality"
+ "unit": "sk-thm-picard-duality",
+ "split_report": {
+  "date": "2026-10-11",
+  "item": "lem-sc-derived-hom-finite-free-model",
+  "worker": "stage1",
+  "summary": "Split the bounded-above finite-free derived internal Hom computation into bounded-below injective resolution, acyclic Hom preservation, and K-injective comparison. The target statement is unchanged.",
+  "blueprint": "Realizes the parenthetical Ext-vanishing proof of thm-sc-p1-duality: represent derived internal Hom from a bounded-above locally free resolution by the sheaf Hom complex."
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-dfm1852",
+  "group": "M1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-dfm1852 (reviewer sub-agent of L); spot-checked: Steps 1-3 checked: bounded-below injective resolution (needed: Hom-acyclicity fails for unbounded acyclic A under product totalization), cone argument, Def 08J7 well-definedness + E->K qis; Qh_map_bijective read at KInjective.lean:41 (exact; superfluous but true). Not class (b) of lem-sc-derived-hom-projective-resolution (that is module RHom over a ring A, G[0]; this is sheaf RHom on a ringed space) nor of prop-pur-kinjective-resolutions-exist (no bounded-below/termwise-injective conclusion). No cycle: new nodes are unsplit statements, none cite the item. My LeanFinder query 'bounded below cochain complex quasi-isomorphic to a bounded below complex of injective objects': isKInjective_of_injective, InjectiveResolution (objects), cm5b factorization; verdict no match. Second reading: no missed fault."
+ }
 }

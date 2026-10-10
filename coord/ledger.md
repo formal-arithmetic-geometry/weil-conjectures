@@ -2292,3 +2292,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 18:49 L: merged deliver/E1/lem-pc-zero-scheme-pullback-local-coefficient (reviewer PASS; first push; new nodes: 1)
 - 18:50 L: merged deliver/C1/lem-pc-quasi-coherent-extension (reviewer FIX; first push; new nodes: 0)
 - 18:50 L: merged deliver/C1/lem-sc-smooth-diagonal-regular-immersion (reviewer FIX; first push; new nodes: 2)
+- 18:51 L: merged deliver/M1/lem-sc-derived-hom-finite-free-model (reviewer PASS; first push; new nodes: 3)
