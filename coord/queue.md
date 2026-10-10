@@ -1,8 +1,8 @@
 # Work queue
 
-851 items; claim with `tools/claim.py next <group> [--stage N]`.
+849 items; claim with `tools/claim.py next <group> [--stage N]`.
 
-## Stage 1: nodes to split (385)
+## Stage 1: nodes to split (382)
 
 | node | distance to a target | Lean state on the done branch |
 |---|---|---|
@@ -32,12 +32,10 @@
 | `lem-weil-pbc-integral-injective-dimension-equal` | 1016 | none |
 | `lem-weil-pbc-projective-dimension-ext-characterization` | 1016 | none |
 | `lem-weil-pbc-tor-ideal-kernel-naturality` | 1016 | none |
-| `lem-weil-pbc-tor-one-surjective-change-rings` | 1016 | none |
 | `lem-weil-pbc-tor-one-surjective-flat-middle` | 1016 | none |
 | `lem-weil-pbc-torsion-cyclic-presentation` | 1016 | none |
 | `lem-weil-pbc-torsion-hom-flat-comparison` | 1016 | none |
 | `lem-weil-pbc-triangular-change-of-basis` | 1016 | none |
-| `lem-weil-pbc-regular-sequence-koszul-regular` | 1017 | none |
 | `lem-weil-pbc-dim-one-residue-field-extensions-finite` | 1018 | none |
 | `lem-weil-pbc-koszul-differential-square-zero` | 1018 | none |
 | `lem-weil-pbc-injective-acyclicity-bounded-below` | 2002 | sorry_here |
@@ -53,7 +51,6 @@
 | `def-weil-pbc-etale-cohomology` | 3003 | none |
 | `def-weil-pbc-strict-henselization-limit` | 3003 | none |
 | `prop-weil-pbc-strict-henselization-stalk-formula` | 3003 | none |
-| `def-sc-constant-sheaves` | 3004 | none |
 | `def-weil-pbc-pointed-etale-neighbourhoods` | 3004 | none |
 | `lem-pc-module-pullback-adjunction` | 3004 | none |
 | `lem-pc-module-pullback-identity-composition` | 3004 | none |
@@ -392,7 +389,7 @@
 | `def-exc-jacobian-presentation` | - | none |
 | `lem-zl-noether-normalization-dimension` | - | none |
 
-## Stage 2: nodes to state (466)
+## Stage 2: nodes to state (467)
 
 | node | distance to Mathlib | kind |
 |---|---|---|
@@ -812,6 +809,7 @@
 | `lem-weil-pbc-topological-inverse-image-stalk` | 1 | state |
 | `lem-weil-pbc-tor-dimension-shift-free` | 1 | state |
 | `lem-weil-pbc-tor-long-exact-first-variable` | 1 | state |
+| `lem-weil-pbc-tor-one-surjective-change-rings` | 1 | state |
 | `lem-weil-pbc-tor-strictly-pro-zero` | 1 | state |
 | `lem-weil-pbc-torsion-extension-flat-descent` | 1 | state |
 | `lem-weil-pbc-torsion-module-flat-base-change-iso` | 1 | state |
@@ -863,7 +861,7 @@
 | `lem-weil-pbc-p1-field-dimension-one` | 4 | state |
 | `lem-weil-pbc-projective-space-zero-isomorphism` | 4 | state |
 
-Not open yet: 403 nodes that wait for stage 1, 865 nodes that wait for a statement dependency.
+Not open yet: 400 nodes that wait for stage 1, 867 nodes that wait for a statement dependency.
 
 ## Stage 3: modules to prove (0)
 
