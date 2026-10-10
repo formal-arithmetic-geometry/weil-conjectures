@@ -22,9 +22,47 @@
   "def-pc-base-change",
   "pqf-def-coherent"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "When X_i is affine, every X_j and X are affine as well: write X_i=Spec(B_i), X_j=Spec(B_j) with B_j=B_i\\otimes_{R_i}R_j, and X=Spec(B) with B=B_i\\otimes_{R_i}R; since R is the directed colimit of the R_j (S=Spec(R)=\\varprojlim Spec(R_j)) and tensor product commutes with directed colimits, B is the directed colimit of the B_j. A finitely presented quasi-coherent module on an affine scheme is the sheaf associated to a finitely presented module, maps of quasi-coherent modules are maps of the modules, and pullback is extension of scalars. Thus the module, map, and equality assertions are exactly the affine ring statement [lem-pc-fp-module-map-descent-affine]. The Noetherian hypothesis on the R_i is not used anywhere in this proof.",
+   "uses": [
+    "lem-pc-fp-module-map-descent-affine"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/limits.tex",
+    "place": "Limits, Lemma limits-lemma-descend-modules-finite-presentation, Tag 01ZR, first proof (affine case)"
+   }
+  },
+  {
+   "text": "For general X_i, which is quasi-compact and quasi-separated because it is finitely presented over the quasi-compact, quasi-separated S_i, choose a finite affine open cover (U_a)_a of X_i; its base changes cover X_j and X, and each (U_a)_j, (U_a)_X is affine. Since X_i is quasi-separated, every pairwise intersection U_a\\cap U_b, every triple intersection U_a\\cap U_b\\cap U_c, and every intersection of two affine opens of X_i is quasi-compact; cover each of the finitely many such opens that occur below by finitely many affine opens of X_i. Agreement of two maps of quasi-coherent modules, and the cocycle condition, are local, so they hold on such an open as soon as they hold on each member of its finite affine cover. Module descent: apply the object clause of [lem-pc-fp-module-map-descent-affine] on each U_a to get models M_a. On each affine V_{ab,c} of the cover of U_a\\cap U_b apply the map clause to the given identification of the pullbacks of M_a and M_b and to its inverse, and the equality clause to the two composites with the identities, so it descends to an isomorphism \\theta_{ab,c}; apply the equality clause on the affines covering each V_{ab,c}\\cap V_{ab,c'} so that the \\theta_{ab,c} agree there and glue to an isomorphism \\theta_{ab} on (U_a\\cap U_b)_j; apply the equality clause on the affines covering each triple intersection so that the cocycle condition \\theta_{ac}=\\theta_{bc}\\circ\\theta_{ab} holds. Map descent: apply the map clause on each U_a and the equality clause on the affines covering each U_a\\cap U_b so the local maps agree on overlaps. All of this is finitely many applications, each holding from some stage on and preserved by further pullback; since I is directed, one common later stage j works. The descended modules and the isomorphisms \\theta_{ab} then glue (Zariski gluing of quasi-coherent sheaves) to a finitely presented quasi-coherent module on X_j, and the descended local maps glue to a map; pulling back the glued data gives the original module or map, since this holds on each (U_a)_X compatibly with the gluing data.",
+   "uses": [
+    "lem-pc-fp-module-map-descent-affine"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/limits.tex",
+    "place": "Limits, Lemma limits-lemma-descend-modules-finite-presentation, Tag 01ZR, first proof (general case: Zariski gluing from the affine case)"
+   }
+  },
+  {
+   "text": "For clause (1), run the finite-cover construction on the given module M and retain the descended local modules and comparison isomorphisms; their glued module M_j is finitely presented and its pullback is M. For clause (2), run it simultaneously on F_j, G_j, and the given map, so the descended local maps glue to a map phi_{j'}:(F_j)_{j'}\\to(G_j)_{j'} whose pullback is phi. The identifications ((F_j)_{j'})_X\\cong(F_j)_X and ((G_j)_{j'})_X\\cong(G_j)_X are the canonical associativity identifications for iterated base change.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/limits.tex",
+    "place": "Limits, Lemma limits-lemma-descend-modules-finite-presentation, Tag 01ZR, statement and conclusion"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-fp-module-map-descent-affine"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/limits.tex",
+  "place": "Limits, Lemma limits-lemma-descend-modules-finite-presentation, Tag 01ZR"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -56,12 +94,29 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-pc-fp-complex-descent",
   "by": "worker",
   "date": "2026-10-10"
  },
  "chapter": "sec-picard-framework",
- "unit": "sk-thm-picard-semicon"
+ "unit": "sk-thm-picard-semicon",
+ "split_report": {
+  "date": "2026-10-11",
+  "item": "lem-pc-fp-module-map-descent",
+  "worker": "stage1",
+  "summary": "Read Limits Lemma 01ZR and its proof. The affine case is isolated as the strictly narrower ring-level finite-presentation colimit statement; the general case applies that result on finite affine covers and quasi-compact overlaps, descends the finite compatibility data at one common stage, and glues by the Zariski construction. No sorry-free project declaration states the item.",
+  "blueprint": "The three proof steps realize the ancestor blueprint sentence on finite-presentation and differential data: affine finite-presentation descent, passage to the general qcqs case by gluing, and extraction of the module and map clauses.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-fmm2810",
+  "group": "F1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-fmm2810 (reviewer sub-agent of L); spot-checked: Statement diffed against sheaf-dag: identical to R-fcd2656's 01ZR (1)/(2) restatement, no E7 revert; matches lem-pc-fp-complex-descent steps 2 and 4 (C4). New node lem-pc-fp-module-map-descent-affine is Algebra 05N7 (colimit-category-fp-modules): real lemma, no DAG duplicate (only the algebra version 05N9 exists), grep of slopmaster2 Mathlib for FinitePresentation with DirectLimit/colimit: no match. FIX more, RETURN less: (1) C1/D Step 2 gluing omitted agreement of the descended comparison maps on overlaps V_{ab,c} cap V_{ab,c'} (needed to glue them to an iso on the non-affine U_a cap U_b), omitted descending inverses so the comparisons are isomorphisms, and left map descent overlap agreement implicit; rewrote Step 2 with quasi-compact covers of all pairwise/triple/refinement overlaps, equality clause applied on each, common stage by directedness. (2) Step 1: made B = colim B_j explicit (R = colim R_j, tensor commutes with directed colimits) and declared the Noetherian hypothesis unused (E).; 1 file(s) fixed by the reviewer"
+ },
+ "lead_note": "2026-10-10 L (R-fmm2810): Noetherian hypothesis on R_i declared unused in Step 1; statement identical to the E1 (R-fcd2656) restatement, no revert."
 }

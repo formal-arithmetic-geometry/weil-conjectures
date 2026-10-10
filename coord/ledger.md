@@ -2800,3 +2800,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 22:16 L: returned deliver/M1/lemma-nagata-morphism-descends (reviewer RETURN: 1. E/D (dependency in returned form): the statement ('apply the finite-stage construction of [def-nagata-morphism-descen)
 - 22:16 L: merged deliver/C1/lem-weil-pbc-constructible-noetherian-finite-selection (reviewer PASS; first push; new nodes: 0)
 - 22:16 L: merged deliver/E1/lemma-nagata-affine-fp-descends (reviewer PASS; first push; new nodes: 0)
+- 22:17 L: merged deliver/F1/lem-pc-fp-module-map-descent (reviewer FIX; first push; new nodes: 1)
