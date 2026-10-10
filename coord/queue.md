@@ -1,8 +1,8 @@
 # Work queue
 
-911 items; claim with `tools/claim.py next <group> [--stage N]`.
+910 items; claim with `tools/claim.py next <group> [--stage N]`.
 
-## Stage 1: nodes to split (633)
+## Stage 1: nodes to split (632)
 
 | node | distance to a target | Lean state on the done branch |
 |---|---|---|
@@ -26,7 +26,6 @@
 | `lem-weil-pbc-smooth-fibre-regular-local` | 1012 | none |
 | `lem-weil-pbc-smooth-localization-conormal-split` | 1012 | none |
 | `lem-weil-pbc-smooth-over-field-dimension-differentials` | 1012 | none |
-| `def-weil-pbc-nagata-ring` | 1013 | none |
 | `def-weil-pbc-relative-global-complete-intersection` | 1013 | none |
 | `def-weil-pbc-serre-conditions-rk-sk` | 1013 | none |
 | `lem-weil-pbc-artinian-local-essentially-finite-type-residue` | 1013 | none |
@@ -923,7 +922,7 @@
 | `lem-weil-pbc-p1-field-dimension-one` | 4 | state |
 | `lem-weil-pbc-projective-space-zero-isomorphism` | 4 | state |
 
-Not open yet: 645 nodes that wait for stage 1, 553 nodes that wait for a statement dependency.
+Not open yet: 644 nodes that wait for stage 1, 554 nodes that wait for a statement dependency.
 
 ## Stage 3: modules to prove (0)
 
