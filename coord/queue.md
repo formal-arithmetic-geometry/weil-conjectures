@@ -1,8 +1,8 @@
 # Work queue
 
-863 items; claim with `tools/claim.py next <group> [--stage N]`.
+866 items; claim with `tools/claim.py next <group> [--stage N]`.
 
-## Stage 1: nodes to split (57)
+## Stage 1: nodes to split (60)
 
 | node | distance to a target | Lean state on the done branch |
 |---|---|---|
@@ -17,10 +17,13 @@
 | `lem-pc-sheaf-rhom-projection-formula` | 3021 | none |
 | `lem-pc-tor-independent-perfect-pullback-comparison` | 3021 | none |
 | `lem-sc-affine-koszul-hom-alternating-cech` | 3022 | none |
-| `lem-sc-affine-pseudo-coherent-lift` | 3022 | none |
 | `lem-sc-perfect-ext-bounded-qcoh-vanishing` | 3022 | none |
 | `lem-sc-qcoh-complex-alternating-cech-derived-sections` | 3022 | none |
 | `lem-sc-affine-truncation-kernel-flat` | 3023 | none |
+| `lem-sc-cone-pseudo-coherent` | 3023 | none |
+| `lem-sc-finite-cohomology` | 3023 | none |
+| `lem-sc-pseudo-coherent-qcoh` | 3023 | none |
+| `lem-sc-qc-open-derived-lift` | 3023 | none |
 | `lem-pc-ring-pseudo-coherent-summand` | 3024 | none |
 | `lem-pc-genus-agrees-sc` | 4007 | rests_on_sorry |
 | `prop-av-tate-rank` | 4008 | rests_on_sorry |
@@ -875,7 +878,7 @@
 | `lem-weil-pbc-projective-space-zero-isomorphism` | 4 | state |
 | `def-nagata-fixed-base-separated-stage` | 6 | state |
 
-Not open yet: 1678 nodes that wait for a statement dependency, 97 nodes that wait for stage 1.
+Not open yet: 1679 nodes that wait for a statement dependency, 100 nodes that wait for stage 1.
 
 ## Stage 3: modules to prove (0)
 
