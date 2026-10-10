@@ -7,6 +7,7 @@ module
 
 public import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
 public import Mathlib.AlgebraicGeometry.Morphisms.QuasiFinite
+public import WeilConjectures.Compactification.QuasiFinite
 public import WeilConjectures.DeligneLaumon.Reduction.Weights
 public import WeilConjectures.WeilSheaf.LowerShriekPackage
 
@@ -685,13 +686,21 @@ variable {X Y : Scheme.{u}} [X.Over (Spec (CommRingCat.of k₀))]
   [QuasiCompact (Y ↘ Spec (CommRingCat.of k₀))]
   [QuasiSeparated (Y ↘ Spec (CommRingCat.of k₀))]
 
+omit [LocallyOfFiniteType (X ↘ Spec (CommRingCat.of k₀))] in
+attribute [local instance] Compactification.over in
 /-- For a separated quasi-finite morphism `f : X ⟶ Y` of `k₀`-schemes the higher direct images
 with compact support `Rʳf₀!` vanish for `r > 0` (blueprint: `sk-l-dl-general-quasifinite`). -/
 theorem isZero_higherLowerShriek_of_quasiFinite (r : ℕ) (hr : 0 < r) (F : WeilSheaf k₀ l X) :
-    IsZero ((WeilSheaf.higherLowerShriek k₀ l f r).obj F) :=
-  -- Compact-support base change identifies the stalks of `Rʳf₀!F` with the cohomology of a
-  -- finite geometric fibre, which is concentrated in degree zero.
-  sorry
+    IsZero ((WeilSheaf.higherLowerShriek k₀ l f r).obj F) := by
+  have : CompactSpace Y :=
+    QuasiCompact.compactSpace_of_compactSpace (Y ↘ Spec (CommRingCat.of k₀))
+  have : QuasiSeparatedSpace Y :=
+    quasiSeparatedSpace_of_quasiSeparated (Y ↘ Spec (CommRingCat.of k₀))
+  -- By Zariski's main theorem `f` has a compactification `X ⟶[i] Z ⟶[g] Y` with `g` finite, so
+  -- `Rʳf₀!F ≅ Rʳg₀*(i₀!F)`, which vanishes for `r > 0` as `g₀*` is exact.
+  obtain ⟨c, _, _⟩ := Compactification.exists_isFinite_of_locallyQuasiFinite f
+  obtain ⟨e⟩ := WeilSheaf.nonempty_higherLowerShriek_iso_higherLowerStar (l := l) f c r F
+  exact (WeilSheaf.isZero_higherLowerStar_of_isFinite c.g r hr _).of_iso e
 
 /-- For a separated quasi-finite morphism `f : X ⟶ Y` of `k₀`-schemes the exact functor `f₀!`
 preserves mixed upper weight bounds (blueprint: `sk-l-dl-general-quasifinite`). -/
