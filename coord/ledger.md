@@ -2463,3 +2463,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 19:59 L: merged deliver/J1/lem-pc-derived-filtered-free-resolution (reviewer FIX; after a return; new nodes: 2)
 - 19:59 L: merged deliver/C1/lem-sc-krull-akizuki-noetherian (reviewer PASS; first push; new nodes: 1)
 - 19:59 L: merged deliver/C1/lem-pc-derived-direct-image-composition (reviewer PASS; first push; new nodes: 0)
+- 20:01 L: merged deliver/C1/lem-pc-kflat-closure (reviewer FIX+NODE(1); first push; new nodes: 3)

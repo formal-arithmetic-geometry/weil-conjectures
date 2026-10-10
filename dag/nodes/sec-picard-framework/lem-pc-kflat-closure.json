@@ -20,9 +20,59 @@
   "def-pc-flat-sheaf-modules",
   "def-pc-kflat-complex"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "The bounded-above flat-complex argument of Stacks 06YS applies to the abelian category of sheaves of $\\mathcal O$-modules: filter the tensor total complex by stupid truncations. Each associated graded piece is a tensor product with one flat term and is acyclic; induction on the upper bound gives acyclicity. Thus every bounded-above complex of flat $\\mathcal O$-modules is K-flat by [lem-pc-bounded-above-flat-kflat-site].",
+   "uses": [
+    "lem-pc-bounded-above-flat-kflat-site"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Lemma 06YS, bounded-above flat complexes are K-flat"
+   }
+  },
+  {
+   "text": "Cones and countable direct sums of K-flat complexes of $\\mathcal O$-modules are K-flat by [lem-pc-kflat-cone-direct-sum]. The homotopy colimit of a sequence $E_0^\\bullet\\to E_1^\\bullet\\to\\cdots$ is by definition the cone of $1-\\operatorname{shift}:\\bigoplus_nE_n^\\bullet\\to\\bigoplus_nE_n^\\bullet$, as in [lem-pc-complex-hocolim-colimit]; if every $E_n^\\bullet$ is K-flat, the countable sum $\\bigoplus_nE_n^\\bullet$ is K-flat and so is the cone of this endomorphism, by the two clauses of [lem-pc-kflat-cone-direct-sum]. Hence the class of K-flat complexes is closed under homotopy colimits.",
+   "uses": [
+    "lem-pc-kflat-cone-direct-sum",
+    "lem-pc-complex-hocolim-colimit"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Lemma 06YS, closure of K-flat complexes under cones and direct sums"
+   }
+  },
+  {
+   "text": "Take $\\mathcal B=\\Mod(\\mathcal O)$. It is a Grothendieck abelian category by [prop-pur-kinjective-resolutions-exist] (for $\\Mod(\\mathcal O)$ to be abelian the site is small or essentially small, and replacing $\\mathcal C$ by an equivalent small site changes neither $\\Mod(\\mathcal O)$ nor $\\otimes_{\\mathcal O}$), and by [lem-pc-sheaf-modules-tensor-closed] the tensor product $\\otimes_{\\mathcal O}$ makes it symmetric, hence braided, monoidal closed, so $\\mathcal F\\otimes_{\\mathcal O}-$ is a left adjoint and right exact for every $\\mathcal F$, and $\\mathcal G\\otimes_{\\mathcal O}\\mathcal F\\cong\\mathcal F\\otimes_{\\mathcal O}\\mathcal G$ naturally. A flat $\\mathcal O$-module $\\mathcal F$ [def-pc-flat-sheaf-modules] has $-\\otimes_{\\mathcal O}\\mathcal F$, hence $\\mathcal F\\otimes_{\\mathcal O}-$, exact, so $\\mathcal F\\otimes_{\\mathcal O}-$ preserves finite limits and $\\mathcal F$ is flat in the sense of [lem-weil-pbc-flat-coproduct]. That theorem applied to a countable family $(\\mathcal F_n)_{n\\in\\mathbf N}$ of flat $\\mathcal O$-modules shows that $(\\bigoplus_n\\mathcal F_n)\\otimes_{\\mathcal O}-$ preserves finite limits; being also right exact, it is exact, and by the symmetry so is $-\\otimes_{\\mathcal O}\\bigoplus_n\\mathcal F_n$. Thus $\\bigoplus_n\\mathcal F_n$ is flat.",
+   "uses": [
+    "prop-pur-kinjective-resolutions-exist",
+    "lem-pc-sheaf-modules-tensor-closed",
+    "lem-weil-pbc-flat-coproduct",
+    "def-pc-flat-sheaf-modules"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Lemma 03EU, direct sums of flat sheaves are flat"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-bounded-above-flat-kflat-site",
+  "lem-pc-kflat-cone-direct-sum",
+  "lem-pc-complex-hocolim-colimit",
+  "prop-pur-kinjective-resolutions-exist",
+  "lem-pc-sheaf-modules-tensor-closed",
+  "lem-weil-pbc-flat-coproduct",
+  "def-pc-flat-sheaf-modules"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Lemma 06YS"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -47,12 +97,43 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-pc-kflat-resolution",
   "by": "worker",
   "date": "2026-10-10"
  },
  "chapter": "sec-picard-framework",
- "unit": "sk-thm-picard-semicon"
+ "unit": "sk-thm-picard-semicon",
+ "split_report": {
+  "date": "2026-10-11",
+  "item": "lem-pc-kflat-closure",
+  "worker": "stage1",
+  "summary": "Split the closure argument into the strict closure sublemma for cones and countable direct sums. The bounded-above implication follows the Stacks 06YS filtration argument and cites the existing bounded-above K-flat node. I checked the arbitrary-site hypotheses against the generic sheaf Grothendieck/monoidal node and the abstract flat-coproduct theorem; no Lean declaration states this item exactly.",
+  "blueprint": "Realizes the closure argument in the proof of def-weil-derived-tensor: bounded-above flat complexes, closure under cones and countable sums, and flatness of countable sums.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-flat-coproduct",
+    "why": "Provides the general theorem that coproducts of flat objects in a Grothendieck abelian braided monoidal closed category are flat."
+   },
+   {
+    "node": "prop-pur-kinjective-resolutions-exist",
+    "why": "States that Mod(O) on a small site is Grothendieck abelian, the hypothesis of the abstract flat-coproduct theorem (added by reviewer R-kfc2124)."
+   }
+  ]
+ },
+ "tool_uses": [
+  "prop-pur-kinjective-resolutions-exist",
+  "lem-weil-pbc-flat-coproduct",
+  "prop-pur-kinjective-resolutions-exist"
+ ],
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-kfc2124",
+  "group": "C1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-kfc2124 (reviewer sub-agent of L); spot-checked: Checked all three steps against 06YS/03EU and the cited statements; cycle check vs lem-pc-bounded-above-flat-kflat and lem-pc-module-bounded-flat-kflat (not reached); new nodes: bounded-above-site is the site generalisation of the ringed-space node (not class b), cone-direct-sum duplicates none of the 8 same-tag nodes; Mathlib/slopmaster2 grep for sheaf-module monoidal closed: no match. FIX more, RETURN less: (1) C4 step 2 cited lem-weil-pbc-sheaf-tensor-closed (A-valued sheaves, fixed A) for Mod(O): dropped it, step 2 now cites only lem-pc-kflat-cone-direct-sum; (2) D/elementary: the homotopy-colimit clause of the item was never derived: added to step 2 via the hocolim definition in lem-pc-complex-hocolim-colimit; (3) C4 step 3 same misuse for the Grothendieck and monoidal-closed hypotheses of lem-weil-pbc-flat-coproduct: now cites prop-pur-kinjective-resolutions-exist (Mod(O) Grothendieck) and new statement-only node lem-pc-sheaf-modules-tensor-closed (Stacks 03EO), with the exact-vs-finite-limits translation spelled out; tool use lem-weil-pbc-sheaf-tensor-closed dropped.; 2 file(s) fixed by the reviewer; 1 statement node(s) added by the reviewer (FIX more, RETURN less)"
+ },
+ "lead_note": "2026-10-10 L (R-kfc2124): Second reading by C1 describes a filtered-colimit node and abelian-sheaf/forgetful citations that are not in the delivered files; it missed that lem-weil-pbc-sheaf-tensor-closed is about A-valued sheaves for a fixed A and does not cover Mod(O) for a sheaf of rings O. No cycle: nothing cited reaches lem-pc-bounded-above-flat-kflat or lem-pc-module-bounded-flat-kflat. When lem-pc-bounded-above-flat-kflat-site is split it must not cite those two nodes."
 }
