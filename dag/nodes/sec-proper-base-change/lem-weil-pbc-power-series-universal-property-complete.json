@@ -25,15 +25,91 @@
  "statement": "Let $\\Lambda$ and $T$ be commutative rings, $\\mathfrak a\\subseteq T$ an ideal such that $T$ is $\\mathfrak a$-adically complete [def-weil-pbc-adically-complete-ring], $\\alpha:\\Lambda\\to T$ a ring homomorphism, $n\\ge0$, and $t_1,\\ldots,t_n\\in\\mathfrak a$. Write $t^E=t_1^{e_1}\\cdots t_n^{e_n}$ and $|E|=e_1+\\cdots+e_n$ for $E\\in\\mathbf N^n$. Then there is a ring homomorphism $\\Phi:\\Lambda[[x_1,\\ldots,x_n]]\\to T$ from the formal power series ring [def-weil-pbc-multivariate-power-series] such that $\\Phi(\\lambda)=\\alpha(\\lambda)$ for $\\lambda\\in\\Lambda$ (constant series) and $\\Phi(x_i)=t_i$ for $i=1,\\ldots,n$; for $F=\\sum_Ea_Ex^E$, $\\Phi(F)$ is the unique element of $T$ with $\\Phi(F)\\equiv\\sum_{|E|<m}\\alpha(a_E)t^E\\pmod{\\mathfrak a^m}$ for every $m\\ge1$. Moreover $\\Phi$ is the only ring homomorphism $\\Lambda[[x_1,\\ldots,x_n]]\\to T$ which agrees with $\\alpha$ on $\\Lambda$ and sends $x_i$ to $t_i$ for every $i$.",
  "source": {
   "document": "literature/stacks-project/more-algebra.tex",
-  "place": "used without statement as 'the universal property of power series rings' in More on Algebra, proof of Lemma Tag 07NL (lemma-power-series-ring-over-Cohen-fs, line 9719), in the proof of Lemma Tag 07NN (lemma-embed-map-Noetherian-complete-local-rings, line 9769: the map phi' : Lambda[[x]] -> S[[y]], x_i -> phi(x_i) + y_i) and in Algebra, proof of Theorem Tag 032A (algebra.tex line 44929: Lambda[[x_1..x_n]] -> R, x_i -> y_i); agent-formulated"
+  "place": "used without statement as 'the universal property of power series rings' in More on Algebra, proof of Lemma Tag 07NL (lemma-power-series-ring-over-Cohen-fs, line 9719), in the proof of Lemma Tag 07NN (lemma-embed-map-Noetherian-complete-local-rings, line 9812: the map phi' : Lambda[[x]] -> S[[y]], x_i -> phi(x_i) + y_i) and in Algebra, proof of Theorem Tag 032A (algebra.tex line 45014: Lambda[[x_1..x_n]] -> R, x_i -> y_i); agent-formulated"
  },
  "stmt_deps": [
   "def-weil-pbc-adically-complete-ring",
   "def-weil-pbc-multivariate-power-series"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "*Notation and partial sums.* By [def-weil-pbc-multivariate-power-series] an element of $\\Lambda[[x_1,\\ldots,x_n]]$ is a family $F=(a_E)_{E\\in\\mathbf N^n}$ of elements of $\\Lambda$, written $\\sum_Ea_Ex^E$, with coefficientwise sum and product $(FG)_H=\\sum_{E+E'=H}a_Eb_{E'}$ for $G=(b_{E'})$; a constant $\\lambda\\in\\Lambda$ is the series $\\lambda x^0$, and $x_i$ is the series with coefficient $1$ at the $i$-th unit vector $\\varepsilon_i$ and $0$ elsewhere, so that $x^E=x_1^{e_1}\\cdots x_n^{e_n}$ is the series with coefficient $1$ at $E$ and $0$ elsewhere, and $a_Ex^E$ (product of the constant $a_E$ with $x^E$) is the series with coefficient $a_E$ at $E$ and $0$ elsewhere. For $F=\\sum_Ea_Ex^E$ and $m\\ge1$ put $P_m(F)=\\sum_{|E|<m}\\alpha(a_E)t^E\\in T$, a finite sum (there are finitely many $E\\in\\mathbf N^n$ with $|E|<m$). Since $t_i\\in\\mathfrak a$, $t^E\\in\\mathfrak a^{|E|}$ for every $E$. Hence for $m'\\ge m\\ge1$, $P_{m'}(F)-P_m(F)=\\sum_{m\\le|E|<m'}\\alpha(a_E)t^E\\in\\mathfrak a^m$.",
+   "uses": [
+    "def-weil-pbc-multivariate-power-series"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "fact used without statement or proof in the proof of Lemma Tag 07NL (line 9719); proof written by an agent"
+   }
+  },
+  {
+   "text": "*Definition of $\\Phi(F)$, and its characterization.* By [def-weil-pbc-adically-complete-ring] the canonical map $T\\to\\varprojlim_mT/\\mathfrak a^m$, $s\\mapsto(s\\bmod\\mathfrak a^m)_m$, is bijective. By step 1 the classes $P_m(F)\\bmod\\mathfrak a^m$ form a compatible family: the image of $P_{m+1}(F)\\bmod\\mathfrak a^{m+1}$ under $T/\\mathfrak a^{m+1}\\to T/\\mathfrak a^m$ is $P_{m+1}(F)\\bmod\\mathfrak a^m=P_m(F)\\bmod\\mathfrak a^m$. By surjectivity there is $\\Phi(F)\\in T$ with $\\Phi(F)\\equiv P_m(F)\\pmod{\\mathfrak a^m}$ for every $m\\ge1$; by injectivity it is the only such element (two such elements have the same image in the inverse limit). In particular, an element $s\\in T$ with $s\\in\\mathfrak a^m$ for every $m\\ge1$ is $0$ (it and $0$ have the same image), i.e. $\\bigcap_m\\mathfrak a^m=0$. This defines a map $\\Phi:\\Lambda[[x_1,\\ldots,x_n]]\\to T$ and proves the clause of the statement that $\\Phi(F)$ is the unique element congruent to $\\sum_{|E|<m}\\alpha(a_E)t^E$ modulo $\\mathfrak a^m$ for all $m\\ge1$.",
+   "uses": [
+    "def-weil-pbc-adically-complete-ring"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "fact used without statement or proof in the proof of Lemma Tag 07NL (line 9719); proof written by an agent"
+   }
+  },
+  {
+   "text": "*$\\Phi$ is a ring homomorphism.* Fix $m\\ge1$ and $F=\\sum a_Ex^E$, $G=\\sum b_Ex^E$. (a) Sums are coefficientwise, so $P_m(F+G)=P_m(F)+P_m(G)$ as $\\alpha$ is additive; hence $\\Phi(F+G)$ and $\\Phi(F)+\\Phi(G)$ are both congruent to $P_m(F+G)$ modulo $\\mathfrak a^m$ for every $m$, and they are equal by the uniqueness of step 2. (b) The unit $1=x^0$ has $P_m(1)=\\alpha(1)t^0=1$ for every $m\\ge1$, so $\\Phi(1)=1$ by step 2. (c) $P_m(F)P_m(G)=\\sum_{|E|<m,\\,|E'|<m}\\alpha(a_E)\\alpha(b_{E'})t^{E+E'}$. If $|E+E'|<m$ then $|E|,|E'|<m$, so the terms with $|E+E'|<m$ are all present and, grouped by $H=E+E'$, give $\\sum_{|H|<m}\\alpha\\bigl(\\sum_{E+E'=H}a_Eb_{E'}\\bigr)t^H=P_m(FG)$ ($\\alpha$ is a ring homomorphism); the remaining terms have $|E+E'|\\ge m$ and lie in $\\mathfrak a^m$ (step 1). So $P_m(F)P_m(G)\\equiv P_m(FG)\\pmod{\\mathfrak a^m}$. Since $\\Phi(F)-P_m(F)$ and $\\Phi(G)-P_m(G)$ lie in the ideal $\\mathfrak a^m$, also $\\Phi(F)\\Phi(G)\\equiv P_m(F)P_m(G)\\equiv P_m(FG)\\pmod{\\mathfrak a^m}$, for every $m\\ge1$; by the uniqueness of step 2, $\\Phi(FG)=\\Phi(F)\\Phi(G)$.",
+   "uses": [
+    "def-weil-pbc-multivariate-power-series",
+    "def-weil-pbc-adically-complete-ring"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "fact used without statement or proof in the proof of Lemma Tag 07NL (line 9719); proof written by an agent"
+   }
+  },
+  {
+   "text": "*The values on $\\Lambda$ and on the $x_i$.* For $\\lambda\\in\\Lambda$ the series $\\lambda x^0$ has $P_m(\\lambda)=\\alpha(\\lambda)$ for every $m\\ge1$, so $\\Phi(\\lambda)=\\alpha(\\lambda)$ by step 2. For the series $x_i$ (coefficient $1$ at $\\varepsilon_i$, $|\\varepsilon_i|=1$) one has $P_1(x_i)=0$ and $P_m(x_i)=t_i$ for $m\\ge2$; as $t_i\\in\\mathfrak a$, $t_i\\equiv P_m(x_i)\\pmod{\\mathfrak a^m}$ for every $m\\ge1$, so $\\Phi(x_i)=t_i$ by step 2. (For $n=0$ there are no $x_i$ and $\\Phi=\\alpha$.) With step 3 this proves the existence part of the statement.",
+   "uses": [
+    "def-weil-pbc-multivariate-power-series",
+    "def-weil-pbc-adically-complete-ring"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "fact used without statement or proof in the proof of Lemma Tag 07NL (line 9719); proof written by an agent"
+   }
+  },
+  {
+   "text": "*Series without terms of degree $<m$ lie in the ideal generated by the monomials of degree $m$.* Let $m\\ge1$ and $R=\\sum_Gr_Gx^G\\in\\Lambda[[x_1,\\ldots,x_n]]$ with $r_G=0$ for $|G|<m$. Let $\\mathcal E_m=\\{E\\in\\mathbf N^n:|E|=m\\}$, a finite set. For each $G$ with $|G|\\ge m$ choose $E(G)\\in\\mathcal E_m$ with $E(G)\\le G$ componentwise (lower the entries of $G$ one unit at a time, from the last nonzero entry, until the total is $m$). For $E\\in\\mathcal E_m$ let $g_E\\in\\Lambda[[x_1,\\ldots,x_n]]$ have coefficient $r_{E+H}$ at $H$ if $|E+H|\\ge m$ and $E(E+H)=E$, and $0$ otherwise. By the product formula of [def-weil-pbc-multivariate-power-series] the coefficient of $x^Eg_E$ at $G$ is $0$ unless $E\\le G$, and then it is the coefficient of $g_E$ at $G-E$, namely $r_G$ if $E(G)=E$ and $0$ otherwise (note $|G|\\ge|E|=m$ when $E\\le G$). Summing over the finite set $\\mathcal E_m$, the coefficient of $\\sum_{E\\in\\mathcal E_m}x^Eg_E$ at $G$ is $r_G$ if $|G|\\ge m$ (exactly one $E$, namely $E(G)$, contributes) and $0=r_G$ if $|G|<m$ (no $E\\in\\mathcal E_m$ is $\\le G$). Hence $R=\\sum_{E\\in\\mathcal E_m}x^Eg_E$, a finite sum.",
+   "uses": [
+    "def-weil-pbc-multivariate-power-series"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "fact used without statement or proof in the proof of Lemma Tag 07NL (line 9719); proof written by an agent"
+   }
+  },
+  {
+   "text": "*Uniqueness among all ring homomorphisms.* Let $\\Phi':\\Lambda[[x_1,\\ldots,x_n]]\\to T$ be any ring homomorphism with $\\Phi'(\\lambda)=\\alpha(\\lambda)$ for $\\lambda\\in\\Lambda$ and $\\Phi'(x_i)=t_i$ for all $i$ (no continuity is assumed). Then $\\Phi'(x^E)=t^E$ by multiplicativity. Fix $F=\\sum a_Ex^E$ and $m\\ge1$, and write $F=F_{<m}+R$ with $F_{<m}=\\sum_{|E|<m}a_Ex^E$ (a finite sum of the series $a_Ex^E=a_E\\cdot x^E$ of step 1) and $R=F-F_{<m}$, whose coefficients vanish in degrees $<m$. Then $\\Phi'(F_{<m})=\\sum_{|E|<m}\\alpha(a_E)t^E=P_m(F)$. By step 5, $R=\\sum_{|E|=m}x^Eg_E$, so $\\Phi'(R)=\\sum_{|E|=m}t^E\\Phi'(g_E)\\in\\mathfrak a^m$ since $t^E\\in\\mathfrak a^m$ (step 1). Hence $\\Phi'(F)\\equiv P_m(F)\\pmod{\\mathfrak a^m}$ for every $m\\ge1$, and $\\Phi'(F)=\\Phi(F)$ by the uniqueness in step 2. So $\\Phi'=\\Phi$.",
+   "uses": [
+    "def-weil-pbc-adically-complete-ring"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "fact used without statement or proof in the proof of Lemma Tag 07NL (line 9719); proof written by an agent"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-multivariate-power-series",
+  "def-weil-pbc-adically-complete-ring"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "used without statement as 'the universal property of power series rings' in the proof of Lemma Tag 07NL (line 9719), in the proof of Lemma Tag 07NN (line 9812) and in Algebra, proof of Theorem Tag 032A (algebra.tex line 45014); no Stacks lemma states it, the proof is written by an agent from [def-weil-pbc-multivariate-power-series] and [def-weil-pbc-adically-complete-ring]"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -55,10 +131,24 @@
    "results": "Evaluation.lean:67 HasEval (each a s topologically nilpotent, a tends to 0 cofinitely), :230 eval₂Hom (hφ : Continuous φ) (ha : HasEval a) with [UniformSpace R] [UniformSpace S] [IsUniformAddGroup S] [CompleteSpace S] [T2Space S] [IsTopologicalRing S] [IsLinearTopology S S], :283 eval₂_unique (uniqueness among continuous maps); no version stated with IsAdicComplete; AdicCompletion/Completeness.lean:214 only gives completeness of MvPowerSeries itself for (X)",
    "date": "2026-10-10",
    "verdict": "no exact match; candidate recorded"
+  },
+  {
+   "tool": "loogle",
+   "query": "MvPowerSeries, IsAdicComplete, RingHom",
+   "results": "none",
+   "date": "2026-10-10",
+   "verdict": "no match: no Mathlib declaration combines MvPowerSeries with IsAdicComplete into a ring homomorphism"
+  },
+  {
+   "tool": "grep",
+   "query": "sed -n 225,236p and 280,290p Mathlib/RingTheory/MvPowerSeries/Evaluation.lean; grep -rn liftRingHom Mathlib/RingTheory/AdicCompletion/*.lean; files containing both MvPowerSeries and IsAdicComplete",
+   "results": "eval₂Hom (line 230) needs Continuous φ, HasEval a and a complete Hausdorff linear uniform topology on S; eval₂_unique (line 283) assumes continuity of ε; AdicCompletion.liftRingHom (Algebra.lean:361) lifts a compatible family R →+* S/I^n, which here would itself have to be constructed; only Completeness.lean has both names (completeness of MvPowerSeries itself, line 214)",
+   "date": "2026-10-10",
+   "verdict": "no one-line specialization (point B8): candidate kept"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "worker",
@@ -85,5 +175,12 @@
   "line": 230,
   "how": "Not one line. eval₂Hom (line 230) builds Λ[[σ]] →+* T from a continuous φ and a with HasEval a (line 67) when T is a complete Hausdorff uniform additive group with linear topology; here Λ would carry the discrete topology and T the 𝔞-adic topology, and turning `IsAdicComplete 𝔞 T` into `CompleteSpace T`, `T2Space T`, `IsLinearTopology T T` for that uniform structure is itself a lemma. The uniqueness clause of the node is for all ring homomorphisms; eval₂_unique (line 283) assumes continuity, which for a map sending x_i into 𝔞 is an extra argument (every series with no term of degree < m lies in (x)^m). Lines read 2026-10-10."
  },
- "reviewed": "2026-10-10 L: statement checked against the universal property used without statement in 07NL/07NN/032A; no blueprint node states it (searched)"
+ "reviewed": "2026-10-10 L: 6 steps checked (agent proof; Stacks uses it without statement): partial sums Cauchy, limit by completeness, ring homomorphism, values on Lambda and x_i, every series of order >= m is a combination of degree-m monomials, uniqueness among all ring maps since they agree mod a^m for every m",
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "lem-weil-pbc-power-series-universal-property-complete",
+  "worker": "stage1",
+  "summary": "Statement kept (checked against its uses: lem-weil-pbc-complete-local-flat-presentation step 3 uses existence with the values on Lambda and x_i, step 4 the uniqueness among all ring maps; lem-weil-pbc-cohen-structure-power-series-surjection step 5 uses existence and the values, step 6 only that Phi is a ring map with Phi(x^E)=y^E). No sorry-free slopmaster2 declaration states it (grep of WeilConjectures for the id, MvPowerSeries with eval/IsAdicComplete: none). No Stacks lemma states it (used without statement in 07NL, 07NN, 032A), so the proof is written by an agent from the two definition nodes, in six elementary steps: (1) partial sums P_m(F) and P_m' - P_m in a^m; (2) completeness (bijectivity of T -> lim T/a^m) gives Phi(F) with Phi(F) = P_m(F) mod a^m, unique, and the intersection of the a^m is 0; (3) Phi additive, unital, multiplicative via P_m(F)P_m(G) = P_m(FG) mod a^m; (4) Phi(lambda)=alpha(lambda), Phi(x_i)=t_i; (5) a series with no terms of degree < m is a finite sum of x^E g_E with |E|=m (explicit g_E); (6) any ring map Phi' with these values satisfies Phi'(F) = P_m(F) mod a^m, hence Phi'=Phi, no continuity assumed. Source line numbers corrected: 07NN map phi' is at more-algebra.tex line 9812 (not 9769), 032A's map at algebra.tex line 45014 (not 44929). Mathlib: candidate eval₂Hom/eval₂_unique kept (topological, not one line); Loogle and a grep added. No new nodes.",
+  "blueprint": "The blueprint ancestor thm-weil-pbc-finite-etale-lifting is reached only through the chain in blueprint.from.via; the steps realize the universal property of power series used without statement at the place recorded in from.place (step 7 of its split, Lemma 0GS2 essential-surjectivity paragraphs) via lem-weil-pbc-complete-local-flat-presentation steps 3-4 (construction of phi' and commutativity of the square by uniqueness). same_as: [] (blueprint_refs search 'universal property power series', 'power series complete homomorphism', 'power series ring', 'adically complete', '032A', '07NN': no blueprint node states it)."
+ }
 }
