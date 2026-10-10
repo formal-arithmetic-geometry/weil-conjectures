@@ -16,9 +16,93 @@
   "def-pc-finite-locally-free",
   "def-sbc-locally-finite-presentation"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "The locally finite presentation hypothesis implies locally finite type: on each affine pair the target algebra is a quotient of a polynomial algebra in finitely many variables, so their images generate it [def-sbc-locally-finite-presentation, def-weil-finite-type-morphism]. The hypothesis that $f$ is finite locally free gives that $f$ is finite and flat by [def-pc-finite-locally-free]. Thus [lem-weil-pbc-descend-finite] yields $a\\ge0$ with $f_a$ finite, and [lem-weil-pbc-descend-flat-finite-presentation] yields $b\\ge0$ with $f_b$ flat. Choose $i\\ge a,b$. By cartesian-square pasting, $f_i$ is the base change of $f_a$ along $Y_i\\to Y_a$, and of $f_b$ along $Y_i\\to Y_b$. Finiteness and flatness are preserved by these base changes. Moreover $f_i$ is locally of finite presentation by base-change stability. Therefore $f_i$ is finite locally free by its definition.",
+   "uses": [
+    "def-sbc-locally-finite-presentation",
+    "def-weil-finite-type-morphism",
+    "def-pc-finite-locally-free",
+    "lem-weil-pbc-descend-finite",
+    "lem-weil-pbc-descend-flat-finite-presentation",
+    "lem-weil-pbc-cartesian-square-pasting",
+    "lem-weil-pbc-finite-morphism-permanence",
+    "lem-weil-pbc-flat-morphism-base-change",
+    "lem-weil-pbc-qcqs-morphism-permanence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/limits.tex",
+    "place": "Tag 06AC, label lemma-descend-finite-locally-free, first paragraph; the finite-generator observation spells out Morphisms 01TW"
+   }
+  },
+  {
+   "text": "Assume also that $f$ has degree $d$. The degree-local-constancy lemma gives the open and closed subset $W_d\\subseteq Y_i$ where $f_i$ has degree $d$. The rank base-change formula applied to $f=f_i\\times_{Y_i}Y$ says that its degree at $y\\in Y$ equals the degree of $f_i$ at its image in $Y_i$. Hence $Y\\to Y_i$ has image in $W_d$.",
+   "uses": [
+    "lem-weil-pbc-finite-locally-free-degree-locally-constant",
+    "lem-weil-pbc-finite-flat-rank-iso",
+    "lem-weil-pbc-cartesian-square-pasting"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/limits.tex",
+    "place": "Tag 06AC, label lemma-descend-finite-locally-free, second paragraph"
+   }
+  },
+  {
+   "text": "Apply the scheme-over-limit lemma to $Y_0\\to S_0$: $Y$ is the limit of the $Y_j$, $j\\ge0$, with affine transition maps. Each $Y_j\\to Y_0$ is affine, hence quasi-compact and quasi-separated; since $Y_0$ is quasi-compact and quasi-separated, so is $Y_j$ by qcqs permanence. An open and closed subset is retrocompact: its intersection with a quasi-compact open is closed therein and hence quasi-compact. Consequently $W_d$ is constructible, being itself a retrocompact open, by the constructible-subset definition. All hypotheses of the constructible-limit lemma are therefore satisfied, and it gives $i'\\ge i$ such that $Y_{i'}\\to Y_i$ has image in $W_d$.",
+   "uses": [
+    "lem-weil-pbc-scheme-over-limit",
+    "lem-weil-pbc-affine-morphism-permanence",
+    "lem-weil-pbc-qcqs-morphism-permanence",
+    "def-weil-constructible-subset",
+    "lem-weil-pbc-limit-contained-in-constructible"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/limits.tex",
+    "place": "Tag 06AC, label lemma-descend-finite-locally-free, second paragraph, using Tag 05F4, label lemma-limit-contained-in-constructible"
+   }
+  },
+  {
+   "text": "The morphism $f_{i'}$ is the base change of $f_i$ along $Y_{i'}\\to Y_i$. It remains finite, flat and locally of finite presentation by the same permanence results as in Step 1. For every $y'\\in Y_{i'}$, the rank base-change formula identifies its degree with that of $f_i$ at the image of $y'$, which lies in $W_d$ and therefore has degree $d$. Thus $f_{i'}$ is finite locally free of degree $d$ by [def-pc-finite-locally-free].",
+   "uses": [
+    "lem-weil-pbc-cartesian-square-pasting",
+    "lem-weil-pbc-finite-morphism-permanence",
+    "lem-weil-pbc-flat-morphism-base-change",
+    "lem-weil-pbc-qcqs-morphism-permanence",
+    "lem-weil-pbc-finite-flat-rank-iso",
+    "def-pc-finite-locally-free"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/limits.tex",
+    "place": "Tag 06AC, label lemma-descend-finite-locally-free, final sentence"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sbc-locally-finite-presentation",
+  "def-weil-finite-type-morphism",
+  "def-pc-finite-locally-free",
+  "lem-weil-pbc-descend-finite",
+  "lem-weil-pbc-descend-flat-finite-presentation",
+  "lem-weil-pbc-cartesian-square-pasting",
+  "lem-weil-pbc-finite-morphism-permanence",
+  "lem-weil-pbc-flat-morphism-base-change",
+  "lem-weil-pbc-qcqs-morphism-permanence",
+  "lem-weil-pbc-finite-locally-free-degree-locally-constant",
+  "lem-weil-pbc-finite-flat-rank-iso",
+  "lem-weil-pbc-scheme-over-limit",
+  "lem-weil-pbc-affine-morphism-permanence",
+  "def-weil-constructible-subset",
+  "lem-weil-pbc-limit-contained-in-constructible"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/limits.tex",
+  "place": "Limits, Lemma Tag 06AC (label lemma-descend-finite-locally-free)"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -50,7 +134,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "worker",
@@ -70,5 +154,18 @@
   }
  },
  "chapter": "sec-proper-base-change",
- "unit": "sk-thm-p1"
+ "unit": "sk-thm-p1",
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "lem-weil-pbc-descend-finite-locally-free",
+  "worker": "stage1",
+  "summary": "Checked 06AC and 081D against Stacks source. Split into finite/flat descent with explicit common-stage permanence, the degree locus with rank base change, constructible-limit application with qcqs and constructibility hypotheses checked, and rank-d conclusion. Only necessary new child: 04AI flatness descent; used existing definition of finite locally free rather than a tautological criterion child."
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "group": "F1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed by the lead of F1; spot-checked by L: L read the four steps (06AC): finite and flat descend to a stage (existing finite-descent node, new unsplit 04AI node), common stage by square pasting, degree locus clopen hence constructible, 05F4 limit lemma."
+ }
 }
