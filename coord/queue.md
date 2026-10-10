@@ -1,8 +1,8 @@
 # Work queue
 
-901 items; claim with `tools/claim.py next <group> [--stage N]`.
+902 items; claim with `tools/claim.py next <group> [--stage N]`.
 
-## Stage 1: nodes to split (152)
+## Stage 1: nodes to split (153)
 
 | node | distance to a target | Lean state on the done branch |
 |---|---|---|
@@ -20,16 +20,17 @@
 | `lem-pc-perfect-complexes-compact-set` | 3016 | none |
 | `lem-pc-ringed-space-derived-limit-stalk-injective` | 3016 | none |
 | `lem-pc-ringed-space-rgamma-derived-limit` | 3016 | none |
-| `lem-pc-perfect-generation-open-induction-step` | 3017 | none |
+| `lem-pc-perfect-generation-koszul-orthogonal` | 3018 | none |
 | `lem-pc-perfect-rhom-tensor-comparison` | 3018 | none |
+| `lem-pc-supported-open-pushforward` | 3018 | none |
 | `lem-sc-proper-flat-right-adjoint-affine-basechange` | 3018 | none |
 | `lem-weil-pbc-complex-ses-connecting-formula` | 3018 | none |
 | `lem-weil-pbc-degreewise-split-derived-triangle` | 3018 | none |
+| `lem-sc-affine-perfect-map-lift` | 3019 | none |
+| `lem-sc-affine-perfect-support-extension` | 3019 | none |
+| `lem-sc-derived-open-gluing` | 3019 | none |
 | `lem-pc-perfect-thick-closure` | 3021 | none |
 | `lem-pc-supported-perfect-generator` | 3021 | none |
-| `lem-sc-affine-perfect-map-lift` | 3021 | none |
-| `lem-sc-affine-perfect-support-extension` | 3021 | none |
-| `lem-sc-derived-open-gluing` | 3021 | none |
 | `lem-sc-rhom-supported-qcoherent` | 3021 | none |
 | `lem-sc-supported-factor-through-thick` | 3021 | none |
 | `lem-pc-genus-agrees-sc` | 4007 | rests_on_sorry |
@@ -913,7 +914,7 @@
 | `lem-weil-pbc-projective-space-zero-isomorphism` | 4 | state |
 | `def-nagata-fixed-base-separated-stage` | 6 | state |
 
-Not open yet: 1510 nodes that wait for a statement dependency, 192 nodes that wait for stage 1.
+Not open yet: 1511 nodes that wait for a statement dependency, 193 nodes that wait for stage 1.
 
 ## Stage 3: modules to prove (0)
 
