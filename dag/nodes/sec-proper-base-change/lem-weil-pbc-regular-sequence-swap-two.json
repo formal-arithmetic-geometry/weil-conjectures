@@ -1,0 +1,68 @@
+{
+ "id": "lem-weil-pbc-regular-sequence-swap-two",
+ "kind": "statement",
+ "title": "Swapping a regular sequence of length two",
+ "statement": "Let $R$ be a commutative ring and $a,b\\in R$. If $a,b$ is a regular sequence in $R$ [def-weil-pbc-regular-sequence] and $b$ is a nonzerodivisor on $R$, then $b,a$ is a regular sequence in $R$.",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Algebra, proof of Lemma Tag 07DW (lemma-regular-sequence-in-polynomial-ring), case $r=2$: \"the kernel of $a : R/(b)\\to R/(b)$ is isomorphic to the kernel of $b : R/(a)\\to R/(a)$ if both $a$ and $b$ are nonzerodivisors\""
+ },
+ "stmt_deps": [
+  "def-weil-pbc-regular-sequence"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "if a, b is a regular sequence and b is a nonzerodivisor then b, a is a regular sequence",
+   "results": "RingTheory.Sequence.IsRegular, IsRegular.cons', isWeaklyRegular_append_iff', IsLocalRing.isRegular_of_perm (Mathlib.RingTheory.Regular.RegularSequence): permutation only for local Noetherian M, no swap lemma",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "swap two elements of a weakly regular sequence: IsWeaklyRegular M [a, b] and b is SMul regular on M implies IsWeaklyRegular M [b, a]",
+   "results": "IsRegular.toIsWeaklyRegular, IsWeaklyRegular.prototype_perm (needs torsion condition K = aK -> K = 0 on all sub-quotients), IsWeaklyRegular.cons, isWeaklyRegular_cons_iff, isRegular_cons_iff",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "RingTheory.Sequence.IsWeaklyRegular ?M [?a, ?b] → RingTheory.Sequence.IsWeaklyRegular ?M [?b, ?a]",
+   "results": "no results",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rn 'swap' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/RingTheory/Regular/",
+   "results": "RegularSequence.lean:576 private lemma IsWeaklyRegular.swap {a b} (h1 : IsWeaklyRegular M [a, b]) (h2 : torsionBy R M b = a • torsionBy R M b → torsionBy R M b = ⊥) : IsWeaklyRegular M [b, a] -- private, and its hypothesis h2 is a torsion condition (implied by b being M-regular, since then torsionBy b = ⊥); weakly regular only (no nonvanishing of M/(a,b)M)",
+   "date": "2026-10-10",
+   "verdict": "no match (private lemma IsWeaklyRegular.swap is a Lean candidate for stage 3: with b regular, h2 holds trivially; IsRegular adds only top_ne_smul, which is symmetric in a,b)"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-regular-sequence-polynomial-variables",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1"
+}
