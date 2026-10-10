@@ -1,0 +1,76 @@
+{
+ "id": "lem-weil-pbc-projective-space-proj-separated",
+ "kind": "statement",
+ "title": "Projective space over a ring is separated over the ring",
+ "statement": "Let $A$ be a ring, $n\\ge0$, and $P=\\operatorname{Proj}(A[x_0,\\dots,x_n])$ [def-pc-proj] ($\\deg x_k=1$), with structure morphism $q:P\\to\\operatorname{Spec}(A)$ (on each standard open $D_+(x_k)=\\operatorname{Spec}(A[x_0,\\dots,x_n]_{(x_k)})$ it is induced by the ring map $A\\to A[x_0,\\dots,x_n]_{(x_k)}$). Then $q$ is separated [def-weil-proper-morphism].",
+ "source": {
+  "document": "literature/stacks-project/constructions.tex",
+  "place": "Constructions, Lemma 01NH (constructions-lemma-projective-space-separated) part (1), with P^n_{Spec A} = Proj(A[T_0,...,T_n]) by Lemma 01O3 (constructions-lemma-relative-proj-base-change); the proof is that of Lemma 01MC (constructions-lemma-proj-separated) relative to Spec of the degree-0 part"
+ },
+ "stmt_deps": [
+  "def-pc-proj",
+  "def-weil-proper-morphism"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Proj of graded ring is separated over Spec of degree zero part",
+   "results": "AlgebraicGeometry.Proj.isSeparated : IsSeparated (Proj.toSpecZero 𝒜) (Mathlib.AlgebraicGeometry.ProjectiveSpectrum.Proper); Proj.instIsSeparated; Proj.toSpecZero; Proj.instLocallyOfFiniteTypeToSpecZero...",
+   "date": "2026-10-10",
+   "verdict": "match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "the structure morphism from Proj of a graded ring to Spec of its degree zero part is separated",
+   "results": "AlgebraicGeometry.Proj.instIsSeparated, AlgebraicGeometry.Proj.isSeparated (ProjectiveSpectrum/Proper), IsSeparated.instMap, Proj.instIsProperToSpecZero..., Proj.instUniversallyClosedToSpecZero...",
+   "date": "2026-10-10",
+   "verdict": "match: Proj.isSeparated"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rn 'IsSeparated|isSeparated' Mathlib/AlgebraicGeometry/ProjectiveSpectrum/; sed -n 148,153p ProjectiveSpectrum/Basic.lean; sed -n 150,156p RingTheory/MvPolynomial/Homogeneous.lean",
+   "results": "ProjectiveSpectrum/Proper.lean:82 instance isSeparated : IsSeparated (toSpecZero 𝒜); Basic.lean:151 def toSpecZero : Proj 𝒜 ⟶ Spec (𝒜 0); Homogeneous.lean:152 homogeneousSubmodule_zero : homogeneousSubmodule σ R 0 = 1 (degree-0 part of the polynomial ring is R); Homogeneous.lean:619 abbrev gradedAlgebra",
+   "date": "2026-10-10",
+   "verdict": "match"
+  },
+  {
+   "tool": "local_search",
+   "query": "AlgebraicGeometry.Proj.isSeparated",
+   "results": "instance in .lake/packages/mathlib/Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Proper.lean (index: unavailable, so this only confirms existence)",
+   "date": "2026-10-10",
+   "verdict": "exists"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "AlgebraicGeometry.Proj.isSeparated",
+  "file": "Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Proper.lean",
+  "line": 82,
+  "how": "specializes in one line: take 𝒜 = MvPolynomial.homogeneousSubmodule (Fin (n+1)) A with the graded structure MvPolynomial.gradedAlgebra (Mathlib/RingTheory/MvPolynomial/Homogeneous.lean:619); the instance Proj.isSeparated (Proper.lean:82) says Proj.toSpecZero 𝒜 : Proj 𝒜 ⟶ Spec (𝒜 0) (ProjectiveSpectrum/Basic.lean:151) is separated, and 𝒜 0 = A by homogeneousSubmodule_zero (Homogeneous.lean:152), so q is toSpecZero followed by the isomorphism Spec(𝒜 0) ≅ Spec A, separated as a composite with an isomorphism"
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-coherent-serre-vanishing",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lead_note": "Leaf accepted by L (2026-10-10): the instance Proj.isSeparated (ProjectiveSpectrum/Proper.lean:82) for toSpecZero of the graded polynomial algebra, whose degree-0 part is A; checked with sed.",
+ "reviewed": "pass (L, 2026-10-10): leaf, instance checked by sed."
+}
