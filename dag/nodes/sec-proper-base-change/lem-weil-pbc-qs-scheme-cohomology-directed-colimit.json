@@ -1,0 +1,93 @@
+{
+ "id": "lem-weil-pbc-qs-scheme-cohomology-directed-colimit",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-finite-etale-lifting",
+   "place": "step 7 of its split, through the graded cohomology used in the essential-surjectivity argument of Lemma 0GS2; specifically the identification of the graded H^p in Stacks 0897(1); within it, the passage from the finite partial direct sums to the whole direct sum $\\bigoplus_mH^p(X,\\mathcal G_m)$ (Stacks 01FF, the directed-colimit statement)",
+   "via": [
+    "lem-weil-pbc-qcqs-cohomology-direct-sum",
+    "lem-weil-pbc-graded-finiteness-cohomology",
+    "lem-weil-pbc-cohomology-powers-ideal-rees-finite",
+    "lem-weil-pbc-cohomology-powers-ideal-application",
+    "lem-weil-pbc-ml-cohomology-powers-ideal",
+    "lem-weil-pbc-theorem-formal-functions",
+    "lem-weil-pbc-formal-systems-push-pull",
+    "prop-weil-pbc-grothendieck-existence",
+    "lem-weil-pbc-algebraize-finite-over-proper",
+    "lem-weil-pbc-finite-etale-lifting-complete",
+    "lem-weil-pbc-finite-etale-lifting-essential-surjectivity"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Cohomology on a quasi-compact open commutes with directed colimits of modules (Stacks 01FF, for schemes)",
+ "statement": "Let $X$ be a scheme [def-pc-scheme] whose underlying topological space has the following two properties: (1) the quasi-compact open subsets [def-weil-pbc-quasi-compact-scheme] form a basis of the topology, and (2) the intersection of any two quasi-compact open subsets is quasi-compact. Let $I$ be a directed set (nonempty, any two elements have a common upper bound), let $(\\mathcal F_i,\\varphi_{i'i}:\\mathcal F_i\\to\\mathcal F_{i'})_{i\\le i'}$ be a system of sheaves of $\\mathcal O_X$-modules over $I$ [def-weil-sheaf-of-modules-category] ($\\varphi_{ii}=\\mathrm{id}$, $\\varphi_{i''i'}\\varphi_{i'i}=\\varphi_{i''i}$), and let $(\\mathcal F,(c_i:\\mathcal F_i\\to\\mathcal F)_{i\\in I})$ be a colimit of this system in the category $\\Mod(\\mathcal O_X)$ [def-weil-pbc-category-colimit]. For an open $U\\subseteq X$ and an $\\mathcal O_X$-module $\\mathcal G$ write $H^q(U,\\mathcal G)=H^q(U,\\mathcal G|_U)$ for the cohomology [pqf-def-cohomology] of the open subscheme $U$ with coefficients in the restriction $\\mathcal G|_U$ ($W\\mapsto\\mathcal G(W)$ for opens $W\\subseteq U$), and $H^q(U,h)$ for the map induced by a morphism $h$ of $\\mathcal O_X$-modules. Then for every quasi-compact open $U\\subseteq X$ and every $q\\ge0$: (a) every $x\\in H^q(U,\\mathcal F)$ is of the form $H^q(U,c_i)(y)$ for some $i\\in I$ and $y\\in H^q(U,\\mathcal F_i)$; (b) if $i\\in I$ and $y\\in H^q(U,\\mathcal F_i)$ satisfy $H^q(U,c_i)(y)=0$, then $H^q(U,\\varphi_{i'i})(y)=0$ for some $i'\\ge i$. In other words, the canonical map $\\varinjlim_iH^q(U,\\mathcal F_i)\\to H^q(U,\\mathcal F)$ from the directed colimit of the abelian groups $H^q(U,\\mathcal F_i)$, whose restriction to the $i$-th term is $H^q(U,c_i)$, is bijective.",
+ "source": {
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Cohomology, Lemma 01FF (label lemma-quasi-separated-cohomology-colimit, lines 3194-3209; proof lines 3211-3310), stated there for a ringed space with properties (1) and (2); here for the ringed space underlying a scheme, which is the case used. Tag verified in tags/tags: 01FF,cohomology-lemma-quasi-separated-cohomology-colimit."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-pbc-quasi-compact-scheme",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-pbc-category-colimit",
+  "pqf-def-cohomology"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "sheaf cohomology on a quasi-compact open commutes with filtered colimits of sheaves of modules",
+   "results": "CategoryTheory.Sheaf.hasFilteredColimitsOfSize, SheafOfModules.instHasColimitsOfSize..., AlgebraicGeometry.Scheme.Modules.instHasColimits, CategoryTheory.Sheaf.ab5ofSize (Mathlib.CategoryTheory.Abelian.GrothendieckAxioms.Sheaf); existence and exactness of colimits only, no comparison of cohomology with colimits",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "cohomology of a spectral or quasi-separated space commutes with directed colimits of sheaves",
+   "results": "AlgebraicGeometry.nonempty_isColimit_Γ_mapCocone (global sections of a limit of schemes), Condensed/LightCondensed locally constant colimit lemmas, skyscraper colimits; none about higher cohomology and colimits of sheaves",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"cohomology\", CategoryTheory.Limits.colimit",
+   "results": "none",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rlnE 'IsFiltered|HasFilteredColimits|colimit' Mathlib/CategoryTheory/Sites/SheafCohomology Mathlib/AlgebraicGeometry/Modules Mathlib/Topology/Sheaves",
+   "results": "SheafCohomology/{Basic,Cech,MayerVietoris}.lean: no hit; hits only in Topology/Sheaves (stalks, limits, skyscraper) and AlgebraicGeometry/Modules/{Sheaf,Tilde}.lean (existence of colimits); no cohomology-colimit comparison",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-qcqs-cohomology-direct-sum",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1"
+}

@@ -1,0 +1,96 @@
+{
+ "id": "lem-weil-pbc-scheme-modules-coproduct-finite-subsums",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-finite-etale-lifting",
+   "place": "step 7 of its split, through the graded cohomology used in the essential-surjectivity argument of Lemma 0GS2; specifically the identification of the graded H^p in Stacks 0897(1); within it, writing the direct sum $\\mathcal G=\\bigoplus_m\\mathcal G_m$ of $\\mathcal O_X$-modules as the directed colimit of its finite partial sums",
+   "via": [
+    "lem-weil-pbc-qcqs-cohomology-direct-sum",
+    "lem-weil-pbc-graded-finiteness-cohomology",
+    "lem-weil-pbc-cohomology-powers-ideal-rees-finite",
+    "lem-weil-pbc-cohomology-powers-ideal-application",
+    "lem-weil-pbc-ml-cohomology-powers-ideal",
+    "lem-weil-pbc-theorem-formal-functions",
+    "lem-weil-pbc-formal-systems-push-pull",
+    "prop-weil-pbc-grothendieck-existence",
+    "lem-weil-pbc-algebraize-finite-over-proper",
+    "lem-weil-pbc-finite-etale-lifting-complete",
+    "lem-weil-pbc-finite-etale-lifting-essential-surjectivity"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Modules on a scheme: colimits exist, and a coproduct is the directed colimit of its finite subcoproducts",
+ "statement": "Let $X$ be a scheme [def-pc-scheme] and $\\Mod(\\mathcal O_X)$ the category of sheaves of $\\mathcal O_X$-modules [def-weil-sheaf-of-modules-category]. (1) Every small diagram in $\\Mod(\\mathcal O_X)$ has a colimit [def-weil-pbc-category-colimit]; in particular every family of $\\mathcal O_X$-modules indexed by a set has a coproduct. (2) Let $A$ be a set and $(\\mathcal G_a)_{a\\in A}$ a family of $\\mathcal O_X$-modules. For every subset $A'\\subseteq A$ let $(C_{A'},(\\iota^{A'}_a)_{a\\in A'})$ be a coproduct of $(\\mathcal G_a)_{a\\in A'}$ in $\\Mod(\\mathcal O_X)$, and for $A'\\subseteq A''\\subseteq A$ let $\\kappa_{A''A'}:C_{A'}\\to C_{A''}$ be the unique morphism with $\\kappa_{A''A'}\\circ\\iota^{A'}_a=\\iota^{A''}_a$ for all $a\\in A'$; write $C=C_A$ and $\\kappa_{A'}=\\kappa_{AA'}$. Then the finite subsets of $A$, ordered by inclusion, form a directed set (nonempty, any two have a common upper bound), $(C_{A'},\\kappa_{A''A'})$ is a system over it ($\\kappa_{A'A'}=\\mathrm{id}$, $\\kappa_{A'''A''}\\kappa_{A''A'}=\\kappa_{A'''A'}$), and $(C,(\\kappa_{A'})_{A'\\text{ finite}})$ is a colimit of this system in $\\Mod(\\mathcal O_X)$.",
+ "source": {
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Cohomology, proof of Lemma 09J7 (label lemma-perfect-is-compact, lines 13758-13768), where $H^p(X,\\bigoplus_i\\mathcal I_i)=\\bigoplus_iH^p(X,\\mathcal I_i)$ is read off Lemma 01FF, i.e. the direct sum is taken as the directed colimit of its finite partial sums; clause (1): Modules, Lemma 01AH (label lemma-limits-colimits, modules.tex line 204, part (2): all colimits exist in Mod(O_X)). Tags verified in tags/tags: 09J7,cohomology-lemma-perfect-is-compact; 01AH,modules-lemma-limits-colimits."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-pbc-category-colimit"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "coproduct is the filtered colimit of finite subcoproducts",
+   "results": "CategoryTheory.Limits.hasCoproducts_of_finite_and_filtered, CoproductsFromFiniteFiltered.finiteSubcoproductsCocone_pt, CoproductsFromFiniteFiltered.isColimitFiniteSubproductsCocone (Mathlib.CategoryTheory.Limits.Constructions.Filtered)",
+   "date": "2026-10-10",
+   "verdict": "match (clause 2): isColimitFiniteSubproductsCocone"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Limits.CoproductsFromFiniteFiltered.isColimitFiniteSubproductsCocone",
+   "results": "{C} [Category C] {α : Type w} [HasFiniteCoproducts C] (f : α → C) [HasColimitsOfShape (Finset (Discrete α)) C] [HasCoproduct f] : IsColimit (finiteSubcoproductsCocone f)",
+   "date": "2026-10-10",
+   "verdict": "match (clause 2), type read"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "the coproduct of a family is the colimit over finite subsets of the finite coproducts; category of sheaves of modules on a scheme has colimits",
+   "results": "AlgebraicGeometry.Scheme.Modules.instHasColimits : HasColimits X.Modules (Mathlib.AlgebraicGeometry.Modules.Sheaf); PresheafOfModules.Finite.hasFiniteColimits; SheafOfModules.isColimitFreeCofan",
+   "date": "2026-10-10",
+   "verdict": "match (clause 1): Scheme.Modules.instHasColimits"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -n 'def isColimitFiniteSubproductsCocone\\|def finiteSubcoproductsCocone' Mathlib/CategoryTheory/Limits/Constructions/Filtered.lean; sed -n 53p Mathlib/AlgebraicGeometry/Modules/Sheaf.lean",
+   "results": "Filtered.lean:95 def finiteSubcoproductsCocone (pt := ∐ f, legs Sigma.desc fun s => Sigma.ι f _), :103 def isColimitFiniteSubproductsCocone; Sheaf.lean:53 instance : HasColimits X.Modules",
+   "date": "2026-10-10",
+   "verdict": "match, lines read"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "AlgebraicGeometry.Scheme.Modules.instHasColimits; CategoryTheory.Limits.CoproductsFromFiniteFiltered.isColimitFiniteSubproductsCocone",
+  "file": "Mathlib/AlgebraicGeometry/Modules/Sheaf.lean; Mathlib/CategoryTheory/Limits/Constructions/Filtered.lean",
+  "how": "one declaration per clause: clause (1) is the instance HasColimits X.Modules (Sheaf.lean:53; X.Modules = SheafOfModules X.ringCatSheaf, the category Mod(O_X)); clause (2) is isColimitFiniteSubproductsCocone f (Filtered.lean:103) for C = X.Modules and f = (G_a), whose instance hypotheses HasFiniteCoproducts and HasColimitsOfShape (Finset (Discrete A)) hold by clause (1); its cocone finiteSubcoproductsCocone (Filtered.lean:95) has point the coproduct ∐ f and legs Sigma.desc (fun s => Sigma.ι f s) = the maps kappa_{A'} over Finset (Discrete A), the directed set of finite subsets; the choice of coproducts C_{A'} is immaterial since coproducts are unique up to unique isomorphism compatible with the inclusions",
+  "line": 103
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-qcqs-cohomology-direct-sum",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1"
+}
