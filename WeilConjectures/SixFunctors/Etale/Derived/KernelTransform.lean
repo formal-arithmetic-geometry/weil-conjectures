@@ -89,10 +89,8 @@ compactifiable morphisms is compactifiable by Nagata's theorem, which needs a qu
 and quasi-separated base), so it is a hypothesis.
 
 `AlgebraicGeometry.Etale.nonempty_iso_kernelTransform_diagonal` is the projection formula for
-the closed immersion `Δ`, followed by `Δ_* = Δ_!` and `Δ ≫ p₂ = 𝟙`. Since `R(f)_!` is computed
-with a chosen compactification, the last two steps use independence of the compactification
-(`AlgebraicGeometry.Etale.rightDerivedLowerShriekIso`), which needs `π` quasi-compact and
-torsion coefficients.
+the closed immersion `Δ`, followed by `Δ_* = Δ_!` and the composition law of `Rf_!` for
+`Δ ≫ p₂ = 𝟙`, which needs torsion coefficients.
 
 `AlgebraicGeometry.Etale.nonempty_iso_kernelTransform_shift` is formal: the shift isomorphism
 of the derived tensor product in its second variable is natural in the first
