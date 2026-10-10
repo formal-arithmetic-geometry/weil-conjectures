@@ -16,8 +16,8 @@ public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.PAdicAlgCl.Deriv
 # Compatibility of the six functors with the extension of `ℓ`-adic coefficients
 
 Let `ℓ` be a prime, `E ≤ F` finite subextensions of `ℚ_ℓ` inside `ℚ̄_ℓ`
-(`PadicAlgCl.FiniteSubext ℓ`) and `Ω = ℚ̄_ℓ`. For a scheme `X`, the coefficient inclusions
-`ι : E_X ⟶ F_X` (`ProEtale.padicSubfieldRingObjMap`) and `ι : E_X ⟶ ℚ̄_ℓ,X`
+(`PadicAlgCl.FiniteIntermediateField ℓ`) and `Ω = ℚ̄_ℓ`. For a scheme `X`, the coefficient
+inclusions `ι : E_X ⟶ F_X` (`ProEtale.padicSubfieldRingObjMap`) and `ι : E_X ⟶ ℚ̄_ℓ,X`
 (`ProEtale.padicSubfieldSheafToPadicAlgClSheaf`) induce the *derived extensions of scalars*
 ```
 T^X_{E,F} = F_X ⊗ᴸ_{E_X} - = L(Ext_ι) : D(Mod_{E_X}) ⥤ D(Mod_{F_X}),
@@ -85,7 +85,7 @@ categories.
 * **(A0.2)** `ProEtale.preservesFiniteLimits_extendScalars_padicSubfieldSheafToPadicAlgClSheaf`:
   for a finite subextension `E`, the extension of scalars `ℚ̄_ℓ,X ⊗_{E_X} -` is exact, i.e.
   `ℚ̄_ℓ,X` is flat over `E_X`: it is the sheafification of the filtered union of the `F_X`,
-  `F ≥ E` (`ProEtale.padicAlgClSheaf_isColimit`), each of which is finite free over `E_X`.
+  `F ≥ E` (`ProEtale.isColimitPadicAlgClSheafCocone`), each of which is finite free over `E_X`.
 * `ProEtale.isIso_padicSubfieldDerivedPushHom`: for a finite extension `F/E`, (Push) is an
   isomorphism on all unbounded objects, since `F_X ≅ E_X^n` reduces it to the compatibility of
   `Rf_*` with finite direct sums.
@@ -124,29 +124,30 @@ variable (X : Scheme.{u})
 
 /-- **(A0.2)** For finite subextensions `E ≤ F`, the extension of scalars along `E_X ⟶ F_X` is
 exact: `F_X` is finite free, in particular flat, over `E_X`. See the module docstring. -/
-instance preservesFiniteLimits_extendScalars_padicSubfieldRingObjMap {E F : FiniteSubext ℓ}
-    (h : E ≤ F) : PreservesFiniteLimits (Mod.extendScalars (padicSubfieldRingObjMap X ℓ h)) :=
+instance preservesFiniteLimits_extendScalars_padicSubfieldRingObjMap
+    {E F : FiniteIntermediateField ℓ} (h : E ≤ F) :
+    PreservesFiniteLimits (Mod.extendScalars (padicSubfieldRingObjMap X ℓ h)) :=
   sorry
 
 /-- **(A0.2)** For a finite subextension `E`, the extension of scalars along `E_X ⟶ ℚ̄_ℓ,X` is
 exact: `ℚ̄_ℓ,X` is flat over `E_X`, being a filtered colimit of finite free `E_X`-modules. See
 the module docstring. -/
 instance preservesFiniteLimits_extendScalars_padicSubfieldSheafToPadicAlgClSheaf
-    (E : FiniteSubext ℓ) :
+    (E : FiniteIntermediateField ℓ) :
     PreservesFiniteLimits (Mod.extendScalars (padicSubfieldSheafToPadicAlgClSheaf X ℓ E)) :=
   sorry
 
-instance preservesHomology_extendScalars_padicSubfieldRingObjMap {E F : FiniteSubext ℓ}
+instance preservesHomology_extendScalars_padicSubfieldRingObjMap {E F : FiniteIntermediateField ℓ}
     (h : E ≤ F) : (Mod.extendScalars (padicSubfieldRingObjMap X ℓ h)).PreservesHomology := {}
 
 instance preservesHomology_extendScalars_padicSubfieldSheafToPadicAlgClSheaf
-    (E : FiniteSubext ℓ) :
+    (E : FiniteIntermediateField ℓ) :
     (Mod.extendScalars (padicSubfieldSheafToPadicAlgClSheaf X ℓ E)).PreservesHomology := {}
 
 /-- The restriction of scalars along the flat inclusion `E_X ⟶ F_X` preserves K-injective
 complexes, its left adjoint being exact. -/
-instance preservesKInjectiveComplexes_comap_padicSubfieldRingObjMap {E F : FiniteSubext ℓ}
-    (h : E ≤ F) :
+instance preservesKInjectiveComplexes_comap_padicSubfieldRingObjMap
+    {E F : FiniteIntermediateField ℓ} (h : E ≤ F) :
     (Mod.comap (padicSubfieldRingObjMap X ℓ h) :
       Mod (Sheaf (ProEt.topology X) Ab.{u + 1}) (padicSubfieldRingObj X ℓ F) ⥤
         Mod (Sheaf (ProEt.topology X) Ab.{u + 1}) (padicSubfieldRingObj X ℓ E)
@@ -156,7 +157,7 @@ instance preservesKInjectiveComplexes_comap_padicSubfieldRingObjMap {E F : Finit
 /-- The restriction of scalars along the flat inclusion `E_X ⟶ ℚ̄_ℓ,X` preserves K-injective
 complexes, its left adjoint being exact. -/
 instance preservesKInjectiveComplexes_comap_padicSubfieldSheafToPadicAlgClSheaf
-    (E : FiniteSubext ℓ) :
+    (E : FiniteIntermediateField ℓ) :
     (Mod.comap (padicSubfieldSheafToPadicAlgClSheaf X ℓ E) :
       Mod (Sheaf (ProEt.topology X) Ab.{u + 1}) (padicAlgClSheaf X ℓ) ⥤
         Mod (Sheaf (ProEt.topology X) Ab.{u + 1}) (padicSubfieldRingObj X ℓ E)
@@ -170,7 +171,7 @@ end Flat
 
 section FiniteExtension
 
-variable {X Y : Scheme.{u}} (f : X ⟶ Y) {E F : FiniteSubext ℓ} (h : E ≤ F)
+variable {X Y : Scheme.{u}} (f : X ⟶ Y) {E F : FiniteIntermediateField ℓ} (h : E ≤ F)
 
 /-- Restriction of scalars commutes with the pushforward:
 `f_*^F ⋙ Res_ι ≅ Res_ι ⋙ f_*^E`, both being `mapMod(f_*)` followed by the restriction of scalars
@@ -263,7 +264,8 @@ end FiniteExtension
 
 section FiniteExtensionOpenImmersion
 
-variable {U X : Scheme.{u}} (j : U ⟶ X) [IsOpenImmersion j] {E F : FiniteSubext ℓ} (h : E ≤ F)
+variable {U X : Scheme.{u}} (j : U ⟶ X) [IsOpenImmersion j] {E F : FiniteIntermediateField ℓ}
+  (h : E ≤ F)
 
 /-- Restriction of scalars commutes with the extension by zero along an open immersion:
 `j_!^F ⋙ Res_ι ≅ Res_ι ⋙ j_!^E`, by the naturality of the projection formula and the square of
@@ -334,7 +336,8 @@ end FiniteExtensionOpenImmersion
 
 section FiniteExtensionLowerShriek
 
-variable {X Y : Scheme.{u}} (f : X ⟶ Y) [HasCompactification f] {E F : FiniteSubext ℓ} (h : E ≤ F)
+variable {X Y : Scheme.{u}} (f : X ⟶ Y) [HasCompactification f]
+  {E F : FiniteIntermediateField ℓ} (h : E ≤ F)
 
 /-- **(Shriek)** for a finite extension `F/E`: the canonical comparison
 `Rf_!^E ⋙ T^Y_{E,F} ⟶ T^X_{E,F} ⋙ Rf_!^F` for `Rf_! = Di_! ⋙ Rg_*` attached to the chosen
@@ -367,7 +370,7 @@ end FiniteExtensionLowerShriek
 
 section PadicAlgCl
 
-variable {X Y : Scheme.{u}} (f : X ⟶ Y) (E : FiniteSubext ℓ)
+variable {X Y : Scheme.{u}} (f : X ⟶ Y) (E : FiniteIntermediateField ℓ)
 
 /-- Restriction of scalars commutes with the pushforward:
 `f_*^Ω ⋙ Res_ι ≅ Res_ι ⋙ f_*^E`, both being `mapMod(f_*)` followed by the restriction of scalars
@@ -463,7 +466,7 @@ end PadicAlgCl
 
 section PadicAlgClOpenImmersion
 
-variable {U X : Scheme.{u}} (j : U ⟶ X) [IsOpenImmersion j] (E : FiniteSubext ℓ)
+variable {U X : Scheme.{u}} (j : U ⟶ X) [IsOpenImmersion j] (E : FiniteIntermediateField ℓ)
 
 /-- Restriction of scalars commutes with the extension by zero along an open immersion:
 `j_!^Ω ⋙ Res_ι ≅ Res_ι ⋙ j_!^E`. -/
@@ -538,7 +541,7 @@ end PadicAlgClOpenImmersion
 
 section PadicAlgClLowerShriek
 
-variable {X Y : Scheme.{u}} (f : X ⟶ Y) [HasCompactification f] (E : FiniteSubext ℓ)
+variable {X Y : Scheme.{u}} (f : X ⟶ Y) [HasCompactification f] (E : FiniteIntermediateField ℓ)
 
 /-- **(Shriek)** for `E ⊆ ℚ̄_ℓ`: the canonical comparison `Rf_!^E ⋙ T^Y_{E,Ω} ⟶ T^X_{E,Ω} ⋙ Rf_!^Ω`
 for `Rf_! = Di_! ⋙ Rg_*` attached to the chosen compactification `X ⟶[i] Z ⟶[g] Y` of `f`: the

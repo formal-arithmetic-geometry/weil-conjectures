@@ -14,7 +14,7 @@ public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.PAdicAlgCl.Colim
 # The bounded constructible `ℚ̄_ℓ`-complexes as the 2-colimit over the finite subextensions
 
 Let `ℓ` be a prime and `X` a scheme. For a finite subextension `E ⊆ ℚ̄_ℓ` of `ℚ_ℓ`
-(`PadicAlgCl.FiniteSubext ℓ`), let `C_E(X) = D^b_cons(X, E)` be the bounded constructible
+(`PadicAlgCl.FiniteIntermediateField ℓ`), let `C_E(X) = D^b_cons(X, E)` be the bounded constructible
 derived category of `E_X`-modules (`ProEtale.BoundedConstructible (padicSubfieldRingObj X ℓ E)`,
 the full subcategory of the unbounded `D(Mod_{E_X})` of
 `WeilConjectures.ConstructibleSheaf.ProEtaleModule.DerivedCategory`), and let
@@ -54,7 +54,7 @@ categories. By `CategoryTheory.CategoryCocone.IsFilteredTwoColimit` this is the 
 These are stated for a topologically noetherian `X`, the setting in which the bounded
 constructible complexes form a triangulated subcategory
 (`ProEtale.isTriangulated_boundedConstructible`). They are *not* formal consequences of the
-identification `ℚ̄_ℓ,X ≃ colim_E E_X` of `ProEtale.padicAlgClSheaf_isColimit`, and they are
+identification `ℚ̄_ℓ,X ≃ colim_E E_X` of `ProEtale.isColimitPadicAlgClSheafCocone`, and they are
 false for the unbounded derived categories; see the module docstring of
 `WeilConjectures.CategoryTheory.FilteredTwoColimit` for the ordinary-category model of the
 2-colimit that they describe.
@@ -72,9 +72,9 @@ false for the unbounded derived categories; see the module docstring of
   constructible `ℚ̄_ℓ,X`-complex has finitely many constructible cohomology sheaves; each is
   locally, on the strata of a stratification, finitely presented, and a finite presentation
   involves finitely many sections of `ℚ̄_ℓ,X`, which are defined over a finite subextension since
-  `ℚ̄_ℓ,X = colim_E E_X` (`ProEtale.padicAlgClSheaf_isColimit`). A finite Postnikov induction on
-  the length of the complex then descends the complex itself, the gluing data being morphisms
-  which descend by (Hom).
+  `ℚ̄_ℓ,X = colim_E E_X` (`ProEtale.isColimitPadicAlgClSheafCocone`). A finite Postnikov
+  induction on the length of the complex then descends the complex itself, the gluing data
+  being morphisms which descend by (Hom).
 * **(Hom)** `ProEtale.constructibleCocone_homSurj` and `ProEtale.constructibleCocone_homInj`:
   continuity of the derived hom. For a bounded constructible first argument `K_E` and a
   bounded below second argument, `Hom_{D(Mod_{ℚ̄_ℓ,X})}(T_{E,Ω} K_E, T_{E,Ω} L_E)` is the filtered
@@ -112,7 +112,7 @@ section ExtendScalars
 
 /-- The derived extension of scalars `T^X_{E,F} = F_X ⊗ᴸ_{E_X} - : D(Mod_{E_X}) ⥤ D(Mod_{F_X})`
 along the inclusion of finite subextensions `E ≤ F`. -/
-noncomputable abbrev derivedExtendScalarsSubfield {E F : FiniteSubext ℓ} (h : E ≤ F) :
+noncomputable abbrev derivedExtendScalarsSubfield {E F : FiniteIntermediateField ℓ} (h : E ≤ F) :
     DerivedCategory (Mod (Sheaf (ProEt.topology X) Ab.{u + 1}) (padicSubfieldRingObj X ℓ E)) ⥤
       DerivedCategory (Mod (Sheaf (ProEt.topology X) Ab.{u + 1}) (padicSubfieldRingObj X ℓ F)) :=
   L(Mod.extendScalars (padicSubfieldRingObjMap X ℓ h))
@@ -120,7 +120,7 @@ noncomputable abbrev derivedExtendScalarsSubfield {E F : FiniteSubext ℓ} (h : 
 /-- The derived extension of scalars
 `T^X_{E,Ω} = ℚ̄_ℓ,X ⊗ᴸ_{E_X} - : D(Mod_{E_X}) ⥤ D(Mod_{ℚ̄_ℓ,X})` along the inclusion of a finite
 subextension `E` into `ℚ̄_ℓ`. -/
-noncomputable abbrev derivedExtendScalarsToPadicAlgCl (E : FiniteSubext ℓ) :
+noncomputable abbrev derivedExtendScalarsToPadicAlgCl (E : FiniteIntermediateField ℓ) :
     DerivedCategory (Mod (Sheaf (ProEt.topology X) Ab.{u + 1}) (padicSubfieldRingObj X ℓ E)) ⥤
       DerivedCategory (Mod (Sheaf (ProEt.topology X) Ab.{u + 1}) (padicAlgClSheaf X ℓ)) :=
   L(Mod.extendScalars (padicSubfieldSheafToPadicAlgClSheaf X ℓ E))
@@ -129,7 +129,7 @@ noncomputable abbrev derivedExtendScalarsToPadicAlgCl (E : FiniteSubext ℓ) :
 `E ≤ F`. The extensions of scalars being exact, the composite of their derived functors is the
 derived functor of the composite, which is the extension of scalars along the composite
 inclusion `E_X ⟶ F_X ⟶ ℚ̄_ℓ,X = E_X ⟶ ℚ̄_ℓ,X`. -/
-noncomputable def derivedExtendScalarsCompIso {E F : FiniteSubext ℓ} (h : E ≤ F) :
+noncomputable def derivedExtendScalarsCompIso {E F : FiniteIntermediateField ℓ} (h : E ≤ F) :
     derivedExtendScalarsSubfield X ℓ h ⋙ derivedExtendScalarsToPadicAlgCl X ℓ F ≅
       derivedExtendScalarsToPadicAlgCl X ℓ E :=
   haveI : PreservesFiniteLimits (Mod.extendScalars (padicSubfieldRingObjMap X ℓ h ≫
@@ -149,7 +149,7 @@ section Constructible
 
 /-- The bounded constructible derived category `C_E(X) = D^b_cons(X, E)` of `E_X`-modules, for
 a finite subextension `E ⊆ ℚ̄_ℓ` of `ℚ_ℓ`. -/
-noncomputable abbrev PadicSubfieldConstructible (E : FiniteSubext ℓ) : Type _ :=
+noncomputable abbrev PadicSubfieldConstructible (E : FiniteIntermediateField ℓ) : Type _ :=
   BoundedConstructible (padicSubfieldRingObj X ℓ E)
 
 /-- The bounded constructible derived category `C_Ω(X) = D^b_cons(X, ℚ̄_ℓ)` of
@@ -159,7 +159,8 @@ noncomputable abbrev PadicAlgClConstructible : Type _ :=
 
 /-- Extension of scalars along `E_X ⟶ F_X` preserves bounded constructible complexes. See the
 module docstring. -/
-lemma boundedConstructible_derivedExtendScalarsSubfield_obj {E F : FiniteSubext ℓ} (h : E ≤ F)
+lemma boundedConstructible_derivedExtendScalarsSubfield_obj {E F : FiniteIntermediateField ℓ}
+    (h : E ≤ F)
     (K : DerivedCategory (Mod (Sheaf (ProEt.topology X) Ab.{u + 1}) (padicSubfieldRingObj X ℓ E)))
     (hK : boundedConstructible (padicSubfieldRingObj X ℓ E) K) :
     boundedConstructible (padicSubfieldRingObj X ℓ F)
@@ -168,7 +169,7 @@ lemma boundedConstructible_derivedExtendScalarsSubfield_obj {E F : FiniteSubext 
 
 /-- Extension of scalars along `E_X ⟶ ℚ̄_ℓ,X` preserves bounded constructible complexes. See the
 module docstring. -/
-lemma boundedConstructible_derivedExtendScalarsToPadicAlgCl_obj (E : FiniteSubext ℓ)
+lemma boundedConstructible_derivedExtendScalarsToPadicAlgCl_obj (E : FiniteIntermediateField ℓ)
     (K : DerivedCategory (Mod (Sheaf (ProEt.topology X) Ab.{u + 1}) (padicSubfieldRingObj X ℓ E)))
     (hK : boundedConstructible (padicSubfieldRingObj X ℓ E) K) :
     boundedConstructible (padicAlgClSheaf X ℓ) ((derivedExtendScalarsToPadicAlgCl X ℓ E).obj K) :=
@@ -176,7 +177,7 @@ lemma boundedConstructible_derivedExtendScalarsToPadicAlgCl_obj (E : FiniteSubex
 
 /-- The extension of scalars `T^X_{E,F} : C_E(X) ⥤ C_F(X)` on bounded constructible complexes,
 for finite subextensions `E ≤ F`. -/
-noncomputable def constructibleExtendScalars {E F : FiniteSubext ℓ} (h : E ≤ F) :
+noncomputable def constructibleExtendScalars {E F : FiniteIntermediateField ℓ} (h : E ≤ F) :
     PadicSubfieldConstructible X ℓ E ⥤ PadicSubfieldConstructible X ℓ F :=
   (boundedConstructible (padicSubfieldRingObj X ℓ F)).lift
     ((boundedConstructible (padicSubfieldRingObj X ℓ E)).ι ⋙ derivedExtendScalarsSubfield X ℓ h)
@@ -185,7 +186,7 @@ noncomputable def constructibleExtendScalars {E F : FiniteSubext ℓ} (h : E ≤
 /-- The extension of scalars `T^X_{E,Ω} : C_E(X) ⥤ C_Ω(X)` on bounded constructible complexes,
 for a finite subextension `E`: the functors of the cocone whose vertex is the bounded
 constructible `ℚ̄_ℓ`-complexes. -/
-noncomputable def constructibleToPadicAlgCl (E : FiniteSubext ℓ) :
+noncomputable def constructibleToPadicAlgCl (E : FiniteIntermediateField ℓ) :
     PadicSubfieldConstructible X ℓ E ⥤ PadicAlgClConstructible X ℓ :=
   (boundedConstructible (padicAlgClSheaf X ℓ)).lift
     ((boundedConstructible (padicSubfieldRingObj X ℓ E)).ι ⋙ derivedExtendScalarsToPadicAlgCl X ℓ E)
@@ -195,7 +196,7 @@ noncomputable def constructibleToPadicAlgCl (E : FiniteSubext ℓ) :
 of scalars between finite subextensions: `T^X_{E,F} ⋙ T^X_{F,Ω} ≅ T^X_{E,Ω}` on bounded
 constructible complexes, by `derivedExtendScalarsCompIso` and the full faithfulness of the
 inclusion of the bounded constructible complexes. -/
-noncomputable def constructibleToPadicAlgClCompIso {E F : FiniteSubext ℓ} (h : E ≤ F) :
+noncomputable def constructibleToPadicAlgClCompIso {E F : FiniteIntermediateField ℓ} (h : E ≤ F) :
     constructibleExtendScalars X ℓ h ⋙ constructibleToPadicAlgCl X ℓ F ≅
       constructibleToPadicAlgCl X ℓ E :=
   Functor.fullyFaithfulCancelRight (boundedConstructible (padicAlgClSheaf X ℓ)).ι
@@ -213,7 +214,7 @@ bounded constructible `E`-complexes over the finite subextensions `E ⊆ ℚ̄_�
 extensions of scalars as transition functors, and the extensions of scalars to `ℚ̄_ℓ` as
 functors to the vertex. -/
 noncomputable def constructibleCocone :
-    CategoryCocone (fun E : FiniteSubext ℓ ↦ PadicSubfieldConstructible X ℓ E)
+    CategoryCocone (fun E : FiniteIntermediateField ℓ ↦ PadicSubfieldConstructible X ℓ E)
       (PadicAlgClConstructible X ℓ) where
   T h := constructibleExtendScalars X ℓ h
   Φ E := constructibleToPadicAlgCl X ℓ E
