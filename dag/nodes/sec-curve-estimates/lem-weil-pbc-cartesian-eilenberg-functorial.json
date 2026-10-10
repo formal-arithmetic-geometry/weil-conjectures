@@ -14,7 +14,7 @@
  },
  "kind": "statement",
  "title": "Functorial Cartan--Eilenberg resolutions and filtered total complexes",
- "statement": "Let $F:\\mathcal A\\to\\mathcal B$ be an exact additive functor between abelian categories [def-sp-abelian]. For a bounded-below complex $K^\\bullet$ in an abelian category, with $Z^q=\\operatorname{Ker}(d_K^q)$, $B^{q+1}=\\operatorname{Im}(d_K^q)$ and $H^q(K^\\bullet)=Z^q/\\operatorname{Im}(d_K^{q-1})$, a *Cartan--Eilenberg resolution* of $K^\\bullet$ is a double complex $I^{\\bullet,\\bullet}$ [def-sp-double-complex-total], with differentials $d_I:I^{p,q}\\to I^{p+1,q}$ and $d_{II}:I^{p,q}\\to I^{p,q+1}$, together with a morphism of complexes $\\epsilon:K^\\bullet\\to I^{0,\\bullet}$, such that: (1) there is $i$ with $I^{p,q}=0$ for all $q<i$ and all $p$; (2) $I^{p,q}=0$ for $p<0$; (3) for each $q$ the row $(I^{\\bullet,q},d_I)$, augmented by $\\epsilon^q$, is an injective resolution [def-sp-injective-resolutions] of $K^q$; (4) for each $q$ the complex $\\operatorname{Ker}(d_{II}:I^{\\bullet,q}\\to I^{\\bullet,q+1})$ is an injective resolution of $Z^q$; (5) for each $q$ the complex $\\operatorname{Im}(d_{II}:I^{\\bullet,q}\\to I^{\\bullet,q+1})$ is an injective resolution of $B^{q+1}$; (6) for each $q$ the complex $H^q_{II}(I^{\\bullet,\\bullet})$ is an injective resolution of $H^q(K^\\bullet)$. Let $K^\\bullet$ be a bounded-below complex in $\\mathcal A$ and $L^\\bullet$ a bounded-below complex in $\\mathcal B$, let $u:F(K^\\bullet)\\to L^\\bullet$ be a morphism of complexes, and let $(I_K,\\epsilon_K)$ and $(J_L,\\epsilon_L)$ be Cartan--Eilenberg resolutions of $K^\\bullet$ and $L^\\bullet$. Then there is a morphism of double complexes $\\phi:F(I_K)\\to J_L$ with $\\phi\\circ F(\\epsilon_K)=\\epsilon_L\\circ u$; in particular for each $q$ its $q$-th row $F(I_K^{\\bullet,q})\\to J_L^{\\bullet,q}$ is a morphism of complexes compatible, through the augmentations, with $u^q:F(K^q)\\to L^q$. On total complexes (defined by the formula of [def-sp-double-complex-total], the sums $\\bigoplus_{p+q=n}$ being finite by (1) and (2)), filtered by the second degree $q$ (the filtration ${}''F$ of [def-sp-double-complex-total], a decreasing filtration [def-sp-filtration]), $\\operatorname{Tot}(\\phi):\\operatorname{Tot}F(I_K)\\to\\operatorname{Tot}J_L$ is a morphism of filtered complexes.",
+ "statement": "Let $F:\\mathcal A\\to\\mathcal B$ be an exact additive functor between abelian categories [def-sp-abelian]. For a bounded-below complex $K^\\bullet$ in an abelian category, with $Z^q=\\operatorname{Ker}(d_K^q)$, $B^{q+1}=\\operatorname{Im}(d_K^q)$ and $H^q(K^\\bullet)=Z^q/\\operatorname{Im}(d_K^{q-1})$, a *Cartan--Eilenberg resolution* of $K^\\bullet$ is a double complex $I^{\\bullet,\\bullet}$ [def-sp-double-complex-total], with differentials $d_I:I^{p,q}\\to I^{p+1,q}$ and $d_{II}:I^{p,q}\\to I^{p,q+1}$, together with a morphism of complexes $\\epsilon:K^\\bullet\\to I^{0,\\bullet}$, such that: (1) there is $i$ with $I^{p,q}=0$ for all $q<i$ and all $p$; (2) $I^{p,q}=0$ for $p<0$; (3) for each $q$ the row $(I^{\\bullet,q},d_I)$, augmented by $\\epsilon^q$, is an injective resolution [def-sp-injective-resolutions] of $K^q$; (4) for each $q$ the complex $\\operatorname{Ker}(d_{II}:I^{\\bullet,q}\\to I^{\\bullet,q+1})$ is an injective resolution of $Z^q$; (5) for each $q$ the complex $\\operatorname{Im}(d_{II}:I^{\\bullet,q}\\to I^{\\bullet,q+1})$ is an injective resolution of $B^{q+1}$; (6) for each $q$ the complex $H^q_{II}(I^{\\bullet,\\bullet})$ is an injective resolution of $H^q(K^\\bullet)$. Let $K^\\bullet$ be a bounded-below complex in $\\mathcal A$ and $L^\\bullet$ a bounded-below complex in $\\mathcal B$, let $u:F(K^\\bullet)\\to L^\\bullet$ be a morphism of complexes, and let $(I_K,\\epsilon_K)$ and $(J_L,\\epsilon_L)$ be Cartan--Eilenberg resolutions satisfying (1)--(6). Then there is a morphism of double complexes $\\phi:F(I_K)\\to J_L$ with $\\phi\\circ F(\\epsilon_K)=\\epsilon_L\\circ u$; in particular for each $q$ its $q$-th row is compatible through the augmentations with $u^q$. On total complexes (defined by [def-sp-double-complex-total], with sums finite by (1) and (2)), $\\operatorname{Tot}(\\phi)$ is a morphism of filtered complexes for the decreasing filtration by the second degree [def-sp-filtration].",
  "source": {
   "document": "literature/stacks-project/derived.tex",
   "place": "Definition Tag 015H (definition-cartan-eilenberg), Lemma Tag 015I (lemma-cartan-eilenberg), and Remark Tag 015K (remark-functorial-ss)"
@@ -25,41 +25,93 @@
   "def-sp-filtration",
   "def-sp-injective-resolutions"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "For every degree $q$, decompose the bounded-below complex into the exact sequences $0\\to Z^q\\to K^q\\to B^{q+1}\\to0$ and $0\\to B^q\\to Z^q\\to H^q(K)\\to0$, and make the same decompositions for $L$. Exactness of $F$ carries these sequences and the exact augmented rows of $I_K$ to exact sequences and exact augmented rows of $F(I_K)$. The six Cartan--Eilenberg conditions stated in the item give the required injective-resolution rows for $J_L$, and for its $Z$, $B$, and $H_{II}$ pieces.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Definition Tag 015H, clauses (3)--(6), and Lemma Tag 015I"
+   }
+  },
+  {
+   "text": "We construct the row maps by induction on $q$, along the sequence $0\\to B^q\\to Z^q\\to H^q\\to0$, $0\\to Z^q\\to K^q\\to B^{q+1}\\to0$ of Step 1. The induction claim at $q$ is that a map $\\varphi_B^q$ from the row $F(\\operatorname{Im}(d_{II}:I_K^{\\bullet,q-1}\\to I_K^{\\bullet,q}))$ to the corresponding row of $J_L$ has been constructed, compatible with the augmentations (through $u$). Below the lowest nonzero degree all rows are zero, and in the lowest degree $B^q=0$, so $\\varphi_B^q=0$ starts the induction. Given $\\varphi_B^q$: (a) the $H^q$ row map $\\varphi_H^q$ is obtained from [lem-weil-pbc-lift-along-injective-quasi-iso], applied to the augmentation $F(H^q(K))[0]\\to F(H^q_{II}(I_K))$, which is a monomorphic quasi-isomorphism because $0\\to F(H^q(K))\\to F(H^q_{II}(I_K)^{0})\\to F(H^q_{II}(I_K)^{1})\\to\\cdots$ is exact, and to the map $F(H^q(K))\\to H^q(L)\\to H^q_{II}(J_L)^{0}$ into the bounded-below injective complex $H^q_{II}(J_L)$; (b) the $Z^q$ row map $\\varphi_Z^q$ is the middle map $\\varphi_B$ given by [lem-weil-pbc-horseshoe-morphism-lift-exact-source] for the short exact sequence of exact augmented complexes $0\\to F(B^q\\text{-row})\\to F(Z^q\\text{-row})\\to F(H^q\\text{-row})\\to0$ over $0\\to F(B^q)\\to F(Z^q)\\to F(H^q(K))\\to0$, the target horseshoe $0\\to B^q\\text{-row}\\to Z^q\\text{-row}\\to H^q_{II}\\text{-row}$ of $J_L$ (injective resolutions by (4)--(6), degreewise exact, zero for $p<0$ by (2)) and the endpoint maps $\\varphi_B^q,\\varphi_H^q$; (c) the $B^{q+1}$ row map $\\varphi_B^{q+1}$ is obtained from [lem-weil-pbc-lift-along-injective-quasi-iso] exactly as in (a), for the row $F(\\operatorname{Im}(d_{II}:I_K^{\\bullet,q}\\to I_K^{\\bullet,q+1}))$ augmented by $F(B^{q+1})$; (d) the $K^q$ row map $\\phi^{\\bullet,q}$ is the middle map $\\varphi_B$ given by [lem-weil-pbc-horseshoe-morphism-lift-exact-source] for $0\\to F(Z^q\\text{-row})\\to F(I_K^{\\bullet,q})\\to F(B^{q+1}\\text{-row})\\to0$ over $0\\to F(Z^q)\\to F(K^q)\\to F(B^{q+1})\\to0$, the target horseshoe given by (3)--(5), and the endpoint maps $\\varphi_Z^q,\\varphi_B^{q+1}$. Each row map is chosen exactly once: $\\varphi_B$ and $\\varphi_H$ by the quasi-isomorphism lift, $\\varphi_Z$ and $\\phi^{\\bullet,q}$ as horseshoe middle maps, so the three-term compatibilities of (b) and (d) hold for the maps actually used, and $\\varphi_B^{q+1}$ continues the induction.",
+   "uses": [
+    "lem-weil-pbc-lift-along-injective-quasi-iso",
+    "lem-weil-pbc-horseshoe-morphism-lift-exact-source"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Lemma Tag 015I, comparison morphism construction, written degree-by-degree using its cycle, boundary, and cohomology rows"
+   }
+  },
+  {
+   "text": "The resulting row maps commute with $d_I$ by construction. They commute with $d_{II}$ because on the $q$-th row the vertical differential factors as $I^{\\bullet,q}\\to J_B^{\\bullet,q+1}\\to J_Z^{\\bullet,q+1}\\to I^{\\bullet,q+1}$ through the boundary and cycle rows, and every factor commutes by the induction claim, including the three-term compatibilities supplied by the exact-source horseshoe lifts. Thus the row maps assemble to a morphism of double complexes $\\phi:F(I_K)\\to J_L$, and the degree-zero augmentation identity is $\\phi\\circ F(\\epsilon_K)=\\epsilon_L\\circ u$.",
+   "uses": [
+    "lem-weil-pbc-horseshoe-morphism-lift-exact-source"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Lemma Tag 015I, proof that the comparison maps commute with the vertical differential (the composite through boundaries and cycles)"
+   }
+  },
+  {
+   "text": "Take the direct sum of the bidegree-preserving components $\\phi^{p,q}$ in each total degree. The total differential and the decreasing filtration by the second degree are those of [def-sp-double-complex-total] and [def-sp-filtration]. Since $\\phi$ commutes with both double-complex differentials and preserves bidegrees, its total map is a filtered chain map; the sums are finite by the bounded-below and nonnegative-degree conditions.",
+   "uses": [
+    "def-sp-double-complex-total"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Remark Tag 015K (remark-functorial-ss)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-lift-along-injective-quasi-iso",
+  "lem-weil-pbc-horseshoe-morphism-lift-exact-source",
+  "def-sp-double-complex-total"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/derived.tex",
+  "place": "Lemma Tag 015I and Remark Tag 015K"
+ },
  "mathlib_searches": [
   {
-   "tool": "leansearch",
-   "query": "functorial Cartan-Eilenberg resolution morphism of bounded below complexes exact additive functor",
-   "results": "No declaration providing functorial Cartan-Eilenberg resolutions",
+   "tool": "leanfinder",
+   "query": "functorial Cartan Eilenberg resolution morphism exact additive functor",
+   "results": "Generic resolution and chain-map declarations only; no Cartan--Eilenberg functoriality theorem.",
    "date": "2026-10-11",
    "verdict": "no match"
   },
   {
    "tool": "loogle",
-   "query": "CartanEilenberg resolution morphism filtered complex spectral sequence",
-   "results": "No declaration matching functorial Cartan-Eilenberg resolutions; only generic spectral sequence constructions",
+   "query": "CategoryTheory Abelian injective resolution chain map",
+   "results": "No matching declaration returned.",
    "date": "2026-10-11",
    "verdict": "no match"
   },
   {
    "tool": "grep",
-   "query": "rg -n 'Cartan.Eilenberg|cartan.*eilenberg|functorial.*resolution' /home/ubuntu/weil-src-slopmaster2/.lake/packages/mathlib/Mathlib",
-   "results": "No Cartan-Eilenberg resolution functoriality declaration",
+   "query": "Cartan.Eilenberg|cartan.*eilenberg|filtered.*total in Mathlib",
+   "results": "No matches in Mathlib source.",
    "date": "2026-10-11",
    "verdict": "no match"
   },
   {
-   "tool": "grep",
-   "query": "grep -rln 'CartanEilenberg\\|Cartan-Eilenberg\\|Cartan--Eilenberg' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib",
-   "results": "no file mentions Cartan-Eilenberg resolutions",
-   "date": "2026-10-10",
-   "verdict": "no match"
+   "tool": "leansearch",
+   "query": "functorial Cartan Eilenberg resolution morphism",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-11",
+   "verdict": "unavailable"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-weil-pbc-hypercohomology-e1-pullback-functorial",
   "by": "worker",
@@ -74,5 +126,30 @@
   "slopmaster2": {
    "state": "none"
   }
+ },
+ "split_report": {
+  "date": "2026-10-11",
+  "item": "lem-weil-pbc-cartesian-eilenberg-functorial",
+  "worker": "stage1",
+  "summary": "Restored the exchanged-index boundedness clauses, removed the false exact-source comparison node, and added an exact-source horseshoe lift. The induction now uses the injective quasi-isomorphism lift for Z and H rows and the horseshoe middle maps for K rows, with no independent re-choice.",
+  "blueprint": "Realizes the ancestor proof clause on naturality of the complex-continuity input to the bounded-below derived statement.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-horseshoe-morphism-lift",
+    "why": "The target horseshoe resolution and its endpoint compatibility are used by the exact-source middle-lift statement."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-horseshoe-morphism-lift",
+  "lem-weil-pbc-horseshoe-morphism-lift"
+ ],
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-cef1857",
+  "group": "E1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-cef1857 (reviewer sub-agent of L); spot-checked: All four 18:09 points checked: (1) Z/H/B rows now via lift-along-injective-quasi-iso (exact augmented source gives monomorphic qis from A[0]), middle rows via new exact-source horseshoe node; (2) K-row maps are the horseshoe phi_B, no re-choice; (3) bounds restored to (1) q<i, (2) p<0; (4) false comparison node gone. New node lem-weil-pbc-horseshoe-morphism-lift-exact-source: true (target splits degreewise, source exact), generalises not specialises horseshoe-morphism-lift, searches dated 2026-10-11 recorded. Target J_L rows form horseshoes by (2)-(6). FIX more, RETURN less: (i) C4/D Step 2 said the Z rows come from the quasi-iso lift AND are horseshoe middles of 0->B^q->Z^q->H^q->0 (chosen twice, breaking B->Z compatibility used in Step 3) and never said where B^{q+1} comes from; rewrote Step 2 as induction on phi_B^q: H^q and B^{q+1} by quasi-iso lift, Z^q and K^q as horseshoe middle maps, base phi_B=0; (ii) B3 closing $ after H^q(K^\\bullet) still missing in the statement, added; (iii) stmt_deps listed two lemmas the statement does not cite, trimmed to the four definitions.; 1 file(s) fixed by the reviewer"
  }
 }
