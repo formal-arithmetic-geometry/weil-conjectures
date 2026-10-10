@@ -719,3 +719,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 2026-10-10, delivery of G1: lem-weil-pbc-etale-ring-map-prescribed-residue-field returned (8b2dc2f0): step 4 identifies A/pA with the fibre ring and cites nothing for p' over p and kappa(p') = L (use A tensor kappa(p) and the fibre-ring primes bijection); step 1
 - 00:44 L: reviewed lem-weil-pbc-jacobi-zariski-left-term-vanishing (00S2 final assertion; 4 steps; +3 leaves, +00HM node): accepted. Returned G1 etale-ring-map-prescribed-residue-field (step 4 imprecise and uncited).
 - 00:47 L: reviewed lem-weil-pbc-linear-equation-localization-polynomial (07EU omitted detail; 4 steps; +2 leaves): accepted.
+- 00:48 L: reviewed lem-weil-pbc-limit-residue-field (0CUG(1); 7 steps), lem-weil-pbc-local-completion-quotient (00MA; 4 steps), lem-weil-pbc-jacobi-zariski-homology-sequence (00S2; 9 steps; +6 nodes: 5 leaves incl. snake lemma and Tor definition, +1 unsplit): all accepted.

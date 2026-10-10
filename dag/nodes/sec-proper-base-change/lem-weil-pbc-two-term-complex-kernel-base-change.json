@@ -1,0 +1,68 @@
+{
+ "id": "lem-weil-pbc-two-term-complex-kernel-base-change",
+ "kind": "statement",
+ "title": "Kernel of a two-term complex with free degree-0 term commutes with base change when Tor_1 and Tor_2 of the cokernel vanish",
+ "statement": "Let $B$ be a commutative ring, $C$ a $B$-module, and $\\delta:N_1\\to N_0$ a homomorphism of $B$-modules with $N_0$ a free $B$-module; put $H_1=\\ker\\delta$ and $H_0=\\operatorname{coker}\\delta$. If $\\operatorname{Tor}^B_1(H_0,C)=0$ and $\\operatorname{Tor}^B_2(H_0,C)=0$ [def-weil-pbc-tor-modules], then the $B$-linear map $H_1\\otimes_BC\\to\\ker(\\delta\\otimes\\mathrm{id}_C:N_1\\otimes_BC\\to N_0\\otimes_BC)$, $h\\otimes c\\mapsto h\\otimes c$ (induced by the inclusion $H_1\\subseteq N_1$; it lands in the kernel since $\\delta(h)=0$), is an isomorphism. (If $C$ is a $B$-algebra, this map is $C$-linear.)",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Algebra, proof of Lemma Tag 00S2 (lemma-exact-sequence-NL), final paragraph, lines 35462--35484"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-tor-modules"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "kernel of a linear map tensored with a module equals tensor of kernel when Tor vanishes",
+   "results": "LinearMap.tensorKerEquiv, LinearMap.tensorKerEquiv_apply, LinearMap.lTensor_ker_subtype_tensorKerEquiv_symm, LinearMap.kerLTensorEquivOfSurjective, Module.Flat.ker_lTensor_eq (Mathlib.RingTheory.Flat.Equalizer; all under a flatness hypothesis)",
+   "verdict": "no match (only the flat case)",
+   "date": "2026-10-10"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "two-term complex N1 -> N0 with N0 free, Tor_1 and Tor_2 of cokernel vanish, then kernel commutes with base change",
+   "results": "Rep.isZero_Tor_succ_of_projective, Module.Flat.lTensor_shortComplex_exact, Module.Flat.rTensor_shortComplex_exact, Module.Flat.iff_lTensor_preserves_shortComplex_exact",
+   "verdict": "no match",
+   "date": "2026-10-10"
+  },
+  {
+   "tool": "loogle",
+   "query": "LinearMap.ker (LinearMap.rTensor _ _), TensorProduct _ (LinearMap.ker _) _",
+   "results": "none",
+   "verdict": "no match",
+   "date": "2026-10-10"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rn 'Tor' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/RingTheory/Flat/ ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/LinearAlgebra/TensorProduct/ (excluding Torsion); grep -rln 'isZero_Tor' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/",
+   "results": "RingTheory/Flat/CategoryTheory.lean:27 (TODO 'Relate flatness with Tor'); CategoryTheory/Monoidal/Tor.lean (isZero_Tor_succ_of_projective only); no long exact Tor sequence and no Tor-vanishing base-change statement",
+   "verdict": "no match",
+   "date": "2026-10-10"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-jacobi-zariski-homology-sequence",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1"
+}

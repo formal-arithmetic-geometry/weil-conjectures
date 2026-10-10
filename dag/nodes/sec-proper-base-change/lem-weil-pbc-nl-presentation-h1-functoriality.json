@@ -1,0 +1,73 @@
+{
+ "id": "lem-weil-pbc-nl-presentation-h1-functoriality",
+ "kind": "statement",
+ "title": "H_1 of the naive cotangent complex of a presentation: maps induced by morphisms of presentations (Stacks 00S1, parts (2), (3) on H_1)",
+ "statement": "Let $R$ be a commutative ring and $S$ an $R$-algebra. A *presentation* of $S$ over $R$ is a surjective homomorphism of $R$-algebras $\\alpha:P\\to S$ where $P=R[x_t,\\ t\\in T]$ is a polynomial ring over $R$ on an arbitrary set $T$ of variables; let $I=\\ker\\alpha$. Its *naive cotangent complex* is the two-term complex of $S$-modules $\\mathrm{NL}(\\alpha):\\ I/I^2\\xrightarrow{\\ \\mathrm d_\\alpha\\ }S\\otimes_P\\Omega_{P/R}$, $f\\bmod I^2\\mapsto1\\otimes\\mathrm df$ ($\\Omega$ and $\\mathrm d$ as in [def-weil-pbc-kahler-differentials]; $I/I^2$ is an $S=P/I$-module and $\\mathrm d_\\alpha$ is well defined and $S$-linear by the Leibniz rule), and $H_1(\\mathrm{NL}(\\alpha)):=\\ker\\mathrm d_\\alpha$. Now let $R\\to R'$ and $\\psi:S\\to S'$ be ring homomorphisms, where $S'$ is an $R'$-algebra, such that the square commutes ($\\psi(r\\cdot1_S)=r\\cdot1_{S'}$ for $r\\in R$, $R$ acting on $S'$ through $R'$); let $\\alpha:P\\to S$ be a presentation of $S$ over $R$ and $\\alpha':P'\\to S'$ a presentation of $S'$ over $R'$, with kernels $I$, $I'$. A *morphism of presentations* from $\\alpha$ to $\\alpha'$ is a homomorphism of $R$-algebras $\\varphi:P\\to P'$ ($P'$ an $R$-algebra through $R\\to R'$) with $\\alpha'\\circ\\varphi=\\psi\\circ\\alpha$. For such $\\varphi$: $\\varphi(I)\\subseteq I'$; the map $\\varphi_1:I/I^2\\to I'/I'^2$, $f\\bmod I^2\\mapsto\\varphi(f)\\bmod I'^2$, is $S$-linear ($S$ acting on $I'/I'^2$ through $\\psi$), satisfies $\\mathrm d_{\\alpha'}\\circ\\varphi_1=\\varphi_0\\circ\\mathrm d_\\alpha$ for the $S$-linear map $\\varphi_0:S\\otimes_P\\Omega_{P/R}\\to S'\\otimes_{P'}\\Omega_{P'/R'}$, $s\\otimes\\mathrm dg\\mapsto\\psi(s)\\otimes\\mathrm d\\varphi(g)$, and hence restricts to an $S$-linear map $\\varphi_*:H_1(\\mathrm{NL}(\\alpha))\\to H_1(\\mathrm{NL}(\\alpha'))$. Moreover: (1) if $\\varphi,\\varphi'$ are two morphisms of presentations from $\\alpha$ to $\\alpha'$ (over the same square), then $\\varphi_*=\\varphi'_*$; (2) $\\mathrm{id}_P$ is a morphism of presentations from $\\alpha$ to itself (over the identity square) and $(\\mathrm{id}_P)_*$ is the identity; if $\\varphi$ is a morphism of presentations from $\\alpha$ to $\\alpha'$ and $\\varphi'$ one from $\\alpha'$ to a presentation $\\alpha'':P''\\to S''$ of $S''$ over $R''$ (over a second commuting square $R'\\to R''$, $\\psi':S'\\to S''$), then $\\varphi'\\circ\\varphi$ is a morphism of presentations from $\\alpha$ to $\\alpha''$ over the composite square and $(\\varphi'\\circ\\varphi)_*=\\varphi'_*\\circ\\varphi_*$.",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Algebra, Section Tag 00S0 (section-netherlander), definitions of presentation, NL(alpha) and morphisms of presentations, lines 35178--35242; Lemma Tag 00S1 (lemma-NL-homotopy), statement lines 35273--35293, parts (2) and (3), restricted to the kernels (proof lines 35295--35392: homotopic maps of two-term complexes induce the same map on kernels). Tags verified in stacks-project/tags/tags: 00S0,algebra-section-netherlander; 00S1,algebra-lemma-NL-homotopy"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-kahler-differentials"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "naive cotangent complex independent of presentation, morphisms of presentations induce homotopic maps",
+   "results": "CategoryTheory.ShortComplex.Homotopy.homologyMap_congr (Mathlib.Algebra.Homology.ShortComplex.Preadditive), Algebra.SubmersivePresentation.cotangentComplex_injective, HomologicalComplexUpToQuasiIso.Q_map_eq_of_homotopy",
+   "verdict": "no direct hit; see leanfinder",
+   "date": "2026-10-10"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "two homomorphisms of extensions (presentations) induce the same map on H1 cotangent and on Kaehler differentials",
+   "results": "Algebra.Extension.H1Cotangent.map_eq, Algebra.Extension.H1Cotangent.map, Algebra.Extension.H1Cotangent.map_apply_coe (Mathlib.RingTheory.Extension.Cotangent.Basic), Algebra.Generators.H1Cotangent.δ_eq_δ",
+   "verdict": "match: Algebra.Extension.H1Cotangent.map_eq",
+   "date": "2026-10-10"
+  },
+  {
+   "tool": "loogle",
+   "query": "Algebra.Extension.H1Cotangent.map_eq",
+   "results": "Algebra.Extension.H1Cotangent.map_eq (f g : P.Hom P') : H1Cotangent.map f = H1Cotangent.map g, Mathlib.RingTheory.Extension.Cotangent.Basic",
+   "verdict": "match",
+   "date": "2026-10-10"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -n 'H1Cotangent.map_eq\\|H1Cotangent.map_id\\|H1Cotangent.map_comp\\|def cotangentComplex\\|abbrev CotangentSpace\\|def H1Cotangent.map' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/RingTheory/Extension/Cotangent/Basic.lean; grep -n 'structure Hom' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/RingTheory/Extension/Basic.lean",
+   "results": "Cotangent/Basic.lean: CotangentSpace := S ⊗[P.Ring] Ω[P.Ring⁄R] (58), cotangentComplex (61; cotangentComplex_mk: x ↦ 1 ⊗ D x), H1Cotangent := ker cotangentComplex (339), H1Cotangent.map (381, restriction of Cotangent.map f), map_eq (391), map_id (399), map_comp (403); Extension/Basic.lean: structure Hom (206: ring hom P.Ring → P'.Ring compatible with R → R' and S → S')",
+   "verdict": "match, one lemma per clause",
+   "date": "2026-10-10"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "Algebra.Extension.H1Cotangent.map_eq, Algebra.Extension.H1Cotangent.map_id, Algebra.Extension.H1Cotangent.map_comp",
+  "file": "Mathlib/RingTheory/Extension/Cotangent/Basic.lean",
+  "line": 391,
+  "how": "one Mathlib lemma per clause, source read 2026-10-10: a presentation alpha is Algebra.Generators R S T (a set-theoretic section exists by choice) and its Extension P.toExtension has Ring = MvPolynomial T R, Cotangent = I/I^2, CotangentSpace = S ⊗[P.Ring] Ω[P.Ring⁄R] (line 58), cotangentComplex = d_alpha (line 61, cotangentComplex_mk), H1Cotangent = ker (line 339); a morphism of presentations is an Extension.Hom (Extension/Basic.lean line 206: toRingHom with toRingHom_algebraMap = compatibility with R → R', algebraMap_toRingHom = alpha' ∘ phi = psi ∘ alpha); phi_* is Extension.H1Cotangent.map (line 381, restriction of Cotangent.map, map_apply_coe); clause (1) is H1Cotangent.map_eq (391), clause (2) is H1Cotangent.map_id (399) and H1Cotangent.map_comp (403) with Hom.comp"
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-jacobi-zariski-homology-sequence",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1"
+}

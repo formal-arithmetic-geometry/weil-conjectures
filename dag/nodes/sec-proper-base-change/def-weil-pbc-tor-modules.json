@@ -1,0 +1,71 @@
+{
+ "id": "def-weil-pbc-tor-modules",
+ "kind": "definition",
+ "title": "Tor groups of modules (Stacks 00LY)",
+ "statement": "Let $B$ be a commutative ring and $M,N$ be $B$-modules. Choose a resolution $\\cdots\\to F_2\\to F_1\\to F_0\\to M\\to0$ of $M$ by projective (for instance free) $B$-modules. For $i\\ge0$, $\\operatorname{Tor}^B_i(M,N)$ is the $i$-th homology module of the complex $\\cdots\\to F_2\\otimes_BN\\to F_1\\otimes_BN\\to F_0\\otimes_BN\\to0$. It is a $B$-module, independent of the chosen resolution up to canonical isomorphism, and functorial in $M$ and $N$; $\\operatorname{Tor}^B_0(M,N)=M\\otimes_BN$.",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Algebra, Section Tag 00LY (section-tor, 'Tor groups and flatness'), lines 18215--18236, with Lemma lemma-tor-welldefined (lines 18238--18262) for the independence of the resolution. Tag verified: 00LY,algebra-section-tor"
+ },
+ "stmt_deps": [],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Tor functor of modules left derived functor of tensor product",
+   "results": "CategoryTheory.Tor', CategoryTheory.Tor, CategoryTheory.Tor_obj, CategoryTheory.Tor'_obj_obj (Mathlib.CategoryTheory.Monoidal.Tor), Rep.Tor_obj, Rep.Tor",
+   "verdict": "match: CategoryTheory.Tor'",
+   "date": "2026-10-10"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Tor groups of modules over a commutative ring, left derived functor of tensor product in ModuleCat",
+   "results": "CategoryTheory.Tor_obj, CategoryTheory.Tor'_obj_obj, CategoryTheory.Tor, CategoryTheory.Tor', Rep.Tor",
+   "verdict": "match",
+   "date": "2026-10-10"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Tor', ModuleCat",
+   "results": "none (no ModuleCat-specialized Tor lemma)",
+   "verdict": "no ModuleCat-specific declaration; the general definition applies",
+   "date": "2026-10-10"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -n 'def Tor' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/CategoryTheory/Monoidal/Tor.lean; grep -n 'MonoidalPreadditive' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/Algebra/Category/ModuleCat/Monoidal/Basic.lean; grep -n 'enoughProjectives' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/Algebra/Category/ModuleCat/Projective.lean; grep -rn 'instance.*HasProjectiveResolutions' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/CategoryTheory",
+   "results": "Tor (44, derived in the second variable), Tor' (50, derived in the first variable: leftDerived of tensoringRight N applied to M); ModuleCat MonoidalPreadditive instance (Monoidal/Basic.lean 449); EnoughProjectives (ModuleCat R) (Projective.lean 58); HasProjectiveResolutions for abelian categories with enough projectives (Abelian/Projective/Resolution.lean 341)",
+   "verdict": "match",
+   "date": "2026-10-10"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "CategoryTheory.Tor'",
+  "file": "Mathlib/CategoryTheory/Monoidal/Tor.lean",
+  "line": 50,
+  "how": "specializes in one line: Tor^B_i(M, N) := ((CategoryTheory.Tor' (ModuleCat B) i).obj M).obj N, the i-th left derived functor of - ⊗_B N evaluated at M (Tor'_obj_obj), computed from a chosen projective resolution of M (Functor.leftDerived; independence of the resolution: ProjectiveResolution.isoLeftDerivedObj); instances MonoidalPreadditive (ModuleCat B) (Algebra/Category/ModuleCat/Monoidal/Basic.lean 449), EnoughProjectives (Projective.lean 58), HasProjectiveResolutions (CategoryTheory/Abelian/Projective/Resolution.lean 341). Source read 2026-10-10."
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-jacobi-zariski-homology-sequence",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1"
+}

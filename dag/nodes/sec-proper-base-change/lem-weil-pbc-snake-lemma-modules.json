@@ -1,0 +1,71 @@
+{
+ "id": "lem-weil-pbc-snake-lemma-modules",
+ "kind": "statement",
+ "title": "Snake lemma for modules (Stacks 07JW)",
+ "statement": "Let $\\Lambda$ be a commutative ring and let\n$$\\begin{array}{ccccccc}X&\\xrightarrow{f}&Y&\\xrightarrow{g}&Z&\\to&0\\\\ \\downarrow\\alpha&&\\downarrow\\beta&&\\downarrow\\gamma&&\\\\ U&\\xrightarrow{k}&V&\\xrightarrow{l}&W&&\\end{array}$$\nbe a commutative diagram of $\\Lambda$-modules and $\\Lambda$-linear maps ($\\beta f=k\\alpha$, $\\gamma g=l\\beta$) whose rows are exact ($\\ker g=\\operatorname{im}f$, $g$ surjective, $k$ injective, $\\ker l=\\operatorname{im}k$). Then there is a $\\Lambda$-linear map $\\partial:\\ker\\gamma\\to\\operatorname{coker}\\alpha$ (for $z\\in\\ker\\gamma$ choose $y\\in Y$ with $g(y)=z$ and $u\\in U$ with $k(u)=\\beta(y)$, and put $\\partial z=u\\bmod\\operatorname{im}\\alpha$; this is independent of the choices) such that the sequence\n$$\\ker\\alpha\\xrightarrow{f'}\\ker\\beta\\xrightarrow{g'}\\ker\\gamma\\xrightarrow{\\ \\partial\\ }\\operatorname{coker}\\alpha\\xrightarrow{k'}\\operatorname{coker}\\beta\\xrightarrow{l'}\\operatorname{coker}\\gamma$$\nis exact, where $f',g'$ are the restrictions of $f,g$ and $k',l'$ are induced by $k,l$. If moreover $l$ is surjective, then $l'$ is surjective; if $f$ is injective, then $f'$ is injective.",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Algebra, Lemma Tag 07JW (lemma-snake), lines 303--335 (stated for abelian groups; the construction of the connecting map is Lambda-linear for modules); for abelian categories Homology, Lemma Tag 010H (lemma-snake), homology.tex lines 1012--1048. Tags verified in stacks-project/tags/tags: 07JW,algebra-lemma-snake; 010H,homology-lemma-snake"
+ },
+ "stmt_deps": [],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "snake lemma six term exact sequence kernels cokernels abelian category",
+   "results": "CategoryTheory.kernelCokernelCompSequence.snakeInput, SnakeLemma.δ_eq (Mathlib.Algebra.Module.SnakeLemma), CategoryTheory.ShortComplex.SnakeInput.mk (Mathlib.Algebra.Homology.ShortComplex.SnakeLemma), SnakeLemma.exact_δ_right",
+   "verdict": "match: CategoryTheory.ShortComplex.SnakeInput",
+   "date": "2026-10-10"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "snake lemma for modules: exact sequence ker -> ker -> ker -> coker -> coker -> coker",
+   "results": "SnakeLemma.exact_δ_left, SnakeLemma.exact_δ'_left, SnakeLemma.δ_aux, SnakeLemma.exact_δ_right, SnakeLemma.exact_δ'_right (Mathlib.Algebra.Module.SnakeLemma: only the exactness at the connecting map)",
+   "verdict": "partial (module version gives the middle exactness only); full sequence via SnakeInput",
+   "date": "2026-10-10"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.ShortComplex.SnakeInput.snake_lemma",
+   "results": "CategoryTheory.ShortComplex.SnakeInput.snake_lemma (S : SnakeInput C) : S.composableArrows.Exact, Mathlib.Algebra.Homology.ShortComplex.SnakeLemma",
+   "verdict": "match",
+   "date": "2026-10-10"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -n 'structure SnakeInput\\|lemma L₀_exact\\|lemma L₃_exact\\|def δ\\|lemma snake_lemma\\|epi_L₃_g\\|mono_L₀_f' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/Algebra/Homology/ShortComplex/SnakeLemma.lean",
+   "results": "structure SnakeInput (64: rows L₁ exact with L₁.g epi, L₂ exact with L₂.f mono, L₀ kernel row, L₃ cokernel row), δ (279), L₀_exact (210), L₀'_exact (269), L₁'_exact (328), L₂'_exact (373), L₃_exact (222), snake_lemma (385), mono_L₀_f (167), epi_L₃_g (204)",
+   "verdict": "match",
+   "date": "2026-10-10"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "CategoryTheory.ShortComplex.SnakeInput.snake_lemma",
+  "file": "Mathlib/Algebra/Homology/ShortComplex/SnakeLemma.lean",
+  "line": 385,
+  "how": "specializes in one line: C := ModuleCat Λ (abelian); the diagram is a morphism v₁₂ : L₁ ⟶ L₂ of short complexes with L₁ = (X → Y → Z) exact and L₁.g epi, L₂ = (U → V → W) exact and L₂.f mono, L₀ / L₃ its kernel / cokernel rows (fields of SnakeInput, line 64); snake_lemma gives exactness of ker α → ker β → ker γ → coker α → coker β → coker γ with connecting map SnakeInput.δ (line 279); the two surjectivity/injectivity add-ons are the instances epi_L₃_g (line 204) and mono_L₀_f (line 167). Source read 2026-10-10."
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-jacobi-zariski-homology-sequence",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1"
+}

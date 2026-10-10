@@ -1,0 +1,73 @@
+{
+ "id": "lem-weil-pbc-polynomial-ring-kahler-basis-any-variables",
+ "kind": "statement",
+ "title": "Kähler differentials of a polynomial ring in an arbitrary set of variables",
+ "statement": "Let $R$ be a commutative ring, $T$ any set and $P=R[x_t,\\ t\\in T]$ the polynomial ring. Then the module of Kähler differentials $\\Omega_{P/R}$ [def-weil-pbc-kahler-differentials] is a free $P$-module with basis $(\\mathrm dx_t)_{t\\in T}$, and for every $g\\in P$ one has $\\mathrm dg=\\sum_{t\\in T}\\frac{\\partial g}{\\partial x_t}\\,\\mathrm dx_t$ (a finite sum), where $\\partial/\\partial x_t$ is the formal partial derivative of $P$ over $R$. Consequently, for every $P$-algebra $S$, $S\\otimes_P\\Omega_{P/R}$ is a free $S$-module with basis $(1\\otimes\\mathrm dx_t)_{t\\in T}$.",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Algebra, Lemma Tag 00RX (lemma-differentials-polynomial-ring), lines 34310--34340 (stated for finitely many variables; the proof applies verbatim to any set of variables), as used in the proof of Lemma Tag 00S2, line 35450 ('the dx_s, dy_t form a basis for the middle module'). Tag verified: 00RX,algebra-lemma-differentials-polynomial-ring"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-kahler-differentials"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Kaehler differentials of polynomial ring free basis D X i",
+   "results": "KaehlerDifferential.mvPolynomialBasis, KaehlerDifferential.mvPolynomialEquiv, mvPolynomialBasis_apply, mvPolynomialBasis_repr_D_X, mvPolynomialBasis_repr_apply (Mathlib.RingTheory.Kaehler.Polynomial)",
+   "verdict": "match",
+   "date": "2026-10-10"
+  },
+  {
+   "tool": "loogle",
+   "query": "Module.Basis _ (MvPolynomial _ _) Ω[MvPolynomial _ _⁄_]",
+   "results": "KaehlerDifferential.mvPolynomialBasis (R) (σ : Type*) : Basis σ (MvPolynomial σ R) Ω[MvPolynomial σ R⁄R]; mvPolynomialBasis_apply",
+   "verdict": "match (σ arbitrary)",
+   "date": "2026-10-10"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Kähler differentials of a multivariate polynomial ring over any index set are free with basis dX_i",
+   "results": "instFreeMvPolynomialKaehlerDifferential, KaehlerDifferential.mvPolynomialEquiv, KaehlerDifferential.mvPolynomialBasis, Algebra.SubmersivePresentation.free_kaehlerDifferential",
+   "verdict": "match",
+   "date": "2026-10-10"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -n 'mvPolynomialBasis' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/RingTheory/Kaehler/Polynomial.lean; grep -rn 'mvPolynomialBasis' dag/nodes",
+   "results": "Polynomial.lean: def mvPolynomialBasis (60), mvPolynomialBasis_repr_D (70), mvPolynomialBasis_apply (94), mvPolynomialBasis_repr_apply (80: coordinate i of D x is pderiv i x); DAG: lem-weil-pbc-polynomial-ring-kahler-basis states only the case of finitely many variables",
+   "verdict": "match; existing DAG node covers only finitely many variables",
+   "date": "2026-10-10"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "KaehlerDifferential.mvPolynomialBasis",
+  "file": "Mathlib/RingTheory/Kaehler/Polynomial.lean",
+  "line": 60,
+  "how": "exact with σ := T arbitrary: mvPolynomialBasis R σ is a basis of Ω[MvPolynomial σ R⁄R] with basis vector D (X i) (mvPolynomialBasis_apply, line 94) and coordinates of D g equal to MvPolynomial.pderiv i g (mvPolynomialBasis_repr_apply, line 80); the base-changed basis of S ⊗ Ω is Basis.baseChange (one line). Source read 2026-10-10."
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-jacobi-zariski-homology-sequence",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1"
+}
