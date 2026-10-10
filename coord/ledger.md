@@ -1015,3 +1015,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 07:23 L: reviewed and accepted lem-weil-pbc-residue-field-pd-le-krull-dimension (5 steps; +exact-free-complex-last-minors-regular-sequence 00N1 node; the unjustified clause 'in particular dim R is finite' removed from the statement, citers unaffected).
 - 07:23 L: reviewed and accepted lem-weil-pbc-quasi-finite-at-prime-permanence (4 steps by agent, no new nodes; 0C6H).
 - 07:25 L: reviewed and accepted lem-weil-pbc-quasi-finite-at-prime-principal-localization (9 steps, no new nodes; 077H).
+- 07:28 L: accepted lem-weil-pbc-reduced-strongly-transcendental-not-quasi-finite (5 steps; new leaf strongly-transcendental-quotient-minimal-prime 00Q0, new node domains-strongly-transcendental-not-quasi-finite 00Q1). Worker notes 00Q2 assumes R reduced but never uses it.

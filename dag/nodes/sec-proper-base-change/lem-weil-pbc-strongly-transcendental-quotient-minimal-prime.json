@@ -1,0 +1,82 @@
+{
+ "id": "lem-weil-pbc-strongly-transcendental-quotient-minimal-prime",
+ "kind": "statement",
+ "title": "Strong transcendence passes to the quotient by a minimal prime",
+ "statement": "Let $R\\subseteq S$ be a subring of a commutative ring, with $R$ and $S$ reduced (no nonzero nilpotent elements), and let $x\\in S$ be strongly transcendental over $R$ [def-weil-pbc-strongly-transcendental] (for the inclusion $R\\to S$). Let $\\mathfrak q\\subset S$ be a minimal prime ideal of $S$ (a prime ideal containing no strictly smaller prime ideal) and $\\mathfrak p=R\\cap\\mathfrak q$. Then the image $\\bar x$ of $x$ in $S/\\mathfrak q$ is strongly transcendental over $R/\\mathfrak p$ for the ring map $R/\\mathfrak p\\to S/\\mathfrak q$ induced by the inclusion: if $\\bar u(\\bar a_0+\\bar a_1\\bar x+\\dots+\\bar a_k\\bar x^k)=0$ in $S/\\mathfrak q$ with $\\bar u\\in S/\\mathfrak q$ and $\\bar a_i\\in R/\\mathfrak p$, then $\\bar u\\bar a_i=0$ for all $i$.",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Algebra, Lemma Tag 00Q0 (lemma-reduced-strongly-transcendental-minimal-prime, line 30644); tag verified in literature/stacks-project/tags/tags"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-strongly-transcendental"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "strongly transcendental element image in quotient by minimal prime of reduced ring remains strongly transcendental",
+   "results": "isStronglyTranscendental_mk_of_mem_minimalPrimes, IsStronglyTranscendental.iff_of_isFractionRing, IsStronglyTranscendental.of_isLocalization_left, IsStronglyTranscendental (Mathlib.RingTheory.Algebraic.StronglyTranscendental)",
+   "date": "2026-10-10",
+   "verdict": "match: isStronglyTranscendental_mk_of_mem_minimalPrimes (over R), with of_surjective_left for R/p"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "x strongly transcendental over R in reduced ring S, q minimal prime of S, image of x in S/q strongly transcendental",
+   "results": "isStronglyTranscendental_mk_of_mem_minimalPrimes (first), IsStronglyTranscendental.of_transcendental, .of_isLocalization_left, .iff_of_isFractionRing, .iff_of_isLocalization",
+   "date": "2026-10-10",
+   "verdict": "match (same declaration)"
+  },
+  {
+   "tool": "loogle",
+   "query": "IsStronglyTranscendental",
+   "results": "15 declarations, among them isStronglyTranscendental_mk_of_mem_minimalPrimes and IsStronglyTranscendental.of_surjective_left (StronglyTranscendental.lean), Algebra.not_isStronglyTranscendental_of_quasiFiniteAt (ZariskisMainTheorem.lean)",
+   "date": "2026-10-10",
+   "verdict": "match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rn 'stacks 00Q0' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib",
+   "results": "RingTheory/Algebraic/StronglyTranscendental.lean:122 @[stacks 00Q0] lemma isStronglyTranscendental_mk_of_mem_minimalPrimes (line 123)",
+   "date": "2026-10-10",
+   "verdict": "match"
+  },
+  {
+   "tool": "local_search",
+   "query": "isStronglyTranscendental_mk_of_mem_minimalPrimes (project ~/weil-conjectures-slopmaster2)",
+   "results": "found in .lake/packages/mathlib/Mathlib/RingTheory/Algebraic/StronglyTranscendental.lean (index: unavailable)",
+   "date": "2026-10-10",
+   "verdict": "exists"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "isStronglyTranscendental_mk_of_mem_minimalPrimes, IsStronglyTranscendental.of_surjective_left",
+  "file": "Mathlib/RingTheory/Algebraic/StronglyTranscendental.lean",
+  "how": "specializes in one line (read with sed -n 1,140p, 2026-10-10): `isStronglyTranscendental_mk_of_mem_minimalPrimes [IsReduced S] {x : S} (hx : IsStronglyTranscendental R x) (q : Ideal S) (hq : q ∈ minimalPrimes S) : IsStronglyTranscendental R (Ideal.Quotient.mk q x)` (lines 122-123, any R-algebra S, R need not be reduced nor a subring) gives strong transcendence of the image over R; `IsStronglyTranscendental.of_surjective_left (h : IsStronglyTranscendental R x) (H : Function.Surjective (algebraMap R S)) : IsStronglyTranscendental S x` (lines 94-96) applied with the surjection R → R/(R∩q) = R ⧸ q.under R (Ideal.Quotient.mk_surjective) gives it over R/p for the induced algebra R/p → S/q; Mathlib itself composes the two exactly this way at ZariskisMainTheorem.lean:419-420. IsStronglyTranscendental (lines 36-38) is the node's definition [def-weil-pbc-strongly-transcendental].",
+  "line": 122
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-reduced-strongly-transcendental-not-quasi-finite",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lead_note": "Composed leaf accepted by L (2026-10-10): isStronglyTranscendental_mk_of_mem_minimalPrimes (StronglyTranscendental.lean:122, [stacks 00Q0], checked with sed) gives strong transcendence of the image over R; IsStronglyTranscendental.of_surjective_left (:94) transfers it along the surjection R -> R/p. Two declarations composed as Mathlib does in ZariskisMainTheorem.lean.",
+ "reviewed": "pass (L, 2026-10-10): leaf, two declarations checked by sed; statement matches the composition."
+}
