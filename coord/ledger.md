@@ -832,3 +832,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 03:42 L: reviewed lem-weil-pbc-geometrically-regular-h1-injective (10 steps, +7: 07DZ, 07E1, 0322 vanishing, connecting-map naturality, purely inseparable base change, p-th root differentials, cotangent-dimension composed leaf; Stacks cites 00OM where 00ON is needed): accepted.
 - 03:44 L: reviewed lem-weil-pbc-grothendieck-existence-easy (9 steps, +4 unsplit: 0ALK, 05EK, 05EU, gluing of sheaves of modules): accepted.
 - 03:44 L: reviewed lem-weil-pbc-ideal-module-product-stalk (5 steps, +stalk-exactness node; tool_uses lem-weil-pbc-module-stalk-tensor): accepted.
+- 03:45 L: reviewed lem-weil-pbc-henselian-finite-etale-equivalence (9 steps, +04GJ, +00U5 nodes, +00U2 product leaf): accepted.

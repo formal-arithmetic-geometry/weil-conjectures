@@ -1,0 +1,74 @@
+{
+ "id": "lem-weil-pbc-etale-algebra-finite-product",
+ "kind": "statement",
+ "title": "A finite product of etale algebras is etale (Stacks 00U2 (11))",
+ "statement": "Let $A$ be a commutative ring, $n\\ge0$, and $B_1,\\dots,B_n$ commutative $A$-algebras such that each $\\operatorname{Spec}B_j\\to\\operatorname{Spec}A$ [def-weil-affine-spectrum] is etale [def-weil-etale-morphism]. Then for the product $A$-algebra $B=B_1\\times\\cdots\\times B_n$ (for $n=0$ the zero ring) the morphism $\\operatorname{Spec}B\\to\\operatorname{Spec}A$ is etale.",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Algebra, Lemma Tag 00U2 (lemma-etale, line 39290), item (11), direction 'if', applied n-1 times"
+ },
+ "stmt_deps": [
+  "def-weil-affine-spectrum",
+  "def-weil-etale-morphism"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "finite product of etale algebras is etale; product is etale iff each factor is etale",
+   "results": "Algebra.FormallyEtale.pi_iff, Algebra.FormallyEtale.instForallOfFinite (Mathlib.RingTheory.Etale.Pi), Algebra.Etale.iff_exists_algEquiv_prod, Algebra.FormallyUnramified.pi_iff, Algebra.Etale.baseChange",
+   "date": "2026-10-10",
+   "verdict": "match (see loogle)"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "a finite product of étale R-algebras is étale over R",
+   "results": "Algebra.FormallyEtale.pi_iff, Algebra.FormallyEtale.instForallOfFinite (Mathlib.RingTheory.Etale.Pi), Algebra.Etale.iff_exists_algEquiv_prod, Algebra.Etale.comp",
+   "date": "2026-10-10",
+   "verdict": "match (formally etale version)"
+  },
+  {
+   "tool": "loogle",
+   "query": "Algebra.Etale ?R ((i : ?I) → ?A i)",
+   "results": "Algebra.FormallyEtale.instEtaleForallOfFinite {R I} (A : I → Type) [CommRing R] [∀ i, CommRing (A i)] [∀ i, Algebra R (A i)] [Finite I] [∀ i, Algebra.Etale R (A i)] : Algebra.Etale R ((i : I) → A i) (Mathlib.RingTheory.Etale.Pi)",
+   "date": "2026-10-10",
+   "verdict": "match"
+  },
+  {
+   "tool": "grep",
+   "query": "sed -n 28,41p ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/RingTheory/Etale/Pi.lean",
+   "results": "line 39: instance [Finite I] [∀ i, Etale R (A i)] : Etale R (Π i, A i)",
+   "date": "2026-10-10",
+   "verdict": "match"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "Algebra.FormallyEtale.instEtaleForallOfFinite",
+  "file": "Mathlib/RingTheory/Etale/Pi.lean",
+  "line": 39,
+  "how": "specializes in one line: with I = Fin n, Π i, B i is the product B_1×…×B_n; the node's hypotheses and conclusion (etale Spec morphisms) are Algebra.Etale A B_j and Algebra.Etale A B by the match of lem-weil-pbc-etale-ring-map-iff-etale-affine (HasRingHomProperty.Spec_iff with RingHom.etale_algebraMap). Source read 2026-10-10."
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-henselian-finite-etale-equivalence",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1"
+}

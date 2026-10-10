@@ -1,0 +1,63 @@
+{
+ "id": "lem-weil-pbc-etale-ring-map-quasi-finite",
+ "kind": "statement",
+ "title": "An etale ring map is quasi-finite at every prime (Stacks 00U5)",
+ "statement": "Let $R\\to S$ be a homomorphism of commutative rings such that $\\operatorname{Spec}S\\to\\operatorname{Spec}R$ [def-weil-affine-spectrum] is etale [def-weil-etale-morphism]. Then $S$ is a finitely generated $R$-algebra and $R\\to S$ is quasi-finite [def-weil-pbc-ring-map-quasi-finite-at-prime] at every prime ideal $\\mathfrak q$ of $S$.",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Algebra, Lemma Tag 00U5 (lemma-etale-quasi-finite, line 39456) and its proof (fibre rings are etale over the residue fields, hence finite products of finite separable extensions by Lemma 00U3, so quasi-finite by Lemma 00PM lemma-quasi-finite)"
+ },
+ "stmt_deps": [
+  "def-weil-affine-spectrum",
+  "def-weil-etale-morphism",
+  "def-weil-pbc-ring-map-quasi-finite-at-prime"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "etale algebra is quasi-finite",
+   "results": "AlgebraicGeometry.IsEtale, Algebra.Etale, Algebra.QuasiFinite (+mk, recOn), AlgebraicGeometry.instLocallyQuasiFiniteOfIsFinite, Algebra.QuasiFinite.iff_finite_comap_preimage_singleton (Mathlib.RingTheory.QuasiFinite.Basic)",
+   "date": "2026-10-10",
+   "verdict": "no direct match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "an étale ring map is quasi-finite: fibres of an étale algebra are finite over the residue fields",
+   "results": "Algebra.Etale.finitePresentation, Algebra.Etale.exists_subalgebra_fg, RingHom.Etale.toAlgebra, RingHom.etale_algebraMap, StandardEtalePair.instEtaleRing",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rln QuasiFinite ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/RingTheory/Unramified ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/RingTheory/Etale; sed -n 330,333p ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/RingTheory/Unramified/LocalStructure.lean; grep -rn quasiFiniteAt_iff_isOpen_singleton_fiber ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib",
+   "results": "Unramified/LocalStructure.lean:331-333: instance (priority := low) [EssFiniteType R S] [FormallyUnramified R S] : QuasiFinite R S (anonymous instance; Algebra.QuasiFinite = all fibre rings finite over the residue fields); Etale/QuasiFinite.lean (etale neighbourhoods splitting fibres); ZariskisMainTheorem.lean:754 Algebra.quasiFiniteAt_iff_isOpen_singleton_fiber ([FiniteType R S]: QuasiFiniteAt R q <-> {q} open in its fibre)",
+   "date": "2026-10-10",
+   "verdict": "generalization in a different formulation: Algebra.Etale R S gives FinitePresentation (so FiniteType, EssFiniteType) and FormallyUnramified, hence Algebra.QuasiFinite R S by the instance above, hence Algebra.QuasiFiniteAt R q (instance for Localization), and Algebra.quasiFiniteAt_iff_isOpen_singleton_fiber turns this into the isolated-point form of def-weil-pbc-ring-map-quasi-finite-at-prime; since that agreement of definitions is itself a theorem (as recorded on the definition node), not a leaf; Lean route recorded for stage 2"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-henselian-finite-etale-equivalence",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1"
+}
