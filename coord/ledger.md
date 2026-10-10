@@ -2143,3 +2143,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 17:37 L: merged deliver/F1/lem-weil-pbc-etale-sections-equal-open (reviewer FIX; first push; new nodes: 1)
 - 17:38 L: merged deliver/K1/lem-sc-group-coinduced-acyclic (reviewer FIX; first push; new nodes: 0)
 - 17:38 L: merged deliver/C1/lem-sc-open-curve-gm-direct-image-cohomology (reviewer FIX; first push; new nodes: 2)
+- 17:38 L: merged deliver/K1/lem-sc-group-h2-transfer (reviewer PASS; first push; new nodes: 1)

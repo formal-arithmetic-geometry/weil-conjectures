@@ -19,9 +19,36 @@
  "stmt_deps": [
   "def-exc-continuous-cohomology"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Apply [lem-sc-group-h2-transfer-transfer-identity] with q=2. The restriction from H^2(G,M) to H^2(H,M), followed by corestriction, is multiplication by [G:H].",
+   "uses": [
+    "lem-sc-group-h2-transfer-transfer-identity"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-curve-estimates/sk-prop-h2/lem-sc-group-cd-one.md",
+    "place": "## Proof, paragraph 1"
+   }
+  },
+  {
+   "text": "The restriction map is zero because H^2(H,M)=0, so the composite in Step 1 is zero. Since M is finite and ell-primary, some ell^r annihilates M; the cochain complex computing H^2(G,M) is therefore ell^r-torsion termwise, so ell^r annihilates H^2(G,M). Bézout gives integers a,b with a[G:H]+b ell^r=1 because [G:H] is prime to ell. For x in H^2(G,M), Step 1 gives [G:H]x=0, and hence x=(a[G:H]+b ell^r)x=0. Thus H^2(G,M)=0.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-curve-estimates/sk-prop-h2/lem-sc-group-cd-one.md",
+    "place": "## Proof, paragraph 1"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sc-group-h2-transfer-transfer-identity"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/master/blueprint/sec-curve-estimates/sk-prop-h2/lem-sc-group-cd-one.md",
+  "place": "## Proof, paragraph 1"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -46,12 +73,28 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-sc-group-cd-one",
   "by": "worker",
   "date": "2026-10-10"
  },
  "chapter": "sec-curve-estimates",
- "unit": "sk-prop-h2"
+ "unit": "sk-prop-h2",
+ "split_report": {
+  "date": "2026-10-11",
+  "item": "lem-sc-group-h2-transfer",
+  "worker": "stage1",
+  "summary": "Split the prime-to-ell transfer argument into the all-degree restriction-corestriction identity and an elementary degree-two injectivity argument. The helper is strictly more general than the item's degree-two vanishing conclusion and is unsplit because it is not available in Mathlib.",
+  "blueprint": "The item's two steps realize the first paragraph of blueprint node lem-sc-group-cd-one: the restriction-corestriction identity, followed by its prime-to-ell vanishing consequence.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-ght1750",
+  "group": "K1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-ght1750 (reviewer sub-agent of L); spot-checked: Step 1 cites transfer-identity helper (cor o res = [G:H], all q, open H, finite discrete M) with q=2, hypotheses match; Step 2 elementary: res zero since H^2(H,M)=0, ell^r kills M hence continuous cochains and H^2(G,M), Bezout with index prime to ell gives x=0; no cycle. New node: true standard statement (Serre CG I.2.4), statement-only, not elementary, not a duplicate per K1 DAG search. Mathlib: grep -rliE 'cores|transfer' Mathlib/RepresentationTheory (2026-10-10 17:38 UTC) hits only GroupHomology/Functoriality coresNatTrans (homology functoriality, not cohomology transfer); GroupCohomology/ has no corestriction and no profinite/continuous version: no match. No repairs."
+ }
 }
