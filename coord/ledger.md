@@ -2771,3 +2771,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 22:06 L: merged deliver/F1/lem-pc-sites-modules-sheafification-flat (reviewer FIX; after a return; new nodes: 2)
 - 22:07 L: merged deliver/M1/lem-pod-adic-limit-finite-modules (reviewer FIX; after a return; new nodes: 1)
 - 22:07 L: returned deliver/C1/lem-pc-perfect-summand (reviewer RETURN: Reviewer R-psm2744 (second reading missed this). (1) E/D: Step 2 is false as argued. An idempotent of K in D(O_U) (or D()
+- 22:07 L: returned deliver/E1/lem-pc-derived-mayer-vietoris-triangle (reviewer RETURN: 1. D1 (relabelling) / class (b): the new node lem-pc-ringed-space-derived-mayer-vietoris is Tag 08BV itself, the item's )
