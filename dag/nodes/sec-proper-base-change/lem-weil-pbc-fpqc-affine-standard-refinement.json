@@ -25,37 +25,126 @@
   "def-weil-pbc-fpqc-covering",
   "def-weil-pbc-faithfully-flat-ring-map"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Apply the defining affine-open condition of the fpqc covering [def-weil-pbc-fpqc-covering] to $T$ itself. It gives a finite index set $J$, a map $a:J\\to I$, and affine opens $V_j=\\operatorname{Spec}(A_j)\\subseteq T_{a(j)}$ whose images cover $T$. The definition also gives flatness of every $f_i$; the construction allows $J=\\varnothing$ when $T=\\varnothing$.",
+   "uses": [
+    "def-weil-pbc-fpqc-covering"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/topologies.tex",
+    "place": "Definition Tag 022B (topologies-definition-fpqc-covering), affine-open condition with U = T"
+   }
+  },
+  {
+   "text": "For each $j$, apply the affine-chart flatness criterion [lem-weil-pbc-flat-morphism-affine-criterion] to the flat morphism $f_{a(j)}:T_{a(j)}\\to T$ and its affine open $V_j$. Thus the induced map $R=\\mathcal O_T(T)\\to\\mathcal O_{T_{a(j)}}(V_j)=A_j$ is flat. The finite product $\\prod_{j\\in J}A_j$ is flat as an $R$-module by [lem-weil-pbc-finite-product-flat-modules], so the product ring map is flat.",
+   "uses": [
+    "def-weil-pbc-fpqc-covering",
+    "lem-weil-pbc-flat-morphism-affine-criterion",
+    "lem-weil-pbc-finite-product-flat-modules"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Lemma Tag 01U5 (lemma-flat-characterize), clause (1) implies (2); finite-product flatness as in Algebra, Tags 00HB and 00DD"
+   }
+  },
+  {
+   "text": "Let $\\mathfrak p\\in\\operatorname{Spec}R$. Since the images of the $V_j$ cover $T$, there are $j$ and $\\mathfrak q\\in\\operatorname{Spec}A_j$ mapping to $\\mathfrak p$. The coordinate projection $\\pi_j:\\prod_kA_k\\to A_j$ pulls $\\mathfrak q$ back to a prime of $\\prod_kA_k$ whose contraction along the product map $R\\to\\prod_kA_k$ is $\\mathfrak p$. Hence the map on spectra of the product ring map is surjective. Combining this with step 2 and the flat-plus-surjective-spectrum criterion [lem-weil-pbc-flat-surjective-spectrum-faithfully-flat] proves that $R\\to\\prod_jA_j$ is faithfully flat.",
+   "uses": [
+    "def-weil-pbc-fpqc-covering",
+    "lem-weil-pbc-flat-surjective-spectrum-faithfully-flat"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Lemma Tag 00HQ (lemma-ff-rings), equivalence of faithful flatness with surjectivity on spectra for a flat map; covering images from Topologies Definition Tag 022B"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-fpqc-covering",
+  "lem-weil-pbc-flat-morphism-affine-criterion",
+  "lem-weil-pbc-finite-product-flat-modules",
+  "lem-weil-pbc-flat-surjective-spectrum-faithfully-flat"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/topologies.tex",
+  "place": "Definition Tag 022B, with Morphisms Lemma Tag 01U5 and Algebra Lemma Tag 00HQ"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
-   "query": "an fpqc covering of an affine scheme admits a standard fpqc refinement",
-   "results": "Scheme.AffineCover and quasiCompactCover lemmas, but no refinement theorem for fpqc families",
+   "query": "an fpqc covering of an affine scheme admits finitely many affine opens whose coordinate ring product is faithfully flat",
+   "results": "Flat.flat_and_surjective_iff_faithfullyFlat_of_isAffine and flat_iff, but no theorem naming the given family and its selected affine opens",
    "date": "2026-10-11",
    "verdict": "no exact match"
   },
   {
    "tool": "loogle",
-   "query": "QuasiCompact",
-   "results": "no hits for the requested identifier/pattern",
+   "query": "AlgebraicGeometry.Scheme.fpqcPrecoverage, IsAffine, RingHom.FaithfullyFlat",
+   "results": "unknown identifier IsAffine",
    "date": "2026-10-11",
    "verdict": "no match"
   },
   {
    "tool": "grep",
-   "query": "standard.*fpqc|fpqc.*refin in Mathlib/AlgebraicGeometry",
+   "query": "finite.*affine.*flat|fpqc.*refin|FaithfullyFlat in Mathlib/AlgebraicGeometry/Sites",
    "results": "no matches in the requested Mathlib subdirectory",
    "date": "2026-10-11",
    "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "finite affine refinement of fpqc cover with faithfully flat product of rings",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-11",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "finite family of flat affine schemes covering an affine scheme yields faithfully flat homomorphism to the product of their rings",
+   "results": "Flat.flat_and_surjective_iff_faithfullyFlat_of_isAffine; Flat.instDescScheme; flat_and_surjective_SpecMap_iff; no direct family-selection theorem",
+   "date": "2026-10-11",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "RingHom.FaithfullyFlat, Flat, Finset.prod",
+   "results": "unknown identifier Flat",
+   "date": "2026-10-11",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "exists_finite_affine_flat|fpqcPrecoverage|flat_and_surjective_iff_faithfullyFlat in Mathlib/AlgebraicGeometry",
+   "results": "fpqcPrecoverage (Sites/Fpqc.lean:60), Flat.flat_and_surjective_iff_faithfullyFlat_of_isAffine (Morphisms/Flat.lean:170), no direct theorem in Mathlib",
+   "date": "2026-10-11",
+   "verdict": "no exact match"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-weil-pbc-open-subscheme-fpqc-descent",
   "by": "worker",
   "date": "2026-10-10"
+ },
+ "split_report": {
+  "date": "2026-10-11",
+  "item": "lem-weil-pbc-fpqc-affine-standard-refinement",
+  "worker": "stage1",
+  "summary": "The finite affine opens come directly from the affine-base clause of fpqc covering (022B). Their coordinate maps are flat by 01U5, the finite product is flat by the existing Mathlib leaf, and surjectivity on spectra follows by contracting a prime through a coordinate projection; 00HQ then gives faithful flatness. No new node is needed.",
+  "blueprint": "Realizes the Tag 03N0 proof sentence in lemma-weil-pbc-proper-underived-exchange: after the affine reduction, choose a standard fpqc covering refining the given family."
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-fsr1840",
+  "group": "G1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-fsr1840 (reviewer sub-agent of L); spot-checked: Step 1 = 022B clause applied to U=T (finite a:J->I, images cover T, empty case ok); step 2: affine criterion hypotheses met (g(V_j) in T, both affine), finite-product flat leaf incl. empty product; step 3: prime pulled back via coordinate projection contracts to p, then 00HQ leaf; all cited nodes are existing mathlib leaves/defs, none depends on the item or on open-subscheme/etale-sections fpqc descent nodes, so no cycle; quasi-compactness is supplied by the definition's finite n. Second reading: no missed fault. No repairs."
  }
 }
