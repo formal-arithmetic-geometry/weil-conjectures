@@ -1,0 +1,77 @@
+{
+ "id": "lem-weil-pbc-ml-sets-tower-limit-nonempty",
+ "kind": "statement",
+ "title": "A Mittag-Leffler tower of nonempty sets has a nonempty limit (Stacks 0597, index set the positive integers)",
+ "statement": "Let $(E_i,f_i)_{i\\ge1}$ be an inverse system of sets [def-weil-inverse-system] (sets $E_i$ and maps $f_i:E_{i+1}\\to E_i$), with composites $\\varphi_{k,i}=f_i\\circ f_{i+1}\\circ\\cdots\\circ f_{k-1}:E_k\\to E_i$ for $k\\ge i$ ($\\varphi_{i,i}=\\mathrm{id}$). Assume that every $E_i$ is nonempty and that $(E_i)$ satisfies the Mittag-Leffler condition: for every $i\\ge1$ there is an integer $c(i)\\ge i$ such that $\\varphi_{k,i}(E_k)=\\varphi_{c(i),i}(E_{c(i)})$ (as subsets of $E_i$) for all $k\\ge c(i)$. Then the limit $\\varprojlim_iE_i=\\{(x_i)_{i\\ge1}\\in\\prod_{i\\ge1}E_i: f_i(x_{i+1})=x_i\\text{ for all }i\\ge1\\}$ is nonempty.",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Algebra, Lemma 0597 (lemma-ML-limit-nonempty, algebra.tex line 20748) for the countable directed set I = {1,2,3,...} (the reduction to this index set in its proof is not needed), with Example 0596 (example-ML-surjective-maps, line 20736: the stable images form a system with surjective maps and the same limit) and Definition 0595 (definition-ML-system, line 20724). Tags verified in tags/tags: 0595,algebra-definition-ML-system; 0596,algebra-example-ML-surjective-maps; 0597,algebra-lemma-ML-limit-nonempty"
+ },
+ "stmt_deps": [
+  "def-weil-inverse-system"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Mittag-Leffler inverse system of nonempty sets indexed by natural numbers has nonempty inverse limit",
+   "results": "InverseSystem.limit (Mathlib.Order.DirectedInverseSystem), TopCat.nonempty_limitCone_of_compact_t2_cofiltered_system (Mathlib.Topology.Category.TopCat.Limits.Konig), CategoryTheory.Functor.toEventualRanges_nonempty and isMittagLeffler_of_exists_finite_range (Mathlib.CategoryTheory.CofilteredSystem), direct-limit instances",
+   "date": "2026-10-10",
+   "verdict": "no match (toEventualRanges_nonempty gives only nonemptiness of each stable image, not of the sections)"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "a countable inverse system of nonempty sets satisfying the Mittag-Leffler condition has a nonempty set of sections",
+   "results": "nonempty_sections_of_finite_inverse_system, nonempty_sections_of_finite_cofiltered_system(.init) (Mathlib.CategoryTheory.CofilteredSystem; need finite sets), exists_seq_forall_proj_of_forall_finite (Mathlib.Order.KonigLemma; finite fibres), TopCat.partialSections.nonempty, InverseSystem.limit/globalEquiv/PEquivOn (Mathlib.Order.DirectedInverseSystem)",
+   "date": "2026-10-10",
+   "verdict": "no match (all need finiteness or compactness)"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.IsMittagLeffler, CategoryTheory.Functor.sections",
+   "results": "none",
+   "date": "2026-10-10",
+   "verdict": "no match: no declaration mentions both IsMittagLeffler and sections"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rn \"IsMittagLeffler\\|eventualRange\\|nonempty_sections\\|surjective_π_app\" ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib --include=*.lean",
+   "results": "CategoryTheory/CofilteredSystem.lean (IsMittagLeffler line 137, toEventualRanges line 246, toEventualRangesSectionsEquiv line 255, surjective_toEventualRanges line 262, toEventualRanges_nonempty line 268; nonempty_sections_of_finite_* lines 79, 111 need finite sets); CategoryTheory/Limits/Types/Images.lean line 111 surjective_π_app_zero_of_surjective_map (F : ℕᵒᵖ ⥤ Type, surjective successive maps: projection of a limit cone to index 0 surjective); Limits/ConcreteCategory/Basic.lean line 99 (concrete version); Combinatorics/SimpleGraph/Ends/Defs.lean (eventualRange, unrelated)",
+   "date": "2026-10-10",
+   "verdict": "no single declaration; the statement is a composite of five Mathlib declarations (see mathlib_candidate)"
+  },
+  {
+   "tool": "local_search",
+   "query": "surjective_π_app_zero_of_surjective_map (project ~/weil-conjectures-slopmaster2)",
+   "results": "CategoryTheory.Limits.Concrete.surjective_π_app_zero_of_surjective_map, CategoryTheory.Limits.Types.surjective_π_app_zero_of_surjective_map (index: unavailable)",
+   "date": "2026-10-10",
+   "verdict": "names exist, as read in the source files"
+  }
+ ],
+ "mathlib_match": null,
+ "mathlib_candidate": "Composite, not a leaf (B8): for F : ℕᵒᵖ ⥤ Type, the Stacks ML condition agrees with CategoryTheory.Functor.IsMittagLeffler (Mathlib/CategoryTheory/CofilteredSystem.lean:137, read); then F.toEventualRanges (line 246) has surjective maps (surjective_toEventualRanges, line 262) and nonempty values (toEventualRanges_nonempty, line 268), so the limit cone of F.toEventualRanges projects surjectively onto the nonempty value at 0 (CategoryTheory.Limits.Types.surjective_π_app_zero_of_surjective_map, Mathlib/CategoryTheory/Limits/Types/Images.lean:111, read), and F.toEventualRangesSectionsEquiv (line 255) transports a section back to F. Five declarations chained, plus the translation between the indexing i>=1 with c(i) and Mathlib's morphisms of ℕᵒᵖ; not one line.",
+ "status": "unsplit",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-mittag-leffler-limit-exact",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "reviewed": "Reviewed by L 2026-10-10 (statement): Algebra 0597 for the index set {1,2,...}, ML condition and limit defined in the statement. Unsplit."
+}

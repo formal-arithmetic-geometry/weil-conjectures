@@ -11,9 +11,86 @@
   "def-weil-inverse-system",
   "def-weil-pbc-mittag-leffler-system"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Notation. Write $a_i:A_{i+1}\\to A_i$, $b_i:B_{i+1}\\to B_i$, $t_i:C_{i+1}\\to C_i$ for the transition maps and $a_{k,i},b_{k,i},t_{k,i}$ ($k\\ge i$) for their composites $A_k\\to A_i$, $B_k\\to B_i$, $C_k\\to C_i$ [def-weil-inverse-system], so that $b_{k,i}=b_{j,i}\\circ b_{k,j}$ for $k\\ge j\\ge i$, and likewise for $a$ and $t$. Since $u$ and $v$ are morphisms of inverse systems, $b_i\\circ u_{i+1}=u_i\\circ a_i$ and $t_i\\circ v_{i+1}=v_i\\circ b_i$; composing these squares $k-i$ times gives $b_{k,i}\\circ u_k=u_i\\circ a_{k,i}$ and $t_{k,i}\\circ v_k=v_i\\circ b_{k,i}$ for all $k\\ge i$ (induction on $k-i$). Exactness of $0\\to A_i\\to B_i\\to C_i\\to0$ means: $u_i$ is injective, $v_i$ is surjective and $\\ker v_i=u_i(A_i)$. Also, if $(x_i)\\in\\varprojlim_iM_i$ for an inverse system $(M_i)$ with composites $m_{k,i}$, then $m_{k,i}(x_k)=x_i$ for all $k\\ge i$ (induction on $k-i$).",
+   "uses": [
+    "def-weil-inverse-system"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra, Lemma 0598 (lemma-ML-exact-sequence, algebra.tex lines 20770--20815), proof (the notation $\\varphi_{ji}$, $f_i$, $g_i$ there)"
+   }
+  },
+  {
+   "text": "Part (2). Assume $(B_i)$ is ML [def-weil-pbc-mittag-leffler-system] and fix $i\\ge1$; let $c=c(i)\\ge i$ be such that $b_{k,i}(B_k)=b_{c,i}(B_c)$ for all $k\\ge c$. For every $k\\ge i$, since $v_k$ is surjective and $t_{k,i}\\circ v_k=v_i\\circ b_{k,i}$ (Step 1), $t_{k,i}(C_k)=t_{k,i}(v_k(B_k))=v_i(b_{k,i}(B_k))$. Hence for $k\\ge c$: $t_{k,i}(C_k)=v_i(b_{k,i}(B_k))=v_i(b_{c,i}(B_c))=t_{c,i}(C_c)$. So the same $c(i)$ witnesses the ML condition for $(C_i)$ at $i$, and $(C_i)$ is ML [def-weil-pbc-mittag-leffler-system].",
+   "uses": [
+    "def-weil-pbc-mittag-leffler-system"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/homology.tex",
+    "place": "Homology, Lemma 02N1 (lemma-Mittag-Leffler, homology.tex line 7673) (2), whose proof is 'Nice exercise'; written out by the worker"
+   }
+  },
+  {
+   "text": "Part (3), the fibres. Assume $(A_i)$ is ML and let $(c_i)\\in\\varprojlim_iC_i$. For $i\\ge1$ put $E_i=v_i^{-1}(c_i)\\subseteq B_i$; it is nonempty since $v_i$ is surjective. For $k\\ge i$ and $e\\in E_k$, $v_i(b_{k,i}(e))=t_{k,i}(v_k(e))=t_{k,i}(c_k)=c_i$ (Step 1), so $b_{k,i}(E_k)\\subseteq E_i$. Hence the restrictions $b_i|_{E_{i+1}}:E_{i+1}\\to E_i$ make $(E_i)_{i\\ge1}$ an inverse system of nonempty sets [def-weil-inverse-system] whose composites are the restrictions of the $b_{k,i}$.",
+   "uses": [
+    "def-weil-inverse-system"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra, Lemma 0598 (lemma-ML-exact-sequence, algebra.tex lines 20770--20815), proof, first paragraph (the sets $E_i=g_i^{-1}(c_i)$)"
+   }
+  },
+  {
+   "text": "Part (3), $(E_i)$ satisfies the Mittag-Leffler condition for sets. Fix $i\\ge1$ and let $j=c(i)\\ge i$ be given by the ML condition for $(A_i)$ [def-weil-pbc-mittag-leffler-system]: $a_{k,i}(A_k)=a_{j,i}(A_j)$ for all $k\\ge j$. We claim $b_{k,i}(E_k)=b_{j,i}(E_j)$ for all $k\\ge j$. The inclusion $\\subseteq$: $b_{k,i}(E_k)=b_{j,i}(b_{k,j}(E_k))\\subseteq b_{j,i}(E_j)$ by Step 3. For $\\supseteq$, let $e_j\\in E_j$. Choose any $e'_k\\in E_k$ (Step 3) and put $e'_j=b_{k,j}(e'_k)\\in E_j$. Then $v_j(e_j-e'_j)=c_j-c_j=0$, so $e_j-e'_j=u_j(\\alpha)$ for some $\\alpha\\in A_j$ (exactness at $B_j$). As $a_{j,i}(\\alpha)\\in a_{j,i}(A_j)=a_{k,i}(A_k)$, there is $\\beta\\in A_k$ with $a_{k,i}(\\beta)=a_{j,i}(\\alpha)$. Put $x_k=e'_k+u_k(\\beta)$; then $v_k(x_k)=v_k(e'_k)=c_k$, so $x_k\\in E_k$, and by Step 1 $b_{k,i}(x_k)=b_{j,i}(b_{k,j}(e'_k))+u_i(a_{k,i}(\\beta))=b_{j,i}(e'_j)+u_i(a_{j,i}(\\alpha))=b_{j,i}(e'_j)+b_{j,i}(u_j(\\alpha))=b_{j,i}(e'_j+e_j-e'_j)=b_{j,i}(e_j)$. So $b_{j,i}(e_j)\\in b_{k,i}(E_k)$, proving the claim. Thus $(E_i)$, with $c(i)$ taken from $(A_i)$, satisfies the Mittag-Leffler condition of [lem-weil-pbc-ml-sets-tower-limit-nonempty].",
+   "uses": [
+    "def-weil-pbc-mittag-leffler-system",
+    "lem-weil-pbc-ml-sets-tower-limit-nonempty"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra, Lemma 0598 (lemma-ML-exact-sequence, algebra.tex lines 20770--20815), proof, second paragraph (the claim $\\varphi_{ki}(E_k)=\\varphi_{ji}(E_j)$ for $k\\ge j$)"
+   }
+  },
+  {
+   "text": "Part (3), surjectivity of $\\varprojlim v_i$. By Steps 3 and 4, $(E_i)$ is an inverse system of nonempty sets satisfying the Mittag-Leffler condition, so its limit is nonempty [lem-weil-pbc-ml-sets-tower-limit-nonempty]: there are $e_i\\in E_i$ ($i\\ge1$) with $b_i(e_{i+1})=e_i$ for all $i$. Then $(e_i)\\in\\varprojlim_iB_i$ and $(\\varprojlim v_i)((e_i))=(v_i(e_i))=(c_i)$. As $(c_i)\\in\\varprojlim_iC_i$ was arbitrary, $\\varprojlim v_i$ is surjective.",
+   "uses": [
+    "lem-weil-pbc-ml-sets-tower-limit-nonempty"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra, Lemma 0598 (lemma-ML-exact-sequence, algebra.tex lines 20770--20815), proof, first paragraph (Lemma 0597 applied to $(E_i)$)"
+   }
+  },
+  {
+   "text": "Part (3), exactness of the limit sequence. Abelian groups are $\\mathbf Z$-modules and homomorphisms are $\\mathbf Z$-linear; with $R=\\mathbf Z$, $(K_n)=(A_i)$, $(B_n)=(B_i)$, $(C_n)=(C_i)$, the first assertion of [lem-weil-pbc-tower-limit-exact-surjective-kernels] (b) (whose limits are the same sets of compatible sequences as here) gives the exactness of $0\\to\\varprojlim_iA_i\\xrightarrow{\\varprojlim u_i}\\varprojlim_iB_i\\xrightarrow{\\varprojlim v_i}\\varprojlim_iC_i$, with no hypothesis on $(A_i)$. Together with Step 5, $0\\to\\varprojlim_iA_i\\to\\varprojlim_iB_i\\to\\varprojlim_iC_i\\to0$ is exact when $(A_i)$ is ML.",
+   "uses": [
+    "lem-weil-pbc-tower-limit-exact-surjective-kernels"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra, Lemma 0598 (lemma-ML-exact-sequence, algebra.tex lines 20770--20815), proof, first sentence ('Taking limits ... is left exact'); Homology, Lemma 02N1 (1) (homology.tex line 7673)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-inverse-system",
+  "def-weil-pbc-mittag-leffler-system",
+  "lem-weil-pbc-ml-sets-tower-limit-nonempty",
+  "lem-weil-pbc-tower-limit-exact-surjective-kernels"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Algebra, Lemma 0598 (lemma-ML-exact-sequence, lines 20770--20815) for (3), with Lemma 0597 (lemma-ML-limit-nonempty, line 20748); part (2) and the left exactness are the exercise of Homology, Lemma 02N1 (homology.tex line 7673), written out by the worker"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -49,10 +126,24 @@
    "results": "only CategoryTheory/CofilteredSystem.lean (Functor.IsMittagLeffler for J => Type v, line 137, eventual ranges, nonempty sections), RingTheory/AdicCompletion/Exactness.lean line 27 (comment 'proven directly without using Mittag-Leffler systems'), Analysis/.../Cotangent.lean (unrelated)",
    "date": "2026-10-10",
    "verdict": "no match (Mathlib's ML lemmas are for functors to Type: nonempty sections, surjectivity onto eventual ranges; nothing on exactness of lim for abelian groups)"
+  },
+  {
+   "tool": "leansearch",
+   "query": "image of Mittag-Leffler system under surjective natural transformation is Mittag-Leffler",
+   "results": "CategoryTheory.Functor.isMittagLeffler_of_surjective, isMittagLeffler_iff_subset_range_comp, isMittagLeffler_of_exists_finite_range (Mathlib.CategoryTheory.CofilteredSystem), Subfunctor.image, Subfunctor.instEpiFunctorTypeToRange (Mathlib.CategoryTheory.Subfunctor.Image)",
+   "date": "2026-10-10",
+   "verdict": "no match for (2)"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rn \"IsMittagLeffler\" and \"eventualRange\" ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib --include=*.lean",
+   "results": "IsMittagLeffler occurs only in CategoryTheory/CofilteredSystem.lean (lines 137-268: definition, eventual ranges, toPreimages, toEventualRanges); eventualRange also in Combinatorics/SimpleGraph/Ends/Defs.lean (unrelated)",
+   "date": "2026-10-10",
+   "verdict": "no match: no Mathlib statement on ML systems of abelian groups, quotients, or exactness of limits (re-check 2026-10-10)"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "worker",
@@ -72,5 +163,12 @@
   }
  },
  "chapter": "sec-proper-base-change",
- "unit": "sk-thm-p1"
+ "unit": "sk-thm-p1",
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "lem-weil-pbc-mittag-leffler-limit-exact",
+  "worker": "stage1",
+  "summary": "Read Homology 02N0/02N1 (homology.tex 7652--7700) and Algebra 0595, 0596, 0597, 0598, 03CA (algebra.tex 20700--20870); tags verified in tags/tags. Statement kept (it agrees with 02N1 (2), (3)); stmt_deps unchanged. Proof in 6 steps: notation and the composite commutations; (2) via t_{k,i}(C_k)=v_i(b_{k,i}(B_k)) with the same c(i) (02N1's exercise written out); (3) following the proof of 0598: the fibres E_i=v_i^{-1}(c_i) form a tower of nonempty sets, it is ML (the correction x_k=e'_k+u_k(beta) written out with the commutations), so its limit is nonempty by the new node lem-weil-pbc-ml-sets-tower-limit-nonempty (Lemma 0597 for I = positive integers), giving a lift; left exactness from lem-weil-pbc-tower-limit-exact-surjective-kernels (b) with R = Z. One new node (unsplit, Mathlib composite recorded in mathlib_candidate). Mathlib: no match for the item (earlier searches kept, LeanSearch and grep repeated)."
+ },
+ "reviewed": "Reviewed by L 2026-10-10: (2) elementary from surjectivity of v_k; (3) by the fibre system E_i = v_i^{-1}(c_i), shown Mittag-Leffler by the correction argument of Algebra 0598 (step 4, checked), nonempty limit by 0597 (new unsplit node for sets), left exactness from the existing tower node. No Mathlib match for the item; the new node has a Mathlib candidate chain (B8)."
 }
