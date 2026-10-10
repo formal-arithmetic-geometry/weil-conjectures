@@ -2872,3 +2872,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 22:48 L: returned deliver/E1/lem-pc-tor-independent-perfect-tensor-base-change (reviewer RETURN: 1. E (false new statement), lem-pc-tor-independent-perfect-pullback-comparison: (g_X)^*P is defined as 'the ordinary mod)
 - 22:48 L: merged deliver/J1/lem-sc-zariski-dimension-bound (reviewer FIX; first push; new nodes: 0)
 - 22:49 L: merged deliver/C1/lem-pc-global-hom-adjunction (reviewer FIX; after a return; new nodes: 2)
+- 22:49 UTC L corrected the source tag of lem-pc-global-hom-adjunction (0AA8 -> 0B6I, lemma-iso-global-hom) after R-gha2932
