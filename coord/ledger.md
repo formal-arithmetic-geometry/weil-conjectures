@@ -2563,3 +2563,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 20:47 L: merged deliver/E1/lem-pc-sites-modules-j-shriek-flat (reviewer FIX; first push; new nodes: 1)
 - 20:48 L: merged deliver/H1/def-nagata-finite-presentation-descent (reviewer FIX; first push; new nodes: 0)
 - 20:48 L: merged deliver/C1/def-sc-field-extension (reviewer FIX; first push; new nodes: 0)
+- 20:49 L: merged deliver/M1/pqf-lem-coherent-ft-locnoeth (reviewer FIX; first push; new nodes: 0)

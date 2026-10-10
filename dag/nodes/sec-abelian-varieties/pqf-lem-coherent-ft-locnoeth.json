@@ -3,7 +3,7 @@
  "blueprint": {
   "is": "pqf-lem-coherent-ft-locnoeth",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "Coherence on locally Noetherian schemes",
@@ -21,26 +21,86 @@
  "stmt_deps": [],
  "proof": [
   {
-   "text": "*($\\Leftarrow$).* Let $\\mathcal F$ be quasi-coherent and of\nfinite type on the locally Noetherian $X$ ([pqf-def-locnoeth]) and\nlet $\\varphi:\\mathcal O_U^{\\oplus n}\\to\\mathcal F|_U$\nbe a map over an open $U$. Kernels of maps of quasi-coherent sheaves\nare quasi-coherent (checked on affine open subschemes, where they\ncorrespond to kernels of maps of modules), so $\\ker\\varphi$ is\nquasi-coherent; being a quasi-coherent submodule of a finite-rank\nfree module over each affine Noetherian $\\operatorname{Spec}A\\subset U$\nit is the sheaf $\\widetilde K$ of a submodule $K\\subset A^n$, and $K$\nis finitely generated because $A$ and hence $A^n$ are Noetherian.\nThus $\\ker\\varphi$ is of finite type, which with $\\mathcal F$ of\nfinite type is the definition of coherence in\n[pqf-def-coherent].\n*($\\Rightarrow$).* Let $\\mathcal F$ be coherent; it is of\nfinite type by definition, and it is quasi-coherent: for an affine\nopen $\\operatorname{Spec}A\\subset X$ with $A$ Noetherian, the\ncoherence condition (finite kernels) gives that\n$\\mathcal F|_{\\operatorname{Spec}A}$ is the sheaf associated with\nits module of global sections – the classical finite-relation\nargument over Noetherian rings: because $\\mathcal F$ is of finite\ntype there is a surjection $A^n\\to\\Gamma(\\operatorname{Spec}A,\\mathcal F)$\nwhose kernel is finitely generated, the kernel being of finite type\nby coherence, so a presentation exists; the same argument on\nprincipal open subschemes $D(g)$ and the exactness of\n$(-)\\otimes_A A_g$ yield $\\Gamma(D(g),\\mathcal F)=\\Gamma(\\operatorname{Spec}A,\\mathcal F)_g$, i.e. the sheaf $\\mathcal F|_{\\operatorname{Spec}A}$ is\n$\\widetilde{\\Gamma(\\operatorname{Spec}A,\\mathcal F)}$ (cf. the\nclassical equivalent characterization of coherent modules on\nNoetherian schemes, Stacks Project, Cohomology of Schemes, Lemma\n30.9.1, [Tag 01XZ](https://stacks.math.columbia.edu/tag/01XZ)).\nSince this holds on every affine open, $\\mathcal F$ is\nquasi-coherent.",
+   "text": "Forward direction. Assume $\\mathcal F$ is coherent. It is of finite type by [pqf-def-coherent]: every point $x$ has an open neighbourhood $U$ with a surjection $\\psi:\\mathcal O_U^{\\oplus n}\\to\\mathcal F|_U$. By the coherence clause of [pqf-def-coherent] applied to $\\psi$, $\\ker\\psi$ is of finite type, so $x$ has an open neighbourhood $W\\subseteq U$ with a surjection $\\mathcal O_W^{\\oplus m}\\to(\\ker\\psi)|_W$. Composing with the inclusion of $\\ker\\psi$ gives an exact sequence $\\mathcal O_W^{\\oplus m}\\to\\mathcal O_W^{\\oplus n}\\to\\mathcal F|_W\\to0$, so $\\mathcal F$ is of finite presentation in the sense of [lem-weil-pbc-quasi-coherent-finite-type-affine], and part (0) of that statement makes $\\mathcal F$ quasi-coherent. Thus $\\mathcal F$ is quasi-coherent of finite type.",
+   "uses": [
+    "pqf-def-coherent",
+    "lem-weil-pbc-quasi-coherent-finite-type-affine"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/coherent.tex",
+    "place": "Cohomology of Schemes, Lemma 01XZ (coherent-lemma-coherent-Noetherian), proof"
+   }
+  },
+  {
+   "text": "Reverse direction. Assume $\\mathcal F$ is quasi-coherent and of finite type. Let $U$ be open and $\\varphi:\\mathcal O_U^{\\oplus n}\\to\\mathcal F|_U$ any map. The source is quasi-coherent (on an affine $\\operatorname{Spec}A$ it is $\\widetilde{A^{n}}$, a finite direct sum of $\\widetilde A$, by [lem-weil-pbc-affine-tilde-gamma-adjunction] (4)), so [lem-weil-pbc-quasi-coherent-module-kernel] makes $\\ker\\varphi$ a quasi-coherent $\\mathcal O_U$-module with sections $(\\ker\\varphi)(V)=\\ker(\\varphi_V)$. On every affine $V=\\operatorname{Spec}A\\subseteq U$, part (a) of [lem-weil-pbc-quasi-coherent-finite-type-affine] makes $M=\\mathcal F(V)$ a finite $A$-module, and $(\\ker\\varphi)(V)=K=\\ker(A^n\\to M)$. The ring $A$ is Noetherian by [pqf-def-locnoeth] and [def-weil-pbc-noetherian-ring], and $K$ is finitely generated: induct on $n$, projecting $K\\subseteq A^n$ to $A^{n-1}$, lifting finitely many generators, and adjoining generators of the ideal $K\\cap Ae_n$ (the case $n=0$ is zero). By part (a) of [lem-weil-pbc-quasi-coherent-finite-type-affine] applied to $\\ker\\varphi$ on $U$, $(\\ker\\varphi)|_V$ is of finite type; as such $V$ cover $U$, $\\ker\\varphi$ is of finite type, and [pqf-def-coherent] gives coherence.",
    "uses": [
     "pqf-def-locnoeth",
-    "pqf-def-coherent"
+    "def-weil-pbc-noetherian-ring",
+    "pqf-def-coherent",
+    "lem-weil-pbc-affine-tilde-gamma-adjunction",
+    "lem-weil-pbc-quasi-coherent-finite-type-affine",
+    "lem-weil-pbc-quasi-coherent-module-kernel"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/coherent.tex",
+    "place": "Cohomology of Schemes, Lemma 01XZ (coherent-lemma-coherent-Noetherian), proof"
+   }
   }
  ],
  "proof_deps": [
   "pqf-def-locnoeth",
-  "pqf-def-coherent"
+  "def-weil-pbc-noetherian-ring",
+  "pqf-def-coherent",
+  "lem-weil-pbc-affine-tilde-gamma-adjunction",
+  "lem-weil-pbc-quasi-coherent-finite-type-affine",
+  "lem-weil-pbc-quasi-coherent-module-kernel"
  ],
  "proof_origin": {
-  "by": "agent",
-  "document": "literature/blueprint/master/blueprint/sec-abelian-varieties/sk-prop-av-pqf-finite/pqf-lem-coherent-ft-locnoeth.md",
-  "place": "## Proof"
+  "by": "document",
+  "document": "literature/stacks-project/coherent.tex",
+  "place": "Cohomology of Schemes, Lemma 01XZ (coherent-lemma-coherent-Noetherian), proof"
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "coherent O_X-module on a locally Noetherian scheme iff quasi-coherent and finite type",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-11",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "coherent sheaf locally Noetherian scheme quasi-coherent finite type",
+   "results": "AlgebraicGeometry.IsLocallyNoetherian.component_noetherian; AlgebraicGeometry.IsLocallyNoetherian; AlgebraicGeometry.IsNoetherian.toIsLocallyNoetherian; AlgebraicGeometry.isNoetherian_iff_of_finite_iSup_eq_top; AlgebraicGeometry.LocallyOfFiniteType.isLocallyNoetherian; AlgebraicGeometry.noetherianSpace_of_isAffine; AlgebraicGeometry.noetherianSpace_of_isAffineOpen; AlgebraicGeometry.isNoetherian_iff_of_finite_affine_openCover",
+   "date": "2026-10-11",
+   "verdict": "no match: only general Noetherian-scheme facts"
+  },
+  {
+   "tool": "loogle",
+   "query": "SheafOfModules.IsFiniteType IsFinitePresentation IsQuasicoherent",
+   "results": "0 hits; Unknown identifier IsFinitePresentation",
+   "date": "2026-10-11",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "IsFiniteType|IsFinitePresentation|coherent [Mathlib/AlgebraicGeometry/Modules]",
+   "results": "Mathlib/AlgebraicGeometry/Modules/Tilde.lean:10,378,415,465-466; no exact coherent equivalence",
+   "date": "2026-10-11",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "isNoetherian_of_fg_of_noetherian|isNoetherian_of_isNoetherianRing_of_finite [Mathlib/RingTheory/Noetherian]",
+   "results": "Mathlib/RingTheory/Noetherian/Basic.lean:324,330",
+   "date": "2026-10-10",
+   "verdict": "generic Noetherian submodule finiteness; the step proves the A^n case inline, item itself not in Mathlib"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [
   "proof_cites_literature"
@@ -65,5 +125,29 @@
   }
  },
  "chapter": "sec-abelian-varieties",
- "unit": "sk-prop-av-pqf-finite"
+ "unit": "sk-prop-av-pqf-finite",
+ "split_report": {
+  "date": "2026-10-11",
+  "item": "pqf-lem-coherent-ft-locnoeth",
+  "worker": "stage1",
+  "summary": "Split the imported 01XZ proof into the coherent-to-quasi-coherent and quasi-coherent-finite-type-to-coherent directions. The first direction writes the finite-relation localization argument on affine Noetherian opens and uses the affine tilde/global-sections correspondence. The second uses the existing affine finite-type criterion and quasi-coherent-kernel lemma, with the Noetherian finite-generation induction written directly in the step. No new nodes were needed; all cited facts were searched in the DAG first.",
+  "blueprint": "The two steps realize the two implication paragraphs of the blueprint node proof.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-quasi-coherent-finite-type-affine",
+    "why": "The reverse implication needs the generic affine equivalence between finite type and finite generation of sections, which this unit does not provide."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-quasi-coherent-finite-type-affine"
+ ],
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-cfl2405",
+  "group": "M1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-cfl2405 (reviewer sub-agent of L); spot-checked: Read packet; both directions against 01XZ and the cited statements. FIX more, RETURN less: (1) C1/C4 Step 1: the identity Gamma(D(g),F)=Gamma(U,F)_g 'by exactness and clearing powers of g' was uncited and not justified (sections over D(g) of a sheaf cokernel are not the cokernel of sections without quasi-coherence), and the counit clause (3) of lem-weil-pbc-affine-tilde-gamma-adjunction presupposes quasi-coherence; rewrote as coherent => local presentation O^m->O^n->F->0 => finite presentation => quasi-coherent by part (0) of lem-weil-pbc-quasi-coherent-finite-type-affine (Stacks route: Modules 01BW/01BO); Noetherian not needed there. (2) C4 Step 2: lem-weil-pbc-quasi-coherent-module-kernel only gives quasi-coherence of the kernel, not 'the sheaf associated to K'; now uses sectionwise kernel + part (a) of the affine finite-type criterion applied to ker phi, with quasi-coherence of O_U^n via adjunction (4). (3) E7: unnamed statement change 'Lemma 30.9.1' -> 'Lemma' reverted. Noetherian submodule induction kept inline; one Mathlib grep recorded (RingTheory/Noetherian/Basic.lean:324,330). tool_use of lem-weil-pbc-quasi-coherent-finite-type-affine accepted (generic). The Second reading missed fault (1).; 1 file(s) fixed by the reviewer"
+ }
 }
