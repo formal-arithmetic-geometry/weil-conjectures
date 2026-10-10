@@ -13,19 +13,63 @@
   },
   "same_as": []
  },
- "statement": "Let $(X,\\mathcal O_X)$ be a ringed space [def-sc-ringed-space-module-cohomology]. If $(I_i^\\bullet)_{i\\in I}$ is a set-indexed family of K-injective complexes of $\\mathcal O_X$-modules [def-pur-kinjective-complex], then the termwise product complex $\\prod_i I_i^\\bullet$ is K-injective and represents the product of the $I_i^\\bullet$ in $D(\\mathcal O_X)$ [def-weil-abstract-derived-category].",
+ "statement": "Let $\\mathcal A$ be an abelian category [def-sp-abelian]. Let $T$ be a set, and for each $t\\in T$ let $I_t^\\bullet$ be a K-injective complex [def-sp-kinjective-bridge]. Assume that the product $I^n=\\prod_{t\\in T}I_t^n$ exists in $\\mathcal A$ for every integer $n$ [def-weil-category-product]. Then the termwise product complex $I^\\bullet$ is K-injective and represents the product of the objects $I_t^\\bullet$ in $D(\\mathcal A)$ [def-weil-abstract-derived-category, def-weil-category-product].",
  "source": {
   "document": "literature/stacks-project/derived.tex",
   "place": "Tag 0BK6, label lemma-product-K-injective"
  },
  "stmt_deps": [
-  "def-sc-ringed-space-module-cohomology",
-  "def-pur-kinjective-complex",
-  "def-weil-abstract-derived-category"
+  "def-sp-abelian",
+  "def-sp-kinjective-bridge",
+  "def-weil-abstract-derived-category",
+  "def-weil-category-product"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Let $K^\\bullet$ be acyclic. The Hom complex from $K^\\bullet$ to the termwise product $I^\\bullet$ is the product, over $t\\in T$, of the Hom complexes from $K^\\bullet$ to $I_t^\\bullet$, because $I^n=\\prod_t I_t^n$ in every degree. Each factor is acyclic by K-injectivity, and products of abelian groups are exact [lem-pc-abelian-groups-exact-products], so a product of acyclic complexes of abelian groups is acyclic (cohomology commutes with products, kernels and images being computed factorwise); hence the product Hom complex is acyclic. Thus $I^\\bullet$ is K-injective.",
+   "uses": [
+    "def-sp-kinjective-bridge",
+    "lem-pc-abelian-groups-exact-products"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 0BK6, label lemma-product-K-injective, proof of K-injectivity"
+   }
+  },
+  {
+   "text": "For every complex $K^\\bullet$, the termwise definition of $I^\\bullet$ identifies chain maps $K^\\bullet\\to I^\\bullet$ and chain homotopies between them with families of chain maps $K^\\bullet\\to I_t^\\bullet$ and chain homotopies. Therefore composition with the projections gives $\\operatorname{Hom}_{K(\\mathcal A)}(K^\\bullet,I^\\bullet)=\\prod_t\\operatorname{Hom}_{K(\\mathcal A)}(K^\\bullet,I_t^\\bullet)$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 0BK6, label lemma-product-K-injective, proof of the product universal property"
+   }
+  },
+  {
+   "text": "Each $I_t^\\bullet$, and by Step 1 also $I^\\bullet$, satisfies the hypothesis of the K-injective Hom comparison: a chain map from an acyclic complex $N^\\bullet$ is a $0$-cocycle of the acyclic Hom complex $\\operatorname{Hom}^\\bullet(N^\\bullet,-)$, hence a coboundary, i.e. homotopic to zero. For every $K^\\bullet$, the K-injective Hom comparison identifies each Hom set into $QI^\\bullet$ in $D(\\mathcal A)$ with the corresponding Hom set in $K(\\mathcal A)$, and does the same for every $QI_t^\\bullet$. Combining these bijections with Step 2 yields $\\operatorname{Hom}_{D(\\mathcal A)}(QK^\\bullet,QI^\\bullet)=\\prod_t\\operatorname{Hom}_{D(\\mathcal A)}(QK^\\bullet,QI_t^\\bullet)$, so $QI^\\bullet$ with the projections represents the product.",
+   "uses": [
+    "lem-weil-pbc-kinjective-hom-derived",
+    "def-weil-category-product"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 0BK6, label lemma-product-K-injective, final product argument"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sp-kinjective-bridge",
+  "lem-weil-pbc-kinjective-hom-derived",
+  "def-weil-category-product",
+  "lem-pc-abelian-groups-exact-products"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/derived.tex",
+  "place": "Tag 0BK6, label lemma-product-K-injective"
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -50,10 +94,26 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-pc-derived-functor-commutes-derived-limit",
   "by": "worker",
   "date": "2026-10-10"
+ },
+ "split_report": {
+  "date": "2026-10-11",
+  "item": "lem-pc-ringed-space-product-kinjective",
+  "worker": "stage1",
+  "summary": "Split Tag 0BK6 into the componentwise null-homotopy proof of K-injectivity, the elementary product calculation in the homotopy category, and the derived-category product bijection using the existing K-injective Hom comparison and product definition nodes.",
+  "blueprint": "The steps realize the supporting derived-functor/product comparison step in blueprint ancestor lem-sc-finite-duality.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-pki2710",
+  "group": "J1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-pki2710 (reviewer sub-agent of L); spot-checked: Tag 0BK6 statement matches (general abelian category, degreewise products exist; generalisation from ringed space named in second reading, citers lem-pc-derived-functor-commutes-derived-limit / lem-pc-ringed-space-rgamma-derived-limit apply it to Mod(O_X), which has products); no ATTACH: slopmaster2 Products.lean has only HomotopyCategory.isLimitFanQuotient and DerivedCategory.hasLimitsOfShape_discrete (existence, needs K-injective resolutions), not this statement; no Mathlib match; lem-pc-ringed-space-derived-products is existence of products, not duplicated and not needed. FIX more, RETURN less: (1) C1 Step 1 exactness of products in Ab now cites existing lem-pc-abelian-groups-exact-products (added to uses and proof_deps); (2) C4/E Step 3 now checks the hypothesis of lem-weil-pbc-kinjective-hom-derived (homotopic-to-zero form) from the Hom-complex-acyclic form of def-sp-kinjective-bridge, for I_t and I.; 1 file(s) fixed by the reviewer"
  }
 }

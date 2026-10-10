@@ -2727,3 +2727,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 21:51 L: merged deliver/J1/lem-pc-ringed-space-rgamma-derived-limit (reviewer FIX; first push; new nodes: 0)
 - 21:51 L: merged deliver/K1/lem-sc-generic-stalk-finite-length (reviewer FIX; first push; new nodes: 0)
 - 21:52 L: merged deliver/J1/lem-sc-affine-perfect-support-extension (reviewer FIX; after a return; new nodes: 3)
+- 21:52 L: merged deliver/J1/lem-pc-ringed-space-product-kinjective (reviewer FIX; first push; new nodes: 0)
