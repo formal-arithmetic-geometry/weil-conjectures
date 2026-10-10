@@ -995,3 +995,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 07:03 L: reviewed and accepted lem-weil-pbc-power-series-ring-subfields (8 steps; +power-series-frobenius-coefficientwise leaf; explicit basis instead of 0394).
 - 07:03 L: reviewed and accepted lem-weil-pbc-presheaf-module-stalk-filtered-colimit (4 steps; +filtered-colimit-modules-criterion composed leaf).
 - 07:05 L: reviewed and accepted lem-weil-pbc-pth-root-presentation-differentials (6 steps, no new nodes; uses the explicit connecting map of the 00S2 node; source sign convention noted).
+- 07:05 L: reviewed and accepted lem-weil-pbc-pth-roots-extension-degree (5 steps, no new nodes; 07DZ).
