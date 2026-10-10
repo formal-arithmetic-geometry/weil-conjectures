@@ -61,6 +61,9 @@ resolutions.
   law of `Rf_!`, compact-support base change and the projection formula.
 - `AlgebraicGeometry.Etale.nonempty_iso_kernelTransform_diagonal`: the kernel transform of a
   kernel supported on the diagonal is a tensor product.
+- `AlgebraicGeometry.Etale.nonempty_iso_kernelTransform_tensor_of_hasProjectionFormula`: kernel
+  transforms are linear over the base on full subcategories where the projection formula for
+  the second projection holds.
 - `AlgebraicGeometry.Etale.nonempty_iso_kernelTransform_tensor`: kernel transforms are linear
   over the base, given the projection formula for the second projection.
 

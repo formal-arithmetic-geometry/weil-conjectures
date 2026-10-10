@@ -261,8 +261,9 @@ of `AlgebraicGeometry.Etale.projectionMap` is an isomorphism of bifunctors on th
 unbounded derived categories, with no boundedness, constructibility or Tor amplitude hypothesis
 on `K` and `L`.
 
-This is the unbounded form of clause (5) of `prop-functor-package` that the base linearity of
-kernel transforms (and of the Fourier–Deligne transform, `sk-prop-base-linear`) consumes.
+This is an unbounded form of clause (5) of `prop-functor-package`, from which the case
+`sk-thm-sf-pf-finite` (`AlgebraicGeometry.Etale.hasProjectionFormula_of_boundedConstructible`)
+is read off.
 It holds for torsion coefficients (SGA 4 XVII 5.2.9): for the open immersion `i` of the
 compactification `PF` is an isomorphism formally
 (`AlgebraicGeometry.Etale.derivedOpenImmersionLowerShriekProjectionIso`), and for the proper

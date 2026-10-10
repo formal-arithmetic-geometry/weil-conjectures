@@ -121,7 +121,7 @@ theorem nonempty_iso_fourierTransform_mapDerivedCategory (Ψ : AddChar (ZMod p) 
   -- `Λ_V ⊗ᴸ M ≅ M`, naturally in `M`.
   let uV : derivedTensorRightFunctor (ModuleCat.{u + 1} Λ) V ⋙
       (evaluation _ _).obj (constantComplex Λ V) ≅ 𝟭 _ :=
-    NatIso.ofComponents (fun M ↦ λ_ M) fun f ↦ leftUnitor_naturality f
+    derivedTensorLeftUnitorNatIso _ V
   exact ⟨Functor.isoWhiskerLeft _ (Functor.isoWhiskerRight
       (Functor.isoWhiskerLeft D((π)^*[ModuleCat.{u + 1} Λ]) uV.symm) _) ≪≫
     Functor.isoWhiskerRight e ((evaluation _ _).obj K₀)⟩
