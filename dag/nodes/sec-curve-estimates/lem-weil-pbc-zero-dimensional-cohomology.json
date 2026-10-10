@@ -3,7 +3,7 @@
  "blueprint": {
   "is": "lem-weil-pbc-zero-dimensional-cohomology",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "Etale cohomology in dimension zero",
@@ -14,36 +14,81 @@
  },
  "stmt_deps": [
   "def-weil-pbc-eight-curve-assertions",
+  "def-weil-pbc-abelian-etale-sheaves",
   "def-weil-pbc-etale-cohomology",
   "def-weil-pbc-etale-site",
   "def-weil-pbc-geometric-stalks"
  ],
  "proof": [
   {
-   "text": "Finite type in the setup of [def-weil-pbc-curve-setting] gives a finite affine\ncover by spectra of finite-type zero-dimensional $k$-algebras. Such rings are\nArtinian; their prime ideals are finite in number and maximal, and their\nresidue fields are finite over $k$, hence equal to $k$. Consequently $|C|$ is\nfinite discrete and $C_{\\mathrm{red}}=\\coprod_{c\\in|C|}\\operatorname{Spec}k$.\nThe reduction is a universal homeomorphism, so invariance of the etale site\nunder universal homeomorphisms identifies the cohomology with that of this\nfinite disjoint union.",
+   "text": "By [lem-weil-pbc-finite-type-dim-zero-artinian], the finite-type\nzero-dimensional scheme $C$ has finite discrete underlying space and every\npoint is closed. Let $i:C_{\\mathrm{red}}\\to C$ be the reduction. By\n[lem-weil-pbc-reduction-universal-homeomorphism], $C_{\\mathrm{red}}$ is reduced\nand $i$ is a universal homeomorphism. Since $C_{\\mathrm{red}}$ is a closed\nsubscheme of the finite-type $k$-scheme $C$, it is itself finite type over $k$.\nApplying [lem-weil-pbc-closed-point-residue-field-base] to $C_{\\mathrm{red}}$\nidentifies every residue field $\\kappa_{C_{\\mathrm{red}}}(c)$ with $k$ (equivalently,\n$\\mathcal O_{C_{\\mathrm{red}},c}=\\mathcal O_{C,c}/\\sqrt{0}$ has the same\nresidue field). The singleton pieces of the finite discrete space\n$C_{\\mathrm{red}}$ are open and closed. Each such piece is affine by\n[lem-weil-pbc-finite-discrete-scheme-affine]. Its coordinate ring is reduced\nand has only one prime, hence is a field; the residue-field identification\nmakes that field $k$. Therefore each piece is $\\operatorname{Spec}k$. By\n[lem-weil-pbc-scheme-coproduct-family], the morphism from the coproduct of\nthese pieces to $C_{\\mathrm{red}}$ induced by their inclusions is an\nisomorphism: its restriction to each summand is the corresponding open\nimmersion, and the summands are pairwise disjoint and cover $C_{\\mathrm{red}}$,\nso it is bijective and a local isomorphism.",
    "uses": [
-    "def-weil-pbc-curve-setting"
+    "lem-weil-pbc-finite-type-dim-zero-artinian",
+    "lem-weil-pbc-closed-point-residue-field-base",
+    "lem-weil-pbc-reduction-universal-homeomorphism",
+    "lem-weil-pbc-finite-discrete-scheme-affine",
+    "lem-weil-pbc-scheme-coproduct-family"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra Lemma 00KH (algebra-lemma-Noetherian-dimension-0) and Theorem 00FV (algebra-theorem-nullstellensatz), together with Morphisms Lemma 054M (morphisms-lemma-reduction-universal-homeomorphism) and the first paragraph of Lemma 0A5B (etale-cohomology-lemma-constant-smooth-statements)"
+   }
   },
   {
-   "text": "Every etale scheme over an algebraically closed field is a disjoint union of\ncopies of its spectrum: an affine etale neighbourhood is zero-dimensional and\nreduced, and its residue fields are finite separable extensions of $k$. Thus\nthe small etale site on $\\operatorname{Spec}k$ has sheaf category equal to the\ncategory of sets, and abelian sheaves equal to abelian groups. Global sections\non each point are its stalk, and are exact. Global sections on the finite\ndisjoint union are the finite product of these exact functors. Taking their\nright derived functors gives the formula.",
-   "uses": [],
-   "elementary": null
+   "text": "Apply [lem-weil-pbc-finite-geometric-point-coproduct-cohomology] to\nthe finite coproduct description of $C_{\\mathrm{red}}$ from step 1. It gives\nvanishing in every degree $q>0$ and identifies degree zero with the finite\nproduct of the geometric stalks on the reduced scheme. The universal\nhomeomorphism $i$ identifies these cohomology groups with those of $(C,F)$\nby [thm-weil-pbc-universal-homeomorphism-invariance]. Under the induced\nbijection of points, for the geometric point $\\bar c$ over $c$ on\n$C_{\\mathrm{red}}$ the inverse-image stalk comparison\n$(i^{-1}F)_{\\bar c}=F_{i\\circ\\bar c}=F_{\\bar c}$ is the canonical one from\n[lem-weil-pbc-inverse-image-stalk-germ]. Thus the degree-zero product is\n$\\prod_{c\\in|C|}F_{\\bar c}$.",
+   "uses": [
+    "lem-weil-pbc-finite-geometric-point-coproduct-cohomology",
+    "thm-weil-pbc-universal-homeomorphism-invariance",
+    "lem-weil-pbc-inverse-image-stalk-germ"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Proposition 03SI (proposition-topological-invariance), Theorem 03QT (theorem-equivalence-sheaves-point), Lemma 03QU (lemma-compare-cohomology-point), Section 03QQ (section-cohomology-point), and the first paragraph of the proof of Lemma 0A5B (etale-cohomology-lemma-constant-smooth-statements)"
+   }
   }
  ],
  "proof_deps": [
-  "def-weil-pbc-curve-setting",
-  "thm-weil-pbc-universal-homeomorphism-invariance"
+  "lem-weil-pbc-finite-type-dim-zero-artinian",
+  "lem-weil-pbc-closed-point-residue-field-base",
+  "lem-weil-pbc-reduction-universal-homeomorphism",
+  "lem-weil-pbc-finite-discrete-scheme-affine",
+  "lem-weil-pbc-scheme-coproduct-family",
+  "lem-weil-pbc-finite-geometric-point-coproduct-cohomology",
+  "thm-weil-pbc-universal-homeomorphism-invariance",
+  "lem-weil-pbc-inverse-image-stalk-germ"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/master/blueprint/sec-curve-estimates/sk-prop-cd/lem-weil-pbc-zero-dimensional-cohomology.md",
   "place": "## Proof"
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "etale cohomology of a separated finite type zero dimensional scheme over an algebraically closed field: degree zero is the finite product of geometric stalks and positive degrees vanish",
+   "results": "No theorem for this etale cohomology calculation; only unrelated curve field-extension and site declarations",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "|- CategoryTheory.Sheaf.H _ _ = 0",
+   "results": "No matching declaration for etale cohomology vanishing or stalk product identification",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "rg -n -i 'zero.dimensional.*cohomology|cohomology.*geometric.stalk|finite.*coproduct.*cohomology' ~/weil-src-slopmaster2/.lake/packages/mathlib/Mathlib",
+   "results": "No Mathlib declaration for the stated etale cohomology formula",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [
   "cites_outside_uses"
@@ -77,5 +122,42 @@
   }
  },
  "chapter": "sec-curve-estimates",
- "unit": "sk-prop-cd"
+ "unit": "sk-prop-cd",
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "lem-weil-pbc-zero-dimensional-cohomology",
+  "worker": "stage1",
+  "summary": "Checked the item against Stacks Etale Cohomology: the first paragraph of Lemma 0A5B, Proposition 03SI (proposition-topological-invariance), Theorem 03QT (theorem-equivalence-sheaves-point), and Section 03QQ (section-cohomology-point). Step 1 uses the finite/discrete and residue-field leaves, reduction universal-homeomorphism, finite-discrete-affine, and the coproduct family to prove that the reduction is a finite coproduct of Spec k, including the residue-field and coproduct-isomorphism arguments. Step 2 applies the finite geometric-point coproduct statement, invokes universal-homeomorphism invariance, and uses the inverse-image stalk-germ lemma to identify each reduced stalk with F at the corresponding point. No exact sorry-free declaration exists in /home/ubuntu/weil-src-slopmaster2/WeilConjectures.",
+  "blueprint": {
+   "statement": "node lem-weil-pbc-zero-dimensional-cohomology, order 1002",
+   "steps": {
+    "1": "proof, first paragraph: reduction to a finite coproduct of spectra of k",
+    "2": "proof, second paragraph: exact global sections on each point and finite-product assembly"
+   }
+  },
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-reduction-universal-homeomorphism",
+    "why": "The reduction morphism's universal-homeomorphism invariance is a generic etale-site tool; the sk-prop-cd route has no unit-specific replacement for this standard reduction step."
+   },
+   {
+    "node": "lem-weil-pbc-inverse-image-stalk-germ",
+    "why": "Step 2 uses the generic inverse-image stalk identification for the reduction morphism; the sk-prop-cd route has no unit-specific replacement for this sheaf-theoretic tool."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-reduction-universal-homeomorphism",
+  "lem-weil-pbc-inverse-image-stalk-germ",
+  "lem-weil-pbc-reduction-universal-homeomorphism",
+  "lem-weil-pbc-inverse-image-stalk-germ"
+ ],
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-zd2",
+  "group": "G1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-zd2 (reviewer sub-agent of L); spot-checked: Repaired re-push after the 14:56 return; every point checked: (1) lem-weil-pbc-geometric-point-cohomology deleted, not in the diff; (2) step 2 cites lem-weil-pbc-inverse-image-stalk-germ (f=i, ybar over c on C_red, G=F gives (i^{-1}F)_cbar=F_{i o cbar}) in text, uses, proof_deps, and split_report.tool_uses with why; (3a) closed-point-residue-field-base applied to C_red (closed subscheme, finite type over k, all points closed since |C| discrete and i homeomorphism); (3b) explicit coproduct-isomorphism line from scheme-coproduct-family (open immersions, disjoint, covering); (3c) 054M and 0A5B named with their labels; (4) report and summary describe the delivered steps, step 2 place gives 03SI Proposition, 03QT Theorem, 03QQ Section with labels. Statement agrees with Stacks 0A5B first paragraph and 03QU; the new node is true (03QT/03QU componentwise on finitely many Spec k, k separably closed; cohomology of a finite disjoint union is the product); tested on I empty and |I|=1. Cited statements read: finite-type-dim-zero-artinian, reduction-universal-homeomorphism, finite-discrete-scheme-affine, scheme-coproduct-family, closed-point-residue-field-base, thm-weil-pbc-universal-homeomorphism-invariance (compatible with cohomology), inverse-image-stalk-germ. Tool uses accepted (C8, generic): lem-weil-pbc-reduction-universal-homeomorphism, lem-weil-pbc-inverse-image-stalk-germ. Fixes: dag/nodes/sec-curve-estimates/lem-weil-pbc-finite-geometric-point-coproduct-cohomology.json: statement/stmt_deps: cite def-weil-pbc-geometric-stalks and def-weil-pbc-etale-cohomology for the notions stalk and H^q (B3, FIX more, RETURN less); source.place: 03QT is a Theorem, labels of 03QT, 03QU, 03QQ, 0A5B added. dag/nodes/sec-curve-estimates/lem-weil-pbc-zero-dimensional-cohomology.json: proof step 1 source.place: labels of 00KH and 00FV added. Start Sat Oct 10 03:08:03 PM UTC 2026, end Sat Oct 10 03:08:55 PM UTC 2026.; 2 file(s) fixed by the reviewer"
+ }
 }
