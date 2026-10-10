@@ -11,9 +11,72 @@
   "def-weil-pbc-mv-polynomial-ring",
   "def-weil-pbc-kahler-differentials"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Choose, for every variable $x_t$ of $P$, an element $p'_t\\in P'$ whose image under $\\alpha'$ is $\\alpha(x_t)$; these choices exist since $\\alpha'$ is onto. The universal property of the polynomial ring [def-weil-pbc-mv-polynomial-ring] gives an $R$-algebra map $\\varphi:P\\to P'$ with $\\varphi(x_t)=p'_t$ and $\\alpha'\\varphi=\\alpha$, since the two maps agree on $R$ and each $x_t$. Reversing the roles of the presentations gives $\\psi:P'\\to P$ with $\\alpha\\psi=\\alpha'$.",
+   "uses": [
+    "def-weil-pbc-mv-polynomial-ring"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Lemma Tag 00S1 (lemma-NL-homotopy), proof of (1), lines 35295-35304"
+   }
+  },
+  {
+   "text": "For any $R$-algebra map $a:P\\to P'$ over $S$ (so $\\alpha'a=\\alpha$), $a(I)\\subseteq I'$ and $a(I^2)\\subseteq I'^2$; multiplication on $I/I^2$ by $P$ therefore factors through $S=P/I$, and $a_1(f\\bmod I^2)=a(f)\\bmod I'^2$ is $S$-linear. By the universal property of Kähler differentials [def-weil-pbc-kahler-differentials], $a$ gives the $S$-linear map $a_0:S\\otimes_P\\Omega_{P/R}\\to S\\otimes_{P'}\\Omega_{P'/R}$ determined by $a_0(s\\otimes\\mathrm dp)=s\\otimes\\mathrm d(a(p))$. The Leibniz rule makes $\\mathrm d_\\alpha$ well defined on $I/I^2$: for $f,g\\in I$, $\\mathrm d(fg)$ maps to $\\alpha(f)\\otimes\\mathrm dg+\\alpha(g)\\otimes\\mathrm df=0$; the same holds for $\\alpha'$. On $f\\bmod I^2$ one has $\\mathrm d_{\\alpha'}a_1(f)=1\\otimes\\mathrm d(a(f))=a_0\\mathrm d_\\alpha(f)$, so $(a_1,a_0)$ is a chain map.",
+   "uses": [
+    "def-weil-pbc-kahler-differentials"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Section Tag 00S0 (section-netherlander), lines 35189-35233; Lemma Tag 00S1 (lemma-NL-homotopy), proof of (2), lines 35306-35322"
+   }
+  },
+  {
+   "text": "Let $a,b:P\\to P'$ be any two such maps over $S$. Since $\\alpha'(a(p)-b(p))=0$, the difference defines $D:P\\to I'/I'^2$, $D(p)=(a(p)-b(p))\\bmod I'^2$. It is additive and vanishes on $R$. Moreover $a(p)-b(p)\\in I'$ implies that $a(p)$ and $b(p)$ act on $I'/I'^2$ through the common scalar $\\alpha(p)\\in S$; hence the identity $a(pq)-b(pq)=a(p)(a(q)-b(q))+(a(p)-b(p))b(q)$ becomes $D(pq)=\\alpha(p)D(q)+\\alpha(q)D(p)$. Thus $D$ is an $R$-derivation into the $P$-module $I'/I'^2$ defined by $\\alpha$. The universal property [def-weil-pbc-kahler-differentials], followed by extension of scalars from $P$ to $S$, gives a unique $S$-linear $H:S\\otimes_P\\Omega_{P/R}\\to I'/I'^2$ with $H(s\\otimes\\mathrm dp)=sD(p)$.",
+   "uses": [
+    "def-weil-pbc-kahler-differentials"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Lemma Tag 00S1 (lemma-NL-homotopy), proof of (2), lines 35306-35348"
+   }
+  },
+  {
+   "text": "The two homotopy identities follow on generators. For $f\\in I$, $H\\mathrm d_\\alpha(f\\bmod I^2)=H(1\\otimes\\mathrm df)=(a(f)-b(f))\\bmod I'^2=(a_1-b_1)(f\\bmod I^2)$. For $s\\otimes\\mathrm dp$, $\\mathrm d_{\\alpha'}H(s\\otimes\\mathrm dp)=s\\otimes\\mathrm d(a(p)-b(p))=(a_0-b_0)(s\\otimes\\mathrm dp)$; both sides are $S$-linear, and the differentials $\\mathrm dp$ generate $\\Omega_{P/R}$ by its construction in [def-weil-pbc-kahler-differentials]. This supplies explicitly the calculation omitted in the source's proof of part (2).",
+   "uses": [
+    "def-weil-pbc-kahler-differentials"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Lemma Tag 00S1 (lemma-NL-homotopy), proof of (2), lines 35337-35349 ('A calculation (omitted)')"
+   }
+  },
+  {
+   "text": "For maps of presentations $a:P\\to P'$ and $c:P'\\to P''$ over the same base algebra, the induced maps compose termwise: on $f\\bmod I^2$, $c_1a_1(f)=c(a(f))\\bmod I''^2=(c\\circ a)_1(f)$, and on $s\\otimes\\mathrm dp$, $c_0a_0(s\\otimes\\mathrm dp)=s\\otimes\\mathrm d(c(a(p)))=(c\\circ a)_0(s\\otimes\\mathrm dp)$. The identity presentation map induces identities in both degrees. Apply steps 3-4 first to $a=\\mathrm{id}_P$, $b=\\psi\\circ\\varphi$ to obtain $h$; composition then gives $\\mathrm{id}-\\psi_1\\varphi_1=h\\mathrm d_\\alpha$ and $\\mathrm{id}-\\psi_0\\varphi_0=\\mathrm d_\\alpha h$. Apply them again to $a=\\mathrm{id}_{P'}$, $b=\\varphi\\circ\\psi$ to obtain $h'$ and the two analogous identities for $\\alpha'$. Step 2 supplies the two chain-map identities. Thus the selected maps are mutual homotopy inverses, and the construction works for any choices of $\\varphi,\\psi$ over $S$.",
+   "uses": [
+    "def-weil-pbc-kahler-differentials"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Lemma Tag 00S1 (lemma-NL-homotopy), proof of (3)-(4), lines 35351-35392"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-mv-polynomial-ring",
+  "def-weil-pbc-kahler-differentials"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Lemma Tag 00S1 (lemma-NL-homotopy), proof of (1)-(4), lines 35295-35392"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -57,7 +120,7 @@
   "file": "Mathlib/RingTheory/Extension/Cotangent/Basic.lean",
   "how": "Not a leaf: with Generators P, P' of S over R, f = (defaultHom P P').toExtensionHom and g = (defaultHom P' P).toExtensionHom (Generators.lean line 468, Hom.toExtensionHom line 600), phi_1 = Cotangent.map f (Extension/Basic.lean line 465), phi_0 = CotangentSpace.map f (Cotangent/Basic.lean line 147), chain-map identity map_comp_cotangentComplex (line 205); the homotopy h = (g.comp f).sub (Hom.id _) (Hom.sub, line 252) with Cotangent.map_sub_map (line 311) and CotangentSpace.map_sub_map (line 290), after rewriting map (g.comp f) = map g ∘ map f (Cotangent.map_comp, Extension/Basic.lean line 498; CotangentSpace.map_comp, Cotangent/Basic.lean line 176) and map id = id (lines 488, 173). Read with sed -n 205,330p and 540,560p on Extension/Cotangent/Basic.lean on 2026-10-10. A short proof from these, but several declarations and a composition argument, not one line."
  },
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "worker",
@@ -77,5 +140,18 @@
   }
  },
  "chapter": "sec-proper-base-change",
- "unit": "sk-thm-p1"
+ "unit": "sk-thm-p1",
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "lem-weil-pbc-nl-presentations-homotopy-equivalent",
+  "worker": "stage1",
+  "summary": "Verified the specialization of Stacks Algebra 00S1 to two presentations of one R-algebra and split its proof into lifts of generators, functorial chain maps, the difference derivation, the two explicit homotopy equations omitted by Stacks, and mutual homotopy inverses. Existing polynomial and Kahler-differential definition nodes suffice; no new node is needed."
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "group": "F1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed by the lead of F1; spot-checked by L: 00S1 for two presentations of the same algebra: lifts by the polynomial universal property, induced chain maps, difference derivation D into I'/I'^2 (the P-action through alpha checked), the omitted homotopy calculation written out in step 4, composition termwise in step 5"
+ }
 }
