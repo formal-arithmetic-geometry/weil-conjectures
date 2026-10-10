@@ -1,0 +1,82 @@
+{
+ "id": "lem-weil-pbc-noetherian-minimal-prime-associated",
+ "kind": "statement",
+ "title": "A minimal prime of a Noetherian ring is an associated prime of the ring",
+ "statement": "Let $R$ be a Noetherian ring [def-weil-pbc-noetherian-ring] and let $\\mathfrak p\\subset R$ be a minimal prime ideal of $R$ (a prime ideal containing no strictly smaller prime ideal). Then $\\mathfrak p$ is an associated prime of $R$: there is an element $z\\in R$ whose annihilator $\\operatorname{Ann}_R(z)=\\{a\\in R: az=0\\}$ equals $\\mathfrak p$.",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Algebra, Lemma Tag 05BV (lemma-ass-minimal-prime-support, line 15260) for the module M = R (Supp(R) = Spec R, whose minimal elements are the minimal primes of R); Definition Tag 00LA (definition-associated, line 15108) for associated primes"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-noetherian-ring"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "minimal prime of a Noetherian ring is an associated prime",
+   "results": "Module.associatedPrimes.minimalPrimes_annihilator_subset_associatedPrimes (Mathlib.RingTheory.Ideal.AssociatedPrime.Localization), minimalPrimes, associatedPrimes, Ideal.minimalPrimes_isPrime, Ideal.finite_minimalPrimes_of_isNoetherianRing",
+   "date": "2026-10-10",
+   "verdict": "match (generalization to finite modules, specializes in one line)"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "minimal prime ideals of a Noetherian ring are associated primes of the ring",
+   "results": "Ideal.finite_minimalPrimes_of_isNoetherianRing, minimalPrimes.finite_of_isNoetherianRing, PrimeSpectrum.finite_setOf_isMin, Module.associatedPrimes.minimalPrimes_annihilator_subset_associatedPrimes, exists_le_isAssociatedPrime_of_isNoetherianRing",
+   "date": "2026-10-10",
+   "verdict": "match: Module.associatedPrimes.minimalPrimes_annihilator_subset_associatedPrimes"
+  },
+  {
+   "tool": "loogle",
+   "query": "associatedPrimes, minimalPrimes",
+   "results": "no results (loogle index)",
+   "date": "2026-10-10",
+   "verdict": "no information; the leansearch/leanfinder/grep hits are used"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rn 'minimalPrimes' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/RingTheory/Ideal/AssociatedPrime/; grep -rln 'associatedPrimes\\|IsAssociatedPrime' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib",
+   "results": "Localization.lean:128 minimalPrimes_annihilator_subset_associatedPrimes; Basic.lean:98 IsAssociatedPrime, :114 isAssociatedPrime_iff; files Lasker.lean, AssociatedPrime/{Basic,Localization,Finiteness}.lean, Regular/{LinearMap,IsSMulRegular}.lean",
+   "date": "2026-10-10",
+   "verdict": "match: Localization.lean:128"
+  },
+  {
+   "tool": "local_search",
+   "query": "minimalPrimes_annihilator_subset_associatedPrimes (project root ~/weil-conjectures-slopmaster2)",
+   "results": "Module.associatedPrimes.minimalPrimes_annihilator_subset_associatedPrimes in .lake/packages/mathlib/Mathlib/RingTheory/Ideal/AssociatedPrime/Localization.lean (index: unavailable, name found)",
+   "date": "2026-10-10",
+   "verdict": "name exists"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "Module.associatedPrimes.minimalPrimes_annihilator_subset_associatedPrimes",
+  "file": "Mathlib/RingTheory/Ideal/AssociatedPrime/Localization.lean",
+  "line": 128,
+  "how": "specializes in one line: lines 128-129, `[IsNoetherianRing R] [Module.Finite R M] : (Module.annihilator R M).minimalPrimes ⊆ associatedPrimes R M`, applied to M = R (Module.Finite R R). Translation: Module.annihilator R R = ⊥ by Module.annihilator_eq_bot (Mathlib/RingTheory/Ideal/Maps.lean:891) for the faithful action of R on itself, and (⊥ : Ideal R).minimalPrimes = minimalPrimes R (abbrev, Mathlib/RingTheory/Ideal/MinimalPrime/Basic.lean:63, documented as `Ideal.minimalPrimes ⊥`), the same translation as in the existing leaf lem-weil-pbc-noetherian-local-dim-drop-outside-minimal-primes; membership in associatedPrimes R R is IsAssociatedPrime (Mathlib/RingTheory/Ideal/AssociatedPrime/Basic.lean:98, defined with the radical of the colon), which for Noetherian R is `I.IsPrime ∧ ∃ x, I = colon ⊥ {x}` by isAssociatedPrime_iff (Basic.lean:114-116), and colon ⊥ {x} = Ann(x) by Submodule.mem_colon_singleton (Mathlib/RingTheory/Ideal/Colon.lean:48). Lines read with sed -n on 2026-10-10."
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-cm-local-maximal-chain-length",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lead_note": "Composed leaf accepted by L (2026-10-10): Module.associatedPrimes.minimalPrimes_annihilator_subset_associatedPrimes (AssociatedPrime/Localization.lean:128) for M = R with annihilator bot, and isAssociatedPrime_iff (AssociatedPrime/Basic.lean:114, Noetherian case) giving p = colon bot {z}, i.e. Ann(z) = p; checked with sed. One-line specialization (B8).",
+ "reviewed": "pass (L, 2026-10-10): leaf, declarations checked by sed."
+}

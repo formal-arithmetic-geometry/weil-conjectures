@@ -1045,3 +1045,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 07:57 L: accepted lem-weil-pbc-affine-pushforward-ideal-product (6 steps, no new nodes; tool_uses pqf-lem-pushforward-qcoh recorded by L).
 - 07:57 L: accepted lem-weil-pbc-cm-local-dimension-drop-regular-sequence (5 steps, no new nodes).
 - 08:00 L: accepted lem-weil-pbc-cm-local-quotient-nonzerodivisor-cm (5 steps, no new nodes).
+- 08:02 L: accepted lem-weil-pbc-cm-local-maximal-chain-length (8 steps; new leaf noetherian-minimal-prime-associated 05BV, new unsplit nodes associated-prime-power-quotient 0CN5 and cm-local-associated-prime-minimal 0BUS).
