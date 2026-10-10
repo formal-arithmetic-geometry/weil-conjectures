@@ -11,11 +11,120 @@
   "def-weil-pbc-flat-ring-map",
   "def-weil-finitely-generated-module",
   "def-weil-module-base-change",
-  "def-weil-pbc-module-localization-away"
+  "def-weil-pbc-module-localization-away",
+  "def-weil-ring-localization-away"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "($\\Rightarrow$) Let $M$ be generated over $R$ by $m_1,\\dots,m_r$ [def-weil-finitely-generated-module]. In $M\\otimes_RS$ [def-weil-module-base-change] every element is a sum of pure tensors $m\\otimes s=s\\cdot(m\\otimes1)$, and writing $m=\\sum_ka_km_k$ gives $m\\otimes1=\\sum_k\\varphi(a_k)(m_k\\otimes1)$; so $m_1\\otimes1,\\dots,m_r\\otimes1$ generate $M\\otimes_RS$ over $S$. In $M_{f_i}$ [def-weil-pbc-module-localization-away] every element is $m/f_i^e=(1/f_i^e)\\cdot(m/1)=\\sum_k(a_k/f_i^e)\\cdot(m_k/1)$; so $m_1/1,\\dots,m_r/1$ generate $M_{f_i}$ over $R_{f_i}$.",
+   "uses": [
+    "def-weil-finitely-generated-module",
+    "def-weil-module-base-change",
+    "def-weil-pbc-module-localization-away"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "More on Algebra, Remark Tag 05EU (remark-formal-glueing-algebras, line 25036): ascent of finiteness"
+   }
+  },
+  {
+   "text": "($\\Leftarrow$; the ring $T$ and its flatness.) Put $T_0=S$, $T_i=R_{f_i}$ for $1\\le i\\le t$ [def-weil-ring-localization-away], $T=T_0\\times T_1\\times\\cdots\\times T_t$ with componentwise ring operations, and $\\psi:R\\to T$, $\\psi(r)=(\\varphi(r),r/1,\\dots,r/1)$, a ring homomorphism. As an $R$-module via $\\psi$, $T$ is the product of the $R$-modules $T_0$ (via $\\varphi$) and $T_i$ (via $r\\mapsto r/1$), with componentwise operations. $T_0=S$ is flat over $R$ by hypothesis [def-weil-pbc-flat-ring-map]; each $R_{f_i}$ is flat over $R$, being the localization of $R$ at the multiplicative set $\\{1,f_i,f_i^2,\\dots\\}$ [lem-weil-pbc-localization-flat]. Hence $\\psi$ is flat [lem-weil-pbc-finite-product-flat-modules].",
+   "uses": [
+    "def-weil-ring-localization-away",
+    "def-weil-pbc-flat-ring-map",
+    "lem-weil-pbc-localization-flat",
+    "lem-weil-pbc-finite-product-flat-modules"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "More on Algebra, Remark Tag 05EU (line 25046): 'R -> S x prod R_{f_i} is faithfully flat' (flatness part, not argued in the source)"
+   }
+  },
+  {
+   "text": "($\\operatorname{Spec}T\\to\\operatorname{Spec}R$ is surjective.) For $0\\le j\\le t$ let $\\pi_j:T\\to T_j$ be the projection, a ring homomorphism; if $\\mathfrak q_j\\subset T_j$ is a prime ideal then $\\pi_j^{-1}(\\mathfrak q_j)$ is a prime ideal of $T$ and $\\psi^{-1}(\\pi_j^{-1}(\\mathfrak q_j))=(\\pi_j\\psi)^{-1}(\\mathfrak q_j)$, where $\\pi_0\\psi=\\varphi$ and $\\pi_i\\psi$ is the localization map $R\\to R_{f_i}$. So it suffices to show that every prime $\\mathfrak p\\subset R$ [def-weil-affine-spectrum] is $(\\pi_j\\psi)^{-1}(\\mathfrak q_j)$ for some $j$ and some prime $\\mathfrak q_j$ of $T_j$. (a) If $I\\not\\subseteq\\mathfrak p$, then $f_i\\notin\\mathfrak p$ for some $i$, since otherwise $I=(f_1,\\dots,f_t)\\subseteq\\mathfrak p$. By [lem-weil-pbc-basic-subset-immersion-image] with $A=R$, $f=f_i$ and $n=0$ (so $J=0$, $A/J=R$ and $B=R_{f_i}$, the map $A\\to A/J\\to B$ being the localization map), the image of $\\operatorname{Spec}R_{f_i}\\to\\operatorname{Spec}R$ is $D(f_i)=\\{\\mathfrak p: f_i\\notin\\mathfrak p\\}$, which contains $\\mathfrak p$: there is a prime $\\mathfrak q$ of $R_{f_i}$ whose inverse image in $R$ is $\\mathfrak p$. (b) If $I\\subseteq\\mathfrak p$, let $\\theta:R/I\\to S/IS$, $r+I\\mapsto\\varphi(r)+IS$, be the isomorphism of the hypothesis and $\\rho:S\\to S/IS$ the quotient map, so $\\rho\\varphi=\\theta\\circ(r\\mapsto r+I)$. The ideal $\\bar{\\mathfrak p}=\\mathfrak p/I$ of $R/I$ is prime, hence so is its image $\\theta(\\bar{\\mathfrak p})$ under the ring isomorphism $\\theta$, and $\\mathfrak q=\\rho^{-1}(\\theta(\\bar{\\mathfrak p}))$ is a prime ideal of $S$. For $r\\in R$: $\\varphi(r)\\in\\mathfrak q\\iff\\theta(r+I)\\in\\theta(\\bar{\\mathfrak p})\\iff r+I\\in\\bar{\\mathfrak p}\\iff r\\in\\mathfrak p$, the last because $I\\subseteq\\mathfrak p$. So $\\varphi^{-1}(\\mathfrak q)=\\mathfrak p$.",
+   "uses": [
+    "def-weil-affine-spectrum",
+    "lem-weil-pbc-basic-subset-immersion-image"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "More on Algebra, Remark Tag 05EU (line 25046): surjectivity on spectra, which the source leaves to the reader; the hypothesis R/I = S/IS of Lemma Tag 05EK (lemma-recover-module-from-glueing-data, line 24579) gives the primes containing I, the D(f_i) the others"
+   }
+  },
+  {
+   "text": "($\\psi$ is faithfully flat.) By the two previous steps $\\psi:R\\to T$ is flat and $\\operatorname{Spec}T\\to\\operatorname{Spec}R$ is surjective, so $\\psi$ is faithfully flat [lem-weil-pbc-flat-surjective-spectrum-faithfully-flat], [def-weil-pbc-faithfully-flat-ring-map].",
+   "uses": [
+    "lem-weil-pbc-flat-surjective-spectrum-faithfully-flat",
+    "def-weil-pbc-faithfully-flat-ring-map"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "More on Algebra, Remark Tag 05EU (line 25046); Algebra, Lemma Tag 00HQ (lemma-ff-rings, line 9164)"
+   }
+  },
+  {
+   "text": "($T\\otimes_RM$ as a product.) Regard $T\\otimes_RM$ as a $T$-module by $t\\cdot(u\\otimes m)=tu\\otimes m$, and $N=(T_0\\otimes_RM)\\times\\cdots\\times(T_t\\otimes_RM)$ as a $T$-module componentwise, $(t_j)_j\\cdot(z_j)_j=(t_jz_j)_j$, with $T_j$ acting on $T_j\\otimes_RM$ through the left factor. By [lem-weil-pbc-tensor-finite-product] (with the $t+1$ $R$-modules $P_k=T_{k-1}$, $1\\le k\\le t+1$, and $N=M$) the map $\\Phi:T\\otimes_RM\\to N$, $(u_j)_j\\otimes m\\mapsto(u_j\\otimes m)_j$, is an isomorphism of $R$-modules. It is $T$-linear: for $t=(t_j)_j\\in T$, $\\Phi(t\\cdot((u_j)_j\\otimes m))=\\Phi((t_ju_j)_j\\otimes m)=(t_ju_j\\otimes m)_j=t\\cdot\\Phi((u_j)_j\\otimes m)$, and both $x\\mapsto\\Phi(tx)$ and $x\\mapsto t\\Phi(x)$ are additive, so they agree on the pure tensors, which generate $T\\otimes_RM$ as an abelian group. Moreover $S\\otimes_RM\\to M\\otimes_RS$, $s\\otimes m\\mapsto m\\otimes s$, is an isomorphism of $S$-modules (the symmetry of the tensor product; $S$ acting on $M\\otimes_RS$ as in [def-weil-module-base-change]), and $R_{f_i}\\otimes_RM\\to M_{f_i}$, $(a/f_i^e)\\otimes m\\mapsto am/f_i^e$, is an isomorphism of $R_{f_i}$-modules [lem-weil-pbc-localization-tensor], [def-weil-pbc-module-localization-away]. Hence $T_0\\otimes_RM$ is a finitely generated $S$-module iff $M\\otimes_RS$ is, and $T_i\\otimes_RM$ is a finitely generated $R_{f_i}$-module iff $M_{f_i}$ is (an isomorphism carries generators to generators).",
+   "uses": [
+    "lem-weil-pbc-tensor-finite-product",
+    "def-weil-module-base-change",
+    "lem-weil-pbc-localization-tensor",
+    "def-weil-pbc-module-localization-away",
+    "def-weil-finitely-generated-module"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "More on Algebra, Remark Tag 05EU (line 25036): 'M' and 'M_i' are the components of M tensor (S x prod R_{f_i})"
+   }
+  },
+  {
+   "text": "($T\\otimes_RM$ is finitely generated over $T$.) Assume $M\\otimes_RS$ is finitely generated over $S$ and each $M_{f_i}$ over $R_{f_i}$. By the previous step each $N_j=T_j\\otimes_RM$ is generated over $T_j$ by finitely many elements $z_{j,1},\\dots,z_{j,b_j}$ [def-weil-finitely-generated-module]. For $z\\in N_j$ let $\\iota_j(z)\\in N$ have $z$ in place $j$ and $0$ elsewhere, and for $c\\in T_j$ let $\\tau_j(c)\\in T$ have $c$ in place $j$ and $0$ elsewhere. For $n=(n_j)_j\\in N$ write $n_j=\\sum_lc_{j,l}z_{j,l}$ with $c_{j,l}\\in T_j$; then $n=\\sum_j\\iota_j(n_j)=\\sum_j\\sum_l\\tau_j(c_{j,l})\\cdot\\iota_j(z_{j,l})$ by the componentwise action. So the finitely many $\\iota_j(z_{j,l})$ generate $N$ over $T$, and their images under the $T$-linear isomorphism $\\Phi^{-1}$ generate $T\\otimes_RM$ over $T$.",
+   "uses": [
+    "def-weil-finitely-generated-module"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "More on Algebra, Remark Tag 05EU (line 25036)"
+   }
+  },
+  {
+   "text": "(Descent.) $\\psi:R\\to T$ is faithfully flat (step 4) and $T\\otimes_RM$ is a finitely generated $T$-module (step 6), so $M$ is a finitely generated $R$-module [lem-weil-pbc-faithfully-flat-descent-finite-module].",
+   "uses": [
+    "lem-weil-pbc-faithfully-flat-descent-finite-module"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "More on Algebra, Remark Tag 05EU (line 25046) citing Algebra, Lemma Tag 03C4 (lemma-descend-properties-modules, line 20307) (1)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-finitely-generated-module",
+  "def-weil-module-base-change",
+  "def-weil-pbc-module-localization-away",
+  "def-weil-ring-localization-away",
+  "def-weil-pbc-flat-ring-map",
+  "lem-weil-pbc-localization-flat",
+  "lem-weil-pbc-finite-product-flat-modules",
+  "def-weil-affine-spectrum",
+  "lem-weil-pbc-basic-subset-immersion-image",
+  "lem-weil-pbc-flat-surjective-spectrum-faithfully-flat",
+  "def-weil-pbc-faithfully-flat-ring-map",
+  "lem-weil-pbc-tensor-finite-product",
+  "lem-weil-pbc-localization-tensor",
+  "lem-weil-pbc-faithfully-flat-descent-finite-module"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "More on Algebra, Remark Tag 05EU (remark-formal-glueing-algebras, line 25036), case 'finite'; with Algebra, Lemma Tag 03C4 (lemma-descend-properties-modules, line 20307) (1) and Lemma Tag 00HQ (lemma-ff-rings, line 9164); the faithful flatness of R -> S x prod R_{f_i}, asserted without argument in 05EU, is written out in steps 2-4"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -37,10 +146,17 @@
    "results": "RingTheory/Finiteness/Descent.lean:34 Module.Finite.of_finite_tensorProduct_of_faithfullyFlat (read); Flat/FaithfullyFlat/Basic.lean:634 IsNoetherian.of_isNoetherian_tensorProduct_of_faithfullyFlat; no statement for the formal glueing data",
    "verdict": "no match (candidate recorded above)",
    "date": "2026-10-10"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "an R-module M is finitely generated iff M ⊗ S is finitely generated and each localization M_{f_i} is finitely generated, where R → S flat and R/I ≅ S/IS (formal glueing)",
+   "results": "Module.flat_of_isLocalized_span, instFinitePresentationTensorProduct, Module.Finite.of_localizationSpan_finite' (Mathlib.RingTheory.Localization.Finiteness; needs the f_i to generate the unit ideal), Module.flat_of_localized_span, Module.flat_iff",
+   "date": "2026-10-10",
+   "verdict": "no match; the item is assembled from the leaves Module.Finite.of_finite_tensorProduct_of_faithfullyFlat, Module.FaithfullyFlat.of_comap_surjective, TensorProduct.piLeft, Module.Flat.directSum"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "worker",
@@ -60,5 +176,12 @@
   }
  },
  "chapter": "sec-proper-base-change",
- "unit": "sk-thm-p1"
+ "unit": "sk-thm-p1",
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "lem-weil-pbc-formal-glueing-finite-modules",
+  "worker": "stage1",
+  "summary": "Split following Stacks More on Algebra Remark 05EU (case 'finite'): seven steps. (1) the forward direction, elementary (images of generators generate the base change and the localizations). (2)-(4) R -> T = S x prod R_{f_i} is faithfully flat: flat as a finite product of flat modules (new leaf lem-weil-pbc-finite-product-flat-modules; localizations flat by lem-weil-pbc-localization-flat), surjective on spectra (primes not containing I lie in some D(f_i), by the existing leaf lem-weil-pbc-basic-subset-immersion-image with n = 0; primes containing I come from S by the isomorphism R/I = S/IS, written out), then 00HQ (lem-weil-pbc-flat-surjective-spectrum-faithfully-flat). The source asserts this faithful flatness without argument. (5) T (x)_R M is the T-module product of S (x) M = M (x) S and R_{f_i} (x) M = M_{f_i} (existing leaf lem-weil-pbc-tensor-finite-product, created meanwhile by the sibling item lem-weil-pbc-formal-glueing-complex-exact and cited instead of a second node; T-linearity checked on pure tensors; lem-weil-pbc-localization-tensor). (6) a componentwise module over a finite product of rings is finite when each component is (elementary, generators written). (7) descent 03C4(1) (new leaf lem-weil-pbc-faithfully-flat-descent-finite-module). Statement unchanged; def-weil-ring-localization-away added to stmt_deps. Two new nodes, both Mathlib leaves (Module.Flat.directSum + Module.Flat.of_linearEquiv + DirectSum.linearEquivFunOnFintype; Module.Finite.of_finite_tensorProduct_of_faithfullyFlat). The existing candidate Module.Finite.of_finite_tensorProduct_of_faithfullyFlat is not a one-line specialization for the item itself (faithful flatness of T and the product decomposition are the content of steps 2-6); one more search (leanfinder) recorded."
+ },
+ "reviewed": "Reviewed by L 2026-10-10: faithful to More on Algebra 05EU 'finite' with the unargued faithful flatness of R -> S x prod R_{f_i} written out (steps 2-4: flat product, surjectivity on Spec via D(f_i) and the isomorphism R/I = S/IS, 00HQ), the product decomposition of T⊗M (step 5, tensor-finite-product leaf) and descent by 03C4 (1) (new exact leaf). Finite products of flat modules: new composed leaf. Not a Mathlib leaf itself."
 }

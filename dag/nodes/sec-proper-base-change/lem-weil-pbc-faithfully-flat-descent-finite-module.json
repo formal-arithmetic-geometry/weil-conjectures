@@ -1,0 +1,82 @@
+{
+ "id": "lem-weil-pbc-faithfully-flat-descent-finite-module",
+ "kind": "statement",
+ "title": "Finite generation descends along faithfully flat ring maps",
+ "statement": "Let $\\psi:R\\to T$ be a faithfully flat homomorphism of commutative rings [def-weil-pbc-faithfully-flat-ring-map] and $M$ an $R$-module. Regard $T\\otimes_RM$ as a $T$-module by $t\\cdot(u\\otimes m)=tu\\otimes m$. If $T\\otimes_RM$ is a finitely generated $T$-module [def-weil-finitely-generated-module], then $M$ is a finitely generated $R$-module.",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Algebra, Lemma Tag 03C4 (lemma-descend-properties-modules, line 20307), part (1)"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-faithfully-flat-ring-map",
+  "def-weil-finitely-generated-module"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "module is finite if its base change along a faithfully flat algebra is finite",
+   "results": "AlgebraicGeometry.IsFinite.instIsStableUnderBaseChangeScheme, Module.Finite.base_change (Mathlib.RingTheory.TensorProduct.Finite), IsBaseChange.finrank_eq, RingHom.finite_isStableUnderBaseChange, Module.Flat.of_flat_tensorProduct, Module.FaithfullyFlat.toFlat",
+   "date": "2026-10-10",
+   "verdict": "no direct hit (ascent Module.Finite.base_change only)"
+  },
+  {
+   "tool": "loogle",
+   "query": "Module.Finite, Module.FaithfullyFlat, TensorProduct",
+   "results": "Module.Finite.of_finite_tensorProduct_of_faithfullyFlat (Mathlib.RingTheory.Finiteness.Descent); Algebra.IsFiniteSplit.exists_tensorProduct_of_etale",
+   "date": "2026-10-10",
+   "verdict": "match: Module.Finite.of_finite_tensorProduct_of_faithfullyFlat"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "finiteness of a module descends along a faithfully flat ring map: if T ⊗ M is finitely generated over T then M is finitely generated",
+   "results": "Module.FaithfullyFlat.instTensorProduct, Module.Flat.of_flat_tensorProduct, Module.flat_iff, Module.Flat.out, Module.Flat.iff_flat_tensorProduct",
+   "date": "2026-10-10",
+   "verdict": "no direct hit (the flat analogue 03C4(3) came up)"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -n 'of_finite_tensorProduct_of_faithfullyFlat' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/RingTheory/Finiteness/Descent.lean; sed -n 20,45p RingTheory/Finiteness/Descent.lean",
+   "results": "RingTheory/Finiteness/Descent.lean:34 Module.Finite.of_finite_tensorProduct_of_faithfullyFlat (read; uses at :73, :138)",
+   "date": "2026-10-10",
+   "verdict": "match"
+  },
+  {
+   "tool": "local_search",
+   "query": "Module.Finite.of_finite_tensorProduct_of_faithfullyFlat (project ~/weil-conjectures-slopmaster2)",
+   "results": "lemma in .lake/packages/mathlib/Mathlib/RingTheory/Finiteness/Descent.lean (index: unavailable)",
+   "date": "2026-10-10",
+   "verdict": "exists"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "Module.Finite.of_finite_tensorProduct_of_faithfullyFlat",
+  "file": "Mathlib/RingTheory/Finiteness/Descent.lean",
+  "how": "exact: `lemma Module.Finite.of_finite_tensorProduct_of_faithfullyFlat {M : Type*} [AddCommGroup M] [Module R M] [Module.FaithfullyFlat R T] [Module.Finite T (T ⊗[R] M)] : Module.Finite R M` (Descent.lean:34-36, R, T commutative rings, [Algebra R T]) with the algebra structure ψ.toAlgebra; T ⊗[R] M carries the T-module structure t·(u⊗m) = tu⊗m of the node; faithfully flat ring maps are matched to Module.FaithfullyFlat on [def-weil-pbc-faithfully-flat-ring-map] (RingHom.faithfullyFlat_algebraMap_iff); Module.Finite is [def-weil-finitely-generated-module]. Lines read with sed -n 2026-10-10.",
+  "line": 34
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-formal-glueing-finite-modules",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "reviewed": "Reviewed by L 2026-10-10: exact Mathlib leaf Module.Finite.of_finite_tensorProduct_of_faithfullyFlat (Descent.lean line 34, read); Algebra 03C4 (1)."
+}

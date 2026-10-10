@@ -1,0 +1,82 @@
+{
+ "id": "lem-weil-pbc-finite-product-flat-modules",
+ "kind": "statement",
+ "title": "A finite product of flat modules is flat",
+ "statement": "Let $R$ be a commutative ring, $n\\ge0$ an integer and $M_1,\\dots,M_n$ flat $R$-modules [def-weil-pbc-flat-ring-map]. Then the product $M_1\\times\\cdots\\times M_n$, an $R$-module with the componentwise operations, is a flat $R$-module.",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Algebra, Definition Tag 00HB (definition-flat, line 8621) with Lemma Tag 00DD (lemma-tensor-products-commute-with-limits, line 1934): $(\\bigoplus_jM_j)\\otimes_RN=\\bigoplus_j(M_j\\otimes_RN)$ and a direct sum of injective maps is injective; the version for sheaves of modules is Modules, Lemma Tag 05NG (lemma-colimits-flat, modules.tex line 2611)"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-flat-ring-map"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "finite product of flat modules is flat",
+   "results": "Module.Flat.instTensorProduct, Module.Flat.dfinsupp_iff, Module.FaithfullyFlat.toFlat, Module.Flat.directSum (Mathlib.RingTheory.Flat.Basic), Module.Flat.of_flat_tensorProduct",
+   "date": "2026-10-10",
+   "verdict": "generalization: Module.Flat.directSum (direct sums of flat modules) specializes in one line"
+  },
+  {
+   "tool": "loogle",
+   "query": "Module.Flat ?R ((i : ?ι) → ?M i)",
+   "results": "none",
+   "date": "2026-10-10",
+   "verdict": "no exact Pi statement"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "a finite direct product of flat modules over a commutative ring is flat",
+   "results": "Module.Flat.dfinsupp_iff, Module.Flat.dfinsupp, Module.Flat.directSum_iff, Module.Flat.directSum (Mathlib.RingTheory.Flat.Basic), Module.FaithfullyFlat.directSum",
+   "date": "2026-10-10",
+   "verdict": "generalization: Module.Flat.directSum, one line via DirectSum.linearEquivFunOnFintype"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rnE 'Flat R \\((∀|Π i|.* × )|Flat\\.pi|Flat\\.prod|flat_pi|flat_prod' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib ; grep -n 'directSum\\|of_linearEquiv' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/RingTheory/Flat/Basic.lean; sed -n 181,183p and 205,219p RingTheory/Flat/Basic.lean; sed -n 150,151p Algebra/DirectSum/Module.lean",
+   "results": "no Pi/Prod flatness statement; RingTheory/Flat/Basic.lean:181 Module.Flat.of_linearEquiv, :207 directSum_iff, :217 instance Module.Flat.directSum; Algebra/DirectSum/Module.lean:150 DirectSum.linearEquivFunOnFintype (read)",
+   "date": "2026-10-10",
+   "verdict": "match by one-line specialization"
+  },
+  {
+   "tool": "local_search",
+   "query": "DirectSum.linearEquivFunOnFintype (project ~/weil-conjectures-slopmaster2)",
+   "results": "DirectSum.linearEquivFunOnFintype in Mathlib/Algebra/DirectSum/Module.lean (index: unavailable)",
+   "date": "2026-10-10",
+   "verdict": "exists"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "Module.Flat.directSum, Module.Flat.of_linearEquiv, DirectSum.linearEquivFunOnFintype",
+  "file": "Mathlib/RingTheory/Flat/Basic.lean",
+  "how": "specializes in one line: `instance Module.Flat.directSum [∀ i, Flat R (M i)] : Flat R (⨁ i, M i)` (RingTheory/Flat/Basic.lean:217) with ι = Fin n, and `Module.Flat.of_linearEquiv [Flat R M] (e : N ≃ₗ[R] M) : Flat R N` (Basic.lean:181) applied to `(DirectSum.linearEquivFunOnFintype R ι M).symm : (∀ i, M i) ≃ₗ[R] ⨁ i, M i` (Mathlib/Algebra/DirectSum/Module.lean:150, for Fintype ι); the binary product M × N is the case n = 2 up to the linear equivalence with Fin 2 → _. Lines read with sed -n 2026-10-10.",
+  "line": 217
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-formal-glueing-finite-modules",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lead_note": "Composed leaf: Module.Flat.directSum (Mathlib/RingTheory/Flat/Basic.lean line 217) with iota = Fin n, transported along DirectSum.linearEquivFunOnFintype (Mathlib/Algebra/DirectSum/Module.lean line 150) by Module.Flat.of_linearEquiv (Flat/Basic.lean line 181); one declaration per clause, lines read by L.",
+ "reviewed": "Reviewed by L 2026-10-10: composed Mathlib leaf; lines read."
+}
