@@ -1,8 +1,8 @@
 # Work queue
 
-901 items; claim with `tools/claim.py next <group> [--stage N]`.
+900 items; claim with `tools/claim.py next <group> [--stage N]`.
 
-## Stage 1: nodes to split (141)
+## Stage 1: nodes to split (139)
 
 | node | distance to a target | Lean state on the done branch |
 |---|---|---|
@@ -27,7 +27,6 @@
 | `lem-pc-base-change-rhom-perfect` | 3019 | none |
 | `lem-pc-global-hom-adjunction` | 3019 | none |
 | `lem-pc-perfect-generator-exists` | 3019 | none |
-| `lem-pc-perfect-generator-pullback` | 3019 | none |
 | `lem-sc-affine-perfect-map-lift` | 3019 | none |
 | `lem-sc-flat-precompose-pus` | 3019 | none |
 | `def-pc-global-derived-rhom` | 3020 | none |
@@ -71,7 +70,6 @@
 | `lem-pc-coherent-hi` | - | sorry_here |
 | `lem-pod-lattice-stabilizer-open` | - | none |
 | `lem-sc-affine-generic-second` | - | sorry_here |
-| `lem-sc-genus-invariant` | - | none |
 | `lem-sc-global-functions` | - | rests_on_sorry |
 | `lem-sc-pic-affine-quotient` | - | none |
 | `lem-weil-pbc-constant-subsheaf-generic` | - | none |
@@ -148,7 +146,7 @@
 | `lem-pur-rhom-well-defined` | - | none |
 | `lem-zl-noether-normalization-dimension` | - | none |
 
-## Stage 2: nodes to state (760)
+## Stage 2: nodes to state (761)
 
 | node | distance to Mathlib | kind |
 |---|---|---|
@@ -338,6 +336,7 @@
 | `lem-sc-four-lemma` | 1 | state |
 | `lem-sc-free-prime-membership` | 1 | state |
 | `lem-sc-generic-stalk-finite-length` | 1 | state |
+| `lem-sc-genus-invariant` | 1 | state |
 | `lem-sc-global-sections-left-exact` | 1 | state |
 | `lem-sc-glue-component-line-bundles` | 1 | state |
 | `lem-sc-glue-component-reduced-cover-sections` | 1 | state |
@@ -913,7 +912,7 @@
 | `lem-weil-pbc-projective-space-zero-isomorphism` | 4 | state |
 | `def-nagata-fixed-base-separated-stage` | 6 | state |
 
-Not open yet: 1541 nodes that wait for a statement dependency, 181 nodes that wait for stage 1.
+Not open yet: 1542 nodes that wait for a statement dependency, 179 nodes that wait for stage 1.
 
 ## Stage 3: modules to prove (0)
 
