@@ -3,7 +3,7 @@
  "blueprint": {
   "is": "lemma-weil-pbc-fibre-product-limit",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "Base change commutes with the neighbourhood limit",
@@ -13,28 +13,78 @@
   "place": "node lemma-weil-pbc-fibre-product-limit, order 945"
  },
  "stmt_deps": [
-  "def-weil-pbc-scheme-conventions"
+  "def-weil-pbc-scheme-conventions",
+  "def-weil-pbc-strict-henselization-limit",
+  "def-pc-fibre-product"
  ],
  "proof": [
   {
-   "text": "On affine charts, tensor products commute with filtered colimits, and\nquasi-compactness gives finitely many charts while quasi-separatedness gives\nquasi-compact pairwise intersections; the affine identifications glue to the\ndisplayed identification of\n[def-weil-pbc-strict-henselization-limit].",
+   "text": "Write $\\mathcal N_{\\bar s}$ for all pointed etale neighbourhoods and $\\mathcal J_{\\bar s}$ for the small full subcategory of affine representatives chosen in [def-weil-pbc-strict-henselization-limit]. The definition gives $S_{(\\bar s)}=\\operatorname{Spec}(\\varinjlim_{\\mathcal J_{\\bar s}^{\\mathrm{op}}}A_V)$; [lem-weil-pbc-spec-small-colimit-limit] says that its canonical projections form a limit cone over $\\mathcal J_{\\bar s}$. Every affine pointed neighbourhood is isomorphic to a representative. Transport its projection through such an isomorphism; naturality makes this independent of the choice, and restricting or extending cones along these isomorphisms gives inverse correspondences. Hence the same cone is limiting over all affine pointed neighbourhoods; clause (2) of [lem-weil-pbc-colimit-initial-full-subcategory], applied in $\\mathbf{Sch}^{\\mathrm{op}}$, identifies the resulting limit with the representative limit and its projections. The affine full subcategory is initial in $\\mathcal N_{\\bar s}$ by [lemma-weil-pbc-affine-neighbourhood-cofinal]; clause (1) of [lem-weil-pbc-colimit-initial-full-subcategory], again in $\\mathbf{Sch}^{\\mathrm{op}}$, carries the limit cone to all of $\\mathcal N_{\\bar s}$. Thus $S_{(\\bar s)}$ with its canonical projections $p_V:S_{(\\bar s)}\\to V$ is a limit of the full neighbourhood diagram, and $p_S:S_{(\\bar s)}\\to S$ is its structure map, since $(S,\\bar s)$ is an object.",
    "uses": [
+    "def-weil-pbc-strict-henselization-limit",
+    "lem-weil-pbc-spec-small-colimit-limit",
+    "lemma-weil-pbc-affine-neighbourhood-cofinal",
+    "lem-weil-pbc-colimit-initial-full-subcategory",
+    "lem-weil-pbc-pointed-etale-neighbourhoods-cofiltered"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-curve-estimates/sk-prop-h2/lemma-weil-pbc-fibre-product-limit.md",
+    "place": "proof, affine-neighbourhood limit comparison; universal-property expansion using Stacks Tags 01YW, 0BUC and 04E7"
+   }
+  },
+  {
+   "text": "Let $T$ be any scheme and let $g_V:T\\to X\\times_SV$ be a compatible cone indexed by $\\mathcal N_{\\bar s}$. Write $x_V:T\\to X$ and $v_V:T\\to V$ for its two components. The $v_V$ form a cone over $\\mathcal N_{\\bar s}$, so Step 1 gives a unique $b:T\\to S_{(\\bar s)}$ with $p_Vb=v_V$ for every $V$. For any $V,W$, cofilteredness [lem-weil-pbc-pointed-etale-neighbourhoods-cofiltered] supplies $U\\to V$ and $U\\to W$; compatibility of the $g$'s and the fibre-product projections gives $x_V=x_U=x_W$. Call the common map $a:T\\to X$. At the object $(S,\\bar s)$, $g_S:T\\to X\\times_SS$ gives $fa=v_S=p_Sb$. The universal property [def-pc-fibre-product] therefore gives a unique $h:T\\to X\\times_SS_{(\\bar s)}$ with components $a,b$; for every $V$, its projection to $X\\times_SV$ has components $a,p_Vb=x_V,v_V$, hence equals $g_V$. If two such $h$ induce the same cone, their $S_{(\\bar s)}$ components agree by the limit uniqueness of Step 1 and their $X$ components agree already at $S$; fibre-product uniqueness makes them equal. Thus the canonical cone from $X\\times_SS_{(\\bar s)}$ is limiting and gives the displayed isomorphism.",
+   "uses": [
+    "lem-weil-pbc-pointed-etale-neighbourhoods-cofiltered",
+    "def-pc-fibre-product",
     "def-weil-pbc-strict-henselization-limit"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-curve-estimates/sk-prop-h2/lemma-weil-pbc-fibre-product-limit.md",
+    "place": "proof, global fibre-product limit; direct universal-property expansion"
+   }
   }
  ],
  "proof_deps": [
-  "def-weil-pbc-strict-henselization-limit"
+  "def-weil-pbc-strict-henselization-limit",
+  "lem-weil-pbc-spec-small-colimit-limit",
+  "lemma-weil-pbc-affine-neighbourhood-cofinal",
+  "lem-weil-pbc-colimit-initial-full-subcategory",
+  "lem-weil-pbc-pointed-etale-neighbourhoods-cofiltered",
+  "def-pc-fibre-product"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/master/blueprint/sec-curve-estimates/sk-prop-h2/lemma-weil-pbc-fibre-product-limit.md",
   "place": "## Proof"
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "base change of a scheme over a stage along a cofiltered limit of schemes with affine transition maps",
+   "results": "No single Mathlib declaration for the general base-change limit; project node lem-weil-pbc-scheme-over-limit records the source theorem and closed source declaration.",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "IsLimit of pullback cone over affine transition inverse system of schemes",
+   "results": "Only affine-transition limit infrastructure and open-subscheme special cases; no general pullback/base-change theorem.",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "rg -n 'baseChangeCone|isLimitBaseChange|pullback.*limit|limit.*pullback' /home/ubuntu/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicGeometry",
+   "results": "No matching declaration in pinned Mathlib; the project source has AlgebraicGeometry.isLimitBaseChangeCone, already represented by lem-weil-pbc-scheme-over-limit.",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [
   "detailed_form",
@@ -67,5 +117,34 @@
   }
  },
  "chapter": "sec-curve-estimates",
- "unit": "sk-prop-h2"
+ "unit": "sk-prop-h2",
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "lemma-weil-pbc-fibre-product-limit",
+  "worker": "fibre_limit",
+  "summary": "Repaired the returned split by replacing the unsupported directed-system comparison with a direct universal-property proof. The strict-henselization cone is limiting over affine representatives, all affine neighbourhoods, and then all pointed neighbourhoods. A compatible cone to the fibre products supplies one map to the strict henselization and, by cofilteredness, one map to X; fibre-product uniqueness completes the proof. Quasi-compactness and quasi-separatedness are unused.",
+  "blueprint": "Step 1 realizes the blueprint's affine-neighbourhood limit comparison using the existing strict-henselization definition and initial-subcategory theorem. Step 2 supplies the details of its final global fibre-product limit identification by the universal properties. The blueprint's chart-gluing sketch is unnecessary for this general categorical argument. Blueprint search found no same-as node.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-colimit-initial-full-subcategory",
+    "why": "Its clauses (1) and (2) transfer the affine-representative scheme limit to all pointed etale neighbourhoods; no node in sk-prop-h2 states this generic category-theoretic result."
+   },
+   {
+    "node": "lem-weil-pbc-pointed-etale-neighbourhoods-cofiltered",
+    "why": "Cofilteredness supplies a common refinement to compare the X-components of any two cone maps; no node in sk-prop-h2 states it."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-colimit-initial-full-subcategory",
+  "lem-weil-pbc-pointed-etale-neighbourhoods-cofiltered"
+ ],
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-fp3",
+  "group": "H1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-fp3 (reviewer sub-agent of L); spot-checked: Repaired re-push after the returns of 13:14 and 14:33 (R-fpl). Latest return: point 1 (C4/C2, unsupported directed-cofinality in step 2) repaired by the direct universal-property proof the return proposed: the directed reindexing and lem-weil-pbc-scheme-over-limit tool use are gone; point 2 (E2/B4, S_0 used twice, J_sbar smallness, proof_deps) is moot because step 1 with stage 0 is removed, and proof_deps is now the union of the steps' uses including def-pc-fibre-product. Statement unchanged (blueprint node lemma-weil-pbc-fibre-product-limit, order 945); stmt_deps adds def-weil-pbc-strict-henselization-limit and def-pc-fibre-product, which the statement uses. Step 1: def-weil-pbc-strict-henselization-limit gives S_(sbar)=Spec colim over J_sbar^op with J_sbar small; lem-weil-pbc-spec-small-colimit-limit makes the projections a limit cone over J_sbar in Schemes; transport along the essentially surjective full inclusion J_sbar into affine neighbourhoods plus clause (2) of lem-weil-pbc-colimit-initial-full-subcategory gives the limit over all affine neighbourhoods; lemma-weil-pbc-affine-neighbourhood-cofinal (affine subcategory initial) and lem-weil-pbc-pointed-etale-neighbourhoods-cofiltered (N_sbar cofiltered, (S,sbar) an object) are exactly the hypotheses of clause (1), applied in Sch^op, giving the limit over N_sbar; p_S is the structure map and p_V lie over S by cone compatibility. Step 2: checked by hand: V-components of a compatible cone form a cone (q(id x h)=hq), X-components are constant along morphisms (p(id x h)=p) hence equal for all V by common refinement, f a = v_S = p_S b from g_S, def-pc-fibre-product gives existence and uniqueness of T -> X x_S S_(sbar); uniqueness of the induced map checked via the step-1 limit and the component at S. Tool uses (both sk-thm-p1, generic black boxes, C8) accepted: lem-weil-pbc-colimit-initial-full-subcategory, lem-weil-pbc-pointed-etale-neighbourhoods-cofiltered. Small case: diagram reduced to (S,sbar) gives X x_S S = X. qcqs hypothesis unused, statement unchanged, no E7. Only the item's node and report changed, one commit, review section present; node unchanged on sheaf-dag since merge base 331bc5e29. No new nodes, no Mathlib leaves. 14:40-14:42 UTC."
+ }
 }
