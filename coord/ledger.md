@@ -2756,3 +2756,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 22:01 L: returned deliver/C1/lem-pc-flat-module-descent (reviewer RETURN: 1. B (false new statement, RETURN): lem-pc-affine-flat-module-descent omits Tag 02JO(3) hypothesis (a), that R_j (x)_{R_)
 - 22:02 UTC L deleted two abandoned delivery branches of Mathlib leaves (H1 connecting-formula, F1 degreewise-split-derived-triangle); notices
 - 22:02 L: merged deliver/J1/def-nagata-affine-fp-descent (reviewer FIX; first push; new nodes: 0)
+- 22:02 L: merged deliver/H1/lem-sc-affine-generic-second (reviewer FIX; first push; new nodes: 0)
