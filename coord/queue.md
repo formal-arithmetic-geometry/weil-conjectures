@@ -2,7 +2,7 @@
 
 914 items; claim with `tools/claim.py next <group> [--stage N]`.
 
-## Stage 1: nodes to split (332)
+## Stage 1: nodes to split (331)
 
 | node | distance to a target | Lean state on the done branch |
 |---|---|---|
@@ -14,12 +14,13 @@
 | `lem-weil-pbc-etale-sections-fpqc-descent` | 2006 | none |
 | `lem-weil-pbc-sets-affine-etale-inverse-image-comparison` | 2010 | none |
 | `lem-sc-affine-cap-section-open-dictionary` | 2012 | none |
-| `lem-sc-find-globally-generated` | 2012 | none |
 | `lem-sc-noetherian-topological-cohomology-vanishing` | 2012 | none |
 | `lem-sc-ample-proj-open` | 2013 | none |
 | `lem-sc-boundary-cech-local-lifts` | 2013 | none |
 | `lem-sc-closed-pushforward-boundary-naturality` | 2013 | none |
+| `lem-sc-jacobson-denominator-function-field` | 2013 | none |
 | `lem-sc-proj-standard-open-basis` | 2013 | none |
+| `lem-sc-separated-affine-function-field-surjective` | 2013 | none |
 | `lem-sc-topological-leray-spectral-sequence` | 2013 | none |
 | `lem-sc-torsor-h1-boundary-representative` | 2013 | none |
 | `lem-sc-torsor-h1-ext-pushforward` | 2013 | none |
@@ -35,7 +36,6 @@
 | `lem-weil-pbc-derived-finite-product` | 3007 | none |
 | `lem-weil-pbc-etale-sheaf-clopen-product` | 3007 | none |
 | `lem-weil-pbc-cohomology-over-object-localization` | 3009 | none |
-| `lem-weil-pbc-etale-cohomology-invariance-under-site-equivalence` | 3009 | none |
 | `lem-weil-pbc-etale-site-localization-open` | 3009 | none |
 | `lem-exc-etale-field-galois-classification` | 3010 | none |
 | `lem-sc-etale-fibre-product-base-change-coproduct` | 3010 | none |
@@ -51,7 +51,6 @@
 | `lem-pc-local-flat-faithful-flat-reflects-surjective` | 3013 | none |
 | `lem-pc-proper-geometrically-reduced-global-sections-separable` | 3013 | none |
 | `lem-pc-separable-polynomial-alg-closed-quotient-product` | 3013 | none |
-| `lem-sc-affine-finite-module-free-locus` | 3013 | none |
 | `lem-sc-ext-sheaf-to-global-spectral-sequence` | 3013 | none |
 | `lem-sc-ext-stalk-localization` | 3013 | none |
 | `lem-sc-ext-support-cohomology-vanishing` | 3013 | none |
@@ -339,7 +338,7 @@
 | `lem-pur-rhom-well-defined` | - | none |
 | `lem-zl-noether-normalization-dimension` | - | none |
 
-## Stage 2: nodes to state (582)
+## Stage 2: nodes to state (583)
 
 | node | distance to Mathlib | kind |
 |---|---|---|
@@ -418,6 +417,7 @@
 | `lem-pc-scheme-connected-iff-idempotents` | 1 | state |
 | `lem-pc-scheme-dimension-local-rings` | 1 | state |
 | `lem-sc-affine-cap-section-open-algebra` | 1 | state |
+| `lem-sc-affine-finite-module-free-locus` | 1 | state |
 | `lem-sc-affine-open-finite-complement` | 1 | state |
 | `lem-sc-closed-affine-union-affine` | 1 | state |
 | `lem-sc-determinant-short-exact` | 1 | state |
@@ -926,7 +926,7 @@
 | `lem-weil-pbc-p1-field-dimension-one` | 4 | state |
 | `lem-weil-pbc-projective-space-zero-isomorphism` | 4 | state |
 
-Not open yet: 350 nodes that wait for stage 1, 1164 nodes that wait for a statement dependency.
+Not open yet: 349 nodes that wait for stage 1, 1166 nodes that wait for a statement dependency.
 
 ## Stage 3: modules to prove (0)
 
