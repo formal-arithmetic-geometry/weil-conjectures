@@ -12,9 +12,52 @@
   "def-weil-pbc-coherent-formal-module",
   "def-weil-pbc-closed-subset-proper-over-base"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Fix $n\\ge1$ and $x\\in X$, and write $A=\\mathcal O_{X,x}$, $\\mathfrak a=\\mathcal I_x\\subseteq A$ (an ideal of $A$ by [lem-weil-pbc-ideal-module-product-stalk] (1)) and $M=(\\mathcal F_{n+1})_x$, an $A$-module [def-weil-pbc-module-stalk]. By the definition of $\\mathit{Coh}(X,\\mathcal I)$ [def-weil-pbc-coherent-formal-module] (1), $\\mathcal I^{n+1}\\mathcal F_{n+1}=0$ and the transition map induces an isomorphism of $\\mathcal O_X$-modules $\\mathcal F_{n+1}/\\mathcal I^n\\mathcal F_{n+1}\\to\\mathcal F_n$. Taking stalks at $x$ (a functor, so isomorphisms go to isomorphisms) and applying [lem-weil-pbc-ideal-module-product-stalk] (4) with $\\mathcal J=\\mathcal I$ and $\\mathcal F=\\mathcal F_{n+1}$ gives $\\mathfrak a^{n+1}M=(\\mathcal I^{n+1}\\mathcal F_{n+1})_x=0$ and an isomorphism of $A$-modules $M/\\mathfrak a^nM\\cong(\\mathcal F_n)_x$.",
+   "uses": [
+    "def-weil-pbc-coherent-formal-module",
+    "def-weil-pbc-module-stalk",
+    "lem-weil-pbc-ideal-module-product-stalk"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/coherent.tex",
+    "place": "Cohomology of Schemes, proof of Lemma 0CYV (lemma-systems-with-proper-support), proof of (1), first sentence; stated there without proof"
+   }
+  },
+  {
+   "text": "Algebra: for an ideal $\\mathfrak a$ of a ring $A$ and an $A$-module $M$ with $\\mathfrak a^{n+1}M=0$ ($n\\ge1$), $M/\\mathfrak a^nM=0$ implies $M=0$. Indeed $M=\\mathfrak a^nM$ gives $M=\\mathfrak a^n(\\mathfrak a^nM)=\\mathfrak a^{2n}M\\subseteq\\mathfrak a^{n+1}M=0$, since $2n\\ge n+1$. (No finiteness of $M$ and no Nakayama lemma is needed.) Conversely $M=0$ gives $M/\\mathfrak a^nM=0$. With step 1: $(\\mathcal F_n)_x=0$ if and only if $(\\mathcal F_{n+1})_x=0$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/coherent.tex",
+    "place": "Cohomology of Schemes, proof of Lemma 0CYV (lemma-systems-with-proper-support), proof of (1), first sentence; stated there without proof"
+   }
+  },
+  {
+   "text": "By the definition of the support [def-weil-pbc-closed-subset-proper-over-base] (2), $\\operatorname{Supp}(\\mathcal F_m)=\\{x:(\\mathcal F_m)_x\\ne0\\}$, so step 2, valid for every $x\\in X$, says $\\operatorname{Supp}(\\mathcal F_n)=\\operatorname{Supp}(\\mathcal F_{n+1})$ for every $n\\ge1$. Induction on $n$ gives $\\operatorname{Supp}(\\mathcal F_n)=\\operatorname{Supp}(\\mathcal F_1)$ for all $n\\ge1$. (Neither the Noetherian hypothesis nor the coherence of the $\\mathcal F_n$ is used.)",
+   "uses": [
+    "def-weil-pbc-closed-subset-proper-over-base"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/coherent.tex",
+    "place": "Cohomology of Schemes, proof of Lemma 0CYV (lemma-systems-with-proper-support), proof of (1), first sentence; stated there without proof"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-coherent-formal-module",
+  "def-weil-pbc-module-stalk",
+  "lem-weil-pbc-ideal-module-product-stalk",
+  "def-weil-pbc-closed-subset-proper-over-base"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/coherent.tex",
+  "place": "proof of Lemma 0CYV, (1): the equality of supports is stated there without proof; proof written by the agent from the definition of Coh(X, I) (coherent.tex, Section 'Coherent formal modules', Lemma 087X / lemma-inverse-systems-abelian context) and stalk computations (Modules, Lemmas 01AG, 01CB)"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -39,7 +82,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "worker",
@@ -60,5 +103,17 @@
  },
  "chapter": "sec-proper-base-change",
  "unit": "sk-thm-p1",
- "lead_note": "The proof sketch that the worker had put in the statement was moved here by L (2026-10-10): Idea: the transition map $\\mathcal F_n\\to\\mathcal F_1$ is surjective, giving $\\supseteq$; on stalks $\\mathcal F_{1,x}\\cong\\mathcal F_{n,x}/\\mathcal I_x\\mathcal F_{n,x}$ and $\\mathcal I_x^n\\mathcal F_{n,x}=0$, so $\\mathcal F_{1,x}=0$ forces $\\mathcal F_{n,x}=\\mathcal I_x^n\\mathcal F_{n,x}=0$.)"
+ "lead_note": "The proof sketch that the worker had put in the statement was moved here by L (2026-10-10): Idea: the transition map $\\mathcal F_n\\to\\mathcal F_1$ is surjective, giving $\\supseteq$; on stalks $\\mathcal F_{1,x}\\cong\\mathcal F_{n,x}/\\mathcal I_x\\mathcal F_{n,x}$ and $\\mathcal I_x^n\\mathcal F_{n,x}=0$, so $\\mathcal F_{1,x}=0$ forces $\\mathcal F_{n,x}=\\mathcal I_x^n\\mathcal F_{n,x}=0$.)",
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "lem-weil-pbc-formal-system-support-constant",
+  "worker": "stage1",
+  "summary": "Statement and stmt_deps checked against Stacks 0CYV (coherent.tex l.7531-7561, where the equality Supp(F_n)=Supp(F_1) is asserted without proof) and against def-weil-pbc-coherent-formal-module; kept unchanged. Proof written in three steps following the lead_note's idea rather than the Nakayama route: on stalks (F_n)_x = M/I_x^n M with M=(F_{n+1})_x and I_x^{n+1}M=0, and M = I_x^n M forces M = I_x^{2n}M = 0, so no finiteness or Nakayama is needed; induction gives the equality. The stalk computations ((JF)_x = J_x F_x, stalk of F/JF, stalks of powers J^n) had no node and became the new unsplit node lem-weil-pbc-ideal-module-product-stalk (Stacks Modules 01AG, 01CB), searched with LeanSearch, LeanFinder, Loogle and grep: no match. The Noetherian and coherence hypotheses of the statement are not used by the proof."
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "result": "accepted",
+  "note": "3 steps: stalks of I^{n+1}F_{n+1} = 0 and F_n = F_{n+1}/I^n F_{n+1} via a new stalk node (Modules 01AG/01CB), the elementary a^n M = M => M = a^{2n} M = 0, induction. No Nakayama and no Noetherian hypothesis needed (the statement keeps the source's hypotheses). Tags 0CYV, 01AG, 01CB verified."
+ }
 }
