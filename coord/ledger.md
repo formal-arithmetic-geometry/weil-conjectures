@@ -1727,3 +1727,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 15:08 L: returned deliver/G1/lem-sc-p1-graded-syzygy (reviewer RETURN: 1. D2/D1: lem-sc-p1-graded-syzygy step 1: the whole content of the item (graded Hilbert syzygy for k[x_0,x_1]) is moved )
 - 15:08 L: merged deliver/M1/thm-sc-serre-duality-curve (reviewer FIX; after a return; new nodes: 0)
 - 15:08 L: merged deliver/M1/lemma-weil-pbc-proper-underived-exchange (reviewer FIX; after a return; new nodes: 1)
+- 15:08 L: merged deliver/G1/lemma-weil-pbc-finite-refinement-etale-cover (reviewer FIX+NODE(1); after a return; new nodes: 5)
