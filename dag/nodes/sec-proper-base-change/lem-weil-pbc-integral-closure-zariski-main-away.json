@@ -2,13 +2,14 @@
  "id": "lem-weil-pbc-integral-closure-zariski-main-away",
  "kind": "statement",
  "title": "Zariski's Main localization at a quasi-finite prime",
- "statement": "Let $A\\to B$ be a finite-type map of commutative rings, let $B'$ be the integral closure of $A$ in $B$, and let $\\mathfrak q\\subseteq B$ be a prime with $\\mathfrak q$ prime at which $A\\to B$ is quasi-finite in the affine sense of [pqf-def-quasifinite] (Stacks Algebra Definition 10.122.3, Tags 00PL and 00PK). In Mathlib's affine encoding this is the hypothesis `[Algebra.QuasiFiniteAt A q]` for the prime ideal `q : Ideal B`. Then there is an element $h\\in B'$ with $h\\notin\\mathfrak q$ such that the localization map $B'_h\\to B_h$ is an isomorphism.",
+ "statement": "Let $A\\to B$ be a finite-type map of commutative rings, let $B'$ be the integral closure of $A$ in $B$, and let $\\mathfrak q\\subseteq B$ be a prime with $\\mathfrak q$ prime at which $A\\to B$ is quasi-finite in the affine sense of [def-weil-pbc-ring-map-quasi-finite-at-prime] (Stacks Algebra Definition 00PL). Then there is an element $h\\in B'$ with $h\\notin\\mathfrak q$ such that the localization map $B'_h\\to B_h$ is an isomorphism.",
  "source": {
   "document": "literature/stacks-project/more-algebra.tex",
   "place": "literature/stacks-project/more-algebra.tex:2524-2529, proof of Lemma Tag 09XH invoking Theorem Tag 00Q9 (theorem-main-theorem); the theorem's affine quasi-finite-at-a-prime hypothesis is Algebra Definition Tag 00PL/isolated-fibre Lemma Tag 00PK"
  },
  "stmt_deps": [
-  "pqf-def-quasifinite"
+  "def-weil-pbc-ring-map-quasi-finite-at-prime",
+  "def-weil-pbc-integral-closure"
  ],
  "proof": [],
  "proof_deps": [],
@@ -43,12 +44,7 @@
    "verdict": "match (source read)"
   }
  ],
- "mathlib_match": {
-  "declaration": "Algebra.ZariskisMainProperty.of_finiteType",
-  "file": "Mathlib/RingTheory/ZariskisMainTheorem.lean",
-  "how": "The exact declaration is `Algebra.ZariskisMainProperty.of_finiteType` in Mathlib/RingTheory/ZariskisMainTheorem.lean:660-663. It has `[Algebra.FiniteType A B]`, `(q : Ideal B)`, `[q.IsPrime]`, and `[Algebra.QuasiFiniteAt A q]`; the last typeclass is Mathlib's affine encoding of the node's quasi-finite-at-q hypothesis ([pqf-def-quasifinite], Stacks Tags 00PL and 00PK). Unfolding `ZariskisMainProperty` at lines 75-78 gives an element of the integral closure outside q and a bijective `Localization.awayMap`, which is exactly h and the localization isomorphism. Source read 2026-10-10."
- },
- "status": "mathlib",
+ "status": "unsplit",
  "merged_into": null,
  "created": {
   "by": "worker",
@@ -68,5 +64,12 @@
   }
  },
  "chapter": "sec-proper-base-change",
- "unit": "sk-thm-p1"
+ "unit": "sk-thm-p1",
+ "mathlib_candidate": {
+  "declaration": "Algebra.ZariskisMainProperty.of_finiteType",
+  "file": "Mathlib/RingTheory/ZariskisMainTheorem.lean",
+  "how": "The exact declaration is `Algebra.ZariskisMainProperty.of_finiteType` in Mathlib/RingTheory/ZariskisMainTheorem.lean:660-663. It has `[Algebra.FiniteType A B]`, `(q : Ideal B)`, `[q.IsPrime]`, and `[Algebra.QuasiFiniteAt A q]`; the last typeclass is Mathlib's affine encoding of the node's quasi-finite-at-q hypothesis ([pqf-def-quasifinite], Stacks Tags 00PL and 00PK). Unfolding `ZariskisMainProperty` at lines 75-78 gives an element of the integral closure outside q and a bijective `Localization.awayMap`, which is exactly h and the localization isomorphism. Source read 2026-10-10. Not a leaf (B8): the DAG's quasi-finite-at-q (isolated point of the fibre ring) agrees with Mathlib's Algebra.QuasiFiniteAt (quasi-finiteness of the localization) only through quasiFiniteAt_iff_isOpen_singleton_fiber (ZariskisMainTheorem.lean:754) and the fibre homeomorphism, which is a theorem."
+ },
+ "lead_note": " L 2026-10-10 07:10: demoted from a Mathlib leaf to unsplit with the match recorded as mathlib_candidate (B8), and the hypothesis now cites def-weil-pbc-ring-map-quasi-finite-at-prime instead of the scheme definition pqf-def-quasifinite.",
+ "reviewed": "Reviewed by L 2026-10-10 (statement): Algebra 00Q9 (Zariski's Main Theorem, pointwise form); demoted to unsplit (B8)."
 }
