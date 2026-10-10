@@ -1,8 +1,8 @@
 # Work queue
 
-930 items; claim with `tools/claim.py next <group> [--stage N]`.
+928 items; claim with `tools/claim.py next <group> [--stage N]`.
 
-## Stage 1: nodes to split (228)
+## Stage 1: nodes to split (226)
 
 | node | distance to a target | Lean state on the done branch |
 |---|---|---|
@@ -40,7 +40,6 @@
 | `lem-weil-pbc-unrestricted-strict-henselization-stalk` | 4009 | none |
 | `lem-pc-universal-adjoint-section` | 4010 | rests_on_sorry |
 | `lem-sc-product-tangent-space-direct-sum` | 4010 | none |
-| `lem-sc-rational-unramified-cotangent-criterion` | 4010 | none |
 | `lem-sc-strict-henselization-completion-noetherian` | 4010 | none |
 | `lem-sc-strict-henselization-cotangent-dimension` | 4010 | none |
 | `lem-sc-strict-henselization-faithfully-flat` | 4010 | none |
@@ -57,7 +56,6 @@
 | `lem-pc-kflat-bounded-flat-replacement` | 5012 | none |
 | `lem-pc-kflat-closure` | 5012 | none |
 | `lem-pc-kflat-hocolim-truncations` | 5012 | none |
-| `lem-pc-module-bounded-flat-kflat` | 5012 | none |
 | `lem-pc-noetherian-approximation-data` | 5012 | none |
 | `lem-pc-noetherian-perfect-direct-image` | 5012 | none |
 | `lem-pc-rf-base-change-complex` | 5012 | none |
@@ -942,7 +940,7 @@
 | `lem-weil-pbc-p1-field-dimension-one` | 4 | state |
 | `lem-weil-pbc-projective-space-zero-isomorphism` | 4 | state |
 
-Not open yet: 1384 nodes that wait for a statement dependency, 263 nodes that wait for stage 1.
+Not open yet: 1386 nodes that wait for a statement dependency, 261 nodes that wait for stage 1.
 
 ## Stage 3: modules to prove (0)
 
