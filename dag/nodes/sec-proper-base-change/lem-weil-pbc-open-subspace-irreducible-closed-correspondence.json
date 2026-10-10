@@ -1,0 +1,83 @@
+{
+ "id": "lem-weil-pbc-open-subspace-irreducible-closed-correspondence",
+ "kind": "statement",
+ "title": "Irreducible closed subsets of an open subspace correspond to those of the space meeting it",
+ "statement": "Let $X$ be a topological space and $U\\subseteq X$ an open subset with the subspace topology [def-kun-subspace-topology]. Let $\\mathcal I_U(X)$ be the set of irreducible [def-weil-irreducible-components] closed subsets $Z\\subseteq X$ with $Z\\cap U\\neq\\emptyset$, and $\\mathcal I(U)$ the set of irreducible closed subsets of the space $U$. Then for $Z\\in\\mathcal I_U(X)$ the set $Z\\cap U$ belongs to $\\mathcal I(U)$, and the map $\\mathcal I_U(X)\\to\\mathcal I(U)$, $Z\\mapsto Z\\cap U$, is a bijection, with inverse $T\\mapsto\\overline T$ (the closure of $T$ in $X$), such that for $Z,Z'\\in\\mathcal I_U(X)$ one has $Z\\subseteq Z'$ if and only if $Z\\cap U\\subseteq Z'\\cap U$. In particular $Z\\subsetneq Z'$ implies $Z\\cap U\\subsetneq Z'\\cap U$.",
+ "source": {
+  "document": "literature/stacks-project/topology.tex",
+  "place": "Topology, proof of Lemma Tag 0B7I (lemma-dimension-supremum-local-dimensions, line 1428), lines 1442-1446: 'the sets $U \\cap Z_i$ are irreducible closed in $U$ and the inclusions are strict (details omitted; hint: the closure of $U \\cap Z_i$ is $Z_i$)'; tag 0B7I verified in stacks-project/tags/tags (0B7I,topology-lemma-dimension-supremum-local-dimensions)"
+ },
+ "stmt_deps": [
+  "def-kun-subspace-topology",
+  "def-weil-irreducible-components"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "irreducible closed subsets of an open subset U correspond to irreducible closed subsets of X meeting U, order isomorphism",
+   "results": "irreducibleComponentsEquivOfIsPreirreducibleFiber (Mathlib.Topology.Irreducible), irreducibleSetEquivPoints (Mathlib.Topology.Sober), TopologicalSpace.IrreducibleCloseds.orderIsoSubtype (Mathlib.Topology.Sets.Closeds), AlgebraicGeometry.affineOpensRestrict, PrimeSpectrum.pointsEquivIrreducibleCloseds: none is the open-subspace correspondence",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "for an open subset U of a topological space X, intersecting with U gives a bijection from irreducible closed subsets of X meeting U to irreducible closed subsets of U, inverse given by closure",
+   "results": "TopologicalSpace.IrreducibleCloseds.orderIsoSubtype, orderIsoSubtype', irreducibleSetEquivPoints, irreducibleComponentsEquivOfIsPreirreducibleFiber, genericPoints.component_ofComponent: none is it",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "TopologicalSpace.IrreducibleCloseds.orderIsoOfIsOpenEmbedding",
+   "results": "TopologicalSpace.IrreducibleCloseds.orderIsoOfIsOpenEmbedding (f : β → α) (h : Topology.IsOpenEmbedding f) : IrreducibleCloseds β ≃o {V : IrreducibleCloseds α | (f ⁻¹' V).Nonempty} (Mathlib.Topology.Sets.Closeds)",
+   "date": "2026-10-10",
+   "verdict": "match (specializes in one line, f = Subtype.val)"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rn 'orderIsoOfIsOpenEmbedding\\|map_strictMono_of_isInducing' Mathlib/; sed -n 475,540p Mathlib/Topology/Sets/Closeds.lean; grep -n 'isOpenEmbedding_subtypeVal' Mathlib/Topology/Constructions.lean; grep -n 'theorem\\|lemma' Mathlib/Topology/Irreducible.lean",
+   "results": "Topology/Sets/Closeds.lean:515 def orderIsoOfIsOpenEmbedding (toFun T = map f T = closure (f '' T), invFun V = f ⁻¹' V, map_rel_iff'); line 478 def IrreducibleCloseds.map; Topology/Constructions.lean:388 IsOpen.isOpenEmbedding_subtypeVal; Topology/Irreducible.lean:445 IsIrreducible.preimage, 400 IsPreirreducible.open_subset, 479 closure_image_preimage_of_isPreirreducible (the pieces used by orderIsoOfIsOpenEmbedding)",
+   "date": "2026-10-10",
+   "verdict": "match"
+  },
+  {
+   "tool": "local_search",
+   "query": "orderIsoOfIsOpenEmbedding (project root ~/weil-conjectures-slopmaster2)",
+   "results": "TopologicalSpace.IrreducibleCloseds.orderIsoOfIsOpenEmbedding in .lake/packages/mathlib/Mathlib/Topology/Sets/Closeds.lean (index: unavailable, name found by the fallback search)",
+   "date": "2026-10-10",
+   "verdict": "match (name exists)"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "TopologicalSpace.IrreducibleCloseds.orderIsoOfIsOpenEmbedding",
+  "file": "Mathlib/Topology/Sets/Closeds.lean",
+  "line": 515,
+  "how": "specializes in one line: TopologicalSpace.IrreducibleCloseds.orderIsoOfIsOpenEmbedding (Subtype.val : U → X) hU.isOpenEmbedding_subtypeVal (Closeds.lean lines 510-536; IsOpen.isOpenEmbedding_subtypeVal at Mathlib/Topology/Constructions.lean:388) is an order isomorphism IrreducibleCloseds U ≃o {V : IrreducibleCloseds X | (Subtype.val ⁻¹' V).Nonempty}; the set on the right is the node's I_U(X) (Subtype.val ⁻¹' V nonempty iff V ∩ U ≠ ∅), its invFun is V ↦ Subtype.val ⁻¹' V, i.e. V ∩ U as a subset of U (so V ∩ U is irreducible closed in U), its toFun is T ↦ closure (Subtype.val '' T), the closure of T in X, and map_rel_iff' is the clause Z ⊆ Z' iff Z ∩ U ⊆ Z' ∩ U (an order isomorphism preserves strict inclusion). IrreducibleCloseds U consists of the irreducible closed subsets of U with the subspace topology (instance on the subtype). Lines read with sed -n on 2026-10-10."
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-dimension-supremum-local-dimensions",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lead_note": "Leaf accepted by L (2026-10-10): IrreducibleCloseds.orderIsoOfIsOpenEmbedding (Topology/Sets/Closeds.lean:515) with f = Subtype.val of the open U (IsOpen.isOpenEmbedding_subtypeVal, Constructions.lean:388); checked with sed. The order isomorphism is Z -> Z cap U with inverse the closure.",
+ "reviewed": "pass (L, 2026-10-10): leaf, declarations checked by sed."
+}

@@ -1061,3 +1061,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 08:11 L: accepted lem-weil-pbc-dimension-at-point-field-extension (5 steps, no new nodes).
 - 08:14 L: nineteenth account limit (~08:12); session resumed on another account. Worker on differentials-dimension-bound-smooth-at-prime had finished writing (accepted from disk); workers on smooth-over-field-regular-local, dimension-supremum-local-dimensions, equation-count-localize-rgci, exact-free-complex-last-minors died with nothing; claims kept and relaunched.
 - 08:14 L: accepted lem-weil-pbc-differentials-dimension-bound-smooth-at-prime (6 steps; new unsplit nodes smooth-at-maximal-ideal-alg-closed-differentials-bound and smooth-at-prime-field-extension-descent).
+- 08:18 L: accepted lem-weil-pbc-dimension-supremum-local-dimensions (4 steps; new leaf open-subspace-irreducible-closed-correspondence, IrreducibleCloseds.orderIsoOfIsOpenEmbedding).
