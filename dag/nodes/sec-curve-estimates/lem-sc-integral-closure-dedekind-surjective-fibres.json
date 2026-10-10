@@ -29,9 +29,70 @@
   "def-weil-pbc-integral-closure",
   "def-weil-pbc-normal-ring"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Let D=C be the integral closure of A in L. Since A ⊆ C ⊆ L, the Krull–Akizuki theorem [lem-sc-krull-akizuki-noetherian] shows that C is Noetherian.",
+   "uses": [
+    "lem-sc-krull-akizuki-noetherian"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra Lemma 09IG, first sentence, invoking Lemma 10.119.12 (Tag 00PG)"
+   }
+  },
+  {
+   "text": "The inclusion A → C is integral and injective, and C is a subring of the field L. Therefore the integral-extension dimension equality [lem-weil-pbc-integral-injective-dimension-equal] gives dim(C)=dim(A)=1. The integral closure C is integrally closed in L and is a domain, and its fraction field is L, by [lem-weil-pbc-integral-closure-finite-extension-normal]. Hence C is a Noetherian integrally closed domain of dimension 1, i.e. a Dedekind domain.",
+   "uses": [
+    "lem-weil-pbc-integral-injective-dimension-equal",
+    "lem-weil-pbc-integral-closure-finite-extension-normal"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra Lemma 09IG, second and third sentences, invoking Lemmas 10.112.4 (Tag 00OK) and 10.120.17 (Tag 034X)"
+   }
+  },
+  {
+   "text": "The inclusion A ⊆ C is integral, so lying over [lem-weil-pbc-integral-injective-lying-over] says that every prime of A is the contraction of a prime of C. Thus Spec(C) → Spec(A) is surjective.",
+   "uses": [
+    "lem-weil-pbc-integral-injective-lying-over"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra Lemma 09IG, fourth sentence, invoking Lemma 10.36.17 (Tag 00GQ)"
+   }
+  },
+  {
+   "text": "For every maximal ideal m of A, localize A at A\\m and C at the same multiplicative set. By the localization prime correspondence [lem-weil-pbc-localization-prime-residue-field-iso] (1), applied to C → (A\\m)⁻¹C with W = A\\m, contraction is a bijection from the primes of (A\\m)⁻¹C onto the primes of C disjoint from A\\m; since A is one-dimensional, a prime of C is disjoint from A\\m exactly when it contracts to (0) or to m, and the primes lying over mA_m correspond exactly to the primes of C over m. By part (3) of the same statement, corresponding primes have isomorphic residue fields as C-algebras, hence as A-algebras. The resulting injective map A_m → (A\\m)⁻¹C is between domains, its fraction fields are K and L, and A_m is Noetherian local of dimension 1. Thus [lem-weil-pbc-dim-one-residue-field-extensions-finite] gives finitely many primes over m, each maximal, and finite residue-field extensions. For the generic prime (0), any prime q of C contracting to (0) contains (0), and incomparability for the integral extension A ⊆ C forces q=(0), so the generic fibre has one point; its residue extension is Frac(C)=L over Frac(A)=K, finite by hypothesis. Hence every fibre is finite, and all residue-field extensions are finite.",
+   "uses": [
+    "lem-weil-pbc-localization-prime-residue-field-iso",
+    "lem-weil-pbc-dim-one-residue-field-extensions-finite",
+    "lem-weil-pbc-integral-injective-lying-over",
+    "lem-weil-pbc-integral-incomparability"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra Lemma 09IG, final sentence, invoking Lemma 10.119.10 (Tag 031F)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sc-krull-akizuki-noetherian",
+  "lem-weil-pbc-integral-injective-dimension-equal",
+  "lem-weil-pbc-integral-closure-finite-extension-normal",
+  "lem-weil-pbc-integral-injective-lying-over",
+  "lem-weil-pbc-dim-one-residue-field-extensions-finite",
+  "lem-weil-pbc-integral-incomparability",
+  "lem-weil-pbc-localization-prime-residue-field-iso"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Algebra Lemma 10.120.18 (Tag 09IG), proof"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -56,12 +117,38 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-sc-semilocal-dim-one-normalization",
   "by": "worker",
   "date": "2026-10-10"
  },
  "chapter": "sec-curve-estimates",
- "unit": "sk-thm-curveestimate"
+ "unit": "sk-thm-curveestimate",
+ "split_report": {
+  "date": "2026-10-11",
+  "item": "lem-sc-integral-closure-dedekind-surjective-fibres",
+  "worker": "stage1",
+  "summary": "Expanded Stacks Algebra Lemma 09IG into four steps: Krull–Akizuki Noetherianity, dimension-one plus normality gives Dedekind, lying-over gives surjectivity, and the existing 031F node gives finite closed fibres and finite residue extensions. Created one genuinely missing statement-only node for Krull–Akizuki; reused the existing reviewed 031F node rather than duplicating it.",
+  "blueprint": "Realizes the blueprint ancestor lem-sc-pic-proper-ntorsion at its 09N2 proof invocation of Algebra Lemma 09IG.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-dim-one-residue-field-extensions-finite",
+    "why": "Step 4 needs the established 031F theorem that, after localizing a one-dimensional Noetherian domain at a maximal ideal, only finitely many primes lie over that maximal ideal and their residue fields are finite; this exact local residue-fibre result is not supplied by the curve-estimate unit."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-localization-prime-residue-field-iso",
+  "lem-weil-pbc-dim-one-residue-field-extensions-finite",
+  "lem-weil-pbc-dim-one-residue-field-extensions-finite"
+ ],
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-icd1945",
+  "group": "H1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-icd1945 (reviewer sub-agent of L); spot-checked: Reviewed at 5d162c859; c1179ce21 is a rebase with byte-identical delivery files. Statement vs Stacks 09IG; steps 1-3 cite 00PG node, 00OK node, normality leaf, lying-over leaf (RingHom.IsIntegral.comap_surjective, Topology.lean:1226; GoingUp.lean:327 confirmed by grep) - cited, not reproved; 031F hypotheses after localization; incomparability for generic fibre. Krull-Akizuki new node: grep -i akizuki over Mathlib, no hit, not a leaf. FIX more, RETURN less: (1) C1 step 4 asserted the localization prime correspondence and residue-field isomorphism without a cited statement; now cites lem-weil-pbc-localization-prime-residue-field-iso (1),(3) as a tool (no node of sk-thm-curveestimate states it); (2) E step 4 wrongly said primes of C disjoint from A\\m are exactly those over m; corrected to those contracting to (0) or m, with primes over mA_m corresponding to primes over m.; 1 file(s) fixed by the reviewer"
+ }
 }
