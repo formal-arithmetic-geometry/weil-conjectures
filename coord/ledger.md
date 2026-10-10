@@ -2098,3 +2098,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 17:08 L: returned deliver/M1/lem-sc-ample-proj-local-chart (reviewer RETURN: 1. D1: step 2 and node lem-sc-ample-proj-affine-chart: the new node restates the item's second clause word for word (amp)
 - 17:09 L: merged deliver/K1/lem-sc-finite-pushforward-locally-free (reviewer FIX; first push; new nodes: 0)
 - 17:09 L: returned deliver/J1/lem-sc-affine-maximal-points-closed-in-lft-scheme (reviewer RETURN: 1. B8: lem-sc-affine-maximal-points-closed-in-lft-scheme.json: status/mathlib_match: the item is made a Mathlib leaf fro)
+- 17:09 L: merged deliver/J1/lem-sc-graded-localization-exact (reviewer PASS; first push; new nodes: 0)

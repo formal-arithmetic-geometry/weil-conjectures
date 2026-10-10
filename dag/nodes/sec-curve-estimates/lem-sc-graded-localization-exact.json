@@ -23,9 +23,36 @@
  "stmt_deps": [
   "def-weil-pbc-module-localization-away"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Forget the gradings and apply exactness of localization at the multiplicative subset of powers of s, as stated by [lem-weil-pbc-localization-module-exact]. The induced sequence M'_s \\to M_s \\to M''_s is therefore exact.",
+   "uses": [
+    "lem-weil-pbc-localization-module-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/coherent.tex",
+    "place": "Cohomology of Schemes, Lemma 09MR proof, Mayer–Vietoris paragraph (localization exactness)"
+   }
+  },
+  {
+   "text": "The localization grading is preserved by f_s and g_s because f and g preserve degrees and s is homogeneous. Write an element of a localized module as a finite sum of homogeneous fractions. If a homogeneous degree-zero element y of M_s maps to zero in M''_s, exactness from Step 1 gives x in M'_s with f_s(x)=y; taking the degree-zero homogeneous component x_0 gives f_s(x_0)=y. Conversely, g_s(f_s(x))=0 holds for every x by exactness before taking components. Thus M'_{(s)} \\to M_{(s)} \\to M''_{(s)} is exact. The same argument applies in every degree, so it applies termwise to finite or infinite exact sequences.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/coherent.tex",
+    "place": "Cohomology of Schemes, Lemma 09MR proof, Mayer–Vietoris paragraph (passage to degree-zero parts)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-localization-module-exact"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/coherent.tex",
+  "place": "Cohomology of Schemes, Lemma 09MR proof, Mayer–Vietoris paragraph"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -57,10 +84,36 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-sc-invert-s-cohomology-mayer-vietoris-diagram",
   "by": "worker",
   "date": "2026-10-10"
+ },
+ "split_report": {
+  "date": "2026-10-11",
+  "item": "lem-sc-graded-localization-exact",
+  "worker": "stage1",
+  "summary": "No sorry-free slopmaster2 declaration states this item. I split the imported localization claim into ordinary exactness after localization, using the existing Mathlib-backed node lem-weil-pbc-localization-module-exact, and the elementary homogeneous-component argument proving exactness on the degree-zero parts and termwise for arbitrary exact sequences. The statement and source remain unchanged.",
+  "blueprint": [
+   "09MR Mayer–Vietoris paragraph: exactness is preserved by localization and passage to degree zero"
+  ],
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-localization-module-exact",
+    "why": "Step 1 uses its ordinary localization exactness as the generic algebraic tool; the curve-estimate unit has no separate localization exactness node."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-localization-module-exact"
+ ],
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-gle1710",
+  "group": "J1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-gle1710 (reviewer sub-agent of L); spot-checked: Source: Stacks 09MR (label coherent-lemma-invert-s-cohomology), proof of the lemma, Mayer-Vietoris paragraph using exactness of localization and passage to degree-zero parts; statement unchanged from the node created by R-mvd, hypotheses (Z-graded A, s homogeneous of degree d>=0, degree-preserving f,g, im f = ker g) agree. Step 1: lem-weil-pbc-localization-module-exact (status mathlib, LocalizedModule.map_exact, Mathlib/Algebra/Module/LocalizedModule/Exact.lean line 37 verified with sed) states exactness of T^{-1}(-) for any multiplicative T, applied to T = powers of s, hypotheses met; declared tool use accepted (generic leaf used as black box, C8). Step 2 elementary: f_s, g_s are degree-preserving for the direct-sum grading of M_s, so a degree-zero y in ker g_s = im f_s is f_s(x_0) for the degree-zero component x_0 of a preimage; the other inclusion is g f = 0; termwise for long sequences. Small cases: d=0 (M_(s) = (M_0)_s-type degree-zero fractions) and zero sequences. Mathlib query run (B8, LeanFinder 'homogeneous localization of a graded module at a homogeneous element is exact (degree zero part ...)'): only ungraded exact_of_isLocalized_span, IsLocalizedModule.map_exact, LocalizedModule.map_exact, ModuleCat.localizedModule_functor_map_exact; no graded degree-zero module statement, so the item stays split, not a leaf (same verdict as the recorded R-mvd query). Only the item's node and report changed; no new nodes. Start Sat Oct 10 05:09:16 PM UTC 2026, end Sat Oct 10 05:09:41 PM UTC 2026."
  }
 }
