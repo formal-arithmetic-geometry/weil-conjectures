@@ -15,9 +15,125 @@
   "def-weil-pbc-module-localization",
   "def-weil-pbc-localization-at-prime"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "(Setup.) Let $W=\\{1,g,g^2,\\dots\\}$ and $\\lambda:S\\to S_g$ the localization map [def-weil-ring-localization-away]. Since $\\mathfrak q$ is prime and $g\\notin\\mathfrak q$, $\\mathfrak q\\cap W=\\emptyset$, so by [lem-weil-pbc-localization-prime-residue-field-iso] (1) $\\bar{\\mathfrak q}:=\\mathfrak qS_g$ is a prime ideal of $S_g$ with $\\lambda^{-1}(\\bar{\\mathfrak q})=\\mathfrak q$, and by its part (2) the map $S_{\\mathfrak q}\\to(S_g)_{\\bar{\\mathfrak q}}$, $s/u\\mapsto\\lambda(s)/\\lambda(u)$, is an isomorphism of $S$-algebras [def-weil-pbc-localization-at-prime]. In particular $S_g\\neq0$, so by [def-weil-pbc-complete-intersection-over-field] (1) there are integers $m,t\\ge0$, polynomials $f_1,\\dots,f_t\\in Q:=k[y_1,\\dots,y_m]$ [def-weil-pbc-mv-polynomial-ring] and an isomorphism of $k$-algebras $\\alpha:T:=Q/J\\xrightarrow{\\sim}S_g$, $J=(f_1,\\dots,f_t)$, with $\\dim S_g=m-t$. Let $\\beta:Q\\to Q/J\\xrightarrow{\\alpha}S_g$; it is a surjective homomorphism of $k$-algebras with kernel $J$. Put $\\mathfrak q''=\\beta^{-1}(\\bar{\\mathfrak q})$, a prime ideal of $Q$ containing $J$, and $\\bar{\\mathfrak p}=\\mathfrak q''/J=\\alpha^{-1}(\\bar{\\mathfrak q})$, a prime ideal of $T$. Since $\\alpha$ is an isomorphism, $T\\neq0$ and $\\dim T=\\dim S_g=m-t$ (Krull dimension of $\\operatorname{Spec}$ [def-kun-topological-krull-dimension], $\\operatorname{Spec}\\alpha$ being a homeomorphism [def-weil-affine-spectrum]).",
+   "uses": [
+    "def-weil-ring-localization-away",
+    "lem-weil-pbc-localization-prime-residue-field-iso",
+    "def-weil-pbc-localization-at-prime",
+    "def-weil-pbc-complete-intersection-over-field",
+    "def-weil-pbc-mv-polynomial-ring",
+    "def-kun-topological-krull-dimension",
+    "def-weil-affine-spectrum"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra, proof of Lemma 00SC (lemma-lci, line 35909), last paragraph ('Assume (1)'): 'Let S_g = k[y_1..y_m]/(f_1..f_t) be a presentation of S_g as a global complete intersection. Write J = (f_1..f_t). Let q'' be the prime corresponding to qS_g'; Definition 00S9 (definition-lci-field, line 35817)"
+   }
+  },
+  {
+   "text": "(The dimension at $\\mathfrak q$.) By [lem-weil-pbc-principal-localization-open-immersion] the morphism $\\operatorname{Spec}S_g\\to\\operatorname{Spec}S$ induced by $\\lambda$ is an open immersion [def-weil-open-immersion], so it is a homeomorphism of $\\operatorname{Spec}S_g$ onto an open subset $O\\subseteq\\operatorname{Spec}S$; it sends $\\bar{\\mathfrak q}$ to $\\lambda^{-1}(\\bar{\\mathfrak q})=\\mathfrak q$ (step 1), so $\\mathfrak q\\in O$. A homeomorphism maps open neighbourhoods of a point onto open neighbourhoods of its image and strict chains of irreducible closed subsets onto strict chains of the same length, so it preserves the Krull dimension at a point [def-kun-topological-dimension-at-point]; with [lem-weil-pbc-dimension-at-point-open-subspace] for $O$ we get $d=\\dim_{\\mathfrak q}(\\operatorname{Spec}S)=\\dim_{\\mathfrak q}(O)=\\dim_{\\bar{\\mathfrak q}}(\\operatorname{Spec}S_g)$. Likewise the homeomorphism $\\operatorname{Spec}\\alpha:\\operatorname{Spec}S_g\\to\\operatorname{Spec}T$ sends $\\bar{\\mathfrak q}$ to $\\bar{\\mathfrak p}$, so $d=\\dim_{\\bar{\\mathfrak p}}(\\operatorname{Spec}T)$. By [lem-weil-pbc-global-complete-intersection-equidimensional] applied to $T=Q/(f_1,\\dots,f_t)$ ($T\\neq0$, $\\dim T=m-t$ by step 1), $d=m-t$. So $d$ is an integer, and $d\\ge0$ because the Krull dimension at a point of a nonempty space lies in $\\{0,1,\\dots,\\infty\\}$ [def-kun-topological-dimension-at-point].",
+   "uses": [
+    "lem-weil-pbc-principal-localization-open-immersion",
+    "def-weil-open-immersion",
+    "def-kun-topological-dimension-at-point",
+    "lem-weil-pbc-dimension-at-point-open-subspace",
+    "lem-weil-pbc-global-complete-intersection-equidimensional"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra, proof of Lemma 00SC (lemma-lci, line 35909), last paragraph ('Assume (1)'): 'Note that t = m - dim(S_g) = height(q'') - height(q), see Lemma 00P2 (lemma-codimension)'; the equidimensionality of S_g is the paragraph after Definition 00S9 (lines 35834-35849)"
+   }
+  },
+  {
+   "text": "(Regular sequence at $\\mathfrak q''$.) Let $R=Q_{\\mathfrak q''}$ [def-weil-pbc-localization-at-prime]. By [lem-weil-pbc-global-complete-intersection-local-regular-sequence] (hypotheses: $T\\neq0$, $\\dim T=m-t$, $J\\subseteq\\mathfrak q''$, step 1) the images $f_1/1,\\dots,f_t/1$ form a regular sequence in $R$ [def-weil-pbc-regular-sequence]; they generate the ideal $JR$. By [lem-weil-pbc-regular-sequence-conormal-free] the $R/JR$-module $JR/(JR)^2$ is free with basis the classes of $f_1/1,\\dots,f_t/1$, so $JR/(JR)^2\\cong(R/JR)^{\\oplus t}$.",
+   "uses": [
+    "def-weil-pbc-localization-at-prime",
+    "lem-weil-pbc-global-complete-intersection-local-regular-sequence",
+    "def-weil-pbc-regular-sequence",
+    "lem-weil-pbc-regular-sequence-conormal-free"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra, proof of Lemma 00SC (lemma-lci, line 35909), last paragraph ('Assume (1)'): 'As seen in the proof of Lemma 00SB (and also above) the elements f_1..f_t form a regular sequence in the local ring k[y_1..y_m]_{q''}. By Lemma 00LN (lemma-regular-quasi-regular) we see that (J/J^2)_q is free of rank t'"
+   }
+  },
+  {
+   "text": "(The conormal module of $\\beta$ at $\\bar{\\mathfrak q}$.) Let $U=Q\\setminus\\mathfrak q''$. Localizing at $U$ [def-weil-pbc-module-localization] the exact sequences of $Q$-modules $0\\to J\\to Q\\to T\\to0$ and $0\\to J^2\\to J\\to J/J^2\\to0$ gives exact sequences [lem-weil-pbc-localization-module-exact]: $U^{-1}J\\to R$ is injective with image $JR$, $U^{-1}(J^2)$ maps onto $J^2R=(JR)^2$ inside it, hence $U^{-1}(J/J^2)\\cong JR/(JR)^2$ and $U^{-1}T\\cong R/JR$, compatibly with the module structures. The $S_g$-module structure of $J/J^2$ is the one through $\\alpha:Q/J\\cong S_g$, and since $\\beta$ is surjective with $\\beta^{-1}(\\bar{\\mathfrak q})=\\mathfrak q''$ we have $\\beta(U)=S_g\\setminus\\bar{\\mathfrak q}$; so the localization of the $S_g$-module $J/J^2$ at $S_g\\setminus\\bar{\\mathfrak q}$ is $U^{-1}(J/J^2)$ (the same fractions $x/u$ and the same relation $u'(u_2x_1-u_1x_2)=0$, an element $u\\in U$ acting as $\\beta(u)$), and $U^{-1}T=T_{\\bar{\\mathfrak p}}\\cong(S_g)_{\\bar{\\mathfrak q}}\\cong S_{\\mathfrak q}$ by $\\alpha$ and step 1. By step 3, $(J/J^2)_{\\bar{\\mathfrak q}}$ is a free $S_{\\mathfrak q}$-module of rank $t$: $(J/J^2)_{\\bar{\\mathfrak q}}\\cong S_{\\mathfrak q}^{\\oplus t}$.",
+   "uses": [
+    "def-weil-pbc-module-localization",
+    "lem-weil-pbc-localization-module-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra, proof of Lemma 00SC (lemma-lci, line 35909), last paragraph ('Assume (1)'): '(J/J^2)_q is free of rank t' (the identification of the localization of J/J^2 with the conormal module of JR in k[y]_{q''}, left implicit in the source); localization is exact, Proposition 00CS (proposition-localization-exact, line 1336)"
+   }
+  },
+  {
+   "text": "(Comparison of the two presentations.) Apply [lem-weil-pbc-conormal-module-principal-localization] with the ring $k$, the $k$-algebra $S$, the element $g$, the presentation $\\alpha_0:P=k[x_1,\\dots,x_n]\\to S=P/I$ (the quotient map, kernel $I$) and the presentation $\\beta:k[y_1,\\dots,y_m]\\to S_g$ of step 1 (kernel $J$): $(I/I^2)_g\\oplus S_g^{\\oplus m}\\cong J/J^2\\oplus S_g^{\\oplus n}$ as $S_g$-modules [def-weil-pbc-module-localization-away]. Localize at $S_g\\setminus\\bar{\\mathfrak q}$ [def-weil-pbc-module-localization]; localization takes isomorphisms to isomorphisms and finite direct sums to direct sums, and $(S_g)_{\\bar{\\mathfrak q}}\\cong S_{\\mathfrak q}$ (step 1). For the $S$-module $M=I/I^2$ the map $M_{\\mathfrak q}\\to(M_g)_{\\bar{\\mathfrak q}}$, $x/u\\mapsto(x/1)/(u/1)$, is an isomorphism compatible with $S_{\\mathfrak q}\\cong(S_g)_{\\bar{\\mathfrak q}}$: every element of $(M_g)_{\\bar{\\mathfrak q}}$ is $(x/g^a)/(s/g^b)=(g^bx/1)/(g^as/1)$ with $g^as\\in S\\setminus\\mathfrak q$, and $(x/1)/(u/1)=0$ means $(s/g^b)(x/1)=0$ in $M_g$ for some $s\\notin\\mathfrak q$, i.e. $g^csx=0$ with $g^cs\\in S\\setminus\\mathfrak q$, i.e. $x/u=0$ (this is the argument of [lem-weil-pbc-localization-prime-residue-field-iso] (2) for the module $M$). With step 4 we obtain an isomorphism of $S_{\\mathfrak q}$-modules $N\\oplus S_{\\mathfrak q}^{\\oplus m}\\cong S_{\\mathfrak q}^{\\oplus(t+n)}$, where $N=(I/I^2)_{\\mathfrak q}$.",
+   "uses": [
+    "lem-weil-pbc-conormal-module-principal-localization",
+    "def-weil-pbc-module-localization-away",
+    "def-weil-pbc-module-localization",
+    "lem-weil-pbc-localization-prime-residue-field-iso"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra, proof of Lemma 00SC (lemma-lci, line 35909), last paragraph ('Assume (1)'): 'By Lemma 00S6 (lemma-conormal-module-localize, line 35776) we have J/J^2 (+) S_g^n = (I/I^2)_g (+) S_g^m'"
+   }
+  },
+  {
+   "text": "(Freeness and rank; conclusion.) By step 5, $N$ is a direct summand of the free $S_{\\mathfrak q}$-module $S_{\\mathfrak q}^{\\oplus(t+n)}$, hence projective [def-weil-pbc-projective-module], hence flat [lem-weil-pbc-projective-module-flat]; it is finitely generated [def-weil-finitely-generated-module], being the image of $S_{\\mathfrak q}^{\\oplus(t+n)}$ under the projection onto the summand. The ring $S_{\\mathfrak q}$ is local with residue field $\\kappa(\\mathfrak q)$ [def-weil-pbc-localization-at-prime], so $N$ is free [lem-weil-pbc-finite-flat-local-free]. Tensoring $N\\oplus S_{\\mathfrak q}^{\\oplus m}\\cong S_{\\mathfrak q}^{\\oplus(t+n)}$ with $\\kappa(\\mathfrak q)$ shows that $\\kappa(\\mathfrak q)\\otimes N$ has dimension $r:=t+n-m$ over $\\kappa(\\mathfrak q)$, so a basis of $N$ has exactly $r$ elements and $r\\ge0$: $N\\cong S_{\\mathfrak q}^{\\oplus r}$. By step 2, $r=n-(m-t)=n-d$. Hence $(I/I^2)_{\\mathfrak q}$ is free of rank $n-d$, and $n-d=r\\ge0$ gives $d\\le n$; with step 2, $0\\le d\\le n$.",
+   "uses": [
+    "def-weil-pbc-projective-module",
+    "lem-weil-pbc-projective-module-flat",
+    "def-weil-finitely-generated-module",
+    "def-weil-pbc-localization-at-prime",
+    "lem-weil-pbc-finite-flat-local-free"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra, proof of Lemma 00SC (lemma-lci, line 35909), last paragraph ('Assume (1)'): 'Thus (I/I^2)_q is free of rank t + n - m = m - dim(S_g) + n - m = n - dim(S_g) = height(q') - height(q) = c'; a finitely generated flat module over a local ring is free, Lemma 00NZ (lemma-finite-flat-local, line 19223)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-ring-localization-away",
+  "lem-weil-pbc-localization-prime-residue-field-iso",
+  "def-weil-pbc-localization-at-prime",
+  "def-weil-pbc-complete-intersection-over-field",
+  "def-weil-pbc-mv-polynomial-ring",
+  "def-kun-topological-krull-dimension",
+  "def-weil-affine-spectrum",
+  "lem-weil-pbc-principal-localization-open-immersion",
+  "def-weil-open-immersion",
+  "def-kun-topological-dimension-at-point",
+  "lem-weil-pbc-dimension-at-point-open-subspace",
+  "lem-weil-pbc-global-complete-intersection-equidimensional",
+  "lem-weil-pbc-global-complete-intersection-local-regular-sequence",
+  "def-weil-pbc-regular-sequence",
+  "lem-weil-pbc-regular-sequence-conormal-free",
+  "def-weil-pbc-module-localization",
+  "lem-weil-pbc-localization-module-exact",
+  "lem-weil-pbc-conormal-module-principal-localization",
+  "def-weil-pbc-module-localization-away",
+  "def-weil-pbc-projective-module",
+  "lem-weil-pbc-projective-module-flat",
+  "def-weil-finitely-generated-module",
+  "lem-weil-pbc-finite-flat-local-free"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Algebra, Lemma 00SC (lemma-lci, line 35909), implication (1) => (4): last paragraph of its proof, with Lemma 00P2 (lemma-codimension, line 28270) replaced by the equidimensionality of global complete intersections (paragraph after Definition 00S9) since the statement uses d = dim_q Spec S directly"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -42,7 +158,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "worker",
@@ -62,5 +178,17 @@
   }
  },
  "chapter": "sec-proper-base-change",
- "unit": "sk-thm-p1"
+ "unit": "sk-thm-p1",
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "lem-weil-pbc-lci-conormal-free-rank-codimension",
+  "worker": "stage1",
+  "summary": "Proof written in 6 steps following the last paragraph of the proof of Stacks 00SC ((1) => (4)). Statement and stmt_deps kept. Steps: (1) the prime qS_g, S_q = (S_g)_{qS_g}, and the global complete intersection presentation beta: k[y_1..y_m] -> S_g with kernel J=(f_1..f_t), dim S_g = m - t; (2) d = dim_q Spec S = m - t via the open immersion Spec S_g -> Spec S, the open-subspace lemma and the new node for equidimensionality of a global complete intersection (paragraph after 00S9; the source writes this as 't = m - dim(S_g) = height(q'') - height(q)' via 00P2); (3) f_i regular sequence in k[y]_{q''} (new node, proof of 00SB as cited in 00SC) and J/J^2 of a regular sequence free (new node, 00LN in degree 1); (4) identification of (J/J^2)_{qS_g} with JR/(JR)^2 by exactness of localization (implicit in the source); (5) Lemma 00S6 (new node) localized at q; (6) the direct summand of a finite free module over the local ring S_q is free (existing Mathlib leaves 00NZ and projective => flat), rank t + n - m = n - d, which also gives d <= n. Four new unsplit nodes, each with leansearch, leanfinder/loogle and grep recorded; none in Mathlib (Mathlib has no quasi-regular sequences, no Cohen-Macaulay rings, no comparison of conormal modules of arbitrary presentations; Algebra.Generators.cotangentCompLocalizationAwayEquiv is only 08JZ (1))."
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "result": "accepted",
+  "note": "6 steps following the last paragraph of Stacks 00SC (1)=>(4): the prime of S_g and its localization; d = m - t via the open immersion Spec S_g -> Spec S and the equidimensionality of global complete intersections (new unsplit node, Section 00S8); the f_i form a regular sequence in k[y]_{q''} (new unsplit node from the proof of 00SB) and J/J^2 is free on them (new unsplit 00LN (1) node); localization of the conormal module; the comparison (I/I^2)_g + S_g^m = J/J^2 + S_g^n (new unsplit 00S6 node); a direct summand of a finite free module over the local ring S_q is free, of rank t + n - m = n - d >= 0. L checked the two new statements on the source: all components of a global complete intersection have dimension m - t, and t elements generating an ideal of height t in a Cohen-Macaulay local ring form a regular sequence."
+ }
 }

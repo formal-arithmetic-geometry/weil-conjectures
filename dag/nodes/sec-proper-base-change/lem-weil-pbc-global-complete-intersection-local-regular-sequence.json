@@ -1,0 +1,72 @@
+{
+ "id": "lem-weil-pbc-global-complete-intersection-local-regular-sequence",
+ "kind": "statement",
+ "title": "The equations of a global complete intersection form a regular sequence at every prime",
+ "statement": "Let $k$ be a field, $m,t\\ge0$ integers, $Q=k[y_1,\\dots,y_m]$ the polynomial ring [def-weil-pbc-mv-polynomial-ring], $f_1,\\dots,f_t\\in Q$, $J=(f_1,\\dots,f_t)$ and $T=Q/J$. Assume $T\\neq0$ and that the Krull dimension [def-kun-topological-krull-dimension] of $\\operatorname{Spec}T$ [def-weil-affine-spectrum] is $m-t$. Let $\\mathfrak q''\\subset Q$ be a prime ideal with $J\\subseteq\\mathfrak q''$ and $Q_{\\mathfrak q''}$ the localization at $\\mathfrak q''$ [def-weil-pbc-localization-at-prime]. Then the images $f_1/1,\\dots,f_t/1$ form a regular sequence in the local ring $Q_{\\mathfrak q''}$ [def-weil-pbc-regular-sequence].",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Algebra, proof of Lemma 00SB (lemma-lci-CM, line 35876; proof lines 35882-35899: k[x]_{m'} regular local of dimension n (00OQ), Cohen-Macaulay (00NQ), dim S_m >= n - c by 00KW applied c times, equality, regular sequence by Proposition 00N6 proposition-CM-module), as invoked for an arbitrary prime q'' in the proof of Lemma 00SC (lemma-lci, line 35909), last paragraph: 'As seen in the proof of Lemma 00SB (and also above) the elements f_1, ..., f_t form a regular sequence in the local ring k[y_1, ..., y_m]_{q''}'"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-mv-polynomial-ring",
+  "def-kun-topological-krull-dimension",
+  "def-weil-affine-spectrum",
+  "def-weil-pbc-localization-at-prime",
+  "def-weil-pbc-regular-sequence"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "regular sequence in a polynomial ring localized at a prime, complete intersection, quotient dimension equals n minus number of equations",
+   "results": "RingTheory.Sequence.IsWeaklyRegular.of_isLocalizedModule, ringKrullDim_add_length_eq_ringKrullDim_of_isRegular (Mathlib.RingTheory.KrullDimension.Regular: the converse direction, regular => dimension drops by the length), RingTheory.Sequence.IsWeaklyRegular.isRegular_of_isLocalization_of_mem (Mathlib.RingTheory.Regular.Flat), Module.supportDim_add_length_eq_supportDim_of_isRegular",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "in a Cohen-Macaulay local ring, elements f_1..f_c with dim R/(f) = dim R - c form a regular sequence",
+   "results": "IsLocalRing.isRegular_iff_isWeaklyRegular_of_subset_maximalIdeal, ringKrullDim_add_length_eq_ringKrullDim_of_isRegular, RingTheory.Sequence.isRegular_iff, IsWeaklyRegular.isRegular_of_isLocalization_of_mem (none gives regularity from the dimension count; Mathlib has no Cohen-Macaulay rings)",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "RingTheory.Sequence.IsRegular, MvPolynomial",
+   "results": "none",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rln 'CohenMacaulay\\|IsCohenMacaulay' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib --include=*.lean; grep -rn 'IsRegular' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib --include=*.lean | grep -i 'mvPolynomial\\|height\\|CohenMacaulay'",
+   "results": "no Cohen-Macaulay notion; no regular sequence statement for polynomial rings or complete intersections (only MonomialOrder leading-coefficient IsRegular lemmas)",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-lci-conormal-free-rank-codimension",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1"
+}
