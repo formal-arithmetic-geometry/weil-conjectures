@@ -1,8 +1,8 @@
 # Work queue
 
-847 items; claim with `tools/claim.py next <group> [--stage N]`.
+850 items; claim with `tools/claim.py next <group> [--stage N]`.
 
-## Stage 1: nodes to split (664)
+## Stage 1: nodes to split (666)
 
 | node | distance to a target | Lean state on the done branch |
 |---|---|---|
@@ -11,7 +11,6 @@
 | `lem-weil-pbc-helper-g-ring-char-p` | 1011 | none |
 | `lem-weil-pbc-lft-over-field-isolated-point-residue-finite` | 1011 | none |
 | `lem-weil-pbc-regular-ring-smooth-ascent` | 1011 | none |
-| `lem-weil-pbc-regular-sequence-polynomial-variables` | 1011 | none |
 | `lem-weil-pbc-regular-sequence-powers` | 1011 | none |
 | `lem-weil-pbc-ringed-space-module-exactness-local-lifting` | 1011 | none |
 | `lem-weil-pbc-separable-extension-fraction-field-of-smooth-algebra` | 1011 | none |
@@ -126,6 +125,7 @@
 | `lem-weil-pbc-module-finite-type-submodule-extension` | 1012 | none |
 | `lem-weil-pbc-module-pullback-affine-sections` | 1012 | none |
 | `lem-weil-pbc-module-stalk-filtered-colimit` | 1012 | none |
+| `lem-weil-pbc-polynomial-ideal-coefficients-monomial` | 1012 | none |
 | `lem-weil-pbc-polynomial-local-completion-formally-smooth` | 1012 | none |
 | `lem-weil-pbc-popescu-artinian-flat-subalgebras` | 1012 | none |
 | `lem-weil-pbc-popescu-delocalize-weak` | 1012 | none |
@@ -144,6 +144,8 @@
 | `lem-weil-pbc-reduced-source-factors-through-closed-subscheme` | 1012 | none |
 | `lem-weil-pbc-regular-local-finite-gl-dim` | 1012 | none |
 | `lem-weil-pbc-regular-local-hypersurface-criterion` | 1012 | none |
+| `lem-weil-pbc-regular-sequence-short-exact-sequence` | 1012 | none |
+| `lem-weil-pbc-regular-sequence-swap-two` | 1012 | none |
 | `lem-weil-pbc-ringed-space-colimit-restriction` | 1012 | none |
 | `lem-weil-pbc-separably-generated-separable` | 1012 | none |
 | `lem-weil-pbc-sets-extension-by-empty-adjunction` | 1012 | none |
@@ -671,7 +673,7 @@
 | `lem-pc-finite-linear-avoidance` | - | none |
 | `lem-pc-linear-pair-graded-finite` | - | none |
 
-## Stage 2: nodes to state (183)
+## Stage 2: nodes to state (184)
 
 | node | distance to Mathlib | kind |
 |---|---|---|
@@ -810,6 +812,7 @@
 | `lem-weil-pbc-regular-local-localization` | 1 | state |
 | `lem-weil-pbc-regular-ring-faithfully-flat-descent` | 1 | state |
 | `lem-weil-pbc-regular-ring-local-criterion` | 1 | state |
+| `lem-weil-pbc-regular-sequence-polynomial-variables` | 1 | state |
 | `lem-weil-pbc-root-lifting-etale-retraction` | 1 | state |
 | `lem-weil-pbc-scheme-clopen-idempotent` | 1 | state |
 | `lem-weil-pbc-scheme-theoretic-union` | 1 | state |
@@ -859,7 +862,7 @@
 | `lem-weil-pbc-p1-field-dimension-one` | 4 | state |
 | `lem-weil-pbc-projective-space-zero-isomorphism` | 4 | state |
 
-Not open yet: 676 nodes that wait for stage 1, 468 nodes that wait for a statement dependency.
+Not open yet: 678 nodes that wait for stage 1, 468 nodes that wait for a statement dependency.
 
 ## Stage 3: modules to prove (0)
 
