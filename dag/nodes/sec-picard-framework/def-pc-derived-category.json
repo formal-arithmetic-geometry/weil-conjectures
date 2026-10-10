@@ -3,25 +3,77 @@
  "blueprint": {
   "is": "def-pc-derived-category",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "definition",
  "title": "The derived category of $\\mathcal{O}_X$-modules",
- "statement": "Let $X$ be a scheme. Apply the\nderived-category construction\nto the abelian category of sheaves of $\\mathcal O_X$-modules; denote\nthe result by $D(\\mathcal O_X)$. The category\n$D_{\\mathrm{QCoh}}(\\mathcal O_X)$ is the full subcategory consisting\nof objects whose cohomology sheaves are quasi-coherent.",
+ "statement": "Let $X$ be a scheme [def-pc-scheme]. Apply the derived-category construction [def-weil-abstract-derived-category] to the abelian category of sheaves of $\\mathcal O_X$-modules [def-weil-sheaf-of-modules-category]; denote the result by $D(\\mathcal O_X)$. The category $D_{\\mathrm{QCoh}}(\\mathcal O_X)$ is the full subcategory consisting of objects whose cohomology sheaves are quasi-coherent [pqf-def-coherent].",
  "source": {
   "document": "literature/blueprint/master/blueprint/sec-picard-framework/sk-thm-picard-coherence/def-pc-derived-category.md",
   "place": "node def-pc-derived-category, order 643"
  },
  "stmt_deps": [
   "def-pc-scheme",
-  "def-weil-abstract-derived-category"
+  "def-weil-abstract-derived-category",
+  "def-weil-sheaf-of-modules-category",
+  "pqf-def-coherent"
  ],
  "proof": [],
  "proof_deps": [],
  "proof_origin": null,
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "derived category of sheaves of O_X-modules and full subcategory whose cohomology sheaves are quasi-coherent",
+   "results": "DerivedCategory (Mathlib/Algebra/Homology/DerivedCategory/Basic), DerivedCategory.Q (same), DerivedCategory.instIsLocalizationCochainComplexIntQQuasiIsoUp (same), SheafOfModules.isQuasicoherent (Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent); no declaration combines the O_X-module specialization with the quasi-coherent-cohomology full subcategory",
+   "date": "2026-10-11",
+   "verdict": "no match; generic components only"
+  },
+  {
+   "tool": "loogle",
+   "query": "DerivedCategory, Sheaf, QuasiCoherent",
+   "results": "0 hits; unknown identifier 'Sheaf'",
+   "date": "2026-10-11",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "DerivedCategory|quasi.?coherent [Mathlib/Algebra/Homology/DerivedCategory]",
+   "results": "0 hits in Mathlib/Algebra/Homology/DerivedCategory",
+   "date": "2026-10-11",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "derived category sheaves modules quasi-coherent cohomology",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-11",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "full subcategory of derived category with quasi-coherent cohomology sheaves",
+   "results": "DerivedCategory, DerivedCategory.IsGE, DerivedCategory.IsLE and related generic support declarations; no quasi-coherent full-subcategory declaration",
+   "date": "2026-10-11",
+   "verdict": "no match; generic components only"
+  },
+  {
+   "tool": "loogle",
+   "query": "DerivedCategory.homologyProperty",
+   "results": "0 hits; unknown identifier 'DerivedCategory.homologyProperty'",
+   "date": "2026-10-11",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "homologyProperty|DerivedCategory.*FullSubcategory|quasi.?coherent [Mathlib/Algebra/Homology/DerivedCategory]",
+   "results": "0 hits in Mathlib/Algebra/Homology/DerivedCategory",
+   "date": "2026-10-11",
+   "verdict": "no match"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [],
  "blueprint_kind": "definition",
@@ -47,5 +99,20 @@
   }
  },
  "chapter": "sec-picard-framework",
- "unit": "sk-thm-picard-coherence"
+ "unit": "sk-thm-picard-coherence",
+ "split_report": {
+  "date": "2026-10-11",
+  "item": "def-pc-derived-category",
+  "worker": "stage1",
+  "summary": "Split the imported definition without creating helper nodes. The abstract derived category is supplied by the existing def-weil-abstract-derived-category Mathlib leaf, and the sheaf-of-O_X-modules category is supplied by the existing definition dependency; the quasi-coherent derived subcategory is a defining full-subcategory clause rather than a separate theorem. No exact project declaration exists in the source checkout. Mathlib searches found only the generic DerivedCategory and SheafOfModules.isQuasicoherent components, not the combined definition.",
+  "blueprint": "The item is the blueprint node def-pc-derived-category itself (order 643); its statement realizes the definition of D(O_X) and the full subcategory D_QCoh(O_X) by the clause naming objects whose cohomology sheaves are quasi-coherent."
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-ddc2924",
+  "group": "M1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-ddc2924 (reviewer sub-agent of L); spot-checked: E7/C4: statement diffed against sheaf-dag: text identical apart from four added citations [def-pc-scheme, def-weil-abstract-derived-category, def-weil-sheaf-of-modules-category, pqf-def-coherent]; no mathematical clause changed, so citers (lem-pc-perfect-generator-exists, lem-pc-qcqs-derived-direct-image-right-adjoint, lem-pc-derived-mayer-vietoris-triangle, lem-pc-affine-qcoh-derived-equivalence) unaffected; derived-category construction cites def-weil-abstract-derived-category (class b reuse); abelian category of O_X-modules is the clause of def-weil-sheaf-of-modules-category; quasi-coherent is clause 1 of pqf-def-coherent (Tag 01BE), no cycle; no triangulated-subcategory claim (Tag 08DL-area) smuggled in; def-pc-derived-direct-image and def-pc-global-derived-rhom consistent. Mathlib grep DerivedCategory+Scheme/SheafOfModules/Modules: 0 hits, not a leaf. FIX more, RETURN less: none needed."
+ }
 }
