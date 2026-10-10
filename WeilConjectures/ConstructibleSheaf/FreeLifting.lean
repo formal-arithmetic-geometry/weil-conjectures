@@ -21,6 +21,7 @@ public import WeilConjectures.ConstructibleSheaf.Monoidal
 public import WeilConjectures.ConstructibleSheaf.OpenClosed
 public import WeilConjectures.Mathlib.AlgebraicGeometry.IdealSheaf.Subscheme
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.FlatModuleCat
+public import WeilConjectures.SixFunctors.OpenClosed.Conservative
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Sites.Etale
 
 /-!
@@ -597,6 +598,57 @@ lemma exists_detecting_freeYoneda_of_iso_constantSheaf {Y : Scheme.{u}}
     rw [Adjunction.homEquiv_unit, Functor.map_zero, comp_zero]
   rw [h0]
   simpa [c] using this
+
+lemma freeYonedaEtaleHomEquiv_zero {Y Z : Scheme.{u}} (e : Y ⟶ Z) (he : Etale e) (V : Y.Etale)
+    {G F : Sheaf Z.smallEtaleTopology (ModuleCat.{u + 1} Λ)} :
+    freeYonedaEtaleHomEquiv e he V F
+      (0 : Sheaf.freeYoneda Z.smallEtaleTopology ((MorphismProperty.Over.map ⊤ he).obj V)
+        (ModuleCat.of Λ Λ) ⟶ F) = 0 := by
+  calc freeYonedaEtaleHomEquiv e he V F 0
+      = freeYonedaEtaleHomEquiv e he V F (0 ≫ (0 : F ⟶ F)) := by rw [comp_zero]
+    _ = _ := freeYonedaEtaleHomEquiv_comp e he V _ _
+    _ = 0 := by simp
+
+/-- **Vanishing is detected on a jointly surjective family.** A morphism of étale sheaves of
+`Λ`-modules whose pullbacks along a family of morphisms covering the base vanish is zero: its
+kernel inclusion becomes invertible after each pullback. -/
+lemma eq_zero_of_upperStar_map_eq_zero {Z : Scheme.{u}} {ι : Type u} {Y : ι → Scheme.{u}}
+    (a : ∀ i, Y i ⟶ Z) (ha : ∀ z : Z, ∃ (i : ι) (y : Y i), (a i).base y = z)
+    {G F : Sheaf Z.smallEtaleTopology (ModuleCat.{u + 1} Λ)} (f : G ⟶ F)
+    (hf : ∀ i, (Etale.upperStar (ModuleCat.{u + 1} Λ) (a i)).map f = 0) : f = 0 := by
+  have : IsIso (kernel.ι f) := by
+    refine Etale.isIso_of_isIso_upperStar_map_of_jointlySurjective _ a ha _ fun i ↦ ?_
+    have h : (Etale.upperStar (ModuleCat.{u + 1} Λ) (a i)).map (kernel.ι f) =
+        (PreservesKernel.iso (Etale.upperStar (ModuleCat.{u + 1} Λ) (a i)) f).hom ≫
+          (kernelIsoOfEq (hf i)).hom ≫ kernel.ι _ := by simp
+    rw [h]
+    infer_instance
+  rw [← cancel_epi (kernel.ι f), kernel.condition, comp_zero]
+
+/-- If the pullback of `G` along an étale `e : A ⟶ Z` from a nonempty scheme is constant and
+finite, finitely many maps from the free sheaf on `A` detect the vanishing of `e^* f`. -/
+lemma exists_detecting_freeYoneda_of_isConstant {Z A : Scheme.{u}} (e : A ⟶ Z) (he : Etale e)
+    [Nonempty A] (G : Sheaf Z.smallEtaleTopology (ModuleCat.{u + 1} Λ))
+    (hc : ((Etale.upperStar (ModuleCat.{u + 1} Λ) e).obj G).IsConstant A.smallEtaleTopology)
+    (hfin : Scheme.IsFiniteSheaf ((Etale.upperStar (ModuleCat.{u + 1} Λ) e).obj G)) :
+    ∃ (n : ℕ) (s : Fin n → (Sheaf.freeYoneda Z.smallEtaleTopology
+        ((MorphismProperty.Over.map ⊤ he).obj (Scheme.Etale.mk (𝟙 A))) (ModuleCat.of Λ Λ) ⟶ G)),
+      ∀ ⦃F⦄ (f : G ⟶ F), (∀ k, s k ≫ f = 0) →
+        (Etale.upperStar (ModuleCat.{u + 1} Λ) e).map f = 0 := by
+  have : PreservesFilteredColimitsOfSize.{u, u} (CategoryTheory.forget (ModuleCat.{u + 1} Λ)) :=
+    preservesFilteredColimitsOfSize_shrink.{u, u + 1, u, u + 1} _
+  obtain ⟨N, ⟨iN⟩⟩ := hc.mem_essImage
+  obtain ⟨x⟩ := ‹Nonempty A›
+  have : Module.Finite Λ N := by
+    rw [← ModuleCat.isFinitelyGenerated_iff]
+    exact (hfin.isFinitelyGenerated_sheafFiber _ (A.algClosurePoint x)).of_iso
+      ((Scheme.pointSmallEtale (A.algClosurePoint x)).sheafFiber.mapIso iN.symm ≪≫
+        (Scheme.pointSmallEtale (A.algClosurePoint x)).sheafFiberConstantSheafIso N)
+  obtain ⟨n, σ, hσ⟩ := exists_detecting_freeYoneda_of_iso_constantSheaf iN
+  refine ⟨n, fun k ↦ (freeYonedaEtaleHomEquiv e he _ G).symm (σ k), fun F f hf ↦ hσ _ fun k ↦ ?_⟩
+  have := congrArg (freeYonedaEtaleHomEquiv e he _ F) (hf k)
+  rwa [freeYonedaEtaleHomEquiv_comp, Equiv.apply_symm_apply,
+    freeYonedaEtaleHomEquiv_zero e he _ (G := G)] at this
 
 end Generation
 
