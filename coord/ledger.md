@@ -2644,3 +2644,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 21:16 L: merged deliver/E1/lem-pc-noetherian-bounded-coherent-pseudo-coherent (reviewer FIX; first push; new nodes: 1)
 - 21:16 L: deleted deliver/J1/def-weil-pbc-C1 after J1's abandonment (item attached by L at 67a1cd8ba)
 - 21:17 L: merged deliver/H1/thm-pqf-zmt-factorization (reviewer FIX; first push; new nodes: 1)
+- 21:17 L: merged deliver/K1/def-pod-lisse-l-adic-sheaves (reviewer FIX; first push; new nodes: 0)

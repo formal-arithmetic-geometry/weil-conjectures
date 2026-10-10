@@ -7,7 +7,7 @@
    "place": "step 6, 7, 8, 9, 10 of its split (source: Proposition 1.1.9, third bullet, p. 3 (the lcc sheaves F_m correspond to the finite pi_1-modules Lambda/m^m Lambda); Milne LEC, Section 19, p. 125 ('to give a locally constant sheaf M on a connected variety X is to give a finitely generated Z_l-module M together with a continuous action of pi_1(X, x)'); Weil II (1.1.1) b), p. 146)",
    "via": []
   },
-  "same_as": null
+  "same_as": []
  },
  "kind": "definition",
  "title": "Lisse O_E-, E- and Qlbar-sheaves and their fibres (Weil II (1.1.1))",
@@ -41,10 +41,52 @@
    "results": "none",
    "date": "2026-10-09",
    "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "definition lisse O_E E Q_lbar sheaf inverse system finite coefficient modules",
+   "results": "LightCondMod.LocallyConstant.instHasSheafifyLightProfiniteCoherentTopologyModuleCat (Mathlib/Condensed/Discrete/Module); LightCondMod.ofSheafLightProfinite (Mathlib/Condensed/Light/Explicit); CondensedMod.ofSheafProfinite (Mathlib/Condensed/Explicit); no lisse adic sheaf definition",
+   "date": "2026-10-11",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "Sheaf, Module, LocallyConstant",
+   "results": "unknown identifier 'Sheaf' (0 hits)",
+   "date": "2026-10-11",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "lisse|Lisse|ElladicSheaf|ellAdicSheaf in AlgebraicGeometry/ and CategoryTheory/",
+   "results": "Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean:63 ellAdicSheaf; no lisse adic systems or E/Q_lbar sheaves",
+   "date": "2026-10-11",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "What is a lisse l-adic sheaf as an inverse system of locally constant finite coefficient sheaves, including scalar extension and Q_l bar colimit",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-11",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "loogle",
+   "query": "ElladicCohomology, Scheme.ellAdicSheaf, LocallyConstant",
+   "results": "unknown identifier 'ElladicCohomology' (0 hits)",
+   "date": "2026-10-11",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "LocallyConstant|ElladicCohomology|ellAdicSheaf in AlgebraicGeometry/",
+   "results": "Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean:27-28,63,75; unrelated constant ellAdicSheaf and EllAdicCohomology",
+   "date": "2026-10-11",
+   "verdict": "no match"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "worker",
@@ -64,5 +106,24 @@
   }
  },
  "chapter": "sec-poincare-duality",
- "unit": "sk-lem-finite"
+ "unit": "sk-lem-finite",
+ "split_report": {
+  "date": "2026-10-11",
+  "item": "def-pod-lisse-l-adic-sheaves",
+  "worker": "stage1",
+  "summary": "Checked the Weil II definition clause by clause, confirmed all six statement dependencies, found no existing Lean declaration or duplicate blueprint node, and recorded Mathlib searches. No additional nodes are needed because this is a definition whose constituent notions already exist.",
+  "blueprint": [
+   "Weil II (1.1.1) b): compatible inverse systems of finite-level lisse sheaves and inverse-limit fibre",
+   "Weil II (1.1.1) c): E-sheaves, scalar extension, and fibre",
+   "Weil II (1.1.1) d): Q_lbar 2-colimit, fibre, tensor products, and unit"
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-lls2535",
+  "group": "K1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-lls2535 (reviewer sub-agent of L); spot-checked: Read Weil II (1.1.1) a)-d) pp.146-147 in the PDF against clauses 1-5: inverse system with reduction isos, Hom via pro-objects = compatible families (G_n killed by m^n), Hom tensor E, Qlbar 2-colimit Hom, ceil(m/e) scalar extension all correct; no proof steps; Mathlib record honest (ellAdicSheaf is the constant sheaf only); def-weil-pbc-etale-sheaves and def-constructible-locally-constant are sheaves-of-sets notions, no module-level lcc node exists, so the inline one-sentence convention is no class (b) duplicate; def-pod-l-adic-representations is not a dependency of this definition (it is cited by the citer cor-galois-lisse-representations, which uses the same O_E/E/Qlbar notions and fibres, C4 ok, Y connected). FIX more, RETURN less: B3 source.place corrected: it claimed all clauses come from (1.1.1), but fibres, the explicit scalar-extension formula, tensor products and unit are not stated there (Weil II p.147 refers to SGA 5 VI), and (1.1.1) c),d) define lisse E-/Qlbar-sheaves as LOCALLY of the form F tensor E while the node takes them globally; both deviations now named, with why they agree on connected Y (stable lattice for compact pi_1). The K1 second reading missed this (it said tensor/unit agree with the source).; 1 file(s) fixed by the reviewer"
+ }
 }
