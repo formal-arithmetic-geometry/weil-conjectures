@@ -24,8 +24,38 @@
   "def-pc-fibre-product",
   "def-weil-irreducible-components"
  ],
- "proof": [],
- "proof_deps": [],
+ "proof": [
+  {
+   "text": "Apply [lem-sc-product-irreducible-components-bijection] with the geometrically irreducible scheme $U$ and the scheme $V$. The projection $U\\times_{\\operatorname{Spec}K}V\\to V$ therefore induces a bijection between their sets of irreducible components.",
+   "uses": [
+    "lem-sc-product-irreducible-components-bijection"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 038F (lemma-bijection-irreducible-components)"
+   }
+  },
+  {
+   "text": "Since $V$ is geometrically irreducible, its base change along the identity extension $K/K$ is irreducible, so $V$ has exactly one irreducible component. The bijection in Step 1 then shows that $U\\times_{\\operatorname{Spec}K}V$ has exactly one irreducible component $Z$. By [lem-sc-irreducible-components-cover] every point of $U\\times_{\\operatorname{Spec}K}V$ lies in some irreducible component, hence in $Z$; so $U\\times_{\\operatorname{Spec}K}V=Z$ is irreducible [def-weil-irreducible-components].",
+   "uses": [
+    "def-pc-geometrically-irreducible",
+    "def-weil-irreducible-components",
+    "lem-sc-irreducible-components-cover"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 038F, specialization to an irreducible second factor"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sc-product-irreducible-components-bijection",
+  "def-pc-geometrically-irreducible",
+  "def-weil-irreducible-components",
+  "lem-sc-irreducible-components-cover"
+ ],
  "proof_origin": {
   "by": "document",
   "document": "literature/stacks-project/varieties.tex",
@@ -55,12 +85,28 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-sc-geometrically-irreducible-product",
   "by": "worker",
   "date": "2026-10-10"
  },
  "chapter": "sec-picard-framework",
- "unit": "sk-prop-jacobian"
+ "unit": "sk-prop-jacobian",
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "lem-sc-irreducible-product-over-field",
+  "worker": "stage1",
+  "summary": "Split the product irreducibility claim by first invoking the Tag 038F component-bijection statement and then specializing the second factor to an irreducible scheme. Added one unsplit node for the exact component-bijection fact after searches found no matching Mathlib theorem.",
+  "blueprint": "Realizes thm-sc-jacobian-representability proof step (4) 'Connectedness', the assertion that a product of geometrically irreducible schemes is irreducible.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-ipf",
+  "group": "K1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-ipf (reviewer sub-agent of L); spot-checked: Source: Stacks varieties.tex Tag 038F (lemma-bijection-irreducible-components): k field, X,Y k-schemes, X geometrically irreducible => X x_k Y -> Y bijection on irreducible components; new node lem-sc-product-irreducible-components-bijection states it hypothesis by hypothesis (U geometrically irreducible, V any K-scheme), self-contained, notions cited, unsplit, created.item = item, id fresh, not a duplicate of the other 038F-citing nodes (lem-pc-base-change-product, lem-sc-hilb-*); no slopmaster2 declaration for it in the sorry map (B10), Mathlib irreducibleComponentsEquiv needs IsOpenMap, so no leaf. Item statement unchanged. Step 1 carried by the new node; Step 2: V geometrically irreducible, base change along K/K (def-pc-geometrically-irreducible) gives V irreducible, so V is its own unique component; bijection gives one component Z of the product. FIX (C1, FIX more, RETURN less): dag/nodes/sec-picard-framework/lem-sc-irreducible-product-over-field.json: proof[1].text, proof[1].uses, proof_deps: the inference 'exactly one component hence irreducible' needs every point to lie in a component (Zorn), now cited from the existing Mathlib leaf lem-sc-irreducible-components-cover (generic topology, no tool_use needed). Small cases: U or V = Spec K (product = V or U, irreducible); V empty excluded since irreducible means nonempty. Consumer lem-sc-geometrically-irreducible-product Step 3 uses exactly this statement. Start Sat Oct 10 03:38:47 PM UTC 2026, end Sat Oct 10 03:39:37 PM UTC 2026.; 1 file(s) fixed by the reviewer"
+ }
 }
