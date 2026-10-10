@@ -89,3 +89,7 @@ The blueprint node (citing Stacks 01JY) says the ideal sheaf of the base change 
 ## Blueprint statement error: thm-galois-fundamental, base-change clause (2026-10-10, found by the worker)
 
 The blueprint's base-change clause says that for every connected $Y'\to Y$ the image of $\pi_1(Y')\to\pi_1(Y)$ is an open subgroup. False: for $Y'$ the spectrum of an algebraic closure of a point, $\pi_1(Y')$ is trivial and its image is not open when $\pi_1(Y)$ is infinite. The proof's cofinality claim fails likewise (Galois covers of $\operatorname{Spec}\bar{\mathbf F}_p$ pulled back to $\mathbf A^1$ are not cofinal). The node now states the continuous map $f_*$ for every connected $Y'$ (Stacks 0BND (3)) and the open stabilizer subgroup only for finite etale $f$ (SGA 1 V 6.13, §7), which is what the citers use (lemma-weil-pbc-curve-locally-constant-reduction, lem-wf-dense-open-pi1-surjective).
+
+## Blueprint definition gap: def-weil-pbc-finite-torsors (2026-10-10, found by the worker of thm-galois-lc-etale)
+
+The blueprint defines an $M$-torsor as a finite locally constant sheaf $P$ with $M\times P\to P\times P$ an isomorphism, without Stacks 03AH's condition that $P$ have sections locally; so the empty sheaf is a torsor. thm-galois-lc-etale reads the definition with the local-sections condition (as def-sc-gm-torsor has it); the definition node carries a lead note and is corrected at its split.
