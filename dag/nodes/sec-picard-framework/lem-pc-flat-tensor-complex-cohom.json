@@ -22,9 +22,27 @@
   "def-weil-pbc-flat-ring-map",
   "def-pc-cochain-complex-modules"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "For each degree $i$ write $Z^i=\\ker(d^i)$, $B^i=\\operatorname{im}(d^{i-1})$ and $H^i=Z^i/B^i$, so that $0\\to Z^i\\to C^i\\xrightarrow{d^i}B^{i+1}\\to 0$, $0\\to B^{i+1}\\to C^{i+1}$ and $0\\to B^i\\to Z^i\\to H^i\\to 0$ are exact. By the flat-tensor exactness lemma [lem-weil-pbc-flat-tensor-exact] (applied with $R=A$, $M=B$), all three stay exact after $-\\otimes_A B$ (for the surjectivity apply it to $C^i\\to B^{i+1}\\to 0$, for the injections to $0\\to Z^i\\to C^i$, $0\\to B^{i+1}\\to C^{i+1}$, $0\\to B^i\\to Z^i$). Since $B^{i+1}\\otimes_A B\\to C^{i+1}\\otimes_A B$ is injective, $d^i\\otimes 1$ factors as the surjection $C^i\\otimes_A B\\to B^{i+1}\\otimes_A B$ followed by an injection, so $\\ker(d^i\\otimes 1)=Z^i\\otimes_A B$ and likewise $\\operatorname{im}(d^{i-1}\\otimes 1)=B^i\\otimes_A B$ inside it. The third tensored sequence then identifies $H^i(C^\\bullet\\otimes_A B)=(Z^i\\otimes_A B)/(B^i\\otimes_A B)$ with $H^i\\otimes_A B$. These identifications are induced by the canonical tensor maps, so they give the canonical isomorphism $H^i(C^\\bullet)\\otimes_A B\\to H^i(C^\\bullet\\otimes_A B)$.",
+   "uses": [
+    "lem-weil-pbc-flat-tensor-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/coherent.tex",
+    "place": "Tag 02KH, label lemma-flat-base-change-cohomology, proof paragraph 'Since A -> B is flat, the same thing remains true on taking cohomology'"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-flat-tensor-exact"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/coherent.tex",
+  "place": "Tag 02KH, label lemma-flat-base-change-cohomology, proof paragraph 'Since A -> B is flat, the same thing remains true on taking cohomology'"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -56,10 +74,26 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-pc-flat-base-change-cohom",
   "by": "worker",
   "date": "2026-10-10"
+ },
+ "split_report": {
+  "date": "2026-10-11",
+  "item": "lem-pc-flat-tensor-complex-cohom",
+  "worker": "stage1",
+  "summary": "The item was not stated by a sorry-free project declaration. I split its proof into the cycle-boundary argument: the two short exact sequences defining cycles, boundaries, and cohomology remain exact after tensoring with the flat module B, by the existing Mathlib-backed node lem-weil-pbc-flat-tensor-exact; the resulting kernel and quotient identifications are the canonical comparison map.",
+  "blueprint": "Realizes the flat Cech-complex cohomology assertion in the ancestor lem-pc-flat-base-change-cohom proof, Step 1, where the source says that flatness preserves exactness when taking cohomology.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-ftc2047",
+  "group": "H1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-ftc2047 (reviewer sub-agent of L); spot-checked: Step 1 checked against cited lem-weil-pbc-flat-tensor-exact (R=A, M=B; hypotheses match); Mathlib grep: only Module.Flat.lTensor_shortComplex_exact / PreservesFiniteLimits tensorLeft (RingTheory/Flat/CategoryTheory.lean), no single homology-tensor declaration, so split stands (no B10). FIX more, RETURN less: (1) C1/D gap the second reading missed: kernel of d^i tensor 1 equals Z^i tensor B needs injectivity of B^{i+1} tensor B -> C^{i+1} tensor B; added the exact sequence 0->B^{i+1}->C^{i+1} and the factorisation argument, all from the cited node; (2) B4 preflight: step text rewritten in TeX. Note: second reading claims created.item was changed, but the file still has the parent item (correct; maintainer field).; 1 file(s) fixed by the reviewer"
  }
 }
