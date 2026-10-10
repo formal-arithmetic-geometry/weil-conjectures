@@ -1,8 +1,8 @@
 # Work queue
 
-934 items; claim with `tools/claim.py next <group> [--stage N]`.
+936 items; claim with `tools/claim.py next <group> [--stage N]`.
 
-## Stage 1: nodes to split (251)
+## Stage 1: nodes to split (253)
 
 | node | distance to a target | Lean state on the done branch |
 |---|---|---|
@@ -19,9 +19,10 @@
 | `lem-pc-derived-sections-pushforward-comparison` | 3014 | none |
 | `lem-pc-derived-qcoh-compact-generation` | 3015 | none |
 | `lem-sc-derived-open-restriction-adjunction-exact` | 3015 | none |
-| `lem-sc-finite-affine-derived-equivalence` | 3015 | none |
 | `lem-sc-finite-pushforward-derived-hom-qcoherent` | 3015 | none |
+| `def-pc-ringed-spaces-derived-direct-image` | 3016 | none |
 | `lem-pc-derived-qcoh-perfect-generation` | 3016 | none |
+| `lem-pc-ringed-spaces-derived-adjoint-general` | 3016 | none |
 | `lem-sc-bounded-above-finite-free-hom-acyclic` | 3016 | none |
 | `lem-sc-bounded-below-injective-resolution` | 3016 | none |
 | `lem-sc-p1-ext-resolution-derived-connecting` | 3016 | none |
@@ -37,7 +38,6 @@
 | `lem-sc-proper-flat-right-adjoint-affine-basechange` | 3018 | none |
 | `lem-sc-proper-flat-right-adjoint-restriction-open` | 3018 | none |
 | `lem-pc-genus-agrees-sc` | 4007 | rests_on_sorry |
-| `lem-sc-strict-henselization-dvr` | 4008 | none |
 | `prop-av-tate-rank` | 4008 | rests_on_sorry |
 | `cor-pc-sigma-pic-iso` | 4009 | rests_on_sorry |
 | `lem-pc-vanishing-above-dim` | 4009 | rests_on_sorry |
@@ -47,6 +47,9 @@
 | `lem-sc-hom-etale-locus-translation` | 4009 | none |
 | `lem-sc-mult-n-tangent-differential` | 4009 | none |
 | `lem-sc-positive-ample-hilbert-degree` | 4009 | none |
+| `lem-sc-strict-henselization-dimension` | 4009 | none |
+| `lem-sc-strict-henselization-noetherian` | 4009 | none |
+| `lem-sc-strict-henselization-regular` | 4009 | none |
 | `lem-weil-pbc-gm-pullback-strict-henselization` | 4009 | none |
 | `lem-weil-pbc-unrestricted-strict-henselization-stalk` | 4009 | none |
 | `lem-pc-hilb-separated` | 4010 | none |
@@ -65,7 +68,6 @@
 | `lem-pc-proper-support-perfect-direct-image` | 5011 | none |
 | `lem-sc-mult-n-locally-quasi-finite` | 5011 | none |
 | `thm-pc-semicontinuity-base-change` | 5011 | sorry_here |
-| `def-pc-flat-sheaf-modules` | 5012 | none |
 | `lem-pc-derived-acyclic-resolution` | 5012 | none |
 | `lem-pc-kflat-bounded-flat-replacement` | 5013 | none |
 | `lem-pc-kflat-closure` | 5013 | none |
@@ -946,7 +948,7 @@
 | `lem-weil-pbc-p1-field-dimension-one` | 4 | state |
 | `lem-weil-pbc-projective-space-zero-isomorphism` | 4 | state |
 
-Not open yet: 1331 nodes that wait for a statement dependency, 285 nodes that wait for stage 1.
+Not open yet: 1334 nodes that wait for a statement dependency, 287 nodes that wait for stage 1.
 
 ## Stage 3: modules to prove (0)
 
