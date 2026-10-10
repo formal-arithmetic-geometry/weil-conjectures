@@ -11,7 +11,7 @@
  },
  "kind": "statement",
  "title": "Descent of bounded finitely presented complex data",
- "statement": "Let I be a directed set and let (S_i)_{i\\in I} be an inverse system of quasi-compact, quasi-separated schemes with affine transition morphisms, where S_i=\\operatorname{Spec}(R_i) for Noetherian rings R_i, and let S=\\varprojlim_i S_i=\\operatorname{Spec}(R). Fix i\\in I, let X_i be a finitely presented S_i-scheme [def-pc-scheme], put X=X_i\\times_{S_i}S and X_j=X_i\\times_{S_i}S_j for j\\ge i [def-pc-base-change], and let G^\\bullet be a bounded complex of finitely presented \\mathcal{O}_X-modules. Then, after replacing i by some j\\ge i, there is a bounded complex H_j^\\bullet of finitely presented \\mathcal{O}_{X_j}-modules whose base change to X is isomorphic to G^\\bullet.",
+ "statement": "Let I be a directed set and let (S_i)_{i\\in I} be an inverse system of quasi-compact, quasi-separated schemes with affine transition morphisms, where S_i=\\operatorname{Spec}(R_i) for Noetherian rings R_i, and let S=\\varprojlim_i S_i=\\operatorname{Spec}(R). Fix i\\in I, let X_i be a finitely presented S_i-scheme [def-pc-scheme], put X=X_i\\times_{S_i}S and X_j=X_i\\times_{S_i}S_j for j\\ge i [def-pc-base-change]. Let G^\\bullet mean a Z-indexed family of finitely presented quasi-coherent \\mathcal{O}_X-modules [pqf-def-coherent], zero outside a finite interval, with \\mathcal{O}_X-linear differentials d^r:G^r\\to G^{r+1} satisfying d^{r+1}\\circ d^r=0. Then, after replacing i by some j\\ge i, there is such a bounded family H_j^\\bullet of finitely presented quasi-coherent \\mathcal{O}_{X_j}-modules and differentials whose base change to X is isomorphic to G^\\bullet as a complex.",
  "source": {
   "document": "literature/stacks-project/limits.tex",
   "place": "Lemma 32.10.2, Tag 01ZR; Lemma 32.10.4, Tag 05LY"
@@ -19,11 +19,60 @@
  "stmt_deps": [
   "def-pc-scheme",
   "def-pc-morphism-conventions",
-  "def-pc-base-change"
+  "def-pc-base-change",
+  "pqf-def-coherent"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Because the complex is bounded, only finitely many degrees contain terms. Its terms, differentials, and the finitely many equations that consecutive differentials compose to zero form finite module-and-map data; this is just the definition of a bounded complex.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/limits.tex",
+    "place": "Lemma 32.10.2, Tag 01ZR, finite bounded range of terms and maps"
+   }
+  },
+  {
+   "text": "Apply part (1) of lem-pc-fp-module-map-descent to each of the finitely many nonzero terms G^r, obtaining models G^r_j with isomorphisms \\alpha_r:(G^r_j)_X\\cong G^r; since I is directed and pullbacks of models are again models, all may be taken at one common stage j. For each r, apply part (2) to the fixed models G^r_j, G^{r+1}_j and the map \\alpha_{r+1}^{-1}\\circ d^r\\circ\\alpha_r:(G^r_j)_X\\to(G^{r+1}_j)_X, and again pass to one common later stage. This gives maps d^r_j:G^r_j\\to G^{r+1}_j between the same model of each term (so consecutive differentials share the model of their common term) with \\alpha_{r+1}\\circ(d^r_j)_X=d^r\\circ\\alpha_r.",
+   "uses": [
+    "lem-pc-fp-module-map-descent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/limits.tex",
+    "place": "Lemma 32.10.2, Tag 01ZR, descent of finitely presented modules, maps, and relations"
+   }
+  },
+  {
+   "text": "Apply finite relation descent to the finitely many equations saying that each consecutive pair of descended differentials has composite zero. After one further stage these equations hold on X_j, because their base changes are the corresponding zero composites in G^\\bullet.",
+   "uses": [
+    "lem-pc-fp-relation-descent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/limits.tex",
+    "place": "Lemma 32.10.2, Tag 01ZR, descent of the finite relation data"
+   }
+  },
+  {
+   "text": "The descended terms and differentials therefore form a bounded complex H_j^\\bullet=(G^r_j,d^r_j) of finitely presented quasi-coherent \\mathcal{O}_{X_j}-modules. The termwise isomorphisms \\alpha_r commute with every differential by construction in Step 2, so they assemble to an isomorphism of complexes from the base change of H_j^\\bullet to G^\\bullet.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/limits.tex",
+    "place": "Lemma 32.10.2, Tag 01ZR, assembly of the descended finite complex"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-fp-module-map-descent",
+  "lem-pc-fp-relation-descent"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/limits.tex",
+  "place": "Lemma 32.10.2, Tag 01ZR"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -55,12 +104,28 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-pc-flat-bounded-complex-descent",
   "by": "worker",
   "date": "2026-10-10"
  },
  "chapter": "sec-picard-framework",
- "unit": "sk-thm-picard-semicon"
+ "unit": "sk-thm-picard-semicon",
+ "split_report": {
+  "date": "2026-10-11",
+  "item": "lem-pc-fp-complex-descent",
+  "worker": "stage1",
+  "summary": "No sorry-free project declaration states this geometric descent assertion. I split the proof into the elementary finite encoding of a bounded complex, the statement-only finite-presentation descent of its modules, maps, and relations, and the elementary assembly of the descended data into a complex and a base-change isomorphism.",
+  "blueprint": "Realizes the ancestor Noetherian-approximation proof sentence on descent of the bounded finitely presented complex data (Tags 01ZR and 05LY).",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-fcd2656",
+  "group": "E1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-fcd2656 (reviewer sub-agent of L); spot-checked: Read packet whole; checked item vs Tag 01ZR, both new nodes vs 01ZR parts (1)-(3), no duplicate 01ZR node (flat/proper-support nodes depend on the item; lem-pc-affine-perfect-colimit-descent is finite projective/affine, not applicable, so no citation owed); Noetherian hypothesis unused but harmless (imported statement). FIX more, RETURN less: C4 Step 2 applied the single-map node lem-pc-fp-module-map-descent separately to each differential, which gives independent models of each shared term G^{r+1} and no complex; restated that node as Tag 01ZR parts (1) modules and (2) maps between fixed models, rewrote Step 2 to descend terms first then differentials between the fixed models, and Step 4 to use the resulting isomorphisms alpha_r. Missed by E1 second reading.; 2 file(s) fixed by the reviewer"
+ }
 }
