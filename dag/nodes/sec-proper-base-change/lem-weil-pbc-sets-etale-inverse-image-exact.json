@@ -27,9 +27,66 @@
   "lem-weil-pbc-etale-base-change-continuous",
   "def-weil-pbc-sites-and-cohomology"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "The base-change functor on small etale sites is continuous, sends coverings to coverings, preserves the relevant fibre products, and its sectionwise direct image on sheaves of sets is a sheaf, by [lem-weil-pbc-etale-base-change-continuous]. Thus the direct image in the statement is the functor to which the inverse image is adjoint.",
+   "uses": [
+    "lem-weil-pbc-etale-base-change-continuous"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Definition 00WV and Lemma 00WW (lemma-pushforward-sheaf)"
+   }
+  },
+  {
+   "text": "The set-valued inverse image is the sheafification of the presheaf pullback along base change. The existing construction [lem-weil-pbc-etale-inverse-image-algebraic-structures] states that this functor is left adjoint to the sectionwise direct image and commutes with finite limits. Therefore it preserves the finite limits asserted in the statement, including the terminal sheaf and binary products.",
+   "uses": [
+    "lem-weil-pbc-etale-inverse-image-algebraic-structures"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Proposition 00X6 (proposition-get-morphism), with Lemmas 00VE, 00WX and 00WJ"
+   }
+  },
+  {
+   "text": "Since the inverse image is left adjoint to the direct image by Step 2, it preserves all small colimits by [lem-weil-pbc-left-adjoint-preserves-colimits]. In particular it preserves finite colimits.",
+   "uses": [
+    "lem-weil-pbc-left-adjoint-preserves-colimits"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/categories.tex",
+    "place": "Lemma 0038 (lemma-adjoint-exact), part (1)"
+   }
+  },
+  {
+   "text": "Combining Steps 1–3, the continuous base-change functor has an inverse-image functor preserving finite limits and finite colimits, hence it satisfies the morphism-of-sites condition in [def-weil-pbc-sites-and-cohomology](3).",
+   "uses": [
+    "lem-weil-pbc-etale-base-change-continuous",
+    "lem-weil-pbc-etale-inverse-image-algebraic-structures",
+    "lem-weil-pbc-left-adjoint-preserves-colimits",
+    "def-weil-pbc-sites-and-cohomology"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Definition 00X1 (definition-morphism-sites)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-etale-base-change-continuous",
+  "lem-weil-pbc-etale-inverse-image-algebraic-structures",
+  "lem-weil-pbc-left-adjoint-preserves-colimits",
+  "def-weil-pbc-sites-and-cohomology"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Lemma 03Q1 (lemma-stalk-pullback), assertion (2), and Section 03PZ (section-inverse-image), read with Sites Definition 00X1 and Proposition 00X6"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -68,10 +125,26 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-weil-pbc-affine-etale-site-base-change",
   "by": "worker",
   "date": "2026-10-10"
+ },
+ "split_report": {
+  "date": "2026-10-11",
+  "item": "lem-weil-pbc-sets-etale-inverse-image-exact",
+  "worker": "stage1",
+  "summary": "Split exactness into the continuous base-change/direct-image fact, the existing set-valued inverse-image construction and finite-limit preservation, preservation of finite colimits by its left-adjoint property, and the resulting morphism-of-sites conclusion. No new DAG nodes were needed.",
+  "blueprint": "Realizes the ancestor clause asserting that base change defines a continuous functor and a morphism of affine etale sites, specifically exactness of inverse image after comparison with the full small etale sites.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-sie1745",
+  "group": "G1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-sie1745 (reviewer sub-agent of L); spot-checked: Read packet whole. C/D: Step 2 cites lem-weil-pbc-etale-inverse-image-algebraic-structures(1) whose statement gives the set inverse image, adjunction to sectionwise u_*, finite-limit preservation; its created.item is prop-weil-pbc-inverse-image-modules-exact and its proof_deps do not contain the item or its ancestor lem-weil-pbc-affine-etale-site-base-change (no cycle). Step 3 finite colimits via generic left-adjoint node (generic tool, sound). Step 4 matches Def 00X1 clause in def-weil-pbc-sites-and-cohomology(3). E: hypotheses arbitrary h, small etale sites, match. Leaf check: grep Mathlib/CategoryTheory/Sites/Pullback.lean l.92-101 PreservesFiniteLimits (Functor.sheafPullback G A J K) needs [RepresentablyFlat G] and Mathlib-form sites; not an exact match or one-line specialization (representable flatness of base change on the small etale site is itself the content), so no leaf. No repairs."
  }
 }
