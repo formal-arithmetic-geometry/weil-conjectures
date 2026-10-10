@@ -1,0 +1,61 @@
+{
+ "id": "lem-weil-pbc-sets-adjoint-continuous-restriction-adjunction",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lemma-weil-pbc-proper-strict-henselian-h0",
+   "place": "the localization argument used to identify the etale inverse image with restriction in the proof of the inverse-image/restriction lemma",
+   "via": [
+    "lem-weil-pbc-sets-etale-inverse-image-restriction",
+    "lem-weil-pbc-sets-pushforward-stalk-strict-henselization"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Restriction of sheaves of sets along an etale localization is left adjoint to base-change direct image",
+ "statement": "Let $S$ and $T$ be schemes and let $\\mathcal C=T_{\\Et}$ and $\\mathcal D=S_{\\Et}$ be their small etale sites [def-weil-pbc-etale-site], let $\\lambda:\\mathcal C\\to\\mathcal D$ and $\\beta:\\mathcal D\\to\\mathcal C$ be functors with $\\lambda\\dashv\\beta$ and counit $\\varepsilon:\\lambda\\beta\\to\\mathrm{id}_{\\mathcal D}$. Assume precomposition with each functor carries sheaves of sets [def-weil-pbc-etale-sheaf-of-sets] to sheaves of sets, and write $\\operatorname{Sh}(\\mathcal C)$, $\\operatorname{Sh}(\\mathcal D)$ for the categories of sheaves of sets. Then precomposition $\\lambda^s:\\operatorname{Sh}(\\mathcal D)\\to\\operatorname{Sh}(\\mathcal C)$ is left adjoint to precomposition $\\beta^s:\\operatorname{Sh}(\\mathcal C)\\to\\operatorname{Sh}(\\mathcal D)$, and its unit at a sheaf $G$ is the morphism whose component at $W\\in\\mathcal D$ is $G(\\varepsilon_W):G(W)\\to G(\\lambda\\beta W)$. If $L:\\operatorname{Sh}(\\mathcal D)\\to\\operatorname{Sh}(\\mathcal C)$ is another left adjoint to $\\beta^s$ with unit $\\eta$, there is a unique natural isomorphism $\\rho:L\\xrightarrow{\\sim}\\lambda^s$ satisfying $\\beta^s(\\rho_G)\\circ\\eta_G=G(\\varepsilon)$ for every sheaf $G$.",
+ "source": {
+  "document": "literature/stacks-project/sites.tex",
+  "place": "Lemmas Tag 00XX (lemma-have-functor-other-way) and Tag 09VQ (uniqueness of adjoints), with the sheaf-of-sets argument of Tag 00WX"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-etale-site",
+  "def-weil-pbc-etale-sheaf-of-sets"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "left adjoint induced by precomposition along a functor of sites and right adjoint precomposition along its adjoint",
+   "results": "CategoryTheory.Functor.sheafPullback and Functor.sheafAdjunctionContinuous; no declaration for the stated sheaves-of-sets localization adjunction",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "sheaves of sets precomposition along adjoint continuous functors is an adjunction",
+   "results": "Functor.sheafAdjunctionContinuous (Mathlib/CategoryTheory/Sites/Pullback.lean), only the generic continuous-functor construction; no localization statement with the unit formula",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "rg -n 'sheafAdjunctionContinuous|leftAdjointUniq|precomp.*sheaf' /home/ubuntu/weil-src-slopmaster2/.lake/packages/mathlib/Mathlib/CategoryTheory/Sites /home/ubuntu/weil-src-slopmaster2/.lake/packages/mathlib/Mathlib/Topology/Sheaves",
+   "results": "Generic sheafAdjunctionContinuous and Adjunction.leftAdjointUniq only; no statement for the sheaves-of-sets localization adjunction",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "created": {
+  "item": "lem-weil-pbc-sets-etale-inverse-image-restriction",
+  "by": "worker",
+  "date": "2026-10-10"
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-iff"
+}

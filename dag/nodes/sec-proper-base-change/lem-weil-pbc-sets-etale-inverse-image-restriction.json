@@ -25,20 +25,117 @@
   "lem-weil-pbc-sets-etale-inverse-image-composition-units",
   "def-pc-fibre-product"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Write $Y=U$, so $j:Y\\to X$ and $G|_Y=G|_U$. By [lem-weil-pbc-etale-localization-functor-adjoint] the functor $\\iota_j:Y_{\\Et}\\to X_{\\Et}$ sending $V\\to Y$ to $V\\to X$ is well-defined, and the base-change functor $b_j:X_{\\Et}\\to Y_{\\Et}$ sends $W$ to $W\\times_XY$. The adjunction $\\iota_j\\dashv b_j$ has counit the projection $p_W:W\\times_XY\\to W$. By [lem-weil-pbc-sets-etale-inverse-image-composition-units] the direct image on sheaves of sets is $(j_*F)(W)=F(W\\times_XY)$, i.e. precomposition with $b_j$.",
+   "uses": [
+    "lem-weil-pbc-etale-localization-functor-adjoint",
+    "lem-weil-pbc-sets-etale-inverse-image-composition-units"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/topologies.tex",
+    "place": "Tags 021H and 021I"
+   }
+  },
+  {
+   "text": "Precomposition with $\\iota_j$ preserves sheaves: a covering of an object of $Y_{\\Et}$ remains a jointly surjective etale covering after viewing all maps over $X$, and fibre products are unchanged. Precomposition with $b_j$ preserves sheaves because [lem-weil-pbc-etale-covering-base-change] makes the base-changed family a covering and [lem-weil-pbc-etale-base-change-finite-limits] identifies the base-changed fibre products. Therefore $G|_Y=G\\circ\\iota_j$ is a sheaf of sets and $j_*F=F\\circ b_j$ is a sheaf of sets.",
+   "uses": [
+    "def-weil-pbc-etale-site",
+    "def-pc-fibre-product",
+    "lem-weil-pbc-etale-covering-base-change",
+    "lem-weil-pbc-etale-base-change-finite-limits",
+    "def-weil-pbc-etale-sheaf-of-sets",
+    "lem-weil-pbc-sets-etale-inverse-image-composition-units"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Tag 00WW and Topologies Tags 021F and 021I"
+   }
+  },
+  {
+   "text": "Apply [lem-weil-pbc-sets-adjoint-continuous-restriction-adjunction] to $\\lambda=\\iota_j$ and $\\beta=b_j$. It gives an adjunction from sheaves of sets on $X_{\\Et}$ to sheaves of sets on $Y_{\\Et}$, with unit $u_G(W)=G(p_W):G(W)\\to G(W\\times_XY)$.",
+   "uses": [
+    "lem-weil-pbc-sets-adjoint-continuous-restriction-adjunction",
+    "lem-weil-pbc-etale-localization-functor-adjoint",
+    "lem-weil-pbc-sets-etale-inverse-image-composition-units",
+    "def-weil-pbc-etale-site",
+    "def-weil-pbc-etale-sheaf-of-sets"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Tag 00XX (1)"
+   }
+  },
+  {
+   "text": "By [lem-weil-pbc-continuous-functor-sheaf-pullback-adjunction], the sheafified inverse image along the base-change functor is left adjoint to precomposition with that functor; by [lem-weil-pbc-sets-etale-inverse-image-composition-units] this is the set-valued inverse image $j^{-1}$ and direct image $j_*$, and $\\eta_{j,G}:G\\to j_*j^{-1}G$, $s\\mapsto j^*s$, is its unit. The functor $b_j$ satisfies the hypothesis by Step 2. The uniqueness clause of [lem-weil-pbc-sets-adjoint-continuous-restriction-adjunction] therefore gives a unique natural isomorphism $\\rho:j^{-1}\\xrightarrow{\\sim}(-)|_Y$ such that $j_*(\\rho_G)\\circ\\eta_{j,G}=u_G$. This proves clause (1), including naturality.",
+   "uses": [
+    "lem-weil-pbc-continuous-functor-sheaf-pullback-adjunction",
+    "lem-weil-pbc-sets-adjoint-continuous-restriction-adjunction",
+    "lem-weil-pbc-sets-etale-inverse-image-composition-units"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Tags 00XX (2), 00XY and Etale Cohomology Tag 03S2"
+   }
+  },
+  {
+   "text": "Evaluate $j_*(\\rho_G)\\circ\\eta_{j,G}=u_G$ at $W\\in X_{\\Et}$. Since $(j_*\\rho_G)(W)=\\rho_G(W\\times_XY)$ and $u_G(W)=G(p_W)$, this is exactly $\\rho_G(W\\times_XY)\\circ\\eta_{j,G}(W)=s|_{W\\times_XY}$ for $s\\in G(W)$. Taking $W=X$ and identifying $X\\times_XY$ with $Y$ gives the global-sections assertion; $\\rho_G(Y)$ is an isomorphism as a component of $\\rho$.",
+   "uses": [
+    "lem-weil-pbc-sets-etale-inverse-image-composition-units",
+    "def-pc-fibre-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Tag 00XZ"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-etale-localization-functor-adjoint",
+  "lem-weil-pbc-sets-etale-inverse-image-composition-units",
+  "def-weil-pbc-etale-site",
+  "def-pc-fibre-product",
+  "lem-weil-pbc-etale-covering-base-change",
+  "lem-weil-pbc-etale-base-change-finite-limits",
+  "def-weil-pbc-etale-sheaf-of-sets",
+  "lem-weil-pbc-sets-adjoint-continuous-restriction-adjunction",
+  "lem-weil-pbc-continuous-functor-sheaf-pullback-adjunction"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/sites.tex",
+  "place": "Tags 00WW, 00XX, 00XY, 00XZ, 021F, 021H and 021I"
+ },
  "mathlib_searches": [
   {
+   "tool": "leansearch",
+   "query": "inverse image of sheaves of sets on a small etale site along an etale morphism equals restriction",
+   "results": "No declaration for this small-etale sheaves-of-sets statement",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "sheaf of sets etale localization inverse image restriction",
+   "results": "Generic Functor.sheafPullback and over-site restriction only; no scheme-etale declaration",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
    "tool": "grep",
-   "query": "grep -n '^def \\|^lemma \\|^abbrev ' Mathlib/CategoryTheory/Sites/Over.lean; ls Mathlib/AlgebraicGeometry/Sites/; grep -rn smallEtale Mathlib/AlgebraicGeometry/Sites/*.lean | grep -i 'over\\|restrict\\|pullback'",
-   "results": "CategoryTheory.GrothendieckTopology.over, overPullback (Sites/Over.lean:248, 288): the topology and pullback functor on Over X for a general site; AlgebraicGeometry/Sites/{Etale,Small,AffineEtale,EtalePoint}.lean: the small etale site, no identification of the inverse image along an etale morphism with restriction",
+   "query": "rg -n 'smallEtale|sheafPullback|overPullback|restriction' /home/ubuntu/weil-src-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicGeometry/Sites /home/ubuntu/weil-src-slopmaster2/.lake/packages/mathlib/Mathlib/CategoryTheory/Sites",
+   "results": "Small etale site definitions and generic overPullback/sheafPullback, but no inverse-image-as-restriction theorem",
    "date": "2026-10-10",
    "verdict": "no match"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "R-ps3",
@@ -54,5 +151,20 @@
   "slopmaster2": {
    "state": "none"
   }
+ },
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "lem-weil-pbc-sets-etale-inverse-image-restriction",
+  "worker": "stage1",
+  "summary": "Adapted the already split abelian localization proof to sheaves of sets. The only missing non-elementary dependency was isolated as the statement-only sets adjoint-continuous-restriction node; the remaining steps use the existing etale localization, covering/base-change, and set-valued inverse-image nodes. The unit formula is evaluated on objects and then on the terminal object for global sections.",
+  "blueprint": "Steps 1-2 realize the localization and sheaf-preservation discussion in the blueprint ancestor's inverse-image restriction argument; Steps 3-5 realize the adjunction, canonical isomorphism, and unit-on-sections clauses from the Tag 03S2/00XZ route."
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-sir",
+  "group": "H1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-sir (reviewer sub-agent of L); spot-checked: Source: Stacks Etale Cohomology Tag 03S2 (j^{-1} is restriction via U_et -> X_et) and Sites 00XX lemma-have-functor-other-way / 00XZ; the item statement (unchanged) agrees: j etale, G sheaf of sets, rho natural iso with rho(j^*s)=s|_{W x_X U}. Step 1 carried by lem-weil-pbc-etale-localization-functor-adjoint (1)-(3) (iota_j -| b_j, counit p_W). Step 2: G o iota_j sheaf (def-weil-pbc-etale-site, j o v etale), F o b_j sheaf by lem-weil-pbc-etale-covering-base-change and lem-weil-pbc-etale-base-change-finite-limits (3). Step 3: new node with C=Y_et, D=X_et, lambda=iota_j, beta=b_j; checked the variance: lambda -| beta gives beta^op -| lambda^op, hence lambda^s -| beta^s with unit G(eps_W), true. Step 4: lem-weil-pbc-continuous-functor-sheaf-pullback-adjunction (2) with u=b_j (hypothesis from Step 2) is j^{-1} -| j_* of lem-weil-pbc-sets-etale-inverse-image-composition-units; uniqueness of adjoints compatible with units gives rho. Step 5 elementary evaluation at W. Small case j=id: rho is the identity-compatible iso id^{-1}G=G. Fixes (FIX more, RETURN less): (1) dag/nodes/sec-proper-base-change/lem-weil-pbc-sets-adjoint-continuous-restriction-adjunction.json: statement: 'sites [def-weil-pbc-etale-site]' cited the small etale site definition for arbitrary sites (B3/C4); specialized to C=T_et, D=S_et small etale sites of schemes S,T, which is the only use, and named Sh(C), Sh(D) as categories of sheaves of sets. (2) item: proof steps 1,2,3,5 and proof_deps: def-weil-pbc-direct-image (abelian sheaves only) cited for the direct image of sheaves of sets (C4); replaced by lem-weil-pbc-sets-etale-inverse-image-composition-units, which states (e_*H)(U)=H(U x_S T) and j^{-1} -| j_* for sets; Step 4 text now cites it for identifying u_s with j^{-1} and the unit with s -> j^*s, and says b_j satisfies the hypothesis by Step 2. (3) item step 1: text: the proof wrote j:Y->X while the statement has j:U->X; added 'Write Y=U'. Step 3 uses: added def-weil-pbc-etale-site, def-weil-pbc-etale-sheaf-of-sets. Start 'Sat Oct 10 03:38:38 PM UTC 2026', end 'Sat Oct 10 03:40:01 PM UTC 2026'.; 2 file(s) fixed by the reviewer"
  }
 }
