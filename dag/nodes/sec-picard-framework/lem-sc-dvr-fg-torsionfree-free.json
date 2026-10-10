@@ -23,7 +23,11 @@
  ],
  "proof": [],
  "proof_deps": [],
- "proof_origin": null,
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Tag 0AUW, part (3), with the Mathlib specialization recorded below"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -35,32 +39,53 @@
   {
    "tool": "leanfinder",
    "query": "finite torsion-free module over DVR free",
-   "results": "No theorem combining a DVR hypothesis with finite torsion-free implies free",
+   "results": "Module.free_of_finite_type_torsion_free' in Mathlib/LinearAlgebra/FreeModule/PID.lean:387; specializes using the DVR principal-ideal-ring instance",
    "date": "2026-10-10",
-   "verdict": "no match"
+   "verdict": "generalization: finite torsion-free modules over any principal ideal ring are free"
   },
   {
    "tool": "loogle",
    "query": "Module.Free",
-   "results": "General Module.Free declarations only; no DVR torsion-free criterion",
+   "results": "Module.free_of_finite_type_torsion_free' (Mathlib/LinearAlgebra/FreeModule/PID.lean:387)",
    "date": "2026-10-10",
-   "verdict": "no match"
+   "verdict": "generalization: finite torsion-free modules over any principal ideal ring are free"
   },
   {
    "tool": "grep",
    "query": "rg 'torsion.*free|free.*torsion' Mathlib/RingTheory Mathlib/LinearAlgebra",
-   "results": "No declaration for finite torsion-free modules over a DVR",
+   "results": "Mathlib/LinearAlgebra/FreeModule/PID.lean:387 declares Module.free_of_finite_type_torsion_free'; Mathlib/RingTheory/DiscreteValuationRing/Basic.lean:58 gives the principal-ideal-ring DVR class",
    "date": "2026-10-10",
-   "verdict": "no match"
+   "verdict": "generalization: specializes to DVRs"
   }
  ],
- "mathlib_match": null,
- "status": "unsplit",
+ "mathlib_match": {
+  "declaration": "Module.free_of_finite_type_torsion_free'",
+  "file": "Mathlib/LinearAlgebra/FreeModule/PID.lean",
+  "how": "specializes in one line: `instance Module.free_of_finite_type_torsion_free' [Module.Finite R M] [IsTorsionFree R M] : Module.Free R M` (line 387, R a principal ideal domain: `[CommRing R] [IsDomain R] [IsPrincipalIdealRing R]`); a discrete valuation ring is a principal ideal domain by [def-sc-discrete-valuation-ring] (Mathlib's `IsDiscreteValuationRing` extends `IsPrincipalIdealRing`, Mathlib/RingTheory/DiscreteValuationRing/Basic.lean:58), finite generation is `Module.Finite R M`, and over a domain `IsTorsionFree` is the usual torsion-freeness; together with finite generation, Module.Free gives finite free (line 387 read with sed on 2026-10-10)."
+ },
+ "status": "mathlib",
  "created": {
   "item": "lem-sc-regular-curve-torsionfree-free",
   "by": "worker",
   "date": "2026-10-10"
  },
  "chapter": "sec-picard-framework",
- "unit": "sk-thm-picard-rr"
+ "unit": "sk-thm-picard-rr",
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "lem-sc-dvr-fg-torsionfree-free",
+  "worker": "stage1",
+  "summary": "Classified the item as a Mathlib leaf. Mathlib's Module.free_of_finite_type_torsion_free' gives a Module.Free structure for any Module.Finite torsion-free module over a principal ideal ring; the existing def-sc-discrete-valuation-ring identifies a DVR with this structure, and finite generation supplies the finite-rank condition.",
+  "blueprint": [
+   "The torsion-free quotient: finitely generated and torsion-free over the discrete valuation ring ... hence free"
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-dtf",
+  "group": "C1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-dtf (reviewer sub-agent of L); spot-checked: Source: Stacks More on Algebra Tag 0AUW (more-algebra-lemma-dedekind-torsion-free-flat) part (3): a finite torsion free module over a PID is finite free; the node's statement (R a DVR [def-sc-discrete-valuation-ring], M finitely generated torsion-free, conclusion finite free) is the DVR case, a DVR being a local PID by the cited definition node. Statement unchanged by the delivery; only the item's file and the report changed, one commit, review section present. Mathlib leaf verified with sed: Mathlib/LinearAlgebra/FreeModule/PID.lean:387 'instance Module.free_of_finite_type_torsion_free' [Module.Finite R M] [IsTorsionFree R M] : Module.Free R M' in context [CommRing R] [IsPrincipalIdealRing R] (line 103) [IsDomain R] (line 139); Mathlib/RingTheory/DiscreteValuationRing/Basic.lean:58 IsDiscreteValuationRing extends IsPrincipalIdealRing, IsLocalRing over IsDomain; Module.IsTorsionFree (Algebra/Module/Torsion/Free.lean:45, regular elements act injectively) is the usual notion over a domain; finite + free = finite free: a one-line specialization (B8). Small cases: M=0 (rank 0), M=R^n, R/(t) excluded as not torsion-free. Fix: dag/nodes/sec-picard-framework/lem-sc-dvr-fg-torsionfree-free.json: mathlib_match.how and three mathlib_searches results: the line was given as 376-380, which is the unprimed Module.free_of_finite_type_torsion_free (span hypothesis); the recorded primed declaration is at line 387; how rewritten to quote the declaration and its line (A6/B6). Start Sat Oct 10 03:38:09 PM UTC 2026, end Sat Oct 10 03:38:50 PM UTC 2026.; 1 file(s) fixed by the reviewer"
+ }
 }
