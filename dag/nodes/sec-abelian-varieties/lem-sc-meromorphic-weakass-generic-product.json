@@ -25,39 +25,93 @@
   "pqf-def-coherent",
   "def-weil-pbc-module-stalk"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Work on an affine open U = Spec(A). The irreducible components of U correspond to the finitely many minimal primes q_1, ..., q_t of A, and their generic points are exactly the points represented by these primes. The hypothesis on quasi-compact opens gives the required finiteness. By [lem-sc-affine-weakass-nonzerodivisors], the non-zero-divisors of A are the complement of the union of the weakly associated primes; a prime p of A is weakly associated to A if and only if the point p of U is a weakly associated point of X, i.e. pA_p is weakly associated to A_p = O_{X,p} (elementary, Algebra Lemma 10.66.2, tag 0566: localization is exact, so the annihilator of a/s in A_p is Ann_A(a)A_p, and the primes of A_p are the primes of A contained in p, so p is minimal over Ann_A(a) exactly when pA_p is minimal over Ann_A(a)A_p). Hypothesis (a) therefore puts every weakly associated prime of A among the generic points of irreducible components of X lying in U, which are exactly the generic points of the irreducible components of U, i.e. among the q_i. The affine total-quotient calculation [lem-sc-affine-totalquotient-minimal-product] then gives Q(A) = product_i A_{q_i}.",
+   "uses": [
+    "lem-sc-affine-weakass-nonzerodivisors",
+    "lem-sc-affine-totalquotient-minimal-product"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/divisors.tex",
+    "place": "Tag 0EMF, proof: affine open Spec(A), finite minimal primes, and Algebra Lemmas 10.66.7 (tag 05C3), 10.66.2 (tag 0566) and 10.25.4 (tag 02LX)"
+   }
+  },
+  {
+   "text": "For U = Spec(A), the value of the localization presheaf defining K_X is Q(A). For a generic point eta_i represented by q_i, the inverse image of U under j_{eta_i}: Spec(O_{X,eta_i}) \\to X is Spec(A_{q_i}), so the value of j_{eta_i,*} O_{X,eta_i} on U is A_{q_i}; if eta_i is not in U the value is zero. Thus the affine isomorphism in Step 1 is exactly K_X(U) = product_{eta in X^0 intersect U} j_{eta,*} O_{X,eta}(U). These identifications agree on inclusions of affine opens, so the affine-basis equalities glue to K_X = product_{eta in X^0} j_{eta,*} O_{X,eta}.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/divisors.tex",
+    "place": "Tag 0EMF, proof: identify the affine presheaf with j_* O_Y and conclude the sheaf isomorphism"
+   }
+  },
+  {
+   "text": "Let F be quasi-coherent and write M = F(U) on an affine U = Spec(A). Tensoring the finite product decomposition of Step 1 with M gives K_X(U) tensor_A M = (product_i A_{q_i}) tensor_A M = product_i (A_{q_i} tensor_A M) = product_i M_{q_i}; the middle equality is finite distributivity of tensor products over finite products. The factor M_{q_i} is the stalk F_{eta_i}, and the same restriction compatibility as in Step 2 identifies the resulting affine maps with the canonical map K_X tensor_{O_X} F \\to product_{eta in X^0} j_{eta,*} F_eta. Hence K_X(F) = product_{eta in X^0} j_{eta,*} F_eta.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/divisors.tex",
+    "place": "Tag 0EMF, statement and proof part (2): tensor the first decomposition with a quasi-coherent module"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sc-affine-weakass-nonzerodivisors",
+  "lem-sc-affine-totalquotient-minimal-product"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/divisors.tex",
+  "place": "Tag 0EMF (Lemma 31.24.6), with Algebra Lemmas 10.66.7 (tag 05C3), 10.66.2 (tag 0566) and 10.25.4 (tag 02LX)"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
-   "query": "weakly associated points of a locally Noetherian scheme are associated points and generic points",
-   "results": "No declaration for weakly associated points or the meromorphic sheaf; unrelated generic-point and Noetherian stalk declarations",
+   "query": "total quotient ring product of localizations at minimal primes weakly associated",
+   "results": "PrimeSpectrum.PiLocalization; IsLocalization.subsingleton_primeSpectrum_of_mem_minimalPrimes; no total quotient product theorem",
    "date": "2026-10-11",
    "verdict": "no match"
   },
   {
    "tool": "loogle",
-   "query": "NoetherianSpace finite irreducibleComponents, associated points weakly associated",
-   "results": "Unknown identifier NoetherianSpace",
+   "query": "Ideal minimalPrimes total quotient ring localization product",
+   "results": "0 hits; application type mismatch for minimalPrimes",
    "date": "2026-10-11",
    "verdict": "unavailable"
   },
   {
    "tool": "grep",
-   "query": "rg -n 'WeakAss|weakly associated|associated points' Mathlib",
-   "results": "no matches",
+   "query": "weakly associated|total quotient|minimal primes (Mathlib/RingTheory)",
+   "results": "no matching declarations",
    "date": "2026-10-11",
    "verdict": "no match"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-sc-meromorphic-sheaf-generic-product",
   "by": "worker",
   "date": "2026-10-10"
  },
  "chapter": "sec-abelian-varieties",
- "unit": "sk-def-av-ample-degree"
+ "unit": "sk-def-av-ample-degree",
+ "split_report": {
+  "date": "2026-10-11",
+  "item": "lem-sc-meromorphic-weakass-generic-product",
+  "worker": "stage1",
+  "summary": "No sorry-free Lean declaration states the item. I split the proof into the affine total-quotient calculation, its identification with the generic-point pushforward product on affine opens and gluing, and the finite-product tensor calculation for a quasi-coherent module. Two statement-only algebra nodes record the nonzerodivisor/weakly-associated criterion (Tag 10.66.7) and the total quotient decomposition (Tag 10.25.4). The local divisors.tex checkout is absent; the Stacks statement and proof were read online and the affine argument is written out here.",
+  "blueprint": "Realizes lem-sc-hilbert-polynomial proof induction step: the description of K_X and K_X(F) at generic points using the weakly-associated-point and finite-component hypotheses of Tag 0EMF.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-mwg2900",
+  "group": "M1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-mwg2900 (reviewer sub-agent of L); spot-checked: Head a57f8c0ac is a rebase of a10bcb9d7 onto 0cc04154f, delivery files identical. Item vs Tag 0EMF (hyps a,b; product and quasi-coherent clause; matches H1 step use, invertible L is quasi-coherent); weakly-associated-point definition inline, verbatim as in lem-sc-ass-weakass-locally-noetherian; K_X defined inline as in H1 (no def-sc-meromorphic node exists); new nodes vs 02LX/05C3, true (minimal primes are zero-divisors), not duplicates of the 02LX nodes. FIX more, RETURN less: (1) C4/B3 lem-sc-affine-totalquotient-minimal-product cited lem-sc-ass-weakass-locally-noetherian (a locally Noetherian scheme lemma) for the ring notion of weakly associated prime: definition written inline, stmt_dep dropped (Second reading removed the same dep from the sibling but missed this one); (2) source tags: 0546 is the section, the zero-divisor lemma is tag 05C3 and the definition 0547, corrected in both new nodes and the item; (3) C1 Step 1 used uncited point/prime translation of weak association (Tag 0566): folded in with its two-line localization argument and the tag.; 3 file(s) fixed by the reviewer"
+ }
 }
