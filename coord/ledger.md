@@ -1736,3 +1736,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 15:10 L: returned deliver/J1/lem-sc-point-tangent-separation-closed-immersion (reviewer RETURN: 1. D2/D1: step 3 and new node lem-sc-point-tangent-criterion-closed-immersion: the new node is the item itself (same k, )
 - 15:10 L: merged deliver/C1/lem-sc-etale-affine-qcoherent (reviewer FIX; after a return; new nodes: 1)
 - 15:11 L: retired 3 uncited new nodes of M1's lem-exc-field-discrete-modules (lem-exc-pi1-galois-identification, lem-exc-galois-descent-equalizer, lem-exc-etale-site-gset-coverings): no step cites them after the repair (reviewer R-fd4)
+- 15:11 L: merged deliver/E1/lem-sc-conductor-sections (reviewer FIX+NODE(1); first push; new nodes: 2)
