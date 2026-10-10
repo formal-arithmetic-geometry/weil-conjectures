@@ -1,0 +1,13 @@
+# lem-weil-pbc-limit-finite-presentation
+
+## Worker delivery
+
+Files written: `dag/nodes/sec-proper-base-change/lem-weil-pbc-limit-finite-presentation.json` and this report. No new nodes; no Lean attachments; no WANTED source. Stacks `algebra.tex` was read from the F2 checkout because this H1 checkout has no fetched literature tree.
+
+The statement is unchanged. Stacks 00R0 states clauses (1)-(4) and leaves its proof to the reader, referring to local Tag 00QV. The item's clause (5) follows from the same polynomial presentation by base change to `R`; it is stated explicitly and does not need the module assertion of Tag 00R1. The six steps construct a coefficient subring `C`, the directed system of finite type subrings containing it, the quotient models `S_T`, inverse maps for their base changes, and the colimit universal property for `S`. The proof cites the Lean-closed `lemma-nagata-ring-finite-type-subalgebras`, the existing Mathlib leaf `lem-weil-pbc-polynomial-scalar-extension`, and the relevant definition nodes. This closed lemma is a generic ring tool from another unit. No blueprint node found by `blueprint_refs.py search` states this ring-level system; `blueprint.same_as` is `[]`.
+
+The imported item had no proof. Its Mathlib searches and candidate were already recorded; the candidate provides one model, while this item needs a compatible directed system. `review_split.py` passes; `blueprint_refs.py check` passes. `check_dag.py` found zero cycles but exits nonzero for seven unrelated, pre-existing reach warnings (constructible approximation and finite-cover nodes). No item-local issue was reported.
+
+## Review by H1
+
+I read Algebra 00R0 and its cited 00QV in `algebra.tex`. The unchanged item statement reproduces 00R0's directed ring-map system and adds the final base-change isomorphism, which follows from the same fixed finite presentation. Step 1 fixes all relation coefficients, step 2 uses the statement of the Lean-closed `lemma-nagata-ring-finite-type-subalgebras` to form a cofinal directed family, step 3 constructs its quotient rings, steps 4 and 5 give explicit inverse maps for base change, and step 6 verifies the colimit universal property. I checked that `lem-weil-pbc-polynomial-scalar-extension` supplies the polynomial part of steps 4 and 5; their displayed quotient maps verify the relation ideal separately. The construction also works when there are no generators or no relations. No new node was made; the blueprint searches found no duplicate. The cited Nagata lemma is a closed generic ring tool from another unit. I requested no changes from the worker.
