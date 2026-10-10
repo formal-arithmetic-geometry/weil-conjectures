@@ -3,34 +3,60 @@
  "blueprint": {
   "is": "lem-pc-finite-extension-alg-closed",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "Finite extensions of algebraically closed fields",
- "statement": "Let $\\Omega$ be an algebraically closed field and $\\Omega\\subseteq K$ a\nfinite field extension. Then $K=\\Omega$.",
+ "statement": "Let $\\Omega$ be an algebraically closed field [def-weil-algebraic-closure] (every nonconstant polynomial in $\\Omega[X]$ has a root in $\\Omega$), and let $K$ be a field together with a ring homomorphism $\\iota:\\Omega\\to K$, making $K$ a field extension of $\\Omega$ [def-pc-field-extension], such that the extension is finite, i.e. $K$ is finite-dimensional as an $\\Omega$-vector space via $\\iota$ [def-pc-field-tower]. Then $\\iota$ is bijective, i.e. $K=\\Omega$ (identifying $\\Omega$ with $\\iota(\\Omega)$).",
  "source": {
   "document": "literature/blueprint/master/blueprint/sec-picard-framework/sk-thm-picard-rr/lem-pc-finite-extension-alg-closed.md",
   "place": "node lem-pc-finite-extension-alg-closed, order 727"
  },
  "stmt_deps": [
+  "def-weil-algebraic-closure",
+  "def-pc-field-extension",
   "def-pc-field-tower"
  ],
- "proof": [
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
   {
-   "text": "Let $\\alpha\\in K$. The minimal polynomial $m_\\alpha\\in\\Omega[T]$ is\nirreducible; over the algebraically closed field it has a root, and an\nirreducible polynomial with a root is linear, so $\\deg m_\\alpha=1$ and\n$\\alpha\\in\\Omega$. (We use the standard irreducible-polynomial-with-a-root\nargument: $m_\\alpha=(T-\\beta)q(T)$ with $\\beta\\in\\Omega$ and $m_\\alpha$\nirreducible forces $q$ constant.)",
-   "uses": [],
-   "elementary": null
+   "tool": "leansearch",
+   "query": "finite field extension of an algebraically closed field is trivial; algebraically closed field has no proper finite extension, algebraMap bijective; algebraically closed field finite dimensional extension algebraMap surjective",
+   "results": "none: the service answered HTTP 500 Internal Server Error to all three queries (lean-lsp tool and a direct POST to https://leansearch.net/search)",
+   "date": "2026-10-10",
+   "verdict": "no result (service down); covered by the LeanFinder search below"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "a finite field extension of an algebraically closed field is equal to the base field",
+   "results": "IsAlgClosed.instIsAlgClosure, IsAlgClosed.algebraicClosure_eq_bot_iff (Mathlib.FieldTheory.AlgebraicClosure), FirstOrder.Field.isAlgClosed_of_model_ACF, AlgebraicClosure.isAlgClosed, IsAlgClosure.isAlgClosed",
+   "date": "2026-10-10",
+   "verdict": "related only (algebraicClosure_eq_bot_iff is about the algebraic closure inside an algebraically closed field, not this statement)"
+  },
+  {
+   "tool": "loogle",
+   "query": "IsAlgClosed, Function.Bijective (algebraMap _ _)",
+   "results": "IsAlgClosed.algebraMap_bijective_of_isIntegral (Mathlib.FieldTheory.IsAlgClosed.Basic); Algebra.FormallyUnramified.bijective_of_isAlgClosed_of_isLocalRing; IsSimpleModule.algebraMap_end_bijective_of_isAlgClosed; Representation.IsIrreducible.algebraMap_intertwiningMap_bijective_of_isAlgClosed",
+   "date": "2026-10-10",
+   "verdict": "match: IsAlgClosed.algebraMap_bijective_of_isIntegral"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rn 'algebraMap_surjective_of_is\\|algebraMap_bijective_of_isIntegral' Mathlib/FieldTheory/IsAlgClosed/; grep -rn 'Algebra.IsIntegral.of_finite' Mathlib/RingTheory/IntegralClosure/Algebra/Basic.lean",
+   "results": "Mathlib/FieldTheory/IsAlgClosed/Basic.lean:220 theorem IsAlgClosed.algebraMap_bijective_of_isIntegral; line 242 only a docstring mention of a no-longer-existing name algebraMap_surjective_of_isAlgebraic (no declaration algebraMap_surjective_of_isIntegral / _of_isAlgebraic in this Mathlib); line 244-249 IntermediateField.eq_bot_of_isAlgClosed_of_isAlgebraic; Mathlib/RingTheory/IntegralClosure/Algebra/Basic.lean:72 instance Algebra.IsIntegral.of_finite",
+   "date": "2026-10-10",
+   "verdict": "match: IsAlgClosed.algebraMap_bijective_of_isIntegral (line 220) with the instance Algebra.IsIntegral.of_finite (line 72)"
   }
  ],
- "proof_deps": [],
- "proof_origin": {
-  "by": "agent",
-  "document": "literature/blueprint/master/blueprint/sec-picard-framework/sk-thm-picard-rr/lem-pc-finite-extension-alg-closed.md",
-  "place": "## Proof"
+ "mathlib_match": {
+  "declaration": "IsAlgClosed.algebraMap_bijective_of_isIntegral",
+  "file": "Mathlib/FieldTheory/IsAlgClosed/Basic.lean",
+  "line": 220,
+  "how": "specializes in one line: Basic.lean:220-222 `theorem algebraMap_bijective_of_isIntegral {k K : Type*} [Field k] [Ring K] [IsDomain K] [hk : IsAlgClosed k] [Algebra k K] [Algebra.IsIntegral k K] : Function.Bijective (algebraMap k K)`, applied with k = Ω, K = K (a field is a domain), the algebra structure given by ι (algebraMap Ω K = ι); the hypothesis Algebra.IsIntegral Ω K comes from finiteness [Module.Finite Ω K] by the instance `Algebra.IsIntegral.of_finite` (Mathlib/RingTheory/IntegralClosure/Algebra/Basic.lean:72). Read with sed -n 220,231p and 60,75p on the pinned Mathlib."
  },
- "mathlib_searches": [],
- "mathlib_match": null,
- "status": "imported",
+ "status": "mathlib",
  "merged_into": null,
  "import_flags": [],
  "blueprint_kind": "lemma",
@@ -55,5 +81,14 @@
   }
  },
  "chapter": "sec-picard-framework",
- "unit": "sk-thm-picard-rr"
+ "unit": "sk-thm-picard-rr",
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "lem-pc-finite-extension-alg-closed",
+  "worker": "stage1",
+  "summary": "The item is a Mathlib leaf: IsAlgClosed.algebraMap_bijective_of_isIntegral (Mathlib/FieldTheory/IsAlgClosed/Basic.lean:220) with Algebra.IsIntegral.of_finite (Mathlib/RingTheory/IntegralClosure/Algebra/Basic.lean:72); the names suggested in the brief (algebraMap_surjective_of_isIntegral/_isAlgebraic) do not exist in this Mathlib (only a stale docstring mention at line 242). The imported agent proof (minimal polynomial is linear) is removed since a leaf carries no proof; it is exactly the Mathlib proof. The statement is made self-contained: Omega algebraically closed [def-weil-algebraic-closure], K a field extension via iota [def-pc-field-extension], finite [def-pc-field-tower]; conclusion iota bijective. No slopmaster2 declaration states this node (grep by id and key words: slopmaster2 only uses the Mathlib lemma inline). The DAG node lem-weil-pbc-alg-closed-finite-extension-trivial (sec-proper-base-change, created 2026-10-09, mathlib leaf with the same declaration) states the same thing: a duplicate for the lead to merge or keep.",
+  "blueprint": "no proof steps (Mathlib leaf); the Mathlib proof (minpoly irreducible, hence of degree 1 over an algebraically closed field) is the blueprint node's '## Proof' paragraph."
+ },
+ "reviewed": "2026-10-10 L: Mathlib leaf: IsAlgClosed.algebraMap_bijective_of_isIntegral (IsAlgClosed/Basic.lean 220, verified) with Algebra.IsIntegral.of_finite; statement made self-contained. Duplicate of lem-weil-pbc-alg-closed-finite-extension-trivial (2026-10-09, same declaration): stage-3 merge candidate. LeanSearch down.",
+ "lead_note": "2026-10-10 L: same statement as lem-weil-pbc-alg-closed-finite-extension-trivial (sec-proper-base-change); merge candidate."
 }
