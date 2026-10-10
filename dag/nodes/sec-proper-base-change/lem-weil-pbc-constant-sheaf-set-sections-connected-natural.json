@@ -28,9 +28,57 @@
   "def-weil-pbc-etale-sheaf-of-sets",
   "lem-galois-constant-sheaf-sets-representable"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Let $U_E=\\coprod_{e\\in E}U$ and let $h_{U_E}$ be the representable presheaf on $U_{\\Et}$. By [lem-galois-constant-sheaf-sets-representable], the constant sheaf $\\underline E$ is canonically isomorphic to $h_{U_E}$, and the canonical constant section associated to $e$ corresponds to the morphism $\\iota_e\\circ\\mathrm{id}_U:U\\to U_E$. Thus $\\underline E(U)$ is identified with the set of morphisms $U\\to U_E$ over $U$.",
+   "uses": [
+    "lem-galois-constant-sheaf-sets-representable"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Remark 03P5 (remark-constant-locally-constant-maps), using Example 03YW and Lemma 03O3"
+   }
+  },
+  {
+   "text": "Apply [lem-galois-coproduct-copies-morphisms-clopen] with $W=U$ and $s=\\mathrm{id}_U$. A morphism $U\\to U_E$ over $U$ is an $E$-indexed clopen decomposition of $U$, equivalently a map $|U|\\to E$ with open fibres. By [lem-weil-pbc-connected-locally-constant-map], every such map is constant because $U$ is nonempty and connected. Therefore exactly one index $e$ has piece $U$ and all other pieces are empty, so every section is the unique constant section with value $e$; nonemptiness makes the value unique. Hence $E\\to\\underline E(U)$ is bijective.",
+   "uses": [
+    "lem-galois-coproduct-copies-morphisms-clopen",
+    "lem-weil-pbc-connected-locally-constant-map",
+    "def-weil-connected-scheme"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Remark 03P5 (remark-constant-locally-constant-maps): locally constant maps on a connected nonempty space are constant"
+   }
+  },
+  {
+   "text": "Let $v:V\\to U$ be an $\\Omega$-morphism. By Step 1 the canonical map $E\\to\\underline E(U)$ is $e\\mapsto\\eta_U(e)$, the image of $e$ under the canonical map $\\eta$ from the constant presheaf, and the section corresponding to $e$ is $\\eta_U(e)$. Its pullback along $v$ is $v^*\\eta_U(e)\\in(v^{-1}\\underline E_U)(V)$ [lem-weil-pbc-sets-etale-inverse-image-composition-units] (with $U\\times_UV=V$), and the canonical isomorphism $\\gamma_v:v^{-1}\\underline E_U\\xrightarrow{\\sim}\\underline E_V$ of [lem-weil-pbc-sets-etale-inverse-image-constant-sheaf] sends it to $\\eta_V(e)$, the constant section with value $e$ on $V$. Nothing about $V$ is used, so the naturality holds without any connectedness assumption on $V$.",
+   "uses": [
+    "lem-weil-pbc-sets-etale-inverse-image-constant-sheaf",
+    "lem-weil-pbc-sets-etale-inverse-image-composition-units"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Modules on Sites, Section 18.43 (Tag 093I) and Lemma 093R (sites-modules-lemma-pullback-locally-constant): the inverse image of a constant sheaf is the constant sheaf"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-galois-constant-sheaf-sets-representable",
+  "lem-galois-coproduct-copies-morphisms-clopen",
+  "lem-weil-pbc-connected-locally-constant-map",
+  "def-weil-connected-scheme",
+  "lem-weil-pbc-sets-etale-inverse-image-constant-sheaf",
+  "lem-weil-pbc-sets-etale-inverse-image-composition-units"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Remark 03P5 (remark-constant-locally-constant-maps), set-valued form"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -55,10 +103,47 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-weil-pbc-etale-geometric-fibre-constant-sections",
   "by": "worker",
   "date": "2026-10-10"
+ },
+ "split_report": {
+  "date": "2026-10-11",
+  "item": "lem-weil-pbc-constant-sheaf-set-sections-connected-natural",
+  "worker": "stage1",
+  "summary": "Split the set-valued connected-section statement using the existing representability node for the constant sheaf and the existing clopen-decomposition node for maps into a coproduct of copies. Connectedness forces the associated locally constant map to be constant, giving bijectivity; the coproduct description makes pullback natural for arbitrary target schemes. No new nodes were needed.",
+  "blueprint": "The three steps realize the paragraph beginning 'The base Y_(ybar) is strictly henselian local' in lemma-weil-pbc-proper-underived-exchange: identify the constant sheaf on the geometric fibre, compute sections on a connected fibre, and record naturality under pullback.",
+  "tool_uses": [
+   {
+    "node": "lem-galois-constant-sheaf-sets-representable",
+    "why": "Generic representability of the set-valued constant sheaf computes its sections; no node in the proper-base-change unit supplies this tool."
+   },
+   {
+    "node": "lem-galois-coproduct-copies-morphisms-clopen",
+    "why": "The functor-of-points description of the coproduct identifies sections with clopen decompositions; no node in this unit supplies it."
+   },
+   {
+    "node": "lem-weil-pbc-connected-locally-constant-map",
+    "why": "The general connected-space fact that locally constant maps are constant is used; no node in this unit supplies it."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-galois-constant-sheaf-sets-representable",
+  "lem-galois-coproduct-copies-morphisms-clopen",
+  "lem-weil-pbc-connected-locally-constant-map",
+  "lem-galois-constant-sheaf-sets-representable",
+  "lem-galois-coproduct-copies-morphisms-clopen",
+  "lem-weil-pbc-connected-locally-constant-map"
+ ],
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-css1706",
+  "group": "E1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-css1706 (reviewer sub-agent of L); spot-checked: Source Stacks Remark 59.23.2 (Tag 03P5, etale-cohomology-remark-constant-locally-constant-maps); statement unchanged, hypotheses (U nonempty connected per def-weil-connected-scheme, small etale site U_Et, E any set) agree with the source; Omega plays no role, harmless. Step 1: lem-galois-constant-sheaf-sets-representable gives phi:E->h_{U_E} iso with c=phi.eta, so eta_U(e) <-> iota_e o id_U. Step 2: lem-galois-coproduct-copies-morphisms-clopen (b),(c) with W=U, s=id identifies Mor_U(U,U_E) with maps |U|->E with open fibres, iota_e <-> constant e; lem-weil-pbc-connected-locally-constant-map makes all constant, nonemptiness gives injectivity; E empty checked (both sides empty). Step 3 as delivered was wrong in its reasoning: for an arbitrary Omega-morphism v:V->U (not etale; the parent lem-weil-pbc-etale-geometric-fibre-constant-sections uses inverse image along arbitrary v) V is not an object of U_Et, so 'pullback represented by f o v' is not a statement of any cited node. FIX more, RETURN less (C1): dag/nodes/sec-proper-base-change/lem-weil-pbc-constant-sheaf-set-sections-connected-natural.json: proof[2]: rewritten to take v^*eta_U(e) [lem-weil-pbc-sets-etale-inverse-image-composition-units] and the canonical iso gamma_v:v^{-1}E_U->E_V with gamma_v(v^*eta_U(e))=eta_V(e); uses/proof_deps updated; NEW statement-only node lem-weil-pbc-sets-etale-inverse-image-constant-sheaf (Stacks 093I/093R, 0H7J; true: the presheaf inverse image of a constant presheaf is constant since (U,V'->V) is terminal in the index category, then sheafify), Mathlib loogle 'CategoryTheory.constantSheaf, CategoryTheory.Sheaf.IsConstant' run by me: no pullback-of-constant-sheaf statement. Tool uses accepted as generic black boxes (C8). Fix adapted from partial scratch of cut-off reviewer R-css1709, re-verified. Start Sat Oct 10 05:06:08 PM UTC 2026, end Sat Oct 10 05:07:15 PM UTC 2026; 2 file(s) fixed by the reviewer; 1 statement node(s) added by the reviewer (FIX more, RETURN less)"
  }
 }
