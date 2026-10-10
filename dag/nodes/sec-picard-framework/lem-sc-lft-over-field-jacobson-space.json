@@ -36,10 +36,78 @@
    "results": "FiniteType.lean:117 nonrec lemma LocallyOfFiniteType.jacobsonSpace (f : X --> Y) [LocallyOfFiniteType f] [JacobsonSpace Y] : JacobsonSpace X (a lemma, not an instance); FiniteType.lean:113 instance JacobsonSpace (Spec R) for IsJacobsonRing R; JacobsonSpace.lean:72 class JacobsonSpace: closure (Z inter closedPoints X) = Z for closed Z",
    "date": "2026-10-10",
    "verdict": "match candidate for the leaf: AlgebraicGeometry.LocallyOfFiniteType.jacobsonSpace (FiniteType.lean:117) applied to X -> Spec k, JacobsonSpace (Spec k) inferred (FiniteType.lean:113; field Artinian hence Jacobson, Jacobson/Ring.lean:102) (reviewer R-mpc1727)"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "schemes locally of finite type over a field are Jacobson",
+   "results": "AlgebraicGeometry.LocallyOfFiniteType.jacobsonSpace (Mathlib/AlgebraicGeometry/Morphisms/FiniteType); also related Jacobson-space declarations",
+   "date": "2026-10-11",
+   "verdict": "match: general theorem applied to X -> Spec k"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "JacobsonSpace source of locally finite type morphism from scheme to spectrum of a field",
+   "results": "AlgebraicGeometry.LocallyOfFiniteType.jacobsonSpace (Mathlib/AlgebraicGeometry/Morphisms/FiniteType), with Spec Jacobson instances",
+   "date": "2026-10-11",
+   "verdict": "match: general theorem applied to the structure morphism"
+  },
+  {
+   "tool": "loogle",
+   "query": "LocallyOfFiniteType.jacobsonSpace, JacobsonSpace",
+   "results": "unknown identifier 'LocallyOfFiniteType.jacobsonSpace'",
+   "date": "2026-10-11",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.LocallyOfFiniteType.jacobsonSpace",
+   "results": "AlgebraicGeometry.LocallyOfFiniteType.jacobsonSpace (Mathlib.AlgebraicGeometry.Morphisms.FiniteType)",
+   "date": "2026-10-11",
+   "verdict": "match"
+  },
+  {
+   "tool": "grep",
+   "query": "JacobsonSpace Mathlib/AlgebraicGeometry",
+   "results": "no hits returned by msearch",
+   "date": "2026-10-11",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "LocallyOfFiniteType.jacobsonSpace Mathlib/AlgebraicGeometry/Morphisms/FiniteType.lean",
+   "results": "no hits returned by msearch",
+   "date": "2026-10-11",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "class JacobsonSpace|closure.*closedPoints Mathlib/Topology/JacobsonSpace.lean",
+   "results": "no hits returned by msearch",
+   "date": "2026-10-11",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "closed points are dense in every closed subset of a scheme locally of finite type over a field",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-11",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "grep",
+   "query": "sed -n 105,120p Mathlib/AlgebraicGeometry/Morphisms/FiniteType.lean; sed -n 65,78p Mathlib/Topology/JacobsonSpace.lean (slopmaster2 mathlib)",
+   "results": "FiniteType.lean:117 nonrec lemma LocallyOfFiniteType.jacobsonSpace; :113 instance JacobsonSpace (Spec R) for IsJacobsonRing R; JacobsonSpace.lean:72 closure_inter_closedPoints",
+   "date": "2026-10-11",
+   "verdict": "match: leaf (reviewer R-ljs1755)"
   }
  ],
- "mathlib_match": null,
- "status": "unsplit",
+ "mathlib_match": {
+  "declaration": "AlgebraicGeometry.LocallyOfFiniteType.jacobsonSpace",
+  "file": "Mathlib/AlgebraicGeometry/Morphisms/FiniteType.lean",
+  "line": 117,
+  "how": "one-line specialization: `nonrec lemma LocallyOfFiniteType.jacobsonSpace (f : X ⟶ Y) [LocallyOfFiniteType f] [JacobsonSpace Y] : JacobsonSpace X` (FiniteType.lean:117) applied to the structure morphism X ⟶ Spec k (def-weil-finite-type-morphism); `JacobsonSpace (Spec k)` is the inferred instance at FiniteType.lean:113 (a field is a Jacobson ring); the conclusion is the class field `JacobsonSpace.closure_inter_closedPoints : IsClosed Z → closure (Z ∩ closedPoints X) = Z` (Mathlib/Topology/JacobsonSpace.lean:72), closed points as in def-weil-closed-points"
+ },
+ "status": "mathlib",
  "merged_into": null,
  "created": {
   "by": "worker",
@@ -47,5 +115,20 @@
   "date": "2026-10-10"
  },
  "chapter": "sec-picard-framework",
- "unit": "sk-thm-picard-rr"
+ "unit": "sk-thm-picard-rr",
+ "split_report": {
+  "date": "2026-10-11",
+  "item": "lem-sc-lft-over-field-jacobson-space",
+  "worker": "stage1",
+  "summary": "Checked Tag 0478(2) against the item. The item is a Mathlib leaf: AlgebraicGeometry.LocallyOfFiniteType.jacobsonSpace (FiniteType.lean:117) applied to the structure morphism X -> Spec k, with JacobsonSpace (Spec k) inferred (FiniteType.lean:113); the JacobsonSpace class field is exactly density of closed points in every closed subset. Reviewer R-ljs1755 turned the two-step split into this leaf.",
+  "blueprint": "The leaf realizes the Jacobson property of X used in the blueprint ancestor's third paragraph (closed points dense in every closed subset)."
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-ljs1755",
+  "group": "K1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-ljs1755 (reviewer sub-agent of L); spot-checked: Statement vs Stacks 0478(2): agrees. Read FiniteType.lean:113-117 and JacobsonSpace.lean:72 with sed. FIX more, RETURN less: C1 step 1 rested on Mathlib's LocallyOfFiniteType.jacobsonSpace with no cited node; made the item itself the Mathlib leaf (status mathlib, mathlib_match FiniteType.lean:117, instance at :113 inferred, conclusion is the JacobsonSpace class field), proof/proof_deps cleared, split_report rewritten, search recorded. Second reading missed this, and its claimed created.item correction is not in the file (maintainer field, not a fault).; 1 file(s) fixed by the reviewer"
+ }
 }
