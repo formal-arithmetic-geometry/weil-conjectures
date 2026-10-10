@@ -13,9 +13,115 @@
   "def-weil-pbc-sheafification",
   "def-weil-pbc-category-colimit"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "*Step 1 (restriction to $U$ of a sheaf is a sheaf).* Let $\\mathcal P$ be a presheaf of sets on $X$. The rule $V\\mapsto\\mathcal P(V)$ ($V\\subseteq U$ open) with the restriction maps of $\\mathcal P$ is a presheaf $\\mathcal P|_U$ on $U$, since the opens of $U$ are exactly the opens of $X$ contained in $U$ and the composition and identity laws are those of $\\mathcal P$; for a morphism $\\varphi$, $\\varphi|_U=(\\varphi_V)_{V\\subseteq U}$ is natural for the same reason, and $(\\gamma\\circ\\varphi)|_U=\\gamma|_U\\circ\\varphi|_U$. A covering of $V\\subseteq U$ in the site of open subsets of $U$ [def-weil-pbc-sites-and-cohomology] is a family of opens $V_i\\subseteq V$ with $\\bigcup V_i=V$, which is also a covering of $V$ in the site of open subsets of $X$, with the same overlaps $V_i\\cap V_k$ (the fibre products). So the equalizer diagram of the sheaf condition for $\\mathcal P|_U$ and this covering is the one for $\\mathcal P$ and the same covering; if $\\mathcal P$ is a sheaf on $X$, $\\mathcal P|_U$ is a sheaf on $U$. This is the claim inside the statement (Stacks 00A0 (2): 'clearly a sheaf').",
+   "uses": [
+    "def-weil-pbc-sites-and-cohomology"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sheaves.tex",
+    "place": "Sheaves, Lemma Tag 00A0 (label lemma-j-pullback, line 4453), proof of (2); Definition Tag 00A1 (definition-restriction)"
+   }
+  },
+  {
+   "text": "*Step 2 (clause (1), and the first half of clause (4)).* Let $\\mathcal G$ be a presheaf of sets on $U$. By the formula of [def-weil-pbc-sets-extension-by-empty], $(j_{U,p!}\\mathcal G)(V)=\\mathcal G(V)$ for $V\\subseteq U$ with the restriction maps of $\\mathcal G$; so $(j_{U,p!}\\mathcal G)|_U=\\mathcal G$ as presheaves on $U$ (first half of (4)). Let $\\mathcal P$ be a presheaf of sets on $X$. For $\\psi:j_{U,p!}\\mathcal G\\to\\mathcal P$, $\\psi|_U:\\mathcal G\\to\\mathcal P|_U$ is a morphism (Step 1). Conversely, for $\\alpha:\\mathcal G\\to\\mathcal P|_U$ put $\\tilde\\alpha_V=\\alpha_V$ if $V\\subseteq U$ and $\\tilde\\alpha_V=$ the empty map $\\emptyset\\to\\mathcal P(V)$ if $V\\not\\subseteq U$. Naturality of $\\tilde\\alpha$ for opens $V'\\subseteq V$: if $V\\subseteq U$ then $V'\\subseteq U$ and it is the naturality of $\\alpha$; if $V\\not\\subseteq U$ both composites $(j_{U,p!}\\mathcal G)(V)=\\emptyset\\to\\mathcal P(V')$ are maps out of the empty set, hence equal. Clearly $\\tilde\\alpha|_U=\\alpha$; and $\\widetilde{\\psi|_U}=\\psi$, since both have the components $\\psi_V$ for $V\\subseteq U$ and for $V\\not\\subseteq U$ both components are the unique map out of $\\emptyset$. So $\\psi\\mapsto\\psi|_U$ is bijective with inverse $\\alpha\\mapsto\\tilde\\alpha$. Naturality: for $\\beta:\\mathcal G'\\to\\mathcal G$ and $\\gamma:\\mathcal P\\to\\mathcal P'$, the morphism $j_{U,p!}\\beta$ has components $\\beta_V$ for $V\\subseteq U$ [def-weil-pbc-sets-extension-by-empty], so $(\\gamma\\circ\\psi\\circ j_{U,p!}\\beta)|_U=\\gamma|_U\\circ\\psi|_U\\circ\\beta$ (Step 1), which is the naturality of $\\psi\\mapsto\\psi|_U$ in $\\mathcal G$ and $\\mathcal P$. (Stacks: 'to map $j_{p!}\\mathcal F$ into $\\mathcal G$ it is enough to map $\\mathcal F(V)\\to\\mathcal G(V)$ whenever $V\\subset U$ compatibly with restriction mappings'.)",
+   "uses": [
+    "def-weil-pbc-sets-extension-by-empty"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sheaves.tex",
+    "place": "Sheaves, Lemma Tag 00A3 (label lemma-j-shriek, line 4549), proof, first two sentences (clause (1)) and last sentence (clause (4))"
+   }
+  },
+  {
+   "text": "*Step 3 (clause (2): the bijection).* Let $\\mathcal G$ be a sheaf of sets on $U$ and $\\mathcal F$ a sheaf of sets on $X$. Morphisms of sheaves are morphisms of the underlying presheaves, and by the universal property of the sheafification $\\theta_{\\mathcal G}:j_{U,p!}\\mathcal G\\to j_{U!}\\mathcal G$ [def-weil-pbc-sheafification] the map $\\operatorname{Hom}_{\\Sh(X)}(j_{U!}\\mathcal G,\\mathcal F)\\to\\operatorname{Hom}(j_{U,p!}\\mathcal G,\\mathcal F)$, $\\psi\\mapsto\\psi\\circ\\theta_{\\mathcal G}$, is bijective (every morphism from $j_{U,p!}\\mathcal G$ to the sheaf $\\mathcal F$ factors uniquely through $\\theta_{\\mathcal G}$). Compose with the bijection $\\varphi\\mapsto\\varphi|_U$ of Step 2 for $\\mathcal P=\\mathcal F$, onto $\\operatorname{Hom}(\\mathcal G,\\mathcal F|_U)$, which is $\\operatorname{Hom}_{\\Sh(U)}(\\mathcal G,\\mathcal F|_U)$ since $\\mathcal F|_U$ is a sheaf (Step 1). The composite is $\\psi\\mapsto(\\psi\\circ\\theta_{\\mathcal G})|_U$, bijective, with inverse $\\alpha\\mapsto$ the unique $\\psi$ with $\\psi\\circ\\theta_{\\mathcal G}=\\tilde\\alpha$ (inverse of Step 2 followed by the inverse of the factorization).",
+   "uses": [
+    "def-weil-pbc-sheafification",
+    "def-weil-pbc-sets-extension-by-empty"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sheaves.tex",
+    "place": "Sheaves, Lemma Tag 00A3 (label lemma-j-shriek, line 4549), proof: 'The adjointness of $j_!$ and restriction follows from this and the properties of sheafification'"
+   }
+  },
+  {
+   "text": "*Step 4 (clause (2): naturality).* For $\\beta:\\mathcal G'\\to\\mathcal G$ a morphism of sheaves on $U$, $j_{U!}\\beta$ is the morphism with $j_{U!}\\beta\\circ\\theta_{\\mathcal G'}=\\theta_{\\mathcal G}\\circ j_{U,p!}\\beta$ [def-weil-pbc-sets-extension-by-empty]. For $\\gamma:\\mathcal F\\to\\mathcal F'$ a morphism of sheaves on $X$ and $\\psi:j_{U!}\\mathcal G\\to\\mathcal F$: $(\\gamma\\circ\\psi\\circ j_{U!}\\beta\\circ\\theta_{\\mathcal G'})|_U=(\\gamma\\circ\\psi\\circ\\theta_{\\mathcal G}\\circ j_{U,p!}\\beta)|_U=\\gamma|_U\\circ(\\psi\\circ\\theta_{\\mathcal G})|_U\\circ\\beta$, using $(j_{U,p!}\\beta)|_U=\\beta$ and Step 1. This is the naturality of the bijection of Step 3 in $\\mathcal G$ and $\\mathcal F$, so $j_{U!}$ is left adjoint to $\\mathcal F\\mapsto\\mathcal F|_U$ ('bifunctorially in $\\mathcal F$ and $\\mathcal G$').",
+   "uses": [
+    "def-weil-pbc-sets-extension-by-empty"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sheaves.tex",
+    "place": "Sheaves, Lemma Tag 00A3 (label lemma-j-shriek, line 4549), proof; statement (2), 'bifunctorially'"
+   }
+  },
+  {
+   "text": "*Step 5 (stalks of a restriction).* Let $\\mathcal P$ be a presheaf of sets on $X$ and $x\\in U$. The open neighbourhoods of $x$ in $X$, ordered by reverse inclusion, form a nonempty ($X\\ni x$) directed (two neighbourhoods $W,W'$ are both refined by $W\\cap W'$) poset, hence a filtered category [def-weil-pbc-category-colimit]; the same holds for the open neighbourhoods of $x$ in $U$, which are the neighbourhoods $W\\ni x$ of $X$ with $W\\subseteq U$. The germs $\\mathcal P(W)\\to\\mathcal P_x$ for $x\\in W\\subseteq U$ are compatible with restriction, so by the universal property of the colimit there is exactly one map $c:(\\mathcal P|_U)_x\\to\\mathcal P_x$ sending the germ of $s\\in\\mathcal P(W)$ in $(\\mathcal P|_U)_x$ to its germ in $\\mathcal P_x$. It is bijective, by [lem-weil-pbc-filtered-colimit-sets-elementwise] for both colimits (a morphism $W\\to W''$ of the index category means $W''\\subseteq W$): surjective, since every element of $\\mathcal P_x$ is $t_x$ for some open $W\\ni x$ and $t\\in\\mathcal P(W)$ (part (1)), and $t_x=(t|_{W\\cap U})_x$ (the germs form a cocone) is $c$ of the germ of $t|_{W\\cap U}$, as $x\\in W\\cap U\\subseteq U$; injective, since two elements of $(\\mathcal P|_U)_x$ are germs of some $s\\in\\mathcal P(W)$, $s'\\in\\mathcal P(W')$ with $W,W'\\subseteq U$ (part (1)), and if their images in $\\mathcal P_x$ agree, part (2) gives an open $W''\\ni x$ with $W''\\subseteq W\\cap W'$ and $s|_{W''}=s'|_{W''}$; then $W''\\subseteq U$, so by part (2) again (the converse direction, for the colimit over the neighbourhoods in $U$) the two germs in $(\\mathcal P|_U)_x$ agree. (Stacks 00A0 (3): 'the collection of open neighbourhoods of $u$ which are contained in $U$ is cofinal'.)",
+   "uses": [
+    "lem-weil-pbc-filtered-colimit-sets-elementwise",
+    "def-weil-pbc-category-colimit"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sheaves.tex",
+    "place": "Sheaves, Lemma Tag 00A0 (label lemma-j-pullback, line 4453), proof of (3)"
+   }
+  },
+  {
+   "text": "*Step 6 (clause (3), $x\\notin U$).* Let $\\mathcal G$ be a sheaf of sets on $U$ and $x\\in X\\setminus U$. Every open neighbourhood $W$ of $x$ satisfies $W\\not\\subseteq U$, so $(j_{U,p!}\\mathcal G)(W)=\\emptyset$ [def-weil-pbc-sets-extension-by-empty]. The index category of the stalk is filtered (Step 5), and by [lem-weil-pbc-filtered-colimit-sets-elementwise] (1) every element of $(j_{U,p!}\\mathcal G)_x$ is the germ of an element of some $(j_{U,p!}\\mathcal G)(W)=\\emptyset$; so $(j_{U,p!}\\mathcal G)_x=\\emptyset$. By [lem-weil-pbc-sets-stalk-sheafification-space] applied to $\\mathcal P=j_{U,p!}\\mathcal G$ and its sheafification $\\theta_{\\mathcal G}$, the map $(j_{U,p!}\\mathcal G)_x\\to(j_{U!}\\mathcal G)_x$ is bijective, so $(j_{U!}\\mathcal G)_x=\\emptyset$.",
+   "uses": [
+    "def-weil-pbc-sets-extension-by-empty",
+    "lem-weil-pbc-filtered-colimit-sets-elementwise",
+    "lem-weil-pbc-sets-stalk-sheafification-space"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sheaves.tex",
+    "place": "Sheaves, Lemma Tag 00A3 (label lemma-j-shriek, line 4549), proof: 'The identification of stalks is obvious from the definition of the extension by the empty set and the definition of a stalk', with Lemma Tag 007Z (lemma-stalk-sheafification, line 1563) for $j_!=(j_{p!})^\\#$"
+   }
+  },
+  {
+   "text": "*Step 7 (clause (3), $x\\in U$).* Let $\\mathcal G$ be a sheaf of sets on $U$ and $x\\in U$. The stalk $\\mathcal G_x$ (colimit over the open neighbourhoods $V$ of $x$ in $U$) is the stalk at $x$ of $(j_{U,p!}\\mathcal G)|_U=\\mathcal G$ (Step 2). Step 5 for $\\mathcal P=j_{U,p!}\\mathcal G$ gives the bijection $\\kappa:\\mathcal G_x\\to(j_{U,p!}\\mathcal G)_x$, $s_x\\mapsto s_x$ ($s\\in\\mathcal G(V)=(j_{U,p!}\\mathcal G)(V)$, $x\\in V\\subseteq U$). [lem-weil-pbc-sets-stalk-sheafification-space] for $\\mathcal P=j_{U,p!}\\mathcal G$ gives the bijection $\\theta_{\\mathcal G,x}:(j_{U,p!}\\mathcal G)_x\\to(j_{U!}\\mathcal G)_x$, $s_x\\mapsto(\\theta_{\\mathcal G,V}(s))_x$. The composite $\\theta_{\\mathcal G,x}\\circ\\kappa$ is bijective and sends $s_x$ to $(\\theta_{\\mathcal G,V}(s))_x$ for every open $V$ with $x\\in V\\subseteq U$ and every $s\\in\\mathcal G(V)$. So the map of clause (3) is well defined (it is this composite; its value on $s_x$ does not depend on the representative $(V,s)$) and bijective.",
+   "uses": [
+    "lem-weil-pbc-sets-stalk-sheafification-space"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sheaves.tex",
+    "place": "Sheaves, Lemma Tag 00A3 (label lemma-j-shriek, line 4549), proof, stalk identification; Lemma Tag 00A0 (3) and Lemma Tag 007Z (lemma-stalk-sheafification)"
+   }
+  },
+  {
+   "text": "*Step 8 (clause (4), second half).* Let $\\mathcal G$ be a sheaf of sets on $U$. By Steps 1 and 2, $\\theta_{\\mathcal G}|_U$ is a morphism from $(j_{U,p!}\\mathcal G)|_U=\\mathcal G$ to $(j_{U!}\\mathcal G)|_U$, and both are sheaves of sets on the space $U$ ($j_{U!}\\mathcal G$ is a sheaf on $X$ [def-weil-pbc-sets-extension-by-empty], so Step 1 applies). Let $x\\in U$. The stalk map $(\\theta_{\\mathcal G}|_U)_x:\\mathcal G_x\\to((j_{U!}\\mathcal G)|_U)_x$ sends $s_x$ to the germ of $\\theta_{\\mathcal G,V}(s)$ in $((j_{U!}\\mathcal G)|_U)_x$; following it by the bijection $c:((j_{U!}\\mathcal G)|_U)_x\\to(j_{U!}\\mathcal G)_x$ of Step 5 (for $\\mathcal P=j_{U!}\\mathcal G$) gives $s_x\\mapsto(\\theta_{\\mathcal G,V}(s))_x$, which is the bijection of Step 7. So $(\\theta_{\\mathcal G}|_U)_x=c^{-1}\\circ(\\text{the map of Step 7})$ is bijective for every $x\\in U$. By [lem-weil-pbc-sets-sheaf-iso-on-stalks], applied on the topological space $U$, $\\theta_{\\mathcal G}|_U$ is an isomorphism of sheaves of sets on $U$. (Stacks proves (4) and (5) 'by computing the value of the sheaf on any open of $U$'; that computation needs a description of the sections of a sheafification which no node states, so the step goes through the stalks of Step 7 and the criterion of Lemma Tag 007T (3) instead.)",
+   "uses": [
+    "def-weil-pbc-sets-extension-by-empty",
+    "lem-weil-pbc-sets-sheaf-iso-on-stalks"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sheaves.tex",
+    "place": "Sheaves, Lemma Tag 00A3 (label lemma-j-shriek, line 4549), proof, last sentence; Lemma Tag 007T (label lemma-points-exactness, line 1340), part (3)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-sites-and-cohomology",
+  "def-weil-pbc-sets-extension-by-empty",
+  "def-weil-pbc-sheafification",
+  "lem-weil-pbc-filtered-colimit-sets-elementwise",
+  "def-weil-pbc-category-colimit",
+  "lem-weil-pbc-sets-stalk-sheafification-space",
+  "lem-weil-pbc-sets-sheaf-iso-on-stalks"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/sheaves.tex",
+  "place": "Sheaves, Lemma Tag 00A3 (label lemma-j-shriek, line 4549) with its proof, and Lemma Tag 00A0 (label lemma-j-pullback, line 4453) with its proof; clause (4) second half through stalks and Lemma Tag 007T (3) (lemma-points-exactness) instead of Stacks' 'computing the value of the sheaf on any open of U'"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -58,10 +164,31 @@
    "results": "no extension by the empty set or by zero for sheaves on a topological space anywhere in Mathlib (only an unrelated hit in NumberTheory/MulChar/Basic.lean). The restriction j^{-1} is Topology.IsOpenEmbedding.sheafPullback (Functors.lean:125) = hf.functor.sheafPushforwardContinuous, precomposition with IsOpenMap.functor, continuous by Topology.IsOpenEmbedding.functor_isContinuous (SheafCondition/Sites.lean:165). Its left adjoint exists abstractly: Functor.sheafPullbackConstruction.sheafPullback (Sites/Pullback.lean:70, = sheafToPresheaf ⋙ lan along hf.functor.op ⋙ presheafToSheaf) with sheafAdjunctionContinuous (:75), so (2) holds for that functor. Identifying the left Kan extension along hf.functor.op with j_{U,p!} (value at V: colimit over the opens W ⊆ U with V ⊆ W, empty if V ⊄ U, G(V) if V ⊆ U) is a computation not in Mathlib; (1) as stated, (3) and (4) are not in Mathlib",
    "date": "2026-10-10",
    "verdict": "no match (abstract left adjoint only; the identification with the explicit j_{U!} is not one line)"
+  },
+  {
+   "tool": "leansearch",
+   "query": "left adjoint of restriction of presheaves to an open subset, extension by empty set, presheaf on X from presheaf on open U",
+   "results": "AlgebraicGeometry.Scheme.restrictFunctor_obj_left, PresheafedSpace.restrict, TopCat.Presheaf.pushforwardPullbackAdjunction (Mathlib.Topology.Sheaves.Presheaf), Scheme.Modules.instIsLeftAdjointRestrictFunctor, TopCat.Presheaf.restrict, Scheme.Modules.restrictAdjunction, PresheafedSpace.restrict_presheaf, ofRestrict_c_app",
+   "date": "2026-10-10",
+   "verdict": "no match: pullback/pushforward adjunctions and restriction of presheafed spaces only"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "extension by the empty set of a sheaf of sets on an open subset U of X, left adjoint to restriction, stalks empty outside U",
+   "results": "StalkSkyscraperPresheafAdjunctionAuxs.toSkyscraperPresheaf_app, toSkyscraperPresheaf, stalkSkyscraperSheafAdjunction, instIsLeftAdjointPresheafStalkFunctor, skyscraperSheaf (Mathlib.Topology.Sheaves.Skyscraper)",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rln 'Shriek\\|shriek\\|extendBy\\|lowerStar\\|IsLeftAdjoint' Mathlib/Topology/Sheaves/ ; grep -rn 'Shriek\\|shriek\\|extendByEmpty\\|extensionByEmpty' Mathlib/CategoryTheory/Sites/ (under ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/)",
+   "results": "Functors.lean (IsLeftAdjoint of the sheaf pullback, already recorded above), Skyscraper.lean (stalk/skyscraper adjunction); nothing in CategoryTheory/Sites",
+   "date": "2026-10-10",
+   "verdict": "no match; the item stays split, its clauses use the Mathlib leaves lem-weil-pbc-sets-stalk-sheafification-space and lem-weil-pbc-sets-sheaf-iso-on-stalks"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "worker",
@@ -81,5 +208,17 @@
   }
  },
  "chapter": "sec-proper-base-change",
- "unit": "sk-thm-p1"
+ "unit": "sk-thm-p1",
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "lem-weil-pbc-sets-extension-by-empty-adjunction",
+  "worker": "stage1",
+  "summary": "Checked against Stacks Sheaves 00A3 (lemma-j-shriek, sheaves.tex line 4549) and its proof, with 00A0 (lemma-j-pullback, line 4453), 00A1 and 00A2; statement kept. Proof in eight steps, clauses in order: restriction of a (pre)sheaf to U and that it preserves sheaves (the claim inside the statement, 00A0 (2)); clause (1) and (j_{U,p!}G)|_U = G from the definition (maps out of the empty set); clause (2) as the universal property of sheafification composed with (1), naturality from the defining identity of j_{U!}beta; stalks of a restriction by cofinality (00A0 (3)) via lem-weil-pbc-filtered-colimit-sets-elementwise; clause (3) for x not in U (all terms empty) and x in U, both through the new Mathlib leaf lem-weil-pbc-sets-stalk-sheafification-space (Stacks 007Z, TopCat.Presheaf.stalkFunctor_map_unit_toSheafify_isIso with C = Type v), since j_{U!} is defined by the universal property and only the abelian/ring versions of 007Z existed as nodes; clause (4) second half through stalks and the existing leaf lem-weil-pbc-sets-sheaf-iso-on-stalks (007T (3)) instead of Stacks' 'computing the value on any open of U', which would need a description of sections of a sheafification that no node gives. Item searched again (leansearch, leanfinder, grep): no Mathlib match."
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "result": "accepted",
+  "note": "8 steps following Stacks 00A3/00A0: restriction of a sheaf is a sheaf (same coverings); clause (1) and (j_{p!}G)|_U = G from the formula; clause (2) by the universal property of sheafification composed with (1), naturality from the defining identity of j_! beta; stalks of a restriction via cofinality (filtered-colimit leaf); clause (3) with a new leaf for 007Z (stalks unchanged by sheafification, sets version: stalkFunctor_map_unit_toSheafify_isIso, Sheafify.lean:137 verified by L); clause (4) through stalks and the 007T (3) leaf instead of the source's unavailable section description. Tags 007Z, 007T, 00A0, 00A3 verified."
+ }
 }

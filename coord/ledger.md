@@ -879,3 +879,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 04:45 L: reviewed lem-weil-pbc-regular-sequence-swap-two (2 steps, no new node, B8 candidate): accepted.
 - 04:50 L: reviewed lem-weil-pbc-regularity-rk-goes-up (6 steps, +0H9M composed leaf): accepted. Stage-3 note: lem-weil-pbc-regular-ring-smooth-ascent steps 3-4 should cite def-weil-pbc-serre-conditions-rk-sk and say the fibres are Noetherian.
 - 04:51 L: reviewed lem-weil-pbc-ring-universal-first-order-thickening (7 steps, +00UO composed leaf): accepted.
+- 04:51 L: reviewed lem-weil-pbc-sets-extension-by-empty-adjunction (8 steps, +007Z sets leaf): accepted.
