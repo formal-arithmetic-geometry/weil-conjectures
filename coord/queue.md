@@ -1,8 +1,8 @@
 # Work queue
 
-941 items; claim with `tools/claim.py next <group> [--stage N]`.
+945 items; claim with `tools/claim.py next <group> [--stage N]`.
 
-## Stage 1: nodes to split (583)
+## Stage 1: nodes to split (586)
 
 | node | distance to a target | Lean state on the done branch |
 |---|---|---|
@@ -19,12 +19,10 @@
 | `lem-weil-pbc-quasi-coherent-module-direct-sum` | 1014 | none |
 | `lem-weil-pbc-reduced-normal-iff-integrally-closed-total-fractions` | 1014 | none |
 | `lem-weil-pbc-regular-local-dim-one-iff-normal` | 1014 | none |
-| `lem-weil-pbc-relative-global-complete-intersection-partial-local-flat` | 1014 | none |
 | `lem-weil-pbc-schanuel` | 1014 | none |
 | `lem-weil-pbc-separable-residue-cotangent-injective` | 1014 | none |
 | `lem-weil-pbc-separably-generated-differentials-dimension` | 1014 | none |
 | `lem-weil-pbc-serre-criterion-reduced` | 1014 | none |
-| `lem-weil-pbc-torsion-module-flat-base-change-iso` | 1014 | none |
 | `lem-weil-pbc-torsion-submodule-flat-base-change-iso` | 1014 | none |
 | `lem-weil-pbc-two-term-homotopy-equivalence-direct-sum` | 1014 | none |
 | `lem-weil-pbc-well-ordered-union-projective-dimension` | 1014 | none |
@@ -47,7 +45,9 @@
 | `lem-weil-pbc-depth-zero-injective-free-map-unit-minor` | 1015 | none |
 | `lem-weil-pbc-dimension-at-point-components` | 1015 | none |
 | `lem-weil-pbc-dimension-quasi-finite-over-polynomial-algebra` | 1015 | none |
+| `lem-weil-pbc-directed-union-subrings-flat-module` | 1015 | none |
 | `lem-weil-pbc-essentially-finite-presentation-over-intermediate` | 1015 | none |
+| `lem-weil-pbc-fibre-ring-local-ring-natural-iso` | 1015 | none |
 | `lem-weil-pbc-finite-type-domain-dimension-trdeg` | 1015 | none |
 | `lem-weil-pbc-finite-type-etale-finite-factor-decomposition` | 1015 | none |
 | `lem-weil-pbc-flat-another-variant-local-criterion` | 1015 | none |
@@ -60,6 +60,7 @@
 | `lem-weil-pbc-fs-adic-complete-source-target` | 1015 | none |
 | `lem-weil-pbc-fs-adic-field-regular-local` | 1015 | none |
 | `lem-weil-pbc-graded-finiteness-cohomology` | 1015 | none |
+| `lem-weil-pbc-grothendieck-regular-sequence-flat` | 1015 | none |
 | `lem-weil-pbc-integral-scheme-ideal-generic-stalk` | 1015 | none |
 | `lem-weil-pbc-limit-finite-presentation` | 1015 | none |
 | `lem-weil-pbc-limit-module-essentially-finite-presentation-over-system` | 1015 | none |
@@ -71,7 +72,9 @@
 | `lem-weil-pbc-polynomial-ring-maximal-chain-height-difference` | 1015 | none |
 | `lem-weil-pbc-quasi-finite-over-polynomial-algebra` | 1015 | none |
 | `lem-weil-pbc-regular-local-quotient-kernel-parameters` | 1015 | none |
+| `lem-weil-pbc-relative-global-complete-intersection-base-change` | 1015 | none |
 | `lem-weil-pbc-relative-global-complete-intersection-local-regular-sequence` | 1015 | none |
+| `lem-weil-pbc-relative-global-complete-intersection-noetherian-approximation` | 1015 | none |
 | `lem-weil-pbc-sections-morphism-to-proj-polynomial-ring` | 1015 | none |
 | `lem-weil-pbc-separable-polynomial-quotient-reduced` | 1015 | none |
 | `lem-weil-pbc-smooth-at-maximal-ideal-alg-closed-differentials-bound` | 1015 | none |
@@ -590,7 +593,7 @@
 | `def-exc-jacobian-presentation` | - | none |
 | `def-nagata-rees-algebra` | - | none |
 
-## Stage 2: nodes to state (358)
+## Stage 2: nodes to state (359)
 
 | node | distance to Mathlib | kind |
 |---|---|---|
@@ -934,6 +937,7 @@
 | `lem-weil-pbc-tor-dimension-shift-free` | 1 | state |
 | `lem-weil-pbc-tor-long-exact-first-variable` | 1 | state |
 | `lem-weil-pbc-tor-strictly-pro-zero` | 1 | state |
+| `lem-weil-pbc-torsion-module-flat-base-change-iso` | 1 | state |
 | `lem-weil-pbc-tower-limit-exact-surjective-kernels` | 1 | state |
 | `lem-weil-pbc-triangle-morphism-extension` | 1 | state |
 | `lem-weil-pbc-truncation-descends` | 1 | state |
@@ -953,7 +957,7 @@
 | `lem-weil-pbc-p1-field-dimension-one` | 4 | state |
 | `lem-weil-pbc-projective-space-zero-isomorphism` | 4 | state |
 
-Not open yet: 594 nodes that wait for stage 1, 683 nodes that wait for a statement dependency.
+Not open yet: 597 nodes that wait for stage 1, 684 nodes that wait for a statement dependency.
 
 ## Stage 3: modules to prove (0)
 
