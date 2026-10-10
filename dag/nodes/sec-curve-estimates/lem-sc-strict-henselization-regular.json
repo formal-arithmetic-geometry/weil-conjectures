@@ -23,9 +23,53 @@
   "def-weil-pbc-noetherian-ring",
   "def-weil-regular-scheme"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "The strict henselization is Noetherian because $R$ is Noetherian, by [lem-sc-strict-henselization-noetherian]. Thus the regular-local criterion applies to both $R$ and $R^{\\mathrm{sh}}$.",
+   "uses": [
+    "lem-sc-strict-henselization-noetherian"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Lemma Tag 06LN, proof via Tag 06LJ"
+   }
+  },
+  {
+   "text": "The strict henselization has the same Krull dimension as $R$, by [lem-sc-strict-henselization-dimension].",
+   "uses": [
+    "lem-sc-strict-henselization-dimension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Lemma Tag 06LN, proof via Tag 06LK"
+   }
+  },
+  {
+   "text": "By [lem-sc-strict-henselization-cotangent-dimension], the cotangent spaces of $R$ and $R^{\\mathrm{sh}}$ have equal dimensions after identifying the residue-field extension. Applying [lem-weil-pbc-regular-local-cotangent-dimension] to the two Noetherian local rings, regularity is equivalent in each case to equality of Krull dimension with cotangent-space dimension. The equalities from Steps 1 and 2 therefore give $R$ regular if and only if $R^{\\mathrm{sh}}$ regular.",
+   "uses": [
+    "lem-sc-strict-henselization-cotangent-dimension",
+    "lem-weil-pbc-regular-local-cotangent-dimension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Lemma Tag 06LN, final paragraph of proof"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sc-strict-henselization-noetherian",
+  "lem-sc-strict-henselization-dimension",
+  "lem-sc-strict-henselization-cotangent-dimension",
+  "lem-weil-pbc-regular-local-cotangent-dimension"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Lemma Tag 06LN (lemma-henselization-regular), proof"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -64,12 +108,28 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-sc-strict-henselization-dvr",
   "by": "worker",
   "date": "2026-10-10"
  },
  "chapter": "sec-curve-estimates",
- "unit": "sk-thm-br"
+ "unit": "sk-thm-br",
+ "split_report": {
+  "date": "2026-10-11",
+  "item": "lem-sc-strict-henselization-regular",
+  "worker": "stage1",
+  "summary": "Split Tag 06LN into Noetherianity, dimension, and embedding-dimension comparisons. The existing strict-henselization Noetherianity and dimension nodes provide the first two inputs; a new unsplit node records the cotangent-space base-change isomorphism, and the existing Mathlib cotangent criterion finishes the equivalence.",
+  "blueprint": "Realizes the proof of the boundary stalk calculation in lem-sc-brauer-zero: the regular-local criterion for the strict henselization, using the imported route through the strict-henselization DVR node.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-shr2034",
+  "group": "K1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-shr2034 (reviewer sub-agent of L); spot-checked: Item = Stacks 06LN (R vs R^sh); proof follows the 06LN minimal-generator route, not 07NG ascent, so no flat-regular-fibre citation needed. Steps 1-3 cite statements whose hypotheses hold (noetherian/dimension nodes are unconditional iff/equality; Mathlib cotangent criterion applied to both Noetherian local rings). New node cotangent-dimension checked true: m^sh=mR^sh, flatness gives (m/m^2)⊗_R R^sh = m^sh/(m^sh)^2 and R^sh/mR^sh=kappa^sep (07QM). Not class b: no existing node states it (lem-sc-strict-henselization-dvr is the scheme-stalk DVR statement and is downstream; lem-weil-pbc-ideal-cotangent-flat-base-change-ring is the generic flat input only); not d: needs flatness, mR^sh=m^sh and residue field, none stated by a node for local R^sh; not c: grep of Mathlib for StrictHenselization: 0 files. No cycle. FIX more, RETURN less: no repairs needed."
+ }
 }
