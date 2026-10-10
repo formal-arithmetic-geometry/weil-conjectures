@@ -1017,3 +1017,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 07:25 L: reviewed and accepted lem-weil-pbc-quasi-finite-at-prime-principal-localization (9 steps, no new nodes; 077H).
 - 07:28 L: accepted lem-weil-pbc-reduced-strongly-transcendental-not-quasi-finite (5 steps; new leaf strongly-transcendental-quotient-minimal-prime 00Q0, new node domains-strongly-transcendental-not-quasi-finite 00Q1). Worker notes 00Q2 assumes R reduced but never uses it.
 - 07:28 L: accepted lem-weil-pbc-quasi-finite-four-rings (8 steps; new leaf finite-type-algebra-dim-zero-finite 0ALW).
+- 07:29 L: accepted lem-weil-pbc-quasi-finite-monogenic-integral-closure (9 steps; new leaf leading-coefficient-times-root-integral 00PQ). Worker: 00Q8 leaves S' integrally closed in S, the fibre-ring identification and the use of 00Q2 implicit; all written out.

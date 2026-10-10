@@ -1,0 +1,82 @@
+{
+ "id": "lem-weil-pbc-leading-coefficient-times-root-integral",
+ "kind": "statement",
+ "title": "The top coefficient times a root is integral",
+ "statement": "Let $\\varphi:R\\to S$ be a homomorphism of commutative rings, let $n\\ge0$, $a_0,\\dots,a_n\\in R$ and $t\\in S$ with $\\varphi(a_0)+\\varphi(a_1)t+\\dots+\\varphi(a_n)t^n=0$ in $S$. Then $\\varphi(a_n)t$ is integral over $R$ [def-weil-pbc-integral-closure]: it is a root of a monic polynomial with coefficients in $\\varphi(R)$.",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Algebra, Lemma Tag 00PQ (lemma-make-integral-trivial, line 30481); proof: multiply the relation by $\\varphi(a_n)^{n-1}$. Tag verified in literature/stacks-project/tags/tags (00PQ,algebra-lemma-make-integral-trivial)."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-integral-closure"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "if p(x) = 0 then leading coefficient of p times x is integral",
+   "results": "isIntegral_leadingCoeff_smul, RingHom.isIntegralElem_leadingCoeff_mul (Mathlib.RingTheory.IntegralClosure.IsIntegralClosure.Basic), minpoly.IsIntegrallyClosed.isIntegral_iff_isUnit_leadingCoeff, is_integral_localization_at_leadingCoeff",
+   "date": "2026-10-10",
+   "verdict": "match"
+  },
+  {
+   "tool": "loogle",
+   "query": "RingHom.IsIntegralElem _ (_ * _)",
+   "results": "RingHom.IsIntegralElem.mul, RingHom.IsIntegralElem.of_mul_unit, RingHom.isIntegralElem_leadingCoeff_mul (Mathlib.RingTheory.IntegralClosure.IsIntegralClosure.Basic)",
+   "date": "2026-10-10",
+   "verdict": "match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "t satisfies a_0 + a_1 t + ... + a_n t^n = 0, then a_n t is integral over R",
+   "results": "isIntegral_leadingCoeff_smul, RingHom.isIntegralElem_leadingCoeff_mul, IsIntegral.of_aeval_monic_of_isIntegral_coeff, IsAdjoinRootMonic.isIntegral_root, IsIntegral.of_aeval_monic",
+   "date": "2026-10-10",
+   "verdict": "match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rn 'leadingCoeff_smul\\|isIntegralElem_leadingCoeff_mul\\|isIntegralElem_zero' Mathlib/RingTheory",
+   "results": "RingTheory/IntegralClosure/IsIntegralClosure/Basic.lean:286 theorem RingHom.isIntegralElem_leadingCoeff_mul (h : p.eval₂ f x = 0) : f.IsIntegralElem (f p.leadingCoeff * x); :307 isIntegral_leadingCoeff_smul; RingTheory/IntegralClosure/IsIntegral/Basic.lean:113 RingHom.isIntegralElem_zero; source read",
+   "date": "2026-10-10",
+   "verdict": "match (source read)"
+  },
+  {
+   "tool": "local_search",
+   "query": "RingHom.isIntegralElem_leadingCoeff_mul",
+   "results": "found in .lake/packages/mathlib/Mathlib/RingTheory/IntegralClosure/IsIntegralClosure/Basic.lean (index: unavailable, name found)",
+   "date": "2026-10-10",
+   "verdict": "exists"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "RingHom.isIntegralElem_leadingCoeff_mul",
+  "file": "Mathlib/RingTheory/IntegralClosure/IsIntegralClosure/Basic.lean",
+  "how": "specializes in one line: lines 286-303 (read 2026-10-10), for f : R →+* S, p : R[X], x : S with p.eval₂ f x = 0, gives f.IsIntegralElem (f p.leadingCoeff * x) (RingHom.IsIntegralElem, RingTheory/IntegralClosure/IsIntegral/Defs.lean:39: a root of a monic polynomial via f). Take p = a_0 + ... + a_n X^n: if a_n ≠ 0 then p.leadingCoeff = a_n; if a_n = 0 then φ(a_n)t = 0 is integral by RingHom.isIntegralElem_zero (RingTheory/IntegralClosure/IsIntegral/Basic.lean:113).",
+  "line": 286
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-quasi-finite-monogenic-integral-closure",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lead_note": "Leaf accepted by L (2026-10-10): RingHom.isIntegralElem_leadingCoeff_mul (IsIntegralClosure/Basic.lean:286, checked with sed) with p = sum a_i X^i; the degenerate case a_n = 0 is RingHom.isIntegralElem_zero (IsIntegral/Basic.lean:113).",
+ "reviewed": "pass (L, 2026-10-10): leaf, declaration checked by sed; statement matches with the a_n = 0 case noted."
+}
