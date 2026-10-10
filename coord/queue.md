@@ -2,11 +2,10 @@
 
 902 items; claim with `tools/claim.py next <group> [--stage N]`.
 
-## Stage 1: nodes to split (645)
+## Stage 1: nodes to split (644)
 
 | node | distance to a target | Lean state on the done branch |
 |---|---|---|
-| `lem-weil-pbc-helper-g-ring-char-p` | 1011 | none |
 | `lem-weil-pbc-small-etale-representable-presheaf-sheaf` | 1011 | none |
 | `lem-weil-pbc-affine-basic-sets-disjoint-refinement` | 1012 | none |
 | `lem-weil-pbc-artinian-ring-self-finite-length` | 1012 | none |
@@ -35,7 +34,6 @@
 | `lem-weil-pbc-smooth-over-field-dimension-differentials` | 1012 | none |
 | `lem-weil-pbc-smooth-retract-standard-smooth` | 1012 | none |
 | `lem-weil-pbc-spec-local-ring-canonical-morphism` | 1012 | none |
-| `lem-weil-pbc-spectral-directed-limit-finite-sober` | 1012 | none |
 | `lem-weil-pbc-spectral-directed-limit-spectral` | 1012 | none |
 | `lem-weil-pbc-spectral-limit-descend-opens` | 1012 | none |
 | `lem-weil-pbc-spectral-limit-pullback-sections` | 1012 | none |
@@ -80,6 +78,7 @@
 | `lem-weil-pbc-find-derivation-not-pth-power` | 1013 | none |
 | `lem-weil-pbc-finite-locally-free-degree-etale-descent` | 1013 | none |
 | `lem-weil-pbc-finite-surjective-affine-target-noetherian` | 1013 | none |
+| `lem-weil-pbc-finite-t0-space-sober` | 1013 | none |
 | `lem-weil-pbc-formal-glueing-complex-exact` | 1013 | none |
 | `lem-weil-pbc-formal-glueing-finite-modules` | 1013 | none |
 | `lem-weil-pbc-formal-glueing-isogeny` | 1013 | none |
@@ -652,7 +651,7 @@
 | `lem-pc-linear-pair-graded-finite` | - | none |
 | `def-exc-jacobian-presentation` | - | none |
 
-## Stage 2: nodes to state (257)
+## Stage 2: nodes to state (258)
 
 | node | distance to Mathlib | kind |
 |---|---|---|
@@ -881,6 +880,7 @@
 | `lem-weil-pbc-spectral-closed-subspace` | 1 | state |
 | `lem-weil-pbc-spectral-constructible-clopen-constructible-topology` | 1 | state |
 | `lem-weil-pbc-spectral-constructible-finite-intersection` | 1 | state |
+| `lem-weil-pbc-spectral-directed-limit-finite-sober` | 1 | state |
 | `lem-weil-pbc-spectral-generalizations-of-quasi-compact` | 1 | state |
 | `lem-weil-pbc-spectral-proconstructible-closure-specialization` | 1 | state |
 | `lem-weil-pbc-spectral-sheaf-colimit-constant-embeddings` | 1 | state |
@@ -914,7 +914,7 @@
 | `lem-weil-pbc-p1-field-dimension-one` | 4 | state |
 | `lem-weil-pbc-projective-space-zero-isomorphism` | 4 | state |
 
-Not open yet: 657 nodes that wait for stage 1, 547 nodes that wait for a statement dependency.
+Not open yet: 656 nodes that wait for stage 1, 548 nodes that wait for a statement dependency.
 
 ## Stage 3: modules to prove (0)
 
