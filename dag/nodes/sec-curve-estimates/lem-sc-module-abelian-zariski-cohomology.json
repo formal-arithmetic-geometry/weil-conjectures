@@ -21,11 +21,65 @@
  "stmt_deps": [
   "def-sc-zariski-site",
   "pqf-def-cohomology",
+  "def-sc-zariski-cohomology",
+  "def-weil-sheaf-of-modules-category"
+ ],
+ "proof": [
+  {
+   "text": "For the ringed site $(X_{\\mathrm{Zar}},\\mathcal O_X)$, the forgetful functor from sheaves of $\\mathcal O_X$-modules to abelian sheaves is exact, preserving kernels and cokernels, by [lem-weil-pbc-module-sheaves-colimits-forgetful]. Thus an exact sequence of module sheaves remains exact after forgetting the module structure.",
+   "uses": [
+    "lem-weil-pbc-module-sheaves-colimits-forgetful"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Lemma Tag 03DA (lemma-abelian: Mod(O) abelian and the forgetful functor exact)"
+   }
+  },
+  {
+   "text": "The sheaves of $\\mathcal O_X$-modules on $X_{\\mathrm{Zar}}$ are the $\\mathcal O_X$-modules on the underlying space of $X$, the objects of $X_{\\mathrm{Zar}}$ being the open subsets and its coverings the open coverings [def-sc-zariski-site]; this category has enough injectives by [lem-weil-pbc-scheme-modules-enough-injectives]. Choose an injective resolution $\\mathcal F\\to I^\\bullet$ in the category of $\\mathcal O_X$-module sheaves. Exactness of the forgetful functor from step 1 makes the underlying complex $\\mathcal F_{\\mathrm{ab}}\\to I^\\bullet_{\\mathrm{ab}}$ an exact resolution in abelian sheaves.",
+   "uses": [
+    "lem-weil-pbc-scheme-modules-enough-injectives",
+    "def-sc-zariski-site",
+    "lem-weil-pbc-module-sheaves-colimits-forgetful"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Lemma Tag 03DA and Injectives, Theorem Tag 079H, applied to the ringed Zariski site"
+   }
+  },
+  {
+   "text": "Each term $I^m$ is an injective $\\mathcal O_X$-module on the ringed site $(X_{\\mathrm{Zar}},\\mathcal O_X)$, so $H^q(U,I^m_{\\mathrm{ab}})=0$ for $q>0$ and every open $U$, in particular $U=X$, by [lem-sc-injective-module-abelian-acyclic-zariski]; that is, $I^m_{\\mathrm{ab}}$ is acyclic for $v=\\Gamma(X,-):\\textit{Ab}(X_{\\mathrm{Zar}})\\to\\textit{Ab}$. The category $\\textit{Ab}(X_{\\mathrm{Zar}})$ is abelian with enough injectives by [lem-weil-pbc-site-sheaves-enough-injectives], so the acyclic-resolution criterion [lemma-weil-pbc-leray-acyclicity] (2) applies to $v$ and identifies the cohomology of the complex of global sections $\\Gamma(X,I^\\bullet_{\\mathrm{ab}})$ with the derived global sections $R^q\\Gamma(X,\\mathcal F_{\\mathrm{ab}})$ [def-sc-zariski-cohomology]. The same global-sections complex $\\Gamma(X,I^\\bullet)$ computes the module cohomology $R^q\\Gamma(X,\\mathcal F)$ [pqf-def-cohomology], since $I^\\bullet$ is an injective resolution in $\\mathcal O_X$-modules. The resulting isomorphisms are canonical and natural in $\\mathcal F$, since maps of sheaves lift to maps of injective resolutions and the comparison map of [lemma-weil-pbc-leray-acyclicity] (2) is induced by any morphism of complexes over the identity.",
+   "uses": [
+    "lem-sc-injective-module-abelian-acyclic-zariski",
+    "lem-weil-pbc-site-sheaves-enough-injectives",
+    "lemma-weil-pbc-leray-acyclicity",
+    "pqf-def-cohomology",
+    "def-sc-zariski-cohomology"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Lemma Tag 03FD (lemma-cohomology-modules-abelian-agree), proof, second paragraph; Lemma Tag 03F9 acyclic Cech criterion"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-module-sheaves-colimits-forgetful",
+  "lem-weil-pbc-scheme-modules-enough-injectives",
+  "def-sc-zariski-site",
+  "lem-sc-injective-module-abelian-acyclic-zariski",
+  "lem-weil-pbc-site-sheaves-enough-injectives",
+  "lemma-weil-pbc-leray-acyclicity",
+  "pqf-def-cohomology",
   "def-sc-zariski-cohomology"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Lemma Tag 03FD (lemma-cohomology-modules-abelian-agree), proof"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -57,12 +111,48 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-sc-noetherian-cohomology-above-dimension",
   "by": "worker",
   "date": "2026-10-10"
  },
  "chapter": "sec-curve-estimates",
- "unit": "sk-prop-cd"
+ "unit": "sk-prop-cd",
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "lem-sc-module-abelian-zariski-cohomology",
+  "worker": "stage1",
+  "summary": "Split the comparison into exactness of the forgetful functor, existence of module-sheaf injective resolutions, and the acyclic-resolution comparison of the resulting global-sections complex. Added unsplit child statements for the ringed-site injective-module abelian acyclicity theorem (and, as delivered, a Zariski-site enough-injectives node, which the reviewer replaced in step 2 by the existing lem-weil-pbc-scheme-modules-enough-injectives); no exact Lean declaration was found.",
+  "blueprint": "The three steps realize the parent blueprint proof clause asserting that Zariski cohomology of a module sheaf is computed as cohomology of its underlying abelian sheaf, in the second paragraph of lem-sc-ga-cohomology.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-module-sheaves-colimits-forgetful",
+    "why": "Its exact-forgetful statement is the generic categorical input for the Zariski module category; no node in this unit duplicates it."
+   },
+   {
+    "node": "lemma-weil-pbc-leray-acyclicity",
+    "why": "Its acyclic-resolution criterion is the generic derived-functor mechanism converting the common global-sections complex into both cohomology theories."
+   },
+   {
+    "node": "lem-weil-pbc-scheme-modules-enough-injectives",
+    "why": "Generic enough-injectives theorem for O_X-modules on a scheme, cited by the reviewer (C5) instead of a duplicate new node."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-scheme-modules-enough-injectives",
+  "lem-weil-pbc-module-sheaves-colimits-forgetful",
+  "lemma-weil-pbc-leray-acyclicity",
+  "lem-weil-pbc-scheme-modules-enough-injectives"
+ ],
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-maz",
+  "group": "G1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-maz (reviewer sub-agent of L); spot-checked: Source: Stacks 03FD (sites-cohomology.tex label lemma-cohomology-modules-abelian-agree, read locally; the report wrongly says the checkout has only indexes), any ringed site and module; the item is its specialization to (X_Zar,O_X), no hypothesis added or dropped. The worker's route (injective module resolution + acyclic-resolution criterion) replaces the source's universal-delta-functor argument and is equivalent. Step 1: lem-weil-pbc-module-sheaves-colimits-forgetful (1) gives exactness of forget (X_Zar admits sheafification); declared tool use accepted. Step 2: enough injectives in Mod(O_X) plus step 1. Step 3: new acyclicity node with U=X gives Gamma(X,-)-acyclicity of I^m_ab; lemma-weil-pbc-leray-acyclicity (2) (declared tool use accepted) with A=Ab(X_Zar); module side by pqf-def-cohomology/def-sp-left-exact-additive; naturality by the lift-independence clause of leray (2). New acyclicity node true (03FD proof, 03F9+03FC), tested on a one-point space (Mod(O)=k-Vect, all higher H vanish) and the empty scheme. No slopmaster2 declaration found (grep). FIX more, RETURN less: (1) C5: dag/nodes/sec-curve-estimates/lem-sc-module-abelian-zariski-cohomology.json: proof step 2, uses, proof_deps, split_report: cite the existing lem-weil-pbc-scheme-modules-enough-injectives (with def-sc-zariski-site) instead of the delivered duplicate lem-sc-zariski-module-sheaves-enough-injectives (now uncited; see lead note); (2) C1: same file, step 3: the leray criterion needs Ab(X_Zar) with enough injectives, now cited as lem-weil-pbc-site-sheaves-enough-injectives (Mathlib leaf), step text made explicit (v=Gamma(X,-), clause (2)); (3) B3/C4: dag/nodes/sec-curve-estimates/lem-sc-injective-module-abelian-acyclic-zariski.json: statement and stmt_deps: the general-site H^q(U,-) was cited to the Zariski-only def-sc-zariski-cohomology; now cites def-weil-pbc-sites-and-cohomology (2) for site and cohomology over U, and def-sp-injective-resolutions added to stmt_deps (it was cited but missing); unused def-sp-acyclic, def-sp-left-exact-additive removed. Mathematics unchanged. Times: start Sat Oct 10 03:11:20 PM UTC 2026, end Sat Oct 10 03:13:41 PM UTC 2026.; 2 file(s) fixed by the reviewer"
+ },
+ "lead_note": "2026-10-10 L (R-maz): The delivered new node lem-sc-zariski-module-sheaves-enough-injectives duplicates the existing lem-weil-pbc-scheme-modules-enough-injectives (O_X-modules on X_Zar = O_X-modules on the space) and after the reviewer's fix is cited by no node; retire it (merged_into lem-weil-pbc-scheme-modules-enough-injectives) rather than queue it."
 }
