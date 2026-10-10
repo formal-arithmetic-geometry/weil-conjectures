@@ -2537,3 +2537,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 20:36 L: returned deliver/F1/lem-pc-derived-lower-truncation-step-triangle (reviewer RETURN: Reviewer R-dlt2336. (1) E / false new statement (lem-pc-derived-lower-truncation-step-ses): with tau_{>=m}K = K^m/Im d^{)
 - 20:36 L: merged deliver/M1/pqf-lem-leray-lowdegree (reviewer PASS; first push; new nodes: 1)
 - 20:37 L: merged deliver/H1/lem-sp-horseshoe-prescribed-resolutions (reviewer FIX; first push; new nodes: 0)
+- 20:39 L: returned deliver/K1/lem-sp-cartan-eilenberg-comparison-independence (reviewer RETURN: Reviewer R-cci2340. (1) E, false new statement: lem-sp-cartan-eilenberg-comparison-homotopy claims the two CE lifts phi,)
