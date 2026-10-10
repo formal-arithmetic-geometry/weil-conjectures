@@ -25,44 +25,88 @@
  ],
  "proof": [],
  "proof_deps": [],
- "proof_origin": null,
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Lemma 18.11.1 (Tag 03CY, lemma-sheafification-presheaf-modules)"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
    "query": "module sheafification for a presheaf of rings on a site",
-   "results": "PresheafOfModules.sheafification",
-   "date": "2026-10-11",
-   "verdict": "generalization"
+   "results": "PresheafOfModules.Sheafify.module; PresheafOfModules.sheafify; PresheafOfModules.sheafification; PresheafOfModules.Sheafify.SMulCandidate; ModuleCat.tilde; PresheafOfModules.Sheafify.smulCandidate; ModuleCat.tildeInModuleCat; PresheafOfModules.Sheafify.SMulCandidate.x",
+   "date": "2026-10-10",
+   "verdict": "match: the sheafification construction and induced module action"
   },
   {
    "tool": "loogle",
-   "query": "PresheafOfModules.sheafificationAdjunction",
-   "results": "PresheafOfModules.sheafificationAdjunction",
-   "date": "2026-10-11",
+   "query": "PresheafOfModules.sheafification, PresheafOfModules.sheafificationAdjunction",
+   "results": "PresheafOfModules.sheafificationAdjunction; PresheafOfModules.instIsIsoFunctorSheafOfModulesCounitSheafificationAdjunction; PresheafOfModules.toPresheaf_map_sheafificationAdjunction_unit_app; PresheafOfModules.toSheaf_map_sheafificationAdjunction_counit_app; PresheafOfModules.sheafificationAdjunction_homEquiv_apply",
+   "date": "2026-10-10",
+   "verdict": "match"
+  },
+  {
+   "tool": "grep",
+   "query": "sheafificationAdjunction|sheafificationCompToSheaf in Mathlib/Algebra/Category/ModuleCat/Presheaf/Sheafification.lean",
+   "results": "0 hits from the msearch grep query",
+   "date": "2026-10-10",
    "verdict": "no match"
   },
   {
    "tool": "grep",
    "query": "sheafificationAdjunction in Mathlib/Algebra/Category/ModuleCat",
-   "results": "declarations found",
-   "date": "2026-10-11",
-   "verdict": "generalization"
+   "results": "0 hits from the msearch grep query",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "sheafification of presheaf of modules over sheafified presheaf of rings universal property",
+   "results": "service unavailable (Internal Server Error)",
+   "date": "2026-10-10",
+   "verdict": "unavailable"
   },
   {
    "tool": "grep",
-   "query": "sheafificationAdjunction|sheafificationCompToSheaf in Mathlib/Algebra/Category/ModuleCat/Presheaf/Sheafification.lean",
-   "results": "PresheafOfModules.sheafification (line 54), sheafificationCompToSheaf (line 72), sheafificationAdjunction (line 125), for a locally bijective alpha : R0 -> R.val",
+   "query": "sheafificationAdjunction in Mathlib/Algebra/Category/ModuleCat/Presheaf",
+   "results": "0 hits from the msearch grep query",
    "date": "2026-10-10",
-   "verdict": "generalization: two declarations plus the local bijectivity of R0 -> R0^#; kept as an unsplit statement node (reviewer R-smf2740)"
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "sheafificationAdjunction|sheafificationCompToSheaf|Subsingleton (SMulCandidate in Mathlib/Algebra/Category/ModuleCat/Presheaf/",
+   "results": "Sheafification.lean:54 sheafification, :72 sheafificationCompToSheaf, :125 sheafificationAdjunction, :145 toPresheaf_map_sheafificationAdjunction_unit_app; Sheafify.lean:203 instance Subsingleton (SMulCandidate α φ r m)",
+   "date": "2026-10-10",
+   "verdict": "match (reviewer R-smi2830; the earlier 0-hit grep records are superseded)"
   }
  ],
- "mathlib_match": null,
- "status": "unsplit",
+ "mathlib_match": {
+  "declaration": "PresheafOfModules.sheafification; PresheafOfModules.sheafificationCompToSheaf; PresheafOfModules.sheafificationAdjunction; PresheafOfModules.toPresheaf_map_sheafificationAdjunction_unit_app",
+  "file": "Mathlib/Algebra/Category/ModuleCat/Presheaf/Sheafification.lean:54,72,125,145",
+  "how": "specializes in one line by taking R₀ to be O, R to be O^#, and α to be the sheafification map O → O^#. The declaration at line 54 constructs P^# with its O^#-module action; line 72 identifies its underlying abelian sheaf with abelian sheafification; line 125 gives the unique factorization and adjunction to restriction of scalars; line 145 identifies the unit with P → P^#. The locally injective and locally surjective hypotheses on α are exactly the standard sheafification-map instances. The uniqueness of the compatible action map O^# × P^# → P^# is the instance `Subsingleton (PresheafOfModules.Sheafify.SMulCandidate α φ r m)` (Mathlib/Algebra/Category/ModuleCat/Presheaf/Sheafify.lean:203): any compatible action sends (r,m) to an element that is locally φ(r₀·m₀), i.e. an SMulCandidate, and such an element is unique by separatedness."
+ },
+ "status": "mathlib",
  "created": {
   "item": "lem-pc-sites-modules-sheafification-flat",
   "by": "worker",
   "date": "2026-10-10"
  },
  "chapter": "sec-picard-framework",
- "unit": "sk-thm-picard-semicon"
+ "unit": "sk-thm-picard-semicon",
+ "split_report": {
+  "date": "2026-10-11",
+  "item": "lem-pc-sites-module-sheafification-interface",
+  "worker": "stage1",
+  "summary": "The item is a Mathlib leaf: the generic presheaf-of-modules sheafification construction, underlying abelian sheafification, and sheafification adjunction specialize directly to the site-level Stacks Tag 03CY interface.",
+  "blueprint": "Realizes the sheafification step in the proof route under def-weil-derived-tensor; the full interface is Stacks Tag 03CY."
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-smi2830",
+  "group": "M1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-smi2830 (reviewer sub-agent of L); spot-checked: E7: statement byte-identical to sheaf-dag (R-smf2740 03CY restatement kept, no revert). B8 leaf: read Sheafification.lean 54/72/125/145 with sed; one-line specialization (alpha = O -> O^#, locally bijective), underlying abelian sheaf clause = sheafificationCompToSheaf (Iso.refl), which is what F1 step 1 uses with the adjunction (C4 ok). Not a duplicate of the H1 tensor sibling. FIX more, RETURN less: (1) B8 the 'unique action map' clause had no declaration; added Sheafify.lean:203 Subsingleton SMulCandidate to mathlib_match.how; (2) recorded a correct grep (the delivered grep records say 0 hits for declarations that exist).; 1 file(s) fixed by the reviewer"
+ }
 }
