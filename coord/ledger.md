@@ -2145,3 +2145,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 17:38 L: merged deliver/C1/lem-sc-open-curve-gm-direct-image-cohomology (reviewer FIX; first push; new nodes: 2)
 - 17:38 L: merged deliver/K1/lem-sc-group-h2-transfer (reviewer PASS; first push; new nodes: 1)
 - 17:39 L: merged deliver/F1/lem-sc-group-cohomology-filtered-union (reviewer PASS; first push; new nodes: 0)
+- 17:39 L: returned deliver/C1/lem-sc-semilocal-dim-one-conductor (reviewer RETURN: Reviewer R-sdc1750. 1. E (false new statement) lem-sc-finite-integral-conductor: the hypothesis dim B = 1 is missing, an)
