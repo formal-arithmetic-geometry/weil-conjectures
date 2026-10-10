@@ -325,12 +325,30 @@ def main() -> int:
             f("tools/review_split.py does not pass:\n   " + "\n   ".join(out.splitlines()[:12]))
         r = subprocess.run([sys.executable, "tools/check_dag.py"], cwd=ROOT, capture_output=True, text=True)
         # a "route:" warning counts only when it names the item or a new node; standing ones belong to the lead
-        bad = [l for l in (r.stdout + r.stderr).splitlines()
-               if l.startswith(("error", "unit", "cycle", "deps")) or "ERROR" in l
-               or (l.startswith("route") and any(i in l for i in [item, *new_nodes]))]
+        def findings(text):
+            return [l for l in text.splitlines()
+                    if l.startswith(("error", "unit", "cycle", "deps")) or "ERROR" in l
+                    or (l.startswith("route") and any(i in l for i in [item, *new_nodes]))]
+        bad = findings(r.stdout + r.stderr)
+        # launcher's finding, 2026-10-10 15:30 UTC: the preflight fails only on what the delivery introduces. The findings
+        # already present on the base are not the delivery's: they are computed on a temporary worktree of the base and
+        # subtracted. (Pre-existing route warnings blocked thm-constructible-serre 29 times.)
+        if bad:
+            import tempfile, shutil
+            wt = tempfile.mkdtemp(prefix="preflight-base-")
+            try:
+                subprocess.run(["git", "worktree", "add", "--detach", "-q", wt, base], cwd=ROOT, capture_output=True, text=True, check=True)
+                rb = subprocess.run([sys.executable, "tools/check_dag.py"], cwd=wt, capture_output=True, text=True)
+                on_base = set(findings(rb.stdout + rb.stderr))
+                bad = [l for l in bad if l not in on_base]
+            except subprocess.CalledProcessError as e:
+                print(f"   (note: could not check the base {base} in a worktree: {e.stderr.strip()[:200]}; all findings count)")
+            finally:
+                subprocess.run(["git", "worktree", "remove", "--force", wt], cwd=ROOT, capture_output=True, text=True)
+                shutil.rmtree(wt, ignore_errors=True)
         last = (r.stdout.strip().splitlines() or [""])[-1]
         if bad or "0 cycles" not in last:
-            f("tools/check_dag.py reports a problem:\n   " + "\n   ".join((bad or [last])[:12]))
+            f("tools/check_dag.py reports a problem introduced by the delivery (findings already on the base are not counted):\n   " + "\n   ".join((bad or [last])[:12]))
     else:
         f("review_split.py and check_dag.py were not run because the working tree is not clean")
 

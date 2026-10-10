@@ -21,7 +21,7 @@ p = ROOT / "coord" / "deliveries.log"
 if p.exists():
     for line in p.read_text().splitlines():
         m = re.match(r"\S+ (\S+) abandoned (\S+):", line)
-        if m:
+        if m and m.group(2) not in g(m.group(1))["abandoned"]:   # distinct items: a release loop (C1, 15:00-15:30) counted once
             g(m.group(1))["abandoned"].append(m.group(2))
         m = re.match(r"\S+ (\S+) done (\S+) .*merged by L", line)
         if m and m.group(1) != "L":
@@ -52,7 +52,7 @@ for lock in sorted((ROOT / "coord" / "claims").glob("*.lock")):
 if "--json" in sys.argv:
     print(json.dumps(groups, indent=1))
 else:
-    print("| group | merged | returned | abandoned | claims held (age, h) |")
+    print("| group | merged | returned | abandoned (distinct items) | claims held (age, h) |")
     print("|---|---|---|---|---|")
     for name in sorted(groups):
         d = groups[name]

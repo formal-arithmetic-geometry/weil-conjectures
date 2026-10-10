@@ -145,6 +145,26 @@ def queue(stage: str | None = None):
     return [r[0] for r in rows]
 
 
+
+def abandoned_recently(who, hours=24):
+    """Items `who` released with 'abandon:' in the last `hours` hours (coord/deliveries.log); other groups and L may take them."""
+    import datetime as _dt
+    out = set()
+    p = WORK / "deliveries.log"
+    if not p.exists():
+        return out
+    now = _dt.datetime.now(_dt.timezone.utc)
+    for line in p.read_text().splitlines():
+        m = re.match(r"(\S+)Z (\S+) abandoned (\S+):", line)
+        if m and m.group(2) == who:
+            try:
+                t = _dt.datetime.fromisoformat(m.group(1)).replace(tzinfo=_dt.timezone.utc)
+            except ValueError:
+                continue
+            if (now - t).total_seconds() <= hours * 3600:
+                out.add(m.group(3))
+    return out
+
 def main() -> int:
     a = sys.argv[1:]
     if not a or a[0] in ("-h", "--help", "help"):
@@ -158,9 +178,12 @@ def main() -> int:
         stage = a[a.index("--stage") + 1] if "--stage" in a else None
         n = min(n, LIMIT - len(held_by(who)))
         got = 0
-        for m in queue(stage):
+        skip = abandoned_recently(who)   # launcher's finding, 2026-10-10 15:30 UTC: C1 abandoned one item 29 times in half an
+        for m in queue(stage):           # hour because next handed it straight back; a group skips its own abandonments for 24 h
             if got >= n:
                 break
+            if m in skip:
+                continue
             if sorries(m) == 0:  # finished since the queue was written
                 continue
             if node_finished(m):  # a DAG node split or matched since the queue was written (stale queue.tsv)
