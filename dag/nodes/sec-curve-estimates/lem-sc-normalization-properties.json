@@ -3,7 +3,7 @@
  "blueprint": {
   "is": "lem-sc-normalization-properties",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "Properties of the normalization",
@@ -17,13 +17,37 @@
  ],
  "proof": [
   {
-   "text": "Part (a) is [lem-sc-normalization-exists]; part (b) is\n[lem-sc-normalization-over-normal-locus]; part (c) is\n[lem-sc-normalized-curve-smooth].",
+   "text": "Part (a), asserting finiteness, surjectivity, birationality, properness in the proper case, and dimension preservation, is exactly lem-sc-normalization-exists.",
    "uses": [
-    "lem-sc-normalization-exists",
-    "lem-sc-normalization-over-normal-locus",
+    "lem-sc-normalization-exists"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-curve-estimates/sk-thm-br/lem-sc-normalization-properties.md",
+    "place": "## Proof, part (a)"
+   }
+  },
+  {
+   "text": "Part (b), the isomorphism after restricting the normalization to any normal open U, is exactly lem-sc-normalization-over-normal-locus.",
+   "uses": [
+    "lem-sc-normalization-over-normal-locus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-curve-estimates/sk-thm-br/lem-sc-normalization-properties.md",
+    "place": "## Proof, part (b)"
+   }
+  },
+  {
+   "text": "Part (c), smoothness of the normalization in dimension one over a perfect field, is exactly lem-sc-normalized-curve-smooth.",
+   "uses": [
     "lem-sc-normalized-curve-smooth"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-curve-estimates/sk-thm-br/lem-sc-normalization-properties.md",
+    "place": "## Proof, part (c)"
+   }
   }
  ],
  "proof_deps": [
@@ -36,9 +60,38 @@
   "document": "literature/blueprint/master/blueprint/sec-curve-estimates/sk-thm-br/lem-sc-normalization-properties.md",
   "place": "## Proof"
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "normalization of an integral finite type scheme over a field is finite surjective birational, preserves dimension, is proper when proper, is an isomorphism over the normal locus, and is smooth for dimension one over a perfect field",
+   "results": "HTTP 500 from LeanSearch; no result returned",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "normalization",
+   "results": "AlgebraicGeometry.Scheme.Hom.normalization and related declarations; no declaration matching the combined item",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "normalization finite birational morphism over normal locus smooth curve",
+   "results": "Normalization declarations in Mathlib.AlgebraicGeometry.Normalization; no combined declaration",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "rg -n 'normalization|isFinite_fromNormalization|isIso_fromNormalization|smooth_fromNormalization' /home/ubuntu/weil-src-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicGeometry",
+   "results": "Normalization declarations occur in Mathlib/AlgebraicGeometry/Normalization.lean, but none states all three clauses of this item",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [],
  "blueprint_kind": "lemma",
@@ -63,5 +116,20 @@
   }
  },
  "chapter": "sec-curve-estimates",
- "unit": "sk-thm-br"
+ "unit": "sk-thm-br",
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "lem-sc-normalization-properties",
+  "worker": "stage1",
+  "summary": "Checked the normalization-properties statement against its blueprint source and split its proof into three clause-level steps. Each step cites the existing node whose statement exactly supplies that clause; no new nodes were required.",
+  "blueprint": "Realizes the blueprint proof sentence assigning parts (a), (b), and (c) to lem-sc-normalization-exists, lem-sc-normalization-over-normal-locus, and lem-sc-normalized-curve-smooth, respectively."
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-nrp",
+  "group": "M1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-nrp (reviewer sub-agent of L); spot-checked: Source: blueprint master sec-curve-estimates/sk-thm-br/lem-sc-normalization-properties.md (order 919); the item statement is unchanged and agrees with it clause by clause (integral, finite type over k, normalization in k(X) via def-sc-normalization; (a) finite/surjective/birational, proper if X proper, dim equal; (b) iso over every normal open U; (c) smooth if dim X=1 and k perfect). Step 1 carried by lem-sc-normalization-exists (same hypotheses, states all of (a)); step 2 by lem-sc-normalization-over-normal-locus (same hypotheses, states (b) verbatim); step 3 by lem-sc-normalized-curve-smooth (perfect k, dim X=1, states smoothness of X^nu). All three cited nodes are in the same unit sk-thm-br, so no C7/C8 issue; the split follows the blueprint proof exactly. No new nodes, no Mathlib leaves; four Mathlib searches recorded (LeanSearch HTTP 500 noted), no combined declaration expected. Changed fields: same_as null->[], proof, mathlib_searches, status, split_report only. Note: report section 1 mentions a citations.json that is not in the commit (harmless). Small cases: (b) with U empty is trivial; (c) restricted exactly as the cited node. Start Sat Oct 10 03:18:14 PM UTC 2026, end Sat Oct 10 03:18:32 PM UTC 2026"
+ }
 }
