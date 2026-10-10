@@ -2214,3 +2214,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 18:11 L: merged deliver/C1/lem-pc-ringed-spaces-derived-pullback-composition (reviewer FIX; first push; new nodes: 1)
 - 18:11 L: merged deliver/E1/lem-sc-p1-section-restriction-s-torsion (reviewer FIX; first push; new nodes: 0)
 - 18:12 L: returned deliver/K1/lem-sc-positive-ample-hilbert-degree (reviewer RETURN: 1. D1/D3 (no real split): the single step cites the document as the step ('Stacks Lemma 0BEV states ... so the inequalit)
+- 18:12 L: merged deliver/H1/lem-sc-topological-extension-by-zero-stalks (reviewer PASS; first push; new nodes: 0)

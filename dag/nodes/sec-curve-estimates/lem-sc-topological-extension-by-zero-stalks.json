@@ -24,9 +24,63 @@
   "def-weil-pbc-sheafification",
   "def-weil-pbc-module-stalk"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "By the stalk-sheafification lemma, the canonical map from the stalk of the presheaf j_{p!}G to the stalk of its sheafification j_!G is an isomorphism, compatibly with the germ maps.",
+   "uses": [
+    "lem-weil-pbc-stalk-sheafification-space"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sheaves.tex",
+    "place": "Sheaves, Lemma 007Z (lemma-stalk-sheafification) and Lemma 0085 (lemma-sheafify-abelian-presheaf)"
+   }
+  },
+  {
+   "text": "If x is outside U, every open neighborhood V of x is not contained in U, so (j_{p!}G)(V)=0. The filtered colimit defining the stalk of j_{p!}G is therefore the zero abelian group, and the isomorphism in step 1 gives (j_!G)_x=0.",
+   "uses": [
+    "def-weil-pbc-module-stalk"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sheaves.tex",
+    "place": "Sheaves, Lemma 00A5 (lemma-j-shriek-abelian), part (3), outside U"
+   }
+  },
+  {
+   "text": "If x is in U, the neighborhoods V∩U, for V an open neighborhood of x in X, are cofinal among the open neighborhoods of x in U. On these neighborhoods j_{p!}G(V∩U)=G(V∩U), with the same restriction maps. The two filtered colimits are consequently canonically identified, giving G_x ≅ (j_{p!}G)_x; composing with step 1 gives the asserted natural isomorphism G_x ≅ (j_!G)_x.",
+   "uses": [
+    "def-weil-pbc-module-stalk"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sheaves.tex",
+    "place": "Sheaves, Lemma 00A5 (lemma-j-shriek-abelian), part (2), and the definition of stalks"
+   }
+  },
+  {
+   "text": "All maps used above are induced by restriction maps and by the canonical sheafification morphism, so the identifications commute with morphisms of G. For F on X, the presheaf map j_{p!}j^*F→F is the identity on opens contained in U and zero otherwise; at x∈U its germ map is therefore the identity on F_x under the identification of step 3, while at x outside U the source stalk is zero. This is the stated naturality and adjunction-map clause.",
+   "uses": [
+    "def-weil-pbc-sheafification",
+    "def-weil-pbc-module-stalk"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sheaves.tex",
+    "place": "Sheaves, Lemma 00A5 (lemma-j-shriek-abelian), parts (2), (3), (5)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-sheafification",
+  "def-weil-pbc-module-stalk",
+  "lem-weil-pbc-stalk-sheafification-space"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/sheaves.tex",
+  "place": "Sheaves, Lemma 00A5 (lemma-j-shriek-abelian), parts (2), (3), (5)"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -65,12 +119,28 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-sc-noetherian-open-closed-cohomology-sequence",
   "by": "worker",
   "date": "2026-10-10"
  },
  "chapter": "sec-curve-estimates",
- "unit": "sk-thm-curveestimate"
+ "unit": "sk-thm-curveestimate",
+ "split_report": {
+  "date": "2026-10-11",
+  "item": "lem-sc-topological-extension-by-zero-stalks",
+  "worker": "stage1",
+  "summary": "Checked the item against Stacks Lemma 00A5 and its definition of extension by zero. No new node was needed: the only non-elementary input, invariance of stalks under sheafification, is the existing node lem-weil-pbc-stalk-sheafification-space; the remaining stalk computations are direct filtered-colimit and cofinality arguments. The naturality and adjunction-map clause follows directly from the defining presheaf map.",
+  "blueprint": "Realizes the 02UZ open-closed-sequence step computing the stalks of the first term j_!j^*F, via the stalk calculation for extension by zero.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-ezs1812",
+  "group": "H1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-ezs1812 (reviewer sub-agent of L); spot-checked: Read packet whole. Steps vs Stacks 00A4/00A5(2,3,5): step 1 cites leaf lem-weil-pbc-stalk-sheafification-space (status mathlib, stalkFunctor_map_unit_toSheafify_isIso), which states exactly the presheaf-to-sheafification stalk iso; step 2 outside U all neighbourhoods give 0; step 3 neighbourhoods inside U are cofinal for x in U; step 4 adjunction map induced from presheaf map, germ identity on U. No cycle: cited leaf is an older weil-pbc node, not created from this item or parent M1. Mathlib grep extensionByZero|extendByZero in Mathlib: no hits, so no Mathlib attachment. No new nodes. Second reading: no fault missed."
+ }
 }
