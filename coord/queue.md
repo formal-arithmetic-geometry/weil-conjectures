@@ -1,8 +1,8 @@
 # Work queue
 
-898 items; claim with `tools/claim.py next <group> [--stage N]`.
+896 items; claim with `tools/claim.py next <group> [--stage N]`.
 
-## Stage 1: nodes to split (133)
+## Stage 1: nodes to split (130)
 
 | node | distance to a target | Lean state on the done branch |
 |---|---|---|
@@ -22,7 +22,6 @@
 | `lem-pc-affine-morphism-hom-out-of-perfect` | 3019 | none |
 | `lem-pc-global-hom-adjunction` | 3019 | none |
 | `lem-pc-koszul-affine-detection` | 3019 | none |
-| `def-pc-global-derived-rhom` | 3020 | none |
 | `lem-pc-global-hom-pullback-adjunction` | 3020 | none |
 | `lem-pc-qcqs-derived-direct-image-right-adjoint` | 3020 | none |
 | `lem-sc-affine-perfect-derived-tensor-hom` | 3020 | none |
@@ -41,7 +40,6 @@
 | `lem-sc-effective-cartier-dimension-drop` | 4011 | none |
 | `lem-sc-etale-local-ring-faithfully-flat-descent` | 4012 | none |
 | `lem-sc-etale-triple-to-sh-completion-flat` | 4012 | none |
-| `lem-sc-lfp-field-extension-pointwise-descent` | 4012 | none |
 | `lem-sc-ass-weakass-locally-noetherian` | 5012 | none |
 | `lem-sc-locnoeth-components-locally-finite` | 5012 | none |
 | `lem-sc-meromorphic-weakass-generic-product` | 5012 | none |
@@ -64,7 +62,6 @@
 | `lem-pod-adic-tower-reconstruction` | - | none |
 | `lem-sc-global-functions` | - | rests_on_sorry |
 | `lem-sc-pic-affine-quotient` | - | none |
-| `lem-weil-pbc-constant-subsheaf-generic` | - | none |
 | `lem-weil-pbc-generic-separable-algebra-splitting` | - | none |
 | `lem-weil-pbc-pullback-finite-locally-constant` | - | none |
 | `lem-weil-pbc-spread-finite-separable-extension` | - | none |
@@ -140,7 +137,7 @@
 | `lem-zl-noether-normalization-dimension` | - | none |
 | `lem-pur-rhom-global-sections` | - | none |
 
-## Stage 2: nodes to state (765)
+## Stage 2: nodes to state (766)
 
 | node | distance to Mathlib | kind |
 |---|---|---|
@@ -439,6 +436,7 @@
 | `lem-weil-pbc-constant-sheaf-geometric-stalk` | 1 | state |
 | `lem-weil-pbc-constant-sheaf-sections-connected` | 1 | state |
 | `lem-weil-pbc-constant-sheaf-sections-locally-constant` | 1 | state |
+| `lem-weil-pbc-constant-subsheaf-generic` | 1 | state |
 | `lem-weil-pbc-constructible-in-retrocompact-open` | 1 | state |
 | `lem-weil-pbc-constructible-intersection-in-constructible` | 1 | state |
 | `lem-weil-pbc-constructible-is-retrocompact` | 1 | state |
@@ -910,7 +908,7 @@
 | `lem-weil-pbc-projective-space-zero-isomorphism` | 4 | state |
 | `def-nagata-fixed-base-separated-stage` | 6 | state |
 
-Not open yet: 1561 nodes that wait for a statement dependency, 173 nodes that wait for stage 1.
+Not open yet: 1563 nodes that wait for a statement dependency, 170 nodes that wait for stage 1.
 
 ## Stage 3: modules to prove (0)
 
