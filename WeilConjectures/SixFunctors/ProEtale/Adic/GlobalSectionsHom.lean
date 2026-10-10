@@ -7,6 +7,7 @@ module
 
 public import WeilConjectures.CategoryTheory.Monoidal.Mod.EvaluationPairing
 public import WeilConjectures.CategoryTheory.Sites.MonObj
+public import WeilConjectures.Mathlib.CategoryTheory.Sites.GlobalSections
 public import WeilConjectures.SixFunctors.ProEtale.Adic.Module
 public import WeilConjectures.SixFunctors.ProEtale.UpperLowerStar.GlobalSectionsMonoidal
 
@@ -64,7 +65,7 @@ noncomputable abbrev fromTerminal (U : (Scheme.ProEt Z)ᵒᵖ) :
 
 /-- A morphism out of the unit presheaf is determined by its value on `1` over the terminal
 object. -/
-lemma unitPresheaf_hom_ext {P : (Scheme.ProEt Z)ᵒᵖ ⥤ WeilCoefficients.{u} l}
+lemma unitPresheaf_hom_ext_of_section {P : (Scheme.ProEt Z)ᵒᵖ ⥤ WeilCoefficients.{u} l}
     {φ ψ : 𝟙_ ((Scheme.ProEt Z)ᵒᵖ ⥤ WeilCoefficients.{u} l) ⟶ P}
     (h : (φ.app (op (Scheme.ProEt.mk (𝟙 Z)))).hom (1 : ULift.{u + 1} (PadicAlgCl l)) =
       (ψ.app (op (Scheme.ProEt.mk (𝟙 Z)))).hom (1 : ULift.{u + 1} (PadicAlgCl l))) :
@@ -85,7 +86,7 @@ lemma globalSectionOfHom_injective {N : Sheaf (Scheme.ProEt.topology Z) (WeilCoe
     Function.Injective (globalSectionOfHom (N := N)) := by
   intro f g h
   rw [globalSectionOfHom_eq, globalSectionOfHom_eq] at h
-  refine Sheaf.unit_hom_ext (unitPresheaf_hom_ext ?_)
+  refine Sheaf.unit_hom_ext (unitPresheaf_hom_ext_of_section ?_)
   exact ((ConcreteCategory.injective_of_mono_of_preservesPullback
     ((Sheaf.ΓNatIsoSheafSections _ _ (Scheme.ProEt.isTerminalMkId Z)).inv.app N))) h
 

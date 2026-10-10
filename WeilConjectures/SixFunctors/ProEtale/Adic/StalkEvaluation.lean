@@ -6,6 +6,7 @@ Authors: Claude
 module
 
 public import WeilConjectures.CategoryTheory.Monoidal.Mod.EvaluationPairing
+public import WeilConjectures.Mathlib.CategoryTheory.Sites.GlobalSections
 public import WeilConjectures.SixFunctors.ProEtale.Adic.AlgClosedField
 public import WeilConjectures.SixFunctors.ProEtale.Adic.InternalHomEvaluation
 public import WeilConjectures.SixFunctors.ProEtale.Adic.UnitSection
@@ -75,9 +76,6 @@ lemma bijective_evaluationPairing_comp_iff {Z V : Scheme.{u}} (f : V ⟶ Z) [Wea
     erw [Functor.map_comp]
     rfl
   exact congrArg (fun m ↦ m.hom (v ⊗ₜ w)) hm
-
-instance {Z : Scheme.{u}} : (Sheaf.Γ (Scheme.ProEt.topology Z) (WeilCoefficients.{u} l)).Additive :=
-  Functor.additive_of_preserves_binary_products _
 
 variable [IsAlgClosed K]
 
