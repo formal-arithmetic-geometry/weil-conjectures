@@ -22,8 +22,40 @@
   "def-weil-abstract-derived-category",
   "def-weil-derived-limit"
  ],
- "proof": [],
- "proof_deps": [],
+ "proof": [
+  {
+   "text": "By the definition of a derived inverse limit, the system has a Roos distinguished triangle $R\\varprojlim_nK_n\\xrightarrow{p}\\prod_nK_n\\xrightarrow{1-s}\\prod_nK_n\\to(R\\varprojlim_nK_n)[1]$. Countable products in $\\operatorname{Ab}$ are exact [lem-pc-abelian-groups-exact-products], so by part (2) of [lem-weil-derived-limit-existence] the product $\\prod_nK_n$ exists in $D(\\operatorname{Ab})$ and $H^i(\\prod_nK_n)\\cong\\prod_nH^i(K_n)$ via the maps $H^i(\\mathrm{pr}_n)$; since $\\mathrm{pr}_n\\circ(1-s)=\\mathrm{pr}_n-f_n\\circ\\mathrm{pr}_{n+1}$, under this identification $H^i(1-s)$ is the map $1-s$ on $\\prod_nH^i(K_n)$ for the inverse system $(H^i(K_n),H^i(f_n))$.",
+   "uses": [
+    "def-weil-derived-limit",
+    "lem-pc-abelian-groups-exact-products",
+    "lem-weil-derived-limit-existence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 07KX, derived-limit distinguished triangle; Tag 07KC, products in the derived category"
+   }
+  },
+  {
+   "text": "Apply the long exact cohomology sequence [lem-sf-derived-homology-long-exact] to the Roos triangle of Step 1; with Step 1 its segment $\\prod_nH^{i-1}(K_n)\\xrightarrow{1-s}\\prod_nH^{i-1}(K_n)\\to H^i(R\\varprojlim_nK_n)\\xrightarrow{H^i(p)}\\prod_nH^i(K_n)\\xrightarrow{1-s}\\prod_nH^i(K_n)$ is exact. By the Roos computation [lem-pc-derived-limit-roos-abelian-groups], applied to the inverse systems of abelian groups $(H^{i-1}(K_n))_n$ and $(H^i(K_n))_n$, the kernel of $1-s$ in degree $i$ is $\\varprojlim_nH^i(K_n)$ and the cokernel of $1-s$ in degree $i-1$ is naturally $R^1\\varprojlim_nH^{i-1}(K_n)$, the first right derived functor of the inverse limit. Exactness therefore gives the short exact sequence $0\\to R^1\\varprojlim_nH^{i-1}(K_n)\\to H^i(R\\varprojlim_nK_n)\\to\\varprojlim_nH^i(K_n)\\to0$.",
+   "uses": [
+    "lem-sf-derived-homology-long-exact",
+    "lem-pc-derived-limit-roos-abelian-groups"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 07KY, short exact sequence obtained by breaking the long exact cohomology sequence"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-derived-limit",
+  "lem-pc-abelian-groups-exact-products",
+  "lem-weil-derived-limit-existence",
+  "lem-sf-derived-homology-long-exact",
+  "lem-pc-derived-limit-roos-abelian-groups"
+ ],
  "proof_origin": {
   "by": "document",
   "document": "literature/stacks-project/perfect.tex",
@@ -47,6 +79,27 @@
    "query": "Mittag Leffler R1 limit derived functor Mathlib",
    "results": "no hits",
    "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Milnor exact sequence for cohomology of a derived inverse limit of a countable tower of complexes of abelian groups",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-11",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory DerivedCategory Rlim H cohomology lim1",
+   "results": "0 hits; unknown identifier CategoryTheory",
+   "date": "2026-10-11",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "Milnor|Rlim|homotopyLimit|lim1 in Mathlib/",
+   "results": "0 hits",
+   "date": "2026-10-11",
+   "verdict": "no match"
   }
  ],
  "mathlib_match": null,
@@ -55,5 +108,37 @@
   "by": "worker",
   "date": "2026-10-10"
  },
- "status": "unsplit"
+ "status": "split",
+ "split_report": {
+  "date": "2026-10-11",
+  "item": "lem-pc-derived-limit-milnor-sequence",
+  "worker": "stage1",
+  "summary": "Split the Milnor sequence into the Roos-triangle/product step and the long-exact-cohomology step. Created one smaller unsplit statement-only node, lem-pc-derived-limit-roos-abelian-groups, for the kernel/cokernel computation of a countable inverse limit and the vanishing of higher derived limits. The existing pro-etale Roos node was checked and is specialized to a different tower category, so it was not used as a duplicate.",
+  "blueprint": "The two steps realize the ancestor blueprint proof's first-step cohomology-of-the-derived-limit argument and its invocation of the Stacks 07KX/07KY/07KW Roos computation.",
+  "tool_uses": [
+   {
+    "node": "lem-sf-derived-homology-long-exact",
+    "why": "Step 2 uses its generic statement that cohomology of every distinguished triangle in a derived category has a natural long exact sequence; this generic triangulated-category tool is not supplied by the Picard-duality unit's route."
+   },
+   {
+    "node": "lem-weil-derived-limit-existence",
+    "why": "Step 1 uses its generic derived-category product existence and cohomology-of-products statement; this tool lemma is filed in the proper-base-change unit and is not supplied by the Picard-duality route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sf-derived-homology-long-exact",
+  "lem-weil-derived-limit-existence",
+  "lem-sf-derived-homology-long-exact",
+  "lem-weil-derived-limit-existence"
+ ],
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-dlm2309",
+  "group": "H1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-dlm2309 (reviewer sub-agent of L); spot-checked: Read packet whole; checked Step 1/2 against 08TC Roos triangle, 07KC products, 07KY long exact segment (i-1 shift correct), new node against 07KW. FIX more, RETURN less: (1) C4: item's R^1 lim is the right derived functor of lim on Ab(N), but new node lem-pc-derived-limit-roos-abelian-groups identified coker(1-s) with R^1 lim only 'in the derived-limit sense of def-weil-derived-limit' (in that sense an elementary special case of the item itself); restated the new node in the derived-functor sense of Tag 07KW (Ab(N) abelian with enough injectives, lim = ker, R^1 lim = coker(1-s) naturally, R^q=0 q>=2), stmt_deps def-weil-inverse-system, def-sp-abelian, def-sp-left-exact-additive; one Mathlib grep recorded, no match. (2) C1: exactness of countable products in Ab (hypothesis of lem-weil-derived-limit-existence (2)) was uncited; added statement node lem-pc-abelian-groups-exact-products (Mathlib AB4Star AddCommGrpCat recorded) and cited it in Step 1. (3) Step texts now state the compatibility of H^i(prod)=prod H^i with 1-s via pr_n and apply the Roos node to (H^{i-1}(K_n)) and (H^i(K_n)); proof_deps updated. No restatement of lem-pc-derived-functor-commutes-derived-limit (08U1) (class b clear); tool_uses accepted as generic tools. Second reading by H1 missed (1) and (2).; 3 file(s) fixed by the reviewer; 1 statement node(s) added by the reviewer (FIX more, RETURN less)"
+ },
+ "lead_note": "2026-10-10 L (R-dlm2309): new node lem-pc-abelian-groups-exact-products is a Mathlib fact (AB4Star AddCommGrpCat, Grp/AB.lean:98); merge tool requires reviewer-added nodes unsplit, so attach it as a leaf"
 }
