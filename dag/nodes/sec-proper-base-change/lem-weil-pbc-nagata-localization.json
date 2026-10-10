@@ -14,11 +14,11 @@
     "lem-weil-pbc-etale-colimit-normal-local-domain"
    ]
   },
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "Localizations of Nagata rings are Nagata",
- "statement": "Let $A$ be a Nagata ring [def-weil-pbc-nagata-ring] and let $T\\subseteq A$ be a multiplicative subset. Then the localization $T^{-1}A$ is a Nagata ring: it is Noetherian [def-weil-pbc-noetherian-ring], and for every prime ideal $\\mathfrak q\\subset T^{-1}A$ the domain $(T^{-1}A)/\\mathfrak q$ is N-2 [def-weil-pbc-japanese-domain]. In particular each local ring $A_{\\mathfrak p}$ and each principal localization $A_f$ is Nagata.",
+ "statement": "Let $A$ be a Nagata ring [def-weil-pbc-nagata-ring] and let $T\\subseteq A$ be a multiplicative subset ($1\\in T$, $st\\in T$ for $s,t\\in T$), with localization $T^{-1}A$ [def-weil-pbc-module-localization]. Then $T^{-1}A$ is a Nagata ring: it is Noetherian [def-weil-pbc-noetherian-ring], and for every prime ideal $\\mathfrak q\\subset T^{-1}A$ the domain $(T^{-1}A)/\\mathfrak q$ is N-2 [def-weil-pbc-japanese-domain]. In particular each local ring $A_{\\mathfrak p}$ [def-weil-pbc-localization-at-prime] and each principal localization $A_f$ [def-weil-ring-localization-away] is Nagata.",
  "source": {
   "document": "literature/stacks-project/algebra.tex",
   "place": "Algebra, Lemma Tag 032U (lemma-nagata-localize), lines 45721-45727"
@@ -26,11 +26,76 @@
  "stmt_deps": [
   "def-weil-pbc-nagata-ring",
   "def-weil-pbc-noetherian-ring",
-  "def-weil-pbc-japanese-domain"
+  "def-weil-pbc-japanese-domain",
+  "def-weil-pbc-module-localization",
+  "def-weil-pbc-localization-at-prime",
+  "def-weil-ring-localization-away"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "*Noetherian.* $A$ is Noetherian by the definition of a Nagata ring [def-weil-pbc-nagata-ring], so its localization $T^{-1}A$ (with $\\lambda:A\\to T^{-1}A$, $a\\mapsto a/1$, which satisfies (a)-(c) of [lem-weil-pbc-localization-noetherian]) is Noetherian by [lem-weil-pbc-localization-noetherian]. (Stacks leaves this to the reader: the proof of 032U says only 'clear'.)",
+   "uses": [
+    "def-weil-pbc-nagata-ring",
+    "lem-weil-pbc-localization-noetherian"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra, Lemma Tag 032U (lemma-nagata-localize), proof ('Clear from Lemma 032G'), lines 45724-45727; Definition Tag 032R (definition-nagata), lines 45621-45632"
+   }
+  },
+  {
+   "text": "*The quotients by primes are localizations of the domains $A/\\mathfrak p$.* Let $\\mathfrak q\\subset T^{-1}A$ be a prime ideal and $\\mathfrak p=\\lambda^{-1}(\\mathfrak q)$. By [lem-weil-pbc-localization-quotient-by-prime] (1), $\\mathfrak p$ is a prime ideal of $A$ disjoint from $T$, and by (2) of the same lemma, with $\\pi:A\\to A/\\mathfrak p$ and $\\overline T=\\pi(T)$, a multiplicative subset of the domain $A/\\mathfrak p$ not containing $0$, there is a ring isomorphism $\\theta:\\overline T^{-1}(A/\\mathfrak p)\\xrightarrow{\\sim}(T^{-1}A)/\\mathfrak q$.",
+   "uses": [
+    "lem-weil-pbc-localization-quotient-by-prime"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra, Lemma Tag 00E3 (lemma-spec-localization), lines 3162-3200, and Proposition Tag 00CT (proposition-localize-quotient), lines 1379-1385 (the step 032U leaves implicit in 'clear')"
+   }
+  },
+  {
+   "text": "*N-2.* Since $A$ is Nagata, the domain $A/\\mathfrak p$ is N-2 [def-weil-pbc-nagata-ring]. By [lem-weil-pbc-localization-n2-domain] (2), applied to $R=A/\\mathfrak p$ and $S=\\overline T$ (where $0\\notin\\overline T$ by step 2), the localization $\\overline T^{-1}(A/\\mathfrak p)$ is a domain which is N-2. The N-2 property [def-weil-pbc-japanese-domain] is defined from the ring structure alone (fraction field, finite extensions of it, integral closures, finite generation as a module), so it is carried by the ring isomorphism $\\theta$ of step 2: $\\theta$ extends to an isomorphism of fraction fields $K_1\\cong K_2$, a finite extension $L/K_2$ becomes a finite extension of $K_1$ through it, the integral closures of the two rings in $L$ are the same subring of $L$, and a finitely generated module over one ring is finitely generated over the other through $\\theta$. Hence $(T^{-1}A)/\\mathfrak q$ is N-2.",
+   "uses": [
+    "def-weil-pbc-nagata-ring",
+    "lem-weil-pbc-localization-n2-domain",
+    "def-weil-pbc-japanese-domain"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra, Lemma Tag 032U (lemma-nagata-localize), proof: 'Clear from Lemma 032G' (lemma-localize-N, lines 45172-45182)"
+   }
+  },
+  {
+   "text": "*Conclusion.* By steps 1-3, $T^{-1}A$ is Noetherian and all its quotients by prime ideals are N-2, i.e. $T^{-1}A$ is a Nagata ring [def-weil-pbc-nagata-ring]. The particular cases: $A_{\\mathfrak p}$ is $T^{-1}A$ for $T=A\\setminus\\mathfrak p$ [def-weil-pbc-localization-at-prime] and $A_f$ is $T^{-1}A$ for $T=\\{1,f,f^2,\\dots\\}$ [def-weil-ring-localization-away], both multiplicative subsets.",
+   "uses": [
+    "def-weil-pbc-nagata-ring",
+    "def-weil-pbc-localization-at-prime",
+    "def-weil-ring-localization-away"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra, Lemma Tag 032U (lemma-nagata-localize), lines 45721-45727"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-nagata-ring",
+  "lem-weil-pbc-localization-noetherian",
+  "lem-weil-pbc-localization-quotient-by-prime",
+  "lem-weil-pbc-localization-n2-domain",
+  "def-weil-pbc-japanese-domain",
+  "def-weil-pbc-localization-at-prime",
+  "def-weil-ring-localization-away"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Algebra, Lemma Tag 032U (lemma-nagata-localize), lines 45721-45727, proof 'Clear from Lemma 032G (lemma-localize-N)'; the implicit parts from Tag 00E3 (lines 3162-3200) and Tag 00CT (lines 1379-1385)"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -55,7 +120,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "worker",
@@ -75,5 +140,13 @@
   }
  },
  "chapter": "sec-proper-base-change",
- "unit": "sk-thm-p1"
+ "unit": "sk-thm-p1",
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "lem-weil-pbc-nagata-localization",
+  "worker": "stage1",
+  "summary": "Source read: Algebra Lemma 032U (lemma-nagata-localize, algebra.tex 45721-45727; tag verified in tags/tags), proof 'Clear from Lemma 032G'. 032G is lemma-localize-N (lines 45172-45182; the brief's '032J?' is wrong, 032G verified), whose proof cites 0307 (lemma-integral-closure-localize, lines 7596-7627, verified). The 'clear' is written out: step 1 Noetherian via the existing leaf lem-weil-pbc-localization-noetherian; step 2 primes q of T^{-1}A and (T^{-1}A)/q = T̄^{-1}(A/p) via the new Mathlib leaf lem-weil-pbc-localization-quotient-by-prime (00E3 + 00CT; existing nodes lem-weil-pbc-primes-of-localization, lem-weil-pbc-localization-quotient-commute and lem-weil-pbc-localization-at-prime-of-quotient cover only the prime and principal cases); step 3 N-2 via the new unsplit node lem-weil-pbc-localization-n2-domain (032G; its proof will use 0307 = Mathlib IsLocalization.integralClosure, Localization/Integral.lean:442), transported along the ring isomorphism; step 4 conclusion and the special cases A_p, A_f. Statement unchanged in content; added the definition of a multiplicative subset and the citations def-weil-pbc-module-localization, def-weil-pbc-localization-at-prime, def-weil-ring-localization-away to stmt_deps. Item's own Mathlib searches (three kinds) kept: no Nagata notion in Mathlib.",
+  "blueprint": "The item is not a blueprint node; its blueprint ancestor is lem-weil-pbc-normal-constant-generic, from.place 'step 4 of its split (Tag 09Z5, proof of (1))' (kept, not 'unspecified'). Steps 1-4 realize, at that place, the Nagata property of localizations used by lem-weil-pbc-normal-nagata-monogenic-n1 (localizing at R_s and at maximal ideals) in the chain via lem-weil-pbc-nagata-universally-japanese ... lem-weil-pbc-etale-colimit-normal-local-domain. Blueprint searches (tools/blueprint_refs.py search: 'Nagata localization', 'Japanese', 'N-2', '032U', '032G', '0307', 'integral closure commutes', 'localization prime quotient') found no blueprint node stating the item or the two new nodes (the 'Nagata' hits are Nagata compactification nodes): same_as [] everywhere."
+ },
+ "reviewed": "2026-10-10 L: 4 steps checked against 032U (\"clear from 032G\", written out): Noetherian, primes of T^{-1}A and (T^{-1}A)/q = Tbar^{-1}(A/p) (new composed leaf), N-2 of A/p carried to its localization (new 032G node) and across the isomorphism"
 }
