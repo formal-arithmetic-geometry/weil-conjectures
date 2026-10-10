@@ -1,0 +1,87 @@
+{
+ "id": "lem-weil-pbc-module-hom-left-exact",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-finite-etale-lifting",
+   "place": "step 7 of its split (source: Lemma 0GS2, proof: the essential-surjectivity paragraphs; the coherent stalk-map extension used in the coherent devissage route); refined: in the stalk-of-internal-Hom lemma (Stacks 01CP) serving it, the final sentence 'F_x sits in an exact sequence O_x^m -> O_x^n -> F_x -> 0 which induces the exact sequence 0 -> Hom(F_x,G_x) -> G_x^n -> G_x^m', i.e. left exactness of Hom_{O_{X,x}}(-,G_x) and Hom(O_x^n,G_x)=G_x^n",
+   "via": [
+    "lem-weil-pbc-stalk-internal-hom-finite-presentation",
+    "lem-weil-pbc-coherent-generic-point-ideal-inclusion",
+    "lem-weil-pbc-coherent-property-devissage-integral-subschemes",
+    "lem-weil-pbc-finite-surjective-affine-target-noetherian",
+    "lem-weil-pbc-finite-surjective-affine-target",
+    "lem-weil-pbc-surjective-universally-closed-affine-target",
+    "lem-weil-pbc-thickening-affine-scheme",
+    "lem-weil-pbc-thickening-integral",
+    "lem-weil-pbc-thickening-finite-cartesian",
+    "lem-weil-pbc-finite-etale-lifting-complete",
+    "lem-weil-pbc-finite-etale-lifting-essential-surjectivity"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Hom into a module is left exact, and Hom out of a finite free module is a finite product",
+ "statement": "Let $R$ be a commutative ring and $N$ an $R$-module. (1) Let $M_1\\xrightarrow{f}M_2\\xrightarrow{g}M_3$ be $R$-linear maps with $g\\circ f=0$, $\\operatorname{Ker}g=\\operatorname{Im}f$ and $g$ surjective. Write $g^*:\\operatorname{Hom}_R(M_3,N)\\to\\operatorname{Hom}_R(M_2,N)$, $\\psi\\mapsto\\psi\\circ g$, and $f^*:\\operatorname{Hom}_R(M_2,N)\\to\\operatorname{Hom}_R(M_1,N)$, $\\chi\\mapsto\\chi\\circ f$. Then $g^*$ is injective and $\\operatorname{Ker}f^*=\\operatorname{Im}g^*$; that is, $0\\to\\operatorname{Hom}_R(M_3,N)\\xrightarrow{g^*}\\operatorname{Hom}_R(M_2,N)\\xrightarrow{f^*}\\operatorname{Hom}_R(M_1,N)$ is exact. (2) For $n\\ge0$ let $R^{\\oplus n}$ be the free $R$-module with standard basis $e_1,\\dots,e_n$. Then $\\chi\\mapsto(\\chi(e_i))_{1\\le i\\le n}$ is an $R$-linear bijection $\\operatorname{Hom}_R(R^{\\oplus n},N)\\to N^{\\oplus n}$, with inverse $(y_i)_i\\mapsto\\bigl(\\sum_ir_ie_i\\mapsto\\sum_ir_iy_i\\bigr)$.",
+ "source": {
+  "document": "literature/stacks-project/modules.tex",
+  "place": "Modules, Lemma Tag 01CP (lemma-stalk-internal-hom), proof, third paragraph, lines 3657-3708: the step 'which induces the exact sequence 0 -> Hom_{O_{X,x}}(F_x,G_x) -> G_x^n -> G_x^m', used without proof"
+ },
+ "stmt_deps": [],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Hom functor into a module is left exact: exact sequence M1 → M2 → M3 → 0 gives exact 0 → Hom(M3,N) → Hom(M2,N) → Hom(M1,N)",
+   "results": "CategoryTheory.Functor.IsHomological.exact, CategoryTheory.ShortComplex.ShortExact.map, CategoryTheory.ShortComplex.Exact.map_of_preservesRightHomologyOf, LeftExactFunctor.ofExact_map (category-level only; none states Hom_R(-,N) on modules)",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "contravariant Hom of linear maps is left exact for an exact sequence ending in a surjection",
+   "results": "LinearMap.exact_lcomp_of_exact_of_surjective (Mathlib.LinearAlgebra.LeftExact), five-lemma variants in Mathlib.Algebra.FiveLemma, Function.Surjective.comp_exact_iff_exact",
+   "date": "2026-10-10",
+   "verdict": "match: LinearMap.exact_lcomp_of_exact_of_surjective is clause (1), exactness at Hom_R(M_2,N)"
+  },
+  {
+   "tool": "loogle",
+   "query": "LinearMap.lcomp, Function.Exact",
+   "results": "LinearMap.exact_lcomp_of_exact_of_surjective (Mathlib.LinearAlgebra.LeftExact)",
+   "date": "2026-10-10",
+   "verdict": "match (clause (1), middle exactness)"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -n 'lcomp_injective_of_surjective\\|exact_lcomp_of_exact_of_surjective\\|def piRing' in Mathlib/LinearAlgebra/{BilinearMap,LeftExact,Pi}.lean (~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib)",
+   "results": "LinearAlgebra/LeftExact.lean:32 exact_lcomp_of_exact_of_surjective; LinearAlgebra/BilinearMap.lean:195 lcomp_injective_of_surjective; LinearAlgebra/Pi.lean:548 piRing, :555 piRing_apply, :559 piRing_symm_apply",
+   "date": "2026-10-10",
+   "verdict": "match: one declaration per clause, read with sed -n"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "LinearMap.lcomp_injective_of_surjective; LinearMap.exact_lcomp_of_exact_of_surjective; LinearMap.piRing",
+  "file": "Mathlib/LinearAlgebra/BilinearMap.lean; Mathlib/LinearAlgebra/LeftExact.lean; Mathlib/LinearAlgebra/Pi.lean",
+  "how": "exact, one declaration per clause: (1) injectivity of g^* = LinearMap.lcomp_injective_of_surjective (BilinearMap.lean line 195; lcomp S N g ψ = ψ ∘ₗ g by lcomp_apply', line 193), Ker f^* = Im g^* = LinearMap.exact_lcomp_of_exact_of_surjective (LeftExact.lean line 32, Function.Exact f g and Surjective g give Function.Exact (lcomp R N g) (lcomp R N f)); (2) LinearMap.piRing R N (Fin n) R : ((Fin n → R) →ₗ[R] N) ≃ₗ[R] (Fin n → N) (Pi.lean line 548), with piRing_apply (line 555: χ ↦ (χ (Pi.single i 1))_i) and piRing_symm_apply (line 559: (y_i) ↦ (g ↦ Σ g i • y_i))"
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-stalk-internal-hom-finite-presentation",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1"
+}

@@ -1309,3 +1309,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 11:26 L: merged G1 lemma-weil-pbc-spectral-restriction (+3 nodes), K1 lem-weil-pbc-module-injects-localizations-associated-primes (0 new), M1 lem-weil-pbc-sheaf-hom-finite-presentation-quasi-coherent (01CQ, 0 new).
 - 11:28 L: accepted def-weil-pbc-direct-image (definition split; new nodes: direct image left exact (closed on slopmaster2), right derived functor on D^+ (Mathlib leaf), module direct image left exact; lowerStar and rightDerivedLowerStarPlus attached to the item: closed).
 - 11:28 L: accepted lem-weil-pbc-scheme-modules-functorial-injective-embeddings (01DI, 7 steps; new leaf: modules over a ring are Grothendieck abelian; a two-step route via the sorry-free isGrothendieckAbelian of Mod(O_X) noted).
+- 11:29 L: accepted lem-weil-pbc-stalk-internal-hom-finite-presentation (01CP, 6 steps; new Mathlib leaf for Hom left exact and Hom out of a free module).

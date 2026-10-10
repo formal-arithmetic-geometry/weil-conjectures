@@ -31,9 +31,96 @@
   "def-weil-pbc-module-finite-type-presentation",
   "def-pur-sheaf-hom"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "*Step 1 (the canonical map).* An element of $\\mathcal Hom_{\\mathcal O_X}(\\mathcal F,\\mathcal G)_x$ is a germ of a section over an open $U\\ni x$ [def-weil-pbc-module-stalk], i.e. of an $\\mathcal O_U$-linear $\\varphi:\\mathcal F|_U\\to\\mathcal G|_U$ [def-pur-sheaf-hom], [def-pur-localized-ringed-site]. Since the open neighbourhoods of $x$ inside $U$ are cofinal among all open neighbourhoods of $x$, $(\\mathcal F|_U)_x=\\mathcal F_x$ and $(\\mathcal G|_U)_x=\\mathcal G_x$ (same germs), so $\\varphi$ has a stalk map $\\varphi_x:\\mathcal F_x\\to\\mathcal G_x$, $s_x\\mapsto\\varphi_W(s)_x$ for $s\\in\\mathcal F(W)$, $x\\in W\\subseteq U$, which is $\\mathcal O_{X,x}$-linear [def-weil-pbc-module-stalk]. If $\\varphi|_V=\\varphi'|_V$ on an open $x\\in V\\subseteq U\\cap U'$ then $\\varphi_x=\\varphi'_x$ (compute on germs of sections over opens inside $V$). Hence $c:\\mathcal Hom_{\\mathcal O_X}(\\mathcal F,\\mathcal G)_x\\to\\operatorname{Hom}_{\\mathcal O_{X,x}}(\\mathcal F_x,\\mathcal G_x)$, $(U,\\varphi)_x\\mapsto\\varphi_x$, is well defined; it is additive, and $\\mathcal O_{X,x}$-linear because for $f\\in\\mathcal O_X(U)$ the section $f\\varphi$ (multiplication by $f$ composed with $\\varphi$, [def-pur-sheaf-hom]) has $(f\\varphi)_x=f_x\\varphi_x$ by the formula $(rs)_x=r_xs_x$ of [def-weil-pbc-module-stalk].",
+   "uses": [
+    "def-pur-sheaf-hom",
+    "def-pur-localized-ringed-site",
+    "def-weil-pbc-module-stalk"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/modules.tex",
+    "place": "proof, first paragraph: 'The map sends the equivalence class of (U, phi) ... to phi_x'"
+   }
+  },
+  {
+   "text": "*Step 2 (localize to a finite presentation).* By [def-weil-pbc-module-finite-type-presentation](2) there are an open $U\\ni x$, integers $n,m\\ge0$, an $\\mathcal O_U$-linear $a:\\mathcal O_U^{\\oplus m}\\to\\mathcal O_U^{\\oplus n}$ and an isomorphism $\\iota:\\operatorname{Coker}(a)\\xrightarrow{\\sim}\\mathcal F|_U$ in $\\operatorname{Mod}(\\mathcal O_U)$; let $b=\\iota\\circ\\pi:\\mathcal O_U^{\\oplus n}\\to\\mathcal F|_U$, $\\pi$ the cokernel map, and write $a_U(e_k)=\\sum_ia_{ik}e_i$ with $a_{ik}\\in\\mathcal O_X(U)$ (here $\\mathcal O_U^{\\oplus n}$ is $W\\mapsto\\mathcal O_X(W)^{\\oplus n}$ with basis sections $e_i$). The sequence $\\mathcal O_U^{\\oplus m}\\xrightarrow{a}\\mathcal O_U^{\\oplus n}\\xrightarrow{b}\\mathcal F|_U\\to0$ is exact in $\\operatorname{Mod}(\\mathcal O_U)$: by [lem-weil-pbc-module-stalk-exact](3) applied on the ringed space $(U,\\mathcal O_U)$, for every $y\\in U$ the map $\\pi_y$ is surjective with kernel $a_y(\\mathcal O_{U,y}^{\\oplus m})$, and $\\iota_y$ is bijective (its inverse is $(\\iota^{-1})_y$, stalk maps being functorial by their formula in [def-weil-pbc-module-stalk]); so $b_y$ is surjective with kernel $\\operatorname{Im}a_y$, i.e. the complexes $\\mathcal O_U^{\\oplus m}\\to\\mathcal O_U^{\\oplus n}\\to\\mathcal F|_U$ and $\\mathcal O_U^{\\oplus n}\\to\\mathcal F|_U\\to0$ are exact on every stalk, hence exact by [lem-weil-pbc-module-stalk-exact](5). Finally, sections of $\\mathcal Hom_{\\mathcal O_X}(\\mathcal F,\\mathcal G)$ over opens $V\\subseteq U$ are $\\operatorname{Hom}_{\\mathcal O_V}(\\mathcal F|_V,\\mathcal G|_V)$, which are also the sections of $\\mathcal Hom_{\\mathcal O_U}(\\mathcal F|_U,\\mathcal G|_U)$ over $V$, with the same restriction maps and module structures [def-pur-sheaf-hom], [def-pur-localized-ringed-site]; with the cofinality of Step 1, the stalks at $x$, the stalks $\\mathcal F_x,\\mathcal G_x,\\mathcal O_{X,x}$ and the map $c$ are unchanged when $X$ is replaced by $U$. We may and do assume $U=X$.",
+   "uses": [
+    "def-weil-pbc-module-finite-type-presentation",
+    "lem-weil-pbc-module-stalk-exact",
+    "def-weil-pbc-module-stalk",
+    "def-pur-sheaf-hom",
+    "def-pur-localized-ringed-site"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/modules.tex",
+    "place": "proof, third paragraph: 'By localizing on X we may assume that F has a presentation O^m -> O^n -> F -> 0'"
+   }
+  },
+  {
+   "text": "*Step 3 (the free case on the sheaf side).* By [lem-weil-pbc-sheaf-hom-finite-presentation-kernel](2), applied to the exact sequence $\\mathcal O_X^{\\oplus m}\\xrightarrow{a}\\mathcal O_X^{\\oplus n}\\xrightarrow{b}\\mathcal F\\to0$ of Step 2 and to $\\mathcal M=\\mathcal G$, the sequence $0\\to\\mathcal Hom_{\\mathcal O_X}(\\mathcal F,\\mathcal G)\\xrightarrow{\\beta}\\mathcal G^{\\oplus n}\\xrightarrow{\\alpha}\\mathcal G^{\\oplus m}$, $\\beta_V(\\psi)=(\\psi_V(b_V(e_i|_V)))_i$, $\\alpha_V((y_i)_i)=(\\sum_ia_{ik}|_Vy_i)_k$, is an exact sequence of $\\mathcal O_X$-modules.",
+   "uses": [
+    "lem-weil-pbc-sheaf-hom-finite-presentation-kernel"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/modules.tex",
+    "place": "proof, third paragraph: 'By Lemma 01CO this gives an exact sequence 0 -> Hom(F,G) -> G^n -> G^m'"
+   }
+  },
+  {
+   "text": "*Step 4 (taking stalks).* By [lem-weil-pbc-module-stalk-exact](5) (with (2): $\\beta$ is a kernel of $\\alpha$, so $\\beta_x$ is injective with image $\\operatorname{Ker}\\alpha_x$) the sequence $0\\to\\mathcal Hom_{\\mathcal O_X}(\\mathcal F,\\mathcal G)_x\\xrightarrow{\\beta_x}(\\mathcal G^{\\oplus n})_x\\xrightarrow{\\alpha_x}(\\mathcal G^{\\oplus m})_x$ is exact. Stalks commute with finite direct sums: the map $\\sigma_n:(\\mathcal G^{\\oplus n})_x\\to\\mathcal G_x^{\\oplus n}$, $((y_i)_i)_x\\mapsto((y_i)_x)_i$, is a well-defined $\\mathcal O_{X,x}$-linear bijection, by the description of germs in [def-weil-pbc-module-stalk]: it is well defined and linear because restriction in $\\mathcal G^{\\oplus n}$ is componentwise; surjective because $n$ germs $(y_i)_x$, $y_i\\in\\mathcal G(W_i)$, are represented by $y_i|_W$ on the open $W=\\bigcap_iW_i\\ni x$ (finite intersection; $W=X$ if $n=0$); injective because if every $(y_i)_x=0$ then $y_i|_{V_i}=0$ for opens $x\\in V_i$, so $(y_i)_i$ vanishes on $\\bigcap_iV_i$. In the same way $\\sigma^{\\mathcal O}_n:(\\mathcal O_X^{\\oplus n})_x\\to\\mathcal O_{X,x}^{\\oplus n}$ is an isomorphism sending $(e_i)_x$ to the $i$-th standard basis vector $\\bar e_i$. Under these identifications $\\sigma_m\\circ\\alpha_x=\\bar\\alpha\\circ\\sigma_n$ with $\\bar\\alpha((z_i)_i)=(\\sum_i(a_{ik})_xz_i)_k$, by the formula for $\\alpha$ and $(ry)_x=r_xy_x$; and the induced $\\bar a=\\sigma^{\\mathcal O}_n a_x(\\sigma^{\\mathcal O}_m)^{-1}:\\mathcal O_{X,x}^{\\oplus m}\\to\\mathcal O_{X,x}^{\\oplus n}$ sends $\\bar e_k\\mapsto\\sum_i(a_{ik})_x\\bar e_i$. Hence $0\\to\\mathcal Hom_{\\mathcal O_X}(\\mathcal F,\\mathcal G)_x\\xrightarrow{\\sigma_n\\beta_x}\\mathcal G_x^{\\oplus n}\\xrightarrow{\\bar\\alpha}\\mathcal G_x^{\\oplus m}$ is exact.",
+   "uses": [
+    "lem-weil-pbc-module-stalk-exact",
+    "def-weil-pbc-module-stalk"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/modules.tex",
+    "place": "proof, third paragraph: 'Taking stalks we get an exact sequence 0 -> Hom(F,G)_x -> G_x^n -> G_x^m'"
+   }
+  },
+  {
+   "text": "*Step 5 (the free case on the stalk side).* Put $\\bar b=b_x\\circ(\\sigma^{\\mathcal O}_n)^{-1}:\\mathcal O_{X,x}^{\\oplus n}\\to\\mathcal F_x$. Applying [lem-weil-pbc-module-stalk-exact](5) to the exact sequence of Step 2 (exactness at $\\mathcal O_X^{\\oplus n}$ and at $\\mathcal F$, the latter meaning $b_x$ surjective), $\\mathcal O_{X,x}^{\\oplus m}\\xrightarrow{\\bar a}\\mathcal O_{X,x}^{\\oplus n}\\xrightarrow{\\bar b}\\mathcal F_x\\to0$ is an exact sequence of $\\mathcal O_{X,x}$-modules. By [lem-weil-pbc-module-hom-left-exact](1) with $R=\\mathcal O_{X,x}$, $N=\\mathcal G_x$, the sequence $0\\to\\operatorname{Hom}(\\mathcal F_x,\\mathcal G_x)\\xrightarrow{\\bar b^*}\\operatorname{Hom}(\\mathcal O_{X,x}^{\\oplus n},\\mathcal G_x)\\xrightarrow{\\bar a^*}\\operatorname{Hom}(\\mathcal O_{X,x}^{\\oplus m},\\mathcal G_x)$ is exact, and by [lem-weil-pbc-module-hom-left-exact](2) the evaluations $\\theta_n(\\chi)=(\\chi(\\bar e_i))_i$, $\\theta_m$ are bijections onto $\\mathcal G_x^{\\oplus n}$, $\\mathcal G_x^{\\oplus m}$ with $\\theta_m\\bar a^*=\\bar\\alpha\\theta_n$ (since $\\chi(\\bar a(\\bar e_k))=\\sum_i(a_{ik})_x\\chi(\\bar e_i)$). So $\\varepsilon=\\theta_n\\bar b^*:\\operatorname{Hom}_{\\mathcal O_{X,x}}(\\mathcal F_x,\\mathcal G_x)\\to\\mathcal G_x^{\\oplus n}$, $\\varepsilon(\\chi)=(\\chi(\\bar b(\\bar e_i)))_i$, is injective with image $\\operatorname{Ker}\\bar\\alpha$.",
+   "uses": [
+    "lem-weil-pbc-module-stalk-exact",
+    "lem-weil-pbc-module-hom-left-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/modules.tex",
+    "place": "proof, third paragraph: 'the result follows since F_x sits in an exact sequence O_x^m -> O_x^n -> F_x -> 0 which induces the exact sequence 0 -> Hom(F_x,G_x) -> G_x^n -> G_x^m'"
+   }
+  },
+  {
+   "text": "*Step 6 (comparison; conclusion).* The triangle commutes: $\\varepsilon\\circ c=\\sigma_n\\circ\\beta_x$. Indeed for a germ $(V,\\psi)_x$, $\\sigma_n\\beta_x((V,\\psi)_x)=(\\psi_V(b_V(e_i|_V))_x)_i=(\\psi_x(b_x((e_i)_x)))_i=(\\psi_x(\\bar b(\\bar e_i)))_i=\\varepsilon(\\psi_x)$, using the formula for stalk maps of Step 1 and $(e_i)_x=(\\sigma^{\\mathcal O}_n)^{-1}(\\bar e_i)$. By Steps 4 and 5, $\\sigma_n\\beta_x$ and $\\varepsilon$ are both injective with the same image $\\operatorname{Ker}\\bar\\alpha$. Hence $c$ is injective (as $\\varepsilon c$ is) and surjective (for $\\chi$, $\\varepsilon(\\chi)\\in\\operatorname{Ker}\\bar\\alpha$ equals $\\sigma_n\\beta_x(h)=\\varepsilon(c(h))$ for some $h$, and $\\varepsilon$ is injective, so $\\chi=c(h)$). So $c$ is an isomorphism of $\\mathcal O_{X,x}$-modules (linear by Step 1).",
+   "uses": [
+    "def-weil-pbc-module-stalk"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/modules.tex",
+    "place": "proof, third paragraph: 'and the result follows' (the identification of the two kernels, left implicit by the source)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pur-sheaf-hom",
+  "def-pur-localized-ringed-site",
+  "def-weil-pbc-module-stalk",
+  "def-weil-pbc-module-finite-type-presentation",
+  "lem-weil-pbc-module-stalk-exact",
+  "lem-weil-pbc-sheaf-hom-finite-presentation-kernel",
+  "lem-weil-pbc-module-hom-left-exact"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/modules.tex",
+  "place": "Modules, Lemma Tag 01CP (lemma-stalk-internal-hom), proof, third paragraph, lines 3657-3708. The source's 'by localizing on X' and 'taking stalks', the stalk of a finite direct sum, the stalk of the presentation, and the comparison of the two kernels are written out by the worker."
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -58,7 +145,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "worker",
@@ -66,9 +153,21 @@
   "date": "2026-10-10"
  },
  "lean_audit": {
-  "master": {"state": "none"},
-  "slopmaster2": {"state": "none"}
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
  },
  "chapter": "sec-proper-base-change",
- "unit": "sk-thm-p1"
+ "unit": "sk-thm-p1",
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "lem-weil-pbc-stalk-internal-hom-finite-presentation",
+  "worker": "stage1",
+  "summary": "Split by one level following Stacks Modules 01CP (lemma-stalk-internal-hom, modules.tex lines 3619-3708), finitely presented part only (the item states only that part; the finite-type injectivity part is not needed). Steps: canonical map well defined and linear (germs, elementary); localization to a finite presentation, with exactness of O^m -> O^n -> F|_U -> 0 obtained from lem-weil-pbc-module-stalk-exact (3),(5) since the definition gives F|_U only as isomorphic to a cokernel; the free case on the sheaf side is the existing lem-weil-pbc-sheaf-hom-finite-presentation-kernel (2) (Stacks 01CO(1) plus Hom(O^n,G)=G^n); stalks via lem-weil-pbc-module-stalk-exact (2),(5), with stalks of finite direct sums written out from the germ description; the stalk side via one new Mathlib leaf lem-weil-pbc-module-hom-left-exact (left exactness of Hom_R(-,N), Hom_R(R^n,N)=N^n); comparison of the two kernels written out. Statement and stmt_deps kept. No slopmaster2 Lean found for the item (grep of id and key words).",
+  "blueprint": "The item is not a blueprint node; its ancestor thm-weil-pbc-finite-etale-lifting is served at the place recorded in blueprint.from.place (the coherent stalk-map extension used in the coherent devissage route of the essential-surjectivity paragraphs of Lemma 0GS2). The steps realize that use: they give the stalk isomorphism Hom(F,G)_x -> Hom(F_x,G_x) that lem-weil-pbc-coherent-stalk-map-extends cites. same_as: [] (blueprint_refs search 'stalk internal hom', '01CP', '01CO' found no blueprint node stating it)."
+ },
+ "reviewed": "2026-10-10 L: 6 steps following 01CP (canonical map; local presentation with exactness from the stalk node; the sheaf-side free case by the 01CO node; stalks with finite sums; the module side by the new leaf (Hom left exact, Hom(R^n, N) = N^n); comparison of kernels); 1 new Mathlib leaf (lines read)"
 }
