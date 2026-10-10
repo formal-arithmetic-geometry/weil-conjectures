@@ -1370,3 +1370,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 2026-10-10, delivery of C1: thm-weil-pbc-hypercover-cohomology merged from deliver/C1/thm-weil-pbc-hypercover-cohomology (1 commit(s), 0 new node(s), spot-checked by L: L: 01H0 via the double complex of an injective resolution evaluated on the hypercover; 0 new); claim closed
 - 12:08 L: merged C1 thm-weil-pbc-hypercover-cohomology (01H0, 0 new). J1 lem-weil-pbc-limit-module-essentially-finite-presentation-over-system NOT merged: review_split fails (proof_origin empty, blueprint.same_as null); returned to J1.
 - 12:08 L: accepted lem-galois-object-exists (0BN2, 4 steps, 0 new).
+- 12:08 L: accepted lem-galois-constant-sheaf-sets-representable (03P5/03YW for sets, 4 steps; new node: U-morphisms into a coproduct of copies of U are clopen decompositions; 1 tool use).

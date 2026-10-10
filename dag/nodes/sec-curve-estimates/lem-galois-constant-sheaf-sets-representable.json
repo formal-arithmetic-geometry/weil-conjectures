@@ -25,9 +25,79 @@
   "def-weil-pbc-constant-sheaf",
   "def-weil-pbc-etale-sheaf-of-sets"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "*Step 1 ($h_{U_E}$ is a sheaf and $c$ is a morphism of presheaves).* Regard $U_E$ as a $U$-scheme through $\\pi$ [lem-weil-pbc-scheme-coproduct-family]. By [lem-weil-pbc-small-etale-representable-presheaf-sheaf] (Stacks Lemma Tag 03O3, applied with $T=U$ and $X=U_E$), the presheaf $h_{U_E}(W,s)=\\operatorname{Mor}_U(W,U_E)$ is a sheaf of sets on $U_{\\Et}$ [def-weil-pbc-etale-sheaf-of-sets]. The map $c_{(W,s)}(e)=\\iota_e\\circ s$ lands in $\\operatorname{Mor}_U(W,U_E)$ since $\\pi\\circ\\iota_e\\circ s=s$, and it is natural: for a morphism $g:(W',s')\\to(W,s)$ of $U_{\\Et}$ (so $s\\circ g=s'$) we get $c_{(W,s)}(e)\\circ g=\\iota_e\\circ s'=c_{(W',s')}(e)$, which is the restriction of $c_{(W,s)}(e)$ along $g$ in $h_{U_E}$ and the image of $e$ under the identity restriction map of the constant presheaf.",
+   "uses": [
+    "lem-weil-pbc-scheme-coproduct-family",
+    "lem-weil-pbc-small-etale-representable-presheaf-sheaf",
+    "def-weil-pbc-etale-sheaf-of-sets",
+    "def-weil-pbc-etale-site"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Remark Tag 03P5: 'By Lemma 03O3 any representable presheaf satisfies the sheaf condition for the $\\tau$-topology'; Lemma Tag 03O3 (lemma-representable-sheaf-fpqc)"
+   }
+  },
+  {
+   "text": "*Step 2 (sections of $h_{U_E}$ are locally constant: Zariski-local description).* Let $(W,s)$ be an object of $U_{\\Et}$ and $f\\in h_{U_E}(W,s)$. By [lem-galois-coproduct-copies-morphisms-clopen] (a), the sets $W_e=f^{-1}(\\iota_e(U))$, $e\\in E$, form an $E$-indexed clopen decomposition of $W$, and with $j_e:W_e\\to W$ the inclusion of the open subscheme, $f\\circ j_e=\\iota_e\\circ s\\circ j_e=c_{(W_e,s\\circ j_e)}(e)$. Each $j_e$ is an open immersion, hence etale, and $s\\circ j_e$ is etale as a composite of etale morphisms [lem-weil-pbc-etale-composition-cancellation]; so $(W_e,s\\circ j_e)$ is an object of $U_{\\Et}$ and, the $W_e$ covering $W$, $\\mathcal W_f=\\{j_e:W_e\\to W\\}_{e\\in E}$ is a covering of $(W,s)$ in $U_{\\Et}$ [def-weil-pbc-etale-site] on whose members $f$ restricts to the image of a constant: $f|_{W_e}=c_{W_e}(e)$. Two facts about this covering: (i) for $e\\ne e'$ the fibre product $Z=W_e\\times_WW_{e'}$ (computed in schemes, [def-weil-pbc-etale-site]) is empty, since every point of $Z$ maps to a point of $W_e\\cap W_{e'}=\\varnothing$; (ii) for every sheaf of sets $\\mathcal G$ on $U_{\\Et}$ and every empty object $Z$, $\\mathcal G(Z)$ has exactly one element, because the empty family is a covering of $Z$ and the sheaf condition [def-weil-pbc-etale-sheaf-of-sets] makes $\\mathcal G(Z)$ the equalizer of two maps between empty products, i.e. a one-point set. Finally, for $f=c_{(W,s)}(e_0)$ part (c) of [lem-galois-coproduct-copies-morphisms-clopen] gives $W_{e_0}=W$ and $W_e=\\varnothing$ for $e\\ne e_0$; and for a morphism $g:(W',s')\\to(W,s)$ the decomposition of $f\\circ g$ is $((f\\circ g)^{-1}(\\iota_e(U)))_e=(g^{-1}(W_e))_e$.",
+   "uses": [
+    "lem-galois-coproduct-copies-morphisms-clopen",
+    "lem-weil-pbc-etale-composition-cancellation",
+    "def-weil-open-immersion",
+    "def-weil-pbc-etale-site",
+    "def-weil-pbc-etale-sheaf-of-sets"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/groupoids.tex",
+    "place": "Groupoids, Example Tag 03YW: $G_S(T)=\\{f:T\\to G\\text{ locally constant}\\}$; Etale Cohomology, Remark Tag 03P5: 'This Zariski sheaf is representable by the group scheme $G_S$'"
+   }
+  },
+  {
+   "text": "*Step 3 ($(h_{U_E},c)$ has the universal property of the sheafification of the constant presheaf $P_E:W\\mapsto E$).* Let $\\mathcal G$ be a sheaf of sets on $U_{\\Et}$ and $\\alpha:P_E\\to\\mathcal G$ a morphism of presheaves, so $\\alpha_W(e)|_{W'}=\\alpha_{W'}(e)$ for every morphism $W'\\to W$. Existence: for $f\\in h_{U_E}(W)$ take the covering $\\{W_e\\to W\\}_e$ of Step 2 and the sections $t_e=\\alpha_{W_e}(e)\\in\\mathcal G(W_e)$. They agree on overlaps: on $Z=W_e\\times_WW_e$ both pullbacks of $t_e$ equal $\\alpha_Z(e)$ by naturality of $\\alpha$; on $W_e\\times_WW_{e'}$, $e\\ne e'$, which is empty, $\\mathcal G$ has one element (Step 2 (i), (ii)). By the sheaf condition [def-weil-pbc-etale-sheaf-of-sets] there is a unique $\\beta_W(f)\\in\\mathcal G(W)$ with $\\beta_W(f)|_{W_e}=\\alpha_{W_e}(e)$ for all $e$. Naturality of $\\beta$: for $g:W'\\to W$, the decomposition of $f\\circ g$ is $W'_e=g^{-1}(W_e)$ (Step 2), and on $W'_e$ both $\\beta_W(f)|_{W'}$ and $\\beta_{W'}(f\\circ g)$ restrict to $\\alpha_{W'_e}(e)$ (the first because $W'_e\\to W'\\to W$ factors through $W_e$ and $\\alpha_{W_e}(e)|_{W'_e}=\\alpha_{W'_e}(e)$); as $\\{W'_e\\to W'\\}$ is a covering, they are equal by the uniqueness half of the sheaf condition. $\\beta\\circ c=\\alpha$: for $f=c_W(e_0)$ the decomposition is $W_{e_0}=W$, $W_e=\\varnothing$ otherwise (Step 2), so $\\beta_W(c_W(e_0))=\\beta_W(c_W(e_0))|_W=\\alpha_W(e_0)$. Uniqueness: if $\\beta':h_{U_E}\\to\\mathcal G$ satisfies $\\beta'\\circ c=\\alpha$, then for $f\\in h_{U_E}(W)$, using $f|_{W_e}=c_{W_e}(e)$ (Step 2) and naturality of $\\beta'$, $\\beta'_W(f)|_{W_e}=\\beta'_{W_e}(c_{W_e}(e))=\\alpha_{W_e}(e)=\\beta_W(f)|_{W_e}$ for all $e$, so $\\beta'_W(f)=\\beta_W(f)$ by the sheaf condition. Thus every morphism from $P_E$ to a sheaf factors uniquely through $c$, which is the defining property of a sheafification [def-weil-pbc-sheafification] (the Zariski covering $\\{W_e\\to W\\}$ already suffices, as in the source).",
+   "uses": [
+    "def-weil-pbc-etale-sheaf-of-sets",
+    "def-weil-pbc-sheafification",
+    "def-weil-pbc-etale-site"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Remark Tag 03P5: 'the sheafification $\\underline G$ of the constant presheaf associated to $G$ in the Zariski topology of the site already gives $\\Gamma(U,\\underline G)=\\{$Zariski locally constant maps $U\\to G\\}$ ... hence we conclude that the Zariski sheafification $\\underline G$ above is also the $\\tau$-sheafification' (the argument written out for sets; the group structure plays no role)"
+   }
+  },
+  {
+   "text": "*Step 4 (the factorization $\\varphi$ and its invertibility).* By [def-weil-pbc-constant-sheaf] $\\underline E$ with $\\eta:P_E\\to\\underline E$ is the sheafification of $P_E$ [def-weil-pbc-sheafification]; since $h_{U_E}$ is a sheaf (Step 1), $c$ factors as $c=\\varphi\\circ\\eta$ for a unique $\\varphi:\\underline E\\to h_{U_E}$ (morphisms of sheaves being morphisms of presheaves, [def-weil-pbc-etale-sheaf-of-sets]). By Step 3 applied to $\\mathcal G=\\underline E$ and $\\alpha=\\eta$ there is $\\psi:h_{U_E}\\to\\underline E$ with $\\psi\\circ c=\\eta$. Then $(\\psi\\circ\\varphi)\\circ\\eta=\\psi\\circ c=\\eta=\\mathrm{id}\\circ\\eta$, so $\\psi\\circ\\varphi=\\mathrm{id}_{\\underline E}$ by the uniqueness in the universal property of $\\eta$; and $(\\varphi\\circ\\psi)\\circ c=\\varphi\\circ\\eta=c=\\mathrm{id}\\circ c$, so $\\varphi\\circ\\psi=\\mathrm{id}_{h_{U_E}}$ by the uniqueness in Step 3 (with $\\mathcal G=h_{U_E}$, $\\alpha=c$). Hence $\\varphi$ is an isomorphism. For $E=\\varnothing$ nothing changes: $U_\\varnothing$ is the empty scheme and all steps apply verbatim (the decompositions are empty families, existing only over empty $W$).",
+   "uses": [
+    "def-weil-pbc-constant-sheaf",
+    "def-weil-pbc-sheafification",
+    "def-weil-pbc-etale-sheaf-of-sets"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Remark Tag 03P5, last sentence: the Zariski sheafification, being representable, is the $\\tau$-sheafification"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-scheme-coproduct-family",
+  "lem-weil-pbc-small-etale-representable-presheaf-sheaf",
+  "def-weil-pbc-etale-sheaf-of-sets",
+  "def-weil-pbc-etale-site",
+  "lem-galois-coproduct-copies-morphisms-clopen",
+  "lem-weil-pbc-etale-composition-cancellation",
+  "def-weil-open-immersion",
+  "def-weil-pbc-sheafification",
+  "def-weil-pbc-constant-sheaf"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Remark Tag 03P5 (remark-constant-locally-constant-maps, lines 2437-2456), with Groupoids, Example Tag 03YW (literature/stacks-project/groupoids.tex, lines 535-561) and Lemma Tag 03O3 (lemma-representable-sheaf-fpqc, lines 1067-1075); the source's 'hence we conclude' (that the Zariski sheafification is the etale one) is written out in Steps 2-4"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -59,7 +129,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "worker",
@@ -75,5 +145,16 @@
   }
  },
  "chapter": "sec-curve-estimates",
- "unit": "sk-prop-h2"
+ "unit": "sk-prop-h2",
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "lem-galois-constant-sheaf-sets-representable",
+  "worker": "stage1",
+  "summary": "Split along Stacks Remark 03P5 for sets (the group structure of 03P5/03YW plays no role). Step 1: h_{U_E} is an etale sheaf by lem-weil-pbc-small-etale-representable-presheaf-sheaf (03O3), c is natural. Step 2: by the new node lem-galois-coproduct-copies-morphisms-clopen (set version of 03YW: U-morphisms W -> U_E are E-indexed clopen decompositions of W), every section f is c(e) on the members of the Zariski covering {f^{-1}(V_e) -> W} (open immersions etale, lem-weil-pbc-etale-composition-cancellation); overlaps for e != e' are empty and sheaves take one value on empty objects. Step 3: (h_{U_E}, c) satisfies the universal property of the sheafification of the constant presheaf (existence by gluing alpha(e) over that covering, naturality, uniqueness). Step 4: phi exists by the universal property of eta and is an isomorphism by the two uniqueness statements. Statement unchanged. The existing lem-weil-pbc-constant-group-scheme-morphism-clopen states the 03YW bijection only for an abelian group E with the group-scheme structure, so it was not cited for a set E; lem-weil-pbc-constant-sheaf-sections-locally-constant is the abelian-group analogue (it uses lem-weil-pbc-site-sheafification-sections-local; here the universal property is checked directly, which needs no local description of sheafification). No sorry-free slopmaster2 declaration states the item (Etale.constantSheafIsoContinuousMapSheaf in WeilConjectures/Mathlib/AlgebraicGeometry/Sites/ConstantSheaf.lean:155 is the abelian-group, continuous-map version, not representability by U_E).",
+  "blueprint": "thm-galois-lc-etale, proof Step 1 ('the sheaf is finite locally constant') and Step 3 ('essential surjectivity'): Steps 1-4 realize the identification, implicit in Stacks 03RV's proof, of the constant sheaf with value E with h_{U_E} for the disjoint union of E copies of the base; Step 2 (via the new node) is the functor-of-points identification 03YW, Steps 3-4 the 03P5 sheafification comparison."
+ },
+ "tool_uses": [
+  "lem-weil-pbc-small-etale-representable-presheaf-sheaf"
+ ],
+ "reviewed": "2026-10-10 L: 4 steps (h_{U_E} a sheaf, sections as clopen decompositions by the new set version of 03YW, the universal property of the sheafification checked directly, the isomorphism); 1 tool use accepted; 1 new node"
 }

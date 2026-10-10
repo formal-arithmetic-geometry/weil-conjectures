@@ -1,0 +1,78 @@
+{
+ "id": "lem-galois-coproduct-copies-morphisms-clopen",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-galois-lc-etale",
+   "place": "proof, Step 1 ('the sheaf is finite locally constant') and Step 3 ('essential surjectivity'): the identification of a constant sheaf with finite value with the sheaf of sections of a finite disjoint union of copies of the base; precisely its functor-of-points half (Groupoids, Example 03YW, as used in Stacks Remark 03P5): a morphism into the disjoint union of copies of the base is a decomposition into open and closed pieces",
+   "via": [
+    "lem-galois-constant-sheaf-sets-representable",
+    "lem-galois-flc-representable"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Morphisms into a disjoint union of copies of the base are clopen decompositions",
+ "statement": "Let $U$ be a scheme [def-pc-scheme] and $E$ a set. Let $U_E=\\coprod_{e\\in E}U$ be the coproduct of copies of $U$ indexed by $E$ [lem-weil-pbc-scheme-coproduct-family], with coprojections $\\iota_e:U\\to U_E$, and let $\\pi:U_E\\to U$ be the morphism with $\\pi\\circ\\iota_e=\\mathrm{id}_U$ for all $e\\in E$; write $V_e=\\iota_e(U)\\subseteq U_E$. Let $s:W\\to U$ be a morphism of schemes. Call a family $(W_e)_{e\\in E}$ of open subsets of $W$ an *$E$-indexed clopen decomposition* of $W$ if the $W_e$ are pairwise disjoint and $W=\\bigcup_{e\\in E}W_e$ (then each $W_e$ is also closed); regard each $W_e$ as an open subscheme [def-weil-open-immersion] with inclusion $j_e:W_e\\to W$. Then: (a) for every morphism $f:W\\to U_E$ with $\\pi\\circ f=s$, the family $(f^{-1}(V_e))_{e\\in E}$ is an $E$-indexed clopen decomposition of $W$, and $f\\circ j_e=\\iota_e\\circ s\\circ j_e$ on $W_e=f^{-1}(V_e)$ for every $e\\in E$; (b) for every $E$-indexed clopen decomposition $(W_e)_{e\\in E}$ of $W$ there is exactly one morphism $f:W\\to U_E$ with $\\pi\\circ f=s$ and $f^{-1}(V_e)=W_e$ for all $e\\in E$. Hence $f\\mapsto(f^{-1}(V_e))_{e\\in E}$ is a bijection from the set of $U$-morphisms $W\\to U_E$ onto the set of $E$-indexed clopen decompositions of $W$, equivalently onto the set of maps $\\varphi:|W|\\to E$ all of whose fibres are open ($W_e=\\varphi^{-1}(e)$). (c) For $e_0\\in E$ the morphism $\\iota_{e_0}\\circ s$ corresponds to the decomposition with $W_{e_0}=W$ and $W_e=\\varnothing$ for $e\\neq e_0$ (the constant map with value $e_0$). For $E=\\varnothing$, $U_\\varnothing$ is the empty scheme, and a $U$-morphism $W\\to U_\\varnothing$ exists (and is then unique) if and only if $W$ is empty.",
+ "source": {
+  "document": "literature/stacks-project/groupoids.tex",
+  "place": "Groupoids, Example Tag 03YW (groupoids-example-constant-group, lines 535-561): the functor of points of $G_S=\\coprod_{g\\in G}S$ is $T\\mapsto\\{f:T\\to G\\text{ locally constant}\\}$ (the group structure plays no role in this identification); proved from Schemes, Lemma Tag 01JB (schemes-lemma-glue, with $U_{ij}=\\varnothing$ for $i\\ne j$) and Lemma Tag 01HI (schemes-lemma-restrict-map-to-opens). Used in Etale Cohomology, Remark Tag 03P5."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "lem-weil-pbc-scheme-coproduct-family",
+  "def-weil-open-immersion"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "morphism of schemes into a coproduct of schemes corresponds to decomposition into open and closed subschemes",
+   "results": "AlgebraicGeometry.instIsOpenImmersionInlScheme, instHasFiniteCoproductsScheme, instMonoCoprodScheme, coprodSpec (Mathlib.AlgebraicGeometry.Limits); Scheme.LocalRepresentability.glueData_openCover_map (Mathlib.AlgebraicGeometry.Sites.Representability); nothing describing Hom(W, coproduct of copies) by clopen decompositions",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "morphisms from a scheme X to the disjoint union of copies of S over S correspond to locally constant functions on X",
+   "results": "Scheme.coprodPresheafObjIso (Mathlib.AlgebraicGeometry.Limits), CompHausLike.LocallyConstant.sigmaIso (Mathlib.Condensed.Discrete.LocallyConstant), AffineSpace.homOverEquiv, AlgebraicGeometry.sigmaMk (homeomorphism Σ|X_i| ≃ |∐X_i|), pointsPi, ι_sigmaSpec; none is the bijection",
+   "date": "2026-10-10",
+   "verdict": "no match (sigmaMk, disjoint_opensRange_sigmaι are ingredients only)"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Scheme, CategoryTheory.Limits.Sigma.ι, IsLocallyConstant",
+   "results": "no declarations",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rn 'LocallyConstant\\|IsLocallyConstant\\|sigmaι\\|glueMorphismsOfTop\\|C(' in ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicGeometry/{Limits,Gluing}.lean; grep -rln 'LocallyConstant' Mathlib/AlgebraicGeometry",
+   "results": "Limits.lean: sigmaι_eq_iff (191), disjoint_opensRange_sigmaι (202), isEmpty_pullback_sigmaι_of_ne (219), sigmaMk (253); no LocallyConstant in AlgebraicGeometry except Morphisms/FlatRank.lean (unrelated). The gluing along fibres of a continuous map, Scheme.glueOfContinuousMap, is in slopmaster2's WeilConjectures/Mathlib/AlgebraicGeometry/Gluing.lean (line 728), not in Mathlib, and states only the construction, not this bijection",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-galois-constant-sheaf-sets-representable",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-curve-estimates",
+ "unit": "sk-prop-h2"
+}
