@@ -2,7 +2,7 @@
 
 911 items; claim with `tools/claim.py next <group> [--stage N]`.
 
-## Stage 1: nodes to split (297)
+## Stage 1: nodes to split (296)
 
 | node | distance to a target | Lean state on the done branch |
 |---|---|---|
@@ -21,10 +21,10 @@
 | `lem-sc-semilocal-dim-one-normalization` | 2015 | none |
 | `lem-sc-mayer-vietoris-ringed-space` | 2017 | none |
 | `lem-weil-pbc-cartesian-eilenberg-functorial` | 3007 | none |
-| `lem-exc-finite-galois-tensor-decomposition` | 3009 | none |
+| `lem-exc-finite-galois-algebra-tensor-decomposition` | 3010 | none |
+| `lem-exc-finite-galois-sheaf-sections-coproduct` | 3010 | none |
 | `lem-weil-pbc-site-extension-by-zero-exact` | 3011 | none |
 | `lem-sc-sheaf-ext-coherent` | 3014 | none |
-| `lem-sp-cartan-eilenberg-properties` | 3014 | none |
 | `lem-pc-derived-direct-image-preserves-direct-sums` | 3015 | none |
 | `lem-pc-derived-direct-image-preserves-qcoh` | 3015 | none |
 | `lem-pc-derived-qcoh-compact-generation` | 3015 | none |
@@ -39,15 +39,15 @@
 | `lem-sc-smooth-proper-diagonal-koszul-dual` | 3015 | none |
 | `lem-sc-smooth-proper-diagonal-koszul-regular` | 3015 | none |
 | `lem-sc-smooth-proper-diagonal-tensor-formula` | 3015 | none |
+| `lem-sp-cart-eilenberg-left-exact-cohomology` | 3015 | none |
 | `lem-pc-brown-cohomological-representability` | 3016 | none |
 | `lem-pc-derived-adjoint-functors` | 3016 | none |
 | `lem-pc-derived-ambient-direct-sums` | 3016 | none |
-| `lem-sc-affine-derived-cohomology` | 3016 | none |
-| `lem-sc-affine-derived-pushforward-conservative` | 3016 | none |
 | `lem-sc-kahler-differentials-diagonal-ideal` | 3016 | none |
 | `lem-sc-p1-section-clearing-denominators-qcqs` | 3016 | none |
 | `lem-sc-p1-section-restriction-s-torsion` | 3016 | none |
 | `lem-sc-smooth-proper-diagonal-basechange-upper-shriek` | 3016 | none |
+| `lem-sc-qcoh-acyclic-derived-pushforward-cohomology` | 3017 | none |
 | `lem-pc-genus-agrees-sc` | 4007 | rests_on_sorry |
 | `lem-sc-open-curve-boundary-higher-direct-image-vanishing` | 4007 | none |
 | `lem-sc-open-curve-etale-leray-low-degree` | 4007 | none |
@@ -58,7 +58,6 @@
 | `lem-pc-vanishing-above-dim` | 4009 | rests_on_sorry |
 | `lem-pc-zero-scheme-locally-principal` | 4009 | none |
 | `lem-pc-zero-scheme-pullback` | 4009 | none |
-| `lem-pc-zero-scheme-zero-iff` | 4009 | none |
 | `lem-sc-finite-flat-surj-points` | 4009 | none |
 | `lem-sc-positive-ample-hilbert-degree` | 4009 | none |
 | `thm-pc-f-representable` | 4009 | rests_on_sorry |
@@ -304,7 +303,7 @@
 | `lem-pur-rhom-well-defined` | - | none |
 | `lem-zl-noether-normalization-dimension` | - | none |
 
-## Stage 2: nodes to state (614)
+## Stage 2: nodes to state (615)
 
 | node | distance to Mathlib | kind |
 |---|---|---|
@@ -387,6 +386,7 @@
 | `lem-pc-scheme-dimension-local-rings` | 1 | state |
 | `lem-pc-separable-polynomial-alg-closed-quotient-product` | 1 | state |
 | `lem-pc-zero-scheme-ideal-local` | 1 | state |
+| `lem-pc-zero-scheme-zero-iff` | 1 | state |
 | `lem-sc-affine-cap-section-open-algebra` | 1 | state |
 | `lem-sc-affine-finite-module-free-locus` | 1 | state |
 | `lem-sc-affine-finite-projective-prime-membership` | 1 | state |
@@ -923,7 +923,7 @@
 | `lem-weil-pbc-p1-field-dimension-one` | 4 | state |
 | `lem-weil-pbc-projective-space-zero-isomorphism` | 4 | state |
 
-Not open yet: 322 nodes that wait for stage 1, 1287 nodes that wait for a statement dependency.
+Not open yet: 321 nodes that wait for stage 1, 1291 nodes that wait for a statement dependency.
 
 ## Stage 3: modules to prove (0)
 
