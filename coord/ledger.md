@@ -1710,3 +1710,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 15:01 L: merged deliver/E1/lem-sc-etale-qcoherent-descent-fpqc-sections (reviewer FIX; first push; new nodes: 0)
 - 15:01 L: returned deliver/M1/thm-sc-p1-duality (reviewer RETURN: 1. B2/E5: lem-sc-p1-duality-pairing-naturality: the statement is not self-contained and, as written, does not make sense)
 - 15:02 L: returned deliver/G1/lem-pc-very-ample-descends (reviewer RETURN: 1. C4: lem-pc-very-ample-descends step 5: the step says 'by the definition of very ampleness' psi and psi^*O(1)=L make L)
+- 15:03 L: returned deliver/C1/lem-sc-etale-zariski-qcoh-comparison (reviewer RETURN: 1. D4/D1: step 3 and node lem-sc-etale-zariski-qcoherent-higher-direct-images-vanish: step 3 argues that the presheaves )
