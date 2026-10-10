@@ -727,3 +727,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 00:54 L: reviewed lem-weil-pbc-make-separable (030R; 2 steps; +04KM, +030X nodes): accepted.
 - 00:55 L: reviewed lem-weil-pbc-module-pullback-finite-type (01B6; 4 steps; +1 leaf): accepted.
 - 00:56 L: reviewed lem-weil-pbc-open-subspace-dimension-monotone: Mathlib leaf (line verified): accepted.
+- 2026-10-10, delivery of E1: lem-weil-pbc-helper-g-ring-char-p returned (7f65c8b68): step 2 does not set up the induction; new nodes cite wrong definitions; steps 3-4 leave the 07N9 identification and the derivation extension unexplained; see co
