@@ -296,6 +296,7 @@ public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.PAdicAlgCl.Basic
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.PAdicAlgCl.Derived.BoundedConstructible
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.PAdicAlgCl.Derived.Hom
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.PAdicAlgCl.Derived.LowerShriek
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.PAdicAlgCl.Derived.Monoidal
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.PAdicAlgCl.Derived.OpenImmersionLowerShriek
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.PAdicAlgCl.Derived.Tensor
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.PAdicAlgCl.Derived.UpperLowerStar
