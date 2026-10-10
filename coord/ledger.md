@@ -2547,3 +2547,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 20:42 L: merged deliver/F1/lem-sc-etale-base-change-geometric (reviewer FIX; first push; new nodes: 1)
 - 20:42 L: returned deliver/J1/lem-pc-perfect-complex-descent (reviewer RETURN: 1. E (false new statement) lem-pc-perfect-cover-gluing: objects of D(O_X) do not glue from a finite cover with isomorphi)
 - 20:43 L: merged deliver/K1/def-nagata-separated-descent-stage (reviewer FIX; first push; new nodes: 0)
+- 20:43 L: merged deliver/G1/pqf-lem-locqf-fibre-discrete (reviewer FIX; first push; new nodes: 1)

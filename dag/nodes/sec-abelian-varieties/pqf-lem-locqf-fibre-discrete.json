@@ -3,7 +3,7 @@
  "blueprint": {
   "is": "pqf-lem-locqf-fibre-discrete",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "Finite fibre over a point",
@@ -13,30 +13,72 @@
   "place": "node pqf-lem-locqf-fibre-discrete, order 548"
  },
  "stmt_deps": [
-  "def-weil-pbc-scheme-conventions"
+  "def-weil-pbc-scheme-conventions",
+  "pqf-def-quasifinite"
  ],
  "proof": [
   {
-   "text": "The fibre $X_s=X\\times_S\\operatorname{Spec}\\kappa(s)$ is locally of\nfinite type over the field $\\kappa(s)$ and has finitely many points;\nas in the proof of [pqf-lem-qf-finitefibres], restricting to an\naffine open $\\operatorname{Spec}A$ over an affine open\n$\\operatorname{Spec}R\\subset S$, the finite type\n$\\kappa(s)$-algebra $A\\otimes_R\\kappa(s)$ has finitely many prime\nideals, hence is Artinian, all its primes maximal, and its spectrum is\na finite discrete set. Hence $X_s$ is a finite discrete space, each of\nits points is isolated, and at every point the ring map is quasi-finite\nat the corresponding prime in the sense of\n[pqf-def-quasifinite], i.e. $f$ is quasi-finite at each point\nover $s$.",
+   "text": "Choose affine opens $V\\cong\\operatorname{Spec}R\\subseteq S$ with $s\\in V$ and $U\\cong\\operatorname{Spec}A\\subseteq X$ with $f(U)\\subseteq V$, and let $\\mathfrak p\\subset R$ be the prime of $s$. By [lem-weil-pbc-lft-affine-pairs] $R\\to A$ is of finite type, hence so is $\\kappa(s)\\to A\\otimes_R\\kappa(s)$ (images of generators generate). Since $\\operatorname{Spec}\\kappa(s)\\to S$ factors through $V$, [lem-weil-pbc-open-fibre-product] and [lem-weil-pbc-fibre-product-affine-spectra] identify the open subscheme $p^{-1}(U)$ of $X_s$ ($p:X_s\\to X$ the first projection) with $\\operatorname{Spec}(A\\otimes_R\\kappa(s))$. By [def-pc-scheme-fibre] $p$ is a homeomorphism of $X_s$ onto $f^{-1}(\\{s\\})$, which is finite; so $X_s$, and hence $\\operatorname{Spec}(A\\otimes_R\\kappa(s))$, has finitely many points. By [pqf-lem-finite-type-algebra-finite-spectrum] this spectrum is finite discrete, so every point of the open set $p^{-1}(U)$ is open in $X_s$. Such opens $p^{-1}(U)$ cover $X_s$, so $X_s$ is discrete, and finite as just shown. For a point $x$ over $s$, take such $U\\ni x$ and $V$ and apply [lem-weil-pbc-isolated-fibre-point-quasi-finite-affine-pairs] (its hypotheses: $f$ locally of finite type, the point of $X_s$ over $x$ isolated): $R\\to A$ is of finite type and quasi-finite at the prime corresponding to $x$, which is exactly the witness required by [pqf-def-quasifinite]. Thus $f$ is quasi-finite at every point lying over $s$.",
    "uses": [
-    "pqf-lem-qf-finitefibres",
-    "pqf-def-quasifinite"
+    "lem-weil-pbc-lft-affine-pairs",
+    "lem-weil-pbc-open-fibre-product",
+    "lem-weil-pbc-fibre-product-affine-spectra",
+    "def-pc-scheme-fibre",
+    "pqf-lem-finite-type-algebra-finite-spectrum",
+    "lem-weil-pbc-isolated-fibre-point-quasi-finite-affine-pairs",
+    "pqf-def-quasifinite",
+    "def-weil-pbc-scheme-conventions"
    ],
    "elementary": false
   }
  ],
  "proof_deps": [
-  "pqf-lem-qf-finitefibres",
-  "pqf-def-quasifinite"
+  "lem-weil-pbc-lft-affine-pairs",
+  "lem-weil-pbc-open-fibre-product",
+  "lem-weil-pbc-fibre-product-affine-spectra",
+  "def-pc-scheme-fibre",
+  "pqf-lem-finite-type-algebra-finite-spectrum",
+  "lem-weil-pbc-isolated-fibre-point-quasi-finite-affine-pairs",
+  "pqf-def-quasifinite",
+  "def-weil-pbc-scheme-conventions"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/master/blueprint/sec-abelian-varieties/sk-prop-av-pqf-finite/pqf-lem-locqf-fibre-discrete.md",
   "place": "## Proof"
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "a locally finite type morphism with finite fibre has discrete fibre and is quasi-finite at points over it",
+   "results": "Related declarations for finite morphisms and locally quasi-finite morphisms; no exact statement",
+   "date": "2026-10-11",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry LocallyQuasiFinite finite fibre discrete",
+   "results": "Unknown identifier AlgebraicGeometry; no result",
+   "date": "2026-10-11",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "grep",
+   "query": "locally.*finite.*type.*finite.*fibre|finite.*discrete in Mathlib/AlgebraicGeometry",
+   "results": "No declaration combining the hypotheses and conclusion",
+   "date": "2026-10-11",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "locally finite type morphism finite fibre discrete quasi-finite",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-11",
+   "verdict": "unavailable"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [],
  "blueprint_kind": "lemma",
@@ -63,5 +105,34 @@
   }
  },
  "chapter": "sec-abelian-varieties",
- "unit": "sk-prop-av-pqf-finite"
+ "unit": "sk-prop-av-pqf-finite",
+ "split_report": {
+  "date": "2026-10-11",
+  "item": "pqf-lem-locqf-fibre-discrete",
+  "worker": "stage1",
+  "summary": "Replaced the imported proof's unsupported appeal to the global quasi-finite finite-fibres lemma with a statement-only affine algebra lemma. Added the missing quasi-finite definition dependency and recorded all source and Mathlib checks.",
+  "blueprint": "Realizes the proof paragraph's affine reduction and the conclusion that the finite fibre is discrete and quasi-finite at points over s.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-isolated-fibre-point-quasi-finite-affine-pairs",
+    "why": "Generic affine criterion converting an isolated point in a locally finite-type fibre into the quasi-finite-at-point witness; no same-unit node states this converse."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-isolated-fibre-point-quasi-finite-affine-pairs",
+  "lem-weil-pbc-lft-affine-pairs",
+  "lem-weil-pbc-open-fibre-product",
+  "lem-weil-pbc-fibre-product-affine-spectra",
+  "def-pc-scheme-fibre",
+  "lem-weil-pbc-isolated-fibre-point-quasi-finite-affine-pairs"
+ ],
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-lfd2348",
+  "group": "G1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-lfd2348 (reviewer sub-agent of L); spot-checked: Statement = Stacks 01TH (finite set-theoretic fibre, not LocallyQuasiFinite), so no Mathlib leaf: Mathlib QuasiFinite.lean has LocallyQuasiFinite.of_finite_preimage_singleton (all fibres) and quasiFiniteAt_iff_isOpen_singleton_asFiber (Mathlib's QuasiFiniteAt, stalk-based), neither states the pointwise item. No cycle: none of the cited nodes reaches the item, pqf-lem-qf-finitefibres or pqf-lem-finite-qf (reachability over sheaf-dag). New node pqf-lem-finite-type-algebra-finite-spectrum true (0ALW + zero ring), not a duplicate of the 00KH/0ALW nodes (those assume dim 0), no single Mathlib declaration (grep RingTheory/QuasiFinite). FIX more, RETURN less: C1 - step 1 used uncited non-elementary facts: |X_s| homeomorphic to f^{-1}(s) (now def-pc-scheme-fibre), the open p^{-1}(U) of X_s is Spec(A tensor_R kappa(s)) (now lem-weil-pbc-open-fibre-product + lem-weil-pbc-fibre-product-affine-spectra), R->A of finite type on affine pairs (now lem-weil-pbc-lft-affine-pairs); step rewritten, uses/proof_deps updated; all four are generic cross-unit mathlib leaves, recorded as tool uses.; 1 file(s) fixed by the reviewer"
+ }
 }
