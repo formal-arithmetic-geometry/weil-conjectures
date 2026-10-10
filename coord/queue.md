@@ -1,8 +1,8 @@
 # Work queue
 
-855 items; claim with `tools/claim.py next <group> [--stage N]`.
+862 items; claim with `tools/claim.py next <group> [--stage N]`.
 
-## Stage 1: nodes to split (408)
+## Stage 1: nodes to split (414)
 
 | node | distance to a target | Lean state on the done branch |
 |---|---|---|
@@ -18,7 +18,6 @@
 | `lem-weil-pbc-flat-formally-smooth-closed-fibre-adic` | 1015 | none |
 | `lem-weil-pbc-free-complex-unit-entry-splits` | 1015 | none |
 | `lem-weil-pbc-fs-adic-field-regular-local` | 1015 | none |
-| `lem-weil-pbc-graded-finiteness-cohomology` | 1015 | none |
 | `lem-weil-pbc-grothendieck-regular-sequence-flat` | 1015 | none |
 | `lem-weil-pbc-limit-module-essentially-finite-presentation-over-system` | 1015 | none |
 | `lem-weil-pbc-local-nagata-domain-analytically-unramified` | 1015 | none |
@@ -27,7 +26,6 @@
 | `lem-weil-pbc-normal-ring-integrally-closed-total` | 1015 | none |
 | `lem-weil-pbc-openness-of-flatness` | 1015 | none |
 | `lem-weil-pbc-principal-maximal-dim-one-regular` | 1015 | none |
-| `lem-weil-pbc-quasi-finite-over-polynomial-algebra` | 1015 | none |
 | `lem-weil-pbc-quotient-by-power-torsion-no-torsion` | 1015 | none |
 | `lem-weil-pbc-regular-local-quotient-kernel-parameters` | 1015 | none |
 | `lem-weil-pbc-relative-global-complete-intersection-local-regular-sequence` | 1015 | none |
@@ -37,7 +35,6 @@
 | `lem-weil-pbc-torsion-extension-flat-descent` | 1015 | none |
 | `lem-weil-pbc-valuation-ring-normal` | 1015 | none |
 | `def-weil-pbc-analytically-unramified` | 1016 | none |
-| `lem-weil-pbc-cohen-power-series-presentation` | 1016 | none |
 | `lem-weil-pbc-coherent-stalk-map-extends` | 1016 | none |
 | `lem-weil-pbc-dimension-inequality-quasi-finite` | 1016 | none |
 | `lem-weil-pbc-dimension-preserved-field-extension` | 1016 | none |
@@ -47,7 +44,13 @@
 | `lem-weil-pbc-integral-injective-dimension-equal` | 1016 | none |
 | `lem-weil-pbc-module-injects-localizations-associated-primes` | 1016 | none |
 | `lem-weil-pbc-projective-dimension-ext-characterization` | 1016 | none |
+| `lem-weil-pbc-qcqs-cohomology-direct-sum` | 1016 | none |
 | `lem-weil-pbc-regular-quotient-ideal-intersection` | 1016 | none |
+| `lem-weil-pbc-ring-quasi-finite-locus-open` | 1016 | none |
+| `lem-weil-pbc-triangular-change-of-basis` | 1016 | none |
+| `def-weil-pbc-koszul-complex` | 1017 | none |
+| `def-weil-pbc-koszul-regular-sequence` | 1017 | none |
+| `lem-weil-pbc-regular-sequence-koszul-regular` | 1017 | none |
 | `lem-weil-pbc-sheaf-hom-finite-presentation-quasi-coherent` | 1017 | none |
 | `lem-weil-pbc-dim-one-residue-field-extensions-finite` | 1018 | none |
 | `lem-weil-pbc-injective-acyclicity-bounded-below` | 2002 | sorry_here |
@@ -296,6 +299,8 @@
 | `pqf-def-cohomology` | 6011 | none |
 | `lem-pc-projective-space-cohomology-bound` | 6012 | sorry_here |
 | `lem-pc-projective-space-twist-cohomology` | 6012 | rests_on_sorry |
+| `pqf-lem-going-up` | 6017 | none |
+| `pqf-lem-incomparability` | 6017 | none |
 | `pqf-def-affine-morphism` | - | none |
 | `def-nagata-final-descended-model` | - | none |
 | `def-nagata-finite-type-closed-in-fp` | - | none |
@@ -414,8 +419,9 @@
 | `def-exc-etale-algebra-lift` | - | none |
 | `lem-exc-etale-jacobian-presentation` | - | none |
 | `def-exc-jacobian-presentation` | - | none |
+| `lem-zl-noether-normalization-dimension` | - | none |
 
-## Stage 2: nodes to state (447)
+## Stage 2: nodes to state (448)
 
 | node | distance to Mathlib | kind |
 |---|---|---|
@@ -491,6 +497,7 @@
 | `lem-weil-pbc-closed-immersion-residue-field-iso` | 1 | state |
 | `lem-weil-pbc-closed-pushforward-constant-restriction` | 1 | state |
 | `lem-weil-pbc-cohen-coefficient-ring-exists` | 1 | state |
+| `lem-weil-pbc-cohen-power-series-presentation` | 1 | state |
 | `lem-weil-pbc-cohen-rings-exist` | 1 | state |
 | `lem-weil-pbc-cohen-structure-power-series-surjection` | 1 | state |
 | `lem-weil-pbc-colimit-category-fp-algebras` | 1 | state |
@@ -867,7 +874,7 @@
 | `lem-weil-pbc-p1-field-dimension-one` | 4 | state |
 | `lem-weil-pbc-projective-space-zero-isomorphism` | 4 | state |
 
-Not open yet: 424 nodes that wait for stage 1, 831 nodes that wait for a statement dependency.
+Not open yet: 430 nodes that wait for stage 1, 833 nodes that wait for a statement dependency.
 
 ## Stage 3: modules to prove (0)
 
