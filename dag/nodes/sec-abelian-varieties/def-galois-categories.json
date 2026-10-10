@@ -3,26 +3,51 @@
  "blueprint": {
   "is": "def-galois-categories",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "definition",
  "title": "Finite etale covers and finite locally constant sheaves",
- "statement": "Let $Y$ be a scheme with a geometric point $\\bar y\\to Y$. Write\n$\\mathrm{F\\acute Et}(Y)$ for the category of\nfinite etale $Y$-schemes,\nwith $Y$-morphisms, and $\\mathrm{FLC}(Y)$ for the category of\nfinite locally constant sheaves of\nfinite sets on $Y_{\\Et}$, with morphisms of sheaves. For\n$\\mathcal F\\in\\mathrm{FLC}(Y)$ and $P\\in\\mathrm{F\\acute Et}(Y)$ write\n\n$$\n\\mathcal F_{\\bar y},\\qquad |P_{\\bar y}|\n$$\n\nfor the fibre at $\\bar y$; An $M$-torsor is as in\n[def-weil-pbc-finite-torsors].",
+ "statement": "Let $Y$ be a scheme [def-pc-scheme] with a geometric point $\\bar y\\to Y$ [def-weil-geometric-point]. Write $\\mathrm{F\\acute Et}(Y)$ for the category of finite etale $Y$-schemes, with $Y$-morphisms; finite and etale use the conventions of [def-weil-pbc-scheme-conventions]. Write $\\mathrm{FLC}(Y)$ for the category of finite locally constant sheaves of finite sets on the small etale site $Y_{\\Et}$ [def-weil-pbc-etale-site], where finite locally constant has the meaning in [def-weil-pbc-etale-sheaves], with morphisms of sheaves. For $\\mathcal F\\in\\mathrm{FLC}(Y)$ and $P\\in\\mathrm{F\\acute Et}(Y)$ write\n\n$$\n\\mathcal F_{\\bar y},\\qquad |P_{\\bar y}|\n$$\n\nfor the fibre at $\\bar y$; an $M$-torsor is as in [def-weil-pbc-finite-torsors].",
  "source": {
   "document": "literature/blueprint/master/blueprint/sec-abelian-varieties/sk-prop-av-finite-etale-points/def-galois-categories.md",
   "place": "node def-galois-categories, order 583"
  },
  "stmt_deps": [
-  "def-weil-pbc-finite-torsors",
+  "def-pc-scheme",
+  "def-weil-geometric-point",
+  "def-weil-pbc-scheme-conventions",
+  "def-weil-pbc-etale-site",
   "def-weil-pbc-etale-sheaves",
-  "def-weil-pbc-scheme-conventions"
+  "def-weil-pbc-finite-torsors"
  ],
  "proof": [],
  "proof_deps": [],
  "proof_origin": null,
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "finite etale covers and finite locally constant sheaves category",
+   "results": "CompHausLike.LocallyConstant.functor and related condensed locally-constant constructions; no scheme etale finite-cover category",
+   "date": "2026-10-11",
+   "verdict": "no match: these are condensed/topological locally constant functors, not finite etale schemes or the small etale site"
+  },
+  {
+   "tool": "loogle",
+   "query": "FiniteEtale, IsFiniteLocallyConstantSheafOfTypes",
+   "results": "0 hits; loogle reports unknown identifier 'FiniteEtale'",
+   "date": "2026-10-11",
+   "verdict": "unavailable/no match: no declaration for this project-specific pair"
+  },
+  {
+   "tool": "grep",
+   "query": "FiniteLocallyConstant|FiniteEtale in Mathlib/",
+   "results": "0 hits",
+   "date": "2026-10-11",
+   "verdict": "no match: the project-specific scheme and sheaf definitions are not in Mathlib"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [],
  "blueprint_kind": "definition",
@@ -49,5 +74,20 @@
   }
  },
  "chapter": "sec-abelian-varieties",
- "unit": "sk-prop-av-finite-etale-points"
+ "unit": "sk-prop-av-finite-etale-points",
+ "split_report": {
+  "date": "2026-10-11",
+  "item": "def-galois-categories",
+  "worker": "stage1",
+  "summary": "Checked the imported definition against the blueprint node and the project source. The item introduces the categories of finite etale Y-schemes and finite locally constant sheaves on the small etale site, their geometric fibres, and the torsor convention; these are definitions and existing statement dependencies, so no proof steps or new subordinate nodes are required. The Lean declaration tagged with this blueprint id defines only the FLC full subcategory and does not state the whole item, so this is a split definition rather than an attachment.",
+  "blueprint": "The definition node itself (order 583), specifically its category clauses and its final geometric-fibre notation clause."
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-dgc1815",
+  "group": "E1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-dgc1815 (reviewer sub-agent of L); spot-checked: Statement reads correctly (FEt(Y), FLC(Y) on small etale site, geometric fibres, torsor convention); not a duplicate of def-galois-category (sec-curve-estimates, the abstract Galois-category axioms) nor of Mathlib GaloisCategory (this node defines no Galois category at all, so B8 is moot); cited ids def-pc-scheme, def-weil-geometric-point, def-weil-pbc-etale-site exist. FIX more, RETURN less: B3 the rewritten statement cites def-pc-scheme, def-weil-geometric-point, def-weil-pbc-etale-site but stmt_deps omitted them; added. Note: def-weil-pbc-etale-sheaves defines locally constant and lisse but says 'finite locally constant' only in its constructible clause, which matches lisse/Stacks 03RU.; 1 file(s) fixed by the reviewer"
+ }
 }
