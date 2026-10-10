@@ -21,39 +21,115 @@
  "stmt_deps": [
   "def-pc-cochain-complex-modules"
  ],
- "proof": [],
+ "proof": [
+  {
+   "text": "For every degree n and every element m of M^n, take a copy T(n,m) of the two-term complex A[−n] → A[−n−1] (free of rank one in degrees n and n+1, with the shift convention N[k]^j=N^{j+k}) whose differential is the identity, and map its lower generator (degree n) to m and its upper generator (degree n+1) to d_M(m). These maps define a morphism T(n,m) → M because d_M^2=0. Let Q_0 be the termwise direct sum of all T(n,m), over all n and m, with the map to M given summand by summand. The resulting map Q_0 → M is degreewise surjective, since the lower generator indexed by any m maps to m.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/dga.tex",
+    "place": "Differential Graded Algebra, Lemma 15.60.8 (Tag 09KN), proof"
+   }
+  },
+  {
+   "text": "For every degree n and every cocycle z in Z^n(M)=ker(d_M:M^n→M^{n+1}), add a copy S(n,z) of the zero-differential shift A[−n] (A concentrated in degree n), mapped to M by sending its generator to z; this is a morphism of complexes because d_M(z)=0. Let Q be the termwise direct sum Q_0 ⊕ (⊕ S(n,z)), with the induced map to M. The generator of S(n,z) is a cocycle of Q mapping to z, so Z^n(Q) → Z^n(M) is surjective for every n, while degreewise surjectivity is retained from Q_0.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/dga.tex",
+    "place": "Differential Graded Algebra, Lemma 15.60.8 (Tag 09KN), proof"
+   }
+  },
+  {
+   "text": "Let Q' be the direct sum of all upper terms A[−n−1] in the T(n,m), together with all S(n,z), and let Q'' be the direct sum of all lower terms A[−n] in the T(n,m). The upper terms and the S(n,z) are subcomplexes of Q (their differentials are zero), so Q' → Q is an inclusion of complexes, and Q'' = Q/Q' carries the zero differential. Degreewise Q = Q' ⊕ Q'' as modules, so 0 → Q' → Q → Q'' → 0 is a degreewise split short exact sequence of complexes, and Q', Q'' are direct sums of shifts A[k] with zero differential, as required.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/dga.tex",
+    "place": "Differential Graded Algebra, Lemma 15.60.8 (Tag 09KN), proof"
+   }
+  }
+ ],
  "proof_deps": [],
- "proof_origin": null,
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/dga.tex",
+  "place": "Differential Graded Algebra, Lemma 15.60.8 (Tag 09KN), proof"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
-   "query": "for every complex of modules there is a map from a direct sum of two term free complexes surjective on terms and cycles",
-   "results": "CategoryTheory.ShortComplex.exact_iff_surjective_moduleCatToCycles; no free two-term cover declaration",
+   "query": "for every cochain complex of modules there is a degreewise surjective map from a complex built from two-term free complexes and shifts, surjective on cocycles",
+   "results": "CochainComplex.HomComplex.Cochain.fromSingleMk_surjective; CochainComplex.HomComplex.Cocycle.fromSingleMk_surjective; no free two-term cover declaration",
    "date": "2026-10-11",
    "verdict": "no match"
   },
   {
    "tool": "loogle",
-   "query": "ProjectiveResolution, CochainComplex",
-   "results": "unavailable: unknown identifier ProjectiveResolution",
+   "query": "HomologicalComplex, Free, cocycle, direct sum, shift",
+   "results": "0 hits; unknown identifier Free",
    "date": "2026-10-11",
    "verdict": "unavailable"
   },
   {
    "tool": "grep",
-   "query": "ProjectiveResolution|free.*complex in Mathlib/CategoryTheory/Abelian",
+   "query": "HomologicalComplex|CochainComplex|free.*complex|cocycle (Mathlib/Algebra/Homology)",
+   "results": "no relevant declaration",
+   "date": "2026-10-11",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "construct a degreewise surjective cover of a cochain complex by free two-term complexes and shifts, surjective on cycles",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-11",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "free resolution of a complex of modules by direct sums of shifts and contractible complexes",
+   "results": "CategoryTheory.ProjectiveResolution.ofComplex; no statement for a cochain complex cover by free shifts",
+   "date": "2026-10-11",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "FreeModule, HomologicalComplex, directSum",
+   "results": "0 hits; unknown identifier FreeModule",
+   "date": "2026-10-11",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "grep",
+   "query": "FreeModule|directSum.*HomologicalComplex|Cochain (Mathlib/Algebra/Homology)",
    "results": "no relevant declaration",
    "date": "2026-10-11",
    "verdict": "no match"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-pc-derived-filtered-free-resolution",
   "by": "worker",
   "date": "2026-10-10"
  },
  "chapter": "sec-picard-framework",
- "unit": "sk-thm-picard-f-representable"
+ "unit": "sk-thm-picard-f-representable",
+ "split_report": {
+  "date": "2026-10-11",
+  "item": "lem-pc-derived-free-complex-cover",
+  "worker": "stage1",
+  "summary": "Split the Tag 09KN cover construction into the element-indexed two-term summands, the cocycle-indexed zero-differential shifts, and the resulting degreewise split short exact sequence. No auxiliary nodes were needed because each step is an elementary construction from the stated complex and its cocycles.",
+  "blueprint": "Realizes proof step (2) of lem-pc-projection-formula: construct the successive free two-term complexes used to resolve the given complex.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-dfc2233",
+  "group": "H1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-dfc2233 (reviewer sub-agent of L); spot-checked: Statement is the repaired Tag 09KN form (degreewise surjective, surjective on cocycles, degreewise split 0->Q'->Q->Q''->0 with Q',Q'' sums of A[k], zero differential); unchanged since base. Step 1 two-term T(n,m) gives degreewise surjectivity, step 2 cocycle shifts give surjectivity on cocycles (checked M=A[0] where contractible pieces alone fail), step 3 Q' = upper terms + cocycle shifts is a subcomplex with zero-differential quotient. Only termwise direct sums of complexes are used (elementary, as in step 1 of lem-pc-derived-module-direct-sums); that node's D(A)-coproduct statement is not needed, so no C1. No restated node (class b): only this item and its parent use carry the 09KN construction. FIX more, RETURN less: shift sign: steps wrote A[n], A[n+1] for summands in degrees n, n+1 (with N[k]^j=N^{j+k} these sit in degrees -n, -n-1, so the maps to M^n were not of degree 0); now A[-n] -> A[-n-1] and A[-n] with the convention stated; step 2 now says why S(n,z)->M is a chain map and that Z^n(Q)->Z^n(M) is onto; step 3 says why Q' is a subcomplex. H1's second reading missed the shift sign, and its claim to have changed created.item is not in the file (created.item correctly stays lem-pc-derived-filtered-free-resolution).; 1 file(s) fixed by the reviewer"
+ }
 }
