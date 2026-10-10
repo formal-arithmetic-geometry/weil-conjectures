@@ -1,8 +1,8 @@
 # Work queue
 
-853 items; claim with `tools/claim.py next <group> [--stage N]`.
+854 items; claim with `tools/claim.py next <group> [--stage N]`.
 
-## Stage 1: nodes to split (370)
+## Stage 1: nodes to split (371)
 
 | node | distance to a target | Lean state on the done branch |
 |---|---|---|
@@ -22,7 +22,6 @@
 | `lem-weil-pbc-sections-morphism-to-proj-polynomial-ring` | 1015 | none |
 | `lem-weil-pbc-symmetric-projective-presentation-conormal` | 1015 | none |
 | `lem-weil-pbc-valuation-ring-normal` | 1015 | none |
-| `lem-weil-pbc-dimension-inequality-quasi-finite` | 1016 | none |
 | `lem-weil-pbc-dimension-preserved-field-extension` | 1016 | none |
 | `lem-weil-pbc-direct-sum-extension-assembly` | 1016 | none |
 | `lem-weil-pbc-projective-dimension-ext-characterization` | 1016 | none |
@@ -57,13 +56,13 @@
 | `lem-galois-aut-profinite` | 3006 | none |
 | `lem-galois-inverse-image-representable` | 3006 | none |
 | `lem-galois-pi1-finite-etale-image-stabilizer` | 3006 | none |
+| `lem-pc-presheaf-module-inverse-image-adjunction` | 3006 | none |
 | `lem-sc-flat-base-change-coherent` | 3006 | sorry_here |
 | `lem-weil-pbc-hypercover-finite-simplex-lifting` | 3006 | none |
 | `lem-weil-pbc-hypercover-free-resolution` | 3006 | none |
 | `lem-weil-pbc-hypercover-product` | 3006 | none |
 | `def-sc-divisor` | 3007 | none |
 | `lem-galois-transitive` | 3007 | none |
-| `lem-sc-divisor-class-curve` | 3007 | none |
 | `lem-sc-etale-affine-qcoherent` | 3007 | none |
 | `lem-sc-etale-qcoherent-descent` | 3007 | none |
 | `lem-sc-etale-zariski-qcoh-comparison` | 3007 | none |
@@ -88,8 +87,10 @@
 | `lem-galois-fpqc-morphisms-descend` | 3008 | none |
 | `lem-pc-curves-are-sc` | 3008 | none |
 | `lem-sc-degree-2g1-very-ample` | 3008 | rests_on_sorry |
+| `lem-sc-divisor-module-local` | 3008 | none |
 | `lem-sc-etale-qcoherent-presheaf-functorial` | 3008 | none |
 | `lem-sc-line-bundle-rational-section` | 3008 | rests_on_sorry |
+| `lem-sc-smooth-connected-curve-local-rings` | 3008 | none |
 | `lem-sc-sylow-module-filtration` | 3008 | none |
 | `lem-sc-zero-generic-acyclic` | 3008 | rests_on_sorry |
 | `thm-sc-theorem-of-the-base` | 3008 | rests_on_sorry |
@@ -865,7 +866,7 @@
 | `lem-weil-pbc-p1-field-dimension-one` | 4 | state |
 | `lem-weil-pbc-projective-space-zero-isomorphism` | 4 | state |
 
-Not open yet: 388 nodes that wait for stage 1, 899 nodes that wait for a statement dependency.
+Not open yet: 389 nodes that wait for stage 1, 901 nodes that wait for a statement dependency.
 
 ## Stage 3: modules to prove (0)
 
