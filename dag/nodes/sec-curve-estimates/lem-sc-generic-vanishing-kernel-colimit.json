@@ -26,9 +26,76 @@
   "def-pur-abelian-sheaf-kernel",
   "def-weil-pbc-category-colimit"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Let I be the poset of nonempty affine opens of C, ordered by reverse inclusion. It is nonempty because C is a nonempty integral scheme, and for U,V in I the intersection U ∩ V contains the generic point; the affine-open basis [lem-weil-pbc-affine-opens-basis] supplies a nonempty affine W ⊆ U ∩ V. Thus I is filtered. For V ⊆ U, naturality of the inverse-image/direct-image adjunction units gives a factorization u_V = (j_{U*}j_U^{-1}G → j_{V*}j_V^{-1}G) ∘ u_U, so the kernel inclusion K_U → K_V is defined by the universal property of kernels. These inclusions satisfy the identity and composition laws, hence form a filtered diagram of kernels.",
+   "uses": [
+    "def-pc-integral-scheme",
+    "lem-weil-pbc-affine-opens-basis",
+    "def-weil-pbc-inverse-image",
+    "def-weil-pbc-direct-image",
+    "def-pur-abelian-sheaf-kernel"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-curve-estimates/sk-prop-cd/lem-sc-generic-cohomology-comparison.md",
+    "place": "## Proof, acyclicity sentence: affine opens ordered by reverse inclusion and compatibility of the units; Lean GenericComparison.lean:164-181"
+   }
+  },
+  {
+   "text": "Let φ : colim_I K_U → G be the canonical map induced by the kernel inclusions. For every U there is a short exact sequence 0 → K_U → G → G/K_U → 0, where G/K_U is the cokernel of the kernel inclusion K_U → G (not of u_U), and the transition maps make these short exact sequences a diagram over I, with G the constant middle diagram. Exactness of filtered colimits in abelian sheaves [lem-weil-pbc-site-abelian-sheaves-filtered-colimits-exact] shows that the induced map from colim_I K_U to colim_I G is monic. The colimit of the constant diagram is canonically G, and under this identification the induced map is φ; hence φ is monic.",
+   "uses": [
+    "lem-weil-pbc-site-abelian-sheaves-filtered-colimits-exact",
+    "def-weil-pbc-category-colimit",
+    "def-pur-abelian-sheaf-kernel"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-curve-estimates/sk-prop-cd/lem-sc-generic-cohomology-comparison.md",
+    "place": "## Proof, acyclicity sentence: the colimit of kernels maps monomorphically to G; Lean GenericComparison.lean:171-186"
+   }
+  },
+  {
+   "text": "The assumed generic-vanishing condition says that for every section s of G over an etale object V, there is a covering {V_a → V} and, for each a, a nonempty affine U_a such that u_{U_a}(s|_{V_a}) = 0. By the sectionwise description of a kernel, s|_{V_a} is the image of a section of K_{U_a}; therefore every section of G is locally in the image of φ. The abelian-sheaf epi/local-surjectivity criterion [lem-weil-pbc-abelian-sheaf-epi-locally-surjective] implies that φ is an epimorphism.",
+   "uses": [
+    "lem-weil-pbc-abelian-sheaf-epi-locally-surjective",
+    "def-pur-abelian-sheaf-kernel",
+    "def-weil-pbc-category-colimit"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-curve-estimates/sk-prop-cd/lem-sc-generic-cohomology-comparison.md",
+    "place": "## Proof, acyclicity sentence: generic-vanishing covering hypothesis gives local surjectivity; Lean GenericComparison.lean:187-201"
+   }
+  },
+  {
+   "text": "The category of abelian sheaves is abelian, so a morphism that is both monic and epic is an isomorphism. Applying this to φ proves that the canonical morphism colim_U K_U → G is an isomorphism.",
+   "uses": [
+    "def-weil-pbc-abelian-etale-sheaves"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-curve-estimates/sk-prop-cd/lem-sc-generic-cohomology-comparison.md",
+    "place": "## Proof, acyclicity sentence: conclude the canonical map is an isomorphism; Lean GenericComparison.lean:202-211"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-integral-scheme",
+  "lem-weil-pbc-affine-opens-basis",
+  "def-weil-pbc-inverse-image",
+  "def-weil-pbc-direct-image",
+  "def-pur-abelian-sheaf-kernel",
+  "lem-weil-pbc-site-abelian-sheaves-filtered-colimits-exact",
+  "def-weil-pbc-category-colimit",
+  "lem-weil-pbc-abelian-sheaf-epi-locally-surjective",
+  "def-weil-pbc-abelian-etale-sheaves"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/blueprint/master/blueprint/sec-curve-estimates/sk-prop-cd/lem-sc-generic-cohomology-comparison.md",
+  "place": "## Proof, acyclicity sentence; Lean GenericComparison.lean:164-211"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -53,7 +120,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "chapter": "sec-curve-estimates",
  "unit": "sk-prop-cd",
  "created": {
@@ -69,5 +136,36 @@
    "state": "none"
   }
  },
- "merged_into": null
+ "merged_into": null,
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "lem-sc-generic-vanishing-kernel-colimit",
+  "worker": "stage1",
+  "summary": "Expanded the generic-vanishing kernel-colimit argument into four steps: filtered reverse-inclusion affine opens and kernel transitions, monicity from exact filtered colimits, local surjectivity from the generic-vanishing hypothesis, and the abelian mono-plus-epi conclusion. No new nodes were needed because the DAG already contains the affine-open basis, filtered-colimit exactness, and abelian-sheaf epi/local-surjectivity statements.",
+  "blueprint": "The steps realize the acyclicity sentence of lem-sc-generic-cohomology-comparison: affine-open kernels form the filtered diagram, the canonical map is mono and locally surjective, and hence an isomorphism.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-site-abelian-sheaves-filtered-colimits-exact",
+    "why": "Step 2 uses exactness of filtered colimits in abelian sheaves to prove the colimit-to-G map is monic; the sk-prop-cd route has no unit-specific replacement."
+   },
+   {
+    "node": "lem-weil-pbc-abelian-sheaf-epi-locally-surjective",
+    "why": "Step 3 uses the general abelian-sheaf criterion converting local lifts of sections into an epimorphism; the sk-prop-cd route has no unit-specific replacement."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-site-abelian-sheaves-filtered-colimits-exact",
+  "lem-weil-pbc-abelian-sheaf-epi-locally-surjective",
+  "lem-weil-pbc-site-abelian-sheaves-filtered-colimits-exact",
+  "lem-weil-pbc-abelian-sheaf-epi-locally-surjective"
+ ],
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-gvk",
+  "group": "M1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-gvk (reviewer sub-agent of L); spot-checked: Source: blueprint lem-sc-generic-cohomology-comparison proof (kernel/cokernel of F->eta_*eta^*F, acyclicity sentence) and Lean GenericComparison.lean:164-211 (diagram over NonemptyAffineOpens^op, mono via colim.map of a mono nat trans under AB5, epi via Sheaf.IsLocallySurjective, isIso_of_mono_of_epi); statement unchanged (imported), steps follow the Lean route. Step 1: def-pc-integral-scheme (nonempty, irreducible: two nonempty opens meet) + lem-weil-pbc-affine-opens-basis (affine W in U cap V) give a nonempty directed poset, filtered by def-weil-pbc-category-colimit; u_V factors through u_U from the adjunction of def-weil-pbc-inverse-image and the formula of def-weil-pbc-direct-image (W x_C V = (W x_C U) x_U V), kernel inclusion by def-pur-abelian-sheaf-kernel; checked K_U subset K_V for V subset U. Step 2: lem-weil-pbc-site-abelian-sheaves-filtered-colimits-exact applied to 0->K_U->G->G/K_U->0, constant colimit = G by def-weil-pbc-category-colimit. Step 3: hypothesis + sectionwise kernel (def-pur-abelian-sheaf-kernel) + lem-weil-pbc-abelian-sheaf-epi-locally-surjective (iff, small etale site of a scheme: hypotheses match). Step 4: Ab(C_et) abelian (def-weil-pbc-abelian-etale-sheaves), mono+epi iso. Tool uses accepted: both pbc lemmas are general black-box statements (mathlib leaves). Small case U=C: K_C=0 (unit is id). Fix: dag/nodes/sec-curve-estimates/lem-sc-generic-vanishing-kernel-colimit.json: proof[1].text: the short exact sequence read 0->K_U->G->coker(u_U)->0, which is not exact (G->coker(u_U) is zero); replaced coker(u_U) by G/K_U = coker(K_U->G), argument unchanged. Note: report mentions citations.json, which is not on the branch (harmless). Start 2026-10-10 15:24:42 UTC, end Sat Oct 10 03:25:18 PM UTC 2026 per date -u.; 1 file(s) fixed by the reviewer"
+ }
 }
