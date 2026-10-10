@@ -11,7 +11,7 @@
  },
  "kind": "statement",
  "title": "Affine full faithfulness for a perfect complex over a filtered colimit",
- "statement": "Let (A_i)_{i in I} be a filtered system of rings with colimit A, and let A_0 be one stage. Let E_0 be a bounded complex of finite projective A_0-modules and let K_0 be a complex of A_0-modules. Put E_i=E_0 tensor_{A_0} A_i, K_i=K_0 tensor_{A_0} A_i, E=E_0 tensor_{A_0} A, and K=K_0 tensor_{A_0} A. If K_0 is K-flat, then the canonical map $\\operatorname{colim}_{i \\ge 0} \\operatorname{Hom}_{D(A_i)}(E_i,K_i) \\to \\operatorname{Hom}_{D(A)}(E,K)$ is an isomorphism. Here $D(-)$ and K-flatness are the notions used in [def-pc-derived-category], and the bounded finite-projective source is the affine form of [def-pc-perfect-complex].",
+ "statement": "Let (A_i)_{i in I} be a filtered system of rings with colimit A, and let A_0 be one stage. Let E_0 and K_0 be bounded complexes of finite projective A_0-modules. Put E_i=E_0 tensor_{A_0} A_i, K_i=K_0 tensor_{A_0} A_i, E=E_0 tensor_{A_0} A, and K=K_0 tensor_{A_0} A. Then the canonical map $\\operatorname{colim}_{i \\ge 0} \\operatorname{Hom}_{D(A_i)}(E_i,K_i) \\to \\operatorname{Hom}_{D(A)}(E,K)$ is an isomorphism. Here $D(-)$ is the notion used in [def-pc-derived-category], and bounded finite-projective complexes are the affine form of [def-pc-perfect-complex].",
  "source": {
   "document": "literature/stacks-project/perfect.tex",
   "place": "Derived Categories of Schemes, Lemma 36.29.2, Tag 09RE, affine case in the proof (bounded finite projective source and K-flat target)"
@@ -20,9 +20,54 @@
   "def-pc-derived-category",
   "def-pc-perfect-complex"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Replace the derived Hom groups by the zeroth cohomology of the ordinary Hom complexes Hom_{A_i}^\\bullet(E_i,K_i) and Hom_A^\\bullet(E,K). Each E_i is bounded above with projective terms, and each K_i is bounded below, so the one-point affine specialization [lem-sc-affine-projective-complex-derived-hom] identifies these ordinary Hom complexes with the derived Hom objects R Hom_{A_i}(E_i,K_i) and R Hom_A(E,K). On the one-point ringed site with structure ring R the global sections functor is the identity of R-modules, so H^0 of the point of an object of D(R) is the zeroth cohomology of any representing complex, and [lem-pur-rhom-global-sections] gives H^0(R Hom_R(L,M)) = Hom_{D(R)}(L,M); hence Hom_{D(A_i)}(E_i,K_i)=H^0(Hom_{A_i}^\\bullet(E_i,K_i)) and Hom_{D(A)}(E,K)=H^0(Hom_A^\\bullet(E,K)), compatibly with scalar extension. The bounded finite-projective complexes K_i are K-flat by [lem-pc-module-bounded-flat-kflat], so the displayed tensor complexes represent their derived scalar extensions.",
+   "uses": [
+    "lem-sc-affine-projective-complex-derived-hom",
+    "lem-pur-rhom-global-sections",
+    "lem-pc-module-bounded-flat-kflat"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/perfect.tex",
+    "place": "Derived Categories of Schemes, Lemma 36.29.2, Tag 09RE, affine case"
+   }
+  },
+  {
+   "text": "In each degree n, the Hom complex is a finite product over the finitely many degrees p in which E_0^p is nonzero, of Hom_{A_i}(E_0^p\\otimes_{A_0}A_i,K_0^{p+n}\\otimes_{A_0}A_i). Each E_0^p and K_0^{p+n} is finite projective and hence finitely presented. The index set I carries the order i \\le j used for the stages, and a filtered preordered set is a directed set, so (A_i) is a directed system of commutative rings as required by [lem-pc-fp-module-map-descent-affine]. That statement therefore says that every A-linear component map E^p\\to K^{p+n} is the scalar extension of a map at one sufficiently late stage, and that two stage maps become equal at a later stage exactly when their scalar extensions to A agree. Since the differentials of the stage Hom complexes are the scalar extensions of those over A_0, the canonical map from the filtered colimit of the stage Hom complexes to Hom_A^\\bullet(E,K) is an isomorphism degreewise and commutes with differentials.",
+   "uses": [
+    "lem-pc-fp-module-map-descent-affine"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/perfect.tex",
+    "place": "Derived Categories of Schemes, Lemma 36.29.2, Tag 09RE, affine calculation"
+   }
+  },
+  {
+   "text": "For a filtered colimit of modules, a cycle in the colimit Hom complex is represented by a cycle at some stage: its differential is zero in the colimit, so the finite-presentation equality from Step 2 makes that differential zero after passing to a later stage. Likewise, two stage cycles have equal classes in the colimit exactly when their difference is the differential of a stage element after a later enlargement, again by the equality clause in Step 2. Thus the canonical degreewise isomorphism of Step 2 induces an isomorphism on zeroth cohomology, which is the asserted canonical map colim_i Hom_{D(A_i)}(E_i,K_i) ≅ Hom_{D(A)}(E,K).",
+   "uses": [
+    "lem-pc-fp-module-map-descent-affine"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/perfect.tex",
+    "place": "Derived Categories of Schemes, Lemma 36.29.2, Tag 09RE, affine calculation and conclusion"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sc-affine-projective-complex-derived-hom",
+  "lem-pur-rhom-global-sections",
+  "lem-pc-module-bounded-flat-kflat",
+  "lem-pc-fp-module-map-descent-affine"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/perfect.tex",
+  "place": "Derived Categories of Schemes, Lemma 36.29.2, Tag 09RE"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -54,12 +99,43 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-pc-perfect-descend-morphisms",
   "by": "worker",
   "date": "2026-10-10"
  },
  "chapter": "sec-picard-framework",
- "unit": "sk-thm-picard-semicon"
+ "unit": "sk-thm-picard-semicon",
+ "split_report": {
+  "date": "2026-10-11",
+  "item": "lem-pc-affine-perfect-hom-colimit",
+  "worker": "stage1",
+  "summary": "Split Tag 09RE's affine calculation into derived Hom represented by the ordinary Hom complex, descent of finite-projective component maps and differential relations across the filtered colimit, and the elementary cycle-boundary argument on cohomology. No new nodes were created; all inputs are existing DAG statements.",
+  "blueprint": "Realizes the ancestor Tag 09RE affine proof sentence: rewrite derived Hom from a bounded finite-projective complex as homotopy-complex maps and commute the finite-presentation calculation with the filtered colimit.",
+  "tool_uses": [
+   {
+    "node": "lem-sc-affine-projective-complex-derived-hom",
+    "why": "Its generic one-point derived-Hom computation is the input needed to represent the affine Hom groups by ordinary Hom complexes; the Picard-semicon unit has no equivalent local derived-Hom statement."
+   },
+   {
+    "node": "lem-pur-rhom-global-sections",
+    "why": "Generic identification H^0(R Hom(L,M)) = Hom_D(L,M) on a ringed site, specialized to the one-point site of a ring; needed to pass from the derived Hom object to the Hom group in D(A_i)."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sc-affine-projective-complex-derived-hom",
+  "lem-pur-rhom-global-sections",
+  "lem-sc-affine-projective-complex-derived-hom",
+  "lem-pur-rhom-global-sections"
+ ],
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-phc2904",
+  "group": "H1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-phc2904 (reviewer sub-agent of L); spot-checked: Statement change (K_0 K-flat -> bounded finite projective) named in second reading and matches the use in lem-pc-perfect-descend-morphisms Step 2 (Q_i[n] perfect, bounded finite projective via lem-pc-perfect-affine-bounded-projective); no duplication of sibling F1 lem-pc-fp-module-map-descent-affine, which is cited not restated; Step 3 H^0/filtered-colimit argument elementary and correct. FIX more, RETURN less: (1) C1 Step 1 used Hom_{D(R)}(L,M)=H^0(R Hom(L,M)) uncited (lem-sc-affine-projective-complex-derived-hom only represents R Hom by the Hom complex): now cites lem-pur-rhom-global-sections specialized to the one-point site (declared tool use, other unit, as generic tool), added to uses/proof_deps/tool_uses; (2) C4 Step 2 applied the directed-set node lem-pc-fp-module-map-descent-affine to a filtered system: added that the stages are indexed by a preorder (i>=0), and a filtered preorder is directed; also noted K_0^{p+n} finitely presented (both sides required) and dropped the irrelevant differential-relation clause (Hom^n terms are graded maps). Both missed by the second reading.; 1 file(s) fixed by the reviewer"
+ }
 }
