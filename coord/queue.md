@@ -1,8 +1,8 @@
 # Work queue
 
-913 items; claim with `tools/claim.py next <group> [--stage N]`.
+912 items; claim with `tools/claim.py next <group> [--stage N]`.
 
-## Stage 1: nodes to split (320)
+## Stage 1: nodes to split (318)
 
 | node | distance to a target | Lean state on the done branch |
 |---|---|---|
@@ -10,12 +10,10 @@
 | `lem-weil-pbc-injective-acyclicity-bounded-below` | 2002 | sorry_here |
 | `lem-weil-pbc-etale-sections-fpqc-descent` | 2006 | none |
 | `lem-weil-pbc-flat-fibres-irreducible` | 2006 | none |
-| `lem-weil-pbc-tensor-finite-type-limit` | 2006 | none |
 | `lem-weil-pbc-constant-sheaf-set-sections-connected-natural` | 2007 | none |
 | `lem-weil-pbc-etale-geometric-fibre-inverse-image-constant` | 2007 | none |
 | `lem-sc-noetherian-topological-cohomology-vanishing` | 2012 | none |
 | `lem-weil-pbc-sets-etale-inverse-image-exact` | 2012 | none |
-| `lem-sc-separated-affine-function-field-surjective` | 2013 | none |
 | `lem-sc-affine-standard-cover-finite-presentation-flat` | 2014 | none |
 | `lem-sc-ample-finite-affine-cover` | 2014 | none |
 | `lem-sc-ample-proj-local-chart` | 2014 | none |
@@ -23,6 +21,7 @@
 | `lem-sc-dvr-tensor-surjective-negative-valuation` | 2014 | none |
 | `lem-sc-dvr-valuation-arithmetic` | 2014 | none |
 | `lem-sc-free-prime-membership` | 2014 | none |
+| `lem-sc-local-domain-dim-one-principal-localization-fraction-field` | 2014 | none |
 | `lem-sc-semilocal-dedekind-dvr-reduction` | 2014 | none |
 | `lem-sc-semilocal-dim-one-conductor` | 2014 | none |
 | `lem-sc-zariski-contracted-power-extension` | 2015 | none |
@@ -49,7 +48,6 @@
 | `lem-sc-derived-internal-hom-stalk-localization` | 3014 | none |
 | `lem-sc-ext-coherent-hom-injective-acyclic` | 3014 | none |
 | `lem-sc-finite-duality-derived-hom` | 3014 | none |
-| `lem-sc-finite-locally-free-derived-hom` | 3014 | none |
 | `lem-sc-finite-pushforward-locally-free` | 3014 | none |
 | `lem-sc-global-sections-left-exact` | 3014 | none |
 | `lem-sc-p1-ext-pushout-postcompose` | 3014 | none |
@@ -327,7 +325,7 @@
 | `lem-pur-rhom-well-defined` | - | none |
 | `lem-zl-noether-normalization-dimension` | - | none |
 
-## Stage 2: nodes to state (593)
+## Stage 2: nodes to state (594)
 
 | node | distance to Mathlib | kind |
 |---|---|---|
@@ -855,6 +853,7 @@
 | `lem-weil-pbc-symmetric-algebra-quotient-module` | 1 | state |
 | `lem-weil-pbc-symmetric-projective-presentation-conormal` | 1 | state |
 | `lem-weil-pbc-tensor-field-extension-galois-invariants` | 1 | state |
+| `lem-weil-pbc-tensor-finite-type-limit` | 1 | state |
 | `lem-weil-pbc-termwise-adjunction-homotopy` | 1 | state |
 | `lem-weil-pbc-topological-inverse-image-stalk` | 1 | state |
 | `lem-weil-pbc-tor-dimension-shift-free` | 1 | state |
@@ -925,7 +924,7 @@
 | `lem-weil-pbc-p1-field-dimension-one` | 4 | state |
 | `lem-weil-pbc-projective-space-zero-isomorphism` | 4 | state |
 
-Not open yet: 337 nodes that wait for stage 1, 1226 nodes that wait for a statement dependency.
+Not open yet: 335 nodes that wait for stage 1, 1228 nodes that wait for a statement dependency.
 
 ## Stage 3: modules to prove (0)
 
