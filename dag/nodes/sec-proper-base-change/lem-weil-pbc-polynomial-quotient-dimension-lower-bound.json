@@ -12,9 +12,59 @@
   "def-kun-topological-krull-dimension",
   "def-weil-affine-spectrum"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Put $P=k[x_1,\\dots,x_m]$, $J=(f_1,\\dots,f_t)$ and let $\\pi:P\\to T=P/J$ be the quotient map. Since $T\\neq0$, the zero ideal of $T$ is proper, so [lem-weil-pbc-proper-ideal-contained-in-maximal] gives a maximal ideal $\\mathfrak n\\subset T$. Its inverse image $\\mathfrak M=\\pi^{-1}(\\mathfrak n)$ is a maximal ideal of $P$: indeed $P/\\mathfrak M\\cong T/\\mathfrak n$ is a field. Moreover $J\\subseteq\\mathfrak M$, and the correspondence of ideals for the quotient identifies $\\mathfrak n$ with $\\mathfrak M/J$.",
+   "uses": [
+    "lem-weil-pbc-proper-ideal-contained-in-maximal"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra, paragraph following Definition Tag 00S9 (definition-lci-field), lines 35834-35849: choose a maximal ideal containing the equations; existence also follows from Lemma Tag 00E0 (lemma-Zariski-topology), item (2)"
+   }
+  },
+  {
+   "text": "By [lem-weil-pbc-polynomial-ring-maximal-localization-dimension], $\\dim(P_{\\mathfrak M})=m$. By [lem-weil-pbc-localization-dimension-chains-below-prime], this is $\\operatorname{ht}(\\mathfrak M)$, while $\\dim(T_{\\mathfrak n})=\\operatorname{ht}(\\mathfrak n)$. The Noetherian ring $P$ is the finite type algebra $k[x_1,\\dots,x_m]$ over the Noetherian field $k$, hence is Noetherian by [lem-weil-pbc-finite-type-algebra-noetherian]. Applying [lem-weil-pbc-noetherian-height-quotient-bound] to $J=(f_1,\\dots,f_t)\\subseteq\\mathfrak M$ gives $m=\\operatorname{ht}(\\mathfrak M)\\leq\\operatorname{ht}(\\mathfrak M/J)+t=\\dim(T_{\\mathfrak n})+t$. Therefore $\\dim(T_{\\mathfrak n})\\geq m-t$. This is exactly the source's iteration of Tag 00KW at the maximal ideal $\\mathfrak M$.",
+   "uses": [
+    "lem-weil-pbc-polynomial-ring-maximal-localization-dimension",
+    "lem-weil-pbc-localization-dimension-chains-below-prime",
+    "lem-weil-pbc-finite-type-algebra-noetherian",
+    "lem-weil-pbc-noetherian-height-quotient-bound"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra, paragraph following Definition Tag 00S9 (definition-lci-field), lines 35834-35849, using Tag 00OP (lemma-dim-affine-space) and Tag 00KW (lemma-one-equation) t times"
+   }
+  },
+  {
+   "text": "The ring $T$ is a finitely generated $k$-algebra, being the quotient of $P$ by $J$. Hence [lem-weil-pbc-closed-point-dimension-local-ring], applied to the maximal ideal $\\mathfrak n$, identifies the dimension at $\\mathfrak n$ of $\\operatorname{Spec}T$ with $\\dim(T_{\\mathfrak n})$. By [lem-weil-pbc-dimension-supremum-local-dimensions], the Krull dimension of $\\operatorname{Spec}T$ is the supremum of its dimensions at points, so it is at least its dimension at $\\mathfrak n$. Step 2 therefore gives $\\dim(\\operatorname{Spec}T)\\geq\\dim(T_{\\mathfrak n})\\geq m-t$, as required.",
+   "uses": [
+    "lem-weil-pbc-closed-point-dimension-local-ring",
+    "lem-weil-pbc-dimension-supremum-local-dimensions"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra, paragraph following Definition Tag 00S9 (definition-lci-field), lines 35834-35849, together with Lemma Tag 00OU (dimension at a closed point) and Topology Lemma Tag 0B7I (dimension is the supremum of local dimensions)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-proper-ideal-contained-in-maximal",
+  "lem-weil-pbc-polynomial-ring-maximal-localization-dimension",
+  "lem-weil-pbc-localization-dimension-chains-below-prime",
+  "lem-weil-pbc-finite-type-algebra-noetherian",
+  "lem-weil-pbc-noetherian-height-quotient-bound",
+  "lem-weil-pbc-closed-point-dimension-local-ring",
+  "lem-weil-pbc-dimension-supremum-local-dimensions"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Algebra, paragraph following Definition Tag 00S9 (definition-lci-field), lines 35834-35849: choose a maximal ideal over the equations, use Tag 00OP and iterate Tag 00KW; passage from the local bound to the dimension of Spec is made explicit using Algebra Tag 00OU and Topology Tag 0B7I"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -39,7 +89,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "worker",
@@ -59,5 +109,18 @@
   }
  },
  "chapter": "sec-proper-base-change",
- "unit": "sk-thm-p1"
+ "unit": "sk-thm-p1",
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "lem-weil-pbc-polynomial-quotient-dimension-lower-bound",
+  "worker": "stage1",
+  "summary": "Kept the source-faithful statement and split the paragraph after Stacks Definition 00S9 into three steps: choose a maximal ideal of the nonzero quotient; apply 00OP and the t-fold 00KW height bound at its inverse image to obtain local dimension at least m-t; pass from that closed-point local dimension to the global topological dimension. All dependencies are existing public nodes; no new nodes were needed."
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "group": "E1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed by the lead of E1; spot-checked by L: L read the three steps (paragraph after 00S9): a maximal ideal of T, ht(M) = m in the polynomial ring and the height bound ht(M/J) >= m - t, dimension at the closed point and supremum of local dimensions."
+ }
 }
