@@ -1,0 +1,74 @@
+{
+ "id": "lem-weil-pbc-module-direct-image-left-exact",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "def-weil-pbc-direct-image",
+   "place": "statement, last sentence: 'With a fixed coefficient ring whose pullback is canonically identified with itself, the same functors act on module sheaves' (u_* on module sheaves, left exact)",
+   "via": []
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Direct image of etale sheaves of modules over a constant ring: module structure, additive and left exact",
+ "statement": "Let $u:U\\to V$ be a morphism of schemes [def-pc-scheme] and $R$ a commutative ring. For a scheme $T$ let $T_{\\Et}$ be its small etale site [def-weil-pbc-etale-site], $\\Ab(T_{\\Et})$ the category of abelian sheaves on it [def-weil-pbc-abelian-etale-sheaves], $R_T$ the constant sheaf of rings with value $R$ on $T_{\\Et}$ [def-weil-pbc-constant-sheaf] and $\\Mod(T_{\\Et},R)$ the abelian category of sheaves of $R_T$-modules [def-weil-sheaf-of-modules-category]. For a sheaf $G$ of abelian groups or of commutative rings on $U_{\\Et}$ let $u_*G$ be the sheaf $W\\mapsto G(W\\times_VU)$ on $V_{\\Et}$, $W\\times_VU$ the fibre product [def-pc-fibre-product], with restriction along $g:W_1\\to W_2$ that of $G$ along $g\\times\\mathrm{id}_U$ (a sheaf of the same kind by [lem-weil-pbc-etale-base-change-continuous]). Let $\\rho:R_V\\to u_*R_U$ be the morphism of sheaves of rings which, by the universal property of sheafification [def-weil-pbc-sheafification], extends the morphism from the constant presheaf of rings with value $R$ on $V_{\\Et}$ to $u_*R_U$ whose component at $W$ is the map $R\\to R_U(W\\times_VU)$ of the sheafification morphism of the constant presheaf $R$ on $U_{\\Et}$. Then: (1) for $F\\in\\Mod(U_{\\Et},R)$ the abelian sheaf $u_*F$, with the action $R_V(W)\\times F(W\\times_VU)\\to F(W\\times_VU)$, $(a,s)\\mapsto\\rho_W(a)\\,s$, is a sheaf of $R_V$-modules, and for an $R_U$-linear morphism $\\varphi:F\\to F'$ the morphism $u_*\\varphi$, $(u_*\\varphi)_W=\\varphi_{W\\times_VU}$, is $R_V$-linear; this defines a functor $u_*:\\Mod(U_{\\Et},R)\\to\\Mod(V_{\\Et},R)$ whose composite with the forgetful functor to $\\Ab(V_{\\Et})$ is the composite of the forgetful functor to $\\Ab(U_{\\Et})$ with $u_*:\\Ab(U_{\\Et})\\to\\Ab(V_{\\Et})$; (2) this functor is additive and left exact [def-sp-left-exact-additive]: it preserves finite products and kernels, so for every exact sequence $0\\to F_1\\to F_2\\to F_3$ of $\\Mod(U_{\\Et},R)$ the sequence $0\\to u_*F_1\\to u_*F_2\\to u_*F_3$ is exact in $\\Mod(V_{\\Et},R)$.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Section 071J (section-derived-functors), paragraph before the definition of Rf_*: 'If f is a morphism of ringed topoi then we get a left exact functor f_*: Mod(O) -> Mod(O')'; the abelian case: literature/stacks-project/etale-cohomology.tex Section 03PV, paragraph after Definition 03PY; the module structure through R_V -> u_*R_U is the source's 'with a fixed coefficient ring whose pullback is canonically identified with itself, the same functors act on module sheaves' (blueprint node def-weil-pbc-direct-image)"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-pbc-etale-site",
+  "def-weil-pbc-abelian-etale-sheaves",
+  "def-weil-pbc-constant-sheaf",
+  "def-weil-sheaf-of-modules-category",
+  "def-pc-fibre-product",
+  "lem-weil-pbc-etale-base-change-continuous",
+  "def-weil-pbc-sheafification",
+  "def-sp-left-exact-additive"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "pushforward of sheaves of modules along a continuous functor preserves finite limits, left exact",
+   "results": "SheafOfModules.pushforward and pushforward_map_val (Mathlib.Algebra.Category.ModuleCat.Sheaf.PushforwardContinuous); Functor.sheafPushforwardContinuous; SheafOfModules.pushforwardSections; PresheafOfModules.pushforward0",
+   "date": "2026-10-10",
+   "verdict": "clause (1) data only: SheafOfModules.pushforward (PushforwardContinuous.lean:44, read lines 20-50) is the pushforward of sheaves of modules along a continuous functor F and a morphism of sheaves of rings phi : S -> F_*R; no left exactness or additivity"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Limits.PreservesFiniteLimits (SheafOfModules.pushforward _)",
+   "results": "none",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rn 'pushforward' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/Algebra/Category/ModuleCat/Sheaf/ ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/Algebra/Category/ModuleCat/Presheaf/ | grep -i 'PreservesFiniteLimits\\|PreservesLimits\\|Additive\\|Linear'; grep -rn 'SheafOfModules.pushforward' ~/weil-conjectures-slopmaster2/WeilConjectures | grep -i 'preserves\\|additive\\|instance'",
+   "results": "none in Mathlib; none in slopmaster2 (its etale sheaves of modules are ModuleCat R-valued sheaves, for which AlgebraicGeometry.Etale.preservesFiniteLimits_lowerStar with A = ModuleCat R is the analogue, a different model of Mod(T_Et,R))",
+   "date": "2026-10-10",
+   "verdict": "no match; candidate for clause (1): SheafOfModules.pushforward with phi = rho; clause (2) not in Mathlib"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "def-weil-pbc-direct-image",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-curve-estimates",
+ "unit": "sk-prop-h2"
+}

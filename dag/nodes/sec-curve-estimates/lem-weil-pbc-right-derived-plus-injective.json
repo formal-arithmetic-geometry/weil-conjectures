@@ -1,0 +1,82 @@
+{
+ "id": "lem-weil-pbc-right-derived-plus-injective",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "def-weil-pbc-direct-image",
+   "place": "statement, second sentence: 'If K -> I(K) is a K-injective resolution, set Ru_*K = u_*I(K), Ru_*: D^+(U_Et) -> D^+(V_Et)' (that this defines a functor on D^+, independent of the resolution)",
+   "via": []
+  },
+  "same_as": [
+   "lem-sp-kinjective-computes"
+  ]
+ },
+ "kind": "statement",
+ "title": "Right derived functor on bounded below derived categories, computed on bounded below complexes of injectives",
+ "statement": "Let $\\mathcal A,\\mathcal B$ be abelian categories [def-sp-abelian], $\\mathcal A$ with enough injectives (every object is a subobject of an injective object [def-sp-injective-resolutions]), and $v:\\mathcal A\\to\\mathcal B$ an additive functor. For an abelian category $\\mathcal C$ let $K^+(\\mathcal C)$ be the full subcategory of the homotopy category of cochain complexes of $\\mathcal C$ [def-weil-abstract-derived-category] whose objects are the bounded below complexes ($L^n=0$ for $n\\ll0$), let $D^+(\\mathcal C)$ be the bounded below derived category [def-weil-pbc-bounded-derived-subcategories] and $Q^+_{\\mathcal C}:K^+(\\mathcal C)\\to D^+(\\mathcal C)$ the localization at the quasi-isomorphisms; let $K^+(v):K^+(\\mathcal A)\\to K^+(\\mathcal B)$ be $v$ applied termwise (it respects homotopies since $v$ is additive). Then: (1) there are a functor $Rv:D^+(\\mathcal A)\\to D^+(\\mathcal B)$ and a natural transformation $\\alpha:Q^+_{\\mathcal B}\\circ K^+(v)\\to Rv\\circ Q^+_{\\mathcal A}$ such that $(Rv,\\alpha)$ is a right derived functor of $v$, i.e. a left Kan extension of $Q^+_{\\mathcal B}\\circ K^+(v)$ along $Q^+_{\\mathcal A}$: for every functor $G:D^+(\\mathcal A)\\to D^+(\\mathcal B)$ and every natural transformation $\\beta:Q^+_{\\mathcal B}\\circ K^+(v)\\to G\\circ Q^+_{\\mathcal A}$ there is a unique natural transformation $\\gamma:Rv\\to G$ with $\\gamma_{Q^+_{\\mathcal A}L}\\circ\\alpha_L=\\beta_L$ for all $L$; (2) for every bounded below complex $I$ of injective objects of $\\mathcal A$ the morphism $\\alpha_I:Q^+_{\\mathcal B}(v(I))\\to Rv(Q^+_{\\mathcal A}I)$ is an isomorphism; (3) if $(Rv',\\alpha')$ is another pair with the property of (1), there is a unique isomorphism $\\theta:Rv\\xrightarrow{\\sim}Rv'$ with $\\theta_{Q^+_{\\mathcal A}L}\\circ\\alpha_L=\\alpha'_L$ for all $L$.",
+ "source": {
+  "document": "literature/stacks-project/derived.tex",
+  "place": "Lemma 05TI (lemma-enough-injectives-right-derived), part (2): for A with enough injectives and an additive F: A -> B, RF: D^+(A) -> D^+(B) is everywhere defined; Lemma 05TH (lemma-injective-acyclic), part (1), cited in its proof: a bounded below complex of injectives computes RF (clause (2)); Section 05S7 (section-derived-functors), Definition 05S9 (RF defined at X, its value) and Lemma 05SA (lemma-derived-functor: the values are functorial, uniquely). Mathlib defines RF as a left Kan extension along the localization (clauses (1), (3)), which is the derived functor of Stacks where it is everywhere defined."
+ },
+ "stmt_deps": [
+  "def-sp-abelian",
+  "def-sp-injective-resolutions",
+  "def-weil-abstract-derived-category",
+  "def-weil-pbc-bounded-derived-subcategories"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "right derived functor on the bounded below derived category of an additive functor with enough injectives, unit isomorphism on complexes of injectives",
+   "results": "Functor.rightDerived, rightDerived_map_eq, rightDerivedZeroIsoSelf, instIsIsoAppToRightDerivedZeroOfInjective (Mathlib.CategoryTheory.Abelian.RightDerived); Functor.IsRightDerivedFunctor and isRightDerivedFunctor_iff_isIso_rightDerivedDesc (Mathlib.CategoryTheory.Functor.Derived.RightDerived); InjectiveResolution.isoRightDerivedObj_hom_naturality",
+   "date": "2026-10-10",
+   "verdict": "the abstract notion IsRightDerivedFunctor; the D^+ functor found by loogle"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.rightDerivedFunctorPlus",
+   "results": "Functor.rightDerivedFunctorPlus : DerivedCategory.Plus C ⥤ DerivedCategory.Plus D for F additive, C with EnoughInjectives (Mathlib.Algebra.Homology.DerivedCategory.RightDerivedFunctorPlus); its IsRightDerivedFunctor instances; NatTrans.rightDerivedFunctorPlus (the loogle server's Mathlib is newer and also lists CommShift instances not in the pinned Mathlib)",
+   "date": "2026-10-10",
+   "verdict": "match (clause (1))"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "total right derived functor D^+(C) to D^+(D) of an additive functor, isomorphic to F applied to a bounded below complex of injective objects",
+   "results": "Functor.mapDerivedCategoryFactorsh, mapDerivedCategoryFactors, mapDerivedCategoryFactorsh_hom_app (exact functors, Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor); Functor.toRightDerivedZero; lifting instance for mapDerivedCategory",
+   "date": "2026-10-10",
+   "verdict": "no further match (exact-functor case only)"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -n 'instance\\|def ' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/Algebra/Homology/DerivedCategory/RightDerivedFunctorPlus.lean; sed -n 1,66p of it; sed -n 350,410p ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/Algebra/Homology/DerivedCategory/DerivabilityStructureInjectives.lean; sed -n 92,140p ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/CategoryTheory/Functor/Derived/RightDerived.lean",
+   "results": "rightDerivedFunctorPlus (RightDerivedFunctorPlus.lean:36) = totalRightDerived of F.mapHomotopyCategoryPlus ⋙ DerivedCategory.Plus.Qh along Qh; rightDerivedFunctorPlusUnit (:45); instance IsRightDerivedFunctor (:51); instance IsIso (α.app K) for K : HomotopyCategory.Plus C with all K.obj.as.X n injective, for any right derived functor (F', α) of a functor on HomotopyCategory.Plus C (DerivabilityStructureInjectives.lean:378); rightDerived_ext (RightDerived.lean:94), rightDerivedUnique (:139)",
+   "date": "2026-10-10",
+   "verdict": "match, one declaration per clause"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "CategoryTheory.Functor.rightDerivedFunctorPlus",
+  "file": "Mathlib/Algebra/Homology/DerivedCategory/RightDerivedFunctorPlus.lean",
+  "how": "one Mathlib declaration per clause, for C = A, D = B with [HasDerivedCategory] (the size instance of the derived categories), F = v with [F.Additive] [EnoughInjectives C]: K^+(C) is HomotopyCategory.Plus C (Mathlib/Algebra/Homology/HomotopyCategory/Plus.lean:137, the homotopy classes of bounded below complexes, plus_quotient_obj_iff at :90) with HomotopyCategory.Plus.quasiIso (:151), Q^+ is DerivedCategory.Plus.Qh (Mathlib/Algebra/Homology/DerivedCategory/Plus.lean:62), K^+(v) is F.mapHomotopyCategoryPlus (HomotopyCategory/Plus.lean:265). (1) Rv = F.rightDerivedFunctorPlus (RightDerivedFunctorPlus.lean:36), alpha = F.rightDerivedFunctorPlusUnit (:45), and the instance at :51 gives F.rightDerivedFunctorPlus.IsRightDerivedFunctor F.rightDerivedFunctorPlusUnit (HomotopyCategory.Plus.quasiIso C), i.e. IsLeftKanExtension (Mathlib/CategoryTheory/Functor/Derived/RightDerived.lean:55), whose universal property is rightDerivedDesc/rightDerived_fac (:77, :82) with uniqueness rightDerived_ext (:94). (2) the instance at Mathlib/Algebra/Homology/DerivedCategory/DerivabilityStructureInjectives.lean:378: IsIso (alpha.app K) for every K : HomotopyCategory.Plus C all of whose terms K.obj.as.X n are injective, for every right derived functor (F', alpha) of a functor from HomotopyCategory.Plus C (applied to F.mapHomotopyCategoryPlus ⋙ DerivedCategory.Plus.Qh and the pair of (1); the same file's example at :400-405 is this application). (3) Functor.rightDerivedUnique (RightDerived.lean:139, rightDerivedNatIso with the identity, compatible with the units by rightDerivedNatTrans_fac :105) and uniqueness by rightDerived_ext (:94)."
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "def-weil-pbc-direct-image",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-curve-estimates",
+ "unit": "sk-prop-h2"
+}
