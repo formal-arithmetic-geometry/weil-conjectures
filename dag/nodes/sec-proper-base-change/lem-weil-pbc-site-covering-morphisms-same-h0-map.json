@@ -1,0 +1,69 @@
+{
+ "id": "lem-weil-pbc-site-covering-morphisms-same-h0-map",
+ "kind": "statement",
+ "title": "Two morphisms of coverings over the same morphism induce the same map on zeroth Cech sets",
+ "statement": "Let $\\mathcal C$ be a site [def-weil-pbc-sites-and-cohomology] and $\\mathcal F$ a presheaf of sets on $\\mathcal C$. Let $\\mathcal U=\\{U_i\\to U\\}_{i\\in I}$ and $\\mathcal V=\\{\\rho_j:V_j\\to V\\}_{j\\in J}$ be coverings, and let $f=(\\chi,\\alpha,(f_i)_{i\\in I})$ and $g=(\\chi,\\beta,(g_i)_{i\\in I})$ be two morphisms of coverings $\\mathcal U\\to\\mathcal V$ lying over the same morphism $\\chi:U\\to V$ (so $f_i:U_i\\to V_{\\alpha(i)}$, $g_i:U_i\\to V_{\\beta(i)}$, $\\rho_{\\alpha(i)}f_i=\\rho_{\\beta(i)}g_i=\\chi\\circ(U_i\\to U)$), with induced maps $f^*,g^*:H^0(\\mathcal V,\\mathcal F)\\to H^0(\\mathcal U,\\mathcal F)$, $(f^*s)_i=\\mathcal F(f_i)(s_{\\alpha(i)})$, $(g^*s)_i=\\mathcal F(g_i)(s_{\\beta(i)})$, as in [def-weil-pbc-site-plus-construction] (a), (b). Then $f^*=g^*$. In particular, if $\\mathcal U$ and $\\mathcal V$ are coverings of the same object, every morphism of coverings $\\mathcal U\\to\\mathcal V$ over the identity induces the same map $H^0(\\mathcal V,\\mathcal F)\\to H^0(\\mathcal U,\\mathcal F)$.",
+ "source": {
+  "document": "literature/stacks-project/sites.tex",
+  "place": "Sites, Lemma 00W7 (lemma-independent-refinement) and its proof; Remark 00W8 (remark-both-refine-same-H0)"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-sites-and-cohomology",
+  "def-weil-pbc-site-plus-construction"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "two refinement maps between covering families induce the same map on compatible families of sections (zeroth Cech cohomology)",
+   "results": "CategoryTheory.Meq.refine_apply, Meq.pullback_refine (Mathlib.CategoryTheory.Sites.ConcreteSheafification), AlgebraicGeometry.Scheme.Cover.Hom.w (Mathlib.AlgebraicGeometry.Cover.MorphismProperty), GrothendieckTopology.OneHypercover.arrowsCompatible (Sites.Hypercover.One), Precoverage.ZeroHypercover.glueMorphisms.congr_simp",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "pulling back a compatible family of elements along a refinement of covers does not depend on the chosen refinement morphism",
+   "results": "Meq.pullback_refine, Meq.pullback_apply, Meq.pullback (Sites.ConcreteSheafification), Presieve.FamilyOfElements.Compatible.pullback, Presieve.pullbackCompatible_iff, Presieve.Arrows.pullbackCompatible_iff, FamilyOfElements.PullbackCompatible (Sites.IsSheafFor)",
+   "date": "2026-10-10",
+   "verdict": "no match (sieve-indexed matching families have no choice of refinement morphism)"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.PreOneHypercover.Homotopy.mapMultiforkOfIsLimit_eq",
+   "results": "CategoryTheory.PreOneHypercover.Homotopy.mapMultiforkOfIsLimit_eq (Mathlib.CategoryTheory.Sites.Hypercover.Homotopy): homotopic refinements f g : E.Hom F of pre-1-hypercovers of one object S induce the same map on multiequalizers",
+   "date": "2026-10-10",
+   "verdict": "generalization in another formalism, not one line: it is stated for pre-1-hypercovers of a single object (morphisms over id_S only) and needs a Homotopy f g, i.e. the 1-hypercover structure on V given by the fibre products V_j x_V V_j' and the lifts U_i -> V_alpha(i) x_V V_beta(i); building the PreOneHypercover of a covering of a site, the multifork as H^0 and the homotopy is several lines, and the node's case over a general chi : U -> V is not covered"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -n 'Homotopy\\|mapMultiforkOfIsLimit\\|structure Hom' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/CategoryTheory/Sites/Hypercover/Homotopy.lean Hypercover/Zero.lean; grep -rln 'Arrows.Compatible' Mathlib/CategoryTheory/Sites",
+   "results": "Hypercover/Homotopy.lean:46 structure Homotopy, :64 Homotopy.mapMultiforkOfIsLimit_eq; Hypercover/Zero.lean:268 structure PreZeroHypercover.Hom (refinements over id_S); IsSheafFor.lean, Hypercover/SheafOfTypes.lean (Arrows.Compatible); no statement for two morphisms of zero-hypercovers / families of coverings over a general morphism",
+   "date": "2026-10-10",
+   "verdict": "no match (see loogle entry)"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-site-plus-construction-presheaf",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1"
+}

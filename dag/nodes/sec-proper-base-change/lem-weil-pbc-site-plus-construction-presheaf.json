@@ -11,9 +11,94 @@
   "def-weil-pbc-sites-and-cohomology",
   "def-weil-pbc-site-plus-construction"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "*The colimit is a filtered colimit over the coverings ordered by refinement.* Fix $U$ and let $D_U:\\mathcal J_U^{opp}\\to$ sets, $\\mathcal U\\mapsto H^0(\\mathcal U,\\mathcal F)$, $f\\mapsto f^*$, with colimit $(\\mathcal F^+(U),(\\iota_{\\mathcal U}))$, $\\iota_{\\mathcal U}(s)=[\\mathcal U,s]$ [def-weil-pbc-site-plus-construction] (c). The category $\\mathcal J_U^{opp}$ itself need not be filtered (two different morphisms of coverings $\\mathcal V\\to\\mathcal U$ need not be equalized by precomposition); following Stacks (the diagram is filtered in the sense of Categories, Definition 002V, and the footnote there) we pass to the preorder. Let $P_U$ be the category whose objects are the coverings of $U$, with exactly one morphism $\\mathcal V\\to\\mathcal U$ if $\\mathcal V$ refines $\\mathcal U$ (there is a morphism $\\mathcal V\\to\\mathcal U$ in $\\mathcal J_U$) and none otherwise; it is a small category, since refinement is reflexive (identity morphism of coverings) and transitive (composition of morphisms of coverings over $\\mathrm{id}_U$) [def-weil-pbc-site-plus-construction] (b), and the coverings of $U$ form a set [def-weil-pbc-sites-and-cohomology]. By [lem-weil-pbc-site-covering-morphisms-same-h0-map], all morphisms $f:\\mathcal V\\to\\mathcal U$ in $\\mathcal J_U$ induce one and the same map $\\rho_{\\mathcal V\\mathcal U}=f^*:H^0(\\mathcal U,\\mathcal F)\\to H^0(\\mathcal V,\\mathcal F)$; since $(g\\circ f)^*=f^*g^*$ and $\\mathrm{id}^*=\\mathrm{id}$ [def-weil-pbc-site-plus-construction] (b), $D'_U:P_U^{opp}\\to$ sets, $\\mathcal U\\mapsto H^0(\\mathcal U,\\mathcal F)$, $(\\mathcal V\\le\\mathcal U)\\mapsto\\rho_{\\mathcal V\\mathcal U}$, is a functor with $D_U=D'_U\\circ q$ for the evident functor $q:\\mathcal J_U^{opp}\\to P_U^{opp}$ (identity on objects). A family of maps $\\mu_{\\mathcal U}:H^0(\\mathcal U,\\mathcal F)\\to M$ is a cocone on $D_U$ iff $\\mu_{\\mathcal V}f^*=\\mu_{\\mathcal U}$ for every morphism $f:\\mathcal V\\to\\mathcal U$ of $\\mathcal J_U$, iff $\\mu_{\\mathcal V}\\rho_{\\mathcal V\\mathcal U}=\\mu_{\\mathcal U}$ whenever $\\mathcal V$ refines $\\mathcal U$, iff it is a cocone on $D'_U$. So $D_U$ and $D'_U$ have the same cocones, and $(\\mathcal F^+(U),(\\iota_{\\mathcal U}))$, a colimit of $D_U$, is a colimit of $D'_U$ [def-weil-pbc-category-colimit] (the factorization property is the same condition). Finally $P_U^{opp}$ is filtered [def-weil-pbc-category-colimit]: it has the object $\\{\\mathrm{id}_U\\}$ (axiom (i) of a site); two coverings $\\mathcal U,\\mathcal U'$ of $U$ have a common refinement $\\mathcal W$ with morphisms $\\mathcal W\\to\\mathcal U$, $\\mathcal W\\to\\mathcal U'$ over $\\mathrm{id}_U$ [lem-weil-pbc-site-coverings-common-refinement], i.e. arrows $\\mathcal U\\to\\mathcal W$, $\\mathcal U'\\to\\mathcal W$ in $P_U^{opp}$; and two parallel arrows of $P_U^{opp}$ are equal.",
+   "uses": [
+    "def-weil-pbc-site-plus-construction",
+    "def-weil-pbc-sites-and-cohomology",
+    "lem-weil-pbc-site-covering-morphisms-same-h0-map",
+    "lem-weil-pbc-site-coverings-common-refinement",
+    "def-weil-pbc-category-colimit"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Sites, Section 00W1: the paragraph after Remark 00W8 ('From these two lemmas, and the fact that J_U is nonempty, it follows that the diagram H^0(-,F): J_U^opp -> Sets is filtered'), using Lemmas 00W6 and 00W7; literature/stacks-project/categories.tex, Definition 002V and the footnote after it (passing to the quotient index category)"
+   }
+  },
+  {
+   "text": "*Clauses (1) and (2).* Apply [lem-weil-pbc-filtered-colimit-sets-elementwise] to the filtered category $P_U^{opp}$ and the functor $D'_U$ with colimit $(\\mathcal F^+(U),(\\iota_{\\mathcal U}))$ (Step 1). Its clause (1) says every element of $\\mathcal F^+(U)$ is $\\iota_{\\mathcal U}(s)=[\\mathcal U,s]$ for a covering $\\mathcal U$ of $U$ and $s\\in H^0(\\mathcal U,\\mathcal F)$: this is (1). Its clause (2) says $[\\mathcal U,s]=[\\mathcal U',s']$ iff there is an object $\\mathcal V$ of $P_U^{opp}$ with arrows $\\mathcal U\\to\\mathcal V$, $\\mathcal U'\\to\\mathcal V$ in $P_U^{opp}$ such that $\\rho_{\\mathcal V\\mathcal U}(s)=\\rho_{\\mathcal V\\mathcal U'}(s')$; an arrow $\\mathcal U\\to\\mathcal V$ of $P_U^{opp}$ means that there is a morphism of coverings $f:\\mathcal V\\to\\mathcal U$ over $\\mathrm{id}_U$, and then $\\rho_{\\mathcal V\\mathcal U}=f^*$ for every such $f$ (Step 1). Hence $[\\mathcal U,s]=[\\mathcal U',s']$ iff there are a covering $\\mathcal V$ of $U$ and morphisms of coverings $f:\\mathcal V\\to\\mathcal U$, $f':\\mathcal V\\to\\mathcal U'$ over $\\mathrm{id}_U$ with $f^*s=f'^*s'$: this is the main assertion of (2).",
+   "uses": [
+    "lem-weil-pbc-filtered-colimit-sets-elementwise",
+    "def-weil-pbc-site-plus-construction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Sites, Section 00W1, the paragraph after Remark 00W8 ('every element in the set F^+(U) arises from an element s in H^0(U,F) ... s and s' determine the same element of the colimit if and only if there exists a covering V of U and refinements f, f' such that f^*s = (f')^*s''); Categories, Section 04AX"
+   }
+  },
+  {
+   "text": "*The case of $\\theta$ in (2).* Let $a,b\\in\\mathcal F(U)$, so $\\theta_U(a)=[\\{\\mathrm{id}_U\\},a]$, $\\theta_U(b)=[\\{\\mathrm{id}_U\\},b]$ with $H^0(\\{\\mathrm{id}_U\\},\\mathcal F)=\\mathcal F(U)$ [def-weil-pbc-site-plus-construction] (c). For a covering $\\mathcal V=\\{v_k:V_k\\to U\\}_{k\\in K}$, a morphism of coverings $f:\\mathcal V\\to\\{\\mathrm{id}_U\\}$ over $\\mathrm{id}_U$ consists of the unique map $K\\to\\{*\\}$ and morphisms $f_k:V_k\\to U$ with $\\mathrm{id}_U\\circ f_k=\\mathrm{id}_U\\circ v_k$, i.e. $f_k=v_k$; so there is exactly one such morphism, and $(f^*a)_k=\\mathcal F(v_k)(a)=a|_{V_k}$ [def-weil-pbc-site-plus-construction] (b). By the main assertion of (2) (Step 2) with $\\mathcal U=\\mathcal U'=\\{\\mathrm{id}_U\\}$: $\\theta_U(a)=\\theta_U(b)$ iff there is a covering $\\mathcal V=\\{V_k\\to U\\}$ of $U$ (the morphisms $f,f'$ to $\\{\\mathrm{id}_U\\}$ then exist and are equal) with $f^*a=f^*b$, i.e. $a|_{V_k}=b|_{V_k}$ for all $k$.",
+   "uses": [
+    "def-weil-pbc-site-plus-construction"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Sites, Section 00W1, the paragraph after Remark 00W8, specialized to the trivial covering {id_U} (used in the proof of Theorem 00WB(2))"
+   }
+  },
+  {
+   "text": "*Clause (3), the formula.* Let $h:V\\to U$, $\\mathcal U=\\{\\pi_i:U_i\\to U\\}_{i\\in I}$, $\\mathcal W=\\{w_l:W_l\\to V\\}_{l\\in L}$ a covering of $V$, and $g=(h,\\gamma,(g_l)_{l\\in L}):\\mathcal W\\to\\mathcal U$ a morphism of coverings over $h$, so $\\pi_{\\gamma(l)}g_l=h\\,w_l$. By definition [def-weil-pbc-site-plus-construction] (c), $\\mathcal F^+(h)[\\mathcal U,s]=[\\mathcal U\\times_UV,p_{\\mathcal U}^*s]$ with the chosen fibre products $U_i\\times_UV$ and $p_{\\mathcal U}=(h,\\mathrm{id}_I,(\\mathrm{pr}_1)_i)$. Since $\\pi_{\\gamma(l)}g_l=h\\,w_l$, the universal property of $U_{\\gamma(l)}\\times_UV$ gives a unique $k_l:W_l\\to U_{\\gamma(l)}\\times_UV$ with $\\mathrm{pr}_1k_l=g_l$ and $\\mathrm{pr}_2k_l=w_l$. Then $k=(\\mathrm{id}_V,\\gamma,(k_l)):\\mathcal W\\to\\mathcal U\\times_UV$ is a morphism of coverings over $\\mathrm{id}_V$ (the condition is $\\mathrm{pr}_2k_l=\\mathrm{id}_V w_l$), i.e. a morphism of $\\mathcal J_V$, and $p_{\\mathcal U}\\circ k=(h\\,\\mathrm{id}_V,\\gamma,(\\mathrm{pr}_1k_l))=(h,\\gamma,(g_l))=g$ (composition of morphisms of coverings, [def-weil-pbc-site-plus-construction] (b)). Hence $g^*s=k^*p_{\\mathcal U}^*s$ by functoriality of $(-)^*$ [def-weil-pbc-site-plus-construction] (b), and by the cocone property of the coprojections $\\iota^V$ of $\\mathcal F^+(V)$ for the morphism $k$ of $\\mathcal J_V$ [def-weil-pbc-category-colimit], $[\\mathcal W,g^*s]=\\iota^V_{\\mathcal W}(k^*p_{\\mathcal U}^*s)=\\iota^V_{\\mathcal U\\times_UV}(p_{\\mathcal U}^*s)=\\mathcal F^+(h)[\\mathcal U,s]$.",
+   "uses": [
+    "def-weil-pbc-site-plus-construction",
+    "def-weil-pbc-category-colimit"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Sites, Section 00W1, the remark after Lemma 00W4 ('we may pullback an element s as above via any morphism from any covering of W to {U_i -> U} and we will always end up with the same element'); written out by the agent, without Lemma 00W7, from the construction of F^+(h) before Lemma 00W4"
+   }
+  },
+  {
+   "text": "*Clause (3), independence of the fibre products and the factorization case.* If $U_i\\times'_UV$ is another choice of fibre products, with projections $\\mathrm{pr}'_1,\\mathrm{pr}'_2$, then $\\mathcal U\\times'_UV=\\{U_i\\times'_UV\\to V\\}$ is a covering of $V$ (the canonical isomorphisms $\\phi_i:U_i\\times'_UV\\to U_i\\times_UV$ over $V$ give coverings $\\{\\phi_i\\}$ by axiom (i), and composing them with the covering $\\mathcal U\\times_UV$ gives a covering by axiom (ii) [def-weil-pbc-sites-and-cohomology]) and $p'_{\\mathcal U}=(h,\\mathrm{id}_I,(\\mathrm{pr}'_1))$ is a morphism of coverings over $h$; by Step 4, $[\\mathcal U\\times'_UV,p'^*_{\\mathcal U}s]=\\mathcal F^+(h)[\\mathcal U,s]$, so the map defined with the other choices agrees with $\\mathcal F^+(h)$ on every class, hence everywhere by (1) (Step 2). Factorization case: if $h=\\pi_i\\circ c$ with $c:V\\to U_i$, then $\\{\\mathrm{id}_V\\}$ is a covering of $V$ (axiom (i)) and $g=(h,\\,*\\mapsto i,\\,c):\\{\\mathrm{id}_V\\}\\to\\mathcal U$ is a morphism of coverings over $h$, the condition being $\\pi_ic=h\\,\\mathrm{id}_V$; $g^*s=\\mathcal F(c)(s_i)=s_i|_V\\in H^0(\\{\\mathrm{id}_V\\},\\mathcal F)=\\mathcal F(V)$, so by Step 4 $\\mathcal F^+(h)[\\mathcal U,s]=[\\{\\mathrm{id}_V\\},s_i|_V]=\\theta_V(s_i|_V)$ [def-weil-pbc-site-plus-construction] (c).",
+   "uses": [
+    "def-weil-pbc-site-plus-construction",
+    "def-weil-pbc-sites-and-cohomology"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Sites, Section 00W1: footnote to the construction of F^+(V) -> F^+(U) ('The resulting map does not depend on the choices made, see below') and the proof of Lemma 00W9 (lemma-plus-surjective: the morphism of coverings {U_i -> U_i} -> {U_i -> U} computes the restriction as theta(s_i))"
+   }
+  },
+  {
+   "text": "*Clause (4).* Identity: the identity $(\\mathrm{id}_U,\\mathrm{id}_I,(\\mathrm{id}_{U_i}))$ of $\\mathcal U$ is a morphism of coverings over $\\mathrm{id}_U$ [def-weil-pbc-site-plus-construction] (b), so by Step 4 $\\mathcal F^+(\\mathrm{id}_U)[\\mathcal U,s]=[\\mathcal U,s]$; by (1) every element is such a class, so $\\mathcal F^+(\\mathrm{id}_U)=\\mathrm{id}$. Composition: for $k:W\\to V$, $h:V\\to U$ and $[\\mathcal U,s]\\in\\mathcal F^+(U)$, by definition $\\mathcal F^+(k)\\mathcal F^+(h)[\\mathcal U,s]=\\mathcal F^+(k)[\\mathcal U\\times_UV,p_{\\mathcal U}^*s]=[(\\mathcal U\\times_UV)\\times_VW,p_{\\mathcal U\\times_UV}^*p_{\\mathcal U}^*s]=[(\\mathcal U\\times_UV)\\times_VW,(p_{\\mathcal U}\\circ p_{\\mathcal U\\times_UV})^*s]$, and $p_{\\mathcal U}\\circ p_{\\mathcal U\\times_UV}$ is a morphism of coverings from the covering $(\\mathcal U\\times_UV)\\times_VW$ of $W$ to $\\mathcal U$ over $h\\circ k$ (composites of morphisms of coverings lie over the composite, [def-weil-pbc-site-plus-construction] (b)); by Step 4 the last class is $\\mathcal F^+(h\\circ k)[\\mathcal U,s]$. By (1), $\\mathcal F^+(k)\\circ\\mathcal F^+(h)=\\mathcal F^+(h\\circ k)$, so $\\mathcal F^+$ is a functor $\\mathcal C^{op}\\to$ sets. Naturality of $\\theta$: for $h:V\\to U$ and $a\\in\\mathcal F(U)=H^0(\\{\\mathrm{id}_U\\},\\mathcal F)$, $h$ factors as $\\mathrm{id}_U\\circ h$ through the single member of $\\{\\mathrm{id}_U\\}$, so the factorization case of Step 5 gives $\\mathcal F^+(h)(\\theta_U(a))=\\theta_V(\\mathcal F(h)(a))$.",
+   "uses": [
+    "def-weil-pbc-site-plus-construction"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Sites, Lemma 00W4 (lemma-plus-presheaf) and its proof (W x_U U_i = W x_V (V x_U U_i)), here via the remark after Lemma 00W4"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-site-plus-construction",
+  "def-weil-pbc-sites-and-cohomology",
+  "lem-weil-pbc-site-covering-morphisms-same-h0-map",
+  "lem-weil-pbc-site-coverings-common-refinement",
+  "def-weil-pbc-category-colimit",
+  "lem-weil-pbc-filtered-colimit-sets-elementwise"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/sites.tex",
+  "place": "Sites, Section 00W1 (section-sheafification): construction of F^+ before Lemma 00W4, Lemma 00W4, the remark after it, Lemmas 00W6, 00W7, Remark 00W8, the paragraph after it, Lemma 00W9; Categories, Definition 002V and Section 04AX"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -35,10 +120,17 @@
    "results": "ConcreteSheafification.lean:150 res_mk_eq_mk_pullback, :202 toPlus_eq_mk, :208 exists_rep, :217 eq_mk_iff_exists (all in namespace CategoryTheory.GrothendieckTopology.Plus, sieve version)",
    "date": "2026-10-10",
    "verdict": "no match (sieve version only; see leansearch entry)"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -n 'exists_rep\\|eq_mk_iff_exists\\|toPlus_eq_mk\\|lemma.*plusMap\\|theorem.*plusMap\\|res_mk_eq_mk_pullback' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/CategoryTheory/Sites/Plus.lean Sites/ConcreteSheafification.lean",
+   "results": "Plus.lean:163 plusMap_id, :179 plusMap_comp, :234 plusMap_toPlus (functoriality in the presheaf P, not in the object); ConcreteSheafification.lean:150 res_mk_eq_mk_pullback, :202 toPlus_eq_mk, :208 exists_rep, :217 eq_mk_iff_exists (sieve version, J.Cover X)",
+   "date": "2026-10-10",
+   "verdict": "no match: same verdict as the leansearch entry; the presheaf structure of plusObj is by construction over covering sieves, the Stacks construction over families of coverings is a different object"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "worker",
@@ -58,5 +150,17 @@
   }
  },
  "chapter": "sec-proper-base-change",
- "unit": "sk-thm-p1"
+ "unit": "sk-thm-p1",
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "lem-weil-pbc-site-plus-construction-presheaf",
+  "worker": "stage1",
+  "summary": "Proof written in six steps from Stacks Sites Section 00W1, read against def-weil-pbc-site-plus-construction (chosen fibre products, F^+(U) the chosen colimit over J_U^opp, F^+(h) via p_U). Stacks says the diagram H^0(-,F) on J_U^opp is filtered in the sense of Categories 002V (condition (3) only up to the diagram), not that J_U^opp is a filtered category, so Step 1 passes to the refinement preorder P_U (Lemma 00W7, new node lem-weil-pbc-site-covering-morphisms-same-h0-map) with the same cocones, and uses the existing common refinement node (00W6) for filteredness; (1),(2) then follow from the existing Mathlib leaf lem-weil-pbc-filtered-colimit-sets-elementwise; the theta case of (2) is the unique morphism of a covering to {id_U}. (3) is proved directly from the cocone property: any morphism of coverings g over h factors as p_U o k with k in J_V (no use of 00W7); independence of fibre products and the factorization case (00W9) follow. (4) from (1) and (3) (identity, composite of the p's lies over h o k, theta via the factorization case). Statement and stmt_deps kept; the Mathlib verdict (sieve-based plusObj, not a one-line specialization) confirmed and a grep of Plus.lean added."
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "result": "accepted",
+  "note": "6 steps following Stacks Sites 00W1: the colimit over J_U^opp equals the colimit over the refinement preorder, which is filtered by 00W6 (existing node) and 00W7 (new unsplit node: two morphisms of coverings over the same map induce the same map on H^0); (1),(2) from the elementwise description of filtered colimits of sets (leaf); the theta case; (3) via the factorization of any morphism of coverings over h through the chosen fibre-product covering and the cocone identity; independence of fibre products and the factorization case; (4) identity, composition, naturality. Tags verified."
+ }
 }
