@@ -158,4 +158,64 @@ lemma prop_of_bounded (Q : ObjectProperty (DerivedCategory C)) [Q.IsTriangulated
     TStructure.t.isLE_of_le M b _ (by lia)
   exact prop_of_isGE_of_isLE Q P hP (b - a + 1).toNat a M ha this fun q _ _ ↦ hMP q
 
+section Amplitude
+
+variable {D : Type*} [Category D] [Abelian D] [HasDerivedCategory D]
+  (Φ : DerivedCategory C ⥤ DerivedCategory D) [Φ.CommShift ℤ] [Φ.IsTriangulated] (d : ℤ)
+
+omit [Φ.IsTriangulated] in
+/-- If a triangulated functor `Φ : D(C) ⥤ D(D)` sends every object of `C` placed in degree `0`
+into degrees `≤ d`, it sends every object of `C` placed in degree `n` into degrees `≤ n + d`. -/
+lemma isLE_obj_singleFunctor_obj (hΦ : ∀ F : C, (Φ.obj ((singleFunctor C 0).obj F)).IsLE d)
+    (F : C) (n : ℤ) : (Φ.obj ((singleFunctor C n).obj F)).IsLE (n + d) := by
+  have := hΦ F
+  have : TStructure.t.IsLE ((Φ.obj ((singleFunctor C 0).obj F))⟦-n⟧) (n + d) :=
+    TStructure.t.isLE_shift _ d (-n) (n + d) (by lia)
+  let e : (Φ.obj ((singleFunctor C 0).obj F))⟦-n⟧ ≅ Φ.obj ((singleFunctor C n).obj F) :=
+    (Φ.commShiftIso (-n)).symm.app _ ≪≫
+      Φ.mapIso (((singleFunctors C).shiftIso (-n) n 0 (by lia)).app F)
+  exact TStructure.t.isLE_of_iso e (n + d)
+
+/-- **Amplitude by dévissage.** If a triangulated functor `Φ : D(C) ⥤ D(D)` sends every object
+of `C` placed in degree `0` into degrees `≤ d`, it sends every bounded object concentrated in
+degrees `≤ n` into degrees `≤ n + d`: by induction on the length, using the truncation triangle
+`τ_{< n} M ⟶ M ⟶ τ_{≥ n} M ⟶` whose third term is `Hⁿ M` placed in degree `n`. -/
+lemma isLE_obj_of_isLE (hΦ : ∀ F : C, (Φ.obj ((singleFunctor C 0).obj F)).IsLE d)
+    (M : DerivedCategory C) (hM : TStructure.t.bounded M) (n : ℤ) [M.IsLE n] :
+    (Φ.obj M).IsLE (n + d) := by
+  obtain ⟨⟨a, ha⟩, -⟩ := hM
+  suffices h : ∀ (k : ℕ) (M : DerivedCategory C) (n : ℤ), M.IsGE (n - k) → M.IsLE n →
+      (Φ.obj M).IsLE (n + d) by
+    exact h (n - a).toNat M n (TStructure.t.isGE_of_ge M _ a (by lia)) inferInstance
+  intro k
+  induction k with
+  | zero =>
+    intro M n h₁ h₂
+    have : M.IsGE n := by simpa using h₁
+    obtain ⟨Y, ⟨e⟩⟩ := exists_iso_singleFunctor_obj_of_isGE_of_isLE M n
+    have := isLE_obj_singleFunctor_obj Φ d hΦ Y n
+    exact TStructure.t.isLE_of_iso (Φ.mapIso e.symm) (n + d)
+  | succ k ih =>
+    intro M n h₁ h₂
+    have hT := Φ.map_distinguished _ (TStructure.t.triangleLTGE_distinguished n M)
+    refine TStructure.t.isLE₂ _ hT (n + d) ?_ ?_
+    · have : ((TStructure.t.triangleLTGE n).obj M).obj₁.IsLE (n - 1) :=
+        TStructure.t.isLE_truncLT_obj _ _ _ (by lia)
+      have : ((TStructure.t.triangleLTGE n).obj M).obj₁.IsGE (n - 1 - k) := by
+        have : M.IsGE (n - 1 - k) := TStructure.t.isGE_of_ge M _ (n - ↑(k + 1)) (by lia)
+        exact inferInstanceAs (TStructure.t.IsGE ((TStructure.t.truncLT n).obj M) _)
+      have := ih _ (n - 1) this inferInstance
+      exact TStructure.t.isLE_of_le (Φ.obj ((TStructure.t.triangleLTGE n).obj M).obj₁)
+        (n - 1 + d) (n + d) (by lia)
+    · have : ((TStructure.t.triangleLTGE n).obj M).obj₃.IsLE n :=
+        inferInstanceAs (TStructure.t.IsLE ((TStructure.t.truncGE n).obj M) n)
+      have : ((TStructure.t.triangleLTGE n).obj M).obj₃.IsGE n :=
+        inferInstanceAs (TStructure.t.IsGE ((TStructure.t.truncGE n).obj M) n)
+      obtain ⟨Y, ⟨e⟩⟩ := exists_iso_singleFunctor_obj_of_isGE_of_isLE
+        ((TStructure.t.triangleLTGE n).obj M).obj₃ n
+      have := isLE_obj_singleFunctor_obj Φ d hΦ Y n
+      exact TStructure.t.isLE_of_iso (Φ.mapIso e.symm) (n + d)
+
+end Amplitude
+
 end DerivedCategory
