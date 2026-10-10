@@ -2466,3 +2466,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 20:01 L: merged deliver/C1/lem-pc-kflat-closure (reviewer FIX+NODE(1); first push; new nodes: 3)
 - 20:04 L: merged deliver/G1/def-pc-essentially-constant-ind-diagram (reviewer FIX; first push; new nodes: 0)
 - 20:04 L: merged deliver/F1/lem-sc-proper-flat-right-adjoint-direct-sums (reviewer FIX; first push; new nodes: 0)
+- 20:04 L: merged deliver/E1/lem-sc-hom-etale-locus-translation (reviewer FIX; after a return; new nodes: 1)
