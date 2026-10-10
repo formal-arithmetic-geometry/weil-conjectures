@@ -1151,3 +1151,5 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 09:12 L: accepted lem-weil-pbc-torsion-module-flat-base-change-iso (4 steps, 0 new). Source note: the 05E9 proof says 'by induction hypothesis' for I^n M, which is annihilated by I and is the base case.
 - 09:13 L: accepted lem-weil-pbc-torsion-submodule-flat-base-change-iso (7 steps; new lem-weil-pbc-quotient-by-power-torsion-no-torsion, 05EB (1)).
 - 2026-10-10, delivery of F1: lem-weil-pbc-nl-presentations-homotopy-equivalent merged from deliver/F1/lem-weil-pbc-nl-presentations-homotopy-equivalent (1 commit(s), 0 new node(s), spot-checked by L: 00S1 for two presentations of the same algebra: lifts by the polynomial universal property, induced chain maps, difference derivation D into I'/I'^2 (the P-action through alpha checked), the omitted homotopy calculation written out in step 4, composition termwise in step 5); claim closed
+- 09:15 L: merged F1 lem-weil-pbc-nl-presentations-homotopy-equivalent (00S1, 0 new).
+- 09:15 L: accepted lem-weil-pbc-zariski-extension-by-zero-adjunction (5 steps, 0 new; Stacks omits the proofs of 00A5 and the inverse check in 03DI).
