@@ -1691,3 +1691,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 14:55 L: 39 nodes' imported lean.sorry_free flags set to false (transitively sorried per the sorry map); HUMAN entry; notice to all groups
 - 14:55 L: F1 return of fpqc-refinement-fully-faithful: tag correction 023Z -> 02VS/023Y appended
 - 14:55 L: returned deliver/K1/lem-sc-ext-locally-free (reviewer RETURN: Points 1 (composite now assumes T(I) U-acyclic), 3 (Ext via [lem-weil-pbc-ext-via-injective-resolution]), 4 ([pqf-def-co)
+- 14:55 L: merged deliver/K1/lem-weil-pbc-proper-composition (reviewer FIX; first push; new nodes: 0)

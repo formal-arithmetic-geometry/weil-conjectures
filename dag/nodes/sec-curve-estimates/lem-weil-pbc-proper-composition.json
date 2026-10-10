@@ -3,7 +3,7 @@
  "blueprint": {
   "is": "lem-weil-pbc-proper-composition",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "Properness is stable under composition",
@@ -15,26 +15,49 @@
  "stmt_deps": [
   "def-weil-pbc-scheme-conventions"
  ],
- "proof": [
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/morphisms.tex",
+  "place": "Morphisms, Lemma Tag 01W3 (composition-proper)"
+ },
+ "mathlib_searches": [
   {
-   "text": "Separatedness, finite type and universal closedness are each stable under\ncomposition in the sense of [def-weil-pbc-scheme-conventions]: the diagonal\nof a composite is the composite of diagonals (hence a closed immersion), the\nfinite-type property passes through composites (finiteness of the generation\nis transitive), and the composite of universally closed morphisms is\nuniversally closed, since the base changes of the composite are composites of\nbase changes and composites of closed maps are closed. Hence the composite of\nproper morphisms is proper.",
-   "uses": [
-    "def-weil-pbc-scheme-conventions"
-   ],
-   "elementary": false
+   "tool": "leansearch",
+   "query": "the composite of two proper morphisms of schemes is proper",
+   "results": "AlgebraicGeometry.IsProper instance for composition; IsProper.comp_iff",
+   "date": "2026-10-10",
+   "verdict": "match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "given IsProper f and IsProper g, prove IsProper (f ≫ g)",
+   "results": "AlgebraicGeometry.IsProper instance [IsProper f] [IsProper g] : IsProper (f ≫ g)",
+   "date": "2026-10-10",
+   "verdict": "match: exact composition instance"
+  },
+  {
+   "tool": "grep",
+   "query": "rg -n IsProper Mathlib/AlgebraicGeometry/Morphisms/Proper.lean",
+   "results": "Proper.lean:58 stableUnderComposition; Proper.lean:67 instance [IsProper f] [IsProper g] : IsProper (f ≫ g)",
+   "date": "2026-10-10",
+   "verdict": "match"
+  },
+  {
+   "tool": "local_search",
+   "query": "AlgebraicGeometry.IsProper (f ≫ g)",
+   "results": "found in Mathlib/AlgebraicGeometry/Morphisms/Proper.lean; declaration exists",
+   "date": "2026-10-10",
+   "verdict": "match exists"
   }
  ],
- "proof_deps": [
-  "def-weil-pbc-scheme-conventions"
- ],
- "proof_origin": {
-  "by": "agent",
-  "document": "literature/blueprint/master/blueprint/sec-curve-estimates/sk-thm-br/lem-weil-pbc-proper-composition.md",
-  "place": "## Proof"
+ "mathlib_match": {
+  "declaration": "AlgebraicGeometry.IsProper.instCompScheme",
+  "file": "Mathlib/AlgebraicGeometry/Morphisms/Proper.lean",
+  "how": "exact: instance at line 67, [IsProper f] [IsProper g] : IsProper (f ≫ g) (auto-generated name AlgebraicGeometry.IsProper.instCompScheme); IsProper at lines 42-43 is separated, universally closed, and locally of finite type."
  },
- "mathlib_searches": [],
- "mathlib_match": null,
- "status": "imported",
+ "status": "mathlib",
  "merged_into": null,
  "import_flags": [],
  "blueprint_kind": "lemma",
@@ -56,5 +79,20 @@
   }
  },
  "chapter": "sec-curve-estimates",
- "unit": "sk-thm-br"
+ "unit": "sk-thm-br",
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "lem-weil-pbc-proper-composition",
+  "worker": "stage1",
+  "summary": "Checked the imported statement against the proper-morphism convention and Mathlib. The composition instance for IsProper is exact, so this item is a Mathlib leaf and needs no new DAG nodes or proof steps. The source is Stacks Project Morphisms, Lemma 01W3 (composition-proper).",
+  "blueprint": "The imported proof paragraph: separatedness, finite type, and universal closedness are stable under composition, yielding properness of the composite."
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-pco",
+  "group": "K1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-pco (reviewer sub-agent of L); spot-checked: Source Stacks Tag 01W3 (morphisms.tex lemma-composition-proper, line 9898: the composition of proper morphisms is proper) agrees with the node statement, no extra hypotheses; proper in def-weil-pbc-scheme-conventions points to def-weil-proper-morphism (separated, finite type, universally closed), itself a Mathlib leaf on AlgebraicGeometry.IsProper with the UniversallyClosed -> QuasiCompact reconciliation. Mathlib leaf, no steps, no new nodes: verified pinned Mathlib Morphisms/Proper.lean lines 42-43 (class IsProper extends IsSeparated, UniversallyClosed, LocallyOfFiniteType) and line 67 (instance [IsProper f] [IsProper g] : IsProper (f ≫ g)), whose name AlgebraicGeometry.IsProper.instCompScheme I confirmed in Proper.ilean. Small case: composition with an identity is covered. Only the item file and report changed, one commit, review section present, same_as recorded as [], four searches recorded. Fix: dag/nodes/sec-curve-estimates/lem-weil-pbc-proper-composition.json: mathlib_match.declaration: '(composition instance)' replaced by the declaration name AlgebraicGeometry.IsProper.instCompScheme, and mathlib_match.how line 67-68 -> 67 with the name. Start Sat Oct 10 02:55:11 PM UTC 2026, end Sat Oct 10 02:55:31 PM UTC 2026.; 1 file(s) fixed by the reviewer"
+ }
 }
