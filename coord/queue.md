@@ -2,7 +2,7 @@
 
 848 items; claim with `tools/claim.py next <group> [--stage N]`.
 
-## Stage 1: nodes to split (314)
+## Stage 1: nodes to split (313)
 
 | node | distance to a target | Lean state on the done branch |
 |---|---|---|
@@ -21,7 +21,6 @@
 | `lem-weil-pbc-sets-strictly-henselian-open-sections-stalk` | 2008 | none |
 | `prop-weil-pbc-strict-henselization-stalk-formula` | 3003 | none |
 | `lem-weil-pbc-zero-dimensional-cohomology` | 3004 | none |
-| `lemma-weil-pbc-affine-neighbourhood-cofinal` | 3004 | none |
 | `lemma-weil-pbc-etale-cohomology-continuity` | 3004 | none |
 | `lemma-weil-pbc-fibre-product-limit` | 3004 | none |
 | `prop-weil-pbc-kinjective-resolutions-exist` | 3004 | none |
@@ -37,13 +36,13 @@
 | `lem-sc-noetherian-cohomology-above-dimension` | 3008 | sorry_here |
 | `lem-sc-zero-generic-acyclic` | 3008 | rests_on_sorry |
 | `lem-weil-pbc-coskeleton-matching-tuples` | 3008 | none |
-| `lem-galois-fpqc-descend-unramified` | 3009 | none |
 | `lem-galois-fpqc-descending-types-morphisms` | 3009 | none |
 | `lem-pc-cartier-divisor-finite-over-field` | 3009 | none |
 | `lem-sc-hilb-geometrically-integral` | 3009 | rests_on_sorry |
 | `lem-sc-very-ample-separation-criterion` | 3009 | none |
 | `lem-weil-pbc-simplicial-index-finite-initial` | 3009 | none |
 | `lem-exc-cochains-derived-invariants` | 3010 | none |
+| `lem-galois-fpqc-descend-open-immersion` | 3010 | none |
 | `lem-pc-finite-scheme-cohomology-tensor` | 3010 | none |
 | `lem-pc-very-ample-ample` | 3010 | sorry_here |
 | `lem-pc-zero-support-finite-scheme` | 3010 | none |
@@ -321,7 +320,7 @@
 | `def-exc-jacobian-presentation` | - | none |
 | `lem-zl-noether-normalization-dimension` | - | none |
 
-## Stage 2: nodes to state (534)
+## Stage 2: nodes to state (535)
 
 | node | distance to Mathlib | kind |
 |---|---|---|
@@ -371,6 +370,7 @@
 | `lem-galois-coproduct-copies-morphisms-clopen` | 1 | state |
 | `lem-galois-flat-algebra-descent` | 1 | state |
 | `lem-galois-fpqc-descend-etale` | 1 | state |
+| `lem-galois-fpqc-descend-unramified` | 1 | state |
 | `lem-galois-fpqc-morphisms-descend` | 1 | state |
 | `lem-pc-affine-cech-complex` | 1 | state |
 | `lem-pc-alg-closed-reduced-algebra-no-idempotents-dim-one` | 1 | state |
@@ -860,7 +860,7 @@
 | `lem-weil-pbc-p1-field-dimension-one` | 4 | state |
 | `lem-weil-pbc-projective-space-zero-isomorphism` | 4 | state |
 
-Not open yet: 334 nodes that wait for stage 1, 985 nodes that wait for a statement dependency.
+Not open yet: 333 nodes that wait for stage 1, 986 nodes that wait for a statement dependency.
 
 ## Stage 3: modules to prove (0)
 
