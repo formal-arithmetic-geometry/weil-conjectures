@@ -2,7 +2,7 @@
 
 855 items; claim with `tools/claim.py next <group> [--stage N]`.
 
-## Stage 1: nodes to split (313)
+## Stage 1: nodes to split (312)
 
 | node | distance to a target | Lean state on the done branch |
 |---|---|---|
@@ -16,7 +16,7 @@
 | `lem-sc-pic-lift-closed-immersion-dim-le-one` | 2010 | none |
 | `lem-sc-reduced-dim-le-one-ample` | 2010 | none |
 | `lem-sc-ample-square-zero-thickening` | 2011 | none |
-| `prop-weil-pbc-strict-henselization-stalk-formula` | 3003 | none |
+| `lem-weil-pbc-derived-etale-cohomology-limit` | 3004 | none |
 | `lem-weil-pbc-zero-dimensional-cohomology` | 3004 | none |
 | `prop-weil-pbc-kinjective-resolutions-exist` | 3004 | none |
 | `lem-sc-etale-affine-qcoherent` | 3007 | none |
@@ -27,7 +27,6 @@
 | `lem-sc-generic-vanishing-acyclic` | 3008 | none |
 | `lem-sc-noetherian-cohomology-above-dimension` | 3008 | sorry_here |
 | `lem-galois-fpqc-refinement-fully-faithful` | 3010 | none |
-| `lem-galois-fpqc-singleton-affine-refinement` | 3010 | none |
 | `lem-pc-cartier-divisor-nowhere-dense` | 3010 | none |
 | `lem-pc-dim-zero-finite-over-field` | 3010 | none |
 | `lem-pc-nowhere-dense-dim-zero` | 3010 | none |
@@ -40,7 +39,6 @@
 | `thm-sc-serre-duality-curve` | 3010 | rests_on_sorry |
 | `lem-exc-coinduced-continuous-acyclic` | 3011 | none |
 | `lem-exc-coinduced-discrete-embedding` | 3011 | none |
-| `lem-exc-discrete-modules-abelian-injective-embeddings` | 3011 | none |
 | `lem-pc-ample-affine-loci-criterion` | 3011 | none |
 | `lem-pc-base-change-closure-components` | 3011 | none |
 | `lem-pc-very-ample-descends` | 3011 | sorry_here |
@@ -50,6 +48,7 @@
 | `lem-sc-torsion-subsheaf-quotient` | 3011 | none |
 | `lem-sc-vector-bundle-line-subbundle` | 3011 | none |
 | `thm-sc-p1-duality` | 3011 | sorry_here |
+| `lem-exc-rg-discrete-modules-functorial-injective-embeddings` | 3012 | none |
 | `lem-pc-grothendieck-edge-cocycle` | 3012 | none |
 | `lem-pc-projective-base-change` | 3012 | none |
 | `lem-sc-ext-locally-free` | 3012 | sorry_here |
@@ -202,6 +201,7 @@
 | `lem-weil-pbc-finite-pushforward-constructible-noetherian` | - | none |
 | `lemma-nagata-final-noetherian-base-system` | - | none |
 | `pqf-lem-affine-local-target` | - | none |
+| `sbc-lem-higher-direct-image-presheaf` | - | none |
 | `thm-pqf-zmt-factorization` | - | none |
 | `def-nagata-finite-presentation-descent` | - | none |
 | `def-nagata-glued-limit-comparison` | - | none |
@@ -286,7 +286,6 @@
 | `lem-weil-pbc-irreducible-lisse-strata` | - | none |
 | `lem-weil-pbc-lisse-generic-kernel` | - | none |
 | `lem-weil-separably-closed-geometrically-connected` | - | none |
-| `sbc-lem-higher-direct-image-presheaf` | - | none |
 | `sbc-lem-smooth-geometrically-reduced` | - | none |
 | `def-pc-derived-category` | - | none |
 | `lem-kun-04ca` | - | none |
@@ -320,7 +319,7 @@
 | `def-exc-jacobian-presentation` | - | none |
 | `lem-zl-noether-normalization-dimension` | - | none |
 
-## Stage 2: nodes to state (542)
+## Stage 2: nodes to state (543)
 
 | node | distance to Mathlib | kind |
 |---|---|---|
@@ -373,6 +372,7 @@
 | `lem-galois-fpqc-descend-open-immersion` | 1 | state |
 | `lem-galois-fpqc-descend-unramified` | 1 | state |
 | `lem-galois-fpqc-morphisms-descend` | 1 | state |
+| `lem-galois-fpqc-singleton-affine-refinement` | 1 | state |
 | `lem-pc-affine-cech-complex` | 1 | state |
 | `lem-pc-alg-closed-reduced-algebra-no-idempotents-dim-one` | 1 | state |
 | `lem-pc-cech-exact` | 1 | state |
@@ -867,7 +867,7 @@
 | `lem-weil-pbc-p1-field-dimension-one` | 4 | state |
 | `lem-weil-pbc-projective-space-zero-isomorphism` | 4 | state |
 
-Not open yet: 332 nodes that wait for stage 1, 1011 nodes that wait for a statement dependency.
+Not open yet: 331 nodes that wait for stage 1, 1013 nodes that wait for a statement dependency.
 
 ## Stage 3: modules to prove (0)
 
