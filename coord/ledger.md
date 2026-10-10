@@ -2622,3 +2622,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 21:09 L: merged deliver/E1/lem-pc-ringed-space-derived-products (reviewer FIX; first push; new nodes: 0)
 - 21:09 L: attached AlgebraicGeometry.IsCurve.FiniteOfIsProper to def-weil-pbc-C5 (Assertions.lean:111-115, sorry-free); K1's claim released with abandon (not counted)
 - 21:09 L: deleted deliver/K1/def-weil-pbc-C5 (item attached by L at de914db95, claim released)
+- 21:10 L: returned deliver/G1/lem-sc-intersection-effective-cartier (reviewer RETURN: Reviewer R-iec2512 (packet review), head 8474dd2d9. Points 1 (E/C4: d>=1, D nonempty, dim D=d-1 now assumed) and 2 (C1: )
