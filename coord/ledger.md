@@ -917,3 +917,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 05:30 L: reviewed lem-weil-pbc-tower-limit-exact-surjective-kernels (6 steps, no new node): accepted.
 - 05:31 L: reviewed lem-weil-pbc-two-term-complex-kernel-base-change (5 steps, +Tor dimension-shift node): accepted.
 - 05:32 L: reviewed lem-weil-pbc-universal-thickening-open-pieces (8 steps, no new node): accepted. Stage-3 note: 04FA node repeats part (1) with an unused hypothesis.
+- 05:34 L: reviewed def-weil-pbc-cohen-ring (definition; promoted to a composed definition leaf: IsDiscreteValuationRing + uniformizer + IsAdicComplete): accepted. Stage-3 note: cohen-rings-exist and cohen-ring-mod-pn-formally-smooth restate the notion inline.
