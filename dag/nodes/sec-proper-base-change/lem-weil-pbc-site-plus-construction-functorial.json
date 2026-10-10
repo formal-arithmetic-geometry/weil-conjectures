@@ -11,9 +11,60 @@
   "def-weil-pbc-sites-and-cohomology",
   "def-weil-pbc-site-plus-construction"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "For a covering $\\mathcal U=\\{U_i\\to U\\}_{i\\in I}$ and $s=(s_i)_i\\in H^0(\\mathcal U,\\mathcal F)$, define $\\varphi^+_{\\mathcal U}(s)=(\\varphi_{U_i}(s_i))_i$. This family lies in $H^0(\\mathcal U,\\mathcal G)$: on each $U_i\\times_UU_j$, the two restrictions of $s_i$ and $s_j$ agree, and applying the naturality square for the presheaf morphism $\\varphi$ preserves that equality. If $f: \\mathcal U'\\to\\mathcal U$ is a refinement over $\\mathrm{id}_U$, then $f^*(\\varphi^+_{\\mathcal U}s)=\\varphi^+_{\\mathcal U'}(f^*s)$ componentwise, since both sides restrict $\\varphi_{U_{\\alpha(i')}}(s_{\\alpha(i')})$ along the same component map.",
+   "uses": [
+    "def-weil-pbc-site-plus-construction"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Sites, Lemma 00W5 (lemma-plus-functorial), with the map on compatible H^0 families induced componentwise"
+   }
+  },
+  {
+   "text": "The refinement compatibility in step 1 makes the componentwise maps a morphism of the two colimit diagrams $H^0(-,\\mathcal F)$ and $H^0(-,\\mathcal G)$ on $\\mathcal J_U^{\\mathrm{opp}}$. Hence the universal property of the colimit [def-weil-pbc-category-colimit] gives a unique map $\\varphi^+_U:\\mathcal F^+(U)\\to\\mathcal G^+(U)$ with $\\varphi^+_U([\\mathcal U,s])=[\\mathcal U,\\varphi^+_{\\mathcal U}(s)]$. For $h:V\\to U$, use the fibre-product covering and its projection refinement from [def-weil-pbc-site-plus-construction]. The componentwise identity after pulling back along $h$ shows $\\mathcal G^+(h)\\circ\\varphi^+_U=\\varphi^+_V\\circ\\mathcal F^+(h)$ on colimit representatives, so the maps $\\varphi^+_U$ form a morphism of presheaves.",
+   "uses": [
+    "def-weil-pbc-category-colimit",
+    "def-weil-pbc-site-plus-construction"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Sites, Section 00W1 and Lemma 00W5: refinement compatibility descends to colimits and commutes with restriction maps"
+   }
+  },
+  {
+   "text": "For $a\\in\\mathcal F(U)$, the canonical map sends $a$ to the class of the compatible family $(a|_{U_i})_i$ on the trivial covering. Applying the componentwise rule gives the class of $(\\varphi_{U_i}(a|_{U_i}))_i=(\\varphi_U(a)|_{U_i})_i$, by the presheaf naturality square. This is exactly $\\theta_{\\mathcal G,U}(\\varphi_U(a))$, proving $\\theta_{\\mathcal G}\\circ\\varphi=\\varphi^+\\circ\\theta_{\\mathcal F}$.",
+   "uses": [
+    "def-weil-pbc-site-plus-construction"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Sites, Lemma 00W5 (lemma-plus-functorial), the naturality square for the canonical map to the plus construction"
+   }
+  },
+  {
+   "text": "On every representative $[\\mathcal U,s]$, the map induced by $\\mathrm{id}_{\\mathcal F}$ leaves each component unchanged, so $(\\mathrm{id}_{\\mathcal F})^+=\\mathrm{id}_{\\mathcal F^+}$. For $\\mathcal F\\xrightarrow{\\varphi}\\mathcal G\\xrightarrow{\\psi}\\mathcal H$, applying the construction twice sends $(s_i)_i$ to $(\\psi_{U_i}(\\varphi_{U_i}(s_i)))_i$, which is the componentwise image under $\\psi\\circ\\varphi$; equality on all colimit representatives gives $(\\psi\\circ\\varphi)^+=\\psi^+\\circ\\varphi^+$. Thus the plus construction is functorial and $\\theta$ is natural.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Sites, Lemma 00W5 (lemma-plus-functorial), identity and composition clauses"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-site-plus-construction",
+  "def-weil-pbc-category-colimit"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/sites.tex",
+  "place": "Sites, Lemma 00W5 (lemma-plus-functorial), with the representative and colimit checks written out"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -45,7 +96,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "worker",
@@ -65,5 +116,23 @@
   }
  },
  "chapter": "sec-proper-base-change",
- "unit": "sk-thm-p1"
+ "unit": "sk-thm-p1",
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "lem-weil-pbc-site-plus-construction-functorial",
+  "worker": "stage1",
+  "summary": "Split the Stacks Sites 00W5 functoriality lemma into four elementary steps: componentwise transport of compatible H^0 families and refinement compatibility; descent to colimit maps and compatibility with pullback restrictions; naturality of the canonical theta map on the trivial covering; and identity/composition on representatives. The existing definition node supplies the covering, refinement, pullback, colimit, and theta data, so no new reusable node was needed. Mathlib searches remain recorded: its plusMap/toPlus naturality is for sieve-based Grothendieck topologies, while this node uses the Stacks covering-family colimit construction.",
+  "checks": [
+   "No Lean files written or compiled",
+   "All reusable facts cited through existing public nodes",
+   "No new node created"
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "group": "G1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed by the lead of G1; spot-checked by L: 4 elementary steps following Sites 00W5: componentwise image of compatible families, compatible with refinements, hence maps on the colimits forming a morphism of presheaves; naturality of theta on the trivial covering; identity and composition on representatives. Correct."
+ }
 }
