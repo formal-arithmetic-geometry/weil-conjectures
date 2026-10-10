@@ -25,9 +25,40 @@
   "def-sc-invertible-module",
   "def-weil-pbc-ample-invertible-module"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "For each point $x\\in X$, clause (2) of [def-weil-pbc-ample-invertible-module] gives an integer $n_x>0$ and a section $s_x\\in\\Gamma(X,\\mathcal L^{\\otimes n_x})$ such that $x\\in X_{s_x}$ and $X_{s_x}$ is affine. The same definition states that each nonvanishing locus $X_s$ is open, so the family $\\{X_{s_x}\\}_{x\\in X}$ is an open cover of $X$.",
+   "uses": [
+    "def-weil-pbc-ample-invertible-module"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/properties.tex",
+    "place": "Properties Lemma 09NV and Definition 01PS, the pointwise affine principal-open condition"
+   }
+  },
+  {
+   "text": "By the ampleness hypothesis, $X$ is quasi-compact: this is clause (1) of [def-weil-pbc-ample-invertible-module]. By the definition of quasi-compactness [def-weil-pbc-quasi-compact-scheme], the open cover from the preceding step has a finite subcover $X_{s_1},\\ldots,X_{s_m}$. Writing $n_i$ and $s_i$ for the corresponding powers and sections gives $n_i>0$, each $X_{s_i}$ affine, and $X=\\bigcup_iX_{s_i}$.",
+   "uses": [
+    "def-weil-pbc-ample-invertible-module",
+    "def-weil-pbc-quasi-compact-scheme"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Section 01K2, definition of quasi-compactness, applied to the open cover of Section 01PR/Definition 01PS"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-ample-invertible-module",
+  "def-weil-pbc-quasi-compact-scheme"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/properties.tex",
+  "place": "Properties Definition 01PS and Lemma 09NV, with quasi-compactness from Schemes Section 01K2"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -49,15 +80,66 @@
    "results": "No exact theorem",
    "date": "2026-10-11",
    "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "finite affine principal open cover from an ample invertible sheaf",
+   "results": "Generic affine-cover declarations including AlgebraicGeometry.Proj.affineOpenCover; no ampleness theorem",
+   "date": "2026-10-11",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "IsAmple, finite affine open cover, nonvanishing section",
+   "results": "0 hits; invalid pattern diagnostic '<input>:1:23: expected end of input'",
+   "date": "2026-10-11",
+   "verdict": "no match (invalid pattern)"
+  },
+  {
+   "tool": "grep",
+   "query": "isCompact_iff_finite_and_eq_biUnion_affineOpens|affineOpenCover",
+   "results": "0 hits",
+   "date": "2026-10-11",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Proj.affineOpenCover",
+   "results": "AlgebraicGeometry.Proj.affineOpenCover and related Proj affine-cover declarations; no theorem for ample invertible modules",
+   "date": "2026-10-11",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "An ample invertible sheaf has finitely many positive power sections whose affine nonvanishing loci cover the scheme",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-11",
+   "verdict": "unavailable"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-sc-ample-proj-open",
   "by": "worker",
   "date": "2026-10-10"
  },
  "chapter": "sec-curve-estimates",
- "unit": "sk-thm-curveestimate"
+ "unit": "sk-thm-curveestimate",
+ "split_report": {
+  "date": "2026-10-11",
+  "item": "lem-sc-ample-finite-affine-cover",
+  "worker": "stage1",
+  "summary": "Split the finite-cover consequence of ampleness into two steps. The existing 09NV node supplies an affine principal nonvanishing neighbourhood for each point; the ampleness definition supplies quasi-compactness, and the quasi-compactness definition extracts a finite subcover. No new nodes were needed.",
+  "blueprint": "The steps realize the ancestor proof's first sentence: choose powers and sections with affine nonvanishing loci covering the scheme, using the pointwise construction followed by finite-subcover extraction.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-afc1709",
+  "group": "C1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-afc1709 (reviewer sub-agent of L); spot-checked: Source Stacks Properties Definition 01PS / Proposition 01Q3 (1)=>(2): the item statement (unchanged) agrees with it; only the item node and report changed, no new nodes. Step 1: clause (2) of def-weil-pbc-ample-invertible-module gives for each x an n>=1, s with x in X_s and X_s affine, and the same node states X_s is open, so the X_{s_x} form an open cover. Step 2: clause (1) of that node gives quasi-compactness, def-weil-pbc-quasi-compact-scheme states every open cover has a finite subcover; the subfamily keeps n_i>0 and affineness. Both cited statements read in full; hypotheses match; definitions cited are in stmt_deps, no off-unit lemma used. Small cases: empty X (empty family), Spec A with O_X, P^1 with O(1) (two charts). Mathlib: grep of pinned Mathlib/AlgebraicGeometry for Ample/IsAmple finds no file or declaration, so no leaf. Checked that lem-sc-ample-proj-open, lem-sc-ample-proj-local-chart and lem-sc-dim-one-ample-invertible are not restated (open immersion into Proj, local chart of Proj morphism, existence of ample on dim<=1). Start Sat Oct 10 05:08:33 PM UTC 2026, end Sat Oct 10 05:08:53 PM UTC 2026."
+ }
 }
