@@ -2,17 +2,16 @@
 
 927 items; claim with `tools/claim.py next <group> [--stage N]`.
 
-## Stage 1: nodes to split (324)
+## Stage 1: nodes to split (323)
 
 | node | distance to a target | Lean state on the done branch |
 |---|---|---|
 | `lem-weil-pbc-injective-acyclicity-bounded-below` | 2002 | sorry_here |
-| `lem-weil-pbc-etale-geometric-fibre-inverse-image-constant` | 2007 | none |
-| `lem-weil-pbc-etale-inverse-image-section-description` | 2007 | none |
 | `lem-weil-pbc-etale-open-fpqc-descent` | 2007 | none |
 | `lem-weil-pbc-etale-sections-equal-open` | 2007 | none |
 | `lem-weil-pbc-fibre-spec-homeomorphism` | 2007 | none |
 | `lem-weil-pbc-sets-etale-inverse-image-constant-sheaf` | 2008 | none |
+| `lem-weil-pbc-spec-algebraically-closed-etale-sheaf-constant` | 2008 | none |
 | `lem-weil-pbc-sets-etale-inverse-image-exact` | 2012 | none |
 | `lem-sc-irreducible-noetherian-constant-acyclic` | 2013 | none |
 | `lem-sc-noetherian-extension-by-zero-reduction` | 2013 | none |
@@ -52,14 +51,12 @@
 | `lem-pc-derived-qcoh-direct-sums` | 3015 | none |
 | `lem-pc-ringed-spaces-derived-adjoint` | 3015 | none |
 | `lem-pc-ringed-spaces-derived-pullback-composition` | 3015 | none |
-| `lem-sc-affine-derived-pushforward-t-exact` | 3015 | none |
 | `lem-sc-ext-coherent-hom-injective-flasque` | 3015 | none |
 | `lem-sc-finite-affine-derived-equivalence` | 3015 | none |
 | `lem-sc-finite-pushforward-derived-hom-qcoherent` | 3015 | none |
 | `lem-sc-finite-sheafhom-affine-adjoint` | 3015 | none |
 | `lem-sc-finite-twisted-inverse-bounded-below` | 3015 | none |
 | `lem-sc-p1-invertible-section-localization` | 3015 | none |
-| `lem-sc-p1-tor-dimension-shift-natural` | 3015 | none |
 | `lem-sc-p1-twist-multiplication` | 3015 | none |
 | `lem-sc-smooth-omega-finite-locally-free` | 3015 | none |
 | `lem-sc-smooth-proper-diagonal-conormal-differentials` | 3015 | none |
@@ -67,6 +64,8 @@
 | `lem-sc-smooth-proper-diagonal-koszul-regular` | 3015 | none |
 | `lem-sc-smooth-proper-diagonal-pushforward-structure` | 3015 | none |
 | `lem-sc-smooth-proper-diagonal-tensor-formula` | 3015 | none |
+| `lem-sc-affine-derived-cohomology` | 3016 | none |
+| `lem-sc-affine-derived-pushforward-conservative` | 3016 | none |
 | `lem-sc-open-curve-gm-direct-image-cohomology` | 4006 | none |
 | `lem-pc-genus-agrees-sc` | 4007 | rests_on_sorry |
 | `lem-pc-zero-scheme-properties` | 4008 | rests_on_sorry |
@@ -331,7 +330,7 @@
 | `lem-pur-rhom-well-defined` | - | none |
 | `lem-zl-noether-normalization-dimension` | - | none |
 
-## Stage 2: nodes to state (603)
+## Stage 2: nodes to state (604)
 
 | node | distance to Mathlib | kind |
 |---|---|---|
@@ -449,6 +448,7 @@
 | `lem-sc-local-ring-artin-schreier-kernel` | 1 | state |
 | `lem-sc-normal-dim1-dvr` | 1 | state |
 | `lem-sc-p1-graded-degree-component-exact` | 1 | state |
+| `lem-sc-p1-tor-dimension-shift-natural` | 1 | state |
 | `lem-sc-p1-tor-dimension-shifting` | 1 | state |
 | `lem-sc-pic-proper-decomposition` | 1 | state |
 | `lem-sc-pic-proper-ntorsion` | 1 | state |
@@ -939,7 +939,7 @@
 | `lem-weil-pbc-p1-field-dimension-one` | 4 | state |
 | `lem-weil-pbc-projective-space-zero-isomorphism` | 4 | state |
 
-Not open yet: 341 nodes that wait for stage 1, 1249 nodes that wait for a statement dependency.
+Not open yet: 340 nodes that wait for stage 1, 1252 nodes that wait for a statement dependency.
 
 ## Stage 3: modules to prove (0)
 
