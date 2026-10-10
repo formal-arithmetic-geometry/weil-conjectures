@@ -1755,3 +1755,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 15:15 L: merged deliver/H1/lem-sc-component-intersections-finite (reviewer FIX; first push; new nodes: 1)
 - 15:16 L: merged deliver/M1/lem-sc-zero-dim-noetherian-affine (reviewer FIX; first push; new nodes: 2)
 - 15:16 L: merged deliver/G1/lem-pc-very-ample-descends (reviewer PASS; after a return; new nodes: 2)
+- 15:16 L: merged deliver/F1/lem-galois-fpqc-refinement-fully-faithful (reviewer FIX; after a return; new nodes: 2)

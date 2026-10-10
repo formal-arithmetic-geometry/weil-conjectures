@@ -1,0 +1,61 @@
+{
+ "id": "lem-galois-fpqc-pullback-canonical-iso",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-galois-descent",
+   "place": "Step 2 full-faithfulness input: canonical comparison of pullback functors for two family maps over the same base (Stacks Tag 02VS, part (3), and Tag 023Y)",
+   "via": [
+    "lem-galois-fpqc-refinement-fully-faithful"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Canonical isomorphism between pullback functors for two maps over a base",
+ "statement": "Let $S$ be a scheme [def-pc-scheme], let $a:X\\to S$ and $b:T\\to S$ be morphisms, and let $r_0,r_1:T\\to X$ be morphisms over $S$. Pullback of descent data [def-pd-descent-datum] along $r_0$ and along $r_1$ gives canonically naturally isomorphic functors $DD(X/S)\\to DD(T/S)$. More generally, for morphisms $r:T\\to X$ and $t:U\\to T$ over $S$, the pullback functor along $r\\circ t$ is canonically naturally isomorphic to the composite of the pullback functors along $r$ and $t$, using the canonical associativity isomorphism $U\\times_T(T\\times_X V)\\cong U\\times_X V$ of fibre products [def-pc-fibre-product]. Here $DD(X/S)$ denotes the category whose objects are the descent data $(V,\\varphi)$ on schemes $V$ over $X$ relative to $X/S$ [def-pd-descent-datum] and whose morphisms $(V,\\varphi)\\to(W,\\psi)$ are the morphisms $\\alpha:V\\to W$ over $X$ with $\\psi\\circ\\mathrm{pr}_0^*\\alpha=\\mathrm{pr}_1^*\\alpha\\circ\\varphi$; for a morphism $r:T\\to X$ over $S$ (with $T\\to S$ the given structure map), the pullback of $(V,\\varphi)$ along $r$ is $(T\\times_XV,(r\\times r)^*\\varphi)$ [def-pc-fibre-product], where $r\\times r:T\\times_ST\\to X\\times_SX$, and the pullback of $\\alpha$ is $\\mathrm{id}_T\\times_X\\alpha$.",
+ "source": {
+  "document": "literature/stacks-project/descent.tex",
+  "place": "Descent, Lemma Tag 02VS (lemma-pullback-family), part (3), and Lemma Tag 023Y (lemma-pullback), parts (1)--(2); composition from the fibre-product construction in 023Y(1)"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-pd-descent-datum",
+  "def-pc-fibre-product"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "canonical natural isomorphism between pullback functors on descent data for two maps over the same base",
+   "results": "generic pullback and descent-data interfaces only; no scheme specialization",
+   "date": "2026-10-10",
+   "verdict": "no direct match"
+  },
+  {
+   "tool": "loogle",
+   "query": "DescentData pullback canonical iso",
+   "results": "CategoryTheory.Pseudofunctor.DescentData.pullFunctor and generic comparison lemmas; no stated scheme result",
+   "date": "2026-10-10",
+   "verdict": "no direct match"
+  },
+  {
+   "tool": "grep",
+   "query": "rg -n 'pullFunctor|descent.*iso|canonical.*pullback' Mathlib/CategoryTheory/Sites/Descent Mathlib/AlgebraicGeometry",
+   "results": "generic pullFunctor declarations only; no scheme descent-data comparison for Tags 02VS and 023Y",
+   "date": "2026-10-10",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "created": {
+  "item": "lem-galois-fpqc-refinement-fully-faithful",
+  "by": "worker",
+  "date": "2026-10-10"
+ },
+ "chapter": "sec-curve-estimates",
+ "unit": "sk-prop-h2"
+}
