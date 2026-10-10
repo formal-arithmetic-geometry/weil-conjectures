@@ -850,3 +850,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 04:06 L: reviewed lem-weil-pbc-make-separably-generated (10 steps, +5 leaves, +031V node): accepted.
 - 04:08 L: reviewed lem-weil-pbc-module-cohomology-fmap-basic-properties (8 steps, 0 new): accepted.
 - 04:10 L: reviewed lem-weil-pbc-module-finite-presentation-cokernel (7 steps, +def-weil-pbc-module-finite-type-presentation leaf): accepted.
+- 04:11 L: reviewed lem-weil-pbc-module-finite-presentation-direct-sum (7 steps, 0 new): accepted.
