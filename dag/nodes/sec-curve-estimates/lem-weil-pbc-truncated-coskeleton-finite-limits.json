@@ -24,9 +24,90 @@
   "def-weil-pbc-simplicial-object",
   "def-weil-pbc-simplicial-coskeleton"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "For each $n$, the indexing category is finite: for each $0\\leq k\\leq m$ there are finitely many order-preserving maps $[k]\\to[n]$, and between any two such maps there are finitely many possible $\\psi$. Thus finite limits [def-galois-finite-limits-colimits] give $L_n=\\lim U(n)$ with projections $p_{n,\\alpha}:L_n\\to U_k$. If $\\varphi:[n]\\to[n']$, the projections $p_{n',\\varphi\\alpha}$ form a cone over $U(n)$, hence give a unique $L(\\varphi):L_{n'}\\to L_n$ with $p_{n,\\alpha}L(\\varphi)=p_{n',\\varphi\\alpha}$. Applying these equations to the identity and to a composite proves the simplicial identities by uniqueness of maps into a limit; so $L$ is a simplicial object.",
+   "uses": [
+    "def-galois-finite-limits-colimits",
+    "def-weil-pbc-simplicial-set",
+    "def-weil-pbc-simplicial-object"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/simplicial.tex",
+    "place": "Lemma 0183 (lemma-existence-cosk), formula and construction of the maps induced by postcomposition"
+   }
+  },
+  {
+   "text": "For a simplicial object $V$, a morphism $g:V\\to L$ is equivalent, by the limit property in each degree, to compatible maps $g_{n,\\alpha}=p_{n,\\alpha}g_n:V_n\\to U_k$ for all $\\alpha:[k]\\to[n]$, $k\\leq m$. Naturality in $n$ says $g_{n,\\alpha}V(\\varphi)=g_{n',\\varphi\\alpha}$ for $\\varphi:[n]\\to[n']$. Taking $\\varphi=\\alpha:[k]\\to[n]$ gives $g_{n,\\alpha}=g_{k,\\mathrm{id}}V(\\alpha)$. Conversely, a natural transformation $t:\\mathrm{sk}_mV\\to U$ gives maps $t_kV(\\alpha)$; for $\\psi:[k']\\to[k]$, naturality of $t$ makes $U(\\psi)t_kV(\\alpha)=t_{k'}V(\\alpha\\psi)$, so they are cones and define $g_n$. Their compatibility under every $\\varphi$ makes $g$ simplicial. These constructions are inverse and natural in $V$, establishing the coskeleton mapping property [def-weil-pbc-simplicial-coskeleton]; its counit is $p_{k,\\mathrm{id}}:L_k\\to U_k$ in degrees $k\\leq m$.",
+   "uses": [
+    "def-weil-pbc-simplicial-coskeleton",
+    "def-weil-pbc-simplicial-object"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/simplicial.tex",
+    "place": "Lemma 0183 (lemma-existence-cosk), proof, the Hom-set calculation from compatible families and their identity components"
+   }
+  },
+  {
+   "text": "For $k\\leq m$, the object $\\mathrm{id}_{[k]}:[k]\\to[k]$ is final in $(\\Delta/[k])_{\\leq m}$, hence initial in its opposite. The limit of $U(k)$ is therefore $U_k$: the cone with vertex $U_k$ has component $U(\\alpha):U_k\\to U_j$ at $\\alpha:[j]\\to[k]$, and every cone factors uniquely through its component at the identity. Thus the counit $p_{k,\\mathrm{id}}$ from the preceding step is an isomorphism in each truncated degree; naturality makes $\\varepsilon:\\mathrm{sk}_mL\\to U$ an isomorphism.",
+   "uses": [
+    "def-weil-pbc-simplicial-coskeleton"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/simplicial.tex",
+    "place": "Lemma 0184 (lemma-trivial-cosk), proof, and Lemma 0185 (lemma-recover-cosk)"
+   }
+  },
+  {
+   "text": "Let $\\Phi:\\mathcal C\\to\\mathcal D$ preserve finite limits. Each category $(\\Delta/[n])_{\\leq m}^{\\mathrm{op}}$ is finite by step 1, so the cone $\\Phi(p_{n,\\alpha})$ exhibits $\\Phi(L_n)$ as the limit of $\\Phi\\circ U(n)$. The equations defining $L(\\varphi)$ in step 1 remain true after $\\Phi$; uniqueness of the induced limit maps therefore identifies $\\Phi\\circ L$ with the same construction applied to $\\Phi\\circ U$. The Hom-set calculation of step 2, with these image cones, proves that $(\\Phi\\circ L,\\Phi(\\varepsilon))$ has the coskeleton mapping property in $\\mathcal D$. If $c:K\\to\\operatorname{cosk}_m\\mathrm{sk}_mK$ is the canonical isomorphism, then $\\Phi(c)$ is an isomorphism and $\\Phi(\\varepsilon)\\circ\\mathrm{sk}_m(\\Phi(c))=\\mathrm{id}$; the mapping property makes $\\Phi(c)$ the canonical morphism for $\\Phi\\circ K$.",
+   "uses": [
+    "def-galois-finite-limits-colimits",
+    "def-weil-pbc-simplicial-coskeleton"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/hypercovering.tex",
+    "place": "Lemma 01GD (lemma-acyclicity), proof, finite-limit construction of coskeleton terms under an exact functor; expanded using Simplicial Lemma 0183"
+   }
+  },
+  {
+   "text": "For $\\beta:U\\to U'$, the maps $\\beta_k:U_k\\to U'_k$ form a natural transformation $U(n)\\to U'(n)$ for each $n$. Composing each limit projection for $U(n)$ with $\\beta_k$ gives a cone over $U'(n)$ and a unique map $b_n:L_n\\to L'_n$. Its defining equations commute with the postcomposition maps $L(\\varphi)$ by uniqueness, so $b$ is simplicial; at $k\\leq m$ its component obeys $\\varepsilon'_k b_k=\\beta_k\\varepsilon_k$. The mapping property of step 2 makes $b$ the unique map with that property. The same uniqueness applied to identity and composite transformations proves functoriality; applied to $\\beta^{-1}$ it proves that $b$ is an isomorphism when $\\beta$ is. Applying $\\Phi$ to the defining projection equations for $b$ gives exactly the defining equations for the map induced by $\\Phi\\circ\\beta$ between the image coskeleta of step 4, so these maps agree.",
+   "uses": [
+    "def-weil-pbc-simplicial-coskeleton"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/simplicial.tex",
+    "place": "Lemma 0183 (lemma-existence-cosk), naturality of the limit construction and the coskeleton mapping property"
+   }
+  },
+  {
+   "text": "Take $\\mathcal C=\\mathrm{PSh}(\\mathcal E)$ with values in sets. By [lem-weil-pbc-presheaf-finite-limits-objectwise] (1), presheaf limits are objectwise and evaluation at each $V\\in\\mathcal E$ preserves finite limits. Apply step 4 to this evaluation functor and step 5 to an arbitrary truncated-presheaf morphism. This gives the coskeleton and induced morphism sectionwise; in particular the canonical coskeletality isomorphism is detected at every $V$.",
+   "uses": [
+    "lem-weil-pbc-presheaf-finite-limits-objectwise"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/hypercovering.tex",
+    "place": "Lemma 01GD (lemma-acyclicity), proof, passage to sections and the finite-limit description of coskeleton terms; Sites and Sheaves Lemma 00W2 (lemma-limit-sheaf)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-galois-finite-limits-colimits",
+  "def-weil-pbc-simplicial-set",
+  "def-weil-pbc-simplicial-object",
+  "def-weil-pbc-simplicial-coskeleton",
+  "lem-weil-pbc-presheaf-finite-limits-objectwise"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/simplicial.tex",
+  "place": "Lemmas 0183, 0184, 0185, with the finite-limit consequence used in Hypercoverings Lemma 01GD; proof expanded from the online Stacks text because the local literature checkout is absent"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -58,7 +139,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "worker",
@@ -79,5 +160,19 @@
   "declaration": "CategoryTheory.SimplicialObject.Truncated.cosk; CategoryTheory.SimplicialObject.coskAdj",
   "file": "Mathlib/AlgebraicTopology/SimplicialObject/Basic.lean",
   "how": "clause (1) existence as the right Kan extension (pointwise, so given by the limit formula when the limits over StructuredArrow categories exist); clauses (2)-(4) not in Mathlib"
+ },
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "lem-weil-pbc-truncated-coskeleton-finite-limits",
+  "worker": "stage1",
+  "summary": "Expanded Stacks 0183 into the finite indexing category, limit maps, and explicit Hom-set bijection; proved the counit from the identity object's initiality in the opposite indexing category, finite-limit preservation by any left exact functor, naturality in the truncated object, and objectwise evaluation for presheaves. Reused the existing Mathlib leaf on presheaf limits; no new node was needed. The Stacks TeX checkout is absent locally, so the proof was checked against the online tags and recorded as agent-written.",
+  "blueprint": "Serves the first paragraph of lem-weil-pbc-hypercover-free-resolution, the phrase 'Exactness is a local assertion about the sheaves ... Thus every cycle is locally a boundary', through the finite-limit coskeleton comparison used in steps 1, 2 and 4 of lem-weil-pbc-coskeleton-free-homology-comparison."
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "group": "E1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed by the lead of E1; spot-checked by L: L: reviewed in full by a reviewer sub-agent (PASS): 0183/0184/0185 and 01GD read, 6 steps checked, small cases"
  }
 }
