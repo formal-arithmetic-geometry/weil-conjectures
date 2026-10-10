@@ -92,9 +92,9 @@ theorem nonempty_iso_derivedTensor_flip :
     Nonempty (derivedTensor A X ≅ (derivedTensor A X).flip) := by
   obtain ⟨_⟩ := _root_.DerivedCategory.nonempty_braidedCategory
     (Sheaf X.smallEtaleTopology A)
-  exact ⟨NatIso.ofComponents (fun K ↦ NatIso.ofComponents (fun M ↦ β_ K M)
-    (fun g ↦ BraidedCategory.braiding_naturality_right K g))
-    (fun f ↦ by ext M; exact BraidedCategory.braiding_naturality_left f M)⟩
+  -- `curriedBraidingNatIso` is generic in the category, so the kernel does not check the
+  -- naturality of the braiding in `D(X_ét)` (which took about 50s).
+  exact ⟨BraidedCategory.curriedBraidingNatIso _⟩
 
 variable {A X}
 
