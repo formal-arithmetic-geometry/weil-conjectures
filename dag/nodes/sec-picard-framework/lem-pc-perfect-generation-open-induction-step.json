@@ -13,7 +13,7 @@
  },
  "kind": "statement",
  "title": "Perfect generators extend across an affine-open cover",
- "statement": "Let X be a quasi-compact and quasi-separated scheme [def-pc-scheme], let U be a quasi-compact open subscheme and V an affine open subscheme with X = U union V. If P is a perfect generator of D_QCoh(O_U) [def-pc-derived-category, def-pc-perfect-complex, def-pc-generators], then there are a perfect object Q of D(O_X) whose restriction to U has P as a direct summand, and a perfect Koszul object K' of D(O_X) supported on the closed subset V minus U, such that Q direct-sum K' is a generator of D_QCoh(O_X).",
+ "statement": "Let X be a quasi-compact and quasi-separated scheme [def-pc-scheme], let U be a quasi-compact open subscheme and V an affine open subscheme with X = U union V. If P is a perfect generator of D_QCoh(O_U) [def-pc-derived-category, def-pc-perfect-complex, def-pc-generators], then there are a perfect object Q of D(O_X) whose restriction to U has P as a direct summand, and a perfect object K' of D(O_X) supported on the closed subset V minus U (meaning every cohomology sheaf vanishes on its complement), such that the direct sum Q $\\oplus$ K' is a generator of D_QCoh(O_X).",
  "source": {
   "document": "literature/stacks-project/perfect.tex",
   "place": "Tag 09IS, proof (using Tags 09IQ and 09IR), induction step"
@@ -24,9 +24,67 @@
   "def-pc-perfect-complex",
   "def-pc-generators"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Apply the supported perfect-map lifting statement [lem-sc-perfect-support-map-lift] with T=X, E=0 and the zero map from P. Its hypotheses hold because X is quasi-compact and quasi-separated, U is quasi-compact, and X minus T is empty. It produces a perfect Q on X whose restriction to U has P as a direct summand.",
+   "uses": [
+    "lem-sc-perfect-support-map-lift"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/perfect.tex",
+    "place": "Tag 09IQ, Lemma direct-summand-of-a-restriction"
+   }
+  },
+  {
+   "text": "Write V=Spec(A) and Z=V minus U. Since U intersection V is quasi-compact, Z is the vanishing locus V(f_1,...,f_r) for finitely many f_i in A. Let K be the Koszul complex on the f_i over A. It is perfect, its cohomology is supported on Z, and the supported-open pushforward statement [lem-pc-supported-open-pushforward] makes K' = R(V \\to X)_*K perfect on X and identifies K' with the extension-by-zero pushforward of K.",
+   "uses": [
+    "lem-pc-supported-open-pushforward"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/perfect.tex",
+    "place": "Tag 09IS, induction step, using Tags 09IQ and 09IR; Tag 08DP"
+   }
+  },
+  {
+   "text": "Let E be in D_QCoh(O_X) and suppose every Hom((Q \\oplus K')[n],E) is zero. By the supported-open pushforward statement [lem-pc-supported-open-pushforward] (with T=Z, closed in X and contained in V), K' is the extension-by-zero pushforward of K, so the adjunction between extension by zero and restriction identifies Hom(K'[n],E) with Hom(K[n],E restricted to V). The Koszul orthogonality criterion [lem-pc-perfect-generation-koszul-orthogonal] therefore gives that the canonical map E restricted to V \\to R(U intersection V \\to V)_*(E restricted to U intersection V) is an isomorphism. Let j:U \\to X be the inclusion and F=Rj_*(E restricted to U), with canonical (unit) map E \\to F. By [lem-pc-restrict-derived-direct-image-open] (applied to j and the open V, and to the open U), F restricted to V is canonically R(U intersection V \\to V)_*(E restricted to U intersection V) and F restricted to U is E restricted to U; under these identifications the restriction of E \\to F to V is the isomorphism just obtained and its restriction to U is the identity. A morphism in D(O_X) that is an isomorphism on each member of an open cover is an isomorphism (its cone has cohomology sheaves vanishing on each member, hence zero), so E \\to F=Rj_*(E restricted to U) is an isomorphism.",
+   "uses": [
+    "lem-pc-supported-open-pushforward",
+    "lem-pc-perfect-generation-koszul-orthogonal",
+    "lem-pc-restrict-derived-direct-image-open"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/perfect.tex",
+    "place": "Tag 09IS, induction step, paragraph beginning Let E be an object"
+   }
+  },
+  {
+   "text": "Since E is R(U \\to X)_*(E restricted to U), adjunction gives Hom(Q[n],E)=Hom(Q restricted to U[n],E restricted to U). The direct-summand decomposition of Q restricted to U contains Hom(P[n],E restricted to U) as a direct summand, so these groups vanish. Because P is a generator, E restricted to U is zero. Applying the already-proved isomorphism E=R(U \\to X)_*(E restricted to U) gives E=0, so the direct sum Q \\oplus K' is a generator.",
+   "uses": [
+    "lem-sc-perfect-support-map-lift",
+    "def-pc-generators"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/perfect.tex",
+    "place": "Tag 09IS, induction step, final paragraph"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sc-perfect-support-map-lift",
+  "lem-pc-supported-open-pushforward",
+  "lem-pc-perfect-generation-koszul-orthogonal",
+  "lem-pc-restrict-derived-direct-image-open",
+  "def-pc-generators"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/perfect.tex",
+  "place": "Tag 09IS, proof of theorem-bondal-van-den-Bergh, induction step"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -51,12 +109,31 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "chapter": "sec-picard-framework",
  "unit": "sk-thm-picard-duality",
  "created": {
   "item": "lem-pc-derived-qcoh-perfect-generation",
   "by": "worker",
   "date": "2026-10-10"
+ },
+ "split_report": {
+  "date": "2026-10-11",
+  "item": "lem-pc-perfect-generation-open-induction-step",
+  "worker": "stage1",
+  "summary": "Read the Stacks proof of Tag 09IS and split the induction step into its actual inputs: the existing supported perfect-map lifting lemma supplies Q, while two new statement-only nodes record the Koszul orthogonality criterion (Tag 09IR) and the supported open-immersion pushforward/restriction lemmas (Tags 08DP and 08DF). The item proof then constructs the Koszul object and spells out the Hom-orthogonality argument proving that Q direct-sum K' generates.",
+  "blueprint": "Realizes the ancestor lem-sc-finite-duality blueprint place ‘perfect-generation proof: induction step adjoining an affine open and a Koszul perfect complex supported on its complement’ through the four proof steps above.",
+  "tool_uses": []
+ },
+ "tool_uses": [
+  "lem-pc-restrict-derived-direct-image-open"
+ ],
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-pgi2559",
+  "group": "C1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-pgi2559 (reviewer sub-agent of L); spot-checked: Read whole packet; checked Steps 1-4 against Tag 09IS/09IQ/09IR/08DP/08DF and cited statements; generator sense matches def-pc-generators and citer lem-pc-derived-qcoh-perfect-generation (weak generator, C4 ok); no MV node needed (local-iso check), no overlap with lem-pc-perfect-thick-closure; Koszul/08DP/08DF inputs are proper statement-only nodes, no existing node by tag/grep. FIX more, RETURN less: (1) C1 Step 3 restriction of Rj_* to V was uncited ('transitivity') - now cites existing lem-pc-restrict-derived-direct-image-open (Tag 08FE, generic ringed-space tool from sk-thm-picard-f-representable, C7 tool use); (2) C4 new node lem-pc-perfect-generation-koszul-orthogonal (i) said only 'E is isomorphic to', Step 3 needs the canonical map to be an iso (as in 09IR) - statement corrected; (3) C4 Step 3 cited lem-sc-derived-open-gluing for 'iso on an open cover is iso', which it does not state, and had the map direction F->E - replaced by the elementary cone argument with the unit E->F, gluing citation dropped; Step 4 uses trimmed. Note E7: dropping 'Koszul' from the item statement (weakening, citer only needs perfect) was not named in the report.; 2 file(s) fixed by the reviewer"
  }
 }
