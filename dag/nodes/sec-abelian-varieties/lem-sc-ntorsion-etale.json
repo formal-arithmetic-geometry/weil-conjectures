@@ -3,7 +3,7 @@
  "blueprint": {
   "is": "lem-sc-ntorsion-etale",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "The $n$-torsion of an abelian variety is etale",
@@ -19,43 +19,92 @@
  ],
  "proof": [
   {
-   "text": "By [lem-sc-isogeny-facts](b), $A[n]$ is a finite flat group\nscheme of order $n^{2g}$, prime to $\\operatorname{char}k$\n([lem-sc-mult-n-finite-flat]); by\n[lem-sc-fg-order-prime-etale] it is etale (equivalently, $[n]$ is etale, by\n[lem-sc-mult-n-etale-kernel]), and by\n[lem-sc-finite-etale-points] the map\n$A[n](k)\\to A[n](k')$ is a bijection. It remains to identify the\ngroup structure. Since $[n]$ is surjective on $k$-points for\nevery $n$ ([lem-sc-isogeny-surjective]), the group $A(k)$\nis divisible; by [lem-sc-av-commutative] it is abelian. For a\nprime power $\\ell^e$ with $\\ell\\neq\\operatorname{char}k$, the\nsubgroup $A(k)[\\ell^e]=A[\\ell^e](k)$ has order\n$\\ell^{2ge}$ ([lem-sc-finite-etale-points] applied to\n$A[\\ell^e]$, of order $\\ell^{2ge}$ by\n[lem-sc-isogeny-facts](b)), so the divisible group $A(k)$\nsatisfies $|A(k)[\\ell]|=\\ell^{2g}$, and by\n[lem-sc-divisible-group-structure]\n\n$$\nA[\\ell^e](k)\\cong(\\mathbf Z/\\ell^e\\mathbf Z)^{2g}.\n$$",
+   "text": "For n prime to the characteristic, [lem-sc-mult-n-finite-flat] gives that A[n] is finite flat of order n^{2g}, and [lem-sc-mult-n-etale-kernel] gives that it is etale. Applying [lem-sc-finite-etale-points] to A[n] gives |A[n](k)| = n^{2g} and identifies the canonical map A[n](k) \\to A[n](k') as a bijection. Thus A[n] is a finite etale group scheme and the asserted base-change map is an isomorphism of groups.",
    "uses": [
-    "lem-sc-isogeny-facts",
     "lem-sc-mult-n-finite-flat",
-    "lem-sc-fg-order-prime-etale",
     "lem-sc-mult-n-etale-kernel",
-    "lem-sc-finite-etale-points",
-    "lem-sc-isogeny-surjective",
-    "lem-sc-av-commutative",
-    "lem-sc-divisible-group-structure"
+    "lem-sc-finite-etale-points"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/groupoid-schemes.tex",
+    "place": "Tag 0BFH and Tag 03RP"
+   }
   },
   {
-   "text": "For general $n=\\prod_i\\ell_i^{e_i}$ prime to\n$\\operatorname{char}k$, the closed subgroup schemes\n$A[\\ell_i^{e_i}]$ have coprime orders, so\n$A[n]=A[\\ell_1^{e_1}]\\times\\cdots\\times A[\\ell_r^{e_r}]$ as group\nschemes (by Bezout's identity the multiplication maps give the\ndirect product decomposition), and\n\n$$\nA[n](k)\\cong\\prod_i(\\mathbf Z/\\ell_i^{e_i}\\mathbf Z)^{2g}\n\\cong(\\mathbf Z/n\\mathbf Z)^{2g}\n$$\n\nby the Chinese remainder theorem.",
-   "uses": [],
-   "elementary": null
+   "text": "The surjectivity statement [lem-sc-isogeny-surjective] for every positive integer implies that A(k) is divisible, and [lem-sc-av-commutative] makes it an abelian group. For each prime power ell^e dividing n, the equality A(k)[ell^e] = A[ell^e](k) follows from the definition of the kernel, while, since ell divides n and so ell^e is prime to char k, [lem-sc-mult-n-finite-flat] gives that A[ell^e] is finite flat of order ell^(2ge), [lem-sc-mult-n-etale-kernel] gives that it is etale, and [lem-sc-finite-etale-points] then gives this subgroup order ell^(2ge). In particular its ell-torsion has order ell^(2g), so [lem-sc-divisible-group-structure] gives A[ell^e](k) isomorphic to (Z/ell^e Z)^(2g).",
+   "uses": [
+    "lem-sc-isogeny-surjective",
+    "lem-sc-av-commutative",
+    "lem-sc-mult-n-finite-flat",
+    "lem-sc-mult-n-etale-kernel",
+    "lem-sc-finite-etale-points",
+    "lem-sc-divisible-group-structure"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/groupoid-schemes.tex",
+    "place": "Tag 03RP, proof of Proposition 39.9.11"
+   }
+  },
+  {
+   "text": "Write n as the product of its pairwise coprime prime powers. The coprime torsion decomposition [lem-sc-coprime-torsion-decomposition], applied to the Z-module A[n](k), identifies A[n](k) with the product of the prime-power subgroups. The Chinese remainder isomorphism identifies the product of the groups (Z/ell_i^e_i Z)^(2g) with (Z/n Z)^(2g). The kernel definition identifies these point subgroups with the corresponding A[ell_i^e_i](k), so this is the claimed group isomorphism.",
+   "uses": [
+    "lem-sc-coprime-torsion-decomposition"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/groupoid-schemes.tex",
+    "place": "Tag 03RP, Chinese remainder step"
+   }
   }
  ],
  "proof_deps": [
-  "lem-sc-isogeny-facts",
   "lem-sc-mult-n-finite-flat",
-  "lem-sc-fg-order-prime-etale",
   "lem-sc-mult-n-etale-kernel",
   "lem-sc-finite-etale-points",
   "lem-sc-isogeny-surjective",
   "lem-sc-av-commutative",
-  "lem-sc-divisible-group-structure"
+  "lem-sc-divisible-group-structure",
+  "lem-sc-coprime-torsion-decomposition"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/master/blueprint/sec-abelian-varieties/sk-prop-av-ntorsion-etale/lem-sc-ntorsion-etale.md",
   "place": "## Proof"
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "n-torsion subgroup scheme of an abelian variety is etale",
+   "results": "Etale-related declarations, no theorem for abelian-variety torsion",
+   "date": "2026-10-11",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "Etale torsionSubgroupScheme",
+   "results": "Unknown identifier Etale; no match",
+   "date": "2026-10-11",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "torsionSubgroupScheme|nonempty_addEquiv_torsionBy AlgebraicGeometry",
+   "results": "no Mathlib matches",
+   "date": "2026-10-11",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "n-torsion points of abelian variety",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-11",
+   "verdict": "unavailable"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [],
  "blueprint_kind": "lemma",
@@ -260,5 +309,21 @@
   }
  },
  "chapter": "sec-abelian-varieties",
- "unit": "sk-prop-av-ntorsion-etale"
+ "unit": "sk-prop-av-ntorsion-etale",
+ "split_report": {
+  "date": "2026-10-11",
+  "item": "lem-sc-ntorsion-etale",
+  "worker": "stage1",
+  "summary": "Split the item into the finite-etale/base-change argument, the divisible-group prime-power argument, and the coprime-primary decomposition. Existing DAG nodes provide every non-elementary input except the decomposition, which is a Mathlib leaf matching Submodule.torsionBy_isInternal.",
+  "blueprint": "The three proof steps realize the single unit proof step: the first two paragraphs establish finite etaleness, base change, divisibility, and prime-power torsion; the final paragraph is the coprime product and Chinese remainder clause.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-nte1752",
+  "group": "G1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-nte1752 (reviewer sub-agent of L); spot-checked: Read packet whole; Step 1 cites finite-flat, etale-kernel (char k prime to n), finite-etale-points with their hypotheses; Step 3 leaf lem-sc-coprime-torsion-decomposition read at Mathlib/Algebra/Module/Torsion/Basic.lean:534, exact match of Submodule.torsionBy_isInternal (Finset S, pairwise IsCoprime, IsTorsionBy prod); def-weil-pbc-direct-sum-modules exists; CRT elementary. FIX more, RETURN less: C4/C1 in Step 2 - lem-sc-finite-etale-points needs A[ell^e] finite etale but etaleness of A[ell^e] was not cited; added [lem-sc-mult-n-etale-kernel] with the hypothesis ell^e prime to char k (ell | n) to the text and uses of step 2 (missed by the second reading).; 1 file(s) fixed by the reviewer"
+ }
 }
