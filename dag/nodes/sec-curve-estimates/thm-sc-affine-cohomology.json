@@ -3,7 +3,7 @@
  "blueprint": {
   "is": "thm-sc-affine-cohomology",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "Kummer computation on an affine curve",
@@ -19,36 +19,92 @@
  ],
  "proof": [
   {
-   "text": "The\n[def-sc-kummer-sequence] together with\n$\\operatorname{Pic}(C)=H^1(C,\\mathbf G_m)$\n([lem-sc-h1-gm-pic]) and the vanishing\n$H^2(C,\\mathbf G_m)=0$ of [lem-sc-brauer-zero] (affine case)\ngive the long exact sequence\n\n$$\n0\\to\\mu_n(k)\\to\\mathcal O_C(C)^\\times\\xrightarrow{\\ n\\ }\n\\mathcal O_C(C)^\\times\\to H^1(C,\\mu_n)\\to\n\\operatorname{Pic}(C)\\xrightarrow{\\ n\\ }\\operatorname{Pic}(C)\\to\nH^2(C,\\mu_n)\\to 0,\n$$\n\nwhence the displayed exact sequence for $H^1(C,\\mu_n)$, with\n$H^1(C,\\mu_n)$ an extension of $\\operatorname{Pic}(C)[n]$ by\n$\\mathcal O_C(C)^\\times/\\mathcal O_C(C)^\\times{}^{\\,n}$; the\n$H^2$-cokernel vanishes because $\\operatorname{Pic}(C)$ is\n$n$-divisible ([lem-sc-pic-affine]). The $H^0$-term is\n$\\mu_n(k)=\\mathbf Z/n\\mathbf Z$ by\n[lem-sc-primitive-root]; for $q>2$ the vanishing is\n[lem-sc-affine-cohomological-dimension]. The finiteness of the\nunit quotient is [lem-sc-affine-unit-quotient].",
+   "text": "Apply [lem-sc-kummer-les] to the smooth connected affine curve C, using [lem-sc-brauer-zero] for the hypothesis H^2(C, G_m)=0. It gives the canonical short exact sequence 0 → O_C(C)^×/O_C(C)^×ⁿ → H^1(C, μ_n) → Pic(C)[n] → 0 and identifies H^0(C, μ_n) with Z/nZ via [lem-sc-primitive-root]. Transport these groups along the canonical trivialization θ_ζ of [def-sc-mu-trivialization]. The unit quotient is finite by [lem-sc-affine-unit-quotient], while Pic(C)[n] is finite and Pic(C) is n-divisible by [lem-sc-pic-affine]; hence the Kummer H^2 cokernel in [lem-sc-kummer-les] vanishes.",
    "uses": [
-    "def-sc-kummer-sequence",
-    "lem-sc-h1-gm-pic",
+    "lem-sc-kummer-les",
     "lem-sc-brauer-zero",
-    "lem-sc-pic-affine",
     "lem-sc-primitive-root",
-    "lem-sc-affine-cohomological-dimension",
-    "lem-sc-affine-unit-quotient"
+    "def-sc-mu-trivialization",
+    "lem-sc-affine-unit-quotient",
+    "lem-sc-pic-affine"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The higher-degree vanishing H^q(C_et, F_n)=0 for every q>1 is the affine-curve cohomological-dimension statement [lem-sc-affine-cohomological-dimension], applied to the torsion constant sheaf F_n.",
+   "uses": [
+    "lem-sc-affine-cohomological-dimension"
    ],
    "elementary": false
   }
  ],
  "proof_deps": [
-  "def-sc-kummer-sequence",
-  "lem-sc-h1-gm-pic",
+  "def-sc-mu-trivialization",
+  "lem-sc-kummer-les",
   "lem-sc-brauer-zero",
-  "lem-sc-pic-affine",
   "lem-sc-primitive-root",
-  "lem-sc-affine-cohomological-dimension",
-  "lem-sc-affine-unit-quotient"
+  "lem-sc-pic-affine",
+  "lem-sc-affine-unit-quotient",
+  "lem-sc-affine-cohomological-dimension"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/master/blueprint/sec-curve-estimates/sk-prop-cd-affine/thm-sc-affine-cohomology.md",
   "place": "## Proof"
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Kummer computation étale cohomology smooth affine connected curve constant Z/n exact sequence units Pic torsion vanishing higher cohomology",
+   "results": "groupCohomology.H1ofAutOnUnitsUnique; groupCohomology.isMulCoboundary₁_of_isMulCocycle₁_of_aut_to_units; Algebra.Extension.instAddCommGroupH1Cotangent; Algebra.Generators.H1Cotangent.exact_map_δ'; Algebra.H1Cotangent.exact_map_δ; Algebra.instFiniteH1CotangentOfFinitePresentationOfProjectiveKaehlerDifferential; Algebra.Generators.H1Cotangent.exact_map_δ; Algebra.H1Cotangent",
+   "date": "2026-10-11",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "Sheaf.H (C.constantZMod n) 0, Function.Exact, CohomologicalPicardGroup, subsingleton higher cohomology",
+   "results": "0 hits; unknown identifier Sheaf.H",
+   "date": "2026-10-11",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "constantZMod|sheafH_rootsOfUnitySheaf|finite_units_quotient|affine.*cohom in Mathlib",
+   "results": "0 hits",
+   "date": "2026-10-11",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "étale cohomology affine curve Kummer sequence units Picard torsion",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-11",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "short exact sequence H1 affine curve mu_n units Picard n torsion",
+   "results": "IsDedekindDomain.selmerGroup.fromUnitLift; IsDedekindDomain.selmerGroup.fromUnit; IsDedekindDomain.selmerGroup.fromUnit_ker; IsDedekindDomain.selmerGroup; groupCohomology.H1ofAutOnUnitsUnique; groupCohomology.isMulCoboundary₁_of_isMulCocycle₁_of_aut_to_units; WeierstrassCurve.Affine.Point.toClass_apply; WeierstrassCurve.Affine.Point.toClass",
+   "date": "2026-10-11",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "Function.Exact _ _, AddSubgroup.torsionBy, Sheaf.H",
+   "results": "0 hits; unknown identifier Sheaf.H",
+   "date": "2026-10-11",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "Function.Exact|torsionBy|CohomologicalPicardGroup in Mathlib/Algebra Mathlib/CategoryTheory",
+   "results": "0 hits",
+   "date": "2026-10-11",
+   "verdict": "no match"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [],
  "blueprint_kind": "theorem",
@@ -263,5 +319,36 @@
   }
  },
  "chapter": "sec-curve-estimates",
- "unit": "sk-prop-cd-affine"
+ "unit": "sk-prop-cd-affine",
+ "split_report": {
+  "date": "2026-10-11",
+  "item": "thm-sc-affine-cohomology",
+  "worker": "stage1",
+  "summary": "The rejected Lean attachment is weaker than the blueprint target: it gives only noncanonical Nonempty equivalences and an existential sequence ending in torsion of the cohomological Picard group. I retained the target statement and rewrote its proof into the Kummer long-exact-sequence step, finiteness/divisibility consequences, canonical root-of-unity trivialization, and affine cohomological-dimension step, citing existing DAG nodes only.",
+  "blueprint": "The two steps realize the single proof paragraph of the blueprint node: Kummer sequence and Picard/Brauer consequences, followed by higher-degree affine cohomological-dimension vanishing.",
+  "tool_uses": [
+   {
+    "node": "lem-sc-kummer-les",
+    "why": "The Kummer long-exact-sequence lemma is a generic result from the separate H1 unit, used here as the route's Kummer calculation."
+   },
+   {
+    "node": "lem-sc-brauer-zero",
+    "why": "The Brauer vanishing theorem supplies the H^2(G_m)=0 hypothesis required by the Kummer lemma."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sc-kummer-les",
+  "lem-sc-brauer-zero",
+  "lem-sc-kummer-les",
+  "lem-sc-brauer-zero"
+ ],
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-sac2700",
+  "group": "M1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-sac2700 (reviewer sub-agent of L); spot-checked: Statement unchanged from base and matches citers (lem-sc-c2, sbc cd node). Step 1: lem-sc-kummer-les cited with hypotheses (n prime to char k; H^2(G_m)=0 from lem-sc-brauer-zero, smooth separated connected - affine gives separated); H^0 via lem-sc-primitive-root + def-sc-mu-trivialization (primitive zeta); unit-quotient finiteness is verbatim the statement of lem-sc-affine-unit-quotient (current sheaf-dag text: O^x/O^xn finite), Pic(C)[n] finite from lem-sc-pic-affine. Step 2: H^q=0, q>1 (incl. H^2) cited from lem-sc-affine-cohomological-dimension, not from Brauer node; Step 1's H^2(mu_n)=coker remark is redundant, not wrong. Tool uses kummer-les and brauer-zero accepted as generic tools. Cited statements re-read on sheaf-dag ee742d524: unchanged. No repairs."
+ }
 }

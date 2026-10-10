@@ -2717,3 +2717,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 21:45 L: merged deliver/C1/lem-pc-perfect-thick-closure (reviewer PASS; first push; new nodes: 2)
 - 21:46 L: merged deliver/J1/pqf-lem-finite-fp-locnoeth (reviewer FIX; first push; new nodes: 1)
 - 21:46 L: returned deliver/M1/lem-weil-pbc-generic-finite-algebra-splitting (reviewer RETURN: 1. E (false new statement) lem-weil-pbc-spread-purely-inseparable-factors: with L=K' and A'=A it asserts that for every )
+- 21:46 L: merged deliver/M1/thm-sc-affine-cohomology (reviewer PASS; first push; new nodes: 0)
