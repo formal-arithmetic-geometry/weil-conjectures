@@ -3,7 +3,7 @@
  "blueprint": {
   "is": "lem-sc-cohomological-dimension",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "Cohomological dimension of a smooth curve",
@@ -19,43 +19,187 @@
  ],
  "proof": [
   {
-   "text": "Work on one of the finitely many disjoint integral components\nof the smooth curve. By [lem-sc-generic-cohomology-comparison]\nit suffices to treat $\\eta_*M$. At a closed point the strict\nlocal ring of $C$ is a discrete valuation ring, by\n[lem-sc-smooth-regular], [lem-sc-regular-dim1-dvr] and preservation\nof regularity and dimension under etale localization.\nIts fraction field is algebraic over $k(C)$: a strict\nhenselization is a filtered union of etale neighborhoods and\ntheir fraction fields are finite separable extensions.\nBy [prop-weil-pbc-strict-henselization-stalk-formula]\nand [lem-sc-function-field-cd-one],\n$R^q\\eta_*M=0$ for $q>1$.\nThe sheaf $R^1\\eta_*M$ has zero generic restriction, hence\nis acyclic by [lem-sc-zero-generic-acyclic].",
+   "text": "*Setup.* Let $C$ be the smooth separated connected curve over the algebraically closed field $k$ and $F$ the torsion sheaf. By [lem-sc-affine-open-finite-complement] there is an affine open $U\\subseteq C$, with inclusion $j:U\\to C$, whose complement $S=C\\setminus U$ is a finite set of closed points. For $x\\in S$ the residue field $\\kappa(x)$ equals $k$ by [lem-weil-pbc-closed-point-residue-field-base] ($C$ is of finite type over $k$), hence is separably closed [def-kun-separably-closed]; so $U\\subseteq C$ satisfies the hypotheses of [lem-sc-finite-support-acyclic] and [lem-sc-iso-off-finite-set-cohomology]. By [lem-sc-etale-affine-over-curve] (with $w=\\mathrm{id}_U$) $U$ is an affine curve over $k$. The morphism $j$ is affine [pqf-def-affine-morphism]: for an affine open $W\\subseteq C$ the preimage $j^{-1}(W)=U\\cap W$ is affine by [lem-weil-pbc-separated-affine-open-intersection], $C$ being separated over $k$.",
    "uses": [
-    "lem-sc-generic-cohomology-comparison",
-    "lem-sc-smooth-regular",
-    "lem-sc-regular-dim1-dvr",
-    "prop-weil-pbc-strict-henselization-stalk-formula",
-    "lem-sc-function-field-cd-one",
-    "lem-sc-zero-generic-acyclic"
+    "lem-sc-affine-open-finite-complement",
+    "lem-weil-pbc-closed-point-residue-field-base",
+    "def-kun-separably-closed",
+    "lem-sc-etale-affine-over-curve",
+    "pqf-def-affine-morphism",
+    "lem-weil-pbc-separated-affine-open-intersection"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-curve-estimates/sk-prop-cd/lem-sc-cohomological-dimension.md",
+    "place": "split along the Lean proof WeilConjectures/AlgebraicGeometry/Curve/HighDegreeVanishing.lean, AlgebraicGeometry.IsCurve.subsingleton_sheafH_of_three_le_of_forall (lines 274-437): lines 284-294 (exists_isAffineOpen_finite_compl, isAlgClosed_residueField_of_isClosed, IsAffineHom j, hUcurve)"
+   }
   },
   {
-   "text": "The ordinary Grothendieck spectral sequence of\n[thm-sp-grothendieck] for sections composed with $\\eta_*$\nhas terms $H^a(C,R^b\\eta_*M)$ and converges to\n$H^{a+b}(k(C),M)$. Direct image takes injectives to injectives\nbecause its left adjoint is exact, so the required acyclicity\nholds. The only row above $b=0$ is $b=1$, and its only\npossibly nonzero term is at $a=0$. For total degree $q>2$\nthere are thus no differentials into or out of $H^q(C,\\eta_*M)$.\nIt equals $H^q(k(C),M)=0$, by\n[lem-sc-function-field-cd-one].",
+   "text": "*Reduction to $j_*$, for $F$ killed by $n$.* Let $n\\ge1$ and let $F$ (in this step and steps 3-8) be an abelian sheaf on $C_{\\Et}$ with $n\\cdot\\mathrm{id}_F=0$; put $G=j^{-1}F$, also killed by $n$ since $j^{-1}$ is additive [def-weil-pbc-inverse-image]. Let $\\eta_F:F\\to j_*j^{-1}F=j_*G$ be the unit of $j^{-1}\\dashv j_*$ [def-weil-pbc-direct-image]. By the triangle identity $\\varepsilon_{j^{-1}F}\\circ j^{-1}(\\eta_F)=\\mathrm{id}$, and $\\varepsilon_{j^{-1}F}$ is an isomorphism by [lem-sc-open-immersion-pushforward-fully-faithful]; so $j^{-1}(\\eta_F)$ is an isomorphism, and [lem-sc-iso-off-finite-set-cohomology] gives $H^q(C,F)\\cong H^q(C,j_*G)$ for all $q\\ge2$. It therefore suffices for $q=3$ to show $H^3(C,j_*G)=0$ (steps 3-7).",
    "uses": [
-    "thm-sp-grothendieck",
-    "lem-sc-function-field-cd-one"
+    "def-weil-pbc-inverse-image",
+    "def-weil-pbc-direct-image",
+    "lem-sc-open-immersion-pushforward-fully-faithful",
+    "lem-sc-iso-off-finite-set-cohomology"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-curve-estimates/sk-prop-cd/lem-sc-cohomological-dimension.md",
+    "place": "split along the Lean proof WeilConjectures/AlgebraicGeometry/Curve/HighDegreeVanishing.lean, AlgebraicGeometry.IsCurve.subsingleton_sheafH_of_three_le_of_forall (lines 274-437): lines 295-313 (hunit, hb)"
+   }
+  },
+  {
+   "text": "*Two acyclic envelopes on $U$.* By [lem-sc-torsion-acyclic-envelope] on $U$ there is a short exact sequence $0\\to G\\to J\\to G'\\to0$ in $\\Ab(U_{\\Et})$ with $J$ killed by $n$, $H^q(U,J)=0$, $H^q(C,j_*J)=0$ and $H^q(W,w^{-1}J)=0$ for all $q\\ge1$ and every etale $w:W\\to U$; the cokernel $G'$ is killed by $n$ (a quotient of $J$). Applying the same lemma to $G'$ gives $0\\to G'\\to J'\\to G''\\to0$ with the same properties for $J'$ and $G''$ killed by $n$. A sheaf killed by $n$ is torsion in the sense of [def-weil-pbc-etale-sheaves] (every section is killed by $n$).",
+   "uses": [
+    "lem-sc-torsion-acyclic-envelope",
+    "def-weil-pbc-etale-sheaves"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-curve-estimates/sk-prop-cd/lem-sc-cohomological-dimension.md",
+    "place": "split along the Lean proof WeilConjectures/AlgebraicGeometry/Curve/HighDegreeVanishing.lean, AlgebraicGeometry.IsCurve.subsingleton_sheafH_of_three_le_of_forall (lines 274-437): lines 314-327 (exists_mono_acyclic_of_nsmul_eq_zero twice, S1, S2)"
+   }
+  },
+  {
+   "text": "*$H^1(C,j_*G'')=0$.* The long exact cohomology sequence [lem-weil-pbc-derived-functor-long-exact] of $0\\to G'\\to J'\\to G''\\to0$ on $U$ contains $H^1(U,J')\\to H^1(U,G'')\\to H^2(U,G')$; here $H^1(U,J')=0$ (step 3) and $H^2(U,G')=0$ by [lem-sc-affine-curve-h2-vanishing] ($U$ is an affine curve by step 1, $G'$ is torsion), so $H^1(U,G'')=0$. The edge map $H^1(C,j_*G'')\\to H^1(U,G'')$ is injective by [lem-sc-edge-map-h1-injective], hence $H^1(C,j_*G'')=0$.",
+   "uses": [
+    "lem-weil-pbc-derived-functor-long-exact",
+    "lem-sc-affine-curve-h2-vanishing",
+    "lem-sc-edge-map-h1-injective"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-curve-estimates/sk-prop-cd/lem-sc-cohomological-dimension.md",
+    "place": "split along the Lean proof WeilConjectures/AlgebraicGeometry/Curve/HighDegreeVanishing.lean, AlgebraicGeometry.IsCurve.subsingleton_sheafH_of_three_le_of_forall (lines 274-437): lines 328-338 (hc, hd)"
+   }
+  },
+  {
+   "text": "*$0\\to j_*G'\\to j_*J'\\to j_*G''\\to0$ is exact.* Exactness on the left and in the middle is left exactness of $j_*$ [def-weil-pbc-direct-image]. For surjectivity let $V\\to C$ be etale and $s\\in(j_*G'')(V)=G''(V\\times_CU)$. Cover $V$ by affine opens $V_a$; these form a covering of $V$ in $C_{\\Et}$. Put $W_a=V_a\\times_CU$. It is affine, being affine over the affine $V_a$ as a base change of the affine morphism $j$ (step 1, [lem-weil-pbc-affine-morphism-permanence] (1), (2)), and etale over $U$ as a base change of $V_a\\to C$ [lem-weil-pbc-etale-scheme-base-change]; so $W_a$ is an affine curve over $k$ by [lem-sc-etale-affine-over-curve]. Restricting $0\\to G\\to J\\to G'\\to0$ along $w_a:W_a\\to U$ gives a short exact sequence, inverse image being exact [prop-weil-pbc-inverse-image-modules-exact] (with $R=\\mathbf Z$); its long exact sequence [lem-weil-pbc-derived-functor-long-exact] contains $H^1(W_a,w_a^{-1}J)\\to H^1(W_a,w_a^{-1}G')\\to H^2(W_a,w_a^{-1}G)$, where the left group is $0$ by step 3 and the right one by [lem-sc-affine-curve-h2-vanishing] ($w_a^{-1}G$ is killed by $n$, hence torsion). So $H^1(W_a,w_a^{-1}G')=0$, and [lem-sc-lift-sections-h1-vanishing] applied to $0\\to G'\\to J'\\to G''\\to0$ and $W_a\\in U_{\\Et}$ lifts $s|_{V_a}\\in G''(W_a)$ to $J'(W_a)=(j_*J')(V_a)$. Thus $j_*J'\\to j_*G''$ is locally surjective, hence an epimorphism by [lem-weil-pbc-abelian-sheaf-epi-locally-surjective].",
+   "uses": [
+    "def-weil-pbc-direct-image",
+    "lem-weil-pbc-affine-morphism-permanence",
+    "lem-weil-pbc-etale-scheme-base-change",
+    "lem-sc-etale-affine-over-curve",
+    "prop-weil-pbc-inverse-image-modules-exact",
+    "lem-weil-pbc-derived-functor-long-exact",
+    "lem-sc-affine-curve-h2-vanishing",
+    "lem-sc-lift-sections-h1-vanishing",
+    "lem-weil-pbc-abelian-sheaf-epi-locally-surjective"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-curve-estimates/sk-prop-cd/lem-sc-cohomological-dimension.md",
+    "place": "split along the Lean proof WeilConjectures/AlgebraicGeometry/Curve/HighDegreeVanishing.lean, AlgebraicGeometry.IsCurve.subsingleton_sheafH_of_three_le_of_forall (lines 274-437): lines 339-367 (he: the base change W of an affine VA to U, H^1 vanishing, surjective_app_of_subsingleton_H_one; hS2j)"
+   }
+  },
+  {
+   "text": "*$H^2(C,j_*G')=0$.* The long exact sequence [lem-weil-pbc-derived-functor-long-exact] of the short exact sequence of step 5 contains $H^1(C,j_*G'')\\to H^2(C,j_*G')\\to H^2(C,j_*J')$; the left group is $0$ by step 4 and the right one by step 3 ([lem-sc-torsion-acyclic-envelope] (2) for $J'$).",
+   "uses": [
+    "lem-weil-pbc-derived-functor-long-exact",
+    "lem-sc-torsion-acyclic-envelope"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-curve-estimates/sk-prop-cd/lem-sc-cohomological-dimension.md",
+    "place": "split along the Lean proof WeilConjectures/AlgebraicGeometry/Curve/HighDegreeVanishing.lean, AlgebraicGeometry.IsCurve.subsingleton_sheafH_of_three_le_of_forall (lines 274-437): lines 368-377 (hh)"
+   }
+  },
+  {
+   "text": "*$H^3(C,j_*G)=0$, hence $H^3(C,F)=0$.* By left exactness of $j_*$ [def-weil-pbc-direct-image], $0\\to j_*G\\to j_*J\\to j_*G'$ is exact. Let $N=\\operatorname{coker}(j_*G\\to j_*J)$, so that $0\\to j_*G\\to j_*J\\to N\\to0$ is exact and $j_*J\\to j_*G'$ induces a monomorphism $\\psi:N\\to j_*G'$; let $R=\\operatorname{coker}\\psi$. The functor $j^{-1}$ is exact [prop-weil-pbc-inverse-image-modules-exact], and through the counit isomorphisms $j^{-1}j_*\\cong\\mathrm{id}$ of [lem-sc-open-immersion-pushforward-fully-faithful] (natural in the sheaf) $j^{-1}$ of $j_*J\\to j_*G'$ is $J\\to G'$, an epimorphism; so $j^{-1}\\psi$ is an epimorphism and $j^{-1}R=0$. By [lem-sc-finite-support-acyclic] (step 1) $H^q(C,R)=0$ for $q\\ge1$. The long exact sequences [lem-weil-pbc-derived-functor-long-exact] of $0\\to N\\to j_*G'\\to R\\to0$ and of $0\\to j_*G\\to j_*J\\to N\\to0$ give $0=H^1(C,R)\\to H^2(C,N)\\to H^2(C,j_*G')=0$ (step 6), so $H^2(C,N)=0$, and $H^2(C,N)\\to H^3(C,j_*G)\\to H^3(C,j_*J)=0$ (step 3, [lem-sc-torsion-acyclic-envelope] (2)), so $H^3(C,j_*G)=0$. By step 2, $H^3(C,F)=0$.",
+   "uses": [
+    "def-weil-pbc-direct-image",
+    "prop-weil-pbc-inverse-image-modules-exact",
+    "lem-sc-open-immersion-pushforward-fully-faithful",
+    "lem-sc-finite-support-acyclic",
+    "lem-weil-pbc-derived-functor-long-exact",
+    "lem-sc-torsion-acyclic-envelope"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-curve-estimates/sk-prop-cd/lem-sc-cohomological-dimension.md",
+    "place": "split along the Lean proof WeilConjectures/AlgebraicGeometry/Curve/HighDegreeVanishing.lean, AlgebraicGeometry.IsCurve.subsingleton_sheafH_of_three_le_of_forall (lines 274-437): lines 378-416 (T, psi, Sa, Sb, hR, hRa, hN, conclusion)"
+   }
+  },
+  {
+   "text": "*All $q\\ge3$ for sheaves killed by $n$ (dimension shifting on $C$).* Induction on $q\\ge3$, simultaneously for all sheaves killed by $n$; the case $q=3$ is step 7. For $q>3$ and $F$ killed by $n$, [lem-sc-torsion-acyclic-envelope] on $C$ gives $0\\to F\\to J_C\\to F_1\\to0$ with $J_C$ killed by $n$ and $H^{q}(C,J_C)=0$; $F_1$ is killed by $n$. The long exact sequence [lem-weil-pbc-derived-functor-long-exact] contains $H^{q-1}(C,F_1)\\to H^q(C,F)\\to H^q(C,J_C)=0$, and $H^{q-1}(C,F_1)=0$ by induction ($q-1\\ge3$). So $H^q(C,F)=0$.",
+   "uses": [
+    "lem-sc-torsion-acyclic-envelope",
+    "lem-weil-pbc-derived-functor-long-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-curve-estimates/sk-prop-cd/lem-sc-cohomological-dimension.md",
+    "place": "split along the Lean proof WeilConjectures/AlgebraicGeometry/Curve/HighDegreeVanishing.lean, AlgebraicGeometry.IsCurve.subsingleton_sheafH_of_three_le_of_forall (lines 274-437): lines 417-431 (hbdd)"
+   }
+  },
+  {
+   "text": "*Torsion sheaves.* Let now $F$ be any torsion sheaf. By [lemma-weil-pbc-torsion-filtered-union] $F=\\varinjlim_mF[m]$, a filtered colimit of the subsheaves $F[m]=\\ker(m:F\\to F)$, each killed by $m$. The curve $C$ is quasi-compact (of finite type over $k$) and quasi-separated (separated), so by [lem-weil-pbc-cohomology-filtered-colimit] $H^q(C,F)=\\varinjlim_mH^q(C,F[m])$, which is $0$ for $q\\ge3$ by step 8. Hence $H^q(C,F)=0$ for all $q>2$.",
+   "uses": [
+    "lemma-weil-pbc-torsion-filtered-union",
+    "lem-weil-pbc-cohomology-filtered-colimit"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-curve-estimates/sk-prop-cd/lem-sc-cohomological-dimension.md",
+    "place": "split along the Lean proof WeilConjectures/AlgebraicGeometry/Curve/HighDegreeVanishing.lean, AlgebraicGeometry.IsCurve.subsingleton_sheafH_of_three_le_of_forall (lines 274-437): lines 432-437 (Etale.subsingleton_H_of_isTorsion, whose proof is the filtered union of the n!-torsion subsheaves and Scheme.H_map_isColimit_of_isFiltered)"
+   }
   }
  ],
  "proof_deps": [
-  "lem-sc-generic-cohomology-comparison",
-  "lem-sc-smooth-regular",
-  "lem-sc-regular-dim1-dvr",
-  "prop-weil-pbc-strict-henselization-stalk-formula",
-  "lem-sc-function-field-cd-one",
-  "lem-sc-zero-generic-acyclic",
-  "thm-sp-grothendieck"
+  "lem-sc-affine-open-finite-complement",
+  "lem-weil-pbc-closed-point-residue-field-base",
+  "def-kun-separably-closed",
+  "lem-sc-etale-affine-over-curve",
+  "pqf-def-affine-morphism",
+  "lem-weil-pbc-separated-affine-open-intersection",
+  "def-weil-pbc-inverse-image",
+  "def-weil-pbc-direct-image",
+  "lem-sc-open-immersion-pushforward-fully-faithful",
+  "lem-sc-iso-off-finite-set-cohomology",
+  "lem-sc-torsion-acyclic-envelope",
+  "def-weil-pbc-etale-sheaves",
+  "lem-weil-pbc-derived-functor-long-exact",
+  "lem-sc-affine-curve-h2-vanishing",
+  "lem-sc-edge-map-h1-injective",
+  "lem-weil-pbc-affine-morphism-permanence",
+  "lem-weil-pbc-etale-scheme-base-change",
+  "prop-weil-pbc-inverse-image-modules-exact",
+  "lem-sc-lift-sections-h1-vanishing",
+  "lem-weil-pbc-abelian-sheaf-epi-locally-surjective",
+  "lem-sc-finite-support-acyclic",
+  "lemma-weil-pbc-torsion-filtered-union",
+  "lem-weil-pbc-cohomology-filtered-colimit"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/master/blueprint/sec-curve-estimates/sk-prop-cd/lem-sc-cohomological-dimension.md",
-  "place": "## Proof"
+  "place": "## Proof replaced by the route of the Lean proof AlgebraicGeometry.IsCurve.subsingleton_sheafH_of_three_le (WeilConjectures/AlgebraicGeometry/Curve/CohomologicalDimension.lean:397-415) through WeilConjectures/AlgebraicGeometry/Curve/HighDegreeVanishing.lean, AlgebraicGeometry.IsCurve.subsingleton_sheafH_of_three_le_of_forall (lines 274-437); Stacks 03SC (1) (literature/stacks-project/etale-cohomology.tex, theorem-vanishing-affine-curves) proves it by another route (constructible reduction and the trace method)"
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "etale cohomological dimension of a curve over an algebraically closed field is at most two",
+   "results": "Algebra.FormallyEtale.subsingleton_h1Cotangent, AlgebraicGeometry.IsEtale, Algebra.Etale.*, Scheme.zariskiTopology_le_etaleTopology",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "H^q of torsion etale sheaf on smooth curve over algebraically closed field vanishes for q greater than 2",
+   "results": "Algebra.FormallyEtale.subsingleton_h1Cotangent, IsStandardSmooth.subsingleton_h1Cotangent, Algebra.formallyEtale_iff, Algebra.etaleLocus_eq_compl_support",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rln 'cohomologicalDimension\\|smallEtaleTopology' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib",
+   "results": "AlgebraicGeometry/Sites/Etale.lean, Sites/AffineEtale.lean, Sites/EtalePoint.lean: the small étale site only, no cohomology vanishing; the project declaration AlgebraicGeometry.IsCurve.subsingleton_sheafH_of_three_le (WeilConjectures/AlgebraicGeometry/Curve/CohomologicalDimension.lean:411) states it for every curve but rests on sorry",
+   "date": "2026-10-10",
+   "verdict": "no match in Mathlib"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [],
  "blueprint_kind": "lemma",
@@ -97,5 +241,19 @@
    "module": "WeilConjectures.AlgebraicGeometry.Curve.CohomologicalDimension",
    "note": "states the node (03SC (1), any curve, q >= 3) but rests on sorry on 71d63dcf through IsConnectedCurve.subsingleton_sheafH_two_lowerStar, Etale.unitComparison_app_isColimit_of_isLimit and Scheme.H_map_isColimit_of_isFiltered (L, 2026-10-10): not attached; split along the Lean"
   }
- ]
+ ],
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "lem-sc-cohomological-dimension",
+  "worker": "stage1",
+  "summary": "Split along the Lean proof of AlgebraicGeometry.IsCurve.subsingleton_sheafH_of_three_le (03SC (1)), as the lead asked, instead of the imported generic-point/Leray argument (which is mathematically sound, checked: the row b=1 is concentrated in a=0, so no differential meets E_2^{q,0} for q>=3). Nine steps: an affine open U with finite complement of closed points with residue field k; F -> j_*j^{-1}F is an isomorphism over U hence on H^q, q>=2; two acyclic envelopes of sheaves killed by n on U; H^1(C,j_*G'')=0 via the H^1 edge map and H^2 vanishing on the affine curve U; exactness of 0->j_*G'->j_*J'->j_*G''->0 via H^2 vanishing on the affine curves V_a x_C U; H^2(C,j_*G')=0; H^3(C,j_*G)=0 through the cokernel of N -> j_*G' which vanishes over U; dimension shifting on C; filtered union of the F[m] and filtered colimits on the qcqs curve. Nine new nodes, each stating one Lean declaration: eight are sorry-free on slopmaster2 (affine open with finite complement, finite-support acyclicity, iso off a finite set on H^{>=2}, acyclic envelope, H^1 edge map injective, lifting sections, etale affine over a curve is a curve, j_* fully faithful for open j), one rests on sorry (lem-sc-affine-curve-h2-vanishing = IsCurve.subsingleton_sheafH_two_of_isAffine, 03SC (2) in degree 2). The statement is kept; the proof does not use smoothness or connectedness (the Lean proves it for every curve). The Lean candidate stays a candidate (it rests on sorry through lem-sc-affine-curve-h2-vanishing and H_map_isColimit_of_isFiltered).",
+  "blueprint": "The steps do not realize the paragraphs of the blueprint proof (## Proof): its first paragraph (R^q eta_*M = 0 for q>1, R^1 eta_*M acyclic) and second paragraph (Grothendieck spectral sequence for sections composed with eta_*) are replaced by the Lean route; the generic-point argument survives only inside lem-sc-affine-curve-h2-vanishing (its smooth case is lem-sc-generic-cohomology-comparison with lem-sc-affine-generic-second). This departs from unit sk-prop-cd steps 4-5 and uses 03SC (2) in degree 2 (unit sk-prop-cd-affine, which sk-prop-cd does not cite); no mathematical error in the unit route was found."
+ },
+ "tool_uses": [
+  "lem-weil-pbc-cohomology-filtered-colimit",
+  "lem-weil-pbc-derived-functor-long-exact",
+  "lemma-weil-pbc-torsion-filtered-union",
+  "prop-weil-pbc-inverse-image-modules-exact"
+ ],
+ "reviewed": "2026-10-10 L: 9 steps along the slopmaster2 proof (affine open with finite complement, reduction to j_* of a sheaf killed by n, two acyclic envelopes, the H^1 edge map and lifting of sections on affine etale pieces, the cokernel argument giving H^3 = 0, dimension shifting, torsion as a filtered union); 9 new nodes, 8 closed on slopmaster2 (verified), the ninth (03SC (2), degree 2 on affine curves) rests on sorry; 4 tool uses accepted. Route departure: the unit sk-prop-cd's generic-point/spectral-sequence route is replaced by the Lean's, without an error in the blueprint route; accepted by L because the Lean route is nearly finished (HUMAN.md); the unit's realized fields are left empty."
 }

@@ -1,0 +1,122 @@
+{
+ "id": "lem-sc-affine-curve-h2-vanishing",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-cohomological-dimension",
+   "place": "## Proof, as a whole (degrees $q>2$): the blueprint proof concludes 'For total degree $q>2$ there are thus no differentials into or out of $H^q(C,\\eta_*M)$. It equals $H^q(k(C),M)=0$'; the split replaces this generic-point assembly by the route of the Lean proof AlgebraicGeometry.IsCurve.subsingleton_sheafH_of_three_le_of_forall (HighDegreeVanishing.lean), and this node is used in steps 4 and 5 (for $U$ and for the affine curves $V_a\\times_CU$).",
+   "via": []
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "H^2 of a torsion sheaf on an affine curve vanishes",
+ "statement": "Let $k$ be an algebraically closed field and $C$ an affine curve over $k$ [def-sc-curves] (an affine scheme, separated and of finite type over $k$, of dimension at most one; it may be empty, disconnected, singular or have zero-dimensional components). For every torsion abelian sheaf $F$ on $C_{\\Et}$ [def-weil-pbc-etale-sheaves], $H^2(C_{\\Et},F)=0$ [def-weil-pbc-etale-cohomology].",
+ "source": {
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tag 03SC (theorem-vanishing-affine-curves) (2) in degree 2; Lean: WeilConjectures/AlgebraicGeometry/Curve/CohomologicalDimension.lean, AlgebraicGeometry.IsCurve.subsingleton_sheafH_two_of_isAffine, lines 386-395 (reduction AlgebraicGeometry.IsCurve.subsingleton_sheafH_two_of_isAffine_of_forall, sorry-free, to smooth affine connected curves, AlgebraicGeometry.IsConnectedCurve.subsingleton_sheafH_two_of_isAffine_of_smooth)"
+ },
+ "stmt_deps": [
+  "def-sc-curves",
+  "def-weil-pbc-etale-sheaves",
+  "def-weil-pbc-etale-cohomology"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "second etale cohomology of an affine curve over an algebraically closed field vanishes for torsion sheaves",
+   "results": "groupCohomology.H2π_eq_zero_iff, groupCohomology.H2, Algebra.FormallyEtale.subsingleton_h1Cotangent",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "H^2 etale cohomology affine curve algebraically closed field vanishes",
+   "results": "groupCohomology.H1ofAutOnUnitsUnique (Hilbert 90), FormallyEtale.subsingleton_h1Cotangent, IsStandardSmooth.subsingleton_h1Cotangent",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rln 'smallEtaleTopology' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib; grep -rn 'Curve' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicGeometry --include=*.lean -l",
+   "results": "no étale cohomology of curves in Mathlib; the project declaration AlgebraicGeometry.IsCurve.subsingleton_sheafH_two_of_isAffine (WeilConjectures/AlgebraicGeometry/Curve/CohomologicalDimension.lean:391) states it",
+   "date": "2026-10-10",
+   "verdict": "no match in Mathlib"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-sc-cohomological-dimension",
+  "date": "2026-10-10"
+ },
+ "chapter": "sec-curve-estimates",
+ "unit": "sk-prop-cd",
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "rests_on_sorry",
+   "decls": [
+    {
+     "name": "AlgebraicGeometry.IsCurve.subsingleton_sheafH_two_of_isAffine",
+     "module": "WeilConjectures.AlgebraicGeometry.Curve.CohomologicalDimension",
+     "lines": [
+      386,
+      395
+     ],
+     "kind": "theorem",
+     "sorry": false
+    }
+   ],
+   "missing": [],
+   "open": [
+    {
+     "name": "AlgebraicGeometry.Etale.unitComparison_app_isColimit_of_isLimit",
+     "module": "WeilConjectures.AlgebraicGeometry.Sites.SectionContinuity",
+     "lines": [
+      74,
+      102
+     ],
+     "kind": "theorem",
+     "nodes": [],
+     "below": false
+    },
+    {
+     "name": "AlgebraicGeometry.IsConnectedCurve.subsingleton_sheafH_two_lowerStar",
+     "module": "WeilConjectures.AlgebraicGeometry.Curve.Affine",
+     "lines": [
+      333,
+      353
+     ],
+     "kind": "theorem",
+     "nodes": [
+      "lem-sc-affine-generic-second"
+     ],
+     "below": false
+    },
+    {
+     "name": "AlgebraicGeometry.Scheme.H_map_isColimit_of_isFiltered",
+     "module": "WeilConjectures.AlgebraicGeometry.Curve.Reductions",
+     "lines": [
+      68,
+      86
+     ],
+     "kind": "theorem",
+     "nodes": [
+      "lemma-weil-pbc-curve-filtered-cohomology"
+     ],
+     "below": false
+    }
+   ]
+  }
+ }
+}
