@@ -1,6 +1,6 @@
 # Work queue
 
-911 items; claim with `tools/claim.py next <group> [--stage N]`.
+912 items; claim with `tools/claim.py next <group> [--stage N]`.
 
 ## Stage 1: nodes to split (298)
 
@@ -10,9 +10,10 @@
 | `lem-weil-pbc-open-subscheme-fpqc-descent` | 2008 | none |
 | `lem-weil-pbc-spec-algebraically-closed-etale-sheaf-constant` | 2008 | none |
 | `lem-weil-pbc-sets-etale-inverse-image-constant-base-change` | 2009 | none |
-| `lem-sc-irreducible-noetherian-constant-acyclic` | 2013 | none |
 | `lem-sc-noetherian-extension-by-zero-reduction` | 2013 | none |
+| `lem-sc-irreducible-constant-sections` | 2014 | none |
 | `lem-sc-topological-extension-by-zero-stalks` | 2014 | none |
+| `lem-sc-topological-flasque-acyclic` | 2014 | none |
 | `lem-sc-ample-proj-canonical-map` | 2015 | none |
 | `lem-sc-boundary-cech-injective-middle` | 2015 | none |
 | `lem-sc-finite-integral-conductor` | 2015 | none |
@@ -22,7 +23,6 @@
 | `lem-weil-pbc-cartesian-eilenberg-functorial` | 3007 | none |
 | `lem-exc-finite-galois-tensor-decomposition` | 3009 | none |
 | `lem-weil-pbc-site-extension-by-zero-exact` | 3011 | none |
-| `lem-sc-p1-boundary-one-extension-class` | 3014 | none |
 | `lem-sc-sheaf-ext-coherent` | 3014 | none |
 | `lem-sp-cartan-eilenberg-properties` | 3014 | none |
 | `lem-pc-derived-direct-image-preserves-direct-sums` | 3015 | none |
@@ -37,6 +37,7 @@
 | `lem-sc-finite-pushforward-derived-hom-qcoherent` | 3015 | none |
 | `lem-sc-finite-sheafhom-affine-adjoint` | 3015 | none |
 | `lem-sc-finite-twisted-inverse-bounded-below` | 3015 | none |
+| `lem-sc-p1-ext-connecting-yoneda` | 3015 | none |
 | `lem-sc-smooth-proper-diagonal-koszul-dual` | 3015 | none |
 | `lem-sc-smooth-proper-diagonal-koszul-regular` | 3015 | none |
 | `lem-sc-smooth-proper-diagonal-tensor-formula` | 3015 | none |
@@ -56,7 +57,6 @@
 | `prop-pd-picard-degree-decomposition` | 4008 | rests_on_sorry |
 | `cor-pc-sigma-pic-iso` | 4009 | rests_on_sorry |
 | `lem-pc-vanishing-above-dim` | 4009 | rests_on_sorry |
-| `lem-pc-zero-scheme-ideal-local` | 4009 | none |
 | `lem-pc-zero-scheme-locally-principal` | 4009 | none |
 | `lem-pc-zero-scheme-pullback` | 4009 | none |
 | `lem-pc-zero-scheme-zero-iff` | 4009 | none |
@@ -305,7 +305,7 @@
 | `lem-pur-rhom-well-defined` | - | none |
 | `lem-zl-noether-normalization-dimension` | - | none |
 
-## Stage 2: nodes to state (613)
+## Stage 2: nodes to state (614)
 
 | node | distance to Mathlib | kind |
 |---|---|---|
@@ -387,6 +387,7 @@
 | `lem-pc-scheme-connected-iff-idempotents` | 1 | state |
 | `lem-pc-scheme-dimension-local-rings` | 1 | state |
 | `lem-pc-separable-polynomial-alg-closed-quotient-product` | 1 | state |
+| `lem-pc-zero-scheme-ideal-local` | 1 | state |
 | `lem-sc-affine-cap-section-open-algebra` | 1 | state |
 | `lem-sc-affine-finite-module-free-locus` | 1 | state |
 | `lem-sc-affine-finite-projective-prime-membership` | 1 | state |
@@ -923,7 +924,7 @@
 | `lem-weil-pbc-p1-field-dimension-one` | 4 | state |
 | `lem-weil-pbc-projective-space-zero-isomorphism` | 4 | state |
 
-Not open yet: 323 nodes that wait for stage 1, 1283 nodes that wait for a statement dependency.
+Not open yet: 323 nodes that wait for stage 1, 1285 nodes that wait for a statement dependency.
 
 ## Stage 3: modules to prove (0)
 
