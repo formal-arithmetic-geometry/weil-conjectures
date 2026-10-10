@@ -3,7 +3,7 @@
  "blueprint": {
   "is": "def-weil-pbc-geometric-stalks",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "definition",
  "title": "Geometric stalks",
@@ -19,9 +19,35 @@
  "proof": [],
  "proof_deps": [],
  "proof_origin": null,
- "mathlib_searches": [],
- "mathlib_match": null,
- "status": "imported",
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "geometric stalk of sheaf on small etale site as filtered colimit over pointed etale neighborhoods",
+   "results": "TopCat.Presheaf.stalk; AlgebraicGeometry.Scheme.smallEtaleTopology; broader topological stalk does not use etale neighborhoods",
+   "date": "2026-10-10",
+   "verdict": "generalization: category-theoretic point fibre is the relevant match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"pointSmallEtale\"; \"sheafFiber\"; \"presheafFiber\"",
+   "results": "AlgebraicGeometry.Scheme.pointSmallEtale (Mathlib.AlgebraicGeometry.Sites.EtalePoint); CategoryTheory.GrothendieckTopology.Point.sheafFiber and presheafFiber (Mathlib.CategoryTheory.Sites.Point.Basic)",
+   "date": "2026-10-10",
+   "verdict": "match: (pointSmallEtale s).sheafFiber.obj F is the geometric stalk"
+  },
+  {
+   "tool": "grep",
+   "query": "rg pointSmallEtale|presheafFiber|sheafFiber in /home/ubuntu/Poincare-MorganTian/.work/helpers/codex-m47-line/.lake/packages/mathlib/Mathlib/{AlgebraicGeometry/Sites/EtalePoint,CategoryTheory/Sites/Point/Basic}.lean",
+   "results": "Mathlib/AlgebraicGeometry/Sites/EtalePoint.lean:64-65 sets the point fiber to Etale.forget S composed with coyoneda at Over.mk s; Mathlib/CategoryTheory/Sites/Point/Basic.lean:96-97 defines presheafFiber as colim over the opposite category of elements, and lines 277-278 define sheafFiber by restricting it to sheaves",
+   "date": "2026-10-10",
+   "verdict": "match: the stated category and opposite-index colimit occur definitionally"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "CategoryTheory.GrothendieckTopology.Point.sheafFiber",
+  "file": "Mathlib/CategoryTheory/Sites/Point/Basic.lean",
+  "how": "specializes in one line: (AlgebraicGeometry.Scheme.pointSmallEtale s).sheafFiber.obj F. EtalePoint.lean:64-65 defines the fibre as lifts Spec Omega -> U over s; Point/Basic.lean:96-97 defines its presheaf fibre as colim over the opposite category of elements, and :277-278 restricts this to sheaves. No comparison theorem is needed."
+ },
+ "status": "mathlib",
  "merged_into": null,
  "import_flags": [],
  "blueprint_kind": "definition",
@@ -43,5 +69,22 @@
   }
  },
  "chapter": "sec-curve-estimates",
- "unit": "sk-prop-h2"
+ "unit": "sk-prop-h2",
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "def-weil-pbc-geometric-stalks",
+  "worker": "stage1",
+  "summary": "Mathlib's Scheme.pointSmallEtale packages lifts to etale neighbourhoods as a site point, and GrothendieckTopology.Point.sheafFiber takes the colimit of sections over its opposite category of elements. Together they give the stated geometric stalk directly. The slopmaster2 source has no declaration tagged for this node, and its EtalePoint extension treats both definitions as Mathlib imports.",
+  "blueprint": {
+   "steps": [],
+   "same_as_search": "Searched the entire imported DAG across chapters by the item id, 'pointed etale neighbourhood', 'geometric stalk', and colimit wording. No second node states this definition; other hits use its stalk or state exactness, conservativity, or stalk formulas. This item itself is the imported master-blueprint node at order 931."
+  }
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "group": "J1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed by the lead of J1; spot-checked by L: L: Mathlib Point.sheafFiber (Sites/Point/Basic.lean) and the etale point read; the stalk is the colimit over the pointed neighbourhoods"
+ }
 }
