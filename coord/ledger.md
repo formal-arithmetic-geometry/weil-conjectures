@@ -1423,3 +1423,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 12:33 L: accepted thm-av-final (key node of sk-thm-av-final, 4 steps along the Lean conjunction, 0 new; unit realized).
 - 12:33 L: accepted lem-weil-pbc-double-complex-zigzag-to-row-cokernel-map (00M1, 5 steps, 0 new).
 - 12:34 L: accepted def-weil-pbc-double-complex-zigzag-module (definition split; new Mathlib leaf for double complexes, new functoriality node cited by its two users).
+- 12:36 L: accepted lem-weil-pbc-noetherian-flat-locus-neighborhood: attachment check, finished by Module.Flat.exists_notMem_forall_flat_localizedModule (sorry-free on 71d63dcf, verified), lean_audit closed, not split
