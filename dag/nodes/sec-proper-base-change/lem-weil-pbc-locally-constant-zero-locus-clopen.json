@@ -11,17 +11,75 @@
  },
  "kind": "statement",
  "title": "Zero locus of a section of a locally constant sheaf",
- "statement": "Let T be a topological space and F a locally constant sheaf of abelian groups [def-weil-pbc-etale-sheaves] on T, meaning that every point has an open neighbourhood on which F is isomorphic to a constant sheaf [def-weil-pbc-constant-sheaf]. For s in Gamma(T,F) (sections and germs as for sheaves on a topological space [def-weil-pbc-topological-inverse-image]), let Z(s) be the set of points at which the germ of s is zero. Then Z(s) is both open and closed in T.",
+ "statement": "Let $T$ be a topological space (sheaves on $T$ are those on the site of open subsets of $T$ with open coverings [def-weil-pbc-sites-and-cohomology]) and $F$ a sheaf of abelian groups on $T$ which is *locally constant*: every point of $T$ has an open neighbourhood $U$ such that the restriction $F|_U$ (the sheaf $W\\mapsto F(W)$ on the open subsets $W\\subseteq U$, with the restriction maps of $F$) is isomorphic to the constant sheaf $\\underline A_U$ on $U$ of some abelian group $A$ [def-weil-pbc-constant-sheaf]. For $s\\in\\Gamma(T,F)$ and $x\\in T$ let $s_x\\in F_x$ be the germ of $s$ in the stalk $F_x$ [def-weil-pbc-module-stalk], and let $Z(s)=\\{x\\in T: s_x=0\\}$. Then $Z(s)$ is both open and closed in $T$.",
  "source": {
   "document": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-thm-iff/lemma-weil-pbc-spectral-restriction.md",
   "place": "Detailed form, Step 1"
  },
  "stmt_deps": [
-  "def-weil-pbc-etale-sheaves"
+  "def-weil-pbc-sites-and-cohomology",
+  "def-weil-pbc-constant-sheaf",
+  "def-weil-pbc-module-stalk"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "*$Z(s)$ is open.* Let $x\\in Z(s)$. Then $s_x=0=0_x$, so by the description of equality of germs in [def-weil-pbc-module-stalk] there is an open $W$ with $x\\in W$ and $s|_W=0$. For every $y\\in W$ the germ $s_y$ equals $(s|_W)_y=0$, so $W\\subseteq Z(s)$. Hence $Z(s)$ is open (this holds for every sheaf of abelian groups).",
+   "uses": [
+    "def-weil-pbc-module-stalk"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-thm-iff/lemma-weil-pbc-spectral-restriction.md",
+    "place": "Proof, Step 1: 'whose zero locus is therefore open and closed in V'"
+   }
+  },
+  {
+   "text": "*Stalks of a constant sheaf.* Let $U$ be a topological space, $A$ an abelian group, $P$ the constant presheaf $W\\mapsto A$ on $U$ (all restriction maps the identity of $A$) and $\\theta:P\\to\\underline A_U$ its sheafification, so $\\underline A_U$ is the constant sheaf [def-weil-pbc-constant-sheaf], [def-weil-pbc-sheafification]. For $y\\in U$ define $c_y:A\\to\\underline A_{U,y}$ by $c_y(e)=\\theta_W(e)_y$ for any open $W\\ni y$; this does not depend on $W$, because $\\theta_{W'}(e)=\\theta_W(e)|_{W'}$ for $W'\\subseteq W$ (the restriction maps of $P$ are identities and $\\theta$ commutes with restriction). Claim: $c_y$ is an isomorphism of abelian groups. The germ map $\\gamma_y:A=P(U)\\to P_y$, $e\\mapsto e_y$, is a homomorphism [def-weil-pbc-module-stalk]; it is surjective because every element of $P_y$ is a germ $e_y$ of some $e\\in P(W)=A$, $W\\ni y$, and $e\\in P(U)$ restricts to $e\\in P(W)$, so both have the same germ; it is injective because $e_y=0$ means $e|_W=0$ for some open $W\\ni y$, and $e|_W=e$. (This is Stacks, Sheaves, Example 007B, $A=(A_p)_y$.) By [lem-weil-pbc-stalk-sheafification-space] (Stacks, Sheaves, Lemma 007Z) applied to the space $U$, $\\theta_y:P_y\\to\\underline A_{U,y}$, $e_y\\mapsto\\theta_W(e)_y$, is an isomorphism. Hence $c_y=\\theta_y\\circ\\gamma_y$ is an isomorphism.",
+   "uses": [
+    "def-weil-pbc-constant-sheaf",
+    "def-weil-pbc-sheafification",
+    "def-weil-pbc-module-stalk",
+    "lem-weil-pbc-stalk-sheafification-space"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sheaves.tex",
+    "place": "Example 007B (example-stalk-constant-presheaf) and Lemma 007Z (lemma-stalk-sheafification)"
+   }
+  },
+  {
+   "text": "*Local structure of $Z(s)$.* Let $x\\in T$. Choose an open $U\\ni x$, an abelian group $A$ and an isomorphism of sheaves $\\varphi:F|_U\\to\\underline A_U$. For $y\\in U$ the stalk of $F|_U$ at $y$ is $F_y$: the open neighbourhoods of $y$ contained in $U$ are cofinal among all open neighbourhoods of $y$, so every germ in $F_y$ is the germ of a section over an open inside $U$, with the same equality of germs [def-weil-pbc-module-stalk]. The morphism $\\varphi$ induces the homomorphism $\\varphi_y:F_y\\to\\underline A_{U,y}$, $\\sigma_y\\mapsto\\varphi_W(\\sigma)_y$ [def-weil-pbc-module-stalk], and $(\\varphi^{-1})_y$ is its inverse, so $\\varphi_y$ is an isomorphism. Put $t=\\varphi_U(s|_U)\\in\\underline A_U(U)$. By Step 2 there is a unique $e\\in A$ with $t_x=c_x(e)=\\theta_U(e)_x$, and by the equality of germs there is an open $W$ with $x\\in W\\subseteq U$ and $t|_W=\\theta_U(e)|_W$. For $y\\in W$: $\\varphi_y(s_y)=t_y=\\theta_U(e)_y=c_y(e)$. Since $\\varphi_y$ and $c_y$ (Step 2) are injective homomorphisms, $s_y=0$ if and only if $e=0$. So either $e=0$ and $W\\subseteq Z(s)$, or $e\\neq0$ and $W\\cap Z(s)=\\emptyset$. (Equivalently: on $W$, $y\\mapsto c_y^{-1}(\\varphi_y(s_y))$ is the constant map with value $e$, the local form of the blueprint's 'locally constant function $V\\to A$'.)",
+   "uses": [
+    "def-weil-pbc-module-stalk",
+    "def-weil-pbc-constant-sheaf"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-thm-iff/lemma-weil-pbc-spectral-restriction.md",
+    "place": "Proof, Step 1: 'On an open V on which F is isomorphic to a constant sheaf the section s|_V corresponds to a locally constant function V -> A'"
+   }
+  },
+  {
+   "text": "*$Z(s)$ is closed.* Let $x\\in T\\setminus Z(s)$ and take $W\\ni x$ and $e$ as in Step 3. Since $x\\in W$ and $x\\notin Z(s)$, the alternative $W\\subseteq Z(s)$ is excluded, so $W\\cap Z(s)=\\emptyset$, i.e. $W\\subseteq T\\setminus Z(s)$. Hence $T\\setminus Z(s)$ is open, and with Step 1, $Z(s)$ is open and closed.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-thm-iff/lemma-weil-pbc-spectral-restriction.md",
+    "place": "Proof, Step 1: 'since T is covered by such V, the set Z(s) is open and closed in T'"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-module-stalk",
+  "def-weil-pbc-constant-sheaf",
+  "def-weil-pbc-sheafification",
+  "lem-weil-pbc-stalk-sheafification-space"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-thm-iff/lemma-weil-pbc-spectral-restriction.md",
+  "place": "Detailed form, Proof, Step 1 (written out by the worker with Stacks, Sheaves, Example 007B and Lemma 007Z, literature/stacks-project/sheaves.tex)"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -43,10 +101,31 @@
    "results": "no general locally constant sheaf zero-locus declaration; only unrelated connected/clopen topology lemmas",
    "date": "2026-10-10",
    "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "set of points where the germ of a section of a sheaf is zero is open",
+   "results": "AlgebraicGeometry.RingedSpace.zeroLocus / zeroLocus_isClosed (Mathlib.Geometry.RingedSpace.Basic: zero locus of a ring section, closed), RingedSpace.exists_res_eq_zero_of_germ_eq_zero, Scheme.zeroLocus_isClosed, germ_eq_zero_of_pow_mul_eq_zero; none about locally constant sheaves",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "locally constant sheaf on a topological space, the zero locus of a global section is clopen",
+   "results": "IsLocallyConstant.isClopen_fiber (Mathlib.Topology.LocallyConstant.Basic: fibres of a locally constant function are clopen), LocallyConstant.ofIsClopen, PrimeSpectrum.isClopen_iff_mul_add_zeroLocus; nothing about sheaves locally isomorphic to a constant sheaf",
+   "date": "2026-10-10",
+   "verdict": "no match (IsLocallyConstant.isClopen_fiber is the function-level fact only, not the sheaf statement)"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rln 'constantSheaf\\|IsLocallyConstant' Topology/Sheaves CategoryTheory/Sites; grep -rn 'germ.*= 0\\|germ_eq_zero\\|isOpen.*germ' Topology/Sheaves  (in ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib)",
+   "results": "CategoryTheory/Sites/ConstantSheaf.lean (constantSheaf functor on a site, no locally constant sheaves), Sites/LocalSite.lean, GlobalSections.lean, SheafCohomology/Basic.lean, Abelian.lean; no germ zero-locus lemma in Topology/Sheaves",
+   "date": "2026-10-10",
+   "verdict": "no match"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "worker",
@@ -66,5 +145,13 @@
   }
  },
  "chapter": "sec-proper-base-change",
- "unit": "sk-thm-iff"
+ "unit": "sk-thm-iff",
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "lem-weil-pbc-locally-constant-zero-locus-clopen",
+  "worker": "stage1",
+  "summary": "Wrote the proof of the blueprint's Step 1 in four steps: Z(s) open for any sheaf (germ equality); stalks of the constant sheaf on a space are A via e -> theta(e)_y (Stacks 007B, with the Mathlib leaf lem-weil-pbc-stalk-sheafification-space for 007Z); on a trivializing open U and a smaller W the germs s_y are all zero or all nonzero (transport of germs along the isomorphism F|_U = A_U); hence the complement is open. No new node: the blueprint's identification of s|_V with a locally constant function V -> A (Stacks 0081, no DAG node) is replaced by the stalk computation, which gives the same local constancy directly. Corrected the statement's citations: it cited def-weil-pbc-etale-sheaves (sheaves on T_et) for 'locally constant' and def-weil-pbc-topological-inverse-image for germs; now cites def-weil-pbc-sites-and-cohomology (site of opens), def-weil-pbc-constant-sheaf and def-weil-pbc-module-stalk, and states that the group A may depend on U; meaning unchanged. stmt_deps updated accordingly. Mathlib: searched with LeanSearch, LeanFinder and grep; no match (Mathlib has only IsLocallyConstant.isClopen_fiber for functions). No slopmaster2 declaration found.",
+  "blueprint": "Steps 2-4 realize the whole of 'Proof, Step 1' of lemma-weil-pbc-spectral-restriction: step 3 is 'on an open V on which F is isomorphic to a constant sheaf the section s|_V corresponds to a locally constant function V -> A' (made precise via stalks, step 2), steps 1 and 4 are 'whose zero locus is therefore open and closed in V; since T is covered by such V, Z(s) is open and closed in T'."
+ },
+ "reviewed": "2026-10-10 L: 4 steps (openness from equality of germs, stalks of a constant sheaf, the local structure on a trivializing open, closedness); found complete on disk after the 22nd account limit; 0 new nodes"
 }
