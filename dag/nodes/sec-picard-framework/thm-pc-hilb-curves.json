@@ -3,11 +3,11 @@
  "blueprint": {
   "is": "thm-pc-hilb-curves",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "Hilbert schemes of smooth projective curves",
- "statement": "(Picard Schemes of Curves, Proposition 44.3.6, Tag\n[0B9I](https://stacks.math.columbia.edu/tag/0B9I).) Let $X$ be a\ngeometrically irreducible smooth proper curve over a field $k$ and let\n$d\\geq0$. Then:\n\n1. $\\operatorname{Hilb}^d_{X/k}$ is representable by a smooth proper variety\n$\\underline{\\operatorname{Hilb}}^d_{X/k}$ of dimension $d$ over $k$;\n1. for a field extension $k'/k$ the $k'$-rational points of\n$\\underline{\\operatorname{Hilb}}^d_{X/k}$ are in bijection with the effective Cartier\ndivisors of degree $d$ on $X_{k'}$;\n1. for $d_1,d_2\\geq0$ there is a morphism\n$$\n\\underline{\\operatorname{Hilb}}^{d_1}_{X/k}\\times_k\\underline{\\operatorname{Hilb}}^{d_2}_{X/k}\n\\longrightarrow\\underline{\\operatorname{Hilb}}^{d_1+d_2}_{X/k}\n$$\nwhich is finite locally free of degree $\\binom{d_1+d_2}{d_1}$.",
+ "statement": "(Picard Schemes of Curves,  Tag\n[0B9I](https://stacks.math.columbia.edu/tag/0B9I).) Let $X$ be a\ngeometrically irreducible smooth proper curve over a field $k$ and let\n$d\\geq0$. Then:\n\n1. $\\operatorname{Hilb}^d_{X/k}$ is representable by a smooth proper variety\n$\\underline{\\operatorname{Hilb}}^d_{X/k}$ of dimension $d$ over $k$;\n1. for a field extension $k'/k$ the $k'$-rational points of\n$\\underline{\\operatorname{Hilb}}^d_{X/k}$ are in bijection with the effective Cartier\ndivisors of degree $d$ on $X_{k'}$;\n1. for $d_1,d_2\\geq0$ there is a morphism\n$$\n\\underline{\\operatorname{Hilb}}^{d_1}_{X/k}\\times_k\\underline{\\operatorname{Hilb}}^{d_2}_{X/k}\n\\longrightarrow\\underline{\\operatorname{Hilb}}^{d_1+d_2}_{X/k}\n$$\nwhich is finite locally free of degree $\\binom{d_1+d_2}{d_1}$.",
  "source": {
   "document": "literature/blueprint/master/blueprint/sec-picard-framework/sk-thm-picard-hilb-curves/thm-pc-hilb-curves.md",
   "place": "node thm-pc-hilb-curves, order 790",
@@ -31,9 +31,10 @@
  ],
  "proof": [
   {
-   "text": "*Step 0: the affine-open hypothesis.*\nWe verify the hypotheses of [lem-pc-hilb-representable]: $X$ is proper,\nhence separated, over $k$, and it remains to check the affine-open condition.\nGiven finitely many points $x_1,\\ldots,x_d\\in X$, choose a closed\npoint $Q$ different from every closed point in this list.\nSuch a $Q$ exists: the complement of finitely many closed points\nis a nonempty open of the one-dimensional integral variety $X$;\na nonempty affine open inside it has a maximal ideal with residue\nfield finite over $k$ by Zariski's lemma. This point is closed in\n$X$, since its residue field is finite over $k$.\nThe divisor $[Q]$ is effective Cartier on the smooth curve and\nhas positive degree $[\\kappa(Q):k]$ by\n[lem-pc-degree-base-change]. Therefore $\\mathcal O_X(Q)$ is\nample by [lem-pc-ample-positive-degree], and\n$X\\setminus\\{Q\\}$ is affine by [lem-sc-ample-complement-affine].\nIt contains all the prescribed points, including the generic\npoint. This proves the affine-open hypothesis.",
+   "text": "*Step 0: the affine-open hypothesis.*\nWe verify the hypotheses of [lem-pc-hilb-representable]: $X$ is proper,\nhence separated, over $k$, and projective by [lem-sc-proper-dim-one-projective] because $X$ has dimension one. It remains to check the affine-open condition.\nGiven finitely many points $x_1,\\ldots,x_d\\in X$, choose a closed\npoint $Q$ different from every closed point in this list.\nSuch a $Q$ exists: the complement of finitely many closed points\nis a nonempty open of the one-dimensional integral variety $X$;\na nonempty affine open inside it has a maximal ideal with residue\nfield finite over $k$ by Zariski's lemma. This point is closed in\n$X$, since its residue field is finite over $k$.\nThe divisor $[Q]$ is effective Cartier on the smooth curve and\nhas positive degree $[\\kappa(Q):k]$ by\n[lem-pc-degree-base-change]. Therefore $\\mathcal O_X(Q)$ is\nample by [lem-pc-ample-positive-degree], and\n$X\\setminus\\{Q\\}$ is affine by [lem-sc-ample-complement-affine].\nIt contains all the prescribed points, including the generic\npoint. This proves the affine-open hypothesis.",
    "uses": [
     "lem-pc-hilb-representable",
+    "lem-sc-proper-dim-one-projective",
     "lem-pc-degree-base-change",
     "lem-pc-ample-positive-degree",
     "lem-sc-ample-complement-affine"
@@ -41,12 +42,20 @@
    "elementary": false
   },
   {
-   "text": "*Step 1: representability and the properties (1).* By\n[lem-pc-hilb-representable] the functors\n$\\operatorname{Hilb}^d_{X/k}$ are representable by schemes $H_d:=\\underline{\\operatorname{Hilb}}^d_{X/k}$\nfor all $d\\ge0$. The scheme $H_d$ is smooth of relative dimension $d$\nover $k$ by [lem-pc-hilb-smooth]. It is separated over $k$: the\ndiagonal $\\Delta:H_d\\to H_d\\times_kH_d$ is a closed immersion: let\n$Z_1,Z_2\\in\\operatorname{Hilb}^d_{X/k}(H_d\\times_kH_d)$ be the two pullbacks of the\nuniversal object along the projections; a morphism $T\\to H_d\\times_kH_d$ factors through $\\Delta$ iff $Z_{1,T}=Z_{2,T}$ (the\nuniversal property: a $T$-valued point of $H_d\\times H_d$ is a pair\nof elements of $\\operatorname{Hilb}^d(T)$; they are equal iff the pair comes from\n$H_d$ via the diagonal); the locus $\\{\\,T:\\ Z_{1,T}=Z_{2,T}\\,\\}$ is\nclosed in $H_d\\times H_d$: it is the intersection of the closed loci\n$\\{Z_1\\subseteq Z_2\\}$ and $\\{Z_2\\subseteq Z_1\\}$, each of which is\nclosed by the closed-immersion claim of the proof of\n[lem-pc-hilb-representable] (Step 1 there: applied with\n$Y=X_{H\\times H}$, $X'=Z_1$ (closed in $X_{H\\times H}$— yes: $Z_1$\nis closed in $X_{H_d\\times_kH_d}$) and $Z=Z_2$ – the locus where\n$Z_{2,T}\\subseteq Z_{1,T}$ is closed). Hence $\\Delta$ is a closed\nimmersion, i.e. $H_d$ is separated over $k$ (the standard\ncharacterization of separatedness via the diagonal,\n[def-pc-morphism-conventions]). It is proper: by\n[lem-pc-hilb-addition] the morphism\n$H_{d-1}\\times_kX\\to H_d$ is finite locally free of degree $d$; the\niterated composite\n\n$$\n\\pi_d:X^d=X\\times_k\\cdots\\times_kX\\;\\longrightarrow\\;H_d,\n\\qquad\n(x_1,\\dots,x_d)\\longmapsto x_1+\\cdots+x_d\n$$\n\n(the addition applied successively) is finite locally free of degree\n$d!$ (composites of finite locally free morphisms of degrees\n$1,2,\\dots,d$: the degree multiplies, the classical multiplicativity:\nthe composite $H_{d-1}\\times X\\to H_d$ has degree $d$; the\nprojection $X^d\\to X^{d-1}\\times X$ is an isomorphism\n($X^d\\cong X^{d-1}\\times X$), the composite\n$X^d\\to H_{d-1}\\times X$ (the product of $\\pi_{d-1}$ with\n$\\mathrm{id}_X$) has degree $(d-1)!$ by the multiplicativity of the\ndegree (the degree of a product of finite locally free morphisms is\nthe product of the degrees: the rank of the finite locally free\nmodule attached to the fibre product is the tensor product of the\nmodules, whose rank multiplies), and the composite of $X^d\\to H_{d-1}\\times X$ with $H_{d-1}\\times X\\to H_d$ has degree\n$(d-1)!\\cdot d=d!$, the degree of a composite of finite locally free\nmorphisms being the product of the degrees (again multiplicativity,\nor: the fibre of the composite over a point is the scheme of the\ntensor product of the two finite locally free algebras, whose rank is\nthe product of the ranks). The morphism $\\pi_d$ is\n*surjective*: the image $I:=\\pi_d(X^d)$ is closed\n($X^d$ is proper, $\\pi_d$ is finite hence proper, and the image of a\nproper morphism is closed: the standard statement); for a closed\npoint $\\bar t$ of $H_d\\otimes_k\\bar k$ the corresponding closed\nsubscheme $D_{\\bar t}\\subseteq X_{\\bar k}$ is finite flat of rank\n$d$ over $\\bar k$, so it is a sum\n$D_{\\bar t}=y_1+\\cdots+y_d$ of $\\bar k$-points (with the\nmultiplicities $m_j$, $\\sum_jm_j=d$: a finite flat scheme over an\nalgebraically closed field is a union of closed points with\nArtinian structures), hence $\\bar t$ lies in the image of\n$X^d\\otimes_k\\bar k\\to H_d\\otimes_k\\bar k$; so\n$I\\otimes_k\\bar k$ contains every closed point of the scheme of\nfinite type $H_d\\otimes_k\\bar k$; since\n$I\\otimes_k\\bar k$ is closed and the closed points of a scheme of\nfinite type over an algebraically closed field are dense,\n$I\\otimes_k\\bar k=H_d\\otimes_k\\bar k$; as\n$\\bar k/k$ is faithfully flat, the closed subset $I$ has\n$I\\otimes_k\\bar k=$ everything, hence $I=H_d$ (for a closed subset\n$I$ with $I\\otimes_k\\bar k=H_d\\otimes_k\\bar k$: the closure\ncondition: if $x\\in H_d\\setminus I$ then the image point\n$x_{\\bar k}$ lies in $H_d\\otimes\\bar k\\setminus I\\otimes\\bar k$,\ncontradiction). So $\\pi_d$ is surjective.\nThen $H_d$ is proper: $X^d$ is proper (finite products of proper schemes over $k$ are proper, the standard statement; and $X\\to\\operatorname{Spec} k$ is proper by hypothesis), $\\pi_d$ is finite hence proper, so\n$H_d=\\pi_d(X^d)$ is the image of a proper scheme under a proper morphism, hence proper (Morphisms, Lemma 29.42.9, Tag\n[03GN](https://stacks.math.columbia.edu/tag/03GN): the image of a proper morphism is proper). Finally $H_d$ is irreducible: $X^d$ is irreducible (geometrically irreducible over $k$: products of geometrically irreducible schemes over $k$ are irreducible: Varieties, Lemma 33.8.4, Tag\n[038F](https://stacks.math.columbia.edu/tag/038F)), and the image of an irreducible scheme under a continuous surjective map is irreducible; together with smoothness (hence reducedness: smooth over the field $k$ is reduced, the standard statement) $H_d$ is an integral separated scheme of finite type over $k$ of dimension $d$, i.e. a variety over $k$ ([def-pc-curve]: a variety is an integral separated scheme of finite type over $k$). This proves (1).",
+   "text": "*Step 1: representability and the properties (1).* By\n[lem-pc-hilb-representable] the functors\n$\\operatorname{Hilb}^d_{X/k}$ are representable by schemes $H_d:=\\underline{\\operatorname{Hilb}}^d_{X/k}$\nfor all $d\\ge0$. The scheme $H_d$ is smooth of relative dimension $d$\nover $k$ by [lem-pc-hilb-smooth]. It is separated over $k$ by [lem-pc-hilb-separated], applied to the separated morphism $X\\to\\operatorname{Spec}k$. It is proper, as follows. For $d=0$, [lem-sc-hilb-zero-base] identifies $H_0$ with $\\operatorname{Spec}k$, so $H_0$ is proper and has dimension zero. For $d\\geq1$, [lem-pc-hilb-addition] gives the morphism\n$H_{d-1}\\times_kX\\to H_d$, finite locally free of degree $d$; the\niterated composite\n\n$$\n\\pi_d:X^d=X\\times_k\\cdots\\times_kX\\;\\longrightarrow\\;H_d,\n\\qquad\n(x_1,\\dots,x_d)\\longmapsto x_1+\\cdots+x_d\n$$\n\n(the addition applied successively) is finite locally free of degree\n$d!$ (composites of finite locally free morphisms of degrees\n$1,2,\\dots,d$: the degree multiplies, the classical multiplicativity:\nthe composite $H_{d-1}\\times X\\to H_d$ has degree $d$; the\nprojection $X^d\\to X^{d-1}\\times X$ is an isomorphism\n($X^d\\cong X^{d-1}\\times X$), the composite\n$X^d\\to H_{d-1}\\times X$ (the product of $\\pi_{d-1}$ with\n$\\mathrm{id}_X$) has degree $(d-1)!$ by the multiplicativity of the\ndegree (the degree of a product of finite locally free morphisms is\nthe product of the degrees: the rank of the finite locally free\nmodule attached to the fibre product is the tensor product of the\nmodules, whose rank multiplies), and the composite of $X^d\\to H_{d-1}\\times X$ with $H_{d-1}\\times X\\to H_d$ has degree\n$(d-1)!\\cdot d=d!$, the degree of a composite of finite locally free\nmorphisms being the product of the degrees (again multiplicativity,\nor: the fibre of the composite over a point is the scheme of the\ntensor product of the two finite locally free algebras, whose rank is\nthe product of the ranks). The morphism $\\pi_d$ is *surjective*: it is finite locally free of degree $d!\\geq1$, hence surjective (a finite locally free morphism of positive constant rank is surjective, directly from the definition of finite locally free).\nThen $H_d$ is proper: $X^d$ is proper (finite products of proper schemes over $k$ are proper by repeated use of [lem-weil-pbc-proper-base-change] and [lem-weil-pbc-proper-composition]; and $X\\to\\operatorname{Spec} k$ is proper by hypothesis), $\\pi_d$ is finite hence proper by [lem-weil-pbc-finite-proper], so\n$H_d=\\pi_d(X^d)$ is the image of a proper scheme under a proper morphism, hence proper by [lem-weil-pbc-image-universally-closed] (Tag 03GN), $H_d$ being separated and of finite type over $k$. Finally $H_d$ is irreducible: $X^d$ is irreducible (by induction on $d$, $X^d=X^{d-1}\\times_kX$ is geometrically irreducible over $k$ by [lem-sc-geometrically-irreducible-product], in particular irreducible, taking $k'=k$), and the image of an irreducible scheme under a continuous surjective map is irreducible; together with smoothness (hence reducedness by [sbc-lem-smooth-geometrically-reduced]) $H_d$ is an integral separated scheme of finite type over $k$ of dimension $d$, i.e. a variety over $k$ ([def-pc-curve]: a variety is an integral separated scheme of finite type over $k$). This proves (1).",
    "uses": [
     "lem-pc-hilb-representable",
     "lem-pc-hilb-smooth",
+    "lem-pc-hilb-separated",
+    "lem-weil-pbc-image-universally-closed",
+    "lem-sc-geometrically-irreducible-product",
+    "lem-weil-pbc-finite-proper",
+    "lem-weil-pbc-proper-base-change",
+    "lem-weil-pbc-proper-composition",
+    "sbc-lem-smooth-geometrically-reduced",
     "def-pc-morphism-conventions",
     "lem-pc-hilb-addition",
+    "lem-sc-hilb-zero-base",
     "def-pc-curve"
    ],
    "elementary": false
@@ -63,39 +72,82 @@
    "elementary": false
   },
   {
-   "text": "*Step 3: the addition morphism; part (3).* For $d_1,d_2\\ge0$ and\n$T$ over $k$: an element of\n$\\operatorname{Hilb}^{d_1}_{X/k}(T)\\times\\operatorname{Hilb}^{d_2}_{X/k}(T)$ is a pair of closed\nsubschemes $D_1,D_2\\subseteq X_T$ finite locally free of degrees\n$d_1,d_2$ over $T$; by [lem-pc-cartier-criterion]\n((1)$\\Rightarrow$(2)) both are relative effective Cartier\ndivisors on $X_T/T$; the sum $D_1+D_2$ (the closed subscheme defined\nlocally by the product of the two defining equations: an effective\nCartier divisor, and flat over $T$: the short exact sequence\n$0\\to\\mathcal{O}_{X_T}/(f_1)\\to\\mathcal{O}_{X_T}/(f_1f_2)\\to\\mathcal{O}_{X_T}/(f_2)\\to0$\n(exact because $f_1$ is a nonzerodivisor; the two ends flat over $T$)\nshows $\\mathcal{O}_{D_1+D_2}$ flat over $T$, and the rank is the sum\n$d_1+d_2$) is again finite locally free of degree $d_1+d_2$ over\n$T$: it is an element of $\\operatorname{Hilb}^{d_1+d_2}_{X/k}(T)$. The assignment\n$(D_1,D_2)\\mapsto D_1+D_2$ is natural in $T$, so by the\nrepresentability of $\\operatorname{Hilb}^{d_1+d_2}$ it is induced by a morphism\n\n$$\n\\alpha:H_{d_1}\\times_kH_{d_2}\\longrightarrow H_{d_1+d_2} .\n$$\n\nThe map $\\alpha$ is proper, since its source is proper over $k$\nand its target is separated over $k$, by part (1).\nThe surjection $u:=\\pi_{d_1}\\times\\pi_{d_2}$ from\n$X^{d_1+d_2}$ onto its source is finite locally free, and\n$\\alpha\\circ u=\\pi_{d_1+d_2}$ is finite locally free as well.\nFor every point of the target, the fibre of $\\alpha$ is therefore\nthe surjective image of the finite fibre of $\\pi_{d_1+d_2}$, so it\nhas finitely many points. Thus $\\alpha$ is finite by\n[thm-pqf-finite-iff-proper-finite-fibres].\nIt is flat by [lem-pc-flat-source-descent], since $u$ is a flat\nsurjection and the composite is flat. These are morphisms of\nfinite type schemes over a field, hence of finite presentation;\nso $\\alpha$ is finite locally free. We may now compute its rank\nusing the commutative diagram\n\n$$\n\\begin{array}{ccc}\nX^{d_1}\\times_kX^{d_2}&\\stackrel{\\sim}{\\longrightarrow}&X^{d_1+d_2}\\\\\n\\downarrow&&\\downarrow\\\\\nH_{d_1}\\times_kH_{d_2}&\\longrightarrow&H_{d_1+d_2}\n\\end{array}\n$$\n\n(the vertical left arrow is $\\pi_{d_1}\\times\\pi_{d_2}$, the vertical\nright $\\pi_{d_1+d_2}$; the diagram commutes by the definition of $\\alpha$\nand the additivity of the sums). The left vertical arrow is finite\nlocally free of degree $d_1!\\cdot d_2!$ (the degrees multiply), the\nright vertical arrow of degree $(d_1+d_2)!$; with\n$\\deg(\\alpha)=N$ the commutativity gives\n$d_1!\\,d_2!\\,N=(d_1+d_2)!$ (the classical multiplicativity of the\ndegree of composites of finite locally free morphisms: the composite\nhas degree the product; the identity in the diagram is the identity of\nthe two schemes), so $N=\\binom{d_1+d_2}{d_1}$. This proves (3).",
+   "text": "*Step 3: the addition morphism; part (3).* For $d_1,d_2\\ge0$ and\n$T$ over $k$: an element of\n$\\operatorname{Hilb}^{d_1}_{X/k}(T)\\times\\operatorname{Hilb}^{d_2}_{X/k}(T)$ is a pair of closed\nsubschemes $D_1,D_2\\subseteq X_T$ finite locally free of degrees\n$d_1,d_2$ over $T$; by [lem-pc-cartier-criterion]\n((1)$\\Rightarrow$(2)) both are relative effective Cartier\ndivisors on $X_T/T$; their sum is defined locally by the product of the two nonzerodivisor equations, hence is a relative effective Cartier divisor. Its fibres have support contained in the union of the finite fibres of $D_1$ and $D_2$, so it is locally quasi-finite. Since $X_T\\to T$ is proper, the sum is proper over $T$; the proper case of [lem-pc-cartier-criterion] therefore makes it finite locally free. Fibrewise the length, hence the rank, is the sum $d_1+d_2$, so $D_1+D_2$ is finite locally free of degree $d_1+d_2$ over\n$T$: it is an element of $\\operatorname{Hilb}^{d_1+d_2}_{X/k}(T)$. The assignment\n$(D_1,D_2)\\mapsto D_1+D_2$ is natural in $T$, so by the\nrepresentability of $\\operatorname{Hilb}^{d_1+d_2}$ it is induced by a morphism\n\n$$\n\\alpha:H_{d_1}\\times_kH_{d_2}\\longrightarrow H_{d_1+d_2} .\n$$\n\nThe map $\\alpha$ is proper by [lem-weil-pbc-proper-to-separated], since its source is proper over $k$\n(by [lem-weil-pbc-proper-base-change] and [lem-weil-pbc-proper-composition]) and its target is separated over $k$, by part (1).\nThe surjection $u:=\\pi_{d_1}\\times\\pi_{d_2}$ from\n$X^{d_1+d_2}$ onto its source is finite locally free, and\n$\\alpha\\circ u=\\pi_{d_1+d_2}$ is finite locally free as well.\nFor every point of the target, the fibre of $\\alpha$ is therefore\nthe surjective image of the finite fibre of $\\pi_{d_1+d_2}$, so it\nhas finitely many points. Thus $\\alpha$ is finite by\n[thm-pqf-finite-iff-proper-finite-fibres].\nIt is flat by [lem-pc-flat-source-descent], since $u$ is a flat\nsurjection and the composite is flat. These are morphisms of\nfinite type schemes over a field, hence of finite presentation;\nso $\\alpha$ is finite locally free. We may now compute its rank\nusing the commutative diagram\n\n$$\n\\begin{array}{ccc}\nX^{d_1}\\times_kX^{d_2}&\\stackrel{\\sim}{\\longrightarrow}&X^{d_1+d_2}\\\\\n\\downarrow&&\\downarrow\\\\\nH_{d_1}\\times_kH_{d_2}&\\longrightarrow&H_{d_1+d_2}\n\\end{array}\n$$\n\n(the vertical left arrow is $\\pi_{d_1}\\times\\pi_{d_2}$, the vertical\nright $\\pi_{d_1+d_2}$; the diagram commutes by the definition of $\\alpha$\nand the additivity of the sums). The left vertical arrow is finite\nlocally free of degree $d_1!\\cdot d_2!$ (the degrees multiply), the\nright vertical arrow of degree $(d_1+d_2)!$; with\n$\\deg(\\alpha)=N$ the commutativity gives\n$d_1!\\,d_2!\\,N=(d_1+d_2)!$ (the classical multiplicativity of the\ndegree of composites of finite locally free morphisms: the composite\nhas degree the product; the identity in the diagram is the identity of\nthe two schemes), so $N=\\binom{d_1+d_2}{d_1}$. This proves (3).",
    "uses": [
     "lem-pc-cartier-criterion",
+    "lem-weil-pbc-finite-proper",
+    "lem-weil-pbc-proper-base-change",
+    "lem-weil-pbc-proper-composition",
     "thm-pqf-finite-iff-proper-finite-fibres",
-    "lem-pc-flat-source-descent"
+    "lem-pc-flat-source-descent",
+    "lem-weil-pbc-proper-to-separated"
    ],
    "elementary": false
   }
  ],
  "proof_deps": [
-  "lem-pc-hilb-representable",
-  "lem-pc-degree-base-change",
-  "lem-pc-ample-positive-degree",
-  "lem-sc-ample-complement-affine",
-  "lem-pc-hilb-smooth",
-  "def-pc-morphism-conventions",
-  "lem-pc-hilb-addition",
-  "def-pc-curve",
-  "def-pc-hilb-functor",
   "def-pc-base-change",
-  "lem-pc-cartier-criterion",
+  "def-pc-curve",
   "def-pc-degree-line-bundle",
-  "thm-pqf-finite-iff-proper-finite-fibres",
-  "lem-pc-flat-source-descent"
+  "def-pc-hilb-functor",
+  "def-pc-morphism-conventions",
+  "lem-pc-ample-positive-degree",
+  "lem-pc-cartier-criterion",
+  "lem-pc-degree-base-change",
+  "lem-pc-flat-source-descent",
+  "lem-pc-hilb-addition",
+  "lem-pc-hilb-representable",
+  "lem-pc-hilb-separated",
+  "lem-pc-hilb-smooth",
+  "lem-sc-ample-complement-affine",
+  "lem-sc-geometrically-irreducible-product",
+  "lem-sc-hilb-zero-base",
+  "lem-sc-proper-dim-one-projective",
+  "lem-weil-pbc-finite-proper",
+  "lem-weil-pbc-image-universally-closed",
+  "lem-weil-pbc-proper-base-change",
+  "lem-weil-pbc-proper-composition",
+  "lem-weil-pbc-proper-to-separated",
+  "sbc-lem-smooth-geometrically-reduced",
+  "thm-pqf-finite-iff-proper-finite-fibres"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/master/blueprint/sec-picard-framework/sk-thm-picard-hilb-curves/thm-pc-hilb-curves.md",
   "place": "## Proof"
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Hilbert scheme of a smooth proper geometrically irreducible curve is representable smooth proper dimension d; points are effective Cartier divisors; addition finite locally free binomial degree",
+   "results": "AlgebraicGeometry.IsSmoothOfRelativeDimension; AlgebraicGeometry.AffineSpace; AlgebraicGeometry.Proj.isSeparated (no Hilbert/Picard declaration)",
+   "date": "2026-10-11",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry Hilbert smooth proper curve, finite locally free",
+   "results": "0 hits; Unknown identifier AlgebraicGeometry",
+   "date": "2026-10-11",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "HilbertPresheaf|hilbertPresheaf|finiteLocallyFree in Mathlib/AlgebraicGeometry",
+   "results": "0 hits",
+   "date": "2026-10-11",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Hilbert scheme of smooth proper curve representability",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-11",
+   "verdict": "unavailable"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [
   "proof_cites_literature",
@@ -444,5 +496,80 @@
   }
  },
  "chapter": "sec-picard-framework",
- "unit": "sk-thm-picard-hilb-curves"
+ "unit": "sk-thm-picard-hilb-curves",
+ "split_report": {
+  "date": "2026-10-11",
+  "item": "thm-pc-hilb-curves",
+  "worker": "stage1",
+  "summary": "Repaired returned split: established projectivity before ampleness, replaced proof-only separatedness argument with lem-pc-hilb-separated, and cited existing DAG nodes for properness, products, irreducibility, finite properness, and smooth reducedness.",
+  "blueprint": "Steps 0-3 realize the blueprint proof: affine-open hypothesis, representability/proper smooth variety, divisor-valued points, and finite locally free addition.",
+  "tool_uses": [
+   {
+    "node": "def-pc-morphism-conventions",
+    "why": "Step 1 uses the diagonal characterization of separatedness from this cross-unit definition node."
+   },
+   {
+    "node": "def-pc-curve",
+    "why": "Step 1 uses this cross-unit definition for the final meaning of variety."
+   },
+   {
+    "node": "def-pc-base-change",
+    "why": "Step 2 uses this cross-unit base-change definition for X_{k'} as a fibre product."
+   },
+   {
+    "node": "thm-pqf-finite-iff-proper-finite-fibres",
+    "why": "Step 3 uses this cross-unit criterion to infer finiteness from properness and finite fibres."
+   },
+   {
+    "node": "lem-pc-degree-base-change",
+    "why": "Step 0 uses the cross-unit degree computation for a closed point divisor."
+   },
+   {
+    "node": "lem-pc-ample-positive-degree",
+    "why": "Step 0 uses the cross-unit positive-degree ampleness criterion."
+   },
+   {
+    "node": "lem-sc-ample-complement-affine",
+    "why": "Step 0 uses the cross-unit theorem that an ample divisor has affine complement."
+   },
+   {
+    "node": "lem-sc-proper-dim-one-projective",
+    "why": "Returned proof requires this general properness/product/reducedness fact and no node in this unit supplies it."
+   },
+   {
+    "node": "lem-sc-geometrically-irreducible-product",
+    "why": "Returned proof requires this general properness/product/reducedness fact and no node in this unit supplies it."
+   },
+   {
+    "node": "lem-weil-pbc-finite-proper",
+    "why": "Returned proof requires this general properness/product/reducedness fact and no node in this unit supplies it."
+   },
+   {
+    "node": "sbc-lem-smooth-geometrically-reduced",
+    "why": "Returned proof requires this general properness/product/reducedness fact and no node in this unit supplies it."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-proper-to-separated",
+  "def-pc-morphism-conventions",
+  "def-pc-curve",
+  "def-pc-base-change",
+  "thm-pqf-finite-iff-proper-finite-fibres",
+  "lem-pc-degree-base-change",
+  "lem-pc-ample-positive-degree",
+  "lem-sc-ample-complement-affine",
+  "lem-sc-proper-dim-one-projective",
+  "lem-sc-geometrically-irreducible-product",
+  "lem-weil-pbc-finite-proper",
+  "sbc-lem-smooth-geometrically-reduced"
+ ],
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-thc1910",
+  "group": "M1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-thc1910 (reviewer sub-agent of L); spot-checked: Return 18:21 points: C4 repaired (Step 0 cites lem-sc-proper-dim-one-projective before lem-pc-ample-positive-degree); C5 repaired (new statement-only lem-pc-hilb-separated = Tag 0B98 verbatim, no same-tag duplicate, Mathlib has no Hilbert schemes, searches recorded); C1 mostly repaired; statement change is only dropping 'Proposition 44.3.6' (B5, tag kept). FIX more, RETURN less: (1) C1/B5 Step 2 still quoted 'Morphisms, Lemma 29.42.9, Tag 03GN' and 'Varieties, Lemma 33.8.4, Tag 038F' (the preflight warning) instead of the nodes it lists in uses: now cites lem-weil-pbc-image-universally-closed and lem-sc-geometrically-irreducible-product (induction on d), lemma numbers dropped; removed the garbled duplicated separatedness sentence at the end of Step 2 and the unused lem-sc-proper-dim-one-projective from Step 2 uses. (2) C1 Step 4: alpha proper (proper source, separated target, Tag 01W6) now cites existing lem-weil-pbc-proper-to-separated (added to uses/proof_deps, declared tool use), source properness by proper base change and composition. (3) Step 4 grammar of the d1+d2 rank sentence. Steps 3-4 mathematics as accepted by R-thc1820; no cycle.; 1 file(s) fixed by the reviewer"
+ }
 }

@@ -2343,3 +2343,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 19:09 L: merged deliver/E1/def-sc-ringed-space-module-cohomology (reviewer PASS; first push; new nodes: 0)
 - 19:10 L: merged deliver/H1/lem-pc-affine-qcoh-derived-equivalence (reviewer FIX; first push; new nodes: 0)
 - 19:10 L: merged deliver/G1/lem-pc-projection-locality (reviewer FIX+NODE(1); first push; new nodes: 1)
+- 19:10 L: merged deliver/M1/thm-pc-hilb-curves (reviewer FIX; after a return; new nodes: 1)
