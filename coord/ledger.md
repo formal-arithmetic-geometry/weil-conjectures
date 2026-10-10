@@ -741,3 +741,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 01:13 L: reviewed lem-weil-pbc-popescu-lift-solution (07F8; 7 steps; +07F0 node): accepted.
 - 01:14 L: reviewed lem-weil-pbc-popescu-product (07F3; 5 steps; +1 node): accepted.
 - 01:15 L: reviewed lem-weil-pbc-projective-ample-invertible (01PU; 5 steps; statement repaired to absolute ampleness; tool_uses projective-space-standard-charts, twist-glued-identification): accepted; lead_note on the citer grothendieck-existence-projective.
+- 01:17 L: reviewed lem-weil-pbc-quasi-finite-at-point-isolated (01TH; 5 steps): accepted.
