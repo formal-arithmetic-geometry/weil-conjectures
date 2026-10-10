@@ -21,11 +21,55 @@
  "stmt_deps": [
   "def-pc-field-extension",
   "def-weil-pbc-separable-algebraic-extension",
-  "def-weil-etale-morphism"
+  "def-weil-etale-morphism",
+  "lem-weil-pbc-scheme-coproduct-family"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "By [lem-weil-pbc-scheme-coproduct-family], the coproduct $X=\\coprod_{i\\in I}\\operatorname{Spec}L_i$ exists with open coprojections $\\iota_i:\\operatorname{Spec}L_i\\to X$ whose images are pairwise disjoint and cover $X$. The universal property gives a unique morphism $f:X\\to\\operatorname{Spec}K$ whose restriction along $\\iota_i$ is the given morphism $\\operatorname{Spec}L_i\\to\\operatorname{Spec}K$.",
+   "uses": [
+    "lem-weil-pbc-scheme-coproduct-family"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Schemes, Lemma 01JB (lemma-glue), coproduct mapping property"
+   }
+  },
+  {
+   "text": "For every $i\\in I$, the restriction $f\\circ\\iota_i:\\operatorname{Spec}L_i\\to\\operatorname{Spec}K$ is etale by [lem-weil-pbc-finite-separable-extension-etale], because $L_i/K$ is finite and separable algebraic by hypothesis.",
+   "uses": [
+    "lem-weil-pbc-finite-separable-extension-etale"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Morphisms, Lemma 02GL (morphisms-lemma-etale-over-field), finite separable spectra are etale"
+   }
+  },
+  {
+   "text": "The images of the $\\iota_i$ form an open cover of $X$ by step 1, and each restriction $f\\circ\\iota_i$ is etale by step 2. Etaleness is local on the source by [lem-weil-pbc-etale-local-on-source], so $f$ is etale. This also covers $I=\\varnothing$, when $X$ is empty, and $I$ a singleton, when $f$ is the given finite separable spectrum morphism.",
+   "uses": [
+    "lem-weil-pbc-scheme-coproduct-family",
+    "lem-weil-pbc-etale-local-on-source"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Morphisms, Lemma 02GJ (lemma-etale-characterize), etaleness is local on the source"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-scheme-coproduct-family",
+  "lem-weil-pbc-finite-separable-extension-etale",
+  "lem-weil-pbc-etale-local-on-source"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/morphisms.tex",
+  "place": "Morphisms, Lemma 02GL (morphisms-lemma-etale-over-field), converse direction, together with Schemes Lemma 01JB and Morphisms Lemma 02GJ"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -44,18 +88,39 @@
   {
    "tool": "grep",
    "query": "rg -n 'coprod.*Etale|Etale.*coprod|disjoint.*Etale' /home/ubuntu/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicGeometry",
-   "results": "coproduct scheme declarations but no theorem that arbitrary coproducts of etale morphisms are etale",
+   "results": "coproduct scheme declarations; generic AlgebraicGeometry.IsZariskiLocalAtSource.sigmaDesc (Mathlib/AlgebraicGeometry/Morphisms/Basic.lean:305): for P local at the source, P (Sigma.desc f) if P (f i) for all i; with P = Etale this is the coproduct clause, but no declaration states the node (finite separable field spectra) [reviewer R-ece correction 2026-10-10]",
    "date": "2026-10-10",
-   "verdict": "no match"
+   "verdict": "candidate (generic step 3), no match for the node"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-exc-etale-field-gsets",
   "by": "worker",
   "date": "2026-10-10"
  },
  "chapter": "sec-curve-estimates",
- "unit": "sk-prop-h2"
+ "unit": "sk-prop-h2",
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "lem-exc-etale-coproduct-etale",
+  "worker": "stage1",
+  "summary": "Split the statement into the coproduct construction, componentwise etaleness from finite separable extensions, and the source-locality conclusion. The statement and hypotheses were checked against Stacks Morphisms Tag 02GL; the coproduct mapping property comes from Schemes Tag 01JB and source-locality from Morphisms Tag 02GJ. Existing nodes were used for all three non-elementary inputs, so no new node was needed.",
+  "blueprint": "The three steps realize the ancestor blueprint's essential-surjectivity clause that the coproduct of the spectra attached to the finite G-orbits is etale.",
+  "tool_uses": []
+ },
+ "mathlib_candidate": {
+  "declaration": "AlgebraicGeometry.IsZariskiLocalAtSource.sigmaDesc",
+  "file": "Mathlib/AlgebraicGeometry/Morphisms/Basic.lean",
+  "reason": "Line 305: P (Sigma.desc f) from P (f i) for every i, for P Zariski-local at the source (Etale is, Morphisms/Etale.lean HasRingHomProperty instance). It gives steps 1 and 3 at once; the node also needs lem-weil-pbc-finite-separable-extension-etale for each component, so it is not a one-line specialization of a single declaration."
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-ece",
+  "group": "E1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-ece (reviewer sub-agent of L); spot-checked: Source Stacks Morphisms 02GL (lemma-etale-over-field, morphisms.tex:8175), direction 'disjoint union of spectra of finite separable extensions is etale': the statement agrees (K field, any index set I, L_i/K finite separable, coproduct morphism to Spec K etale); stmt_deps addition of the coproduct node is right since the statement names the coproduct. Step 1 carried by lem-weil-pbc-scheme-coproduct-family (existence, universal property, open immersions with disjoint covering images; Mathlib leaf). Step 2 by lem-weil-pbc-finite-separable-extension-etale (finite + separable algebraic gives Spec k' -> Spec k etale; hypotheses are the item's). Step 3 by lem-weil-pbc-etale-local-on-source (open cover U_b of X, f etale iff each f o j_b etale) with U_i = image of iota_i, the passage from iota_i to j_i being composition with an isomorphism onto the open image. Small cases: I empty (X empty, vacuous), I singleton (the given morphism). Mathlib: AlgebraicGeometry.IsZariskiLocalAtSource.sigmaDesc at Mathlib/AlgebraicGeometry/Morphisms/Basic.lean:305 read; it is the generic coproduct clause, not the node (needs the finite separable component fact), so the split stands rather than a leaf. FIX: dag/nodes/sec-curve-estimates/lem-exc-etale-coproduct-etale.json: mathlib_searches[2] (grep): results/verdict corrected to name IsZariskiLocalAtSource.sigmaDesc (Basic.lean:305) instead of 'no theorem'; mathlib_candidate added with that declaration. Start Sat Oct 10 04:11:21 PM UTC 2026, end Sat Oct 10 04:12:10 PM UTC 2026.; 1 file(s) fixed by the reviewer"
+ }
 }
