@@ -17,7 +17,7 @@
     "lem-weil-pbc-finite-etale-lifting-essential-surjectivity"
    ]
   },
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "The canonical maps of formal glueing: localized S-module structure, swap of two localizations, localization of a base change",
@@ -31,9 +31,101 @@
   "def-weil-pbc-module-localization",
   "def-weil-module-base-change"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "For $R$-linear $k:Q\\to Q'$ and $h:Q'\\to Q''$, the maps $(h\\circ k)_e$ and $h_e\\circ k_e$ both send $q/e^n$ to $h(k(q))/e^n$; likewise $(h+h')_e$ and $h_e+h'_e$ send it to $(h(q)+h'(q))/e^n$, and $(\\mathrm{id}_Q)_e(q/e^n)=q/e^n$. Every element of $Q_e$ is such a fraction, so the three maps in (1) are equal.",
+   "uses": [
+    "def-weil-pbc-module-localization"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra, Definition 07JZ (definition-localization-module) and the fraction construction preceding it, for the powers of e"
+   }
+  },
+  {
+   "text": "For an $S$-module $Q$, multiplication $m_s:q\\mapsto sq$ is $R$-linear since the images of $R$ commute with $s$. The identities $m_1=\\mathrm{id}$, $m_{s+t}=m_s+m_t$ and $m_{st}=m_s\\circ m_t$ remain true after localization by the preceding step. They therefore define an $S$-module structure on $Q_e$, with $s(q/e^n)=(sq)/e^n$. If $s=\\varphi(r)$, this is the original $R$-action on fractions, so its restricted $R$-module structure is unchanged; $q\\mapsto q/1$ is $S$-linear by the same formula. For an $S$-linear $h:Q\\to Q'$, $h_e(s(q/e^n))=h(sq)/e^n=s(h(q)/e^n)$, proving the last assertion of (1).",
+   "uses": [
+    "def-weil-pbc-module-localization",
+    "def-weil-pbc-module-localization-away"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "More on Algebra, Remark 05EL (remark-glueing-data), S-module localizations used for can_i and morphisms; fraction construction in Algebra, Definition 07JZ"
+   }
+  },
+  {
+   "text": "The element $f$ acts bijectively on $(P_g)_f$ by its outer localization. Multiplication by $g$ is already invertible on $P_g$, and localizing its inverse as an $R$-linear map gives an inverse to multiplication by $g$ on $(P_g)_f$, by the composition and identity formulas of step 1. Hence both $f$ and $g$ act bijectively on $(P_g)_f$.",
+   "uses": [
+    "def-weil-pbc-module-localization-away",
+    "def-weil-pbc-module-localization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra, Definition 07JZ (definition-localization-module) and Lemma 07K0 (lemma-universal-property-localization-module), specialized to powers of f and g"
+   }
+  },
+  {
+   "text": "Compose $P\\to P_g\\to(P_g)_f$. Since $f$ acts bijectively on its target, Lemma 07K0's universal property gives a unique $R$-linear map $u:P_f\\to(P_g)_f$ taking $p/1$ to $(p/1)/1$; its fraction formula is $u(p/f^a)=(p/1)/f^a$. Since $g$ also acts bijectively on the target, the same property extends $u$ uniquely to $\\sigma^P_{f,g}:(P_f)_g\\to(P_g)_f$, with $\\sigma^P_{f,g}((p/f^a)/g^b)=(p/g^b)/f^a$. Any other map with the stated values on $((p/1)/1)$ first agrees with $u$ on $P_f$, then agrees with this extension on $(P_f)_g$, so the asserted uniqueness holds.",
+   "uses": [
+    "def-weil-pbc-module-localization-away",
+    "def-weil-pbc-module-localization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra, Lemma 07K0 (lemma-universal-property-localization-module), applied twice; More on Algebra, Remark 05EL (remark-glueing-data), canonical can_ij"
+   }
+  },
+  {
+   "text": "Interchanging $f$ and $g$ in step 4 constructs $\\sigma^P_{g,f}$. Their two composites send each $((p/f^a)/g^b)$ and $((p/g^b)/f^a)$ back to itself by the displayed fraction formula. Such fractions exhaust the respective iterated localizations, so the maps are inverse isomorphisms, proving (2). This also covers $f=0$, $g=0$, or a zero localization: the same universal property and formulas apply.",
+   "uses": [
+    "def-weil-pbc-module-localization-away"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "More on Algebra, Remark 05EL (remark-glueing-data), canonical isomorphisms can_ij; fraction construction in Algebra, Definition 07JZ"
+   }
+  },
+  {
+   "text": "Tensor the localization map $P\\to P_f$ with $S$ to obtain the $R$-linear map $t:P\\otimes_RS\\to P_f\\otimes_RS$, $p\\otimes s\\mapsto(p/1)\\otimes s$. Multiplication by $f$ is invertible on $P_f$ and hence on its tensor product with $S$ (its inverse tensored with the identity is inverse there). Lemma 07K0 therefore extends $t$ uniquely to an $R$-linear map $c^P_f:(P\\otimes_RS)_f\\to P_f\\otimes_RS$. The extension formula gives $c^P_f((p\\otimes s)/f^e)=(p/f^e)\\otimes s$. Pure tensors generate $P\\otimes_RS$, and every localized element has a fraction representative, so this formula determines the extension and its values on $(p\\otimes s)/1$ prove the uniqueness asserted in (3). By the $S$-module structure in step 2, both $c^P_f(s'((p\\otimes s)/f^e))$ and $s'c^P_f((p\\otimes s)/f^e)$ equal $(p/f^e)\\otimes s's$; additivity and generation by localized pure tensors prove $S$-linearity.",
+   "uses": [
+    "def-weil-pbc-module-localization-away",
+    "def-weil-module-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra, Lemma 07K0 (lemma-universal-property-localization-module) and Lemma 00DK (lemma-tensor-localization); More on Algebra, Remark 05EL (remark-glueing-data), canonical can_i"
+   }
+  },
+  {
+   "text": "The localization-after-tensor theorem [lem-weil-pbc-localization-tensor-over-base], applied with $A=R$, $M=P$, $T=\\{1,f,f^2,\\dots\\}$ and $N=S$, says that $t$ is a localization at the powers of $f$ and that its induced $R$-linear map $(P\\otimes_RS)_f\\to P_f\\otimes_RS$ is an isomorphism with precisely the formula of step 6. By the uniqueness in step 6 this induced map is $c^P_f$. Since $c^P_f$ is $S$-linear, its inverse is $S$-linear as well: for $y=c^P_f(x)$, $(c^P_f)^{-1}(sy)=(c^P_f)^{-1}(c^P_f(sx))=sx$. Thus $c^P_f$ is an $S$-module isomorphism.",
+   "uses": [
+    "lem-weil-pbc-localization-tensor-over-base",
+    "def-weil-pbc-module-localization-away"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra, Lemma 00DK (lemma-tensor-localization) with Lemma 00D2 (lemma-tensor-with-bimodule); More on Algebra, Remark 05EL (remark-glueing-data), canonical can_i"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-module-localization",
+  "def-weil-pbc-module-localization-away",
+  "def-weil-module-base-change",
+  "lem-weil-pbc-localization-tensor-over-base"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Remark 05EL (remark-glueing-data) supplies the canonical maps without a proof; the argument expands them with Algebra Lemma 07K0 (lemma-universal-property-localization-module), Lemma 00DK (lemma-tensor-localization), and Lemma 00D2 (lemma-tensor-with-bimodule)"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -84,7 +176,7 @@
   "file": "Mathlib/RingTheory/Localization/BaseChange.lean",
   "how": "lines 244-252: for an A-linear localization map g : M → M' at S ⊆ A, AlgebraTensorModule.rTensor R N g is a localization map at S; with A = R, g = P → P_f, N = S it gives the R-linear isomorphism of clause (3) through IsLocalizedModule.linearEquiv; clause (1), clause (2) and the S-linearity in (3) are not covered"
  },
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "worker",
@@ -106,5 +198,19 @@
  "chapter": "sec-proper-base-change",
  "unit": "sk-thm-p1",
  "import_flags": [],
- "note": "Claim moved out of def-weil-pbc-formal-glueing-data (well-definedness of its data: the S-module structure of P_f, the maps sigma^P_{f,g} and c^P_f). The definition names it in `pointers`, not in stmt_deps (a definition does not cite a lemma about its own data). Clauses (2), (3) 'is an isomorphism' overlap prop-weil-pbc-formal-glueing-equivalence (1), whose split can cite this node for them."
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "lem-weil-pbc-formal-glueing-canonical-maps",
+  "worker": "stage1",
+  "summary": "Checked Remark 05EL's canonical can_i and can_ij against Algebra 07K0, 00DK and 00D2. Proved localization functor identities and induced S-linearity by fraction formulas, built the swap by two applications of module-localization universality, and identified the tensor comparison with the existing reviewed localization-after-tensor Mathlib leaf. No new nodes or statement changes.",
+  "blueprint": "Provides the canonical localization and tensor maps used by the formal-glueing definition on the 0GS2 essential-surjectivity branch of thm-weil-pbc-finite-etale-lifting, step 7. Its seven steps spell out the functoriality, iterated-localization swap, and base-change map implicit in that use. Whole-blueprint searches for can_i and for localization tensor glue found no matching imported statement."
+ },
+ "note": "Claim moved out of def-weil-pbc-formal-glueing-data (well-definedness of its data: the S-module structure of P_f, the maps sigma^P_{f,g} and c^P_f). The definition names it in `pointers`, not in stmt_deps (a definition does not cite a lemma about its own data). Clauses (2), (3) 'is an isomorphism' overlap prop-weil-pbc-formal-glueing-equivalence (1), whose split can cite this node for them.",
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "group": "K1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed by the lead of K1; spot-checked by L: L: 05EL maps checked: functorial localization, swap of iterated localizations by 07K0, tensor-localization via 00DK"
+ }
 }
