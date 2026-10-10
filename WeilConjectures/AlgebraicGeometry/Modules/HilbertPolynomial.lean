@@ -345,6 +345,31 @@ theorem eulerChar_tensorObj_sub_eulerChar_tensorObj_eq {M N : X.Modules}
     eulerChar_congr K (PreservesCokernel.iso (tensorRight P) φ).symm
   rw [eulerChar_sub_eulerChar_eq K (φ ▷ P), e₁, e₂]
 
+omit [IsProper (X ↘ Spec (.of K))] in
+attribute [local instance] Abelian.hasFiniteBiproducts in
+/-- **The Euler characteristic of a free module.** `χ(𝒪_X^{⊕ r} ⊗ N) = r χ(N)` for `N`
+invertible: the cohomology of a finite direct sum is the direct sum of the cohomologies. -/
+theorem eulerChar_free_tensorObj (r : ℕ) (N : X.Modules) [N.IsInvertible]
+    [∀ q, FiniteDimensional K (N.H q)] :
+    (SheafOfModules.free (R := X.ringCatSheaf) (ULift.{u} (Fin r)) ⊗ₘ N).eulerChar K =
+      r * N.eulerChar K := by
+  have := isEquivalence_tensorRight N
+  let e : SheafOfModules.free (R := X.ringCatSheaf) (ULift.{u} (Fin r)) ⊗ₘ N ≅
+      ⨁ fun _ : ULift.{u} (Fin r) ↦ N :=
+    PreservesCoproduct.iso (tensorRight N) _ ≪≫
+      Sigma.mapIso (fun _ ↦ λ_ N) ≪≫ (biproduct.isoCoproduct _).symm
+  have h (q : ℕ) : (SheafOfModules.free (R := X.ringCatSheaf) (ULift.{u} (Fin r)) ⊗ₘ
+      N).finrankH K q = r * N.finrankH K q := by
+    rw [finrankH_congr K e q, finrankH_of_isBilimit K (biproduct.isBilimit _) q]
+    simp
+  unfold eulerChar
+  rw [mul_finsum]
+  congr 1
+  funext q
+  rw [h q]
+  push_cast
+  ring
+
 end EulerChar
 
 /-- A morphism `σ : 𝒪_X ⟶ N` sending `1` to `0` is zero. -/
