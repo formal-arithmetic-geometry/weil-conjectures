@@ -20,9 +20,70 @@
   "def-pc-field-extension",
   "def-weil-etale-morphism"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "For an etale K-scheme X, the set Hom_K(Spec K^sep,X) carries a G-action by precomposition. Apply [lem-weil-pbc-etale-fibre-discrete-separable-points] with S=Spec K: X is a disjoint union of spectra of finite separable extensions, so every geometric point factors through one such component. By [lem-exc-etale-field-galois-classification], the stabilizer of a point is Gal(K^sep/sigma(L)) for the corresponding K-embedding sigma, an open subgroup of G. Thus the action is discrete and continuous, and the construction is functorial in X.",
+   "uses": [
+    "lem-weil-pbc-etale-fibre-discrete-separable-points",
+    "lem-exc-etale-field-galois-classification"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/pione.tex",
+    "place": "Tag 03QR, Lemma lemma-sheaves-point, first paragraph; Morphisms Tag 02GL (morphisms-lemma-etale-over-field) for the field decomposition"
+   }
+  },
+  {
+   "text": "A morphism of etale K-schemes induces a G-equivariant map on geometric points. Decompose source and target into their connected finite-separable spectrum components by [lem-weil-pbc-etale-fibre-discrete-separable-points] with S=Spec K. On one source component, connectedness forces an equivariant map to land in one target orbit; the full-faithfulness clause of [lem-exc-etale-field-galois-classification] identifies that equivariant map with a unique K-morphism of spectra. Taking these componentwise maps gives a unique K-morphism of the coproducts. Conversely, the same componentwise construction sends every K-morphism to its geometric-point map, so the functor is fully faithful.",
+   "uses": [
+    "lem-weil-pbc-etale-fibre-discrete-separable-points",
+    "lem-exc-etale-field-galois-classification"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/pione.tex",
+    "place": "Tag 03QR, Lemma lemma-sheaves-point, full-faithfulness paragraph, using the finite Galois correspondence"
+   }
+  },
+  {
+   "text": "Let S be a discrete continuous G-set. Decompose S into G-orbits. For s in S, continuity makes its stabilizer G_s open, so the orbit G/G_s is finite; by [lem-exc-etale-field-galois-classification] there is a finite separable extension L_s/K with G_s=Gal(K^sep/L_s), namely L_s=(K^sep)^{G_s}, and the orbit is represented by Spec L_s. Each Spec L_s -> Spec K is etale by [lem-weil-pbc-finite-separable-extension-etale], and their coproduct is etale by [lem-exc-etale-coproduct-etale]. Its geometric points are the disjoint union of the corresponding finite orbits, canonically isomorphic to S. Therefore the functor is essentially surjective.",
+   "uses": [
+    "lem-exc-etale-field-galois-classification",
+    "lem-weil-pbc-finite-separable-extension-etale",
+    "lem-exc-etale-coproduct-etale"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/pione.tex",
+    "place": "Tag 03QR, Lemma lemma-sheaves-point, essential-surjectivity paragraph; Morphisms Tag 02GL for finite separable pieces"
+   }
+  },
+  {
+   "text": "For a family (U_i \\to X) of etale morphisms of etale K-schemes, write P(-)=Hom_K(Spec K^sep,-). Suppose the family is a covering in the small etale site, i.e. jointly surjective on points [def-weil-pbc-etale-site]. Let \\bar x \\in P(X) lie over x in X and pick u in some U_i mapping to x. By [lem-weil-pbc-etale-fibre-discrete-separable-points] with S=Spec K, the components {x} of X and {u} of U_i are isomorphic over K to Spec kappa(x) and Spec kappa(u) with kappa(x), kappa(u) finite separable over K, and the morphism U_i \\to X restricts to a K-morphism Spec kappa(u) \\to Spec kappa(x). By [lem-exc-etale-field-galois-classification], P(Spec kappa(u)) and P(Spec kappa(x)) are transitive (in particular nonempty) G-sets; the induced G-equivariant map between them hits some point of the transitive G-set P(Spec kappa(x)) and hence, by equivariance, all of it; \\bar x factors through the component {x} (Spec K^sep is a single point), so \\bar x is hit. Thus the family is jointly surjective on P. Conversely, assume the maps P(U_i) \\to P(X) are jointly surjective. For x in X, [lem-weil-pbc-etale-fibre-discrete-separable-points] with S=Spec K says that kappa(x) is finite separable over K, so P(Spec kappa(x)) is nonempty by [lem-exc-etale-field-galois-classification] and x admits a point \\bar x in P(X) over it; a preimage of \\bar x in some P(U_i) lies over a point of U_i mapping to x. Thus the family is jointly surjective on points, and it is a covering by the definition [def-weil-pbc-etale-site] of coverings in the small etale site. Under the equivalence already established, these are exactly jointly surjective families of G-equivariant maps.",
+   "uses": [
+    "lem-weil-pbc-etale-fibre-discrete-separable-points",
+    "lem-exc-etale-field-galois-classification",
+    "def-weil-pbc-etale-site"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/pione.tex",
+    "place": "Tag 03QR, Lemma lemma-sheaves-point, with Remark 03QS; the converse is the geometric-point argument using Morphisms 02GL"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-etale-fibre-discrete-separable-points",
+  "lem-exc-etale-field-galois-classification",
+  "lem-weil-pbc-finite-separable-extension-etale",
+  "lem-exc-etale-coproduct-etale",
+  "def-weil-pbc-etale-site"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/pione.tex",
+  "place": "Tag 03QR (Lemma lemma-sheaves-point), Remark 03QS, and Morphisms Tag 02GL (morphisms-lemma-etale-over-field)"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -47,12 +108,41 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-exc-field-discrete-modules",
   "by": "worker",
   "date": "2026-10-10"
  },
  "chapter": "sec-curve-estimates",
- "unit": "sk-prop-h2"
+ "unit": "sk-prop-h2",
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "lem-exc-etale-field-gsets",
+  "worker": "stage1",
+  "summary": "Repaired the split after return: deleted the decomposition and covering restatements, reused the existing etale-fibre decomposition and geometric-point lifting lemmas, strengthened the Galois classification with the finite-spectrum full-faithfulness bijection and the correctly embedded stabilizer formula, and added only the missing coproduct-etale statement needed for essential surjectivity.",
+  "blueprint": "The four steps realize the blueprint proof paragraph: decomposition into finite separable spectra, Galois-set classification, coproduct construction for essential surjectivity, and the jointly-surjective covering criterion.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-etale-fibre-discrete-separable-points",
+    "why": "Steps 1, 2, and 4 use its S=Spec K specialization to decompose an etale K-scheme and identify residue fields of its points."
+   },
+   {
+    "node": "lem-weil-pbc-finite-separable-extension-etale",
+    "why": "Step 3 uses its assertion that each finite separable field spectrum is etale over Spec K."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-etale-fibre-discrete-separable-points",
+  "lem-weil-pbc-finite-separable-extension-etale"
+ ],
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-efg3",
+  "group": "G1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-efg3 (reviewer sub-agent of L); spot-checked: Repaired re-push after return 15:29: points 1-6 checked repaired (cover-detection and decomposition nodes deleted, existing fibre lemma cited and declared as tool use; classification gains the Hom-bijection clause and the sigma(L) stabilizer; coproduct-etale node added with finite-separable-etale leaf cited and L_s=(K^sep)^{G_s} explicit; stmt_deps restored; proof_origin 03QR/03QS/02GL; created carrying only item is per README). Source pione 03QR lemma-sheaves-point (pione.tex 69-106) read: the item's equivalence and steps 1-3 follow its proof (02GL decomposition, open stabilizers, orbits -> fixed fields -> coproduct); step 4 is Remark 03QS. Statements of fibre-discrete-separable-points (S=Spec K gives X discrete with components Spec kappa(y), kappa(y) finite separable), finite-separable-extension-etale (Mathlib leaf), def-weil-pbc-etale-site (coverings = jointly surjective etale families) read against the steps. Small cases: K separably closed (G trivial, etale K-schemes = sets), finite Galois L/K (orbit G/Gal(K^sep/L)), empty scheme/empty G-set. FIX more, RETURN less: (1) C4 step 4 of lem-exc-etale-field-gsets: lem-weil-pbc-etale-cover-geometric-point-lift requires Omega algebraically closed (def-weil-geometric-point), K^sep is not; forward direction rewritten from the fibre lemma and the transitivity clause of lem-exc-etale-field-galois-classification (equivariant map into a transitive G-set from a nonempty one is onto), converse cites the classification for nonemptiness; uses/proof_deps/split_report.tool_uses drop the lift leaf and add the classification. (2) B3 lem-exc-etale-field-galois-classification: statement cites def-pd-separable-closure and def-weil-pbc-separable-algebraic-extension, stmt_deps updated. (3) B3 lem-exc-etale-coproduct-etale: statement cites def-weil-pbc-separable-algebraic-extension, stmt_deps updated. Start Sat Oct 10 03:50:55 PM UTC 2026, end Sat Oct 10 03:52:08 PM UTC 2026.; 3 file(s) fixed by the reviewer"
+ }
 }
