@@ -32,9 +32,100 @@
   "def-pc-field-extension",
   "def-weil-pbc-integral-closure"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "*Fraction fields.* Let $K=A_{(0)}$ and $L=B_{(0)}$ be the fraction fields of $A$ and $B$, their localizations at the prime $(0)$ [def-weil-pbc-localization-at-prime]. Since $A\\subseteq B\\subseteq L$ and every nonzero $s\\in A$ is nonzero in the field $L$, the map $\\iota:K\\to L$, $a/s\\mapsto as^{-1}$, is well defined ($a/s=a'/s'$ means $as'=a's$ in the domain $A$, hence in $L$), a ring homomorphism, and injective since $K$ is a field; on $A$ it is the inclusion $A\\subseteq B\\subseteq L$. So $L$ is a field extension of $K$ through $\\iota$ [def-pc-field-extension], and for any field extension $M$ of $L$ the two $A$-algebra structures on $M$, through $A\\subseteq K\\xrightarrow{\\iota}L\\subseteq M$ and through $A\\subseteq B\\subseteq L\\subseteq M$, agree.",
+   "uses": [
+    "def-weil-pbc-localization-at-prime",
+    "def-pc-field-extension"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra, Lemma Tag 032I (lemma-quasi-finite-over-Noetherian-japanese, line 45202), proof, first paragraph, lines 45208-45209: 'Let $L/K$ be the induced extension of fraction fields.'"
+   }
+  },
+  {
+   "text": "*$L/K$ is finite.* Let $b_1,\\dots,b_n$ generate $B$ as an $A$-module [def-weil-finitely-generated-module], and let $V=\\iota(K)b_1+\\dots+\\iota(K)b_n\\subseteq L$, the $K$-subspace spanned by the $b_i$. Every element $\\iota(a/s)\\,b$ with $a,s\\in A$, $s\\ne0$, $b\\in B$ lies in $V$: write $ab=\\sum_i a_ib_i$ with $a_i\\in A$, so $\\iota(a/s)b=\\sum_i\\iota(a_i/s)b_i$. Conversely every element of $V$ is a finite sum of such products, and sums and products of such products are again sums of such products ($\\iota(k)b\\cdot\\iota(k')b'=\\iota(kk')bb'$); so $V$ is a subring of $L$ containing $\\iota(K)$ and $B$, i.e. a commutative $K$-algebra, an integral domain (a subring of a field), and finite-dimensional over $K$ (spanned by $b_1,\\dots,b_n$). By [lem-weil-pbc-finite-dimensional-domain-is-field] $V$ is a field. Hence for $b,b'\\in B$ with $b'\\ne0$ the inverse of $b'$ in $V$, which is its inverse in $L$, lies in $V$, and $b/b'=b\\,b'^{-1}\\in V$. Every element of $L=B_{(0)}$ has this form, so $V=L$ and $\\dim_KL\\le n$: $L/K$ is a finite field extension [def-pc-field-extension]. (In the source this is the finiteness of $L/K$, obtained there for quasi-finite extensions from Lemma 00PK (2) on the fibre $S\\otimes_RK$; in the finite case the fibre $V\\cong K\\otimes_AB$ is spanned by the images of the $b_i$, and the argument above is that case written out.)",
+   "uses": [
+    "def-weil-finitely-generated-module",
+    "lem-weil-pbc-finite-dimensional-domain-is-field",
+    "def-pc-field-extension",
+    "def-weil-pbc-localization-at-prime"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra, Lemma Tag 032I (lemma-quasi-finite-over-Noetherian-japanese, line 45202), proof, first paragraph, lines 45209-45212: 'Note that this is a finite field extension (for example by Lemma isolated-point-fibre (2) applied to the fibre $S\\otimes_R K$ ...)', in the finite case"
+   }
+  },
+  {
+   "text": "*$M/K$ is finite.* Let $M$ be a finite field extension of $L$ [def-pc-field-extension]. By steps 1 and 2, $K\\subseteq L\\subseteq M$ (through $\\iota$) with $L/K$ and $M/L$ finite, so by the tower law [lem-weil-pbc-field-degree-multiplicativity] $M/K$ is finite, with $[M:K]=[M:L][L:K]$.",
+   "uses": [
+    "def-pc-field-extension",
+    "lem-weil-pbc-field-degree-multiplicativity"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra, Lemma Tag 032I (lemma-quasi-finite-over-Noetherian-japanese, line 45202), proof, second paragraph, lines 45226-45228: 'Let $M$ be a finite field extension of the fraction field of $S$. Then $M$ is also a finite field extension of $K$'"
+   }
+  },
+  {
+   "text": "*The closure of $A$.* Let $T_A\\subseteq M$ be the integral closure of $A$ in $M$ [def-weil-pbc-integral-closure], $M$ being an $A$-algebra through $A\\subseteq K\\to M$, which by step 1 is the same as through $A\\subseteq B\\subseteq M$. Since $A$ is N-2 [def-weil-pbc-japanese-domain] and $M/K$ is finite (step 3), $T_A$ is a finitely generated $A$-module [def-weil-finitely-generated-module].",
+   "uses": [
+    "def-weil-pbc-integral-closure",
+    "def-weil-pbc-japanese-domain",
+    "def-weil-finitely-generated-module"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra, Lemma Tag 032I (lemma-quasi-finite-over-Noetherian-japanese, line 45202), proof, second paragraph, lines 45228-45229: 'and we conclude that the integral closure $T$ of $R$ in $M$ is finite over $R$'"
+   }
+  },
+  {
+   "text": "*$T_A$ is the integral closure of $B$ in $M$.* Let $T_B\\subseteq M$ be the integral closure of $B$ in $M$ [def-weil-pbc-integral-closure]. (a) $T_A\\subseteq T_B$: if $x\\in M$ satisfies $x^m+a_{m-1}x^{m-1}+\\dots+a_0=0$ with $a_i\\in A$, this is a monic equation with coefficients $a_i\\in A\\subseteq B$, so $x$ is integral over $B$. (b) $T_B\\subseteq T_A$: $B$ is a finitely generated $A$-module, so $B$ is integral over $A$ by [lem-weil-pbc-finite-algebra-is-integral]. By [def-weil-pbc-integral-closure] $T_B$ is a subring of $M$ containing $B$, and each of its elements is integral over $B$, i.e. the ring map $B\\to T_B$ is integral. By [lem-weil-pbc-integral-transitive] applied to $A\\to B\\to T_B$, every $x\\in T_B$ is integral over $A$, i.e. $x\\in T_A$. Hence $T_A=T_B$. This is the case of Algebra, Lemma 0308 (lemma-integral-closure-transitive, line 7723) used by the source, for $A\\to B\\to M$, where the integral closure of $A$ in $B$ is all of $B$.",
+   "uses": [
+    "def-weil-pbc-integral-closure",
+    "lem-weil-pbc-finite-algebra-is-integral",
+    "lem-weil-pbc-integral-transitive"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra, Lemma Tag 032I (lemma-quasi-finite-over-Noetherian-japanese, line 45202), proof, second paragraph, lines 45229-45230: 'By Lemma integral-closure-transitive [Tag 0308] we see that $T$ is also the integral closure of $S$ in $M$'"
+   }
+  },
+  {
+   "text": "*Conclusion.* Let $t_1,\\dots,t_m$ generate $T_A$ as an $A$-module (step 4). Since $T_B=T_A$ (step 5) and $A\\subseteq B$, every $A$-linear combination $\\sum_j a_jt_j$ is a $B$-linear combination, so $t_1,\\dots,t_m$ generate $T_B$ as a $B$-module [def-weil-finitely-generated-module] (Algebra, Lemma 02JM (2): $A\\to C$ finite implies $B\\to C$ finite, for $C=T_B$). As $M$ was an arbitrary finite field extension of the fraction field $L$ of $B$, $B$ is N-2 [def-weil-pbc-japanese-domain]. (The hypothesis that $A$ is Noetherian is not used in this finite case; the source needs it only for the reduction of quasi-finite extensions to finite ones.)",
+   "uses": [
+    "def-weil-finitely-generated-module",
+    "def-weil-pbc-japanese-domain"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra, Lemma Tag 032I (lemma-quasi-finite-over-Noetherian-japanese, line 45202), proof, second paragraph, lines 45230-45231: 'and we win by Lemma integral-permanence' (Tag 02JM, part (2))"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-localization-at-prime",
+  "def-pc-field-extension",
+  "def-weil-finitely-generated-module",
+  "lem-weil-pbc-finite-dimensional-domain-is-field",
+  "lem-weil-pbc-field-degree-multiplicativity",
+  "def-weil-pbc-integral-closure",
+  "def-weil-pbc-japanese-domain",
+  "lem-weil-pbc-finite-algebra-is-integral",
+  "lem-weil-pbc-integral-transitive"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Algebra, Lemma Tag 032I (lemma-quasi-finite-over-Noetherian-japanese, line 45202), proof lines 45207-45232: first paragraph (finiteness of the extension of fraction fields; written out directly for the finite case in step 2) and second paragraph (the finite case), with the cited Lemmas 0308 (lemma-integral-closure-transitive, line 7723) and 02JM (lemma-integral-permanence, line 7710)"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -59,7 +150,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "worker",
@@ -80,5 +171,12 @@
  },
  "chapter": "sec-proper-base-change",
  "unit": "sk-thm-p1",
- "reviewed": "2026-10-10 L: statement checked against 032I (finite case)"
+ "reviewed": "2026-10-10 L: 6 steps checked against 032I (finite case): K embeds in L, L/K finite (written out for the finite case), M/K finite, integral closure of A in M finite by N-2, equal to that of B (0308 case written out), generators carry over; Noetherian unused in the finite case (noted)",
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "lem-weil-pbc-n2-ascends-finite-domain-extension",
+  "worker": "stage1",
+  "summary": "Read Algebra Lemma 032I (lemma-quasi-finite-over-Noetherian-japanese, algebra.tex 45202-45232) and the lemmas its finite case cites, 0308 (lemma-integral-closure-transitive, 7723, proof omitted) and 02JM (lemma-integral-permanence, 7710, proof omitted), and 00GK (lemma-finite-is-integral, 7470); tags verified in tags/tags. Six steps: embedding of fraction fields; L/K finite, written out for the finite case (the source cites 00PK (2) for the quasi-finite case) via the finite-dimensional domain lemma; M/K finite by the tower law; T_A finite over A by N-2; T_A = T_B (the case of 0308 needed, both inclusions, via finite-is-integral and integral transitivity); generators of T_A over A generate T_B over B (02JM (2), written out). Statement kept (the Noetherian hypothesis is unused in the finite case but is the source's). No new node. No slopmaster2 declaration (no Japanese/N-2 notion in WeilConjectures). Blueprint search ('N-2', 'N-2 finite extension', '032I', 'Japanese', 'integral closure finite extension'): no blueprint node states it, same_as [].",
+  "blueprint": "All six steps serve the place of the blueprint node lem-weil-pbc-normal-constant-generic recorded in from.place (step 4 of its split, Tag 09Z5 proof of (1)), reached through the via chain at lem-weil-pbc-complete-local-nagata's use of 032I in the reduction of the proof of Algebra 032W to R = k[[X_1,...,X_d]] or Lambda[[X_1,...,X_d]]: the N-2 property passes from these power series rings to the complete local domain finite over them."
+ }
 }
