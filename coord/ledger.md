@@ -1850,3 +1850,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 15:44 L: merged deliver/E1/lem-sc-p1-graded-kernel-finite (reviewer PASS; first push; new nodes: 1)
 - 15:44 L: merged deliver/J1/lem-sc-ample-finite-principal-affine (reviewer FIX; after a return; new nodes: 3)
 - 15:44 L: merged deliver/K1/lem-sc-coherent-free-stalks-locally-free (reviewer FIX; first push; new nodes: 1)
+- 15:44 L: merged deliver/K1/lem-sc-reduced-ideals-zero-intersection (reviewer PASS; first push; new nodes: 0)

@@ -24,9 +24,48 @@
  "stmt_deps": [
   "def-weil-affine-spectrum"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "By [lem-weil-pbc-zero-locus-ideal-intersection], $V(I\\cap J)=V(I)\\cup V(J)=\\operatorname{Spec}(A)$. Thus every prime ideal of $A$ contains $I\\cap J$.",
+   "uses": [
+    "lem-weil-pbc-zero-locus-ideal-intersection"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Varieties Remark 09NW (varieties-remark-conductor), equality $\\operatorname{Spec}(A)=V(I)\\cup V(J)=V(I\\cap J)$; Algebra Lemma 00E0 (lemma-Zariski-topology), part (9)"
+   }
+  },
+  {
+   "text": "Take $x\\in I\\cap J$. By Step 1, $x$ belongs to every prime ideal. By [lem-weil-pbc-zero-locus-eq-iff-radical-eq], the intersection of all prime ideals is $\\sqrt{(0)}$, so $x$ is nilpotent. Reducedness of $A$ means that a nilpotent element is zero. Hence $I\\cap J=0$.",
+   "uses": [
+    "lem-weil-pbc-zero-locus-eq-iff-radical-eq"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Varieties Remark 09NW (varieties-remark-conductor), assertion that $I\\cap J=0$; Algebra Lemma 00E0 (lemma-Zariski-topology), part (7)"
+   }
+  },
+  {
+   "text": "The quotient map $q:A\\to B=A/J$ sends $I$ onto the ideal $IB=(I+J)/J$ by definition. Its restriction $q|_I:I\\to IB$ has kernel $\\{x\\in I:x\\in J\\}=I\\cap J=0$ by Step 2; it is surjective onto $IB$, so it is an $A$-module isomorphism. The quotient description of the same map is $I/(I\\cap J)\\cong IB$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Varieties Remark 09NW (varieties-remark-conductor), $IB=(I+J)/J=I/(I\\cap J)$"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-zero-locus-ideal-intersection",
+  "lem-weil-pbc-zero-locus-eq-iff-radical-eq"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/varieties.tex",
+  "place": "Varieties Remark 09NW (varieties-remark-conductor); Algebra Lemma 00E0 (lemma-Zariski-topology), parts (7) and (9)"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -51,12 +90,28 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-sc-conductor-ideal-zero-intersection",
   "by": "worker",
   "date": "2026-10-10"
  },
  "chapter": "sec-curve-estimates",
- "unit": "sk-thm-curveestimate"
+ "unit": "sk-thm-curveestimate",
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "lem-sc-reduced-ideals-zero-intersection",
+  "worker": "stage1",
+  "summary": "Expanded Remark 09NW into the zero-locus identity, the radical criterion with reducedness, and the explicit quotient-map argument. Existing Mathlib-leaf DAG nodes supply both non-elementary facts; no new nodes are required.",
+  "blueprint": "The three steps realize the conductor equality in the first sentence of the proof of lem-sc-pic-proper-ntorsion, via Varieties Remark 09NW.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-rzi",
+  "group": "K1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-rzi (reviewer sub-agent of L); spot-checked: Source: Varieties Remark 09NW (varieties-remark-conductor, varieties.tex:8068-8076) read locally: reduced ring A, ideals I,J with V(I) u V(J)=Spec A, B=A/J, I -> IB iso of A-modules, IB=(I+J)/J=I/(I cap J), I cap J=0; the item's statement matches hypothesis by hypothesis (reduced, covering, B=A/J), no change of statement. Only the item's node and the report changed; changed fields are split-owned (proof, proof_deps, proof_origin, status, split_report). Step 1: lem-weil-pbc-zero-locus-ideal-intersection states V(I cap J)=V(I) u V(J) for any commutative ring, Mathlib leaf PrimeSpectrum.zeroLocus_inf verified at RingTheory/Spectrum/Prime/Basic.lean:336. Step 2: lem-weil-pbc-zero-locus-eq-iff-radical-eq states sqrt I = intersection of primes containing I (leaf clause Ideal.radical_eq_sInf, Ideal/Operations.lean:932 verified), applied to I=0 gives nilradical; reducedness gives I cap J=0. Step 3 elementary: kernel of I -> A/J restricted is I cap J, image is IB. Both cited nodes are off-unit (sk-thm-p1) Mathlib leaves used as generic tools, no tool_uses needed. Small cases: A=k[x,y]/(xy), I=(x), J=(y): (x) cap (y)=0 in A; A=k[x]/(x^2) is excluded (not reduced; there I=J=(x) gives I cap J=(x) nonzero), confirming the reduced hypothesis is needed; A=0 trivial. Note: report lists a citations.json not in the commit (harmless). Start Sat Oct 10 03:44:32 PM UTC 2026, end Sat Oct 10 03:44:54 PM UTC 2026."
+ }
 }
