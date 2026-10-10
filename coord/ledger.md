@@ -1693,3 +1693,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 14:55 L: returned deliver/K1/lem-sc-ext-locally-free (reviewer RETURN: Points 1 (composite now assumes T(I) U-acyclic), 3 (Ext via [lem-weil-pbc-ext-via-injective-resolution]), 4 ([pqf-def-co)
 - 14:55 L: merged deliver/K1/lem-weil-pbc-proper-composition (reviewer FIX; first push; new nodes: 0)
 - 14:55 L: merged deliver/F1/lem-sc-reduced-dim-le-one-ample (reviewer FIX; first push; new nodes: 9)
+- 14:56 L: merged deliver/F1/lem-exc-coinduced-continuous-acyclic (reviewer PASS; after a return; new nodes: 2)

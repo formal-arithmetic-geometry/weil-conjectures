@@ -22,9 +22,50 @@
   "lem-exc-discrete-modules-abelian",
   "lem-exc-coinduced-discrete-embedding"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "For each $n\\geq1$ define $h_n$ on an $n$-cochain $F$ by $h_n(F)(g_1,\\ldots,g_{n-1})(x)=F(x,g_1,\\ldots,g_{n-1})(1)$. Evaluation at $1$ and product precomposition preserve $A$-linearity; [lem-exc-coinduced-homotopy-continuous] proves that this formula is a continuous $(n-1)$-cochain with values in the discrete module $D(M)$.",
+   "uses": [
+    "lem-exc-coinduced-homotopy-continuous"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 0DVG, label section-continuous-group-cohomology, final profinite comparison"
+   }
+  },
+  {
+   "text": "Expand $d^{n-1}h_nF$ and $h_{n+1}d^nF$ at $(g_1,\\ldots,g_n)$ and then at $x$. The term $(x\\cdot F(g_1,\\ldots,g_n))(1)=F(g_1,\\ldots,g_n)(x)$ survives and all others cancel in pairs, including the terms $F(xg_1,g_2,\\ldots,g_n)(1)$ and the final terms. Thus $d^{n-1}h_nF+h_{n+1}d^nF=F$ in $C^n(G,D(M))$ by [lem-exc-coinduced-homotopy-identity].",
+   "uses": [
+    "lem-exc-coinduced-homotopy-identity"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 0DVG, label section-continuous-group-cohomology, final profinite comparison"
+   }
+  },
+  {
+   "text": "If $q>0$ and $F$ is a $q$-cocycle, then $d^qF=0$. The homotopy identity in degree $q$ gives $F=d^{q-1}(h_qF)$, so $F$ is a coboundary. Therefore $H^q(C^\\bullet(G,D(M)))=0$ for every $q>0$.",
+   "uses": [
+    "lem-exc-coinduced-homotopy-identity"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 0DVG, label section-continuous-group-cohomology, final profinite comparison"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-exc-coinduced-homotopy-continuous",
+  "lem-exc-coinduced-homotopy-identity"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tag 0DVG; explicit coinduced contracting homotopy"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -49,10 +90,26 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-exc-cochains-derived-invariants"
  },
  "chapter": "sec-curve-estimates",
- "unit": "sk-prop-h2"
+ "unit": "sk-prop-h2",
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "lem-exc-coinduced-continuous-acyclic",
+  "worker": "stage1",
+  "summary": "Split the agent-written coinduced acyclicity claim into continuity of the explicit evaluation homotopy and its direct cochain identity, then used the identity to prove vanishing in every positive degree. Checked the exact inhomogeneous differential, endpoint cancellation, and continuity into the discrete coinduced module; no matching Lean or Mathlib declaration exists.",
+  "blueprint": "Realizes the final continuous-cochain comparison clause of def-exc-continuous-cohomology via the item route from lem-exc-cochains-derived-invariants.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-cc2",
+  "group": "F1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-cc2 (reviewer sub-agent of L); spot-checked: Repaired re-push after the 14:48 return; all three points repaired: (1) lem-exc-coinduced-homotopy-continuous now self-contained (G profinite, A finite ring, M with open stabilizers, D(M)=Cont(G,M) discrete with right translation, C^n=Cont(G^n,D(M))), stmt_deps lem-exc-discrete-modules-abelian and lem-exc-coinduced-discrete-embedding, no citation of the item; (2) lem-exc-coinduced-homotopy-identity restates all objects, writes d^0 and d^n in full and h_n, cites the continuity node only for continuity of h_nF, does not cite the item; (3) both statements and the item's three steps in TeX, step 2 sentence replaced by the surviving term (x.F(g_1..g_n))(1)=F(g_1..g_n)(x). Source: Stacks 0DVG section-continuous-group-cohomology gives the inhomogeneous differential the item uses; contraction is agent-written as recorded. Read statements of lem-exc-discrete-modules-abelian (category of A-modules with open-stabilizer G-action) and lem-exc-coinduced-discrete-embedding (D(M) with (h.f)(x)=f(xh) is again such a module): they give the objects the three statements use. Step 1 carried by homotopy-continuous (A-linearity pointwise); step 2 by homotopy-identity; step 3 elementary from the identity with d^qF=0. Item diff vs sheaf-dag: only proof, proof_deps, proof_origin, split_report, status changed. Tested identity at n=1 by hand: d^0h_1F(g)(x)=F(xg)(1)-F(x)(1), h_2d^1F(g)(x)=F(g)(x)-F(xg)(1)+F(x)(1), sum F(g)(x); continuity: F locally constant on compact G^n factors through G^n/U^n for open normal U, so h_nF does. No Mathlib leaf; no coinduced declaration in slopmaster2 WeilConjectures (B10). Start Sat Oct 10 02:55:46 PM UTC 2026, end Sat Oct 10 02:56:09 PM UTC 2026."
+ }
 }
