@@ -5,13 +5,8 @@ Authors: Christian Merten
 -/
 module
 
-public import WeilConjectures.Compactification.BaseChange
-public import WeilConjectures.FourierTransform.Defs
-public import WeilConjectures.SixFunctors.Etale.Derived.ProjectionFormula
 public import WeilConjectures.EtaleCohomology.Purity.Smooth.Conventions
-public import WeilConjectures.SixFunctors.Etale.Derived.Exchange
-public import WeilConjectures.SixFunctors.Etale.Derived.Shift
-public import WeilConjectures.SixFunctors.Etale.Derived.UpperStarMonoidal
+public import WeilConjectures.FourierTransform.Defs
 
 /-!
 

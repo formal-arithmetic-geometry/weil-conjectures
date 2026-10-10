@@ -5,10 +5,7 @@ Authors: Weil conjectures project
 -/
 module
 
-public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.PlusAdjunction
-public import WeilConjectures.Compactification.RefinementPullback
 public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriek
-public import WeilConjectures.SixFunctors.Etale.Derived.UpperLowerStarCoherence
 public import WeilConjectures.SixFunctors.Etale.LowerShriek.OpenImmersion.BaseChange
 
 /-!
