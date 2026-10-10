@@ -22,9 +22,64 @@
   "def-pc-base-change",
   "def-weil-pbc-closed-subset-proper-over-base"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Since F_i is finitely presented it is a quasi-coherent \\mathcal{O}_{X_i}-module of finite type. Let Z_i\\hookrightarrow X_i be its scheme-theoretic support [lem-weil-pbc-scheme-theoretic-support], a closed subscheme with underlying set \\operatorname{Supp}(F_i). For j\\geq i put Z_j=Z_i\\times_{S_i}S_j\\hookrightarrow X_j and Z=Z_i\\times_{S_i}S\\hookrightarrow X, closed subschemes as base changes of a closed immersion, with underlying sets the preimages of \\operatorname{Supp}(F_i) under X_j\\to X_i and X\\to X_i (underlying set of a base change of a closed immersion, Stacks 01JT, elementary). By [lem-weil-pbc-support-pullback-finite-type](3) these preimages are \\operatorname{Supp}(F_i|_{X_j}) and \\operatorname{Supp}(F); in particular these supports are closed. The morphism Z_i\\to S_i is locally of finite type (closed immersion followed by the finitely presented X_i\\to S_i), and Z_i, S_i are quasi-compact and quasi-separated (S_i affine, Z_i closed in X_i, which is of finite presentation over S_i).",
+   "uses": [
+    "lem-weil-pbc-scheme-theoretic-support",
+    "lem-weil-pbc-support-pullback-finite-type"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/limits.tex",
+    "place": "Lemma 32.13.5, Tag 081G, proof"
+   }
+  },
+  {
+   "text": "X\\to S is locally of finite type (base change of X_i\\to S_i) and Z is a closed subscheme of X with underlying set \\operatorname{Supp}(F), which is proper over S by hypothesis [def-weil-pbc-closed-subset-proper-over-base]. By [lem-weil-pbc-closed-subset-proper-over-base-properties](1) (every closed subscheme structure on a closed subset proper over S is proper over S), Z\\to S is proper.",
+   "uses": [
+    "lem-weil-pbc-closed-subset-proper-over-base-properties"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/cohomology.tex",
+    "place": "Lemma 0CYL"
+   }
+  },
+  {
+   "text": "Apply [lem-weil-pbc-eventually-proper] to the inverse system (S_j)_{j\\geq i} and f_0: Z_i\\to Y_0=S_i (with S_i, Z_i, Y_0 quasi-compact and quasi-separated by step 1): its base change Z\\to S is proper by step 2 and f_0 is locally of finite type by step 1, so there is j\\geq i with Z_j\\to S_j proper.",
+   "uses": [
+    "lem-weil-pbc-eventually-proper"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/limits.tex",
+    "place": "Lemma 32.13.4, Tag 081F"
+   }
+  },
+  {
+   "text": "Z_j is a closed subscheme of X_j with underlying set \\operatorname{Supp}(F_i|_{X_j}) (step 1), X_j\\to S_j is locally of finite type, and Z_j\\to S_j is proper (step 3). By [lem-weil-pbc-closed-subset-proper-over-base-properties](1) (some closed subscheme structure proper suffices), the support of the pullback of F_i to X_j is proper over S_j.",
+   "uses": [
+    "lem-weil-pbc-closed-subset-proper-over-base-properties"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/cohomology.tex",
+    "place": "Lemma 0CYL"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-scheme-theoretic-support",
+  "lem-weil-pbc-support-pullback-finite-type",
+  "lem-weil-pbc-closed-subset-proper-over-base-properties",
+  "lem-weil-pbc-eventually-proper"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/limits.tex; literature/stacks-project/cohomology.tex",
+  "place": "Tag 081G proof (via 081F), with Morphisms 05JU/056J and Cohomology 0CYL"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -56,12 +111,56 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-pc-finite-flat-proper-support-descent",
   "by": "worker",
   "date": "2026-10-10"
  },
  "chapter": "sec-picard-framework",
- "unit": "sk-thm-picard-semicon"
+ "unit": "sk-thm-picard-semicon",
+ "split_report": {
+  "date": "2026-10-11",
+  "item": "lem-pc-proper-support-descent",
+  "worker": "stage1",
+  "summary": "Reviewer R-psd2548 rewrote the proof along the 081G route: scheme-theoretic support Z_i of F_i, base changes with support identified by 056J, properness of Z over S by 0CYL, eventual properness by 081F, conclusion by 0CYL. Helper lem-pc-support-closed-subscheme-descent dropped (class b/d).",
+  "blueprint": "Realizes the blueprint sentence on descent of proper supports of the terms (Tags 081G and Cohomology Lemma 30.26.7).",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-eventually-proper",
+    "why": "generic Stacks 081F eventual properness"
+   },
+   {
+    "node": "lem-weil-pbc-scheme-theoretic-support",
+    "why": "generic scheme-theoretic support (05JU)"
+   },
+   {
+    "node": "lem-weil-pbc-support-pullback-finite-type",
+    "why": "generic support of a pullback of a finite type module (056J)"
+   },
+   {
+    "node": "lem-weil-pbc-closed-subset-proper-over-base-properties",
+    "why": "generic independence of closed subscheme structure (0CYL)"
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-eventually-proper",
+  "lem-weil-pbc-scheme-theoretic-support",
+  "lem-weil-pbc-support-pullback-finite-type",
+  "lem-weil-pbc-closed-subset-proper-over-base-properties",
+  "lem-weil-pbc-eventually-proper",
+  "lem-weil-pbc-scheme-theoretic-support",
+  "lem-weil-pbc-support-pullback-finite-type",
+  "lem-weil-pbc-closed-subset-proper-over-base-properties"
+ ],
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-psd2548",
+  "group": "G1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-psd2548 (reviewer sub-agent of L); spot-checked: Stacks 081G/081F text; def-weil-pbc-closed-subset-proper-over-base is set-theoretic support with reduced structure (C4 ok). FIX more, RETURN less: (1) B class b/d: helper lem-pc-support-closed-subscheme-descent dropped (holds at j=i from 05JU + 056J; proper hypothesis idle); cited lem-weil-pbc-scheme-theoretic-support and lem-weil-pbc-support-pullback-finite-type(3) instead. (2) C1: step 2's 'base change to S is proper' and step 3's structure-independence now cite lem-weil-pbc-closed-subset-proper-over-base-properties(1) (0CYL). (3) E: 081F qcqs hypotheses on Z_i, S_i checked in step 1; tool_uses declared for the four sk-thm-p1 generic nodes.; 1 file(s) fixed by the reviewer"
+ },
+ "lead_note": "2026-10-10 L (R-psd2548): Second reading by G1 claimed the helper was removed and the proof rewritten, but the head 89628e729 still carried both; the claimed citations.json does not exist."
 }
