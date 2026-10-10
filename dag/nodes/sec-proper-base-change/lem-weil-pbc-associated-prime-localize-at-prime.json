@@ -29,9 +29,62 @@
   "def-weil-pbc-localization-at-prime",
   "def-weil-pbc-module-localization"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Since $\\mathfrak q\\in\\operatorname{Ass}_T(P)$, choose $z\\in P$ with $\\operatorname{Ann}_T(z)=\\mathfrak q$. The $T$-linear map $T\\to P$, $a\\mapsto az$, has kernel $\\operatorname{Ann}_T(z)=\\mathfrak q$, so it induces an injective $T$-linear map $\\iota:T/\\mathfrak q\\to P$, $\\bar a\\mapsto az$; that is, $0\\to T/\\mathfrak q\\xrightarrow{\\iota}P$ is exact.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra, Lemma 0310 (lemma-associated-primes-localize), proof, first two sentences (lines 15406-15410): 'If p in Ass(M) there exists an element m in M whose annihilator is p. As localization is exact (Proposition 00CS) we see that the annihilator of m/1 in M_p is pR_p hence (1) holds.'"
+   }
+  },
+  {
+   "text": "Put $S=T\\setminus\\mathfrak q$, a multiplicative subset since $\\mathfrak q$ is prime. Localization at $S$ is exact [lem-weil-pbc-localization-module-exact]; applied to the exact sequence $0\\to T/\\mathfrak q\\xrightarrow{\\iota}P$ (with $L=0$, $u=0$, $v=\\iota$: $\\ker\\iota=0=\\operatorname{im}u$) it gives that $S^{-1}\\iota:(T/\\mathfrak q)_{\\mathfrak q}\\to P_{\\mathfrak q}$, $\\bar a/s\\mapsto az/s$, is injective (the localization of the zero module is zero) [def-weil-pbc-module-localization].",
+   "uses": [
+    "lem-weil-pbc-localization-module-exact",
+    "def-weil-pbc-module-localization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra, Lemma 0310 (lemma-associated-primes-localize), proof, first two sentences (lines 15406-15410): 'If p in Ass(M) there exists an element m in M whose annihilator is p. As localization is exact (Proposition 00CS) we see that the annihilator of m/1 in M_p is pR_p hence (1) holds.'"
+   }
+  },
+  {
+   "text": "Let $a/s\\in T_{\\mathfrak q}$ ($a\\in T$, $s\\in S$) [def-weil-pbc-localization-at-prime]. In $P_{\\mathfrak q}$ we have $(a/s)\\cdot(z/1)=az/s=(S^{-1}\\iota)(\\bar a/s)$ [def-weil-pbc-module-localization], so by step 2, $(a/s)(z/1)=0$ iff $\\bar a/s=0$ in $(T/\\mathfrak q)_{\\mathfrak q}$. Since $s$ acts bijectively on $(T/\\mathfrak q)_{\\mathfrak q}$, $\\bar a/s=0$ iff $\\bar a/1=0$, iff $u\\bar a=0$ in $T/\\mathfrak q$ for some $u\\in S$, i.e. $ua\\in\\mathfrak q$ for some $u\\notin\\mathfrak q$; as $\\mathfrak q$ is prime this holds iff $a\\in\\mathfrak q$ (take $u=1$ for the converse). Hence $\\operatorname{Ann}_{T_{\\mathfrak q}}(z/1)=\\{a/s: a\\in\\mathfrak q, s\\in S\\}$. This set is $\\mathfrak qT_{\\mathfrak q}$: it is contained in $\\mathfrak qT_{\\mathfrak q}$ as $a/s=(a/1)(1/s)$, and it contains every finite sum $\\sum_i (a_i/1)(b_i/s_i)=(\\sum_i a_ib_i\\prod_{j\\ne i}s_j)/\\prod_j s_j$ with $a_i\\in\\mathfrak q$, whose numerator lies in $\\mathfrak q$.",
+   "uses": [
+    "def-weil-pbc-localization-at-prime",
+    "def-weil-pbc-module-localization"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra, Lemma 0310 (lemma-associated-primes-localize), proof, first two sentences (lines 15406-15410): 'If p in Ass(M) there exists an element m in M whose annihilator is p. As localization is exact (Proposition 00CS) we see that the annihilator of m/1 in M_p is pR_p hence (1) holds.'"
+   }
+  },
+  {
+   "text": "$\\mathfrak qT_{\\mathfrak q}$ is a prime ideal of $T_{\\mathfrak q}$, being its maximal ideal [def-weil-pbc-localization-at-prime], and by step 3 it is the annihilator of the element $z/1\\in P_{\\mathfrak q}$. Hence $\\mathfrak qT_{\\mathfrak q}\\in\\operatorname{Ass}_{T_{\\mathfrak q}}(P_{\\mathfrak q})$, with $\\operatorname{Ann}_{T_{\\mathfrak q}}(z/1)=\\mathfrak qT_{\\mathfrak q}$ for any $z$ with $\\operatorname{Ann}_T(z)=\\mathfrak q$.",
+   "uses": [
+    "def-weil-pbc-localization-at-prime"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra, Lemma 0310 (lemma-associated-primes-localize), proof, first two sentences (lines 15406-15410): 'If p in Ass(M) there exists an element m in M whose annihilator is p. As localization is exact (Proposition 00CS) we see that the annihilator of m/1 in M_p is pR_p hence (1) holds.'"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-localization-module-exact",
+  "def-weil-pbc-module-localization",
+  "def-weil-pbc-localization-at-prime"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Algebra, Lemma 0310 (lemma-associated-primes-localize), proof of (1), lines 15406-15410; Proposition 00CS (proposition-localization-exact) for exactness"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -56,7 +109,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "worker",
@@ -77,5 +130,12 @@
  },
  "chapter": "sec-proper-base-change",
  "unit": "sk-thm-p1",
- "reviewed": "2026-10-10 L: statement checked against 0310 (1) (any ring)"
+ "reviewed": "2026-10-10 L: 4 steps checked against 0310 (1) for any ring: T/q injects into P, localization exact, Ann(z/1) = qT_q since q is prime, qT_q prime; the Mathlib lemma uses the radical notion (Noetherian only), so not a leaf",
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "lem-weil-pbc-associated-prime-localize-at-prime",
+  "worker": "stage1",
+  "summary": "Read Stacks 0310 (algebra.tex 15393-15418; tag verified, tags line 3967: 0310,algebra-lemma-associated-primes-localize) and 00CS (tags line 472: proposition-localization-exact). The statement is part (1) of 0310 for an arbitrary ring with the annihilator notion of associated prime; part (2) (the converse, needing p finitely generated) is not part of the node and is not used. The proof of (1) needs no finiteness: steps follow the source: z with Ann(z)=q gives an injection T/q -> P (step 1), exactness of localization [lem-weil-pbc-localization-module-exact, a Mathlib leaf for 00CS] keeps it injective after localizing at q (step 2), the computation of Ann(z/1) = qT_q written out (step 3, the source's 'we see'), and qT_q prime as the maximal ideal (step 4). Statement unchanged; stmt_deps unchanged. Mathlib: Module.associatedPrimes.mem_associatedPrimes_of_comap_mem_associatedPrimes_of_isLocalizedModule (Mathlib/RingTheory/Ideal/AssociatedPrime/Localization.lean:40, tagged stacks 0310 (1)) is for Mathlib's radical notion (Basic.lean: IsAssociatedPrime has I = (colon N {x}).radical), which agrees with the annihilator notion only over Noetherian rings (isAssociatedPrime_iff); no leaf. No slopmaster2 declaration (grep of WeilConjectures for the id and for associatedPrime/annihilator localization: none). Compared with lem-weil-pbc-associated-prime-localization-depth-zero: that node is the special case P=T over a Noetherian ring T (a Mathlib leaf); this node is the general one, not a duplicate.",
+  "blueprint": "The steps realize, in lem-weil-pbc-normal-constant-generic's proof (step 4 of its split, Lemma 09Z5 proof of (1)) through the equality case of Lemma 0312, the sentence of 0312's third paragraph 'First we observe that qS_q in Ass_{S_q}((M ⊗_R N)_q), see Lemma 0310': steps 1-4 prove that cited fact (0310 (1)) for an arbitrary ring."
+ }
 }
