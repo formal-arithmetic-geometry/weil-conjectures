@@ -1,6 +1,6 @@
 # Work queue
 
-894 items; claim with `tools/claim.py next <group> [--stage N]`.
+895 items; claim with `tools/claim.py next <group> [--stage N]`.
 
 ## Stage 1: nodes to split (638)
 
@@ -28,7 +28,6 @@
 | `lem-weil-pbc-smooth-localization-conormal-split` | 1012 | none |
 | `lem-weil-pbc-smooth-over-field-dimension-differentials` | 1012 | none |
 | `lem-weil-pbc-smooth-over-field-local-complete-intersection` | 1012 | none |
-| `lem-weil-pbc-smooth-over-product-ring` | 1012 | none |
 | `lem-weil-pbc-smooth-retract-standard-smooth` | 1012 | none |
 | `lem-weil-pbc-spec-local-ring-canonical-morphism` | 1012 | none |
 | `lem-weil-pbc-spectral-directed-limit-finite-sober` | 1012 | none |
@@ -128,6 +127,7 @@
 | `lem-weil-pbc-serre-sk-goes-up` | 1013 | none |
 | `lem-weil-pbc-site-higher-direct-image-sheafified-presheaf` | 1013 | none |
 | `lem-weil-pbc-site-leray-degenerate` | 1013 | none |
+| `lem-weil-pbc-smooth-product-algebra` | 1013 | none |
 | `lem-weil-pbc-strictly-henselian-etale-acyclic` | 1013 | none |
 | `lem-weil-pbc-strictly-standard-localization-smooth` | 1013 | none |
 | `lem-weil-pbc-syntomic-at-prime-relative-global-complete-intersection` | 1013 | none |
@@ -645,7 +645,7 @@
 | `lem-pc-linear-pair-graded-finite` | - | none |
 | `def-exc-jacobian-presentation` | - | none |
 
-## Stage 2: nodes to state (256)
+## Stage 2: nodes to state (257)
 
 | node | distance to Mathlib | kind |
 |---|---|---|
@@ -865,6 +865,7 @@
 | `lem-weil-pbc-smooth-algebra-filtered-colimit-descent` | 1 | state |
 | `lem-weil-pbc-smooth-conormal-sequence-exact` | 1 | state |
 | `lem-weil-pbc-smooth-over-normal-ring-normal` | 1 | state |
+| `lem-weil-pbc-smooth-over-product-ring` | 1 | state |
 | `lem-weil-pbc-spec-field-point-residue-field` | 1 | state |
 | `lem-weil-pbc-spec-finite-product-fields` | 1 | state |
 | `lem-weil-pbc-spec-map-residue-field-naturality` | 1 | state |
