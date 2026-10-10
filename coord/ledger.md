@@ -1987,3 +1987,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 16:29 L: merged deliver/F1/lem-weil-pbc-complex-spectral-sequence-comparison (reviewer PASS; after a return; new nodes: 0)
 - 16:30 L: returned deliver/F1/lem-weil-pbc-etale-site-localization-open (reviewer RETURN: 1. B10/D1: lem-weil-pbc-etale-site-localization-open: the item is stated exactly, clause by clause, by sorry-free slopma)
 - 16:30 L: lem-weil-pbc-etale-site-localization-open attached (4 declarations, EtaleOver.lean; reviewer R-slo's B10 finding), F1's return dropped
+- 16:31 L: returned deliver/H1/lem-weil-pbc-injective-acyclicity-bounded-below (reviewer RETURN: 1. E2: new node lem-weil-pbc-torsion-complex-injective-devissage is false as stated (it is exactly the embedding that co)
