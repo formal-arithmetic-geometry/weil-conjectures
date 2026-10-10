@@ -1,8 +1,8 @@
 # Work queue
 
-896 items; claim with `tools/claim.py next <group> [--stage N]`.
+897 items; claim with `tools/claim.py next <group> [--stage N]`.
 
-## Stage 1: nodes to split (651)
+## Stage 1: nodes to split (652)
 
 | node | distance to a target | Lean state on the done branch |
 |---|---|---|
@@ -129,6 +129,7 @@
 | `lem-weil-pbc-purely-inseparable-pth-root-tower` | 1013 | none |
 | `lem-weil-pbc-quasi-coherent-extension-qc-open` | 1013 | none |
 | `lem-weil-pbc-quasi-finite-at-finite-subalgebra-away` | 1013 | none |
+| `lem-weil-pbc-quasi-finite-ring-map-integral-closure-open` | 1013 | none |
 | `lem-weil-pbc-regular-sequence-conormal-free` | 1013 | none |
 | `lem-weil-pbc-relative-global-complete-intersection-smooth-jacobian` | 1013 | none |
 | `lem-weil-pbc-residue-field-pd-ge-embedding-dimension` | 1013 | none |
@@ -908,7 +909,7 @@
 | `lem-weil-pbc-p1-field-dimension-one` | 4 | state |
 | `lem-weil-pbc-projective-space-zero-isomorphism` | 4 | state |
 
-Not open yet: 663 nodes that wait for stage 1, 536 nodes that wait for a statement dependency.
+Not open yet: 664 nodes that wait for stage 1, 536 nodes that wait for a statement dependency.
 
 ## Stage 3: modules to prove (0)
 
