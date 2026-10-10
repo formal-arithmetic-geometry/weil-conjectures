@@ -19,6 +19,8 @@ public import WeilConjectures.Mathlib.CategoryTheory.Sites.Over
   étale topologies (`AlgebraicGeometry.Scheme.Hom.isContinuous_etale`), and it is
   compatible with the projections `V ×_Y X ⟶ V` by
   `AlgebraicGeometry.Scheme.Hom.etale_map_left_comp_fst`.
+- `AlgebraicGeometry.Scheme.Etale.isContinuous_forget_comp_overForget`: the functor from the
+  small étale site of `X` to schemes is continuous for the big étale topology.
 - `AlgebraicGeometry.Scheme.mem_smallEtaleTopology_iff`: a sieve on an object of the small
   étale site is a covering exactly when the arrows in it are jointly surjective. This is the
   sieve-level form of
@@ -100,6 +102,19 @@ lemma Hom.etale_map_left_comp_fst (f : X ⟶ Y) {U V : Y.Etale} (g : V ⟶ U) :
 lemma Hom.etale_map_left_comp_snd (f : X ⟶ Y) {U V : Y.Etale} (g : V ⟶ U) :
     (f.Etale.map g).left ≫ pullback.snd U.hom f = pullback.snd V.hom f :=
   pullback.lift_snd _ _ _
+
+/-- The forgetful functor from the small étale site of `X` to `X`-schemes is continuous for
+the étale topology on `Over X`. -/
+instance Etale.isContinuous_forget :
+    (Etale.forget X).IsContinuous X.smallEtaleTopology (etaleTopology.over X) :=
+  inferInstanceAs ((MorphismProperty.Over.forget @AlgebraicGeometry.Etale ⊤ X).IsContinuous
+    (X.smallGrothendieckTopology _) (X.overGrothendieckTopology _))
+
+/-- The functor from the small étale site of `X` to schemes is continuous for the big étale
+topology. -/
+instance Etale.isContinuous_forget_comp_overForget :
+    (Etale.forget X ⋙ Over.forget X).IsContinuous X.smallEtaleTopology etaleTopology :=
+  Functor.isContinuous_comp _ _ _ (etaleTopology.over X) _
 
 end Functoriality
 
