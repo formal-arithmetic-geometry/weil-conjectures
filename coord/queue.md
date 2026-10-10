@@ -1,8 +1,8 @@
 # Work queue
 
-910 items; claim with `tools/claim.py next <group> [--stage N]`.
+911 items; claim with `tools/claim.py next <group> [--stage N]`.
 
-## Stage 1: nodes to split (627)
+## Stage 1: nodes to split (628)
 
 | node | distance to a target | Lean state on the done branch |
 |---|---|---|
@@ -30,7 +30,6 @@
 | `lem-weil-pbc-cm-local-free-resolution-to-mcm` | 1013 | none |
 | `lem-weil-pbc-cohen-ring-mod-pn-formally-smooth` | 1013 | none |
 | `lem-weil-pbc-cohen-rings-exist` | 1013 | none |
-| `lem-weil-pbc-coherent-finite-type-sub-kernel` | 1013 | none |
 | `lem-weil-pbc-cohomology-powers-ideal-application` | 1013 | none |
 | `lem-weil-pbc-colimit-standard-smooth-algebras` | 1013 | none |
 | `lem-weil-pbc-conormal-module-principal-localization` | 1013 | none |
@@ -121,6 +120,8 @@
 | `lem-weil-pbc-transitivity-gamma` | 1013 | none |
 | `lem-weil-pbc-zariski-etale-inclusion-morphism-of-sites` | 1013 | none |
 | `lem-weil-pbc-zariski-open-restriction-injectives` | 1013 | none |
+| `lem-weil-pbc-depth-in-ses` | 1014 | none |
+| `lem-weil-pbc-depth-le-support-dimension` | 1014 | none |
 | `lem-weil-pbc-finitely-generated-field-complete-intersection-model` | 1014 | none |
 | `lem-weil-pbc-injective-acyclicity-bounded-below` | 2002 | sorry_here |
 | `lem-weil-pbc-property-implies-acyclicity` | 2003 | none |
@@ -922,7 +923,7 @@
 | `lem-weil-pbc-p1-field-dimension-one` | 4 | state |
 | `lem-weil-pbc-projective-space-zero-isomorphism` | 4 | state |
 
-Not open yet: 639 nodes that wait for stage 1, 555 nodes that wait for a statement dependency.
+Not open yet: 640 nodes that wait for stage 1, 556 nodes that wait for a statement dependency.
 
 ## Stage 3: modules to prove (0)
 
