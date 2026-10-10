@@ -3,7 +3,7 @@
  "blueprint": {
   "is": "lem-weil-pbc-lisse-generic-kernel",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "A generic stalk detects kernels in a locally constant sheaf",
@@ -19,19 +19,32 @@
  ],
  "proof": [
   {
-   "text": "Let $N=\\ker(\\phi)$; exactness of the geometric stalk functors gives\n$N_{\\bar\\eta}=0$. Suppose $N\\neq0$. By conservativity of geometric stalks,\nthere is a nonzero geometric germ of $N$, represented by a local section. Use\na common etale refinement on which $F$ is constant. The image of that section\nin $F$ can, after another neighbourhood restriction, be taken to be one fixed\nnonzero element $m$ of the constant group. We have thus obtained a nonempty\netale $W\\to S$ and a section of $N|_W$ whose image is constantly $m\\neq0$.",
-   "uses": [],
-   "elementary": null
+   "text": "Let $N=\\ker(\\phi)\\subseteq F$. By exactness of geometric stalks [prop-weil-pbc-geometric-stalks-exact], for every geometric point $\\bar s$ the sequence $0\\to N_{\\bar s}\\to F_{\\bar s}\\to G_{\\bar s}$ is exact; in particular $N_{\\bar\\eta}=0$ and each $N_{\\bar s}\\to F_{\\bar s}$ is injective. Suppose $N\\neq0$. Then $N\\to0$ is not an isomorphism, so by [lemma-weil-pbc-geometric-stalk-conservative] there is a geometric point $\\bar s$ with $N_{\\bar s}\\neq0$. Since $F$ is locally constant as an abelian sheaf [def-weil-pbc-etale-sheaves], there are an etale $V\\to S$ in the covering, an abelian group $M$ and an isomorphism $F|_V\\cong\\underline M$ [def-weil-pbc-constant-sheaf] whose image contains the image of $\\bar s$; since $V\\times_S\\operatorname{Spec}\\Omega$ is a nonempty scheme etale over the algebraically closed field $\\Omega$, it has an $\\Omega$-point, i.e. $\\bar s$ lifts to a geometric point $\\bar v$ of $V$. (Elementary: every pointed etale neighbourhood $(U,\\bar u)$ of $\\bar s$ is refined by $(U\\times_SV,(\\bar u,\\bar v))$, which lies over $V$; so by cofinality in the colimit of [def-weil-pbc-geometric-stalks] the stalk of $F|_V$ at $\\bar v$ is $F_{\\bar s}$, and likewise for $N$, and the same holds at every geometric point of $V$.) Choose a pointed etale neighbourhood $(U,\\bar u)$ of $\\bar v$ in $V$ and $\\sigma\\in N(U)$ with nonzero germ; its image $\\tau\\in F(U)$ has nonzero germ in $F_{\\bar s}$. By [lem-weil-pbc-constant-sheaf-geometric-stalk] applied on $V$ at $\\bar v$, transported along $F|_V\\cong\\underline M$, this germ is the germ of $\\iota_V(m)$ for a unique $m\\in M$, and $m\\neq0$ because $\\iota_V(0)=0$. Two elements of a filtered colimit that agree are already equal at some stage, so after replacing $(U,\\bar u)$ by a smaller pointed etale neighbourhood $(W,\\bar w)$ over $V$ we have $\\sigma\\in N(W)$ whose image in $F(W)$ corresponds to $\\iota_V(m)|_W$, $m\\neq0$. In particular $W$ is nonempty.",
+   "uses": [
+    "prop-weil-pbc-geometric-stalks-exact",
+    "lemma-weil-pbc-geometric-stalk-conservative",
+    "def-weil-pbc-etale-sheaves",
+    "def-weil-pbc-constant-sheaf",
+    "def-weil-pbc-geometric-stalks",
+    "lem-weil-pbc-constant-sheaf-geometric-stalk"
+   ],
+   "elementary": false
   },
   {
-   "text": "Etale morphisms are flat and locally of finite presentation, so\n[lem-weil-pbc-flat-lfp-open] makes the image of $W$ a nonempty open in $S$. It\ncontains $\\eta$, hence $W_{\\bar\\eta}$ is a nonempty etale scheme over an\nalgebraically closed field. Choose one of its geometric points. The displayed\nsection then has nonzero image $m$ in the stalk of $F|_W$, while its stalk in\n$N|_W$ is $N_{\\bar\\eta}=0$, a contradiction. Therefore $N=0$ and $\\phi$ is a\nmonomorphism.",
+   "text": "Etale morphisms are flat and locally of finite presentation, so by [lem-weil-pbc-flat-lfp-open] the image of $W\\to S$ is a nonempty open of $S$; as $S$ is irreducible it contains $\\eta$. Hence $W\\times_S\\operatorname{Spec}\\Omega_{\\bar\\eta}$ is a nonempty scheme etale over an algebraically closed field and has a rational point, i.e. a geometric point $\\bar w'$ of $W$ lying over $\\bar\\eta$. Then $(W,\\bar w')$ is a pointed etale neighbourhood of $\\bar\\eta$ [def-weil-pbc-geometric-stalks], so the germ of $\\sigma$ there lies in $N_{\\bar\\eta}=0$, and therefore the germ of its image in $F_{\\bar\\eta}$ is $0$. On the other hand, by the cofinality remark of the previous step applied at the image $\\bar v'$ of $\\bar w'$ in $V$, $F_{\\bar\\eta}$ is the stalk of $F|_V\\cong\\underline M$ at $\\bar v'$, and there the germ of $\\iota_V(m)$ is the image of $m\\neq0$ under the isomorphism $M\\to\\underline M_{\\bar v'}$ of [lem-weil-pbc-constant-sheaf-geometric-stalk], hence nonzero. This contradiction shows $N=0$, so $\\phi$ is a monomorphism.",
    "uses": [
-    "lem-weil-pbc-flat-lfp-open"
+    "lem-weil-pbc-flat-lfp-open",
+    "def-weil-pbc-geometric-stalks",
+    "lem-weil-pbc-constant-sheaf-geometric-stalk"
    ],
    "elementary": false
   }
  ],
  "proof_deps": [
+  "def-weil-pbc-constant-sheaf",
+  "def-weil-pbc-etale-sheaves",
+  "def-weil-pbc-geometric-stalks",
+  "lem-weil-pbc-constant-sheaf-geometric-stalk",
   "lem-weil-pbc-flat-lfp-open",
   "lemma-weil-pbc-geometric-stalk-conservative",
   "prop-weil-pbc-geometric-stalks-exact"
@@ -41,9 +54,38 @@
   "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/lem-weil-pbc-lisse-generic-kernel.md",
   "place": "## Proof"
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "a morphism of etale sheaves from a locally constant sheaf is a monomorphism if injective at a geometric generic stalk",
+   "results": "TopCat.Presheaf.mono_of_stalk_mono; TopCat.Presheaf.mono_iff_stalk_mono; CategoryTheory.Sheaf.mono_of_isLocallyInjective; CategoryTheory.Sheaf.mono_of_injective (Mathlib/Topology/Sheaves/Stalks, Mathlib/CategoryTheory/Sites/LocallyInjective)",
+   "date": "2026-10-11",
+   "verdict": "no exact match; only topological-sheaf and locally-injective generalizations"
+  },
+  {
+   "tool": "loogle",
+   "query": "Sheaf, Presheaf, Mono, stalk",
+   "results": "0 hits; unknown identifier Sheaf",
+   "date": "2026-10-11",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "locally constant.*stalk|geometric.*stalk.*mono in Mathlib/",
+   "results": "0 hits",
+   "date": "2026-10-11",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "generic geometric stalk detects monomorphism of locally constant etale sheaves",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-11",
+   "verdict": "unavailable"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [],
  "blueprint_kind": "lemma",
@@ -77,5 +119,23 @@
   }
  },
  "chapter": "sec-smooth-purity",
- "unit": "sk-prop-sf-cbc"
+ "unit": "sk-prop-sf-cbc",
+ "split_report": {
+  "date": "2026-10-11",
+  "item": "lem-weil-pbc-lisse-generic-kernel",
+  "worker": "stage1",
+  "summary": "Repaired the imported proof by citing exactness and conservativity of geometric stalks in the kernel argument, and by citing the stalk formula in the generic-point contradiction. No new nodes were needed because all non-elementary dependencies already exist in the DAG.",
+  "blueprint": "The two proof steps realize the whole blueprint proof: form the kernel and use stalk conservativity, then use openness of the etale image and a geometric point over the generic point to obtain the contradiction."
+ },
+ "tool_uses": [
+  "lem-weil-pbc-constant-sheaf-geometric-stalk"
+ ],
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-lgk2934",
+  "group": "C1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-lgk2934 (reviewer sub-agent of L); spot-checked: Checked both steps and every cited statement; citer lem-weil-pbc-constructible-noetherian-finite-selection uses it on irreducible lisse strata as stated (C4 ok). FIX more, RETURN less: (1) C1: the stalk of a constant sheaf (germ of iota(m) is m, nonzero) was used in both steps uncited; now cites lem-weil-pbc-constant-sheaf-geometric-stalk (generic tool from sk-def-pbc, C7 ok) and def-weil-pbc-constant-sheaf. (2) C1: lifting the geometric point to the constant-cover member V and the identification of stalks of F|_V with stalks of F were implicit; now spelled out as elementary cofinality from def-weil-pbc-geometric-stalks, plus the filtered-colimit shrinking that makes the image constantly m. Note: the report's Second reading says step 2 was changed to cite lem-weil-pbc-inverse-image-stalk-germ, but the delivered node at 118f7472b does not contain that change (stale report claim); not needed after the fix.; 1 file(s) fixed by the reviewer"
+ }
 }

@@ -2875,3 +2875,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 22:49 UTC L corrected the source tag of lem-pc-global-hom-adjunction (0AA8 -> 0B6I, lemma-iso-global-hom) after R-gha2932
 - 22:50 L: merged deliver/F1/lem-pc-derived-internal-hom-pullback-adjunction (reviewer FIX+NODE(1); first push; new nodes: 1)
 - 22:51 L: merged deliver/K1/lem-sc-affine-weakass-nonzerodivisors (reviewer FIX; first push; new nodes: 0)
+- 22:52 L: merged deliver/C1/lem-weil-pbc-lisse-generic-kernel (reviewer FIX; first push; new nodes: 0)
