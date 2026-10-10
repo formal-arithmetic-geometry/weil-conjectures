@@ -4,7 +4,7 @@
   "is": null,
   "from": {
    "node": "lem-pc-very-ample-ample",
-   "place": "proof: 'so $\\mathcal{L}$ is ample by Properties, Proposition 28.27.13 (Tag 01Q3), condition (4) $\\Rightarrow$ (1)' -- the passage from the ampleness of 01PS to the complete-linear-system meaning of def-sc-ample",
+   "place": "proof, first paragraph: the closed projective embedding used to deduce ampleness; making its defining finite subsystem into the complete linear system",
    "via": []
   },
   "same_as": []
@@ -24,9 +24,78 @@
   "def-weil-closed-immersion",
   "lem-weil-pbc-projective-space-functor-of-points"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "If $X=\\varnothing$, the unique morphism to the empty projective space of its zero space of sections is a closed immersion, and the pullback assertion is vacuous. Otherwise, properness over the field implies $X$ is of finite type over the Noetherian $\\operatorname{Spec}k$, hence locally Noetherian [lem-weil-pbc-finite-type-over-noetherian]. The invertible $\\mathcal M$ is quasi-coherent and locally free of rank one [def-sc-invertible-module], so it is of finite type; it is coherent by [pqf-lem-coherent-ft-locnoeth]. Thus $W:=\\Gamma(X,\\mathcal M)$ is finite-dimensional over $k$ by [lem-pc-euler-characteristic-well-defined] with $i=0$.",
+   "uses": [
+    "lem-weil-pbc-finite-type-over-noetherian",
+    "def-sc-invertible-module",
+    "pqf-lem-coherent-ft-locnoeth",
+    "lem-pc-euler-characteristic-well-defined"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/coherent.tex",
+    "place": "Cohomology of Schemes, Lemma 01XZ (coherent iff quasi-coherent of finite type on a locally Noetherian scheme), and Lemma 02O6 (finite coherent cohomology over a Noetherian affine base)"
+   }
+  },
+  {
+   "text": "Choose a basis $s_0,\\ldots,s_r$ of $V$ and extend it to a basis $s_0,\\ldots,s_N$ of $W$; both are finite by step 1. Since $j$ is the morphism associated with $V$, its defining sections generate $\\mathcal M$ at every point by [lem-weil-pbc-projective-space-functor-of-points]. Consequently the extended family also generates $\\mathcal M$. The same node gives the morphism $\\phi:X\\to\\mathbf P(W^\\vee)_k$ of the complete system, with $\\phi^*\\mathcal O(1)\\cong\\mathcal M$ carrying the coordinate sections to $s_i$.",
+   "uses": [
+    "lem-weil-pbc-projective-space-functor-of-points"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/constructions.tex",
+    "place": "Constructions, Lemma 01NE (lemma-projective-space), generating sections and their associated morphism"
+   }
+  },
+  {
+   "text": "Let $U\\subseteq\\mathbf P(W^\\vee)_k$ be the union of the standard opens $D_+(T_0),\\ldots,D_+(T_r)$ corresponding to the basis of $V$. By [lem-weil-pbc-projective-space-standard-charts] these are exactly the nonvanishing loci of those coordinate sections. The sections $T_0,\\ldots,T_r$ therefore generate $\\mathcal O(1)|_U$, and [lem-weil-pbc-projective-space-functor-of-points] defines a $k$-morphism $p:U\\to\\mathbf P(V^\\vee)_k$. Since $s_0,\\ldots,s_r$ generate $\\mathcal M$, $\\phi(X)\\subseteq U$. Pulling the $T_i$ back through $p\\circ\\phi$ gives $s_i$, so uniqueness in the functor-of-points statement gives $p\\circ\\phi=j$ (with $\\phi$ regarded as a map to $U$).",
+   "uses": [
+    "lem-weil-pbc-projective-space-standard-charts",
+    "lem-weil-pbc-projective-space-functor-of-points"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/constructions.tex",
+    "place": "Constructions, Lemma 01NE (lemma-projective-space) and Lemma 01NG (lemma-standard-covering-projective-space); projection defined only on the union of the indicated standard opens"
+   }
+  },
+  {
+   "text": "The projective space $\\mathbf P(W^\\vee)_k$ is separated over $k$ by [lem-weil-pbc-projective-space-proj-separated]. Hence its open subscheme $U$ is separated over $k$: its diagonal is the restriction of the closed diagonal of projective space to $U\\times_kU$. Since $U\\to\\operatorname{Spec}k$ is separated and factors through $p$, [lem-weil-pbc-separated-cancellation] (b) makes $p$ separated. Now $p\\circ\\phi=j$ is a closed immersion, so [lem-weil-pbc-closed-immersion-cancellation] makes $X\\to U$ a closed immersion. Composing with the open immersion $U\\hookrightarrow\\mathbf P(W^\\vee)_k$ makes $\\phi$ an immersion. Also $X$ is proper over $k$ and $\\mathbf P(W^\\vee)_k$ is separated over $k$, so [lem-weil-pbc-proper-to-separated] makes $\\phi$ proper. By [lem-weil-pbc-proper-immersion-closed], $\\phi$ is a closed immersion. Its pullback of $\\mathcal O(1)$ is $\\mathcal M$ by step 2.",
+   "uses": [
+    "lem-weil-pbc-projective-space-proj-separated",
+    "lem-weil-pbc-separated-cancellation",
+    "lem-weil-pbc-closed-immersion-cancellation",
+    "lem-weil-pbc-proper-to-separated",
+    "lem-weil-pbc-proper-immersion-closed"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Morphisms, Lemma 07RK (lemma-immersion-permanence), part (3); Lemma 01W6 (lemma-image-proper-scheme-closed), part (2); Schemes, Lemma 01KV (lemma-compose-after-separated); Schemes, Lemma 01IQ for a proper immersion"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "def-sc-invertible-module",
+  "pqf-lem-coherent-ft-locnoeth",
+  "lem-pc-euler-characteristic-well-defined",
+  "lem-weil-pbc-projective-space-functor-of-points",
+  "lem-weil-pbc-projective-space-standard-charts",
+  "lem-weil-pbc-projective-space-proj-separated",
+  "lem-weil-pbc-separated-cancellation",
+  "lem-weil-pbc-closed-immersion-cancellation",
+  "lem-weil-pbc-proper-to-separated",
+  "lem-weil-pbc-proper-immersion-closed"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/constructions.tex",
+  "place": "Projection argument using Constructions 01NE/01NG, Schemes 01KV, and Morphisms 07RK/01W6"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -51,12 +120,72 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-pc-ample-affine-loci-criterion",
   "by": "worker",
   "date": "2026-10-10"
  },
  "chapter": "sec-picard-framework",
- "unit": "sk-thm-picard-rr"
+ "unit": "sk-thm-picard-rr",
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "lem-pc-complete-linear-system-closed",
+  "worker": "stage1",
+  "summary": "Gave the finite-dimensionality, complete-system construction, projection on the open where the subsystem generates, and proper closed-immersion argument. Corrected the source's erroneous 01KT label to the applicable 01KV and 07RK statements; no new node was needed.",
+  "blueprint": "The four steps make precise the closed projective embedding used in the first proof paragraph of lem-pc-very-ample-ample, including the passage from its finite defining subsystem to the complete system.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-finite-type-over-noetherian",
+    "why": "Generic Noetherianity result used to apply coherent-sheaf finiteness."
+   },
+   {
+    "node": "pqf-lem-coherent-ft-locnoeth",
+    "why": "Generic coherent-sheaf criterion; the unit does not prove it."
+   },
+   {
+    "node": "lem-weil-pbc-projective-space-functor-of-points",
+    "why": "Generic projective-space representation constructs both maps and identifies their pullback sections."
+   },
+   {
+    "node": "lem-weil-pbc-projective-space-standard-charts",
+    "why": "Generic standard-chart description identifies the projection's domain."
+   },
+   {
+    "node": "lem-weil-pbc-separated-cancellation",
+    "why": "Generic cancellation makes the projection separated."
+   },
+   {
+    "node": "lem-weil-pbc-closed-immersion-cancellation",
+    "why": "Generic cancellation makes the map to the projection domain a closed immersion."
+   },
+   {
+    "node": "lem-weil-pbc-proper-to-separated",
+    "why": "Generic properness lemma applies to the complete-system map."
+   },
+   {
+    "node": "lem-weil-pbc-proper-immersion-closed",
+    "why": "Generic proper-immersion lemma closes the image in the full projective space."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "pqf-lem-coherent-ft-locnoeth",
+  "lem-weil-pbc-projective-space-functor-of-points",
+  "lem-weil-pbc-projective-space-standard-charts",
+  "lem-weil-pbc-separated-cancellation",
+  "lem-weil-pbc-closed-immersion-cancellation",
+  "lem-weil-pbc-proper-to-separated",
+  "lem-weil-pbc-proper-immersion-closed"
+ ],
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-cls",
+  "group": "G1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-cls (reviewer sub-agent of L); spot-checked: Delivery: only the item and its report, one commit 6cb52761d, Review by G1 present; no new nodes. Changed fields are split-owned (proof, proof_deps, proof_origin, status, split_report, blueprint.from.place, which replaced the false 01Q3 attribution with the first paragraph of the lem-pc-very-ample-ample proof). Source: no single Stacks tag; I checked the tags used in the steps against literature/stacks-project/tags/tags and the .tex files: 07RK = morphisms-lemma-immersion-permanence (3) closed immersion Z->X with Y->X separated gives Z->Y closed; 01W6 image-proper-scheme-closed; 01KV compose-after-separated; 01IQ immersion-when-closed; 01NE, 01NG, 01XZ, 02O6. Step 1: proper => finite type over Noetherian Spec k, X Noetherian by lem-weil-pbc-finite-type-over-noetherian; M quasi-coherent locally free rank one (def-sc-invertible-module) hence finite type, coherent by pqf-lem-coherent-ft-locnoeth (01XZ); H^0 finite-dimensional by lem-pc-euler-characteristic-well-defined, i=0; empty X handled. Step 2: generation of M by the V-sections and the morphism phi with phi^*T_i=s_i from the generating-sections, existence and pullback clauses of lem-weil-pbc-projective-space-functor-of-points (stated over Z; passage to the k-morphism through P_k = Spec k x P_Z is elementary). Step 3: U = union of D_+(T_i), i<=r, is the nonvanishing locus of T_0..T_r by lem-weil-pbc-projective-space-standard-charts (b), so these generate O(1)|_U and give p:U->P(V^vee)_k; phi(X) in U since nonvanishing pulls back pointwise; p phi = j by the uniqueness clause plus agreement over Spec k. Step 4: P(W^vee)_k separated over k by lem-weil-pbc-projective-space-proj-separated, U separated by restricting the closed diagonal; p separated by lem-weil-pbc-separated-cancellation (b) since U->Spec k = (P(V^vee)_k->Spec k) p; X->U closed immersion by lem-weil-pbc-closed-immersion-cancellation (hypotheses: j closed immersion, p separated); phi proper by lem-weil-pbc-proper-to-separated (X proper over k, target separated over k); phi closed immersion by lem-weil-pbc-proper-immersion-closed. All cited statements read; hypotheses match. Tool uses (C8): all eight declared ones are generic black boxes (scheme/projective-space/cancellation lemmas), none replaces a step of the unit's route; accepted. Small cases: X empty; X = P^1, M = O(1), V = Gamma gives the identity; X = P^1, M = O(2), V = <x^2, y^2> gives a finite non-closed-immersion (not a hypothesis case) while the complete system gives the conic, consistent with the hypothesis being needed; X = P^1, O(4), V = <x^4,x^3y,xy^3,y^4> closed immersion, complete system the rational normal quartic. Lead note: the item's maintainer-owned source.place still cites 01KT wrongly. Start: Sat Oct 10 03:36:57 PM UTC 2026; end: Sat Oct 10 03:37:51 PM UTC 2026."
+ },
+ "lead_note": "2026-10-10 L (R-cls): source.place (maintainer field) still names Schemes 01KT for cancellation of closed immersions; 01KT is schemes-lemma-section-immersion. The right tag is Morphisms 07RK (lemma-immersion-permanence) part (3); correct the source text."
 }
