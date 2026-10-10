@@ -12,8 +12,9 @@
 | `lem-sc-ringed-space-injective-restriction-surjective` | 2018 | none |
 | `lem-sc-ringed-space-module-sheaves-enough-injectives` | 2019 | none |
 | `lem-pc-unbounded-derived-functor-cohomological-bound` | 3012 | none |
-| `lem-pc-kflat-stalk-criterion` | 3013 | none |
 | `lem-pc-derived-sections-pushforward-comparison` | 3014 | none |
+| `lem-pc-skyscraper-complex` | 3014 | none |
+| `lem-pc-stalk-tensor-complex` | 3014 | none |
 | `lem-pc-derived-qcoh-compact-generation` | 3015 | none |
 | `lem-sc-finite-pushforward-derived-hom-qcoherent` | 3015 | none |
 | `def-pc-ringed-spaces-derived-direct-image` | 3016 | none |
@@ -51,8 +52,9 @@
 | `lem-weil-pbc-unrestricted-strict-henselization-stalk` | 4009 | none |
 | `lem-pc-hilb-separated` | 4010 | none |
 | `lem-pc-universal-adjoint-section` | 4010 | rests_on_sorry |
-| `lem-pc-derived-module-free-generation` | 4011 | none |
 | `lem-pc-affine-derived-pullback-tensor-tilde` | 4012 | none |
+| `lem-pc-derived-filtered-free-resolution` | 4012 | none |
+| `lem-pc-derived-module-direct-sums` | 4012 | none |
 | `lem-pc-restrict-derived-direct-image-open` | 4012 | none |
 | `lem-pc-flat-base-change-cohom` | 5008 | rests_on_sorry |
 | `lem-pc-fppf-affine-sheafification-restriction` | 5009 | none |
@@ -71,10 +73,7 @@
 | `lem-sp-derived-couple-functoriality` | 6003 | none |
 | `lem-sp-half-plane-graded-canonical` | 6003 | none |
 | `lem-sp-kinjective-comparison-principle` | 6003 | none |
-| `lem-weil-pbc-finite-proper` | 6003 | none |
 | `lem-sp-derived-well-defined` | 6004 | none |
-| `pqf-lem-finite-integral-lft` | 6004 | none |
-| `pqf-lem-integral-lft-finite` | 6004 | none |
 | `pqf-lem-integral-univclosed` | 6004 | none |
 | `thm-sp-grothendieck` | 6004 | none |
 | `def-sp-double-complex-total` | 6005 | none |
@@ -82,6 +81,7 @@
 | `pqf-lem-lying-over` | 6005 | none |
 | `thm-sp-double-complex-spectral-sequences` | 6005 | sorry_here |
 | `thm-sp-if-e1` | 6005 | none |
+| `pqf-lem-finite-integral-lft` | 6006 | none |
 | `thm-sp-spectral-object-yields` | 6006 | none |
 | `lem-sp-long-exact-of-triangle` | 6007 | sorry_here |
 | `pqf-def-coherent` | 6007 | none |
@@ -946,7 +946,7 @@
 | `lem-weil-pbc-p1-field-dimension-one` | 4 | state |
 | `lem-weil-pbc-projective-space-zero-isomorphism` | 4 | state |
 
-Not open yet: 1341 nodes that wait for a statement dependency, 283 nodes that wait for stage 1.
+Not open yet: 1343 nodes that wait for a statement dependency, 283 nodes that wait for stage 1.
 
 ## Stage 3: modules to prove (0)
 
