@@ -1,0 +1,66 @@
+{
+ "id": "lem-weil-pbc-flat-equational-criterion",
+ "kind": "statement",
+ "title": "Equational criterion of flatness",
+ "statement": "Let $R$ be a commutative ring and $M$ an $R$-module. A relation $\\sum_{i=1}^{n}f_ix_i=0$ in $M$ ($n\\ge0$, $f_i\\in R$, $x_i\\in M$) is called *trivial* if there are an integer $m\\ge0$, elements $y_1,\\dots,y_m\\in M$ and elements $a_{ij}\\in R$ ($1\\le i\\le n$, $1\\le j\\le m$) such that $x_i=\\sum_{j=1}^m a_{ij}y_j$ for every $i$ and $\\sum_{i=1}^n f_ia_{ij}=0$ for every $j$. Then $M$ is flat [def-weil-pbc-flat-ring-map] if and only if every relation in $M$ is trivial.",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Algebra, Lemma Tag 00HK (lemma-flat-eq, line 8995), with the definition of a trivial relation in the paragraph before it"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-flat-ring-map"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "equational criterion for flatness: in a flat module every relation sum f_i x_i = 0 is trivial",
+   "results": "Module.Flat.of_forall_isTrivialRelation, Module.Flat.iff_forall_isTrivialRelation, Module.Flat.isTrivialRelation_of_sum_smul_eq_zero, Module.Flat.of_forall_exists_factorization, Module.Flat.tfae_equational_criterion, Module.IsTrivialRelation (all Mathlib.RingTheory.Flat.EquationalCriterion)",
+   "date": "2026-10-10",
+   "verdict": "match: Module.Flat.iff_forall_isTrivialRelation"
+  },
+  {
+   "tool": "loogle",
+   "query": "Module.IsTrivialRelation",
+   "results": "Module.IsTrivialRelation, Module.isTrivialRelation_iff_vanishesTrivially, Equiv.isTrivialRelation_comp, Module.sum_smul_eq_zero_of_isTrivialRelation, Module.Flat.isTrivialRelation_of_sum_smul_eq_zero, Module.Flat.of_forall_isTrivialRelation, Module.Flat.iff_forall_isTrivialRelation, Module.Flat.tfae_equational_criterion (Mathlib.RingTheory.Flat.EquationalCriterion)",
+   "date": "2026-10-10",
+   "verdict": "match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rn '00HK' and grep -n 'theorem\\|lemma\\|abbrev' in ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/RingTheory/Flat/EquationalCriterion.lean; lean_local_search Module.Flat.isTrivialRelation_of_sum_smul_eq_zero",
+   "results": "EquationalCriterion.lean:75 abbrev Module.IsTrivialRelation (∃ k a y, (∀ i, x i = ∑ j, a i j • y j) ∧ ∀ j, ∑ i, f i * a i j = 0); :169 Module.Flat.iff_forall_isTrivialRelation @[stacks 00HK]; :177 Module.Flat.isTrivialRelation_of_sum_smul_eq_zero @[stacks 00HK] (any Fintype index); :186 of_forall_isTrivialRelation; also LinearAlgebra/TensorProduct/Vanishing.lean (terminology only); local_search finds the forward lemma in the Mathlib package",
+   "date": "2026-10-10",
+   "verdict": "match"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "Module.Flat.iff_forall_isTrivialRelation, Module.IsTrivialRelation",
+  "file": "Mathlib/RingTheory/Flat/EquationalCriterion.lean",
+  "line": 169,
+  "how": "exact: Module.IsTrivialRelation f x (line 75) is the node's trivial relation (k = m, a i j = a_{ij}, y j = y_j), and iff_forall_isTrivialRelation (lines 169-172, @[stacks 00HK]) states Module.Flat R M ↔ every relation ∑ i, f i • x i = 0 indexed by Fin l is trivial, for CommRing R and AddCommGroup M (every module over a commutative ring); the forward direction for any finite index type is isTrivialRelation_of_sum_smul_eq_zero (line 177). Module.Flat is the node's flatness by the match of def-weil-pbc-flat-ring-map. Lines read with sed -n 2026-10-10"
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-popescu-lift-twice",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1"
+}
