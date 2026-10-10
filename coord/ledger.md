@@ -2600,3 +2600,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 20:59 L: merged deliver/K1/lem-pc-sepclosed-finite-sep-trivial (reviewer PASS; first push; new nodes: 0)
 - 21:00 L: merged deliver/E1/lem-weil-pbc-gm-pullback-strict-henselization (reviewer FIX; after a return; new nodes: 0)
 - 21:00 L: merged deliver/G1/lem-pqf-leray-five-term (reviewer FIX; first push; new nodes: 0)
+- 21:00 L: merged deliver/F1/lem-pc-derived-lower-truncation-step-triangle (reviewer FIX; after a return; new nodes: 1)
