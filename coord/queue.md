@@ -1,6 +1,6 @@
 # Work queue
 
-941 items; claim with `tools/claim.py next <group> [--stage N]`.
+942 items; claim with `tools/claim.py next <group> [--stage N]`.
 
 ## Stage 1: nodes to split (587)
 
@@ -10,19 +10,15 @@
 | `lem-weil-pbc-flat-variant-local-criterion` | 1012 | none |
 | `lem-weil-pbc-flat-module-pullback-exact-pushforward-injective` | 1013 | none |
 | `lem-weil-pbc-pullback-ample-invertible` | 1013 | none |
-| `lem-weil-pbc-fibre-dimension-bounded-open-upstairs` | 1014 | none |
-| `lem-weil-pbc-jacobi-zariski-regular-sequence-left-injective` | 1014 | none |
 | `lem-weil-pbc-minimal-finite-free-resolution-local` | 1014 | none |
 | `lem-weil-pbc-module-injective-open-cover-cech-acyclic` | 1014 | none |
 | `lem-weil-pbc-nl-presentations-homotopy-equivalent` | 1014 | none |
 | `lem-weil-pbc-nonzerodivisor-if-maximal-not-associated` | 1014 | none |
 | `lem-weil-pbc-normal-nagata-monogenic-n1` | 1014 | none |
 | `lem-weil-pbc-p-basis-differentials-basis` | 1014 | none |
-| `lem-weil-pbc-quasi-coherent-algebra-change-of-rings` | 1014 | none |
 | `lem-weil-pbc-quasi-coherent-module-direct-sum` | 1014 | none |
 | `lem-weil-pbc-reduced-normal-iff-integrally-closed-total-fractions` | 1014 | none |
 | `lem-weil-pbc-regular-local-dim-one-iff-normal` | 1014 | none |
-| `lem-weil-pbc-relative-global-complete-intersection-conormal-free` | 1014 | none |
 | `lem-weil-pbc-relative-global-complete-intersection-partial-local-flat` | 1014 | none |
 | `lem-weil-pbc-relative-global-complete-intersection-principal-localization` | 1014 | none |
 | `lem-weil-pbc-schanuel` | 1014 | none |
@@ -48,11 +44,13 @@
 | `lem-weil-pbc-colimit-category-fp-algebras` | 1015 | none |
 | `lem-weil-pbc-complete-local-flat-presentation` | 1015 | none |
 | `lem-weil-pbc-complete-local-map-regular-presentation` | 1015 | none |
+| `lem-weil-pbc-conormal-intersection-regular-quotient` | 1015 | none |
 | `lem-weil-pbc-depth-drops-by-one` | 1015 | none |
 | `lem-weil-pbc-depth-ext` | 1015 | none |
 | `lem-weil-pbc-depth-over-quotient-ring` | 1015 | none |
 | `lem-weil-pbc-depth-zero-injective-free-map-unit-minor` | 1015 | none |
 | `lem-weil-pbc-dimension-at-point-components` | 1015 | none |
+| `lem-weil-pbc-dimension-quasi-finite-over-polynomial-algebra` | 1015 | none |
 | `lem-weil-pbc-essentially-finite-presentation-over-intermediate` | 1015 | none |
 | `lem-weil-pbc-finite-type-domain-dimension-trdeg` | 1015 | none |
 | `lem-weil-pbc-finite-type-etale-finite-factor-decomposition` | 1015 | none |
@@ -75,7 +73,9 @@
 | `lem-weil-pbc-openness-of-flatness` | 1015 | none |
 | `lem-weil-pbc-p-independent-extends-to-p-basis` | 1015 | none |
 | `lem-weil-pbc-polynomial-ring-maximal-chain-height-difference` | 1015 | none |
+| `lem-weil-pbc-quasi-finite-over-polynomial-algebra` | 1015 | none |
 | `lem-weil-pbc-regular-local-quotient-kernel-parameters` | 1015 | none |
+| `lem-weil-pbc-relative-global-complete-intersection-local-regular-sequence` | 1015 | none |
 | `lem-weil-pbc-sections-morphism-to-proj-polynomial-ring` | 1015 | none |
 | `lem-weil-pbc-separable-polynomial-quotient-reduced` | 1015 | none |
 | `lem-weil-pbc-smooth-at-maximal-ideal-alg-closed-differentials-bound` | 1015 | none |
@@ -594,7 +594,7 @@
 | `def-exc-jacobian-presentation` | - | none |
 | `def-nagata-rees-algebra` | - | none |
 
-## Stage 2: nodes to state (354)
+## Stage 2: nodes to state (355)
 
 | node | distance to Mathlib | kind |
 |---|---|---|
@@ -784,6 +784,7 @@
 | `lem-weil-pbc-jacobi-zariski-homology-sequence` | 1 | state |
 | `lem-weil-pbc-jacobi-zariski-left-term-vanishing` | 1 | state |
 | `lem-weil-pbc-jacobi-zariski-quotient-smooth` | 1 | state |
+| `lem-weil-pbc-jacobi-zariski-regular-sequence-left-injective` | 1 | state |
 | `lem-weil-pbc-kahler-differentials-mod-power-ideal` | 1 | state |
 | `lem-weil-pbc-kahler-differentials-polynomial-extension` | 1 | state |
 | `lem-weil-pbc-kernel-cokernel-annihilated-mod-ideal` | 1 | state |
@@ -953,7 +954,7 @@
 | `lem-weil-pbc-p1-field-dimension-one` | 4 | state |
 | `lem-weil-pbc-projective-space-zero-isomorphism` | 4 | state |
 
-Not open yet: 598 nodes that wait for stage 1, 679 nodes that wait for a statement dependency.
+Not open yet: 598 nodes that wait for stage 1, 682 nodes that wait for a statement dependency.
 
 ## Stage 3: modules to prove (0)
 
