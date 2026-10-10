@@ -2373,3 +2373,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 19:22 L: returned deliver/M1/lem-pc-derived-sections-pushforward-comparison (reviewer RETURN: Reviewer R-dsp1928 (head 78df16cf4). 1. E (Step 2, wrong mathematics, missed by the Second reading): the item lives in M)
 - 19:22 L: merged deliver/H1/lem-sc-bounded-above-finite-free-hom-acyclic (reviewer FIX; first push; new nodes: 1)
 - 19:23 L: merged deliver/J1/def-sp-double-complex-total (reviewer FIX; first push; new nodes: 0)
+- 19:23 L: returned deliver/F1/lem-sc-topological-filtered-cohomology (reviewer RETURN: Reviewer R-tfc1932, head 2681811e2. More than three faults, so returned per the brief. 1. C4 Step 1: lem-weil-pbc-sheave)
