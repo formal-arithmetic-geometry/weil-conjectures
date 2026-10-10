@@ -1368,4 +1368,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 12:04 L: accepted def-sc-etale-qcoherent-module (definition split; new node for the presheaf functoriality of the pullback restrictions).
 - 12:07 L: accepted lem-sc-cohomological-dimension (split along the slopmaster2 proof, 9 steps; 9 new nodes, 8 closed on slopmaster2 and attached, 1 resting on sorry; 4 tool uses; the departure from the unit's spectral-sequence route recorded in HUMAN.md).
 - 2026-10-10, delivery of C1: thm-weil-pbc-hypercover-cohomology merged from deliver/C1/thm-weil-pbc-hypercover-cohomology (1 commit(s), 0 new node(s), spot-checked by L: L: 01H0 via the double complex of an injective resolution evaluated on the hypercover; 0 new); claim closed
-- 12:07 L: merged C1 thm-weil-pbc-hypercover-cohomology (01H0, 0 new) and J1 lem-weil-pbc-limit-module-essentially-finite-presentation-over-system (00QV/00QX, 0 new).
+- 12:08 L: merged C1 thm-weil-pbc-hypercover-cohomology (01H0, 0 new). J1 lem-weil-pbc-limit-module-essentially-finite-presentation-over-system NOT merged: review_split fails (proof_origin empty, blueprint.same_as null); returned to J1.
