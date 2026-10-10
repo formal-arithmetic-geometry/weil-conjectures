@@ -20,9 +20,43 @@
   "def-pc-morphism-conventions",
   "def-pc-hilb-functor"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Write $H=H_d$ and put $P=H\\times_S H$. Pull back the universal object of $\\operatorname{Hilb}^d_{X/S}(H)$ along the two projections $P\\to H$; by functoriality of the Hilbert functor [lem-pc-hilb-functorial] this gives $Z_1,Z_2\\in\\operatorname{Hilb}^d_{X/S}(P)$, i.e. closed subschemes of $X_P$ that are finite locally free of degree $d$ over $P$, and for every $T'\\to P$ their pullbacks $Z_{1,T'},Z_{2,T'}$ are the corresponding elements of $\\operatorname{Hilb}^d_{X/S}(T')$. Apply the closed-containment-locus statement [lem-pc-hilb-containment-locus] with $T=P$ to $(Z,W)=(Z_1,Z_2)$ and to $(Z,W)=(Z_2,Z_1)$ (each $Z_i\\hookrightarrow X_P$ is a closed immersion and each is finite locally free of degree $d$ over $P$); this gives closed subschemes $P_{12},P_{21}\\subseteq P$, and $T'\\to P$ factors through the closed subscheme $P_{12}\\cap P_{21}$ if and only if $Z_{1,T'}\\subseteq Z_{2,T'}$ and $Z_{2,T'}\\subseteq Z_{1,T'}$.",
+   "uses": [
+    "lem-pc-hilb-functorial",
+    "lem-pc-hilb-containment-locus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/pic.tex",
+    "place": "Picard Schemes of Curves, Lemma 44.2.8, label lemma-hilb-d-separated, Tag 0B98; proof, containment loci"
+   }
+  },
+  {
+   "text": "For every $T'\\to P$, since $H$ represents $\\operatorname{Hilb}^d_{X/S}$ [def-pc-hilb-functor], $T'\\to P$ factors through the diagonal $\\Delta:H\\to P$ if and only if $Z_{1,T'}=Z_{2,T'}$ as elements of $\\operatorname{Hilb}^d_{X/S}(T')$. Equality of closed subschemes of $X_{T'}$ is equivalent to mutual containment, so $\\Delta$ and $P_{12}\\cap P_{21}\\hookrightarrow P$ represent the same subfunctor of $P$; by Yoneda $\\Delta$ is isomorphic over $P$ to this closed immersion, hence is a closed immersion. By the diagonal definition of separatedness [def-weil-proper-morphism], $H_d\\to S$ is separated.",
+   "uses": [
+    "def-weil-proper-morphism",
+    "def-pc-hilb-functor"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/pic.tex",
+    "place": "Picard Schemes of Curves, Lemma 44.2.8, label lemma-hilb-d-separated, Tag 0B98; proof, diagonal"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-hilb-functorial",
+  "lem-pc-hilb-containment-locus",
+  "def-weil-proper-morphism",
+  "def-pc-hilb-functor"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/blueprint/master/blueprint/sec-picard-framework/sk-thm-picard-hilb-general/lem-pc-hilb-separated.md",
+  "place": "Stacks Project, Picard Schemes of Curves, Lemma 44.2.8, Tag 0B98"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -54,12 +88,41 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "thm-pc-hilb-curves",
   "by": "worker",
   "date": "2026-10-10"
  },
  "chapter": "sec-picard-framework",
- "unit": "sk-thm-picard-hilb-curves"
+ "unit": "sk-thm-picard-hilb-curves",
+ "split_report": {
+  "date": "2026-10-11",
+  "item": "lem-pc-hilb-separated",
+  "worker": "stage1",
+  "summary": "The project theorem is sorry-free in its own body but rests on the sorry-backed containment-locus theorem. I split that missing theorem as a statement-only dependency and wrote the separatedness proof via the two closed containment loci and the diagonal criterion.",
+  "blueprint": "Realizes thm-pc-hilb-curves, Step 1: the representing Hilbert scheme is separated."
+ },
+ "lean_candidates": [
+  {
+   "name": "AlgebraicGeometry.isSeparated_of_representableBy_hilbertPresheaf",
+   "module": "WeilConjectures.AlgebraicGeometry.Hilbert.Curve",
+   "lines": [
+    996,
+    1032
+   ],
+   "note": "The declaration states the item exactly and has no sorry in its own proof, but its dependency exists_idealSheafData_le_ker_iff_comap_le is sorry-backed."
+  }
+ ],
+ "tool_uses": [
+  "lem-pc-hilb-functorial"
+ ],
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-hsp2037",
+  "group": "C1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-hsp2037 (reviewer sub-agent of L); spot-checked: Item statement vs Tag 0B98 (hypotheses and conclusion match); new node lem-pc-hilb-containment-locus vs Tag 0B97 claim (true, closed-immersion W general, base-change compatible; no duplicate in DAG: grep for 0B97/containment/equality locus and the pc-hilb nodes; no valuative criterion needed, diagonal via def-weil-proper-morphism); Step 2 Yoneda identification of the diagonal with the intersection of the two loci checked. FIX more, RETURN less: C4/C1 in Step 1, the containment lemma needs Z_1,Z_2 finite locally free of degree d over P and compatible pullbacks, which was unproved; cited lem-pc-hilb-functorial (tool use, generic functoriality of Hilb) and spelled out both applications, the loci P_12,P_21, and H=H_d notation.; 1 file(s) fixed by the reviewer"
+ }
 }
