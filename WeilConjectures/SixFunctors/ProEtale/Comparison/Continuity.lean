@@ -141,16 +141,6 @@ noncomputable def overOpensι (hP : ∀ {X Y : Scheme.{u}} (f : X ⟶ Y), IsOpen
     (V : P.Over ⊤ S) (U : V.left.Opens) : overOpens hP V U ⟶ V :=
   MorphismProperty.Over.homMk U.ι rfl trivial
 
-/-- Open immersions are étale. -/
-lemma etale_of_isOpenImmersion {X Y : Scheme.{u}} (f : X ⟶ Y) (_ : IsOpenImmersion f) :
-    Etale f :=
-  inferInstance
-
-/-- Open immersions are weakly étale. -/
-lemma weaklyEtale_of_isOpenImmersion {X Y : Scheme.{u}} (f : X ⟶ Y) (_ : IsOpenImmersion f) :
-    WeaklyEtale f :=
-  inferInstance
-
 /-- A pre-`1`-hypercover in `P.Over ⊤ S` whose structure maps are open immersions covering the
 base and whose second-level maps are open immersions covering the pairwise intersections is a
 `1`-hypercover for any topology in which jointly surjective families of open immersions are
@@ -315,7 +305,7 @@ noncomputable def opensEtaleDiagram (U : (K.obj i₀).left.Opens) : Over i₀ �
 /-- The preimage of an open `U` of `K i₀` in the cone point of `c`, as an object of the
 pro-étale site. -/
 noncomputable def opensConePt (U : (K.obj i₀).left.Opens) : S.ProEt :=
-  overOpens weaklyEtale_of_isOpenImmersion c.pt ((c.π.app i₀).left ⁻¹ᵁ U)
+  overOpens (fun _ _ ↦ inferInstance) c.pt ((c.π.app i₀).left ⁻¹ᵁ U)
 
 variable [IsCofiltered I]
   (hc : IsLimit ((ProEt.forget S ⋙ CategoryTheory.Over.forget S).mapCone c))
@@ -381,7 +371,8 @@ noncomputable def opensPresentationHomOfLE {U V : (K.obj i₀).left.Opens} (h : 
 
 lemma opensPresentationι_map (U : (K.obj i₀).left.Opens) :
     (opensPresentationι K c i₀ hc U).map =
-      overOpensι weaklyEtale_of_isOpenImmersion c.pt ((c.π.app i₀).left ⁻¹ᵁ U) := by
+      overOpensι (P := @WeaklyEtale) (fun _ _ ↦ inferInstance)
+        c.pt ((c.π.app i₀).left ⁻¹ᵁ U) := by
   refine (overPresentation K c i₀ hc).isLimit.hom_ext fun j ↦ ?_
   rw [RelativeLimitPresentation.Hom.map_π]
   exact (ProEt.forget S ⋙ Over.forget S).map_injective (Scheme.Hom.resLE_comp_ι _ _)
@@ -408,7 +399,7 @@ noncomputable def opensPreOneHypercover (d : AffineOpenCoverData (K.obj i₀).le
     PreOneHypercover.{u} c.pt where
   I₀ := d.ι₀
   X k := opensConePt K c i₀ (d.O k)
-  f _ := overOpensι weaklyEtale_of_isOpenImmersion c.pt _
+  f _ := overOpensι (P := @WeaklyEtale) (fun _ _ ↦ inferInstance) c.pt _
   I₁ := d.ι₁
   Y k l m := opensConePt K c i₀ (d.W k l m)
   p₁ _ _ m := opensConePtHomOfLE K c i₀ (d.W_le_left m)
@@ -441,7 +432,7 @@ variable {K} in
 /-- `opensPreOneHypercover` is a `1`-hypercover for the pro-étale topology. -/
 noncomputable def opensOneHypercover (d : AffineOpenCoverData (K.obj i₀).left) :
     (ProEt.topology S).OneHypercover c.pt :=
-  oneHypercoverOfIsOpenImmersion weaklyEtale_of_isOpenImmersion (ProEt.topology S)
+  oneHypercoverOfIsOpenImmersion (P := @WeaklyEtale) (fun _ _ ↦ inferInstance) (ProEt.topology S)
     ProEt.mem_topology_of_isOpenImmersion (opensPreOneHypercover c i₀ d)
     (fun _ ↦ inferInstanceAs (IsOpenImmersion (Scheme.Opens.ι _)))
     (fun m ↦ inferInstanceAs (IsOpenImmersion
@@ -466,7 +457,7 @@ topology. -/
 noncomputable def opensPreOneHypercoverPresentationOneHypercover
     (d : AffineOpenCoverData (K.obj i₀).left) (j : Over i₀) :
     (smallEtaleTopology S).OneHypercover (K.obj j.left) :=
-  oneHypercoverOfIsOpenImmersion etale_of_isOpenImmersion (smallEtaleTopology S)
+  oneHypercoverOfIsOpenImmersion (P := @Etale) (fun _ _ ↦ inferInstance) (smallEtaleTopology S)
     mem_smallEtaleTopology_of_isOpenImmersion
     ((opensPreOneHypercoverPresentation K c i₀ hc d).preOneHypercover j)
     (fun _ ↦ inferInstanceAs (IsOpenImmersion (Scheme.Opens.ι _)))

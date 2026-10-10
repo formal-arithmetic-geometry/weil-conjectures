@@ -43,6 +43,8 @@ namespace AlgebraicGeometry.Scheme
 
 variable (S : Scheme.{u})
 
+/-- Viewing an affine étale `S`-scheme as an affine pro-étale one and then as an object of
+`S_proét` agrees with taking `Spec` and then the inclusion `S_ét ⥤ S_proét`. -/
 noncomputable
 def AffineEtale.toAffineProEtCompToProEtIso :
     AffineEtale.toAffineProEt S ⋙ AffineProEt.toProEt S ≅
