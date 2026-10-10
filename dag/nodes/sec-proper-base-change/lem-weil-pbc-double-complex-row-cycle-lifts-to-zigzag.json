@@ -32,9 +32,71 @@
   "def-weil-pbc-module-chain-complex-homology",
   "def-weil-pbc-exact-sequence"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Case $n=0$. By [def-weil-pbc-double-complex-zigzag-module], $T_0(A)=A_{0,0}$ and the defining conditions of $Z_0(A)$ are empty (there is no $p\\ge1$ with $p+q=0$, $q\\ge0$), so $Z_0(A)=A_{0,0}$; the element $a=x$ is a zig-zag with $a_{0,0}=x$. From now on $n\\ge1$, and then the hypothesis says $\\delta^{\\mathrm{rt}}_n(\\pi_n(x))=0$.",
+   "uses": [
+    "def-weil-pbc-double-complex-zigzag-module"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra, Lemma Tag 00M1 (lemma-no-spectral-sequence), proof, lines 18464-18481 ('First we show that these maps are surjective ... And so on until a full zig-zag is found.')"
+   }
+  },
+  {
+   "text": "Inductive claim. For $0\\le k\\le n$ let $C(k)$ be the assertion: there are elements $a_{j,n-j}\\in A_{j,n-j}$ for $0\\le j\\le k$ with $a_{0,n}=x$ and $d_{j,n-j}(a_{j,n-j})=\\delta_{j-1,n-j+1}(a_{j-1,n-j+1})$ for every $1\\le j\\le k$. We prove $C(n)$ by induction on $k$: $C(0)$ holds with $a_{0,n}:=x$ (no condition to check); step 3 proves $C(0)\\Rightarrow C(1)$ and step 4 proves $C(k-1)\\Rightarrow C(k)$ for $2\\le k\\le n$, each time keeping the elements already chosen and choosing one new element $a_{k,n-k}$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra, Lemma Tag 00M1 (lemma-no-spectral-sequence), proof, lines 18464-18481 ('First we show that these maps are surjective ... And so on until a full zig-zag is found.')"
+   }
+  },
+  {
+   "text": "$C(0)\\Rightarrow C(1)$ (the source: 'Because $\\delta(r)=0$, we see that $\\delta(a_{0,i})$ is in the image of $d$'). By the definition of $\\delta^{\\mathrm{rt}}_n$ in the statement, $\\pi_{n-1}(\\delta_{0,n}(x))=\\delta^{\\mathrm{rt}}_n(\\pi_n(x))=0$ (here $n\\ge1$, so $\\delta^{\\mathrm{rt}}_n$ is defined and the cycle condition of [def-weil-pbc-module-chain-complex-homology] is this equation). The kernel of the projection $\\pi_{n-1}:A_{0,n-1}\\to A^{\\mathrm{rt}}_{n-1}=A_{0,n-1}/d_{1,n-1}(A_{1,n-1})$ is $d_{1,n-1}(A_{1,n-1})$, so there is $a_{1,n-1}\\in A_{1,n-1}$ with $d_{1,n-1}(a_{1,n-1})=\\delta_{0,n}(a_{0,n})$. Together with $a_{0,n}=x$ this is $C(1)$.",
+   "uses": [
+    "def-weil-pbc-module-chain-complex-homology"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra, Lemma Tag 00M1 (lemma-no-spectral-sequence), proof, lines 18464-18481 ('First we show that these maps are surjective ... And so on until a full zig-zag is found.')"
+   }
+  },
+  {
+   "text": "$C(k-1)\\Rightarrow C(k)$ for $2\\le k\\le n$ (the source: 'This in turn implies that $\\delta(a_{1,i-1})$ is in the kernel of $d$ ... By exactness of the rows we find an element $a_{2,i-2}$ ... And so on'). Given $a_{0,n},\\dots,a_{k-1,n-k+1}$ as in $C(k-1)$, put $y=\\delta_{k-1,n-k+1}(a_{k-1,n-k+1})\\in A_{k-1,n-k}$ (defined since $n-k+1\\ge1$). Using the commutation $d_{k-1,n-k}\\circ\\delta_{k-1,n-k+1}=\\delta_{k-2,n-k+1}\\circ d_{k-1,n-k+1}$ (an instance of $\\delta_{p-1,q}d_{p,q}=d_{p,q-1}\\delta_{p,q}$ with $(p,q)=(k-1,n-k+1)$, $p\\ge1$, $q\\ge1$), the relation of $C(k-1)$ for $j=k-1$, namely $d_{k-1,n-k+1}(a_{k-1,n-k+1})=\\delta_{k-2,n-k+2}(a_{k-2,n-k+2})$, and $\\delta_{k-2,n-k+1}\\circ\\delta_{k-2,n-k+2}=0$, we get $d_{k-1,n-k}(y)=\\delta_{k-2,n-k+1}(\\delta_{k-2,n-k+2}(a_{k-2,n-k+2}))=0$. Since $p:=k-1\\ge1$ and $q:=n-k\\ge0$, the hypothesis says that the row $A_{k,n-k}\\xrightarrow{d_{k,n-k}}A_{k-1,n-k}\\xrightarrow{d_{k-1,n-k}}A_{k-2,n-k}$ is exact at $A_{k-1,n-k}$ [def-weil-pbc-exact-sequence]; in the category of $R$-modules the image and kernel subobjects are the submodules $d_{k,n-k}(A_{k,n-k})$ and $\\ker d_{k-1,n-k}$, so these are equal and $y\\in d_{k,n-k}(A_{k,n-k})$. Choose $a_{k,n-k}\\in A_{k,n-k}$ with $d_{k,n-k}(a_{k,n-k})=y=\\delta_{k-1,n-k+1}(a_{k-1,n-k+1})$; this is the relation for $j=k$, so $C(k)$ holds.",
+   "uses": [
+    "def-weil-pbc-exact-sequence"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra, Lemma Tag 00M1 (lemma-no-spectral-sequence), proof, lines 18464-18481 ('First we show that these maps are surjective ... And so on until a full zig-zag is found.')"
+   }
+  },
+  {
+   "text": "Conclusion ('until a full zig-zag is found'). By steps 2-4, $C(n)$ holds: we have $a=(a_{n,0},a_{n-1,1},\\dots,a_{0,n})\\in T_n(A)$ with $a_{0,n}=x$ and $d_{j,n-j}(a_{j,n-j})=\\delta_{j-1,n-j+1}(a_{j-1,n-j+1})$ for $1\\le j\\le n$. Writing $(p,q)=(j,n-j)$, these are exactly the conditions $d_{p,q}(a_{p,q})=\\delta_{p-1,q+1}(a_{p-1,q+1})$ for all $p\\ge1$, $q\\ge0$, $p+q=n$ defining $Z_n(A)$ [def-weil-pbc-double-complex-zigzag-module], so $a\\in Z_n(A)$ and $a_{0,n}=x$.",
+   "uses": [
+    "def-weil-pbc-double-complex-zigzag-module"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra, Lemma Tag 00M1 (lemma-no-spectral-sequence), proof, lines 18464-18481 ('First we show that these maps are surjective ... And so on until a full zig-zag is found.')"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-double-complex-zigzag-module",
+  "def-weil-pbc-module-chain-complex-homology",
+  "def-weil-pbc-exact-sequence"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Algebra, Lemma Tag 00M1 (lemma-no-spectral-sequence), proof, lines 18464-18481 (surjectivity of $\\mathbf H_i(A)\\to H_i(R(A)_\\bullet)$)"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -66,7 +128,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "worker",
@@ -82,5 +144,13 @@
   }
  },
  "chapter": "sec-proper-base-change",
- "unit": "sk-thm-p1"
+ "unit": "sk-thm-p1",
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "lem-weil-pbc-double-complex-row-cycle-lifts-to-zigzag",
+  "worker": "stage1",
+  "summary": "Read Stacks 00M1 (algebra.tex, lemma-no-spectral-sequence; tag verified in tags/tags line 807), proof lines 18464-18481. The source's 'And so on until a full zig-zag is found' is written out as an explicit induction: claim C(k) (partial zig-zag a_{0,n},...,a_{k,n-k} starting at x), base C(0), first step C(0)=>C(1) from the cycle condition in the row cokernel (kernel of the projection onto a cokernel), general step C(k-1)=>C(k) for k>=2 from commutation of d and delta, delta^2=0 and exactness of row n-k at A_{k-1,n-k} (k-1>=1, which is where the hypothesis 'exact in positive degrees' is used; exactness at p=0 is never needed), conclusion that C(n) is a zig-zag. Case n=0 separately (Z_0=A_{0,0}). All steps elementary from the definitions; no new node. The statement is kept; checked that its indexing of the zig-zag condition agrees with def-weil-pbc-double-complex-zigzag-module as it stands (d_{p,q}(a_{p,q})=delta_{p-1,q+1}(a_{p-1,q+1})) and with the source's (d(a_{1,i-1})=delta(a_{0,i}) etc.). Edge cases: n=1 uses only step 3; no sign issue arises since the source's zig-zags have no signs. Lean: grep of slopmaster2 for the id, 'zigzag', 'no_spectral', '00M1' finds nothing relevant (only monoidal zigzag identities and category zigzags); lean_audit none.",
+  "blueprint": "No blueprint node states this (blueprint_refs search 'zig-zag', 'zigzag', '00M1', 'double complex', 'double complex exact rows', 'lemma-no-spectral-sequence', 'first quadrant': only def-sp-double-complex-total and thm-sp-double-complex-spectral-sequences, which are not this). The steps realize, inside the chain recorded in blueprint.from.place (ancestor lem-weil-pbc-normal-constant-generic, step 4 of its split, through Tor symmetry 00M3 and 00M1), the sentence of 00M1's proof 'First we show that these maps are surjective ... And so on until a full zig-zag is found': steps 2-4 are the 'and so on' induction, step 3 is 'Because delta(r)=0 ... in the image of d', step 4 is 'This in turn implies ... By exactness of the rows'."
+ },
+ "reviewed": "2026-10-10 L: 5 elementary steps, the inductive zig-zag construction of 00M1 written out (the cycle condition at the first step, exactness of the rows at p >= 1 afterwards); 0 new nodes"
 }
