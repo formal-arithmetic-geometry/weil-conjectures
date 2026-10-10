@@ -8,6 +8,7 @@ module
 public import Mathlib.AlgebraicGeometry.Geometrically.Connected
 public import Mathlib.AlgebraicGeometry.Morphisms.Smooth
 public import WeilConjectures.DeligneLaumon.AffineLine.Defs
+public import WeilConjectures.WeilSheaf.GeometricCoinvariants
 
 /-!
 # The two endpoints of the compactly supported cohomology of a middle extension

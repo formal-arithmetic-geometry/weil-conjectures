@@ -8,6 +8,7 @@ module
 public import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
 public import Mathlib.AlgebraicGeometry.Morphisms.QuasiFinite
 public import WeilConjectures.Compactification.QuasiFinite
+public import WeilConjectures.Mathlib.AlgebraicGeometry.Noetherian
 public import WeilConjectures.DeligneLaumon.Reduction.Weights
 public import WeilConjectures.WeilSheaf.LowerShriekPackage
 
@@ -326,14 +327,6 @@ The blueprint argument for the open–closed reduction runs through the open–c
 support base change. The open–closed triangle, the composition law and base change are taken
 from the six-functor package of `WeilConjectures.WeilSheaf.LowerShriekPackage`; the reductions are
 derived from them as in the blueprint.
-
-## TODO
-
-Prove `AlgebraicGeometry.WeilSheaf.IsMixedOfWeightsAtMost.of_openClosed` for a scheme `X` which
-is not quasi-compact over `k₀`. The argument through the open–closed triangle of Weil complexes
-needs `X` quasi-compact and quasi-separated over `k₀`, for the direct image with compact support
-along `j` to be defined; without it one needs the open–closed short exact sequence of Weil sheaves
-and the stalks of the direct image along the closed immersion.
 -/
 
 section OpenClosed
@@ -419,14 +412,17 @@ theorem WeilComplex.IsMixedOfWeightsAtMost.of_openClosed {U X Z : Scheme.{u}}
   exact (WeilComplex.IsMixedOfWeightsAtMost.of_distTriang hT (hU.of_iso e₁.symm)
     (hZ.of_iso e₃.symm)).of_iso e₂
 
-/-- Let `G` be a Weil sheaf on `X`, let `j : U ⟶ X` be an open immersion whose closed complement
-is `i : Z ⟶ X`, and suppose that `j₀^*G` and `i₀^*G` are mixed of weights at most `w`. Then `G`
-is mixed of weights at most `w` (blueprint: `lem-zl-morphism-open-closed-reduction`, part 2).
+/-- Let `G` be a Weil sheaf on a `k₀`-scheme `X` of finite type, let `j : U ⟶ X` be an open
+immersion whose closed complement is `i : Z ⟶ X`, and suppose that `j₀^*G` and `i₀^*G` are mixed
+of weights at most `w`. Then `G` is mixed of weights at most `w`
+(blueprint: `lem-zl-morphism-open-closed-reduction`, part 2).
 
 The blueprint argument applies `lem-zl-open-closed-weight` to `G` placed in degree zero. -/
 theorem WeilSheaf.IsMixedOfWeightsAtMost.of_openClosed {U X Z : Scheme.{u}}
     [U.Over (Spec (CommRingCat.of k₀))] [LocallyOfFiniteType (U ↘ Spec (CommRingCat.of k₀))] [X.Over
     (Spec (CommRingCat.of k₀))] [LocallyOfFiniteType (X ↘ Spec (CommRingCat.of k₀))]
+    [QuasiCompact (X ↘ Spec (CommRingCat.of k₀))]
+    [QuasiSeparated (X ↘ Spec (CommRingCat.of k₀))]
     [Z.Over (Spec (CommRingCat.of k₀))] [LocallyOfFiniteType (Z ↘ Spec (CommRingCat.of k₀))]
     {j : U ⟶ X} [IsOpenImmersion j]
     [j.IsOver (Spec (CommRingCat.of k₀))] {i : Z ⟶ X} [IsClosedImmersion i]
@@ -434,8 +430,15 @@ theorem WeilSheaf.IsMixedOfWeightsAtMost.of_openClosed {U X Z : Scheme.{u}}
     (hij : IsCompl (Set.range j.base) (Set.range i.base)) {w : ℝ} {G : WeilSheaf k₀ l X}
     (hU : ((WeilSheaf.upperStar j).obj G).IsMixedOfWeightsAtMost ι w)
     (hZ : ((WeilSheaf.upperStar i).obj G).IsMixedOfWeightsAtMost ι w) :
-    G.IsMixedOfWeightsAtMost ι w :=
-  sorry
+    G.IsMixedOfWeightsAtMost ι w := by
+  have := isNoetherian_of_locallyOfFiniteType (X ↘ Spec (CommRingCat.of k₀))
+  have : TopologicalSpace.NoetherianSpace U := j.isOpenEmbedding.isInducing.noetherianSpace
+  have hK := WeilComplex.IsMixedOfWeightsAtMost.of_openClosed (K := WeilSheaf.toComplex.obj G) hij
+    (.derivedLowerShriek_of_isOpenImmersion j
+      (hU.toComplex.of_iso ((WeilSheaf.toComplexCompUpperStarIso j).app G).symm))
+    (.derivedLowerStar_of_isClosedImmersion i
+      (hZ.toComplex.of_iso ((WeilSheaf.toComplexCompUpperStarIso i).app G).symm))
+  exact ((hK 0).of_iso (WeilSheaf.toComplexCompHomologySheafIso.app G)).mono_weight (by simp)
 
 /-- Let `j : U ⟶ X` be an open immersion whose closed complement is `i : Z ⟶ X`, and let
 `f : X ⟶ Y`. Applying `Rf₀!` to the open–closed triangle of a Weil sheaf `F` and taking
