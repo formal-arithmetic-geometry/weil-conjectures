@@ -1,6 +1,6 @@
 # Work queue
 
-852 items; claim with `tools/claim.py next <group> [--stage N]`.
+853 items; claim with `tools/claim.py next <group> [--stage N]`.
 
 ## Stage 1: nodes to split (369)
 
@@ -29,6 +29,7 @@
 | `lem-weil-pbc-triangular-change-of-basis` | 1016 | none |
 | `lem-weil-pbc-tor-symmetry` | 1017 | none |
 | `lem-weil-pbc-dim-one-residue-field-extensions-finite` | 1018 | none |
+| `lem-weil-pbc-double-complex-cokernel-homology-iso` | 1018 | none |
 | `lem-weil-pbc-injective-acyclicity-bounded-below` | 2002 | sorry_here |
 | `lem-weil-pbc-property-implies-acyclicity` | 2003 | none |
 | `lem-weil-pbc-qcqs-higher-direct-image` | 2003 | none |
@@ -66,7 +67,6 @@
 | `lem-sc-ga-cohomology` | 3007 | none |
 | `lem-sc-generic-cohomology-comparison` | 3007 | rests_on_sorry |
 | `lem-sc-local-ring-artin-schreier-kernel` | 3007 | none |
-| `lem-sc-pic-proper-decomposition` | 3007 | none |
 | `lem-sc-positive-degree-ample` | 3007 | rests_on_sorry |
 | `lem-weil-pbc-finite-coproduct-lfp-qcqs` | 3007 | none |
 | `lem-weil-pbc-matching-object-fibre-product` | 3007 | none |
@@ -376,7 +376,7 @@
 | `def-exc-jacobian-presentation` | - | none |
 | `lem-zl-noether-normalization-dimension` | - | none |
 
-## Stage 2: nodes to state (483)
+## Stage 2: nodes to state (484)
 
 | node | distance to Mathlib | kind |
 |---|---|---|
@@ -432,6 +432,7 @@
 | `lem-sc-ext-torsor` | 1 | state |
 | `lem-sc-four-lemma` | 1 | state |
 | `lem-sc-normal-dim1-dvr` | 1 | state |
+| `lem-sc-pic-proper-decomposition` | 1 | state |
 | `lem-sc-point-z-cohomology` | 1 | state |
 | `lem-sc-principal-ideal-dvr` | 1 | state |
 | `lem-sc-regular-connected-integral` | 1 | state |
