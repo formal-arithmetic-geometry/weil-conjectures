@@ -1,0 +1,81 @@
+{
+ "id": "lem-weil-pbc-finite-type-over-field-prime-intersection-maximal",
+ "kind": "statement",
+ "title": "A finite type algebra over a field is Jacobson: every prime is the intersection of the maximal ideals containing it",
+ "statement": "Let $k$ be a field and let $B$ be a finite type $k$-algebra [def-weil-pbc-finite-type-algebra]. Then $B$ is a Jacobson ring: for every prime ideal $\\mathfrak p\\subset B$, $\\mathfrak p$ equals the intersection of all maximal ideals $\\mathfrak m\\subset B$ with $\\mathfrak p\\subseteq\\mathfrak m$. In particular, for every $f\\in B$ with $f\\notin\\mathfrak p$ there is a maximal ideal $\\mathfrak m\\supseteq\\mathfrak p$ of $B$ with $f\\notin\\mathfrak m$.",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Algebra, Lemma 00G1 (algebra-lemma-finite-type-field-Jacobson, line 6668), with Definition 00G0 (algebra-definition-ring-jacobson, line 6660: every radical ideal, in particular every prime, is the intersection of the maximal ideals containing it); proved there from Theorem 00FV (2)"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-finite-type-algebra"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "a finitely generated algebra over a field is a Jacobson ring",
+   "results": "RingHom.FiniteType.isJacobsonRing, IsJacobsonRing, isJacobsonRing_of_finiteType, finite_of_finite_type_of_isJacobsonRing, IsJacobsonRing.mk, Polynomial.isJacobsonRing_polynomial_of_isJacobsonRing (all Mathlib.RingTheory.Jacobson.Ring)",
+   "date": "2026-10-10",
+   "verdict": "match: isJacobsonRing_of_finiteType with A = k"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "in a finite type algebra over a field, every prime ideal is the intersection of the maximal ideals containing it",
+   "results": "IsJacobsonRing, isJacobsonRing_iff_sInf_maximal, finite_of_finite_type_of_isJacobsonRing (Mathlib.RingTheory.Jacobson.Ring); PrimeSpectrum.discreteTopology_iff_finite_isMaximal_and_sInf_le_nilradical (unrelated)",
+   "date": "2026-10-10",
+   "verdict": "match: IsJacobsonRing is the prime/maximal intersection property (isJacobsonRing_iff_prime_eq)"
+  },
+  {
+   "tool": "loogle",
+   "query": "isJacobsonRing_of_finiteType",
+   "results": "isJacobsonRing_of_finiteType {A B} [CommRing A] [CommRing B] [Algebra A B] [IsJacobsonRing A] [Algebra.FiniteType A B] : IsJacobsonRing B (Mathlib.RingTheory.Jacobson.Ring)",
+   "date": "2026-10-10",
+   "verdict": "match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -n 'class IsJacobsonRing|isJacobsonRing_iff_prime_eq|lemma isJacobsonRing_of_finiteType|IsArtinianRing\\] : IsJacobsonRing' Mathlib/RingTheory/Jacobson/Ring.lean; grep -n 'def jacobson' Mathlib/RingTheory/Jacobson/Ideal.lean",
+   "results": "Ring.lean:60 class IsJacobsonRing (out' : radical I has I.jacobson = I); Ring.lean:73 isJacobsonRing_iff_prime_eq; Ring.lean:102 instance IsArtinianRing -> IsJacobsonRing; Ring.lean:666 isJacobsonRing_of_finiteType; Ideal.lean:65 Ideal.jacobson I = sInf {J | I <= J and J maximal}; Artinian/Module.lean:376 DivisionRing.instIsArtinianRing",
+   "date": "2026-10-10",
+   "verdict": "match (lines read with sed -n)"
+  },
+  {
+   "tool": "local_search",
+   "query": "isJacobsonRing_iff_prime_eq (project ~/weil-conjectures-slopmaster2)",
+   "results": "isJacobsonRing_iff_prime_eq, Mathlib/RingTheory/Jacobson/Ring.lean (index: unavailable, found by file scan)",
+   "date": "2026-10-10",
+   "verdict": "exists"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "isJacobsonRing_of_finiteType, isJacobsonRing_iff_prime_eq",
+  "file": "Mathlib/RingTheory/Jacobson/Ring.lean",
+  "line": 666,
+  "how": "specializes in one line: isJacobsonRing_of_finiteType (Ring.lean:666-669) with A = k, B = B gives IsJacobsonRing B, the hypothesis IsJacobsonRing k found by instance search (DivisionRing.instIsArtinianRing, Mathlib/RingTheory/Artinian/Module.lean:376, and IsArtinianRing -> IsJacobsonRing, Ring.lean:102); isJacobsonRing_iff_prime_eq (Ring.lean:73) turns it into P.jacobson = P for every prime P, and Ideal.jacobson P = sInf {J | P <= J and J.IsMaximal} by definition (Mathlib/RingTheory/Jacobson/Ideal.lean:65), which is the statement. The 'in particular' clause is the definition of the intersection. Lines read with sed -n, 2026-10-10."
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-isolated-prime-finite-type-algebra-residue-finite",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lead_note": "L 2026-10-10: composed Mathlib leaf (two declarations plus instance search); lines 666, 73 verified."
+}

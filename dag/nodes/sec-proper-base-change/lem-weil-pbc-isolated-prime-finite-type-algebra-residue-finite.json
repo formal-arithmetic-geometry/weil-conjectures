@@ -2,19 +2,68 @@
  "id": "lem-weil-pbc-isolated-prime-finite-type-algebra-residue-finite",
  "kind": "statement",
  "title": "An isolated prime of a finite type algebra over a field has finite residue field",
- "statement": "Let $k$ be a field and let $B$ be a finitely generated $k$-algebra. If $\\mathfrak p\\in\\operatorname{Spec}B$ has singleton $\\{\\mathfrak p\\}$ open in $\\operatorname{Spec}B$, then the residue field $\\kappa(\\mathfrak p)=B_{\\mathfrak p}/\\mathfrak pB_{\\mathfrak p}$ [def-weil-pbc-localization-at-prime], with its field extension structure from $k\\to B\\to\\kappa(\\mathfrak p)$ [def-pc-field-extension], is finite over $k$.",
+ "statement": "Let $k$ be a field and let $B$ be a finite type (finitely generated) $k$-algebra [def-weil-pbc-finite-type-algebra]. If $\\mathfrak p\\in\\operatorname{Spec}B$ [def-weil-affine-spectrum] has singleton $\\{\\mathfrak p\\}$ open in $\\operatorname{Spec}B$, then $\\mathfrak p$ is a maximal ideal of $B$, and the residue field $\\kappa(\\mathfrak p)=B_{\\mathfrak p}/\\mathfrak pB_{\\mathfrak p}$ [def-weil-pbc-localization-at-prime], with its field extension structure from $k\\to B\\to\\kappa(\\mathfrak p)$ [def-pc-field-extension], is finite over $k$, i.e. $\\dim_k\\kappa(\\mathfrak p)<\\infty$.",
  "source": {
   "document": "literature/stacks-project/algebra.tex",
   "place": "Algebra, Lemma 00PJ (algebra-lemma-isolated-point, line 30106), implication (1) => (6), using Lemmas 00G1 and 00G3 to make an isolated prime maximal and Theorem 00FV (algebra-theorem-nullstellensatz, line 6524) for finiteness of the residue field of a maximal ideal"
  },
  "stmt_deps": [
+  "def-weil-pbc-finite-type-algebra",
   "def-weil-affine-spectrum",
   "def-weil-pbc-localization-at-prime",
   "def-pc-field-extension"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "*$\\mathfrak p$ is maximal.* The closed subsets of $\\operatorname{Spec}B$ in the Zariski topology [def-weil-affine-spectrum] are the sets $V(I)=\\{\\mathfrak q:\\ I\\subseteq\\mathfrak q\\}$ for ideals $I\\subseteq B$. Since $\\{\\mathfrak p\\}$ is open, its complement is $V(I)$ for some ideal $I$, so $\\{\\mathfrak p\\}=\\{\\mathfrak q\\in\\operatorname{Spec}B:\\ I\\not\\subseteq\\mathfrak q\\}$. In particular $I\\not\\subseteq\\mathfrak p$; choose $f\\in I$ with $f\\notin\\mathfrak p$. By [lem-weil-pbc-finite-type-over-field-prime-intersection-maximal] (the Jacobson property of $B$) there is a maximal ideal $\\mathfrak m\\supseteq\\mathfrak p$ with $f\\notin\\mathfrak m$. Then $I\\not\\subseteq\\mathfrak m$, so $\\mathfrak m\\notin V(I)$, i.e. $\\mathfrak m\\in\\{\\mathfrak p\\}$, hence $\\mathfrak p=\\mathfrak m$ is maximal. (This is the argument of Lemma 00G3, that the closed points of $V(J)$ are dense in it, applied to $Z=\\operatorname{Spec}B$ and the open set $\\{\\mathfrak p\\}$.)",
+   "uses": [
+    "def-weil-affine-spectrum",
+    "lem-weil-pbc-finite-type-over-field-prime-intersection-maximal"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra, Lemma 00PJ (algebra-lemma-isolated-point, line 30106), proof of (1) => (2), first sentences: Spec(S) is Jacobson by Lemmas 00G1 and 00G3, so the isolated point q is closed; Lemma 00G3 (algebra-lemma-jacobson, line 6692), first half of its proof; Lemma 00G1 (line 6668)"
+   }
+  },
+  {
+   "text": "*$\\kappa(\\mathfrak p)$ is a finite type $k$-algebra.* Write $\\mathfrak m=\\mathfrak p$, now maximal, so $B/\\mathfrak m$ is a field. The composite $B\\to B_{\\mathfrak m}\\to\\kappa(\\mathfrak m)=B_{\\mathfrak m}/\\mathfrak mB_{\\mathfrak m}$ [def-weil-pbc-localization-at-prime] is surjective: for $b\\in B$ and $s\\in B\\setminus\\mathfrak m$ choose $t\\in B$ with $st-1\\in\\mathfrak m$ (the class of $s$ is invertible in the field $B/\\mathfrak m$); then $b/s-bt/1=b(1-st)/s\\in\\mathfrak mB_{\\mathfrak m}$, so $b/s$ and the image of $bt$ have the same class in $\\kappa(\\mathfrak m)$. If $b_1,\\dots,b_n$ generate $B$ as a $k$-algebra [def-weil-pbc-finite-type-algebra], their images generate $\\kappa(\\mathfrak m)$ as a $k$-algebra (a $k$-algebra surjection carries polynomials in the $b_i$ to the same polynomials in their images). So $\\kappa(\\mathfrak m)$ is a field which is a finite type $k$-algebra via $k\\to B\\to\\kappa(\\mathfrak m)$.",
+   "uses": [
+    "def-weil-pbc-localization-at-prime",
+    "def-weil-pbc-finite-type-algebra"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra, Theorem 00FV (algebra-theorem-nullstellensatz, line 6524), last sentence 'The same is true in any finite type k-algebra' and the first paragraph of its proof (reduction to a quotient of the polynomial ring, where kappa(m) = B/m)"
+   }
+  },
+  {
+   "text": "*$\\kappa(\\mathfrak p)$ is finite over $k$.* By step 2, $K=\\kappa(\\mathfrak p)$ with $k\\to B\\to K$ is a field that is a finitely generated $k$-algebra; [lem-weil-pbc-zariski-lemma] gives $\\dim_kK<\\infty$, i.e. $K/k$ is a finite field extension [def-pc-field-extension], with exactly the $k$-structure of the statement.",
+   "uses": [
+    "lem-weil-pbc-zariski-lemma",
+    "def-pc-field-extension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra, Theorem 00FV (algebra-theorem-nullstellensatz, line 6524), part (1) for finite type k-algebras; this gives 00PJ (6) (finiteness of kappa(q)/k) from (5) (q closed)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-affine-spectrum",
+  "lem-weil-pbc-finite-type-over-field-prime-intersection-maximal",
+  "def-weil-pbc-localization-at-prime",
+  "def-weil-pbc-finite-type-algebra",
+  "lem-weil-pbc-zariski-lemma",
+  "def-pc-field-extension"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Algebra, Lemma 00PJ (algebra-lemma-isolated-point, line 30106), (1) => (5) => (6) for kappa: isolated point closed by Lemmas 00G1 (line 6668) and 00G3 (line 6692), then Theorem 00FV (line 6524) for the residue field of a maximal ideal"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -36,10 +85,24 @@
    "results": "RingTheory/Jacobson/Ring.lean:676 finite_of_finite_type_of_isJacobsonRing; AlgebraicGeometry/Morphisms/Finite.lean:221 isClosed_singleton_iff_locallyOfFiniteType; RingTheory/ZariskisMainTheorem.lean:754 quasiFiniteAt_iff_isOpen_singleton_fiber; no theorem proving this exact scheme statement",
    "date": "2026-10-10",
    "verdict": "no match: Mathlib has ingredients only; the Stacks 00G1/00G3/00FV combination remains a separate proof node"
+  },
+  {
+   "tool": "leansearch",
+   "query": "prime ideal with open singleton in prime spectrum of finitely generated algebra over field is maximal",
+   "results": "Ideal.IsMaximal.isPrime', PrimeSpectrum.isMax_iff, PrimeSpectrum.stableUnderSpecialization_singleton, Ideal.IsPrime.isMaximal (Dedekind), PrimeSpectrum.isClosed_singleton_iff_isMaximal (Mathlib.RingTheory.Spectrum.Prime.Topology:176)",
+   "date": "2026-10-10",
+   "verdict": "no single declaration; the composite isJacobsonRing_of_finiteType (Jacobson/Ring.lean:666) -> instance JacobsonSpace (PrimeSpectrum R) (Spectrum/Prime/Jacobson.lean:49) -> isClosed_singleton_of_isLocallyClosed_singleton (Topology/JacobsonSpace.lean:121) with IsOpen.isLocallyClosed (Topology/Basic.lean:138) -> isClosed_singleton_iff_isMaximal gives the maximality, then finite_of_finite_type_of_isJacobsonRing (Ring.lean:676) with Ideal.algebraMap_residueField_surjective (LocalRing/ResidueField/Ideal.lean:140) the finiteness: a chain of several declarations, not a leaf"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -n 'isClosed_singleton_of_isLocallyClosed_singleton' Mathlib/Topology/JacobsonSpace.lean; grep -n 'JacobsonSpace' Mathlib/RingTheory/Spectrum/Prime/Jacobson.lean; grep -rn 'IsMaximal' Mathlib/RingTheory/Jacobson/*.lean Mathlib/RingTheory/Nullstellensatz.lean | grep -i finite",
+   "results": "JacobsonSpace.lean:121 isClosed_singleton_of_isLocallyClosed_singleton; Prime/Jacobson.lean:49 instance [IsJacobsonRing R] : JacobsonSpace (PrimeSpectrum R), :61 isJacobsonRing_iff_jacobsonSpace; no IsMaximal+finite residue field lemma in Jacobson/ or Nullstellensatz.lean",
+   "date": "2026-10-10",
+   "verdict": "no match: ingredients only"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "worker",
@@ -59,5 +122,17 @@
   }
  },
  "chapter": "sec-proper-base-change",
- "unit": "sk-thm-p1"
+ "unit": "sk-thm-p1",
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "lem-weil-pbc-isolated-prime-finite-type-algebra-residue-finite",
+  "worker": "stage1",
+  "summary": "Checked against Stacks Algebra 00PJ (line 30106; its (1) => (2) proof opens with: Spec S is Jacobson by 00G1 and 00G3, so an isolated point is closed), 00G3 (line 6692), 00G1 (line 6668), 00G0 (line 6660) and 00FV (line 6524); tags verified in tags/tags. Statement kept, with 'finitely generated k-algebra' now citing def-weil-pbc-finite-type-algebra and the intermediate conclusion 'p is maximal' made explicit. Proof in three steps: (1) isolated => maximal by the argument of 00G3 using the new Mathlib leaf lem-weil-pbc-finite-type-over-field-prime-intersection-maximal (00G1, isJacobsonRing_of_finiteType + isJacobsonRing_iff_prime_eq); (2) for maximal m, B -> kappa(m) is surjective, so kappa(m) is a field of finite type over k (elementary, written out); (3) the existing Mathlib leaf lem-weil-pbc-zariski-lemma (00FV(1)/0CY7) gives finiteness. The isolated => maximal step is not a separate leaf because Mathlib has it only as a chain of four declarations (JacobsonSpace instance, isClosed_singleton_of_isLocallyClosed_singleton, IsOpen.isLocallyClosed, isClosed_singleton_iff_isMaximal); the argument is a few lines from the Jacobson leaf."
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "result": "accepted",
+  "note": "3 steps following Stacks 00PJ (1)=>(5)=>(6): an open point is maximal via the Jacobson property (new composed leaf isJacobsonRing_of_finiteType / isJacobsonRing_iff_prime_eq, Jacobson/Ring.lean:666/73 verified by L; the four-declaration Mathlib chain for 'open point is closed' was rightly not made a leaf); kappa(m) is a finite type k-algebra; Zariski's lemma (existing leaf). Statement now cites def-weil-pbc-finite-type-algebra and states maximality of p."
+ }
 }
