@@ -26,9 +26,51 @@
   "lem-sc-tangent-space-vector-space",
   "def-weil-affine-spectrum"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Write $j_x:\\operatorname{Spec}\\kappa(x)\\to X$ and $j_y:\\operatorname{Spec}\\kappa(y)\\to Y$ for the canonical point morphisms. The residue-field naturality statement [lem-weil-pbc-residue-field-point-naturality], applied to $f$ at $x$, says $f\\circ j_x=j_y\\circ\\operatorname{Spec}(\\kappa(y)\\to\\kappa(x))$. Under the assumed identification of these fields the right side is $j_y$. If $c:\\operatorname{Spec}\\kappa\\to\\operatorname{Spec}\\kappa[\\epsilon]$ is $\\operatorname{Spec}$ of $\\epsilon\\mapsto0$ (as in [lem-sc-tangent-space-vector-space]) and $\\theta\\circ c=j_x$, associativity gives $(f\\circ\\theta)\\circ c=j_y$. Thus composition with $f$ maps $T_X$ into $T_Y$.",
+   "uses": [
+    "lem-weil-pbc-residue-field-point-naturality",
+    "lem-sc-tangent-space-vector-space"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 0B2F, lemma-map-tangent-spaces (proof omitted); base-point verification using Schemes Tag 01J5"
+   }
+  },
+  {
+   "text": "For $\\lambda\\in\\kappa$ and $\\theta\\in T_X$, scalar multiplication is precomposition with $\\operatorname{Spec}(m_\\lambda)$, where $m_\\lambda(\\epsilon)=\\lambda\\epsilon$ [lem-sc-tangent-space-vector-space]. Hence $f\\circ(\\lambda\\theta)=f\\circ\\theta\\circ\\operatorname{Spec}(m_\\lambda)=\\lambda(f\\circ\\theta)$, using the same residue-field identification for $T_Y$. This includes $\\lambda=0$.",
+   "uses": [
+    "lem-sc-tangent-space-vector-space"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 0B2B, lemma-tangent-space, scalar multiplication; Tag 0B2F, lemma-map-tangent-spaces"
+   }
+  },
+  {
+   "text": "For $\\theta_1,\\theta_2\\in T_X$, let $\\Theta$ be the unique map from $\\operatorname{Spec}\\kappa[\\epsilon_1,\\epsilon_2]$ whose restrictions along $j_i$ are $\\theta_i$, as supplied by the pushout statement [lem-sc-tangent-space-vector-space]. The restrictions of $f\\circ\\Theta$ along the same $j_i$ are $f\\circ\\theta_i$; uniqueness in that statement therefore identifies it with the map used to form $(f\\circ\\theta_1)+(f\\circ\\theta_2)$ in $T_Y$. Precomposing both with $s$ gives $f\\circ(\\theta_1+\\theta_2)=(f\\circ\\theta_1)+(f\\circ\\theta_2)$. Together with step 2 and step 1, composition with $f$ is a $\\kappa$-linear map.",
+   "uses": [
+    "lem-sc-tangent-space-vector-space"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 0B2B, lemma-tangent-space, pushout and addition; Tag 0B2F, lemma-map-tangent-spaces"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-residue-field-point-naturality",
+  "lem-sc-tangent-space-vector-space"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/varieties.tex",
+  "place": "Tags 0B2B and 0B2F; Tag 0B2F omits proof, so functoriality is written out from the construction in 0B2B"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -36,10 +78,66 @@
    "results": "AlgebraicGeometry.FormallyUnramified, AffineSpace, SpecToEquivOfLocalRing_apply_fst; no tangent space of a scheme or its vector-space structure",
    "date": "2026-10-10",
    "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "composition with a morphism of schemes induces a linear map on tangent spaces defined by dual number points",
+   "results": "CotangentSpace.map_comp, AffineSpace.comp_homOfVector and ring-level maps; no scheme dual-number tangent-space map",
+   "date": "2026-10-11",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Scheme, DualNumber, LinearMap",
+   "results": "0 hits",
+   "date": "2026-10-11",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "tangentSpace|TangentSpace|dual.number AlgebraicGeometry",
+   "results": "0 hits",
+   "date": "2026-10-11",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "morphism of schemes induces linear map between tangent spaces at points",
+   "results": "Internal Server Error",
+   "date": "2026-10-11",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "functoriality of tangent vectors of a scheme over a field under a scheme morphism",
+   "results": "AffineSpace.comp_homOfVector, Scheme.comp_app, Scheme.residueFieldMap_comp; no tangent-space linearity theorem",
+   "date": "2026-10-11",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "tangentSpaceAt",
+   "results": "0 hits; unknown identifier tangentSpaceAt",
+   "date": "2026-10-11",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "tangent|Tangent AlgebraicGeometry",
+   "results": "9 mentions, only elliptic tangent geometry and cotangent imports, no scheme tangent-space map",
+   "date": "2026-10-11",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "differential of morphism of schemes is linear on tangent vectors",
+   "results": "Internal Server Error",
+   "date": "2026-10-11",
+   "verdict": "unavailable"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "R-tan",
@@ -55,5 +153,21 @@
   "slopmaster2": {
    "state": "none"
   }
+ },
+ "split_report": {
+  "date": "2026-10-11",
+  "item": "lem-sc-tangent-map-linear",
+  "worker": "stage1",
+  "summary": "Verified the dual-number tangent-space definition against Stacks 0B2B and 0B2F. Since 0B2F omits its proof, expanded the functoriality argument: residue-field naturality preserves the base point, scalar precomposition commutes with postcomposition, and the pushout uniqueness proves additivity. No new node is needed.",
+  "blueprint": "Steps 1-3 realize the tangent-vector separation argument named in the third paragraph of lem-sc-degree-2g1-very-ample, via lem-sc-point-tangent-cotangent-surjective and lem-sc-point-tangent-separation-closed-immersion.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-tml1710",
+  "group": "K1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-tml1710 (reviewer sub-agent of L); spot-checked: Source: Stacks 0B2F (varieties.tex lemma-map-tangent-spaces, proof omitted), read locally; the item's statement is 0B2F with S=Spec k, the condition kappa(y)=kappa(x) as an isomorphism with chosen identification, minus the dual-to-Omega clause; agrees hypothesis by hypothesis. The tangent space rests on the dual-number construction of lem-sc-tangent-space-vector-space (def-sc-dual-numbers), the same as def-sc-scheme-tangent-space (merged 16:54), not an ad hoc Hom(m/m^2,k); the item cannot cite def-sc-scheme-tangent-space, which cites it. Step 1 carried by lem-weil-pbc-residue-field-point-naturality (Mathlib leaf, Hom.SpecMap_residueFieldMap_fromSpecResidueField, ResidueField.lean line 261 verified with sed; off-unit leaf used as a generic tool, C8 fine) plus associativity; step 2 by the scalar formula of lem-sc-tangent-space-vector-space (b); step 3 by its pushout uniqueness (a) applied in Y to f o Theta, then precomposition with s. Hypotheses: f over k so composites are k-morphisms; residue-field iso used in step 1 and for kappa-structure of T_Y. Small cases: Spec k -> Spec k (zero map), t->t^2 and t->ct on A^1 at 0 (zero, multiplication by c). No new nodes; Mathlib searches logged on the item. FIX: dag/nodes/sec-picard-framework/lem-sc-tangent-map-linear.json: proof[0].text: c was written as Spec k[eps] -> Spec k 'reduction modulo eps', wrong direction for theta o c; corrected to c: Spec kappa -> Spec kappa[eps], Spec of eps->0 as in lem-sc-tangent-space-vector-space; proof[0].uses: added lem-sc-tangent-space-vector-space (already in proof_deps). Start Sat Oct 10 05:03:23 PM UTC 2026, end Sat Oct 10 05:03:53 PM UTC 2026.; 1 file(s) fixed by the reviewer"
  }
 }
