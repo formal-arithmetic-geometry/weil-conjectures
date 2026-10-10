@@ -11,9 +11,116 @@
   "def-weil-spectral-space",
   "def-weil-pbc-constructible-topology"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "*Step 1 (the constructible topologies).* For $i\\in I$ let $X_i'$ denote the set $X_i$ with its constructible topology [def-weil-pbc-constructible-topology]. Each $X_i'$ is quasi-compact [lem-weil-pbc-spectral-constructible-topology-quasi-compact] and Hausdorff [lem-weil-pbc-spectral-constructible-topology-hausdorff], $X_i$ being spectral [def-weil-spectral-space]. For $i\\le i'$ the map $f_{ii'}$ is spectral, hence continuous as a map $X_{i'}'\\to X_i'$ [lem-weil-pbc-spectral-map-constructible-continuous]. By hypothesis $Z_i$ is closed in $X_i'$.",
+   "uses": [
+    "def-weil-pbc-constructible-topology",
+    "lem-weil-pbc-spectral-constructible-topology-quasi-compact",
+    "lem-weil-pbc-spectral-constructible-topology-hausdorff",
+    "def-weil-spectral-space",
+    "lem-weil-pbc-spectral-map-constructible-continuous"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/topology.tex",
+    "place": "Topology, proof of Lemma Tag 0A2V (label lemma-inverse-limit-spectral-spaces-quasi-compact, line 4779), first three sentences (Lemmas 0901, 0A2S (1))"
+   }
+  },
+  {
+   "text": "*Step 2 (the constructible topology is finer).* For every $i$ the identity map $\\iota_i:X_i'\\to X_i$ is continuous. Indeed, let $U\\subseteq X_i$ be open. Since $X_i$ is spectral [def-weil-spectral-space], the quasi-compact open subsets form a basis of its topology, so $U=\\bigcup_\\alpha U_\\alpha$ with each $U_\\alpha$ a quasi-compact open of $X_i$. Each $U_\\alpha$ is a member of the subbase of the constructible topology [def-weil-pbc-constructible-topology], hence open in $X_i'$, and so is their union $U$.",
+   "uses": [
+    "def-weil-spectral-space",
+    "def-weil-pbc-constructible-topology"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/topology.tex",
+    "place": "Topology, paragraph after Definition Tag 08YG (definition-spectral-space), line 4300: 'the constructible topology is stronger than the given topology'; used in the proof of Lemma Tag 0A2V (line 4779), last two sentences"
+   }
+  },
+  {
+   "text": "*Step 3 (the product).* Let $P'=\\prod_{i\\in I}X_i'$ with the product topology, and $\\mathrm{pr}_i:P'\\to X_i'$ the projections, which are continuous (each $\\mathrm{pr}_i^{-1}(V)$, $V\\subseteq X_i'$ open, is a basic open set $\\prod_jU_j$ with $U_i=V$ and $U_j=X_j'$ for $j\\ne i$). By Step 1 and Tychonoff's theorem [lem-weil-pbc-tychonoff-product-quasi-compact] $P'$ is quasi-compact.",
+   "uses": [
+    "lem-weil-pbc-tychonoff-product-quasi-compact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/topology.tex",
+    "place": "Topology, proof of Lemma Tag 08ZV (label lemma-inverse-limit-quasi-compact, line 2475), used in the proof of Lemma Tag 0A2V (line 4779), first two sentences (Theorem Tag 08ZU)"
+   }
+  },
+  {
+   "text": "*Step 4 (the compatible families in the $Z_i$ form a closed subset).* Let $L=\\{(x_i)\\in P': x_i\\in Z_i\\text{ for all }i\\in I,\\ f_{ii'}(x_{i'})=x_i\\text{ for all }i\\le i'\\}$. For $i\\in I$ the set $\\mathrm{pr}_i^{-1}(Z_i)$ is closed in $P'$, since $Z_i$ is closed in $X_i'$ (Step 1) and $\\mathrm{pr}_i$ is continuous (its complement is $\\mathrm{pr}_i^{-1}(X_i'\\setminus Z_i)$, open). For $i\\le i'$ the maps $f_{ii'}\\circ\\mathrm{pr}_{i'}$ and $\\mathrm{pr}_i$ from $P'$ to $X_i'$ are continuous (Steps 1 and 3) and $X_i'$ is Hausdorff (Step 1), so $E_{ii'}=\\{x\\in P': f_{ii'}(\\mathrm{pr}_{i'}(x))=\\mathrm{pr}_i(x)\\}$ is closed in $P'$ [lem-weil-pbc-hausdorff-equalizer-closed]. Hence $L=\\bigcap_i\\mathrm{pr}_i^{-1}(Z_i)\\cap\\bigcap_{i\\le i'}E_{ii'}$, an intersection of closed subsets, is closed in $P'$.",
+   "uses": [
+    "lem-weil-pbc-hausdorff-equalizer-closed"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/topology.tex",
+    "place": "Topology, proof of Lemma Tag 08ZV (label lemma-inverse-limit-quasi-compact, line 2475), used in the proof of Lemma Tag 0A2V (line 4779), third to last sentences (Stacks uses the closed graphs of Lemma Tag 08ZF, i.e. the diagonal criterion Tag 08ZE; the coincidence set used here is the same closed set), applied to the spaces $Z_i'$ as in the proof of Lemma Tag 0A2V"
+   }
+  },
+  {
+   "text": "*Step 5 ($L$ is quasi-compact).* By Steps 3 and 4, $L$ is a closed subset of the quasi-compact space $P'$, hence quasi-compact in the topology induced from $P'$ [lem-weil-pbc-closed-in-quasi-compact].",
+   "uses": [
+    "lem-weil-pbc-closed-in-quasi-compact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/topology.tex",
+    "place": "Topology, proof of Lemma Tag 08ZV (label lemma-inverse-limit-quasi-compact, line 2475), used in the proof of Lemma Tag 0A2V (line 4779) (Lemma Tag 005C)"
+   }
+  },
+  {
+   "text": "*Step 6 (the map $\\Phi:L\\to X$ and its image).* Let $(x_i)\\in L$. It is a compatible family ($f_{ii'}(x_{i'})=x_i$ for $i\\le i'$), so by the hypothesis on $X$ there is exactly one $x\\in X$ with $p_i(x)=x_i$ for all $i$; put $\\Phi((x_i))=x$. Then $\\Phi(L)=Z$: if $x=\\Phi((x_i))$ then $p_i(x)=x_i\\in Z_i$ for all $i$, so $x\\in Z$; conversely, for $x\\in Z$ the family $(p_i(x))_i$ lies in $L$ (its components lie in the $Z_i$, and $f_{ii'}(p_{i'}(x))=p_i(x)$ as $f_{ii'}\\circ p_{i'}=p_i$), and $\\Phi((p_i(x))_i)=x$ by uniqueness.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/topology.tex",
+    "place": "Topology, proof of Lemma Tag 0A2V (label lemma-inverse-limit-spectral-spaces-quasi-compact, line 4779): 'Z\\' \\to Z is a bijection on underlying sets' (limits of spaces have the limit of the underlying sets, Lemma Tag 08ZT (lemma-limits))"
+   }
+  },
+  {
+   "text": "*Step 7 ($\\Phi$ is continuous).* Give $L$ the topology induced from $P'$. For every $i\\in I$ we have $p_i\\circ\\Phi=\\iota_i\\circ\\mathrm{pr}_i|_L$ as maps $L\\to X_i$ (both send $(x_j)$ to $x_i$). This is continuous: $\\mathrm{pr}_i|_L$ is the restriction to the subspace $L$ of the continuous map $\\mathrm{pr}_i:P'\\to X_i'$ (Step 3), and $\\iota_i$ is continuous (Step 2). Since the topology of $X$ is the coarsest for which all $p_i$ are continuous, $\\Phi:L\\to X$ is continuous [lem-weil-pbc-initial-topology-continuity].",
+   "uses": [
+    "lem-weil-pbc-initial-topology-continuity"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/topology.tex",
+    "place": "Topology, proof of Lemma Tag 0A2V (label lemma-inverse-limit-spectral-spaces-quasi-compact, line 4779): 'The maps Z\\'_i \\to Z_i are continuous, hence Z\\' \\to Z is continuous'"
+   }
+  },
+  {
+   "text": "*Step 8 (conclusion).* By Steps 5, 6 and 7, $Z=\\Phi(L)$ is the image of the quasi-compact space $L$ under the continuous map $\\Phi:L\\to X$, hence $Z$ is quasi-compact in the topology induced from $X$ [lem-weil-pbc-continuous-image-quasi-compact]. For the last assertion take $Z_i=X_i$ for all $i$: $X_i$ is closed in $X_i'$, $f_{ii'}(X_{i'})\\subseteq X_i$, and then $Z=X$, so $X$ is quasi-compact.",
+   "uses": [
+    "lem-weil-pbc-continuous-image-quasi-compact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/topology.tex",
+    "place": "Topology, proof of Lemma Tag 0A2V (label lemma-inverse-limit-spectral-spaces-quasi-compact, line 4779), last sentence (Lemma Tag 04Z9 (1)), and part (2)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-constructible-topology",
+  "lem-weil-pbc-spectral-constructible-topology-quasi-compact",
+  "lem-weil-pbc-spectral-constructible-topology-hausdorff",
+  "def-weil-spectral-space",
+  "lem-weil-pbc-spectral-map-constructible-continuous",
+  "lem-weil-pbc-tychonoff-product-quasi-compact",
+  "lem-weil-pbc-hausdorff-equalizer-closed",
+  "lem-weil-pbc-closed-in-quasi-compact",
+  "lem-weil-pbc-initial-topology-continuity",
+  "lem-weil-pbc-continuous-image-quasi-compact"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/topology.tex",
+  "place": "Topology, proof of Lemma Tag 0A2V (lemma-inverse-limit-spectral-spaces-quasi-compact, line 4779), with the proof of Lemma Tag 08ZV (lemma-inverse-limit-quasi-compact, line 2475) written out for the subspaces Z_i"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -49,10 +156,38 @@
    "results": "only `instance : SpectralSpace (PrimeSpectrum R)` (RingTheory/Spectrum/Prime/Topology.lean:844); no IsLimit in Topology/Spectral, Sober.lean, Constructible.lean; ConstructibleTopology.lean has compactSpace_withConstructibleTopology (line 92) and isCompact_sInter_of_subset_constructibleTopologySubbasis (line 81) but nothing on limits",
    "date": "2026-10-10",
    "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "inverse limit of compact Hausdorff spaces: set of compatible families in the product is closed and compact",
+   "results": "CompHaus.limitCone, CompHaus.hasLimits (Mathlib.Topology.Category.CompHaus.Basic), ProfiniteGrp.limitConePtAux, Pi.compactSpace, Pi.isCompact_iff (Mathlib.Topology.Separation.Hausdorff)",
+   "date": "2026-10-10",
+   "verdict": "no match: ingredients (08ZV in category form, Tychonoff) only; nothing about constructible topologies or the comparison with the spectral topology"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "limit of a diagram of compact Hausdorff spaces is compact; inverse limit quasi-compact",
+   "results": "CompHaus.limitCone, TopCat.nonempty_limitCone_of_compact_t2_cofiltered_system, CompHaus.limitConeIsLimit, CompHaus.hasLimits",
+   "date": "2026-10-10",
+   "verdict": "no match (ingredient only)"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "constructible topology finer than the original topology; identity from constructible topology is continuous; spectral map continuous in constructible topology",
+   "results": "Topology.IsConstructible.preimage (Mathlib.Topology.Constructible), PrespectralSpace.of_isInducing, IsSpectralMap, SpectralMap.spectral'",
+   "date": "2026-10-10",
+   "verdict": "no match: neither the comparison of topologies nor continuity of spectral maps for the constructible topologies is stated"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rn 'constructibleTopology\\|WithConstructibleTopology' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib --include=*.lean outside Topology/Spectral/ConstructibleTopology.lean; grep -n theorem/lemma ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/Topology/Spectral/Hom.lean",
+   "results": "no use of the constructible topology outside its own file; Hom.lean has IsSpectralMap.continuous, isSpectralMap_id, IsSpectralMap.comp, no constructible topology; ConstructibleTopology.lean TODO (line 27): T2 of the constructible topology not yet in Mathlib",
+   "date": "2026-10-10",
+   "verdict": "no match; the item is split (Tychonoff, closed coincidence sets, comparison of topologies; B8)"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "worker",
@@ -72,5 +207,12 @@
   }
  },
  "chapter": "sec-proper-base-change",
- "unit": "sk-thm-p1"
+ "unit": "sk-thm-p1",
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "lem-weil-pbc-spectral-limit-constructible-closed-quasi-compact",
+  "worker": "stage1",
+  "summary": "Not a Mathlib leaf (B8): the statement composes Tychonoff, closedness of the compatible families in a product of Hausdorff spaces, the Hausdorff property of the constructible topology (a TODO in Mathlib's ConstructibleTopology.lean) and the comparison of the constructible with the given topology; searched with LeanSearch, LeanFinder, Loogle (earlier record) and grep. Split in 8 steps following the proof of Stacks 0A2V with the proof of 08ZV written out for the subsets Z_i (no directedness needed): constructible topologies quasi-compact (existing leaf 0901) and Hausdorff (sibling node from 0A2W's split), spectral maps continuous for them (sibling node, 0A2S (1)), the identity X_i' -> X_i continuous (elementary from the definitions), Tychonoff (new leaf, Pi.compactSpace), the set L of compatible families in the Z_i closed in the product (new leaf isClosed_eq for coincidence sets), L quasi-compact (existing leaf 005C), the bijection L -> Z (elementary), its continuity via the initial topology of X (new leaf continuous_iInf_rng + continuous_induced_rng), and Z quasi-compact as a continuous image (new leaf isCompact_range, 04Z9 (1)). Statement unchanged; the hypothesis f_{ii'}(Z_{i'}) subset Z_i is not used by the proof (Stacks needs it only to form lim Z_i as a diagram), harmless. The citer lem-weil-pbc-spectral-directed-limit-spectral (Step 2) applies the statement as written."
+ },
+ "reviewed": "pass (L, 2026-10-10): 8 steps follow 0A2V with 08ZV written out: compatible families with components in the Z_i form a closed subset of the Tychonoff product of the constructible topologies (new leaves 08ZU, 08ZE), hence quasi-compact; the bijection onto Z is continuous by the initial-topology property (new leaf) since the constructible topology is finer, and the image is quasi-compact (new leaf 04Z9). Reuses the sibling's Hausdorff and continuity nodes."
 }

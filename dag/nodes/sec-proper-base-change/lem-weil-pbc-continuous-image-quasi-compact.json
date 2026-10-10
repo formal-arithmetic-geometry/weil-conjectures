@@ -1,0 +1,73 @@
+{
+ "id": "lem-weil-pbc-continuous-image-quasi-compact",
+ "kind": "statement",
+ "title": "The image of a quasi-compact space under a continuous map is quasi-compact",
+ "statement": "Let $g:T\\to Y$ be a continuous map of topological spaces with $T$ quasi-compact (every open covering has a finite subcovering). Then the image $g(T)\\subseteq Y$ is quasi-compact in the topology induced from $Y$: every covering of $g(T)$ by subsets open in $g(T)$ has a finite subcovering.",
+ "source": {
+  "document": "literature/stacks-project/topology.tex",
+  "place": "Topology, Lemma Tag 04Z9 (label lemma-image-quasi-compact, line 1747), part (1)"
+ },
+ "stmt_deps": [],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "image of a compact set under a continuous map is compact",
+   "results": "isCompact_range, IsCompact.image, IsCompact.image_of_continuousOn, TopologicalSpace.Compacts.map (Mathlib.Topology.Compactness.Compact, Mathlib.Topology.Sets.Compacts)",
+   "date": "2026-10-10",
+   "verdict": "match: isCompact_range"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "continuous image of a compact set is compact",
+   "results": "IsCompact.image, IsCompact.image_of_continuousOn, TopologicalSpace.Compacts.map, isCompact_range",
+   "date": "2026-10-10",
+   "verdict": "match"
+  },
+  {
+   "tool": "loogle",
+   "query": "IsCompact (Set.image _ _)",
+   "results": "IsCompact.image, IsCompact.image_of_continuousOn, Topology.IsEmbedding.isCompact_iff, Topology.IsInducing.isCompact_iff, Subtype.isCompact_iff, Pi.isCompact_iff_of_isClosed",
+   "date": "2026-10-10",
+   "verdict": "match: IsCompact.image"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -n 'theorem isCompact_range\\|theorem IsCompact.image\\|theorem isCompact_iff_compactSpace' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/Topology/Compactness/Compact.lean",
+   "results": "IsCompact.image line 125, isCompact_range line 974, isCompact_iff_compactSpace line 1057",
+   "date": "2026-10-10",
+   "verdict": "match"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "isCompact_range",
+  "file": "Mathlib/Topology/Compactness/Compact.lean",
+  "line": 974,
+  "how": "specializes in one line: `isCompact_range [CompactSpace X] {f : X → Y} (hf : Continuous f) : IsCompact (range f)` with X = T, f = g gives IsCompact (g(T)); quasi-compactness in the induced topology is CompactSpace of the subspace, equivalent by `isCompact_iff_compactSpace` (line 1057). Lines 974-975 and 1057 read 2026-10-10."
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-spectral-limit-constructible-closed-quasi-compact",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lead_note": "Leaf accepted by L (2026-10-10): isCompact_range (Compactness/Compact.lean:974) with isCompact_iff_compactSpace (:1057); checked with sed.",
+ "reviewed": "pass (L, 2026-10-10): leaf, declaration checked by sed."
+}

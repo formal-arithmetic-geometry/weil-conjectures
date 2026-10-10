@@ -1,0 +1,73 @@
+{
+ "id": "lem-weil-pbc-initial-topology-continuity",
+ "kind": "statement",
+ "title": "Continuity of a map into a space carrying the initial topology of a family of maps",
+ "statement": "Let $X$ be a set, let $(Y_i)_{i\\in I}$ be topological spaces and $q_i:X\\to Y_i$ maps, and give $X$ the coarsest topology for which every $q_i$ is continuous (the topology with subbase the sets $q_i^{-1}(V)$, $i\\in I$, $V\\subseteq Y_i$ open). Let $T$ be a topological space and $g:T\\to X$ a map. Then $g$ is continuous if and only if $q_i\\circ g:T\\to Y_i$ is continuous for every $i\\in I$.",
+ "source": {
+  "document": "literature/stacks-project/topology.tex",
+  "place": "Topology, Section Tag 08ZS (label section-limits, line 2342), where limits of spaces are given this topology (as subspaces of products); no lemma of that section states the criterion, which is the universal property of the coarsest topology making the $q_i$ continuous"
+ },
+ "stmt_deps": [],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "map into a space with the infimum of induced topologies is continuous iff all compositions are continuous",
+   "results": "continuous_iInf_rng (Mathlib.Topology.Order), Topology.IsInducing.continuous_iff, continuous_sInf_rng, continuous_iInf_dom",
+   "date": "2026-10-10",
+   "verdict": "match: continuous_iInf_rng with continuous_induced_rng"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "universal property of the initial topology: a map into a space whose topology is the infimum of induced topologies is continuous iff each composite is continuous",
+   "results": "Topology.IsGeneratedBy.continuous_iff, Topology.WithGeneratedByTopology.continuous_from_iff (final topologies, the dual notion), continuous_iff_le_induced, continuous_iff_coinduced_le",
+   "date": "2026-10-10",
+   "verdict": "ingredient continuous_iff_le_induced; the match is continuous_iInf_rng + continuous_induced_rng"
+  },
+  {
+   "tool": "loogle",
+   "query": "Continuous, iInf, TopologicalSpace.induced",
+   "results": "LinearMap.mem_span_iff_continuous_of_finite, LinearMap.mem_span_iff_continuous (unrelated)",
+   "date": "2026-10-10",
+   "verdict": "no match from this query"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -n 'theorem continuous_iInf_rng\\|theorem continuous_induced_rng' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/Topology/Order.lean",
+   "results": "continuous_induced_rng line 793, continuous_iInf_rng line 869",
+   "date": "2026-10-10",
+   "verdict": "match"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "continuous_iInf_rng",
+  "file": "Mathlib/Topology/Order.lean",
+  "line": 869,
+  "how": "specializes in one line: the coarsest topology on X making all q_i continuous is ⨅ i, induced q_i (t_i) (continuous_iff_le_induced, Topology/Order.lean); `continuous_iInf_rng : Continuous[t₁, iInf t₂] f ↔ ∀ i, Continuous[t₁, t₂ i] f` (line 869) followed by `continuous_induced_rng : Continuous[t₁, induced f t₂] g ↔ Continuous[t₁, t₂] (f ∘ g)` (line 793) for each i: `continuous_iInf_rng.trans (forall_congr' fun i => continuous_induced_rng)`. Lines 793-795 and 869-871 read 2026-10-10."
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-spectral-limit-constructible-closed-quasi-compact",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lead_note": "Leaf accepted by L (2026-10-10): continuous_iInf_rng (Topology/Order.lean:869) with continuous_induced_rng (:793); checked with sed.",
+ "reviewed": "pass (L, 2026-10-10): leaf, declaration checked by sed."
+}

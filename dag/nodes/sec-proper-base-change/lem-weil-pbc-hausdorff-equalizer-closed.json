@@ -1,0 +1,73 @@
+{
+ "id": "lem-weil-pbc-hausdorff-equalizer-closed",
+ "kind": "statement",
+ "title": "The coincidence set of two continuous maps into a Hausdorff space is closed",
+ "statement": "Let $T$ and $H$ be topological spaces with $H$ Hausdorff (any two distinct points have disjoint open neighbourhoods), and let $a,b:T\\to H$ be continuous maps. Then the set $\\{t\\in T: a(t)=b(t)\\}$ is closed in $T$.",
+ "source": {
+  "document": "literature/stacks-project/topology.tex",
+  "place": "Topology, Lemma Tag 08ZE (label lemma-Hausdorff, line 123: $H$ is Hausdorff iff the diagonal of $H\\times H$ is closed); the set is the inverse image of the diagonal under $(a,b):T\\to H\\times H$, the argument of the proof of Lemma Tag 08ZG (label lemma-section-closed, line 163)"
+ },
+ "stmt_deps": [],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "set where two continuous maps into a Hausdorff space agree is closed",
+   "results": "isClosed_eq, IsClosed.isClosed_eq (Mathlib.Topology.Separation.Hausdorff), IsSeparatedMap.isClosed_eqLocus, Set.EqOn.closure",
+   "date": "2026-10-10",
+   "verdict": "match: isClosed_eq"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "the locus where two continuous functions into a Hausdorff space coincide is closed",
+   "results": "isClosed_eq, IsClosed.isClosed_eq (Mathlib.Topology.Separation.Hausdorff), IsSeparatedMap.isClosed_eqLocus, ContinuousMap.isClosed_setOf_mapsTo",
+   "date": "2026-10-10",
+   "verdict": "match: isClosed_eq"
+  },
+  {
+   "tool": "loogle",
+   "query": "IsClosed, T2Space, Continuous, setOf",
+   "results": "none (query form too loose; the leansearch/leanfinder hit was checked by source)",
+   "date": "2026-10-10",
+   "verdict": "no result"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -n 'theorem isClosed_eq' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/Topology/Separation/Hausdorff.lean",
+   "results": "isClosed_eq line 488",
+   "date": "2026-10-10",
+   "verdict": "match: isClosed_eq, lines 488-490 read"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "isClosed_eq",
+  "file": "Mathlib/Topology/Separation/Hausdorff.lean",
+  "line": 488,
+  "how": "exact: `isClosed_eq [T2Space X] {f g : Y → X} (hf : Continuous f) (hg : Continuous g) : IsClosed {y | f y = g y}` with X = H, Y = T, f = a, g = b; T2Space is Hausdorff. Lines 488-490 read 2026-10-10."
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-spectral-limit-constructible-closed-quasi-compact",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lead_note": "Leaf accepted by L (2026-10-10): isClosed_eq (Separation/Hausdorff.lean:488, checked with sed).",
+ "reviewed": "pass (L, 2026-10-10): leaf, declaration checked by sed."
+}

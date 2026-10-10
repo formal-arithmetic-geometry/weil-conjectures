@@ -1,0 +1,73 @@
+{
+ "id": "lem-weil-pbc-tychonoff-product-quasi-compact",
+ "kind": "statement",
+ "title": "Tychonoff: a product of quasi-compact spaces is quasi-compact",
+ "statement": "Let $I$ be a set and for every $i\\in I$ let $T_i$ be a quasi-compact topological space (every open covering has a finite subcovering). Then the product $\\prod_{i\\in I}T_i$ with the product topology (the topology with basis the sets $\\prod_iU_i$, $U_i\\subseteq T_i$ open, $U_i=T_i$ for all but finitely many $i$) is quasi-compact.",
+ "source": {
+  "document": "literature/stacks-project/topology.tex",
+  "place": "Topology, Theorem Tag 08ZU (label theorem-tychonov, line 2446)"
+ },
+ "stmt_deps": [],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "product of compact spaces is compact (Tychonoff)",
+   "results": "Pi.compactSpace, isCompact_univ_pi, instCompactSpaceProd, Function.compactSpace, IsCompact.prod (Mathlib.Topology.Compactness.Compact)",
+   "date": "2026-10-10",
+   "verdict": "match: Pi.compactSpace"
+  },
+  {
+   "tool": "loogle",
+   "query": "CompactSpace ((i : _) → _)",
+   "results": "Function.compactSpace, Pi.compactSpace (Mathlib.Topology.Compactness.Compact)",
+   "date": "2026-10-10",
+   "verdict": "match: Pi.compactSpace"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Tychonoff theorem: arbitrary product of compact topological spaces is compact",
+   "results": "Pi.compactSpace ('Tychonoff's Theorem'), instCompactSpaceProd, isCompact_pi_infinite, Pi.isCompact_iff",
+   "date": "2026-10-10",
+   "verdict": "match: Pi.compactSpace"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -n 'Tychonoff\\|instance Pi.compactSpace\\|theorem isCompact_univ_pi' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/Topology/Compactness/Compact.lean",
+   "results": "section Tychonoff line 1162; isCompact_univ_pi line 1178; instance Pi.compactSpace line 1183",
+   "date": "2026-10-10",
+   "verdict": "match: Pi.compactSpace, line 1183 read"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "Pi.compactSpace",
+  "file": "Mathlib/Topology/Compactness/Compact.lean",
+  "line": 1183,
+  "how": "exact: `instance Pi.compactSpace [∀ i, CompactSpace (X i)] : CompactSpace (∀ i, X i)`, the product carrying Mathlib's product topology Pi.topologicalSpace (Topology/Constructions.lean:66); Mathlib's compact is quasi-compact (no Hausdorff condition). Lines 1177-1184 read 2026-10-10."
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-spectral-limit-constructible-closed-quasi-compact",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lead_note": "Leaf accepted by L (2026-10-10): instance Pi.compactSpace (Compactness/Compact.lean:1183, checked with sed).",
+ "reviewed": "pass (L, 2026-10-10): leaf, declaration checked by sed."
+}
