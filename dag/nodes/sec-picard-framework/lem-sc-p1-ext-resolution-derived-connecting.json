@@ -13,7 +13,7 @@
  },
  "kind": "statement",
  "title": "Injective-resolution and derived connecting maps agree",
- "statement": "Let $\\mathcal A$ be an abelian category [def-sp-abelian] with enough injectives, let $M$ be an object, and let $0\\to A\\to B\\to C\\to0$ be a short exact sequence. Define $\\operatorname{Ext}^n_{\\mathcal A}(M,-)$ both as the right derived functors of $\\operatorname{Hom}_{\\mathcal A}(M,-)$ computed by injective resolutions [def-sp-injective-resolutions] and as $\\operatorname{Hom}_{D(\\mathcal A)}(M[0],-[0][n])$ [def-pc-ext]. Under the canonical comparison between these descriptions [lem-weil-pbc-ext-via-injective-resolution], the connecting morphism in the injective-resolution long exact sequence for $\\operatorname{Ext}^n_{\\mathcal A}(M,-)$ is the homology connecting morphism induced by the distinguished triangle $A[0]\\to B[0]\\to C[0]\\to A[0][1]$ in the derived category.",
+ "statement": "Let $\\mathcal A$ be an abelian category [def-sp-abelian] with enough injectives, let $M$ be an object, and let $0\\to A\\to B\\to C\\to0$ be a short exact sequence, with distinguished triangle $A[0]\\to B[0]\\to C[0]\\xrightarrow{w}A[0][1]$ of [lem-sf-derived-ses-triangle]. Define $\\operatorname{Ext}^n_{\\mathcal A}(M,-)$ both as the right derived functors of $\\operatorname{Hom}_{\\mathcal A}(M,-)$ computed by injective resolutions [def-sp-injective-resolutions] and as $\\operatorname{Hom}_{D(\\mathcal A)}(M[0],-[0][n])$ [def-pc-ext]. Under the canonical comparison between these descriptions [lem-weil-pbc-ext-via-injective-resolution], the connecting morphism $\\operatorname{Ext}^n_{\\mathcal A}(M,C)\\to\\operatorname{Ext}^{n+1}_{\\mathcal A}(M,A)$ in the injective-resolution long exact sequence for $\\operatorname{Ext}^n_{\\mathcal A}(M,-)$ is the homology connecting morphism induced by this distinguished triangle in the derived category, i.e. the connecting morphism of the long exact sequence of the homological functor $\\operatorname{Hom}_{D(\\mathcal A)}(M[0],-)$ [lem-sp-long-exact-of-triangle], $\\xi\\mapsto w[n]\\circ\\xi$.",
  "source": {
   "document": "literature/stacks-project/derived.tex",
   "place": "Tags 05TE and 06XR: right-derived functors form the canonical delta-functor, and Ext is computed by injective resolutions and identified with derived-category morphisms"
@@ -22,10 +22,46 @@
   "def-sp-abelian",
   "def-sp-injective-resolutions",
   "def-pc-ext",
-  "lem-weil-pbc-ext-via-injective-resolution"
+  "lem-weil-pbc-ext-via-injective-resolution",
+  "lem-sf-derived-ses-triangle",
+  "lem-sp-long-exact-of-triangle"
  ],
- "proof": [],
- "proof_deps": [],
+ "proof": [
+  {
+   "text": "The functor $v=\\operatorname{Hom}_{\\mathcal A}(M,-)$ is additive and left exact: additivity is pointwise, and a morphism $M\\to K$ into the kernel of a map is exactly a morphism $M\\to B$ whose composite to $C$ is zero. Apply [lem-sc-p1-right-derived-triangle-connecting] to this $v$ and to the triangle $A[0]\\to B[0]\\to C[0]\\xrightarrow{w}A[0][1]$ of [lem-sf-derived-ses-triangle]: under the identifications $\\theta^n_X:H^n(Rv(X[0]))\\cong R^nv(X)$ of [lem-sp-derived-functor-single-identification], the horseshoe connecting map $R^nv(C)\\to R^{n+1}v(A)$ (the connecting map of the injective-resolution long exact sequence for $\\operatorname{Ext}^n_{\\mathcal A}(M,-)$) is the homology connecting map $\\delta^n$ of the distinguished triangle $Rv(A[0])\\to Rv(B[0])\\to Rv(C[0])\\to Rv(A[0])[1]$ in $D^+(\\mathrm{Ab})$.",
+   "uses": [
+    "lem-sc-p1-right-derived-triangle-connecting",
+    "lem-sf-derived-ses-triangle",
+    "lem-sp-derived-functor-single-identification"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tags 05TE and 015B: canonical delta-functor from the derived category and its injective-resolution realization"
+   }
+  },
+  {
+   "text": "Apply [lem-sc-p1-rhom-hom-derived-connecting] to the distinguished triangle $A[0]\\to B[0]\\to C[0]\\xrightarrow{w}A[0][1]$ of $D^+(\\mathcal A)$: its isomorphisms $\\psi^n_X:H^n(Rv(X))\\cong\\operatorname{Hom}_{D(\\mathcal A)}(M[0],X[n])$ carry $\\delta^n$ of Step 1 to $\\xi\\mapsto w[n]\\circ\\xi$, the connecting morphism of $\\operatorname{Hom}_{D(\\mathcal A)}(M[0],-)$ [lem-sp-long-exact-of-triangle]. For $N\\in\\{A,C\\}$ and an injective resolution $\\varepsilon:N\\to I^\\bullet$ (for instance the one of the horseshoe resolution of Step 1), $\\theta^n_N$ is induced by $Rv(N[0])\\cong v(I^\\bullet)=\\operatorname{Hom}_{\\mathcal A}(M,I^\\bullet)$, and $\\psi^n_{N[0]}$ sends the class of a cocycle $f:M\\to I^n$ to $(\\varepsilon[n])^{-1}\\circ f$; by [lem-weil-pbc-ext-via-injective-resolution] this composite $\\psi^n_{N[0]}\\circ(\\theta^n_N)^{-1}:R^nv(N)\\to\\operatorname{Ext}^n_{\\mathcal A}(M,N)$ is exactly the canonical comparison of the statement. Composing with Step 1 gives the asserted equality of connecting morphisms.",
+   "uses": [
+    "lem-sc-p1-rhom-hom-derived-connecting",
+    "lem-weil-pbc-ext-via-injective-resolution",
+    "lem-sp-long-exact-of-triangle"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tags 06XR and 05TE: Ext by injective resolutions as Hom in K(A), and the long exact sequence of a homological functor"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sc-p1-right-derived-triangle-connecting",
+  "lem-sf-derived-ses-triangle",
+  "lem-sp-derived-functor-single-identification",
+  "lem-sc-p1-rhom-hom-derived-connecting",
+  "lem-weil-pbc-ext-via-injective-resolution",
+  "lem-sp-long-exact-of-triangle"
+ ],
  "proof_origin": {
   "by": "document",
   "document": "literature/stacks-project/derived.tex",
@@ -55,12 +91,29 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-sc-p1-ext-connecting-yoneda",
   "by": "worker",
   "date": "2026-10-10"
  },
  "chapter": "sec-picard-framework",
- "unit": "sk-thm-picard-duality"
+ "unit": "sk-thm-picard-duality",
+ "split_report": {
+  "date": "2026-10-11",
+  "item": "lem-sc-p1-ext-resolution-derived-connecting",
+  "worker": "stage1",
+  "summary": "Split the comparison into the generic bridge from horseshoe right-derived connecting maps to the distinguished-triangle connecting map, followed by the explicit injective-resolution computation of Ext. The bridge is recorded as one new statement-only node; the existing Mathlib Ext-resolution comparison is cited for the cocycle formula.",
+  "blueprint": [
+   "thm-sc-p1-duality proof, Step 2: compatibility of the cohomology connecting map with composition by the boundary class"
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-pec2004",
+  "group": "C1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-pec2004 (reviewer sub-agent of L); spot-checked: Read packet whole; checked horseshoe node, single-identification, ext-via-injective-resolution, def-weil-abstract-derived-category (cone triangle with -p, Stacks 0152 -p q^-1: snake-lemma boundaries without sign; third map of A[0]->B[0]->C[0]->A[0][1] unique since Hom(A[1],C)=0), def-sc-ext-sheaf and lem-weil-pbc-derived-functor-long-exact (no sign stated; consistent); Mathlib grep: RightDerived.lean has no delta/triangle comparison. FIX more, RETURN less: (1) C1 missed by the second reading: the bridge gives the connecting map of the triangle Rv(A)->Rv(B)->Rv(C) in D(Ab), but the item's derived side is Hom_{D(A)}(M[0],-) (postcomposition with w[n], as the consumer lem-sc-p1-ext-connecting-yoneda/derived-connecting-extclass reads it); the compatibility H^n(RHom(M,X)) = Hom_D(M[0],X[n]) with connecting maps was uncited -> new statement-only node lem-sc-p1-rhom-hom-derived-connecting, Step 2 rewritten to use it and to show psi∘theta^-1 is the ext-via-injective-resolution comparison; (2) C1/B3: the triangle and its third map w were uncited in item and bridge -> cite lem-sf-derived-ses-triangle; E7: item statement changed only to name w and make 'homology connecting morphism' explicit (Hom_D(M[0],-) via lem-sp-long-exact-of-triangle, xi -> w[n]∘xi), reason: pin the sign/meaning used downstream.; 3 file(s) fixed by the reviewer; 1 statement node(s) added by the reviewer (FIX more, RETURN less)"
+ }
 }
