@@ -163,7 +163,6 @@ theorem closure_range_appLE_union_range_coordRatio (S : Scheme.{u}) [IsAffine S]
       refine (homOfSections_resLE_standardOpenIso_hom (Y ↘ S) w hw i).trans ?_
       refine AffineSpace.hom_ext (by simp) fun j ↦ ?_
       rw [AffineSpace.homOfVector_appTop_coord]
-      change Y.divBasicOpen (w j.1) (w i) = _
       symm
       refine Y.eq_divBasicOpen ?_
       have h1 : ∀ x : Γ(Y, ⊤), x = 1 → (Y.basicOpen (w i)).ι.appTop x = 1 := by

@@ -155,18 +155,6 @@ theorem Modules.exists_ne_zero_of_nontrivial_H_zero {X : Scheme.{u}} (M : X.Modu
     M.val.map_id] at h1
   exact h1
 
-/-- **A morphism `𝒪_X ⟶ N` is determined by the image of `1`.** If `σ : 𝒪_X ⟶ N` sends the
-global section `1` to `0`, then `σ = 0`: every section of `𝒪_X` is a multiple of a restriction
-of `1`. -/
-theorem Modules.eq_zero_of_app_top_one {X : Scheme.{u}} {N : X.Modules} (σ : 𝟙_ X.Modules ⟶ N)
-    (h : σ.app ⊤ (1 : Γ(X, ⊤)) = 0) : σ = 0 := by
-  refine hom_ext _ _ fun U ↦ ?_
-  ext r
-  obtain ⟨a, rfl⟩ := ((isFreeGenerator_one (X := X) ⊤).map (le_top : U ≤ ⊤)).exists_smul_eq r
-  rw [Hom.app_smul]
-  erw [Hom.app_presheaf_map σ (homOfLE (le_top : U ≤ ⊤)) (1 : Γ(X, ⊤)), h]
-  simp
-
 /-- **A morphism `𝒪_X ⟶ N` which vanishes on `H⁰` is zero.** Under `H⁰(X, -) = Γ(X, -)` the
 map `H⁰(σ)` sends `1` to the image of `1` under `σ`. -/
 theorem Modules.eq_zero_of_forall_H_map_zero {X : Scheme.{u}} {N : X.Modules}

@@ -694,7 +694,8 @@ theorem Scheme.Hom.fwdDiff_iter_eulerChar_tensorObj_tensorPow [IsIntegral Y]
   let ε : (Scheme.Modules.restrictFunctor V.ι).obj (SheafOfModules.free (R := Y.ringCatSheaf) I) ≅
       (Scheme.Modules.restrictFunctor V.ι).obj E :=
     (Scheme.Modules.restrictFunctorIsoPullback V.ι).app _ ≪≫
-      Scheme.Modules.pullbackFreeIso V.ι I ≪≫ (Scheme.Modules.pullbackFreeIso (Y.homOfLE hVU) I).symm ≪≫
+      Scheme.Modules.pullbackFreeIso V.ι I ≪≫
+      (Scheme.Modules.pullbackFreeIso (Y.homOfLE hVU) I).symm ≪≫
       (Scheme.Modules.pullback (Y.homOfLE hVU)).mapIso e.symm ≪≫
       (Scheme.Modules.pullbackComp (Y.homOfLE hVU) U.ι).app E ≪≫
       (Scheme.Modules.pullbackCongr (Y.homOfLE_ι hVU)).app E ≪≫

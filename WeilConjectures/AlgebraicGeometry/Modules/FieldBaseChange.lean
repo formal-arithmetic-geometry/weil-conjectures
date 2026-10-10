@@ -227,7 +227,8 @@ theorem exists_eq_sum_smul_pullbackTopSection [CompactSpace X] (M : X.Modules) [
   -- on `φ⁻¹ V` for `V ⊆ W a`, `σ = ∑ q, β q • φ^* (F a q • e a)`
   have hσ (a : S) {V : X.Opens} (hV : V ≤ (W a).1) :
       MK.presheaf.map (homOfLE le_top : φ ⁻¹ᵁ V ⟶ ⊤).op σ =
-        ∑ q, pK (φ ⁻¹ᵁ V) (β q) • pullbackSection φ (M.presheaf.map (homOfLE hV).op (F a q • e a)) := by
+        ∑ q, pK (φ ⁻¹ᵁ V) (β q) •
+          pullbackSection φ (M.presheaf.map (homOfLE hV).op (F a q • e a)) := by
     have h1 := congrArg (MK.presheaf.map (homOfLE (φ.preimage_mono hV)).op) (hh a)
     rw [presheaf_map_homOfLE_map_homOfLE, map_smul, hhF a] at h1
     rw [← h1, map_sum, Finset.sum_smul]
