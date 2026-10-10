@@ -891,3 +891,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 05:00 L: reviewed lem-weil-pbc-sheaf-hom-finite-presentation-kernel (7 steps, no new node; statement made explicit): accepted.
 - 05:00 L: reviewed lem-weil-pbc-site-plus-injective-separated (2 steps, no new node): accepted. Stage-3 note: lem-weil-pbc-site-plus-of-separated-is-sheaf step (b) has plain TeX and a loose agreement argument.
 - 05:00 L: reviewed lem-weil-pbc-smooth-algebra-filtered-colimit-descent (4 steps, no new node): accepted.
+- 05:02 L: deleted the stale branches deliver/C1/lem-weil-pbc-z-localizations-dvr (item abandoned by C1 at 02:16, merged from G1 at 03:04; roles/remote-lead.md 3a) and deliver/F1/lem-weil-pbc-etale-stratification-local-gluing (push at 01:28 after the merge at 01:19; delivery-errors A7).
