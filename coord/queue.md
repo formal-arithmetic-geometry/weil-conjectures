@@ -1,8 +1,8 @@
 # Work queue
 
-858 items; claim with `tools/claim.py next <group> [--stage N]`.
+857 items; claim with `tools/claim.py next <group> [--stage N]`.
 
-## Stage 1: nodes to split (650)
+## Stage 1: nodes to split (647)
 
 | node | distance to a target | Lean state on the done branch |
 |---|---|---|
@@ -19,9 +19,6 @@
 | `lem-weil-pbc-coherent-formal-modules-local-exactness` | 1012 | none |
 | `lem-weil-pbc-coherent-modules-kernel-cokernel-sum` | 1012 | none |
 | `lem-weil-pbc-completion-at-quasi-finite-prime` | 1012 | none |
-| `lem-weil-pbc-constant-sheaf-open-maps-sections` | 1012 | none |
-| `lem-weil-pbc-constructible-intersection-in-constructible` | 1012 | none |
-| `lem-weil-pbc-constructible-is-retrocompact` | 1012 | none |
 | `lem-weil-pbc-cotangent-complex-symmetric-algebra` | 1012 | none |
 | `lem-weil-pbc-criterion-flatness-fibre-noetherian` | 1012 | none |
 | `lem-weil-pbc-descend-finite-locally-free` | 1012 | none |
@@ -657,7 +654,7 @@
 | `lem-pc-finite-linear-avoidance` | - | none |
 | `lem-pc-linear-pair-graded-finite` | - | none |
 
-## Stage 2: nodes to state (208)
+## Stage 2: nodes to state (210)
 
 | node | distance to Mathlib | kind |
 |---|---|---|
@@ -705,6 +702,8 @@
 | `lem-weil-pbc-completion-regular-local` | 1 | state |
 | `lem-weil-pbc-constant-group-scheme-multiplication` | 1 | state |
 | `lem-weil-pbc-constructible-in-retrocompact-open` | 1 | state |
+| `lem-weil-pbc-constructible-intersection-in-constructible` | 1 | state |
+| `lem-weil-pbc-constructible-is-retrocompact` | 1 | state |
 | `lem-weil-pbc-cover-module-exact` | 1 | state |
 | `lem-weil-pbc-derivation-extends` | 1 | state |
 | `lem-weil-pbc-directed-colimit-base-change-elementwise` | 1 | state |
@@ -870,7 +869,7 @@
 | `lem-weil-pbc-p1-field-dimension-one` | 4 | state |
 | `lem-weil-pbc-projective-space-zero-isomorphism` | 4 | state |
 
-Not open yet: 662 nodes that wait for stage 1, 498 nodes that wait for a statement dependency.
+Not open yet: 659 nodes that wait for stage 1, 499 nodes that wait for a statement dependency.
 
 ## Stage 3: modules to prove (0)
 
