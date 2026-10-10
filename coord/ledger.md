@@ -953,3 +953,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 06:15 L: reviewed and accepted lem-weil-pbc-finite-surjective-affine-target-noetherian (8 steps; +01YM devissage, 01YO, 01YP nodes; three gaps of the 01YQ proof written out).
 - 06:15 L: reviewed and accepted lem-weil-pbc-field-char-p-nilpotent-lifting (3 steps; +vector-space-projective composed leaf 09FN; square-zero case via the h1 node and 031J).
 - 06:15 L: reviewed and accepted lem-weil-pbc-finite-locally-free-degree-etale-descent (5 steps; +fpqc-descend-finite/flat/locally-finite-presentation nodes 02LA/02L2/02KY).
+- 2026-10-10, delivery of C1: lem-weil-pbc-artinian-ring-self-finite-length merged from deliver/C1/lem-weil-pbc-artinian-ring-self-finite-length (1 commit(s), 0 new node(s), spot-checked by L: L read HopkinsLevitzki.lean 135-137: isArtinianRing_iff_isFiniteLength, @[stacks 00JB], forward direction gives the node; exact match); claim closed

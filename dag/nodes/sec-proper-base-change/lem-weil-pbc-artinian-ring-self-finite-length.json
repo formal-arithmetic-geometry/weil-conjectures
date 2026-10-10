@@ -10,32 +10,46 @@
  "stmt_deps": [],
  "proof": [],
  "proof_deps": [],
- "proof_origin": null,
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Lemma Tag 00JB; Mathlib/RingTheory/HopkinsLevitzki.lean:135-137"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
    "query": "Artinian commutative ring has finite length as a module over itself",
-   "results": "isFiniteLength_iff_isNoetherian_isArtinian; IsArtinianRing.instIsNoetherianRing",
+   "results": "isFiniteLength_iff_isNoetherian_isArtinian; IsArtinianRing.instIsNoetherianRing; exact Stacks 00JB match isArtinianRing_iff_isFiniteLength at Mathlib/RingTheory/HopkinsLevitzki.lean:136-137",
    "date": "2026-10-10",
-   "verdict": "ingredients only; no exact theorem phrased for the self-module filtration"
+   "verdict": "match: isArtinianRing_iff_isFiniteLength"
   },
   {
    "tool": "leanfinder",
    "query": "finite length of an Artinian ring viewed as a module over itself",
-   "results": "isFiniteLength_iff_isNoetherian_isArtinian in Mathlib.RingTheory.FiniteLength",
+   "results": "isFiniteLength_iff_isNoetherian_isArtinian in Mathlib/RingTheory/FiniteLength.lean:73-80; exact Stacks 00JB match isArtinianRing_iff_isFiniteLength in Mathlib/RingTheory/HopkinsLevitzki.lean:136-137",
    "date": "2026-10-10",
-   "verdict": "general criterion, not an exact one-line match to the Stacks statement"
+   "verdict": "match: isArtinianRing_iff_isFiniteLength"
   },
   {
    "tool": "grep",
-   "query": "grep -n 'isFiniteLength_iff_isNoetherian_isArtinian\\\\|instIsNoetherianRing' Mathlib/RingTheory/FiniteLength.lean Mathlib/RingTheory/Noetherian/Defs.lean",
-   "results": "FiniteLength.lean contains the iff criterion; Noetherian/Defs.lean contains the Noetherian-ring instances",
+   "query": "rg -n 'isArtinianRing_iff_isFiniteLength|isFiniteLength_iff_isNoetherian_isArtinian' Mathlib/RingTheory/HopkinsLevitzki.lean Mathlib/RingTheory/FiniteLength.lean",
+   "results": "Mathlib/RingTheory/HopkinsLevitzki.lean:135-137 gives the exact equivalence with Stacks 00JB annotation; Mathlib/RingTheory/FiniteLength.lean:73-80 gives the general criterion",
    "date": "2026-10-10",
-   "verdict": "ingredients found, but no exact theorem with this statement"
+   "verdict": "match: isArtinianRing_iff_isFiniteLength"
   }
  ],
- "mathlib_match": null,
- "status": "unsplit",
+ "mathlib_match": {
+  "declaration": "isArtinianRing_iff_isFiniteLength",
+  "file": "Mathlib/RingTheory/HopkinsLevitzki.lean",
+  "how": "Mathlib/RingTheory/HopkinsLevitzki.lean:135-137 states the Stacks 00JB equivalence; apply its forward direction to an Artinian commutative ring, taking M = R = B. IsFiniteLength B B is the finite chain bound."
+ },
+ "status": "mathlib",
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "lem-weil-pbc-artinian-ring-self-finite-length",
+  "worker": "stage1",
+  "summary": "Re-searched the statement with LeanSearch, LeanFinder and Mathlib source grep. Mathlib theorem isArtinianRing_iff_isFiniteLength (HopkinsLevitzki.lean:135-137), explicitly annotated [stacks 00JB], states exactly that an Artinian commutative ring has finite length as its self-module; the forward implication specializes to B. The node is therefore a Mathlib leaf."
+ },
  "merged_into": null,
  "created": {
   "by": "worker",
@@ -56,5 +70,12 @@
  },
  "chapter": "sec-proper-base-change",
  "unit": "sk-thm-p1",
- "lead_note": "L 2026-10-10: removed the citation [def-weil-pbc-kahler-differentials] (that node defines Kähler differentials, not modules); 'R-module' needs no definition node here."
+ "lead_note": "L 2026-10-10: removed the citation [def-weil-pbc-kahler-differentials] (that node defines Kähler differentials, not modules); 'R-module' needs no definition node here.",
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "group": "C1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed by the lead of C1; spot-checked by L: L read HopkinsLevitzki.lean 135-137: isArtinianRing_iff_isFiniteLength, @[stacks 00JB], forward direction gives the node; exact match"
+ }
 }
