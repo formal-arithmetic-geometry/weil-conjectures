@@ -15,8 +15,7 @@ public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.Ten
 Let `A` be a monoidal Grothendieck abelian coefficient category and let `X` be a scheme, so
 that the derived category `D(X_proét)` of `A`-valued pro-étale sheaves on `X` carries the derived
 tensor product `- ⊗ᴸ -` of `WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.Tensor`.
-Under the same
-hypotheses `D(X_proét)` is monoidal closed
+Under the same hypotheses `D(X_proét)` is monoidal closed
 (`WeilConjectures.CategoryTheory.DerivedCategory.Monoidal.Closed`), and this file defines the
 *derived hom* of pro-étale sheaves to be the internal hom of that closed structure, i.e. the right
 adjoint of the derived tensor product.
@@ -41,8 +40,7 @@ adjoint of the derived tensor product.
 This is the pro-étale counterpart of `WeilConjectures.SixFunctors.Etale.Derived.Hom`.
 
 As in `WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.Tensor`, the monoidal
-structure on
-`Sheaf (Scheme.ProEt.topology X) A` is the global instance
+structure on `Sheaf (Scheme.ProEt.topology X) A` is the global instance
 `AlgebraicGeometry.ProEtale.sheafMonoidalCategory`. The *type* of `derivedHom` does not
 mention it.
 

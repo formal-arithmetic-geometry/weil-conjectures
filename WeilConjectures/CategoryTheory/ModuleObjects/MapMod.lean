@@ -30,6 +30,9 @@ object, so that `F.obj R` is an algebra object of `D` (`Functor.monObjObj`, a sc
 * `NatTrans.IsMonoidal.isMonHom_app`: the components of a monoidal natural transformation at an
   algebra object are morphisms of algebra objects, so that a monoidal natural transformation
   `τ : F ⟶ F'` induces the restriction of scalars `Mod.comap (τ.app R)`.
+* `Functor.mapModCompIso`: for a monoidal natural isomorphism `τ : F ⋙ G ⟶ H`, transporting
+  module objects along `F` and then `G` is transporting them along `H` and restricting scalars
+  along `τ.app R`.
 
 The second part concerns a *monoidal adjunction* `adj : F ⊣ G` in the sense of mathlib
 (`Adjunction.IsMonoidal`: `F` is strong monoidal, `G` is lax monoidal, and the two structures
@@ -365,5 +368,47 @@ lemma mapModAdjunction_counit_app_hom (N : Mod D (F.obj R)) :
   exact adj.homEquiv_symm_id N.X
 
 end Adjunction
+
+/-! ### Module objects under a composition of lax monoidal functors -/
+
+namespace Functor
+
+variable (F : C ⥤ D) (G : D ⥤ E) {H : C ⥤ E} [F.LaxMonoidal] [G.LaxMonoidal] [H.LaxMonoidal]
+  (τ : F ⋙ G ⟶ H) [NatTrans.IsMonoidal τ] (R : C) [MonObj R]
+
+/-- The component at an algebra object `R` of a monoidal natural transformation
+`τ : F ⋙ G ⟶ H`, as a morphism `G.obj (F.obj R) ⟶ H.obj R` whose source carries the algebra
+object structure transported first along `F` and then along `G`. It is an `abbrev` of
+`τ.app R`, see `Adjunction.unitAlgHom`. -/
+abbrev compAlgHom : G.obj (F.obj R) ⟶ H.obj R := τ.app R
+
+/-- The component `G.obj (F.obj R) ⟶ H.obj R` of a monoidal natural transformation
+`τ : F ⋙ G ⟶ H` is a morphism of algebra objects. -/
+instance isMonHom_compAlgHom : IsMonHom (compAlgHom F G τ R) :=
+  IsMonHom.of_eq (h₁ := (F ⋙ G).monObjObj R) (h₂ := H.monObjObj R) (τ.app R)
+    (Functor.monObjObj_comp F G R) rfl
+
+variable [IsIso τ]
+
+/-- `mapMod` of a composition: for a monoidal natural isomorphism `τ : F ⋙ G ⟶ H` of lax
+monoidal functors, transporting an `R`-module object first along `F` and then along `G` is
+transporting it along `H` and restricting scalars along `τ.app R`. -/
+@[simps!]
+noncomputable def mapModCompIso :
+    F.mapMod (R := R) ⋙ G.mapMod ≅ H.mapMod ⋙ Mod.comap (compAlgHom F G τ R) :=
+  NatIso.ofComponents (fun M ↦ Mod.isoMk (asIso (τ.app M.X)) (by
+    change (Functor.LaxMonoidal.μ G (F.obj R) (F.obj M.X) ≫
+        G.map (Functor.LaxMonoidal.μ F R M.X ≫ F.map γ[R,M.X])) ≫ τ.app M.X =
+      G.obj (F.obj R) ◁ τ.app M.X ≫ τ.app R ▷ H.obj M.X ≫ Functor.LaxMonoidal.μ H R M.X ≫
+        H.map γ[R,M.X]
+    have h₁ : (F ⋙ G).map γ[R,M.X] ≫ τ.app M.X = τ.app (R ⊗ M.X) ≫ H.map γ[R,M.X] :=
+      τ.naturality γ[R,M.X]
+    have h₂ := NatTrans.IsMonoidal.tensor (τ := τ) R M.X
+    rw [comp_μ] at h₂
+    rw [whisker_exchange_assoc, ← tensorHom_def_assoc, ← reassoc_of% h₂, ← h₁, G.map_comp,
+      Category.assoc, Category.assoc]
+    rfl)) (fun f ↦ by ext; exact τ.naturality f.hom)
+
+end Functor
 
 end CategoryTheory
