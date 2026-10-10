@@ -9,11 +9,84 @@
  },
  "stmt_deps": [
   "def-pc-scheme",
-  "pqf-def-cohomology"
+  "pqf-def-cohomology",
+  "def-weil-pbc-site-cech-complex",
+  "def-weil-sheaf-of-modules-category"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Fix an $\\mathcal O_X$-module $\\mathcal H$. Since $\\Mod(\\mathcal O_X)$ has enough injectives, choose an injective resolution $\\mathcal H\\to\\mathcal I^\\bullet$. Form the first-quadrant double complex $D_{\\mathcal H}^{p,q}=\\check{\\mathcal C}^p(\\mathcal U,\\mathcal I^q)$, with the Cech differential horizontally and the resolution differential vertically, and its total complex $T_{\\mathcal H}$. Restriction of global sections gives a cochain map $\\alpha_{\\mathcal H}:\\Gamma(X,\\mathcal I^\\bullet)\\to T_{\\mathcal H}$ in Cech degree zero; the resolution map gives a cochain map $\\beta_{\\mathcal H}:\\check{\\mathcal C}^\\bullet(\\mathcal U,\\mathcal H)\\to T_{\\mathcal H}$ in resolution degree zero. In each case the other differential of the image is zero, respectively by the sheaf gluing condition and because $\\mathcal H\\to\\mathcal I^0\\to\\mathcal I^1$ is a complex.",
+   "uses": [
+    "lem-weil-pbc-scheme-modules-enough-injectives",
+    "def-sp-injective-resolutions",
+    "def-weil-pbc-site-cech-complex",
+    "def-sp-double-complex-total",
+    "def-sc-zariski-site"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/cohomology.tex",
+    "place": "Cohomology, Lemma 01EQ (lemma-cech-cohomology), proof, construction of the double complex and maps alpha and beta"
+   }
+  },
+  {
+   "text": "For each $q$, the $q$-th horizontal row has $\\check H^p(\\mathcal U,\\mathcal I^q)=0$ for $p>0$ because $\\mathcal I^q$ is injective, while its degree-zero cohomology is $\\mathcal I^q(X)$: a Cech zero-cocycle is precisely a family of local sections agreeing on every overlap, and the sheaf axiom glues it uniquely. Apply the row-first spectral sequence of this first-quadrant double complex. Its first page is concentrated in horizontal degree zero and there is no differential entering or leaving that column on later pages; its edge map is induced by $\\alpha_{\\mathcal H}$. The spectral sequence converges to $H^*(T_{\\mathcal H})$, so $H^n(\\alpha_{\\mathcal H})$ is an isomorphism for every $n$.",
+   "uses": [
+    "lem-weil-pbc-module-injective-open-cover-cech-acyclic",
+    "def-sc-zariski-site",
+    "thm-sp-double-complex-spectral-sequences",
+    "def-sp-double-complex-total"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/cohomology.tex",
+    "place": "Cohomology, Lemma 01EQ proof, Lemma 01EP (lemma-injective-trivial-cech) and the row-acyclic total-complex argument"
+   }
+  },
+  {
+   "text": "Define $c_{\\mathcal H}$ on first cohomology as $H^1(\\alpha_{\\mathcal H})^{-1}\\circ H^1(\\beta_{\\mathcal H})$, followed by the canonical identification $H^1(\\Gamma(X,\\mathcal I^\\bullet))=H^1(X,\\mathcal H)$. The inverse exists by step 2. Both maps entering the formula are canonical in the derived category: changing the injective resolution gives the same morphism through a comparison map of resolutions, and the comparison maps induce the standard identifications for the right-derived global-sections functor.",
+   "uses": [
+    "pqf-def-cohomology",
+    "lem-weil-pbc-injective-resolution-lift-exists",
+    "lem-weil-pbc-derived-functor-map-via-lift"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/cohomology.tex",
+    "place": "Cohomology, Lemma 01EQ proof, final paragraph: beta followed by inverse alpha in the derived category"
+   }
+  },
+  {
+   "text": "Given $\\varphi:\\mathcal H\\to\\mathcal H'$, choose injective resolutions and lift $\\varphi$ to a cochain map $\\widetilde\\varphi:\\mathcal I^\\bullet\\to\\mathcal I'^\\bullet$. Termwise restriction and the Cech cochain functor produce $T(\\widetilde\\varphi):T_{\\mathcal H}\\to T_{\\mathcal H'}$. The square with the two $\\alpha$ maps commutes in every degree because restriction commutes with $\\widetilde\\varphi^q$; the square with the two $\\beta$ maps commutes because $\\widetilde\\varphi^0$ lifts $\\varphi$. Thus on $H^1$, using the formula of step 3 and the injective-resolution formula for $H^1(X,\\varphi)$, one obtains $c_{\\mathcal H'}\\circ\\check H^1(\\mathcal U,\\varphi)=H^1(X,\\varphi)\\circ c_{\\mathcal H}$. This also supplies the functoriality verification omitted in the source proof.",
+   "uses": [
+    "lem-weil-pbc-injective-resolution-lift-exists",
+    "def-weil-pbc-site-cech-complex",
+    "lem-weil-pbc-derived-functor-map-via-lift"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/cohomology.tex",
+    "place": "Cohomology, Lemma 01EQ proof, omitted functoriality check after construction of alpha and beta"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-scheme-modules-enough-injectives",
+  "def-sp-injective-resolutions",
+  "def-weil-pbc-site-cech-complex",
+  "def-sp-double-complex-total",
+  "def-sc-zariski-site",
+  "lem-weil-pbc-module-injective-open-cover-cech-acyclic",
+  "thm-sp-double-complex-spectral-sequences",
+  "pqf-def-cohomology",
+  "lem-weil-pbc-injective-resolution-lift-exists",
+  "lem-weil-pbc-derived-functor-map-via-lift"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Cohomology, Lemma 01EQ (lemma-cech-cohomology), proof, with the omitted functoriality square expanded"
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -24,7 +97,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "R-bd2",
@@ -52,5 +125,49 @@
   "slopmaster2": {
    "state": "none"
   }
+ },
+ "split_report": {
+  "date": "2026-10-11",
+  "item": "lem-sc-cech-h1-map-natural",
+  "worker": "stage1",
+  "summary": "Split Stacks Cohomology Lemma 01EQ through the injective-resolution Cech double complex. The row spectral sequence proves that global sections map quasi-isomorphically to its total complex. Expanded the source's omitted naturality check by lifting a module morphism to injective resolutions and checking the alpha and beta squares termwise. No new nodes are needed.",
+  "blueprint": "The ancestor lem-sc-pic-proper-ntorsion uses Cohomology Lemma 0B8S in its 09MS square-zero proof. Its derivation calculation applies multiplication endomorphisms to boundary Cech cocycles; these four steps establish the natural Cech-to-H1 map needed at that point.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-scheme-modules-enough-injectives",
+    "why": "General existence of injective resolutions for O_X-modules; the curve-estimate unit has no such result."
+   },
+   {
+    "node": "lem-weil-pbc-module-injective-open-cover-cech-acyclic",
+    "why": "General Cech acyclicity of an injective module for an arbitrary Zariski open cover, exactly the row input of 01EQ."
+   },
+   {
+    "node": "thm-sp-double-complex-spectral-sequences",
+    "why": "General first-quadrant double-complex spectral sequence supplies the row-acyclic total-complex comparison."
+   },
+   {
+    "node": "lem-weil-pbc-injective-resolution-lift-exists",
+    "why": "Generic comparison-map lift for morphisms between injective resolutions; required by the omitted functoriality check."
+   },
+   {
+    "node": "lem-weil-pbc-derived-functor-map-via-lift",
+    "why": "Generic identification of derived-functor maps with maps on chosen injective resolutions; required to identify H1(phi)."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-scheme-modules-enough-injectives",
+  "lem-weil-pbc-module-injective-open-cover-cech-acyclic",
+  "thm-sp-double-complex-spectral-sequences",
+  "lem-weil-pbc-injective-resolution-lift-exists",
+  "lem-weil-pbc-derived-functor-map-via-lift"
+ ],
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-chn",
+  "group": "E1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-chn (reviewer sub-agent of L); spot-checked: Source: Stacks Cohomology Lemma 01EQ (lemma-cech-cohomology, cohomology.tex 1434-1480) read in full; the item is its degree-1 case for X a scheme and a cover of X, statement unchanged (only stmt_deps added: def-weil-pbc-site-cech-complex, def-weil-sheaf-of-modules-category, both split-owned and correct). Step 1 (alpha, beta into Tot of C^p(U,I^q)): resolution from lem-weil-pbc-scheme-modules-enough-injectives + def-sp-injective-resolutions, Cech complex and its functoriality from def-weil-pbc-site-cech-complex (a)-(e), Tot and sign d_I+(-1)^p d_II from def-sp-double-complex-total; checked alpha lands in column 0 (d_I of restricted global section is 0 by presheaf identities; the text says 'gluing', harmless) and beta in row 0 (H->I^0->I^1 zero). Step 2: lem-weil-pbc-module-injective-open-cover-cech-acyclic (U=X, any index set, Zariski site intersections) gives rows exact in p>0, H^0 = I^q(X) by the sheaf axiom of def-sc-zariski-site; thm-sp-double-complex-spectral-sequences (second spectral sequence ''E_1 = H_I, finite filtrations, functorial) with comparison of the column-0 complex gives H^n(alpha) iso; the comparison of finitely filtered abutments is C2-elementary. Step 3: pqf-def-cohomology (H^1 = R^1 Gamma on O_X-modules) and lem-weil-pbc-derived-functor-map-via-lift (iota_P) define c_H; independence of resolution follows from step 4 with phi=id. Step 4: lem-weil-pbc-injective-resolution-lift-exists (phi~^0 s_H = s_H' phi) and derived-functor-map-via-lift; checked c_H' Cech(phi) = alpha'^-1 beta' Cech(phi) = alpha'^-1 T(phi~) beta = Gamma(phi~) alpha^-1 beta, identified with H^1(X,phi). Small cases: zero module, one-open cover (Cech H^1 = 0), consistent. Tool uses accepted as generic black boxes (C8): all five declared (enough injectives, injective Cech acyclicity, double-complex spectral sequences, resolution lift, derived functor map via lift); none replaces a step of the curve-estimate route. No new nodes, no leaves; no slopmaster2 attachment plausible (B10). Report: names the source and cited statements; it mentions a citations.json not in the commit (cosmetic). Start Sat Oct 10 04:12:58 PM UTC 2026, end Sat Oct 10 04:13:35 PM UTC 2026."
  }
 }
