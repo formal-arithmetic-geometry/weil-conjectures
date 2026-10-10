@@ -1,0 +1,13 @@
+# lem-weil-pbc-flat-mod-injective
+
+## Worker report
+
+Split the item in five steps following Stacks Algebra 00ME. Added the unsplit node `lem-weil-pbc-flat-tor-ideal-criterion` for Stacks 00M5; it has LeanSearch, LeanFinder and source-grep records and no asserted Mathlib match. No Lean attachment or wanted source. `review_split.py` passes. `check_dag.py` finds no cycles and reports seven pre-existing unreachable constructible nodes elsewhere.
+
+## Review by K1
+
+I read pinned Stacks `algebra.tex` Lemma 00ME (`lemma-mod-injective`) and Lemma 00M5 (`lemma-characterize-flat`), including their proofs. The item has the same local map, Noetherian target, finite module, flat module and reduction-injectivity hypotheses as 00ME; its two conclusions agree. The new node states exactly 00M5's equivalence (1) and (4) for an arbitrary commutative ring and module, with no finite-generation condition. Its references `def-weil-pbc-flat-ring-map` and `def-weil-pbc-tor-modules` define the notions it uses. It has no proof steps while unsplit and cites the 00M5 label; the three searches and a DAG search for 00M5/Tor-flatness found no duplicate node or verified Mathlib leaf. Whole-blueprint searches found no same statement; both nodes record the inherited 09Z5 ancestor and their place in that proof chain.
+
+Step 1 uses `lem-weil-pbc-flat-tensor-exact`, `lem-weil-pbc-tensor-right-exact` and `lem-weil-pbc-tensor-over-quotient-ring` for the two rows modulo successive powers. Step 2 uses flatness of modules over the field $R/\mathfrak m$ to inject the left vertical map; diagram chasing then proves each $u_n$ injective. Step 3 applies `lem-weil-pbc-krull-intersection-jacobson` to the finite $S$-module $N$ and the ideal $\mathfrak mS\subseteq\mathfrak m_S$, exactly as 00ME does. Step 4 uses the first-variable Tor long exact sequence and the new 00M5 node to reduce cokernel flatness to injectivity modulo every ideal. Step 5 checks that a proper ideal of local $R$ lies in $\mathfrak m$, so $R/I\to S/IS$ remains local and $S/IS$ Noetherian; `lem-weil-pbc-quotient-local-structure` and `lem-weil-pbc-flat-module-quotient-flat` supply the cited facts, and steps 1-3 apply to the quotient map. The case $I=R$ gives zero modules. The proof uses the cited statements themselves and reproduces 00ME's two-part argument, without replacing it by a weaker route.
+
+I checked $I=R$, $N=0$, and $\mathfrak m=0$ (a field): each case leaves the induction or the quotient criterion well-defined, with the claimed conclusion. I requested no changes after the worker's final pass. `check_dag.py` still reports the seven unrelated reachability notices and no new cycle.

@@ -14,7 +14,7 @@
     "lem-weil-pbc-etale-colimit-normal-local-domain"
    ]
   },
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "Injectivity modulo the maximal ideal into a flat module (Noetherian local)",
@@ -28,9 +28,88 @@
   "def-weil-pbc-flat-ring-map",
   "def-weil-finitely-generated-module"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Put $u_n:N/\\mathfrak m^nN\\to M/\\mathfrak m^nM$. The hypothesis is injectivity of $u_1$. For $n\\ge1$ put $Q_n=\\mathfrak m^n/\\mathfrak m^{n+1}$. Right exactness gives $N\\otimes_R Q_n\\to N/\\mathfrak m^{n+1}N\\to N/\\mathfrak m^nN\\to0$; flatness of $M$ makes the analogous sequence for $M$ exact also at the left. The first arrows are induced by multiplication, and the identifications $N\\otimes_RQ_n\\cong(N/\\mathfrak mN)\\otimes_{R/\\mathfrak m}Q_n$ and $M\\otimes_RQ_n\\cong(M/\\mathfrak mM)\\otimes_{R/\\mathfrak m}Q_n$ respect $u$.",
+   "uses": [
+    "lem-weil-pbc-flat-tensor-exact",
+    "lem-weil-pbc-tensor-right-exact",
+    "lem-weil-pbc-tensor-over-quotient-ring"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra, proof of Lemma Tag 00ME (lemma-mod-injective), first paragraph, lines 23436-23454"
+   }
+  },
+  {
+   "text": "Assume $u_n$ injective. Since $R/\\mathfrak m$ is a field, tensoring the injective $u_1$ with the $R/\\mathfrak m$-vector space $Q_n$ is injective. In the diagram of the sequences from the preceding step, if a class $x\\in N/\\mathfrak m^{n+1}N$ maps to zero under $u_{n+1}$, its image under $u_n$ is zero, so $x$ comes from $N\\otimes_RQ_n$. Its image in $M\\otimes_RQ_n$ is zero because the lower first arrow is injective; the left vertical map is injective, hence $x=0$. Thus induction gives injectivity of $u_n$ for every $n\\ge1$.",
+   "uses": [
+    "lem-weil-pbc-module-over-field-flat",
+    "lem-weil-pbc-flat-tensor-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra, proof of Lemma Tag 00ME (lemma-mod-injective), first paragraph, lines 23436-23454"
+   }
+  },
+  {
+   "text": "The ideal $\\mathfrak mS$ lies in the unique maximal ideal of $S$. Since $S$ is Noetherian and $N$ finite over $S$, Krull intersection gives $\\bigcap_{n\\ge1}(\\mathfrak mS)^nN=0$. As $(\\mathfrak mS)^nN=\\mathfrak m^nN$, an element of $\\ker u$ belongs to every $\\mathfrak m^nN$ by injectivity of $u_n$, and therefore is zero.",
+   "uses": [
+    "lem-weil-pbc-krull-intersection-jacobson"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra, proof of Lemma Tag 00ME (lemma-mod-injective), second paragraph, lines 23456-23462; Krull intersection Tag 00IP"
+   }
+  },
+  {
+   "text": "Let $C=M/u(N)$ and let $I\\subseteq R$ be any ideal. From $0\\to N\\xrightarrow{u}M\\to C\\to0$, the first-variable Tor exact sequence and flatness of $M$ identify $\\operatorname{Tor}_1^R(C,R/I)$ with the kernel of $N\\otimes_RR/I\\to M\\otimes_RR/I$, hence with the kernel of $N/IN\\to M/IM$. The flatness-Tor criterion reduces the conclusion to injectivity of these maps for all $I$.",
+   "uses": [
+    "lem-weil-pbc-tor-long-exact-first-variable",
+    "lem-weil-pbc-flat-tor-ideal-criterion",
+    "lem-weil-pbc-tensor-over-quotient-ring"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra, proof of Lemma Tag 00ME (lemma-mod-injective), third paragraph, lines 23464-23473; Tor criterion Tag 00M5 and exact sequence Tag 00M0"
+   }
+  },
+  {
+   "text": "If $I=R$, then $N/IN=M/IM=0$. Otherwise $I\\subseteq\\mathfrak m$, so $IS\\subseteq\\mathfrak m_S$. The induced map $R/I\\to S/IS$ is local, $S/IS$ is Noetherian (each ascending chain of its ideals lifts to one in $S$), and $N/IN$ is finite over $S/IS$. The $R/I$-module $M/IM$ is flat, and reduction of $N/IN\\to M/IM$ modulo $\\mathfrak m/I$ is exactly $u_1$, hence injective. Apply the injectivity argument of steps 1-3, with $R/I,S/IS,N/IN,M/IM$ in place of $R,S,N,M$, to obtain injectivity for this $I$. Step 4 now gives flatness of $C$.",
+   "uses": [
+    "lem-weil-pbc-quotient-local-structure",
+    "lem-weil-pbc-flat-module-quotient-flat",
+    "lem-weil-pbc-tensor-over-quotient-ring",
+    "lem-weil-pbc-krull-intersection-jacobson",
+    "lem-weil-pbc-flat-tor-ideal-criterion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra, proof of Lemma Tag 00ME (lemma-mod-injective), final paragraph, lines 23473-23477; case I = R made explicit"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-flat-tensor-exact",
+  "lem-weil-pbc-module-over-field-flat",
+  "lem-weil-pbc-tensor-right-exact",
+  "lem-weil-pbc-tensor-over-quotient-ring",
+  "lem-weil-pbc-krull-intersection-jacobson",
+  "lem-weil-pbc-tor-long-exact-first-variable",
+  "lem-weil-pbc-flat-tor-ideal-criterion",
+  "lem-weil-pbc-quotient-local-structure",
+  "lem-weil-pbc-flat-module-quotient-flat"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Algebra, Lemma Tag 00ME (lemma-mod-injective), proof lines 23436-23477"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -62,7 +141,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "worker",
@@ -82,5 +161,19 @@
   }
  },
  "chapter": "sec-proper-base-change",
- "unit": "sk-thm-p1"
+ "unit": "sk-thm-p1",
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "lem-weil-pbc-flat-mod-injective",
+  "worker": "stage1",
+  "summary": "Checked the unchanged statement against Stacks Algebra 00ME and wrote its two-part proof: injectivity modulo successive powers by tensor exactness, Krull intersection over S, then flatness of the cokernel by the Tor criterion and repeating the injectivity argument after reduction by each proper ideal. Added the missing 00M5 Tor criterion as an unsplit node; reused eight existing DAG nodes. The zero quotient for I=R is treated separately.",
+  "blueprint": "Serves step 4 of lem-weil-pbc-normal-constant-generic (Stacks 09Z5 normality argument) along the flat-local-depth and Serre-chain descendants. The five steps realize the local flat-module injectivity and cokernel-flatness input used on that branch. Whole-blueprint searches for 00ME and the specific flat-module injectivity statement found no duplicate."
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "group": "K1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed by the lead of K1; spot-checked by L: L: 00ME steps checked (graded induction, Krull intersection, Tor criterion 00M5 on quotients)"
+ }
 }
