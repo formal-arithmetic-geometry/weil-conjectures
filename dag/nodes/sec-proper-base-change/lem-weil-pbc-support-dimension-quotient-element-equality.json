@@ -1,0 +1,70 @@
+{
+ "id": "lem-weil-pbc-support-dimension-quotient-element-equality",
+ "kind": "statement",
+ "title": "An element of the maximal ideal outside the minimal primes of the support cuts the support dimension by exactly one",
+ "statement": "Let $(R,\\mathfrak m)$ be a Noetherian local ring [def-weil-pbc-noetherian-ring] (a Noetherian commutative ring with exactly one maximal ideal $\\mathfrak m$). For a finite $R$-module $N$ let $\\operatorname{Supp}(N)$ be the set of prime ideals $\\mathfrak p\\subset R$ with $N_{\\mathfrak p}\\neq0$, $N_{\\mathfrak p}$ the localization [def-weil-pbc-module-localization], and let $\\dim\\operatorname{Supp}(N)\\in\\{-\\infty,0,1,2,\\dots\\}$ be the supremum of the integers $n\\ge0$ for which there is a chain $\\mathfrak p_0\\subsetneq\\cdots\\subsetneq\\mathfrak p_n$ of prime ideals all lying in $\\operatorname{Supp}(N)$ ($-\\infty$ when $N=0$; $-\\infty+1=-\\infty$). Let $M$ be a finite $R$-module [def-weil-finitely-generated-module], $\\operatorname{Ann}_R(M)=\\{a\\in R: aM=0\\}$ its annihilator, and $f\\in\\mathfrak m$. Suppose that (1) $f$ lies in no prime ideal of $R$ that is minimal among the prime ideals containing $\\operatorname{Ann}_R(M)$, or (2) $f$ is a nonzerodivisor on $M$ (multiplication by $f$ on $M$ is injective). Then $\\dim\\operatorname{Supp}(M/fM)+1=\\dim\\operatorname{Supp}(M)$.",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Algebra, Lemma Tag 0B52 (lemma-one-equation-module, line 15297), last sentence (equality in the right inequality when f is in no minimal prime of the support, for example a nonzerodivisor). Tag verified in tags/tags: 0B52,algebra-lemma-one-equation-module"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-noetherian-ring",
+  "def-weil-pbc-module-localization",
+  "def-weil-finitely-generated-module"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "element of maximal ideal not in any minimal prime of support: dimension of support of M/xM plus one equals dimension of support of M",
+   "results": "Module.supportDim_quotSMulTop_succ_eq_of_notMem_minimalPrimes_of_mem_maximalIdeal, ..._of_mem_jacobson, Module.supportDim_quotSMulTop_succ_eq_supportDim, Module.supportDim_le_supportDim_quotSMulTop_succ_of_mem_jacobson, Module.supportDim_quotSMulTop_succ_eq_supportDim_mem_jacobson (Mathlib.RingTheory.KrullDimension.Regular)",
+   "date": "2026-10-10",
+   "verdict": "match: one declaration per clause"
+  },
+  {
+   "tool": "loogle",
+   "query": "Module.supportDim, QuotSMulTop, Ideal.minimalPrimes",
+   "results": "Module.supportDim_quotSMulTop_succ_le_of_notMem_minimalPrimes, Module.supportDim_quotSMulTop_succ_eq_of_notMem_minimalPrimes_of_mem_maximalIdeal, Module.supportDim_quotSMulTop_succ_eq_of_notMem_minimalPrimes_of_mem_jacobson (Mathlib.RingTheory.KrullDimension.Regular)",
+   "date": "2026-10-10",
+   "verdict": "match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rn 'stacks 0B52' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib; sed -n 160,176p ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/RingTheory/KrullDimension/Regular.lean",
+   "results": "KrullDimension/Regular.lean:141 (second inequality), :165-166 (the equality case) supportDim_quotSMulTop_succ_eq_of_notMem_minimalPrimes_of_mem_maximalIdeal, :172 supportDim_quotSMulTop_succ_eq_supportDim",
+   "date": "2026-10-10",
+   "verdict": "match"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "Module.supportDim_quotSMulTop_succ_eq_of_notMem_minimalPrimes_of_mem_maximalIdeal",
+  "file": "Mathlib/RingTheory/KrullDimension/Regular.lean",
+  "line": 166,
+  "how": "exact, one declaration per clause: clause (1) is lines 165-171, `@[stacks 0B52 \"the equality case\"] theorem supportDim_quotSMulTop_succ_eq_of_notMem_minimalPrimes_of_mem_maximalIdeal {x : R} (hn : ∀ p ∈ (annihilator R M).minimalPrimes, x ∉ p) (hx : x ∈ maximalIdeal R) : supportDim R (QuotSMulTop x M) + 1 = supportDim R M`; clause (2) is line 172-174, `theorem supportDim_quotSMulTop_succ_eq_supportDim {x : R} (reg : IsSMulRegular M x) (hx : x ∈ maximalIdeal R) : supportDim R (QuotSMulTop x M) + 1 = supportDim R M`; both in namespace Module under `variable [CommRing R] [IsNoetherianRing R] [Module.Finite R M]` (lines 28-29) and `[IsLocalRing R]` (line 137). `(annihilator R M).minimalPrimes` is the set of primes minimal over Ann(M); IsSMulRegular M x is injectivity of x on M; QuotSMulTop x M = M ⧸ x • ⊤ = M/xM (Mathlib/RingTheory/QuotSMulTop.lean:36); supportDim R M = Order.krullDim (support R M) (Mathlib/RingTheory/KrullDimension/Module.lean:32), with value ⊥ = -∞ for empty support and ⊥+1 = ⊥ in WithBot ℕ∞. Lines read with sed -n 2026-10-10."
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-cm-module-good-element-nonzerodivisor",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lead_note": "Leaf accepted by L (2026-10-10): supportDim_quotSMulTop_succ_eq_of_notMem_minimalPrimes_of_mem_maximalIdeal (KrullDimension/Regular.lean:166) and supportDim_quotSMulTop_succ_eq_supportDim (:172), one per clause, checked with sed.",
+ "reviewed": "pass (L, 2026-10-10): leaf, declaration checked by sed."
+}

@@ -1047,3 +1047,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 08:00 L: accepted lem-weil-pbc-cm-local-quotient-nonzerodivisor-cm (5 steps, no new nodes).
 - 08:02 L: accepted lem-weil-pbc-cm-local-maximal-chain-length (8 steps; new leaf noetherian-minimal-prime-associated 05BV, new unsplit nodes associated-prime-power-quotient 0CN5 and cm-local-associated-prime-minimal 0BUS).
 - 08:04 L: accepted lem-weil-pbc-cohomology-powers-ideal-rees-finite (4 steps; new unsplit node graded-finiteness-cohomology 0897 (1); tool_uses pqf-lem-coherent-ft-locnoeth recorded by L).
+- 08:06 L: accepted lem-weil-pbc-cm-module-good-element-nonzerodivisor (9 steps following the 00N5 proof; new unsplit node cm-module-good-sequence-element-nonzerodivisor 00N4; new leaves regular-sequence-permutation-noetherian-local 00LJ, support-quotient-ideal-module 00L3, support-dimension-quotient-element-equality 0B52, noetherian-local-finite-krull-dimension 00KQ).

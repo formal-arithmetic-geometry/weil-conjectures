@@ -1,0 +1,72 @@
+{
+ "id": "lem-weil-pbc-cm-module-good-sequence-element-nonzerodivisor",
+ "kind": "statement",
+ "title": "An element good with respect to a maximal regular sequence of a Cohen–Macaulay module is a nonzerodivisor",
+ "statement": "Let $(R,\\mathfrak m)$ be a Noetherian local ring [def-weil-pbc-noetherian-ring] (a Noetherian commutative ring with exactly one maximal ideal $\\mathfrak m$). For a finite $R$-module $N$ let $\\operatorname{Supp}(N)$ be the set of prime ideals $\\mathfrak p\\subset R$ with $N_{\\mathfrak p}\\neq0$, $N_{\\mathfrak p}$ the localization [def-weil-pbc-module-localization], and let $\\dim\\operatorname{Supp}(N)\\in\\{-\\infty,0,1,2,\\dots\\}$ be the supremum of the integers $n\\ge0$ for which there is a chain $\\mathfrak p_0\\subsetneq\\cdots\\subsetneq\\mathfrak p_n$ of prime ideals all lying in $\\operatorname{Supp}(N)$ ($-\\infty$ when $\\operatorname{Supp}(N)=\\emptyset$, i.e. $N=0$; the same definition for any subset of $\\operatorname{Spec}R$ in place of $\\operatorname{Supp}(N)$). For elements $a_1,\\dots,a_k\\in R$ let $V(a_1,\\dots,a_k)$ be the set of prime ideals of $R$ containing all $a_j$. Let $M\\neq0$ be a finite $R$-module [def-weil-finitely-generated-module] which is Cohen–Macaulay, i.e. $\\operatorname{depth}(M)=\\dim\\operatorname{Supp}(M)$, where $\\operatorname{depth}(M)=\\operatorname{depth}_{\\mathfrak m}(M)$ is the depth [def-weil-pbc-depth]; let $d=\\dim\\operatorname{Supp}(M)$, an integer $\\ge0$, and let $f_1,\\dots,f_d\\in\\mathfrak m$ be an $M$-regular sequence [def-weil-pbc-regular-sequence] of length $d$. Let $g\\in\\mathfrak m$ be *good* with respect to $(M,f_1,\\dots,f_d)$, that is, $\\dim\\bigl(\\operatorname{Supp}(M)\\cap V(g,f_1,\\dots,f_i)\\bigr)=d-i-1$ for every $i=0,1,\\dots,d-1$. Then (a) $g$ is a nonzerodivisor on $M$ (multiplication by $g$ on $M$ is injective), and (b) $M/gM$ is Cohen–Macaulay, $\\operatorname{depth}(M/gM)=\\dim\\operatorname{Supp}(M/gM)=d-1$, and $f_1,\\dots,f_{d-1}$ is an $M/gM$-regular sequence (a maximal one, its length being $\\operatorname{depth}(M/gM)$).",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Algebra, Lemma Tag 00N4 (lemma-good-element, line 24985), with the notation 'good with respect to (M, f_1, ..., f_d)' of the paragraph before it (lines 24971-24982) and Definition Tag 00N3 (definition-CM, line 24960). Tags verified in tags/tags: 00N4,algebra-lemma-good-element; 00N3,algebra-definition-CM"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-noetherian-ring",
+  "def-weil-pbc-module-localization",
+  "def-weil-finitely-generated-module",
+  "def-weil-pbc-depth",
+  "def-weil-pbc-regular-sequence"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Cohen-Macaulay module good element nonzerodivisor regular sequence f_1..f_d, dimension of support intersected with V(g, f_1..f_i)",
+   "results": "RingTheory.Sequence.IsRegular, IsRegular.cons', isRegular_cons_iff, IsRegular.cons, IsRegular.nontrivial (Mathlib.RingTheory.Regular.RegularSequence), Module.supportDim (KrullDimension.Module): regular sequences and support dimension only, no Cohen-Macaulay notion",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Cohen-Macaulay module, element g good with respect to a maximal regular sequence f_1,...,f_d (dim Supp M ∩ V(g,f_1..f_i) = d-i-1) is a nonzerodivisor and M/gM is Cohen-Macaulay",
+   "results": "RingTheory.Sequence.IsWeaklyRegular.regular_mod_prev, isWeaklyRegular_iff, isWeaklyRegular_iff_Fin, isRegular_iff, IsLocalRing.isRegular_iff_isWeaklyRegular_of_subset_maximalIdeal (Mathlib.RingTheory.Regular.RegularSequence): definitional facts on regular sequences only",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rn 'good\\b.*regular\\|lemma-good-element\\|00N4' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/RingTheory; grep -rln 'CohenMacaulay\\|Cohen-Macaulay\\|Module.depth\\|def depth' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/RingTheory; ls ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/RingTheory/Depth",
+   "results": "no hit for 00N4 or good elements; no Cohen-Macaulay notion and no depth definition (RingTheory/Depth/ has only Rees.lean: the Rees theorem relating Ext vanishing to regular sequences, ModuleCat.exists_isRegular_tfae, no depth)",
+   "date": "2026-10-10",
+   "verdict": "no match: Mathlib has neither depth nor Cohen-Macaulay modules"
+  },
+  {
+   "tool": "local_search",
+   "query": "CohenMacaulay (project ~/weil-conjectures-slopmaster2)",
+   "results": "none (index: unavailable, so not a proof of absence; see grep)",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-cm-module-good-element-nonzerodivisor",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1"
+}

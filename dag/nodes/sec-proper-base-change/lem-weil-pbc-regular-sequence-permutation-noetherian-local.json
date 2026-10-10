@@ -1,0 +1,77 @@
+{
+ "id": "lem-weil-pbc-regular-sequence-permutation-noetherian-local",
+ "kind": "statement",
+ "title": "A permutation of a regular sequence on a finite module over a Noetherian local ring is regular",
+ "statement": "Let $(R,\\mathfrak m)$ be a Noetherian local ring [def-weil-pbc-noetherian-ring] (a Noetherian commutative ring with exactly one maximal ideal $\\mathfrak m$). Let $M$ be a finite $R$-module [def-weil-finitely-generated-module] and $x_1,\\dots,x_c\\in R$ an $M$-regular sequence [def-weil-pbc-regular-sequence]. Then for every permutation $\\sigma$ of $\\{1,\\dots,c\\}$ the sequence $x_{\\sigma(1)},\\dots,x_{\\sigma(c)}$ is an $M$-regular sequence as well.",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Algebra, Lemma Tag 00LJ (lemma-permute-xi, line 16639). Tag verified in tags/tags: 00LJ,algebra-lemma-permute-xi"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-noetherian-ring",
+  "def-weil-finitely-generated-module",
+  "def-weil-pbc-regular-sequence"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "permutation of a regular sequence on a finite module over a Noetherian local ring is regular",
+   "results": "IsLocalRing.isRegular_of_perm, IsLocalRing.isWeaklyRegular_of_perm_of_subset_maximalIdeal, IsWeaklyRegular.prototype_perm, IsRegular.of_perm_of_subset_jacobson_annihilator, IsWeaklyRegular.of_perm_of_subset_jacobson_annihilator (Mathlib.RingTheory.Regular.RegularSequence)",
+   "date": "2026-10-10",
+   "verdict": "match: IsLocalRing.isRegular_of_perm"
+  },
+  {
+   "tool": "loogle",
+   "query": "RingTheory.Sequence.IsRegular, List.Perm, IsLocalRing",
+   "results": "IsLocalRing.isRegular_of_perm (Mathlib.RingTheory.Regular.RegularSequence): [IsLocalRing R] [IsNoetherian R M] (h1 : IsRegular M rs) (h2 : rs.Perm rs') : IsRegular M rs'",
+   "date": "2026-10-10",
+   "verdict": "match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rn 'stacks 00LJ\\|_of_perm' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/RingTheory/Regular/*.lean",
+   "results": "RegularSequence.lean:653 IsLocalRing.isWeaklyRegular_of_perm_of_subset_maximalIdeal, :660 IsLocalRing.isRegular_of_perm",
+   "date": "2026-10-10",
+   "verdict": "match"
+  },
+  {
+   "tool": "local_search",
+   "query": "IsLocalRing.isRegular_of_perm (project ~/weil-conjectures-slopmaster2)",
+   "results": "RingTheory.Sequence._root_.IsLocalRing.isRegular_of_perm in .lake/packages/mathlib/Mathlib/RingTheory/Regular/RegularSequence.lean",
+   "date": "2026-10-10",
+   "verdict": "match"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "IsLocalRing.isRegular_of_perm",
+  "file": "Mathlib/RingTheory/Regular/RegularSequence.lean",
+  "line": 660,
+  "how": "specializes in one line: lines 660-669, `lemma _root_.IsLocalRing.isRegular_of_perm [IsLocalRing R] [IsNoetherian R M] {rs rs' : List R} (h1 : IsRegular M rs) (h2 : List.Perm rs rs') : IsRegular M rs'`. `IsRegular M rs` (structure, line 146) extends `IsWeaklyRegular M rs` (line 135: each rs[i] is SMul-regular on M ⧸ (ofList (rs.take i) • ⊤), i.e. a nonzerodivisor on M/(x_1,...,x_{i-1})M, characterization isWeaklyRegular_iff_Fin lines 138-142) by `top_ne_smul : ⊤ ≠ Ideal.ofList rs • ⊤` (line 147, M/(x_1,...,x_c)M ≠ 0): exactly Stacks 00LF. The hypothesis [IsNoetherian R M] holds for M finite over the Noetherian ring R by the instance isNoetherian_of_isNoetherianRing_of_finite (Mathlib/RingTheory/Noetherian/Basic.lean:324); take rs' = the permuted list. Lines read with sed -n 2026-10-10."
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-cm-module-good-element-nonzerodivisor",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lead_note": "Leaf accepted by L (2026-10-10): IsLocalRing.isRegular_of_perm (Regular/RegularSequence.lean:660), checked with sed.",
+ "reviewed": "pass (L, 2026-10-10): leaf, declaration checked by sed."
+}
