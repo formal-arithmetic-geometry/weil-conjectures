@@ -2928,3 +2928,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 23:09 L: merged deliver/K1/lem-pc-flat-rf-open (reviewer FIX; first push; new nodes: 0)
 - 23:10 L: merged deliver/C1/lem-pc-perfect-locus (reviewer FIX; first push; new nodes: 0)
 - 23:10 L: merged deliver/M1/lem-sc-p1-hi-vanishing (reviewer PASS; first push; new nodes: 0)
+- 23:10 L: returned deliver/G1/thm-sp-spectral-object-yields (reviewer RETURN: 1. E (item statement and new node lem-sp-filtered-complex-ZB-description, 'Equivalently' clause): the image formula is f)
