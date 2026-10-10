@@ -1,0 +1,74 @@
+{
+ "id": "lem-weil-pbc-module-ses-cech-h1-surjective",
+ "kind": "statement",
+ "title": "Vanishing Cech H^1 of the kernel on a cofinal system of open coverings gives surjectivity on sections (O_X-modules)",
+ "statement": "Let $X$ be a scheme [def-pc-scheme] and let $0\\to\\mathcal F\\xrightarrow{\\iota}\\mathcal G\\xrightarrow{\\varphi}\\mathcal H\\to0$ be a short exact sequence [def-weil-pbc-exact-sequence] in the abelian category $\\Mod(\\mathcal O_X)$ of sheaves of $\\mathcal O_X$-modules on the underlying topological space of $X$ [def-weil-sheaf-of-modules-category]. Let $U\\subseteq X$ be an open subset. An *open covering* of $U$ is a family $(U_i)_{i\\in I}$ of open subsets of $U$ (any index set) with $U=\\bigcup_{i\\in I}U_i$; it is regarded as the covering $\\mathcal U=\\{U_i\\to U\\}_{i\\in I}$ of the Zariski site $X_{\\rm Zar}$, the site of open subschemes of $X$ with inclusions as morphisms and jointly surjective open families as coverings [def-sc-zariski-site], in which the fibre product $U_{i_0}\\times_U\\cdots\\times_UU_{i_p}$ is the intersection $U_{i_0\\ldots i_p}=U_{i_0}\\cap\\cdots\\cap U_{i_p}$ with its inclusions and the projection omitting the $j$-th factor is the inclusion $U_{i_0\\ldots i_{p+1}}\\subseteq U_{i_0\\ldots\\hat{i_j}\\ldots i_{p+1}}$; $\\check H^p(\\mathcal U,\\mathcal F)$ denotes the Cech cohomology [def-weil-pbc-site-cech-complex] of the underlying presheaf of abelian groups $W\\mapsto\\mathcal F(W)$ of $\\mathcal F$ on $X_{\\rm Zar}$ for $\\mathcal U$ (degree $p$ term $\\prod_{(i_0,\\ldots,i_p)\\in I^{p+1}}\\mathcal F(U_{i_0\\ldots i_p})$, alternating sum of restrictions as differential). Let $\\Sigma$ be a set of open coverings of $U$ which is cofinal (for every open covering $(V_j)_{j\\in J}$ of $U$ there is $(U_i)_{i\\in I}\\in\\Sigma$ such that every $U_i$ is contained in some $V_j$) and such that $\\check H^1(\\mathcal U,\\mathcal F)=0$ for every $\\mathcal U\\in\\Sigma$. Then $\\varphi_U:\\mathcal G(U)\\to\\mathcal H(U)$ is surjective. (Stacks states this for any ringed space.)",
+ "source": {
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Cohomology of Sheaves, Lemma 01EU (lemma-ses-cech-h1, line 1593)"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-pbc-exact-sequence",
+  "def-weil-sheaf-of-modules-category",
+  "def-sc-zariski-site",
+  "def-weil-pbc-site-cech-complex"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "short exact sequence of sheaves, vanishing first Cech cohomology of the kernel on a covering implies surjectivity on sections",
+   "results": "ShortComplex.exact_of_f_is_kernel, ShortComplex.ShortExact.mk', ShortComplex.ShortExact.exact (Mathlib.Algebra.Homology.ShortComplex.*), Sheaf.locallySurjective, Sheaf.isLocallySurjective_iff_epi' (Mathlib.CategoryTheory.Sites.EpiMono): general exactness and local surjectivity, no Cech H^1 criterion",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "if H^1 Cech of F vanishes for a cofinal system of coverings of U, then G(U) -> H(U) is surjective for 0 -> F -> G -> H -> 0 exact sheaves of modules",
+   "results": "TopCat.Presheaf.app_surjective_of_injective_of_locally_surjective (Mathlib.Topology.Sheaves.Stalks; needs injectivity on stalks, i.e. F = 0, not this), GrothendieckTopology.MayerVietorisSquare.shortComplex_exact/shortComplex_shortExact (Mathlib.CategoryTheory.Sites.MayerVietorisSquare), coherentTopology/extensiveTopology local surjectivity lemmas: none with a Cech hypothesis",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"cechComplex\"",
+   "results": "CategoryTheory.cechComplexFunctor (Mathlib.CategoryTheory.Sites.SheafCohomology.Cech) only, a definition",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rliE 'cech|čech' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib; grep -rnE '^(theorem|lemma)' Mathlib/CategoryTheory/Sites/SheafCohomology/ | grep -iE 'surj|epi|vanish|cech|isZero'",
+   "results": "Cech hits are Stone-Cech compactification files, AlgebraicGeometry/Sites/ElladicCohomology.lean and SheafCohomology/Cech.lean (definitions only, no theorem); in SheafCohomology only subsingleton_H_of_isZero (Basic.lean:161)",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-module-cech-vanishing-criterion",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "reviewed": "2026-10-10 L: statement checked against 01EU (ses of O_X-modules, cofinal set of coverings with Cech H^1 of the kernel zero gives surjectivity on sections); module version of the reviewed site node lem-weil-pbc-site-ses-cech-h1-surjective",
+ "lead_note": "split following Stacks 01EU or the site version lem-weil-pbc-site-ses-cech-h1-surjective"
+}
