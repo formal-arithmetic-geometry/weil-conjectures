@@ -15,6 +15,7 @@ public import WeilConjectures.AlgebraicGeometry.Curve.RiemannRoch
 public import WeilConjectures.AlgebraicGeometry.DualNumbers
 public import WeilConjectures.AlgebraicGeometry.EffectiveDescent
 public import WeilConjectures.AlgebraicGeometry.GroupScheme.Lie
+public import WeilConjectures.AlgebraicGeometry.GroupScheme.Separated
 public import WeilConjectures.AlgebraicGeometry.Picard.Degree
 public import WeilConjectures.AlgebraicGeometry.Picard.Scheme
 public import WeilConjectures.AlgebraicGeometry.Regular
@@ -893,24 +894,12 @@ theorem nonempty_iso_of_representableBy (d : ℤ) (P₀ Pd : Over (Spec (.of k))
   exact ⟨hP₀.uniqueUpToIso (hPd.ofIso ((sheafToPresheaf _ _).mapIso
     ((presheafToSheaf (fppfTopology.over (Spec (.of k))) (Type (u + 1))).mapIso e)).symm)⟩
 
-/-- **`Pic^g` is proper.** A `k`-scheme representing the degree-`g` part `Pic^g_{X/k}` of the
-Picard functor, `g` the genus, is proper over `k`.  The universal divisor of the Hilbert scheme
-defines `Hilb^g_{X/k} ⟶ Pic^g_{X/k}`, `D ↦ 𝒪_X(D)`; it is surjective because by Riemann–Roch
-an invertible module of degree `g` has `h⁰ ≥ χ = 1`, hence is `𝒪_X(D)` for the zero divisor `D`
-of a nonzero section.  So `Pic^g_{X/k}` is the image of the proper `Hilb^g_{X/k}` in a
-separated `k`-scheme, hence proper (Stacks `03GN`).
-
-(blueprint: `thm-sc-theorem-of-the-base`, properness of `Pic^g`) -/
-theorem isProper_of_representableBy_picardFunctorDegree_genus (P : Over (Spec (.of k)))
-    (hP : (picardFunctorDegree (X ↘ Spec (.of k)) (arithmeticGenus k X)).obj.RepresentableBy P) :
-    IsProper P.hom :=
-  sorry
-
 /-- **`Pic^g` is smooth of dimension `g`.** A `k`-scheme representing the degree-`g` part
-`Pic^g_{X/k}` of the Picard functor, `g` the genus, is smooth of relative dimension `g` over `k`.
-The subfunctor `F` of the normalized Picard functor is represented by an open subscheme `U` of
-the smooth `g`-dimensional `Hilb^g_{X/k}`, and its classes have degree `g`, so `U` is open in
-`Pic^g_{X/k}`; by the twist lemma the translates of `U` by `k`-points cover `Pic^g_{X/k}`.
+`Pic^g_{X/k}` of the Picard functor, `g` the genus, is smooth of relative dimension `g` over `k`:
+it is an open subscheme of the Picard scheme (`AlgebraicGeometry.exists_decomposition_picardFunctor`),
+which is smooth of dimension `g`, being covered by translates of an open subscheme of the smooth
+`g`-dimensional `Hilb^g_{X/k}`
+(`AlgebraicGeometry.smoothOfRelativeDimension_of_representableBy_picardFunctor`).
 
 (blueprint: `thm-sc-theorem-of-the-base`, smoothness of `Pic^g`) -/
 theorem smoothOfRelativeDimension_of_representableBy_picardFunctorDegree_genus
@@ -929,6 +918,101 @@ theorem smoothOfRelativeDimension_of_representableBy_picardFunctorDegree_genus
   rw [← Over.w e.hom, MorphismProperty.cancel_left_of_respectsIso
     (P := @SmoothOfRelativeDimension (arithmeticGenus k X))]
   exact this
+
+/-- **The Abel map `Hilb^g ⟶ Pic^g` is surjective.** For a `k`-scheme `P` representing
+`Pic^g_{X/k}`, `g` the genus, there are a proper geometrically integral `k`-scheme `H` (the
+Hilbert scheme `Hilb^g_{X/k}`) and a morphism `a : H ⟶ P` of `k`-schemes, `D ↦ 𝒪_X(D)`
+(`AlgebraicGeometry.abelMapPresheaf`), which is surjective: a point `p` of `P` gives a class of
+degree `g` over an algebraic closure `K` of `κ(p)`, which comes from `Pic (X_K)`
+(`AlgebraicGeometry.exists_toSheafify_app_eq_of_isAlgClosed`) and is effective by Riemann–Roch
+(`AlgebraicGeometry.exists_abelClass_eq`).
+
+(blueprint: `thm-sc-theorem-of-the-base`, the map `γ_g : Hilb^g ⟶ Pic^g`) -/
+theorem exists_surjective_of_representableBy_picardFunctorDegree_genus (P : Over (Spec (.of k)))
+    (hP : (picardFunctorDegree (X ↘ Spec (.of k)) (arithmeticGenus k X)).obj.RepresentableBy P) :
+    ∃ (H : Over (Spec (.of k))) (a : H ⟶ P), IsProper H.hom ∧ GeometricallyIntegral H.hom ∧
+      Surjective a.left := by
+  obtain ⟨H, q, -, hq, hqi, eH, -⟩ :=
+    hilbertPresheaf_curve_representable (X ↘ Spec (.of k)) (arithmeticGenus k X)
+  let J := fppfTopology.over (Spec (.of k))
+  let S := picardSubfunctorDegree (X ↘ Spec (.of k)) (arithmeticGenus k X)
+  let Φ := abelMapPresheaf (X ↘ Spec (.of k)) (arithmeticGenus k X)
+  -- the class of the universal divisor, and the Abel morphism `a`
+  let ab : (picardFunctorDegree (X ↘ Spec (.of k)) (arithmeticGenus k X)).obj.obj
+      (.op (Over.mk q)) :=
+    (toSheafify J S.toFunctor).app _ (Φ.app _ (ULift.up (eH.homEquiv (𝟙 _))))
+  let a : Over.mk q ⟶ P := hP.homEquiv.symm ab
+  have hab {T : Over (Spec (.of k))} (h : T ⟶ Over.mk q) :
+      hP.homEquiv (h ≫ a) = (toSheafify J S.toFunctor).app _ (Φ.app _ (ULift.up (eH.homEquiv h))) := by
+    rw [hP.homEquiv_comp, hP.homEquiv.apply_symm_apply]
+    have h₃ : eH.homEquiv h = (hilbertPresheaf _ _).map h.op (eH.homEquiv (𝟙 _)) := by
+      simpa using eH.homEquiv_comp h (𝟙 _)
+    rw [h₃]
+    refine (NatTrans.naturality_apply (toSheafify J S.toFunctor) h.op _).symm.trans ?_
+    exact congrArg _ (NatTrans.naturality_apply Φ h.op _).symm
+  refine ⟨Over.mk q, a, hq, hqi, ⟨fun p ↦ ?_⟩⟩
+  -- a geometric point `x : Spec K ⟶ P` over `p`
+  let κ := P.left.residueField p
+  let φ : CommRingCat.of k ⟶ κ := Spec.preimage (P.left.fromSpecResidueField p ≫ P.hom)
+  let K := AlgebraicClosure κ
+  letI : Algebra k K := ((algebraMap κ K).comp φ.hom).toAlgebra
+  have hK : Spec.map (CommRingCat.ofHom (algebraMap k K)) =
+      Spec.map (CommRingCat.ofHom (algebraMap κ K)) ≫ P.left.fromSpecResidueField p ≫ P.hom := by
+    rw [← Spec.map_preimage (P.left.fromSpecResidueField p ≫ P.hom), ← Spec.map_comp]
+    rfl
+  let x : Over.mk (Spec.map (CommRingCat.ofHom (algebraMap k K))) ⟶ P :=
+    Over.homMk (Spec.map (CommRingCat.ofHom (algebraMap κ K)) ≫ P.left.fromSpecResidueField p)
+      (by rw [Category.assoc]; exact hK.symm)
+  -- the class of `x` comes from an effective divisor of degree `g` on `X_K`
+  obtain ⟨L, hL⟩ := exists_toSheafify_app_eq_of_isAlgClosed S.toFunctor (hP.homEquiv x)
+  obtain ⟨D, hD⟩ := exists_abelClass_eq K L
+  let h : Over.mk (Spec.map (CommRingCat.ofHom (algebraMap k K))) ⟶ Over.mk q :=
+    eH.homEquiv.symm D
+  have hx : h ≫ a = x := by
+    refine hP.homEquiv.injective ?_
+    rw [hab, ← hL]
+    refine congrArg _ (Subtype.ext ?_)
+    rw [abelMapPresheaf_app_val]
+    simpa [h] using hD
+  obtain ⟨pt⟩ : Nonempty (Spec (.of K)) := inferInstance
+  refine ⟨h.left pt, ?_⟩
+  rw [← Scheme.Hom.comp_apply, ← Over.comp_left, hx]
+  change (P.left.fromSpecResidueField p) _ = p
+  exact Scheme.fromSpecResidueField_apply _ _
+
+/-- **`Pic^g` is proper.** A `k`-scheme `P` representing the degree-`g` part `Pic^g_{X/k}` of
+the Picard functor, `g` the genus, is proper over `k`. The Abel map `Hilb^g_{X/k} ⟶ P`,
+`D ↦ 𝒪_X(D)`, is surjective
+(`AlgebraicGeometry.exists_surjective_of_representableBy_picardFunctorDegree_genus`), so `P` is
+the image of the proper `Hilb^g_{X/k}`; it is locally of finite type, being smooth, and separated,
+being an open subscheme of the Picard scheme, a group scheme over a field. Hence `P` is proper
+(Stacks `03GN`).
+
+(blueprint: `thm-sc-theorem-of-the-base`, properness of `Pic^g`) -/
+theorem isProper_of_representableBy_picardFunctorDegree_genus (P : Over (Spec (.of k)))
+    (hP : (picardFunctorDegree (X ↘ Spec (.of k)) (arithmeticGenus k X)).obj.RepresentableBy P) :
+    IsProper P.hom := by
+  obtain ⟨H, a, hH, -, ha⟩ := exists_surjective_of_representableBy_picardFunctorDegree_genus P hP
+  -- `P` is separated: an open subscheme of the Picard scheme, a group scheme over `k`
+  obtain ⟨A, hAg, hA, -⟩ := isRepresentable_picardFunctor (X ↘ Spec (.of k))
+  obtain ⟨Pd, j, hj, -, -, -, hPd⟩ := exists_decomposition_picardFunctor A hA
+  obtain ⟨hg⟩ := hPd (arithmeticGenus k X)
+  have := hj (arithmeticGenus k X)
+  have hsep : IsSeparated P.hom := by
+    rw [← Over.w (hP.uniqueUpToIso hg).hom, MorphismProperty.cancel_left_of_respectsIso
+      (P := @IsSeparated), ← Over.w (j _)]
+    have : IsSeparated A.hom := GrpObj.isSeparated_hom A
+    have : IsSeparated (j (arithmeticGenus k X)).left := inferInstance
+    infer_instance
+  -- `P` is locally of finite type, being smooth
+  have := smoothOfRelativeDimension_of_representableBy_picardFunctorDegree_genus P hP
+  have : Smooth P.hom := SmoothOfRelativeDimension.smooth (arithmeticGenus k X) _
+  -- `P` is universally closed, being the image of the proper `H`
+  have : UniversallyClosed (a.left ≫ P.hom) := by
+    rw [Over.w a]
+    infer_instance
+  have : UniversallyClosed P.hom := .of_comp_surjective a.left P.hom
+  exact ⟨⟩
 
 /-- Two representing objects of degree components of the Picard functor are isomorphic over
 `k`: both are isomorphic to a representing object of `Pic^0_{X/k}`. -/
