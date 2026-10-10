@@ -31,9 +31,46 @@
   "def-weil-pbc-flat-ring-map",
   "def-weil-pbc-tor-modules"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Choose a free resolution $\\cdots\\to F_2\\to F_1\\to F_0\\to M\\to0$ over $R$. The complexes $F_\\bullet\\otimes_R A$ and $F_\\bullet\\otimes_R B$ compute the two Tor groups in the statement by [def-weil-pbc-tor-modules]. Put $K_A=\\ker(F_1\\otimes_R A\\to F_0\\otimes_R A)$ and define $K_B$ similarly; then $\\operatorname{Tor}_1^R(M,A)$ and $\\operatorname{Tor}_1^R(M,B)$ are the corresponding cycle modules modulo the images of $F_2$.",
+   "uses": [
+    "def-weil-pbc-tor-modules",
+    "def-weil-pbc-exact-sequence"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Put $I=\\operatorname{im}(F_1\\otimes_R A\\to F_0\\otimes_R A)$. The exact augmented sequence splits at $I$ into $0\\to K_A\\to F_1\\otimes_R A\\to I\\to0$ and $0\\to I\\to F_0\\otimes_R A\\to M\\otimes_R A\\to0$. Since $M\\otimes_R A$ is flat over $A$, [lem-weil-pbc-flat-quotient-tensor-injective] applied to the second short exact sequence makes $I\\otimes_A B\\to F_0\\otimes_R B$ injective. By [lem-weil-pbc-tensor-right-exact] applied to the first, $K_A\\otimes_A B\\to F_1\\otimes_R B\\to I\\otimes_A B\\to0$ is exact. The identifications $(F_i\\otimes_R A)\\otimes_A B\\cong F_i\\otimes_R B$ identify the latter map with the map induced by $F_1\\otimes_R B\\to F_0\\otimes_R B$; therefore the image of $K_A\\otimes_A B$ is $K_B$ and the induced map $K_A\\otimes_A B\\twoheadrightarrow K_B$ is surjective.",
+   "uses": [
+    "def-weil-pbc-flat-ring-map",
+    "def-weil-pbc-exact-sequence",
+    "lem-weil-pbc-flat-quotient-tensor-injective",
+    "lem-weil-pbc-tensor-right-exact"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "By [lem-weil-pbc-tensor-right-exact], tensoring the quotient presentation $F_2\\otimes_R A\\to K_A\\to\\operatorname{Tor}_1^R(M,A)\\to0$ with $B$ gives a quotient of $K_A\\otimes_A B$ identified with $\\operatorname{Tor}_1^R(M,A)\\otimes_A B$. The map $F_2\\otimes_R B\\to K_B$ is the base change of the corresponding map over $A$, so the surjection $K_A\\otimes_A B\\twoheadrightarrow K_B$ descends to a surjection on these quotients. The $A$-module structure on $\\operatorname{Tor}_1^R(M,A)$ is the functorial one in the second variable; on pure tensors the induced map sends $\\bar k\\otimes b$ to the class of $b\\bar k$, hence this descended map is the natural map $\\operatorname{Tor}_1^R(M,A)\\otimes_A B\\to\\operatorname{Tor}_1^R(M,B)$ from [def-weil-pbc-tor-modules]. It is therefore surjective.",
+   "uses": [
+    "def-weil-pbc-tor-modules",
+    "lem-weil-pbc-tensor-right-exact"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-tor-modules",
+  "def-weil-pbc-exact-sequence",
+  "def-weil-pbc-flat-ring-map",
+  "lem-weil-pbc-flat-quotient-tensor-injective",
+  "lem-weil-pbc-tensor-right-exact"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Algebra, Lemma Tag 00MM (lemma-surjective-on-tor-one), lines 23846--23880"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -58,7 +95,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "worker",
@@ -78,5 +115,21 @@
   }
  },
  "chapter": "sec-proper-base-change",
- "unit": "sk-thm-p1"
+ "unit": "sk-thm-p1",
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "lem-weil-pbc-tor-one-surjective-flat-middle",
+  "worker": "stage1",
+  "summary": "Repaired the Tag 00MM split by factoring the augmented resolution at its image module: flat-quotient tensor injectivity handles the second short exact sequence, tensor right exactness handles the first and the Tor quotient, and the induced quotient map is identified with the natural Tor map.",
+  "blueprint": "Realizes the 00MM proof used by step 7 of the finite-etale-lifting theorem ancestor: the free-resolution computation, the image-module tensor argument, and passage to Tor quotients.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-torone2",
+  "group": "H1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-torone2 (reviewer sub-agent of L); spot-checked: Re-push after the 13:45 UTC return; tip 4b109a12a committed 14:26:54 UTC, after the return. Return points repaired: C1/C4 step 2 now splits the augmented sequence at I=im(F_1(x)A->F_0(x)A), cites lem-weil-pbc-flat-quotient-tensor-injective (SES 0->I->F_0(x)A->M(x)A->0, M(x)A flat, N=B: I(x)B->F_0(x)B injective) and lem-weil-pbc-tensor-right-exact (on 0->K_A->F_1(x)A->I->0), both in uses and proof_deps; since F_1(x)B->F_0(x)B factors through I(x)B with the second arrow injective, K_B = ker(F_1(x)B->I(x)B) = im(K_A(x)B), checked. C2 step 3 cites right exactness for (F_2(x)A)(x)B->K_A(x)B->Tor_1(M,A)(x)B->0, the F_2 images correspond, the surjection descends; functorial A-module structure and kbar(x)b->b kbar stated. F: report rewritten for this item alone, one '## Review by H1', names Tag 00MM and per step the statements checked, edge cases B=A and M free. Statement agrees with Stacks 00MM (algebra.tex 23846, lemma-surjective-on-tor-one) hypothesis by hypothesis (R->A->B, M an R-module, M(x)_R A flat over A, natural map onto); proof follows its proof. Read the statements of all five cited nodes (flat-quotient-tensor-injective, tensor-right-exact, tor-modules, exact-sequence, flat-ring-map); each supplies what the step takes. Only split-owned fields changed (proof, proof_deps, proof_origin, status, split_report); no new nodes; tool_uses empty. 14:27-14:31 UTC"
+ }
 }
