@@ -75,7 +75,7 @@ theorem Scheme.Hom.isFinite_steinFactorizationBase {A : Type u} [CommRing A]
   -- `Γ(Spec A, p_* 𝒪_Y) = H⁰(Y, 𝒪_Y) = Γ(Y, 𝒪_Y)`, linearly over `Γ(Spec A, ⊤)`
   let φ : Γ((Scheme.Modules.higherDirectImage p 0).obj O, ⊤) →ₗ[Γ(Spec (.of A), ⊤)] Γ(Y, ⊤) :=
     { toFun x := Scheme.Modules.H.zeroLinearEquiv O (e x)
-      map_add' x y := by rw [map_add, map_add]; rfl
+      map_add' x y := by rw [map_add, map_add]
       map_smul' c x := by
         rw [e.map_smulₛₗ, LinearEquiv.map_smul]
         rfl }
