@@ -24,9 +24,92 @@
   "def-weil-sheaf-of-modules-category",
   "def-weil-pbc-site-cech-complex"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Write $\\mathrm{PMod}(\\mathcal O)$ for presheaves of $\\mathcal O$-modules. The sheafification functor is an exact left adjoint to the inclusion of sheaves, so an injective sheaf $I$ is injective in $\\mathrm{PMod}(\\mathcal O)$ by [lem-weil-pbc-ringed-site-injective-module-injective-presheaf].",
+   "uses": [
+    "def-weil-pbc-sites-and-cohomology",
+    "def-weil-sheaf-of-modules-category",
+    "def-weil-presheaf-modules-sheafification",
+    "def-sp-injective-resolutions",
+    "lem-weil-pbc-ringed-site-injective-module-injective-presheaf"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Lemma Tag 03FB and the first sentence of Lemma Tag 03FC"
+   }
+  },
+  {
+   "text": "For the covering $\\mathcal U$, form the free presheaf complex $K_\\bullet$ whose degree-$p$ term is the direct sum of the representable free module presheaves on $U_{i_0}\\times_U\\cdots\\times_UU_{i_p}$ and whose differential is the alternating sum of the face maps. By [lem-weil-pbc-ringed-site-free-cech-complex-exact], $K_\\bullet$ is exact in positive degrees. The proof is the decomposition at each object $W$ and each map $W\\to U$ into the free-module complex on the set of lifts of that map, contracted by adjoining one chosen lift; the empty lift set contributes the zero complex.",
+   "uses": [
+    "def-weil-pbc-sites-and-cohomology",
+    "def-weil-presheaf-modules-sheafification",
+    "lem-weil-pbc-ringed-site-free-cech-complex-exact",
+    "lem-weil-pbc-power-set-complex-contractible"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Lemmas Tags 03F5 and 03AT"
+   }
+  },
+  {
+   "text": "For every presheaf of $\\mathcal O$-modules $G$, the Yoneda identification $\\operatorname{Hom}(\\mathcal O_V,G)\\cong G(V)$, $\\beta\\mapsto\\beta_V(e_{\\mathrm{id}_V})$, of [lem-weil-pbc-free-yoneda-presheaf-module] (whose inverse sends $s$ to $e_\\varphi\\mapsto s|_\\varphi$) and the direct-sum/product adjunction identify the cochain complex $\\operatorname{Hom}_{\\mathrm{PMod}(\\mathcal O)}(K_\\bullet,G)$ with the Čech complex $\\check{\\mathcal C}^\\bullet(\\mathcal U,G)$: precomposition by a face map is restriction along the corresponding projection, so the differential is the alternating restriction differential.",
+   "uses": [
+    "def-weil-pbc-site-cech-complex",
+    "def-weil-presheaf-modules-sheafification",
+    "lem-weil-pbc-free-yoneda-presheaf-module"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Lemma Tag 03AS (lemma-cech-map-into) and the proof of Tag 03FC"
+   }
+  },
+  {
+   "text": "Since $I$ is injective in the presheaf category by Step 1, the contravariant functor $\\operatorname{Hom}(-,I)$ is exact. Applying it to the positive-degree exact complex $K_\\bullet$ from Step 2 gives $H^p(\\operatorname{Hom}(K_\\bullet,I))=0$ for every $p>0$; Step 3 identifies this with $\\check H^p(\\mathcal U,I)$.",
+   "uses": [
+    "lem-weil-pbc-ringed-site-injective-module-injective-presheaf",
+    "lem-weil-pbc-ringed-site-free-cech-complex-exact",
+    "def-weil-pbc-site-cech-complex",
+    "def-sp-injective-resolutions"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Lemma Tag 03FC (lemma-injective-module-trivial-cech), proof after Tags 03FB and 03F5"
+   }
+  },
+  {
+   "text": "The underlying abelian presheaf $I_{\\mathrm{ab}}$ has the same sections and restriction maps as $I$, so its Čech complex is the same complex of abelian groups. Therefore $\\check H^p(\\mathcal U,I_{\\mathrm{ab}})=0$ for every $p>0$.",
+   "uses": [
+    "def-weil-pbc-site-cech-complex",
+    "def-weil-sheaf-of-modules-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Lemma Tag 03FD, second paragraph, invoking Tag 03FC"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-sites-and-cohomology",
+  "def-sp-injective-resolutions",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-presheaf-modules-sheafification",
+  "def-weil-pbc-site-cech-complex",
+  "lem-weil-pbc-ringed-site-injective-module-injective-presheaf",
+  "lem-weil-pbc-ringed-site-free-cech-complex-exact",
+  "lem-weil-pbc-power-set-complex-contractible",
+  "lem-weil-pbc-free-yoneda-presheaf-module"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Lemma Tag 03FC (lemma-injective-module-trivial-cech), via Tags 03FB, 03F5 and 03AT"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -51,12 +134,37 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-sc-injective-module-abelian-acyclic-zariski",
   "by": "worker",
   "date": "2026-10-10"
  },
  "chapter": "sec-curve-estimates",
- "unit": "sk-prop-cd"
+ "unit": "sk-prop-cd",
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "lem-weil-pbc-ringed-site-injective-module-cech-acyclic",
+  "worker": "stage1",
+  "summary": "Split the general ringed-site injective-module Cech acyclicity lemma following Stacks Tags 03FC and 03FD. Added statement-only general ringed-site nodes for injectivity in presheaves and exactness of the free Cech presheaf complex; used the existing contracting-complex node. The five steps transfer injectivity, establish exactness, identify Hom with the Cech complex, apply exact Hom, and forget the module structure.",
+  "blueprint": "Realizes lem-sc-ga-cohomology proof, second paragraph: the acyclicity argument for an injective module sheaf.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-power-set-complex-contractible",
+    "why": "Step 2 uses its contracting homotopy for the free module complex on the set of lifts; no node in this ringed-site unit supplies that elementary set-level complex."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-power-set-complex-contractible",
+  "lem-weil-pbc-power-set-complex-contractible"
+ ],
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-rca2",
+  "group": "M1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-rca2 (reviewer sub-agent of L); spot-checked: Source: Stacks sites-cohomology Lemma 03FC (lemma-injective-module-trivial-cech) with 03FB (lemma-injective-module-injective-presheaf, read: ringed site, injective sheaf of modules injective in PMod(O), proof via exact sheafification adjoint), 03F5 (lemma-complex-tensored-still-exact, read: any category with the fibre products, O a presheaf of rings) and 03FD second paragraph; item statement unchanged, hypotheses agree (arbitrary ringed site, injective in Mod(O), any covering, underlying abelian Cech complex). New child injective-presheaf = 03FB hypothesis by hypothesis; new child free-cech-complex-exact = 03F5 (general-site version of the etale node lem-weil-pbc-free-cech-complex-exact), checked true: K_p(W) decomposes over phi:W->U into C_p(S_phi;O(W)) of lem-weil-pbc-power-set-complex-contractible, S_phi the lifts, empty S_phi gives 0. Steps: 1 carried by the injective-presheaf child; 2 by the free-cech child; 3 Yoneda + Hom(sum)=prod gives Cech complex of def-weil-pbc-site-cech-complex; 4 Hom(-,I) exact on K exact in positive degrees gives H^p=0 for p>0 (p>=1 checked against indexing); 5 elementary forgetful identification. Tool use lem-weil-pbc-power-set-complex-contractible accepted as generic set-level tool (it only illustrates the child's proof). Blueprint search: blueprint_refs search 'injective presheaf' and 'Cech injective' give nothing stating the item (lem-weil-pbc-cech-criterion is the basis-site criterion), same_as [] fine; slopmaster2 TopCat.Presheaf.exactAt_cechComplex_of_injective is for spaces, not ringed sites, no attachment. Small cases: one-object site with identity covering (K_p=O_U, differentials alternately 0 and id, exact in positive degrees), empty lift set, zero module. FIX more, RETURN less: dag/nodes/sec-curve-estimates/lem-weil-pbc-ringed-site-injective-module-cech-acyclic.json: proof[2] (Step 3) text and uses: the Yoneda identification Hom(O_V,G)=G(V) was used with no node (C1); now cites the existing leaf lem-weil-pbc-free-yoneda-presheaf-module (same O_V = O[h_V]), added to proof_deps; proof[3] (Step 4) uses: added def-sp-injective-resolutions (injectivity of I used). Start Sat Oct 10 04:06:29 PM UTC 2026, end Sat Oct 10 04:07:45 PM UTC 2026.; 1 file(s) fixed by the reviewer"
+ }
 }
