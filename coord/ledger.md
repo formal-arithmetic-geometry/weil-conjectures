@@ -1716,3 +1716,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 15:04 L: FIX more, RETURN less (human): merge tool accepts reviewer-added statement nodes (FIX+NODE), brief-review, maintainer.md (4c), STATE line
 - 15:05 L: merged deliver/E1/lem-sc-group-cd-one (reviewer PASS; after a return; new nodes: 3)
 - 15:05 L: merged deliver/J1/lem-sc-function-field-cd-one (reviewer FIX; after a return; new nodes: 3)
+- 15:05 L: returned deliver/E1/lem-pc-grothendieck-edge-cocycle (reviewer RETURN: 1. D1/D3 + C4: step 2 carries the whole content of the item (the left edge map equals the cocycle map H^n(G(F(I^.))) -> )
