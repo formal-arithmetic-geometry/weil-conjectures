@@ -183,25 +183,4 @@ instance (m : ℤ) : (tateTwist k₀ l X m).IsTriangulated := by
 
 end WeilComplex
 
-section Fourier
-
-variable {k₀ : Type u} [Field k₀] [Finite k₀] {l : ℕ} [Fact l.Prime] [Fact (ringChar k₀ ≠ l)]
-
--- TODO(unify): sk-prop-base-linear
-/-- The Fourier–Deligne transform of Weil complexes on the affine line commutes with the Tate
-twist: `FT_ψ(K(m)) ≅ FT_ψ(K)(m)` as Weil complexes, naturally in `K`. This is the Weil
-structure part of the second clause of the base linearity proposition; the underlying
-statement on étale complexes is `AlgebraicGeometry.Etale.nonempty_iso_fourierTransform_tateTwist`.
-
-The proof is the étale one, with every isomorphism used (monoidality of `pr₁^*`, the
-compact-support projection formula for `pr₂`, the pullback of the Tate sheaves) compatible with
-the Frobenius pullbacks; these compatibilities for Weil complexes are not yet available.
-(blueprint: `prop-base-linear`, clause (2)) -/
-theorem nonempty_iso_fourierTransform_tateTwist (ψ : AddChar k₀ (PadicAlgCl l)) (m : ℤ) :
-    Nonempty (WeilComplex.tateTwist k₀ l (affineLine k₀) m ⋙ fourierTransform ψ ≅
-      fourierTransform ψ ⋙ WeilComplex.tateTwist k₀ l (affineLine k₀) m) :=
-  sorry
-
-end Fourier
-
 end AlgebraicGeometry

@@ -21,6 +21,11 @@ and the pullbacks of the coordinates.
 
 - `AlgebraicGeometry.AffineSpace.zeroSectionIsoZeroLocusSubscheme`: `S ≅ V(t_i)`, compatibly
   with the zero section and the inclusion of `V(t_i)`.
+
+## Main statements
+
+- `AlgebraicGeometry.AffineSpace.dense_compl_range_zeroSection`: the complement of the zero
+  section is dense, the fibres of `𝔸(n; S) ⟶ S` being irreducible.
 -/
 
 @[expose] public section
@@ -60,5 +65,43 @@ lemma zeroSectionIsoZeroLocusSubscheme_hom_zeroLocusSubschemeι {s : Set Γ(𝔸
     (zeroSectionIsoZeroLocusSubscheme n S hs).hom ≫ 𝔸(n; S).zeroLocusSubschemeι s =
       zeroSection n S := by
   simp [zeroSectionIsoZeroLocusSubscheme]
+
+/-- The unit section of affine space misses the zero section: the coordinates are `1` along the
+former and `0` along the latter, so the basic open of a coordinate separates them. -/
+lemma oneSection_apply_notMem_range_zeroSection [Nonempty n] (y : S) :
+    oneSection n S y ∉ Set.range (zeroSection n S) := by
+  rintro ⟨y', hy'⟩
+  let i : n := Classical.arbitrary n
+  have h₁ : oneSection n S y ∈ 𝔸(n; S).basicOpen (coord S i) := by
+    change y ∈ oneSection n S ⁻¹ᵁ 𝔸(n; S).basicOpen (coord S i)
+    rw [Scheme.preimage_basicOpen_top, oneSection, homOfVector_appTop_coord]
+    simp
+  have h₀ : zeroSection n S y' ∉ 𝔸(n; S).basicOpen (coord S i) := by
+    change y' ∉ zeroSection n S ⁻¹ᵁ 𝔸(n; S).basicOpen (coord S i)
+    rw [Scheme.preimage_basicOpen_top, zeroSection_appTop_coord]
+    simp
+  exact h₀ (hy' ▸ h₁)
+
+/-- **The complement of the zero section is dense.** The zero section of `𝔸(n; S)`, `n`
+nonempty, has empty interior: the fibre of `𝔸(n; S) ⟶ S` through a point `0(y)` is irreducible,
+so its generic point specializes both to `0(y)` and to `1(y)`, and an open subset of the closed
+zero section containing `0(y)` would contain the generic point and hence `1(y)`. -/
+theorem dense_compl_range_zeroSection [Nonempty n] :
+    Dense (Set.range (zeroSection n S))ᶜ := by
+  rw [← interior_eq_empty_iff_dense_compl, Set.eq_empty_iff_forall_notMem]
+  rintro _ hx
+  obtain ⟨y, rfl⟩ := interior_subset hx
+  have hF : IsIrreducible ((𝔸(n; S) ↘ S) ⁻¹' {y}) :=
+    (𝔸(n; S) ↘ S).isIrreducible_preimage (isOpenMap_over (n := n) S) isIrreducible_singleton
+  have hg := hF.isGenericPoint_genericPoint_closure
+  have h₀ : hF.genericPoint ⤳ zeroSection n S y := hg.specializes (subset_closure (by
+    simp [← Scheme.Hom.comp_apply]))
+  have h₁ : hF.genericPoint ⤳ oneSection n S y := hg.specializes (subset_closure (by
+    simp [← Scheme.Hom.comp_apply]))
+  have hmem := h₀.mem_open isOpen_interior hx
+  have hclosed : IsClosed (Set.range (zeroSection n S)) :=
+    (zeroSection n S).isClosedEmbedding.isClosed_range
+  exact oneSection_apply_notMem_range_zeroSection n S y
+    (h₁.mem_closed hclosed (interior_subset hmem))
 
 end AlgebraicGeometry.AffineSpace

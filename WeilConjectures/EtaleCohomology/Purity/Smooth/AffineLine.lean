@@ -6,6 +6,8 @@ Authors: Claude
 module
 
 public import WeilConjectures.AlgebraicGeometry.AffineSpace.ZeroSection
+public import WeilConjectures.ConstructibleSheaf.Restriction
+public import WeilConjectures.SixFunctors.Etale.Derived.InvertibleRestriction
 public import WeilConjectures.EtaleCohomology.Purity.Smooth.KummerClass
 public import WeilConjectures.SixFunctors.Etale.Derived.Composition
 public import WeilConjectures.SixFunctors.Etale.Derived.TensorStructure
@@ -183,6 +185,7 @@ theorem nonempty_iso_rightDerivedUpperShriek_affineLineZero [HasTateTwist.IsNorm
         eqToIso (by rw [mul_one])) ≪≫ (@asIso _ _ _ _ _ hφ).symm) ≪≫
     leftDerivedUpperStarConstantComplexIso Λ e.hom⟩
 
+set_option linter.unusedSectionVars false in
 /-- Blueprint `sk-prop-a1-inv`: Weak `𝔸¹`-invariance
 
 *Uniqueness for lisse sheaf maps on `𝔸¹_Y`.* Two morphisms between finite locally constant
@@ -195,8 +198,12 @@ theorem injective_upperStar_map_of_isFiniteLocallyConstantSheaf
     (L M : Sheaf 𝔸(ULift.{u} (Fin 1); Y).smallEtaleTopology (ModuleCat.{u + 1} Λ))
     [Scheme.IsFiniteLocallyConstantSheaf L] [Scheme.IsFiniteLocallyConstantSheaf M] :
     Function.Injective fun φ : L ⟶ M ↦ ((j)^*[ModuleCat.{u + 1} Λ]).map φ :=
-  sorry
+  upperStar_map_injective_of_isLocallyConstantSheaf j (by
+    rw [hj]
+    exact AffineSpace.dense_compl_range_zeroSection _ _)
 
+set_option linter.unusedSectionVars false in
+set_option linter.unusedVariables false in
 /-- Blueprint `sk-prop-a1-inv`: Weak `𝔸¹`-invariance
 
 *Uniqueness for lisse sheaf maps on `𝔾_{m,Y}`.* Two morphisms between finite locally constant
@@ -208,9 +215,27 @@ theorem injective_upperStar_oneSection_map_of_isFiniteLocallyConstantSheaf
     (i₁ : Y ⟶ G) (hi₁ : i₁ ≫ j = AffineSpace.oneSection (ULift.{u} (Fin 1)) Y)
     (L M : Sheaf G.smallEtaleTopology (ModuleCat.{u + 1} Λ))
     [Scheme.IsFiniteLocallyConstantSheaf L] [Scheme.IsFiniteLocallyConstantSheaf M] :
-    Function.Injective fun φ : L ⟶ M ↦ ((i₁)^*[ModuleCat.{u + 1} Λ]).map φ :=
-  sorry
+    Function.Injective fun φ : L ⟶ M ↦ ((i₁)^*[ModuleCat.{u + 1} Λ]).map φ := by
+  -- `i₁` is a section of the separated `G ⟶ Y`, hence a closed immersion
+  have hp : i₁ ≫ j ≫ (𝔸(ULift.{u} (Fin 1); Y) ↘ Y) = 𝟙 Y := by
+    rw [reassoc_of% hi₁, AffineSpace.oneSection_comp_over]
+  have : IsClosedImmersion (i₁ ≫ j ≫ (𝔸(ULift.{u} (Fin 1); Y) ↘ Y)) := by
+    rw [hp]
+    infer_instance
+  have : IsClosedImmersion i₁ :=
+    IsClosedImmersion.of_comp i₁ (j ≫ (𝔸(ULift.{u} (Fin 1); Y) ↘ Y))
+  -- every fibre of `G ⟶ Y` is irreducible, being open in a fibre of `𝔸¹_Y ⟶ Y`
+  refine upperStar_map_injective_of_isPreconnected i₁ fun g ↦ ?_
+  let y := (𝔸(ULift.{u} (Fin 1); Y) ↘ Y).base (j.base g)
+  refine ⟨j.base ⁻¹' ((𝔸(ULift.{u} (Fin 1); Y) ↘ Y).base ⁻¹' {y}),
+    ((((𝔸(ULift.{u} (Fin 1); Y) ↘ Y).isIrreducible_preimage
+      (AffineSpace.isOpenMap_over (n := ULift.{u} (Fin 1)) Y)
+      isIrreducible_singleton).isPreirreducible.preimage j.isOpenEmbedding).isPreconnected),
+    rfl, i₁.base y, ?_, y, rfl⟩
+  have := congrArg (fun f : Y ⟶ Y ↦ f.base y) hp
+  simpa using this
 
+set_option linter.unusedSectionVars false in
 /-- Blueprint `sk-prop-a1-inv`: Weak `𝔸¹`-invariance
 
 *Invariance along the line.* A comparison between an invertible complex `F` on `𝔸¹_Y` and a
@@ -231,8 +256,28 @@ theorem eq_of_leftDerivedUpperStar_oneSection_eq
     (α β : F ≅ (L(((𝔸(ULift.{u} (Fin 1); Y) ↘ Y))^*[ModuleCat.{u + 1} Λ])).obj C)
     (h : (L((AffineSpace.oneSection (ULift.{u} (Fin 1)) Y)^*[ModuleCat.{u + 1} Λ])).map α.hom =
       (L((AffineSpace.oneSection (ULift.{u} (Fin 1)) Y)^*[ModuleCat.{u + 1} Λ])).map β.hom) :
-    α = β :=
-  sorry
+    α = β := by
+  let π := 𝔸(ULift.{u} (Fin 1); Y) ↘ Y
+  let i₁ := AffineSpace.oneSection (ULift.{u} (Fin 1)) Y
+  -- the unit section is a closed immersion, being a section of the separated `𝔸¹_Y ⟶ Y`
+  have hp : i₁ ≫ π = 𝟙 Y := AffineSpace.oneSection_comp_over _ _
+  have : IsClosedImmersion (i₁ ≫ π) := by
+    rw [hp]
+    infer_instance
+  have : IsClosedImmersion i₁ := IsClosedImmersion.of_comp i₁ π
+  -- the fibres of `𝔸¹_Y ⟶ Y` are irreducible and meet the unit section
+  have hi : ∀ x : 𝔸(ULift.{u} (Fin 1); Y), ∃ S : Set 𝔸(ULift.{u} (Fin 1); Y),
+      _root_.IsPreconnected S ∧ x ∈ S ∧ (S ∩ Set.range i₁.base).Nonempty := fun x ↦
+    ⟨π.base ⁻¹' {π.base x}, (π.isIrreducible_preimage
+      (AffineSpace.isOpenMap_over (n := ULift.{u} (Fin 1)) Y)
+      isIrreducible_singleton).isPreirreducible.isPreconnected, rfl, i₁.base (π.base x),
+      by simpa using congrArg (fun f : Y ⟶ Y ↦ f.base (π.base x)) hp, π.base x, rfl⟩
+  have hγ : (L((i₁)^*[ModuleCat.{u + 1} Λ])).map (α.hom ≫ β.inv) = 𝟙 _ := by
+    rw [CategoryTheory.Functor.map_comp, h, ← CategoryTheory.Functor.map_comp, β.hom_inv_id,
+      CategoryTheory.Functor.map_id]
+  have := eq_id_of_leftDerivedUpperStar_map_eq_id_of_isInvertible i₁ hi hF _ hγ
+  exact Iso.ext (by rw [← Category.comp_id α.hom, ← β.inv_hom_id, ← Category.assoc, this,
+    Category.id_comp])
 
 end
 
