@@ -36,9 +36,82 @@
   "lem-weil-pbc-nl-presentation-h1-functoriality",
   "lem-weil-pbc-jacobi-zariski-surjection-h1"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Bottom row (the Jacobi-Zariski sequence of $\\mathbf F_p\\to k\\to K$). Apply [lem-weil-pbc-jacobi-zariski-homology-sequence] with $A=\\mathbf F_p$, $B=k$, $C=K$ and $\\varphi:k\\to K$ the structure map ($K=A/\\mathfrak m$ is a $k$-algebra through $k\\to A\\to K$). Its exact sequence contains $$H_1(L_{K/k})\\xrightarrow{\\ \\partial_k\\ }K\\otimes_k\\Omega_{k/\\mathbf F_p}\\xrightarrow{\\ w_k\\ }\\Omega_{K/\\mathbf F_p},\\qquad w_k(x\\otimes\\mathrm ds)=x\\,\\mathrm d(s\\cdot1_K),$$ exact at the middle term: $\\ker w_k=\\operatorname{im}\\partial_k$. (This is the lower row of the source's diagram, read at $\\Omega_{k/\\mathbf F_p}\\otimes_kK$; the identification $K\\otimes_k\\Omega_{k/\\mathbf F_p}\\cong\\Omega_{k/\\mathbf F_p}\\otimes_kK$, $x\\otimes\\omega\\mapsto\\omega\\otimes x$, is used silently below.)",
+   "uses": [
+    "lem-weil-pbc-jacobi-zariski-homology-sequence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "More on Algebra, Proposition Tag 07E5 (proposition-characterization-geometrically-regular), proof, paragraph 'Equivalence of (3) and (4)', lines 8763-8795, first diagram (lower row) and the Jacobi-Zariski sequence it produces (Algebra, Lemma Tag 00S2)"
+   }
+  },
+  {
+   "text": "Top row is injective on the left. Apply [lem-weil-pbc-jacobi-zariski-homology-sequence] with $A=\\mathbf F_p$, $B=A$, $C=K$, $\\varphi:A\\to K$ the quotient map: the part $H_1(L_{K/\\mathbf F_p})\\xrightarrow{v_A}H_1(L_{K/A})\\xrightarrow{\\partial_A}K\\otimes_A\\Omega_{A/\\mathbf F_p}$ is exact at $H_1(L_{K/A})$, so $\\ker\\partial_A=\\operatorname{im}v_A$. The field $K$ receives the field $k$ of characteristic $p$, so $K$ has characteristic $p$ [def-pc-field-characteristic] and [lem-weil-pbc-field-char-p-h1-cotangent-vanishing] gives $H_1(L_{K/\\mathbf F_p})=0$; hence $\\partial_A$ is injective. By the case $S=B$ of [lem-weil-pbc-jacobi-zariski-connecting-map-naturality] (with $R=\\mathbf F_p$, $B=A$, $I=\\mathfrak m$, $C=K$) we have $\\delta\\circ\\theta=\\partial_A$, where $\\theta:H_1(L_{K/A})\\xrightarrow{\\sim}\\mathfrak m/\\mathfrak m^2$ is the isomorphism of [lem-weil-pbc-jacobi-zariski-surjection-h1] and $\\delta:\\mathfrak m/\\mathfrak m^2\\to K\\otimes_A\\Omega_{A/\\mathbf F_p}$, $f\\bmod\\mathfrak m^2\\mapsto1\\otimes\\mathrm df$. Since $\\theta$ is bijective and $\\partial_A$ injective, $\\delta=\\partial_A\\circ\\theta^{-1}$ is injective. (This is the upper row of the source's diagram, exact on the left because $H_1(L_{K/\\mathbf F_p})=0$ by Algebra, Proposition Tag 0322, and with first term $H_1(L_{K/A})=\\mathfrak m/\\mathfrak m^2$ by Algebra, Lemma Tag 07BP.)",
+   "uses": [
+    "lem-weil-pbc-jacobi-zariski-homology-sequence",
+    "def-pc-field-characteristic",
+    "lem-weil-pbc-field-char-p-h1-cotangent-vanishing",
+    "lem-weil-pbc-jacobi-zariski-connecting-map-naturality",
+    "lem-weil-pbc-jacobi-zariski-surjection-h1"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "More on Algebra, Proposition Tag 07E5 (proposition-characterization-geometrically-regular), proof, paragraph 'Equivalence of (3) and (4)', lines 8763-8795, upper row of the second diagram; 'We have used that H_1(L_{K/A}) = m/m^2 and that H_1(L_{K/F_p}) = 0 as K/F_p is separable'"
+   }
+  },
+  {
+   "text": "The left square commutes. Apply [lem-weil-pbc-jacobi-zariski-connecting-map-naturality] with $R=\\mathbf F_p$, $S=k$, $B=A$, $I=\\mathfrak m$, $C=K$: with $\\iota:H_1(L_{K/k})\\to H_1(L_{K/A})$ the map induced by the morphism of presentations $k[K]\\to A[K]$ over the square $k\\to A$, $\\mathrm{id}_K$ [lem-weil-pbc-nl-presentation-h1-functoriality], $\\theta$ as in step 2, $\\partial_k$ the connecting map of step 1, and $c:K\\otimes_k\\Omega_{k/\\mathbf F_p}\\to K\\otimes_A\\Omega_{A/\\mathbf F_p}$, $x\\otimes\\mathrm ds\\mapsto x\\otimes\\mathrm d(s\\cdot1_A)$, it gives $\\delta\\circ\\theta\\circ\\iota=c\\circ\\partial_k$. By the definition in the statement, $\\gamma=\\theta\\circ\\iota$ (the same $\\iota$ and the same $\\theta$ of [lem-weil-pbc-jacobi-zariski-surjection-h1]), and $c$ is $\\lambda$ after the identification of step 1 ($\\lambda(\\mathrm ds\\otimes x)=\\mathrm d(s\\cdot1_A)\\otimes x$). Hence $$\\delta\\circ\\gamma=\\lambda\\circ\\partial_k .$$",
+   "uses": [
+    "lem-weil-pbc-jacobi-zariski-connecting-map-naturality",
+    "lem-weil-pbc-nl-presentation-h1-functoriality",
+    "lem-weil-pbc-jacobi-zariski-surjection-h1"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "More on Algebra, Proposition Tag 07E5 (proposition-characterization-geometrically-regular), proof, paragraph 'Equivalence of (3) and (4)', lines 8763-8795, second diagram, left square ('to get a commutative diagram')"
+   }
+  },
+  {
+   "text": "The middle square commutes: with $w_A:K\\otimes_A\\Omega_{A/\\mathbf F_p}\\to\\Omega_{K/\\mathbf F_p}$, $x\\otimes\\mathrm da\\mapsto x\\,\\mathrm d\\bar a$, the map $w$ of [lem-weil-pbc-jacobi-zariski-homology-sequence] for $\\mathbf F_p\\to A\\to K$ (the map $u$ of the source's upper row $\\Omega_{A/\\mathbf F_p}\\otimes_AK\\to\\Omega_{K/\\mathbf F_p}$), we have $w_A\\circ\\lambda=w_k$. Both sides are $K$-linear and, on the generators $x\\otimes\\mathrm ds$ ($x\\in K$, $s\\in k$), $w_A(\\lambda(x\\otimes\\mathrm ds))=w_A(x\\otimes\\mathrm d(s\\cdot1_A))=x\\,\\mathrm d(\\overline{s\\cdot1_A})=x\\,\\mathrm d(s\\cdot1_K)=w_k(x\\otimes\\mathrm ds)$, since the image of $s\\cdot1_A$ in $K=A/\\mathfrak m$ is $s\\cdot1_K$; the elements $\\mathrm ds$ generate $\\Omega_{k/\\mathbf F_p}$ [def-weil-pbc-kahler-differentials], so these generators span $K\\otimes_k\\Omega_{k/\\mathbf F_p}$.",
+   "uses": [
+    "lem-weil-pbc-jacobi-zariski-homology-sequence",
+    "def-weil-pbc-kahler-differentials"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "More on Algebra, Proposition Tag 07E5 (proposition-characterization-geometrically-regular), proof, paragraph 'Equivalence of (3) and (4)', lines 8763-8795, second diagram, middle square (the vertical arrow $\\Omega_{K/\\mathbf F_p}\\to\\Omega_{K/\\mathbf F_p}$ is the identity)"
+   }
+  },
+  {
+   "text": "Diagram chase (direction (3) $\\Rightarrow$ (4) of 'the kernels ... have the same dimension', written without dimensions). Let $x\\in\\Omega_{k/\\mathbf F_p}\\otimes_kK$ with $\\lambda(x)=0$. By step 4, $w_k(x)=w_A(\\lambda(x))=0$, so by step 1 $x=\\partial_k(h)$ for some $h\\in H_1(L_{K/k})$. By step 3, $\\delta(\\gamma(h))=\\lambda(\\partial_k(h))=\\lambda(x)=0$; $\\delta$ is injective by step 2, so $\\gamma(h)=0$; $\\gamma$ is injective by hypothesis, so $h=0$ and $x=\\partial_k(0)=0$. Hence $\\lambda$ is injective. (The regularity of $A$ and the Noetherian hypothesis, present in (3) and (4) of 07E5, are not used.)",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "More on Algebra, Proposition Tag 07E5 (proposition-characterization-geometrically-regular), proof, paragraph 'Equivalence of (3) and (4)', lines 8763-8795, last sentence 'Thus it is clear that the kernels of H_1(L_{K/k}) -> m/m^2 and Omega_{k/F_p} (x)_k K -> Omega_{A/F_p} (x)_A K have the same dimension'"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-jacobi-zariski-homology-sequence",
+  "def-pc-field-characteristic",
+  "lem-weil-pbc-field-char-p-h1-cotangent-vanishing",
+  "lem-weil-pbc-jacobi-zariski-connecting-map-naturality",
+  "lem-weil-pbc-jacobi-zariski-surjection-h1",
+  "lem-weil-pbc-nl-presentation-h1-functoriality",
+  "def-weil-pbc-kahler-differentials"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "More on Algebra, Proposition Tag 07E5 (proposition-characterization-geometrically-regular), proof, paragraph 'Equivalence of (3) and (4)', lines 8763-8795"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -63,7 +136,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "worker",
@@ -79,5 +152,13 @@
   "slopmaster2": {
    "state": "none"
   }
- }
+ },
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "lem-weil-pbc-h1-injective-differentials-injective-char-p",
+  "worker": "stage1",
+  "summary": "Read Stacks 07E5 (more-algebra.tex lines 8697-8795), paragraph 'Equivalence of (3) and (4)', and the lemmas it cites (Algebra 00S2 Jacobi-Zariski, 07BP H_1 of a surjection, 0322 H_1(L_{K/F_p})=0); tags verified in tags/tags. The source proves only that the two kernels have the same dimension by the two Jacobi-Zariski rows; the direction needed here is written as an explicit diagram chase with no dimension count: step 1 the lower row exact at Omega_k (x) K (00S2 for F_p -> k -> K), step 2 the upper row injective on the left (00S2 for F_p -> A -> K, H_1(L_{K/F_p})=0, delta o theta = partial_A), step 3 the left square delta o gamma = lambda o partial_k (connecting-map naturality), step 4 the middle square (elementary on generators), step 5 the chase. All facts are cited existing reviewed nodes of unit sk-thm-p1; no new node was needed. Statement kept; the Noetherian hypothesis is kept as in the source though unused. No slopmaster2 Lean found (grep for the id, 07E5, geometrically regular, H1Cotangent in WeilConjectures).",
+  "blueprint": "The steps realize, in the blueprint ancestor thm-weil-pbc-finite-etale-lifting, the place of from.place: step 7 of its split (Lemma 0GS2 essential surjectivity), the residue-field differential injection in the 07NQ formal-smoothness input, characteristic-p case: passage from injectivity of H_1(L_{K/k}) -> m/m^2 to injectivity of Omega_{k/F_p} (x) K -> Omega_{C/F_p} (x) K (07E5 'Equivalence of (3) and (4)', used by 07EL (2) => (5)); steps 1-2 are the two rows, steps 3-4 the commuting squares, step 5 the chase."
+ },
+ "reviewed": "2026-10-10 L: 5 steps, the 07E5 (3) => (4) chase written out with the Jacobi–Zariski sequences for F_p -> k -> K and F_p -> A -> K, H_1(L_{K/F_p}) = 0, the naturality of the connecting maps; 0 new nodes"
 }
