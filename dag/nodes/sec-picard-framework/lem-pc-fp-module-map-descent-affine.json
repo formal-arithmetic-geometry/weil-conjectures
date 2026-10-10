@@ -20,9 +20,49 @@
   "def-sc-finitely-presented-module",
   "def-weil-pbc-category-colimit"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Choose a finite presentation A^{\\oplus m} \\to A^{\\oplus n} \\to M \\to 0. The matrix entries have representatives in some A_i by the elementwise description of the filtered colimit. Let M_i be the cokernel of the represented matrix over A_i. After tensoring its presentation with A, the matrix is the original one, so M_i\\otimes_{A_i}A is canonically isomorphic to M.",
+   "uses": [
+    "lem-pc-filtered-colimit-commrings-elementwise"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra, Lemma algebra-lemma-colimit-category-fp-modules, Tag 05N7, proof of (1)"
+   }
+  },
+  {
+   "text": "Fix a stage i and finitely presented A_i-modules M_i,N_i, with presentations A_i^r \\xrightarrow{R_M} A_i^s \\to M_i \\to 0 and A_i^p \\xrightarrow{R_N} A_i^q \\to N_i \\to 0. For an A-linear map M_i\\otimes_{A_i}A \\to N_i\\otimes_{A_i}A, choose coefficient vectors in A^q for the images of the s generators of M_i and lift their finitely many entries to one later stage A_j by clause (1) of [lem-pc-filtered-colimit-commrings-elementwise]. For each of the finitely many columns of R_M, its image under the proposed map is zero in (N_i\\otimes_{A_i}A)=\\operatorname{coker}(R_N\\otimes A); therefore its coefficient vector d_t in A^q is in the image of R_N\\otimes A, so choose b_t\\in A^p with d_t=(R_N\\otimes A)b_t. Lift all entries of the finitely many b_t to a common later stage j by clause (1), and let d_t^{(j)}\\in A_j^q be the combination of the lifted generator vectors with coefficients the t-th column of R_M, so that d_t^{(j)} maps to d_t. Each coordinate of d_t^{(j)}-R_Nb_t (lifted b_t) then maps to zero in A, so clause (2), applied to comparison with 0 and then combined by directedness, makes all these finitely many coordinate equalities hold at one further stage j'. The lifted generator vectors therefore kill the relations R_M there and define an A_{j'}-linear map M_i\\otimes_{A_i}A_{j'}\\to N_i\\otimes_{A_i}A_{j'} whose base change is the given map.",
+   "uses": [
+    "lem-pc-filtered-colimit-commrings-elementwise"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra, Lemma algebra-lemma-colimit-category-fp-modules, Tag 05N7, proof of (2), via Lemma module-map-property-in-colimit"
+   }
+  },
+  {
+   "text": "For two A_i-linear maps M_i \\rightrightarrows N_i whose base changes to A are equal, use a finite presentation A_i^p \\xrightarrow{R_N} A_i^q \\to N_i\\to0 and compare their values on finite generators of M_i. For each generator, the difference \\varphi(x_k)-\\psi(x_k)\\in N_i is the image of a coefficient vector c_k\\in A_i^q, and the class of the image of c_k in A^q is zero in (N_i\\otimes_{A_i}A)=\\operatorname{coker}(R_N\\otimes A); hence choose b_k\\in A^p with (image of c_k)=(R_N\\otimes A)b_k. Lift all entries of the finitely many b_k to one stage by clause (1) of [lem-pc-filtered-colimit-commrings-elementwise]. Each coordinate of c_k-R_Nb_k (c_k pushed to that stage) maps to zero in A, and clause (2), followed by a common directed enlargement, makes all these coordinate equalities hold at one later stage. The differences then vanish in N_i\\otimes_{A_i}A_{j'} on generators, j' that stage, so the two maps become equal after passage to that stage.",
+   "uses": [
+    "lem-pc-filtered-colimit-commrings-elementwise"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra, Lemma algebra-lemma-colimit-category-fp-modules, Tag 05N7, proof of (3), via Lemma module-map-property-in-colimit"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-filtered-colimit-commrings-elementwise"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Algebra, Lemma algebra-lemma-colimit-category-fp-modules, Tag 05N7"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -47,12 +87,36 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-pc-fp-module-map-descent",
   "by": "worker",
   "date": "2026-10-10"
  },
  "chapter": "sec-picard-framework",
- "unit": "sk-thm-picard-semicon"
+ "unit": "sk-thm-picard-semicon",
+ "split_report": {
+  "date": "2026-10-11",
+  "item": "lem-pc-fp-module-map-descent-affine",
+  "worker": "stage1",
+  "summary": "Read Algebra Lemma 05N7 and its use in Limits Lemma 01ZR. The imported item is exactly the affine ring theorem, so I split its proof into the finite-presentation matrix construction, descent of a map using finitely many generator images and relations, and eventual equality of two maps using finitely many coefficient equations. All three steps use the existing elementwise filtered-colimit statement; no new node was created.",
+  "blueprint": "Realizes the affine case of the parent Noetherian-approximation step: finite-presentation module objects, maps, and equalities descend along the directed ring colimit.",
+  "tool_uses": [
+   {
+    "node": "lem-pc-filtered-colimit-commrings-elementwise",
+    "why": "Its element-representation and eventual-equality clauses supply the finite coefficient lifting used in all three matrix arguments."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pc-filtered-colimit-commrings-elementwise"
+ ],
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-fma2944",
+  "group": "F1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-fma2944 (reviewer sub-agent of L); spot-checked: Both 22:39 return points repaired: Step 2 (E5) and Step 3 (E3) now use the target presentation R_N, witnesses b with (coefficient vector)=R_N b over A, lifted by clause (1) and equalized at a later stage by clause (2) of lem-pc-filtered-colimit-commrings-elementwise (C1 ok, Tag 05N7 via 00QO-type argument). C4: clauses (objects/maps/equality) give K1 lem-pc-affine-perfect-colimit-descent (summand splitting, differentials, d^2=0), F1 lem-pc-fp-module-map-descent (affine case and Zariski gluing), H1 lem-pc-affine-perfect-hom-colimit (degreewise Hom colimit, cycles) exactly what they use; J1 lem-pc-fp-relation-descent does not cite this node. No new nodes; no duplicate (lem-pc-noetherian-approximation-data is different). created.item = parent item is correct (second reading's claimed edit not present, harmless). FIX more, RETURN less: precision only, Step 2 names the stage vector d_t^{(j)} whose coordinates are compared and the final stage j'; Step 3 takes c_k in A_i^q (difference lives in N_i) and compares its pushforward with R_N b_k.; 1 file(s) fixed by the reviewer"
+ }
 }

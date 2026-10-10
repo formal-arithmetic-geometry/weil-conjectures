@@ -2886,3 +2886,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 22:54 UTC L attached lem-weil-separably-closed-geometrically-connected (slopmaster2 of_connectedSpace_of_isSepClosed; converse Mathlib connectedSpace_of_subsingleton in mathlib_match) after R-sgc2938; M1 delivery returned as unneeded
 - 22:54 L: merged deliver/K1/lem-weil-geometrically-connected-check-after-extension (reviewer FIX; first push; new nodes: 1)
 - 22:54 L: merged deliver/M1/lemma-nagata-morphism-descends (reviewer FIX; after a return; new nodes: 0)
+- 22:56 L: merged deliver/F1/lem-pc-fp-module-map-descent-affine (reviewer FIX; after a return; new nodes: 0)
