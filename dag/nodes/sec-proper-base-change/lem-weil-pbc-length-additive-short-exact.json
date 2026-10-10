@@ -1,0 +1,87 @@
+{
+ "id": "lem-weil-pbc-length-additive-short-exact",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-normal-constant-generic",
+   "place": "step 4 of its split, through the proof of Tate's lemma 032P and the proof of 031F (lemma-finite-extension-residue-fields-dimension-1), which invokes lemma-finite-length (00PE); the additivity of length used in the finite case of 00PE (the filtration M ⊃ xM ⊃ x^2M ⊃ ... and the sandwich x^{n+c}R^{⊕r} ⊂ x^nM ⊂ x^nR^{⊕r})",
+   "via": [
+    "lem-weil-pbc-dim-one-submodule-quotient-finite-length",
+    "lem-weil-pbc-dim-one-residue-field-extensions-finite",
+    "lem-weil-pbc-tate-n2-complete-principal",
+    "lem-weil-pbc-complete-local-nagata",
+    "lem-weil-pbc-analytically-unramified-n1",
+    "lem-weil-pbc-normal-nagata-monogenic-n1",
+    "lem-weil-pbc-nagata-universally-japanese",
+    "lem-weil-pbc-finite-type-z-domain-normalization-finite",
+    "lem-weil-pbc-smooth-over-normal-ring-normal",
+    "lem-weil-pbc-etale-over-normal-ring-normal",
+    "lem-weil-pbc-etale-colimit-normal-local-domain"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Length is additive in short exact sequences",
+ "statement": "Let $R$ be a ring and let $0\\to M'\\xrightarrow{f}M\\xrightarrow{g}M''\\to0$ be a short exact sequence of $R$-modules ($f$ injective, $g$ surjective, $\\operatorname{Im}f=\\operatorname{Ker}g$). Then $\\mathrm{length}_R(M)=\\mathrm{length}_R(M')+\\mathrm{length}_R(M'')$ in $\\{0,1,2,\\dots\\}\\cup\\{\\infty\\}$ (with $n+\\infty=\\infty+n=\\infty$), where $\\mathrm{length}_R$ is the length of [def-weil-pbc-module-length]. In particular $M$ has finite length if and only if $M'$ and $M''$ both do.",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Algebra, Lemma Tag 00IV (lemma-length-additive, lines 12392-12416), statement"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-module-length"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "length of module is additive in short exact sequences",
+   "results": "service error: HTTP 500 Internal Server Error from leansearch.net (via lean_leansearch and via a direct POST to https://leansearch.net/search), twice",
+   "date": "2026-10-10",
+   "verdict": "no result (service down); verdict taken from the other two kinds"
+  },
+  {
+   "tool": "loogle",
+   "query": "Module.length _ _ = Module.length _ _ + Module.length _ _",
+   "results": "Module.length_prod, Module.length_eq_add_of_exact (Mathlib.RingTheory.Length), CovBy.length_restrictScalars, CovBy.length_baseChange (Mathlib.RingTheory.LocalRing.Length)",
+   "date": "2026-10-10",
+   "verdict": "match: Module.length_eq_add_of_exact"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rn 'length_eq_add_of_exact' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib",
+   "results": "RingTheory/Length.lean:22 (docstring 'Length is additive in exact sequences'), :171 the lemma, used at :199, :205, :213",
+   "date": "2026-10-10",
+   "verdict": "match: Module.length_eq_add_of_exact, Mathlib/RingTheory/Length.lean:171-172"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "Module.length_eq_add_of_exact",
+  "file": "Mathlib/RingTheory/Length.lean",
+  "line": 171,
+  "how": "exact: Length.lean:164-172 (read with sed -n 160,200p): for [Ring R], f : N →ₗ[R] M, g : M →ₗ[R] P with hf : Function.Injective f, hg : Function.Surjective g, H : Function.Exact f g, Module.length R M = Module.length R N + Module.length R P in ℕ∞ (where n + ⊤ = ⊤); Module.length is def-weil-pbc-module-length's match (Length.lean:32). The 'in particular' is the same equation read in ℕ∞ (a sum is ≠ ⊤ iff both summands are)."
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-dim-one-submodule-quotient-finite-length",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1"
+}

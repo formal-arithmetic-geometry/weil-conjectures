@@ -1,0 +1,96 @@
+{
+ "id": "lem-weil-pbc-dim-le-one-principal-quotient-finite-length",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-normal-constant-generic",
+   "place": "step 4 of its split, through the proof of Tate's lemma 032P and the proof of 031F (lemma-finite-extension-residue-fields-dimension-1), which invokes lemma-finite-length (00PE); the first paragraph of the proof of 00PE: 'we have dim(R/xR)=0, and hence R/xR has finite length'",
+   "via": [
+    "lem-weil-pbc-dim-one-submodule-quotient-finite-length",
+    "lem-weil-pbc-dim-one-residue-field-extensions-finite",
+    "lem-weil-pbc-tate-n2-complete-principal",
+    "lem-weil-pbc-complete-local-nagata",
+    "lem-weil-pbc-analytically-unramified-n1",
+    "lem-weil-pbc-normal-nagata-monogenic-n1",
+    "lem-weil-pbc-nagata-universally-japanese",
+    "lem-weil-pbc-finite-type-z-domain-normalization-finite",
+    "lem-weil-pbc-smooth-over-normal-ring-normal",
+    "lem-weil-pbc-etale-over-normal-ring-normal",
+    "lem-weil-pbc-etale-colimit-normal-local-domain"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Quotient of a Noetherian ring of dimension at most one by a nonzerodivisor has finite length",
+ "statement": "Let $R$ be a Noetherian ring [def-weil-pbc-noetherian-ring] (commutative) of Krull dimension $\\dim R\\le1$ [def-weil-pbc-krull-dimension-ring], and let $x\\in R$ be a nonzerodivisor ($xa=0$ implies $a=0$ for $a\\in R$). Then the $R$-module $R/xR$ has finite length: $\\mathrm{length}_R(R/xR)<\\infty$ [def-weil-pbc-module-length].",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Algebra, Lemma Tag 00PE (lemma-finite-length, lines 29171-29235), proof, first paragraph: 'Since x is not zero and R is a domain we have dim(R/xR)=0, and hence R/xR has finite length' (with Lemma Tag 00KH, lemma-Noetherian-dimension-0, lines 14362-14370)"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-noetherian-ring",
+  "def-weil-pbc-krull-dimension-ring",
+  "def-weil-pbc-module-length"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "quotient of Noetherian ring of Krull dimension at most one by a non zero divisor has finite length",
+   "results": "service error: HTTP 500 Internal Server Error from leansearch.net (lean_leansearch and direct POST)",
+   "date": "2026-10-10",
+   "verdict": "no result (service down); verdict taken from the other two kinds"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "R Noetherian of dimension one, x nonzerodivisor, then R/(x) is a module of finite length",
+   "results": "isFiniteLength_quotient_span_singleton (Mathlib.RingTheory.OrderOfVanishing), ringKrullDim_quotient_span_singleton_succ_eq_ringKrullDim_of_mem_nonZeroDivisors, ringKrullDim_quotient_span_singleton_succ_eq_ringKrullDim, ringKrullDim_le_ringKrullDim_quotSMulTop_succ (Mathlib.RingTheory.KrullDimension.Regular)",
+   "date": "2026-10-10",
+   "verdict": "match: isFiniteLength_quotient_span_singleton"
+  },
+  {
+   "tool": "loogle",
+   "query": "IsFiniteLength _ (_ ⧸ Ideal.span {_})",
+   "results": "isFiniteLength_quotient_span_singleton (Mathlib.RingTheory.OrderOfVanishing.Basic)",
+   "date": "2026-10-10",
+   "verdict": "match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rn 'isFiniteLength_quotient_span_singleton' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib",
+   "results": "RingTheory/OrderOfVanishing/Basic.lean:292-294 (theorem), used at :308",
+   "date": "2026-10-10",
+   "verdict": "match"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "isFiniteLength_quotient_span_singleton",
+  "file": "Mathlib/RingTheory/OrderOfVanishing/Basic.lean",
+  "line": 292,
+  "how": "exact: OrderOfVanishing/Basic.lean:288-294 (read with sed -n 280,300p; R a CommRing by the variable at :45): [IsNoetherianRing R] [Ring.KrullDimLE 1 R] {x : R} (hx : x ∈ nonZeroDivisors R) : IsFiniteLength R (R ⧸ Ideal.span {x}); Ring.KrullDimLE 1 R is dim R ≤ 1, and IsFiniteLength R N is Module.length R N ≠ ⊤ by Module.length_ne_top_iff (Mathlib/RingTheory/Length.lean:94)."
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-dim-one-submodule-quotient-finite-length",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1"
+}
