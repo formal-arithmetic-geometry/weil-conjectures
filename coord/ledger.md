@@ -1708,3 +1708,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 15:01 L: merged deliver/M1/lem-pc-zero-support-finite-scheme (reviewer FIX; first push; new nodes: 1)
 - 15:01 L: lem-sc-closed-affine-union-affine accepted (5 steps per 09NL via 05YU, 0 new nodes; 1 tool use copied)
 - 15:01 L: merged deliver/E1/lem-sc-etale-qcoherent-descent-fpqc-sections (reviewer FIX; first push; new nodes: 0)
+- 15:01 L: returned deliver/M1/thm-sc-p1-duality (reviewer RETURN: 1. B2/E5: lem-sc-p1-duality-pairing-naturality: the statement is not self-contained and, as written, does not make sense)
