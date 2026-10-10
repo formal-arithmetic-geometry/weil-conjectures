@@ -24,9 +24,79 @@
   "lem-weil-pbc-scheme-coproduct-family",
   "def-weil-open-immersion"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "*Step 1 (components).* By [lem-weil-pbc-scheme-coproduct-family], each $\\iota_e:U\\to U_E$ is an open immersion [def-weil-open-immersion], its image $V_e$ is an open subscheme isomorphic to $U$, and the $V_e$ are disjoint and cover $U_E$. In particular $U_E$ is empty when $E$ is empty. The coproduct universal property gives $\\pi:U_E\\to U$ from the identity maps on the summands, with $\\pi\\circ\\iota_e=\\mathrm{id}_U$.",
+   "uses": [
+    "lem-weil-pbc-scheme-coproduct-family",
+    "def-weil-open-immersion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Schemes, Lemma Tag 01JB (lemma-glue), first mapping property and the disjoint glueing data $U_{ee'}=\\varnothing$ for $e\\ne e'$"
+   }
+  },
+  {
+   "text": "*Step 2 (preimage pieces).* Given $f:W\\to U_E$ over $U$, set $W_e=f^{-1}(V_e)$. Each $W_e$ is open by continuity; the disjointness and covering of the $V_e$ from [lem-weil-pbc-scheme-coproduct-family] imply that the $W_e$ are pairwise disjoint and cover $W$. Also $W\\setminus W_e=\\bigcup_{e'\\ne e}W_{e'}$ is open, so $W_e$ is closed as well. The inclusion $j_e:W_e\\to W$ is the corresponding open immersion [def-weil-open-immersion].",
+   "uses": [
+    "lem-weil-pbc-scheme-coproduct-family",
+    "def-weil-open-immersion"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Schemes, Lemma Tag 01JB (lemma-glue), second mapping property, the preimages $V_i=g^{-1}(U_i)$"
+   }
+  },
+  {
+   "text": "*Step 3 (restriction is forced).* Since $(f\\circ j_e)(W_e)\\subseteq V_e$, [lem-weil-pbc-morphism-factors-through-open-subscheme] factors $f\\circ j_e$ uniquely through $V_e$. The open immersion $\\iota_e:U\\to U_E$ identifies $U$ with $V_e$ by [lem-weil-pbc-scheme-coproduct-family], so write the factorization as $f\\circ j_e=\\iota_e\\circ h_e$ for a unique $h_e:W_e\\to U$. Composing with $\\pi$ yields $h_e=\\pi\\circ f\\circ j_e=s\\circ j_e$. Thus $f\\circ j_e=\\iota_e\\circ s\\circ j_e$ on every piece.",
+   "uses": [
+    "lem-weil-pbc-morphism-factors-through-open-subscheme",
+    "lem-weil-pbc-scheme-coproduct-family"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Schemes, Lemma Tag 01JB (lemma-glue), second mapping property, the local maps $g_i$; Lemma Tag 01HI (lemma-restrict-map-to-opens)"
+   }
+  },
+  {
+   "text": "*Step 4 (gluing and inverse).* Conversely, let $(W_e)_{e\\in E}$ be an indexed clopen decomposition of $W$. On the open subscheme $W_e$ take $f_e=\\iota_e\\circ s\\circ j_e:W_e\\to U_E$. Distinct pieces have empty intersections, so the $f_e$ agree there; [lem-weil-pbc-scheme-morphism-gluing] gives a unique $f:W\\to U_E$ restricting to $f_e$ for all $e$. On every $W_e$, $\\pi\\circ f=\\pi\\circ\\iota_e\\circ s\\circ j_e=s\\circ j_e$, hence $\\pi\\circ f=s$ by uniqueness of gluing. Since $f(W_e)\\subseteq V_e$, while $f(W_{e'})\\subseteq V_{e'}$ is disjoint from $V_e$ for $e'\\ne e$, the covering by the $W_{e'}$ shows $f^{-1}(V_e)=W_e$. Starting from an $f$, Step 3 identifies all its restrictions with these same $f_e$, so uniqueness of gluing recovers $f$. The two constructions are inverse bijections.",
+   "uses": [
+    "lem-weil-pbc-scheme-morphism-gluing",
+    "lem-weil-pbc-scheme-coproduct-family"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Schemes, Lemma Tag 01JB (lemma-glue), second mapping property for disjoint glueing data; its proof is omitted there and is supplied here"
+   }
+  },
+  {
+   "text": "*Step 5 (functions and edge cases).* A disjoint covering $(W_e)_{e\\in E}$ defines the function $\\varphi:|W|\\to E$ taking $x$ to its unique index $e$; conversely a function defines $W_e=\\varphi^{-1}(e)$. If every fibre is open, its complement is the union of the other open fibres, so each fibre is clopen. For $e_0\\in E$, the map $\\iota_{e_0}\\circ s$ has image in $V_{e_0}$, hence its inverse-image family has $W_{e_0}=W$ and all other $W_e=\\varnothing$. If $E=\\varnothing$, Step 1 makes $U_E$ empty; a morphism $W\\to U_E$ exists exactly when $W$ is empty, and uniqueness follows from Step 4 (or from the unique empty family).",
+   "uses": [
+    "lem-weil-pbc-scheme-coproduct-family",
+    "lem-weil-pbc-scheme-morphism-gluing"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/groupoids.tex",
+    "place": "Groupoids, Example Tag 03YW (example-constant-group), functor of points as locally constant functions; Etale Cohomology, Remark Tag 03P5"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-scheme-coproduct-family",
+  "def-weil-open-immersion",
+  "lem-weil-pbc-morphism-factors-through-open-subscheme",
+  "lem-weil-pbc-scheme-morphism-gluing"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/schemes.tex",
+  "place": "Schemes, Lemma Tag 01JB (lemma-glue), second mapping property applied to a disjoint union; the source omits the proof of that mapping property. Groupoids, Example Tag 03YW states the locally constant functor of points."
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -58,7 +128,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "worker",
@@ -74,5 +144,19 @@
   }
  },
  "chapter": "sec-curve-estimates",
- "unit": "sk-prop-h2"
+ "unit": "sk-prop-h2",
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "lem-galois-coproduct-copies-morphisms-clopen",
+  "worker": "stage1",
+  "summary": "The set-valued functor-of-points statement follows from the public Mathlib leaves for arbitrary scheme coproducts, factorization through an open subscheme, and gluing of scheme morphisms. The proof constructs the inverse maps and checks the constant and empty-index cases. No new node is needed. No exact slopmaster2 declaration was found: exists_fiberOpens_comp_sigmaι supplies only the decomposition of a morphism into a coproduct, while glueOfContinuousMap is only a gluing constructor, not the full bijection.",
+  "blueprint": "The functor-of-points part of thm-galois-lc-etale proof Step 1 ('the sheaf is finite locally constant') and Step 3 ('essential surjectivity'), as mediated by lem-galois-constant-sheaf-sets-representable and lem-galois-flc-representable; Groupoids Tag 03YW and Schemes Tag 01JB supply the local argument."
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "group": "F1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed by the lead of F1; spot-checked by L: L: 5 steps (components, preimage pieces, forced restriction, gluing, functions) read against 01JB/01HI"
+ }
 }
