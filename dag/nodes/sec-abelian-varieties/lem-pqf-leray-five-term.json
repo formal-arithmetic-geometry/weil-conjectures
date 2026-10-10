@@ -27,9 +27,56 @@
   "def-sp-convergence",
   "def-sp-filtration"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "By [def-sp-exact-couple] $d_r$ has bidegree $(r,1-r)$ and $E_{r+1}^{p,q}=\\ker d_r/\\operatorname{im}d_r$ at $E_r^{p,q}$; by [def-sp-convergence] $E_\\infty=Z_\\infty/B_\\infty$ inside $E_2$, with $Z_2=E_2$, $B_2=0$. Since $E_2^{p,q}=0$ unless $p,q\\ge0$, look at the three entries $(1,0)$, $(0,1)$, $(2,0)$. For $r\\ge2$ the differential out of $(1,0)$ lands in $(1+r,1-r)$, and the one into $(1,0)$ starts at $(1-r,r-1)$; both have a negative index. Out of $(0,1)$, $d_r$ lands in $(r,2-r)$, which has a negative index for $r\\ge3$; into $(0,1)$ it starts at $(-r,r)$. Into $(2,0)$, $d_r$ starts at $(2-r,r-1)$, which has a negative index for $r\\ge3$; out of $(2,0)$ it lands in $(2+r,1-r)$. So the only nonzero differential at these entries is $d_2:E_2^{0,1}\\to E_2^{2,0}$. Hence $Z_\\infty^{1,0}=E_2^{1,0}$ and $B_\\infty^{1,0}=0$; $Z_\\infty^{0,1}=\\ker d_2$ and $B_\\infty^{0,1}=0$; $Z_\\infty^{2,0}=E_2^{2,0}$ and $B_\\infty^{2,0}=\\operatorname{im}d_2$. This gives $E_\\infty^{1,0}=E_2^{1,0}$, $E_\\infty^{0,1}=\\ker d_2\\subseteq E_2^{0,1}$ and $E_\\infty^{2,0}=\\operatorname{coker}d_2$.",
+   "uses": [
+    "def-sp-exact-couple",
+    "def-sp-convergence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/homology.tex",
+    "place": "Lemma 0132 and the exact-couple construction preceding it"
+   }
+  },
+  {
+   "text": "Convergence [def-sp-convergence] gives $E_\\infty^{p,n-p}\\cong\\operatorname{gr}^pH^n=F^pH^n/F^{p+1}H^n$ [def-sp-filtration]. These vanish for $p<0$ and for $p>n$, and the filtration is finite. So $F^0H^n=H^n$ and $F^{n+1}H^n=0$. For $n=1$ this gives $F^1H^1\\cong E_\\infty^{1,0}$ and $H^1/F^1H^1\\cong E_\\infty^{0,1}$; for $n=2$ it gives $F^2H^2\\cong E_\\infty^{2,0}$. With Step 1, the bottom edge $E_2^{1,0}=E_\\infty^{1,0}\\cong F^1H^1\\hookrightarrow H^1$ is injective. The left edge $H^1\\twoheadrightarrow H^1/F^1H^1\\cong E_\\infty^{0,1}=\\ker d_2\\hookrightarrow E_2^{0,1}$ has kernel $F^1H^1$ and image $\\ker d_2$. The bottom edge in degree 2 is $E_2^{2,0}\\twoheadrightarrow E_\\infty^{2,0}\\cong F^2H^2\\hookrightarrow H^2$, with kernel $\\operatorname{im}d_2$.",
+   "uses": [
+    "def-sp-convergence",
+    "def-sp-filtration",
+    "def-sp-exact-couple"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/homology.tex",
+    "place": "Lemma 0132, convergence and finite-filtration clauses"
+   }
+  },
+  {
+   "text": "The maps of Step 2, together with $d_2$, form the sequence $0\\to E_2^{1,0}\\to H^1\\to E_2^{0,1}\\xrightarrow{d_2}E_2^{2,0}\\to H^2$. It is exact at each term: at $E_2^{1,0}$, because the bottom edge is injective; at $H^1$, because the bottom edge has image $F^1H^1$, which is the kernel of the left edge; at $E_2^{0,1}$, because the left edge has image $\\ker d_2$; and at $E_2^{2,0}$, because the degree-2 bottom edge has kernel $\\operatorname{im}d_2$. The three non-$d_2$ maps are the canonical bottom and left edge maps, and the middle map is $d_2$ itself (the transgression).",
+   "uses": [
+    "def-sp-exact-couple",
+    "def-sp-convergence",
+    "def-sp-filtration"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/homology.tex",
+    "place": "Lemma 0132, standard total-degree 1--2 extraction"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sp-exact-couple",
+  "def-sp-convergence",
+  "def-sp-filtration"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/homology.tex",
+  "place": "Lemma 0132 and the exact-couple low-degree extraction"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -61,12 +108,28 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "pqf-lem-leray-lowdegree",
   "by": "worker",
   "date": "2026-10-10"
  },
  "chapter": "sec-abelian-varieties",
- "unit": "sk-prop-av-pqf-finite"
+ "unit": "sk-prop-av-pqf-finite",
+ "split_report": {
+  "date": "2026-10-11",
+  "item": "lem-pqf-leray-five-term",
+  "worker": "stage1",
+  "summary": "Completed the generic five-term spectral-sequence item without creating duplicate child nodes. The proof uses the existing exact-couple, convergence, and finite-filtration statements: first-quadrant bidegrees leave only d_2 from (0,1) to (2,0), convergence identifies stable terms with graded filtration pieces, and the resulting edge maps and quotient/kernel descriptions give the displayed exact sequence.",
+  "blueprint": "Realizes the ancestor proof sentence asserting that total degrees 0, 1, and 2 form the displayed exact sequence by edge maps and the connecting d_2-transgression.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-lft2445",
+  "group": "G1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-lft2445 (reviewer sub-agent of L); spot-checked: Checked all five exactness spots against def-sp-convergence (Z_inf/B_inf, E_inf=gr^p) and def-sp-filtration; the edge maps are the filtration inclusion/quotient composites, matching the ancestor's use via lem-sp-grothendieck-edge-maps; d_2 is the bare d_2; no new nodes, so nothing is restated (class b: none). FIX more, RETURN less: (1) C1 Step 1 used E_inf=Z_inf/B_inf without citing def-sp-convergence and claimed falsely that d_2 is the only differential at all total-degree 1-2 entries (d_2 from (1,1) and d_3 from (0,2) exist); rewritten to check the entries (1,0),(0,1),(2,0) one by one, and def-sp-convergence added to uses. (2) C4/D Step 2 left F^0H^n=H^n and F^{n+1}H^n=0 implicit; derived them from finiteness and the vanishing of gr^p outside 0..n, with each edge's kernel and image stated. (3) Step 3 exactness at E_2^{2,0} was garbled ('kernel modulo the transgression image'); now kernel of the degree-2 bottom edge = im d_2. The Second reading by G1 missed (1) and (3).; 1 file(s) fixed by the reviewer"
+ }
 }
