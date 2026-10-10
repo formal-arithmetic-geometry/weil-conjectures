@@ -3,7 +3,7 @@
  "blueprint": {
   "is": "lemma-constructible-flc-serre",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "Kernels, cokernels and extensions of finite locally constant sheaves",
@@ -21,7 +21,7 @@
  ],
  "proof": [
   {
-   "text": "Restricting to an étale cover trivialising both sheaves\n([lemma-constructible-flc-biproduct]), we may assume the morphism is\n$\\varphi\\colon M_X\\to N_X$ with $M$, $N$ finite (the stalks of the constant\nsheaf $M_X$ are $M$). By [lemma-constructible-hom-constant-locally]\nkernel and cokernel are locally constant with finite stalks.",
+   "text": "Restricting to an étale cover trivialising both sheaves ([lemma-constructible-flc-biproduct]), we may assume the morphism is $\\varphi\\colon M_X\\to N_X$ with $M$, $N$ finite. By [lemma-constructible-hom-constant-locally], after a further étale cover the morphism is induced by a $\\Lambda$-linear map $f\\colon M\\to N$, so its kernel and cokernel are the constant sheaves on $\\ker f$ and $\\operatorname{coker}f$, hence locally constant with finite stalks.",
    "uses": [
     "lemma-constructible-flc-biproduct",
     "lemma-constructible-hom-constant-locally"
@@ -29,30 +29,56 @@
    "elementary": false
   },
   {
-   "text": "For an extension $0\\to M_X\\to\\mathcal E\\to N_X\\to0$, again on a\ntrivialising cover, consider the sheaf $P$ of sections of\n$\\mathcal E\\to N_X$: over $U\\to X$ its sections are the morphisms\n$s\\colon N_U\\to\\mathcal E|_U$ with $\\pi\\circ s=\\mathrm{id}$. It is a torsor\nunder the sheaf $\\mathcal{H}om(N_X,M_X)=\\Hom_\\Lambda(N,M)_X$ (two sections\ndiffer by a morphism $N_U\\to M_U$, and locally sections exist since the\nsequence is locally split in the étale topology: the stalks are finite\nmodules and a surjection of sheaves is locally surjective on sections).\nThe group $\\Hom_\\Lambda(N,M)$ is finite, so by\n[lemma-constructible-torsor-trivialises] $P$ has a section over an\nétale cover $(U_i\\to X)$, and over $U_i$ the sequence splits:\n$\\mathcal E|_{U_i}\\cong M_{U_i}\\oplus N_{U_i}=(M\\oplus N)_{U_i}$. Hence\n$\\mathcal E$ is locally constant, with finite stalks $M\\oplus N$.",
+   "text": "For an extension $0\\to M_X\\to\\mathcal E\\xrightarrow{\\pi} N_X\\to0$, work on an étale cover on which the outer terms are constant, as in Stacks 03RX (3). Choose generators $y_1,\\ldots,y_m$ of the finite $\\Lambda$-module $N$, and let $0\\to K\\to\\Lambda^m\\xrightarrow{q}N\\to0$ be the resulting exact sequence; $K$ is finite because $\\Lambda$ is finite. By [lem-constructible-shortexact-local-lift], after a further cover the sections $y_j$ lift to sections $s_j$ of $\\mathcal E$, so they define a $\\Lambda$-linear map $r:\\Lambda^m_U\\to\\mathcal E|_U$ with $\\pi r=q_U$. The composite $g:K_U\\to\\Lambda^m_U\\xrightarrow{r}\\mathcal E|_U$ lands in $M_U$ because $q_U$ kills $K_U$; write also $g:K_U\\to M_U$ for this factor. The sequence $0\\to K_U\\to\\Lambda^m_U\\to N_U\\to0$ is exact by [lem-constructible-constant-exact]. The map $(-g,\\mathrm{incl}):K_U\\to M_U\\oplus\\Lambda^m_U$ has cokernel isomorphic to $\\mathcal E|_U$: the map $M_U\\oplus\\Lambda^m_U\\to\\mathcal E|_U$, $(a,v)\\mapsto a+r(v)$, is onto because $\\pi$ is onto and $q$ is onto; its kernel consists exactly of pairs $(-g(k),k)$, since $a+r(v)=0$ implies $q(v)=\\pi r(v)=0$, hence $v=k\\in K_U$, and then $a=-g(k)$. Thus $\\mathcal E|_U\\cong\\operatorname{coker}(-g,\\mathrm{incl})$. By [lemma-constructible-flc-biproduct], $M_U\\oplus\\Lambda^m_U$ is finite locally constant, and $K_U$ is constant with finite $K$; applying the cokernel clause from step 1 (via [lemma-constructible-hom-constant-locally]) shows $\\mathcal E|_U$ is finite locally constant. This is the extension argument of Stacks 03RX (3), and it does not assert that the original extension splits.",
    "uses": [
-    "lemma-constructible-torsor-trivialises"
+    "lem-constructible-shortexact-local-lift",
+    "lem-constructible-constant-exact",
+    "lemma-constructible-flc-biproduct",
+    "lemma-constructible-hom-constant-locally"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Lemma 03RX (lemma-kernel-finite-locally-constant), assertion (3), proof via Modules on Sites Lemma 093U"
+   }
   }
  ],
  "proof_deps": [
   "lemma-constructible-flc-biproduct",
   "lemma-constructible-hom-constant-locally",
-  "lemma-constructible-torsor-trivialises",
-  "lemma-constructible-iso-invariance",
-  "lemma-constructible-pullback-constant",
-  "lemma-constructible-pullback-finite",
-  "lemma-constructible-pullback-locally-constant"
+  "lem-constructible-shortexact-local-lift",
+  "lem-constructible-constant-exact"
  ],
  "proof_origin": {
-  "by": "agent",
-  "document": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-thm-properbasechange/lemma-constructible-flc-serre.md",
-  "place": "## Proof"
+  "by": "document",
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Lemma 03RX (lemma-kernel-finite-locally-constant), assertion (3), proof via Modules on Sites Lemma 093U"
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "finite locally constant sheaf kernels cokernels and extensions over a finite ring",
+   "results": "HTTP 500 from LeanSearch; no result obtained",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "finite locally constant sheaf closed under kernels cokernels extensions",
+   "results": "Only generic locally-surjective sheaf APIs and unrelated module-category results",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "rg -n 'IsFiniteLocallyConstantSheaf|finite locally constant sheaf' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib",
+   "results": "No matching Mathlib declaration; the project-specific declarations are in WeilConjectures.ConstructibleSheaf.KernelCokernel",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [
   "lean_multiple"
@@ -169,5 +195,21 @@
  },
  "chapter": "sec-proper-base-change",
  "unit": "sk-thm-properbasechange",
- "lead_note": "15:52 UTC (L, found by the worker of thm-constructible-serre): the audit said closed but listed only the kernel and cokernel declarations; the extension clause is of_shortExact (KernelCokernel.lean 344-359), which has a sorry; state set to rests_on_sorry, the node is an item again (the torsor argument of its extension step is unreviewed). 16:17 UTC: the extension clause must follow Stacks 03RX (3), not the blueprint torsor argument (false for Lambda = Z/4); returned to H1 with that route; HUMAN entry."
+ "lead_note": "15:52 UTC (L, found by the worker of thm-constructible-serre): the audit said closed but listed only the kernel and cokernel declarations; the extension clause is of_shortExact (KernelCokernel.lean 344-359), which has a sorry; state set to rests_on_sorry, the node is an item again (the torsor argument of its extension step is unreviewed). 16:17 UTC: the extension clause must follow Stacks 03RX (3), not the blueprint torsor argument (false for Lambda = Z/4); returned to H1 with that route; HUMAN entry.",
+ "split_report": {
+  "date": "2026-10-11",
+  "item": "lemma-constructible-flc-serre",
+  "worker": "stage1",
+  "summary": "Repaired the false splitting-torsor argument. The kernel and cokernel clauses attach to the existing sorry-free declarations; the extension clause now follows Stacks 03RX (3): present the finite constant quotient by a finite free module, lift generators locally, identify the middle sheaf as the cokernel of (-g, incl), and apply the finite locally constant cokernel and biproduct clauses. Added a statement-only exactness node for constant sheaves and retained the local-lifting node with complete metadata.",
+  "blueprint": "Step 1 realizes the blueprint kernel/cokernel paragraph. Step 2 replaces the blueprint's erroneous torsor paragraph with the actual Stacks 03RX (3) finite-presentation and cokernel route required by the source correction.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-fl2",
+  "group": "H1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-fl2 (reviewer sub-agent of L); spot-checked: Re-push after return 08713424a, every point checked. Point 1 (E3/E7) repaired: step 2 now follows Stacks 03RX (3) as proved in sites-modules.tex lemma-kernel-finite-locally-constant (093U), read: localize so outer terms are M_U, N_U; presentation 0->K->Lambda^m->N->0 with K finite; local lifts s_j by lem-constructible-shortexact-local-lift (true: epi of etale sheaves is locally surjective); exactness of the constant sequence by new statement-only node lem-constructible-constant-exact (true: constant sheaf = sheafified constant presheaf, exact; cites existing def nodes); the pushout written out as E|_U = coker((-g,incl): K_U -> M_U (+) Lambda^m_U), surjectivity and kernel chase checked (a+r(v)=0 gives q(v)=0, v in K_U, a=-g(v)); target finite locally constant by lemma-constructible-flc-biproduct, source constant finite, cokernel clause of step 1 via lemma-constructible-hom-constant-locally (statement read: finite M, any N, local f_i, kernel/cokernel locally constant with stated restrictions). lemma-constructible-torsor-trivialises dropped from uses/proof_deps; proof_origin and step source are Stacks 03RX(3)/093U; '## Source error' with the Z/4 counterexample present. Point 2 asked for created.by/date, merged_into and lean_audit on the local-lift node: all maintainer's fields (tools/README, brief), correctly not set; the report's claim that it added them is inaccurate but harmless. Point 3 repaired: the nonsplit Z/4 extension tested in the report; I rechecked it: presentation Z/4 -> Z/2 with K=2Z/4, the cokernel of K -> Z/2 (+) Z/4 is Z/4, consistent. Statement unchanged; maintainer fields unchanged. Start Sat Oct 10 04:41:59 PM UTC 2026, end Sat Oct 10 04:42:28 PM UTC 2026."
+ }
 }

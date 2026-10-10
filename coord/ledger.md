@@ -2018,3 +2018,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 16:41 L: REVIEW BEHIND 12 after the 28th limit; eight slots (7 reviewers + the audit); the def-sc-ext-sheaf writer's partial file moved to scratch, item still claimed by L
 - 16:42 L: returned deliver/H1/lem-sc-point-tangent-finite-local-cotangent-surjective (reviewer RETURN: 1. A3/F (point 3 of the return of 16:26, not repaired): coord/reports/H1/lem-sc-point-tangent-finite-local-cotangent-sur)
 - 16:42 L: lem-sc-topological-pushforward-injective attached (J1 release; sorry-free)
+- 16:42 L: merged deliver/H1/lemma-constructible-flc-serre (reviewer PASS; after a return; new nodes: 2)
