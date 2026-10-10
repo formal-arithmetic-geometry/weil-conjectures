@@ -11,14 +11,16 @@
     "lem-weil-pbc-gabber-h0-etale-criterion"
    ]
   },
-  "same_as": []
+  "same_as": [
+   "lem-kun-sep-closed-finite-extension-sep-closed"
+  ]
  },
  "kind": "statement",
- "title": "A finite extension of a separably closed field embeds uniquely into an algebraically closed field",
- "statement": "Let $K$ be a separably closed field [def-pc-separably-closed], $L/K$ a finite field extension [def-pc-field-extension] and $\\Omega$ an algebraically closed field [def-weil-algebraic-closure] together with a field homomorphism $\\iota:K\\to\\Omega$. Then there is exactly one field homomorphism $\\lambda:L\\to\\Omega$ with $\\lambda|_K=\\iota$.",
+ "title": "A finite extension of a separably closed field is separably closed and embeds uniquely into an algebraically closed field",
+ "statement": "Let $K$ be a separably closed field [def-pc-separably-closed] and $L/K$ a finite field extension [def-pc-field-extension]. Then: (a) $L$ is separably closed; (b) for every algebraically closed field $\\Omega$ [def-weil-algebraic-closure] and every field homomorphism $\\iota:K\\to\\Omega$ there is exactly one field homomorphism $\\lambda:L\\to\\Omega$ with $\\lambda|_K=\\iota$.",
  "source": {
   "document": "literature/stacks-project/fields.tex",
-  "place": "Lemma Tag 030K (lemma-separable-first: L has a subextension L_sep/K separable with L/L_sep purely inseparable; L_sep = K as K is separably closed) and Lemma Tag 09HJ (lemma-separable-degree) with its proof ('when K/F is purely inseparable ... there is a unique map K -> Fbar'), the image of L lying in the algebraic closure of iota(K) inside Omega; existence by Lemma Tag 09GU (lemma-map-into-algebraic-closure). Used in the proof of Etale Cohomology Proposition Tag 03QP: 'Since the residue field of O^sh is separably closed the same is true for each A_i'"
+  "place": "Lemma Tag 030K (lemma-separable-first: L has a subextension L_sep/K separable with L/L_sep purely inseparable; L_sep = K as K is separably closed, so L/K is purely inseparable); (a): a separable polynomial over L has its roots separable over L, hence algebraic over K, and the separable closure argument of 030K applied to L(root)/K shows the root lies in L; (b): Lemma Tag 09HJ (lemma-separable-degree) and its proof ('when K/F is purely inseparable ... there is a unique map K -> Fbar'), the image of L lying in the algebraic closure of iota(K) inside Omega; existence by Lemma Tag 09GU (lemma-map-into-algebraic-closure). Used in the proof of Etale Cohomology Proposition Tag 03QP: 'Since the residue field of O^sh is separably closed the same is true for each A_i'"
  },
  "stmt_deps": [
   "def-pc-separably-closed",
@@ -49,12 +51,19 @@
    "results": "Algebra.IsAlgebraic.isPurelyInseparable_of_isSepClosed (PurelyInseparable/Basic.lean:148), instSubsingletonAlgHomOfIsPurelyInseparable (:407), IsAlgClosed.lift (IsAlgClosed/Basic.lean:350)",
    "date": "2026-10-10",
    "verdict": "match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rn 'isSepClosed' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/FieldTheory/PurelyInseparable/*.lean; sed -n 560,571p FieldTheory/PurelyInseparable/Basic.lean",
+   "results": "Algebra.IsAlgebraic.isPurelyInseparable_of_isSepClosed (:148), isSepClosed_iff_isPurelyInseparable_algebraicClosure (:558), Algebra.IsAlgebraic.isSepClosed (:567)",
+   "date": "2026-10-10",
+   "verdict": "match (clause (a))"
   }
  ],
  "mathlib_match": {
-  "declaration": "IsAlgClosed.lift; Algebra.IsAlgebraic.isPurelyInseparable_of_isSepClosed; instSubsingletonAlgHomOfIsPurelyInseparable",
+  "declaration": "Algebra.IsAlgebraic.isSepClosed; IsAlgClosed.lift; Algebra.IsAlgebraic.isPurelyInseparable_of_isSepClosed; instSubsingletonAlgHomOfIsPurelyInseparable",
   "file": "Mathlib/FieldTheory/IsAlgClosed/Basic.lean; Mathlib/FieldTheory/PurelyInseparable/Basic.lean",
-  "how": "one declaration per clause. Existence: IsAlgClosed.lift (Mathlib/FieldTheory/IsAlgClosed/Basic.lean line 350, variables lines 300 and 330-331: for an algebraic R-algebra S, R a domain, and an algebraically closed M, a map S →ₐ[R] M) with R = K, S = L (finite hence algebraic, Algebra.IsAlgebraic.of_finite), M = Omega made a K-algebra through iota. Uniqueness: Algebra.IsAlgebraic.isPurelyInseparable_of_isSepClosed (Mathlib/FieldTheory/PurelyInseparable/Basic.lean line 148: an algebraic extension of a separably closed field is purely inseparable) and instSubsingletonAlgHomOfIsPurelyInseparable (same file line 407: for E/F purely inseparable and any reduced F-algebra L, Subsingleton (E →ₐ[F] L)) with F = K, E = L, L = Omega (a field, hence reduced). A field homomorphism L -> Omega restricting to iota on K is exactly a K-algebra map; IsSepClosed (Mathlib/FieldTheory/IsSepClosed.lean line 66) is def-pc-separably-closed by that node's own mathlib_match."
+  "how": "one declaration per clause. (a): Algebra.IsAlgebraic.isSepClosed (Mathlib/FieldTheory/PurelyInseparable/Basic.lean line 567: for E/F algebraic and F separably closed, IsSepClosed E) with F = K, E = L (finite hence algebraic, Algebra.IsAlgebraic.of_finite). (b) Existence: IsAlgClosed.lift (Mathlib/FieldTheory/IsAlgClosed/Basic.lean line 350, variables lines 300 and 330-331: for an algebraic R-algebra S, R a domain, and an algebraically closed M, a map S →ₐ[R] M) with R = K, S = L (finite hence algebraic, Algebra.IsAlgebraic.of_finite), M = Omega made a K-algebra through iota. Uniqueness: Algebra.IsAlgebraic.isPurelyInseparable_of_isSepClosed (Mathlib/FieldTheory/PurelyInseparable/Basic.lean line 148: an algebraic extension of a separably closed field is purely inseparable) and instSubsingletonAlgHomOfIsPurelyInseparable (same file line 407: for E/F purely inseparable and any reduced F-algebra L, Subsingleton (E →ₐ[F] L)) with F = K, E = L, L = Omega (a field, hence reduced). A field homomorphism L -> Omega restricting to iota on K is exactly a K-algebra map; IsSepClosed (Mathlib/FieldTheory/IsSepClosed.lean line 66) is def-pc-separably-closed by that node's own mathlib_match."
  },
  "status": "mathlib",
  "merged_into": null,
