@@ -1,8 +1,8 @@
 # Work queue
 
-923 items; claim with `tools/claim.py next <group> [--stage N]`.
+919 items; claim with `tools/claim.py next <group> [--stage N]`.
 
-## Stage 1: nodes to split (203)
+## Stage 1: nodes to split (199)
 
 | node | distance to a target | Lean state on the done branch |
 |---|---|---|
@@ -43,7 +43,6 @@
 | `lem-sc-hilbert-difference` | 5010 | none |
 | `lem-sc-hilbert-embedded-points` | 5010 | none |
 | `lem-sc-regular-meromorphic-section-exists` | 5010 | none |
-| `lem-pc-fppf-affine-refinement` | 5011 | none |
 | `lem-pc-rf-base-change-complex` | 5012 | none |
 | `lem-pc-bounded-above-flat-kflat-site` | 5013 | none |
 | `lem-pc-finite-flat-proper-support-descent` | 5013 | none |
@@ -59,16 +58,13 @@
 | `pqf-lem-coherent-ft-locnoeth` | 6009 | none |
 | `thm-sc-theorem-of-cube` | 6010 | rests_on_sorry |
 | `lem-pc-projective-space-twist-cohomology` | 6011 | rests_on_sorry |
-| `lem-sc-ample-positive-degree` | 6011 | rests_on_sorry |
 | `pqf-lem-leray` | 6011 | none |
 | `pqf-lem-leray-lowdegree` | 6011 | none |
 | `pqf-lem-qf-finitefibres` | 6011 | none |
 | `pqf-lem-locqf-fibre-discrete` | 6012 | none |
 | `lem-pc-projective-space-canonical` | 6013 | sorry_here |
 | `pqf-lem-serre-criterion` | 6013 | none |
-| `pqf-lem-going-up` | 6017 | none |
 | `pqf-def-affine-morphism` | - | none |
-| `def-nagata-final-descended-model` | - | none |
 | `def-weil-t-structure` | - | none |
 | `lemma-nagata-final-descended-model` | - | none |
 | `def-nagata-final-noetherian-base-system` | - | none |
@@ -935,7 +931,7 @@
 | `lem-weil-pbc-p1-field-dimension-one` | 4 | state |
 | `lem-weil-pbc-projective-space-zero-isomorphism` | 4 | state |
 
-Not open yet: 1434 nodes that wait for a statement dependency, 240 nodes that wait for stage 1.
+Not open yet: 1436 nodes that wait for a statement dependency, 237 nodes that wait for stage 1.
 
 ## Stage 3: modules to prove (0)
 
