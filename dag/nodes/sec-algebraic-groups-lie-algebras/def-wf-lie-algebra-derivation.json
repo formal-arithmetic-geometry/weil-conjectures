@@ -3,11 +3,11 @@
  "blueprint": {
   "is": "def-wf-lie-algebra-derivation",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "definition",
  "title": "Tangent spaces, Lie algebras and rational actions",
- "statement": "*Tangent spaces and differentials.* Let $X=\\operatorname{Spec}A$ be a\nfinite-type affine $k$-scheme (for instance an affine variety, i.e.\n$A$ finitely generated and reduced) and let $x\\in X(k)$, with maximal\nideal $\\mathfrak m_x\\subseteq A$ of the functions vanishing at $x$. The\n*tangent space* of $X$ at $x$ is\n\n$$\nT_xX=(\\mathfrak m_x/\\mathfrak m_x^2)^\\vee\n=\\operatorname{Hom}_k(\\mathfrak m_x/\\mathfrak m_x^2,k).\n$$\n\nEquivalently, $T_xX$ is the set of $k$-algebra maps\n$A\\to k[\\varepsilon]/\\varepsilon^2$ reducing to evaluation at $x$\nmodulo $\\varepsilon$: such a map is $f\\mapsto f(x)+\\varepsilon\\,v(f)$\nwith $v$ a $k$-derivation at $x$, and $v\\mapsto v|_{\\mathfrak m_x}$\nidentifies these derivations with the linear forms on $\\mathfrak m_x$\nkilling $\\mathfrak m_x^2$ (the Leibniz rule forces\n$v(\\mathfrak m_x^2)=0$ and $v(1)=0$, and conversely every such form\nextends uniquely via $A=k\\oplus\\mathfrak m_x$). A regular map\n$\\varphi:X\\to Y$ with comorphism $\\varphi^*:B\\to A$ satisfies\n$\\varphi^*\\mathfrak m_{\\varphi(x)}\\subseteq\\mathfrak m_x$, hence induces\n$\\mathfrak m_{\\varphi(x)}/\\mathfrak m_{\\varphi(x)}^2\\to\n\\mathfrak m_x/\\mathfrak m_x^2$; the dual linear map\n$d\\varphi_x:T_xX\\to T_{\\varphi(x)}Y$ is the *differential* of $\\varphi$\nat $x$. In the dual-number description it is composition with\n$\\varphi^*$; in particular $d(\\psi\\circ\\varphi)_x=d\\psi_{\\varphi(x)}\\circ\nd\\varphi_x$.\n\n*Lie algebra of a matrix group.* Let $G\\subseteq\\operatorname{GL}(V)$ be\na closed subgroup scheme of finite type (see the last paragraph), for\nexample a smooth matrix group. For a commutative $k$-algebra $R$, the\n$R$-points $G(R)$ are the matrices in $\\operatorname{GL}(V\\otimes_kR)$\nsatisfying the defining equations of $G$ over $R$. Its *Lie algebra* is\n$\\operatorname{Lie}(G)=T_1G$; by the dual-number description, and\nidentifying $T_1\\operatorname{GL}(V)=\\operatorname{End}(V)$ through\n$X\\mapsto1+\\varepsilon X$,\n\n$$\n\\operatorname{Lie}(G)=\\{X\\in\\operatorname{End}(V):\n1+\\varepsilon X\\in G(k[\\varepsilon]/\\varepsilon^2)\\},\n$$\n\na Lie algebra in the sense of [def-wf-lie-algebra] under the bracket\n$[X,Y]=XY-YX$ of $\\operatorname{End}(V)$. (That this subspace is\nclosed under the bracket, and that $dr$ below preserves brackets, is standard: compare\nMilne, *Algebraic Groups* (2017), Chapter 10.)\n\n*Rational actions.* A *rational representation* of $G$ is a regular\nhomomorphism $r:G\\to\\operatorname{GL}(M)$, i.e. an algebraic-group\nmodule in the sense of [def-wf-algebraic-representations]. Its\ndifferential at $1$ is the linear map\n$dr:\\operatorname{Lie}(G)\\to\\operatorname{End}(M)$ characterized by\n$r(1+\\varepsilon X)=1+\\varepsilon\\,dr(X)$ over\n$k[\\varepsilon]/\\varepsilon^2$; it is a Lie representation of\n$\\operatorname{Lie}(G)$ on $M$ in the sense of [def-wf-lie-algebra],\ni.e. $dr([X,Y])=dr(X)dr(Y)-dr(Y)dr(X)$. The *adjoint action*\nis $\\operatorname{Ad}(g)X=gXg^{-1}$ for $g\\in G(k)$, preserving\n$\\operatorname{Lie}(G)$ because conjugation by $g$ preserves $G$; its\ndifferential is $\\operatorname{ad}(Y)X=[Y,X]$, since over\n$k[\\varepsilon]/\\varepsilon^2$ one has\n$(1+\\varepsilon Y)X(1+\\varepsilon Y)^{-1}=X+\\varepsilon(YX-XY)$.\n\n*Matrix group schemes and smoothness.* A *finite-type matrix group\nscheme* is a closed subscheme $\\mathcal G\\subseteq\\operatorname{GL}(V)$\ncut out by a finitely generated, possibly nonradical, ideal, such that\nthe regular multiplication and inversion of $\\operatorname{GL}(V)$\nrestrict to it; its coordinate algebra need not a priori be reduced,\nand its tangent spaces and Lie algebra are defined by the same formulas\nas above, directly from the defining equations. For a closed point $x$\nof a finite-type affine $k$-scheme $X=\\operatorname{Spec}A$, the *local\nring* is $\\mathcal O_{X,x}=A_{\\mathfrak m_x}$; it is *regular* if\n$\\dim_kT_xX=\\dim\\mathcal O_{X,x}$ (Krull dimension; the inequality\n$\\ge$ always holds), and $X$ is *smooth over $k$ at $x$* when\n$\\mathcal O_{X,x}$ is regular ($k$ being algebraically closed of\ncharacteristic zero, hence perfect). A *smooth matrix group* is a\nmatrix group smooth at every closed point.",
+ "statement": "*Tangent spaces and differentials.* Let k be an algebraically closed field of characteristic zero. Let X=Spec A and Y=Spec B be finite-type affine k-schemes, let x in X(k), and let phi:X\\to Y be a k-morphism. The tangent space is T_xX := T_{X/k,x} as defined in [def-sc-scheme-tangent-space], using the dual-number ring [def-sc-dual-numbers]. For rational points, [lem-sc-rational-tangent-cotangent-duality] identifies T_xX canonically with Hom_k(m_x/m_x^2,k), and [lem-sc-rational-point-tangent-derivation-identification] identifies its vectors with k-derivations at x. The differential d phi_x is induced by the tangent-map construction of [def-sc-scheme-tangent-space] (equivalently, under the preceding identification, the dual of the cotangent map); differentials compose. *Lie algebra of a matrix group.* Let V be a finite-dimensional k-vector space and let G be a finite-type closed subgroup scheme of GL(V). For a commutative k-algebra R, G(R) consists of matrices satisfying the defining equations. Define Lie(G) := T_{G/k,1}, identified with {X in End_k(V) | 1+epsilon X in G(k[epsilon]/epsilon^2)} via X \\mapsto 1+epsilon X (and T_1 GL(V)=End_k(V)), using [def-sc-scheme-tangent-space] and [def-sc-dual-numbers]. By [lem-wf-lie-algebra-derivation-bracket], Lie(G) is a subspace of End_k(V) closed under the commutator [X,Y]=XY-YX, hence a Lie algebra in the sense of [def-wf-lie-algebra] under this bracket. *Rational actions.* Let M be a finite-dimensional k-vector space. For a regular homomorphism r:G\\to GL(M) as in [def-wf-algebraic-representations], its differential at 1 is the linear map dr:Lie(G)\\to End_k(M) characterized by r(1+epsilon X)=1+epsilon dr(X) over k[epsilon]/epsilon^2; by [lem-wf-lie-algebra-derivation-bracket] it is a Lie representation of Lie(G) on M in the sense of [def-wf-lie-algebra], i.e. dr([X,Y])=dr(X)dr(Y)-dr(Y)dr(X). The adjoint action is Ad(g)X=gXg^{-1} for g in G(k); it preserves Lie(G), since g(1+epsilon X)g^{-1}=1+epsilon gXg^{-1} and conjugation by g preserves G. Its differential is ad(Y)X=[Y,X], since over k[epsilon]/epsilon^2 one has (1+epsilon Y)X(1+epsilon Y)^{-1}=X+epsilon(YX-XY). *Matrix group schemes and smoothness.* A finite-type matrix group scheme is a finite-type closed subgroup scheme of GL(V), possibly nonreduced, with multiplication and inversion restricting from GL(V). Regular local rings and regular schemes use [def-weil-regular-scheme], and smooth ring maps use [def-weil-pbc-smooth-ring-map]. For a finite-type affine k-scheme over the perfect base field k, the regular-local-ring criterion and its equivalence with smoothness at a point are the content of [lem-weil-pbc-regular-local-cotangent-dimension], [lem-weil-pbc-smooth-over-field-regular-local], and [lem-weil-pbc-regular-local-separable-residue-smooth]. A smooth matrix group is smooth at every closed point.",
  "source": {
   "document": "literature/blueprint/master/blueprint/sec-algebraic-groups-lie-algebras/sk-d-tangent/def-wf-lie-algebra-derivation.md",
   "place": "node def-wf-lie-algebra-derivation, order 2481",
@@ -19,34 +19,47 @@
   ]
  },
  "stmt_deps": [
+  "def-sc-scheme-tangent-space",
+  "def-sc-dual-numbers",
+  "lem-sc-rational-tangent-cotangent-duality",
+  "lem-sc-rational-point-tangent-derivation-identification",
+  "lem-wf-lie-algebra-derivation-bracket",
   "def-wf-lie-algebra",
-  "def-wf-algebraic-representations"
+  "def-wf-algebraic-representations",
+  "def-weil-regular-scheme",
+  "def-weil-pbc-smooth-ring-map",
+  "lem-weil-pbc-regular-local-cotangent-dimension",
+  "lem-weil-pbc-smooth-over-field-regular-local",
+  "lem-weil-pbc-regular-local-separable-residue-smooth"
  ],
  "proof": [],
  "proof_deps": [],
  "proof_origin": null,
  "mathlib_searches": [
   {
-   "tool": "text search of the local Mathlib checkout (0df444a360)",
-   "query": "Matrix.GeneralLinearGroup.lieAlgebra",
-   "results": [],
-   "date": "2026-10-08"
+   "tool": "leanfinder",
+   "query": "tangent spaces dual numbers Lie algebra rational representation differential matrix group",
+   "results": "derivationToSquareZero...; no tangent-space or matrix-group declaration",
+   "date": "2026-10-11",
+   "verdict": "no exact match"
   },
   {
-   "tool": "text search of the local Mathlib checkout (0df444a360)",
-   "query": "Matrix.GeneralLinearGroup.RationalHom",
-   "results": [],
-   "date": "2026-10-08"
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.tangentSpaceAt, AlgebraicGeometry.GrpObj.Lie, LieEquiv, RationalHom",
+   "results": "0 hits; tangentSpaceAt unknown",
+   "date": "2026-10-11",
+   "verdict": "no match"
   },
   {
-   "tool": "text search of the local Mathlib checkout (0df444a360)",
-   "query": "Matrix.GeneralLinearGroup.RationalHom.differential",
-   "results": [],
-   "date": "2026-10-08"
+   "tool": "grep",
+   "query": "tangentSpaceAt|GrpObj\\.Lie|RationalHom|differential in Mathlib",
+   "results": "no hits",
+   "date": "2026-10-11",
+   "verdict": "no match"
   }
  ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [
   "lean_not_found"
@@ -240,5 +253,22 @@
   }
  },
  "chapter": "sec-algebraic-groups-lie-algebras",
- "unit": "sk-d-tangent"
+ "unit": "sk-d-tangent",
+ "split_report": {
+  "date": "2026-10-11",
+  "item": "def-wf-lie-algebra-derivation",
+  "worker": "stage1",
+  "summary": "Repaired the returned split: tangent spaces now use the established scheme tangent-space definition, with rational-point cotangent and derivation descriptions stated as remarks citing the existing identification lemmas; bracket closure and differential compatibility are delegated to a new statement-only lemma; regularity and smoothness use their existing definitions and equivalence lemmas.",
+  "blueprint": "The item realizes the complete tangent-space, Lie-algebra, rational-action, matrix-group, and smoothness definition from the blueprint.",
+  "tool_uses": [],
+  "statement_change": "Restated with citations (returns R-lad3110/R-lad3124, points E7/C1/C4; reviewer R-lad3140 repaired the third push). Clauses and where each now lives: (a) T_xX=(m_x/m_x^2)^dual: now T_xX:=T_{X/k,x} of [def-sc-scheme-tangent-space], with the cotangent description kept as a remark citing [lem-sc-rational-tangent-cotangent-duality]; (b) dual-number/derivation description and the Leibniz argument: kept as a remark citing [def-sc-dual-numbers] and [lem-sc-rational-point-tangent-derivation-identification]; (c) differential d phi_x and its composition rule: kept in the item, via the tangent map of [def-sc-scheme-tangent-space]; (d) Lie(G)=T_1G identified with {X : 1+eps X in G(k[eps]/eps^2)} by X->1+eps X, T_1 GL(V)=End(V): kept verbatim in the item; (e) Lie(G) closed under XY-YX, hence a Lie algebra in the sense of [def-wf-lie-algebra]: kept in the item, the closure now by the statement-only lemma [lem-wf-lie-algebra-derivation-bracket] instead of the Milne remark; (f) dr linear, characterized by r(1+eps X)=1+eps dr(X), a Lie representation in the sense of [def-wf-lie-algebra]: kept in the item, bracket compatibility by [lem-wf-lie-algebra-derivation-bracket]; (g) Ad(g) preserves Lie(G) and its differential is ad(Y)X=[Y,X]: kept in the item with their one-line dual-number computations; (h) regular local ring via dim T_xX=dim O_{X,x} and smoothness at x: replaced by [def-weil-regular-scheme], [def-weil-pbc-smooth-ring-map] and the three equivalence lemmas [lem-weil-pbc-regular-local-cotangent-dimension], [lem-weil-pbc-smooth-over-field-regular-local], [lem-weil-pbc-regular-local-separable-residue-smooth]; (i) finite-type matrix group scheme and smooth matrix group: kept in the item. The lemma cites nothing and does not cite the item, so there is no cycle; the five citers (lem-ag-lie-centre, lem-ag-closure-commutators, lem-ag-lie-stable-subspace, lem-wf-same-lie-closed-subgroup, lem-ag-cartier-reduced) get the bracket, dr as a Lie representation, and Lie(G)=T_1G from clauses (d)-(g) of the item they already cite."
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-lad3140",
+  "group": "G1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-lad3140 (reviewer sub-agent of L); spot-checked: Checked the head against the R-lad3124 return. E7: Lie(G):=T_{G/k,1} with its identification with {X : 1+eps X in G(k[eps])} is restored; the Second reading by G1 deleted lem-wf-lie-algebra-derivation-bracket as a D1 duplicate and left bracket closure and dr-compatibility resting only on a Milne remark, which recreated C1 for lem-ag-lie-centre (z(h) needs h to be a Lie algebra), lem-ag-closure-commutators and lem-ag-lie-stable-subspace. Read the steps of the five citers on sheaf-dag: the same-lie Dimension step (m_1/m_1^2 vs Lie(K)) is covered by Lie(G)=T_1G plus the cotangent remark; Ad/ad and the dual-number computations of lie-centre/closure-commutators by clause (g); Lie of explicit equations by lem-ag-cartier-reduced. def-wf-lie-algebra (Mathlib leaf; stmt_deps def-wf-algebraic-representations, which has none) does not cite the item: no cycle. FIX more, RETURN less: (1) C1/B10: re-added lem-wf-lie-algebra-derivation-bracket as a statement-only node that defines g and dr itself and cites only def-wf-lie-algebra and def-wf-algebraic-representations, never the item, so no cycle; it is true: the commutator of 1+eps1 X and 1+eps2 Y in k[eps1,eps2] is 1+eps1 eps2[X,Y], and k[eps]->k[eps1,eps2], eps->eps1 eps2, is injective (Milne AG ch.10). The item now says that Lie(G) is a Lie algebra and dr is a Lie representation in the sense of [def-wf-lie-algebra] by [lem-wf-lie-algebra-derivation-bracket], the alternative from the return, so no citer edits are needed; I also restored that Ad(g) preserves Lie(G) and the ad computation; (2) E7: statement_change now lists clauses (a)-(i) and where each lives; (3) C4: item stmt_deps equal its citations (lemma added) and lemma stmt_deps equal its citations. Grep query recorded.; 2 file(s) fixed by the reviewer; 1 statement node(s) added by the reviewer (FIX more, RETURN less)"
+ }
 }
