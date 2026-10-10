@@ -1,0 +1,68 @@
+{
+ "id": "lem-weil-pbc-abelian-exact-iff-epi-kernel-lift",
+ "kind": "statement",
+ "title": "A complex in an abelian category is exact iff the induced map to the kernel is an epimorphism",
+ "statement": "Let $\\mathcal A$ be an abelian category [def-sp-abelian] and $X\\xrightarrow{u}Y\\xrightarrow{v}Z$ a complex of $\\mathcal A$, i.e. $v\\circ u=0$ [def-weil-pbc-exact-sequence]. Let $k:K\\to Y$ be a kernel of $v$ ($v\\circ k=0$, and every $t:T\\to Y$ with $v\\circ t=0$ factors as $t=k\\circ t'$ for a unique $t':T\\to K$), and let $u':X\\to K$ be the unique morphism with $k\\circ u'=u$. Then the complex is exact at $Y$ ($\\operatorname{Im}(u)=\\operatorname{Ker}(v)$ as subobjects of $Y$, [def-weil-pbc-exact-sequence]) if and only if $u'$ is an epimorphism.",
+ "source": {
+  "document": "literature/stacks-project/homology.tex",
+  "place": "Homology, Definition 010E (label definition-exact: exact at y means Im(x->y) = Ker(y->z)) and Lemma 010C (label lemma-characterize-injective: surjective iff epimorphism, isomorphism iff injective and surjective); the statement is the combination: u factors as X ->> Im(u) >-> K, and Im(u) = Ker(v) iff the monomorphism Im(u) -> K is an isomorphism iff it is an epimorphism iff u' is one"
+ },
+ "stmt_deps": [
+  "def-sp-abelian",
+  "def-weil-pbc-exact-sequence"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "short complex in abelian category is exact iff the induced map to the kernel of g is an epimorphism",
+   "results": "CategoryTheory.ShortComplex.exact_iff_epi_imageToKernel', exact_iff_epi_imageToKernel, exact_iff_isIso_imageToKernel (Mathlib.CategoryTheory.Abelian.Exact); CategoryTheory.ShortComplex.exact_iff_epi_kernel_lift, exact_iff_epi_toCycles (Mathlib.Algebra.Homology.ShortComplex.Exact); ShortComplex.ab_exact_iff_function_exact",
+   "date": "2026-10-10",
+   "verdict": "match: exact_iff_epi_kernel_lift"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.ShortComplex.Exact, CategoryTheory.Epi, CategoryTheory.Limits.kernel.lift",
+   "results": "CategoryTheory.ShortComplex.Exact.epi_kernelLift, CategoryTheory.ShortComplex.exact_iff_epi_kernel_lift (Mathlib.Algebra.Homology.ShortComplex.Exact)",
+   "date": "2026-10-10",
+   "verdict": "match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rn 'exact_iff_epi_kernel_lift\\|exact_iff_epi_toCycles\\|theorem exact_iff_image_eq_kernel' Mathlib/Algebra/Homology/ShortComplex/Exact.lean Mathlib/CategoryTheory/Abelian/Exact.lean; sed -n 395,412p Mathlib/Algebra/Homology/ShortComplex/Exact.lean",
+   "results": "Algebra/Homology/ShortComplex/Exact.lean:397 exact_iff_epi_toCycles, :404 exact_iff_epi_kernel_lift [S.HasHomology] [HasKernel S.g] : S.Exact ↔ Epi (kernel.lift S.g S.f S.zero); CategoryTheory/Abelian/Exact.lean:94 exact_iff_image_eq_kernel : S.Exact ↔ imageSubobject S.f = kernelSubobject S.g",
+   "date": "2026-10-10",
+   "verdict": "match, read"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "CategoryTheory.ShortComplex.exact_iff_epi_kernel_lift",
+  "file": "Mathlib/Algebra/Homology/ShortComplex/Exact.lean",
+  "how": "specializes in one line: for the short complex S = ShortComplex.mk u v (v∘u = 0) in an abelian category (HasHomology and HasKernel hold), S.Exact ↔ Epi (kernel.lift v u _) (line 404), and S.Exact ↔ imageSubobject u = kernelSubobject v by ShortComplex.exact_iff_image_eq_kernel (Mathlib/CategoryTheory/Abelian/Exact.lean:94), which is exactness at Y of def-weil-pbc-exact-sequence; a given kernel (K,k) is isomorphic over Y to Mathlib's chosen kernel, the iso carrying kernel.lift v u _ to u', and epimorphisms are stable under composition with isomorphisms",
+  "line": 404
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-ringed-space-module-exactness-local-lifting",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lead_note": "L 2026-10-10: composed match (ShortComplex.exact_iff_epi_kernel_lift Exact.lean:404 with exact_iff_image_eq_kernel Abelian/Exact.lean:94 for the meaning of exactness); lines verified by L; line field set to the first."
+}

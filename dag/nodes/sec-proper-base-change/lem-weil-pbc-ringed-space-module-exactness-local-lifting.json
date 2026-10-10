@@ -8,11 +8,86 @@
   "place": "Modules, Section 01AF (label section-kernels: kernels sectionwise, cokernel the sheafified sectionwise cokernel with stalks Coker(phi)_x = Coker(phi_x), lines 102-145) and Lemma 01AG (label lemma-abelian, line 149: Mod(O_X) is abelian and a complex is exact at G iff it is exact on all stalks); with Sheaves, Lemma 0H7H / Definition 007U (sheaves.tex, label lemma-characterize-epi-mono, definition-injective-surjective: surjective on all stalks iff locally surjective), as recorded on lem-weil-pbc-locally-surjective-iff-stalks"
  },
  "stmt_deps": [
-  "def-weil-sheaf-of-modules-category"
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-pbc-exact-sequence"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "*Step 1 (epimorphisms are the morphisms with zero cokernel).* $\\textit{Mod}(\\mathcal O_X)$ is an abelian category [def-weil-sheaf-of-modules-category], in particular preadditive, and the cokernel of $\\varphi:\\mathcal G\\to\\mathcal H$ is $c:\\mathcal H\\to\\operatorname{Coker}\\varphi$. By [lem-weil-pbc-preadditive-epi-iff-cokernel-zero], $\\varphi$ is an epimorphism if and only if $\\operatorname{Coker}\\varphi$ is a zero object, i.e. $\\operatorname{Coker}\\varphi=0$. This is the equivalence of the two descriptions of 'surjective' in (1); it remains to compare them with the local lifting condition (Steps 2 and 3).",
+   "uses": [
+    "def-weil-sheaf-of-modules-category",
+    "lem-weil-pbc-preadditive-epi-iff-cokernel-zero"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/homology.tex",
+    "place": "Homology, Lemma 010C (label lemma-characterize-injective), (2): f is surjective (Coker f = 0) iff f is an epimorphism"
+   }
+  },
+  {
+   "text": "*Step 2 ((1), local lifting implies epimorphism).* Assume that for every open $W$ and $h\\in\\mathcal H(W)$ there are an open covering $W=\\bigcup_iW_i$ and $g_i\\in\\mathcal G(W_i)$ with $\\varphi_{W_i}(g_i)=h|_{W_i}$. Let $\\psi_1,\\psi_2:\\mathcal H\\to\\mathcal T$ be morphisms of $\\mathcal O_X$-modules with $\\psi_1\\circ\\varphi=\\psi_2\\circ\\varphi$, and put $\\psi=\\psi_1-\\psi_2$ (sectionwise difference), so $\\psi\\circ\\varphi=0$. For $W$, $h$, $W_i$, $g_i$ as above, $\\psi_W(h)|_{W_i}=\\psi_{W_i}(h|_{W_i})=\\psi_{W_i}(\\varphi_{W_i}(g_i))=0$ for all $i$, since $\\psi$ commutes with restrictions; as $\\mathcal T$ is a sheaf [def-weil-sheaf-of-modules-category], a section whose restrictions to the members of an open covering vanish is $0$, so $\\psi_W(h)=0$. Hence $\\psi=0$, i.e. $\\psi_1=\\psi_2$, and $\\varphi$ is an epimorphism.",
+   "uses": [
+    "def-weil-sheaf-of-modules-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sheaves.tex",
+    "place": "Sheaves, Definition 007U (label definition-injective-surjective), (5), and Lemma 0H7H (label lemma-characterize-epi-mono), (2): surjective maps of sheaves are epimorphisms (proof omitted there; written out here)"
+   }
+  },
+  {
+   "text": "*Step 3 ((1), epimorphism implies local lifting).* Assume $\\varphi$ is an epimorphism, so $\\operatorname{Coker}\\varphi=0$ by Step 1. By the construction of cokernels in $\\textit{Mod}(\\mathcal O_X)$ [def-weil-sheaf-of-modules-category], $\\operatorname{Coker}\\varphi=\\mathcal Q^\\#$ is the sheafification [def-weil-presheaf-modules-sheafification] of the presheaf of $\\mathcal O_X$-modules $\\mathcal Q:U\\mapsto\\mathcal H(U)/\\varphi_U(\\mathcal G(U))$ (restrictions induced by those of $\\mathcal H$, which carry $\\varphi_U(\\mathcal G(U))$ into $\\varphi_V(\\mathcal G(V))$ as $\\varphi$ commutes with restrictions), with $c$ the composite of the quotient maps $\\mathcal H(U)\\to\\mathcal Q(U)$ and of $\\theta:\\mathcal Q\\to\\mathcal Q^\\#$; and the underlying abelian sheaf of $\\mathcal Q^\\#$, with $\\theta$, is the sheafification of the underlying presheaf of abelian groups of $\\mathcal Q$ [def-weil-presheaf-modules-sheafification]. Let $W\\subseteq X$ be open, $h\\in\\mathcal H(W)$, $x\\in W$, and let $q\\in\\mathcal Q(W)$ be the class of $h$. Then $\\theta_W(q)\\in\\mathcal Q^\\#(W)=0$, so its germ $\\theta_x(q_x)=(\\theta_W(q))_x$ is $0$ (stalks and germs as in [def-weil-pbc-module-stalk]). By [lem-weil-pbc-stalk-sheafification-space] $\\theta_x:\\mathcal Q_x\\to\\mathcal Q^\\#_x$ is an isomorphism, hence $q_x=0=0_x$, and by the description of equality of germs [def-weil-pbc-module-stalk] there is an open $V_x$ with $x\\in V_x\\subseteq W$ and $q|_{V_x}=0$ in $\\mathcal Q(V_x)=\\mathcal H(V_x)/\\varphi_{V_x}(\\mathcal G(V_x))$. Since $q|_{V_x}$ is the class of $h|_{V_x}$, there is $g_x\\in\\mathcal G(V_x)$ with $\\varphi_{V_x}(g_x)=h|_{V_x}$. The opens $V_x$, $x\\in W$, cover $W$, which is the local lifting condition of (1). (This is the stalk statement $\\operatorname{Coker}(\\varphi)_x=\\operatorname{Coker}(\\varphi_x)$ of Modules, Section 01AF, used in the direction needed.) Together with Steps 1 and 2 this proves (1).",
+   "uses": [
+    "def-weil-sheaf-of-modules-category",
+    "def-weil-presheaf-modules-sheafification",
+    "def-weil-pbc-module-stalk",
+    "lem-weil-pbc-stalk-sheafification-space"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/modules.tex",
+    "place": "Modules, Section 01AF (label section-kernels): Coker(phi) is the sheafification of U |-> G(U)/phi(F(U)), and Coker(phi)_x = Coker(phi_x) because stalks commute with sheafification (Sheaves, Lemma 007Z, label lemma-stalk-sheafification)"
+   }
+  },
+  {
+   "text": "*Step 4 ((2), reduction to an epimorphism onto the kernel).* Let $\\mathcal F\\xrightarrow{\\chi}\\mathcal G\\xrightarrow{\\varphi}\\mathcal H$ be a complex of $\\mathcal O_X$-modules. Its kernel $k:\\mathcal K=\\operatorname{Ker}\\varphi\\to\\mathcal G$ is the sub-$\\mathcal O_X$-module $\\mathcal K(W)=\\{g\\in\\mathcal G(W):\\varphi_W(g)=0\\}$ with the restrictions of $\\mathcal G$ and $k$ the inclusion [def-weil-sheaf-of-modules-category]. Since $\\varphi\\circ\\chi=0$, $\\chi_W(\\mathcal F(W))\\subseteq\\mathcal K(W)$ for every open $W$, so $\\chi=k\\circ\\chi'$ where $\\chi'_W:\\mathcal F(W)\\to\\mathcal K(W)$, $f\\mapsto\\chi_W(f)$; the $\\chi'_W$ are $\\mathcal O_X(W)$-linear and commute with restrictions (those of $\\mathcal K$ being those of $\\mathcal G$), so $\\chi'$ is a morphism of $\\mathcal O_X$-modules, and it is the unique one with $k\\circ\\chi'=\\chi$ ($k$ is injective on sections). By [lem-weil-pbc-abelian-exact-iff-epi-kernel-lift] in the abelian category $\\textit{Mod}(\\mathcal O_X)$, the complex is exact at $\\mathcal G$ ($\\operatorname{Im}\\chi=\\operatorname{Ker}\\varphi$, [def-weil-pbc-exact-sequence]) if and only if $\\chi':\\mathcal F\\to\\mathcal K$ is an epimorphism.",
+   "uses": [
+    "def-weil-sheaf-of-modules-category",
+    "def-weil-pbc-exact-sequence",
+    "lem-weil-pbc-abelian-exact-iff-epi-kernel-lift"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/homology.tex",
+    "place": "Homology, Definition 010E (label definition-exact) and Lemma 010C (label lemma-characterize-injective); kernels in Mod(O_X): Modules, Section 01AF (label section-kernels)"
+   }
+  },
+  {
+   "text": "*Step 5 ((2), conclusion).* Apply (1) (Steps 1-3) to the morphism $\\chi':\\mathcal F\\to\\mathcal K$ of Step 4: $\\chi'$ is an epimorphism if and only if for every open $W$ and every $g\\in\\mathcal K(W)$ there are an open covering $W=\\bigcup_iW_i$ and $f_i\\in\\mathcal F(W_i)$ with $\\chi'_{W_i}(f_i)=g|_{W_i}$ in $\\mathcal K(W_i)$. As $\\mathcal K(W)$ consists of the $g\\in\\mathcal G(W)$ with $\\varphi_W(g)=0$, the restrictions of $\\mathcal K$ are those of $\\mathcal G$, and $\\chi'_{W_i}(f_i)=\\chi_{W_i}(f_i)$, this is exactly the local lifting condition of (2). With Step 4 this proves (2).",
+   "uses": [
+    "def-weil-sheaf-of-modules-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/modules.tex",
+    "place": "Modules, Section 01AF (label section-kernels: the kernel is the sectionwise kernel)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-sheaf-of-modules-category",
+  "lem-weil-pbc-preadditive-epi-iff-cokernel-zero",
+  "def-weil-presheaf-modules-sheafification",
+  "def-weil-pbc-module-stalk",
+  "lem-weil-pbc-stalk-sheafification-space",
+  "def-weil-pbc-exact-sequence",
+  "lem-weil-pbc-abelian-exact-iff-epi-kernel-lift"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/modules.tex",
+  "place": "Modules, Section 01AF (kernels sectionwise; cokernel the sheafified sectionwise cokernel, with stalks via Sheaves Lemma 007Z) and Lemma 01AG; Sheaves Definition 007U(5) and Lemma 0H7H(2); Homology Definition 010E and Lemma 010C. Part (2) is deduced from (1) applied to the induced map onto the kernel instead of through the stalk criterion of 01AG; both are assembled from these places"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -41,10 +116,24 @@
    "results": "SheafOfModules.IsLocallySurjective is only an abbrev (ModuleCat/Sheaf.lean:203) used as a hypothesis in ChangeOfRings/Sheafify; Sheaf/Abelian.lean:40 only the instance Abelian (SheafOfModules R); TopCat.Sheaf.exact_iff_stalkFunctor_map_exact (Mathlib/Topology/Sheaves/Abelian.lean:103): a ShortComplex of sheaves on a topological space valued in a concrete abelian category C is exact iff exact on all stalks; TopCat.Sheaf.epi_of_shortExact (Topology/Sheaves/Flasque.lean:113)",
    "date": "2026-10-10",
    "verdict": "no match for O_X-modules: exact_iff_stalkFunctor_map_exact is the stalk criterion for abelian sheaves (C = AddCommGrpCat); applying it to O_X-modules needs that the forgetful functor Mod(O_X) -> Ab(X) is exact, and the passage from stalks to local lifting is lem-weil-pbc-locally-surjective-iff-stalks, so this node is not a one-line specialization"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "sheaf of modules on a ringed space: epimorphism iff locally surjective on sections",
+   "results": "CategoryTheory.Sheaf.epi_of_isLocallySurjective, epi_of_isLocallySurjective' (Mathlib.CategoryTheory.Sites.LocallySurjective); PresheafOfModules.epi_of_surjective, surjective_of_epi, epi_iff_surjective (Mathlib.Algebra.Category.ModuleCat.Presheaf.EpiMono)",
+   "date": "2026-10-10",
+   "verdict": "no match: concrete-valued sheaves or presheaves of modules only, nothing for SheafOfModules"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rn 'epi_iff\\|isLocallySurjective_iff\\|Epi' Mathlib/Algebra/Category/ModuleCat/Sheaf/*.lean Mathlib/Algebra/Category/ModuleCat/Sheaf.lean Mathlib/AlgebraicGeometry/Modules/*.lean (lemma/theorem/instance lines)",
+   "results": "only Generators.lean (Epi of the map from a free module given by generating sections, ofEpi) and Quasicoherent.lean uses; no epi/locally-surjective characterization for SheafOfModules or Scheme.Modules",
+   "date": "2026-10-10",
+   "verdict": "no match"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "worker",
@@ -69,6 +158,12 @@
   "date": "2026-10-10",
   "by": "L",
   "result": "accepted",
-  "note": "Statement: epimorphisms and exactness in Mod(O_X) on a ringed space are the local lifting conditions (Modules 01AF/01AG); self-contained; correct; unsplit."
+  "note": "5 steps: epi iff Coker = 0 (010C leaf); local lifting => epi by the sheaf axiom; epi => local lifting through the sheafified sectionwise cokernel and the stalk isomorphism of sheafification; (2) reduced to (1) for F -> Ker(phi) by the new abelian-category leaf (exact iff kernel lift is epi; Mathlib lines verified by L). No other-unit tools."
+ },
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "lem-weil-pbc-ringed-space-module-exactness-local-lifting",
+  "worker": "stage1",
+  "summary": "Read Stacks Modules 01AF (kernels sectionwise, cokernel = sheafified sectionwise cokernel, Coker(phi)_x = Coker(phi_x)) and 01AG, Sheaves 007U/0H7H/007T/007Z, Homology 010C/010E. Statement kept; added def-weil-pbc-exact-sequence to stmt_deps (exactness at G is that notion). Proof in 5 steps: epi iff Coker = 0 (lem-weil-pbc-preadditive-epi-iff-cokernel-zero); local lifting implies epi (elementary, sheaf axiom); epi implies local lifting via the cokernel presheaf and stalks of the sheafification (lem-weil-pbc-stalk-sheafification-space, germ calculus of def-weil-pbc-module-stalk); exactness at G iff the induced map F -> Ker(phi) is an epimorphism (new Mathlib leaf lem-weil-pbc-abelian-exact-iff-epi-kernel-lift = ShortComplex.exact_iff_epi_kernel_lift); then (1) applied to F -> Ker(phi) gives (2). This route avoids the stalk criterion of 01AG (no node for it was needed) and lem-weil-pbc-locally-surjective-iff-stalks. Searches added for the item (leanfinder, grep): still not in Mathlib for SheafOfModules."
  }
 }

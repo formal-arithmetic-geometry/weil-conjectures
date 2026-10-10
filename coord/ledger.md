@@ -759,3 +759,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 01:38 L: reviewed lem-weil-pbc-regular-local-localization (5 steps, +4: global-dimension definition, 00O7, 00OC, 00O8): accepted.
 - 01:40 L: reviewed lem-weil-pbc-regular-sequence-polynomial-variables (6 steps, +2: swap-two, polynomial-ideal-coefficients-monomial; two corrections to Stacks 07DW): accepted.
 - 01:41 L: reviewed lem-weil-pbc-regular-sequence-powers (6 steps, +0F1T node): accepted.
+- 01:42 L: reviewed lem-weil-pbc-ringed-space-module-exactness-local-lifting (5 steps, +1 abelian leaf): accepted; lem-weil-pbc-separable-purely-inseparable-linear-disjoint: Mathlib leaf (Tower.lean:99), source tags corrected.
