@@ -1033,3 +1033,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 07:43 L: accepted lem-weil-pbc-smooth-retract-relative-global-complete-intersection (6 steps; new unsplit nodes improve-presentation-smooth-conormal-free 07CE(1) and dimension-supremum-local-dimensions 0B7I; fibre dimension via the rank of Omega instead of 00SC).
 - 07:44 L: accepted lem-weil-pbc-strictly-henselian-etale-acyclic (3 steps, no new nodes; tool_uses prop-weil-pbc-geometric-stalks-exact recorded by L).
 - 07:45 L: accepted lem-weil-pbc-spectral-limit-constructible-closed-quasi-compact (8 steps; 4 new leaves tychonoff-product-quasi-compact 08ZU, hausdorff-equalizer-closed 08ZE, continuous-image-quasi-compact 04Z9, initial-topology-continuity). Worker notes the hypothesis f(Z_i') in Z_i is unused; kept.
+- 07:47 L: accepted lem-weil-pbc-tor-dimension-shift-free (3 steps by agent, no new nodes).

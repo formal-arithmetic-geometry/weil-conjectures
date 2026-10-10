@@ -10,9 +10,53 @@
  "stmt_deps": [
   "def-weil-pbc-tor-modules"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "A free resolution of $K$. Apply [lem-weil-pbc-free-resolution-ses-split] to the short exact sequence $0\\to K\\xrightarrow{\\mathrm{id}_K}K\\to0\\to0$ ($\\mathrm{id}_K$ injective, $\\ker(K\\to0)=K=\\operatorname{im}\\mathrm{id}_K$, $K\\to0$ surjective) and keep only its first resolution: this gives a chain complex $G_\\bullet$ ($n\\ge0$, differentials $e_n:G_n\\to G_{n-1}$ for $n\\ge1$) of free $R$-modules with an $R$-linear augmentation $\\eta:G_0\\to K$ such that $\\cdots\\to G_2\\xrightarrow{e_2}G_1\\xrightarrow{e_1}G_0\\xrightarrow{\\eta}K\\to0$ is exact.",
+   "uses": [
+    "lem-weil-pbc-free-resolution-ses-split"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra, Section Tag 00LY (section-tor, lines 18215--18236): 'Choose a resolution $F_\\bullet$ of $M$ by free $R$-modules'"
+   }
+  },
+  {
+   "text": "Splicing. Define $F'_0=F$ and $F'_{n+1}=G_n$ for $n\\ge0$, with differentials $d'_1=j\\circ\\eta:G_0\\to F$ and $d'_{n+1}=e_n:G_n\\to G_{n-1}$ for $n\\ge1$, and augmentation $p:F'_0=F\\to M$. All $F'_n$ are free ($F$ by hypothesis, $G_n$ by Step 1) [def-weil-pbc-free-module]. The augmented complex $\\cdots\\to F'_2\\xrightarrow{d'_2}F'_1\\xrightarrow{d'_1}F'_0\\xrightarrow{p}M\\to0$ is exact [def-weil-pbc-exact-sequence]: $p$ is surjective; $pd'_1=pj\\eta=0$ and $\\operatorname{im}d'_1=j(\\eta(G_0))=j(K)=\\ker p$ because $\\eta$ is surjective and the given sequence is exact; $d'_1d'_2=j\\eta e_1=0$ and $\\ker d'_1=\\ker(j\\eta)=\\ker\\eta=\\operatorname{im}e_1=\\operatorname{im}d'_2$ because $j$ is injective; for $n\\ge2$, $d'_n d'_{n+1}=e_{n-1}e_n=0$ and $\\ker d'_n=\\ker e_{n-1}=\\operatorname{im}e_n=\\operatorname{im}d'_{n+1}$ by exactness of Step 1. So $(F'_\\bullet,p)$ is a free resolution of $M$.",
+   "uses": [
+    "def-weil-pbc-free-module",
+    "def-weil-pbc-exact-sequence"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra, proof of Lemma Tag 00S2 (lemma-exact-sequence-NL), lines 35476--35477 ('Since $N^0$ is free, we also see that $\\text{Tor}_2^B(H^0, C) = \\text{Tor}_1^B(M, C)$'), stated there without proof; argument written by the agent"
+   }
+  },
+  {
+   "text": "Comparison in degrees $\\ge2$. Free modules are allowed as the projective resolutions of [def-weil-pbc-tor-modules], so by that definition (independence of the resolution up to canonical isomorphism) $\\operatorname{Tor}^R_{i+1}(M,N)\\cong H_{i+1}(F'_\\bullet\\otimes_RN)$ and $\\operatorname{Tor}^R_i(K,N)\\cong H_i(G_\\bullet\\otimes_RN)$, as $R$-modules. Let $i\\ge1$. In $F'_\\bullet\\otimes_RN$ the part around degree $i+1$ is $F'_{i+2}\\otimes N\\xrightarrow{d'_{i+2}\\otimes1}F'_{i+1}\\otimes N\\xrightarrow{d'_{i+1}\\otimes1}F'_i\\otimes N$; since $i+1\\ge2$ and $i+2\\ge2$, Step 2 gives $d'_{i+2}=e_{i+1}$, $d'_{i+1}=e_i$ and $F'_{i+2}=G_{i+1}$, $F'_{i+1}=G_i$, $F'_i=G_{i-1}$, so this is literally $G_{i+1}\\otimes N\\xrightarrow{e_{i+1}\\otimes1}G_i\\otimes N\\xrightarrow{e_i\\otimes1}G_{i-1}\\otimes N$, the part of $G_\\bullet\\otimes_RN$ around degree $i$. Hence $H_{i+1}(F'_\\bullet\\otimes N)=\\ker(e_i\\otimes1)/\\operatorname{im}(e_{i+1}\\otimes1)=H_i(G_\\bullet\\otimes N)$, and composing, $\\operatorname{Tor}^R_{i+1}(M,N)\\cong\\operatorname{Tor}^R_i(K,N)$ as $R$-modules. (For $i=0$ the argument fails since $d'_1=j\\eta\\neq e_0$; this is why the statement requires $i\\ge1$.) The case $i=1$ gives $\\operatorname{Tor}^R_2(M,N)\\cong\\operatorname{Tor}^R_1(K,N)$, so one is $0$ iff the other is.",
+   "uses": [
+    "def-weil-pbc-tor-modules"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra, Section Tag 00LY (section-tor, lines 18215--18236): Tor as homology of $F_\\bullet\\otimes_RN$ for a free resolution $F_\\bullet$; Lemma Tag 00LZ (lemma-tor-welldefined, line 18239): independence of the resolution"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-free-resolution-ses-split",
+  "def-weil-pbc-free-module",
+  "def-weil-pbc-exact-sequence",
+  "def-weil-pbc-tor-modules"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Algebra, proof of Lemma Tag 00S2 (lemma-exact-sequence-NL), lines 35476--35477, where the fact is stated without proof; the splicing argument is written by the agent from the definition of Tor in Section Tag 00LY and Lemma Tag 00LZ"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -55,10 +99,45 @@
    "results": "none; index: unavailable (not a proof of absence)",
    "date": "2026-10-10",
    "verdict": "inconclusive"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Tor of a module is isomorphic to Tor of the kernel of a surjection from a free module in one degree lower",
+   "results": "LinearMap.kerLTensorEquivOfSurjective, LinearMap.tensorKerEquivOfSurjective_symm_tmul (Mathlib.RingTheory.Flat.Equalizer), LinearMap.quotKerEquivOfSurjective (Mathlib.LinearAlgebra.Isomorphisms), Module.Finite.kerRepr (Mathlib.RingTheory.Finiteness.Cardinality); nothing about Tor",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "left derived functor of a short exact sequence with projective middle term: L_{n+1}F(M) ≅ L_nF(K)",
+   "results": "CategoryTheory.Functor.isZero_leftDerived_obj_projective_succ, CategoryTheory.ProjectiveResolution.isoLeftDerivedObj, isoLeftDerivedObj_hom_naturality, fromLeftDerivedZero_eq (Mathlib.CategoryTheory.Abelian.LeftDerived)",
+   "date": "2026-10-10",
+   "verdict": "no match (vanishing on projectives and resolution comparison only; no long exact sequence or dimension shift for left derived functors)"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Tor', CategoryTheory.ShortComplex",
+   "results": "none",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rln \"Tor'\\|\\bTor\\b\" and grep -rln \"leftDerived.*δ\\|LeftDerived.*Exact\\|homologySequence.*leftDerived\" in ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib; grep of declarations in CategoryTheory/Monoidal/Tor.lean; ls Algebra/Homology/",
+   "results": "Tor only in CategoryTheory/Monoidal/Tor.lean (Tor line 44, Tor' line 50, isZero_Tor_succ_of_projective line 56, isZero_Tor'_succ_of_projective line 61), mentioned in comments of RingTheory/Flat/CategoryTheory.lean and RingTheory/LocalRing/Module.lean, used in RepresentationTheory/Homological/GroupHomology/Basic.lean; no connecting map or long exact sequence for leftDerived; dimension shifting exists only for Ext (Algebra/Category/ModuleCat/Ext/DimensionShifting.lean)",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "local_search",
+   "query": "Tor'_succ (project root ~/weil-conjectures-slopmaster2)",
+   "results": "none; index: unavailable (not a proof of absence)",
+   "date": "2026-10-10",
+   "verdict": "inconclusive"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "worker",
@@ -78,5 +157,12 @@
   }
  },
  "chapter": "sec-proper-base-change",
- "unit": "sk-thm-p1"
+ "unit": "sk-thm-p1",
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "lem-weil-pbc-tor-dimension-shift-free",
+  "worker": "stage1",
+  "summary": "Not a Mathlib leaf: Tor of [def-weil-pbc-tor-modules] is Mathlib's Tor' (left derived functor of - (x) N in the first variable), and Mathlib has for it only vanishing on projectives (isZero_Tor'_succ_of_projective) and no long exact sequence or dimension shift for left derived functors (dimension shifting exists only for Ext); searches recorded. Statement checked against Stacks 00S2 (lines 35476--35477, stated without proof there) and kept. Proof written by the agent from the definition (Section 00LY, Lemma 00LZ): (1) a free resolution G of K, obtained from [lem-weil-pbc-free-resolution-ses-split] applied to 0 -> K -> K -> 0 -> 0; (2) splicing G with 0 -> K -> F -> M -> 0 gives a free resolution F' of M with F'_{n+1} = G_n, d'_1 = j eta, d'_{n+1} = e_n for n >= 1 (exactness checked degree by degree); (3) for i >= 1 the complexes F' (x) N and G (x) N agree around degrees i+1 and i, so the homologies are equal and the definition's independence of the resolution gives the isomorphism. The long exact Tor node [lem-weil-pbc-tor-long-exact-first-variable] only reaches degree 1 and is not used. No new nodes."
+ },
+ "reviewed": "pass (L, 2026-10-10): 3 steps by agent: a free resolution of K (from the ses-split node applied to 0 -> K -> K -> 0), spliced with F to a free resolution of M, and the tensored complexes agree in degrees >= 2, giving Tor_{i+1}(M,N) = Tor_i(K,N) for i >= 1 by independence of the resolution."
 }
