@@ -10,9 +10,49 @@
  "stmt_deps": [
   "def-weil-inverse-system"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "For each $i\\ge1$ put $B_i=\\varphi_{c(i),i}(E_{c(i)})\\subseteq E_i$. Every $B_i$ is nonempty because $E_{c(i)}$ is nonempty. The images $\\varphi_{k,i}(E_k)$ decrease as $k$ increases, since $\\varphi_{k,i}=\\varphi_{j,i}\\circ\\varphi_{k,j}$ for $k\\ge j\\ge i$ [def-weil-inverse-system]. By the Mittag-Leffler hypothesis they equal $B_i$ for all $k\\ge c(i)$, so $B_i=\\bigcap_{k\\ge i}\\varphi_{k,i}(E_k)$; the terms with $i\\le k<c(i)$ contain $B_i$ by the same composite identity.",
+   "uses": [
+    "def-weil-inverse-system"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra, Definition 0595 (definition-ML-system) and Example 0596 (example-ML-surjective-maps), algebra.tex lines 20710--20745: stable images"
+   }
+  },
+  {
+   "text": "The restricted transition $f_i:B_{i+1}\\to B_i$ is well defined: if $x\\in B_{i+1}$, then $x=\\varphi_{k,i+1}(z)$ for some $k\\ge\\max(c(i),c(i+1),i+1)$ and $z\\in E_k$, by stabilization of the image at level $i+1$; hence $f_i(x)=\\varphi_{k,i}(z)\\in B_i$. It is surjective: for $y\\in B_i$ choose the same kind of $k$; stabilization at $i$ gives $z\\in E_k$ with $\\varphi_{k,i}(z)=y$. Put $x=\\varphi_{k,i+1}(z)$. Since $k\\ge c(i+1)$, stabilization at $i+1$ gives $x\\in B_{i+1}$, and $f_i(x)=\\varphi_{k,i}(z)=y$. Thus $(B_i,f_i|_{B_{i+1}})$ is a tower of nonempty sets with surjective transitions, and its compatible sequences are exactly those of $(E_i)$: any compatible $(e_i)$ satisfies $e_i=\\varphi_{k,i}(e_k)\\in B_i$ for $k\\ge\\max(i,c(i))$, while a compatible sequence in the $B_i$ is already one in the $E_i$.",
+   "uses": [
+    "def-weil-inverse-system"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra, Example 0596 (example-ML-surjective-maps), algebra.tex lines 20736--20745: stable-image tower with surjective maps and unchanged limit; surjectivity calculation expanded"
+   }
+  },
+  {
+   "text": "Choose $b_1\\in B_1$. Given $b_i\\in B_i$, surjectivity in Step 2 gives $b_{i+1}\\in B_{i+1}$ with $f_i(b_{i+1})=b_i$. Dependent choice makes these successive choices into one sequence $(b_i)_{i\\ge1}$; it is compatible at every level, hence belongs to $\\varprojlim_iB_i$. By Step 2 the same sequence belongs to $\\varprojlim_iE_i$, proving the latter nonempty.",
+   "uses": [
+    "def-weil-inverse-system"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra, Lemma 0597 (lemma-ML-limit-nonempty), algebra.tex lines 20748--20767: countable positive-integer case follows from the axiom of choice"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-inverse-system"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Algebra, Definition 0595 (definition-ML-system), Example 0596 (example-ML-surjective-maps), Lemma 0597 (lemma-ML-limit-nonempty), algebra.tex lines 20724--20767, specialized to the positive integers"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -52,7 +92,7 @@
  ],
  "mathlib_match": null,
  "mathlib_candidate": "Composite, not a leaf (B8): for F : ℕᵒᵖ ⥤ Type, the Stacks ML condition agrees with CategoryTheory.Functor.IsMittagLeffler (Mathlib/CategoryTheory/CofilteredSystem.lean:137, read); then F.toEventualRanges (line 246) has surjective maps (surjective_toEventualRanges, line 262) and nonempty values (toEventualRanges_nonempty, line 268), so the limit cone of F.toEventualRanges projects surjectively onto the nonempty value at 0 (CategoryTheory.Limits.Types.surjective_π_app_zero_of_surjective_map, Mathlib/CategoryTheory/Limits/Types/Images.lean:111, read), and F.toEventualRangesSectionsEquiv (line 255) transports a section back to F. Five declarations chained, plus the translation between the indexing i>=1 with c(i) and Mathlib's morphisms of ℕᵒᵖ; not one line.",
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "worker",
@@ -73,5 +113,17 @@
  },
  "chapter": "sec-proper-base-change",
  "unit": "sk-thm-p1",
- "reviewed": "Reviewed by L 2026-10-10 (statement): Algebra 0597 for the index set {1,2,...}, ML condition and limit defined in the statement. Unsplit."
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "lem-weil-pbc-ml-sets-tower-limit-nonempty",
+  "worker": "stage1",
+  "summary": "Expanded Stacks Algebra 0595--0597 into the stable-image construction, the surjectivity of its transitions with a common sufficiently large index, equality of its compatible sequences with the original tower, and a dependent-choice recursion. No new nodes were needed: each calculation uses the inverse-system definition, and the existing Mathlib search records the composite candidate without treating it as a one-line leaf."
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "group": "E1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed by the lead of E1; spot-checked by L: 0597 for towers over the positive integers; stable images B_i, surjectivity of the restricted transitions with k >= max(c(i), c(i+1), i+1), dependent choice; all three steps elementary"
+ }
 }
