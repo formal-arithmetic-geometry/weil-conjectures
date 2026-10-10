@@ -29,23 +29,23 @@ Written by the launcher at the start (`1-dag`), then kept current by the maintai
 - **Imported statement false in general (2026-10-09 15:05):** lem-fet-locally-trivial (sec-curve-estimates, imported, unit of the finite-etale points) asks for one surjective etale Y' → Y and one finite set S trivializing a finite etale P → Y; false for disconnected Y (Y = pt ⊔ pt, P one point over one component), true for connected Y. Found by the worker of lem-weil-pbc-finite-etale-trace-degree, which used Stacks 04HN instead. To be corrected at its own split (add 'Y connected' or allow S to vary with the component).
 - **Gap in a reviewed proof (node level, 2026-10-09 14:45):** prop-weil-pbc-algebraically-closed-extension step 10 feeds step 9 (constructibility in the curve sense, def-weil-pbc-constructible-torsion) into lem-weil-pbc-curve-constructible-reduction, whose hypothesis is constructibility as a sheaf of Z/r-modules (def-weil-pbc-etale-constructible-sheaf); the bridge is the new node lem-weil-pbc-constructible-torsion-modules-agree (unsplit): to be cited at step 10 when that node is split (the lead will add the pointer then). RESOLVED 2026-10-09 15:45: lem-weil-pbc-constructible-torsion-modules-agree split and reviewed; step 10 cites it.
 
-**Remote groups** (`tools/group_stats.py`, updated with each progress row; 2026-10-10 14:57 UTC):
+**Remote groups** (`tools/group_stats.py`, updated with each progress row; 2026-10-10 15:08 UTC):
 | group | merged | returned | abandoned | claims held (age, h) |
 |---|---|---|---|---|
 | C | 19 | 20 | 0 | 0: none |
-| C1 | 56 | 29 | 4 | 6: lem-sc-brauer-zero-all-curves (0.8), lem-sc-curve-base-change-relative-dimension-one (0.8), lem-sc-etale-affine-qcoherent (2.8), lem-sc-etale-zariski-qcoh-comparison (2.7), lem-sc-generic-vanishing-acyclic (0.2), thm-constructible-serre (0.1) |
+| C1 | 57 | 31 | 4 | 6: lem-sc-brauer-zero-all-curves (1.0), lem-sc-curve-base-change-relative-dimension-one (1.0), lem-sc-etale-affine-qcoherent (3.0), lem-sc-etale-zariski-qcoh-comparison (2.9), lem-weil-pbc-closed-immersion-products (0.0), thm-constructible-serre (0.3) |
 | D | 2 | 8 | 0 | 0: none |
 | D1 | 3 | 4 | 2 | 0: none |
 | E | 1 | 5 | 0 | 0: none |
-| E1 | 80 | 31 | 6 | 6: lem-pc-grothendieck-edge-cocycle (0.1), lem-sc-determinant-short-exact (0.5), lem-sc-etale-qcoherent-descent-fpqc-sections (0.1), lem-sc-finite-duality (0.7), lem-sc-group-cd-one (0.7), lem-sc-regular-curve-torsionfree-free (0.5) |
+| E1 | 85 | 32 | 6 | 6: lem-exc-coinduced-homotopy-continuous (0.1), lem-pc-algebraic-dim-zero-affine-finite (0.1), lem-pc-grothendieck-edge-cocycle (0.3), lem-pc-zero-dimensional-closed-subscheme-finite (0.1), lem-sc-conductor-sections (0.2), lem-sc-glue-component-line-bundles (0.2) |
 | F | 1 | 4 | 0 | 0: none |
-| F1 | 62 | 29 | 21 | 6: lem-galois-fpqc-refinement-fully-faithful (0.3), lem-pc-base-change-closure-components (0.8), lem-sc-ample-square-zero-thickening (0.2), lem-sc-dvr-saturation-line (0.0), lem-sc-pic-lift-closed-immersion-dim-le-one (0.3), lem-weil-pbc-ext-one-direct-sum (0.1) |
+| F1 | 62 | 30 | 21 | 6: lem-galois-fpqc-refinement-fully-faithful (0.4), lem-pc-base-change-closure-components (0.9), lem-sc-ample-square-zero-thickening (0.4), lem-sc-dvr-saturation-line (0.2), lem-sc-pic-lift-closed-immersion-dim-le-one (0.5), lem-weil-pbc-ext-one-direct-sum (0.2) |
 | G | 0 | 2 | 0 | 0: none |
-| G1 | 45 | 15 | 2 | 7: lem-pc-very-ample-descends (0.8), lem-sc-affine-cap-section-open (0.0), lem-sc-canonical-degree (0.5), lem-sc-module-abelian-zariski-cohomology (0.1), lem-sc-p1-graded-syzygy (0.1), lem-weil-pbc-zero-dimensional-cohomology (3.5), lemma-weil-pbc-finite-refinement-etale-cover (4.5) |
-| H1 | 20 | 9 | 4 | 5: lem-exc-rg-discrete-modules-functorial-injective-embeddings (0.1), lem-pc-nowhere-dense-dim-zero (0.2), lem-sc-component-intersections-finite (0.0), lem-sc-torsion-sections-generic (0.1), lem-weil-pbc-sets-pushforward-stalk-strict-henselization (3.1) |
-| J1 | 19 | 5 | 2 | 6: lem-exc-coinduced-discrete-embedding (0.4), lem-pc-cartier-divisor-nowhere-dense (0.2), lem-sc-ample-finite-principal-affine (0.0), lem-sc-function-field-cd-one (0.8), lem-sc-p1-coherent-proj-representation (0.1), lem-sc-point-tangent-separation-closed-immersion (0.2) |
-| K1 | 24 | 6 | 1 | 6: lem-pc-ample-affine-loci-criterion (0.2), lem-pc-projective-base-change (0.2), lem-sc-ext-locally-free (0.7), lem-sc-p1-proj-sheafification-exact (0.1), lem-sc-p1-proj-shifted-free-twist (0.1), lem-weil-pbc-proper-to-separated (0.0) |
-| M1 | 12 | 5 | 3 | 6: lem-exc-field-discrete-modules (2.3), lem-pc-zero-support-finite-scheme (0.6), lem-weil-pbc-derived-etale-cohomology-limit (0.1), lemma-weil-pbc-proper-underived-exchange (4.8), thm-sc-p1-duality (0.7), thm-sc-serre-duality-curve (0.6) |
+| G1 | 47 | 17 | 2 | 7: lem-exc-coinduced-homotopy-identity (0.0), lem-pc-very-ample-descends (1.0), lem-sc-affine-cap-section-open (0.2), lem-sc-geometrically-irreducible-product (0.0), lem-sc-module-abelian-zariski-cohomology (0.3), lem-sc-p1-graded-syzygy (0.2), lem-weil-pbc-zero-dimensional-cohomology (3.7) |
+| H1 | 20 | 11 | 4 | 6: lem-exc-rg-discrete-modules-functorial-injective-embeddings (0.3), lem-pc-nowhere-dense-dim-zero (0.4), lem-sc-component-intersections-finite (0.2), lem-sc-integral-dim-one-ample (0.2), lem-sc-torsion-sections-generic (0.3), lem-weil-pbc-sets-pushforward-stalk-strict-henselization (3.3) |
+| J1 | 21 | 6 | 2 | 6: lem-exc-coinduced-functions-open-stabilizer (0.0), lem-pc-cartier-divisor-nowhere-dense (0.4), lem-sc-ample-finite-principal-affine (0.2), lem-sc-exterior-top-direct-sum (0.0), lem-sc-p1-coherent-proj-representation (0.3), lem-sc-point-tangent-separation-closed-immersion (0.4) |
+| K1 | 25 | 6 | 1 | 6: lem-pc-ample-affine-loci-criterion (0.4), lem-pc-projective-base-change (0.3), lem-sc-ext-locally-free (0.9), lem-sc-finite-duality-trace (0.0), lem-sc-p1-proj-sheafification-exact (0.2), lem-weil-pbc-proper-to-separated (0.2) |
+| M1 | 15 | 6 | 3 | 6: lem-exc-field-discrete-modules (2.5), lem-sc-generic-vanishing-kernel-colimit (0.0), lem-sc-local-splitting-finite-free (0.0), lem-sc-zero-dim-noetherian-affine (0.2), lem-weil-pbc-derived-etale-cohomology-limit (0.3), thm-sc-p1-duality (0.9) |
 
 REMOTE LAUNCHER READY (2026-10-09 16:22: `roles/remote-launcher.md` committed; `AGENTS.md` §1, `roles/remote-lead.md`, `SETUP.md`, `roles/maintainer.md` §7, `tools/README.md` tied in; the tools take any group name `C1`, `C2`, …; the old group `C` keeps its claims until the human says its session is stopped).
 
@@ -57,20 +57,20 @@ REMOTE LAUNCHER READY (2026-10-09 16:22: `roles/remote-launcher.md` committed; `
 
 **REVIEW MODE STANDING** (2026-10-10 14:33 UTC, human's order via the launcher): the eight remote groups are run by a dispatcher script (no leads), 40 workers at all times, returns first; deliveries expected to rise from ~50/h to well over 100/h. All five sub-agent slots of L are reviewers that run the whole path themselves (brief-review.md: checks, full review, merge or return with the locked tool, one-line answer); L writes no splits and claims nothing while three or more unreviewed deliveries wait; oldest first, repaired returns first of all. Attachments arrive as releases `abandon: attachment <item>: <declaration>, <file>:<line>` in coord/deliveries.log; L verifies transitive sorry-freeness (sorryfree) and the statement, and closes the node or writes a notice to the group. If five reviewers cannot keep the unreviewed count under ten, L writes **REVIEW BEHIND <count>** here at once and goes to eight reviewers (accounts added by the human).
 
-**Direct delivery** (decision of the human, 2026-10-10 evening; numbers since 13:05 UTC, when L read it; updated 14:57 UTC; content returns = sections C, D, E; the threshold is one content return in four deliveries over an hour, or reviews more than twenty minutes behind):
+**Direct delivery** (decision of the human, 2026-10-10 evening; numbers since 13:05 UTC, when L read it; updated 15:08 UTC; content returns = sections C, D, E; the threshold is one content return in four deliveries over an hour, or reviews more than twenty minutes behind):
 
-| group | merged at first push | merged after a return | returned |
-|---|---|---|---|
-| C1 | 7 | 2 | 5 |
-| E1 | 20 | 4 | 7 |
-| F1 | 10 | 1 | 4 |
-| G1 | 6 | 2 | 6 |
-| H1 | 2 | 5 | 9 |
-| J1 | 9 | 2 | 4 |
-| K1 | 11 | 4 | 6 |
-| M1 | 8 | 1 | 5 |
+| group | merged at first push | merged after a return | returned | with reviewer fix |
+|---|---|---|---|---|
+| C1 | 8 | 2 | 7 | 5 |
+| E1 | 22 | 7 | 8 | 14 |
+| F1 | 10 | 1 | 5 | 6 |
+| G1 | 6 | 3 | 8 | 6 |
+| H1 | 2 | 5 | 11 | 2 |
+| J1 | 9 | 4 | 5 | 7 |
+| K1 | 12 | 4 | 6 | 7 |
+| M1 | 9 | 3 | 6 | 7 |
 
-Oldest delivery awaiting review: 1 min deliver/C1/lem-sc-curve-base-change-relative-dimension-one
+Oldest delivery awaiting review: 2 min deliver/E1/lem-sc-conductor-sections
 
 **In progress** (2026-10-09 22:29 UTC): the review-commit-claim loop on the queue of the target, five opus workers at effort medium (items claimed with `claim.py next L --stage 1` in queue order; claims in `coord/claims/`); one commit per reviewed item, per-item timings in `local/target-stats.txt` (opus-relaunch6 lines). Remote groups C1, D1, E1, F1, G1 (5 claims each; G1 holds 6) deliver on deliver/<group>/<item> and are reviewed per roles/remote-lead.md; since 19:55 UTC the human's rule applies: a group with an open entry in coord/returns/<group>.md is refused new claims by `tools/claim.py next` until it repairs the item or abandons it with a reason starting with 'abandon:' (release is otherwise refused while a return entry or a delivery branch exists; merge, release and abandonment delete the entries, so the returns files are exact; abandonments are counted in the groups table); the merge tool runs only with SHEAF_LEAD=L-only in the lead's shell. Deliveries are checked after each review (`tools/merge_delivery.py list`) and a background watch of refs/heads/deliver/ runs. Since the decision of ~20:22 UTC a remote group cannot release an item with an open return entry or a delivery branch except by abandoning it ('abandon: <reason>', counted per group); a claim obtained through a bypass is released by the maintainer. Since ~22:22 UTC (decision of the human): group D1 is stopped (claims abandoned, branches deleted, returns cleared); the remote groups run tools/preflight_delivery.py on their clone before every push (one commit on the current tip, only the item's files, a real group review, new nodes without proof steps and with cited statements, verified Mathlib lines, steps citing nodes rather than quoting tags, review_split and check_dag); a delivery that fails it is not pushed. Open returns at 21:32 UTC: D1 sheaves-directed-colimit-sections, E1 complex-injective-resolution-mono and descend-separated, F1 etale-free-sheaf-constructible (third return), G1 stein-factorization-affine (second return) and unramified-etale-local-decomposition. Pending for a quiet moment: re-search with the new tools the unsplit new nodes created before the search rule (grep only); stage-3 merge candidates accumulate in the ledger (relative Gabber node, the two superseded finite-etale nodes, lem-weil-pbc-projective-space-twist-glued-identification vs the charts node's clause (v), lemma-weil-pbc-constructible-finite-pushforward vs its Lambda-module form, the two definitions of etale now reconciled by the two smooth-of-relative-dimension-0 items). The Wanted documents of `literature/LIST.md` (Weibel 2.4.6/2.2.8 added) and the questions in `coord/HUMAN.md` are open; nothing waits on them.
 
@@ -265,6 +265,7 @@ Oldest delivery awaiting review: 1 min deliver/C1/lem-sc-curve-base-change-relat
 | 2026-10-10 14:46 | 858 | 1865 | 957 | 339 | DIRECT DELIVERY TOO COSTLY (see the flag above: 18 content returns of 66 decisions in 13:44-14:44, 27%); CHECK_DAG KEYERROR FIXED; REVIEW MODE STANDING: 2 reviewers in flight, 3 starting, 9 unreviewed waiting (oldest 5 min), not behind; since 14:34 reviewers merged 17 and returned 9; own: lem-sc-ample-on-reduction-noetherian accepted |
 | 2026-10-10 14:52 | 855 | 1883 | 960 | 341 | DIRECT DELIVERY TOO COSTLY still: hour 13:52-14:52 reviewers merged 60 and returned 24 (29%, all content reasons); REVIEW MODE STANDING: 5 reviewers in flight, 1 unreviewed waiting (oldest 2 min), reviews not behind; since 14:46 reviewers merged 17, returned 5; dag_queue missing-node fix committed (b2b7e1b02) |
 | 2026-10-10 14:57 | 866 | 1892 | 962 | 341 | DIRECT DELIVERY TOO COSTLY, worsening: hour 13:58-14:57 reviewers merged 62 and returned 33 (35%); since 14:52 alone 9 merged, 11 returned (all content: wrong hypotheses, uncarried steps, false new nodes, invented tags); REVIEW MODE STANDING: 3 reviewers + 2 writers in flight (queue empty when they started), 0 unreviewed waiting, not behind; 39 shallow lean.sorry_free flags corrected (75fceceb4), 1 attachment closed (kinjective-functorial-existence), 2 refused (serre-duality-curve, hilb-dominating-power) |
+| 2026-10-10 15:08 | 866 | 1906 | 962 | 341 | DIRECT DELIVERY TOO COSTLY: hour 14:09-15:08 reviewers merged 68 and returned 41 (38%); FIX MORE, RETURN LESS in force since 15:05 (1 FIX+NODE merge so far); REVIEW MODE STANDING: 5 reviewers in flight (briefly 7 at 15:07 by a miscount of L, corrected), 1 unreviewed waiting (oldest 2 min), not behind; own lem-sc-hilb-dominating-power accepted (2 new nodes); since 14:57 own accepted 3, reviewers merged 14, returned 10 |
 
 **LEAN REFRESH DONE** (2026-10-10 10:53 UTC; the human's decision relayed at 09:47, commit 6fde5cb5d). The done-branch checkout `~/weil-conjectures-slopmaster2` is at `71d63dcf` (from `1ad77be9`, 882 commits; same Mathlib, lake-manifest unchanged; `.lake/build` seeded from the other session's worktree, 10116 jobs built with 12 threads by 10:12). New sorry map `local/sorry_map_slopmaster2_71d63dcf.jsonl.gz`: 32094 declarations (21984 owners after merging auxiliaries; 420 with `sorry`, 271 of them named by no node), made with the `Weil` root included; the first run died with the session at the 21st account limit and was rerun detached (10:30–10:47). Names added to the audit: the `lean = [...]` lists of `upstream-blueprint-main` (849 lists, 508 for DAG nodes, 754 names; an old `blueprint_lean` name absent from the branch is `superseded` when the current list exists) and the docstring tags `(blueprint: <id>)`: 1438 tag ids; **822 declarations with such a tag matched a node** (exact tags for 473 nodes; qualified tags such as "the implication (1) ⇒ (2)" for 78 nodes, which count as partial and never close a node); 182 tagged ids are no DAG node, 75 tags sit outside a declaration docstring. Also a list of every declaration of the imported libraries (`local/library_names_mathlib.tsv.gz`, 473131 names, `tools/library_names.lean`), so that a Mathlib declaration named by the blueprint counts as found and sorry-free. The lean-lsp server already serves the new checkout (it finds the new declarations), no restart needed.
 
@@ -334,6 +335,7 @@ Numbers (the DAG as of the refresh, 4471 nodes; the "before" is the same DAG und
 | 2026-10-10 14:46 | 105 of 773 | 12 |
 | 2026-10-10 14:52 | 108 of 777 | 12 |
 | 2026-10-10 14:57 | 109 of 777 | 12 |
+| 2026-10-10 15:08 | 112 of 778 | 12 |
 
 Review lag (10:12 UTC): 11 deliveries waiting, the oldest since 09:36 UTC (about 35 minutes), more than the twenty minutes the human set; the lead missed them while the delivery watch slept (10-minute polling) during the Lean refresh. Working through them now; the watch is now checked at every review.
 
