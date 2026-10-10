@@ -739,19 +739,139 @@ lemma Etale.bijective_lowerStarUnit_comp_map_of_concrete [HasSmallSiteSheafify A
     ⟨fun _ _ h ↦ (cancel_epi _).1 h, fun ψ ↦ ⟨inv (Etale.etaleLowerShriekToLowerStar A f G) ≫ ψ,
       IsIso.hom_inv_id_assoc _ _⟩⟩
 
-example : HasSmallSiteSheafify AddCommGrpCat.{u + 1} := inferInstance
-omit [IsGrothendieckAbelian.{u + 1} A] [AlgebraicGeometry.Etale f] [IsSeparated f]
-  [IsFinite f] in
-/-- Composing with `Hom(a, -)` preserves sheaves on the small étale site. -/
-instance Etale.hasSheafCompose_preadditiveCoyoneda (Z : Scheme.{u}) (a : A) :
-    Z.smallEtaleTopology.HasSheafCompose (preadditiveCoyoneda.obj (op a)) :=
-  have : PreservesLimitsOfSize.{u, u + 1} (preadditiveCoyoneda.obj (op a)) :=
-    preservesLimitsOfSize_shrink.{u + 1, u + 1, u, u + 1} _
-  inferInstance
 
-example : X.smallEtaleTopology.HasSheafCompose (CategoryTheory.forget AddCommGrpCat.{u + 1}) :=
-  inferInstance
-example : IsGrothendieckAbelian.{u + 1} AddCommGrpCat.{u + 1} := inferInstance
+omit [IsGrothendieckAbelian.{u + 1} A] [AlgebraicGeometry.Etale f] [IsSeparated f] [IsFinite f] in
+lemma Etale.sheafCompose_preadditiveCoyoneda_map_hom_app_apply {Z : Scheme.{u}}
+    {P Q : Sheaf Z.smallEtaleTopology A} (ψ : P ⟶ Q) {a : A} (U : Z.Etaleᵒᵖ)
+    (x : a ⟶ P.obj.obj U) :
+    (((sheafCompose _ (preadditiveCoyoneda.obj (op a))).map ψ).hom.app U).hom x =
+      x ≫ ψ.hom.app U :=
+  rfl
+
+omit [IsGrothendieckAbelian.{u + 1} A] [AlgebraicGeometry.Etale f] [IsSeparated f] [IsFinite f] in
+lemma Etale.sheafCompose_map_preadditiveCoyoneda_map_app_hom_app_apply {Z : Scheme.{u}}
+    (P : Sheaf Z.smallEtaleTopology A) {a a' : A} (g : a ⟶ a') (U : Z.Etaleᵒᵖ)
+    (x : a' ⟶ P.obj.obj U) :
+    (((sheafCompose_map _ (preadditiveCoyoneda.map g.op)).app P).hom.app U).hom x = g ≫ x :=
+  rfl
+
+/-- **Extension by zero off the graphs is the unit of an adjunction `f_* ⊣ f^*`** for a finite
+étale `f` and an arbitrary coefficient category: every morphism `G ⟶ f^* F` is `η_G ≫ f^* φ`
+for a unique `φ : f_* G ⟶ F`. The case of abelian groups is
+`AlgebraicGeometry.Etale.bijective_lowerStarUnit_comp_map_of_concrete`, and the general case
+follows by applying it to the sheaves of abelian groups `Hom(a, G(-))` and `Hom(a, F(-))`. -/
+lemma Etale.bijective_lowerStarUnit_comp_map (G : Sheaf X.smallEtaleTopology A)
+    (F : Sheaf Y.smallEtaleTopology A) :
+    Function.Bijective (fun φ : (f)_*[A].obj G ⟶ F ↦
+      (Etale.lowerStarUnit A f).app G ≫ (Etale.localizationRestriction A f ‹_›).map φ) := by
+  let h (a : A) := sheafCompose X.smallEtaleTopology (preadditiveCoyoneda.obj (op a))
+  let h' (a : A) := sheafCompose Y.smallEtaleTopology (preadditiveCoyoneda.obj (op a))
+  have hAb (G' : Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1})
+      (F' : Sheaf Y.smallEtaleTopology AddCommGrpCat.{u + 1}) :=
+    Etale.bijective_lowerStarUnit_comp_map_of_concrete AddCommGrpCat.{u + 1} f G' F'
+  have hcomp (a : A) {F'' : Sheaf Y.smallEtaleTopology A} {G'' : Sheaf X.smallEtaleTopology A}
+      (φ : (f)_*[A].obj G'' ⟶ F'') :
+      (h a).map ((Etale.lowerStarUnit A f).app G'' ≫
+        (Etale.localizationRestriction A f ‹_›).map φ) =
+        (Etale.lowerStarUnit AddCommGrpCat.{u + 1} f).app ((h a).obj G'') ≫
+          (Etale.localizationRestriction AddCommGrpCat.{u + 1} f ‹_›).map ((h' a).map φ) := by
+    rw [Functor.map_comp, Etale.sheafCompose_map_lowerStarUnit_app]
+    rfl
+  constructor
+  · intro φ₁ φ₂ heq
+    ext U : 3
+    have h₁ := (hAb ((h (((f)_*[A].obj G).obj.obj U)).obj G)
+      ((h' (((f)_*[A].obj G).obj.obj U)).obj F)).1
+      (a₁ := (h' _).map φ₁) (a₂ := (h' _).map φ₂) (by
+        dsimp only
+        rw [← hcomp, ← hcomp]
+        exact congrArg _ heq)
+    have h₂ : 𝟙 _ ≫ φ₁.hom.app U = 𝟙 _ ≫ φ₂.hom.app U :=
+      congrArg (fun ψ ↦ (ψ.hom.app U).hom (𝟙 _)) h₁
+    simpa only [Category.id_comp] using h₂
+  · intro ψ
+    let e (a : A) := Equiv.ofBijective _ (hAb ((h a).obj G) ((h' a).obj F))
+    let φa (a : A) : (f)_*[AddCommGrpCat.{u + 1}].obj ((h a).obj G) ⟶ (h' a).obj F :=
+      (e a).symm ((h a).map ψ)
+    have hφa (a : A) : e a (φa a) = (h a).map ψ := (e a).apply_symm_apply _
+    -- the `φa` are natural in `a`
+    have hnat {a a' : A} (g : a ⟶ a') :
+        (f)_*[AddCommGrpCat.{u + 1}].map ((sheafCompose_map _ (preadditiveCoyoneda.map g.op)).app G) ≫
+          φa a = φa a' ≫ (sheafCompose_map _ (preadditiveCoyoneda.map g.op)).app F := by
+      apply (hAb ((h a').obj G) ((h' a).obj F)).1
+      dsimp only
+      have hn := (Etale.lowerStarUnit AddCommGrpCat.{u + 1} f).naturality
+        ((sheafCompose_map _ (preadditiveCoyoneda.map g.op)).app G)
+      rw [Functor.map_comp, Functor.map_comp, ← Category.assoc, ← Category.assoc]
+      change ((Etale.lowerStarUnit AddCommGrpCat.{u + 1} f).app _ ≫
+        ((f)_*[AddCommGrpCat.{u + 1}] ⋙ Etale.localizationRestriction _ f _).map _) ≫ _ = _
+      rw [← hn]
+      change _ ≫ e a (φa a) = e a' (φa a') ≫ _
+      rw [hφa, hφa]
+      exact ((sheafCompose_map _ (preadditiveCoyoneda.map g.op)).naturality ψ).symm
+    let m (U : Y.Etaleᵒᵖ) : ((f)_*[A].obj G).obj.obj U ⟶ F.obj.obj U :=
+      ((φa (((f)_*[A].obj G).obj.obj U)).hom.app U).hom (𝟙 _)
+    have hm (a : A) (U : Y.Etaleᵒᵖ) (x : a ⟶ ((f)_*[A].obj G).obj.obj U) :
+        ((φa a).hom.app U).hom x = x ≫ m U := by
+      have : ((φa a).hom.app U).hom (x ≫ 𝟙 _) = x ≫ m U :=
+        congrArg (fun k ↦ (k.hom.app U).hom (𝟙 _)) (hnat x)
+      rwa [Category.comp_id] at this
+    let φ : (f)_*[A].obj G ⟶ F := ObjectProperty.homMk
+      { app U := m U
+        naturality U V k := by
+          have hk : ((φa (((f)_*[A].obj G).obj.obj U)).hom.app V).hom
+              (𝟙 _ ≫ ((f)_*[A].obj G).obj.map k) = m U ≫ F.obj.map k :=
+            congrArg (fun k ↦ k (𝟙 _))
+              (congrArg AddCommGrpCat.Hom.hom
+                ((φa (((f)_*[A].obj G).obj.obj U)).hom.naturality k))
+          rw [Category.id_comp, hm] at hk
+          exact hk }
+    have hφ (a : A) : (h' a).map φ = φa a := by
+      ext U : 3
+      ext x
+      exact (hm a U x).symm
+    refine ⟨φ, ?_⟩
+    ext U : 3
+    have h₁ : (h (G.obj.obj U)).map ((Etale.lowerStarUnit A f).app G ≫
+        (Etale.localizationRestriction A f ‹_›).map φ) = (h (G.obj.obj U)).map ψ := by
+      rw [hcomp, hφ]
+      exact hφa _
+    have h₂ : 𝟙 _ ≫ ((Etale.lowerStarUnit A f).app G ≫
+        (Etale.localizationRestriction A f ‹_›).map φ).hom.app U = 𝟙 _ ≫ ψ.hom.app U :=
+      congrArg (fun ψ ↦ (ψ.hom.app U).hom (𝟙 _)) h₁
+    simpa only [Category.id_comp] using h₂
+
+/-- **For a finite étale `f`, the direct image `f_*` is left adjoint to the restriction
+`f^*`**, with unit the extension by zero off the graphs. -/
+noncomputable def Etale.lowerStarLocalizationRestrictionAdjunction :
+    (f)_*[A] ⊣ Etale.localizationRestriction A f ‹_› :=
+  Adjunction.mkOfHomEquiv
+    { homEquiv G F := Equiv.ofBijective _ (Etale.bijective_lowerStarUnit_comp_map A f G F)
+      homEquiv_naturality_left_symm {G' G F} k ψ := by
+        apply (Equiv.ofBijective _ (Etale.bijective_lowerStarUnit_comp_map A f G' F)).injective
+        erw [Equiv.apply_symm_apply]
+        rw [Equiv.ofBijective_apply, Functor.map_comp,
+          ← Category.assoc]
+        change _ = ((Etale.lowerStarUnit A f).app G' ≫
+          ((f)_*[A] ⋙ Etale.localizationRestriction A f ‹_›).map k) ≫ _
+        rw [← (Etale.lowerStarUnit A f).naturality, Category.assoc]
+        exact congrArg (k ≫ ·) ((Equiv.ofBijective _
+          (Etale.bijective_lowerStarUnit_comp_map A f G F)).apply_symm_apply ψ).symm
+      homEquiv_naturality_right φ g := by
+        simp only [Equiv.ofBijective_apply, Functor.map_comp, Category.assoc] }
+
+lemma Etale.lowerStarLocalizationRestrictionAdjunction_unit :
+    (Etale.lowerStarLocalizationRestrictionAdjunction A f).unit = Etale.lowerStarUnit A f := by
+  ext G : 2
+  change (Etale.lowerStarUnit A f).app G ≫ (Etale.localizationRestriction A f ‹_›).map (𝟙 _) = _
+  rw [CategoryTheory.Functor.map_id]
+  exact Category.comp_id _
+
+/-- **For a finite étale `f`, the direct image `f_*` is left adjoint to the pullback `f^*`.** -/
+noncomputable def Etale.lowerStarUpperStarAdjunctionOfIsFinite :
+    (f)_*[A] ⊣ (f)^*[A] :=
+  (Etale.lowerStarLocalizationRestrictionAdjunction A f).ofNatIsoRight
+    (Etale.upperStarIsoLocalizationRestriction A f ‹_›).symm
 
 end Bijective
 
