@@ -2,7 +2,7 @@
 
 941 items; claim with `tools/claim.py next <group> [--stage N]`.
 
-## Stage 1: nodes to split (585)
+## Stage 1: nodes to split (583)
 
 | node | distance to a target | Lean state on the done branch |
 |---|---|---|
@@ -24,8 +24,6 @@
 | `lem-weil-pbc-separable-residue-cotangent-injective` | 1014 | none |
 | `lem-weil-pbc-separably-generated-differentials-dimension` | 1014 | none |
 | `lem-weil-pbc-serre-criterion-reduced` | 1014 | none |
-| `lem-weil-pbc-spectral-constructible-topology-hausdorff` | 1014 | none |
-| `lem-weil-pbc-spectral-map-constructible-continuous` | 1014 | none |
 | `lem-weil-pbc-torsion-module-flat-base-change-iso` | 1014 | none |
 | `lem-weil-pbc-torsion-submodule-flat-base-change-iso` | 1014 | none |
 | `lem-weil-pbc-two-term-homotopy-equivalence-direct-sum` | 1014 | none |
@@ -592,7 +590,7 @@
 | `def-exc-jacobian-presentation` | - | none |
 | `def-nagata-rees-algebra` | - | none |
 
-## Stage 2: nodes to state (356)
+## Stage 2: nodes to state (358)
 
 | node | distance to Mathlib | kind |
 |---|---|---|
@@ -906,12 +904,14 @@
 | `lem-weil-pbc-spectral-closed-subspace` | 1 | state |
 | `lem-weil-pbc-spectral-constructible-clopen-constructible-topology` | 1 | state |
 | `lem-weil-pbc-spectral-constructible-finite-intersection` | 1 | state |
+| `lem-weil-pbc-spectral-constructible-topology-hausdorff` | 1 | state |
 | `lem-weil-pbc-spectral-directed-limit-finite-sober` | 1 | state |
 | `lem-weil-pbc-spectral-directed-limit-spectral` | 1 | state |
 | `lem-weil-pbc-spectral-generalizations-of-quasi-compact` | 1 | state |
 | `lem-weil-pbc-spectral-limit-constructible-closed-nonempty` | 1 | state |
 | `lem-weil-pbc-spectral-limit-constructible-closed-quasi-compact` | 1 | state |
 | `lem-weil-pbc-spectral-limit-descend-opens` | 1 | state |
+| `lem-weil-pbc-spectral-map-constructible-continuous` | 1 | state |
 | `lem-weil-pbc-spectral-proconstructible-closure-specialization` | 1 | state |
 | `lem-weil-pbc-spectral-sheaf-colimit-constant-embeddings` | 1 | state |
 | `lem-weil-pbc-split-extension-free-presentation` | 1 | state |
@@ -953,7 +953,7 @@
 | `lem-weil-pbc-p1-field-dimension-one` | 4 | state |
 | `lem-weil-pbc-projective-space-zero-isomorphism` | 4 | state |
 
-Not open yet: 596 nodes that wait for stage 1, 683 nodes that wait for a statement dependency.
+Not open yet: 594 nodes that wait for stage 1, 683 nodes that wait for a statement dependency.
 
 ## Stage 3: modules to prove (0)
 
