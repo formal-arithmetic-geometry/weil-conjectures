@@ -29,9 +29,102 @@
   "pqf-def-cohomology",
   "def-weil-pbc-etale-cohomology"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "For $u:U\\to X$ put $\\mathcal F_{\\mathrm{et}}(u)=\\Gamma(U,u^*\\mathcal F)$ and for an $X$-morphism $g:U'\\to U$ use the pullback restriction $\\rho_g$ of [def-sc-etale-qcoherent-module]. The presheaf functoriality statement [lem-sc-etale-qcoherent-presheaf-functorial] proves that these restrictions are additive and compose, while [lem-sc-etale-qcoherent-descent] proves the presheaf is a sheaf. Applying the same pullback functor to an $\\mathcal O_X$-linear $\\varphi$ gives the maps $\\Gamma(U,u^*\\varphi)$; their compatibility with the restrictions is the naturality asserted in the presheaf-functoriality statement, so they define a morphism $\\varphi_{\\mathrm{et}}$ of [def-weil-pbc-abelian-etale-sheaves].",
+   "uses": [
+    "def-sc-etale-qcoherent-module",
+    "lem-sc-etale-qcoherent-presheaf-functorial",
+    "lem-sc-etale-qcoherent-descent",
+    "def-weil-pbc-abelian-etale-sheaves"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/descent.tex",
+    "place": "Section 35.8, Tags 03DR and 03DT, equation (35.8.1): the associated etale sheaf and its functoriality"
+   }
+  },
+  {
+   "text": "Let $\\epsilon:X_{\\mathrm{Et}}\\to X_{\\rm Zar}$ be the morphism of sites induced by the inclusion of open subschemes, as in [lem-weil-pbc-zariski-etale-inclusion-morphism-of-sites], so $(\\epsilon_*\\mathcal F_{\\mathrm{et}})(U)=\\mathcal F_{\\mathrm{et}}(j_U)=\\Gamma(U,j_U^*\\mathcal F)$ for an open $U\\subseteq X$ with inclusion $j_U:U\\to X$. Its pullback on cohomology [lem-weil-pbc-site-cohomology-pullback] over the final object $X$, followed by $H^q$ of the counit $\\epsilon^{-1}\\epsilon_*\\mathcal F_{\\mathrm{et}}\\to\\mathcal F_{\\mathrm{et}}$, is the map $e^q:H^q(X_{\\rm Zar},\\epsilon_*\\mathcal F_{\\mathrm{et}})\\to H^q(X_{\\mathrm{Et}},\\mathcal F_{\\mathrm{et}})$; in degree zero it is the identity of $\\Gamma(X,\\mathcal F_{\\mathrm{et}})$ by the triangle identity. Next, the identification $\\epsilon_*\\mathcal F_{\\mathrm{et}}\\cong\\mathcal F_{ab}$, with $\\mathcal F_{ab}$ the underlying abelian sheaf of $\\mathcal F$ on $X_{\\rm Zar}$: for an open $U$ let $\\theta_U:\\mathcal F(U)=(\\mathcal F|_U)(U)\\to\\Gamma(U,j_U^*\\mathcal F)$ be the map on sections over $U$ of the isomorphism $\\kappa_{\\mathcal F}:\\mathcal F|_U\\xrightarrow{\\sim}j_U^*\\mathcal F$ of [lem-weil-pbc-open-immersion-module-pullback-restriction]; it is an isomorphism of groups, and by the unit clause of that statement (with the open $U$ of $X$) $\\theta_U(t)=\\eta^{j_U}(t)=j_U^*t$. For opens $W\\subseteq U$ with inclusion $g:W\\to U$, so $j_W=j_U\\circ g$, the restriction of $\\mathcal F_{\\mathrm{et}}$ along $g$ is $\\rho_g(s)=c_{g,j_U}(g^*s)$ [def-sc-etale-qcoherent-module], and the normalization of $c_{g,j_U}$ by the units in [lem-sc-etale-qcoherent-presheaf-functorial] gives $\\rho_g(\\theta_U(t))=c_{g,j_U}(g^*j_U^*t)=j_W^*t=\\eta^{j_W}(t)=\\theta_W(t|_W)$, the last equality again by the unit clause of [lem-weil-pbc-open-immersion-module-pullback-restriction] (for $j_W$ and the open $U$, $j_W^{-1}U=W$). Hence $\\theta:\\mathcal F_{ab}\\xrightarrow{\\sim}\\epsilon_*\\mathcal F_{\\mathrm{et}}$ is an isomorphism of abelian sheaves on $X_{\\rm Zar}$. For an $\\mathcal O_X$-linear $\\varphi:\\mathcal F\\to\\mathcal G$ the naturality of $\\kappa$ in the module gives $\\Gamma(U,j_U^*\\varphi)\\circ\\theta_U=\\theta_U\\circ\\varphi_U$, i.e. $\\epsilon_*(\\varphi_{\\mathrm{et}})\\circ\\theta=\\theta\\circ\\varphi_{ab}$. Finally [lem-sc-zariski-module-abelian-cohomology-agree] gives $\\alpha^q:H^q(X,\\mathcal F)\\xrightarrow{\\sim}H^q(X_{\\rm Zar},\\mathcal F_{ab})$. Define $c^q_{\\mathcal F}=e^q\\circ H^q(X_{\\rm Zar},\\theta)\\circ\\alpha^q:H^q(X,\\mathcal F)\\to H^q(X_{\\mathrm{Et}},\\mathcal F_{\\mathrm{et}})$.",
+   "uses": [
+    "lem-weil-pbc-zariski-etale-inclusion-morphism-of-sites",
+    "lem-weil-pbc-site-cohomology-pullback",
+    "def-weil-pbc-sites-and-cohomology",
+    "def-sc-zariski-cohomology",
+    "def-weil-pbc-etale-cohomology",
+    "lem-weil-pbc-open-immersion-module-pullback-restriction",
+    "def-sc-etale-qcoherent-module",
+    "lem-sc-etale-qcoherent-presheaf-functorial",
+    "lem-sc-zariski-module-abelian-cohomology-agree"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/descent.tex",
+    "place": "Proposition 03DW, part (2), and etale-cohomology.tex Lemma 09AX: the comparison map induced by the inclusion of the Zariski site"
+   }
+  },
+  {
+   "text": "For every affine open $U\\subseteq X$, [lem-weil-pbc-etale-cohomology-over-open] identifies the value of the higher-direct-image presheaf with $H^q(U_{\\mathrm{Et}},(\\mathcal F|_U)_{\\mathrm{et}})$, which is zero for $q>0$ by [lem-sc-etale-affine-qcoherent]. Hence the presheaf $P^q(U)=H^q(U_{\\mathrm{Et}},(\\mathcal F|_U)_{\\mathrm{et}})$ is zero on the affine basis. Every open has an affine covering, so the sheafification $ (P^q)^\\# $ is zero; the sheafification description [lem-weil-pbc-site-higher-direct-image-sheafified-presheaf] therefore gives $R^q\\epsilon_*\\mathcal F_{\\mathrm{et}}=0$ for $q>0$.",
+   "uses": [
+    "lem-weil-pbc-etale-cohomology-over-open",
+    "lem-sc-etale-affine-qcoherent",
+    "lem-weil-pbc-site-higher-direct-image-sheafified-presheaf",
+    "def-weil-pbc-sheafification"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Theorem Tag 03P2 (theorem-zariski-fpqc-quasi-coherent), affine case and the preceding Lemma Tag 03P1"
+   }
+  },
+  {
+   "text": "Apply the Leray degeneration statement [lem-weil-pbc-site-leray-degenerate] to $\\epsilon$ and the vanishing of its higher direct images from Step 3. The edge map in that lemma is therefore an isomorphism for every $q$, so the map $e^q$ of Step 2 (the edge map $e^q_{X,\\mathcal F_{\\mathrm{et}}}$ for the final object $X$) is an isomorphism, and hence so is $c^q_{\\mathcal F}=e^q\\circ H^q(\\theta)\\circ\\alpha^q$. This proves the asserted comparison for every scheme, including non-separated schemes.",
+   "uses": [
+    "lem-weil-pbc-site-leray-degenerate",
+    "lem-weil-pbc-site-higher-direct-image-sheafified-presheaf"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/descent.tex",
+    "place": "Proposition Tag 03DW, proof after the separated case: injective resolutions and the comparison of the two Cech spectral sequences"
+   }
+  },
+  {
+   "text": "For $\\varphi:\\mathcal F\\to\\mathcal G$, the naturality square for $c^q$ is the composite of four commuting squares: (i) the naturality square of the module/underlying-abelian comparison [lem-sc-zariski-module-abelian-cohomology-agree]; (ii) $H^q(X_{\\rm Zar},-)$ applied to the square $\\epsilon_*(\\varphi_{\\mathrm{et}})\\circ\\theta_{\\mathcal F}=\\theta_{\\mathcal G}\\circ\\varphi_{ab}$ of Step 2; (iii) the naturality square for the site-cohomology pullback [lem-weil-pbc-site-cohomology-pullback]; and (iv) the square for the counit $\\epsilon^{-1}\\epsilon_*\\to\\mathrm{id}$, which is natural by the adjunction. Thus $c^q_{\\mathcal G}\\circ H^q(X,\\varphi)=H^q(X_{\\mathrm{Et}},\\varphi_{\\mathrm{et}})\\circ c^q_{\\mathcal F}$. In degree zero, $e^0$ is the identity by the triangle identity (Step 2) and $\\alpha^0$ is the identity by the degree-zero clause of [lem-sc-zariski-module-abelian-cohomology-agree], so $c^0_{\\mathcal F}=\\theta_X$, which is the identity of $\\Gamma(X,\\mathcal F)$ under the identification $\\Gamma(X,\\mathcal F)=\\Gamma(X,\\mathrm{id}_X^*\\mathcal F)=\\mathcal F_{\\mathrm{et}}(X)$ given by $\\kappa$ for $j_X=\\mathrm{id}_X$.",
+   "uses": [
+    "lem-sc-zariski-module-abelian-cohomology-agree",
+    "lem-weil-pbc-site-cohomology-pullback"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/descent.tex",
+    "place": "Proposition Tag 03DW, statement and proof: canonical comparison isomorphisms are natural in the quasi-coherent module"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sc-etale-qcoherent-module",
+  "lem-sc-etale-qcoherent-presheaf-functorial",
+  "lem-sc-etale-qcoherent-descent",
+  "def-weil-pbc-abelian-etale-sheaves",
+  "lem-weil-pbc-zariski-etale-inclusion-morphism-of-sites",
+  "lem-weil-pbc-site-cohomology-pullback",
+  "def-weil-pbc-sites-and-cohomology",
+  "def-sc-zariski-cohomology",
+  "def-weil-pbc-etale-cohomology",
+  "lem-sc-zariski-module-abelian-cohomology-agree",
+  "lem-sc-etale-affine-qcoherent",
+  "lem-weil-pbc-site-higher-direct-image-sheafified-presheaf",
+  "def-weil-pbc-sheafification",
+  "lem-weil-pbc-site-leray-degenerate",
+  "lem-weil-pbc-etale-cohomology-over-open",
+  "lem-weil-pbc-open-immersion-module-pullback-restriction"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/descent.tex",
+  "place": "Proposition Tag 03DW, part (2), with the affine calculation from etale-cohomology.tex Theorem Tag 03P2"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -70,7 +163,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "worker",
@@ -86,5 +179,72 @@
   }
  },
  "chapter": "sec-curve-estimates",
- "unit": "sk-prop-cd"
+ "unit": "sk-prop-cd",
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "lem-sc-etale-zariski-qcoh-comparison",
+  "worker": "stage1",
+  "summary": "Split the comparison into construction of the associated etale sheaf and its morphisms, the comparison map from the Zariski inclusion of sites, affine acyclicity and vanishing of higher direct images, Leray degeneration for arbitrary schemes, and naturality in the module. Added the smaller statement lem-sc-zariski-module-abelian-cohomology-agree for the module-versus-underlying-abelian comparison from Stacks 03FD.",
+  "blueprint": "The item's blueprint.from points to the proper-case Artin-Schreier proof clause identifying etale H^1(G_a) with Zariski H^1(O_C); the five steps realize that comparison and its naturality using the full comparison theorem and its affine local calculation.",
+  "tool_uses": [
+   {
+    "node": "lem-sc-etale-qcoherent-presheaf-functorial",
+    "why": "Step 1 needs the presheaf restriction laws for the associated etale sheaf; the unit only names the comparison theorem."
+   },
+   {
+    "node": "lem-sc-etale-qcoherent-descent",
+    "why": "Step 1 needs the sheaf condition for the associated etale presheaf; the unit only names the comparison theorem."
+   },
+   {
+    "node": "lem-weil-pbc-zariski-etale-inclusion-morphism-of-sites",
+    "why": "Step 2 needs the site morphism induced by open subschemes."
+   },
+   {
+    "node": "lem-weil-pbc-site-cohomology-pullback",
+    "why": "Steps 2 and 5 need the induced pullback on site cohomology and its naturality."
+   },
+   {
+    "node": "lem-sc-etale-affine-qcoherent",
+    "why": "Step 3 needs affine etale acyclicity for quasi-coherent modules."
+   },
+   {
+    "node": "lem-weil-pbc-site-higher-direct-image-sheafified-presheaf",
+    "why": "Steps 3 and 4 need the sheafification description of higher direct images."
+   },
+   {
+    "node": "lem-weil-pbc-site-leray-degenerate",
+    "why": "Step 4 needs the Leray edge-map isomorphism after higher direct images vanish."
+   },
+   {
+    "node": "lem-weil-pbc-open-immersion-module-pullback-restriction",
+    "why": "Step 2 needs the natural identification of module pullback with restriction along the open immersion."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sc-etale-qcoherent-presheaf-functorial",
+  "lem-sc-etale-qcoherent-descent",
+  "lem-weil-pbc-zariski-etale-inclusion-morphism-of-sites",
+  "lem-weil-pbc-site-cohomology-pullback",
+  "lem-sc-etale-affine-qcoherent",
+  "lem-weil-pbc-site-higher-direct-image-sheafified-presheaf",
+  "lem-weil-pbc-site-leray-degenerate",
+  "lem-weil-pbc-open-immersion-module-pullback-restriction",
+  "lem-sc-etale-qcoherent-presheaf-functorial",
+  "lem-sc-etale-qcoherent-descent",
+  "lem-weil-pbc-zariski-etale-inclusion-morphism-of-sites",
+  "lem-weil-pbc-site-cohomology-pullback",
+  "lem-sc-etale-affine-qcoherent",
+  "lem-weil-pbc-site-higher-direct-image-sheafified-presheaf",
+  "lem-weil-pbc-site-leray-degenerate",
+  "lem-weil-pbc-open-immersion-module-pullback-restriction"
+ ],
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-ez2",
+  "group": "C1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-ez2 (reviewer sub-agent of L); spot-checked: Re-push after the 15:03 return; points checked: (1) the circular higher-direct-image node is gone, step 3 now proves R^q eps_* F_et=0 from the new node lem-weil-pbc-etale-cohomology-over-open (Stacks 03F3 + localized etale site = U_Et, with j^{-1}F_et=(F|_U)_et via kappa; statement checked true), lem-sc-etale-affine-qcoherent for the affine open and quasi-coherent F|_U, sheafification zero on an affine basis, and lem-weil-pbc-site-higher-direct-image-sheafified-presheaf; lem-pc-affine-vanishing dropped: repaired. (3) step 5 writes the four squares, cites lem-sc-zariski-module-abelian-cohomology-agree (a correct 03FD for the Zariski site), fmap nodes removed from step 5 and tool_uses: repaired. (4) proof_deps = union of uses, tool_uses each with a why, report updated: repaired. (2) only asserted, not written (eps_*F_et ~ F_ab was routed through the cohomology-over-open node and its compatibility/naturality stated without derivation): FIX more, RETURN less (C1/C4): dag/nodes/sec-curve-estimates/lem-sc-etale-zariski-qcoh-comparison.json: proof[1]: rewrote step 2 to define theta_U = kappa on sections over U (lem-weil-pbc-open-immersion-module-pullback-restriction, unit clause theta_U(t)=eta^{j_U}(t)), prove rho_g(theta_U t)=theta_W(t|_W) from the unit normalization of c_{g,j_U} in lem-sc-etale-qcoherent-presheaf-functorial (now cited in step 2), naturality in phi from naturality of kappa, and define c^q_F = e^q o H^q(theta) o alpha^q explicitly; the over-open node dropped from step 2 (still used in step 3, proof_deps unchanged); proof[3]: the edge map e^q is the iso, hence c^q; proof[4]: square (ii) named as H^q(theta-square) and degree zero c^0 = theta_X = identity under Gamma(X,F)=Gamma(X,id^*F). Statement agrees with 03DW(2) (canonical isomorphisms H^q(S,F)=H^q(S_et,F^a)) plus naturality; Leray edge map lem-weil-pbc-site-leray-degenerate applied with V=X final, hypotheses supplied by step 3. Small cases: q=0, affine X (both sides vanish for q>0), phi=id. All tool_uses accepted as generic site/module tools. Start Sat Oct 10 03:27:45 PM UTC 2026, end Sat Oct 10 03:29:22 PM UTC 2026.; 1 file(s) fixed by the reviewer"
+ }
 }

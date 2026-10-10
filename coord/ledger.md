@@ -1790,3 +1790,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 15:29 L: merged deliver/G1/lem-sc-p1-graded-syzygy (reviewer FIX; after a return; new nodes: 5)
 - 15:29 L: returned deliver/G1/lem-exc-etale-field-gsets (reviewer RETURN: 1. D1: step 4 / lem-exc-etale-field-cover-detection: the new node is the item's covering clause restated (covering iff j)
 - 15:29 L: returned deliver/E1/lem-weil-pbc-radicial-etale-open (reviewer RETURN: 1. B10: lem-weil-pbc-radicial-etale-open: slopmaster2 (71d63dcf) already proves the item: AlgebraicGeometry.IsOpenImmers)
+- 15:29 L: merged deliver/C1/lem-sc-etale-zariski-qcoh-comparison (reviewer FIX; after a return; new nodes: 2)
