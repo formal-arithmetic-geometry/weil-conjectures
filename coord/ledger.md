@@ -1474,3 +1474,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 13:15 L: merged deliver/E1/lem-weil-pbc-finite-product-normal (reviewer PASS, first push; 3 new Mathlib leaves)
 - 13:16 L: accepted lem-sc-smooth-connected-curve-local-rings: 8 steps, 4 new Mathlib leaves (stalks in the function field, 005E closed point, 02IZ generalization chains, def DVR)
 - 2026-10-10, delivery of E1: lem-sc-ga-cohomology merged from deliver/E1/lem-sc-ga-cohomology (1 commit(s), 1 new node(s), spot-checked by L: L: reviewed in full by a reviewer sub-agent (FIX: two wording fixes in split_report.blueprint and the new node's from.place): 03DW(2) and 02UZ read, 3 steps checked, route via the unit's step 5 (descent for quasi-coherent modules), small cases tested); claim closed
+- 13:16 L: merged deliver/E1/lem-sc-ga-cohomology (reviewer FIX: 2 wording fixes applied; first push; new node lem-sc-noetherian-cohomology-above-dimension)
