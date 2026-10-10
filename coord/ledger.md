@@ -2746,3 +2746,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 21:59 L: merged deliver/G1/lem-sc-affine-perfect-map-lift (reviewer FIX+NODE(1); after a return; new nodes: 3)
 - 21:59 L: returned deliver/G1/lem-pc-supported-open-pushforward (reviewer RETURN: Reviewer R-sop2728. 1. D1 (relabelling, delivery-errors F.1 / G.2): the two new nodes restate the item's own clauses. le)
 - 21:59 L: merged deliver/H1/lem-sc-meromorphic-sheaf-generic-product (reviewer FIX; after a return; new nodes: 2)
+- 22:00 L: merged deliver/C1/lem-pc-perfect-generator-exists (reviewer FIX; first push; new nodes: 0)

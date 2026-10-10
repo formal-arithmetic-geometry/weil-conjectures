@@ -24,9 +24,69 @@
   "def-pc-perfect-complex",
   "def-pc-generators"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "For an affine scheme X = Spec(A), O_X is a perfect object of D_QCoh(O_X) and a perfect generator: E = 0 exactly when Hom(O_X[n], E) vanishes for every n.",
+   "uses": [
+    "lem-pc-perfect-generation-affine-base"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/perfect.tex",
+    "place": "Tag 09IS affine case"
+   }
+  },
+  {
+   "text": "Let X be quasi-compact and quasi-separated with X = U union V, U quasi-compact open and V affine open, and let P be a perfect generator of D_QCoh(O_U). The cited induction step gives a perfect Q on X and a perfect Koszul object K' supported on V minus U such that Q direct-sum K' is a generator of D_QCoh(O_X); a direct sum of two perfect objects is perfect (on a common refinement of the two coverings the sum of two strictly perfect complexes is strictly perfect), and Q direct-sum K' lies in D_QCoh(O_X) because a perfect object has quasi-coherent cohomology sheaves (elementary: locally it is isomorphic to a bounded complex of direct summands of finite free modules, whose cohomology sheaves are kernels modulo images of maps of quasi-coherent modules, hence quasi-coherent, and quasi-coherence is local). So D_QCoh(O_X) has a single perfect generator lying in D_QCoh(O_X).",
+   "uses": [
+    "lem-pc-perfect-generation-open-induction-step"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/perfect.tex",
+    "place": "Tag 09IS, induction step"
+   }
+  },
+  {
+   "text": "For the qcqs scheme X, let P(W) be the property that D_QCoh(O_W) has a perfect generator, i.e. a perfect object G with E = 0 if and only if Hom(G[n], E) = 0 for all n, for every E in D_QCoh(O_W). P holds for every affine open by Step 1. If U is quasi-compact open, V affine open and P(U) holds, then U union V is a quasi-compact open of the quasi-separated X, hence itself quasi-compact and quasi-separated, and Step 2 applied to U union V gives P(U union V). By the induction principle, P(X) holds: D_QCoh(O_X) has a perfect generator G.",
+   "uses": [
+    "lem-sc-invert-s-cohomology-induction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/coherent.tex",
+    "place": "Tag 08DR, as applied in Tag 09IS"
+   }
+  },
+  {
+   "text": "Let G be the perfect generator from Step 3 and let S be the smallest strictly full subcategory containing G and closed under shifts, cones, retracts and set-indexed direct sums. The category D_QCoh(O_X) is a triangulated subcategory of D(O_X) (elementary: it is closed under shifts, and under cones by the long exact cohomology sequence and the fact that quasi-coherent modules form a weak Serre subcategory, i.e. are closed under kernels, cokernels and extensions) and has set-indexed direct sums, G, which lies in D_QCoh(O_X) by Steps 1 and 2, is compact, and the one-member family (G) has coproduct G, which is a generator. By the homotopy-colimit construction for a set of compact generators, every object Y is obtained from coproducts of shifts of G by successive cones and a final coproduct cone. Shifts of G are perfect, so the closure properties put every such object in S; hence S is all of D_QCoh(O_X).",
+   "uses": [
+    "lem-pc-derived-qcoh-direct-sums",
+    "lem-pc-perfect-object-compact",
+    "def-pc-generators",
+    "lem-pc-compact-generators-build-objects"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 09SN, applied to the perfect generator of Tag 09IS"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-perfect-generation-affine-base",
+  "lem-pc-perfect-generation-open-induction-step",
+  "lem-sc-invert-s-cohomology-induction",
+  "lem-pc-derived-qcoh-direct-sums",
+  "lem-pc-perfect-object-compact",
+  "def-pc-generators",
+  "lem-pc-compact-generators-build-objects"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/perfect.tex",
+  "place": "Tag 09IS, proof of theorem-bondal-van-den-Bergh"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -51,12 +111,37 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-sc-proper-flat-right-adjoint-affine-basechange",
   "by": "worker",
   "date": "2026-10-10"
  },
  "chapter": "sec-picard-framework",
- "unit": "sk-thm-picard-duality"
+ "unit": "sk-thm-picard-duality",
+ "split_report": {
+  "date": "2026-10-11",
+  "item": "lem-pc-perfect-generator-exists",
+  "worker": "stage1",
+  "summary": "Split Tag 09IS using the existing affine-base, affine-open induction, and qcqs induction-principle nodes, then used the existing compactness, direct-sum, generator-definition, and homotopy-colimit nodes to prove that the resulting single perfect generator generates the whole localizing retract-closed subcategory. No new nodes were needed.",
+  "blueprint": "Realizes the Tag 0AA8 case (1) sentence in the ancestor lem-sc-finite-duality: choose a single perfect complex M generating D_QCoh(X).",
+  "tool_uses": [
+   {
+    "node": "lem-sc-invert-s-cohomology-induction",
+    "why": "The qcqs open-cover induction principle is the generic Stacks Tag 08DR tool used to pass from affine and affine-union cases to X; this Picard unit has no replacement for that general induction principle."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sc-invert-s-cohomology-induction",
+  "lem-sc-invert-s-cohomology-induction"
+ ],
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-pge2728",
+  "group": "C1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-pge2728 (reviewer sub-agent of L); spot-checked: Read packet whole; Step 1 affine base (09IS affine case), Step 2 merged open-induction-step node, Step 3 qcqs induction principle lem-sc-invert-s-cohomology-induction (Tag 08DR, generic tool, accepted) with P(U)=>P(U union V) matching its premise, Step 4 compactness + telescope node give the localizing retract-closed clause; generator = def-pc-generators as citers (lem-sc-proper-flat-right-adjoint-affine-basechange, lem-pc-perfect-generator-pullback) use it; no new nodes, no duplicate of the merged induction-step/koszul-orthogonal/supported-generator nodes. FIX more, RETURN less: (1) C1/C4 Step 2: the induction step yields Q+K' perfect in D(O_X), but the statement and lem-pc-perfect-object-compact need G in D_QCoh; added the elementary fact that perfect objects have quasi-coherent cohomology; (2) C1 Step 4: lem-pc-derived-qcoh-direct-sums gives only sums, lem-pc-compact-generators-build-objects needs D_QCoh triangulated; added the elementary closure under shifts/cones (QCoh weak Serre). Second reading missed both.; 1 file(s) fixed by the reviewer"
+ }
 }
