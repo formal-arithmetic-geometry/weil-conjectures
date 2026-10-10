@@ -26,9 +26,43 @@
   "def-sp-abelian",
   "def-sp-injective-resolutions"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "For a morphism of discrete $A$-modules with continuous $G$-action, the underlying module kernel is stable under the action, and every element of it has the same open stabilizer as in the source. The underlying cokernel inherits the action; the stabilizer of a quotient class contains the open stabilizer of any representative, so it is open. Thus the zero object, finite biproducts, kernels, and cokernels are those in the underlying module category, and exactness is detected on underlying $A$-modules. The normal-kernel and conormal-cokernel conditions for monomorphisms and epimorphisms are the corresponding module conditions. Therefore the structural criterion in [def-sp-abelian] makes $\\mathcal C$ an abelian category.",
+   "uses": [
+    "lem-exc-discrete-modules-abelian-structure",
+    "def-sp-abelian"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 0A2H, label section-group-cohomology: open stabilizers and the R-G-module category; the kernel/cokernel verification is the direct module-category construction"
+   }
+  },
+  {
+   "text": "By the functorial injective-embedding result for $R$-$G$-modules [lem-exc-discrete-modules-abelian-injective-embeddings], specialized to the discrete-action subcategory, every object of $\\mathcal C$ admits a monomorphism into an injective object. Hence $\\mathcal C$ has enough injectives in the sense of [def-sp-injective-resolutions].",
+   "uses": [
+    "lem-exc-discrete-modules-abelian-injective-embeddings",
+    "def-sp-injective-resolutions"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/injectives.tex",
+    "place": "Tag 04JF, label lemma-G-modules, and etale-cohomology.tex Tag 0A2H paragraph after Definition 04JP"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-exc-discrete-modules-abelian-structure",
+  "def-sp-abelian",
+  "lem-exc-discrete-modules-abelian-injective-embeddings",
+  "def-sp-injective-resolutions"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tag 0A2H, label section-group-cohomology, with the functorial-injective construction from literature/stacks-project/injectives.tex Tag 04JF"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -53,7 +87,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "def-exc-continuous-cohomology",
@@ -68,5 +102,24 @@
   }
  },
  "chapter": "sec-curve-estimates",
- "unit": "sk-prop-h2"
+ "unit": "sk-prop-h2",
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "lem-exc-discrete-modules-abelian",
+  "worker": "stage1",
+  "summary": "Split the category claim into the underlying kernel/cokernel and exactness structure, and the functorial injective-embedding theorem. Checked the open-stabilizer condition for submodules and quotient classes, then combined the structural node with the abelian-category definition and the Stacks 04JF injective result to obtain the full item.",
+  "blueprint": "Realizes def-exc-continuous-cohomology's category clause: the first step is the direct open-stabilizer/kernel/cokernel verification, and the second is the cited functorial-injective result used for enough injectives."
+ },
+ "tool_uses": [
+  "def-sp-abelian",
+  "def-sp-injective-resolutions"
+ ],
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-dma",
+  "group": "G1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-dma (reviewer sub-agent of L); spot-checked: Source: etale-cohomology.tex Definition 04JP (definition-G-module-continuous) and the following paragraph (continuity iff open stabilizers; Mod_G has enough injectives), and injectives.tex Tag 04JF (lemma-G-modules: Mod_{R,G} for any topological group G and ring R has functorial injective embeddings, via the right adjoint u(M)={x: open stabilizer} of the forgetful functor to Mod_{R[G]}). The item statement is unchanged; it is the specialization G profinite, A finite ring, objects A-modules with A-linear G-action with open stabilizers, morphisms equivariant A-linear maps, matching 04JP hypothesis by hypothesis. New node -structure (zero object, biproducts, kernels, cokernels with induced action, exactness on underlying modules) checked true: kernel elements keep their stabilizer, a class's stabilizer contains that of a representative, componentwise biproducts keep open stabilizers. Step 1 carried by -structure plus def-sp-abelian: a mono has zero kernel in C hence is injective, and is then the kernel of N -> N/f(M) since C-kernels are module kernels; dually for epis; preadditivity is obvious; a few lines from the cited statements (C2). New node -injective-embeddings is exactly 04JF specialized (true; enough injectives follows), and step 2 is carried by it plus def-sp-injective-resolutions. def-sp-abelian and def-sp-injective-resolutions are of unit sk-prop-av-pqf-finite, generic definitions used as black boxes, recorded as tool_uses (C8). New nodes: statement only, created.item the item, from = {node, place, via}, is null, same_as lists, three Mathlib searches each (leansearch unavailable 403, recorded); no sorry-free slopmaster2 declaration found by grep (EnoughInjectives occurrences concern sheaf categories only), so B10 does not apply. Small cases: trivial G, zero module, quotient by a stable submodule. Report present with Review by G1. Start 14:20 UTC, end 14:21 UTC."
+ }
 }
