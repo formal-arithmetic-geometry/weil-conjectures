@@ -26,9 +26,61 @@
   "def-pc-derived-category-qcoh-algebra",
   "def-pc-derived-rhom-algebra-module"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "By [def-pur-pseudo-coherent-complex], every point of $Y$ has an open neighbourhood on which $A$ is quasi-isomorphic to a bounded-above complex of finite free modules; shrinking to affine opens and using that the Noetherian scheme $Y$ is quasi-compact, choose a finite affine open cover $Y=\\bigcup_{i=1}^n U_i$, $U_i=\\operatorname{Spec}(R_i)$, with $A|_{U_i}$ quasi-isomorphic to a bounded-above complex $\\mathcal F_i^\\bullet$ of finite free $\\mathcal O_{U_i}$-modules. Restriction to an open commutes with derived internal Hom by [lem-sc-derived-internal-hom-restrict-open]. The same restriction functor is exact by [lem-sc-derived-open-restriction-adjunction-exact], so cohomology sheaves restrict as well, and $K|_{U_i}$ lies in $D^+_{\\mathrm{QCoh}}(U_i)$ with the same lower bound $a$ as $K$.",
+   "uses": [
+    "def-pur-pseudo-coherent-complex",
+    "lem-sc-derived-internal-hom-restrict-open",
+    "lem-sc-derived-open-restriction-adjunction-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/perfect.tex",
+    "place": "Tag 0A6H, proof of clause (1), localization to affine opens"
+   }
+  },
+  {
+   "text": "On $U_i=\\operatorname{Spec}(R_i)$ a map $\\mathcal O_{U_i}^m\\to\\mathcal O_{U_i}^k$ is a matrix over $\\Gamma(U_i,\\mathcal O_{U_i})=R_i$ [lem-weil-pbc-spec-module-tilde-sections], so $\\mathcal F_i^\\bullet=\\widetilde P_i$ for a bounded-above complex $P_i$ of finite free $R_i$-modules. By the affine equivalence [lem-pc-affine-qcoh-derived-equivalence], $K|_{U_i}\\cong\\widetilde L_i$ with $L_i=R\\Gamma(U_i,K|_{U_i})\\in D(R_i)$; since $M\\mapsto\\widetilde M$ is exact and $\\Gamma(U_i,\\widetilde M)=M$ [lem-weil-pbc-spec-module-tilde-sections], $H^q(L_i)=0$ for $q<a$. The affine comparison [lem-sc-affine-pseudo-coherent-rhom-qcoherent] identifies $R\\mathcal Hom(A,K)|_{U_i}$ with the associated sheaf of $R\\operatorname{Hom}_{R_i}(P_i,L_i)$, whose cohomology sheaves are quasi-coherent and vanish in sufficiently negative degrees. Taking the minimum of these finitely many bounds, the cohomology sheaves of $R\\mathcal Hom_{\\mathcal O_Y}(A,K)$ are quasi-coherent and vanish in all sufficiently negative degrees.",
+   "uses": [
+    "lem-weil-pbc-spec-module-tilde-sections",
+    "lem-pc-affine-qcoh-derived-equivalence",
+    "lem-sc-affine-pseudo-coherent-rhom-qcoherent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/perfect.tex",
+    "place": "Tag 0A6H, clause (1) reduced to clause (3) on an affine"
+   }
+  },
+  {
+   "text": "The action of $A$ on the first argument gives the natural $A$-module structure through [def-pc-derived-rhom-algebra-module]. By the definition of $D^+_{\\mathrm{QCoh}}(A)$ in [def-pc-derived-category-qcoh-algebra], quasi-coherence for an $A$-module is quasi-coherence of its underlying $\\mathcal O_Y$-module. Thus the object lies in $D^+_{\\mathrm{QCoh}}(A)$ and, after restriction of scalars, in $D^+_{\\mathrm{QCoh}}(Y)$.",
+   "uses": [
+    "def-pc-derived-rhom-algebra-module",
+    "def-pc-derived-category-qcoh-algebra"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/duality.tex",
+    "place": "Tags 0BUZ, 0BV0, 0BV1 and Tag 0AX2"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pur-pseudo-coherent-complex",
+  "lem-sc-derived-internal-hom-restrict-open",
+  "lem-sc-derived-open-restriction-adjunction-exact",
+  "lem-sc-affine-pseudo-coherent-rhom-qcoherent",
+  "def-pc-derived-rhom-algebra-module",
+  "def-pc-derived-category-qcoh-algebra",
+  "lem-weil-pbc-spec-module-tilde-sections",
+  "lem-pc-affine-qcoh-derived-equivalence"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/perfect.tex",
+  "place": "Tag 0A6H, lemma-quasi-coherence-internal-hom, clause (1)"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -74,12 +126,31 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-sc-finite-pushforward-derived-hom-qcoherent",
   "by": "worker",
   "date": "2026-10-10"
  },
  "chapter": "sec-picard-framework",
- "unit": "sk-thm-picard-duality"
+ "unit": "sk-thm-picard-duality",
+ "split_report": {
+  "date": "2026-10-11",
+  "item": "lem-sc-pseudo-coherent-rhom-qcoherent",
+  "worker": "M1-stage1",
+  "summary": "Split the global theorem into local affine reduction, affine RHom calculation, and the algebra-module/forgetful-category conclusion. Added one smaller affine statement-only node.",
+  "blueprint": "The proof clause of lem-sc-finite-duality invoking Stacks 0A6H for internal Hom from a pseudo-coherent object.",
+  "tool_uses": []
+ },
+ "tool_uses": [
+  "lem-pc-affine-qcoh-derived-equivalence"
+ ],
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-prq2226",
+  "group": "M1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-prq2226 (reviewer sub-agent of L); spot-checked: Statement vs Stacks 0A6H(1) and citing node lem-sc-finite-pushforward-derived-hom-qcoherent: Noetherian, pseudo-coherent qc algebra, K in D^+_QCoh match (C4 ok, G1 D^+ point respected). New affine node = 0A6H(3)(a), not a duplicate of lem-sc-affine-rhom-qcoherent (degree-0 finite modules only), not Mathlib, not elementary. FIX more, RETURN less: (1) C1 Step 2 represented K|U_i by L_i~ without citing the affine equivalence: cited lem-pc-affine-qcoh-derived-equivalence (generic tool, Stacks 06Z0, declared tool_use) and derived the lower bound of L_i via exactness of tilde and Gamma(U,M~)=M [lem-weil-pbc-spec-module-tilde-sections]; (2) C1 Step 2 took a global finite-projective model of A on an arbitrary affine U_i, which needs Stacks 08E7 (uncited): Step 1 now chooses the affine cover fine enough that the definition's local finite-free model exists on each U_i, and Step 2 writes it as P_i~ (matrices over R_i); (3) uniform lower bound: cover made finite by quasi-compactness, minimum of the bounds taken. uses/proof_deps updated. Second reading by M1 missed (1)-(3).; 1 file(s) fixed by the reviewer"
+ }
 }

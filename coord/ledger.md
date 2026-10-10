@@ -2487,3 +2487,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 20:10 L: merged deliver/K1/lem-pc-noetherian-perfect-direct-image (reviewer FIX; first push; new nodes: 0)
 - 20:11 L: returned deliver/E1/lem-pc-rf-base-change-complex (reviewer RETURN: 1. C4/E (step 1): lem-pc-rf-base-change-flat-module states only Lg^*Rf_*G = Rf_{T,*}G_T for a single S-flat module and f)
 - 20:11 L: merged deliver/G1/lem-pc-flat-filtered-complex-comparison (reviewer FIX; first push; new nodes: 0)
+- 20:11 L: merged deliver/M1/lem-sc-pseudo-coherent-rhom-qcoherent (reviewer FIX; first push; new nodes: 1)
