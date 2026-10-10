@@ -1052,6 +1052,7 @@ public import WeilConjectures.Mathlib.RingTheory.Spectrum.Prime.FreeLocus
 public import WeilConjectures.Mathlib.RingTheory.Spectrum.Prime.Noetherian
 public import WeilConjectures.Mathlib.RingTheory.Spectrum.Prime.Topology
 public import WeilConjectures.Mathlib.RingTheory.TensorProduct.Basic
+public import WeilConjectures.Mathlib.RingTheory.TensorProduct.DirectLimitFG
 public import WeilConjectures.Mathlib.RingTheory.TensorProduct.Maps
 public import WeilConjectures.Mathlib.RingTheory.TotallySplit
 public import WeilConjectures.Mathlib.RingTheory.Trace.Basic
