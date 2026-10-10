@@ -1974,3 +1974,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 16:25 L: merged deliver/M1/lem-sc-point-tangent-cotangent-surjective (reviewer FIX+NODE(1); first push; new nodes: 3)
 - 16:26 L: returned deliver/H1/lem-sc-point-tangent-finite-local-cotangent-surjective (reviewer RETURN: 1. D2/D1: lem-sc-point-tangent-finite-local-ideal-generation and Step 2: the whole content of the item is moved into the)
 - 16:26 L: merged deliver/K1/lem-pc-degree-agrees-sc (reviewer FIX; first push; new nodes: 0)
+- 16:27 L: returned deliver/C1/lem-weil-pbc-field-tensor-irreducible (reviewer RETURN: 1. E2/C4: lem-weil-pbc-p-ring-map-homeomorphism: the statement is false. It drops hypothesis (b) of Algebra 0BRA (Ker(A-)
