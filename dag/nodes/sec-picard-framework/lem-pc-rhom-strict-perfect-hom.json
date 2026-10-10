@@ -25,9 +25,56 @@
   "def-pur-derived-internal-hom",
   "def-pc-derived-category"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Represent M by a cochain complex and choose the functorial K-injective resolution M^bullet \\to I^bullet supplied in the definition of derived internal Hom. By that definition, R\\mathcal Hom_{O_U}(P,M) is represented by the Hom complex Hom^bullet(P,I^bullet).",
+   "uses": [
+    "def-pur-derived-internal-hom"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Section 08J7 (derived internal Hom construction)"
+   }
+  },
+  {
+   "text": "Let f:M^bullet \\to I^bullet be the resolution of Step 1; we show Hom^bullet(P,M^bullet) \\to Hom^bullet(P,I^bullet) is a quasi-isomorphism [def-pc-quasi-iso-modules]. For each degree i, P^i is a direct summand of a finite free module [def-pc-perfect-complex], so \\mathcal Hom(P^i,-) is exact: it is a direct summand of the exact functor \\mathcal Hom(O_U^{\\oplus r},-) of [lem-sc-finite-free-internal-hom-exact]. An exact functor commutes with taking cohomology sheaves, so \\mathcal Hom(P^i,M^\\bullet) \\to \\mathcal Hom(P^i,I^\\bullet) is a quasi-isomorphism. P is bounded, so its stupid truncations \\sigma_{\\geq k}P give a finite filtration of P by subcomplexes with graded pieces P^k[-k]; since the terms of the Hom complex [def-pur-hom-complex] are finite products over the degrees of P, applying Hom^bullet(-,M^\\bullet) and Hom^bullet(-,I^\\bullet) gives termwise split short exact sequences of complexes, compatible with f, 0 \\to Hom^bullet(P^k[-k],-) \\to Hom^bullet(\\sigma_{\\geq k}P,-) \\to Hom^bullet(\\sigma_{\\geq k+1}P,-) \\to 0, whose first term is a shift of \\mathcal Hom(P^k,-) applied to the complex. Induction on the finitely many nonzero degrees of P, using the long exact cohomology sequence of a short exact sequence of complexes (Stacks Tag 0117) and the five lemma, shows that Hom^bullet(P,M^bullet) \\to Hom^bullet(P,I^bullet) is a quasi-isomorphism.",
+   "uses": [
+    "lem-sc-finite-free-internal-hom-exact",
+    "def-pur-hom-complex",
+    "def-pc-perfect-complex",
+    "def-pc-quasi-iso-modules"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/cohomology.tex",
+    "place": "Tag 08DM, cohomology-lemma-RHom-strictly-perfect, finite-projective calculation"
+   }
+  },
+  {
+   "text": "The quasi-isomorphism in Step 2 identifies the ordinary Hom complex Hom^bullet(P,M^bullet) with the derived representative Hom^bullet(P,I^bullet), hence gives the comparison isomorphism in D(O_U). The comparison is canonical, natural in P and M, and independent of the chosen representatives because the derived internal-Hom construction is functorial on pairs of complexes and sends quasi-isomorphisms in either variable to quasi-isomorphisms, as stated in [def-pur-derived-internal-hom].",
+   "uses": [
+    "def-pur-derived-internal-hom"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/cohomology.tex",
+    "place": "Tag 08DM, cohomology-lemma-RHom-strictly-perfect, conclusion"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pur-derived-internal-hom",
+  "lem-sc-finite-free-internal-hom-exact",
+  "def-pur-hom-complex",
+  "def-pc-perfect-complex",
+  "def-pc-quasi-iso-modules"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Tag 08DM (cohomology-lemma-RHom-strictly-perfect)"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -59,10 +106,26 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-pc-perfect-rhom-tensor-comparison",
   "by": "worker",
   "date": "2026-10-10"
+ },
+ "split_report": {
+  "date": "2026-10-11",
+  "item": "lem-pc-rhom-strict-perfect-hom",
+  "worker": "stage1",
+  "summary": "Checked the item against Stacks Tag 08DM. No sorry-free project declaration states it, and no smaller DAG node is needed: the proof is the K-injective-resolution construction followed by the bounded finite-projective Hom calculation, using the existing finite-free internal-Hom exactness node and a local direct-summand argument.",
+  "blueprint": "Realizes the local finite-projective calculation underlying the comparison isomorphism in the parent blueprint node lem-sc-finite-duality.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-rsp3100",
+  "group": "K1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-rsp3100 (reviewer sub-agent of L); spot-checked: Statement vs Tag 08DM and H1 Step 1/Step 4 use (U affine open, E strictly perfect = bounded, direct summands of finite free, matching def-pc-perfect-complex local clause): matches. Step 1 cites def-pur-derived-internal-hom K-injective representative; Step 3 canonicity from its functorial/qis clauses; def-pur-hom-complex cited. Exactness of Hom(P^i,-) from lem-sc-finite-free-internal-hom-exact plus direct summand: fine. FIX more, RETURN less: C1 in Step 2 - the cone argument used uncited facts (cone of a qis is acyclic, Hom^bullet(P,Cone f)=Cone(Hom^bullet(P,f)), acyclic cone implies qis; def-pc-quasi-iso-modules says none of these); rewrote Step 2 without cones: Hom(P^i,-) exact so termwise qis, stupid-truncation filtration of bounded P gives termwise split SES of Hom complexes, induction with long exact cohomology sequence (Stacks Tag 0117) and five lemma.; 1 file(s) fixed by the reviewer"
  }
 }
