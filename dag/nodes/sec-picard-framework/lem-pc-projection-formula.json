@@ -3,11 +3,11 @@
  "blueprint": {
   "is": "lem-pc-projection-formula",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "The projection formula",
- "statement": "Let $f:X\\to Y$ be a quasi-compact, quasi-separated morphism of schemes.\nFor $E\\in D_{\\text{QCoh}}(\\mathcal{O}_X)$ and $K\\in D_{\\text{QCoh}}(\\mathcal{O}_Y)$ the\ncanonical map\n\n$$\nRf_*(E)\\otimes_{\\mathcal{O}_Y}^{\\mathbb L}K\\;\\longrightarrow\\;\nRf_*(E\\otimes_{\\mathcal{O}_X}^{\\mathbb L}Lf^*K)\n$$\n\nis an isomorphism; in particular, for an invertible\n$\\mathcal{O}_Y$-module $\\mathcal{N}$,\n$Rf_*(E)\\otimes\\mathcal{N}\\cong Rf_*(E\\otimes f^*\\mathcal{N})$.",
+ "statement": "Let $f:X\\to Y$ be a quasi-compact, quasi-separated morphism of schemes. For $E\\in D_{\\text{QCoh}}(\\mathcal{O}_X)$ and $K\\in D_{\\text{QCoh}}(\\mathcal{O}_Y)$ the canonical map $Rf_*(E)\\otimes_{\\mathcal{O}_Y}^{\\mathbb L}K\\to Rf_*(E\\otimes_{\\mathcal{O}_X}^{\\mathbb L}Lf^*K)$ is an isomorphism; in particular, for an invertible $\\mathcal{O}_Y$-module $\\mathcal{N}$, $Rf_*(E)\\otimes\\mathcal{N}\\cong Rf_*(E\\otimes f^*\\mathcal{N})$.",
  "source": {
   "document": "literature/blueprint/master/blueprint/sec-picard-framework/sk-thm-picard-f-representable/lem-pc-projection-formula.md",
   "place": "node lem-pc-projection-formula, order 829",
@@ -30,12 +30,49 @@
  ],
  "proof": [
   {
-   "text": "The map of the statement (defined in Cohomology, Equation 20.54.2.1) is\nnatural in $E$ and $K$, so: (1) the assertion is local in $Y$: if\n$Y=\\bigcup_{i\\in I}V_i$ is an open covering, the objects and the map\nrestrict to the open sets (the derived functors localize: $Rf_*$ and\n$\\otimes^{\\mathbb L}$ are computed on the open subschemes and the\nrestriction maps are the restrictions of the canonical maps), and\n$D_{\\text{QCoh}}$-identifications can be checked on an open cover; so\nwe may assume $Y$ affine, $Y=\\operatorname{Spec}(A)$. (2) For the affine $Y$, the\nfunctor $D_{\\text{QCoh}}(\\mathcal{O}_Y)\\to D(A)$ (global sections, with the\nstandard equivalence $D_{\\text{QCoh}}(\\mathcal{O}_Y)\\cong D(A)$, cf. Derived\nCategories of Schemes, Lemma 36.3.5, Section 36.3, chapter Tag\n[08CU](https://stacks.math.columbia.edu/tag/08CU)) identifies both\nsides: the case $K=A[k]$ is the statement\n$Rf_*(E[k])\\cong Rf_*(E)[k]$ (the shift: clear); an object $K$ is a\nretract of a complex which is built up by direct sums and distinguished\ntriangles from shifts $A[k]$ (the standard dissage: the functors\n$Lf^*$, $\\otimes^{\\mathbb L}$, $Rf_*$ preserve direct sums and exact\ntriangles, so the property \"$P(K)$ holds\" is stable under triangles and\npasses to direct sums, and the class of $K$'s with $P(K)$ contains\n$A[k]$ and is closed under the two operations and retracts; the\n\"the standard: every object of $D(A)$ is obtained from a complex of\nfree modules whose terms are sums..., by the inductive tower of\ntruncations\" – the classical proof of the cofiber-type generation:\nthe full subcategory generated is $D(A)$: the truncations argument\nreduces to the bounded case and the \"bounded complexes are filtered by\nthe shifts of their quotients $M^i$'-type (the exact triangles\n$M^{[p,q]}\\to M^{[p,q+1]}\\to M^{q+1}[-q-1]\\to$\" with\n$M^q$ free after a resolution; this is the standard identical argument\nthat one uses for the derived functors' basic properties, as in the\nproof of Lemma 36.22.1, Tag\n[08EU](https://stacks.math.columbia.edu/tag/08EU)). Hence $P(K)$\nholds for all $K$. (3) The last statement: for an invertible $\\mathcal{N}$,\n$\\mathcal{N}$ as an object of $D_{\\text{QCoh}}$ and the natural map\n$Rf_*E\\otimes\\mathcal{N}\\to Rf_*(E\\otimes f^*\\mathcal{N})$ is the\n$\\otimes^{\\mathbb L}$-statement specialized to $K=\\mathcal{N}[0]$ (with\n$\\otimes^{\\mathbb L}\\mathcal{N}=\\otimes\\mathcal{N}$ since $\\mathcal{N}$ is locally free, and\n$Lf^*\\mathcal{N}=f^*\\mathcal{N}$).",
+   "text": "The canonical projection map is natural in E and K, and the isomorphism assertion can be checked after restriction to an open covering of Y. By [lem-pc-projection-locality], it is enough to prove the assertion when Y is affine, Y=Spec(A).",
+   "uses": [
+    "lem-pc-projection-locality"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/cohomology.tex",
+    "place": "Equation 20.54.2.1 (cohomology-equation-projection-formula-map), and the locality reduction in perfect.tex Lemma 36.22.1 (Tag 08EU)"
+   }
+  },
+  {
+   "text": "Assume Y=\\operatorname{Spec}(A). By [lem-pc-affine-qcoh-derived-equivalence], M\\mapsto\\widetilde M is an equivalence of triangulated categories D(A)\\to D_{\\mathrm{QCoh}}(\\mathcal O_Y) sending A[k] to \\mathcal O_Y[k]; being an equivalence it preserves direct sums, which exist in D_{\\mathrm{QCoh}}(\\mathcal O_Y) by [lem-pc-derived-qcoh-direct-sums]. Let T(M) be the property that the canonical map is an isomorphism for K=\\widetilde M (E fixed). (i) T is closed under direct sums: Lf^* and E\\otimes^{\\mathbb L}- are left adjoints, hence preserve direct sums; by [lem-pc-derived-pullback-tensor-qcoh] each E\\otimes^{\\mathbb L}Lf^*\\widetilde{M_i} lies in D_{\\mathrm{QCoh}}(\\mathcal O_X), so Rf_* preserves their direct sum by [lem-pc-derived-direct-image-direct-sums]; by naturality in K the map for \\bigoplus M_i is the direct sum of the maps for the M_i. (ii) If two of the vertices of a distinguished triangle in D(A) satisfy T, so does the third: all functors involved are exact, the canonical maps form a morphism of distinguished triangles, and the five lemma applies. (iii) T is closed under retracts. (iv) T(A[k]) holds: for K=\\mathcal O_Y[k] both sides are canonically Rf_*(E)[k] and the canonical map is the identity under these identifications. By [lem-pc-derived-module-free-generation], T(M) holds for every M in D(A), hence the map is an isomorphism for every K in D_{\\mathrm{QCoh}}(\\mathcal O_Y).",
+   "uses": [
+    "lem-pc-affine-qcoh-derived-equivalence",
+    "lem-pc-derived-qcoh-direct-sums",
+    "lem-pc-derived-pullback-tensor-qcoh",
+    "lem-pc-derived-direct-image-direct-sums",
+    "lem-pc-derived-module-free-generation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/perfect.tex",
+    "place": "Lemma 36.22.1 (Tag 08EU), second and third paragraphs; Lemma 36.3.5 (Tag 06Z0); Lemma 36.4.5 (Tag 08DZ); More on Algebra, Remark 15.60.11 (Tag 09PB)"
+   }
+  },
+  {
+   "text": "For an invertible O_Y-module N, regard N as N[0] in D_QCoh(O_Y). Specializing the derived formula to K=N[0] gives the displayed ordinary tensor formula because N is locally free, so tensoring with N is already derived and Lf^*N=f^*N.",
    "uses": [],
-   "elementary": null
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-picard-framework/sk-thm-picard-f-representable/lem-pc-projection-formula.md",
+    "place": "Proof, final specialization"
+   }
   }
  ],
- "proof_deps": [],
+ "proof_deps": [
+  "lem-pc-projection-locality",
+  "lem-pc-affine-qcoh-derived-equivalence",
+  "lem-pc-derived-qcoh-direct-sums",
+  "lem-pc-derived-pullback-tensor-qcoh",
+  "lem-pc-derived-direct-image-direct-sums",
+  "lem-pc-derived-module-free-generation"
+ ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/master/blueprint/sec-picard-framework/sk-thm-picard-f-representable/lem-pc-projection-formula.md",
@@ -43,7 +80,7 @@
  },
  "mathlib_searches": [],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [
   "proof_cites_literature",
@@ -89,5 +126,23 @@
   }
  },
  "chapter": "sec-picard-framework",
- "unit": "sk-thm-picard-f-representable"
+ "unit": "sk-thm-picard-f-representable",
+ "split_report": {
+  "date": "2026-10-11",
+  "item": "lem-pc-projection-formula",
+  "worker": "stage1",
+  "summary": "Split the imported proof into locality, affine equivalence, generation, and direct-sum inputs.",
+  "blueprint": "Realizes locality reduction, affine identification and generation, and invertible-module specialization."
+ },
+ "tool_uses": [
+  "lem-pc-derived-qcoh-direct-sums"
+ ],
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-prf1840",
+  "group": "C1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-prf1840 (reviewer sub-agent of L); spot-checked: Steps 1-3 against Stacks 08EU, 06Z0, 08DZ, 09PB; no slopmaster2 attachment (AlgebraicGeometry/Modules/ProjectionFormula.lean is only the degree-0 g_*(F⊗g^*N) case for invertible N, DirectImage.lean:443 is sorried and only the R^q invertible case). FIX more, RETURN less: (1) B3/C4 lem-pc-affine-qcoh-derived-equivalence's second clause ('expressions identified with module expressions', ill-typed for E on X) replaced by the precise 06Z0 statement (tilde is a triangulated equivalence D(A)->D_QCoh(O_Y), quasi-inverse RGamma, A[k]->O_Y[k]); direct-sums and generation statements made explicit; (2) C1 step 2 rewritten: added sum preservation of Lf^* and E⊗^L- (left adjoints), cites lem-pc-derived-qcoh-direct-sums (sk-thm-picard-duality, generic tool: D_QCoh has sums) and new statement-only node lem-pc-derived-pullback-tensor-qcoh (08DW/08DX part 1) needed to apply 08DZ to E⊗^L Lf^*K_i; two-of-three via five lemma; proof_deps updated; (3) metadata: source documents cohomology-of-schemes.tex/derived-categories-of-schemes.tex (nonexistent) corrected to cohomology.tex/perfect.tex/more-algebra.tex, item external Tag 08CU (chapter tag) removed though the second reading claimed it was, locality stmt_deps def-pc-base-change -> def-pc-scheme, def-pc-derived-pullback.; 6 file(s) fixed by the reviewer; 1 statement node(s) added by the reviewer (FIX more, RETURN less)"
+ }
 }
