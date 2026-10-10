@@ -1,14 +1,13 @@
 # Work queue
 
-873 items; claim with `tools/claim.py next <group> [--stage N]`.
+870 items; claim with `tools/claim.py next <group> [--stage N]`.
 
-## Stage 1: nodes to split (76)
+## Stage 1: nodes to split (70)
 
 | node | distance to a target | Lean state on the done branch |
 |---|---|---|
-| `lem-weil-pbc-geometric-point-pullback-stalk` | 12 | none |
 | `lem-weil-derived-limit-roos-complex` | 15 | none |
-| `lem-weil-pbc-injective-acyclicity-bounded-below` | 2002 | sorry_here |
+| `lem-weil-pbc-arbitrary-ring-torsion-sheaf-base-change` | 2003 | none |
 | `lem-pc-ringed-space-module-stalk-tensor` | 3013 | none |
 | `lem-sc-derived-hom-mayer-vietoris` | 3015 | none |
 | `lem-pc-module-tor-amplitude-flat-model` | 3016 | none |
@@ -33,7 +32,7 @@
 | `lem-sc-finite-flat-surj-points` | 4009 | none |
 | `lem-sc-etale-triple-to-sh-completion-flat` | 4012 | none |
 | `lem-sc-etale-at-prime-flat-unramified-criterion` | 4013 | none |
-| `lem-sc-ass-weakass-fg-stalk` | 5013 | none |
+| `lem-sc-ass-weakass-fg-prime` | 5014 | none |
 | `lem-pc-derived-tensor-transitivity` | 5015 | none |
 | `lem-pc-rf-single-complex-affine-base-change` | 5015 | none |
 | `lem-pc-rf-single-complex-relative-mayer-vietoris` | 5015 | none |
@@ -57,7 +56,6 @@
 | `lem-sc-affine-constant-second` | - | rests_on_sorry |
 | `lem-kun-cp-approximation` | - | none |
 | `lem-sc-zariski-flasque-acyclic` | - | none |
-| `lem-kun-support-geometric-point-independent` | - | none |
 | `lem-pc-flat-rf-open` | - | rests_on_sorry |
 | `lem-pur-kinjective-degreewise-existence` | - | none |
 | `lem-pur-ringed-site-grothendieck-abelian` | - | none |
@@ -68,12 +66,9 @@
 | `lem-pur-derived-change-of-rings` | - | none |
 | `lem-sc-p1-hi-vanishing` | - | rests_on_sorry |
 | `def-wf-lie-algebra` | - | none |
-| `lem-kun-algebraic-separable-smooth` | - | none |
-| `lem-kun-fg-separable-smooth` | - | none |
 | `lem-pc-curve-coherent-finiteness` | - | rests_on_sorry |
 | `lem-pc-flf-properties` | - | none |
 | `lem-sc-p1-twist-exists` | - | none |
-| `lem-exc-etale-algebra-lift` | - | none |
 | `lem-pc-projective-curve-finite-projection` | - | rests_on_sorry |
 | `lem-sc-p1-coherent-finite` | - | rests_on_sorry |
 | `def-exc-etale-algebra-lift` | - | none |
@@ -81,9 +76,8 @@
 | `def-pur-hom-complex` | - | none |
 | `lem-pur-rhom-global-sections` | - | none |
 | `lem-pur-rhom-well-defined` | - | none |
-| `lem-zl-noether-normalization-dimension` | - | none |
 
-## Stage 2: nodes to state (797)
+## Stage 2: nodes to state (800)
 
 | node | distance to Mathlib | kind |
 |---|---|---|
@@ -174,9 +168,11 @@
 | `lem-galois-fpqc-descend-unramified` | 1 | state |
 | `lem-galois-fpqc-morphisms-descend` | 1 | state |
 | `lem-galois-fpqc-singleton-affine-refinement` | 1 | state |
+| `lem-kun-fg-separable-smooth` | 1 | state |
 | `lem-kun-fibre-product-limits` | 1 | state |
 | `lem-kun-finite-closed-subscheme` | 1 | state |
 | `lem-kun-stalks-commute-colimits` | 1 | state |
+| `lem-kun-support-geometric-point-independent` | 1 | state |
 | `lem-pc-affine-cech-complex` | 1 | state |
 | `lem-pc-affine-containment-ideal` | 1 | state |
 | `lem-pc-affine-finite-type-algebra` | 1 | state |
@@ -830,6 +826,7 @@
 | `lem-weil-pbc-zariski-pair-flat-integral-isomorphism` | 1 | state |
 | `lem-weil-pbc-zariski-pair-rank-one-propagation` | 1 | state |
 | `lem-weil-separably-closed-geometrically-connected` | 1 | state |
+| `lem-zl-noether-normalization-dimension` | 1 | state |
 | `lemma-nagata-diagonal-base-change` | 1 | state |
 | `lemma-nagata-filtered-colimit-finite-data` | 1 | state |
 | `lemma-nagata-projective-target-local` | 1 | state |
@@ -885,7 +882,7 @@
 | `lem-weil-pbc-projective-space-zero-isomorphism` | 4 | state |
 | `def-nagata-fixed-base-separated-stage` | 6 | state |
 
-Not open yet: 1639 nodes that wait for a statement dependency, 114 nodes that wait for stage 1.
+Not open yet: 1642 nodes that wait for a statement dependency, 108 nodes that wait for stage 1.
 
 ## Stage 3: modules to prove (0)
 
