@@ -14,7 +14,7 @@
  },
  "kind": "statement",
  "title": "Derived tensor-Hom comparison for a perfect complex",
- "statement": "Let X be a scheme [def-pc-scheme], let K be a perfect complex [def-pc-perfect-complex] in D_QCoh(O_X) [def-pc-derived-category], and let M be a quasi-coherent complex. Define K^\\vee := R\\mathcal Hom_{O_X}(K,O_X). Then K^\\vee is a perfect complex in D_QCoh(O_X). The canonical global map M\\otimes^L K^\\vee \\longrightarrow R\\mathcal Hom_{O_X}(K,M) induced by evaluation is an isomorphism, and the canonical bidual map K\\longrightarrow R\\mathcal Hom_{O_X}(K^\\vee,O_X) is an isomorphism. Let \\epsilon:K^\\vee\\otimes^L K\\to O_X be the evaluation map and \\eta:O_X\\to K\\otimes^L K^\\vee the map corresponding to \\mathrm{id}_K under the isomorphism K\\otimes^L K^\\vee\\cong R\\mathcal Hom_{O_X}(K,K) (the case M=K); then (\\epsilon,\\eta) satisfy the two zig-zag identities (1_K\\otimes\\epsilon)\\circ(\\eta\\otimes 1_K)=\\mathrm{id}_K and (\\epsilon\\otimes 1_{K^\\vee})\\circ(1_{K^\\vee}\\otimes\\eta)=\\mathrm{id}_{K^\\vee}, so (K,K^\\vee,\\epsilon,\\eta) is an exact pairing in D_QCoh(O_X) with its derived tensor product. For every morphism g:X'\\to X [def-pc-derived-pullback], the canonical base-change map Lg^*K^\\vee \\longrightarrow R\\mathcal Hom_{O_{X'}}(Lg^*K,O_{X'}) is an isomorphism.",
+ "statement": "Let X be a scheme [def-pc-scheme], let K be a perfect complex [def-pc-perfect-complex] in D_QCoh(O_X) [def-pc-derived-category], and let M be a quasi-coherent complex. Define K^\\vee := R\\mathcal Hom_{O_X}(K,O_X) [def-pur-derived-internal-hom]. Then K^\\vee is a perfect complex in D_QCoh(O_X). Use the tensor-internal-Hom adjunction and the symmetry of the derived tensor product [def-pc-tensor-complex-sheaves] of [lem-sc-derived-internal-hom-adjunction]; for objects A,E of D(O_X) let \\mathrm{ev}:R\\mathcal Hom_{O_X}(A,E)\\otimes^L A\\to E be the evaluation map, the map corresponding to \\mathrm{id}_{R\\mathcal Hom(A,E)} under that adjunction, and put \\epsilon:=\\mathrm{ev}:K^\\vee\\otimes^L K\\to O_X. Define the canonical global map M\\otimes^L K^\\vee \\longrightarrow R\\mathcal Hom_{O_X}(K,M) to be the map corresponding under the adjunction to 1_M\\otimes\\epsilon:M\\otimes^L K^\\vee\\otimes^L K\\to M\\otimes^L O_X=M; this map is an isomorphism. Define the canonical bidual map K\\longrightarrow R\\mathcal Hom_{O_X}(K^\\vee,O_X) as the map corresponding under the adjunction to the composite K\\otimes^L K^\\vee\\cong K^\\vee\\otimes^L K\\xrightarrow{\\epsilon}O_X of the symmetry isomorphism with \\epsilon; it is an isomorphism. Let \\eta:O_X\\to K\\otimes^L K^\\vee be the unique map whose composite with the isomorphism K\\otimes^L K^\\vee\\cong R\\mathcal Hom_{O_X}(K,K) (the case M=K) is the map O_X\\to R\\mathcal Hom_{O_X}(K,K) corresponding under the adjunction to O_X\\otimes^L K=K\\xrightarrow{\\mathrm{id}_K}K; then (\\epsilon,\\eta) satisfy the two zig-zag identities (1_K\\otimes\\epsilon)\\circ(\\eta\\otimes 1_K)=\\mathrm{id}_K and (\\epsilon\\otimes 1_{K^\\vee})\\circ(1_{K^\\vee}\\otimes\\eta)=\\mathrm{id}_{K^\\vee}, so (K,K^\\vee,\\epsilon,\\eta) is an exact pairing in D_QCoh(O_X) with its derived tensor product. For every morphism of schemes g:X'\\to X, with derived pullback Lg^* [def-pc-derived-pullback] and Lg^*O_X=O_{X'}, define the canonical base-change map Lg^*K^\\vee \\longrightarrow R\\mathcal Hom_{O_{X'}}(Lg^*K,O_{X'}) as the map corresponding under the adjunction on X' to the composite Lg^*K^\\vee\\otimes^L Lg^*K\\cong Lg^*(K^\\vee\\otimes^L K)\\xrightarrow{Lg^*\\epsilon}O_{X'} of the isomorphism of [lem-pc-derived-pullback-tensor-product] with Lg^*\\epsilon; it is an isomorphism.",
  "source": {
   "document": "literature/stacks-project/cohomology.tex",
   "place": "Tag 08DQ, cohomology-lemma-dual-perfect-complex, via lemma-internal-hom-evaluate-isom; Tag 0FPC, cohomology-example-dual-derived (zig-zag identities); Tag 0GM7, cohomology-lemma-pullback-internal-hom (1)"
@@ -23,11 +23,81 @@
   "def-pc-scheme",
   "def-pc-perfect-complex",
   "def-pc-derived-category",
-  "def-pc-derived-pullback"
+  "def-pc-derived-pullback",
+  "def-pur-derived-internal-hom",
+  "def-pc-tensor-complex-sheaves",
+  "lem-sc-derived-internal-hom-adjunction",
+  "lem-pc-derived-pullback-tensor-product"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Local computation, for an arbitrary object M of D(O_X). By [def-pc-perfect-complex] there is an affine open cover X=\\bigcup U_i with K|_{U_i}\\cong\\mathcal E^\\bullet, a strictly perfect complex (bounded, each term a direct summand of a finite free O_{U_i}-module). Fix such U=U_i and represent M|_U by a complex \\mathcal F^\\bullet. By [lem-sc-derived-internal-hom-restrict-open], K^\\vee|_U\\cong R\\mathcal Hom_{O_U}(\\mathcal E^\\bullet,O_U) and R\\mathcal Hom_{O_X}(K,M)|_U\\cong R\\mathcal Hom_{O_U}(\\mathcal E^\\bullet,\\mathcal F^\\bullet), and by [lem-pc-rhom-strict-perfect-hom] these are the Hom complexes \\mathcal E^{\\vee\\bullet}=\\mathcal Hom^\\bullet(\\mathcal E^\\bullet,O_U), with terms \\mathcal Hom(\\mathcal E^{-n},O_U), and \\mathcal Hom^\\bullet(\\mathcal E^\\bullet,\\mathcal F^\\bullet). The terms of \\mathcal E^{\\vee\\bullet} are again direct summands of finite free modules, so \\mathcal E^{\\vee\\bullet} is strictly perfect (hence K^\\vee is perfect) and has quasi-coherent terms (hence quasi-coherent cohomology sheaves on U; quasi-coherence of cohomology is local, so K^\\vee\\in D_QCoh(O_X)). Being bounded with flat terms, \\mathcal E^{\\vee\\bullet} is K-flat by [lem-pc-bounded-above-flat-kflat], so with the symmetry of [lem-sc-derived-internal-hom-adjunction] M|_U\\otimes^L K^\\vee|_U is represented by \\operatorname{Tot}(\\mathcal F^\\bullet\\otimes\\mathcal E^{\\vee\\bullet}) [def-pc-tensor-complex-sheaves]. On these representatives the map of the statement (defined by the adjunction, whose formation commutes with restriction to U because restriction is termwise on tensor products and commutes with R\\mathcal Hom) is the termwise map \\mathcal F^p\\otimes\\mathcal Hom(\\mathcal E^{-q},O_U)\\to\\mathcal Hom(\\mathcal E^{-q},\\mathcal F^p), as in Tag 08DQ; this is an isomorphism of sheaves for \\mathcal E^{-q} finite free (both sides are (\\mathcal F^p)^{\\oplus r}) and hence for a direct summand of a finite free module. Likewise the bidual map on U is the termwise map \\mathcal E^n\\to\\mathcal Hom(\\mathcal Hom(\\mathcal E^n,O_U),O_U) (use [lem-pc-rhom-strict-perfect-hom] for the strictly perfect \\mathcal E^{\\vee\\bullet}), an isomorphism for the same reason.",
+   "uses": [
+    "def-pc-perfect-complex",
+    "lem-sc-derived-internal-hom-restrict-open",
+    "lem-pc-rhom-strict-perfect-hom",
+    "lem-pc-bounded-above-flat-kflat",
+    "lem-sc-derived-internal-hom-adjunction",
+    "def-pc-tensor-complex-sheaves"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/cohomology.tex",
+    "place": "Tag 08DQ (cohomology-lemma-dual-perfect-complex) and Tag 08DM"
+   }
+  },
+  {
+   "text": "Globalization of the isomorphisms. The evaluation map M\\otimes^L K^\\vee\\to R\\mathcal Hom_{O_X}(K,M) and the bidual map are globally defined morphisms of D(O_X) (by the adjunction in the statement), and by Step 1 their restrictions to every U_i are isomorphisms. A morphism of D(O_X) is an isomorphism if and only if it induces isomorphisms on all cohomology sheaves, which can be checked on an open cover; hence both are isomorphisms. No morphism is glued here: only the property of being an isomorphism is checked locally. In particular the evaluation map is an isomorphism for every object M of D(O_X), not only for quasi-coherent M.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/cohomology.tex",
+    "place": "Tag 08DQ (cohomology-lemma-dual-perfect-complex) and Tag 08DM"
+   }
+  },
+  {
+   "text": "Zig-zag identities. Apply [lem-pc-dualizable-evaluation-criterion] with D=K^\\vee and e=\\epsilon: its hypothesis, that for every object M of D(O_X) the map M\\otimes^L K^\\vee\\to R\\mathcal Hom_{O_X}(K,M) corresponding under [lem-sc-derived-internal-hom-adjunction] to 1_M\\otimes\\epsilon is an isomorphism, is Step 2, and its coevaluation is the \\eta of the statement (the case M=K). It gives both triangle identities.",
+   "uses": [
+    "lem-pc-dualizable-evaluation-criterion",
+    "lem-sc-derived-internal-hom-adjunction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/cohomology.tex",
+    "place": "Tag 0FPC (cohomology-example-dual-derived)"
+   }
+  },
+  {
+   "text": "Base change. Let g:X'\\to X and U=U_i as in Step 1, and cover g^{-1}(U) by affine opens V. The complexes \\mathcal E^\\bullet and \\mathcal E^{\\vee\\bullet} are bounded with flat terms, so by [lem-pc-flat-complex-derived-pullback] (applied to g|_V:V\\to U) (Lg^*K)|_V and (Lg^*K^\\vee)|_V are represented by the termwise pullbacks g^*\\mathcal E^\\bullet and g^*\\mathcal E^{\\vee\\bullet}; the former is strictly perfect, so by [lem-sc-derived-internal-hom-restrict-open] and [lem-pc-rhom-strict-perfect-hom] R\\mathcal Hom_{O_{X'}}(Lg^*K,O_{X'})|_V is the Hom complex \\mathcal Hom^\\bullet(g^*\\mathcal E^\\bullet,O_V). Computing the isomorphism of [lem-pc-derived-pullback-tensor-product] on these flat representatives, the base-change map of the statement is on V the termwise map g^*\\mathcal Hom(\\mathcal E^{-n},O_U)\\to\\mathcal Hom(g^*\\mathcal E^{-n},O_V), which is an isomorphism for a finite free module and hence for a direct summand of one (Tag 0GM7, proof of (1)). Being an isomorphism is checked on cohomology sheaves, locally on X', as in Step 2.",
+   "uses": [
+    "lem-pc-flat-complex-derived-pullback",
+    "lem-sc-derived-internal-hom-restrict-open",
+    "lem-pc-rhom-strict-perfect-hom",
+    "lem-pc-derived-pullback-tensor-product"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/cohomology.tex",
+    "place": "Tag 0GM7 (cohomology-lemma-pullback-internal-hom), case (1), and Tag 08DM"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-perfect-complex",
+  "lem-sc-derived-internal-hom-restrict-open",
+  "lem-pc-rhom-strict-perfect-hom",
+  "lem-pc-bounded-above-flat-kflat",
+  "lem-sc-derived-internal-hom-adjunction",
+  "def-pc-tensor-complex-sheaves",
+  "lem-pc-dualizable-evaluation-criterion",
+  "lem-pc-flat-complex-derived-pullback",
+  "lem-pc-derived-pullback-tensor-product"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Tags 08DQ, 0FPC, 0GM7 and 09UA"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -88,12 +158,42 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-pc-perfect-tensor-hom-duality",
   "by": "worker",
   "date": "2026-10-10"
  },
  "chapter": "sec-picard-framework",
- "unit": "sk-thm-picard-duality"
+ "unit": "sk-thm-picard-duality",
+ "split_report": {
+  "date": "2026-10-11",
+  "item": "lem-pc-perfect-rhom-tensor-comparison",
+  "worker": "stage1",
+  "summary": "Split the global perfect-complex RHom comparison into a local strictly-perfect Hom-complex calculation (Tag 08DM), the locality of being an isomorphism, the closed-monoidal dualizability criterion for the zig-zags (Tag 0FPC), and termwise derived pullback for base change (Tag 0GM7 (1)). Reviewer R-prt2934 rewrote the steps and the map definitions (FIX).",
+  "blueprint": "Realizes the comparison-isomorphism clause of lem-sc-finite-duality: identify RHom(K,M) with M tensor^L RHom(K,O_X), establish the exact pairing and biduality, and transport the dual through derived pullback.",
+  "tool_uses": [
+   {
+    "node": "lem-pc-bounded-above-flat-kflat",
+    "why": "K-flatness is required for the affine derived tensor/Hom calculation."
+   },
+   {
+    "node": "lem-pc-flat-complex-derived-pullback",
+    "why": "Termwise pullback must be identified with derived pullback in the base-change step."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pc-bounded-above-flat-kflat",
+  "lem-pc-flat-complex-derived-pullback"
+ ],
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-prt2934",
+  "group": "H1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-prt2934 (reviewer sub-agent of L); spot-checked: FIX more, RETURN less: (1) class (b): new lem-pc-derived-tensor-internal-hom-adjunction duplicates lem-sc-derived-internal-hom-adjunction (08DJ+0FPB, with symmetry); dropped, item and criterion cite the existing node. (2) C4: Step 1 derived the every-M evaluation iso from lem-pc-affine-perfect-complex-duality (R-module complexes only); rewritten as Tag 08DQ: strictly perfect E on affine U (def-pc-perfect-complex), restrict-open + lem-pc-rhom-strict-perfect-hom (any complex of O_U-modules), E^vee K-flat (lem-pc-bounded-above-flat-kflat), termwise F(x)Hom(E,O)->Hom(E,F) iso for direct summands of finite free (elementary); new Step 2 (elementary): being an isomorphism is checked on cohomology sheaves locally, no gluing of morphisms; the R-module node became unused and is dropped; tool use lem-pc-affine-qcoh-derived-equivalence dropped. (3) B3: evaluation ev, the global map, bidual map, eta and the base-change map now defined explicitly via lem-sc-derived-internal-hom-adjunction and lem-pc-derived-pullback-tensor-product (as in lem-pc-derived-internal-hom-pullback-adjunction); criterion statement now defines phi_M and eta (checked: triangle identities follow from phi_K and phi_O isomorphisms; true); base-change step rewritten on affine V in g^{-1}U with termwise pullback (Tag 0GM7 (1)), old Step 4 folded in. Tag 08DM correct now; prop-sf-dualizable answered in report. C4 citers: lem-sc-rhom-supported-qcoherent, lem-pc-affine-morphism-hom-out-of-perfect, lem-pc-perfect-tensor-hom-duality use K perfect, M qcoh, K^vee perfect in D_QCoh, zig-zags/exact pairing, base change with L=O: all still stated. Mathlib grep for the criterion recorded (no match).; 2 file(s) fixed by the reviewer"
+ },
+ "lead_note": "2026-10-10 L (R-prt2934): Third push. Fault the H1 second reading missed: Step 1 claimed the evaluation iso for every M in D(O_X) from the R-module node lem-pc-affine-perfect-complex-duality, which only covers complexes of R-modules (quasi-coherent M); repaired with the sheaf-level termwise argument of Tag 08DQ."
 }

@@ -2878,3 +2878,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 22:52 L: merged deliver/C1/lem-weil-pbc-lisse-generic-kernel (reviewer FIX; first push; new nodes: 0)
 - 22:52 L: merged deliver/C1/lem-sc-perfect-into-support-on-T (reviewer FIX; after a return; new nodes: 0)
 - 22:53 L: merged deliver/J1/lem-kun-finite-closed-subscheme (reviewer PASS; first push; new nodes: 0)
+- 22:53 L: merged deliver/H1/lem-pc-perfect-rhom-tensor-comparison (reviewer FIX; after a return; new nodes: 2)
