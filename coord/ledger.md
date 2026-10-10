@@ -2895,3 +2895,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 22:58 L: merged deliver/J1/lem-sc-picard-locus-closed (reviewer PASS; after a return; new nodes: 2)
 - 22:58 L: merged deliver/M1/lem-sc-picard-product-open (reviewer FIX; after a return; new nodes: 2)
 - 22:59 L: merged deliver/H1/lem-kun-fibre-product-limits (reviewer FIX; first push; new nodes: 0)
+- 22:59 L: returned deliver/F1/lem-kun-sep-closed-finite-extension-sep-closed (reviewer RETURN: Not a fault: the item is Mathlib's Algebra.IsAlgebraic.isSepClosed (Mathlib/FieldTheory/PurelyInseparable/Basic.lean:567)
