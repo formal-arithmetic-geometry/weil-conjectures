@@ -432,18 +432,34 @@ theorem isFiniteLocallyConstantSheaf_freeYoneda_of_isFinite (V : U.Etale) [IsFin
 
 end FiniteEtale
 
+/-- **Generic finiteness of étale morphisms** [Stacks 03I1, 02NW]. Let `Z` be a nonempty scheme
+with Noetherian underlying space and `W` an affine étale `Z`-scheme. Over some nonempty open
+`U ⊆ Z` the morphism `W ⟶ Z` is finite: over the generic point `η` of an irreducible open
+`U₀`, the fibre of `W` is finite, and by Zariski's Main Theorem `W` is open in a scheme `T` finite
+over `U₀`; the closure of `W` in `T` meets its complement only over a closed subset of `U₀` not
+containing `η`, and over the complement `U` of that subset `W` is closed in `T`, hence finite
+over `U`. -/
+theorem exists_isFinite_etale_obj {Z : Scheme.{u}} [TopologicalSpace.NoetherianSpace Z]
+    [Nonempty Z] (W : Z.Etale) [IsAffine W.left] :
+    ∃ U : Z.Opens, (U : Set Z).Nonempty ∧ IsFinite (U.ι.Etale.obj W).hom :=
+  sorry
+
 /-- **Generic local constancy of free sheaves.** Let `Z` be a nonempty scheme with Noetherian
 underlying space and `Λ` finite. The free étale sheaf `Λ[W]` on an affine étale `Z`-scheme `W`
-is finite locally constant on some nonempty open `U ⊆ Z`: over a dense open `U` the morphism
-`W ⟶ Z` is finite étale (it is finite étale over the generic points of `Z`, and this spreads
-out), and the free sheaf on a finite étale `U`-scheme is finite locally constant, the finite
-étale scheme splitting étale-locally on `U` (`lem-fet-locally-trivial`). -/
+is finite locally constant on some nonempty open `U ⊆ Z`: over a nonempty open `U` the morphism
+`W ⟶ Z` is finite étale (`AlgebraicGeometry.Etale.exists_isFinite_etale_obj`), the restriction
+of `Λ[W]` to `U` is the free sheaf on `W ×_Z U` (`AlgebraicGeometry.Etale.upperStarFreeYonedaIso`),
+and the free sheaf on a finite étale scheme is finite locally constant
+(`AlgebraicGeometry.Etale.isFiniteLocallyConstantSheaf_freeYoneda_of_isFinite`). -/
 theorem exists_isFiniteLocallyConstantSheaf_freeYoneda [Finite Λ] {Z : Scheme.{u}}
     [TopologicalSpace.NoetherianSpace Z] [Nonempty Z] (W : Z.Etale) [IsAffine W.left] :
     ∃ U : Z.Opens, (U : Set Z).Nonempty ∧ Scheme.IsFiniteLocallyConstantSheaf
       ((Etale.upperStar (ModuleCat.{u + 1} Λ) U.ι).obj
-        (Sheaf.freeYoneda Z.smallEtaleTopology W (ModuleCat.of Λ Λ))) :=
-  sorry
+        (Sheaf.freeYoneda Z.smallEtaleTopology W (ModuleCat.of Λ Λ))) := by
+  obtain ⟨U, hU, hfin⟩ := exists_isFinite_etale_obj W
+  refine ⟨U, hU, ?_⟩
+  have := isFiniteLocallyConstantSheaf_freeYoneda_of_isFinite (Λ := Λ) (U.ι.Etale.obj W)
+  exact Scheme.IsFiniteLocallyConstantSheaf.of_iso (upperStarFreeYonedaIso U.ι W).symm
 
 /-- **Free sheaves on affine étale schemes are constructible** [Stacks 03SA, 095M]. Let `X` be
 a scheme with Noetherian underlying space and `Λ` finite. The free étale sheaf `Λ[W] = j_{W!} Λ_W`
