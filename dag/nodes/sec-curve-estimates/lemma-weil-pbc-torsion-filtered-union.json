@@ -3,38 +3,116 @@
  "blueprint": {
   "is": "lemma-weil-pbc-torsion-filtered-union",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "Filtered torsion union",
- "statement": "For every torsion sheaf [def-weil-pbc-etale-sheaves] $F$ on $X_{\\Et}$,\n\n$$\n F=\\varinjlim_{(\\mathbf N_{>0},\\mid)}F[n],\\qquad\n F[n]=\\ker(n:F\\to F),\n$$\n\nas a filtered colimit in $\\Ab(X_{\\Et})$. Here positive integers are ordered\nby divisibility, and for $n\\mid m$ the transition map is the inclusion\n$F[n]\\hookrightarrow F[m]$; this poset is filtered because\n$\\operatorname{lcm}(n,m)$ is a common upper bound.",
+ "statement": "Let $X$ be a scheme and let $F$ be a torsion sheaf [def-weil-pbc-etale-sheaves] on $X_{\\Et}$, i.e. an object of $\\Ab(X_{\\Et})$ every local section of which is locally killed by a positive integer. Then\n\n$$\n F=\\varinjlim_{(\\mathbf N_{>0},\\mid)}F[n],\\qquad\n F[n]=\\ker(n:F\\to F)\\ \\text{[def-pur-abelian-sheaf-kernel]},\n$$\n\nas a filtered colimit [def-weil-pbc-category-colimit] in $\\Ab(X_{\\Et})$: the canonical map $c_F:\\varinjlim_nF[n]\\to F$ induced by the inclusions $F[n]\\hookrightarrow F$ is an isomorphism. Here positive integers are ordered\nby divisibility, and for $n\\mid m$ the transition map is the inclusion\n$F[n]\\hookrightarrow F[m]$; this poset is filtered because\n$\\operatorname{lcm}(n,m)$ is a common upper bound.",
  "source": {
   "document": "literature/blueprint/master/blueprint/sec-curve-estimates/sk-prop-h2/lemma-weil-pbc-torsion-filtered-union.md",
   "place": "node lemma-weil-pbc-torsion-filtered-union, order 954"
  },
  "stmt_deps": [
-  "def-weil-pbc-etale-sheaves"
+  "def-weil-pbc-etale-sheaves",
+  "def-pur-abelian-sheaf-kernel",
+  "def-weil-pbc-category-colimit"
  ],
  "proof": [
   {
-   "text": "Every local section of $F$ is locally killed by some positive integer, hence lies in\n$F[n]$ locally, so the canonical map to $F$ is an epimorphism of sheaves; a\nsection that is zero in $F$ is already zero in every $F[n]$, so it is a\nmonomorphism. Filteredness follows from the lcm property, and the sheaf\naxioms pass the local statements to global ones, exactly in the sense of\n[def-weil-pbc-etale-sheaves].",
+   "text": "*The diagram and the canonical map.* By [def-pur-abelian-sheaf-kernel] $F[n]$ is the subsheaf $U\\mapsto\\{s\\in F(U):ns=0\\}$ of $F$, with inclusion $i_n:F[n]\\to F$. If $n\\mid m$, write $m=kn$; then $ns=0$ implies $ms=k(ns)=0$, so $F[n]\\subseteq F[m]$ as subsheaves of $F$, and the inclusion $j_{nm}:F[n]\\to F[m]$ satisfies $i_m j_{nm}=i_n$; the inclusions compose, so $n\\mapsto F[n]$ is a functor $D$ from the poset $(\\mathbf N_{>0},\\mid)$ to $\\Ab(X_{\\Et})$. This poset is nonempty and any $n,m$ have the upper bound $\\operatorname{lcm}(n,m)$; a poset has at most one arrow between two objects, so it is a filtered small category [def-weil-pbc-category-colimit]. $\\Ab(X_{\\Et})$ has all small colimits [def-weil-pbc-etale-sheaves], so $\\varinjlim_nF[n]$ exists with coprojections $\\iota_n$, and the compatible family $(i_n)$ induces the unique $c_F:\\varinjlim_nF[n]\\to F$ with $c_F\\iota_n=i_n$ for all $n$ [def-weil-pbc-category-colimit].",
+   "uses": [
+    "def-pur-abelian-sheaf-kernel",
+    "def-weil-pbc-category-colimit",
+    "def-weil-pbc-etale-sheaves"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-curve-estimates/sk-prop-h2/lemma-weil-pbc-torsion-filtered-union.md",
+    "place": "second '## Proof' (of the detailed form)"
+   }
+  },
+  {
+   "text": "*$c_F$ is a monomorphism.* The family $(i_n)$ is a natural transformation $i:D\\to\\Delta F$ to the constant diagram with value $F$, and each $i_n$ is a monomorphism (an inclusion of a subsheaf, injective on all sections). Filtered colimits in $\\Ab(X_{\\Et})$ are exact, in particular a filtered colimit of monomorphisms is a monomorphism [lem-weil-pbc-abelian-etale-sheaves-grothendieck] (the category $\\Ab(X_{\\Et})$ of [def-weil-pbc-etale-sheaves] is the category of abelian sheaves on the small etale site of that node). So $\\varinjlim i:\\varinjlim_nF[n]\\to\\varinjlim_n\\Delta F$ is a monomorphism. The index category is filtered, hence connected (any two objects are joined by $n\\to\\operatorname{lcm}(n,m)\\leftarrow m$), so the cocone $(\\mathrm{id}_F)_n$ exhibits $F$ as the colimit of $\\Delta F$ (a cocone $(\\mu_n:F\\to M)$ on $\\Delta F$ has all $\\mu_n$ equal along zigzags, and $\\mu_n$ is then the unique factorization). Under this identification $\\varinjlim i$ is the map with $(\\varinjlim i)\\iota_n=i_n$, i.e. $c_F$. Hence $c_F$ is a monomorphism. (The blueprint's sentence 'a section that is zero in $F$ is already zero in every $F[n]$' only shows that each $i_n$ is a monomorphism; the exactness of filtered colimits is what passes this to $c_F$.)",
+   "uses": [
+    "lem-weil-pbc-abelian-etale-sheaves-grothendieck",
+    "def-weil-pbc-etale-sheaves",
+    "def-weil-pbc-category-colimit"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-curve-estimates/sk-prop-h2/lemma-weil-pbc-torsion-filtered-union.md",
+    "place": "second '## Proof' (of the detailed form)"
+   }
+  },
+  {
+   "text": "*$c_F$ is an epimorphism.* Let $U$ be an object of $X_{\\Et}$ and $s\\in F(U)$. Since $F$ is torsion [def-weil-pbc-etale-sheaves], there are an etale covering $\\{U_a\\to U\\}_a$ and integers $n_a\\ge1$ with $n_a\\,s|_{U_a}=0$. Then $s|_{U_a}\\in F[n_a](U_a)$ by the sectionwise description of the kernel [def-pur-abelian-sheaf-kernel]; call this section $t_a$, so $(i_{n_a})_{U_a}(t_a)=s|_{U_a}$. The section $g_a=(\\iota_{n_a})_{U_a}(t_a)$ of $\\varinjlim_nF[n]$ over $U_a$ satisfies $(c_F)_{U_a}(g_a)=(c_F\\iota_{n_a})_{U_a}(t_a)=(i_{n_a})_{U_a}(t_a)=s|_{U_a}$ (step 1). Thus $c_F$ is locally surjective, and a locally surjective morphism of abelian sheaves on $X_{\\Et}$ is an epimorphism [lem-weil-pbc-abelian-sheaf-epi-locally-surjective].",
+   "uses": [
+    "def-weil-pbc-etale-sheaves",
+    "def-pur-abelian-sheaf-kernel",
+    "lem-weil-pbc-abelian-sheaf-epi-locally-surjective"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-curve-estimates/sk-prop-h2/lemma-weil-pbc-torsion-filtered-union.md",
+    "place": "second '## Proof' (of the detailed form)"
+   }
+  },
+  {
+   "text": "*Conclusion.* $\\Ab(X_{\\Et})$ is an abelian category [def-weil-pbc-etale-sheaves], and in an abelian category a morphism that is both a monomorphism and an epimorphism is an isomorphism (it is the kernel of its cokernel $0$, hence isomorphic to the identity). By steps 2 and 3, $c_F$ is an isomorphism, i.e. $F=\\varinjlim_nF[n]$ via the inclusions.",
    "uses": [
     "def-weil-pbc-etale-sheaves"
    ],
-   "elementary": false
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-curve-estimates/sk-prop-h2/lemma-weil-pbc-torsion-filtered-union.md",
+    "place": "second '## Proof' (of the detailed form)"
+   }
   }
  ],
  "proof_deps": [
-  "def-weil-pbc-etale-sheaves"
+  "def-pur-abelian-sheaf-kernel",
+  "def-weil-pbc-category-colimit",
+  "def-weil-pbc-etale-sheaves",
+  "lem-weil-pbc-abelian-etale-sheaves-grothendieck",
+  "lem-weil-pbc-abelian-sheaf-epi-locally-surjective"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/master/blueprint/sec-curve-estimates/sk-prop-h2/lemma-weil-pbc-torsion-filtered-union.md",
-  "place": "## Proof"
+  "place": "second '## Proof' (of the detailed form); Stacks 0DDC (etale-cohomology-lemma-torsion-cohomology), proof of (1), uses 'F = \\bigcup F[n]' without proof"
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "torsion sheaf of abelian groups is the filtered colimit of its n-torsion subsheaves",
+   "results": "AddCommGrpCat.FilteredColimits.colimit/colimitCoconeIsColimit, ModuleCat.FilteredColimits.colimit, CommGrpCat/AddGrpCat.FilteredColimits.* (Mathlib.Algebra.Category.Grp.FilteredColimits): constructions of filtered colimits of groups, nothing on torsion sheaves",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "a torsion abelian sheaf on a site is the colimit (union) of the kernels of multiplication by n",
+   "results": "CategoryTheory.Sheaf.instIsGrothendieckAbelian, CategoryTheory.sheafIsAbelian, Sheaf.isGrothendieckAbelian_of_essentiallySmall, SheafOfModules.instAbelian, CategoryTheory.Sheaf.H, condensed-module instances: generic structure only",
+   "date": "2026-10-10",
+   "verdict": "no match (the Grothendieck-abelian instance is the tool of step 2, recorded on lem-weil-pbc-abelian-etale-sheaves-grothendieck)"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Sheaf, CategoryTheory.Limits.IsColimit, CategoryTheory.Limits.kernel",
+   "results": "SheafOfModules.relationsOfIsCokernelFree(_I,_s), SheafOfModules.presentationOfIsCokernelFree_relations, SheafOfModules.Presentation.isColimit, ...map_relations_I (Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent): presentations, unrelated",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rn 'IsTorsion\\|torsion' CategoryTheory/Sites/ CategoryTheory/Abelian/ AlgebraicGeometry/Sites/; grep -rln 'kernel (.*• 𝟙' CategoryTheory AlgebraicGeometry (in ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib)",
+   "results": "only 'torsion theory' keywords in CategoryTheory/Abelian/Preradical/{Basic,Colon,Radical}.lean; no torsion sheaf and no kernel of n•𝟙 on sheaves",
+   "date": "2026-10-10",
+   "verdict": "no match: Mathlib has no notion of torsion sheaf"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [
   "detailed_form",
@@ -66,5 +144,14 @@
   }
  },
  "chapter": "sec-curve-estimates",
- "unit": "sk-prop-h2"
+ "unit": "sk-prop-h2",
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "lemma-weil-pbc-torsion-filtered-union",
+  "worker": "stage1",
+  "summary": "Rule-0 search: the id occurs in slopmaster2 (71d63dcf) in the docstrings of AlgebraicGeometry.Scheme.IsTorsionSheaf.exists_isColimit and Scheme.IsTorsionSheafOfInvertibleOrder.exists_isColimit (WeilConjectures/SixFunctors/Etale/BaseChangeTheorems/TorsionSheaf.lean:212-289, 356-), both sorry-free per the sorry map, but neither states the node: they assert only that some filtered diagram of sheaves of Lambda-modules, each killed by a positive integer, has colimit F (built from the chain F[k!]), for the stalkwise torsion notion; the docstring says so ('this lemma only records the existence of some such diagram'). Not attached; the item is split. The proof follows the blueprint's detailed proof in four steps: the divisibility diagram and the canonical map c_F (elementary, from the sectionwise kernel); c_F mono by exactness of filtered colimits in Ab(X_et) (the blueprint argued mono only from each F[n] -> F being mono, which is not enough; repaired); c_F epi by local surjectivity from the definition of torsion; mono+epi = iso in an abelian category. The same steps are Lean's AlgebraicGeometry.Etale.isColimitOfMonoOfLocallySurjective (WeilConjectures/AlgebraicGeometry/Curve/HighDegreeVanishing.lean:89-130, sorry-free) applied as in Etale.subsingleton_H_of_isTorsion. Statement: 'Let X be a scheme' added (X was not introduced), the canonical map c_F named, and the kernel and colimit definitions cited (stmt_deps). All cited lemmas are Mathlib leaves; no new node. The same content is (2)=>(1) of lem-weil-pbc-torsion-sheaf-characterizations (unit sk-def-pbc), proved there through geometric stalks; not cited, to keep the item's route and avoid a non-leaf tool of another unit.",
+  "blueprint": "Steps 1-4 realize the whole of the blueprint proof of lemma-weil-pbc-torsion-filtered-union (detailed form): step 1 = 'Filteredness follows from the lcm property' and the transition maps of the short proof ('sends a section killed by n to the same section, now regarded as killed by mn'); step 2 = 'a section that is zero in F is already zero in every F[n], so it is a monomorphism' (made correct by exactness of filtered colimits); step 3 = 'Every local section of F is locally killed by some positive integer, hence lies in F[n] locally, so the canonical map to F is an epimorphism of sheaves' / 'sheafification preserves this local epimorphism'; step 4 = 'the sheaf axioms pass the local statements to global ones'."
+ },
+ "reviewed": "2026-10-10 L: 4 steps (the diagram over divisibility, mono by exactness of filtered colimits, epi by local surjectivity, mono + epi = iso); blueprint proof gap on the mono repaired; statement given its scheme X and the canonical map; 0 new nodes. The two sorry-free exists_isColimit declarations tagged with this id state only the existence of some such diagram, not this: not attached (right).",
+ "lead_note": "2026-10-10 L: the same as (2) => (1) of lem-weil-pbc-torsion-sheaf-characterizations (unit sk-def-pbc); torsion is defined twice (def-weil-pbc-etale-sheaves: locally killed by n; def-weil-pbc-torsion-etale-sheaf: c_F an isomorphism). Kept as the unit sk-prop-h2 states it; to merge when sk-def-pbc is reviewed."
 }
