@@ -7,7 +7,7 @@ module
 
 public import WeilConjectures.WeilSheaf.Cohomology
 public import WeilConjectures.WeilSheaf.HomologySequence
-public import WeilConjectures.WeilSheaf.StalkFunctor
+public import WeilConjectures.WeilSheaf.ConstantTwistCohomology
 
 /-!
 # Compactly supported cohomology of a shifted Weil complex

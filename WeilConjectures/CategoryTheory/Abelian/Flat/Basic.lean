@@ -5,15 +5,17 @@ Authors: Nailin Guan
 -/
 module
 
+public import Mathlib.CategoryTheory.Abelian.Exact
 public import Mathlib.CategoryTheory.Abelian.GrothendieckCategory.Basic
 public import Mathlib.CategoryTheory.Monoidal.Limits.Preserves
+public import WeilConjectures.Mathlib.CategoryTheory.Monoidal.Rigid.Basic
 public import WeilConjectures.FromJoel.CategoryTheory.Abelian.Flat.Basic
 
 /-!
 
 # Flat objects of a braided closed monoidal category
 
-Four elementary properties of `CategoryTheory.ObjectProperty.flat` that are not part of
+Six elementary properties of `CategoryTheory.ObjectProperty.flat` that are not part of
 `WeilConjectures.FromJoel.CategoryTheory.Abelian.Flat.Basic`. The first two are used by the
 flat separator criterion of
 `WeilConjectures.CategoryTheory.GrothendieckAbelian.Monoidal.FlatResolution`.
@@ -26,8 +28,10 @@ The second one says that flat objects are stable under coproducts in a Grothendi
 abelian category. This is what makes the functorial flat cover `∐_{g : G ⟶ X} G` attached
 to a flat separator `G` flat.
 
-The last two say that a zero object is flat, and that an object with a tensor inverse is
-flat, tensoring with it being an equivalence of categories, hence exact.
+The next three say that a zero object is flat, that an object with a tensor inverse is
+flat, tensoring with it being an equivalence of categories, hence exact, and that a
+dualizable object is flat, tensoring with it being a right adjoint. Finally, a retract of a
+flat object is flat.
 
 ## Main results
 
@@ -37,6 +41,8 @@ flat, tensoring with it being an equivalence of categories, hence exact.
 - `CategoryTheory.ObjectProperty.flat_of_isZero`: a zero object is flat.
 - `CategoryTheory.ObjectProperty.flat_of_tensorIso`: an object with a tensor inverse is
   flat.
+- `CategoryTheory.ObjectProperty.flat_of_isDualizable`: a dualizable object is flat.
+- `CategoryTheory.ObjectProperty.flat_of_retract`: a retract of a flat object is flat.
 
 -/
 
@@ -114,5 +120,31 @@ lemma flat_of_tensorIso {X Y : A} (e : X ⊗ Y ≅ 𝟙_ A) : flat X := by
   exact ⟨(exactFunctor_iff _).2 ⟨inferInstance, inferInstance⟩,
     preservesFiniteLimits_of_natIso (BraidedCategory.tensorLeftIsoTensorRight X),
     preservesFiniteColimits_of_natIso (BraidedCategory.tensorLeftIsoTensorRight X)⟩
+
+omit [Abelian A] [IsGrothendieckAbelian.{u} A] in
+/-- A dualizable object `X` is flat: `tensorLeft X` is right adjoint to `tensorLeft Xᘁ`
+(`CategoryTheory.tensorLeftAdjunction`), so it preserves limits. -/
+lemma flat_of_isDualizable {X : A} (hX : IsDualizable X) : flat X := by
+  obtain ⟨_⟩ := hX
+  rw [flat_iff_preservesFiniteLimits]
+  have := (tensorLeftAdjunction X Xᘁ).rightAdjoint_preservesLimits
+  infer_instance
+
+omit [IsGrothendieckAbelian.{u} A] in
+/-- A retract of a flat object is flat: `tensorLeft X` is right exact, being a left adjoint,
+and it preserves monomorphisms, as `X ◁ f` is a retract of the monomorphism `Y ◁ f`. -/
+lemma flat_of_retract [MonoidalPreadditive A] {X Y : A} (h : Retract X Y) (hY : flat Y) :
+    flat X := by
+  rw [flat_iff_preservesFiniteLimits]
+  have : PreservesFiniteLimits (tensorLeft Y) := hY.1.1
+  have : (tensorLeft X).PreservesMonomorphisms := ⟨fun {Z W} f _ ↦ ⟨fun {T} g₁ g₂ hg ↦ by
+    have hm : Mono (Y ◁ f) := (tensorLeft Y).map_mono f
+    have key : g₁ ≫ h.i ▷ Z = g₂ ≫ h.i ▷ Z := by
+      rw [← cancel_mono (Y ◁ f), Category.assoc, Category.assoc, ← whisker_exchange]
+      simp only [← Category.assoc]
+      exact congrArg (· ≫ h.i ▷ W) hg
+    simpa [← comp_whiskerRight] using congrArg (· ≫ h.r ▷ Z) key⟩⟩
+  have := Functor.preservesHomology_of_preservesMonos_and_cokernels (tensorLeft X)
+  exact Functor.preservesFiniteLimits_of_preservesHomology _
 
 end CategoryTheory.ObjectProperty
