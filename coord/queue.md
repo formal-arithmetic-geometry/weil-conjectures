@@ -1,8 +1,8 @@
 # Work queue
 
-905 items; claim with `tools/claim.py next <group> [--stage N]`.
+904 items; claim with `tools/claim.py next <group> [--stage N]`.
 
-## Stage 1: nodes to split (262)
+## Stage 1: nodes to split (261)
 
 | node | distance to a target | Lean state on the done branch |
 |---|---|---|
@@ -21,9 +21,9 @@
 | `lem-sc-smooth-proper-diagonal-tensor-formula` | 3015 | none |
 | `lem-sc-bounded-above-finite-free-hom-acyclic` | 3016 | none |
 | `lem-sc-bounded-below-injective-resolution` | 3016 | none |
-| `lem-sc-koszul-regular-closed-immersion-perfect` | 3016 | none |
 | `lem-sc-koszul-regular-immersion-derived-hom` | 3016 | none |
 | `def-pc-compactly-generated` | 3017 | none |
+| `def-sc-perfect-closed-immersion` | 3017 | none |
 | `lem-pc-compact-generators-build-objects` | 3017 | none |
 | `lem-pc-compact-hom-hocolim` | 3017 | none |
 | `lem-pc-derived-sections-pushforward-comparison` | 3017 | none |
@@ -56,7 +56,6 @@
 | `lem-pc-derived-pullback-tensor-qcoh` | 4011 | none |
 | `lem-pc-projection-locality` | 4011 | none |
 | `lem-pc-zero-scheme-pullback-full-local-coefficient` | 4011 | none |
-| `def-weil-pbc-etale-sheaves` | 5002 | none |
 | `lem-pc-flat-base-change-cohom` | 5008 | rests_on_sorry |
 | `lem-pc-picard-functor-agrees-sc` | 5008 | none |
 | `lem-sc-deg-pullback-finite` | 5009 | rests_on_sorry |
@@ -917,7 +916,7 @@
 | `lem-weil-pbc-p1-field-dimension-one` | 4 | state |
 | `lem-weil-pbc-projective-space-zero-isomorphism` | 4 | state |
 
-Not open yet: 1336 nodes that wait for a statement dependency, 292 nodes that wait for stage 1.
+Not open yet: 1338 nodes that wait for a statement dependency, 291 nodes that wait for stage 1.
 
 ## Stage 3: modules to prove (0)
 
