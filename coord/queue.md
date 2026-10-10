@@ -1,8 +1,8 @@
 # Work queue
 
-863 items; claim with `tools/claim.py next <group> [--stage N]`.
+861 items; claim with `tools/claim.py next <group> [--stage N]`.
 
-## Stage 1: nodes to split (56)
+## Stage 1: nodes to split (54)
 
 | node | distance to a target | Lean state on the done branch |
 |---|---|---|
@@ -29,7 +29,6 @@
 | `lem-pc-vanishing-above-dim` | 4009 | rests_on_sorry |
 | `lem-sc-finite-flat-surj-points` | 4009 | none |
 | `lem-sc-etale-triple-to-sh-completion-flat` | 4012 | none |
-| `lem-pc-affine-sections-flat-over-base` | 5014 | none |
 | `lem-pc-derived-tensor-transitivity` | 5015 | none |
 | `lem-sc-associated-localization-fg` | 5015 | none |
 | `lem-sc-weakass-localization` | 5015 | none |
@@ -38,7 +37,6 @@
 | `lem-pc-rf-mv-triangle-naturality` | 5016 | none |
 | `lem-pc-sites-sheafification-underlying-sets` | 5016 | none |
 | `lem-sp-filtered-complex-ZB-description` | 6007 | none |
-| `lem-sp-ce-horizontal-lift` | 6008 | none |
 | `lem-sp-ce-vertical-nullhomotopy` | 6008 | none |
 | `lem-sc-picard-h1-multiple-locus` | 6013 | none |
 | `lem-sc-picard-locus-closed-valuation-triviality` | 6013 | none |
@@ -875,7 +873,7 @@
 | `lem-weil-pbc-projective-space-zero-isomorphism` | 4 | state |
 | `def-nagata-fixed-base-separated-stage` | 6 | state |
 
-Not open yet: 1690 nodes that wait for a statement dependency, 97 nodes that wait for stage 1.
+Not open yet: 1691 nodes that wait for a statement dependency, 95 nodes that wait for stage 1.
 
 ## Stage 3: modules to prove (0)
 
