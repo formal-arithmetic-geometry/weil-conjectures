@@ -25,9 +25,51 @@
   "def-sp-abelian",
   "def-sbc-standard-tstructure-derived-category"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "At degree $m$ the map $C_m(K)\\to\\tau_{\\ge m}K$ is the identity of $K^m/\\operatorname{im}(d^{m-1})$, and at degree $m+1$ it is the inclusion $\\operatorname{im}(d^m)\\hookrightarrow K^{m+1}$; it is zero in all other degrees. By the definition of the lower truncation in the statement, $q_m$ is zero in degree $m$ (where $\\tau_{\\ge m+1}K$ is zero), the quotient $K^{m+1}\\to K^{m+1}/\\operatorname{im}(d^m)$ in degree $m+1$, and the identity of $K^r$ in degrees $r>m+1$. Thus the displayed sequence is exact in every degree: in degree $m$ it is $0\\to K^m/\\operatorname{im}(d^{m-1})\\xrightarrow{\\mathrm{id}}K^m/\\operatorname{im}(d^{m-1})\\to0\\to0$, in degrees $r>m+1$ it is $0\\to0\\to K^r\\xrightarrow{\\mathrm{id}}K^r\\to0$, in degrees below $m$ all terms are zero, and in degree $m+1$ the kernel of the quotient $K^{m+1}\\to K^{m+1}/\\operatorname{im}(d^m)$ is $\\operatorname{im}(d^m)$. The maps commute with the differentials: in degree $m$ because the differential of $C_m(K)$ is induced by $d^m$, and in degree $m+1$ because $d^{m+1}d^m=0$, so $d^{m+1}$ vanishes on $\\operatorname{im}(d^m)$. Hence it is a short exact sequence of complexes. This is the lower-truncation construction of Stacks Tag 0118.",
+   "uses": [
+    "def-sp-abelian",
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/homology.tex",
+    "place": "Tag 0118 (homology-section-truncations), lower canonical truncations and their degreewise quotients"
+   }
+  },
+  {
+   "text": "The degree-$m$ component of $H^m(K)[-m]\\to C_m(K)$ is the canonical inclusion $\\ker(d^m)/\\operatorname{im}(d^{m-1})\\hookrightarrow K^m/\\operatorname{im}(d^{m-1})$, and the other components are zero. This is a morphism of complexes because the source has zero differential and the differential of $C_m(K)$, induced by $d^m$, vanishes on $\\ker(d^m)$. The cohomology of $C_m(K)$ in degree $m$ is the kernel of the map $K^m/\\operatorname{im}(d^{m-1})\\to\\operatorname{im}(d^m)$ induced by $d^m$, namely $\\ker(d^m)/\\operatorname{im}(d^{m-1})=H^m(K)$, and the map above induces the identity on it; its cohomology in degree $m+1$ is $\\operatorname{im}(d^m)/\\operatorname{im}(d^m)=0$ since that map is an epimorphism; all other cohomology objects vanish, as do those of $H^m(K)[-m]$ outside degree $m$. Therefore the map is a quasi-isomorphism by the definition of quasi-isomorphism.",
+   "uses": [
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/homology.tex",
+    "place": "Tag 0118 (homology-section-truncations), identification of the successive quotient with H^m(K)[-m]"
+   }
+  },
+  {
+   "text": "For a morphism of complexes $f:K\\to L$, $f$ maps $\\operatorname{im}(d_K^{r})$ into $\\operatorname{im}(d_L^{r})$ and $\\ker(d_K^r)$ into $\\ker(d_L^r)$ and induces the corresponding maps on quotients and images. The maps $f^m$ and $f^{m+1}$ therefore define a morphism $C_m(K)\\to C_m(L)$, and $f$ induces morphisms $\\tau_{\\ge m}K\\to\\tau_{\\ge m}L$ and $\\tau_{\\ge m+1}K\\to\\tau_{\\ge m+1}L$ forming a morphism between the two short exact sequences. The inclusion $H^m(K)[-m]\\to C_m(K)$ commutes with these induced maps because it is the canonical map from cycles modulo boundaries and $H^m(f)$ is induced by $f^m$. Thus the short exact sequences and the quasi-isomorphisms are natural in $K$.",
+   "uses": [
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/homology.tex",
+    "place": "Tag 0118 (homology-section-truncations), functoriality of canonical truncations"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sp-abelian",
+  "def-weil-abstract-derived-category"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/homology.tex",
+  "place": "Tag 0118 (homology-section-truncations)"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -59,10 +101,26 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-pc-derived-lower-truncation-step-triangle",
   "by": "worker",
   "date": "2026-10-10"
+ },
+ "split_report": {
+  "date": "2026-10-11",
+  "item": "lem-pc-derived-lower-truncation-step-ses",
+  "worker": "stage1",
+  "summary": "Completed the chain-level proof from Stacks Tag 0118. The first step checks the degreewise short exact sequence and induced differentials; the second computes the two nonzero cohomology degrees of C_m(K) and proves the canonical map from H^m(K)[-m] is a quasi-isomorphism; the third checks functoriality under a chain map. All steps are elementary from existing definitions, so no new node was created.",
+  "blueprint": "Realizes the ancestor proof's first-step uniform truncation bound, specifically the successive lower-truncation quotient and its identification with H^m(K)[-m].",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-lts2539",
+  "group": "F1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-lts2539 (reviewer sub-agent of L); spot-checked: Statement keeps the corrected form (E): 0->C_m(K)->tau_{>=m}K->tau_{>=m+1}K->0 with C_m(K) the two-term complex K^m/im d^{m-1} -> im d^m and H^m(K)[-m]->C_m(K) a quasi-isomorphism. Checked exactness degree by degree (m, m+1 kernel = im d^m, >m+1, <m), chain-map conditions, cohomology of C_m(K) (degree m = H^m, degree m+1 = 0) and naturality; the truncation is defined in the item's own statement, so the elementary steps rest on it and def-weil-abstract-derived-category (C1 ok). Not a restatement (class b): lem-weil-pbc-truncation-step-ses is the dual upper-truncation tau_{<=q} statement. FIX more, RETURN less: B4 rewrote the three step texts in TeX (\\to, \\hookrightarrow, \\operatorname{im}) and made the degreewise exactness and the degree-m cohomology computation explicit. Second reading missed the B4 plain-text arrows; its claim to have changed created.item is not reflected in the file (created.item correctly remains the triangle item).; 1 file(s) fixed by the reviewer"
  }
 }
