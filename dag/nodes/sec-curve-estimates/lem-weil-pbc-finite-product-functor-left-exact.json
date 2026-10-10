@@ -24,9 +24,40 @@
   "document": "literature/stacks-project/homology.tex",
   "place": "Homology, Lemma 060K (homology-lemma-product-abelian-groups-exact, homology.tex line 7921: products of exact sequences of abelian groups are exact) together with the componentwise structure of a product category; formulation supplied by the reviewer"
  },
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "The product category has a zero object and finite biproducts by taking the corresponding objects and maps in each component. For a morphism family $(f_i)_i$, its kernel is the family of componentwise kernels, since a cone into this family is a cone into each $\\ker(f_i)$ and the componentwise universal properties assemble into the universal property in the product category. Thus the finite biproduct and kernel assertions hold.",
+   "uses": [
+    "def-sp-abelian"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/homology.tex",
+    "place": "Homology, Lemma 060K (homology-lemma-product-abelian-groups-exact), together with the componentwise universal properties of finite biproducts and kernels in a product category"
+   }
+  },
+  {
+   "text": "For each $i$, additivity of $\\Gamma_i$ identifies its value on a finite biproduct with the corresponding product in $\\mathbf{Ab}$, and left exactness identifies its value on a componentwise kernel with the kernel of the induced map. The finite product in $\\mathbf{Ab}$ is a finite biproduct, so the componentwise formula $\\Gamma((A_i)_i)=\\prod_i\\Gamma_i(A_i)$ preserves finite products and carries the componentwise kernel to the kernel of $\\Gamma((f_i)_i)$. By the definition of an additive left exact functor, $\\Gamma$ is additive and left exact.",
+   "uses": [
+    "def-sp-left-exact-additive",
+    "def-sp-abelian"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/homology.tex",
+    "place": "Homology, Lemma 060K (homology-lemma-product-abelian-groups-exact), finite products of exact sequences of abelian groups"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sp-abelian",
+  "def-sp-left-exact-additive"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/homology.tex",
+  "place": "Homology, Lemma 060K (homology-lemma-product-abelian-groups-exact), with the product-category componentwise argument supplied explicitly"
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -37,7 +68,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "R-dfp",
@@ -53,5 +84,26 @@
   "slopmaster2": {
    "state": "none"
   }
+ },
+ "split_report": {
+  "date": "2026-10-11",
+  "item": "lem-weil-pbc-finite-product-functor-left-exact",
+  "worker": "stage1",
+  "summary": "Completed the proof split for the existing unsplit statement. Step 1 constructs the zero object, finite biproducts, and kernels in the finite product category componentwise. Step 2 applies the additive and left exact hypotheses componentwise and uses finite biproducts in Ab to prove the product functor is additive and left exact. No new nodes were needed; both existing definition nodes were checked as the exact dependencies.",
+  "blueprint": {
+   "statement": "proof, second paragraph: the componentwise product functor on the finite product category is additive and left exact",
+   "steps": {
+    "1": "proof, second paragraph: componentwise finite biproducts and kernels in the product category",
+    "2": "proof, second paragraph: the componentwise product functor is additive and left exact"
+   }
+  }
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-fpl",
+  "group": "J1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-fpl (reviewer sub-agent of L); spot-checked: Source Stacks 060K (homology-lemma-product-abelian-groups-exact, homology.tex 7921: products of complexes of abelian groups, homology is the product) read; the statement (unchanged, pre-existing) takes finite I, abelian A_i [def-sp-abelian], additive left exact Gamma_i [def-sp-left-exact-additive], all notions cited. Step 1: zero object, finite biproducts and kernels of the product category componentwise from the componentwise universal properties, given def-sp-abelian in each A_i (elementary, C2). Step 2: def-sp-left-exact-additive says additive = preserves finite products and left exact = additive + preserves kernels; Gamma of a biproduct is a product of products (products commute), and prod_i ker Gamma_i(f_i) = ker prod_i Gamma_i(f_i) in Ab elementwise (the finite case of 060K), checkable in a few lines from the cited definitions. Only fields the split owns changed (proof, proof_deps, proof_origin, status, split_report); no new nodes. Mathlib: Limits/Pi.lean (coneOfConeEvalIsLimit, hasLimit_of_hasLimit_comp_eval) gives componentwise limits in the Pi category and Adjunction/Limits.lean:216 gives lim preserves limits, but no declaration states the Gamma clause (Functor.pi composed with the product over Discrete I) exactly, so not a leaf. Small cases: I empty gives the zero functor on the terminal category; I singleton gives Gamma_i. Start: Sat Oct 10 04:48:03 PM UTC 2026; end: Sat Oct 10 04:48:46 PM UTC 2026."
  }
 }
