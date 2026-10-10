@@ -52,8 +52,8 @@ The transform of the constant sheaf is computed from the stalk formula
 `H_c^*(𝔸^r, Λ) ≅ Λ(-r)[-2r]`, which needs `Λ` finite with exponent invertible on `S`. The
 transform of the skyscraper is compact-support base change of `Rp₂,!` along the zero section.
 The comparison of the transforms for `ψ` and `ψ⁻¹` is base change of `Rp₂,!` along the
-isomorphism `ι × 1`; it compares the chosen compactifications of `p₂` and of its conjugate by
-`ι × 1`.
+isomorphism `ι × 1`, over the identity of the second factor
+(`AlgebraicGeometry.Etale.nonempty_iso_kernelTransform_of_isIso`).
 
 TODO: upgrade these back to `Iso` constructions once they can be built.
 
@@ -75,6 +75,121 @@ open scoped CategoryTheory.Functor
 namespace AlgebraicGeometry.Etale
 
 open AlgebraicGeometry.AffineSpace
+
+section Automorphism
+
+variable (Λ : Type (u + 1)) [CommRing Λ]
+variable {P V V' : Scheme.{u}} (q₁ : P ⟶ V) (q₂ : P ⟶ V') [HasCompactification q₂]
+  [QuasiCompact q₂]
+
+/-- Compact-support base change along an automorphism `σ` over `V'`. -/
+private lemma kt_bc [Finite Λ] (σ : P ⟶ P) [IsIso σ] (h₂ : σ ≫ q₂ = q₂) :
+    Nonempty (R(q₂)_![ModuleCat.{u + 1} Λ] ≅
+      L((σ)^*[ModuleCat.{u + 1} Λ]) ⋙ R(q₂)_![ModuleCat.{u + 1} Λ]) := by
+  let A := ModuleCat.{u + 1} Λ
+  have sq : IsPullback σ q₂ q₂ (𝟙 _) :=
+    IsPullback.of_horiz_isIso ⟨h₂.trans (Category.comp_id _).symm⟩
+  have := isIso_rightDerivedLowerShriekBaseChangeMap Λ sq
+  let idIso : L((𝟙 V')^*[A]) ≅ 𝟭 _ :=
+    Functor.leftDerivedFunctorNatIso _ (Etale.upperStarId A _) ≪≫
+      (𝟭 _).leftDerivedFunctorIsoMapDerivedCategory ≪≫ Functor.mapDerivedCategoryIdIso _
+  exact ⟨(Functor.rightUnitor _).symm ≪≫ Functor.isoWhiskerLeft _ idIso.symm ≪≫
+      asIso (rightDerivedLowerShriekBaseChangeMap Λ sq)⟩
+
+/-- `D(q₁^*) ⋙ Lσ^* ≅ D(τ^*) ⋙ D(q₁^*)` for `σ ≫ q₁ = q₁ ≫ τ`. -/
+private lemma kt_pc (σ : P ⟶ P) (τ : V ⟶ V) (h₁ : σ ≫ q₁ = q₁ ≫ τ) :
+    Nonempty (D((q₁)^*[ModuleCat.{u + 1} Λ]) ⋙ L((σ)^*[ModuleCat.{u + 1} Λ]) ≅
+      D((τ)^*[ModuleCat.{u + 1} Λ]) ⋙ D((q₁)^*[ModuleCat.{u + 1} Λ])) := by
+  let A := ModuleCat.{u + 1} Λ
+  let ι {X Y : Scheme.{u}} (f : X ⟶ Y) := leftDerivedUpperStarIsoMapDerivedCategory A f
+  exact ⟨Functor.isoWhiskerRight (ι q₁).symm _ ≪≫
+      (leftDerivedUpperStarComp A σ q₁ (q₁ ≫ τ) h₁.symm).symm ≪≫
+      leftDerivedUpperStarComp A q₁ τ ≪≫
+      Functor.isoWhiskerRight (ι _) _ ≪≫ Functor.isoWhiskerLeft _ (ι _)⟩
+
+/-- `Lσ^*` commutes with tensoring by `𝒦`. -/
+private lemma kt_tens (σ : P ⟶ P)
+    (𝒦 : DerivedCategory (Sheaf P.smallEtaleTopology (ModuleCat.{u + 1} Λ))) :
+    Nonempty (derivedTensorRight (ModuleCat.{u + 1} Λ) P 𝒦 ⋙ L((σ)^*[ModuleCat.{u + 1} Λ]) ≅
+      L((σ)^*[ModuleCat.{u + 1} Λ]) ⋙ derivedTensorRight (ModuleCat.{u + 1} Λ) P
+        (L((σ)^*[ModuleCat.{u + 1} Λ]).obj 𝒦)) :=
+  ⟨derivedTensorRightCompLeftDerivedUpperStarIso _ σ 𝒦⟩
+
+/-- A kernel transform `K ↦ Rq₂,!(q₁^* K ⊗ᴸ 𝒦)[a]` is unchanged by an automorphism `σ` of
+`P` over `V'`: if `σ` lies over the endomorphism `τ` of `V` and `Lσ^* 𝒦 ≅ 𝒦'`, then
+`Rq₂,!(q₁^* K ⊗ᴸ 𝒦)[a] ≅ Rq₂,!(q₁^* τ^* K ⊗ᴸ 𝒦')[a]`, naturally in `K`. This is
+compact-support base change along the cartesian square with sides `σ`, `q₂`, `q₂` and `𝟙`,
+together with the monoidality of `Lσ^*`. -/
+theorem nonempty_iso_kernelTransform_of_isIso [Finite Λ] (σ : P ⟶ P) [IsIso σ] (τ : V ⟶ V)
+    (h₁ : σ ≫ q₁ = q₁ ≫ τ) (h₂ : σ ≫ q₂ = q₂)
+    (𝒦 𝒦' : DerivedCategory (Sheaf P.smallEtaleTopology (ModuleCat.{u + 1} Λ)))
+    (e : L((σ)^*[ModuleCat.{u + 1} Λ]).obj 𝒦 ≅ 𝒦') (a : ℤ) :
+    Nonempty (D((q₁)^*[ModuleCat.{u + 1} Λ]) ⋙ derivedTensorRight _ P 𝒦 ⋙
+        R(q₂)_![ModuleCat.{u + 1} Λ] ⋙ shiftFunctor _ a ≅
+      D((τ)^*[ModuleCat.{u + 1} Λ]) ⋙ D((q₁)^*[ModuleCat.{u + 1} Λ]) ⋙
+        derivedTensorRight _ P 𝒦' ⋙ R(q₂)_![ModuleCat.{u + 1} Λ] ⋙ shiftFunctor _ a) := by
+  obtain ⟨bc⟩ := kt_bc Λ q₂ σ h₂
+  obtain ⟨pc⟩ := kt_pc Λ q₁ σ τ h₁
+  obtain ⟨tens⟩ := kt_tens Λ σ 𝒦
+  let X := R(q₂)_![ModuleCat.{u + 1} Λ] ⋙
+    shiftFunctor (DerivedCategory (Sheaf V'.smallEtaleTopology (ModuleCat.{u + 1} Λ))) a
+  -- every reassociation is explicit, the kernel being slow to unfold derived functors
+  exact ⟨Functor.isoWhiskerLeft _ (Functor.isoWhiskerLeft _
+      (Functor.isoWhiskerRight bc (shiftFunctor _ a) ≪≫ Functor.associator _ _ _)) ≪≫
+    Functor.isoWhiskerLeft _ ((Functor.associator _ _ _).symm ≪≫
+      Functor.isoWhiskerRight tens X ≪≫ Functor.associator _ _ _) ≪≫
+    (Functor.associator _ _ _).symm ≪≫ Functor.isoWhiskerRight pc _ ≪≫
+      Functor.associator _ _ _ ≪≫
+    Functor.isoWhiskerLeft _ (Functor.isoWhiskerLeft _
+      (Functor.isoWhiskerRight ((derivedTensor _ P).flip.mapIso e) X))⟩
+
+/-- The derived pullback of a sheaf placed in degree zero is the pullback of the sheaf, placed
+in degree zero. -/
+lemma nonempty_iso_leftDerivedUpperStar_singleFunctor {X Y : Scheme.{u}} (f : X ⟶ Y)
+    (F : Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ))
+    (G : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))
+    (e : (f)^*[ModuleCat.{u + 1} Λ].obj F ≅ G) :
+    Nonempty (L((f)^*[ModuleCat.{u + 1} Λ]).obj ((DerivedCategory.singleFunctor _ 0).obj F) ≅
+      (DerivedCategory.singleFunctor _ 0).obj G) :=
+  ⟨(leftDerivedUpperStarIsoMapDerivedCategory _ f).app _ ≪≫
+    (((f)^*[ModuleCat.{u + 1} Λ]).mapDerivedCategorySingleFunctor 0).app _ ≪≫
+    (DerivedCategory.singleFunctor _ 0).mapIso e⟩
+
+end Automorphism
+
+section NegProd
+
+variable (n : Type u) (S : Scheme.{u})
+
+/-- The automorphism `ι × 1 : (x, ξ) ↦ (-x, ξ)` of `𝔸(n; S) ×_S 𝔸(n; S)`. -/
+noncomputable def negProd : pullback (𝔸(n; S) ↘ S) (𝔸(n; S) ↘ S) ⟶
+    pullback (𝔸(n; S) ↘ S) (𝔸(n; S) ↘ S) :=
+  pullback.map _ _ _ _ (neg n S) (𝟙 _) (𝟙 S) (by simp [neg_over]) (by simp)
+
+@[reassoc (attr := simp)]
+lemma negProd_fst : negProd n S ≫ pullback.fst _ _ = pullback.fst _ _ ≫ neg n S :=
+  pullback.lift_fst _ _ _
+
+@[reassoc (attr := simp)]
+lemma negProd_snd : negProd n S ≫ pullback.snd _ _ = pullback.snd _ _ :=
+  (pullback.lift_snd _ _ _).trans (Category.comp_id _)
+
+@[reassoc (attr := simp)]
+lemma negProd_negProd : negProd n S ≫ negProd n S = 𝟙 _ := by
+  ext <;> simp [AffineSpace.neg_comp_neg]
+
+instance : IsIso (negProd n S) := ⟨negProd n S, negProd_negProd n S, negProd_negProd n S⟩
+
+lemma negProd_appTop_stdPairing [Fintype n] :
+    (negProd n S).appTop (stdPairing n S) = -stdPairing n S := by
+  simp only [stdPairing, map_sum, map_mul, ← neg_mul, ← Finset.sum_neg_distrib]
+  congr 1
+  ext i
+  rw [← CommRingCat.comp_apply, ← CommRingCat.comp_apply, ← Scheme.Hom.comp_appTop,
+    ← Scheme.Hom.comp_appTop, negProd_fst, negProd_snd, Scheme.Hom.comp_appTop,
+    CommRingCat.comp_apply, neg_appTop_coord, map_neg]
+
+end NegProd
 
 variable (Λ : Type (u + 1)) [CommRing Λ] {p : ℕ} [Fact p.Prime] [Invertible (p : Λ)]
 variable (n : Type u) [Fintype n] (S : Scheme.{u})
@@ -160,15 +275,29 @@ The kernel of `FT_{ψ⁻¹}` is the pullback of the kernel of `FT_ψ` along `ι 
 `AlgebraicGeometry.Etale.nonempty_iso_artinSchreierSheafOf_inv` and `b(-x, ξ) = -b(x, ξ)`.
 It holds for every character.
 
-Class: compactification-dependent; decided by independence of the compactification. The
-blueprint proof is formal (base change along the isomorphism `ι × 1`); `[Finite Λ]` enters
-solely through independence of the compactification
-(`AlgebraicGeometry.Etale.rightDerivedLowerShriekIso`), comparing the chosen compactifications
-of `p₂` and of its conjugate by `ι × 1`.
+The proof is compact-support base change of `Rp₂,!` along the cartesian square with sides
+`ι × 1`, `p₂`, `p₂` and `𝟙`, so the same compactification of `p₂` is used on both sides;
+`[Finite Λ]` enters through that base change
+(`AlgebraicGeometry.Etale.isIso_rightDerivedLowerShriekBaseChangeMap`).
 (sketch blueprint: `sk-def-ft`, remark; `lem-fd-as-lisse`) -/
 theorem nonempty_iso_affineFourierTransform_inv [Finite Λ] (Ψ : AddChar (ZMod p) Λ) :
     Nonempty (affineFourierTransform Λ n S Ψ⁻¹ ≅
-        D((neg n S)^*[ModuleCat.{u + 1} Λ]) ⋙ affineFourierTransform Λ n S Ψ) :=
-  sorry
+        D((neg n S)^*[ModuleCat.{u + 1} Λ]) ⋙ affineFourierTransform Λ n S Ψ) := by
+  set π := 𝔸(n; S) ↘ S
+  let := (pullback π π).overSpecZModOfCharP p
+  have hΨ : Ψ⁻¹.compAddMonoidHom AddEquiv.ulift.toAddMonoidHom =
+      (Ψ.compAddMonoidHom AddEquiv.ulift.toAddMonoidHom)⁻¹ := by
+    ext; simp
+  -- `σ^* 𝒦_{ψ⁻¹} = ℒ_{ψ⁻¹, -b} ≅ ℒ_{ψ, b} = 𝒦_ψ`, `σ = ι × 1`
+  obtain ⟨e₀⟩ := nonempty_iso_artinSchreierSheafOf_neg_inv (pullback π π)
+    (Ψ⁻¹.compAddMonoidHom AddEquiv.ulift.toAddMonoidHom) (stdPairing n S)
+  obtain ⟨e⟩ := nonempty_iso_leftDerivedUpperStar_singleFunctor Λ (negProd n S)
+    (fourierKernel Λ π π Ψ⁻¹ (stdPairing n S)) (fourierKernel Λ π π Ψ (stdPairing n S))
+    (artinSchreierSheafZModPullbackIso (negProd n S) Ψ⁻¹ (stdPairing n S) ≪≫
+      eqToIso (congrArg (artinSchreierSheafZMod _ Ψ⁻¹) (negProd_appTop_stdPairing n S)) ≪≫
+      e₀ ≪≫ eqToIso (congrArg (artinSchreierSheafOf (pullback π π) · (stdPairing n S))
+        (by rw [hΨ, inv_inv])))
+  exact nonempty_iso_kernelTransform_of_isIso Λ (pullback.fst π π) (pullback.snd π π)
+    (negProd n S) (neg n S) (negProd_fst n S) (negProd_snd n S) _ _ e _
 
 end AlgebraicGeometry.Etale
