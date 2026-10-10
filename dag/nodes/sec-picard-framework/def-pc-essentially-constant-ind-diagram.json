@@ -13,12 +13,14 @@
  },
  "kind": "definition",
  "title": "Essentially constant filtered ind-diagram",
- "statement": "Let J be a filtered category, C a category, and F : J \\to C a functor. We say that F is essentially constant with value X in the ind-category if there are morphisms p_j : F(j) \\to X natural in j, an index j0 and a morphism s : X \\to F(j0) with p_{j0} composed with s equal to the identity of X, and such that for every j there is an index k receiving morphisms from j0 and j for which the transition map F(j) \\to F(k) equals the composite F(j) \\to X \\to F(j0) \\to F(k), where the first map is p_j, the second is s, and the last two maps are induced by the chosen morphisms in J.",
+ "statement": "Let $J$ be a filtered category, $\\mathcal C$ a category, and $F : J \\to \\mathcal C$ a functor. We say that $F$ is essentially constant with value $X$ in the ind-category if there are morphisms $p_j : F(j) \\to X$ natural in $j$, an index $j_0$ and a morphism $s : X \\to F(j_0)$ with $p_{j_0} \\circ s = \\operatorname{id}_X$, and such that for every $j$ there is an index $k$ with morphisms $j_0 \\to k$ and $j \\to k$ for which the transition map $F(j) \\to F(k)$ equals the composite $F(j) \\xrightarrow{p_j} X \\xrightarrow{s} F(j_0) \\to F(k)$, where the last map is induced by the chosen morphism $j_0 \\to k$.",
  "source": {
   "document": "literature/stacks-project/categories.tex",
   "place": "Categories, Definition Tag 05PU (label categories-definition-essentially-constant-diagram), part (1), filtered (ind-object) case; characterized in Lemma Tag 05PY"
  },
- "stmt_deps": [],
+ "stmt_deps": [
+  "def-weil-size-convention"
+ ],
  "proof": [],
  "proof_deps": [],
  "proof_origin": null,
@@ -40,18 +42,33 @@
   {
    "tool": "grep",
    "query": "IsEventuallyConstant|IndObject|essentially constant",
-   "results": "No grep hits for the requested pattern in Mathlib/CategoryTheory/Limits",
+   "results": "Hits in Mathlib/CategoryTheory/Limits: Constructions/EventuallyConstant.lean (Functor.IsEventuallyConstantTo/From: transition maps eventually isomorphisms) and Indization/*.lean (IsIndObject: presheaf is a filtered colimit of representables); neither states the Stacks 05PU(1) retraction-and-factorization condition",
    "date": "2026-10-11",
-   "verdict": "no exact match"
+   "verdict": "no match"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-pc-essentially-constant-ind-hom-colimit",
   "by": "worker",
   "date": "2026-10-10"
  },
  "chapter": "sec-picard-framework",
- "unit": "sk-thm-picard-duality"
+ "unit": "sk-thm-picard-duality",
+ "split_report": {
+  "date": "2026-10-11",
+  "item": "def-pc-essentially-constant-ind-diagram",
+  "worker": "stage1",
+  "summary": "Standalone definition checked against Stacks Categories Definition Tag 05PU part (1); no proof steps or child nodes are needed. The size convention is the only project definition dependency, and Mathlib searches found only the different eventual-constancy notion.",
+  "blueprint": "Realizes the ind-system Hom computation in the proof of lem-pc-pre-derived-adjoint-functors-general by supplying the essential-constancy definition."
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-eci2203",
+  "group": "G1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-eci2203 (reviewer sub-agent of L); spot-checked: Statement matches Stacks 05PU(1) clause by clause (cocone p_j, section s at j0, p_{j0}s=id, common-stage k with j0->k, j->k factorization); source kept as 05PU(1)/05PY (B3 ok); stmt_deps only def-weil-size-convention, no def-weil-abstract-derived-category; mathlib_match null is honest (IsEventuallyConstantTo and IsIndObject are different notions). FIX more, RETURN less: B search record: the grep entry claimed no hits in Mathlib/CategoryTheory/Limits, but the pattern hits Constructions/EventuallyConstant.lean and Indization/*.lean; corrected results text, verdict no match.; 1 file(s) fixed by the reviewer"
+ }
 }
