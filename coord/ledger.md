@@ -2148,3 +2148,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 17:39 L: returned deliver/C1/lem-sc-semilocal-dim-one-conductor (reviewer RETURN: Reviewer R-sdc1750. 1. E (false new statement) lem-sc-finite-integral-conductor: the hypothesis dim B = 1 is missing, an)
 - 17:39 L: merged deliver/F1/lem-pc-polynomial-quotient-distinct-linear-crt (reviewer FIX; first push; new nodes: 4)
 - 17:39 L: merged deliver/K1/lem-sc-field-artin-schreier-sequence (reviewer FIX; first push; new nodes: 0)
+- 17:40 L: merged deliver/E1/lem-sc-field-kummer-h2-brauer-injection (reviewer FIX; first push; new nodes: 0)
