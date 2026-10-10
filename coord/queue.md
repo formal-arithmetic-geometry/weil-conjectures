@@ -1,8 +1,8 @@
 # Work queue
 
-921 items; claim with `tools/claim.py next <group> [--stage N]`.
+920 items; claim with `tools/claim.py next <group> [--stage N]`.
 
-## Stage 1: nodes to split (621)
+## Stage 1: nodes to split (620)
 
 | node | distance to a target | Lean state on the done branch |
 |---|---|---|
@@ -25,8 +25,6 @@
 | `lem-weil-pbc-smooth-fibre-regular-local` | 1012 | none |
 | `lem-weil-pbc-smooth-localization-conormal-split` | 1012 | none |
 | `lem-weil-pbc-smooth-over-field-dimension-differentials` | 1012 | none |
-| `lem-weil-pbc-lci-regular-sequence-global-complete-intersection` | 1013 | none |
-| `lem-weil-pbc-lqf-locally-finite-type` | 1013 | none |
 | `lem-weil-pbc-miracle-flatness` | 1013 | none |
 | `lem-weil-pbc-mittag-leffler-limit-exact` | 1013 | none |
 | `lem-weil-pbc-module-finite-type-image-extension` | 1013 | none |
@@ -109,6 +107,7 @@
 | `lem-weil-pbc-nl-presentations-homotopy-equivalent` | 1014 | none |
 | `lem-weil-pbc-p-basis-differentials-basis` | 1014 | none |
 | `lem-weil-pbc-p-independent-differentials-independent` | 1014 | none |
+| `lem-weil-pbc-polynomial-quotient-dimension-at-point-height-difference` | 1014 | none |
 | `lem-weil-pbc-polynomial-ring-maximal-localization-dimension` | 1014 | none |
 | `lem-weil-pbc-torsion-module-flat-base-change-iso` | 1014 | none |
 | `lem-weil-pbc-torsion-submodule-flat-base-change-iso` | 1014 | none |
@@ -933,7 +932,7 @@
 | `lem-weil-pbc-p1-field-dimension-one` | 4 | state |
 | `lem-weil-pbc-projective-space-zero-isomorphism` | 4 | state |
 
-Not open yet: 633 nodes that wait for stage 1, 581 nodes that wait for a statement dependency.
+Not open yet: 632 nodes that wait for stage 1, 583 nodes that wait for a statement dependency.
 
 ## Stage 3: modules to prove (0)
 
