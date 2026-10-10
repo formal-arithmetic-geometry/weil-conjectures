@@ -62,6 +62,28 @@ open CategoryTheory
 namespace AlgebraicGeometry
 
 variable {k₀ : Type u} [Field k₀] [Finite k₀] {l : ℕ} [Fact l.Prime] [Fact (ringChar k₀ ≠ l)]
+
+/-- The global sections of a zero Weil sheaf vanish. -/
+theorem WeilSheaf.subsingleton_globalSections_of_isZero {X : Scheme.{u}}
+    [X.Over (Spec (CommRingCat.of k₀))] [QuasiCompact (X ↘ Spec (CommRingCat.of k₀))]
+    [LocallyOfFiniteType (X ↘ Spec (CommRingCat.of k₀))] {F : WeilSheaf k₀ l X}
+    (hF : Limits.IsZero F) : Subsingleton F.globalSections.carrier :=
+  ModuleCat.subsingleton_of_isZero <| Functor.map_isZero
+    (ObjectProperty.ι _ ⋙ Endofunctor.IsoAlgebra.forget _ ⋙ ProEtale.AdicSheaf.forget _ ⋙
+      Sheaf.Γ _ (WeilCoefficients.{u} l) ⋙ WeilCoefficients.toModuleCat l) hF
+
+/-- The cohomology `Hʳ(Spec k̄, M)` of a Weil complex on `Spec k₀` vanishes outside a finite
+interval of degrees, a Weil complex being bounded. -/
+theorem WeilComplex.exists_subsingleton_cohomologyFrobeniusModule
+    (M : WeilComplex k₀ l (Spec (CommRingCat.of k₀))) :
+    ∃ a b : ℤ, ∀ r, r < a ∨ b < r → Subsingleton (M.cohomologyFrobeniusModule r).carrier := by
+  obtain ⟨⟨a, ha⟩, ⟨b, hb⟩⟩ := M.property.1
+  refine ⟨a, b, fun r hr ↦ WeilSheaf.subsingleton_globalSections_of_isZero ?_⟩
+  refine Limits.IsZero.of_full_of_faithful_of_isZero (ObjectProperty.ι _) _ ?_
+  rcases hr with hr | hr
+  · exact _root_.DerivedCategory.isZero_of_isGE (hX := ha) _ a r hr
+  · exact _root_.DerivedCategory.isZero_of_isLE (hX := hb) _ b r hr
+
 section Separated
 
 variable {X : Scheme.{u}} [X.Over (Spec (CommRingCat.of k₀))]
@@ -77,7 +99,7 @@ The compactly supported cohomology `Hʳ_c(X ⊗ k̄, K)` of a Weil complex vanis
 interval of degrees `r`. -/
 theorem exists_subsingleton_compactlySupportedCohomology (K : WeilComplex k₀ l X) :
     ∃ a b : ℤ, ∀ r, r < a ∨ b < r → Subsingleton (K.compactlySupportedCohomology r).carrier :=
-  sorry
+  exists_subsingleton_cohomologyFrobeniusModule _
 
 /-- Blueprint `prop-cohomological-finiteness`: Compact-support finiteness and Frobenius.
 
@@ -85,7 +107,7 @@ The ordinary cohomology `Hʳ(X ⊗ k̄, K)` of a Weil complex vanishes outside a
 degrees `r`. -/
 theorem exists_subsingleton_cohomology (K : WeilComplex k₀ l X) :
     ∃ a b : ℤ, ∀ r, r < a ∨ b < r → Subsingleton (K.cohomology r).carrier :=
-  sorry
+  exists_subsingleton_cohomologyFrobeniusModule _
 
 end WeilComplex
 
