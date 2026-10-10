@@ -1936,3 +1936,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 16:14 L: returned deliver/M1/lem-sc-ext-stalk-localization (reviewer RETURN: 1. B3: lem-sc-derived-internal-hom-stalk-localization, statement: three notions have no defining node. 'pseudo-coherent )
 - 16:14 L: merged deliver/F1/lem-sc-tensor-globally-generated (reviewer FIX; first push; new nodes: 1)
 - 16:15 L: merged deliver/H1/lem-pc-separable-tensor-algebraic-closure (reviewer FIX; first push; new nodes: 1)
+- 16:15 L: returned deliver/M1/lem-exc-field-sections-stalk-invariants (reviewer RETURN: 1. E3: step 3: the sentence 'Since $\sigma H_L\sigma^{-1}=H_{L'}$' is false when $j(L)\neq L'$ (then $\sigma H_L\sigma^{)
