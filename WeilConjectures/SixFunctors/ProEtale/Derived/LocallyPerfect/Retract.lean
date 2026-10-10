@@ -7,7 +7,7 @@ module
 
 public import WeilConjectures.SixFunctors.ProEtale.Derived.DualizableLocalRetract
 public import WeilConjectures.SixFunctors.ProEtale.Derived.LocallyPerfect.Transport
-public import WeilConjectures.SixFunctors.ProEtale.Derived.UpperStarMonoidalStructure
+public import WeilConjectures.SixFunctors.ProEtale.Derived.UpperStarCoevaluation
 
 /-!
 # Dualizable complexes are locally retracts of finite subcomplexes
@@ -161,6 +161,7 @@ lemma Qh_map_quotient_map_eq {C : Type*} [Category C] [Abelian C] [HasDerivedCat
     quotientCompQhIso_hom_naturality, h]
 
 open _root_.DerivedCategory in
+set_option maxHeartbeats 1000000 in
 /-- **Local retract, after pullback.** Let `K` have a right dual `D` in `D(X_proét)`, with
 `K ≅ Q(M)` and `D ≅ Q(F)` for a complex `F` of flat sheaves whose pullback along `g : V ⟶ X` is
 K-flat, and let the coevaluation followed by `Q(s)` be `Q(φ)`. Suppose that over `V` the
@@ -216,6 +217,38 @@ theorem exists_retract_upperStar (V : X.ProEt)
     Functor.PreservesFlat.flat_obj (F := (V.hom)^*[ModuleCat.{u + 1} Λ]) (hF n)
   have hF'k : (HomotopyCategory.quasiIso _ (.up ℤ)).kFlat (qV.obj F') :=
     (HomotopyCategory.kFlat_quotient_obj_iff _).2 hF'
-  sorry
+  let t := ∑ k, (HomologicalComplex.ιTensorObj M F (p k) (-p k) 0 (by simp)).hom.app _
+    (tensorSectionMap _ _ _ (x k ⊗ₜ y k))
+  let t' := (sectionTransport V ((M ⊗ F).X 0)).hom t
+  have ht' : ((GC.obj (M ⊗ F)).d 0 1).hom.app _ t' = 0 := by
+    have := sectionTransport_naturality V ((M ⊗ F).d 0 1) t
+    erw [← this]
+    rw [hd, map_zero]
+  let φt := (singleUnitHomEquiv (GC.obj (M ⊗ F))).symm ⟨t', ht'⟩
+  have hφt : Q.map (inv (η GC) ≫ GC.map φ) = Q.map (φt ≫ GC.map s) := by
+    refine Q_map_eq_of_singleUnitHomEquiv_eq_add _ _ (-(sectionTransport V (I.X (-1))).hom w) ?_
+    rw [singleUnitHomEquiv_inv_η_comp_map, singleUnitHomEquiv_comp_coe]
+    simp only [φt, Equiv.apply_symm_apply]
+    have h1 := sectionTransport_naturality V (s.f 0) t
+    have h2 := sectionTransport_naturality V (I.d (-1) 0) w
+    rw [hs, map_add] at h1
+    have h3 : ((GC.map s).f 0).hom.app (op (terminalProEt V.left)) t' =
+        (show ((GC.obj I).X 0).obj.obj (op (terminalProEt V.left)) from
+          (sectionTransport V (I.X 0)).hom ((I.X 0).obj.map
+            ((Scheme.ProEt.isTerminalMkId X).from V).op (singleUnitHomEquiv I φ).1)) +
+        ((GC.obj I).d (-1) 0).hom.app (op (terminalProEt V.left))
+          ((sectionTransport V (I.X (-1))).hom w) := h1.symm.trans (congrArg _ h2)
+    change _ = ((GC.obj I).d (-1) 0).hom.app (op (terminalProEt V.left))
+      (-(sectionTransport V (I.X (-1))).hom w) +
+        ((GC.map s).f 0).hom.app (op (terminalProEt V.left)) t'
+    rw [h3, map_neg]
+    abel
+  obtain ⟨τ, hτ⟩ := exists_comp_whiskerRight_eq_of_singleUnitHomEquiv ι hF'flat p x'
+    (fun k ↦ (sectionTransport V _).hom (y k)) (φt ≫ δ GC M F) (by
+      rw [singleUnitHomEquiv_comp_coe]
+      simp only [φt, Equiv.apply_symm_apply, t', t, map_sum, hx']
+      refine Finset.sum_congr rfl fun k _ ↦ ?_
+      exact δ_mapHomologicalComplex_f_sectionTransport V M F (p k) (-p k) 0 (by simp) (x k) (y k))
+  exact exists_retract_of_upperStar V.hom K D M F I e eD s φ v hφ hF' ι φt hφt τ hτ
 
 end AlgebraicGeometry.ProEtale
