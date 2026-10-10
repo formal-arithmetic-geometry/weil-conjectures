@@ -1978,3 +1978,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 16:28 L: returned deliver/C1/lem-weil-pbc-cohomology-over-object-localization (reviewer RETURN: 1. D1/D2: lem-weil-pbc-site-restriction-injectives: the new node restates the item's own clause 'Restriction G -> G|_W s)
 - 16:28 L: merged deliver/E1/lem-sc-ext-support-cohomology-vanishing (reviewer FIX+NODE(1); first push; new nodes: 2)
 - 16:28 L: merged deliver/F1/lem-sc-invert-s-cohomology-gluing (reviewer FIX; first push; new nodes: 1)
+- 16:28 L: merged deliver/M1/lem-pc-rational-hyp (reviewer FIX; first push; new nodes: 0)
