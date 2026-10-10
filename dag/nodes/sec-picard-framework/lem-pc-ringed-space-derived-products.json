@@ -24,14 +24,94 @@
   "def-weil-sheaf-of-modules-category",
   "def-weil-category-product"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "The category of open subsets of X, with inclusions, is a small site and O_X is a sheaf of commutative rings on it. By [prop-pur-kinjective-resolutions-exist], Mod(O_X) is Grothendieck abelian, and every complex has a K-injective resolution [def-pur-kinjective-complex]. Represent each K_i by a complex and choose a K-injective resolution K_i -> I_i.",
+   "uses": [
+    "prop-pur-kinjective-resolutions-exist",
+    "def-pur-kinjective-complex"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/injectives.tex",
+    "place": "Tag 07D9, label lemma-derived-products, proof: 'choose a K-injective resolution'; Remark Tag 079Q, label remark-existence-D"
+   }
+  },
+  {
+   "text": "Mod(O_X) has products indexed by sets: the sectionwise product U -> prod_i F_i(U) of sheaves of O_X-modules is a sheaf of O_X-modules and is their product. Let I be the termwise product complex prod_i I_i, with projections pr_i. For any complex L, morphisms of complexes L -> I and homotopies between them are exactly families of morphisms L -> I_i and of homotopies, so Hom_{K(O_X)}(L,I) = prod_i Hom_{K(O_X)}(L,I_i) via the pr_i. If L is acyclic, every factor is 0 because each I_i is K-injective, so Hom_{K(O_X)}(L,I)=0 and I is K-injective [def-pur-kinjective-complex].",
+   "uses": [
+    "def-pur-kinjective-complex"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Lemma Tag 070L (lemma-product-K-injective), via the Hom characterization of K-injectivity"
+   }
+  },
+  {
+   "text": "Let L be any complex. By [lem-weil-pbc-kinjective-hom-derived], applied to the K-injective complexes I and I_i, and by step 2, Hom_{D(O_X)}(L,I) = Hom_{K(O_X)}(L,I) = prod_i Hom_{K(O_X)}(L,I_i) = prod_i Hom_{D(O_X)}(L,I_i) = prod_i Hom_{D(O_X)}(L,K_i), the composite bijection being composition with the images of the pr_i (and the isomorphisms I_i = K_i in D(O_X)). Hence I with these projections is a product of the family (K_i) in D(O_X) [def-weil-category-product]. Taking I countable gives the final assertion.",
+   "uses": [
+    "lem-weil-pbc-kinjective-hom-derived",
+    "def-weil-category-product"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/injectives.tex",
+    "place": "Tag 07D9, label lemma-derived-products, proof, last paragraph (products of K-injective complexes)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "prop-pur-kinjective-resolutions-exist",
+  "def-pur-kinjective-complex",
+  "lem-weil-pbc-kinjective-hom-derived",
+  "def-weil-category-product"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/master/blueprint/sec-picard-framework/sk-thm-picard-duality/lem-pc-ringed-space-derived-products.md",
+  "place": "proof, first step, truncation tower"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
-   "query": "derived category of a Grothendieck abelian category has products",
-   "results": "IsGrothendieckAbelian.hasExt; HasDerivedCategory; HasDerivedCategory.standard; hasExt_of_hasDerivedCategory; HomologicalComplex.isGrothendieckAbelian; no products in DerivedCategory",
+   "query": "derived category of sheaves of modules on a ringed space has arbitrary products",
+   "results": "LightCondensed.instIsGrothendieckAbelianLightCondMod; CategoryTheory.Sheaf.instIsGrothendieckAbelian; instAbelianLightCondMod; Condensed.instAB4CondensedMod; SheafOfModules.instAbelian; Condensed.instAB4StarCondensedMod; instAbelianCondensedMod; CategoryTheory.Sheaf.instHasFiniteProducts",
+   "date": "2026-10-11",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "HasLimitsOfShape (Discrete I) (DerivedCategory C), IsGrothendieckAbelian",
+   "results": "Unknown identifier HasLimitsOfShape; no hit",
+   "date": "2026-10-11",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "hasLimitsOfShape_discrete|derived category.*products",
+   "results": "none",
+   "date": "2026-10-11",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "products exist in the derived category of a Grothendieck abelian category",
+   "results": "CategoryTheory.IsGrothendieckAbelian.hasExt; HasDerivedCategory; HomologicalComplex.isGrothendieckAbelian; no derived-category product theorem",
+   "date": "2026-10-11",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "DerivedCategory.hasLimitsOfShape_discrete",
+   "results": "unknown identifier; no hit",
+   "date": "2026-10-11",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "DerivedCategory.*hasLimits|hasLimitsOfShape_discrete",
+   "results": "none",
    "date": "2026-10-11",
    "verdict": "no match"
   }
@@ -40,5 +120,36 @@
  "created": {
   "item": "lem-pc-ringed-space-truncation-derived-limit"
  },
- "status": "unsplit"
+ "status": "split",
+ "split_report": {
+  "date": "2026-10-11",
+  "item": "lem-pc-ringed-space-derived-products",
+  "worker": "stage1",
+  "summary": "Split by the Stacks 07D9 proof: prop-pur-kinjective-resolutions-exist gives K-injective resolutions in Mod(O_X); the termwise product of K-injective complexes is K-injective (elementary, Hom characterization, Stacks 070L); lem-weil-pbc-kinjective-hom-derived identifies Hom into K-injectives in D and K, giving the universal property of the product.",
+  "blueprint": "Realizes the first proof step of lem-sc-finite-duality: the product in D(O_X) used for the truncation tower, via Stacks 08D3/08D5 and the derived-products result 07D9/079Q.",
+  "tool_uses": [
+   {
+    "node": "prop-pur-kinjective-resolutions-exist",
+    "why": "Generic tool: its Grothendieck-abellian conclusion applies to the small site of open subsets of the ringed space and supplies the hypothesis of Stacks 07D9."
+   },
+   {
+    "node": "lem-weil-pbc-kinjective-hom-derived",
+    "why": "Generic tool: Hom_D(N,I)=Hom_K(N,I) for K-injective I in any abelian category (Stacks 070I)."
+   }
+  ]
+ },
+ "tool_uses": [
+  "prop-pur-kinjective-resolutions-exist",
+  "lem-weil-pbc-kinjective-hom-derived",
+  "prop-pur-kinjective-resolutions-exist",
+  "lem-weil-pbc-kinjective-hom-derived"
+ ],
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-rdp2509",
+  "group": "E1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-rdp2509 (reviewer sub-agent of L); spot-checked: C4: item gives set-indexed products in D(O_X), which covers prod_n tau>=-n E used by lem-pc-ringed-space-truncation-derived-limit. FIX more, RETURN less: (1) D2/C1 (missed by the second reading): step 2 moved the whole conclusion into new node lem-pc-derived-products-grothendieck-abelian, the item's generalization (Stacks 07D9 itself); dropped it and rewrote the proof along 07D9: K-injective resolutions from prop-pur-kinjective-resolutions-exist, termwise product of K-injectives is K-injective (elementary from Hom characterization, Stacks 070L), Hom_D=Hom_K into K-injectives by lem-weil-pbc-kinjective-hom-derived (generic tool, Stacks 070I) giving the product's universal property; proof_deps and tool_uses updated.; 1 file(s) fixed by the reviewer"
+ }
 }
