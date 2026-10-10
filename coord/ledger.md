@@ -2167,3 +2167,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 17:46 L: merged deliver/H1/lem-sc-smooth-proper-diagonal-conormal-differentials (reviewer FIX+NODE(1); first push; new nodes: 1)
 - 17:47 L: merged deliver/E1/lem-pc-structure-pushforward (reviewer FIX; first push; new nodes: 0)
 - 17:47 L: merged deliver/C1/lem-pc-f-open-subfunctor (reviewer FIX; first push; new nodes: 0)
+- 17:49 L: merged deliver/H1/lem-pd-degree-locally-constant (reviewer PASS; first push; new nodes: 0)
