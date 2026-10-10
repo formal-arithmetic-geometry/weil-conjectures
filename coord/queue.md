@@ -1,8 +1,8 @@
 # Work queue
 
-904 items; claim with `tools/claim.py next <group> [--stage N]`.
+902 items; claim with `tools/claim.py next <group> [--stage N]`.
 
-## Stage 1: nodes to split (145)
+## Stage 1: nodes to split (143)
 
 | node | distance to a target | Lean state on the done branch |
 |---|---|---|
@@ -23,7 +23,6 @@
 | `lem-pc-perfect-generation-koszul-orthogonal` | 3018 | none |
 | `lem-pc-perfect-rhom-tensor-comparison` | 3018 | none |
 | `lem-pc-supported-open-pushforward` | 3018 | none |
-| `lem-weil-pbc-complex-ses-connecting-formula` | 3018 | none |
 | `lem-weil-pbc-degreewise-split-derived-triangle` | 3018 | none |
 | `def-sc-duality-equation-base-change-map` | 3019 | none |
 | `lem-pc-affine-morphism-hom-out-of-perfect` | 3019 | none |
@@ -37,7 +36,6 @@
 | `def-pc-global-derived-rhom` | 3020 | none |
 | `lem-pc-qcqs-derived-direct-image-right-adjoint` | 3020 | none |
 | `lem-sc-rhom-supported-qcoherent` | 3021 | none |
-| `lem-sc-supported-factor-through-thick` | 3021 | none |
 | `lem-pc-perfect-summand` | 3022 | none |
 | `lem-pc-perfect-two-out-of-three` | 3022 | none |
 | `lem-pc-genus-agrees-sc` | 4007 | rests_on_sorry |
@@ -916,7 +914,7 @@
 | `lem-weil-pbc-projective-space-zero-isomorphism` | 4 | state |
 | `def-nagata-fixed-base-separated-stage` | 6 | state |
 
-Not open yet: 1535 nodes that wait for a statement dependency, 185 nodes that wait for stage 1.
+Not open yet: 1536 nodes that wait for a statement dependency, 183 nodes that wait for stage 1.
 
 ## Stage 3: modules to prove (0)
 
