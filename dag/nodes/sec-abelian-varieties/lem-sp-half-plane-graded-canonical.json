@@ -22,9 +22,57 @@
   "def-sp-filtration",
   "def-sp-convergence"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Fix $p\\geq0$, $q\\geq a$, $n=p+q$, and choose $r>\\max(q-a+1,p)$ so large that $u:=p-r+2\\leq0$; put $v:=q+r-2$, so $u+v=n$. By [thm-sp-half-plane-convergence] the entry has stabilized from page $r$ on, so $E_r^{p,q}=E_\\infty^{p,q}$. By item 4 of [lem-sp-derived-couple-exact], $C_r$ is an exact couple of type $r-2$ with $D_r^{u,v}=\\operatorname{im}(\\alpha^{r-2}:D^{p,q}\\to D^{u,v})$ and $D_r^{p+2,q-1}=\\operatorname{im}(\\alpha^{r-2}:D^{p+r,q-r+1}\\to D^{p+2,q-1})=0$, since $q-r+1<a$. Exactness of $C_r$ at $E_r^{p,q}$ and at $D_r^{u,v}$ gives the exact sequence $D_r^{u+1,v-1}\\xrightarrow{\\alpha_r}D_r^{u,v}\\xrightarrow{g_r}E_r^{p,q}\\to0$. For $k\\leq0$, $\\alpha:D^{k,m}\\to D^{k-1,m+1}$ is an isomorphism by exactness of [def-sp-exact-couple], since $E_2^{k-2,m+1}=0$ and $E_2^{k-1,m+1}=0$ (negative first index); hence $\\alpha^{-u}:D^{0,n}=A^n\\to D^{u,v}$ is an isomorphism carrying $G_qA^n=\\operatorname{im}(\\alpha^p)$ onto $D_r^{u,v}$ and $G_{q-1}A^n=\\operatorname{im}(\\alpha^{p+1})$ onto $\\alpha_r(D_r^{u+1,v-1})$. So the sequence identifies $E_\\infty^{p,q}$ with $G_qA^n/G_{q-1}A^n=F^pA^n/F^{p+1}A^n$.",
+   "uses": [
+    "thm-sp-half-plane-convergence",
+    "def-sp-exact-couple",
+    "lem-sp-derived-couple-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-abelian-varieties/sk-prop-av-pqf-finite/lem-sp-couple-morphism.md",
+    "place": "## Proof: the identification of E_infinity with the associated graded pieces used to compare the graded map with the E_infinity map"
+   }
+  },
+  {
+   "text": "Under the identification of Step 1 the map $\\gamma:D^{p,q}\\to E_\\infty^{p,q}$ is induced by $g$: iterating the defining property $g'\\circ\\bar\\alpha=\\pi\\circ\\hat g$ of item 2 of [lem-sp-derived-couple-exact] gives $g_r(\\alpha^{r-2}y)=\\overline{g(y)}$ for $y\\in D^{p,q}$, and $g$ factors through $\\ker d$ on each page, so $g(y)$ is a cycle on every page and lies in $Z_\\infty^{p,q}$ [def-sp-convergence]. The map $\\varphi$ is $\\alpha^p:D^{p,q}\\to D^{0,n}=A^n$ followed by $F^pA^n\\to F^pA^n/F^{p+1}A^n$. By Step 1, both are the composite of $D^{p,q}\\twoheadrightarrow G_qA^n$ with the quotient $G_qA^n\\to G_qA^n/G_{q-1}A^n$, transported by the isomorphism $\\alpha^{-u}$; hence both are epimorphisms with the same kernel.",
+   "uses": [
+    "lem-sp-derived-couple-exact",
+    "def-sp-convergence",
+    "thm-sp-half-plane-convergence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/homology.tex",
+    "place": "Lemma 12.21.4 (Tag 011T) and Lemma 12.23.5 (Tag 012F)"
+   }
+  },
+  {
+   "text": "Two epimorphisms out of $D^{p,q}$ with the same kernel induce a unique isomorphism $E_\\infty^{p,q}\\cong F^pA^n/F^{p+1}A^n$ carrying $\\gamma$ to $\\varphi$, i.e. $\\overline{g(y)}\\mapsto\\overline{\\alpha^p(y)}$; this is the canonical isomorphism of weak convergence in [def-sp-convergence] (here $A^n=D^{0,n}$ is the stable value of the colimit, as $\\alpha$ is an isomorphism in first degree $\\leq0$, and $F^pA^n=\\operatorname{im}\\alpha^p$). The isomorphism $E_\\infty^{p,q}\\cong F^pA^{p+q}/F^{p+1}A^{p+q}$ of [thm-sp-half-plane-convergence] is not specified further in that statement; the present lemma fixes it to be this canonical isomorphism, which by Step 2 exists and carries $\\gamma$ to $\\varphi$.",
+   "uses": [
+    "def-sp-convergence",
+    "thm-sp-half-plane-convergence"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/homology.tex",
+    "place": "Lemma 12.23.5 (Tag 012F)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "thm-sp-half-plane-convergence",
+  "def-sp-exact-couple",
+  "lem-sp-derived-couple-exact",
+  "def-sp-convergence"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/homology.tex",
+  "place": "Lemmas 12.21.4 (Tag 011T) and 12.23.5 (Tag 012F), with the stabilized-page calculation in the blueprint proof"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -32,13 +80,66 @@
    "results": "CochainComplex.ConnectData.homologyIsoPos, DoldKan.Γ₀NondegComplexIso, Rep.standardComplex quasi-isomorphisms, HomologicalComplex₂.XXIsoOfEq_inv_ιTotal; no exact-couple or E-infinity declaration",
    "date": "2026-10-10",
    "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "canonical E-infinity associated graded identification from an exact couple in a half-plane",
+   "results": "HomologicalComplex₂.ofGradedObject_toGradedObject and unrelated HomologicalComplex declarations; no exact-couple or E-infinity declaration",
+   "date": "2026-10-11",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "SpectralSequence E_infty associated graded exact couple",
+   "results": "0 hits; unknown identifier SpectralSequence",
+   "date": "2026-10-11",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "ExactCouple|E_infty|associated graded in Mathlib/Algebra/Homology",
+   "results": "0 hits",
+   "date": "2026-10-11",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "canonical E-infinity associated graded identification from an exact couple in a half-plane",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-11",
+   "verdict": "unavailable"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-sp-couple-morphism"
  },
  "chapter": "sec-abelian-varieties",
- "unit": "sk-prop-av-pqf-finite"
+ "unit": "sk-prop-av-pqf-finite",
+ "split_report": {
+  "date": "2026-10-11",
+  "item": "lem-sp-half-plane-graded-canonical",
+  "worker": "stage1",
+  "summary": "Checked that no Lean declaration states this item. Added a three-step proof: choose a stabilized page and identify its exact-couple quotient with the filtration quotient; show the maps induced by g and alpha^p are the two quotient epimorphisms with the same kernel; conclude the canonical isomorphism carries gamma to varphi. No new child nodes were needed.",
+  "blueprint": "Realizes the identification paragraph of lem-sp-couple-morphism: the stabilized-page quotient, the two epimorphisms from D^{p,q}, and their canonical induced isomorphism.",
+  "tool_uses": [
+   {
+    "node": "lem-sp-derived-couple-exact",
+    "why": "Its statement supplies the iterated derived couples, D_r image formula, exactness, and the g_r maps used to identify the stabilized quotient and show g(y) is a permanent cycle."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sp-derived-couple-exact",
+  "lem-sp-derived-couple-exact"
+ ],
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-hpg1941",
+  "group": "F1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-hpg1941 (reviewer sub-agent of L); spot-checked: Checked the stabilized-page computation (u<=0, D_r^{p+2,q-1}=0 as q-r+1<a, alpha iso in first degree <=0 from vanishing E_2) and g_r(alpha^{r-2}y)=[g(y)] against lem-sp-derived-couple-exact items 2 and 4; tool use lem-sp-derived-couple-exact accepted. FIX more, RETURN less: (1) C5: Step 1 attributed the D_r image formula to the theorem's 'stabilized-page calculation' (its proof); now cites item 4 of lem-sp-derived-couple-exact and spells out the exact sequence and the alpha^{-u} transport. (2) C5/E: Step 3 relied on which isomorphism the theorem's proof builds; the theorem's statement leaves it unspecified, so Step 3 now says it is fixed as the canonical weak-convergence isomorphism of def-sp-convergence (A^n=D^{0,n} as stable colimit), and cites the theorem. (3) B4: plain-text arrows in Steps 1-2 rewritten in TeX.; 1 file(s) fixed by the reviewer"
+ }
 }
