@@ -32,6 +32,7 @@ public import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.Proper
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.Smooth
 public import WeilConjectures.Mathlib.CategoryTheory.Adjunction.Basic
 public import WeilConjectures.PointCount
+public import WeilConjectures.AlgebraicGeometry.FieldExtensionLimit
 
 /-!
 # The Jacobian of a smooth projective curve
@@ -2023,6 +2024,84 @@ theorem nonempty_representableBy_picardFunctorDegree_of_isPullback {K : Type u} 
           (Spec.map (CommRingCat.ofHom (algebraMap k K))) T).left :=
         inferInstanceAs (QuasiCompact (pullback.fst _ _))
       isSheafFor_picardFunctorDegree_singleton C 0 _
+
+open Functor.RepresentableBy IntermediateField in
+/-- **The canonical descent datum of `J_s` is trivial at a finite level.** Let `J_s` represent the
+restriction of `Pic^0_{C/k}` to schemes over a separable closure `k_s`. Then there are a finite
+subextension `L` of `k_s/k`, an `L`-scheme `J_L` and a cartesian square `J_s = J_L ×_L k_s`
+through which the transport of points of `J_s` induced by `Pic^0_{C/k}` is trivial along pairs of
+`k_s`-points which agree over `L`.
+
+`J_s` descends to some finite `K'` (Stacks 01ZM). The transport of `Pic^0_{C/k}` and the
+projection to `J_{K'}` give two morphisms over `Spec (k_s ⊗_{K'} k_s)`; they agree on the diagonal
+`Spec k_s`, which is the limit of the `Spec (k_s ⊗_L k_s)`, hence over some
+`Spec (k_s ⊗_L k_s)` (Stacks 01ZM). -/
+theorem exists_finiteSubext_isPullback_overTransport {ks : Type u} [Field ks] [Algebra k ks]
+    [IsSepClosure k ks] (C : Scheme.{u}) [C.Over (Spec (.of k))]
+    [SmoothOfRelativeDimension 1 (C ↘ Spec (.of k))] [IsProper (C ↘ Spec (.of k))]
+    [GeometricallyIntegral (C ↘ Spec (.of k))] (Js : Over (Spec (.of ks)))
+    (rs : ((Over.map (Spec.map (CommRingCat.ofHom (algebraMap k ks)))).op ⋙
+      (picardFunctorDegree (C ↘ Spec (.of k)) 0).obj).RepresentableBy Js) :
+    ∃ (L : FiniteSubext k ks) (JL : Over (Spec (.of L.1))) (q : Js.left ⟶ JL.left)
+      (_ : IsPullback q Js.hom JL.hom (Spec.map (CommRingCat.ofHom (algebraMap L.1 ks)))),
+      ∀ {T : Scheme.{u}} (f₁ f₂ : T ⟶ Spec (.of ks))
+        (h : f₁ ≫ Spec.map (CommRingCat.ofHom (algebraMap k ks)) =
+          f₂ ≫ Spec.map (CommRingCat.ofHom (algebraMap k ks))),
+        f₁ ≫ Spec.map (CommRingCat.ofHom (algebraMap L.1 ks)) =
+          f₂ ≫ Spec.map (CommRingCat.ofHom (algebraMap L.1 ks)) →
+        ∀ a : Over.mk f₁ ⟶ Js, (rs.overTransport f₁ f₂ h a).left ≫ q = a.left ≫ q := by
+  have : IsSepClosed ks := IsSepClosure.sep_closed k
+  have : Algebra.IsSeparable k ks := IsSepClosure.separable
+  -- `J_s` is smooth and proper over `k_s`
+  have : SmoothOfRelativeDimension 1 (pullback (C ↘ Spec (.of k))
+      (Spec.map (CommRingCat.ofHom (algebraMap k ks))) ↘ Spec (.of ks)) :=
+    inferInstanceAs (SmoothOfRelativeDimension 1 (pullback.snd _ _))
+  have : IsProper (pullback (C ↘ Spec (.of k))
+      (Spec.map (CommRingCat.ofHom (algebraMap k ks))) ↘ Spec (.of ks)) :=
+    inferInstanceAs (IsProper (pullback.snd _ _))
+  have : GeometricallyIntegral (pullback (C ↘ Spec (.of k))
+      (Spec.map (CommRingCat.ofHom (algebraMap k ks))) ↘ Spec (.of ks)) :=
+    inferInstanceAs (GeometricallyIntegral (pullback.snd _ _))
+  obtain ⟨e⟩ := nonempty_picardFunctorDegree_iso_of_isPullback (K := ks) (C := C)
+    (C' := pullback (C ↘ Spec (.of k)) (Spec.map (CommRingCat.ofHom (algebraMap k ks))))
+    (pullback.fst _ _) (IsPullback.of_hasPullback _ _) 0
+  have : IsProper Js.hom := isProper_of_representableBy_picardFunctorDegree 0 Js (rs.ofIso e)
+  have hsm := smoothOfRelativeDimension_of_representableBy_picardFunctorDegree 0 Js (rs.ofIso e)
+  have : Smooth Js.hom := hsm.smooth
+  -- `J_s` descends to a finite subextension `K'`
+  obtain ⟨K', Y, p, _, _, _, q', hq'⟩ := exists_finiteSubext_isPullback (F := k) Js.hom
+  set gs := Spec.map (CommRingCat.ofHom (algebraMap k ks))
+  set ι' := Spec.map (CommRingCat.ofHom (algebraMap K'.1 ks))
+  have hgs (L : FiniteSubext k ks) : Spec.map (CommRingCat.ofHom (algebraMap L.1 ks)) ≫
+      Spec.map (CommRingCat.ofHom (algebraMap k L.1)) = gs :=
+    specMap_algebraMap_comp_specMap_algebraMap k L.1 ks
+  -- the two projections of `Spec (k_s ⊗_{K'} k_s)`
+  set pr₁ := tensorSpecPr₁ K'
+  set pr₂ := tensorSpecPr₂ K'
+  have hpr : pr₁ ≫ ι' = pr₂ ≫ ι' := (isPullback_tensorSpecPr K').w
+  have hprg : pr₁ ≫ gs = pr₂ ≫ gs := by
+    rw [← hgs K', ← Category.assoc, hpr, Category.assoc]
+  -- the universal pair of points over `Spec (k_s ⊗_{K'} k_s)`
+  set pV := pullback.snd Js.hom pr₁
+  set f₁V := pullback.fst Js.hom pr₁ ≫ Js.hom
+  set f₂V := pV ≫ pr₂
+  have hf₁V : f₁V = pV ≫ pr₁ := pullback.condition
+  have hfV : f₁V ≫ gs = f₂V ≫ gs := by
+    rw [hf₁V, Category.assoc, hprg, Category.assoc]
+  let a₀ : Over.mk f₁V ⟶ Js := Over.homMk (pullback.fst Js.hom pr₁) rfl
+  -- the two morphisms to `J_{K'}`: the projection, and the transport followed by it
+  set u := (rs.overTransport f₁V f₂V hfV a₀).left ≫ q'
+  set pW := pullback.snd p (pr₁ ≫ ι')
+  have hψ : (pullback.fst Js.hom pr₁ ≫ q') ≫ p = pV ≫ pr₁ ≫ ι' := by
+    rw [Category.assoc, hq'.w, ← Category.assoc, pullback.condition, Category.assoc]
+  have hχ : u ≫ p = pV ≫ pr₁ ≫ ι' := by
+    have := Over.w (rs.overTransport f₁V f₂V hfV a₀)
+    simp only [Over.mk_hom] at this
+    rw [Category.assoc, hq'.w, ← Category.assoc, this, hpr]
+    rfl
+  let ψ := pullback.lift _ _ hψ
+  let χ := pullback.lift _ _ hχ
+  sorry
 
 /-- **`Pic^0_{C/k}` is represented at a finite separable level by a descent of `J_s`.** Let `J_s`
 represent the restriction of `Pic^0_{C/k}` to schemes over a separable closure `k_s`. Then there are
