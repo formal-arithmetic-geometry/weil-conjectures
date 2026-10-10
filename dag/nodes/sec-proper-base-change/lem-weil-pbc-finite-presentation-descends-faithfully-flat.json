@@ -1,0 +1,76 @@
+{
+ "id": "lem-weil-pbc-finite-presentation-descends-faithfully-flat",
+ "kind": "statement",
+ "title": "Finite presentation descends along faithfully flat ring maps (Stacks 00QQ)",
+ "statement": "Let $\\rho:R\\to R'$ be a faithfully flat homomorphism of commutative rings [def-weil-pbc-faithfully-flat-ring-map], let $\\alpha:R\\to A$ be a homomorphism of commutative rings, and let $A'=R'\\otimes_RA$, an $R'$-algebra through $r'\\mapsto r'\\otimes1$. Then $A$ is a finitely presented $R$-algebra [def-weil-pbc-finitely-presented-algebra] if and only if $A'$ is a finitely presented $R'$-algebra.",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Algebra, Lemma Tag 00QQ (lemma-finite-presentation-descends, line 31464)"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-faithfully-flat-ring-map",
+  "def-weil-pbc-finitely-presented-algebra"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "finite presentation descends along faithfully flat base change of algebras",
+   "results": "Algebra.FinitePresentation.baseChange (Mathlib.RingTheory.FiniteStability), FinitePresentation.of_isBaseChange, RingHom.FinitePresentation, RingHom.finitePresentation_isStableUnderBaseChange, Module.FaithfullyFlat.instTensorProduct, Module.Flat.of_flat_tensorProduct",
+   "date": "2026-10-10",
+   "verdict": "base-change direction found (Algebra.FinitePresentation.baseChange); descent direction not in the top results"
+  },
+  {
+   "tool": "loogle",
+   "query": "Algebra.FinitePresentation, Module.FaithfullyFlat, TensorProduct",
+   "results": "Algebra.FinitePresentation.of_finitePresentation_tensorProduct_of_faithfullyFlat (Mathlib.RingTheory.Finiteness.Descent)",
+   "date": "2026-10-10",
+   "verdict": "match (descent direction)"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "if R' is faithfully flat over R and R' ⊗ A is a finitely presented R'-algebra then A is a finitely presented R-algebra",
+   "results": "Algebra.FinitePresentation.baseChange, Module.Flat.of_flat_tensorProduct, RingHom.FaithfullyFlat.isStableUnderBaseChange, instFinitePresentationTensorProduct (modules), Module.FaithfullyFlat.instTensorProduct",
+   "date": "2026-10-10",
+   "verdict": "base-change direction only"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -n 'FinitePresentation' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/RingTheory/Finiteness/Descent.lean Mathlib/RingTheory/FiniteStability.lean (read with sed -n)",
+   "results": "Finiteness/Descent.lean:98-100 lemma Algebra.FinitePresentation.of_finitePresentation_tensorProduct_of_faithfullyFlat [Module.FaithfullyFlat R T] [Algebra.FinitePresentation T (T ⊗[R] S)] : Algebra.FinitePresentation R S; :126 RingHom.FinitePresentation.codescendsAlong_faithfullyFlat; FiniteStability.lean:55 instance Algebra.FinitePresentation.baseChange [FinitePresentation R A] : FinitePresentation B (B ⊗[R] A)",
+   "date": "2026-10-10",
+   "verdict": "match: one declaration per direction"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "Algebra.FinitePresentation.of_finitePresentation_tensorProduct_of_faithfullyFlat, Algebra.FinitePresentation.baseChange",
+  "file": "Mathlib/RingTheory/Finiteness/Descent.lean",
+  "line": 98,
+  "how": "one declaration per direction. 'If': Algebra.FinitePresentation.of_finitePresentation_tensorProduct_of_faithfullyFlat (Mathlib/RingTheory/Finiteness/Descent.lean:98-100) with its R := R, S := A (algebra via alpha), T := R' (algebra via rho, Module.FaithfullyFlat R R' being [def-weil-pbc-faithfully-flat-ring-map]): Algebra.FinitePresentation R' (R' ⊗[R] A) -> Algebra.FinitePresentation R A; the R'-algebra structure of R' ⊗[R] A is the left one, r' ↦ r' ⊗ 1. 'Only if': the instance Algebra.FinitePresentation.baseChange (Mathlib/RingTheory/FiniteStability.lean:55) with B := R'. Algebra.FinitePresentation is [def-weil-pbc-finitely-presented-algebra] by that node's match. Source read with sed -n 2026-10-10."
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-fpqc-descend-locally-finite-presentation",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lead_note": "Composed leaf accepted by L (2026-10-10): Algebra.FinitePresentation.of_finitePresentation_tensorProduct_of_faithfullyFlat (Finiteness/Descent.lean:98) for descent and the instance FinitePresentation.baseChange (FiniteStability.lean:55) for base change; checked with sed.",
+ "reviewed": "pass (L, 2026-10-10): leaf, declarations checked by sed."
+}
