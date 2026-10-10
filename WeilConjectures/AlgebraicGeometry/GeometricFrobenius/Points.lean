@@ -6,6 +6,8 @@ Authors: Claude
 module
 
 public import WeilConjectures.AlgebraicGeometry.GeometricFrobenius
+public import WeilConjectures.Mathlib.AlgebraicGeometry.ResidueField
+public import WeilConjectures.Mathlib.FieldTheory.Finite.Basic
 public import WeilConjectures.PointCount
 
 /-!
@@ -105,5 +107,113 @@ theorem geometricFiberPoint_fieldPoints_comp_geometricGaloisFrobenius_pow [Finit
   have : Finite (FiniteField.galoisExtension k n) := Module.finite_of_finite k
   exact f.geometricFiberPoint_comp_geometricGaloisFrobenius_pow _ _ _ _
     (FiniteField.nat_card_galoisExtension k n hn)
+
+end AlgebraicGeometry.Scheme.Hom
+
+namespace AlgebraicGeometry.Scheme.Hom
+
+variable {k : Type u} [Field k] {X : Scheme.{u}} (f : X ⟶ Spec (.of k))
+
+/-- The structure morphism to `Spec k̄` of a geometric point `t` lying over
+`Spec ι₀ : Spec k̄ ⟶ Spec κ(x)` is `Spec α` for a ring endomorphism `α` of `k̄` with
+`α ∘ (k ⟶ k̄) = ι₀ ∘ (k ⟶ κ(x))`. -/
+lemma residueFieldAlgebraMap_comp_eq_of_comp_geometricFiberProj {x : X}
+    (t : Spec (.of (AlgebraicClosure k)) ⟶ f.geometricFiber)
+    (ι₀ : X.residueField x ⟶ .of (AlgebraicClosure k))
+    (h₀ : t ≫ f.geometricFiberProj = Spec.map ι₀ ≫ X.fromSpecResidueField x) :
+    ι₀.hom.comp (f.residueFieldAlgebraMap x) =
+      (Spec.preimage (t ≫ f.geometricFiberToAlgebraicClosure)).hom.comp
+        (algebraMap k (AlgebraicClosure k)) := by
+  have h := t ≫= f.geometricFiber_condition
+  rw [← Category.assoc, h₀, Category.assoc, ← f.specMap_residueFieldAlgebraMap, ← Spec.map_comp,
+    ← Category.assoc, ← Spec.map_preimage (t ≫ f.geometricFiberToAlgebraicClosure)] at h
+  simp only [Scheme.specAlgebraicClosure, Over.mk_hom, ← Spec.map_comp] at h
+  exact congrArg CommRingCat.Hom.hom (Spec.map_inj.1 h)
+
+/-- Two geometric points `s, s'` of the geometric fiber over the same point `x` of `X` with
+finite residue field are related by a positive power of the geometric Galois Frobenius `g_X`, up
+to reparametrisation by an automorphism `g` of `Spec k̄` commuting with `σ`:
+
+```
+             s
+  Spec k̄ -------> X
+    ^             |
+    g           g_Xʲ
+    |             v
+  Spec k̄ -------> X
+             s'
+```
+
+that is `g ≫ s = s' ≫ g_Xʲ`. The residue field embeddings `κ(x) ↪ k̄` of `s` and `s'` differ by
+an element of `Gal(κ(x) / k)`, a power of the Frobenius. -/
+theorem exists_iso_comp_eq_comp_geometricGaloisFrobenius_pow [Finite k]
+    (s s' : Spec (.of (AlgebraicClosure k)) ⟶ f.geometricFiber)
+    (hss' : (s ≫ f.geometricFiberProj).base (IsLocalRing.closedPoint _) =
+      (s' ≫ f.geometricFiberProj).base (IsLocalRing.closedPoint _))
+    (hx : (s ≫ f.geometricFiberProj).base (IsLocalRing.closedPoint _) ∈ X.finitePoints) :
+    ∃ (g : Spec (.of (AlgebraicClosure k)) ≅ Spec (.of (AlgebraicClosure k))) (j : ℕ), 1 ≤ j ∧
+      g.hom ≫ s = s' ≫ (f.geometricGaloisFrobenius ^ j).hom ∧
+      ∀ m : ℕ, g.hom ≫ (specGeometricFrobenius k ^ m).hom =
+        (specGeometricFrobenius k ^ m).hom ≫ g.hom := by
+  let := Fintype.ofFinite k
+  set x := (s ≫ f.geometricFiberProj).base (IsLocalRing.closedPoint _)
+  have : Finite (X.residueField x) := X.mem_finitePoints.1 hx
+  obtain ⟨ι, hι⟩ := Scheme.exists_eq_spec_map_comp_fromSpecResidueField _ x rfl
+  obtain ⟨ι', hι'⟩ :=
+    Scheme.exists_eq_spec_map_comp_fromSpecResidueField (s' ≫ f.geometricFiberProj) x hss'.symm
+  have hc := f.residueFieldAlgebraMap_comp_eq_of_comp_geometricFiberProj s ι hι
+  have hc' := f.residueFieldAlgebraMap_comp_eq_of_comp_geometricFiberProj s' ι' hι'
+  set α := Spec.preimage (s ≫ f.geometricFiberToAlgebraicClosure)
+  set α' := Spec.preimage (s' ≫ f.geometricFiberToAlgebraicClosure)
+  let αe := RingEquiv.ofBijective α.hom (FiniteField.bijective_ringHom_of_isAlgClosed _ k _)
+  let ι₁ : X.residueField x →+* AlgebraicClosure k := α'.hom.comp (αe.symm.toRingHom.comp ι.hom)
+  have h₁ : ι₁.comp (f.residueFieldAlgebraMap x) = ι'.hom.comp (f.residueFieldAlgebraMap x) := by
+    refine RingHom.ext fun c ↦ ?_
+    have e₁ := RingHom.congr_fun hc c
+    have e₂ := RingHom.congr_fun hc' c
+    simp only [RingHom.coe_comp, Function.comp_apply] at e₁ e₂ ⊢
+    rw [e₂]
+    change α'.hom (αe.symm (ι.hom _)) = _
+    rw [e₁]
+    exact congrArg α'.hom (αe.symm_apply_apply _)
+  obtain ⟨i, hi⟩ := FiniteField.exists_apply_eq_pow_card_pow_of_comp_eq _ h₁
+  let := (f.residueFieldAlgebraMap x).toAlgebra
+  have : Module.Finite k (X.residueField x) := Module.Finite.of_finite
+  have hE : Nat.card (X.residueField x) =
+      Fintype.card k ^ Module.finrank k (X.residueField x) := by
+    rw [Module.natCard_eq_pow_finrank (K := k), Nat.card_eq_fintype_card]
+  obtain ⟨j, hj, hφ⟩ := FiniteField.exists_geometricFrobeniusAlgEquivOfAlgebraic_pow_apply_eq k
+    (AlgebraicClosure k) Module.finrank_pos hE ι₁ i
+  let φj :=
+    (FiniteField.geometricFrobeniusAlgEquivOfAlgebraic k (AlgebraicClosure k) ^ j).toRingEquiv
+  let αe' := RingEquiv.ofBijective α'.hom (FiniteField.bijective_ringHom_of_isAlgClosed _ k _)
+  let γ : AlgebraicClosure k ≃+* AlgebraicClosure k := αe.symm.trans (φj.trans αe')
+  have hg : (Scheme.Spec.mapIso γ.toCommRingCatIso.op).hom =
+      Spec.map (CommRingCat.ofHom γ.toRingHom) := rfl
+  refine ⟨Scheme.Spec.mapIso γ.toCommRingCatIso.op, j, hj, ?_, fun m ↦ ?_⟩
+  · ext
+    · rw [Category.assoc, Category.assoc, geometricGaloisFrobenius_pow_hom_comp_geometricFiberProj,
+        hι, hι', hg, ← Category.assoc, ← Spec.map_comp]
+      congr 2
+      ext a
+      change αe' (φj (αe.symm (ι a))) = ι' a
+      rw [hi, ← hφ]
+      exact FiniteField.map_geometricFrobeniusAlgEquivOfAlgebraic_pow_apply k (AlgebraicClosure k)
+        α'.hom j (αe.symm (ι a))
+    · rw [Category.assoc, Category.assoc,
+        geometricGaloisFrobenius_pow_hom_comp_geometricFiberToAlgebraicClosure,
+        ← Category.assoc s',
+        ← Spec.map_preimage (s ≫ f.geometricFiberToAlgebraicClosure),
+        ← Spec.map_preimage (s' ≫ f.geometricFiberToAlgebraicClosure),
+        specGeometricFrobenius_pow_hom, hg, ← Spec.map_comp, ← Spec.map_comp]
+      congr 1
+      ext y
+      change αe' (φj (αe.symm (α.hom y))) = α'.hom (φj y)
+      rw [show αe.symm (α.hom y) = y from αe.symm_apply_apply y]
+      rfl
+  · rw [specGeometricFrobenius_pow_hom, hg, ← Spec.map_comp, ← Spec.map_comp]
+    congr 1
+    ext y
+    exact (FiniteField.map_geometricFrobeniusAlgEquivOfAlgebraic_pow_apply k _ γ.toRingHom m y)
 
 end AlgebraicGeometry.Scheme.Hom
