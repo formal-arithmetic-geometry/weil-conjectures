@@ -3,7 +3,7 @@
  "blueprint": {
   "is": "lem-fin-dense-normal-open",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "A dense normal open in an integral finite-type scheme",
@@ -17,28 +17,99 @@
  ],
  "proof": [
   {
-   "text": "Choose a nonempty affine open $\\operatorname{Spec}B$ and\ntake its normalization in its own fraction field, using\n[def-fin-normalization-extension].\nBy [lem-fin-normalization-extension-finite], the\nintegral closure $C$ is a finite $B$-module. Express\nits finitely many module generators as fractions in\n$\\operatorname{Frac}B$. A common nonzero denominator\n$b\\in B$ gives $C_b=B_b$. Since the integral closure\nis integrally closed and localization preserves this\nproperty, $B_b$ is a normal domain, as required by\n[def-sbc-normal-dominant-galois]. The nonempty open\n$\\operatorname{Spec}B_b$ is dense because $X$ is integral.",
+   "text": "Because X is integral and nonempty, choose a nonempty affine open U = Spec B. The ring B is a domain and has fraction field K = Frac B. Form the integral closure C of B in K, which is the affine chart of the normalization in [def-fin-normalization-extension]. By [lem-fin-normalization-extension-finite] (the finite-extension case with L = K), C is a finite B-module.",
    "uses": [
     "def-fin-normalization-extension",
     "lem-fin-normalization-extension-finite",
+    "def-weil-pbc-scheme-conventions"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-a1-kummer/lem-fin-dense-normal-open.md",
+    "place": "## Proof, first sentence through 'the integral closure C is a finite B-module'"
+   }
+  },
+  {
+   "text": "Choose finite B-module generators c_1, ..., c_r of C and write each c_i as a fraction a_i/s_i in K with a_i,s_i in B and s_i nonzero. Let b = s_1 ... s_r, so b is nonzero. After localizing at b, every generator c_i belongs to B_b, hence C_b is contained in B_b. The reverse inclusion is tautological, so C_b = B_b. This is the common-denominator argument from the blueprint, written using the finite module generators.",
+   "uses": [
+    "lem-fin-normalization-extension-finite"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-a1-kummer/lem-fin-dense-normal-open.md",
+    "place": "## Proof, 'Express its finitely many module generators as fractions ... A common nonzero denominator b gives C_b = B_b'"
+   }
+  },
+  {
+   "text": "The integral closure C of the domain B in its finite field extension K is a normal domain with fraction field K by [lem-weil-pbc-integral-closure-finite-extension-normal]. Since b is nonzero, localization preserves normality by [lem-weil-pbc-localization-normal-domain], so B_b = C_b is a normal domain. Therefore Spec(B_b) is a normal open subscheme of X.",
+   "uses": [
+    "lem-weil-pbc-integral-closure-finite-extension-normal",
+    "lem-weil-pbc-localization-normal-domain",
     "def-sbc-normal-dominant-galois"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-a1-kummer/lem-fin-dense-normal-open.md",
+    "place": "## Proof, 'Since the integral closure is integrally closed and localization preserves this property, B_b is a normal domain'"
+   }
+  },
+  {
+   "text": "The principal open D(b) = Spec(B_b) is nonempty because b is nonzero in the domain B. It is dense in X because every nonempty open of an integral scheme is dense. Hence this normal open is the required nonempty dense normal open subscheme.",
+   "uses": [
+    "def-sbc-normal-dominant-galois"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-a1-kummer/lem-fin-dense-normal-open.md",
+    "place": "## Proof, final sentence"
+   }
   }
  ],
  "proof_deps": [
   "def-fin-normalization-extension",
   "lem-fin-normalization-extension-finite",
-  "def-sbc-normal-dominant-galois"
+  "def-weil-pbc-scheme-conventions",
+  "def-sbc-normal-dominant-galois",
+  "lem-weil-pbc-integral-closure-finite-extension-normal",
+  "lem-weil-pbc-localization-normal-domain"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-a1-kummer/lem-fin-dense-normal-open.md",
   "place": "## Proof"
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Every integral finite-type scheme over a field has a nonempty open subscheme which is normal",
+   "results": "AlgebraicGeometry.Scheme.Hom.instIsIntegralNormalization; AlgebraicGeometry.isIntegral_of_isAffine_of_isDomain; no exact theorem for the requested conclusion",
+   "date": "2026-10-11",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "Scheme.normalizationIn, isNormal, normal locus",
+   "results": "0 hits; unknown identifier Scheme.normalizationIn",
+   "date": "2026-10-11",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "normalization over the normal locus|integrally closed.*localization|exists.*normal.*open [Mathlib/AlgebraicGeometry]",
+   "results": "Mathlib/AlgebraicGeometry/ZariskisMainTheorem.lean:201; no declaration stating this item",
+   "date": "2026-10-11",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "nonempty normal open subscheme of integral scheme finite type over field",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-11",
+   "verdict": "unavailable"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [],
  "blueprint_kind": "lemma",
@@ -66,5 +137,34 @@
   }
  },
  "chapter": "sec-smooth-purity",
- "unit": "sk-prop-a1-kummer"
+ "unit": "sk-prop-a1-kummer",
+ "split_report": {
+  "date": "2026-10-11",
+  "item": "lem-fin-dense-normal-open",
+  "worker": "stage1",
+  "summary": "Checked the source and found no exact sorry-free declaration for the requested normal-open conclusion. Split the proof into choosing an affine chart, clearing denominators using finite normalization, applying the existing normality and localization leaves, and checking nonemptiness and density. No new node was needed; all non-elementary facts are cited from existing nodes.",
+  "blueprint": "The four steps realize the blueprint proof paragraph from the affine choice through the common-denominator argument and the normal dense principal open.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-integral-closure-finite-extension-normal",
+    "why": "The affine argument needs the normality and fraction-field statement for an integral closure in a finite field extension; this existing cross-unit Mathlib leaf supplies it."
+   },
+   {
+    "node": "lem-weil-pbc-localization-normal-domain",
+    "why": "The final affine ring is obtained by localization, and this existing cross-unit Mathlib leaf supplies preservation of normality."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-integral-closure-finite-extension-normal",
+  "lem-weil-pbc-localization-normal-domain"
+ ],
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-dno2459",
+  "group": "M1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-dno2459 (reviewer sub-agent of L); spot-checked: Proof does not use openness of the normal locus (0BXG) or generic-point normality: it argues via finiteness of normalization (lem-fin-normalization-extension-finite, imported, no dependency back on the item) plus common denominator C_b=B_b, then integral-closure normality and localization leaves (pbc tool_uses accepted as generic tools); localization leaf also covers local rings R_p for normal-scheme definition; nonempty/dense elementary; no new nodes, no restatement, no cycle. No fault beyond the second reading."
+ }
 }
