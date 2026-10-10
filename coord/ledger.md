@@ -930,3 +930,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 05:43 L: reviewed lem-weil-pbc-clopen-open-cover-section (4 steps, +open-immersion-iso leaf): accepted.
 - 05:45 L: sixteenth account limit at ~05:44; five workers died: cartier-equality left a complete split on disk (reviewed next); cohen-rings-exist, closed-point-dimension-local-ring, cm-local-free-resolution-to-mcm, cohen-ring-mod-pn-formally-smooth left nothing and are relaunched (claims kept by L). Session continues on another account.
 - 05:46 L: reviewed lem-weil-pbc-cartier-equality (7 steps, +07BV model node, +00S7 H_1 leaf; complete on disk from the dead worker): accepted.
+- 05:49 L: reviewed lem-weil-pbc-coherent-finite-type-sub-kernel (5 steps, no new node): accepted.
