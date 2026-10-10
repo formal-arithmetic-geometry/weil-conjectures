@@ -11,9 +11,73 @@
   "def-weil-pbc-filtered-colimit-smooth-algebras",
   "def-weil-pbc-flat-ring-map"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "(Square-zero case: criterion.) In Steps 1-3 let $K\\subset R$ be any ideal with $K^2=0$ such that $\\Lambda/K\\Lambda$ is a filtered colimit of smooth $R/K$-algebras and $R\\to\\Lambda$ is flat; we show $\\Lambda$ is a filtered colimit of smooth $R$-algebras. Let $\\mathcal E$ be the set of smooth $R$-algebras [def-weil-pbc-smooth-ring-map] whose underlying ring is a quotient $R[x_1,\\dots,x_n]/\\mathfrak a$ ($n\\ge0$, $\\mathfrak a$ an ideal); it is a set, each member is finitely presented (condition (i) of [def-weil-pbc-smooth-ring-map]), and every smooth $R$-algebra is isomorphic as an $R$-algebra to a member of $\\mathcal E$ (by (i)). By [lem-weil-pbc-factorization-criterion-filtered-colimit] (Algebra, Lemma 07C3) applied to $\\mathcal E$, it suffices to show: for every finitely presented $R$-algebra $A$ and homomorphism of $R$-algebras $\\varphi:A\\to\\Lambda$ there are a smooth $R$-algebra $B'$ and homomorphisms of $R$-algebras $A\\to B'\\to\\Lambda$ composing to $\\varphi$ (replace $B'$ by an isomorphic member of $\\mathcal E$, transporting both maps along the isomorphism). The conclusion of [lem-weil-pbc-factorization-criterion-filtered-colimit] for this $\\mathcal E$ is then exactly that $\\Lambda$ is a filtered colimit of smooth $R$-algebras [def-weil-pbc-filtered-colimit-smooth-algebras].",
+   "uses": [
+    "lem-weil-pbc-factorization-criterion-filtered-colimit",
+    "def-weil-pbc-smooth-ring-map",
+    "def-weil-pbc-filtered-colimit-smooth-algebras"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/smoothing.tex",
+    "place": "Smoothing Ring Maps, proof of Proposition Tag 07CM (proposition-lift, lines 1393-1418): 'We have to find a factorization A -> B -> Lambda with B smooth over R, see Algebra, Lemma 07C3 (lemma-when-colimit)'"
+   }
+  },
+  {
+   "text": "(Square-zero case: lift once.) Let $A$, $\\varphi$ be as in Step 1. By [lem-weil-pbc-popescu-lift-once] (Lemma 07CK; hypotheses $K^2=0$ and $\\Lambda/K\\Lambda$ a filtered colimit of smooth $R/K$-algebras) there are a smooth $R$-algebra $B$, a finitely generated ideal $J\\subset KB$ and homomorphisms of $R$-algebras $\\psi:A\\to B/J$, $\\chi:B/J\\to\\Lambda$ with $\\chi\\circ\\psi=\\varphi$. Let $\\pi:B\\to B/J$ be the quotient map and $\\varphi_B=\\chi\\circ\\pi:B\\to\\Lambda$, a homomorphism of $R$-algebras with $\\varphi_B(J)=0$.",
+   "uses": [
+    "lem-weil-pbc-popescu-lift-once"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/smoothing.tex",
+    "place": "Smoothing Ring Maps, proof of Proposition Tag 07CM (proposition-lift, lines 1393-1418): 'By Lemma lemma-lift-once we may assume that A = B/J with B smooth over R and J in IB a finitely generated ideal'"
+   }
+  },
+  {
+   "text": "(Square-zero case: lift twice.) By [lem-weil-pbc-popescu-lift-twice] (Lemma 07CL; hypotheses $K^2=0$, $\\Lambda/K\\Lambda$ a filtered colimit of smooth $R/K$-algebras, $R\\to\\Lambda$ flat [def-weil-pbc-flat-ring-map]) applied to $\\varphi_B:B\\to\\Lambda$ and $J$ of Step 2, there are a smooth $R$-algebra $B'$ and homomorphisms of $R$-algebras $\\alpha:B\\to B'$, $\\beta:B'\\to\\Lambda$ with $\\alpha(J)=0$ and $\\beta\\circ\\alpha=\\varphi_B$. Since $\\alpha(J)=0$, $\\alpha=\\bar\\alpha\\circ\\pi$ for a homomorphism of $R$-algebras $\\bar\\alpha:B/J\\to B'$. Then $\\beta\\circ\\bar\\alpha\\circ\\pi=\\varphi_B=\\chi\\circ\\pi$ and $\\pi$ is surjective, so $\\beta\\circ\\bar\\alpha=\\chi$ and $\\beta\\circ(\\bar\\alpha\\circ\\psi)=\\chi\\circ\\psi=\\varphi$: $\\varphi$ factors as $A\\xrightarrow{\\bar\\alpha\\psi}B'\\xrightarrow{\\beta}\\Lambda$ with $B'$ smooth over $R$. By Step 1, $\\Lambda$ is a filtered colimit of smooth $R$-algebras.",
+   "uses": [
+    "lem-weil-pbc-popescu-lift-twice",
+    "def-weil-pbc-flat-ring-map"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/smoothing.tex",
+    "place": "Smoothing Ring Maps, proof of Proposition Tag 07CM (proposition-lift, lines 1393-1418): 'By Lemma lemma-lift-twice we can find a commutative diagram ... such that alpha(J) = 0. Thus alpha factors as B -> A -> B''"
+   }
+  },
+  {
+   "text": "(Induction on $n$ with $I^n=0$; the source says only 'by induction on $n$ it suffices to consider the case $I^2=0$', written out here.) We show by induction on $n\\ge1$: for all $R\\to\\Lambda$ and $I$ with $I^n=0$ satisfying (2) and (3), $\\Lambda$ is a filtered colimit of smooth $R$-algebras. $n=1$: $I=0$, so $R/I=R$ and $\\Lambda/I\\Lambda=\\Lambda$ as $R$-algebras, and (2) is the claim. $n=2$: Steps 1-3 with $K=I$. $n\\ge3$, assuming the case $n-1$: put $K=I^{n-1}$; then $K^2=I^{2n-2}\\subset I^n=0$ as $2n-2\\ge n$, and $K\\subset I$. Let $R'=R/K$, $\\Lambda'=\\Lambda/K\\Lambda$ and $I'=I/K\\subset R'$. (a) $(I')^{n-1}=(I^{n-1}+K)/K=0$. (b) $\\Lambda'\\cong R'\\otimes_R\\Lambda$ as $R'$-algebras [lem-weil-pbc-tensor-quotient-base-change], which is a flat $R'$-module [lem-weil-pbc-flat-module-base-change] since $\\Lambda$ is a flat $R$-module by (3) [def-weil-pbc-flat-ring-map]; so $R'\\to\\Lambda'$ is flat. (c) $R'/I'=R/I$ and $\\Lambda'/I'\\Lambda'=\\Lambda/(I\\Lambda+K\\Lambda)=\\Lambda/I\\Lambda$ (as $K\\subset I$), compatibly with the algebra structures, so (2) holds for $R'\\to\\Lambda'$ and $I'$. By the induction hypothesis, $\\Lambda/K\\Lambda$ is a filtered colimit of smooth $R/K$-algebras [def-weil-pbc-filtered-colimit-smooth-algebras]. Now Steps 1-3 for $R\\to\\Lambda$ and the square-zero ideal $K$ ($R\\to\\Lambda$ flat by (3)) show that $\\Lambda$ is a filtered colimit of smooth $R$-algebras.",
+   "uses": [
+    "lem-weil-pbc-tensor-quotient-base-change",
+    "lem-weil-pbc-flat-module-base-change",
+    "def-weil-pbc-flat-ring-map",
+    "def-weil-pbc-filtered-colimit-smooth-algebras"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/smoothing.tex",
+    "place": "Smoothing Ring Maps, proof of Proposition Tag 07CM (proposition-lift, lines 1393-1418): 'Since I^n = 0 for some n, it follows by induction on n that it suffices to consider the case where I^2 = 0'"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-factorization-criterion-filtered-colimit",
+  "def-weil-pbc-smooth-ring-map",
+  "def-weil-pbc-filtered-colimit-smooth-algebras",
+  "lem-weil-pbc-popescu-lift-once",
+  "lem-weil-pbc-popescu-lift-twice",
+  "def-weil-pbc-flat-ring-map",
+  "lem-weil-pbc-tensor-quotient-base-change",
+  "lem-weil-pbc-flat-module-base-change"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/smoothing.tex",
+  "place": "Smoothing Ring Maps, Proposition Tag 07CM (proposition-lift, line 1374), proof lines 1393-1418; the induction on n, which the source states in one sentence, written out in step 4"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -38,7 +102,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "worker",
@@ -58,5 +122,17 @@
   }
  },
  "chapter": "sec-proper-base-change",
- "unit": "sk-thm-p1"
+ "unit": "sk-thm-p1",
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "lem-weil-pbc-popescu-lift-nilpotent",
+  "worker": "stage1",
+  "summary": "Statement checked against Stacks 07CM (smoothing.tex 1374): identical (I nilpotent, Lambda/I Lambda ind-smooth over R/I, R -> Lambda flat). Proof follows the Stacks proof: steps 1-3 the square-zero case (Algebra 07C3 = existing node lem-weil-pbc-factorization-criterion-filtered-colimit, applied to the set of smooth algebras that are quotients of finite polynomial rings; Lemma 07CK and Lemma 07CL as new unsplit nodes lem-weil-pbc-popescu-lift-once and lem-weil-pbc-popescu-lift-twice; the factorisation of alpha through B/J written out), step 4 the induction on n via K = I^{n-1} (square zero), flatness of R/K -> Lambda/K Lambda by the Mathlib leaves lem-weil-pbc-tensor-quotient-base-change and lem-weil-pbc-flat-module-base-change. Tags verified in tags/tags: 07CM proposition-lift, 07CK lemma-lift-once, 07CL lemma-lift-twice, 07C3 algebra-lemma-when-colimit. stmt_deps unchanged."
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "result": "accepted",
+  "note": "4 steps follow Stacks 07CM: the square-zero case via the existing 07C3 factorization-criterion node, new 07CK and 07CL nodes (with the composite identified), and the induction on n written out with K = I^{n-1} (flatness passes to R/K by the base-change leaves). Tags 07CM, 07CK, 07CL, 07C3 verified."
+ }
 }
