@@ -1,0 +1,81 @@
+{
+ "id": "lem-weil-pbc-quotient-by-power-torsion-no-torsion",
+ "kind": "statement",
+ "title": "The quotient by the I-power torsion submodule has no I-torsion (I finitely generated)",
+ "statement": "Let $R$ be a commutative ring, $I\\subseteq R$ a finitely generated ideal and $M$ an $R$-module. Put $M[I^\\infty]=\\{m\\in M:\\ I^nm=0\\text{ for some }n\\ge1\\}$, a submodule of $M$, and $M'=M/M[I^\\infty]$. Then $M'[I]=0$: if $\\bar x\\in M'$ satisfies $a\\bar x=0$ for every $a\\in I$, then $\\bar x=0$.",
+ "source": {
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "More on Algebra, Lemma 05EB (lemma-divide-by-torsion, line 24042), part (1)"
+ },
+ "stmt_deps": [],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "quotient of a module by its I-power torsion submodule has no I-torsion, I finitely generated ideal",
+   "results": "Submodule.QuotientTorsion.instIsTorsionFree, Submodule.QuotientTorsion.torsion_eq_bot (Mathlib.Algebra.Module.Torsion.Basic: torsion w.r.t. all non-zero-divisors, not I-power torsion), instModuleQuotientAddSubgroupTorsion, Ideal.finite_quotient_pow, Ideal.iInf_pow_smul_eq_bot_of_noZeroSMulDivisors, Hausdorffification",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Ideal.primaryComponent of quotient by primaryComponent is trivial",
+   "results": "Ideal.Quotient.subsingleton_iff, Ideal.Quotient.nontrivial_of_liesOver_of_isPrime, Ideal.isPrime_map_quotientMk_of_isPrime (unrelated)",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "M / (I-power torsion of M) is I-torsion-free for a finitely generated ideal I",
+   "results": "Module.isTorsionBySet_quotient_ideal_smul, Submodule.QuotientTorsion.instIsTorsionFree, Submodule.QuotientTorsion.torsion_eq_bot, Submodule.instModuleQuotientIdealSubtypeMemTorsionBySetCoe, Ideal.iInf_pow_smul_eq_bot_of_isTorsionFree (none about M/M[I^infty])",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "Ideal.primaryComponent",
+   "results": "Ideal.primaryComponent (Mathlib.Algebra.Module.Torsion.PrimaryComponent: the submodule M[I^infty] = iSup_n torsionBySet A M (I^n)), primaryComponent_mem, primaryComponent.map, primaryComponent.map_ker_eq, primaryComponent_torsionBySet_eq_inf, primaryComponent_torsionBySet_of_isCoprime, primaryComponent_sup, iSup_primaryComponent_eq_top, iSupIndep_primaryComponent, primaryComponent.map_surjective: no lemma on the quotient M/primaryComponent M I",
+   "date": "2026-10-10",
+   "verdict": "no match (the notion M[I^infty] is Ideal.primaryComponent; the lemma is absent)"
+  },
+  {
+   "tool": "loogle",
+   "query": "Submodule.torsionBySet, HasQuotient.Quotient, HPow.hPow",
+   "results": "none",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rnE 'torsionBySet|IsTorsionBySet' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib | grep -iE 'quotient|mk|⧸|pow'; and grep -n 'theorem|lemma' Mathlib/Algebra/Module/Torsion/PrimaryComponent.lean",
+   "results": "Algebra/Module/Torsion/Basic.lean: IsTorsionBySet.quotient (line 630: a quotient of an s-torsion module is s-torsion), isTorsionBySet_quotient_ideal_smul, torsionBySet_le_torsionBySet_pow; PrimaryComponent.lean: only the lemmas listed under loogle. None states that M/M[I^infty] has no I-torsion",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-torsion-submodule-flat-base-change-iso",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "reviewed": "2026-10-10 L: statement checked against 05EB (1); elementary from finite generation of I"
+}
