@@ -1,8 +1,8 @@
 # Work queue
 
-888 items; claim with `tools/claim.py next <group> [--stage N]`.
+886 items; claim with `tools/claim.py next <group> [--stage N]`.
 
-## Stage 1: nodes to split (325)
+## Stage 1: nodes to split (323)
 
 | node | distance to a target | Lean state on the done branch |
 |---|---|---|
@@ -25,9 +25,9 @@
 | `lem-sc-leray-closed-pushforward-cohomology` | 2012 | none |
 | `lem-sc-noetherian-topological-cohomology-vanishing` | 2012 | none |
 | `lem-sc-torsor-h1-functoriality` | 2012 | none |
-| `lem-sc-zero-dim-noetherian-finite-discrete` | 2012 | none |
 | `lem-sc-invert-s-cohomology` | 2013 | none |
 | `lem-sc-reduced-ideals-zero-intersection` | 2013 | none |
+| `lem-sc-zero-dim-noetherian-closed-finite` | 2013 | none |
 | `lem-weil-pbc-etale-cohomology-limit-complex-systems` | 3005 | none |
 | `lem-weil-pbc-finite-coproduct-cohomology-assembly` | 3006 | none |
 | `lem-weil-pbc-geometric-point-cohomology` | 3006 | none |
@@ -42,18 +42,16 @@
 | `lem-weil-pbc-ringed-site-injective-module-cech-acyclic` | 3011 | none |
 | `lem-exc-rg-open-stabilizer-adjoint` | 3012 | none |
 | `lem-galois-descent-datum-diagonal-identity` | 3012 | none |
-| `lem-pc-base-change-product` | 3012 | none |
 | `lem-pc-clopen-smooth-proper-curve` | 3012 | none |
 | `lem-pc-fpqc-descend-closed-immersion` | 3012 | none |
 | `lem-pc-global-sections-separable` | 3012 | none |
 | `lem-pc-grothendieck-edge-cocycle` | 3012 | none |
-| `lem-pc-proper-descends-field` | 3012 | none |
 | `lem-pc-separable-tensor-algebraic-closure` | 3012 | none |
 | `lem-sc-coherent-free-stalks-locally-free` | 3012 | none |
 | `lem-sc-p1-duality-pairing-naturality` | 3012 | none |
 | `lem-sc-p1-ext-coherent-dim-one-vanishing` | 3012 | none |
 | `lem-sc-p1-ext-locally-free-naturality` | 3012 | none |
-| `lem-sc-ext-evaluation` | 3013 | none |
+| `lem-pc-field-extension-fpqc-cover` | 3013 | none |
 | `lem-sc-finite-flat-duality-evaluation` | 3013 | none |
 | `lem-sc-local-section-quotient-finite-free` | 3013 | none |
 | `lem-sc-product-irreducible-components-bijection` | 3013 | none |
@@ -900,7 +898,7 @@
 | `lem-weil-pbc-p1-field-dimension-one` | 4 | state |
 | `lem-weil-pbc-projective-space-zero-isomorphism` | 4 | state |
 
-Not open yet: 344 nodes that wait for stage 1, 1097 nodes that wait for a statement dependency.
+Not open yet: 342 nodes that wait for stage 1, 1101 nodes that wait for a statement dependency.
 
 ## Stage 3: modules to prove (0)
 
