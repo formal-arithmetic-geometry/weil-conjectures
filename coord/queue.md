@@ -1,13 +1,13 @@
 # Work queue
 
-916 items; claim with `tools/claim.py next <group> [--stage N]`.
+915 items; claim with `tools/claim.py next <group> [--stage N]`.
 
-## Stage 1: nodes to split (331)
+## Stage 1: nodes to split (330)
 
 | node | distance to a target | Lean state on the done branch |
 |---|---|---|
 | `lemma-constructible-flc-serre` | 6 | rests_on_sorry |
-| `lemma-constructible-torsor-trivialises` | 7 | none |
+| `def-constructible-torsor` | 8 | none |
 | `lem-weil-pbc-injective-acyclicity-bounded-below` | 2002 | sorry_here |
 | `lem-weil-pbc-field-tensor-irreducible` | 2005 | none |
 | `lem-weil-pbc-etale-geometric-fibre-constant-sections` | 2006 | none |
@@ -26,11 +26,10 @@
 | `lem-sc-zariski-ext-torsor` | 2014 | none |
 | `lem-sc-affine-section-localization` | 2015 | none |
 | `lem-sc-invert-s-cohomology-mayer-vietoris-diagram` | 2015 | none |
-| `lem-sc-invert-s-cohomology-separated-induction` | 2015 | none |
 | `lem-sc-invertible-tensor-qcoherent` | 2015 | none |
 | `lem-weil-pbc-hypercohomology-e1-pullback-functorial` | 3006 | none |
-| `lem-exc-field-sections-stalk-invariants` | 3007 | none |
 | `lem-weil-pbc-etale-sheaf-clopen-product` | 3007 | none |
+| `lem-exc-finite-galois-sections-descent` | 3008 | none |
 | `lem-weil-pbc-finite-product-complex-cohomology` | 3008 | none |
 | `lem-weil-pbc-finite-product-functor-left-exact` | 3008 | none |
 | `lem-weil-pbc-finite-product-injective-resolutions` | 3008 | none |
@@ -928,7 +927,7 @@
 | `lem-weil-pbc-p1-field-dimension-one` | 4 | state |
 | `lem-weil-pbc-projective-space-zero-isomorphism` | 4 | state |
 
-Not open yet: 348 nodes that wait for stage 1, 1186 nodes that wait for a statement dependency.
+Not open yet: 347 nodes that wait for stage 1, 1189 nodes that wait for a statement dependency.
 
 ## Stage 3: modules to prove (0)
 
