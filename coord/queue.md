@@ -48,13 +48,14 @@
 | `def-weil-pbc-etale-cohomology` | 3003 | none |
 | `def-weil-pbc-strict-henselization-limit` | 3003 | none |
 | `prop-weil-pbc-strict-henselization-stalk-formula` | 3003 | none |
-| `lem-pc-module-pullback-adjunction` | 3004 | none |
 | `lem-weil-pbc-zero-dimensional-cohomology` | 3004 | none |
 | `lemma-weil-pbc-affine-neighbourhood-cofinal` | 3004 | none |
 | `lemma-weil-pbc-etale-cohomology-continuity` | 3004 | none |
 | `lemma-weil-pbc-fibre-product-limit` | 3004 | none |
 | `prop-weil-pbc-kinjective-resolutions-exist` | 3004 | none |
 | `def-galois-fibre-functor` | 3005 | none |
+| `lem-pc-module-change-of-rings-adjunction` | 3005 | none |
+| `lem-pc-module-inverse-image-adjunction` | 3005 | none |
 | `lem-weil-pbc-hypercover-refinement` | 3005 | none |
 | `lemma-weil-pbc-finite-hypercover-descent` | 3005 | none |
 | `def-weil-pbc-finite-split-hypercover` | 3006 | none |
@@ -65,7 +66,6 @@
 | `lem-sc-flat-base-change-coherent` | 3006 | sorry_here |
 | `lem-weil-pbc-hypercover-free-resolution` | 3006 | none |
 | `def-sc-divisor` | 3007 | none |
-| `lem-galois-descent` | 3007 | none |
 | `lem-galois-transitive` | 3007 | none |
 | `lem-sc-affine-curve-h2-vanishing` | 3007 | rests_on_sorry |
 | `lem-sc-ample-complement-affine` | 3007 | sorry_here |
@@ -865,7 +865,7 @@
 | `lem-weil-pbc-p1-field-dimension-one` | 4 | state |
 | `lem-weil-pbc-projective-space-zero-isomorphism` | 4 | state |
 
-Not open yet: 393 nodes that wait for stage 1, 889 nodes that wait for a statement dependency.
+Not open yet: 393 nodes that wait for stage 1, 891 nodes that wait for a statement dependency.
 
 ## Stage 3: modules to prove (0)
 
