@@ -3,7 +3,7 @@
  "blueprint": {
   "is": "def-exc-continuous-cohomology",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "definition",
  "title": "Discrete modules and continuous group cohomology",
@@ -13,14 +13,45 @@
   "place": "node def-exc-continuous-cohomology, order 961"
  },
  "stmt_deps": [
-  "def-weil-abstract-derived-category"
+  "def-weil-abstract-derived-category",
+  "lem-exc-discrete-modules-abelian",
+  "lem-exc-cochains-derived-invariants"
  ],
  "proof": [],
  "proof_deps": [],
  "proof_origin": null,
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "continuous group cohomology profinite group discrete module derived functor invariants",
+   "results": "Service returned HTTP 500 on two attempts.",
+   "date": "2026-10-10",
+   "verdict": "unavailable; no match established"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "continuous cohomology of profinite group acting on discrete module",
+   "results": "continuousCohomology and ContinuousCohomology.invariants in Mathlib.Algebra.Category.ContinuousCohomology.Basic (v4.28 index) concern actions on topological modules; no comparison to derived invariants in the discrete-module category returned.",
+   "date": "2026-10-10",
+   "verdict": "candidate differs in category and defining construction"
+  },
+  {
+   "tool": "loogle",
+   "query": "continuousCohomology",
+   "results": "continuousCohomology in Mathlib.RepresentationTheory.Homological.ContCohomology.Basic concerns TopRep k G and continuous cochains; the index returned no derived-invariants comparison.",
+   "date": "2026-10-10",
+   "verdict": "candidate differs in category and defining construction"
+  },
+  {
+   "tool": "grep",
+   "query": "rg for continuous cohomology, discrete G-modules, derived invariants in /home/ubuntu/weil-src-slopmaster2/.lake/packages/mathlib/Mathlib",
+   "results": "The source checkout has no .lake/packages/mathlib directory. Streamed pinned Mathlib 0df444a Mathlib/RepresentationTheory/Homological/ContCohomology/Basic.lean: lines 21-41 specify TopRep cochains and TODOs for exactness/comparison; lines 129-132 define cochain homology, not derived invariants. A whole-tree grep remains unavailable.",
+   "date": "2026-10-10",
+   "verdict": "candidate is not the full item; whole-tree grep unavailable"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [],
  "blueprint_kind": "definition",
@@ -44,5 +75,19 @@
   }
  },
  "chapter": "sec-curve-estimates",
- "unit": "sk-prop-h2"
+ "unit": "sk-prop-h2",
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "def-exc-continuous-cohomology",
+  "worker": "stage1",
+  "summary": "Checked the definition against Stacks 04JP and 04JR and its profinite setting against 03VI. The category and injective-existence assertion is now stated by lem-exc-discrete-modules-abelian; the comparison with continuous inhomogeneous cochains is stated by lem-exc-cochains-derived-invariants. The latter is stated as known but unproved in Stacks 0DVG and remains an unsplit obligation. Derived-category terminology is carried by def-weil-abstract-derived-category. No exact Lean declaration was found in slopmaster2; the available Mathlib search indexes show related topological-module cohomology only, while the pinned source tree and LeanSearch service are unavailable on this machine.",
+  "blueprint": "The definition and open-stabilizer clause, the abelian-category and invariants clauses, and the final continuous-cochain comparison clause of blueprint node def-exc-continuous-cohomology."
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "group": "F1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed by the lead of F1; spot-checked by L: L: reviewed in full by a reviewer sub-agent (FIX: citations of the derived-functor and injectives nodes): 04JF and 0DVG read, the two claims hidden in the definition now statement nodes"
+ }
 }
