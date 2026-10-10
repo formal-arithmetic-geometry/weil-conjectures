@@ -1,0 +1,71 @@
+{
+ "id": "lem-weil-pbc-transitivity-gamma",
+ "kind": "statement",
+ "title": "Jacobi-Zariski sequence of a tower of fields is exact on the left",
+ "statement": "Let $K\\subseteq L\\subseteq M$ be field extensions. For a ring map $R\\to S$ let $H_1(L_{S/R})$ be the first homology of the naive cotangent complex $\\mathrm{NL}_{S/R}$ of the canonical presentation $R[S]\\to S$ [def-weil-pbc-smooth-ring-map], and $\\Omega_{S/R}$ the module of K\\\"ahler differentials [def-weil-pbc-kahler-differentials]. Let $a:H_1(L_{L/K})\\otimes_LM\\to H_1(L_{M/K})$ be the $M$-linear map $h\\otimes c\\mapsto c\\cdot\\iota_*(h)$, where $\\iota_*:H_1(L_{L/K})\\to H_1(L_{M/K})$ is induced by the morphism of presentations $K[L]\\to K[M]$, $[l]\\mapsto[l]$, over the square $K=K$, $L\\subseteq M$ [lem-weil-pbc-nl-presentation-h1-functoriality]. Then the sequence of $M$-vector spaces $$0\\to H_1(L_{L/K})\\otimes_LM\\xrightarrow{a}H_1(L_{M/K})\\xrightarrow{v}H_1(L_{M/L})\\xrightarrow{\\partial}\\Omega_{L/K}\\otimes_LM\\xrightarrow{w}\\Omega_{M/K}\\xrightarrow{z}\\Omega_{M/L}\\to0,$$ with $v,\\partial,w,z$ the maps of the Jacobi-Zariski sequence for $K\\to L\\to M$ [lem-weil-pbc-jacobi-zariski-homology-sequence], is exact. In particular $a$ is injective.",
+ "source": {
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "More on Algebra, Lemma Tag 07E2 (lemma-transitivity-gamma, line 8599); its proof combines More on Algebra Lemma Tag 07D5 (lemma-transitive-colimit-lci-at-end) with Algebra Lemma Tag 07BV (lemma-colimit-syntomic): every field extension of K is a filtered colimit of global complete intersections over K. Tags verified in literature/stacks-project/tags/tags."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-smooth-ring-map",
+  "def-weil-pbc-kahler-differentials",
+  "lem-weil-pbc-nl-presentation-h1-functoriality",
+  "lem-weil-pbc-jacobi-zariski-homology-sequence"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "tower of field extensions M/L/K: H1 cotangent of L over K tensored with M injects into H1 cotangent of M over K",
+   "results": "Algebra.Extension.H1Cotangent, Algebra.H1Cotangent (Mathlib.RingTheory.Extension.Cotangent.Basic); Algebra.Generators.H1Cotangent.δ_map, Algebra.Generators.H1Cotangent.δ_eq_δ, Algebra.H1Cotangent.δ (Mathlib.RingTheory.Kaehler.JacobiZariski); Algebra.Extension.H1Cotangent.map, Algebra.Extension.h1Cotangentι_injective (injectivity of the inclusion H1 -> cotangent, not of the base-change map)",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Jacobi-Zariski sequence for field extensions is exact on the left: H_1(L_{L/K}) ⊗ M → H_1(L_{M/K}) injective",
+   "results": "Algebra.H1Cotangent.exact_δ_mapBaseChange, Algebra.H1Cotangent.exact_map_δ, Algebra.Generators.H1Cotangent.exact_δ_map, Algebra.Generators.H1Cotangent.exact_map_δ', Algebra.Generators.H1Cotangent.exact_map_δ (Mathlib.RingTheory.Kaehler.JacobiZariski): exactness of the sequence from H1(L_{M/K}) onward; the leftmost term is only Algebra.H1Cotangent.exact_liftBaseChange_map_of_flat (exactness at H1(L_{M/K}) for flat M/L), no injectivity",
+   "date": "2026-10-10",
+   "verdict": "no match: Mathlib has the six-term part of the sequence (exactness at H1(L_{M/K}), H1(L_{M/L}), Omega) but not the injectivity of the left map, which needs H_2-vanishing for fields"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rn 'Injective' Mathlib/RingTheory/Kaehler/JacobiZariski.lean Mathlib/RingTheory/Extension/Cotangent/*.lean; grep -rln H1Cotangent Mathlib | xargs grep -ln '\\[Field'; grep -rn '07E2' Mathlib",
+   "results": "JacobiZariski.lean:201 CotangentSpace.map_toComp_injective (cotangent space, not H1); Cotangent/Basic.lean:368 h1Cotangentι_injective; no file about H1Cotangent assumes Field; no @[stacks 07E2]",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "Function.Injective, Algebra.H1Cotangent, TensorProduct",
+   "results": "not run: rate limit exceeded twice (3 requests / 30 s, shared with parallel workers); replaced by the leanfinder search above",
+   "date": "2026-10-10",
+   "verdict": "not run"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-geometrically-regular-over-field-flat",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1"
+}
