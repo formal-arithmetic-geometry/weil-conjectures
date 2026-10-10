@@ -2396,3 +2396,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 19:30 L: merged deliver/E1/lem-sc-smooth-proper-tensor-perfect-case (reviewer FIX; first push; new nodes: 1)
 - 19:30 L: merged deliver/K1/lem-sp-derived-couple-functoriality (reviewer FIX; first push; new nodes: 0)
 - 19:31 L: merged deliver/K1/lem-sc-group-addition-tangent-differential (reviewer FIX; after a return; new nodes: 1)
+- 19:32 L: merged deliver/H1/lem-pc-quasi-isomorphisms-multiplicative-system (reviewer PASS; first push; new nodes: 0)
