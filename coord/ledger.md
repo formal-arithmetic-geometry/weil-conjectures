@@ -1486,3 +1486,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 2026-10-10, delivery of F1: lem-weil-pbc-simplicial-set-glue-simplex merged from deliver/F1/lem-weil-pbc-simplicial-set-glue-simplex (1 commit(s), 1 new node(s), spot-checked by L: L: reviewed in full by a reviewer sub-agent (PASS): 018R read, 4 steps checked, new Mathlib leaf lines 114/217/225/233 verified, small cases tested); claim closed
 - 13:20 L: merged deliver/F1/lem-weil-pbc-simplicial-set-glue-simplex (reviewer PASS, first push; new Mathlib leaf)
 - 13:21 L: accepted lem-weil-pbc-fpqc-descend-affine (8 steps, 02KQ/02KU unsplit, 02L4 and degree-0 flat base change leaves, tool_uses pqf-lem-affine-local-target) and lem-weil-pbc-dim-one-submodule-quotient-finite-length (9 steps, 2 leaves)
+- 13:25 L: accepted lem-weil-pbc-fpqc-descend-quasi-compact: 5 steps (02KQ), new Mathlib leaf lem-weil-pbc-quasi-compact-morphism-preimage-qc-open

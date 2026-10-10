@@ -1,0 +1,96 @@
+{
+ "id": "lem-weil-pbc-quasi-compact-morphism-preimage-qc-open",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lemma-weil-pbc-h1-constructible-representation",
+   "place": "proof, second paragraph: 'By Lemmas 03SA (lemma-torsion-colimit-constructible) and 03Q5 (lemma-colimit) we can find a map F -> I with F a constructible sheaf of Z/lZ-modules' (step 2 of its split, through the chain in via down to [lem-weil-pbc-fpqc-descend-integral], which combines 02KS and 02L5); made precise here: in the proof of Descent 02L5 (descent.tex lines 5943-5944), 'By Lemmas [02KQ] and [02KU] we see that X -> S is separated and quasi-compact': the quasi-compact half, for the flat surjective morphism of affine schemes S' -> S; refined: in the proof of Descent 02KQ (descent.tex lines 5481-5486), 'Assume that the base change $f' : X' \\to S'$ is quasi-compact. Then $X'$ is quasi-compact': the inverse image under the quasi-compact $f'$ of the quasi-compact open $g^{-1}(U)$ is quasi-compact (Schemes 01K4, (2) implies (1))",
+   "via": [
+    "lem-weil-pbc-fpqc-descend-quasi-compact",
+    "lem-weil-pbc-fpqc-descend-affine",
+    "lem-weil-pbc-fpqc-descend-integral",
+    "lem-weil-pbc-fpqc-descend-finite",
+    "lem-weil-pbc-finite-locally-free-degree-etale-descent",
+    "lem-weil-pbc-flat-fp-lqf-bounded-stratification",
+    "lem-weil-pbc-flat-fp-qf-stratification",
+    "lem-weil-pbc-etale-separated-stratified-finite",
+    "lem-weil-pbc-etale-stratified-finite",
+    "lem-weil-pbc-etale-free-sheaf-constructible",
+    "lem-weil-pbc-constructible-generation",
+    "lem-weil-pbc-module-sheaf-colimit-constructible"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "A quasi-compact morphism has quasi-compact inverse images of quasi-compact opens (Stacks 01K4)",
+ "statement": "Let $f:X\\to Y$ be a morphism of schemes [def-pc-scheme] which is quasi-compact [def-weil-finite-type-morphism], i.e. $f^{-1}(V)$ is quasi-compact for every affine open $V\\subseteq Y$. Let $W\\subseteq Y$ be an open subset which is quasi-compact [def-weil-pbc-quasi-compact-scheme] in the topology induced from $Y$ (every covering of $W$ by opens of $W$ has a finite subcovering). Then $f^{-1}(W)\\subseteq X$ is quasi-compact in the topology induced from $X$.",
+ "source": {
+  "document": "literature/stacks-project/schemes.tex",
+  "place": "Schemes, Lemma Tag 01K4 (lemma-quasi-compact-affine, line 3584), the implication (2) => (1), with Definition Tag 01K3 (definition-quasi-compact, line 3576: a morphism is quasi-compact if the underlying continuous map is quasi-compact, i.e. inverse images of quasi-compact opens are quasi-compact)"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-finite-type-morphism",
+  "def-weil-pbc-quasi-compact-scheme"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "preimage of a quasi-compact open under a quasi-compact morphism of schemes is quasi-compact",
+   "results": "none: HTTP 500 Internal Server Error from the lean-lsp tool and from https://leansearch.net/search directly (2026-10-10 13:3x UTC)",
+   "date": "2026-10-10",
+   "verdict": "no result (service error)"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "a quasi-compact morphism of schemes (preimage of affine opens quasi-compact) has quasi-compact preimage of every quasi-compact open",
+   "results": "AlgebraicGeometry.QuasiCompact.isCompact_preimage, AlgebraicGeometry.Scheme.Hom.isCompact_preimage, AlgebraicGeometry.quasiCompact_iff, AlgebraicGeometry.quasiCompact_iff_forall_isAffineOpen, AlgebraicGeometry.quasiCompact_iff_forall_affine (all Mathlib.AlgebraicGeometry.Morphisms.QuasiCompact)",
+   "date": "2026-10-10",
+   "verdict": "match"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.QuasiCompact, IsCompact, Set.preimage",
+   "results": "AlgebraicGeometry.QuasiCompact.isCompact_preimage, AlgebraicGeometry.QuasiCompact.mk, AlgebraicGeometry.quasiCompact_iff, AlgebraicGeometry.Scheme.Hom.isCompact_preimage_singleton",
+   "date": "2026-10-10",
+   "verdict": "match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -n 'class QuasiCompact\\|Scheme.Hom.isCompact_preimage\\|quasiCompact_iff_forall_isAffineOpen' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicGeometry/Morphisms/QuasiCompact.lean",
+   "results": "class QuasiCompact (line 43, field isCompact_preimage: inverse images of compact opens are compact), lemma Scheme.Hom.isCompact_preimage (line 55), theorem quasiCompact_iff_forall_isAffineOpen (line 97)",
+   "date": "2026-10-10",
+   "verdict": "match"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "AlgebraicGeometry.Scheme.Hom.isCompact_preimage",
+  "file": "Mathlib/AlgebraicGeometry/Morphisms/QuasiCompact.lean",
+  "how": "specializes in one line: the node's quasi-compactness of f (affine form, as in [def-weil-finite-type-morphism]) is `QuasiCompact f` by `quasiCompact_iff_forall_isAffineOpen` (line 97); then `Scheme.Hom.isCompact_preimage [QuasiCompact f] {U : Opens Y} (hU : IsCompact (U : Set Y)) : IsCompact (f ⁻¹ᵁ U : Set X)` (line 55; the class field `QuasiCompact.isCompact_preimage`, line 43) applied to U = W gives IsCompact (f^{-1}(W)), which is quasi-compactness in the induced topology by `isCompact_iff_compactSpace` (Topology/Compactness/Compact.lean line 1057). Lines read with sed -n on 2026-10-10."
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-fpqc-descend-quasi-compact",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1"
+}

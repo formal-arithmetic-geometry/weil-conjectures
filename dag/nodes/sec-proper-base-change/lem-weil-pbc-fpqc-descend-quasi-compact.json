@@ -35,9 +35,81 @@
   "def-weil-finite-type-morphism",
   "def-pc-fibre-product"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Let $U\\subseteq S$ be an affine open. By the definition of a quasi-compact morphism [def-weil-finite-type-morphism] it suffices to show that $f^{-1}(U)$ is quasi-compact. Since $g$ is quasi-compact, $V:=g^{-1}(U)\\subseteq S'$ is a quasi-compact open of $S'$ (definition of quasi-compactness of $g$ applied to the affine open $U$). This is the source's reduction to an affine base (it reduces to $S$ affine by Zariski locality, Schemes 01K4; with the definition in [def-weil-finite-type-morphism] the reduction is the definition itself).",
+   "uses": [
+    "def-weil-finite-type-morphism"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/descent.tex",
+    "place": "Descent, Lemma 02KQ (lemma-descending-property-quasi-compact), proof, lines 5481-5487 ('Being quasi-compact is Zariski local on the base ... let $S' \\to S$ be a flat surjective morphism of affine schemes')"
+   }
+  },
+  {
+   "text": "Write $X'=X\\times_SS'$ [def-pc-fibre-product] with projections $p:X'\\to X$ and $f':X'\\to S'$, so that $f\\circ p=g\\circ f'$. Since $f'$ is quasi-compact and $V$ is a quasi-compact open of $S'$, the open $W:=f'^{-1}(V)\\subseteq X'$ is quasi-compact by [lem-weil-pbc-quasi-compact-morphism-preimage-qc-open]. (In the source, with $S'$ affine, this is 'Then $X'$ is quasi-compact'.)",
+   "uses": [
+    "def-pc-fibre-product",
+    "lem-weil-pbc-quasi-compact-morphism-preimage-qc-open"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/descent.tex",
+    "place": "Descent, Lemma 02KQ (lemma-descending-property-quasi-compact), proof, lines 5481-5487 ('Assume that the base change $f' : X' \\to S'$ is quasi-compact. Then $X'$ is quasi-compact')"
+   }
+  },
+  {
+   "text": "The projection $p:X'=X\\times_SS'\\to X$ is surjective: it is the base change of the surjective morphism $g:S'\\to S$ along $f:X\\to S$ (identifying $X\\times_SS'$ with $S'\\times_SX$ by the canonical symmetry isomorphism of the fibre product, which is a homeomorphism commuting with the projections), so [lem-weil-pbc-surjective-base-change] applies with its $f,g$ taken to be $g,f$.",
+   "uses": [
+    "lem-weil-pbc-surjective-base-change",
+    "def-weil-surjective-morphism"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/descent.tex",
+    "place": "Descent, Lemma 02KQ (lemma-descending-property-quasi-compact), proof, lines 5481-5487 ('and $X' \\to X$ is surjective')"
+   }
+  },
+  {
+   "text": "$p(W)=f^{-1}(U)$. If $x'\\in W$ then $f(p(x'))=g(f'(x'))\\in g(V)\\subseteq U$, so $p(x')\\in f^{-1}(U)$. Conversely, let $x\\in f^{-1}(U)$; by step 3 choose $x'\\in X'$ with $p(x')=x$; then $g(f'(x'))=f(x)\\in U$, so $f'(x')\\in g^{-1}(U)=V$ and $x'\\in f'^{-1}(V)=W$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/descent.tex",
+    "place": "Descent, Lemma 02KQ (lemma-descending-property-quasi-compact), proof, lines 5481-5487 ('Hence $X$ is quasi-compact', with $X$ replaced by $f^{-1}(U)$)"
+   }
+  },
+  {
+   "text": "The restriction $p|_W:W\\to X$ is continuous (a morphism of schemes [def-pc-scheme] is continuous on underlying spaces, and restriction to a subspace preserves continuity) and $W$ is quasi-compact (step 2), so its image $p(W)=f^{-1}(U)$ (step 4) is quasi-compact in the topology induced from $X$ by [lem-weil-pbc-continuous-image-quasi-compact]. As $U$ was an arbitrary affine open of $S$, $f$ is quasi-compact [def-weil-finite-type-morphism].",
+   "uses": [
+    "def-pc-scheme",
+    "lem-weil-pbc-continuous-image-quasi-compact",
+    "def-weil-pbc-quasi-compact-scheme",
+    "def-weil-finite-type-morphism"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/descent.tex",
+    "place": "Descent, Lemma 02KQ (lemma-descending-property-quasi-compact), proof, lines 5481-5487 ('Hence $X$ is quasi-compact. This implies that $f$ is quasi-compact.')"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-finite-type-morphism",
+  "def-pc-fibre-product",
+  "lem-weil-pbc-quasi-compact-morphism-preimage-qc-open",
+  "lem-weil-pbc-surjective-base-change",
+  "def-weil-surjective-morphism",
+  "def-pc-scheme",
+  "lem-weil-pbc-continuous-image-quasi-compact",
+  "def-weil-pbc-quasi-compact-scheme"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/descent.tex",
+  "place": "Descent, Lemma Tag 02KQ (lemma-descending-property-quasi-compact, line 5471), proof lines 5476-5488, the descent clause; the reduction to an affine base is the definition of quasi-compactness used here (Schemes 01K4)"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -69,7 +141,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "worker",
@@ -89,5 +161,13 @@
   }
  },
  "chapter": "sec-proper-base-change",
- "unit": "sk-thm-p1"
+ "unit": "sk-thm-p1",
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "lem-weil-pbc-fpqc-descend-quasi-compact",
+  "worker": "stage1",
+  "summary": "Split following the proof of Stacks 02KQ (only its descent clause; base change 01K5 and Zariski locality are not needed for the one-member covering): for an affine open U of S, V = g^{-1}(U) is quasi-compact; W = f'^{-1}(V) is quasi-compact (new Mathlib leaf lem-weil-pbc-quasi-compact-morphism-preimage-qc-open, Stacks 01K4, Scheme.Hom.isCompact_preimage); p: X' -> X is surjective (lem-weil-pbc-surjective-base-change); p(W) = f^{-1}(U) (elementary); so f^{-1}(U) is the continuous image of a quasi-compact space (lem-weil-pbc-continuous-image-quasi-compact). Flatness of g is not used (as in the source's proof). The source reduces to S' affine, the item has g quasi-compact instead, which replaces 'X' is quasi-compact' by the quasi-compactness of f'^{-1}(g^{-1}(U)). No slopmaster2 declaration states the item (grep by id, 02KQ, DescendsAlong QuasiCompact); Mathlib has no DescendsAlong instance for QuasiCompact (Loogle, LeanFinder, grep); LeanSearch returned HTTP 500 throughout. Statement unchanged.",
+  "blueprint": "The item serves the clause 'By Lemmas [02KQ] and [02KU] we see that X -> S is separated and quasi-compact' (quasi-compact half) of the proof of Descent 02L5, realized in the chain via down to lemma-weil-pbc-h1-constructible-representation (proof, second paragraph: the reduction to constructible sheaves through 03SA/03Q5); steps 1-5 realize all of the 02KQ descent argument: step 1 the affine reduction, step 2 'X' is quasi-compact', step 3 'X' -> X is surjective', steps 4-5 'Hence X is quasi-compact. This implies f is quasi-compact'."
+ },
+ "reviewed": "2026-10-10 L: 5 steps along 02KQ checked (affine open U, V = g^-1(U) quasi-compact; W = f'^-1(V) quasi-compact by the new leaf Scheme.Hom.isCompact_preimage, line 55 verified; p surjective by base change; p(W) = f^-1(U); continuous image). Flatness unused, as in the source. New Mathlib leaf lem-weil-pbc-quasi-compact-morphism-preimage-qc-open (01K4)."
 }
