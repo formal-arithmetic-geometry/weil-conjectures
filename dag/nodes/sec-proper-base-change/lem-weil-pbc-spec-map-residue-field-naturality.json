@@ -13,9 +13,62 @@
   "def-weil-pbc-localization-at-prime",
   "lem-weil-pbc-spec-residue-field-identification"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "*Step 1 (the square of global sections, stalks and residue fields).* Write $Y=\\operatorname{Spec}R$, $X=\\operatorname{Spec}R'$, $f=\\operatorname{Spec}\\psi:X\\to Y$, $x=\\mathfrak p'\\in X$ and $y=f(x)\\in Y$, a prime $\\mathfrak q\\subset R$. By [def-weil-affine-spectrum], $\\Gamma(Y,\\mathcal O_Y)=R$, $\\Gamma(X,\\mathcal O_X)=R'$, and $\\operatorname{Spec}\\psi$ induces $\\psi$ on global sections: $f^\\sharp_Y=\\psi$ (Stacks 01I1/01I2: $\\operatorname{Spec}\\psi$ is the morphism of affine schemes whose map on global sections is $\\psi$). For a point $z$ of a scheme $Z$ let $\\gamma_z:\\Gamma(Z,\\mathcal O_Z)\\to\\mathcal O_{Z,z}$ be the germ map and $\\rho_z:\\mathcal O_{Z,z}\\to\\kappa_Z(z)$ the residue map. The stalk map $f^\\sharp_x:\\mathcal O_{Y,y}\\to\\mathcal O_{X,x}$ of the morphism of locally ringed spaces $f$ [def-weil-locally-ringed-space-morphism] is the map induced on the colimits over the open neighbourhoods $V\\ni y$ by the maps $f^\\sharp_V:\\mathcal O_Y(V)\\to\\mathcal O_X(f^{-1}V)$, i.e. $f^\\sharp_x(\\text{germ}_y s)=\\text{germ}_x(f^\\sharp_V s)$; taking $V=Y$ gives the commutative square of the proof of Stacks 01HY: $f^\\sharp_x\\circ\\gamma_y=\\gamma_x\\circ\\psi:R\\to\\mathcal O_{X,x}$. Moreover $f^\\sharp_x$ is a local homomorphism [def-weil-locally-ringed-space-morphism], and the map $r:\\kappa_Y(y)\\to\\kappa_X(x)$ induced by $f$ on residue fields [def-weil-residue-field] is the map induced by $f^\\sharp_x$ on residue fields: $r\\circ\\rho_y=\\rho_x\\circ f^\\sharp_x$. Combining, $(\\ast)$ $r\\circ\\rho_y\\circ\\gamma_y=\\rho_x\\circ\\gamma_x\\circ\\psi:R\\to\\kappa_X(x)$.",
+   "uses": [
+    "def-weil-affine-spectrum",
+    "def-weil-locally-ringed-space-morphism",
+    "def-weil-residue-field"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Schemes, Lemma Tag 01HY (lemma-morphism-into-affine-where-point-goes, lines 769-800: the commutative square Gamma(X) -> O_{X,x}, Gamma(Y) -> O_{Y,f(x)}), Lemma Tag 01I1 (lemma-morphism-into-affine, lines 841-950) and Lemma Tag 01I2 (lemma-category-affine-schemes, line 954)"
+   }
+  },
+  {
+   "text": "*Step 2 (clause (1)).* For a ring $A$ and a prime $\\mathfrak a\\subset A$, viewed as a point of $\\operatorname{Spec}A$, the maximal ideal $\\mathfrak m_{\\mathfrak a}=\\ker\\rho_{\\mathfrak a}$ of $\\mathcal O_{\\operatorname{Spec}A,\\mathfrak a}$ satisfies $\\gamma_{\\mathfrak a}^{-1}(\\mathfrak m_{\\mathfrak a})=\\ker(\\rho_{\\mathfrak a}\\circ\\gamma_{\\mathfrak a})=\\ker(e_A^{-1}\\circ\\pi_{\\mathfrak a})=\\ker\\pi_{\\mathfrak a}=\\mathfrak a$, where $\\pi_{\\mathfrak a}:A\\to\\kappa(\\mathfrak a)$ and $e_A:\\kappa_{\\operatorname{Spec}A}(\\mathfrak a)\\cong\\kappa(\\mathfrak a)$: the second equality is the clause $e_A^{-1}\\circ\\pi_{\\mathfrak a}=\\rho_{\\mathfrak a}\\circ\\gamma_{\\mathfrak a}$ of [lem-weil-pbc-spec-residue-field-identification], the third holds as $e_A$ is an isomorphism, the last is [lem-weil-pbc-prime-residue-field-algebra] (a). Since $f^\\sharp_x$ is local, $f^\\sharp_x(\\mathfrak m_y)\\subseteq\\mathfrak m_x$, so $(f^\\sharp_x)^{-1}(\\mathfrak m_x)$ is a proper ideal (it does not contain $1$) containing the maximal ideal $\\mathfrak m_y$, hence equals $\\mathfrak m_y$. Therefore, by step 1, $\\mathfrak q=\\gamma_y^{-1}(\\mathfrak m_y)=\\gamma_y^{-1}((f^\\sharp_x)^{-1}(\\mathfrak m_x))=(f^\\sharp_x\\circ\\gamma_y)^{-1}(\\mathfrak m_x)=(\\gamma_x\\circ\\psi)^{-1}(\\mathfrak m_x)=\\psi^{-1}(\\gamma_x^{-1}(\\mathfrak m_x))=\\psi^{-1}(\\mathfrak p')=\\mathfrak p$ (the case $A=R$, $\\mathfrak a=\\mathfrak q$ and the case $A=R'$, $\\mathfrak a=\\mathfrak p'$). So $\\operatorname{Spec}\\psi(\\mathfrak p')=\\mathfrak p$; this is Stacks 01HY for $f=\\operatorname{Spec}\\psi$, and agrees with the description of $\\operatorname{Spec}\\psi$ on points in Algebra 00E2.",
+   "uses": [
+    "lem-weil-pbc-spec-residue-field-identification",
+    "lem-weil-pbc-prime-residue-field-algebra",
+    "def-weil-locally-ringed-space-morphism",
+    "def-weil-affine-spectrum"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Schemes, Lemma Tag 01HY (lemma-morphism-into-affine-where-point-goes, lines 769-800: since the right vertical arrow is local, m_{f(x)} is the inverse image of m_x); with literature/stacks-project/algebra.tex, Lemma Tag 00E2 (lemma-spec-functorial)"
+   }
+  },
+  {
+   "text": "*Step 3 (clause (2)).* By step 2, $y=\\mathfrak p$, so $r:\\kappa_{\\operatorname{Spec}R}(\\mathfrak p)\\to\\kappa_{\\operatorname{Spec}R'}(\\mathfrak p')$. The map $\\kappa(\\psi)$ exists and is characterized by $\\kappa(\\psi)\\circ\\pi_{\\mathfrak p}=\\pi_{\\mathfrak p'}\\circ\\psi$: the ring map $\\pi_{\\mathfrak p'}\\circ\\psi:R\\to\\kappa(\\mathfrak p')$ kills $\\mathfrak p=\\psi^{-1}(\\mathfrak p')$ (as $\\ker\\pi_{\\mathfrak p'}=\\mathfrak p'$) and sends $t\\in R\\setminus\\mathfrak p$ to $\\pi_{\\mathfrak p'}(\\psi(t))\\neq0$, a unit of the field $\\kappa(\\mathfrak p')$, so it factors uniquely as $\\lambda\\circ\\pi_{\\mathfrak p}$ ([lem-weil-pbc-prime-residue-field-algebra] (a), (d), (c)); and $\\lambda(\\overline{r/t})=\\lambda(\\pi_{\\mathfrak p}(r))\\lambda(\\pi_{\\mathfrak p}(t))^{-1}=\\overline{\\psi(r)/\\psi(t)}$, so $\\lambda=\\kappa(\\psi)$. Now compose $(\\ast)$ of step 1 with $e_{R'}$ and use $\\rho_y\\circ\\gamma_y=e_R^{-1}\\circ\\pi_{\\mathfrak p}$ and $\\rho_x\\circ\\gamma_x=e_{R'}^{-1}\\circ\\pi_{\\mathfrak p'}$ ([lem-weil-pbc-spec-residue-field-identification] for $R$ at $\\mathfrak p$ and for $R'$ at $\\mathfrak p'$): $(e_{R'}\\circ r\\circ e_R^{-1})\\circ\\pi_{\\mathfrak p}=e_{R'}\\circ e_{R'}^{-1}\\circ\\pi_{\\mathfrak p'}\\circ\\psi=\\pi_{\\mathfrak p'}\\circ\\psi=\\kappa(\\psi)\\circ\\pi_{\\mathfrak p}$. By [lem-weil-pbc-prime-residue-field-algebra] (c) (ring maps out of $\\kappa(\\mathfrak p)$ are determined by their composite with $\\pi_{\\mathfrak p}$), $e_{R'}\\circ r\\circ e_R^{-1}=\\kappa(\\psi)$, i.e. $e_{R'}\\circ r=\\kappa(\\psi)\\circ e_R$. (Stacks does not write out this passage to residue fields; equivalently, under the stalk identifications $\\mathcal O_{\\operatorname{Spec}R,\\mathfrak p}\\cong R_{\\mathfrak p}$, $\\mathcal O_{\\operatorname{Spec}R',\\mathfrak p'}\\cong R'_{\\mathfrak p'}$ of Stacks 01HV (6) the stalk map is $r/t\\mapsto\\psi(r)/\\psi(t)$; the argument above works directly on residue fields.)",
+   "uses": [
+    "lem-weil-pbc-spec-residue-field-identification",
+    "lem-weil-pbc-prime-residue-field-algebra",
+    "def-weil-pbc-localization-at-prime",
+    "def-weil-residue-field"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra, section Local rings (lines 3337-3358) and Lemma Tag 00E2 (lemma-spec-functorial); with literature/stacks-project/schemes.tex, Lemma Tag 01HV (lemma-spec-sheaves, (6), line 692) and Lemma Tag 01HY (lines 769-800)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-affine-spectrum",
+  "def-weil-locally-ringed-space-morphism",
+  "def-weil-residue-field",
+  "lem-weil-pbc-spec-residue-field-identification",
+  "lem-weil-pbc-prime-residue-field-algebra",
+  "def-weil-pbc-localization-at-prime"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/schemes.tex",
+  "place": "Schemes, Lemma Tag 01HY (lemma-morphism-into-affine-where-point-goes, lines 769-800) with Lemmas Tag 01I1, 01I2 and 01HV (6); Algebra, section Local rings and Lemma Tag 00E2. Stacks proves clause (1) (01HY); the passage to residue fields in clause (2) is not written in Stacks and is written out by the worker (step 3)."
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -44,10 +97,31 @@
    "results": "(1) is Spec.map_apply (AlgebraicGeometry/Scheme.lean:537: Spec.map f x = PrimeSpectrum.comap f.hom x). For (2) only the stalk-level version exists: Scheme.localRingHom_comp_stalkIso (AlgebraicGeometry/AffineScheme.lean:1314: (Spec.stalkIso R (p.comap f)).hom ≫ ofHom (Localization.localRingHom ...) ≫ (Spec.stalkIso S p).inv = (Spec.map f).stalkMap p), AlgebraicGeometry.localRingHom_comp_stalkIso (Spec.lean:227), Scheme.arrowStalkMapSpecIso (AffineScheme.lean:1324); Spec.residueFieldIso (ResidueField.lean:301) is IsLocalRing.ResidueField.mapEquiv of Spec.stalkIso, and Scheme.residue_residueFieldMap (ResidueField.lean:128); residueFieldIso is used elsewhere only in AlgebraicGeometry/Fiber.lean:87-90, with no naturality lemma",
    "date": "2026-10-10",
    "verdict": "no exact match: (1) is Spec.map_apply; (2) follows from Scheme.localRingHom_comp_stalkIso by passing to residue fields (IsLocalRing.ResidueField.map functoriality, residue_residueFieldMap, the definition of Spec.residueFieldIso and Ideal.ResidueField.map as ResidueField.map of Localization.localRingHom), a few lines, not one"
+  },
+  {
+   "tool": "leansearch",
+   "query": "residue field map of Spec.map f at prime p equals Ideal.ResidueField.map of f under Spec.residueFieldIso",
+   "results": "Ideal.ResidueField.mapₐ, Ideal.ResidueField.map, Ideal.ResidueField.mapₐ_apply (Mathlib.RingTheory.LocalRing.ResidueField.Ideal), Scheme.Hom.residueFieldMap, Scheme.Hom.Spec_map_residueFieldMap_fromSpecResidueField (Mathlib.AlgebraicGeometry.ResidueField), IsLocalRing.ResidueField.map, RingHom.specComap",
+   "date": "2026-10-10",
+   "verdict": "no match (re-search by the splitting worker): no lemma relating Scheme.Hom.residueFieldMap (Spec.map f) with Ideal.ResidueField.map through Spec.residueFieldIso"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Scheme.Hom.residueFieldMap, AlgebraicGeometry.Spec.map",
+   "results": "Scheme.Hom.SpecMap_residueFieldMap_fromSpecResidueField (+ _assoc), Scheme.instIsOverMapResidueFieldMap..., Scheme.Pullback.Triplet.isPullback_SpecMap_tensor, Triplet.Spec_ofPointTensor_SpecTensorTo (PullbackCarrier), Scheme.Hom.asFiberHom_fiberToSpecResidueField (+ _assoc), isPullback_fiberToSpecResidueField_of_isPullback (Fiber)",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rn 'residueFieldIso\\|Spec_map_residueFieldMap\\|residueFieldMap_Spec' Mathlib/ ; sed -n 165,176p,295,325p Mathlib/AlgebraicGeometry/ResidueField.lean",
+   "results": "residueFieldIso only in ResidueField.lean:301-321 and Fiber.lean:87-90; Scheme.Hom.Γevaluation_naturality (ResidueField.lean:170: Y.Γevaluation (f x) ≫ f.residueFieldMap x = f.appTop ≫ X.Γevaluation x) is the residue-field form of the square of step 1",
+   "date": "2026-10-10",
+   "verdict": "no match; Lean route for (2): Γevaluation_naturality for Spec.map f, ΓSpecIso_naturality (Scheme.lean:609), Spec.algebraMap_residueFieldIso_inv (ResidueField.lean:308) and Ideal.ResidueField ring-hom extensionality, a few lines; (1) is Spec.map_apply (Scheme.lean:537, rfl)"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "worker",
@@ -67,5 +141,17 @@
   }
  },
  "chapter": "sec-proper-base-change",
- "unit": "sk-thm-p1"
+ "unit": "sk-thm-p1",
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "lem-weil-pbc-spec-map-residue-field-naturality",
+  "worker": "stage1",
+  "summary": "Statement kept (it matches the uses in lem-weil-pbc-etale-neighbourhood-prescribed-residue-field, lem-weil-pbc-lft-over-field-isolated-point-residue-finite and lem-weil-pbc-limit-residue-field). Not a Mathlib leaf: (1) is Spec.map_apply (rfl) but (2) has no Mathlib lemma (searched again with LeanSearch, Loogle, grep; it needs Γevaluation_naturality, ΓSpecIso_naturality, Spec.algebraMap_residueFieldIso_inv and residue-field extensionality). Split into three elementary steps following Stacks 01HY: (1) the square of global sections, stalks and residue fields from the definition of the stalk map of a morphism of locally ringed spaces and of the residue field map, with Gamma(Spec psi) = psi [def-weil-affine-spectrum]; (2) clause (1) by the 01HY argument (locality of the stalk map, inverse image of the maximal ideal under the germ map is the prime, via the identification clause of lem-weil-pbc-spec-residue-field-identification and ker pi = p); (3) clause (2) directly on residue fields from the square and the identification clause, with kappa(psi) characterized by kappa(psi)∘pi_p = pi_p'∘psi and the uniqueness clause (c) of lem-weil-pbc-prime-residue-field-algebra, so no node on the stalk map R_p -> R'_p' is needed. No new nodes. stmt_deps unchanged."
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "result": "accepted",
+  "note": "3 steps following Stacks 01HY: the square f^#_x gamma_y = gamma_x psi and r rho_y = rho_x f^#_x; (1) from the locality of the stalk map and the identification clause of spec-residue-field-identification with ker pi = p; (2) by the characterization of kappa(psi) through pi_p and the uniqueness clause of prime-residue-field-algebra. No new nodes."
+ }
 }
