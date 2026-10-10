@@ -3,25 +3,63 @@
  "blueprint": {
   "is": "def-sp-kinjective-bridge",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "definition",
  "title": "The K-injective bridge",
- "statement": "A *K-injective resolution* of a complex $K$ is a quasi-isomorphism $K\\to I$\nwith $I$ K-injective: for every acyclic complex $A$ the complex\n$\\operatorname{Hom}(A,I)$ is acyclic. In a Grothendieck abelian category\n[def-sp-grothendieck-abelian] every bounded-below complex admits a\nK-injective resolution.\n\nThis is what carries a left exact additive functor\n[def-sp-left-exact-additive] from objects to complexes, and it is the bridge\nthe name refers to. For $v:\\mathcal A\\to\\mathcal B$ left exact additive and\n$K\\in\\operatorname{Ch}^+(\\mathcal A)$, choose a K-injective resolution $K\\to\nI$ and set\n\n$$\n RvK:=v(I),\\qquad R^pv(K):=\\mathcal H^p(RvK).\n$$\n\nThat the choice of resolution does not matter, and that for an object $X$\nplaced in degree zero this agrees with the derived functors $R^pv(X)$ defined\nby injective resolutions, is [lem-sp-kinjective-computes]; until that lemma\nthe notation is read as depending on the chosen resolution. This is the only\nmeaning $Rv$ has on complexes anywhere in the chapter.",
+ "statement": "A *K-injective resolution* of a complex $K$ is a quasi-isomorphism $K\\to I$\nwith $I$ K-injective: for every acyclic complex $A$ the Hom complex\n$\\operatorname{Hom}^\\bullet(A,I)$ is acyclic (as in\n[def-weil-pbc-kinjective-resolutions], with the abelian category in place of\n$\\Mod(T_{\\Et},R)$). In a Grothendieck abelian category\n[def-sp-grothendieck-abelian] every complex, in particular every\nbounded-below one, admits a K-injective resolution\n[lem-weil-pbc-kinjective-functorial-existence].\n\nThis is what carries a left exact additive functor\n[def-sp-left-exact-additive] from objects to complexes, and it is the bridge\nthe name refers to. For $v:\\mathcal A\\to\\mathcal B$ left exact additive and\n$K\\in\\operatorname{Ch}^+(\\mathcal A)$, choose a K-injective resolution $K\\to\nI$ and set\n\n$$\n RvK:=v(I),\\qquad R^pv(K):=\\mathcal H^p(RvK).\n$$\n\nThat the choice of resolution does not matter, and that for an object $X$\nplaced in degree zero this agrees with the derived functors $R^pv(X)$ defined\nby injective resolutions, is [lem-sp-kinjective-computes]; until that lemma\nthe notation is read as depending on the chosen resolution. This is the only\nmeaning $Rv$ has on complexes anywhere in the chapter.",
  "source": {
   "document": "literature/blueprint/master/blueprint/sec-abelian-varieties/sk-prop-av-pqf-finite/def-sp-kinjective-bridge.md",
   "place": "node def-sp-kinjective-bridge, order 517"
  },
  "stmt_deps": [
   "def-sp-grothendieck-abelian",
-  "def-sp-left-exact-additive"
+  "def-sp-left-exact-additive",
+  "def-weil-pbc-kinjective-resolutions",
+  "lem-weil-pbc-kinjective-functorial-existence"
  ],
  "proof": [],
  "proof_deps": [],
  "proof_origin": null,
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "K-injective resolutions in a Grothendieck abelian category and derived functor on complexes",
+   "results": "CategoryTheory.Functor.toRightDerivedZero, CategoryTheory.InjectiveResolution.toRightDerivedZero', CategoryTheory.Functor.rightDerived and related declarations in Mathlib/CategoryTheory/Abelian/RightDerived",
+   "date": "2026-10-11",
+   "verdict": "no exact match: results concern ordinary injective resolutions and right-derived functors"
+  },
+  {
+   "tool": "loogle",
+   "query": "CochainComplex.IsKInjective, HasKInjectiveResolutions, Grothendieck abelian",
+   "results": "0 hits; unknown identifier HasKInjectiveResolutions",
+   "date": "2026-10-11",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "KInjective|HasKInjectiveResolutions Mathlib/Algebra/Homology Mathlib/CategoryTheory/Abelian",
+   "results": "0 hits",
+   "date": "2026-10-11",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Every bounded below complex in a Grothendieck abelian category admits a K-injective resolution",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-11",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "grep",
+   "query": "KInjective|HasKInjectiveResolutions Mathlib/",
+   "results": "0 hits",
+   "date": "2026-10-11",
+   "verdict": "no exact match"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [
   "cites_outside_uses"
@@ -62,5 +100,37 @@
   }
  ],
  "chapter": "sec-abelian-varieties",
- "unit": "sk-prop-av-pqf-finite"
+ "unit": "sk-prop-av-pqf-finite",
+ "split_report": {
+  "date": "2026-10-11",
+  "item": "def-sp-kinjective-bridge",
+  "worker": "stage1",
+  "summary": "Checked the imported definition against the blueprint and the available Lean source. No project declaration states this bridge, and no subordinate node is needed: the statement itself introduces the K-injective resolution convention, the Grothendieck existence assertion, and the complex-level definition of Rv and its cohomology. The existing def-weil-pbc-kinjective-resolutions node is a specialized etale module-sheaf definition and is not a duplicate. Mathlib's IsKInjective uses a different homotopy lifting formulation, while the derived-functor bridge is not an exact Mathlib declaration.",
+  "blueprint": "The complete imported definition: K-injective resolution and existence in a Grothendieck abelian category, followed by the RvK and R^p v conventions and the forward reference to lem-sp-kinjective-computes.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-kinjective-functorial-existence",
+    "why": "generic existence of K-injective resolutions in a Grothendieck abelian category; the definition's choice of resolution needs it"
+   },
+   {
+    "node": "def-weil-pbc-kinjective-resolutions",
+    "why": "generic Hom-complex convention for K-injectivity"
+   }
+  ],
+  "reviewer_fix": "R-kib1848 (E7): the existence clause was an uncited non-elementary assertion inside the definition (C1); it now cites lem-weil-pbc-kinjective-functorial-existence (Grothendieck abelian, all complexes, no cycle), and Hom(A,I) is made precise as the Hom complex of def-weil-pbc-kinjective-resolutions. No change to the meaning."
+ },
+ "tool_uses": [
+  "lem-weil-pbc-kinjective-functorial-existence",
+  "def-weil-pbc-kinjective-resolutions",
+  "lem-weil-pbc-kinjective-functorial-existence",
+  "def-weil-pbc-kinjective-resolutions"
+ ],
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-kib1848",
+  "group": "F1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-kib1848 (reviewer sub-agent of L); spot-checked: Definition read whole; K-injective (Hom-complex acyclic) and RvK:=v(I) correct, choice-dependence deferred explicitly to lem-sp-kinjective-computes. Not a duplicate: def-weil-pbc-kinjective-resolutions is etale-module-specific, def-pur-kinjective-complex is O-module homotopy form; no cycle (neither cited node reaches the item). FIX more, RETURN less: C1 the existence clause 'every bounded-below complex in a Grothendieck abelian category admits a K-injective resolution' was an uncited theorem inside the definition (missed by the Second reading); now cites lem-weil-pbc-kinjective-functorial-existence (all complexes, generic tool), and Hom(A,I) made precise via def-weil-pbc-kinjective-resolutions; both added to stmt_deps and tool_uses.; 1 file(s) fixed by the reviewer"
+ }
 }
