@@ -25,9 +25,64 @@
   "def-weil-pbc-adic-completion",
   "def-weil-pbc-faithfully-flat-ring-map"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Put C=R^{\\mathrm{sh}} and I=\\mathfrak mC. By the strict henselization triples statement, C is local with maximal ideal I and residue field a separable closure of R/\\mathfrak m. Since R is Noetherian, \\mathfrak m is finitely generated, hence I is finitely generated; the residue field C/I is Noetherian. Applying the general completion criterion [lem-weil-pbc-completion-noetherian-quotient-noetherian] to (C,I) shows that \\widehat C is Noetherian.",
+   "uses": [
+    "lem-weil-pbc-strict-henselization-triples",
+    "lem-weil-pbc-completion-noetherian-quotient-noetherian"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Lemma Tag 06LJ, proof part (a), paragraph beginning 'As m is finitely generated'"
+   }
+  },
+  {
+   "text": "The canonical map C\\to\\widehat C is flat by [lem-sc-strict-henselization-completion-flat].",
+   "uses": [
+    "lem-sc-strict-henselization-completion-flat"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Lemma Tag 06LJ, proof part (c), paragraph beginning 'To finish the proof of (c)'"
+   }
+  },
+  {
+   "text": "Locality of $C\\to\\widehat C$. Let $\\pi:\\widehat C\\to C/I$, $(x_n)_n\\mapsto x_1$, and $\\iota:C\\to\\widehat C$ the canonical map, so $\\pi\\circ\\iota$ is the quotient map $C\\to C/I$. Each $C/I^n$ is local with nilpotent maximal ideal $I/I^n$ (Step 1: $I$ is the maximal ideal of $C$), so $x_n\\in C/I^n$ is a unit iff its image $x_1\\in C/I$ is nonzero. Hence if $x=(x_n)\\in\\widehat C$ has $x_1\\ne0$, every $x_n$ is a unit and the inverses are compatible by uniqueness, so $x$ is a unit; the non-units are therefore exactly $\\ker\\pi$, a proper ideal. Thus $\\widehat C$ is local with maximal ideal $\\ker\\pi$, and $\\iota^{-1}(\\ker\\pi)=\\ker(C\\to C/I)=I$, so $\\iota$ is a local homomorphism.",
+   "uses": [
+    "lem-weil-pbc-strict-henselization-triples"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Lemma Tag 06LJ, part (a): (R^{sh})^\\wedge is a local ring; elementary inverse-limit argument"
+   }
+  },
+  {
+   "text": "By Step 2 the map $C\\to\\widehat C$ is flat and by Step 3 it is a local homomorphism of local rings. Therefore it is faithfully flat by the flat-local faithfully-flat lemma [lem-pc-local-flat-faithful-flat-reflects-surjective].",
+   "uses": [
+    "lem-pc-local-flat-faithful-flat-reflects-surjective"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Lemma Tag 00HR (algebra-lemma-local-flat-ff)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-strict-henselization-triples",
+  "lem-weil-pbc-completion-noetherian-quotient-noetherian",
+  "lem-sc-strict-henselization-completion-flat",
+  "lem-pc-local-flat-faithful-flat-reflects-surjective"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Lemma Tag 06LJ (lemma-henselization-noetherian), proof parts (a) and (c)"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -59,12 +114,46 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-sc-strict-henselization-noetherian",
   "by": "worker",
   "date": "2026-10-10"
  },
  "chapter": "sec-curve-estimates",
- "unit": "sk-thm-br"
+ "unit": "sk-thm-br",
+ "split_report": {
+  "date": "2026-10-11",
+  "item": "lem-sc-strict-henselization-completion-noetherian",
+  "worker": "stage1",
+  "summary": "Split Tag 06LJ parts (a) and (c): finite generation of the extended maximal ideal and the general complete-adic Noetherian criterion give Noetherianity; flatness is isolated in the new supporting node; flatness plus locality gives faithful flatness via the existing local-flat lemma.",
+  "blueprint": "Realizes the blueprint ancestor's boundary-stalk claim that strict henselization completion is Noetherian and faithfully flat, following Tag 06LJ parts (a) and (c).",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-strict-henselization-triples",
+    "why": "supplies strict henselization local-ring, maximal-ideal, and residue-field data"
+   },
+   {
+    "node": "lem-weil-pbc-completion-noetherian-quotient-noetherian",
+    "why": "generic complete-adic criterion supplies Noetherianity of the completion"
+   },
+   {
+    "node": "lem-pc-local-flat-faithful-flat-reflects-surjective",
+    "why": "converts flat local completion into faithful flatness"
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-strict-henselization-triples",
+  "lem-weil-pbc-completion-noetherian-quotient-noetherian",
+  "lem-pc-local-flat-faithful-flat-reflects-surjective"
+ ],
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-shn2249",
+  "group": "C1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-shn2249 (reviewer sub-agent of L); spot-checked: No cycle: item cites none of the 06LJ siblings (lem-sc-strict-henselization-noetherian cites the item, so citing it or the Noetherian-hypothesis completion leaf lem-weil-pbc-local-completion-local-ring would be circular); mR^sh maximal ideal and residue field cited from triples clause 2; 05GH criterion hypotheses (C/I Noetherian, I f.g.) checked; new flat node is a real lemma (06LJ(c)), not a duplicate of siblings or lem-weil-pbc-henselization-noetherian-completion, and Mathlib AdicCompletion.flat_of_isNoetherian needs C Noetherian (circular) so not class c/d; grep RingTheory/AdicCompletion: LocalRing.lean has isLocalRing_of_fg/algebraMap_isLocalHom_of_fg but no node states them for f.g. maximal ideal. FIX more, RETURN less: C1 Step 3 asserted uncited that the completion is local with maximal ideal I\\widehat C; split into new elementary Step 3 (inverse-limit unit argument: completion local with maximal ideal ker(pi), iota local) and Step 4 (00HR faithful flatness), proof_deps unchanged. Note: second reading claims citations.json quotes were added but the branch diff touches no citations.json.; 1 file(s) fixed by the reviewer"
+ }
 }
