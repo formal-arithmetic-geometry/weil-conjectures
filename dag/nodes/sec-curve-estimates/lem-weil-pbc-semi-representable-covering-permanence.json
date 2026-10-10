@@ -13,17 +13,80 @@
  },
  "kind": "statement",
  "title": "Coverings of semi-representable objects are stable under composition and base change",
- "statement": "Let $X$ be a scheme and $\\mathrm{SR}(X)$ the category of semi-representable objects over $X$, with its coverings [def-weil-pbc-semi-representable-object]. (1) If $a:K\\to L$ and $b:L\\to M$ are coverings in $\\mathrm{SR}(X)$, then $b\\circ a:K\\to M$ is a covering. (2) If $a:K\\to L$ is a covering and $c:L'\\to L$ is any morphism of $\\mathrm{SR}(X)$, then the projection $L'\\times_LK\\to L'$ from the fibre product in $\\mathrm{SR}(X)$ is a covering.",
+ "statement": "Let $X$ be a scheme and $\\mathrm{SR}(X)$ the category of semi-representable objects over $X$, with its coverings [def-weil-pbc-semi-representable-object]. (1) If $a:K\\to L$ and $b:L\\to M$ are coverings in $\\mathrm{SR}(X)$, then $b\\circ a:K\\to M$ is a covering. (2) If $a:K\\to L$ is a covering and $c:L'\\to L$ is any morphism of $\\mathrm{SR}(X)$, then the fibre product $L'\\times_LK$ in $\\mathrm{SR}(X)$ exists, and its projection $L'\\times_LK\\to L'$ is a covering, where $L'\\times_LK$ is the fibre product of [lem-weil-pbc-semi-representable-finite-limits] (2) (applied to $\\mathcal C=X_{\\Et}$): for $K=\\{K_i\\}_{i\\in I}$, $L=\\{L_j\\}_{j\\in J}$, $L'=\\{L'_l\\}_{l\\in J'}$, $a=(\\alpha,a_i)$, $c=(\\gamma,c_l)$, it is the family $\\{L'_l\\times_{c_l,L_{\\gamma(l)},a_i}K_i\\}_{(l,i)\\in J'\\times I,\\ \\gamma(l)=\\alpha(i)}$, and the projection has index map $(l,i)\\mapsto l$ and components the first projections.",
  "source": {
   "document": "literature/stacks-project/hypercovering.tex",
   "place": "Lemma 01G4 (lemma-covering-permanence), parts (1) and (2), for SR(C, X) = SR(C/X) with C = X_et"
  },
  "stmt_deps": [
-  "def-weil-pbc-semi-representable-object"
+  "def-weil-pbc-semi-representable-object",
+  "lem-weil-pbc-semi-representable-finite-limits"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Notation. By [def-weil-pbc-semi-representable-object] (3), a morphism $(\\alpha,f_i):\\{U_i\\}_{i\\in I}\\to\\{V_j\\}_{j\\in J}$ of $\\mathrm{SR}(X)$ is a covering iff for every $j\\in J$ the family $\\{f_i:U_i\\to V_j\\}_{i\\in I,\\,\\alpha(i)=j}$ is a covering family of $X_{\\Et}$, and by [def-weil-pbc-etale-site] a covering family of $X_{\\Et}$ is a family of etale morphisms (between objects etale over $X$, the morphisms being $X$-morphisms) which is jointly surjective onto its target. Composition in $\\mathrm{SR}(X)$ is $(\\beta,b_j)\\circ(\\alpha,a_i)=(\\beta\\circ\\alpha,(b_{\\alpha(i)}\\circ a_i)_{i})$ [def-weil-pbc-semi-representable-object] (1).",
+   "uses": [
+    "def-weil-pbc-semi-representable-object",
+    "def-weil-pbc-etale-site"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/hypercovering.tex",
+    "place": "Definition 01G0 (definition-SR) and Definition 01G3 (definition-covering-SR)"
+   }
+  },
+  {
+   "text": "Proof of (1) (Stacks: 'immediate from the axioms of a site', written out). Write $K=\\{K_i\\}_{i\\in I}$, $L=\\{L_j\\}_{j\\in J}$, $M=\\{M_n\\}_{n\\in N}$, $a=(\\alpha,a_i)$, $b=(\\beta,b_j)$. Fix $n\\in N$. Since $b$ is a covering, $\\{b_j:L_j\\to M_n\\}_{j\\in J,\\,\\beta(j)=n}$ is a jointly surjective family of etale morphisms; since $a$ is a covering, for each such $j$ the family $\\{a_i:K_i\\to L_j\\}_{i\\in I,\\,\\alpha(i)=j}$ is a jointly surjective family of etale morphisms (step 1). By [lem-weil-pbc-etale-covering-composition] (with $T=M_n$, the $f$'s the $b_j$ and, over $L_j$, the $g$'s the $a_i$ with $\\alpha(i)=j$), the family $\\{b_j\\circ a_i:K_i\\to M_n\\}$ indexed by the pairs $(j,i)$ with $\\beta(j)=n$, $\\alpha(i)=j$ consists of etale morphisms and is jointly surjective. The map $i\\mapsto(\\alpha(i),i)$ is a bijection from $\\{i\\in I:\\beta(\\alpha(i))=n\\}$ onto this set of pairs (inverse $(j,i)\\mapsto i$), under which $b_j\\circ a_i=b_{\\alpha(i)}\\circ a_i$ is the $i$-th component of $b\\circ a$ (step 1); the composites are $X$-morphisms between objects of $X_{\\Et}$. Hence $\\{b_{\\alpha(i)}\\circ a_i:K_i\\to M_n\\}_{i:\\,\\beta\\alpha(i)=n}$ is a covering family of $X_{\\Et}$ for every $n$, i.e. $b\\circ a$ is a covering.",
+   "uses": [
+    "def-weil-pbc-semi-representable-object",
+    "def-weil-pbc-etale-site",
+    "lem-weil-pbc-etale-covering-composition"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/hypercovering.tex",
+    "place": "Lemma 01G4 (lemma-covering-permanence), proof, 'Part (1) is immediate from the axioms of a site'; the final sentence (SR(C, X) = SR(C/X))"
+   }
+  },
+  {
+   "text": "Proof of (2), the fibre product. Write $K,L,L',a,c$ as in the statement. $X_{\\Et}$ has a final object $\\mathrm{id}_X$ and fibre products, computed as fibre products of schemes [def-weil-pbc-etale-site]. Hence by [lem-weil-pbc-semi-representable-finite-limits] (2) applied to $\\mathcal C=X_{\\Et}$, the family $P=\\{P_{(l,i)}\\}$, $P_{(l,i)}=L'_l\\times_{c_l,L_{\\gamma(l)},a_i}K_i$ for $(l,i)\\in J'\\times I$ with $\\gamma(l)=\\alpha(i)$, with the projections $p'=((l,i)\\mapsto l,\\ \\mathrm{pr}_1)$ to $L'$ and $p=((l,i)\\mapsto i,\\ \\mathrm{pr}_2)$ to $K$, is a fibre product $L'\\times_LK$ in $\\mathrm{SR}(X)$; each $P_{(l,i)}$ is the scheme-theoretic fibre product, an object of $X_{\\Et}$.",
+   "uses": [
+    "def-weil-pbc-etale-site",
+    "lem-weil-pbc-semi-representable-finite-limits",
+    "def-weil-pbc-semi-representable-object"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/hypercovering.tex",
+    "place": "Lemma 01G4 (lemma-covering-permanence), proof, 'Part (2) follows by the construction of fibre products in SR(C) in the proof of Lemma 01G1 (lemma-coprod-prod-SR)', with that proof, part (3) and the paragraph on SR(C, X)"
+   }
+  },
+  {
+   "text": "Proof of (2), the covering. Fix $l\\in J'$ and put $j=\\gamma(l)$. The members of $P$ over $l$ are indexed by $\\{(l,i): \\alpha(i)=j\\}$, i.e. by $\\{i\\in I:\\alpha(i)=j\\}$, and the corresponding components of $p'$ are the first projections $\\mathrm{pr}_1:L'_l\\times_{c_l,L_j,a_i}K_i\\to L'_l$. Since $a$ is a covering, $\\{a_i:K_i\\to L_j\\}_{\\alpha(i)=j}$ is a jointly surjective family of etale morphisms (step 1). By [lem-weil-pbc-etale-covering-base-change] (with $Y=L_j$, $V_i=K_i$, $g=c_l:L'_l\\to L_j$), the projections $L'_l\\times_{L_j}K_i\\to L'_l$, $\\alpha(i)=j$, are etale and jointly surjective; they are $X$-morphisms between objects of $X_{\\Et}$ (step 3). So for every $l\\in J'$ the family of components of $p'$ over $l$ is a covering family of $X_{\\Et}$, i.e. $p':L'\\times_LK\\to L'$ is a covering [def-weil-pbc-semi-representable-object] (3). (This is the Stacks requirement that the morphisms of a covering are representable: in $X_{\\Et}$ every fibre product exists.)",
+   "uses": [
+    "def-weil-pbc-semi-representable-object",
+    "def-weil-pbc-etale-site",
+    "lem-weil-pbc-etale-covering-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/hypercovering.tex",
+    "place": "Lemma 01G4 (lemma-covering-permanence), proof, 'and the requirement that the morphisms in a covering of C are representable'"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-semi-representable-object",
+  "def-weil-pbc-etale-site",
+  "lem-weil-pbc-etale-covering-composition",
+  "lem-weil-pbc-semi-representable-finite-limits",
+  "lem-weil-pbc-etale-covering-base-change"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/hypercovering.tex",
+  "place": "Lemma 01G4 (lemma-covering-permanence), parts (1), (2) and the final sentence, with the fibre product from the proof of Lemma 01G1 (lemma-coprod-prod-SR), part (3) and the SR(C, X) paragraph"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -48,7 +111,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "worker",
@@ -64,5 +127,13 @@
   }
  },
  "chapter": "sec-curve-estimates",
- "unit": "sk-prop-h2"
+ "unit": "sk-prop-h2",
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "lem-weil-pbc-semi-representable-covering-permanence",
+  "worker": "stage1",
+  "summary": "Read Stacks 01G4 and its proof, 01G0/01G3 and the proof of 01G1 (fibre products in SR). Rule 0: no slopmaster2 declaration (grep of the id, 'semi-representable', 'SemiRepresentable', '01G4' in WeilConjectures: none); lean_audit none. Proof in four steps: notation (covering = componentwise covering family of X_et, composition law); (1) by the Mathlib leaf lem-weil-pbc-etale-covering-composition plus the reindexing bijection i -> (alpha(i), i) written out (Stacks calls it immediate); (2) fibre product from the Mathlib leaf lem-weil-pbc-semi-representable-finite-limits (2) with X_et's fibre products from def-weil-pbc-etale-site, and the covering property componentwise from the Mathlib leaf lem-weil-pbc-etale-covering-base-change. Statement made precise (not changed in content): (2) now says the fibre product exists and names it as the one of lem-weil-pbc-semi-representable-finite-limits (2), with its index set and projection, so the claim does not depend on a choice of fibre product; stmt_dep lem-weil-pbc-semi-representable-finite-limits added. Stacks proves (1),(2) for SR(C) and transfers to SR(C,X)=SR(C/X); here the site is X_et directly (objects already over X), which is the same thing. No new node; the existing Mathlib searches of the item (three kinds) stand.",
+  "blueprint": "lem-weil-pbc-hypercover-refinement, proof, fourth paragraph: 'Previously chosen faces prescribe compatible boundaries; the matching covers of U lift those boundaries after finite refinement': steps 2 (composition of coverings) and 3-4 (base change of coverings) realize the composition and pullback of the one-simplex coverings used there (via lem-weil-pbc-hypercover-finite-simplex-lifting)."
+ },
+ "reviewed": "2026-10-10 L: 4 steps following 01G4 (componentwise composition via the composition leaf, the fibre product in SR(X) from the finite-limits leaf, base change via the base-change leaf); statement made precise about the fibre product; 0 new nodes"
 }
