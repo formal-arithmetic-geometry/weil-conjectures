@@ -2003,3 +2003,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 16:34 L: returned deliver/G1/lem-weil-pbc-etale-sheaf-clopen-product (reviewer RETURN: 1. D1/D2: new node lem-weil-pbc-etale-sheaf-clopen-gluing and step 2: the new node restates the item's own first clause )
 - 16:34 L: merged deliver/M1/lem-exc-field-sections-stalk-invariants (reviewer FIX; after a return; new nodes: 1)
 - 16:35 L: merged deliver/J1/lem-sc-finite-flat-duality-evaluation (reviewer PASS; after a return; new nodes: 4)
+- 16:35 L: returned deliver/M1/thm-sc-proper-finite-fibre-finite-neighbourhood (reviewer RETURN: 1. B9/C5: new node lem-sc-proper-open-base-change: it restates a fact an existing node of the same unit and chapter alre)
