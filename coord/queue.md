@@ -59,7 +59,6 @@
 | `lem-pc-derived-pullback-tensor-qcoh` | 4011 | none |
 | `lem-pc-projection-locality` | 4011 | none |
 | `lem-pc-zero-scheme-adjunction-base-change` | 4011 | none |
-| `lem-pc-zero-scheme-pullback-full-local-coefficient` | 4011 | none |
 | `lem-pc-flat-base-change-cohom` | 5008 | rests_on_sorry |
 | `lem-pc-picard-functor-agrees-sc` | 5008 | none |
 | `lem-sc-deg-pullback-finite` | 5009 | rests_on_sorry |
@@ -72,8 +71,9 @@
 | `lem-pc-proper-support-perfect-direct-image` | 5011 | none |
 | `thm-pc-semicontinuity-base-change` | 5011 | sorry_here |
 | `def-pc-flat-sheaf-modules` | 5012 | none |
-| `lem-pc-kflat-resolution` | 5012 | none |
-| `def-sp-convergence` | 6002 | none |
+| `lem-pc-kflat-bounded-flat-replacement` | 5013 | none |
+| `lem-pc-kflat-closure` | 5013 | none |
+| `lem-pc-kflat-hocolim-truncations` | 5013 | none |
 | `lem-sp-couple-morphism` | 6002 | none |
 | `lem-sp-kinjective-computes` | 6002 | none |
 | `thm-sp-half-plane-convergence` | 6002 | none |
@@ -927,7 +927,7 @@
 | `lem-weil-pbc-p1-field-dimension-one` | 4 | state |
 | `lem-weil-pbc-projective-space-zero-isomorphism` | 4 | state |
 
-Not open yet: 1339 nodes that wait for a statement dependency, 289 nodes that wait for stage 1.
+Not open yet: 1342 nodes that wait for a statement dependency, 289 nodes that wait for stage 1.
 
 ## Stage 3: modules to prove (0)
 
