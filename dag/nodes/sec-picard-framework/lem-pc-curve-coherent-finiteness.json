@@ -3,7 +3,7 @@
  "blueprint": {
   "is": "lem-pc-curve-coherent-finiteness",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "Coherent cohomology of a smooth projective curve over an algebraically closed field",
@@ -18,18 +18,20 @@
  ],
  "proof": [
   {
-   "text": "By [lem-pc-projective-curve-finite-projection], choose a finite\nmorphism $u:X\\to\\mathbf P^1_k$. If\n$W=\\operatorname{Spec}(R)\\subset\\mathbf P^1_k$ is affine, then\n$u^{-1}(W)=\\operatorname{Spec}(B)$ with $B$ finite over $R$.\nThe restriction of $\\mathcal F$ is $\\widetilde M$ for a finite\n$B$-module $M$: this is the affine characterization of coherence on\nthe locally Noetherian scheme $X$ in\n[pqf-lem-coherent-ft-locnoeth]. Hence $M$ is finite over $R$,\nso $u_*\\mathcal F|_W=\\widetilde M$ is coherent. (The same finite\nmodule calculation on principal opens gives the restriction maps;\nthus no finite-type-over-$R$ module is being mistaken for a finite\n$R$-module.)",
+   "text": "By [def-pc-smooth-projective-curve], $X$ is a projective curve over\n$k$, and $k$, being algebraically closed, is infinite. So by\n[lem-pc-projective-curve-finite-projection] we may choose a finite\n(in particular affine) morphism $u:X\\to\\mathbf P^1_k$. If\n$W=\\operatorname{Spec}(R)\\subset\\mathbf P^1_k$ is affine, then\n$u^{-1}(W)=\\operatorname{Spec}(B)$ with $B$ finite over $R$.\nThe restriction of $\\mathcal F$ is $\\widetilde M$ for a finite\n$B$-module $M$: this is the affine characterization of coherence on\nthe locally Noetherian scheme $X$ in\n[pqf-lem-coherent-ft-locnoeth]. Since $B$ is finite over $R$, the\nfinite set of $B$-generators of $M$ also generates $M$ over $R$. For a\nprincipal open $D(f)\\subset W$, its inverse image is\n$\\operatorname{Spec}(B_f)$ and the sections are $M_f$, with restriction\nmap the usual localization map. Thus $u_*\\mathcal F|_W=\\widetilde M$\nwith $M$ finite over $R$, and these local descriptions show that\n$u_*\\mathcal F$ is coherent.",
    "uses": [
+    "def-pc-smooth-projective-curve",
     "lem-pc-projective-curve-finite-projection",
     "pqf-lem-coherent-ft-locnoeth"
    ],
    "elementary": false
   },
   {
-   "text": "For every affine $W\\subset\\mathbf P^1_k$, its inverse image is affine;\ntherefore higher cohomology of $\\mathcal F$ on $u^{-1}(W)$ vanishes by\n[pqf-lem-affine-vanishing]. The Leray spectral sequence of $u$\nfrom [pqf-lem-leray]\nthen has $R^q u_*\\mathcal F=0$ for $q>0$ and gives canonical\nisomorphisms\n\n$$\nH^i(X,\\mathcal F)\\cong H^i(\\mathbf P^1_k,u_*\\mathcal F).\n$$",
+   "text": "For every affine $W\\subset\\mathbf P^1_k$, its inverse image is affine;\ntherefore higher cohomology of $\\mathcal F$ on $u^{-1}(W)$ vanishes by\n[pqf-lem-affine-vanishing]. On this affine base,\n[lem-pc-cohomology-sections-affine-base] identifies\n$\\Gamma(W,R^q u_*\\mathcal F)$ with\n$H^q(u^{-1}(W),\\mathcal F)$, so these sections vanish for every\n$q>0$ and every affine $W$. Since affine opens form a basis of\n$\\mathbf P^1_k$, $R^q u_*\\mathcal F=0$ for $q>0$. The Leray spectral\nsequence from [pqf-lem-leray] therefore degenerates to canonical\nisomorphisms\n\n$$\nH^i(X,\\mathcal F)\\cong H^i(\\mathbf P^1_k,u_*\\mathcal F).\n$$",
    "uses": [
     "pqf-lem-affine-vanishing",
-    "pqf-lem-leray"
+    "pqf-lem-leray",
+    "lem-pc-cohomology-sections-affine-base"
    ],
    "elementary": false
   },
@@ -43,12 +45,14 @@
   }
  ],
  "proof_deps": [
+  "def-pc-smooth-projective-curve",
   "lem-pc-projective-curve-finite-projection",
   "pqf-lem-coherent-ft-locnoeth",
   "pqf-lem-affine-vanishing",
   "pqf-lem-leray",
   "lem-sc-p1-coherent-finite",
-  "lem-sc-p1-hi-vanishing"
+  "lem-sc-p1-hi-vanishing",
+  "lem-pc-cohomology-sections-affine-base"
  ],
  "proof_origin": {
   "by": "agent",
@@ -57,7 +61,7 @@
  },
  "mathlib_searches": [],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [],
  "blueprint_kind": "lemma",
@@ -136,5 +140,44 @@
   }
  },
  "chapter": "sec-picard-framework",
- "unit": "sk-thm-picard-coherence"
+ "unit": "sk-thm-picard-coherence",
+ "split_report": {
+  "date": "2026-10-11",
+  "item": "lem-pc-curve-coherent-finiteness",
+  "worker": "stage1",
+  "summary": "Checked the imported proof against the finite-projection/Leray/projective-line route and the sorry-free slopmaster2 theorem interface. The three sorry-backed declarations opened by the Lean audit are already represented by existing DAG nodes: affine higher-direct-image comparison by lem-pc-cohomology-sections-affine-base, finite sections/coherence by lem-pc-coherent-hi, and dimension vanishing by lem-sc-noetherian-cohomology-above-dimension. These attachments were added to the relevant proof steps; no new nodes were created.",
+  "blueprint": "The three proof paragraphs realize respectively finite pushforward coherence, Leray comparison after affine acyclicity, and finite-dimensionality/vanishing on the projective line.",
+  "tool_uses": [
+   {
+    "node": "pqf-lem-coherent-ft-locnoeth",
+    "why": "The affine characterization of coherence is imported from the quasi-coherent finite-type unit."
+   },
+   {
+    "node": "pqf-lem-affine-vanishing",
+    "why": "Affine inverse images have vanishing higher cohomology by this generic scheme-cohomology lemma."
+   },
+   {
+    "node": "pqf-lem-leray",
+    "why": "The Leray spectral sequence is a generic derived-functor tool for the pushforward."
+   },
+   {
+    "node": "lem-pc-cohomology-sections-affine-base",
+    "why": "It supplies the affine-base identification of higher-direct-image sections with cohomology used in the Leray step."
+   }
+  ]
+ },
+ "tool_uses": [
+  "pqf-lem-coherent-ft-locnoeth",
+  "pqf-lem-affine-vanishing",
+  "pqf-lem-leray",
+  "lem-pc-cohomology-sections-affine-base"
+ ],
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-ccf3050",
+  "group": "M1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-ccf3050 (reviewer sub-agent of L); spot-checked: Read packet whole; routes via finite projection + Leray + P^1 nodes (merged), no restatement; statement matches citers (euler-char, genus). FIX more, RETURN less: (1) C1/E: Step 1 now cites def-pc-smooth-projective-curve for 'projective curve' and notes alg. closed => infinite, the hypothesis of lem-pc-projective-curve-finite-projection, and finite => affine; (2) C: removed uses lem-pc-coherent-hi (Step 1) and lem-sc-noetherian-cohomology-above-dimension (Step 3), cited but not used in the step text (Lean-audit attachments only), dropped the latter's tool_use; proof_deps/uses_not_cited adjusted.; 1 file(s) fixed by the reviewer"
+ }
 }
