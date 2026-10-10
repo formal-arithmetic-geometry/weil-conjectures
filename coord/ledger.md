@@ -1967,3 +1967,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 16:23 L: lem-sc-torsor-h1: the bijection named in the statement (03AH construction, delta_T(1)); reviewers R-th2/R-tbr
 - 16:24 L: merged deliver/J1/lem-sc-affine-cap-section-open-dictionary (reviewer FIX; after a return; new nodes: 2)
 - 16:24 L: merged deliver/J1/lem-sc-torsor-h1-ext-pushforward (reviewer PASS; first push; new nodes: 0)
+- 16:24 L: returned deliver/J1/lem-sc-finite-flat-duality-evaluation (reviewer RETURN: Reviewer R-ffd3 (branch head 38a431445). Points 2-5 of the 16:09 return are repaired: the finite-duality node is now sta)
