@@ -3,11 +3,11 @@
  "blueprint": {
   "is": "lemma-nagata-qc-open-eq-eventually",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "Eventual equality of descended quasi-compact opens",
- "statement": "For every $\\lambda\\geq\\lambda_{W_1=W_2}$, the inverse images of\n$W_{1,\\lambda_0}$ and $W_{2,\\lambda_0}$ in $Y_\\lambda$ are equal.",
+ "statement": "Fix the base-changed inverse system, opens, affine charts, finite basic-open presentations, transported sections, witness identities, and selected stage $\\lambda_{W_1=W_2}$ constructed in [def-nagata-qc-open-equality-stage]. For every index $\\lambda\\geq\\lambda_{W_1=W_2}$, let $W_{i,\\lambda}$ be the pullback of $W_{i,\\lambda_0}$ to $Y_\\lambda$ (equivalently, the finite union of the transported basic opens on each chart). Then $W_{1,\\lambda}=W_{2,\\lambda}$ as opens of $Y_\\lambda$.",
  "source": {
   "document": "literature/blueprint/master/blueprint/sec-nagata-compactification/sk-prop-nagata-sketch-approximation/lemma-nagata-qc-open-eq-eventually.md",
   "place": "node lemma-nagata-qc-open-eq-eventually, order 350"
@@ -17,20 +17,59 @@
  ],
  "proof": [
   {
-   "text": "Equality of finite unions of basic opens is equivalent, chartwise, to the\ntwo finite lists of radical containments. Each chosen power identity holds\nat its witness stage and at every later stage. Their common upper bound\ntherefore imposes both inclusions on every affine chart, hence equality of\nthe global opens.",
-   "uses": [],
-   "elementary": null
+   "text": "The definition node supplies a finite affine cover and, on each chart, power identities witnessing both radical containments. Every element of the finite set $F$ of the definition is $\\leq\\lambda_{W_1=W_2}=u(F)\\leq\\lambda$ by [lemma-nagata-directed-finite-upper-bound], so $\\lambda$ is above every element of $F$ and, applying the transition ring maps, every identity transports to the $\\lambda$-chart with the pullbacks $f_{ijk,\\lambda}$. If a point lies in $D(f_{1jk,\\lambda})$, the first identity forces at least one $f_{2\\ell k,\\lambda}$ to be nonzero at that point, so $D(f_{1jk,\\lambda})\\subseteq\\bigcup_\\ell D(f_{2\\ell k,\\lambda})$; the second identity gives the reverse inclusion after exchanging $1$ and $2$. Taking the finite unions and then the affine charts gives $W_{1,\\lambda}\\subseteq W_{2,\\lambda}$ and $W_{2,\\lambda}\\subseteq W_{1,\\lambda}$, hence equality.",
+   "uses": [
+    "def-nagata-qc-open-equality-stage",
+    "lemma-nagata-directed-finite-upper-bound"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-nagata-compactification/sk-prop-nagata-sketch-approximation/def-nagata-qc-open-equality-stage.md",
+    "place": "node def-nagata-qc-open-equality-stage, final parenthetical clause"
+   }
   }
  ],
- "proof_deps": [],
+ "proof_deps": [
+  "def-nagata-qc-open-equality-stage",
+  "lemma-nagata-directed-finite-upper-bound"
+ ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/master/blueprint/sec-nagata-compactification/sk-prop-nagata-sketch-approximation/lemma-nagata-qc-open-eq-eventually.md",
   "place": "## Proof"
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "eventual equality of inverse images of quasi-compact opens in an affine inverse system",
+   "results": "AlgebraicGeometry.exists_map_preimage_eq_map_preimage (Mathlib/AlgebraicGeometry/AffineTransitionLimit.lean:294); also exists_map_preimage_le_map_preimage, exists_preimage_eq",
+   "date": "2026-10-11",
+   "verdict": "generalization: gives existence of a stage with equal preimages for compact opens, but not the explicit selected stage from def-nagata-qc-open-equality-stage or its eventual-for-all-later-stages conclusion"
+  },
+  {
+   "tool": "loogle",
+   "query": "IsCompactOpen, Scheme.Open, inverse image equality",
+   "results": "none (parser rejected the supplied pattern)",
+   "date": "2026-10-11",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "quasi.?compact.*open|equality.*stage|eventually in Mathlib/AlgebraicGeometry",
+   "results": "none",
+   "date": "2026-10-11",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "at a sufficiently large stage inverse images of two quasi-compact opens become equal",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-11",
+   "verdict": "unavailable"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [
   "bypassed"
@@ -64,5 +103,21 @@
   }
  },
  "chapter": "sec-nagata-compactification",
- "unit": "sk-prop-nagata-sketch-approximation"
+ "unit": "sk-prop-nagata-sketch-approximation",
+ "split_report": {
+  "date": "2026-10-11",
+  "item": "lemma-nagata-qc-open-eq-eventually",
+  "worker": "stage1",
+  "summary": "Expanded the shorthand statement to identify the data and selected stage constructed by def-nagata-qc-open-equality-stage. The proof checks the two transported power identities chartwise, derives the two basic-open inclusions, and glues the finite chartwise equalities. No new nodes were needed; a related Mathlib theorem was recorded as a non-identical generalization.",
+  "blueprint": "Realizes the proof paragraph asserting that the common upper bound of the finite chartwise power identities imposes both inclusions at every later stage.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-qoe2958",
+  "group": "C1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-qoe2958 (reviewer sub-agent of L); spot-checked: Merged def-nagata-qc-open-equality-stage on sheaf-dag unchanged since base, statement and proof use exactly its data and final parenthetical; chartwise pointwise argument from the power identities (D(f_1)⊆∪D(f_2) and conversely), finite unions over the cover; statement matches use in def-nagata-morphism-descent (covering at lambda_phi). FIX more, RETURN less: (1) C1: the step used i<=u(F) for every i in F (needed because the definition's parenthetical is stated for lambda above every element of F, while the item assumes lambda>=u(F)) without citation; cited lemma-nagata-directed-finite-upper-bound in uses and proof_deps and spelled out the transport. Second reading by C1 missed this.; 1 file(s) fixed by the reviewer"
+ }
 }
