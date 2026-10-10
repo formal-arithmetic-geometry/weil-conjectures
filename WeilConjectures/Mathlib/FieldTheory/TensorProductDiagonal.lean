@@ -177,6 +177,60 @@ noncomputable def isColimitDiagonalCocone : IsColimit (diagonalCocone F E) where
     rw [mul_one] at h
     exact h
 
+variable (F E) in
+/-- The diagram `L ↦ L` of the finite subextensions of `E/F`. -/
+noncomputable def subextDiagram : FiniteSubext F E ⥤ CommRingCat.{u} where
+  obj L := .of L.1
+  map {L L'} f := CommRingCat.ofHom (IntermediateField.inclusion (leOfHom f)).toRingHom
+
+variable (F E) in
+/-- `E` as a cocone over its finite subextensions. -/
+noncomputable def subextCocone : Cocone (subextDiagram F E) where
+  pt := .of E
+  ι := { app L := CommRingCat.ofHom (algebraMap L.1 E) }
+
+/-- In a cocone over the finite subextensions, the image of `x ∈ L` does not depend on `L`. -/
+lemma subextCocone_aux (s : Cocone (subextDiagram F E)) (L : FiniteSubext F E) (x : L.1) :
+    (s.ι.app (FiniteSubext.adjoin (x : E))).hom
+      ⟨x, IntermediateField.mem_adjoin_simple_self F (x : E)⟩ = (s.ι.app L).hom x := by
+  obtain ⟨M, hLM, hxM⟩ :=
+    @directed_of (FiniteSubext F E) (· ≤ ·) (FiniteSubext.instIsDirected F E) L
+      (FiniteSubext.adjoin (x : E))
+  exact (ConcreteCategory.congr_hom (s.w (homOfLE hxM))
+    ⟨x, IntermediateField.mem_adjoin_simple_self F (x : E)⟩).symm.trans
+    (ConcreteCategory.congr_hom (s.w (homOfLE hLM)) x)
+
+/-- **`E` is the filtered colimit of its finite subextensions**, for `E/F` algebraic. -/
+noncomputable def isColimitSubextCocone : IsColimit (subextCocone F E) where
+  desc s := CommRingCat.ofHom
+    { toFun x := (s.ι.app (FiniteSubext.adjoin x)).hom
+        ⟨x, IntermediateField.mem_adjoin_simple_self F x⟩
+      map_one' := (subextCocone_aux s ⟨⊥, inferInstance⟩ 1).trans (map_one _)
+      map_mul' x y := by
+        obtain ⟨M, hM₁, hM₂⟩ := @directed_of (FiniteSubext F E) (· ≤ ·)
+          (FiniteSubext.instIsDirected F E) (FiniteSubext.adjoin x) (FiniteSubext.adjoin y)
+        have hx : x ∈ M.1 := hM₁ (IntermediateField.mem_adjoin_simple_self F x)
+        have hy : y ∈ M.1 := hM₂ (IntermediateField.mem_adjoin_simple_self F y)
+        exact (subextCocone_aux s M ⟨x * y, mul_mem hx hy⟩).trans
+          ((map_mul (s.ι.app M).hom (⟨x, hx⟩ : M.1) ⟨y, hy⟩).trans (congrArg₂ (· * ·)
+            (subextCocone_aux s M ⟨x, hx⟩).symm (subextCocone_aux s M ⟨y, hy⟩).symm))
+      map_zero' := (subextCocone_aux s ⟨⊥, inferInstance⟩ 0).trans (map_zero _)
+      map_add' x y := by
+        obtain ⟨M, hM₁, hM₂⟩ := @directed_of (FiniteSubext F E) (· ≤ ·)
+          (FiniteSubext.instIsDirected F E) (FiniteSubext.adjoin x) (FiniteSubext.adjoin y)
+        have hx : x ∈ M.1 := hM₁ (IntermediateField.mem_adjoin_simple_self F x)
+        have hy : y ∈ M.1 := hM₂ (IntermediateField.mem_adjoin_simple_self F y)
+        exact (subextCocone_aux s M ⟨x + y, add_mem hx hy⟩).trans
+          ((map_add (s.ι.app M).hom (⟨x, hx⟩ : M.1) ⟨y, hy⟩).trans (congrArg₂ (· + ·)
+            (subextCocone_aux s M ⟨x, hx⟩).symm (subextCocone_aux s M ⟨y, hy⟩).symm)) }
+  fac s L := by
+    refine CommRingCat.hom_ext (RingHom.ext fun x ↦ ?_)
+    exact subextCocone_aux s L x
+  uniq s m hm := by
+    refine CommRingCat.hom_ext (RingHom.ext fun (x : E) ↦ ?_)
+    exact (ConcreteCategory.congr_hom (hm (FiniteSubext.adjoin x))
+      ⟨x, IntermediateField.mem_adjoin_simple_self F x⟩)
+
 end Colimit
 
 end IntermediateField
