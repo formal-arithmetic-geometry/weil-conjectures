@@ -1430,3 +1430,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 12:40 L: accepted lem-weil-pbc-sr-matching-object-one-member: 6 steps, new Mathlib leaf lem-weil-pbc-finite-limits-from-terminal-pullbacks and new node lem-weil-pbc-matching-object-proper-faces (0186, injective maps)
 - 12:40 L: accepted def-pc-smooth-projective-curve: definition, deps def-pc-curve/def-pc-projective-morphism/def-sbc-smooth-morphisms; def-sc-general-curve flagged (no dimension condition)
 - 2026-10-10, delivery of G1: lem-weil-pbc-triangular-change-of-basis merged from deliver/G1/lem-weil-pbc-triangular-change-of-basis (1 commit(s), 0 new node(s), spot-checked by L: L: 4 elementary steps (coordinate map, triangular solving in both orientations, independence by the unit diagonal) checked against 00MT); claim closed
+- 12:41 L: merged deliver/G1/lem-weil-pbc-triangular-change-of-basis (4 elementary steps, 00MT)
