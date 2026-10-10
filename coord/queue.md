@@ -2,7 +2,7 @@
 
 862 items; claim with `tools/claim.py next <group> [--stage N]`.
 
-## Stage 1: nodes to split (404)
+## Stage 1: nodes to split (403)
 
 | node | distance to a target | Lean state on the done branch |
 |---|---|---|
@@ -64,7 +64,6 @@
 | `def-weil-pbc-etale-cohomology` | 3003 | none |
 | `def-weil-pbc-strict-henselization-limit` | 3003 | none |
 | `prop-weil-pbc-strict-henselization-stalk-formula` | 3003 | none |
-| `def-pc-field-tower` | 3004 | none |
 | `def-sc-constant-sheaves` | 3004 | none |
 | `def-weil-pbc-curve-setting` | 3004 | none |
 | `def-weil-pbc-pointed-etale-neighbourhoods` | 3004 | none |
@@ -411,7 +410,7 @@
 | `def-exc-jacobian-presentation` | - | none |
 | `lem-zl-noether-normalization-dimension` | - | none |
 
-## Stage 2: nodes to state (458)
+## Stage 2: nodes to state (459)
 
 | node | distance to Mathlib | kind |
 |---|---|---|
@@ -421,6 +420,7 @@
 | `def-nagata-homogeneous-localization-degree-zero` | 1 | state |
 | `def-nagata-rees-algebra` | 1 | state |
 | `def-nagata-relative-affine-space` | 1 | state |
+| `def-pc-field-tower` | 1 | state |
 | `def-pc-kflat-complex` | 1 | state |
 | `def-pc-standard-graded-algebra` | 1 | state |
 | `def-pc-zero-scheme` | 1 | state |
@@ -874,7 +874,7 @@
 | `lem-weil-pbc-p1-field-dimension-one` | 4 | state |
 | `lem-weil-pbc-projective-space-zero-isomorphism` | 4 | state |
 
-Not open yet: 420 nodes that wait for stage 1, 846 nodes that wait for a statement dependency.
+Not open yet: 419 nodes that wait for stage 1, 846 nodes that wait for a statement dependency.
 
 ## Stage 3: modules to prove (0)
 
