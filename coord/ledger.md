@@ -2168,3 +2168,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 17:47 L: merged deliver/E1/lem-pc-structure-pushforward (reviewer FIX; first push; new nodes: 0)
 - 17:47 L: merged deliver/C1/lem-pc-f-open-subfunctor (reviewer FIX; first push; new nodes: 0)
 - 17:49 L: merged deliver/H1/lem-pd-degree-locally-constant (reviewer PASS; first push; new nodes: 0)
+- 17:50 L: merged deliver/G1/lem-sc-smooth-omega-finite-locally-free (reviewer PASS; first push; new nodes: 0)

@@ -24,20 +24,73 @@
   "def-weil-pbc-kahler-differentials",
   "def-amb-finite-locally-free-module"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Fix a point x in X. Since f is smooth of relative dimension d, the definition [def-sbc-smooth-morphisms] gives dim_x(X_{f(x)}) = d. Apply [lem-weil-pbc-smooth-differentials-free-rank-fibre-dimension] to f and x. It supplies affine opens V = Spec R in S and W = Spec A in X with x in W and f(W) contained in V such that the Kähler differential module Omega_{A/R} is free of rank dim_x(X_{f(x)}), hence free of rank d.",
+   "uses": [
+    "def-sbc-smooth-morphisms",
+    "lem-weil-pbc-smooth-differentials-free-rank-fibre-dimension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Morphisms, Lemma 02G1 (lemma-smooth-omega-finite-locally-free), statement and proof on affine neighbourhoods"
+   }
+  },
+  {
+   "text": "On each affine neighbourhood W = Spec A obtained in step 1, the definition of Omega^1_{X/S} in the item identifies its restriction with the sheaf associated to Omega_{A/R}. Since Omega_{A/R} is free of rank d, that associated sheaf is O_W^{oplus d}. Thus every point of X has an open neighbourhood on which Omega^1_{X/S} is O^{oplus d}, which is exactly locally free of constant rank d by [def-amb-finite-locally-free-module].",
+   "uses": [
+    "def-amb-finite-locally-free-module"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Morphisms, Lemma 02G1 (lemma-smooth-omega-finite-locally-free), local affine description of Omega_{X/S}"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sbc-smooth-morphisms",
+  "lem-weil-pbc-smooth-differentials-free-rank-fibre-dimension",
+  "def-amb-finite-locally-free-module"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/morphisms.tex",
+  "place": "Morphisms, Lemma 02G1 (lemma-smooth-omega-finite-locally-free), statement and affine-local proof"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
    "query": "sheaf of relative differentials of a smooth morphism of schemes is finite locally free of rank equal to relative dimension",
-   "results": "Algebra.FormallySmooth.instFinitePresentationKaehlerDifferentialOfEssFiniteType, Algebra.IsStandardSmooth.free_kaehlerDifferential (ring level, no rank), AlgebraicGeometry.isSmoothOfRelativeDimension_iff; no scheme-level sheaf of differentials",
-   "date": "2026-10-10",
+   "results": "Algebra.FormallySmooth.instFinitePresentationKaehlerDifferentialOfEssFiniteType; Algebra.IsStandardSmooth.free_kaehlerDifferential; AlgebraicGeometry.isSmoothOfRelativeDimension_iff; no scheme-level sheaf theorem",
+   "date": "2026-10-11",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "Smooth, KaehlerDifferential, Module.Free",
+   "results": "no results; query reported unknown identifier Smooth",
+   "date": "2026-10-11",
    "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "relativeDifferentials|KaehlerDifferential|finite locally free in Mathlib/AlgebraicGeometry",
+   "results": "no matches in the requested Mathlib/AlgebraicGeometry directory",
+   "date": "2026-10-11",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "sheaf of relative differentials of a smooth morphism is locally free of constant rank equal to the relative dimension",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-11",
+   "verdict": "unavailable"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "R-srd1706",
@@ -53,5 +106,29 @@
   "slopmaster2": {
    "state": "none"
   }
+ },
+ "split_report": {
+  "date": "2026-10-11",
+  "item": "lem-sc-smooth-omega-finite-locally-free",
+  "worker": "stage1",
+  "summary": "Used the existing stronger affine-local node lem-weil-pbc-smooth-differentials-free-rank-fibre-dimension rather than creating a duplicate. Its free-module conclusion, together with the definition of smooth relative dimension and the item's affine description of the sheaf of differentials, gives a local O^{oplus d} trivialization at every point. The second step is elementary unpacking of the associated-sheaf definition.",
+  "blueprint": "Realizes the imported proof sentence for Lemma 02G1: Omega_{X/S} is finite locally free and its pointwise rank equals the fibre dimension; the affine-local realization is supplied by lem-weil-pbc-smooth-differentials-free-rank-fibre-dimension.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-smooth-differentials-free-rank-fibre-dimension",
+    "why": "Its statement is the needed affine-local freeness and rank computation for Kähler differentials; the Picard-duality unit has no more specific replacement for this generic smoothness lemma."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-smooth-differentials-free-rank-fibre-dimension"
+ ],
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-sol1750",
+  "group": "G1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-sol1750 (reviewer sub-agent of L); spot-checked: Step 1: def-sbc-smooth-morphisms gives dim_x(X_{f(x)})=d at every x; lem-weil-pbc-smooth-differentials-free-rank-fibre-dimension (smooth f, point x) gives affine W∋x, V with Omega_{A/R} free of rank that dimension: hypotheses match (C4). Step 2 elementary: ~(A^d)=O_W^d, cover of X, def-amb-finite-locally-free-module. No cycle (cited lemma is pre-existing, not from this item). No new nodes. Mathlib grep of AlgebraicGeometry: no scheme-level sheaf of Kaehler differentials or rank statement, so no leaf. Second reading: no missed fault."
  }
 }
