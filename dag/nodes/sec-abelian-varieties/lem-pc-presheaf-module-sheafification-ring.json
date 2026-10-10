@@ -1,0 +1,76 @@
+{
+ "id": "lem-pc-presheaf-module-sheafification-ring",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "def-pc-base-change",
+   "place": "statement, module base-change clause: 'the base change of a module F on X_T is F_{T'} = g_X^* F''; within it the inverse-image module structure (Stacks 008X) and the first equality of the inverse-image/direct-image module adjunction (Stacks 008Y), both by sheafification of presheaves of modules over a presheaf of rings (Stacks 0089)",
+   "via": [
+    "lem-pc-module-inverse-image-adjunction",
+    "lem-pc-module-pullback-adjunction",
+    "def-pc-module-pullback"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Sheafification of a presheaf of modules over a presheaf of rings",
+ "statement": "Let $X$ be a topological space, and consider presheaves and sheaves on the open subsets of $X$, a family of opens covering $U$ when its union is $U$. Let $\\mathcal O$ be a presheaf of commutative rings on $X$ with sheafification $\\theta_{\\mathcal O}:\\mathcal O\\to\\mathcal O^\\#$ as a presheaf of commutative rings [def-weil-pbc-sheafification], and let $\\mathcal P$ be a presheaf of $\\mathcal O$-modules [def-weil-presheaf-modules-sheafification], with sheafification $\\theta_{\\mathcal P}:\\mathcal P\\to\\mathcal P^\\#$ as a presheaf of abelian groups. Then there is a structure of sheaf of $\\mathcal O^\\#$-modules [def-weil-sheaf-of-modules-category] on the abelian sheaf $\\mathcal P^\\#$ such that $\\theta_{\\mathcal P}$ is semilinear over $\\theta_{\\mathcal O}$: $\\theta_{\\mathcal P,U}(ax)=\\theta_{\\mathcal O,U}(a)\\,\\theta_{\\mathcal P,U}(x)$ for $U\\subseteq X$ open, $a\\in\\mathcal O(U)$, $x\\in\\mathcal P(U)$; that is, $\\theta_{\\mathcal P}$ is a morphism of presheaves of $\\mathcal O$-modules into $\\mathcal P^\\#$ regarded as an $\\mathcal O$-module through $\\theta_{\\mathcal O}$. Moreover, for every sheaf of $\\mathcal O^\\#$-modules $\\mathcal N$, regarded as a presheaf of $\\mathcal O$-modules through $\\theta_{\\mathcal O}$, every morphism of presheaves of $\\mathcal O$-modules $\\varphi:\\mathcal P\\to\\mathcal N$ factors uniquely as $\\varphi=\\bar\\varphi\\circ\\theta_{\\mathcal P}$ with $\\bar\\varphi:\\mathcal P^\\#\\to\\mathcal N$ a morphism of sheaves of $\\mathcal O^\\#$-modules; $\\bar\\varphi$ is the morphism of abelian sheaves given by the universal property of $\\theta_{\\mathcal P}$. Hence $\\varphi\\mapsto\\bar\\varphi$ is a bijection $\\operatorname{Hom}_{\\mathrm{PMod}(\\mathcal O)}(\\mathcal P,\\mathcal N)\\cong\\operatorname{Hom}_{\\Mod(\\mathcal O^\\#)}(\\mathcal P^\\#,\\mathcal N)$, natural in $\\mathcal P$ and $\\mathcal N$ (a morphism $\\mathcal P\\to\\mathcal P'$ of presheaves of $\\mathcal O$-modules giving its sheafification, an $\\mathcal O^\\#$-linear map).",
+ "source": {
+  "document": "literature/stacks-project/sheaves.tex",
+  "place": "Tag 0089, lemma-sheafification-presheaf-modules (line 1825; proof 'Omitted'), and the adjunction formula after it"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-sheafification",
+  "def-weil-presheaf-modules-sheafification",
+  "def-weil-sheaf-of-modules-category"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "sheafification of a presheaf of modules over a presheaf of rings is a sheaf of modules over the sheafified ring, left adjoint",
+   "results": "PresheafOfModules.sheafify, PresheafOfModules.sheafifyMap, PresheafOfModules.toSheafify (Mathlib.Algebra.Category.ModuleCat.Presheaf.Sheafify); PresheafOfModules.sheafification, PresheafOfModules.sheafificationAdjunction, instIsLeftAdjointSheafOfModulesSheafification (Mathlib.Algebra.Category.ModuleCat.Presheaf.Sheafification)",
+   "date": "2026-10-10",
+   "verdict": "match: PresheafOfModules.sheafification with α = toSheafify"
+  },
+  {
+   "tool": "loogle",
+   "query": "PresheafOfModules.sheafificationAdjunction",
+   "results": "PresheafOfModules.sheafificationAdjunction : sheafification α ⊣ SheafOfModules.forget R ⋙ restrictScalars α (for α : R₀ ⟶ R.obj locally injective and locally surjective); toPresheaf_map_sheafificationAdjunction_unit_app (unit underlies toSheafify J M₀.presheaf); toSheaf_map_sheafificationAdjunction_counit_app; sheafificationAdjunction_homEquiv_apply (module Mathlib.Algebra.Category.ModuleCat.Presheaf.Sheafification)",
+   "date": "2026-10-10",
+   "verdict": "match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -n 'def sheafification \\|def sheafificationCompToSheaf\\|def sheafificationAdjunction\\|lemma toPresheaf_map_sheafificationAdjunction_unit_app' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/Algebra/Category/ModuleCat/Presheaf/Sheafification.lean; grep -rn 'isLocallyInjective_toSheafify\\|isLocallySurjective_toSheafify\\|WEqualsLocallyBijective' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/CategoryTheory/Sites/",
+   "results": "Sheafification.lean:54 sheafification (obj M₀ := sheafify α (toSheafify J M₀.presheaf)), :72 sheafificationCompToSheaf (Iso.refl: underlying abelian sheaf = presheafToSheaf of the underlying abelian presheaf), :125 sheafificationAdjunction, :145 toPresheaf_map_sheafificationAdjunction_unit_app; Sites/LocallyInjective.lean:195 isLocallyInjective_toSheafify', Sites/LocallySurjective.lean:308 isLocallySurjective_toSheafify' (concrete categories such as RingCat), Sites/LocallyBijective.lean:153 instance WEqualsLocallyBijective for concrete categories (AddCommGrpCat)",
+   "date": "2026-10-10",
+   "verdict": "match"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "PresheafOfModules.sheafificationAdjunction",
+  "file": "Mathlib/Algebra/Category/ModuleCat/Presheaf/Sheafification.lean",
+  "how": "specializes in one line, one declaration per clause, for C = Opens X, J = Opens.grothendieckTopology X, R₀ = O (composed with forget₂ CommRingCat RingCat), R = the ring sheafification and α = toSheafify J R₀ (locally injective and surjective by the instances isLocallyInjective_toSheafify' at CategoryTheory/Sites/LocallyInjective.lean:195 and isLocallySurjective_toSheafify' at CategoryTheory/Sites/LocallySurjective.lean:308; J.WEqualsLocallyBijective AddCommGrpCat by the instance at CategoryTheory/Sites/LocallyBijective.lean:153): the sheaf of O^#-modules is (sheafification α).obj P (line 54), whose underlying abelian sheaf is the abelian sheafification of P by sheafificationCompToSheaf (line 72, Iso.refl); the semilinearity of θ_P and the unique factorization are the adjunction sheafificationAdjunction α : sheafification α ⊣ SheafOfModules.forget R ⋙ restrictScalars α (line 125), whose unit has underlying map toSheafify J P.presheaf = θ_P (toPresheaf_map_sheafificationAdjunction_unit_app, line 145)"
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-pc-module-inverse-image-adjunction",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-abelian-varieties",
+ "unit": "sk-def-av-jacobian"
+}

@@ -1390,3 +1390,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 2026-10-10, delivery of E1: lem-weil-pbc-dimension-inequality-quasi-finite merged from deliver/E1/lem-weil-pbc-dimension-inequality-quasi-finite (1 commit(s), 0 new node(s), spot-checked by L: L: 00QF via Zariski's main theorem (the integral closure T with S_q = T_q'), incomparability for chains in T, localization dimension; 0 new); claim closed
 - 12:18 L: merged E1 lem-weil-pbc-dimension-inequality-quasi-finite (00QF, 0 new).
 - 12:18 L: accepted lem-sc-divisor-class-curve (0BE9/0BE8, 6 steps; 2 new nodes; 1 tool use; blueprint sign slip in the injectivity noted).
+- 12:19 L: accepted lem-pc-module-inverse-image-adjunction (008Y, 4 steps; new nodes: presheaf module adjunction 008T/008U, sheafification of presheaves of modules 0089 as a Mathlib leaf).

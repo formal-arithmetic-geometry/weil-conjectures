@@ -1,0 +1,72 @@
+{
+ "id": "lem-pc-presheaf-module-inverse-image-adjunction",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "def-pc-base-change",
+   "place": "statement, module base-change clause: 'the base change of a module F on X_T is F_{T'} = g_X^* F''; within it the inverse-image/direct-image adjunction for modules (Stacks 008Y), whose second equality is this presheaf-level adjunction (Stacks 008U)",
+   "via": [
+    "lem-pc-module-inverse-image-adjunction",
+    "lem-pc-module-pullback-adjunction",
+    "def-pc-module-pullback"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Presheaf inverse image of modules is left adjoint to direct image",
+ "statement": "Let $f:X\\to Y$ be a continuous map of topological spaces, $\\mathcal O$ a presheaf of commutative rings on $Y$, and let $f_p$, $f_*$ and the unit $i_{\\mathcal G}:\\mathcal G\\to f_*f_p\\mathcal G$ of the adjunction $f_p\\dashv f_*$ on presheaves of sets, abelian groups and commutative rings be as in [def-weil-pbc-topological-inverse-image] (2), with $f_p\\mathcal G(U)=\\varinjlim_{V\\supseteq f(U)}\\mathcal G(V)$ and coprojections $\\iota^U_V$. (1) For a presheaf of $\\mathcal O$-modules $\\mathcal G$ on $Y$ [def-weil-presheaf-modules-sheafification], there is a unique map $f_p\\mathcal O(U)\\times f_p\\mathcal G(U)\\to f_p\\mathcal G(U)$ for every open $U\\subseteq X$ with $\\iota^U_V(a)\\cdot\\iota^U_V(g)=\\iota^U_V(ag)$ for all $V\\supseteq f(U)$, $a\\in\\mathcal O(V)$, $g\\in\\mathcal G(V)$; it makes the presheaf of abelian groups $f_p\\mathcal G$ a presheaf of $f_p\\mathcal O$-modules, and for a morphism of presheaves of $\\mathcal O$-modules $u$, $f_pu$ is $f_p\\mathcal O$-linear. (2) For a presheaf of $f_p\\mathcal O$-modules $\\mathcal F$ on $X$, the presheaf of abelian groups $f_*\\mathcal F$, $V\\mapsto\\mathcal F(f^{-1}V)$, is a presheaf of $\\mathcal O$-modules with $a\\in\\mathcal O(V)$ acting on $\\mathcal F(f^{-1}V)$ through $i_{\\mathcal O,V}(a)\\in f_p\\mathcal O(f^{-1}V)$; for a morphism of presheaves of $f_p\\mathcal O$-modules $w$, $f_*w$ is $\\mathcal O$-linear. (3) The bijection $\\operatorname{Hom}_{\\mathrm{PAb}(X)}(f_p\\mathcal G,\\mathcal F)\\cong\\operatorname{Hom}_{\\mathrm{PAb}(Y)}(\\mathcal G,f_*\\mathcal F)$, $\\psi\\mapsto f_*\\psi\\circ i_{\\mathcal G}$, of the adjunction $f_p\\dashv f_*$ on presheaves of abelian groups maps the $f_p\\mathcal O$-linear morphisms exactly onto the $\\mathcal O$-linear ones, and so restricts to a bijection $\\operatorname{Hom}_{\\mathrm{PMod}(f_p\\mathcal O)}(f_p\\mathcal G,\\mathcal F)\\cong\\operatorname{Hom}_{\\mathrm{PMod}(\\mathcal O)}(\\mathcal G,f_*\\mathcal F)$, natural in $\\mathcal G$ and $\\mathcal F$.",
+ "source": {
+  "document": "literature/stacks-project/sheaves.tex",
+  "place": "Tag 008T, lemma-pullback-presheaf-module (line 2727), for (1); Tag 008S, lemma-pushforward-presheaf-module (line 2693), for the f_*f_pO-module structure in (2); Tag 008U, lemma-adjoint-push-pull-presheaves-modules (line 2782), for (3), whose proof leaves to the reader that i_G and c_F are module maps"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-topological-inverse-image",
+  "def-weil-presheaf-modules-sheafification"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "presheaf inverse image of a presheaf of modules is a module over the inverse image presheaf of rings, adjoint to pushforward",
+   "results": "AlgebraicGeometry.Scheme.Modules.pullbackPushforwardAdjunction (Mathlib.AlgebraicGeometry.Modules.Sheaf); TopCat.Presheaf.pushforwardPullbackAdjunction (Mathlib.Topology.Sheaves.Presheaf, presheaves with values in one category C, no modules); SheafOfModules.pullbackPushforwardAdjunction, SheafOfModules.PullbackConstruction.adjunction, SheafOfModules.pullback (Mathlib.Algebra.Category.ModuleCat.Sheaf.PullbackContinuous)",
+   "date": "2026-10-10",
+   "verdict": "no match: the module pullbacks are abstract left adjoints of pushforward along a ring map, not f_pG with the colimit module structure"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "pullback of presheaf of modules along continuous map computed as colimit over open neighbourhoods of image, left adjoint to pushforward",
+   "results": "PresheafOfModules.pullback and PresheafOfModules.pullbackPushforwardAdjunction (Mathlib.Algebra.Category.ModuleCat.Presheaf.Pullback, pullback defined at line 44 as (pushforward φ).leftAdjoint), SheafOfModules.pullback, TopCat.Presheaf.pushforwardPullbackAdjunction",
+   "date": "2026-10-10",
+   "verdict": "no match: PresheafOfModules.pullback φ is the abstract left adjoint; identifying it, for φ = i_O : O -> f_* f_pO, with f_pG and its colimit module structure is itself this lemma (candidate for stage 2, delivery-errors B8)"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rln 'PresheafOfModules.pullback\\|pullbackObj' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib; grep -n 'def ' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/Algebra/Category/ModuleCat/Presheaf/Pullback.lean; grep -n 'pullbackObj' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/Topology/Sheaves/Presheaf.lean",
+   "results": "Presheaf/Pullback.lean:44 pullback (left adjoint), :50 pullbackPushforwardAdjunction, :117 pullbackId, :131 pullbackComp; Sheaf/PullbackContinuous.lean, Sheaf/PullbackFree.lean use it; Topology/Sheaves/Presheaf.lean:313 pullbackObjObjOfImageOpen, :370 pullbackObjIso (open maps, single-category presheaves); no colimit description of the module pullback",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "mathlib_candidate": "PresheafOfModules.pullbackPushforwardAdjunction (Mathlib/Algebra/Category/ModuleCat/Presheaf/Pullback.lean:50) for φ = i_O, once its pullback is identified with f_pG",
+ "status": "unsplit",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-pc-module-inverse-image-adjunction",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-abelian-varieties",
+ "unit": "sk-def-av-jacobian"
+}

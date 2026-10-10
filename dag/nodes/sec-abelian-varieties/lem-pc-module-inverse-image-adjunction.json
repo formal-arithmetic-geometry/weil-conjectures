@@ -5,31 +5,144 @@
   "from": {
    "node": "def-pc-base-change",
    "place": "statement, module base-change clause: 'the base change of a module F on X_T is F_{T'} = g_X^* F'; the inverse-image/direct-image step in the adjunction for that pullback",
-   "via": ["lem-pc-module-pullback-adjunction", "def-pc-module-pullback"]
+   "via": [
+    "lem-pc-module-pullback-adjunction",
+    "def-pc-module-pullback"
+   ]
   },
   "same_as": []
  },
  "kind": "statement",
  "title": "Inverse image of module sheaves is left adjoint to direct image",
- "statement": "Let $f:X\\to Y$ be a continuous map of topological spaces, $\\mathcal A$ a sheaf of commutative rings on $Y$, $\\mathcal M$ a sheaf of $\\mathcal A$-modules, and $\\mathcal N$ a sheaf of $f^{-1}\\mathcal A$-modules on $X$ [def-weil-sheaf-of-modules-category]. The inverse-image sheaf $f^{-1}\\mathcal M$ [def-weil-pbc-topological-inverse-image] is an $f^{-1}\\mathcal A$-module by the inverse image of the action on $\\mathcal M$. The direct-image sheaf $f_*\\mathcal N$, whose sections over $V\\subseteq Y$ are $\\mathcal N(f^{-1}V)$, is an $\\mathcal A$-module through the unit $\\eta_{\\mathcal A}:\\mathcal A\\to f_*f^{-1}\\mathcal A$. The inverse-image/direct-image adjunction for abelian sheaves restricts to a natural bijection $\\operatorname{Hom}_{f^{-1}\\mathcal A}(f^{-1}\\mathcal M,\\mathcal N)\\cong\\operatorname{Hom}_{\\mathcal A}(\\mathcal M,f_*\\mathcal N)$.",
+ "statement": "Let $f:X\\to Y$ be a continuous map of topological spaces, $\\mathcal A$ a sheaf of commutative rings on $Y$, $\\mathcal M$ a sheaf of $\\mathcal A$-modules, and $\\mathcal N$ a sheaf of $f^{-1}\\mathcal A$-modules on $X$ [def-weil-sheaf-of-modules-category]. Let $f_p$, $f^{-1}=(f_p-)^\\#$ with sheafification maps $\\theta$, the unit $i$ of $f_p\\dashv f_*$ on presheaves and the unit $\\eta_{\\mathcal A}=f_*(\\theta_{\\mathcal A})\\circ i_{\\mathcal A}:\\mathcal A\\to f_*f^{-1}\\mathcal A$ be as in [def-weil-pbc-topological-inverse-image]. The inverse-image sheaf $f^{-1}\\mathcal M$ is a sheaf of $f^{-1}\\mathcal A$-modules: it is the sheafification of the presheaf of $f_p\\mathcal A$-modules $f_p\\mathcal M$ of [lem-pc-presheaf-module-inverse-image-adjunction] (1), with the $f^{-1}\\mathcal A=(f_p\\mathcal A)^\\#$-module structure of [lem-pc-presheaf-module-sheafification-ring], the one for which $\\theta_{\\mathcal M}:f_p\\mathcal M\\to f^{-1}\\mathcal M$ is semilinear over $\\theta_{\\mathcal A}$. The direct-image sheaf $f_*\\mathcal N$, whose sections over $V\\subseteq Y$ are $\\mathcal N(f^{-1}V)$, is an $\\mathcal A$-module through $\\eta_{\\mathcal A}$ ($a\\in\\mathcal A(V)$ acts by $\\eta_{\\mathcal A,V}(a)\\in f^{-1}\\mathcal A(f^{-1}V)$). Then the inverse-image/direct-image adjunction bijection $\\operatorname{Hom}_{\\mathrm{Ab}(X)}(f^{-1}\\mathcal M,\\mathcal N)\\cong\\operatorname{Hom}_{\\mathrm{Ab}(Y)}(\\mathcal M,f_*\\mathcal N)$ of abelian sheaves restricts to a bijection $\\operatorname{Hom}_{f^{-1}\\mathcal A}(f^{-1}\\mathcal M,\\mathcal N)\\cong\\operatorname{Hom}_{\\mathcal A}(\\mathcal M,f_*\\mathcal N)$, natural in $\\mathcal M$ and $\\mathcal N$.",
  "source": {
   "document": "literature/stacks-project/sheaves.tex",
   "place": "Tag 008Y, lemma-adjoint-push-pull-modules (line 2933), with Tag 008X, lemma-pullback-module (line 2896), for the inverse-image module structure"
  },
- "stmt_deps": ["def-weil-sheaf-of-modules-category", "def-weil-pbc-topological-inverse-image"],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "stmt_deps": [
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-pbc-topological-inverse-image",
+  "lem-pc-presheaf-module-inverse-image-adjunction",
+  "lem-pc-presheaf-module-sheafification-ring"
+ ],
+ "proof": [
+  {
+   "text": "*Step 1 (the presheaf module structures).* By [lem-pc-presheaf-module-inverse-image-adjunction] (1) applied to the presheaf of rings $\\mathcal O=\\mathcal A$ and the presheaf of $\\mathcal A$-modules $\\mathcal M$, $f_p\\mathcal M$ is a presheaf of $f_p\\mathcal A$-modules, functorially in $\\mathcal M$. By [lem-pc-presheaf-module-sheafification-ring] applied on $X$ to the presheaf of rings $f_p\\mathcal A$ and $\\mathcal P=f_p\\mathcal M$, its abelian sheafification $f^{-1}\\mathcal M=(f_p\\mathcal M)^\\#$ [def-weil-pbc-topological-inverse-image] (3) is a sheaf of $(f_p\\mathcal A)^\\#=f^{-1}\\mathcal A$-modules with $\\theta_{\\mathcal M}$ semilinear over $\\theta_{\\mathcal A}$ (here $f^{-1}\\mathcal A$ is the sheafification of $f_p\\mathcal A$ as a presheaf of commutative rings, (3) of that definition with values in commutative rings); for $u:\\mathcal M\\to\\mathcal M'$ $\\mathcal A$-linear, $f^{-1}u$ is the sheafification of the $f_p\\mathcal A$-linear $f_pu$, hence $f^{-1}\\mathcal A$-linear by the naturality in that lemma. This is the module structure of the statement (Stacks 008X).",
+   "uses": [
+    "lem-pc-presheaf-module-inverse-image-adjunction",
+    "lem-pc-presheaf-module-sheafification-ring",
+    "def-weil-pbc-topological-inverse-image"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sheaves.tex",
+    "place": "Tag 008X, lemma-pullback-module, proof: 'f^{-1} is the composition of f_p and sheafification; combination of 008T and 0089'"
+   }
+  },
+  {
+   "text": "*Step 2 (first equality of 008Y).* Regard $\\mathcal N$ as a presheaf of $f_p\\mathcal A$-modules $\\mathcal N_0$ through $\\theta_{\\mathcal A}:f_p\\mathcal A\\to f^{-1}\\mathcal A$ (sectionwise restriction of scalars; a sheaf of $f^{-1}\\mathcal A$-modules is in particular a presheaf of modules [def-weil-sheaf-of-modules-category]). By the universal property of [lem-pc-presheaf-module-sheafification-ring] with $\\mathcal P=f_p\\mathcal M$, composition with $\\theta_{\\mathcal M}$ is a bijection $\\operatorname{Hom}_{f^{-1}\\mathcal A}(f^{-1}\\mathcal M,\\mathcal N)\\cong\\operatorname{Hom}_{\\mathrm{PMod}(f_p\\mathcal A)}(f_p\\mathcal M,\\mathcal N_0)$, natural in $\\mathcal M$ and $\\mathcal N$; on underlying morphisms of abelian (pre)sheaves it is $\\alpha\\mapsto\\alpha\\circ\\theta_{\\mathcal M}$, the restriction of the bijection $\\operatorname{Hom}_{\\mathrm{Ab}(X)}(f^{-1}\\mathcal M,\\mathcal N)\\cong\\operatorname{Hom}_{\\mathrm{PAb}(X)}(f_p\\mathcal M,\\mathcal N)$ of abelian sheafification [def-weil-pbc-sheafification].",
+   "uses": [
+    "lem-pc-presheaf-module-sheafification-ring",
+    "def-weil-sheaf-of-modules-category",
+    "def-weil-pbc-sheafification"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sheaves.tex",
+    "place": "Tag 008Y, lemma-adjoint-push-pull-modules, proof, first equality 'by Lemma 0089'"
+   }
+  },
+  {
+   "text": "*Step 3 (second equality of 008Y).* By [lem-pc-presheaf-module-inverse-image-adjunction] (3) with $\\mathcal O=\\mathcal A$, $\\mathcal G=\\mathcal M$ and $\\mathcal F=\\mathcal N_0$, the map $\\psi\\mapsto f_*\\psi\\circ i_{\\mathcal M}$ is a bijection $\\operatorname{Hom}_{\\mathrm{PMod}(f_p\\mathcal A)}(f_p\\mathcal M,\\mathcal N_0)\\cong\\operatorname{Hom}_{\\mathrm{PMod}(\\mathcal A)}(\\mathcal M,f_*\\mathcal N_0)$, natural in $\\mathcal M$ and $\\mathcal N_0$, where $a\\in\\mathcal A(V)$ acts on $f_*\\mathcal N_0(V)=\\mathcal N(f^{-1}V)$ through $i_{\\mathcal A,V}(a)\\in f_p\\mathcal A(f^{-1}V)$ acting on $\\mathcal N_0$, i.e. as $\\theta_{\\mathcal A,f^{-1}V}(i_{\\mathcal A,V}(a))=\\eta_{\\mathcal A,V}(a)$ acting on $\\mathcal N$ [def-weil-pbc-topological-inverse-image] (3). So $f_*\\mathcal N_0$ is $f_*\\mathcal N$ with the $\\mathcal A$-module structure of the statement; it is a sheaf because $\\mathcal N$ is ([def-weil-pbc-topological-inverse-image] (1)), and morphisms of sheaves of $\\mathcal A$-modules $\\mathcal M\\to f_*\\mathcal N$ are the morphisms of presheaves of $\\mathcal A$-modules [def-weil-sheaf-of-modules-category].",
+   "uses": [
+    "lem-pc-presheaf-module-inverse-image-adjunction",
+    "def-weil-pbc-topological-inverse-image",
+    "def-weil-sheaf-of-modules-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sheaves.tex",
+    "place": "Tag 008Y, proof, second equality 'by Lemma 008U'; the O-module structure via O -> f_*f^{-1}O from the statement of 008Y"
+   }
+  },
+  {
+   "text": "*Step 4 (composite; it restricts the abelian adjunction).* Composing the bijections of steps 2 and 3 gives a bijection $\\operatorname{Hom}_{f^{-1}\\mathcal A}(f^{-1}\\mathcal M,\\mathcal N)\\cong\\operatorname{Hom}_{\\mathcal A}(\\mathcal M,f_*\\mathcal N)$, $\\alpha\\mapsto f_*(\\alpha\\circ\\theta_{\\mathcal M})\\circ i_{\\mathcal M}=f_*\\alpha\\circ(f_*\\theta_{\\mathcal M}\\circ i_{\\mathcal M})=f_*\\alpha\\circ\\eta_{\\mathcal M}$, natural in $\\mathcal M$ and $\\mathcal N$ as a composite of natural bijections. This is the formula of the abelian adjunction bijection $\\operatorname{Hom}(f^{-1}\\mathcal M,\\mathcal N)=\\operatorname{Hom}(f_p\\mathcal M,\\mathcal N)=\\operatorname{Hom}(\\mathcal M,f_*\\mathcal N)$ of [def-weil-pbc-topological-inverse-image] (3), with unit $\\eta_{\\mathcal M}=f_*(\\theta_{\\mathcal M})\\circ i_{\\mathcal M}$; so the abelian bijection maps the $f^{-1}\\mathcal A$-linear morphisms onto the $\\mathcal A$-linear ones and the module bijection is its restriction.",
+   "uses": [
+    "def-weil-pbc-topological-inverse-image"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sheaves.tex",
+    "place": "Tag 008Y, proof: the two displayed equalities composed"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-presheaf-module-inverse-image-adjunction",
+  "lem-pc-presheaf-module-sheafification-ring",
+  "def-weil-pbc-topological-inverse-image",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-pbc-sheafification"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/sheaves.tex",
+  "place": "Tag 008Y (lemma-adjoint-push-pull-modules, line 2933) with Tag 008X (lemma-pullback-module, line 2896)"
+ },
  "mathlib_searches": [
-  {"tool": "leansearch", "query": "inverse image of sheaf modules adjoint to direct image along continuous map", "results": "SheafOfModules.PullbackConstruction.adjunction (Mathlib.Algebra.Category.ModuleCat.Sheaf.PullbackContinuous), an adjunction for an abstract presheaf pullback followed by sheafification", "date": "2026-10-10", "verdict": "no exact match for the stated inverse-image module structure"},
-  {"tool": "loogle", "query": "SheafOfModules.pullbackPushforwardAdjunction", "results": "SheafOfModules.pullbackPushforwardAdjunction (Mathlib.Algebra.Category.ModuleCat.Sheaf.PullbackContinuous), whose pullback is defined as a left adjoint rather than as inverse image of modules", "date": "2026-10-10", "verdict": "no exact match"},
-  {"tool": "grep", "query": "rg -n 'def pullback|def adjunction|pullbackPushforwardAdjunction' /tmp/mathlib-f1/Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean; rg -n 'def restrictScalars' /tmp/mathlib-f1/Mathlib/Algebra/Category/ModuleCat/Sheaf/ChangeOfRings.lean", "results": "PullbackContinuous.lean:53 defines pullback as an abstract left adjoint, :60 gives its adjunction, and :79 gives a sheafification-based construction; ChangeOfRings.lean:35 gives restriction, but none identifies inverse image with its induced module action", "date": "2026-10-10", "verdict": "no exact match"}
+  {
+   "tool": "leansearch",
+   "query": "inverse image of sheaf modules adjoint to direct image along continuous map",
+   "results": "SheafOfModules.PullbackConstruction.adjunction (Mathlib.Algebra.Category.ModuleCat.Sheaf.PullbackContinuous), an adjunction for an abstract presheaf pullback followed by sheafification",
+   "date": "2026-10-10",
+   "verdict": "no exact match for the stated inverse-image module structure"
+  },
+  {
+   "tool": "loogle",
+   "query": "SheafOfModules.pullbackPushforwardAdjunction",
+   "results": "SheafOfModules.pullbackPushforwardAdjunction (Mathlib.Algebra.Category.ModuleCat.Sheaf.PullbackContinuous), whose pullback is defined as a left adjoint rather than as inverse image of modules",
+   "date": "2026-10-10",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "rg -n 'def pullback|def adjunction|pullbackPushforwardAdjunction' /tmp/mathlib-f1/Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean; rg -n 'def restrictScalars' /tmp/mathlib-f1/Mathlib/Algebra/Category/ModuleCat/Sheaf/ChangeOfRings.lean",
+   "results": "PullbackContinuous.lean:53 defines pullback as an abstract left adjoint, :60 gives its adjunction, and :79 gives a sheafification-based construction; ChangeOfRings.lean:35 gives restriction, but none identifies inverse image with its induced module action",
+   "date": "2026-10-10",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "sed -n 1,140p ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean; grep -n 'def ' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/Algebra/Category/ModuleCat/Presheaf/Pullback.lean",
+   "results": "Sheaf/PullbackContinuous.lean:53 SheafOfModules.pullback := (pushforward φ).leftAdjoint, :60 pullbackPushforwardAdjunction, :79 PullbackConstruction.adjunction (forget ⋙ PresheafOfModules.pullback φ.hom ⋙ sheafification (𝟙 R.obj) ⊣ pushforward φ), :103 pullbackIso; Presheaf/Pullback.lean:44 PresheafOfModules.pullback := leftAdjoint",
+   "date": "2026-10-10",
+   "verdict": "no exact match: Mathlib's module pullback for φ = η_A : A -> f_*f^{-1}A is an abstract left adjoint (or presheaf left adjoint then sheafification); that its underlying abelian sheaf is the topological f^{-1}M is not stated; the statement here (abelian adjunction restricting) is split instead, with the sheafification part a Mathlib leaf"
+  }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
- "created": {"by": "worker", "item": "lem-pc-module-pullback-adjunction", "date": "2026-10-10"},
- "lean_audit": {"master": {"state": "none"}, "slopmaster2": {"state": "none"}},
+ "created": {
+  "by": "worker",
+  "item": "lem-pc-module-pullback-adjunction",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
  "chapter": "sec-abelian-varieties",
- "unit": "sk-def-av-jacobian"
+ "unit": "sk-def-av-jacobian",
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "lem-pc-module-inverse-image-adjunction",
+  "worker": "stage1",
+  "summary": "Read Stacks 008Y and 008X and every lemma their proofs cite (008T, 008S, 008U, 0089, 008W, 008D; tags verified in tags/tags). Checked rule 0: no slopmaster2 declaration names this node or states a topological inverse-image module adjunction (grep of WeilConjectures, Comparator). Mathlib: SheafOfModules.pullbackPushforwardAdjunction / PullbackConstruction.adjunction give an adjunction whose left adjoint is abstract (or presheaf-module pullback then sheafification), not the topological f^{-1}M with its 008X module structure, so the item is not a leaf. Split following 008Y: step 1 the 008X module structure (008T presheaf structure, then 0089 sheafification), step 2 the first equality by 0089, step 3 the second by 008U, step 4 the composite equals the abelian adjunction formula. Statement made precise: the f^{-1}A-module structure on f^{-1}M is now stated as the 008X one (sheafification of the f_pA-module f_pM), instead of 'the inverse image of the action', which would need f^{-1}(A x M) = f^{-1}A x f^{-1}M, proved nowhere in the node; the A-module structure of f_*N is unchanged (through eta_A), and the conclusion now says explicitly that the abelian adjunction restricts. New nodes: lem-pc-presheaf-module-inverse-image-adjunction (008T+008S+008U, unsplit) and lem-pc-presheaf-module-sheafification-ring (0089, Mathlib leaf PresheafOfModules.sheafificationAdjunction). The etale analogue lem-weil-pbc-inverse-image-module-adjunction (Stacks 03D3, unit sk-def-exchange) is not used: it is for morphisms of schemes on etale sites, not continuous maps.",
+  "blueprint": "The item serves def-pc-base-change, statement, module base-change clause (the inverse-image/direct-image step of the adjunction for g_X^*), via lem-pc-module-pullback-adjunction and def-pc-module-pullback; steps 1-4 realize that inverse-image/direct-image step completely (module structure on g^{-1}G and the bijection Hom_{g^{-1}O}(g^{-1}G,F) = Hom_O(G,g_*F) used in step 2 of lem-pc-module-pullback-adjunction)."
+ },
+ "reviewed": "2026-10-10 L: 4 steps following 008Y/008X (the module structure on f^{-1}M as the sheafification of f_pM, the two adjunction equalities 0089 (Mathlib leaf, new) and 008U (new node), the composite restricting the abelian adjunction); statement corrected to Stacks' definition of the module structure; 2 new nodes"
 }
