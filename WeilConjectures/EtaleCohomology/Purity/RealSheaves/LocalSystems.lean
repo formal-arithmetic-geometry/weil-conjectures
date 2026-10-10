@@ -151,7 +151,8 @@ theorem Scheme.IsFiniteLocallyConstantSheaf.isFiniteLocallyConstantSheafOfTypes
     (F : Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ)) (hF : IsFiniteLocallyConstantSheaf F) :
     IsFiniteLocallyConstantSheafOfTypes
       ((sheafCompose _ (CategoryTheory.forget (ModuleCat.{u + 1} Λ))).obj F) := by
-  have : Limits.PreservesFilteredColimitsOfSize.{u, u} (CategoryTheory.forget (ModuleCat.{u + 1} Λ)) :=
+  have : Limits.PreservesFilteredColimitsOfSize.{u, u}
+      (CategoryTheory.forget (ModuleCat.{u + 1} Λ)) :=
     Limits.preservesFilteredColimitsOfSize_shrink.{u, u + 1, u, u + 1} _
   obtain ⟨⟨𝒰, h𝒰⟩⟩ := hF.toIsLocallyConstantSheaf.nonempty_locallyConstantDatum
   refine ⟨⟨𝒰, fun i ↦ ?_⟩, ⟨fun Ω _ _ s ↦ ?_⟩⟩
