@@ -4,7 +4,7 @@
   "is": null,
   "from": {
    "node": "lem-sc-finite-duality",
-   "place": "the pro-system Hom computation in the proof of the pre-derived adjunction",
+   "place": "the pro-system Hom computation in the proof of the pre-derived adjunction (the definition used for the pro-system)",
    "via": [
     "lem-pc-pre-derived-adjoint-functors-general",
     "lem-pc-essentially-constant-pro-hom-colimit"
@@ -25,7 +25,7 @@
  "proof_deps": [],
  "proof_origin": null,
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-pc-essentially-constant-pro-hom-colimit",
   "by": "L",
@@ -33,5 +33,51 @@
  },
  "chapter": "sec-picard-framework",
  "unit": "sk-thm-picard-duality",
- "lead_note": "Added by L (19:47 UTC) at reviewer R-ecp2049's request: the merge tool refused the reviewer's copy because a reviewer-added node needs stmt_deps. Dual of def-pc-essentially-constant-ind-diagram; cited by lem-pc-essentially-constant-pro-hom-colimit, whose statement until now named only the Stacks tag."
+ "lead_note": "Added by L (19:47 UTC) at reviewer R-ecp2049's request: the merge tool refused the reviewer's copy because a reviewer-added node needs stmt_deps. Dual of def-pc-essentially-constant-ind-diagram; cited by lem-pc-essentially-constant-pro-hom-colimit, whose statement until now named only the Stacks tag.",
+ "split_report": {
+  "date": "2026-10-11",
+  "item": "def-pc-essentially-constant-pro-diagram",
+  "worker": "stage1",
+  "summary": "Checked the general cofiltered pro-diagram definition against Stacks Categories Tag 05PU(2), verified its cone, retraction, and factorization clauses, searched for duplicates and Mathlib matches, and recorded that the nearby Mathlib eventual-constancy declarations are strictly different.",
+  "blueprint": "The definition used for the pro-system Hom computation in the proof of the pre-derived adjunction; this realizes the pro-object definition clause underlying that computation.",
+  "tool_uses": []
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "definition of essentially constant cofiltered pro-diagram cone retraction factorization",
+   "results": "CategoryTheory.Functor.IsEventuallyConstantTo.cone, cone_π_app, coneπApp, cone_pt, isLimitCone, coneπApp_eq, coneπApp_eq_id; these concern eventual isomorphisms and do not state the Stacks essentially-constant pro-object definition",
+   "date": "2026-10-11",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.IsEventuallyConstantFrom",
+   "results": "CategoryTheory.Functor.IsEventuallyConstantFrom, IsFiltered.IsEventuallyConstant, IsEventuallyConstantFrom.cocone/hasColimit (Mathlib.CategoryTheory.Limits.Constructions.EventuallyConstant): transition maps eventually isomorphisms, not the Stacks 05PU(2) retraction-and-factorization condition (run by reviewer R-ecp2208)",
+   "date": "2026-10-11",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "IsEventuallyConstant|ProObject|essentially constant in Mathlib/CategoryTheory",
+   "results": "Hits: Limits/Constructions/EventuallyConstant.lean (Functor.IsEventuallyConstantTo/From, IsCofiltered/IsFiltered.IsEventuallyConstant: eventual isomorphisms), Presentable/Basic.lean and Subobject/{Artinian,Noetherian}Object.lean (uses of these); no ProObject definition (only prose in Galois/Prorepresentability.lean); none states the Stacks 05PU(2) retraction-and-factorization condition",
+   "date": "2026-10-11",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "definition of essentially constant pro object diagram",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-11",
+   "verdict": "unavailable"
+  }
+ ],
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-ecp2208",
+  "group": "H1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-ecp2208 (reviewer sub-agent of L); spot-checked: Statement checked clause by clause against Stacks 05PU(2) (cone, j0 and retraction r, factorization through k->j0, k->j); stmt_dep def-pc-essentially-constant-ind-diagram kept; definition with no proof steps or proof_deps, status split. FIX more, RETURN less: B (dishonest search records, missed by the second reading) - grep record said '0 hits' but Mathlib/CategoryTheory/Limits/Constructions/EventuallyConstant.lean has Functor.IsEventuallyConstantTo/From and IsCofiltered/IsFiltered.IsEventuallyConstant; rewrote it with the real hits; replaced the loogle record (claimed 'unknown identifier IsEventuallyConstantFrom', which exists) by my own loogle query CategoryTheory.Functor.IsEventuallyConstantFrom; verdicts harmonised to 'no match' (eventual isomorphisms, not the retract-and-factorization notion), as in the merged ind definition.; 1 file(s) fixed by the reviewer"
+ }
 }
