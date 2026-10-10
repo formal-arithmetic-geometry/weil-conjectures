@@ -1,0 +1,80 @@
+{
+ "id": "lem-weil-pbc-minimal-finite-free-resolution-local",
+ "kind": "statement",
+ "title": "Minimal finite free resolutions over a Noetherian local ring",
+ "statement": "Let $(R,\\mathfrak m)$ be a Noetherian local ring [def-weil-pbc-noetherian-ring] with maximal ideal $\\mathfrak m$, let $M$ be a finitely generated $R$-module [def-weil-finitely-generated-module] and let $d\\ge0$ be an integer. If $M$ has a projective resolution of length $\\le d$ [def-weil-pbc-finite-global-dimension], i.e. an exact sequence $0\\to P_d\\to\\dots\\to P_0\\to M\\to0$ with every $P_i$ projective, then there is an exact sequence [def-weil-pbc-exact-sequence] of $R$-modules $$0\\to F_d\\xrightarrow{\\varphi_d}F_{d-1}\\xrightarrow{\\varphi_{d-1}}\\cdots\\xrightarrow{\\varphi_1}F_0\\xrightarrow{\\varepsilon}M\\to0$$ in which every $F_i$ is a finite free $R$-module [def-weil-pbc-free-module] ($F_i\\cong R^{\\oplus n_i}$ for an integer $n_i\\ge0$) and $\\varphi_i(F_i)\\subseteq\\mathfrak mF_{i-1}$ for $1\\le i\\le d$ (equivalently: every matrix coefficient of every $\\varphi_i$ lies in $\\mathfrak m$).",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Algebra, Lemma Tag 0CXF (lemma-what-kind-of-resolutions-Noetherian-local, line 26702), condition (7): a finite free resolution of length d, with its proof (Lemmas 00LP resolution-by-finite-free, 00O5 independent-resolution, 00NX finite-projective: finite projective over local is free); together with Lemma Tag 00MT (lemma-add-trivial-complex, line 24608) used as in the proofs of Lemmas 00OA and 00OB (lines 26990--26994 and 27082--27086: 'we may assume all the maps in the complex F have the property that Im(F_i -> F_{i-1}) is contained in m F_{i-1}, because removing a trivial summand from the resolution can at worst shorten the resolution'). Tags verified in tags/tags: 0CXF,algebra-lemma-what-kind-of-resolutions-Noetherian-local; 00MT,algebra-lemma-add-trivial-complex"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-noetherian-ring",
+  "def-weil-finitely-generated-module",
+  "def-weil-pbc-finite-global-dimension",
+  "def-weil-pbc-exact-sequence",
+  "def-weil-pbc-free-module"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "over a Noetherian local ring a finite module of finite projective dimension has a minimal finite free resolution",
+   "results": "ModuleCat.projectiveResolution (Mathlib.Algebra.Category.ModuleCat.LeftResolution), ProjectiveResolution.instHasProjectiveResolution, Module.finitePresentation_of_finite, Module.free_of_flat_of_isLocalRing (Mathlib.RingTheory.LocalRing.Module), Module.Finite.exists_comp_eq_id_of_projective: ingredients only, no finite free or minimal resolution of bounded length",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "complex of finite free modules with a unit entry in a differential matrix splits off a trivial complex R -> R",
+   "results": "CategoryTheory.ShortComplex.Splitting and its constructors (Mathlib.Algebra.Homology.ShortComplex.Exact): unrelated",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "minimal free resolution over a local ring: differentials have image in m times the next module",
+   "results": "ProjectiveResolution.complex_d_succ_comp, complex_d_comp_pi_f_zero, InjectiveResolution.complex_d_comp, ProjectiveResolution.ofComplex_d_1_0, Algebra.Presentation.differentialsSolution: nothing on minimal resolutions",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "IsLocalRing, CategoryTheory.HasProjectiveDimensionLT",
+   "results": "no results",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rn 'minimal.*resolution\\|MinimalResolution\\|minimalResolution' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib; grep -rln 'HasProjectiveDimension' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib",
+   "results": "no minimal resolution anywhere; projective dimension only in CategoryTheory/Abelian/Projective/Dimension.lean, Algebra/Category/ModuleCat/ProjectiveDimension.lean, RingTheory/LocalProperties/ProjectiveDimension.lean, RingTheory/Regular/ProjectiveDimension.lean, none of which builds finite free resolutions; the ingredient 'finite flat (hence projective, Module.Flat.of_projective RingTheory/Flat/Basic.lean:227) over local is free' is Module.free_of_flat_of_isLocalRing (RingTheory/LocalRing/Module.lean:304)",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-residue-field-pd-ge-embedding-dimension",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "reviewed": "Reviewed by L 2026-10-10 (statement): minimal finite free resolution of length ≤ d over a Noetherian local ring (Algebra 0CXF (7) with 00MT, as used by 00OA/00OB). Unsplit."
+}

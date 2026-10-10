@@ -1,0 +1,75 @@
+{
+ "id": "lem-weil-pbc-free-complex-maps-to-resolution",
+ "kind": "statement",
+ "title": "A complex of free modules over M maps to any resolution of N over a map M -> N",
+ "statement": "Let $R$ be a commutative ring and $\\varphi:M\\to N$ a homomorphism of $R$-modules. Let $\\cdots\\to N_2\\xrightarrow{\\partial_2}N_1\\xrightarrow{\\partial_1}N_0\\xrightarrow{\\eta}N\\to0$ be an exact sequence of $R$-modules [def-weil-pbc-exact-sequence] (a resolution of $N$; finitely many $N_i$ may be nonzero). Let $\\cdots\\to F_2\\xrightarrow{\\delta_2}F_1\\xrightarrow{\\delta_1}F_0\\xrightarrow{\\pi}M$ be $R$-linear maps with $\\delta_{i-1}\\circ\\delta_i=0$ for $i\\ge2$ and $\\pi\\circ\\delta_1=0$ (a complex over $M$, not necessarily exact), every $F_i$ being a free $R$-module [def-weil-pbc-free-module]. Then there are $R$-linear maps $\\alpha_i:F_i\\to N_i$ ($i\\ge0$) with $\\eta\\circ\\alpha_0=\\varphi\\circ\\pi$ and $\\partial_i\\circ\\alpha_i=\\alpha_{i-1}\\circ\\delta_i$ for all $i\\ge1$.",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Algebra, Lemma Tag 00LS (lemma-compare-resolutions, line 17500), part (1), with its proof (lines 17525--17535). Tag verified in tags/tags: 00LS,algebra-lemma-compare-resolutions"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-exact-sequence",
+  "def-weil-pbc-free-module"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "map of complexes from a complex of free modules over M to a resolution of N lifting a map M to N",
+   "results": "CategoryTheory.ProjectiveResolution.lift, lift_commutes, lift_commutes_assoc, liftFZero, liftFOne, liftHomotopyZeroSucc_comp_assoc (Mathlib.CategoryTheory.Abelian.Projective.Resolution), ShortComplex.Exact.liftFromProjective (Mathlib.Algebra.Homology.ShortComplex.Exact), ModuleCat.projectiveResolution",
+   "date": "2026-10-10",
+   "verdict": "generalization only for exact sources: see mathlib_candidate"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "comparison theorem: chain map from a complex of projectives augmented to M into an exact resolution of N lifting a morphism M -> N",
+   "results": "ProjectiveResolution.liftFSucc, lift, liftFOne, liftHomotopyZeroOne, liftHomotopyZeroZero, liftFZero (Mathlib.CategoryTheory.Abelian.Projective.Resolution): all typed on two ProjectiveResolution's",
+   "date": "2026-10-10",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.ProjectiveResolution.lift",
+   "results": "ProjectiveResolution.lift {Y Z} (f : Y ⟶ Z) (P : ProjectiveResolution Y) (Q : ProjectiveResolution Z) : P.complex ⟶ Q.complex; liftIdHomotopy, liftCompHomotopy, lift_commutes, lift_commutes_zero, lift_commutes_assoc",
+   "date": "2026-10-10",
+   "verdict": "no exact match: the source P must be a ProjectiveResolution (exact)"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -n '^def\\|^theorem\\|^lemma' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/CategoryTheory/Abelian/Projective/Resolution.lean; sed -n 50,100p of the same file; grep -n liftFromProjective ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/Algebra/Homology/ShortComplex/Exact.lean",
+   "results": "liftFZero (line 55), liftFOne (71), liftFSucc (82), lift (92), lift_commutes (100), lift_commutes_zero (106): the construction uses only P.complex.X n projective and Q exact (Q.exact0, Q.exact_succ), but every declaration takes P : ProjectiveResolution Y, whose complex is exact; Exact.liftFromProjective (Exact.lean:954) and ChainComplex.mkHom (Algebra/Homology/HomologicalComplex.lean:1057) are the building blocks",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "mathlib_candidate": {
+  "declaration": "CategoryTheory.ProjectiveResolution.lift (with lift_commutes_zero); building blocks CategoryTheory.ShortComplex.Exact.liftFromProjective, ChainComplex.mkHom",
+  "file": "Mathlib/CategoryTheory/Abelian/Projective/Resolution.lean (lines 55--110); Mathlib/Algebra/Homology/ShortComplex/Exact.lean (line 954); Mathlib/Algebra/Homology/HomologicalComplex.lean (line 1057)",
+  "how": "not a leaf: ProjectiveResolution.lift needs the source to be a projective resolution, i.e. exact, while the node's source complex (a Koszul complex in its use) need not be exact; the proof of lift (liftFZero/liftFOne/liftFSucc, lines 55--98, read) uses only the projectivity of the source terms and the exactness of the target, so the node follows by repeating that construction with Exact.liftFromProjective and ChainComplex.mkHom; free modules are projective (Module.Projective.of_free)."
+ },
+ "status": "unsplit",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-residue-field-pd-ge-embedding-dimension",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "reviewed": "Reviewed by L 2026-10-10 (statement): Algebra 00LS (1), comparison map from a complex of free modules to a resolution. Unsplit; Mathlib candidate (ProjectiveResolution.lift needs exactness of the source) recorded."
+}
