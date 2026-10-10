@@ -1,8 +1,8 @@
 # Work queue
 
-856 items; claim with `tools/claim.py next <group> [--stage N]`.
+855 items; claim with `tools/claim.py next <group> [--stage N]`.
 
-## Stage 1: nodes to split (385)
+## Stage 1: nodes to split (383)
 
 | node | distance to a target | Lean state on the done branch |
 |---|---|---|
@@ -29,7 +29,6 @@
 | `lem-weil-pbc-fpqc-descend-affine` | 1016 | none |
 | `lem-weil-pbc-fpqc-descend-universally-closed` | 1016 | none |
 | `lem-weil-pbc-fs-adic-field-differentials-injective` | 1016 | none |
-| `lem-weil-pbc-integral-injective-dimension-equal` | 1016 | none |
 | `lem-weil-pbc-power-series-field-cohen-fs-adic` | 1016 | none |
 | `lem-weil-pbc-power-series-parameter-quotient` | 1016 | none |
 | `lem-weil-pbc-projective-dimension-ext-characterization` | 1016 | none |
@@ -38,7 +37,6 @@
 | `lem-weil-pbc-triangular-change-of-basis` | 1016 | none |
 | `lem-weil-pbc-cyclic-extension-cocycle` | 1017 | none |
 | `lem-weil-pbc-dim-one-residue-field-extensions-finite` | 1018 | none |
-| `lem-weil-pbc-koszul-differential-square-zero` | 1018 | none |
 | `lem-weil-pbc-injective-acyclicity-bounded-below` | 2002 | sorry_here |
 | `lem-weil-pbc-property-implies-acyclicity` | 2003 | none |
 | `lem-weil-pbc-qcqs-higher-direct-image` | 2003 | none |
@@ -392,7 +390,7 @@
 | `def-exc-jacobian-presentation` | - | none |
 | `lem-zl-noether-normalization-dimension` | - | none |
 
-## Stage 2: nodes to state (471)
+## Stage 2: nodes to state (472)
 
 | node | distance to Mathlib | kind |
 |---|---|---|
@@ -625,6 +623,7 @@
 | `lem-weil-pbc-integral-closure-finite-fibre-image-clopen` | 1 | state |
 | `lem-weil-pbc-integral-extension-dimension` | 1 | state |
 | `lem-weil-pbc-integral-idempotent-annihilating-polynomial` | 1 | state |
+| `lem-weil-pbc-integral-injective-dimension-equal` | 1 | state |
 | `lem-weil-pbc-intersection-subfields-differentials` | 1 | state |
 | `lem-weil-pbc-intersection-subfields-subspace` | 1 | state |
 | `lem-weil-pbc-inverse-image-closed-pushforward-constant` | 1 | state |
@@ -868,7 +867,7 @@
 | `lem-weil-pbc-p1-field-dimension-one` | 4 | state |
 | `lem-weil-pbc-projective-space-zero-isomorphism` | 4 | state |
 
-Not open yet: 403 nodes that wait for stage 1, 868 nodes that wait for a statement dependency.
+Not open yet: 401 nodes that wait for stage 1, 869 nodes that wait for a statement dependency.
 
 ## Stage 3: modules to prove (0)
 
