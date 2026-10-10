@@ -1,8 +1,8 @@
 # Work queue
 
-854 items; claim with `tools/claim.py next <group> [--stage N]`.
+853 items; claim with `tools/claim.py next <group> [--stage N]`.
 
-## Stage 1: nodes to split (379)
+## Stage 1: nodes to split (378)
 
 | node | distance to a target | Lean state on the done branch |
 |---|---|---|
@@ -66,7 +66,6 @@
 | `lem-sc-artin-schreier-dimension` | 3006 | none |
 | `lem-sc-cohomological-dimension` | 3006 | none |
 | `lem-sc-flat-base-change-coherent` | 3006 | sorry_here |
-| `lem-weil-pbc-etale-finite-data-descent` | 3006 | none |
 | `lem-weil-pbc-hypercover-free-resolution` | 3006 | none |
 | `def-galois-category` | 3007 | none |
 | `def-sc-divisor` | 3007 | none |
@@ -866,7 +865,7 @@
 | `lem-weil-pbc-p1-field-dimension-one` | 4 | state |
 | `lem-weil-pbc-projective-space-zero-isomorphism` | 4 | state |
 
-Not open yet: 397 nodes that wait for stage 1, 874 nodes that wait for a statement dependency.
+Not open yet: 396 nodes that wait for stage 1, 875 nodes that wait for a statement dependency.
 
 ## Stage 3: modules to prove (0)
 
