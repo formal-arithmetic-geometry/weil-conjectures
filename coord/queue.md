@@ -2,12 +2,11 @@
 
 924 items; claim with `tools/claim.py next <group> [--stage N]`.
 
-## Stage 1: nodes to split (612)
+## Stage 1: nodes to split (610)
 
 | node | distance to a target | Lean state on the done branch |
 |---|---|---|
 | `lem-weil-pbc-small-etale-representable-presheaf-sheaf` | 1011 | none |
-| `lem-weil-pbc-affine-basic-sets-disjoint-refinement` | 1012 | none |
 | `lem-weil-pbc-closed-immersion-conormal-flat-base-change` | 1012 | none |
 | `lem-weil-pbc-closed-immersion-conormal-functorial` | 1012 | none |
 | `lem-weil-pbc-closed-pushforward-constant-stalks` | 1012 | none |
@@ -20,18 +19,17 @@
 | `lem-weil-pbc-flat-variant-local-criterion` | 1012 | none |
 | `lem-weil-pbc-formal-systems-graded-vanishing` | 1012 | none |
 | `lem-weil-pbc-formal-systems-kernel-rees-finite` | 1012 | none |
-| `lem-weil-pbc-smooth-at-generic-point-over-field` | 1012 | none |
 | `lem-weil-pbc-smooth-at-prime-free-conormal-basis` | 1012 | none |
 | `lem-weil-pbc-smooth-fibre-regular-local` | 1012 | none |
 | `lem-weil-pbc-smooth-localization-conormal-split` | 1012 | none |
 | `lem-weil-pbc-smooth-over-field-dimension-differentials` | 1012 | none |
-| `lem-weil-pbc-projective-resolution-kernel-projective` | 1013 | none |
-| `lem-weil-pbc-purely-inseparable-base-change-local-ring` | 1013 | none |
+| `lem-weil-pbc-affine-basic-set-difference` | 1013 | none |
 | `lem-weil-pbc-purely-inseparable-pth-root-tower` | 1013 | none |
 | `lem-weil-pbc-quasi-coherent-extension-qc-open` | 1013 | none |
 | `lem-weil-pbc-quasi-finite-at-finite-subalgebra-away` | 1013 | none |
 | `lem-weil-pbc-quasi-finite-ring-map-integral-closure-open` | 1013 | none |
 | `lem-weil-pbc-regular-local-mcm-free` | 1013 | none |
+| `lem-weil-pbc-regular-local-separable-residue-smooth` | 1013 | none |
 | `lem-weil-pbc-regular-sequence-conormal-free` | 1013 | none |
 | `lem-weil-pbc-relative-global-complete-intersection-smooth-jacobian` | 1013 | none |
 | `lem-weil-pbc-residue-field-pd-ge-embedding-dimension` | 1013 | none |
@@ -619,7 +617,7 @@
 | `def-exc-jacobian-presentation` | - | none |
 | `def-nagata-rees-algebra` | - | none |
 
-## Stage 2: nodes to state (312)
+## Stage 2: nodes to state (314)
 
 | node | distance to Mathlib | kind |
 |---|---|---|
@@ -648,6 +646,7 @@
 | `lem-sc-dim0-finite` | 1 | state |
 | `lem-weil-pbc-adic-completion-noetherian` | 1 | state |
 | `lem-weil-pbc-adjunction-lifts-group-ring-objects` | 1 | state |
+| `lem-weil-pbc-affine-basic-sets-disjoint-refinement` | 1 | state |
 | `lem-weil-pbc-algebra-colimit-fp-algebras-over-it` | 1 | state |
 | `lem-weil-pbc-annihilator-element-flat-base-change` | 1 | state |
 | `lem-weil-pbc-annihilator-localization-finite` | 1 | state |
@@ -844,6 +843,7 @@
 | `lem-weil-pbc-proper-coproduct` | 1 | state |
 | `lem-weil-pbc-pth-root-presentation-differentials` | 1 | state |
 | `lem-weil-pbc-pth-roots-extension-degree` | 1 | state |
+| `lem-weil-pbc-purely-inseparable-base-change-local-ring` | 1 | state |
 | `lem-weil-pbc-purely-inseparable-integral-prime-unique` | 1 | state |
 | `lem-weil-pbc-radicial-prime-unique-degree-p` | 1 | state |
 | `lem-weil-pbc-reduced-induced-closed-subscheme` | 1 | state |
@@ -936,7 +936,7 @@
 | `lem-weil-pbc-p1-field-dimension-one` | 4 | state |
 | `lem-weil-pbc-projective-space-zero-isomorphism` | 4 | state |
 
-Not open yet: 624 nodes that wait for stage 1, 590 nodes that wait for a statement dependency.
+Not open yet: 622 nodes that wait for stage 1, 592 nodes that wait for a statement dependency.
 
 ## Stage 3: modules to prove (0)
 
