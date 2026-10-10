@@ -12,7 +12,6 @@
 | `lem-weil-pbc-closed-subset-proper-over-base-universally-closed-image` | 1011 | none |
 | `lem-weil-pbc-etale-ring-map-prescribed-residue-field` | 1011 | none |
 | `lem-weil-pbc-formal-functions-stalk` | 1011 | none |
-| `lem-weil-pbc-galois-invariant-closed-subset-descends` | 1011 | none |
 | `lem-weil-pbc-geometrically-regular-descent` | 1011 | none |
 | `lem-weil-pbc-grothendieck-existence-devissage` | 1011 | none |
 | `lem-weil-pbc-helper-g-ring-char-p` | 1011 | none |
@@ -108,6 +107,7 @@
 | `def-weil-pbc-ample-invertible-module` | 1012 | none |
 | `def-weil-pbc-constant-group-scheme` | 1012 | none |
 | `def-weil-pbc-formally-smooth-adic` | 1012 | none |
+| `lem-weil-pbc-affine-basic-sets-disjoint-refinement` | 1012 | none |
 | `lem-weil-pbc-affine-finite-type-generating-sections` | 1012 | none |
 | `lem-weil-pbc-ample-scheme-separated` | 1012 | none |
 | `lem-weil-pbc-artinian-ring-self-finite-length` | 1012 | none |
@@ -825,7 +825,7 @@
 | `lem-weil-pbc-p1-field-dimension-one` | 4 | state |
 | `lem-weil-pbc-projective-space-zero-isomorphism` | 4 | state |
 
-Not open yet: 669 nodes that wait for stage 1, 441 nodes that wait for a statement dependency.
+Not open yet: 669 nodes that wait for stage 1, 442 nodes that wait for a statement dependency.
 
 ## Stage 3: modules to prove (0)
 
