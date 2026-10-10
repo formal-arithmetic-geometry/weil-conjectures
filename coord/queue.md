@@ -1,13 +1,12 @@
 # Work queue
 
-915 items; claim with `tools/claim.py next <group> [--stage N]`.
+913 items; claim with `tools/claim.py next <group> [--stage N]`.
 
-## Stage 1: nodes to split (322)
+## Stage 1: nodes to split (320)
 
 | node | distance to a target | Lean state on the done branch |
 |---|---|---|
 | `lem-constructible-constant-exact` | 7 | none |
-| `lem-constructible-shortexact-local-lift` | 7 | none |
 | `lem-weil-pbc-injective-acyclicity-bounded-below` | 2002 | sorry_here |
 | `lem-weil-pbc-etale-sections-fpqc-descent` | 2006 | none |
 | `lem-weil-pbc-flat-fibres-irreducible` | 2006 | none |
@@ -41,14 +40,12 @@
 | `lem-sc-rational-point-tangent-derivation-identification` | 3013 | none |
 | `lem-sc-tangent-map-linear` | 3013 | none |
 | `lem-sc-tangent-space-vector-space` | 3013 | none |
-| `lem-weil-pbc-ringed-site-module-sheafification-exact` | 3013 | none |
 | `lem-pc-finite-extension-tensor-algebraic-closure-reduced-separable` | 3014 | none |
 | `lem-pc-noetherian-derived-direct-image-right-adjoint` | 3014 | none |
 | `lem-pc-polynomial-quotient-distinct-linear-crt` | 3014 | none |
 | `lem-pc-proper-derived-direct-image-composition` | 3014 | none |
 | `lem-pc-separable-polynomial-distinct-roots-alg-closed` | 3014 | none |
 | `lem-sc-acyclic-comparison-natural` | 3014 | none |
-| `lem-sc-affine-derived-concentration` | 3014 | none |
 | `lem-sc-derived-internal-hom-stalk-localization` | 3014 | none |
 | `lem-sc-ext-coherent-hom-injective-acyclic` | 3014 | none |
 | `lem-sc-finite-duality-derived-hom` | 3014 | none |
@@ -62,6 +59,7 @@
 | `lem-sc-smooth-proper-relative-dualizing-general` | 3014 | none |
 | `lem-sc-support-dimension-cohomology-vanishing` | 3014 | none |
 | `lem-sp-cartan-eilenberg-properties` | 3014 | none |
+| `lem-sc-affine-derived-pushforward-t-exact` | 3015 | none |
 | `lem-sc-p1-invertible-section-localization` | 3015 | none |
 | `lem-sc-p1-tor-dimension-shift-natural` | 3015 | none |
 | `lem-sc-p1-twist-multiplication` | 3015 | none |
@@ -927,7 +925,7 @@
 | `lem-weil-pbc-p1-field-dimension-one` | 4 | state |
 | `lem-weil-pbc-projective-space-zero-isomorphism` | 4 | state |
 
-Not open yet: 339 nodes that wait for stage 1, 1224 nodes that wait for a statement dependency.
+Not open yet: 337 nodes that wait for stage 1, 1226 nodes that wait for a statement dependency.
 
 ## Stage 3: modules to prove (0)
 
