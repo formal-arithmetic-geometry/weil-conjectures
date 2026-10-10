@@ -1520,3 +1520,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 2026-10-10, delivery of F1: lem-pc-closed-imm-base-change merged from deliver/F1/lem-pc-closed-imm-base-change (1 commit(s), 0 new node(s), spot-checked by L: L: reviewed in full by a reviewer sub-agent (FIX: citations of the pullback-ideal and affine-sections nodes in steps 1-2): corrected image-form statement kept, 01JU (1) read, 3 steps checked, small cases); claim closed
 - 13:40 L: merged deliver/F1/lem-pc-closed-imm-base-change (reviewer FIX applied; tool_uses 2; first push)
 - 13:40 L: accepted lem-galois-finite-etale-connected-object: attachment Scheme.FiniteEtale.isConnected_of_connectedSpace verified, closed, not split
+- 2026-10-10, delivery of M1: def-sc-picard-functor returned (9d9b9f3bf): Reviewed in full (reviewer sub-agent of L). E1/B3: the definition is stated for 'a proper smooth connected curve over a field k', but the cited nodes for the de
