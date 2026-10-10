@@ -76,7 +76,6 @@ lemma sheafPushforwardContinuousComp'_trans {FG' : C ⥤ E} [FG'.IsContinuous J 
       sheafPushforwardContinuousComp' e A J K L ≪≫ sheafPushforwardContinuousIso e' A J L := by
   ext P U
   simp [sheafPushforwardContinuousComp']
-  rfl
 
 
 section Unit
