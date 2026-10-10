@@ -28,9 +28,146 @@
   "lem-sc-hilb-to-pic-morphism",
   "def-weil-surjective-morphism"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "*The curve over a field extension.* Let $K/k$ be a field extension [def-pc-field-extension] and $C_K=C\\times_{\\operatorname{Spec}k}\\operatorname{Spec}K$ [def-pc-base-change]. The curve $C$ is integral, hence nonempty, and smooth over the separably closed field $k$, so it has a $k$-rational point $\\sigma$ [lem-pc-rational-points-dense]. Hence by [prop-pc-xk-integral] (2) $C_K$ is a smooth projective curve over $K$ [def-pc-smooth-projective-curve] (in particular integral, of dimension $1$, and proper over $K$ [lem-pc-projective-proper]), with $H^0(C_K,\\mathcal O_{C_K})=K$ and $\\dim_KH^1(C_K,\\mathcal O_{C_K})=\\dim_kH^1(C,\\mathcal O_C)=g$. By [lem-pc-vanishing-above-dim], applied to the smooth projective curve $C_K$ over $K$, $H^i(C_K,\\mathcal F)=0$ for $i\\geq2$ and every quasi-coherent $\\mathcal F$, and by [lem-pc-euler-characteristic-well-defined] $H^0,H^1$ of a coherent $\\mathcal F$ are finite-dimensional over $K$; so for every coherent $\\mathcal F$ on $C_K$ the Euler characteristic [def-pc-euler-characteristic] is $\\chi(C_K,\\mathcal F)=\\dim_KH^0(C_K,\\mathcal F)-\\dim_KH^1(C_K,\\mathcal F)$. In particular $\\chi(C_K,\\mathcal O_{C_K})=1-g$.",
+   "uses": [
+    "def-pc-field-extension",
+    "def-pc-base-change",
+    "lem-pc-rational-points-dense",
+    "prop-pc-xk-integral",
+    "def-pc-smooth-projective-curve",
+    "lem-pc-projective-proper",
+    "lem-pc-vanishing-above-dim",
+    "lem-pc-euler-characteristic-well-defined",
+    "def-pc-euler-characteristic"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/pic.tex",
+    "place": "Tag 0BA0 (lemma-picard-pieces), proof, fourth paragraph: 'for any field extension K/k ... chi(X_K, L) = d+1-g' (the value chi(X_K, O) = 1-g and the base change of X to K)"
+   }
+  },
+  {
+   "text": "*A $K$-point of $P_d$ is an invertible module of degree $d$ on $C_K$.* Let $y:\\operatorname{Spec}K\\to P_d$ be a morphism over $k$. Under the representing isomorphism $\\operatorname{Pic}^d_{C/k}\\cong h_{P_d}$ [def-pc-representable-functor], $y$ corresponds to a class $\\xi\\in\\operatorname{Pic}^d_{C/k}(\\operatorname{Spec}K)\\subseteq\\operatorname{Pic}_{C/k}(\\operatorname{Spec}K)$ [def-pc-picard-functor]. Since $C$ is a smooth projective curve with the $k$-rational point $\\sigma$ (step 1), the hypotheses of [thm-pc-pic-split] hold for $C\\to\\operatorname{Spec}k$ by [lem-pc-rational-hyp]; with $T=\\operatorname{Spec}K$, $C_T=C_K$, the map $\\operatorname{Pic}(C_K)\\to\\operatorname{Pic}_{C/k}(\\operatorname{Spec}K)$ is surjective, so $\\xi$ is the class of an invertible $\\mathcal O_{C_K}$-module $\\mathcal L$. Computing the degree of $\\xi$ with the trivial covering $\\{\\operatorname{Spec}K\\to\\operatorname{Spec}K\\}$ and the representative $\\mathcal L$ [def-pd-degree-morphism], its value at the unique point $t$ of $\\operatorname{Spec}K$ is the fibrewise degree $\\deg_T(\\mathcal L)(t)$ [def-pd-fibrewise-degree]; as $\\kappa(t)=K$, $C_{\\kappa(t)}=C_K$ and $\\mathcal L_t=\\mathcal L$, this is $\\deg_{C_K}(\\mathcal L)=\\chi(C_K,\\mathcal L)-\\chi(C_K,\\mathcal O_{C_K})$ [def-pc-degree-line-bundle]. As $\\xi\\in\\operatorname{Pic}^d_{C/k}(\\operatorname{Spec}K)$, $\\deg_{C_K}(\\mathcal L)=d$.",
+   "uses": [
+    "def-pc-representable-functor",
+    "def-pc-picard-functor",
+    "thm-pc-pic-split",
+    "lem-pc-rational-hyp",
+    "def-pd-degree-morphism",
+    "def-pd-fibrewise-degree",
+    "def-pc-degree-line-bundle"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/pic.tex",
+    "place": "Tag 0BA0 (lemma-picard-pieces), proof, fourth paragraph: 'any invertible O_{X_K}-module L of degree d' (K-points of Pic^d as invertible modules of degree d; the proof's first paragraph: Pic_{X/k} is isomorphic to Pic_{X/k,sigma})"
+   }
+  },
+  {
+   "text": "*$\\mathcal L$ has a nonzero section.* By steps 1 and 2, $\\chi(C_K,\\mathcal L)=\\deg_{C_K}(\\mathcal L)+\\chi(C_K,\\mathcal O_{C_K})=d+1-g\\geq1$, since $d\\geq g$. By step 1, $\\chi(C_K,\\mathcal L)=\\dim_KH^0(C_K,\\mathcal L)-\\dim_KH^1(C_K,\\mathcal L)$ [def-pc-euler-characteristic], so $\\dim_KH^0(C_K,\\mathcal L)\\geq\\chi(C_K,\\mathcal L)\\geq1$. Choose $s\\in H^0(C_K,\\mathcal L)=\\Gamma(C_K,\\mathcal L)$ with $s\\neq0$.",
+   "uses": [
+    "def-pc-euler-characteristic",
+    "def-pc-degree-line-bundle"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/pic.tex",
+    "place": "Tag 0BA0 (lemma-picard-pieces), proof, fourth paragraph: 'chi(X_K, L) = d+1-g > 0. Hence L has a nonzero section'"
+   }
+  },
+  {
+   "text": "*$\\mathcal L\\cong\\mathcal O_{C_K}(D)$ for $D=Z(s)$.* $C_K$ is integral (step 1) and $s\\neq0$, so the zero scheme $D:=Z(s)\\subseteq C_K$ [def-pc-zero-scheme] is an effective Cartier divisor, its ideal sheaf being an effective Cartier ideal [lem-pc-nonzero-section-integral-cartier]. By [lem-pc-zero-scheme-divisor-iso] (with $X=C_K$, $\\mathcal M=\\mathcal O_{C_K}$, $\\mathcal N=\\mathcal L$, $\\varphi=(f\\mapsto fs)$, so that $Z(\\varphi)=Z(s)=D$), $\\mathcal L\\cong\\mathcal O_{C_K}(D)\\otimes\\mathcal O_{C_K}\\cong\\mathcal O_{C_K}(D)$, with $\\mathcal O_{C_K}(D)=\\mathcal I_D^\\vee$ [def-pc-divisor-line-bundle].",
+   "uses": [
+    "def-pc-zero-scheme",
+    "lem-pc-nonzero-section-integral-cartier",
+    "lem-pc-zero-scheme-divisor-iso",
+    "def-pc-divisor-line-bundle"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/pic.tex",
+    "place": "Tag 0BA0 (lemma-picard-pieces), proof, fourth paragraph: 'we conclude that L = O_{X_K}(D) for some divisor D in X_K' (Divisors, Lemmas 02OR (4) and 01X0 (2))"
+   }
+  },
+  {
+   "text": "*$D$ is a $K$-point of $\\operatorname{Hilb}^d_{C/k}$.* $C_K$ is proper over $K$ of dimension $1$ (step 1), and $D$ is an effective Cartier divisor on it (step 4); by [lem-pc-cartier-divisor-finite-over-field] $D$ is affine, $D\\to\\operatorname{Spec}K$ is finite and $A:=\\Gamma(D,\\mathcal O_D)$ is a finite-dimensional $K$-algebra, so $D=\\operatorname{Spec}A$. By [lem-pc-degree-base-change] (2), $\\deg_{C_K}(\\mathcal O_{C_K}(D))=\\dim_KA$. Isomorphic coherent modules have isomorphic cohomology, hence the same $\\chi$ and the same degree [def-pc-degree-line-bundle]; so by step 4 and step 2, $\\dim_KA=\\deg_{C_K}(\\mathcal O_{C_K}(D))=\\deg_{C_K}(\\mathcal L)=d$. The morphism $D=\\operatorname{Spec}A\\to\\operatorname{Spec}K$ is finite locally free of degree $d$ [def-pc-finite-locally-free]: it is finite; it is flat because $A$ is a free $K$-module (a vector space); it is locally of finite presentation because the finite-dimensional $K$-algebra $A$ is of finite type over the Noetherian ring $K$, hence finitely presented; and its only fibre is $D$ itself, with $\\dim_K\\Gamma(D,\\mathcal O_D)=d$. As $D$ is a closed subscheme of $C_{\\operatorname{Spec}K}=C_K$, $D\\in\\operatorname{Hilb}^d_{C/k}(\\operatorname{Spec}K)$ [def-pc-hilb-functor].",
+   "uses": [
+    "lem-pc-cartier-divisor-finite-over-field",
+    "lem-pc-degree-base-change",
+    "def-pc-degree-line-bundle",
+    "def-pc-finite-locally-free",
+    "def-pc-hilb-functor"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/pic.tex",
+    "place": "Tag 0BA0 (lemma-picard-pieces), proof, fourth paragraph: 'for some divisor D in X_K of degree d' (D a point of Hilb^d_{X/k} with values in K)"
+   }
+  },
+  {
+   "text": "*The $K$-point $y$ lifts to $H_d$.* Since $H_d$ represents $\\operatorname{Hilb}^d_{C/k}$ [def-pc-representable-functor], the element $D\\in\\operatorname{Hilb}^d_{C/k}(\\operatorname{Spec}K)$ of step 5 corresponds to a $k$-morphism $x:\\operatorname{Spec}K\\to H_d$. By [lem-sc-hilb-to-pic-morphism] (3), the $K$-point $\\gamma_d\\circ x$ of $P_d$ corresponds to the class of $\\mathcal O_{C_K}(D)$ in $\\operatorname{Pic}^d_{C/k}(\\operatorname{Spec}K)$. By step 4, $\\mathcal O_{C_K}(D)\\cong\\mathcal L$, so this class is the image of $[\\mathcal L]$, which is $\\xi$ (step 2). The representing isomorphism being a bijection $\\operatorname{Pic}^d_{C/k}(\\operatorname{Spec}K)\\cong\\operatorname{Hom}_k(\\operatorname{Spec}K,P_d)$ under which $\\xi$ corresponds to $y$, we get $\\gamma_d\\circ x=y$.",
+   "uses": [
+    "def-pc-representable-functor",
+    "def-pc-hilb-functor",
+    "lem-sc-hilb-to-pic-morphism"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/pic.tex",
+    "place": "Tag 0BA0 (lemma-picard-pieces), proof, fourth paragraph: 'It follows that gamma_d is surjective' (the K-point lifts along gamma_d, by the construction of gamma_d in the proof's second paragraph)"
+   }
+  },
+  {
+   "text": "*Conclusion.* Let $p\\in P_d$ and $K:=\\kappa(p)$ its residue field [def-weil-residue-field]; through the structure morphism $P_d\\to\\operatorname{Spec}k$, $K$ is a field extension of $k$ [def-weil-residue-field], and the canonical morphism $j_p:\\operatorname{Spec}\\kappa(p)\\to P_d$ [lem-weil-pbc-residue-field-point-naturality] ($\\operatorname{Spec}$ of $\\mathcal O_{P_d,p}\\to\\kappa(p)$ followed by $\\operatorname{Spec}\\mathcal O_{P_d,p}\\to P_d$) is a morphism over $k$ mapping the unique point of $\\operatorname{Spec}K$ to $p$. Steps 1 to 6 with $y=j_p$ give $x:\\operatorname{Spec}K\\to H_d$ with $\\gamma_d\\circ x=j_p$; if $q\\in H_d$ is the image of the unique point of $\\operatorname{Spec}K$ under $x$, then $\\gamma_d(q)=j_p(\\mathrm{pt})=p$. Hence every point of $P_d$ is in the image of $\\gamma_d$, i.e. $\\gamma_d$ is surjective [def-weil-surjective-morphism].",
+   "uses": [
+    "def-weil-residue-field",
+    "lem-weil-pbc-residue-field-point-naturality",
+    "def-weil-surjective-morphism"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/pic.tex",
+    "place": "Tag 0BA0 (lemma-picard-pieces), proof, fourth paragraph: 'It follows that gamma_d is surjective'"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-field-extension",
+  "def-pc-base-change",
+  "lem-pc-rational-points-dense",
+  "prop-pc-xk-integral",
+  "def-pc-smooth-projective-curve",
+  "lem-pc-projective-proper",
+  "lem-pc-vanishing-above-dim",
+  "lem-pc-euler-characteristic-well-defined",
+  "def-pc-euler-characteristic",
+  "def-pc-representable-functor",
+  "def-pc-picard-functor",
+  "thm-pc-pic-split",
+  "lem-pc-rational-hyp",
+  "def-pd-degree-morphism",
+  "def-pd-fibrewise-degree",
+  "def-pc-degree-line-bundle",
+  "def-pc-zero-scheme",
+  "lem-pc-nonzero-section-integral-cartier",
+  "lem-pc-zero-scheme-divisor-iso",
+  "def-pc-divisor-line-bundle",
+  "lem-pc-cartier-divisor-finite-over-field",
+  "lem-pc-degree-base-change",
+  "def-pc-finite-locally-free",
+  "def-pc-hilb-functor",
+  "lem-sc-hilb-to-pic-morphism",
+  "def-weil-residue-field",
+  "lem-weil-pbc-residue-field-point-naturality",
+  "def-weil-surjective-morphism"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/pic.tex",
+  "place": "Tag 0BA0 (lemma-picard-pieces), clause (5) and its proof, fourth paragraph; with Divisors, Lemmas 02OR (4) and 01X0 (2) (divisors.tex) for 'L = O_{X_K}(D)'"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -55,7 +192,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "worker",
@@ -71,5 +208,13 @@
   }
  },
  "chapter": "sec-picard-framework",
- "unit": "sk-prop-jacobian"
+ "unit": "sk-prop-jacobian",
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "lem-sc-hilb-to-pic-surjective",
+  "worker": "stage1",
+  "summary": "Split following Stacks 0BA0, proof, fourth paragraph, read in pic.tex (tag verified in tags/tags). The single sentence is written out in seven steps: (1) C has a k-point (separably closed k), so C_K is a smooth projective curve with H^0=K, h^1=g, cohomology vanishing above 1, chi = h^0 - h^1 and chi(O)=1-g; (2) a K-point y of P_d is a class xi in Pic^d(Spec K), represented by an invertible L on C_K (Pic(C_K) -> Pic_{C/k}(Spec K) onto by 0B9N/0B9U) of degree d (degree of a class through the trivial covering); (3) chi(L)=d+1-g>=1 so h^0(L)>=1 (no Riemann-Roch theorem is needed: the degree is defined as chi(L)-chi(O)); (4) on the integral C_K, Z(s) of a nonzero s is an effective Cartier divisor D and L = O(D) (two new nodes, Stacks 02OR(4)/01WZ and 01X0(2)); (5) D is finite over K of length deg O(D) = d, so finite locally free of degree d, a K-point of Hilb^d; (6) its point x of H_d satisfies gamma_d o x = y by clause (3) of [lem-sc-hilb-to-pic-morphism]; (7) with K = kappa(p) every point p of P_d is hit. Statement unchanged. No slopmaster2 declaration states the item (grep of the id, of 'Hilb' and of Picard/Jacobian.lean: the surjectivity is only described in the docstring of the sorry isProper_of_representableBy_picardFunctorDegree_genus). Tools of other units used as black boxes: lem-pc-cartier-divisor-finite-over-field and lem-pc-degree-base-change (sk-thm-picard-rr), prop-pc-xk-integral and lem-pc-vanishing-above-dim (sk-thm-picard-twist), lem-pc-rational-hyp/thm-pc-pic-split (sk-prop-picard-pic-split), lem-pc-rational-points-dense (sk-prop-picard-dense-points), lem-pc-euler-characteristic-well-defined (sk-thm-picard-rr); all are units the unit sk-prop-jacobian cites, directly or through them.",
+  "blueprint": "Realizes the place of thm-sc-jacobian-representability recorded in blueprint.from (proof step (4) through lem-sc-picg-geometrically-integral: Pic^g is the image of Hilb^g) and unit sk-prop-jacobian step 4 'It is surjective: over an algebraically closed field K, a class L of degree g has h^0(L) >= chi(L) = 1 by [sk-thm-picard-rr] (RR), so L = O_{C_K}(D) for the zero divisor D of a nonzero section, a K-point of Hilb^g ([sk-thm-picard-hilb-curves] (2))': steps 1-3 are 'h^0(L) >= chi(L) = d+1-g >= 1' (for all field extensions K, as Stacks does, not only algebraically closed ones, which surjectivity on points with arbitrary residue fields needs), step 4 'L = O_{C_K}(D) for the zero divisor D of a nonzero section', step 5 'a K-point of Hilb', steps 6-7 'It is surjective'."
+ },
+ "reviewed": "2026-10-10 L: 7 steps along 0BA0 (5) checked (C_K smooth projective with H^0 = K and h^1 = g; a K-point of P_d is the class of an invertible L of degree d via the Pic split sequence; chi(L) = d+1-g >= 1 gives a nonzero section; D = Z(s) effective Cartier and L = O(D) by the two new nodes; D finite of degree d, a K-point of Hilb^d; gamma_d x = y by the morphism node; every point hit with K = kappa(p)). New nodes: lem-pc-nonzero-section-integral-cartier (02OR (4), unsplit), lem-pc-zero-scheme-divisor-iso (01X0 (2), closed on slopmaster2 by Hom.nonempty_iso_dual_toModules_tensorObj, verified). Off-unit citations are nodes of units the unit cites (no route finding). LeanSearch down."
 }
