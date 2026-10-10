@@ -2,7 +2,7 @@
 
 942 items; claim with `tools/claim.py next <group> [--stage N]`.
 
-## Stage 1: nodes to split (591)
+## Stage 1: nodes to split (589)
 
 | node | distance to a target | Lean state on the done branch |
 |---|---|---|
@@ -12,7 +12,6 @@
 | `lem-weil-pbc-pullback-ample-invertible` | 1013 | none |
 | `lem-weil-pbc-fibre-dimension-bounded-open-upstairs` | 1014 | none |
 | `lem-weil-pbc-improve-presentation-smooth-conormal-free` | 1014 | none |
-| `lem-weil-pbc-intersection-subfields-subspace` | 1014 | none |
 | `lem-weil-pbc-jacobi-zariski-regular-sequence-left-injective` | 1014 | none |
 | `lem-weil-pbc-minimal-finite-free-resolution-local` | 1014 | none |
 | `lem-weil-pbc-module-injective-open-cover-cech-acyclic` | 1014 | none |
@@ -20,8 +19,6 @@
 | `lem-weil-pbc-nonzerodivisor-if-maximal-not-associated` | 1014 | none |
 | `lem-weil-pbc-normal-nagata-monogenic-n1` | 1014 | none |
 | `lem-weil-pbc-p-basis-differentials-basis` | 1014 | none |
-| `lem-weil-pbc-polynomial-ring-maximal-localization-dimension` | 1014 | none |
-| `lem-weil-pbc-polynomial-ring-n2` | 1014 | none |
 | `lem-weil-pbc-quasi-coherence-scalar-restriction` | 1014 | none |
 | `lem-weil-pbc-quasi-coherent-algebra-change-of-rings` | 1014 | none |
 | `lem-weil-pbc-quasi-coherent-iso-on-affine-cover` | 1014 | none |
@@ -77,6 +74,7 @@
 | `lem-weil-pbc-limit-module-essentially-finite-presentation-over-system` | 1015 | none |
 | `lem-weil-pbc-local-ring-colimit-essentially-finite-type-over-z` | 1015 | none |
 | `lem-weil-pbc-module-ses-cech-h1-surjective` | 1015 | none |
+| `lem-weil-pbc-n2-char-p-purely-inseparable-criterion` | 1015 | none |
 | `lem-weil-pbc-openness-of-flatness` | 1015 | none |
 | `lem-weil-pbc-p-independent-extends-to-p-basis` | 1015 | none |
 | `lem-weil-pbc-polynomial-ring-maximal-chain-height-difference` | 1015 | none |
@@ -598,7 +596,7 @@
 | `def-exc-jacobian-presentation` | - | none |
 | `def-nagata-rees-algebra` | - | none |
 
-## Stage 2: nodes to state (351)
+## Stage 2: nodes to state (353)
 
 | node | distance to Mathlib | kind |
 |---|---|---|
@@ -779,6 +777,7 @@
 | `lem-weil-pbc-integral-extension-dimension` | 1 | state |
 | `lem-weil-pbc-integral-idempotent-annihilating-polynomial` | 1 | state |
 | `lem-weil-pbc-intersection-subfields-differentials` | 1 | state |
+| `lem-weil-pbc-intersection-subfields-subspace` | 1 | state |
 | `lem-weil-pbc-inverse-image-closed-pushforward-constant` | 1 | state |
 | `lem-weil-pbc-isolated-fibre-point-base-change` | 1 | state |
 | `lem-weil-pbc-isolated-fibre-point-residue-finite` | 1 | state |
@@ -826,6 +825,7 @@
 | `lem-weil-pbc-p-independent-differentials-independent` | 1 | state |
 | `lem-weil-pbc-polynomial-ideal-coefficients-monomial` | 1 | state |
 | `lem-weil-pbc-polynomial-quotient-dimension-lower-bound` | 1 | state |
+| `lem-weil-pbc-polynomial-ring-maximal-localization-dimension` | 1 | state |
 | `lem-weil-pbc-polynomial-ring-origin-regular-local` | 1 | state |
 | `lem-weil-pbc-popescu-artinian-flat-subalgebras` | 1 | state |
 | `lem-weil-pbc-popescu-delocalize-weak-localization-smooth` | 1 | state |
@@ -954,7 +954,7 @@
 | `lem-weil-pbc-p1-field-dimension-one` | 4 | state |
 | `lem-weil-pbc-projective-space-zero-isomorphism` | 4 | state |
 
-Not open yet: 602 nodes that wait for stage 1, 676 nodes that wait for a statement dependency.
+Not open yet: 600 nodes that wait for stage 1, 677 nodes that wait for a statement dependency.
 
 ## Stage 3: modules to prove (0)
 
