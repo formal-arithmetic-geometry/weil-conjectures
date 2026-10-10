@@ -7,11 +7,11 @@
    "place": "its statement (a notion the statement uses)",
    "via": []
   },
-  "same_as": null
+  "same_as": []
  },
  "kind": "definition",
  "title": "Pullback of a sheaf of modules along a morphism of schemes",
- "statement": "Let $g:X\\to Y$ be a morphism of schemes, with underlying continuous map $g$ and ring-sheaf map $g^\\sharp:\\mathcal O_Y\\to g_*\\mathcal O_X$, equivalently $g^{-1}\\mathcal O_Y\\to\\mathcal O_X$. For a sheaf of $\\mathcal O_Y$-modules $\\mathcal G$ (on the Zariski site of $Y$), the *pullback* $g^*\\mathcal G$ is the sheaf of $\\mathcal O_X$-modules\n\n$$\ng^*\\mathcal G=\\mathcal O_X\\otimes_{g^{-1}\\mathcal O_Y}g^{-1}\\mathcal G,\n$$\n\nwhere $g^{-1}\\mathcal G$ is the inverse image sheaf of abelian groups (sheafification of $V\\mapsto\\varinjlim_{U\\supseteq g(V)}\\mathcal G(U)$) with its $g^{-1}\\mathcal O_Y$-module structure. This is a functor $g^*:\\mathrm{Mod}(\\mathcal O_Y)\\to\\mathrm{Mod}(\\mathcal O_X)$, left adjoint to the pushforward $g_*:\\mathrm{Mod}(\\mathcal O_X)\\to\\mathrm{Mod}(\\mathcal O_Y)$, with $\\mathrm{id}^*\\cong\\mathrm{id}$ and $(h\\circ g)^*\\cong g^*h^*$.",
+ "statement": "Let $g:X\\to Y$ be a morphism of schemes [def-pc-scheme], with underlying continuous map $g$ and ring-sheaf map $g^\\sharp:\\mathcal O_Y\\to g_*\\mathcal O_X$, equivalently $g^{-1}\\mathcal O_Y\\to\\mathcal O_X$. For a sheaf of $\\mathcal O_Y$-modules $\\mathcal G$ [def-weil-sheaf-of-modules-category] (on the Zariski site of $Y$), the *pullback* $g^*\\mathcal G$ is the sheaf of $\\mathcal O_X$-modules\n\n$$\ng^*\\mathcal G=\\mathcal O_X\\otimes_{g^{-1}\\mathcal O_Y}g^{-1}\\mathcal G,\n$$\n\nusing the sheaf tensor product and change of rings [def-pur-sheaf-tensor-product], where $g^{-1}\\mathcal G$ is the inverse image sheaf of abelian groups [def-weil-pbc-topological-inverse-image] (sheafification of $V\\mapsto\\varinjlim_{U\\supseteq g(V)}\\mathcal G(U)$) with its $g^{-1}\\mathcal O_Y$-module structure. This is a functor $g^*:\\mathrm{Mod}(\\mathcal O_Y)\\to\\mathrm{Mod}(\\mathcal O_X)$, left adjoint to the pushforward $g_*:\\mathrm{Mod}(\\mathcal O_X)\\to\\mathrm{Mod}(\\mathcal O_Y)$, with $\\mathrm{id}^*\\cong\\mathrm{id}$ and $(h\\circ g)^*\\cong g^*h^*$.",
  "source": {
   "document": "literature/blueprint/master/blueprint/sec-abelian-varieties/sk-def-av-jacobian/def-pc-base-change.md",
   "place": "node def-pc-base-change, order 451: 'the base change of a module $\\mathcal F$ on $X_T$ is $\\mathcal F_{T'}=g_X^*\\mathcal F$'",
@@ -23,11 +23,63 @@
   ]
  },
  "stmt_deps": [
-  "def-pc-scheme"
+  "def-pc-scheme",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-pbc-topological-inverse-image",
+  "def-pur-sheaf-tensor-product"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "For a morphism $u:\\mathcal G\\to\\mathcal G'$ of $\\mathcal O_Y$-modules, [lem-pc-module-pullback-adjunction] gives the induced $g^{-1}\\mathcal O_Y$-module structure on $g^{-1}\\mathcal G$ [def-weil-pbc-topological-inverse-image] and the functorial map $\\mathrm{id}_{\\mathcal O_X}\\otimes g^{-1}u$ on the sheaf tensor product [def-pur-sheaf-tensor-product]. Its identity and composite laws make the displayed formula a functor $g^*:\\mathrm{Mod}(\\mathcal O_Y)\\to\\mathrm{Mod}(\\mathcal O_X)$ [def-weil-sheaf-of-modules-category]. The same theorem gives the sectionwise pushforward with its $\\mathcal O_Y(V)$-action restricted along $g^\\sharp_V$, which is the pushforward in Stacks 0095.",
+   "uses": [
+    "def-weil-pbc-topological-inverse-image",
+    "def-pur-sheaf-tensor-product",
+    "def-weil-sheaf-of-modules-category",
+    "lem-pc-module-pullback-adjunction"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sheaves.tex",
+    "place": "Tag 0095, definition-pushforward, lines 3116-3152 (pullback and pushforward functors)"
+   }
+  },
+  {
+   "text": "The morphism $g$ is in particular a morphism of ringed spaces [def-pc-scheme], and the pullback and pushforward of the preceding step are exactly $P_g$ and $g_*$ in [lem-pc-module-pullback-adjunction]. Its natural bijection $\\operatorname{Hom}_{\\mathcal O_X}(g^*\\mathcal G,\\mathcal F)\\cong\\operatorname{Hom}_{\\mathcal O_Y}(\\mathcal G,g_*\\mathcal F)$ is the adjunction claimed here. The named theorem is the missing tensor/restriction plus inverse-image/direct-image comparison, rather than an identification by notation with Mathlib's abstract left adjoint.",
+   "uses": [
+    "def-pc-scheme",
+    "lem-pc-module-pullback-adjunction"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sheaves.tex",
+    "place": "Tag 0096, lemma-adjoint-pullback-pushforward-modules, lines 3156-3187"
+   }
+  },
+  {
+   "text": "Apply [lem-pc-module-pullback-identity-composition] to the identity $X\\to X$ and to the composable pair $g:X\\to Y$, $h:Y\\to Z$. Since its $P_a$ is the formula of this definition for each morphism $a$, the two natural isomorphisms there give $\\mathrm{id}^*\\cong\\mathrm{id}$ and $(h\\circ g)^*\\cong g^*h^*$ with the source and target module categories required here.",
+   "uses": [
+    "lem-pc-module-pullback-identity-composition"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sheaves.tex",
+    "place": "Tag 0097, lemma-push-pull-composition-modules, lines 3189-3202; identity isomorphism from the identity adjunction"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-topological-inverse-image",
+  "def-pur-sheaf-tensor-product",
+  "def-weil-sheaf-of-modules-category",
+  "def-pc-scheme",
+  "lem-pc-module-pullback-adjunction",
+  "lem-pc-module-pullback-identity-composition"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/sheaves.tex",
+  "place": "Tags 0095 (definition-pushforward), 0096 (lemma-adjoint-pullback-pushforward-modules), 0097 (lemma-push-pull-composition-modules)"
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -59,7 +111,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "worker",
@@ -85,5 +137,19 @@
   "file": "Mathlib/AlgebraicGeometry/Modules/Sheaf.lean",
   "how": "exact: for `g : X ⟶ Y`, `Scheme.Modules.pullback g : Y.Modules ⥤ X.Modules` (line 183) is $g^*$; it is characterized as the left adjoint of `Scheme.Modules.pushforward g` (line 166) by `pullbackPushforwardAdjunction` (line 189), which is the content of Stacks Tag 0096 and determines $g^*\\mathcal G$ up to unique isomorphism, so the tensor-product formula is this functor; `pullbackId` (line 219) and `pullbackComp` (line 241) are the identity and composition isomorphisms Re-check 2026-10-09: Mathlib defines `SheafOfModules.pullback` as a left adjoint of the pushforward; the formula $\\mathcal O_X\\otimes_{g^{-1}\\mathcal O_Y}g^{-1}\\mathcal G$ is not stated in Mathlib, and it agrees with the left adjoint by Stacks 0096; the node's functor, adjunction and identity/composition isomorphisms are those of Mathlib.",
   "reason": "re-check 2026-10-09 (lead's decision on the report of list C): the node defines the pullback of modules by the formula O_X ⊗_{g^{-1}O_Y} g^{-1}G, Mathlib defines SheafOfModules.pullback / Scheme.Modules.pullback as the left adjoint of the pushforward; their agreement is a theorem (Stacks 0096), and a node whose agreement with Mathlib's definition is itself a theorem is not a leaf (stages/1-dag.md §2; same ruling as def-pur-sheaf-tensor-product on list D). The match stays recorded for the split: the functor, the adjunction and the identity/composition isomorphisms are Mathlib's"
+ },
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "def-pc-module-pullback",
+  "worker": "stage1",
+  "summary": "Checked the pullback definition against Stacks Sheaves 0095 (definition-pushforward), 0096 (lemma-adjoint-pullback-pushforward-modules), and 0097 (lemma-push-pull-composition-modules). The tensor formula uses the existing sheaf tensor/change-of-rings definition, topological inverse image, and category of sheaf modules, now cited in the statement. Three steps define the functor on morphisms, apply a named adjunction theorem to the displayed tensor formula, and apply a named identity/composition theorem. The latter two are separate unsplit statements, because Mathlib gives them only for its abstract left adjoint and the comparison is not definitional. No exact sorry-free slopmaster2 declaration states the entire definition.",
+  "blueprint": "The created definition serves the module base-change clause in the statement of def-pc-base-change (order 451), which writes F_{T'} = g_X^* F; the Stacks 0095 tensor formula makes that notation precise. The blueprint node has no proof steps."
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "group": "F1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed by the lead of F1; spot-checked by L: L: 0095/0096/0097 for the Zariski pullback of modules; adjunction and composition as new nodes"
  }
 }
