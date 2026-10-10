@@ -28,39 +28,159 @@
   "lem-weil-pbc-open-immersion-module-pullback-restriction",
   "def-sc-etale-qcoherent-module"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Because an open immersion $j:U\\to X$ is etale, apply the localization equivalence to the object $j$ of $X_{\\mathrm{Et}}$. A $U$-etale object $v:V\\to U$ corresponds to $(j\\circ v:V\\to X, v:V\\to U)$, and the two covering topologies coincide. This equivalence sends $\\mathrm{id}_U$ to the final object of $U_{\\mathrm{Et}}$.",
+   "uses": [
+    "lem-weil-pbc-etale-site-localization-open"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Sites, Section 00XZ (section-localize), specialized to the etale site"
+   }
+  },
+  {
+   "text": "For every $v:V\\to U$ in $U_{\\mathrm{Et}}$, the restriction $G|_U$ of $G$ to $X_{\\mathrm{Et}}/U$ has value $G(V\\to U\\to X)$. The etale inverse-image restriction theorem identifies $j^{-1}G(V)$ with this same group, using the original restriction maps of $G$. Thus the sheaf transported from the slice site by step 1 is $j^{-1}G$; the identification is natural in $G$ and remains compatible with a further open inclusion.",
+   "uses": [
+    "lem-weil-pbc-etale-inverse-image-restriction",
+    "lem-weil-pbc-etale-site-localization-open"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Sites, Section 00XZ (section-localize), and etale inverse-image restriction"
+   }
+  },
+  {
+   "text": "Apply Stacks 03F3(1) to the constant integer ring on $X_{\\mathrm{Et}}$: restriction of an injective abelian sheaf to $X_{\\mathrm{Et}}/U$ remains injective, since it is right adjoint to exact extension by zero. In an injective resolution $G\\to I^\\bullet$, restriction therefore gives an injective resolution on the slice site, and $I^n(U)=(I^n|_U)(\\mathrm{id}_U)$. Taking cohomology of these identical complexes gives $H^q(U,G)\\cong H^q(\\mathrm{id}_U,G|_U)$, naturally in $G$ and in restriction to smaller open objects.",
+   "uses": [
+    "lem-weil-pbc-cohomology-over-object-localization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Cohomology on Sites, Lemma 03F3 (lemma-cohomology-of-open), parts (1)-(2)"
+   }
+  },
+  {
+   "text": "Use the site equivalence of step 1 with $W=\\mathrm{id}_U$ in the cohomology transport theorem: it identifies $H^q(\\mathrm{id}_U,G|_U)$ with cohomology over the final object of $U_{\\mathrm{Et}}$ for the transported sheaf. By step 2 that sheaf is $j^{-1}G$; evaluation at the final object is the global-sections functor $\\Gamma(U_{\\mathrm{Et}},-)$ [def-weil-pbc-global-sections-functor], and an injective resolution $j^{-1}G\\to J^\\bullet$ (bounded below, injective terms) is a K-injective resolution [lem-weil-pbc-bounded-below-injectives-kinjective], so this cohomology is $H^q(U_{\\mathrm{Et}},j^{-1}G)$ as defined by K-injective resolutions [def-weil-pbc-etale-cohomology]. The naturality in $G$ and further inclusions follows from the naturality of the three comparisons.",
+   "uses": [
+    "lem-weil-pbc-etale-site-localization-open",
+    "lem-weil-pbc-etale-cohomology-invariance-under-site-equivalence",
+    "lem-weil-pbc-etale-inverse-image-restriction",
+    "lem-weil-pbc-bounded-below-injectives-kinjective",
+    "def-weil-pbc-global-sections-functor"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Cohomology on Sites, Lemma 03F3, and Sites, Section 00XZ"
+   }
+  },
+  {
+   "text": "Set $G=\\mathcal F_{\\mathrm{et}}$. For each etale $v:V\\to U$, step 2 gives $(j^{-1}G)(V)=G(j\\circ v)=\\Gamma(V,(j\\circ v)^*\\mathcal F)$. Apply $c_{v,j}^{-1}$ to identify this with $\\Gamma(V,v^*j^*\\mathcal F)$ and then $v^*(\\kappa_{\\mathcal F}^{-1})$ to identify it with $\\Gamma(V,v^*(\\mathcal F|_U))=((\\mathcal F|_U)_{\\mathrm{et}})(V)$. Naturality of $c_{v,j}$ and $\\kappa_{\\mathcal F}$ makes these maps commute with each restriction $\\rho_g$, whose formula and composition law are given by the etale quasi-coherent presheaf nodes. Thus the sectionwise maps form the stated natural isomorphism of sheaves.",
+   "uses": [
+    "lem-weil-pbc-etale-inverse-image-restriction",
+    "def-sc-etale-qcoherent-module",
+    "lem-pc-module-pullback-identity-composition",
+    "lem-weil-pbc-open-immersion-module-pullback-restriction",
+    "lem-sc-etale-qcoherent-presheaf-functorial"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Sites, Section 00XZ; module pullback composition and open restriction"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-etale-site-localization-open",
+  "lem-weil-pbc-etale-inverse-image-restriction",
+  "lem-weil-pbc-cohomology-over-object-localization",
+  "lem-weil-pbc-etale-cohomology-invariance-under-site-equivalence",
+  "def-sc-etale-qcoherent-module",
+  "lem-pc-module-pullback-identity-composition",
+  "lem-weil-pbc-open-immersion-module-pullback-restriction",
+  "lem-sc-etale-qcoherent-presheaf-functorial",
+  "lem-weil-pbc-bounded-below-injectives-kinjective",
+  "def-weil-pbc-global-sections-functor"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Cohomology on Sites, Lemma 03F3 (lemma-cohomology-of-open) and Sites, Section 00XZ (section-localize)"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
-   "query": "cohomology over an object of an etale site equals cohomology on the localized site of an open subscheme",
-   "results": "No declaration comparing site cohomology over an object with the cohomology of the small etale site of an open",
+   "query": "cohomology over an object of an etale site equals cohomology on the localized site",
+   "results": "No exact declaration; overEquiv found",
    "date": "2026-10-10",
-   "verdict": "no match"
+   "verdict": "no exact match"
   },
   {
    "tool": "leanfinder",
-   "query": "localized site X_Et/U equivalent to U_Et and cohomology comparison",
-   "results": "Scheme.smallEtaleTopology and generic sheaf cohomology only; no localization/cohomology comparison",
+   "query": "localized etale site equivalent to etale site of underlying scheme",
+   "results": "Scheme.Etale.overEquiv and Sheaf.H.mapFunctor_bijective",
    "date": "2026-10-10",
-   "verdict": "no match"
+   "verdict": "generalization only"
   },
   {
    "tool": "grep",
-   "query": "rg -n 'cohomology over an object|localized site|small etale site of the open' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/CategoryTheory/Sites ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicGeometry",
-   "results": "Generic Sheaf.H and smallEtaleTopology declarations, but no theorem identifying localized etale-site cohomology",
+   "query": "rg -n 'overEquiv|overSheafEquiv|mapFunctor_bijective' Mathlib/AlgebraicGeometry/Sites/EtaleOver.lean Mathlib/CategoryTheory/Sites/SheafCohomology/Basic.lean",
+   "results": "EtaleOver.lean:72,178; SheafCohomology/Basic.lean:136",
    "date": "2026-10-10",
-   "verdict": "no match"
+   "verdict": "no combined declaration"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-sc-etale-zariski-qcoh-comparison",
   "by": "worker",
   "date": "2026-10-10"
  },
  "chapter": "sec-curve-estimates",
- "unit": "sk-prop-cd"
+ "unit": "sk-prop-cd",
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "lem-weil-pbc-etale-cohomology-over-open",
+  "worker": "stage1",
+  "summary": "Inserted the missing Stacks 03F3 localization comparison before site-equivalence transport, cited the existing inverse-image restriction theorem, and proved the quasi-coherent sheaf identification sectionwise with pullback composition and naturality. Corrected the false Mathlib-leaf claim for the project localization declarations and restored the original statement exactly.",
+  "blueprint": "Realizes the ancestor blueprint proof clause on the affine-local identification of cohomology over an open etale object with cohomology on the open, via Sites 00XZ and Cohomology on Sites 03F3.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-etale-inverse-image-restriction",
+    "why": "The separate etale inverse-image restriction theorem supplies the formula needed to identify the slice sheaf with j^{-1}G."
+   },
+   {
+    "node": "lem-pc-module-pullback-identity-composition",
+    "why": "The general module-pullback composition isomorphism supplies c_(v,j) in the final sheaf calculation."
+   },
+   {
+    "node": "lem-weil-pbc-open-immersion-module-pullback-restriction",
+    "why": "The general open-immersion module lemma supplies kappa_F for the final sheaf calculation."
+   },
+   {
+    "node": "lem-sc-etale-qcoherent-presheaf-functorial",
+    "why": "This presheaf lemma supplies the explicit composition law for the restriction maps rho_g in the final sheaf calculation."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-etale-inverse-image-restriction",
+  "lem-pc-module-pullback-identity-composition",
+  "lem-weil-pbc-open-immersion-module-pullback-restriction",
+  "lem-sc-etale-qcoherent-presheaf-functorial"
+ ],
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-eco2",
+  "group": "F1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-eco2 (reviewer sub-agent of L); spot-checked: Re-push after return 15:53: all 7 points repaired. (1) new node lem-weil-pbc-cohomology-over-object-localization states Stacks 03F3 (1)-(2) (sites-cohomology-lemma-cohomology-of-open, checked in tags) hypothesis by hypothesis (site, object W, abelian sheaf, slice topology, restriction preserves injectives, H^q(W,G)=H^q(id_W,G|_W)); step 3 cites it. (2) invariance node rewritten as one statement for an equivalence of sites with coverings carried both ways, object W, H^q(W,G)=H^q(e(W),e_*G) over def-weil-pbc-sites-and-cohomology (2); true (e_*G(e(W))=G(W), equivalence of Ab-sheaf categories preserves injective resolutions); F_et clause gone. (3) step 5 now argues sectionwise: F_et(j o v)=Gamma(V,(j o v)^*F) [def-sc-etale-qcoherent-module], c_{v,j} [lem-pc-module-pullback-identity-composition, normalized in lem-sc-etale-qcoherent-presheaf-functorial], v^*(kappa_F^{-1}) [lem-weil-pbc-open-immersion-module-pullback-restriction], compatibility with rho_g from the presheaf-functorial composition law; all in uses/proof_deps. (4) step 2 cites existing lem-weil-pbc-etale-inverse-image-restriction whose clause 1 states rho_G: j^{-1}G ~ G|_Y with G|_Y(V->Y)=G(V->X) for j etale (open immersion is etale): exactly the requested fact. (5) localization node is unsplit, mathlib_match null, lean_candidates overEquiv (EtaleOver.lean 64-80) and overSheafEquiv (174-178) verified in the project file by sed and sorry-free by sorryfree.py (OK both); overSheafEquiv for any A, specialised to Ab, said. (6) item statement byte-identical to sheaf-dag (diffed); only split-owned fields changed. (7) report names the steps and statements. Tool uses accepted as generic black boxes: lem-weil-pbc-etale-inverse-image-restriction, lem-pc-module-pullback-identity-composition, lem-weil-pbc-open-immersion-module-pullback-restriction, lem-sc-etale-qcoherent-presheaf-functorial. Small cases: q=0 (both sides sections G(U)), j=id (slice = site), zero sheaf. FIX more, RETURN less: dag/nodes/sec-curve-estimates/lem-weil-pbc-etale-cohomology-over-open.json: proof[3]: C1, step 4 identified cohomology over the final object (injective resolutions) with H^q(U_Et,-) defined by K-injective resolutions without a node; added the sentence citing lem-weil-pbc-bounded-below-injectives-kinjective and def-weil-pbc-global-sections-functor, added to uses and proof_deps; proof[0],proof[1]: source.document sites-cohomology.tex -> sites.tex (00XZ is in sites.tex); proof_origin.place: 03S2 (extension by zero) -> Sites 00XZ. dag/nodes/sec-curve-estimates/lem-weil-pbc-etale-site-localization-open.json: statement: B3, the localized site X_Et/U and its topology were used undefined; inserted their definition (slice category over U->X, family covers iff underlying family covers in X_Et, as in Stacks 00XZ); stmt_deps: added def-weil-pbc-abelian-etale-sheaves (cited in statement). Start Sat Oct 10 04:06:15 PM UTC 2026, end Sat Oct 10 04:07:19 PM UTC 2026.; 2 file(s) fixed by the reviewer"
+ },
+ "lead_note": "2026-10-10 L (R-eco2): item source.place (maintainer field) names 'Etale Cohomology, Section 03S2' as the localization reference; 03S2 is extension by zero, the localization reference is Sites 00XZ (section-localize): correct source.place."
 }

@@ -1,0 +1,59 @@
+{
+ "id": "lem-weil-pbc-cohomology-over-object-localization",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-artin-schreier-dimension",
+   "place": "proof, proper case: cohomology over an open etale object is first computed on its localized site",
+   "via": [
+    "lem-sc-etale-zariski-qcoh-comparison"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Cohomology over an object is cohomology on its localized site",
+ "statement": "Let $\\mathcal C$ be a Grothendieck site [def-weil-pbc-sites-and-cohomology], $W$ an object of $\\mathcal C$, and $G$ an abelian sheaf on $\\mathcal C$. Give the slice category $\\mathcal C/W$ the topology in which a family covers precisely when its underlying family covers in $\\mathcal C$; it has final object $\\mathrm{id}_W:W\\to W$. Write $G|_W$ for the sheaf on $\\mathcal C/W$ given by $(V\\to W)\\mapsto G(V)$. Restriction $G\\mapsto G|_W$ sends injective abelian sheaves on $\\mathcal C$ to injective abelian sheaves on $\\mathcal C/W$. For every $q\\geq0$, the cohomology $H^q(W,G)=R^q\\Gamma(W,-)(G)$ over $W$ [def-weil-pbc-sites-and-cohomology] is canonically isomorphic to $H^q(\\mathrm{id}_W,G|_W)=R^q\\Gamma(\\mathrm{id}_W,-)(G|_W)$ computed on the localized site $\\mathcal C/W$, naturally in $G$ and in maps of objects $W'\\to W$.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Cohomology on Sites, Lemma 03F3 (lemma-cohomology-of-open), parts (1)-(2); abelian sheaves are modules over the constant integer sheaf"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-sites-and-cohomology"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "cohomology over an object of a site equals cohomology of restriction to localized site",
+   "results": "No exact declaration recorded; Mathlib SheafCohomology/Basic.lean lists this comparison as TODO",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "injective sheaf restriction localized site preserves injectives and cohomology",
+   "results": "No exact comparison recorded; Sheaf.H defines Ext cohomology",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "rg -n 'restrict.*[Ii]njective|[Ii]njective.*restrict|cohomology.*[Oo]ver' .lake/packages/mathlib/Mathlib/CategoryTheory/Sites",
+   "results": "SheafCohomology/Basic.lean:35 explicitly marks (F.cohomologyPresheaf n).obj U ~= Sheaf.H (F.over U) n as TODO; no exact declaration",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "created": {
+  "item": "lem-weil-pbc-etale-cohomology-over-open",
+  "by": "worker",
+  "date": "2026-10-10"
+ },
+ "chapter": "sec-curve-estimates",
+ "unit": "sk-prop-cd"
+}
