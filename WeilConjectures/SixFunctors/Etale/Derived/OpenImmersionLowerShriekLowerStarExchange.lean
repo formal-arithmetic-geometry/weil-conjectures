@@ -5,7 +5,9 @@ Authors: Christian Merten
 -/
 module
 
+public import WeilConjectures.SixFunctors.Etale.BaseChangeTheorems.Proper
 public import WeilConjectures.SixFunctors.Etale.Derived.OpenImmersionLowerShriekBaseChange
+public import WeilConjectures.SixFunctors.OpenClosed.Derived
 
 /-!
 # Exchanging an extension by zero with a derived pushforward
@@ -26,8 +28,8 @@ mate, along the adjunctions `D(g'^*) ⊣ Rg'_*` and `D(g''^*) ⊣ Rg''_*`, of th
 derived base change isomorphism `D(g'^*) ⋙ Dj'_! ≅ Dj_! ⋙ D(g''^*)` for the extension by zero.
 Since the pullbacks are exact, this needs no monoidal structure on the coefficients.
 
-When `g''` is proper and the coefficients are torsion, this map is an isomorphism (stated, not
-yet proved); this is the key step in the proof of the composition law `R(f ≫ g)_! ≅ Rf_! ⋙ Rg_!`.
+When `g''` is proper and the coefficients are torsion, this map is an isomorphism; this is the
+key step in the proof of the composition law `R(f ≫ g)_! ≅ Rf_! ⋙ Rg_!`.
 
 ## Main definitions
 
@@ -135,33 +137,107 @@ lemma openImmersionLowerShriekLowerStarExchange_app (hsq : IsPullback g' j' j g'
 
 variable (Λ : Type (u + 1)) [CommRing Λ]
 
+/-- Over the open `U` the exchange map is an isomorphism, for any `g''` and any coefficients:
+`D(j^*)` of the exchange map `Dj_! Rg'_* K ⟶ Rg''_* Dj'_! K` is an isomorphism.
+
+By the adjunction `Dj_! ⊣ D(j^*)` it suffices that composing with the exchange map is bijective
+on maps out of `Dj_! T`. As `Dj_!` is fully faithful these are the maps `Dj_! ψ` for
+`ψ : T ⟶ Rg'_* K`, and composing `Dj_! ψ` with the exchange map and taking the adjoint along
+`D(g''^*) ⊣ Rg''_*` gives `bc ≫ Dj'_!(ψ♭)`, with `bc : Dg''^* Dj_! T ≅ Dj'_! Dg'^* T` the base
+change isomorphism and `ψ♭ : Dg'^* T ⟶ K` the adjoint of `ψ`; this is bijective in `ψ`, since
+`Dj'_!` is fully faithful too. -/
+lemma isIso_upperStar_map_openImmersionLowerShriekLowerStarExchange_app
+    (hsq : IsPullback g' j' j g'')
+    (K : DerivedCategory (Sheaf U'.smallEtaleTopology (ModuleCat.{u + 1} Λ))) :
+    IsIso (D((j)^*[ModuleCat.{u + 1} Λ]).map
+      ((openImmersionLowerShriekLowerStarExchange (ModuleCat.{u + 1} Λ) hsq).app K)) := by
+  let adj := derivedOpenImmersionLowerShriekUpperStarAdjunction (ModuleCat.{u + 1} Λ) j
+  let adj' := derivedOpenImmersionLowerShriekUpperStarAdjunction (ModuleCat.{u + 1} Λ) j'
+  let a' := mapDerivedUpperStarLowerStarAdjunction (ModuleCat.{u + 1} Λ) g'
+  let a'' := mapDerivedUpperStarLowerStarAdjunction (ModuleCat.{u + 1} Λ) g''
+  let bc := mapDerivedCategoryOpenImmersionLowerShriekBaseChangeIso (ModuleCat.{u + 1} Λ) hsq
+  let α := (openImmersionLowerShriekLowerStarExchange (ModuleCat.{u + 1} Λ) hsq).app K
+  rw [isIso_iff_yoneda_map_bijective]
+  intro T
+  -- composing with `α` on maps out of `Dj_! T`, followed by the adjunction `Dg''^* ⊣ Rg''_*`
+  have key (ψ : T ⟶ R((g')_*[ModuleCat.{u + 1} Λ]).obj K) :
+      (a''.homEquiv _ _).symm (D((j)_!open[ModuleCat.{u + 1} Λ]).map ψ ≫ α) =
+        bc.inv.app T ≫ D((j')_!open[ModuleCat.{u + 1} Λ]).map ((a'.homEquiv _ _).symm ψ) := by
+    rw [show α = _ from openImmersionLowerShriekLowerStarExchange_app _ hsq K]
+    erw [← a''.homEquiv_unit]
+    rw [a''.homEquiv_naturality_left_symm]
+    erw [Equiv.symm_apply_apply]
+    rw [a'.homEquiv_counit, Functor.map_comp]
+    exact bc.inv.naturality_assoc ψ _
+  have h₁ : Function.Bijective (fun ψ : T ⟶ R((g')_*[ModuleCat.{u + 1} Λ]).obj K ↦
+      bc.inv.app T ≫ D((j')_!open[ModuleCat.{u + 1} Λ]).map ((a'.homEquiv _ _).symm ψ)) := by
+    have := ((Iso.homCongr (bc.app T) (Iso.refl _)).bijective.comp
+      (adj'.fullyFaithfulLOfIsIsoUnit.map_bijective _ K)).comp (a'.homEquiv T K).symm.bijective
+    convert this using 2
+    simp [Iso.homCongr]
+  have h₂ : Function.Bijective (fun φ : D((j)_!open[ModuleCat.{u + 1} Λ]).obj T ⟶
+      D((j)_!open[ModuleCat.{u + 1} Λ]).obj (R((g')_*[ModuleCat.{u + 1} Λ]).obj K) ↦ φ ≫ α) := by
+    rw [← Function.Bijective.of_comp_iff _ (adj.fullyFaithfulLOfIsIsoUnit.map_bijective _ _),
+      ← Function.Bijective.of_comp_iff' (a''.homEquiv _ _).symm.bijective]
+    convert h₁ using 1
+    funext ψ
+    exact key ψ
+  have := ((adj.homEquiv _ _).bijective.comp h₂).comp (adj.homEquiv _ _).symm.bijective
+  convert this using 1
+  funext x
+  simp [← Adjunction.homEquiv_naturality_right_symm]
+  rfl
+
 /-- **Extension by zero commutes with proper pushforward**: if the coefficient ring `Λ` is
 torsion as an additive group, then for a cartesian square `g' ≫ j = j' ≫ g''` of schemes with
 `j` and `j'` open immersions and `g''` proper, the exchange map
 `Rg'_* ⋙ Dj_! ⟶ Dj'_! ⋙ Rg''_*` on the unbounded derived categories `D(-_ét, Λ)` is an
 isomorphism.
 
-The statement fails for general coefficients, which is why `Λ` is torsion here. With `Λ` torsion
-and `g''` proper it holds by the argument of
-`AlgebraicGeometry.Etale.isIso_derivedBaseChangeMap_of_isProper_of_isAddTorsion_ring`: the
-question is local on `Z`, and over a quasi-compact open of `Z` the proper map `g''` has bounded
-fibre dimension, so `Rg''_*` has finite cohomological dimension on torsion sheaves and the
-bounded below statement passes to unbounded complexes.
-
-Proof plan: with `i` the closed complement of `j`, it suffices to check the claim after `D(j^*)`
-and after `D(i^*)`.
-- After `D(j^*)` it follows from base change along the open immersion `j`,
-  `j^* Rg''_* ≅ Rg'_* j'^*`, once `j^* j_! ≅ 𝟭` and `j'^* j'_! ≅ 𝟭` identify both sides.
-- After `D(i^*)` both sides vanish: the source because `i^* j_! = 0`, and the target by proper
-  base change for `g''` along `i`, which is
-  `AlgebraicGeometry.Etale.isIso_derivedBaseChangeMap_of_isProper_of_isAddTorsion_ring`, since
-  the pullback of `j'_!` to the closed complement of `j'` vanishes.
+With `i` the closed complement of `j`, it is checked after `D(j^*)` and after `D(i^*)`:
+- after `D(j^*)` this holds for any `g''` and any coefficients, by
+  `AlgebraicGeometry.Etale.isIso_upperStar_map_openImmersionLowerShriekLowerStarExchange_app`;
+- after `D(i^*)` both sides vanish: the source because `i^* j_! = 0`, and the target by proper
+  base change for `g''` along `i`
+  (`AlgebraicGeometry.Etale.isIso_derivedBaseChangeMap_of_isProper_of_isAddTorsion_ring`),
+  since the pullback of `j'_!` to `g''⁻¹(W)`, which does not meet `U'`, vanishes.
 
 (blueprint: unbounded analogue of `thm:open-proper-interchange`) -/
 theorem isIso_openImmersionLowerShriekLowerStarExchange_of_isAddTorsion_ring
     (hΛ : IsAddTorsion Λ) [IsProper g''] (hsq : IsPullback g' j' j g'') :
-    IsIso (openImmersionLowerShriekLowerStarExchange (ModuleCat.{u + 1} Λ) hsq) :=
-  sorry
+    IsIso (openImmersionLowerShriekLowerStarExchange (ModuleCat.{u + 1} Λ) hsq) := by
+  have hdisj : Disjoint (Set.range j.closedComplement.base) (Set.range j.base) := by
+    rw [j.range_closedComplement]
+    exact disjoint_compl_left
+  have (K : DerivedCategory (Sheaf U'.smallEtaleTopology (ModuleCat.{u + 1} Λ))) :
+      IsIso ((openImmersionLowerShriekLowerStarExchange (ModuleCat.{u + 1} Λ) hsq).app K) := by
+    apply isIso_of_isIso_mapDerivedCategoryUpperStar_map _ j j.closedComplement
+      j.range_closedComplement
+    · exact isIso_upperStar_map_openImmersionLowerShriekLowerStarExchange_app Λ hsq K
+    refine isIso_of_source_target_iso_zero _
+      (isZero_mapDerivedCategoryUpperStar_obj_openImmersionLowerShriek_of_disjoint_range _ j
+        j.closedComplement hdisj _).isoZero (IsZero.isoZero ?_)
+    let sq := IsPullback.of_hasPullback g'' j.closedComplement
+    have := isIso_derivedBaseChangeMap_of_isProper_of_isAddTorsion_ring Λ hΛ sq
+    let N := D((j')_!open[ModuleCat.{u + 1} Λ]).obj K
+    have hN :
+        IsZero (L((pullback.fst g'' j.closedComplement)^*[ModuleCat.{u + 1} Λ]).obj N) := by
+      refine IsZero.of_iso ?_ ((leftDerivedUpperStarIsoMapDerivedCategory _ _).app N)
+      refine isZero_mapDerivedCategoryUpperStar_obj_openImmersionLowerShriek_of_disjoint_range _
+        j' _ ?_ K
+      rw [Set.disjoint_left]
+      rintro _ ⟨x, rfl⟩ ⟨y, hy⟩
+      have h₁ : g''.base ((pullback.fst g'' j.closedComplement).base x) ∈
+          Set.range j.closedComplement.base := ⟨(pullback.snd g'' j.closedComplement).base x, by
+        rw [← Scheme.Hom.comp_apply, ← pullback.condition, Scheme.Hom.comp_apply]⟩
+      have h₂ : g''.base ((pullback.fst g'' j.closedComplement).base x) ∈ Set.range j.base :=
+        ⟨g'.base y, by rw [← Scheme.Hom.comp_apply, hsq.w, Scheme.Hom.comp_apply, hy]⟩
+      exact Set.disjoint_left.1 hdisj h₁ h₂
+    exact IsZero.of_iso
+      ((R((pullback.snd g'' j.closedComplement)_*[ModuleCat.{u + 1} Λ])).map_isZero hN)
+      ((leftDerivedUpperStarIsoMapDerivedCategory _ _).symm.app _ ≪≫
+        asIso ((derivedBaseChangeMap _ sq.toCommSq).app N))
+  exact NatIso.isIso_of_isIso_app _
 
 end Etale
 
