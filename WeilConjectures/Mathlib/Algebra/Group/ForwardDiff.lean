@@ -155,4 +155,27 @@ theorem degree_add_one_le_of_le_degree_comp_sub {P : ℚ[X]} {a d : ℕ}
   rw [degree_eq_natDegree hP] at hlt ⊢
   exact_mod_cast (WithBot.coe_lt_coe.1 (h.trans_lt hlt) : d < P.natDegree)
 
+/-- For a polynomial of degree at most `g`, the `g`-th forward difference at `0` of its values at
+the natural numbers is `g!` times its coefficient of `X ^ g`. -/
+theorem fwdDiff_iter_eval_natCast_zero {P : ℚ[X]} {g : ℕ} (hP : P.natDegree ≤ g) :
+    Δ_[1]^[g] (fun n : ℕ ↦ P.eval (n : ℚ)) 0 = g.factorial * P.coeff g := by
+  rw [fwdDiff_iter_comp_natCast (fun x : ℚ ↦ P.eval x) g 0]
+  rcases hP.lt_or_eq with hlt | rfl
+  · rw [Polynomial.fwdDiff_iter_eq_zero_of_degree_lt hlt,
+      Polynomial.coeff_eq_zero_of_natDegree_lt hlt]
+    simp
+  · rw [Polynomial.fwdDiff_iter_degree_eq_factorial]
+    simp [mul_comm]
+
+/-- Shifting the variable does not change the coefficient of `X ^ g` of a polynomial of degree at
+most `g`. -/
+theorem coeff_comp_X_add_C_of_natDegree_le {P : ℚ[X]} {g : ℕ} (hP : P.natDegree ≤ g) (a : ℚ) :
+    (P.comp (X + C a)).coeff g = P.coeff g := by
+  rw [← taylor_apply]
+  rcases hP.lt_or_eq with hlt | rfl
+  · rw [coeff_eq_zero_of_natDegree_lt hlt,
+      coeff_eq_zero_of_natDegree_lt (by rwa [natDegree_taylor])]
+  · have := leadingCoeff_taylor (r := a) (f := P)
+    rwa [Polynomial.leadingCoeff, natDegree_taylor] at this
+
 end Polynomial

@@ -568,8 +568,117 @@ theorem Scheme.Hom.fwdDiff_iter_eulerChar_tensorObj_tensorPow [IsIntegral Y]
     (e : (Scheme.Modules.pullback U.ι).obj E ≅ SheafOfModules.free (ULift.{u} (Fin r))) :
     letI : Y.Over (Spec (.of K)) := ⟨f⟩
     Δ_[1]^[((topologicalKrullDim Y).unbotD 0).toNat]
-      (fun m ↦ Scheme.Modules.eulerChar K (E ⊗ M.tensorPow m)) 0 = r * f.degree M :=
-  sorry
+      (fun m ↦ Scheme.Modules.eulerChar K (E ⊗ M.tensorPow m)) 0 = r * f.degree M := by
+  let : Y.Over (Spec (.of K)) := ⟨f⟩
+  have : IsProper (Y ↘ Spec (.of K)) := ‹IsProper f›
+  have := hample.isInvertible
+  have := Scheme.Modules.isNoetherian_of_isProper K (X := Y)
+  have : SheafOfModules.IsQuasicoherent (R := Y.ringCatSheaf) E :=
+    (SheafOfModules.IsFinitePresentation.exists_quasicoherentData E).choose.isQuasicoherent
+  set g := ((topologicalKrullDim Y).unbotD 0).toNat
+  -- a section `t` of `M^{⊗ c}` with `∅ ≠ D(t) ⊆ U`
+  set η := genericPoint Y
+  have hηU : η ∈ U := ((genericPoint_spec Y).mem_open_set_iff U.isOpen).mpr (by simpa using hU)
+  let J := Scheme.IdealSheafData.vanishingIdeal ⟨(U : Set Y)ᶜ, U.isOpen.isClosed_compl⟩
+  have hηJ : η ∉ (J.support : Set Y) := by simpa [J] using hηU
+  obtain ⟨c, hc⟩ := Scheme.Modules.exists_mem_compl_support_zeroLocus_comp_toModulesι
+    (Y ↘ Spec (.of K)) hample J hηJ
+  obtain ⟨σ, hσ⟩ := hc c le_rfl
+  have : SheafOfModules.IsInvertible.{u, u, u} (M.tensorPow c) :=
+    Scheme.Modules.IsInvertible.sheafOfModules_isInvertible _
+  set t := σ ≫ J.toModulesι ▷ M.tensorPow c ≫ (λ_ _).hom
+  set V : Y.Opens := (Scheme.Modules.Hom.zeroLocus t).support.compl
+  have hVU : V ≤ U := fun y hy ↦ by
+    by_contra hyU
+    exact Scheme.Modules.not_generatesAt_of_factors J σ (y := y) (by simpa [J] using hyU)
+      ((Scheme.Modules.generatesAt_iff_mem_compl_support t y).mpr hy)
+  -- `E` and `𝒪_Y^{⊕ r}` agree on `V`
+  let I := ULift.{u} (Fin r)
+  let ε : (Scheme.Modules.restrictFunctor V.ι).obj (SheafOfModules.free (R := Y.ringCatSheaf) I) ≅
+      (Scheme.Modules.restrictFunctor V.ι).obj E :=
+    (Scheme.Modules.restrictFunctorIsoPullback V.ι).app _ ≪≫
+      Scheme.Modules.pullbackFreeIso V.ι I ≪≫ (Scheme.Modules.pullbackFreeIso (Y.homOfLE hVU) I).symm ≪≫
+      (Scheme.Modules.pullback (Y.homOfLE hVU)).mapIso e.symm ≪≫
+      (Scheme.Modules.pullbackComp (Y.homOfLE hVU) U.ι).app E ≪≫
+      (Scheme.Modules.pullbackCongr (Y.homOfLE_ι hVU)).app E ≪≫
+      ((Scheme.Modules.restrictFunctorIsoPullback V.ι).app E).symm
+  obtain ⟨m, φ, hφ⟩ := Scheme.Modules.exists_hom_free_isIso_restrictFunctor_map f t E ε
+  -- kernel and cokernel of `φ` are supported on the proper closed subset `Vᶜ`
+  have hK := Scheme.Modules.isZero_restrict_kernel_of_isIso φ V
+  have hC := Scheme.Modules.isZero_restrict_cokernel_of_isIso φ V
+  have hdim : topologicalKrullDim (((V : Set Y)ᶜ : Set Y)) < g := by
+    refine topologicalKrullDim_lt_of_forall_exists_specializes isClosed_univ
+      V.isOpen.isClosed_compl (Set.subset_univ _)
+      (fun w _ ↦ ⟨η, trivial, genericPoint_specializes w, fun h ↦ h hσ⟩) ?_
+    rw [IsHomeomorph.topologicalKrullDim_eq _ (Homeomorph.Set.univ Y).isHomeomorph]
+    exact (Scheme.Modules.topologicalKrullDim_le_unbotD_toNat K).trans_lt
+      (by exact_mod_cast Nat.lt_succ_self g)
+  have := SheafOfModules.isQuasicoherent_unit (R := Y.ringCatSheaf)
+  have := Scheme.Modules.IsInvertible.sheafOfModules_isInvertible (𝟙_ Y.Modules)
+  have : SheafOfModules.IsFinitePresentation (R := Y.ringCatSheaf)
+      (SheafOfModules.free (R := Y.ringCatSheaf) I) :=
+    Scheme.Modules.isFinitePresentation_sigma (fun _ : I ↦ SheafOfModules.unit Y.ringCatSheaf)
+  have := Scheme.Modules.isQuasicoherent_tensorObj E ((M.tensorPow c).tensorPow m)
+  have := Scheme.Modules.isFinitePresentation_tensorObj E ((M.tensorPow c).tensorPow m)
+  have := Scheme.Modules.isQuasicoherent_kernel φ
+  have := Scheme.Modules.isFinitePresentation_kernel φ
+  have := Scheme.Modules.isQuasicoherent_cokernel φ
+  have := Scheme.Modules.isFinitePresentation_cokernel φ
+  obtain ⟨PK, hPK, hPK'⟩ := Scheme.Modules.exists_polynomial_eulerChar_tensorObj_tensorPow K
+    hample g V hdim (kernel φ) hK
+  obtain ⟨PC, hPC, hPC'⟩ := Scheme.Modules.exists_polynomial_eulerChar_tensorObj_tensorPow K
+    hample g V hdim (cokernel φ) hC
+  obtain ⟨PE, hPE, hPE'⟩ := Scheme.Modules.exists_polynomial_eulerChar_tensorObj_tensorPow_of_le K
+    hample E (Scheme.Modules.topologicalKrullDim_le_unbotD_toNat K)
+  obtain ⟨PO, hPO, hPO'⟩ := f.exists_polynomial_hilbertFunction M hample
+  -- `χ(E ⊗ M^{⊗ (n + c m)}) = r χ(M^{⊗ n}) + χ(coker φ ⊗ M^{⊗ n}) - χ(ker φ ⊗ M^{⊗ n})`
+  have key (n : ℕ) : (Scheme.Modules.eulerChar K (E ⊗ M.tensorPow (n + c * m)) : ℚ) =
+      r * f.hilbertFunction M n + (Scheme.Modules.eulerChar K (cokernel φ ⊗ M.tensorPow n) -
+        Scheme.Modules.eulerChar K (kernel φ ⊗ M.tensorPow n)) := by
+    have h := Scheme.Modules.eulerChar_tensorObj_sub_eulerChar_tensorObj_eq K φ (M.tensorPow n)
+    let e₂ : (M.tensorPow c).tensorPow m ⊗ M.tensorPow n ≅ M.tensorPow (n + c * m) :=
+      whiskerRightIso (M.tensorPowMulIso c m).symm _ ≪≫ (M.tensorPowAddIso (c * m) n).symm ≪≫
+        eqToIso (congrArg M.tensorPow (Nat.add_comm (c * m) n))
+    let e₁ := α_ E ((M.tensorPow c).tensorPow m) (M.tensorPow n) ≪≫ whiskerLeftIso E e₂
+    rw [Scheme.Modules.eulerChar_congr K e₁,
+      Scheme.Modules.eulerChar_free_tensorObj K r (M.tensorPow n)] at h
+    have h' : Scheme.Modules.eulerChar K (E ⊗ M.tensorPow (n + c * m)) =
+        r * f.hilbertFunction M n + (Scheme.Modules.eulerChar K (cokernel φ ⊗ M.tensorPow n) -
+          Scheme.Modules.eulerChar K (kernel φ ⊗ M.tensorPow n)) := by
+      change _ = _ * Scheme.Modules.eulerChar K (M.tensorPow n) + _
+      linarith
+    exact_mod_cast h'
+  have hpoly : PE.comp (Polynomial.X + Polynomial.C ((c * m : ℕ) : ℚ)) =
+      (r : ℚ) • PO + (PC - PK) := by
+    refine Polynomial.eq_of_infinite_eval_eq _ _
+      (Set.infinite_range_of_injective Nat.cast_injective |>.mono ?_)
+    rintro _ ⟨n, rfl⟩
+    simp only [Set.mem_ofPred_eq, Polynomial.eval_comp, Polynomial.eval_add, Polynomial.eval_X,
+      Polynomial.eval_C, Polynomial.eval_smul, Polynomial.eval_sub, smul_eq_mul]
+    have := hPE' (n + c * m)
+    push_cast at this ⊢
+    rw [this, key n, hPO' n, hPC' n, hPK' n]
+  -- compare the coefficients of `X ^ g`
+  have hcoeff : PE.coeff g = r * PO.coeff g := by
+    rw [← Polynomial.coeff_comp_X_add_C_of_natDegree_le hPE ((c * m : ℕ) : ℚ), hpoly,
+      Polynomial.coeff_add, Polynomial.coeff_smul, Polynomial.coeff_sub,
+      Polynomial.coeff_eq_zero_of_degree_lt hPC, Polynomial.coeff_eq_zero_of_degree_lt hPK]
+    simp [g]
+  have hdeg := f.degree_eq_factorial_mul_coeff M hPO hPO'
+  have hE : ((Δ_[1]^[g] (fun m ↦ Scheme.Modules.eulerChar K (E ⊗ M.tensorPow m)) 0 : ℤ) : ℚ) =
+      Δ_[1]^[g] (fun n : ℕ ↦ PE.eval (n : ℚ)) 0 := by
+    rw [fwdDiff_iter_eq_sum_shift, fwdDiff_iter_eq_sum_shift]
+    push_cast
+    refine Finset.sum_congr rfl fun i _ ↦ ?_
+    simp [hPE']
+  rw [Polynomial.fwdDiff_iter_eval_natCast_zero hPE, hcoeff] at hE
+  have : ((Δ_[1]^[g] (fun m ↦ Scheme.Modules.eulerChar K (E ⊗ M.tensorPow m)) 0 : ℤ) : ℚ) =
+      ((r * f.degree M : ℤ) : ℚ) := by
+    rw [hE]
+    push_cast
+    rw [hdeg]
+    ring
+  exact_mod_cast this
 
 /-- Blueprint `sk-prop-av-deg-pullback`: Degree of a pullback under a finite morphism.
 
