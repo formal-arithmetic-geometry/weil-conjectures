@@ -26,21 +26,64 @@
   "lem-pc-affine-tor-amplitude-criterion",
   "def-pc-finite-locally-free"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Write X=Spec(A). The given bounded-above finite-free complex P^\\bullet represents E|_U, and [lem-pc-affine-tor-amplitude-criterion] transfers the stated Tor amplitude [a,b] between the sheaf and module formulations.",
+   "uses": [
+    "lem-pc-affine-tor-amplitude-criterion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/perfect.tex",
+    "place": "Tag 08ED proof, first paragraph and the invocation of Lemma 08E9"
+   }
+  },
+  {
+   "text": "Choose r<a and set K=Im(P^{r-1} \\to P^r). Since the cohomology of the represented object vanishes below a, the complex is exact at degree r on U, so the associated sheaf \\widetilde K|_U identifies with Ker(\\widetilde{P^r}|_U \\to \\widetilde{P^{r+1}}|_U); this equality is only asserted after restriction to U, not as an equality of A-modules on all of X.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/perfect.tex",
+    "place": "Tag 08ED proof, definition of K and exactness below the Tor-amplitude range"
+   }
+  },
+  {
+   "text": "Let f\\in A with D(f)\\subseteq U; such principal opens cover U. By [lem-sc-affine-truncation-kernel-flat] (the last-one-flat lemma), applied to the same complex and the same r<a, the A_f-module K_f is flat and finitely presented, hence a finite projective A_f-module by [lem-weil-pbc-finitely-presented-flat-module-projective] (Stacks Tag 00NX). By [lem-weil-pbc-finite-projective-standard-free-cover] there are g_1,\\dots,g_s\\in A_f generating the unit ideal with each (K_f)_{g_i} finite free, so \\widetilde K|_{D(f)} is free of finite rank on each D(g_i)\\subseteq D(f). Hence \\widetilde K|_U is locally free of finite rank, i.e. finite locally free; in particular it is flat and of finite presentation, its local sections being localizations of the flat finitely presented modules K_f.",
+   "uses": [
+    "lem-sc-affine-truncation-kernel-flat",
+    "lem-weil-pbc-finitely-presented-flat-module-projective",
+    "lem-weil-pbc-finite-projective-standard-free-cover"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/perfect.tex",
+    "place": "Tag 08ED proof, paragraphs invoking cohomology-lemma-last-one-flat and properties-lemma-finite-locally-free (flat + finitely presented = finite locally free, Algebra Tag 00NX)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-affine-tor-amplitude-criterion",
+  "lem-sc-affine-truncation-kernel-flat",
+  "lem-weil-pbc-finitely-presented-flat-module-projective",
+  "lem-weil-pbc-finite-projective-standard-free-cover"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/perfect.tex",
+  "place": "Tag 08ED proof"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
-   "query": "kernel at the lower end of a bounded above finite free complex representing a perfect complex is finite locally free",
-   "results": "Generic DerivedCategory and KProjective declarations; no finite-locally-free truncation theorem",
+   "query": "flat finite presentation lower truncation kernel of bounded-above finite free complex on affine open",
+   "results": "Generic flat morphism and ideal-sheaf kernel declarations; no truncation-kernel theorem",
    "date": "2026-10-11",
    "verdict": "no match"
   },
   {
    "tool": "loogle",
-   "query": "Flat, IsFinitePresentation, IsLocallyFree",
-   "results": "0 hits; unknown identifier 'Flat'",
+   "query": "Module.Flat, Module.FinitePresentation, kernel, finite free complex",
+   "results": "0 hits; loogle: unknown identifier kernel",
    "date": "2026-10-11",
    "verdict": "no match"
   },
@@ -50,15 +93,55 @@
    "results": "0 hits in Mathlib source",
    "date": "2026-10-11",
    "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Tor amplitude forces the last syzygy in a bounded above finite free resolution to be flat",
+   "results": "Generic Tor and projective-dimension declarations; no truncation-kernel theorem",
+   "date": "2026-10-11",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "Module.Flat.of_free, Module.finitePresentation_of_projective",
+   "results": "0 hits",
+   "date": "2026-10-11",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "Flat.of_free|finitePresentation_of_projective Mathlib/",
+   "results": "0 hits in Mathlib source",
+   "date": "2026-10-11",
+   "verdict": "no match"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-sc-affine-perfect-plus-locally-free",
   "by": "worker",
   "date": "2026-10-10"
  },
  "chapter": "sec-picard-framework",
- "unit": "sk-thm-picard-duality"
+ "unit": "sk-thm-picard-duality",
+ "split_report": {
+  "date": "2026-10-11",
+  "item": "lem-sc-affine-truncation-kernel-finite-locally-free",
+  "worker": "stage1",
+  "summary": "Checked Tag 08ED and split its truncation-kernel argument into three steps. The only non-elementary missing ingredient is the last-one-flat statement, recorded as the new statement-only node lem-sc-affine-truncation-kernel-flat. The proof explicitly restricts the kernel/image equality to U and then applies flatness plus finite presentation to obtain finite local freeness.",
+  "blueprint": "Realizes the proper-flat support proof clause: truncate the bounded-above finite-free lift below a Tor-amplitude bound and show the kernel is finite locally free."
+ },
+ "tool_uses": [
+  "lem-weil-pbc-finitely-presented-flat-module-projective",
+  "lem-weil-pbc-finite-projective-standard-free-cover"
+ ],
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-tkf3130",
+  "group": "F1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-tkf3130 (reviewer sub-agent of L); spot-checked: Checked math: on U exactness at r (r<a) gives Im=Ker on U; K_f=coker(P_f^{r-2}->P_f^{r-1}) on D(f) in U, so fp, and flat by last-one-flat; citer lem-sc-affine-perfect-plus-locally-free uses the item with the same P, r<a, K=Im - quantifiers match. No duplicate tor-amplitude/last-one-flat node in-unit (lem-kun-tor-cokernel-flat is etale-site). FIX more, RETURN less: (1) C4 step 3 cited def-pc-finite-locally-free, a definition for MORPHISMS, for 'flat+fp module => finite locally free'; replaced by lem-weil-pbc-finitely-presented-flat-module-projective (Tag 00NX, mathlib leaf) + lem-weil-pbc-finite-projective-standard-free-cover as generic tool_uses, argued on principal opens D(f) in U; proof_deps updated. (2) new node lem-sc-affine-truncation-kernel-flat restated in module form (K_f flat and finitely presented for each D(f) in U, with the sheaf form as equivalent) so step 3 applies module-level lemmas without an unstated sheaf-to-module flatness step.; 2 file(s) fixed by the reviewer"
+ }
 }
