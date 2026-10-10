@@ -1,8 +1,8 @@
 # Work queue
 
-926 items; claim with `tools/claim.py next <group> [--stage N]`.
+924 items; claim with `tools/claim.py next <group> [--stage N]`.
 
-## Stage 1: nodes to split (223)
+## Stage 1: nodes to split (220)
 
 | node | distance to a target | Lean state on the done branch |
 |---|---|---|
@@ -44,25 +44,22 @@
 | `lem-sc-strict-henselization-faithfully-flat` | 4010 | none |
 | `lem-pc-hilb-containment-locus` | 4011 | none |
 | `lem-pc-derived-filtered-free-resolution` | 4012 | none |
-| `lem-pc-affine-tilde-kflat` | 4013 | none |
 | `lem-pc-flat-filtered-complex-comparison` | 5009 | none |
 | `lem-sc-hilbert-polynomial` | 5009 | none |
 | `lem-pc-derived-direct-image-composition` | 5010 | none |
 | `lem-pc-fppf-affine-site-topos-equivalence` | 5010 | none |
 | `lem-sc-generic-rank-leading-degree` | 5010 | none |
-| `lem-sc-mult-n-locally-quasi-finite` | 5011 | none |
 | `lem-pc-flat-sheaf-stalk-flat` | 5012 | none |
 | `lem-pc-kflat-bounded-flat-replacement` | 5012 | none |
 | `lem-pc-kflat-closure` | 5012 | none |
 | `lem-pc-noetherian-approximation-data` | 5012 | none |
 | `lem-pc-noetherian-perfect-direct-image` | 5012 | none |
 | `lem-pc-rf-base-change-complex` | 5012 | none |
+| `lem-sc-mult-n-dim-one-closed-subscheme` | 5012 | none |
 | `lem-pc-complex-hocolim-colimit` | 5013 | none |
 | `lem-sp-cartan-eilenberg-comparison-independence` | 6005 | none |
 | `lem-sp-cartan-eilenberg-exists` | 6005 | none |
 | `thm-sp-spectral-object-yields` | 6006 | none |
-| `pqf-def-coherent` | 6007 | none |
-| `pqf-def-cohomology` | 6007 | none |
 | `lem-sc-cech-spectral` | 6009 | sorry_here |
 | `pqf-lem-coherent-ft-locnoeth` | 6009 | none |
 | `lem-pc-affine-morphism-hi` | 6010 | rests_on_sorry |
@@ -191,6 +188,7 @@
 | `lem-weil-pbc-irreducible-lisse-strata` | - | none |
 | `lem-weil-pbc-lisse-generic-kernel` | - | none |
 | `lem-weil-separably-closed-geometrically-connected` | - | none |
+| `prop-pur-kinjective-resolutions-exist` | - | none |
 | `sbc-lem-smooth-geometrically-reduced` | - | none |
 | `def-pc-derived-category` | - | none |
 | `lem-kun-04ca` | - | none |
@@ -202,7 +200,6 @@
 | `lem-pc-flat-rf-open` | - | rests_on_sorry |
 | `lem-pc-projective-space-coherent-finiteness` | - | sorry_here |
 | `lem-sc-zariski-filtered-cohomology` | - | none |
-| `prop-pur-kinjective-resolutions-exist` | - | none |
 | `def-amb-finite-locally-free-module` | - | none |
 | `def-sc-kahler-differentials` | - | none |
 | `def-wf-lie-algebra-derivation` | - | rests_on_sorry |
@@ -230,7 +227,7 @@
 | `lem-pur-rhom-well-defined` | - | none |
 | `lem-zl-noether-normalization-dimension` | - | none |
 
-## Stage 2: nodes to state (703)
+## Stage 2: nodes to state (704)
 
 | node | distance to Mathlib | kind |
 |---|---|---|
@@ -902,6 +899,7 @@
 | `lemma-nagata-proper-to-separated-target` | 1 | state |
 | `lemma-nagata-scheme-image-ideal-qc` | 1 | state |
 | `lemma-weil-pbc-finite-l-group-filtration` | 1 | state |
+| `pqf-def-coherent` | 1 | state |
 | `pqf-lem-image-proper` | 1 | state |
 | `pqf-lem-proper-basic` | 1 | state |
 | `cor-pqf-proper-quasifinite-finite` | 2 | state |
@@ -938,7 +936,7 @@
 | `lem-weil-pbc-p1-field-dimension-one` | 4 | state |
 | `lem-weil-pbc-projective-space-zero-isomorphism` | 4 | state |
 
-Not open yet: 1389 nodes that wait for a statement dependency, 258 nodes that wait for stage 1.
+Not open yet: 1392 nodes that wait for a statement dependency, 255 nodes that wait for stage 1.
 
 ## Stage 3: modules to prove (0)
 
