@@ -11,9 +11,53 @@
   "def-weil-pbc-exact-sequence",
   "def-weil-pbc-projective-module"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Put $N=\\{(u,v)\\in P_1\\oplus P_2:p_1(u)+p_2(v)=0\\}$, the kernel of the sum map $P_1\\oplus P_2\\to M$. The coordinate projections $q_1:N\\to P_1$ and $q_2:N\\to P_2$ are surjective: for a given $u\\in P_1$, choose $v$ with $p_2(v)=-p_1(u)$, and for a given $v\\in P_2$, choose $u$ with $p_1(u)=-p_2(v)$. Exactness of the original sequences [def-weil-pbc-exact-sequence] identifies $\\ker(q_1)$ with $L$ by $l\\mapsto(0,c_2(l))$, and $\\ker(q_2)$ with $K$ by $k\\mapsto(c_1(k),0)$. Thus $0\\to L\\to N\\xrightarrow{q_1}P_1\\to0$ and $0\\to K\\to N\\xrightarrow{q_2}P_2\\to0$ are short exact.",
+   "uses": [
+    "def-weil-pbc-exact-sequence"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra, Lemma Tag 00O3 (lemma-Schanuel), proof, first paragraph, lines 26513-26519"
+   }
+  },
+  {
+   "text": "Since $P_1$ and $P_2$ are projective [def-weil-pbc-projective-module], apply [lem-weil-pbc-ses-projective-quotient-splits] to the two short exact sequences of Step 1. Obtain $R$-linear sections $s_1:P_1\\to N$ and $s_2:P_2\\to N$ with $q_1s_1=\\mathrm{id}_{P_1}$ and $q_2s_2=\\mathrm{id}_{P_2}$.",
+   "uses": [
+    "def-weil-pbc-projective-module",
+    "lem-weil-pbc-ses-projective-quotient-splits"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra, Lemma Tag 00O3 (lemma-Schanuel), proof, first paragraph, lines 26519-26521"
+   }
+  },
+  {
+   "text": "The first section gives an $R$-linear isomorphism $L\\oplus P_1\\to N$, $(l,u)\\mapsto(0,c_2(l))+s_1(u)$. Indeed, for $n\\in N$, $n-s_1(q_1(n))$ belongs to $\\ker(q_1)$, so Step 1 gives a unique $l\\in L$ with $n-s_1(q_1(n))=(0,c_2(l))$; this is the inverse image of $n$ together with $q_1(n)$. Similarly $K\\oplus P_2\\to N$, $(k,v)\\mapsto(c_1(k),0)+s_2(v)$, is an $R$-linear isomorphism with inverse obtained from $n-s_2(q_2(n))\\in\\ker(q_2)$. Composing the second isomorphism with the inverse of the first yields $K\\oplus P_2\\cong L\\oplus P_1$.",
+   "uses": [
+    "def-weil-pbc-exact-sequence",
+    "lem-weil-pbc-ses-projective-quotient-splits"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra, Lemma Tag 00O3 (lemma-Schanuel), proof, first paragraph, lines 26519-26521; split exact sequence isomorphisms expanded"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-exact-sequence",
+  "def-weil-pbc-projective-module",
+  "lem-weil-pbc-ses-projective-quotient-splits"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Algebra, Lemma Tag 00O3 (lemma-Schanuel), proof, first paragraph, lines 26513-26521"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -52,7 +96,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "worker",
@@ -73,5 +117,17 @@
  },
  "chapter": "sec-proper-base-change",
  "unit": "sk-thm-p1",
- "reviewed": "Reviewed by L 2026-10-10 (statement): Algebra 00O3 (Schanuel's lemma). Unsplit."
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "group": "C1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed by the lead of C1; spot-checked by L: 00O3 first assertion: fibre product N = ker(P1 + P2 -> M), both projections surjective with kernels L and K, split by projectivity, two explicit isomorphisms with N"
+ },
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "lem-weil-pbc-schanuel",
+  "worker": "stage1",
+  "summary": "Split from the first proof of Stacks Algebra Lemma 00O3: form the kernel N of p_1+p_2, verify explicitly that its projections to P_1 and P_2 are surjective with kernels L and K, use the reviewed Mathlib leaf for splitting short exact sequences with projective quotient, and write both direct-sum isomorphisms and their inverse formulas. No new nodes were needed."
+ }
 }
