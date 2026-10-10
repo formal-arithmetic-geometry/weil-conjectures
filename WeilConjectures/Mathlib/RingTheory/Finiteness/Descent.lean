@@ -243,7 +243,6 @@ theorem exists_isPushout_faithfullyFlat (B : Type u) [CommRing B] [Algebra A B]
     inferInstance, inferInstance, inferInstance, inferInstance,
     Algebra.FinitePresentation.of_finiteType.mp hfin, inferInstance, hff, hpush'⟩
 
-
 omit [CommRing A₀] [CommRing B₀] [Algebra A₀ A] [Algebra A₀ B₀] in
 /-- **Finite presentation descends along faithfully flat maps of finite presentation** (Stacks,
 Tag 02KK). Let `R → A → B` be ring maps such that `B` is of finite presentation over `R` and
@@ -288,6 +287,7 @@ theorem of_finitePresentation_of_faithfullyFlat (R B : Type u) [CommRing R] [Com
       (R' := A₀ ⊗[A₁] B₁) (S' := B) (RingHom.faithfullyFlat_algebraMap_iff.mpr inferInstance)
       (RingHom.finitePresentation_algebraMap.mpr inferInstance)
   exact .trans R A₀ A
+
 end Algebra.FinitePresentation
 
 end FaithfullyFlatModel

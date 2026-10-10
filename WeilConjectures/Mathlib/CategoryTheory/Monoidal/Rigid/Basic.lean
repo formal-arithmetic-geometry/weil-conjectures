@@ -225,7 +225,15 @@ theorem isIso_ihomUnitTensorToIhom (Y X : C) [ExactPairing Y X] (Z : C) :
   rw [ihomUnitTensorToIhom_eq Y X]
   infer_instance
 
-/-- The transpose of `ihomUnitTensorToIhom X Z`. -/
+/-- The transpose of `ihomUnitTensorToIhom X Z` is evaluation of the first factor:
+```
+X ⊗ ([X, 𝟙] ⊗ Z) --X ◁ ihomUnitTensorToIhom--> X ⊗ [X, Z]
+        |                                          |
+       α⁻¹                                        ev
+        v                                          v
+(X ⊗ [X, 𝟙]) ⊗ Z ------ev ▷ Z------> 𝟙 ⊗ Z ---λ---> Z
+```
+-/
 lemma whiskerLeft_ihomUnitTensorToIhom_ev (X Z : C) :
     X ◁ ihomUnitTensorToIhom X Z ≫ (ihom.ev X).app Z =
       (α_ _ _ _).inv ≫ (ihom.ev X).app (𝟙_ C) ▷ Z ≫ (λ_ Z).hom := by
