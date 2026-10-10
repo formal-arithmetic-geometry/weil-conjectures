@@ -13,51 +13,158 @@
  },
  "kind": "statement",
  "title": "Derived pullback is left adjoint to derived direct image for ringed spaces",
- "statement": "Let $g:(X,\\mathcal O_X)\\to(Y,\\mathcal B)$ be a morphism of ringed spaces [def-weil-sheaf-of-modules-category]. Define $Lg^*E:=\\mathcal O_X\\otimes^{\\mathbf L}_{g^{-1}\\mathcal B}g^{-1}E$ using [def-weil-pbc-topological-inverse-image, lem-pur-derived-change-of-rings], and let $Rg_*$ be the right derived functor of $g_*$ [def-pc-ringed-spaces-derived-direct-image]. Then $Lg^*:D(\\mathcal B)\\rightleftarrows D(\\mathcal O_X):Rg_*$ [def-weil-abstract-derived-category] is an adjoint pair, with natural bifunctorial bijections $\\operatorname{Hom}_{D(\\mathcal O_X)}(Lg^*E,F)\\cong\\operatorname{Hom}_{D(\\mathcal B)}(E,Rg_*F)$.",
+ "statement": "Let $g:(X,\\mathcal O_X)\\to(Y,\\mathcal B)$ be a morphism of ringed spaces [def-weil-locally-ringed-space-morphism] and let $\\Mod(\\mathcal O_X)$ and $\\Mod(\\mathcal B)$ be the sheaf-of-module categories [def-weil-sheaf-of-modules-category]. Define $Lg^*E:=\\mathcal O_X\\otimes^{\\mathbf L}_{g^{-1}\\mathcal B}g^{-1}E$ using [def-weil-pbc-topological-inverse-image, lem-pur-derived-change-of-rings], and let $Rg_*$ be the right derived functor of $g_*$ [def-pc-ringed-spaces-derived-direct-image]. Then $Lg^*:D(\\mathcal B)\\rightleftarrows D(\\mathcal O_X):Rg_*$ [def-weil-abstract-derived-category] is an adjoint pair, with natural bifunctorial bijections $\\operatorname{Hom}_{D(\\mathcal O_X)}(Lg^*E,F)\\cong\\operatorname{Hom}_{D(\\mathcal B)}(E,Rg_*F)$.",
  "source": {
   "document": "literature/stacks-project/cohomology.tex",
   "place": "Tag 079W, Cohomology Lemma cohomology-lemma-adjoint (ringed-space form)"
  },
  "stmt_deps": [
+  "def-weil-locally-ringed-space-morphism",
   "def-weil-abstract-derived-category",
   "def-weil-sheaf-of-modules-category",
   "def-weil-pbc-topological-inverse-image",
   "lem-pur-derived-change-of-rings",
   "def-pc-ringed-spaces-derived-direct-image"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Write $\\rho:g^{-1}\\mathcal B\\to\\mathcal O_X$ for the ring morphism induced by the structure map in [def-weil-locally-ringed-space-morphism]. The underived pullback of a sheaf of $\\mathcal B$-modules is $\\mathcal O_X\\otimes_{g^{-1}\\mathcal B}g^{-1}(-)$. Apply the inverse-image/direct-image module adjunction [lem-pc-module-inverse-image-adjunction] to $g^{-1}\\mathcal B$-modules, followed by the change-of-rings adjunction [lem-pc-module-change-of-rings-adjunction] along $\\rho$. Their composite gives natural bijections $\\operatorname{Hom}_{\\mathcal O_X}(\\mathcal O_X\\otimes_{g^{-1}\\mathcal B}g^{-1}E,F)\\cong\\operatorname{Hom}_{\\mathcal B}(E,g_*F)$, so the displayed underived pullback is left adjoint to $g_*$. Here $g_*F$ has the $\\mathcal B$-module structure through $g^\\sharp$ and sections $V\\mapsto F(g^{-1}V)$, as stated in [def-pc-ringed-spaces-derived-direct-image]; the inverse-image module structure and the sheaf-module categories are supplied by [def-weil-pbc-topological-inverse-image] and [def-weil-sheaf-of-modules-category].",
+   "uses": [
+    "lem-pc-module-inverse-image-adjunction",
+    "lem-pc-module-change-of-rings-adjunction",
+    "def-weil-locally-ringed-space-morphism",
+    "def-pc-ringed-spaces-derived-direct-image",
+    "def-weil-pbc-topological-inverse-image",
+    "def-weil-sheaf-of-modules-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sheaves.tex",
+    "place": "Tags 008A and 008Y, tensor/change-of-rings and inverse-image/direct-image adjunctions for sheaves of modules"
+   }
+  },
+  {
+   "text": "The functor in the first step has the total left derived functor $Lg^*=\\mathcal O_X\\otimes^{\\mathbf L}_{g^{-1}\\mathcal B}g^{-1}(-)$, computed on K-flat resolutions. Every complex $E$ of $\\mathcal B$-modules has a K-flat resolution $P\\to E$ [lem-pc-kflat-resolution]. Since $g^{-1}$ is exact, $g^{-1}P\\to g^{-1}E$ is a quasi-isomorphism, and $g^{-1}P$ is K-flat over $g^{-1}\\mathcal B$ by [lem-pc-kflat-pullback-preservation] applied to the morphism of ringed spaces $(g,\\mathrm{id}):(X,g^{-1}\\mathcal B)\\to(Y,\\mathcal B)$, whose termwise pullback is $g^{-1}P\\otimes_{g^{-1}\\mathcal B}g^{-1}\\mathcal B=g^{-1}P$. Hence, by [lem-pur-derived-change-of-rings] along $\\rho$, $Lg^*E\\cong\\mathcal O_X\\otimes_{g^{-1}\\mathcal B}g^{-1}P$, and a quasi-isomorphism of K-flat complexes is sent to a quasi-isomorphism; this gives the required left-derived comparison maps. The direct image has the total right derived functor $Rg_*$ computed on K-injective resolutions [def-pc-ringed-spaces-derived-direct-image]; the existence and resolution comparison data are supplied by [def-pur-kinjective-complex] and [prop-pur-kinjective-resolutions-exist]. Therefore the generic derived-adjunction theorem [lem-sc-derived-adjunction-from-underived] applies to the underived adjunction of step 1. It yields an adjunction $Lg^*\\dashv Rg_*$ and its derived counit induced by the underived counit.",
+   "uses": [
+    "lem-pc-kflat-resolution",
+    "lem-pc-kflat-pullback-preservation",
+    "lem-pur-derived-change-of-rings",
+    "def-pc-ringed-spaces-derived-direct-image",
+    "def-pur-kinjective-complex",
+    "prop-pur-kinjective-resolutions-exist",
+    "lem-sc-derived-adjunction-from-underived"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/cohomology.tex",
+    "place": "Tag 079W, cohomology-lemma-adjoint, with the K-flat/K-injective constructions of the derived pullback and direct image"
+   }
+  },
+  {
+   "text": "By the conclusion of [lem-sc-derived-adjunction-from-underived], the adjunction is represented by natural bifunctorial Hom bijections. Substituting the definitions of the two derived functors from the statement gives $\\operatorname{Hom}_{D(\\mathcal O_X)}(Lg^*E,F)\\cong\\operatorname{Hom}_{D(\\mathcal B)}(E,Rg_*F)$, natural in both $E$ and $F$.",
+   "uses": [
+    "lem-sc-derived-adjunction-from-underived"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/cohomology.tex",
+    "place": "Tag 079W, cohomology-lemma-adjoint, adjunction conclusion"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-module-inverse-image-adjunction",
+  "lem-pc-module-change-of-rings-adjunction",
+  "def-weil-pbc-topological-inverse-image",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-locally-ringed-space-morphism",
+  "def-pc-ringed-spaces-derived-direct-image",
+  "lem-pur-derived-change-of-rings",
+  "def-pur-kinjective-complex",
+  "prop-pur-kinjective-resolutions-exist",
+  "lem-sc-derived-adjunction-from-underived",
+  "lem-pc-kflat-resolution",
+  "lem-pc-kflat-pullback-preservation"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Tag 079W, cohomology-lemma-adjoint, using Tags 008A/008Y and the derived-functor constructions"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
    "query": "derived adjunction for a morphism of ringed spaces left derived pullback right derived direct image",
-   "results": "Generic sheaf pullback/pushforward adjunctions only; no derived ringed-space theorem",
+   "results": "SheafOfModules.pullbackPushforwardAdjunction and related underived sheaf-module adjunctions; no derived ringed-space theorem",
    "date": "2026-10-11",
    "verdict": "no match"
   },
   {
    "tool": "loogle",
    "query": "SheafOfModules PullbackConstruction.adjunction",
-   "results": "Unknown identifier PullbackConstruction.adjunction",
+   "results": "0 hits; unknown identifier Adjunction.derived",
    "date": "2026-10-11",
    "verdict": "unavailable"
   },
   {
    "tool": "grep",
    "query": "derived.*pullback|derived.*direct.*image",
-   "results": "No derived ringed-space adjunction in Mathlib",
+   "results": "No matching derived pullback/direct-image ringed-space declaration",
    "date": "2026-10-11",
    "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "derived pullback direct image adjunction for sheaves of modules on ringed spaces",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-11",
+   "verdict": "unavailable"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-sc-finite-affine-derived-equivalence",
   "by": "worker",
   "date": "2026-10-10"
  },
  "chapter": "sec-picard-framework",
- "unit": "sk-thm-picard-duality"
+ "unit": "sk-thm-picard-duality",
+ "split_report": {
+  "date": "2026-10-11",
+  "item": "lem-pc-ringed-spaces-derived-adjoint-general",
+  "worker": "stage1",
+  "summary": "No exact sorry-free declaration exists in WeilConjectures. The item is split with three proof steps: the underived tensor pullback adjunction from the existing sheaf-module inverse-image and change-of-rings adjunctions; passage to derived functors using the existing K-flat/K-injective constructions and the generic derived-adjunction leaf; and the resulting natural bifunctorial Hom bijection. No new child node was needed.",
+  "blueprint": "Realizes the blueprint ancestor lem-sc-finite-duality proof clause 'derived pullback/direct-image adjunction' via the three steps above; the generic ringed-space form is the Stacks Tag 079W route.",
+  "tool_uses": [
+   {
+    "node": "lem-pur-derived-change-of-rings",
+    "why": "The derived pullback is defined by the K-flat change-of-rings construction, which is a generic derived-functor tool not supplied by this unit's Picard route."
+   },
+   {
+    "node": "prop-pur-kinjective-resolutions-exist",
+    "why": "The derived direct image requires existence of K-injective resolutions, a generic sheaf-module tool not supplied by this unit's Picard route."
+   },
+   {
+    "node": "lem-pc-kflat-resolution",
+    "why": "Existence of K-flat resolutions of complexes of sheaves of modules on any site, a generic derived-functor tool needed to compute Lg^*."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pur-derived-change-of-rings",
+  "prop-pur-kinjective-resolutions-exist",
+  "lem-pc-kflat-resolution",
+  "lem-pur-derived-change-of-rings",
+  "prop-pur-kinjective-resolutions-exist",
+  "lem-pc-kflat-resolution"
+ ],
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-rda2039",
+  "group": "J1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-rda2039 (reviewer sub-agent of L); spot-checked: Statement: Tag 079W for an arbitrary morphism of ringed spaces; not a restatement of lem-pc-ringed-spaces-derived-adjoint (that node is for morphisms of schemes with scheme-level def-pc-derived-pullback/direct-image; this one is the general ringed-space form with Rg_* from def-pc-ringed-spaces-derived-direct-image); naturality stated as bifunctorial bijections. E7 change (morphism citation corrected to def-weil-locally-ringed-space-morphism) is named in the second reading. Step 1 (008A/008Y composite adjunction) and Step 3 checked; K-injective resolutions cited (def-pc-ringed-spaces-derived-direct-image, prop-pur-kinjective-resolutions-exist). Tool uses accepted as generic. FIX more, RETURN less: (1) C1 Step 2: Lg^* being the left derived functor of the underived pullback needed K-flat resolutions to exist and g^{-1} of a K-flat complex to be K-flat over g^{-1}B, neither cited (missed by the second reading); now cites lem-pc-kflat-resolution and lem-pc-kflat-pullback-preservation (applied to (g,id):(X,g^{-1}B)->(Y,B)), added to uses/proof_deps and tool_uses. (2) stmt_deps lacked def-weil-locally-ringed-space-morphism cited by the changed statement; added.; 1 file(s) fixed by the reviewer"
+ }
 }
