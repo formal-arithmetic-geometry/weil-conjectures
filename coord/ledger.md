@@ -2087,3 +2087,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 17:04 L: merged deliver/C1/lem-constructible-constant-exact (reviewer FIX; first push; new nodes: 0)
 - 17:06 L: 29th account limit at ~17:05; reviewers R-css1709, R-scf1710, R-eyf1711, R-dtv1712 and writer W-ext1713 (def-sc-ext-sheaf) cut off, nothing complete on disk; REVIEW BEHIND 11, eight reviewers relaunched
 - 17:07 L: merged deliver/E1/lem-weil-pbc-constant-sheaf-set-sections-connected-natural (reviewer FIX+NODE(1); first push; new nodes: 1)
+- 17:07 L: merged deliver/E1/lem-sc-affine-standard-cover-finite-presentation-flat (reviewer FIX; first push; new nodes: 3)

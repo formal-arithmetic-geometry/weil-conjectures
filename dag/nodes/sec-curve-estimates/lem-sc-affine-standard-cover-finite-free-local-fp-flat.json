@@ -1,0 +1,74 @@
+{
+ "id": "lem-sc-affine-standard-cover-finite-free-local-fp-flat",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-pic-proper-ntorsion",
+   "place": "the affine intersection step: each standard-open localization is finite free, hence finitely presented and flat",
+   "via": [
+    "lem-sc-affine-standard-cover-finite-projective",
+    "lem-sc-affine-cap-section-open"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "A finite free module is finitely presented and flat",
+ "statement": "Let $A$ be a commutative ring and $P$ an $A$-module that is free [def-weil-pbc-free-module] with a finite basis. Then $P$ is finitely presented [def-sc-finitely-presented-module] and flat as an $A$-module [def-weil-pbc-flat-ring-map].",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Algebra, Lemma Tag 00NX (lemma-finite-projective), the implications (7) => (4) and (7) => (5), using Lemma Tag 00EO (lemma-cover) and Lemma Tag 00HT (lemma-flat-localization)"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-free-module",
+  "def-sc-finitely-presented-module",
+  "def-weil-pbc-flat-ring-map"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "finite free module is finitely presented and flat",
+   "results": "Module.finitePresentation_of_free_of_surjective; Module.Flat.of_free",
+   "date": "2026-10-11",
+   "verdict": "component matches only"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "finite free module finite presentation flat",
+   "results": "Module.finitePresentation_of_free_of_surjective and Module.Flat.of_free",
+   "date": "2026-10-11",
+   "verdict": "component matches only"
+  },
+  {
+   "tool": "grep",
+   "query": "rg -n 'finitePresentation_of_free|Flat.of_free' Mathlib/Algebra/Module Mathlib/RingTheory/Flat",
+   "results": "Algebra/Module/FinitePresentation.lean:129, RingTheory/Flat/Basic.lean:45",
+   "date": "2026-10-11",
+   "verdict": "component matches only; no conjunction declaration"
+  },
+  {
+   "tool": "loogle",
+   "query": "Module.Free, Module.Finite, Module.FinitePresentation",
+   "results": "Module.finitePresentation_of_free_of_surjective; Module.FinitePresentation.equiv_quotient",
+   "date": "2026-10-10",
+   "verdict": "match per clause (reviewer R-scf1706): finite presentation via Module.finitePresentation_of_projective with Module.Projective.of_free; flatness Module.Flat.of_free"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "Module.finitePresentation_of_projective, Module.Projective.of_free, Module.Flat.of_free",
+  "file": "Mathlib/Algebra/Module/FinitePresentation.lean",
+  "line": 161,
+  "how": "one declaration per clause: finitely presented = Module.finitePresentation_of_projective (Algebra/Module/FinitePresentation.lean:161-163, [Projective R M] [Module.Finite R M]) with the instance Module.Projective.of_free (Algebra/Module/Projective.lean:161, free => projective) and Module.Finite from the finite basis; flat = instance Module.Flat.of_free (RingTheory/Flat/Basic.lean:231)"
+ },
+ "status": "mathlib",
+ "created": {
+  "item": "lem-sc-affine-standard-cover-finite-presentation-flat",
+  "by": "worker",
+  "date": "2026-10-10"
+ },
+ "chapter": "sec-curve-estimates",
+ "unit": "sk-thm-curveestimate"
+}
