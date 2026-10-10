@@ -11,9 +11,54 @@
   "def-weil-spectral-space",
   "def-weil-pbc-constructible-topology"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "*Step 1 (an open set separating $x$ and $y$).* Let $x\\ne y$ in $X$. The space $X$ is sober [def-weil-spectral-space]: every irreducible closed subset has exactly one generic point. The singleton $\\{x\\}$ is irreducible [def-weil-irreducible-components] (it is nonempty, and if $\\{x\\}=Z_1\\cup Z_2$ with $Z_1,Z_2$ closed in $\\{x\\}$ then one of them contains $x$ and equals $\\{x\\}$), so its closure $\\overline{\\{x\\}}$ is an irreducible closed subset of $X$ [lem-weil-pbc-irreducible-closure], and likewise $\\overline{\\{y\\}}$. Suppose $x\\in\\overline{\\{y\\}}$ and $y\\in\\overline{\\{x\\}}$. Then $\\overline{\\{x\\}}\\subseteq\\overline{\\{y\\}}$ and $\\overline{\\{y\\}}\\subseteq\\overline{\\{x\\}}$, so $Z=\\overline{\\{x\\}}=\\overline{\\{y\\}}$ is an irreducible closed subset with the two generic points $x$ and $y$, and uniqueness gives $x=y$, a contradiction. Hence $x\\notin\\overline{\\{y\\}}$ or $y\\notin\\overline{\\{x\\}}$. Exchanging the names of $x$ and $y$ if necessary (the conclusion is symmetric in $x,y$: swap $A$ and $B$ at the end), assume $x\\notin\\overline{\\{y\\}}$. Then $U_0=X\\setminus\\overline{\\{y\\}}$ is open in $X$, $x\\in U_0$ and $y\\notin U_0$. (This is Stacks' 'Since $X$ is sober, there is an open subset $U$ containing exactly one of the two points $x,y$. Say $x\\in U$.', written out.)",
+   "uses": [
+    "def-weil-spectral-space",
+    "def-weil-irreducible-components",
+    "lem-weil-pbc-irreducible-closure"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/topology.tex",
+    "place": "Topology, Lemma Tag 0901 (lemma-constructible-hausdorff-quasi-compact, line 4305), proof, first paragraph"
+   }
+  },
+  {
+   "text": "*Step 2 (a quasi-compact open).* The quasi-compact open subsets of $X$ form a basis of its topology [def-weil-spectral-space], so there is a quasi-compact open $U\\subseteq X$ with $x\\in U\\subseteq U_0$; since $y\\notin U_0$, also $y\\notin U$, i.e. $y\\in X\\setminus U$.",
+   "uses": [
+    "def-weil-spectral-space"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/topology.tex",
+    "place": "Topology, Lemma Tag 0901 (lemma-constructible-hausdorff-quasi-compact, line 4305), proof, first paragraph"
+   }
+  },
+  {
+   "text": "*Step 3 (conclusion).* $U$ is a quasi-compact open subset of $X$, so $U$ and $X\\setminus U$ both belong to the subbase of the constructible topology [def-weil-pbc-constructible-topology] and are therefore open in it. Put $A=U$ and $B=X\\setminus U$ (with the roles of $A$ and $B$ exchanged if $x$ and $y$ were renamed in Step 1). Then $A$ and $B$ are open in the constructible topology, $A\\cap B=\\emptyset$, $x\\in A$ and $y\\in B$. As $x\\ne y$ were arbitrary, $X$ with its constructible topology is Hausdorff.",
+   "uses": [
+    "def-weil-pbc-constructible-topology"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/topology.tex",
+    "place": "Topology, Lemma Tag 0901 (lemma-constructible-hausdorff-quasi-compact, line 4305), proof, first paragraph"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-spectral-space",
+  "def-weil-irreducible-components",
+  "lem-weil-pbc-irreducible-closure",
+  "def-weil-pbc-constructible-topology"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/topology.tex",
+  "place": "Topology, Lemma Tag 0901 (label lemma-constructible-hausdorff-quasi-compact, line 4305), proof, first paragraph (Hausdorff part); the deduction 'sober implies an open set contains exactly one of x, y' (Step 1) is written out by the agent where Stacks states it in one clause"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -49,10 +94,31 @@
    "results": "the constructible topology occurs only in Mathlib/Topology/Spectral/ConstructibleTopology.lean (165 lines, read in full): constructibleTopologySubbasis, constructibleTopology, WithConstructibleTopology, isOpen_iff/isClosed_iff, IsCompact.isOpen_constructibleTopology_of_isOpen/_of_isClosed, compactSpace_withConstructibleTopology (line 92, @[stacks 0901 \"quasi-compactness\"]); its TODO (line 27) reads 'If X is a spectral space, show that X is T2 and totally disconnected'",
    "date": "2026-10-10",
    "verdict": "no match: the Hausdorff part of 0901 is an open TODO of Mathlib"
+  },
+  {
+   "tool": "leansearch",
+   "query": "spectral space with constructible topology is a T2 space",
+   "results": "SpectralSpace.toT0Space (Mathlib.Topology.Spectral.Basic), PrimeSpectrum.instT0Space, T2Space, T2Space.mk, T2Space.to_quasiSeparatedSpace, MaximalSpectrum.instT1Space, TotallySeparatedSpace.t2Space, SpectralSpace.mk; nothing about the constructible topology",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "T2Space (WithConstructibleTopology _)",
+   "results": "none",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rln 'WithConstructibleTopology\\|constructibleTopology' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib; grep -n 'instance\\|theorem\\|lemma\\|TODO' Mathlib/Topology/Spectral/ConstructibleTopology.lean",
+   "results": "only Mathlib/Topology/Spectral/ConstructibleTopology.lean; its declarations are isOpen_iff, isClosed_iff, IsCompact.isOpen_constructibleTopology_of_isOpen (line 60), _of_isClosed (line 65), compl_mem_constructibleTopologySubbasis_iff, isCompact_of_mem_constructibleTopologySubbasis, isCompact_sInter_of_subset_constructibleTopologySubbasis, compactSpace_withConstructibleTopology (line 92); no T2Space instance; TODO line 27: 'If X is a spectral space, show that X is T2 and totally disconnected'",
+   "date": "2026-10-10",
+   "verdict": "no match (re-checked by the splitting worker): the Hausdorff part of 0901 is an open TODO of Mathlib; Mathlib has the pieces IsCompact.isOpen_constructibleTopology_of_isOpen/_of_isClosed and SpectralSpace.toT0Space + t0Space_iff_exists_isOpen_xor'_mem (Topology/Separation/Basic.lean:135), with which the proof above is a few lines, not one"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "worker",
@@ -72,5 +138,12 @@
   }
  },
  "chapter": "sec-proper-base-change",
- "unit": "sk-thm-p1"
+ "unit": "sk-thm-p1",
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "lem-weil-pbc-spectral-constructible-topology-hausdorff",
+  "worker": "stage1",
+  "summary": "Checked the statement against Stacks Topology Lemma 0901 (label lemma-constructible-hausdorff-quasi-compact, topology.tex line 4305; tag verified in stacks-project/tags/tags, also 08YG = topology-definition-spectral-space) and the definition of the constructible topology in the paragraph before it (line 4290); statement kept (correct and self-contained; its two notions cite def-weil-spectral-space and def-weil-pbc-constructible-topology, both Mathlib leaves). Not a Mathlib leaf: Mathlib's ConstructibleTopology.lean has only the quasi-compactness part of 0901 and lists the T2 part as a TODO; searches re-run with LeanSearch, Loogle and grep. Proof in three steps following the first paragraph of the Stacks proof: (1) sobriety gives an open containing exactly one of x, y, written out from the uniqueness of generic points, using that the closure of a point is irreducible (existing Mathlib leaf lem-weil-pbc-irreducible-closure); (2) shrink it to a quasi-compact open by the basis property; (3) U and its complement are disjoint subbasic opens of the constructible topology. No new node. The citers (lem-weil-pbc-spectral-limit-constructible-closed-quasi-compact Steps 1 and 4, lem-weil-pbc-spectral-limit-constructible-closed-nonempty Step 1) use exactly the stated Hausdorff property."
+ },
+ "reviewed": "2026-10-10 L: 3 steps checked against the first paragraph of the 0901 proof: sobriety gives x not in the closure of y (or conversely) via uniqueness of generic points, a quasi-compact open U with x in U, y not in U, and U, X - U separate in the constructible topology; Mathlib has only the quasi-compactness half (ConstructibleTopology.lean, T2 is a TODO)"
 }
