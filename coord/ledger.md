@@ -1706,3 +1706,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 15:00 L: returned deliver/H1/lem-sc-torsion-sections-generic (reviewer RETURN: 1. C4: lem-sc-torsion-sections-generic, proof step 1: the step chooses 'an affine open V=Spec A with x in V contained in)
 - 15:00 L: lem-sc-ample-ideal-section accepted (7 steps per 01Q3, 0 new nodes; 3 tool uses copied)
 - 15:01 L: merged deliver/M1/lem-pc-zero-support-finite-scheme (reviewer FIX; first push; new nodes: 1)
+- 15:01 L: lem-sc-closed-affine-union-affine accepted (5 steps per 09NL via 05YU, 0 new nodes; 1 tool use copied)

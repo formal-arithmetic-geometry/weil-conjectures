@@ -25,9 +25,83 @@
   "def-weil-closed-immersion",
   "def-weil-affine-spectrum"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Case $r=0$. Then the $Z_i$ cover nothing, so the underlying set of $Y$ is empty and $Y$ is the empty scheme. The empty scheme is $\\operatorname{Spec}$ of the zero ring (the zero ring has no prime ideals), so $Y\\cong\\operatorname{Spec}(0)$ is affine [def-weil-affine-spectrum]. From now on $r\\ge1$.",
+   "uses": [
+    "def-weil-affine-spectrum"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/limits.tex",
+    "place": "Limits, Lemma 09NL (label lemma-affines-glued-in-closed-affine), proof"
+   }
+  },
+  {
+   "text": "Let $i_j:Z_j\\to Y$ ($1\\le j\\le r$) be the closed immersions and let $W=Z_1\\amalg\\cdots\\amalg Z_r$ be the disjoint union (coproduct) of schemes, with the induced morphism $\\pi=(i_1,\\ldots,i_r):W\\to Y$ (the source's $\\coprod Z_i\\to X$). Since each $Z_j$ is affine, $W$ is a finite disjoint union of affine schemes and hence affine by [lem-weil-pbc-affine-morphism-permanence] (4).",
+   "uses": [
+    "lem-weil-pbc-affine-morphism-permanence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/limits.tex",
+    "place": "Limits, Lemma 09NL (label lemma-affines-glued-in-closed-affine), proof"
+   }
+  },
+  {
+   "text": "$\\pi$ is finite [def-weil-finite-integral-morphism]. Each closed immersion $i_j$ is finite by [lem-weil-pbc-closed-immersion-finite]. Induction on $k=1,\\ldots,r$: put $W_k=Z_1\\amalg\\cdots\\amalg Z_k$ and $\\pi_k=(i_1,\\ldots,i_k):W_k\\to Y$. For $k=1$, $\\pi_1=i_1$ is finite. For $k\\ge2$, $W_k=W_{k-1}\\amalg Z_k$ (associativity of the coproduct) and $\\pi_k=(\\pi_{k-1},i_k)$ is the morphism induced by the two finite morphisms $\\pi_{k-1}$ (induction hypothesis) and $i_k$, so it is finite by [lem-weil-pbc-finite-coproduct]. Hence $\\pi=\\pi_r$ is finite. (The source says $\\pi$ is integral; finite is stronger, and is what the next step uses.)",
+   "uses": [
+    "lem-weil-pbc-closed-immersion-finite",
+    "lem-weil-pbc-finite-coproduct",
+    "def-weil-finite-integral-morphism"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/limits.tex",
+    "place": "Limits, Lemma 09NL (label lemma-affines-glued-in-closed-affine), proof"
+   }
+  },
+  {
+   "text": "$\\pi$ is surjective [def-weil-surjective-morphism]: the underlying set of $W$ is the disjoint union of those of the $Z_j$ and $\\pi$ restricts to $i_j$ on $Z_j$, so the image of $\\pi$ is $\\bigcup_j i_j(Z_j)$, which is all of $Y$ by hypothesis. $\\pi$ is universally closed [def-weil-proper-morphism], since a finite morphism is universally closed by [lem-weil-pbc-finite-closed-map-finite-fibres] (1).",
+   "uses": [
+    "def-weil-surjective-morphism",
+    "lem-weil-pbc-finite-closed-map-finite-fibres",
+    "def-weil-proper-morphism"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/limits.tex",
+    "place": "Limits, Lemma 09NL (label lemma-affines-glued-in-closed-affine), proof"
+   }
+  },
+  {
+   "text": "So $\\pi:W\\to Y$ is a surjective, universally closed morphism with affine source $W$ (steps 2-4). By Proposition 05YU [lem-weil-pbc-surjective-universally-closed-affine-target], $Y$ is affine.",
+   "uses": [
+    "lem-weil-pbc-surjective-universally-closed-affine-target"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/limits.tex",
+    "place": "Limits, Lemma 09NL (label lemma-affines-glued-in-closed-affine), proof"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-affine-spectrum",
+  "lem-weil-pbc-affine-morphism-permanence",
+  "lem-weil-pbc-closed-immersion-finite",
+  "lem-weil-pbc-finite-coproduct",
+  "def-weil-finite-integral-morphism",
+  "def-weil-surjective-morphism",
+  "lem-weil-pbc-finite-closed-map-finite-fibres",
+  "def-weil-proper-morphism",
+  "lem-weil-pbc-surjective-universally-closed-affine-target"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/limits.tex",
+  "place": "Limits, Lemma 09NL (label lemma-affines-glued-in-closed-affine), proof: 'Then $\\coprod Z_i \\to X$ is surjective and integral with affine source. Hence $X$ is affine by Proposition 05YU (proposition-affine)'"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -49,13 +123,62 @@
    "results": "No exact theorem for this statement in Mathlib/AlgebraicGeometry; generic Noetherian irreducible-component and affine-open APIs only",
    "date": "2026-10-10",
    "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "a scheme which is the union of finitely many affine closed subschemes is affine; IsAffine of surjective integral morphism from affine scheme",
+   "results": "HTTP 500 Internal Server Error on both queries (service down); no declaration returned",
+   "date": "2026-10-10",
+   "verdict": "service unavailable"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.IsAffine, AlgebraicGeometry.IsClosedImmersion",
+   "results": "IsClosedImmersion.hasAffineProperty, IsClosedImmersion.of_surjective_of_isAffine, IsClosedImmersion.isAffine_surjective_of_isAffine, IsClosedImmersion.isIso_of_injective_of_isAffine, isClosedImmersion_diagonal_restrict_diagonalCoverDiagonalRange (all affine target => affine source, or the converse direction for a single surjective-on-sections closed immersion); none concludes the target affine from a closed cover",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "if a scheme X is covered set-theoretically by finitely many closed subschemes each of which is affine, then X is affine",
+   "results": "Scheme.isAffine_affineCover, Scheme.isAffine_affineOpenCover, instIsAffineXSchemeFiniteSubcover, Scheme.exists_isOpenCover_and_isAffine, isNoetherian_iff_of_finite_affine_openCover (open covers only)",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rn 'isAffine_of\\|isAffine_of_.*[Ss]urj\\|isAffine_of_.*[Ff]inite\\|isAffine_of_.*[Ii]ntegral\\|isAffine_of_.*[Cc]losed\\|isAffine_of_.*[Cc]over' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicGeometry and ~/weil-conjectures-slopmaster2/WeilConjectures",
+   "results": "Mathlib: isAffine_of_isAffineHom (Morphisms/Affine.lean:185), isAffine_of_isEmpty (Limits.lean:135), isAffine_of_isAffineOpen_basicOpen (Morphisms/Affine.lean:108), Scheme.isAffine_of_isLimit, IsAffine (∐ g) for finite families (Limits.lean:651); slopmaster2: IsConnectedCurve.isAffine_of_ne_top only. No Chevalley-type theorem (finite/integral surjective image of affine is affine) and no closed-cover criterion",
+   "date": "2026-10-10",
+   "verdict": "no match"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-sc-reduced-dim-le-one-ample"
  },
  "chapter": "sec-curve-estimates",
- "unit": "sk-thm-curveestimate"
+ "unit": "sk-thm-curveestimate",
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "lem-sc-closed-affine-union-affine",
+  "worker": "stage1",
+  "summary": "Read Stacks Limits Lemma 09NL (limits.tex, label lemma-affines-glued-in-closed-affine; tag verified in tags/tags) and its proof: the disjoint union of the Z_i maps surjectively and integrally onto X with affine source, so X is affine by Proposition 05YU (limits-proposition-affine, tag verified). The source's proof does not use an ideal-product reduction to two closed subschemes or Serre's criterion; the split follows the source. Steps: r=0 (empty scheme = Spec 0); the coproduct W is affine (finite disjoint union of affines); pi: W -> Y is finite (closed immersions finite, 035C; induction with the binary coproduct of finite morphisms, 0CYI), which is stronger than the source's 'integral'; pi is surjective (elementary) and universally closed (finite => universally closed, 01WN); conclude by the existing 05YU node. Statement kept. No new node: every fact is an existing node (four Mathlib leaves and the 05YU node). No sorry-free slopmaster2 declaration states the item (grep by id, tag, IsAffine names). lean_audit absent and left as it is. Mathlib: re-searched with Loogle, LeanFinder and grep (LeanSearch returned HTTP 500 twice); no match.",
+  "blueprint": "The item is not a blueprint node; its ancestor lem-sc-pic-proper-ntorsion's place (proof, first sentence via 09NZ/09NX: 09NX proof, second paragraph, 'the nonvanishing locus X_s is a finite union of affine closed subschemes', concluded affine by 09NL) is realized by steps 1-5 together; blueprint search (tools/blueprint_refs.py search 09NL, 05YU, 'affine closed subschemes union', 'finitely many affine closed', 'union of affine closed', 'closed subschemes affine', 'covered by closed subschemes', 'integral surjective affine') found no blueprint node stating it: same_as [].",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-surjective-universally-closed-affine-target",
+    "why": "Step 5 takes Stacks Proposition 05YU (surjective universally closed morphism from an affine scheme has affine target), which the source cites; it is a generic tool of unit sk-thm-p1 and no node of sk-thm-curveestimate states it"
+   }
+  ]
+ },
+ "reviewed": {
+  "by": "L",
+  "date": "2026-10-10",
+  "note": "split read in full against 09NL: coproduct of the affine Z_j is affine (leaf), the map to Y is finite (closed immersions finite, finite-coproduct leaf by induction), surjective and universally closed (leaf), so Y is affine by 05YU (tool use, sk-thm-p1); 0 new nodes; the brief had guessed a different proof, the worker followed the source"
+ },
+ "tool_uses": [
+  "lem-weil-pbc-surjective-universally-closed-affine-target"
+ ]
 }
