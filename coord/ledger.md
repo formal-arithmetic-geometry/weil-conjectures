@@ -2692,3 +2692,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 21:35 L: merged deliver/K1/lem-sc-proper-flat-right-adjoint-affine-basechange (reviewer FIX; after a return; new nodes: 9)
 - 21:35 L: merged deliver/C1/lem-pc-perfect-complexes-compact-set (reviewer FIX+NODE(1); after a return; new nodes: 2)
 - 21:35 L: merged deliver/C1/lem-sc-affine-unit-quotient (reviewer PASS; first push; new nodes: 0)
+- 21:35 L: returned deliver/K1/lem-pc-tower-surjective-lim-acyclic (reviewer RETURN: 1. D (circular): Step 2 says 'the towers B,C have surjective transitions, so Step 1 makes all their R^q lim vanish', but)
