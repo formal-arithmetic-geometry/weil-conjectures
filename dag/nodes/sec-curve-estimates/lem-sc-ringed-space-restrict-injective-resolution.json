@@ -24,9 +24,56 @@
   "def-sp-injective-resolutions",
   "lem-sc-ringed-space-module-sheaves-enough-injectives"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "By [lem-sc-derived-open-restriction-adjunction-exact], the restriction functor $j^{-1}:\\operatorname{Mod}(\\mathcal O_X)\\to\\operatorname{Mod}(\\mathcal O_U)$ is exact. Applying this functor termwise to the augmented exact complex $0\\to F\\to I^0\\to I^1\\to\\cdots$ therefore gives an exact augmented complex $0\\to F|_U\\to I^0|_U\\to I^1|_U\\to\\cdots$.",
+   "uses": [
+    "lem-sc-derived-open-restriction-adjunction-exact",
+    "def-sp-injective-resolutions"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/cohomology.tex",
+    "place": "Cohomology, Lemma 01E1 (lemma-cohomology-of-open), proof of part (1), exactness after restriction"
+   }
+  },
+  {
+   "text": "The same node gives an adjunction $j_!\\dashv j^{-1}$ with $j_!$ exact. The right-adjoint-preserves-injectives lemma [lem-sp-right-adjoint-preserves-injectives], applied to the exact functor $j_!$ and its right adjoint $j^{-1}$ between the abelian module categories, shows that each injective $I^n$ restricts to an injective $I^n|_U$.",
+   "uses": [
+    "lem-sc-derived-open-restriction-adjunction-exact",
+    "lem-sp-right-adjoint-preserves-injectives",
+    "def-sp-injective-resolutions"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/cohomology.tex",
+    "place": "Cohomology, Lemma 01E1 (lemma-cohomology-of-open), proof of part (1), extension by zero and preservation of injectives"
+   }
+  },
+  {
+   "text": "By [lem-sc-ringed-space-module-sheaves-enough-injectives], instantiated for the ringed space $(U,\\mathcal O_U)$, the category of $\\mathcal O_U$-modules is abelian and has enough injectives. Combining Steps 1 and 2, the restricted augmented complex is exact and has injective terms; it is therefore an injective resolution of $F|_U$ by [def-sp-injective-resolutions]. In particular, every term $I^n|_U$ is injective.",
+   "uses": [
+    "lem-sc-ringed-space-module-sheaves-enough-injectives",
+    "def-sp-injective-resolutions"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/cohomology.tex",
+    "place": "Cohomology, Lemma 01E1 (lemma-cohomology-of-open), conclusion of part (1)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sc-derived-open-restriction-adjunction-exact",
+  "def-sp-injective-resolutions",
+  "lem-sp-right-adjoint-preserves-injectives",
+  "lem-sc-ringed-space-module-sheaves-enough-injectives"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Cohomology, Lemma 01E1 (lemma-cohomology-of-open), part (1) and proof"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -51,12 +98,30 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-sc-mayer-vietoris-ringed-space",
   "by": "worker",
   "date": "2026-10-10"
  },
  "chapter": "sec-curve-estimates",
- "unit": "sk-thm-curveestimate"
+ "unit": "sk-thm-curveestimate",
+ "split_report": {
+  "date": "2026-10-11",
+  "item": "lem-sc-ringed-space-restrict-injective-resolution",
+  "worker": "stage1",
+  "summary": "No exact declaration exists in the Lean source. The item is split without new nodes: exactness of restriction and the exact extension-by-zero adjunction are supplied by the existing ringed-space node lem-sc-derived-open-restriction-adjunction-exact; the existing generic right-adjoint-preserves-injectives lemma gives injectivity of restricted terms; the injective-resolution definition then gives the conclusion.",
+  "blueprint": "Realizes the ancestor blueprint clause '09MR Mayer–Vietoris paragraph: choose an injective resolution and restrict it to the opens' via the item route through lem-sc-mayer-vietoris-ringed-space."
+ },
+ "tool_uses": [
+  "lem-sc-derived-open-restriction-adjunction-exact"
+ ],
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-rri1919",
+  "group": "E1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-rri1919 (reviewer sub-agent of L); spot-checked: Steps 1-3 against cited statements: j^{-1} exact and j_! exact left adjoint (lem-sc-derived-open-restriction-adjunction-exact, ringed-space node, unit sk-thm-picard-duality, accepted as generic tool), orientation j_! -| j^{-1} matches lem-sp-right-adjoint-preserves-injectives, enough injectives on Mod(O_U) via ringed-space node lem-sc-ringed-space-module-sheaves-enough-injectives; no scheme-only citations; no cycle (adjunction node created from lem-sc-derived-k-injective-restrict-open, does not depend on item); matches Stacks 01E1(1) and proof. No faults found."
+ }
 }
