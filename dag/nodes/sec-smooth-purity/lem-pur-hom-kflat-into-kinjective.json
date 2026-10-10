@@ -24,20 +24,85 @@
   "def-pur-kinjective-complex",
   "def-pur-hom-complex"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Let $\\mathcal K^\\bullet$ be any acyclic complex of $\\mathcal O$-modules. By the definition of K-flatness, the total tensor complex $\\operatorname{Tot}(\\mathcal K^\\bullet\\otimes_{\\mathcal O}\\mathcal L^\\bullet)$ is acyclic.",
+   "uses": [
+    "def-pc-kflat-complex"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Lemma 0A96 (lemma-RHom-from-K-flat-into-K-injective), proof: first sentence"
+   }
+  },
+  {
+   "text": "By [lem-sc-derived-hom-tensor-total] (applied with $\\mathcal M^\\bullet=\\mathcal I^\\bullet$) there is an isomorphism of complexes of $\\mathcal O$-modules $\\mathcal Hom^\\bullet(\\mathcal K^\\bullet,\\mathcal Hom^\\bullet(\\mathcal L^\\bullet,\\mathcal I^\\bullet))\\cong\\mathcal Hom^\\bullet(\\operatorname{Tot}(\\mathcal K^\\bullet\\otimes_{\\mathcal O}\\mathcal L^\\bullet),\\mathcal I^\\bullet)$.",
+   "uses": [
+    "lem-sc-derived-hom-tensor-total"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Lemma 0A96 (lemma-compose), tensor-Hom calculation in the proof"
+   }
+  },
+  {
+   "text": "For the acyclic total tensor complex from Step 1, K-injectivity of $\\mathcal I^\\bullet$ gives $\\operatorname{Hom}_{K(\\mathcal O)}(\\operatorname{Tot}(\\mathcal K^\\bullet\\otimes_{\\mathcal O}\\mathcal L^\\bullet),\\mathcal I^\\bullet)=0$. For complexes $\\mathcal A^\\bullet,\\mathcal B^\\bullet$ of $\\mathcal O$-modules, the global sections $\\Gamma(\\mathcal C,\\mathcal Hom^\\bullet(\\mathcal A^\\bullet,\\mathcal B^\\bullet))$ form the complex whose degree-$n$ terms are families of $\\mathcal O$-linear maps $\\mathcal A^p\\to\\mathcal B^{p+n}$ with the differential of [def-pur-hom-complex]; its degree-zero cocycles are the morphisms of complexes and its degree-zero coboundaries are exactly the null-homotopic ones, so $H^0(\\Gamma(\\mathcal C,\\mathcal Hom^\\bullet(\\mathcal A^\\bullet,\\mathcal B^\\bullet)))=\\operatorname{Hom}_{K(\\mathcal O)}(\\mathcal A^\\bullet,\\mathcal B^\\bullet)$. Taking global sections and $H^0$ of the isomorphism of Step 2 therefore gives $\\operatorname{Hom}_{K(\\mathcal O)}(\\mathcal K^\\bullet,\\mathcal Hom^\\bullet(\\mathcal L^\\bullet,\\mathcal I^\\bullet))=0$ for every acyclic $\\mathcal K^\\bullet$. By the definition of K-injectivity, $\\mathcal Hom^\\bullet(\\mathcal L^\\bullet,\\mathcal I^\\bullet)$ is K-injective.",
+   "uses": [
+    "def-pur-kinjective-complex",
+    "def-pur-hom-complex"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Lemma 0A96 (lemma-RHom-from-K-flat-into-K-injective), proof: conclusion"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-kflat-complex",
+  "def-pur-kinjective-complex",
+  "def-pur-hom-complex",
+  "lem-sc-derived-hom-tensor-total"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Lemma 0A96 (lemma-RHom-from-K-flat-into-K-injective), proof"
+ },
  "mathlib_searches": [
   {
-   "tool": "grep",
-   "query": "grep -rln 'KInjective\\|isKInjective' Mathlib (slopmaster2 .lake/packages/mathlib)",
-   "results": "Algebra/Homology/DerivedCategory/KInjective.lean, HomotopyCategory/KInjective.lean, KProjective.lean, ModelCategory/Injective.lean, CategoryTheory/Abelian/Injective/Ext.lean: K-injectivity in a general abelian category only; no sheaf Hom complex, no K-flat notion",
-   "date": "2026-10-10",
+   "tool": "leanfinder",
+   "query": "Hom complex from a K-flat complex into a K-injective complex is K-injective",
+   "results": "CategoryTheory.InjectiveResolution.instIsKInjectiveCochainComplex and CochainComplex.isKInjective_of_injective; no K-flat/sheaf Hom statement",
+   "date": "2026-10-11",
    "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "KInjective, KFlat, internalHom, tensor",
+   "results": "0 hits; unknown identifier KInjective",
+   "date": "2026-10-11",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "KInjective|isKInjective|kFlat|internalHom in Mathlib/CategoryTheory/Algebra/Homology",
+   "results": "K-injective declarations in Mathlib/Algebra/Homology/HomotopyCategory/KInjective.lean, but no sheaf Hom complex or K-flat notion",
+   "date": "2026-10-11",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "K-flat tensor with an acyclic complex is acyclic, hence Hom into K-injective is K-injective",
+   "results": "unavailable: service unavailable",
+   "date": "2026-10-11",
+   "verdict": "unavailable"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "reviewer",
@@ -45,5 +110,20 @@
   "date": "2026-10-10"
  },
  "chapter": "sec-smooth-purity",
- "unit": "sk-def-sf-operations"
+ "unit": "sk-def-sf-operations",
+ "split_report": {
+  "date": "2026-10-11",
+  "item": "lem-pur-hom-kflat-into-kinjective",
+  "worker": "stage1",
+  "summary": "No sorry-free project declaration states this lemma. Expanded the Stacks 0A96 proof into three steps: K-flatness makes the tensor with an acyclic test complex acyclic; the termwise signed tensor-Hom calculation identifies the two Hom complexes; and K-injectivity of the target gives the required acyclicity. Mathlib searches found only general group-valued HomComplex/K-injective declarations, not the sheaf statement.",
+  "blueprint": "Realizes the proof paragraph of def-weil-derived-pullback-tensor-hom asserting that Hom from a K-flat complex into a K-injective complex is K-injective."
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-hki3146",
+  "group": "C1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-hki3146 (reviewer sub-agent of L); spot-checked: Statement vs Stacks 0A96: matches; citers lem-pur-rhom-global-sections and lem-sc-derived-internal-hom-adjunction use it with K-flat source, K-injective target: quantifiers match; no kflat/kinjective duplicate node. FIX more, RETURN less: (1) C1/class d: Step 2 re-derived inline (as 'elementary') the sheaf-level total tensor-Hom isomorphism that is the existing node lem-sc-derived-hom-tensor-total (in base via 5f35dcb5e), and its termwise sheaf adjunction was uncited; Step 2 now cites lem-sc-derived-hom-tensor-total, elementary false. (2) C4: Step 3 took H^0 of the sheaf Hom complex as Hom in K(O); rewritten to take global sections, H^0(Gamma(Hom^bullet(A,B)))=Hom_K(A,B) from def-pur-hom-complex, as in the Stacks proof. proof_deps updated; def-pc-tensor-complex-sheaves dropped from stmt_deps (not in the statement).; 1 file(s) fixed by the reviewer"
+ }
 }

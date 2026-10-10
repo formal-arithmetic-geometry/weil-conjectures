@@ -2998,3 +2998,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 23:43 L: merged deliver/C1/lem-sc-derived-internal-hom-adjunction (reviewer FIX; after a return; new nodes: 1)
 - 23:44 L: merged deliver/J1/lem-pc-sites-module-sheafification-bilinear-extension (reviewer FIX+NODE(1); first push; new nodes: 1)
 - 23:44 L: returned deliver/E1/lem-pc-derived-tensor-transitivity (reviewer RETURN: 1. E (ill-typed item statement / missing hypothesis): for general R-algebras A,B (neither R-flat) K tensor^L_R B and (E )
+- 23:46 L: merged deliver/C1/lem-pur-hom-kflat-into-kinjective (reviewer FIX; first push; new nodes: 0)
