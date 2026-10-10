@@ -68,7 +68,6 @@
 | `lem-sc-flat-base-change-coherent` | 3006 | sorry_here |
 | `lem-weil-pbc-etale-finite-data-descent` | 3006 | none |
 | `lem-weil-pbc-hypercover-free-resolution` | 3006 | none |
-| `thm-galois-abstract-equivalence` | 3006 | none |
 | `def-galois-category` | 3007 | none |
 | `def-sc-divisor` | 3007 | none |
 | `def-sc-etale-qcoherent-module` | 3007 | none |
@@ -89,6 +88,7 @@
 | `lem-sc-pic-proper-decomposition` | 3007 | none |
 | `lem-sc-positive-degree-ample` | 3007 | rests_on_sorry |
 | `lem-sc-zero-generic-acyclic` | 3007 | rests_on_sorry |
+| `lem-weil-pbc-finite-coproduct-lfp-qcqs` | 3007 | none |
 | `thm-av-final` | 3007 | rests_on_sorry |
 | `thm-sc-jacobian-representability` | 3007 | rests_on_sorry |
 | `def-pc-smooth-projective-curve` | 3008 | none |
@@ -866,7 +866,7 @@
 | `lem-weil-pbc-p1-field-dimension-one` | 4 | state |
 | `lem-weil-pbc-projective-space-zero-isomorphism` | 4 | state |
 
-Not open yet: 397 nodes that wait for stage 1, 873 nodes that wait for a statement dependency.
+Not open yet: 397 nodes that wait for stage 1, 874 nodes that wait for a statement dependency.
 
 ## Stage 3: modules to prove (0)
 
