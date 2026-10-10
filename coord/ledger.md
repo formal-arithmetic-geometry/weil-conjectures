@@ -2186,3 +2186,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 17:56 L: merged deliver/F1/lem-weil-pbc-etale-subsheaf-final-open (reviewer PASS; first push; new nodes: 0)
 - 17:56 L: merged deliver/C1/lem-sc-semilocal-dim-one-conductor (reviewer FIX; after a return; new nodes: 4)
 - 17:57 L: merged deliver/F1/lem-pc-inseparable-tensor-nilpotent (reviewer PASS; first push; new nodes: 0)
+- 17:58 L: merged deliver/E1/lem-pc-ringed-spaces-derived-adjoint (reviewer FIX+NODE(1); first push; new nodes: 1)

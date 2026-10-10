@@ -13,7 +13,7 @@
  },
  "kind": "statement",
  "title": "Derived pullback is left adjoint to derived direct image",
- "statement": "Let $f:X\\to Y$ be a morphism of schemes [def-pc-scheme] (more generally of ringed spaces). The derived pullback $Lf^*:D(\\mathcal O_Y)\\to D(\\mathcal O_X)$ [def-pc-derived-pullback] is left adjoint to the derived direct image $Rf_*:D(\\mathcal O_X)\\to D(\\mathcal O_Y)$ [def-pc-derived-direct-image]: $\\operatorname{Hom}_{D(\\mathcal O_X)}(Lf^*G,F)=\\operatorname{Hom}_{D(\\mathcal O_Y)}(G,Rf_*F)$ bifunctorially in $F\\in D(\\mathcal O_X)$ and $G\\in D(\\mathcal O_Y)$, with derived categories as in [def-pc-derived-category].",
+ "statement": "Let $f:X\\to Y$ be a morphism of schemes [def-pc-scheme]. The derived pullback $Lf^*:D(\\mathcal O_Y)\\to D(\\mathcal O_X)$ [def-pc-derived-pullback] is left adjoint to the derived direct image $Rf_*:D(\\mathcal O_X)\\to D(\\mathcal O_Y)$ [def-pc-derived-direct-image]: $\\operatorname{Hom}_{D(\\mathcal O_X)}(Lf^*G,F)=\\operatorname{Hom}_{D(\\mathcal O_Y)}(G,Rf_*F)$ bifunctorially in $F\\in D(\\mathcal O_X)$ and $G\\in D(\\mathcal O_Y)$, with derived categories as in [def-pc-derived-category].",
  "source": {
   "document": "literature/stacks-project/cohomology.tex",
   "place": "Tag 079W, Cohomology Lemma cohomology-lemma-adjoint"
@@ -24,9 +24,59 @@
   "def-pc-derived-direct-image",
   "def-pc-derived-pullback"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "For the morphism of ringed spaces underlying f, the module pullback P_f = O_X tensor_{f^{-1}O_Y} f^{-1}(-) is left adjoint to the underived direct image f_*: the natural map Hom_{O_X}(P_f G,F) -> Hom_{O_Y}(G,f_*F) is a bijection, by [lem-pc-module-pullback-adjunction]. The derived pullback Lf^* and derived direct image Rf_* are the left and right derived functors of these two functors, as specified in [def-pc-derived-pullback] and [def-pc-derived-direct-image].",
+   "uses": [
+    "lem-pc-module-pullback-adjunction",
+    "def-pc-derived-pullback",
+    "def-pc-derived-direct-image"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sheaves.tex",
+    "place": "Tag 0096, lemma-adjoint-pullback-pushforward-modules"
+   }
+  },
+  {
+   "text": "Apply [lem-pc-derived-adjoint-functors] with $\\mathcal A$ the abelian category of $\\mathcal O_X$-modules, $\\mathcal B$ that of $\\mathcal O_Y$-modules, $F=f_*$ and $G=P_f$; $G$ is left adjoint to $F$ by Step 1. By [def-pc-derived-direct-image] and [def-pc-derived-pullback], $Rf_*$ and $Lf^*$ are the right derived functor of $f_*$ and the left derived functor of $P_f$, defined on all of $D(\\mathcal O_X)$ and $D(\\mathcal O_Y)$ (computed by K-injective, resp. K-flat, resolutions), where these derived categories are those of [def-pc-derived-category], i.e. the derived categories of the two module categories. The cited lemma therefore gives that $Lf^*$ is left adjoint to $Rf_*$, with a canonical bijection $\\operatorname{Hom}_{D(\\mathcal O_X)}(Lf^*G,F)\\cong\\operatorname{Hom}_{D(\\mathcal O_Y)}(G,Rf_*F)$.",
+   "uses": [
+    "lem-pc-derived-adjoint-functors",
+    "lem-pc-module-pullback-adjunction",
+    "def-pc-derived-pullback",
+    "def-pc-derived-direct-image",
+    "def-pc-derived-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Lemma 09T5 (lemma-derived-adjoint-functors), as invoked in the proof of Cohomology Lemma 079W"
+   }
+  },
+  {
+   "text": "The bijection of Step 2 is functorial in both variables by the functoriality clause of [lem-pc-derived-adjoint-functors] (here $RF=Rf_*$ and $LG=Lf^*$ are defined everywhere), i.e. bifunctorial in $F\\in D(\\mathcal O_X)$ and $G\\in D(\\mathcal O_Y)$; this is the displayed statement.",
+   "uses": [
+    "lem-pc-derived-adjoint-functors"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/cohomology.tex",
+    "place": "Tag 079W, Cohomology Lemma cohomology-lemma-adjoint (functoriality clause)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-module-pullback-adjunction",
+  "lem-pc-derived-adjoint-functors",
+  "def-pc-derived-pullback",
+  "def-pc-derived-direct-image",
+  "def-pc-derived-category"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Tag 079W, Cohomology Lemma cohomology-lemma-adjoint"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -51,12 +101,28 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-pc-proper-derived-direct-image-composition",
   "by": "worker",
   "date": "2026-10-10"
  },
  "chapter": "sec-picard-framework",
- "unit": "sk-thm-picard-duality"
+ "unit": "sk-thm-picard-duality",
+ "split_report": {
+  "date": "2026-10-11",
+  "item": "lem-pc-ringed-spaces-derived-adjoint",
+  "worker": "stage1",
+  "summary": "Kept the imported statement and split its proof into the underived module adjunction, the K-flat/K-injective derived construction of Stacks Tag 079W, and bifunctoriality. No child node was created because the only further fact is the item itself (and the abstract Mathlib derived-adjunction API is not an exact ringed-space instantiation).",
+  "blueprint": "Realizes the derived direct-image composition proof clause: the adjunction between derived pullback and derived direct image (Stacks Tag 079W).",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-rda1757",
+  "group": "E1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-rda1757 (reviewer sub-agent of L); spot-checked: Item statement checked against Stacks 079W; narrowing from ringed spaces to schemes is named in the second reading (E7), matches the scheme-only definition nodes. Step 1 matches lem-pc-module-pullback-adjunction. No restatement of prop-weil-pbc-derived-inverse-image-adjunction (etale, bounded below, exact left adjoint u^{-1}; Lf^* is not exact), so not class (b); no cycle (lem-pc-proper-derived-direct-image-composition depends on this item, not the reverse). Mathlib Adjunction.derived (Functor/Derived/Adjunction.lean:144) read: needs absoluteness instances, not exact. FIX more, RETURN less: steps 2-3 rested on 'the formal derived-adjunction argument of Tag 079W', i.e. Derived Categories Lemma 09T5, stated by no cited node (C1; the second reading missed it): added statement-only node lem-pc-derived-adjoint-functors (Stacks 09T5 with 0DVC functoriality, 'defined at' made explicit), unsplit, one Mathlib search recorded; step 2 now applies it with F=f_*, G=P_f, step 3 takes bifunctoriality from its functoriality clause (elementary), uses and proof_deps updated.; 2 file(s) fixed by the reviewer; 1 statement node(s) added by the reviewer (FIX more, RETURN less)"
+ }
 }
