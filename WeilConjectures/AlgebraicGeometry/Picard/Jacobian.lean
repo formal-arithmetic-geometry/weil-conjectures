@@ -28,6 +28,7 @@ public import WeilConjectures.Mathlib.Algebra.DualNumber
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Geometrically.Irreducible
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Geometrically.Reduced
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Modules.Sheaf
+public import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.Proper
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.Smooth
 public import WeilConjectures.Mathlib.CategoryTheory.Adjunction.Basic
 
@@ -1855,10 +1856,20 @@ theorem exists_intermediateField_descentDatum {ks : Type u} [Field ks] [Algebra 
     obtain ⟨hG, -⟩ := exists_commGrpObj_isPicardZeroMul _ (rs.ofIso e)
     obtain ⟨α, _, j, hj, hjf⟩ := GrpObj.exists_isImmersion_projectiveSpace Js
     have : IsImmersion j := hj
-    obtain ⟨β, _, i, hi, -⟩ := exists_isImmersion_projectiveSpace_of_pullback (k := K) (K := ks)
+    obtain ⟨β, _, i, hi, hif⟩ := exists_isImmersion_projectiveSpace_of_pullback (k := K) (K := ks)
       JK.hom (hq.isoPullback.inv ≫ j) (by rw [Category.assoc, hjf, hq.isoPullback_inv_snd])
     have : IsImmersion i := hi
-    exact fun s hs ↦ exists_isAffineOpen_superset_of_isImmersion i s hs
+    -- `J_K` is proper, so the immersion is closed
+    have := smoothOfRelativeDimension_of_representableBy_picardFunctorDegree 0 Js (rs.ofIso e)
+    have := geometricallyIntegral_of_representableBy_picardFunctorDegree 0 Js (rs.ofIso e)
+    obtain ⟨hJK, -, -⟩ := isProper_smoothOfRelativeDimension_geometricallyIntegral_of_isPullback
+      JK.hom Js.hom q hq
+      (arithmeticGenus ks (pullback (C ↘ Spec (.of k)) (Spec.map (CommRingCat.ofHom (algebraMap k ks)))))
+    have : UniversallyClosed (i ≫ ℙ(β; Spec (.of K)) ↘ Spec (.of K)) := by
+      rw [hif]
+      infer_instance
+    have := IsClosedImmersion.of_comp_of_isSeparated i (ℙ(β; Spec (.of K)) ↘ Spec (.of K))
+    exact fun s hs ↦ exists_isAffineOpen_superset_of_isClosedImmersion i s hs
 
 open Functor.RepresentableBy in
 /-- **`Pic^0_{C/k}` satisfies descent along a field extension.** Let `K/k` be a field extension and

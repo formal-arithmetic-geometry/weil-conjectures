@@ -104,4 +104,87 @@ theorem exists_homogeneous_notMem_of_finset (s : Finset (ProjectiveSpectrum 𝒜
       exact hgs x hxe (x.isPrime.mem_of_pow_mem E ((Ideal.add_mem_iff_left _
         (Ideal.pow_mem_of_mem _ (hyx ⟨x, hxe⟩) d hd)).mp hmem))
 
+open DirectSum in
+/-- A homogeneous ideal which is not contained in an ideal `q` contains a homogeneous element
+outside `q`: otherwise all its homogeneous components, hence all its elements, lie in `q`. -/
+lemma _root_.HomogeneousIdeal.exists_mem_graded_not_mem (p : HomogeneousIdeal 𝒜) (q : Ideal A)
+    (h : ¬ p.toIdeal ≤ q) : ∃ i, ∃ a ∈ 𝒜 i, a ∈ p.toIdeal ∧ a ∉ q := by
+  classical
+  by_contra H
+  push Not at H
+  refine h fun x hx ↦ ?_
+  rw [← sum_support_decompose 𝒜 x]
+  exact Ideal.sum_mem _ fun i _ ↦ H i _ (SetLike.coe_mem _) (p.isHomogeneous i hx)
+
+open DirectSum HomogeneousIdeal in
+/-- A relevant homogeneous prime misses a homogeneous element of positive degree. -/
+lemma exists_pos_mem_graded_not_mem (x : ProjectiveSpectrum 𝒜) :
+    ∃ i, 0 < i ∧ ∃ b ∈ 𝒜 i, b ∉ x.asHomogeneousIdeal := by
+  obtain ⟨i, b, hb, hbirr, hbx⟩ :=
+    (irrelevant 𝒜).exists_mem_graded_not_mem x.asHomogeneousIdeal.toIdeal x.not_irrelevant_le
+  refine ⟨i, Nat.pos_of_ne_zero fun hi ↦ hbx ?_, b, hb, hbx⟩
+  subst hi
+  have h0 : (decompose 𝒜 b 0 : A) = 0 := (mem_irrelevant_iff 𝒜 b).1 hbirr
+  rw [decompose_of_mem_same 𝒜 hb] at h0
+  rw [h0]
+  exact zero_mem _
+
+/-- **Graded prime avoidance.** For finitely many points of `Proj 𝒜`, there is a homogeneous
+element of positive degree lying in none of the corresponding homogeneous primes.
+
+Given `a` of degree `d` avoiding the primes of `S` but lying in `p_y`, every `p_x`, `x ∈ S`, is
+not contained in `p_y`; with homogeneous `c_x ∈ p_x ∖ p_y` and `b ∉ p_y` of positive degree, the
+element `g = b ∏ c_x` of degree `e` and `a^e + g^d` avoid all the primes. -/
+theorem exists_mem_graded_forall_not_mem (S : Finset (ProjectiveSpectrum 𝒜)) :
+    ∃ m, 0 < m ∧ ∃ f ∈ 𝒜 m, ∀ x ∈ S, f ∉ x.asHomogeneousIdeal := by
+  classical
+  induction S using Finset.induction_on with
+  | empty => exact ⟨1, one_pos, 0, zero_mem _, by simp⟩
+  | @insert y S hy ih =>
+    obtain ⟨d, hd, a, ha, haS⟩ := ih
+    by_cases hay : a ∉ y.asHomogeneousIdeal
+    · exact ⟨d, hd, a, ha, by simpa [hay] using haS⟩
+    push Not at hay
+    -- the primes `p_x`, `x ∈ S`, not contained in `p_y`
+    let S₁ := S.filter fun x ↦ ¬ x.asHomogeneousIdeal.toIdeal ≤ y.asHomogeneousIdeal.toIdeal
+    have hc (x : ProjectiveSpectrum 𝒜) (hx : x ∈ S₁) :
+        ∃ i, ∃ c ∈ 𝒜 i, c ∈ x.asHomogeneousIdeal.toIdeal ∧ c ∉ y.asHomogeneousIdeal.toIdeal :=
+      x.asHomogeneousIdeal.exists_mem_graded_not_mem _ (Finset.mem_filter.1 hx).2
+    choose! ic c hcmem hcx hcy using hc
+    obtain ⟨ib, hib, b, hb, hby⟩ := exists_pos_mem_graded_not_mem y
+    let g := b * ∏ x ∈ S₁, c x
+    let e := ib + ∑ x ∈ S₁, ic x
+    have hg : g ∈ 𝒜 e := SetLike.mul_mem_graded hb (SetLike.prod_mem_graded 𝒜 ic c hcmem)
+    have he : 0 < e := Nat.add_pos_left hib _
+    have hgy : g ∉ y.asHomogeneousIdeal := by
+      have := y.isPrime
+      refine fun hmem ↦ (this.mem_or_mem hmem).elim hby fun hp ↦ ?_
+      obtain ⟨x, hx, hcx'⟩ := (Ideal.IsPrime.prod_mem_iff (p := y.asHomogeneousIdeal.toIdeal)).1 hp
+      exact hcy x hx hcx'
+    have hgx (x : ProjectiveSpectrum 𝒜) (hx : x ∈ S₁) : g ∈ x.asHomogeneousIdeal :=
+      Ideal.mul_mem_left _ _ (Ideal.prod_mem _ hx (hcx x hx))
+    have hfy : a ^ e + g ^ d ∉ y.asHomogeneousIdeal := by
+      intro hmem
+      have := y.isPrime
+      have h1 : a ^ e ∈ y.asHomogeneousIdeal := Ideal.pow_mem_of_mem _ hay e he
+      have h2 : g ^ d ∈ y.asHomogeneousIdeal := by
+        simpa using (Ideal.add_mem_iff_right _ h1).1 hmem
+      exact hgy (this.mem_of_pow_mem d h2)
+    refine ⟨d * e, Nat.mul_pos hd he, a ^ e + g ^ d, ?_, ?_⟩
+    · refine add_mem ?_ ?_
+      · simpa [mul_comm] using SetLike.pow_mem_graded e ha
+      · simpa using SetLike.pow_mem_graded d hg
+    · intro x hx
+      rcases Finset.mem_insert.1 hx with rfl | hx
+      · exact hfy
+      by_cases hle : x.asHomogeneousIdeal.toIdeal ≤ y.asHomogeneousIdeal.toIdeal
+      · exact fun hmem ↦ hfy (hle hmem)
+      replace hx : x ∈ S₁ := Finset.mem_filter.2 ⟨hx, hle⟩
+      · intro hmem
+        have := x.isPrime
+        have h2 : g ^ d ∈ x.asHomogeneousIdeal := Ideal.pow_mem_of_mem _ (hgx x hx) d hd
+        have h1 : a ^ e ∈ x.asHomogeneousIdeal := by
+          simpa using (Ideal.add_mem_iff_left _ h2).1 hmem
+        exact haS x (Finset.mem_filter.1 hx).1 (this.mem_of_pow_mem e h1)
+
 end ProjectiveSpectrum
