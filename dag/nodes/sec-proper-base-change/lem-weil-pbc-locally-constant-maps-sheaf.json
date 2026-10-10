@@ -5,14 +5,41 @@
  "statement": "Let U be a topological space and R a set. A map from an open subset V of U to R is locally constant if every point of V has an open neighbourhood in V on which the map is constant. For each open V let L_R(V) be the set of such maps, with restriction maps. Then L_R is a sheaf of sets on the site of open subsets of U with open coverings [def-weil-pbc-sites-and-cohomology]: compatible locally constant maps on an open cover glue uniquely to a locally constant map.",
  "source": {
   "document": "literature/stacks-project/sheaves.tex",
-  "place": "Sheaves, Definition Tag 006W, preceding paragraph: locally constant maps form a sheaf"
+  "place": "Sheaves, Example 6.4 and Definition 6.5 (Tag 006W): continuous maps form a sheaf; for a discrete target these are the locally constant maps"
  },
  "stmt_deps": [
   "def-weil-pbc-sites-and-cohomology"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Let $V=\\bigcup_{i\\in I}V_i$ be an open covering and let $f_i:V_i\\to R$ be locally constant maps whose restrictions to every $V_i\\cap V_j$ agree. Define $f:V\\to R$ pointwise by $f(x)=f_i(x)$ for any $i$ with $x\\in V_i$. Such an $i$ exists because the $V_i$ cover $V$, and compatibility on $V_i\\cap V_j$ makes the value independent of the choice. By construction $f|_{V_i}=f_i$ for every $i$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sheaves.tex",
+    "place": "Sheaves, Example 6.4 (example-basic-continuous-maps), gluing construction"
+   }
+  },
+  {
+   "text": "For $x\\in V$, choose $i$ with $x\\in V_i$. Since $f_i$ is locally constant, there is an open neighbourhood $W\\subseteq V_i$ of $x$ on which $f_i$ is constant; because $V_i$ is open in $V$, $W$ is also open in $V$, and $f|_W=f_i|_W$ is constant. Thus $f$ is locally constant. If $g:V\\to R$ is another gluing, then for each $x$ and any $i$ containing it, $g(x)=f_i(x)=f(x)$, so $g=f$. Existence and uniqueness give the sheaf condition.",
+   "uses": [
+    "def-weil-pbc-sites-and-cohomology"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sheaves.tex",
+    "place": "Sheaves, Example 6.4 and the paragraph preceding Definition 6.5 (Tag 006W)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-sites-and-cohomology"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/sheaves.tex",
+  "place": "Sheaves, Example 6.4 and Definition 6.5 (Tag 006W)"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -37,7 +64,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "worker",
@@ -57,5 +84,11 @@
   }
  },
  "chapter": "sec-proper-base-change",
- "unit": "sk-thm-p1"
+ "unit": "sk-thm-p1",
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "lem-weil-pbc-locally-constant-maps-sheaf",
+  "worker": "stage1",
+  "summary": "Checked the statement against Stacks Sheaves Example 6.4 and Definition 6.5 (Tag 006W), and replaced the empty imported proof by the explicit pointwise gluing argument: compatibility makes the glued map well-defined, local constancy is checked on a covering member around each point, and uniqueness is pointwise. No new nodes are needed because every inference is an immediate use of the definitions. The existing three-way Mathlib search finds the locally constant map API and generic sheaf machinery but no declaration for this sheaf."
+ }
 }
