@@ -26,16 +26,78 @@
   "lem-sc-h1-gm-pic",
   "def-sc-curves",
   "def-sc-invertible-module",
-  "lem-sc-torsor-h1-functoriality",
+  "lem-sc-torsor-h1",
   "lem-weil-pbc-cohomology-pullback-degree-zero",
   "def-pc-scheme",
   "def-weil-pbc-inverse-image",
   "def-weil-pbc-cohomology-pullback",
   "def-pc-module-pullback"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "By [lem-sc-h1-gm-pic], the class of an invertible module $\\mathcal L$ in $H^1(X_{\\mathrm{Et}},\\mathbf G_{m,X})$ is represented by the etale torsor $T_{\\mathcal L}=\\underline{\\operatorname{Isom}}(\\mathcal O_X,\\mathcal L)$; [lem-sc-torsor-h1] identifies this torsor class with the corresponding cohomology class.",
+   "uses": [
+    "lem-sc-h1-gm-pic",
+    "lem-sc-torsor-h1"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 040E (Lemma 21.6.1), torsor representative"
+   }
+  },
+  {
+   "text": "Let $u^{-1}T_{\\mathcal L}$ be the inverse image of the etale sheaf of sets $T_{\\mathcal L}$ (sheafified presheaf inverse image, as in [def-weil-pbc-inverse-image]), a $u^{-1}\\mathbf G_{m,X}$-torsor. Define $\\theta:u^{-1}T_{\\mathcal L}\\to T_{u^*\\mathcal L}=\\underline{\\operatorname{Isom}}(\\mathcal O_Y,u^*\\mathcal L)$ by sending a local generator $s$ of $\\mathcal L$ on an etale $U\\to X$, pulled back to an etale $V\\to Y$ over $U$, to the generator $1\\otimes s$ of $u^*\\mathcal L=\\mathcal O_Y\\otimes_{u^{-1}\\mathcal O_X}u^{-1}\\mathcal L$ [def-pc-module-pullback] on $V$. For a local unit $f$ one has $1\\otimes fs=c_u(f)(1\\otimes s)$, so $\\theta$ is equivariant along $c_u$, the comparison of the statement (adjoint, via [def-weil-pbc-inverse-image], to pullback of units). An equivariant map from a $G$-torsor to a $G'$-torsor along $G\\to G'$ induces an isomorphism from the contracted product (Stacks Tag 03AH; local check on a trivializing covering, where both sides are $G'$). Hence $u^{-1}T_{\\mathcal L}\\wedge^{u^{-1}\\mathbf G_{m,X}}\\mathbf G_{m,Y}\\cong T_{u^*\\mathcal L}$.",
+   "uses": [
+    "def-pc-module-pullback",
+    "def-weil-pbc-inverse-image"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 040E (Lemma 21.6.1), pullback of the Isom torsor"
+   }
+  },
+  {
+   "text": "By clause (1) of [lem-sc-etale-torsor-h1-functoriality], $u^*:H^1(X_{\\mathrm{Et}},\\mathbf G_{m,X})\\to H^1(Y_{\\mathrm{Et}},u^{-1}\\mathbf G_{m,X})$ sends the class of $T_{\\mathcal L}$ (step 1, via [lem-sc-torsor-h1]) to the class of $u^{-1}T_{\\mathcal L}$; by clause (2) applied to $c_u$, $H^1(c_u)$ (the map of [lem-weil-pbc-cohomology-pullback-functorial]) sends that to the class of $u^{-1}T_{\\mathcal L}\\wedge^{u^{-1}\\mathbf G_{m,X}}\\mathbf G_{m,Y}$, which is $[T_{u^*\\mathcal L}]$ by step 2. Under [lem-sc-h1-gm-pic] for $Y$ this is $[u^*\\mathcal L]$, so $H^1(c_u)\\circ u^*$ corresponds to $[\\mathcal L]\\mapsto[u^*\\mathcal L]$.",
+   "uses": [
+    "lem-sc-etale-torsor-h1-functoriality",
+    "lem-sc-torsor-h1",
+    "lem-weil-pbc-cohomology-pullback-functorial",
+    "lem-sc-h1-gm-pic"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 040E (Lemma 21.6.1), functoriality"
+   }
+  },
+  {
+   "text": "For degree zero, [lem-weil-pbc-cohomology-pullback-degree-zero] identifies cohomology with global sections and identifies the pullback with the unit map on sections. Applied to $\\mathbf G_m$, this is the pullback homomorphism $\\mathcal O_X(X)^\\times\\to\\mathcal O_Y(Y)^\\times$.",
+   "uses": [
+    "lem-weil-pbc-cohomology-pullback-degree-zero"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 040E (Lemma 21.6.1), degree zero"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sc-h1-gm-pic",
+  "lem-sc-torsor-h1",
+  "def-pc-module-pullback",
+  "def-weil-pbc-inverse-image",
+  "lem-sc-etale-torsor-h1-functoriality",
+  "lem-weil-pbc-cohomology-pullback-functorial",
+  "lem-weil-pbc-cohomology-pullback-degree-zero"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 040E (Lemma 21.6.1)"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -67,12 +129,43 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-sc-kummer-base-change-compatibility",
   "by": "worker",
   "date": "2026-10-10"
  },
  "chapter": "sec-curve-estimates",
- "unit": "sk-prop-ext-invariance"
+ "unit": "sk-prop-ext-invariance",
+ "split_report": {
+  "date": "2026-10-11",
+  "item": "lem-sc-h1-gm-pic-pullback",
+  "worker": "stage1",
+  "summary": "Split the functorial Picard/H¹(G_m) statement into torsor representation, the elementary pullback identification of Isom torsors, naturality of the cohomology pullback, and degree zero. Removed the prior Zariski-only torsor-functoriality dependency.",
+  "blueprint": "Realizes the ancestor thm-sc-constant-invariance place 'Proper and affine cases: compatibility of the Kummer sequence with the Picard identifications'.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-cohomology-pullback-functorial",
+    "why": "The proof needs the general naturality equation for etale cohomology pullback, which is supplied by the proper-base-change unit."
+   },
+   {
+    "node": "lem-weil-pbc-cohomology-pullback-degree-zero",
+    "why": "The degree-zero global-sections identification is supplied by the proper-base-change unit and is not part of this curve unit's route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-cohomology-pullback-functorial",
+  "lem-weil-pbc-cohomology-pullback-degree-zero",
+  "lem-weil-pbc-cohomology-pullback-functorial",
+  "lem-weil-pbc-cohomology-pullback-degree-zero"
+ ],
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-hgp3140",
+  "group": "K1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-hgp3140 (reviewer sub-agent of L); spot-checked: Read lem-sc-h1-gm-pic (etale torsor Isom(O,L) clause), lem-sc-torsor-h1, lem-sc-torsor-h1-functoriality (Zariski only, no pullback clause), lem-sc-torsor-h1-ext-pushout (Zariski), the PBC ladder, functorial and degree-zero nodes, def-sc-field-extension (rho^q = cohomology pullback) and the citer lem-sc-kummer-base-change-compatibility step 1 (uses H^1(c) o rho^1 for u=pi: literally the stated composite; c defined in-statement as adjoint to pullback of units). Steps 1 and 4 fine; tool uses (functorial for H^q(phi), degree-zero) accepted as generic. FIX more, RETURN less: (1) C1/C4 step 3: the compatibility of the etale torsor bijection with u^* ([T] -> [u^{-1}T]) and with H^1(c_u) (contracted product) was stated by no cited node, and the cited naturality clause (3) of lem-weil-pbc-cohomology-pullback-functorial (u^* o H^q(phi) = H^q(u^{-1}phi) o u^*) does not say it; added statement-only node lem-sc-etale-torsor-h1-functoriality (etale clauses (1) pullback, (2) change of group; not a duplicate: existing lem-sc-torsor-h1-functoriality is Zariski and has no pullback clause; Mathlib grep recorded) and step 3 now cites it. (2) step 2 reworded: u^{-1}T_L is the inverse image of the torsor (not Isom(u^{-1}O,u^{-1}L)); explicit c_u-equivariant map s -> 1 tensor s and the contracted-product isomorphism (Tag 03AH), elementary. proof_deps updated. The Second reading by K1 missed fault (1).; 2 file(s) fixed by the reviewer; 1 statement node(s) added by the reviewer (FIX more, RETURN less)"
+ }
 }
