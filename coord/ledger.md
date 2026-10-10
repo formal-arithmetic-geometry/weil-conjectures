@@ -2378,3 +2378,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 19:24 L: returned deliver/E1/lem-sc-hom-etale-locus-translation (reviewer RETURN: R-hel1935: 1. E7/E (statement narrowed for a wrong reason, breaking its consumer): the delivery restricts the item to a )
 - 19:24 L: merged deliver/K1/lem-pc-compact-hom-hocolim (reviewer FIX; after a return; new nodes: 0)
 - 19:25 L: merged deliver/G1/lem-sc-finite-flat-unramified-tangent-criterion (reviewer PASS; first push; new nodes: 1)
+- 19:25 L: merged deliver/E1/lem-sp-derived-well-defined (reviewer FIX; first push; new nodes: 0)

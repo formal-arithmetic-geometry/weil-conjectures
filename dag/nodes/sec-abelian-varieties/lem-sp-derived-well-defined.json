@@ -3,11 +3,11 @@
  "blueprint": {
   "is": "lem-sp-derived-well-defined",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "Well-definedness of right derived functors",
- "statement": "Let $v$ be a left exact additive [def-sp-left-exact-additive] functor and let\n$X$ be an object of a Grothendieck abelian category\n[def-sp-grothendieck-abelian]. Then $R^nv(X)$ is well defined, independent of\nthe chosen injective resolution [def-sp-injective-resolutions], and\n$R^0v(X)\\cong v(X)$ naturally in $X$.",
+ "statement": "Let $\\mathcal A$ be an abelian category with enough injectives, let\n$v:\\mathcal A\\to\\mathcal B$ be a left exact additive [def-sp-left-exact-additive] functor, and let\n$X$ be an object of $\\mathcal A$ (for instance of a Grothendieck abelian category\n[def-sp-grothendieck-abelian], such as $\\mathrm{Mod}(\\mathcal O_T)$ for a ringed space $(T,\\mathcal O_T)$). Then $R^nv(X)$ is well defined, independent of\nthe chosen injective resolution [def-sp-injective-resolutions], and\n$R^0v(X)\\cong v(X)$ naturally in $X$.",
  "source": {
   "document": "literature/blueprint/master/blueprint/sec-abelian-varieties/sk-prop-av-pqf-finite/lem-sp-derived-well-defined.md",
   "place": "node lem-sp-derived-well-defined, order 502"
@@ -17,44 +17,70 @@
   "def-sp-grothendieck-abelian",
   "def-sp-injective-resolutions"
  ],
- "proof": [
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/blueprint/master/blueprint/sec-abelian-varieties/sk-prop-av-pqf-finite/lem-sp-derived-well-defined.md",
+  "place": "node statement; Mathlib generalization"
+ },
+ "mathlib_searches": [
   {
-   "text": "Step 1: choose resolutions. By the Grothendieck-abelian hypothesis\n([def-sp-grothendieck-abelian], enough injectives by [lem-sp-grothendieck-enough-injectives]) and\n[def-sp-injective-resolutions], $X$ admits an injective resolution\n$I^{\\bullet}$: $0\\to X\\to I^0\\to I^1\\to\\cdots$, and $R^nv(X)$ is defined as\n$H^n(v(I^{\\bullet}))$, by [def-sp-left-exact-additive].",
-   "uses": [
-    "def-sp-grothendieck-abelian",
-    "lem-sp-grothendieck-enough-injectives",
-    "def-sp-injective-resolutions",
-    "def-sp-left-exact-additive"
-   ],
-   "elementary": false
+   "tool": "leanfinder",
+   "query": "right derived functor independent of injective resolution naturally isomorphic degree zero left exact functor",
+   "results": "CategoryTheory.Functor.rightDerivedZeroIsoSelf; CategoryTheory.InjectiveResolution.isoRightDerivedObj and homotopyEquiv",
+   "date": "2026-10-11",
+   "verdict": "match: more general declarations cover both clauses"
   },
   {
-   "text": "Step 2: independence. Let $J^{\\bullet}$ be a second injective resolution of\n$X$. The identity of $X$ extends to a cochain map $\\varphi:I^{\\bullet}\\to\nJ^{\\bullet}$ (inductively: $X\\to J^0$ extends to $I^0\\to J^0$ because $J^0$\nis injective, and the induction step raises the degree, the maps of\n$I^{\\bullet}$ being inductively extended through the injectivity of the\n$J^q$), and any two such extensions $\\varphi,\\psi$ are cochain homotopic\n(their difference is a cochain map extending the zero map $X\\to J^{\\bullet}$\nwith the source $I^{\\bullet}$ acyclic in positive degrees and the $J^q$\ninjective, so the standard lifting argument gives a homotopy). Hence\n$v(\\varphi):v(I^{\\bullet})\\to v(J^{\\bullet})$ is a cochain map whose homotopy\nclass is independent of the choices, and since a cochain homotopy becomes an\nequality in the homotopy category, the cochain maps $v(\\varphi)$, $v(\\psi)$\ninduce the same map of the homology; the composite of the maps induced by\n$\\varphi$ and by a map $\\psi':J^{\\bullet}\\to I^{\\bullet}$ extending the\nidentity of $X$ is the map induced by a chain map extending the identity,\ni.e. the identity, by the same uniqueness of the homotopy class; so the\n$H^n(v(I^{\\bullet}))\\cong H^n(v(J^{\\bullet}))$ is a canonical isomorphism,\nnatural in $X$ (the comparison being natural by Step 2 applied functorially).",
-   "uses": [],
-   "elementary": null
+   "tool": "loogle",
+   "query": "rightDerivedObjIsoOfResolution, InjectiveResolution, rightDerivedZeroIsoSelf",
+   "results": "0 hits; unknown identifier rightDerivedObjIsoOfResolution",
+   "date": "2026-10-11",
+   "verdict": "no match for that spelling"
   },
   {
-   "text": "Step 3: degree zero. By left exactness of $v$\n([def-sp-left-exact-additive]), the sequence\n\n$$\n 0\\longrightarrow v(X)\\longrightarrow v(I^0)\\longrightarrow v(I^1)\n$$\n\nis exact, so $H^0(v(I^{\\bullet}))=v(X)$, naturally.",
-   "uses": [
-    "def-sp-left-exact-additive"
-   ],
-   "elementary": false
+   "tool": "grep",
+   "query": "rightDerivedObjIsoOfResolution|isoRightDerivedObj|InjectiveResolution /home/ubuntu/weil-src-slopmaster2/.lake/packages/mathlib/Mathlib/CategoryTheory",
+   "results": "Mathlib/CategoryTheory/Abelian/RightDerived.lean:114 isoRightDerivedObj; :376 rightDerivedZeroIsoSelf; Mathlib/CategoryTheory/Abelian/Injective/Resolution.lean:187 homotopyEquiv",
+   "date": "2026-10-11",
+   "verdict": "match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "injective resolutions homotopy equivalent right derived homology independent resolution",
+   "results": "CategoryTheory.InjectiveResolution.homotopyEquiv; CategoryTheory.InjectiveResolution.isoRightDerivedToHomotopyCategoryObj; CategoryTheory.InjectiveResolution.isoRightDerivedObj",
+   "date": "2026-10-11",
+   "verdict": "match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "right derived functor from injective resolutions is independent of choice and degree zero is original left exact functor",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-11",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "grep",
+   "query": "rightDerivedZeroIsoSelf /home/ubuntu/weil-src-slopmaster2/.lake/packages/mathlib/Mathlib/CategoryTheory/Abelian",
+   "results": "Mathlib/CategoryTheory/Abelian/RightDerived.lean:376 rightDerivedZeroIsoSelf; :380-397 naturality and inverse identities",
+   "date": "2026-10-11",
+   "verdict": "match"
+  },
+  {
+   "tool": "grep",
+   "query": "HasInjectiveResolutions instance from EnoughInjectives in Mathlib/CategoryTheory/Abelian/Injective/Resolution.lean",
+   "results": "instance for abelian categories with enough injectives (Resolution.lean:348)",
+   "date": "2026-10-10",
+   "verdict": "match: hypothesis widened to enough injectives (reviewer R-dwd1939)"
   }
  ],
- "proof_deps": [
-  "def-sp-grothendieck-abelian",
-  "lem-sp-grothendieck-enough-injectives",
-  "def-sp-injective-resolutions",
-  "def-sp-left-exact-additive"
- ],
- "proof_origin": {
-  "by": "agent",
-  "document": "literature/blueprint/master/blueprint/sec-abelian-varieties/sk-prop-av-pqf-finite/lem-sp-derived-well-defined.md",
-  "place": "## Proof"
+ "mathlib_match": {
+  "declaration": "CategoryTheory.InjectiveResolution.isoRightDerivedObj; CategoryTheory.Functor.rightDerivedZeroIsoSelf",
+  "file": "Mathlib/CategoryTheory/Abelian/RightDerived.lean",
+  "how": "specialization: for an abelian category with enough injectives Mathlib infers HasInjectiveResolutions; Functor.rightDerived is defined for any additive functor, InjectiveResolution.isoRightDerivedObj computes it from any chosen injective resolution, and rightDerivedZeroIsoSelf gives the natural degree-zero isomorphism for a left exact functor"
  },
- "mathlib_searches": [],
- "mathlib_match": null,
- "status": "imported",
+ "status": "mathlib",
  "merged_into": null,
  "import_flags": [],
  "blueprint_kind": "lemma",
@@ -79,5 +105,21 @@
   }
  },
  "chapter": "sec-abelian-varieties",
- "unit": "sk-prop-av-pqf-finite"
+ "unit": "sk-prop-av-pqf-finite",
+ "split_report": {
+  "date": "2026-10-11",
+  "item": "lem-sp-derived-well-defined",
+  "worker": "stage1",
+  "summary": "The item is a Mathlib leaf. Mathlib's rightDerived construction computes every degree from any injective resolution, and its natural rightDerivedZeroIsoSelf gives the degree-zero identification; both are stated under weaker hypotheses than the item's Grothendieck assumption.",
+  "blueprint": "Realizes the imported proof's clauses choosing an injective resolution, independence of that choice, and degree-zero identification via Mathlib's general right-derived-functor API."
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-dwd1939",
+  "group": "E1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-dwd1939 (reviewer sub-agent of L); spot-checked: Read isoRightDerivedObj (RightDerived.lean:114), rightDerivedZeroIsoSelf (:376), homotopyEquiv (Injective/Resolution.lean:187), HasInjectiveResolutions instance (:348); consumers checked (Mod(O_X) cases Grothendieck, ringed-space fine). FIX more, RETURN less: E7 widened the hypothesis to enough injectives, which lemma-weil-pbc-leray-acyclicity needs; mathlib_match how updated to specialization; grep search recorded.; 1 file(s) fixed by the reviewer"
+ },
+ "lead_note": "2026-10-10 L (R-dwd1939): Statement widened from Grothendieck abelian to abelian with enough injectives (E7): consumer lemma-weil-pbc-leray-acyclicity and def-sp-left-exact-additive use it in that generality. Pre-existing: lemma-weil-pbc-leray-acyclicity Step 3 cites 'Step 2' of this node, which as a Mathlib leaf has no proof (C5 in the consumer)."
 }
