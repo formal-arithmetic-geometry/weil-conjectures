@@ -23,7 +23,6 @@
 | `lem-weil-pbc-formal-systems-graded-vanishing` | 1012 | none |
 | `lem-weil-pbc-formal-systems-kernel-rees-finite` | 1012 | none |
 | `lem-weil-pbc-make-separably-generated` | 1012 | none |
-| `lem-weil-pbc-ml-cohomology-powers-ideal` | 1012 | none |
 | `lem-weil-pbc-module-cohomology-fmap-basic-properties` | 1012 | none |
 | `lem-weil-pbc-module-cohomology-fmap-functorial` | 1012 | none |
 | `lem-weil-pbc-module-finite-presentation-cokernel` | 1012 | none |
@@ -149,6 +148,7 @@
 | `lem-weil-pbc-residue-field-pd-ge-embedding-dimension` | 1013 | none |
 | `lem-weil-pbc-residue-field-pd-le-krull-dimension` | 1013 | none |
 | `lem-weil-pbc-scheme-modules-enough-injectives` | 1013 | none |
+| `lem-weil-pbc-separable-root-pth-power` | 1013 | none |
 | `lem-weil-pbc-separated-lqf-base-change` | 1013 | none |
 | `lem-weil-pbc-serre-criterion-normal` | 1013 | none |
 | `lem-weil-pbc-serre-sk-goes-up` | 1013 | none |
@@ -912,7 +912,7 @@
 | `lem-weil-pbc-p1-field-dimension-one` | 4 | state |
 | `lem-weil-pbc-projective-space-zero-isomorphism` | 4 | state |
 
-Not open yet: 676 nodes that wait for stage 1, 521 nodes that wait for a statement dependency.
+Not open yet: 676 nodes that wait for stage 1, 522 nodes that wait for a statement dependency.
 
 ## Stage 3: modules to prove (0)
 
