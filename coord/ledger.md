@@ -1232,3 +1232,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 10:22 L: merged C1 lem-weil-pbc-depth-drops-by-one (090R, 2 new with Mathlib matches) and M1 lem-weil-pbc-localization-n2-domain (032G, 0 new).
 - 2026-10-10, delivery of G1: lem-weil-pbc-smooth-at-prime-field-extension-descent merged from deliver/G1/lem-weil-pbc-smooth-at-prime-field-extension-descent (1 commit(s), 1 new node(s), spot-checked by L: L: 02UQ reverse direction via 00TG chain checked; Mathlib BaseChange.lean:199 read); claim closed
 - 2026-10-10, delivery of K1: lem-weil-pbc-flat-mod-injective merged from deliver/K1/lem-weil-pbc-flat-mod-injective (1 commit(s), 1 new node(s), spot-checked by L: L: 00ME steps checked (graded induction, Krull intersection, Tor criterion 00M5 on quotients)); claim closed
+- 10:27 L: merged G1 lem-weil-pbc-smooth-at-prime-field-extension-descent (02UQ, 1 new with Mathlib match) and K1 lem-weil-pbc-flat-mod-injective (00ME, 1 new: 00M5).
