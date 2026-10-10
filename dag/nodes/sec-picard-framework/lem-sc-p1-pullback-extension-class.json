@@ -22,9 +22,50 @@
   "def-sc-ext-sheaf",
   "lem-sc-p1-ext-yoneda-functoriality"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Write the original maps as $i:\\mathcal A\\to\\mathcal E$ and $p:\\mathcal E\\to\\mathcal C$. Form the fiber product $P=\\mathcal E\\times_{\\mathcal C}\\mathcal C'$ with projections $q:P\\to\\mathcal E$ and $p':P\\to\\mathcal C'$. The maps $a\\mapsto(i(a),0)$ and $p'$ give $0\\to\\mathcal A\\to P\\to\\mathcal C'\\to0$: on each stalk $p'$ is surjective because $p$ is, and its kernel consists exactly of pairs $(i(a),0)$ since $i$ identifies $\\mathcal A$ with $\\ker p$. The maps $(1_{\\mathcal A},q,u)$ form a morphism of short exact sequences from this pullback sequence to the original one, since $p\\circ q=u\\circ p'$ by the fiber-product equation.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/homology.tex",
+    "place": "Homology Section Tag 010I, pullback of an extension along its quotient map"
+   }
+  },
+  {
+   "text": "Apply [lem-sc-p1-ext-class-naturality] to the morphism of short exact sequences from step 1. Its left component is $1_{\\mathcal A}$ and its right component is $u$, so $1_{\\mathcal A}[1]\\circ\\delta(u^*\\mathcal E)=\\delta(\\mathcal E)\\circ u$. The identity on the left leaves the class unchanged.",
+   "uses": [
+    "def-sc-ext-sheaf",
+    "lem-sc-p1-ext-class-naturality"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/homology.tex",
+    "place": "Homology Section Tag 010I (homology-section-extensions, definition-ext-group and pullback construction), together with Derived Section Tag 06XP (derived-section-ext, definition-ext and Yoneda extension class)"
+   }
+  },
+  {
+   "text": "By [lem-sc-p1-ext-yoneda-functoriality], the right side $\\delta(\\mathcal E)\\circ u$ is the Yoneda composition named in the statement, equal to the contravariant Ext image $\\operatorname{Ext}^1_X(u,\\mathcal A)(\\delta)$. Thus the equality in step 2 is the claimed pullback-class formula.",
+   "uses": [
+    "lem-sc-p1-ext-yoneda-functoriality"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Derived Section Tag 06XP, functoriality and composition of Ext classes"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sc-ext-sheaf",
+  "lem-sc-p1-ext-class-naturality",
+  "lem-sc-p1-ext-yoneda-functoriality"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/homology.tex",
+  "place": "Homology Section Tag 010I (homology-section-extensions, definition-ext-group and pullback construction), together with Derived Section Tag 06XP (derived-section-ext, definition-ext and Yoneda extension class)"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -56,12 +97,35 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-sc-p1-boundary-extension-composition",
   "by": "worker",
   "date": "2026-10-10"
  },
  "chapter": "sec-picard-framework",
- "unit": "sk-thm-picard-duality"
+ "unit": "sk-thm-picard-duality",
+ "split_report": {
+  "date": "2026-10-11",
+  "item": "lem-sc-p1-pullback-extension-class",
+  "worker": "stage1",
+  "summary": "Constructed the pullback short exact sequence explicitly, then applied the existing Mathlib leaf lem-sc-p1-ext-class-naturality (extClass_naturality) and the existing Yoneda functoriality node. No new nodes.",
+  "blueprint": [
+   "thm-sc-p1-duality proof, Step 2: identification of the pullback extension class for the compatibility of the connecting map with composition by the boundary class"
+  ]
+ },
+ "mathlib_candidate": {
+  "declaration": "CategoryTheory.ShortComplex.ShortExact.extClass_naturality",
+  "file": "Mathlib/Algebra/Homology/DerivedCategory/Ext/ExtClass.lean",
+  "line": 131,
+  "why": "Naturality gives the class equality after constructing the pullback short exact sequence and its morphism to the original sequence."
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-pec1753",
+  "group": "G1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-pec1753 (reviewer sub-agent of L); spot-checked: Read extClass_naturality at ExtClass.lean:131-137: h1.extClass.comp (mk0 f.tau1) = (mk0 f.tau3).comp h2.extClass; with tau1=id_A, tau3=u it gives delta(u*E)=delta(E) o u, so step 2 is a direct use of the existing leaf lem-sc-p1-ext-class-naturality (status mathlib, exact). Item stays split: Mathlib has no pullback-of-extension declaration, step 1 (stalkwise fiber product SES and morphism (1,q,u)) is elementary. No new nodes; second reading's removal of the duplicate leaf confirmed. Edge cases u=id, u=0 fine. FIX more, RETURN less: (1) split_report.summary still claimed a new Mathlib leaf after the duplicate was dropped, rewritten to name the existing leaf and no new nodes; (2) step 3 said the statement names Ext^1(u,A)(delta), but it names delta o u, text corrected.; 1 file(s) fixed by the reviewer"
+ }
 }
