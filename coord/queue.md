@@ -1,16 +1,18 @@
 # Work queue
 
-866 items; claim with `tools/claim.py next <group> [--stage N]`.
+867 items; claim with `tools/claim.py next <group> [--stage N]`.
 
-## Stage 1: nodes to split (318)
+## Stage 1: nodes to split (319)
 
 | node | distance to a target | Lean state on the done branch |
 |---|---|---|
 | `thm-constructible-serre` | 5 | rests_on_sorry |
 | `lem-weil-pbc-ext-one-direct-sum` | 1017 | none |
 | `lem-weil-pbc-injective-acyclicity-bounded-below` | 2002 | sorry_here |
-| `lemma-weil-pbc-proper-underived-exchange` | 2003 | sorry_here |
-| `lemma-weil-pbc-finite-refinement-etale-cover` | 2006 | sorry_here |
+| `lem-weil-pbc-sections-base-field-extension` | 2004 | none |
+| `lem-weil-pbc-affine-source-morphism-separated` | 2007 | none |
+| `lem-weil-pbc-etale-fibre-specialization-bound` | 2007 | none |
+| `lem-weil-pbc-radicial-etale-open` | 2007 | none |
 | `lem-weil-pbc-sets-pushforward-stalk-strict-henselization` | 2008 | none |
 | `lem-sc-pic-lift-closed-immersion-dim-le-one` | 2010 | none |
 | `lem-sc-affine-cap-section-open` | 2011 | none |
@@ -22,7 +24,7 @@
 | `lem-sc-integral-dim-one-ample` | 2011 | none |
 | `lem-sc-zero-dim-noetherian-affine` | 2011 | none |
 | `lem-weil-pbc-derived-etale-cohomology-limit` | 3004 | none |
-| `lem-weil-pbc-zero-dimensional-cohomology` | 3004 | none |
+| `lem-weil-pbc-finite-geometric-point-coproduct-cohomology` | 3005 | none |
 | `lem-sc-etale-affine-qcoherent` | 3007 | none |
 | `lem-sc-etale-zariski-qcoh-comparison` | 3007 | none |
 | `lem-exc-field-discrete-modules` | 3008 | none |
@@ -33,16 +35,13 @@
 | `lem-pc-nowhere-dense-dim-zero` | 3010 | none |
 | `lem-sc-brauer-zero-all-curves` | 3010 | sorry_here |
 | `lem-sc-curve-base-change-relative-dimension-one` | 3010 | none |
-| `lem-sc-hilb-dominating-power` | 3010 | none |
 | `lem-sc-point-tangent-separation-closed-immersion` | 3010 | none |
-| `thm-sc-serre-duality-curve` | 3010 | rests_on_sorry |
 | `lem-pc-algebraic-dim-zero-affine-finite` | 3011 | none |
 | `lem-pc-ample-affine-loci-criterion` | 3011 | none |
 | `lem-pc-base-change-closure-components` | 3011 | none |
 | `lem-pc-very-ample-descends` | 3011 | sorry_here |
 | `lem-pc-zero-dimensional-closed-subscheme-finite` | 3011 | none |
 | `lem-sc-geometrically-irreducible-product` | 3011 | none |
-| `lem-sc-regular-curve-torsionfree-free` | 3011 | none |
 | `thm-sc-p1-duality` | 3011 | sorry_here |
 | `lem-exc-coinduced-functions-open-stabilizer` | 3012 | none |
 | `lem-exc-coinduced-homotopy-continuous` | 3012 | none |
@@ -50,6 +49,8 @@
 | `lem-exc-rg-discrete-modules-functorial-injective-embeddings` | 3012 | none |
 | `lem-pc-grothendieck-edge-cocycle` | 3012 | none |
 | `lem-pc-projective-base-change` | 3012 | none |
+| `lem-sc-coherent-free-stalks-locally-free` | 3012 | none |
+| `lem-sc-dvr-fg-torsionfree-free` | 3012 | none |
 | `lem-sc-dvr-saturation-line` | 3012 | none |
 | `lem-sc-ext-locally-free` | 3012 | sorry_here |
 | `lem-sc-exterior-top-direct-sum` | 3012 | none |
@@ -254,6 +255,7 @@
 | `def-nagata-morphism-equality-stage` | - | none |
 | `def-nagata-qc-open-equality-stage` | - | none |
 | `def-nagata-relative-gluing-datum-descent` | - | none |
+| `def-nagata-scheme-theoretically-dense-open` | - | none |
 | `lem-pc-coherent-hi` | - | sorry_here |
 | `lem-sc-affine-generic-second` | - | sorry_here |
 | `lem-sc-genus-invariant` | - | none |
@@ -275,6 +277,7 @@
 | `lemma-nagata-directed-finite-upper-bound` | - | none |
 | `lemma-nagata-morphism-descends` | - | none |
 | `lemma-nagata-qc-open-descends` | - | none |
+| `pqf-lem-qf-locqf-qc` | - | none |
 | `sbc-lem-higher-direct-image-limit` | - | none |
 | `def-nagata-basechanged-system` | - | none |
 | `def-pc-derived-direct-image` | - | none |
@@ -302,13 +305,11 @@
 | `lem-pc-flat-rf-open` | - | rests_on_sorry |
 | `lem-pc-projective-space-coherent-finiteness` | - | sorry_here |
 | `lem-sc-zariski-filtered-cohomology` | - | none |
-| `def-nagata-scheme-theoretically-dense-open` | - | none |
 | `def-sc-kahler-differentials` | - | none |
 | `lem-kun-separable-smooth-colimit` | - | none |
 | `lem-kun-stalk-as-pullback` | - | none |
 | `lem-pc-perfect-locus` | - | sorry_here |
 | `lem-sc-p1-hi-vanishing` | - | rests_on_sorry |
-| `pqf-lem-qf-locqf-qc` | - | none |
 | `def-amb-finite-locally-free-module` | - | none |
 | `lem-kun-algebraic-separable-smooth` | - | none |
 | `lem-kun-fg-separable-smooth` | - | none |
@@ -878,7 +879,7 @@
 | `lem-weil-pbc-p1-field-dimension-one` | 4 | state |
 | `lem-weil-pbc-projective-space-zero-isomorphism` | 4 | state |
 
-Not open yet: 337 nodes that wait for stage 1, 1032 nodes that wait for a statement dependency.
+Not open yet: 339 nodes that wait for stage 1, 1037 nodes that wait for a statement dependency.
 
 ## Stage 3: modules to prove (0)
 
