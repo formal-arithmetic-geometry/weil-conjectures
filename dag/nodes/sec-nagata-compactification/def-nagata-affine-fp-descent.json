@@ -3,25 +3,56 @@
  "blueprint": {
   "is": "def-nagata-affine-fp-descent",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "definition",
  "title": "Finite-stage model of a finitely presented affine algebra",
- "statement": "Suppose $S_{\\lambda_0}=\\operatorname{Spec}(A_{\\lambda_0})$,\n$S=\\operatorname{Spec}(A)$, and fix a finite presentation\n\n$$\nB=A[x_1,\\ldots,x_n]/(r_1,\\ldots,r_m).\n$$\n\nSelect finite-stage lifts of every coefficient of every $r_j$, let\n$\\lambda_B$ be their selected common upper bound, let\n$r_{j,\\lambda_B}$ be the lifted polynomials, and define\n\n$$\nB_{\\lambda_B}\n=A_{\\lambda_B}[x_1,\\ldots,x_n]/\n(r_{1,\\lambda_B},\\ldots,r_{m,\\lambda_B}).\n$$\n\nDefine $\\beta_B$ to be the comparison from\n$B_{\\lambda_B}\\otimes_{A_{\\lambda_B}}A$ to $B$ induced by the presentation.",
+ "statement": "Let $I$ be a nonempty directed set, let $(A_\\lambda)_{\\lambda\\in I}$ be a directed system of rings with transition maps $\\varphi_{\\lambda\\mu}\\colon A_\\lambda\\to A_\\mu$ ($\\lambda\\leq\\mu$) and colimit $A$, with structure maps $\\varphi_\\lambda\\colon A_\\lambda\\to A$; write $S_\\lambda=\\operatorname{Spec}(A_\\lambda)$ and $S=\\operatorname{Spec}(A)$, so that $(S_\\lambda)$ is an inverse system with affine transition morphisms and $S=\\varprojlim S_\\lambda$. Fix $\\lambda_0\\in I$ and a finite presentation\n\n$$\nB=A[x_1,\\ldots,x_n]/(r_1,\\ldots,r_m).\n$$\n\nLet $c_1,\\ldots,c_N\\in A$ be the finitely many coefficients of $r_1,\\ldots,r_m$. By finite-data descent [lemma-nagata-filtered-colimit-finite-data] (equivalently, because $A=\\operatorname{colim}A_\\lambda$), for each $k$ there exist a stage $\\lambda_k\\in I$ and an element $\\tilde c_k\\in A_{\\lambda_k}$ with $\\varphi_{\\lambda_k}(\\tilde c_k)=c_k$. **Choose** such pairs $(\\lambda_k,\\tilde c_k)$; they are not unique, and everything below depends on this choice (and on the presentation); citers must not assume the result is independent of it. Let $F=\\{\\lambda_0,\\lambda_1,\\ldots,\\lambda_N\\}\\subseteq I$ and let $\\lambda_B=u(F)$ be the selected upper bound of [def-nagata-directed-finite-upper-bound]; by [lemma-nagata-directed-finite-upper-bound], $\\lambda_0\\leq\\lambda_B$ and $\\lambda_k\\leq\\lambda_B$ for all $k$. Let $r_{j,\\lambda_B}\\in A_{\\lambda_B}[x_1,\\ldots,x_n]$ be the polynomial obtained from $r_j$ by replacing each coefficient $c_k$ by $\\varphi_{\\lambda_k\\lambda_B}(\\tilde c_k)$, and define\n\n$$\nB_{\\lambda_B}\n=A_{\\lambda_B}[x_1,\\ldots,x_n]/\n(r_{1,\\lambda_B},\\ldots,r_{m,\\lambda_B}).\n$$\n\nSince $\\varphi_{\\lambda_B}\\circ\\varphi_{\\lambda_k\\lambda_B}=\\varphi_{\\lambda_k}$, the map $\\varphi_{\\lambda_B}$ applied to coefficients sends $r_{j,\\lambda_B}$ to $r_j$. Define $\\beta_B$ to be the $A$-algebra map\n\n$$\n\\beta_B\\colon B_{\\lambda_B}\\otimes_{A_{\\lambda_B}}A\n=A[x_1,\\ldots,x_n]/(\\varphi_{\\lambda_B}(r_{1,\\lambda_B}),\\ldots,\\varphi_{\\lambda_B}(r_{m,\\lambda_B}))\n\\longrightarrow B\n$$\n\nsending $x_i\\mapsto x_i$ (here the two quotients have the same relations, so $\\beta_B$ is the identity on presentations). Since $\\lambda_0\\leq\\lambda_B$, $\\operatorname{Spec}(B_{\\lambda_B})$ is a scheme over $S_{\\lambda_B}$ and hence over $S_{\\lambda_0}$; for $\\lambda_B\\leq\\lambda$ the base changes $\\operatorname{Spec}(B_{\\lambda_B}\\otimes_{A_{\\lambda_B}}A_\\lambda)$ form the base-changed system of [def-nagata-basechanged-system] (started at $\\lambda_B$), whose limit term is $\\operatorname{Spec}(B_{\\lambda_B}\\otimes_{A_{\\lambda_B}}A)$.",
  "source": {
   "document": "literature/blueprint/master/blueprint/sec-nagata-compactification/sk-prop-nagata-sketch-approximation/def-nagata-affine-fp-descent.md",
   "place": "node def-nagata-affine-fp-descent, order 351"
  },
  "stmt_deps": [
   "def-nagata-directed-finite-upper-bound",
-  "lemma-nagata-filtered-colimit-finite-data"
+  "lemma-nagata-directed-finite-upper-bound",
+  "lemma-nagata-filtered-colimit-finite-data",
+  "def-nagata-basechanged-system"
  ],
  "proof": [],
  "proof_deps": [],
  "proof_origin": null,
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "finite-stage model of a finitely presented affine algebra by lifting finitely many polynomial coefficients",
+   "results": "Algebra.Presentation.instFinitePresentationModelOfHasCoeffsOfFinite; AlgebraicGeometry.AffineSpace.instLocallyOfFinitePresentationOverSchemeInferInstanceOverClassOfFinite; Algebra.FinitePresentation; Algebra.Presentation.exists_presentation_fin; RingHom.FinitePresentation; Algebra.SubmersivePresentation; AlgHom.FinitePresentation; Algebra.FinitePresentation.mvPolynomial_of_finitePresentation",
+   "date": "2026-10-11",
+   "verdict": "no exact match: these concern finite presentations but do not define descent data or the comparison map"
+  },
+  {
+   "tool": "loogle",
+   "query": "Polynomial quotient finite presentation tensor base change",
+   "results": "0 hits; loogle: Unknown identifier `quotient`",
+   "date": "2026-10-11",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "FinitePresentation|finitelyPresented|Polynomial.*quotient in Mathlib/AlgebraicGeometry",
+   "results": "0 hits",
+   "date": "2026-10-11",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "finite presentation descends to a finite stage in a filtered colimit of rings",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-11",
+   "verdict": "unavailable"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [
   "bypassed"
@@ -56,5 +87,21 @@
   }
  },
  "chapter": "sec-nagata-compactification",
- "unit": "sk-prop-nagata-sketch-approximation"
+ "unit": "sk-prop-nagata-sketch-approximation",
+ "split_report": {
+  "date": "2026-10-11",
+  "item": "def-nagata-affine-fp-descent",
+  "worker": "stage1",
+  "summary": "The item is a definition already decomposed by its two existing statement dependencies: the selected finite upper bound and finite-data descent in a filtered colimit. The blueprint marks this bookkeeping route bypassed by the formalized Noetherian approximation declarations, and no project declaration states this definition. No new node is needed.",
+  "blueprint": "Realizes the definition node itself (order 351); its finite-stage lifts use the existing finite-data descent node and its selected common upper bound uses the existing selected-upper-bound definition.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-afd2734",
+  "group": "J1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-afd2734 (reviewer sub-agent of L); spot-checked: Read both cited statements, lemma-nagata-directed-finite-upper-bound, def-nagata-basechanged-system, lemma-nagata-affine-fp-descends (sole statement citer) and K1's pushed gluing-datum statement. FIX more, RETURN less: (1) C4/NAGATA(2): lifts are a choice; statement now says the construction depends on the chosen lifts and citers must not assume canonicity (second reading missed this). (2) C4: lambda_B is u(F) with F = {lambda_0} plus the lift stages, and lemma-nagata-directed-finite-upper-bound cited for lambda_k, lambda_0 <= lambda_B (the def leaves this to the lemma); r_{j,lambda_B} defined as transported lifts, beta_B made explicit and checked well defined. (3) C1/NAGATA(3): def-nagata-basechanged-system cited for the system Spec(B_{lambda_B} tensor A_lambda) over S_{lambda_0}, which K1's chart transport uses; stmt_deps updated.; 1 file(s) fixed by the reviewer"
+ }
 }
