@@ -1750,3 +1750,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 15:14 L: retired uncited duplicate node lem-sc-zariski-module-sheaves-enough-injectives (G1's module-abelian-zariski-cohomology; the fix cites lem-weil-pbc-scheme-modules-enough-injectives; reviewer R-maz)
 - 15:14 L: merged deliver/H1/lem-pc-nowhere-dense-dim-zero (reviewer PASS; after a return; new nodes: 0)
 - 15:14 L: merged deliver/H1/lem-exc-rg-discrete-modules-functorial-injective-embeddings (reviewer PASS; first push; new nodes: 3)
+- 15:14 L: merged deliver/E1/lem-sc-glue-component-line-bundles (reviewer FIX; first push; new nodes: 2)

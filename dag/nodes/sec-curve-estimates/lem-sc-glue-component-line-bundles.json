@@ -26,9 +26,60 @@
   "def-weil-closed-immersion",
   "def-sc-invertible-module"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Set $T=\\bigcup_{i\\ne j}Z_i\\cap Z_j$. Because each pairwise intersection is discrete, $T$ is discrete. Reducedness together with the set-theoretic cover gives the scheme-theoretic cover $X\\setminus T=\\bigcup_i(Z_i\\setminus T)$, and the opens on the right are pairwise disjoint. The restriction identity for sections on such an open is [lem-sc-glue-component-reduced-cover-sections].",
+   "uses": [
+    "lem-sc-glue-component-reduced-cover-sections"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Varieties Lemma 09NE, proof, first paragraph"
+   }
+  },
+  {
+   "text": "For each $t\\in T$, discreteness gives an open neighborhood $U_t$ containing no other point of $T$. Shrink it so that every $\\mathcal M_i|_{U_t\\cap Z_i}$ is free of rank one; for the prescribed-section assertion, shrink further so each $s_i$ is nonvanishing there and choose the frame carrying $s_i$ to $1$. Cover each $Z_i\\setminus T$ by opens $U_{ij}$ on which $\\mathcal M_i$ is free, and extend these to an open cover of $X$ by the $U_t$ and $U_{ij}$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Varieties Lemma 09NE, proof, construction of U_t and U_{ij}"
+   }
+  },
+  {
+   "text": "On overlaps contained in a single $Z_i$, use the transition functions of $\\mathcal M_i$. Distinct $U_{ij}$ and $U_{i'j'}$ with $i\\ne i'$ are disjoint; on overlaps involving a $U_t$ use the frame chosen on $U_t\\cap Z_i$. The restriction identity from step 1 identifies these functions with units on the corresponding overlaps in $X$, and the transition functions satisfy the cocycle condition because they come from the local frames of $\\mathcal M_i$. The resulting Cech data glue to an invertible module $\\mathcal M$ by [lem-sc-glue-component-transition-cocycle], and its restriction to each $Z_i$ is $\\mathcal M_i$.",
+   "uses": [
+    "lem-sc-glue-component-reduced-cover-sections",
+    "lem-sc-glue-component-transition-cocycle"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Varieties Lemma 09NE, proof, transition-function paragraph"
+   }
+  },
+  {
+   "text": "In the section-prescribed case, the frame on every $U_t$ sends each $s_i$ to $1$. Taking the section $1$ on every $U_t$ and the local expression of $s_i$ on each $U_{ij}$ gives compatible local sections: on overlaps the transition functions are exactly the changes of frames, and on intersections with $U_t$ the normalization makes both expressions equal. The sheaf axiom therefore glues them to a global section $s$ of $\\mathcal M$, whose restriction to $Z_i$ is $s_i$.",
+   "uses": [
+    "lem-sc-glue-component-transition-cocycle"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Varieties Lemma 09NE, proof, final paragraph"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sc-glue-component-reduced-cover-sections",
+  "lem-sc-glue-component-transition-cocycle"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/varieties.tex",
+  "place": "Varieties Lemma 09NE (varieties-lemma-glue-invertible-sheaves), proof"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -53,12 +104,27 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-sc-reduced-dim-le-one-ample",
   "by": "worker",
   "date": "2026-10-10"
  },
  "chapter": "sec-curve-estimates",
- "unit": "sk-thm-curveestimate"
+ "unit": "sk-thm-curveestimate",
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "lem-sc-glue-component-line-bundles",
+  "worker": "stage1",
+  "summary": "Expanded Stacks Lemma 09NE into the reduced-cover section identity, local frame construction, Cech transition-function gluing, and normalized-section gluing. Added two unsplit supporting nodes for the non-elementary reduced-union restriction argument and the standard invertible-module Cech construction.",
+  "blueprint": "The four steps realize the direct proof of Lemma 09NE: the definition of T and reducedness paragraph, the U_t/U_ij frame cover, the transition-function cocycle paragraph, and the final normalized-section paragraph."
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-gcl",
+  "group": "E1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-gcl (reviewer sub-agent of L); spot-checked: Source Varieties Lemma 09NE (varieties-lemma-glue-invertible-sheaves, varieties.tex 7990-8088) read in full; the item statement agrees hypothesis by hypothesis (X reduced, set-theoretic cover by closed subschemes, discrete pairwise intersections; both conclusions, sections nonvanishing at points of Z_i cap Z_j). Step 1 carried by lem-sc-glue-component-reduced-cover-sections, which I checked true: T is closed (finite union of closed sets), the Z_i minus T are finitely many disjoint closed sets covering X minus T hence clopen, and a closed subscheme with full support in a reduced scheme is the whole open, giving the product of sections. Step 2 elementary (local triviality, discreteness of T, shrinking U_t away from Z_k not containing t and to where s_i is nonvanishing, possible since t in T lies in two components). Step 3: overlaps U_t cap U_ij and U_t cap U_t' lie in X minus T so the reduced-cover node turns component transition functions into units of O_X; cocycle holds componentwise; glued by lem-sc-glue-component-transition-cocycle (true: standard Cech gluing, convention g_ac=g_ab g_bc consistent with g_ab = phi_a phi_b^-1). Step 4 sheaf axiom, as in the source. Cited defs def-sc-invertible-module, def-pc-reduced-scheme, def-weil-closed-immersion read. Small cases: T empty, r=1. No Mathlib leaves; blueprint_refs search cocycle/glue found no same_as. FIX: dag/nodes/sec-curve-estimates/lem-sc-glue-component-transition-cocycle.json: source: Schemes Lemma 01JB is gluing of schemes, replaced by Sheaves Lemma 00AM (gluing sheaves of O-modules, sheaves.tex). Start Sat Oct 10 03:13:42 PM UTC 2026, end Sat Oct 10 03:14:35 PM UTC 2026.; 1 file(s) fixed by the reviewer"
+ }
 }
