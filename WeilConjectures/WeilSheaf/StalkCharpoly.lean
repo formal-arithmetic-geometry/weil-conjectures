@@ -177,6 +177,97 @@ lemma upperStarComp_id_left (t : X ⟶ Y) :
   refine Iso.ext (NatTrans.ext (funext fun M ↦ ?_))
   simp
 
+
+/-- The unit of `(𝟙 X)^* ⊣ (𝟙 X)_*` followed by `(𝟙 X)_* ≅ 𝟭` is the inverse of
+`(𝟙 X)^* ≅ 𝟭`. -/
+lemma upperStarLowerStarAdjunction_unit_app_comp_lowerStarId_hom_app
+    (G : Sheaf (Scheme.ProEt.topology X) A) :
+    (upperStarLowerStarAdjunction A (𝟙 X)).unit.app G ≫
+        (lowerStarId A X).hom.app ((upperStar A (𝟙 X)).obj G) =
+      (upperStarId A X).inv.app G := by
+  have h₁ := unit_conjugateEquiv Adjunction.id (upperStarLowerStarAdjunction A (𝟙 X))
+    (upperStarId A X).hom G
+  have h₂ := congrArg (fun e ↦ e.hom.app G) (conjugateIsoEquiv_upperStarId A X)
+  simp only [conjugateIsoEquiv_apply_hom] at h₂
+  simp only [Functor.id_obj] at h₁
+  rw [h₂] at h₁
+  simp only [Adjunction.id_unit, NatTrans.id_app, Iso.symm_hom, Category.id_comp] at h₁
+  have n := (lowerStarId A X).hom.naturality ((upperStarId A X).inv.app G)
+  simp only [Functor.id_map] at n
+  calc (upperStarLowerStarAdjunction A (𝟙 X)).unit.app G ≫
+        (lowerStarId A X).hom.app ((upperStar A (𝟙 X)).obj G)
+      = ((upperStarLowerStarAdjunction A (𝟙 X)).unit.app G ≫
+          (lowerStar A (𝟙 X)).map ((upperStarId A X).hom.app G)) ≫
+          (lowerStar A (𝟙 X)).map ((upperStarId A X).inv.app G) ≫
+          (lowerStarId A X).hom.app ((upperStar A (𝟙 X)).obj G) := by
+        rw [Category.assoc, ← Functor.map_comp_assoc, Iso.hom_inv_id_app,
+          CategoryTheory.Functor.map_id, Category.id_comp]
+    _ = (lowerStarId A X).inv.app G ≫ (lowerStarId A X).hom.app G ≫
+          (upperStarId A X).inv.app G := by
+        rw [← h₁]
+        rw [Category.assoc, n]
+        simp only [Functor.id_obj, Category.id_comp]
+    _ = (upperStarId A X).inv.app G := by simp
+
+/-- The restriction of global sections along the identity is the inverse of `(𝟙 X)^* ≅ 𝟭`. -/
+lemma globalSectionsToUpperStar_id_app (G : Sheaf (Scheme.ProEt.topology X) A) :
+    (globalSectionsToUpperStar A (𝟙 X)).app G =
+      (Sheaf.Γ _ A).map ((upperStarId A X).inv.app G) := by
+  rw [globalSectionsToUpperStar_app, globalSectionsLowerStarIso_id, ← Functor.map_comp,
+    upperStarLowerStarAdjunction_unit_app_comp_lowerStarId_hom_app]
+
+
+/-- The transport along the trivial square `𝟙 ≫ t = t ≫ 𝟙` and `(𝟙)^* ≅ 𝟭` is the
+identity. -/
+lemma globalSectionsTransport_id {P Y : Scheme.{u}} {t : P ⟶ Y} (h : 𝟙 P ≫ t = t ≫ 𝟙 Y)
+    (F : Sheaf (Scheme.ProEt.topology Y) A) :
+    globalSectionsTransport A h ((upperStarId A Y).hom.app F) = 𝟙 _ := by
+  rw [globalSectionsTransport, globalSectionsToUpperStar_id_app, upperStarCompIso_hom_app,
+    upperStarComp_id_left, upperStarComp_id_right]
+  simp only [Iso.trans_inv, Iso.trans_hom, Iso.symm_inv, Iso.symm_hom, NatTrans.comp_app,
+    Functor.isoWhiskerLeft_inv, Functor.isoWhiskerRight_hom, Functor.whiskerLeft_app,
+    Functor.whiskerRight_app, Functor.rightUnitor_hom_app, Functor.leftUnitor_inv_app,
+    Category.id_comp, Category.assoc, ← Functor.map_comp, Iso.inv_hom_id_app_assoc,
+    Iso.hom_inv_id_app, Functor.comp_obj, Functor.id_obj]
+  simp [upperStarCongr]
+
+
+/-- For the identity isomorphism, `e^* ≅ (e⁻¹)_*` is the composite of `(𝟙)^* ≅ 𝟭` and
+`𝟭 ≅ (𝟙)_*`. -/
+lemma upperStarIsoLowerStarInv_refl_hom_app (M : Sheaf (Scheme.ProEt.topology X) A) :
+    (upperStarIsoLowerStarInv A (Iso.refl X)).hom.app M ≫ (lowerStarId A X).hom.app M =
+      (upperStarId A X).hom.app M := by
+  apply ((upperStarLowerStarAdjunction A (𝟙 X)).homEquiv _ _).injective
+  simp only [Adjunction.homEquiv_unit, Functor.map_comp]
+  have h₁ := upperStarLowerStarAdjunction_unit_app_comp_map_upperStarIsoLowerStarInv A
+    (Iso.refl X) M
+  have h₂ : (upperStarLowerStarAdjunction A (𝟙 X)).unit.app M ≫
+      (lowerStar A (𝟙 X)).map ((upperStarId A X).hom.app M) = (lowerStarId A X).inv.app M := by
+    have := upperStarLowerStarAdjunction_unit_app_comp_lowerStarId_hom_app A M
+    rw [← cancel_mono ((lowerStarId A X).hom.app M)]
+    have n := (lowerStarId A X).hom.naturality ((upperStarId A X).hom.app M)
+    simp only [Functor.id_map, Functor.id_obj] at n
+    rw [Category.assoc, n, reassoc_of% this]
+    simp
+  erw [reassoc_of% h₁, h₂]
+  rw [lowerStarUnit, ← lowerStarComp_trans_lowerStarCongr]
+  erw [lowerStarComp_id_left]
+  simp [lowerStarCongr]
+
+
+/-- For an isomorphism `e` equal to the identity, `e^* ≅ (e⁻¹)_*` is the composite of the
+identifications with the identity functor. -/
+lemma upperStarIsoLowerStarInv_hom_app_of_eq_refl {e : X ≅ X} (he : e = Iso.refl X)
+    (h₀ : e.inv = 𝟙 X) (p : e.hom = 𝟙 X) (M : Sheaf (Scheme.ProEt.topology X) A) :
+    (upperStarIsoLowerStarInv A e).hom.app M ≫ (lowerStarCongr A h₀).hom.app M ≫
+        (lowerStarId A X).hom.app M =
+      (upperStarCongr A p).hom.app M ≫ (upperStarId A X).hom.app M := by
+  subst he
+  dsimp only [Iso.refl_inv, Iso.refl_hom] at *
+  simp only [lowerStarCongr, upperStarCongr, eqToIso_refl, Iso.refl_hom, NatTrans.id_app,
+    Category.id_comp]
+  exact upperStarIsoLowerStarInv_refl_hom_app A M
+
 end Unit
 
 end AlgebraicGeometry.ProEtale
@@ -215,6 +306,36 @@ variable {k₀ : Type u} [Field k₀] [Finite k₀] {l : ℕ} [Fact l.Prime] [Fa
 
 variable (F : WeilSheaf k₀ l X)
   (s : Spec (.of (AlgebraicClosure k₀)) ⟶ (X ↘ Spec (CommRingCat.of k₀)).geometricFiber)
+
+
+/-- The `0`-th iterate of the Weil structure is the identification `(𝟙)^* ≅ 𝟭`. -/
+lemma frobeniusPowStr_zero
+    (p : ((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius ^ 0).hom = 𝟙 _) :
+    F.frobeniusPowStr 0 = (ProEtale.upperStarCongr _ p).hom.app F.obj.carrier.X ≫
+      (ProEtale.upperStarId _ _).hom.app F.obj.carrier.X := by
+  have hz : ((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius ^ 0).inv = 𝟙 _ := by
+    rw [pow_zero]; rfl
+  have h₀ : (ProEtale.AdicSheaf.forget _).map (F.frobeniusPowIso 0).hom =
+      (ProEtale.lowerStarCongr _ hz).hom.app F.obj.carrier.X ≫
+        (ProEtale.lowerStarId _ _).hom.app F.obj.carrier.X := by
+    simp only [frobeniusPowIso, Iso.trans_hom, Iso.app_hom, Functor.map_comp,
+      ProEtale.adicLowerStarId, NatIso.trans_app]
+    rfl
+  rw [frobeniusPowStr, h₀]
+  exact ProEtale.upperStarIsoLowerStarInv_hom_app_of_eq_refl _ (by rw [pow_zero]; rfl) _ _ _
+
+
+/-- The transport along the `0`-th iterate of the Weil structure is the identity. -/
+lemma globalSectionsTransport_frobeniusPowStr_zero {t : Spec (.of (AlgebraicClosure k₀)) ⟶
+    (X ↘ Spec (CommRingCat.of k₀)).geometricFiber} {τ : Spec (.of (AlgebraicClosure k₀)) ⟶
+      Spec (.of (AlgebraicClosure k₀))} (hτ : τ = 𝟙 _)
+    (h : τ ≫ t = t ≫ ((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius ^ 0).hom) :
+    ProEtale.globalSectionsTransport _ h (F.frobeniusPowStr 0) = 𝟙 _ := by
+  have p : ((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius ^ 0).hom = 𝟙 _ := by
+    rw [pow_zero]; rfl
+  rw [ProEtale.globalSectionsTransport_congr _ h p _ _ (F.frobeniusPowStr_zero p),
+    ProEtale.globalSectionsTransport_congr_left _ _ hτ]
+  exact ProEtale.globalSectionsTransport_id _ _ _
 
 /-- The transports along the iterated Weil structures compose: for `b ≥ 1`, transporting along
 `φ_a` and then along `φ_b` is transporting along `φ_{a+b}`. -/
