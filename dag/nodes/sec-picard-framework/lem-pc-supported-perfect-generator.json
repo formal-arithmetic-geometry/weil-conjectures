@@ -27,9 +27,103 @@
   "def-weil-triangulated-category",
   "def-pc-generators"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Affine case X=\\operatorname{Spec}(A). The quasi-compact open X\\setminus T is a finite union of standard opens D(f_1),\\ldots,D(f_r), so T=V(f_1,\\ldots,f_r). Let K be the Koszul complex on f_1,\\ldots,f_r, a perfect object of D(\\mathcal O_X). Multiplication by each f_i is homotopic to zero on K (Stacks Tag 0663), so its cohomology modules are killed by (f_1,\\ldots,f_r) and the cohomology sheaves of K vanish on every D(f_i): K is supported on T. Apply the Koszul orthogonality criterion [lem-pc-perfect-generation-koszul-orthogonal] to the scheme X with affine open V=X and open U=X\\setminus T (so U\\cap V=U is quasi-compact and V\\setminus U=T=V(f_1,\\ldots,f_r)). If E\\in D_{\\mathrm{QCoh}}(\\mathcal O_X) is supported on T and \\operatorname{Hom}(K[n],E)=0 for all n, then E\\cong Rj_*(E|_U)=Rj_*(0)=0. By [def-pc-generators], K generates the supported subcategory.",
+   "uses": [
+    "lem-pc-perfect-generation-koszul-orthogonal",
+    "def-pc-generators"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/perfect.tex",
+    "place": "Tag 0A9A (Lemma 36.15.4), affine case"
+   }
+  },
+  {
+   "text": "Induction. Cover the quasi-compact X by affine opens W_1,\\ldots,W_m and induct on m; m=1 is Step 1. For m>1 put U=W_1\\cup\\cdots\\cup W_{m-1} and V=W_m=\\operatorname{Spec}(B). U is quasi-compact and quasi-separated, T\\cap U is closed in U, and U\\setminus T=U\\cap(X\\setminus T) is quasi-compact because X is quasi-separated. The induction hypothesis gives a perfect P on U supported on T\\cap U which generates the supported subcategory of D_{\\mathrm{QCoh}}(\\mathcal O_U).",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/perfect.tex",
+    "place": "Tag 0A9A, induction principle (Tag 08DR)"
+   }
+  },
+  {
+   "text": "Apply the supported perfect-map lifting statement [lem-sc-perfect-support-map-lift] to X, the quasi-compact open U, the closed T (with X\\setminus T quasi-compact), the object E=0 and the zero map \\alpha:P\\to 0. It gives a perfect Q on X supported on T such that P is a direct summand of Q|_U.",
+   "uses": [
+    "lem-sc-perfect-support-map-lift"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/perfect.tex",
+    "place": "Tag 0A9A, choice of Q (Lemma lift-map-from-perfect-complex-with-support)"
+   }
+  },
+  {
+   "text": "Let Z=X\\setminus U, closed in X and contained in V. The open W=V\\setminus(Z\\cap T)=(U\\cap V)\\cup(V\\setminus T) is quasi-compact, both pieces being intersections of quasi-compact opens of the quasi-separated X; hence Z\\cap T=V(g_1,\\ldots,g_s) for finitely many g_i\\in B. Let K be the Koszul complex on the g_i over B; as in Step 1 it is perfect on V and supported on Z\\cap T. Since Z\\cap T is closed in X and contained in V, the supported-open pushforward statement [lem-pc-supported-open-pushforward] for i:V\\to X makes K'=Ri_*K perfect on X and identifies it with the extension by zero i_!K; hence the cohomology sheaves of K' vanish off Z\\cap T\\subset T. Thus Q\\oplus K' is perfect and supported on T.",
+   "uses": [
+    "lem-pc-supported-open-pushforward"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/perfect.tex",
+    "place": "Tag 0A9A, construction of K'"
+   }
+  },
+  {
+   "text": "Let E be in D_{\\mathrm{QCoh}}(\\mathcal O_X), supported on T, with \\operatorname{Hom}((Q\\oplus K')[n],E)=0 for all n. Since K'\\cong i_!K and i_!\\dashv i^{-1} with both exact [lem-sc-derived-open-restriction-adjunction-exact], \\operatorname{Hom}(K[n],E|_V)=0 for all n. The Koszul orthogonality criterion [lem-pc-perfect-generation-koszul-orthogonal], applied to the scheme V with open W and affine open V (W\\cap V=W quasi-compact, V\\setminus W=Z\\cap T=V(g_1,\\ldots,g_s)), shows E|_V\\to R(W\\to V)_*(E|_W) is an isomorphism. Now E|_W is supported on T\\cap W=T\\cap U\\cap V, closed in W and contained in U\\cap V, so [lem-pc-supported-open-pushforward] for U\\cap V\\to W gives E|_W\\cong R(U\\cap V\\to W)_*(E|_{U\\cap V}); with [lem-pc-ringed-spaces-derived-direct-image-composition], E|_V\\to R(U\\cap V\\to V)_*(E|_{U\\cap V}) is an isomorphism. Let j:U\\to X and F=Rj_*(E|_U) with unit E\\to F. By [lem-pc-restrict-derived-direct-image-open] (for j and the opens V and U), F|_V\\cong R(U\\cap V\\to V)_*(E|_{U\\cap V}) and F|_U\\cong E|_U, and under these the unit restricts to the isomorphism above on V and to the identity on U. A morphism that is an isomorphism on each member of an open cover is an isomorphism (its cone has zero cohomology sheaves), so E\\cong Rj_*(E|_U).",
+   "uses": [
+    "lem-sc-derived-open-restriction-adjunction-exact",
+    "lem-pc-perfect-generation-koszul-orthogonal",
+    "lem-pc-supported-open-pushforward",
+    "lem-pc-ringed-spaces-derived-direct-image-composition",
+    "lem-pc-restrict-derived-direct-image-open"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/perfect.tex",
+    "place": "Tag 0A9A, proof that E=R(U\\to X)_*E|_U"
+   }
+  },
+  {
+   "text": "By the adjunction between restriction and derived direct image, \\operatorname{Hom}(Q[n],E)=\\operatorname{Hom}(Q|_U[n],E|_U), which contains \\operatorname{Hom}(P[n],E|_U) as a direct summand; so these groups vanish. E|_U lies in D_{\\mathrm{QCoh}}(\\mathcal O_U) and is supported on T\\cap U, so the choice of P (Step 2) gives E|_U=0, and Step 5 gives E\\cong Rj_*(0)=0. By [def-pc-generators], Q\\oplus K' generates the supported subcategory of D_{\\mathrm{QCoh}}(\\mathcal O_X), completing the induction.",
+   "uses": [
+    "def-pc-generators"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/perfect.tex",
+    "place": "Tag 0A9A, end of proof"
+   }
+  },
+  {
+   "text": "The supported objects form a triangulated full subcategory: shifts preserve support, and in a distinguished triangle the long exact cohomology sequence shows that the third cohomology sheaf is supported on T when the first two are. Thus the perfect object E from the preceding steps generates the stated triangulated supported subcategory.",
+   "uses": [
+    "def-weil-triangulated-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/perfect.tex",
+    "place": "Tag 0A9A, definition of the supported subcategory"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-perfect-generation-koszul-orthogonal",
+  "def-pc-generators",
+  "lem-sc-perfect-support-map-lift",
+  "lem-pc-supported-open-pushforward",
+  "lem-sc-derived-open-restriction-adjunction-exact",
+  "lem-pc-ringed-spaces-derived-direct-image-composition",
+  "lem-pc-restrict-derived-direct-image-open",
+  "def-weil-triangulated-category"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/perfect.tex",
+  "place": "Tag 0A9A (Lemma 36.15.4), proof"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -61,10 +155,29 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-sc-supported-derived-generated-perfect",
   "by": "worker",
   "date": "2026-10-10"
+ },
+ "split_report": {
+  "date": "2026-10-11",
+  "item": "lem-pc-supported-perfect-generator",
+  "worker": "stage1",
+  "summary": "Split the supported-generation theorem into the affine supported-generator input and the finite affine-cover induction. The proof records support preservation through the existing affine support-extension and map-lifting lemmas, then applies the open induction and checks the triangulated supported subcategory.",
+  "blueprint": "Realizes the ancestor lem-sc-finite-duality place 'the direct-sum extension from bounded-below support to all supported complexes: the supported subcategory is generated by a perfect object'.",
+  "tool_uses": []
+ },
+ "tool_uses": [
+  "lem-pc-restrict-derived-direct-image-open"
+ ],
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-spg2612",
+  "group": "E1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-spg2612 (reviewer sub-agent of L); spot-checked: Read packet, Tag 0A9A source, cited nodes and the C1/K1 neighbours (09IR koszul-orthogonal, 08DP/08DF supported-open-pushforward, open-induction-step, map-lift); 'generates' = def-pc-generators as used by citer lem-sc-supported-derived-generated-perfect. FIX more, RETURN less: (1) C4: Step 2 applied lem-pc-perfect-generation-open-induction-step, whose hypothesis is a generator of all of D_QCoh(O_U) (P only generates the T-supported part) and whose K' is supported on V minus U, not on T; rewrote: Q from lem-sc-perfect-support-map-lift (E=0), K' = Ri_* of Koszul on Z cap T via lem-pc-supported-open-pushforward. (2) C4/C1: Step 3 derived E|_V = pushforward from the affine supported-generator statement (which does not say it) and left the overlap calculation uncited; now 09IR node on V with W, supported-open-pushforward on W, derived-direct-image-composition, restrict-derived-direct-image-open (generic tool use: restriction of Rj_* to an open), open-cover iso; Koszul support by Tag 0663, induction by Tag 08DR. (3) class (d): new lem-pc-affine-supported-perfect-generator is two lines from lem-pc-perfect-generation-koszul-orthogonal + Tag 0663; folded into Step 1, node dropped. The Second reading by E1 missed (1) and (2).; 1 file(s) fixed by the reviewer"
  }
 }
