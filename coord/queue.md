@@ -1,26 +1,24 @@
 # Work queue
 
-860 items; claim with `tools/claim.py next <group> [--stage N]`.
+861 items; claim with `tools/claim.py next <group> [--stage N]`.
 
-## Stage 1: nodes to split (354)
+## Stage 1: nodes to split (350)
 
 | node | distance to a target | Lean state on the done branch |
 |---|---|---|
 | `thm-constructible-serre` | 5 | rests_on_sorry |
 | `lem-weil-pbc-dimension-preserved-field-extension` | 1009 | none |
 | `lem-weil-pbc-descend-qc-open-fg-subalgebra` | 1010 | none |
-| `lem-weil-pbc-fpqc-descend-affine` | 1010 | none |
 | `lem-weil-pbc-fpqc-descend-universally-closed` | 1010 | none |
+| `lem-weil-pbc-fpqc-descend-quasi-compact` | 1011 | none |
+| `lem-weil-pbc-fpqc-descend-separated` | 1011 | none |
 | `lem-weil-pbc-flat-variant-local-criterion` | 1012 | none |
 | `lem-weil-pbc-pullback-ample-invertible` | 1013 | none |
-| `lem-weil-pbc-finite-product-normal` | 1015 | none |
 | `lem-weil-pbc-finite-type-etale-finite-factor-decomposition` | 1015 | none |
-| `lem-weil-pbc-limit-module-essentially-finite-presentation-over-system` | 1015 | none |
 | `lem-weil-pbc-regular-local-quotient-kernel-parameters` | 1015 | none |
 | `lem-weil-pbc-sections-morphism-to-proj-polynomial-ring` | 1015 | none |
 | `lem-weil-pbc-direct-sum-extension-assembly` | 1016 | none |
 | `lem-weil-pbc-tor-one-surjective-flat-middle` | 1016 | none |
-| `lem-weil-pbc-dim-one-submodule-quotient-finite-length` | 1019 | none |
 | `lem-weil-pbc-double-complex-zigzag-trivial-if-row-boundary` | 1019 | none |
 | `lem-weil-pbc-injective-acyclicity-bounded-below` | 2002 | sorry_here |
 | `lem-weil-pbc-property-implies-acyclicity` | 2003 | none |
@@ -43,18 +41,18 @@
 | `lem-galois-aut-profinite` | 3006 | none |
 | `lem-galois-inverse-image-representable` | 3006 | none |
 | `lem-sc-flat-base-change-coherent` | 3006 | sorry_here |
-| `lem-weil-pbc-hypercover-free-resolution` | 3006 | none |
 | `def-pc-curve` | 3007 | none |
 | `lem-galois-finite-etale-connected-object` | 3007 | none |
 | `lem-galois-transitive` | 3007 | none |
 | `lem-sc-etale-affine-qcoherent` | 3007 | none |
 | `lem-sc-etale-qcoherent-descent` | 3007 | none |
 | `lem-sc-etale-zariski-qcoh-comparison` | 3007 | none |
-| `lem-sc-ga-cohomology` | 3007 | none |
 | `lem-sc-generic-cohomology-comparison` | 3007 | rests_on_sorry |
+| `lem-weil-pbc-cech-nerve-free-homology` | 3007 | none |
+| `lem-weil-pbc-coskeleton-free-homology-comparison` | 3007 | none |
+| `lem-weil-pbc-matching-object-coskeleton` | 3007 | none |
 | `lem-weil-pbc-simplicial-matching-object` | 3007 | none |
 | `def-pc-dimension` | 3008 | none |
-| `def-pc-divisor-line-bundle` | 3008 | none |
 | `def-pc-projective-morphism` | 3008 | none |
 | `def-sc-picard-functor` | 3008 | none |
 | `lem-exc-field-discrete-modules` | 3008 | none |
@@ -62,13 +60,11 @@
 | `lem-pc-h0-geom-connected` | 3008 | none |
 | `lem-pc-h0-proper-variety` | 3008 | none |
 | `lem-sc-degree-2g1-very-ample` | 3008 | rests_on_sorry |
-| `lem-sc-smooth-connected-curve-local-rings` | 3008 | none |
+| `lem-sc-noetherian-cohomology-above-dimension` | 3008 | sorry_here |
 | `lem-sc-zero-generic-acyclic` | 3008 | rests_on_sorry |
-| `lem-weil-pbc-matching-object-coskeleton` | 3008 | none |
 | `lem-weil-pbc-simplicial-hom-object-exists` | 3008 | none |
 | `lem-weil-pbc-simplicial-hom-object-pushout` | 3008 | none |
 | `lem-weil-pbc-simplicial-hom-object-standard-simplex` | 3008 | none |
-| `lem-weil-pbc-simplicial-set-glue-simplex` | 3008 | none |
 | `thm-sc-theorem-of-the-base` | 3008 | rests_on_sorry |
 | `def-exc-continuous-cohomology` | 3009 | none |
 | `def-sc-rational-functions` | 3009 | none |
@@ -361,7 +357,7 @@
 | `def-exc-jacobian-presentation` | - | none |
 | `lem-zl-noether-normalization-dimension` | - | none |
 
-## Stage 2: nodes to state (506)
+## Stage 2: nodes to state (511)
 
 | node | distance to Mathlib | kind |
 |---|---|---|
@@ -372,6 +368,7 @@
 | `def-nagata-homogeneous-localization-degree-zero` | 1 | state |
 | `def-nagata-rees-algebra` | 1 | state |
 | `def-nagata-relative-affine-space` | 1 | state |
+| `def-pc-divisor-line-bundle` | 1 | state |
 | `def-pc-field-tower` | 1 | state |
 | `def-pc-kflat-complex` | 1 | state |
 | `def-pc-standard-graded-algebra` | 1 | state |
@@ -498,6 +495,7 @@
 | `lem-weil-pbc-derivation-nonzero-on-non-pth-power` | 1 | state |
 | `lem-weil-pbc-differential-zero-iff-pth-power` | 1 | state |
 | `lem-weil-pbc-dim-one-residue-field-extensions-finite` | 1 | state |
+| `lem-weil-pbc-dim-one-submodule-quotient-finite-length` | 1 | state |
 | `lem-weil-pbc-directed-colimit-base-change-elementwise` | 1 | state |
 | `lem-weil-pbc-directed-union-subrings-flat-module` | 1 | state |
 | `lem-weil-pbc-double-complex-cokernel-homology-iso` | 1 | state |
@@ -550,6 +548,7 @@
 | `lem-weil-pbc-finite-over-complete-local-product` | 1 | state |
 | `lem-weil-pbc-finite-over-complete-ring` | 1 | state |
 | `lem-weil-pbc-finite-product-integral-closure` | 1 | state |
+| `lem-weil-pbc-finite-product-normal` | 1 | state |
 | `lem-weil-pbc-finite-projective-prime-local-free` | 1 | state |
 | `lem-weil-pbc-finite-projective-standard-free-cover` | 1 | state |
 | `lem-weil-pbc-finite-purely-inseparable-degree-p-intermediate` | 1 | state |
@@ -640,6 +639,7 @@
 | `lem-weil-pbc-lift-projective-module-etale` | 1 | state |
 | `lem-weil-pbc-limit-finite-presentation` | 1 | state |
 | `lem-weil-pbc-limit-flat-modules` | 1 | state |
+| `lem-weil-pbc-limit-module-essentially-finite-presentation-over-system` | 1 | state |
 | `lem-weil-pbc-limit-module-finite-presentation` | 1 | state |
 | `lem-weil-pbc-limit-tower-essentially-finite-presentation` | 1 | state |
 | `lem-weil-pbc-linear-equation-localization-polynomial` | 1 | state |
@@ -765,6 +765,7 @@
 | `lem-weil-pbc-sheaf-tensor-closed` | 1 | state |
 | `lem-weil-pbc-sheaves-directed-colimit-sections` | 1 | state |
 | `lem-weil-pbc-simplicial-set-add-simplices` | 1 | state |
+| `lem-weil-pbc-simplicial-set-glue-simplex` | 1 | state |
 | `lem-weil-pbc-skyscraper-constant-on-point-closure` | 1 | state |
 | `lem-weil-pbc-smooth-algebra-filtered-colimit-descent` | 1 | state |
 | `lem-weil-pbc-smooth-conormal-sequence-exact` | 1 | state |
@@ -872,7 +873,7 @@
 | `lem-weil-pbc-p1-field-dimension-one` | 4 | state |
 | `lem-weil-pbc-projective-space-zero-isomorphism` | 4 | state |
 
-Not open yet: 374 nodes that wait for stage 1, 939 nodes that wait for a statement dependency.
+Not open yet: 370 nodes that wait for stage 1, 943 nodes that wait for a statement dependency.
 
 ## Stage 3: modules to prove (0)
 
