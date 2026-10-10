@@ -36,3 +36,7 @@ Closed (20:23 UTC, decision of the human via the launcher at ~20:22 UTC): tools/
 Open (2026-10-09 23:35 UTC): group C1 has pushed deliver/C1/lem-weil-pbc-z-g-ring three more times (eec962a5f, 2cc643024, f52e26fe2) after the return of 23:22 UTC, each a rebase of the same content with the same report; the returned reason (the new node 'A -> A^ is regular for every DVR' is false without characteristic zero, which Stacks 07PX requires) is not addressed, and a notice in coord/returns/C1.md (23:30 UTC) had no effect either. It looks like C1's loop re-pushes without reading the return. The return stays open; nothing of C1 is merged until the node is fixed. If C1 is an automated loop, it needs to read coord/returns/C1.md before each push.
 
 Closed (2026-10-09 23:57 UTC): C1 pushed a real repair of lem-weil-pbc-z-g-ring at a194a15c (characteristic-zero hypothesis added); merged. The three unchanged re-pushes before it remain unexplained.
+
+## Open (01:09 UTC): F1 re-pushed lem-weil-pbc-etale-stratification-local-gluing unchanged after the third return
+
+Branch head 3db8c764 is the returned head 3a7d53e6 rebased on the current tip with no change to the item, the new node or the report (the same false factorization claim in step 3; the 09YJ node still lacks its basis hypothesis). Not merged; a notice was added to coord/returns/F1.md. Three returns of this item so far (23:57, 00:34, 01:03 UTC).
