@@ -42,7 +42,8 @@ structure given by the sheafification of the objectwise tensor product
   (`PadicAlgCl.finiteIntermediateFieldValued`, `ProEtale.padicAlgClSheaf`). This presheaf is the
   union of the presheaves `U ↦ C(U, E)` over the finite subextensions `E ⊆ ℚ̄_ℓ`, so that
   `ℚ̄_ℓ,X = colim_E E_X` as sheaves of rings, which is the `ℚ̄_ℓ`-sheaf of Bhatt–Scholze
-  (this identification with the colimit is not formalized here). It is defined directly as a
+  (`ProEtale.isColimitPadicAlgClSheafCocone`, as abelian sheaves, over the directed
+  set `PadicAlgCl.FiniteIntermediateField`). It is defined directly as a
   ring object of abelian sheaves, the sheafification of presheaves of rings not being
   available.
 
@@ -65,6 +66,10 @@ ring objects.
   of sheaves of rings; `AlgebraicGeometry.ProEtale.padicSheafToPadicAlgClSheaf` and
   `AlgebraicGeometry.ProEtale.padicSubfieldSheafToPadicAlgClSheaf`: the inclusions into
   `ℚ̄_ℓ,X`, as morphisms of ring objects.
+* `AlgebraicGeometry.ProEtale.padicAlgClSheafCocone`: the cocone of the `E_X ⟶ ℚ̄_ℓ,X` over the
+  finite subextensions `E`, and `AlgebraicGeometry.ProEtale.isColimitPadicAlgClSheafCocone`: it
+  is a colimit, being the sheafification of the colimit `padicAlgClPresheafCocone` of
+  presheaves.
 
 -/
 
@@ -104,6 +109,18 @@ lemma mem_finiteIntermediateFieldValued_iff (f : C(U, PadicAlgCl ℓ)) :
     f ∈ finiteIntermediateFieldValued ℓ U ↔
       ∃ E : IntermediateField ℚ_[ℓ] (PadicAlgCl ℓ), FiniteDimensional ℚ_[ℓ] E ∧ ∀ x, f x ∈ E :=
   Iff.rfl
+
+/-- The finite subextensions `E ⊆ ℚ̄_ℓ` of `ℚ_ℓ`, ordered by inclusion. This is a directed
+order, the compositum of two finite subextensions being finite. -/
+abbrev FiniteIntermediateField : Type :=
+  {E : IntermediateField ℚ_[ℓ] (PadicAlgCl ℓ) // FiniteDimensional ℚ_[ℓ] E}
+
+instance (E : FiniteIntermediateField ℓ) : FiniteDimensional ℚ_[ℓ] E.1 := E.2
+
+instance : Nonempty (FiniteIntermediateField ℓ) := ⟨⟨⊥, inferInstance⟩⟩
+
+instance : IsDirectedOrder (FiniteIntermediateField ℓ) where
+  directed E F := ⟨⟨E.1 ⊔ F.1, inferInstance⟩, le_sup_left (a := E.1), le_sup_right (a := E.1)⟩
 
 end PadicAlgCl
 
@@ -343,5 +360,95 @@ instance : IsMonHom (padicSubfieldSheafToPadicAlgClSheaf X ℓ E) :=
     ⟨_, finiteDimensional_fieldRange_toAlgHom ℓ E, fun t ↦ ⟨t, rfl⟩⟩))
 
 end SubfieldToPadicAlgCl
+
+/-! ### `ℚ̄_ℓ,X` as the colimit of the `E_X` -/
+
+/-- The inclusion `E_X ⟶ F_X` for subextensions `E ⊆ F ⊆ ℚ̄_ℓ` of `ℚ_ℓ`, a morphism of sheaves of
+rings. -/
+noncomputable def padicSubfieldSheafMapOfLE {E F : IntermediateField ℚ_[ℓ] (PadicAlgCl ℓ)}
+    (h : E ≤ F) : padicSubfieldSheaf X ℓ E ⟶ padicSubfieldSheaf X ℓ F :=
+  letI := PadicAlgCl.normedFieldOfAlgebra ℓ E
+  letI := PadicAlgCl.normedFieldOfAlgebra ℓ F
+  continuousMapRingSheafMap X (IntermediateField.inclusion h).toRingHom
+    (continuous_induced_rng.mpr continuous_induced_dom)
+
+/-- The diagram `E ↦ E_X` of sheaves of rings, indexed by the finite subextensions `E ⊆ ℚ̄_ℓ` of
+`ℚ_ℓ` ordered by inclusion. -/
+noncomputable def padicSubfieldSheafFunctor :
+    PadicAlgCl.FiniteIntermediateField ℓ ⥤ Sheaf (ProEt.topology X) RingCat.{u + 1} where
+  obj E := padicSubfieldSheaf X ℓ E.1
+  map f := padicSubfieldSheafMapOfLE X ℓ (leOfHom f)
+  map_id _ := rfl
+  map_comp _ _ := rfl
+
+/-- The cocone of abelian sheaves over the diagram `E ↦ E_X` with vertex `ℚ̄_ℓ,X`, given by the
+inclusions `E_X ⟶ ℚ̄_ℓ,X`. -/
+noncomputable def padicAlgClSheafCocone :
+    Cocone (padicSubfieldSheafFunctor X ℓ ⋙
+      sheafCompose (ProEt.topology X) (forget₂ RingCat.{u + 1} Ab.{u + 1})) :=
+  Cocone.mk (padicAlgClSheaf X ℓ)
+    { app E := padicSubfieldSheafToPadicAlgClSheaf X ℓ E.1
+      naturality _ _ f := by
+        refine Eq.trans ?_ (Category.comp_id _).symm
+        exact Sheaf.sheafCompose_map_comp_sheafComposeToSheafify _ _
+          ((padicSubfieldSheafFunctor X ℓ).map f) }
+
+/-- The cocone of abelian presheaves over the diagram `E ↦ C(-, E)` with vertex the presheaf
+`U ↦ {f ∈ C(U, ℚ̄_ℓ) | f takes values in a finite subextension}`, whose sheafification is
+`padicAlgClSheafCocone`. -/
+noncomputable def padicAlgClPresheafCocone :
+    Cocone (padicSubfieldSheafFunctor X ℓ ⋙ sheafToPresheaf _ _ ⋙
+      (Functor.whiskeringRight _ _ _).obj (forget₂ RingCat.{u + 1} Ab.{u + 1})) :=
+  Cocone.mk (padicAlgClRingPresheaf X ℓ ⋙ forget₂ RingCat.{u + 1} Ab.{u + 1})
+    { app E := Functor.whiskerRight (letI := PadicAlgCl.normedFieldOfAlgebra ℓ E.1
+        continuousMapRingPresheafToPadicAlgCl X ℓ (algebraMap E.1 (PadicAlgCl ℓ))
+          (continuous_algebraMap_padicAlgCl_of_algebra ℓ E.1)
+          ⟨_, finiteDimensional_fieldRange_toAlgHom ℓ E.1, fun t ↦ ⟨t, rfl⟩⟩) _
+      naturality _ _ _ := rfl }
+
+/-- The presheaf `U ↦ {f ∈ C(U, ℚ̄_ℓ) | f takes values in a finite subextension}` is the
+colimit of the presheaves `U ↦ C(U, E)`: objectwise, it is the filtered union of the injective
+maps `C(U, E) → C(U, ℚ̄_ℓ)`. -/
+noncomputable def isColimitPadicAlgClPresheafCocone :
+    IsColimit (padicAlgClPresheafCocone X ℓ) := by
+  haveI := preservesSmallestFilteredColimits_of_preservesFilteredColimits (forget Ab.{u + 1})
+  haveI : ReflectsColimitsOfShape (PadicAlgCl.FiniteIntermediateField ℓ) (forget Ab.{u + 1}) :=
+    reflectsColimitsOfShape_of_reflectsIsomorphisms
+  refine evaluationJointlyReflectsColimits _ fun U ↦ isColimitOfReflects (forget Ab.{u + 1}) ?_
+  refine Types.FilteredColimit.isColimitOf' _ _ ?_ ?_
+  · intro x
+    obtain ⟨⟨f, E, hE, hf⟩⟩ := x
+    let := PadicAlgCl.normedFieldOfAlgebra ℓ E
+    refine ⟨⟨E, hE⟩, ULift.up (⟨fun x ↦ ⟨f x, hf x⟩, continuous_induced_rng.mpr f.2⟩ :
+      C(U.unop.left, E)), ?_⟩
+    rfl
+  · intro E x y h
+    refine ⟨E, 𝟙 E, ?_⟩
+    obtain ⟨x⟩ := x
+    obtain ⟨y⟩ := y
+    have h' : ∀ t, (x t : PadicAlgCl ℓ) = y t := fun t ↦
+      congrArg (fun z : ULift.{u + 1} (PadicAlgCl.finiteIntermediateFieldValued ℓ U.unop.left) ↦
+        (z.down : C(U.unop.left, PadicAlgCl ℓ)) t) h
+    have : x = y := ContinuousMap.ext fun t ↦ Subtype.val_injective (h' t)
+    subst this
+    rfl
+
+/-- `ℚ̄_ℓ,X` is the colimit of the abelian sheaves `E_X = C(-, E)` over the finite subextensions
+`E ⊆ ℚ̄_ℓ` of `ℚ_ℓ` [Bhatt–Scholze, Section 6.8]: it is the sheafification of the colimit
+`padicAlgClPresheafCocone` of the underlying presheaves, sheafification being a left adjoint. -/
+noncomputable def isColimitPadicAlgClSheafCocone : IsColimit (padicAlgClSheafCocone X ℓ) := by
+  let α : (padicSubfieldSheafFunctor X ℓ ⋙ sheafToPresheaf _ _ ⋙
+      (Functor.whiskeringRight _ _ _).obj (forget₂ RingCat.{u + 1} Ab.{u + 1})) ⋙
+        presheafToSheaf (ProEt.topology X) Ab.{u + 1} ≅
+      padicSubfieldSheafFunctor X ℓ ⋙
+        sheafCompose (ProEt.topology X) (forget₂ RingCat.{u + 1} Ab.{u + 1}) :=
+    NatIso.ofComponents (fun E ↦ Sheaf.sheafifyRingPresheafIso.{u + 1, u, u + 1} _ _) fun f ↦ by
+      simp [Sheaf.sheafCompose_map_eq]
+  refine (IsColimit.precomposeHomEquiv α _).1 ?_
+  refine IsColimit.ofIsoColimit (isColimitOfPreserves (presheafToSheaf _ Ab.{u + 1})
+    (isColimitPadicAlgClPresheafCocone X ℓ)) (Cocone.ext (Iso.refl _) fun E ↦ ?_)
+  simp only [Functor.mapCocone_ι_app, Iso.refl_hom, Category.comp_id, Cocone.precompose_obj_ι,
+    NatTrans.comp_app]
+  exact (Iso.hom_inv_id_assoc _ _).symm
 
 end AlgebraicGeometry.ProEtale
