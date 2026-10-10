@@ -2958,3 +2958,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 23:23 L: merged deliver/H1/lem-weil-pbc-geometric-point-pullback-stalk (reviewer FIX; first push; new nodes: 0)
 - 23:23 L: merged deliver/G1/lem-pc-qcqs-sheaf-rhom-adjunction (reviewer FIX; first push; new nodes: 1)
 - 23:25 L: returned deliver/F1/lem-pur-kinjective-degreewise-existence (reviewer RETURN: 1. D1/D2 (no real split): step 2 marks as elementary the clause 'every term I(K)^n is injective', citing nothing but the)
+- 23:25 L: returned deliver/G1/def-wf-lie-algebra-derivation (reviewer RETURN: Reviewer R-lad3124, head dad045761. Point 1 (class b, tangent space via def-sc-scheme-tangent-space/def-sc-dual-numbers )
