@@ -1,8 +1,8 @@
 # Work queue
 
-859 items; claim with `tools/claim.py next <group> [--stage N]`.
+858 items; claim with `tools/claim.py next <group> [--stage N]`.
 
-## Stage 1: nodes to split (408)
+## Stage 1: nodes to split (403)
 
 | node | distance to a target | Lean state on the done branch |
 |---|---|---|
@@ -16,12 +16,9 @@
 | `lem-weil-pbc-finite-type-etale-finite-factor-decomposition` | 1015 | none |
 | `lem-weil-pbc-flat-another-variant-local-criterion` | 1015 | none |
 | `lem-weil-pbc-flat-formally-smooth-closed-fibre-adic` | 1015 | none |
-| `lem-weil-pbc-fs-adic-field-regular-local` | 1015 | none |
-| `lem-weil-pbc-grothendieck-regular-sequence-flat` | 1015 | none |
 | `lem-weil-pbc-limit-module-essentially-finite-presentation-over-system` | 1015 | none |
 | `lem-weil-pbc-local-nagata-domain-analytically-unramified` | 1015 | none |
 | `lem-weil-pbc-local-ring-colimit-essentially-finite-type-over-z` | 1015 | none |
-| `lem-weil-pbc-normal-domain-fractional-principal-quotient-ass` | 1015 | none |
 | `lem-weil-pbc-normal-ring-integrally-closed-total` | 1015 | none |
 | `lem-weil-pbc-openness-of-flatness` | 1015 | none |
 | `lem-weil-pbc-principal-maximal-dim-one-regular` | 1015 | none |
@@ -32,7 +29,6 @@
 | `lem-weil-pbc-symmetric-projective-presentation-conormal` | 1015 | none |
 | `lem-weil-pbc-torsion-extension-flat-descent` | 1015 | none |
 | `lem-weil-pbc-valuation-ring-normal` | 1015 | none |
-| `def-weil-pbc-analytically-unramified` | 1016 | none |
 | `lem-weil-pbc-coherent-stalk-map-extends` | 1016 | none |
 | `lem-weil-pbc-dimension-inequality-quasi-finite` | 1016 | none |
 | `lem-weil-pbc-dimension-preserved-field-extension` | 1016 | none |
@@ -41,6 +37,7 @@
 | `lem-weil-pbc-fpqc-descend-universally-closed` | 1016 | none |
 | `lem-weil-pbc-integral-injective-dimension-equal` | 1016 | none |
 | `lem-weil-pbc-module-injects-localizations-associated-primes` | 1016 | none |
+| `lem-weil-pbc-normal-domain-principal-quotient-associated-height` | 1016 | none |
 | `lem-weil-pbc-projective-dimension-ext-characterization` | 1016 | none |
 | `lem-weil-pbc-qs-scheme-cohomology-directed-colimit` | 1016 | none |
 | `lem-weil-pbc-triangular-change-of-basis` | 1016 | none |
@@ -48,7 +45,6 @@
 | `lem-weil-pbc-regular-sequence-koszul-regular` | 1017 | none |
 | `lem-weil-pbc-sheaf-hom-finite-presentation-quasi-coherent` | 1017 | none |
 | `lem-weil-pbc-dim-one-residue-field-extensions-finite` | 1018 | none |
-| `lem-weil-pbc-koszul-differential` | 1018 | none |
 | `lem-weil-pbc-koszul-differential-square-zero` | 1018 | none |
 | `lem-weil-pbc-injective-acyclicity-bounded-below` | 2002 | sorry_here |
 | `lem-weil-pbc-property-implies-acyclicity` | 2003 | none |
@@ -68,7 +64,6 @@
 | `def-pc-module-pullback` | 3003 | none |
 | `def-weil-pbc-etale-cohomology` | 3003 | none |
 | `def-weil-pbc-strict-henselization-limit` | 3003 | none |
-| `prop-weil-pbc-geometric-stalks-exact` | 3003 | none |
 | `prop-weil-pbc-strict-henselization-stalk-formula` | 3003 | none |
 | `def-pc-field-tower` | 3004 | none |
 | `def-sc-constant-sheaves` | 3004 | none |
@@ -415,7 +410,7 @@
 | `def-exc-jacobian-presentation` | - | none |
 | `lem-zl-noether-normalization-dimension` | - | none |
 
-## Stage 2: nodes to state (451)
+## Stage 2: nodes to state (455)
 
 | node | distance to Mathlib | kind |
 |---|---|---|
@@ -432,6 +427,7 @@
 | `def-sc-cr-field` | 1 | state |
 | `def-sc-ext-sheaf` | 1 | state |
 | `def-sc-p1-standard` | 1 | state |
+| `def-weil-pbc-analytically-unramified` | 1 | state |
 | `def-weil-pbc-associated-graded-ring` | 1 | state |
 | `def-weil-pbc-associated-module` | 1 | state |
 | `def-weil-pbc-complete-intersection-over-field` | 1 | state |
@@ -626,6 +622,7 @@
 | `lem-weil-pbc-gabber-root-criterion-etale-section-lifting` | 1 | state |
 | `lem-weil-pbc-global-complete-intersection-local-regular-sequence` | 1 | state |
 | `lem-weil-pbc-glue-sheaves-of-modules` | 1 | state |
+| `lem-weil-pbc-grothendieck-regular-sequence-flat` | 1 | state |
 | `lem-weil-pbc-h0-spectral-closed-restriction` | 1 | state |
 | `lem-weil-pbc-henselian-factorization-locally-nilpotent` | 1 | state |
 | `lem-weil-pbc-henselization-finite-separable-fibres` | 1 | state |
@@ -654,6 +651,7 @@
 | `lem-weil-pbc-kahler-differentials-mod-power-ideal` | 1 | state |
 | `lem-weil-pbc-kahler-differentials-polynomial-extension` | 1 | state |
 | `lem-weil-pbc-kernel-cokernel-annihilated-mod-ideal` | 1 | state |
+| `lem-weil-pbc-koszul-differential` | 1 | state |
 | `lem-weil-pbc-krull-intersection-localization` | 1 | state |
 | `lem-weil-pbc-lft-over-field-isolated-point-residue-finite` | 1 | state |
 | `lem-weil-pbc-lift-coprime-factorization-etale` | 1 | state |
@@ -690,6 +688,7 @@
 | `lem-weil-pbc-noether-normalization-over-domain` | 1 | state |
 | `lem-weil-pbc-nonvanishing-section-trivializes` | 1 | state |
 | `lem-weil-pbc-nonzerodivisor-if-maximal-not-associated` | 1 | state |
+| `lem-weil-pbc-normal-domain-fractional-principal-quotient-ass` | 1 | state |
 | `lem-weil-pbc-normal-extension-purely-inseparable-then-galois` | 1 | state |
 | `lem-weil-pbc-normal-locus-open` | 1 | state |
 | `lem-weil-pbc-ogoma` | 1 | state |
@@ -871,7 +870,7 @@
 | `lem-weil-pbc-p1-field-dimension-one` | 4 | state |
 | `lem-weil-pbc-projective-space-zero-isomorphism` | 4 | state |
 
-Not open yet: 424 nodes that wait for stage 1, 841 nodes that wait for a statement dependency.
+Not open yet: 419 nodes that wait for stage 1, 842 nodes that wait for a statement dependency.
 
 ## Stage 3: modules to prove (0)
 
