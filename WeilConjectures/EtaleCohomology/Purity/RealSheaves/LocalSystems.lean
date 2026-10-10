@@ -15,6 +15,7 @@ public import Mathlib.RepresentationTheory.Invariants
 public import Mathlib.Topology.Algebra.Category.ProfiniteGrp.Basic
 public import WeilConjectures.AlgebraicGeometry.FundamentalGroup.Basic
 public import WeilConjectures.ConstructibleSheaf.Defs
+public import WeilConjectures.Mathlib.AlgebraicGeometry.Sites.Proetale
 public import WeilConjectures.EtaleCohomology.Purity.RealSheaves.Basic
 public import WeilConjectures.Mathlib.RepresentationTheory.Continuous.Basic
 public import WeilConjectures.NumberTheory.Padics.Extension
@@ -104,6 +105,37 @@ universe u
 open CategoryTheory
 
 namespace AlgebraicGeometry
+
+/-- The functor sending a finite étale `Y`-scheme `P` to the étale sheaf of sets `Hom_Y(-, P)` it
+represents. This is the first half of the step *sheaves and covers* of
+`AlgebraicGeometry.Scheme.exists_equivalence_isFiniteLocallyConstantSheaf_of_isFundamentalGroup`:
+finite locally constant sheaves of sets are the sheaves in its essential image. -/
+noncomputable def Scheme.FiniteEtale.toSheaf (Y : Scheme.{u}) :
+    Y.FiniteEtale ⥤ Sheaf Y.smallEtaleTopology (Type u) :=
+  ObjectProperty.ι _ ⋙ Y.smallEtaleTopology.yoneda
+
+/-- A finite étale `Y`-scheme is determined by the étale sheaf of sets it represents: the small
+étale topology is subcanonical, so `AlgebraicGeometry.Scheme.FiniteEtale.toSheaf` is fully
+faithful. -/
+noncomputable def Scheme.FiniteEtale.fullyFaithfulToSheaf (Y : Scheme.{u}) :
+    (Scheme.FiniteEtale.toSheaf Y).FullyFaithful :=
+  (ObjectProperty.fullyFaithfulι _).comp Y.smallEtaleTopology.yonedaFullyFaithful
+
+/-- The stalk at a geometric point `s` of the sheaf represented by a finite étale `Y`-scheme `P`
+is the geometric fibre of `P` at `s`. This is the compatibility of
+`AlgebraicGeometry.Scheme.FiniteEtale.toSheaf` with the stalk functor, which makes the triangle
+of `AlgebraicGeometry.Scheme.exists_equivalence_isFiniteLocallyConstantSheaf_of_isFundamentalGroup`
+commute on represented sheaves. -/
+noncomputable def Scheme.FiniteEtale.toSheafCompSheafFiberIso {Y : Scheme.{u}} {Ω : Type u}
+    [Field Ω] [IsSepClosed Ω] (s : Spec (.of Ω) ⟶ Y) :
+    Scheme.FiniteEtale.toSheaf Y ⋙ (Scheme.pointSmallEtale s).sheafFiber ≅
+      ObjectProperty.ι _ ⋙ (Scheme.pointSmallEtale s).fiber :=
+  Functor.isoWhiskerLeft (ObjectProperty.ι _)
+    (Functor.isoWhiskerRight (Y.smallEtaleTopology.yonedaCompSheafToPresheaf)
+        (Scheme.pointSmallEtale s).presheafFiber ≪≫
+      Functor.isoWhiskerRight shrinkYonedaIsoYoneda.symm
+        (Scheme.pointSmallEtale s).presheafFiber ≪≫
+      (Scheme.pointSmallEtale s).shrinkYonedaCompPresheafFiberIso)
 
 /-- Blueprint `sk-i-real-galois`: Galois correspondence for finite local systems. Also
 blueprint `cor-galois-lisse-representations`: Lisse sheaves and continuous representations.
