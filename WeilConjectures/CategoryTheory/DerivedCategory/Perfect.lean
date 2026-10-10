@@ -5,14 +5,19 @@ Authors: Claude
 -/
 module
 
+public import Mathlib.Algebra.Category.ModuleCat.Biproducts
 public import Mathlib.Algebra.Category.ModuleCat.Monoidal.Closed
 public import Mathlib.Algebra.Homology.DerivedCategory.TStructure
 public import Mathlib.Algebra.Homology.HomotopyCategory.KInjective
 public import Mathlib.RingTheory.SimpleModule.InjectiveProjective
 public import WeilConjectures.CategoryTheory.DerivedCategory.HasMonoidalDerivedCategory
+public import WeilConjectures.CategoryTheory.DerivedCategory.Monoidal.Dualizable
+public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Monoidal.Closed
+public import WeilConjectures.CategoryTheory.DerivedCategory.FlatModel
 public import WeilConjectures.CategoryTheory.DerivedCategory.TorAmplitude
 public import WeilConjectures.CategoryTheory.GrothendieckAbelian.Monoidal.FlatResolution
 public import WeilConjectures.CategoryTheory.Monoidal.Instances.DerivedCategory
+public import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.KProjective
 public import WeilConjectures.Mathlib.CategoryTheory.Limits.Shapes.ZeroMorphisms
 public import WeilConjectures.Mathlib.CategoryTheory.Monoidal.Rigid.Braided
 
@@ -42,6 +47,8 @@ perfect objects of `D(R)` are the *perfect point complexes*.
   of scalars to a field the cohomology is finite dimensional and bounded.
 - `DerivedCategory.IsPerfect.ihom_unit` (`sk-lem-finite`, Step 3): the dual
   `C^∨ = RHom_R(C, R)` of a perfect complex is perfect.
+- `DerivedCategory.IsPerfect.isDualizable` (`prop-pod-biduality-at-the-point`, Steps 1–3): a
+  perfect complex is dualizable for the derived tensor product.
 - `DerivedCategory.IsPerfect.isIso_toIhomIhomUnit` (`prop-pod-biduality-at-the-point`): for
   any braiding of `D(R)`, the canonical biduality map `C ⟶ C^∨∨` is an isomorphism for a
   perfect `C`, where `C^∨ = RHom_R(C, R)`.
@@ -157,6 +164,76 @@ theorem IsPerfect.tensor_homology [IsNoetherianRing R] (E : Type*) [Field E] [Al
   | tmul e m => rw [Subsingleton.elim m 0, TensorProduct.tmul_zero]
   | add x y hx hy => rw [hx, hy, add_zero]
 
+/-- The image in `D(R)` of a bounded complex of finitely generated projective modules is
+perfect. -/
+lemma isPerfect_Q_obj (P : CochainComplex (ModuleCat.{u} R) ℤ) (a b : ℤ) [P.IsStrictlyGE a]
+    [P.IsStrictlyLE b] (hP : ∀ i, Module.Projective R (P.X i) ∧ Module.Finite R (P.X i)) :
+    (Q.obj P).IsPerfect :=
+  ⟨P, a, b, inferInstance, inferInstance, hP, ⟨Iso.refl _⟩⟩
+
+/-- Perfect complexes are stable under shifts. -/
+lemma IsPerfect.shift {C : DerivedCategory (ModuleCat.{u} R)} (hC : C.IsPerfect) (n : ℤ) :
+    (C⟦n⟧).IsPerfect := by
+  obtain ⟨P, a, b, _, _, hP, ⟨e⟩⟩ := hC
+  have := P.isStrictlyGE_shift a n (a - n) (by omega)
+  have := P.isStrictlyLE_shift b n (b - n) (by omega)
+  exact (isPerfect_Q_obj (P⟦n⟧) (a - n) (b - n) fun i ↦ hP (i + n)).of_iso
+    (((Q.commShiftIso n).app P) ≪≫ (shiftFunctor _ n).mapIso e.symm)
+
+/-- The mapping cone of a morphism between bounded complexes of finitely generated projective
+modules is again such a complex. -/
+lemma isPerfect_Q_obj_mappingCone {P₁ P₂ : CochainComplex (ModuleCat.{u} R) ℤ} (φ : P₁ ⟶ P₂)
+    (a₁ b₁ a₂ b₂ : ℤ) [P₁.IsStrictlyGE a₁] [P₁.IsStrictlyLE b₁] [P₂.IsStrictlyGE a₂]
+    [P₂.IsStrictlyLE b₂] (h₁ : ∀ i, Module.Projective R (P₁.X i) ∧ Module.Finite R (P₁.X i))
+    (h₂ : ∀ i, Module.Projective R (P₂.X i) ∧ Module.Finite R (P₂.X i)) :
+    (Q.obj (CochainComplex.mappingCone φ)).IsPerfect := by
+  have : (CochainComplex.mappingCone φ).IsStrictlyGE (min (a₁ - 1) a₂) :=
+    CochainComplex.isStrictlyGE_mappingCone φ a₁ a₂ _
+  have : (CochainComplex.mappingCone φ).IsStrictlyLE (max (b₁ - 1) b₂) := by
+    rw [CochainComplex.isStrictlyLE_iff]
+    intro i hi
+    rw [CochainComplex.mappingCone.isZero_X_iff]
+    exact ⟨P₁.isZero_of_isStrictlyLE b₁ _ (by omega), P₂.isZero_of_isStrictlyLE b₂ _ (by omega)⟩
+  refine isPerfect_Q_obj _ (min (a₁ - 1) a₂) (max (b₁ - 1) b₂) fun i ↦ ?_
+  let e := (HomologicalComplex.homotopyCofiber.XIsoBiprod φ i (i + 1) rfl) ≪≫
+    ModuleCat.biprodIsoProd (P₁.X (i + 1)) (P₂.X i)
+  have := (h₁ (i + 1)).1
+  have := (h₁ (i + 1)).2
+  have := (h₂ i).1
+  have := (h₂ i).2
+  exact ⟨Module.Projective.of_equiv e.toLinearEquiv.symm,
+    Module.Finite.equiv e.toLinearEquiv.symm⟩
+
+/-- Perfect complexes are stable under extensions: in a distinguished triangle
+`C₁ ⟶ C₂ ⟶ C₃ ⟶ C₁[1]` with `C₁` and `C₃` perfect, `C₂` is perfect. The map `C₃ ⟶ C₁[1]` lifts
+to a morphism of complexes, its source being K-projective, and `C₂[1]` is its mapping cone. -/
+lemma isPerfect_obj₂_of_distTriang
+    (T : Pretriangulated.Triangle (DerivedCategory (ModuleCat.{u} R)))
+    (hT : T ∈ distTriang _) (h₁ : T.obj₁.IsPerfect) (h₃ : T.obj₃.IsPerfect) :
+    T.obj₂.IsPerfect := by
+  obtain ⟨P₁, a₁, b₁, _, _, hP₁, ⟨e₁⟩⟩ := h₁
+  obtain ⟨P₃, a₃, b₃, _, _, hP₃, ⟨e₃⟩⟩ := h₃
+  have : ∀ n, Projective (P₃.X n) := fun n ↦ by
+    have := (hP₃ n).1
+    exact ModuleCat.projective_of_categoryTheory_projective _
+  have : P₃.IsKProjective := CochainComplex.isKProjective_of_projective _ b₃
+  have := P₁.isStrictlyGE_shift a₁ 1 (a₁ - 1) (by omega)
+  have := P₁.isStrictlyLE_shift b₁ 1 (b₁ - 1) (by omega)
+  obtain ⟨ψ, hψ⟩ := CochainComplex.IsKProjective.exists_Q_map_eq P₃ (P₁⟦(1 : ℤ)⟧)
+    (e₃.inv ≫ T.mor₃ ≫ e₁.hom⟦(1 : ℤ)⟧' ≫ ((Q.commShiftIso (1 : ℤ)).app P₁).inv)
+  have hcomm : Q.map ψ ≫ ((Q.commShiftIso (1 : ℤ)).app P₁).hom ≫ e₁.inv⟦(1 : ℤ)⟧' =
+      e₃.inv ≫ T.mor₃ := by
+    rw [hψ]
+    simp [← Functor.map_comp]
+  obtain ⟨f, -⟩ := Pretriangulated.exists_iso_of_arrow_iso _ _
+    (mappingCone_triangle_distinguished ψ)
+    (Pretriangulated.rot_of_distTriang _ (Pretriangulated.rot_of_distTriang _ hT))
+    (Arrow.isoMk e₃.symm (((Q.commShiftIso (1 : ℤ)).app P₁) ≪≫ (shiftFunctor _ 1).mapIso e₁.symm)
+      hcomm.symm)
+  have hcone := isPerfect_Q_obj_mappingCone ψ a₃ b₃ (a₁ - 1) (b₁ - 1) hP₃ fun i ↦ hP₁ (i + 1)
+  exact ((hcone.of_iso (Pretriangulated.Triangle.π₃.mapIso f)).shift (-1)).of_iso
+    ((shiftFunctorCompIsoId _ (1 : ℤ) (-1) (by omega)).app _)
+
 /-- Blueprint `sk-lem-finite` (Step 2 of its proof): perfectness over a Noetherian ring.
 
 Over a Noetherian ring `R`, a bounded complex `C` with finitely generated cohomology modules and
@@ -267,12 +344,19 @@ section Biduality
 /-- Blueprint `prop-pod-biduality-at-the-point` (Steps 1–3 of its proof): a perfect point
 complex is dualizable for the derived tensor product of `D(R)`.
 
-A single finitely generated projective module is dualizable, with dual `Hom_R(P, R)`; a bounded
-complex of such modules is dualizable, with dual the termwise dual complex, by induction on the
-length using the truncation triangles; and dualizability is invariant under isomorphism. -/
+A finitely generated projective module is dualizable, with dual `Hom_R(P, R)`
+(`ModuleCat.isDualizable_of_projective`). A bounded complex `P` of such modules is paired with
+its termwise dual complex for the tensor product of complexes, and `P` and its dual are K-flat,
+so the pairing descends to `D(R)` (`DerivedCategory.isDualizable_Q_obj`). This replaces the
+blueprint's induction along the truncation triangles by a direct chain-level construction of the
+evaluation and coevaluation. Dualizability is invariant under isomorphism. -/
 theorem IsPerfect.isDualizable {C : DerivedCategory (ModuleCat.{u} R)} (hC : C.IsPerfect) :
-    IsDualizable C :=
-  sorry
+    IsDualizable C := by
+  obtain ⟨P, a, b, _, _, hP, ⟨e⟩⟩ := hC
+  refine IsDualizable.of_iso e.symm (isDualizable_Q_obj P a b fun n ↦ ?_)
+  have := (hP n).1
+  have := (hP n).2
+  exact ModuleCat.isDualizable_of_projective (P.X n)
 
 /-- Blueprint `prop-pod-biduality-at-the-point`: biduality at the point.
 
