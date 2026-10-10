@@ -1,0 +1,66 @@
+{
+ "id": "lem-weil-pbc-proper-ideal-contained-in-maximal",
+ "kind": "statement",
+ "title": "Every proper ideal is contained in a maximal ideal",
+ "statement": "Let $R$ be a commutative ring and $I\\subseteq R$ an ideal with $I\\neq R$. Then there is a maximal ideal $\\mathfrak m\\subset R$ with $I\\subseteq\\mathfrak m$. In particular every nonzero commutative ring has a maximal ideal, and every prime ideal of $R$ is contained in a maximal ideal of $R$.",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Algebra, Lemma Tag 00E0 (label lemma-Zariski-topology, line 2987), item (2) ('Every nonzero ring has a maximal ideal') and the proof of item (8), line 3069 ('I is not the unit ideal if and only if I is contained in some maximal ideal (to see this, apply (2) to the ring R/I)'); tag verified in stacks-project/tags/tags"
+ },
+ "stmt_deps": [],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "every proper ideal of a commutative ring is contained in a maximal ideal",
+   "results": "Ideal.exists_le_maximal (Mathlib.RingTheory.Ideal.Maximal), IsLocalRing.le_maximalIdeal, Ideal.ne_top_iff_exists_maximal, IsLocalRing.le_maximalIdeal_of_isPrime, Ring.exists_maximal_of_not_isField",
+   "date": "2026-10-10",
+   "verdict": "match: Ideal.exists_le_maximal"
+  },
+  {
+   "tool": "loogle",
+   "query": "Ideal.exists_le_maximal",
+   "results": "Ideal.exists_le_maximal {α : Type u} [Semiring α] (I : Ideal α) (hI : I ≠ ⊤) : ∃ M, M.IsMaximal ∧ I ≤ M (Mathlib.RingTheory.Ideal.Maximal)",
+   "date": "2026-10-10",
+   "verdict": "match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rn 'theorem exists_le_maximal' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib",
+   "results": "Mathlib/RingTheory/Ideal/Maximal.lean:80 theorem exists_le_maximal (I : Ideal α) (hI : I ≠ ⊤) : ∃ M : Ideal α, M.IsMaximal ∧ I ≤ M (docstring: Krull's theorem); Mathlib/Order/Preorder/Finite.lean:52 (finsets, unrelated)",
+   "date": "2026-10-10",
+   "verdict": "match: Ideal.exists_le_maximal, lines 78-82 read"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "Ideal.exists_le_maximal",
+  "file": "Mathlib/RingTheory/Ideal/Maximal.lean",
+  "line": 80,
+  "how": "exact (lines 78-82 read): for a semiring α (in particular a commutative ring) and an ideal I with I ≠ ⊤ there is M with M.IsMaximal and I ≤ M. The 'in particular' clauses are the cases I = 0 (R ≠ 0 means ⊥ ≠ ⊤) and I = a prime ideal (prime ideals are proper by definition)."
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-finite-type-domain-dimension-local-ring",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lead_note": "Leaf accepted by L (2026-10-10): Ideal.exists_le_maximal (Ideal/Maximal.lean:80), checked with sed.",
+ "reviewed": "pass (L, 2026-10-10): leaf, declaration checked by sed."
+}

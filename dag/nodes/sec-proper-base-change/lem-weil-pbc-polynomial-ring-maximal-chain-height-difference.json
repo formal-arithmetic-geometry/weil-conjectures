@@ -1,0 +1,75 @@
+{
+ "id": "lem-weil-pbc-polynomial-ring-maximal-chain-height-difference",
+ "kind": "statement",
+ "title": "Maximal chains of primes in a polynomial ring over a field have length the difference of the heights",
+ "statement": "Let $k$ be a field, $n\\ge0$ an integer and $P=k[x_1,\\dots,x_n]$ the polynomial ring [def-weil-pbc-mv-polynomial-ring]. For a prime ideal $\\mathfrak q\\subset P$ let $\\operatorname{ht}(\\mathfrak q)\\in\\{0,1,2,\\dots,\\infty\\}$ be the supremum of the integers $t\\ge0$ for which there is a chain $\\mathfrak q_0\\subsetneq\\mathfrak q_1\\subsetneq\\cdots\\subsetneq\\mathfrak q_t$ of prime ideals of $P$ with $\\mathfrak q_t\\subseteq\\mathfrak q$. Then $\\operatorname{ht}(\\mathfrak q)\\le n$ for every prime $\\mathfrak q$ of $P$, and for prime ideals $\\mathfrak p\\subseteq\\mathfrak q$ of $P$ every maximal chain of primes between $\\mathfrak p$ and $\\mathfrak q$, that is, every chain $\\mathfrak p=\\mathfrak p_0\\subsetneq\\mathfrak p_1\\subsetneq\\cdots\\subsetneq\\mathfrak p_t=\\mathfrak q$ of prime ideals of $P$ such that for each $1\\le i\\le t$ no prime ideal $\\mathfrak r$ of $P$ satisfies $\\mathfrak p_{i-1}\\subsetneq\\mathfrak r\\subsetneq\\mathfrak p_i$, has length $t=\\operatorname{ht}(\\mathfrak q)-\\operatorname{ht}(\\mathfrak p)$.",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Algebra, Lemma Tag 00OR (label lemma-dimension-height-polynomial-ring, line 27737); its proof uses Proposition 00OQ (proposition-finite-gl-dim-polynomial-ring, line 27723), and the Cohen-Macaulay lemmas labelled lemma-regular-ring-CM, lemma-maximal-chain-CM and lemma-CM-dim-formula; tag verified in stacks-project/tags/tags"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-mv-polynomial-ring"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "polynomial ring over a field is catenary: saturated chain of primes from p to q has length height q minus height p",
+   "results": "Polynomial.height_eq_height_add_one, Polynomial.height_map_C, Polynomial.ringKrullDim_of_isNoetherianRing (Mathlib.RingTheory.KrullDimension.Polynomial), Ideal.height, Ideal.primeHeight, Ideal.height_le_iff, Ideal.primeHeight_mono (Mathlib.RingTheory.Ideal.Height), Ideal.height_le_card_of_mem_minimalPrimes_span_finset (KrullsHeightTheorem)",
+   "date": "2026-10-10",
+   "verdict": "no match: no catenarity statement"
+  },
+  {
+   "tool": "leansearch",
+   "query": "every maximal chain of prime ideals in a polynomial ring over a field has the same length; height of q minus height of p",
+   "results": "Ideal.height, Ideal.primeHeight, Ideal.height_le_card_of_mem_minimalPrimes_span_finset, Polynomial.height_eq_height_add_one, Polynomial.height_map_C, Ideal.exists_ltSeries_length_eq_height, Ideal.height_eq_primeHeight, Ideal.height_le_iff",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "MvPolynomial over a field: any maximal chain of prime ideals between two primes has length equal to the difference of their heights",
+   "results": "Polynomial.height_eq_height_add_one, Ideal.exists_ltSeries_length_eq_height, Ideal.height_le_ringKrullDim_quotient_add_encard, Ideal.height_le_ringKrullDim_quotient_add_one, Polynomial.height_map_C, Ideal.height_le_height_add_encard_of_subset",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "MvPolynomial, Ideal.height, CovBy",
+   "results": "none",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rniE 'catenar|saturated chain|maximal chain|covby.*height|height.*covby' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/RingTheory ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/Order/KrullDimension.lean; grep -rnE '(theorem|lemma) .*(Catenar|catenar|equidim|Equidim)' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib",
+   "results": "only Ideal.height_le_iff_covBy (Mathlib/RingTheory/Ideal/Height.lean:325, a bound on the height by covering primes) and its use in KrullsHeightTheorem.lean:207; no catenary or equidimensionality notion in Mathlib",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-finite-type-domain-dimension-local-ring",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1"
+}
