@@ -1,0 +1,69 @@
+{
+ "id": "lem-sc-noetherian-closed-subset-finite-components",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-pic-proper-ntorsion",
+   "place": "the finite closed intersection set T in the first paragraph of the proof: a closed subset of a Noetherian space has finitely many irreducible components",
+   "via": [
+    "lem-sc-component-intersections-finite",
+    "lem-sc-reduced-dim-le-one-ample",
+    "lem-sc-dim-one-ample-invertible",
+    "lem-sc-dim-one-quasi-projective"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "A closed subset of a Noetherian scheme has finitely many irreducible components",
+ "statement": "Let $X$ be a Noetherian scheme [pqf-def-locnoeth] [def-weil-pbc-quasi-compact-scheme], and let $E\\subseteq X$ be a closed subset. Then $E$ is the union of finitely many irreducible components, where irreducible components are maximal irreducible closed subsets of $E$ [def-weil-irreducible-components].",
+ "source": {
+  "document": "literature/stacks-project/properties.tex",
+  "place": "Properties Lemma 0BA8 (properties-lemma-Noetherian-irreducible-components), applied to the closed subspace E"
+ },
+ "stmt_deps": [
+  "pqf-def-locnoeth",
+  "def-weil-pbc-quasi-compact-scheme",
+  "def-weil-irreducible-components"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "finite irreducible components of a closed subset of a Noetherian scheme",
+   "results": "TopologicalSpace.NoetherianSpace.finite_irreducibleComponents; AlgebraicGeometry.finite_irreducibleComponents_of_isNoetherian",
+   "date": "2026-10-10",
+   "verdict": "match: specialize to the closed subtype E"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Noetherian topological space closed subset finitely many irreducible components",
+   "results": "NoetherianSpace.finite_irreducibleComponents",
+   "date": "2026-10-10",
+   "verdict": "match: apply to the subtype of a closed set"
+  },
+  {
+   "tool": "grep",
+   "query": "rg -n 'finite_irreducibleComponents|noetherianSpace_of_isClosed' /home/ubuntu/weil-src-slopmaster2/.lake/packages/mathlib/Mathlib/Topology/NoetherianSpace.lean /home/ubuntu/weil-src-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicGeometry/Noetherian.lean",
+   "results": "Topology/NoetherianSpace.lean:193 NoetherianSpace.finite_irreducibleComponents; :120-126 noetherianSpace_of_isClosed; AlgebraicGeometry/Noetherian.lean:364 finite_irreducibleComponents_of_isNoetherian",
+   "date": "2026-10-10",
+   "verdict": "match: closed-subtype specialization"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "TopologicalSpace.NoetherianSpace.finite_irreducibleComponents",
+  "file": "Mathlib/Topology/NoetherianSpace.lean",
+  "line": 193,
+  "how": "specializes in one line: a Noetherian scheme has Noetherian underlying space (as used by AlgebraicGeometry.finite_irreducibleComponents_of_isNoetherian, Mathlib/AlgebraicGeometry/Noetherian.lean:364); the instance `NoetherianSpace.set` (Mathlib/Topology/NoetherianSpace.lean:76) makes the subspace E Noetherian; `NoetherianSpace.finite_irreducibleComponents` (line 193) gives finiteness of its irreducible components, and `sUnion_irreducibleComponents` (Mathlib/Topology/Irreducible.lean:353) gives that they cover E (one declaration per clause)"
+ },
+ "status": "mathlib",
+ "created": {
+  "item": "lem-sc-noetherian-closed-points-finite",
+  "by": "worker",
+  "date": "2026-10-10"
+ },
+ "chapter": "sec-curve-estimates",
+ "unit": "sk-thm-curveestimate"
+}

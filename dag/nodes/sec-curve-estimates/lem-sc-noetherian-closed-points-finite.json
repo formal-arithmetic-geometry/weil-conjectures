@@ -25,9 +25,48 @@
   "pqf-def-locnoeth",
   "def-weil-pbc-quasi-compact-scheme"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "By [lem-sc-noetherian-closed-subset-finite-components], the closed subset $E$ is the union of finitely many irreducible components $E_1,\\ldots,E_r$, each irreducible and closed in $X$.",
+   "uses": [
+    "lem-sc-noetherian-closed-subset-finite-components"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/properties.tex",
+    "place": "Properties Lemma 0BA8 (properties-lemma-Noetherian-irreducible-components)"
+   }
+  },
+  {
+   "text": "For each $i$, [lem-sc-scheme-sober] gives a generic point $\\xi_i\\in E_i$ with $E_i=\\overline{\\{\\xi_i\\}}$. By hypothesis $\\xi_i$ is closed in $X$, so $\\overline{\\{\\xi_i\\}}=\\{\\xi_i\\}$ and hence $E_i=\\{\\xi_i\\}$.",
+   "uses": [
+    "lem-sc-scheme-sober"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Schemes Lemma 01IS (lemma-scheme-sober), applied to each irreducible component"
+   }
+  },
+  {
+   "text": "Thus $E=E_1\\cup\\cdots\\cup E_r=\\{\\xi_1,\\ldots,\\xi_r\\}$ is finite.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/properties.tex",
+    "place": "Properties Lemma 0BA8, conclusion of the first paragraph"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sc-noetherian-closed-subset-finite-components",
+  "lem-sc-scheme-sober"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/properties.tex",
+  "place": "Properties Lemma 0BA8, with Schemes Lemma 01IS"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -52,12 +91,36 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-sc-component-intersections-finite",
   "by": "worker",
   "date": "2026-10-10"
  },
  "chapter": "sec-curve-estimates",
- "unit": "sk-thm-curveestimate"
+ "unit": "sk-thm-curveestimate",
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "lem-sc-noetherian-closed-points-finite",
+  "worker": "stage1",
+  "summary": "Split the finiteness argument into finite irreducible components of the closed subset, collapse of each component to its closed generic point using scheme sobriety, and the finite union conclusion. Added one Mathlib leaf for the closed-subset component finiteness specialization.",
+  "blueprint": "Realizes the finite closed intersection set T clause in the first paragraph of lem-sc-pic-proper-ntorsion via the three proof steps.",
+  "tool_uses": [
+   {
+    "node": "lem-sc-noetherian-closed-subset-finite-components",
+    "why": "The item's route needs finiteness of components of the particular closed subset E; this Mathlib leaf supplies that closed-subspace specialization."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sc-scheme-sober"
+ ],
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-ncp",
+  "group": "G1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-ncp (reviewer sub-agent of L); spot-checked: Source Properties Lemma 0BA8 (first paragraph): Noetherian X, closed E all of whose points are closed => E finite; item statement agrees hypothesis by hypothesis. Step 1 carried by new leaf lem-sc-noetherian-closed-subset-finite-components (components of E are closed in E, hence in X since E closed); step 2 by lem-sc-scheme-sober (irreducible closed Z in X has generic point xi with Z = closure{xi}; xi in E so closed, Z = {xi}); step 3 elementary finite union. Mathlib verified: NoetherianSpace.finite_irreducibleComponents at Topology/NoetherianSpace.lean:193, NoetherianSpace.set instance :76, sUnion_irreducibleComponents Topology/Irreducible.lean:353, finite_irreducibleComponents_of_isNoetherian AlgebraicGeometry/Noetherian.lean:364. Small cases: E empty, E a closed point, E = an integral curve (generic point not closed, hypothesis fails), finite discrete scheme. FIX: dag/nodes/sec-curve-estimates/lem-sc-noetherian-closed-subset-finite-components.json: mathlib_match.how: cited a nonexistent noetherianSpace_of_isClosed at lines 120-126; replaced with NoetherianSpace.set (:76), the scheme-to-space step and sUnion_irreducibleComponents for the covering clause. Tool uses: added lem-sc-scheme-sober (off-unit sk-def-av-pic, generic sobriety, C8 accepted); dropped the declared lem-sc-noetherian-closed-subset-finite-components (same-unit new node, not an off-unit tool). Start Sat Oct 10 03:35:14 PM UTC 2026, end Sat Oct 10 03:35:42 PM UTC 2026.; 1 file(s) fixed by the reviewer"
+ }
 }
