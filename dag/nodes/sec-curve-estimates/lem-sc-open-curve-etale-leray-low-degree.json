@@ -26,9 +26,59 @@
   "def-weil-pbc-etale-sheaves",
   "def-weil-pbc-scheme-conventions"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "The hypotheses that (R^1 j_*F)_x and (R^2 j_*F)_x vanish at every geometric point imply R^1 j_*F=0 and R^2 j_*F=0 by conservativity of geometric stalks [lemma-weil-pbc-geometric-stalk-conservative].",
+   "uses": [
+    "lemma-weil-pbc-geometric-stalk-conservative"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Discussion preceding Tag 03RM; stalk criterion"
+   }
+  },
+  {
+   "text": "Apply the Grothendieck spectral sequence [thm-sp-grothendieck] to the composable left-exact functors j_* and Gamma(Cbar,-). The etale direct image j_* preserves injective sheaves [lem-weil-pbc-direct-image-preserves-injectives], so it sends injectives to Gamma(Cbar,-)-acyclic objects. By the definition of etale cohomology [def-weil-pbc-etale-cohomology] and the identity Gamma(Cbar,j_*F)=Gamma(C,F) from the definition of direct image [def-weil-pbc-direct-image], the E_2 terms are H^p(Cbar_et,R^q j_*F) and the abutment is H^{p+q}(C_et,F). The bottom edge map of [lem-sp-grothendieck-edge-maps] is the natural Leray edge map in the statement.",
+   "uses": [
+    "thm-sp-grothendieck",
+    "lem-weil-pbc-direct-image-preserves-injectives",
+    "def-weil-pbc-etale-cohomology",
+    "def-weil-pbc-direct-image",
+    "lem-sp-grothendieck-edge-maps"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Discussion preceding Tag 03RM; Leray spectral sequence"
+   }
+  },
+  {
+   "text": "In total degree n<=2, the only rows other than q=0 are q=1 and q=2, which vanish by Step 1. Differentials entering E_r^{n,0} originate in row q=r-1; for r=2,3 these are zero and for r>=4 their first coordinate n-r is negative. Differentials leaving row q=0 land at negative q. Hence E_2^{n,0}=E_infty^{n,0}. The finite filtration from Step 2 has no other nonzero graded piece in degree n, so F^nH^n=H^n and its bottom edge map is an isomorphism for n=0,1,2.",
+   "uses": [
+    "thm-sp-grothendieck",
+    "lem-sp-grothendieck-edge-maps"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Discussion preceding Tag 03RM; low-degree consequence of Leray after vanishing of R^1j_*F and R^2j_*F"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lemma-weil-pbc-geometric-stalk-conservative",
+  "thm-sp-grothendieck",
+  "lem-weil-pbc-direct-image-preserves-injectives",
+  "def-weil-pbc-etale-cohomology",
+  "def-weil-pbc-direct-image",
+  "lem-sp-grothendieck-edge-maps"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Discussion preceding Tag 03RM"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -67,12 +117,50 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-sc-open-curve-gm-direct-image-cohomology",
   "by": "worker",
   "date": "2026-10-10"
  },
  "chapter": "sec-curve-estimates",
- "unit": "sk-thm-br"
+ "unit": "sk-thm-br",
+ "split_report": {
+  "date": "2026-10-11",
+  "item": "lem-sc-open-curve-etale-leray-low-degree",
+  "worker": "stage1",
+  "summary": "Apply the existing generic Grothendieck spectral sequence and bottom-edge theorem to etale direct image followed by global sections, then prove the row-vanishing collapse in degrees zero through two. Geometric-stalk conservativity converts the hypotheses to vanishing sheaves.",
+  "blueprint": "Realizes the ancestor lem-sc-brauer-zero proof sentence identifying H^q(C_et,G_m) with H^q(Cbar_et,j_*G_m) via Leray after vanishing of R^1 and R^2.",
+  "tool_uses": [
+   {
+    "node": "thm-sp-grothendieck",
+    "why": "Supplies the spectral sequence and finite filtration for a composite of left-exact functors."
+   },
+   {
+    "node": "lem-weil-pbc-direct-image-preserves-injectives",
+    "why": "Verifies the acyclicity hypothesis for etale direct image."
+   },
+   {
+    "node": "lem-sp-grothendieck-edge-maps",
+    "why": "Identifies the row-zero edge map of the generic Grothendieck spectral sequence."
+   }
+  ]
+ },
+ "tool_uses": [
+  "thm-sp-grothendieck",
+  "lem-weil-pbc-direct-image-preserves-injectives",
+  "lem-sp-grothendieck-edge-maps",
+  "thm-sp-grothendieck",
+  "lem-weil-pbc-direct-image-preserves-injectives",
+  "lem-sp-grothendieck-edge-maps"
+ ],
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-oll1817",
+  "group": "J1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-oll1817 (reviewer sub-agent of L); spot-checked: No cycle: thm-sp-grothendieck, lem-sp-grothendieck-edge-maps, lemma-weil-pbc-geometric-stalk-conservative, lem-weil-pbc-direct-image-preserves-injectives are generic (sp/pbc), none depends on the parent. Statement is the q=0,1,2 isomorphism form (not the five-term sequence) and is what the parent needs; edge maps argued in Step 3: rows 1,2 vanish, so E2^{n,0}=Einf^{n,0}=H^n for n<=2 (incoming d_r from row r-1 zero for r=2,3, negative column for r>=4). Step 1 conservativity applied to 0->R^q j_*F correct; Step 2 acyclicity via injectives preserved, Gamma(Cbar,j_*F)=Gamma(C,F) by definition. Tool uses accepted as generic. No repairs."
+ },
+ "lead_note": "2026-10-10 L (R-oll1817): Second reading's 'Changes' line (created.item set to this item, source replaced by Tag 01F2) is not reflected in the delivered JSON: created.item is still the parent lem-sc-open-curve-gm-direct-image-cohomology (correct, it was created from there) and source still says 'Discussion preceding Tag 03RM'; no mathematical consequence."
 }
