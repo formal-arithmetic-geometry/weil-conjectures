@@ -1,0 +1,69 @@
+{
+ "id": "lem-weil-pbc-associated-prime-localization-depth-zero",
+ "kind": "statement",
+ "title": "Localizing a Noetherian ring at an associated prime gives a local ring whose maximal ideal is associated",
+ "statement": "Let $R$ be a Noetherian ring [def-weil-pbc-noetherian-ring] and $\\mathfrak q\\subset R$ a prime ideal which is an associated prime of $R$, i.e. $\\mathfrak q=\\operatorname{Ann}_R(z)=\\{a\\in R: az=0\\}$ for some $z\\in R$. Let $R_{\\mathfrak q}$ be the localization of $R$ at $\\mathfrak q$ [def-weil-pbc-localization-at-prime], a local ring with maximal ideal $\\mathfrak qR_{\\mathfrak q}$. Then $\\mathfrak qR_{\\mathfrak q}$ is an associated prime of $R_{\\mathfrak q}$: there is $w\\in R_{\\mathfrak q}$ with $\\operatorname{Ann}_{R_{\\mathfrak q}}(w)=\\mathfrak qR_{\\mathfrak q}$.",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Algebra, Lemma Tag 05BZ (lemma-localize-ass, line 15423), parts (1) and (2) for M = R and S = R \\ q (q lies in Spec(R_q), so q is in Ass_R(R_q) = Ass_{R_q}(R_q), where it is qR_q). Tag verified in tags/tags: 05BZ,algebra-lemma-localize-ass"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-noetherian-ring",
+  "def-weil-pbc-localization-at-prime"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "associated prime p of R, maximal ideal of localization at p is associated prime of the localization",
+   "results": "Module.associatedPrimes.mem_associatedPrimes_atPrime_of_mem_associatedPrimes, Module.associatedPrimes.mem_associatePrimes_localizedModule_atPrime_of_mem_associated_primes (Mathlib.RingTheory.Ideal.AssociatedPrime.Localization), IsLocalization.AtPrime.map_eq_maximalIdeal, IsLocalization.AtPrime.comap_maximalIdeal",
+   "date": "2026-10-10",
+   "verdict": "match (up to M = R)"
+  },
+  {
+   "tool": "loogle",
+   "query": "associatedPrimes, IsLocalRing.maximalIdeal",
+   "results": "Module.associatedPrimes.mem_associatedPrimes_atPrime_of_mem_associatedPrimes : p in associatedPrimes R M -> maximalIdeal (Localization.AtPrime p) in associatedPrimes (Localization.AtPrime p) (LocalizedModule.AtPrime p M)",
+   "date": "2026-10-10",
+   "verdict": "match (for M = R the module is LocalizedModule.AtPrime p R, not the ring Localization.AtPrime p)"
+  },
+  {
+   "tool": "grep",
+   "query": "sed -n 1,80p ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/RingTheory/Ideal/AssociatedPrime/Localization.lean",
+   "results": "line 38-41: @[stacks 0310 \"(1)\"] mem_associatedPrimes_of_comap_mem_associatedPrimes_of_isLocalizedModule (p : Ideal R') (ass : p.comap (algebraMap R R') in associatedPrimes R M) : p in associatedPrimes R' M', for any localization R' of R at S and localization map f : M -> M' at S; line 70 mem_associatedPrimes_atPrime_of_mem_associatedPrimes",
+   "date": "2026-10-10",
+   "verdict": "match"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "Module.associatedPrimes.mem_associatedPrimes_of_comap_mem_associatedPrimes_of_isLocalizedModule",
+  "file": "Mathlib/RingTheory/Ideal/AssociatedPrime/Localization.lean",
+  "how": "specializes in one line: lines 38-41 with S = q.primeCompl, R' = M' = Localization.AtPrime q, f = Algebra.linearMap R R' (an IsLocalizedModule S f, since R' is IsLocalization S R'), p = maximalIdeal R'; the hypothesis comap (maximalIdeal R') = q is Localization.AtPrime.under_maximalIdeal (Mathlib/RingTheory/Localization/AtPrime/Basic.lean:203). associatedPrimes is the annihilator definition for the Noetherian rings R and R_q by isAssociatedPrime_iff (AssociatedPrime/Basic.lean:114-116). Lines read with sed -n on 2026-10-10.",
+  "line": 40
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-exact-free-complex-last-minors-regular-sequence",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lead_note": "Leaf accepted by L (2026-10-10): Module.associatedPrimes.mem_associatedPrimes_of_comap_mem_associatedPrimes_of_isLocalizedModule (AssociatedPrime/Localization.lean:40) with the localization at q and Localization.AtPrime.under_maximalIdeal; checked with sed/grep. For Noetherian rings isAssociatedPrime_iff gives the annihilator form of the statement.",
+ "reviewed": "pass (L, 2026-10-10): leaf, declaration checked."
+}

@@ -1,0 +1,75 @@
+{
+ "id": "lem-weil-pbc-free-complex-mod-nonzerodivisor-exact",
+ "kind": "statement",
+ "title": "Reducing an exact finite free complex modulo a nonzerodivisor keeps exactness one step less",
+ "statement": "Let $(R,\\mathfrak m)$ be a local ring, $e\\ge2$ an integer and $0\\to R^{\\oplus n_e}\\xrightarrow{\\varphi_e}R^{\\oplus n_{e-1}}\\xrightarrow{\\varphi_{e-1}}\\cdots\\xrightarrow{\\varphi_1}R^{\\oplus n_0}$ a complex of finite free $R$-modules [def-weil-pbc-free-module] ($\\varphi_i\\circ\\varphi_{i+1}=0$ for $1\\le i\\le e-1$) which is exact [def-weil-pbc-exact-sequence] at $R^{\\oplus n_e},R^{\\oplus n_{e-1}},\\dots,R^{\\oplus n_1}$. Let $x\\in\\mathfrak m$ be a nonzerodivisor of $R$ ($xy=0$ implies $y=0$), $\\bar R=R/xR$, and $\\bar\\varphi_i:\\bar R^{\\oplus n_i}\\to\\bar R^{\\oplus n_{i-1}}$ the $\\bar R$-linear map whose matrix [def-weil-matrix] is the matrix of $\\varphi_i$ with its entries reduced modulo $x$ (equivalently $\\varphi_i\\otimes_R\\bar R$). Then the complex $0\\to\\bar R^{\\oplus n_e}\\xrightarrow{\\bar\\varphi_e}\\bar R^{\\oplus n_{e-1}}\\to\\cdots\\xrightarrow{\\bar\\varphi_2}\\bar R^{\\oplus n_1}$ is exact at $\\bar R^{\\oplus n_e},\\bar R^{\\oplus n_{e-1}},\\dots,\\bar R^{\\oplus n_2}$.",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Algebra, Lemma Tag 00MZ (lemma-div-x-exact-one-less, line 24766), in Situation situation-complex (Section 00MS, section-complex-exact, line 24576). Tag verified in tags/tags: 00MZ,algebra-lemma-div-x-exact-one-less"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-free-module",
+  "def-weil-pbc-exact-sequence",
+  "def-weil-matrix"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "exact complex of free modules tensored with R/xR for a nonzerodivisor x remains exact",
+   "results": "Module.Flat.lTensor_exact, Module.Flat.rTensor_exact, Module.FaithfullyFlat.rTensor_exact_iff_exact, rTensor_exact, Module.Flat.rTensor_shortComplex_exact: flatness statements only",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "complex of free modules exact, x a nonzerodivisor, the complex reduced modulo x is exact one step less (snake lemma long exact sequence of homology for multiplication by x)",
+   "results": "RingTheory.Sequence.map_first_exact_on_four_term_right_exact_of_isSMulRegular_last (Mathlib.RingTheory.Regular.RegularSequence), QuotSMulTop.map_first_exact_on_four_term_exact_of_isSMulRegular_last (Mathlib.RingTheory.Regular.IsSMulRegular), ModuleCat.smulShortComplex_exact, IsSMulRegular.smulShortComplex_shortExact, QuotSMulTop.map_exact",
+   "date": "2026-10-10",
+   "verdict": "candidate: QuotSMulTop.map_first_exact_on_four_term_exact_of_isSMulRegular_last (one position at a time)"
+  },
+  {
+   "tool": "loogle",
+   "query": "QuotSMulTop, Function.Exact, IsSMulRegular",
+   "results": "QuotSMulTop.map_first_exact_on_four_term_exact_of_isSMulRegular_last (h12 : Exact f1 f2) (h23 : Exact f2 f3) (h : IsSMulRegular M''' r) : Exact (QuotSMulTop.map r f1) (QuotSMulTop.map r f2)",
+   "date": "2026-10-10",
+   "verdict": "candidate, not the statement for a complex"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -n 'map_first_exact_on_four_term_exact_of_isSMulRegular_last' -A14 ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/RingTheory/Regular/IsSMulRegular.lean; grep -rln QuotSMulTop ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib",
+   "results": "IsSMulRegular.lean:173-183 the four-term lemma; QuotSMulTop in RingTheory/{QuotSMulTop,Support,KrullDimension/Regular,Regular/*,Depth/Rees}.lean; no statement about a finite free complex reduced modulo x",
+   "date": "2026-10-10",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "mathlib_candidate": {
+  "declaration": "QuotSMulTop.map_first_exact_on_four_term_exact_of_isSMulRegular_last",
+  "file": "Mathlib/RingTheory/Regular/IsSMulRegular.lean",
+  "how": "lines 173-183: for exact M -> M' -> M'' -> M''' (exact at M' and M'') and r regular on M''', the maps M/rM -> M'/rM' -> M''/rM'' are exact. Applied at each position j = e, ..., 2 with M = R^{n_{j+1}} (0 for j = e), M' = R^{n_j}, M'' = R^{n_{j-1}}, M''' = R^{n_{j-2}} (x is regular on a free module), it gives the node after identifying R^n/xR^n with (R/xR)^n and the induced maps with the reduced matrices: several translations, not one line, so the node stays unsplit."
+ },
+ "status": "unsplit",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-exact-free-complex-last-minors-regular-sequence",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1"
+}

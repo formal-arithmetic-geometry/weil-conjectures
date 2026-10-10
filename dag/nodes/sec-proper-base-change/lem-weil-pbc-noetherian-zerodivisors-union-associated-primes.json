@@ -1,0 +1,75 @@
+{
+ "id": "lem-weil-pbc-noetherian-zerodivisors-union-associated-primes",
+ "kind": "statement",
+ "title": "In a Noetherian ring the zerodivisors are the union of the associated primes",
+ "statement": "Let $R$ be a Noetherian ring [def-weil-pbc-noetherian-ring]. Call a prime ideal $\\mathfrak q\\subset R$ an *associated prime* of $R$ if $\\mathfrak q=\\operatorname{Ann}_R(z)=\\{a\\in R: az=0\\}$ for some $z\\in R$, and write $\\operatorname{Ass}(R)$ for the set of these. Call $x\\in R$ a *zerodivisor* if $xy=0$ for some $y\\in R$, $y\\neq0$, and a *nonzerodivisor* otherwise. Then the set of zerodivisors of $R$ equals $\\bigcup_{\\mathfrak q\\in\\operatorname{Ass}(R)}\\mathfrak q$. In particular an element of $R$ lying in no associated prime of $R$ is a nonzerodivisor.",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Algebra, Lemma Tag 00LD (lemma-ass-zero-divisors, line 15278), for the module M = R. Tag verified in tags/tags: 00LD,algebra-lemma-ass-zero-divisors"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-noetherian-ring"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Noetherian ring: union of associated primes equals set of zero divisors",
+   "results": "biUnion_associatedPrimes_eq_zero_divisors, biUnion_associatedPrimes_eq_compl_nonZeroDivisors (Mathlib.RingTheory.Ideal.AssociatedPrime.Basic), biUnion_associatedPrimes_eq_compl_regular (Mathlib.RingTheory.Regular.IsSMulRegular)",
+   "date": "2026-10-10",
+   "verdict": "match"
+  },
+  {
+   "tool": "loogle",
+   "query": "associatedPrimes, nonZeroDivisors",
+   "results": "biUnion_associatedPrimes_eq_compl_nonZeroDivisors (R) [CommSemiring R] [IsNoetherianRing R] : U p in associatedPrimes R R, p = (nonZeroDivisors R)^c",
+   "date": "2026-10-10",
+   "verdict": "match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "if an ideal of a Noetherian ring is not contained in any associated prime then it contains a non-zero-divisor",
+   "results": "exists_le_isAssociatedPrime_of_isNoetherianRing, biUnion_associatedPrimes_eq_compl_nonZeroDivisors, Ideal.bot_lt_annihilator_of_disjoint_nonZeroDivisors, Ideal.nonempty_inter_nonZeroDivisors_of_faithfulSMul, associatedPrimes.nonempty",
+   "date": "2026-10-10",
+   "verdict": "match for the union statement; no single declaration for the ideal form"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -n 'biUnion_associatedPrimes' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/RingTheory/Ideal/AssociatedPrime/Basic.lean",
+   "results": "line 227 biUnion_associatedPrimes_eq_zero_divisors (module M), line 238 biUnion_associatedPrimes_eq_compl_nonZeroDivisors (M = R)",
+   "date": "2026-10-10",
+   "verdict": "match"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "biUnion_associatedPrimes_eq_compl_nonZeroDivisors",
+  "file": "Mathlib/RingTheory/Ideal/AssociatedPrime/Basic.lean",
+  "how": "exact, lines 238-239: [IsNoetherianRing R] : U p in associatedPrimes R R, (p : Set R) = (nonZeroDivisors R)^c, proved from biUnion_associatedPrimes_eq_zero_divisors (lines 227-236). Membership in associatedPrimes is the annihilator definition for Noetherian R by isAssociatedPrime_iff (lines 114-116). Lines read with sed -n on 2026-10-10.",
+  "line": 238
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-exact-free-complex-last-minors-regular-sequence",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lead_note": "Leaf accepted by L (2026-10-10): biUnion_associatedPrimes_eq_compl_nonZeroDivisors (AssociatedPrime/Basic.lean:238); checked with sed/grep. For Noetherian rings isAssociatedPrime_iff gives the annihilator form of the statement.",
+ "reviewed": "pass (L, 2026-10-10): leaf, declaration checked."
+}

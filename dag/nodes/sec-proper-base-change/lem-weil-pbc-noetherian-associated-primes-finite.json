@@ -1,0 +1,76 @@
+{
+ "id": "lem-weil-pbc-noetherian-associated-primes-finite",
+ "kind": "statement",
+ "title": "A finite module over a Noetherian ring has finitely many associated primes",
+ "statement": "Let $R$ be a Noetherian ring [def-weil-pbc-noetherian-ring] and $M$ a finite (finitely generated) $R$-module [def-weil-finitely-generated-module]. Call a prime ideal $\\mathfrak p\\subset R$ an *associated prime* of $M$ if there is $z\\in M$ whose annihilator $\\{a\\in R: az=0\\}$ equals $\\mathfrak p$, and write $\\operatorname{Ass}(M)$ for the set of associated primes of $M$. Then $\\operatorname{Ass}(M)$ is a finite set.",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Algebra, Lemma Tag 00LC (lemma-finite-ass, line 15176); associated primes: Definition Tag 00LA (definition-associated, line 15108). Tags verified in tags/tags: 00LC,algebra-lemma-finite-ass; 00LA,algebra-definition-associated"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-noetherian-ring",
+  "def-weil-finitely-generated-module"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "associated primes of a finitely generated module over a Noetherian ring are finite",
+   "results": "associatedPrimes.finite (Mathlib.RingTheory.Ideal.AssociatedPrime.Finiteness), associatedPrimes, IsArtinianRing.setOf_isPrime_finite, minimalPrimes.finite_of_isNoetherianRing",
+   "date": "2026-10-10",
+   "verdict": "match: associatedPrimes.finite"
+  },
+  {
+   "tool": "loogle",
+   "query": "associatedPrimes, Set.Finite",
+   "results": "associatedPrimes.finite : [IsNoetherianRing A] [Module.Finite A M] : (associatedPrimes A M).Finite (Mathlib.RingTheory.Ideal.AssociatedPrime.Finiteness)",
+   "date": "2026-10-10",
+   "verdict": "match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -n 'theorem associatedPrimes.finite' -B3 ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/RingTheory/Ideal/AssociatedPrime/Finiteness.lean",
+   "results": "lines 156-158: @[stacks 00LC] theorem associatedPrimes.finite : (associatedPrimes A M).Finite, under variable (A M) [IsNoetherianRing A] [Module.Finite A M] (line 86)",
+   "date": "2026-10-10",
+   "verdict": "match"
+  },
+  {
+   "tool": "local_search",
+   "query": "associatedPrimes (project root ~/weil-conjectures-slopmaster2)",
+   "results": "associatedPrimes, associatedPrimes.finite, associatedPrimes.nonempty, ... (index: unavailable, results returned)",
+   "date": "2026-10-10",
+   "verdict": "match confirmed by name"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "associatedPrimes.finite",
+  "file": "Mathlib/RingTheory/Ideal/AssociatedPrime/Finiteness.lean",
+  "how": "exact (tagged @[stacks 00LC]), lines 156-158 under the variables of line 86 ([IsNoetherianRing A] [Module.Finite A M]). Mathlib's associatedPrimes (Basic.lean:101-104) uses IsAssociatedPrime, the radical of an annihilator; for Noetherian A, isAssociatedPrime_iff (Basic.lean:114-116) gives I.IsPrime and I = colon bot {x} = Ann(x), the definition of the statement. Lines read with sed -n on 2026-10-10.",
+  "line": 158
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-exact-free-complex-last-minors-regular-sequence",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lead_note": "Leaf accepted by L (2026-10-10): associatedPrimes.finite (AssociatedPrime/Finiteness.lean:158, [stacks 00LC]); checked with sed/grep. For Noetherian rings isAssociatedPrime_iff gives the annihilator form of the statement.",
+ "reviewed": "pass (L, 2026-10-10): leaf, declaration checked."
+}
