@@ -1,6 +1,6 @@
 # Work queue
 
-861 items; claim with `tools/claim.py next <group> [--stage N]`.
+862 items; claim with `tools/claim.py next <group> [--stage N]`.
 
 ## Stage 1: nodes to split (368)
 
@@ -24,7 +24,7 @@
 | `lem-weil-pbc-tor-one-surjective-flat-middle` | 1016 | none |
 | `lem-weil-pbc-triangular-change-of-basis` | 1016 | none |
 | `lem-weil-pbc-dim-one-residue-field-extensions-finite` | 1018 | none |
-| `def-weil-pbc-double-complex-zigzag-module` | 1019 | none |
+| `lem-weil-pbc-double-complex-zigzag-module-functorial` | 1019 | none |
 | `lem-weil-pbc-double-complex-zigzag-trivial-if-row-boundary` | 1019 | none |
 | `lem-weil-pbc-injective-acyclicity-bounded-below` | 2002 | sorry_here |
 | `lem-weil-pbc-property-implies-acyclicity` | 2003 | none |
@@ -375,7 +375,7 @@
 | `def-exc-jacobian-presentation` | - | none |
 | `lem-zl-noether-normalization-dimension` | - | none |
 
-## Stage 2: nodes to state (493)
+## Stage 2: nodes to state (494)
 
 | node | distance to Mathlib | kind |
 |---|---|---|
@@ -400,6 +400,7 @@
 | `def-weil-pbc-complete-intersection-over-field` | 1 | state |
 | `def-weil-pbc-constant-group-scheme` | 1 | state |
 | `def-weil-pbc-depth` | 1 | state |
+| `def-weil-pbc-double-complex-zigzag-module` | 1 | state |
 | `def-weil-pbc-essentially-constant-system` | 1 | state |
 | `def-weil-pbc-essentially-smooth-ring-map` | 1 | state |
 | `def-weil-pbc-fibre-degree-bound` | 1 | state |
