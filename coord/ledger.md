@@ -1819,3 +1819,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 15:37 L: merged deliver/C1/lem-weil-pbc-closed-immersion-products (reviewer FIX; first push; new nodes: 1)
 - 15:37 L: returned deliver/H1/lem-sc-etale-standard-cover-cech (reviewer RETURN: 1. D1: lem-sc-etale-coproduct-cover-geometry and lem-sc-etale-coproduct-cech-sections: the two new nodes restate the ite)
 - 15:37 L: merged deliver/M1/lem-sc-conductor-ideal-zero-intersection (reviewer FIX; first push; new nodes: 1)
+- 15:37 L: merged deliver/H1/lem-sc-integral-dim-one-ample (reviewer FIX; after a return; new nodes: 3)
