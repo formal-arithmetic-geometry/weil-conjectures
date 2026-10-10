@@ -2651,3 +2651,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 21:20 L: merged deliver/C1/lem-pod-equivalence-induces-module-objects (reviewer PASS; first push; new nodes: 0)
 - 21:20 L: merged deliver/C1/lem-pc-direct-image-bounded-coherent (reviewer FIX; first push; new nodes: 2)
 - 21:20 L: merged deliver/G1/sbc-lem-higher-direct-image-presheaf (reviewer FIX; first push; new nodes: 0)
+- 21:21 L: merged deliver/F1/lem-pc-kflat-tensor-cone-two-out-of-three (reviewer FIX; first push; new nodes: 2)
