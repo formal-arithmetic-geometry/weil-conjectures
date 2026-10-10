@@ -1,0 +1,84 @@
+{
+ "id": "lem-sc-curve-base-change-relative-dimension-one",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-sc-jacobian-representability",
+   "place": "proof, step (4) 'Connectedness' through [lem-sc-picg-geometrically-integral]: the morphism Hilb^g -> Pic^g, D -> O_C(D); here the hypothesis 'X_T -> T smooth of relative dimension 1' under which the universal closed subscheme of Hilb^d is a relative effective Cartier divisor (Stacks 0B9D (1)=>(2), used in Remark 0B9J and the proof of 0BA0 (4))",
+   "via": [
+    "lem-sc-hilb-to-pic-morphism",
+    "lem-sc-picg-geometrically-integral"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Base changes of a smooth curve are smooth of relative dimension $1$",
+ "statement": "Let $k$ be a field and let $C$ be a curve over $k$ [def-pc-curve] (an integral scheme, separated and of finite type over $k$, of dimension $1$) whose structure morphism $C\\to\\operatorname{Spec}k$ is smooth [def-sbc-smooth-morphisms]. Let $T$ be a scheme with a morphism $T\\to\\operatorname{Spec}k$, let $C_T=C\\times_{\\operatorname{Spec}k}T$ be the base change [def-pc-base-change] and $f_T:C_T\\to T$ the second projection. Then $f_T$ is smooth of relative dimension $1$ in the sense of [def-sbc-smooth-morphisms]: $f_T$ is smooth, and for every point $x\\in C_T$, with $t=f_T(x)$ and fibre $(C_T)_t=C_T\\times_T\\operatorname{Spec}\\kappa(t)$, the dimension of $(C_T)_t$ at $x$ [def-kun-dimension] is $\\dim_x\\bigl((C_T)_t\\bigr)=1$.",
+ "source": {
+  "document": "literature/stacks-project/morphisms.tex",
+  "place": "Tag 02NK (lemma-base-change-relative-dimension-d) with its proof via Tag 02FY (lemma-dimension-fibre-after-base-change) (1); Tag 01VB (lemma-base-change-smooth); and for T = Spec k: literature/stacks-project/varieties.tex Tag 0A21 (lemma-dimension-locally-algebraic) (3), dim_x(X) = dim(X) for X irreducible locally algebraic"
+ },
+ "stmt_deps": [
+  "def-pc-curve",
+  "def-sbc-smooth-morphisms",
+  "def-pc-base-change",
+  "def-kun-dimension"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "fibre dimension at a point is invariant under base change of a morphism locally of finite type",
+   "results": "AlgebraicGeometry.locallyOfFiniteType_isStableUnderBaseChange (Mathlib.AlgebraicGeometry.Morphisms.FiniteType), IsFinite / LocallyQuasiFinite / LocallyOfFinitePresentation base-change instances, AlgebraicGeometry.isSmoothOfRelativeDimension_isStableUnderBaseChange (Mathlib.AlgebraicGeometry.Morphisms.Smooth)",
+   "date": "2026-10-10",
+   "verdict": "no match: Mathlib's SmoothOfRelativeDimension n is defined by local standard-smooth presentations of relative dimension n, not by the fibre dimension dim_x(X_{f(x)}) of [def-sbc-smooth-morphisms]; no statement about dim_x of fibres under base change"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.SmoothOfRelativeDimension",
+   "results": "smoothOfRelativeDimension_isStableUnderBaseChange, instSmoothOfRelativeDimensionSndScheme (n) (pullback.snd f g), SmoothOfRelativeDimension.smooth, smoothOfRelativeDimension_comp (Mathlib.AlgebraicGeometry.Morphisms.Smooth)",
+   "date": "2026-10-10",
+   "verdict": "candidate only: base change stability for Mathlib's standard-smooth notion; its agreement with the fibre-dimension notion is itself a theorem (delivery-errors B8), so not a leaf"
+  },
+  {
+   "tool": "leansearch",
+   "query": "smooth of relative dimension n is stable under base change / pullback of smooth morphism of relative dimension n is smooth of relative dimension n",
+   "results": "none: leansearch.net returned HTTP 500 Internal Server Error on three attempts (via the MCP tool and by direct POST to https://leansearch.net/search), 2026-10-10 ~13:43 UTC",
+   "date": "2026-10-10",
+   "verdict": "not obtained (service error); covered by the LeanFinder and Loogle searches"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rn 'SmoothOfRelativeDimension' (pullback|baseChange|instance) and grep -rni 'dimension.*fiber' in ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicGeometry",
+   "results": "Mathlib/AlgebraicGeometry/Morphisms/Smooth.lean: class SmoothOfRelativeDimension (line 135, standard-smooth definition), smoothOfRelativeDimension_isStableUnderBaseChange (line 166); no fibre-dimension statement; slopmaster2 (not Mathlib) has WeilConjectures/Mathlib/AlgebraicGeometry/Morphisms/Smooth.lean:417 smoothOfRelativeDimension_iff_topologicalKrullDim_eq (over a field, X irreducible: SmoothOfRelativeDimension n f <-> topologicalKrullDim X = n)",
+   "date": "2026-10-10",
+   "verdict": "no match; mathlib_candidate recorded"
+  }
+ ],
+ "mathlib_match": null,
+ "mathlib_candidate": {
+  "declaration": "AlgebraicGeometry.smoothOfRelativeDimension_isStableUnderBaseChange",
+  "file": "Mathlib/AlgebraicGeometry/Morphisms/Smooth.lean",
+  "how": "lines 166-170: base change stability of Mathlib's SmoothOfRelativeDimension n (standard-smooth presentations); with slopmaster2's smoothOfRelativeDimension_iff_topologicalKrullDim_eq (WeilConjectures/Mathlib/AlgebraicGeometry/Morphisms/Smooth.lean:417) for C -> Spec k; the comparison with the fibre-dimension notion of [def-sbc-smooth-morphisms] is not in Mathlib"
+ },
+ "status": "unsplit",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-sc-hilb-to-pic-morphism",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-prop-jacobian"
+}

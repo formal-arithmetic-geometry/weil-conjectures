@@ -1532,3 +1532,6 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 13:45 L: returned deliver/H1/lem-weil-pbc-tor-one-surjective-flat-middle (reviewer RETURN: C1/C4 exactness after tensoring not carried by a cited node, C2 step 3, F report copied from another item)
 - 13:45 L: accepted lem-sc-invertible-module-generic-stalk: 9 steps, no new nodes
 - 2026-10-10, delivery of E1: lem-weil-pbc-set-cech-nerve-free-resolution merged from deliver/E1/lem-weil-pbc-set-cech-nerve-free-resolution (1 commit(s), 0 new node(s), spot-checked by L: L: reviewed in full by a reviewer sub-agent (FIX: a wrong label in a step source): 01GC/03AT read, 4 steps recomputed, small cases); claim closed
+- 13:47 L: merged deliver/E1/lem-weil-pbc-set-cech-nerve-free-resolution (reviewer FIX label; first push)
+- 13:47 L: accepted lem-sc-hilb-to-pic-morphism: 7 steps (0BA0 (4)), new node lem-sc-curve-base-change-relative-dimension-one
+- 13:47 L: launcher: 21 deliveries waiting, oldest 76 min: all five slots reviewers until fewer than three wait, no claims for L, oldest first, repaired re-pushes first

@@ -27,11 +27,156 @@
   "def-pc-representable-functor",
   "def-pc-hilb-functor",
   "def-pc-divisor-line-bundle",
-  "def-pc-field-extension"
+  "def-pc-field-extension",
+  "def-pc-relative-effective-cartier",
+  "def-pc-finite-locally-free",
+  "def-pc-base-change",
+  "def-sc-effective-cartier-divisor"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "*The family $C_T\\to T$.* Let $T$ be any $k$-scheme and $f_T:C_T=C\\times_kT\\to T$ the projection [def-pc-base-change]. Since $C$ is a smooth projective curve [def-pc-smooth-projective-curve], in particular a curve over $k$ smooth over $k$, the morphism $f_T$ is smooth of relative dimension $1$ by [lem-sc-curve-base-change-relative-dimension-one]. It is flat and locally of finite presentation, being smooth [lem-pc-smooth-flat]. It is proper: $C\\to\\operatorname{Spec}k$ is projective, hence proper [lem-pc-projective-proper], and properness is stable under base change [lem-pc-proper-base-change](1). A proper morphism is quasi-compact and separated, hence quasi-separated [def-weil-proper-morphism], so $f_T$ is of finite presentation (locally of finite presentation, quasi-compact and quasi-separated, [def-weil-scheme-morphism-properties]). We use this for $T=H_d$, $T=\\operatorname{Spec}\\kappa(t)$ and $T=\\operatorname{Spec}K$.",
+   "uses": [
+    "def-pc-base-change",
+    "def-pc-smooth-projective-curve",
+    "lem-sc-curve-base-change-relative-dimension-one",
+    "lem-pc-smooth-flat",
+    "lem-pc-projective-proper",
+    "lem-pc-proper-base-change",
+    "def-weil-proper-morphism",
+    "def-weil-scheme-morphism-properties"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/pic.tex",
+    "place": "Remark 0B9J (remark-universal-object-hilb-d): 'The universal closed object is a relatively effective divisor ... by Lemma 0B9D', whose hypothesis 'X -> S smooth of relative dimension 1' is checked here for X = C_T"
+   }
+  },
+  {
+   "text": "*Clause 1.* Let $\\varphi:h_{H_d}\\xrightarrow{\\sim}\\operatorname{Hilb}^d_{C/k}$ be the representing isomorphism [def-pc-representable-functor] and $D_d:=\\varphi_{H_d}(\\mathrm{id}_{H_d})$. By the definition of the Hilbert functor [def-pc-hilb-functor], $D_d\\subset C_{H_d}$ is a closed subscheme with $D_d\\to H_d$ finite locally free of degree $d$ [def-pc-finite-locally-free]. By step 1, $C_{H_d}\\to H_d$ is smooth of relative dimension $1$, so [lem-pc-cartier-criterion], implication (1)$\\Rightarrow$(2), shows that $D_d$ is a relative effective Cartier divisor on $C_{H_d}/H_d$ [def-pc-relative-effective-cartier]: an effective Cartier divisor of $C_{H_d}$, flat over $H_d$. (For $d=0$, $D_d=\\emptyset$, whose ideal is $\\mathcal O_{C_{H_d}}$; the argument covers it.) Hence its ideal $\\mathcal I_{D_d}$ is an effective Cartier ideal and $\\mathcal O(D_d)=\\mathcal I_{D_d}^\\vee$ of [def-pc-divisor-line-bundle] is defined, and it is an invertible $\\mathcal O_{C_{H_d}}$-module by [lem-pc-divisor-line-bundle-invertible].",
+   "uses": [
+    "def-pc-representable-functor",
+    "def-pc-hilb-functor",
+    "def-pc-finite-locally-free",
+    "lem-pc-cartier-criterion",
+    "def-pc-relative-effective-cartier",
+    "def-pc-divisor-line-bundle",
+    "lem-pc-divisor-line-bundle-invertible"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/pic.tex",
+    "place": "Remark 0B9J: 'The universal closed object is a relatively effective divisor D_univ ... by Lemma 0B9D ... In particular, D_univ is an effective Cartier divisor and we obtain an invertible module O(D_univ)'; Lemma 0B9D (lemma-divisors-on-curves) (1)=>(2)"
+   }
+  },
+  {
+   "text": "*The fibre of $\\mathcal O(D_d)$ at a point.* Let $t\\in H_d$, with residue field $\\kappa(t)$ (a field extension of $k$ through $H_d\\to\\operatorname{Spec}k$, [def-pc-field-extension]) and canonical morphism $\\iota_t:\\operatorname{Spec}\\kappa(t)\\to H_d$. The fibre product $C_{H_d}\\times_{H_d}\\operatorname{Spec}\\kappa(t)=(C\\times_kH_d)\\times_{H_d}\\operatorname{Spec}\\kappa(t)$ is $C_{\\kappa(t)}=C\\times_k\\operatorname{Spec}\\kappa(t)$ (pasting of fibre products, [def-pc-fibre-product]), and the pullback of $\\mathcal O(D_d)$ along the projection $\\iota_{t,C}:C_{\\kappa(t)}\\to C_{H_d}$ is the fibre $\\mathcal O(D_d)_t$ of [def-pd-fibrewise-degree]. By step 1, $C_{H_d}\\to H_d$ is flat of finite presentation, and by step 2 $D_d$ is a relative effective Cartier divisor on it; so [lem-pc-recd-pullback] with $g=\\iota_t$ gives: $D_t:=D_d\\times_{H_d}\\operatorname{Spec}\\kappa(t)$ is a relative effective Cartier divisor on $C_{\\kappa(t)}/\\kappa(t)$, in particular an effective Cartier divisor on $C_{\\kappa(t)}$ [def-pc-relative-effective-cartier], and $\\mathcal O_{C_{\\kappa(t)}}(D_t)\\cong\\iota_{t,C}^*\\mathcal O(D_d)=\\mathcal O(D_d)_t$. Moreover $D_t\\to\\operatorname{Spec}\\kappa(t)$ is the fibre of $D_d\\to H_d$ over $t$, so, $D_d\\to H_d$ being finite locally free of degree $d$, $\\dim_{\\kappa(t)}\\Gamma(D_t,\\mathcal O_{D_t})=d$ by [def-pc-finite-locally-free].",
+   "uses": [
+    "def-pc-field-extension",
+    "def-pc-fibre-product",
+    "def-pd-fibrewise-degree",
+    "lem-pc-recd-pullback",
+    "def-pc-relative-effective-cartier",
+    "def-pc-finite-locally-free"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/pic.tex",
+    "place": "Remark 0B9J, last sentence: 'the restriction of O(D_univ) to the fibre [D] x X is O_X(D)', here at an arbitrary point t of H_d"
+   }
+  },
+  {
+   "text": "*Clause 2: the fibrewise degree is $d$.* The scheme $C_{\\kappa(t)}$ is proper over $\\kappa(t)$ (step 1) and of dimension $1$ by [lem-pc-dim-base-change] ($C$ is a curve over $k$, $\\kappa(t)/k$ a field extension). $D_t$ is an effective Cartier divisor on it (step 3), so [lem-pc-degree-base-change](2) gives $\\deg\\mathcal O_{C_{\\kappa(t)}}(D_t)=\\dim_{\\kappa(t)}\\Gamma(D_t,\\mathcal O_{D_t})=d$, with $\\deg=\\chi(-)-\\chi(\\mathcal O)$ of [def-pc-degree-line-bundle]. Isomorphic invertible modules have the same Euler characteristic, so by step 3 and [def-pd-fibrewise-degree]\n$$\\deg_{H_d}(\\mathcal O(D_d))(t)=\\deg_{C_{\\kappa(t)}}(\\mathcal O(D_d)_t)=\\deg\\mathcal O_{C_{\\kappa(t)}}(D_t)=d$$\nfor every $t\\in H_d$.",
+   "uses": [
+    "lem-pc-dim-base-change",
+    "lem-pc-degree-base-change",
+    "def-pc-degree-line-bundle",
+    "def-pd-fibrewise-degree"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/pic.tex",
+    "place": "Tag 0BA0 proof, first paragraph: Pic^d consists of the L with chi(X_t, L_t) = d + 1 - g, i.e. fibre degree d; the degree of O(D) for D of degree d"
+   }
+  },
+  {
+   "text": "*Definition of $\\gamma_d$.* The isomorphism class $[\\mathcal O(D_d)]\\in\\operatorname{Pic}(C_{H_d})$ is an element of the Picard presheaf at $H_d$ [def-pc-picard-presheaf]; let $c\\in\\operatorname{Pic}_{C/k}(H_d)$ be its image under the sheafification map [def-pc-picard-functor]. The degree of $c$ [def-pd-degree-morphism], computed with the trivial covering $\\{\\mathrm{id}_{H_d}\\}$ and the representative $\\mathcal O(D_d)$, is the function $t\\mapsto\\deg_{H_d}(\\mathcal O(D_d))(t)$, identically $d$ by step 4; so $c\\in\\operatorname{Pic}^d_{C/k}(H_d)$. With $\\psi:\\operatorname{Pic}^d_{C/k}\\xrightarrow{\\sim}h_{P_d}$ the representing isomorphism [def-pc-representable-functor], put $\\gamma_d:=\\psi_{H_d}(c)\\in\\operatorname{Hom}_k(H_d,P_d)$. This is the morphism of clause 2; equivalently, by the Yoneda lemma [lem-pc-yoneda], $\\gamma_d$ is the morphism $h_{H_d}\\to h_{P_d}$ given by $\\psi\\circ\\tau\\circ\\varphi^{-1}$, where $\\tau:h_{H_d}\\to\\operatorname{Pic}^d_{C/k}$ is the transformation corresponding to $c$.",
+   "uses": [
+    "def-pc-picard-presheaf",
+    "def-pc-picard-functor",
+    "def-pd-degree-morphism",
+    "def-pc-representable-functor",
+    "lem-pc-yoneda"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/pic.tex",
+    "place": "Tag 0BA0 proof, second paragraph: 'There is a morphism gamma_d ... coming from the invertible sheaf O(D_univ) on Hilb^d x_k X (Remark 0B9J) by the Yoneda lemma (Categories, Lemma 001P)'"
+   }
+  },
+  {
+   "text": "*The $K$-point $x$ and its divisor.* Let $K/k$ be a field extension and $x:\\operatorname{Spec}K\\to H_d$ a $k$-morphism. By the Yoneda lemma [lem-pc-yoneda], the natural isomorphism $\\varphi$ is determined by $D_d=\\varphi_{H_d}(\\mathrm{id})$: $\\varphi_{\\operatorname{Spec}K}(x)=\\varphi_{\\operatorname{Spec}K}(\\mathrm{id}_{H_d}\\circ x)=\\operatorname{Hilb}^d_{C/k}(x)(D_d)$, and the action of the Hilbert functor [def-pc-hilb-functor] on the morphism $x$ is base change, so this is $D:=D_d\\times_{H_d}\\operatorname{Spec}K\\subset C_K$; being an element of $\\operatorname{Hilb}^d_{C/k}(\\operatorname{Spec}K)$, it is a closed subscheme finite locally free of degree $d$ over $K$. Applying [lem-pc-recd-pullback] as in step 3 with $g=x$ (allowed by steps 1 and 2): $D$ is a relative effective Cartier divisor on $C_K/K$, hence an effective Cartier divisor on $C_K$ [def-pc-relative-effective-cartier], and\n$$\\mathcal O_{C_K}(D)\\cong x_C^*\\mathcal O(D_d),$$\nwhere $x_C:C_K\\to C_{H_d}$ is the base change of $x$ and $x_C^*$ the pullback of modules [def-pc-module-pullback].",
+   "uses": [
+    "lem-pc-yoneda",
+    "def-pc-hilb-functor",
+    "lem-pc-recd-pullback",
+    "def-pc-relative-effective-cartier",
+    "def-pc-module-pullback"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/pic.tex",
+    "place": "Remark 0B9J, last sentence (restriction of O(D_univ) to the fibre over the point [D] is O(D)), for a K-point; Proposition 0B9I (2) 'Part (2) follows from the definitions'"
+   }
+  },
+  {
+   "text": "*Clause 3.* By naturality of $\\psi$ applied to $x$: $\\gamma_d\\circ x=h_{P_d}(x)(\\gamma_d)=h_{P_d}(x)(\\psi_{H_d}(c))=\\psi_{\\operatorname{Spec}K}\\bigl(\\operatorname{Pic}^d_{C/k}(x)(c)\\bigr)$. The restriction map of the Picard presheaf along $x$ is pullback along $x_C$ [def-pc-picard-presheaf, def-pc-module-pullback] and the sheafification map is natural [def-pc-picard-functor], so $\\operatorname{Pic}^d_{C/k}(x)(c)$ is the image in $\\operatorname{Pic}_{C/k}(\\operatorname{Spec}K)$ of $[x_C^*\\mathcal O(D_d)]=[\\mathcal O_{C_K}(D)]$ (step 6). Hence the $K$-point $\\gamma_d\\circ x$ of $P_d$ corresponds under $\\psi$ to the class of $\\mathcal O_{C_K}(D)$ in $\\operatorname{Pic}^d_{C/k}(\\operatorname{Spec}K)$, where $D$ is the divisor corresponding to $x$.",
+   "uses": [
+    "def-pc-picard-presheaf",
+    "def-pc-module-pullback",
+    "def-pc-picard-functor"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/pic.tex",
+    "place": "Tag 0BA0 proof, second paragraph (gamma_d by the Yoneda lemma) with Remark 0B9J, last sentence"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-base-change",
+  "def-pc-smooth-projective-curve",
+  "lem-sc-curve-base-change-relative-dimension-one",
+  "lem-pc-smooth-flat",
+  "lem-pc-projective-proper",
+  "lem-pc-proper-base-change",
+  "def-weil-proper-morphism",
+  "def-weil-scheme-morphism-properties",
+  "def-pc-representable-functor",
+  "def-pc-hilb-functor",
+  "def-pc-finite-locally-free",
+  "lem-pc-cartier-criterion",
+  "def-pc-relative-effective-cartier",
+  "def-pc-divisor-line-bundle",
+  "lem-pc-divisor-line-bundle-invertible",
+  "def-pc-field-extension",
+  "def-pc-fibre-product",
+  "def-pd-fibrewise-degree",
+  "lem-pc-recd-pullback",
+  "lem-pc-dim-base-change",
+  "lem-pc-degree-base-change",
+  "def-pc-degree-line-bundle",
+  "def-pc-picard-presheaf",
+  "def-pc-picard-functor",
+  "def-pd-degree-morphism",
+  "lem-pc-yoneda",
+  "def-pc-module-pullback"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/pic.tex",
+  "place": "Tag 0BA0 (lemma-picard-pieces) (4) and its proof, second paragraph; Remark 0B9J (remark-universal-object-hilb-d); Lemma 0B9D (lemma-divisors-on-curves) (1)=>(2); Yoneda, Categories Lemma 001P"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -56,7 +201,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "worker",
@@ -72,5 +217,13 @@
   }
  },
  "chapter": "sec-picard-framework",
- "unit": "sk-prop-jacobian"
+ "unit": "sk-prop-jacobian",
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "lem-sc-hilb-to-pic-morphism",
+  "worker": "stage1",
+  "summary": "Split following Stacks 0BA0 (4) and the second paragraph of its proof (gamma_d from O(D_univ) by Yoneda), Remark 0B9J and Lemma 0B9D. Seven steps: (1) C_T -> T smooth of relative dimension 1, flat, proper, of finite presentation (new unsplit node for the relative-dimension claim, which the imported Hilbert nodes took as 'standard'); (2) clause 1 from 0B9D (1)=>(2) and the invertibility of O(D); (3) the fibre of O(D_d) at t is O(D_t) by the base-change lemma lem-pc-recd-pullback, D_t of length d by the definition of degree d; (4) clause 2 from deg O(D) = dim Gamma(O_D) (lem-pc-degree-base-change (2)) on the 1-dimensional proper C_{kappa(t)}; (5) gamma_d defined from the class via the representing isomorphism of Pic^d; (6)-(7) clause 3 by Yoneda for the Hilbert functor (x corresponds to D_d x_{H_d} Spec K) and naturality of the Pic^d isomorphism. Statement unchanged; stmt_deps gained def-pc-relative-effective-cartier, def-pc-finite-locally-free, def-pc-base-change, def-sc-effective-cartier-divisor, which the statement uses. lem-pc-universal-divisor (Lean-closed) was not cited: its node statement covers only degree d+1 >= 1, the scheme underline Hilb, and k-rational points, while the item needs every d >= 0, any representing H_d, and K-points; its Lean declaration isRelativeEffectiveCartier_universal_hilbertPresheaf does cover clauses 1 and the pullback part of step 6 in full generality. No slopmaster2 declaration constructs gamma_d.",
+  "blueprint": "thm-sc-jacobian-representability, proof step (4) 'Connectedness' (via lem-sc-picg-geometrically-integral): the morphism Hilb^g -> Pic^g, D -> O_C(D); unit sk-prop-jacobian step 4 'The universal divisor of [sk-thm-picard-hilb-curves] (3) ... defines alpha: Hilb^g -> Pic^g, D -> O_C(D)': steps 1-2 realize 'the universal divisor', steps 3-5 'defines alpha into Pic^g', steps 6-7 'D -> O_C(D)' on points."
+ },
+ "reviewed": "2026-10-10 L: 7 steps along 0BA0 (4) checked (C_T -> T smooth of relative dimension 1 by the new node, flat, lfp, proper; D_d a relative effective Cartier divisor by the Cartier criterion, O(D_d) invertible; fibre at t and dim Gamma(O_{D_t}) = d; fibrewise degree d by the degree base-change node; gamma_d from the class via sheafification and the representing isomorphism; Yoneda and pullback of D_d for a K-point; naturality). stmt_deps completed. New unsplit node lem-sc-curve-base-change-relative-dimension-one (02NK with 02FY/01VB/0A21; Mathlib candidate smoothOfRelativeDimension_isStableUnderBaseChange recorded, not a leaf by B8). LeanSearch down."
 }
