@@ -1344,3 +1344,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 11:48 L: accepted lem-weil-pbc-cyclic-extension-flat-descent (05EG, 9 steps; new node: the cocycle description of extensions of A/J by P).
 - 11:49 L: accepted lem-weil-pbc-sets-finite-pushforward-stalk (03QP (1) for sets, 10 steps; new nodes 03Q9, 04GH, 03QO for sets and a Mathlib leaf; 1 tool use).
 - 2026-10-10, delivery of K1: lem-weil-pbc-koszul-differential-square-zero merged from deliver/K1/lem-weil-pbc-koszul-differential-square-zero (1 commit(s), 0 new node(s), spot-checked by L: L: D^2 = 0 by the recursion on wedge monomials (D^2(v wedge x) = v wedge D^2(x)), then by linearity; 0 new); claim closed
+- 11:49 L: merged K1 lem-weil-pbc-koszul-differential-square-zero (0 new).
