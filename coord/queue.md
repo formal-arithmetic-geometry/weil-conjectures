@@ -1,8 +1,8 @@
 # Work queue
 
-856 items; claim with `tools/claim.py next <group> [--stage N]`.
+858 items; claim with `tools/claim.py next <group> [--stage N]`.
 
-## Stage 1: nodes to split (367)
+## Stage 1: nodes to split (369)
 
 | node | distance to a target | Lean state on the done branch |
 |---|---|---|
@@ -26,6 +26,10 @@
 | `lem-weil-pbc-triangular-change-of-basis` | 1016 | none |
 | `lem-weil-pbc-dim-one-residue-field-extensions-finite` | 1018 | none |
 | `lem-weil-pbc-double-complex-cokernel-homology-iso` | 1018 | none |
+| `def-weil-pbc-double-complex-zigzag-module` | 1019 | none |
+| `lem-weil-pbc-double-complex-row-cycle-lifts-to-zigzag` | 1019 | none |
+| `lem-weil-pbc-double-complex-zigzag-to-row-cokernel-map` | 1019 | none |
+| `lem-weil-pbc-double-complex-zigzag-trivial-if-row-boundary` | 1019 | none |
 | `lem-weil-pbc-injective-acyclicity-bounded-below` | 2002 | sorry_here |
 | `lem-weil-pbc-property-implies-acyclicity` | 2003 | none |
 | `lem-weil-pbc-qcqs-higher-direct-image` | 2003 | none |
@@ -47,14 +51,12 @@
 | `prop-weil-pbc-kinjective-resolutions-exist` | 3004 | none |
 | `def-galois-fibre-functor` | 3005 | none |
 | `lemma-weil-pbc-finite-hypercover-descent` | 3005 | none |
-| `def-weil-pbc-finite-split-hypercover` | 3006 | none |
 | `lem-galois-aut-profinite` | 3006 | none |
 | `lem-galois-inverse-image-representable` | 3006 | none |
 | `lem-sc-flat-base-change-coherent` | 3006 | sorry_here |
 | `lem-weil-pbc-hypercover-free-resolution` | 3006 | none |
 | `def-sc-divisor` | 3007 | none |
 | `def-weil-pbc-semi-representable-object` | 3007 | none |
-| `def-weil-pbc-simplicial-hom-object` | 3007 | none |
 | `lem-galois-finite-etale-connected-object` | 3007 | none |
 | `lem-galois-transitive` | 3007 | none |
 | `lem-sc-etale-affine-qcoherent` | 3007 | none |
@@ -868,7 +870,7 @@
 | `lem-weil-pbc-p1-field-dimension-one` | 4 | state |
 | `lem-weil-pbc-projective-space-zero-isomorphism` | 4 | state |
 
-Not open yet: 385 nodes that wait for stage 1, 908 nodes that wait for a statement dependency.
+Not open yet: 387 nodes that wait for stage 1, 910 nodes that wait for a statement dependency.
 
 ## Stage 3: modules to prove (0)
 
