@@ -40,9 +40,10 @@
 | `thm-sp-spectral-object-yields` | 6006 | none |
 | `lem-sp-cartan-eilenberg-double-complex-homotopy` | 6007 | none |
 | `lem-sc-picard-diagonal-locally-closed` | 6012 | none |
-| `lem-sc-picard-locus-closed` | 6012 | none |
 | `lem-sc-picard-product-open` | 6012 | none |
-| `lem-sc-proper-flat-global-sections` | 6012 | none |
+| `lem-sc-picard-locus-closed-valuation-criterion` | 6013 | none |
+| `lem-sc-picard-locus-closed-valuation-triviality` | 6013 | none |
+| `lem-sc-proper-flat-global-sections-criterion` | 6013 | none |
 | `pqf-lem-serre-criterion` | 6013 | none |
 | `lem-sc-base-change-curve` | - | none |
 | `lem-pc-coherent-hi` | - | sorry_here |
@@ -82,7 +83,6 @@
 | `lem-pc-projective-curve-finite-projection` | - | rests_on_sorry |
 | `lem-sc-p1-coherent-finite` | - | rests_on_sorry |
 | `def-exc-etale-algebra-lift` | - | none |
-| `lem-exc-etale-jacobian-presentation` | - | none |
 | `lem-pc-projective-coordinate-model` | - | sorry_here |
 | `def-exc-jacobian-presentation` | - | none |
 | `def-pur-hom-complex` | - | none |
@@ -887,7 +887,7 @@
 | `lem-weil-pbc-projective-space-zero-isomorphism` | 4 | state |
 | `def-nagata-fixed-base-separated-stage` | 6 | state |
 
-Not open yet: 1625 nodes that wait for a statement dependency, 121 nodes that wait for stage 1.
+Not open yet: 1628 nodes that wait for a statement dependency, 121 nodes that wait for stage 1.
 
 ## Stage 3: modules to prove (0)
 
