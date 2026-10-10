@@ -4,7 +4,7 @@
   "is": null,
   "from": {
    "node": "lem-sc-finite-duality",
-   "place": "Tag 0AA8 case (1): algebraic RHom base change for perfect Rf_*M",
+   "place": "Tag 0AA8 proof, using Tag 0AA7 (label perfect-lemma-affine-morphism-and-hom-out-of-perfect), clause (1)",
    "via": [
     "lem-sc-proper-flat-right-adjoint-affine-basechange"
    ]
@@ -13,19 +13,82 @@
  },
  "kind": "statement",
  "title": "RHom base change for a perfect complex",
- "statement": "Let A\\to A' be a morphism of commutative rings, let E be a perfect complex of A-modules [def-pc-perfect-complex], and let K be any complex of A-modules [def-pc-derived-rhom-algebra-module]. The canonical map A'\\otimes_A^L RHom_A(E,K)\\to RHom_{A'}(A'\\otimes_A^L E,A'\\otimes_A^L K) is an isomorphism [def-pc-derived-pullback].",
+ "statement": "Let A\\to A' be a morphism of commutative rings. Regard complexes of A-modules (resp. A'-modules) as complexes of modules over the ringed site with one object and ring A (resp. A'), so that RHom_A, RHom_{A'} denote the derived Hom of [def-pur-derived-internal-hom] for these ringed sites and A'\\otimes_A^L- the derived change of rings of [lem-pur-derived-change-of-rings], computed by K-flat resolutions. Let E be a perfect complex of A-modules, i.e. E is isomorphic in D(A) to a bounded complex of finite projective A-modules (equivalently \\widetilde E is perfect on Spec(A) in the sense of [def-pc-perfect-complex], by [lem-pc-perfect-affine-bounded-projective]), and let K be any complex of A-modules. The canonical map A'\\otimes_A^L RHom_A(E,K)\\to RHom_{A'}(A'\\otimes_A^L E,A'\\otimes_A^L K), namely the A'-linear extension of the A-linear map RHom_A(E,K)\\to RHom_{A'}(A'\\otimes_A^L E,A'\\otimes_A^L K) induced by the functor A'\\otimes_A^L-, is an isomorphism in D(A').",
  "source": {
   "document": "literature/stacks-project/more-algebra.tex",
   "place": "RHom base-change lemma for a perfect complex, clause (1)"
  },
  "stmt_deps": [
   "def-pc-perfect-complex",
-  "def-pc-derived-pullback",
-  "def-pc-derived-rhom-algebra-module"
+  "lem-pc-perfect-affine-bounded-projective",
+  "def-pur-derived-internal-hom",
+  "lem-pur-derived-change-of-rings"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Choose a bounded complex P^\\bullet of finite projective A-modules representing E (the definition in the statement). Choose a K-flat resolution Q^\\bullet\\to K [lem-pc-kflat-resolution, def-pc-kflat-complex], and the K-injective resolution Q^\\bullet\\to I^\\bullet used in [def-pur-derived-internal-hom]. A bounded complex is bounded above and its terms are projective, so [lem-sc-bounded-above-projective-kprojective] makes P^\\bullet K-projective; applying Hom_A^\\bullet(P^\\bullet,-) to the acyclic cone of Q^\\bullet\\to I^\\bullet shows that Hom_A^\\bullet(P^\\bullet,Q^\\bullet)\\to Hom_A^\\bullet(P^\\bullet,I^\\bullet) is a quasi-isomorphism, so Hom_A^\\bullet(P^\\bullet,Q^\\bullet) represents RHom_A(E,K) [def-pur-derived-internal-hom].",
+   "uses": [
+    "lem-pc-kflat-resolution",
+    "def-pc-kflat-complex",
+    "lem-sc-bounded-above-projective-kprojective",
+    "def-pur-derived-internal-hom"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Lemma 0A6A (label lemma-base-change-RHom), map (equation-base-change-RHom), clause (1), bounded finite-projective model"
+   }
+  },
+  {
+   "text": "For a bounded finite-projective P^\\bullet, each degree of Hom_A^\\bullet(P^\\bullet,Q^\\bullet) is a finite product of terms Hom_A(P^i,Q^{i+n}). For every finite projective P^i, scalar extension gives the canonical isomorphism A'\\otimes_A Hom_A(P^i,Q^{i+n}) \\cong Hom_{A'}(A'\\otimes_A P^i,A'\\otimes_A Q^{i+n}); these degreewise isomorphisms commute with the differentials because they are induced by the same evaluation maps. Thus tensoring the Hom complex with A' identifies it with the Hom complex of A'\\otimes_A P^\\bullet and A'\\otimes_A Q^\\bullet. This is the finite-projective tensor-Hom calculation, including the zero and finite-free summand cases, written directly from the definitions.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Lemma 0A6A (label lemma-base-change-RHom), map (equation-base-change-RHom), clause (1), finite-projective tensor-Hom calculation"
+   }
+  },
+  {
+   "text": "Hom_A^\\bullet(P^\\bullet,Q^\\bullet) is K-flat, so A'\\otimes_A Hom_A^\\bullet(P^\\bullet,Q^\\bullet) represents A'\\otimes_A^L RHom_A(E,K) [lem-pur-derived-change-of-rings]. Indeed, for finite projective P^i the natural map Hom_A(P^i,A)\\otimes_A M\\to Hom_A(P^i,M) is an isomorphism (true for A^n, hence for summands), so Hom_A^\\bullet(P^\\bullet,Q^\\bullet)\\cong Tot(P^\\vee\\otimes_A Q^\\bullet) with P^\\vee=Hom_A^\\bullet(P^\\bullet,A) a bounded complex of finite projective, hence flat, A-modules. For an acyclic F^\\bullet, Tot(F^\\bullet\\otimes Tot(P^\\vee\\otimes Q^\\bullet))\\cong Tot(Tot(F^\\bullet\\otimes P^\\vee)\\otimes Q^\\bullet); Tot(F^\\bullet\\otimes P^\\vee) is acyclic by [lem-pc-module-bounded-flat-kflat], hence so is the whole since Q^\\bullet is K-flat [def-pc-kflat-complex].",
+   "uses": [
+    "lem-pur-derived-change-of-rings",
+    "lem-pc-module-bounded-flat-kflat",
+    "def-pc-kflat-complex"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Lemma 0A6A (label lemma-base-change-RHom), map (equation-base-change-RHom), clause (1), K-flatness of the Hom complex"
+   }
+  },
+  {
+   "text": "By [lem-pur-derived-change-of-rings], A'\\otimes_A Q^\\bullet represents A'\\otimes_A^L K and A'\\otimes_A P^\\bullet (bounded, flat terms, K-flat by [lem-pc-module-bounded-flat-kflat]) represents A'\\otimes_A^L E. Each A'\\otimes_A P^i is finite projective over A' (a direct summand of a finite free module after scalar extension), so by [lem-sc-bounded-above-projective-kprojective] and the argument of Step 1 over A', Hom_{A'}^\\bullet(A'\\otimes_A P^\\bullet,A'\\otimes_A Q^\\bullet) represents RHom_{A'}(A'\\otimes_A^L E,A'\\otimes_A^L K) [def-pur-derived-internal-hom]. On these representatives the map induced by the functor A'\\otimes_A^L- (computed on the K-flat complexes P^\\bullet, Q^\\bullet by the termwise functor A'\\otimes_A-) is \\varphi\\mapsto 1\\otimes\\varphi, Hom_A^\\bullet(P^\\bullet,Q^\\bullet)\\to Hom_{A'}^\\bullet(A'\\otimes_AP^\\bullet,A'\\otimes_AQ^\\bullet), and its A'-linear extension, on the representative of Step 3, is the chain map a'\\otimes\\varphi\\mapsto a'(1\\otimes\\varphi), which is the isomorphism of Step 2. Hence the canonical map is an isomorphism.",
+   "uses": [
+    "lem-pur-derived-change-of-rings",
+    "lem-pc-module-bounded-flat-kflat",
+    "lem-sc-bounded-above-projective-kprojective",
+    "def-pur-derived-internal-hom"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Lemma 0A6A (label lemma-base-change-RHom), map (equation-base-change-RHom), clause (1), conclusion"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-kflat-resolution",
+  "def-pc-kflat-complex",
+  "lem-sc-bounded-above-projective-kprojective",
+  "def-pur-derived-internal-hom",
+  "lem-pur-derived-change-of-rings",
+  "lem-pc-module-bounded-flat-kflat"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/perfect.tex",
+  "place": "Tag 0AA7, label perfect-lemma-affine-morphism-and-hom-out-of-perfect, clause (1)"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -50,12 +113,33 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-sc-proper-flat-right-adjoint-affine-basechange",
   "by": "worker",
   "date": "2026-10-10"
  },
  "chapter": "sec-picard-framework",
- "unit": "sk-thm-picard-duality"
+ "unit": "sk-thm-picard-duality",
+ "split_report": {
+  "date": "2026-10-11",
+  "item": "lem-pc-base-change-rhom-perfect",
+  "worker": "stage1",
+  "summary": "Checked Tag 0AA8 clause (1) and the affine perfect-complex interpretation. No sorry-free project declaration or blueprint duplicate states this item. The proof uses a bounded finite-projective representative of a perfect complex, K-projectivity to compute derived Hom, and the elementary finite-projective tensor-Hom calculation after scalar extension; no subordinate node was created because the calculation is a few-line step and a new node would restate the item.",
+  "blueprint": "Realizes the ancestor lem-sc-finite-duality proof place 'Tag 0AA8 case (1): algebraic RHom base change for perfect Rf_*M' by the finite-projective Hom-complex calculation and scalar-extension identification.",
+  "tool_uses": []
+ },
+ "tool_uses": [
+  "lem-pc-kflat-resolution",
+  "lem-pur-derived-change-of-rings",
+  "lem-pc-module-bounded-flat-kflat"
+ ],
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-bcr2734",
+  "group": "M1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-bcr2734 (reviewer sub-agent of L); spot-checked: Math checked (bounded f.g.-projective model, K-projectivity, finite tensor-Hom; citer lem-sc-proper-flat-right-adjoint-affine-basechange uses it for perfect Rf_*M, C4 ok). Tool uses (generic, C7/C8): lem-pc-kflat-resolution, lem-pur-derived-change-of-rings, lem-pc-module-bounded-flat-kflat. FIX more, RETURN less: (1) C4: RHom_A(E,K) cited def-pc-derived-rhom-algebra-module, which defines RHom(B,-) for a quasi-coherent algebra B in the first slot, not RHom of a complex E; now def-pur-derived-internal-hom on the one-object ringed site, derived tensor via lem-pur-derived-change-of-rings, perfect = bounded finite projective model with lem-pc-perfect-affine-bounded-projective (E7: statement citations changed for this reason, mathematics unchanged). (2) C1: LHS A'(x)^L RHom was taken as underived A'(x)Hom(P,Q) without showing Hom(P,Q) K-flat; added Step 3 (Hom(P,Q)=Tot(P^vee(x)Q), lem-pc-module-bounded-flat-kflat + K-flat Q). (3) B10: 'canonical map' undefined and its identification with the Step 2 chain map asserted; defined in the statement as the A'-linear extension of the map induced by A'(x)^L-, identified on representatives in Step 4. K-flat resolution now cited from lem-pc-kflat-resolution; source place made precise (more-algebra Lemma 0A6A clause (1)). Second reading missed (1)-(3).; 1 file(s) fixed by the reviewer"
+ }
 }
