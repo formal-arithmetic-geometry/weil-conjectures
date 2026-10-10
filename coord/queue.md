@@ -2,7 +2,7 @@
 
 888 items; claim with `tools/claim.py next <group> [--stage N]`.
 
-## Stage 1: nodes to split (326)
+## Stage 1: nodes to split (325)
 
 | node | distance to a target | Lean state on the done branch |
 |---|---|---|
@@ -42,7 +42,6 @@
 | `lem-weil-pbc-ringed-site-injective-module-cech-acyclic` | 3011 | none |
 | `lem-exc-rg-open-stabilizer-adjoint` | 3012 | none |
 | `lem-galois-descent-datum-diagonal-identity` | 3012 | none |
-| `lem-pc-affine-finite-type-algebra` | 3012 | none |
 | `lem-pc-base-change-product` | 3012 | none |
 | `lem-pc-clopen-smooth-proper-curve` | 3012 | none |
 | `lem-pc-fpqc-descend-closed-immersion` | 3012 | none |
@@ -59,7 +58,6 @@
 | `lem-sc-local-section-quotient-finite-free` | 3013 | none |
 | `lem-sc-product-irreducible-components-bijection` | 3013 | none |
 | `lem-sc-proper-upper-shriek-composition` | 3013 | none |
-| `lem-sc-smooth-proper-curve-dualizing` | 3013 | none |
 | `lem-sc-p1-graded-kernel-finite` | 3014 | none |
 | `lem-sc-p1-graded-nakayama-free` | 3014 | none |
 | `lem-sc-p1-koszul-resolution` | 3014 | none |
@@ -68,6 +66,7 @@
 | `lem-sc-p1-serre-section-module-comparison` | 3014 | none |
 | `lem-sc-p1-serre-section-module-finite` | 3014 | none |
 | `lem-sc-p1-tor-dimension-shifting` | 3014 | none |
+| `lem-sc-smooth-proper-relative-dualizing-general` | 3014 | none |
 | `lem-sc-brauer-zero` | 4005 | rests_on_sorry |
 | `lem-sc-affine-open-proper` | 4006 | sorry_here |
 | `lem-pc-genus-agrees-sc` | 4007 | rests_on_sorry |
@@ -333,7 +332,7 @@
 | `def-exc-jacobian-presentation` | - | none |
 | `lem-zl-noether-normalization-dimension` | - | none |
 
-## Stage 2: nodes to state (562)
+## Stage 2: nodes to state (563)
 
 | node | distance to Mathlib | kind |
 |---|---|---|
@@ -391,6 +390,7 @@
 | `lem-galois-fpqc-morphisms-descend` | 1 | state |
 | `lem-galois-fpqc-singleton-affine-refinement` | 1 | state |
 | `lem-pc-affine-cech-complex` | 1 | state |
+| `lem-pc-affine-finite-type-algebra` | 1 | state |
 | `lem-pc-alg-closed-reduced-algebra-no-idempotents-dim-one` | 1 | state |
 | `lem-pc-ample-affine-loci-criterion` | 1 | state |
 | `lem-pc-cech-exact` | 1 | state |
@@ -900,7 +900,7 @@
 | `lem-weil-pbc-p1-field-dimension-one` | 4 | state |
 | `lem-weil-pbc-projective-space-zero-isomorphism` | 4 | state |
 
-Not open yet: 345 nodes that wait for stage 1, 1096 nodes that wait for a statement dependency.
+Not open yet: 344 nodes that wait for stage 1, 1097 nodes that wait for a statement dependency.
 
 ## Stage 3: modules to prove (0)
 
