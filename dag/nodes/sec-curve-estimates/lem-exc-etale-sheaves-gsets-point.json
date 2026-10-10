@@ -2,9 +2,11 @@
  "id": "lem-exc-etale-sheaves-gsets-point",
  "kind": "statement",
  "title": "Etale sheaves of sets on a field and discrete Galois sets",
- "statement": "Let $K$ be a field [def-pc-field-extension], $K^{\\rm sep}$ a separable closure, $G=\\operatorname{Gal}(K^{\\rm sep}/K)$ with its Krull topology, and $\\bar s:\\operatorname{Spec}K^{\\rm sep}\\to\\operatorname{Spec}K$ the corresponding geometric point. (i) For a sheaf of sets $F$ on the small etale site [def-weil-pbc-etale-site] of $\\operatorname{Spec}K$, the group $G$ acts on the stalk $F_{\\bar s}$ [def-weil-pbc-geometric-stalks] through its action on $\\operatorname{Spec}K^{\\rm sep}$ over $\\operatorname{Spec}K$, and every element of $F_{\\bar s}$ has an open stabilizer. The functor $F\\mapsto F_{\\bar s}$ is an equivalence from the category of sheaves of sets on the small etale site of $\\operatorname{Spec}K$ to the category of sets with a $G$-action for which every stabilizer is open. (ii) For an etale $K$-scheme $X$ [def-weil-etale-morphism] in the small etale site, the stalk at $\\bar s$ of the sheaf $h_X:U\\mapsto\\operatorname{Hom}_K(U,X)$ is the $G$-set $\\operatorname{Hom}_K(\\operatorname{Spec}K^{\\rm sep},X)$.",
+ "statement": "Let $K$ be a field [def-pc-field-extension], $K^{\\rm sep}$ a separable closure [def-kun-separably-closed] embedded in an algebraic closure $\\Omega$ of $K$, $G=\\operatorname{Gal}(K^{\\rm sep}/K)$ with its Krull topology, and $\\bar s:\\operatorname{Spec}\\Omega\\to\\operatorname{Spec}K$ the corresponding geometric point [def-weil-geometric-point]. (i) For a sheaf of sets $F$ on the small etale site [def-weil-pbc-etale-site] of $\\operatorname{Spec}K$, the group $G$ acts on the stalk $F_{\\bar s}$ [def-weil-pbc-geometric-stalks] through its action on pointed etale neighbourhoods, and every element of $F_{\\bar s}$ has an open stabilizer. The functor $F\\mapsto F_{\\bar s}$ is an equivalence from the category of sheaves of sets on the small etale site of $\\operatorname{Spec}K$ to the category of sets with a $G$-action for which every stabilizer is open. (ii) For an etale $K$-scheme $X$ [def-weil-etale-morphism] in the small etale site, the stalk at $\\bar s$ of the sheaf $h_X:U\\mapsto\\operatorname{Hom}_K(U,X)$ is naturally the $G$-set $\\operatorname{Hom}_K(\\operatorname{Spec}K^{\\rm sep},X)$.",
  "stmt_deps": [
   "def-pc-field-extension",
+  "def-kun-separably-closed",
+  "def-weil-geometric-point",
   "def-weil-pbc-etale-site",
   "def-weil-pbc-geometric-stalks",
   "def-weil-etale-morphism"
@@ -13,9 +15,72 @@
   "document": "literature/stacks-project/etale-cohomology.tex",
   "place": "Tag 03QT, Theorem theorem-equivalence-sheaves-point and its proof (the inverse U -> Mor_K(U,X) with stalk Mor_K(Spec K^sep, X)); the G-action on stalks in the paragraph before it"
  },
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Represent an element of $F_{\\bar s}$ by a triple $(U,\\bar u,t)$ as in [def-weil-pbc-geometric-stalks]. For $\\sigma\\in G$, change the lift to $\\bar u\\circ\\operatorname{Spec}(\\tilde\\sigma)$, where $\\tilde\\sigma\\in\\operatorname{Aut}(\\Omega/K)$ extends $\\sigma$. This is independent of the extension: each point of the etale $K$-scheme $U$ has finite separable residue field by [lem-weil-pbc-etale-fibre-discrete-separable-points], so an automorphism fixing $K^{\\rm sep}$ fixes every such lift. The action is functorial on triples; the stabilizer of this element contains $\\operatorname{Gal}(K^{\\rm sep}/L)$ for the finite separable image $L\\subseteq K^{\\rm sep}$ of its residue field, hence is open.",
+   "uses": [
+    "def-weil-pbc-geometric-stalks",
+    "lem-weil-pbc-etale-fibre-discrete-separable-points"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 03QW, section-galois-action-stalks, action formula and paragraph before Tag 03QT"
+   }
+  },
+  {
+   "text": "For each etale $K$-scheme $X$, [lem-weil-pbc-small-etale-representable-presheaf-sheaf] makes $h_X$ a sheaf. By [lem-galois-stalk-representable], evaluation on a pointed neighbourhood identifies its stalk with $\\operatorname{Hom}_K(\\operatorname{Spec}\\Omega,X)$. By [lem-weil-pbc-etale-fibre-discrete-separable-points], $X$ is a disjoint union of spectra of finite separable extensions of $K$; every $K$-embedding of any such extension in $\\Omega$ lands in $K^{\\rm sep}$. Thus restriction gives a natural bijection with $\\operatorname{Hom}_K(\\operatorname{Spec}K^{\\rm sep},X)$, compatible with the action from step 1. This proves (ii).",
+   "uses": [
+    "lem-weil-pbc-small-etale-representable-presheaf-sheaf",
+    "lem-galois-stalk-representable",
+    "lem-weil-pbc-etale-fibre-discrete-separable-points"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 03QT, theorem-equivalence-sheaves-point, proof, the stalk of the representable sheaf (details omitted)"
+   }
+  },
+  {
+   "text": "Write $M=F_{\\bar s}$. For each finite separable $K\\subseteq L\\subseteq K^{\\rm sep}$, [lem-exc-field-sections-stalk-invariants] identifies $F(\\operatorname{Spec}L)$ with $M^{H_L}$, where $H_L=\\operatorname{Gal}(K^{\\rm sep}/L)$; its compatibility with every $K$-embedding $j:L\\to L'$ identifies restriction with the action of an extension $\\sigma\\in G$ of $j$. Every etale $K$-scheme is a disjoint union of such spectra by [lem-weil-pbc-etale-fibre-discrete-separable-points]; the sheaf property for the covering by components identifies its sections with the product of their section sets. A $G$-equivariant map $M\\to N$ therefore gives, on every etale $K$-scheme, a natural map of sections of the corresponding sheaves. Conversely a sheaf morphism yields its equivariant stalk map, and the section formula makes these constructions inverse. Hence the stalk functor is fully faithful.",
+   "uses": [
+    "lem-exc-field-sections-stalk-invariants",
+    "lem-weil-pbc-etale-fibre-discrete-separable-points"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 03QT, theorem-equivalence-sheaves-point, proof, inverse and omitted full-faithfulness details; Tag 04JM, lemma-global-sections-point, direct proof"
+   }
+  },
+  {
+   "text": "Given any discrete continuous $G$-set $M$, [lem-exc-etale-field-gsets] supplies an etale $K$-scheme $X$ whose Galois fibre $\\operatorname{Hom}_K(\\operatorname{Spec}K^{\\rm sep},X)$ is $M$. By step 2, $h_X$ has stalk $M$. Thus the stalk functor is essentially surjective; combined with step 3 it is an equivalence, completing (i).",
+   "uses": [
+    "lem-exc-etale-field-gsets",
+    "lem-weil-pbc-small-etale-representable-presheaf-sheaf",
+    "lem-galois-stalk-representable",
+    "lem-weil-pbc-etale-fibre-discrete-separable-points"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 03QT, theorem-equivalence-sheaves-point, proof, construction of inverse using Tag 03QR"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-geometric-stalks",
+  "lem-weil-pbc-etale-fibre-discrete-separable-points",
+  "lem-weil-pbc-small-etale-representable-presheaf-sheaf",
+  "lem-galois-stalk-representable",
+  "lem-exc-field-sections-stalk-invariants",
+  "lem-exc-etale-field-gsets"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tags 03QW, 03QT and 04JM, with the details omitted at 03QT supplied here"
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -23,10 +88,17 @@
    "results": "only AffineEtale.sheafEquiv (affine etale vs small etale site); no stalk/G-set equivalence",
    "date": "2026-10-10",
    "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "rg -n 'etaleSheaf|galoisSet|galois.*equiv|Sheaf.*Galois' WeilConjectures/AlgebraicGeometry WeilConjectures/Mathlib and rg in Mathlib/AlgebraicGeometry/Sites",
+   "results": "No equivalence of all set-valued sheaves on a field with discrete Galois sets",
+   "date": "2026-10-10",
+   "verdict": "no match"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "R-fd4",
@@ -51,5 +123,36 @@
   "slopmaster2": {
    "state": "none"
   }
+ },
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "lem-exc-etale-sheaves-gsets-point",
+  "worker": "stage1",
+  "summary": "Corrected the geometric point to have algebraically closed residue field, as required by the project's definition and Stacks Tag 03QT. Split the proof into the Galois action, the representable stalk, full faithfulness from sections over finite separable fields, and essential surjectivity from the etale-scheme/G-set equivalence. The missing direct sections calculation is a separate statement-only node.",
+  "blueprint": "The steps realize the third paragraph of lem-exc-field-discrete-modules: stalk action and representable finite-extension fibre in steps 1-2, sections as H-invariants and full faithfulness in step 3, and the converse construction in step 4.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-etale-fibre-discrete-separable-points",
+    "why": "The general decomposition of an etale fibre into finite separable field spectra supplies the connected components of the field site; no node of this unit states that decomposition."
+   },
+   {
+    "node": "lem-weil-pbc-small-etale-representable-presheaf-sheaf",
+    "why": "The subcanonical property of the small etale site is a general tool; no node of this unit states that representables are sheaves."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-etale-fibre-discrete-separable-points",
+  "lem-weil-pbc-small-etale-representable-presheaf-sheaf",
+  "lem-weil-pbc-etale-fibre-discrete-separable-points",
+  "lem-weil-pbc-small-etale-representable-presheaf-sheaf"
+ ],
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-esp",
+  "group": "G1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-esp (reviewer sub-agent of L); spot-checked: Source Stacks 03QW/03QT/04JM (etale-cohomology.tex). Item statement correction (E7, named in report): the geometric point is now Spec Omega with Omega algebraically closed as def-weil-geometric-point requires (Spec K^sep is not one for imperfect K); conclusion unchanged, agrees with 03QT hypothesis by hypothesis. Step 1: action by changing lifts via an extension of sigma to Aut(Omega/K); well defined because lifts factor through finite separable residue fields (lem-weil-pbc-etale-fibre-discrete-separable-points, applied to U over Spec K); stabilizer contains Gal(K^sep/L), open. Step 2: h_X sheaf (lem-weil-pbc-small-etale-representable-presheaf-sheaf), stalk = Omega-points (lem-galois-stalk-representable), components finite separable so Omega-points = K^sep-points. Step 3: new node lem-exc-field-sections-stalk-invariants plus sheaf condition on component coverings gives full faithfulness; I checked the new statement: the germ map at the lift L in K^sep in Omega is H_L-invariant, bijective by Galois descent (04JM), and the naturality formula for a K-embedding j:L->L' (pullback = germ at lift sigma|_L = sigma.m, lands in M^{H_L'}, independent of sigma) holds with the left action defined by lift iota -> sigma o iota. Step 4: lem-exc-etale-field-gsets plus step 2 gives essential surjectivity. Small cases: K separably closed (G trivial, F(Spec K)=M), L=K, empty X. Tool uses accepted (both generic, sk-thm-p1). No Mathlib/slopmaster2 declaration found (rg of WeilConjectures and Mathlib AlgebraicGeometry for Galois sheaf/stalk). blueprint_refs search 'sections invariants separable': 0. FIX: dag/nodes/sec-curve-estimates/lem-exc-etale-sheaves-gsets-point.json: mathlib_searches: restored the earlier grep entry (AffineEtale.sheafEquiv only) that the delivery had overwritten, keeping the new one after it. Start Sat Oct 10 03:32:54 PM UTC 2026, end Sat Oct 10 03:33:39 PM UTC 2026.; 1 file(s) fixed by the reviewer"
  }
 }
