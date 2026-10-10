@@ -16,9 +16,69 @@
   "document": "literature/stacks-project/cohomology.tex",
   "place": "Cohomology, Lemma 02FQ (cohomology-lemma-torsors-h1) and its proof (the class of a torsor as the boundary of 1 in the pushout extension), with Lemma 02UV (cohomology-lemma-cohomology-and-closed-immersions); naturality implicit in Varieties Lemma 09NY proof"
  },
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Choose for the $G$-torsor $T$ an extension $0\\to G\\to E\\to\\mathbf Z_X\\to0$ whose fibre over $1$ is $T$ [lem-sc-torsor-h1-boundary-representative]. Its class is $\\delta_E(1)$. Push out the extension along $\\varphi:G\\to G'$ [lem-sc-torsor-h1-ext-pushout]. The natural long exact cohomology sequences [def-sc-topological-abelian-cohomology] of the morphism from the original extension to its pushout give $H^1(\\varphi)(\\delta_E(1))=\\delta_{E_{\\varphi}}(1)$; both quotient maps are the identity of $\\mathbf Z_X$.",
+   "uses": [
+    "lem-sc-torsor-h1-boundary-representative",
+    "lem-sc-torsor-h1-ext-pushout",
+    "def-sc-topological-abelian-cohomology"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/cohomology.tex",
+    "place": "Lemma 02FQ, boundary of 1 for the extension and naturality of the cohomology long exact sequence"
+   }
+  },
+  {
+   "text": "The fibre over $1$ of $E_{\\varphi}$ is $T\\wedge^G G'$ [lem-sc-torsor-h1-ext-pushout]. Applying the converse clause of [lem-sc-torsor-h1-boundary-representative] to this extension identifies $\\delta_{E_{\\varphi}}(1)$ with the class of that fibre, proving (1).",
+   "uses": [
+    "lem-sc-torsor-h1-ext-pushout",
+    "lem-sc-torsor-h1-boundary-representative"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/cohomology.tex",
+    "place": "Lemma 02FQ, pushout extension and fibre over 1"
+   }
+  },
+  {
+   "text": "For (2), choose an extension $0\\to F\\to E\\to\\mathbf Z_Z\\to0$ representing $T$ by [lem-sc-torsor-h1-boundary-representative] on $Z$. Its class is $\\delta_E(1)$. Exact direct image and the compatibility of the comparison isomorphism with connecting maps [lem-sc-closed-pushforward-boundary-naturality] send this class to the boundary of $1$ for the pullback along $u:\\mathbf Z_X\\to i_*\\mathbf Z_Z$ of $0\\to i_*F\\to i_*E\\to i_*\\mathbf Z_Z\\to0$. The pullback is required because $i_*\\mathbf Z_Z$ is generally different from $\\mathbf Z_X$.",
+   "uses": [
+    "lem-sc-torsor-h1-boundary-representative",
+    "lem-sc-closed-pushforward-boundary-naturality"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/cohomology.tex",
+    "place": "Lemmas 02FQ and 02UV, connecting map and exact closed direct image"
+   }
+  },
+  {
+   "text": "The fibre over $1$ of that pulled-back extension is $i_*T$ [lem-sc-torsor-h1-ext-pushforward]. By the converse clause of [lem-sc-torsor-h1-boundary-representative] on $X$, its boundary of $1$ is the class of $i_*T$. Combined with Step 3 this proves (2).",
+   "uses": [
+    "lem-sc-torsor-h1-ext-pushforward",
+    "lem-sc-torsor-h1-boundary-representative"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/cohomology.tex",
+    "place": "Lemmas 02FQ and 02UV, fibre of the pullback and torsor class"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sc-torsor-h1-boundary-representative",
+  "lem-sc-torsor-h1-ext-pushout",
+  "def-sc-topological-abelian-cohomology",
+  "lem-sc-closed-pushforward-boundary-naturality",
+  "lem-sc-torsor-h1-ext-pushforward"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Lemmas 02FQ and 02UV; naturality of the boundary construction"
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -29,7 +89,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "R-phr",
@@ -57,5 +117,21 @@
   "slopmaster2": {
    "state": "none"
   }
+ },
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "lem-sc-torsor-h1-functoriality",
+  "worker": "stage1",
+  "summary": "Proved both clauses from a boundary-of-one representative, naturality of the long exact sequence, the pushout fibre calculation, compatibility of closed direct image with connecting maps, and the fibre calculation after pullback along the constant-sheaf unit.",
+  "blueprint": "Realizes the final step of the blueprint ancestor lem-sc-pic-proper-ntorsion proof, where torsor naturality is used implicitly.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-th2",
+  "group": "F1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-th2 (reviewer sub-agent of L); spot-checked: Repaired re-push after the 15:51 return: all five points repaired. (1) ext-pushforward no longer states clause (2): it now states only the direct-image/pullback fibre computation P x_{Z_X,1} * = i_*T. (2)-(3) step 1 no longer uses the proof of lem-sc-torsor-h1 nor the etale-only lem-sc-ext-torsor; Zariski site fixed in every new node. (4) the route is that of Stacks 02FQ (class = delta(1) of an extension with fibre T) and 02UV (exact i_*, comparison compatible with connecting maps): new statement-only nodes lem-sc-torsor-h1-boundary-representative (existence of extension with fibre T, [T]=delta_E(1), converse) and lem-sc-closed-pushforward-boundary-naturality (iso of lem-sc-cohomology-closed-immersion-pushforward commutes with delta; pullback along u:Z_X->i_*Z_Z handled). (5) extension, fibre over 1, pushout, Z_X, contracted product, i_* defined in the statements, TeX. Steps: 1 = boundary-representative + ext-pushout + natural long exact sequence of def-sc-topological-abelian-cohomology (its statement says natural LES) for the morphism (phi, E->E_phi, id_{Z_X}); 2 = ext-pushout fibre T wedge^G G' + converse clause; 3 = boundary-representative on Z + closed-boundary naturality (in particular clause for C=Z_Z and pullback along u), exactness from lem-sc-closed-immersion-pushforward-exact (topological closed inclusion, applies); 4 = ext-pushforward (short exactness of the pulled-back sequence and fibre i_*T) + converse clause on X. Cited statements read: lem-sc-torsor-h1 (Zariski case stated), def-sc-gm-torsor, def-sc-topological-abelian-cohomology, lem-sc-cohomology-closed-immersion-pushforward, lem-sc-closed-immersion-pushforward-exact, def-weil-closed-immersion, def-sc-zariski-site, def-pc-scheme. Small cases checked by hand: fibre of E_phi over 1 is T wedge G' via (t,g')->[(t,g')] (well defined on the G-orbits); fibre of P over 1 on U is the lifts of 1 in E(U cap Z), i.e. i_*T, trivial singleton off Z, locally nonempty so an i_*F-torsor; phi=id and i=id give back E, T. New nodes: three Mathlib search kinds recorded, no match; blueprint_refs search 'torsor boundary' / 'pushout extension' finds no same node, same_as [] stands. The missing created.by/date, merged_into, lean_audit noted in the return are maintainer fields (created filled at merge). No tool_uses. Start Sat Oct 10 03:57:59 PM UTC 2026, end Sat Oct 10 03:58:43 PM UTC 2026."
  }
 }

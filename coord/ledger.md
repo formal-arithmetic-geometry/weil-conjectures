@@ -1889,3 +1889,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 15:58 L: merged deliver/E1/lem-sc-boundary-derivation-square-zero (reviewer FIX+NODE(1); after a return; new nodes: 2)
 - 15:58 L: merged deliver/F1/lem-sc-affine-cap-section-open-algebra (reviewer FIX; first push; new nodes: 0)
 - 15:58 L: merged deliver/E1/lem-sc-closed-subset-qc-ideal (reviewer PASS; first push; new nodes: 0)
+- 15:58 L: merged deliver/F1/lem-sc-torsor-h1-functoriality (reviewer PASS; after a return; new nodes: 4)
