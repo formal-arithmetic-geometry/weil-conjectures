@@ -45,12 +45,12 @@
 | `lem-sc-finite-sheafhom-affine-adjoint` | 3015 | none |
 | `lem-sc-finite-twisted-inverse-bounded-below` | 3015 | none |
 | `lem-sc-smooth-omega-finite-locally-free` | 3015 | none |
-| `lem-sc-smooth-proper-diagonal-conormal-differentials` | 3015 | none |
 | `lem-sc-smooth-proper-diagonal-koszul-dual` | 3015 | none |
 | `lem-sc-smooth-proper-diagonal-koszul-regular` | 3015 | none |
 | `lem-sc-smooth-proper-diagonal-tensor-formula` | 3015 | none |
 | `lem-sc-affine-derived-cohomology` | 3016 | none |
 | `lem-sc-affine-derived-pushforward-conservative` | 3016 | none |
+| `lem-sc-kahler-differentials-diagonal-ideal` | 3016 | none |
 | `lem-sc-p1-section-clearing-denominators-qcqs` | 3016 | none |
 | `lem-sc-p1-section-restriction-s-torsion` | 3016 | none |
 | `lem-sc-smooth-proper-diagonal-basechange-upper-shriek` | 3016 | none |
@@ -929,7 +929,7 @@
 | `lem-weil-pbc-p1-field-dimension-one` | 4 | state |
 | `lem-weil-pbc-projective-space-zero-isomorphism` | 4 | state |
 
-Not open yet: 328 nodes that wait for stage 1, 1269 nodes that wait for a statement dependency.
+Not open yet: 328 nodes that wait for stage 1, 1270 nodes that wait for a statement dependency.
 
 ## Stage 3: modules to prove (0)
 
