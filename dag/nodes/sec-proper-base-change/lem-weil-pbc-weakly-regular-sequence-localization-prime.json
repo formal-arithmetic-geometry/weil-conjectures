@@ -1,0 +1,75 @@
+{
+ "id": "lem-weil-pbc-weakly-regular-sequence-localization-prime",
+ "kind": "statement",
+ "title": "A sequence satisfying the nonzerodivisor conditions inside a prime becomes a regular sequence in the localization at that prime",
+ "statement": "Let $A$ be a commutative ring, $\\mathfrak p\\subset A$ a prime ideal, $r\\ge0$ an integer and $a_1,\\dots,a_r\\in\\mathfrak p$ such that for every $i=1,\\dots,r$ multiplication by $a_i$ on $A/(a_1,\\dots,a_{i-1})$ is injective (condition (1) of [def-weil-pbc-regular-sequence] for the module $A$; for instance $a_1,\\dots,a_r$ a regular sequence in $A$). Let $A_{\\mathfrak p}$ be the localization of $A$ at $\\mathfrak p$ [def-weil-pbc-localization-at-prime]. Then $a_1/1,\\dots,a_r/1$ is a regular sequence in $A_{\\mathfrak p}$ [def-weil-pbc-regular-sequence].",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "No single tag: the case of a localization of Lemma Tag 00LM (lemma-flat-increases-depth, line 16676; there for flat local homomorphisms, which A -> A_p is not unless p is maximal), with flatness of localization Lemma Tag 00HT (lemma-flat-localization, line 9196); used in the item for the passage from k[y]_{m'} to k[y]_{q''} that the proof of Lemma Tag 00SC (lemma-lci, line 35909, last paragraph) leaves implicit. Stated as in Mathlib, RingTheory/Regular/Flat.lean, lines 75-79"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-regular-sequence",
+  "def-weil-pbc-localization-at-prime"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "regular sequence in a ring maps to a regular sequence in the localization at a prime ideal containing it",
+   "results": "RingTheory.Sequence.IsWeaklyRegular.isRegular_of_isLocalization_of_mem, IsWeaklyRegular.of_isLocalizedModule, IsWeaklyRegular.isRegular_of_isLocalizedModule_of_mem, IsWeaklyRegular.of_isLocalization (Mathlib.RingTheory.Regular.Flat), Submonoid.LocalizationMap.map_isRegular, IsRegular.of_faithfullyFlat",
+   "date": "2026-10-10",
+   "verdict": "match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "weakly regular sequence contained in a prime ideal p becomes a regular sequence in the localization R_p",
+   "results": "RingTheory.Sequence.IsWeaklyRegular.isRegular_of_isLocalization_of_mem (Mathlib.RingTheory.Regular.Flat), isRegular_of_isLocalizedModule_of_mem, of_isLocalization, of_isLocalizedModule, IsLocalRing.isRegular_iff_isWeaklyRegular_of_subset_maximalIdeal",
+   "date": "2026-10-10",
+   "verdict": "match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rn 'isRegular_of_isLocalization_of_mem\\|IsWeaklyRegular.of_flat' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib --include=*.lean; sed -n 50,80p RingTheory/Regular/Flat.lean; sed -n 128,150p RingTheory/Regular/RegularSequence.lean",
+   "results": "Flat.lean:75 theorem IsWeaklyRegular.isRegular_of_isLocalization_of_mem; Flat.lean:47 IsWeaklyRegular.of_flat; RegularSequence.lean:135 structure IsWeaklyRegular, :146 structure IsRegular",
+   "date": "2026-10-10",
+   "verdict": "match"
+  },
+  {
+   "tool": "local_search",
+   "query": "RingTheory.Sequence.IsWeaklyRegular.isRegular_of_isLocalization_of_mem (project root ~/weil-conjectures-slopmaster2)",
+   "results": "theorem in .lake/packages/mathlib/Mathlib/RingTheory/Regular/Flat.lean (index unavailable; existence confirmed by sed -n 75p)",
+   "date": "2026-10-10",
+   "verdict": "match"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "RingTheory.Sequence.IsWeaklyRegular.isRegular_of_isLocalization_of_mem",
+  "file": "Mathlib/RingTheory/Regular/Flat.lean",
+  "line": 75,
+  "how": "exact (lines 75-79, variables lines 28 and 50-62): `(S) [CommRing S] [Algebra R S] (p : Ideal R) [p.IsPrime] [IsLocalization.AtPrime S p] {rs : List R} (reg : IsWeaklyRegular R rs) (mem : ∀ r ∈ rs, r ∈ p) : IsRegular S (rs.map (algebraMap R S))`, with S = Localization.AtPrime p. `IsWeaklyRegular R rs` (Mathlib/RingTheory/Regular/RegularSequence.lean lines 135-137: rs[i] is IsSMulRegular on R/(rs.take i)R) is the node's condition (1), and `IsRegular` (line 146) is [def-weil-pbc-regular-sequence]. Lines read with sed -n on 2026-10-10."
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-global-complete-intersection-local-regular-sequence",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "reviewed": "Reviewed by L 2026-10-10: exact Mathlib leaf RingTheory.Sequence.IsWeaklyRegular.isRegular_of_isLocalization_of_mem (Regular/Flat.lean line 75, read)."
+}

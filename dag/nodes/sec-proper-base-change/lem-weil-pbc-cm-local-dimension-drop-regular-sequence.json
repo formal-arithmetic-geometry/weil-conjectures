@@ -1,0 +1,72 @@
+{
+ "id": "lem-weil-pbc-cm-local-dimension-drop-regular-sequence",
+ "kind": "statement",
+ "title": "In a Cohen-Macaulay local ring, elements cutting the dimension by their number form a regular sequence",
+ "statement": "Let $(R,\\mathfrak m)$ be a Noetherian local ring [def-weil-pbc-noetherian-ring] (a Noetherian commutative ring with exactly one maximal ideal $\\mathfrak m$) whose Krull dimension $d=\\dim R$ [def-weil-pbc-krull-dimension-ring] is finite, and assume that $R$ is Cohen–Macaulay in the sense that $\\operatorname{depth}(R)\\ge d$ [def-weil-pbc-depth], that is, $\\mathfrak m$ contains an $R$-regular sequence of length $d$. Let $c\\ge0$ be an integer and $g_1,\\dots,g_c\\in\\mathfrak m$ elements such that the ring $R/(g_1,\\dots,g_c)$ has Krull dimension $\\dim R/(g_1,\\dots,g_c)=d-c$. Then $g_1,\\dots,g_c$ is a regular sequence in $R$ [def-weil-pbc-regular-sequence].",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Algebra, Proposition Tag 00N6 (proposition-CM-module, line 25052), first assertion, for the module M = R (the support of R/(g_1,...,g_c) is V(g_1,...,g_c), of dimension dim R/(g_1,...,g_c)); Cohen-Macaulay as in Definition Tag 00N3 (definition-CM, line 24960: dim Supp(M) = depth(M)), here depth(R) >= dim R, equivalent since the depth never exceeds the dimension"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-noetherian-ring",
+  "def-weil-pbc-krull-dimension-ring",
+  "def-weil-pbc-depth",
+  "def-weil-pbc-regular-sequence"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Cohen-Macaulay local ring, elements of maximal ideal with dim R/(x_1..x_c) = dim R - c form a regular sequence",
+   "results": "RingTheory.Sequence.IsRegular, IsLocalRing.isRegular_iff_isWeaklyRegular_of_subset_maximalIdeal, RingTheory.Sequence.isRegular_cons_iff, IsRegular.cons' (Mathlib.RingTheory.Regular.RegularSequence); ringKrullDim_quotSMulTop_succ_eq_ringKrullDim, ringKrullDim_add_length_eq_ringKrullDim_of_isRegular, ringKrullDim_quotient_span_singleton_succ_eq_ringKrullDim (Mathlib.RingTheory.KrullDimension.Regular: regular => dimension drops, the converse direction); IsWeaklyRegular.isRegular_of_isLocalizedModule_of_mem",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "system of parameters in a Cohen-Macaulay local ring is a regular sequence; depth equals dimension implies part of system of parameters is regular",
+   "results": "IsLocalRing.isRegular_iff_isWeaklyRegular_of_subset_maximalIdeal, IsWeaklyRegular.isRegular_of_isLocalization_of_mem, RingTheory.Sequence.isRegular_iff, IsLocalRing.isWeaklyRegular_of_perm_of_subset_maximalIdeal, IsRegular.cons', ringKrullDim_add_length_eq_ringKrullDim_of_isRegular",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "RingTheory.Sequence.IsRegular, ringKrullDim",
+   "results": "ringKrullDim_add_length_eq_ringKrullDim_of_isRegular (Mathlib.RingTheory.KrullDimension.Regular): IsRegular R rs -> dim R/(rs) + length = dim R, the converse of the node",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rn 'IsCohenMacaulay\\|CohenMacaulay' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib --include=*.lean; wc -l ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/RingTheory/Regular/Depth.lean; grep -rln ringKrullDim ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/RingTheory/Regular/",
+   "results": "no Cohen-Macaulay notion anywhere in Mathlib; RingTheory/Regular/Depth.lean is a 10-line stub with no declarations; no file of RingTheory/Regular/ mentions ringKrullDim",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-global-complete-intersection-local-regular-sequence",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "reviewed": "Reviewed by L 2026-10-10 (statement): Algebra 00N6 for M = R, Cohen-Macaulay taken as depth R ≥ dim R. Unsplit."
+}
