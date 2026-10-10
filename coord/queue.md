@@ -1,6 +1,6 @@
 # Work queue
 
-825 items; claim with `tools/claim.py next <group> [--stage N]`.
+826 items; claim with `tools/claim.py next <group> [--stage N]`.
 
 ## Stage 1: nodes to split (656)
 
@@ -14,8 +14,6 @@
 | `lem-weil-pbc-idempotent-endomorphism-charpoly-field` | 1011 | none |
 | `lem-weil-pbc-idempotent-endomorphism-image-base-change` | 1011 | none |
 | `lem-weil-pbc-lft-over-field-isolated-point-residue-finite` | 1011 | none |
-| `lem-weil-pbc-limit-fibre-products` | 1011 | none |
-| `lem-weil-pbc-polynomial-ring-origin-regular-local` | 1011 | none |
 | `lem-weil-pbc-popescu-delocalize-base` | 1011 | none |
 | `lem-weil-pbc-popescu-delocalize-height-zero` | 1011 | none |
 | `lem-weil-pbc-popescu-desingularize-strictly-standard` | 1011 | none |
@@ -98,6 +96,7 @@
 | `lem-weil-pbc-descend-finite-locally-free` | 1012 | none |
 | `lem-weil-pbc-descend-qc-open-fg-subalgebra` | 1012 | none |
 | `lem-weil-pbc-faithfully-flat-base-change` | 1012 | none |
+| `lem-weil-pbc-fibre-product-affine-transition` | 1012 | none |
 | `lem-weil-pbc-finite-free-resolution-noetherian` | 1012 | none |
 | `lem-weil-pbc-finite-length-module-simple-filtration` | 1012 | none |
 | `lem-weil-pbc-finite-module-complete-over-complete-noetherian` | 1012 | none |
@@ -641,6 +640,7 @@
 | `def-sc-zariski-cohomology` | - | none |
 | `lem-kun-algebraic-separable-smooth` | - | none |
 | `lem-kun-fg-separable-smooth` | - | none |
+| `lem-kun-fibre-product-limits` | - | none |
 | `lem-pc-flf-properties` | - | none |
 | `lem-pc-hilb-sheaf` | - | rests_on_sorry |
 | `lem-pc-projective-coherent-finiteness` | - | none |
@@ -663,7 +663,7 @@
 | `lem-pc-finite-linear-avoidance` | - | none |
 | `lem-pc-linear-pair-graded-finite` | - | none |
 
-## Stage 2: nodes to state (169)
+## Stage 2: nodes to state (170)
 
 | node | distance to Mathlib | kind |
 |---|---|---|
@@ -784,6 +784,7 @@
 | `lem-weil-pbc-nakayama-nilpotent` | 1 | state |
 | `lem-weil-pbc-nonvanishing-section-trivializes` | 1 | state |
 | `lem-weil-pbc-ogoma` | 1 | state |
+| `lem-weil-pbc-polynomial-ring-origin-regular-local` | 1 | state |
 | `lem-weil-pbc-power-series-onto-completion` | 1 | state |
 | `lem-weil-pbc-power-set-complex-contractible` | 1 | state |
 | `lem-weil-pbc-reduced-induced-closed-subscheme` | 1 | state |
@@ -837,7 +838,7 @@
 | `lem-weil-pbc-p1-field-dimension-one` | 4 | state |
 | `lem-weil-pbc-projective-space-zero-isomorphism` | 4 | state |
 
-Not open yet: 668 nodes that wait for stage 1, 456 nodes that wait for a statement dependency.
+Not open yet: 668 nodes that wait for stage 1, 457 nodes that wait for a statement dependency.
 
 ## Stage 3: modules to prove (0)
 
