@@ -4,7 +4,7 @@
   "is": null,
   "from": {
    "node": "lem-sc-pic-proper-ntorsion",
-   "place": "## Proof, first sentence: the proper curve C must first be shown projective; via Stacks 09NZ and 09NX, 09NX proof, first paragraph: choose powers and sections on each component with affine nonvanishing locus containing T",
+   "place": "## Proof, first sentence: choose powers and sections on each component with affine nonvanishing locus containing T",
    "via": [
     "lem-sc-reduced-dim-le-one-ample",
     "lem-sc-dim-one-ample-invertible",
@@ -25,39 +25,101 @@
   "def-sc-invertible-module",
   "def-weil-pbc-ample-invertible-module"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Assume first $E\\neq\\emptyset$ (the case $E=\\emptyset$ is treated at the end). Since $Y$ carries the ample invertible sheaf $\\mathcal M$, [lem-sc-ample-finite-set-affine] (Properties Lemma 01ZY), applied to $Y$ itself, gives an affine open $U'\\subseteq Y$ with $E\\subseteq U'$. Put $U=U'\\cap W$, an open subset with $E\\subseteq U\\subseteq W$ (it need not be affine; the restriction of $\\mathcal M$ to $W$ need not be ample, as $W$ need not be quasi-compact, so 01ZY is not applied to $W$).",
+   "uses": [
+    "lem-sc-ample-finite-set-affine"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/properties.tex",
+    "place": "Properties Lemma 09NV, proof, first paragraph: by Lemma 01ZY choose an affine open U subset W containing E"
+   }
+  },
+  {
+   "text": "Put $S=\\bigoplus_{n\\ge0}\\Gamma(Y,\\mathcal M^{\\otimes n})$, a nonnegatively graded commutative ring. For each $e\\in E$, let $\\mathfrak p_e$ be the homogeneous prime of sections vanishing at $e$, and let $I\\subset S_+$ be the graded ideal of positive-degree sections vanishing at every point of $Y\\setminus U$. By [lem-sc-closed-subset-qc-ideal] choose a quasi-coherent ideal sheaf $\\mathcal J\\subseteq\\mathcal O_Y$ with $V(\\mathcal J)=Y\\setminus U$. For $e\\in E$ we have $e\\in U$, so $e\\notin V(\\mathcal J)$, and since $Y$ is quasi-compact (part of the ampleness of $\\mathcal M$), [lem-sc-ample-ideal-section] gives $n>0$ and $u\\in\\Gamma(Y,\\mathcal J\\mathcal M^{\\otimes n})$ with $e\\in Y_u$; at a point $y\\in V(\\mathcal J)$ the germ $u_y$ lies in $\\mathcal J_y(\\mathcal M^{\\otimes n})_y\\subseteq\\mathfrak m_y(\\mathcal M^{\\otimes n})_y$, so $u$ vanishes on $Y\\setminus U$. Thus $u\\in I$ and $u\\notin\\mathfrak p_e$, i.e. $I\\not\\subseteq\\mathfrak p_e$ for every $e$. By graded prime avoidance [lem-sc-graded-prime-avoidance] (Algebra Lemma 00JS), there is a homogeneous positive-degree $s\\in I$ outside every $\\mathfrak p_e$.",
+   "uses": [
+    "lem-sc-closed-subset-qc-ideal",
+    "lem-sc-ample-ideal-section",
+    "lem-sc-graded-prime-avoidance"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/properties.tex",
+    "place": "Properties Lemma 09NV, proof, second paragraph: define S, p_x and I, use the basis of X_s and Algebra Lemma 00JS"
+   }
+  },
+  {
+   "text": "By the definitions of $I$ and $\\mathfrak p_e$, $E\\subseteq Y_s\\subseteq U\\subseteq W$. Since $U'$ is affine and $Y_s\\subseteq U\\subseteq U'$, [lem-sc-affine-cap-section-open] gives that $Y_s=U'\\cap Y_s$ is affine. If $E$ is empty, take any positive tensor power and the zero section, whose nonvanishing locus is empty and affine.",
+   "uses": [
+    "lem-sc-affine-cap-section-open"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/properties.tex",
+    "place": "Properties Lemma 09NV, proof, final paragraph: then E subset X_s subset U and X_s is affine by Lemma 01PV"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sc-ample-finite-set-affine",
+  "lem-sc-closed-subset-qc-ideal",
+  "lem-sc-ample-ideal-section",
+  "lem-sc-graded-prime-avoidance",
+  "lem-sc-affine-cap-section-open"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/properties.tex",
+  "place": "Properties Lemma 09NV proof"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
    "query": "ample invertible sheaf finite set affine nonvanishing section",
-   "results": "LeanSearch HTTP 500 (service unavailable); no declaration returned",
+   "results": "No exact declaration",
    "date": "2026-10-10",
-   "verdict": "service unavailable"
+   "verdict": "no match"
   },
   {
    "tool": "leanfinder",
    "query": "ample invertible sheaf finite set affine nonvanishing section",
-   "results": "Concept search returned generic scheme, affine-open, or sheaf gluing declarations; no exact statement",
+   "results": "No exact declaration",
    "date": "2026-10-10",
    "verdict": "no match"
   },
   {
    "tool": "grep",
-   "query": "rg -n -i 'ample|line bundle|invertible sheaf|closed.*affine|artinian.*affine|irreducible.*component' /home/ubuntu/weil-src-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicGeometry",
-   "results": "No exact theorem for this statement in Mathlib/AlgebraicGeometry; generic Noetherian irreducible-component and affine-open APIs only",
+   "query": "rg -n -i 'ample|line bundle|invertible sheaf' Mathlib/AlgebraicGeometry",
+   "results": "No exact theorem",
    "date": "2026-10-10",
    "verdict": "no match"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-sc-reduced-dim-le-one-ample",
   "by": "worker",
   "date": "2026-10-10"
  },
  "chapter": "sec-curve-estimates",
- "unit": "sk-thm-curveestimate"
+ "unit": "sk-thm-curveestimate",
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "lem-sc-ample-finite-principal-affine",
+  "worker": "stage1",
+  "summary": "Repaired the false finite-product argument by following 09NV: choose an affine U using 01ZY, then use the graded section ring and graded prime avoidance 00JS to choose one section, and apply 01PV. Added statement-only nodes for 01ZY and 00JS and corrected the closed-subset node to 01J3.",
+  "blueprint": "The steps realize the ancestor proof's first-sentence route through the finite-set affine-neighbourhood construction and the cited 09NV proof.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-af2",
+  "group": "J1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-af2 (reviewer sub-agent of L); spot-checked: Repaired re-push after the 15:13 return: point 1 (false product argument) repaired by following Stacks 09NV's proof (properties.tex 5304: 01ZY, Gamma_* graded ring, 00JS, 01PV); point 2 repaired (01J3 place, vanishingIdeal candidate recorded; created.by/date are stamped at merge); point 3 repaired (report names the TeX read, step places now describe 09NV's proof). Statement agrees with 09NV hypothesis by hypothesis (scheme, ample L, E finite subset W open; n>0, X_s affine, E in X_s in W). New statements checked true against sources: lem-sc-ample-finite-set-affine = 01ZY case (3); lem-sc-graded-prime-avoidance = 00JS (algebra.tex 13630); lem-sc-closed-subset-qc-ideal = reduced induced structure 01J3. Cited statements read: lem-sc-ample-ideal-section (01Q3, needs Y qc: given by ampleness), lem-sc-affine-cap-section-open (01PV). Small case: P^1, O(1), E={0,inf}: the return's counterexample no longer applies, s is a single avoiding section (e.g. x^2+y^2 type). FIX more, RETURN less: (1) C4 dag/nodes/sec-curve-estimates/lem-sc-ample-finite-principal-affine.json: proof step 1: applied 01ZY to W claiming M|_W ample, false when W is not quasi-compact; now 01ZY on Y gives affine U' containing E, U = U' cap W, and step 3 gets Y_s affine as U' cap Y_s by 01PV (Y_s in U in U'); (2) C1 same file: step 2: I not in p_e used the ideal of Y minus U without a node; now cites lem-sc-closed-subset-qc-ideal (added to uses and proof_deps; the node was otherwise unused) and writes out why u vanishes on V(J); (3) B3 dag/nodes/sec-curve-estimates/lem-sc-graded-prime-avoidance.json: statement/stmt_deps: graded ring was cited as def-pc-standard-graded-algebra (standard graded k-algebra, which Gamma_* is not); now nonnegatively graded commutative ring [def-pc-proj] with graded ideal and S_+ spelled out; also dag/nodes/sec-curve-estimates/lem-sc-closed-subset-qc-ideal.json: statement: added [pqf-def-coherent] at quasi-coherent (already in stmt_deps) and spelled out V(J). Start Sat Oct 10 03:42:33 PM UTC 2026, end Sat Oct 10 03:44:15 PM UTC 2026.; 3 file(s) fixed by the reviewer"
+ }
 }
