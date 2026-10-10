@@ -1803,3 +1803,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 15:33 L: lem-pc-localization-preserves-nonzerodivisor attached (K1 release; declaration not in the sorry map, proof read by L)
 - 15:33 L: claim.py next skips a group's own abandonments of the last 24 h; group_stats counts distinct abandoned items; preflight check_dag findings diffed against the base (launcher's three defects)
 - 15:33 L: merged deliver/G1/lem-exc-etale-sheaves-gsets-point (reviewer FIX; first push; new nodes: 1)
+- 15:34 L: merged deliver/K1/lem-sc-injective-module-abelian-acyclic-zariski (reviewer FIX; first push; new nodes: 2)
