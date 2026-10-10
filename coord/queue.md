@@ -1,6 +1,6 @@
 # Work queue
 
-858 items; claim with `tools/claim.py next <group> [--stage N]`.
+859 items; claim with `tools/claim.py next <group> [--stage N]`.
 
 ## Stage 1: nodes to split (638)
 
@@ -18,7 +18,6 @@
 | `lem-weil-pbc-descend-finite-locally-free` | 1012 | none |
 | `lem-weil-pbc-descend-qc-open-fg-subalgebra` | 1012 | none |
 | `lem-weil-pbc-equation-count-fibre-dimension-flat` | 1012 | none |
-| `lem-weil-pbc-finite-projective-prime-local-free` | 1012 | none |
 | `lem-weil-pbc-finite-surjective-affine-target` | 1012 | none |
 | `lem-weil-pbc-finite-type-z-domain-normalization-finite` | 1012 | none |
 | `lem-weil-pbc-first-order-thickening-base-change` | 1012 | none |
@@ -129,6 +128,7 @@
 | `lem-weil-pbc-cohen-rings-exist` | 1013 | none |
 | `lem-weil-pbc-coherent-finite-type-sub-kernel` | 1013 | none |
 | `lem-weil-pbc-fibre-degree-bound-field-points` | 1013 | none |
+| `lem-weil-pbc-finite-surjective-affine-target-noetherian` | 1013 | none |
 | `lem-weil-pbc-lift-to-injective-unique-up-to-homotopy` | 1013 | none |
 | `lem-weil-pbc-module-finite-type-image-extension` | 1013 | none |
 | `lem-weil-pbc-module-pushforward-injective-acyclic` | 1013 | none |
@@ -645,7 +645,7 @@
 | `lem-pc-finite-linear-avoidance` | - | none |
 | `lem-pc-linear-pair-graded-finite` | - | none |
 
-## Stage 2: nodes to state (220)
+## Stage 2: nodes to state (221)
 
 | node | distance to Mathlib | kind |
 |---|---|---|
@@ -741,6 +741,7 @@
 | `lem-weil-pbc-finite-open-cover-degree-sum` | 1 | state |
 | `lem-weil-pbc-finite-over-complete-local-product` | 1 | state |
 | `lem-weil-pbc-finite-over-complete-ring` | 1 | state |
+| `lem-weil-pbc-finite-projective-prime-local-free` | 1 | state |
 | `lem-weil-pbc-finite-projective-standard-free-cover` | 1 | state |
 | `lem-weil-pbc-finite-purely-inseparable-scalar-descent` | 1 | state |
 | `lem-weil-pbc-finite-separable-multiplication-etale` | 1 | state |
