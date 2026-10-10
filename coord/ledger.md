@@ -2138,3 +2138,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 17:36 L: returned deliver/K1/lem-sp-cartan-eilenberg-properties (reviewer RETURN: 1 (E, missing hypothesis): the item's statement takes the Cartan--Eilenberg resolution 'in the convention of [thm-sp-if-)
 - 17:37 L: merged deliver/C1/lem-sc-p1-twist-multiplication (reviewer FIX; first push; new nodes: 0)
 - 17:37 L: merged deliver/F1/lem-sc-tangent-space-vector-space (reviewer FIX; first push; new nodes: 1)
+- 17:37 L: merged deliver/J1/lem-sc-ext-coherent-hom-injective-flasque (reviewer FIX; first push; new nodes: 0)
