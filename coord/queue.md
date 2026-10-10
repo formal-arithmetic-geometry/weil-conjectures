@@ -2,7 +2,7 @@
 
 955 items; claim with `tools/claim.py next <group> [--stage N]`.
 
-## Stage 1: nodes to split (583)
+## Stage 1: nodes to split (581)
 
 | node | distance to a target | Lean state on the done branch |
 |---|---|---|
@@ -40,18 +40,13 @@
 | `lem-weil-pbc-local-nagata-domain-analytically-unramified` | 1015 | none |
 | `lem-weil-pbc-local-ring-colimit-essentially-finite-type-over-z` | 1015 | none |
 | `lem-weil-pbc-module-ses-cech-h1-surjective` | 1015 | none |
-| `lem-weil-pbc-n1-local-characterization` | 1015 | none |
-| `lem-weil-pbc-n2-char-p-purely-inseparable-criterion` | 1015 | none |
-| `lem-weil-pbc-nagata-localization` | 1015 | none |
 | `lem-weil-pbc-normal-domain-fractional-principal-quotient-ass` | 1015 | none |
 | `lem-weil-pbc-openness-of-flatness` | 1015 | none |
 | `lem-weil-pbc-p-independent-extends-to-p-basis` | 1015 | none |
-| `lem-weil-pbc-polynomial-ring-maximal-chain-height-difference` | 1015 | none |
 | `lem-weil-pbc-projective-dimension-ses-kernel` | 1015 | none |
 | `lem-weil-pbc-quasi-finite-over-polynomial-algebra` | 1015 | none |
 | `lem-weil-pbc-quotient-by-power-torsion-no-torsion` | 1015 | none |
 | `lem-weil-pbc-regular-local-quotient-kernel-parameters` | 1015 | none |
-| `lem-weil-pbc-relative-global-complete-intersection-base-change` | 1015 | none |
 | `lem-weil-pbc-relative-global-complete-intersection-local-regular-sequence` | 1015 | none |
 | `lem-weil-pbc-relative-global-complete-intersection-noetherian-approximation` | 1015 | none |
 | `lem-weil-pbc-sections-morphism-to-proj-polynomial-ring` | 1015 | none |
@@ -63,20 +58,23 @@
 | `def-weil-pbc-analytically-unramified` | 1016 | none |
 | `lem-weil-pbc-associated-primes-flat-base-change` | 1016 | none |
 | `lem-weil-pbc-codimension-one-analytically-unramified` | 1016 | none |
-| `lem-weil-pbc-cohen-structure-power-series-surjection` | 1016 | none |
 | `lem-weil-pbc-coherent-homs-over-open` | 1016 | none |
-| `lem-weil-pbc-coherent-local-isomorphism` | 1016 | none |
 | `lem-weil-pbc-coherent-stalk-map-extends` | 1016 | none |
 | `lem-weil-pbc-coherent-support-union-exact-sequence` | 1016 | none |
 | `lem-weil-pbc-complete-local-nagata` | 1016 | none |
 | `lem-weil-pbc-depth-le-dim-associated-prime` | 1016 | none |
+| `lem-weil-pbc-dimension-preserved-field-extension` | 1016 | none |
 | `lem-weil-pbc-field-injective-matrix-nonzero-maximal-minor` | 1016 | none |
 | `lem-weil-pbc-fpqc-descend-affine` | 1016 | none |
 | `lem-weil-pbc-fpqc-descend-universally-closed` | 1016 | none |
+| `lem-weil-pbc-localization-n2-domain` | 1016 | none |
 | `lem-weil-pbc-module-injects-localizations-associated-primes` | 1016 | none |
+| `lem-weil-pbc-normal-extension-purely-inseparable-then-galois` | 1016 | none |
+| `lem-weil-pbc-normal-locus-open` | 1016 | none |
 | `lem-weil-pbc-power-series-cohen-formally-smooth-adic` | 1016 | none |
 | `lem-weil-pbc-power-series-universal-property-complete` | 1016 | none |
 | `lem-weil-pbc-sections-annihilated-by-ideal` | 1016 | none |
+| `lem-weil-pbc-module-finite-type-surjective-on-stalk` | 1017 | none |
 | `lem-weil-pbc-injective-acyclicity-bounded-below` | 2002 | sorry_here |
 | `lem-weil-pbc-property-implies-acyclicity` | 2003 | none |
 | `lem-weil-pbc-qcqs-higher-direct-image` | 2003 | none |
@@ -590,7 +588,7 @@
 | `def-exc-jacobian-presentation` | - | none |
 | `def-nagata-rees-algebra` | - | none |
 
-## Stage 2: nodes to state (372)
+## Stage 2: nodes to state (374)
 
 | node | distance to Mathlib | kind |
 |---|---|---|
@@ -641,6 +639,7 @@
 | `lem-weil-pbc-closed-pushforward-constant-restriction` | 1 | state |
 | `lem-weil-pbc-cohen-coefficient-ring-exists` | 1 | state |
 | `lem-weil-pbc-cohen-rings-exist` | 1 | state |
+| `lem-weil-pbc-cohen-structure-power-series-surjection` | 1 | state |
 | `lem-weil-pbc-colimit-etale-ring-map` | 1 | state |
 | `lem-weil-pbc-colimit-eventually-flat` | 1 | state |
 | `lem-weil-pbc-colimit-finite-ring-map` | 1 | state |
@@ -831,6 +830,7 @@
 | `lem-weil-pbc-p-independent-differentials-independent` | 1 | state |
 | `lem-weil-pbc-polynomial-ideal-coefficients-monomial` | 1 | state |
 | `lem-weil-pbc-polynomial-quotient-dimension-lower-bound` | 1 | state |
+| `lem-weil-pbc-polynomial-ring-maximal-chain-height-difference` | 1 | state |
 | `lem-weil-pbc-polynomial-ring-maximal-localization-dimension` | 1 | state |
 | `lem-weil-pbc-polynomial-ring-origin-regular-local` | 1 | state |
 | `lem-weil-pbc-popescu-artinian-flat-subalgebras` | 1 | state |
@@ -967,7 +967,7 @@
 | `lem-weil-pbc-p1-field-dimension-one` | 4 | state |
 | `lem-weil-pbc-projective-space-zero-isomorphism` | 4 | state |
 
-Not open yet: 594 nodes that wait for stage 1, 702 nodes that wait for a statement dependency.
+Not open yet: 592 nodes that wait for stage 1, 707 nodes that wait for a statement dependency.
 
 ## Stage 3: modules to prove (0)
 
