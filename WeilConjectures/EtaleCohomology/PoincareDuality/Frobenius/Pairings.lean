@@ -27,6 +27,22 @@ in general, and defines the degreewise Poincaré pairing
   `AlgebraicGeometry.Etale.TateOrientation.untwistedDegreewisePoincarePairing`
   (`prop-pod-degree-of-the-pairing`): the untwisted pairing
   `Ra_! K ⊗ᴸ (Ra_* K^∨)[2d] ⟶ Λ_Y(-d)` and its degreewise form.
+
+## Implementation notes
+
+The Tate twist `Λ(d)` is a datum (`AlgebraicGeometry.Etale.HasTateTwist`) and the orientation
+`γ` is arbitrary, so the Frobenius structures on the twists and the Frobenius equivariance of
+the smooth trace (`thm-pur-weil-equivariance-of-purity-and-trace`) are hypotheses: a Weil datum
+`τ` on `Λ_X(d)` for which the smooth trace is a morphism of Weil objects, and a Weil datum on
+`Λ_Y(-d)` on whose sections Frobenius acts by `q^d`
+(`def-weil-frobenius-coefficient-twists`). The contragredient datum on `K^∨` (resp. `K^∨(d)`) is
+characterised by the Frobenius equivariance of the evaluation `K ⊗ᴸ K^∨ ⟶ Λ_X` (resp. of the
+twisted evaluation `K ⊗ᴸ K^∨(d) ⟶ Λ_X(d)`), which determines it when `K` is dualizable.
+
+The second factor `H^{2d-i}(X, K^∨(d))` is read as `Hom(Λ_Y, (Ra_* K^∨(d))[j])` with
+`i + j = 2d`, and the degreewise pairing passes through
+`(Ra_* K^∨(d))[j] ≅ ((Ra_* K^∨(d))[2d])[j - 2d]`, the shift convention of
+`prop-pod-degree-of-the-pairing`.
 -/
 
 @[expose] public section

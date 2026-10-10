@@ -21,6 +21,13 @@ multiplicities.
   `AlgebraicGeometry.Etale.TateOrientation.roots_map_charpoly_frobeniusOperator`
   (`cor-pod-reciprocal-eigenvalues`, `sk-thm-frobenius` (b)): conjugacy and reciprocal
   eigenvalues.
+
+## Implementation notes
+
+The reciprocity statement assumes the line-valued pairing perfect after a trivialisation
+`Hom(Λ_Y, Λ_Y(-d)) ≃ Λ` of the value line; at a field stage this is
+`thm-pod-degreewise-perfectness-over-a-field`. Over `𝒪_E` it fails (the blueprint's example
+`K = [𝒪_E --ϖ--> 𝒪_E]` over a point), which is why (b) is stated over a field.
 -/
 
 @[expose] public section

@@ -5,7 +5,6 @@ Authors: Nailin Guan
 -/
 module
 
-public import Mathlib
 public import WeilConjectures.SixFunctors.Etale.SmoothBaseChange.Defs
 public import WeilConjectures.SixFunctors.BaseChange.DerivedComparison
 public import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.SingleTriangle
@@ -122,12 +121,12 @@ theorem Etale.exists_connecting_baseChangeHomologyMap (sq : IsPullback e h g p)
       (ShortComplex.mk _ _ wS₁).Exact ∧ (ShortComplex.mk _ _ wS₂).Exact ∧
       (ShortComplex.mk _ _ wT₁).Exact ∧ (ShortComplex.mk _ _ wT₂).Exact ∧
       δS ≫ Etale.baseChangeHomologyMap Λ sq n₁ E.X₁ =
-        Etale.baseChangeHomologyMap Λ sq n₀ E.X₃ ≫ δT :=
+        Etale.baseChangeHomologyMap Λ sq n₀ E.X₃ ≫ δT := by
+  obtain ⟨δ, hδ⟩ := hE.exists_mk_singleTrianglePlus_distinguished
   -- The concrete functors are only passed as data with `rfl` equations: unifying them with
   -- the abstract composites directly makes the kernel unfold the derived functors. Both lemmas
-  -- below accept the zero morphisms of the sheaf categories as they are, for the same reason.
-  hE.exists_mk_singleTrianglePlus_distinguished.elim fun δ hδ ↦
-  Functor.exists_homologySequenceδ_whiskerRight'
+  -- accept the zero morphisms of the sheaf categories as they are, for the same reason.
+  exact Functor.exists_homologySequenceδ_whiskerRight
     (DerivedCategory.Plus.homologyFunctor (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)) 0)
     (DerivedCategory.Plus.singleFunctor _ 0)
     (Etale.baseChange (ModuleCat.{u + 1} Λ) sq.toCommSq)

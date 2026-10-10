@@ -113,8 +113,9 @@ noncomputable def Etale.freeSheafSections {X : Scheme.{u}}
 /-- The map `Hom(h^* Fr(W), K[q]) ⟶ Hom(Fr(W), H^q(Rh_* K))`, natural in `W`, for a functor
 `Fr : X.Etale ⥤ Sheaf X.smallEtaleTopology A` and a general coefficient category `A`: the
 construction of `AlgebraicGeometry.Etale.higherDirectImagePresheafToHom`, which is its value
-at the free sheaves. Defining it for a general `A` and instantiating it is much cheaper for the
-kernel than writing it out over `ModuleCat Λ`. -/
+at the free sheaves. -/
+-- Defining this for a general `A` and instantiating it is much cheaper for the kernel than
+-- writing it out over `ModuleCat Λ`.
 noncomputable def Etale.higherDirectImagePresheafToHomOfFunctor (A : Type u') [Category.{u + 1} A]
     [Abelian A] [IsGrothendieckAbelian.{u + 1} A] [HasSmallSiteSheafify A] [MonoidalCategory A]
     [MonoidalPreadditive A] [SymmetricCategory A] [MonoidalClosed A]

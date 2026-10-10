@@ -35,8 +35,9 @@ open Scheme Etale
 
 /-- The form of `AlgebraicGeometry.Etale.isIso_derivedBaseChangeMapPlus_of_etale` for a general
 coefficient category `A`, in which the pullback along `g'` is only assumed to preserve injective
-objects. Proving it for a general `A` and instantiating it is much cheaper for the kernel than
-the direct proof over `ModuleCat Λ`. -/
+objects. -/
+-- Proving this for a general `A` and instantiating it is much cheaper for the kernel than the
+-- direct proof over `ModuleCat Λ`.
 theorem Etale.isIso_derivedBaseChangeMapPlus_of_injective_upperStar (A : Type u')
     [Category.{u + 1} A] [Abelian A] [IsGrothendieckAbelian.{u + 1} A] [HasSmallSiteSheafify A]
     {X' X Y' Y : Scheme.{u}} {g' : X' ⟶ X} {f' : X' ⟶ Y'} {f : X ⟶ Y} {g : Y' ⟶ Y}

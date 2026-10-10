@@ -17,6 +17,25 @@ triangle `X₁[0] ⟶ X₂[0] ⟶ X₃[0] ⟶ X₁[1]` in the bounded below deri
 `CategoryTheory.ShortComplex.ShortExact.singleTrianglePlus_distinguished`): the lift of
 Mathlib's `CategoryTheory.ShortComplex.ShortExact.singleTriangle` along the inclusion
 `DerivedCategory.Plus C ⥤ DerivedCategory C`.
+
+`CategoryTheory.ShortComplex.ShortExact.exists_mk_singleTrianglePlus_distinguished` states that
+this triangle is distinguished in the form `Triangle.mk (E.f[0]) (E.g[0]) δ` for some `δ`, and
+`CategoryTheory.ShortComplex.ShortExact.map_exact_of_isHomological` deduces that the image of
+`E` under `singleFunctor 0 ⋙ G`, for a homological functor `G`, is exact. Both lemmas take
+the zero morphisms of the categories involved as arbitrary instances.
+
+## Implementation notes
+
+`exists_mk_singleTrianglePlus_distinguished` is the form to use over a concrete abelian
+category: identifying the objects and morphisms of `hE.singleTrianglePlus` with those of
+`DerivedCategory.Plus.singleFunctor C 0` there makes the kernel unfold the derived category,
+whereas here the identification is checked once, over an abstract `C`. The zero morphisms are
+arbitrary instances, reduced to those of the abelian structure by `Subsingleton.elim`, so that
+the lemmas apply as they stand to short complexes of sheaves: the zero morphisms of sheaves
+come from the full subcategory of sheaves, and unifying them with those of the abelian
+structure at the call site is expensive for the kernel. `singleTrianglePlus_distinguished`
+itself cannot be stated for arbitrary zero morphisms, since its connecting morphism is built
+from `CategoryTheory.ShortComplex.ShortExact.singleδ`, which needs the abelian instance.
 -/
 
 @[expose] public section
@@ -25,7 +44,11 @@ namespace CategoryTheory.ShortComplex.ShortExact
 
 open Pretriangulated
 
-variable {C : Type*} [Category* C] [Abelian C] [HasDerivedCategory C] {E : ShortComplex C}
+variable {C : Type*} [Category* C] [Abelian C] [HasDerivedCategory C]
+
+section
+
+variable {E : ShortComplex C}
 
 /-- The triangle `X₁[0] ⟶ X₂[0] ⟶ X₃[0] ⟶ X₁[1]` in the bounded below derived category
 attached to a short exact sequence `0 ⟶ X₁ ⟶ X₂ ⟶ X₃ ⟶ 0`: the lift of
@@ -55,42 +78,44 @@ lemma singleTrianglePlus_distinguished (hE : E.ShortExact) :
       Category.id_comp]
     exact Category.comp_id _
 
-/-- The distinguished triangle `X₁[0] ⟶ X₂[0] ⟶ X₃[0] ⟶ X₁[1]` of
-`CategoryTheory.ShortComplex.ShortExact.singleTrianglePlus_distinguished`, written with
-`CategoryTheory.Pretriangulated.Triangle.mk`, its objects and first two morphisms spelled out.
-Use it over a concrete abelian category: there, identifying the objects and morphisms of
-`hE.singleTrianglePlus` with those of `DerivedCategory.Plus.singleFunctor C 0` makes the kernel
-unfold the derived category, while here the identification is checked once, over an abstract
-`C`. The zero morphisms of `C` are an arbitrary instance, so that the lemma applies as it
-stands to a short complex of sheaves, whose zero morphisms come from the full subcategory of
-sheaves rather than from the abelian structure: comparing the two instances is expensive for
-the kernel too. -/
+end
+
+section ArbitraryZeroMorphisms
+
+/-- The distinguished triangle of a short exact sequence `0 ⟶ X₁ ⟶ X₂ ⟶ X₃ ⟶ 0`, written
+with `CategoryTheory.Pretriangulated.Triangle.mk`, for an arbitrary `HasZeroMorphisms C`
+instance:
+```
+X₁[0] --E.f--> X₂[0] --E.g--> X₃[0] --δ--> X₁[0][1]
+```
+-/
 lemma exists_mk_singleTrianglePlus_distinguished [Z : Limits.HasZeroMorphisms C]
-    {E : ShortComplex C} (hE : E.ShortExact) :
-    ∃ δ : (DerivedCategory.Plus.singleFunctor C 0).obj E.X₃ ⟶
-        ((DerivedCategory.Plus.singleFunctor C 0).obj E.X₁)⟦(1 : ℤ)⟧,
-      Triangle.mk ((DerivedCategory.Plus.singleFunctor C 0).map E.f)
-        ((DerivedCategory.Plus.singleFunctor C 0).map E.g) δ ∈
+    {S : ShortComplex C} (hS : S.ShortExact) :
+    ∃ δ : (DerivedCategory.Plus.singleFunctor C 0).obj S.X₃ ⟶
+        ((DerivedCategory.Plus.singleFunctor C 0).obj S.X₁)⟦(1 : ℤ)⟧,
+      Triangle.mk ((DerivedCategory.Plus.singleFunctor C 0).map S.f)
+        ((DerivedCategory.Plus.singleFunctor C 0).map S.g) δ ∈
           distTriang (DerivedCategory.Plus C) := by
   obtain rfl : Z = Preadditive.preadditiveHasZeroMorphisms := Subsingleton.elim _ _
-  exact ⟨_, hE.singleTrianglePlus_distinguished⟩
+  exact ⟨_, hS.singleTrianglePlus_distinguished⟩
 
-
-/-- The image of a short exact sequence `E` under a functor `F : C ⥤ D` which factors as the
+/-- The image of a short exact sequence `S` under a functor `F : C ⥤ D` which factors as the
 inclusion of `C` in degree `0` followed by a homological functor `G : D⁺(C) ⥤ D` is exact in
-the middle: it is the image under `G` of the distinguished triangle of `E`.
-
-The zero morphisms of `C` and of `D` are arbitrary instances, as in
-`CategoryTheory.ShortComplex.ShortExact.exists_mk_singleTrianglePlus_distinguished`, so that the
-lemma applies as it stands to sheaves. -/
-lemma map_exact_of_isHomological [Z₀ : Limits.HasZeroMorphisms C] {E : ShortComplex C}
-    (hE : E.ShortExact) {D : Type*} [Category* D] [Abelian D] [Z : Limits.HasZeroMorphisms D]
+the middle: it is the image under `G` of the distinguished triangle of `S`. The zero
+morphisms of `C` and of `D` are arbitrary instances. -/
+-- The factorisation `hF` is an equality of functors, not an isomorphism, so that callers whose
+-- `F` is definitionally `singleFunctor C 0 ⋙ G` can pass `rfl` and the kernel never has to
+-- unfold `F`.
+lemma map_exact_of_isHomological [Limits.HasZeroMorphisms C] {S : ShortComplex C}
+    (hS : S.ShortExact) {D : Type*} [Category* D] [Abelian D] [Z : Limits.HasZeroMorphisms D]
     (G : DerivedCategory.Plus C ⥤ D) [G.IsHomological] (F : C ⥤ D) [F.PreservesZeroMorphisms]
     (hF : DerivedCategory.Plus.singleFunctor C 0 ⋙ G = F) :
-    (E.map F).Exact := by
-  obtain rfl : Z₀ = Preadditive.preadditiveHasZeroMorphisms := Subsingleton.elim _ _
+    (S.map F).Exact := by
+  obtain ⟨δ, hδ⟩ := hS.exists_mk_singleTrianglePlus_distinguished
   obtain rfl : Z = Preadditive.preadditiveHasZeroMorphisms := Subsingleton.elim _ _
   subst hF
-  exact G.map_distinguished_exact _ hE.singleTrianglePlus_distinguished
+  exact G.map_distinguished_exact _ hδ
+
+end ArbitraryZeroMorphisms
 
 end CategoryTheory.ShortComplex.ShortExact
