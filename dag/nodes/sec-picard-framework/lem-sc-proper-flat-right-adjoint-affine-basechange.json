@@ -6,7 +6,7 @@
    "node": "lem-sc-finite-duality",
    "place": "the affine-base case in the proof of the proper-flat right-adjoint base-change formula, invoking the affine Tor-independent base-change lemma",
    "via": [
-    "lem-sc-proper-flat-right-adjoint-basechange"
+    "lem-sc-proper-flat-right-adjoint-affine-basechange"
    ]
   },
   "same_as": []
@@ -24,23 +24,91 @@
   "def-weil-flat-morphism",
   "def-pc-fibre-product",
   "def-pc-derived-category",
-  "def-pc-derived-direct-image"
+  "def-pc-derived-direct-image",
+  "def-sc-duality-equation-base-change-map"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Write Y=Spec(A) and Y'=Spec(A'). Since f is flat, O_X[0] is a bounded complex of quasi-coherent modules flat over Y, so [lem-pc-rf-base-change-complex] with G^\\bullet=O_X[0] and arbitrary E\\in D_QCoh(X) shows that the canonical base-change transformation \\beta:Lg^*Rf_*\\to Rf'_*Lg_X^* is an isomorphism on D_QCoh(X). Hence the canonical morphism Lg_X^*a(K)\\to a'(Lg^*K) of [def-sc-duality-equation-base-change-map] is defined, and the hypothesis of [lem-sc-flat-precompose-pus] holds. Moreover, for x in X over y in Y and y' in Y' over y, O_{X,x} is flat over O_{Y,y}, so Tor_i^{O_{Y,y}}(O_{X,x},O_{Y',y'})=0 for i>0: f and g are Tor independent in the sense of [lem-pc-affine-morphism-hom-out-of-perfect].",
+   "uses": [
+    "lem-pc-rf-base-change-complex",
+    "def-sc-duality-equation-base-change-map"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/duality.tex",
+    "place": "Tag 0AA8 (Lemma 48.6.2), definition of the base-change map and case (1) Tor-independence hypothesis"
+   }
+  },
+  {
+   "text": "Choose a single perfect generator M of D_QCoh(X) by [lem-pc-perfect-generator-exists]. The morphism g is affine because Y and Y' are affine, so its base change g_X is affine; therefore [lem-pc-perfect-generator-pullback] says that Lg_X^*M generates D_QCoh(X'). Apply [lem-pc-proper-support-perfect-direct-image] with E=M and with G^\\bullet=O_X[0]. The latter is finitely presented and flat over Y because f is flat, and its support X is proper over Y because f is proper; hence E\\otimes^L G^\\bullet\\simeq M, so Rf_*M is perfect and its formation commutes with arbitrary base change.",
+   "uses": [
+    "lem-pc-perfect-generator-exists",
+    "lem-pc-perfect-generator-pullback",
+    "lem-pc-proper-support-perfect-direct-image"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/duality.tex",
+    "place": "Tag 0AA8 (Lemma 48.6.2), proof of case (1), perfect generator and use of Tag 0A1H"
+   }
+  },
+  {
+   "text": "Let c:Lg_X^*a(K)\\to a'(Lg^*K) be the canonical morphism of Step 1. By [lem-sc-flat-precompose-pus] (its hypotheses hold by Step 1), R\\operatorname{Hom}_{X'}(Lg_X^*M,c) precomposed with the pullback comparison R\\operatorname{Hom}_X(M,a(K))\\otimes^{\\mathbf L}_AA'\\to R\\operatorname{Hom}_{X'}(Lg_X^*M,Lg_X^*a(K)) equals the composite of the adjunction isomorphism for a [lem-pc-global-hom-adjunction], the algebraic RHom base-change map for Rf_*M, the isomorphism induced by \\beta_M^{-1} (Step 1), and the adjunction isomorphism for a' [lem-pc-global-hom-adjunction]. The pullback comparison is an isomorphism by [lem-pc-affine-morphism-hom-out-of-perfect], since M is perfect, a(K)\\in D_QCoh(X), and f, g are Tor independent (Step 1). The algebraic RHom base-change map is an isomorphism by [lem-pc-base-change-rhom-perfect], since Rf_*M is perfect (Step 2, [lem-pc-proper-support-perfect-direct-image]). Hence R\\operatorname{Hom}_{X'}(Lg_X^*M,c) is an isomorphism.",
+   "uses": [
+    "lem-sc-flat-precompose-pus",
+    "lem-pc-affine-morphism-hom-out-of-perfect",
+    "lem-pc-global-hom-adjunction",
+    "lem-pc-proper-support-perfect-direct-image",
+    "lem-pc-base-change-rhom-perfect"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/duality.tex",
+    "place": "Tag 0AA8 (Lemma 48.6.2), proof of case (1), adjunction and RHom comparison"
+   }
+  },
+  {
+   "text": "The cone of the canonical map has zero derived Hom from the generator Lg_X^*M by Step 3. Since that object generates D_QCoh(X'), the cone is zero, so the canonical map Lg_X^*a(K)\\to a'(Lg^*K) is an isomorphism. As K was arbitrary, this holds for every K in D_QCoh(Y).",
+   "uses": [
+    "lem-pc-perfect-generator-pullback",
+    "def-sc-duality-equation-base-change-map"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/duality.tex",
+    "place": "Tag 0AA8 (Lemma 48.6.2), proof of case (1), generator detection and conclusion"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-rf-base-change-complex",
+  "def-sc-duality-equation-base-change-map",
+  "lem-pc-perfect-generator-exists",
+  "lem-pc-perfect-generator-pullback",
+  "lem-pc-proper-support-perfect-direct-image",
+  "lem-sc-flat-precompose-pus",
+  "lem-pc-affine-morphism-hom-out-of-perfect",
+  "lem-pc-global-hom-adjunction",
+  "lem-pc-base-change-rhom-perfect"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/duality.tex",
+  "place": "Tag 0AA8 (Lemma 48.6.2), case (1)"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
    "query": "affine proper flat Tor independent derived right adjoint base change",
-   "results": "Flatness and base-change declarations only; no quasi-coherent derived right-adjoint theorem",
+   "results": "flatness and base-change declarations only; no quasi-coherent derived right-adjoint theorem",
    "date": "2026-10-11",
    "verdict": "no match"
   },
   {
    "tool": "loogle",
    "query": "CategoryTheory Adjunction derived base change",
-   "results": "0 hits; unknown syntax",
+   "results": "0 hits; parser rejected the pattern",
    "date": "2026-10-11",
    "verdict": "no match"
   },
@@ -53,12 +121,43 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-sc-proper-flat-right-adjoint-basechange",
   "by": "worker",
   "date": "2026-10-10"
  },
  "chapter": "sec-picard-framework",
- "unit": "sk-thm-picard-duality"
+ "unit": "sk-thm-picard-duality",
+ "split_report": {
+  "date": "2026-10-11",
+  "item": "lem-sc-proper-flat-right-adjoint-affine-basechange",
+  "worker": "stage1",
+  "summary": "Repaired the returned split by deleting the bundled RHom-conclusion node and the misnamed affine Tor node. The proof now treats Tor independence from flatness as an elementary affine step, then cites separate statement-only inputs for a single perfect generator, its affine pullback, the canonical mate-defined base-change map and its compatibility, the affine Hom-out-of-perfect comparison, global RHom adjunction, algebraic RHom base change, and the existing Tag 0A1H perfect direct-image/base-change node.",
+  "blueprint": "The four steps realize Tag 0AA8 case (1): define the Tor-independent affine square and mate map; choose and pull back a perfect generator and apply Tag 0A1H; compare RHom using the four individual inputs; detect the zero cone by the pulled-back generator.",
+  "tool_uses": [
+   {
+    "node": "lem-pc-proper-support-perfect-direct-image",
+    "why": "Tag 0A1H is the generic perfect direct-image and arbitrary base-change input required by the Tag 0AA8 RHom comparison; no node in this unit supplies it."
+   },
+   {
+    "node": "lem-pc-rf-base-change-complex",
+    "why": "Tag 0A1D with G=O_X[0]: generic flat base change Lg^*Rf_* -> Rf'_*Lg_X^* is an isomorphism for flat f; needed so the Tag 0AA8 base-change map is defined."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pc-proper-support-perfect-direct-image",
+  "lem-pc-rf-base-change-complex",
+  "lem-pc-proper-support-perfect-direct-image",
+  "lem-pc-rf-base-change-complex"
+ ],
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-pfa2620",
+  "group": "K1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-pfa2620 (reviewer sub-agent of L); spot-checked: Re-push after 20:34 return: points (2) generator, (3) affine Hom-out-of-perfect/qcqs right adjoint, (4) E=M,G=O_X[0] repaired; no duplicate of right-adjoint/base-change nodes (sbc-def-base-change-map is etale). FIX more, RETURN less: (1) def-sc-duality-equation-base-change-map named the wrong adjunction (Lg_X^* -| Rg_X,* instead of Rf'_* -| a') and asserted beta iso from undefined Tor independence uncited: now hypothesis 'beta iso', theta the conjugate, map defined as the Stacks composite Lg_X^*a -> Lg_X^*aRg_*Lg^* <-(theta^-1) Lg_X^*Rg_X,*a'Lg^* -> a'Lg^*; (2) C1: item Step 1 now cites lem-pc-rf-base-change-complex (Tag 0A1D, G=O_X[0]) for beta iso when f flat (declared tool use), not elementary; (3) B: Tor independence spelled out stalkwise in lem-pc-affine-morphism-hom-out-of-perfect; lem-sc-flat-precompose-pus restated as an explicit agreement of two maps (pullback comparison then RHom(-,c) vs adjunction, algebraic RHom base change, beta_M^-1, adjunction), Step 3 rewritten to use it with each iso cited. Second reading missed fault (1).; 4 file(s) fixed by the reviewer"
+ }
 }
