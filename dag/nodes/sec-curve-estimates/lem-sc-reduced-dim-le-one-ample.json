@@ -29,9 +29,111 @@
   "def-sc-invertible-module",
   "def-weil-pbc-ample-invertible-module"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "If $X=\\varnothing$ or $\\dim X\\le0$, [lem-sc-zero-dim-noetherian-affine] makes $X$ affine and $\\mathcal O_X$ ample. This includes finite discrete unions of reduced closed points and the empty scheme. Henceforth assume $\\dim X=1$.",
+   "uses": [
+    "lem-sc-zero-dim-noetherian-affine"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/properties.tex",
+    "place": "Properties Lemmas 0AAX and 0CKV; dimension-zero branch omitted from the statement of Varieties Lemma 09NX"
+   }
+  },
+  {
+   "text": "Let $Z_1,\\ldots,Z_r$ be the finitely many irreducible components of $X$, each with its reduced closed subscheme structure. Each $Z_i$ is integral, Noetherian and separated as a closed subscheme of $X$, and has dimension $0$ or $1$. By [lem-sc-integral-dim-one-ample] in dimension $1$ and [lem-sc-zero-dim-noetherian-affine] in dimension $0$, choose an ample invertible $\\mathcal O_{Z_i}$-module $\\mathcal L_i$. The set $T=\\bigcup_{i\\ne j}(Z_i\\cap Z_j)$ is a finite set of closed points, and each $x\\notin T$ lies on exactly one component, by [lem-sc-component-intersections-finite].",
+   "uses": [
+    "lem-sc-integral-dim-one-ample",
+    "lem-sc-zero-dim-noetherian-affine",
+    "lem-sc-component-intersections-finite",
+    "def-pc-integral-scheme"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Varieties Lemma 09NX, proof, first three sentences; Lemma 09ND; Properties Lemma 0CKV for zero-dimensional components"
+   }
+  },
+  {
+   "text": "For each $i$, apply [lem-sc-ample-finite-principal-affine] to $E=T\\cap Z_i$, $W=Z_i$ and $\\mathcal L_i$. Replace $\\mathcal L_i$ by the resulting positive power and obtain $s_i$ whose affine nonvanishing locus $(Z_i)_{s_i}$ contains $T\\cap Z_i$. The intersections $Z_i\\cap Z_j$ are finite discrete spaces (step 2); therefore [lem-sc-glue-component-line-bundles] gives an invertible $\\mathcal O_X$-module $\\mathcal L$ and a section $s$ restricting to each $s_i$.",
+   "uses": [
+    "lem-sc-ample-finite-principal-affine",
+    "lem-sc-component-intersections-finite",
+    "lem-sc-glue-component-line-bundles"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Varieties Lemma 09NX, proof, first and second paragraphs; Properties Lemma 09NV; Varieties Lemma 09NE"
+   }
+  },
+  {
+   "text": "The open $X_s$ contains $T$. Its closed subschemes $(Z_i)_{s_i}$ are affine and their underlying sets cover $X_s$; as $Z_i$ is closed in $X$, each is closed in $X_s$. Apply [lem-sc-closed-affine-union-affine] to conclude that $X_s$ is affine.",
+   "uses": [
+    "lem-sc-closed-affine-union-affine"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Varieties Lemma 09NX, proof, second paragraph; Limits Lemma 09NL"
+   }
+  },
+  {
+   "text": "Fix $x\\in X\\setminus T$, lying on the unique component $Z_1$ (step 2). Let $Z$ be the reduced union of the other components, with ideal $\\mathcal I\\subseteq\\mathcal O_X$, and let $\\mathcal I_1$ be its image in $\\mathcal O_{Z_1}$. Then $x\\notin V(\\mathcal I_1)$: otherwise $x$ would lie on both $Z_1$ and $Z$. Applying [lem-sc-ample-ideal-section] to the ample $\\mathcal L_1$ and ideal $\\mathcal I_1$ gives $m_1>0$ and $t_1\\in\\Gamma(Z_1,\\mathcal I_1\\mathcal L_1^{\\otimes m_1})$ nonvanishing at $x$. The definition of ampleness [def-weil-pbc-ample-invertible-module] gives $m_2>0$ and $t_2\\in\\Gamma(Z_1,\\mathcal L_1^{\\otimes m_2})$ with $x\\in(Z_1)_{t_2}$ affine.",
+   "uses": [
+    "lem-sc-component-intersections-finite",
+    "lem-sc-ample-ideal-section",
+    "def-weil-pbc-ample-invertible-module"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Varieties Lemma 09NX, proof, final paragraph; Properties Proposition 01Q3 and Definition 01PS"
+   }
+  },
+  {
+   "text": "Set $m=m_1+m_2$ and $t=t_1t_2$. Multiplication places $t$ in $\\Gamma(Z_1,\\mathcal I_1\\mathcal L_1^{\\otimes m})$, and its nonvanishing locus is $(Z_1)_t=(Z_1)_{t_1}\\cap(Z_1)_{t_2}$, containing $x$. It is affine by [lem-sc-affine-cap-section-open] applied to the affine open $(Z_1)_{t_2}$ and the section $t_1$.",
+   "uses": [
+    "lem-sc-affine-cap-section-open"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Varieties Lemma 09NX, proof, final four sentences; Properties Lemma 01PV"
+   }
+  },
+  {
+   "text": "By [lem-sc-conductor-sections], $t$ extends to a global section $\\widetilde t$ of $\\mathcal L^{\\otimes m}$ vanishing on all components except $Z_1$. Its nonvanishing locus $X_{\\widetilde t}$ equals $(Z_1)_t$, which is affine and contains $x$ by step 6. Together with the affine $X_s$ for points of $T$ (step 4), these sections verify the defining criterion [def-weil-pbc-ample-invertible-module] at every point of the quasi-compact Noetherian scheme $X$. Thus $\\mathcal L$ is ample.",
+   "uses": [
+    "lem-sc-conductor-sections",
+    "def-weil-pbc-ample-invertible-module"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Varieties Lemma 09NX, proof, conductor equality and conclusion; Varieties Remark 09NW"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sc-zero-dim-noetherian-affine",
+  "lem-sc-integral-dim-one-ample",
+  "lem-sc-component-intersections-finite",
+  "def-pc-integral-scheme",
+  "lem-sc-ample-finite-principal-affine",
+  "lem-sc-glue-component-line-bundles",
+  "lem-sc-closed-affine-union-affine",
+  "lem-sc-ample-ideal-section",
+  "def-weil-pbc-ample-invertible-module",
+  "lem-sc-affine-cap-section-open",
+  "lem-sc-conductor-sections"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/varieties.tex",
+  "place": "Varieties Lemma 09NX (varieties-lemma-dim-1-noetherian-reduced-separated-has-ample), with dimension-zero branch from Properties Lemmas 0AAX and 0CKV"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -63,7 +165,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "worker",
@@ -79,5 +181,20 @@
   "slopmaster2": {
    "state": "none"
   }
+ },
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "lem-sc-reduced-dim-le-one-ample",
+  "worker": "stage1",
+  "summary": "Split the Stacks 09NX proof into component ampleness, finite intersections, a common affine section near intersections, and conductor-supported affine sections away from them. Added the dimension-zero branch, including isolated zero-dimensional components, which 09NX does not state.",
+  "blueprint": "The seven steps realize the ancestor lem-sc-pic-proper-ntorsion first proof sentence through 09NX: establish ampleness on the reduced one-dimensional scheme before the 09NZ lift to the original curve."
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-rda",
+  "group": "F1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-rda (reviewer sub-agent of L); spot-checked: Source: Stacks 09NX (varieties.tex:8080) read in full with 09ND, 09NE (7990), 09NW (8070), Properties 09NV (5293), 01Q3 (4557), 01PV (4288), 01PS (4244), 0CKV (1303), Limits 09NL (2912). Item statement unchanged (Noetherian, reduced, separated, dim<=1, empty allowed); the worker's source-error note is right: 09NX applies 09ND to every component, but a dimension-1 X can have an isolated point component; steps 1-2 cover dim<=0 and point components by lem-sc-zero-dim-noetherian-affine (0CKV: quasi-compact separated dim 0 is affine; O ample on affine). New node statements checked hypothesis by hypothesis against their tags: glue-component-line-bundles = 09NE (reduced, set-theoretic cover, discrete pairwise intersections; sections nonvanishing on intersections); ample-finite-principal-affine = 09NV (E finite in W open, no further hypothesis); closed-affine-union-affine = 09NL (no Noetherian hypothesis); affine-cap-section-open = 01PV (power version is 01PV applied to M^n); ample-ideal-section = 01Q3 (1)=>(6) at a point outside V(J); integral-dim-one-ample = 09ND; conductor-sections globalizes 09NW: I meets the ideal of Z_1 in the ideal of Z_1 u Z = Y, zero as Y is reduced, so I -> I_1 is an isomorphism and tensoring with M^m gives the global-section isomorphism; component-intersections-finite: distinct components meet in proper closed subsets of irreducible sets of dim<=1, whose irreducible components are closed points (sober), finitely many by Noetherianity. Steps: 1 by zero-dim node; 2 by integral-dim-one-ample / zero-dim node / component node (closed subschemes inherit Noetherian, separated); 3 by 09NV node with E=T cap Z_i, W=Z_i (powers of ample stay ample, elementary from 01PS), finite sets of closed points discrete, s_i nonvanishing on T cap Z_i, so the 09NE node gives (L,s); 4 X_s cap Z_i=(Z_i)_{s_i} affine closed in X_s, 09NL node; 5 x not in V(I_1)=Z_1 cap Z, I_1 quasi-coherent, ample-ideal-section and ample definition; 6 (Z_1)_{t1 t2}=(Z_1)_{t1} cap (Z_1)_{t2}, 01PV node on U=(Z_1)_{t2}; 7 conductor node with L|Z_1=L_1, X_{t~} subset X minus Z which as an open subscheme of reduced X equals Z_1 minus Z, so X_{t~}=(Z_1)_t as schemes (elementary, as in Stacks), and the 01PS criterion at T (s) and off T (t~). No Mathlib leaf; no slopmaster2 declaration states any node (project IsAmple is relative to Spec K). Small cases: X empty, X a reduced point, integral curve (r=1, T empty, I=O_X), curve disjoint union point (point component, Z_i cap Z_j empty), two lines meeting in a node (T one point). Fixes (citations of existing nodes, no mathematics changed): dag/nodes/sec-curve-estimates/lem-sc-affine-cap-section-open.json: statement, stmt_deps: cite def-weil-pbc-ample-invertible-module for the notation Y_s; dag/nodes/sec-curve-estimates/lem-sc-ample-ideal-section.json: statement, stmt_deps: cite pqf-def-coherent for quasi-coherent; dag/nodes/sec-curve-estimates/lem-sc-conductor-sections.json: statement, stmt_deps: cite def-weil-irreducible-components, def-sbc-closed-immersion-ideal-sheaf, def-weil-pbc-ample-invertible-module (nonvanishing locus). Start Sat Oct 10 02:52:57 PM UTC 2026, end Sat Oct 10 02:55:25 PM UTC 2026.; 3 file(s) fixed by the reviewer"
  }
 }
