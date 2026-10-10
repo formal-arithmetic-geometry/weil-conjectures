@@ -840,3 +840,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 03:48 L: reviewed lem-weil-pbc-higher-direct-image-presheaf (7 steps, +01E1 node, +composed sheafification leaf), lem-weil-pbc-immersion-fibre-degree-one (5 steps, 0 new): accepted.
 - 03:52 L: reviewed lem-weil-pbc-krull-intersection-localization (5 steps, 0 new): accepted.
 - 03:54 L: reviewed lem-weil-pbc-kernel-cokernel-annihilated-mod-ideal (8 steps; wrong definition citation removed), lem-weil-pbc-integral-extension-dimension (2 steps, +3 leaves; stage 3: pqf-lem-incomparability duplicates the new 00GT leaf), lem-weil-pbc-isolated-prime-finite-type-algebra-residue-finite (3 steps, +Jacobson leaf), lem-weil-pbc-kahler-differentials-polynomial-extension (6 steps, +00RS leaf): accepted.
+- 03:56 L: reviewed lem-weil-pbc-local-dimension-zero-henselian (4 steps, 0 new; stage 3: dimension-zero-local-strictly-henselian could cite it): accepted.
