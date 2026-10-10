@@ -1,8 +1,8 @@
 # Work queue
 
-929 items; claim with `tools/claim.py next <group> [--stage N]`.
+926 items; claim with `tools/claim.py next <group> [--stage N]`.
 
-## Stage 1: nodes to split (220)
+## Stage 1: nodes to split (217)
 
 | node | distance to a target | Lean state on the done branch |
 |---|---|---|
@@ -14,13 +14,11 @@
 | `lem-pc-qcoh-truncation-derived-limit` | 3013 | none |
 | `lem-pc-ringed-space-module-stalk-tensor` | 3014 | none |
 | `lem-pc-stalk-direct-sums` | 3014 | none |
-| `lem-pc-ringed-spaces-derived-direct-image-composition` | 3015 | none |
 | `lem-pc-derived-qcoh-perfect-generation` | 3016 | none |
 | `lem-pc-perfect-complexes-compact-set` | 3016 | none |
 | `lem-sc-pseudo-coherent-rhom-qcoherent` | 3016 | none |
 | `lem-pc-perfect-tensor-hom-duality` | 3017 | none |
 | `lem-pc-proper-perfect-direct-image-perfect` | 3017 | none |
-| `lem-sc-p1-rhom-hom-derived-connecting` | 3017 | none |
 | `lem-sc-p1-right-derived-triangle-connecting` | 3017 | none |
 | `lem-sc-proper-flat-right-adjoint-affine-basechange` | 3018 | none |
 | `lem-sc-proper-flat-right-adjoint-open-support` | 3019 | none |
@@ -40,7 +38,6 @@
 | `lem-sc-filtered-colimit-prime-chain-dimension` | 4010 | none |
 | `lem-sc-product-tangent-space-direct-sum` | 4010 | none |
 | `lem-sc-strict-henselization-completion-noetherian` | 4010 | none |
-| `lem-sc-strict-henselization-cotangent-dimension` | 4010 | none |
 | `lem-sc-strict-henselization-faithfully-flat` | 4010 | none |
 | `lem-pc-hilb-containment-locus` | 4011 | none |
 | `lem-pc-derived-free-complex-cover` | 4013 | none |
@@ -64,10 +61,10 @@
 | `pqf-lem-coherent-ft-locnoeth` | 6009 | none |
 | `lem-pc-affine-morphism-hi` | 6010 | rests_on_sorry |
 | `lem-pc-closed-immersion-coherent-cohomology` | 6010 | rests_on_sorry |
-| `lem-pc-projective-space-cohomology-bound` | 6010 | sorry_here |
 | `lem-pc-serre-vanishing` | 6010 | rests_on_sorry |
 | `thm-pqf-finite-iff-proper-finite-fibres` | 6010 | none |
 | `thm-sc-theorem-of-cube` | 6010 | rests_on_sorry |
+| `lem-pc-alternating-cech-computes` | 6011 | none |
 | `lem-pc-projective-space-serre-vanishing` | 6011 | rests_on_sorry |
 | `lem-pc-projective-space-twist-cohomology` | 6011 | rests_on_sorry |
 | `lem-sc-ample-positive-degree` | 6011 | rests_on_sorry |
@@ -941,7 +938,7 @@
 | `lem-weil-pbc-p1-field-dimension-one` | 4 | state |
 | `lem-weil-pbc-projective-space-zero-isomorphism` | 4 | state |
 
-Not open yet: 1401 nodes that wait for a statement dependency, 256 nodes that wait for stage 1.
+Not open yet: 1405 nodes that wait for a statement dependency, 253 nodes that wait for stage 1.
 
 ## Stage 3: modules to prove (0)
 
