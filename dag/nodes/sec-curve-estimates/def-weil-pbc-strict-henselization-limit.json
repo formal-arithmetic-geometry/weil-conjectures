@@ -3,24 +3,56 @@
  "blueprint": {
   "is": "def-weil-pbc-strict-henselization-limit",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "definition",
  "title": "Strict henselization from pointed neighbourhoods",
- "statement": "For affine $(V,\\bar v)$ with $V=\\operatorname{Spec}A_V$, put\n\n$$\n \\mathcal O^{\\mathrm{sh}}_{S,\\bar s}\n   =\\varinjlim_{(V,\\bar v)}A_V,\n \\qquad\n S_{(\\bar s)}=\\operatorname{Spec}\\mathcal O^{\\mathrm{sh}}_{S,\\bar s}.\n$$\n\nThe canonical maps from $S_{(\\bar s)}$ to the affine pointed etale\nneighborhoods identify it with their inverse limit; these affine\nneighborhoods form the indexing subcategory used in the displayed colimit.",
+ "statement": "Let $S$ be a scheme [def-pc-scheme] and let $\\bar s:\\operatorname{Spec}\\Omega\\to S$ be a geometric point [def-weil-geometric-point]. Let $\\mathcal N^{\\mathrm{aff}}_{\\bar s}$ be the full subcategory of pointed etale neighbourhoods [def-weil-pbc-pointed-etale-neighbourhoods] whose underlying scheme is affine, written $V=\\operatorname{Spec}A_V$ [def-weil-affine-spectrum]. By [lem-weil-pbc-affine-etale-essentially-small-cover] with $T=S$, choose a small full subcategory $\\mathcal J_{\\bar s}\\subset\\mathcal N^{\\mathrm{aff}}_{\\bar s}$ containing one representative of every isomorphism class of pairs $(V,\\bar v)$; it is small because the affine etale objects have a set of representatives and each set of lifts $\\operatorname{Hom}_S(\\operatorname{Spec}\\Omega,V)$ is a set. Thus every affine pointed neighbourhood is isomorphic to an object of $\\mathcal J_{\\bar s}$.\n\nPut $\\mathcal I_{\\bar s}:=\\mathcal J_{\\bar s}^{\\mathrm{op}}$. For $V=\\operatorname{Spec}A_V$ define $D_{\\bar s}:\\mathcal I_{\\bar s}\\to\\mathbf{CRing}$ by $D_{\\bar s}(V,\\bar v)=A_V$; an arrow represented by a pointed map $a:(V,\\bar v)\\to(W,\\bar w)$ is sent to $a^\\#:A_W\\to A_V$. Since $\\mathcal J_{\\bar s}$ is small, the colimit in commutative rings exists by [lem-weil-pbc-commutative-algebras-colimits-exist] and [def-weil-pbc-category-colimit]. Define\n\n$$\n A^{\\mathrm{sh}}_{S,\\bar s}:=\\varinjlim_{\\mathcal I_{\\bar s}}D_{\\bar s},\\qquad\n S_{(\\bar s)}:=\\operatorname{Spec}A^{\\mathrm{sh}}_{S,\\bar s}.\n$$\n\nThe category of all pointed etale neighbourhoods is cofiltered by [lem-weil-pbc-pointed-etale-neighbourhoods-cofiltered], and its affine full subcategory is initial by [lemma-weil-pbc-affine-neighbourhood-cofinal]; hence [lem-weil-pbc-colimit-initial-full-subcategory](1) gives cofilteredness and independence of the colimit from replacing all affine neighbourhoods by $\\mathcal J_{\\bar s}$. Applying [lem-weil-pbc-spec-small-colimit-limit] to the small diagram gives canonical maps identifying $S_{(\\bar s)}$ with the inverse limit over $\\mathcal J_{\\bar s}$; transporting this limit along the representative equivalence gives the inverse-limit notation over all affine pointed neighbourhoods, independent up to canonical isomorphism of the choice of $\\mathcal J_{\\bar s}$.",
  "source": {
   "document": "literature/blueprint/master/blueprint/sec-curve-estimates/sk-prop-h2/def-weil-pbc-strict-henselization-limit.md",
   "place": "node def-weil-pbc-strict-henselization-limit, order 944"
  },
  "stmt_deps": [
-  "def-weil-pbc-pointed-etale-neighbourhoods"
+  "def-pc-scheme",
+  "def-weil-geometric-point",
+  "def-weil-pbc-pointed-etale-neighbourhoods",
+  "def-weil-affine-spectrum",
+  "def-weil-pbc-category-colimit",
+  "lem-weil-pbc-affine-etale-essentially-small-cover",
+  "lem-weil-pbc-pointed-etale-neighbourhoods-cofiltered",
+  "lemma-weil-pbc-affine-neighbourhood-cofinal",
+  "lem-weil-pbc-colimit-initial-full-subcategory",
+  "lem-weil-pbc-commutative-algebras-colimits-exist",
+  "lem-weil-pbc-spec-small-colimit-limit"
  ],
  "proof": [],
  "proof_deps": [],
  "proof_origin": null,
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "strict henselization as a colimit of coordinate rings over pointed affine etale neighbourhoods",
+   "results": "AlgebraicGeometry.Scheme.pointSmallEtale and CategoryTheory.GrothendieckTopology.Point.presheafFiber; no strict-henselization construction",
+   "date": "2026-10-10",
+   "verdict": "no exact match; Mathlib supplies the pointed-etale fibre and generic colimit machinery only"
+  },
+  {
+   "tool": "loogle",
+   "query": "Spec (colimit D) is limit (Spec.obj D)",
+   "results": "AlgebraicGeometry.Spec.reflective and CategoryTheory.Functor.Final.colimitIso; no declaration naming strict henselization",
+   "date": "2026-10-10",
+   "verdict": "no exact match; the generic Spec right-adjoint result is recorded in lem-weil-pbc-spec-small-colimit-limit"
+  },
+  {
+   "tool": "grep",
+   "query": "rg -n -i 'strict.?henselization|henselization.?limit|Oˢʰ' /home/ubuntu/weil-src-slopmaster2/WeilConjectures /home/ubuntu/weil-src-slopmaster2/Comparator; rg -n 'pointSmallEtale|Spec.reflective' /home/ubuntu/weil-src-slopmaster2/.lake/packages/mathlib/Mathlib",
+   "results": "No project declaration for this construction; Mathlib hits are pointSmallEtale in AlgebraicGeometry/Sites/EtalePoint.lean and Spec.reflective in AlgebraicGeometry/GammaSpecAdjunction.lean:600",
+   "date": "2026-10-10",
+   "verdict": "no exact match"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [
   "detailed_form"
@@ -53,5 +85,20 @@
   }
  },
  "chapter": "sec-curve-estimates",
- "unit": "sk-prop-h2"
+ "unit": "sk-prop-h2",
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "def-weil-pbc-strict-henselization-limit",
+  "worker": "stage1",
+  "summary": "Repaired the large-index definition under return E7. The construction now chooses a small full representative subcategory J of affine pointed etale neighbourhoods, defines the ring diagram on J^op, cites the existing commutative-algebra colimit existence result, and uses cofilteredness plus the initial-full-subcategory lemma for independence from the full affine category. The existing small-diagram Spec/limit Mathlib leaf is therefore applied within its smallness hypothesis.",
+  "blueprint": "The item's definition/sketch: choose the affine pointed-neighbourhood index, send pointed maps contravariantly on coordinate rings, take the colimit, and identify Spec of that colimit with the inverse limit. E7 repairs the omitted small representative category and explicitly records existence and independence. Whole-blueprint search for strict henselization limit, affine pointed neighbourhoods, and Spec colimit found no duplicate node (same_as = [])."
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-shlim",
+  "group": "J1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-shlim (reviewer sub-agent of L); spot-checked: Re-push after the 13:32 return (C4/B3/E1, non-small index). Repair checked point by point: the colimit is now over I=J^op with J a small full subcategory of affine pointed etale neighbourhoods, built from the set of lem-weil-pbc-affine-etale-essentially-small-cover (T=S; affine etale U->S iso in S_Et to a member Spec A of the set) with pairs (Spec A, vbar), vbar in the set Hom_S(Spec Omega, Spec A); every affine (V',v') is isomorphic to such a pair via phi with v=phi v', so J is small and each affine object receives a morphism from J. Existence: lem-weil-pbc-commutative-algebras-colimits-exist (R=Z, small diagram) with def-weil-pbc-category-colimit. Independence and cofilteredness: lem-weil-pbc-pointed-etale-neighbourhoods-cofiltered (N_sbar cofiltered), lemma-weil-pbc-affine-neighbourhood-cofinal (affine full subcategory initial, so each object receives a morphism from an affine one), then lem-weil-pbc-colimit-initial-full-subcategory (1) applied to N_sbar > N^aff and to N^aff > J, hypotheses (cofiltered, full, every object receives a morphism) met; two choices J, J' both map isomorphically to the same colimit. Spec leaf lem-weil-pbc-spec-small-colimit-limit now applied to the small diagram J^op -> CRing only, within its smallness hypothesis. E7: change named in the report and split_report. Statement against literature/blueprint/master/blueprint/sec-curve-estimates/sk-prop-h2/def-weil-pbc-strict-henselization-limit.md (order 944; the file is in the repository, the report's WANTED for it is mistaken): opposite index, contravariant coordinate-ring diagram (arrow represented by a:(V,v)->(W,w) to a^#:A_W->A_V), ring colimit, Spec, inverse-limit identification all retained. Leaf lines verified in pinned Mathlib: GammaSpecAdjunction.lean:600 Spec.reflective, Scheme.lean:470 Spec, :479 Spec.map, Morphisms/Affine.lean:181 isAffineHom_of_isAffine. Changed fields of the item are split-owned only (statement, stmt_deps, mathlib_searches, status, split_report, blueprint.same_as null->[]). Small case S=Spec Omega' with Omega' separably closed: (S, sbar) is in J up to iso and initial-ish, colimit is Omega'-coordinate ring, S_(sbar)=S. 13:59-14:01 UTC."
+ }
 }

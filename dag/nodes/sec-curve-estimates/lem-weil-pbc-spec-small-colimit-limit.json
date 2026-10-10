@@ -1,0 +1,62 @@
+{
+ "id": "lem-weil-pbc-spec-small-colimit-limit",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "def-weil-pbc-strict-henselization-limit",
+   "place": "blueprint sketch sentence: the affine scheme–ring anti-equivalence carries the colimit cocone to the canonical limit cone",
+   "via": []
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Spec of a small colimit of rings is the limit of the spectra",
+ "statement": "Let $\\mathcal I$ be a small category and $D:\\mathcal I\\to\\mathbf{CRing}$ a diagram of commutative rings with colimit $C=\\varinjlim_{\\mathcal I}D$ [def-weil-pbc-category-colimit]. The ring maps $D(i)\\to C$ induce a cone from the affine scheme $\\operatorname{Spec}C$ [def-weil-affine-spectrum] to the inverse diagram of affine schemes $\\operatorname{Spec}D(i)$, and this cone is a limit in the category of schemes [def-pc-scheme]. Equivalently, after viewing $D$ as a functor $\\mathcal I^{\\mathrm{op}}\\to\\mathbf{CRing}^{\\mathrm{op}}$, the affine spectrum functor carries the colimit cocone to a limit cone.",
+ "source": {
+  "document": "literature/stacks-project/limits.tex",
+  "place": "Lemma Tag 01YW (lemma-directed-inverse-system-affine-schemes-has-limit), with the affine scheme–ring anti-equivalence generalized to an arbitrary small diagram"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-category-colimit",
+  "def-pc-scheme",
+  "def-weil-affine-spectrum"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Spec of a colimit of commutative rings is the limit of the corresponding affine schemes for an arbitrary small diagram",
+   "results": "AlgebraicGeometry.Spec.reflective and Scheme.Spec; no named strict-henselization construction",
+   "date": "2026-10-10",
+   "verdict": "match via Spec.reflective preserving limits"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Spec.reflective",
+   "results": "AlgebraicGeometry.Spec.reflective : Reflective Scheme.Spec; CategoryTheory.Functor.RightAdjoint preserves limits",
+   "date": "2026-10-10",
+   "verdict": "match"
+  },
+  {
+   "tool": "grep",
+   "query": "rg -n 'instance Spec.reflective|def Spec|isAffineHom_of_isAffine' /home/ubuntu/weil-src-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicGeometry/{GammaSpecAdjunction.lean,Scheme.lean,Morphisms/Affine.lean}",
+   "results": "GammaSpecAdjunction.lean:600 instance Spec.reflective; Scheme.lean:470 def Spec and :479 Spec.map; Morphisms/Affine.lean:181 isAffineHom_of_isAffine",
+   "date": "2026-10-10",
+   "verdict": "match"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "AlgebraicGeometry.Spec.reflective",
+  "file": "Mathlib/AlgebraicGeometry/GammaSpecAdjunction.lean",
+  "line": 600,
+  "how": "specializes in one line: Spec.reflective (Mathlib/AlgebraicGeometry/GammaSpecAdjunction.lean:600) makes Spec a right adjoint, so it preserves the limit obtained by viewing the ring colimit cocone in the opposite category; Spec.map (Mathlib/AlgebraicGeometry/Scheme.lean:479) gives the canonical maps and isAffineHom_of_isAffine (Mathlib/AlgebraicGeometry/Morphisms/Affine.lean:181) gives affineness"
+ },
+ "status": "mathlib",
+ "created": {
+  "item": "def-weil-pbc-strict-henselization-limit"
+ },
+ "chapter": "sec-curve-estimates",
+ "unit": "sk-prop-h2"
+}
