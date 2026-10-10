@@ -25,53 +25,123 @@
   "def-pc-perfect-complex",
   "def-weil-pbc-closed-subset-proper-over-base"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "The hypotheses on S, f, and E, including bounded coherent cohomology and proper support of every cohomology sheaf, are exactly those of [lem-pc-direct-image-bounded-coherent]. Therefore Rf_*E has bounded coherent cohomology on S.",
+   "uses": [
+    "lem-pc-direct-image-bounded-coherent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/perfect.tex",
+    "place": "Derived Categories of Schemes, Lemma 36.27.1 (Tag 08EV), proof: first paragraph"
+   }
+  },
+  {
+   "text": "Since S is Noetherian, [lem-pc-noetherian-bounded-coherent-pseudo-coherent] turns the bounded coherent cohomology from Step 1 into pseudo-coherence of Rf_*E.",
+   "uses": [
+    "lem-pc-noetherian-bounded-coherent-pseudo-coherent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/perfect.tex",
+    "place": "Derived Categories of Schemes, Lemma 36.27.1 (Tag 08EV), proof: 'Hence Rf_*E is pseudo-coherent'"
+   }
+  },
+  {
+   "text": "The hypothesis that E has finite Tor dimension over f^{-1}\\mathcal O_S concerns E on X, not Rf_*E on S; the passage between them is [lem-pc-proper-direct-image-finite-tor], whose hypotheses (S Noetherian, f locally of finite type, E bounded with coherent cohomology, every cohomology sheaf with support proper over S, E of finite Tor dimension in D(f^{-1}\\mathcal O_S)) are exactly those of the statement. Hence Rf_*E has finite Tor dimension as an object of D(\\mathcal O_S).",
+   "uses": [
+    "lem-pc-proper-direct-image-finite-tor"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/perfect.tex",
+    "place": "Derived Categories of Schemes, Lemma 36.27.1 (Tag 08EV), proof: from 'By Lemma 36.10.6' (Tag 08EA) to 'we win' (reduction to quasi-compact f, base change, tor amplitude of Rf_*E)"
+   }
+  },
+  {
+   "text": "By Step 2 Rf_*E is pseudo-coherent and by Step 3 it has finite Tor dimension in D(\\mathcal O_S); these are the hypotheses of [lem-pc-pseudo-coherent-finite-tor-perfect] for K=Rf_*E. Hence Rf_*E is perfect on S.",
+   "uses": [
+    "lem-pc-pseudo-coherent-finite-tor-perfect"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/perfect.tex",
+    "place": "Derived Categories of Schemes, Lemma 36.27.1 (Tag 08EV), proof: 'it suffices to show that Rf_*E has finite tor dimension, see Cohomology, Lemma 20.49.5 (Tag 08CQ)'"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-direct-image-bounded-coherent",
+  "lem-pc-noetherian-bounded-coherent-pseudo-coherent",
+  "lem-pc-proper-direct-image-finite-tor",
+  "lem-pc-pseudo-coherent-finite-tor-perfect"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/perfect.tex",
+  "place": "Derived Categories of Schemes, Lemma 36.27.1 (Tag 08EV)"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
    "query": "proper pushforward of bounded coherent finite Tor complex is perfect",
    "results": "DerivedCategory T-structure declarations only; no algebraic-geometric direct-image theorem",
-   "date": "2026-10-10",
+   "date": "2026-10-11",
    "verdict": "no match"
   },
   {
    "tool": "loogle",
-   "query": "DerivedCategory, PerfectComplex, finite Tor",
-   "results": "0 hits; Unknown identifier PerfectComplex",
-   "date": "2026-10-10",
+   "query": "DerivedCategory PerfectComplex finite Tor",
+   "results": "0 hits; unknown identifier PerfectComplex",
+   "date": "2026-10-11",
    "verdict": "no match"
   },
   {
    "tool": "grep",
    "query": "Perfect|finiteTor|derived.*pushforward",
    "results": "0 hits",
-   "date": "2026-10-10",
+   "date": "2026-10-11",
    "verdict": "no match"
   },
   {
    "tool": "leansearch",
    "query": "proper pushforward bounded coherent finite Tor dimension complex perfect",
    "results": "service unavailable: Internal Server Error",
-   "date": "2026-10-10",
+   "date": "2026-10-11",
    "verdict": "unavailable"
   },
   {
    "tool": "grep",
    "query": "finiteTorDim|IsPerfect.*Complex|PerfectComplex in Mathlib/AlgebraicGeometry and Mathlib/Algebra/Homology (slopmaster2 checkout)",
    "results": "0 hits",
-   "date": "2026-10-10",
+   "date": "2026-10-11",
    "verdict": "no match"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-pc-proper-perfect-direct-image-perfect",
   "by": "worker",
   "date": "2026-10-10"
  },
  "chapter": "sec-picard-framework",
- "unit": "sk-thm-picard-duality"
+ "unit": "sk-thm-picard-duality",
+ "split_report": {
+  "date": "2026-10-11",
+  "item": "lem-pc-bounded-coherent-finite-tor-proper-pushforward-perfect",
+  "worker": "stage1",
+  "summary": "Split Stacks Tag 08EV into the direct-image bounded-coherence input, the Noetherian implication from bounded coherent cohomology to pseudo-coherence, and the criterion that pseudo-coherence plus finite Tor dimension is perfect. The item hypotheses match the cited direct-image input exactly; no Mathlib declaration states the scheme-level results.",
+  "blueprint": "Realizes the ancestor lem-sc-finite-duality proof sentence claiming that Derived Categories of Schemes, Lemma 36.27.1 applies, including its reduction from perfectness to finite Tor dimension.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-bct2358",
+  "group": "F1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-bct2358 (reviewer sub-agent of L); spot-checked: Read the packet whole and Stacks 08EV/08E2/08E8/08CQ text. Steps 1-2 correct: 08E2 node gives D^b_Coh of Rf_*E, 08E8 node gives pseudo-coherence (bounded coherent => QCoh, so 08E8 applies). The three new nodes are true, statement-only, not duplicates (lem-sc-coherent-pseudo-coherent is only the degree-0 sheaf case; no existing scheme-level 08CQ or 08E2 node; lem-pc-proper-perfect-direct-image-perfect and lem-pc-noetherian-perfect-direct-image cite this item, not restate it). FIX more, RETURN less: (1) C1, missed by the Second reading: old step 3 fed 'the finite Tor-dimension hypothesis in the statement' to the 08CQ criterion, but that hypothesis is finite Tor dimension of E over f^{-1}O_S on X, while 08CQ needs finite Tor dimension of Rf_*E over O_S; this passage is the main paragraph of the 08EV proof (08EA, base change, tor amplitude). Added statement-only node lem-pc-proper-direct-image-finite-tor (Rf_*E has finite Tor dimension under the item's hypotheses; grep recorded), new step 3 cites it, step 4 applies lem-pc-pseudo-coherent-finite-tor-perfect to K=Rf_*E; proof_deps updated. (2) item source.document still more-morphisms.tex although the report says it was corrected: set to perfect.tex. (3) old step 3 source said Cohomology Lemma 20.48.4; 08CQ is 20.49.5: corrected. Statement of the item unchanged. Edge case: f=id, E coherent of finite Tor dimension: new node is trivial and 08CQ gives the classical criterion.; 2 file(s) fixed by the reviewer; 1 statement node(s) added by the reviewer (FIX more, RETURN less)"
+ }
 }
