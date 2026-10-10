@@ -7,6 +7,8 @@ module
 
 public import WeilConjectures.AlgebraicGeometry.AbelianVariety.Final
 public import WeilConjectures.AlgebraicGeometry.Curve.Compactification
+public import WeilConjectures.AlgebraicGeometry.Curve.DivisorRestriction
+public import WeilConjectures.AlgebraicGeometry.Curve.Picard
 public import WeilConjectures.AlgebraicGeometry.Curve.Kummer
 public import WeilConjectures.AlgebraicGeometry.Curve.SerreDuality
 public import WeilConjectures.AlgebraicGeometry.GlobalSectionsBijective
@@ -16,6 +18,8 @@ public import WeilConjectures.AlgebraicGeometry.Sites.ArtinSchreier
 public import WeilConjectures.AlgebraicGeometry.Sites.GmPicard
 public import WeilConjectures.Mathlib.Algebra.Module.Torsion.Basic
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Normalization
+public import WeilConjectures.Mathlib.RingTheory.Noetherian.Basic
+public import WeilConjectures.Mathlib.GroupTheory.Finiteness
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
 
 /-!
@@ -251,8 +255,136 @@ theorem exists_addEquiv_pic_quotient (f : C ⟶ Spec (.of k)) [IsConnectedCurve 
       IsConnectedCurve c.g ∧ Smooth c.g ∧
         (∃ e : (picardFunctorDegree c.g 0).obj.RepresentableBy J, IsPicardZeroMul c.g e) ∧
         Λ.FG ∧
-        Nonempty (Additive C.Pic ≃+ Additive (𝟙_ (Over (Spec (.of k))) ⟶ J) ⧸ Λ) :=
-  sorry
+        Nonempty (Additive C.Pic ≃+ Additive (𝟙_ (Over (Spec (.of k))) ⟶ J) ⧸ Λ) := by
+  classical
+  obtain ⟨c, hZ, hsm, hfin, hcl⟩ := IsConnectedCurve.exists_smooth_properCompactification f
+  have := c.isProper
+  have := c.isOpenImmersion
+  have := IsConnectedCurve.connectedSpace' c.g
+  have := IsConnectedCurve.nonempty f
+  have : IsLocallyNoetherian c.Z := LocallyOfFiniteType.isLocallyNoetherian c.g
+  have : IsRegular c.Z := IsRegular.of_smooth c.g
+  have : IrreducibleSpace c.Z := IsRegular.irreducibleSpace c.Z
+  have : IsReduced c.Z := isReduced_of_isReduced_stalk c.Z
+  have : IsIntegral c.Z := isIntegral_of_irreducibleSpace_of_isReduced c.Z
+  have : CompactSpace c.Z := (quasiCompact_iff_compactSpace c.g).mp inferInstance
+  have : IsNoetherian c.Z := ⟨⟩
+  have : JacobsonSpace c.Z := LocallyOfFiniteType.jacobsonSpace c.g
+  have : SmoothOfRelativeDimension 1 c.g :=
+    (smoothOfRelativeDimension_iff_topologicalKrullDim_eq c.g 1).mpr
+      (IsConnectedCurve.krullDim_eq_one (f := c.g))
+  have := IsConnectedCurve.connectedSpace' f
+  have : IsLocallyNoetherian C := LocallyOfFiniteType.isLocallyNoetherian f
+  have : IsRegular C := IsRegular.of_smooth f
+  have : IrreducibleSpace C := IsRegular.irreducibleSpace C
+  have : IsReduced C := isReduced_of_isReduced_stalk C
+  have : IsIntegral C := isIntegral_of_irreducibleSpace_of_isReduced C
+  have : IsNoetherian C := ⟨⟩
+  have : SmoothOfRelativeDimension 1 f :=
+    (smoothOfRelativeDimension_iff_topologicalKrullDim_eq f 1).mpr
+      (IsConnectedCurve.krullDim_eq_one (f := f))
+  -- the Jacobian of the compactification
+  let _ : c.Z.Over (Spec (.of k)) := ⟨c.g⟩
+  have : IsProper (c.Z ↘ Spec (.of k)) := c.isProper
+  have : SmoothOfRelativeDimension 1 (c.Z ↘ Spec (.of k)) := ‹SmoothOfRelativeDimension 1 c.g›
+  have : IsCurve (c.Z ↘ Spec (.of k)) := hZ.toIsCurve
+  have : Smooth (c.Z ↘ Spec (.of k)) := hsm
+  have : GeometricallyIntegral (c.Z ↘ Spec (.of k)) := by
+    have : GeometricallyConnected c.g := GeometricallyConnected.of_isSepClosed (k := k) c.Z
+    have : GeometricallyIrreducible (c.Z ↘ Spec (.of k)) :=
+      GeometricallyIrreducible.of_smooth_of_geometricallyConnected c.g
+    exact .of_geometricallyReduced_of_geometricallyIrreducible _
+  obtain ⟨J, _, e, hJp, hJs, hJi, he, ⟨ψ⟩⟩ := exists_jacobian (k := k) (X := c.Z)
+  have : IsAbelianVariety J :=
+    { toIsProper := hJp
+      toSmooth := SmoothOfRelativeDimension.smooth (Scheme.arithmeticGenus k c.Z) J.hom
+      toConnectedSpace := by
+        have := GeometricallyIrreducible.irreducibleSpace_of_subsingleton J.hom
+        infer_instance }
+  -- the divisor class groups
+  let _ : C.Over (Spec (.of k)) := ⟨f⟩
+  have : IsCurve (C ↘ Spec (.of k)) := inferInstanceAs (IsCurve f)
+  have : SmoothOfRelativeDimension 1 (C ↘ Spec (.of k)) := ‹SmoothOfRelativeDimension 1 f›
+  obtain ⟨eC, -⟩ := Scheme.exists_divisorClassGroup_addEquiv_pic (k := k) (C := C)
+  obtain ⟨eZ, heZ⟩ := Scheme.exists_divisorClassGroup_addEquiv_pic (k := k) (C := c.Z)
+  have heZ0 (D : c.Z.Divisor) (hD : D ∈ c.Z.principalDivisors) :
+      Scheme.Divisor.toPic k c.Z D = 0 := by
+    rw [← heZ, (QuotientAddGroup.eq_zero_iff D).2 hD, map_zero]
+  let resCl : c.Z.DivisorClassGroup →+ C.DivisorClassGroup :=
+    QuotientAddGroup.map _ _ (Scheme.Divisor.restrict c.i)
+      (fun D hD ↦ Scheme.Divisor.restrict_principalDivisors c.i ⟨D, hD, rfl⟩)
+  -- the map `Pic⁰(C̄) ⟶ Pic(C)`
+  let ι₀ : Additive (picardZero k c.Z) →+ Additive c.Z.Pic :=
+    MonoidHom.toAdditive (picardZero k c.Z).subtype
+  have hι₀ : Function.Injective ι₀ := Subtype.val_injective
+  let Ψ : Additive (picardZero k c.Z) →+ Additive C.Pic :=
+    eC.toAddMonoidHom.comp (resCl.comp (eZ.symm.toAddMonoidHom.comp ι₀))
+  -- a closed point at infinity
+  obtain ⟨x₀, hx₀⟩ : ∃ x : c.Z, x ∉ Set.range c.i := by
+    by_contra! h
+    have : Surjective c.i := ⟨h⟩
+    have : IsIso c.i := (isIso_iff_isOpenImmersion_and_surjective _).mpr ⟨inferInstance, this⟩
+    have : IsProper f := by rw [c.comm]; infer_instance
+    have h0 := (isFinite_of_isProper_of_isAffine f).2
+    rw [IsConnectedCurve.krullDim_eq_one (f := f)] at h0
+    exact absurd h0 (by decide)
+  let P₀ : closedPoints c.Z := ⟨x₀, hcl x₀ hx₀⟩
+  have hP₀ : Scheme.Divisor.restrict c.i (Finsupp.single P₀ (1 : ℤ)) = 0 := by
+    ext x
+    rw [Scheme.Divisor.restrict_apply, Finsupp.coe_zero, Pi.zero_apply]
+    refine Finsupp.single_eq_of_ne fun h ↦ hx₀ ⟨x.1, ?_⟩
+    exact (congrArg Subtype.val h)
+  -- `Ψ` is surjective
+  have hsurj : Function.Surjective Ψ := by
+    intro y
+    obtain ⟨DC, hDC⟩ := QuotientAddGroup.mk_surjective (eC.symm y)
+    set D := Scheme.Divisor.extend c.i DC
+    set D' := D - Scheme.Divisor.degree c.Z D • Finsupp.single P₀ (1 : ℤ)
+    have hD' : Scheme.picDegreeHom k c.Z (Scheme.Divisor.toPic k c.Z D').toMul = 1 := by
+      rw [Scheme.picDegreeHom_toPic, ofAdd_eq_one]
+      simp [D']
+    refine ⟨.ofMul ⟨(Scheme.Divisor.toPic k c.Z D').toMul, hD'⟩, ?_⟩
+    have h1 : eZ.symm (ι₀ (.ofMul ⟨_, hD'⟩)) = QuotientAddGroup.mk D' := by
+      rw [AddEquiv.symm_apply_eq, heZ]
+      rfl
+    change eC (resCl (eZ.symm (ι₀ _))) = y
+    rw [h1]
+    change eC (QuotientAddGroup.mk (Scheme.Divisor.restrict c.i D')) = y
+    rw [map_sub, map_zsmul, Scheme.Divisor.restrict_extend, hP₀,
+      smul_zero, sub_zero, hDC, AddEquiv.apply_symm_apply]
+  -- the kernel of `Ψ` is generated by the classes of the points at infinity
+  let T : AddSubgroup c.Z.Divisor := AddSubgroup.closure
+    (Set.range fun P : {P : closedPoints c.Z // P.1 ∉ Set.range c.i} ↦ Finsupp.single P.1 (1 : ℤ))
+  have : Finite {P : closedPoints c.Z // P.1 ∉ Set.range c.i} := by
+    have := hfin.to_subtype
+    refine Finite.of_injective (β := ↥((Set.range c.i.base)ᶜ)) (fun P ↦ ⟨P.1.1, P.2⟩)
+      fun P Q h ↦ ?_
+    exact Subtype.ext (Subtype.ext (by simpa using congrArg Subtype.val h))
+  have hT : T.FG := by
+    have := Set.finite_range fun P : {P : closedPoints c.Z // P.1 ∉ Set.range c.i} ↦
+      Finsupp.single P.1 (1 : ℤ)
+    exact ⟨this.toFinset, by rw [Set.Finite.coe_toFinset]⟩
+  have hker : Ψ.ker.map ι₀ ≤ T.map (Scheme.Divisor.toPic k c.Z) := by
+    rintro _ ⟨L, hL, rfl⟩
+    obtain ⟨D, hD⟩ := QuotientAddGroup.mk_surjective (eZ.symm (ι₀ L))
+    have h0 : resCl (QuotientAddGroup.mk D) = 0 := by
+      rw [hD]
+      exact eC.injective ((AddMonoidHom.mem_ker.1 hL).trans eC.map_zero.symm)
+    replace h0 : (QuotientAddGroup.mk (Scheme.Divisor.restrict c.i D) : C.DivisorClassGroup) = 0 :=
+      h0
+    rw [QuotientAddGroup.eq_zero_iff] at h0
+    obtain ⟨p, hp, t, ht, hpt⟩ :=
+      AddSubgroup.mem_sup.1 (Scheme.Divisor.mem_sup_closure_of_restrict_mem c.i D h0)
+    refine ⟨t, ht, ?_⟩
+    rw [← eZ.apply_symm_apply (ι₀ L), ← hD, heZ, ← hpt, map_add, heZ0 p hp, zero_add]
+  have hΛ : Ψ.ker.FG := AddSubgroup.FG.of_map_le hι₀ (hT.map _) hker
+  -- transport along `Pic⁰(C̄) ≅ J(k)`
+  let ψ' : Additive (picardZero k c.Z) ≃+ Additive (𝟙_ (Over (Spec (.of k))) ⟶ J) :=
+    MulEquiv.toAdditive ψ
+  refine ⟨c, J, inferInstance, inferInstance, Ψ.ker.map ψ'.toAddMonoidHom, hZ, hsm,
+    ⟨e, he⟩, hΛ.map _, ⟨?_⟩⟩
+  exact (QuotientAddGroup.quotientKerEquivOfSurjective Ψ hsurj).symm.trans
+    (QuotientAddGroup.congr _ _ ψ' rfl)
 
 /-- **`Pic` of an affine curve is divisible with finite torsion.** Let `C` be a smooth affine
 connected curve over an algebraically closed field `k` and `n` prime to `char k`. Then `Pic(C)`
