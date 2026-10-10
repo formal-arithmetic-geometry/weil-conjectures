@@ -23,9 +23,55 @@
   "def-pd-separable-closure",
   "def-weil-pbc-separable-algebraic-extension"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "For finite separable L/K, K-embeddings L\\to K^sep correspond contravariantly to geometric points of Spec L. The embedding set is nonempty by [lem-exc-etale-embedding-extension-sepclosed] applied with E=L, F=K, intermediate field K, and f the inclusion K\\to K^sep: every element of L is algebraic over K and its minimal polynomial is separable, hence splits in the separably closed K^sep. It is finite elementarily: choose a K-basis a_1,\\ldots,a_n of L; an embedding is determined by the images of the a_i, and each image is one of finitely many roots in K^sep of the minimal polynomial of a_i. The extension K^sep/K is Galois: it is separable algebraic by [def-pd-separable-closure], and it is normal because every separable minimal polynomial over K splits in the separably closed K^sep. Given two embeddings sigma and tau, the map tau\\circ sigma^{-1}:sigma(L)\\to tau(L) extends by [lem-exc-etale-embedding-extension-sepclosed] to a K-algebra endomorphism phi:K^sep\\to K^sep; its hypotheses hold because K^sep is algebraic over K and the relevant separable minimal polynomials split there. This endomorphism is bijective by [lem-exc-etale-algebraic-endomorphism-bijective], hence is an element of G, proving transitivity. The stabilizer is {g | g\\circ sigma=sigma}=Gal(K^sep/sigma(L)) by the definition of the fixing subgroup. This subgroup is open by [lem-exc-etale-finite-subextension-fixing-subgroup-open], since sigma(L) is finite-dimensional over K; therefore the action on the discrete embedding set is continuous.",
+   "uses": [
+    "lem-exc-etale-embedding-extension-sepclosed",
+    "lem-exc-etale-algebraic-endomorphism-bijective",
+    "lem-exc-etale-finite-subextension-fixing-subgroup-open"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/pione.tex",
+    "place": "Tag 03SF, finite separable field component; Mathlib field-theory declarations supply the extension and openness facts"
+   }
+  },
+  {
+   "text": "Let S be a finite transitive discrete continuous G-set and H the stabilizer of a point. Continuity makes H open and the orbit map identifies S with G/H. By [lem-exc-etale-open-subgroup-fixed-field], L=(K^sep)^H is finite separable over K and H=Gal(K^sep/L). By step 1, the embedding G-set of L is transitive with stabilizer of the inclusion equal to Gal(K^sep/L)=H, so it is G-isomorphic to G/H and hence to S.",
+   "uses": [
+    "lem-exc-etale-open-subgroup-fixed-field"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/pione.tex",
+    "place": "Tag 03QR, finite Galois correspondence discussion: orbit-stabilizer and fixed field"
+   }
+  },
+  {
+   "text": "For finite separable L/K and L'/K, injectivity of precomposition follows because field embeddings are injective and L has an embedding into K^sep (step 1). For surjectivity, let phi be equivariant and fix an embedding sigma_0:L\\to K^sep; put tau=phi(sigma_0). Equivariance gives Gal(K^sep/sigma_0(L))\\subseteq Gal(K^sep/tau(L')). Hence tau(L') lies in the fixed field of the fixing subgroup of sigma_0(L), which is sigma_0(L) by [lem-exc-etale-galois-fixed-field-subgroup], applicable since K^sep/K is Galois (step 1). Thus tau=sigma_0\\circ psi for a unique K-map psi:L'\\to L, and equivariance plus transitivity from step 1 gives phi=psi^* everywhere. Therefore the displayed Hom map is bijective.",
+   "uses": [
+    "lem-exc-etale-galois-fixed-field-subgroup"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/pione.tex",
+    "place": "Tag 03QR, full-faithfulness paragraph, with the fixed-field identity supplied by Mathlib"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-exc-etale-embedding-extension-sepclosed",
+  "lem-exc-etale-algebraic-endomorphism-bijective",
+  "lem-exc-etale-finite-subextension-fixing-subgroup-open",
+  "lem-exc-etale-open-subgroup-fixed-field",
+  "lem-exc-etale-galois-fixed-field-subgroup"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/pione.tex",
+  "place": "Tags 03SF and 03QR, finite Galois correspondence and full faithfulness"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -50,12 +96,28 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-exc-etale-field-gsets",
   "by": "worker",
   "date": "2026-10-10"
  },
  "chapter": "sec-curve-estimates",
- "unit": "sk-prop-h2"
+ "unit": "sk-prop-h2",
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "lem-exc-etale-field-galois-classification",
+  "worker": "stage1",
+  "summary": "Repaired the split by deleting two nodes that merely restated clauses of the item and the separable-degree leaf. The proof spells out embedding nonemptiness and finiteness, transitivity, stabilizer, continuity, G/H identification, and full faithfulness, citing the new open-subgroup statement and Mathlib leaves for extension of embeddings, bijectivity of algebraic endomorphisms, openness of fixing subgroups, and fixed fields.",
+  "blueprint": "The three steps realize the first proof paragraph of lem-exc-field-discrete-modules: finite separable fields give finite continuous G-sets, open stabilizers recover finite separable fixed fields, and the construction is fully faithful.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-egc3",
+  "group": "E1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-egc3 (reviewer sub-agent of L); spot-checked: Re-push after returns of 16:12 and 16:33 (head 8ae34ceab). Latest return points: 1 repaired (step 1 cites new leaf lem-exc-etale-finite-subextension-fixing-subgroup-open, declaration name gone from the text); 2 repaired (leaf lem-exc-etale-algebraic-endomorphism-bijective cited, hypotheses for K^sep/K spelled out); 3 repaired (nonemptiness via lem-exc-etale-embedding-extension-sepclosed with E=L, intermediate field K); 4 repaired (separable-degree leaf deleted, finiteness proved from a K-basis and roots of minimal polynomials); 5 half repaired: step 1 now proves K^sep/K Galois, but lem-exc-etale-galois-fixed-field-subgroup still said 'separably closed extension ... that is Galois' (the report claims otherwise) - FIX more, RETURN less (C4, leaf statement vs declaration): dag/nodes/sec-curve-estimates/lem-exc-etale-galois-fixed-field-subgroup.json: statement: rewritten for a Galois extension K/k (separable algebraic, normal spelled out as in lem-weil-pbc-finite-galois-fixed-field), H the subgroup fixing L, fixed field of H = L, as InfiniteGalois.fixedField_fixingSubgroup states; stmt_deps: def-pd-separable-closure replaced by def-weil-pbc-separable-algebraic-extension. Other fixes: item proof[2].text: injectivity needs an embedding of L (not L') into K^sep, now 'L has an embedding into K^sep (step 1)', and the fixed-field leaf application now says it applies since K^sep/K is Galois (step 1); split_report.summary: stale mention of separable-degree leaves replaced; split_report.date 2026-10-11 -> 2026-10-10. Mathlib lines verified in the pinned Mathlib: Algebra.IsAlgebraic.algHom_bijective RingTheory/Algebraic/Basic.lean:491 (field L, algebraic over K); IntermediateField.exists_algHom_of_splits FieldTheory/Extension.lean:344 (hK': every s in E integral over F with minpoly splitting in K - matches node); IntermediateField.fixingSubgroup_isOpen FieldTheory/KrullTopology.lean:169 (no Galois hypothesis, E finite-dimensional); InfiniteGalois.fixedField_fixingSubgroup FieldTheory/Galois/Infinite.lean:85 ([IsGalois k K]). No GaloisCategory/FiberFunctor leaf. Steps checked: step 1 (embeddings nonempty, finite, transitive via extension + bijectivity with E=K^sep, F=K, intermediate field sigma(L); stabilizer = fixing subgroup of sigma(L), open, so the action on the finite discrete set is continuous); step 2 (stabilizer H open by continuity, lem-exc-etale-open-subgroup-fixed-field gives L=(K^sep)^H finite separable and H=Gal(K^sep/L), step 1 gives the G-set of L transitive with that stabilizer, hence G/H = S); step 3 (injectivity by injectivity of embeddings; surjectivity: stab(sigma_0) in stab(tau) puts tau(L') in the fixed field of Gal(K^sep/sigma_0 L) = sigma_0(L), tau = sigma_0 psi, equivariance + transitivity give phi = psi^*). Source pione.tex Tags 03SF/03QR; new statement node open-subgroup-fixed-field is the Galois correspondence half, not a restatement of an item clause. Small cases: K separably closed (G trivial, one embedding), L=K, L/K finite Galois (embedding set G/Gal(K^sep/L) of size [L:K]). Start Sat Oct 10 04:48:42 PM UTC 2026, end Sat Oct 10 04:49:55 PM UTC 2026.; 2 file(s) fixed by the reviewer"
+ }
 }
