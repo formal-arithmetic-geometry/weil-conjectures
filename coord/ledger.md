@@ -1773,3 +1773,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 15:21 L: merged deliver/M1/lem-weil-pbc-derived-etale-cohomology-limit (reviewer FIX; after a return; new nodes: 1)
 - 15:22 L: merged deliver/J1/lem-weil-pbc-affine-source-morphism-separated (reviewer PASS; first push; new nodes: 0)
 - 15:22 L: merged deliver/F1/lem-sc-finite-discrete-separated-affine (reviewer PASS; first push; new nodes: 0)
+- 15:22 L: returned deliver/E1/lem-pc-grothendieck-edge-cocycle (reviewer RETURN: Re-push 9f02e0808 repairs return point 3 (def-sp-left-exact-additive cited in step 1) and the proof_origin of point 4, b)
