@@ -2,17 +2,18 @@
  "id": "def-weil-pbc-ample-invertible-module",
  "kind": "definition",
  "title": "Ample invertible module on a scheme (absolute ampleness)",
- "statement": "Let $X$ be a scheme [def-pc-scheme] and $\\mathcal L$ an invertible $\\mathcal O_X$-module [def-sc-invertible-module]. For $n\\ge0$ write $\\mathcal L^{\\otimes n}$ for the $n$-fold tensor product $\\mathcal L\\otimes_{\\mathcal O_X}\\dots\\otimes_{\\mathcal O_X}\\mathcal L$ [def-pur-sheaf-tensor-product] (with $\\mathcal L^{\\otimes0}=\\mathcal O_X$), and for a global section $s\\in\\Gamma(X,\\mathcal L^{\\otimes n})$ put $X_s=\\{x\\in X:\\ s_x\\notin\\mathfrak m_x(\\mathcal L^{\\otimes n})_x\\}$, the set of points where the value of $s$ in $(\\mathcal L^{\\otimes n})_x\\otimes_{\\mathcal O_{X,x}}\\kappa(x)$ is nonzero ($\\kappa(x)$ the residue field [def-weil-residue-field]); it is an open subset of $X$, viewed as an open subscheme. $\\mathcal L$ is *ample* if (1) $X$ is quasi-compact [def-weil-finite-type-morphism] (every open covering of the underlying space has a finite subcovering), and (2) for every $x\\in X$ there exist $n\\ge1$ and $s\\in\\Gamma(X,\\mathcal L^{\\otimes n})$ such that $x\\in X_s$ and the open subscheme $X_s$ is affine. This is the absolute notion of Stacks Properties Definition 01PS (EGA II 4.5.3 with criterion 4.5.2 a')); it is not the notion of [def-sc-ample], which is stated only for proper schemes over a field via very ampleness of a power.",
+ "statement": "Let $X$ be a scheme [def-pc-scheme] and $\\mathcal L$ an invertible $\\mathcal O_X$-module [def-sc-invertible-module]. For $n\\ge0$ write $\\mathcal L^{\\otimes n}$ for the $n$-fold tensor product $\\mathcal L\\otimes_{\\mathcal O_X}\\dots\\otimes_{\\mathcal O_X}\\mathcal L$ [def-pur-sheaf-tensor-product] (with $\\mathcal L^{\\otimes0}=\\mathcal O_X$); it is an invertible $\\mathcal O_X$-module. For a global section $s\\in\\Gamma(X,\\mathcal L^{\\otimes n})$ put $X_s=\\{x\\in X:\\ s_x\\notin\\mathfrak m_x(\\mathcal L^{\\otimes n})_x\\}$, where $s_x$ is the germ of $s$ in the stalk $(\\mathcal L^{\\otimes n})_x$ [def-weil-pbc-module-stalk] and $\\mathfrak m_x$ the maximal ideal of the local ring $\\mathcal O_{X,x}$; equivalently, $X_s$ is the set of points where the value of $s$ in $(\\mathcal L^{\\otimes n})_x\\otimes_{\\mathcal O_{X,x}}\\kappa(x)$ is nonzero ($\\kappa(x)$ the residue field [def-weil-residue-field]). The set $X_s$ is open in $X$ (Stacks Modules Lemma 01CY; the invertibility of $\\mathcal L^{\\otimes n}$ and the openness of $X_s$ are the statements recorded in `pointers`), and $X_s$ is viewed as an open subscheme of $X$. $\\mathcal L$ is *ample* if (1) $X$ is quasi-compact [def-weil-pbc-quasi-compact-scheme], and (2) for every $x\\in X$ there exist $n\\ge1$ and $s\\in\\Gamma(X,\\mathcal L^{\\otimes n})$ such that $x\\in X_s$ and $X_s$ is an affine open of $X$ [def-pc-scheme]. This is the absolute notion of Stacks Properties Definition 01PS (EGA II 4.5.3).",
  "source": {
   "document": "literature/stacks-project/properties.tex",
-  "place": "Properties, Definition 01PS (label definition-ample); EGA II (literature/ega/EGA-II_PMIHES-8-1961.pdf), Définition 4.5.3 with Théorème 4.5.2 a')"
+  "place": "Properties, Section 01PR (label section-ample), opening paragraph (X_s open by Modules Lemma 01CY, label lemma-s-open), and Definition 01PS (label definition-ample); EGA II (literature/ega/EGA-II_PMIHES-8-1961.pdf), Définition 4.5.3 with Théorème 4.5.2 a')"
  },
  "stmt_deps": [
   "def-pc-scheme",
   "def-sc-invertible-module",
   "def-pur-sheaf-tensor-product",
+  "def-weil-pbc-module-stalk",
   "def-weil-residue-field",
-  "def-weil-finite-type-morphism"
+  "def-weil-pbc-quasi-compact-scheme"
  ],
  "proof": [],
  "proof_deps": [],
@@ -52,10 +53,38 @@
    "results": "AlgebraicGeometry.IsAmple in WeilConjectures/AlgebraicGeometry/Modules/Ample.lean (source repository, not Mathlib): 'some positive tensor power is very ample' over Spec K, i.e. the notion of def-sc-ample, not this one; index unavailable",
    "date": "2026-10-10",
    "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.IsAffineOpen, \"ample\"",
+   "results": "none (no declaration mentioning IsAffineOpen has 'ample' in its name); the plain query \"Ample\" returns only Lean.Order.Example.*, Lean.Meta.Match.Example/CounterExample, i.e. substring hits on 'example'",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "ample line bundle on a scheme: quasi-compact and every point lies in an affine nonvanishing locus of a section of a tensor power",
+   "results": "AlgebraicGeometry.quasiCompact_iff_forall_affine, QuasiCompact, Scheme.IsQuasiAffine.of_forall_exists_mem_basicOpen (Mathlib.AlgebraicGeometry.QuasiAffine: the case L = O_X, quasi-affine), isCompact_iff_finite_and_eq_biUnion_affineOpens, Scheme.affineBasicOpen, Scheme.compactSpace_of_isAffine, exists_of_res_zero_of_qcqs",
+   "date": "2026-10-10",
+   "verdict": "no match (only the special case L = O_X appears, as a criterion for quasi-affineness)"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "ample invertible sheaf on a scheme (EGA II 4.5.3)",
+   "results": "isAffine_of_isAffineOpen_basicOpen, isAffineOpen_of_isAffineOpen_basicOpen, IsAffineOpen.instIsAffineToSchemeBasicOpen, IsAffineOpen.basicOpen, exists_eq_pow_mul_of_isAffineOpen",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rn 'IsAmple\\|ample' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicGeometry/*.lean; grep -rnwiE 'ample|IsAmple|veryAmple|IsVeryAmple' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib --include=*.lean; ls ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicGeometry/Modules/",
+   "results": "first grep: only 'example' lines (AffineSpace.lean:493, Limits.lean:725); word grep: no hit outside Mathlib/Analysis/Convex/AmpleSet.lean (ample subsets of real vector spaces); Mathlib/AlgebraicGeometry/Modules/ has only Presheaf.lean, Sheaf.lean, Tilde.lean (no invertible modules, no Picard group)",
+   "date": "2026-10-10",
+   "verdict": "no match"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "worker",
@@ -75,5 +104,33 @@
   }
  },
  "chapter": "sec-proper-base-change",
- "unit": "sk-thm-p1"
+ "unit": "sk-thm-p1",
+ "pointers": [
+  {
+   "to": "lem-weil-pbc-nonvanishing-section-trivializes",
+   "was": [],
+   "reason": "well-definedness of the data, not a dependency: for an invertible module M on a scheme and s in Gamma(X, M), the set X_s is open (Stacks Modules Lemma 01CY), applied to M = L^{otimes n}; it makes X_s an open subscheme, as Properties Section 01PR recalls before Definition 01PS",
+   "date": "2026-10-10"
+  },
+  {
+   "to": "lem-weil-pbc-invertible-pullback-tensor",
+   "was": [],
+   "reason": "well-definedness of the data, not a dependency: its part (1) (Stacks Modules Lemma 01CT (1), a tensor product of invertible modules is invertible) gives by induction on n that L^{otimes n} is invertible (L^{otimes 0} = O_X trivially), which the openness lemma 01CY needs",
+   "date": "2026-10-10"
+  }
+ ],
+ "note": "Not the notion of def-sc-ample, which is stated only for proper schemes over a field via very ampleness of a power; the source repository's AlgebraicGeometry.IsAmple (WeilConjectures/AlgebraicGeometry/Modules/Ample.lean) is that other notion. Moved out of the statement by the worker of this item (2026-10-10).",
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "def-weil-pbc-ample-invertible-module",
+  "worker": "stage1",
+  "summary": "Checked against Stacks Properties Section 01PR and Definition 01PS (properties.tex 4229-4257; EGA II 4.5.3 is its reference) and Modules Lemma 01CY (modules.tex 4360, lemma-s-open) and 01CT (4201, lemma-constructions-invertible); tags verified in tags/tags (01PR, 01PS, 01CY, 01CT, 01HW, 01IJ, 01K2, 005A). The definition agrees with 01PS (quasi-compact X; every point in an affine X_s for a section s of some L^{otimes n}, n >= 1). Changes: (a) the claim 'X_s is an open subset' moved out: the definition now names it only in words and records in `pointers` the existing reviewed node lem-weil-pbc-nonvanishing-section-trivializes (Stacks 01CY) and, for the invertibility of L^{otimes n} which 01CY needs, lem-weil-pbc-invertible-pullback-tensor (1) (Stacks 01CT (1)); neither is in stmt_deps; (b) stmt_deps: def-weil-finite-type-morphism removed (it is the morphism notion, not the quasi-compactness of a scheme) and replaced by the new Mathlib leaf def-weil-pbc-quasi-compact-scheme (CompactSpace); new Mathlib leaf def-weil-pbc-affine-scheme (IsAffine/IsAffineOpen) added for 'X_s affine'; def-weil-pbc-module-stalk added for the germ s_x in (L^{otimes n})_x; (c) the sentence contrasting with def-sc-ample moved to the field `note` (it cited a node that is not a dependency). No proof hints or bold tag references in the text. The five citers (lem-weil-pbc-coherent-twist-global-generation, -formal-systems-graded-vanishing, -vanishing-projective, -projective-ample-invertible, -ample-scheme-separated) use exactly conditions (1) and (2) (quasi-compact X, affine X_s for sections of powers n >= 1) and the X_s notation; none needs a change. Mathlib: no ample invertible module (LeanSearch, LeanFinder, Loogle, grep recorded; Mathlib has no invertible-module/Picard API in AlgebraicGeometry/Modules); the source repository's IsAmple is the very-ample-power notion over a field."
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "result": "accepted",
+  "note": "Definition node (Stacks 01PS): the claims (L^n invertible, X_s open) moved to pointers at existing reviewed nodes (01CT, 01CY); quasi-compact scheme gets a new Mathlib-leaf definition (CompactSpace); the worker's new affine-scheme definition duplicated def-pc-scheme (which defines affine schemes) and was removed by L, the citation redirected; the def-sc-ample comparison moved to a note."
+ },
+ "lead_note": " L 2026-10-10: the worker's def-weil-pbc-affine-scheme duplicated def-pc-scheme; removed, citation redirected."
 }

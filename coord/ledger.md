@@ -791,3 +791,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 02:14 L: reviewed lem-weil-pbc-zariski-pair-rank-one-propagation (3 steps, +00NX leaf; statement rewritten in TeX): accepted. Merged F1 site-coverings-common-refinement (4 steps, 00W6).
 - 02:15 L: reviewed def-weil-pbc-complete-intersection-over-field (definition, 0 new): accepted.
 - 02:17 L: reviewed def-weil-pbc-constant-group-scheme (definition, +multiplication node) and def-weil-pbc-fibre-degree-bound (definition, +composed leaf): accepted; citers made to cite the moved claims so the new nodes are reachable.
+- 02:19 L: reviewed def-weil-pbc-ample-invertible-module (definition, +quasi-compact-scheme leaf; duplicate affine-scheme definition removed) and def-weil-pbc-finite-global-dimension (definition, +projective-module leaf, +well-definedness lemma flagged unreachable until the 00O8 node cites it): accepted.

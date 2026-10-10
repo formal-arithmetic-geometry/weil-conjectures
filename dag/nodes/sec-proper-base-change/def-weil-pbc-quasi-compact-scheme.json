@@ -1,0 +1,65 @@
+{
+ "id": "def-weil-pbc-quasi-compact-scheme",
+ "kind": "definition",
+ "title": "Quasi-compact scheme",
+ "statement": "A topological space $T$ is *quasi-compact* if every open covering of $T$ has a finite subcovering (no Hausdorff condition). A scheme $X$ [def-pc-scheme] is *quasi-compact* if its underlying topological space is quasi-compact.",
+ "source": {
+  "document": "literature/stacks-project/schemes.tex",
+  "place": "Schemes, Section 01K2 (label section-quasi-compact), first sentence: 'A scheme is quasi-compact if its underlying topological space is quasi-compact'; Topology, Definition 005A (literature/stacks-project/topology.tex, label definition-quasi-compact, (1))"
+ },
+ "stmt_deps": [
+  "def-pc-scheme"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "scheme whose underlying topological space is quasi-compact",
+   "results": "AlgebraicGeometry.Scheme.compactSpace_of_isAffine, AlgebraicGeometry.quasiCompact_iff_forall_affine, AlgebraicGeometry.QuasiCompact, AlgebraicGeometry.quasiCompact_iff (Mathlib.AlgebraicGeometry.AffineScheme, .Morphisms.QuasiCompact)",
+   "date": "2026-10-10",
+   "verdict": "match (CompactSpace of the underlying space)"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "quasi-compact scheme: underlying topological space is compact, equivalently the morphism to Spec Z is quasi-compact",
+   "results": "AlgebraicGeometry.compactSpace_iff_quasiCompact, AlgebraicGeometry.quasiCompact_iff_compactSpace, AlgebraicGeometry.quasiCompact_over_affine_iff, instance QuasiCompact X.toSpecΓ for CompactSpace X",
+   "date": "2026-10-10",
+   "verdict": "match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rn '^class CompactSpace\\|theorem isCompact_univ_iff\\|theorem isCompact_iff_finite_subcover' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/Topology; grep -n 'theorem compactSpace_iff_quasiCompact' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicGeometry/Morphisms/QuasiCompact.lean",
+   "results": "Topology/Defs/Filter.lean:283 class CompactSpace (isCompact_univ); Topology/Compactness/Compact.lean:389 isCompact_iff_finite_subcover, :795 isCompact_univ_iff; Morphisms/QuasiCompact.lean:137 compactSpace_iff_quasiCompact (X : Scheme) : CompactSpace X ↔ QuasiCompact (terminal.from X)",
+   "date": "2026-10-10",
+   "verdict": "match"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "CompactSpace",
+  "file": "Mathlib/Topology/Defs/Filter.lean",
+  "how": "specializes in one line: a quasi-compact scheme X is CompactSpace X for the underlying topological space (Filter.lean:283, isCompact_univ); IsCompact univ is the finite-subcover condition by isCompact_iff_finite_subcover (Topology/Compactness/Compact.lean:389). AlgebraicGeometry.compactSpace_iff_quasiCompact (Morphisms/QuasiCompact.lean:137) identifies it with quasi-compactness of X → Spec Z (terminal.from X)"
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "def-weil-pbc-ample-invertible-module",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1"
+}
