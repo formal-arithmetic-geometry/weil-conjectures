@@ -2,7 +2,7 @@
 
 858 items; claim with `tools/claim.py next <group> [--stage N]`.
 
-## Stage 1: nodes to split (647)
+## Stage 1: nodes to split (646)
 
 | node | distance to a target | Lean state on the done branch |
 |---|---|---|
@@ -18,7 +18,6 @@
 | `lem-weil-pbc-coherent-modules-kernel-cokernel-sum` | 1012 | none |
 | `lem-weil-pbc-completion-at-quasi-finite-prime` | 1012 | none |
 | `lem-weil-pbc-cotangent-complex-symmetric-algebra` | 1012 | none |
-| `lem-weil-pbc-criterion-flatness-fibre-noetherian` | 1012 | none |
 | `lem-weil-pbc-descend-finite-locally-free` | 1012 | none |
 | `lem-weil-pbc-descend-qc-open-fg-subalgebra` | 1012 | none |
 | `lem-weil-pbc-equation-count-fibre-dimension-flat` | 1012 | none |
@@ -654,7 +653,7 @@
 | `lem-pc-finite-linear-avoidance` | - | none |
 | `lem-pc-linear-pair-graded-finite` | - | none |
 
-## Stage 2: nodes to state (211)
+## Stage 2: nodes to state (212)
 
 | node | distance to Mathlib | kind |
 |---|---|---|
@@ -706,6 +705,7 @@
 | `lem-weil-pbc-constructible-intersection-in-constructible` | 1 | state |
 | `lem-weil-pbc-constructible-is-retrocompact` | 1 | state |
 | `lem-weil-pbc-cover-module-exact` | 1 | state |
+| `lem-weil-pbc-criterion-flatness-fibre-noetherian` | 1 | state |
 | `lem-weil-pbc-derivation-extends` | 1 | state |
 | `lem-weil-pbc-directed-colimit-base-change-elementwise` | 1 | state |
 | `lem-weil-pbc-elementary-etale-finite-piece-persistence` | 1 | state |
@@ -870,7 +870,7 @@
 | `lem-weil-pbc-p1-field-dimension-one` | 4 | state |
 | `lem-weil-pbc-projective-space-zero-isomorphism` | 4 | state |
 
-Not open yet: 659 nodes that wait for stage 1, 500 nodes that wait for a statement dependency.
+Not open yet: 658 nodes that wait for stage 1, 500 nodes that wait for a statement dependency.
 
 ## Stage 3: modules to prove (0)
 
