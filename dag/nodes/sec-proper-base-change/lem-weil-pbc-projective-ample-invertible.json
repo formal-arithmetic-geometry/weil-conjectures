@@ -2,21 +2,100 @@
  "id": "lem-weil-pbc-projective-ample-invertible",
  "kind": "statement",
  "title": "A closed immersion into projective space supplies an ample invertible sheaf",
- "statement": "Let $A$ be a ring, let $f:X\\to\\operatorname{Spec}(A)$ be a morphism, and suppose that for some $n$ there is a closed immersion $i:X\\hookrightarrow\\mathbf P^n_A$ over $\\operatorname{Spec}(A)$ [def-weil-closed-immersion], where $\\mathbf P^n_A$ is the base change of projective space [def-nagata-projective-space-base-change]. Let $\\mathcal O_{\\mathbf P^n_A}(1)$ be the standard twisting sheaf [def-weil-pbc-proj-twisting-sheaf]. Then $\\mathcal L=i^*\\mathcal O_{\\mathbf P^n_A}(1)$ is an invertible $\\mathcal O_X$-module [def-sc-invertible-module] that is $f$-ample [def-sc-ample]. Here $f$-ample means relatively ample in the sense of Stacks Tags 01PS (definition-ample) and 01VG (definition-relatively-ample): some positive tensor power is relatively very ample, i.e. gives a closed immersion over $\\operatorname{Spec}(A)$ into a projective space.",
+ "statement": "Let $A$ be a ring, let $n\\ge0$, let $\\mathbf P^n_{\\mathbf Z}=\\operatorname{Proj}(\\mathbf Z[T_0,\\dots,T_n])$ ($\\deg T_k=1$) and $\\mathbf P^n_A=\\mathbf P(\\{0,\\dots,n\\};\\operatorname{Spec}A)=\\operatorname{Spec}A\\times_{\\operatorname{Spec}\\mathbf Z}\\mathbf P^n_{\\mathbf Z}$ [def-nagata-projective-space-base-change], with projections $q:\\mathbf P^n_A\\to\\operatorname{Spec}A$ and $\\rho:\\mathbf P^n_A\\to\\mathbf P^n_{\\mathbf Z}$. Let $\\mathcal O_{\\mathbf P^n_{\\mathbf Z}}(1)=\\widetilde{S(1)}$ be the twisting sheaf of $\\mathbf P^n_{\\mathbf Z}$ [def-weil-pbc-proj-twisting-sheaf] with its global sections $T_0,\\dots,T_n$, and put $\\mathcal O_{\\mathbf P^n_A}(1)=\\rho^*\\mathcal O_{\\mathbf P^n_{\\mathbf Z}}(1)$ [def-pc-module-pullback]. Let $X$ be a scheme with a morphism $f:X\\to\\operatorname{Spec}A$ and a closed immersion $i:X\\to\\mathbf P^n_A$ [def-weil-closed-immersion] with $q\\circ i=f$. Then $\\mathcal L=i^*\\mathcal O_{\\mathbf P^n_A}(1)$ is an invertible $\\mathcal O_X$-module [def-sc-invertible-module] which is ample on $X$ in the absolute sense of Stacks Definition 01PS [def-weil-pbc-ample-invertible-module]; more precisely $X$ is quasi-compact, and for the sections $s_k=i^*\\rho^*T_k\\in\\Gamma(X,\\mathcal L)$ ($k=0,\\dots,n$) the non-vanishing loci $X_{s_k}$ are affine open subschemes covering $X$. (Since $\\operatorname{Spec}A$ is affine, 'ample on $X$' is the same as '$f$-ample' in the sense of Stacks Morphisms Definition 01VH, by Morphisms Lemma 01VK; only the absolute notion is asserted and used here.)",
  "source": {
-  "document": "literature/stacks-project/morphisms.tex",
-  "place": "Morphisms, Lemma 01W9 (lemma-H-projective), Properties Lemma 01Q1 (properties-lemma-ample-immersion-into-proj), relative ampleness Definitions 01PS (definition-ample) and 01VG (definition-relatively-ample), and Constructions Definition 01MN (definition-twist)"
+  "document": "literature/stacks-project/properties.tex",
+  "place": "Properties, Definition 01PS (definition-ample) and Lemma 01PU (lemma-ample-on-closed) with its proof; Constructions, Definition 01NF (definition-projective-space), Lemma 01NG (lemma-standard-covering-projective-space), Definition 01MN (definition-twist), Lemma 01MW (lemma-ample-on-proj); Morphisms, Definition 01VH and Lemma 01VK (lemma-ample-over-affine) for the remark on f-ampleness; Morphisms Lemma 01W9 (lemma-H-projective) for the setting"
  },
  "stmt_deps": [
-  "def-weil-closed-immersion",
   "def-nagata-projective-space-base-change",
   "def-weil-pbc-proj-twisting-sheaf",
+  "def-pc-module-pullback",
+  "def-weil-closed-immersion",
   "def-sc-invertible-module",
-  "def-sc-ample"
+  "def-weil-pbc-ample-invertible-module"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "*Comparison of the two twisting sheaves.* Let $\\mathcal O^{\\mathrm{gl}}(1)$ be the module of [def-pc-projective-space-twist] on $\\mathbf P^n_{\\mathbf Z}$ ($A=\\mathbf Z$, $d=1$, index set $\\{0,\\dots,n\\}$) with its global sections $T^{\\mathrm{gl}}_k$. By [lem-weil-pbc-projective-space-twist-glued-identification] there is an isomorphism $\\theta:\\mathcal O^{\\mathrm{gl}}(1)\\to\\widetilde{S(1)}=\\mathcal O_{\\mathbf P^n_{\\mathbf Z}}(1)$ with $\\theta(T^{\\mathrm{gl}}_k)=T_k$. Applying the functor $\\rho^*$ [def-pc-module-pullback] gives an isomorphism $\\rho^*\\theta:\\rho^*\\mathcal O^{\\mathrm{gl}}(1)\\to\\mathcal O_{\\mathbf P^n_A}(1)$ carrying $\\rho^*T^{\\mathrm{gl}}_k$ to $\\rho^*T_k$ (a functor carries isomorphisms to isomorphisms, and pullback of sections is natural), and then $i^*\\rho^*\\theta$ identifies $i^*\\rho^*\\mathcal O^{\\mathrm{gl}}(1)$ with $\\mathcal L$, carrying $i^*\\rho^*T^{\\mathrm{gl}}_k$ to $s_k$. So it suffices to prove every assertion for $\\mathcal O_P(1)=\\rho^*\\mathcal O^{\\mathrm{gl}}(1)$ and its sections $T_k$, which is the module of [lem-weil-pbc-projective-space-standard-charts] for $S=\\operatorname{Spec}A$; write $P=\\mathbf P^n_A$, $D_+(T_k)_S=\\rho^{-1}(D_+(T_k))$ and $u_{l/k}$ as there.",
+   "uses": [
+    "def-pc-projective-space-twist",
+    "lem-weil-pbc-projective-space-twist-glued-identification",
+    "def-pc-module-pullback",
+    "lem-weil-pbc-projective-space-standard-charts"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/constructions.tex",
+    "place": "Constructions, Definition 01MN (definition-twist) and Lemma 01NG; the identification of the glued and the $\\widetilde{S(1)}$ twisting sheaf"
+   }
+  },
+  {
+   "text": "*$\\mathcal L$ is invertible.* Put $X_k=i^{-1}(D_+(T_k)_S)$. By [lem-weil-pbc-projective-space-standard-charts] (a) the $D_+(T_k)_S$ cover $P$, so the $X_k$ cover $X$. By (b) of that lemma applied to $g=i:X\\to P$, the section $s_k=i^*T_k$ is a free generator of $\\mathcal L=i^*\\mathcal O_P(1)$ over $X_k$: for every open $V\\subseteq X_k$ the map $\\Gamma(V,\\mathcal O_X)\\to\\Gamma(V,\\mathcal L)$, $a\\mapsto a\\,s_k|_V$, is bijective, i.e. $\\mathcal O_{X_k}\\to\\mathcal L|_{X_k}$, $a\\mapsto as_k$, is an isomorphism of $\\mathcal O_{X_k}$-modules. Hence $\\mathcal L$ is locally free of rank one, and quasi-coherent (being locally isomorphic to $\\mathcal O_X$), i.e. invertible [def-sc-invertible-module].",
+   "uses": [
+    "lem-weil-pbc-projective-space-standard-charts",
+    "def-sc-invertible-module"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/constructions.tex",
+    "place": "Constructions, Lemma 01NG (lemma-standard-covering-projective-space), Definition 01NF and the discussion after it ($\\mathcal L=\\varphi^*\\mathcal O(1)$, $s_i=\\varphi^*T_i$)"
+   }
+  },
+  {
+   "text": "*The non-vanishing loci: $X_{s_k}=X_k$.* For $x\\in X$ the value of $s_k$ at $x$ is its image in $\\mathcal L_x\\otimes\\kappa(x)$, as in [def-weil-pbc-ample-invertible-module] (with $\\mathcal L^{\\otimes1}=\\mathcal L$). If $x\\in X_k$, $s_k$ generates the free rank-one module $\\mathcal L_x$ (Step 2), so its value is a basis of the one-dimensional $\\kappa(x)$-vector space $\\mathcal L_x\\otimes\\kappa(x)$, hence nonzero: $X_k\\subseteq X_{s_k}$. Conversely let $x\\notin X_k$, $p=i(x)\\notin D_+(T_k)_S$, and choose $j$ with $x\\in X_j$ (Step 2). By [lem-weil-pbc-projective-space-standard-charts] (b) for $g=\\mathrm{id}_P$, $T_k=u_{k/j}T_j$ on $D_+(T_j)_S$, $T_j$ is a generator there, and $P_{T_k}=D_+(T_k)_S$; so $0=T_k(p)=u_{k/j}(p)\\,T_j(p)$ with $T_j(p)\\neq0$, whence $u_{k/j}(p)=0$ in $\\kappa(p)$. By (b) for $g=i$, $s_k=i^*(u_{k/j})\\,s_j$ on $X_j$, and the value of the function $i^*(u_{k/j})$ at $x$ is the image of $u_{k/j}(p)=0$ under $\\kappa(p)\\to\\kappa(x)$ (the stalk map of $i$ is local), so $s_k(x)=0$. Thus $X_{s_k}=X_k$.",
+   "uses": [
+    "lem-weil-pbc-projective-space-standard-charts",
+    "def-weil-pbc-ample-invertible-module",
+    "def-weil-residue-field"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/constructions.tex",
+    "place": "Constructions, Lemma 01NG (lemma-standard-covering-projective-space), Definition 01NF and the discussion after it ($\\mathcal L=\\varphi^*\\mathcal O(1)$, $s_i=\\varphi^*T_i$)"
+   }
+  },
+  {
+   "text": "*Each $X_{s_k}$ is affine.* By [lem-weil-pbc-projective-space-standard-charts] (c) for the affine open $S'=S=\\operatorname{Spec}A$ (so $q^{-1}(S')=P$), $D_+(T_k)_S$ is affine, $\\cong\\operatorname{Spec}A[U_l:l\\neq k]$. Since $i$ is a closed immersion, by the affine form of [def-weil-closed-immersion] (Stacks 01QO) the preimage of the affine open $D_+(T_k)_S=\\operatorname{Spec}R$ is $\\operatorname{Spec}(R/I)$ for an ideal $I$, so $X_{s_k}=X_k=i^{-1}(D_+(T_k)_S)$ is an affine open subscheme of $X$ (Stacks Schemes 01IH, used in the proof of Properties 01PU).",
+   "uses": [
+    "lem-weil-pbc-projective-space-standard-charts",
+    "def-weil-closed-immersion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/properties.tex",
+    "place": "Properties, Lemma 01PU (lemma-ample-on-closed), proof, and Definition 01PS"
+   }
+  },
+  {
+   "text": "*$\\mathcal L$ is ample.* $X=X_{s_0}\\cup\\dots\\cup X_{s_n}$ is a finite union of affine schemes, each quasi-compact [lem-weil-pbc-spec-basic-opens-unit-ideal-quasi-compact] (iii); a finite union of quasi-compact subspaces is quasi-compact, so $X$ is quasi-compact, condition (1) of [def-weil-pbc-ample-invertible-module]. For $x\\in X$ choose $k$ with $x\\in X_{s_k}$; then $s_k\\in\\Gamma(X,\\mathcal L^{\\otimes1})$ and $X_{s_k}$ is affine (Step 4), which is condition (2) with exponent $1$. Hence $\\mathcal L$ is ample. (For the remark: $f=q\\circ i$ with $\\operatorname{Spec}A$ affine, so by Stacks Morphisms Lemma 01VK this is the same as $\\mathcal L$ being $f$-ample in the sense of Morphisms Definition 01VH; no node asserts or needs that relative notion.)",
+   "uses": [
+    "lem-weil-pbc-spec-basic-opens-unit-ideal-quasi-compact",
+    "def-weil-pbc-ample-invertible-module"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/properties.tex",
+    "place": "Properties, Lemma 01PU (lemma-ample-on-closed), proof, and Definition 01PS"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-projective-space-twist",
+  "lem-weil-pbc-projective-space-twist-glued-identification",
+  "def-pc-module-pullback",
+  "lem-weil-pbc-projective-space-standard-charts",
+  "def-sc-invertible-module",
+  "def-weil-pbc-ample-invertible-module",
+  "def-weil-residue-field",
+  "def-weil-closed-immersion",
+  "lem-weil-pbc-spec-basic-opens-unit-ideal-quasi-compact"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/properties.tex",
+  "place": "Properties, Lemma 01PU (lemma-ample-on-closed) with its proof, applied to the standard covering of Constructions Lemma 01NG (literature/stacks-project/constructions.tex); the ampleness of O(1) on P^n_A is shown directly from Definition 01PS through the affine charts D_+(T_k) instead of through Constructions Lemma 01MW"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -38,10 +117,24 @@
    "results": "Mathlib has no H-projective or relative-ampleness API; projective-space and twisting-sheaf constructions are absent.",
    "date": "2026-10-10",
    "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "restriction of an ample line bundle to a closed subscheme is ample",
+   "results": "HasAffineProperty.restrict, Scheme.ofRestrict_appLE, Scheme.Opens.toScheme, IsLocalAtSource.resLE, Flat.instResLE (Mathlib.AlgebraicGeometry.*); no ampleness notion",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rn 'IsAmple\\|isAmple\\|Ample' Mathlib/AlgebraicGeometry/; grep -rln 'ProjectiveSpace\\|projectiveSpace' Mathlib/AlgebraicGeometry/",
+   "results": "none (no ampleness and no projective space in Mathlib/AlgebraicGeometry)",
+   "date": "2026-10-10",
+   "verdict": "no match"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "stage1",
@@ -62,5 +155,21 @@
  },
  "chapter": "sec-proper-base-change",
  "unit": "sk-thm-p1",
- "lead_note": "L (2026-10-10): the citation of def-sc-ample (ample over a field) does not fit a scheme over Spec A; the absolute notion is def-weil-pbc-ample-invertible-module (Stacks 01PS), and over an affine base f-ample is the same as ample (01VK). The splitter of this node should restate ampleness through that node so that lem-weil-pbc-coherent-twist-global-generation applies."
+ "lead_note": "L (2026-10-10): the citation of def-sc-ample (ample over a field) does not fit a scheme over Spec A; the absolute notion is def-weil-pbc-ample-invertible-module (Stacks 01PS), and over an affine base f-ample is the same as ample (01VK). The splitter of this node should restate ampleness through that node so that lem-weil-pbc-coherent-twist-global-generation applies. L 2026-10-10: statement repaired by the worker (def-sc-ample replaced by def-weil-pbc-ample-invertible-module; absolute ampleness asserted). tool_uses lem-weil-pbc-projective-space-standard-charts and lem-weil-pbc-projective-space-twist-glued-identification (unit sk-thm-reduction; generic facts about P^n).",
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "lem-weil-pbc-projective-ample-invertible",
+  "worker": "stage1",
+  "summary": "Statement repaired as the lead_note asked: the citation def-sc-ample (ampleness over a field) is replaced by def-weil-pbc-ample-invertible-module (absolute ampleness, Stacks 01PS), and the conclusion is now 'L is invertible and ample on X' (with the explicit affine cover X_{s_k}), which is what lem-weil-pbc-coherent-twist-global-generation needs; f-ampleness (01VH) is mentioned only as a remark (equal to ampleness over affine Spec A by 01VK, not 01VG which is a section tag). The statement now introduces O_{P^n_A}(1) explicitly as rho^* of the twisting sheaf of P^n_Z (def-weil-pbc-proj-twisting-sheaf is for Proj of a graded ring, while P^n_A is the base change of def-nagata-projective-space-base-change), adding def-pc-module-pullback. The source place 01Q1 (open immersion into Proj(Gamma_*)) did not prove this and was replaced by 01PU (ample restricts to closed subschemes) with 01NG. Proof in five steps: identification of the glued and the S(1)-tilde twisting sheaf, invertibility and the non-vanishing loci via the standard-chart lemma, affineness of the charts and of their preimages under the closed immersion, then Definition 01PS with exponent 1. No new nodes. Route: lem-weil-pbc-projective-space-standard-charts and lem-weil-pbc-projective-space-twist-glued-identification are in unit sk-thm-reduction, not cited by sk-thm-p1; they are generic tool lemmas on P^n."
+ },
+ "tool_uses": [
+  "lem-weil-pbc-projective-space-standard-charts",
+  "lem-weil-pbc-projective-space-twist-glued-identification"
+ ],
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "result": "accepted",
+  "note": "5 steps follow Stacks 01PU with 01NG: the two twisting sheaves identified (glued vs S(1)-tilde), L invertible via the standard-charts node, X_{s_k} = i^{-1}(D_+(T_k)), these are affine (closed immersion, affine form), ample by the definition with exponent 1. Statement now asserts absolute ampleness (01PS) over the affine base; f-ample is a remark (01VH/01VK). Tags 01PU, 01NG, 01MW, 01PS, 01VH, 01VK verified."
+ }
 }
