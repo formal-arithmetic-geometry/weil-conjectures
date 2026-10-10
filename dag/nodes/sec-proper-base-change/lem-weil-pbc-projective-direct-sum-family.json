@@ -1,0 +1,75 @@
+{
+ "id": "lem-weil-pbc-projective-direct-sum-family",
+ "kind": "statement",
+ "title": "A direct sum of an arbitrary family of projective modules is projective",
+ "statement": "Let $R$ be a commutative ring, $I$ a set (possibly infinite or empty) and $(P_i)_{i\\in I}$ a family of projective $R$-modules [def-weil-pbc-projective-module]. Then the direct sum $\\bigoplus_{i\\in I}P_i$ [def-weil-pbc-direct-sum-modules] is a projective $R$-module.",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Algebra, Lemma Tag 065Q (lemma-direct-sum-projective, line 18864). Tag verified in tags/tags: 065Q,algebra-lemma-direct-sum-projective"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-projective-module",
+  "def-weil-pbc-direct-sum-modules"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "direct sum of an arbitrary family of projective modules is projective",
+   "results": "Module.instProjectiveDFinsupp, Module.instProjectiveProd (Mathlib.Algebra.Module.Projective); CategoryTheory.Projective.instBiproduct, instCoprod, instSigmaObj (Mathlib.CategoryTheory.Preadditive.Projective.Basic); Module.Projective.iff_split'",
+   "date": "2026-10-10",
+   "verdict": "match: Module.instProjectiveDFinsupp / Module.Projective.directSum"
+  },
+  {
+   "tool": "loogle",
+   "query": "Module.Projective _ (DirectSum _ _)",
+   "results": "Module.Projective.directSum, Module.Projective.directSum_iff (Mathlib.Algebra.Module.Projective)",
+   "date": "2026-10-10",
+   "verdict": "match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "union of a well-ordered increasing chain of submodules whose successive quotients are projective is a projective module",
+   "results": "Module.instProjectiveDFinsupp ('Direct Sum of Projective Modules is Projective'), Module.Grassmannian.projective_quotient, Module.instProjectiveProd, ModuleCat.enoughProjectives (Mathlib)",
+   "date": "2026-10-10",
+   "verdict": "match for the direct sum: Module.instProjectiveDFinsupp"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -n 'instance\\|theorem' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/Algebra/Module/Projective.lean; sed -n 140,150p and 285,306p",
+   "results": "line 142: instance [h : ∀ i, Projective R (A i)] : Projective R (Π₀ i, A i); line 297: Projective.directSum_iff; line 304: instance Projective.directSum [∀ i, Projective R (M i)] : Projective R (⨁ i, M i)",
+   "date": "2026-10-10",
+   "verdict": "match"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "Module.Projective.directSum",
+  "file": "Mathlib/Algebra/Module/Projective.lean",
+  "line": 304,
+  "how": "exact: instance Module.Projective.directSum (lines 304-305) {R} [Semiring R] {ι} {M : ι → Type w} [∀ i, Module.Projective R (M i)] : Module.Projective R (⨁ i, M i), proved from Projective.directSum_iff (lines 297-302) and the instance for Π₀ i, A i (line 142); ⨁ i, M i is the direct sum of def-weil-pbc-direct-sum-modules (DirectSum). Lines read with sed -n 2026-10-10"
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-well-ordered-union-projective-dimension",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "reviewed": "2026-10-10 L: Mathlib leaf checked: Module.Projective.directSum, Algebra/Module/Projective.lean:304 (065Q)"
+}

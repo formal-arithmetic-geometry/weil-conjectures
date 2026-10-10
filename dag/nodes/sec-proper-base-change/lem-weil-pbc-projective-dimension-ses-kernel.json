@@ -1,0 +1,76 @@
+{
+ "id": "lem-weil-pbc-projective-dimension-ses-kernel",
+ "kind": "statement",
+ "title": "In a short exact sequence, a bound n on the middle term and n+1 on the quotient bound the submodule by n",
+ "statement": "Let $R$ be a commutative ring, $m\\ge0$ an integer and $0\\to M'\\xrightarrow{u}M\\xrightarrow{v}M''\\to0$ a short exact sequence of $R$-modules [def-weil-pbc-exact-sequence] ($u$ injective, $v$ surjective, $\\operatorname{Im}u=\\operatorname{Ker}v$). Assume that $M$ has a projective resolution of length $\\le m$ and that $M''$ has a projective resolution of length $\\le m+1$ [def-weil-pbc-finite-global-dimension] (exact sequences $0\\to P_m\\to\\dots\\to P_0\\to M\\to0$ and $0\\to Q_{m+1}\\to\\dots\\to Q_0\\to M''\\to0$ with all $P_i$, $Q_i$ projective $R$-modules). Then $M'$ has a projective resolution of length $\\le m$.",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Algebra, Lemma Tag 065S (lemma-exact-sequence-projective-dimension, line 26762), part (1). Tag verified in tags/tags: 065S,algebra-lemma-exact-sequence-projective-dimension"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-exact-sequence",
+  "def-weil-pbc-finite-global-dimension"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "short exact sequence 0 -> M' -> M -> M'' -> 0 of modules, if M has projective dimension at most n and M'' at most n+1 then M' has projective dimension at most n",
+   "results": "CategoryTheory.ShortComplex.ShortExact.hasProjectiveDimensionLT_X₁, hasProjectiveDimensionLT_X₂, hasProjectiveDimensionLT_X₃, hasProjectiveDimensionLT_X₃_iff, HasProjectiveDimensionLE, HasProjectiveDimensionLT.mk' (Mathlib.CategoryTheory.Abelian.Projective.Dimension); hasInjectiveDimensionLT_X₁ (Injective.Dimension)",
+   "date": "2026-10-10",
+   "verdict": "candidate: hasProjectiveDimensionLT_X₁ (Ext-defined projective dimension in an abelian category)"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "kernel of a surjection from a projective module onto a module of projective dimension at most n+1 has projective dimension at most n",
+   "results": "ShortComplex.ShortExact.hasProjectiveDimensionLT_X₃_iff, hasProjectiveDimensionLT_X₁, _X₃, _X₂, instHasProjectiveDimensionLTSucc, hasProjectiveDimensionLT_of_ge, projectiveDimension_lt_iff, projectiveDimension_le_iff (Mathlib.CategoryTheory.Abelian.Projective.Dimension)",
+   "date": "2026-10-10",
+   "verdict": "candidate: same, Ext-defined"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.HasProjectiveDimensionLT, CategoryTheory.ShortComplex.ShortExact",
+   "results": "ShortComplex.ShortExact.hasProjectiveDimensionLT_X₂, _X₁, _X₃_iff, _X₃ (Mathlib.CategoryTheory.Abelian.Projective.Dimension)",
+   "date": "2026-10-10",
+   "verdict": "candidate: same"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rln 'projectiveDimension\\|ProjectiveDimension\\|HasProjectiveDimensionLE\\|hasProjectiveDimensionLT' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/{CategoryTheory/Abelian/Projective,Algebra/Homology,Algebra/Category,RingTheory}; sed -n 185,235p CategoryTheory/Abelian/Projective/Dimension.lean; head -80 Algebra/Category/ModuleCat/ProjectiveDimension.lean",
+   "results": "CategoryTheory/Abelian/Projective/Dimension.lean (HasProjectiveDimensionLT defined by vanishing of Ext^i(X,-) for i >= n; hasProjectiveDimensionLT_X₁ line 213), Algebra/Category/ModuleCat/ProjectiveDimension.lean (invariance under (semi)linear equivalence), RingTheory/LocalProperties/ProjectiveDimension.lean, RingTheory/Regular/ProjectiveDimension.lean; no declaration relating HasProjectiveDimensionLE to the existence of a projective resolution of length <= n",
+   "date": "2026-10-10",
+   "verdict": "no match for the resolution form; Ext form is a candidate"
+  }
+ ],
+ "mathlib_match": null,
+ "mathlib_candidate": {
+  "declaration": "CategoryTheory.ShortComplex.ShortExact.hasProjectiveDimensionLT_X₁",
+  "file": "Mathlib/CategoryTheory/Abelian/Projective/Dimension.lean",
+  "line": 213,
+  "how": "(hS : S.ShortExact) (n) (h₂ : HasProjectiveDimensionLT S.X₂ n) (h₃ : HasProjectiveDimensionLT S.X₃ (n + 1)) : HasProjectiveDimensionLT S.X₁ n (lines 213-221, read with sed -n), in ModuleCat R with n = m+1. Mathlib's HasProjectiveDimensionLT is defined by vanishing of Ext; that it agrees with 'has a projective resolution of length <= m' (Stacks 065R(1)<=>(3)) is itself a theorem not in Mathlib, so the node is not a leaf (point B8)."
+ },
+ "status": "unsplit",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-well-ordered-union-projective-dimension",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "reviewed": "2026-10-10 L: statement checked against 065S (1); the Mathlib candidate hasProjectiveDimensionLT_X1 uses the Ext-defined dimension, whose agreement with resolutions is a theorem Mathlib lacks"
+}
