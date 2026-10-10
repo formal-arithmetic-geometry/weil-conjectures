@@ -1,0 +1,77 @@
+{
+ "id": "lem-weil-pbc-sets-etale-inverse-image-exact",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lemma-weil-pbc-proper-strict-henselian-h0",
+   "place": "the clause asserting that affine base change defines a continuous functor and a morphism of affine etale sites, specifically exactness of inverse image after comparison with the full small etale sites",
+   "via": [
+    "lem-weil-pbc-affine-etale-site-base-change",
+    "lem-weil-pbc-sets-affine-etale-inverse-image-comparison"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-iff",
+ "title": "Inverse image of set-valued sheaves on small etale sites is exact",
+ "statement": "Let $h:T'\\to T$ be any morphism of schemes [def-pc-scheme]. On the small etale sites [def-weil-pbc-etale-site], base change $V\\mapsto V\\times_TT'$ gives a continuous functor $T_{\\Et}\\to T'_{\\Et}$ [lem-weil-pbc-etale-base-change-continuous]. Its induced inverse-image functor $h^{-1}:\\operatorname{Sh}(T_{\\Et})\\to\\operatorname{Sh}(T'_{\\Et})$ on sheaves of sets, left adjoint to $h_*F(V)=F(V\\times_TT')$, preserves finite limits and finite colimits; hence this base-change functor defines a morphism of sites $T'_{\\Et}\\to T_{\\Et}$ [def-weil-pbc-sites-and-cohomology](3).",
+ "source": {
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Lemma Tag 03Q1 (lemma-stalk-pullback), assertion (2), and Section Tag 03PZ (section-inverse-image), Definition 59.36.1"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-pbc-etale-site",
+  "lem-weil-pbc-etale-base-change-continuous",
+  "def-weil-pbc-sites-and-cohomology"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "small etale inverse image of sheaves of sets along scheme morphism is exact",
+   "results": "Service returned HTTP 500 on two attempts; no result available",
+   "date": "2026-10-11",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.sheafPullbackConstruction.preservesFiniteLimits",
+   "results": "CategoryTheory.Functor.sheafPullbackConstruction.preservesFiniteLimits, Mathlib/CategoryTheory/Sites/Pullback.lean:98, assumes continuity and finite-limit preservation by left Kan extension",
+   "date": "2026-10-11",
+   "verdict": "no match: the small-etale base-change hypotheses and finite colimits are not supplied"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Pullback of sheaves along a morphism of schemes on small etale sites preserves finite limits",
+   "results": "CategoryTheory.Functor.sheafPullbackConstruction.preservesFiniteLimits, Mathlib/CategoryTheory/Sites/Pullback.lean:98; generic conditional result",
+   "date": "2026-10-11",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "rg -n 'isContinuous_overPullback|preservesFiniteLimits_upperStar|sheafPullbackConstruction.preservesFiniteLimits' Mathlib/AlgebraicGeometry/Sites Mathlib/CategoryTheory/Sites/Pullback.lean",
+   "results": "Only generic CategoryTheory.Functor.sheafPullbackConstruction.preservesFiniteLimits at Pullback.lean:98; scheme-specific declarations occur in the source checkout, not Mathlib",
+   "date": "2026-10-11",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -n -E 'pullback|Continuous|PreservesFinite' Mathlib/AlgebraicGeometry/Sites/AffineEtale.lean Mathlib/AlgebraicGeometry/Sites/Etale.lean; grep -rln PreservesFiniteLimits Mathlib/AlgebraicGeometry/Sites (pinned Mathlib of weil-conjectures-slopmaster2)",
+   "results": "Only the small etale topology, the affine etale site and its sheaf equivalence (AffineEtale.sheafEquiv); no inverse image along a morphism of schemes on small etale sheaves and no exactness statement",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "created": {
+  "item": "lem-weil-pbc-affine-etale-site-base-change",
+  "by": "worker",
+  "date": "2026-10-10"
+ }
+}

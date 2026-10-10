@@ -24,14 +24,80 @@
   "def-pc-scheme",
   "pqf-def-affine-morphism",
   "lem-weil-pbc-affine-etale-site-topos",
-  "lem-weil-pbc-affine-morphism-permanence",
-  "lem-weil-pbc-etale-base-change-finite-limits",
-  "lem-weil-pbc-etale-base-change-continuous",
   "def-weil-pbc-sites-and-cohomology"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Let $V\\to T$ be an object of $T_{affine,\\Et}$. The base change $V\\times_TT'\\to T'$ is etale by [lem-weil-pbc-etale-base-change-finite-limits](1). It is affine as a scheme: the projection $V\\times_TT'\\to V$ is the base change of the affine map $h$ and is therefore affine by [lem-weil-pbc-affine-morphism-permanence](1); its target $V$ is affine, so its source is affine by (2) of that node. On arrows use the ordinary base-change functor of [lem-weil-pbc-etale-base-change-finite-limits](1). Thus it restricts to the claimed functor $u$ on the full subcategories of affine objects.",
+   "uses": [
+    "lem-weil-pbc-etale-base-change-finite-limits",
+    "lem-weil-pbc-affine-morphism-permanence",
+    "lem-weil-pbc-affine-etale-site-topos"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Lemma Tag 0EYL (lemma-colimit-affine-sites), opening assertion on affine transition morphisms; Topologies Lemma Tag 04HR (lemma-alternative), affine etale subsite"
+   }
+  },
+  {
+   "text": "A standard covering $\\{V_i\\to V\\}_{i=1}^m$ in $T_{affine,\\Et}$ is a finite jointly surjective etale family of affine schemes by [lem-weil-pbc-affine-etale-site-topos]. The base-changed family is jointly surjective and etale by [lem-weil-pbc-etale-covering-base-change], and each $V_i\\times_TT'$ is affine by Step 1; hence it is a standard covering in $T'_{affine,\\Et}$. For $A\\to V\\leftarrow B$ in the affine site, $A\\times_VB$ is etale over $T$ by [lem-weil-pbc-etale-base-change-finite-limits](2). It is affine: $A\\to V$ is affine because both schemes are affine [pqf-def-affine-morphism], and its base change $A\\times_VB\\to B$ is affine by [lem-weil-pbc-affine-morphism-permanence](1), with affine target $B$, so (2) applies. Thus this is also the fibre product in the full affine subcategory. The canonical isomorphism $u(A\\times_VB)\\cong u(A)\\times_{u(V)}u(B)$ follows from [lem-weil-pbc-etale-base-change-finite-limits](3); its target is affine by the same argument.",
+   "uses": [
+    "lem-weil-pbc-affine-etale-site-topos",
+    "lem-weil-pbc-etale-covering-base-change",
+    "lem-weil-pbc-etale-base-change-finite-limits",
+    "pqf-def-affine-morphism",
+    "lem-weil-pbc-affine-morphism-permanence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/topologies.tex",
+    "place": "Lemma Tag 04HR (lemma-alternative) and Definition Tag 0219 (definition-standard-etale); etale coverings under base change, Lemma Tag 0217 (lemma-etale)"
+   }
+  },
+  {
+   "text": "Step 2 gives both conditions in [def-weil-pbc-sites-and-cohomology](3) for continuity: standard coverings are carried to standard coverings, and the comparison on their fibre products is an isomorphism. Thus $u$ is continuous. Its precomposition functor $u^s$ sends sheaves of sets on $T'_{affine,\\Et}$ to sheaves on $T_{affine,\\Et}$, and the sheafified presheaf left Kan extension $u_s$ is left adjoint to $u^s$, by [lem-weil-pbc-continuous-functor-sheaf-pullback-adjunction]. Write $g_*=u^s$ and $g^{-1}=u_s$.",
+   "uses": [
+    "def-weil-pbc-sites-and-cohomology",
+    "lem-weil-pbc-continuous-functor-sheaf-pullback-adjunction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Definition Tag 00WV (definition-continuous), Lemmas Tag 00WW (lemma-pushforward-sheaf) and 00WX (lemma-pullback-sheaf)"
+   }
+  },
+  {
+   "text": "For $S=T,T'$ let $R_S:\\operatorname{Sh}(S_{\\Et})\\to\\operatorname{Sh}(S_{affine,\\Et})$ be restriction. It is an equivalence by [lem-weil-pbc-affine-etale-site-topos]. Let $h_*^{full}$ be direct image on the full small etale site; its value at $V\\to T$ is $F(V\\times_TT')$ by [lem-weil-pbc-etale-base-change-continuous](3). For every sheaf $F$ on $T'_{\\Et}$ and every affine $V\\to T$, Step 1 makes $V\\times_TT'$ an affine object, so $(R_T h_*^{full}F)(V)=F(V\\times_TT')=(g_*R_{T'}F)(V)$; the restriction maps agree because both use base change of arrows. This gives $R_T h_*^{full}\\cong g_*R_{T'}$. Taking left adjoints and using quasi-inverses of $R_T,R_{T'}$ gives $g^{-1}\\cong R_{T'}h^{-1}_{full}R_T^{-1}$. The middle functor preserves finite limits and colimits by [lem-weil-pbc-sets-etale-inverse-image-exact]; each $R$ and its quasi-inverse does too, since an equivalence carries any limiting or colimiting cone to one of the same shape (transport the universal property through the full and faithful functor). Hence $g^{-1}$ is exact. Together with Step 3, this is precisely the morphism-of-sites condition of [def-weil-pbc-sites-and-cohomology](3).",
+   "uses": [
+    "lem-weil-pbc-affine-etale-site-topos",
+    "lem-weil-pbc-etale-base-change-continuous",
+    "lem-weil-pbc-sets-etale-inverse-image-exact",
+    "def-weil-pbc-sites-and-cohomology"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Lemma Tag 03Q1 (lemma-stalk-pullback), assertion (2), combined with Topologies Lemma Tag 04HR (lemma-alternative)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-etale-base-change-finite-limits",
+  "lem-weil-pbc-affine-morphism-permanence",
+  "lem-weil-pbc-affine-etale-site-topos",
+  "lem-weil-pbc-etale-covering-base-change",
+  "pqf-def-affine-morphism",
+  "def-weil-pbc-sites-and-cohomology",
+  "lem-weil-pbc-continuous-functor-sheaf-pullback-adjunction",
+  "lem-weil-pbc-etale-base-change-continuous",
+  "lem-weil-pbc-sets-etale-inverse-image-exact"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Lemma Tag 0EYL uses the affine-site transition maps; the proof here combines Topologies Tag 04HR, Sites Tags 00WV/00WW/00WX and Etale Cohomology Tag 03Q1"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -56,10 +122,65 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-weil-pbc-sets-affine-etale-inverse-image-comparison",
   "by": "worker",
   "date": "2026-10-10"
+ },
+ "split_report": {
+  "date": "2026-10-11",
+  "item": "lem-weil-pbc-affine-etale-site-base-change",
+  "worker": "stage1",
+  "summary": "Restricted ordinary etale base change to affine objects using affine-morphism permanence, checked standard coverings and fibre products, then obtained the site morphism by transporting exact inverse image from full small etale sites through the affine-site sheaf equivalences. Added the statement-only small-etale exactness node for sheaves of sets, which was missing from the DAG.",
+  "blueprint": "lemma-weil-pbc-proper-strict-henselian-h0: the clause asserting that affine base change defines a continuous functor and a morphism of affine etale sites",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-affine-morphism-permanence",
+    "why": "affineness of the base-changed objects is a generic affine-morphism theorem, not a step of sk-thm-iff"
+   },
+   {
+    "node": "lem-weil-pbc-affine-etale-site-topos",
+    "why": "the equivalence of affine and full etale sheaf categories is a generic site comparison needed to transfer exactness"
+   },
+   {
+    "node": "lem-weil-pbc-etale-covering-base-change",
+    "why": "base change of a jointly surjective etale covering is a generic scheme-theoretic tool"
+   },
+   {
+    "node": "lem-weil-pbc-etale-base-change-finite-limits",
+    "why": "finite-limit behavior on full etale sites supplies the restriction to affine objects"
+   },
+   {
+    "node": "lem-weil-pbc-etale-base-change-continuous",
+    "why": "the full-site direct-image formula identifies the transported right adjoint"
+   },
+   {
+    "node": "lem-weil-pbc-continuous-functor-sheaf-pullback-adjunction",
+    "why": "the generic site adjunction supplies the inverse-image/direct-image pair"
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-affine-morphism-permanence",
+  "lem-weil-pbc-affine-etale-site-topos",
+  "lem-weil-pbc-etale-covering-base-change",
+  "lem-weil-pbc-etale-base-change-finite-limits",
+  "lem-weil-pbc-etale-base-change-continuous",
+  "lem-weil-pbc-continuous-functor-sheaf-pullback-adjunction",
+  "lem-weil-pbc-affine-morphism-permanence",
+  "lem-weil-pbc-affine-etale-site-topos",
+  "lem-weil-pbc-etale-covering-base-change",
+  "lem-weil-pbc-etale-base-change-finite-limits",
+  "lem-weil-pbc-etale-base-change-continuous",
+  "lem-weil-pbc-continuous-functor-sheaf-pullback-adjunction"
+ ],
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-aes",
+  "group": "F1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-aes (reviewer sub-agent of L); spot-checked: Source: Stacks 0EYL (etale-cohomology lemma-colimit-affine-sites), 04HR (topologies lemma-alternative), 03Q1 (lemma-stalk-pullback) (2) read in the TeX; Sites 00WV/00WX/00X1 via def-weil-pbc-sites-and-cohomology(3). Audit point (16:50): the split proves the item honestly, it does not cite lem-weil-pbc-sets-affine-etale-inverse-image-comparison nor lem-weil-pbc-affine-etale-site-colimit (only the comparison node references this item; no cycle). Step 1: base change etale by finite-limits(1); V x_T T' affine by affine-morphism-permanence (1) then (2) (V affine) - checked. Step 2: standard coverings (finite, affine, jointly surjective, as stated in affine-etale-site-topos) go to standard coverings by etale-covering-base-change (with Y'=V x_T T', V_i x_V Y' = V_i x_T T') and Step 1; A x_V B affine via pqf-def-affine-morphism (map of affines) and permanence (1),(2); comparison iso by finite-limits(3); both continuity clauses (a),(b) of def(3) hold. Step 3: def(3) supplies that u^s preserves sheaves, adjunction node (hypothesis exactly that) gives u_s left adjoint. Step 4: R_T h_* = g_* R_T' checked objectwise; left adjoints give h^{-1}R_T^{-1} = R_T'^{-1} g^{-1}, so g^{-1} = R_T' h^{-1} R_T^{-1}, exact as a composite of exact functors (new node + equivalences of affine-etale-site-topos for sheaves of sets) - correct, this is the exactness clause of 00X1. New node lem-weil-pbc-sets-etale-inverse-image-exact agrees with 03Q1(2) for any morphism of schemes; self-contained, statement only, deps exist. Small cases: h=id (u=id, g=id), empty covering, T non-affine (affine site has no final object, which is why exactness is transported rather than derived from finite limits). Tool uses: six off-unit generic black boxes, accepted. Mathlib: my own grep of pinned Mathlib AlgebraicGeometry/Sites (AffineEtale.lean, Etale.lean) found only AffineEtale.sheafEquiv, no pullback/exactness: no match. Fixes: dag/nodes/sec-proper-base-change/lem-weil-pbc-affine-etale-site-base-change.json: proof[3].source.place: label lemma-exactness-pullback (nonexistent) -> lemma-stalk-pullback (Tag 03Q1); dag/nodes/sec-proper-base-change/lem-weil-pbc-sets-etale-inverse-image-exact.json: mathlib_searches: added reviewer grep with verdict no match. Start-end UTC: Sat Oct 10 04:52:16 PM UTC 2026 - Sat Oct 10 04:53:13 PM UTC 2026.; 2 file(s) fixed by the reviewer"
  }
 }
