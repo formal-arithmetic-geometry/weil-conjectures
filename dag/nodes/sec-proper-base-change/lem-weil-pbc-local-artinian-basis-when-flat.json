@@ -5,14 +5,89 @@
  "statement": "Let $(R,\\mathfrak m)$ be a local ring whose maximal ideal $\\mathfrak m$ is nilpotent ($\\mathfrak m^N=0$ for some $N$; e.g. an Artinian local ring), and let $M$ be a flat $R$-module [def-weil-pbc-flat-ring-map], not necessarily finitely generated. Let $A$ be a set and $(x_\\alpha)_{\\alpha\\in A}$ a family of elements of $M$, with images $\\overline x_\\alpha\\in M/\\mathfrak mM$. Then the following are equivalent: (1) $(\\overline x_\\alpha)_{\\alpha\\in A}$ is a basis of the $R/\\mathfrak m$-vector space $M/\\mathfrak mM$; (2) $(x_\\alpha)_{\\alpha\\in A}$ is a basis of $M$ as an $R$-module (the $R$-linear map $\\bigoplus_{\\alpha\\in A}R\\to M$, $e_\\alpha\\mapsto x_\\alpha$, is an isomorphism).",
  "source": {
   "document": "literature/stacks-project/algebra.tex",
-  "place": "Algebra, Lemma Tag 051F (lemma-local-artinian-basis-when-flat, line 24295); its proof uses Nakayama's Lemma 00DV (lemma-NAK, nilpotent case) and Lemma 00M5 (lemma-flat-tor-zero)"
+  "place": "Algebra, Lemma Tag 051F (lemma-local-artinian-basis-when-flat, line 24295); its proof uses Nakayama's Lemma Tag 00DV (lemma-NAK, nilpotent case) and Lemma Tag 00HL (lemma-flat-tor-zero, line 9037)"
  },
  "stmt_deps": [
   "def-weil-pbc-flat-ring-map"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "(Notation.) Let $\\kappa=R/\\mathfrak m$, let $F=\\bigoplus_{\\alpha\\in A}R$ with standard basis $(e_\\alpha)$, and let $\\varphi:F\\to M$ be the $R$-linear map $e_\\alpha\\mapsto x_\\alpha$. Reducing modulo $\\mathfrak m$, $F/\\mathfrak mF=\\bigoplus_{\\alpha\\in A}\\kappa$ (componentwise: $\\mathfrak mF=\\bigoplus_\\alpha\\mathfrak m$), with basis the classes $\\bar e_\\alpha$, and $\\varphi$ induces the $\\kappa$-linear map $\\bar\\varphi:F/\\mathfrak mF\\to M/\\mathfrak mM$, $\\bar e_\\alpha\\mapsto\\overline x_\\alpha$. Thus (1) says exactly that $\\bar\\varphi$ is bijective, and (2) says exactly that $\\varphi$ is bijective.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra, proof of Lemma Tag 051F (lemma-local-artinian-basis-when-flat, lines 24308-24321)"
+   }
+  },
+  {
+   "text": "((2) $\\Rightarrow$ (1); Stacks: 'immediate'.) If $\\varphi$ is an isomorphism, then $\\varphi(\\mathfrak mF)=\\mathfrak m\\varphi(F)=\\mathfrak mM$, so $\\varphi$ induces an isomorphism $F/\\mathfrak mF\\to M/\\mathfrak mM$, which is $\\bar\\varphi$; by step 1 this is (1).",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra, proof of Lemma Tag 051F (lemma-local-artinian-basis-when-flat, lines 24308-24321)"
+   }
+  },
+  {
+   "text": "((1) $\\Rightarrow$ (2), surjectivity; Stacks: 'By Nakayama's Lemma the elements $x_\\alpha$ generate $M$'.) Assume (1). Then $\\bar\\varphi:F/\\mathfrak mF\\to M/\\mathfrak mM$ is surjective (step 1). Since $\\mathfrak m$ is nilpotent, Nakayama's lemma for a nilpotent ideal [lem-weil-pbc-nakayama-nilpotent], applied to $I=\\mathfrak m$ and $u=\\varphi:F\\to M$ (no finiteness needed), gives that $\\varphi$ is surjective, i.e. the $x_\\alpha$ generate $M$.",
+   "uses": [
+    "lem-weil-pbc-nakayama-nilpotent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra, proof of Lemma Tag 051F (lemma-local-artinian-basis-when-flat, lines 24308-24321)"
+   }
+  },
+  {
+   "text": "(The short exact sequence and its reduction; Stacks: 'one gets a short exact sequence $0\\to K\\to\\bigoplus_{\\alpha}R\\to M\\to0$. Tensoring with $R/\\mathfrak m$ and using Lemma 00HL'.) Let $K=\\ker\\varphi$ and $j:K\\to F$ the inclusion; by step 3, $0\\to K\\xrightarrow{j}F\\xrightarrow{\\varphi}M\\to0$ is a short exact sequence [def-weil-pbc-exact-sequence]. Since $M$ is flat [def-weil-pbc-flat-ring-map], [lem-weil-pbc-flat-quotient-tensor-injective] with $N=\\kappa$ gives that $0\\to\\kappa\\otimes_RK\\to\\kappa\\otimes_RF\\to\\kappa\\otimes_RM\\to0$ is exact.",
+   "uses": [
+    "lem-weil-pbc-flat-quotient-tensor-injective",
+    "def-weil-pbc-exact-sequence",
+    "def-weil-pbc-flat-ring-map"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra, proof of Lemma Tag 051F (lemma-local-artinian-basis-when-flat, lines 24308-24321)"
+   }
+  },
+  {
+   "text": "($K/\\mathfrak mK=0$; Stacks: 'we obtain $K/\\mathfrak mK=0$', written out.) By [lem-weil-pbc-tensor-over-quotient-ring] (1) with $J=\\mathfrak m$, the maps $\\kappa\\otimes_RP\\to P/\\mathfrak mP$, $\\bar r\\otimes p\\mapsto rp\\bmod\\mathfrak mP$, are isomorphisms for $P=K,F,M$; they are natural in $P$ (both sides are functorial and the formula commutes with $R$-linear maps), so the exact sequence of step 4 becomes the exact sequence $0\\to K/\\mathfrak mK\\xrightarrow{\\bar j}F/\\mathfrak mF\\xrightarrow{\\bar\\varphi}M/\\mathfrak mM\\to0$, where $\\bar j,\\bar\\varphi$ are induced by $j,\\varphi$. By (1) and step 1, $\\bar\\varphi$ is injective, so $\\operatorname{im}\\bar j=\\ker\\bar\\varphi=0$; as $\\bar j$ is injective, $K/\\mathfrak mK=0$.",
+   "uses": [
+    "lem-weil-pbc-tensor-over-quotient-ring"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra, proof of Lemma Tag 051F (lemma-local-artinian-basis-when-flat, lines 24308-24321)"
+   }
+  },
+  {
+   "text": "($K=0$; Stacks: 'By Nakayama's Lemma we conclude $K=0$'.) Apply [lem-weil-pbc-nakayama-nilpotent] with $I=\\mathfrak m$ to the zero map $u:0\\to K$: the induced map $0\\to K/\\mathfrak mK$ is surjective because $K/\\mathfrak mK=0$ (step 5), hence $u$ is surjective, i.e. $K=0$ (this is the clause 'if $K=\\mathfrak mK$ then $K=0$' of that node). So $\\varphi$ is injective; with step 3 it is bijective, which is (2) by step 1.",
+   "uses": [
+    "lem-weil-pbc-nakayama-nilpotent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra, proof of Lemma Tag 051F (lemma-local-artinian-basis-when-flat, lines 24308-24321)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-nakayama-nilpotent",
+  "lem-weil-pbc-flat-quotient-tensor-injective",
+  "def-weil-pbc-exact-sequence",
+  "def-weil-pbc-flat-ring-map",
+  "lem-weil-pbc-tensor-over-quotient-ring"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Algebra, Lemma Tag 051F (lemma-local-artinian-basis-when-flat, line 24295) and its proof (lines 24308-24321); the identification kappa (x) P = P/mP and the identification of the reduced map with the map of (1) written out"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -41,10 +116,38 @@
    "results": "none",
    "date": "2026-10-10",
    "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "flat module over local ring with nilpotent maximal ideal is free",
+   "results": "Module.free_of_flat_of_isLocalRing, Module.free_of_maximalIdeal_rTensor_injective, Module.free_of_flat_of_finrank_eq, Module.nonempty_basis_of_flat_of_finrank_eq (Mathlib.RingTheory.LocalRing.Module), Module.Flat.of_free, Module.flat_of_localized_maximal",
+   "date": "2026-10-10",
+   "verdict": "no match (all need Module.Finite or Module.FinitePresentation; no nilpotent-maximal-ideal variant)"
+  },
+  {
+   "tool": "loogle",
+   "query": "Module.Flat, IsLocalRing, Module.Free",
+   "results": "Module.free_of_flat_of_isLocalRing (Mathlib.RingTheory.LocalRing.Module) only",
+   "date": "2026-10-10",
+   "verdict": "no match (needs Module.Finite R P)"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rn 'IsNilpotent\\|nilpotent' Mathlib/RingTheory/Flat/*.lean Mathlib/RingTheory/LocalRing/Module.lean; grep -rnE 'IsNilpotent.*(maximalIdeal|jacobson)' Mathlib; sed -n 250,312p Mathlib/RingTheory/LocalRing/Module.lean",
+   "results": "no nilpotent hypothesis in Flat/ or LocalRing/Module.lean (only Flat/Basic.lean:655 inside a proof); IsNilpotent (maximalIdeal R) occurs only in HopkinsLevitzki.lean:185 (Artinian iff nilpotent), Unramified/Field.lean:66, KrullDimension/Zero.lean:143; candidate Module.IsLocalRing.linearIndependent_of_flat (LocalRing/Module.lean:255: R local, M flat, no finiteness, v : ι → M with ι : Type u, linear independence of the images in k ⊗ M implies R-linear independence) gives only the independence half; the spanning half for non-finite M needs nilpotence (Nakayama), which Mathlib states only for FG submodules (Nakayama.lean)",
+   "date": "2026-10-10",
+   "verdict": "no match for the equivalence; partial candidate Module.IsLocalRing.linearIndependent_of_flat for injectivity (a Lean shortcut for steps 4-6), recorded in the report"
+  },
+  {
+   "tool": "local_search",
+   "query": "IsLocalRing.linearIndependent_of_flat",
+   "results": "Module.IsLocalRing.linearIndependent_of_flat (Mathlib/RingTheory/LocalRing/Module.lean)",
+   "date": "2026-10-10",
+   "verdict": "partial (independence half only)"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "worker",
@@ -64,5 +167,17 @@
   }
  },
  "chapter": "sec-proper-base-change",
- "unit": "sk-thm-p1"
+ "unit": "sk-thm-p1",
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "lem-weil-pbc-local-artinian-basis-when-flat",
+  "worker": "stage1",
+  "summary": "No exact Mathlib declaration (Mathlib's basis/freeness results for flat modules over local rings need Module.Finite/FinitePresentation; Module.IsLocalRing.linearIndependent_of_flat at LocalRing/Module.lean:255 gives only the independence half, recorded). Split in 6 steps following the Stacks proof of 051F: notation (phi : R^(A) -> M and its reduction), (2)=>(1) elementary, surjectivity by Nakayama for a nilpotent ideal (existing lem-weil-pbc-nakayama-nilpotent, 00DV(11), no finiteness), the short exact sequence 0->K->R^(A)->M->0 tensored with R/m stays exact (existing leaf lem-weil-pbc-flat-quotient-tensor-injective, 00HL), identification kappa (x) P = P/mP (existing leaf lem-weil-pbc-tensor-over-quotient-ring) giving K/mK = 0, and K = 0 by the same Nakayama node. No new nodes. Source field corrected: the node cited 'Lemma 00M5 (lemma-flat-tor-zero)', but 00M5 is lemma-characterize-flat; lemma-flat-tor-zero is 00HL (tags file)."
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "result": "accepted",
+  "note": "6 steps following Stacks 051F: notation; (2)=>(1); surjectivity by Nakayama for a nilpotent ideal (existing node, no finiteness); the short exact sequence stays exact after tensoring with kappa by flatness (00HL leaf); K/mK = 0 via the identification kappa (x) P = P/mP (existing leaf); K = 0 by Nakayama again. No new nodes; source tag corrected (00HL for lemma-flat-tor-zero, not 00M5)."
+ }
 }
