@@ -9,7 +9,9 @@
     "lem-sc-noetherian-topological-cohomology-vanishing"
    ]
   },
-  "same_as": []
+  "same_as": [
+   "lem-sc-zariski-flasque-acyclic"
+  ]
  },
  "kind": "statement",
  "title": "Flasque sheaves are acyclic for topological cohomology",
@@ -23,9 +25,29 @@
   "def-sc-topological-abelian-cohomology",
   "def-sc-zariski-flasque"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "The site of open subsets of X with open coverings is exactly the topological (Zariski) site used by [lem-sc-zariski-flasque-acyclic]. By [def-sc-topological-abelian-cohomology], its cohomology is the right derived functor of global sections, while the cited lemma computes the same derived functor by an injective-resolution model. Therefore its vanishing statement gives H^q(X,F)=0 for every q>0.",
+   "uses": [
+    "lem-sc-zariski-flasque-acyclic",
+    "def-sc-topological-abelian-cohomology"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/cohomology.tex",
+    "place": "Lemma 09SY (lemma-flasque-acyclic), proof and the definition of cohomology in Section 01DZ"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sc-zariski-flasque-acyclic",
+  "def-sc-topological-abelian-cohomology"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Lemma 09SY (lemma-flasque-acyclic)"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -57,12 +79,38 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-sc-irreducible-noetherian-constant-acyclic",
   "by": "worker",
   "date": "2026-10-10"
  },
  "chapter": "sec-curve-estimates",
- "unit": "sk-thm-curveestimate"
+ "unit": "sk-thm-curveestimate",
+ "split_report": {
+  "date": "2026-10-11",
+  "item": "lem-sc-topological-flasque-acyclic",
+  "worker": "stage1",
+  "summary": "Checked the item against Stacks Project Cohomology, Lemma 09SY (lemma-flasque-acyclic), and Section 01DZ for the derived-global-sections definition. The opens site in the item is the topological/Zariski site, so the existing lem-sc-zariski-flasque-acyclic node supplies the vanishing; def-sc-topological-abelian-cohomology identifies that resolution cohomology with the stated right derived functor. No Lean declaration with the exact blueprint tag or statement was found.",
+  "blueprint": "the ancestor lem-sc-pic-proper-ntorsion proof clause 'the d=0 irreducible case in the 02UZ induction: conclude acyclicity from flasqueness', realized by the specialization step",
+  "tool_uses": [
+   {
+    "node": "lem-sc-zariski-flasque-acyclic",
+    "why": "It supplies the generic flasque-acyclicity theorem on a topological opens site; no node in the curve-estimate unit provides this homological-algebra result."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sc-zariski-flasque-acyclic",
+  "lem-sc-zariski-flasque-acyclic"
+ ],
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-tfa1818",
+  "group": "M1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-tfa1818 (reviewer sub-agent of L); spot-checked: Step 1 vs lem-sc-zariski-flasque-acyclic (imported, sec-smooth-purity; deps only def-sc-zariski-flasque, def-sc-zariski-cohomology: no cycle with this item or parent lem-sc-irreducible-noetherian-constant-acyclic) and def-sc-topological-abelian-cohomology; the cited node's proof carries injectives-flasque, flasque quotient, dimension shift; tool_use accepted as generic homological tool (C7); no new nodes; searches recorded. No repairs."
+ },
+ "lead_note": "2026-10-10 L (R-tfa1818): Item restates imported lem-sc-zariski-flasque-acyclic (same opens site of a topological space); citing it is correct, not a duplicate. That node's statement writes X_Zar of def-sc-zariski-cohomology (scheme-defined) for a topological space; its proof is site-generic."
 }
