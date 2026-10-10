@@ -13,7 +13,7 @@
  },
  "kind": "statement",
  "title": "Restriction-zero sections are killed by a power of an invertible section",
- "statement": "Let $X$ be a quasi-compact [def-weil-pbc-quasi-compact-scheme] and quasi-separated scheme [def-pc-scheme], $\\mathcal L$ an invertible $\\mathcal O_X$-module [def-sc-invertible-module], $s\\in\\Gamma(X,\\mathcal L)$, and $\\mathcal F$ a quasi-coherent $\\mathcal O_X$-module [pqf-def-coherent]. Put $X_s=\\{x\\in X:s(x)\\ne0\\text{ in }\\mathcal L_x\\otimes\\kappa(x)\\}$, where $\\kappa(x)$ is the residue field [def-weil-residue-field]. If $t\\in\\Gamma(X,\\mathcal F)$ restricts to zero on $X_s$, then there exists $m\\ge0$ such that the image of $t$ under multiplication by $s^{\\otimes m}$ is zero in $\\Gamma(X,\\mathcal F\\otimes\\mathcal L^{\\otimes m})$.",
+ "statement": "Let $X$ be a quasi-compact [def-weil-pbc-quasi-compact-scheme] and quasi-separated scheme [def-pc-scheme, def-weil-quasi-separated-morphism] (the intersection of any two affine opens is quasi-compact), $\\mathcal L$ an invertible $\\mathcal O_X$-module [def-sc-invertible-module], $s\\in\\Gamma(X,\\mathcal L)$, and $\\mathcal F$ a quasi-coherent $\\mathcal O_X$-module [pqf-def-coherent]. Put $X_s=\\{x\\in X:s(x)\\ne0\\text{ in }\\mathcal L_x\\otimes\\kappa(x)\\}$, where $\\kappa(x)$ is the residue field [def-weil-residue-field]. If $t\\in\\Gamma(X,\\mathcal F)$ restricts to zero on $X_s$, then there exists $m\\ge0$ such that the image of $t$ under multiplication by $s^{\\otimes m}$ is zero in $\\Gamma(X,\\mathcal F\\otimes\\mathcal L^{\\otimes m})$.",
  "source": {
   "document": "literature/stacks-project/properties.tex",
   "place": "Properties, Lemma 01PW (label lemma-invert-s-sections), injectivity of the canonical localization map"
@@ -23,11 +23,63 @@
   "def-pc-scheme",
   "def-sc-invertible-module",
   "pqf-def-coherent",
+  "def-weil-residue-field",
+  "def-weil-quasi-separated-morphism"
+ ],
+ "proof": [
+  {
+   "text": "Choose a finite affine open cover $X=U_1\\cup\\dots\\cup U_r$, $U_i=\\operatorname{Spec}R_i$, with $\\mathcal L|_{U_i}\\cong\\mathcal O_{U_i}$; this is possible because $\\mathcal L$ is locally free of rank one and $X$ is quasi-compact. Write $s|_{U_i}=f_ie_i$ with $e_i$ a basis of $\\mathcal L|_{U_i}$ and $f_i\\in R_i$. For $x\\in U_i$, $s(x)\\ne0$ in $\\mathcal L_x\\otimes\\kappa(x)$ iff the image of $f_i$ in $\\kappa(x)$ is nonzero, i.e. iff $f_i\\notin\\mathfrak p_x$; hence $X_s\\cap U_i=D(f_i)$.",
+   "uses": [
+    "def-weil-pbc-quasi-compact-scheme",
+    "def-sc-invertible-module",
+    "def-weil-residue-field"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/properties.tex",
+    "place": "Properties, Lemma 01PW, proof of injectivity on a finite affine trivializing cover"
+   }
+  },
+  {
+   "text": "Since $\\mathcal F|_{U_i}$ is quasi-coherent, the counit $\\widetilde{M_i}\\to\\mathcal F|_{U_i}$ with $M_i=\\Gamma(U_i,\\mathcal F)$ is an isomorphism, and under it the restriction $\\Gamma(U_i,\\mathcal F)\\to\\Gamma(D(f_i),\\mathcal F)$ is the localization map $M_i\\to(M_i)_{f_i}$. Since $D(f_i)\\subseteq X_s$ and $t|_{X_s}=0$, the element $m_i=t|_{U_i}\\in M_i$ satisfies $m_i/1=0$ in $(M_i)_{f_i}$. By the kernel criterion for localization, $um_i=0$ for some $u$ in the powers of $f_i$, so $f_i^{n_i}m_i=0$ for some $n_i\\ge0$.",
+   "uses": [
+    "pqf-def-coherent",
+    "lem-weil-pbc-spec-module-tilde-sections",
+    "lem-weil-pbc-affine-tilde-gamma-adjunction",
+    "def-weil-pbc-module-localization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/properties.tex",
+    "place": "Properties, Lemma 01PW, injectivity calculation after trivializing L on an affine open"
+   }
+  },
+  {
+   "text": "Because the cover is finite, put $m=\\max_in_i$. On $U_i$ we have $s^{\\otimes m}|_{U_i}=f_i^me_i^{\\otimes m}$, so the image of $t$ under multiplication by $s^{\\otimes m}$ restricts on $U_i$ to $f_i^mm_i\\otimes e_i^{\\otimes m}=0$. As the $U_i$ cover $X$, the sheaf property gives that this image is zero in $\\Gamma(X,\\mathcal F\\otimes\\mathcal L^{\\otimes m})$.",
+   "uses": [
+    "def-sc-invertible-module"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/properties.tex",
+    "place": "Properties, Lemma 01PW, conclusion of injectivity proof"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-quasi-compact-scheme",
+  "def-sc-invertible-module",
+  "pqf-def-coherent",
+  "lem-weil-pbc-spec-module-tilde-sections",
+  "lem-weil-pbc-affine-tilde-gamma-adjunction",
+  "def-weil-pbc-module-localization",
   "def-weil-residue-field"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/properties.tex",
+  "place": "Properties, Lemma 01PW (label lemma-invert-s-sections), injectivity of the canonical localization map"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -59,12 +111,28 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-sc-p1-invertible-section-localization",
   "by": "worker",
   "date": "2026-10-10"
  },
  "chapter": "sec-picard-framework",
- "unit": "sk-thm-picard-duality"
+ "unit": "sk-thm-picard-duality",
+ "split_report": {
+  "date": "2026-10-11",
+  "item": "lem-sc-p1-section-restriction-s-torsion",
+  "worker": "stage1",
+  "summary": "Expanded the imported Stacks 01PW injectivity clause into a finite affine trivializing-cover argument. On each affine chart, quasi-coherence and the existing module-sheaf localization statements reduce vanishing on the nonvanishing locus to the defining localization criterion that a power of the local equation annihilates the section; a maximum over the finite cover gives the global exponent.",
+  "blueprint": "Realizes the proof clause comparing graded sections on the nonvanishing open with global sections after localization, specifically the injectivity calculation.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-srt1811",
+  "group": "E1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-srt1811 (reviewer sub-agent of L); spot-checked: Statement vs 01PW(1) (qs hypothesis extra but harmless; already in old statement); no cycle: parent invertible-section-localization cites this item, item cites only defs and affine tilde nodes; quasi-compactness used for the finite trivializing cover in step 1; step 2 hypotheses (qc of F|U_i, counit iso, localization kernel criterion) checked against cited statements. FIX more, RETURN less: (1) B3/preflight: steps rewritten in TeX, plain-text arrow removed; (2) C1: step 1's identification X_s cap U_i = D(f_i) uses the residue field, def-weil-residue-field added to step 1 uses and proof_deps. Second reading missed fault (2) and its claim of having set created.item to the item is not reflected (created.item is the parent, which is correct).; 1 file(s) fixed by the reviewer"
+ }
 }
