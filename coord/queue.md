@@ -1,8 +1,8 @@
 # Work queue
 
-925 items; claim with `tools/claim.py next <group> [--stage N]`.
+928 items; claim with `tools/claim.py next <group> [--stage N]`.
 
-## Stage 1: nodes to split (324)
+## Stage 1: nodes to split (325)
 
 | node | distance to a target | Lean state on the done branch |
 |---|---|---|
@@ -18,9 +18,7 @@
 | `lem-sc-noetherian-extension-by-zero-reduction` | 2013 | none |
 | `lem-sc-noetherian-open-closed-cohomology-sequence` | 2013 | none |
 | `lem-sc-ample-proj-local-chart` | 2014 | none |
-| `lem-sc-dvr-valuation-arithmetic` | 2014 | none |
 | `lem-sc-free-prime-membership` | 2014 | none |
-| `lem-sc-local-domain-dim-one-principal-localization-fraction-field` | 2014 | none |
 | `lem-sc-semilocal-dedekind-dvr-reduction` | 2014 | none |
 | `lem-sc-semilocal-dim-one-conductor` | 2014 | none |
 | `lem-sc-boundary-cech-injective-middle` | 2015 | none |
@@ -30,17 +28,16 @@
 | `lem-sc-zariski-contracted-power-torsor` | 2016 | none |
 | `lem-weil-pbc-cartesian-eilenberg-functorial` | 3007 | none |
 | `lem-exc-finite-galois-tensor-decomposition` | 3009 | none |
-| `lem-weil-pbc-site-restriction-injectives` | 3010 | none |
 | `lem-exc-etale-open-subgroup-fixed-field` | 3011 | none |
-| `lem-sc-quasi-finite-points-open` | 3012 | none |
-| `lem-sc-affine-maximal-points-closed-in-lft-scheme` | 3013 | none |
+| `lem-weil-pbc-site-extension-by-zero-exact` | 3011 | none |
+| `lem-weil-pbc-site-restriction-exact` | 3011 | none |
 | `lem-sc-tangent-space-vector-space` | 3013 | none |
 | `lem-pc-finite-extension-tensor-algebraic-closure-reduced-separable` | 3014 | none |
 | `lem-pc-polynomial-quotient-distinct-linear-crt` | 3014 | none |
 | `lem-pc-separable-polynomial-distinct-roots-alg-closed` | 3014 | none |
 | `lem-sc-derived-internal-hom-stalk-localization` | 3014 | none |
 | `lem-sc-ext-locally-free-second-naturality` | 3014 | none |
-| `lem-sc-finite-duality-derived-hom` | 3014 | none |
+| `lem-sc-lft-over-field-jacobson-space` | 3014 | none |
 | `lem-sc-p1-boundary-connecting-naturality` | 3014 | none |
 | `lem-sc-p1-boundary-one-extension-class` | 3014 | none |
 | `lem-sc-p1-ext-pushout-postcompose` | 3014 | none |
@@ -58,6 +55,10 @@
 | `lem-pc-ringed-spaces-derived-pullback-composition` | 3015 | none |
 | `lem-sc-affine-derived-pushforward-t-exact` | 3015 | none |
 | `lem-sc-ext-coherent-hom-injective-flasque` | 3015 | none |
+| `lem-sc-finite-affine-derived-equivalence` | 3015 | none |
+| `lem-sc-finite-pushforward-derived-hom-qcoherent` | 3015 | none |
+| `lem-sc-finite-sheafhom-affine-adjoint` | 3015 | none |
+| `lem-sc-finite-twisted-inverse-bounded-below` | 3015 | none |
 | `lem-sc-p1-invertible-section-localization` | 3015 | none |
 | `lem-sc-p1-tor-dimension-shift-natural` | 3015 | none |
 | `lem-sc-p1-twist-multiplication` | 3015 | none |
@@ -331,7 +332,7 @@
 | `lem-pur-rhom-well-defined` | - | none |
 | `lem-zl-noether-normalization-dimension` | - | none |
 
-## Stage 2: nodes to state (601)
+## Stage 2: nodes to state (603)
 
 | node | distance to Mathlib | kind |
 |---|---|---|
@@ -415,6 +416,7 @@
 | `lem-sc-affine-cap-section-open-algebra` | 1 | state |
 | `lem-sc-affine-finite-module-free-locus` | 1 | state |
 | `lem-sc-affine-finite-projective-prime-membership` | 1 | state |
+| `lem-sc-affine-maximal-points-closed-in-lft-scheme` | 1 | state |
 | `lem-sc-affine-open-finite-complement` | 1 | state |
 | `lem-sc-affine-standard-cover-finite-presentation-flat` | 1 | state |
 | `lem-sc-affine-standard-cover-finite-projective` | 1 | state |
@@ -444,6 +446,7 @@
 | `lem-sc-integral-locally-algebraic-affine-opens-dimension` | 1 | state |
 | `lem-sc-irreducible-product-over-field` | 1 | state |
 | `lem-sc-jacobson-denominator-function-field` | 1 | state |
+| `lem-sc-local-domain-dim-one-principal-localization-fraction-field` | 1 | state |
 | `lem-sc-local-ring-artin-schreier-kernel` | 1 | state |
 | `lem-sc-normal-dim1-dvr` | 1 | state |
 | `lem-sc-p1-graded-degree-component-exact` | 1 | state |
@@ -937,7 +940,7 @@
 | `lem-weil-pbc-p1-field-dimension-one` | 4 | state |
 | `lem-weil-pbc-projective-space-zero-isomorphism` | 4 | state |
 
-Not open yet: 341 nodes that wait for stage 1, 1245 nodes that wait for a statement dependency.
+Not open yet: 342 nodes that wait for stage 1, 1248 nodes that wait for a statement dependency.
 
 ## Stage 3: modules to prove (0)
 
