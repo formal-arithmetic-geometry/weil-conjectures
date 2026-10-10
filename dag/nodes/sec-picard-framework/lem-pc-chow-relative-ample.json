@@ -17,19 +17,101 @@
   "place": "Remark 30.18.2 (remark-chow-Noetherian, coherent.tex line 5075) part (1) and the proof of Proposition 30.19.1 (Tag 02O5), Chow paragraph; Morphisms Lemma 01W6-type closedness (image-proper-scheme-closed) and Lemma 29.40.5 (Tag 01VJ) / characterize-ample-on-finite-type"
  },
  "stmt_deps": [
-  "def-pc-morphism-conventions",
-  "def-pc-scheme",
-  "def-weil-proper-morphism",
-  "def-weil-closed-immersion",
   "def-nagata-projective-space-base-change",
   "def-pc-module-pullback",
-  "def-sc-invertible-module",
+  "def-pc-morphism-conventions",
   "def-pc-projective-morphism",
+  "def-pc-scheme",
+  "def-sc-invertible-module",
+  "def-weil-closed-immersion",
+  "def-weil-pbc-ample-invertible-module",
+  "def-weil-proper-morphism",
+  "lem-weil-pbc-immersion-closed-image-closed-immersion",
+  "lem-weil-pbc-projective-ample-invertible",
+  "lem-weil-pbc-proper-fp-permanence",
+  "lem-weil-pbc-proper-over-separated"
+ ],
+ "proof": [
+  {
+   "text": "Since $g$ and $\\pi$ are proper, $g'=g\\circ\\pi=p\\circ j$ is proper by the composition clause (a) of the permanence statement. The structure morphism $p:\\mathbf P^m_S\\to S$ is proper, hence separated by the definition of properness. So $j:X'\\to\\mathbf P^m_S$ is proper by the proper-over-separated lemma; being universally closed (base change along the identity), it has closed image. Since $j$ is an immersion with closed image, the immersion-with-closed-image criterion makes $j$ a closed immersion. As $g'$ is proper it is of finite type, in particular quasi-compact, and $g'=p\\circ j$ with $j$ a closed immersion into $\\mathbf P^m_S$; so $g'$ is projective by the definition of a projective morphism.",
+   "uses": [
+    "lem-weil-pbc-proper-fp-permanence",
+    "lem-weil-pbc-proper-over-separated",
+    "lem-weil-pbc-immersion-closed-image-closed-immersion",
+    "def-pc-projective-morphism",
+    "lemma-nagata-projective-space-base-change-proper",
+    "def-weil-proper-morphism"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/coherent.tex",
+    "place": "Cohomology of Schemes, Proposition 30.19.1 (Tag 02O5), Chow paragraph; Remark 30.18.2 (Tag 0200), part (1)"
+   }
+  },
+  {
+   "text": "Since $j$ is a closed immersion over $S$, its base change along $g:Z\\to S$ is a closed immersion $j\\times\\mathrm{id}_Z:X'\\times_SZ\\to\\mathbf P^m_S\\times_SZ=\\mathbf P^m_Z$ (permanence (b); the identification $\\mathbf P^m_S\\times_SZ=Z\\times_{\\operatorname{Spec}\\mathbf Z}\\mathbf P^m_{\\mathbf Z}=\\mathbf P^m_Z$ is associativity of fibre products in the definition of $\\mathbf P(n;-)$). The morphism $g$ is proper, hence separated, so its diagonal $\\Delta_g:Z\\to Z\\times_SZ$ is a closed immersion. The graph $\\Gamma_\\pi=(\\mathrm{id},\\pi):X'\\to X'\\times_SZ$ is the base change of $\\Delta_g$ along $\\pi\\times\\mathrm{id}_Z:X'\\times_SZ\\to Z\\times_SZ$ (elementary: $(X'\\times_SZ)\\times_{Z\\times_SZ}Z\\cong X'$ via $(x,z)$ with $\\pi(x)=z$; Stacks, Schemes, semi-diagonal lemma), hence a closed immersion by permanence (b). The composite $(j\\times\\mathrm{id}_Z)\\circ\\Gamma_\\pi$ is exactly $(j,\\pi):X'\\to\\mathbf P^m_Z$. Both factors are closed immersions, hence proper by permanence (c) and immersions; so $(j,\\pi)$ is proper by (a) and an immersion by (e), its image is closed (properness gives universal closedness), and it is a closed immersion by the immersion-with-closed-image criterion. Since $\\pi$ is proper, it is quasi-compact, and $\\pi$ is the composite of the closed immersion $(j,\\pi)$ with the projection $\\mathbf P^m_Z\\to Z$; so $\\pi$ is projective by definition. Finally $\\mathcal O_{\\mathbf P^m_S}(1)$ and $\\mathcal O_{\\mathbf P^m_Z}(1)$ are the pullbacks of $\\mathcal O_{\\mathbf P^m_{\\mathbf Z}}(1)$ along the projections to $\\mathbf P^m_{\\mathbf Z}$, and the projection $\\mathbf P^m_Z\\to\\mathbf P^m_{\\mathbf Z}$ composed with $(j,\\pi)$ equals the projection $\\mathbf P^m_S\\to\\mathbf P^m_{\\mathbf Z}$ composed with $j$; by the composition compatibility of pullback, $(j,\\pi)^*\\mathcal O_{\\mathbf P^m_Z}(1)\\cong j^*\\mathcal O_{\\mathbf P^m_S}(1)=\\mathcal L$.",
+   "uses": [
+    "lem-weil-pbc-proper-fp-permanence",
+    "def-weil-proper-morphism",
+    "lem-weil-pbc-immersion-closed-image-closed-immersion",
+    "def-pc-projective-morphism",
+    "def-pc-module-pullback",
+    "def-nagata-projective-space-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/coherent.tex",
+    "place": "Remark 30.18.2 (Tag 0200), part (1), and the base-change construction in the Chow paragraph of Proposition 30.19.1 (Tag 02O5)"
+   }
+  },
+  {
+   "text": "Let $V\\subseteq S$ be an affine open, $V=\\operatorname{Spec}A$. The base change of the closed immersion $j$ along the open immersion $V\\to S$ is the restriction $j_V:g'^{-1}(V)\\to p^{-1}(V)=V\\times_S\\mathbf P^m_S=\\mathbf P^m_V$, a closed immersion by permanence (b), over $V$. By the composition compatibility of pullback, $j_V^*\\mathcal O_{\\mathbf P^m_V}(1)\\cong\\mathcal L|_{g'^{-1}(V)}$, both being pullbacks of $\\mathcal O_{\\mathbf P^m_{\\mathbf Z}}(1)$ along the same morphism $g'^{-1}(V)\\to\\mathbf P^m_{\\mathbf Z}$. Applying the projective-ampleness statement to the closed immersion $j_V$ over $\\operatorname{Spec}A$ shows that $\\mathcal L|_{g'^{-1}(V)}$ is ample. This proves the asserted ampleness over affine opens of $S$.",
+   "uses": [
+    "lem-weil-pbc-proper-fp-permanence",
+    "def-nagata-projective-space-base-change",
+    "def-pc-module-pullback",
+    "lem-weil-pbc-projective-ample-invertible",
+    "def-weil-pbc-ample-invertible-module"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/coherent.tex",
+    "place": "Remark 30.18.2 (Tag 0200), part (1), using Properties Lemma 01PU"
+   }
+  },
+  {
+   "text": "Let $W\\subseteq Z$ be an affine open. The base change of the closed immersion $(j,\\pi)$ of step 2 along $W\\to Z$ is a closed immersion $\\pi^{-1}(W)=X'\\times_ZW\\to\\mathbf P^m_Z\\times_ZW=\\mathbf P^m_W$ over $W$ (permanence (b)), and as in step 3 the pullback of $\\mathcal O_{\\mathbf P^m_W}(1)$ along it is $\\mathcal L|_{\\pi^{-1}(W)}$ by step 2 and the composition compatibility of pullback. The same projective-ampleness statement over the affine base $W$ gives that $\\mathcal L|_{\\pi^{-1}(W)}$ is ample. Thus all three clauses of the item hold.",
+   "uses": [
+    "lem-weil-pbc-proper-fp-permanence",
+    "def-nagata-projective-space-base-change",
+    "def-pc-module-pullback",
+    "lem-weil-pbc-projective-ample-invertible",
+    "def-weil-pbc-ample-invertible-module"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/coherent.tex",
+    "place": "Remark 30.18.2 (Tag 0200), part (1), and Proposition 30.19.1 (Tag 02O5), Chow paragraph"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-proper-fp-permanence",
+  "lem-weil-pbc-proper-over-separated",
+  "lem-weil-pbc-immersion-closed-image-closed-immersion",
+  "def-pc-projective-morphism",
+  "lemma-nagata-projective-space-base-change-proper",
+  "def-weil-proper-morphism",
+  "def-pc-module-pullback",
+  "def-nagata-projective-space-base-change",
+  "lem-weil-pbc-projective-ample-invertible",
   "def-weil-pbc-ample-invertible-module"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/coherent.tex",
+  "place": "Cohomology of Schemes, Proposition 30.19.1 (Tag 02O5), Chow paragraph, together with Remark 30.18.2 (Tag 0200), part (1), and Properties Lemma 01PU"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -61,12 +143,37 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-pc-coherent-hi",
   "by": "worker",
   "date": "2026-10-10"
  },
  "chapter": "sec-picard-framework",
- "unit": "sk-thm-picard-coherence"
+ "unit": "sk-thm-picard-coherence",
+ "split_report": {
+  "date": "2026-10-11",
+  "item": "lem-pc-chow-relative-ample",
+  "worker": "stage1",
+  "summary": "Split the Chow relative ampleness input into four proof steps. The existing Chow node supplies the immersion and properness setting; proper-over-separated plus immersion-with-closed-image makes j closed, base change gives the graph closed immersion and projectivity of pi, and the existing affine-base projective ampleness node proves both relative ampleness clauses. No new nodes were needed.",
+  "blueprint": "Realizes the Tag 02O5 Chow step in lem-pc-coherent-hi: the Chow immersion is closed, pi and g' are projective, and j^*O(1) is ample over affine opens of S and Z.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-projective-ample-invertible",
+    "why": "Its affine-base closed-immersion statement supplies ampleness of the pulled-back O(1) on the affine restrictions over S and Z; the coherence unit has no replacement for this generic projective ampleness input."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-projective-ample-invertible",
+  "lem-weil-pbc-projective-ample-invertible"
+ ],
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-cra3152",
+  "group": "M1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-cra3152 (reviewer sub-agent of L); spot-checked: Statement clauses (1)-(3) match the citer lem-pc-coherent-hi step 2 (j closed, g' and pi projective, L ample over affine opens of S and Z). FIX more, RETURN less: (1) C4 step 2: graph Gamma_pi: X'->X' x_S Z was justified as the pullback of the diagonal of pi using pi separated; it is the base change of Delta_g along pi x id, needing g separated (g proper) - rewritten; (2) C1 step 2: 'composition of closed immersions' is in no cited node - replaced by permanence (c),(a),(e) + immersion-closed-image criterion; quasi-compactness for 'projective' (def-pc-projective-morphism) now stated in steps 1-2; step 1 now cites def-weil-proper-morphism for proper=>separated; steps 3-4 now cite permanence (b), def-nagata-projective-space-base-change and def-pc-module-pullback for the restriction to P^m_V/P^m_W and the O(1) identification; (3) B3: '\\to' and '\\times' in steps 1,3,4 were JSON tab escapes (TAB+'o'/'imes') - repaired. No duplicate chow/relatively-ample/projective-morphism node (grep). Second reading missed fault (1).; 1 file(s) fixed by the reviewer"
+ }
 }

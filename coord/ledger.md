@@ -3021,3 +3021,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 23:53 L: merged deliver/K1/lem-sp-filtered-complex-ZB-description (reviewer FIX; first push; new nodes: 1)
 - 23:53 L: merged deliver/K1/lem-sc-qc-open-derived-lift (reviewer FIX; first push; new nodes: 0)
 - 23:54 L: merged deliver/J1/lem-pc-module-flat-opcycles-tor-criterion (reviewer PASS; first push; new nodes: 1)
+- 23:54 L: merged deliver/M1/lem-pc-chow-relative-ample (reviewer FIX; first push; new nodes: 0)
