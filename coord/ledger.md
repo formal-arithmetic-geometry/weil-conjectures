@@ -1501,3 +1501,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 13:30 L: accepted lem-pc-h0-geom-connected: 5 steps (0FD2), 2 new nodes closed in Lean (connected iff idempotents; reduced finite algebra without idempotents has dimension 1), tool_uses lem-pc-coherent-hi, pqf-lem-coherent-ft-locnoeth
 - 2026-10-10, delivery of E1: def-pc-dimension merged from deliver/E1/def-pc-dimension (1 commit(s), 0 new node(s), spot-checked by L: L: reviewed in full by a reviewer sub-agent (PASS): definition kept as the supremum of local-ring dimensions, citers checked, 04MT/04MU, Mathlib lines verified); claim closed
 - 13:30 L: merged deliver/E1/def-pc-dimension (reviewer PASS, first push)
+- 2026-10-10, delivery of E1: def-pc-curve merged from deliver/E1/def-pc-curve (1 commit(s), 0 new node(s), spot-checked by L: L: reviewed in full by a reviewer sub-agent (PASS): 020D/0A23 read, every cited notion checked, no cycle); claim closed
