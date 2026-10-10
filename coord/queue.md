@@ -1,8 +1,8 @@
 # Work queue
 
-905 items; claim with `tools/claim.py next <group> [--stage N]`.
+904 items; claim with `tools/claim.py next <group> [--stage N]`.
 
-## Stage 1: nodes to split (146)
+## Stage 1: nodes to split (145)
 
 | node | distance to a target | Lean state on the done branch |
 |---|---|---|
@@ -36,9 +36,10 @@
 | `lem-sc-flat-precompose-pus` | 3019 | none |
 | `def-pc-global-derived-rhom` | 3020 | none |
 | `lem-pc-qcqs-derived-direct-image-right-adjoint` | 3020 | none |
-| `lem-pc-perfect-thick-closure` | 3021 | none |
 | `lem-sc-rhom-supported-qcoherent` | 3021 | none |
 | `lem-sc-supported-factor-through-thick` | 3021 | none |
+| `lem-pc-perfect-summand` | 3022 | none |
+| `lem-pc-perfect-two-out-of-three` | 3022 | none |
 | `lem-pc-genus-agrees-sc` | 4007 | rests_on_sorry |
 | `prop-av-tate-rank` | 4008 | rests_on_sorry |
 | `cor-pc-sigma-pic-iso` | 4009 | rests_on_sorry |
@@ -67,8 +68,6 @@
 | `lem-sc-base-change-curve` | - | none |
 | `lem-weil-pbc-generic-finite-algebra-splitting` | - | none |
 | `lem-weil-pbc-irreducible-lisse-strata` | - | none |
-| `pqf-lem-finite-fp-locnoeth` | - | none |
-| `thm-sc-affine-cohomology` | - | rests_on_sorry |
 | `thm-sc-constant-invariance` | - | none |
 | `def-nagata-morphism-equality-stage` | - | none |
 | `def-nagata-qc-open-equality-stage` | - | none |
@@ -82,7 +81,6 @@
 | `lem-sc-pic-affine-quotient` | - | none |
 | `lem-weil-pbc-constant-subsheaf-generic` | - | none |
 | `lemma-nagata-filtered-colimit-finite-data` | - | none |
-| `pqf-lem-affine-open-locnoeth` | - | none |
 | `cor-pd-pic0-base-change` | - | sorry_here |
 | `def-nagata-affine-fp-descent` | - | none |
 | `def-nagata-morphism-descent` | - | none |
@@ -141,6 +139,7 @@
 | `lem-pc-curve-coherent-finiteness` | - | rests_on_sorry |
 | `lem-pc-flf-properties` | - | none |
 | `lem-sc-p1-twist-exists` | - | none |
+| `pqf-lem-affine-open-locnoeth` | - | none |
 | `def-weil-extension-by-zero-presheaf` | - | none |
 | `lem-exc-etale-algebra-lift` | - | none |
 | `lem-pc-projective-curve-finite-projection` | - | rests_on_sorry |
@@ -917,7 +916,7 @@
 | `lem-weil-pbc-projective-space-zero-isomorphism` | 4 | state |
 | `def-nagata-fixed-base-separated-stage` | 6 | state |
 
-Not open yet: 1532 nodes that wait for a statement dependency, 186 nodes that wait for stage 1.
+Not open yet: 1535 nodes that wait for a statement dependency, 185 nodes that wait for stage 1.
 
 ## Stage 3: modules to prove (0)
 
