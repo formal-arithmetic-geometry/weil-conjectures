@@ -1,8 +1,8 @@
 # Work queue
 
-910 items; claim with `tools/claim.py next <group> [--stage N]`.
+909 items; claim with `tools/claim.py next <group> [--stage N]`.
 
-## Stage 1: nodes to split (273)
+## Stage 1: nodes to split (271)
 
 | node | distance to a target | Lean state on the done branch |
 |---|---|---|
@@ -31,7 +31,6 @@
 | `lem-pc-kflat-pullback-preservation` | 3016 | none |
 | `lem-pc-quasi-coherent-extension` | 3016 | none |
 | `lem-sc-derived-k-injective-restrict-open` | 3016 | none |
-| `lem-sc-finite-sheafhom-affine` | 3016 | none |
 | `lem-sc-koszul-regular-closed-immersion-perfect` | 3016 | none |
 | `lem-sc-koszul-regular-immersion-derived-hom` | 3016 | none |
 | `lem-sc-smooth-diagonal-regular-immersion` | 3016 | none |
@@ -50,7 +49,6 @@
 | `thm-pc-hilb-curves` | 4009 | rests_on_sorry |
 | `lem-pc-arrow-iso-pullback-counit` | 4010 | none |
 | `lem-pc-ideal-sheaf-comap-affine-extension` | 4010 | none |
-| `lem-pc-invertible-sheaf-instance` | 4010 | none |
 | `lem-pc-projection-formula` | 4010 | sorry_here |
 | `lem-pc-universal-adjoint-section` | 4010 | rests_on_sorry |
 | `lem-pc-zero-scheme-pullback-local-coefficient` | 4010 | none |
@@ -280,7 +278,7 @@
 | `lem-pur-rhom-well-defined` | - | none |
 | `lem-zl-noether-normalization-dimension` | - | none |
 
-## Stage 2: nodes to state (637)
+## Stage 2: nodes to state (638)
 
 | node | distance to Mathlib | kind |
 |---|---|---|
@@ -357,6 +355,7 @@
 | `lem-pc-inseparable-tensor-nilpotent` | 1 | state |
 | `lem-pc-integral-radicial-surjective-universal-homeomorphism` | 1 | state |
 | `lem-pc-invertible-common-free-generator` | 1 | state |
+| `lem-pc-invertible-sheaf-instance` | 1 | state |
 | `lem-pc-linear-pair-graded-finite` | 1 | state |
 | `lem-pc-linear-pair-morphism-finite` | 1 | state |
 | `lem-pc-polynomial-quotient-distinct-linear-crt` | 1 | state |
@@ -922,7 +921,7 @@
 | `lem-weil-pbc-p1-field-dimension-one` | 4 | state |
 | `lem-weil-pbc-projective-space-zero-isomorphism` | 4 | state |
 
-Not open yet: 1307 nodes that wait for a statement dependency, 301 nodes that wait for stage 1.
+Not open yet: 1309 nodes that wait for a statement dependency, 298 nodes that wait for stage 1.
 
 ## Stage 3: modules to prove (0)
 
