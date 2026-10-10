@@ -31,9 +31,45 @@
   "def-weil-pbc-double-complex-zigzag-module",
   "def-weil-pbc-exact-sequence"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Choose c in A_(0,n+1) representing an element y of the row-cokernel module A^rt_(n+1) whose image under delta^rt_(n+1) is pi_n(a_(0,n)). Since delta^rt_(n+1) pi_(n+1) equals pi_n delta_(0,n+1), the difference a_(0,n) minus delta_(0,n+1)(c) lies in the image of d_(1,n); choose e in A_(1,n) with d_(1,n)(e) plus delta_(0,n+1)(c) equal to a_(0,n). Let b in T_(n+1)(A) have only b_(1,n)=e and b_(0,n+1)=c nonzero. Then D_(n+1)(b)_(0,n)=a_(0,n), so replacing a by a-D_(n+1)(b) gives a zig-zag representing the same class and having zeroth component 0. This replacement is legitimate because B_n(A) is contained in Z_n(A) by [lem-weil-pbc-double-complex-zigzag-module-functorial].",
+   "uses": [
+    "def-weil-pbc-module-chain-complex-homology",
+    "def-weil-pbc-double-complex-zigzag-module",
+    "lem-weil-pbc-double-complex-zigzag-module-functorial"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra, Lemma Tag 00M1 (lemma-no-spectral-sequence), proof, lines 18488-18496 (boundary lift and modification to arrange a_{0,i}=0)"
+   }
+  },
+  {
+   "text": "After the first step, suppose inductively that, after subtracting elements of B_n(A), the zig-zag a' has a'_(p,q)=0 for all p<k, where 1 <= k <= n and q=n-p. The zig-zag equation at (k,n-k), together with the already-zero component at (k-1,n-k+1), gives d_(k,n-k)(a'_(k,n-k))=0. Row exactness at A_(k,n-k) therefore supplies f in A_(k+1,n-k) with d_(k+1,n-k)(f)=a'_(k,n-k). Subtract the trivial zig-zag D_(n+1)(b) where b has only b_(k+1,n-k)=f nonzero; its (k,n-k) component is a'_(k,n-k), so the k-th component is killed while only the next component may change. Repeating for k=1,...,n produces a representative with every component zero. Thus the original zig-zag belongs to B_n(A).",
+   "uses": [
+    "def-weil-pbc-double-complex-zigzag-module",
+    "def-weil-pbc-exact-sequence",
+    "lem-weil-pbc-double-complex-zigzag-module-functorial"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra, Lemma Tag 00M1 (lemma-no-spectral-sequence), proof, lines 18496-18504 (successive use of row exactness and subtraction of trivial zig-zags)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-double-complex-zigzag-module",
+  "def-weil-pbc-exact-sequence",
+  "lem-weil-pbc-double-complex-zigzag-module-functorial",
+  "def-weil-pbc-module-chain-complex-homology"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Algebra, Lemma Tag 00M1 (lemma-no-spectral-sequence), proof, lines 18488-18504"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -65,7 +101,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "worker",
@@ -81,5 +117,19 @@
   }
  },
  "chapter": "sec-proper-base-change",
- "unit": "sk-thm-p1"
+ "unit": "sk-thm-p1",
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "lem-weil-pbc-double-complex-zigzag-trivial-if-row-boundary",
+  "worker": "stage1",
+  "summary": "Read Stacks Project Algebra Lemma Tag 00M1 (lemma-no-spectral-sequence), especially the injectivity argument at algebra.tex lines 18488-18504. The item statement agrees with the source after expressing the boundary condition through the row-cokernel complex. Split the proof into the initial boundary subtraction and the finite induction using exact rows; all non-elementary facts are cited from the existing chain-complex, zig-zag, exact-sequence, and zig-zag-functoriality nodes. No new node was needed, and no slopmaster2 declaration states this lemma.",
+  "blueprint": "Realizes the proof place in blueprint.from: the injectivity portion of Stacks 00M1 ('we may modify our zig-zag by a trivial one and assume that a_{0,i}=0' followed by repeated row-exactness modifications). same_as: []"
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "group": "G1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed by the lead of G1; spot-checked by L: L: reviewed in full by a reviewer sub-agent (FIX: stmt_deps completed): 00M1 injectivity paragraph read, 2 steps checked with the + convention, small cases n = 0, 1"
+ }
 }
