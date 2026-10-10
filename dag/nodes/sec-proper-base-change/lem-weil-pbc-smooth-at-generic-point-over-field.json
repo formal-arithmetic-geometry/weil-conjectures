@@ -13,9 +13,47 @@
   "def-weil-pbc-singular-ideal",
   "def-weil-pbc-smooth-ring-map"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "At the zero prime $\\mathfrak q=(0)\\subset S$, localization inverts every nonzero element of the domain $S$, so $S_{\\mathfrak q}$ is the fraction field $L$ and $\\kappa(\\mathfrak q)=S_{\\mathfrak q}/(0)S_{\\mathfrak q}=L$ as field extensions of $k$ [def-weil-pbc-localization-at-prime]. In particular $S_{\\mathfrak q}$ is a regular local ring by [lem-weil-pbc-field-regular-ring], and its residue field is separable over $k$ by the hypothesis [def-weil-pbc-separable-field-extension].",
+   "uses": [
+    "def-weil-pbc-localization-at-prime",
+    "lem-weil-pbc-field-regular-ring",
+    "def-weil-pbc-separable-field-extension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra, proof of Lemma Tag 07ND (lemma-smooth-at-generic-point, line 38915), final sentence, specialized to $R=k$ and $\\mathfrak q=(0)$"
+   }
+  },
+  {
+   "text": "Apply [lem-weil-pbc-regular-local-separable-residue-smooth] (the direction regular local implies smooth) to the finite type $k$-algebra $S$ and $\\mathfrak q=(0)$. Step 1 supplies its regularity and separability hypotheses, so $k\\to S$ is smooth at $(0)$ [def-weil-pbc-singular-ideal]. Thus there is $g\\in S\\setminus(0)$ such that $S_g$ is a smooth $k$-algebra [def-weil-pbc-smooth-ring-map], which is the claimed nonzero $g$.",
+   "uses": [
+    "lem-weil-pbc-regular-local-separable-residue-smooth",
+    "def-weil-pbc-singular-ideal",
+    "def-weil-pbc-smooth-ring-map"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra, Lemma Tag 00TV (lemma-separable-smooth, line 38740), implication regular local implies smooth, as applied in the proof of Lemma Tag 07ND (line 38915); Definition Tag 00TB (definition-smooth-at-prime, line 37511)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-localization-at-prime",
+  "lem-weil-pbc-field-regular-ring",
+  "def-weil-pbc-separable-field-extension",
+  "lem-weil-pbc-regular-local-separable-residue-smooth",
+  "def-weil-pbc-singular-ideal",
+  "def-weil-pbc-smooth-ring-map"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Algebra, implication separable fraction fields imply smooth at $(0)$ in Lemma Tag 07ND (lemma-smooth-at-generic-point, lines 38909-38916), specialized to a field base, using Lemma Tag 00TV and Definition Tag 00TB"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -47,7 +85,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "worker",
@@ -67,5 +105,18 @@
   }
  },
  "chapter": "sec-proper-base-change",
- "unit": "sk-thm-p1"
+ "unit": "sk-thm-p1",
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "lem-weil-pbc-smooth-at-generic-point-over-field",
+  "worker": "stage1",
+  "summary": "Checked the statement against Stacks 07ND, 00TV and 00TB and kept it. The field-base specialization bypasses 07ND's two preliminary reductions: k is already its own fraction field and S is already finite type over the Noetherian field k. The proof has two steps: at the zero prime of the domain S, both the local ring and residue field are its fraction field L, hence the local ring is regular and the residue extension is separable; the new unsplit node lem-weil-pbc-regular-local-separable-residue-smooth (Stacks 00TV) then gives smoothness at (0), which 00TB expands to a nonzero principal localization S_g smooth over k. Mathlib has IsSmoothAt, the open smooth locus and formal smoothness of separably generated field extensions, but no regular-local/separable-residue criterion matching 00TV."
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "group": "E1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed by the lead of E1; spot-checked by L: L read the two steps and the new 00TV node: step 1 identifies S_(0) with L (regular local, residue field L separable by hypothesis), step 2 applies 00TV's regular⇒smooth direction with def-weil-pbc-singular-ideal; the new node states 00TV in full"
+ }
 }

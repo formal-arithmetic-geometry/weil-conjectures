@@ -998,3 +998,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 07:05 L: reviewed and accepted lem-weil-pbc-pth-roots-extension-degree (5 steps, no new nodes; 07DZ).
 - 07:06 L: reviewed and accepted lem-weil-pbc-projective-resolution-kernel-projective (9 steps; +schanuel 00O3 node, +projective-direct-sum, +projective-direct-summand, +ses-projective-quotient-splits leaves).
 - 07:07 L: reviewed and accepted lem-weil-pbc-purely-inseparable-base-change-local-ring (6 steps by agent, no new nodes).
+- 2026-10-10, delivery of E1: lem-weil-pbc-smooth-at-generic-point-over-field merged from deliver/E1/lem-weil-pbc-smooth-at-generic-point-over-field (1 commit(s), 1 new node(s), spot-checked by L: L read the two steps and the new 00TV node: step 1 identifies S_(0) with L (regular local, residue field L separable by hypothesis), step 2 applies 00TV's regular⇒smooth direction with def-weil-pbc-singular-ideal; the new node states 00TV in full); claim closed
