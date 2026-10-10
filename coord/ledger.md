@@ -1321,3 +1321,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 11:38 L: accepted lem-pc-homeo-pure-insep (3 steps; new nodes for 01S4 and 04DF, both closed on slopmaster2 and attached).
 - 11:38 L: accepted lem-weil-pbc-sets-finite-surjective-descent (09Z3, 10 steps; 4 new nodes: 03QP (1) for sets, 03Q1 (3) germs, two Mathlib leaves on geometric stalks).
 - 2026-10-10, delivery of K1: lem-weil-pbc-flat-another-variant-local-criterion merged from deliver/K1/lem-weil-pbc-flat-another-variant-local-criterion (1 commit(s), 3 new node(s), spot-checked by L: L: 00MO via 00MM/00MN: base change of the module, flatness of the quotient, the Tor_1 surjection with the change of rings, localization; 3 new Tor nodes); claim closed
+- 11:39 L: merged K1 lem-weil-pbc-flat-another-variant-local-criterion (00MO, +3 Tor nodes).
