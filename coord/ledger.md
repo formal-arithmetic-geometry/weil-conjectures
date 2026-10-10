@@ -2944,3 +2944,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 23:16 L: returned deliver/H1/lem-pc-affine-flat-module-descent (reviewer RETURN: Reviewer R-afm3042 (head 52f2a212c). Statement unchanged from sheaf-dag and correct: hypothesis (a) is built in by B_j=R)
 - 23:16 L: merged deliver/M1/lem-kun-cp-approximation (reviewer FIX; after a return; new nodes: 0)
 - 23:16 L: merged deliver/M1/lem-pc-curve-coherent-finiteness (reviewer FIX; first push; new nodes: 0)
+- 23:16 L: merged deliver/K1/lem-sc-p1-twist-exists (reviewer PASS; first push; new nodes: 0)
