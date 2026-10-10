@@ -2015,3 +2015,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 16:39 L: returned deliver/J1/lem-pc-grothendieck-ss-double-complex-model (reviewer RETURN: Re-push of 99edcbf15 reviewed by R-gd2. Return points 1 (the identification now cites the construction clause of thm-sp-)
 - 16:39 L: merged deliver/J1/lem-sc-boundary-cech-local-lifts (reviewer PASS; after a return; new nodes: 2)
 - 16:39 L: merged deliver/E1/lem-sc-brauer-zero (reviewer FIX; after a return; new nodes: 1)
+- 16:41 L: REVIEW BEHIND 12 after the 28th limit; eight slots (7 reviewers + the audit); the def-sc-ext-sheaf writer's partial file moved to scratch, item still claimed by L
