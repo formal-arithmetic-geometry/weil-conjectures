@@ -1,8 +1,8 @@
 # Work queue
 
-912 items; claim with `tools/claim.py next <group> [--stage N]`.
+911 items; claim with `tools/claim.py next <group> [--stage N]`.
 
-## Stage 1: nodes to split (637)
+## Stage 1: nodes to split (634)
 
 | node | distance to a target | Lean state on the done branch |
 |---|---|---|
@@ -26,9 +26,6 @@
 | `lem-weil-pbc-smooth-fibre-regular-local` | 1012 | none |
 | `lem-weil-pbc-smooth-localization-conormal-split` | 1012 | none |
 | `lem-weil-pbc-smooth-over-field-dimension-differentials` | 1012 | none |
-| `lem-weil-pbc-zariski-cohomology-locally-zero` | 1012 | none |
-| `def-weil-pbc-depth` | 1013 | none |
-| `def-weil-pbc-essentially-constant-system` | 1013 | none |
 | `def-weil-pbc-japanese-domain` | 1013 | none |
 | `def-weil-pbc-nagata-ring` | 1013 | none |
 | `def-weil-pbc-relative-global-complete-intersection` | 1013 | none |
@@ -644,7 +641,7 @@
 | `lem-pc-linear-pair-graded-finite` | - | none |
 | `def-exc-jacobian-presentation` | - | none |
 
-## Stage 2: nodes to state (275)
+## Stage 2: nodes to state (277)
 
 | node | distance to Mathlib | kind |
 |---|---|---|
@@ -654,6 +651,8 @@
 | `def-weil-pbc-associated-module` | 1 | state |
 | `def-weil-pbc-complete-intersection-over-field` | 1 | state |
 | `def-weil-pbc-constant-group-scheme` | 1 | state |
+| `def-weil-pbc-depth` | 1 | state |
+| `def-weil-pbc-essentially-constant-system` | 1 | state |
 | `def-weil-pbc-essentially-smooth-ring-map` | 1 | state |
 | `def-weil-pbc-fibre-degree-bound` | 1 | state |
 | `def-weil-pbc-finite-global-dimension` | 1 | state |
@@ -924,7 +923,7 @@
 | `lem-weil-pbc-p1-field-dimension-one` | 4 | state |
 | `lem-weil-pbc-projective-space-zero-isomorphism` | 4 | state |
 
-Not open yet: 649 nodes that wait for stage 1, 552 nodes that wait for a statement dependency.
+Not open yet: 646 nodes that wait for stage 1, 553 nodes that wait for a statement dependency.
 
 ## Stage 3: modules to prove (0)
 
