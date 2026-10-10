@@ -2,7 +2,7 @@
 
 897 items; claim with `tools/claim.py next <group> [--stage N]`.
 
-## Stage 1: nodes to split (658)
+## Stage 1: nodes to split (657)
 
 | node | distance to a target | Lean state on the done branch |
 |---|---|---|
@@ -25,7 +25,6 @@
 | `lem-weil-pbc-module-finite-type-submodule-extension` | 1012 | none |
 | `lem-weil-pbc-module-pullback-affine-sections` | 1012 | none |
 | `lem-weil-pbc-module-stalk-filtered-colimit` | 1012 | none |
-| `lem-weil-pbc-polynomial-ideal-coefficients-monomial` | 1012 | none |
 | `lem-weil-pbc-polynomial-local-completion-formally-smooth` | 1012 | none |
 | `lem-weil-pbc-popescu-artinian-flat-subalgebras` | 1012 | none |
 | `lem-weil-pbc-popescu-delocalize-weak` | 1012 | none |
@@ -665,7 +664,7 @@
 | `lem-pc-linear-pair-graded-finite` | - | none |
 | `def-exc-jacobian-presentation` | - | none |
 
-## Stage 2: nodes to state (239)
+## Stage 2: nodes to state (240)
 
 | node | distance to Mathlib | kind |
 |---|---|---|
@@ -833,6 +832,7 @@
 | `lem-weil-pbc-nakayama-nilpotent` | 1 | state |
 | `lem-weil-pbc-nonvanishing-section-trivializes` | 1 | state |
 | `lem-weil-pbc-ogoma` | 1 | state |
+| `lem-weil-pbc-polynomial-ideal-coefficients-monomial` | 1 | state |
 | `lem-weil-pbc-polynomial-ring-origin-regular-local` | 1 | state |
 | `lem-weil-pbc-popescu-find-sequence` | 1 | state |
 | `lem-weil-pbc-popescu-lift-nilpotent` | 1 | state |
@@ -909,7 +909,7 @@
 | `lem-weil-pbc-p1-field-dimension-one` | 4 | state |
 | `lem-weil-pbc-projective-space-zero-isomorphism` | 4 | state |
 
-Not open yet: 670 nodes that wait for stage 1, 526 nodes that wait for a statement dependency.
+Not open yet: 669 nodes that wait for stage 1, 526 nodes that wait for a statement dependency.
 
 ## Stage 3: modules to prove (0)
 
