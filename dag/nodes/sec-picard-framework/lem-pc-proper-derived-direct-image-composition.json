@@ -4,7 +4,7 @@
   "is": null,
   "from": {
    "node": "lem-sc-finite-duality",
-   "place": "proof, first step: compare the dualizing sheaves of the source and target under the finite morphism",
+   "place": "proof clause inherited through lem-sc-proper-upper-shriek-composition: composition of proper derived direct images",
    "via": [
     "lem-sc-proper-upper-shriek-composition"
    ]
@@ -24,39 +24,95 @@
   "def-pc-derived-category",
   "def-weil-proper-morphism"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "By [lem-pc-ringed-spaces-derived-adjoint], $Lf^*$ is left adjoint to $Rf_*$ and $Lg^*$ is left adjoint to $Rg_*$ on the unbounded derived categories. By [lem-pc-ringed-spaces-derived-pullback-composition], $Lf^*\\circ Lg^*\\cong L(g\\circ f)^*$; transporting the adjunction $L(g\\circ f)^*\\dashv R(g\\circ f)_*$ along this isomorphism, $R(g\\circ f)_*$ is a right adjoint of $Lf^*\\circ Lg^*$. Applying [lem-cat-right-adjoint-composition] with $F=Lg^*$, $G=Lf^*$, $F^!=Rg_*$, $G^!=Rf_*$ and $(G\\circ F)^!=R(g\\circ f)_*$ gives a canonical natural isomorphism $R(g\\circ f)_*\\cong Rg_*\\circ Rf_*$ on $D(\\mathcal O_X)$ (Stacks Tag 0D5T). Since $X$, $Y$, $Z$ are Noetherian, [lem-pc-noetherian-derived-direct-image-right-adjoint] says $Rf_*$, $Rg_*$ and $R(g\\circ f)_*$ preserve $D_{\\mathrm{QCoh}}$, so the isomorphism restricts to the full subcategories $D_{\\mathrm{QCoh}}$ [def-pc-derived-category]. Properness and finite type are not used.",
+   "uses": [
+    "lem-pc-ringed-spaces-derived-adjoint",
+    "lem-pc-ringed-spaces-derived-pullback-composition",
+    "lem-cat-right-adjoint-composition",
+    "lem-pc-noetherian-derived-direct-image-right-adjoint",
+    "def-pc-derived-direct-image",
+    "def-pc-derived-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/cohomology.tex",
+    "place": "Tag 0D5T, proof using Tag 079W and Tag 0D5S"
+   }
+  },
+  {
+   "text": "The unit case and the associativity case come from the corresponding coherence of derived pullbacks in [lem-pc-ringed-spaces-derived-pullback-composition]: $L(\\mathrm{id})^*\\cong\\mathrm{id}$ compatibly with the composition isomorphisms, and the two ways of identifying $Lf^*\\circ Lg^*\\circ Lh^*$ with $L(h\\circ g\\circ f)^*$ agree. The isomorphisms of step 1 are the conjugates (mates) of these pullback isomorphisms, characterised by [lem-cat-right-adjoint-composition] through the pasted units and counits; conjugation is compatible with composition and identities, so the unit and associativity equations for the pullbacks give those for the direct images.",
+   "uses": [
+    "lem-pc-ringed-spaces-derived-pullback-composition",
+    "lem-cat-right-adjoint-composition"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/cohomology.tex",
+    "place": "Tag 0D5T together with Tag 0D5S, identity and associativity coherence"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-ringed-spaces-derived-adjoint",
+  "lem-pc-ringed-spaces-derived-pullback-composition",
+  "lem-cat-right-adjoint-composition",
+  "lem-pc-noetherian-derived-direct-image-right-adjoint",
+  "def-pc-derived-direct-image",
+  "def-pc-derived-category"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Tag 0D5T, proof of lemma-derived-pushforward-composition"
+ },
  "mathlib_searches": [
   {
-   "tool": "leansearch",
-   "query": "composition of derived pushforward functors on quasi-coherent sheaves for proper morphisms",
-   "results": "LeanSearch unavailable (HTTP 500); no usable candidate",
-   "date": "2026-10-10",
-   "verdict": "no usable match"
+   "tool": "leanfinder",
+   "query": "composition of derived pushforwards Rg_* Rf_* equals R(g compose f)_* via adjunction",
+   "results": "CategoryTheory.ExponentiableMorphism.pushforwardComp and underived sheaf pushforward results only; no derived ringed-space theorem.",
+   "date": "2026-10-11",
+   "verdict": "no match"
   },
   {
    "tool": "loogle",
-   "query": "R (g.comp f) _* = Rg_* ⋙ Rf_*",
-   "results": "No Mathlib declaration for derived pushforward of schemes; only abstract functor composition",
-   "date": "2026-10-10",
+   "query": "CategoryTheory.Adjunction uniqueness right adjoint, derived pushforward",
+   "results": "No usable direct theorem; generic adjunction API only.",
+   "date": "2026-10-11",
    "verdict": "no match"
   },
   {
    "tool": "grep",
-   "query": "rg -n 'DerivedCategory|pushforward|Rf_\\*' .lake/packages/mathlib/Mathlib/AlgebraicGeometry .lake/packages/mathlib/Mathlib/CategoryTheory",
-   "results": "No derived quasi-coherent pushforward composition theorem in Mathlib",
-   "date": "2026-10-10",
+   "query": "derived-pushforward-composition|cohomology-lemma-adjoint|derived-pullback-composition (Mathlib)",
+   "results": "No derived pushforward composition declaration.",
+   "date": "2026-10-11",
    "verdict": "no match"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-sc-proper-upper-shriek-composition",
   "by": "worker",
   "date": "2026-10-10"
  },
  "chapter": "sec-picard-framework",
- "unit": "sk-thm-picard-duality"
+ "unit": "sk-thm-picard-duality",
+ "split_report": {
+  "date": "2026-10-11",
+  "item": "lem-pc-proper-derived-direct-image-composition",
+  "worker": "stage1",
+  "summary": "Repaired the circular proof. The direct-image comparison now follows Stacks Tag 0D5T: derived direct image is right adjoint to derived pullback (Tag 079W), derived pullbacks compose (Tag 0D5S), and uniqueness of right adjoints gives the comparison; the Noetherian right-adjoint node restricts it to D_QCoh. Coherence is derived by conjugating identity and associativity coherence of derived pullbacks. Properness and finite type are retained as harmless hypotheses but are not used.",
+  "blueprint": "Realizes the direct-image-composition proof clause inherited through lem-sc-proper-upper-shriek-composition.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-pdc1727",
+  "group": "E1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-pdc1727 (reviewer sub-agent of L); spot-checked: Earlier return repaired: (1) step 1 now follows Tag 0D5T via 079W + 0D5S; lem-cat-right-adjoint-composition is applied correctly with F=Lg^*, G=Lf^*, (G o F)^!=R(g o f)_* (right adjoint of Lf^*Lg^* after transport along 0D5S), no longer circular; D_QCoh restriction via lem-pc-noetherian-derived-direct-image-right-adjoint, X,Y,Z Noetherian; (2) step 2 coherence by conjugating pullback coherence; (3) source/proof_origin moved to 0D5T, WANTED dropped. New nodes checked against Stacks 079W, 0D5S text; generic-looking but Mathlib has no derived pullback/pushforward of modules (delivery searches stand). FIX more, RETURN less: (a) C4: step 2 cites unit/associativity of derived pullback composition, which the new node did not state; added the unit and associativity clauses (true, 0D5S construction via K-flat complexes) to lem-pc-ringed-spaces-derived-pullback-composition; (b) orphan new node lem-pc-ringed-spaces-derived-pushforward-composition (Tag 0D5T, restates the item's step 1 and cited by nothing, with lemma nodes in stmt_deps) dropped; (c) B3/E7: the item statement had lost its TeX delimiters with no mathematical change: restored the original TeX statement; the two new nodes rewritten in TeX and stated for schemes (the cited defs def-pc-derived-pullback/direct-image are scheme-level), def-pc-scheme added to stmt_deps; step texts put in TeX with the adjoint-lemma instantiation spelled out.; 3 file(s) fixed by the reviewer"
+ }
 }
