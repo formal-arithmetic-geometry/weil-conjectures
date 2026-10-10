@@ -1,8 +1,8 @@
 # Work queue
 
-900 items; claim with `tools/claim.py next <group> [--stage N]`.
+898 items; claim with `tools/claim.py next <group> [--stage N]`.
 
-## Stage 1: nodes to split (139)
+## Stage 1: nodes to split (137)
 
 | node | distance to a target | Lean state on the done branch |
 |---|---|---|
@@ -11,21 +11,19 @@
 | `lem-pc-ringed-space-module-stalk-tensor` | 3013 | none |
 | `lem-pc-perfect-affine-bounded-projective` | 3014 | none |
 | `lem-sc-derived-open-gluing` | 3014 | none |
-| `lem-pc-direct-image-qc-support-reduction` | 3015 | none |
 | `lem-pc-ring-pseudo-coherent-finite-tor-perfect` | 3015 | none |
-| `lem-pc-tor-amplitude-qcoh-test` | 3015 | none |
 | `lem-pc-tower-surjective-lim-acyclic` | 3015 | none |
+| `lem-pc-affine-tor-amplitude-criterion` | 3016 | none |
+| `lem-pc-supported-open-pushforward` | 3016 | none |
 | `lem-pc-tower-injective-embedding` | 3016 | none |
 | `lem-pc-derived-mayer-vietoris-triangle` | 3017 | none |
 | `lem-pc-ringed-space-sheafification-cohomology` | 3017 | none |
-| `lem-pc-perfect-generation-koszul-orthogonal` | 3018 | none |
 | `lem-pc-perfect-rhom-tensor-comparison` | 3018 | none |
-| `lem-pc-supported-open-pushforward` | 3018 | none |
-| `lem-weil-pbc-degreewise-split-derived-triangle` | 3018 | none |
 | `def-sc-duality-equation-base-change-map` | 3019 | none |
 | `lem-pc-affine-morphism-hom-out-of-perfect` | 3019 | none |
 | `lem-pc-base-change-rhom-perfect` | 3019 | none |
 | `lem-pc-global-hom-adjunction` | 3019 | none |
+| `lem-pc-koszul-affine-detection` | 3019 | none |
 | `lem-pc-perfect-generator-exists` | 3019 | none |
 | `lem-sc-affine-perfect-map-lift` | 3019 | none |
 | `lem-sc-flat-precompose-pus` | 3019 | none |
@@ -912,7 +910,7 @@
 | `lem-weil-pbc-projective-space-zero-isomorphism` | 4 | state |
 | `def-nagata-fixed-base-separated-stage` | 6 | state |
 
-Not open yet: 1542 nodes that wait for a statement dependency, 179 nodes that wait for stage 1.
+Not open yet: 1545 nodes that wait for a statement dependency, 177 nodes that wait for stage 1.
 
 ## Stage 3: modules to prove (0)
 
