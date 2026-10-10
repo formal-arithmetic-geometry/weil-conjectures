@@ -3,7 +3,7 @@
  "blueprint": {
   "is": "def-sp-grothendieck-abelian",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "definition",
  "title": "Grothendieck abelian categories",
@@ -18,9 +18,50 @@
  "proof": [],
  "proof_deps": [],
  "proof_origin": null,
- "mathlib_searches": [],
- "mathlib_match": null,
- "status": "imported",
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Grothendieck abelian category is an abelian category with small colimits, a generator, and exact filtered colimits",
+   "results": "CategoryTheory.IsGrothendieckAbelian; CategoryTheory.IsGrothendieckAbelian.hasColimits; CategoryTheory.IsGrothendieckAbelian.hasFilteredColimitsOfSize; CategoryTheory.IsGrothendieckAbelian.ab5OfSize; CategoryTheory.IsGrothendieckAbelian.hasSeparator (Mathlib/CategoryTheory/Abelian/GrothendieckCategory/Basic)",
+   "date": "2026-10-11",
+   "verdict": "generalization: Mathlib's IsGrothendieckAbelian packages the corresponding axioms with universe-size and local-smallness data, but is not the definition's verbatim formulation"
+  },
+  {
+   "tool": "loogle",
+   "query": "IsGrothendieckAbelian, HasFilteredColimitsOfSize, HasSeparator",
+   "results": "none (unknown identifier IsGrothendieckAbelian)",
+   "date": "2026-10-11",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "IsGrothendieckAbelian|class IsGrothendieckAbelian CategoryTheory/Abelian",
+   "results": "Mathlib/CategoryTheory/Abelian/GrothendieckCategory/Basic.lean:70 class IsGrothendieckAbelian; additional references in GrothendieckCategory and GrothendieckAxioms files",
+   "date": "2026-10-11",
+   "verdict": "generalization: Mathlib class found, but its axiom package differs syntactically"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Grothendieck abelian category with small colimits a generator and exact filtered colimits",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-11",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "grep",
+   "query": "sed -n 55,102p Mathlib/CategoryTheory/Abelian/GrothendieckCategory/Basic.lean",
+   "results": "line 69 @[stacks 079B]; line 70 class IsGrothendieckAbelian [Abelian C] : Prop (locallySmall, hasFilteredColimitsOfSize, ab5OfSize, hasSeparator); line 99 instance IsGrothendieckAbelian.hasColimits : HasColimitsOfSize.{w,w} C",
+   "date": "2026-10-10",
+   "verdict": "exact match at w = v (reviewer R-dga1903)"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "CategoryTheory.IsGrothendieckAbelian",
+  "file": "Mathlib/CategoryTheory/Abelian/GrothendieckCategory/Basic.lean",
+  "line": 70,
+  "how": "exact match (tagged @[stacks 079B]) at w = v: for [Category.{v} C] [Abelian C], IsGrothendieckAbelian.{v} C bundles LocallySmall.{v} C (automatic), HasFilteredColimitsOfSize.{v,v} C and AB5OfSize.{v,v} C (exact filtered colimits) and HasSeparator C (a generator); small colimits are the inferred instance IsGrothendieckAbelian.hasColimits (line 99), not a second step"
+ },
+ "status": "mathlib",
  "merged_into": null,
  "import_flags": [],
  "blueprint_kind": "definition",
@@ -41,5 +82,20 @@
   }
  },
  "chapter": "sec-abelian-varieties",
- "unit": "sk-prop-av-pqf-finite"
+ "unit": "sk-prop-av-pqf-finite",
+ "split_report": {
+  "date": "2026-10-11",
+  "item": "def-sp-grothendieck-abelian",
+  "worker": "stage1",
+  "summary": "Definition with no proof steps. Mathlib's CategoryTheory.IsGrothendieckAbelian (Stacks 079B) states it exactly at universe w = v (AB5 + separator; small colimits inferred), so the node is a Mathlib leaf (reviewer repair, B8).",
+  "blueprint": "The blueprint node is this definition and has no proof steps; the split realizes its single definition clause and its def-sp-abelian dependency."
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-dga1903",
+  "group": "K1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-dga1903 (reviewer sub-agent of L); spot-checked: Definition, no proof steps, no new nodes; statement matches Stacks 079B and blueprint. sed of Mathlib GrothendieckCategory/Basic.lean:55-102: class IsGrothendieckAbelian (line 70, @[stacks 079B]) is exactly this definition at w = v (AB5 + separator; small colimits the inferred instance hasColimits, line 99). No cycle: only stmt_dep def-sp-abelian; def-sp-composite-acyclicity cites this node one-way. FIX more, RETURN less: B8 delivery left a Mathlib definition as split with mathlib_match null (second reading also missed it); made it a Mathlib leaf (status mathlib, mathlib_match IsGrothendieckAbelian, reviewer grep recorded).; 1 file(s) fixed by the reviewer"
+ }
 }
