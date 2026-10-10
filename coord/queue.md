@@ -1,8 +1,8 @@
 # Work queue
 
-916 items; claim with `tools/claim.py next <group> [--stage N]`.
+915 items; claim with `tools/claim.py next <group> [--stage N]`.
 
-## Stage 1: nodes to split (331)
+## Stage 1: nodes to split (330)
 
 | node | distance to a target | Lean state on the done branch |
 |---|---|---|
@@ -21,8 +21,8 @@
 | `lem-sc-closed-pushforward-boundary-naturality` | 2013 | none |
 | `lem-sc-jacobson-denominator-function-field` | 2013 | none |
 | `lem-sc-separated-affine-function-field-surjective` | 2013 | none |
-| `lem-sc-topological-leray-spectral-sequence` | 2013 | none |
 | `lem-sc-tensor-generating-sections` | 2014 | none |
+| `lem-sc-topological-pushforward-injective` | 2014 | none |
 | `lem-sc-zariski-ext-torsor` | 2014 | none |
 | `lem-sc-affine-section-localization` | 2015 | none |
 | `lem-sc-invert-s-cohomology-mayer-vietoris-diagram` | 2015 | none |
@@ -50,7 +50,6 @@
 | `lem-sc-p1-ext-yoneda-functoriality` | 3013 | none |
 | `lem-sc-p1-regular-dimension-one` | 3013 | none |
 | `lem-weil-pbc-ringed-site-module-sheafification-exact` | 3013 | none |
-| `def-pc-upper-shriek-right-adjoint` | 3014 | none |
 | `lem-pc-field-extension-flat` | 3014 | none |
 | `lem-pc-field-extension-quasi-compact` | 3014 | none |
 | `lem-pc-field-extension-surjective` | 3014 | none |
@@ -928,7 +927,7 @@
 | `lem-weil-pbc-p1-field-dimension-one` | 4 | state |
 | `lem-weil-pbc-projective-space-zero-isomorphism` | 4 | state |
 
-Not open yet: 348 nodes that wait for stage 1, 1191 nodes that wait for a statement dependency.
+Not open yet: 347 nodes that wait for stage 1, 1193 nodes that wait for a statement dependency.
 
 ## Stage 3: modules to prove (0)
 
