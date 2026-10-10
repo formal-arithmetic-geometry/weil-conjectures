@@ -1689,3 +1689,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 14:54 L: returned deliver/F1/lem-galois-fpqc-refinement-fully-faithful (reviewer RETURN: 1. C4/E1: Step 2 (proof[1]): [lem-galois-fpqc-morphisms-descend] is about schemes U,W over S and morphisms U\times_SX'\t)
 - 14:55 L: merged deliver/J1/lem-sc-vector-bundle-line-subbundle (reviewer PASS; first push; new nodes: 1)
 - 14:55 L: 39 nodes' imported lean.sorry_free flags set to false (transitively sorried per the sorry map); HUMAN entry; notice to all groups
+- 14:55 L: F1 return of fpqc-refinement-fully-faithful: tag correction 023Z -> 02VS/023Y appended
