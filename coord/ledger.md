@@ -1598,3 +1598,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 14:14 L: returned deliver/E1/lem-sc-very-ample-separation-criterion (reviewer RETURN: 1. E1/E7: node lem-sc-point-tangent-separation-closed-immersion, statement: false as written when X has exactly one clos)
 - 14:15 L: accepted lem-galois-flc-set-stalk-finite: 5 steps, no new nodes
 - 14:15 L: Stacks 0E8S gap (sections must generate L) recorded in HUMAN.md (reviewer of E1 very-ample separation criterion, returned)
+- 14:17 L: returned deliver/G1/lemma-weil-pbc-finite-refinement-etale-cover (reviewer RETURN: 1. D3/C4: proof steps 2 and 4: the induction is not set up, and as written step 4 cites thm-pqf-zmt-factorization outsid)
