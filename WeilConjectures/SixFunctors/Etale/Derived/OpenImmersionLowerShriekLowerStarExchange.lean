@@ -38,21 +38,13 @@ key step in the proof of the composition law `R(f ≫ g)_! ≅ Rf_! ⋙ Rg_!`.
 
 ## Main results
 
+- `AlgebraicGeometry.Etale.isIso_upperStar_map_openImmersionLowerShriekLowerStarExchange_app`:
+  for any `g''` and any coefficients, the exchange map is an isomorphism over the open `U`.
 - `AlgebraicGeometry.Etale.isIso_openImmersionLowerShriekLowerStarExchange_of_isAddTorsion_ring`:
-  with torsion coefficients `Λ` and `g''` proper, the exchange map is an isomorphism (not proved
-  yet; see its docstring).
+  with torsion coefficients `Λ` and `g''` proper, the exchange map is an isomorphism.
 
 ## TODO
 
-- Prove base change along an open immersion on unbounded derived categories,
-  `j^* Rg''_* ≅ Rg'_* j'^*`; it holds for any `g''`, since `j^*` has the exact left adjoint
-  `j_!` and so preserves K-injectives.
-- Prove that `D(j^*)` of the exchange map agrees with this base change isomorphism, once
-  `j^* j_! ≅ 𝟭` and `j'^* j'_! ≅ 𝟭` are used to identify the sources and targets.
-- Prove the isomorphism statement
-  `AlgebraicGeometry.Etale.isIso_openImmersionLowerShriekLowerStarExchange_of_isAddTorsion_ring`
-  along the plan in its docstring, using the two items above and
-  `AlgebraicGeometry.Etale.isIso_derivedBaseChangeMap_of_isProper_of_isAddTorsion_ring`.
 - Redefine `AlgebraicGeometry.Etale.rightDerivedLowerShriekOfCompactificationComparison` as
   this exchange map for the square `(𝟙 X, c.i, d.i, r.hom)`, whiskered by `R(d.g)_*` and
   composed with `R(𝟙 X)_* ≅ 𝟭` and `R(r.hom)_* ⋙ R(d.g)_* ≅ R(c.g)_*`. Its invertibility then
