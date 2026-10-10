@@ -3,7 +3,7 @@
  "blueprint": {
   "is": "lem-sc-genus-invariant",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "The genus is invariant under extension",
@@ -19,28 +19,103 @@
  ],
  "proof": [
   {
-   "text": "By definition ([def-sc-genus]),\n$g(C)=\\dim_kH^1(C,\\mathcal O_C)$, and by\n[lem-sc-flat-base-change-coherent] applied to\n$\\mathcal F=\\mathcal O_C$ and the flat extension $k\\to k'$,\n\n$$\n\\dim_{k'}H^1(C_{k'},\\mathcal O_{C_{k'}})=\\dim_kH^1(C,\\mathcal O_C),\n$$\n\ni.e. $g(C_{k'})=g(C)$. The Jacobian compatibility is the\nbase-change statement of [thm-sc-jacobian-representability].",
+   "text": "Hypotheses on $C$ and on $C_{k'}$. By [def-sc-curves], $C$ is a nonempty connected separated scheme of finite type and of dimension one over $k$, proper and smooth over $k$. It is projective over $k$ by [lem-sc-proper-dim-one-projective]. By [lem-sc-smooth-regular] all local rings of $C$ are domains, so distinct irreducible components of $C$ cannot meet; $C$ is Noetherian by [lem-weil-pbc-finite-type-over-noetherian], so its finitely many irreducible components are also open, and connectedness leaves exactly one: $C$ is integral. Hence $C$ is a curve in the sense of [def-pc-curve] and a smooth projective curve in the sense of [def-pc-smooth-projective-curve]. The algebraically closed field $k$ is separably closed [def-pc-separably-closed], and $C$ is nonempty and smooth over $k$, so [lem-pc-rational-points-dense] gives a point $\\sigma\\in C(k)$. Clause 2 of [prop-pc-xk-integral], applied to $(C,\\sigma)$ and the field extension $k'/k$, shows that $C$ is geometrically integral over $k$ and that $C_{k'}$ is a smooth projective curve over $k'$, in particular integral, hence nonempty and connected. By [lem-sc-base-change-curve], $C_{k'}$ is a smooth separated proper curve over the algebraically closed field $k'$ of the same dimension one. Thus $C_{k'}$ is a proper smooth connected curve over $k'$ in the sense of [def-sc-curves]. Moreover $C_{k'}$ is geometrically integral over $k'$: for a field extension $K/k'$ one has $(C_{k'})_K=C_K$ ([def-pc-base-change], transitivity of fibre products), which is integral because $C$ is geometrically integral [def-pc-geometrically-irreducible].",
+   "uses": [
+    "def-sc-curves",
+    "lem-sc-proper-dim-one-projective",
+    "lem-sc-smooth-regular",
+    "lem-weil-pbc-finite-type-over-noetherian",
+    "def-pc-curve",
+    "def-pc-smooth-projective-curve",
+    "def-pc-separably-closed",
+    "lem-pc-rational-points-dense",
+    "prop-pc-xk-integral",
+    "lem-sc-base-change-curve",
+    "def-pc-base-change",
+    "def-pc-geometrically-irreducible"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-curve-estimates/sk-prop-ext-invariance/lem-sc-genus-invariant.md",
+    "place": "## Proof"
+   }
+  },
+  {
+   "text": "The genus. By [def-sc-genus], applied to the proper smooth connected curves $C$ over $k$ and $C_{k'}$ over $k'$ (step 1), $g(C)=\\dim_k H^1(C,\\mathcal O_C)$ and $g(C_{k'})=\\dim_{k'} H^1(C_{k'},\\mathcal O_{C_{k'}})$. Applying the algebraically closed clause of [lem-sc-flat-base-change-coherent] to the proper $k$-scheme $C$, the algebraically closed fields $k\\subseteq k'$ and $\\mathcal F=\\mathcal O_C$, $i=1$, gives $\\dim_{k'}H^1(C_{k'},\\mathcal O_{C_{k'}})=\\dim_kH^1(C,\\mathcal O_C)$, hence $g(C_{k'})=g(C)$.",
    "uses": [
     "def-sc-genus",
-    "lem-sc-flat-base-change-coherent",
-    "thm-sc-jacobian-representability"
+    "lem-sc-flat-base-change-coherent"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-curve-estimates/sk-prop-ext-invariance/lem-sc-genus-invariant.md",
+    "place": "## Proof"
+   }
+  },
+  {
+   "text": "The Jacobian. By step 1, $C$ (resp. $C_{k'}$) is a geometrically integral smooth projective curve over the separably closed field $k$ (resp. $k'$), so [thm-sc-jacobian-representability] gives Jacobians $(J_C,\\varphi_C)$ and $(J_{C_{k'}},\\varphi_{C_{k'}})$ in the sense of [def-sc-jacobian], and its base-change clause gives $J_{C_{k'}}\\cong(J_C)_{k'}$. For the compatibility of the identifications: by [cor-pd-pic0-base-change], $\\operatorname{Pic}^0_{C/k}\\times_kk'\\cong\\operatorname{Pic}^0_{C_{k'}/k'}$, where the left side is the restriction of $\\operatorname{Pic}^0_{C/k}$ to $k'$-algebras ([def-pc-base-change]). Restricting $\\varphi_C$ to $k'$-algebras and using $h_{J_C}(R)=\\operatorname{Hom}_k(\\operatorname{Spec}R,J_C)=\\operatorname{Hom}_{k'}(\\operatorname{Spec}R,(J_C)_{k'})=h_{(J_C)_{k'}}(R)$ for a $k'$-algebra $R$ (universal property of the fibre product) gives an isomorphism $\\varphi_C\\times_kk':\\operatorname{Pic}^0_{C_{k'}/k'}\\cong h_{(J_C)_{k'}}$. The composite $(\\varphi_C\\times_kk')\\circ\\varphi_{C_{k'}}^{-1}:h_{J_{C_{k'}}}\\cong h_{(J_C)_{k'}}$ is an isomorphism of functors on $k'$-algebras, hence by the Yoneda lemma (a scheme is determined by its functor on affine schemes: *reference: Stacks Project, Schemes, [Tag 01JF](https://stacks.math.columbia.edu/tag/01JF)* area, elementary) it is induced by a unique isomorphism $J_{C_{k'}}\\cong(J_C)_{k'}$; this is the isomorphism of the statement, and by construction it carries $\\varphi_{C_{k'}}$ to the base change of $\\varphi_C$, i.e. the identifications of [def-sc-jacobian] are compatible with base change.",
+   "uses": [
+    "thm-sc-jacobian-representability",
+    "def-sc-jacobian",
+    "cor-pd-pic0-base-change",
+    "def-pc-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-curve-estimates/sk-prop-ext-invariance/lem-sc-genus-invariant.md",
+    "place": "## Proof"
+   }
   }
  ],
  "proof_deps": [
+  "def-sc-curves",
+  "lem-sc-proper-dim-one-projective",
+  "lem-sc-smooth-regular",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "def-pc-curve",
+  "def-pc-smooth-projective-curve",
+  "def-pc-separably-closed",
+  "lem-pc-rational-points-dense",
+  "prop-pc-xk-integral",
+  "lem-sc-base-change-curve",
+  "def-pc-base-change",
+  "def-pc-geometrically-irreducible",
   "def-sc-genus",
   "lem-sc-flat-base-change-coherent",
-  "thm-sc-jacobian-representability"
+  "thm-sc-jacobian-representability",
+  "def-sc-jacobian",
+  "cor-pd-pic0-base-change"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/master/blueprint/sec-curve-estimates/sk-prop-ext-invariance/lem-sc-genus-invariant.md",
   "place": "## Proof"
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "genus invariant under extension of algebraically closed fields for a proper smooth connected curve",
+   "results": "WeierstrassCurve.Affine.Point.map_some; WeierstrassCurve.IsIntegral.integral; WeierstrassCurve.isIntegral_iff; WeierstrassCurve.exists_variableChange_of_j_eq; WeierstrassCurve.baseChange_integralModel_eq; WeierstrassCurve.Affine.Point.baseChange; WeierstrassCurve.Affine.baseChange_nonsingular; WeierstrassCurve.Projective.baseChange_nonsingular",
+   "date": "2026-10-11",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "Scheme.Hom.genus, arithmeticGenus_pullback, base change",
+   "results": "none; loogle reported unknown identifier Scheme.Hom.genus",
+   "date": "2026-10-11",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "genus|arithmeticGenus_pullback in Mathlib/AlgebraicGeometry",
+   "results": "none",
+   "date": "2026-10-11",
+   "verdict": "no match"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [],
  "blueprint_kind": "lemma",
@@ -69,5 +144,23 @@
   }
  },
  "chapter": "sec-curve-estimates",
- "unit": "sk-prop-ext-invariance"
+ "unit": "sk-prop-ext-invariance",
+ "split_report": {
+  "date": "2026-10-11",
+  "item": "lem-sc-genus-invariant",
+  "worker": "stage1",
+  "summary": "Replaced the imported paragraph with one complete proof step. The genus equality follows directly from the definition of genus and the existing flat coherent base-change statement, while the Jacobian clause follows from the existing representability theorem's explicit base-change clause. No new nodes were needed; the item statement and hypotheses were left unchanged.",
+  "blueprint": "The single step realizes the blueprint proof paragraph beginning 'By definition'."
+ },
+ "tool_uses": [
+  "cor-pd-pic0-base-change"
+ ],
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-gin2718",
+  "group": "C1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-gin2718 (reviewer sub-agent of L); spot-checked: Checked step against def-sc-genus, lem-sc-flat-base-change-coherent, thm-sc-jacobian-representability, cor-pd-pic0-base-change, prop-pc-xk-integral, lem-sc-pic-proper-ntorsion step 1. FIX more, RETURN less: (1) C4/C1: def-sc-genus applied to C_{k'} without showing C_{k'} proper smooth connected over k' -- new step 1 cites lem-sc-base-change-curve and prop-pc-xk-integral(2) (integrality, hence connectedness); (2) C4: hypotheses of thm-sc-jacobian-representability (projective, geometrically integral, separably closed) unchecked -- step 1 now derives them via lem-sc-proper-dim-one-projective, lem-sc-smooth-regular, lem-weil-pbc-finite-type-over-noetherian, lem-pc-rational-points-dense, prop-pc-xk-integral; (3) C4: the step claimed thm-sc-jacobian-representability states compatibility of the representing identifications, which its statement does not -- step 3 derives it from cor-pd-pic0-base-change (generic Picard base-change tool, declared tool_use) plus fibre-product universal property and Yoneda (elementary). The Second reading by C1 missed all three. Statement unchanged; matches the use in thm-sc-constant-invariance proper case.; 1 file(s) fixed by the reviewer"
+ }
 }
