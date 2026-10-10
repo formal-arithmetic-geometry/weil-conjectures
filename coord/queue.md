@@ -1,6 +1,6 @@
 # Work queue
 
-858 items; claim with `tools/claim.py next <group> [--stage N]`.
+860 items; claim with `tools/claim.py next <group> [--stage N]`.
 
 ## Stage 1: nodes to split (368)
 
@@ -12,14 +12,12 @@
 | `lem-weil-pbc-fpqc-descend-universally-closed` | 1010 | none |
 | `lem-weil-pbc-flat-variant-local-criterion` | 1012 | none |
 | `lem-weil-pbc-pullback-ample-invertible` | 1013 | none |
-| `lem-weil-pbc-essentially-finite-presentation-over-intermediate` | 1015 | none |
 | `lem-weil-pbc-finite-product-normal` | 1015 | none |
 | `lem-weil-pbc-finite-type-etale-finite-factor-decomposition` | 1015 | none |
 | `lem-weil-pbc-limit-module-essentially-finite-presentation-over-system` | 1015 | none |
 | `lem-weil-pbc-openness-of-flatness` | 1015 | none |
 | `lem-weil-pbc-regular-local-quotient-kernel-parameters` | 1015 | none |
 | `lem-weil-pbc-sections-morphism-to-proj-polynomial-ring` | 1015 | none |
-| `lem-weil-pbc-valuation-ring-normal` | 1015 | none |
 | `lem-weil-pbc-dimension-preserved-field-extension` | 1016 | none |
 | `lem-weil-pbc-direct-sum-extension-assembly` | 1016 | none |
 | `lem-weil-pbc-tor-one-surjective-flat-middle` | 1016 | none |
@@ -65,7 +63,6 @@
 | `lem-sc-generic-cohomology-comparison` | 3007 | rests_on_sorry |
 | `lem-sc-local-ring-artin-schreier-kernel` | 3007 | none |
 | `lem-weil-pbc-finite-coproduct-lfp-qcqs` | 3007 | none |
-| `lem-weil-pbc-hypercover-one-more-simplex` | 3007 | none |
 | `lem-weil-pbc-matching-object-fibre-product` | 3007 | none |
 | `lem-weil-pbc-simplicial-set-add-simplices` | 3007 | none |
 | `thm-av-final` | 3007 | rests_on_sorry |
@@ -90,6 +87,9 @@
 | `lem-sc-sylow-module-filtration` | 3008 | none |
 | `lem-sc-zero-generic-acyclic` | 3008 | rests_on_sorry |
 | `lem-weil-pbc-simplicial-hom-object-exists` | 3008 | none |
+| `lem-weil-pbc-simplicial-hom-object-pushout` | 3008 | none |
+| `lem-weil-pbc-simplicial-hom-object-standard-simplex` | 3008 | none |
+| `lem-weil-pbc-simplicial-set-glue-simplex` | 3008 | none |
 | `thm-sc-theorem-of-the-base` | 3008 | rests_on_sorry |
 | `def-exc-continuous-cohomology` | 3009 | none |
 | `def-pc-curve` | 3009 | none |
@@ -375,7 +375,7 @@
 | `def-exc-jacobian-presentation` | - | none |
 | `lem-zl-noether-normalization-dimension` | - | none |
 
-## Stage 2: nodes to state (490)
+## Stage 2: nodes to state (492)
 
 | node | distance to Mathlib | kind |
 |---|---|---|
@@ -507,6 +507,7 @@
 | `lem-weil-pbc-directed-union-subrings-flat-module` | 1 | state |
 | `lem-weil-pbc-double-complex-cokernel-homology-iso` | 1 | state |
 | `lem-weil-pbc-elementary-etale-finite-piece-persistence` | 1 | state |
+| `lem-weil-pbc-essentially-finite-presentation-over-intermediate` | 1 | state |
 | `lem-weil-pbc-etale-algebra-filtered-colimit-descent` | 1 | state |
 | `lem-weil-pbc-etale-colimit-normal-local-domain` | 1 | state |
 | `lem-weil-pbc-etale-fibre-discrete-separable-points` | 1 | state |
@@ -833,6 +834,7 @@
 | `lem-weil-pbc-unramified-etale-local-decomposition` | 1 | state |
 | `lem-weil-pbc-unramified-fibre-point-isolated` | 1 | state |
 | `lem-weil-pbc-unramified-over-field-discrete` | 1 | state |
+| `lem-weil-pbc-valuation-ring-normal` | 1 | state |
 | `lem-weil-pbc-zariski-pair-finite-gabber-polynomial` | 1 | state |
 | `lem-weil-pbc-zariski-pair-flat-integral-isomorphism` | 1 | state |
 | `lem-weil-pbc-zariski-pair-rank-one-propagation` | 1 | state |
@@ -870,7 +872,7 @@
 | `lem-weil-pbc-p1-field-dimension-one` | 4 | state |
 | `lem-weil-pbc-projective-space-zero-isomorphism` | 4 | state |
 
-Not open yet: 386 nodes that wait for stage 1, 910 nodes that wait for a statement dependency.
+Not open yet: 386 nodes that wait for stage 1, 911 nodes that wait for a statement dependency.
 
 ## Stage 3: modules to prove (0)
 
