@@ -14,9 +14,70 @@
   "def-weil-pbc-abelian-etale-sheaves",
   "def-weil-pbc-etale-cohomology"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "*A geometric point over the closed point.* Let $\\mathfrak m$ be the maximal ideal of $R$, $\\kappa=R/\\mathfrak m$ its residue field and $s\\in S$ the closed point $\\mathfrak m$, so $\\kappa(s)=\\kappa$ [def-weil-affine-spectrum]. Choose an algebraic closure $\\iota:\\kappa\\to\\Omega$ [def-weil-algebraic-closure] (it exists by that node). By [def-weil-geometric-point] the pair consisting of the point $s$ and the field homomorphism $\\iota:\\kappa(s)\\to\\Omega$ is a morphism $\\bar s:\\operatorname{Spec}\\Omega\\to S$, a geometric point of $S$ lying over $s$, with $\\Omega$ algebraically closed and a map $\\kappa\\to\\Omega$, as [lem-weil-pbc-strictly-henselian-sections-stalk] requires.",
+   "uses": [
+    "def-weil-affine-spectrum",
+    "def-weil-algebraic-closure",
+    "def-weil-geometric-point"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Lemma Tag 03QO (lemma-vanishing-etale-cohomology-strictly-henselian), statement ('let sbar be its closed point')"
+   }
+  },
+  {
+   "text": "*$\\Gamma(S,-)$ is exact.* By [lem-weil-pbc-strictly-henselian-sections-stalk] (applied to $R$ strictly henselian [def-weil-pbc-henselian-terminology] and $\\bar s$ of step 1) the germ maps $\\gamma_{\\mathcal F}:\\Gamma(S,\\mathcal F)=\\mathcal F(S)\\to\\mathcal F_{\\bar s}$ are isomorphisms of abelian groups, natural in $\\mathcal F\\in\\Ab(S_{\\Et})$ [def-weil-pbc-abelian-etale-sheaves]: $\\gamma$ is a natural isomorphism $\\Gamma(S,-)\\cong(-)_{\\bar s}$ of functors $\\Ab(S_{\\Et})\\to\\textit{Ab}$. By [prop-weil-pbc-geometric-stalks-exact] the stalk functor $\\mathcal F\\mapsto\\mathcal F_{\\bar s}$ is exact. Transfer along $\\gamma$: (a) $\\Gamma(S,-)$ is additive, since for morphisms $\\varphi,\\psi:\\mathcal F\\to\\mathcal G$ one has $(\\varphi+\\psi)_S=\\varphi_S+\\psi_S$ (morphisms of abelian sheaves are added sectionwise); (b) if $0\\to\\mathcal F'\\xrightarrow{a}\\mathcal F\\xrightarrow{b}\\mathcal F''\\to0$ is short exact in $\\Ab(S_{\\Et})$, then by naturality $\\gamma_{\\mathcal F}\\circ a_S=a_{\\bar s}\\circ\\gamma_{\\mathcal F'}$ and $\\gamma_{\\mathcal F''}\\circ b_S=b_{\\bar s}\\circ\\gamma_{\\mathcal F}$, so the sequence $0\\to\\mathcal F'(S)\\to\\mathcal F(S)\\to\\mathcal F''(S)\\to0$ is carried by the isomorphisms $\\gamma_{\\mathcal F'},\\gamma_{\\mathcal F},\\gamma_{\\mathcal F''}$ onto the short exact sequence $0\\to\\mathcal F'_{\\bar s}\\to\\mathcal F_{\\bar s}\\to\\mathcal F''_{\\bar s}\\to0$; kernels and images correspond under these isomorphisms, so it is short exact. Hence $\\Gamma(S,-)$ is an additive functor carrying short exact sequences to short exact sequences, i.e. exact, and by the equivalence recorded in [lem-sp-exact-functor-preserves-homology] (Stacks Tag 010N) it commutes with finite limits and finite colimits. This is the first assertion of the statement.",
+   "uses": [
+    "lem-weil-pbc-strictly-henselian-sections-stalk",
+    "def-weil-pbc-henselian-terminology",
+    "def-weil-pbc-abelian-etale-sheaves",
+    "prop-weil-pbc-geometric-stalks-exact",
+    "lem-sp-exact-functor-preserves-homology"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Lemma Tag 03QO (lemma-vanishing-etale-cohomology-strictly-henselian), proof, first sentence ('If we show that Gamma(S,F) = F_sbar then Gamma(S,-) is exact as the stalk functor is exact')"
+   }
+  },
+  {
+   "text": "*Vanishing in positive degrees (the higher derived functors of an exact functor are zero, Stacks Derived Categories Lemma Tag 015F (lemma-right-derived-exact-functor) (5), whose proof is that an exact functor carries quasi-isomorphisms to quasi-isomorphisms; written out here for the definition of etale cohomology).* Let $\\mathcal F\\in\\Ab(S_{\\Et})$ and $p\\ge1$. By [def-weil-pbc-etale-cohomology], $H^p(S_{\\Et},\\mathcal F)=H^p(\\Gamma(S,I^\\bullet))$ where $\\mathcal F\\to I^\\bullet$ is a K-injective resolution [def-weil-pbc-kinjective-resolutions], i.e. a quasi-isomorphism from the complex $\\mathcal F[0]$ ($\\mathcal F$ in degree $0$, zero elsewhere) to a K-injective complex $I^\\bullet$ of abelian sheaves, and $\\Gamma(S,I^\\bullet)$ is the complex obtained by applying $\\Gamma(S,-)$ termwise. A quasi-isomorphism induces isomorphisms on all cohomology objects [def-weil-abstract-derived-category], so $H^p(I^\\bullet)\\cong H^p(\\mathcal F[0])$, and $H^p(\\mathcal F[0])=\\ker(0\\to0)/\\operatorname{im}(\\mathcal F[0]^{p-1}\\to0)=0$ because $\\mathcal F[0]^p=0$ for $p\\ne0$. By step 2, $\\Gamma(S,-):\\Ab(S_{\\Et})\\to\\textit{Ab}$ is an additive functor between abelian categories [def-weil-pbc-abelian-etale-sheaves] preserving finite limits and finite colimits, so [lem-weil-pbc-exact-functor-complex-cohomology] gives an isomorphism $H^p(\\Gamma(S,I^\\bullet))\\cong\\Gamma(S,H^p(I^\\bullet))$. Since $H^p(I^\\bullet)$ is a zero object and an additive functor carries zero objects to zero objects ($\\mathrm{id}_0=0$ gives $\\mathrm{id}_{\\Gamma(S,0)}=\\Gamma(S,0_{0,0})=0$), $\\Gamma(S,H^p(I^\\bullet))=0$. Hence $H^p(S_{\\Et},\\mathcal F)=0$ for all $p\\ge1$.",
+   "uses": [
+    "def-weil-pbc-etale-cohomology",
+    "def-weil-pbc-kinjective-resolutions",
+    "def-weil-abstract-derived-category",
+    "def-weil-pbc-abelian-etale-sheaves",
+    "lem-weil-pbc-exact-functor-complex-cohomology"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Lemma Tag 03QO, proof, last sentence ('the higher derived functors of an exact functor are zero, see Derived Categories, Lemma derived-lemma-right-derived-exact-functor'); literature/stacks-project/derived.tex, Lemma Tag 015F (lemma-right-derived-exact-functor) (5) and its proof"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-affine-spectrum",
+  "def-weil-algebraic-closure",
+  "def-weil-geometric-point",
+  "lem-weil-pbc-strictly-henselian-sections-stalk",
+  "def-weil-pbc-henselian-terminology",
+  "def-weil-pbc-abelian-etale-sheaves",
+  "prop-weil-pbc-geometric-stalks-exact",
+  "lem-sp-exact-functor-preserves-homology",
+  "def-weil-pbc-etale-cohomology",
+  "def-weil-pbc-kinjective-resolutions",
+  "def-weil-abstract-derived-category",
+  "lem-weil-pbc-exact-functor-complex-cohomology"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Lemma Tag 03QO (lemma-vanishing-etale-cohomology-strictly-henselian), proof: first sentence (exactness from Gamma(S,F) = F_sbar and the exactness of the stalk functor) and last sentence (higher derived functors of an exact functor vanish), with literature/stacks-project/derived.tex Lemma Tag 015F (lemma-right-derived-exact-functor) (5) and its proof"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -45,10 +106,38 @@
    "results": "no strictly henselian notion; HenselianLocalRing only in RingTheory/Henselian.lean",
    "date": "2026-10-10",
    "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "right derived functors of an exact functor vanish in positive degrees",
+   "results": "CategoryTheory.Functor.isZero_rightDerived_obj_injective_succ, Functor.rightDerived, Functor.IsRightDerivedFunctor, Functor.rightDerivedZeroIsoSelf (Mathlib.CategoryTheory.Abelian.RightDerived, Mathlib.CategoryTheory.Functor.Derived.RightDerived), exactFunctor_le_rightExactFunctor",
+   "date": "2026-10-10",
+   "verdict": "no match: vanishing on injective objects only, and R^0F = F for left exact F; no vanishing of R^nF for exact F; not needed: step 3 argues directly with lem-weil-pbc-exact-functor-complex-cohomology (Mathlib leaf)"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "sheaf cohomology of a sheaf vanishes in positive degree when global sections functor is exact",
+   "results": "CategoryTheory.Sheaf.H (Ext^n from the constant sheaf Z), Sheaf.cohomologyPresheaf, Sheaf.instAddCommGroupH, Sheaf.cohomologyPresheafFunctor (Mathlib.CategoryTheory.Sites.SheafCohomology.Basic), MayerVietorisSquare.shortComplex_exact, CochainComplex.isGE_iff, CochainComplex.exactAt_succ_single_obj",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Sheaf.H, CategoryTheory.Limits.IsZero",
+   "results": "CategoryTheory.Sheaf.subsingleton_H_of_isZero (Mathlib.CategoryTheory.Sites.SheafCohomology.Basic): vanishing for the zero sheaf only",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -n 'PreservesFiniteLimits|PreservesFiniteColimits|Exact' Mathlib/CategoryTheory/Abelian/RightDerived.lean; grep -rln 'isZero_rightDerived|Sheaf.H' Mathlib/ (under ~/weil-conjectures-slopmaster2/.lake/packages/mathlib)",
+   "results": "RightDerived.lean:354 (PreservesFiniteLimits only for rightDerivedZeroIsoSelf); files RightDerived.lean and Sites/SheafCohomology/Basic.lean; no lemma on rightDerived of an exact functor, no henselian or etale input in SheafCohomology",
+   "date": "2026-10-10",
+   "verdict": "no match: the item is not a Mathlib leaf (no strictly henselian rings, no etale cohomology of Spec of a local ring)"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "worker",
@@ -68,5 +157,15 @@
   }
  },
  "chapter": "sec-proper-base-change",
- "unit": "sk-thm-p1"
+ "unit": "sk-thm-p1",
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "lem-weil-pbc-strictly-henselian-etale-acyclic",
+  "worker": "stage1",
+  "summary": "Not a Mathlib leaf (B8: Mathlib has no strictly henselian rings and no vanishing of R^nF for exact F; four more searches recorded). Split along Stacks 03QO's proof, first and last sentence, in three steps: (1) a geometric point sbar over the closed point from an algebraic closure of the residue field (elementary, def-weil-algebraic-closure, def-weil-geometric-point); (2) Gamma(S,-) is naturally isomorphic to the stalk functor at sbar by the reviewed node lem-weil-pbc-strictly-henselian-sections-stalk, the stalk functor is exact by prop-weil-pbc-geometric-stalks-exact (unit sk-prop-h2, already used by several sk-thm-p1 nodes and recorded as tool on lem-weil-pbc-torsion-sheaf-characterizations), and exactness and additivity transfer along the natural isomorphism, with lem-sp-exact-functor-preserves-homology (Mathlib leaf, Tag 010N) for 'exact = preserves finite limits and colimits'; (3) with H^p defined by a K-injective resolution F[0] -> I (def-weil-pbc-etale-cohomology), H^p(I) = H^p(F[0]) = 0 for p >= 1, and H^p(Gamma(S,I)) = Gamma(S,H^p(I)) = 0 by the Mathlib leaf lem-weil-pbc-exact-functor-complex-cohomology: this is Derived Lemma 015F (5), whose proof is 'an exact functor carries quasi-isomorphisms to quasi-isomorphisms', written out for the definition in force. Statement kept. No new nodes."
+ },
+ "tool_uses": [
+  "prop-weil-pbc-geometric-stalks-exact"
+ ],
+ "reviewed": "pass (L, 2026-10-10): 3 steps follow 03QO: Gamma(S,-) is naturally isomorphic to the stalk at a geometric point over the closed point (existing node), exact since geometric stalks are exact (prop-weil-pbc-geometric-stalks-exact, sk-prop-h2, recorded in tool_uses by L), and the higher derived functors of an exact functor vanish via exact-functor-complex-cohomology (015F (5) written out). No new nodes."
 }
