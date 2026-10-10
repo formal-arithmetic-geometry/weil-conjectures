@@ -4,7 +4,7 @@
   "is": null,
   "from": {
    "node": "lem-sc-finite-duality",
-   "place": "the derived direct-image composition proof uses coherence Lf^* o Lg^* = L(g o f)^* (Stacks Tag 0D5S)",
+   "place": "the derived direct-image composition proof uses the canonical derived pullback composition and its identity and associativity coherence (Stacks Tag 0D5S)",
    "via": [
     "lem-pc-proper-derived-direct-image-composition"
    ]
@@ -23,9 +23,43 @@
   "def-pc-derived-category",
   "def-pc-derived-pullback"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "By [lem-pc-kflat-resolution] (applied to the site of open subsets of $Z$ with the sheaf of rings $\\mathcal O_Z$), choose a K-flat complex $K^\\bullet$ of $\\mathcal O_Z$-modules with a quasi-isomorphism $K^\\bullet\\to E$ on $Z$. By [def-pc-derived-pullback], $Lg^*E$ is represented by $g^*K^\\bullet$; by [lem-pc-kflat-pullback-preservation] this is K-flat on $Y$, so applying [def-pc-derived-pullback] again represents $Lf^*Lg^*E$ by $f^*g^*K^\\bullet$. The canonical underived pullback identification $f^*g^*K^\\bullet\\cong(g\\circ f)^*K^\\bullet$ is termwise the associativity of tensor products, hence identifies this complex with $L(g\\circ f)^*E$. The termwise maps commute with chain maps, so they are natural in $E$ and give the claimed canonical natural isomorphism.",
+   "uses": [
+    "lem-pc-kflat-resolution",
+    "def-pc-derived-pullback",
+    "lem-pc-kflat-pullback-preservation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/cohomology.tex",
+    "place": "Tag 0D5S, Cohomology Lemma cohomology-lemma-derived-pullback-composition"
+   }
+  },
+  {
+   "text": "For an identity morphism, the displayed comparison is the canonical unitor of the derived tensor construction, hence $L(\\mathrm{id}_X)^*\\cong\\mathrm{id}$ and the comparison is compatible with composition. For composable $f:X\\to Y$, $g:Y\\to Z$, and $h:W\\to X$, the two comparisons from $Lf^*\\circ Lg^*\\circ Lh^*$ to $L(g\\circ f\\circ h)^*$ are the two reassociations of the same fourfold tensor product. Mac Lane associativity for tensor products makes these reassociations equal, so the composition isomorphisms satisfy the unit and associativity coherence laws.",
+   "uses": [
+    "def-pc-derived-pullback",
+    "lem-pc-kflat-pullback-preservation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/cohomology.tex",
+    "place": "Tag 0D5S, identity and associativity coherence in cohomology-lemma-derived-pullback-composition"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-kflat-resolution",
+  "def-pc-derived-pullback",
+  "lem-pc-kflat-pullback-preservation"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Tag 0D5S, Cohomology Lemma cohomology-lemma-derived-pullback-composition"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -50,12 +84,37 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-pc-proper-derived-direct-image-composition",
   "by": "worker",
   "date": "2026-10-10"
  },
  "chapter": "sec-picard-framework",
- "unit": "sk-thm-picard-duality"
+ "unit": "sk-thm-picard-duality",
+ "split_report": {
+  "date": "2026-10-11",
+  "item": "lem-pc-ringed-spaces-derived-pullback-composition",
+  "worker": "stage1",
+  "summary": "Split Tag 0D5S into the K-flat derived-tensor construction of the canonical pullback composition isomorphism and the identity/associativity coherence obtained from tensor unitality and associativity. The resolution step cites the existing K-flat resolution lemma (Stacks 06YS) and the new K-flat pullback node lem-pc-kflat-pullback-preservation (Stacks 06YC).",
+  "blueprint": "Realizes the derived pullback composition and coherence clause used in the direct-image composition proof.",
+  "tool_uses": [
+   {
+    "node": "lem-pc-kflat-resolution",
+    "why": "Step 1 uses its statement that every complex of O-modules on a site (here the open subsets of Z) has a K-flat resolution; this is a generic derived-tensor tool from the sk-thm-picard-semicon unit."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pc-kflat-resolution",
+  "lem-pc-kflat-resolution"
+ ],
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-dpc1811",
+  "group": "C1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-dpc1811 (reviewer sub-agent of L); spot-checked: Statement vs Stacks 0D5S (unit/assoc clauses added by E1 review are proved in Step 2 from tensor unitor/associator); new node lem-pc-kflat-pullback-preservation = Stacks 06YC, not a duplicate of lem-pur-kflat-change-of-rings (0G7E, change of rings only), Mathlib has no K-flat complexes; no cycle: def-pc-derived-pullback, the new node, lem-pc-kflat-resolution and lem-pc-ringed-spaces-derived-adjoint / lem-pc-derived-adjoint-functors (09T5) do not depend on the item. FIX more, RETURN less: (1) C1 Step 1 chose a K-flat resolution uncited -> cites lem-pc-kflat-resolution (06YS, declared tool use from sk-thm-picard-semicon), proof_deps updated; (2) split_report stale after the second reading: tool_uses named lem-pc-flat-complex-derived-pullback which no step cites (dropped) and summary said no new node -> rewritten.; 1 file(s) fixed by the reviewer"
+ }
 }

@@ -2211,3 +2211,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 18:10 L: merged deliver/H1/thm-pc-f-representable (reviewer FIX; first push; new nodes: 1)
 - 18:11 L: merged deliver/J1/lem-pc-degree-zero-properties (reviewer FIX; first push; new nodes: 0)
 - 18:11 L: HUMAN.md: Lean statement error finite_sections_higherDirectImage (quasi-coherent for coherent; sorried, false as stated), found by R-frp1809
+- 18:11 L: merged deliver/C1/lem-pc-ringed-spaces-derived-pullback-composition (reviewer FIX; first push; new nodes: 1)
