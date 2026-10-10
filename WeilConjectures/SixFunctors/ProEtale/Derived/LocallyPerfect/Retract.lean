@@ -179,11 +179,9 @@ theorem exists_retract_upperStar (V : X.ProEt)
       (((V.hom)^*[ModuleCat.{u + 1} Λ].mapHomologicalComplex (.up ℤ)).obj F))
     (I : CochainComplex (Sheaf (Scheme.ProEt.topology X) (ModuleCat.{u + 1} Λ)) ℤ)
     (s : M ⊗ F ⟶ I) [QuasiIso s]
-    (φ : (HomologicalComplex.single _ (.up ℤ) 0).obj
-      (𝟙_ (Sheaf (Scheme.ProEt.topology X) (ModuleCat.{u + 1} Λ))) ⟶ I)
+    (φ : 𝟙_ (CochainComplex (Sheaf (Scheme.ProEt.topology X) (ModuleCat.{u + 1} Λ)) ℤ) ⟶ I)
     (v : 𝟙_ _ ⟶ Qh.obj ((HomotopyCategory.quotient _ _).obj
-      ((HomologicalComplex.single _ (.up ℤ) 0).obj
-        (𝟙_ (Sheaf (Scheme.ProEt.topology X) (ModuleCat.{u + 1} Λ))))))
+      (𝟙_ (CochainComplex (Sheaf (Scheme.ProEt.topology X) (ModuleCat.{u + 1} Λ)) ℤ))))
     (hφ : η_ K D ≫ (e.hom ⊗ₘ eD.hom) ≫ μ Qh _ _ ≫ Qh.map ((HomotopyCategory.quotient _ _).map s) =
       v ≫ Qh.map ((HomotopyCategory.quotient _ _).map φ))
     {m : ℕ} (p : Fin m → ℤ) (x : ∀ k, (M.X (p k)).obj.obj (op V))
