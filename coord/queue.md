@@ -1,8 +1,8 @@
 # Work queue
 
-919 items; claim with `tools/claim.py next <group> [--stage N]`.
+917 items; claim with `tools/claim.py next <group> [--stage N]`.
 
-## Stage 1: nodes to split (191)
+## Stage 1: nodes to split (189)
 
 | node | distance to a target | Lean state on the done branch |
 |---|---|---|
@@ -44,13 +44,12 @@
 | `lem-sc-hilbert-embedded-points` | 5010 | none |
 | `lem-sc-regular-meromorphic-section-exists` | 5010 | none |
 | `lem-pc-rf-base-change-complex` | 5012 | none |
-| `lem-pc-kflat-cone-direct-sum` | 5013 | none |
 | `lem-pc-perfect-complex-descent` | 5013 | none |
-| `lem-pc-sites-modules-coproduct-flat` | 5013 | none |
 | `lem-pc-sites-modules-j-shriek-flat` | 5013 | none |
 | `lem-pc-sites-modules-quotient-j-shriek` | 5013 | none |
 | `lem-pc-bounded-above-flat-tensor-acyclic` | 5014 | none |
 | `lem-pc-flat-bounded-complex-descent` | 5014 | none |
+| `lem-pc-kflat-tensor-cone-two-out-of-three` | 5014 | none |
 | `lem-pc-module-filtered-colimits-tensor` | 5014 | none |
 | `lem-pc-proper-support-descent` | 5014 | none |
 | `lem-sp-cartan-eilenberg-comparison-independence` | 6005 | none |
@@ -80,7 +79,6 @@
 | `def-weil-pbc-C2` | - | none |
 | `def-weil-pbc-C4` | - | none |
 | `def-weil-pbc-C5` | - | none |
-| `def-weil-pbc-C6` | - | none |
 | `def-weil-pbc-C8` | - | none |
 | `lem-fin-dense-normal-open` | - | none |
 | `lem-kun-03sa` | - | none |
@@ -931,7 +929,7 @@
 | `lem-weil-pbc-p1-field-dimension-one` | 4 | state |
 | `lem-weil-pbc-projective-space-zero-isomorphism` | 4 | state |
 
-Not open yet: 1447 nodes that wait for a statement dependency, 230 nodes that wait for stage 1.
+Not open yet: 1450 nodes that wait for a statement dependency, 228 nodes that wait for stage 1.
 
 ## Stage 3: modules to prove (0)
 
