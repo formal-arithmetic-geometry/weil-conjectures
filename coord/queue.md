@@ -1,8 +1,8 @@
 # Work queue
 
-858 items; claim with `tools/claim.py next <group> [--stage N]`.
+856 items; claim with `tools/claim.py next <group> [--stage N]`.
 
-## Stage 1: nodes to split (56)
+## Stage 1: nodes to split (54)
 
 | node | distance to a target | Lean state on the done branch |
 |---|---|---|
@@ -14,7 +14,6 @@
 | `lem-sc-derived-mayer-vietoris-triangle` | 3016 | none |
 | `lem-sc-derived-open-shriek-derived-adjunction` | 3016 | none |
 | `lem-pc-derived-pullback-tensor-product` | 3019 | none |
-| `lem-pc-rhom-strict-perfect-hom` | 3019 | none |
 | `lem-sc-derived-internal-hom-adjunction` | 3019 | none |
 | `lem-pc-qcqs-sheaf-rhom-adjunction` | 3020 | none |
 | `lem-pc-tor-independent-perfect-pullback-comparison` | 3021 | none |
@@ -57,9 +56,8 @@
 | `lem-pur-ringed-site-grothendieck-abelian` | - | none |
 | `lem-weil-common-extension-fields` | - | none |
 | `def-wf-lie-algebra-derivation` | - | rests_on_sorry |
-| `lem-pur-derived-change-of-rings` | - | none |
-| `def-wf-lie-algebra` | - | none |
 | `lem-pc-flf-properties` | - | none |
+| `lem-pur-left-derived-from-kflat-class` | - | none |
 | `lem-pur-rhom-well-defined` | - | none |
 | `lem-pur-hom-kflat-into-kinjective` | - | none |
 
@@ -870,7 +868,7 @@
 | `lem-weil-pbc-projective-space-zero-isomorphism` | 4 | state |
 | `def-nagata-fixed-base-separated-stage` | 6 | state |
 
-Not open yet: 1661 nodes that wait for a statement dependency, 95 nodes that wait for stage 1.
+Not open yet: 1663 nodes that wait for a statement dependency, 93 nodes that wait for stage 1.
 
 ## Stage 3: modules to prove (0)
 
