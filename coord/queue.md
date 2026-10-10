@@ -2,7 +2,7 @@
 
 941 items; claim with `tools/claim.py next <group> [--stage N]`.
 
-## Stage 1: nodes to split (586)
+## Stage 1: nodes to split (585)
 
 | node | distance to a target | Lean state on the done branch |
 |---|---|---|
@@ -23,7 +23,6 @@
 | `lem-weil-pbc-schanuel` | 1014 | none |
 | `lem-weil-pbc-separable-residue-cotangent-injective` | 1014 | none |
 | `lem-weil-pbc-separably-generated-differentials-dimension` | 1014 | none |
-| `lem-weil-pbc-separating-transcendence-basis-finite-subextension` | 1014 | none |
 | `lem-weil-pbc-serre-criterion-reduced` | 1014 | none |
 | `lem-weil-pbc-spectral-constructible-topology-hausdorff` | 1014 | none |
 | `lem-weil-pbc-spectral-map-constructible-continuous` | 1014 | none |
@@ -593,7 +592,7 @@
 | `def-exc-jacobian-presentation` | - | none |
 | `def-nagata-rees-algebra` | - | none |
 
-## Stage 2: nodes to state (355)
+## Stage 2: nodes to state (356)
 
 | node | distance to Mathlib | kind |
 |---|---|---|
@@ -879,6 +878,7 @@
 | `lem-weil-pbc-separable-tensor-purely-inseparable-field` | 1 | state |
 | `lem-weil-pbc-separate-image-closed-from-closed` | 1 | state |
 | `lem-weil-pbc-separated-affine-cover-criterion` | 1 | state |
+| `lem-weil-pbc-separating-transcendence-basis-finite-subextension` | 1 | state |
 | `lem-weil-pbc-sets-inverse-image-composition` | 1 | state |
 | `lem-weil-pbc-sheaf-algebraic-structures-objects` | 1 | state |
 | `lem-weil-pbc-sheaf-algebras-directed-colimit` | 1 | state |
@@ -953,7 +953,7 @@
 | `lem-weil-pbc-p1-field-dimension-one` | 4 | state |
 | `lem-weil-pbc-projective-space-zero-isomorphism` | 4 | state |
 
-Not open yet: 597 nodes that wait for stage 1, 683 nodes that wait for a statement dependency.
+Not open yet: 596 nodes that wait for stage 1, 683 nodes that wait for a statement dependency.
 
 ## Stage 3: modules to prove (0)
 
