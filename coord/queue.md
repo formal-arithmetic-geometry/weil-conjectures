@@ -1,8 +1,8 @@
 # Work queue
 
-903 items; claim with `tools/claim.py next <group> [--stage N]`.
+906 items; claim with `tools/claim.py next <group> [--stage N]`.
 
-## Stage 1: nodes to split (259)
+## Stage 1: nodes to split (262)
 
 | node | distance to a target | Lean state on the done branch |
 |---|---|---|
@@ -11,7 +11,10 @@
 | `lem-sc-constant-subsheaf-finite-filtration` | 2014 | none |
 | `lem-sc-topological-filtered-cohomology` | 2014 | none |
 | `lem-sc-integral-closure-dedekind-surjective-fibres` | 2016 | none |
-| `lem-sc-mayer-vietoris-ringed-space` | 2017 | none |
+| `def-sc-ringed-space-module-cohomology` | 2018 | none |
+| `lem-sc-ringed-space-injective-restriction-surjective` | 2018 | none |
+| `lem-sc-ringed-space-restrict-injective-resolution` | 2018 | none |
+| `lem-sc-ringed-space-module-sheaves-enough-injectives` | 2019 | none |
 | `lem-weil-pbc-cartesian-eilenberg-functorial` | 3007 | none |
 | `lem-pc-kflat-stalk-criterion` | 3013 | none |
 | `lem-pc-derived-sections-pushforward-comparison` | 3014 | none |
@@ -915,7 +918,7 @@
 | `lem-weil-pbc-p1-field-dimension-one` | 4 | state |
 | `lem-weil-pbc-projective-space-zero-isomorphism` | 4 | state |
 
-Not open yet: 1341 nodes that wait for a statement dependency, 289 nodes that wait for stage 1.
+Not open yet: 1342 nodes that wait for a statement dependency, 292 nodes that wait for stage 1.
 
 ## Stage 3: modules to prove (0)
 
