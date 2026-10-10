@@ -33,10 +33,10 @@
 | `lem-sc-finite-flat-surj-points` | 4009 | none |
 | `lem-weil-pbc-gm-pullback-strict-henselization` | 4009 | none |
 | `lem-pc-universal-adjoint-section` | 4010 | rests_on_sorry |
-| `lem-sc-etale-base-change-geometric` | 4010 | none |
 | `lem-sc-intersection-effective-cartier` | 4010 | none |
 | `lem-sc-top-dimensional-reduction-intersection` | 4010 | none |
 | `lem-pc-hilb-containment-locus` | 4011 | none |
+| `lem-sc-etale-faithfully-flat-local` | 4011 | none |
 | `lem-sc-going-down-surjective-dimension` | 4011 | none |
 | `lem-sc-snapper-numerical-polynomial` | 4011 | none |
 | `lem-sc-strict-henselization-completion-flat` | 4011 | none |
@@ -44,14 +44,15 @@
 | `lem-sc-hilbert-embedded-points` | 5010 | none |
 | `lem-sc-regular-meromorphic-section-exists` | 5010 | none |
 | `lem-pc-rf-base-change-complex` | 5012 | none |
-| `lem-pc-finite-flat-proper-support-descent` | 5013 | none |
 | `lem-pc-kflat-cone-direct-sum` | 5013 | none |
 | `lem-pc-perfect-complex-descent` | 5013 | none |
 | `lem-pc-sites-modules-coproduct-flat` | 5013 | none |
 | `lem-pc-sites-modules-j-shriek-flat` | 5013 | none |
 | `lem-pc-sites-modules-quotient-j-shriek` | 5013 | none |
 | `lem-pc-bounded-above-flat-tensor-acyclic` | 5014 | none |
+| `lem-pc-flat-bounded-complex-descent` | 5014 | none |
 | `lem-pc-module-filtered-colimits-tensor` | 5014 | none |
+| `lem-pc-proper-support-descent` | 5014 | none |
 | `lem-sp-cartan-eilenberg-comparison-independence` | 6005 | none |
 | `thm-sp-spectral-object-yields` | 6006 | none |
 | `pqf-lem-coherent-ft-locnoeth` | 6009 | none |
@@ -62,7 +63,6 @@
 | `pqf-lem-serre-criterion` | 6013 | none |
 | `def-weil-t-structure` | - | none |
 | `def-nagata-fixed-base-separated-stage` | - | none |
-| `def-nagata-separated-descent-stage` | - | none |
 | `def-pur-sheaf-tensor-product` | - | none |
 | `def-weil-pbc-C7` | - | none |
 | `def-weil-pbc-constructible-torsion` | - | none |
@@ -930,7 +930,7 @@
 | `lem-weil-pbc-p1-field-dimension-one` | 4 | state |
 | `lem-weil-pbc-projective-space-zero-isomorphism` | 4 | state |
 
-Not open yet: 1441 nodes that wait for a statement dependency, 229 nodes that wait for stage 1.
+Not open yet: 1444 nodes that wait for a statement dependency, 229 nodes that wait for stage 1.
 
 ## Stage 3: modules to prove (0)
 
