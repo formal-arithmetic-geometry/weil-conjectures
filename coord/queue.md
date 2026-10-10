@@ -1,8 +1,8 @@
 # Work queue
 
-864 items; claim with `tools/claim.py next <group> [--stage N]`.
+863 items; claim with `tools/claim.py next <group> [--stage N]`.
 
-## Stage 1: nodes to split (57)
+## Stage 1: nodes to split (56)
 
 | node | distance to a target | Lean state on the done branch |
 |---|---|---|
@@ -12,7 +12,7 @@
 | `lem-pc-ring-pseudo-coherent-localization-glue` | 3016 | none |
 | `lem-pc-module-flat-opcycles-tor-criterion` | 3017 | none |
 | `lem-sc-derived-open-mayer-vietoris-ses` | 3017 | none |
-| `lem-sc-derived-hom-tensor-total` | 3020 | none |
+| `lem-sc-derived-hom-tensor-total` | 3018 | none |
 | `lem-pc-tor-independent-perfect-pullback-comparison` | 3021 | none |
 | `lem-sc-affine-koszul-hom-alternating-cech` | 3022 | none |
 | `lem-sc-perfect-ext-bounded-qcoh-vanishing` | 3022 | none |
@@ -31,12 +31,12 @@
 | `lem-sc-etale-triple-to-sh-completion-flat` | 4012 | none |
 | `lem-pc-affine-sections-flat-over-base` | 5014 | none |
 | `lem-pc-derived-tensor-transitivity` | 5015 | none |
-| `lem-pc-sites-module-sheafification-bilinear-extension` | 5015 | none |
 | `lem-sc-associated-localization-fg` | 5015 | none |
 | `lem-sc-weakass-localization` | 5015 | none |
 | `lem-pc-affine-derived-base-change-comparison-map` | 5016 | none |
 | `lem-pc-affine-flat-module-descent` | 5016 | none |
 | `lem-pc-rf-mv-triangle-naturality` | 5016 | none |
+| `lem-pc-sites-sheafification-underlying-sets` | 5016 | none |
 | `lem-sp-filtered-complex-ZB-description` | 6007 | none |
 | `lem-sp-ce-horizontal-lift` | 6008 | none |
 | `lem-sp-ce-vertical-nullhomotopy` | 6008 | none |
@@ -61,7 +61,6 @@
 | `lem-pc-flf-properties` | - | none |
 | `lem-pur-left-derived-from-kflat-class` | - | none |
 | `lem-wf-lie-algebra-derivation-bracket` | - | none |
-| `lem-pur-hom-kflat-into-kinjective` | - | none |
 | `lem-pur-rhom-into-kinjective-local` | - | none |
 
 ## Stage 2: nodes to state (807)
@@ -876,7 +875,7 @@
 | `lem-weil-pbc-projective-space-zero-isomorphism` | 4 | state |
 | `def-nagata-fixed-base-separated-stage` | 6 | state |
 
-Not open yet: 1688 nodes that wait for a statement dependency, 98 nodes that wait for stage 1.
+Not open yet: 1690 nodes that wait for a statement dependency, 97 nodes that wait for stage 1.
 
 ## Stage 3: modules to prove (0)
 
