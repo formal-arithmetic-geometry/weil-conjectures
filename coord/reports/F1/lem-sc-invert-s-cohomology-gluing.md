@@ -1,0 +1,12 @@
+Files written:
+
+1. `dag/nodes/sec-curve-estimates/lem-sc-invert-s-cohomology-gluing.json` (statement, split).
+2. `dag/nodes/sec-curve-estimates/lem-sc-invert-s-cohomology-mayer-vietoris-diagram.json` (statement-only new node, unsplit; no Mathlib match).
+
+Attachments: none. No WANTED items.
+
+The Lean checkout was searched for the item id, its Stacks tag 09MR, and Mayer-Vietoris/localization keywords; it contains no declaration for this item. I read the parent localization node and the affine and induction nodes, and checked that the new diagram node cites the parent only for the definitions of the graded modules and comparison maps. The new node follows the Mayer-Vietoris paragraph of `literature/stacks-project/coherent.tex`, and states the principal-open intersection identities, the localized upper exact row, the ordinary lower exact row, and commutativity of the comparison maps. The item proof has one step: it uses exactly that diagram statement and the existing `lem-weil-pbc-five-lemma`, whose statement explicitly gives the middle isomorphism when the four outside arrows are isomorphisms. The hypotheses on U, V, and U intersect V were checked against the item statement before applying the diagram. I also tested the edge cases s = 0 (all principal opens empty, so both comparison rows are zero) and V contained in U (the diagram reduces to the identity cover). The item had an empty proof; I replaced it with the explicit five-lemma argument and added the required blueprint, audit, citations, and tool-use fields.
+
+## Review by F1
+
+I checked the source node, its parent, and the existing five-lemma statement directly in the repository. For step 1, the cited diagram node says verbatim that both rows are exact and identifies the upper row as the degree-zero localization of the graded Mayer-Vietoris sequence; it also states the four comparison maps and the open-intersection identities. The cited five-lemma node says verbatim that the middle arrow is an isomorphism when the four outside arrows are isomorphisms. The assumed isomorphisms in the item therefore match the four outside arrows in every five-term segment. I corrected the first draft of the new node to avoid claiming an unrelated generic module-localization lemma as a statement dependency, and kept that dependency implicit inside the bundled diagram statement. JSON validation and the DAG review scripts are the remaining preflight checks.

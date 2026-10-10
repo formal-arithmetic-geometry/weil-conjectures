@@ -1,0 +1,66 @@
+{
+ "id": "lem-sc-invert-s-cohomology-mayer-vietoris-diagram",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-pic-proper-ntorsion",
+   "place": "09MR proof, Mayer–Vietoris paragraph: the localization maps form a map of long exact sequences; the identifications of principal opens and exactness after localization are used before the five-lemma",
+   "via": [
+    "lem-sc-invert-s-cohomology-gluing",
+    "lem-sc-invert-s-cohomology"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "chapter": "sec-curve-estimates",
+ "unit": "sk-thm-curveestimate",
+ "title": "Mayer–Vietoris diagram for localized graded cohomology",
+ "statement": "Let $Y$ be a quasi-compact [def-weil-pbc-quasi-compact-scheme] and quasi-separated [def-weil-pbc-scheme-conventions] scheme [def-pc-scheme], let $\\mathcal L$ be an invertible $\\mathcal O_Y$-module [def-sc-invertible-module], let $s\\in\\Gamma(Y,\\mathcal L)$, and let $\\mathcal F$ be a quasi-coherent $\\mathcal O_Y$-module [pqf-def-coherent]. For an open subscheme $W\\subseteq Y$ and $n\\ge0$ let $\\mathcal L|_W^{\\otimes n}$ be the tensor power of [def-weil-pbc-ample-invertible-module], and for $n<0$ put $\\mathcal L|_W^{\\otimes n}=(\\mathcal L|_W^{\\vee})^{\\otimes(-n)}$ with $\\mathcal L^{\\vee}$ the dual of [def-sc-invertible-module]. For $p\\ge0$ set $H^p_*(W,\\mathcal L,\\mathcal F)=\\bigoplus_{n\\in\\mathbb Z}H^p(W,\\mathcal F|_W\\otimes\\mathcal L|_W^{\\otimes n})$ [pqf-def-cohomology], a graded module over $\\Gamma_*(Y,\\mathcal L)=\\bigoplus_{n\\ge0}\\Gamma(Y,\\mathcal L^{\\otimes n})$ via restriction, tensor product and multiplication of sections, and let $H^p_*(W,\\mathcal L,\\mathcal F)_{(s)}$ be the degree-zero part of its localization at the homogeneous element $s$ of degree $1$. Let $W_s=W\\cap Y_s$, with $Y_s$ the open subscheme where $s$ does not vanish [def-weil-pbc-ample-invertible-module], and let $c^p_W:H^p_*(W,\\mathcal L,\\mathcal F)_{(s)}\\to H^p(W_s,\\mathcal F|_{W_s})$ be the canonical map sending $\\xi/s^n$ to $s^{-n}\\xi$. Let $U\\subseteq Y$ be a quasi-compact open and $V\\subseteq Y$ an affine open. Then $U_s\\cap V_s=(U\\cap V)_s$ and $U_s\\cup V_s=(U\\cup V)_s$, and there is a commutative diagram with exact rows\n$$\n\\begin{array}{ccccccc}\n\\cdots\\to H^{p-1}_*(U\\cap V,\\mathcal L,\\mathcal F)_{(s)}&\\to&H^p_*(U\\cup V,\\mathcal L,\\mathcal F)_{(s)}&\\to&H^p_*(U,\\mathcal L,\\mathcal F)_{(s)}\\oplus H^p_*(V,\\mathcal L,\\mathcal F)_{(s)}&\\to&H^p_*(U\\cap V,\\mathcal L,\\mathcal F)_{(s)}\\to\\cdots\\\\\n\\downarrow{\\scriptstyle c^{p-1}_{U\\cap V}}&&\\downarrow{\\scriptstyle c^p_{U\\cup V}}&&\\downarrow{\\scriptstyle c^p_U\\oplus c^p_V}&&\\downarrow{\\scriptstyle c^p_{U\\cap V}}\\\\\n\\cdots\\to H^{p-1}(U_s\\cap V_s,\\mathcal F)&\\to&H^p(U_s\\cup V_s,\\mathcal F)&\\to&H^p(U_s,\\mathcal F)\\oplus H^p(V_s,\\mathcal F)&\\to&H^p(U_s\\cap V_s,\\mathcal F)\\to\\cdots\n\\end{array}\n$$\nfor all $p\\ge0$ (with $H^{-1}=0$), in which the lower row is the Mayer--Vietoris long exact sequence of $\\mathcal F|_{(U\\cup V)_s}$ for the open cover $(U\\cup V)_s=U_s\\cup V_s$, and the upper row is the degree-zero part of the localization at $s$ of the direct sum over $n\\in\\mathbb Z$ of the Mayer--Vietoris long exact sequences of $\\mathcal F\\otimes\\mathcal L^{\\otimes n}$ for the open cover of $U\\cup V$ by $U$ and $V$.",
+ "source": {
+  "document": "literature/stacks-project/coherent.tex",
+  "place": "Cohomology of Schemes, Lemma 09MR (coherent-lemma-invert-s-cohomology), proof, Mayer–Vietoris paragraph; Tags 01EB and 05QB"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-sc-invertible-module",
+  "pqf-def-coherent",
+  "pqf-def-cohomology",
+  "def-weil-pbc-ample-invertible-module",
+  "def-weil-pbc-quasi-compact-scheme",
+  "def-weil-pbc-scheme-conventions"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Mayer Vietoris long exact sequence and natural localization comparison for graded sheaf cohomology",
+   "results": "no declaration for scheme cohomology localization or this comparison",
+   "date": "2026-10-11",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "MayerVietoris sheaf cohomology localization degree zero comparison",
+   "results": "Mathlib has MayerVietoris sequences for sheaves, but no graded cohomology localization comparison",
+   "date": "2026-10-11",
+   "verdict": "generalization: MayerVietoris only"
+  },
+  {
+   "tool": "grep",
+   "query": "rg -n 'MayerVietoris|localized.*cohomology|graded.*cohomology' /home/ubuntu/weil-src-slopmaster2/.lake/packages/mathlib/Mathlib/CategoryTheory/Sites/SheafCohomology /home/ubuntu/weil-src-slopmaster2/.lake/packages/mathlib/Mathlib/Topology/Sheaves",
+   "results": "MayerVietoris files contain generic sheaf-cohomology sequences; no graded localization comparison",
+   "date": "2026-10-11",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "created": {
+  "item": "lem-sc-invert-s-cohomology-gluing",
+  "by": "worker",
+  "date": "2026-10-10"
+ }
+}

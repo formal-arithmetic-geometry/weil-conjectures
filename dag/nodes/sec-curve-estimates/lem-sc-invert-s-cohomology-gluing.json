@@ -29,9 +29,29 @@
   "def-weil-pbc-quasi-compact-scheme",
   "def-weil-pbc-scheme-conventions"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Apply the Mayer–Vietoris diagram node to the cover U union V: it gives, in every degree, a commutative five-term diagram with exact rows, whose four outside vertical arrows are c^q_U, c^q_V, and c^q_(U intersect V) in the adjacent degrees and are isomorphisms by hypothesis. The remaining middle vertical arrow is c^p_(U union V), so the five lemma gives that it is an isomorphism. This holds for every p.",
+   "uses": [
+    "lem-sc-invert-s-cohomology-mayer-vietoris-diagram",
+    "lem-weil-pbc-five-lemma"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/coherent.tex",
+    "place": "Cohomology of Schemes, Lemma 09MR proof, Mayer–Vietoris paragraph; Lemma 05QB (five lemma)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sc-invert-s-cohomology-mayer-vietoris-diagram",
+  "lem-weil-pbc-five-lemma"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/coherent.tex",
+  "place": "Cohomology of Schemes, Lemma 09MR proof, Mayer–Vietoris paragraph"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -56,10 +76,35 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-sc-invert-s-cohomology",
   "by": "worker",
   "date": "2026-10-10"
+ },
+ "split_report": {
+  "date": "2026-10-11",
+  "item": "lem-sc-invert-s-cohomology-gluing",
+  "worker": "stage1",
+  "summary": "Split the Mayer-Vietoris gluing implication by isolating the full commutative diagram of localized graded cohomology sequences, including the principal-open intersection identities and exactness after localization, then applying the existing five-lemma node to the four assumed isomorphisms.",
+  "blueprint": "Realizes the ancestor lem-sc-pic-proper-ntorsion 09MR Mayer-Vietoris paragraph: localization comparison maps form a map of long exact sequences and the five lemma gives the union case.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-five-lemma",
+    "why": "The step uses the generic five-lemma conclusion that a commutative five-term diagram with exact rows and four outside isomorphisms has an isomorphism in the middle."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-five-lemma",
+  "lem-weil-pbc-five-lemma"
+ ],
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-isg",
+  "group": "F1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-isg (reviewer sub-agent of L); spot-checked: Source: Stacks coherent.tex Lemma 09MR (lemma-invert-s-cohomology) proof, Mayer-Vietoris paragraph, read: the item statement agrees with the induction hypothesis P(U),P(V),P(U cap V) => P(U cup V) hypothesis by hypothesis (Y qcqs, L invertible, s global section, F quasi-coherent, U qc open, V affine open, all p). Step 1 is carried by the new node lem-sc-invert-s-cohomology-mayer-vietoris-diagram (identities U_s cap V_s=(U cap V)_s, U_s cup V_s=(U cup V)_s, commutative ladder with exact rows: localization and degree-zero part are exact, MV maps are Gamma_*-linear) and lem-weil-pbc-five-lemma (abelian-category five lemma, four outside isos give the middle; outside arrows c^{p-1}_U+c^{p-1}_V, c^{p-1}_{U cap V}, c^p_U+c^p_V, c^p_{U cap V}, direct sums of isos elementary); tool use lem-weil-pbc-five-lemma accepted as a generic black box. Small cases: p=0 (segment starts 0->0, left-exactness), V subset U, s=0 (all localizations and all W_s empty, both rows zero). FIX: dag/nodes/sec-curve-estimates/lem-sc-invert-s-cohomology-mayer-vietoris-diagram.json: statement, stmt_deps: quasi-compact and quasi-separated were cited only by [def-pc-scheme]; now cited by def-weil-pbc-quasi-compact-scheme and def-weil-pbc-scheme-conventions (added to stmt_deps), negative tensor powers and W_s defined as in the item, statement rewritten in TeX with the ladder displayed explicitly (c^p_U+c^p_V as the direct-sum arrow); mathematics unchanged. FIX more, RETURN less: B3 qc/qs notions cited by their definition nodes. Start Sat Oct 10 04:27:06 PM UTC 2026, end Sat Oct 10 04:28:19 PM UTC 2026.; 1 file(s) fixed by the reviewer"
  }
 }
