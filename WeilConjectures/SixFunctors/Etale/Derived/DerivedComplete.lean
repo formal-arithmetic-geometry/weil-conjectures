@@ -6,6 +6,7 @@ Authors: Claude
 module
 
 public import WeilConjectures.CategoryTheory.DerivedCategory.Complete.IntegralCoefficient
+public import WeilConjectures.SixFunctors.Etale.Derived.Invertible
 public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriek
 public import WeilConjectures.SixFunctors.Etale.Derived.Perfect
 
@@ -95,6 +96,29 @@ lemma rightOrthogonal_smulInvertible_rightDerivedLowerStar {Λ : Type (u + 1)} [
   rw [← (adj.homEquiv _ _).apply_symm_apply g, h, Adjunction.homEquiv_unit,
     Functor.map_zero, Limits.comp_zero]
 
+/-- The coefficient dual `RHom(K, Λ_X)` lies in the right orthogonal of the objects on which `ϖ`
+acts invertibly as soon as `Λ_X` does: a map `Z ⟶ RHom(K, Λ_X)` is the transpose of a map
+`K ⊗ᴸ Z ⟶ Λ_X`, and `ϖ` acts invertibly on `K ⊗ᴸ Z`, the derived tensor product being
+`Λ`-linear. -/
+lemma rightOrthogonal_smulInvertible_coefficientDual {Λ : Type (u + 1)} [CommRing Λ]
+    (ϖ : Λ) {X : Scheme.{u}}
+    (hΛ : (_root_.DerivedCategory.smulInvertible X.smallEtaleTopology ϖ).rightOrthogonal
+      Λ_(X, Λ)) (K : 𝐃(X, Λ)) :
+    (_root_.DerivedCategory.smulInvertible X.smallEtaleTopology ϖ).rightOrthogonal
+      ((DerivedCategory.coefficientDual (ModuleCat.{u + 1} Λ) X).obj (op K)) := by
+  intro Z g (hZ : IsIso (ϖ • 𝟙 Z))
+  let e := singleFunctorObjUnitIso (ModuleCat.{u + 1} Λ) X
+  let adj := derivedTensorHomAdjunction (ModuleCat.{u + 1} Λ) (X := X) K
+  have hZ' : IsIso (ϖ • 𝟙 (((derivedTensor (ModuleCat.{u + 1} Λ) X).obj K).obj Z)) := by
+    rw [← CategoryTheory.Functor.map_id, ← Functor.map_smul]
+    infer_instance
+  have h : (adj.homEquiv _ _).symm g = 0 := by
+    have := hΛ ((adj.homEquiv _ _).symm g ≫ e.inv) hZ'
+    rw [← Category.comp_id ((adj.homEquiv _ _).symm g), ← e.inv_hom_id, ← Category.assoc,
+      this, Limits.zero_comp]
+  rw [← (adj.homEquiv _ _).apply_symm_apply g, h, Adjunction.homEquiv_unit,
+    Functor.map_zero, Limits.comp_zero]
+
 section General
 
 variable {Λ : Type (u + 1)} [CommRing Λ] [IsDomain Λ] (I : Ideal Λ) (hI : I.IsPrincipal)
@@ -153,17 +177,17 @@ theorem derivedComplete_coefficientDual {X : Scheme.{u}}
     (hΛ : DerivedCategory.derivedComplete X.smallEtaleTopology I Λ_(X, Λ)) (K : 𝐃(X, Λ))
     (hK : DerivedCategory.derivedComplete X.smallEtaleTopology I K) :
     DerivedCategory.derivedComplete X.smallEtaleTopology I
-      ((DerivedCategory.coefficientDual (ModuleCat.{u + 1} Λ) X).obj (op K)) :=
-  -- Proof sketch: `Λ_X` is the monoidal unit up to the isomorphism
-  -- `DerivedCategory.εSingleFunctorZero`, and derived completeness is invariant under
-  -- isomorphism. `RHom(K, –)` is triangulated and, being right adjoint to `K ⊗ᴸ –`, preserves
-  -- products, so it carries the homotopy limit `Λ_X ⟶ Λ_X ⊗ᴸ Λ/Iⁿ` given by `hΛ` to a
-  -- homotopy limit (`IsHomotopyLimit.map`). Since `Iⁿ = (πⁿ)` and `Λ/Iⁿ` is the
-  -- cone of `πⁿ : Λ → Λ`, the triangulated `Λ`-linear functor `RHom(K, –)` satisfies
-  -- `RHom(K, Λ_X ⊗ᴸ Λ/Iⁿ) ≅ RHom(K, Λ_X) ⊗ᴸ Λ/Iⁿ`, naturally in `n`; transporting the
-  -- homotopy limit along these isomorphisms shows that `K^∨` is derived complete. The
-  -- hypothesis `hK` is not needed by this argument.
-  sorry
+      ((DerivedCategory.coefficientDual (ModuleCat.{u + 1} Λ) X).obj (op K)) := by
+  -- For `I = 0` every object is derived complete. For `I = (ϖ)` with `ϖ ≠ 0`, derived
+  -- completeness is right orthogonality to the objects on which `ϖ` acts invertibly, which
+  -- passes from `Λ_X` to `RHom(K, Λ_X)` by adjunction. The hypothesis `hK` is not needed.
+  obtain ⟨ϖ, hϖI⟩ := hI.principal
+  by_cases h0 : ϖ = 0
+  · obtain rfl : I = ⊥ := by rw [hϖI, h0, Ideal.span_singleton_eq_bot]
+    exact _root_.DerivedCategory.derivedComplete_bot _
+  have hϖ : ϖ ∈ nonZeroDivisors Λ := mem_nonZeroDivisors_of_ne_zero h0
+  rw [_root_.DerivedCategory.derivedComplete_iff_rightOrthogonal hϖ hϖI] at hΛ ⊢
+  exact rightOrthogonal_smulInvertible_coefficientDual ϖ hΛ K
 
 end General
 
