@@ -3,25 +3,55 @@
  "blueprint": {
   "is": "def-weil-pbc-curve-setting",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "definition",
  "title": "The curve setting of the eight assertions",
- "statement": "Let $k$ be algebraically closed, let $C$ be separated of finite type over $k$\nwith $\\dim C\\leq1$, and let $F\\in\\Ab(C_{\\Et})$ be a torsion sheaf. A pair\n$(C,F)$ of this form is a *curve coefficient pair*.",
+ "statement": "Let $k$ be an algebraically closed field and let $C$ be a curve over $k$ [def-sc-curves], that is, a separated scheme of finite type over $k$ with $\\dim C\\leq1$. Let $F\\in\\Ab(C_{\\Et})$ [def-weil-pbc-abelian-etale-sheaves] be a torsion abelian sheaf [def-weil-pbc-torsion-etale-sheaf]. A pair $(C,F)$ of this form is a *curve coefficient pair*.",
  "source": {
   "document": "literature/blueprint/master/blueprint/sec-curve-estimates/sk-prop-cd/def-weil-pbc-curve-setting.md",
   "place": "node def-weil-pbc-curve-setting, order 1001"
  },
  "stmt_deps": [
-  "def-weil-pbc-etale-sheaves",
-  "def-weil-pbc-scheme-conventions"
+  "def-sc-curves",
+  "def-weil-pbc-abelian-etale-sheaves",
+  "def-weil-pbc-torsion-etale-sheaf"
  ],
  "proof": [],
  "proof_deps": [],
  "proof_origin": null,
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "scheme separated finite type over algebraically closed field dimension at most one paired with torsion etale sheaf",
+   "results": "IsProper, IsEtale and unrelated sheaf results; no curve coefficient pair",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "definition of coefficient pair consisting of a scheme curve of dimension at most one over algebraically closed field and a torsion etale sheaf",
+   "results": "Scheme.Etale, WeierstrassCurve and unrelated morphism results; no pair of the required kind",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsCurve\"",
+   "results": "none",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "rg -n -i 'curve.*coefficient|coefficient.*curve|torsion sheaf' Mathlib/AlgebraicGeometry/Sites Mathlib/CategoryTheory/Sites; rg -n 'IsCurve|isCurve' Mathlib/AlgebraicGeometry/Morphisms (Mathlib source under /home/ubuntu/Poincare-MorganTian/.work/helpers/codex-m47-line/.lake/packages/mathlib)",
+   "results": "no combined curve and torsion-sheaf predicate or pair; the separate notions are recorded by def-sc-curves and def-weil-pbc-torsion-etale-sheaf",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [],
  "blueprint_kind": "definition",
@@ -47,5 +77,19 @@
   }
  },
  "chapter": "sec-curve-estimates",
- "unit": "sk-prop-cd"
+ "unit": "sk-prop-cd",
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "def-weil-pbc-curve-setting",
+  "worker": "stage1",
+  "summary": "The definition pairs the existing curve notion def-sc-curves (separated finite-type scheme of dimension at most one over an algebraically closed field) with an abelian sheaf from def-weil-pbc-abelian-etale-sheaves satisfying the torsion condition of def-weil-pbc-torsion-etale-sheaf. The generic imported dependencies did not identify these notions. Mathlib has no combined curve coefficient pair. The slopmaster2 declaration AlgebraicGeometry.IsCurve defines only the geometric half and is already attached to def-sc-curves; no declaration for the pair was found.",
+  "blueprint": "The single defining sentence of def-weil-pbc-curve-setting (order 1001) is realized by the three cited definition nodes."
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "group": "C1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed by the lead of C1; spot-checked by L: L: definition checked against the sketch and Curve.lean"
+ }
 }
