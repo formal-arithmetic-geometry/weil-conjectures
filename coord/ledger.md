@@ -962,3 +962,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 06:23 L: reviewed and accepted lem-weil-pbc-formal-glueing-isogeny (7 steps; +def-weil-pbc-formal-glueing-data 05EL, +prop-weil-pbc-formal-glueing-equivalence 05ER; the worker's duplicate 05E9 node merged into lem-weil-pbc-torsion-module-flat-base-change-iso and deleted uncommitted). Stage 3 note: grothendieck-existence-easy step 3 should cite lem-weil-pbc-localization-module-exact.
 - 06:24 L: reviewed and accepted lem-weil-pbc-fs-adic-flat-geometrically-regular-closed-fibre (4 steps; +fs-adic-local-flat 07NP, +fs-adic-field-geometrically-regular 07EL nodes).
 - 06:25 L: reviewed and accepted lem-weil-pbc-fs-adic-lift-derivation (6 steps; +fs-adic-lift-into-complete node 07NJ).
+- 06:27 L: reviewed and accepted lem-weil-pbc-geometrically-reduced-extension-separable (5 steps; +p-power-independence-separably-generated Mathlib leaf, 030W (2)=>(1)).

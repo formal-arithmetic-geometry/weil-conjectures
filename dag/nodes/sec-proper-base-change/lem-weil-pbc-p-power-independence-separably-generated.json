@@ -1,0 +1,84 @@
+{
+ "id": "lem-weil-pbc-p-power-independence-separably-generated",
+ "kind": "statement",
+ "title": "A finitely generated extension whose p-th powers preserve linear independence is separably generated",
+ "statement": "Let $p$ be a prime number, let $k$ be a field of characteristic $p$ and let $K/k$ be a field extension [def-pc-field-extension] that is finitely generated, i.e. $K=k(a_1,\\dots,a_n)$ for finitely many $a_1,\\dots,a_n\\in K$. Assume that for all pairwise distinct $b_1,\\dots,b_m\\in K$ ($m\\ge0$) that are linearly independent over $k$ (no relation $\\sum_ic_ib_i=0$ with $c_i\\in k$ not all zero), the elements $b_1^p,\\dots,b_m^p$ are linearly independent over $k$ (no relation $\\sum_ic_ib_i^p=0$ with $c_i\\in k$ not all zero). Then $K$ is separably generated over $k$ in the sense of [def-weil-pbc-separable-field-extension] (1): there are finitely many $x_1,\\dots,x_r\\in K$ forming a transcendence basis of $K/k$ [def-weil-pbc-transcendence-basis] such that $K/k(x_1,\\dots,x_r)$ is separable algebraic [def-weil-pbc-separable-algebraic-extension].",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Algebra, Lemma Tag 030W (lemma-characterize-separable-field-extensions, line 10360), implication (2) => (1) for a finitely generated extension (proof paragraph 'Assume (2)', line 10393, using Lemma Tag 0H71 lemma-mini-separability, line 10296); condition (2) of 030W is stated for sets $\\{a_1,\\dots,a_m\\}$, and since $b\\mapsto b^p$ is injective on a field of characteristic $p$ the set form and the form for pairwise distinct elements used here say the same"
+ },
+ "stmt_deps": [
+  "def-pc-field-extension",
+  "def-weil-pbc-separable-field-extension",
+  "def-weil-pbc-transcendence-basis",
+  "def-weil-pbc-separable-algebraic-extension"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "finitely generated field extension in characteristic p such that p-th powers of linearly independent elements are linearly independent is separably generated",
+   "results": "exists_isTranscendenceBasis_and_isSeparable_of_linearIndepOn_pow_of_adjoin_eq_top, exists_isTranscendenceBasis_and_isSeparable_of_linearIndepOn_pow, exists_isTranscendenceBasis_and_isSeparable_of_linearIndepOn_pow_of_essFiniteType (Mathlib.FieldTheory.SeparablyGenerated); LinearIndependent.map_pow_expChar_pow_of_isSeparable(') (Mathlib.FieldTheory.PurelyInseparable.PerfectClosure); LinearIndependent.map_of_isPurelyInseparable_of_isSeparable (Mathlib.FieldTheory.PurelyInseparable.Tower)",
+   "date": "2026-10-10",
+   "verdict": "match: exists_isTranscendenceBasis_and_isSeparable_of_linearIndepOn_pow_of_essFiniteType"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "K/k finitely generated, char p, k-linearly independent elements have k-linearly independent p-th powers, then there is a separating transcendence basis",
+   "results": "exists_isTranscendenceBasis_and_isSeparable_of_linearIndepOn_pow_of_essFiniteType, _of_linearIndepOn_pow, _of_linearIndepOn_pow_of_adjoin_eq_top, _of_linearIndepOn_pow', _of_perfectField (Mathlib.FieldTheory.SeparablyGenerated); IntermediateField.exists_finset_maximalFor_isTranscendenceBasis_separableClosure (Mathlib.FieldTheory.SeparableClosure)",
+   "date": "2026-10-10",
+   "verdict": "match (same declaration)"
+  },
+  {
+   "tool": "loogle",
+   "query": "IsTranscendenceBasis, Algebra.IsSeparable, Algebra.EssFiniteType",
+   "results": "exists_isTranscendenceBasis_and_isSeparable_of_perfectField, exists_isTranscendenceBasis_and_isSeparable_of_linearIndepOn_pow_of_essFiniteType (Mathlib.FieldTheory.SeparablyGenerated)",
+   "date": "2026-10-10",
+   "verdict": "match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -n 'theorem\\|lemma\\|stacks\\|^variable\\|^open' Mathlib/FieldTheory/SeparablyGenerated.lean; sed -n 1,80p and 185-330p of that file; sed -n 85,125p Mathlib/FieldTheory/IntermediateField/Adjoin/Algebra.lean; sed -n 328,334p Mathlib/Algebra/CharP/Defs.lean",
+   "results": "SeparablyGenerated.lean:288-291 @[stacks 030W \"(2) ⇒ (1) finitely generated case\"] exists_isTranscendenceBasis_and_isSeparable_of_linearIndepOn_pow_of_essFiniteType, with section variables p, hp : p.Prime (line 43), H (lines 44-45), [ExpChar k p] (line 189), open IntermediateField (line 185); 0H71 is line 264; IntermediateField.fg_top_iff (Adjoin/Algebra.lean:92), essFiniteType_iff (line 118); ExpChar.prime (CharP/Defs.lean:330)",
+   "date": "2026-10-10",
+   "verdict": "match"
+  },
+  {
+   "tool": "local_search",
+   "query": "exists_isTranscendenceBasis_and_isSeparable_of_linearIndepOn_pow_of_essFiniteType (project ~/weil-conjectures-slopmaster2)",
+   "results": "exists_isTranscendenceBasis_and_isSeparable_of_linearIndepOn_pow_of_essFiniteType (.lake/packages/mathlib/Mathlib/FieldTheory/SeparablyGenerated.lean); index: unavailable",
+   "date": "2026-10-10",
+   "verdict": "the name exists"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "exists_isTranscendenceBasis_and_isSeparable_of_linearIndepOn_pow_of_essFiniteType",
+  "file": "Mathlib/FieldTheory/SeparablyGenerated.lean",
+  "line": 289,
+  "how": "specializes in one line (lines 288-291, with the section variables of lines 43-45 and 189 read 2026-10-10): k of characteristic p with p prime gives CharP k p and ExpChar k p by the constructor ExpChar.prime (Mathlib/Algebra/CharP/Defs.lean:330); K = k(a_1,...,a_n) says (⊤ : IntermediateField k K).FG, which is Algebra.EssFiniteType k K by IntermediateField.fg_top_iff (Mathlib/FieldTheory/IntermediateField/Adjoin/Algebra.lean:92); the hypothesis H (lines 44-45: for every Finset s of K, LinearIndepOn k id s -> LinearIndepOn k (· ^ p) s, where LinearIndepOn R v s is LinearIndependent R (fun x : s => v x), Mathlib/LinearAlgebra/LinearIndependent/Defs.lean:123) is the node's hypothesis with s = {b_1,...,b_m}; the conclusion, a Finset s with IsTranscendenceBasis k ((↑) : s → K) and Algebra.IsSeparable (IntermediateField.adjoin k s) K, is the node's conclusion by the matches recorded on def-weil-pbc-transcendence-basis (IsTranscendenceBasis) and def-weil-pbc-separable-algebraic-extension (Algebra.IsSeparable), IntermediateField.adjoin k s being k(x_1,...,x_r)"
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-geometrically-reduced-extension-separable",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "reviewed": "Reviewed by L 2026-10-10: Mathlib leaf exists_isTranscendenceBasis_and_isSeparable_of_linearIndepOn_pow_of_essFiniteType (SeparablyGenerated.lean line 289, @[stacks 030W]); one-line specialization (ExpChar.prime, fg_top_iff); lines read."
+}
