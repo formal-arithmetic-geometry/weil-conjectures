@@ -783,7 +783,36 @@ lemma exists_detecting_of_isClosedImmersion {Z Z' : Scheme.{u}} (i : Z' ⟶ Z)
     rw [e₁]
     simp only [op_comp, Functor.map_comp, ModuleCat.hom_comp, LinearMap.comp_apply]
     exact congrArg (fun z ↦ (H.obj.map k.op).hom ((H.obj.map (i.Etale.map a').op).hom z)) ha.symm
-  sorry
+  obtain ⟨n, V', φ, hφT, -, hcov⟩ := exists_affine_refinement T hT
+  choose V hV a ψ hc using hφT
+  refine ⟨n, V, fun k ↦ Sheaf.freeYonedaHomEquiv.symm
+    (ModuleCat.ofHom (LinearMap.toSpanSingleton Λ _ (a k))), hV, fun F f hf ↦ ?_⟩
+  have hfa (k : Fin n) : (f.hom.app (op (V k))).hom (a k) = 0 := by
+    have := congrArg (fun φ : Sheaf.freeYoneda Z.smallEtaleTopology (V k) (ModuleCat.of Λ Λ) ⟶ F ↦
+      (Sheaf.freeYonedaHomEquiv φ).hom (1 : Λ)) (hf k)
+    simpa [freeYonedaHomEquiv_comp, freeYonedaHomEquiv_zero] using this
+  let H' := (Etale.upperStar (ModuleCat.{u + 1} Λ) i).obj F
+  let φf := (Etale.upperStar (ModuleCat.{u + 1} Λ) i).map f
+  have key (k : Fin n) :
+      (H'.obj.map (φ k).op).hom ((φf.hom.app (op W')).hom s) = 0 := by
+    have e₁ := congrArg (fun z ↦ z s) (congrArg ModuleCat.Hom.hom (φf.hom.naturality (φ k).op))
+    have e₂ := congrArg (fun z ↦ z ((η.hom.app (op (V k))).hom (a k)))
+      (congrArg ModuleCat.Hom.hom (φf.hom.naturality (ψ k).op))
+    have e₃ := congrArg (fun z ↦ z (a k)) (congrArg ModuleCat.Hom.hom
+      (congrArg (fun φ ↦ φ.hom.app (op (V k))) (adj.unit.naturality f)))
+    simp only [ModuleCat.hom_comp, LinearMap.comp_apply] at e₁ e₂ e₃
+    rw [← e₁, hc k, e₂]
+    have e₄ : (φf.hom.app (op (i.Etale.obj (V k)))).hom ((η.hom.app (op (V k))).hom (a k)) =
+        ((adj.unit.app F).hom.app (op (V k))).hom ((f.hom.app (op (V k))).hom (a k)) := by
+      exact e₃.symm
+    rw [e₄, hfa k, map_zero, map_zero]
+  apply Sheaf.freeYonedaHomEquiv.injective
+  rw [freeYonedaHomEquiv_comp, freeYonedaHomEquiv_zero]
+  refine H'.property.hom_ext_ofArrows φ ((Scheme.ofArrows_mem_smallEtaleTopology_iff _).2 hcov)
+    fun k ↦ ?_
+  ext1
+  refine LinearMap.ext_ring ?_
+  simpa using key k
 
 end Generation
 
