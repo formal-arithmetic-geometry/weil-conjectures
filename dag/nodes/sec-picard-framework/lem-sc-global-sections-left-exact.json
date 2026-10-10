@@ -24,39 +24,140 @@
   "def-weil-sheaf-of-modules-category",
   "def-sp-left-exact-additive"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "By the definition of the category of sheaves of $\\mathcal O_X$-modules [def-weil-sheaf-of-modules-category], this category is abelian and kernels of module morphisms are computed sectionwise. Thus for every morphism $u:\\mathcal F\\to\\mathcal G$, the kernel module $\\ker(u)$ has sections $\\ker(u)(X)=\\ker(\\mathcal F(X)\\to\\mathcal G(X))$.",
+   "uses": [
+    "def-weil-sheaf-of-modules-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/cohomology.tex",
+    "place": "Cohomology of Sheaves, Lemma Tag 01EZ (lemma-before-Leray), proof setup for $\\Gamma(Y,-)$"
+   }
+  },
+  {
+   "text": "Evaluating at $X$ therefore carries the kernel of every module morphism to the kernel of the induced homomorphism of abelian groups. Hence $\\Gamma(X,-)$ preserves kernels.",
+   "uses": [
+    "def-weil-sheaf-of-modules-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/cohomology.tex",
+    "place": "Cohomology of Sheaves, Lemma Tag 01EZ (lemma-before-Leray), proof setup for $\\Gamma(Y,-)$"
+   }
+  },
+  {
+   "text": "The section map of a module morphism is a homomorphism of abelian groups [def-weil-sheaf-of-modules-category], and finite products in $\\operatorname{Mod}(\\mathcal O_X)$ are computed sectionwise, evaluation at $X$ carrying them to the products of the abelian groups of sections [lem-weil-pbc-module-sheaves-limits-sectionwise]. Thus evaluation at $X$, namely $\\Gamma(X,-)$, preserves finite products, i.e. is additive. Combining additivity with kernel preservation gives left exactness by the definition [def-sp-left-exact-additive].",
+   "uses": [
+    "def-weil-sheaf-of-modules-category",
+    "lem-weil-pbc-module-sheaves-limits-sectionwise",
+    "def-sp-left-exact-additive"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/cohomology.tex",
+    "place": "Cohomology of Sheaves, Lemma Tag 01EZ (lemma-before-Leray), proof setup for $\\Gamma(Y,-)$"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-sheaf-of-modules-category",
+  "def-sp-left-exact-additive",
+  "lem-weil-pbc-module-sheaves-limits-sectionwise"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Cohomology of Sheaves, Lemma Tag 01EZ (lemma-before-Leray), proof setup for $\\Gamma(Y,-)$"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
    "query": "global sections functor on sheaves of modules is additive and left exact",
-   "results": "No exact declaration for scheme module global sections found",
+   "results": "AlgebraicGeometry.Scheme.Modules.instAbelian (Mathlib/AlgebraicGeometry/Modules/Sheaf); SheafOfModules.sectionsFunctor and additive sheaf-of-modules declarations, but no exact scheme-module global-sections theorem",
    "date": "2026-10-11",
    "verdict": "no match"
   },
   {
    "tool": "loogle",
    "query": "CategoryTheory.Sheaf global sections preserves kernels",
-   "results": "Only generic sheaf evaluation and kernel declarations; no matching scheme-module global-sections theorem",
+   "results": "No hits for the supplied identifier pattern",
    "date": "2026-10-11",
    "verdict": "no match"
   },
   {
    "tool": "grep",
    "query": "rg -n 'global sections|evaluation.*kernel|preserves.*kernel' Mathlib/CategoryTheory/Sites Mathlib/AlgebraicGeometry",
-   "results": "No exact theorem identifying Gamma(X,-) on scheme modules as additive and left exact",
+   "results": "No matching source declaration for the exact global-sections functor theorem",
    "date": "2026-10-11",
    "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "global sections functor on sheaves of modules is additive and left exact",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-11",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "evaluation at terminal object of sheaves of modules preserves finite limits and kernels",
+   "results": "SheafOfModules.Finite.evaluationPreservesFiniteLimits; SheafOfModules.evaluationPreservesLimitsOfShape; SheafOfModules.evaluationPreservesLimit; no declaration packaging scheme global sections as additive left-exact functor to Ab",
+   "date": "2026-10-11",
+   "verdict": "generalization: finite-limit preservation of evaluation"
+  },
+  {
+   "tool": "loogle",
+   "query": "SheafOfModules.sectionsFunctor, PreservesFiniteLimits",
+   "results": "No hits; loogle reported unknown identifier PreservesFiniteLimits",
+   "date": "2026-10-11",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "sectionsFunctor|PreservesFiniteLimits.*sections|evaluation.*Preserves in Mathlib/Algebra/Category/ModuleCat/Sheaf Mathlib/CategoryTheory/Sites",
+   "results": "No matching source declaration",
+   "date": "2026-10-11",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "SheafOfModules.evaluation, CategoryTheory.Limits.PreservesFiniteLimits",
+   "results": "SheafOfModules.Finite.evaluationPreservesFiniteLimits (Mathlib/Algebra/Category/ModuleCat/Sheaf/Limits.lean:98): evaluation R X : SheafOfModules R => ModuleCat (R(X)) preserves finite limits, for a sheaf of rings on a general site; no declaration for AlgebraicGeometry.Scheme.Modules global sections to Ab packaged as additive left exact",
+   "date": "2026-10-10",
+   "verdict": "generalization: finite-limit preservation of evaluation into ModuleCat, not the statement to Ab; kept as a split, the limit clause is cited through the leaf lem-weil-pbc-module-sheaves-limits-sectionwise"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "def-sc-sheaf-cohomology-functor",
   "by": "worker",
   "date": "2026-10-10"
  },
  "chapter": "sec-picard-framework",
- "unit": "sk-thm-picard-duality"
+ "unit": "sk-thm-picard-duality",
+ "split_report": {
+  "date": "2026-10-11",
+  "item": "lem-sc-global-sections-left-exact",
+  "worker": "stage1",
+  "summary": "Split the global-sections statement into the sectionwise-kernel argument, preservation of kernels, and additivity/left-exactness conclusion. The existing sheaf-of-modules category definition was checked as the sole substantive sheaf input; no new node was needed and no exact closed Lean declaration was found.",
+  "blueprint": {
+   "statement": "proof, Step 2: functoriality of $H^1$ used in naturality of the Cech pairing",
+   "steps": {
+    "1": "proof, Step 2: kernels of sheaves of modules are computed sectionwise",
+    "2": "proof, Step 2: global sections preserves kernels",
+    "3": "proof, Step 2: global sections is additive and therefore left exact"
+   }
+  }
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-gsl1707",
+  "group": "C1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-gsl1707 (reviewer sub-agent of L); spot-checked: Source: Stacks 01EZ (cohomology-lemma-before-Leray, cohomology.tex present) uses left exactness of Gamma(Y,-); the item statement (Gamma(X,-): Mod(O_X)->Ab additive and kernel-preserving, hence left exact per def-sp-left-exact-additive) agrees. Step 1-2: def-weil-sheaf-of-modules-category (mathlib leaf) states Mod(O) abelian with kernels computed sectionwise, which carries kernel preservation. Step 3: def-sp-left-exact-additive defines additive as preserving finite products and left exact as additive plus kernels; the delivered step asserted finite products sectionwise without a node stating it (C4). FIX more, RETURN less: dag/nodes/sec-picard-framework/lem-sc-global-sections-left-exact.json: proof[2].text/uses and proof_deps: cite the existing Mathlib leaf lem-weil-pbc-module-sheaves-limits-sectionwise (limits in Mod(O) computed sectionwise, evaluation to the limit of abelian groups) for finite products; mathlib_searches: added my Loogle query 'SheafOfModules.evaluation, CategoryTheory.Limits.PreservesFiniteLimits' -> SheafOfModules.Finite.evaluationPreservesFiniteLimits (Limits.lean:98, verified with sed) evaluation into ModuleCat(R(X)) on a general site, a generalization not the Ab/Scheme.Modules statement, so the item stays a split, no leaf. No new nodes; DAG grep found no existing node stating the item. Small cases: X empty (Gamma = 0), X = Spec k. Start Sat Oct 10 05:07:43 PM UTC 2026, end Sat Oct 10 05:08:29 PM UTC 2026.; 1 file(s) fixed by the reviewer"
+ }
 }
