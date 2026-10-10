@@ -34,30 +34,46 @@
   {
    "tool": "leanfinder",
    "query": "derived global sections cohomology of modules on an arbitrary ringed space",
-   "results": "No declaration for ringed-space module cohomology; only generic sheaf and derived-category primitives",
+   "results": "CategoryTheory.Sheaf.H and cohomologyPresheaf in Mathlib/CategoryTheory/Sites/SheafCohomology/Basic; SheafOfModules.sections and sectionsFunctor in Mathlib/Algebra/Category/ModuleCat/Sheaf; no arbitrary ringed-space injective-resolution definition",
    "date": "2026-10-11",
-   "verdict": "no match"
+   "verdict": "no exact match; general sheaf-cohomology primitives only"
   },
   {
    "tool": "loogle",
    "query": "right derived functor Gamma sheaf module cohomology",
-   "results": "no hit",
+   "results": "Unknown identifier `right`; no hit",
    "date": "2026-10-11",
    "verdict": "no match"
   },
   {
    "tool": "grep",
    "query": "derived.*global sections.*ringed|cohomology.*ringed space",
-   "results": "no matching declaration in Mathlib",
+   "results": "no matching declaration in Mathlib/",
    "date": "2026-10-11",
    "verdict": "no match"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-sc-mayer-vietoris-ringed-space",
   "by": "worker",
   "date": "2026-10-10"
+ },
+ "split_report": {
+  "date": "2026-10-11",
+  "item": "def-sc-ringed-space-module-cohomology",
+  "worker": "stage1",
+  "summary": "Checked the definition against the Stacks Project ringed-space cohomology paragraph (Tag 01DZ, with the Mayer–Vietoris use recorded at Tag 09MR). The statement introduces a ringed space, an O_X-module, an injective resolution supplied by lem-sc-ringed-space-module-sheaves-enough-injectives, and defines H^p as the cohomology of global sections of that resolution, with the standard resolution-independence and right-derived-functor interpretation. No exact declaration with this blueprint tag exists in the Lean source. This is definition-only, so no child nodes or proof steps are needed.",
+  "blueprint": "09MR Mayer–Vietoris paragraph: the notation H^p(X,F) for a module on a ringed space",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-rmc1910",
+  "group": "E1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-rmc1910 (reviewer sub-agent of L); spot-checked: Definition-only split: statement matches Stacks 01DZ ringed-space paragraph hypothesis by hypothesis; stmt_deps exist on sheaf-dag (ringed space def, Mod(O) def, enough-injectives lem created by lem-sc-mayer-vietoris-ringed-space so no cycle, def-sp-left-exact-additive supplies R^n via injective resolutions incl. independence); no agreement-with-Ab(X) claim stated, so nothing to prove; grep Mathlib/Topology/Sheaves and ModuleCat/Sheaf: no ringed-space module cohomology (Sheaf.H is abelian-sheaf Ext), not a leaf. No repairs."
  }
 }
