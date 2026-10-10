@@ -2,7 +2,7 @@
  "id": "lem-weil-pbc-sheaf-finite-truncation-colimit",
  "kind": "statement",
  "title": "A coequalizer presentation with finite supports is a filtered colimit of finite coequalizers",
- "statement": "Let $X$ be a topological space. Suppose a sheaf of sets $\\mathcal F$ is a coequalizer [def-weil-pbc-category-colimit] of maps $r,s:\\coprod_{b\\in B}j_{V_b!}\\underline{T_b}\\rightrightarrows\\coprod_{a\\in A}j_{U_a!}\\underline{S_a}$, with extension by the empty set as in [def-weil-pbc-sets-extension-by-empty], and suppose every finite subset of source indices has a finite target support for both maps as in [lem-weil-pbc-sheaf-finite-relation-truncations]. Then $\\mathcal F$ is a directed colimit of sheaves, each of which is a coequalizer of two maps between finite coproducts of the displayed form. The index set is the directed set of finite source subsets together with finite target supports.",
+ "statement": "Let $X$ be a topological space; sheaves of sets on $X$ are those on the site of open subsets of $X$ with open coverings [def-weil-pbc-sites-and-cohomology], and coproducts, coequalizers and colimits below are taken in the category of sheaves of sets on $X$ [def-weil-pbc-category-colimit]. Let $A,B$ be sets, $U_a,V_b\\subseteq X$ open and $S_a,T_b$ sets ($a\\in A$, $b\\in B$), with $j_{U!}\\underline S$ the extension by the empty set [def-weil-pbc-sets-extension-by-empty]. For $A'\\subseteq A$ let $(C_{A'},(\\iota^{A'}_a)_{a\\in A'})$ be a coproduct of $(j_{U_a!}\\underline{S_a})_{a\\in A'}$ and for $A'\\subseteq A''$ let $\\kappa_{A''A'}:C_{A'}\\to C_{A''}$ be the morphism with $\\kappa_{A''A'}\\iota^{A'}_a=\\iota^{A''}_a$; write $C=C_A$, $\\kappa_{A'}=\\kappa_{AA'}$; define $D_{B'}$, $\\delta_{B''B'}$, $D=D_B$, $\\delta_{B'}=\\delta_{BB'}$ in the same way for $(j_{V_b!}\\underline{T_b})_{b\\in B}$. Let $r,s:D\\rightrightarrows C$ be morphisms and $q:C\\to\\mathcal F$ a coequalizer of $r,s$. Assume (finite supports, as in [lem-weil-pbc-sheaf-finite-relation-truncations]): for every finite $B'\\subseteq B$ there is a finite $A'\\subseteq A$ such that $r\\delta_{B'}$ and $s\\delta_{B'}$ both factor through $\\kappa_{A'}$. Let $\\Lambda$ be the set of pairs $\\lambda=(B',A')$ of finite subsets $B'\\subseteq B$, $A'\\subseteq A$ such that $r\\delta_{B'}=\\kappa_{A'}r_\\lambda$ and $s\\delta_{B'}=\\kappa_{A'}s_\\lambda$ for some morphisms $r_\\lambda,s_\\lambda:D_{B'}\\to C_{A'}$, ordered by $(B',A')\\le(B'',A'')$ iff $B'\\subseteq B''$ and $A'\\subseteq A''$. Then: (1) $r_\\lambda,s_\\lambda$ are uniquely determined by $\\lambda$, and $\\Lambda$ is a directed set (nonempty, any two elements have a common upper bound); (2) for $\\lambda=(B',A')$ let $q_\\lambda:C_{A'}\\to\\mathcal F_\\lambda$ be a coequalizer of $r_\\lambda,s_\\lambda$; for $\\lambda\\le\\mu=(B'',A'')$ there is a unique morphism $\\varphi_{\\mu\\lambda}:\\mathcal F_\\lambda\\to\\mathcal F_\\mu$ with $\\varphi_{\\mu\\lambda}q_\\lambda=q_\\mu\\kappa_{A''A'}$, and a unique $c_\\lambda:\\mathcal F_\\lambda\\to\\mathcal F$ with $c_\\lambda q_\\lambda=q\\kappa_{A'}$; these satisfy $\\varphi_{\\lambda\\lambda}=\\mathrm{id}$, $\\varphi_{\\nu\\mu}\\varphi_{\\mu\\lambda}=\\varphi_{\\nu\\lambda}$ and $c_\\mu\\varphi_{\\mu\\lambda}=c_\\lambda$; (3) $(\\mathcal F,(c_\\lambda)_{\\lambda\\in\\Lambda})$ is a colimit of the system $(\\mathcal F_\\lambda,\\varphi_{\\mu\\lambda})$ over $\\Lambda$ in the category of sheaves of sets on $X$. Thus $\\mathcal F$ is a directed colimit of coequalizers of pairs of maps between finite coproducts of sheaves $j_{U!}\\underline S$.",
  "source": {
   "document": "literature/stacks-project/modules.tex",
   "place": "Modules, Lemma Tag 0CAI (lemma-filtered-colimit-constructibles), proof at lines 3058-3064: the finite cokernels form the filtered colimit"
@@ -10,11 +10,76 @@
  "stmt_deps": [
   "def-weil-pbc-sets-extension-by-empty",
   "def-weil-pbc-category-colimit",
-  "lem-weil-pbc-sheaf-finite-relation-truncations"
+  "lem-weil-pbc-sheaf-finite-relation-truncations",
+  "def-weil-pbc-sites-and-cohomology"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "*Step 1 (the truncated relations and the directed set).* By [lem-weil-pbc-sheaf-coproduct-finite-subcoproducts](2) every $\\kappa_{A''A'}$ ($A'\\subseteq A''\\subseteq A$) is injective on sections over every open $W$, hence a monomorphism of sheaves: if $\\kappa_{A''A'}f=\\kappa_{A''A'}g$ for $f,g:\\mathcal G\\to C_{A'}$, then $f_W=g_W$ for every $W$. Since $\\kappa_{A'}$ is a monomorphism, $r_\\lambda,s_\\lambda$ are unique for $\\lambda=(B',A')\\in\\Lambda$. For $\\lambda\\le\\mu=(B'',A'')$ the two morphisms $\\kappa_{A''A'}r_\\lambda$ and $r_\\mu\\delta_{B''B'}$ agree after composing with the monomorphism $\\kappa_{A''}$: $\\kappa_{A''}\\kappa_{A''A'}r_\\lambda=\\kappa_{A'}r_\\lambda=r\\delta_{B'}=r\\delta_{B''}\\delta_{B''B'}=\\kappa_{A''}r_\\mu\\delta_{B''B'}$ (the identities $\\kappa_{A''}\\kappa_{A''A'}=\\kappa_{A'}$, $\\delta_{B''}\\delta_{B''B'}=\\delta_{B'}$ hold on each summand by the uniqueness in the universal property of the coproduct [def-weil-pbc-category-colimit]); hence $\\kappa_{A''A'}r_\\lambda=r_\\mu\\delta_{B''B'}$, and likewise $\\kappa_{A''A'}s_\\lambda=s_\\mu\\delta_{B''B'}$. $\\Lambda$ is nonempty: $D_\\emptyset$ and $C_\\emptyset$ are initial objects, so $(\\emptyset,\\emptyset)\\in\\Lambda$ with $r_{(\\emptyset,\\emptyset)}=s_{(\\emptyset,\\emptyset)}$ the unique map. Upper bounds: for $(B_1,A_1),(B_2,A_2)\\in\\Lambda$ put $B_3=B_1\\cup B_2$, $A_3=A_1\\cup A_2$ and let $r_3:D_{B_3}\\to C_{A_3}$ be the morphism with $r_3\\iota^{B_3}_b=\\kappa_{A_3A_i}r_{(B_i,A_i)}\\iota^{B_i}_b$ for any $i$ with $b\\in B_i$ (if $b\\in B_1\\cap B_2$ the two choices agree, since both become $r\\iota^B_b$ after composing with the monomorphism $\\kappa_{A_3}$); then $\\kappa_{A_3}r_3\\iota^{B_3}_b=\\kappa_{A_i}r_{(B_i,A_i)}\\iota^{B_i}_b=r\\delta_{B_i}\\iota^{B_i}_b=r\\delta_{B_3}\\iota^{B_3}_b$ for every $b$, so $\\kappa_{A_3}r_3=r\\delta_{B_3}$, and the same for $s$; so $(B_3,A_3)\\in\\Lambda$ is an upper bound.",
+   "uses": [
+    "lem-weil-pbc-sheaf-coproduct-finite-subcoproducts",
+    "def-weil-pbc-category-colimit"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/modules.tex",
+    "place": "Modules, proof of Lemma Tag 0CAI (lemma-filtered-colimit-constructibles), lines 3058-3064: 'Thus our sheaf is the colimit of the cokernels of these maps between finite coproducts'"
+   }
+  },
+  {
+   "text": "*Step 2 (the system and the cocone).* Coequalizers of sheaves of sets exist [lem-weil-pbc-sheaves-colimit-sheafification]; choose $q_\\lambda:C_{A'}\\to\\mathcal F_\\lambda$ for each $\\lambda=(B',A')$. For $\\lambda\\le\\mu=(B'',A'')$, by Step 1, $q_\\mu\\kappa_{A''A'}r_\\lambda=q_\\mu r_\\mu\\delta_{B''B'}=q_\\mu s_\\mu\\delta_{B''B'}=q_\\mu\\kappa_{A''A'}s_\\lambda$, so by the universal property of the coequalizer [def-weil-pbc-category-colimit] there is exactly one $\\varphi_{\\mu\\lambda}$ with $\\varphi_{\\mu\\lambda}q_\\lambda=q_\\mu\\kappa_{A''A'}$. Similarly $q\\kappa_{A'}r_\\lambda=qr\\delta_{B'}=qs\\delta_{B'}=q\\kappa_{A'}s_\\lambda$ gives exactly one $c_\\lambda$ with $c_\\lambda q_\\lambda=q\\kappa_{A'}$. A coequalizer map is an epimorphism (uniqueness clause of its universal property), so identities between maps out of $\\mathcal F_\\lambda$ may be checked after composing with $q_\\lambda$: $\\varphi_{\\lambda\\lambda}q_\\lambda=q_\\lambda$ gives $\\varphi_{\\lambda\\lambda}=\\mathrm{id}$; $\\varphi_{\\nu\\mu}\\varphi_{\\mu\\lambda}q_\\lambda=q_\\nu\\kappa_{A'''A''}\\kappa_{A''A'}=q_\\nu\\kappa_{A'''A'}=\\varphi_{\\nu\\lambda}q_\\lambda$ for $\\lambda\\le\\mu\\le\\nu=(B''',A''')$; and $c_\\mu\\varphi_{\\mu\\lambda}q_\\lambda=q\\kappa_{A''}\\kappa_{A''A'}=q\\kappa_{A'}=c_\\lambda q_\\lambda$. This proves (1) and (2).",
+   "uses": [
+    "lem-weil-pbc-sheaves-colimit-sheafification",
+    "def-weil-pbc-category-colimit"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/modules.tex",
+    "place": "Modules, proof of Lemma Tag 0CAI (lemma-filtered-colimit-constructibles), lines 3058-3064: 'Thus our sheaf is the colimit of the cokernels of these maps between finite coproducts'"
+   }
+  },
+  {
+   "text": "*Step 3 (every index occurs).* For $a\\in A$, $\\lambda_a:=(\\emptyset,\\{a\\})\\in\\Lambda$ ($D_\\emptyset$ is initial). For $b\\in B$, the finite-support hypothesis applied to $B'=\\{b\\}$ gives a finite $A_b\\subseteq A$ with $(\\{b\\},A_b)=:\\lambda_b\\in\\Lambda$. (Here $C_{\\{a\\}}=j_{U_a!}\\underline{S_a}$ with $\\iota^{\\{a\\}}_a=\\mathrm{id}$, and $\\kappa_{\\{a\\}}=\\iota^A_a$.)",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/modules.tex",
+    "place": "Modules, proof of Lemma Tag 0CAI (lemma-filtered-colimit-constructibles), lines 3058-3064: 'Thus our sheaf is the colimit of the cokernels of these maps between finite coproducts'"
+   }
+  },
+  {
+   "text": "*Step 4 (existence of the induced map).* Let $(M,(\\mu_\\lambda)_{\\lambda\\in\\Lambda})$ be a cocone on the system, $\\mu_\\nu\\varphi_{\\nu\\lambda}=\\mu_\\lambda$. Let $v:C\\to M$ be the morphism with $v\\iota^A_a=\\mu_{\\lambda_a}q_{\\lambda_a}$ for all $a$ (universal property of the coproduct [def-weil-pbc-category-colimit]). For every $\\lambda=(B',A')$ we have $v\\kappa_{A'}=\\mu_\\lambda q_\\lambda$: on the summand $a\\in A'$, $\\lambda_a\\le\\lambda$ and $\\mu_\\lambda q_\\lambda\\iota^{A'}_a=\\mu_\\lambda q_\\lambda\\kappa_{A'\\{a\\}}=\\mu_\\lambda\\varphi_{\\lambda\\lambda_a}q_{\\lambda_a}=\\mu_{\\lambda_a}q_{\\lambda_a}=v\\iota^A_a=v\\kappa_{A'}\\iota^{A'}_a$. Then $vr=vs$: on the summand $b\\in B$ (Step 3), $vr\\iota^B_b=vr\\delta_{\\{b\\}}=v\\kappa_{A_b}r_{\\lambda_b}=\\mu_{\\lambda_b}q_{\\lambda_b}r_{\\lambda_b}=\\mu_{\\lambda_b}q_{\\lambda_b}s_{\\lambda_b}=vs\\iota^B_b$. So there is exactly one $u:\\mathcal F\\to M$ with $uq=v$ (coequalizer [def-weil-pbc-category-colimit]), and $uc_\\lambda=\\mu_\\lambda$ for every $\\lambda$, because $uc_\\lambda q_\\lambda=uq\\kappa_{A'}=v\\kappa_{A'}=\\mu_\\lambda q_\\lambda$ and $q_\\lambda$ is an epimorphism (Step 2).",
+   "uses": [
+    "def-weil-pbc-category-colimit"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/modules.tex",
+    "place": "Modules, proof of Lemma Tag 0CAI (lemma-filtered-colimit-constructibles), lines 3058-3064: 'Thus our sheaf is the colimit of the cokernels of these maps between finite coproducts'"
+   }
+  },
+  {
+   "text": "*Step 5 (uniqueness; conclusion).* If $u':\\mathcal F\\to M$ satisfies $u'c_\\lambda=\\mu_\\lambda$ for all $\\lambda$, then $u'q\\iota^A_a=u'q\\kappa_{\\{a\\}}=u'c_{\\lambda_a}q_{\\lambda_a}=\\mu_{\\lambda_a}q_{\\lambda_a}=v\\iota^A_a$ for every $a$, so $u'q=v=uq$ and $u'=u$ since $q$ is an epimorphism. Hence $(\\mathcal F,(c_\\lambda))$ is a colimit of the system over the directed set $\\Lambda$ [def-weil-pbc-category-colimit], which is (3). (Stacks states this as 'our sheaf is the colimit of the cokernels'; the verification above is the universal property written out. It is equivalent to interchanging the colimit over $\\Lambda$ with the coequalizer, Categories Lemma Tag 002M, together with the cofinality of $\\Lambda$ in the finite subsets of $A$ and of $B$ (Step 3) and [lem-weil-pbc-sheaf-coproduct-finite-subcoproducts](1); the direct check avoids the cofinality argument. Stacks' phrase is not 'finite colimits commute with filtered colimits', which would not apply here.)",
+   "uses": [
+    "def-weil-pbc-category-colimit"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/modules.tex",
+    "place": "Modules, proof of Lemma Tag 0CAI (lemma-filtered-colimit-constructibles), lines 3058-3064: 'Thus our sheaf is the colimit of the cokernels of these maps between finite coproducts'"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-sheaf-coproduct-finite-subcoproducts",
+  "def-weil-pbc-category-colimit",
+  "lem-weil-pbc-sheaves-colimit-sheafification"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/modules.tex",
+  "place": "Modules, proof of Lemma Tag 0CAI, lines 3058-3064 (the final sentence; the verification of the colimit property is written out, the source states it in one line)"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -36,10 +101,24 @@
    "results": "No theorem matching this sheaf-specific construction.",
    "date": "2026-10-10",
    "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "coproduct is the filtered colimit of finite subcoproducts over finsets",
+   "results": "CategoryTheory.Limits.CoproductsFromFiniteFiltered.isColimitFiniteSubproductsCocone, finiteSubcoproductsCocone, hasCoproducts_of_finite_and_filtered (Mathlib.CategoryTheory.Limits.Constructions.Filtered)",
+   "date": "2026-10-10",
+   "verdict": "no match for the item (covers only the coproduct part, already the leaf lem-weil-pbc-sheaf-coproduct-finite-subcoproducts); no statement about coequalizers of truncated relations"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -n 'colimitUncurryIsoColimitCompColim\\|colimitFlipIsoCompColim' Mathlib/CategoryTheory/Limits/Fubini.lean",
+   "results": "colimitUncurryIsoColimitCompColim (line 510) and its simp lemmas: interchange of colimits over a product category",
+   "date": "2026-10-10",
+   "verdict": "no match: generic Fubini for colimits over J x K; the item's index category Lambda is not a product of the coequalizer shape with a fixed index and needs cofinality on top, so it does not specialize in one line"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "worker",
@@ -59,5 +138,17 @@
   }
  },
  "chapter": "sec-proper-base-change",
- "unit": "sk-thm-p1"
+ "unit": "sk-thm-p1",
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "lem-weil-pbc-sheaf-finite-truncation-colimit",
+  "worker": "stage1",
+  "summary": "Statement sharpened (the old text said only 'a directed colimit ... index set of finite source subsets with finite target supports'): it now introduces the subcoproducts C_{A'}, D_{B'} and the maps kappa, delta, the relation maps r,s and the coequalizer q, states the finite-support hypothesis explicitly (pointer to lem-weil-pbc-sheaf-finite-relation-truncations kept in stmt_deps as instructed), defines Lambda = pairs (B',A') with factorizations, the truncated coequalizers F_lambda, the transition maps and cocone maps by their defining identities, and says the colimit is in sheaves of sets on X; def-weil-pbc-sites-and-cohomology added to stmt_deps. Proof in 5 steps following the last sentence of the Stacks 0CAI proof: (1) uniqueness of the factorizations and directedness, from the injectivity of subcoproduct inclusions (existing leaf lem-weil-pbc-sheaf-coproduct-finite-subcoproducts (2)); (2) transition and cocone maps via the coequalizer property, existence of coequalizers from lem-weil-pbc-sheaves-colimit-sheafification; (3) every a and every b occurs in some index; (4)-(5) the universal property of the colimit checked directly. No new node: interchange of colimits (Categories 002M) was not needed, since the direct verification avoids the cofinality argument it would also require."
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "result": "accepted",
+  "note": "5 steps: statement made precise (directed set Lambda of finite index pairs, transition maps, cocone maps); monomorphy of the subcoproduct inclusions from the finite-subcoproducts leaf, directedness, the induced maps via coequalizers, and the universal property of the colimit checked directly (instead of interchange of colimits plus cofinality). No new nodes."
+ }
 }
