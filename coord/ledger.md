@@ -1415,3 +1415,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 12:30 L: merged E1 lem-weil-pbc-valuation-ring-normal (00IC) and J1 lem-weil-pbc-essentially-finite-presentation-over-intermediate (+1 leaf). G1 lem-galois-transitive returned: a Mathlib leaf through Mathlib's (SGA1) Galois category while the DAG's definition is Stacks', the same rule as for the other Galois nodes.
 - 12:30 L: accepted lem-weil-pbc-hypercover-one-more-simplex (01GM, 7 steps; new nodes 018R, 017N, 018V).
 - 2026-10-10, delivery of F1: def-sc-divisor merged from deliver/F1/def-sc-divisor (1 commit(s), 1 new node(s), spot-checked by L: L: definition split (divisors, principal divisors via the DVR valuations of a smooth curve, Cl); new node for the finiteness of the support); claim closed
+- 12:31 L: merged F1 def-sc-divisor (definition, +1 node).
