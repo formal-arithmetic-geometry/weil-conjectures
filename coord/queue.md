@@ -1,8 +1,8 @@
 # Work queue
 
-873 items; claim with `tools/claim.py next <group> [--stage N]`.
+871 items; claim with `tools/claim.py next <group> [--stage N]`.
 
-## Stage 1: nodes to split (80)
+## Stage 1: nodes to split (77)
 
 | node | distance to a target | Lean state on the done branch |
 |---|---|---|
@@ -39,7 +39,7 @@
 | `lem-pc-affine-flat-module-descent` | 5016 | none |
 | `thm-sp-spectral-object-yields` | 6006 | none |
 | `lem-sp-cartan-eilenberg-double-complex-homotopy` | 6007 | none |
-| `lem-sc-picard-diagonal-locally-closed` | 6012 | none |
+| `lem-sc-perfect-h0-locally-closed` | 6013 | none |
 | `lem-sc-picard-h1-multiple-locus` | 6013 | none |
 | `lem-sc-picard-h1-product-injective` | 6013 | none |
 | `lem-sc-picard-locus-closed-valuation-criterion` | 6013 | none |
@@ -56,9 +56,7 @@
 | `lem-sc-affine-constant-second` | - | rests_on_sorry |
 | `lem-kun-cp-approximation` | - | none |
 | `lem-sc-zariski-flasque-acyclic` | - | none |
-| `lemma-nagata-qc-open-eq-eventually` | - | none |
 | `prop-pur-kinjective-resolutions-exist` | - | none |
-| `lem-kun-04ca` | - | none |
 | `lem-kun-support-geometric-point-independent` | - | none |
 | `lem-pc-flat-rf-open` | - | rests_on_sorry |
 | `lem-pc-projective-space-coherent-finiteness` | - | sorry_here |
@@ -81,13 +79,12 @@
 | `lem-sc-p1-coherent-finite` | - | rests_on_sorry |
 | `def-exc-etale-algebra-lift` | - | none |
 | `lem-pc-projective-coordinate-model` | - | sorry_here |
-| `def-exc-jacobian-presentation` | - | none |
 | `def-pur-hom-complex` | - | none |
 | `lem-pur-rhom-global-sections` | - | none |
 | `lem-pur-rhom-well-defined` | - | none |
 | `lem-zl-noether-normalization-dimension` | - | none |
 
-## Stage 2: nodes to state (793)
+## Stage 2: nodes to state (794)
 
 | node | distance to Mathlib | kind |
 |---|---|---|
@@ -326,6 +323,7 @@
 | `lem-sc-p1-tor-dimension-shifting` | 1 | state |
 | `lem-sc-pic-proper-decomposition` | 1 | state |
 | `lem-sc-pic-proper-ntorsion` | 1 | state |
+| `lem-sc-picard-diagonal-locally-closed` | 1 | state |
 | `lem-sc-point-tangent-finite-local-cotangent-surjective` | 1 | state |
 | `lem-sc-point-z-cohomology` | 1 | state |
 | `lem-sc-positive-ample-hilbert-degree` | 1 | state |
@@ -885,7 +883,7 @@
 | `lem-weil-pbc-projective-space-zero-isomorphism` | 4 | state |
 | `def-nagata-fixed-base-separated-stage` | 6 | state |
 
-Not open yet: 1630 nodes that wait for a statement dependency, 118 nodes that wait for stage 1.
+Not open yet: 1633 nodes that wait for a statement dependency, 115 nodes that wait for stage 1.
 
 ## Stage 3: modules to prove (0)
 
