@@ -6,6 +6,8 @@ Authors: Claude
 module
 
 public import WeilConjectures.EtaleCohomology.Purity.Smooth.Conventions
+public import WeilConjectures.Mathlib.CategoryTheory.Monoidal.Rigid.Basic
+public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriekToLowerStar
 
 /-!
 # Co-projection for a closed immersion
@@ -18,12 +20,14 @@ for regular closed immersions (`WeilConjectures.EtaleCohomology.Purity.Smooth.Re
 
 ## Main statements
 
+- `AlgebraicGeometry.Etale.rightDerivedUpperShriekDerivedTensorIsoOfTensorInverse`: co-projection
+  for a general coefficient category.
 - `AlgebraicGeometry.Etale.nonempty_iso_rightDerivedUpperShriek_derivedTensor_of_isInvertible`
 -/
 
 @[expose] public section
 
-universe u
+universe u' u
 
 open CategoryTheory Limits MonoidalCategory
 
@@ -35,8 +39,33 @@ open Scheme
 
 namespace Etale
 
+section General
+
+variable (A : Type u') [Category.{u + 1} A] [Abelian A] [IsGrothendieckAbelian.{u + 1} A]
+  [MonoidalCategory A] [MonoidalPreadditive A] [SymmetricCategory A] [MonoidalClosed A]
+  [Abelian.HasFunctorialFlatResolution A] {X Z : Scheme.{u}}
+
+/-- Co-projection for a closed immersion `i : Z ⟶ X`, for a general coefficient category `A`:
+if `L` has a two-sided tensor inverse `M`, then `Ri^! (K ⊗^L L) ≅ Ri^! K ⊗^L Li^* L`. Here
+`Ri^!` is right adjoint to `Ri_! ≅ Ri_*`, which is right adjoint to the monoidal functor `Li^*`,
+so this is `CategoryTheory.tensorRightCompIsoOfTensorInverse`. -/
+noncomputable def rightDerivedUpperShriekDerivedTensorIsoOfTensorInverse (i : Z ⟶ X)
+    [IsClosedImmersion i] [HasCompactification i] [(R(i)_![A]).IsLeftAdjoint]
+    [(i)^*[A].PreservesFlat] (K L M : _root_.DerivedCategory (Sheaf X.smallEtaleTopology A))
+    (e₁ : ((derivedTensor A X).obj L).obj M ≅ 𝟙_ _)
+    (e₂ : ((derivedTensor A X).obj M).obj L ≅ 𝟙_ _) :
+    (R(i)^![A]).obj (((derivedTensor A X).obj K).obj L) ≅
+      ((derivedTensor A Z).obj ((R(i)^![A]).obj K)).obj ((L((i)^*[A])).obj L) :=
+  (tensorRightCompIsoOfTensorInverse (derivedUpperStarLowerStarAdjunction A i)
+    ((rightDerivedUpperShriekAdjunction A i).ofNatIsoLeft
+      (rightDerivedLowerShriekIsoRightDerivedLowerStar A i))
+    (leftDerivedUpperStarTensorNatIso A i) (leftDerivedUpperStarUnitIso A i) e₁ e₂).app K
+
+end General
+
 variable (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ] [HasTateTwist Λ] {X Z : Scheme.{u}}
 
+omit [HasTateTwist Λ] in
 /-- Blueprint `sk-lem-coprojection`: Co-projection for a closed immersion
 
 For a closed immersion `i : Z ⟶ X`, a complex `K ∈ D^b_{ctf}(X, Λ)` and an object `L` of
@@ -55,15 +84,16 @@ Taking `L = Λ_X(m)[2m]`, whose restriction is `Λ_Z(m)[2m]`, this reads
 theorem nonempty_iso_rightDerivedUpperShriek_derivedTensor_of_isInvertible
     (i : Z ⟶ X) [IsClosedImmersion i] [HasCompactification i]
     (K L : _root_.DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)))
-    (hK : DerivedCategory.boundedConstructibleFiniteTor Λ X K)
-    (hLctf : DerivedCategory.boundedConstructibleFiniteTor Λ X L)
+    (_hK : DerivedCategory.boundedConstructibleFiniteTor Λ X K)
+    (_hLctf : DerivedCategory.boundedConstructibleFiniteTor Λ X L)
     (hL : DerivedCategory.isInvertible Λ X L) :
     Nonempty ((rightDerivedUpperShriek (ModuleCat.{u + 1} Λ) i).obj
         (((derivedTensor (ModuleCat.{u + 1} Λ) X).obj K).obj L) ≅
       ((derivedTensor (ModuleCat.{u + 1} Λ) Z).obj
           ((rightDerivedUpperShriek (ModuleCat.{u + 1} Λ) i).obj K)).obj
-        ((L((i)^*[ModuleCat.{u + 1} Λ])).obj L)) :=
-  sorry
+        ((L((i)^*[ModuleCat.{u + 1} Λ])).obj L)) := by
+  obtain ⟨M, ⟨e₁⟩, ⟨e₂⟩⟩ := hL
+  exact ⟨rightDerivedUpperShriekDerivedTensorIsoOfTensorInverse (ModuleCat.{u + 1} Λ) i K L M e₁ e₂⟩
 
 end Etale
 

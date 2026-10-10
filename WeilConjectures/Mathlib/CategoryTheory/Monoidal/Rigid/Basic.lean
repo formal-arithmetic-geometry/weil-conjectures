@@ -29,6 +29,8 @@ two-sided tensor inverse (`CategoryTheory.IsInvertible.isDualizable`).
   internal hom `ihom X` is `Y ⊗ -`.
 - `CategoryTheory.MonoidalClosed.ihomUnitTensorToIhom`: the canonical comparison map
   `(ihom X).obj (𝟙_ C) ⊗ Z ⟶ (ihom X).obj Z`.
+- `CategoryTheory.tensorRightCompIsoOfTensorInverse`: for `F ⊣ G ⊣ H` with `F` monoidal and `L`
+  invertible, `H (K ⊗ L) ≅ H K ⊗ F L` (co-projection).
 
 ## Main statements
 
@@ -290,5 +292,47 @@ noncomputable def exactPairingOfIsIso : ExactPairing ((ihom X).obj (𝟙_ C)) X 
   evaluation_coevaluation' := evaluation_coevaluationOfIsIso X
 
 end MonoidalClosed
+
+section TensorInverse
+
+variable {D : Type*} [Category D] [MonoidalCategory D] {F : C ⥤ D} {G : D ⥤ C} {H : C ⥤ D}
+  (adj₁ : F ⊣ G) (adj₂ : G ⊣ H)
+  (τ : (Functor.postcompose₂.obj F).obj (curriedTensor C) ≅
+    (((Functor.whiskeringLeft₂ D).obj F).obj F).obj (curriedTensor D))
+  (η : F.obj (𝟙_ C) ≅ 𝟙_ D) {L M : C} (e₁ : L ⊗ M ≅ 𝟙_ C) (e₂ : M ⊗ L ≅ 𝟙_ C)
+
+/-- A functor `F` with `F (K ⊗ M) ≅ F K ⊗ F M` naturally commutes with tensoring on the right
+by an object: `F (K ⊗ L) ≅ F K ⊗ F L`, naturally in `K`. -/
+noncomputable def tensorRightCompIsoOfTensorNatIso (L : C) :
+    tensorRight L ⋙ F ≅ F ⋙ tensorRight (F.obj L) :=
+  NatIso.ofComponents (fun K ↦ (τ.app K).app L) fun f ↦ NatTrans.congr_app (τ.hom.naturality f) L
+
+include adj₁ in
+/-- Let `F ⊣ G` with `F` monoidal, and let `L` have a two-sided tensor inverse `M`. Then `G`
+commutes with tensoring by `M` up to applying `F` to it: `G A ⊗ M ≅ G (A ⊗ F M)`, naturally in
+`A`. Both functors are right adjoint to `K ↦ F (K ⊗ L) ≅ F K ⊗ F L`. -/
+noncomputable def compTensorRightIsoOfTensorInverse :
+    G ⋙ tensorRight M ≅ tensorRight (F.obj M) ⋙ G :=
+  letI := exactPairingOfTensorIso e₁ e₂
+  letI := exactPairingOfTensorIso (((τ.app L).app M).symm ≪≫ F.mapIso e₁ ≪≫ η)
+    (((τ.app M).app L).symm ≪≫ F.mapIso e₂ ≪≫ η)
+  conjugateIsoEquiv ((tensorRightAdjunction L M).comp adj₁)
+    (adj₁.comp (tensorRightAdjunction (F.obj L) (F.obj M)))
+    (tensorRightCompIsoOfTensorNatIso τ L).symm
+
+/-- **Co-projection.** Let `F ⊣ G ⊣ H` with `F` monoidal, and let `L` have a two-sided tensor
+inverse. Then `H` commutes with tensoring by `L` up to applying `F` to it:
+`H (K ⊗ L) ≅ H K ⊗ F L`, naturally in `K`. Both functors are right adjoint to
+`A ↦ G A ⊗ M ≅ G (A ⊗ F M)`, by `CategoryTheory.compTensorRightIsoOfTensorInverse`. -/
+noncomputable def tensorRightCompIsoOfTensorInverse :
+    tensorRight L ⋙ H ≅ H ⋙ tensorRight (F.obj L) :=
+  letI := exactPairingOfTensorIso e₂ e₁
+  letI := exactPairingOfTensorIso (((τ.app M).app L).symm ≪≫ F.mapIso e₂ ≪≫ η)
+    (((τ.app L).app M).symm ≪≫ F.mapIso e₁ ≪≫ η)
+  conjugateIsoEquiv (adj₂.comp (tensorRightAdjunction M L))
+    ((tensorRightAdjunction (F.obj M) (F.obj L)).comp adj₂)
+    (compTensorRightIsoOfTensorInverse adj₁ τ η e₁ e₂).symm
+
+end TensorInverse
 
 end CategoryTheory
