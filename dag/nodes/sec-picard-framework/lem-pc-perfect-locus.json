@@ -3,7 +3,7 @@
  "blueprint": {
   "is": "lem-pc-perfect-locus",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "The perfect locus with fixed degree",
@@ -17,43 +17,81 @@
   "def-pc-derived-category",
   "def-pc-derived-pullback",
   "def-pc-invertible-in-degree-zero",
-  "def-pc-morphism-conventions"
+  "def-pc-morphism-conventions",
+  "def-pc-perfect-complex"
  ],
  "proof": [
   {
-   "text": "If $r<0$, take $U=\\varnothing$. Otherwise let $x\\in X$. By\n[def-pc-perfect-complex], near $x$ the object $E$ is represented\nby a bounded complex $M^\\bullet$ of finite free modules: the finitely\nmany projective terms can all be made free after shrinking.\nOver the local ring $\\mathcal O_{X,x}$, if a matrix of a differential\nhas a unit entry, row and column operations put that entry in a\n$1\\times1$ identity block. The equations $d^{j+1}d^j=0$ and\n$d^jd^{j-1}=0$ force the adjacent maps into and out of this block\nto be zero. Hence a contractible two-term summand splits off.\nEach operation decreases the sum of the ranks of the terms by two,\nso after finitely many operations the remaining complex has every\ndifferential matrix in the maximal ideal.",
+   "text": "If $r<0$, take $U=\\varnothing$. Otherwise let $x\\in X$. By [def-pc-perfect-complex], on an affine open $\\mathrm{Spec}(A)\\ni x$ the object $E$ is represented by a bounded complex of finite projective $A$-modules; since it has finitely many terms, [lem-weil-pbc-finite-projective-standard-free-cover] applied to each term gives a principal open $\\mathrm{Spec}(A_g)\\ni x$ on which $E$ is represented by a bounded complex $M^\\bullet$ of finite free modules. Over the local ring $\\mathcal O_{X,x}$, repeatedly apply [lem-weil-pbc-free-complex-unit-entry-splits] whenever a differential has a unit matrix entry. Each application splits off a contractible two-term identity complex and lowers the sum of the ranks, so the process terminates with a bounded finite-free complex whose differential matrices all lie in the maximal ideal.",
    "uses": [
-    "def-pc-perfect-complex"
+    "def-pc-perfect-complex",
+    "lem-weil-pbc-finite-projective-standard-free-cover",
+    "lem-weil-pbc-free-complex-unit-entry-splits"
    ],
    "elementary": false
   },
   {
-   "text": "Its residue-field differential is zero. Therefore, if\n$H^j(E\\otimes^{\\mathbf L}\\kappa(x))$ vanishes for $j\\ne i$ and\nhas dimension $r$ in degree $i$, the remaining free terms have\nrank zero except in degree $i$, where the rank is $r$.\nAll the changes of bases and the inverses of unit entries used in\nthis finite calculation are defined on an open neighbourhood of\n$x$. On that neighbourhood $E$ is consequently quasi-isomorphic\nto $\\mathcal O^{\\oplus r}[-i]$.",
-   "uses": [],
-   "elementary": null
+   "text": "The remaining differential becomes zero after tensoring with the residue field because all its entries lie in the maximal ideal. Hence its fibre cohomology is the remaining graded vector space. If the fibre cohomology is zero outside degree $i$ and has dimension $r$ in degree $i$, the remaining free terms have rank zero outside degree $i$ and rank $r$ in degree $i$. The finitely many basis changes and inverses used above are defined on an open neighbourhood of $x$, where $E$ is therefore quasi-isomorphic to $\\mathcal O^{\\oplus r}[-i]$.",
+   "uses": [
+    "lem-pc-finrank-field-base-change"
+   ],
+   "elementary": true
   },
   {
-   "text": "Define $U$ to be the set of points satisfying this residue-field\ncohomology condition. The preceding construction proves that $U$\nis open and that $E|_U$ is locally a free rank-$r$ module in degree\n$i$. Such local descriptions agree on overlaps through the\ncohomology sheaf $H^i(E)|_U$, which is therefore locally free of\nrank $r$, with $E|_U\\simeq H^i(E)|_U[-i]$.",
+   "text": "Define $U$ to be the set of points satisfying the residue-field cohomology condition. The neighbourhood construction in the preceding step shows that $U$ is open and that $E|_U$ is locally a free rank-$r$ module in degree $i$. On overlaps these descriptions agree through the cohomology sheaf $H^i(E)|_U$, so $H^i(E)|_U$ is locally free of rank $r$ and $E|_U\\simeq H^i(E)|_U[-i]$.",
    "uses": [],
-   "elementary": null
+   "elementary": true
   },
   {
-   "text": "If $f:Y\\to X$ factors through $U$, these finite free descriptions\npull back to show that $Lf^*E$ has the required form. Conversely,\nif $Lf^*E$ has that form, for any $y\\in Y$ with image $x$ its\nderived fibre equals\n$(E\\otimes^{\\mathbf L}\\kappa(x))\\otimes_{\\kappa(x)}\\kappa(y)$.\nExtension of fields is faithfully flat and preserves dimensions,\nso $x$ satisfies exactly the defining condition of $U$. Thus the\nimage of $f$ is contained in $U$, which is equivalent to factoring\nthrough that open subscheme.",
-   "uses": [],
-   "elementary": null
+   "text": "If $f:Y\\to X$ factors through $U$, the local finite-free descriptions pull back term by term by [lem-pc-flat-complex-derived-pullback] and show that $Lf^*E$ has the required form. Conversely, suppose $Lf^*E$ has that form, let $y\\in Y$ with image $x$, and let $j_y:\\mathrm{Spec}\\,\\kappa(y)\\to Y$, $j_x:\\mathrm{Spec}\\,\\kappa(x)\\to X$ be the canonical morphisms, so $f\\circ j_y=j_x\\circ(\\mathrm{Spec}\\,\\kappa(y)\\to\\mathrm{Spec}\\,\\kappa(x))$. By [lem-pc-ringed-spaces-derived-pullback-composition], $Lj_y^*Lf^*E\\cong L(\\mathrm{Spec}\\,\\kappa(y)\\to\\mathrm{Spec}\\,\\kappa(x))^*Lj_x^*E$. Computing both sides with the local finite-free representative $M^\\bullet$ of $E$ near $x$ (a bounded complex of flat modules, so pulled back term by term by [lem-pc-flat-complex-derived-pullback], with [def-pc-derived-pullback]), the derived fibre of $Lf^*E$ at $y$ is $(M^\\bullet\\otimes\\kappa(x))\\otimes_{\\kappa(x)}\\kappa(y)$, while that of $L[-i]$ ($L$ locally free of rank $r$) is $\\kappa(y)^{r}$ in degree $i$. A field extension is faithfully flat, and the scalar-extension dimension formula [lem-pc-finrank-field-base-change] preserves the vanishing and dimension of the finite-dimensional fibre cohomology. Thus $x$ satisfies the defining condition of $U$; the image of $f$ is contained in $U$, equivalently $f$ factors through the open subscheme $U$.",
+   "uses": [
+    "lem-pc-flat-complex-derived-pullback",
+    "lem-pc-ringed-spaces-derived-pullback-composition",
+    "def-pc-derived-pullback",
+    "lem-pc-finrank-field-base-change"
+   ],
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "def-pc-perfect-complex"
+  "def-pc-perfect-complex",
+  "lem-weil-pbc-finite-projective-standard-free-cover",
+  "lem-weil-pbc-free-complex-unit-entry-splits",
+  "lem-pc-finrank-field-base-change",
+  "lem-pc-flat-complex-derived-pullback",
+  "lem-pc-ringed-spaces-derived-pullback-composition",
+  "def-pc-derived-pullback"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/master/blueprint/sec-picard-framework/sk-thm-picard-perfect/lem-pc-perfect-locus.md",
   "place": "## Proof"
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "splitting a bounded complex of finite free modules over a local ring by contractible summands when a differential has a unit entry",
+   "results": "SimplicialObject.Splitting.nondegComplex; CochainComplex.isSplitEpi_to_singleFunctor_obj_of_projective; LinearMap.split_surjective_of_localization_maximal; CategoryTheory.ShortComplex.Splitting; no complex cancellation theorem",
+   "date": "2026-10-11",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "LocalRing matrix differential contractible complex",
+   "results": "Unknown identifier LocalRing; no hit",
+   "date": "2026-10-11",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rn 'contractible|unit entry|finite free complex' Mathlib/Algebra/Homology Mathlib/RingTheory",
+   "results": "no matches",
+   "date": "2026-10-11",
+   "verdict": "no match"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [
   "long_proof_few_deps",
@@ -203,5 +241,33 @@
   }
  },
  "chapter": "sec-picard-framework",
- "unit": "sk-thm-picard-perfect"
+ "unit": "sk-thm-picard-perfect",
+ "split_report": {
+  "date": "2026-10-11",
+  "item": "lem-pc-perfect-locus",
+  "worker": "stage1",
+  "summary": "Split the imported proof into four complete steps. The local cancellation argument uses the existing Stacks Tag 00MT node lem-weil-pbc-free-complex-unit-entry-splits; the scalar-extension dimension calculation uses the existing Mathlib leaf lem-pc-finrank-field-base-change. No new nodes were needed.",
+  "blueprint": "Steps realize the blueprint proof paragraphs: the r<0/local finite-free reduction, residue-field calculation, construction of the open locus, and the factorisation criterion.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-free-complex-unit-entry-splits",
+    "why": "The local finite-free cancellation in Step 1 is a generic chain-complex tool supplied by Tag 00MT and is not a route-specific node of this unit."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-free-complex-unit-entry-splits",
+  "lem-weil-pbc-finite-projective-standard-free-cover",
+  "lem-pc-flat-complex-derived-pullback",
+  "lem-pc-ringed-spaces-derived-pullback-composition",
+  "lem-weil-pbc-free-complex-unit-entry-splits"
+ ],
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-plo3026",
+  "group": "C1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-plo3026 (reviewer sub-agent of L); spot-checked: Statement matches blueprint and K1 lem-pc-flat-rf-open use (C4 ok); Steps 1-4 prove both directions of the universal property; r<0 case. FIX more, RETURN less: (1) C1 Step 4 derived-fibre identity needs Lj_y^* Lf^* = L(f j_y)^*: cited existing lem-pc-ringed-spaces-derived-pullback-composition (generic tool; missed by the second reading); (2) C1 Step 4 termwise pullback of the finite-free local model (forward direction and fibre): cited lem-pc-flat-complex-derived-pullback (generic tool); (3) C1 Step 1 finite projective terms to finite free after shrinking: cited lem-weil-pbc-finite-projective-standard-free-cover (generic tool). proof_deps updated.; 1 file(s) fixed by the reviewer"
+ }
 }

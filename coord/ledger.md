@@ -2926,3 +2926,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 23:09 L: merged deliver/K1/def-exc-etale-algebra-lift (reviewer PASS; first push; new nodes: 0)
 - 23:09 L: merged deliver/E1/lem-pc-tor-independent-perfect-tensor-base-change (reviewer FIX; after a return; new nodes: 1)
 - 23:09 L: merged deliver/K1/lem-pc-flat-rf-open (reviewer FIX; first push; new nodes: 0)
+- 23:10 L: merged deliver/C1/lem-pc-perfect-locus (reviewer FIX; first push; new nodes: 0)
