@@ -2962,3 +2962,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 23:25 L: merged deliver/E1/lem-sc-kummer-base-change-compatibility (reviewer FIX; after a return; new nodes: 2)
 - 23:25 L: merged deliver/G1/lem-pc-coherent-hi (reviewer FIX+NODE(1); after a return; new nodes: 3)
 - 23:25 L: merged deliver/K1/lem-sp-cartan-eilenberg-double-complex-homotopy (reviewer FIX; after a return; new nodes: 2)
+- 23:26 L: returned deliver/E1/lem-pc-ring-pseudo-coherent-localization-glue (reviewer RETURN: 1. C4: Step 1 cites lem-sc-affine-standard-cover-finite-projective, whose hypothesis is that each N_{f_i} is finite FREE)
