@@ -4,7 +4,7 @@
   "is": null,
   "from": {
    "node": "lem-galois-descent",
-   "place": "Step 2 full-faithfulness input: the pullback functor along an fpqc refinement is fully faithful (Stacks Tag 02W0, proved through Tag 0241)",
+   "place": "Step 2 full-faithfulness input: the pullback functor along an fpqc refinement is fully faithful (Stacks Tag 02W0, proved through Tag 0241); the diagonal specialization uses the identity clause following Definition 35.34.1 (Tag 023V)",
    "via": [
     "lem-galois-fpqc-refinement-fully-faithful"
    ]
@@ -23,9 +23,40 @@
   "def-pd-descent-datum",
   "def-pc-fibre-product"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "By the universal property of the fibre product, the diagonal $\\Delta:X\\to X\\times_YX$ is the unique map whose two composites with the projections are both $\\mathrm{id}_X$. Pulling back the descent datum along the diagonal therefore identifies each of $\\Delta^*\\mathrm{pr}_0^*V$ and $\\Delta^*\\mathrm{pr}_1^*V$ with $V$ over $X$.",
+   "uses": [
+    "def-pc-fibre-product"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/descent.tex",
+    "place": "Descent, Definition Tag 023V (line 8101) and the paragraph immediately following it (line 8143)"
+   }
+  },
+  {
+   "text": "Pull back the cocycle identity for $\\varphi$ along the triple diagonal $\\delta:X\\to X\\times_YX\\times_YX$; by the universal property of the fibre product, $\\mathrm{pr}_{01}\\circ\\delta=\\mathrm{pr}_{02}\\circ\\delta=\\mathrm{pr}_{12}\\circ\\delta=\\Delta$. Under the canonical identifications from Step 1, all three pullbacks of $\\varphi$ are the same endomorphism $e:=\\Delta^*\\varphi$ of $V$, so the cocycle gives $e=e\\circ e$. Since $\\varphi$ is an isomorphism by the definition of a descent datum, $e$ is an isomorphism; composing the equality on the left with $e^{-1}$ yields $\\mathrm{id}_V=e$, which is the asserted identity.",
+   "uses": [
+    "def-pd-descent-datum",
+    "def-pc-fibre-product"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/descent.tex",
+    "place": "Descent, Definition Tag 023V (line 8101), cocycle condition, and paragraph following Definition 35.34.1: 'In fact, $\\Delta^*\\varphi$ is equal to the identity' (line 8143)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-fibre-product",
+  "def-pd-descent-datum"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/descent.tex",
+  "place": "Descent, Definition Tag 023V and the paragraph following Definition 35.34.1 (line 8143)"
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -36,7 +67,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "R-sff",
@@ -52,5 +83,20 @@
   "slopmaster2": {
    "state": "none"
   }
+ },
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "lem-galois-descent-datum-diagonal-identity",
+  "worker": "stage1",
+  "summary": "The item had an empty proof. I split it into the fibre-product construction of the diagonal and its canonical pullback identifications, followed by the triple-diagonal pullback of the descent cocycle; the resulting idempotent is an isomorphism and hence the identity. Existing fibre-product and descent-datum definitions supply every cited fact, so no new nodes were needed.",
+  "blueprint": "The steps realize the ancestor blueprint node lem-galois-descent, Step 2's descent-datum diagonal identity input, corresponding to the paragraph following Definition 35.34.1 (Tag 023V, line 8143)."
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-ddi",
+  "group": "E1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-ddi (reviewer sub-agent of L); spot-checked: Source: Stacks descent.tex Definition 35.34.1 (label definition-descent-datum, Tag 023V, line 8101) and the paragraph at line 8143 ('In fact, Delta^*varphi is equal to the identity'); the item statement agrees with it (X->Y morphism, V over X, varphi descent datum, Delta^*varphi = id_V under the canonical identifications). Step 1 is carried by def-pc-fibre-product (universal property and uniqueness give Delta with pr_0 Delta = pr_1 Delta = id_X and the identifications Delta^* pr_k^* V = V). Step 2 is carried by def-pd-descent-datum (varphi an isomorphism, cocycle pr_02^*varphi = pr_12^*varphi o pr_01^*varphi over X_3): pullback along the triple diagonal gives e = e o e with e invertible, hence e = id; checked hypothesis by hypothesis. Only the item's file and the report changed, one commit, review section present; blueprint.from.place extended (split-owned), no new nodes, no Mathlib leaf. Small cases: X = Y (Delta = id, cocycle gives varphi = varphi o varphi, so varphi = id); Spec L -> Spec K Galois (cocycle phi_{st} = phi_s o s^*phi_t forces phi_1 = id). FIX: dag/nodes/sec-curve-estimates/lem-galois-descent-datum-diagonal-identity.json: proof[1].text and proof[1].uses: named the triple diagonal delta and stated pr_ij o delta = Delta by the universal property of the fibre product, and added def-pc-fibre-product to the step's uses (already in proof_deps). Start Sat Oct 10 03:55:21 PM UTC 2026, end Sat Oct 10 03:56:02 PM UTC 2026.; 1 file(s) fixed by the reviewer"
  }
 }

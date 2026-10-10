@@ -1878,3 +1878,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 15:55 L: merged deliver/M1/lem-sc-p1-graded-nakayama-free (reviewer FIX; first push; new nodes: 2)
 - 15:55 L: K1 re-push of merged lem-sc-conductor-ideal-restriction deleted again (third push), notice
 - 15:55 L: merged deliver/H1/lem-weil-pbc-etale-fibre-specialization-bound (reviewer FIX; after a return; new nodes: 0)
+- 15:56 L: merged deliver/E1/lem-galois-descent-datum-diagonal-identity (reviewer FIX; first push; new nodes: 0)
