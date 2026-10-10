@@ -6,6 +6,7 @@
 
 | node | distance to a target | Lean state on the done branch |
 |---|---|---|
+| `lem-weil-pbc-integral-closure-zariski-main-away` | 1011 | none |
 | `lem-weil-pbc-small-etale-representable-presheaf-sheaf` | 1011 | none |
 | `lem-weil-pbc-closed-immersion-conormal-flat-base-change` | 1012 | none |
 | `lem-weil-pbc-closed-immersion-conormal-functorial` | 1012 | none |
@@ -24,8 +25,6 @@
 | `lem-weil-pbc-smooth-localization-conormal-split` | 1012 | none |
 | `lem-weil-pbc-smooth-over-field-dimension-differentials` | 1012 | none |
 | `lem-weil-pbc-affine-basic-set-difference` | 1013 | none |
-| `lem-weil-pbc-quasi-coherent-extension-qc-open` | 1013 | none |
-| `lem-weil-pbc-quasi-finite-at-finite-subalgebra-away` | 1013 | none |
 | `lem-weil-pbc-quasi-finite-ring-map-integral-closure-open` | 1013 | none |
 | `lem-weil-pbc-regular-local-mcm-free` | 1013 | none |
 | `lem-weil-pbc-regular-local-separable-residue-smooth` | 1013 | none |
@@ -97,6 +96,7 @@
 | `lem-weil-pbc-polynomial-quotient-dimension-at-point-height-difference` | 1014 | none |
 | `lem-weil-pbc-polynomial-ring-maximal-localization-dimension` | 1014 | none |
 | `lem-weil-pbc-polynomial-ring-n2` | 1014 | none |
+| `lem-weil-pbc-quasi-coherent-module-direct-sum` | 1014 | none |
 | `lem-weil-pbc-schanuel` | 1014 | none |
 | `lem-weil-pbc-torsion-module-flat-base-change-iso` | 1014 | none |
 | `lem-weil-pbc-torsion-submodule-flat-base-change-iso` | 1014 | none |
@@ -777,7 +777,6 @@
 | `lem-weil-pbc-improve-presentation` | 1 | state |
 | `lem-weil-pbc-integral-closure-finite-fibre-choose-g` | 1 | state |
 | `lem-weil-pbc-integral-closure-finite-fibre-image-clopen` | 1 | state |
-| `lem-weil-pbc-integral-closure-finite-fibre-part-localization` | 1 | state |
 | `lem-weil-pbc-integral-extension-dimension` | 1 | state |
 | `lem-weil-pbc-integral-idempotent-annihilating-polynomial` | 1 | state |
 | `lem-weil-pbc-intersection-subfields-differentials` | 1 | state |
@@ -933,10 +932,11 @@
 | `lem-weil-pbc-zariski-pair-rank-one-propagation` | 1 | state |
 | `lemma-weil-pbc-finite-l-group-filtration` | 1 | state |
 | `lem-weil-pbc-finite-type-lift-nilpotent` | 2 | state |
+| `lem-weil-pbc-integral-closure-finite-fibre-part-localization` | 2 | state |
 | `lem-weil-pbc-p1-field-dimension-one` | 4 | state |
 | `lem-weil-pbc-projective-space-zero-isomorphism` | 4 | state |
 
-Not open yet: 621 nodes that wait for stage 1, 592 nodes that wait for a statement dependency.
+Not open yet: 621 nodes that wait for stage 1, 594 nodes that wait for a statement dependency.
 
 ## Stage 3: modules to prove (0)
 
