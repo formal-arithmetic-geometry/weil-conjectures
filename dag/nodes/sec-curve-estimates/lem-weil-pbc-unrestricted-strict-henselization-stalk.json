@@ -29,9 +29,71 @@
   "def-weil-pbc-strict-henselization-limit",
   "def-weil-pbc-etale-cohomology"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "By [sbc-lem-higher-direct-image-presheaf], $R^qf_*F$ is the sheafification of the presheaf $V\\mapsto H^q(X\\times_SV,F|)$ on $S_{\\mathrm{Et}}$. Taking the geometric stalk and using [lem-weil-pbc-sheafification-geometric-stalk] identifies $(R^qf_*F)_{\\bar x}$ with the filtered colimit of these cohomology groups over pointed etale neighbourhoods of $\\bar x$.",
+   "uses": [
+    "sbc-lem-higher-direct-image-presheaf",
+    "def-weil-pbc-geometric-stalks",
+    "def-weil-pbc-pointed-etale-neighbourhoods",
+    "lem-weil-pbc-sheafification-geometric-stalk"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Theorem Tag 03Q9 proof, first displayed equality"
+   }
+  },
+  {
+   "text": "By [lemma-weil-pbc-affine-neighbourhood-cofinal], the colimit may be restricted to affine pointed neighbourhoods $V$. Their inverse limit is $S_{(\\bar x)}$ by [def-weil-pbc-strict-henselization-limit], and [lemma-weil-pbc-fibre-product-limit] identifies $X\\times_SS_{(\\bar x)}$ with the inverse limit of $X\\times_SV$. The hypotheses that $f$ is quasi-compact and quasi-separated make all these base changes quasi-compact and quasi-separated, while maps between affine neighbourhoods give affine transition maps.",
+   "uses": [
+    "lemma-weil-pbc-affine-neighbourhood-cofinal",
+    "def-weil-pbc-strict-henselization-limit",
+    "lemma-weil-pbc-fibre-product-limit",
+    "def-weil-pbc-scheme-conventions"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Theorem Tag 03Q9 proof, neighbourhood-limit identification"
+   }
+  },
+  {
+   "text": "Choose an affine pointed etale neighbourhood $(V_0,\\bar v_0)$ and restrict to the cofinal subsystem of affine pointed neighbourhoods $(V,\\bar v)$ equipped with a map to $(V_0,\\bar v_0)$; it is cofiltered and has the same limits and colimits (Step 2). Put $T=X\\times_SV_0$. The schemes $X\\times_SV$ form a cofiltered inverse system of quasi-compact quasi-separated $T$-schemes with affine transition maps (Step 2) and limit $X\\times_SS_{(\\bar x)}$. Apply [lem-weil-pbc-derived-etale-cohomology-limit] to this system and to $K=F|_{X\\times_SV_0}$ placed in degree $0$. Elementary: by [def-weil-pbc-derived-inverse-image] the derived inverse image of a complex concentrated in degree $0$ is the termwise inverse image, again concentrated in degree $0$, and the inverse image of $F|_{X\\times_SV_0}$ along $X\\times_SV\\to X\\times_SV_0$ is $F|_{X\\times_SV}$ and along $X\\times_SS_{(\\bar x)}\\to X\\times_SV_0$ is $p^{-1}F$ [def-weil-pbc-inverse-image], [lem-weil-pbc-inverse-image-composition]; the degree-$q$ cohomology of a sheaf in degree $0$ is its $H^q$ [def-weil-pbc-etale-cohomology]. Hence the lemma identifies the filtered colimit in Step 1 with $H^q((X\\times_SS_{(\\bar x)})_{\\mathrm{Et}},p^{-1}F)$. The identifications are induced by restriction along the projections, so their composite is the canonical restriction map in the statement.",
+   "uses": [
+    "lem-weil-pbc-derived-etale-cohomology-limit",
+    "def-weil-pbc-derived-inverse-image",
+    "def-weil-pbc-inverse-image",
+    "lem-weil-pbc-inverse-image-composition",
+    "def-weil-pbc-etale-cohomology"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Theorem Tag 03Q9 proof, continuity step"
+   }
+  }
+ ],
+ "proof_deps": [
+  "sbc-lem-higher-direct-image-presheaf",
+  "def-weil-pbc-geometric-stalks",
+  "def-weil-pbc-pointed-etale-neighbourhoods",
+  "lem-weil-pbc-sheafification-geometric-stalk",
+  "lemma-weil-pbc-affine-neighbourhood-cofinal",
+  "def-weil-pbc-strict-henselization-limit",
+  "lemma-weil-pbc-fibre-product-limit",
+  "def-weil-pbc-scheme-conventions",
+  "def-weil-pbc-inverse-image",
+  "lem-weil-pbc-derived-etale-cohomology-limit",
+  "def-weil-pbc-derived-inverse-image",
+  "lem-weil-pbc-inverse-image-composition",
+  "def-weil-pbc-etale-cohomology"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Theorem Tag 03Q9 (theorem-higher-direct-images), first assertion and proof"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -63,12 +125,55 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-weil-pbc-gm-strict-henselization-stalk-formula",
   "by": "worker",
   "date": "2026-10-10"
  },
  "chapter": "sec-curve-estimates",
- "unit": "sk-thm-br"
+ "unit": "sk-thm-br",
+ "split_report": {
+  "date": "2026-10-11",
+  "item": "lem-weil-pbc-unrestricted-strict-henselization-stalk",
+  "worker": "stage1",
+  "summary": "Split the unrestricted Tag 03Q9 stalk comparison into the sheafified higher-direct-image stalk calculation, affine neighbourhood and fibre-product limit identification, and continuity of etale cohomology (existing node lem-weil-pbc-derived-etale-cohomology-limit, Tag 0GIT, applied to a sheaf in degree 0; no torsion hypothesis). Reviewer R-ush2246 replaced the proposed child lem-weil-pbc-etale-cohomology-continuity-unrestricted, a special case of that node, by the existing node.",
+  "blueprint": "The three steps realize the stalk computation preceding Tag 03RM: the first displayed stalk-colimit equality, the strict-henselization inverse-limit identification, and the continuity comparison.",
+  "tool_uses": [
+   {
+    "node": "sbc-lem-higher-direct-image-presheaf",
+    "why": "Step 1 uses the generic Tag 03Q8 sheafified-presheaf description of higher direct images; the sk-thm-br route has no replacement for this generic tool lemma."
+   },
+   {
+    "node": "lemma-weil-pbc-affine-neighbourhood-cofinal",
+    "why": "Step 2 uses affine cofinality of pointed etale neighbourhoods; this generic indexing lemma is not supplied by the sk-thm-br route."
+   },
+   {
+    "node": "lemma-weil-pbc-fibre-product-limit",
+    "why": "Step 2 uses the generic fibre-product limit theorem for a qcqs morphism; the sk-thm-br route has no replacement for this limit identification."
+   },
+   {
+    "node": "lem-weil-pbc-derived-etale-cohomology-limit",
+    "why": "Step 3 uses the generic Tag 0GIT continuity of etale cohomology over a qcqs inverse system with affine transitions (no torsion hypothesis), applied to a sheaf in degree 0; it replaces the proposed child, of which it is a generalisation."
+   }
+  ]
+ },
+ "tool_uses": [
+  "sbc-lem-higher-direct-image-presheaf",
+  "lemma-weil-pbc-affine-neighbourhood-cofinal",
+  "lemma-weil-pbc-fibre-product-limit",
+  "lem-weil-pbc-derived-etale-cohomology-limit",
+  "sbc-lem-higher-direct-image-presheaf",
+  "lemma-weil-pbc-affine-neighbourhood-cofinal",
+  "lemma-weil-pbc-fibre-product-limit",
+  "lem-weil-pbc-derived-etale-cohomology-limit"
+ ],
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-ush2246",
+  "group": "J1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-ush2246 (reviewer sub-agent of L); spot-checked: Item is Tag 03Q9 first assertion (R^qf_*F stalk), statement true and matches source. Steps 1-2: 03Q8 presheaf + sheafification stalk, affine cofinality, strict-henselization limit, fibre-product limit; qcqs and affine transitions hold. FIX more, RETURN less: (1) class (b): new child lem-weil-pbc-etale-cohomology-continuity-unrestricted is a special case (sheaf in degree 0, T=X x_S V_0) of existing lem-weil-pbc-derived-etale-cohomology-limit (Tag 0GIT, no torsion) and of lem-weil-pbc-etale-cohomology-limit-complex-systems (0EZM); dropped it and cited the existing node in Step 3 with the degree-0 reduction folded as elementary text (def-weil-pbc-derived-inverse-image, lem-weil-pbc-inverse-image-composition, def-weil-pbc-etale-cohomology); uses/proof_deps/tool_uses updated. Checked no cycle (item not reachable from the cited node). Tool uses (generic Stacks tools) accepted. The J1 second reading missed this duplicate.; 1 file(s) fixed by the reviewer"
+ }
 }
