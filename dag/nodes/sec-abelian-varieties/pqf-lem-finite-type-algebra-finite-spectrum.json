@@ -4,7 +4,7 @@
   "is": null,
   "from": {
    "node": "pqf-lem-locqf-fibre-discrete",
-   "place": "the affine fibre algebra sentence in the proof",
+   "place": "the affine fibre algebra sentence in the proof: a finite-type algebra over the residue field with finite spectrum is finite-dimensional and has discrete spectrum",
    "via": []
   },
   "same_as": []
@@ -22,9 +22,48 @@
   "def-weil-pbc-finite-type-algebra",
   "def-weil-affine-spectrum"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "By [lem-pqf-finite-spectrum-maximal-primes], every prime ideal of $B$ is maximal.",
+   "uses": [
+    "lem-pqf-finite-spectrum-maximal-primes"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Lemma 0ALW, equivalence of (1) and (2)"
+   }
+  },
+  {
+   "text": "Apply [lem-weil-pbc-finite-type-algebra-dim-zero-finite] to the finite-type $k$-algebra $B$ and the conclusion of step 1. It gives that $B$ is finite-dimensional as a $k$-vector space (including the zero ring).",
+   "uses": [
+    "lem-weil-pbc-finite-type-algebra-dim-zero-finite"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Lemma 0ALW, implication (1) => (5)"
+   }
+  },
+  {
+   "text": "The points of $\\operatorname{Spec}B$ are prime ideals, and a point is closed exactly when its prime is maximal. Thus every point is closed by step 1. Since the space is finite by hypothesis, the complement of any singleton is a finite union of closed singletons and is closed; hence every singleton is open. Therefore $\\operatorname{Spec}B$ is discrete. The zero ring has empty spectrum, so the same conclusion is vacuous there.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Lemma 0ALW and the Zariski topology definition"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-pqf-finite-spectrum-maximal-primes",
+  "lem-weil-pbc-finite-type-algebra-dim-zero-finite"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Lemma 0ALW (finite type algebra with finitely many prime ideals), equivalence (1)–(5)"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -56,10 +95,35 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "pqf-lem-locqf-fibre-discrete",
   "by": "worker",
   "date": "2026-10-10"
- }
+ },
+ "split_report": {
+  "date": "2026-10-11",
+  "item": "pqf-lem-finite-type-algebra-finite-spectrum",
+  "worker": "stage1",
+  "summary": "Split the finite-spectrum affine algebra lemma into the Stacks 0ALW implication that all primes are maximal, the existing Mathlib-backed finite-dimensionality leaf, and the elementary finite T1-to-discrete argument. Checked the zero-ring case separately.",
+  "blueprint": "Realizes the affine fibre algebra sentence: finite type over a field plus finite spectrum gives maximal primes, finite-dimensionality, and discrete spectrum.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-finite-type-algebra-dim-zero-finite",
+    "why": "The route needs the general finite-type, dimension-zero algebra finiteness theorem; the affine-fibre unit supplies no replacement for this algebraic tool."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-finite-type-algebra-dim-zero-finite"
+ ],
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-fta2525",
+  "group": "C1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-fta2525 (reviewer sub-agent of L); spot-checked: Packet read whole. Step 1 cites new child exactly (C4 ok); step 2 hypotheses (finite type over field, all primes maximal, zero ring allowed) match lem-weil-pbc-finite-type-algebra-dim-zero-finite; step 3 finite T1 => discrete is elementary; no cycle (child created from item but states only the 0ALW (2)=>(1) direction, a real lemma). New node true (Stacks 0ALW), self-contained; my grep of Mathlib RingTheory/QuasiFinite, Spectrum/Prime, Topology/JacobsonSpace: no single declaration (chain of three), so unsplit is right, not class (c). Second reading: no missed fault. No repairs."
+ },
+ "lead_note": "2026-10-10 L (R-fta2525): New node lem-pqf-finite-spectrum-maximal-primes has no one-declaration Mathlib match but a short Mathlib chain proves it: isJacobsonRing_of_finiteType + Topology/JacobsonSpace.lean:165 (Finite+JacobsonSpace => DiscreteTopology) + PrimeSpectrum.discreteTopology_iff_finite_and_krullDimLE_zero (RingTheory/Spectrum/Prime/Topology.lean:301); cf. Algebra.QuasiFinite.iff_finite_comap_preimage_singleton (RingTheory/QuasiFinite/Basic.lean:287) whose proof does exactly this. Useful when the child is split."
 }

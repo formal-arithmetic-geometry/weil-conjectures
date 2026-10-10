@@ -2635,3 +2635,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 21:13 L: merged deliver/F1/def-pod-l-adic-representations (reviewer FIX; first push; new nodes: 0)
 - 21:13 L: deleted deliver/G1/def-weil-pbc-C4 after G1's abandonment (item attached by L)
 - 21:13 L: deleted deliver/M1/def-weil-pbc-C8 after M1's abandonment (item attached by L)
+- 21:13 L: merged deliver/C1/pqf-lem-finite-type-algebra-finite-spectrum (reviewer PASS; first push; new nodes: 1)
