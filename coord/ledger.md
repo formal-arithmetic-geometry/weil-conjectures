@@ -2603,3 +2603,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 21:00 L: merged deliver/F1/lem-pc-derived-lower-truncation-step-triangle (reviewer FIX; after a return; new nodes: 1)
 - 21:01 L: merged deliver/F1/lem-pc-derived-limit-roos-abelian-groups (reviewer FIX+NODE(1); first push; new nodes: 4)
 - 21:01 L: merged deliver/M1/def-weil-t-structure (reviewer FIX; first push; new nodes: 0)
+- 21:01 L: merged deliver/E1/lem-sc-snapper-numerical-polynomial (reviewer FIX; first push; new nodes: 0)
