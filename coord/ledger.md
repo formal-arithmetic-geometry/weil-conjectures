@@ -2056,3 +2056,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 16:53 L: merged deliver/F1/lem-weil-pbc-affine-etale-site-base-change (reviewer FIX; first push; new nodes: 1)
 - 16:54 L: merged deliver/M1/def-sc-scheme-tangent-space (reviewer FIX+NODE(2); first push; new nodes: 3)
 - 16:55 L: merged deliver/M1/lem-sc-open-map-irreducible-fibres-components (reviewer PASS; first push; new nodes: 0)
+- 16:55 L: merged deliver/J1/lem-pc-grothendieck-ss-double-complex-model (reviewer FIX; after a return; new nodes: 1)

@@ -24,9 +24,76 @@
   "thm-sp-double-complex-spectral-sequences",
   "lem-sp-grothendieck-edge-maps"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Choose the injective resolution $X\\to I^\\bullet$ and the Cartan--Eilenberg resolution $I^{\\bullet,\\bullet}$ of $F(I^\\bullet)$ in the construction clause of [thm-sp-grothendieck], and put $C^{p,q}:=I^{q,p}$. By [thm-sp-if-e1], $C$ is a Cartan--Eilenberg resolution in the exchanged-index convention. Transposition exchanges $d_I$ and $d_{II}$, the two filtrations of [def-sp-double-complex-total], and the first and second spectral sequences of [thm-sp-double-complex-spectral-sequences]. The map multiplying the $(p,q)$ entry by $(-1)^{pq}$ is an isomorphism from the total complex of the transpose to the total complex of $G(I^{\\bullet,\\bullet})$ and preserves the filtrations. Hence the construction clause identifies the Grothendieck spectral sequence with the first-filtration spectral sequence of $\\operatorname{Tot}G(C)$.",
+   "uses": [
+    "thm-sp-grothendieck",
+    "thm-sp-if-e1",
+    "def-sp-double-complex-total",
+    "thm-sp-double-complex-spectral-sequences"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Lemma 015N (lemma-grothendieck-spectral-sequence), proof; Definition 015H"
+   }
+  },
+  {
+   "text": "For the first filtration, [thm-sp-double-complex-spectral-sequences] gives $E_1^{p,q}=H^q_{II}(D^{p,\\bullet})$ and $E_2^{p,q}=H^p_IH^q_{II}(D)$. By [lem-sp-cartan-eilenberg-properties], the vertical cycle, boundary, and cohomology objects are injective, so $H^q_{II}(G(C^{p,\\bullet}))=G(H^q_{II}(C^{p,\\bullet}))$, and $(H^q_{II}(C^{p,\\bullet}))_p$ is an injective resolution of $H^q(F(I^\\bullet))$. By [def-sp-left-exact-additive], $H^q(F(I^\\bullet))=R^qF(X)$ and applying $G$ to this injective resolution gives $H^p=R^pG(R^qF(X))$.",
+   "uses": [
+    "thm-sp-double-complex-spectral-sequences",
+    "lem-sp-cartan-eilenberg-properties",
+    "def-sp-left-exact-additive"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Definition 015H (definition-cartan-eilenberg), Lemma 015I (lemma-cartan-eilenberg), and Lemma 015N (lemma-grothendieck-spectral-sequence), proof"
+   }
+  },
+  {
+   "text": "Apply [thm-sp-if-e1] with $v=G$ and $K^\\bullet=F(I^\\bullet)$ to the second-filtration spectral sequence. Its $E_1^{r,s}=R^rG(F(I^s))$ is zero for $r>0$ by [def-sp-composite-acyclicity], so the only nonzero row is $r=0$: $E_1^{0,s}=G(F(I^s))$, with $d_1$ induced by the differential of $F(I^\\bullet)$. Thus $E_2=E_\\infty$ and $H^n(\\operatorname{Tot}D)=E_2^{0,n}=H^n(G(F(I^\\bullet)))$ by the convergence clause of [thm-sp-double-complex-spectral-sequences]. By [def-sp-left-exact-additive], this is $R^n(G\\circ F)(X)$.",
+   "uses": [
+    "thm-sp-if-e1",
+    "def-sp-composite-acyclicity",
+    "thm-sp-double-complex-spectral-sequences",
+    "def-sp-left-exact-additive"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Lemma 015N (lemma-grothendieck-spectral-sequence), proof; Lemma 015J (lemma-two-ss-complex-functor)"
+   }
+  },
+  {
+   "text": "The image filtration in [thm-sp-double-complex-spectral-sequences] has $F^0H^n=H^n$ and $F^{n+1}H^n=0$, with $E_\\infty^{p,q}\\cong\\operatorname{gr}^pH^{p+q}$. Hence the quotient $H^n=F^0H^n\\twoheadrightarrow F^0H^n/F^1H^n=E_\\infty^{0,n}$ followed by $E_\\infty^{0,n}\\hookrightarrow E_2^{0,n}$ is the left edge map, and [lem-sp-grothendieck-edge-maps] identifies it with $R^n(G\\circ F)(X)\\to G(R^nF(X))$.",
+   "uses": [
+    "thm-sp-double-complex-spectral-sequences",
+    "lem-sp-grothendieck-edge-maps"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Lemma 015N (lemma-grothendieck-spectral-sequence), proof; Lemma 015J"
+   }
+  }
+ ],
+ "proof_deps": [
+  "thm-sp-grothendieck",
+  "thm-sp-if-e1",
+  "def-sp-double-complex-total",
+  "thm-sp-double-complex-spectral-sequences",
+  "lem-sp-cartan-eilenberg-properties",
+  "def-sp-left-exact-additive",
+  "def-sp-composite-acyclicity",
+  "lem-sp-grothendieck-edge-maps"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/derived.tex",
+  "place": "Lemma 015N (lemma-grothendieck-spectral-sequence), proof"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -51,12 +118,51 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-pc-grothendieck-edge-cocycle",
   "by": "worker",
   "date": "2026-10-10"
  },
  "chapter": "sec-picard-framework",
- "unit": "sk-thm-picard-rr"
+ "unit": "sk-thm-picard-rr",
+ "split_report": {
+  "date": "2026-10-11",
+  "item": "lem-pc-grothendieck-ss-double-complex-model",
+  "worker": "stage1",
+  "summary": "Repaired the split by using the construction clause in thm-sp-grothendieck for the spectral-sequence identification, adding a statement-only Cartan--Eilenberg properties node for the column splitting and injective-resolution facts required by the E2 computation, deriving the abutment by applying thm-sp-if-e1 with v=G and the composite acyclicity hypothesis, and retaining the explicit image-filtration edge-map calculation.",
+  "blueprint": "Realizes the ancestor proof's first-sentence filtered-double-complex passage, with the E2 computation, acyclic-collapse abutment, and left-edge quotient/inclusion clauses supplied by Lemma 015N and Lemma 015J.",
+  "tool_uses": [
+   {
+    "node": "lem-sp-grothendieck-edge-maps",
+    "why": "Step 4 takes the statement's named left-edge map and its direction from this off-unit edge-map lemma; the double-complex filtration supplies the quotient and inclusion realizing it."
+   },
+   {
+    "node": "thm-sp-grothendieck",
+    "why": "Step 1 and step 3 use the Grothendieck construction and its derived-abutment clause as a tool from the abelian-varieties unit."
+   },
+   {
+    "node": "thm-sp-double-complex-spectral-sequences",
+    "why": "Steps 1, 2, 3, and 4 use the general two-filtration spectral-sequence construction and image filtration as a tool from the abelian-varieties unit."
+   },
+   {
+    "node": "thm-sp-if-e1",
+    "why": "Steps 2 and 3 use the Cartan--Eilenberg hypercohomology spectral-sequence and abutment computation as a tool from the abelian-varieties unit."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sp-grothendieck-edge-maps",
+  "thm-sp-grothendieck",
+  "thm-sp-double-complex-spectral-sequences",
+  "thm-sp-if-e1"
+ ],
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-gss2",
+  "group": "J1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-gss2 (reviewer sub-agent of L); spot-checked: Re-push after the 16:39 return (R-gd2); all four points checked repaired. Source: Stacks derived.tex Definition 015H (definition-cartan-eilenberg, columns I^{p,bullet} resolve K^p, Ker/Im/H^p_I of d_1 resolve those of K) and Lemma 015I, Lemma 015N proof. Point 1 (E, new node lem-sp-cartan-eilenberg-properties): restated in the convention of thm-sp-if-e1 (rows C^{bullet,q} resolve K^q, columns have injective cycles/boundaries/cohomology, H_II commutes with left exact additive G since columns split, (H^q_II(C^{p,bullet}))_p resolves H^q(K)); checked against 015H clause by clause under C^{p,q}=I^{q,p}; true; test K=A non-injective in degree 0: C is the injective resolution of A in row 0, columns are single objects, H^0_II resolves A, H^q_II=0 for q>0 = H^q(K) - consistent. stmt_deps now include thm-sp-if-e1 and def-sp-double-complex-total. Point 2 (step 1): C^{p,q}:=I^{q,p}, exchange of d_I/d_II, filtrations and first/second spectral sequences, (-1)^{pq} isomorphism of Tot with the sign d_I+(-1)^p d_II of def-sp-double-complex-total checked, then the construction clause of thm-sp-grothendieck (second SS = filtration by resolution degree = first filtration of the transpose). Point 3 (step 2): E_1/E_2 from thm-sp-double-complex-spectral-sequences(I), splitting and resolution from the new node, both R^qF and R^pG identifications from def-sp-left-exact-additive; thm-sp-if-e1 dropped from uses. Point 4 (step 3): thm-sp-if-e1 with v=G (def-sp-truncation-couple allows any left exact additive G between Grothendieck categories), E_1^{r,s}=R^rG(F(I^s)) vanishes for r>0 by the acyclicity hypothesis of def-sp-composite-acyclicity, single row, E_2=E_infty, convergence clause, def-sp-left-exact-additive for R^n(G o F). Step 4 accepted earlier, unchanged. tool_uses (thm-sp-grothendieck, thm-sp-double-complex-spectral-sequences, thm-sp-if-e1, lem-sp-grothendieck-edge-maps) are generic black-box statements, accepted. Mathlib: my LeanFinder query for Cartan-Eilenberg resolutions found only injective/projective resolution infrastructure, no match. FIX: dag/nodes/sec-picard-framework/lem-sp-cartan-eilenberg-properties.json: mathlib_searches: added the reviewer's LeanFinder query and verdict. Start 2026-10-10 16:54:35 UTC (date -u: Sat Oct 10 04:54:35 PM UTC 2026), end Sat Oct 10 04:55:40 PM UTC 2026.; 1 file(s) fixed by the reviewer"
+ }
 }
