@@ -1,0 +1,91 @@
+{
+ "id": "lem-weil-pbc-fpqc-descend-isomorphism",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lemma-weil-pbc-h1-constructible-representation",
+   "place": "proof, second paragraph: 'By Lemmas 03SA (lemma-torsion-colimit-constructible) and 03Q5 (lemma-colimit) we can find a map F -> I with F a constructible sheaf of Z/lZ-modules' (step 2 of its split, through the chain in via down to [lem-weil-pbc-fpqc-descend-integral], which combines 02KS and 02L5); made precise here: in the proof of Descent 02L5 (descent.tex lines 5958-5963), 'By the above the base change of this morphism to S' is an isomorphism. Hence it is an isomorphism by Lemma [02L4]': descent of the isomorphism X -> Spec(A) along the faithfully flat Spec(A') -> Spec(A)",
+   "via": [
+    "lem-weil-pbc-fpqc-descend-affine",
+    "lem-weil-pbc-fpqc-descend-integral",
+    "lem-weil-pbc-fpqc-descend-finite",
+    "lem-weil-pbc-finite-locally-free-degree-etale-descent",
+    "lem-weil-pbc-flat-fp-lqf-bounded-stratification",
+    "lem-weil-pbc-flat-fp-qf-stratification",
+    "lem-weil-pbc-etale-separated-stratified-finite",
+    "lem-weil-pbc-etale-stratified-finite",
+    "lem-weil-pbc-etale-free-sheaf-constructible",
+    "lem-weil-pbc-constructible-generation",
+    "lem-weil-pbc-module-sheaf-colimit-constructible"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Being an isomorphism descends along flat surjective quasi-compact morphisms (Stacks 02L4)",
+ "statement": "Let $h:T'\\to T$ be a morphism of schemes [def-pc-scheme] which is flat [def-weil-flat-morphism], surjective [def-weil-surjective-morphism] and quasi-compact [def-weil-finite-type-morphism]. Let $\\varphi:Y\\to T$ be a morphism of schemes and let $(Y',p,\\varphi')$ be a fibre product of $\\varphi$ and $h$ [def-pc-fibre-product], with $p:Y'\\to Y$ and $\\varphi':Y'\\to T'$, $\\varphi\\circ p=h\\circ\\varphi'$. If $\\varphi'$ is an isomorphism of schemes, then $\\varphi$ is an isomorphism of schemes.",
+ "source": {
+  "document": "literature/stacks-project/descent.tex",
+  "place": "Descent, Lemma Tag 02L4 (lemma-descending-property-isomorphism, line 5915: 'The property P(f) = \"f is an isomorphism\" is fpqc local on the base'), the direction 'the base change has P => f has P' of Definition Tag 02KO (definition-property-morphisms-local, line 5310) for the one-member fpqc covering $\\{h:T'\\to T\\}$ (Topologies, Lemma Tag 03L7, lemma-recognize-fpqc-covering, topologies.tex line 2904, (2): for an affine open $U\\subseteq T$ the open $h^{-1}(U)$ is quasi-compact and $h(h^{-1}(U))=U$)"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-flat-morphism",
+  "def-weil-surjective-morphism",
+  "def-weil-finite-type-morphism",
+  "def-pc-fibre-product"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "isomorphism of schemes descends along faithfully flat quasi-compact morphism",
+   "results": "none: the service returned HTTP 500 Internal Server Error on every call on 2026-10-10 (lean-lsp tool and https://leansearch.net/search directly)",
+   "date": "2026-10-10",
+   "verdict": "no result (service error)"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "isomorphisms of schemes descend along surjective flat quasi-compact morphisms (fpqc descent of isomorphism)",
+   "results": "AlgebraicGeometry.descendsAlong_isomorphisms_surjective_inf_flat_inf_quasicompact (Morphisms.FlatDescent), Flat.surjective_descendsAlong_surjective_inf_flat_inf_quasicompact, descendsAlong_universallyOpen_..., descendsAlong_isOpenImmersion_..., Flat.isIso_of_surjective_of_mono (Morphisms.FlatMono)",
+   "date": "2026-10-10",
+   "verdict": "match: descendsAlong_isomorphisms_surjective_inf_flat_inf_quasicompact"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -n 'stacks 02L4' -A3 ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicGeometry/Morphisms/FlatDescent.lean; sed -n 25,42p ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/CategoryTheory/MorphismProperty/Descent.lean",
+   "results": "FlatDescent.lean:92-94 @[stacks 02L4] instance descendsAlong_isomorphisms_surjective_inf_flat_inf_quasicompact : (isomorphisms Scheme.{u}).DescendsAlong (@Surjective ⊓ @Flat ⊓ @QuasiCompact); Descent.lean:31-33 class DescendsAlong P Q: IsPullback fst snd f g -> Q f -> P fst -> P g",
+   "date": "2026-10-10",
+   "verdict": "match"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "AlgebraicGeometry.descendsAlong_isomorphisms_surjective_inf_flat_inf_quasicompact",
+  "file": "Mathlib/AlgebraicGeometry/Morphisms/FlatDescent.lean",
+  "line": 93,
+  "how": "exact (lines 92-94, read with sed -n on 2026-10-10): the instance (isomorphisms Scheme).DescendsAlong (@Surjective ⊓ @Flat ⊓ @QuasiCompact); by the definition of DescendsAlong (Mathlib/CategoryTheory/MorphismProperty/Descent.lean:31-33, of_isPullback : IsPullback fst snd f g -> Q f -> P fst -> P g) with f := h (Surjective, Flat, QuasiCompact), g := φ, fst := φ' : Y' ⟶ T', snd := p, the square φ' ≫ h = p ≫ φ being a pullback ([def-pc-fibre-product]), it says: IsIso φ' -> IsIso φ. Apply with MorphismProperty.of_isPullback_of_descendsAlong (Descent.lean:39)."
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-fpqc-descend-affine",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1"
+}

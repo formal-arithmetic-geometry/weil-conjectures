@@ -33,9 +33,151 @@
   "def-pc-fibre-product",
   "pqf-def-affine-morphism"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "*Being affine is invariant under isomorphism and Zariski local on the base (conditions (0) and (2) of [lem-weil-pbc-fpqc-local-on-base-criterion] for $\\mathcal P$ = affine).* (0): let $f:X\\to S$ be affine [pqf-def-affine-morphism] and $a:X\\to\\tilde X$, $b:S\\to\\tilde S$ isomorphisms of schemes with $\\tilde f\\circ a=b\\circ f$. Let $W\\subseteq\\tilde S$ be an affine open. Then $V=b^{-1}(W)$ is an affine open of $S$ (the isomorphism $b$ restricts to an isomorphism of open subschemes $V\\to W$ [def-pc-scheme]), so $f^{-1}(V)$ is affine; and $\\tilde f^{-1}(W)=a(f^{-1}(b^{-1}(W)))=a(f^{-1}(V))$ because $\\tilde f=b f a^{-1}$, and $a$ restricts to an isomorphism of open subschemes $f^{-1}(V)\\to\\tilde f^{-1}(W)$; hence $\\tilde f^{-1}(W)$ is affine, and $\\tilde f$ is affine. (2): let $S=\\bigcup_kV_k$ be an open covering such that each restriction $f_k:f^{-1}(V_k)\\to V_k$ is affine. Each open subscheme $V_k$ is covered by affine opens $W$ of $V_k$, which are affine opens of $S$ [def-pc-scheme]; for such $W$, $f^{-1}(W)=f_k^{-1}(W)$ is affine because $f_k$ is affine. These $W$ (over all $k$) form an affine open covering of $S$ whose preimages are affine, so $f$ is affine by [pqf-lem-affine-local-target] (third condition implies the first).",
+   "uses": [
+    "pqf-def-affine-morphism",
+    "def-pc-scheme",
+    "pqf-lem-affine-local-target"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/descent.tex",
+    "place": "Descent, Lemma Tag 02L5 (lemma-descending-property-affine, line 5926), proof, second sentence: 'Being affine is Zariski local on the base, see Morphisms, Lemma 01S8' (morphisms-lemma-characterize-affine, morphisms.tex line 1736); invariance under isomorphism is the convention of Definition Tag 02KO (definition-property-morphisms-local, line 5310)"
+   }
+  },
+  {
+   "text": "*Being affine is stable under base change (condition (1)).* If $f:X\\to S$ is affine and $g:S'\\to S$ is any morphism, in particular a flat one, then the second projection $X\\times_SS'\\to S'$ is affine by clause (1) of [lem-weil-pbc-affine-morphism-permanence].",
+   "uses": [
+    "lem-weil-pbc-affine-morphism-permanence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/descent.tex",
+    "place": "Descent, Lemma Tag 02L5 (lemma-descending-property-affine, line 5926), proof, first sentence: 'A base change of an affine morphism is affine, see Morphisms, Lemma 01SD' (morphisms-lemma-base-change-affine, morphisms.tex line 1982)"
+   }
+  },
+  {
+   "text": "*Condition (3): the setting.* Let $g:S'\\to S$ be a flat [def-weil-flat-morphism] surjective [def-weil-surjective-morphism] morphism of affine schemes, $f:X\\to S$ a morphism, $X'=X\\times_SS'$ the fibre product [def-pc-fibre-product] with projections $g':X'\\to X$, $f':X'\\to S'$, and assume $f'$ affine. By step 1 (invariance under isomorphism, applied to $f$, $g$ and $f'$) we may assume $S=\\operatorname{Spec}R$ and $S'=\\operatorname{Spec}R'$ [def-pc-scheme], so $g=\\operatorname{Spec}\\rho$ for a unique ring map $\\rho:R\\to R'$ [def-weil-affine-spectrum]. (a) $g$ is a morphism of affine schemes, hence affine [lem-weil-pbc-morphism-affine-schemes-affine], hence quasi-compact by clause (3) of [lem-weil-pbc-affine-morphism-permanence]; so $g$ is flat, surjective and quasi-compact. (b) $X'$ is affine by clause (2) of [lem-weil-pbc-affine-morphism-permanence] ($f'$ affine, $S'$ affine); write $A'=\\Gamma(X',\\mathcal O_{X'})$. (c) $f'$ is quasi-compact and separated by clause (3) of [lem-weil-pbc-affine-morphism-permanence]. We have to show that $X$ is affine (then $f$ is affine by [lem-weil-pbc-morphism-affine-schemes-affine]); this is done in steps 4-6.",
+   "uses": [
+    "def-weil-flat-morphism",
+    "def-weil-surjective-morphism",
+    "def-pc-fibre-product",
+    "def-pc-scheme",
+    "def-weil-affine-spectrum",
+    "lem-weil-pbc-morphism-affine-schemes-affine",
+    "lem-weil-pbc-affine-morphism-permanence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/descent.tex",
+    "place": "Descent, Lemma Tag 02L5 (lemma-descending-property-affine, line 5926), proof, lines 5935-5940: 'let g : S' -> S be a flat surjective morphism of affine schemes, and let f : X -> S be a morphism. Assume that the base change f' : X' -> S' is affine. In other words, X' is affine, say X' = Spec(A'). Also write S = Spec(R) and S' = Spec(R'). We have to show that X is affine.'"
+   }
+  },
+  {
+   "text": "*$X$ is quasi-compact and quasi-separated.* By step 3, $g$ is flat, surjective and quasi-compact and $f'$ is quasi-compact and separated. By [lem-weil-pbc-fpqc-descend-quasi-compact], $f$ is quasi-compact [def-weil-finite-type-morphism]; by [lem-weil-pbc-fpqc-descend-separated], $f$ is separated [def-weil-proper-morphism]. Since $S$ is affine, the scheme $X$ is quasi-compact and quasi-separated by [lem-weil-pbc-qcqs-over-affine].",
+   "uses": [
+    "lem-weil-pbc-fpqc-descend-quasi-compact",
+    "def-weil-finite-type-morphism",
+    "lem-weil-pbc-fpqc-descend-separated",
+    "def-weil-proper-morphism",
+    "lem-weil-pbc-qcqs-over-affine"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/descent.tex",
+    "place": "Descent, Lemma Tag 02L5 (lemma-descending-property-affine, line 5926), proof, lines 5943-5944: 'By Lemmas 02KQ and 02KU we see that X -> S is separated and quasi-compact.'"
+   }
+  },
+  {
+   "text": "*Flat base change of global sections.* Let $A=\\Gamma(X,\\mathcal O_X)$, an $R$-algebra through $\\alpha=f^\\sharp:R\\to A$ (the map on global sections, $R=\\Gamma(S,\\mathcal O_S)$ [def-weil-affine-spectrum]). Since $g$ is flat, $S,S'$ are affine and $X$ is quasi-compact and quasi-separated (step 4), [lem-weil-pbc-flat-base-change-global-sections-qcqs] gives that $$\\beta:A\\otimes_RR'\\to A'=\\Gamma(X',\\mathcal O_{X'}),\\qquad a\\otimes r'\\mapsto g'^\\sharp(a)\\,f'^\\sharp(r'),$$ is a ring isomorphism. (The source phrases this as $f_*\\mathcal O_X=\\widetilde A$ and $g^*f_*\\mathcal O_X=f'_*\\mathcal O_{X'}$ through Schemes, Lemma 01LC; on the affine bases $S,S'$ the statement on global sections is what the argument uses, so the quasi-coherence of $f_*\\mathcal O_X$ is not needed.)",
+   "uses": [
+    "def-weil-affine-spectrum",
+    "lem-weil-pbc-flat-base-change-global-sections-qcqs"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/descent.tex",
+    "place": "Descent, Lemma Tag 02L5 (lemma-descending-property-affine, line 5926), proof, lines 5945-5953: 'Thus f_*O_X is a quasi-coherent sheaf of O_S-algebras ... Hence f_*O_X = A~ for some R-algebra A. In fact A = Gamma(X, O_X) of course. Also, by flat base change (Cohomology of Schemes, Lemma 02KH) we have g^*f_*O_X = f'_*O_{X'}. In other words, we have A' = R' (x)_R A.'"
+   }
+  },
+  {
+   "text": "*The canonical morphism $c:X\\to\\operatorname{Spec}A$ and its base change.* By [lem-weil-pbc-morphism-into-affine-scheme] there is a unique morphism $c:X\\to\\operatorname{Spec}A$ with $c^\\sharp=\\mathrm{id}_A$ on global sections, and for every ring $B$ the bijection $\\operatorname{Mor}(Y,\\operatorname{Spec}B)\\to\\operatorname{Hom}(B,\\Gamma(Y,\\mathcal O_Y))$, $u\\mapsto u^\\sharp$, satisfies $(v\\circ u)^\\sharp=u^\\sharp\\circ v^\\sharp$ (functoriality of global sections). (a) $f=\\operatorname{Spec}\\alpha\\circ c$: both have global-sections map $\\alpha$ (as $(\\operatorname{Spec}\\alpha)^\\sharp=\\alpha$ [def-weil-affine-spectrum] and $c^\\sharp=\\mathrm{id}$), so they agree by the bijectivity. (b) Let $T=\\operatorname{Spec}(A\\otimes_RR')$ with $h=\\operatorname{Spec}(a\\mapsto a\\otimes1):T\\to\\operatorname{Spec}A$ and $q=\\operatorname{Spec}(r'\\mapsto1\\otimes r'):T\\to S'$; by [lem-weil-pbc-fibre-product-affine-spectra] $(T,h,q)$ is a fibre product of $\\operatorname{Spec}\\alpha$ and $g$ [def-pc-fibre-product]. (c) Let $c':X'\\to T$ be the morphism with $c'^\\sharp=\\beta$ (step 5) [lem-weil-pbc-morphism-into-affine-scheme]. Comparing global-sections maps: $(h\\circ c')^\\sharp=\\beta\\circ(a\\mapsto a\\otimes1)=g'^\\sharp=(c\\circ g')^\\sharp$ and $(q\\circ c')^\\sharp=\\beta\\circ(r'\\mapsto1\\otimes r')=f'^\\sharp$, so $h\\circ c'=c\\circ g'$ and $q\\circ c'=f'$. (d) Consider the diagram with top row $g':X'\\to X$, middle row $h:T\\to\\operatorname{Spec}A$, bottom row $g:S'\\to S$, and vertical maps $c':X'\\to T$, $c:X\\to\\operatorname{Spec}A$, $q:T\\to S'$, $\\operatorname{Spec}\\alpha:\\operatorname{Spec}A\\to S$; both squares commute by (c) and (b). The lower square is cartesian by (b), and the outer rectangle is $(X',g',q\\circ c'=f')$ over $\\operatorname{Spec}\\alpha\\circ c=f$ and $g$, which is cartesian by the definition of $X'$ and (a). By [lem-weil-pbc-cartesian-square-pasting] the upper square is cartesian: $(X',g',c')$ is a fibre product of $c$ and $h$. (e) $c'$ is an isomorphism: $X'$ is affine (step 3(b)), say $e:\\operatorname{Spec}B\\to X'$ an isomorphism [def-pc-scheme]; then $c'\\circ e=\\operatorname{Spec}\\psi$ for a unique $\\psi:A\\otimes_RR'\\to B$ [def-weil-affine-spectrum], and by the functoriality of global sections $\\psi=e^\\sharp\\circ\\beta$ (identifying $\\Gamma(\\operatorname{Spec}B)=B$), a composite of ring isomorphisms; so $\\operatorname{Spec}\\psi$ is an isomorphism (with inverse $\\operatorname{Spec}\\psi^{-1}$, by functoriality of $\\operatorname{Spec}$ [def-weil-affine-spectrum]), and $c'=\\operatorname{Spec}\\psi\\circ e^{-1}$ is an isomorphism.",
+   "uses": [
+    "lem-weil-pbc-morphism-into-affine-scheme",
+    "def-weil-affine-spectrum",
+    "lem-weil-pbc-fibre-product-affine-spectra",
+    "def-pc-fibre-product",
+    "lem-weil-pbc-cartesian-square-pasting",
+    "def-pc-scheme"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/descent.tex",
+    "place": "Descent, Lemma Tag 02L5 (lemma-descending-property-affine, line 5926), proof, lines 5954-5959: 'Consider the canonical morphism X -> Spec(A) over S from Schemes, Lemma 01I1 (schemes-lemma-morphism-into-affine, schemes.tex line 841). By the above the base change of this morphism to S' is an isomorphism.'"
+   }
+  },
+  {
+   "text": "*Descent of the isomorphism, and condition (3).* The morphism $h:T\\to\\operatorname{Spec}A$ of step 6 is the base change of $g$ along $\\operatorname{Spec}\\alpha$ (step 6(b)); so $h$ is flat by [lem-weil-pbc-flat-morphism-base-change] and surjective by [lem-weil-pbc-surjective-base-change], and quasi-compact because it is a morphism of affine schemes, hence affine [lem-weil-pbc-morphism-affine-schemes-affine] and quasi-compact by clause (3) of [lem-weil-pbc-affine-morphism-permanence]. By step 6(d),(e), $(X',g',c')$ is a fibre product of $c$ and $h$ whose projection $c':X'\\to T$ is an isomorphism; by [lem-weil-pbc-fpqc-descend-isomorphism] (with $\\varphi=c$, $p=g'$, $\\varphi'=c'$), $c:X\\to\\operatorname{Spec}A$ is an isomorphism. Hence $X$ is affine [def-pc-scheme], and $f:X\\to S$, a morphism of affine schemes, is affine by [lem-weil-pbc-morphism-affine-schemes-affine]. Thus being affine satisfies condition (3) of [lem-weil-pbc-fpqc-local-on-base-criterion].",
+   "uses": [
+    "lem-weil-pbc-flat-morphism-base-change",
+    "lem-weil-pbc-surjective-base-change",
+    "lem-weil-pbc-morphism-affine-schemes-affine",
+    "lem-weil-pbc-affine-morphism-permanence",
+    "lem-weil-pbc-fpqc-descend-isomorphism",
+    "def-pc-scheme"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/descent.tex",
+    "place": "Descent, Lemma Tag 02L5 (lemma-descending-property-affine, line 5926), proof, lines 5959-5961: 'Hence it is an isomorphism by Lemma 02L4 (lemma-descending-property-isomorphism, line 5915).' (The morphism Spec(A') -> Spec(A) along which 02L4 is applied is the base change of S' -> S, hence flat, surjective, and quasi-compact as a morphism of affine schemes.)"
+   }
+  },
+  {
+   "text": "*Conclusion.* By steps 1, 2 and 7 the class of affine morphisms [pqf-def-affine-morphism] satisfies conditions (0)-(3) of [lem-weil-pbc-fpqc-local-on-base-criterion]. Applied to $f:X\\to S$ and the fpqc covering $\\{g_i:S_i\\to S\\}_{i\\in I}$ [def-weil-pbc-fpqc-covering], whose base changes $f_i:X\\times_SS_i\\to S_i$ are affine by hypothesis, it gives that $f$ is affine.",
+   "uses": [
+    "lem-weil-pbc-fpqc-local-on-base-criterion",
+    "pqf-def-affine-morphism",
+    "def-weil-pbc-fpqc-covering"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/descent.tex",
+    "place": "Descent, Lemma Tag 02L5 (lemma-descending-property-affine, line 5926), proof, last sentence: 'Therefore Lemma 02KP (lemma-descending-properties-morphisms, line 5407) applies and we win.'"
+   }
+  }
+ ],
+ "proof_deps": [
+  "pqf-def-affine-morphism",
+  "def-pc-scheme",
+  "pqf-lem-affine-local-target",
+  "lem-weil-pbc-affine-morphism-permanence",
+  "def-weil-flat-morphism",
+  "def-weil-surjective-morphism",
+  "def-pc-fibre-product",
+  "def-weil-affine-spectrum",
+  "lem-weil-pbc-morphism-affine-schemes-affine",
+  "lem-weil-pbc-fpqc-descend-quasi-compact",
+  "def-weil-finite-type-morphism",
+  "lem-weil-pbc-fpqc-descend-separated",
+  "def-weil-proper-morphism",
+  "lem-weil-pbc-qcqs-over-affine",
+  "lem-weil-pbc-flat-base-change-global-sections-qcqs",
+  "lem-weil-pbc-morphism-into-affine-scheme",
+  "lem-weil-pbc-fibre-product-affine-spectra",
+  "lem-weil-pbc-cartesian-square-pasting",
+  "lem-weil-pbc-flat-morphism-base-change",
+  "lem-weil-pbc-surjective-base-change",
+  "lem-weil-pbc-fpqc-descend-isomorphism",
+  "lem-weil-pbc-fpqc-local-on-base-criterion",
+  "def-weil-pbc-fpqc-covering"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/descent.tex",
+  "place": "Descent, Lemma Tag 02L5 (lemma-descending-property-affine, line 5926) and its proof (lines 5931-5965), through Lemma Tag 02KP (lemma-descending-properties-morphisms, line 5407); Lemmas Tag 02KQ, 02KU, 02L4; Morphisms, Lemmas Tag 01S8, 01SD; Schemes, Lemma Tag 01I1; Cohomology of Schemes, Lemma Tag 02KH"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -67,7 +209,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "worker",
@@ -88,6 +230,28 @@
  },
  "chapter": "sec-proper-base-change",
  "unit": "sk-thm-p1",
- "reviewed": "2026-10-10 L: statement checked against 02L5; no blueprint node states it",
- "lead_note": "split through the 02KP criterion node lem-weil-pbc-fpqc-local-on-base-criterion, verifying its conditions (0)-(3)"
+ "reviewed": "2026-10-10 L: 8 steps along 02L5 through the criterion node checked (conditions (0),(2) with Zariski locality via pqf-lem-affine-local-target as a tool; base change; affine case: quasi-compact and separated by the two new 02KQ/02KU nodes, qcqs, flat base change of global sections, the canonical map X -> Spec A becomes an isomorphism after the faithfully flat base change, 02L4 leaf). tool_uses pqf-lem-affine-local-target. Four new nodes: 02KQ and 02KU unsplit; 02L4 and the degree-0 flat base change Mathlib leaves (lines verified). Lean candidates recorded (IsAffineHom.descendsAlong one-morphism form; the generic-P fpqc lemma), not exact. M1 had abandoned the item as closed by Lean; not so.",
+ "lead_note": "split through the 02KP criterion node lem-weil-pbc-fpqc-local-on-base-criterion, verifying its conditions (0)-(3)",
+ "lean_candidates": [
+  {
+   "name": "AlgebraicGeometry.IsAffineHom.descendsAlong_surjective_inf_flat_inf_quasicompact",
+   "module": "WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.FlatDescent",
+   "note": "sorry-free on 71d63dcf (sorry map: s=false, ts=false; lines 42-99), @[stacks 02L5]: DescendsAlong @IsAffineHom (@Surjective ⊓ @Flat ⊓ @QuasiCompact), i.e. affineness descends along ONE faithfully flat quasi-compact morphism. It is the single-morphism form, not the node's statement for an fpqc covering family; its proof follows the same route as the source (Zariski-local reduction, qcqs of X, flat base change of global sections, descent of the isomorphism X -> Spec Γ(X)). Not attached by the worker (worker, 2026-10-10)."
+  },
+  {
+   "name": "AlgebraicGeometry.Scheme.of_isPullback_of_ofArrows_mem_fpqcTopology",
+   "module": "WeilConjectures.Mathlib.AlgebraicGeometry.Sites.Fpqc",
+   "note": "sorry-free on 71d63dcf (sorry map: s=false, ts=false; lines 115-126). Generic in P ([IsZariskiLocalAtTarget P], [P.DescendsAlong (@Surjective ⊓ @Flat ⊓ @QuasiCompact)], [P.IsStableUnderBaseChange]); with P := @IsAffineHom (IsZariskiLocalAtTarget from the Mathlib instance HasAffineProperty @IsAffineHom, Mathlib/AlgebraicGeometry/Morphisms/Affine.lean:146; isAffineHom_isStableUnderBaseChange, Affine.lean:172; the DescendsAlong from the theorem above, which is a theorem and not an instance, so it must be supplied by `have`) and the covering hypothesis Sieve.ofArrows _ g ∈ fpqcTopology T obtained from a family in fpqcPrecoverage by Precoverage.generate_mem_toGrothendieck, it gives the node in a few lines; it does not state the node exactly (generic P; its hypothesis is the sieve generated by the family, weaker than the DAG's fpqc covering), so not attached by the worker: for the lead's attachment check (worker, 2026-10-10)"
+  }
+ ],
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "lem-weil-pbc-fpqc-descend-affine",
+  "worker": "stage1",
+  "summary": "Split following Stacks 02L5 (descent.tex line 5926) and its proof (lines 5931-5965), through the criterion 02KP stated by lem-weil-pbc-fpqc-local-on-base-criterion (same unit sk-thm-p1, split, not edited), whose conditions (0)-(3) are checked for P = affine: (0) and (2) in step 1 (01S8 via the accepted tool pqf-lem-affine-local-target, as on lem-weil-pbc-eventually-affine/-descend-affine), (1) in step 2 (01SD, clause (1) of the leaf lem-weil-pbc-affine-morphism-permanence), (3) in steps 3-7 exactly as the source: X' affine; f quasi-compact and separated by 02KQ and 02KU (two new unsplit nodes, stated for one flat surjective quasi-compact morphism, the one-member fpqc covering in which the source applies them), so X is qcqs (leaf lem-weil-pbc-qcqs-over-affine); flat base change Γ(X)⊗_R R' ≅ Γ(X') (02KH in degree 0, new Mathlib leaf lem-weil-pbc-flat-base-change-global-sections-qcqs = isIso_pushoutSection_of_isQuasiSeparated_of_flat_right); the canonical X -> Spec A (01I1, leaf lem-weil-pbc-morphism-into-affine-scheme) has base change X' -> Spec(A⊗R') an isomorphism (pasting, written out); 02L4 (new Mathlib leaf lem-weil-pbc-fpqc-descend-isomorphism = descendsAlong_isomorphisms_surjective_inf_flat_inf_quasicompact) descends it. The source's detour through quasi-coherence of f_*O_X (01LC) is replaced by the global-sections form of 02KH, which is all the argument uses (said in step 5). Statement unchanged (agrees with 02L5 in the direction of 02KO). Tags verified in tags/tags: 02L5, 02KP, 02KQ, 02KU, 02L4, 01S8, 01SD, 01I1, 02KH, 03L7. Lean: no sorry-free slopmaster2 declaration states the node exactly; the single-morphism theorem IsAffineHom.descendsAlong_surjective_inf_flat_inf_quasicompact (@[stacks 02L5]) and the generic Scheme.of_isPullback_of_ofArrows_mem_fpqcTopology are recorded in lean_candidates. Blueprint search (02L5, 02L4, 02KQ, 02KU, 'fpqc local on the base', 'fpqc', 'descends', 'affine morphism', 'faithfully flat', 'flat base change'): no blueprint node states the item, 02KQ, 02KU or 02L4; lem-pc-flat-base-change-cohom (sec-picard-framework) states 02KH for all i and is recorded in same_as of the new degree-0 leaf. The citers (lem-weil-pbc-fpqc-descend-integral and above) are not cited. LeanSearch was down (HTTP 500) for the whole session; the new nodes carry LeanFinder, Loogle and grep searches and the failed LeanSearch query.",
+  "blueprint": "The blueprint ancestor lemma-weil-pbc-h1-constructible-representation (Stacks 0A5H, proof, second paragraph, 'By Lemmas 03SA and 03Q5 we can find a map F -> I with F a constructible sheaf', its split step 2) is served only through the chain in via (down to lem-weil-pbc-fpqc-descend-integral, which combines 02KS with this item, 02L5); none of the item's eight steps realizes a sentence of the blueprint proof directly: they realize the proof of Stacks 02L5, and all serve that same place of the ancestor's step 2. from.place was not 'unspecified' and is kept."
+ },
+ "tool_uses": [
+  "pqf-lem-affine-local-target"
+ ]
 }

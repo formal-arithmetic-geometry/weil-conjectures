@@ -1,0 +1,99 @@
+{
+ "id": "lem-weil-pbc-flat-base-change-global-sections-qcqs",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lemma-weil-pbc-h1-constructible-representation",
+   "place": "proof, second paragraph: 'By Lemmas 03SA (lemma-torsion-colimit-constructible) and 03Q5 (lemma-colimit) we can find a map F -> I with F a constructible sheaf of Z/lZ-modules' (step 2 of its split, through the chain in via down to [lem-weil-pbc-fpqc-descend-integral], which combines 02KS and 02L5); made precise here: in the proof of Descent 02L5 (descent.tex lines 5945-5953), 'Also, by flat base change (see for example Cohomology of Schemes, Lemma [02KH]) we have g^*f_*O_X = f'_*O_{X'}. In other words, we have A' = R' (x)_R A'",
+   "via": [
+    "lem-weil-pbc-fpqc-descend-affine",
+    "lem-weil-pbc-fpqc-descend-integral",
+    "lem-weil-pbc-fpqc-descend-finite",
+    "lem-weil-pbc-finite-locally-free-degree-etale-descent",
+    "lem-weil-pbc-flat-fp-lqf-bounded-stratification",
+    "lem-weil-pbc-flat-fp-qf-stratification",
+    "lem-weil-pbc-etale-separated-stratified-finite",
+    "lem-weil-pbc-etale-stratified-finite",
+    "lem-weil-pbc-etale-free-sheaf-constructible",
+    "lem-weil-pbc-constructible-generation",
+    "lem-weil-pbc-module-sheaf-colimit-constructible"
+   ]
+  },
+  "same_as": [
+   "lem-pc-flat-base-change-cohom"
+  ]
+ },
+ "kind": "statement",
+ "title": "Flat base change of global sections over an affine base (Stacks 02KH, degree 0)",
+ "statement": "Let $S$ and $S'$ be affine schemes [def-pc-scheme], $g:S'\\to S$ a flat morphism [def-weil-flat-morphism], and $f:X\\to S$ a morphism of schemes such that the scheme $X$ is quasi-compact and quasi-separated [def-weil-pbc-scheme-conventions]. Let $X'=X\\times_SS'$ be the fibre product [def-pc-fibre-product] with projections $g':X'\\to X$ and $f':X'\\to S'$. Then the ring map $$\\Gamma(X,\\mathcal O_X)\\otimes_{\\Gamma(S,\\mathcal O_S)}\\Gamma(S',\\mathcal O_{S'})\\longrightarrow\\Gamma(X',\\mathcal O_{X'}),\\qquad a\\otimes s'\\mapsto g'^\\sharp(a)\\cdot f'^\\sharp(s'),$$ where $g'^\\sharp,f'^\\sharp$ are the maps on global sections and the tensor product is formed through $f^\\sharp$ and $g^\\sharp$, is an isomorphism.",
+ "source": {
+  "document": "literature/stacks-project/coherent.tex",
+  "place": "Cohomology of Schemes, Lemma Tag 02KH (lemma-flat-base-change-cohomology, line 948), the case $i=0$, $\\mathcal F=\\mathcal O_X$, $S=\\operatorname{Spec}A$, $S'=\\operatorname{Spec}B$: '$H^i(X,\\mathcal F)\\otimes_AB=H^i(X',\\mathcal F')$' (with $f$ quasi-compact and quasi-separated, which holds when $X$ is quasi-compact and quasi-separated and $S$ is affine)"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-flat-morphism",
+  "def-weil-pbc-scheme-conventions",
+  "def-pc-fibre-product"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "flat base change global sections quasi-compact quasi-separated tensor product isomorphism",
+   "results": "none: the service returned HTTP 500 Internal Server Error on every call on 2026-10-10 (lean-lsp tool and https://leansearch.net/search directly)",
+   "date": "2026-10-10",
+   "verdict": "no result (service error)"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "flat base change for global sections: Γ(X) ⊗_R R' ≅ Γ(X ×_S S') for X quasi-compact quasi-separated and S' → S flat affine",
+   "results": "Scheme.Hom.flat_appLE, Flat.flat_appLE, Flat.instHasRingHomPropertyFlat, flat_iff, Flat.isStableUnderBaseChange (Morphisms.Flat)",
+   "date": "2026-10-10",
+   "verdict": "no match among the results (the file found, Morphisms/Flat.lean, holds the match; see loogle and grep)"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.isIso_pushoutSection_of_isQuasiSeparated_of_flat_right",
+   "results": "AlgebraicGeometry.isIso_pushoutSection_of_isQuasiSeparated_of_flat_right (Mathlib.AlgebraicGeometry.Morphisms.Flat): (H : IsPullback g iY iX f) ... [Flat f] (hUS : IsAffineOpen US) (hUT : IsAffineOpen UT) (hUX : IsCompact UX) (hUX' : IsQuasiSeparated UX) : IsIso (pushoutSection H hUST hUSX hUY)",
+   "date": "2026-10-10",
+   "verdict": "match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -n 'pushoutSection' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicGeometry/Morphisms/Flat.lean; sed -n 190,243p and 457,470p of that file",
+   "results": "Flat.lean:222-233 the cartesian square Y -g-> X, iY, iX, T -f-> S and pushoutSection : pushout (iX.appLE US UX) (f.appLE US UT) ⟶ Γ(Y, UY), the map Γ(X,U_X) ⊗_{Γ(S,U_S)} Γ(T,U_T) -> Γ(Y, g^{-1}U_X ∩ iY^{-1}U_T); Flat.lean:457-460 isIso_pushoutSection_of_isQuasiSeparated_of_flat_right",
+   "date": "2026-10-10",
+   "verdict": "match"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "AlgebraicGeometry.isIso_pushoutSection_of_isQuasiSeparated_of_flat_right",
+  "file": "Mathlib/AlgebraicGeometry/Morphisms/Flat.lean",
+  "line": 457,
+  "how": "specializes in one line (lines 457-460, with the setting at 222-233, read with sed -n on 2026-10-10): take the cartesian square with T := S', f := g (Flat), X := X, iX := f, Y := X', g := g', iY := f' (IsPullback g' f' f g, [def-pc-fibre-product]), and US := ⊤, UT := ⊤, UX := ⊤, UY := ⊤ (⊤ = g'^{-1}⊤ ⊓ f'^{-1}⊤); ⊤ of an affine scheme is an affine open (isAffineOpen_top), ⊤ of X is compact and quasi-separated as X is quasi-compact and quasi-separated. pushoutSection is then the map out of the pushout of Γ(X) <- Γ(S) -> Γ(S') in CommRingCat, which is the tensor product Γ(X) ⊗_{Γ(S)} Γ(S') (CommRingCat.pushoutCocone), given by a ⊗ s' ↦ g'^♯(a) f'^♯(s'); IsIso says it is an isomorphism of rings. The same specialization is used in the slopmaster2 proof of IsAffineHom.descendsAlong_surjective_inf_flat_inf_quasicompact (WeilConjectures/Mathlib/AlgebraicGeometry/Morphisms/FlatDescent.lean:71-73)."
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-fpqc-descend-affine",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1"
+}
