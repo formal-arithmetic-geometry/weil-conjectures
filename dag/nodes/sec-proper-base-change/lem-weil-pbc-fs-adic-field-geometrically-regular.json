@@ -15,9 +15,83 @@
   "def-weil-module-base-change",
   "def-weil-regular-scheme"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Fix any finite purely inseparable field extension $k\\subseteq k_1$. Put $D=C\\otimes_k k_1$ and $I=\\mathfrak mD$. By [lem-weil-pbc-purely-inseparable-base-change-local-ring], $D$ is a Noetherian local ring with a unique maximal ideal $\\mathfrak n$, and $\\mathfrak n$ is the only prime containing $I$. In particular $I\\subseteq\\mathfrak n$. This applies also to the degree-one extension $k_1=k$; in characteristic zero this is the only finite purely inseparable extension [def-weil-pbc-finite-purely-inseparable-extension].",
+   "uses": [
+    "lem-weil-pbc-purely-inseparable-base-change-local-ring",
+    "def-weil-pbc-finite-purely-inseparable-extension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "More on Algebra, Theorem Tag 07EL (theorem-regular-fs), proof of (2) implies (1), lines 9894–9907; the ideal-containment lifting argument spells out the topology change implicit there"
+   }
+  },
+  {
+   "text": "Apply [lem-weil-pbc-fs-adic-base-change] to $k\\to C$ and $k\\to k_1$. It gives formal smoothness of $k_1\\to D$ for the $I$-adic topology.",
+   "uses": [
+    "lem-weil-pbc-fs-adic-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "More on Algebra, Theorem Tag 07EL (theorem-regular-fs), proof of (2) implies (1), lines 9894–9907; the ideal-containment lifting argument spells out the topology change implicit there"
+   }
+  },
+  {
+   "text": "To obtain formal smoothness for the maximal-ideal topology, use [def-weil-pbc-formally-smooth-adic] directly. Let $E$ be a commutative $k_1$-algebra, $J\\subseteq E$ an ideal with $J^2=0$, and $g:D\\to E/J$ a $k_1$-algebra map killing $\\mathfrak n^q$ for some $q\\ge1$. Since $I\\subseteq\\mathfrak n$, we have $I^q\\subseteq\\mathfrak n^q$, so $g(I^q)=0$. The $I$-adic lifting property from step 2 supplies a $k_1$-algebra map $f:D\\to E$ lifting $g$, exactly as required by the definition for $\\mathfrak n$. Also $f(\\mathfrak n^q)\\subseteq J$, hence $f(\\mathfrak n^{2q})\\subseteq J^2=0$, so the lift is continuous for the maximal-ideal-adic topology as well. Thus no unproved equality of adic topologies is needed.",
+   "uses": [
+    "def-weil-pbc-formally-smooth-adic"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "More on Algebra, Theorem Tag 07EL (theorem-regular-fs), proof of (2) implies (1), lines 9894–9907; the ideal-containment lifting argument spells out the topology change implicit there"
+   }
+  },
+  {
+   "text": "The field $k_1$ and the Noetherian local $k_1$-algebra $(D,\\mathfrak n)$ now satisfy every hypothesis of [lem-weil-pbc-fs-adic-field-regular-local], so $D$ is regular local. By [lem-weil-pbc-regular-local-localization], every prime localization of $D$ is regular local, hence $D$ is a regular ring.",
+   "uses": [
+    "lem-weil-pbc-fs-adic-field-regular-local",
+    "lem-weil-pbc-regular-local-localization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "More on Algebra, Theorem Tag 07EL (theorem-regular-fs), proof of (2) implies (1), lines 9894–9907; the ideal-containment lifting argument spells out the topology change implicit there"
+   }
+  },
+  {
+   "text": "The tensor product with reversed factors in the statement is canonically the same scalar extension: the maps $\\tau:C\\otimes_k k_1\\to k_1\\otimes_k C$, $c\\otimes a\\mapsto a\\otimes c$, and $\\sigma:a\\otimes c\\mapsto c\\otimes a$ are ring homomorphisms by [lem-weil-pbc-algebra-tensor-pushout-universal-property] (using the two structure maps in reversed order), and their composites are identities on pure tensors, hence identities. This ring isomorphism sends prime ideals bijectively to prime ideals and induces isomorphisms of their localizations; it preserves chains of prime ideals and minimal numbers of generators of maximal ideals. Thus the definition of regular local ring and regular ring [def-weil-regular-scheme] gives regularity of $k_1\\otimes_k C$ from step 4. Since $k_1/k$ was arbitrary, this is geometric regularity over $k$ by [def-weil-pbc-g-ring].",
+   "uses": [
+    "lem-weil-pbc-algebra-tensor-pushout-universal-property",
+    "def-weil-regular-scheme",
+    "def-weil-pbc-g-ring"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "More on Algebra, Theorem Tag 07EL (theorem-regular-fs), proof of (2) implies (1), lines 9894–9907; the ideal-containment lifting argument spells out the topology change implicit there"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-purely-inseparable-base-change-local-ring",
+  "def-weil-pbc-finite-purely-inseparable-extension",
+  "lem-weil-pbc-fs-adic-base-change",
+  "def-weil-pbc-formally-smooth-adic",
+  "lem-weil-pbc-fs-adic-field-regular-local",
+  "lem-weil-pbc-regular-local-localization",
+  "lem-weil-pbc-algebra-tensor-pushout-universal-property",
+  "def-weil-regular-scheme",
+  "def-weil-pbc-g-ring"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "More on Algebra, Theorem Tag 07EL (theorem-regular-fs), proof of (2) implies (1), lines 9894–9907; the ideal-containment lifting argument spells out the topology change implicit there"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -56,7 +130,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "worker",
@@ -77,5 +151,17 @@
  },
  "chapter": "sec-proper-base-change",
  "unit": "sk-thm-p1",
- "reviewed": "Reviewed by L 2026-10-10 (statement): More on Algebra 07EL (2)=>(1) in both characteristics, stated as geometric regularity in the sense of def-weil-pbc-g-ring (in characteristic 0 only k'=k occurs). Unsplit; the splitter must handle locality of C⊗_k k' and the comparison of adic topologies left implicit by the source."
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "group": "F1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed by the lead of F1; spot-checked by L: L read the five steps (07EL (2)=>(1)): base change to a finite purely inseparable k_1 is Noetherian local (existing node), I-adic formal smoothness by base change, upgraded to n-adic by I in n, regular local by the new unsplit 07EI node, regular ring by localization, factor swap."
+ },
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "lem-weil-pbc-fs-adic-field-geometrically-regular",
+  "worker": "stage1",
+  "summary": "Read Stacks 07EL (theorem-regular-fs), 07EG (lemma-base-change-fs), and 07EI (lemma-fs-implies-regular). Kept the statement and its dependencies. Reused the existing purely inseparable base-change locality node, adic base-change node, regular-local localization node, and tensor-product public universal property. Wrote the needed topology change directly as a square-zero lifting argument from I contained in the new maximal ideal; no cofinality claim is assumed. Created only the strictly smaller 07EI regular-local helper, with three kinds of Mathlib search and no proof. The argument handles both characteristics and the degree-one extension."
+ }
 }
