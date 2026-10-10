@@ -137,8 +137,6 @@ end Dualizable
 
 variable (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ] {X : Scheme.{u}}
 
-namespace DerivedCategory
-
 section FiniteProjective
 
 attribute [local instance] Abelian.hasFiniteBiproducts
@@ -146,21 +144,18 @@ attribute [local instance] Abelian.hasFiniteBiproducts
 variable {Λ} {P : Sheaf (Scheme.ProEt.topology X) (ModuleCat.{u + 1} Λ)} {r : ℕ}
 
 /-- A finite projective `Λ_X`-module `P`, that is, a direct summand of a finite free module
-`Λ_Xʳ` on the small pro-étale site, regarded as a complex in degree `0`, is bounded
-constructible.
+`Λ_Xʳ` on the small pro-étale site, is `ν^*` of a constructible étale sheaf.
 
-Constructibility on the pro-étale site is étale origin
-(`AlgebraicGeometry.ProEtale.DerivedCategory.boundedConstructible`). The free module `Λ_Xʳ` is
-`ν^*` of the constructible étale sheaf `Λ_{X_ét}ʳ`, and the idempotent of `Λ_Xʳ` cutting out
-`P` comes from an endomorphism `e'` of `Λ_{X_ét}ʳ`, as `ν^*` is full
+The free module `Λ_Xʳ` is `ν^*` of the constructible étale sheaf `Λ_{X_ét}ʳ`, and the idempotent
+of `Λ_Xʳ` cutting out `P` comes from an endomorphism `e'` of `Λ_{X_ét}ʳ`, as `ν^*` is full
 (`AlgebraicGeometry.ProEtale.full_comparisonUpperStar`). Since `ν^*` is exact, `P` is `ν^*` of
 the kernel of `1 - e'`, which is constructible
 (`AlgebraicGeometry.Scheme.IsConstructibleSheaf.kernel`). -/
-theorem boundedConstructible_single_of_retract
+theorem exists_isConstructibleSheaf_iso_comparisonUpperStar_obj_of_retract
     (hP : Retract P (⨁ fun _ : Fin r ↦ 𝟙_ (Sheaf (Scheme.ProEt.topology X)
       (ModuleCat.{u + 1} Λ)))) :
-    boundedConstructible (ModuleCat.{u + 1} Λ) X
-      ((_root_.DerivedCategory.singleFunctor _ 0).obj P) := by
+    ∃ Q : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ),
+      IsConstructibleSheaf Q ∧ Nonempty ((ν^*(X)[ModuleCat.{u + 1} Λ]).obj Q ≅ P) := by
   let N := ν^*(X)[ModuleCat.{u + 1} Λ]
   let L' := ⨁ fun _ : Fin r ↦ 𝟙_ (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))
   let eL : N.obj L' ≅ ⨁ fun _ : Fin r ↦ 𝟙_ (Sheaf (Scheme.ProEt.topology X)
@@ -172,7 +167,6 @@ theorem boundedConstructible_single_of_retract
   let e' : L' ⟶ L' := N.preimage (π ≫ ι)
   have he' : N.map (𝟙 L' - e') = 𝟙 _ - π ≫ ι := by simp [e']
   have : IsConstructibleSheaf L' := IsConstructibleSheaf.biproduct _
-  have : IsConstructibleSheaf (kernel (𝟙 L' - e')) := IsConstructibleSheaf.kernel _
   -- `ι` is a kernel of `1 - π ≫ ι`
   have hlim : IsLimit (KernelFork.ofι (f := 𝟙 _ - π ≫ ι) ι (by
       simp [Preadditive.comp_sub, reassoc_of% hιπ])) :=
@@ -183,11 +177,39 @@ theorem boundedConstructible_single_of_retract
       (fun g hg m hm ↦ by
         rw [← hm]
         simp [hιπ])
-  let eP : N.obj (kernel (𝟙 L' - e')) ≅ P :=
-    PreservesKernel.iso N _ ≪≫ kernelIsoOfEq he' ≪≫
-      (limit.isLimit _).conePointUniqueUpToIso hlim
+  exact ⟨kernel (𝟙 L' - e'), IsConstructibleSheaf.kernel _,
+    ⟨PreservesKernel.iso N _ ≪≫ kernelIsoOfEq he' ≪≫
+      (limit.isLimit _).conePointUniqueUpToIso hlim⟩⟩
+
+omit [Finite Λ] in
+/-- A finite projective `Λ_X`-module `P`, that is, a direct summand of a finite free module
+`Λ_Xʳ` on the small pro-étale site, is flat, as a retract of the flat module `Λ_Xʳ`. -/
+theorem flat_of_retract
+    (hP : Retract P (⨁ fun _ : Fin r ↦ 𝟙_ (Sheaf (Scheme.ProEt.topology X)
+      (ModuleCat.{u + 1} Λ)))) :
+    ObjectProperty.flat P := by
+  refine ObjectProperty.flat_of_retract hP ?_
+  have h := ObjectProperty.flat_coproduct (fun _ : ULift.{u + 1} (Fin r) ↦
+    𝟙_ (Sheaf (Scheme.ProEt.topology X) (ModuleCat.{u + 1} Λ)))
+    fun _ ↦ ObjectProperty.flat_of_isDualizable isDualizable_unit
+  exact ObjectProperty.prop_of_iso _ ((Sigma.whiskerEquiv Equiv.ulift.symm
+    (fun _ ↦ Iso.refl _)).symm ≪≫ (biproduct.isoCoproduct _).symm) h
+
+namespace DerivedCategory
+
+/-- A finite projective `Λ_X`-module `P`, that is, a direct summand of a finite free module
+`Λ_Xʳ` on the small pro-étale site, regarded as a complex in degree `0`, is bounded
+constructible: it is `ν^*` of a constructible étale sheaf
+(`AlgebraicGeometry.ProEtale.exists_isConstructibleSheaf_iso_comparisonUpperStar_obj_of_retract`).
+-/
+theorem boundedConstructible_single_of_retract
+    (hP : Retract P (⨁ fun _ : Fin r ↦ 𝟙_ (Sheaf (Scheme.ProEt.topology X)
+      (ModuleCat.{u + 1} Λ)))) :
+    boundedConstructible (ModuleCat.{u + 1} Λ) X
+      ((_root_.DerivedCategory.singleFunctor _ 0).obj P) := by
+  obtain ⟨Q, _, ⟨eP⟩⟩ := exists_isConstructibleSheaf_iso_comparisonUpperStar_obj_of_retract hP
   exact ⟨_, Etale.DerivedCategory.boundedConstructible_singleFunctor_obj _ 0,
-    ⟨(N.mapDerivedCategorySingleFunctor 0).app _ ≪≫
+    ⟨((ν^*(X)[ModuleCat.{u + 1} Λ]).mapDerivedCategorySingleFunctor 0).app _ ≪≫
       (_root_.DerivedCategory.singleFunctor _ 0).mapIso eP⟩⟩
 
 omit [Finite Λ] in
@@ -198,14 +220,8 @@ theorem torAmplitudeIn_single_of_retract
     (hP : Retract P (⨁ fun _ : Fin r ↦ 𝟙_ (Sheaf (Scheme.ProEt.topology X)
       (ModuleCat.{u + 1} Λ)))) :
     torAmplitudeIn (ModuleCat.{u + 1} Λ) X 0 0
-      ((_root_.DerivedCategory.singleFunctor _ 0).obj P) := by
-  refine _root_.DerivedCategory.torAmplitudeIn_singleFunctor_obj_of_flat
-    (ObjectProperty.flat_of_retract hP ?_)
-  have h := ObjectProperty.flat_coproduct (fun _ : ULift.{u + 1} (Fin r) ↦
-    𝟙_ (Sheaf (Scheme.ProEt.topology X) (ModuleCat.{u + 1} Λ)))
-    fun _ ↦ ObjectProperty.flat_of_isDualizable isDualizable_unit
-  exact ObjectProperty.prop_of_iso _ ((Sigma.whiskerEquiv Equiv.ulift.symm
-    (fun _ ↦ Iso.refl _)).symm ≪≫ (biproduct.isoCoproduct _).symm) h
+      ((_root_.DerivedCategory.singleFunctor _ 0).obj P) :=
+  _root_.DerivedCategory.torAmplitudeIn_singleFunctor_obj_of_flat (flat_of_retract hP)
 
 /-- Blueprint `prop-pod-perfect-local-model`: The local finite projective model.
 
@@ -221,7 +237,70 @@ theorem constructibleTorAmplitudeIn_single_of_retract
   ⟨⟨boundedConstructible_single_of_retract hP,
     _root_.DerivedCategory.homologyConcentratedIn_of_torAmplitudeIn h⟩, h⟩
 
+
+/-- Blueprint `prop-pod-perfect-local-model`: The local finite projective model.
+
+A bounded complex `P` of finite projective `Λ_X`-modules on the small pro-étale site, each a
+direct summand of a finite free module `Λ_Xʳ`, lies in `Dctf(X, Λ)`. Its terms are flat, so it
+has finite Tor amplitude (`_root_.DerivedCategory.torAmplitudeIn_Q_obj_of_flat`). Each term is
+`ν^*` of a constructible étale sheaf, and as `ν^*` is fully faithful so is `P` of a bounded
+complex `P'` of constructible étale sheaves. The cohomology sheaves of `P'` are constructible,
+as constructible sheaves are closed under kernels and cokernels, so `P = ν^* P'` is bounded
+constructible. -/
+theorem constructibleFiniteTor_Q_obj_of_retract
+    (P : CochainComplex (Sheaf (Scheme.ProEt.topology X) (ModuleCat.{u + 1} Λ)) ℤ) (a b : ℤ)
+    [P.IsStrictlyGE a] [P.IsStrictlyLE b]
+    (hP : ∀ n, ∃ r : ℕ, Nonempty (Retract (P.X n) (⨁ fun _ : Fin r ↦
+      𝟙_ (Sheaf (Scheme.ProEt.topology X) (ModuleCat.{u + 1} Λ))))) :
+    constructibleFiniteTor (ModuleCat.{u + 1} Λ) X (_root_.DerivedCategory.Q.obj P) := by
+  refine ⟨?_, a, b, _root_.DerivedCategory.torAmplitudeIn_Q_obj_of_flat P a b fun n ↦ by
+    obtain ⟨r, ⟨h⟩⟩ := hP n
+    exact flat_of_retract h⟩
+  let N := ν^*(X)[ModuleCat.{u + 1} Λ]
+  have h (n : ℤ) : ∃ Q : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ),
+      IsConstructibleSheaf Q ∧ Nonempty (N.obj Q ≅ P.X n) := by
+    obtain ⟨r, ⟨h⟩⟩ := hP n
+    exact exists_isConstructibleSheaf_iso_comparisonUpperStar_obj_of_retract h
+  choose Q hQ e using h
+  let e (n : ℤ) := (e n).some
+  -- the étale complex `P'` with `ν^* P' ≅ P`
+  let P' : CochainComplex (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)) ℤ :=
+    { X := Q
+      d i j := N.preimage ((e i).hom ≫ P.d i j ≫ (e j).inv)
+      shape i j hij := N.map_injective (by simp [P.shape i j hij])
+      d_comp_d' i j k _ _ := N.map_injective (by simp) }
+  let eP : (N.mapHomologicalComplex _).obj P' ≅ P :=
+    HomologicalComplex.Hom.isoOfComponents e (fun i j _ ↦ by simp [P'])
+  have hz (n : ℤ) (hn : IsZero (P.X n)) : IsZero (Q n) :=
+    (IsZero.iff_id_eq_zero _).2 (N.map_injective (by
+      rw [N.map_id, N.map_zero]
+      exact (hn.of_iso (e n)).eq_of_src _ _))
+  have : P'.IsStrictlyGE a := (CochainComplex.isStrictlyGE_iff P' a).2 fun i hi ↦
+    hz i (P.isZero_of_isStrictlyGE a i hi)
+  have : P'.IsStrictlyLE b := (CochainComplex.isStrictlyLE_iff P' b).2 fun i hi ↦
+    hz i (P.isZero_of_isStrictlyLE b i hi)
+  -- the cohomology sheaves of `P'` are constructible
+  have hQ' (n : ℤ) : Etale.constructibleSheaf (ModuleCat.{u + 1} Λ) X (Q n) :=
+    (Etale.constructibleSheaf_iff _ _ _).2 (hQ n)
+  have hH (n : ℤ) : IsConstructibleSheaf (P'.homology n) := by
+    have hcycles := (Etale.constructibleSheaf (ModuleCat.{u + 1} Λ) X).prop_of_isLimit_kernelFork
+      (P'.sc n).cyclesIsKernel (hQ' _) (hQ' _)
+    exact (Etale.constructibleSheaf_iff _ _ _).1
+      ((Etale.constructibleSheaf (ModuleCat.{u + 1} Λ) X).prop_of_isColimit_cokernelCofork
+        (P'.sc n).homologyIsCokernel (hQ' _) hcycles)
+  have hb : Etale.DerivedCategory.boundedConstructible (ModuleCat.{u + 1} Λ) X
+      (_root_.DerivedCategory.Q.obj P') := by
+    refine ⟨⟨⟨a, inferInstance⟩, ⟨b, inferInstance⟩⟩, fun n ↦ ?_⟩
+    have : IsConstructibleSheaf ((HomologicalComplex.homologyFunctor _ _ n).obj P') := hH n
+    exact IsConstructibleSheaf.of_iso
+      ((_root_.DerivedCategory.homologyFunctorFactors _ n).app P').symm
+  exact ⟨_, hb, ⟨N.mapDerivedCategoryFactors.app P' ≪≫ _root_.DerivedCategory.Q.mapIso eP⟩⟩
+
+end DerivedCategory
+
 end FiniteProjective
+
+namespace DerivedCategory
 
 variable [IsNoetherian X] in
 /-- Blueprint `prop-pod-perfect-local-model`: The local finite projective model.
