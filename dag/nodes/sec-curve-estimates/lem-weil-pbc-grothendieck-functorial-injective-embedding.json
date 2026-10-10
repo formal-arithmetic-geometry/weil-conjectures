@@ -1,0 +1,79 @@
+{
+ "id": "lem-weil-pbc-grothendieck-functorial-injective-embedding",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-cohomology-filtered-colimit",
+   "place": "proof, step 2 ('Exactness of filtered colimits gives the same identity on $H^q$'): the passage from degree $0$ to higher degrees, which the DAG proof does by the dimension shift of Stacks 0739, embedding the whole filtered diagram $(F_a)$ into a diagram of injective sheaves by a morphism of diagrams",
+   "via": []
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Functorial injective embeddings in a Grothendieck abelian category",
+ "statement": "Let $\\mathcal A$ be a Grothendieck abelian category [def-sp-grothendieck-abelian]. Then $\\mathcal A$ has functorial injective embeddings: there are a functor $J:\\mathcal A\\to\\mathcal A$ and a natural transformation $j:\\mathrm{id}_{\\mathcal A}\\to J$ such that for every object $A$ the morphism $j_A:A\\to J(A)$ is a monomorphism and $J(A)$ is an injective object of $\\mathcal A$ [def-sp-injective-resolutions]. In particular, for every small category $\\mathcal I$ and every diagram $i\\mapsto A_i$, $\\mathcal I\\to\\mathcal A$, the maps $j_{A_i}:A_i\\to J(A_i)$ form a morphism of diagrams from $(A_i)$ to the diagram $(J(A_i))$ of injective objects, each component a monomorphism.",
+ "source": {
+  "document": "literature/stacks-project/injectives.tex",
+  "place": "Injectives, Theorem Tag 079H (label theorem-injective-embedding-grothendieck), with Homology, Definition Tag 0139 (label definition-functorial-injective-embedding) for the notion; for abelian sheaves on a site also Injectives, Theorem Tag 01DP (label theorem-sheaves-injectives), second sentence"
+ },
+ "stmt_deps": [
+  "def-sp-grothendieck-abelian",
+  "def-sp-injective-resolutions"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Grothendieck abelian category has functorial injective embedding: functor with natural monomorphism into injective objects",
+   "results": "CategoryTheory.IsGrothendieckAbelian.enoughInjectives (Mathlib.CategoryTheory.Abelian.GrothendieckCategory.EnoughInjectives); IsGrothendieckAbelian.generatingMonomorphisms.functorToMonoOver; FreydMitchell.functor",
+   "date": "2026-10-10",
+   "verdict": "enoughInjectives is the non-functorial consequence; the functorial data sits next to it (see the grep entry)"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "functorial embedding of every object into an injective object in a Grothendieck abelian category",
+   "results": "IsGrothendieckAbelian.enoughInjectives; IsGrothendieckAbelian.instInjectiveZMonomorphismsRlpMonoMapFactorizationDataRlpOfNatHom (Z of the functorial factorization of X -> 0 is injective); InjectiveResolution.instHasInjectiveResolution",
+   "date": "2026-10-10",
+   "verdict": "match (with the functorial factorization instance)"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rn 'functorial injective\\|FunctorialInjective\\|HasFunctorialFactorization (monomorphisms' Mathlib/CategoryTheory; sed -n 350,377p Mathlib/CategoryTheory/Abelian/GrothendieckCategory/EnoughInjectives.lean; sed -n 128,140p and 158,168p Mathlib/CategoryTheory/MorphismProperty/Factorization.lean; sed -n 59,62p Mathlib/CategoryTheory/Preadditive/Injective/LiftingProperties.lean",
+   "results": "no declaration named 'functorial injective embedding'; EnoughInjectives.lean:356 instance HasFunctorialFactorization (monomorphisms C) (monomorphisms C).rlp for IsGrothendieckAbelian C; :365 monoMapFactorizationDataRlp f := (functorialFactorizationData _ _).factorizationData f; :373 instance Injective (monoMapFactorizationDataRlp (0 : X ⟶ 0)).Z; Factorization.lean:128 structure FunctorialFactorizationData (Z : Arrow C ⥤ C, i : Arrow.leftFunc ⟶ Z, hi : W₁ (i.app f)), :162 factorizationData f has Z := data.Z.obj (Arrow.mk f), i := data.i.app (Arrow.mk f); LiftingProperties.lean:59 injective_iff_rlp_monomorphisms_zero",
+   "date": "2026-10-10",
+   "verdict": "match: specializes in a few lines (see mathlib_match)"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.MorphismProperty.HasFunctorialFactorization, CategoryTheory.IsGrothendieckAbelian",
+   "results": "CategoryTheory.IsGrothendieckAbelian.instHasFunctorialFactorizationMonomorphismsRlp : (monomorphisms C).HasFunctorialFactorization (monomorphisms C).rlp (Mathlib.CategoryTheory.Abelian.GrothendieckCategory.EnoughInjectives)",
+   "date": "2026-10-10",
+   "verdict": "match (the declaration of mathlib_match)"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "CategoryTheory.IsGrothendieckAbelian.instHasFunctorialFactorizationMonomorphismsRlp",
+  "file": "Mathlib/CategoryTheory/Abelian/GrothendieckCategory/EnoughInjectives.lean",
+  "how": "specializes in a few lines: lines 356-360 give, for IsGrothendieckAbelian C, the data d = functorialFactorizationData (monomorphisms C) (monomorphisms C).rlp (Mathlib/CategoryTheory/MorphismProperty/Factorization.lean lines 128-136 and 266-268: a functor d.Z : Arrow C ⥤ C and a natural transformation d.i : Arrow.leftFunc ⟶ d.Z with every d.i.app f a monomorphism). Put J = (X ↦ Arrow.mk (0 : X ⟶ 0)) ⋙ d.Z and j = whiskering of d.i along that functor (Arrow.leftFunc of Arrow.mk (0 : X ⟶ 0) is X). J(X) is injective by the instance at EnoughInjectives.lean lines 373-376 (via injective_iff_rlp_monomorphisms_zero, Mathlib/CategoryTheory/Preadditive/Injective/LiftingProperties.lean line 59), since monoMapFactorizationDataRlp (0 : X ⟶ 0) (line 365) is d.factorizationData (0 : X ⟶ 0), whose Z is d.Z.obj (Arrow.mk 0) (Factorization.lean line 162-164). Stacks' Grothendieck abelian (colimits, a generator, exact filtered colimits) is Mathlib's IsGrothendieckAbelian (Basic.lean line 70: filtered colimits, AB5, a separator; all colimits by IsGrothendieckAbelian.hasColimits)",
+  "line": 356
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-cohomology-filtered-colimit",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-curve-estimates",
+ "unit": "sk-prop-h2"
+}
