@@ -23,9 +23,62 @@
   "def-pc-scheme",
   "def-pc-derived-category"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Let j_U, j_V, j_W be the open immersions of U, V and W=U\\cap V into X, with derived direct images Rj_{U,*}, Rj_{V,*}, Rj_{W,*} as in [lem-pc-restrict-derived-direct-image-open]. Form the morphism Rj_{U,*}A\\oplus Rj_{V,*}B\\to Rj_{W,*}(B|_W) whose V component is the restriction map and whose U component is the restriction map Rj_{U,*}A\\to Rj_{W,*}(A|_W) followed by Rj_{W,*}c. By the triangulated structure of the derived category [def-weil-abstract-derived-category] (applied to the abelian category of \\mathcal O_X-modules) it sits in a distinguished triangle F\\to Rj_{U,*}A\\oplus Rj_{V,*}B\\to Rj_{W,*}(B|_W)\\to F[1]; this defines F.",
+   "uses": [
+    "lem-pc-restrict-derived-direct-image-open",
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/cohomology.tex",
+    "place": "Tag 08DG (Lemma 20.45.1), proof"
+   }
+  },
+  {
+   "text": "Restrict the triangle to U. By [lem-pc-restrict-derived-direct-image-open] (Tag 08FE) applied to f=j_V and the open U (so f^{-1}U=W and g=j:W\\to U), to f=j_W and U (g=j), and to f=j_U and U (g=\\mathrm{id}_U), the restriction to U of the V pushforward and of the W pushforward are both canonically Rj_*(B|_W), and the restriction of the U pushforward is A. Under these identifications, the second arrow is the difference of the map induced by c and the identity on the pushforward from U∩V, so its projection to the second summand is an isomorphism and has a section. The cone triangle of [def-weil-abstract-derived-category] for a morphism with such a section is isomorphic to the triangle with first term A; hence F|_U≅A. Restricting to V gives F|_V≅B by the same displayed split-cone calculation with the two summands interchanged. Under these identifications, the two component maps on U∩V are c and the identity, so the transition isomorphism is c.",
+   "uses": [
+    "lem-pc-restrict-derived-direct-image-open",
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/cohomology.tex",
+    "place": "Tag 08DG (Lemma 20.45.1), proof"
+   }
+  },
+  {
+   "text": "Let f:F|_U→A and g:F|_V→B be the restriction isomorphisms from Step 2. The maps f^{-1} followed by a and g^{-1} followed by b are maps from F to E on U and V. On U∩V their two composites agree because f and g identify the transition with c and a|_{U∩V}=b|_{U∩V}∘c. Thus the compatible pair is the pair required by the Mayer–Vietoris step.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/cohomology.tex",
+    "place": "Tag 08DG (Lemma 20.45.1), proof"
+   }
+  },
+  {
+   "text": "The Mayer–Vietoris exact sequence for derived Hom [lem-sc-derived-hom-mayer-vietoris], applied to F and the target E, lifts this compatible pair to a global morphism F to E. Its restrictions are the prescribed maps by construction.",
+   "uses": [
+    "lem-sc-derived-hom-mayer-vietoris"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/cohomology.tex",
+    "place": "Tag 08DG (Lemma 20.45.1), proof; Mayer–Vietoris input Tag 08BW"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-abstract-derived-category",
+  "lem-pc-restrict-derived-direct-image-open",
+  "lem-sc-derived-hom-mayer-vietoris"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Tag 08DG (Lemma 20.45.1)"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -57,12 +110,31 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-sc-perfect-support-map-lift",
   "by": "worker",
   "date": "2026-10-10"
  },
  "chapter": "sec-picard-framework",
- "unit": "sk-thm-picard-duality"
+ "unit": "sk-thm-picard-duality",
+ "split_report": {
+  "date": "2026-10-11",
+  "item": "lem-sc-derived-open-gluing",
+  "worker": "stage1",
+  "summary": "Split Tag 08DG into the cone construction, restriction of derived open pushforwards, the local compatibility check, and the Mayer–Vietoris Hom lifting step. Added two statement-only child nodes for the non-elementary restriction and Hom inputs; the derived-category cone construction is cited from the existing definition.",
+  "blueprint": "Realizes the proper-flat support proof clause of lem-sc-finite-duality: glue perfect complexes on U and V and then glue compatible maps by the derived Hom Mayer–Vietoris sequence."
+ },
+ "tool_uses": [
+  "lem-pc-restrict-derived-direct-image-open"
+ ],
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-dog2822",
+  "group": "M1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-dog2822 (reviewer sub-agent of L); spot-checked: Item vs Tag 08DG (both clauses, morphism clause existence only, matches use in lem-pc-perfect-complex-descent and lem-sc-perfect-support-map-lift); proof follows the Stacks cone-triangle proof (not the K-injective route), steps 2-4 sound; MV Hom node vs 08BW real lemma, no DAG duplicate. FIX more, RETURN less: (1) B class (b): lem-sc-derived-open-restriction-pushforward is a special case of existing 08FE node lem-pc-restrict-derived-direct-image-open (f=j_V,j_W,j_U), dropped and the existing node cited in steps 1-2 with the three specializations named, recorded as tool use; (2) C1: step 1 now names Rj_* via that node and the triangulated structure (TR1) instead of 'representatives by complexes'; (3) source.document perfect.tex corrected to cohomology.tex for the item, its steps and lem-sc-derived-hom-mayer-vietoris.; 2 file(s) fixed by the reviewer"
+ },
+ "lead_note": "2026-10-10 L (R-dog2822): 08FE restriction cited as tool from lem-pc-restrict-derived-direct-image-open (unit sk-thm-picard-f-representable), as already for lem-pc-perfect-generation-open-induction-step; the unit-local duplicate was dropped"
 }
