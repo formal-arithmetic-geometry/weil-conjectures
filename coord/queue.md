@@ -2,7 +2,7 @@
 
 896 items; claim with `tools/claim.py next <group> [--stage N]`.
 
-## Stage 1: nodes to split (651)
+## Stage 1: nodes to split (650)
 
 | node | distance to a target | Lean state on the done branch |
 |---|---|---|
@@ -22,7 +22,6 @@
 | `lem-weil-pbc-flat-variant-local-criterion` | 1012 | none |
 | `lem-weil-pbc-formal-systems-graded-vanishing` | 1012 | none |
 | `lem-weil-pbc-formal-systems-kernel-rees-finite` | 1012 | none |
-| `lem-weil-pbc-principal-localization-naive-cotangent` | 1012 | none |
 | `lem-weil-pbc-reduced-source-factors-through-closed-subscheme` | 1012 | none |
 | `lem-weil-pbc-regular-local-finite-gl-dim` | 1012 | none |
 | `lem-weil-pbc-regular-local-hypersurface-criterion` | 1012 | none |
@@ -658,7 +657,7 @@
 | `lem-pc-linear-pair-graded-finite` | - | none |
 | `def-exc-jacobian-presentation` | - | none |
 
-## Stage 2: nodes to state (245)
+## Stage 2: nodes to state (246)
 
 | node | distance to Mathlib | kind |
 |---|---|---|
@@ -838,6 +837,7 @@
 | `lem-weil-pbc-popescu-product` | 1 | state |
 | `lem-weil-pbc-power-series-onto-completion` | 1 | state |
 | `lem-weil-pbc-power-set-complex-contractible` | 1 | state |
+| `lem-weil-pbc-principal-localization-naive-cotangent` | 1 | state |
 | `lem-weil-pbc-proper-coproduct` | 1 | state |
 | `lem-weil-pbc-reduced-induced-closed-subscheme` | 1 | state |
 | `lem-weil-pbc-reduced-noetherian-total-ring-fractions` | 1 | state |
@@ -908,7 +908,7 @@
 | `lem-weil-pbc-p1-field-dimension-one` | 4 | state |
 | `lem-weil-pbc-projective-space-zero-isomorphism` | 4 | state |
 
-Not open yet: 663 nodes that wait for stage 1, 537 nodes that wait for a statement dependency.
+Not open yet: 662 nodes that wait for stage 1, 537 nodes that wait for a statement dependency.
 
 ## Stage 3: modules to prove (0)
 
