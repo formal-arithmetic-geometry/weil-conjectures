@@ -16,6 +16,7 @@ public import WeilConjectures.AlgebraicGeometry.DualNumbers
 public import WeilConjectures.AlgebraicGeometry.DualNumbersBaseChange
 public import WeilConjectures.AlgebraicGeometry.Picard.DualNumbers
 public import WeilConjectures.AlgebraicGeometry.EffectiveDescent
+public import WeilConjectures.CategoryTheory.Comma.Over.DescentRepresentable
 public import WeilConjectures.AlgebraicGeometry.GroupScheme.Lie
 public import WeilConjectures.AlgebraicGeometry.GroupScheme.Separated
 public import WeilConjectures.AlgebraicGeometry.Picard.Degree
@@ -1771,6 +1772,33 @@ theorem exists_intermediateField_descentDatum {ks : Type u} [Field ks] [Algebra 
           ∀ s : Set JK.left, s.Finite → ∃ U : JK.left.Opens, IsAffineOpen U ∧ s ⊆ U :=
   sorry
 
+open Functor.RepresentableBy in
+/-- **`Pic^0_{C/k}` satisfies descent along a field extension.** Let `K/k` be a field extension and
+`T` a `k`-scheme. A section of `Pic^0_{C/k}` over `T` is determined by its pullback to
+`T_K = T ×_k K`, and a section over `T_K` whose two pullbacks to `T_K ×_T T_K` agree comes from
+`T`. For finite `K` this is the fppf sheaf property of `Pic^0_{C/k}`; in general
+`Spec K ⟶ Spec k` is only fpqc, and the statement is the fpqc sheaf property of `Pic^0_{C/k}` for
+the covering `T_K ⟶ T`, which follows from `Pic^0_{C/k}` being locally of finite presentation
+(Stacks 01ZC). -/
+theorem picardFunctorDegree_zero_descent {K : Type u} [Field K] [Algebra k K] (C : Scheme.{u})
+    [C.Over (Spec (.of k))] [SmoothOfRelativeDimension 1 (C ↘ Spec (.of k))]
+    [IsProper (C ↘ Spec (.of k))] [GeometricallyIntegral (C ↘ Spec (.of k))]
+    (T : Over (Spec (.of k))) :
+    (∀ x₁ x₂ : (picardFunctorDegree (C ↘ Spec (.of k)) 0).obj.obj (.op T),
+      (picardFunctorDegree (C ↘ Spec (.of k)) 0).obj.map
+          (descentCoverπ (Spec.map (CommRingCat.ofHom (algebraMap k K))) T).op x₁ =
+        (picardFunctorDegree (C ↘ Spec (.of k)) 0).obj.map
+          (descentCoverπ (Spec.map (CommRingCat.ofHom (algebraMap k K))) T).op x₂ → x₁ = x₂) ∧
+    ∀ y : (picardFunctorDegree (C ↘ Spec (.of k)) 0).obj.obj
+        (.op (descentCover (Spec.map (CommRingCat.ofHom (algebraMap k K))) T)),
+      (picardFunctorDegree (C ↘ Spec (.of k)) 0).obj.map
+          (descentCoverPr₁ (Spec.map (CommRingCat.ofHom (algebraMap k K))) T).op y =
+        (picardFunctorDegree (C ↘ Spec (.of k)) 0).obj.map
+          (descentCoverPr₂ (Spec.map (CommRingCat.ofHom (algebraMap k K))) T).op y →
+      ∃ x, (picardFunctorDegree (C ↘ Spec (.of k)) 0).obj.map
+          (descentCoverπ (Spec.map (CommRingCat.ofHom (algebraMap k K))) T).op x = y :=
+  sorry
+
 /-- **`Pic^0_{C/k}` is represented by the descended scheme.** Let `K/k` be a field extension, let
 `J_K` represent the restriction of `Pic^0_{C/k}` to schemes over `K`, and let `J` be a `k`-scheme
 with `J ×_k K ≅ J_K` through which the canonical descent datum of `J_K` relative to
@@ -1799,7 +1827,13 @@ theorem nonempty_representableBy_picardFunctorDegree_of_isPullback {K : Type u} 
         f₂ ≫ Spec.map (CommRingCat.ofHom (algebraMap k K))) (a : Over.mk f₁ ⟶ JK),
       (r.overTransport f₁ f₂ h a).left ≫ q = a.left ≫ q) :
     Nonempty ((picardFunctorDegree (C ↘ Spec (.of k)) 0).obj.RepresentableBy J) :=
-  sorry
+  Functor.RepresentableBy.nonempty_representableBy_of_descent r q hq hinv
+    (fun T ↦ inferInstance)
+    (fun T a ha ↦ ⟨EffectiveEpi.desc _ a fun g₁ g₂ hg ↦ by
+        simpa using congrArg (pullback.lift g₁ g₂ hg ≫ ·) ha,
+      EffectiveEpi.fac _ _ _⟩)
+    (fun T ↦ (picardFunctorDegree_zero_descent C T).1)
+    (fun T ↦ (picardFunctorDegree_zero_descent C T).2)
 
 /-- **The geometric points of `Pic^0_{C₀/k₀}`.** Let `C₀` be a smooth projective geometrically
 integral curve over `k₀`, let `K` be an algebraically closed extension of `k₀` and let `C` be the
