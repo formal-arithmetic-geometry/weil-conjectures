@@ -1,8 +1,8 @@
 # Work queue
 
-945 items; claim with `tools/claim.py next <group> [--stage N]`.
+944 items; claim with `tools/claim.py next <group> [--stage N]`.
 
-## Stage 1: nodes to split (584)
+## Stage 1: nodes to split (583)
 
 | node | distance to a target | Lean state on the done branch |
 |---|---|---|
@@ -23,7 +23,6 @@
 | `lem-weil-pbc-separably-generated-differentials-dimension` | 1014 | none |
 | `lem-weil-pbc-serre-criterion-reduced` | 1014 | none |
 | `lem-weil-pbc-two-term-homotopy-equivalence-direct-sum` | 1014 | none |
-| `lem-weil-pbc-zariski-extension-by-zero-exact` | 1014 | none |
 | `prop-weil-pbc-formal-glueing-equivalence` | 1014 | none |
 | `def-pc-ext` | 1015 | none |
 | `lem-weil-pbc-associated-prime-power-quotient` | 1015 | none |
@@ -957,7 +956,7 @@
 | `lem-weil-pbc-p1-field-dimension-one` | 4 | state |
 | `lem-weil-pbc-projective-space-zero-isomorphism` | 4 | state |
 
-Not open yet: 595 nodes that wait for stage 1, 686 nodes that wait for a statement dependency.
+Not open yet: 594 nodes that wait for stage 1, 687 nodes that wait for a statement dependency.
 
 ## Stage 3: modules to prove (0)
 
