@@ -3,11 +3,11 @@
  "blueprint": {
   "is": "pqf-def-locnoeth",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "definition",
  "title": "Locally Noetherian schemes",
- "statement": "A scheme $X$ is *locally Noetherian* if it admits an affine open\ncovering $X=\\bigcup_iU_i$ with $\\mathcal O_X(U_i)$ Noetherian for all\n$i$. Open subschemes of locally Noetherian schemes are locally\nNoetherian. A locally Noetherian morphism situation is one where the\ntarget is locally Noetherian.\n(*Stacks Project, Morphisms of Schemes, Lemma 29.15.6, Tag\n[01T6](https://stacks.math.columbia.edu/tag/01T6); the open\nsubscheme assertion follows from the definition of a locally Noetherian\nscheme together with the fact that an immersion is locally of finite\ntype, Morphisms of Schemes, Lemma 29.15.5, Tag\n[01T5](https://stacks.math.columbia.edu/tag/01T5).*)",
+ "statement": "A scheme $X$ [def-pc-scheme] is *locally Noetherian* if it admits an affine open\ncovering $X=\\bigcup_iU_i$ with $\\mathcal O_X(U_i)$ a Noetherian ring [def-weil-pbc-noetherian-ring] for all\n$i$ (*Stacks Project, Properties, Definition 28.5.1, Tag\n[01OV](https://stacks.math.columbia.edu/tag/01OV)*). Remark: open subschemes of locally Noetherian schemes are locally\nNoetherian, since an immersion is locally of finite type (Morphisms of Schemes, Lemma 29.15.5, Tag\n[01T5](https://stacks.math.columbia.edu/tag/01T5)) and a scheme locally of finite type over a locally Noetherian scheme is locally Noetherian (Morphisms of Schemes, Lemma 29.15.6, Tag\n[01T6](https://stacks.math.columbia.edu/tag/01T6)). A locally Noetherian morphism situation is one where the\ntarget is locally Noetherian.",
  "source": {
   "document": "literature/blueprint/master/blueprint/sec-nagata-compactification/sk-prop-nagata-sketch-zmt/pqf-def-locnoeth.md",
   "place": "node pqf-def-locnoeth, order 192",
@@ -22,13 +22,38 @@
    }
   ]
  },
- "stmt_deps": [],
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-pbc-noetherian-ring"
+ ],
  "proof": [],
  "proof_deps": [],
  "proof_origin": null,
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "locally Noetherian scheme affine open cover Noetherian",
+   "results": "AlgebraicGeometry.isLocallyNoetherian_of_affine_cover; AlgebraicGeometry.isLocallyNoetherian_iff_of_affine_openCover; AlgebraicGeometry.isLocallyNoetherian_iff_of_iSup_eq_top; AlgebraicGeometry.IsLocallyNoetherian.component_noetherian",
+   "date": "2026-10-10",
+   "verdict": "match for the affine-cover characterization and core class"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.IsLocallyNoetherian",
+   "results": "AlgebraicGeometry.IsLocallyNoetherian; AlgebraicGeometry.instIsLocallyNoetherianToScheme; AlgebraicGeometry.isLocallyNoetherian_of_isOpenImmersion; AlgebraicGeometry.LocallyOfFiniteType.isLocallyNoetherian",
+   "date": "2026-10-10",
+   "verdict": "match for the core class and open-subscheme consequence"
+  },
+  {
+   "tool": "grep",
+   "query": "IsLocallyNoetherian",
+   "results": "Mathlib/AlgebraicGeometry/Noetherian.lean:57 class IsLocallyNoetherian; :103 isLocallyNoetherian_of_affine_cover; :131 isLocallyNoetherian_iff_of_affine_openCover; :151 isLocallyNoetherian_of_isOpenImmersion; :158 open-subscheme instance",
+   "date": "2026-10-10",
+   "verdict": "match for the core class, affine-cover characterization, and open-subscheme consequence"
+  }
+ ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "import_flags": [],
  "blueprint_kind": "definition",
@@ -47,5 +72,25 @@
   }
  },
  "chapter": "sec-nagata-compactification",
- "unit": "sk-prop-nagata-sketch-zmt"
+ "unit": "sk-prop-nagata-sketch-zmt",
+ "split_report": {
+  "date": "2026-10-11",
+  "item": "pqf-def-locnoeth",
+  "worker": "stage1",
+  "summary": "Checked the definition against Stacks Morphisms Lemma 29.15.6, Tag 01T6, and Lemma 29.15.5, Tag 01T5. The statement is retained: it defines locally Noetherian schemes by an affine cover with Noetherian coordinate rings, records that open subschemes remain locally Noetherian, and names the convention that a locally Noetherian morphism situation has locally Noetherian target. Mathlib provides IsLocallyNoetherian, the affine-open-cover equivalence, and the open-immersion preservation theorem, but the equivalence between the Stacks definition and the Mathlib class is theorem-level, so this remains a split definition with a mathlib_candidate and no new nodes. The only statement dependency is the scheme notion.",
+  "blueprint": "The item is the blueprint node pqf-def-locnoeth itself; its full definition and the two Stacks consequences are realized here."
+ },
+ "mathlib_candidate": {
+  "declaration": "AlgebraicGeometry.IsLocallyNoetherian; AlgebraicGeometry.isLocallyNoetherian_iff_of_affine_openCover; AlgebraicGeometry.isLocallyNoetherian_of_isOpenImmersion",
+  "file": "Mathlib/AlgebraicGeometry/Noetherian.lean",
+  "reason": "Mathlib defines IsLocallyNoetherian by Noetherian rings on every affine open (lines 57-59), while isLocallyNoetherian_iff_of_affine_openCover (lines 131-135) gives the Stacks affine-cover formulation and isLocallyNoetherian_of_isOpenImmersion (lines 151-155), together with the Opens instance (lines 158-159), gives the open-subscheme assertion. The agreement of the Stacks definition with Mathlib's class is therefore theorem-level rather than a one-line definitional match."
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-dln2616",
+  "group": "H1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-dln2616 (reviewer sub-agent of L); spot-checked: No duplicate: grep of dag/nodes finds no other locally-Noetherian definition node (def-weil-pbc-coherent-formal-module cites this one). Statement is the Stacks cover form; citers needing every-affine-open use the separate lemma node pqf-lem-affine-open-locnoeth, so C4 holds. FIX more, RETURN less: (1) class b / C1: added the missing Noetherian-ring definition citation [def-weil-pbc-noetherian-ring] to the text and stmt_deps, and cited [def-pc-scheme] in the text (covers affine/open subscheme); (2) source fault: the definition was attributed to Tag 01T6 (a finite-type permanence lemma); now attributed to Properties Definition 28.5.1, Tag 01OV (checked in literature/stacks-project tags file), with 01OV added to source.external; (3) B10: the open-subscheme assertion is kept as a labelled elementary remark with its two-step justification via Tags 01T5 and 01T6. Second reading by H1 missed (1) and (2). Mathlib: IsLocallyNoetherian is the every-affine-open form, so split with mathlib_candidate is correct.; 1 file(s) fixed by the reviewer"
+ }
 }
