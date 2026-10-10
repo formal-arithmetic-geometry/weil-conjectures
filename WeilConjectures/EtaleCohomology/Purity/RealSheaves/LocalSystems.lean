@@ -14,6 +14,7 @@ public import Mathlib.FieldTheory.IntermediateField.Basic
 public import Mathlib.RepresentationTheory.Invariants
 public import Mathlib.Topology.Algebra.Category.ProfiniteGrp.Basic
 public import WeilConjectures.AlgebraicGeometry.FundamentalGroup.Basic
+public import WeilConjectures.AlgebraicGeometry.HenselianFiniteEtale
 public import WeilConjectures.ConstructibleSheaf.Defs
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Sites.Proetale
 public import WeilConjectures.EtaleCohomology.Purity.RealSheaves.Basic
@@ -136,6 +137,35 @@ noncomputable def Scheme.FiniteEtale.toSheafCompSheafFiberIso {Y : Scheme.{u}} {
       Functor.isoWhiskerRight shrinkYonedaIsoYoneda.symm
         (Scheme.pointSmallEtale s).presheafFiber ≪≫
       (Scheme.pointSmallEtale s).shrinkYonedaCompPresheafFiberIso)
+
+/-- **The sheaf of sets underlying a finite locally constant sheaf of `Λ`-modules**, for a
+finite ring `Λ`, is finite locally constant: it is constant on the members of the same étale
+cover, the forgetful functor preserving sheafification, and its stalks are the underlying sets
+of the stalks of `F`, finitely generated modules over a finite ring. This is the first step of
+the *linear structure* part of
+`AlgebraicGeometry.Scheme.exists_equivalence_isFiniteLocallyConstantSheaf_of_isFundamentalGroup`:
+a finite locally constant sheaf of `Λ`-modules is a finite locally constant sheaf of sets with a
+`Λ`-module structure. -/
+theorem Scheme.IsFiniteLocallyConstantSheaf.isFiniteLocallyConstantSheafOfTypes
+    {Λ : Type (u + 1)} [CommRing Λ] [Finite Λ] {Y : Scheme.{u}}
+    (F : Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ)) (hF : IsFiniteLocallyConstantSheaf F) :
+    IsFiniteLocallyConstantSheafOfTypes
+      ((sheafCompose _ (CategoryTheory.forget (ModuleCat.{u + 1} Λ))).obj F) := by
+  have : Limits.PreservesFilteredColimitsOfSize.{u, u} (CategoryTheory.forget (ModuleCat.{u + 1} Λ)) :=
+    Limits.preservesFilteredColimitsOfSize_shrink.{u, u + 1, u, u + 1} _
+  obtain ⟨⟨𝒰, h𝒰⟩⟩ := hF.toIsLocallyConstantSheaf.nonempty_locallyConstantDatum
+  refine ⟨⟨𝒰, fun i ↦ ?_⟩, ⟨fun Ω _ _ s ↦ ?_⟩⟩
+  · have := h𝒰 i
+    exact inferInstanceAs (((sheafCompose _ (CategoryTheory.forget (ModuleCat.{u + 1} Λ))).obj
+      (F.over _)).IsConstant _)
+  · have hfg := hF.toIsFiniteSheaf.isFinitelyGenerated_sheafFiber Ω s
+    have : Finite (ToType ((pointSmallEtale s).sheafFiber.obj F)) :=
+      ConcreteCategory.FiniteOfIsFinitelyGenerated.finite_of_isFinitelyGenerated
+        (C := ModuleCat.{u + 1} Λ) _ hfg
+    let e := ((pointSmallEtale s).sheafFiberCompIso
+      (CategoryTheory.forget (ModuleCat.{u + 1} Λ))).app F
+    rw [ConcreteCategory.isFinitelyGenerated_iff_finite]
+    exact @Finite.of_equiv _ _ this e.symm.toEquiv
 
 /-- Blueprint `sk-i-real-galois`: Galois correspondence for finite local systems. Also
 blueprint `cor-galois-lisse-representations`: Lisse sheaves and continuous representations.
