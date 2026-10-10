@@ -1,0 +1,71 @@
+{
+ "id": "lem-weil-pbc-module-pullback-affine-sections",
+ "kind": "statement",
+ "title": "Sections of the pullback of a quasi-coherent module over an affine open",
+ "statement": "Let $f:X\\to Y$ be a morphism of schemes [def-pc-scheme], $\\mathcal G$ a quasi-coherent $\\mathcal O_Y$-module [pqf-def-coherent], [def-weil-sheaf-of-modules-category], and $f^*\\mathcal G$ its pullback [def-pc-module-pullback], with unit $\\eta_{\\mathcal G}:\\mathcal G\\to f_*f^*\\mathcal G$ of the adjunction $f^*\\dashv f_*$; for an open $W\\subseteq Y$ and $s\\in\\mathcal G(W)$ write $f^*s=\\eta_{\\mathcal G}(s)\\in(f^*\\mathcal G)(f^{-1}W)$. Let $V\\subseteq Y$ and $U\\subseteq f^{-1}(V)$ be affine opens, $A=\\mathcal O_Y(V)$, $B=\\mathcal O_X(U)$, and $\\rho:A\\to B$, $\\rho(a)=f^\\sharp_V(a)|_U$, the ring map induced by $f$ (so $B$ is an $A$-algebra and $\\mathcal G(V)\\otimes_AB$ a $B$-module through the second factor). Then the map\n$$c_{\\mathcal G}:\\mathcal G(V)\\otimes_AB\\longrightarrow(f^*\\mathcal G)(U),\\qquad s\\otimes b\\longmapsto b\\cdot(f^*s)|_U,$$\nis a well-defined isomorphism of $B$-modules, and it is natural in $\\mathcal G$: for every $\\mathcal O_Y$-linear $u:\\mathcal G\\to\\mathcal G'$ between quasi-coherent $\\mathcal O_Y$-modules, $(f^*u)_U\\circ c_{\\mathcal G}=c_{\\mathcal G'}\\circ(u_V\\otimes1_B)$.",
+ "source": {
+  "document": "literature/stacks-project/schemes.tex",
+  "place": "Schemes, Lemma 01I9 (lemma-widetilde-pullback) part (1): psi^* M~ = (S (x)_R M)~ for a morphism of affine schemes Spec S -> Spec R, functorially in M; combined with Lemma 01IA (lemma-quasi-coherent-affine: G|_V = G(V)~ on an affine V), Lemma 01HV (lemma-spec-sheaves: global sections of N~ are N) and the compatibility of f^* with restriction to opens (Sheaves, Lemma 00A0, lemma-j-pullback; Modules, Lemma 01AJ, lemma-exactness-pushforward-pullback, f^* as a left adjoint); this is the affine description used in the proof of Modules, Lemma 01BG (lemma-pullback-quasi-coherent, modules.tex). Stacks states no separate lemma for an affine open U of X lying over an affine open V of Y (statement assembled by the agent)."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "pqf-def-coherent",
+  "def-weil-sheaf-of-modules-category",
+  "def-pc-module-pullback"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "sections of the pullback of a quasi-coherent sheaf over an affine open are the tensor product of sections M ⊗_A B",
+   "results": "IsAffineOpen.appLE_eq_away_map (AffineScheme), pullbackSpecIso (Pullbacks: fibre product of spectra, not modules), Scheme.Modules.pullback (Modules.Sheaf), SheafOfModules.sections, Scheme.Pullback.affine_hasPullback; nothing on sections of a pulled-back module",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "pullback of the tilde of a module along Spec of a ring map is the tilde of the base change module, Scheme.Modules.pullback tilde tensor",
+   "results": "Scheme.Modules.pullback, Scheme.Modules.pullbackPushforwardAdjunction (Modules.Sheaf), pullbackSpecIso and its simp lemmas (Pullbacks); no comparison of pullback with tilde or with a tensor product of sections",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Scheme.Modules.pullback, AlgebraicGeometry.tilde",
+   "results": "none",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rn 'pullback' Mathlib/AlgebraicGeometry/Modules/Tilde.lean; grep -rn 'TensorProduct\\|⊗' Mathlib/AlgebraicGeometry/Modules/*.lean (in ~/weil-conjectures-slopmaster2/.lake/packages/mathlib)",
+   "results": "none: Tilde.lean never mentions pullback and no file of AlgebraicGeometry/Modules mentions a tensor product",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-module-pullback-ideal-quotient",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1"
+}
