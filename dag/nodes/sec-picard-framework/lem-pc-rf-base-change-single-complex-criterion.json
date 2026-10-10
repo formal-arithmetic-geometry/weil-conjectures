@@ -23,9 +23,48 @@
   "def-pc-derived-pullback",
   "def-pc-base-change"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Use Tag 0DJA(1) for the canonical map L(g')^*G^bullet \\to (g')^*G^bullet and the given E. It gives the same stalkwise condition for the induced map L(g')^*(E \\otimes^L G^bullet) \\to L(g')^*E \\otimes^L (g')^*G^bullet.",
+   "uses": [
+    "lem-pc-rf-single-complex-inherited-tensor-condition"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/perfect.tex",
+    "place": "Tag 0DJA, part (1)"
+   }
+  },
+  {
+   "text": "Apply the qcqs single-complex base-change statement to K = E \\otimes^L G^bullet and K' = L(g')^*E \\otimes^L (g')^*G^bullet. Step 1 supplies its stalkwise hypothesis, so the composite Lg^*Rf_*(E \\otimes^L G^bullet) \\to Rf_{T,*}L(g')^*(E \\otimes^L G^bullet) \\to Rf_{T,*}(L(g')^*E \\otimes^L (g')^*G^bullet) is an isomorphism.",
+   "uses": [
+    "lem-pc-rf-single-complex-qcqs-induction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/perfect.tex",
+    "place": "Tag 0DJ9, lemma-single-complex-base-change"
+   }
+  },
+  {
+   "text": "The displayed composite is the canonical base-change map in the statement, by the definition of the derived pullback of a tensor product and functoriality of the comparison maps.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/perfect.tex",
+    "place": "Tags 0DJ9 and 0DJA, conclusion of the single-complex argument"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-rf-single-complex-inherited-tensor-condition",
+  "lem-pc-rf-single-complex-qcqs-induction"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/perfect.tex",
+  "place": "Tags 0DJ8, 0DJ9, 0DJA"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -57,12 +96,27 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-pc-rf-base-change-complex",
   "by": "worker",
   "date": "2026-10-10"
  },
  "chapter": "sec-picard-framework",
- "unit": "sk-thm-picard-semicon"
+ "unit": "sk-thm-picard-semicon",
+ "split_report": {
+  "date": "2026-10-11",
+  "item": "lem-pc-rf-base-change-single-complex-criterion",
+  "worker": "stage1",
+  "summary": "Applied Tag 0DJA(1) to inherit the stalkwise condition after tensoring by E, then applied the faithful Tag 0DJ9 qcqs single-complex base-change statement with K=E tensor^L G and K'=L(g')^*E tensor^L (g')^*G. The final step identifies its composite with the canonical map in the item.",
+  "blueprint": "Realizes the ancestor proof step: single-complex base-change criterion (Tags 0DJ8, 0DJ9, 0DJA)."
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-bcc2756",
+  "group": "E1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-bcc2756 (reviewer sub-agent of L); spot-checked: Re-push after R-bcc2722 return; all four points repaired: (1) qcqs node now states Tag 0DJ9 exactly (arbitrary cartesian square, f qcqs, map L(g')^*K->K' in D_QCoh, 0DJ8(1) stalkwise condition => composite Lg^*Rf_*K->Rf'_*L(g')^*K->Rf'_*K' iso), no affine/U cap V hypothesis, affine-condition node gone; (2) Step 3 old affine translation removed with the reroute; (3) Step 2 substitutes K=E(x)^L G, K'=L(g')^*E(x)^L(g')^*G, supplied by Step 1 (0DJA(1) node with K=G, K'=(g')^*G, which is exactly the item's hypothesis); (4) no proof prose in either statement. Step 3 identification with the canonical map (base change then L(g')^*(E(x)G)=L(g')^*E(x)L(g')^*G->L(g')^*E(x)(g')^*G) is elementary; citer lem-pc-rf-base-change-complex uses the same map and its stalk hypothesis is exactly lem-pc-derived-pullback-tor-independent-flat-complex's conclusion (C4). J1's lem-pc-tor-independent-perfect-tensor-base-change (Tor-independent, perfect P) is not a duplicate of either new node (class b/d no). FIX more, RETURN less: added def-pc-base-change to stmt_deps of both new nodes, which cite it in their statements but omitted it.; 2 file(s) fixed by the reviewer"
+ }
 }
