@@ -22,9 +22,41 @@
   "def-weil-pbc-module-localization-away",
   "def-weil-pbc-projective-module"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "The finite standard-open free-cover criterion gives that $N$ is finitely presented and flat [lem-sc-affine-standard-cover-finite-presentation-flat].",
+   "uses": [
+    "lem-sc-affine-standard-cover-finite-presentation-flat"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra, Lemma Tag 00NX (lemma-finite-projective), implications (7) => (4) => (5) => (1) (finite locally free gives finitely presented by Lemma lemma-cover; flatness is checked locally by Lemma lemma-flat-localization)"
+   }
+  },
+  {
+   "text": "A finitely presented flat module is projective [lem-weil-pbc-finitely-presented-flat-module-projective]. Together with its finite presentation, this is precisely a finite projective module [def-weil-pbc-projective-module].",
+   "uses": [
+    "lem-weil-pbc-finitely-presented-flat-module-projective",
+    "def-weil-pbc-projective-module"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra, Lemma Tag 00NX (lemma-finite-projective), implication (1) => (2)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sc-affine-standard-cover-finite-presentation-flat",
+  "lem-weil-pbc-finitely-presented-flat-module-projective",
+  "def-weil-pbc-projective-module"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Algebra, Lemma Tag 00NX (lemma-finite-projective), implications (7) => (4) => (5) => (1) => (2)"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -49,12 +81,27 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-sc-affine-cap-section-open-dictionary",
   "by": "worker",
   "date": "2026-10-10"
  },
  "chapter": "sec-curve-estimates",
- "unit": "sk-thm-curveestimate"
+ "unit": "sk-thm-curveestimate",
+ "split_report": {
+  "date": "2026-10-11",
+  "item": "lem-sc-affine-standard-cover-finite-projective",
+  "worker": "stage1",
+  "summary": "Split the reverse implication of Stacks Tag 00NX into one statement-only cover criterion giving finite presentation and flatness, followed by the existing Mathlib-backed theorem that finitely presented flat modules are projective. The source statement and hypotheses were checked against the item and the cited nodes.",
+  "blueprint": "Realizes the affine intersection step of lem-sc-pic-proper-ntorsion: the finite standard-open trivializations give finite presentation and flatness, then projectivity."
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-scp2",
+  "group": "C1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-scp2 (reviewer sub-agent of L); spot-checked: Source: Stacks Algebra Tag 00NX (lemma-finite-projective), read in literature/stacks-project/algebra.tex; the item is (7) => (2) with the cover data exactly as in (7) (finitely many f_i generating the unit ideal, each N_{f_i} finite free over R_{f_i}); item statement and stmt_deps unchanged. Route: Stacks chain (7) => (4) (finite locally free is finitely presented, Lemma lemma-cover) => (5) => (1) (flatness local, Lemma lemma-flat-localization) is the new statement-only node lem-sc-affine-standard-cover-finite-presentation-flat, whose hypotheses reproduce the item's and whose conclusion (finitely presented [def-sc-finitely-presented-module] and flat [def-weil-pbc-flat-ring-map]) is exactly what step 1 takes; a strictly smaller fact than the item (not D2: the projectivity step (1) => (2) is separate content). Step 2: lem-weil-pbc-finitely-presented-flat-module-projective (mathlib leaf, Module.Flat.projective_of_finitePresentation, Mathlib/RingTheory/Flat/EquationalCriterion.lean:287 seen) states fp + flat => projective, hence finite projective, with def-weil-pbc-projective-module the target notion; both off-unit nodes are mathlib leaves/definitions, no C7. New node: TeX, self-contained, stmt_deps exist, three Mathlib searches; not a single Mathlib declaration (components Module.FinitePresentation.of_localizationSpan Mathlib/RingTheory/LocalProperties/FinitePresentation.lean:48 and Module.flat_of_localized_span Mathlib/RingTheory/Flat/Localization.lean:103 need the free => fp/flat glue), no duplicate in the DAG (grep of dag/nodes for locality of fp/flatness found only lem-weil-pbc-module-finite-of-localization-span, finite generation only), no sorry-free slopmaster2 declaration states it (finitePresentation_projective_sections in LocallyFreeAffine.lean is about X.Modules on an affine open). Small cases: R=k x k with f=(1,0),(0,1) and N=k + k^2 (non-constant rank): localizations free, N fp, flat, projective; r=1, f_1=1 reduces to N finite free. FIX: dag/nodes/sec-curve-estimates/lem-sc-affine-standard-cover-finite-presentation-flat.json: source.place: '(7) => (1) and (7) => (2)' mislabelled the conclusion (the node gives (1), not (2)), corrected to the Stacks chain (7) => (4) => (5) => (1) with the lemmas used; dag/nodes/sec-curve-estimates/lem-sc-affine-standard-cover-finite-projective.json: proof[0].source.place same correction; proof_origin.place '(7) => (1) => (2) => (3)' corrected to '(7) => (4) => (5) => (1) => (2)' (the item concludes (2), not (3)). Start Sat Oct 10 04:42:20 PM UTC 2026, end Sat Oct 10 04:43:30 PM UTC 2026.; 2 file(s) fixed by the reviewer"
+ }
 }
