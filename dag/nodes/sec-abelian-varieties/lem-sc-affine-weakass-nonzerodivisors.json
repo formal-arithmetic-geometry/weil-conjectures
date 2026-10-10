@@ -21,9 +21,41 @@
  "stmt_deps": [
   "def-weil-affine-spectrum"
  ],
- "proof": [],
+ "proof": [
+  {
+   "text": "Here f in A is a zero-divisor when fy = 0 for some nonzero y in A. Suppose f is a zero-divisor, with fy = 0 and y != 0. The ideal I = Ann(y) is proper, since 1 is not in I, and f lies in I. Hence V(I) is nonempty (Stacks tag 00E0), and by Zorn's lemma applied to the primes containing I, ordered by reverse inclusion (the intersection of a chain of primes is a prime containing I), there is a prime q minimal over I. Then f lies in I, which is contained in q, and q is in WeakAss(A). So every zero-divisor lies in the union of WeakAss(A).",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra, proof of Lemma 10.66.7 (tag 05C3), second half, specialized to M = A; tag 00E0"
+   }
+  },
+  {
+   "text": "Conversely, let f lie in a prime q that is minimal over I = Ann(y) for some y in A. The primes of the ring (A/I)_q correspond to the primes of A containing I and contained in q, so q(A/I)_q is the only prime of (A/I)_q, which is therefore a minimal prime. By Stacks tag 00EU the image of f in (A/I)_q is nilpotent, so there are g in A with g not in q and n > 0 with f^n g in I, that is f^n g y = 0. Since I is contained in q, g is not in I, so gy != 0. Take n >= 1 minimal with f^n g y = 0; then z = f^(n-1) g y is nonzero and fz = 0, so f is a zero-divisor. Together with the preceding step, the set of zero-divisors of A is the union of the primes in WeakAss(A).",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra, proof of Lemma 10.66.7 (tag 05C3), first half, specialized to M = A; tag 00EU"
+   }
+  },
+  {
+   "text": "By definition an element is a non-zero-divisor precisely when it is not a zero-divisor. Taking complements in the equality of the preceding two steps gives that the complement of the union of WeakAss(A) is the set of non-zero-divisors of A.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra, Lemma 10.66.7, tag 05C3, zero-divisor/non-zero-divisor terminology"
+   }
+  }
+ ],
  "proof_deps": [],
- "proof_origin": null,
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Algebra, Lemma 10.66.7, tag 05C3"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -48,12 +80,28 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-sc-meromorphic-weakass-generic-product",
   "by": "worker",
   "date": "2026-10-10"
  },
  "chapter": "sec-abelian-varieties",
- "unit": "sk-def-av-ample-degree"
+ "unit": "sk-def-av-ample-degree",
+ "split_report": {
+  "date": "2026-10-11",
+  "item": "lem-sc-affine-weakass-nonzerodivisors",
+  "worker": "stage1",
+  "summary": "Proved the ring statement directly, following the proof of Stacks Lemma 10.66.7 specialized to M = A: a zero-divisor lies in a prime minimal over the annihilator of the element it kills; an element of a prime minimal over Ann(y) is a zero-divisor via nilpotence in the localization at that minimal prime (tag 00EU); complements give the non-zero-divisor form.",
+  "blueprint": "Realizes the affine-calculation induction step that invokes Algebra Lemma 10.66.7 to identify zero-divisors with the union of weakly associated primes.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-awn2934",
+  "group": "K1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-awn2934 (reviewer sub-agent of L); spot-checked: FIX more, RETURN less: D1/C1 step 1 cited the item's own source 05C3 as its proof input; replaced by a self-contained proof following 05C3's argument at M = A (zero-divisor fy=0 gives a prime minimal over Ann(y) via 00E0 + Zorn; f in q minimal over Ann(y) gives f^n g y = 0 with g not in q via nilpotence in (A/I)_q, tag 00EU, then minimal n); split_report summary corrected (it still claimed a supporting finite-module node that does not exist, which the second reading said it had fixed but had not). Checked WeakAss definition matches 0547, M1 and H1 (minimal over Ann of an element); statement is exactly the complement form M1's affine step uses; edge cases zero ring, domain, k[e]/(e^2).; 1 file(s) fixed by the reviewer"
+ }
 }
