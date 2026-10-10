@@ -24,9 +24,51 @@
   "def-pc-derived-category",
   "def-pc-perfect-complex"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "For a distinguished triangle, the two-out-of-three assertion is exactly Tag 08CR, applied to the three objects K, L, and M.",
+   "uses": [
+    "lem-pc-perfect-two-out-of-three"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/cohomology.tex",
+    "place": "Tag 08CR (lemma-two-out-of-three-perfect)"
+   }
+  },
+  {
+   "text": "The direct-summand assertion is Tag 08CS, applied to the decomposition K ≅ L ⊕ M; it gives perfectness of each summand.",
+   "uses": [
+    "lem-pc-perfect-summand"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/cohomology.tex",
+    "place": "Tag 08CS (lemma-summands-perfect)"
+   }
+  },
+  {
+   "text": "For each perfect object, choose an open cover on which it is represented by a strictly perfect complex, as in [def-pc-perfect-complex]. For finitely many objects, refine these covers to their common intersections. On each intersection, shifting a strictly perfect complex just reindexes its finitely many nonzero terms, and the termwise finite direct sum of finitely many strictly perfect complexes is again bounded with every term a direct summand of a finite free module. These local representatives therefore represent the shifted and finite-direct-sum objects, proving the closure assertion from Definition 08CM.",
+   "uses": [
+    "def-pc-perfect-complex"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/cohomology.tex",
+    "place": "Definition 08CM"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-perfect-complex",
+  "lem-pc-perfect-two-out-of-three",
+  "lem-pc-perfect-summand"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Tags 08CR, 08CS and Definition 08CM"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -37,10 +79,26 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-sc-pseudo-coherent-support-annihilation"
  },
  "chapter": "sec-picard-framework",
- "unit": "sk-thm-picard-duality"
+ "unit": "sk-thm-picard-duality",
+ "split_report": {
+  "date": "2026-10-11",
+  "item": "lem-pc-perfect-thick-closure",
+  "worker": "stage1",
+  "summary": "Split the thick-closure statement into the two non-elementary Stacks inputs, two-out-of-three (08CR) and direct summands (08CS). The shift and finite-direct-sum clauses are proved directly from the bounded finite locally free definition (08CM). Mathlib searches found only generic derived-category infrastructure and no matching perfect-complex closure theorem.",
+  "blueprint": "Realizes the proper-flat support proof clause of lem-sc-finite-duality concerning the perfect object in the thick closure and the perfect cone I.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-ptc2656",
+  "group": "C1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-ptc2656 (reviewer sub-agent of L); spot-checked: Packet read whole. Step 1 cites new statement-only lem-pc-perfect-two-out-of-three (08CR, exact clause 1, hypotheses intact); Step 2 cites new lem-pc-perfect-summand (08CS, K=L+M gives both summands, matches clause 2); Step 3 elementary from def-pc-perfect-complex (08CM): common refinement, restriction/shift/termwise finite sum of strictly perfect complexes stays strictly perfect; zero object fine. Duplicates: git grep sheaf-dag dag/nodes for 08CR/08CS/064W/066T/summand-perfect/perfect two-out-of-three: none. E1 lem-pc-pseudo-coherent-distinguished-triangle covers only pseudo-coherence of the middle term and no perfect=>finite-Tor or Tor-amplitude-cone node exists, so 08CR cannot be assembled from existing nodes; delivery does not duplicate E1's argument (class b/d: no). 08CS is a real lemma (summand of a strictly perfect complex), not elementary. Mathlib: grep Mathlib for IsPerfect/PerfectComplex finds only IsPerfectClosure (fields): no match (class c: no). No fault beyond the Second reading."
+ }
 }
