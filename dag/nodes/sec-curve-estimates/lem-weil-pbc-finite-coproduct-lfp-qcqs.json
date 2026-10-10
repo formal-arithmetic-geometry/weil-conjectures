@@ -1,0 +1,81 @@
+{
+ "id": "lem-weil-pbc-finite-coproduct-lfp-qcqs",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-etale-finite-data-descent",
+   "place": "proof, third paragraph: 'For the covering assertion, the images of finitely many quasi-compact etale maps form a quasi-compact open, and their union commutes with base change' (the finite family is packaged into the single morphism from its finite coproduct, to which surjectivity descent applies)",
+   "via": []
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Finite coproducts of schemes: quasi-compactness, quasi-separatedness, local finite presentation",
+ "statement": "Let $A$ be a finite set (possibly empty), $S$ a scheme [def-pc-scheme] and $g_a:V_a\\to S$ ($a\\in A$) morphisms of schemes. Let $V=\\coprod_{a\\in A}V_a$ be the coproduct in the category of schemes, with coprojections $\\iota_a:V_a\\to V$ [lem-weil-pbc-scheme-coproduct-family], and let $g:V\\to S$ be the unique morphism with $g\\circ\\iota_a=g_a$ for all $a\\in A$. Then:\n(1) if every scheme $V_a$ is quasi-compact (its underlying space is quasi-compact), then $V$ is quasi-compact; if every $V_a$ is quasi-separated (its morphism to $\\operatorname{Spec}\\mathbf Z$ is quasi-separated [def-weil-pbc-scheme-conventions]), then $V$ is quasi-separated;\n(2) if every $g_a$ is locally of finite presentation [def-sbc-locally-finite-presentation], then $g$ is locally of finite presentation.",
+ "source": {
+  "document": "literature/stacks-project/morphisms.tex",
+  "place": "(2): Morphisms, Lemma Tag 01TQ (lemma-locally-finite-presentation-characterize, line 4096), (1)<=>(3), applied to the open covering of $V$ by the $\\iota_a(V_a)$; (1): Schemes, Lemma Tag 01KO (lemma-characterize-quasi-separated, schemes.tex), (1)<=>(3) with $S=\\operatorname{Spec}\\mathbf Z$, using that the $\\iota_a(V_a)$ are pairwise disjoint open subschemes covering $V$, so an intersection of two affine opens inside different pieces is empty"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "lem-weil-pbc-scheme-coproduct-family",
+  "def-weil-pbc-scheme-conventions",
+  "def-sbc-locally-finite-presentation"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "coproduct of quasi-compact schemes over finite index is quasi-compact",
+   "results": "AlgebraicGeometry.instHasFiniteCoproductsScheme, instIsAffineSigmaObjScheme (finite coproduct of affines is affine), Scheme.OpenCover.compactSpace (Mathlib.AlgebraicGeometry.Cover.Open: a scheme with a finite open cover by quasi-compact schemes is quasi-compact), QuasiCompact",
+   "date": "2026-10-10",
+   "verdict": "partial: Scheme.OpenCover.compactSpace gives clause (1) quasi-compact part via the open cover by the coprojections (Scheme.IsLocallyDirected.openCover); no quasi-separated statement"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "finite disjoint union of quasi-separated schemes is quasi-separated",
+   "results": "quasiSeparatedSpace_iff_quasiCompact_prod_lift, quasiSeparatedSpace_of_quasiSeparated, instHasFiniteCoproductsScheme, instCoproductsOfShapeDisjointSchemeOfSmall (Mathlib.AlgebraicGeometry.Limits/Morphisms.QuasiSeparated)",
+   "date": "2026-10-10",
+   "verdict": "no match for the quasi-separated part"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.LocallyOfFinitePresentation, CategoryTheory.Limits.Sigma.desc",
+   "results": "none",
+   "date": "2026-10-10",
+   "verdict": "no direct lemma; clause (2) is the generic IsZariskiLocalAtSource.sigmaDesc"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rn 'sigmaDesc\\|Sigma.desc' and 'QuasiSeparatedSpace.*(sigma|coprod|∐)' in Mathlib/AlgebraicGeometry and Mathlib/Topology",
+   "results": "Morphisms/Basic.lean:305 lemma IsZariskiLocalAtSource.sigmaDesc (P (f i) for all i implies P (Sigma.desc f)); FinitePresentation.lean:56 HasRingHomProperty @LocallyOfFinitePresentation RingHom.FinitePresentation (hence local at source); UnderlyingMap.lean:116 Surjective.sigmaDesc_of_union_range_eq_univ; Cover/Open.lean:104 Scheme.OpenCover.compactSpace; no QuasiSeparatedSpace instance for coproducts or Sigma types",
+   "date": "2026-10-10",
+   "verdict": "candidates for (1) quasi-compact part and (2); no match for the quasi-separated part, so not a leaf"
+  }
+ ],
+ "mathlib_match": null,
+ "mathlib_candidate": {
+  "declaration": "AlgebraicGeometry.IsZariskiLocalAtSource.sigmaDesc",
+  "file": "Mathlib/AlgebraicGeometry/Morphisms/Basic.lean",
+  "reason": "Line 305 gives (2) with P = LocallyOfFinitePresentation (local at source by HasRingHomProperty, FinitePresentation.lean:56); Scheme.OpenCover.compactSpace (Mathlib/AlgebraicGeometry/Cover/Open.lean:104) gives the quasi-compact part of (1); quasi-separatedness of a finite coproduct is in neither, so the node is not a leaf."
+ },
+ "status": "unsplit",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-etale-finite-data-descent",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-curve-estimates",
+ "unit": "sk-prop-h2"
+}

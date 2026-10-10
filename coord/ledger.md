@@ -1359,3 +1359,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 11:57 L: accepted lem-weil-pbc-formally-smooth-differentials-injective as a Mathlib leaf (031K via FormallySmooth, H1Cotangent and exact_δ_mapBaseChange).
 - 11:58 L: accepted lem-weil-pbc-h1-injective-differentials-injective-char-p (07E5 (3) => (4), 5 steps, 0 new).
 - 12:00 L: accepted lem-sc-as-sequence (0A3J/03PL route, 4 steps; new node on a^p = a in local rings of characteristic p; the blueprint proof's residue-field claim wrong at the generic point, replaced; 1 tool use).
+- 12:02 L: accepted thm-galois-abstract-equivalence (0BN4, 12 steps, 0 new; Mathlib's functorToContAction recorded as a candidate pending the identification of the Stacks and SGA1 Galois-category axioms; lem-fet-galois-category's attachment noted as the SGA1 notion).

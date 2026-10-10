@@ -3,28 +3,156 @@
  "blueprint": {
   "is": "thm-galois-abstract-equivalence",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "The abstract equivalence theorem",
- "statement": "Let $(\\mathcal C,F)$ be a Galois category and\n$G=\\operatorname{Aut}(F)$. Then $\\mathcal C\\to \\text{finite-}G\\text{-}\\mathbf{Sets}$, $X\\mapsto F(X)$ with the induced\n$G$-action, is an equivalence of categories.",
+ "statement": "Let $(\\mathcal C,F)$ be a Galois category in the sense of [def-galois-category] and\n$G=\\operatorname{Aut}(F)$ with the topology of [def-galois-category]. Write $\\text{finite-}G\\text{-}\\mathbf{Sets}$ for the category whose objects are finite sets $E$ with a left action of $G$ such that the action map $G\\times E\\to E$ is continuous for the discrete topology on $E$, and whose morphisms are the $G$-equivariant maps. Then the functor\n$\\mathcal C\\to \\text{finite-}G\\text{-}\\mathbf{Sets}$, $X\\mapsto F(X)$ with the induced action $\\gamma\\cdot x=\\gamma_X(x)$, $f\\mapsto F(f)$, is an equivalence of categories.",
  "source": {
   "document": "literature/blueprint/master/blueprint/sec-curve-estimates/sk-prop-h2/thm-galois-abstract-equivalence.md",
   "place": "node thm-galois-abstract-equivalence, order 973"
  },
- "stmt_deps": [],
+ "stmt_deps": [
+  "def-galois-category"
+ ],
  "proof": [
   {
-   "text": "Let $(\\mathcal C,F)$ be a Galois category in the sense of\n[def-galois-category] and $G=\\operatorname{Aut}(F)$, profinite by\n[lem-galois-aut-profinite].\nThe functor is well defined: each $F(X)$ is finite, and the action of\n$G$ on it is continuous by [lem-galois-action-continuous], so $F(X)$ is a\nfinite continuous $G$-set; morphisms go to $G$-equivariant maps by\nnaturality.\nStep 1: faithfulness is [lem-galois-axioms](1).\nStep 2: full faithfulness. Let $s:F(X)\\to F(Y)$ be $G$-equivariant. Its\ngraph $\\Gamma_s\\subseteq F(X)\\times F(Y)=F(X\\times Y)$ is a union of\nconnected components: $G$ acts transitively on the fibre of a connected\ncomponent by [lem-galois-transitive], so a $G$-equivariant subset is\na union of such fibres. Hence there is a union of connected components\n$Z\\subseteq X\\times Y$ with $F(Z)=\\Gamma_s$. The projection\n$F(Z)\\to F(X)$ is bijective, so $Z\\to X$ is an isomorphism by axiom (4),\nand $s=F(f)$ for the composite $f:X\\to Z\\to Y$. Together with Step 1\nthis makes $F$ fully faithful.\nStep 3: essential surjectivity. It suffices to realize $G/H$ for $H$\nopen of finite index. By definition of the topology on $G\\le \\prod_X\\operatorname{Aut}(F(X))$ there are finitely many objects $X_i$,\nwhich we may take connected, with\n$\\ker\\bigl(G\\to\\prod_i\\operatorname{Aut}(F(X_i))\\bigr)\\subseteq H$.\nChoose a Galois object $Y$ mapping to a connected component of\n$\\prod_iX_i$ ([lem-galois-object-exists]) and identify\n$F(Y)=G/U$ for the open subgroup $U$ fixing a chosen element; since\n$Y$ is Galois, $U$ is normal. As $F(Y)\\to F(X_i)$ is surjective,\n$U\\subseteq H$. Let $M\\subseteq\\operatorname{Aut}(Y)$ correspond to\n$(H/U)^{\\mathrm{op}}\\subseteq(G/U)^{\\mathrm{op}} =\\operatorname{Aut}(Y)$, and put $X=Y/M$, the coequalizer of the maps\n$m:Y\\to Y$, $m\\in M$. Exactness of $F$ gives\n$F(X)=F(Y)/M=G/H$, as required.",
+   "text": "*The functor is well defined.* Each $F(X)$ is finite by [def-galois-category](3); $G$ is a profinite group by [lem-galois-aut-profinite]; the action map $G\\times F(X)\\to F(X)$, $(\\gamma,x)\\mapsto\\gamma_X(x)$, is continuous for the discrete topology on $F(X)$ by [lem-galois-action-continuous]; and for $f:X\\to X'$ naturality of every $\\gamma\\in G$ gives $F(f)(\\gamma_X(x))=\\gamma_{X'}(F(f)(x))$, so $F(f)$ is $G$-equivariant. Functoriality is that of $F$.",
    "uses": [
     "def-galois-category",
     "lem-galois-aut-profinite",
-    "lem-galois-action-continuous",
+    "lem-galois-action-continuous"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/pione.tex",
+    "place": "Example 0BMW (example-from-C-F-to-G-sets) and the paragraph before Lemma 0BMR (lemma-aut-inverse-limit) in Section 0BMQ"
+   }
+  },
+  {
+   "text": "*Faithfulness.* $F$ is faithful by [lem-galois-axioms](1); the functor to $\\text{finite-}G\\text{-}\\mathbf{Sets}$ has the same maps on morphisms, so it is faithful.",
+   "uses": [
+    "lem-galois-axioms"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/pione.tex",
+    "place": "Proposition 0BN4 (proposition-galois), proof, first sentence (Lemma 0BN0 (1))"
+   }
+  },
+  {
+   "text": "*Connected components go to $G$-orbits.* Let $X$ be an object and $X=\\coprod_{i=1}^nX_i$ a decomposition into connected objects ([def-galois-category](2)), with coprojections $c_i:X_i\\to X$. Since $F$ is exact it preserves finite coproducts, so the maps $F(c_i)$ identify $F(X)$ with the disjoint union $\\bigsqcup_iF(X_i)$; each $F(c_i)$ is $G$-equivariant (step 1), so each $F(c_i)(F(X_i))$ is $G$-stable. Each $X_i$ is connected, hence not initial, so $F(X_i)\\ne\\emptyset$ by [lem-galois-axioms](3), and $G$ acts transitively on $F(X_i)$ by [lem-galois-transitive]. Hence the $G$-orbits of $F(X)$ are exactly the subsets $F(c_i)(F(X_i))$, $i=1,\\dots,n$.",
+   "uses": [
+    "def-galois-category",
     "lem-galois-axioms",
-    "lem-galois-transitive",
+    "lem-galois-transitive"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/pione.tex",
+    "place": "Proposition 0BN4 (proposition-galois), proof, first paragraph: 'Hence for general X the functor F sends the connected components of X ... to the G-orbits of F(X)'"
+   }
+  },
+  {
+   "text": "*$G$-stable subsets come from unions of components.* With the notation of step 3, let $S\\subseteq F(X)$ be $G$-stable. Then $S$ is a union of orbits, so by step 3 there is $I\\subseteq\\{1,\\dots,n\\}$ with $S=\\bigcup_{i\\in I}F(c_i)(F(X_i))$. Let $Z=\\coprod_{i\\in I}X_i$ (a finite coproduct, [def-galois-category](1)) and $j:Z\\to X$ the map with components $c_i$, $i\\in I$. As $F$ preserves finite coproducts, $F(j)$ is the inclusion of $\\bigsqcup_{i\\in I}F(X_i)$ into $\\bigsqcup_iF(X_i)=F(X)$; it is injective with image $S$, so $j$ is a monomorphism by [lem-galois-axioms](2) and $F(j)$ identifies $F(Z)$ with $S$.",
+   "uses": [
+    "def-galois-category",
+    "lem-galois-axioms"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/pione.tex",
+    "place": "Proposition 0BN4 (proposition-galois), proof, first paragraph: 'Hence there exists a union of connected components Z of X x Y, which comes equipped with a monomorphism Z -> X x Y, with F(Z) = Gamma_s'"
+   }
+  },
+  {
+   "text": "*Fullness.* Let $s:F(X)\\to F(Y)$ be $G$-equivariant. Since $F$ preserves finite products, $(F(\\mathrm{pr}_1),F(\\mathrm{pr}_2)):F(X\\times Y)\\to F(X)\\times F(Y)$ is a bijection, $G$-equivariant for the diagonal action (step 1). The graph $\\Gamma_s=\\{(x,s(x))\\}$ is stable under the diagonal action because $s$ is equivariant; by step 4 applied to $X\\times Y$ there is a monomorphism $j:Z\\to X\\times Y$ with $F(j)(F(Z))$ corresponding to $\\Gamma_s$. The map $F(\\mathrm{pr}_1\\circ j):F(Z)\\to F(X)$ is the bijection $\\Gamma_s\\to F(X)$, $(x,s(x))\\mapsto x$, so $p=\\mathrm{pr}_1\\circ j$ is an isomorphism because $F$ reflects isomorphisms ([def-galois-category](4)). Put $f=\\mathrm{pr}_2\\circ j\\circ p^{-1}:X\\to Y$; then $F(f)(x)=s(x)$ for every $x\\in F(X)$. With step 2 the functor is fully faithful.",
+   "uses": [
+    "def-galois-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/pione.tex",
+    "place": "Proposition 0BN4 (proposition-galois), proof, first paragraph: 'Let X and Y be objects and let s : F(X) -> F(Y) be a map ... Hence F is fully faithful'"
+   }
+  },
+  {
+   "text": "*Reduction of essential surjectivity to $G/H$.* Let $E$ be a finite $G$-set. It is the disjoint union of its finitely many orbits. For $e\\in E$ the stabilizer $H=\\{g:ge=e\\}$ is the preimage of $\\{e\\}$ under the continuous map $g\\mapsto ge$ to the discrete set $E$, hence open, and $Ge\\cong G/H$, $gH\\mapsto ge$, as $G$-sets, so $H$ has finite index. If for each orbit $G/H_k$ ($k=1,\\dots,m$) there is $X_k$ with $F(X_k)\\cong G/H_k$ as $G$-sets, then $F(\\coprod_kX_k)\\cong\\bigsqcup_kF(X_k)\\cong E$ as $G$-sets, because $F$ preserves finite coproducts ([def-galois-category](1),(4)) and the coprojections are equivariant. So it suffices to realize $G/H$ for every open subgroup $H\\subseteq G$ of finite index.",
+   "uses": [
+    "def-galois-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/pione.tex",
+    "place": "Proposition 0BN4 (proposition-galois), proof, second paragraph, first two sentences"
+   }
+  },
+  {
+   "text": "*Finitely many connected objects controlling $H$.* Let $H\\subseteq G$ be an open subgroup of finite index. The topology of $G$ is induced from $\\prod_X\\operatorname{Aut}(F(X))$ with the discrete factors ([def-galois-category]), so the open neighbourhood $H$ of $1$ contains a basic one: there are finitely many objects $X'_1,\\dots,X'_r$ with $K'=\\{\\gamma\\in G:\\gamma_{X'_l}=\\mathrm{id}\\ \\forall l\\}=\\ker\\bigl(G\\to\\prod_l\\operatorname{Aut}(F(X'_l))\\bigr)\\subseteq H$. Decompose each $X'_l$ into connected objects ([def-galois-category](2)) and let $X_1,\\dots,X_t$ be all components so obtained. By step 3, $F(X'_l)$ is the union of the images of the $F$ of its components under equivariant injections, so $\\gamma$ acts trivially on $F(X'_l)$ as soon as it acts trivially on each $F$ of its components. Hence $K=\\ker\\bigl(G\\to\\prod_{i}\\operatorname{Aut}(F(X_i))\\bigr)\\subseteq K'\\subseteq H$ with all $X_i$ connected. If $t=0$ then $K=G=H$ and $G/H$ is $F$ of a final object by [lem-galois-axioms](3); assume $t\\ge1$.",
+   "uses": [
+    "def-galois-category",
+    "lem-galois-axioms"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/pione.tex",
+    "place": "Proposition 0BN4 (proposition-galois), proof, second paragraph: 'By definition of the topology on G there exists a finite collection of objects X_i ... We may assume X_i is connected for all i'"
+   }
+  },
+  {
+   "text": "*A Galois object dominating the $X_i$.* Let $P=X_1\\times\\dots\\times X_t$ (finite limit, [def-galois-category](1)); $F(P)=\\prod_iF(X_i)$ is nonempty since each $F(X_i)\\neq\\emptyset$ ([lem-galois-axioms](3)). Of a decomposition of $P$ into connected objects ([def-galois-category](2)) pick a component $P_0$; it maps to $P$ by its coprojection. By [lem-galois-object-exists] there is a Galois object $Y$ (in the sense of [lem-galois-axioms](6)) and a morphism $Y\\to P_0$. For each $i$ the composite $q_i:Y\\to P_0\\to P\\to X_i$ is a morphism between connected objects, hence an epimorphism ([lem-galois-axioms](4)), so $F(q_i):F(Y)\\to F(X_i)$ is surjective ([lem-galois-axioms](2)) and $G$-equivariant (step 1).",
+   "uses": [
+    "def-galois-category",
+    "lem-galois-axioms",
     "lem-galois-object-exists"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/pione.tex",
+    "place": "Proposition 0BN4 (proposition-galois), proof, second paragraph: 'We can choose a Galois object Y mapping to a connected component of prod X_i using Lemma 0BN2' and 'Since F(Y) surjects onto F(X_i)'"
+   }
+  },
+  {
+   "text": "*$F(Y)\\cong G/U$ with $U$ open normal.* Fix $y\\in F(Y)$. $G$ acts transitively on $F(Y)$ by [lem-galois-transitive] ($Y$ is connected), so $F(Y)\\cong G/U$, $gU\\mapsto gy$, with $U$ the stabilizer of $y$, open by [lem-galois-action-continuous] (as in step 6). $Y$ is Galois, so $\\operatorname{Aut}(Y)$ acts transitively on $F(Y)$ ([lem-galois-axioms](6)), and each $F(a)$, $a\\in\\operatorname{Aut}(Y)$, is $G$-equivariant (step 1). Given $g\\in G$ choose $a$ with $F(a)(y)=gy$; for $u\\in U$, $ugy=uF(a)(y)=F(a)(uy)=F(a)(y)=gy$, so $g^{-1}ug\\in U$. Hence $U$ is normal.",
+   "uses": [
+    "lem-galois-transitive",
+    "lem-galois-action-continuous",
+    "lem-galois-axioms"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/pione.tex",
+    "place": "Proposition 0BN4 (proposition-galois), proof, second paragraph: 'Choose an isomorphism F(Y) = G/U ... This implies that U is normal'"
+   }
+  },
+  {
+   "text": "*$U\\subseteq H$.* For $u\\in U$ and any point $gy$ of $F(Y)$, $u\\,gy=g(g^{-1}ug)y=gy$ by normality (step 9), so $U$ acts trivially on $F(Y)$. As $F(q_i):F(Y)\\to F(X_i)$ is surjective and equivariant (step 8), $U$ acts trivially on every $F(X_i)$, i.e. $U\\subseteq K\\subseteq H$ (step 7).",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/pione.tex",
+    "place": "Proposition 0BN4 (proposition-galois), proof, second paragraph: 'Since F(Y) surjects onto F(X_i) for each i we see that U subset H'"
+   }
+  },
+  {
+   "text": "*$\\operatorname{Aut}(Y)\\cong(G/U)^{\\mathrm{op}}$.* By steps 2 and 5, $a\\mapsto F(a)$ is a bijection $\\operatorname{Aut}(Y)\\to\\operatorname{Aut}_G(F(Y))=\\operatorname{Aut}_G(G/U)$ compatible with composition. A $G$-equivariant $\\varphi:G/U\\to G/U$ is determined by $\\varphi(U)=nU$, and then $\\varphi(gU)=gnU$; conversely, $U$ being normal, $R_n:gU\\mapsto gnU$ is well defined and equivariant for every $n$, and $R_n\\circ R_m=R_{mn}$, $R_n=\\mathrm{id}$ iff $n\\in U$. So $n U\\mapsto R_n$ is an isomorphism $(G/U)^{\\mathrm{op}}\\to\\operatorname{Aut}_G(G/U)$. Let $M\\subseteq\\operatorname{Aut}(Y)$ be the subgroup corresponding to $(H/U)^{\\mathrm{op}}$ ($H\\supseteq U$ by step 10); it is finite, of order $[H:U]$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/pione.tex",
+    "place": "Proposition 0BN4 (proposition-galois), proof, second paragraph: 'Let M subset Aut(Y) be the finite subgroup corresponding to (H/U)^opp subset (G/U)^opp = Aut_{G-Sets}(G/U) = Aut(Y)'"
+   }
+  },
+  {
+   "text": "*$X=Y/M$ realizes $G/H$.* Let $X$ be the colimit of the diagram $M\\to\\mathcal C$ given by the action of the finite group $M$ on $Y$, i.e. the coequalizer of the finite family of arrows $m:Y\\to Y$, $m\\in M$, with map $\\pi:Y\\to X$; it exists because it is a finite colimit ([def-galois-category](1)). $F$ is exact ([def-galois-category](4)), so $F(\\pi)$ identifies $F(X)$ with the quotient of $F(Y)$ by the equivalence relation generated by $z\\sim F(m)(z)$, which is the orbit relation of the group $M$; and $F(\\pi)$ is $G$-equivariant (step 1), so the bijection is one of $G$-sets for the action induced on the quotient. Under $F(Y)\\cong G/U$ the action of $m\\in M$ is $R_n$ for $nU\\in H/U$ (step 11), and the $M$-orbit of $gU$ is $\\{ghU:h\\in H\\}$, i.e. corresponds to $gH$. Hence $F(X)\\cong(G/U)/(H/U)\\cong G/H$ as $G$-sets, and with step 6 the functor is essentially surjective, so (with steps 2 and 5) an equivalence.",
+   "uses": [
+    "def-galois-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/pione.tex",
+    "place": "Proposition 0BN4 (proposition-galois), proof, second paragraph, last two sentences: 'Set X = Y/M ... Since F is exact we see that F(X) = G/H'"
+   }
   }
  ],
  "proof_deps": [
@@ -36,13 +164,49 @@
   "lem-galois-object-exists"
  ],
  "proof_origin": {
-  "by": "agent",
-  "document": "literature/blueprint/master/blueprint/sec-curve-estimates/sk-prop-h2/thm-galois-abstract-equivalence.md",
-  "place": "## Proof"
+  "by": "document",
+  "document": "literature/stacks-project/pione.tex",
+  "place": "Proposition 0BN4 (label proposition-galois), Section 0BMQ (section-galois), with Lemmas 0BMR, 0BN0, 0BN2, 0BN3, Example 0BMW and Definition 04JJ"
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "fiber functor of a Galois category induces an equivalence with finite continuous Aut F-sets",
+   "results": "CategoryTheory.PreGaloisCategory.instIsEquivalenceContActionFintypeCatAutFunctorFunctorToContAction (Mathlib.CategoryTheory.Galois.Equivalence), FiberFunctor, GaloisCategory.hasFiberFunctor (Mathlib.CategoryTheory.Galois.Basic)",
+   "date": "2026-10-10",
+   "verdict": "candidate: same conclusion, but for Mathlib's (SGA1/Lenstra G1-G6) notion of Galois category and fibre functor, not the Stacks 0BMY notion of [def-galois-category]"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "fundamental theorem of Galois categories: C equivalent to finite sets with continuous action of the profinite group Aut(F)",
+   "results": "same instance (Mathlib.CategoryTheory.Galois.Equivalence), exists_lift_of_continuous (Mathlib.CategoryTheory.Galois.EssSurj), instIsFundamentalGroupAutFunctorFintypeCat (IsFundamentalgroup)",
+   "date": "2026-10-10",
+   "verdict": "candidate as above"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.PreGaloisCategory.functorToContAction",
+   "results": "functorToContAction and its Faithful, Full, EssSurj, IsEquivalence instances (Mathlib.CategoryTheory.Galois.Equivalence)",
+   "date": "2026-10-10",
+   "verdict": "candidate as above"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rn 'PreGaloisCategory.*where|: PreGaloisCategory|instance.*FiberFunctor|stacks 0B' Mathlib/CategoryTheory/Galois and Mathlib (whole tree)",
+   "results": "Equivalence.lean:89-90 '@[stacks 0BN4] instance : (functorToContAction F).IsEquivalence'; Basic.lean:66 class PreGaloisCategory (G1-G3), :83 class FiberFunctor (G4-G6); Topology.lean:78-79 topology on Aut F induced by autEmbedding into the product of discrete Aut (F.obj X); Action/Continuous.lean:74 ContAction; instances of PreGaloisCategory/FiberFunctor only for Action FintypeCat G (Examples.lean:85,95); no lemma deriving PreGaloisCategory/FiberFunctor from finite limits + finite colimits + exact conservative F",
+   "date": "2026-10-10",
+   "verdict": "no exact match: Mathlib's hypotheses differ from [def-galois-category]; the comparison (Stacks axioms imply G1-G6, in particular G3 and F preserving epimorphisms) is itself a theorem"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rn 'galois-abstract-equivalence|functorToContAction|GaloisCategory' ~/weil-conjectures-slopmaster2/WeilConjectures ~/weil-conjectures-slopmaster2/Comparator",
+   "results": "no declaration with the node id; FundamentalGroup/Basic.lean:233 equivalenceContAction applies Mathlib's theorem to Y.FiniteEtale with Mathlib's notion",
+   "date": "2026-10-10",
+   "verdict": "no slopmaster2 declaration states the node for def-galois-category"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [],
  "blueprint_kind": "theorem",
@@ -69,5 +233,20 @@
   }
  },
  "chapter": "sec-curve-estimates",
- "unit": "sk-prop-h2"
+ "unit": "sk-prop-h2",
+ "mathlib_candidate": {
+  "declaration": "CategoryTheory.PreGaloisCategory.instIsEquivalenceContActionFintypeCatAutFunctorFunctorToContAction (instance (functorToContAction F).IsEquivalence, with functorToContAction)",
+  "file": "Mathlib/CategoryTheory/Galois/Equivalence.lean",
+  "lines": "40-41 (functorToContAction), 89-90 (IsEquivalence, @[stacks 0BN4]); topology on Aut F: Mathlib/CategoryTheory/Galois/Topology.lean 78-79; ContAction: Mathlib/CategoryTheory/Action/Continuous.lean 74; hypotheses: Mathlib/CategoryTheory/Galois/Basic.lean 66 (PreGaloisCategory), 83 (FiberFunctor)",
+  "reason": "Same conclusion (ContAction FintypeCat (Aut F) = finite discrete sets with continuous action of Aut F, topology induced from the product of the discrete Aut (F.obj X), as in the node), but its hypotheses are SGA1/Lenstra axioms G1-G6 ([GaloisCategory C] [FiberFunctor F], F : C ⥤ FintypeCat), not those of [def-galois-category] (Stacks 0BMY: finite limits and colimits, decomposition into connected objects, F exact and conservative). That the Stacks axioms imply G1-G6 (G3: every monomorphism is a summand inclusion; G5: F preserves epimorphisms; lifting F to FintypeCat) is a theorem, not a one-line specialization (delivery-errors B8)."
+ },
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "thm-galois-abstract-equivalence",
+  "worker": "stage1",
+  "summary": "Rule 0: no slopmaster2 declaration states the node (grep by id and key words; slopmaster2 only applies Mathlib's theorem to finite etale schemes). Mathlib's functorToContAction/IsEquivalence (Galois/Equivalence.lean 40, 89-90, tagged stacks 0BN4) has the same conclusion but assumes the SGA1/Lenstra axioms (PreGaloisCategory + FiberFunctor), while the node uses the Stacks definition [def-galois-category]; the comparison is a theorem (G3, preservation of epimorphisms), so no leaf; recorded as mathlib_candidate. Statement made self-contained: finite G-sets defined (finite sets with action continuous for the discrete topology, Stacks 04JJ), stmt_deps [def-galois-category] (was []). Proof rewritten in 12 steps following Stacks 0BN4 exactly, the hidden arguments written out: well-definedness (Example 0BMW), faithfulness (0BN0(1)), components to orbits and G-stable subsets realized by sub-coproducts (from exactness, 0BN0(2),(3), 0BN3), fullness via the graph, reduction to G/H (orbit-stabilizer and openness of stabilizers), finitely many connected X_i from the definition of the topology, Galois Y over a component of prod X_i (0BN2) with F(Y)->F(X_i) surjective (0BN0(4),(2)), U normal, U in H, Aut(Y)=(G/U)^op (using full faithfulness), and F(Y/M)=G/H by exactness. No new nodes: every fact used is in def-galois-category, lem-galois-axioms, lem-galois-transitive, lem-galois-object-exists, lem-galois-aut-profinite, lem-galois-action-continuous or is written out in a step.",
+  "blueprint": "The single paragraph of the blueprint proof of thm-galois-abstract-equivalence: its preamble (well-definedness, profinite G, continuity) is step 1; its Step 1 (faithfulness) is step 2; its Step 2 (full faithfulness via the graph and a union of connected components) is steps 3-5; its Step 3 (essential surjectivity via G/H, the X_i, the Galois object Y, U normal, M and Y/M) is steps 6-12."
+ },
+ "reviewed": "2026-10-10 L: 12 steps following 0BN4 (faithful, components to orbits, full via graphs, essential surjectivity through Galois objects and G/U); statement made self-contained; 0 new nodes. Mathlib proves it from the SGA1 axioms (functorToContAction, tagged 0BN4): recorded as a candidate; if def-galois-category is identified with Mathlib's notion at its split, this node becomes a Mathlib leaf.",
+ "lead_note": "2026-10-10 L: candidate Mathlib leaf (functorToContAction with IsEquivalence, Galois/Equivalence.lean:40-90) once the Stacks and SGA1 definitions of a Galois category are identified (def-galois-category's split)."
 }
