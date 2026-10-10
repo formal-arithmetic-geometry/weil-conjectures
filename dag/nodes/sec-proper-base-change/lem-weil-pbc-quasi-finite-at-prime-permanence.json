@@ -1,0 +1,68 @@
+{
+ "id": "lem-weil-pbc-quasi-finite-at-prime-permanence",
+ "kind": "statement",
+ "title": "Quasi-finiteness at a prime descends to an intermediate ring",
+ "statement": "Let $A\\to B$ and $B\\to C$ be homomorphisms of commutative rings such that the composite $A\\to C$ is of finite type [def-weil-pbc-finite-type-algebra] (then $B\\to C$ is of finite type). Let $\\mathfrak r\\subset C$ be a prime ideal. If $A\\to C$ is quasi-finite at $\\mathfrak r$ [def-weil-pbc-ring-map-quasi-finite-at-prime], then $B\\to C$ is quasi-finite at $\\mathfrak r$.",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Algebra, Lemma Tag 0C6H (lemma-quasi-finite-permanence, line 30393)"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-finite-type-algebra",
+  "def-weil-pbc-ring-map-quasi-finite-at-prime"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A → B → C, A → C quasi-finite at prime implies B → C quasi-finite at prime",
+   "results": "Algebra.QuasiFiniteAt.baseChange, Algebra.QuasiFinite.baseChange, RingHom.QuasiFinite.of_comp, RingHom.QuasiFinite.stableUnderComposition, AlgebraicGeometry.LocallyQuasiFinite.of_comp",
+   "date": "2026-10-10",
+   "verdict": "candidate (whole-map version RingHom.QuasiFinite.of_comp; B8 for the pointwise one)"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "if A → C is quasi-finite at a prime and A → B → C, then B → C is quasi-finite at that prime",
+   "results": "RingHom.QuasiFinite.of_comp, RingHom.QuasiFinite.stableUnderComposition, RingHom.QuasiFinite.comp, RingHom.QuasiFinite.of_isIntegral_of_finiteType, Algebra.QuasiFinite.trans",
+   "date": "2026-10-10",
+   "verdict": "no pointwise match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rn 'of_restrictScalars' Mathlib/RingTheory/QuasiFinite/",
+   "results": "Basic.lean:233 Algebra.QuasiFinite.of_restrictScalars [QuasiFinite R T] : QuasiFinite S T; Weakly.lean:211 WeaklyQuasiFiniteAt.of_restrictScalars",
+   "date": "2026-10-10",
+   "verdict": "candidate with Mathlib's QuasiFiniteAt (B8)"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-integral-closure-zariski-main-away",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "mathlib_candidate": {
+  "declaration": "Algebra.QuasiFinite.of_restrictScalars",
+  "file": "Mathlib/RingTheory/QuasiFinite/Basic.lean",
+  "how": "Basic.lean:232-233: applied to T = Localization.AtPrime r (IsScalarTower A B C_r) it gives the node for Mathlib's QuasiFiniteAt in one line. Not a leaf (coord/delivery-errors.md B8): Mathlib's `Algebra.QuasiFiniteAt R p` is `QuasiFinite R (Localization.AtPrime p)` (Mathlib/RingTheory/QuasiFinite/Basic.lean:358), which agrees with the DAG's isolated-point notion [def-weil-pbc-ring-map-quasi-finite-at-prime] only through `Algebra.quasiFiniteAt_iff_isOpen_singleton_fiber` (ZariskisMainTheorem.lean:754) and the fibre homeomorphism, a theorem with no node."
+ },
+ "reviewed": "Reviewed by L 2026-10-10 (statement): Algebra 0C6H, stated with the DAG's quasi-finite-at-prime notion. Unsplit; Mathlib candidates, if any, are for Mathlib's QuasiFiniteAt (B8)."
+}

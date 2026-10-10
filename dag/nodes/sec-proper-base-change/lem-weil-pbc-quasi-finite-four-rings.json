@@ -1,0 +1,68 @@
+{
+ "id": "lem-weil-pbc-quasi-finite-four-rings",
+ "kind": "statement",
+ "title": "Quasi-finiteness at a prime passes along a square with surjective tensor map",
+ "statement": "Let $R\\to S$, $R\\to R'$, $R'\\to S'$ and $S\\to S'$ be homomorphisms of commutative rings with $R\\to S\\to S'$ equal to $R\\to R'\\to S'$. Assume that $R\\to S$ is of finite type [def-weil-pbc-finite-type-algebra] and that $S'$ is generated as a ring by the images of $S$ and of $R'$ in the sense that every element of $S'$ is a finite sum $\\sum_i \\sigma_i\\rho_i$ with $\\sigma_i$ in the image of $S$ and $\\rho_i$ in the image of $R'$ (equivalently, the map $S\\otimes_RR'\\to S'$, $s\\otimes r'\\mapsto \\sigma\\rho$, is surjective); then $R'\\to S'$ is of finite type. Let $\\mathfrak q'\\subset S'$ be a prime ideal, and let $\\mathfrak q\\subset S$, $\\mathfrak p'\\subset R'$ be its inverse images. If $R\\to S$ is quasi-finite at $\\mathfrak q$ [def-weil-pbc-ring-map-quasi-finite-at-prime], then $R'\\to S'$ is quasi-finite at $\\mathfrak q'$.",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Algebra, Lemma Tag 00PN (lemma-four-rings, line 30293)"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-finite-type-algebra",
+  "def-weil-pbc-ring-map-quasi-finite-at-prime"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "quasi-finite at prime preserved under base change and surjection S ⊗_R R' → S'",
+   "results": "Algebra.QuasiFinite.baseChange, Algebra.QuasiFinite.of_surjective_algHom, Algebra.QuasiFiniteAt.baseChange, Algebra.QuasiFiniteAt.of_surjectiveOnStalks (Mathlib.RingTheory.QuasiFinite.Basic)",
+   "date": "2026-10-10",
+   "verdict": "candidates with Mathlib's QuasiFiniteAt (B8)"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "commutative square of rings with S ⊗_R R' → S' surjective: quasi-finite at q implies quasi-finite at q'",
+   "results": "RingHom.QuasiFinite.isStableUnderBaseChange, Algebra.QuasiFiniteAt.baseChange, Algebra.QuasiFiniteAt.of_surjectiveOnStalks, .of_surjectiveOnStalks_of_liesOver, Algebra.QuasiFinite.baseChange",
+   "date": "2026-10-10",
+   "verdict": "candidates with Mathlib's QuasiFiniteAt (B8)"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -n 'QuasiFiniteAt' Mathlib/RingTheory/QuasiFinite/Basic.lean (sed -n 350,400p read)",
+   "results": "Basic.lean:361 QuasiFiniteAt.baseChange (to A ⊗[R] S), :381 QuasiFiniteAt.of_surjectiveOnStalks (along S →ₐ[R] T surjective on stalks, same base R); no single lemma for the four-ring square",
+   "date": "2026-10-10",
+   "verdict": "no exact match; candidate = composite of the two (B8)"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-integral-closure-zariski-main-away",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "mathlib_candidate": {
+  "declaration": "Algebra.QuasiFiniteAt.baseChange, Algebra.QuasiFiniteAt.of_surjectiveOnStalks",
+  "file": "Mathlib/RingTheory/QuasiFinite/Basic.lean",
+  "how": "Basic.lean:361-377 (base change to R' ⊗_R S at a prime over p) followed by :381-388 (along the surjection R' ⊗_R S → S', surjective maps are surjective on stalks) gives the node for Mathlib's QuasiFiniteAt. Not a leaf (coord/delivery-errors.md B8): Mathlib's `Algebra.QuasiFiniteAt R p` is `QuasiFinite R (Localization.AtPrime p)` (Mathlib/RingTheory/QuasiFinite/Basic.lean:358), which agrees with the DAG's isolated-point notion [def-weil-pbc-ring-map-quasi-finite-at-prime] only through `Algebra.quasiFiniteAt_iff_isOpen_singleton_fiber` (ZariskisMainTheorem.lean:754) and the fibre homeomorphism, a theorem with no node."
+ },
+ "reviewed": "Reviewed by L 2026-10-10 (statement): Algebra 00PN, stated with the DAG's quasi-finite-at-prime notion. Unsplit; Mathlib candidates, if any, are for Mathlib's QuasiFiniteAt (B8)."
+}

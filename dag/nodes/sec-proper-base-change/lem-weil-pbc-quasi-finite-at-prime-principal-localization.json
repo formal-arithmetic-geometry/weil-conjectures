@@ -1,0 +1,76 @@
+{
+ "id": "lem-weil-pbc-quasi-finite-at-prime-principal-localization",
+ "kind": "statement",
+ "title": "Quasi-finiteness at a prime is unchanged by principal localizations",
+ "statement": "Let $\\varphi:R\\to S$ be a ring map of finite type [def-weil-pbc-finite-type-algebra], let $\\mathfrak q\\subset S$ be a prime ideal and $\\mathfrak p=\\varphi^{-1}(\\mathfrak q)$. Let $f\\in R$ with $f\\notin\\mathfrak p$ and $g\\in S$ with $g\\notin\\mathfrak q$. Let $R_f$ be the localization of $R$ at $f$ and $S_{fg}$ the localization of $S$ at $\\varphi(f)g$ [def-weil-ring-localization-away], with the ring map $R_f\\to S_{fg}$, $r/f^n\\mapsto \\varphi(r)g^n/(\\varphi(f)g)^n$, induced by $\\varphi$ (it is of finite type), and let $\\mathfrak qS_{fg}=\\{y/(\\varphi(f)g)^n\\mid y\\in\\mathfrak q\\}$, a prime ideal of $S_{fg}$. Then $R\\to S$ is quasi-finite at $\\mathfrak q$ [def-weil-pbc-ring-map-quasi-finite-at-prime] if and only if $R_f\\to S_{fg}$ is quasi-finite at $\\mathfrak qS_{fg}$.",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Algebra, Lemma Tag 077H (lemma-quasi-finite-local, line 30277)"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-finite-type-algebra",
+  "def-weil-ring-localization-away",
+  "def-weil-pbc-ring-map-quasi-finite-at-prime"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "quasi-finite at a prime of a localization S_g iff quasi-finite at the corresponding prime of S",
+   "results": "Algebra.QuasiFiniteAt, RingHom.QuasiFinite.propertyIsLocal, RingHom.QuasiFinite.holdsForLocalizationAway, Algebra.QuasiFinite.instLocalization, AlgebraicGeometry.instHasRingHomPropertyLocallyQuasiFiniteQuasiFinite",
+   "date": "2026-10-10",
+   "verdict": "no match (statements about quasi-finite maps, not at a prime)"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "quasi-finite at prime q iff R_f → S_{fg} quasi-finite at the prime q S_{fg}, localization",
+   "results": "RingHom.QuasiFinite.holdsForLocalizationAway, RingHom.QuasiFinite.ofLocalizationSpanTarget, RingHom.QuasiFinite.propertyIsLocal, Algebra.QuasiFinite.of_isLocalization, Algebra.QuasiFinite.instLocalization",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "Algebra.QuasiFiniteAt, Localization.Away",
+   "results": "Algebra.exists_etale_isIdempotentElem_forall_liesOver_eq (Mathlib.RingTheory.Etale.QuasiFinite) only",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rn 'QuasiFiniteAt' Mathlib/RingTheory/QuasiFinite/ Mathlib/RingTheory/ZariskisMainTheorem.lean",
+   "results": "Basic.lean:358-481 (abbrev QuasiFiniteAt := QuasiFinite R (Localization.AtPrime p), baseChange, of_surjectiveOnStalks, comap_algEquiv, of_le, isClopen_singleton, of_isOpen_singleton); none about principal localizations of R and S at a prime",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-integral-closure-zariski-main-away",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "mathlib_candidate": {
+  "declaration": "Algebra.QuasiFiniteAt (definition)",
+  "file": "Mathlib/RingTheory/QuasiFinite/Basic.lean",
+  "how": "Basic.lean:358: for Mathlib's notion the S-side of the node is definitional (the localization of S_g at qS_g is S_q), and the R-side needs Algebra.QuasiFinite.of_restrictScalars (Basic.lean:233) and a base-change argument. Not a leaf (coord/delivery-errors.md B8): Mathlib's `Algebra.QuasiFiniteAt R p` is `QuasiFinite R (Localization.AtPrime p)` (Mathlib/RingTheory/QuasiFinite/Basic.lean:358), which agrees with the DAG's isolated-point notion [def-weil-pbc-ring-map-quasi-finite-at-prime] only through `Algebra.quasiFiniteAt_iff_isOpen_singleton_fiber` (ZariskisMainTheorem.lean:754) and the fibre homeomorphism, a theorem with no node."
+ },
+ "reviewed": "Reviewed by L 2026-10-10 (statement): Algebra 077H, stated with the DAG's quasi-finite-at-prime notion. Unsplit; Mathlib candidates, if any, are for Mathlib's QuasiFiniteAt (B8)."
+}

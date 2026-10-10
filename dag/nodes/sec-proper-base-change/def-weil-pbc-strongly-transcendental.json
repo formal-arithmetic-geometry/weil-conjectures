@@ -1,0 +1,74 @@
+{
+ "id": "def-weil-pbc-strongly-transcendental",
+ "kind": "definition",
+ "title": "Strongly transcendental element",
+ "statement": "Let $\\varphi:R\\to S$ be a homomorphism of commutative rings and $x\\in S$. The element $x$ is *strongly transcendental over $R$* if for every $u\\in S$ and every polynomial $P=a_0+a_1X+\\dots+a_kX^k\\in R[X]$ [def-weil-polynomial-ring] the equality $u\\,(\\varphi(a_0)+\\varphi(a_1)x+\\dots+\\varphi(a_k)x^k)=0$ in $S$ implies $u\\,\\varphi(a_i)=0$ for all $i=0,\\dots,k$. When $\\varphi$ is the inclusion of a subring $R\\subseteq S$ this reads: $u(a_0+a_1x+\\dots+a_kx^k)=0$ with $u\\in S$, $a_i\\in R$ implies $ua_i=0$ for all $i$.",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Algebra, Definition Tag 00PZ (definition-strongly-transcendental, line 30629), stated there for an inclusion of rings $R\\subset S$"
+ },
+ "stmt_deps": [
+  "def-weil-polynomial-ring"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "element strongly transcendental: u * p(x) = 0 implies u times every coefficient of p is zero",
+   "results": "IsStronglyTranscendental (Mathlib.RingTheory.Algebraic.StronglyTranscendental), IsStronglyTranscendental.iff_of_isFractionRing, Transcendental",
+   "date": "2026-10-10",
+   "verdict": "match"
+  },
+  {
+   "tool": "loogle",
+   "query": "IsStronglyTranscendental",
+   "results": "IsStronglyTranscendental (def), .transcendental, isStronglyTranscendental_iff_of_field, .restrictScalars, .of_isLocalization_left, .of_surjective_left, .of_map, .of_isLocalization (all Mathlib.RingTheory.Algebraic.StronglyTranscendental)",
+   "date": "2026-10-10",
+   "verdict": "match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -n 'def IsStronglyTranscendental' -B3 -A3 Mathlib/RingTheory/Algebraic/StronglyTranscendental.lean (sed -n 1,60p read)",
+   "results": "Mathlib/RingTheory/Algebraic/StronglyTranscendental.lean:36 `def IsStronglyTranscendental (x : S) : Prop := ∀ u : S, ∀ p : R[X], p.aeval x * u = 0 → p.map (algebraMap R S) * C u = 0`, tagged @[stacks 00PZ]",
+   "date": "2026-10-10",
+   "verdict": "match (source read)"
+  },
+  {
+   "tool": "local_search",
+   "query": "IsStronglyTranscendental (project ~/weil-conjectures-slopmaster2)",
+   "results": "IsStronglyTranscendental (def), IsStronglyTranscendental.of_map, .transcendental in .lake/packages/mathlib/Mathlib/RingTheory/Algebraic/StronglyTranscendental.lean (index: unavailable, ripgrep fallback)",
+   "date": "2026-10-10",
+   "verdict": "match"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "IsStronglyTranscendental",
+  "file": "Mathlib/RingTheory/Algebraic/StronglyTranscendental.lean",
+  "how": "exact: lines 30-37 (read with sed -n 1,60p, 2026-10-10): for an R-algebra S (structure map φ = algebraMap R S) and x : S, `IsStronglyTranscendental R x := ∀ u p, p.aeval x * u = 0 → p.map (algebraMap R S) * C u = 0`; the coefficient of X^i of `p.map φ * C u` is φ(a_i)u, so the conclusion says φ(a_i)u = 0 for all i, which is the node's definition.",
+  "line": 30
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-integral-closure-zariski-main-away",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "reviewed": "Reviewed by L 2026-10-10: definition leaf IsStronglyTranscendental (Algebraic/StronglyTranscendental.lean line 30, read); Algebra 00PZ."
+}
