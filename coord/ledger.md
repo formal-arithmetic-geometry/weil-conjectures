@@ -928,3 +928,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 05:41 L: reviewed lem-weil-pbc-artinian-local-essentially-finite-type-residue (6 steps, +07DS composition leaf): accepted.
 - 05:42 L: reviewed lem-weil-pbc-cauchy-binet (5 steps, +determinant definition leaf, +2 leaves): accepted; WANTED by the worker: a textbook proof of Cauchy-Binet (not needed, the proof is written).
 - 05:43 L: reviewed lem-weil-pbc-clopen-open-cover-section (4 steps, +open-immersion-iso leaf): accepted.
+- 05:45 L: sixteenth account limit at ~05:44; five workers died: cartier-equality left a complete split on disk (reviewed next); cohen-rings-exist, closed-point-dimension-local-ring, cm-local-free-resolution-to-mcm, cohen-ring-mod-pn-formally-smooth left nothing and are relaunched (claims kept by L). Session continues on another account.
