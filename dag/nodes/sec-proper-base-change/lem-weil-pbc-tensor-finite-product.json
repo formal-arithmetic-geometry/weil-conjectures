@@ -1,0 +1,72 @@
+{
+ "id": "lem-weil-pbc-tensor-finite-product",
+ "kind": "statement",
+ "title": "Tensor product commutes with finite products",
+ "statement": "Let $R$ be a commutative ring, $t\\ge0$ an integer, $P_1,\\dots,P_t$ and $N$ $R$-modules, and $\\prod_{k=1}^tP_k$ the product module (componentwise operations). Then there is a unique $R$-linear map $\\big(\\prod_{k=1}^tP_k\\big)\\otimes_RN\\to\\prod_{k=1}^t(P_k\\otimes_RN)$ with $(x_k)_k\\otimes y\\mapsto(x_k\\otimes y)_k$, and it is an isomorphism of $R$-modules.",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "standard property of the tensor product (tensor product commutes with finite direct sums, which for finitely many factors are the products), used in More on Algebra, Lemma 05EK (lemma-recover-module-from-glueing-data), second proof, where H_1(M,f) ⊗_R S = H_1(M ⊗_R S, f) is asserted for flat S"
+ },
+ "stmt_deps": [],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "tensor product commutes with finite product of modules, (Π i, M i) ⊗ N ≃ Π i, (M i ⊗ N)",
+   "results": "Algebra.TensorProduct.piRight, TensorProduct.piLeft, TensorProduct.piRight (Mathlib.LinearAlgebra.TensorProduct.Pi), TensorProduct.prodLeft, TensorProduct.single_tmul, TensorProduct.finsuppLeft, TensorProduct.directSumRight",
+   "date": "2026-10-10",
+   "verdict": "match: TensorProduct.piLeft"
+  },
+  {
+   "tool": "loogle",
+   "query": "TensorProduct _ ((i : _) → _) _ ≃ₗ[_] ((i : _) → TensorProduct _ _ _)",
+   "results": "TensorProduct.piLeft (Mathlib.LinearAlgebra.TensorProduct.Pi)",
+   "date": "2026-10-10",
+   "verdict": "match"
+  },
+  {
+   "tool": "grep",
+   "query": "sed -n 55,125p ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/LinearAlgebra/TensorProduct/Pi.lean",
+   "results": "line 56 piRightHom, lines 60-62 piRightHom_tmul (x ⊗ f ↦ fun j ↦ x ⊗ f j, rfl), line 91 piRight (Fintype ι), line 115 piLeft : (∀ i, M i) ⊗[R] N ≃ₗ[R] ∀ i, M i ⊗[R] N := TensorProduct.comm ≪≫ₗ piRight ≪≫ₗ piCongrRight (fun _ ↦ TensorProduct.comm)",
+   "date": "2026-10-10",
+   "verdict": "match"
+  },
+  {
+   "tool": "local_search",
+   "query": "TensorProduct.piLeft (project ~/weil-conjectures-slopmaster2)",
+   "results": "TensorProduct.piLeft, def, .lake/packages/mathlib/Mathlib/LinearAlgebra/TensorProduct/Pi.lean",
+   "date": "2026-10-10",
+   "verdict": "match"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "TensorProduct.piLeft",
+  "file": "Mathlib/LinearAlgebra/TensorProduct/Pi.lean",
+  "how": "exact, with ι = Fin t and M = fun k ↦ P_k: `TensorProduct.piLeft R N M : (∀ i, M i) ⊗[R] N ≃ₗ[R] ∀ i, M i ⊗[R] N` (Pi.lean:115, needs [Fintype ι] [DecidableEq ι]), defined as TensorProduct.comm ≪≫ₗ piRight ≪≫ₗ piCongrRight (fun _ ↦ TensorProduct.comm); on pure tensors (x_k)_k ⊗ y ↦ y ⊗ (x_k)_k ↦ (y ⊗ x_k)_k (piRightHom_tmul, Pi.lean:60-62) ↦ (x_k ⊗ y)_k; uniqueness of a linear map with given values on pure tensors is TensorProduct.ext",
+  "line": 115
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-formal-glueing-complex-exact",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "reviewed": "Reviewed by L 2026-10-10: exact Mathlib leaf TensorProduct.piLeft (Pi.lean line 115, read); the formula on pure tensors follows from piRightHom_tmul and the two commutativity isomorphisms."
+}
