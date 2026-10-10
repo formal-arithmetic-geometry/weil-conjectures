@@ -23,9 +23,63 @@
   "def-pc-derived-category",
   "def-pc-derived-direct-image"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "An isomorphism of sheaves on $Y$ can be checked on an affine open cover. Fix an affine $U\\subseteq Y$, replace $Y$ by $U$ and $X$ by $f^{-1}U$, and choose a positive uniform bound $N$ from [lem-pc-derived-direct-image-uniform-truncation-bound]. For $T=\\tau_{\\leq -N-1}E$, the triangle $T\\to E\\to\\tau_{\\geq -N}E\\to T[1]$ and the bound give $H^0(Rf_*T)=H^1(Rf_*T)=0$: indeed $T[-N-1]$ has no positive cohomology (as $H^m(T[-N-1])=H^{m-N-1}(T)$), so its direct image vanishes in degrees at least $N$, i.e. $H^j(Rf_*T)=H^{j+N+1}(Rf_*T[-N-1])=0$ for $j\\geq-1$. Thus $H^0(Rf_*E)\\cong H^0(Rf_*\\tau_{\\geq -N}E)$, naturally in $E$, for every member of the family and its direct sum. Truncation commutes with direct sums because cohomology sheaves do, so the same fixed $N$ reduces the degree-zero comparison to a family bounded below by $-N$.",
+   "uses": [
+    "lem-pc-derived-direct-image-uniform-truncation-bound",
+    "def-pc-derived-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/perfect.tex",
+    "place": "Tag 08D5 proof, reduction to a quasi-compact target and truncation bound"
+   }
+  },
+  {
+   "text": "Apply the bounded-below truncation spectral sequence [thm-sp-truncation-e2] to the left exact functor $f_*$ and each $E_i$ and $E=\\bigoplus_iE_i$: its natural $E_2$ page is $R^pf_*H^q(-)$ and its abutment is $H^{p+q}(Rf_*(-))$. On every affine $V\\subseteq Y$, $f^{-1}V$ is a quasi-compact quasi-separated scheme (quasi-compactness and quasi-separatedness of $f$ over the affine $V$); apply [lem-weil-pbc-qcqs-cohomology-direct-sum] there to the quasi-coherent sheaves $H^q(E_i)|_{f^{-1}V}$. These compatible cohomology isomorphisms give an isomorphism of the associated presheaves on the affine basis; [lem-weil-pbc-higher-direct-image-presheaf] identifies their sheafifications with the higher direct images, and [lem-weil-pbc-module-sheaves-colimits-forgetful] identifies the direct sum sheaf with the sheafification of the sectionwise direct sums. Thus $\\bigoplus_iR^pf_*H^q(E_i)\\cong R^pf_*(\\bigoplus_iH^q(E_i))$. Cohomology sheaves of complexes commute with direct sums, giving the comparison of the $E_2$ pages. In total degree zero, $q\\geq-N$ and $p\\geq0$, so only $0\\leq p\\leq N$ occurs. The natural finite filtrations and their associated graded isomorphisms from [thm-sp-truncation-e2] then show, by induction along the filtration, that $\\bigoplus_iH^0(Rf_*E_i)\\to H^0(Rf_*E)$ is an isomorphism.",
+   "uses": [
+    "thm-sp-truncation-e2",
+    "lem-weil-pbc-qcqs-cohomology-direct-sum",
+    "lem-weil-pbc-higher-direct-image-presheaf",
+    "lem-weil-pbc-module-sheaves-colimits-forgetful",
+    "lem-pc-derived-direct-image-uniform-truncation-bound"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/perfect.tex",
+    "place": "Tag 08DZ (perfect-lemma-quasi-coherence-pushforward-direct-sums), proof, spectral sequences and reduction to sheaves; Tag 08D5 supplies the bound"
+   }
+  },
+  {
+   "text": "The comparison map $\\bigoplus_iRf_*E_i\\to Rf_*(\\bigoplus_iE_i)$ is an isomorphism on $H^0$ over every affine $U\\subseteq Y$ by Steps 1 and 2, hence on $Y$. For each integer $k$, repeat those steps with the family $E_i[k]$; shifts commute with direct sums and $Rf_*$, so the original comparison is an isomorphism on $H^k$. A morphism of derived objects that is an isomorphism on every cohomology sheaf is an isomorphism. Both sides lie in $D_{\\mathrm{QCoh}}(\\mathcal O_Y)$ by the definition of its direct sum and preservation of quasi-coherent cohomology under $Rf_*$ [lem-pc-derived-direct-image-preserves-qcoh].",
+   "uses": [
+    "def-pc-derived-direct-image",
+    "def-pc-derived-category",
+    "lem-pc-derived-direct-image-preserves-qcoh"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/perfect.tex",
+    "place": "Tag 08DZ (perfect-lemma-quasi-coherence-pushforward-direct-sums), conclusion from degree-zero comparison"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-derived-direct-image-uniform-truncation-bound",
+  "def-pc-derived-category",
+  "thm-sp-truncation-e2",
+  "lem-weil-pbc-qcqs-cohomology-direct-sum",
+  "lem-weil-pbc-higher-direct-image-presheaf",
+  "lem-weil-pbc-module-sheaves-colimits-forgetful",
+  "def-pc-derived-direct-image",
+  "lem-pc-derived-direct-image-preserves-qcoh"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/perfect.tex",
+  "place": "Tag 08DZ (perfect-lemma-quasi-coherence-pushforward-direct-sums) and proof"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -50,12 +104,55 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "chapter": "sec-picard-framework",
  "unit": "sk-thm-picard-duality",
  "created": {
   "item": "lem-pc-noetherian-derived-direct-image-right-adjoint",
   "by": "worker",
   "date": "2026-10-10"
+ },
+ "split_report": {
+  "date": "2026-10-11",
+  "item": "lem-pc-derived-direct-image-preserves-direct-sums",
+  "worker": "stage1",
+  "summary": "Split the Stacks proof into the uniform truncation reduction, the bounded-below hypercohomology spectral-sequence comparison, and the shift argument. Added one statement-only prerequisite for the uniform cohomological truncation bound; the qcqs sheaf-cohomology direct-sum theorem and truncation spectral sequence already exist in the DAG.",
+  "blueprint": "The steps realize the first-step comparison prerequisite in lem-sc-finite-duality through lem-sc-proper-upper-shriek-composition, namely preservation of set-indexed direct sums by the derived direct image.",
+  "tool_uses": [
+   {
+    "node": "thm-sp-truncation-e2",
+    "why": "Step 2 uses its stated bounded-below truncation hypercohomology spectral sequence and finite filtration."
+   },
+   {
+    "node": "lem-weil-pbc-qcqs-cohomology-direct-sum",
+    "why": "Step 2 uses its stated isomorphism between cohomology of a direct sum of sheaves and the direct sum of their cohomologies on a qcqs scheme."
+   },
+   {
+    "node": "lem-weil-pbc-higher-direct-image-presheaf",
+    "why": "Step 2 needs the general sheafification description of higher direct images to turn the affine-open cohomology comparison into a comparison of sheaves; the Picard unit has no such statement."
+   },
+   {
+    "node": "lem-weil-pbc-module-sheaves-colimits-forgetful",
+    "why": "Step 2 needs the general module-sheaf colimit formula to identify the sheafification of sectionwise sums with the sheaf direct sum; the Picard unit has no such statement."
+   }
+  ]
+ },
+ "tool_uses": [
+  "thm-sp-truncation-e2",
+  "lem-weil-pbc-qcqs-cohomology-direct-sum",
+  "lem-weil-pbc-higher-direct-image-presheaf",
+  "lem-weil-pbc-module-sheaves-colimits-forgetful",
+  "thm-sp-truncation-e2",
+  "lem-weil-pbc-qcqs-cohomology-direct-sum",
+  "lem-weil-pbc-higher-direct-image-presheaf",
+  "lem-weil-pbc-module-sheaves-colimits-forgetful"
+ ],
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-dps1805",
+  "group": "F1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-dps1805 (reviewer sub-agent of L); spot-checked: Checked statement vs 08DZ (qcqs f, D_QCoh both sides, arbitrary sums); Step 1 vs 08D5(2) truncation triangle; Step 2 qcqs used as in Stacks: f^{-1}V qcqs for affine V feeds lem-weil-pbc-qcqs-cohomology-direct-sum (coherent-lemma-colimit-cohomology), bounded-below spectral sequence thm-sp-truncation-e2 with a=-N, 0<=p<=N in degree 0; Step 3 shifts. New node = 08D5(2)+its truncation consequence, true, not a duplicate of 08D5(1) node. No cycle: cited nodes are sec-proper-base-change / 08D5(1) unsplit, none depends on the item; C1 right-adjoint node and 08D4 node are downstream/uncited. Tool uses accepted as generic. FIX more, RETURN less: Step 1 shift sign (C4/E) — text said T[N+1] has no positive cohomology, from which the bound only gives vanishing in degrees >=2N+1, not >=-1; replaced by T[-N-1] with H^j(Rf_*T)=H^{j+N+1}(Rf_*T[-N-1])=0 for j>=-1. Second reading missed this.; 1 file(s) fixed by the reviewer"
  }
 }
