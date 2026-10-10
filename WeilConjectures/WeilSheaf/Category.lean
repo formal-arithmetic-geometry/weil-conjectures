@@ -243,6 +243,28 @@ instance [LocallyOfFiniteType (X ↘ Spec (CommRingCat.of k₀))] :
     IsTriangulated (WeilComplex k₀ l X) :=
   inferInstanceAs (IsTriangulated (WeilComplex.objectProperty k₀ l X).FullSubcategory)
 
+namespace WeilComplex
+
+/-- A Weil sheaf placed in degree `a`, as a Weil complex. -/
+noncomputable def singleComplex (a : ℤ) (G : WeilSheaf k₀ l X) : WeilComplex k₀ l X :=
+  ⟨(_root_.DerivedCategory.singleFunctor _ a).obj G.obj, by
+    refine ⟨⟨⟨a, inferInstanceAs (_root_.DerivedCategory.IsGE
+      ((_root_.DerivedCategory.singleFunctor _ a).obj G.obj) a)⟩,
+      ⟨a, inferInstanceAs (_root_.DerivedCategory.IsLE
+        ((_root_.DerivedCategory.singleFunctor _ a).obj G.obj) a)⟩⟩, fun m ↦ ?_⟩
+    obtain hm | rfl | hm := lt_trichotomy m a
+    · exact (WeilSheaf.objectProperty k₀ l X).prop_of_isZero
+        ((_root_.DerivedCategory.isGE_iff
+          ((_root_.DerivedCategory.singleFunctor _ a).obj G.obj) a).1 inferInstance m hm)
+    · exact (WeilSheaf.objectProperty k₀ l X).prop_of_iso
+        ((_root_.DerivedCategory.singleFunctorCompHomologyFunctorIso _ m).app G.obj).symm
+          G.property
+    · exact (WeilSheaf.objectProperty k₀ l X).prop_of_isZero
+        ((_root_.DerivedCategory.isLE_iff
+          ((_root_.DerivedCategory.singleFunctor _ a).obj G.obj) a).1 inferInstance m hm)⟩
+
+end WeilComplex
+
 namespace WeilSheaf
 
 /-- The underlying pro-étale sheaf of a Weil sheaf. -/
@@ -258,20 +280,8 @@ lemma isAdicConstructibleSheaf_carrier (F : WeilSheaf k₀ l X) :
 /-- A Weil sheaf, viewed as a Weil complex concentrated in degree zero. -/
 noncomputable def toComplex : WeilSheaf k₀ l X ⥤ WeilComplex k₀ l X :=
   (WeilSheaf.objectProperty k₀ l X).liftFullSubcategory (WeilComplex.objectProperty k₀ l X)
-    (_root_.DerivedCategory.singleFunctor _ 0) fun F hF ↦ by
-    refine ⟨⟨⟨0, inferInstanceAs (_root_.DerivedCategory.IsGE
-      ((_root_.DerivedCategory.singleFunctor _ 0).obj F) 0)⟩,
-      ⟨0, inferInstanceAs (_root_.DerivedCategory.IsLE
-        ((_root_.DerivedCategory.singleFunctor _ 0).obj F) 0)⟩⟩, fun m ↦ ?_⟩
-    obtain hm | rfl | hm := lt_trichotomy m 0
-    · exact (WeilSheaf.objectProperty k₀ l X).prop_of_isZero
-        ((_root_.DerivedCategory.isGE_iff
-          ((_root_.DerivedCategory.singleFunctor _ 0).obj F) 0).1 inferInstance m hm)
-    · exact (WeilSheaf.objectProperty k₀ l X).prop_of_iso
-        ((_root_.DerivedCategory.singleFunctorCompHomologyFunctorIso _ 0).app F).symm hF
-    · exact (WeilSheaf.objectProperty k₀ l X).prop_of_isZero
-        ((_root_.DerivedCategory.isLE_iff
-          ((_root_.DerivedCategory.singleFunctor _ 0).obj F) 0).1 inferInstance m hm)
+    (_root_.DerivedCategory.singleFunctor _ 0) fun F hF ↦
+      (WeilComplex.singleComplex 0 ⟨F, hF⟩).property
 
 instance : (toComplex (k₀ := k₀) (l := l) (X := X)).Additive :=
   ObjectProperty.liftFullSubcategory_additive _ _ _ _
@@ -382,24 +392,6 @@ noncomputable def _root_.AlgebraicGeometry.WeilSheaf.toComplexCompHomologySheafI
       ((_root_.DerivedCategory.singleFunctorCompHomologyFunctorIso _ 0).app F.obj))
     fun f ↦ ObjectProperty.hom_ext _
       ((_root_.DerivedCategory.singleFunctorCompHomologyFunctorIso _ 0).hom.naturality f.hom)
-
-/-- A Weil sheaf placed in degree `a`, as a Weil complex. -/
-noncomputable def singleComplex (a : ℤ) (G : WeilSheaf k₀ l X) : WeilComplex k₀ l X :=
-  ⟨(_root_.DerivedCategory.singleFunctor _ a).obj G.obj, by
-    refine ⟨⟨⟨a, inferInstanceAs (_root_.DerivedCategory.IsGE
-      ((_root_.DerivedCategory.singleFunctor _ a).obj G.obj) a)⟩,
-      ⟨a, inferInstanceAs (_root_.DerivedCategory.IsLE
-        ((_root_.DerivedCategory.singleFunctor _ a).obj G.obj) a)⟩⟩, fun m ↦ ?_⟩
-    obtain hm | rfl | hm := lt_trichotomy m a
-    · exact (WeilSheaf.objectProperty k₀ l X).prop_of_isZero
-        ((_root_.DerivedCategory.isGE_iff
-          ((_root_.DerivedCategory.singleFunctor _ a).obj G.obj) a).1 inferInstance m hm)
-    · exact (WeilSheaf.objectProperty k₀ l X).prop_of_iso
-        ((_root_.DerivedCategory.singleFunctorCompHomologyFunctorIso _ m).app G.obj).symm
-          G.property
-    · exact (WeilSheaf.objectProperty k₀ l X).prop_of_isZero
-        ((_root_.DerivedCategory.isLE_iff
-          ((_root_.DerivedCategory.singleFunctor _ a).obj G.obj) a).1 inferInstance m hm)⟩
 
 /-- A Weil sheaf viewed as a complex is the Weil sheaf placed in degree `0`. -/
 theorem _root_.AlgebraicGeometry.WeilSheaf.toComplex_obj (G : WeilSheaf k₀ l X) :
