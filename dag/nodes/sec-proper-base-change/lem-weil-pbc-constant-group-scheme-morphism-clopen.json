@@ -86,10 +86,11 @@
    }
   },
   {
-   "text": "*Step 7 (the group law is pointwise addition).* Let $f,g:U\\to T_E$ be $T$-morphisms, $P=T_E\\times_TT_E$ with projections $p,q$, and $(f,g):U\\to P$ the morphism with $p\\circ(f,g)=f$, $q\\circ(f,g)=g$ [def-pc-fibre-product]; it is a $T$-morphism and $f+g=m\\circ(f,g)$ [def-weil-pbc-constant-group-scheme]. For the components $W_{e,e'}=p^{-1}(V_e)\\cap q^{-1}(V_{e'})$ of $P$ we get $(f,g)^{-1}(W_{e,e'})=f^{-1}(V_e)\\cap g^{-1}(V_{e'})=\\{x:\\varphi_f(x)=e,\\ \\varphi_g(x)=e'\\}$. By the definition of $m$, $m(W_{e,e'})\\subseteq V_{e+e'}$; since the $W_{e,e'}$ cover $P$ and the $V$'s are disjoint, $m^{-1}(V_d)=\\bigcup_{e+e'=d}W_{e,e'}$. Hence $(f+g)^{-1}(V_d)=\\bigcup_{e+e'=d}\\{x:\\varphi_f(x)=e,\\varphi_g(x)=e'\\}=\\{x:\\varphi_f(x)+\\varphi_g(x)=d\\}$, i.e. $\\varphi_{f+g}=\\varphi_f+\\varphi_g$. The maps $|U|\\to E$ with open fibres form an abelian group under pointwise addition (the fibre of $\\varphi+\\psi$ over $d$ is the union of the open sets $\\varphi^{-1}(e)\\cap\\psi^{-1}(d-e)$; the fibres of $-\\varphi$ are those of $\\varphi$; constants have open fibres). Since $f\\mapsto\\varphi_f$ is a bijection (Steps 4, 5) carrying $+$ to pointwise addition, $\\operatorname{Mor}_T(U,T_E)$ with $+$ is an abelian group and $f\\mapsto\\varphi_f$ is a group isomorphism; by Step 6, $e\\mapsto c_e$ corresponds to $e\\mapsto$ (constant map $e$), which is additive.",
+   "text": "*Step 7 (the group law is pointwise addition).* Let $f,g:U\\to T_E$ be $T$-morphisms, $P=T_E\\times_TT_E$ with projections $p,q$, and $(f,g):U\\to P$ the morphism with $p\\circ(f,g)=f$, $q\\circ(f,g)=g$ [def-pc-fibre-product]; it is a $T$-morphism and $f+g=m\\circ(f,g)$ [def-weil-pbc-constant-group-scheme]. For the components $W_{e,e'}=p^{-1}(V_e)\\cap q^{-1}(V_{e'})$ of $P$ we get $(f,g)^{-1}(W_{e,e'})=f^{-1}(V_e)\\cap g^{-1}(V_{e'})=\\{x:\\varphi_f(x)=e,\\ \\varphi_g(x)=e'\\}$. By the definition of $m$ [lem-weil-pbc-constant-group-scheme-multiplication] (b), (c), $m(W_{e,e'})\\subseteq V_{e+e'}$; since the $W_{e,e'}$ cover $P$ and the $V$'s are disjoint, $m^{-1}(V_d)=\\bigcup_{e+e'=d}W_{e,e'}$. Hence $(f+g)^{-1}(V_d)=\\bigcup_{e+e'=d}\\{x:\\varphi_f(x)=e,\\varphi_g(x)=e'\\}=\\{x:\\varphi_f(x)+\\varphi_g(x)=d\\}$, i.e. $\\varphi_{f+g}=\\varphi_f+\\varphi_g$. The maps $|U|\\to E$ with open fibres form an abelian group under pointwise addition (the fibre of $\\varphi+\\psi$ over $d$ is the union of the open sets $\\varphi^{-1}(e)\\cap\\psi^{-1}(d-e)$; the fibres of $-\\varphi$ are those of $\\varphi$; constants have open fibres). Since $f\\mapsto\\varphi_f$ is a bijection (Steps 4, 5) carrying $+$ to pointwise addition, $\\operatorname{Mor}_T(U,T_E)$ with $+$ is an abelian group and $f\\mapsto\\varphi_f$ is a group isomorphism; by Step 6, $e\\mapsto c_e$ corresponds to $e\\mapsto$ (constant map $e$), which is additive.",
    "uses": [
     "def-pc-fibre-product",
-    "def-weil-pbc-constant-group-scheme"
+    "def-weil-pbc-constant-group-scheme",
+    "lem-weil-pbc-constant-group-scheme-multiplication"
    ],
    "elementary": true,
    "source": {
@@ -99,13 +100,14 @@
   }
  ],
  "proof_deps": [
-  "def-weil-pbc-constant-group-scheme",
-  "lem-weil-pbc-scheme-coproduct-family",
-  "def-weil-open-immersion",
+  "def-pc-fibre-product",
   "def-pc-scheme",
+  "def-weil-open-immersion",
+  "def-weil-pbc-constant-group-scheme",
+  "lem-weil-pbc-constant-group-scheme-multiplication",
   "lem-weil-pbc-morphism-factors-through-open-subscheme",
-  "lem-weil-pbc-scheme-morphism-gluing",
-  "def-pc-fibre-product"
+  "lem-weil-pbc-scheme-coproduct-family",
+  "lem-weil-pbc-scheme-morphism-gluing"
  ],
  "proof_origin": {
   "by": "agent",
@@ -175,5 +177,6 @@
   "by": "L",
   "result": "pass",
   "note": "Seven steps: clopen components of the coproduct (new leaf: coproducts of families of schemes, Limits.lean:187/241/202 verified), U_e = f^{-1}(V_e), restriction to U_e is the structure map composed with iota_e, gluing (existing leaves), maps |U| -> E with clopen fibres, canonical points, group law from the new definition node of the constant group scheme (unsplit, 03YW). Correct. Statement made explicit (bijection, canonical map, group law) and generalized to every T-scheme U (etale not used)."
- }
+ },
+ "lead_note": " L 2026-10-10: step 7 now cites lem-weil-pbc-constant-group-scheme-multiplication for the properties of m (moved out of the definition when it was split)."
 }

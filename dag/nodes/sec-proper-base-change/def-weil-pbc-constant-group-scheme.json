@@ -2,7 +2,7 @@
  "id": "def-weil-pbc-constant-group-scheme",
  "kind": "definition",
  "title": "The constant group scheme T_E and the group law on its T-valued points",
- "statement": "Let $T$ be a scheme [def-pc-scheme] and $E$ an abelian group. The *constant group scheme* $T_E$ with value $E$ over $T$ is the coproduct $T_E=\\coprod_{e\\in E}T$ of copies of $T$ indexed by $E$, with coprojections $\\iota_e:T\\to T_E$ [lem-weil-pbc-scheme-coproduct-family], made a $T$-scheme [def-weil-scheme-over-base] by the structure morphism $\\pi:T_E\\to T$ with $\\pi\\circ\\iota_e=\\mathrm{id}_T$ for all $e$ (the codiagonal). Write $V_e=\\iota_e(T)\\subseteq T_E$, an open and closed subset, the $V_e$ pairwise disjoint and covering $T_E$. Let $P=T_E\\times_TT_E$ be the fibre product [def-pc-fibre-product] of $\\pi$ with itself, with projections $p,q$ and structure morphism $\\rho=\\pi\\circ p=\\pi\\circ q:P\\to T$, and put $W_{e,e'}=p^{-1}(V_e)\\cap q^{-1}(V_{e'})$ for $e,e'\\in E$; these are open subsets of $P$, pairwise disjoint, and they cover $P$. The *multiplication* $m:P\\to T_E$ is the morphism whose restriction to the open subscheme $W_{e,e'}$ is $\\iota_{e+e'}\\circ\\rho|_{W_{e,e'}}$ for all $(e,e')\\in E\\times E$ (these restrictions glue to a unique morphism by [lem-weil-pbc-scheme-morphism-gluing], the overlaps $W_{e,e'}\\cap W_{d,d'}$ being empty for $(e,e')\\ne(d,d')$); it is a $T$-morphism, $\\pi\\circ m=\\rho$, and it maps the component $W_{e,e'}$ into the component $V_{e+e'}$. For a $T$-scheme $s:U\\to T$ and $T$-morphisms $f,g:U\\to T_E$, the *sum* is $f+g:=m\\circ(f,g):U\\to T_E$, where $(f,g):U\\to P$ is the morphism with $p\\circ(f,g)=f$ and $q\\circ(f,g)=g$; the *constant point* attached to $e\\in E$ is $c_e:=\\iota_e\\circ s:U\\to T_E$. The map $E\\to\\operatorname{Mor}_T(U,T_E)$, $e\\mapsto c_e$, is the *canonical map*.",
+ "statement": "Let $T$ be a scheme [def-pc-scheme] and $E$ an abelian group. The *constant group scheme* $T_E$ with value $E$ over $T$ is the coproduct $T_E=\\coprod_{e\\in E}T$ of copies of $T$ indexed by $E$, with coprojections $\\iota_e:T\\to T_E$ (the coproduct exists by [lem-weil-pbc-scheme-coproduct-family]), made a $T$-scheme [def-weil-scheme-over-base] by the structure morphism $\\pi:T_E\\to T$ with $\\pi\\circ\\iota_e=\\mathrm{id}_T$ for all $e$ (the codiagonal, given by the universal property of the coproduct). Write $V_e=\\iota_e(T)\\subseteq T_E$ for the *components* (open and closed, pairwise disjoint and covering $T_E$, by [lem-weil-pbc-scheme-coproduct-family]). Let $P=T_E\\times_TT_E$ be the fibre product [def-pc-fibre-product] of $\\pi$ with itself, with projections $p,q$ and structure morphism $\\rho=\\pi\\circ p=\\pi\\circ q:P\\to T$, and put $W_{e,e'}=p^{-1}(V_e)\\cap q^{-1}(V_{e'})$ for $e,e'\\in E$. The *multiplication* $m:P\\to T_E$ is the morphism of schemes whose restriction to $W_{e,e'}$, regarded as an open subscheme of $P$ [def-weil-open-immersion], is $\\iota_{e+e'}\\circ\\rho|_{W_{e,e'}}$ for all $(e,e')\\in E\\times E$. That the $W_{e,e'}$ are open and closed, pairwise disjoint and cover $P$, that such an $m$ exists and is unique (gluing along this cover, [lem-weil-pbc-scheme-morphism-gluing], the overlaps being empty), and that $\\pi\\circ m=\\rho$ and $m(W_{e,e'})\\subseteq V_{e+e'}$, is the statement node lem-weil-pbc-constant-group-scheme-multiplication (recorded in `pointers`), from which this definition takes $m$. For a $T$-scheme $s:U\\to T$ and $T$-morphisms $f,g:U\\to T_E$, the *sum* is $f+g:=m\\circ(f,g):U\\to T_E$, where $(f,g):U\\to P$ is the morphism with $p\\circ(f,g)=f$ and $q\\circ(f,g)=g$ (it exists since $\\pi\\circ f=s=\\pi\\circ g$); the *constant point* attached to $e\\in E$ is $c_e:=\\iota_e\\circ s:U\\to T_E$. The map $E\\to\\operatorname{Mor}_T(U,T_E)$, $e\\mapsto c_e$, is the *canonical map*. (The name follows Stacks Tag 03YW, where $(T_E,m)$ is a group scheme over $T$; the group-scheme axioms for $m$ are not part of this definition and are not claimed here.)",
  "source": {
   "document": "literature/stacks-project/groupoids.tex",
   "place": "Groupoids, Example 39.5.6 (Tag 03YW, label example-constant-group): $G_S$ is the base change of $\\coprod_{g\\in G}\\Spec(\\mathbf Z)$, with the multiplication mapping the component of $(g,g')$ to the component of $gg'$; Etale Cohomology, Remark 59.23.2 (Tag 03P5, label remark-constant-locally-constant-maps). Here written directly over $T$ (the base change of $\\coprod_g\\Spec\\mathbf Z$ to $T$ is $\\coprod_gT$), with the components $W_{e,e'}$ of the fibre product described as open subsets"
@@ -11,12 +11,35 @@
   "def-pc-scheme",
   "def-weil-scheme-over-base",
   "def-pc-fibre-product",
+  "def-weil-open-immersion",
   "lem-weil-pbc-scheme-coproduct-family",
   "lem-weil-pbc-scheme-morphism-gluing"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "*The data are well formed.* $E$ is a set, so the coproduct $\\coprod_{e\\in E}T$ exists with coprojections $\\iota_e$ [lem-weil-pbc-scheme-coproduct-family], and its universal property applied to the family $(\\mathrm{id}_T)_{e\\in E}$ gives the unique $\\pi$ with $\\pi\\circ\\iota_e=\\mathrm{id}_T$; so $(T_E,\\pi)$ is a $T$-scheme [def-weil-scheme-over-base]. The fibre product $P$ of $\\pi$ with itself exists [def-pc-fibre-product] and $\\pi\\circ p=\\pi\\circ q$ by its commutative square, so $\\rho$ is well defined. For $T$-morphisms $f,g:U\\to T_E$ we have $\\pi\\circ f=s=\\pi\\circ g$, so the universal property of $P$ gives the unique $(f,g)$ with $p\\circ(f,g)=f$, $q\\circ(f,g)=g$. $c_e=\\iota_e\\circ s$ is a $T$-morphism: $\\pi\\circ\\iota_e\\circ s=s$. The morphism $m$ is not constructed here: its existence and uniqueness, and the facts about the $W_{e,e'}$ it rests on, are the statement node lem-weil-pbc-constant-group-scheme-multiplication (a pointer, not a dependency).",
+   "uses": [
+    "lem-weil-pbc-scheme-coproduct-family",
+    "def-weil-scheme-over-base",
+    "def-pc-fibre-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/groupoids.tex",
+    "place": "Groupoids, Example 39.5.6 (Tag 03YW, label example-constant-group); the universal properties of coproduct and fibre product written out by an agent"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-scheme-coproduct-family",
+  "def-weil-scheme-over-base",
+  "def-pc-fibre-product"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/groupoids.tex",
+  "place": "Groupoids, Example 39.5.6 (Tag 03YW): Stacks gives $G_S$ as the base change of $\\coprod_g\\Spec\\mathbf Z$ with the componentwise multiplication; the description directly over $T$ and the well-formedness step written by an agent"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -38,10 +61,17 @@
    "results": "no constant group scheme; GrpObj appears only in AlgebraicGeometry/Group/{Affine,Smooth,Abelian}.lean and Pullbacks.lean (general group schemes)",
    "date": "2026-10-10",
    "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rn 'constant' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicGeometry/*.lean; grep -rln -i constant Mathlib/AlgebraicGeometry; grep -rn -i 'constant group|constantGroup|ConstantGroup' Mathlib",
+   "results": "no hit in AlgebraicGeometry/*.lean; recursively only Group/Abelian.lean (the word 'constantly'), Sites/ConstantSheaf.lean (continuousMapPresheaf, continuousMapPresheafAb: the sheaf U -> C(U,A), 'When T is discrete, this is the constant sheaf (TODO)', no representing scheme), Morphisms/FlatRank, EllipticCurve, Sites/ElladicCohomology; no constant group scheme anywhere. Coproducts: Limits.lean sigma instances, sigmaOpenCover, disjoint_opensRange_sigmaι, isEmpty_pullback_sigmaι_of_ne",
+   "date": "2026-10-10",
+   "verdict": "no match (Lean candidate: T_E := ∐ (fun _ : E => T) with π := Sigma.desc (fun _ => 𝟙 T); m via Scheme.Cover.glueMorphisms)"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "worker",
@@ -61,5 +91,25 @@
   }
  },
  "chapter": "sec-proper-base-change",
- "unit": "sk-thm-p1"
+ "unit": "sk-thm-p1",
+ "pointers": [
+  {
+   "to": "lem-weil-pbc-constant-group-scheme-multiplication",
+   "was": [],
+   "reason": "forward pointer, not a dependency: the claims inside this definition about the fibre product P and the multiplication m (the W_{e,e'} are open and closed, pairwise disjoint and cover P; the componentwise morphisms glue to a unique m; pi o m = rho and m(W_{e,e'}) lies in V_{e+e'}) moved to a statement node introducing its own objects; the definition takes m from it by name",
+   "date": "2026-10-10"
+  }
+ ],
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "def-weil-pbc-constant-group-scheme",
+  "worker": "stage1",
+  "summary": "Checked against Stacks Groupoids Example 03YW (groupoids.tex, example-constant-group: G_S = base change of the coproduct of copies of Spec Z, multiplication mapping the (g,g') component to the gg' component) and Etale Cohomology Remark 03P5 (tags verified in tags/tags). The data agree with the source (written directly over T). Claims moved out of the definition: (1) the V_e are open and closed, disjoint and cover T_E: this is the Mathlib leaf lem-weil-pbc-scheme-coproduct-family, already in stmt_deps because the data T_E, iota_e, pi are built from it (a general lemma, not about this node, so no cycle); (2) the W_{e,e'} are open and closed, pairwise disjoint and cover P, (3) the componentwise morphisms glue to a unique m, (4) pi o m = rho and m(W_{e,e'}) in V_{e+e'} (plus the consequence m^{-1}(V_d) = union over e+e'=d, which the citer uses in its Step 7): all into the new statement node lem-weil-pbc-constant-group-scheme-multiplication (unsplit, introduces T_E, P, W, m itself, does not cite this definition), recorded in pointers, not stmt_deps; Stacks omits the argument, so its proof will be agent-written. Group axioms (associativity, unit, inverse): the definition never asserted them (only the name 'group scheme'); a sentence now says so, and no node was made, since the only citer (lem-weil-pbc-constant-group-scheme-morphism-clopen) proves directly that Mor_T(U,T_E) with the sum is an abelian group via phi_{f+g} = phi_f + phi_g. stmt_deps: def-weil-open-immersion added (open subscheme W_{e,e'}); the rest kept. One elementary well-formedness step (pi, rho, (f,g), c_e from the universal properties). The citer uses V_e, iota_e, pi o iota_e = id, W_{e,e'}, m(W_{e,e'}) in V_{e+e'}, (f,g) and c_e; it should cite the new lemma in its Step 7 (I did not edit it), until then the new node is flagged unreachable. Mathlib: no constant group scheme (LeanSearch, LeanFinder, grep incl. the requested grep of AlgebraicGeometry/*.lean); Sites/ConstantSheaf.lean has continuousMapPresheafAb (U -> C(U,A)) but no representing scheme."
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "result": "accepted",
+  "note": "Definition node: data kept (coproduct, codiagonal, fibre product, sum of T-morphisms, constant points); the claims about the components W_{e,e'} and the multiplication m moved to the new statement node constant-group-scheme-multiplication (pointer); one elementary well-formedness step; group axioms explicitly not claimed. L made the citer's step 7 cite the new node."
+ }
 }

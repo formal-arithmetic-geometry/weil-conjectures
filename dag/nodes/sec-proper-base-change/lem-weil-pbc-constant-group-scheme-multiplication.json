@@ -1,0 +1,72 @@
+{
+ "id": "lem-weil-pbc-constant-group-scheme-multiplication",
+ "kind": "statement",
+ "title": "The multiplication of the constant group scheme: the components of T_E x_T T_E and the glued morphism",
+ "statement": "Let $T$ be a scheme [def-pc-scheme] and $E$ an abelian group. Let $T_E=\\coprod_{e\\in E}T$ be a coproduct of copies of $T$ indexed by $E$, with coprojections $\\iota_e:T\\to T_E$ [lem-weil-pbc-scheme-coproduct-family], let $\\pi:T_E\\to T$ be the morphism with $\\pi\\circ\\iota_e=\\mathrm{id}_T$ for all $e\\in E$, and $V_e=\\iota_e(T)\\subseteq T_E$. Let $P=T_E\\times_{\\pi,T,\\pi}T_E$ be the fibre product [def-pc-fibre-product] with projections $p,q:P\\to T_E$, put $\\rho=\\pi\\circ p=\\pi\\circ q:P\\to T$, and $W_{e,e'}=p^{-1}(V_e)\\cap q^{-1}(V_{e'})\\subseteq P$ for $(e,e')\\in E\\times E$. Then: (a) the $W_{e,e'}$ are open and closed subsets of $P$, $W_{e,e'}\\cap W_{d,d'}=\\varnothing$ for $(e,e')\\ne(d,d')$, and $P=\\bigcup_{(e,e')\\in E\\times E}W_{e,e'}$; (b) regarding each $W_{e,e'}$ as an open subscheme of $P$ [def-weil-open-immersion], there is a unique morphism of schemes $m:P\\to T_E$ with $m|_{W_{e,e'}}=\\iota_{e+e'}\\circ\\rho|_{W_{e,e'}}$ for all $(e,e')\\in E\\times E$; (c) $\\pi\\circ m=\\rho$, $m(W_{e,e'})\\subseteq V_{e+e'}$ for all $(e,e')$, and consequently $m^{-1}(V_d)=\\bigcup_{e+e'=d}W_{e,e'}$ for every $d\\in E$.",
+ "source": {
+  "document": "literature/stacks-project/groupoids.tex",
+  "place": "Groupoids, Example 39.5.6 (Tag 03YW, label example-constant-group): 'The morphism giving the group structure is the morphism $G\\times G\\to G$ which maps the component corresponding to the pair $(g,g')$ to the component corresponding to $gg'$' (over $\\Spec\\mathbf Z$, then base changed to $S$); that the pairs index a decomposition of the fibre product into open and closed pieces and that the componentwise maps glue to one morphism is not written out in Stacks, so the proof is to be written by an agent (gluing: Schemes Section 26.14, Tag 01JA)"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "lem-weil-pbc-scheme-coproduct-family",
+  "def-pc-fibre-product",
+  "def-weil-open-immersion"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "fibre product of two coproducts of schemes over a base is the coproduct of the pairwise fibre products",
+   "results": "AlgebraicGeometry.instHasFiniteCoproductsScheme, isPullback_inl_inl_coprodMap, isPullback_inr_inr_coprodMap, coprodSpec, instFinitaryExtensiveScheme, instIsIsoSchemeSigmaSpecOfFinite (Mathlib.AlgebraicGeometry.Limits), LocallyRingedSpace.coproduct; nothing on the pullback of infinite coproducts or a morphism defined componentwise on P",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "pullback of coproducts of schemes decomposes as coproduct over pairs of indices; morphism defined componentwise on disjoint open cover",
+   "results": "AlgebraicGeometry.isPullback_inl_inl_coprodMap, isPullback_inr_inr_coprodMap, isEmpty_pullback_sigmaι_of_ne, coprodMk, coprodIsoSigma, Scheme.coprodPresheafObjIso (Mathlib.AlgebraicGeometry.Limits), Scheme.Pullback.p1 (Pullbacks), FormalCoproduct.homPullbackEquiv_apply_coe",
+   "date": "2026-10-10",
+   "verdict": "no match (ingredients only)"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Scheme, CategoryTheory.Limits.pullback, CategoryTheory.Limits.Sigma.ι",
+   "results": "AlgebraicGeometry.isEmpty_pullback_sigmaι_of_ne (Mathlib.AlgebraicGeometry.Limits): pullback of two distinct coprojections is empty",
+   "date": "2026-10-10",
+   "verdict": "no match (ingredient: disjointness of components in T_E)"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rn 'pullback.*sigma|sigma.*pullback|Sigma.*Pullback|coprodPullback|pullbackCoprod|FinitaryExtensive|IsUniversalColimit|constant' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicGeometry; grep -n glueMorphisms Mathlib/AlgebraicGeometry/Gluing.lean",
+   "results": "Limits.lean:219 isEmpty_pullback_sigmaι_of_ne, Limits.lean:456 instance FinitaryExtensive Scheme (finite coproducts only), Limits.lean:202 disjoint_opensRange_sigmaι, sigmaOpenCover; Gluing.lean:448 Scheme.Cover.glueMorphisms, :471 ι_glueMorphisms; no constant group scheme, no statement that the pullback of infinite coproducts decomposes; Sites/ConstantSheaf.lean has continuousMapPresheafAb (U -> C(U,A)) but no representing scheme",
+   "date": "2026-10-10",
+   "verdict": "no match (Lean candidate: the W's as the open cover of P from sigmaOpenCover pulled back along p and q, m := glueMorphisms with compatibility from isEmpty of the overlaps)"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "def-weil-pbc-constant-group-scheme",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "import_flags": [],
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1"
+}
