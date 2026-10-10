@@ -11,10 +11,12 @@ public import WeilConjectures.AlgebraicGeometry.ProjectiveSpace.Charts
 public import WeilConjectures.AlgebraicGeometry.ProjectiveSpace.OfSections
 public import WeilConjectures.CategoryTheory.Sites.SheafCohomology.InjectiveZMod
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Sites.EtalePoint
+public import WeilConjectures.SixFunctors.Etale.BaseChangeTheorems.DegreeZero
 public import WeilConjectures.SixFunctors.Etale.BaseChangeTheorems.FiniteLowerStarLift
 public import WeilConjectures.SixFunctors.Etale.BaseChangeTheorems.TorsionSheaf
 public import WeilConjectures.SixFunctors.Etale.SmoothBaseChange.Defs
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Forget
+public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.CohomologyMapDevissage
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.TopologicalInvariance
 
 /-!
@@ -237,6 +239,91 @@ theorem Etale.subsingleton_H_projectiveLine_closedFibre_of_injective (r : ℕ) [
 alias Etale.subsingleton_H_projectiveLine_residueField_of_injective :=
   Etale.subsingleton_H_projectiveLine_closedFibre_of_injective
 
+/-- TEMPORARY bridge. -/
+theorem Etale.bijective_cohomologyMap_zero_of_isIso_globalSectionsUpperStarMap
+    (Λ : Type (u + 1)) [CommRing Λ] {X Y : Scheme.{u}} (f : X ⟶ Y)
+    (F : Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ))
+    (h : IsIso (globalSectionsUpperStarMap (ModuleCat.{u + 1} Λ) f F)) :
+    Function.Bijective (cohomologyMap f
+      ((sheafCompose _ (forget₂ (ModuleCat.{u + 1} Λ) AddCommGrpCat.{u + 1})).obj F) 0) :=
+  sorry
+
+omit [IsSepClosed (IsLocalRing.ResidueField A)] in
+/-- **The comparison for `ℙ¹` in degree zero.** For every étale sheaf `F` of `Λ`-modules on
+`ℙ¹_A`, restriction `Γ(ℙ¹_A, F) ⟶ Γ(ℙ¹_κ, F₀)` is bijective: `ℙ¹_A` is proper over the
+henselian local ring `A`, so this is
+`AlgebraicGeometry.Etale.isIso_globalSectionsUpperStarMap_of_henselianRing`. -/
+theorem Etale.bijective_cohomologyMap_zero_projectiveLine_residueField
+    (Λ : Type (u + 1)) [CommRing Λ]
+    (F : Sheaf (ProjectiveLine (Spec (.of A))).smallEtaleTopology (ModuleCat.{u + 1} Λ)) :
+    Function.Bijective (Etale.cohomologyMap
+      (ProjectiveSpace.map _ (Spec.map (CommRingCat.ofHom (IsLocalRing.residue A))))
+      ((sheafCompose _ (forget₂ (ModuleCat.{u + 1} Λ) AddCommGrpCat.{u + 1})).obj F) 0) :=
+  Etale.bijective_cohomologyMap_zero_of_isIso_globalSectionsUpperStarMap Λ _ F
+    (Etale.isIso_globalSectionsUpperStarMap_of_henselianRing Λ (IsLocalRing.maximalIdeal A)
+      (ProjectiveLine (Spec (.of A)) ↘ Spec (.of A))
+      (ProjectiveSpace.map _ (Spec.map (CommRingCat.ofHom (IsLocalRing.residue A))))
+      (show _ ⟶ Spec (.of (IsLocalRing.ResidueField A)) from
+        ProjectiveLine (Spec (.of (IsLocalRing.ResidueField A))) ↘ _)
+      (ProjectiveSpace.isPullback_map _ _) F)
+
+open Abelian in
+/-- **The comparison for `ℙ¹` with `𝔽_r`-coefficients.** For a prime `r` and every sheaf `F`
+of `𝔽_r`-modules on `ℙ¹_A`, restriction `Hᵠ(ℙ¹_A, F) ⟶ Hᵠ(ℙ¹_κ, F₀)` is bijective. By
+induction on `q`, embedding `F` into an injective sheaf `I` of `𝔽_r`-modules: the underlying
+abelian sheaves of `I` and of `I₀` have no higher cohomology
+(`CategoryTheory.Sheaf.subsingleton_H_forget₂_of_injective` and
+`AlgebraicGeometry.Etale.subsingleton_H_projectiveLine_closedFibre_of_injective`), and a
+diagram chase in the long exact sequences of `0 ⟶ F ⟶ I ⟶ I/F ⟶ 0` on `ℙ¹_A` and `ℙ¹_κ`
+concludes. -/
+theorem Etale.bijective_cohomologyMap_projectiveLine_residueField_zmod (r : ℕ) [Fact r.Prime]
+    (F : Sheaf (ProjectiveLine (Spec (.of A))).smallEtaleTopology
+      (ModuleCat.{u + 1} (ULift.{u + 1} (ZMod r)))) (q : ℕ) :
+    Function.Bijective (Etale.cohomologyMap
+      (ProjectiveSpace.map _ (Spec.map (CommRingCat.ofHom (IsLocalRing.residue A))))
+      ((sheafCompose _ (forget₂ (ModuleCat.{u + 1} (ULift.{u + 1} (ZMod r)))
+        AddCommGrpCat.{u + 1})).obj F) q) := by
+  set ι := ProjectiveSpace.map (ULift.{u} (Fin 2))
+    (Spec.map (CommRingCat.ofHom (IsLocalRing.residue A)))
+  let Λ := ULift.{u + 1} (ZMod r)
+  let fo := forget₂ (ModuleCat.{u + 1} Λ) AddCommGrpCat.{u + 1}
+  have : (coindZMod.{u + 1} r).IsRightAdjoint := (forget₂CoindZModAdj r).isRightAdjoint
+  have : PreservesLimitsOfSize.{u, u + 1} (coindZMod.{u + 1} r) :=
+    (forget₂CoindZModAdj r).rightAdjoint_preservesLimits
+  induction q generalizing F with
+  | zero => exact Etale.bijective_cohomologyMap_zero_projectiveLine_residueField A Λ F
+  | succ n ih =>
+    let i := Injective.ι F
+    let S := ShortComplex.mk i (cokernel.π i) (cokernel.condition i)
+    have hS : (S.map (sheafCompose _ fo)).ShortExact :=
+      shortExact_map_forget₂ Λ { exact := ShortComplex.exact_cokernel i }
+    have hS₀ := hS.map_of_exact ((ι)^*[AddCommGrpCat.{u + 1}])
+    have hI : Subsingleton (Sheaf.H ((sheafCompose _ fo).obj (Injective.under F)) (n + 1)) :=
+      CategoryTheory.Sheaf.subsingleton_H_forget₂_of_injective _ r (Fact.out : r.Prime).ne_zero
+        _ n
+    have hI₀ : Subsingleton (Sheaf.H ((ι)^*[AddCommGrpCat.{u + 1}].obj
+        ((sheafCompose _ fo).obj (Injective.under F))) (n + 1)) := by
+      have := Etale.subsingleton_H_projectiveLine_closedFibre_of_injective A r
+        (Injective.under F) (n + 1) n.succ_pos
+      exact ⟨fun a b ↦ (bijective_sheafHMap_hom
+        ((upperStarSheafComposeForget₂Iso ι Λ).app (Injective.under F)).symm _).1
+          (@Subsingleton.elim _ this _ _)⟩
+    refine ⟨?_, fun η ↦ ?_⟩
+    · rw [injective_iff_map_eq_zero]
+      intro ξ hξ
+      obtain ⟨z, rfl⟩ := Ext.covariant_sequence_exact₁ _ hS ξ (@Subsingleton.elim _ hI _ _) rfl
+      replace hξ := (cohomologyMap_comp_extClass _ hS z).symm.trans hξ
+      obtain ⟨w, hw⟩ := Ext.covariant_sequence_exact₃ _ hS₀ _ rfl hξ
+      obtain ⟨v, rfl⟩ := (ih _).2 w
+      have hvz : v.comp (Ext.mk₀ (S.map (sheafCompose _ fo)).g) (add_zero n) = z :=
+        (ih (cokernel i)).1 ((cohomologyMap_comp_mk₀ _ _ v).trans hw)
+      rw [← hvz, Ext.comp_assoc _ _ _ (add_zero n) (zero_add 1) (by omega)]
+      exact (congrArg (fun t ↦ v.comp t (show n + 1 = n + 1 from rfl)) hS.comp_extClass).trans
+        (Ext.comp_zero _ _ _ _ _)
+    · obtain ⟨y, hy⟩ := Ext.covariant_sequence_exact₁ _ hS₀ η (@Subsingleton.elim _ hI₀ _ _) rfl
+      obtain ⟨z, rfl⟩ := (ih (cokernel i)).2 y
+      exact ⟨z.comp hS.extClass rfl, (cohomologyMap_comp_extClass _ hS z).trans hy⟩
+
 /-- **The strictly henselian comparison for `ℙ¹`.** Let `A` be strictly henselian with
 residue field `κ` and `ι : ℙ¹_κ ⟶ ℙ¹_A` the closed fibre. For every torsion sheaf `F` of
 `Λ`-modules on `ℙ¹_A` and every `q ≥ 0`, restriction `Hᵠ(ℙ¹_A, F) ⟶ Hᵠ(ℙ¹_κ, F₀)` is
@@ -248,8 +335,40 @@ theorem Etale.bijective_cohomologyMap_projectiveLine_residueField
     [IsTorsionSheaf F] (q : ℕ) :
     Function.Bijective (Etale.cohomologyMap
       (ProjectiveSpace.map _ (Spec.map (CommRingCat.ofHom (IsLocalRing.residue A))))
-      ((sheafCompose _ (forget₂ (ModuleCat.{u + 1} Λ) AddCommGrpCat.{u + 1})).obj F) q) :=
-  sorry
+      ((sheafCompose _ (forget₂ (ModuleCat.{u + 1} Λ) AddCommGrpCat.{u + 1})).obj F) q) := by
+  let p := ProjectiveLine (Spec (.of A)) ↘ Spec (.of A)
+  let p₀ := ProjectiveLine (Spec (.of (IsLocalRing.ResidueField A))) ↘
+    Spec (.of (IsLocalRing.ResidueField A))
+  have : CompactSpace (ProjectiveLine (Spec (.of A))) :=
+    QuasiCompact.compactSpace_of_compactSpace p
+  have : QuasiSeparatedSpace (ProjectiveLine (Spec (.of A))) :=
+    quasiSeparatedSpace_of_quasiSeparated p
+  have : CompactSpace (ProjectiveLine (Spec (.of (IsLocalRing.ResidueField A)))) :=
+    QuasiCompact.compactSpace_of_compactSpace p₀
+  have : QuasiSeparatedSpace (ProjectiveLine (Spec (.of (IsLocalRing.ResidueField A)))) :=
+    quasiSeparatedSpace_of_quasiSeparated p₀
+  refine bijective_cohomologyMap_of_isTorsion _ (fun r hr G hG q ↦ ?_) _
+    ((isTorsionSheaf_iff_isTorsion F).1 inferInstance) q
+  have : Fact r.Prime := ⟨hr⟩
+  have : (coindZMod.{u + 1} r).IsRightAdjoint := (forget₂CoindZModAdj r).isRightAdjoint
+  have : PreservesLimitsOfSize.{u, u + 1} (coindZMod.{u + 1} r) :=
+    (forget₂CoindZModAdj r).rightAdjoint_preservesLimits
+  have : IsIso (CategoryTheory.Sheaf.coindCounit _ r G) := by
+    have : IsIso (CategoryTheory.Sheaf.coindCounit _ r G).hom := by
+      rw [NatTrans.isIso_iff_isIso_app]
+      intro U
+      have hU := forget₂CoindZModAdj_counit_shortExact.{u + 1} r (G.obj.obj U)
+      refine (ConcreteCategory.isIso_iff_bijective _).2 ⟨hU.1, fun a ↦ hU.2 a ?_⟩
+      have h1 := congr(((sheafToPresheaf _ _).map $hG).app U a)
+      simp only [Functor.map_nsmul, NatTrans.app_nsmul, Functor.map_zero, NatTrans.app_zero,
+        AddCommGrpCat.hom_nsmul, AddCommGrpCat.hom_zero, AddMonoidHom.nsmul_apply,
+        AddMonoidHom.zero_apply] at h1
+      rw [natCast_zsmul]
+      exact h1
+    have : IsIso ((sheafToPresheaf _ _).map (CategoryTheory.Sheaf.coindCounit _ r G)) := this
+    exact isIso_of_fully_faithful (sheafToPresheaf _ _) _
+  exact bijective_cohomologyMap_of_iso _ (asIso (CategoryTheory.Sheaf.coindCounit _ r G)) q
+    (Etale.bijective_cohomologyMap_projectiveLine_residueField_zmod A r _ q)
 
 end StrictlyHenselian
 

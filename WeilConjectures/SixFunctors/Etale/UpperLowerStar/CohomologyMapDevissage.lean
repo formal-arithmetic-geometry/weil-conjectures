@@ -8,6 +8,7 @@ module
 public import WeilConjectures.AlgebraicGeometry.Curve.Reductions
 public import WeilConjectures.AlgebraicGeometry.Sites.EtaleTorsion
 public import WeilConjectures.SixFunctors.Etale.Gabber
+public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.CohomologyMap
 
 /-!
 # Dévissage for the comparison maps on étale cohomology
@@ -40,6 +41,25 @@ open Scheme
 
 variable {X Y : Scheme.{u}} (f : X ⟶ Y)
 
+/-- The map on cohomology induced by an isomorphism of sheaves is bijective. -/
+lemma bijective_sheafHMap_hom {Z : Scheme.{u}}
+    {G G' : Sheaf Z.smallEtaleTopology AddCommGrpCat.{u + 1}}
+    (e : G ≅ G') (n : ℕ) : Function.Bijective (Sheaf.H.map e.hom n) :=
+  ⟨injective_sheafHMap_of_isIso _ n, fun y ↦ ⟨Sheaf.H.map e.inv n y, by
+    rw [← Sheaf.H.map_comp_apply, e.inv_hom_id, Sheaf.H.map_id_apply]⟩⟩
+
+/-- Bijectivity of the comparison maps is invariant under isomorphisms of sheaves. -/
+lemma bijective_cohomologyMap_of_iso {G G' : Sheaf Y.smallEtaleTopology AddCommGrpCat.{u + 1}}
+    (e : G ≅ G') (q : ℕ) (h : Function.Bijective (cohomologyMap f G q)) :
+    Function.Bijective (cohomologyMap f G' q) := by
+  have : ⇑(cohomologyMap f G' q) = Sheaf.H.map (((f)^*[AddCommGrpCat.{u + 1}]).mapIso e).hom q ∘
+      cohomologyMap f G q ∘ Sheaf.H.map e.symm.hom q := by
+    ext x
+    simp only [Function.comp_apply, Functor.mapIso_hom, ← cohomologyMap_map,
+      ← Sheaf.H.map_comp_apply, Iso.symm_hom, Iso.inv_hom_id, Sheaf.H.map_id_apply]
+  rw [this]
+  exact (bijective_sheafHMap_hom _ q).comp (h.comp (bijective_sheafHMap_hom _ q))
+
 /-- **Two out of three.** For a short exact sequence `0 ⟶ G₁ ⟶ G₂ ⟶ G₃ ⟶ 0` of abelian
 sheaves on `Y`, if the comparison maps `Hᵠ(Y, Gᵢ) ⟶ Hᵠ(X, f^* Gᵢ)` are bijective in every degree
 for `i = 1, 3`, then so are those for `G₂`, by the five lemma. -/
@@ -70,8 +90,8 @@ theorem bijective_cohomologyMap_of_shortExact
     | succ n =>
       obtain ⟨y, hy⟩ := Ext.covariant_sequence_exact₁ _ hS₀ _ hx rfl
       obtain ⟨z, rfl⟩ := (h₃ n).2 y
-      rw [← (h₁ (n + 1)).1 ((cohomologyMap_comp_extClass f hS z).trans hy), Ext.comp_assoc_of_third_deg_zero, hS.extClass_comp,
-        Ext.comp_zero]
+      rw [← (h₁ (n + 1)).1 ((cohomologyMap_comp_extClass f hS z).trans hy),
+        Ext.comp_assoc_of_third_deg_zero, hS.extClass_comp, Ext.comp_zero]
   · obtain ⟨x₃, hx₃⟩ := (h₃ q).2 (y.comp (Ext.mk₀ (((f)^*[AddCommGrpCat.{u + 1}]).map S.g))
       (add_zero q))
     have hδ : x₃.comp hS.extClass rfl = 0 := (h₁ (q + 1)).1 (by
@@ -148,8 +168,7 @@ theorem bijective_cohomologyMap_of_isColimit [CompactSpace X] [QuasiSeparatedSpa
   · rw [injective_iff_map_eq_zero]
     intro x hx
     obtain ⟨j, x', rfl⟩ := HY.1 x
-    rw [cohomologyMap_map] at hx
-    obtain ⟨j', φ, hφ⟩ := HX.2 j _ hx
+    obtain ⟨j', φ, hφ⟩ := HX.2 j _ ((cohomologyMap_map f q (c.ι.app j) x').symm.trans hx)
     have : Sheaf.H.map (D.map φ) q x' = 0 := (h j').1 (by
       rw [cohomologyMap_map, map_zero]
       exact hφ)
