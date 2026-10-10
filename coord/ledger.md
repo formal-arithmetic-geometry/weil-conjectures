@@ -933,3 +933,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 05:49 L: reviewed lem-weil-pbc-coherent-finite-type-sub-kernel (5 steps, no new node): accepted.
 - 05:50 L: reviewed lem-weil-pbc-cm-local-free-resolution-to-mcm (7 steps, +00LK node, +00LX node): accepted; HUMAN.md: the 00NG gap is resolved (K != 0 proved).
 - 05:52 L: reviewed lem-weil-pbc-cohen-rings-exist (10 steps, +03C3 node, +05GH node): accepted.
+- 05:52 L: reviewed lem-weil-pbc-cohen-ring-mod-pn-formally-smooth (6 steps, +031L leaf, +0AUW leaf): accepted.

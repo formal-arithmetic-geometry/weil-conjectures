@@ -2,18 +2,99 @@
  "id": "lem-weil-pbc-cohen-ring-mod-pn-formally-smooth",
  "kind": "statement",
  "title": "A Cohen ring modulo p^n is formally smooth over Z/p^n",
- "statement": "Let $p$ be a prime number and $\\Lambda$ a Cohen ring: a discrete valuation ring (a local principal ideal domain which is not a field) whose maximal ideal is $p\\Lambda$ and which is $p\\Lambda$-adically complete [def-weil-pbc-adically-complete-ring]. Then for every $n\\ge1$ the ring map $\\mathbf Z/p^n\\mathbf Z\\to\\Lambda/p^n\\Lambda$ is formally smooth (Stacks Algebra, Definition 00TI; the case $\\mathfrak n=0$ of [def-weil-pbc-formally-smooth-adic]). Explicitly, since a $\\mathbf Z/p^n\\mathbf Z$-algebra is a ring in which $p^n=0$ and every ring homomorphism between such rings is $\\mathbf Z/p^n\\mathbf Z$-linear: for every commutative ring $D$ with $p^nD=0$, every ideal $J\\subseteq D$ with $J^2=0$, with quotient map $q:D\\to D/J$, and every ring homomorphism $g:\\Lambda/p^n\\Lambda\\to D/J$, there is a ring homomorphism $f:\\Lambda/p^n\\Lambda\\to D$ with $q\\circ f=g$.",
+ "statement": "Let $p$ be a prime number and $\\Lambda$ a Cohen ring with residue characteristic $p$ [def-weil-pbc-cohen-ring] (a discrete valuation ring with maximal ideal $p\\Lambda$ which is $p\\Lambda$-adically complete [def-weil-pbc-adically-complete-ring]). Then for every $n\\ge1$ the ring map $\\mathbf Z/p^n\\mathbf Z\\to\\Lambda/p^n\\Lambda$ is formally smooth (the case $\\mathfrak n=0$ of [def-weil-pbc-formally-smooth-adic]). Explicitly, since a $\\mathbf Z/p^n\\mathbf Z$-algebra is a ring in which $p^n=0$ and every ring homomorphism between such rings is $\\mathbf Z/p^n\\mathbf Z$-linear: for every commutative ring $D$ with $p^nD=0$, every ideal $J\\subseteq D$ with $J^2=0$, with quotient map $q:D\\to D/J$, and every ring homomorphism $g:\\Lambda/p^n\\Lambda\\to D/J$, there is a ring homomorphism $f:\\Lambda/p^n\\Lambda\\to D$ with $q\\circ f=g$.",
  "source": {
   "document": "literature/stacks-project/algebra.tex",
-  "place": "Algebra, Lemma Tag 0329 (lemma-cohen-ring-formally-smooth, line 44907) and its proof (Proposition 0322 for $n=1$, Lemma 0310 lemma-lift-formal-smoothness for the induction); Cohen ring: Definition Tag 0327"
+  "place": "Algebra, Lemma Tag 0329 (lemma-cohen-ring-formally-smooth, line 44907) and its proof (Proposition Tag 0322 proposition-characterize-separable-field-extensions for n = 1, Lemma Tag 031L lemma-lift-formal-smoothness, line 38100, for the induction); Cohen ring: Definition Tag 0327 (definition-cohen-ring)"
  },
  "stmt_deps": [
+  "def-weil-pbc-cohen-ring",
   "def-weil-pbc-adically-complete-ring",
   "def-weil-pbc-formally-smooth-adic"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "*The property $P(m)$.* For $m\\ge1$ let $P(m)$ be the statement: for every commutative ring $D$ with $p^m\\cdot1_D=0$, every ideal $J\\subseteq D$ with $J^2=0$, with quotient map $q:D\\to D/J$, and every ring homomorphism $g:\\Lambda/p^m\\Lambda\\to D/J$, there is a ring homomorphism $f:\\Lambda/p^m\\Lambda\\to D$ with $q\\circ f=g$. $P(m)$ says exactly that $\\mathbf Z/p^m\\mathbf Z\\to\\Lambda/p^m\\Lambda$ is formally smooth in the sense of [def-weil-pbc-formally-smooth-adic] with $\\mathfrak n=0$: there $g(\\mathfrak n^k)=g(0)=0$ holds for $k=1$, so the condition is lifting of all algebra maps; a ring map $\\mathbf Z/p^m\\mathbf Z\\to D$ exists iff $p^m\\cdot1_D=0$ and is then unique ($1\\mapsto1$), it makes $D/J$ a $\\mathbf Z/p^m\\mathbf Z$-algebra through $q$, and a ring homomorphism between $\\mathbf Z/p^m\\mathbf Z$-algebras is $\\mathbf Z/p^m\\mathbf Z$-linear, since $\\mathbf Z/p^m\\mathbf Z$ consists of the classes of integers $N$ and $h(N\\cdot x)=N\\cdot h(x)$ for any additive $h$. The item's statement is $P(n)$ for all $n\\ge1$.",
+   "uses": [
+    "def-weil-pbc-formally-smooth-adic"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra, Definition Tag 00TI (definition-formally-smooth) and Lemma Tag 0329 (line 44907), statement"
+   }
+  },
+  {
+   "text": "*Facts on $\\Lambda$.* By [def-weil-pbc-cohen-ring], $\\Lambda$ is an integral domain and a local ring with maximal ideal $p\\Lambda$, and $p\\neq0$ in $\\Lambda$. (a) $\\kappa=\\Lambda/p\\Lambda$ is a field (the quotient by a maximal ideal), and it has characteristic $p$: $p\\cdot1_\\kappa=0$, $1_\\kappa\\neq0$ and $p$ is prime. (b) $\\Lambda$ is a torsion-free $\\mathbf Z$-module: let $N\\neq0$ be an integer, $N=\\pm p^aN'$ with $a\\ge0$ and $p\\nmid N'$. Choose integers $u,v$ with $uN'+vp=1$; if $N'\\cdot1_\\Lambda\\in p\\Lambda$ then $1\\in p\\Lambda$, impossible as $p\\Lambda$ is a proper ideal, so $N'\\cdot1_\\Lambda$ lies outside the maximal ideal and is a unit of the local ring $\\Lambda$. Also $p^a\\cdot1_\\Lambda\\neq0$ since $\\Lambda$ is a domain and $p\\ne0$. So $N\\cdot1_\\Lambda\\neq0$, and if $Nx=(N\\cdot1_\\Lambda)x=0$ with $x\\in\\Lambda$ then $x=0$ ($\\Lambda$ a domain).",
+   "uses": [
+    "def-weil-pbc-cohen-ring"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra, Definition Tag 0327 (definition-cohen-ring); written out by the worker (the proof of 0329 uses these facts without comment)"
+   }
+  },
+  {
+   "text": "*Base case $n=1$.* $\\Lambda/p\\Lambda=\\kappa$ is a field of characteristic $p$ (step 2(a)). Let $D$ be a commutative ring with $p\\cdot1_D=0$, $J\\subseteq D$ an ideal with $J^2=0$, $q:D\\to D/J$ the quotient map and $g:\\kappa\\to D/J$ a ring homomorphism. By [lem-weil-pbc-field-char-p-nilpotent-lifting] with $K=\\kappa$ and $N=2$ there is a ring homomorphism $f:\\kappa\\to D$ with $q\\circ f=g$. This is $P(1)$. (Stacks deduces this from Proposition 0322 applied to $\\kappa/\\mathbf F_p$, which is separable since $\\mathbf F_p$ is perfect; that argument is the source of the cited node.)",
+   "uses": [
+    "lem-weil-pbc-field-char-p-nilpotent-lifting"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra, Lemma Tag 0329 (lemma-cohen-ring-formally-smooth, line 44907), proof, case n = 1: Proposition Tag 0322 (proposition-characterize-separable-field-extensions)"
+   }
+  },
+  {
+   "text": "*Flatness of $\\mathbf Z/p^m\\mathbf Z\\to\\Lambda/p^m\\Lambda$.* Let $m\\ge1$. $\\mathbf Z$ is a principal ideal domain and $\\Lambda$ is a torsion-free $\\mathbf Z$-module (step 2(b)), so $\\Lambda$ is a flat $\\mathbf Z$-module by [lem-weil-pbc-pid-torsion-free-module-flat]. By [lem-weil-pbc-flat-module-quotient-flat] with $R=\\mathbf Z$, the ideal $p^m\\mathbf Z$ and $M=\\Lambda$, the module $\\Lambda/p^m\\Lambda$ is a flat $\\mathbf Z/p^m\\mathbf Z$-module for $(r\\bmod p^m)\\cdot(x\\bmod p^m\\Lambda)=rx\\bmod p^m\\Lambda$. Since $rx=(r\\cdot1_\\Lambda)x$, this is the module structure given by the ring map $\\mathbf Z/p^m\\mathbf Z\\to\\Lambda/p^m\\Lambda$, $r\\bmod p^m\\mapsto r\\cdot1\\bmod p^m\\Lambda$; so this ring map is flat [def-weil-pbc-flat-ring-map].",
+   "uses": [
+    "lem-weil-pbc-pid-torsion-free-module-flat",
+    "lem-weil-pbc-flat-module-quotient-flat",
+    "def-weil-pbc-flat-ring-map"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra, Lemma Tag 0329 (lemma-cohen-ring-formally-smooth, line 44907), proof: hypothesis (2) of Lemma 031L, which the proof leaves unchecked; written out by the worker with More on Algebra Lemma Tag 0AUW (more-algebra.tex line 4954) and the base change of flatness (Algebra Lemma Tag 00HI (lemma-flat-base-change), compare the proof of Lemma 0328, line 44894)"
+   }
+  },
+  {
+   "text": "*Induction step.* Let $n\\ge1$ and assume $P(n)$. Put $R=\\mathbf Z/p^{n+1}\\mathbf Z$, $S=\\Lambda/p^{n+1}\\Lambda$ with the canonical ring map $\\varphi:R\\to S$, and $I=p^nR$. Apply [lem-weil-pbc-lift-formal-smoothness-flat-square-zero]: (1) $I^2=p^{2n}R=0$ as $2n\\ge n+1$; (2) $\\varphi$ is flat by step 4 with $m=n+1$; (3) $R/I=\\mathbf Z/(p^{n+1},p^n)=\\mathbf Z/p^n\\mathbf Z$ and $IS=p^n S$, so $S/IS=\\Lambda/(p^{n+1}\\Lambda+p^n\\Lambda)=\\Lambda/p^n\\Lambda$, and the induced map $R/I\\to S/IS$ is the canonical map $\\mathbf Z/p^n\\mathbf Z\\to\\Lambda/p^n\\Lambda$, which is formally smooth by $P(n)$ and step 1. Hence $\\varphi:\\mathbf Z/p^{n+1}\\mathbf Z\\to\\Lambda/p^{n+1}\\Lambda$ is formally smooth (lifting along square-zero ideals for $R$-algebras), which is $P(n+1)$ by step 1.",
+   "uses": [
+    "lem-weil-pbc-lift-formal-smoothness-flat-square-zero",
+    "def-weil-pbc-formally-smooth-adic"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra, Lemma Tag 0329 (lemma-cohen-ring-formally-smooth, line 44907), proof, induction: Lemma Tag 031L (lemma-lift-formal-smoothness, line 38100) for Z/p^{n+1} -> Lambda/p^{n+1}Lambda and I = (p^n)"
+   }
+  },
+  {
+   "text": "*Conclusion.* By step 3, $P(1)$ holds, and by step 5, $P(n)$ implies $P(n+1)$ for every $n\\ge1$; by induction $P(n)$ holds for every $n\\ge1$, which by step 1 is the statement.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra, Lemma Tag 0329 (lemma-cohen-ring-formally-smooth, line 44907), proof"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-formally-smooth-adic",
+  "def-weil-pbc-cohen-ring",
+  "lem-weil-pbc-field-char-p-nilpotent-lifting",
+  "lem-weil-pbc-pid-torsion-free-module-flat",
+  "lem-weil-pbc-flat-module-quotient-flat",
+  "def-weil-pbc-flat-ring-map",
+  "lem-weil-pbc-lift-formal-smoothness-flat-square-zero"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Algebra, Lemma Tag 0329 (lemma-cohen-ring-formally-smooth, line 44907) and its proof; flatness (hypothesis (2) of Lemma 031L) written out by the worker"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -35,10 +116,45 @@
    "results": "none",
    "date": "2026-10-10",
    "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "Algebra.FormallySmooth (ZMod _) _",
+   "results": "none",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Cohen ring: complete discrete valuation ring with maximal ideal generated by p, Witt vectors formally smooth over Z/p^n",
+   "results": "WittVector.isAdicCompleteIdealSpanP, WittVector.isDiscreteValuationRing (perfect residue field only), BDeRhamPlus, PreTilt",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "quotient of complete DVR with uniformizer p by p^n is formally smooth over ZMod (p^n)",
+   "results": "Algebra.FormallySmooth.of_comp_surjective, exists_kerProj_comp_eq_id, iff_comp_surjective, Algebra.IsSmoothAt, mk_lift, smoothLocus",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "local_search",
+   "query": "Cohen (project ~/weil-conjectures-slopmaster2)",
+   "results": "none (index: unavailable, so not a proof of absence)",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rniE 'cohen' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/RingTheory; grep -rn 'FormallySmooth (ZMod\\|FormallySmooth (ℤ ⧸' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib; grep -rln FormallySmooth ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/RingTheory/Smooth ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/FieldTheory",
+   "results": "only a bibliography reference [cohen1950] in RingTheory/Noetherian/OfPrime.lean; no ZMod instance; Smooth/Field.lean:53 Algebra.FormallySmooth.of_perfectField needs Algebra.EssFiniteType (so not for an arbitrary residue field); Smooth/Quotient.lean:101 is Stacks 031L",
+   "date": "2026-10-10",
+   "verdict": "no match"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "worker",
@@ -58,5 +174,18 @@
   }
  },
  "chapter": "sec-proper-base-change",
- "unit": "sk-thm-p1"
+ "unit": "sk-thm-p1",
+ "mathlib_candidate": "No Cohen rings in Mathlib. A Lean proof would be short from Mathlib pieces: n = 1 needs formal smoothness of an arbitrary field of characteristic p over ZMod p (Algebra.FormallySmooth.of_perfectField, Mathlib/RingTheory/Smooth/Field.lean:53, requires Algebra.EssFiniteType, so it does not apply to a general residue field); the induction is Algebra.FormallySmooth.of_surjective_of_ker_eq_map_of_flat (Mathlib/RingTheory/Smooth/Quotient.lean:101, Stacks 031L) with flatness from Module.Flat.flat_iff_torsion_eq_bot_of_isBezout (Mathlib/RingTheory/Flat/TorsionFree.lean:93) and Module.Flat.baseChange. Not a leaf (B8).",
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "lem-weil-pbc-cohen-ring-mod-pn-formally-smooth",
+  "worker": "stage1",
+  "summary": "Read Algebra 0329 (algebra.tex 44907) and its proof, 0322 (line 44475), 031L (lemma-lift-formal-smoothness, line 38100; the brief and the node's source called it 0310, which is lemma-associated-primes-localize), 0327, 0328 and More on Algebra 0AUW; tags verified in tags/tags. Statement kept in meaning: the inline definition of Cohen ring is replaced by [def-weil-pbc-cohen-ring] (with a short gloss), the reference to Definition 00TI removed (B7), [def-weil-pbc-formally-smooth-adic] kept (its case n = 0 is the explicit lifting property, checked in step 1). Proof in 6 steps: the property P(m) and its agreement with the definition; facts on Lambda (residue field of characteristic p, Lambda torsion free over Z); n = 1 by the existing node lem-weil-pbc-field-char-p-nilpotent-lifting (N = 2); flatness of Z/p^m -> Lambda/p^m, which Stacks' proof leaves unchecked although 031L needs it, via the new leaf lem-weil-pbc-pid-torsion-free-module-flat and the existing leaf lem-weil-pbc-flat-module-quotient-flat; the induction step by the new leaf lem-weil-pbc-lift-formal-smoothness-flat-square-zero (031L, Mathlib Algebra.FormallySmooth.of_surjective_of_ker_eq_map_of_flat); conclusion. Completeness of Lambda is not used. Mathlib for the item: no match (searches recorded), candidate recorded."
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "result": "accepted",
+  "note": "6 steps following Algebra 0329: the property P(m) identified with the n = 0 case of the adic definition; facts on Lambda (torsion-free over Z written out); n = 1 by the existing field-lifting node (0322 route); flatness of Z/p^m -> Lambda/p^m by a new leaf for 0AUW (flat_iff_torsion_eq_bot_of_isBezout, TorsionFree.lean:93 verified by L) and the quotient-flat leaf (the hypothesis 031L (2) the source leaves unchecked); induction step by a new composed leaf for 031L (of_surjective_of_ker_eq_map_of_flat, Quotient.lean:101 verified by L; same convention as the accepted square-zero lifting leaves); conclusion. Statement: Cohen ring cited from the definition leaf, tag reference removed (B7); the source's wrong tag 0310 corrected to 031L."
+ }
 }
