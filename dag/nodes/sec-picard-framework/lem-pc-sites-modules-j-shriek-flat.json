@@ -13,17 +13,51 @@
  },
  "kind": "statement",
  "title": "Extension by zero of the unit module is flat",
- "statement": "Let $\\mathcal C$ be a site and $\\mathcal O$ a sheaf of commutative rings on $\\mathcal C$, and let $\\operatorname{Mod}(\\mathcal O)$ be the category of sheaves of $\\mathcal O$-modules [def-weil-sheaf-of-modules-category]. For every object $U$ of $\\mathcal C$, the extension-by-zero module sheaf $j_{U!}\\mathcal O_U$ is flat over $\\mathcal O$ [def-pc-flat-sheaf-modules]: tensoring with it over $\\mathcal O$ preserves finite limits (equivalently, the tensor functor on $\\operatorname{Mod}(\\mathcal O)$ is exact).",
+ "statement": "Let $\\mathcal C$ be a site and $\\mathcal O$ a sheaf of commutative rings on $\\mathcal C$, and let $\\operatorname{Mod}(\\mathcal O)$ be the category of sheaves of $\\mathcal O$-modules [def-weil-sheaf-of-modules-category]. For every object $U$ of $\\mathcal C$, let $\\mathcal O_U$ be the restriction of $\\mathcal O$ to the localized ringed site $\\mathcal C/U$, let $P$ be its extension-by-zero presheaf of $\\mathcal O$-modules [def-weil-extension-by-zero-presheaf], so $P(V)=\\bigoplus_{\\varphi\\in\\operatorname{Mor}_{\\mathcal C}(V,U)}\\mathcal O(V)$, and let $j_{U!}\\mathcal O_U=P^\\#$ be its sheafification as a presheaf of $\\mathcal O$-modules [def-weil-presheaf-modules-sheafification]. Then the extension-by-zero module sheaf $j_{U!}\\mathcal O_U$ is flat over $\\mathcal O$ [def-pc-flat-sheaf-modules]: tensoring with it over $\\mathcal O$ preserves finite limits (equivalently, the tensor functor on $\\operatorname{Mod}(\\mathcal O)$ is exact).",
  "source": {
   "document": "literature/stacks-project/sites-modules.tex",
   "place": "Lemma 18.28.7 (Tag 03EV), clause (2), j_{U!}O_U is a flat sheaf"
  },
  "stmt_deps": [
-  "def-pc-flat-sheaf-modules"
+  "def-pc-flat-sheaf-modules",
+  "def-weil-extension-by-zero-presheaf",
+  "def-weil-presheaf-modules-sheafification"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Let $P$ be the extension-by-zero presheaf of $\\mathcal O_U$ [def-weil-extension-by-zero-presheaf]; since $\\mathcal O_U(V\\xrightarrow{\\varphi}U)=\\mathcal O(V)$, for every object $V$ of $\\mathcal C$ it has $P(V)=\\bigoplus_{\\varphi\\in\\operatorname{Mor}_{\\mathcal C}(V,U)}\\mathcal O(V)$, with $\\mathcal O(V)$ acting summandwise. This is a free $\\mathcal O(V)$-module, hence flat. Finite limits of presheaves and tensor products of presheaves are computed objectwise, so tensoring with $P$ preserves finite limits; this is the objectwise-flat-presheaf criterion of Stacks Tag 03ES (Lemma 18.28.2).",
+   "uses": [
+    "def-weil-extension-by-zero-presheaf"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Lemma 18.28.2 (Tag 03ES), together with the formula in Lemma 18.28.7 (Tag 03EV), proof of clause (1)"
+   }
+  },
+  {
+   "text": "By the statement, $j_{U!}\\mathcal O_U$ is the sheafification $P^\\#$ of this presheaf of $\\mathcal O$-modules [def-weil-presheaf-modules-sheafification]; since $\\mathcal O$ is already a sheaf, $\\mathcal O^\\#=\\mathcal O$. Applying [lem-pc-sites-modules-sheafification-flat] to the finite-limit-preserving tensor functor from Step 1 shows that tensoring with $P^\\#$ over $\\mathcal O$ preserves finite limits in $\\operatorname{Mod}(\\mathcal O)$. Therefore $j_{U!}\\mathcal O_U$ is flat, as asserted.",
+   "uses": [
+    "def-weil-presheaf-modules-sheafification",
+    "lem-pc-sites-modules-sheafification-flat"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Lemma 18.28.7 (Tag 03EV), proof of clause (2), using Lemma 18.28.3 (Tag 03ET)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-extension-by-zero-presheaf",
+  "def-weil-presheaf-modules-sheafification",
+  "lem-pc-sites-modules-sheafification-flat"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Lemma 18.28.7 (Tag 03EV), both clauses, using Lemmas 18.28.2 (03ES) and 18.28.3 (03ET)"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -48,12 +82,27 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-pc-kflat-bounded-flat-replacement",
   "by": "worker",
   "date": "2026-10-10"
  },
  "chapter": "sec-picard-framework",
- "unit": "sk-thm-picard-semicon"
+ "unit": "sk-thm-picard-semicon",
+ "split_report": {
+  "date": "2026-10-11",
+  "item": "lem-pc-sites-modules-j-shriek-flat",
+  "worker": "stage1",
+  "summary": "Split the Stacks Tag 03EV proof into the objectwise direct-sum calculation and the sheafification step. The direct-sum calculation is elementary from the explicit formula and objectwise presheaf limits; the non-elementary Tag 03ET sheafification lemma is recorded as one new unsplit dependency. No exact Lean declaration exists for this ringed-site statement.",
+  "blueprint": "the item is imported under def-weil-derived-tensor; the two proof steps realize the flat separator construction's j_{U!} flatness argument"
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-jsf2400",
+  "group": "E1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-jsf2400 (reviewer sub-agent of L); spot-checked: Proof follows Stacks 03EV (objectwise free presheaf via 03ES, then 03ET sheafification), not 03EW's j_! -| j^* argument; checked against packet text: step 1 elementary (free => flat, objectwise limits/tensor), step 2 uses new node lem-pc-sites-modules-sheafification-flat whose hypotheses match (O sheaf so O^#=O); flat is def-pc-flat-sheaf-modules (finite-limit form equivalent to exactness since tensor is right exact); new node not a duplicate of lem-weil-pbc-free-sheaf-flat (Grothendieck-abelian coefficient, constant P) nor in Mathlib (searches recorded); restates nothing. FIX more, RETURN less: C1 - j_{U!}O_U was undefined in the statement and step 1 took the formula P(V)=sum O(V) and step 2 the identification j_{U!}O_U=P^# from 'the source calculation' without a node; the statement now defines j_{U!}O_U as the sheafification [def-weil-presheaf-modules-sheafification] of the extension-by-zero presheaf [def-weil-extension-by-zero-presheaf] (E7: clarification of notation only, same object), steps 1/2 cite these nodes, uses/proof_deps/stmt_deps updated.; 1 file(s) fixed by the reviewer"
+ }
 }
