@@ -4,7 +4,7 @@
   "is": null,
   "from": {
    "node": "lem-sc-finite-duality",
-   "place": "Tag 0AA8 case (1): global RHom adjunction for the right adjoint",
+   "place": "Tag 0B6I (Lemma 48.1.1): global RHom adjunction for the right adjoint",
    "via": [
     "lem-sc-proper-flat-right-adjoint-affine-basechange"
    ]
@@ -13,7 +13,7 @@
  },
  "kind": "statement",
  "title": "Global derived Hom adjunction",
- "statement": "Let f:X\\to Y be a quasi-compact and quasi-separated morphism of schemes [def-pc-scheme], and let Rf_*:D_{\\mathrm{QCoh}}(X)\\to D_{\\mathrm{QCoh}}(Y) [def-pc-derived-category, def-pc-derived-direct-image] have its right adjoint a, whose existence is supplied by [lem-pc-qcqs-derived-direct-image-right-adjoint]. For P\\in D_{\\mathrm{QCoh}}(X) and K\\in D_{\\mathrm{QCoh}}(Y), there is a natural isomorphism of global derived Hom complexes $$R\\operatorname{Hom}_X(P,a(K))\\cong R\\operatorname{Hom}_Y(Rf_*P,K)$$ [def-pc-global-derived-rhom].",
+ "statement": "Let X and Y be quasi-compact and quasi-separated schemes, and let f:X\\to Y be a quasi-compact and quasi-separated morphism [def-pc-scheme]. Let Rf_*:D_{\\mathrm{QCoh}}(X)\\to D_{\\mathrm{QCoh}}(Y) [def-pc-derived-category, def-pc-derived-direct-image] have its right adjoint a, whose existence is supplied by [lem-pc-qcqs-derived-direct-image-right-adjoint]. For P\\in D_{\\mathrm{QCoh}}(X) and K\\in D_{\\mathrm{QCoh}}(Y), there is a natural isomorphism of global derived Hom complexes $$R\\operatorname{Hom}_X(P,a(K))\\cong R\\operatorname{Hom}_Y(Rf_*P,K)$$ [def-pc-global-derived-rhom].",
  "source": {
   "document": "literature/stacks-project/duality.tex",
   "place": "Tag 0AA8 (Lemma 48.6.2), global Hom adjunction in case (1)"
@@ -24,9 +24,46 @@
   "lem-pc-qcqs-derived-direct-image-right-adjoint",
   "def-pc-global-derived-rhom"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "The qcqs hypotheses ensure that the restricted derived direct image preserves D_{\\mathrm{QCoh}} and has right adjoint a, with counit (the sheafy trace) Rf_*a(K)\\to K, by [lem-pc-qcqs-derived-direct-image-right-adjoint]. Use the counit-induced internal-Hom comparison stated in [lem-pc-qcqs-sheaf-rhom-adjunction]; that node records the canonical map and says that after applying the coherator DQ_Y it is an isomorphism. Its construction from the counit is natural in P and K.",
+   "uses": [
+    "lem-pc-qcqs-derived-direct-image-right-adjoint",
+    "lem-pc-qcqs-sheaf-rhom-adjunction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/duality.tex",
+    "place": "Tag 0B6I (Lemma 48.1.1), sheaf-Hom comparison"
+   }
+  },
+  {
+   "text": "Apply derived global sections to the comparison map of [lem-pc-qcqs-sheaf-rhom-adjunction]. Let p_X:(X,\\mathcal O_X)\\to(\\{\\mathrm{pt}\\},\\Gamma(X,\\mathcal O_X)) and p_Y:(Y,\\mathcal O_Y)\\to(\\{\\mathrm{pt}\\},\\Gamma(Y,\\mathcal O_Y)) be the morphisms of ringed spaces of [def-pc-global-derived-rhom], so R\\Gamma(X,-)=Rp_{X,*} and R\\Gamma(Y,-)=Rp_{Y,*}, and let r:(\\{\\mathrm{pt}\\},\\Gamma(X,\\mathcal O_X))\\to(\\{\\mathrm{pt}\\},\\Gamma(Y,\\mathcal O_Y)) be given by f^\\sharp:\\Gamma(Y,\\mathcal O_Y)\\to\\Gamma(X,\\mathcal O_X), so p_Y\\circ f=r\\circ p_X and Rr_*=r_* is the exact restriction of scalars. Applying the canonical composition isomorphism [lem-pc-ringed-spaces-derived-direct-image-composition] to both factorizations gives the derived Leray identity R\\Gamma(Y,-)\\circ Rf_*\\cong r_*\\circ R\\Gamma(X,-) on D(\\mathcal O_X). Thus [def-pc-global-derived-rhom] identifies the two sides with R\\operatorname{Hom}_X(P,a(K)) (with scalars restricted to \\Gamma(Y,\\mathcal O_Y)) and R\\operatorname{Hom}_Y(Rf_*P,K). Since the map becomes an isomorphism after DQ_Y, [lem-pc-dq-coherator-adjunction] (Y is quasi-compact and quasi-separated) gives a quasi-isomorphism on R\\Gamma(Y,-): in each degree use H^i(Y,E)=Hom(\\mathcal O_Y[-i],DQ_Y E), with \\mathcal O_Y[-i] quasi-coherent. This also gives naturality in P and K.",
+   "uses": [
+    "def-pc-global-derived-rhom",
+    "lem-pc-qcqs-sheaf-rhom-adjunction",
+    "lem-pc-dq-coherator-adjunction",
+    "lem-pc-ringed-spaces-derived-direct-image-composition"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/duality.tex",
+    "place": "Tag 0B6I (Lemma 48.1.1), global Hom adjunction"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-global-derived-rhom",
+  "lem-pc-qcqs-derived-direct-image-right-adjoint",
+  "lem-pc-qcqs-sheaf-rhom-adjunction",
+  "lem-pc-dq-coherator-adjunction",
+  "lem-pc-ringed-spaces-derived-direct-image-composition"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/duality.tex",
+  "place": "Tag 0B6I (Lemma 48.1.1, lemma-iso-global-hom)"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -51,12 +88,28 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-sc-proper-flat-right-adjoint-affine-basechange",
   "by": "worker",
   "date": "2026-10-10"
  },
  "chapter": "sec-picard-framework",
- "unit": "sk-thm-picard-duality"
+ "unit": "sk-thm-picard-duality",
+ "split_report": {
+  "date": "2026-10-11",
+  "item": "lem-pc-global-hom-adjunction",
+  "worker": "stage1",
+  "summary": "Repair R-gha2726: replaced the false uncohered sheaf-Hom isomorphism by the Tag 0A9Q comparison after DQ_Y, added the coherator adjunction/detection node, named the counit trace, and supplied the Leray and global-sections argument from Tag 0B6I.",
+  "blueprint": "The two steps realize Tag 0B6I (Lemma 48.1.1): first construct the counit-induced sheaf trace comparison and apply DQ_Y, then use the derived Leray identity and DQ_Y detection to obtain global RHom.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-gha2932",
+  "group": "C1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-gha2932 (reviewer sub-agent of L); spot-checked: R-gha2856 points: (1) lem-pc-dq-coherator-adjunction now has Y qcqs, matching perfect.tex lemma-better-coherator; (2) item and lem-pc-qcqs-sheaf-rhom-adjunction now state X, Y qcqs and f qcqs as 0B6I/0A9Q and the right-adjoint node, change named with reason in report (E7); citers lem-sc-flat-precompose-pus (qcqs square) and lem-sc-proper-flat-right-adjoint-affine-basechange (f proper over affine Y, so X qcqs) still match, def-sc-duality-equation-base-change-map does not cite the item (C4); (3) Leray now cited. Both Second reading edits present at head (Step 1 rewritten to cite stated counit comparison; child nodes and Tag 0B6I proof_origin). FIX more, RETURN less: C4 in Step 2: lem-pc-derived-direct-image-composition (schemes, via Spec Z) does not reach RGamma = Rp_* to the one-point ringed space of def-pc-global-derived-rhom; replaced by lem-pc-ringed-spaces-derived-direct-image-composition (same unit) applied to p_Y o f = r o p_X with r_* exact restriction of scalars, in Step 2 uses and proof_deps; dropped the now unneeded cross-unit tool_use.; 1 file(s) fixed by the reviewer"
+ }
 }
