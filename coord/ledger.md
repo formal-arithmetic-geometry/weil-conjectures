@@ -1663,3 +1663,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 14:47 L: lemma-weil-pbc-proper-strict-henselian-h0: misleading parenthetical on transcendental geometric points reworded per Stacks 0A3I (statement unchanged in substance; reviewer R-pue)
 - 14:47 L: merged deliver/C1/lem-exc-discrete-modules-abelian-structure (reviewer PASS; first push; new nodes: 0)
 - 14:48 L: returned deliver/F1/lem-exc-coinduced-continuous-acyclic (reviewer RETURN: 1. B2: lem-exc-coinduced-homotopy-continuous: the statement is not self-contained; it begins 'With the notation of [lem-)
+- 14:48 L: merged deliver/K1/lem-pc-leray-degenerate-sections (reviewer FIX; after a return; new nodes: 1)

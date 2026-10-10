@@ -1,0 +1,65 @@
+{
+ "id": "lem-pc-grothendieck-edge-cocycle",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pc-euler-characteristic-well-defined",
+   "place": "proof, first sentence: the passage from higher direct images over Spec k to cohomology by Leray degeneration; the cocycle identification of its left edge map",
+   "via": [
+    "lem-pc-leray-degenerate-sections",
+    "lem-pc-cohomology-sections-affine-base"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Cocycle description and collapse of the Grothendieck left edge",
+ "statement": "Let $F:\\mathcal A\\to\\mathcal B$ and $G:\\mathcal B\\to\\mathcal C$ be a composable pair of left exact additive functors between Grothendieck abelian categories [def-sp-composite-acyclicity], with $F$ sending injectives to $G$-acyclics. Let $X\\in\\mathcal A$ and let $X\\to I^\\bullet$ be an injective resolution [def-sp-injective-resolutions]. Under the natural derived-functor identifications $R^n(G\\circ F)(X)\\cong H^n(G(F(I^\\bullet)))$ and $R^nF(X)\\cong H^n(F(I^\\bullet))$ [lem-sp-derived-well-defined], the left edge map of [lem-sp-grothendieck-edge-maps] is the morphism $$H^n(G(F(I^\\bullet)))\\longrightarrow G(H^n(F(I^\\bullet)))$$ induced by taking a degree-$n$ cocycle in $G(F(I^\\bullet))$, regarding it by left exactness of $G$ as a section of $G(\\ker(F(I^n)\\to F(I^{n+1})))$, and applying $G$ to the quotient morphism $\\ker(F(I^n)\\to F(I^{n+1}))\\to H^n(F(I^\\bullet))$. In particular, if $R^pG(R^qF(X))=0$ for all $p>0$ and all $q\\geq0$, this left edge map is an isomorphism in every degree: the first-quadrant spectral sequence of [thm-sp-grothendieck] has a finite, exhaustive, separated decreasing filtration of each abutment object, and [lem-sp-edge-collapse] applies to its exact couple [def-sp-exact-couple] and convergence [def-sp-convergence].",
+ "source": {
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Lemma 01F4 (cohomology-lemma-apply-Leray), proof of part (2), edge map on an injective resolution; the collapse clause uses Derived Categories Lemma 015N and the finite abutment filtration"
+ },
+ "stmt_deps": [
+  "def-sp-composite-acyclicity",
+  "def-sp-injective-resolutions",
+  "lem-sp-derived-well-defined",
+  "lem-sp-grothendieck-edge-maps",
+  "thm-sp-grothendieck",
+  "lem-sp-edge-collapse",
+  "def-sp-exact-couple",
+  "def-sp-convergence"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Grothendieck spectral sequence left edge map sends a cohomology cocycle to its class in G of the cohomology of F(I)",
+   "results": "service error (HTTP 500 from leansearch.net via lean-lsp); no result",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "grothendieckLeftEdgeMap; H^n(G(F(I))) -> G(H^n(F(I)))",
+   "results": "CategoryTheory.Functor.grothendieckLeftEdgeMap in WeilConjectures.CategoryTheory.SpectralSequence.Grothendieck defines only the abstract edge map; no cocycle formula",
+   "date": "2026-10-10",
+   "verdict": "no match for the cocycle description"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rnE 'grothendieckLeftEdgeMap|left edge.*cocycle|cocycle.*edge' /home/ubuntu/weil-src-slopmaster2/.lake/packages/mathlib/Mathlib /home/ubuntu/weil-src-slopmaster2/WeilConjectures",
+   "results": "WeilConjectures/CategoryTheory/SpectralSequence/Grothendieck.lean:378-391 gives the abstract composite defining grothendieckLeftEdgeMap; no cocycle-level statement in Mathlib or the project",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "created": {
+  "item": "lem-pc-leray-degenerate-sections"
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-rr"
+}

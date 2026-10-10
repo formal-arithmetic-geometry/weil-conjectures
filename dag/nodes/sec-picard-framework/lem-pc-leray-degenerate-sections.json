@@ -25,9 +25,73 @@
   "pqf-def-cohomology",
   "def-sp-injective-resolutions"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Choose an injective resolution $\\mathcal F\\to\\mathcal I^\\bullet$ as in [def-sp-injective-resolutions]. By the definition of direct image, $\\Gamma(X,\\mathcal I^\\bullet)=\\Gamma(Y,f_*\\mathcal I^\\bullet)$ termwise. A cocycle in degree $q$ therefore represents a global section of $\\ker(f_*\\mathcal I^q\\to f_*\\mathcal I^{q+1})$, and its image in the quotient by the preceding image is the displayed cocycle formula for $\\varepsilon^q_{\\mathcal F}$. The identifications $H^q(X,\\mathcal F)=H^q(\\Gamma(X,\\mathcal I^\\bullet))$ and $R^qf_*\\mathcal F=\\mathcal H^q(f_*\\mathcal I^\\bullet)$ are the definitions of [pqf-def-cohomology] and higher direct image.",
+   "uses": [
+    "def-sp-injective-resolutions",
+    "def-pc-module-pullback",
+    "pqf-def-cohomology"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/cohomology.tex",
+    "place": "Lemma 01F4, proof of part (2), construction of the edge map from an injective resolution"
+   }
+  },
+  {
+   "text": "Apply [thm-sp-grothendieck] to the composable pair $F=f_*:\\mathrm{Mod}(\\mathcal O_X)\\to\\mathrm{Mod}(\\mathcal O_Y)$ and $G=\\Gamma(Y,-):\\mathrm{Mod}(\\mathcal O_Y)\\to\\mathrm{Ab}$. The hypotheses of [def-sp-composite-acyclicity] hold: $\\mathrm{Mod}(\\mathcal O_X)$ and $\\mathrm{Mod}(\\mathcal O_Y)$ are Grothendieck abelian by [prop-pur-kinjective-resolutions-exist] (the site of open subsets of a scheme is small and $\\mathcal O_X$, $\\mathcal O_Y$ are sheaves of commutative rings), $\\mathrm{Ab}=\\mathrm{Mod}(\\mathbb Z)$ is Grothendieck abelian by [lem-weil-pbc-ring-modules-grothendieck-abelian], and $f_*$ and $\\Gamma(Y,-)$ are additive and left exact because kernels in $\\mathrm{Mod}(\\mathcal O_X)$, $\\mathrm{Mod}(\\mathcal O_Y)$ are computed sectionwise [def-weil-sheaf-of-modules-category]. The required acyclicity hypothesis is supplied by [lem-weil-pbc-module-pushforward-injective-acyclic] with $h=f$ and $V=Y$. Termwise $\\Gamma(Y,f_*\\mathcal G)=\\Gamma(X,\\mathcal G)$, so [pqf-def-cohomology] and [lem-sp-derived-well-defined] identify $R^n(G\\circ F)(\\mathcal F)$ with $H^n(X,\\mathcal F)$ and $R^nF(\\mathcal F)$ with $R^nf_*\\mathcal F$. The left edge is functorial by [lem-sp-grothendieck-edge-maps], and its cocycle description is exactly [lem-pc-grothendieck-edge-cocycle]. Hence the displayed map is independent of the resolution and natural in $\\mathcal F$.",
+   "uses": [
+    "thm-sp-grothendieck",
+    "lem-weil-pbc-module-pushforward-injective-acyclic",
+    "lem-sp-grothendieck-edge-maps",
+    "lem-sp-derived-well-defined",
+    "pqf-def-cohomology",
+    "lem-pc-grothendieck-edge-cocycle",
+    "prop-pur-kinjective-resolutions-exist",
+    "lem-weil-pbc-ring-modules-grothendieck-abelian",
+    "def-weil-sheaf-of-modules-category",
+    "def-sp-composite-acyclicity"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/cohomology.tex",
+    "place": "Lemma 01F4, proof of part (2): the Leray spectral sequence and its functorial edge map"
+   }
+  },
+  {
+   "text": "Assume $H^p(Y,R^qf_*\\mathcal F)=0$ for every $p>0$ and every $q$. Via [pqf-def-cohomology], these are precisely the terms $R^pG(R^qF(\\mathcal F))$ off the $p=0$ column of the first-quadrant spectral sequence supplied by [thm-sp-grothendieck]; its finite decreasing abutment filtration is part of the convergence data used by [lem-sp-grothendieck-edge-maps]. The collapse and edge-isomorphism clause of [lem-pc-grothendieck-edge-cocycle], equivalently [lem-sp-edge-collapse] applied to that finite filtration, makes the canonical left edge $H^q(X,\\mathcal F)\\to\\Gamma(Y,R^qf_*\\mathcal F)$ an isomorphism. By Step 2 this edge is $\\varepsilon^q_{\\mathcal F}$, proving (2).",
+   "uses": [
+    "thm-sp-grothendieck",
+    "lem-sp-grothendieck-edge-maps",
+    "lem-pc-grothendieck-edge-cocycle"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/cohomology.tex",
+    "place": "Lemma 01F4, part (2), degeneration of the Leray spectral sequence when the columns p>0 vanish"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sp-injective-resolutions",
+  "def-pc-module-pullback",
+  "pqf-def-cohomology",
+  "thm-sp-grothendieck",
+  "lem-weil-pbc-module-pushforward-injective-acyclic",
+  "lem-sp-grothendieck-edge-maps",
+  "lem-sp-derived-well-defined",
+  "lem-pc-grothendieck-edge-cocycle",
+  "prop-pur-kinjective-resolutions-exist",
+  "lem-weil-pbc-ring-modules-grothendieck-abelian",
+  "def-weil-sheaf-of-modules-category",
+  "def-sp-composite-acyclicity"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Lemma 01F4 (cohomology-lemma-apply-Leray), part (2) and its proof"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -59,7 +123,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "worker",
@@ -75,5 +139,50 @@
   }
  },
  "chapter": "sec-picard-framework",
- "unit": "sk-thm-picard-rr"
+ "unit": "sk-thm-picard-rr",
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "lem-pc-leray-degenerate-sections",
+  "worker": "stage1",
+  "summary": "Repaired the Stacks 01F4(2) split for every O_X-module by replacing the quasi-coherent-only Leray node with [thm-sp-grothendieck] applied to f_* and Gamma(Y,-), using [lem-weil-pbc-module-pushforward-injective-acyclic] for acyclicity and [pqf-def-cohomology] plus [lem-sp-derived-well-defined] for the composite identification. Added [lem-pc-grothendieck-edge-cocycle] for the cocycle-level left-edge description and its collapse consequence, then used it in Steps 2 and 3.",
+  "blueprint": "proof, first sentence (proper coherent-finiteness context and affine specialization in the ancestor) and the Leray/Grothendieck spectral sequence degeneration at E_2 when columns p>0 vanish; Step 2 realizes the edge-map cocycle identification",
+  "tool_uses": [
+   {
+    "node": "thm-sp-grothendieck",
+    "why": "Its generic spectral sequence applies to f_* and Gamma(Y,-) on all O_X-modules."
+   },
+   {
+    "node": "lem-weil-pbc-module-pushforward-injective-acyclic",
+    "why": "Stacks 01EX with V=Y supplies the acyclicity hypothesis for the generic spectral sequence."
+   },
+   {
+    "node": "lem-sp-derived-well-defined",
+    "why": "Resolution independence of higher direct images is used as a generic derived-functor fact."
+   },
+   {
+    "node": "lem-sp-grothendieck-edge-maps",
+    "why": "The generic theorem supplies the functorial canonical left edge map."
+   },
+   {
+    "node": "prop-pur-kinjective-resolutions-exist",
+    "why": "Generic fact that sheaves of modules on a small site form a Grothendieck abelian category, a hypothesis of thm-sp-grothendieck."
+   }
+  ]
+ },
+ "tool_uses": [
+  "prop-pur-kinjective-resolutions-exist",
+  "thm-sp-grothendieck",
+  "lem-weil-pbc-module-pushforward-injective-acyclic",
+  "lem-sp-derived-well-defined",
+  "lem-sp-grothendieck-edge-maps",
+  "prop-pur-kinjective-resolutions-exist"
+ ],
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-ld2",
+  "group": "K1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-ld2 (reviewer sub-agent of L); spot-checked: Re-push after the 14:28 return; all three points repaired: (1) pqf-lem-leray gone from uses/proof_deps/tool_uses; Step 2 applies thm-sp-grothendieck to f_* and Gamma(Y,-) on all O_X-modules, acyclicity from lem-weil-pbc-module-pushforward-injective-acyclic (01EX, V=Y), composite identified with H^n(X,-) via Gamma(Y,f_*G)=Gamma(X,G), pqf-def-cohomology, lem-sp-derived-well-defined. (2) new unsplit node lem-pc-grothendieck-edge-cocycle (created.item = item, same unit) states the cocycle description of the left edge of lem-sp-grothendieck-edge-maps for a composable pair with an injective resolution; correct (Z^n(GFI)=G(Z^n FI) by left exactness, then G(Z^n->H^n)); B10 checked: slopmaster2 Grothendieck.lean 269-391 has only defs (grothendieckLeftEdge, grothendieckLeftEdgeMap), no theorem stating it, so nothing to attach. (3) its 'in particular' clause gives the edge iso when R^pG(R^qF X)=0 for p>0, with the finite filtration/exact couple hypotheses of lem-sp-edge-collapse named; Step 3 cites it. Report names the statements checked and the all-O_X-modules scope. Source: Stacks 01F4 (cohomology-lemma-apply-Leray) (2) agrees with the item hypothesis by hypothesis (H^p(Y,R^qf_*F)=0 for all q, p>0 gives H^q(X,F)=H^0(Y,R^qf_*F)); item now for every O_X-module, statement unchanged. Small cases: n=0 (edge = identity Gamma(X,F)=Gamma(Y,f_*F)); f=id (R^qf_*=0 for q>0, condition = H^p(X,F)=0, edge iso trivially). Declared tool uses thm-sp-grothendieck, lem-weil-pbc-module-pushforward-injective-acyclic, lem-sp-derived-well-defined, lem-sp-grothendieck-edge-maps accepted as generic. FIX: dag/nodes/sec-picard-framework/lem-pc-leray-degenerate-sections.json: proof[1].text/uses, proof_deps, split_report.tool_uses: added the check of the composable-pair hypotheses of def-sp-composite-acyclicity (Mod(O_X), Mod(O_Y) Grothendieck abelian by prop-pur-kinjective-resolutions-exist, Ab by lem-weil-pbc-ring-modules-grothendieck-abelian, f_* and Gamma left exact by def-weil-sheaf-of-modules-category), tool use prop-pur-kinjective-resolutions-exist. 14:40-14:49 UTC; 1 file(s) fixed by the reviewer"
+ }
 }
