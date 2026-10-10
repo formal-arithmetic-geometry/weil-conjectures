@@ -2198,3 +2198,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 18:05 L: merged deliver/C1/lem-exc-finite-galois-tensor-decomposition (reviewer FIX; after a return; new nodes: 2)
 - 18:05 L: merged deliver/F1/def-pc-f-subfunctor (reviewer FIX; first push; new nodes: 0)
 - 18:05 L: merged deliver/F1/lem-pc-derived-direct-image-preserves-direct-sums (reviewer FIX; first push; new nodes: 1)
+- 18:06 L: merged deliver/K1/lem-sc-p1-section-clearing-denominators-qcqs (reviewer PASS; first push; new nodes: 0)

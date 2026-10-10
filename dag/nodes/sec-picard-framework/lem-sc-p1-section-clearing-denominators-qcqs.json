@@ -25,9 +25,56 @@
   "pqf-def-coherent",
   "def-weil-residue-field"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "At each point choose a Zariski neighbourhood on which $\\mathcal L$ is free by [def-sc-invertible-module], and an affine neighbourhood on which $\\mathcal F$ is a tilde module by [pqf-def-coherent]. Choose a principal open inside the affine presentation neighbourhood and the trivializing neighbourhood; [lem-weil-pbc-spec-module-tilde-sections] identifies the restriction of the tilde module there with the localization of its presenting module, so both properties hold on this principal open. These opens cover $X$, so quasi-compactness [def-weil-pbc-quasi-compact-scheme] gives a finite subcover $X=\\bigcup_{i=1}^r V_i$ on which both properties hold. Write $e_i$ for a generator and $s|_{V_i}=f_i e_i$. For a point of $V_i=\\operatorname{Spec}A_i$, the image of $s$ in $\\mathcal L_x\\otimes\\kappa(x)$ is nonzero exactly when $f_i\\notin\\mathfrak p_x$; hence $X_s\\cap V_i=D(f_i)$. Write $\\mathcal F|_{V_i}=\\widetilde M_i$; identifying $M_i$ with $\\Gamma(V_i,\\mathcal F)$ by the $r=1$ case of [lem-weil-pbc-spec-module-tilde-sections], that same node identifies $\\Gamma(D(f_i),\\mathcal F)$ with $(M_i)_{f_i}$. Write $u|_{D(f_i)}=v_i/f_i^{a_i}$, choose $a\\ge a_i$ for every $i$, and set $w_i=f_i^{a-a_i}v_i\\otimes e_i^{\\otimes a}\\in\\Gamma(V_i,\\mathcal F\\otimes\\mathcal L^{\\otimes a})$. Then $w_i|_{D(f_i)}=u|_{D(f_i)}\\otimes s^{\\otimes a}$.",
+   "uses": [
+    "def-sc-invertible-module",
+    "def-weil-pbc-quasi-compact-scheme",
+    "pqf-def-coherent",
+    "lem-weil-pbc-spec-module-tilde-sections"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/properties.tex",
+    "place": "Properties, Lemma 01PW (lemma-invert-s-sections), part (2), finite trivializing cover and local fractions"
+   }
+  },
+  {
+   "text": "For each pair $i,j$, put $W_{ij}=V_i\\cap V_j$. It is quasi-compact by quasi-separatedness of $X$; it is quasi-separated since every two affine opens of the open subscheme $W_{ij}$ are affine opens of $X$ and have quasi-compact intersection. The difference $d_{ij}=w_i|_{W_{ij}}-w_j|_{W_{ij}}$ is a section of $\\mathcal G_{ij}=(\\mathcal F\\otimes\\mathcal L^{\\otimes a})|_{W_{ij}}$, which is quasi-coherent by [lem-sc-invertible-tensor-qcoherent]. On $(W_{ij})_s=W_{ij}\\cap X_s$ both restrictions equal $u\\otimes s^{\\otimes a}$ by Step 1, so $d_{ij}$ restricts to zero. Apply [lem-sc-p1-section-restriction-s-torsion] to the qcqs scheme $W_{ij}$, its invertible module $\\mathcal L|_{W_{ij}}$, its section $s|_{W_{ij}}$, and $\\mathcal G_{ij}$: for some $b_{ij}\\ge0$, multiplication by $s^{\\otimes b_{ij}}$ kills $d_{ij}$ on $W_{ij}$.",
+   "uses": [
+    "lem-sc-invertible-tensor-qcoherent",
+    "lem-sc-p1-section-restriction-s-torsion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/properties.tex",
+    "place": "Properties, Lemma 01PW (lemma-invert-s-sections), part (2), compatibility on quasi-compact overlaps"
+   }
+  },
+  {
+   "text": "There are finitely many pairs, so choose $b\\ge b_{ij}$ for all of them. Multiplying each $w_i$ by $s^{\\otimes b}$ gives $z_i\\in\\Gamma(V_i,\\mathcal F\\otimes\\mathcal L^{\\otimes(a+b)})$. On $W_{ij}$ their difference is $s^{\\otimes(b-b_{ij})}(s^{\\otimes b_{ij}}d_{ij})=0$ by Step 2. The sheaf gluing axiom gives a global section $t$ restricting to $z_i$ on every $V_i$. On $D(f_i)$, Step 1 gives $z_i=u\\otimes s^{\\otimes(a+b)}$; these opens cover $X_s$, so $t|_{X_s}=u\\otimes s^{\\otimes(a+b)}$. Take $m=a+b$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/properties.tex",
+    "place": "Properties, Lemma 01PW (lemma-invert-s-sections), part (2), common exponent and sheaf gluing"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sc-invertible-module",
+  "def-weil-pbc-quasi-compact-scheme",
+  "pqf-def-coherent",
+  "lem-weil-pbc-spec-module-tilde-sections",
+  "lem-sc-invertible-tensor-qcoherent",
+  "lem-sc-p1-section-restriction-s-torsion"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/properties.tex",
+  "place": "Properties, Lemma 01PW (lemma-invert-s-sections), part (2); proof reconstructed from the source theorem's route and WeilConjectures/AlgebraicGeometry/Modules/ClearDenominators.lean:263-384 because the Stacks source tree is absent locally"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -38,10 +85,35 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-sc-p1-invertible-section-localization"
  },
  "chapter": "sec-picard-framework",
- "unit": "sk-thm-picard-duality"
+ "unit": "sk-thm-picard-duality",
+ "split_report": {
+  "date": "2026-10-11",
+  "item": "lem-sc-p1-section-clearing-denominators-qcqs",
+  "worker": "stage1",
+  "summary": "Proved the qcqs clearing-denominators statement by finitely many affine charts with simultaneous line-bundle trivializations and module presentations, affine module localization, power-torsion on each quasi-compact overlap, and gluing. The overlap step uses the existing restriction-torsion statement for quasi-coherent modules and does not assume affine intersections. No new nodes were needed.",
+  "blueprint": "Realizes lem-sc-p1-graded-resolution's proof clause comparing graded sections on the nonvanishing open with localized global sections, via lem-sc-p1-invertible-section-localization: Step 1 lifts local fractions, Step 2 clears overlap differences, Step 3 glues a global section.",
+  "tool_uses": [
+   {
+    "node": "lem-sc-invertible-tensor-qcoherent",
+    "why": "The overlap argument uses its quasi-coherence conclusion for the twisted module; this is a generic tensor-product tool in another unit."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sc-invertible-tensor-qcoherent",
+  "lem-sc-invertible-tensor-qcoherent"
+ ],
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-scd1806",
+  "group": "K1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-scd1806 (reviewer sub-agent of L); spot-checked: Steps 1-3 against 01PW(2) proof: finite trivializing affine cover via quasi-compactness, X_s cap V_i = D(f_i), tilde-section localization for local fractions; overlaps W_ij qcqs (quasi-separated X, affine opens of W_ij are affine in X), twisted module quasi-coherent by generic tool lem-sc-invertible-tensor-qcoherent (accepted C7), torsion lemma hypotheses match exactly; common exponent and gluing elementary. No cycle: lem-sc-p1-section-restriction-s-torsion is the injectivity sibling created by the parent, unsplit, no deps on this item. No repairs needed; second reading missed nothing I found."
+ }
 }
