@@ -1,6 +1,6 @@
 # Work queue
 
-846 items; claim with `tools/claim.py next <group> [--stage N]`.
+847 items; claim with `tools/claim.py next <group> [--stage N]`.
 
 ## Stage 1: nodes to split (656)
 
@@ -14,9 +14,7 @@
 | `lem-weil-pbc-site-plus-construction-functorial` | 1011 | none |
 | `lem-weil-pbc-site-plus-of-separated-is-sheaf` | 1011 | none |
 | `lem-weil-pbc-small-etale-representable-presheaf-sheaf` | 1011 | none |
-| `lem-weil-pbc-smooth-free-differentials-strictly-standard-power` | 1011 | none |
 | `lem-weil-pbc-smooth-over-normal-ring-normal` | 1011 | none |
-| `lem-weil-pbc-spec-finite-product-fields` | 1011 | none |
 | `lem-weil-pbc-spec-map-residue-field-naturality` | 1011 | none |
 | `lem-weil-pbc-spec-surjective-base-change` | 1011 | none |
 | `lem-weil-pbc-spectral-finite-coequalizer-from-finite-space` | 1011 | none |
@@ -103,6 +101,7 @@
 | `lem-weil-pbc-localization-finite-gl-dim` | 1012 | none |
 | `lem-weil-pbc-lqf-restriction-to-opens` | 1012 | none |
 | `lem-weil-pbc-make-separably-generated` | 1012 | none |
+| `lem-weil-pbc-matrix-left-inverse-minors` | 1012 | none |
 | `lem-weil-pbc-mittag-leffler-complex-limit-homology` | 1012 | none |
 | `lem-weil-pbc-module-cohomology-fmap-functorial` | 1012 | none |
 | `lem-weil-pbc-module-finite-presentation-cokernel` | 1012 | none |
@@ -143,6 +142,7 @@
 | `lem-weil-pbc-smooth-algebra-filtered-colimit-descent` | 1012 | none |
 | `lem-weil-pbc-smooth-at-generic-point-over-field` | 1012 | none |
 | `lem-weil-pbc-smooth-at-prime-free-conormal-basis` | 1012 | none |
+| `lem-weil-pbc-smooth-localization-conormal-split` | 1012 | none |
 | `lem-weil-pbc-smooth-over-field-dimension-differentials` | 1012 | none |
 | `lem-weil-pbc-smooth-over-product-ring` | 1012 | none |
 | `lem-weil-pbc-smooth-retract-standard-smooth` | 1012 | none |
@@ -663,7 +663,7 @@
 | `lem-pc-finite-linear-avoidance` | - | none |
 | `lem-pc-linear-pair-graded-finite` | - | none |
 
-## Stage 2: nodes to state (190)
+## Stage 2: nodes to state (191)
 
 | node | distance to Mathlib | kind |
 |---|---|---|
@@ -824,6 +824,7 @@
 | `lem-weil-pbc-skyscraper-constant-on-point-closure` | 1 | state |
 | `lem-weil-pbc-smooth-conormal-sequence-exact` | 1 | state |
 | `lem-weil-pbc-spec-field-point-residue-field` | 1 | state |
+| `lem-weil-pbc-spec-finite-product-fields` | 1 | state |
 | `lem-weil-pbc-spectral-closed-clopen-decomposition-lift` | 1 | state |
 | `lem-weil-pbc-spectral-closed-subspace` | 1 | state |
 | `lem-weil-pbc-spectral-constructible-clopen-constructible-topology` | 1 | state |
@@ -858,7 +859,7 @@
 | `lem-weil-pbc-p1-field-dimension-one` | 4 | state |
 | `lem-weil-pbc-projective-space-zero-isomorphism` | 4 | state |
 
-Not open yet: 668 nodes that wait for stage 1, 477 nodes that wait for a statement dependency.
+Not open yet: 668 nodes that wait for stage 1, 478 nodes that wait for a statement dependency.
 
 ## Stage 3: modules to prove (0)
 
