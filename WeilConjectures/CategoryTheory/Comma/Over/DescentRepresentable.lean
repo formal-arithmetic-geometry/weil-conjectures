@@ -222,4 +222,50 @@ theorem nonempty_representableBy_of_descent
     simp only [Over.comp_left, Category.assoc, hlift, cc, Over.homMk_left]
     rw [pullback.lift_fst_assoc, Category.assoc]
 
+
+section Representable
+
+variable {V₀ : Over Y} (e : F.RepresentableBy V₀) {T : Over Y}
+include e
+
+/-- **Sections of a representable presheaf descend along `p` when points do.** If `F` is
+represented by `V₀`, the base change `T ×_Y X ⟶ T` of `p` is an epimorphism and morphisms to
+`V₀` descend along it, then sections of `F` over `T` are determined by their pullback to
+`T ×_Y X`. -/
+theorem descent_injective (hepi : Epi (pullback.fst T.hom p)) (x₁ x₂ : F.obj (op T))
+    (h : F.map (descentCoverπ p T).op x₁ = F.map (descentCoverπ p T).op x₂) : x₁ = x₂ := by
+  obtain ⟨a₁, rfl⟩ := e.homEquiv.surjective x₁
+  obtain ⟨a₂, rfl⟩ := e.homEquiv.surjective x₂
+  rw [← e.homEquiv_comp, ← e.homEquiv_comp, e.homEquiv.injective.eq_iff] at h
+  rw [e.homEquiv.injective.eq_iff]
+  ext
+  rw [← cancel_epi (pullback.fst T.hom p)]
+  exact congr($(h).left)
+
+/-- **Sections of a representable presheaf glue along `p` when points do.** If `F` is represented
+by `V₀`, the base change `π : T ×_Y X ⟶ T` of `p` is an epimorphism and morphisms to `V₀` descend
+along it, then a section of `F` over `T ×_Y X` whose two pullbacks to
+`(T ×_Y X) ×_T (T ×_Y X)` agree comes from `T`. -/
+theorem descent_exists (hepi : Epi (pullback.fst T.hom p))
+    (hV₀ : ∀ a : pullback T.hom p ⟶ V₀.left,
+      pullback.fst (pullback.fst T.hom p) (pullback.fst T.hom p) ≫ a =
+        pullback.snd (pullback.fst T.hom p) (pullback.fst T.hom p) ≫ a →
+      ∃ b : T.left ⟶ V₀.left, pullback.fst T.hom p ≫ b = a)
+    (y : F.obj (op (descentCover p T)))
+    (hy : F.map (descentCoverPr₁ p T).op y = F.map (descentCoverPr₂ p T).op y) :
+    ∃ x, F.map (descentCoverπ p T).op x = y := by
+  obtain ⟨b, rfl⟩ := e.homEquiv.surjective y
+  rw [← e.homEquiv_comp, ← e.homEquiv_comp, e.homEquiv.injective.eq_iff] at hy
+  obtain ⟨c, hc⟩ := hV₀ b.left congr($(hy).left)
+  have hw : c ≫ V₀.hom = T.hom := by
+    rw [← cancel_epi (pullback.fst T.hom p), ← Category.assoc, hc, Over.w b, pullback.condition]
+    rfl
+  refine ⟨e.homEquiv (Over.homMk c hw), ?_⟩
+  rw [← e.homEquiv_comp]
+  congr 1
+  ext
+  exact hc
+
+end Representable
+
 end CategoryTheory.Functor.RepresentableBy

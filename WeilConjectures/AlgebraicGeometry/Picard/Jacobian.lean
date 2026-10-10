@@ -1886,69 +1886,6 @@ theorem exists_intermediateField_descentDatum {ks : Type u} [Field ks] [Algebra 
     exact congrArg (·.left) key
   · exact exists_isAffineOpen_superset_of_isPullback C Js rs K JK q hq
 
-open Functor.RepresentableBy in
-/-- **`Pic^0_{C/k}` satisfies descent along a field extension.** Let `K/k` be a field extension and
-`T` a `k`-scheme. A section of `Pic^0_{C/k}` over `T` is determined by its pullback to
-`T_K = T ×_k K`, and a section over `T_K` whose two pullbacks to `T_K ×_T T_K` agree comes from
-`T`. For finite `K` this is the fppf sheaf property of `Pic^0_{C/k}`; in general
-`Spec K ⟶ Spec k` is only fpqc, and the statement is the fpqc sheaf property of `Pic^0_{C/k}` for
-the covering `T_K ⟶ T`, which follows from `Pic^0_{C/k}` being locally of finite presentation
-(Stacks 01ZC). -/
-theorem picardFunctorDegree_zero_descent {K : Type u} [Field K] [Algebra k K] (C : Scheme.{u})
-    [C.Over (Spec (.of k))] [SmoothOfRelativeDimension 1 (C ↘ Spec (.of k))]
-    [IsProper (C ↘ Spec (.of k))] [GeometricallyIntegral (C ↘ Spec (.of k))]
-    (T : Over (Spec (.of k))) :
-    (∀ x₁ x₂ : (picardFunctorDegree (C ↘ Spec (.of k)) 0).obj.obj (.op T),
-      (picardFunctorDegree (C ↘ Spec (.of k)) 0).obj.map
-          (descentCoverπ (Spec.map (CommRingCat.ofHom (algebraMap k K))) T).op x₁ =
-        (picardFunctorDegree (C ↘ Spec (.of k)) 0).obj.map
-          (descentCoverπ (Spec.map (CommRingCat.ofHom (algebraMap k K))) T).op x₂ → x₁ = x₂) ∧
-    ∀ y : (picardFunctorDegree (C ↘ Spec (.of k)) 0).obj.obj
-        (.op (descentCover (Spec.map (CommRingCat.ofHom (algebraMap k K))) T)),
-      (picardFunctorDegree (C ↘ Spec (.of k)) 0).obj.map
-          (descentCoverPr₁ (Spec.map (CommRingCat.ofHom (algebraMap k K))) T).op y =
-        (picardFunctorDegree (C ↘ Spec (.of k)) 0).obj.map
-          (descentCoverPr₂ (Spec.map (CommRingCat.ofHom (algebraMap k K))) T).op y →
-      ∃ x, (picardFunctorDegree (C ↘ Spec (.of k)) 0).obj.map
-          (descentCoverπ (Spec.map (CommRingCat.ofHom (algebraMap k K))) T).op x = y :=
-  sorry
-
-/-- **`Pic^0_{C/k}` is represented by the descended scheme.** Let `K/k` be a field extension, let
-`J_K` represent the restriction of `Pic^0_{C/k}` to schemes over `K`, and let `J` be a `k`-scheme
-with `J ×_k K ≅ J_K` through which the canonical descent datum of `J_K` relative to
-`Spec K ⟶ Spec k` is the trivial one: the projection `q : J_K ⟶ J` is invariant under transport.
-Then `J` represents `Pic^0_{C/k}`.
-
-This is Step 7 of the proof of `AlgebraicGeometry.exists_jacobian_descent`, applied with
-`K = k_s`. The morphism `Spec K ⟶ Spec k` is faithfully flat and quasi-compact but in general not
-locally of finite presentation, so this does not follow from the fppf sheaf property of
-`Pic^0_{C/k}` alone. Since `Pic^0_{C/k}` and `J` are locally of finite presentation, the
-identification of `Pic^0_{C/k}` with `h_J` over `K` is defined over a finitely generated
-subalgebra `A ⊆ K` (Stacks 01ZC), along which fppf descent of sections applies; equivalently, by
-fpqc descent of morphisms (Stacks 02W0) it agrees with the representing object of `Pic^0_{C/k}`.
-
-(blueprint: `thm-pd-jacobian-general-field`, Step 7) -/
-theorem nonempty_representableBy_picardFunctorDegree_of_isPullback {K : Type u} [Field K]
-    [Algebra k K] (C : Scheme.{u}) [C.Over (Spec (.of k))]
-    [SmoothOfRelativeDimension 1 (C ↘ Spec (.of k))] [IsProper (C ↘ Spec (.of k))]
-    [GeometricallyIntegral (C ↘ Spec (.of k))] (JK : Over (Spec (.of K)))
-    (r : ((Over.map (Spec.map (CommRingCat.ofHom (algebraMap k K)))).op ⋙
-      (picardFunctorDegree (C ↘ Spec (.of k)) 0).obj).RepresentableBy JK)
-    (J : Over (Spec (.of k))) (q : JK.left ⟶ J.left)
-    (hq : IsPullback q JK.hom J.hom (Spec.map (CommRingCat.ofHom (algebraMap k K))))
-    (hinv : ∀ {T : Scheme.{u}} (f₁ f₂ : T ⟶ Spec (.of K))
-      (h : f₁ ≫ Spec.map (CommRingCat.ofHom (algebraMap k K)) =
-        f₂ ≫ Spec.map (CommRingCat.ofHom (algebraMap k K))) (a : Over.mk f₁ ⟶ JK),
-      (r.overTransport f₁ f₂ h a).left ≫ q = a.left ≫ q) :
-    Nonempty ((picardFunctorDegree (C ↘ Spec (.of k)) 0).obj.RepresentableBy J) :=
-  Functor.RepresentableBy.nonempty_representableBy_of_descent r q hq hinv
-    (fun T ↦ inferInstance)
-    (fun T a ha ↦ ⟨EffectiveEpi.desc _ a fun g₁ g₂ hg ↦ by
-        simpa using congrArg (pullback.lift g₁ g₂ hg ≫ ·) ha,
-      EffectiveEpi.fac _ _ _⟩)
-    (fun T ↦ (picardFunctorDegree_zero_descent C T).1)
-    (fun T ↦ (picardFunctorDegree_zero_descent C T).2)
-
 /-- **The geometric points of `Pic^0_{C₀/k₀}`.** Let `C₀` be a smooth projective geometrically
 integral curve over `k₀`, let `K` be an algebraically closed extension of `k₀` and let `C` be the
 base change of `C₀` to `K`. Then the value of `Pic^0_{C₀/k₀}` on `Spec K` is `Pic^0(C)`, and the
@@ -2283,6 +2220,78 @@ theorem exists_commGrpObj_representableBy_picardFunctorDegree (ks : Type u) [Fie
   -- Step 5: the group law of `Pic^0_{C/k}` makes `J` a commutative group scheme.
   obtain ⟨_, hr⟩ := exists_commGrpObj_isPicardZeroMul (C ↘ Spec (.of k)) r
   exact ⟨J, inferInstance, r, hP, hS, hG, hr⟩
+
+open Functor.RepresentableBy in
+/-- **`Pic^0_{C/k}` satisfies descent along a field extension.** Let `K/k` be a field extension and
+`T` a `k`-scheme. A section of `Pic^0_{C/k}` over `T` is determined by its pullback to
+`T_K = T ×_k K`, and a section over `T_K` whose two pullbacks to `T_K ×_T T_K` agree comes from
+`T`. For finite `K` this is the fppf sheaf property of `Pic^0_{C/k}`; in general
+`Spec K ⟶ Spec k` is only fpqc, and the statement is the fpqc sheaf property of `Pic^0_{C/k}` for
+the covering `T_K ⟶ T`. Both follow from the representability of `Pic^0_{C/k}`
+(`AlgebraicGeometry.exists_commGrpObj_representableBy_picardFunctorDegree`, which only uses
+descent along finite extensions): sections are then morphisms to the Jacobian `J`, and these
+descend along the fpqc covering `T_K ⟶ T`, an effective epimorphism. -/
+theorem picardFunctorDegree_zero_descent {K : Type u} [Field K] [Algebra k K] (C : Scheme.{u})
+    [C.Over (Spec (.of k))] [SmoothOfRelativeDimension 1 (C ↘ Spec (.of k))]
+    [IsProper (C ↘ Spec (.of k))] [GeometricallyIntegral (C ↘ Spec (.of k))]
+    (T : Over (Spec (.of k))) :
+    (∀ x₁ x₂ : (picardFunctorDegree (C ↘ Spec (.of k)) 0).obj.obj (.op T),
+      (picardFunctorDegree (C ↘ Spec (.of k)) 0).obj.map
+          (descentCoverπ (Spec.map (CommRingCat.ofHom (algebraMap k K))) T).op x₁ =
+        (picardFunctorDegree (C ↘ Spec (.of k)) 0).obj.map
+          (descentCoverπ (Spec.map (CommRingCat.ofHom (algebraMap k K))) T).op x₂ → x₁ = x₂) ∧
+    ∀ y : (picardFunctorDegree (C ↘ Spec (.of k)) 0).obj.obj
+        (.op (descentCover (Spec.map (CommRingCat.ofHom (algebraMap k K))) T)),
+      (picardFunctorDegree (C ↘ Spec (.of k)) 0).obj.map
+          (descentCoverPr₁ (Spec.map (CommRingCat.ofHom (algebraMap k K))) T).op y =
+        (picardFunctorDegree (C ↘ Spec (.of k)) 0).obj.map
+          (descentCoverPr₂ (Spec.map (CommRingCat.ofHom (algebraMap k K))) T).op y →
+      ∃ x, (picardFunctorDegree (C ↘ Spec (.of k)) 0).obj.map
+          (descentCoverπ (Spec.map (CommRingCat.ofHom (algebraMap k K))) T).op x = y :=
+  by
+  obtain ⟨J, _, e, -⟩ := exists_commGrpObj_representableBy_picardFunctorDegree
+    (separableClosure k (AlgebraicClosure k)) C (arithmeticGenus k C) rfl
+  have hepi : Epi (pullback.fst T.hom (Spec.map (CommRingCat.ofHom (algebraMap k K)))) :=
+    inferInstance
+  exact ⟨fun x₁ x₂ h ↦ e.descent_injective hepi x₁ x₂ h,
+    fun y hy ↦ e.descent_exists hepi (fun a ha ↦ ⟨EffectiveEpi.desc _ a fun g₁ g₂ hg ↦ by
+        simpa using congrArg (pullback.lift g₁ g₂ hg ≫ ·) ha, EffectiveEpi.fac _ _ _⟩) y hy⟩
+
+/-- **`Pic^0_{C/k}` is represented by the descended scheme.** Let `K/k` be a field extension, let
+`J_K` represent the restriction of `Pic^0_{C/k}` to schemes over `K`, and let `J` be a `k`-scheme
+with `J ×_k K ≅ J_K` through which the canonical descent datum of `J_K` relative to
+`Spec K ⟶ Spec k` is the trivial one: the projection `q : J_K ⟶ J` is invariant under transport.
+Then `J` represents `Pic^0_{C/k}`.
+
+This is Step 7 of the proof of `AlgebraicGeometry.exists_jacobian_descent`, applied with
+`K = k_s`. The morphism `Spec K ⟶ Spec k` is faithfully flat and quasi-compact but in general not
+locally of finite presentation, so this does not follow from the fppf sheaf property of
+`Pic^0_{C/k}` alone. Since `Pic^0_{C/k}` and `J` are locally of finite presentation, the
+identification of `Pic^0_{C/k}` with `h_J` over `K` is defined over a finitely generated
+subalgebra `A ⊆ K` (Stacks 01ZC), along which fppf descent of sections applies; equivalently, by
+fpqc descent of morphisms (Stacks 02W0) it agrees with the representing object of `Pic^0_{C/k}`.
+
+(blueprint: `thm-pd-jacobian-general-field`, Step 7) -/
+theorem nonempty_representableBy_picardFunctorDegree_of_isPullback {K : Type u} [Field K]
+    [Algebra k K] (C : Scheme.{u}) [C.Over (Spec (.of k))]
+    [SmoothOfRelativeDimension 1 (C ↘ Spec (.of k))] [IsProper (C ↘ Spec (.of k))]
+    [GeometricallyIntegral (C ↘ Spec (.of k))] (JK : Over (Spec (.of K)))
+    (r : ((Over.map (Spec.map (CommRingCat.ofHom (algebraMap k K)))).op ⋙
+      (picardFunctorDegree (C ↘ Spec (.of k)) 0).obj).RepresentableBy JK)
+    (J : Over (Spec (.of k))) (q : JK.left ⟶ J.left)
+    (hq : IsPullback q JK.hom J.hom (Spec.map (CommRingCat.ofHom (algebraMap k K))))
+    (hinv : ∀ {T : Scheme.{u}} (f₁ f₂ : T ⟶ Spec (.of K))
+      (h : f₁ ≫ Spec.map (CommRingCat.ofHom (algebraMap k K)) =
+        f₂ ≫ Spec.map (CommRingCat.ofHom (algebraMap k K))) (a : Over.mk f₁ ⟶ JK),
+      (r.overTransport f₁ f₂ h a).left ≫ q = a.left ≫ q) :
+    Nonempty ((picardFunctorDegree (C ↘ Spec (.of k)) 0).obj.RepresentableBy J) :=
+  Functor.RepresentableBy.nonempty_representableBy_of_descent r q hq hinv
+    (fun T ↦ inferInstance)
+    (fun T a ha ↦ ⟨EffectiveEpi.desc _ a fun g₁ g₂ hg ↦ by
+        simpa using congrArg (pullback.lift g₁ g₂ hg ≫ ·) ha,
+      EffectiveEpi.fac _ _ _⟩)
+    (fun T ↦ (picardFunctorDegree_zero_descent C T).1)
+    (fun T ↦ (picardFunctorDegree_zero_descent C T).2)
 
 /-- **The Jacobian over a general base field, by Galois descent.** Let `k₀` be any field, `k_s` a
 separable closure of `k₀`, `k̄₀` an algebraic closure of `k₀` containing `k_s`, and let `C₀` be a
