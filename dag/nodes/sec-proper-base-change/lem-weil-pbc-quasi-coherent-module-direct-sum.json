@@ -1,0 +1,78 @@
+{
+ "id": "lem-weil-pbc-quasi-coherent-module-direct-sum",
+ "kind": "statement",
+ "title": "The direct sum of two quasi-coherent modules is quasi-coherent",
+ "statement": "Let $X$ be a scheme [def-pc-scheme] and let $\\mathcal F_1,\\mathcal F_2$ be quasi-coherent $\\mathcal O_X$-modules [pqf-def-coherent], [def-weil-sheaf-of-modules-category]. Let $\\mathcal F_1\\oplus\\mathcal F_2$ be the $\\mathcal O_X$-module $W\\mapsto\\mathcal F_1(W)\\oplus\\mathcal F_2(W)$ (for $W\\subseteq X$ open), with componentwise $\\mathcal O_X(W)$-module structure and componentwise restriction maps; it is a sheaf, and together with the inclusions and projections of the two summands it is a direct sum (biproduct) of $\\mathcal F_1$ and $\\mathcal F_2$ in $\\Mod(\\mathcal O_X)$. Then $\\mathcal F_1\\oplus\\mathcal F_2$ is a quasi-coherent $\\mathcal O_X$-module.",
+ "source": {
+  "document": "literature/stacks-project/schemes.tex",
+  "place": "Schemes, Lemma 01ID (lemma-colimit-quasi-coherent, line 1434: on $\\operatorname{Spec}R$ the direct sum of the $\\widetilde{M_i}$ is $\\widetilde{\\bigoplus M_i}$) and Section 01LA (section-quasi-coherent, line 4717, item (3): any direct sum of quasi-coherent sheaves is quasi-coherent, the property being local on $X$)"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "pqf-def-coherent",
+  "def-weil-sheaf-of-modules-category"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "direct sum (biproduct) of two quasi-coherent sheaves of modules on a scheme is quasi-coherent",
+   "results": "SheafOfModules.IsQuasicoherent, IsQuasicoherent.mk, isQuasicoherent, IsQuasicoherent.casesOn/recOn, QuasicoherentData, QuasicoherentData.I (Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent): the definition only, no closure under direct sums",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "the biproduct of two quasicoherent sheaves of modules is quasicoherent",
+   "results": "SheafOfModules.instHasColimitsOfSize... (Sheaf/Colimits), SheafOfModules.isQuasicoherent, IsQuasicoherent, QuasicoherentData (Sheaf/Quasicoherent), SheafOfModules.isColimitFreeCofan (Sheaf/Free), SheafOfModules.instAbelian (Sheaf/Abelian): existence of coproducts, no quasi-coherence of a direct sum",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "SheafOfModules.IsQuasicoherent",
+   "results": "all 19 hits read: IsQuasicoherent, instIsQuasicoherentOfIsFinitePresentation, QuasicoherentData.isQuasicoherent, nonempty_quasicoherentData, IsQuasicoherent.mk, Presentation.isQuasicoherent, isQuasicoherent_over, IsQuasicoherent.of_coversTop, isQuasicoherent_pushforward(_of_isLeftAdjoint), instIsQuasicoherentOfIsLocallyFree, tilde instances, isIso_fromTildeΓ_of_isQuasicoherent, isQuasicoherent_iff_isIso_fromTildeΓ, exists_(affine)OpenCover_presentation, isQuasicoherent_restrictFunctor: none about biproducts, coproducts or direct sums",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rln IsQuasicoherent ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib | xargs grep -n 'biprod\\|⊞\\|coprod'",
+   "results": "only docstrings of Algebra/Category/ModuleCat/Sheaf/Quasicoherent.lean:16,17,250,266 (the definition via coproducts of copies of the ring sheaf) and AlgebraicGeometry/Modules/Tilde.lean:435 (inside a proof); no lemma that a biproduct or coproduct of quasi-coherent modules is quasi-coherent",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "local_search",
+   "query": "isQuasicoherent_biprod (project ~/weil-conjectures-slopmaster2; index: unavailable, so not a proof of absence)",
+   "results": "none; a grep of the source repository WeilConjectures/ found AlgebraicGeometry.Scheme.Modules.isQuasicoherent_sigma (WeilConjectures/AlgebraicGeometry/Modules/QuasicoherentKernel.lean:293-301, sorry-free on slopmaster2 by local/sorry_map_slopmaster2_full.jsonl): a coproduct ∐ M of quasi-coherent X.Modules is quasi-coherent; it is not Mathlib, and this node is its two-summand case (biproduct ≅ coproduct over a two-element index)",
+   "date": "2026-10-10",
+   "verdict": "no Mathlib match; source-repository Lean candidate isQuasicoherent_sigma reported for attachment by the lead"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-quasi-coherent-extension-qc-open",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "reviewed": "Reviewed by L 2026-10-10 (statement): direct sum of two quasi-coherent modules is quasi-coherent (Schemes 01ID/01LA (3)). Unsplit; the source repository's isQuasicoherent_sigma (coproducts) is noted by the worker, not attached (coproduct vs biproduct identification needed)."
+}

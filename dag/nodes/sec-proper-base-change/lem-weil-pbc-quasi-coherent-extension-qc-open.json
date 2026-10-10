@@ -14,9 +14,78 @@
   "pqf-def-coherent",
   "def-weil-sheaf-of-modules-category"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "*Step 1 ($j$ is quasi-compact and quasi-separated).* $j$ is quasi-compact by hypothesis, i.e. in the sense of [def-weil-finite-type-morphism] ($j^{-1}(W)=U\\cap W$ is quasi-compact for every affine open $W\\subseteq X$). $j$ is the inclusion of an open subscheme, hence an open immersion [def-weil-open-immersion], hence a monomorphism of schemes [lem-weil-pbc-open-immersion-monomorphism] (the source quotes Schemes 01L7: an immersion is a monomorphism, in particular separated). So its diagonal $\\Delta_j:U\\to U\\times_XU$ [def-pc-fibre-product] is an isomorphism: the two projections $p_1,p_2:U\\times_XU\\to U$ satisfy $j\\circ p_1=j\\circ p_2$, hence $p_1=p_2$; then $\\Delta_j\\circ p_1$ has components $(p_1,p_1)=(p_1,p_2)$, so $\\Delta_j\\circ p_1=\\mathrm{id}$, and $p_1\\circ\\Delta_j=\\mathrm{id}_U$. An isomorphism is a homeomorphism, so the preimage under $\\Delta_j$ of every quasi-compact open is quasi-compact: $\\Delta_j$ is quasi-compact and $j$ is quasi-separated [def-weil-quasi-separated-morphism].",
+   "uses": [
+    "def-weil-finite-type-morphism",
+    "def-weil-open-immersion",
+    "lem-weil-pbc-open-immersion-monomorphism",
+    "def-pc-fibre-product",
+    "def-weil-quasi-separated-morphism"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/properties.tex",
+    "place": "Properties, Lemma 01PE (lemma-extend-trivial), proof, lines 2806-2843 (first paragraph for $j$ separated and quasi-compact and $j_*$ quasi-coherent; part (2) for $\\mathcal H=\\Ker(\\mathcal F\\oplus j_*\\mathcal G\\to j_*j^*\\mathcal F)$; part (3) 'with its obvious map to $\\mathcal F$ and its obvious identification with $\\mathcal G$ over $U$'), first paragraph of the proof (Schemes 01L7)"
+   }
+  },
+  {
+   "text": "*Step 2 (the modules $j_*\\mathcal G$ and $j_*(\\mathcal F|_U)$ and the map $d$).* For an $\\mathcal O_U$-module $\\mathcal M$ let $j_*\\mathcal M$ be the direct image [def-pc-module-pullback]: $(j_*\\mathcal M)(W)=\\mathcal M(W\\cap U)$ for $W\\subseteq X$ open, with the restriction maps of $\\mathcal M$ and $\\mathcal O_X(W)$ acting through the restriction $\\mathcal O_X(W)\\to\\mathcal O_X(W\\cap U)=\\mathcal O_U(W\\cap U)$; for a morphism $\\beta$ of $\\mathcal O_U$-modules, $(j_*\\beta)_W=\\beta_{W\\cap U}$. The restriction $\\mathcal F|_U$ is a quasi-coherent $\\mathcal O_U$-module [lem-weil-pbc-module-restriction-open-immersion-colimits] (2), and $\\mathcal G$ is quasi-coherent by hypothesis; by Step 1 and [pqf-lem-pushforward-qcoh] (Schemes 01LC) $j_*\\mathcal G$ and $j_*(\\mathcal F|_U)$ are quasi-coherent $\\mathcal O_X$-modules. Let $a:\\mathcal F\\to j_*(\\mathcal F|_U)$, $a_W(f)=f|_{W\\cap U}$; it is $\\mathcal O_X$-linear because the restriction maps of $\\mathcal F$ are semilinear [def-weil-sheaf-of-modules-category], and compatible with restrictions. Let $b=j_*\\varphi:j_*\\mathcal G\\to j_*(\\mathcal F|_U)$, $b_W(g)=\\varphi_{W\\cap U}(g)$. On the direct sum $\\mathcal F\\oplus j_*\\mathcal G$ ($W\\mapsto\\mathcal F(W)\\oplus\\mathcal G(W\\cap U)$), which is quasi-coherent by [lem-weil-pbc-quasi-coherent-module-direct-sum], define the $\\mathcal O_X$-linear map $d:\\mathcal F\\oplus j_*\\mathcal G\\to j_*(\\mathcal F|_U)$, $d_W(f,g)=a_W(f)-b_W(g)=f|_{W\\cap U}-\\varphi_{W\\cap U}(g)$ (this fixes the sign convention of the source's map $\\mathcal F\\oplus j_*\\mathcal G\\to j_*j^*\\mathcal F$; here $j^*\\mathcal F=\\mathcal F|_U$).",
+   "uses": [
+    "def-pc-module-pullback",
+    "lem-weil-pbc-module-restriction-open-immersion-colimits",
+    "pqf-lem-pushforward-qcoh",
+    "def-weil-sheaf-of-modules-category",
+    "lem-weil-pbc-quasi-coherent-module-direct-sum"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/properties.tex",
+    "place": "Properties, Lemma 01PE (lemma-extend-trivial), proof, lines 2806-2843 (first paragraph for $j$ separated and quasi-compact and $j_*$ quasi-coherent; part (2) for $\\mathcal H=\\Ker(\\mathcal F\\oplus j_*\\mathcal G\\to j_*j^*\\mathcal F)$; part (3) 'with its obvious map to $\\mathcal F$ and its obvious identification with $\\mathcal G$ over $U$'), first and second paragraphs (Schemes 01LC, Schemes Section 01LA)"
+   }
+  },
+  {
+   "text": "*Step 3 ($\\mathcal H$ and $\\psi$).* Let $\\mathcal H=\\ker d$, the sub-$\\mathcal O_X$-module of $\\mathcal F\\oplus j_*\\mathcal G$ with $\\mathcal H(W)=\\{(f,g)\\in\\mathcal F(W)\\oplus\\mathcal G(W\\cap U):f|_{W\\cap U}=\\varphi_{W\\cap U}(g)\\}$ (kernels in $\\Mod(\\mathcal O_X)$ are sectionwise). Its source and target being quasi-coherent (Step 2), $\\mathcal H$ is quasi-coherent by [lem-weil-pbc-quasi-coherent-module-kernel]. Let $\\psi:\\mathcal H\\to\\mathcal F$ be the first projection, $\\psi_W(f,g)=f$; it is $\\mathcal O_X$-linear and compatible with restrictions, being the composite of the inclusion $\\mathcal H\\subseteq\\mathcal F\\oplus j_*\\mathcal G$ with the projection to $\\mathcal F$.",
+   "uses": [
+    "lem-weil-pbc-quasi-coherent-module-kernel"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/properties.tex",
+    "place": "Properties, Lemma 01PE (lemma-extend-trivial), proof, lines 2806-2843 (first paragraph for $j$ separated and quasi-compact and $j_*$ quasi-coherent; part (2) for $\\mathcal H=\\Ker(\\mathcal F\\oplus j_*\\mathcal G\\to j_*j^*\\mathcal F)$; part (3) 'with its obvious map to $\\mathcal F$ and its obvious identification with $\\mathcal G$ over $U$'), second paragraph ($\\mathcal H$ is quasi-coherent, Schemes Section 01LA) and part (3) ('its obvious map to $\\mathcal F$')"
+   }
+  },
+  {
+   "text": "*Step 4 ($\\alpha$ and $\\varphi\\circ\\alpha=\\psi|_U$).* By definition of restriction [lem-weil-pbc-module-restriction-open-immersion-colimits], for an open $W\\subseteq U$ we have $(\\mathcal H|_U)(W)=\\mathcal H(W)$, and $W\\cap U=W$, so $(\\mathcal H|_U)(W)=\\{(f,g)\\in\\mathcal F(W)\\oplus\\mathcal G(W):f=\\varphi_W(g)\\}$. Define $\\alpha_W:(\\mathcal H|_U)(W)\\to\\mathcal G(W)$, $\\alpha_W(f,g)=g$. It is $\\mathcal O_U(W)$-linear and commutes with the restriction maps (both are componentwise), so $\\alpha:\\mathcal H|_U\\to\\mathcal G$ is a morphism of $\\mathcal O_U$-modules; and $g\\mapsto(\\varphi_W(g),g)$ is an inverse of $\\alpha_W$ for every $W$ (it lands in $(\\mathcal H|_U)(W)$, and $(f,g)\\mapsto g\\mapsto(\\varphi_W(g),g)=(f,g)$), compatible with restrictions since $\\varphi$ is, so $\\alpha$ is an isomorphism of $\\mathcal O_U$-modules. Finally, for $W\\subseteq U$ and $(f,g)\\in(\\mathcal H|_U)(W)$: $(\\varphi\\circ\\alpha)_W(f,g)=\\varphi_W(g)=f=\\psi_W(f,g)=(\\psi|_U)_W(f,g)$. Hence $\\varphi\\circ\\alpha=\\psi|_U$, and $(\\mathcal H,\\psi,\\alpha)$ has all the required properties.",
+   "uses": [
+    "lem-weil-pbc-module-restriction-open-immersion-colimits"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/properties.tex",
+    "place": "Properties, Lemma 01PE (lemma-extend-trivial), proof, lines 2806-2843 (first paragraph for $j$ separated and quasi-compact and $j_*$ quasi-coherent; part (2) for $\\mathcal H=\\Ker(\\mathcal F\\oplus j_*\\mathcal G\\to j_*j^*\\mathcal F)$; part (3) 'with its obvious map to $\\mathcal F$ and its obvious identification with $\\mathcal G$ over $U$'), part (3) ('its obvious identification with $\\mathcal G$ over $U$'; Sheaves, Section 'open immersions')"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-finite-type-morphism",
+  "def-weil-open-immersion",
+  "lem-weil-pbc-open-immersion-monomorphism",
+  "def-pc-fibre-product",
+  "def-weil-quasi-separated-morphism",
+  "def-pc-module-pullback",
+  "lem-weil-pbc-module-restriction-open-immersion-colimits",
+  "pqf-lem-pushforward-qcoh",
+  "def-weil-sheaf-of-modules-category",
+  "lem-weil-pbc-quasi-coherent-module-direct-sum",
+  "lem-weil-pbc-quasi-coherent-module-kernel"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/properties.tex",
+  "place": "Properties, Lemma 01PE (lemma-extend-trivial), part (3) and its proof, lines 2787-2843"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -38,10 +107,38 @@
    "results": "only TopCat.Sheaf.extend_hom_app (Modules/Tilde.lean:304, extension of sheaves from a basis); SheafOfModules.isQuasicoherent_pushforward (Algebra/Category/ModuleCat/Sheaf/Quasicoherent.lean:329-337) is for pushforward along a continuous functor of sites with a left-adjoint-type hypothesis, not for j_* of a quasi-compact open immersion of schemes; no quasi-coherence of j_*, no extension lemma",
    "date": "2026-10-10",
    "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "SheafOfModules.IsQuasicoherent",
+   "results": "19 hits (Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent, .LocallyFree, Mathlib.AlgebraicGeometry.Modules.Tilde): quasi-coherence of tilde, of locally free and finitely presented modules, of restrictions along open immersions (isQuasicoherent_restrictFunctor, Tilde.lean:576), of pushforwards along continuous functors of sites with a left-adjoint hypothesis (isQuasicoherent_pushforward(_of_isLeftAdjoint), Quasicoherent.lean:329,340); no extension across an open, no quasi-coherence of j_* for a quasi-compact open immersion",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "pushforward of a quasi-coherent sheaf along a quasi-compact quasi-separated morphism of schemes is quasi-coherent",
+   "results": "TopCat.Sheaf.pushforward_sheaf_of_sheaf, AlgebraicGeometry.Scheme.Modules.pushforward (Modules/Sheaf.lean:166), TopCat.Sheaf.pushforward, SheafOfModules.pushforward, PresheafOfModules.pushforward₀, SheafOfModules.pushforwardSections: the functors only, no quasi-coherence statement (Schemes 01LC absent)",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "sed -n 560,590p ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicGeometry/Modules/Tilde.lean; grep -rn 'pushforward' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicGeometry/Modules/",
+   "results": "Tilde.lean:566-571 TODO 'use this to show that quasicoherent sheaves pushforward to quasicoherent sheaves for affine morphisms' with only isIso_fromTildeΓ_pushforward for Spec.map φ; Modules/Sheaf.lean:166-210 the pushforward functor, its adjunction and additivity; nothing for quasi-compact open immersions or qcqs morphisms",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "local_search",
+   "query": "isQuasicoherent_pushforward (project ~/weil-conjectures-slopmaster2; index: unavailable)",
+   "results": "Mathlib: isQuasicoherent_pushforward, isQuasicoherent_pushforward_of_isLeftAdjoint (Sheaf/Quasicoherent.lean); source repository: Scheme.Modules.isQuasicoherent_pushforward_of_isAffineHom (Cohomology/DirectImage.lean), isQuasicoherent_pushforward_of_isClosedImmersion (Modules/ClosedImmersion.lean): affine and closed-immersion cases only, not a quasi-compact open immersion",
+   "date": "2026-10-10",
+   "verdict": "no match"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "worker",
@@ -61,5 +158,15 @@
   }
  },
  "chapter": "sec-proper-base-change",
- "unit": "sk-thm-p1"
+ "unit": "sk-thm-p1",
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "lem-weil-pbc-quasi-coherent-extension-qc-open",
+  "worker": "stage1",
+  "summary": "Proof written from Properties 01PE (3) and its proof (properties.tex 2787-2843) in four steps: (1) j is quasi-compact by hypothesis and quasi-separated because an open immersion is a monomorphism (Schemes 01L7, node lem-weil-pbc-open-immersion-monomorphism), so its diagonal is an isomorphism; (2) j_*G and j_*(F|_U) are quasi-coherent by 01LC (existing node pqf-lem-pushforward-qcoh, already used as a tool in this unit by lem-weil-pbc-affine-pushforward-base-change), F|_U by lem-weil-pbc-module-restriction-open-immersion-colimits (2), F (+) j_*G by the new node lem-weil-pbc-quasi-coherent-module-direct-sum (Schemes 01ID / 01LA (3)); the map d(f,g)=f|_{W cap U}-phi(g) fixes the source's sign convention; (3) H=Ker d is quasi-coherent by lem-weil-pbc-quasi-coherent-module-kernel, psi the first projection; (4) over W in U, H(W)={(f,g): f=phi_W(g)}, alpha=(f,g)->g with inverse g->(phi_W(g),g), and phi alpha = psi|_U, computed sectionwise. Statement unchanged. One new unsplit node (direct sum); Mathlib has neither the item, 01LC, nor closure of quasi-coherence under direct sums (searches recorded)."
+ },
+ "reviewed": "Reviewed by L 2026-10-10: faithful to Properties 01PE (3): H = Ker(F ⊕ j_*G → j_*(F|_U)) with the sign fixed, quasi-coherence from 01LC (pqf-lem-pushforward-qcoh, used as a tool as in affine-pushforward-base-change), the kernel node and a new unsplit direct-sum node; the identification over U written out. No Mathlib match.",
+ "tool_uses": [
+  "pqf-lem-pushforward-qcoh"
+ ]
 }
