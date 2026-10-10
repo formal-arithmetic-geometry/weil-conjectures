@@ -2,7 +2,7 @@
 
 909 items; claim with `tools/claim.py next <group> [--stage N]`.
 
-## Stage 1: nodes to split (631)
+## Stage 1: nodes to split (630)
 
 | node | distance to a target | Lean state on the done branch |
 |---|---|---|
@@ -26,7 +26,6 @@
 | `lem-weil-pbc-smooth-fibre-regular-local` | 1012 | none |
 | `lem-weil-pbc-smooth-localization-conormal-split` | 1012 | none |
 | `lem-weil-pbc-smooth-over-field-dimension-differentials` | 1012 | none |
-| `def-weil-pbc-relative-global-complete-intersection` | 1013 | none |
 | `lem-weil-pbc-artinian-local-essentially-finite-type-residue` | 1013 | none |
 | `lem-weil-pbc-cartier-equality` | 1013 | none |
 | `lem-weil-pbc-cauchy-binet` | 1013 | none |
@@ -638,7 +637,7 @@
 | `lem-pc-linear-pair-graded-finite` | - | none |
 | `def-exc-jacobian-presentation` | - | none |
 
-## Stage 2: nodes to state (278)
+## Stage 2: nodes to state (279)
 
 | node | distance to Mathlib | kind |
 |---|---|---|
@@ -657,6 +656,7 @@
 | `def-weil-pbc-g-ring` | 1 | state |
 | `def-weil-pbc-generating-sections` | 1 | state |
 | `def-weil-pbc-japanese-domain` | 1 | state |
+| `def-weil-pbc-relative-global-complete-intersection` | 1 | state |
 | `def-weil-pbc-ring-map-quasi-finite-at-prime` | 1 | state |
 | `def-weil-pbc-separable-field-extension` | 1 | state |
 | `def-weil-pbc-singular-ideal` | 1 | state |
@@ -921,7 +921,7 @@
 | `lem-weil-pbc-p1-field-dimension-one` | 4 | state |
 | `lem-weil-pbc-projective-space-zero-isomorphism` | 4 | state |
 
-Not open yet: 643 nodes that wait for stage 1, 555 nodes that wait for a statement dependency.
+Not open yet: 642 nodes that wait for stage 1, 555 nodes that wait for a statement dependency.
 
 ## Stage 3: modules to prove (0)
 
