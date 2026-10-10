@@ -1,0 +1,66 @@
+{
+ "id": "lem-pc-affine-localization-injective",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pc-degree-base-change",
+   "place": "proof, part (2): the affine calculation that identifies A with a subring of A_a",
+   "via": [
+    "lem-pc-affine-nonzerodivisor-complement-dense",
+    "lem-pc-cartier-divisor-nowhere-dense",
+    "lem-pc-cartier-divisor-finite-over-field"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Localization at a nonzerodivisor is injective",
+ "statement": "Let $A$ be a commutative ring [def-pc-scheme] and let $a\\in A$ be a non-zero-divisor. The canonical ring map $A\\to A_a$ to the localization away from $a$ is injective.",
+ "source": {
+  "document": "literature/stacks-project/divisors.tex",
+  "place": "Tag 07ZU, affine-local calculation: A is identified with a subring of A_a when a is a non-zero-divisor"
+ },
+ "stmt_deps": [
+  "def-pc-scheme"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "canonical map from a commutative ring to localization away from a non-zero-divisor is injective",
+   "results": "IsLocalization.injective and IsLocalization.injectiveₛ in Mathlib.RingTheory.Localization.Defs",
+   "date": "2026-10-10",
+   "verdict": "match"
+  },
+  {
+   "tool": "loogle",
+   "query": "Injective (algebraMap R S) localization nonZeroDivisors",
+   "results": "IsLocalization.injective (Mathlib.RingTheory.Localization.Defs.lean:941); IsLocalization.injectiveₛ (same file:872)",
+   "date": "2026-10-10",
+   "verdict": "match: specialize M to Submonoid.powers a, with Submonoid.powers_le.mpr ha (Membership.lean:337) for powers a ≤ nonZeroDivisors A"
+  },
+  {
+   "tool": "grep",
+   "query": "rg -n 'theorem injective|injectiveₛ|powers_le_nonZeroDivisors_of_noZeroDivisors' /home/ubuntu/weil-src-slopmaster2/.lake/packages/mathlib/Mathlib/RingTheory/Localization/Defs.lean /home/ubuntu/weil-src-slopmaster2/.lake/packages/mathlib/Mathlib/RingTheory/Localization/Away/Basic.lean",
+   "results": "IsLocalization.injective at Defs.lean:941 and powers specialization in Localization/Away/Basic.lean:336",
+   "date": "2026-10-10",
+   "verdict": "match"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "IsLocalization.injective",
+  "file": "Mathlib/RingTheory/Localization/Defs.lean",
+  "line": 941,
+  "how": "specializes in one line: take M = Submonoid.powers a (S = Localization.Away a) and hM := Submonoid.powers_le.mpr ha (Mathlib/Algebra/Group/Submonoid/Membership.lean:337), ha : a ∈ nonZeroDivisors A"
+ },
+ "status": "mathlib",
+ "created": {
+  "item": "lem-pc-affine-nonzerodivisor-complement-dense",
+  "by": "worker",
+  "date": "2026-10-10"
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-rr"
+}

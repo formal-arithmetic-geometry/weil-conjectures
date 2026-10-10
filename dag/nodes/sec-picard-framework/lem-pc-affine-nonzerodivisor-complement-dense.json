@@ -22,9 +22,41 @@
  "stmt_deps": [
   "def-pc-scheme"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Write $X=\\operatorname{Spec}(A)$ and $U=D(a)=\\operatorname{Spec}(A_a)$. The restriction of the structure sheaf map $\\mathcal O_X\\to j_*\\mathcal O_U$ on the affine basis of principal opens is the canonical localization map $A_g\\to (A_g)_a$; the image of $a$ remains a non-zero-divisor after localizing at $g$ by [lem-pc-localization-preserves-nonzerodivisor], so [lem-pc-affine-localization-injective] applied to $A_g$ makes each such map injective. Hence the sheaf morphism is injective.",
+   "uses": [
+    "lem-pc-localization-preserves-nonzerodivisor",
+    "lem-pc-affine-localization-injective"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/divisors.tex",
+    "place": "Tag 07ZU, affine-local calculation: restriction to D(a) is localization and A embeds in A_a"
+   }
+  },
+  {
+   "text": "The underlying open $U=D(a)$ is topologically dense in $X=\\operatorname{Spec}(A)$ by [lem-pc-principal-open-dense-of-nonzerodivisor].",
+   "uses": [
+    "lem-pc-principal-open-dense-of-nonzerodivisor"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/divisors.tex",
+    "place": "Tag 07ZU, affine-local calculation: a non-zero-divisor principal complement is dense"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-localization-preserves-nonzerodivisor",
+  "lem-pc-affine-localization-injective",
+  "lem-pc-principal-open-dense-of-nonzerodivisor"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/divisors.tex",
+  "place": "Tag 07ZU (Divisors, Lemma effective Cartier complement is affine and scheme-theoretically dense), affine-local calculation"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -49,12 +81,28 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-pc-cartier-divisor-nowhere-dense",
   "by": "worker",
   "date": "2026-10-10"
  },
  "chapter": "sec-picard-framework",
- "unit": "sk-thm-picard-rr"
+ "unit": "sk-thm-picard-rr",
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "lem-pc-affine-nonzerodivisor-complement-dense",
+  "worker": "stage1",
+  "summary": "No sorry-free declaration in slopmaster2 states this item. I split the affine Tag 07ZU calculation into injectivity of localization at a nonzerodivisor and density of the corresponding principal open, then proved the sheaf injection on the principal-open affine basis.",
+  "blueprint": "The steps realize lem-pc-degree-base-change, proof part (2), the affine calculation behind the assertion that the complement of an effective Cartier divisor is scheme-theoretically dense.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-ncd2",
+  "group": "C1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-ncd2 (reviewer sub-agent of L); spot-checked: Source: Stacks Tag 07ZU (divisors.tex, lemma-complement-effective-Cartier-divisor), affine proof: S=Spec A, D=V(f), f nonzerodivisor, A subset A_f gives scheme-theoretic density; the item's statement (unchanged import: O_X -> j_*O_U injective and D(a) dense for a nonzerodivisor a) agrees with that calculation, hypotheses: commutative ring, a nonzerodivisor. Step 1: on the basis D(g) the map is A_g -> A_{ga}=(A_g)_a; lem-pc-localization-preserves-nonzerodivisor states the image of a in A_g is a nonzerodivisor, lem-pc-affine-localization-injective (new leaf) gives injectivity of A_g -> (A_g)_a; injectivity on a basis gives injectivity of the sheaf map (elementary). Step 2: lem-pc-principal-open-dense-of-nonzerodivisor (new unsplit node, true: minimal primes consist of zero divisors, so contain no nonzerodivisor, so every minimal prime lies in D(a)); no DAG or blueprint duplicate (blueprint_refs search 'principal open dense': 0). Mathlib leaf verified: IsLocalization.injective at Mathlib/RingTheory/Localization/Defs.lean:941 (hM : M <= nonZeroDivisors R), one-line specialization with M = powers a. Small cases: k[t], a=t (k[t] -> k[t,1/t] injective, D(t) dense); a=1 trivial; A=k[x,y]/(xy), a=x zero divisor excluded (D(x) not dense). FIX: dag/nodes/sec-picard-framework/lem-pc-affine-localization-injective.json: mathlib_match.how and mathlib_searches[1].verdict: named powers_le_nonZeroDivisors_of_noZeroDivisors, which needs NoZeroDivisors A and does not apply to a general ring; replaced by Submonoid.powers_le.mpr ha (Mathlib/Algebra/Group/Submonoid/Membership.lean:337). Start Sat Oct 10 03:46:58 PM UTC 2026, end Sat Oct 10 03:47:46 PM UTC 2026.; 1 file(s) fixed by the reviewer"
+ }
 }

@@ -1857,3 +1857,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 15:46 L: merged deliver/F1/lem-weil-pbc-ext-one-direct-sum (reviewer FIX; after a return; new nodes: 0)
 - 15:46 L: merged deliver/E1/lem-pc-grothendieck-edge-cocycle (reviewer FIX; after a return; new nodes: 1)
 - 15:46 L: returned deliver/H1/lem-sc-fibre-dimension-after-base-change (reviewer RETURN: 1. D (return point 3 not repaired): new node lem-sc-local-dimension-invariant-residue-field-extension: the commit still )
+- 15:47 L: merged deliver/C1/lem-pc-affine-nonzerodivisor-complement-dense (reviewer FIX; first push; new nodes: 2)
