@@ -190,39 +190,80 @@ lemma surjective_prodEtaleSpecFst (U : (Spec (.of K)).Etale) :
 
 variable {L}
 
-/-- The action of a `K`-automorphism `σ` of `L` on `U ×_K Spec L`. -/
-noncomputable def prodEtaleSpecMap (U : (Spec (.of K)).Etale) (σ : L ≃ₐ[K] L) :
-    prodEtaleSpec L U ⟶ prodEtaleSpec L U :=
-  MorphismProperty.Over.homMk (pullback.map _ _ _ _ (𝟙 _) (etaleSpecMap σ.toAlgHom).left (𝟙 _)
-    (by simp) (MorphismProperty.Over.w (etaleSpecMap σ.toAlgHom)).symm) (by
-      change pullback.map _ _ _ _ _ _ _ _ _ ≫ pullback.snd _ _ ≫ (etaleSpec K L).hom =
-        pullback.snd _ _ ≫ (etaleSpec K L).hom
-      rw [pullback.lift_snd_assoc, Category.assoc,
-        MorphismProperty.Over.w (etaleSpecMap σ.toAlgHom)])
+section Maps
+
+variable {A B : Type u} [Field A] [Field B] [Algebra K A] [Algebra K B] [Algebra.Etale K A]
+  [Algebra.Etale K B]
+
+/-- The morphism `U ×_K Spec B ⟶ U ×_K Spec A` induced by a `K`-algebra map `A →ₐ[K] B`. -/
+noncomputable def prodEtaleSpecMap (U : (Spec (.of K)).Etale) (φ : A →ₐ[K] B) :
+    prodEtaleSpec B U ⟶ prodEtaleSpec A U :=
+  MorphismProperty.Over.homMk (pullback.map _ _ _ _ (𝟙 _) (etaleSpecMap φ).left (𝟙 _)
+    (by simp) (MorphismProperty.Over.w (etaleSpecMap φ)).symm) (by
+      change pullback.map _ _ _ _ _ _ _ _ _ ≫ pullback.snd _ _ ≫ (etaleSpec K A).hom =
+        pullback.snd _ _ ≫ (etaleSpec K B).hom
+      rw [pullback.lift_snd_assoc, Category.assoc, MorphismProperty.Over.w (etaleSpecMap φ)])
 
 @[reassoc (attr := simp)]
-lemma prodEtaleSpecMap_fst (U : (Spec (.of K)).Etale) (σ : L ≃ₐ[K] L) :
-    prodEtaleSpecMap U σ ≫ prodEtaleSpecFst L U = prodEtaleSpecFst L U := by
+lemma prodEtaleSpecMap_fst (U : (Spec (.of K)).Etale) (φ : A →ₐ[K] B) :
+    prodEtaleSpecMap U φ ≫ prodEtaleSpecFst A U = prodEtaleSpecFst B U := by
   apply MorphismProperty.Over.Hom.ext
   exact (pullback.lift_fst _ _ _).trans (Category.comp_id _)
 
 @[reassoc (attr := simp)]
-lemma prodEtaleSpecMap_snd (U : (Spec (.of K)).Etale) (σ : L ≃ₐ[K] L) :
-    prodEtaleSpecMap U σ ≫ prodEtaleSpecSnd L U =
-      prodEtaleSpecSnd L U ≫ etaleSpecMap σ.toAlgHom := by
+lemma prodEtaleSpecMap_snd (U : (Spec (.of K)).Etale) (φ : A →ₐ[K] B) :
+    prodEtaleSpecMap U φ ≫ prodEtaleSpecSnd A U = prodEtaleSpecSnd B U ≫ etaleSpecMap φ := by
   apply MorphismProperty.Over.Hom.ext
   exact pullback.lift_snd _ _ _
+
+lemma prodEtaleSpecMap_comp {C : Type u} [Field C] [Algebra K C] [Algebra.Etale K C]
+    (U : (Spec (.of K)).Etale) (φ : A →ₐ[K] B) (ψ : B →ₐ[K] C) :
+    prodEtaleSpecMap U ψ ≫ prodEtaleSpecMap U φ = prodEtaleSpecMap U (ψ.comp φ) := by
+  refine prodEtaleSpec_hom_ext ?_ ?_
+  · simp
+  · simp only [Category.assoc, prodEtaleSpecMap_snd, prodEtaleSpecMap_snd_assoc,
+      etaleSpecMap_comp]
+
+/-- The base change `V ×_K Spec A ⟶ U ×_K Spec A` of a morphism `f : V ⟶ U`. -/
+noncomputable abbrev prodEtaleSpecMapLeft (A : Type u) [Field A] [Algebra K A]
+    [Algebra.Etale K A] {U V : (Spec (.of K)).Etale} (f : V ⟶ U) :
+    prodEtaleSpec A V ⟶ prodEtaleSpec A U :=
+  (MorphismProperty.Over.map ⊤ (etaleSpec K A).prop).map
+    ((MorphismProperty.Over.pullback @AlgebraicGeometry.Etale ⊤ (etaleSpec K A).hom).map f)
+
+@[reassoc (attr := simp)]
+lemma prodEtaleSpecMapLeft_fst {U V : (Spec (.of K)).Etale} (f : V ⟶ U) :
+    prodEtaleSpecMapLeft A f ≫ prodEtaleSpecFst A U = prodEtaleSpecFst A V ≫ f := by
+  apply MorphismProperty.Over.Hom.ext
+  exact pullback.lift_fst _ _ _
+
+@[reassoc (attr := simp)]
+lemma prodEtaleSpecMapLeft_snd {U V : (Spec (.of K)).Etale} (f : V ⟶ U) :
+    prodEtaleSpecMapLeft A f ≫ prodEtaleSpecSnd A U = prodEtaleSpecSnd A V := by
+  apply MorphismProperty.Over.Hom.ext
+  exact pullback.lift_snd _ _ _
+
+@[reassoc]
+lemma prodEtaleSpecMapLeft_prodEtaleSpecMap {U V : (Spec (.of K)).Etale} (f : V ⟶ U)
+    (φ : A →ₐ[K] B) :
+    prodEtaleSpecMapLeft B f ≫ prodEtaleSpecMap U φ =
+      prodEtaleSpecMap V φ ≫ prodEtaleSpecMapLeft A f := by
+  refine prodEtaleSpec_hom_ext ?_ ?_ <;> simp
+
+end Maps
+
 
 /-- **Galois descent along `U ×_K Spec L ⟶ U`.** For a finite Galois extension `L/K`, a section
 of an abelian étale sheaf over `U ×_K Spec L` which is invariant under the automorphisms of
 `L/K` is the pullback of a unique section over `U`. -/
-theorem existsUnique_map_prodEtaleSpecFst_eq [Normal K L]
+theorem existsUnique_map_prodEtaleSpecFst_eq {L : Type u} [Field L] [Algebra K L]
+    [Algebra.Etale K L] [Normal K L]
     (F : Sheaf (Spec (.of K)).smallEtaleTopology AddCommGrpCat.{u + 1})
     (U : (Spec (.of K)).Etale) (x : F.obj.obj (op (prodEtaleSpec L U)))
-    (hx : ∀ σ, F.obj.map (prodEtaleSpecMap U σ).op x = x) :
+    (hx : ∀ σ : L ≃ₐ[K] L, F.obj.map (prodEtaleSpecMap U σ.toAlgHom).op x = x) :
     ∃! y, F.obj.map (prodEtaleSpecFst L U).op y = x := by
   refine existsUnique_map_eq_of_forall_map_eq F _ (surjective_prodEtaleSpecFst L U)
-    (prodEtaleSpecMap U) (fun E _ _ _ g₁ g₂ hg ↦ ?_) x hx
+    (fun σ : L ≃ₐ[K] L ↦ prodEtaleSpecMap U σ.toAlgHom) (fun E _ _ _ g₁ g₂ hg ↦ ?_) x hx
   obtain ⟨φ₁, hφ₁⟩ := exists_etaleSpecMap_eq (g₁ ≫ prodEtaleSpecSnd L U)
   obtain ⟨φ₂, hφ₂⟩ := exists_etaleSpecMap_eq (g₂ ≫ prodEtaleSpecSnd L U)
   obtain ⟨σ, hσ⟩ := φ₁.exists_comp_eq_of_normal φ₂
