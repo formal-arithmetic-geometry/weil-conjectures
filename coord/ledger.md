@@ -2646,3 +2646,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 21:17 L: merged deliver/H1/thm-pqf-zmt-factorization (reviewer FIX; first push; new nodes: 1)
 - 21:17 L: merged deliver/K1/def-pod-lisse-l-adic-sheaves (reviewer FIX; first push; new nodes: 0)
 - 21:18 L: merged deliver/F1/lem-pc-derived-lower-truncation-step-ses (reviewer FIX; first push; new nodes: 0)
+- 21:19 L: merged deliver/J1/lem-weil-pbc-finite-pushforward-generic-constructible (reviewer FIX; first push; new nodes: 1)

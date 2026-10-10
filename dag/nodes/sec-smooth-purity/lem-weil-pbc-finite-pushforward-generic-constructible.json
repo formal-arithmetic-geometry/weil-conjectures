@@ -3,11 +3,11 @@
  "blueprint": {
   "is": "lem-weil-pbc-finite-pushforward-generic-constructible",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "Generic finite pushforward is constructible",
- "statement": "Let $S$ be an integral Noetherian affine scheme, let $g:Z\\to S$ be finite, and\nlet $E$ be a constructible abelian etale sheaf on $Z$. There is a dense open\n$S^\\circ\\subset S$ on which the direct image $g_*E$ is lisse.",
+ "statement": "Let $S$ be an integral Noetherian affine scheme, let $g:Z\\to S$ be finite, and let $E$ be a constructible abelian etale sheaf on $Z$. There is a dense open $S^\\circ\\subset S$ on which the direct image $g_*E$ is lisse.",
  "source": {
   "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/lem-weil-pbc-finite-pushforward-generic-constructible.md",
   "place": "node lem-weil-pbc-finite-pushforward-generic-constructible, order 1578"
@@ -19,76 +19,118 @@
  ],
  "proof": [
   {
-   "text": "Write $S=\\operatorname{Spec}A$, with $A$ a Noetherian domain and fraction\nfield $K$. A finite algebra is integral ([pqf-lem-finite-integral-lft]). Lying over, applied also after every\nbase change, shows that a finite map is closed: the image of $V(I)$ is the\nclosed set defined by the contraction of $I$. We use this elementary\nfinite-algebra fact to shrink the base below.",
+   "text": "Write S=Spec A with A a Noetherian domain and fraction field K. Since a finite algebra is integral by [pqf-lem-finite-integral-lft], lying over shows that finite morphisms are closed; this permits all subsequent shrinkings of S.",
    "uses": [
     "pqf-lem-finite-integral-lft"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/lem-weil-pbc-finite-pushforward-generic-constructible.md",
+    "place": "## Proof, first paragraph"
+   }
   },
   {
-   "text": "The nilpotent closed immersion $Z_{\\mathrm{red}}\\to Z$ is a universal\nhomeomorphism, so invariance of the etale site under universal homeomorphisms\npermits us to replace $Z$ by $Z_{\\mathrm{red}}$, pulling back $E$. By\n[lem-weil-pbc-noetherian-finite-components], $Z$ has finitely many irreducible\ncomponents $C_i$. The points of its generic fibre are exactly the generic\npoints of the components dominating $S$: in a finite algebra over a domain,\nprimes over $(0)$ become primes of an Artinian $K$-algebra, hence are minimal.\nIf there are none, $g(Z)$ is a proper closed subset and $g_*E$ is zero on its\nopen complement.",
+   "text": "Replace Z by its reduction. The nilpotent immersion is a universal homeomorphism, so [thm-weil-pbc-universal-homeomorphism-invariance] identifies the etale sites and transports E. By [lem-weil-pbc-noetherian-finite-components], Z has finitely many irreducible components. The generic points of the finite fibre over (0) are precisely the generic points of components dominating S. If there are none, the closed image g(Z) misses the generic point and g_*E is zero on a dense open.",
    "uses": [
+    "thm-weil-pbc-universal-homeomorphism-invariance",
     "lem-weil-pbc-noetherian-finite-components"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/lem-weil-pbc-finite-pushforward-generic-constructible.md",
+    "place": "## Proof, second paragraph"
+   }
   },
   {
-   "text": "For each dominating $C_i$, the finite lisse partition of $E$ has a locally\nclosed stratum containing its generic point. That stratum contains an open\nneighbourhood of the generic point inside $C_i$. Shrink this neighbourhood\nfurther to avoid every other component. It is then open in the reduced scheme\n$Z$, and $E$ is lisse there. The union $W$ of these finitely many\nneighbourhoods contains the whole generic fibre. The closed subset $g(Z\\setminus\nW)$ misses the generic point of $S$. Choose a nonempty principal open in its\ncomplement and replace $S$ by it. Now $E$ is lisse on all of $Z$.",
-   "uses": [],
-   "elementary": null
-  },
-  {
-   "text": "Here is the finite-algebra calculation needed for the remaining step. Put\n$B=\\Gamma(Z,\\mathcal O_Z)$. The reduced finite $K$-algebra $B\\otimes_AK$ is a\nfinite product of finite extensions $L_i/K$. In each $L_i$, the elements\nseparable over $K$ form its maximal separable subextension, over which $L_i$\nis purely inseparable. Choose a finite Galois extension $K'/K$ containing\nevery conjugate of these finitely many separable subextensions. Consequently\n\n$$\n \\bigl(B\\otimes_AK'\\bigr)_{\\mathrm{red}}\n       =\\prod_j L'_j\n$$\n\nwith each $L'_j/K'$ purely inseparable. Indeed, tensoring each separable\nsubextension with $K'$ splits it into a product of copies of $K'$; the\nremaining purely inseparable extension has, after any field base change and\nreduction, a single purely inseparable residue field.",
-   "uses": [],
-   "elementary": null
-  },
-  {
-   "text": "A primitive element for $K'/K$ has a monic separable minimal polynomial $P\\in\nK[t]$. Invert its finitely many coefficient denominators and its nonzero\ndiscriminant in $A$. Then\n\n$$\n A'=A[t]/(P)\\subset K',\\qquad \\operatorname{Frac}(A')=K'\n$$\n\nis a finite free etale domain over $A$, of positive rank. The basis\n$1,t,\\ldots,t^{\\deg P-1}$ proves injectivity into $K'$; invertibility of $P'$\nin the quotient proves the etale condition. Positive rank and lying over make\n$\\operatorname{Spec}A'\\to\\operatorname{Spec}A$ surjective.",
-   "uses": [],
-   "elementary": null
-  },
-  {
-   "text": "Put $D=(B\\otimes_AA')_{\\mathrm{red}}$. Its $A'$-torsion is a finitely\ngenerated module, so one nonzero element annihilates it. After inverting that\nelement,\n\n$$\n D\\hookrightarrow D\\otimes_{A'}K'=\\prod_jL'_j .\n$$",
-   "uses": [],
-   "elementary": null
-  },
-  {
-   "text": "Each idempotent of this finite product is a fraction $d/c$ with $d\\in D$ and\n$0\\neq c\\in A'$. Inverting these finitely many denominators places all the\nidempotents in $D$; their relations hold because of the displayed injection.\nHence $D=\\prod_jD_j$, with each $D_j$ a finite $A'$-algebra embedded in\n$L'_j$, and thus a domain.",
-   "uses": [],
-   "elementary": null
-  },
-  {
-   "text": "In characteristic $p>0$, choose finite algebra generators of the $D_j$. Pure\ninseparability supplies one common $q=p^e$ such that every generator $b$ has\n$b^q\\in K'$. Clear these finitely many denominators to put all $b^q$ in $A'$.\nIn a field of characteristic $p$, a $q$-th root is unique if it exists. Thus\nat most one homomorphism from each $D_j$ to any field can extend a given\nhomomorphism from $A'$. This is precisely the radicial condition. Each $A'\\to\nD_j$ is injective and integral, so lying over gives surjectivity, also after\nbase change. After any base change the map is therefore a bijective finite\nclosed map, hence a homeomorphism. In characteristic zero the fields $L'_j$\nequal $K'$; clearing denominators in the finite generators directly gives\n$D_j=A'$. In both cases every $\\operatorname{Spec}D_j\\to\\operatorname{Spec}A'$\nis a finite surjective universal homeomorphism.",
-   "uses": [],
-   "elementary": null
-  },
-  {
-   "text": "All the localizations just made in $A'$ come from shrinking\n$\\operatorname{Spec}A$. Combine their denominators into a single nonzero $c$\nin the original finite free algebra $A'$, clearing any previous denominators\nfirst. The determinant $N(c)\\in A$ of multiplication by $c$ is nonzero, as is\nseen after tensoring with $K$. The adjugate matrix shows that inverting $N(c)$\nmakes $c$ a unit in $A'$. Thus the final cover\n$S'=\\operatorname{Spec}A'\\to S^\\circ$ is still finite surjective etale. Only\nthe reduction of $Z\\times_SS'$ has been decomposed into the\n$\\operatorname{Spec}D_j$; its nilpotent thickening is handled by invariance\nunder universal homeomorphisms.",
-   "uses": [],
-   "elementary": null
-  },
-  {
-   "text": "Under that same site equivalence, a finite locally constant sheaf descends to\na finite locally constant sheaf: a trivializing etale covering descends and\nthe equivalence identifies constant sheaves. Therefore the direct image on\n$S'$ is a finite product of lisse sheaves, hence lisse by a common refinement\nof their finitely many trivializing covers. [lemma-weil-pbc-finite-exchange]\nidentifies it with the pullback of $g_*E|_{S^\\circ}$. The cover $S'\\to\nS^\\circ$ is itself etale and surjective, so its trivializing covers form a\ntrivializing etale cover of $S^\\circ$, proving the assertion.",
+   "text": "For each component dominating S, apply [lem-weil-pbc-irreducible-lisse-strata] to the constructible sheaf E. The stratum containing its generic point contains an open neighbourhood of that point in the component; remove the other components and intersect the finitely many resulting neighbourhoods. Their union W is open in the reduced Z, contains the generic fibre, and E is lisse on W. The closed set g(Z\\setminus W) misses the generic point, so after replacing S by a nonempty principal open in its complement, E is lisse on all of Z.",
    "uses": [
+    "lem-weil-pbc-irreducible-lisse-strata"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/lem-weil-pbc-finite-pushforward-generic-constructible.md",
+    "place": "## Proof, third paragraph"
+   }
+  },
+  {
+   "text": "Apply [lem-weil-pbc-generic-finite-algebra-splitting] to B=Γ(Z,O_Z). After a further dense shrinking and a finite surjective etale cover S'=Spec A'→S, the reduction of Z×_S S' is a finite disjoint union of schemes Spec D_j, each finite, surjective and universally homeomorphic to S'. The nilpotent thickening is again removed using [thm-weil-pbc-universal-homeomorphism-invariance].",
+   "uses": [
+    "lem-weil-pbc-generic-finite-algebra-splitting",
+    "thm-weil-pbc-universal-homeomorphism-invariance"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/lem-weil-pbc-finite-pushforward-generic-constructible.md",
+    "place": "## Proof, finite-algebra calculation"
+   }
+  },
+  {
+   "text": "For each factor $u_j:\\operatorname{Spec}(D_j)\\to S'$ the universal-homeomorphism equivalence [thm-weil-pbc-universal-homeomorphism-invariance] identifies the pullback of $E$ with a finite locally constant sheaf on $S'$ and identifies its direct image $u_{j*}$ with that sheaf. The direct image from the finite disjoint union is therefore a finite product of finite locally constant sheaves, hence lisse (refine their finitely many trivializing etale covers). The finite exchange isomorphism [lemma-weil-pbc-finite-exchange] identifies this sheaf with the pullback of $g_*E$ over the shrunken $S$.",
+   "uses": [
+    "thm-weil-pbc-universal-homeomorphism-invariance",
     "lemma-weil-pbc-finite-exchange"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/lem-weil-pbc-finite-pushforward-generic-constructible.md",
+    "place": "## Proof, final paragraph"
+   }
+  },
+  {
+   "text": "Because S'→S is etale and surjective, a trivializing etale cover of the pullback descends to a trivializing etale cover of S. Hence g_*E is lisse on the chosen dense open.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/lem-weil-pbc-finite-pushforward-generic-constructible.md",
+    "place": "## Proof, final paragraph"
+   }
   }
  ],
  "proof_deps": [
   "pqf-lem-finite-integral-lft",
+  "thm-weil-pbc-universal-homeomorphism-invariance",
   "lem-weil-pbc-noetherian-finite-components",
-  "lemma-weil-pbc-finite-exchange",
-  "thm-weil-pbc-universal-homeomorphism-invariance"
+  "lem-weil-pbc-irreducible-lisse-strata",
+  "lem-weil-pbc-generic-finite-algebra-splitting",
+  "lemma-weil-pbc-finite-exchange"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/lem-weil-pbc-finite-pushforward-generic-constructible.md",
   "place": "## Proof"
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "generic finite pushforward of constructible etale sheaf is lisse on dense open",
+   "results": "Algebra.isOpen_etaleLocus and scheme constructible-image declarations; no sheaf theorem",
+   "date": "2026-10-11",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "Scheme finite morphism direct image lisse sheaf",
+   "results": "0 hits; unknown identifier Scheme",
+   "date": "2026-10-11",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "finite.*pushforward|locally constant in Mathlib/AlgebraicGeometry",
+   "results": "none",
+   "date": "2026-10-11",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "generic finite pushforward constructible etale sheaf lisse dense open",
+   "results": "service unavailable",
+   "date": "2026-10-11",
+   "verdict": "unavailable"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [
   "long_proof_few_deps"
@@ -124,5 +166,30 @@
   }
  },
  "chapter": "sec-smooth-purity",
- "unit": "sk-prop-sf-cbc"
+ "unit": "sk-prop-sf-cbc",
+ "split_report": {
+  "date": "2026-10-11",
+  "item": "lem-weil-pbc-finite-pushforward-generic-constructible",
+  "worker": "stage1",
+  "summary": "Rewrote the imported proof into six audited steps. Existing nodes cover finite integrality, universal-homeomorphism invariance, finite components, irreducible lisse strata, and finite exchange. Added one unsplit auxiliary node for the substantial finite-algebra splitting after an etale extension. Mathlib searches were run for the item and auxiliary node.",
+  "blueprint": "realizes blueprint proof paragraphs 1--10; the auxiliary node realizes the finite algebra calculation in paragraphs 4--9",
+  "tool_uses": [
+   {
+    "node": "thm-weil-pbc-universal-homeomorphism-invariance",
+    "why": "The generic reduction, nilpotent thickening, and finite radicial factors require invariance of the etale topos under universal homeomorphisms, which is not supplied by this unit's compact-support route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "thm-weil-pbc-universal-homeomorphism-invariance",
+  "thm-weil-pbc-universal-homeomorphism-invariance"
+ ],
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-fpg2539",
+  "group": "J1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-fpg2539 (reviewer sub-agent of L); spot-checked: Steps 1-6 against cited statements: closedness of finite maps, reduction via universal-homeomorphism topos equivalence (accepted as generic tool from sk-prop-cd), generic-fibre/dominating components, lisse open nbhds from irreducible-lisse-strata (same constructible notion, def-weil-pbc-etale-sheaves, C4 ok), splitting node, u_j* of lisse is lisse via topos equivalence, finite exchange, etale-surjective descent. Route avoids generic flatness (03S0/02NW): valid, uses universal homeomorphisms instead. New node lem-weil-pbc-generic-finite-algebra-splitting: true (Galois closure of separable parts, spread out, purely inseparable factors radicial), not a duplicate (lem-fin-finite-splitting is etale-local, different), not in Mathlib per recorded searches, not elementary. FIX more, RETURN less: new node cited def-weil-pbc-scheme-conventions for 'universal homeomorphism', which that node does not define; now cites def-weil-universal-homeomorphism (added to stmt_deps).; 1 file(s) fixed by the reviewer"
+ }
 }
