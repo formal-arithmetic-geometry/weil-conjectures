@@ -1021,3 +1021,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 07:29 L: accepted lem-weil-pbc-ringed-space-open-restriction-adjunction (6 elementary steps by agent, no new nodes).
 - 07:31 L: accepted lem-weil-pbc-scheme-modules-enough-injectives (6 steps; new leaf ring-modules-enough-injectives 01DD, new node module-skyscraper-stalk-adjunction 009A/009C; tool_uses lem-sp-right-adjoint-preserves-injectives recorded by L). Stage-3 note: the source repository's Scheme.Modules.isGrothendieckAbelian (sorry) plus IsGrothendieckAbelian.enoughInjectives would give this in Lean.
 - 07:33 L: accepted lem-weil-pbc-separable-root-pth-power (6 steps, no new nodes; worker added P != 0 to hypothesis (b), the statement as written allowed P = 0).
+- 07:34 L: accepted lem-weil-pbc-separated-lqf-base-change (5 steps; new leaf separated-base-change 01KU (3), IsSeparated.instSndScheme).

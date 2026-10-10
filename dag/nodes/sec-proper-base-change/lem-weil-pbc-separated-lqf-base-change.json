@@ -13,9 +13,89 @@
   "def-weil-pbc-scheme-conventions",
   "pqf-def-quasifinite"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "*(1).* Assume $f$ separated. Then the second projection $f':X\\times_SS'\\to S'$ is separated by [lem-weil-pbc-separated-base-change] (Stacks proof: the diagonal $\\Delta_{f'}$ is the base change of $\\Delta_f$ along $S'\\to S$, and closed immersions are stable under base change).",
+   "uses": [
+    "lem-weil-pbc-separated-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Schemes, Lemma Tag 01KU (lemma-separated-permanence), line 4289, item (3), proof lines 4312-4327"
+   }
+  },
+  {
+   "text": "*(2), finite type.* Assume $f$ locally quasi-finite [pqf-def-quasifinite]. Then $f$ is locally of finite type [lem-weil-pbc-lqf-locally-finite-type], hence so is its base change $f'$ [lem-weil-pbc-lft-base-change]. (This is the clause 'combined with the fact that $f'$ is also locally of finite type by Lemma 01T4' of the source; the standing hypothesis 'X locally of finite type over S' of 01TM is thus implied by local quasi-finiteness.)",
+   "uses": [
+    "pqf-def-quasifinite",
+    "lem-weil-pbc-lqf-locally-finite-type",
+    "lem-weil-pbc-lft-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Morphisms, Lemma Tag 01TM (lemma-base-change-quasi-finite), line 3925, item (2); proof lines 3946-3950"
+   }
+  },
+  {
+   "text": "*(2), a point upstairs.* Let $x'\\in X'$, $g':X'\\to X$ the first projection, $x=g'(x')$, $s'=f'(x')$ and $s=f(x)=g(s')$. Since $f$ is locally quasi-finite it is quasi-finite at $x$ [pqf-def-quasifinite], and $f$ is locally of finite type (step 2), so the point of the fibre $X_s$ [def-pc-scheme-fibre] over $x$ is isolated in $X_s$ [lem-weil-pbc-quasi-finite-at-point-isolated]. By [lem-weil-pbc-isolated-fibre-point-base-change] (applied to $f$, $g$, $x'$; it needs only $f$ locally of finite type), $x'$ is an isolated point of the fibre $X'_{s'}=X'\\times_{S'}\\operatorname{Spec}\\kappa(s')$ of $f'$ at $s'$, i.e. the point of $X'_{s'}$ over $x'$ is isolated. (This is the algebra result Tag 00PP that the source invokes, in the fibre form of Tag 01TH (1)$\\Leftrightarrow$(2).)",
+   "uses": [
+    "pqf-def-quasifinite",
+    "def-pc-scheme-fibre",
+    "lem-weil-pbc-quasi-finite-at-point-isolated",
+    "lem-weil-pbc-isolated-fibre-point-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Morphisms, Lemma Tag 01TM (lemma-base-change-quasi-finite), line 3925, item (2); proof lines 3946-3950"
+   }
+  },
+  {
+   "text": "*(2), an affine pair around $x'$.* By [lem-weil-pbc-affine-opens-basis] applied to $S'$ with $W=S'$ there is an affine open $V'\\subseteq S'$ with $s'\\in V'$, $V'\\cong\\operatorname{Spec}R'$, $R'=\\mathcal O_{S'}(V')$; since $f'$ is continuous, $f'^{-1}(V')$ is an open subset of $X'$ containing $x'$, and [lem-weil-pbc-affine-opens-basis] applied to $X'$ with $W=f'^{-1}(V')$ gives an affine open $U'\\subseteq X'$ with $x'\\in U'\\subseteq f'^{-1}(V')$, $U'\\cong\\operatorname{Spec}A'$, $A'=\\mathcal O_{X'}(U')$ [def-weil-affine-spectrum]; thus $f'(U')\\subseteq V'$.",
+   "uses": [
+    "lem-weil-pbc-affine-opens-basis",
+    "def-weil-affine-spectrum"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Morphisms, Lemma Tag 01TM (lemma-base-change-quasi-finite), line 3925, item (2); proof lines 3946-3950"
+   }
+  },
+  {
+   "text": "*(2), conclusion.* Apply [lem-weil-pbc-isolated-fibre-point-quasi-finite-affine-pairs] to $f'$ (locally of finite type by step 2), the point $x'$ (isolated in its fibre by step 3) and the affine pair $U'\\ni x'$, $V'$ of step 4: the ring map $R'\\to A'$ induced by $f'$ is of finite type and quasi-finite at the prime $\\mathfrak q'\\subset A'$ of $x'$ [def-weil-pbc-ring-map-quasi-finite-at-prime]. This is the definition of '$f'$ quasi-finite at $x'$' [pqf-def-quasifinite] (1). As $x'\\in X'$ was arbitrary, $f'$ is locally quasi-finite [pqf-def-quasifinite] (2).",
+   "uses": [
+    "lem-weil-pbc-isolated-fibre-point-quasi-finite-affine-pairs",
+    "def-weil-pbc-ring-map-quasi-finite-at-prime",
+    "pqf-def-quasifinite"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Morphisms, Lemma Tag 01TM (lemma-base-change-quasi-finite), line 3925, item (2); proof lines 3946-3950"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-separated-base-change",
+  "pqf-def-quasifinite",
+  "lem-weil-pbc-lqf-locally-finite-type",
+  "lem-weil-pbc-lft-base-change",
+  "def-pc-scheme-fibre",
+  "lem-weil-pbc-quasi-finite-at-point-isolated",
+  "lem-weil-pbc-isolated-fibre-point-base-change",
+  "lem-weil-pbc-affine-opens-basis",
+  "def-weil-affine-spectrum",
+  "lem-weil-pbc-isolated-fibre-point-quasi-finite-affine-pairs",
+  "def-weil-pbc-ring-map-quasi-finite-at-prime"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/morphisms.tex",
+  "place": "Morphisms, Lemma Tag 01TM (lemma-base-change-quasi-finite), proof lines 3946-3950 (item 2), with Lemma Tag 01TH (lemma-quasi-finite-at-point-characterize) for the passage between quasi-finiteness at a point and isolated points of fibres; item (1) from Schemes, Lemma Tag 01KU (3), schemes.tex line 4289"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -37,10 +117,17 @@
    "results": "Separated.lean:82 instance isStableUnderBaseChange : IsStableUnderBaseChange @IsSeparated; QuasiFinite.lean:66 class LocallyQuasiFinite (Gamma(Y,U) -> Gamma(X,V) RingHom.QuasiFinite on affine opens, no finite type), QuasiFinite.lean:115 IsStableUnderBaseChange @LocallyQuasiFinite; FiniteType.lean locallyOfFiniteType_isStableUnderBaseChange (leaf lem-weil-pbc-lft-base-change)",
    "date": "2026-10-10",
    "verdict": "partial: (1) exact; (2) needs the identification of pqf-def-quasifinite's locally quasi-finite with LocallyQuasiFinite + LocallyOfFiniteType, not one line; kept unsplit"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "if f is separated then the pullback projection X x_S S' -> S' is separated",
+   "results": "AlgebraicGeometry.IsSeparated.instSndScheme, IsSeparated.instFstScheme, IsSeparated.isStableUnderBaseChange (Mathlib.AlgebraicGeometry.Morphisms.Separated)",
+   "date": "2026-10-10",
+   "verdict": "match for (1), made the leaf lem-weil-pbc-separated-base-change; (2) stays a theorem (Mathlib's LocallyQuasiFinite lacks the finite-type clause of pqf-def-quasifinite and uses RingHom.QuasiFinite, B8), so the item is split"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "worker",
@@ -60,5 +147,12 @@
   }
  },
  "chapter": "sec-proper-base-change",
- "unit": "sk-thm-p1"
+ "unit": "sk-thm-p1",
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "lem-weil-pbc-separated-lqf-base-change",
+  "worker": "stage1",
+  "summary": "Split into 5 steps. (1) is the new Mathlib leaf lem-weil-pbc-separated-base-change (AlgebraicGeometry.IsSeparated.instSndScheme, Separated.lean:96, via isStableUnderBaseChange :82). (2) follows Stacks 01TM's proof (00PP plus 01T4) through existing reviewed nodes of unit sk-thm-p1: lqf implies lft (lem-weil-pbc-lqf-locally-finite-type), lft base change (lem-weil-pbc-lft-base-change), quasi-finite at x gives an isolated fibre point (lem-weil-pbc-quasi-finite-at-point-isolated, 01TH), isolated fibre points persist under base change (lem-weil-pbc-isolated-fibre-point-base-change, 00PP/01TM(1)), an affine pair around x' (lem-weil-pbc-affine-opens-basis) and the affine-pair criterion (lem-weil-pbc-isolated-fibre-point-quasi-finite-affine-pairs) giving quasi-finiteness at x' in the sense of pqf-def-quasifinite. Mathlib's LocallyQuasiFinite (QuasiFinite.lean:71, instance IsStableUnderBaseChange :115) is not a one-line match for pqf-def-quasifinite (no finite-type clause, RingHom.QuasiFinite on all affine pairs), so (2) is not made a leaf. Statement unchanged."
+ },
+ "reviewed": "pass (L, 2026-10-10): 5 steps; (1) by the new 01KU (3) leaf, (2) follows 01TM via lft base change, isolation of points in fibres (01TH + base change) and the affine-pairs criterion; Mathlib LocallyQuasiFinite differs from pqf-def-quasifinite (B8), so (2) is proved."
 }

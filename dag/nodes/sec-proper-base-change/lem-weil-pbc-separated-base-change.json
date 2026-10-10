@@ -1,0 +1,83 @@
+{
+ "id": "lem-weil-pbc-separated-base-change",
+ "kind": "statement",
+ "title": "Separated morphisms are stable under base change (Stacks 01KU (3))",
+ "statement": "Let $f:X\\to S$ and $g:S'\\to S$ be morphisms of schemes [def-pc-scheme], and let $f':X'=X\\times_SS'\\to S'$ be the second projection of the fibre product [def-pc-fibre-product]. If $f$ is separated, i.e. its diagonal $X\\to X\\times_SX$ is a closed immersion [def-weil-pbc-scheme-conventions], then $f'$ is separated.",
+ "source": {
+  "document": "literature/stacks-project/schemes.tex",
+  "place": "Schemes, Lemma Tag 01KU (lemma-separated-permanence), line 4289, item (3); proof lines 4312-4327"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-pc-fibre-product",
+  "def-weil-pbc-scheme-conventions"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "base change of a separated morphism of schemes is separated",
+   "results": "AlgebraicGeometry.IsSeparated.isStableUnderBaseChange (Mathlib.AlgebraicGeometry.Morphisms.Separated), AlgebraicGeometry.quasiSeparated_isStableUnderBaseChange, AlgebraicGeometry.IsSeparated, IsSeparated.instMorphismRestrict, IsSeparated.instCompScheme, IsProper.toIsSeparated",
+   "date": "2026-10-10",
+   "verdict": "match: IsSeparated.isStableUnderBaseChange"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.MorphismProperty.IsStableUnderBaseChange @AlgebraicGeometry.IsSeparated",
+   "results": "AlgebraicGeometry.IsSeparated.isStableUnderBaseChange (Mathlib.AlgebraicGeometry.Morphisms.Separated)",
+   "date": "2026-10-10",
+   "verdict": "match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "if f is separated then the pullback projection X x_S S' -> S' is separated",
+   "results": "AlgebraicGeometry.IsSeparated.instSndScheme ([IsSeparated f] : IsSeparated (pullback.snd f g)), IsSeparated.instFstScheme, IsSeparated.isStableUnderBaseChange, IsSeparated.instIsClosedImmersionMapDescScheme",
+   "date": "2026-10-10",
+   "verdict": "match: instSndScheme is the statement verbatim"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -n 'isStableUnderBaseChange\\|pullback.snd f g' Mathlib/AlgebraicGeometry/Morphisms/Separated.lean; sed -n 40,100p",
+   "results": "Separated.lean:44 class IsSeparated (pullback.diagonal f is IsClosedImmersion); :82 instance isStableUnderBaseChange; :96-99 instance [IsSeparated f] : IsSeparated (pullback.snd f g)",
+   "date": "2026-10-10",
+   "verdict": "match"
+  },
+  {
+   "tool": "local_search",
+   "query": "AlgebraicGeometry.IsSeparated.isStableUnderBaseChange",
+   "results": "found, instance, .lake/packages/mathlib/Mathlib/AlgebraicGeometry/Morphisms/Separated.lean (index unavailable; existence confirmed, not a proof of absence of anything)",
+   "date": "2026-10-10",
+   "verdict": "match exists"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "AlgebraicGeometry.IsSeparated.instSndScheme",
+  "file": "Mathlib/AlgebraicGeometry/Morphisms/Separated.lean",
+  "line": 96,
+  "how": "exact: the instance at Separated.lean:96-99, `instance {X Y S : Scheme} (f : X ⟶ S) (g : Y ⟶ S) [IsSeparated f] : IsSeparated (pullback.snd f g)`, proved from `IsSeparated.isStableUnderBaseChange` (Separated.lean:82); `pullback.snd f g : pullback f g ⟶ Y` is the second projection of the fibre product (def-pc-fibre-product = CategoryTheory.Limits.pullback); Mathlib's `IsSeparated f` (class at Separated.lean:44: `IsClosedImmersion (pullback.diagonal f)`) is the separatedness of def-weil-pbc-scheme-conventions / def-weil-proper-morphism (diagonal a closed immersion), as recorded on lem-weil-pbc-closed-immersion-integral-separated-uc. Source read 2026-10-10 (sed -n 40,100p)."
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-separated-lqf-base-change",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "reviewed": "pass (L, 2026-10-10): leaf, the base-change instance at Separated.lean:96 (from isStableUnderBaseChange at :82) checked by sed; Mathlib IsSeparated is the diagonal-closed-immersion notion of the DAG."
+}
