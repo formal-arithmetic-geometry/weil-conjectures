@@ -1782,3 +1782,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 15:25 L: lem-sc-dimension-locally-algebraic accepted (6 steps per 0A21, 1 new node closed in Lean; 2 tool uses copied)
 - 15:25 L: lem-exc-rg-adjoint-transfer-functorial-injectives accepted (4 steps per 0161; statement generalized E7; 1 new Mathlib leaf Adjunction.map_injective)
 - 15:25 L: merged deliver/M1/lem-sc-generic-vanishing-kernel-colimit (reviewer FIX; first push; new nodes: 0)
+- 15:25 L: merged deliver/C1/lem-sc-glue-component-reduced-cover-sections (reviewer PASS; first push; new nodes: 0)

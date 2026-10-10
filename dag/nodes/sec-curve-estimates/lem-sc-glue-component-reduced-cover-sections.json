@@ -23,9 +23,57 @@
   "def-pc-reduced-scheme",
   "def-weil-closed-immersion"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Write $X^\\circ=X\\setminus T$ and $W_i=(Z_i\\cap X^\\circ)_{\\mathrm{top}}$. Each $Z_i\\cap Z_j$ is closed in $X$ by [def-weil-closed-immersion], so their finite union $T$ is closed and $X^\\circ$ is open. If a point of $X^\\circ$ lay in both $W_i$ and $W_j$ with $i\\ne j$, it would lie in $T$; hence the $W_i$ are pairwise disjoint. They cover $X^\\circ$ because the $Z_i$ cover $X$ set theoretically. Each $W_i$ is closed in $X^\\circ$, and its complement is the finite union of the other closed $W_j$; thus each $W_i$ is also open. This includes $r=0$ (then $X^\\circ=\\emptyset$) and $r=1$ (then $T=\\emptyset$).",
+   "uses": [
+    "def-weil-closed-immersion"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Varieties Lemma 09NE (varieties-lemma-glue-invertible-sheaves), proof, first paragraph after setting T; finite closed-cover topology written out"
+   }
+  },
+  {
+   "text": "Give $W_i$ its open subscheme structure in $X^\\circ$ [def-pc-scheme]. The restriction of the closed immersion $Z_i\\hookrightarrow X$ to $W_i$ is a closed immersion with underlying image all of $W_i$ [def-weil-closed-immersion]. On any affine open $V=\\operatorname{Spec}R\\subseteq W_i$, it is $\\operatorname{Spec}(R/I)\\to\\operatorname{Spec}R$ for the ideal $I=\\mathcal I_i(V)$ [def-sbc-closed-immersion-ideal-sheaf], and full support means $V(I)=\\operatorname{Spec}R=V(0)$. By [lem-weil-pbc-zero-locus-eq-iff-radical-eq], $\\sqrt I=\\sqrt0$. Since $V$ is open in the reduced scheme $X$, $R$ is reduced by [def-pc-reduced-scheme], so $\\sqrt0=0$; hence $I=0$. Thus the restricted closed immersion is an isomorphism on every affine open $V$ and consequently $Z_i\\setminus T\\cong W_i$ as schemes over $X^\\circ$. The $W_i$ are disjoint open subschemes covering $X^\\circ$, so their scheme-theoretic union is $X^\\circ$: on every affine open its defining ideal is locally the zero ideal, since one $W_i$ contains each point.",
+   "uses": [
+    "def-pc-scheme",
+    "def-weil-closed-immersion",
+    "def-sbc-closed-immersion-ideal-sheaf",
+    "lem-weil-pbc-zero-locus-eq-iff-radical-eq",
+    "def-pc-reduced-scheme"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Varieties Lemma 09NE (varieties-lemma-glue-invertible-sheaves), proof, first paragraph: 'As X is reduced we have X minus T = union (Z_i minus T) as schemes'; affine ideal argument supplied"
+   }
+  },
+  {
+   "text": "For an open $U\\subseteq X^\\circ$, the finitely many $U_i=U\\cap W_i$ are pairwise disjoint opens covering $U$ by step 1. The structure sheaf of the scheme [def-pc-scheme] satisfies the sheaf axiom, so a section on $U$ is uniquely a tuple of sections on the $U_i$: compatibility on $U_i\\cap U_j=\\emptyset$ is automatic, since a sheaf of rings has the unique section on the empty open. By step 2, $U_i\\cong U\\cap Z_i$ as open subschemes of $Z_i$; restriction therefore identifies $\\mathcal O_X(U_i)$ with $\\mathcal O_{Z_i}(U\\cap Z_i)$. Combining these identifications gives the asserted restriction isomorphism, also when a factor is empty or when $U=\\emptyset$.",
+   "uses": [
+    "def-pc-scheme"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Varieties Lemma 09NE (varieties-lemma-glue-invertible-sheaves), proof, first remark and the displayed product identity in the transition-function paragraph"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-closed-immersion",
+  "def-pc-scheme",
+  "def-sbc-closed-immersion-ideal-sheaf",
+  "lem-weil-pbc-zero-locus-eq-iff-radical-eq",
+  "def-pc-reduced-scheme"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/varieties.tex",
+  "place": "Varieties Lemma 09NE, proof, first paragraph and transition-function paragraph; local source absent, checked against the Stacks Project web edition"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -50,12 +98,27 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-sc-glue-component-line-bundles",
   "by": "worker",
   "date": "2026-10-10"
  },
  "chapter": "sec-curve-estimates",
- "unit": "sk-thm-curveestimate"
+ "unit": "sk-thm-curveestimate",
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "lem-sc-glue-component-reduced-cover-sections",
+  "worker": "stage1",
+  "summary": "Separated the component pieces off T, proved that their restricted closed-immersion ideals vanish on reduced affine opens, and used the sheaf axiom for the disjoint open cover. No new nodes were needed: the radical/zero-locus fact and all definitions already exist.",
+  "blueprint": "The three steps supply the reducedness assertion and structure-sheaf section identity used in the first paragraph of the ancestor lem-sc-pic-proper-ntorsion proof through lem-sc-glue-component-line-bundles (Stacks 09NE)."
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-grc",
+  "group": "C1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-grc (reviewer sub-agent of L); spot-checked: Source: Stacks Varieties Lemma 09NE (label varieties lemma-glue-invertible-sheaves, varieties.tex l.7990ff), read locally: proof sets T, 'As X is reduced we have X minus T = union (Z_i minus T) as schemes', and uses O_X(U)=prod O_{Z_i}(U cap Z_i) for opens off T. Statement unchanged by the delivery; hypotheses reduced X, finitely many closed Z_i covering X set-theoretically are exactly those the proof needs (discreteness of Z_i cap Z_j is only for the parent). Step 1 (elementary): closedness of images from def-weil-closed-immersion; finite-union topology checked, r=0,1 included. Step 2: def-weil-closed-immersion affine clause (i^{-1}U = Spec R/I), def-sbc-closed-immersion-ideal-sheaf (I(U)=I), lem-weil-pbc-zero-locus-eq-iff-radical-eq (V(I)=V(0) iff sqrt I = sqrt 0), def-pc-reduced-scheme (O_X(U) reduced for every open) carry it: I subset nilradical = 0, so Z_i minus T = W_i. Step 3 (elementary): sheaf axiom of O_X on the disjoint cover U cap W_i plus step 2. proof_deps equals the union of uses. All cited nodes are status mathlib (definitions and one commutative-algebra leaf), so no tool_uses needed. No new nodes, no Mathlib leaf. Small cases: Spec k[x,y]/(xy) with the two axes (one given ideal (x^2)), two disjoint points, r=1. Note: the report says the local Stacks source is absent; it is present on the server and agrees with the web text quoted; proof_origin by agent kept since the affine ideal argument is the worker's. Start Sat Oct 10 03:24:59 PM UTC 2026, end Sat Oct 10 03:25:35 PM UTC 2026."
+ }
 }
