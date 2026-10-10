@@ -20,6 +20,7 @@ public import WeilConjectures.AlgebraicGeometry.Picard.Degree
 public import WeilConjectures.AlgebraicGeometry.Picard.Scheme
 public import WeilConjectures.AlgebraicGeometry.Regular
 public import WeilConjectures.Mathlib.Algebra.DualNumber
+public import WeilConjectures.Mathlib.AlgebraicGeometry.Geometrically.Irreducible
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Geometrically.Reduced
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Modules.Sheaf
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.Smooth
@@ -1077,8 +1078,16 @@ irreducible, and it is smooth, hence geometrically reduced.
 theorem geometricallyIntegral_of_representableBy_picardFunctorDegree_genus
     (P : Over (Spec (.of k)))
     (hP : (picardFunctorDegree (X ↘ Spec (.of k)) (arithmeticGenus k X)).obj.RepresentableBy P) :
-    GeometricallyIntegral P.hom :=
-  sorry
+    GeometricallyIntegral P.hom := by
+  obtain ⟨H, a, -, hH, ha⟩ := exists_surjective_of_representableBy_picardFunctorDegree_genus P hP
+  have := smoothOfRelativeDimension_of_representableBy_picardFunctorDegree_genus P hP
+  have : Smooth P.hom := SmoothOfRelativeDimension.smooth (arithmeticGenus k X) _
+  have : GeometricallyIrreducible (a.left ≫ P.hom) := by
+    rw [Over.w a]
+    infer_instance
+  have := GeometricallyIrreducible.of_surjective a.left P.hom
+  exact .of_geometricallyReduced_of_geometricallyIrreducible _
+
 
 /-- **Every degree component is geometrically integral.** A `k`-scheme representing a degree
 component `Pic^d_{X/k}` of the Picard functor is geometrically integral over `k`, being isomorphic
