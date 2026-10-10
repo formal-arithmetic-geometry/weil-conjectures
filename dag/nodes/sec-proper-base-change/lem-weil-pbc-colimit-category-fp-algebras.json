@@ -1,0 +1,75 @@
+{
+ "id": "lem-weil-pbc-colimit-category-fp-algebras",
+ "kind": "statement",
+ "title": "Maps of finitely presented algebras over a directed colimit of rings come from a stage",
+ "statement": "Let $(\\Lambda,\\le)$ be a directed set and $(R_\\lambda)_{\\lambda\\in\\Lambda}$ a directed system of commutative rings (ring maps $R_\\lambda\\to R_\\mu$ for $\\lambda\\le\\mu$, the identity for $\\lambda=\\mu$, compatible with composition) with colimit $R=\\varinjlim_\\lambda R_\\lambda$ in the category of commutative rings [def-weil-pbc-category-colimit]. Let $\\lambda\\in\\Lambda$ and let $A$, $A'$ be finitely presented $R_\\lambda$-algebras [def-weil-pbc-finitely-presented-algebra]. For $\\mu\\ge\\lambda$ put $A_\\mu=A\\otimes_{R_\\lambda}R_\\mu$, $A'_\\mu=A'\\otimes_{R_\\lambda}R_\\mu$ ($R_\\mu$-algebras), and $A_R=A\\otimes_{R_\\lambda}R$, $A'_R=A'\\otimes_{R_\\lambda}R$; identify $A_\\mu\\otimes_{R_\\mu}R=A_R$ and $A'_\\mu\\otimes_{R_\\mu}R=A'_R$ by $(a\\otimes r)\\otimes r'\\mapsto a\\otimes\\bar r r'$. (2) For every homomorphism of $R$-algebras $u:A_R\\to A'_R$ there are $\\mu\\ge\\lambda$ and a homomorphism of $R_\\mu$-algebras $u_\\mu:A_\\mu\\to A'_\\mu$ with $u_\\mu\\otimes1_R=u$. (3) If $v,w:A\\to A'$ are homomorphisms of $R_\\lambda$-algebras with $v\\otimes1_R=w\\otimes1_R$, then $v\\otimes1_{R_\\mu}=w\\otimes1_{R_\\mu}$ for some $\\mu\\ge\\lambda$.",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Algebra, Lemma Tag 05N9 (lemma-colimit-category-fp-algebras, algebra.tex line 32178), parts (2) and (3); its proof refers to Lemma Tag 05N8 (lemma-algebra-map-property-in-colimit)"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-category-colimit",
+  "def-weil-pbc-finitely-presented-algebra"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "algebra homomorphism between finitely presented algebras over colimit descends to a stage of filtered colimit of rings",
+   "results": "RingHom.EssFiniteType.exists_eq_comp_ι_app_of_isColimit (Mathlib.Algebra.Category.Ring.FinitePresentation:81), CategoryTheory.IsFinitelyPresentable.exists_hom_of_isColimit_under, RingHom.FinitePresentation, RingCat.FilteredColimits.colimitCocone, CommRingCat.preservesFilteredColimits_coyoneda (:166), CommRingCat.isFinitelyPresentable_hom",
+   "date": "2026-10-10",
+   "verdict": "generalization: Hom out of a finitely presented algebra commutes with filtered colimits; the base change form needs the adjunction Hom_R(A_R,A'_R)=Hom_{R_lambda}(A,A'_R) and A'_R = colim A'_mu, not one line"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "two algebra maps between finitely presented algebras that agree after base change to the colimit ring agree at some stage; isomorphism after base change to colimit is isomorphism at a stage",
+   "results": "RingHom.EssFiniteType.exists_eq_comp_ι_app_of_isColimit, RingHom.EssFiniteType.exists_comp_map_eq_of_isColimit (Mathlib.Algebra.Category.Ring.FinitePresentation:45), RingHom.finitePresentation_algebraMap, RingHom.finitePresentation_isStableUnderBaseChange, Algebra.FinitePresentation.trans",
+   "date": "2026-10-10",
+   "verdict": "generalization (same remark)"
+  },
+  {
+   "tool": "grep",
+   "query": "rg -n 'exists_.*isColimit|IsColimit.*AlgEquiv|isIso.*isColimit' Mathlib/Algebra/Category/Ring/ Mathlib/RingTheory/ ; sed -n 140,165p Mathlib/Algebra/Category/Ring/FinitePresentation.lean",
+   "results": "FinitePresentation.lean:45 exists_comp_map_eq_of_isColimit (two maps S -> F(i) over R agreeing in the colimit agree at a later stage), :81 exists_eq_comp_ι_app_of_isColimit (a map S -> colimit factors through a stage), :145 preservesColimit_coyoneda_of_finitePresentation; no base change form",
+   "date": "2026-10-10",
+   "verdict": "candidate, not a one-line specialization"
+  },
+  {
+   "tool": "local_search",
+   "query": "RingHom.EssFiniteType.exists_eq_comp_ι_app_of_isColimit (project root ~/weil-conjectures-slopmaster2)",
+   "results": "index: unavailable; declaration read in the source file by sed",
+   "date": "2026-10-10",
+   "verdict": "candidate read in source"
+  }
+ ],
+ "mathlib_match": null,
+ "mathlib_candidate": {
+  "declaration": "RingHom.EssFiniteType.exists_eq_comp_ι_app_of_isColimit; RingHom.EssFiniteType.exists_comp_map_eq_of_isColimit",
+  "file": "Mathlib/Algebra/Category/Ring/FinitePresentation.lean",
+  "line": 81,
+  "how": "(2) from line 81 and (3) from line 45, applied to A -> colim_mu A'_mu = A'_R after the base change adjunction Hom_R(A_R, A'_R) = Hom_{R_lambda}(A, A'_R); more than one line"
+ },
+ "status": "unsplit",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-colimit-flat-ring-map",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1"
+}

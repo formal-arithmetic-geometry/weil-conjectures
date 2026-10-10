@@ -1,0 +1,76 @@
+{
+ "id": "lem-weil-pbc-limit-finite-presentation",
+ "kind": "statement",
+ "title": "Noetherian approximation of a finitely presented ring map",
+ "statement": "Let $\\varphi:R\\to S$ be a homomorphism of commutative rings of finite presentation [def-weil-pbc-finitely-presented-algebra]. Then there exist a nonempty directed set $(\\Lambda,\\le)$ and the following data: for every $\\lambda\\in\\Lambda$ commutative rings $R_\\lambda$, $S_\\lambda$ and a ring map $\\rho_\\lambda:R_\\lambda\\to S_\\lambda$; for $\\lambda\\le\\mu$ ring maps $R_\\lambda\\to R_\\mu$ and $S_\\lambda\\to S_\\mu$ (written $x\\mapsto\\bar x$), equal to the identity for $\\lambda=\\mu$, compatible with composition and with $\\rho_\\lambda,\\rho_\\mu$; and for every $\\lambda$ ring maps $\\pi_\\lambda:R_\\lambda\\to R$ and $\\kappa_\\lambda:S_\\lambda\\to S$, compatible with the transition maps and with $\\varphi\\circ\\pi_\\lambda=\\kappa_\\lambda\\circ\\rho_\\lambda$; such that (1) $(R,(\\pi_\\lambda)_\\lambda)$ and $(S,(\\kappa_\\lambda)_\\lambda)$ are colimits [def-weil-pbc-category-colimit] of the systems $(R_\\lambda)$ and $(S_\\lambda)$ in the category of commutative rings; (2) every $R_\\lambda$ is a finite type $\\mathbf Z$-algebra [def-weil-pbc-finite-type-algebra]; (3) every $S_\\lambda$ is a finite type $R_\\lambda$-algebra via $\\rho_\\lambda$; (4) for $\\lambda\\le\\mu$ the ring map $S_\\lambda\\otimes_{R_\\lambda}R_\\mu\\to S_\\mu$, $s\\otimes r\\mapsto\\bar s\\,\\rho_\\mu(r)$, is an isomorphism; (5) for every $\\lambda$ the ring map $S_\\lambda\\otimes_{R_\\lambda}R\\to S$, $s\\otimes r\\mapsto\\kappa_\\lambda(s)\\varphi(r)$ (with $R$ an $R_\\lambda$-algebra via $\\pi_\\lambda$), is an isomorphism.",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Algebra, Lemma Tag 00R0 (lemma-limit-finite-presentation, algebra.tex line 32567), clauses (1)-(4) (its proof: 'the non-local version of Lemma 00QV ... left to the reader'); clause (5) is the ring form of the 'in particular' $M=M_\\lambda\\otimes_{R_\\lambda}R$ of the next Lemma Tag 00R1 (lemma-limit-module-finite-presentation, line 32593)"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-finitely-presented-algebra",
+  "def-weil-pbc-category-colimit",
+  "def-weil-pbc-finite-type-algebra"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "finitely presented algebra descends to a finitely generated Z-subalgebra (Noetherian approximation)",
+   "results": "Algebra.FiniteType.of_finitePresentation, Module.finitePresentation_iff_finite, Subalgebra.fg_of_noetherian, Algebra.Presentation.finitePresentation_of_isFinite, Algebra.Presentation.exists_presentation_fin (Mathlib.RingTheory.Extension.Presentation.Basic); none gives a directed system of finite type models",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "directed system of finitely generated Z-subalgebras R_i with finitely presented algebras S_i such that S_i tensor R_j = S_j and colimit is the given finitely presented algebra R -> S",
+   "results": "RingHom.EssFiniteType.exists_eq_comp_ι_app_of_isColimit, RingHom.EssFiniteType.exists_comp_map_eq_of_isColimit (Mathlib.Algebra.Category.Ring.FinitePresentation), Algebra.FinitePresentation.trans, RingHom.finitePresentation_algebraMap; no approximation system",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "rg -n -l 'NoetherianDescent|exists_model|NoetherianModel|limit_finite_presentation' Mathlib/RingTheory ; read Mathlib/RingTheory/Extension/Presentation/Core.lean (declarations core, HasCoeffs, ModelOfHasCoeffs, tensorModelOfHasCoeffsEquiv) and Mathlib/RingTheory/Smooth/NoetherianDescent.lean header",
+   "results": "Algebra.Presentation.tensorModelOfHasCoeffsEquiv (Mathlib/RingTheory/Extension/Presentation/Core.lean:207): for one subring R_0 containing the coefficients of a presentation, an R-algebra iso R (x)_{R_0} S_0 = S with S_0 finitely presented over R_0 and P.Core of finite type over Z (line 79); Smooth/NoetherianDescent.lean: the same for smooth algebras. No directed system with transition isomorphisms and colimit",
+   "date": "2026-10-10",
+   "verdict": "no match (a single model only; the directed system (1)-(4) is not there)"
+  },
+  {
+   "tool": "local_search",
+   "query": "Algebra.Presentation.tensorModelOfHasCoeffsEquiv (project root ~/weil-conjectures-slopmaster2)",
+   "results": "index: unavailable (no proof of absence; the grep above read the file)",
+   "date": "2026-10-10",
+   "verdict": "candidate read in source"
+  }
+ ],
+ "mathlib_match": null,
+ "mathlib_candidate": {
+  "declaration": "Algebra.Presentation.tensorModelOfHasCoeffsEquiv",
+  "file": "Mathlib/RingTheory/Extension/Presentation/Core.lean",
+  "line": 207,
+  "how": "gives one finite type model (clauses (2),(3),(5) for the single ring P.Core, line 52/79); the directed system of models with (1) and (4) is not one line from it"
+ },
+ "status": "unsplit",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-colimit-flat-ring-map",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1"
+}
