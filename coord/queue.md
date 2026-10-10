@@ -1,22 +1,23 @@
 # Work queue
 
-910 items; claim with `tools/claim.py next <group> [--stage N]`.
+912 items; claim with `tools/claim.py next <group> [--stage N]`.
 
-## Stage 1: nodes to split (301)
+## Stage 1: nodes to split (299)
 
 | node | distance to a target | Lean state on the done branch |
 |---|---|---|
 | `lem-weil-pbc-injective-acyclicity-bounded-below` | 2002 | sorry_here |
-| `lem-weil-pbc-etale-subsheaf-final-open` | 2008 | none |
 | `lem-weil-pbc-open-subscheme-fpqc-descent` | 2008 | none |
 | `lem-weil-pbc-spec-algebraically-closed-etale-sheaf-constant` | 2008 | none |
 | `lem-weil-pbc-sets-etale-inverse-image-constant-base-change` | 2009 | none |
 | `lem-sc-irreducible-noetherian-constant-acyclic` | 2013 | none |
 | `lem-sc-noetherian-extension-by-zero-reduction` | 2013 | none |
-| `lem-sc-semilocal-dim-one-conductor` | 2014 | none |
 | `lem-sc-topological-extension-by-zero-stalks` | 2014 | none |
 | `lem-sc-ample-proj-canonical-map` | 2015 | none |
 | `lem-sc-boundary-cech-injective-middle` | 2015 | none |
+| `lem-sc-finite-integral-conductor` | 2015 | none |
+| `lem-sc-integral-overring-jacobson-power` | 2015 | none |
+| `lem-sc-semilocal-dim-one-normalization` | 2015 | none |
 | `lem-sc-mayer-vietoris-ringed-space` | 2017 | none |
 | `lem-weil-pbc-cartesian-eilenberg-functorial` | 3007 | none |
 | `lem-exc-finite-galois-tensor-decomposition` | 3009 | none |
@@ -29,10 +30,8 @@
 | `lem-pc-derived-qcoh-compact-generation` | 3015 | none |
 | `lem-pc-derived-qcoh-direct-sums` | 3015 | none |
 | `lem-pc-finite-inseparable-element` | 3015 | none |
-| `lem-pc-inseparable-tensor-nilpotent` | 3015 | none |
 | `lem-pc-ringed-spaces-derived-adjoint` | 3015 | none |
 | `lem-pc-ringed-spaces-derived-pullback-composition` | 3015 | none |
-| `lem-sc-coherent-affine-free-resolution` | 3015 | none |
 | `lem-sc-derived-hom-finite-free-model` | 3015 | none |
 | `lem-sc-derived-internal-hom-restrict-open` | 3015 | none |
 | `lem-sc-finite-affine-derived-equivalence` | 3015 | none |
@@ -71,7 +70,6 @@
 | `lem-pc-smooth-flat` | 4010 | none |
 | `lem-pc-universal-adjoint-section` | 4010 | rests_on_sorry |
 | `lem-pc-zero-scheme-recd` | 4010 | rests_on_sorry |
-| `lem-sc-finite-nonempty-point` | 4010 | none |
 | `lem-pc-degree-zero-properties` | 4011 | none |
 | `lem-pc-smooth-characterization` | 4011 | none |
 | `def-weil-pbc-etale-sheaves` | 5002 | none |
@@ -308,7 +306,7 @@
 | `lem-pur-rhom-well-defined` | - | none |
 | `lem-zl-noether-normalization-dimension` | - | none |
 
-## Stage 2: nodes to state (609)
+## Stage 2: nodes to state (613)
 
 | node | distance to Mathlib | kind |
 |---|---|---|
@@ -378,6 +376,7 @@
 | `lem-pc-flat-pullback-effective-cartier-ideal` | 1 | state |
 | `lem-pc-fpqc-descend-closed-immersion` | 1 | state |
 | `lem-pc-h0-geom-connected` | 1 | state |
+| `lem-pc-inseparable-tensor-nilpotent` | 1 | state |
 | `lem-pc-integral-radicial-surjective-universal-homeomorphism` | 1 | state |
 | `lem-pc-linear-pair-graded-finite` | 1 | state |
 | `lem-pc-linear-pair-morphism-finite` | 1 | state |
@@ -412,6 +411,7 @@
 | `lem-sc-exterior-top-direct-sum` | 1 | state |
 | `lem-sc-fg-domain-positive-dimension-infinite-maximals` | 1 | state |
 | `lem-sc-finite-discrete-separated-affine` | 1 | state |
+| `lem-sc-finite-nonempty-point` | 1 | state |
 | `lem-sc-finite-pushforward-locally-free` | 1 | state |
 | `lem-sc-finite-type-nonclosed-closure-closed-points` | 1 | state |
 | `lem-sc-four-lemma` | 1 | state |
@@ -443,6 +443,7 @@
 | `lem-sc-regular-local-domain` | 1 | state |
 | `lem-sc-regular-local-ext-vanishing` | 1 | state |
 | `lem-sc-semilocal-dedekind-dvr-reduction` | 1 | state |
+| `lem-sc-semilocal-dim-one-conductor` | 1 | state |
 | `lem-sc-smooth-algebra-reduced-field` | 1 | state |
 | `lem-sc-zero-dim-noetherian-closed-finite` | 1 | state |
 | `lem-weil-pbc-adic-completion-noetherian` | 1 | state |
@@ -543,6 +544,7 @@
 | `lem-weil-pbc-etale-ring-map-conormal-criterion` | 1 | state |
 | `lem-weil-pbc-etale-ring-map-prescribed-residue-field` | 1 | state |
 | `lem-weil-pbc-etale-section-idempotent-splitting` | 1 | state |
+| `lem-weil-pbc-etale-subsheaf-final-open` | 1 | state |
 | `lem-weil-pbc-exact-free-complex-last-minors-regular-sequence` | 1 | state |
 | `lem-weil-pbc-exact-functor-bounded-below` | 1 | state |
 | `lem-weil-pbc-ext-one-direct-sum` | 1 | state |
@@ -922,7 +924,7 @@
 | `lem-weil-pbc-p1-field-dimension-one` | 4 | state |
 | `lem-weil-pbc-projective-space-zero-isomorphism` | 4 | state |
 
-Not open yet: 325 nodes that wait for stage 1, 1281 nodes that wait for a statement dependency.
+Not open yet: 323 nodes that wait for stage 1, 1282 nodes that wait for a statement dependency.
 
 ## Stage 3: modules to prove (0)
 
