@@ -8,7 +8,7 @@ module
 public import Mathlib.CategoryTheory.Adjunction.Additive
 public import Mathlib.CategoryTheory.Adjunction.Triple
 public import WeilConjectures.Mathlib.CategoryTheory.MorphismProperty.OverAdjunction
-public import WeilConjectures.SixFunctors.ProEtale.UpperLowerStar.Defs
+public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.UpperLowerStar.Defs
 
 /-!
 
@@ -26,7 +26,8 @@ functor `j_f^*`.
 When `f` is moreover an open immersion (in particular a monomorphism), `j_{f!}` is the
 *extension by zero* functor. It is then exact and fully faithful; fully faithfulness is
 `AlgebraicGeometry.ProEtale.fullyFaithfulOpenImmersionLowerShriek` in
-`WeilConjectures.SixFunctors.ProEtale.LowerShriek.OpenImmersion.FullyFaithful`, proved from
+`WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.LowerShriek.OpenImmersion.FullyFaithful`,
+proved from
 the adjoint triple `ProEtale.localizationAdjunctionTriple` below.
 
 ## Main definitions
@@ -38,7 +39,8 @@ the adjoint triple `ProEtale.localizationAdjunctionTriple` below.
 - `AlgebraicGeometry.ProEtale.localizationRestrictionLowerStarAdjunction`: the adjunction
   `j_f^* ⊣ f_*`, completing the triple `j_{f!} ⊣ j_f^* ⊣ f_*`.
 - `AlgebraicGeometry.ProEtale.upperStarIsoLocalizationRestriction`: for `f` weakly étale the
-  pullback `f^*` of `WeilConjectures.SixFunctors.ProEtale.UpperLowerStar.Defs` is computed
+  pullback `f^*` of `WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.UpperLowerStar.Defs` is
+  computed
   by restriction, both being left adjoint to `f_*`.
 - `AlgebraicGeometry.ProEtale.localizationLowerShriekUpperStarAdjunction`: the adjunction
   `j_{f!} ⊣ f^*`.
@@ -55,7 +57,8 @@ the adjoint triple `ProEtale.localizationAdjunctionTriple` below.
 - `AlgebraicGeometry.ProEtale.openImmersionRestriction`: the restriction `j^*` along an open
   immersion `j`, given objectwise by `(j^* G)(T → U) = G(T → U → X)`.
 - `AlgebraicGeometry.ProEtale.upperStarIsoOpenImmersionRestriction`: the pullback `j^*` of
-  `WeilConjectures.SixFunctors.ProEtale.UpperLowerStar.Defs` is computed by restriction.
+  `WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.UpperLowerStar.Defs` is computed by
+  restriction.
 - `AlgebraicGeometry.ProEtale.openImmersionLowerShriekUpperStarAdjunction`: the adjunction
   `j_! ⊣ j^*` between the lower shriek and the pullback `ProEtale.upperStar`.
 
@@ -79,7 +82,8 @@ the adjoint triple `ProEtale.localizationAdjunctionTriple` below.
   `WeilConjectures.CategoryTheory.GrothendieckAbelian.HasLeftKanExtension`.
 - `j_f^*` restricts along the localization functor, so it requires `WeaklyEtale f`, but it
   needs neither Kan extensions nor sheafification. The pullback `ProEtale.upperStar` of
-  `WeilConjectures.SixFunctors.ProEtale.UpperLowerStar.Defs` is defined for an arbitrary
+  `WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.UpperLowerStar.Defs` is defined for an
+  arbitrary
   morphism at the cost of both; the two agree for a weakly étale `f`, by
   `upperStarIsoLocalizationRestriction`.
 - The continuity and cocontinuity of the localization functor are
@@ -349,7 +353,8 @@ example : PreservesFiniteColimits (j)_!open[A] :=
   inferInstance
 
 /-- For an open immersion `j`, the pullback `j^*` of
-`WeilConjectures.SixFunctors.ProEtale.UpperLowerStar.Defs` is computed by restriction along
+`WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.UpperLowerStar.Defs` is computed by
+restriction along
 the localization functor: both are left adjoint to `j_*`. In particular its sections are
 given by `ProEtale.openImmersionRestriction_obj_val_obj`. -/
 noncomputable def ProEtale.upperStarIsoOpenImmersionRestriction :

@@ -19,7 +19,7 @@ public import WeilConjectures.CategoryTheory.GrothendieckAbelian.Sheaf
 public import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
 public import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.RightDerivedFunctorPlus
 public import WeilConjectures.Mathlib.CategoryTheory.Sites.Monoidal
-public import WeilConjectures.SixFunctors.ProEtale.LowerShriek.Defs
+public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.LowerShriek.Defs
 
 /-!
 
@@ -138,7 +138,8 @@ reflection theorem, in
 
 The additivity and exactness of `g^*` are `ProEtale.additive_upperStar`,
 `ProEtale.preservesFiniteLimits_upperStar` and `ProEtale.preservesHomology_upperStar` of
-`WeilConjectures.SixFunctors.ProEtale.UpperLowerStar.Defs`; the left exactness there rests
+`WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.UpperLowerStar.Defs`; the left exactness
+there rests
 on the sorried `HasSheafify` instance for the small pro-étale site of `Z` and on left
 exactness of the left Kan extension along the opposite of base change, both global
 instances of the folder `WeilConjectures.CategoryTheory.GrothendieckAbelian` (for a weakly

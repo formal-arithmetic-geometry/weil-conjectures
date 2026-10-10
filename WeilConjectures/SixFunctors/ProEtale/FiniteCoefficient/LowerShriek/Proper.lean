@@ -5,8 +5,8 @@ Authors: Nailin Guan
 -/
 module
 
-public import WeilConjectures.SixFunctors.ProEtale.LowerShriek.OpenImmersion.Complement
-public import WeilConjectures.SixFunctors.ProEtale.LowerShriek.OpenImmersion.Conservative
+public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.LowerShriek.OpenImmersion.Complement
+public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.LowerShriek.OpenImmersion.Conservative
 
 /-!
 # The comparison `f_! ⟶ f_*` is an isomorphism for a proper morphism
@@ -15,7 +15,8 @@ This is the pro-étale counterpart of
 `WeilConjectures.SixFunctors.Etale.LowerShriek.Proper`.
 
 For a proper morphism `f : X ⟶ Y` admitting a compactification, the canonical comparison
-`ι_f : f_! ⟶ f_*` of `WeilConjectures.SixFunctors.ProEtale.LowerShriek.Comparison` is an
+`ι_f : f_! ⟶ f_*` of
+`WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.LowerShriek.Comparison` is an
 isomorphism. It is deduced from the case of an open immersion with closed range, applied to
 the open immersion of a compactification of `f`.
 
