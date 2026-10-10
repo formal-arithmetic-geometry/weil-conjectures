@@ -3,7 +3,7 @@
  "blueprint": {
   "is": "lem-pc-projective-noetherian-rf-perfect",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "Perfect direct image for a projective Noetherian family",
@@ -29,8 +29,10 @@
   },
   {
    "text": "Each term of this complex is a finite direct sum of flat\n$A$-modules. To check this explicitly, write an affine\nintersection as $U=\\operatorname{Spec}(B)$ and\n$\\mathcal G|_U=\\widetilde M$. For any injection $N'\\to N$ of\n$A$-modules, let $K$ be the kernel of\n$M\\otimes_A N'\\to M\\otimes_A N$. At a prime $\\mathfrak q$ of\n$B$, with inverse image $\\mathfrak p$ in $A$, the module\n$M_{\\mathfrak q}$ is flat over $A_{\\mathfrak p}$ by relative\nflatness. Localizing the displayed map at $\\mathfrak q$\ntherefore gives an injection, so $K_{\\mathfrak q}=0$ for every\n$\\mathfrak q$. Consequently $K=0$, proving that $M$ is flat\nover $A$.",
-   "uses": [],
-   "elementary": null
+   "uses": [
+    "lem-pc-affine-sections-flat-over-base"
+   ],
+   "elementary": false
   },
   {
    "text": "The cohomology modules of this bounded flat complex are finite\nover $A$ by [lem-pc-projective-coherent-finiteness].\nApplying [lem-pc-noetherian-flat-complex-perfect] gives a\nbounded finite projective representative on $\\operatorname{Spec}(A)$.\nThis proves perfectness locally on $S$.",
@@ -42,6 +44,7 @@
   }
  ],
  "proof_deps": [
+  "lem-pc-affine-sections-flat-over-base",
   "lem-pc-cech-resolution",
   "lem-pc-projective-coherent-finiteness",
   "lem-pc-noetherian-flat-complex-perfect"
@@ -51,9 +54,38 @@
   "document": "literature/blueprint/master/blueprint/sec-picard-framework/sk-thm-picard-semicon/lem-pc-projective-noetherian-rf-perfect.md",
   "place": "## Proof"
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "derived direct image of coherent sheaf flat over a Noetherian base is perfect",
+   "results": "8 hits; no exact theorem (mostly sheaf finiteness predicates and AlgebraicGeometry.flat_iff)",
+   "date": "2026-10-11",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "DerivedCategory, Perfect, flat complex finite cohomology",
+   "results": "0 hits; Unknown identifier flat",
+   "date": "2026-10-11",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "flat.*complex.*finite|Perfect in Mathlib/AlgebraicGeometry",
+   "results": "6 hits, none state the item",
+   "date": "2026-10-11",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "projective morphism coherent sheaf flat over Noetherian base derived pushforward perfect",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-11",
+   "verdict": "unavailable"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [],
  "blueprint_kind": "lemma",
@@ -89,5 +121,30 @@
   }
  },
  "chapter": "sec-picard-framework",
- "unit": "sk-thm-picard-semicon"
+ "unit": "sk-thm-picard-semicon",
+ "split_report": {
+  "date": "2026-10-11",
+  "item": "lem-pc-projective-noetherian-rf-perfect",
+  "worker": "stage1",
+  "summary": "Split the local perfectness argument by adding the missing affine sections flatness criterion and citing the existing Cech, finite-cohomology, and flat-complex perfectness nodes. No Lean declaration states the item.",
+  "blueprint": "Steps 1–3 of the blueprint proof.",
+  "tool_uses": [
+   {
+    "node": "lem-pc-projective-coherent-finiteness",
+    "why": "Step 3 uses its finite cohomology conclusion as a generic coherence input; the semicon unit has no replacement node for projective coherent finiteness."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pc-projective-coherent-finiteness",
+  "lem-pc-projective-coherent-finiteness"
+ ],
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-prp1901",
+  "group": "K1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-prp1901 (reviewer sub-agent of L); spot-checked: Read packet whole. Item vs lem-pc-proper-support-perfect-direct-image (0A1H): item is a special case (E=O_X, G in degree 0, coherent=fin. pres. on loc. Noetherian, projective=>proper support), not a restatement; the split proves it independently from Cech/finiteness/Noetherian-flat-perfect nodes and does not cite 0A1H; 0A1H is unsplit with no proof_deps and lem-pc-rf-perfect-base-change does not cite the item, so no cycle. Steps 1-3 hypotheses checked (projective => qc separated; relative flatness gives M_q flat over A_p; Cech cohomology = H^q finite). Tool use lem-pc-projective-coherent-finiteness accepted as generic finiteness tool. New node lem-pc-affine-sections-flat-over-base = Stacks 00HT(6), true, self-contained; not a duplicate of lem-weil-pbc-flat-map-local-criterion (ring map vs module). Mathlib grep (Mathlib/RingTheory/Flat/Localization.lean): Module.flat_of_isLocalized_maximal assumes M_P flat over R not R_p; node follows by it plus Flat.trans and IsLocalization.flat, so no exact one-declaration leaf; left unsplit. No repairs."
+ }
 }
