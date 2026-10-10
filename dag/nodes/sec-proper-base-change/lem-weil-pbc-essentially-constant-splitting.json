@@ -11,9 +11,61 @@
   "def-weil-inverse-system",
   "def-weil-pbc-essentially-constant-system"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Fix $j\\ge i_0$. Compatibility of the cone maps gives $t_{j,i_0}\\circ\\pi_j=\\pi_{i_0}$ (iterate the displayed compatibility with the adjacent transition maps). Therefore $p_j\\circ\\pi_j=r\\circ t_{j,i_0}\\circ\\pi_j=r\\circ\\pi_{i_0}=\\mathrm{id}_X$ by clause (a) of essential constancy. In particular, $\\pi_j$ is injective.",
+   "uses": [
+    "def-weil-inverse-system",
+    "def-weil-pbc-essentially-constant-system"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/homology.tex",
+    "place": "Homology, proof of Lemma Tag 070C (lemma-essentially-constant), lines 7746--7753; the splitting implicit in 'setting Z_j = Ker(A_j -> A) works'"
+   }
+  },
+  {
+   "text": "For $c\\in C_j$, put $x=p_j(c)$ and $z=c-\\pi_j(x)$. Then $p_j(z)=p_j(c)-p_j\\pi_jp_j(c)=0$, so $z\\in Z_j$, and $c=\\pi_j(x)+z$. If also $c=\\pi_j(x')+z'$ with $z'\\in Z_j$, applying $p_j$ gives $x'=p_j(c)=x$, and then cancellation gives $z'=z$. Thus $C_j=\\pi_j(X)\\oplus Z_j$ with the asserted formula.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/homology.tex",
+    "place": "Homology, proof of Lemma Tag 070C (lemma-essentially-constant), lines 7746--7753; the direct-sum calculation omitted after 'setting Z_j = Ker(A_j -> A) works'"
+   }
+  },
+  {
+   "text": "Let $k\\ge j\\ge i_0$. Cone compatibility gives $t_{k,j}\\circ\\pi_k=\\pi_j$. Associativity of transition maps gives $p_j\\circ t_{k,j}=r\\circ t_{j,i_0}\\circ t_{k,j}=r\\circ t_{k,i_0}=p_k$. Hence $z\\in Z_k$ implies $p_j(t_{k,j}z)=p_k(z)=0$, so $t_{k,j}$ restricts to a homomorphism $Z_k\\to Z_j$. The identity on $\\pi_k(X)$ and this restriction show that $t_{k,j}$ respects the direct-sum decompositions; associativity and identity for the restricted maps follow from those of the original inverse system.",
+   "uses": [
+    "def-weil-inverse-system",
+    "def-weil-pbc-essentially-constant-system"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/homology.tex",
+    "place": "Homology, Lemma Tag 070C (lemma-essentially-constant), clause (a), and proof lines 7746--7753"
+   }
+  },
+  {
+   "text": "Fix $j\\ge i_0$. By clause (b) of essential constancy, choose $k\\ge\\max(i_0,j)=j$ such that $t_{k,j}=\\pi_j\\circ r\\circ t_{k,i_0}=\\pi_j\\circ p_k$. If $z\\in Z_k$, then $p_k(z)=0$, and therefore $t_{k,j}(z)=\\pi_j(p_k(z))=0$. Thus the restricted transition map $Z_k\\to Z_j$ is zero.",
+   "uses": [
+    "def-weil-pbc-essentially-constant-system"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/homology.tex",
+    "place": "Homology, Lemma Tag 070C (lemma-essentially-constant), clause (b), and proof lines 7746--7753"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-inverse-system",
+  "def-weil-pbc-essentially-constant-system"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/homology.tex",
+  "place": "Homology, Lemma Tag 070C (lemma-essentially-constant), forward implication, proof lines 7746--7753; the elementary kernel-splitting calculation hidden by 'setting Z_j = Ker(A_j -> A) works' is written out"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -45,7 +97,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "worker",
@@ -65,5 +117,18 @@
   }
  },
  "chapter": "sec-proper-base-change",
- "unit": "sk-thm-p1"
+ "unit": "sk-thm-p1",
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "lem-weil-pbc-essentially-constant-splitting",
+  "worker": "stage1",
+  "summary": "Checked the statement against the forward implication of Stacks Homology 070C and the specialized definition of essential constancy in Categories 05PU (2)/05PV. The statement is correct and self-contained. Split the proof into four explicit steps: the retraction at every later index, the image-plus-kernel direct-sum calculation omitted by the source, compatibility of the complements with transition maps, and eventual vanishing from the defining factorization. No new node is needed; all non-elementary input is exactly the two existing definition dependencies. The recorded LeanSearch, LeanFinder, local and Mathlib-source searches show no Mathlib statement for the system-level result; LinearMap.isCompl_of_proj covers only the elementary one-index splitting."
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "group": "E1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed by the lead of E1; spot-checked by L: L read the four elementary steps (070C forward direction): retraction, direct-sum decomposition, transition compatibility, eventual vanishing of the kernels."
+ }
 }
