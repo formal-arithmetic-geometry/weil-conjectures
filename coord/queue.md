@@ -14,7 +14,6 @@
 | `lem-weil-pbc-site-plus-construction-functorial` | 1011 | none |
 | `lem-weil-pbc-site-plus-construction-presheaf` | 1011 | none |
 | `lem-weil-pbc-site-plus-of-separated-is-sheaf` | 1011 | none |
-| `lem-weil-pbc-site-plus-of-sheaf-iso` | 1011 | none |
 | `lem-weil-pbc-skyscraper-constant-on-point-closure` | 1011 | none |
 | `lem-weil-pbc-small-etale-representable-presheaf-sheaf` | 1011 | none |
 | `lem-weil-pbc-smooth-free-differentials-strictly-standard-power` | 1011 | none |
@@ -143,6 +142,7 @@
 | `lem-weil-pbc-sheaf-hom-finite-presentation-kernel` | 1012 | none |
 | `lem-weil-pbc-sheaf-isomorphism-local-open-cover` | 1012 | none |
 | `lem-weil-pbc-sheaves-injective-directed-colimit-qc-sections` | 1012 | none |
+| `lem-weil-pbc-site-covering-morphisms-same-h0-map` | 1012 | none |
 | `lem-weil-pbc-smooth-algebra-filtered-colimit-descent` | 1012 | none |
 | `lem-weil-pbc-smooth-at-generic-point-over-field` | 1012 | none |
 | `lem-weil-pbc-smooth-at-prime-free-conormal-basis` | 1012 | none |
@@ -860,7 +860,7 @@
 | `lem-weil-pbc-p1-field-dimension-one` | 4 | state |
 | `lem-weil-pbc-projective-space-zero-isomorphism` | 4 | state |
 
-Not open yet: 671 nodes that wait for stage 1, 474 nodes that wait for a statement dependency.
+Not open yet: 671 nodes that wait for stage 1, 475 nodes that wait for a statement dependency.
 
 ## Stage 3: modules to prove (0)
 
