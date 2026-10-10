@@ -140,6 +140,12 @@ instance Etale.preservesColimitsOfSize_tensorLeft_sheaf (X : Sheaf Y.smallEtaleT
     PreservesColimitsOfSize.{0, 0} (tensorLeft X) :=
   inferInstance
 
+/-- Tensoring on the left with a fixed `A`-valued étale sheaf is right exact, as a particular
+case of `Etale.preservesColimitsOfSize_tensorLeft_sheaf`. -/
+instance Etale.preservesFiniteColimits_tensorLeft_sheaf (X : Sheaf Y.smallEtaleTopology A) :
+    PreservesFiniteColimits (tensorLeft X) :=
+  PreservesColimitsOfSize.preservesFiniteColimits.{0, 0} _
+
 /-- Tensoring on the right with a fixed `A`-valued étale sheaf preserves colimits of size
 `0`: the instance above applied to the essentially small small étale site. -/
 instance Etale.preservesColimitsOfSize_tensorRight_sheaf (X : Sheaf Y.smallEtaleTopology A) :
@@ -158,6 +164,13 @@ instance ProEtale.preservesColimitsOfSize_tensorLeft_sheaf
     (X : Sheaf (Scheme.ProEt.topology Y) A) :
     PreservesColimitsOfSize.{0, 0} (tensorLeft X) :=
   inferInstance
+
+/-- Tensoring on the left with a fixed `A`-valued pro-étale sheaf is right exact, as a
+particular case of `ProEtale.preservesColimitsOfSize_tensorLeft_sheaf`. -/
+instance ProEtale.preservesFiniteColimits_tensorLeft_sheaf
+    (X : Sheaf (Scheme.ProEt.topology Y) A) :
+    PreservesFiniteColimits (tensorLeft X) :=
+  PreservesColimitsOfSize.preservesFiniteColimits.{0, 0} _
 
 /-- Tensoring on the right with a fixed `A`-valued pro-étale sheaf preserves colimits of
 size `0`: the instance above applied to the essentially small small pro-étale site. -/
