@@ -2285,3 +2285,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 18:47 L: returned deliver/C1/lem-sc-qcoh-acyclic-derived-pushforward-cohomology (reviewer RETURN: Reviewer R-qac1847, head 1de1fbb9b. Point 1 of the 18:30 return (qcqs, E7, Leray + 01XJ + 01XB + countable products in S)
 - 18:48 L: merged deliver/F1/def-sp-kinjective-bridge (reviewer FIX; first push; new nodes: 0)
 - 18:48 L: returned deliver/G1/lem-sc-finite-pushforward-derived-hom-qcoherent (reviewer RETURN: Reviewer R-fpd1848, head 3b3728fdb. 1. E/C4 (statement, Steps 2-3, new node lem-sc-pseudo-coherent-rhom-qcoherent): D^+_)
+- 18:48 L: merged deliver/K1/prop-pd-picard-degree-decomposition (reviewer FIX; first push; new nodes: 0)
