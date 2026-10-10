@@ -1,14 +1,15 @@
 # Work queue
 
-911 items; claim with `tools/claim.py next <group> [--stage N]`.
+909 items; claim with `tools/claim.py next <group> [--stage N]`.
 
-## Stage 1: nodes to split (155)
+## Stage 1: nodes to split (153)
 
 | node | distance to a target | Lean state on the done branch |
 |---|---|---|
 | `lem-weil-derived-limit-existence` | 14 | none |
 | `lem-weil-pbc-injective-acyclicity-bounded-below` | 2002 | sorry_here |
 | `lem-pc-ringed-space-module-stalk-tensor` | 3013 | none |
+| `lem-pc-perfect-affine-bounded-projective` | 3014 | none |
 | `lem-sc-derived-open-gluing` | 3014 | none |
 | `lem-pc-coherent-support-proper-higher-direct-image` | 3015 | none |
 | `lem-pc-direct-image-qc-support-reduction` | 3015 | none |
@@ -18,10 +19,9 @@
 | `lem-pc-tor-amplitude-qcoh-test` | 3015 | none |
 | `lem-pc-tower-enough-injectives` | 3015 | none |
 | `lem-pc-tower-surjective-lim-acyclic` | 3015 | none |
-| `lem-pc-ringed-space-derived-limit-stalk-injective` | 3016 | none |
 | `lem-pc-ringed-space-rgamma-derived-limit` | 3016 | none |
 | `lem-pc-derived-mayer-vietoris-triangle` | 3017 | none |
-| `lem-pc-perfect-affine-bounded-projective` | 3017 | none |
+| `lem-pc-ringed-space-sheafification-cohomology` | 3017 | none |
 | `lem-pc-perfect-generation-koszul-orthogonal` | 3018 | none |
 | `lem-pc-perfect-rhom-tensor-comparison` | 3018 | none |
 | `lem-pc-supported-open-pushforward` | 3018 | none |
@@ -55,7 +55,6 @@
 | `lem-sc-locnoeth-components-locally-finite` | 5012 | none |
 | `lem-pc-rf-base-change-single-complex-criterion` | 5013 | none |
 | `lem-pc-affine-perfect-colimit-descent` | 5014 | none |
-| `lem-pc-perfect-affine-model` | 5014 | none |
 | `lem-pc-perfect-descend-morphisms` | 5014 | none |
 | `lem-pc-sites-modules-sheafification-flat` | 5014 | none |
 | `lem-pc-flat-module-descent` | 5015 | none |
@@ -75,7 +74,6 @@
 | `lem-weil-pbc-generic-finite-algebra-splitting` | - | none |
 | `lem-weil-pbc-irreducible-lisse-strata` | - | none |
 | `pqf-lem-finite-fp-locnoeth` | - | none |
-| `pqf-lem-limit-qc-open-descends` | - | none |
 | `pqf-lem-qs-intersection-qc` | - | none |
 | `thm-sc-affine-cohomology` | - | rests_on_sorry |
 | `thm-sc-constant-invariance` | - | none |
@@ -923,7 +921,7 @@
 | `lem-weil-pbc-projective-space-zero-isomorphism` | 4 | state |
 | `def-nagata-fixed-base-separated-stage` | 6 | state |
 
-Not open yet: 1523 nodes that wait for a statement dependency, 195 nodes that wait for stage 1.
+Not open yet: 1524 nodes that wait for a statement dependency, 193 nodes that wait for stage 1.
 
 ## Stage 3: modules to prove (0)
 
