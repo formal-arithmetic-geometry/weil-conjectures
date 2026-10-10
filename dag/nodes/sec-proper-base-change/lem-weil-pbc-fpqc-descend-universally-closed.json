@@ -1,0 +1,99 @@
+{
+ "id": "lem-weil-pbc-fpqc-descend-universally-closed",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lemma-weil-pbc-h1-constructible-representation",
+   "place": "step 2 of its split (source: Lemma 0A5H (lemma-efface-cohomology-on-fibre-by-finite-cover), etale-cohomology.tex line 16164, proof, second paragraph, 'By Lemmas 03SA (lemma-torsion-colimit-); within it, the descent of integrality lem-weil-pbc-fpqc-descend-integral (Stacks 02L9), whose proof (descent.tex lines 6092-6099) reads 'Hence the lemma follows on combining Lemmas [02KS] and [02L5]': this node is Lemma 02KS, the universally-closed half",
+   "via": [
+    "lem-weil-pbc-fpqc-descend-integral",
+    "lem-weil-pbc-fpqc-descend-finite",
+    "lem-weil-pbc-finite-locally-free-degree-etale-descent",
+    "lem-weil-pbc-flat-fp-lqf-bounded-stratification",
+    "lem-weil-pbc-flat-fp-qf-stratification",
+    "lem-weil-pbc-etale-separated-stratified-finite",
+    "lem-weil-pbc-etale-stratified-finite",
+    "lem-weil-pbc-etale-free-sheaf-constructible",
+    "lem-weil-pbc-constructible-generation",
+    "lem-weil-pbc-module-sheaf-colimit-constructible"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Being universally closed descends along fpqc coverings (Stacks 02KS)",
+ "statement": "Let $f:X\\to S$ be a morphism of schemes [def-pc-scheme] and let $\\{g_i:S_i\\to S\\}_{i\\in I}$ be an fpqc covering of $S$ [def-weil-pbc-fpqc-covering]. For $i\\in I$ let $f_i:X\\times_SS_i\\to S_i$ be the base change of $f$ along $g_i$, the second projection of the fibre product [def-pc-fibre-product]. If $f_i$ is universally closed [def-weil-proper-morphism] (for every morphism $T\\to S_i$ the base change $(X\\times_SS_i)\\times_{S_i}T\\to T$ is a closed map of underlying topological spaces) for every $i\\in I$, then $f$ is universally closed.",
+ "source": {
+  "document": "literature/stacks-project/descent.tex",
+  "place": "Descent, Lemma Tag 02KS (lemma-descending-property-universally-closed, line 5515: 'The property P(f) = \"f is universally closed\" is fpqc local on the base'), the direction 'each base change $X\\times_SS_i\\to S_i$ has the property $\\Rightarrow$ $f$ has it' of Definition Tag 02KO (definition-property-morphisms-local, line 5310); proof lines 5520-5563 (via Lemma Tag 02KP and Morphisms, Lemma Tag 02JY lemma-fpqc-quotient-topology)"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-pbc-fpqc-covering",
+  "def-pc-fibre-product",
+  "def-weil-proper-morphism"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "universally closed morphism of schemes descends along faithfully flat quasi-compact base change",
+   "results": "AlgebraicGeometry.descendsAlong_universallyClosed_surjective_inf_flat_inf_quasicompact (Morphisms.FlatDescent), UniversallyClosed, UniversallyClosed.mk, universallyClosed_isStableUnderBaseChange (Morphisms.UniversallyClosed), IsProper.toUniversallyClosed",
+   "date": "2026-10-10",
+   "verdict": "candidate: descent along ONE surjective flat quasi-compact morphism; not the covering-family statement"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.MorphismProperty.DescendsAlong @AlgebraicGeometry.UniversallyClosed",
+   "results": "AlgebraicGeometry.descendsAlong_universallyClosed_surjective_inf_flat_inf_quasicompact : DescendsAlong @UniversallyClosed (@Surjective ⊓ @Flat ⊓ @QuasiCompact) (Morphisms.FlatDescent)",
+   "date": "2026-10-10",
+   "verdict": "candidate (single morphism), no covering-family version"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "universally closed is fpqc local on the target: descends along a family of flat morphisms jointly surjective",
+   "results": "descendsAlong_universallyClosed_surjective_inf_flat_inf_quasicompact, descendsAlong_universallyOpen_surjective_inf_flat_inf_quasicompact (Morphisms.FlatDescent), universallyClosed_isZariskiLocalAtTarget, universallyClosed_iff (Morphisms.UniversallyClosed)",
+   "date": "2026-10-10",
+   "verdict": "no covering-family match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rn '02KS\\|02L5\\|DescendsAlong @IsAffineHom' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib; sed -n 38,60p ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicGeometry/Morphisms/FlatDescent.lean",
+   "results": "FlatDescent.lean:47-60 @[stacks 02KS] instance descendsAlong_universallyClosed_surjective_inf_flat_inf_quasicompact (one surjective flat quasi-compact morphism Y -> Z); Sites/Fpqc.lean defines fpqcPrecoverage/fpqcTopology but states no descent of morphism properties along its coverings",
+   "date": "2026-10-10",
+   "verdict": "no exact match; candidate recorded"
+  }
+ ],
+ "mathlib_match": null,
+ "mathlib_candidate": {
+  "declaration": "AlgebraicGeometry.descendsAlong_universallyClosed_surjective_inf_flat_inf_quasicompact",
+  "file": "Mathlib/AlgebraicGeometry/Morphisms/FlatDescent.lean",
+  "line": "47-60 (read with sed -n 38,60p)",
+  "how": "descent along a single surjective flat quasi-compact morphism, plus universallyClosed_isZariskiLocalAtTarget (Morphisms/UniversallyClosed.lean); the node is stated for an fpqc covering family {S_i -> S}, and the reduction (Zariski-local on S; over an affine open V of S finitely many affine opens of the S_i whose images cover V, their disjoint union -> V one surjective flat quasi-compact morphism) is not one line; not a leaf (point B8), as for the siblings lem-weil-pbc-fpqc-descend-locally-finite-type and -locally-finite-presentation."
+ },
+ "status": "unsplit",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-fpqc-descend-integral",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "reviewed": "2026-10-10 L: statement checked against 02KS; no blueprint node states it",
+ "lead_note": "split through the 02KP criterion node lem-weil-pbc-fpqc-local-on-base-criterion, verifying its conditions (0)-(3)"
+}

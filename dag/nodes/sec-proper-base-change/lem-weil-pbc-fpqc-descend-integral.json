@@ -4,7 +4,7 @@
   "is": null,
   "from": {
    "node": "lemma-weil-pbc-h1-constructible-representation",
-   "place": "step 2 of its split (source: Lemma 0A5H (lemma-efface-cohomology-on-fibre-by-finite-cover), etale-cohomology.tex line 16164, proof, second paragraph, 'By Lemmas 03SA (lemma-torsion-colimit-)",
+   "place": "step 2 of its split (source: Lemma 0A5H (lemma-efface-cohomology-on-fibre-by-finite-cover), etale-cohomology.tex line 16164, proof, second paragraph, 'By Lemmas 03SA (lemma-torsion-colimit-constructible) and 03Q5 (lemma-colimit) we can find a map F -> I with F a constructible sheaf of Z/lZ-modules')",
    "via": [
     "lem-weil-pbc-fpqc-descend-finite",
     "lem-weil-pbc-finite-locally-free-degree-etale-descent",
@@ -17,7 +17,7 @@
     "lem-weil-pbc-module-sheaf-colimit-constructible"
    ]
   },
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "Being integral descends along fpqc coverings (Stacks 02L9)",
@@ -32,9 +32,62 @@
   "def-pc-fibre-product",
   "def-weil-finite-integral-morphism"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "*Step 1 (each $f_i$ is affine and universally closed).* Fix $i\\in I$. By hypothesis $f_i:X\\times_SS_i\\to S_i$ is integral, so by Morphisms, Lemma 01WM [pqf-lem-integral-univclosed], direction (1)$\\Rightarrow$(2), $f_i$ is affine and universally closed. (Source: 'An integral morphism is the same thing as an affine, universally closed morphism. See Morphisms, Lemma [01WM].')",
+   "uses": [
+    "pqf-lem-integral-univclosed"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/descent.tex",
+    "place": "Descent, Lemma Tag 02L9 (lemma-descending-property-integral, line 6087), proof (lines 6092-6099)"
+   }
+  },
+  {
+   "text": "*Step 2 ($f$ is universally closed).* $\\{g_i:S_i\\to S\\}_{i\\in I}$ is an fpqc covering of $S$ and, by step 1, every base change $f_i:X\\times_SS_i\\to S_i$ of $f$ is universally closed. By the descent of universal closedness along fpqc coverings, Descent, Lemma 02KS [lem-weil-pbc-fpqc-descend-universally-closed], applied to the same $f$ and the same covering, $f$ is universally closed. (Source: 'combining Lemmas [02KS] and ...'.)",
+   "uses": [
+    "lem-weil-pbc-fpqc-descend-universally-closed"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/descent.tex",
+    "place": "Descent, Lemma Tag 02L9 (lemma-descending-property-integral, line 6087), proof (lines 6092-6099)"
+   }
+  },
+  {
+   "text": "*Step 3 ($f$ is affine).* Likewise, by step 1 every $f_i$ is affine, so by the descent of affineness along fpqc coverings, Descent, Lemma 02L5 [lem-weil-pbc-fpqc-descend-affine], applied to $f$ and the covering $\\{g_i\\}$, $f$ is affine. (Source: '... and [02L5]'.)",
+   "uses": [
+    "lem-weil-pbc-fpqc-descend-affine"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/descent.tex",
+    "place": "Descent, Lemma Tag 02L9 (lemma-descending-property-integral, line 6087), proof (lines 6092-6099)"
+   }
+  },
+  {
+   "text": "*Step 4 ($f$ is integral).* By steps 2 and 3, $f:X\\to S$ is affine and universally closed, hence integral by Morphisms, Lemma 01WM [pqf-lem-integral-univclosed], direction (2)$\\Rightarrow$(1).",
+   "uses": [
+    "pqf-lem-integral-univclosed"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/descent.tex",
+    "place": "Descent, Lemma Tag 02L9 (lemma-descending-property-integral, line 6087), proof (lines 6092-6099)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "pqf-lem-integral-univclosed",
+  "lem-weil-pbc-fpqc-descend-universally-closed",
+  "lem-weil-pbc-fpqc-descend-affine"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/descent.tex",
+  "place": "Lemma Tag 02L9 (lemma-descending-property-integral, line 6087), proof lines 6092-6099"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -63,10 +116,17 @@
    "results": "only Descent.lean:194 (the hypothesis DescendsAlong @IsAffineHom P' of HasAffineProperty.descendsAlong_of_affineAnd) and a local `have` at FlatDescent.lean:110; no DescendsAlong instance for IsIntegralHom or IsAffineHom (descent of affineness, Stacks 02L5, is absent); UniversallyClosed descends along one surjective flat quasi-compact morphism (FlatDescent.lean:48); nothing for fpqc covering families",
    "date": "2026-10-10",
    "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rn '02L9\\|IsIntegralHom' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicGeometry/Morphisms/Descent.lean ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicGeometry/Morphisms/FlatDescent.lean ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicGeometry/Morphisms/LocalFlatDescent.lean; grep -rn '02L9' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib",
+   "results": "none; IsIntegralHom has HasAffineProperty (affineAnd RingHom.IsIntegral) in Morphisms/Integral.lean, and HasAffineProperty.descendsAlong_of_affineAnd (Descent.lean:190-196) would give its descent only from a DescendsAlong instance for IsAffineHom, which Mathlib lacks (see lem-weil-pbc-fpqc-descend-affine)",
+   "date": "2026-10-10",
+   "verdict": "no match"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "worker",
@@ -87,5 +147,16 @@
  },
  "chapter": "sec-proper-base-change",
  "unit": "sk-thm-p1",
- "lead_note": "Note by L (2026-10-10): the general fpqc-local-on-the-base criterion 02KP now exists as lem-weil-pbc-fpqc-local-on-base-criterion; cite it rather than creating another."
+ "lead_note": "split following the source (02KS + 02L5); the earlier note to cite the 02KP criterion is withdrawn",
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "lem-weil-pbc-fpqc-descend-integral",
+  "worker": "stage1",
+  "summary": "Read Descent 02L9 (descent.tex 6087-6099) and its cited lemmas: Morphisms 01WM (morphisms.tex 11054, integral = affine + universally closed), Descent 02KS (line 5515) and 02L5 (line 5926); tags checked in literature/stacks-project/tags/tags. The source's proof is not the 02KP route the brief guessed: it is 01WM plus the two descent lemmas 02KS and 02L5, so the split follows it in four steps (01WM forwards on each f_i; 02KS; 02L5; 01WM backwards on f). 01WM has the blueprint node pqf-lem-integral-univclosed (unit sk-prop-av-pqf-finite, unsplit; already an accepted tool of lem-weil-pbc-thickening-integral and lem-weil-pbc-surjective-universally-closed-affine-target), cited, not duplicated. 02KS and 02L5 had no node (grep of the tags and labels on dag/nodes, blueprint_refs search) and became the unsplit nodes lem-weil-pbc-fpqc-descend-universally-closed (Mathlib candidate: the single-morphism instance descendsAlong_universallyClosed_surjective_inf_flat_inf_quasicompact, FlatDescent.lean 47-60; not a leaf for the covering-family form) and lem-weil-pbc-fpqc-descend-affine (absent from Mathlib: no DescendsAlong instance for IsAffineHom). lem-weil-pbc-fpqc-local-on-base-criterion (02KP) is not cited by this node: its source proof does not use 02KP directly; 02KP enters through the proofs of 02KS and 02L5, i.e. in the splits of the two new nodes. lem-weil-pbc-descend-affine is Limits 01ZN (descent of affineness to a finite stage of a limit), not 02L5. Statement unchanged; no Lean (state none).",
+  "blueprint": "Blueprint ancestor lemma-weil-pbc-h1-constructible-representation (via the created chain lem-weil-pbc-fpqc-descend-finite, ...): this item serves the place recorded in blueprint.from (step 2 of its split, Stacks 0A5H proof second paragraph), through lem-weil-pbc-fpqc-descend-finite (02LA), whose proof uses 'f is integral' after descent. Steps 1-4 realize no further sentence of the blueprint node's proof text; they realize the four clauses of the Stacks proof of 02L9 (01WM, 02KS, 02L5, 01WM). Blueprint search (tools/blueprint_refs.py search: 'integral fpqc', 'integral descend', '02L9', 'fpqc covering integral', 'integral faithfully flat'): no blueprint node states 02L9, so same_as = []; for the new nodes ('universally closed fpqc', 'universally closed descend', '02KS', 'affine fpqc local', '02L5', 'affine descend', 'affine flat surjective', 'universally closed flat surjective', 'fpqc covering universally', 'fpqc covering affine'): none, same_as = []; '01WM' found pqf-lem-integral-univclosed, which is cited."
+ },
+ "reviewed": "2026-10-10 L: 4 steps checked against the 02L9 proof (integral = affine + universally closed by 01WM; descend each by 02KS and 02L5, new nodes); the lead note to route through 02KP is withdrawn since the source does not; citer fpqc-descend-finite matches",
+ "tool_uses": [
+  "pqf-lem-integral-univclosed"
+ ]
 }
