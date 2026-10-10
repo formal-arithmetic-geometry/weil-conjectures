@@ -1524,3 +1524,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 13:40 L: returned deliver/M1/def-sc-picard-functor (reviewer RETURN: E1/B3 hypotheses not covered by the cited degree nodes, C4 Pic^d wording, C1 geometric vs residue fibre, B9 same_as)
 - 13:41 L: accepted lem-pc-euler-characteristic-well-defined: 5 steps, new node lem-pc-cohomology-sections-affine-base (01XK), tool_uses 3
 - 2026-10-10, delivery of K1: def-sc-rational-section-divisor merged from deliver/K1/def-sc-rational-section-divisor (1 commit(s), 0 new node(s), spot-checked by L: L: reviewed in full by a reviewer sub-agent (PASS): 02SF/0BE6 read, every claim inside the definition carried by a cited statement, no cycle); claim closed
+- 13:41 L: merged deliver/K1/def-sc-rational-section-divisor (reviewer PASS, first push)
