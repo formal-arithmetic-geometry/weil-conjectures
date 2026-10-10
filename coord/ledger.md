@@ -2588,3 +2588,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 20:56 L: merged deliver/C1/lem-sc-affine-pseudo-coherent-rhom-qcoherent (reviewer FIX; first push; new nodes: 1)
 - 20:56 L: merged deliver/H1/lem-pc-perfect-tensor-hom-duality (reviewer FIX; after a return; new nodes: 2)
 - 20:56 L: attached AlgebraicGeometry.IsHilbertSubscheme.eq_of_le to lem-pc-hilb-nested-points-equal (Hilbert/Defs.lean:120-140, sorry-free; reviewer R-uas2425)
+- 20:57 L: merged deliver/K1/lem-sc-finite-maximals-over-element (reviewer PASS; first push; new nodes: 1)
