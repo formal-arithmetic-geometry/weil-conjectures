@@ -3,7 +3,7 @@
  "blueprint": {
   "is": "thm-sc-theorem-of-the-base",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "The theorem of the base",
@@ -42,28 +42,126 @@
  ],
  "proof": [
   {
-   "text": "*Reference: Stacks Project, Picard Schemes of Curves, Lemma\n44.6.7, [Tag 0BA0](https://stacks.math.columbia.edu/tag/0BA0).* The argument of loc. cit. is the following. By Derived\nCategories of Schemes, Lemma 36.32.2,\n[Tag 0B9T](https://stacks.math.columbia.edu/tag/0B9T), the\nPicard functor decomposes as a disjoint union over $d\\in\\mathbf Z$ of open and closed subfunctors $\\operatorname{Pic}^d_{C/k}$,\nclassified by the fibrewise Euler characteristic\n$\\chi(X_t,\\mathcal L_t)=d+1-g$. Smoothness and dimension: the\nHilbert scheme $\\underline{\\mathrm{Hilb}}^g_{C/k}$ is smooth of\ndimension $g$ (Proposition 44.3.6,\n[Tag 0B9I](https://stacks.math.columbia.edu/tag/0B9I)); the\nmorphism $\\gamma_g:\\underline{\\mathrm{Hilb}}^g\\to \\operatorname{Pic}^g$, $D\\mapsto\\mathcal O_C(D)$, is an open\nimmersion on a nonempty open (as the proof of representability of\n[thm-pc-picard-representable] shows), and the translates of this open by $k$-points of the\ngroup scheme form an open covering, so\n$\\operatorname{Pic}_{C/k}$ is smooth of dimension $g$.\nProperness: for $d\\geq g$ the map\n$\\gamma_d:\\underline{\\mathrm{Hilb}}^d_{C/k}\\to\\operatorname{Pic}^d$,\n$D\\mapsto\\mathcal O_C(D)$, given by the universal divisor (Remark\n44.3.7, [Tag 0B9J](https://stacks.math.columbia.edu/tag/0B9J)), is surjective: for $\\mathcal L\\in\\operatorname{Pic}^d(K)$\none has $\\chi(C_K,\\mathcal L)=d+1-g>0$ ([lem-sc-riemann-roch]), so\n$\\mathcal L$ has a nonzero global section, which yields\n$\\mathcal L\\cong\\mathcal O_C(D)$ for an effective divisor $D$\nof degree $d$. The Hilbert scheme is proper over $k$ (it is\nprojective), and the image of a proper scheme in a separated target\nis proper (Morphisms of Schemes, Lemma 29.42.10,\n[Tag 0AH6](https://stacks.math.columbia.edu/tag/0AH6)), so\n$\\operatorname{Pic}^d_{C/k}$ is proper for $d\\geq g$; every\nother component is isomorphic to one of these by a translation under\nthe group law ([prop-pd-picard-degree-decomposition](4): translation by\n$\\mathcal O_C(eP)$ maps $\\operatorname{Pic}^d_{C/k}$ isomorphically onto\n$\\operatorname{Pic}^{d+e}_{C/k}$), hence proper. Therefore the open and closed subgroup scheme\n$\\operatorname{Pic}^0_{C/k}$ is proper and smooth of dimension\n$g$.",
+   "text": "By [thm-pc-picard-representable], the fppf Picard functor of $C$ is represented by a group scheme $P$ over $k$; its restriction to affine $k$-schemes is the functor of [def-sc-picard-functor] by [lem-pc-picard-functor-agrees-sc]. Since $C$ is nonempty and smooth over the separably closed field $k$, [lem-pc-rational-points-dense] gives $p\\in C(k)$. Apply [prop-pd-picard-degree-decomposition] (1)--(3) with $p$: fibrewise degree is locally constant (equivalently, fibrewise Euler characteristic is $d+1-g$), and $P=\\coprod_{d\\in\\mathbf Z}P_d$ with each $P_d$ open and closed and representing $\\operatorname{Pic}^d_{C/k}$. The degree-zero piece is an open and closed subgroup scheme.",
    "uses": [
     "thm-pc-picard-representable",
-    "lem-sc-riemann-roch",
+    "lem-pc-picard-functor-agrees-sc",
+    "lem-pc-rational-points-dense",
     "prop-pd-picard-degree-decomposition"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/pic.tex",
+    "place": "Tag 0BA0 (lemma-picard-pieces), first proof paragraph and clauses (1)--(3); Tag 0B9T (perfect-lemma-chi-locally-constant-geometric)"
+   }
+  },
+  {
+   "text": "Let $F$ be the normalized Picard subfunctor of [lem-pc-f-open-subfunctor] using $p$. Its representing open subscheme $W\\subseteq H_g:=\\underline{\\operatorname{Hilb}}^g_{C/k}$ is supplied by [thm-pc-f-representable], while the same $F$ is an open subfunctor of $P$ by [lem-pc-f-open-subfunctor]. Thus $W$ identifies with an open subscheme $U\\subseteq P$. For every field extension $K/k$, an $F(K)$-class has $h^0=1$ and $H^1=0$; [cor-picard-degree-g] gives degree $g$, so $U\\subseteq P_g$. Now take any point $t$ of $P_g$ with residue field $K$ and associated invertible module $L$ on $C_K$. By [lem-pc-twist] there is a line bundle $L_0$ on $C$ with $L\\otimes L_{0,K}\\in F(K)$. Its degree is zero because both $L$ and the twist have degree $g$. Translation by the $k$-point $[L_0]$ therefore sends $t$ into $U$, and its inverse sends $U$ to an open neighbourhood of $t$ inside $P_g$. These translates of $U$ cover $P_g$.",
+   "uses": [
+    "lem-pc-f-open-subfunctor",
+    "thm-pc-f-representable",
+    "cor-picard-degree-g",
+    "lem-pc-twist",
+    "prop-pd-picard-degree-decomposition"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/pic.tex",
+    "place": "Tag 0BA0 (lemma-picard-pieces), third proof paragraph; Tag 0B9Z (proposition-pic-curve), proof using Tags 0B9V, 0B9X and 0B9Y"
+   }
+  },
+  {
+   "text": "By [thm-pc-hilb-curves] (1), $H_g$ is smooth of dimension $g$ over $k$. Its open $W$ is smooth of relative dimension $g$, and the isomorphism $W\\cong U$ of the previous step gives the same property to $U$. Each translate of $U$ is isomorphic over $k$ to $U$. As those translates cover $P_g$, smoothness and relative dimension $g$ hold at every point of $P_g$ by their local definitions [def-sbc-smooth-morphisms].",
+   "uses": [
+    "thm-pc-hilb-curves",
+    "def-sbc-smooth-morphisms",
+    "prop-pd-picard-degree-decomposition"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/pic.tex",
+    "place": "Tag 0BA0 (lemma-picard-pieces), third proof paragraph; Tag 0B9I (proposition-hilb-d), clause (1)"
+   }
+  },
+  {
+   "text": "The group scheme $P$ is separated over $k$ by [lem-sc-group-scheme-separated-field]; hence its open and closed subscheme $P_g$ is separated. It is locally of finite type because it is smooth by the previous step [def-sbc-smooth-morphisms]. By [thm-pc-hilb-curves] (1), $H_g$ is proper over $k$. The universal divisor gives $\\gamma_g:H_g\\to P_g$ by [lem-sc-hilb-to-pic-morphism], and [lem-sc-hilb-to-pic-surjective] makes it surjective (the inequality $g\\geq g$ is automatic). Apply the proper-image result [lem-weil-pbc-image-universally-closed] to the surjection $H_g\\to P_g$ over $\\operatorname{Spec}k$: properness of $H_g$ gives universal closedness of its structure morphism, and separatedness and local finite type of $P_g$ turn the descended universal closedness into properness of $P_g$.",
+   "uses": [
+    "lem-sc-group-scheme-separated-field",
+    "def-sbc-smooth-morphisms",
+    "thm-pc-hilb-curves",
+    "lem-sc-hilb-to-pic-morphism",
+    "lem-sc-hilb-to-pic-surjective",
+    "lem-weil-pbc-image-universally-closed"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/pic.tex",
+    "place": "Tag 0BA0 (lemma-picard-pieces), fourth proof paragraph; Tag 047L (lemma-group-scheme-separated); Tag 03GN (lemma-image-proper-is-proper)"
+   }
+  },
+  {
+   "text": "The source $H_g$ is geometrically integral by [lem-sc-hilb-geometrically-integral], with the hypotheses supplied by the smooth projective geometrically integral curve $C$. For every extension $K/k$, the base change of $\\gamma_g$ is surjective by [lem-weil-pbc-surjective-base-change]; hence $P_{g,K}$ is the continuous image of the irreducible $H_{g,K}$ and is irreducible [lem-weil-pbc-irreducible-continuous-image]. By [lem-pc-proper-base-change] (2), $P_{g,K}$ remains smooth over $K$. Cover it by affine opens $\\operatorname{Spec}A_i$. The restriction to each affine open is smooth, so $A_i$ is a smooth $K$-algebra by the affine-local smoothness criterion in [def-sbc-smooth-morphisms]; [lem-sc-smooth-algebra-reduced-field] makes every $A_i$ reduced. Each local ring of $P_{g,K}$ is a localization of such an $A_i$, and localization preserves the absence of nonzero nilpotents, so $P_{g,K}$ is reduced. Thus each $P_{g,K}$ is integral [def-pc-integral-scheme], in particular $P_g$ is an integral, separated finite-type $k$-scheme, i.e. a $k$-variety.",
+   "uses": [
+    "lem-sc-hilb-geometrically-integral",
+    "lem-weil-pbc-surjective-base-change",
+    "lem-weil-pbc-irreducible-continuous-image",
+    "lem-pc-proper-base-change",
+    "def-sbc-smooth-morphisms",
+    "lem-sc-smooth-algebra-reduced-field",
+    "def-pc-integral-scheme"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/pic.tex",
+    "place": "Tag 0BA0 (lemma-picard-pieces), clause (1) and proof paragraphs three and four; Tag 0B9I (proposition-hilb-d), proof of irreducibility"
+   }
+  },
+  {
+   "text": "For every integer $d$, [prop-pd-picard-degree-decomposition] (4) identifies both $P_d$ and $P_g$ with $P_0$ by translation by the $k$-points $[\\mathcal O_C(d p)]$ and $[\\mathcal O_C(g p)]$. Hence $P_d$ is a smooth proper integral $k$-variety of dimension $g$, and $P_0$ is a proper smooth group scheme of that dimension. Finally [lem-pc-rational-hyp] gives the hypotheses of [thm-pc-pic-split] for the section $p$; at $T=\\operatorname{Spec}k$, its exact sequence and $\\operatorname{Pic}(\\operatorname{Spec}k)=0$ identify $P(k)$ with $\\operatorname{Pic}(C)$. By [prop-pd-picard-degree-decomposition] (2), the $k$-points of $P_d$ are exactly the degree-$d$ invertible modules.",
+   "uses": [
+    "prop-pd-picard-degree-decomposition",
+    "lem-pc-rational-hyp",
+    "thm-pc-pic-split"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/pic.tex",
+    "place": "Tag 0BA0 (lemma-picard-pieces), clauses (1)--(3), first and fourth proof paragraphs"
+   }
   }
  ],
  "proof_deps": [
   "thm-pc-picard-representable",
-  "lem-sc-riemann-roch",
-  "prop-pd-picard-degree-decomposition"
+  "lem-pc-picard-functor-agrees-sc",
+  "lem-pc-rational-points-dense",
+  "prop-pd-picard-degree-decomposition",
+  "lem-pc-f-open-subfunctor",
+  "thm-pc-f-representable",
+  "cor-picard-degree-g",
+  "lem-pc-twist",
+  "thm-pc-hilb-curves",
+  "def-sbc-smooth-morphisms",
+  "lem-sc-group-scheme-separated-field",
+  "lem-sc-hilb-to-pic-morphism",
+  "lem-sc-hilb-to-pic-surjective",
+  "lem-weil-pbc-image-universally-closed",
+  "lem-sc-hilb-geometrically-integral",
+  "lem-weil-pbc-surjective-base-change",
+  "lem-weil-pbc-irreducible-continuous-image",
+  "lem-pc-proper-base-change",
+  "lem-sc-smooth-algebra-reduced-field",
+  "def-pc-integral-scheme",
+  "lem-pc-rational-hyp",
+  "thm-pc-pic-split"
  ],
  "proof_origin": {
-  "by": "agent",
-  "document": "literature/blueprint/master/blueprint/sec-picard-framework/sk-prop-jacobian/thm-sc-theorem-of-the-base.md",
-  "place": "## Proof"
+  "by": "document",
+  "document": "literature/stacks-project/pic.tex",
+  "place": "Tag 0BA0 (lemma-picard-pieces), proof"
  },
  "mathlib_searches": [],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [
   "proof_cites_literature"
@@ -379,5 +477,19 @@
   }
  },
  "chapter": "sec-picard-framework",
- "unit": "sk-prop-jacobian"
+ "unit": "sk-prop-jacobian",
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "thm-sc-theorem-of-the-base",
+  "worker": "stage1",
+  "summary": "Expanded the imported single-paragraph reference into the Picard degree decomposition, the translated Hilbert open chart proving smoothness, the proper surjective Hilbert map proving properness, geometric integrality, and translation and point identification. Added separatedness and smooth-algebra reducedness as smaller facts.",
+  "blueprint": "The six steps realize the sole proof paragraph of blueprint node thm-sc-theorem-of-the-base: decomposition (opening sentences), smoothness (Hilbert chart and translates), properness (Hilbert map and image), and conclusion (translation and Picard zero)."
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "group": "F1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed by the lead of F1; spot-checked by L: L: reviewed in full by a reviewer sub-agent (FIX: cor-pc-sigma-pic-iso cited in step 2; three label/line corrections): 0BA0 read, 6 steps checked, new nodes 047L and smooth-algebra-reduced checked; Algebra.Smooth.isReduced_of_field sorry-free"
+ }
 }
