@@ -2019,3 +2019,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 16:42 L: returned deliver/H1/lem-sc-point-tangent-finite-local-cotangent-surjective (reviewer RETURN: 1. A3/F (point 3 of the return of 16:26, not repaired): coord/reports/H1/lem-sc-point-tangent-finite-local-cotangent-sur)
 - 16:42 L: lem-sc-topological-pushforward-injective attached (J1 release; sorry-free)
 - 16:42 L: merged deliver/H1/lemma-constructible-flc-serre (reviewer PASS; after a return; new nodes: 2)
+- 16:42 L: merged deliver/H1/lem-sc-point-tangent-finite-local-cotangent-surjective (reviewer PASS; after a return; new nodes: 0)

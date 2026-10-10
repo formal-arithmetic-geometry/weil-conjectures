@@ -21,9 +21,48 @@
  "stmt_deps": [
   "def-weil-locally-ringed-space-morphism"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Surjectivity of the induced map $\\mathfrak m/\\mathfrak m^2\\to\\mathfrak n/\\mathfrak n^2$ means that every element of $\\mathfrak n$ is congruent modulo $\\mathfrak n^2$ to the image of an element of $\\mathfrak m$. Equivalently, $\\mathfrak n=\\mathfrak mB+\\mathfrak n^2$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 0E8M, lemma-when-surjective-local (translation of cotangent-space surjectivity into maximal-ideal generation)"
+   }
+  },
+  {
+   "text": "Set $\\overline B=B/\\mathfrak mB$ and $\\overline{\\mathfrak n}=\\mathfrak n/\\mathfrak mB$. The quotient $\\overline B$ is local with maximal ideal $\\overline{\\mathfrak n}$ and residue field $k$. Since $B$ is finite over $A$, $\\overline B$ is finite-dimensional over $k$, so its ideal $\\overline{\\mathfrak n}$ is a finitely generated $\\overline B$-module; moreover $\\overline{\\mathfrak n}$ is contained in the Jacobson radical of the local ring $\\overline B$. The equality of Step 1 descends to $\\overline{\\mathfrak n}=\\overline{\\mathfrak n}^{2}$. Applying [lem-weil-pbc-nakayama-jacobson] to $R=\\overline B$, $I=\\overline{\\mathfrak n}$ and $M=\\overline{\\mathfrak n}$ gives $\\overline{\\mathfrak n}=0$, hence $\\mathfrak n=\\mathfrak mB$.",
+   "uses": [
+    "lem-weil-pbc-nakayama-jacobson"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 0E8M, lemma-when-surjective-local (quotient by mB and Nakayama applied to n/mB)"
+   }
+  },
+  {
+   "text": "Now $B/\\mathfrak mB=B/\\mathfrak n=k$ is generated over $k=A/\\mathfrak m$ by the image of $1$. Applying [lem-weil-pbc-nakayama-local-generators] to the local ring $A$, the finite $A$-module $B$, and the element $1\\in B$, the element $1$ generates $B$ as an $A$-module. Thus the ring homomorphism $A\\to B$ is surjective.",
+   "uses": [
+    "lem-weil-pbc-nakayama-local-generators"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 0E8M, lemma-when-surjective-local (final Nakayama application to the finite A-module B)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-nakayama-jacobson",
+  "lem-weil-pbc-nakayama-local-generators"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Tag 0E8M, lemma-when-surjective-local"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -48,12 +87,29 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-sc-point-tangent-separation-closed-immersion",
   "by": "worker",
   "date": "2026-10-10"
  },
  "chapter": "sec-picard-framework",
- "unit": "sk-thm-picard-rr"
+ "unit": "sk-thm-picard-rr",
+ "split_report": {
+  "date": "2026-10-11",
+  "item": "lem-sc-point-tangent-finite-local-cotangent-surjective",
+  "worker": "stage1",
+  "summary": "Repaired the split by deleting the auxiliary ideal-generation node that had moved the item's proof out of the item. The item now gives the elementary equality n = mB + n^2, the quotient B/mB Nakayama argument using the Jacobson-radical leaf, and the final Nakayama generator argument for the finite A-module B using the local-generators leaf. The finite-generation hypothesis on n from the usual Tag 0E8M formulation is not assumed; Step 2 derives it from finite-dimensionality of B/mB.",
+  "blueprint": "Realizes the ancestor blueprint proof's third-paragraph local Nakayama step used to prove surjectivity on local rings, including both Nakayama applications and the removal of the unnecessary finite-generation hypothesis on n.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-fl2b",
+  "group": "H1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-fl2b (reviewer sub-agent of L); spot-checked: Reviewer R-fl2b (re-push after the 16:26 return): points 1 and 2 repaired, mathematics right; point 3 (report lists files not in the commit) is a form fault that does not change the split; L merged at 16:42 UTC instead of a third round trip"
+ },
+ "lead_note": "2026-10-10 L (R-fl2b): merged by L over the reviewer's return: the only unrepaired point was report-only (the report lists citations.json and report.md that are not in the commit); points 1-2 repaired and the mathematics right per R-fl2b"
 }
