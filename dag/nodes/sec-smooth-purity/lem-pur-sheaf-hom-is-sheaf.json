@@ -9,7 +9,7 @@
     "def-pur-sheaf-hom"
    ]
   },
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "The sheaf Hom of sheaves of modules is a sheaf of modules",
@@ -23,9 +23,63 @@
   "def-pur-localized-ringed-site",
   "def-pur-sheaf-modules-hom-module"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "For each U, define H(U)=Hom_{O|_U}(F|_U,G|_U), and for V→U restrict a morphism along the relocalization C/V→C/U. Multiplication by a section f∈O(U) is defined by multiplying the source or target; commutativity of O makes the two definitions agree, and restriction is semilinear over O(U)→O(V). This is the pointwise construction of the presheaf and module structure.",
+   "uses": [
+    "def-pur-sheaf-modules-hom-module"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Section 04TT (sites-modules-section-internal-hom)"
+   }
+  },
+  {
+   "text": "For every covering family of U, compatible local O-linear maps F|_{U_i}→G|_{U_i} glue uniquely to an O-linear map on C/U by [lem-pur-sheaf-hom-cover-gluing]; O-linearity is local because addition and scalar multiplication are sectionwise.",
+   "uses": [
+    "lem-pur-sheaf-hom-cover-gluing"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Lemma 03EM (sites-modules-lemma-internal-hom), using Sites Lemma 04TQ"
+   }
+  },
+  {
+   "text": "The localized site C/U has final object U/U, so a section of H over C/U is the same as an element of H(U); this gives H(U)≅Γ(C/U,H|_U), compatibly with restrictions and the O(U)-module structures.",
+   "uses": [
+    "def-pur-localized-ringed-site"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Lemma sites-modules-lemma-internal-hom-restriction and Section 03DD"
+   }
+  },
+  {
+   "text": "A global section of H is a family (φ_U)_{U∈C}, φ_U∈H(U), with φ_U|_V=φ_V for every a:V→U, i.e. (φ_U)_{W/U}=(φ_V)_{W/V} for W→V→U [def-pur-localized-ringed-site]. Given such a family define φ:F→G by φ_V=(φ_V)_{V/V}:F(V)→G(V) (using F|_V(V/V)=F(V), G|_V(V/V)=G(V)). For a:W→V, compatibility gives (φ_V)_{W/V}=(φ_W)_{W/W}=φ_W, so naturality of φ_V for the morphism W/V→V/V of C/V is naturality of φ for a; each φ_V is O(V)-linear, so φ∈Hom_O(F,G). Conversely a morphism φ gives the compatible family (φ|_U)_U with (φ|_U)_{V/U}=φ_V. The two constructions are inverse: (φ|_V)_{V/V}=φ_V, and for a given family (φ_U)_{W/U}=(φ_W)_{W/W}, which is the W/U-component of the restriction to C/U of the morphism built from it. For s∈Γ(C,O) the family s·(φ_U)_U has components s_U φ_U, whose V/V-component is s_V(φ_V)_{V/V}; by the formula (sφ)_V(x)=s_Vφ_V(x) of [def-pur-sheaf-modules-hom-module] this is sφ, so the bijection is Γ(C,O)-linear. (Direct construction, no gluing: C need not have a final object, so the covering-gluing lemma does not apply here.)",
+   "uses": [
+    "def-pur-localized-ringed-site",
+    "def-pur-sheaf-modules-hom-module"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Section 04TT and Lemma 03EM; Section 03DD"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-pur-sheaf-hom-cover-gluing",
+  "def-pur-sheaf-modules-hom-module",
+  "def-pur-localized-ringed-site"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Sections 04TT, 03DD and Lemmas 03EM, sites-modules-lemma-internal-hom-restriction"
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -43,7 +97,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "worker",
@@ -63,5 +117,21 @@
   }
  },
  "chapter": "sec-smooth-purity",
- "unit": "sk-def-sf-admissible"
+ "unit": "sk-def-sf-admissible",
+ "split_report": {
+  "date": "2026-10-11",
+  "item": "lem-pur-sheaf-hom-is-sheaf",
+  "worker": "stage1",
+  "summary": "Read Stacks 04TT, 03DD, 03EM and the restriction lemma. The imported Hom definition depends on this item, so citing it would create a cycle. Added one strictly lower fixed-cover gluing lemma; the global-sections correspondence and Γ(O)-linearity are then constructed directly from that lemma and the existing Hom module-action definition. The earlier Lean attachment was rejected because its equivalence was unstructured.",
+  "blueprint": "Realizes the blueprint ancestor def-coefficient-twists-detailed clause defining sheaf Hom and its stated sheaf/global-sections properties.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-shs2530",
+  "group": "C1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-shs2530 (reviewer sub-agent of L); spot-checked: Read packet whole; Mathlib CategoryTheory/Sites/SheafHom.lean presheafHom/Presheaf.IsSheaf.hom/sheafHomSectionsEquiv are for sheaves in a fixed category A (Type-valued Hom), not O-linear, so no leaf; no existing site-level 04TQ node (grep 04TQ/glue-maps), new node lem-pur-sheaf-hom-cover-gluing is the O-linear form of Sites 04TQ named by the 03EM hint, not (b)/(c)/(d); steps 1-3 checked against def-pur-sheaf-modules-hom-module and def-pur-localized-ringed-site. FIX more, RETURN less: C4 step 4 cited lem-pur-sheaf-hom-cover-gluing for the global morphism and inverse, but that lemma glues over a covering of one object U and C need not have a final object; replaced by the explicit elementary construction phi_V=(phi_V)_{V/V} with inverse phi|->(phi|_U)_U and the pointwise scalar formula of def-pur-sheaf-modules-hom-module, uses = [def-pur-localized-ringed-site, def-pur-sheaf-modules-hom-module], elementary true. Second reading by C1 missed this.; 1 file(s) fixed by the reviewer"
+ }
 }
