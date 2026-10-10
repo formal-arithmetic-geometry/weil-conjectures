@@ -459,16 +459,6 @@ theorem isLocallyPerfect_of_isDualizable
 variable {Λ}
 
 omit [Finite Λ] in
-/-- Being locally constant with finite stalks is invariant under isomorphism. -/
-theorem isFiniteLocallyConstant_of_iso
-    {F G : Sheaf (Scheme.ProEt.topology X) (ModuleCat.{u + 1} Λ)} (e : F ≅ G)
-    (hF : IsFiniteLocallyConstant Λ F) : IsFiniteLocallyConstant Λ G := by
-  obtain ⟨ι, W, g, hg, h⟩ := hF
-  refine ⟨ι, W, g, hg, fun i ↦ ?_⟩
-  obtain ⟨M, hM, ⟨e'⟩⟩ := h i
-  exact ⟨M, hM, ⟨((g i)^*[ModuleCat.{u + 1} Λ]).mapIso e.symm ≪≫ e'⟩⟩
-
-omit [Finite Λ] in
 /-- Being locally constant with finite stalks is local for the pro-étale topology. -/
 theorem isFiniteLocallyConstant_of_cover
     {F : Sheaf (Scheme.ProEt.topology X) (ModuleCat.{u + 1} Λ)} {ι : Type (u + 1)}

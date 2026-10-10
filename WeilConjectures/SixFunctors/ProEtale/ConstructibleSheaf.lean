@@ -32,9 +32,11 @@ of a pro-étale covering family are constant sheaves of finite `Λ`-modules.
 
 - `AlgebraicGeometry.ProEtale.isFiniteLocallyConstant_comparisonUpperStar_obj`: the comparison
   pullback `ν^*` of a finite locally constant étale sheaf is locally constant with finite stalks.
-- `AlgebraicGeometry.ProEtale.exists_isConstructibleSheaf_iso_comparisonUpperStar_obj`
-  (`lem-sf-proetale-constructible-origin` (i)): a constructible pro-étale sheaf is `ν^*` of a
-  constructible étale sheaf.
+- `AlgebraicGeometry.ProEtale.isConstructible_comparisonUpperStar_obj`: `ν^*` preserves
+  constructibility.
+- `ProEtale.isConstructible_iff_exists_isConstructibleSheaf_iso_comparisonUpperStar_obj`
+  (`lem-sf-proetale-constructible-origin` (i)): a pro-étale sheaf is constructible if and only if
+  it is `ν^*` of a constructible étale sheaf.
 
 -/
 
@@ -71,20 +73,26 @@ def IsConstructible {X : Scheme.{u}}
   ∃ S : Stratification X, ∀ i : Fin S.n,
     IsFiniteLocallyConstant Λ (((S.immersion i))^*[ModuleCat.{u + 1} Λ].obj F)
 
-/-- Blueprint `lem-sf-proetale-constructible-origin`: Constructible pro-étale coefficients are
-of étale origin, clause (i), essential surjectivity.
-
-At a finite coefficient ring `Λ`, every constructible sheaf of `Λ`-modules on the small
-pro-étale site of a scheme `T` is `ν^*` of a constructible sheaf on the small étale site. -/
-theorem exists_isConstructibleSheaf_iso_comparisonUpperStar_obj [Finite Λ] {T : Scheme.{u}}
-    {F : Sheaf (Scheme.ProEt.topology T) (ModuleCat.{u + 1} Λ)} (hF : IsConstructible Λ F) :
-    ∃ G : Sheaf T.smallEtaleTopology (ModuleCat.{u + 1} Λ), Scheme.IsConstructibleSheaf G ∧
-      Nonempty ((ν^*(T)[ModuleCat.{u + 1} Λ]).obj G ≅ F) :=
-  sorry
-
 section Comparison
 
 variable {Λ}
+
+/-- Being locally constant with finite stalks is invariant under isomorphism. -/
+theorem isFiniteLocallyConstant_of_iso {X : Scheme.{u}}
+    {F G : Sheaf (Scheme.ProEt.topology X) (ModuleCat.{u + 1} Λ)} (e : F ≅ G)
+    (hF : IsFiniteLocallyConstant Λ F) : IsFiniteLocallyConstant Λ G := by
+  obtain ⟨ι, W, g, hg, h⟩ := hF
+  refine ⟨ι, W, g, hg, fun i ↦ ?_⟩
+  obtain ⟨M, hM, ⟨e'⟩⟩ := h i
+  exact ⟨M, hM, ⟨((g i)^*[ModuleCat.{u + 1} Λ]).mapIso e.symm ≪≫ e'⟩⟩
+
+/-- Being constructible is invariant under isomorphism. -/
+theorem isConstructible_of_iso {X : Scheme.{u}}
+    {F G : Sheaf (Scheme.ProEt.topology X) (ModuleCat.{u + 1} Λ)} (e : F ≅ G)
+    (hF : IsConstructible Λ F) : IsConstructible Λ G :=
+  have ⟨S, hS⟩ := hF
+  ⟨S, fun i ↦ isFiniteLocallyConstant_of_iso
+    (((S.immersion i))^*[ModuleCat.{u + 1} Λ].mapIso e) (hS i)⟩
 
 /-- The scheme `X`, with the identity, is a terminal object of its small étale site. -/
 noncomputable def _root_.AlgebraicGeometry.Scheme.Etale.isTerminalMkId (X : Scheme.{u}) :
@@ -148,6 +156,52 @@ theorem isFiniteLocallyConstant_comparisonUpperStar_obj [Finite Λ] {X : Scheme.
       ⟨(comparisonUpperStarCompUpperStarIso (ModuleCat.{u + 1} Λ) (𝒰₀.f i)).app G ≪≫
         (ν^*(𝒰₀.X i)[ModuleCat.{u + 1} Λ]).mapIso e.symm ≪≫
         (comparisonUpperStarConstantSheafIso Λ (𝒰₀.X i)).app M⟩⟩
+
+/-- The comparison pullback `ν^*` of a constructible étale sheaf is constructible: on the strata
+of a stratification for `G`, it is `ν^*` of a finite locally constant sheaf, `ν^*` commuting with
+the pullbacks to the strata. -/
+theorem isConstructible_comparisonUpperStar_obj [Finite Λ] {X : Scheme.{u}}
+    (G : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))
+    [IsConstructibleSheaf (FA := fun M N : ModuleCat.{u + 1} Λ ↦ M →ₗ[Λ] N)
+      (CA := fun M : ModuleCat.{u + 1} Λ ↦ M) G] :
+    IsConstructible Λ ((ν^*(X)[ModuleCat.{u + 1} Λ]).obj G) := by
+  obtain ⟨S, hS⟩ := IsConstructibleSheaf.exists_stratification
+    (FA := fun M N : ModuleCat.{u + 1} Λ ↦ M →ₗ[Λ] N) (CA := fun M : ModuleCat.{u + 1} Λ ↦ M)
+    (F := G)
+  refine ⟨S, fun i ↦ ?_⟩
+  have := hS i
+  exact isFiniteLocallyConstant_of_iso
+    ((comparisonUpperStarCompUpperStarIso (ModuleCat.{u + 1} Λ) (S.immersion i)).app G).symm
+    (isFiniteLocallyConstant_comparisonUpperStar_obj _)
+
+variable (Λ) in
+/-- Blueprint `lem-sf-proetale-constructible-origin`: Constructible pro-étale coefficients are
+of étale origin, clause (i).
+
+At a finite coefficient ring `Λ`, the comparison pullback `ν^*` induces an equivalence between
+the constructible sheaves of `Λ`-modules on the small étale site of `T` and the constructible
+sheaves on its small pro-étale site. As `ν^*` is fully faithful
+(`AlgebraicGeometry.ProEtale.full_comparisonUpperStar`,
+`AlgebraicGeometry.ProEtale.faithful_comparisonUpperStar`), this says that a pro-étale sheaf is
+constructible if and only if it is `ν^*` of a constructible étale sheaf. That `ν^*` preserves
+constructibility is `isConstructible_comparisonUpperStar_obj`; the essential surjectivity is the
+content of the lemma. -/
+theorem isConstructible_iff_exists_isConstructibleSheaf_iso_comparisonUpperStar_obj [Finite Λ]
+    {T : Scheme.{u}} {F : Sheaf (Scheme.ProEt.topology T) (ModuleCat.{u + 1} Λ)} :
+    IsConstructible Λ F ↔
+      ∃ G : Sheaf T.smallEtaleTopology (ModuleCat.{u + 1} Λ), Scheme.IsConstructibleSheaf G ∧
+        Nonempty ((ν^*(T)[ModuleCat.{u + 1} Λ]).obj G ≅ F) := by
+  refine ⟨fun _ ↦ sorry, fun ⟨G, hG, ⟨e⟩⟩ ↦ ?_⟩
+  exact isConstructible_of_iso e (isConstructible_comparisonUpperStar_obj G)
+
+variable (Λ) in
+/-- A constructible pro-étale sheaf is `ν^*` of a constructible étale sheaf
+(`lem-sf-proetale-constructible-origin` (i)). -/
+theorem exists_isConstructibleSheaf_iso_comparisonUpperStar_obj [Finite Λ] {T : Scheme.{u}}
+    {F : Sheaf (Scheme.ProEt.topology T) (ModuleCat.{u + 1} Λ)} (hF : IsConstructible Λ F) :
+    ∃ G : Sheaf T.smallEtaleTopology (ModuleCat.{u + 1} Λ), Scheme.IsConstructibleSheaf G ∧
+      Nonempty ((ν^*(T)[ModuleCat.{u + 1} Λ]).obj G ≅ F) :=
+  (isConstructible_iff_exists_isConstructibleSheaf_iso_comparisonUpperStar_obj Λ).1 hF
 
 end Comparison
 
