@@ -941,3 +941,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 05:58 L: reviewed lem-weil-pbc-cohomology-powers-ideal-application (8 steps, +02O8 node, +Rees-Noetherian leaf): accepted.
 - 05:58 L: reviewed lem-weil-pbc-conormal-module-principal-localization (6 steps, +00S1 node, +00S3 node): accepted. Stage-3 note: localization-away-tensor-iso and localization-module-tensor may be duplicates.
 - 06:00 L: reviewed lem-weil-pbc-differential-zero-iff-pth-power (4 steps, +07P2 (a)=>(b) node): accepted.
+- 06:02 L: reviewed lem-weil-pbc-etale-ring-map-quasi-finite (4 steps, no new node): accepted.
