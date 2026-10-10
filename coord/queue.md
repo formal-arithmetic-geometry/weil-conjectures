@@ -1,8 +1,8 @@
 # Work queue
 
-915 items; claim with `tools/claim.py next <group> [--stage N]`.
+912 items; claim with `tools/claim.py next <group> [--stage N]`.
 
-## Stage 1: nodes to split (184)
+## Stage 1: nodes to split (181)
 
 | node | distance to a target | Lean state on the done branch |
 |---|---|---|
@@ -66,9 +66,6 @@
 | `def-weil-t-structure` | - | none |
 | `def-pur-sheaf-tensor-product` | - | none |
 | `def-weil-pbc-constructible-torsion` | - | none |
-| `lem-pc-kbar-pure-insep` | - | none |
-| `lem-weil-pbc-finite-pushforward-constructible-noetherian` | - | none |
-| `pqf-lem-affine-local-target` | - | none |
 | `sbc-lem-higher-direct-image-presheaf` | - | none |
 | `thm-pqf-zmt-factorization` | - | none |
 | `def-pc-representable-functor` | - | none |
@@ -78,7 +75,6 @@
 | `lem-fin-dense-normal-open` | - | none |
 | `lem-kun-03sa` | - | none |
 | `lem-kun-stalks-commute-colimits` | - | none |
-| `lem-pc-sepclosed-finite-sep-trivial` | - | none |
 | `lem-pur-sheaf-hom-is-sheaf` | - | none |
 | `lem-weil-pbc-finite-pushforward-generic-constructible` | - | none |
 | `lem-weil-pbc-noetherian-finite-components` | - | none |
@@ -115,6 +111,7 @@
 | `def-nagata-relative-gluing-datum-descent` | - | none |
 | `def-nagata-scheme-theoretically-dense-open` | - | none |
 | `lem-pc-coherent-hi` | - | sorry_here |
+| `lem-pc-sepclosed-finite-sep-trivial` | - | none |
 | `lem-sc-affine-generic-second` | - | sorry_here |
 | `lem-sc-genus-invariant` | - | none |
 | `lem-sc-global-functions` | - | rests_on_sorry |
@@ -927,7 +924,7 @@
 | `lem-weil-pbc-projective-space-zero-isomorphism` | 4 | state |
 | `def-nagata-fixed-base-separated-stage` | 6 | state |
 
-Not open yet: 1458 nodes that wait for a statement dependency, 223 nodes that wait for stage 1.
+Not open yet: 1459 nodes that wait for a statement dependency, 220 nodes that wait for stage 1.
 
 ## Stage 3: modules to prove (0)
 
