@@ -18,9 +18,75 @@
   "lem-weil-pbc-coherent-formal-modules-abelian",
   "lem-weil-pbc-formal-systems-annihilated-by-power"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "For each e >= 1, the closed immersion i_e : X_e -> X has ideal K^e. By [lem-weil-pbc-closed-immersion-coherent-equivalence], coherent modules on X_e identify with coherent O_X-modules annihilated by K^e, and the corresponding formal systems identify with the full subcategory of Coh(X,I) annihilated by K^e. Under this identification, hypothesis (1) says that the completion functor gives an equivalence between these two categories.",
+   "uses": [
+    "lem-weil-pbc-closed-immersion-coherent-equivalence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/coherent.tex",
+    "place": "Cohomology of Schemes, Lemma 088A, proof lines 6961--6968; Lemma 087T"
+   }
+  },
+  {
+   "text": "Apply that equivalence to the quotient system (F_n / K^e F_n)_n to obtain a coherent O_X-module G_e annihilated by K^e, together with its identification with the quotient formal system. The quotient maps for e+1 -> e correspond to maps G_{e+1} -> G_e inducing isomorphisms G_{e+1}/K^e G_{e+1} = G_e. Thus (G_e)_e is an object of Coh(X,K).",
+   "uses": [
+    "def-weil-pbc-coherent-formal-module"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/coherent.tex",
+    "place": "Cohomology of Schemes, Lemma 088A, proof lines 6969--6977"
+   }
+  },
+  {
+   "text": "The map alpha : (F_n) -> H^ induces maps F_n/K^e F_n -> H/(I^n + K^e)H, hence, through the same equivalence, maps G_e -> H/K^e H. Choose t >= 1 annihilating the kernels and cokernels of the component maps of alpha. The commutative-algebra assertion in [lem-weil-pbc-formal-systems-annihilated-by-power] first gives a K^(2t) bound after quotienting by K^e, and applying the same assertion to the induced map of the K-adic systems gives a K^(4t) bound for the kernels and cokernels of G_e -> H/K^e H.",
+   "uses": [
+    "lem-weil-pbc-formal-systems-annihilated-by-power"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/coherent.tex",
+    "place": "Cohomology of Schemes, Lemma 088A, proof lines 6978--6993; Remark 0888"
+   }
+  },
+  {
+   "text": "The maps G_e -> H/K^e H therefore satisfy the hypotheses of [lem-weil-pbc-grothendieck-existence-easy], part (1), with ideal K. We obtain a coherent O_X-module F, a map a:F -> H whose kernel and cokernel are killed by a power of K, and an isomorphism beta:(G_e) = (F/K^e F)_e compatible with a.",
+   "uses": [
+    "lem-weil-pbc-grothendieck-existence-easy"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/coherent.tex",
+    "place": "Cohomology of Schemes, Lemma 088A, proof lines 6994--6997; Lemma 0889"
+   }
+  },
+  {
+   "text": "Fix n. Reduce alpha_n and the comparison beta modulo I^n. The resulting map from F_n/K^e F_n to H/(I^n + K^e)H and the corresponding map from F/I^n F form a triple to which the uniqueness clause of [lem-weil-pbc-grothendieck-existence-easy] applies. It gives an isomorphism F/I^n F = F_n; uniqueness makes these isomorphisms compatible with all transition maps. Hence F^ is isomorphic to (F_n) in Coh(X,I).",
+   "uses": [
+    "lem-weil-pbc-grothendieck-existence-easy",
+    "def-weil-pbc-coherent-formal-module"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/coherent.tex",
+    "place": "Cohomology of Schemes, Lemma 088A, proof lines 6998--7012"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-closed-immersion-coherent-equivalence",
+  "def-weil-pbc-coherent-formal-module",
+  "lem-weil-pbc-formal-systems-annihilated-by-power",
+  "lem-weil-pbc-grothendieck-existence-easy"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/coherent.tex",
+  "place": "Cohomology of Schemes, Lemma 088A (lemma-existence-tricky), proof lines 6955--7012"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -45,7 +111,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "worker",
@@ -65,5 +131,18 @@
   }
  },
  "chapter": "sec-proper-base-change",
- "unit": "sk-thm-p1"
+ "unit": "sk-thm-p1",
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "lem-weil-pbc-grothendieck-existence-devissage",
+  "worker": "stage1",
+  "summary": "Split Stacks Lemma 088A into the closed-subscheme equivalence on each K-thickening (087T), construction of the K-adic system G_e, transfer of the K-power annihilation bounds via Remark 0888, application of the easy algebraization lemma 0889, and the compatible levelwise uniqueness argument. Added 0889 as a public statement-only child because it was not already a DAG node."
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "group": "G1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed by the lead of G1; spot-checked by L: five steps follow Stacks 088A: 087T identification, G_e from hypothesis (1), 2t/4t bounds via the 0888 node, 0889 (new unsplit node) and its uniqueness; note: step 1 relies on clause (2) of lem-weil-pbc-closed-immersion-coherent-equivalence, whose wording 'supported on Z' should read 'annihilated by the ideal sheaf' (stage 3)"
+ }
 }
