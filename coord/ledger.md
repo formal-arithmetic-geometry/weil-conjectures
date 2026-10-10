@@ -1625,3 +1625,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 14:32 L: lem-weil-pbc-closed-immersion-proper accepted as Mathlib leaf (iff_isProper_and_mono + IsProper.instCompScheme; LeanSearch down)
 - 14:32 L: lem-sc-regular-local-domain attached to IsRegularLocalRing.isDomain (sorry-free, Defs.lean 216); tag corrected 00NO->00NP
 - 14:32 L: returned deliver/H1/lem-weil-pbc-sets-pushforward-stalk-strict-henselization (reviewer RETURN: 1. D2/D1: new node lem-weil-pbc-sets-strict-henselization-sections-colimit: its statement is the item's clause (2) (comp)
+- 14:33 L: merged deliver/E1/lem-exc-cochains-derived-invariants (reviewer FIX; first push; new nodes: 3)

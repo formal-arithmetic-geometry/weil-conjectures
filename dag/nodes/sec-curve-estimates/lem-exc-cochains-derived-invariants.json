@@ -21,9 +21,79 @@
   "def-weil-abstract-derived-category",
   "def-sp-left-exact-additive"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Write $T^q(M)=H^q(C^\\bullet(G,M))$. The displayed differentials are natural in equivariant $A$-linear maps. For every short exact sequence of discrete $G$-modules, [lem-exc-continuous-cochains-short-exact] gives a short exact sequence of these complexes. Apply the long exact cohomology sequence [lem-weil-pbc-complex-ses-homology-long-exact] and its compatibility with morphisms of short exact sequences [lem-weil-pbc-complex-ses-long-exact-naturality]. Thus $(T^q)$ is a cohomological $\\delta$-functor [def-weil-pbc-delta-functor]. At degree zero, $\\ker(d^0)$ consists exactly of elements fixed by every $g\\in G$, and $T^0(M)=M^G$ naturally. The same kernel description and exactness in [lem-exc-discrete-modules-abelian] show that invariants are left exact and additive.",
+   "uses": [
+    "lem-exc-continuous-cochains-short-exact",
+    "lem-weil-pbc-complex-ses-homology-long-exact",
+    "lem-weil-pbc-complex-ses-long-exact-naturality",
+    "def-weil-pbc-delta-functor",
+    "lem-exc-discrete-modules-abelian"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 0DVG, label section-continuous-group-cohomology, paragraphs defining the cochain complex and asserting a cohomological delta-functor"
+   }
+  },
+  {
+   "text": "For each $M$, [lem-exc-coinduced-discrete-embedding] supplies a monomorphism $\\iota_M:M\\to D(M)=\\operatorname{Cont}(G,M)$ in this abelian category, with the right-translation action. For every $q>0$, [lem-exc-coinduced-continuous-acyclic] gives $T^q(D(M))=0$. Hence $T^q(\\iota_M):T^q(M)\\to T^q(D(M))$ is the zero map, so $T$ is effaceable in every positive degree.",
+   "uses": [
+    "lem-exc-coinduced-discrete-embedding",
+    "lem-exc-coinduced-continuous-acyclic"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 0DVG, label section-continuous-group-cohomology, final profinite comparison asserted without a proof; agent-written effacement argument"
+   }
+  },
+  {
+   "text": "By Step 1, $T$ is a cohomological $\\delta$-functor; by Step 2 it satisfies the monomorphism-and-zero-map hypothesis of [lem-weil-pbc-effaceable-delta-functor-universal], so $T$ is universal. The category has enough injectives by [lem-exc-discrete-modules-abelian], and invariants are left exact by Step 1. Thus [lem-weil-pbc-right-derived-universal-delta-functor] applies to invariants: its derived functors $R^q(M\\mapsto M^G)$ form a universal $\\delta$-functor with $R^0\\cong(M\\mapsto M^G)$.",
+   "uses": [
+    "lem-weil-pbc-effaceable-delta-functor-universal",
+    "lem-weil-pbc-right-derived-universal-delta-functor",
+    "lem-exc-discrete-modules-abelian",
+    "def-sp-left-exact-additive"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 0DVG, label section-continuous-group-cohomology, paragraph constructing canonical maps from derived invariants to continuous cohomology; source's missing profinite justification supplied through Stacks Homology Tag 010T and Derived Categories Tag 015B as cited nodes"
+   }
+  },
+  {
+   "text": "Identify $R^0$ and $T^0$ with the invariant functor by Step 1 and [lem-weil-pbc-right-derived-universal-delta-functor]. Universality of $R^\\bullet$ gives a unique morphism $R^\\bullet\\to T^\\bullet$ extending the identity on invariants; universality of $T^\\bullet$ gives one in the reverse direction. Each composite extends the identity in degree zero, so uniqueness makes both composites identities. The first morphism is therefore a natural isomorphism in every degree.",
+   "uses": [
+    "lem-weil-pbc-right-derived-universal-delta-functor",
+    "lem-weil-pbc-effaceable-delta-functor-universal",
+    "def-weil-pbc-delta-functor"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 0DVG, label section-continuous-group-cohomology, final paragraph asserting the canonical maps are isomorphisms for profinite G; uniqueness argument using Stacks Homology Tag 010T"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-exc-continuous-cochains-short-exact",
+  "lem-weil-pbc-complex-ses-homology-long-exact",
+  "lem-weil-pbc-complex-ses-long-exact-naturality",
+  "def-weil-pbc-delta-functor",
+  "lem-exc-discrete-modules-abelian",
+  "lem-exc-coinduced-discrete-embedding",
+  "lem-exc-coinduced-continuous-acyclic",
+  "lem-weil-pbc-effaceable-delta-functor-universal",
+  "lem-weil-pbc-right-derived-universal-delta-functor",
+  "def-sp-left-exact-additive"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tag 0DVG, label section-continuous-group-cohomology, final profinite comparison asserted without proof; effacement via discrete coinduction and universality as in Stacks Tags 010T and 015B"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -49,13 +119,13 @@
   {
    "tool": "grep",
    "query": "rg for continuousCohomology and derived invariants in /home/ubuntu/weil-src-slopmaster2/.lake/packages/mathlib/Mathlib",
-   "results": "The source checkout has no .lake/packages/mathlib directory. Streamed pinned Mathlib 0df444a Mathlib/RepresentationTheory/Homological/ContCohomology/Basic.lean: lines 21-41 say cochains are in TopRep and list exactness and comparison work as TODO; lines 129-132 define continuousCohomology as cochain homology. A whole-tree grep remains unavailable.",
+   "results": "Read pinned Mathlib RepresentationTheory/Homological/ContCohomology/Basic.lean: continuousCohomology is defined by cochain homology in TopRep, with no derived-invariants comparison. Search of ContCohomology and GroupCohomology found only abstract-group cochain exactness in GroupCohomology/LongExactSequence.lean:50.",
    "date": "2026-10-10",
-   "verdict": "no derived-invariants comparison in the inspected pinned source; whole-tree grep unavailable"
+   "verdict": "no derived-invariants comparison in the inspected pinned source"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "def-exc-continuous-cohomology",
@@ -70,5 +140,36 @@
   }
  },
  "chapter": "sec-curve-estimates",
- "unit": "sk-prop-h2"
+ "unit": "sk-prop-h2",
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "lem-exc-cochains-derived-invariants",
+  "worker": "stage1",
+  "summary": "Stacks 0DVG defines continuous cochains and the canonical comparison but omits its profinite proof. The split supplies exactness of cochains, a discrete coinduced embedding, and acyclicity of its continuous cochain complex as three strictly smaller obligations, then applies the existing universal delta-functor nodes. No matching sorry-free Lean declaration or exact Mathlib theorem was found.",
+  "blueprint": "The final sentence of blueprint def-exc-continuous-cohomology: 'Equivalently it is computed by the complex of continuous inhomogeneous cochains'; steps 1-4 establish this comparison, including the profinite proof omitted by Stacks 0DVG.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-effaceable-delta-functor-universal",
+    "why": "Step 3 applies the generic effaceability criterion to the cochain delta-functor; the H^2-via-Kummer unit contains no delta-functor criterion."
+   },
+   {
+    "node": "lem-weil-pbc-right-derived-universal-delta-functor",
+    "why": "Steps 3-4 use the generic universality theorem for right derived functors of invariants; the H^2-via-Kummer unit contains no such theorem."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-effaceable-delta-functor-universal",
+  "lem-weil-pbc-right-derived-universal-delta-functor",
+  "lem-weil-pbc-effaceable-delta-functor-universal",
+  "lem-weil-pbc-right-derived-universal-delta-functor"
+ ],
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-ecd",
+  "group": "E1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-ecd (reviewer sub-agent of L); spot-checked: Source: Stacks 0DVG (etale-cohomology.tex, label section-continuous-group-cohomology) read: it defines the inhomogeneous complex with the same d^0 and d^n, states short exactness of continuous cochains for discrete modules, builds the canonical maps via 015B universality and only asserts the profinite isomorphism ('insert future reference'); item statement unchanged and agrees with 0DVG and def-exc-continuous-cohomology (profinite G, finite A, open stabilizers = discrete continuous action, derived functor of invariants). Step 1 carried by lem-exc-continuous-cochains-short-exact (degreewise exact, compatible with d) + lem-weil-pbc-complex-ses-homology-long-exact and -long-exact-naturality (Mathlib leaves) giving the def-weil-pbc-delta-functor axioms; degree-0 injectivity/T^0=M^G from ker d^0 and exactness in lem-exc-discrete-modules-abelian. Step 2 carried by lem-exc-coinduced-discrete-embedding (mono into D(M), checked: (h.f)(x)=f(xh) is a left action, iota(m)(x)=xm equivariant, f in Cont(G,M) factors through G/U so open stabilizer) and lem-exc-coinduced-continuous-acyclic (checked the contraction (hF)(g)(x)=F(x,g)(1): degree 1 gives d^0hF+hdF=F, continuity into discrete D(M) by compactness; true, Shapiro). Step 3: hypotheses of lem-weil-pbc-effaceable-delta-functor-universal (mono with zero T^n map, n>0) and of lem-weil-pbc-right-derived-universal-delta-functor (enough injectives and abelian from lem-exc-discrete-modules-abelian, invariants left exact additive) met; both accepted as generic off-unit tools (C8). Step 4: standard two-universal-delta-functors uniqueness argument. New nodes: unsplit, self-contained, TeX, same_as recorded (my blueprint_refs search 'coinduced' 0 hits, 'continuous cochains' only the parent), three Mathlib searches each; no slopmaster2 declaration found (sorry map grep coinduc/contcoh/profinite). Small cases: G=1, finite G, M=0, G=C_2 A=F_2 degree-1 contraction. FIX: dag/nodes/sec-curve-estimates/lem-exc-cochains-derived-invariants.json: proof[3].text and proof[3].uses: removed the clause 'its components are the canonical maps of [lem-exc-continuous-cochains-short-exact]'s source comparison' and that node from step 4 uses (C4: the node does not state the canonical maps; the clause is not needed for the statement; node stays in proof_deps via step 1). 14:31-14:33 UTC 2026-10-10; 1 file(s) fixed by the reviewer"
+ }
 }
