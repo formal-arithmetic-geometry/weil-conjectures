@@ -17,7 +17,7 @@
  },
  "kind": "statement",
  "title": "Separated affine and local charts surject onto the function field",
- "statement": "Let X be an integral [def-pc-integral-scheme] separated [def-weil-proper-morphism] scheme [def-pc-scheme], let U=Spec(A) be a nonempty affine open subscheme of X, let x be a point of X\\U, let B=O_{X,x} be its local ring, and assume B is Noetherian [def-weil-pbc-noetherian-ring] of Krull dimension 1 [def-weil-pbc-krull-dimension-ring]. Let K=k(X) be the function field [def-sc-function-field]. Via the inclusions A\\to K and B\\to K [lem-sc-integral-scheme-stalks-in-function-field], the canonical ring map A \\otimes B \\to K is surjective.",
+ "statement": "Let X be an integral [def-pc-integral-scheme] separated [def-weil-proper-morphism] scheme [def-pc-scheme], let U=Spec(A) be a nonempty affine open subscheme of X, let x be a point of X\\U, let B=O_{X,x} be its local ring, and assume B is Noetherian [def-weil-pbc-noetherian-ring] of Krull dimension 1 [def-weil-pbc-krull-dimension-ring]. Let K=k(X) be the function field [def-sc-function-field]. Via the inclusions A\\to K and B\\to K [lem-sc-integral-scheme-stalks-in-function-field], the canonical ring map A \\otimes_{\\mathbb Z} B \\to K is surjective.",
  "source": {
   "document": "literature/stacks-project/varieties.tex",
   "place": "Varieties Lemma 09NB (varieties-lemma-find-globally-generated), proof, second and third sentences"
@@ -31,9 +31,69 @@
   "def-weil-pbc-krull-dimension-ring",
   "lem-sc-integral-scheme-stalks-in-function-field"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Let $\\eta$ be the generic point of the integral scheme $X$. Since $U$ is nonempty, $\\eta\\in U$. The stalk lemma [lem-sc-integral-scheme-stalks-in-function-field] makes $B=\\mathcal O_{X,x}$ a domain embedded in $K$ with fraction field $K$. Let $c:\\operatorname{Spec}(B)\\to X$ be the canonical morphism of [lem-weil-pbc-spec-local-ring-canonical-morphism]; its image is the set of generalizations of $x$, so $c^{-1}(U)=\\operatorname{Spec}(B)\\setminus\\{\\mathfrak m_B\\}$. Since $B$ has dimension one, choose $0\\ne f\\in\\mathfrak m_B$. Then $D(f)=\\{(0)\\}=c^{-1}(U)$, and [lem-weil-pbc-principal-localization-open-immersion] identifies this open subscheme with $\\operatorname{Spec}(B_f)$. The prime correspondence in [lem-weil-pbc-primes-of-localization] shows that $B_f$ has only the prime $(0)$; the new statement [lem-sc-local-domain-dim-one-principal-localization-fraction-field] therefore identifies $B_f\\cong K$. Thus $U\\times_X\\operatorname{Spec}(B)=\\operatorname{Spec}(K)$, using [lem-weil-pbc-open-immersion-base-change] for the pullback of the open immersion $U\\hookrightarrow X$. Finally [lem-weil-pbc-fibre-product-affine-spectra], with base ring $R=\\mathbb Z$, identifies $U\\times_{\\operatorname{Spec}(\\mathbb Z)}\\operatorname{Spec}(B)$ with $\\operatorname{Spec}(A\\otimes_{\\mathbb Z}B)$, and the induced map to $\\operatorname{Spec}(K)$ is from the inclusions into $K$.",
+   "uses": [
+    "def-sc-function-field",
+    "lem-sc-integral-scheme-stalks-in-function-field",
+    "lem-weil-pbc-spec-local-ring-canonical-morphism",
+    "lem-weil-pbc-open-immersion-base-change",
+    "lem-weil-pbc-principal-localization-open-immersion",
+    "lem-weil-pbc-primes-of-localization",
+    "lem-sc-local-domain-dim-one-principal-localization-fraction-field",
+    "lem-weil-pbc-fibre-product-affine-spectra"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Varieties Lemma 09NB, proof, opening paragraph: identification of U \\times_X Spec(B_i) with Spec(K)"
+   }
+  },
+  {
+   "text": "Because $X$ is separated, its diagonal $\\Delta_X:X\\to X\\times_{\\operatorname{Spec}(\\mathbb Z)}X$ is a closed immersion by [def-weil-proper-morphism]. Base changing this closed immersion along the morphism $U\\times_{\\operatorname{Spec}(\\mathbb Z)}\\operatorname{Spec}(B)\\to X\\times_{\\operatorname{Spec}(\\mathbb Z)}X$ gives a closed immersion $U\\times_X\\operatorname{Spec}(B)\\hookrightarrow U\\times_{\\operatorname{Spec}(\\mathbb Z)}\\operatorname{Spec}(B)$ by [lem-weil-pbc-closed-immersion-base-change]. Under Step 1 and [lem-weil-pbc-fibre-product-affine-spectra] (again with $R=\\mathbb Z$), this is the closed immersion $\\operatorname{Spec}(K)\\hookrightarrow\\operatorname{Spec}(A\\otimes_{\\mathbb Z}B)$.",
+   "uses": [
+    "def-weil-proper-morphism",
+    "lem-weil-pbc-closed-immersion-base-change",
+    "lem-weil-pbc-fibre-product-affine-spectra"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Varieties Lemma 09NB, proof, sentence beginning 'Since X is separated'"
+   }
+  },
+  {
+   "text": "Apply the affine closed-immersion criterion [lem-weil-pbc-closed-immersion-affine-cover-criterion](1) to the affine target $\\operatorname{Spec}(A\\otimes_{\\mathbb Z}B)$ identified by [lem-weil-pbc-fibre-product-affine-spectra]. It says that the induced map on global sections is surjective. The global-sections map of this closed immersion is exactly the canonical map $A\\otimes_{\\mathbb Z}B\\to K$ induced by the inclusions $A\\to K$ and $B\\to K$. Hence $A\\otimes_{\\mathbb Z}B\\to K$ is surjective.",
+   "uses": [
+    "lem-weil-pbc-closed-immersion-affine-cover-criterion",
+    "lem-weil-pbc-fibre-product-affine-spectra"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Varieties Lemma 09NB, proof, sentence identifying the surjection A \\otimes B_i \\to K"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sc-function-field",
+  "lem-sc-integral-scheme-stalks-in-function-field",
+  "lem-weil-pbc-spec-local-ring-canonical-morphism",
+  "lem-weil-pbc-open-immersion-base-change",
+  "lem-weil-pbc-principal-localization-open-immersion",
+  "lem-weil-pbc-primes-of-localization",
+  "lem-sc-local-domain-dim-one-principal-localization-fraction-field",
+  "lem-weil-pbc-fibre-product-affine-spectra",
+  "def-weil-proper-morphism",
+  "lem-weil-pbc-closed-immersion-base-change",
+  "lem-weil-pbc-closed-immersion-affine-cover-criterion"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/varieties.tex",
+  "place": "Varieties Lemma 09NB (varieties-lemma-find-globally-generated), proof, separatedness paragraph"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -58,12 +118,37 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-sc-find-globally-generated",
   "by": "worker",
   "date": "2026-10-10"
  },
  "chapter": "sec-curve-estimates",
- "unit": "sk-thm-curveestimate"
+ "unit": "sk-thm-curveestimate",
+ "split_report": {
+  "date": "2026-10-11",
+  "item": "lem-sc-separated-affine-function-field-surjective",
+  "worker": "stage1",
+  "summary": "Repaired Step 1 by making the canonical local-ring morphism, open-immersion base change, principal localization, localization prime correspondence, and affine fibre-product identification explicit; added one statement-only node identifying B_f with K. Steps 2 and 3 now consistently use A \\otimes_{\\mathbb Z} B.",
+  "blueprint": "The three steps realize the blueprint sentence in lem-sc-pic-proper-ntorsion's 09NB proof: separatedness makes Spec(K) a closed subscheme of U \\times Spec(B_i), hence A \\otimes B_i \\to K is surjective.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-spec-local-ring-canonical-morphism",
+    "why": "Step 1 needs the canonical morphism Spec(B) to X and its image as the generalizations of x; this generic local-scheme tool is supplied by the proper-base-change unit."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-spec-local-ring-canonical-morphism",
+  "lem-weil-pbc-spec-local-ring-canonical-morphism"
+ ],
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-sfs1704",
+  "group": "J1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-sfs1704 (reviewer sub-agent of L); spot-checked: Repaired re-push after the 16:44 return; the four C1 points were each repaired: (1) Step 1 cites lem-weil-pbc-spec-local-ring-canonical-morphism clause (1) (c(y')=y, image = generalizations), so c^{-1}(U)={(0)} since Spec(B)={(0),m_B} and c((0))=eta in U; (2) lem-weil-pbc-open-immersion-base-change for U x_X Spec(B) as the open subscheme on c^{-1}(U); (3) D(f)={(0)} for 0!=f in m_B, lem-weil-pbc-principal-localization-open-immersion for D(f)=Spec(B_f), lem-weil-pbc-primes-of-localization (2) (with R=B, p=m_B, R_p=B) for the primes of B_f, and the new statement-only node lem-sc-local-domain-dim-one-principal-localization-fraction-field for B_f=K; (4) lem-weil-pbc-fibre-product-affine-spectra with R=Z in Steps 1-3, and the statement now writes A otimes_Z B (statement change requested by the return and named in the report, E7). Steps 2-3 and the statement were accepted by the earlier reviewer and not reopened. New node checked: B local domain of dim 1 has primes (0) and m only, primes of B_f are those avoiding f, i.e. (0), so B_f is a domain with only prime (0), a field between B and K, hence K; tested on k[t]_(t) with f=t and on Z_(p) with f=p. Statement self-contained, cites def-weil-pbc-krull-dimension-ring and def-weil-ring-localization-away. tool_uses lem-weil-pbc-spec-local-ring-canonical-morphism (sk-thm-p1, split) accepted as a generic black-box tool. Delivery committed 16:59 UTC, before 17:00, so its search records were treated as not run; I ran one LeanFinder query for the standard new node: no match. FIX: dag/nodes/sec-curve-estimates/lem-sc-local-domain-dim-one-principal-localization-fraction-field.json: mathlib_searches: added the reviewer's LeanFinder query, verdict no match. Start Sat Oct 10 05:00:48 PM UTC 2026, end Sat Oct 10 05:01:34 PM UTC 2026.; 1 file(s) fixed by the reviewer"
+ }
 }
