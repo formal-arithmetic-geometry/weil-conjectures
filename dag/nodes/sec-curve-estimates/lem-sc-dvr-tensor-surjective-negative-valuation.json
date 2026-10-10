@@ -26,9 +26,51 @@
  "stmt_deps": [
   "def-sc-discrete-valuation-ring"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Choose a uniformizer t of B. By [lem-sc-dvr-valuation-ring-characterization], t^{-1} belongs to K^\\times and has v(t^{-1})=-1, so it is not in B. Surjectivity of the canonical map A \\otimes B \\to K gives a finite tensor expression t^{-1}=\\sum_{j=1}^r a_j b_j with a_j\\in A and b_j\\in B.",
+   "uses": [
+    "lem-sc-dvr-valuation-ring-characterization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Varieties Lemma 09N5 (varieties-lemma-create-globally-generated), proof, induction base case"
+   }
+  },
+  {
+   "text": "Suppose, for contradiction, that every nonzero a\\in A has v(a)\\ge0. Then each nonzero product a_j b_j lies in B: a_j has nonnegative valuation by the supposition, b_j has nonnegative valuation by [lem-sc-dvr-valuation-ring-characterization], v(a_j b_j)=v(a_j)+v(b_j)\\ge0 by [lem-sc-dvr-valuation-arithmetic], and a nonzero element of K of nonnegative valuation lies in B by [lem-sc-dvr-nonnegative-valuation-in-ring]; zero terms are in B as well. Since B is a ring, the finite sum \\sum_j a_j b_j lies in B, contradicting that it equals t^{-1}\\notin B.",
+   "uses": [
+    "lem-sc-dvr-valuation-ring-characterization",
+    "lem-sc-dvr-valuation-arithmetic",
+    "lem-sc-dvr-nonnegative-valuation-in-ring"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Varieties Lemma 09N5 (varieties-lemma-create-globally-generated), proof, induction base case"
+   }
+  },
+  {
+   "text": "Therefore some nonzero x=a_j\\in A has v(x)<0, which is the required conclusion.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Varieties Lemma 09N5 (varieties-lemma-create-globally-generated), proof, induction base case"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sc-dvr-valuation-ring-characterization",
+  "lem-sc-dvr-valuation-arithmetic",
+  "lem-sc-dvr-nonnegative-valuation-in-ring"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/varieties.tex",
+  "place": "Varieties Lemma 09N5 (varieties-lemma-create-globally-generated), proof, induction base case"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -53,12 +95,28 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-sc-jacobson-denominator-function-field",
   "by": "worker",
   "date": "2026-10-10"
  },
  "chapter": "sec-curve-estimates",
- "unit": "sk-thm-curveestimate"
+ "unit": "sk-thm-curveestimate",
+ "split_report": {
+  "date": "2026-10-11",
+  "item": "lem-sc-dvr-tensor-surjective-negative-valuation",
+  "worker": "stage1",
+  "summary": "Split the 09N5 induction base case into choosing the inverse of a uniformizer, expanding it using tensor-product surjectivity, and deriving a contradiction if every element of A has nonnegative valuation. Added one statement-only valuation-ring characterization node and reused the existing valuation-arithmetic node.",
+  "blueprint": "The three steps realize the 09N5 proof's induction base case: a uniformizer inverse has negative valuation, tensor surjectivity expresses it as a finite sum, and nonnegative valuations would force that sum into B.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-dtv1706",
+  "group": "M1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-dtv1706 (reviewer sub-agent of L); spot-checked: Source: Stacks Varieties Lemma 09N5 (varieties-lemma-create-globally-generated), proof, induction base case; the item statement (A subring of K with fraction field K, B a DVR with fraction field K, A tensor B -> K surjective => nonzero x in A with v(x)<0) is that base case, hypotheses unchanged. Audit point: the split does not cite the parent lem-sc-jacobson-denominator-function-field (no cycle); the parent cites this item only as its base case and does its own induction; lem-sc-semilocal-dim-one-conductor (conductor statement) and this item do not restate each other. Step 1: t^{-1} has v=-1 and so is not in B from lem-sc-dvr-valuation-ring-characterization (v>=0 on B\\{0}, v(t)=1, v(t^{-1})=-1); finite tensor expansion is the definition. Step 2: v(a_j b_j)=v(a_j)+v(b_j) from lem-sc-dvr-valuation-arithmetic; but the step also needs that an element of K^x with v>=0 lies in B, which neither cited node states (C4). Step 3 elementary negation. Small cases: K=k(t), B=k[t]_(t): A=B fails surjectivity, A=k[t,t^{-1}] has x=t^{-1}. FIX more, RETURN less: C4 in step 2 repaired by adding statement-only node lem-sc-dvr-nonnegative-valuation-in-ring (B DVR, x in K^x with v(x)>=0 => x in B; Algebra 00IE) and citing it: dag/nodes/sec-curve-estimates/lem-sc-dvr-tensor-surjective-negative-valuation.json: proof[1].text/uses, proof_deps: add lem-sc-dvr-nonnegative-valuation-in-ring. Mathlib: my LeanFinder query for the new node found IsDiscreteValuationRing.exists_lift_of_le_one, absent from the pinned Mathlib (grep), and ValuationSubring.valuation_le_one_iff (ValuationSubring.lean:183, own value group, not normalized Z) -> no leaf; blueprint_refs search found nothing. Start Sat Oct 10 05:06:29 PM UTC 2026, end Sat Oct 10 05:07:25 PM UTC 2026.; 2 file(s) fixed by the reviewer; 1 statement node(s) added by the reviewer (FIX more, RETURN less)"
+ }
 }
