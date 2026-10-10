@@ -2725,3 +2725,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 21:50 L: merged deliver/C1/lem-weil-pbc-irreducible-lisse-strata (reviewer FIX+NODE(1); first push; new nodes: 1)
 - 21:50 L: returned deliver/K1/def-nagata-relative-gluing-datum-descent (reviewer RETURN: Re-push at ebbc2cb81 repairs only the setting sentence; the report and both readings describe edits absent from the head)
 - 21:51 L: merged deliver/J1/lem-pc-ringed-space-rgamma-derived-limit (reviewer FIX; first push; new nodes: 0)
+- 21:51 L: merged deliver/K1/lem-sc-generic-stalk-finite-length (reviewer FIX; first push; new nodes: 0)

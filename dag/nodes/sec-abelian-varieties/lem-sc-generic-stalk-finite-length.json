@@ -24,9 +24,54 @@
   "def-weil-pbc-module-localization",
   "def-weil-pbc-module-length"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Let J=Ann_R(M). By [lem-weil-pbc-finite-module-support-annihilator], the support hypothesis says that every prime containing J is the maximal ideal m, i.e. V(J) is contained in {m}. By [lem-weil-pbc-zero-locus-eq-iff-radical-eq], the radical of J is the intersection of the primes in V(J), hence contains m. The ideal m is finitely generated because R is Noetherian; [lem-weil-pbc-fg-ideal-radical-power] therefore gives N>=1 with m^N contained in J, hence m^N M=0.",
+   "uses": [
+    "lem-weil-pbc-finite-module-support-annihilator",
+    "lem-weil-pbc-zero-locus-eq-iff-radical-eq",
+    "lem-weil-pbc-fg-ideal-radical-power"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00L5 proof, first paragraph"
+   }
+  },
+  {
+   "text": "The powers filtration $M \\supset \\mathfrak mM \\supset \\cdots \\supset \\mathfrak m^N M=0$ has finitely many terms. Each quotient $\\mathfrak m^i M/\\mathfrak m^{i+1}M$ is naturally a finite-dimensional vector space over the residue field $R/\\mathfrak m$: it is finite as an $R$-module because $\\mathfrak m^iM$ is a submodule of the finite module $M$ over the Noetherian ring $R$ [lem-weil-pbc-noetherian-submodule-finite], and $\\mathfrak m$ acts by zero on the quotient. A finite-dimensional vector space has a finite flag by subspaces, hence finite length as an $R/\\mathfrak m$-module and therefore as an $R$-module. Applying [lem-weil-pbc-length-additive-short-exact] successively to the short exact sequences of adjacent filtration quotients gives finite length for $M$.",
+   "uses": [
+    "lem-weil-pbc-noetherian-submodule-finite",
+    "lem-weil-pbc-length-additive-short-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00L5 proof, filtration by powers of the maximal ideal"
+   }
+  },
+  {
+   "text": "Since $M$ is nonzero, the strict inclusion $0\\subsetneq M$ is a chain of length one in the definition of $\\mathrm{length}_R(M)$ [def-weil-pbc-module-length]. Thus its finite length is positive.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00L5 conclusion"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-finite-module-support-annihilator",
+  "lem-weil-pbc-zero-locus-eq-iff-radical-eq",
+  "lem-weil-pbc-fg-ideal-radical-power",
+  "lem-weil-pbc-noetherian-submodule-finite",
+  "lem-weil-pbc-length-additive-short-exact"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Algebra, Lemma Tag 00L5 proof"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -62,15 +107,54 @@
    "results": "no theorem that a finite module over a Noetherian local ring supported at the maximal ideal has finite length",
    "date": "2026-10-10",
    "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "IsFiniteLength|length_ne_top|isArtinian_of with support/annihilator/maximalIdeal in Mathlib (reviewer R-gsl2708)",
+   "results": "Module.length_ne_top_iff, isFiniteLength_iff_isNoetherian_isArtinian, support_of_supportDim_eq_zero; no single declaration for a finite module supported at the maximal ideal having finite length",
+   "date": "2026-10-10",
+   "verdict": "no match"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-sc-numerical-polynomial-leading-term",
   "by": "worker",
   "date": "2026-10-10"
  },
  "chapter": "sec-abelian-varieties",
- "unit": "sk-prop-av-isogeny"
+ "unit": "sk-prop-av-isogeny",
+ "split_report": {
+  "date": "2026-10-11",
+  "item": "lem-sc-generic-stalk-finite-length",
+  "worker": "stage1",
+  "summary": "Split Tag 00L5 by writing the annihilator and radical-power argument directly in the item proof, using existing support and radical-power nodes; the remaining steps use the finite powers-of-the-maximal-ideal filtration to obtain finite length and positivity.",
+  "blueprint": "Realizes the first paragraph of the Tag 0BEN proof in the blueprint ancestor lem-sc-mult-n-finite-flat: finite generic stalk supported at its generic maximal ideal, followed by the Tag 00L5 finite-length argument.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-finite-module-support-annihilator",
+    "why": "The support-to-annihilator identification is a general commutative-algebra tool from another unit."
+   },
+   {
+    "node": "lem-weil-pbc-fg-ideal-radical-power",
+    "why": "The radical-power containment is a general commutative-algebra tool from another unit."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-zero-locus-eq-iff-radical-eq",
+  "lem-weil-pbc-noetherian-submodule-finite",
+  "lem-weil-pbc-length-additive-short-exact",
+  "lem-weil-pbc-finite-module-support-annihilator",
+  "lem-weil-pbc-fg-ideal-radical-power"
+ ],
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-gsl2708",
+  "group": "K1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-gsl2708 (reviewer sub-agent of L); spot-checked: Mathlib grep: no single declaration (only Module.length_ne_top_iff, isFiniteLength_iff_isNoetherian_isArtinian, support_of_supportDim_eq_zero). Split is the Tag 00L5 argument (m^N M=0 via annihilator radical, powers filtration with residue-field quotients, length additivity); C4 citer lem-sc-numerical-polynomial-leading-term uses finite length/positivity, matches. FIX more, RETURN less: (1) C1 step 1: m in sqrt(Ann M) from V(Ann M) in {m} needs sqrt = intersection of primes; cited lem-weil-pbc-zero-locus-eq-iff-radical-eq. (2) C1 step 2: m^iM/m^{i+1}M finite needs submodules of finite modules over Noetherian rings finite; cited lem-weil-pbc-noetherian-submodule-finite (both missed by the Second reading). (3) TeX: unclosed $M. in step 2. proof_deps and tool_uses updated (other-unit generic tools).; 1 file(s) fixed by the reviewer"
+ }
 }
