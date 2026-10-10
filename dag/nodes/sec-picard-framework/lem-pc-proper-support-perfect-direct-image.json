@@ -23,12 +23,56 @@
   "def-weil-pbc-closed-subset-proper-over-base",
   "def-pc-derived-direct-image",
   "def-pc-derived-pullback",
-  "def-pc-base-change",
-  "def-pc-kflat-complex"
+  "def-pc-base-change"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "The arbitrary-base-change assertion is Stacks Project, Lemma 36.26.4 (Tag 0A1D), applied with E as the perfect object (hypotheses of [lem-pc-rf-base-change-complex] checked: f of finite presentation is quasi-compact and quasi-separated by [def-pc-morphism-conventions]; a perfect E is locally quasi-isomorphic to a finite complex of finite free modules, so its cohomology sheaves are quasi-coherent and E\\in D_{\\mathrm{QCoh}}(\\mathcal O_X); the terms of G^\\bullet are finitely presented, hence quasi-coherent, and a bounded complex is bounded above) and G^\\bullet as the bounded-above termwise S-flat complex. Its canonical comparison is exactly Lg^* Rf_*(E\\otimes^L G^\\bullet) \\cong Rf_{T,*}(L(g')^*E\\otimes^L (g')^*G^\\bullet) for every g:T\\to S; since E is perfect, L(g')^*E identifies with E_T. Thus it remains to prove perfectness of K.",
+   "uses": [
+    "lem-pc-rf-base-change-complex"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/perfect.tex",
+    "place": "Lemma 36.30.1, Tag 0A1H, first sentence of proof invoking Lemma 36.26.4 (Tag 0A1D)"
+   }
+  },
+  {
+   "text": "Assume S is affine, S = Spec(R), and write R as a filtered colimit of Noetherian rings R_i. By Limits, Lemma 32.10.1 (Tag 01ZM), after replacing i, the finite-presentation morphism X\\to S descends to X_i\\to\\operatorname{Spec}(R_i). The finite-presentation, flatness, proper-support, and perfectness descent assertions are exactly the combined Noetherian-approximation statement [lem-pc-noetherian-approximation-data], which packages Tags 01ZR, 05LY, 081G (with Cohomology of Schemes, Lemma 30.26.7), and 09RF. Hence after increasing i we have a bounded finitely presented complex G_i^\\bullet flat over R_i with proper support and a perfect E_i whose base changes recover the original data.",
+   "uses": [
+    "thm-pd-spreading-out",
+    "lem-pc-noetherian-approximation-data"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/perfect.tex",
+    "place": "Lemma 36.30.1, Tag 0A1H, Noetherian approximation paragraph"
+   }
+  },
+  {
+   "text": "Apply the Noetherian perfect-direct-image theorem, Stacks Lemma 36.27.2 (Tag 0DJQ), to X_i\\to\\operatorname{Spec}(R_i), E_i, and G_i^\\bullet. It makes Rf_{i,*}(E_i\\otimes^L G_i^\\bullet) perfect. Pullback preserves perfectness because a perfect object is locally a bounded finite locally free complex, and this local description also shows perfectness is Zariski-local. The base-change isomorphism of [lem-pc-rf-base-change-complex] for X_i\\to\\operatorname{Spec}(R_i) (finite presentation over a Noetherian base, hence quasi-compact and quasi-separated) along \\operatorname{Spec}(R)\\to\\operatorname{Spec}(R_i), as in step 1, identifies the pullback with K; the affine argument therefore glues over S.",
+   "uses": [
+    "lem-pc-noetherian-perfect-direct-image",
+    "lem-pc-rf-base-change-complex"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/perfect.tex",
+    "place": "Lemma 36.30.1, Tag 0A1H, final application of Lemma 36.27.2 (Tag 0DJQ)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-rf-base-change-complex",
+  "thm-pd-spreading-out",
+  "lem-pc-noetherian-approximation-data",
+  "lem-pc-noetherian-perfect-direct-image"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/perfect.tex",
+  "place": "Lemma 36.30.1, Tag 0A1H; source proof checked online and reconstructed as base change, Noetherian approximation, and the Noetherian case"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -60,12 +104,28 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-pc-rf-perfect-base-change",
   "by": "worker",
   "date": "2026-10-10"
  },
  "chapter": "sec-picard-framework",
- "unit": "sk-thm-picard-semicon"
+ "unit": "sk-thm-picard-semicon",
+ "split_report": {
+  "date": "2026-10-11",
+  "item": "lem-pc-proper-support-perfect-direct-image",
+  "worker": "stage1",
+  "summary": "No exact sorry-free declaration exists in either Lean checkout. The item is Stacks Tag 0A1H. The returned split was repaired by adding statement nodes for bounded-complex base change (0A1D), Noetherian descent of all data (01ZR, 05LY, 081G, 09RF), and the Noetherian perfect-direct-image theorem (0DJQ); pullback and Zariski locality of perfectness are argued directly in step 3; all three proof steps now cite the precise inputs they use.",
+  "blueprint": "The three steps realize the Tag 0A1H classical-input sentence inherited through lem-pc-rf-perfect-base-change: establish arbitrary base change, spread the data to a Noetherian approximation, and apply the Noetherian perfect-direct-image theorem before descending and gluing.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-psp2009",
+  "group": "J1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-psp2009 (reviewer sub-agent of L); spot-checked: Return 19:04 points 1-4 repaired: step 1 now cites lem-pc-rf-base-change-complex (Tag 0A1D, f qcqs, E in D_QCoh, G bounded-above qcoh S-flat; statement matches Stacks text); step 2 cites thm-pd-spreading-out (01ZM) and combined node lem-pc-noetherian-approximation-data (01ZR/05LY/081G/09RF, true as stated); step 3 cites lem-pc-noetherian-perfect-direct-image (Tag 0DJQ, fp is a specialization of locally finite type, fp modules coherent over Noetherian); pullback/locality of perfectness argued from the definition (accepted as elementary). No duplicate nodes for these tags in dag/nodes; no cycle. FIX more, RETURN less: (1) E4 step 1: hypotheses of the base-change node checked in text (fp => qcqs by def-pc-morphism-conventions, perfect => D_QCoh, fp terms quasi-coherent, bounded => bounded above); (2) C4 step 2: wrong tags 0C0C (descend smooth) and 09RK (factor regular immersion) corrected to 05LY, 081G (+30.26.7), 09RF; (3) C1 step 3: base change for X_i -> Spec R_i now cites lem-pc-rf-base-change-complex in uses; stale split_report summary tags corrected. Second reading by J1 missed the wrong tags left in step 2 text.; 1 file(s) fixed by the reviewer"
+ }
 }
