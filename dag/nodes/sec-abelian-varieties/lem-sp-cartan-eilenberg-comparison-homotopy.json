@@ -17,20 +17,76 @@
   "place": "Lemma 015I (lemma-cartan-eilenberg), comparison morphism construction, and Remark 015K (remark-functorial-ss)"
  },
  "stmt_deps": [
+  "def-sp-abelian",
+  "def-sp-enough-injectives",
   "lem-sp-cartan-eilenberg-exists",
+  "lem-sp-cartan-eilenberg-double-complex-homotopy",
   "def-sp-double-complex-total",
-  "def-sp-injective-resolutions",
-  "lem-weil-pbc-cartesian-eilenberg-functorial",
   "def-sp-filtration"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Put $\\delta=\\phi-\\psi$. Additivity makes $\\delta$ a morphism of double complexes, and the augmentation identities give $\\delta F(\\epsilon_K)=\\epsilon_L(u-u')=\\epsilon_L(ds+sd)$. Thus the induced map on the augmented degree-zero complexes has the prescribed null-homotopy $s$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Lemma 015I and Remark 015K, comparison morphism construction"
+   }
+  },
+  {
+   "text": "Check the repaired double-complex lemma hypotheses for $F(I_K)$ and $J_L$. Exactness of the augmented boundary, cycle, and horizontal-cohomology rows of $F(I_K)$, and of $0\\to Z\\to F(I_K)\\to B\\to0$, follows from exactness of $F$ and the Cartan--Eilenberg resolution $I_K$; the corresponding rows of $J_L$ are injective resolutions by [lem-sp-cartan-eilenberg-exists]. With $w=u-u'$ and the given homotopy $s$, the augmentation identity is $\\delta F(\\epsilon_K)=\\epsilon_L w$, where $\\delta=\\phi-\\psi$. Thus [lem-sp-cartan-eilenberg-double-complex-homotopy] applies and supplies both homotopy components.",
+   "uses": [
+    "lem-sp-cartan-eilenberg-exists",
+    "lem-sp-cartan-eilenberg-double-complex-homotopy"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Lemma 015I comparison construction by B, Z, H rows and Remark 015K; horizontal/vertical homotopy decomposition as in Weibel Lemma 5.7.10"
+   }
+  },
+  {
+   "text": "The repaired lemma gives maps $s_1^{p,q}:F(I_K^{p,q})\\to J_L^{p-1,q}$ and $s_2^{p,q}:F(I_K^{p,q})\\to J_L^{p,q-1}$, with $s_1$ restricting on the augmented row to the prescribed $s$ and with the component identities required for the total homotopy.",
+   "uses": [
+    "lem-sp-cartan-eilenberg-double-complex-homotopy"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Lemma 015I, compatibility with the second exact sequence and vertical differential; Remark 015K"
+   }
+  },
+  {
+   "text": "Set $H^{p,q}=s_1^{p,q}+(-1)^p s_2^{p,q}$. The component equations in the preceding step give $d_{\\operatorname{Tot}J}H+Hd_{\\operatorname{Tot}F(I_K)}=\\delta$; hence $\\operatorname{Tot}(\\phi)-\\operatorname{Tot}(\\psi)=dH+Hd$. The horizontal part preserves the vertical degree and the vertical part lowers it by one, so for the decreasing filtration by vertical (resolution) degree, $H(F^q\\operatorname{Tot}^n)\\subseteq F^{q-1}\\operatorname{Tot}^{n-1}$ [def-sp-double-complex-total, def-sp-filtration]. If $u=u'$, choose $s=0$ and obtain the final assertion.",
+   "uses": [
+    "lem-sp-cartan-eilenberg-double-complex-homotopy",
+    "def-sp-double-complex-total",
+    "def-sp-filtration"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Remark 015K, filtered total-complex comparison"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sp-cartan-eilenberg-exists",
+  "lem-sp-cartan-eilenberg-double-complex-homotopy",
+  "def-sp-double-complex-total",
+  "def-sp-filtration"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/derived.tex",
+  "place": "Lemma 015I and Remark 015K; row-by-row comparison-homotopy argument"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
    "query": "comparison morphisms between Cartan Eilenberg injective resolutions lifting the same map are chain homotopic",
-   "results": "CategoryTheory.InjectiveResolution.descHomotopy and related single-resolution homotopy declarations; no Cartan--Eilenberg double-complex theorem.",
+   "results": "CategoryTheory.InjectiveResolution.descHomotopy, descHomotopyZero, descHomotopyZeroOne, descHomotopyZeroSucc, homotopyEquiv; no Cartan--Eilenberg double-complex theorem.",
    "date": "2026-10-11",
    "verdict": "no match"
   },
@@ -44,7 +100,7 @@
   {
    "tool": "grep",
    "query": "Cartan.Eilenberg|cartan.*eilenberg|Homotopy in Mathlib/Algebra/Homology",
-   "results": "0 hits in the Mathlib homological algebra sources.",
+   "results": "0 hits in Mathlib/Algebra/Homology.",
    "date": "2026-10-11",
    "verdict": "no match"
   },
@@ -57,12 +113,27 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-sp-cartan-eilenberg-comparison-independence",
   "by": "worker",
   "date": "2026-10-10"
  },
  "chapter": "sec-abelian-varieties",
- "unit": "sk-prop-av-pqf-finite"
+ "unit": "sk-prop-av-pqf-finite",
+ "split_report": {
+  "date": "2026-10-11",
+  "item": "lem-sp-cartan-eilenberg-comparison-homotopy",
+  "worker": "stage1",
+  "summary": "Repaired the returned split by making the double-complex lemma type-correct: it now introduces a complex map w: K -> L, a homotopy s with w = d_L s + s d_K, assumes exact source B/Z/H rows and injective target rows, and concludes s_1 epsilon_I = epsilon_J s. The item checks these hypotheses for F(I_K), applies the child lemma for the full construction, and assembles the filtered total homotopy.",
+  "blueprint": "Realizes thm-sp-grothendieck proof, final paragraph: comparison homotopies for the lifted Cartan--Eilenberg maps."
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-cec2822",
+  "group": "J1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-cec2822 (reviewer sub-agent of L); spot-checked: All three 22:11 points repaired: (1) new node now well-typed (w:K->L, s^p:K^p->L^{p-1}, w=d_L s+s d_K, delta eps_I=eps_J w, s1^{p,0} eps_I^p=eps_J^{p-1} s^p all compose); true as dual of Cartan-Eilenberg XVII 1.2/Weibel 5.7.10 (s1 = column comparison over s, then delta-(d_I s1+s1 d_I) lies over 0 and is properly null-homotopic via s2 into injective B/Z/H rows); (2) source hypothesis weakened to exact B/Z/H rows, met by F(I_K) since exact F commutes with ker/im/coker, target J_L rows injective by lem-sp-cartan-eilenberg-exists; (3) horseshoe and lift-unique citations and tool_uses gone, Step 2 only checks hypotheses. Signs: H=s1+(-1)^p s2 gives diagonal d_I s1+s1 d_I+d_II s2+s2 d_II; s1 keeps q, s2 lowers by one, so H(F^q)⊆F^{q-1} by second filtration; item statement unchanged vs base. Searches dated 2026-10-11, no Mathlib CE theory. Note: 'Second reading by J1' still says 'New nodes: none' (stale), no mathematical fault missed."
+ }
 }
