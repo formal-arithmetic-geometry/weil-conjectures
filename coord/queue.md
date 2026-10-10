@@ -2,7 +2,7 @@
 
 936 items; claim with `tools/claim.py next <group> [--stage N]`.
 
-## Stage 1: nodes to split (253)
+## Stage 1: nodes to split (252)
 
 | node | distance to a target | Lean state on the done branch |
 |---|---|---|
@@ -13,12 +13,10 @@
 | `lem-sc-ringed-space-injective-restriction-surjective` | 2018 | none |
 | `lem-sc-ringed-space-restrict-injective-resolution` | 2018 | none |
 | `lem-sc-ringed-space-module-sheaves-enough-injectives` | 2019 | none |
-| `lem-weil-pbc-horseshoe-morphism-lift-exact-source` | 3008 | none |
 | `lem-pc-unbounded-derived-functor-cohomological-bound` | 3012 | none |
 | `lem-pc-kflat-stalk-criterion` | 3013 | none |
 | `lem-pc-derived-sections-pushforward-comparison` | 3014 | none |
 | `lem-pc-derived-qcoh-compact-generation` | 3015 | none |
-| `lem-sc-derived-open-restriction-adjunction-exact` | 3015 | none |
 | `lem-sc-finite-pushforward-derived-hom-qcoherent` | 3015 | none |
 | `def-pc-ringed-spaces-derived-direct-image` | 3016 | none |
 | `lem-pc-derived-qcoh-perfect-generation` | 3016 | none |
@@ -28,13 +26,16 @@
 | `lem-sc-p1-ext-resolution-derived-connecting` | 3016 | none |
 | `lem-sc-smooth-proper-tensor-direct-sums` | 3016 | none |
 | `lem-sc-smooth-proper-tensor-perfect-case` | 3016 | none |
-| `lem-pc-compact-generators-build-objects` | 3017 | none |
 | `lem-pc-compact-hom-hocolim` | 3017 | none |
-| `lem-pc-pre-derived-adjoint-functors-general` | 3017 | none |
 | `lem-sc-koszul-regular-sequence-dual-complex` | 3017 | none |
 | `lem-sc-qcoh-acyclic-derived-pushforward-cohomology` | 3017 | none |
 | `lem-sc-standard-smooth-affine-diagonal-generators` | 3017 | none |
 | `lem-sc-standard-smooth-local-relative-dimension` | 3017 | none |
+| `lem-pc-essentially-constant-ind-hom-colimit` | 3018 | none |
+| `lem-pc-essentially-constant-pro-hom-colimit` | 3018 | none |
+| `lem-pc-left-localization-hom-colimit` | 3018 | none |
+| `lem-pc-quasi-isomorphisms-multiplicative-system` | 3018 | none |
+| `lem-pc-right-localization-hom-colimit` | 3018 | none |
 | `lem-sc-proper-flat-right-adjoint-affine-basechange` | 3018 | none |
 | `lem-sc-proper-flat-right-adjoint-restriction-open` | 3018 | none |
 | `lem-pc-genus-agrees-sc` | 4007 | rests_on_sorry |
@@ -45,7 +46,6 @@
 | `lem-sc-finite-flat-unramified-tangent-criterion` | 4009 | none |
 | `lem-sc-group-addition-tangent-differential` | 4009 | none |
 | `lem-sc-hom-etale-locus-translation` | 4009 | none |
-| `lem-sc-mult-n-tangent-differential` | 4009 | none |
 | `lem-sc-positive-ample-hilbert-degree` | 4009 | none |
 | `lem-sc-strict-henselization-dimension` | 4009 | none |
 | `lem-sc-strict-henselization-noetherian` | 4009 | none |
@@ -55,7 +55,6 @@
 | `lem-pc-hilb-separated` | 4010 | none |
 | `lem-pc-universal-adjoint-section` | 4010 | rests_on_sorry |
 | `lem-pc-derived-module-free-generation` | 4011 | none |
-| `lem-pc-zero-scheme-adjunction-base-change` | 4011 | none |
 | `lem-pc-affine-derived-pullback-tensor-tilde` | 4012 | none |
 | `lem-pc-restrict-derived-direct-image-open` | 4012 | none |
 | `lem-pc-flat-base-change-cohom` | 5008 | rests_on_sorry |
@@ -260,7 +259,7 @@
 | `lem-pur-rhom-well-defined` | - | none |
 | `lem-zl-noether-normalization-dimension` | - | none |
 
-## Stage 2: nodes to state (683)
+## Stage 2: nodes to state (684)
 
 | node | distance to Mathlib | kind |
 |---|---|---|
@@ -359,6 +358,7 @@
 | `lem-pc-linear-pair-morphism-finite` | 1 | state |
 | `lem-pc-pic-of-field` | 1 | state |
 | `lem-pc-polynomial-quotient-distinct-linear-crt` | 1 | state |
+| `lem-pc-pre-derived-adjoint-functors-general` | 1 | state |
 | `lem-pc-presheaf-change-of-rings-adjunction` | 1 | state |
 | `lem-pc-presheaf-module-inverse-image-adjunction` | 1 | state |
 | `lem-pc-principal-open-dense-of-nonzerodivisor` | 1 | state |
@@ -948,7 +948,7 @@
 | `lem-weil-pbc-p1-field-dimension-one` | 4 | state |
 | `lem-weil-pbc-projective-space-zero-isomorphism` | 4 | state |
 
-Not open yet: 1334 nodes that wait for a statement dependency, 287 nodes that wait for stage 1.
+Not open yet: 1339 nodes that wait for a statement dependency, 286 nodes that wait for stage 1.
 
 ## Stage 3: modules to prove (0)
 
