@@ -2763,3 +2763,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 22:03 UTC L matched pqf-lem-affine-open-locnoeth to Mathlib isLocallyNoetherian_of_affine_cover + component_noetherian (R-aol2736); C1 delivery returned as unneeded
 - 22:03 UTC L deleted deliver/E1/def-nagata-scheme-theoretically-dense-open (abandoned after the Mathlib match); confirmed R-qoe2734's hypothesis change on def-nagata-qc-open-equality-stage (lead note)
 - 22:04 L: merged deliver/M1/lem-pc-base-change-rhom-perfect (reviewer FIX; first push; new nodes: 0)
+- 22:04 L: merged deliver/F1/def-nagata-morphism-equality-stage (reviewer FIX; after a return; new nodes: 0)

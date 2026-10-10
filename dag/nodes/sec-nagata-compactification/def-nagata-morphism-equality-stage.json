@@ -3,26 +3,78 @@
  "blueprint": {
   "is": "def-nagata-morphism-equality-stage",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "definition",
  "title": "Stage of equality for two descended morphisms",
- "statement": "Let $\\varphi_{\\lambda_0},\\psi_{\\lambda_0}\\colon X_{\\lambda_0}\\to Y_{\\lambda_0}$ have equal base change to $S$. On a\nfinite affine target cover, include the stages at which their inverse-image\nopens agree and the stages at which the induced ring maps agree on finite\ngenerator lists. Define $\\lambda_{\\varphi=\\psi}$ to be the selected upper\nbound of this finite set.",
+ "statement": "Fix a directed index set $I$, an inverse system of schemes $(S_\\lambda)_{\\lambda\\in I}$ with affine transition morphisms, and an identification $S=\\varprojlim_{\\lambda\\in I}S_\\lambda$; fix $\\lambda_0\\in I$ with $S_{\\lambda_0}$ quasi-compact and quasi-separated, and use [def-nagata-basechanged-system] for the base changes $X_\\lambda,X,Y_\\lambda,Y$ ($\\lambda\\geq\\lambda_0$). Let $X_{\\lambda_0}$ and $Y_{\\lambda_0}$ be schemes of finite presentation over $S_{\\lambda_0}$ (so both are qcqs, and each $X_\\lambda$, being affine over $X_{\\lambda_0}$, is qcqs), and let $\\varphi_{\\lambda_0},\\psi_{\\lambda_0}:X_{\\lambda_0}\\to Y_{\\lambda_0}$ be morphisms over $S_{\\lambda_0}$ with equal base change $X\\to Y$. Choose a finite affine cover $\\{T_j=\\operatorname{Spec}R_j\\}$ of $S_{\\lambda_0}$ and, over it, a finite affine cover $\\{V_{jk}=\\operatorname{Spec}B_{jk}\\}$ of $Y_{\\lambda_0}$ with $V_{jk}$ mapping into $T_j$ and each $B_{jk}$ a finitely presented $R_j$-algebra; fix a finite set $G_{jk}\\subseteq B_{jk}$ generating $B_{jk}$ as an $R_j$-algebra. For each $(j,k)$ put $W_1=\\varphi_{\\lambda_0}^{-1}(V_{jk})$ and $W_2=\\psi_{\\lambda_0}^{-1}(V_{jk})$; these are quasi-compact opens of $X_{\\lambda_0}$ ($\\varphi_{\\lambda_0},\\psi_{\\lambda_0}$ are quasi-compact, since $X_{\\lambda_0}$ is quasi-compact and $Y_{\\lambda_0}$ quasi-separated), and their inverse images in $X$ are both the inverse image of $V_{jk}\\times_{S_{\\lambda_0}}S$ under the common base change, hence equal. Let $\\lambda_{jk}=\\lambda_{W_1=W_2}$ be the stage of [def-nagata-qc-open-equality-stage], applied with the scheme $X_{\\lambda_0}$ (qcqs over $S_{\\lambda_0}$) in the role of the scheme called $Y_{\\lambda_0}$ there. Let $W_{i,\\lambda_{jk}}$ be the inverse image of $W_i$ in $X_{\\lambda_{jk}}$ and choose a finite affine open cover $\\{U_{jkl}\\}_l$ of $W_{1,\\lambda_{jk}}\\cap W_{2,\\lambda_{jk}}$ (quasi-compact, as $X_{\\lambda_{jk}}$ is qcqs); for $\\mu\\geq\\lambda_{jk}$ let $U_{jkl,\\mu}$ and $U^\\infty_{jkl}$ be its inverse images in $X_\\mu$ and in $X$. Each $U_{jkl,\\mu}$ is affine (the transition $X_\\mu\\to X_{\\lambda_{jk}}$ is a base change of the affine $S_\\mu\\to S_{\\lambda_{jk}}$) and $U^\\infty_{jkl}=\\varprojlim_{\\mu}U_{jkl,\\mu}$ (fibre products commute with limits), so by [lem-weil-pbc-spec-colimit-limit] and uniqueness of limits $\\Gamma(U^\\infty_{jkl},\\mathcal O)=\\varinjlim_{\\mu\\geq\\lambda_{jk}}\\Gamma(U_{jkl,\\mu},\\mathcal O)$ as rings. For $b\\in G_{jk}$ let $x,y\\in\\Gamma(U_{jkl},\\mathcal O)$ be the pullbacks of $b$ along the two composites $U_{jkl}\\to X_{\\lambda_0}\\to V_{jk}$ through $\\varphi_{\\lambda_0}$ and through $\\psi_{\\lambda_0}$ (both composites lie over $T_j$, so they pull back elements of $R_j$ equally, and no condition on $R_j$ is needed). Since $\\varphi_{\\lambda_0}$ and $\\psi_{\\lambda_0}$ have the same base change, $x$ and $y$ have the same image in $\\Gamma(U^\\infty_{jkl},\\mathcal O)$; by clause (2) of [lem-pc-filtered-colimit-commrings-elementwise], applied to the directed set $\\{\\mu\\in I\\mid\\mu\\geq\\lambda_{jk}\\}$, choose $\\mu_{jklb}\\geq\\lambda_{jk}$ such that the images of $x$ and $y$ in $\\Gamma(U_{jkl,\\mu_{jklb}},\\mathcal O)$ are equal. Let $F$ be the finite set consisting of $\\lambda_0$, all $\\lambda_{jk}$ and all $\\mu_{jklb}$, and define $\\lambda_{\\varphi=\\psi}=u(F)$ using [def-nagata-directed-finite-upper-bound].",
  "source": {
   "document": "literature/blueprint/master/blueprint/sec-nagata-compactification/sk-prop-nagata-sketch-approximation/def-nagata-morphism-equality-stage.md",
   "place": "node def-nagata-morphism-equality-stage, order 355"
  },
  "stmt_deps": [
+  "def-nagata-basechanged-system",
   "def-nagata-directed-finite-upper-bound",
   "def-nagata-qc-open-equality-stage",
-  "lemma-nagata-filtered-colimit-finite-data"
+  "lem-weil-pbc-spec-colimit-limit",
+  "lem-pc-filtered-colimit-commrings-elementwise"
  ],
  "proof": [],
  "proof_deps": [],
  "proof_origin": null,
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "definition selecting a finite upper bound stage where two descended morphisms have equal inverse-image opens and equal induced ring maps",
+   "results": "AlgebraicGeometry.ExistsHomHomCompEqCompAux.exists_eq; AlgebraicGeometry.Scheme.exists_hom_comp_eq_comp_of_locallyOfFiniteType; AlgebraicGeometry.Scheme.exists_hom_hom_comp_eq_comp_of_locallyOfFiniteType; AlgebraicGeometry.ExistsHomHomCompEqCompAux.exists_index; AlgebraicGeometry.exists_map_preimage_eq_map_preimage (broader inverse-limit results)",
+   "date": "2026-10-11",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "Scheme.Hom, finite affine cover, equal inverse image, ring homomorphism equality",
+   "results": "unknown identifier Scheme.Hom; no result",
+   "date": "2026-10-11",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "morphism.*equality.*stage|equal.*induced.*ring.*map in Mathlib",
+   "results": "none",
+   "date": "2026-10-11",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "define a stage in a directed system where two scheme morphisms become equal after base change",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-11",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "finite affine cover and finite generators ensure equality of two scheme morphisms at a later index in an inverse limit",
+   "results": "AlgebraicGeometry.ExistsHomHomCompEqCompAux.exists_eq; AlgebraicGeometry.Scheme.exists_hom_comp_eq_comp_of_locallyOfFiniteType; AlgebraicGeometry.Scheme.exists_hom_hom_comp_eq_comp_of_locallyOfFiniteType; AlgebraicGeometry.ExistsHomHomCompEqCompAux.exists_index (broader inverse-limit results)",
+   "date": "2026-10-11",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.exists_map_preimage_eq_map_preimage, Scheme.Hom.ext",
+   "results": "unknown identifier Scheme.Hom.ext; no result",
+   "date": "2026-10-11",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "exists_map_preimage_eq_map_preimage|Hom.ext in AlgebraicGeometry",
+   "results": "generic hom_ext occurrences; no declaration of this definition",
+   "date": "2026-10-11",
+   "verdict": "no match"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [
   "bypassed"
@@ -59,5 +111,22 @@
   }
  },
  "chapter": "sec-nagata-compactification",
- "unit": "sk-prop-nagata-sketch-approximation"
+ "unit": "sk-prop-nagata-sketch-approximation",
+ "split_report": {
+  "date": "2026-10-11",
+  "item": "def-nagata-morphism-equality-stage",
+  "worker": "stage1",
+  "summary": "Repaired the definition after the E/C4 return: X_{lambda_0} and Y_{lambda_0} are required to be of finite presentation over S_{lambda_0}; the construction now explicitly chooses a finite affine target cover, the selected quasi-compact-open equality stage for each chart, a finite affine cover of each common inverse image, and a finite-data stage for the induced ring maps, then applies the selected finite upper bound. Added def-nagata-basechanged-system as the setup dependency. No child nodes or proof steps are required, and Mathlib searches found only broader inverse-limit results.",
+  "blueprint": "node def-nagata-morphism-equality-stage, order 355",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-nme2738",
+  "group": "F1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-nme2738 (reviewer sub-agent of L); spot-checked: 21:52 points: (1) E setting now stated (directed I, affine transitions, S=lim, S_lambda0 qcqs, X,Y fp) - repaired; (2) consistent with G1 re-push 564db66bc (opens of a scheme qcqs over S_lambda0 with equal inverse images; X_lambda0 fits); (3) C4 equalizer step now cites lem-pc-filtered-colimit-commrings-elementwise clause (2) - repaired. FIX more, RETURN less: (a) C4/E 'finite affine cover of the common inverse image' used W_{1,lambda}=W_{2,lambda}, which def-nagata-qc-open-equality-stage does not state (its u(F) property is separate): cover W_{1,lambda} cap W_{2,lambda} instead (qc as X_lambda qcqs) and name x,y as the pullbacks of b along the two composites; (b) 'chosen lifts' replaced by the images of x,y at stage mu; (c) justified qc of W_i (phi quasi-compact: X qc, Y qs), affineness of U_{jkl,mu} and the colimit identification via lem-weil-pbc-spec-colimit-limit plus uniqueness of limits; (d) removed lemma-nagata-filtered-colimit-finite-data from stmt_deps (no longer used).; 1 file(s) fixed by the reviewer"
+ },
+ "lead_note": "2026-10-10 L (R-nme2738): consistent with G1's re-pushed def-nagata-qc-open-equality-stage (564db66bc): applied with X_lambda0 (qcqs over S_lambda0 by finite presentation) in the role of its Y_lambda0; stage only meaningful once that re-push merges"
 }
