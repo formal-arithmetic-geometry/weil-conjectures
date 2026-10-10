@@ -36,9 +36,65 @@
   "def-kun-topological-krull-dimension",
   "def-weil-affine-spectrum"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Put $S_K=S\\otimes_kK$ and let $\\tau:S_K\\xrightarrow{\\sim}K\\otimes_kS$ be the canonical symmetry isomorphism of tensor products. By [lem-weil-pbc-field-extension-base-change-faithfully-flat], the map $S\\to S_K$, $s\\mapsto s\\otimes1$, is faithfully flat. Transporting this map along $\\tau$ gives the map $j:S\\to K\\otimes_kS$, $s\\mapsto1\\otimes s$, and faithful flatness is unchanged by the target ring isomorphism $\\tau$.",
+   "uses": [
+    "lem-weil-pbc-field-extension-base-change-faithfully-flat"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra, Lemma Tag 00P3 (lemma-dimension-preserved-field-extension, line 28290), together with the field-extension flatness input used in its proof; tensor-factor symmetry is the canonical swap"
+   }
+  },
+  {
+   "text": "By [lem-weil-pbc-faithfully-flat-surjective-spectrum], the faithfully flat map $j$ induces a surjection $\\operatorname{Spec}(K\\otimes_kS)\\to\\operatorname{Spec}S$. Thus every prime of $S$ is the contraction of at least one prime of $K\\otimes_kS$.",
+   "uses": [
+    "lem-weil-pbc-faithfully-flat-surjective-spectrum"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra, Lemma Tag 00P3 (lemma-dimension-preserved-field-extension, line 28290), with the standard faithfully-flat lying-over consequence for the scalar-extension map"
+   }
+  },
+  {
+   "text": "For a prime $\\mathfrak q_K\\subset K\\otimes_kS$ let $\\mathfrak q=j^{-1}(\\mathfrak q_K)$. Apply [lem-weil-pbc-dimension-at-point-field-extension] to $S$ and $K/k$, whose tensor factor order is changed by the same symmetry $\\tau$. The induced homeomorphism of affine spectra carries $\\mathfrak q_K$ to the corresponding point in the $S\\otimes_kK$ presentation, so the local-dimension equality from that lemma reads $\\dim_{\\mathfrak q_K}\\operatorname{Spec}(K\\otimes_kS)=\\dim_{\\mathfrak q}\\operatorname{Spec}S$.",
+   "uses": [
+    "lem-weil-pbc-dimension-at-point-field-extension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra, Lemma Tag 00P4 (lemma-dimension-at-a-point-preserved-field-extension, line 28307), applied to the primes over the scalar-extension map; the swap $S\\otimes_kK\\cong K\\otimes_kS$ preserves prime chains and local dimensions"
+   }
+  },
+  {
+   "text": "Use [lem-weil-pbc-dimension-supremum-local-dimensions] for each affine spectrum. It gives $\\dim\\operatorname{Spec}(K\\otimes_kS)=\\sup_{\\mathfrak q_K}\\dim_{\\mathfrak q_K}\\operatorname{Spec}(K\\otimes_kS)$ and $\\dim\\operatorname{Spec}S=\\sup_{\\mathfrak q}\\dim_{\\mathfrak q}\\operatorname{Spec}S$, with the empty-spectrum supremum equal to $-\\infty$. By step 2, contraction $\\mathfrak q_K\\mapsto\\mathfrak q$ has image all primes of $S$, and by step 3 the corresponding local dimensions are equal. Therefore the two suprema, and hence the two Krull dimensions, are equal.",
+   "uses": [
+    "lem-weil-pbc-dimension-supremum-local-dimensions",
+    "lem-weil-pbc-faithfully-flat-surjective-spectrum",
+    "lem-weil-pbc-dimension-at-point-field-extension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra, Lemma Tag 00P3 (lemma-dimension-preserved-field-extension, line 28290), concluded using Lemma Tag 00P4; the supremum-over-local-dimensions passage is Topology, Lemma Tag 0B7I (line 1428)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-field-extension-base-change-faithfully-flat",
+  "lem-weil-pbc-faithfully-flat-surjective-spectrum",
+  "lem-weil-pbc-dimension-at-point-field-extension",
+  "lem-weil-pbc-dimension-supremum-local-dimensions"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Algebra, Lemma Tag 00P3 (line 28290), with the local-dimension strengthening Lemma Tag 00P4 (line 28307); the global supremum step is Topology, Lemma Tag 0B7I (line 1428)"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -63,7 +119,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "worker",
@@ -84,5 +140,19 @@
  },
  "chapter": "sec-proper-base-change",
  "unit": "sk-thm-p1",
- "reviewed": "2026-10-10 L: statement checked against 00P3; same_as names lem-pc-dim-base-change and lem-kun-dimension-extension (blueprint nodes stating it in another form: dimension via local rings plus a curve clause, and a scheme version), not cited to keep the unit route"
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-dimfe",
+  "group": "M1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-dimfe (reviewer sub-agent of L); spot-checked: Source Stacks Algebra 00P3 (algebra.tex 28290, label lemma-dimension-preserved-field-extension): statement unchanged and agrees hypothesis by hypothesis (k field, S finite type k-algebra, K/k field extension, dim S = dim K(x)_k S, empty case -infinity on both sides). Route deviates from the source (Noether normalization) to 00P4 + 0B7I, recorded in proof_origin; 00P4 node's proof (via dimension-base-fibre-equals-total) does not use this node, transitive dep closure of the four proof_deps (118 nodes) contains no cycle. Step 1: lem-weil-pbc-field-extension-base-change-faithfully-flat applied with (K,K',D)=(k,K,S) gives S->S(x)_kK faithfully flat; transport along the swap iso is elementary. Step 2: lem-weil-pbc-faithfully-flat-surjective-spectrum gives surjectivity of Spec. Step 3: lem-weil-pbc-dimension-at-point-field-extension (k,K fields, iota, S finite type, q=j^{-1}(q_K)) states the pointwise equality for S(x)_kK; swap homeomorphism preserves contraction and local dimension (def-kun-topological-dimension-at-point). Step 4: lem-weil-pbc-dimension-supremum-local-dimensions (any topological space, sup with -infinity for empty) plus surjectivity and pointwise equality gives equal suprema. All cited nodes in unit sk-thm-p1, no C7/C8 issue; no new nodes, only split-owned fields changed. Small cases: S=0 (both spectra empty, -infinity), S=k[x] with K=C over R (dim 1 both). 14:02-14:02 UTC"
+ },
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "lem-weil-pbc-dimension-preserved-field-extension",
+  "worker": "stage1",
+  "summary": "Split the 00P3 global dimension assertion into four steps without new nodes. Scalar extension is faithfully flat, hence surjective on spectra; the accepted 00P4 local-dimension extension lemma gives equality at every point after the tensor-symmetry identification; and the accepted 0B7I supremum formula converts pointwise equality plus surjectivity into equality of global Krull dimensions. The empty-spectrum case is covered by the -infinity convention in 0B7I.",
+  "blueprint": "Realizes the 00P3 conclusion used in step 7 of thm-weil-pbc-finite-etale-lifting, specifically the sentence 'By Lemma 00P3 the fibres of a base change have the same dimension as the fibres of the original map' in the relative-global-complete-intersection chain. The local 00P4 result and Topology 0B7I supply the pointwise and supremum details omitted by the one-line 00P3 citation."
+ }
 }

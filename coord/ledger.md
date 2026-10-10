@@ -1579,3 +1579,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 14:01 L: returned deliver/E1/lem-sc-second-kummer-divisors (reviewer RETURN: 1. C4/C3: step 2: the step says the 'degree-two exact-sequence clause' of [lem-sc-kummer-les] makes the Kummer coboundar)
 - 14:02 L: accepted lem-weil-pbc-proj-polynomial-twist-chart: 8 steps (01NG/01M4/01ME), no new nodes
 - 14:02 L: merged deliver/E1/lem-sc-riemann-roch-large-degree (reviewer PASS; first push; new nodes: 0)
+- 14:02 L: merged deliver/M1/lem-weil-pbc-dimension-preserved-field-extension (reviewer PASS; first push; new nodes: 0)
