@@ -14,48 +14,96 @@
  },
  "kind": "statement",
  "title": "Finite cohomology below a pseudo-coherent bound",
- "statement": "Let R be a ring and m an integer. Call an object C of D(R) m-pseudo-coherent if there are a bounded complex E^\\bullet of finite free R-modules and a morphism E^\\bullet\\to C in D(R) inducing isomorphisms H^i(E^\\bullet)\\to H^i(C) for i>m and a surjection H^m(E^\\bullet)\\to H^m(C). If K is a complex of R-modules [def-pc-cochain-complex-modules], viewed as an object of D(R) [def-pc-derived-category], which is m-pseudo-coherent and satisfies H^i(K)=0 for every i>m, then H^m(K) is a finite type R-module.",
+ "statement": "Let R be a ring and m an integer. Let D(R) be the derived category [def-weil-abstract-derived-category] of the abelian category of R-modules. Call an object C of D(R) m-pseudo-coherent if there are a bounded complex E^\\bullet of finite free R-modules and a morphism E^\\bullet\\to C in D(R) inducing isomorphisms H^i(E^\\bullet)\\to H^i(C) for i>m and a surjection H^m(E^\\bullet)\\to H^m(C). If K^\\bullet is a complex of R-modules, viewed as an object of D(R), which is m-pseudo-coherent and satisfies H^i(K^\\bullet)=0 for every i>m, then H^m(K^\\bullet) is a finite type R-module.",
  "source": {
   "document": "literature/stacks-project/more-algebra.tex",
   "place": "Tag 064S, label lemma-finite-cohomology"
  },
  "stmt_deps": [
-  "def-pc-cochain-complex-modules",
-  "def-pc-derived-category"
+  "def-weil-abstract-derived-category"
  ],
- "proof": [],
+ "proof": [
+  {
+   "text": "Choose a bounded finite-free witness E^\\bullet\\to K^\\bullet for the m-pseudo-coherence hypothesis; finite free modules are finite projective, so E^\\bullet is a bounded complex of finite projective R-modules. Because H^i(K^\\bullet)=0 for i>m and the witness induces isomorphisms in those degrees, H^i(E^\\bullet)=0 for every i>m.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 064S, proof of lemma-finite-cohomology"
+   }
+  },
+  {
+   "text": "Working with finite projective modules (the splitting below need not preserve freeness): if the largest degree b with E^b\\ne0 satisfies b>m, then H^b(E^\\bullet)=0 makes d^{b-1}:E^{b-1}\\to E^b surjective. Since E^b is finite projective, split this surjection and write E^{b-1}=E'^{b-1}\\oplus E^b so that the differential on the second summand is the identity. Removing the resulting contractible two-term summand leaves a bounded complex of finite projectives with the same cohomology and top degree at most b-1. Repeating finitely many times gives E'^\\bullet with E'^i=0 for i>m and H^m(E')\\cong H^m(E^\\bullet). Then H^m(E')=E'^m/\\operatorname{im}(d^{m-1}) is a quotient of the finitely generated module E'^m, hence finite type.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 064S, proof of lemma-finite-cohomology"
+   }
+  },
+  {
+   "text": "The witness map induces a surjection H^m(E^\\bullet)\\twoheadrightarrow H^m(K) by m-pseudo-coherence. A quotient of a finite type module is finite type, so H^m(K) is finite type.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 064S, proof of lemma-finite-cohomology"
+   }
+  }
+ ],
  "proof_deps": [],
- "proof_origin": null,
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Tag 064S, proof of lemma-finite-cohomology"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
-   "query": "finite type cohomology of pseudo-coherent complex vanishing above degree",
-   "results": "Eight homology support and vanishing declarations; no pseudo-coherent finite-cohomology theorem",
+   "query": "finite generation of top cohomology of bounded finite free complex",
+   "results": "Generic cochain-complex and projective-resolution declarations; no finite-cohomology theorem",
    "date": "2026-10-11",
    "verdict": "no match"
   },
   {
    "tool": "loogle",
-   "query": "FiniteType, Cohomology in DerivedCategory",
-   "results": "0 hits; parser reports expected end of input",
+   "query": "Module.Finite, cohomology, Complex",
+   "results": "0 hits; loogle reports unknown identifier cohomology",
    "date": "2026-10-11",
    "verdict": "no match"
   },
   {
    "tool": "grep",
-   "query": "pseudo.?coherent.*finite.*cohomology",
+   "query": "finite.*cohomology|Module.Finite in Mathlib/CategoryTheory",
    "results": "0 hits in Mathlib source",
    "date": "2026-10-11",
    "verdict": "no match"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-sc-affine-pseudo-coherent-lift",
   "by": "worker",
   "date": "2026-10-10"
  },
  "chapter": "sec-picard-framework",
- "unit": "sk-thm-picard-duality"
+ "unit": "sk-thm-picard-duality",
+ "split_report": {
+  "date": "2026-10-11",
+  "item": "lem-sc-finite-cohomology",
+  "worker": "stage1",
+  "summary": "Split Tag 064S into elementary steps: the finite-free witness, the finite-projective top-degree cancellation giving finite generation of H^m(E), and the finite-quotient step. No Lean declaration states the item.",
+  "blueprint": "The steps realize the Tag 08EE finite-generation obstruction clause recorded under lem-sc-finite-duality.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-fco3157",
+  "group": "F1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-fco3157 (reviewer sub-agent of L); spot-checked: Read Tag 064S; steps 1-3 elementary and correct (top-degree cancellation by splitting over finite projectives, H^m(E') quotient of finitely generated E'^m, quotient of finite type is finite type); def-weil-abstract-derived-category is the right ring-level citation (def-pc-derived-category is O_X-modules, correctly dropped); citer lem-sc-affine-pseudo-coherent-lift uses exactly this clause with m=n-1 in the sense of lem-sc-cone-pseudo-coherent; no duplicate among pseudo-coherent/finite-cohomology nodes; Mathlib grep for pseudo-coherent: 0 hits. FIX more, RETURN less: (1) C4 (missed by the second reading, which introduced it) inline definition changed to finite projective witnesses, diverging from the identical inline definitions in lem-sc-cone-pseudo-coherent and lem-pc-ring-pseudo-coherent-distinguished-triangle and from Tag 064Q: restored finite free in the statement; step 1 notes finite free is finite projective and step 2 works with finite projectives, as Tag 064S does; (2) stale split_report summary naming a removed child lemma corrected.; 1 file(s) fixed by the reviewer"
+ },
+ "lead_note": "2026-10-10 L (R-fco3157): The three inline m-pseudo-coherence definitions (this item, lem-sc-cone-pseudo-coherent, lem-pc-ring-pseudo-coherent-distinguished-triangle) now agree word for word (finite free); a definition node for m-pseudo-coherence in D(R) is still missing."
 }
