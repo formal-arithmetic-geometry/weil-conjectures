@@ -1,0 +1,73 @@
+{
+ "id": "lem-weil-pbc-power-series-adic-evaluation",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-finite-etale-lifting",
+   "place": "step 7, essential surjectivity via complete-local algebraization; power-series evaluation used in Stacks 07NN to construct and invert the parameter perturbation",
+   "via": ["lem-weil-pbc-complete-local-map-regular-presentation", "lem-weil-pbc-fs-adic-lift-from-residue-field", "lem-weil-pbc-fs-adic-lift-over-finite-coefficient-map", "lem-weil-pbc-formally-smooth-complete-local-regular", "lem-weil-pbc-another-helper-g-ring", "lem-weil-pbc-polynomial-complete-local-formal-fibres", "lem-weil-pbc-finite-type-over-g-ring", "lem-weil-pbc-finite-type-z-g-ring", "lem-weil-pbc-finite-etale-lifting-limit-descent", "lem-weil-pbc-finite-etale-lifting-essential-surjectivity"]
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Evaluation of finite-variable power series in an adically complete ring",
+ "statement": "Let $C,T$ be commutative rings, $\\alpha:C\\to T$ a unital ring homomorphism, $I\\subseteq T$ an ideal such that $T$ is $I$-adically complete [def-weil-pbc-adically-complete-ring], $n\\ge0$, and $b_1,\\ldots,b_n\\in I$. Then there is a unique ring homomorphism $E:C[[X_1,\\ldots,X_n]]\\to T$ [def-weil-pbc-multivariate-power-series] which restricts to $\\alpha$ on $C$, satisfies $E(X_i)=b_i$, and is continuous from the $(X_1,\\ldots,X_n)$-adic topology to the $I$-adic topology. Explicitly, for $F=\\sum_{\\nu\\in\\mathbf N^n}c_\\nu X^\\nu$, $E(F)$ is the unique element whose reduction modulo $I^N$ equals $\\sum_{|\\nu|<N}\\alpha(c_\\nu)b^\\nu$ for every $N\\ge1$. Here $|\\nu|=\\sum_i\\nu_i$ and $b^\\nu=\\prod_i b_i^{\\nu_i}$. Continuity means that for each $N$ there is an $M$ such that $E((X_1,\\ldots,X_n)^M)\\subseteq I^N$.",
+ "source": {
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "More on Algebra, Lemma Tag 07NL (lemma-power-series-ring-over-Cohen-fs), proof, the universal property of power series rings; Lemma Tag 07NN (lemma-embed-map-Noetherian-complete-local-rings), proof, construction of the perturbed power series homomorphism. Explicit algebraic version of the universal property used there."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-adically-complete-ring",
+  "def-weil-pbc-multivariate-power-series"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Continuous homomorphism from multivariate formal power series ring into an adically complete ring evaluation of variables in ideal",
+   "results": "MvPowerSeries.continuous_eval₂ and MvPowerSeries.continuous_aeval (Mathlib.RingTheory.MvPowerSeries.Evaluation); topological candidates, not the algebraic inverse-limit statement.",
+   "date": "2026-10-10",
+   "verdict": "candidate; adic/topological identification remains"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Continuous homomorphism from multivariate formal power series ring into an adically complete ring evaluation of variables in ideal",
+   "results": "MvPowerSeries.eval₂Hom and MvPowerSeries.eval₂Hom_eq_extend (Mathlib.RingTheory.MvPowerSeries.Evaluation), with CompleteSpace, T2Space and HasEval assumptions.",
+   "date": "2026-10-10",
+   "verdict": "candidate; not a one-line specialization from algebraic adic completeness"
+  },
+  {
+   "tool": "grep",
+   "query": "rg -n 'eval₂Hom|eval₂_X|eval₂_C|HasEval' /tmp/mathlib-f1/Mathlib/RingTheory/MvPowerSeries/Evaluation.lean; read lines 65-115 and 199-240",
+   "results": "eval₂Hom at 226-231 extends the dense polynomial embedding, eval₂_C at 212-213 and eval₂_X at 216-217 give constants and variables. Requires topological structures, not the stated inverse-limit completeness. Available sparse source is not the exact project pin.",
+   "date": "2026-10-10",
+   "verdict": "candidate; keep unsplit until the adic bridge and uniqueness/formula are verified"
+  }
+ ],
+ "mathlib_match": null,
+ "mathlib_candidate": {
+  "declaration": "MvPowerSeries.eval₂Hom",
+  "file": "Mathlib/RingTheory/MvPowerSeries/Evaluation.lean",
+  "lines": "226-231",
+  "reason": "Need passage from algebraic I-adic completeness to CompleteSpace/T2Space and the explicit formula and uniqueness; not asserted exact."
+ },
+ "status": "unsplit",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-complete-local-map-regular-presentation",
+  "date": "2026-10-10"
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ }
+}

@@ -4,7 +4,7 @@
   "is": null,
   "from": {
    "node": "thm-weil-pbc-finite-etale-lifting",
-   "place": "step 7 of its split (source: Lemma 0GS2, proof: the essential-surjectivity paragraphs)",
+   "place": "step 7, essential surjectivity via the complete-local algebraization route, reaching the compatible regular presentations of Stacks 07NN",
    "via": [
     "lem-weil-pbc-fs-adic-lift-from-residue-field",
     "lem-weil-pbc-fs-adic-lift-over-finite-coefficient-map",
@@ -17,7 +17,7 @@
     "lem-weil-pbc-finite-etale-lifting-essential-surjectivity"
    ]
   },
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "Compatible regular presentations of a map of complete local rings",
@@ -32,9 +32,99 @@
   "def-weil-regular-scheme",
   "def-weil-pbc-flat-ring-map"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Apply [lem-weil-pbc-cohen-power-series-presentation] to $A$ and $B$. Since the local map $f$ induces a field homomorphism $A/\\mathfrak m_A\\to B/\\mathfrak m_B$, the two residue fields have the same characteristic. Thus obtain surjective local maps $q:R=\\Lambda_A[[x_1,\\ldots,x_n]]\\twoheadrightarrow A$ and $v_0:S_0=\\Lambda_B[[z_1,\\ldots,z_e]]\\twoheadrightarrow B$, with $R,S_0$ complete regular local rings and $R/\\mathfrak m_R\\cong A/\\mathfrak m_A$. Here the coefficient rings are both fields in residue characteristic zero and both Cohen rings in residue characteristic $p>0$. Write $J=\\ker(v_0)\\subseteq\\mathfrak m_{S_0}$.",
+   "uses": [
+    "lem-weil-pbc-cohen-power-series-presentation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "More on Algebra, Lemma Tag 07NN (lemma-embed-map-Noetherian-complete-local-rings), proof, first two sentences; the presentation is Algebra, Theorem Tag 032A"
+   }
+  },
+  {
+   "text": "By [lem-weil-pbc-field-cohen-power-series-formally-smooth], the map $\\mathbf Z\\to R$ is formally smooth for the $\\mathfrak m_R$-adic topology. The composite $fq:R\\to B=S_0/J$ is continuous: $q(\\mathfrak m_R)\\subseteq\\mathfrak m_A$ and $f(\\mathfrak m_A)\\subseteq\\mathfrak m_B$. The ideal $J$ is closed in $S_0$: [lem-weil-pbc-complete-local-quotient] makes $S_0/J=B$ separated for its quotient maximal-ideal topology, so $\\bigcap_m(J+\\mathfrak m_{S_0}^m)=J$. Since $J\\subseteq\\mathfrak m_{S_0}$, [lem-weil-pbc-fs-adic-lift-into-complete] with $I=\\mathfrak m_{S_0}$, $t=r=1$ gives a continuous local homomorphism $\\varphi:R\\to S_0$ such that $v_0\\varphi=fq$. It is local because $\\varphi(\\mathfrak m_R)\\subseteq\\mathfrak m_{S_0}$ by its explicit bound $\\varphi(\\mathfrak m_R^{rt})\\subseteq I$ with $rt=1$; alternatively the preimage of $\\mathfrak m_B$ under $v_0$ is $\\mathfrak m_{S_0}$.",
+   "uses": [
+    "lem-weil-pbc-field-cohen-power-series-formally-smooth",
+    "lem-weil-pbc-complete-local-quotient",
+    "lem-weil-pbc-fs-adic-lift-into-complete"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "More on Algebra, Lemma Tag 07NN, proof, lifting sentence; Lemmas Tag 07NL (lemma-power-series-ring-over-Cohen-fs) and Tag 07NJ (lemma-lift-continuous)"
+   }
+  },
+  {
+   "text": "Set $S=S_0[[y_1,\\ldots,y_n]]$ [def-weil-pbc-multivariate-power-series]. By grouping monomials, $S\\cong\\Lambda_B[[z_1,\\ldots,z_e,y_1,\\ldots,y_n]]$, so [lem-weil-pbc-power-series-field-cohen-regular-complete] makes it complete and regular local. Let $v:S\\to B$ be the constant-$y$ map followed by $v_0$ [lem-weil-pbc-power-series-quotient-variables]. It is surjective and local. The continuous map $\\varphi:R\\to S_0$ extends to a local map $u:R\\to S$ with $u|_{\\Lambda_A}=\\varphi|_{\\Lambda_A}$ and $u(x_i)=\\varphi(x_i)+y_i$: apply [lem-weil-pbc-power-series-adic-evaluation] with coefficient map $\\varphi|_{\\Lambda_A}$, ideal $I=\\mathfrak m_S$, and variables $\\varphi(x_i)+y_i\\in\\mathfrak m_S$. This map is local: in the field case the $x_i$ generate $\\mathfrak m_R$, and in the Cohen case its additional generator $p$ maps to $p\\in\\mathfrak m_S$. The composites $vu$ and $fq$ agree on coefficients and on all $x_i$ and are continuous into the complete local ring $B$; uniqueness in the evaluation lemma proves $vu=fq$.",
+   "uses": [
+    "def-weil-pbc-multivariate-power-series",
+    "lem-weil-pbc-power-series-field-cohen-regular-complete",
+    "lem-weil-pbc-power-series-quotient-variables",
+    "lem-weil-pbc-power-series-adic-evaluation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "More on Algebra, Lemma Tag 07NN, proof, final paragraph defining phi-prime and S-prime; completeness and regularity of the power series ring are Algebra, Remark Tag 032C"
+   }
+  },
+  {
+   "text": "The elements $a_i=\\varphi(x_i)$ belong to $\\mathfrak m_{S_0}$ since $\\varphi$ is local. Substitution $y_i\\mapsto a_i+y_i$, fixing $S_0$, is a continuous automorphism of $S_0[[y_1,\\ldots,y_n]]$: its inverse substitutes $y_i\\mapsto y_i-a_i$, and both substitutions exist by [lem-weil-pbc-power-series-adic-evaluation] with coefficient ring $S_0$, target $S$ and ideal $\\mathfrak m_S$. Their composites fix $S_0$ and each $y_i$, hence are the identity by uniqueness in that lemma; the substitutions preserve $\\mathfrak m_S$ and are therefore continuous for its adic topology. The standard regular parameters of $S$ are $z_1,\\ldots,z_e,y_1,\\ldots,y_n$ in residue characteristic zero and $p,z_1,\\ldots,z_e,y_1,\\ldots,y_n$ in residue characteristic $p$ [lem-weil-pbc-power-series-field-cohen-regular-complete]. Applying the automorphism gives a regular system containing $u(x_1)=a_1+y_1,\\ldots,u(x_n)=a_n+y_n$. In the Cohen case it also contains $u(p)=p$, since every unital ring map fixes the integer $p$. Thus the images under $u$ of the standard regular parameters of $R$ (Step 1) form part of a regular system of parameters of $S$.",
+   "uses": [
+    "lem-weil-pbc-power-series-field-cohen-regular-complete",
+    "def-weil-pbc-multivariate-power-series",
+    "lem-weil-pbc-power-series-adic-evaluation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "More on Algebra, Lemma Tag 07NN, proof, last sentence; the omitted parameter check is the displayed substitution and its inverse"
+   }
+  },
+  {
+   "text": "The images of the parameters of $R$ are a regular sequence in $S$ by [lem-weil-pbc-regular-local-generators-regular-sequence], applied to the regular system of $S$ from Step 4 and reordered to put those images first. Hence [lem-weil-pbc-flat-over-regular] applies to the local map $u:R\\to S$ and proves it flat.",
+   "uses": [
+    "lem-weil-pbc-regular-local-generators-regular-sequence",
+    "lem-weil-pbc-flat-over-regular"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "More on Algebra, Lemma Tag 07NN, 'In particular' sentence; Algebra, Lemmas Tag 00NQ (lemma-regular-ring-CM) and Tag 07DY (lemma-flat-over-regular)"
+   }
+  },
+  {
+   "text": "The regular system of parameters in Step 4 can be reordered with $u(t_1),\\ldots,u(t_d)$ first. Its first $d$ elements generate $\\mathfrak m_RS$, since $t_1,\\ldots,t_d$ generate $\\mathfrak m_R$. By the quotient assertion of [lem-weil-pbc-regular-local-generators-regular-sequence], $S/(u(t_1),\\ldots,u(t_d))=S/\\mathfrak m_RS$ is regular local. This also covers $d=0$, when the quotient is $S$.",
+   "uses": [
+    "lem-weil-pbc-regular-local-generators-regular-sequence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "More on Algebra, Lemma Tag 07NN (lemma-embed-map-Noetherian-complete-local-rings), regular fibre assertion; Algebra, Lemma Tag 00NQ (lemma-regular-ring-CM), quotient by an initial segment of a regular system of parameters."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-cohen-power-series-presentation",
+  "lem-weil-pbc-field-cohen-power-series-formally-smooth",
+  "lem-weil-pbc-complete-local-quotient",
+  "lem-weil-pbc-fs-adic-lift-into-complete",
+  "def-weil-pbc-multivariate-power-series",
+  "lem-weil-pbc-power-series-field-cohen-regular-complete",
+  "lem-weil-pbc-power-series-quotient-variables",
+  "lem-weil-pbc-power-series-adic-evaluation",
+  "lem-weil-pbc-regular-local-generators-regular-sequence",
+  "lem-weil-pbc-flat-over-regular"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "More on Algebra, Lemma Tag 07NN (lemma-embed-map-Noetherian-complete-local-rings), proof"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -56,10 +146,17 @@
    "results": "Current-head sparse Mathlib source, not the pinned v4.33.1 checkout: RegularLocalRing/Defs.lean lines 49-88 defines regular local rings and the cotangent-dimension criterion only, with no kernel-parameters or Cohen structure theorem. Smooth/Local.lean lines 22-110 has discrete Jacobian criteria; Smooth/Basic.lean lines 70-86 and 124-159 has discrete lifting, not adic formal smoothness. No match in available RingTheory sources. Version caveat: absence not a claim of verification against the exact project pin.",
    "date": "2026-10-10",
    "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "rg -n 'Cohen|coefficient ring|RegularLocalRing|FormallySmooth' /home/ubuntu/Poincare-MorganTian/.work/helpers/codex-m47-line/.lake/packages/mathlib/Mathlib/RingTheory; read RingTheory/RegularLocalRing/Defs.lean and RingTheory/Smooth/AdicCompletion.lean",
+   "results": "Cohen hits only an unrelated citation in RingTheory/Noetherian/OfPrime.lean; RegularLocalRing/Defs.lean defines the notion and Smooth/AdicCompletion.lean lifts maps from ordinary formally smooth algebras, with no compatible Cohen power series presentation for a local map",
+   "date": "2026-10-10",
+   "verdict": "no match"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "worker",
@@ -80,5 +177,19 @@
    "missing": []
   }
  },
- "lead_note": "Its flatness clause is lem-weil-pbc-complete-local-flat-presentation (07NN, split 2026-10-10); when splitting this node, reuse its steps 1-4 and add regularity and the parameter clause."
+ "lead_note": "Its flatness clause is lem-weil-pbc-complete-local-flat-presentation (07NN, split 2026-10-10); when splitting this node, reuse its steps 1-4 and add regularity and the parameter clause.",
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "lem-weil-pbc-complete-local-map-regular-presentation",
+  "worker": "stage1",
+  "summary": "Checked and completed the existing six-step split of Stacks 07NN. Kept the statement unchanged. Preserved the two supporting nodes for Cohen presentations (032A) and field/Cohen adic formal smoothness (07NL), corrected their statement dependencies, and added the smaller universal adic evaluation node used for the perturbed map and its inverse substitutions. Wrote locality using the explicit lift bound rather than continuity alone, checked the Cohen parameter p is fixed, and proved the fibre regularity directly by the existing regular-parameter quotient theorem 00NQ.",
+  "blueprint": "Steps 1-6 supply the complete-local regular-presentation argument required through step 7 (essential surjectivity) of blueprint node thm-weil-pbc-finite-etale-lifting and its recorded via chain. No imported blueprint node states Stacks 07NN, the Cohen power-series presentation 032A, or the adic formal smoothness 07NL; whole-blueprint searches used 07NN, 032A, Cohen, Cohen power series, formally smooth power series, and complete local."
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "group": "C1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed by the lead of C1; spot-checked by L: L: 07NN read with 07NL/07NJ/032A; the three new nodes refine lem-weil-pbc-cohen-structure-power-series-surjection, lem-weil-pbc-power-series-cohen-formally-smooth-adic and lem-weil-pbc-power-series-universal-property-complete (accepted 09:39), lead notes added so their splits cite those"
+ }
 }
