@@ -1,12 +1,11 @@
 # Work queue
 
-932 items; claim with `tools/claim.py next <group> [--stage N]`.
+930 items; claim with `tools/claim.py next <group> [--stage N]`.
 
-## Stage 1: nodes to split (231)
+## Stage 1: nodes to split (228)
 
 | node | distance to a target | Lean state on the done branch |
 |---|---|---|
-| `def-weil-tower-transition-endomorphism` | 15 | none |
 | `lem-weil-pbc-injective-acyclicity-bounded-below` | 2002 | sorry_here |
 | `lem-sc-topological-filtered-cohomology` | 2014 | none |
 | `lem-sc-krull-akizuki-noetherian` | 2017 | none |
@@ -23,11 +22,9 @@
 | `lem-sc-pseudo-coherent-rhom-qcoherent` | 3016 | none |
 | `lem-pc-perfect-tensor-hom-duality` | 3017 | none |
 | `lem-pc-proper-perfect-direct-image-perfect` | 3017 | none |
-| `lem-sc-finite-free-internal-hom-exact` | 3017 | none |
 | `lem-sc-p1-rhom-hom-derived-connecting` | 3017 | none |
 | `lem-sc-p1-right-derived-triangle-connecting` | 3017 | none |
 | `lem-sc-proper-flat-right-adjoint-affine-basechange` | 3018 | none |
-| `lem-sc-qcoh-acyclic-derived-sections-comparison` | 3018 | none |
 | `lem-sc-proper-flat-right-adjoint-direct-sums` | 3019 | none |
 | `lem-sc-proper-flat-right-adjoint-open-support` | 3019 | none |
 | `lem-sc-right-adjoint-open-support-criterion` | 3019 | none |
@@ -238,7 +235,7 @@
 | `lem-pur-rhom-well-defined` | - | none |
 | `lem-zl-noether-normalization-dimension` | - | none |
 
-## Stage 2: nodes to state (701)
+## Stage 2: nodes to state (702)
 
 | node | distance to Mathlib | kind |
 |---|---|---|
@@ -292,6 +289,7 @@
 | `def-weil-pbc-symmetric-product-morphism` | 1 | state |
 | `def-weil-pbc-torsion-etale-sheaf` | 1 | state |
 | `def-weil-size-convention` | 1 | state |
+| `def-weil-tower-transition-endomorphism` | 1 | state |
 | `def-wf-algebraic-representations` | 1 | state |
 | `etale-proposition-etale-reduced` | 1 | state |
 | `lem-exc-coinduced-functions-open-stabilizer` | 1 | state |
@@ -944,7 +942,7 @@
 | `lem-weil-pbc-p1-field-dimension-one` | 4 | state |
 | `lem-weil-pbc-projective-space-zero-isomorphism` | 4 | state |
 
-Not open yet: 1382 nodes that wait for a statement dependency, 266 nodes that wait for stage 1.
+Not open yet: 1384 nodes that wait for a statement dependency, 263 nodes that wait for stage 1.
 
 ## Stage 3: modules to prove (0)
 
