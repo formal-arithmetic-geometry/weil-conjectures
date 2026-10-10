@@ -164,11 +164,6 @@ lemma globalSectionsMap_comp_frobeniusHom {G G' : WeilSheaf k₀ l X} (f : G ⟶
   erw [reassoc_of% h₁]
   exact congrArg (_ ≫ ·) h₂
 
-lemma globalSections_frobenius_apply (G : WeilSheaf k₀ l X) (x : G.globalSections.carrier) :
-    G.globalSections.frobenius x =
-      ((WeilCoefficients.toModuleCat l).map (globalSectionsFrobeniusHom G)).hom x :=
-  rfl
-
 /-- Isomorphic Weil sheaves have isomorphic global sections, with their Frobenius. -/
 noncomputable def globalSectionsEquivOfIso {G G' : WeilSheaf k₀ l X} (e : G ≅ G') :
     G.globalSections.Equiv G'.globalSections where
@@ -203,9 +198,10 @@ noncomputable def globalSectionsConstantTwistEquiv (G : WeilSheaf k₀ l X) (b :
     (G.constantTwist b).globalSections.Equiv (G.globalSections.rescale b) where
   toLinearEquiv := LinearEquiv.refl _ _
   map_frobenius x := by
-    change (G.constantTwist b).globalSections.frobenius x =
-      (G.globalSections.rescale b).frobenius x
-    rw [globalSections_frobenius_apply, globalSectionsFrobeniusHom_constantTwist]
+    change ((WeilCoefficients.toModuleCat l).map
+      (globalSectionsFrobeniusHom (G.constantTwist b))).hom x =
+        (G.globalSections.rescale b).frobenius x
+    rw [globalSectionsFrobeniusHom_constantTwist]
     exact (FrobeniusModule.frobeniusEnd_rescale_apply (M := G.globalSections)
       (Units.ne_zero b) x).symm
 
