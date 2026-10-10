@@ -1,8 +1,8 @@
 # Work queue
 
-862 items; claim with `tools/claim.py next <group> [--stage N]`.
+861 items; claim with `tools/claim.py next <group> [--stage N]`.
 
-## Stage 1: nodes to split (413)
+## Stage 1: nodes to split (410)
 
 | node | distance to a target | Lean state on the done branch |
 |---|---|---|
@@ -25,7 +25,6 @@
 | `lem-weil-pbc-normal-ring-integrally-closed-total` | 1015 | none |
 | `lem-weil-pbc-openness-of-flatness` | 1015 | none |
 | `lem-weil-pbc-principal-maximal-dim-one-regular` | 1015 | none |
-| `lem-weil-pbc-quotient-by-power-torsion-no-torsion` | 1015 | none |
 | `lem-weil-pbc-regular-local-quotient-kernel-parameters` | 1015 | none |
 | `lem-weil-pbc-relative-global-complete-intersection-local-regular-sequence` | 1015 | none |
 | `lem-weil-pbc-relative-global-complete-intersection-noetherian-approximation` | 1015 | none |
@@ -44,7 +43,6 @@
 | `lem-weil-pbc-module-injects-localizations-associated-primes` | 1016 | none |
 | `lem-weil-pbc-projective-dimension-ext-characterization` | 1016 | none |
 | `lem-weil-pbc-qcqs-cohomology-direct-sum` | 1016 | none |
-| `lem-weil-pbc-regular-quotient-ideal-intersection` | 1016 | none |
 | `lem-weil-pbc-ring-quasi-finite-locus-open` | 1016 | none |
 | `lem-weil-pbc-triangular-change-of-basis` | 1016 | none |
 | `def-weil-pbc-koszul-complex` | 1017 | none |
@@ -72,7 +70,6 @@
 | `def-weil-pbc-etale-cohomology` | 3003 | none |
 | `def-weil-pbc-strict-henselization-limit` | 3003 | none |
 | `lem-weil-pbc-cohomology-filtered-colimit` | 3003 | none |
-| `lemma-weil-pbc-torsion-filtered-union` | 3003 | none |
 | `prop-weil-pbc-geometric-stalks-exact` | 3003 | none |
 | `prop-weil-pbc-strict-henselization-stalk-formula` | 3003 | none |
 | `def-pc-field-tower` | 3004 | none |
@@ -420,7 +417,7 @@
 | `def-exc-jacobian-presentation` | - | none |
 | `lem-zl-noether-normalization-dimension` | - | none |
 
-## Stage 2: nodes to state (449)
+## Stage 2: nodes to state (451)
 
 | node | distance to Mathlib | kind |
 |---|---|---|
@@ -734,6 +731,7 @@
 | `lem-weil-pbc-purely-inseparable-base-change-local-ring` | 1 | state |
 | `lem-weil-pbc-purely-inseparable-integral-prime-unique` | 1 | state |
 | `lem-weil-pbc-purely-inseparable-pth-root-tower` | 1 | state |
+| `lem-weil-pbc-quotient-by-power-torsion-no-torsion` | 1 | state |
 | `lem-weil-pbc-radicial-prime-unique-degree-p` | 1 | state |
 | `lem-weil-pbc-reduced-induced-closed-subscheme` | 1 | state |
 | `lem-weil-pbc-reduced-noetherian-total-ring-fractions` | 1 | state |
@@ -744,6 +742,7 @@
 | `lem-weil-pbc-regular-local-generators-regular-sequence` | 1 | state |
 | `lem-weil-pbc-regular-local-hypersurface-criterion` | 1 | state |
 | `lem-weil-pbc-regular-local-localization` | 1 | state |
+| `lem-weil-pbc-regular-quotient-ideal-intersection` | 1 | state |
 | `lem-weil-pbc-regular-ring-faithfully-flat-descent` | 1 | state |
 | `lem-weil-pbc-regular-ring-local-criterion` | 1 | state |
 | `lem-weil-pbc-regular-ring-normal` | 1 | state |
@@ -874,7 +873,7 @@
 | `lem-weil-pbc-p1-field-dimension-one` | 4 | state |
 | `lem-weil-pbc-projective-space-zero-isomorphism` | 4 | state |
 
-Not open yet: 429 nodes that wait for stage 1, 833 nodes that wait for a statement dependency.
+Not open yet: 426 nodes that wait for stage 1, 834 nodes that wait for a statement dependency.
 
 ## Stage 3: modules to prove (0)
 
