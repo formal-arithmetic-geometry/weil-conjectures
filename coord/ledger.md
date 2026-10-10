@@ -2328,3 +2328,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 19:04 L: merged deliver/C1/thm-picard-serre-a (reviewer FIX; first push; new nodes: 1)
 - 19:04 L: merged deliver/M1/lem-pc-kflat-resolution (reviewer FIX; first push; new nodes: 3)
 - 19:05 L: merged deliver/E1/def-sp-convergence (reviewer FIX; after a return; new nodes: 0)
+- 19:05 L: merged deliver/H1/def-pc-compact-object (reviewer FIX; first push; new nodes: 0)
