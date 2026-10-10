@@ -30,9 +30,57 @@
   "def-sc-invertible-module",
   "def-weil-pbc-ample-invertible-module"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "If $Y=\\varnothing$, the conclusion is immediate. Otherwise, [lem-weil-pbc-noetherian-scheme-closed-subsets-minimal] gives that the underlying space is Noetherian. Since $\\dim Y\\le0$, [lem-sc-zero-dim-noetherian-finite-discrete] gives that $|Y|$ is finite and discrete.",
+   "uses": [
+    "lem-weil-pbc-noetherian-scheme-closed-subsets-minimal",
+    "lem-sc-zero-dim-noetherian-finite-discrete"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/properties.tex",
+    "place": "Properties Lemma 0AAX (properties-lemma-locally-Noetherian-dimension-0), proof"
+   }
+  },
+  {
+   "text": "The scheme is quasi-compact and separated by hypothesis, and its underlying space is finite discrete by step 1. Therefore [lem-sc-finite-discrete-separated-affine] applies and $Y$ is affine.",
+   "uses": [
+    "lem-sc-finite-discrete-separated-affine"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/properties.tex",
+    "place": "Properties Lemma 0CKV (properties-lemma-dimension-zero), final assertion"
+   }
+  },
+  {
+   "text": "On an affine scheme the trivial invertible module $\\mathcal O_Y$ is ample: $Y$ is quasi-compact by hypothesis, which is condition (1); for condition (2) take $n=1$ and the global section $1$ of $\\mathcal O_Y=\\mathcal O_Y^{\\otimes1}$, whose nonvanishing locus is all of $Y$, which is affine by step 2, so every point $x\\in Y$ lies in the affine open $Y_1=Y$.",
+   "uses": [
+    "def-sc-invertible-module",
+    "def-weil-pbc-ample-invertible-module",
+    "def-weil-affine-spectrum"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/properties.tex",
+    "place": "Properties Lemma 0CKV, conclusion together with the definition of an ample invertible module"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-noetherian-scheme-closed-subsets-minimal",
+  "lem-sc-zero-dim-noetherian-finite-discrete",
+  "lem-sc-finite-discrete-separated-affine",
+  "def-sc-invertible-module",
+  "def-weil-pbc-ample-invertible-module",
+  "def-weil-affine-spectrum"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/properties.tex",
+  "place": "Properties Lemmas 0AAX and 0CKV"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -57,12 +105,28 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-sc-reduced-dim-le-one-ample",
   "by": "worker",
   "date": "2026-10-10"
  },
  "chapter": "sec-curve-estimates",
- "unit": "sk-thm-curveestimate"
+ "unit": "sk-thm-curveestimate",
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "lem-sc-zero-dim-noetherian-affine",
+  "worker": "stage1",
+  "summary": "Split the dimension-zero affineness argument into the finite-discrete underlying-space fact (0AAX), the separated finite-discrete affineness criterion (0CKV), and the elementary ampleness check for the structure sheaf.",
+  "blueprint": "Realizes the parent blueprint proof's opening zero-dimensional component case via Properties Lemmas 0AAX and 0CKV.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-zna",
+  "group": "M1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-zna (reviewer sub-agent of L); spot-checked: Source: Stacks properties.tex Lemma 0AAX (lemma-locally-Noetherian-dimension-0: locally Noetherian dim 0 is a disjoint union of spectra of Artinian local rings, discrete topology) and 0CKV (lemma-dimension-zero: dim 0 separated, quasi-compact implies affine); the item (Noetherian, separated, dim<=0, incl. empty) agrees hypothesis by hypothesis. New node finite-discrete: Noetherian + dim<=0 gives discrete (0AAX) and quasi-compact discrete gives finite: true, empty case fine. New node finite-discrete-separated-affine: true (a one-point scheme is affine, a finite disjoint union of affines is affine; separatedness not even needed). Step 1 carried by lem-sc-zero-dim-noetherian-finite-discrete (the Noetherian-closed-subsets node is redundant but correct); step 2 by lem-sc-finite-discrete-separated-affine, its hypotheses qc+separated+finite discrete all available; step 3 elementary from def-weil-pbc-ample-invertible-module (qc, n=1, s=1, Y_1=Y affine). Small cases: empty scheme, Spec of a field, disjoint union of two Artinian spectra. Mathlib: verified Mathlib/AlgebraicGeometry/Limits.lean line 700, instance [Finite X] [DiscreteTopology X] : IsAffine X (name AlgebraicGeometry.instIsAffineOfFiniteOfDiscreteTopologyCarrierCarrierCommRingCat via exact?), a hit of the worker's own grep pattern that the verdict missed. Fixes: dag/nodes/sec-curve-estimates/lem-sc-finite-discrete-separated-affine.json: mathlib_searches[2] results/verdict corrected to that hit, mathlib_candidate added (decl stated without qc/separated; node is its immediate consequence); dag/nodes/sec-curve-estimates/lem-sc-zero-dim-noetherian-affine.json: proof step 3 text: states condition (1) quasi-compactness and n=1 explicitly (no change of mathematics). Start Sat Oct 10 03:14:55 PM UTC 2026, end Sat Oct 10 03:16:14 PM UTC 2026.; 2 file(s) fixed by the reviewer"
+ }
 }
