@@ -2,7 +2,7 @@
 
 900 items; claim with `tools/claim.py next <group> [--stage N]`.
 
-## Stage 1: nodes to split (162)
+## Stage 1: nodes to split (161)
 
 | node | distance to a target | Lean state on the done branch |
 |---|---|---|
@@ -24,7 +24,6 @@
 | `lem-pc-perfect-generation-open-induction-step` | 3017 | none |
 | `lem-sc-p1-right-derived-triangle-connecting` | 3017 | none |
 | `lem-pc-perfect-rhom-tensor-comparison` | 3018 | none |
-| `lem-sc-affine-projective-complex-derived-hom` | 3018 | none |
 | `lem-sc-proper-flat-right-adjoint-affine-basechange` | 3018 | none |
 | `lem-sc-pseudo-coherent-support-annihilation` | 3020 | none |
 | `lem-pc-supported-perfect-generator` | 3021 | none |
@@ -48,22 +47,22 @@
 | `lem-sc-meromorphic-sheaf-generic-product` | 5011 | none |
 | `lem-pc-perfect-complex-descent` | 5013 | none |
 | `lem-pc-rf-base-change-single-complex-criterion` | 5013 | none |
-| `lem-pc-flat-bounded-complex-descent` | 5014 | none |
 | `lem-pc-kflat-tensor-cone-two-out-of-three` | 5014 | none |
 | `lem-pc-proper-support-descent` | 5014 | none |
 | `lem-pc-sites-modules-sheafification-flat` | 5014 | none |
+| `lem-pc-flat-module-descent` | 5015 | none |
+| `lem-pc-fp-complex-descent` | 5015 | none |
 | `lem-sp-cartan-eilenberg-comparison-homotopy` | 6006 | none |
 | `lem-sp-filtered-homotopy-spectral-sequence` | 6006 | none |
 | `thm-sp-spectral-object-yields` | 6006 | none |
 | `lem-sc-general-theorem-of-cube` | 6011 | none |
-| `pqf-lem-finite-type-algebra-finite-spectrum` | 6013 | none |
 | `pqf-lem-serre-criterion` | 6013 | none |
+| `lem-pqf-finite-spectrum-maximal-primes` | 6014 | none |
 | `sbc-lem-higher-direct-image-presheaf` | - | none |
 | `thm-pqf-zmt-factorization` | - | none |
 | `lem-pur-sheaf-hom-is-sheaf` | - | none |
 | `lem-weil-pbc-finite-pushforward-generic-constructible` | - | none |
 | `thm-pqf-immersion-descent` | - | none |
-| `def-pod-l-adic-representations` | - | none |
 | `def-pod-lisse-l-adic-sheaves` | - | none |
 | `def-pur-sheaf-modules-hom-module` | - | none |
 | `def-sbc-normal-dominant-galois` | - | none |
@@ -169,7 +168,7 @@
 | `lem-pur-rhom-well-defined` | - | none |
 | `lem-zl-noether-normalization-dimension` | - | none |
 
-## Stage 2: nodes to state (738)
+## Stage 2: nodes to state (739)
 
 | node | distance to Mathlib | kind |
 |---|---|---|
@@ -872,6 +871,7 @@
 | `pqf-def-coherent` | 1 | state |
 | `pqf-lem-coherent-ft-locnoeth` | 1 | state |
 | `pqf-lem-finite-qf` | 1 | state |
+| `pqf-lem-finite-type-algebra-finite-spectrum` | 1 | state |
 | `pqf-lem-image-proper` | 1 | state |
 | `pqf-lem-proper-basic` | 1 | state |
 | `pqf-lem-qf-finitefibres` | 1 | state |
@@ -912,7 +912,7 @@
 | `lem-weil-pbc-projective-space-zero-isomorphism` | 4 | state |
 | `def-nagata-fixed-base-separated-stage` | 6 | state |
 
-Not open yet: 1494 nodes that wait for a statement dependency, 202 nodes that wait for stage 1.
+Not open yet: 1497 nodes that wait for a statement dependency, 201 nodes that wait for stage 1.
 
 ## Stage 3: modules to prove (0)
 
