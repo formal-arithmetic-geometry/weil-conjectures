@@ -66,7 +66,7 @@ The geometric-stalk half of the same subsection is omitted.
 
 @[expose] public section
 
-universe u
+universe u' u
 
 open CategoryTheory Limits MonoidalCategory
 
@@ -336,6 +336,24 @@ theorem isZero_homology_rightDerivedLowerShriek (f : X ⟶ Y) [HasCompactificati
 
 end Finiteness
 
+section TorAmplitude
+
+variable (A : Type u') [Category.{u + 1} A] [Abelian A] [IsGrothendieckAbelian.{u + 1} A]
+  [MonoidalCategory A] [MonoidalPreadditive A] [SymmetricCategory A] [MonoidalClosed A]
+  [Abelian.HasFunctorialFlatResolution A]
+
+/-- Tor amplitude in `[a, b]` of an object `K` of `D(X_ét)`, written with
+`AlgebraicGeometry.Etale.derivedTensor`: `K ⊗ᴸ F` has homology concentrated in `[a, b]` for
+every sheaf `F` placed in degree `0`. -/
+lemma DerivedCategory.torAmplitudeIn_iff_derivedTensor (X : Scheme.{u}) (a b : ℤ)
+    (K : _root_.DerivedCategory (Sheaf X.smallEtaleTopology A)) :
+    DerivedCategory.torAmplitudeIn A X a b K ↔
+      ∀ F : Sheaf X.smallEtaleTopology A, _root_.DerivedCategory.homologyConcentratedIn a b
+        (((derivedTensor A X).obj K).obj ((_root_.DerivedCategory.singleFunctor _ 0).obj F)) :=
+  Iff.rfl
+
+end TorAmplitude
+
 /-- The compactly supported direct image `Rf_!` of a sheaf placed in degree `0` is concentrated in
 degrees `≥ 0`: it is `Rg_*` of the extension by zero `i_! F` placed in degree `0`, for the chosen
 compactification `X ⟶[i] Z ⟶[g] Y` of `f`. -/
@@ -451,7 +469,9 @@ theorem finiteTorAmplitude_compactlySupportedGlobalSections
   have := noetherianSpace_of_hasCompactification aX (𝟙 (Spec (.of k)))
   have : QuasiCompact aX := ⟨fun _ _ _ ↦ TopologicalSpace.NoetherianSpace.isCompact _⟩
   obtain ⟨d, hd⟩ := exists_topologicalKrullDim_le_of_isPullback aX
-  refine ⟨a, b + 2 * d, torAmplitudeIn_rightDerivedGlobalSections_of_isSepClosed fun F ↦ ?_⟩
+  refine ⟨a, b + 2 * d, torAmplitudeIn_rightDerivedGlobalSections_of_isSepClosed
+    ((DerivedCategory.torAmplitudeIn_iff_derivedTensor _ _ a (b + 2 * d) _).2 fun F ↦ ?_)⟩
+  replace hab := (DerivedCategory.torAmplitudeIn_iff_derivedTensor _ _ a b K).1 hab
   obtain ⟨e⟩ := nonempty_iso_tensor_singleFunctor_obj_rightDerivedLowerShriek Λ aX K F
   -- `M = K ⊗ᴸ a^* F` is concentrated in degrees `[a, b]`
   let M := ((derivedTensor (ModuleCat.{u + 1} Λ) X).obj K).obj
@@ -459,7 +479,7 @@ theorem finiteTorAmplitude_compactlySupportedGlobalSections
   obtain ⟨hMa, hMb⟩ := hab ((aX)^*[ModuleCat.{u + 1} Λ].obj F)
   have : M.IsGE a := hMa
   have : M.IsLE b := hMb
-  have hM : _root_.DerivedCategory.TStructure.t.bounded M := ⟨⟨a, this⟩, ⟨b, hMb⟩⟩
+  have hM : _root_.DerivedCategory.TStructure.t.bounded M := ⟨⟨a, hMa⟩, ⟨b, hMb⟩⟩
   have := isGE_rightDerivedLowerShriek_obj Λ aX M hM a
   -- `Ra_!` sends `M` into degrees `≤ b + 2d`
   have : ((R(aX)_![ModuleCat.{u + 1} Λ]).obj M).IsLE (b + 2 * d) := by
