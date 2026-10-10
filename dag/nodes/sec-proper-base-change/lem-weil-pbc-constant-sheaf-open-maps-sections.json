@@ -10,9 +10,60 @@
  "stmt_deps": [
   "def-weil-pbc-sites-and-cohomology"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "*Step 1 (a locally constant map is constant on the pieces of an open partition).* Let $W\\subseteq V$ be open and $g\\in\\underline T_V(W)$, a locally constant map $W\\to T$. For $t\\in T$ put $W_t=g^{-1}(t)$. Each $W_t$ is open: every $x\\in W_t$ has an open neighbourhood $N\\subseteq W$ on which $g$ is constant, necessarily with value $t$, so $N\\subseteq W_t$. The $W_t$ ($t\\in T$) are pairwise disjoint and their union is $W$, so $\\{W_t\\subseteq W\\}_{t\\in T}$ is an open covering of $W$ (some $W_t$ may be empty), and $g|_{W_t}=\\mathrm{const}_t|_{W_t}$ in $\\underline T_V(W_t)$. Moreover for every sheaf of sets $\\mathcal G$ on $V$, $\\mathcal G(\\emptyset)$ is a single point: the empty family is an open covering of $\\emptyset$, and the sheaf condition [def-weil-pbc-sites-and-cohomology] for it says $\\mathcal G(\\emptyset)\\to\\prod_{\\emptyset}=\\{*\\}$ is bijective. Hence for $t\\ne t'$ any two sections over $W_t\\cap W_{t'}=\\emptyset$ agree.",
+   "uses": [
+    "def-weil-pbc-sites-and-cohomology"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sheaves.tex",
+    "place": "Sheaves, Definition Tag 006W (definition-constant-sheaf) and the sentence before it (locally constant maps form a sheaf)"
+   }
+  },
+  {
+   "text": "*Step 2 (injectivity: $\\varphi$ is determined by $t\\mapsto\\varphi_V(\\mathrm{const}_t)$).* Let $\\varphi:\\underline T_V\\to\\mathcal G$ be a morphism and $\\psi=\\beta(\\varphi)$, $\\psi(t)=\\varphi_V(\\mathrm{const}_t)$. For $W$, $g$ and $W_t$ as in Step 1, naturality of $\\varphi$ with respect to the inclusions $W_t\\subseteq W$ and $W_t\\subseteq V$ gives $\\varphi_W(g)|_{W_t}=\\varphi_{W_t}(g|_{W_t})=\\varphi_{W_t}(\\mathrm{const}_t|_{W_t})=\\varphi_V(\\mathrm{const}_t)|_{W_t}=\\psi(t)|_{W_t}$ for every $t\\in T$. Since $\\mathcal G$ is a sheaf, $\\mathcal G(W)\\to\\prod_t\\mathcal G(W_t)$ is injective for the covering $\\{W_t\\}$ [def-weil-pbc-sites-and-cohomology], so $\\varphi_W(g)$ is the unique section of $\\mathcal G(W)$ whose restriction to each $W_t$ is $\\psi(t)|_{W_t}$. Thus two morphisms $\\varphi,\\varphi'$ with $\\beta(\\varphi)=\\beta(\\varphi')$ have $\\varphi_W=\\varphi'_W$ for every $W$, i.e. $\\beta$ is injective.",
+   "uses": [
+    "def-weil-pbc-sites-and-cohomology"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sheaves.tex",
+    "place": "Sheaves, Example Tag 0081 (example-sheafify-constant), whose verification 'it is easy to see' is written out here; cf. Sites, Example Tag 0H7J (sites.tex, example-constant-sheaf)"
+   }
+  },
+  {
+   "text": "*Step 3 (surjectivity: construction of $\\varphi$ from $\\psi:T\\to\\mathcal G(V)$).* Given a map $\\psi:T\\to\\mathcal G(V)$, for $W\\subseteq V$ open and $g\\in\\underline T_V(W)$ with the covering $\\{W_t\\}_{t\\in T}$ of Step 1, the family $s_t=\\psi(t)|_{W_t}\\in\\mathcal G(W_t)$ is compatible: on $W_t\\cap W_t=W_t$ trivially, and for $t\\ne t'$ the overlap is empty and $\\mathcal G(\\emptyset)$ is a point (Step 1). By the sheaf condition [def-weil-pbc-sites-and-cohomology] there is a unique $\\varphi_W(g)\\in\\mathcal G(W)$ with $\\varphi_W(g)|_{W_t}=\\psi(t)|_{W_t}$ for all $t$. The maps $\\varphi_W$ are compatible with restriction: for $W'\\subseteq W$ open, $g'=g|_{W'}$ has $W'_t=g'^{-1}(t)=W_t\\cap W'$, and $\\varphi_W(g)|_{W'}$ restricts on $W'_t$ to $(\\varphi_W(g)|_{W_t})|_{W'_t}=\\psi(t)|_{W'_t}$, so by uniqueness $\\varphi_W(g)|_{W'}=\\varphi_{W'}(g|_{W'})$. Hence $\\varphi:\\underline T_V\\to\\mathcal G$ is a morphism of sheaves. For $g=\\mathrm{const}_t$ on $W=V$ one has $V_t=V$ and $V_{t'}=\\emptyset$ for $t'\\ne t$; the section $\\psi(t)$ itself satisfies the defining conditions (over the empty $V_{t'}$ trivially), so $\\varphi_V(\\mathrm{const}_t)=\\psi(t)$, i.e. $\\beta(\\varphi)=\\psi$. So $\\beta$ is surjective, and with Step 2 bijective.",
+   "uses": [
+    "def-weil-pbc-sites-and-cohomology"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sheaves.tex",
+    "place": "Sheaves, Example Tag 0081 (example-sheafify-constant) and Definition Tag 006W; the bijection is Sites, Example Tag 0H7J (sites.tex, example-constant-sheaf) for the opens site of V, whose final object is V"
+   }
+  },
+  {
+   "text": "*Step 4 (naturality in $\\mathcal G$).* For $\\alpha:\\mathcal G\\to\\mathcal G'$ and $\\varphi:\\underline T_V\\to\\mathcal G$, $(\\alpha\\circ\\varphi)_V=\\alpha_V\\circ\\varphi_V$, so $\\beta(\\alpha\\circ\\varphi)(t)=\\alpha_V(\\varphi_V(\\mathrm{const}_t))=(\\alpha_V\\circ\\beta(\\varphi))(t)$ for all $t\\in T$.",
+   "uses": [
+    "def-weil-pbc-sites-and-cohomology"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sheaves.tex",
+    "place": "Sites, Example Tag 0H7J (sites.tex, example-constant-sheaf): the bijection is natural in the sheaf"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-sites-and-cohomology"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sheaves.tex",
+  "place": "Sheaves, Example Tag 0081 (example-sheafify-constant; the verification is called 'easy to see' there) with Definition Tag 006W; the statement is Sites, Example Tag 0H7J (literature/stacks-project/sites.tex, example-constant-sheaf) for the site of opens of V. Written out by an agent directly from the sheaf condition, without passing through sheafification."
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -34,10 +85,31 @@
    "results": "only Condensed/Discrete/{Characterization,Module,Colimit,LocallyConstant}.lean (condensed sets); nothing in Topology/Sheaves or CategoryTheory/Sites",
    "date": "2026-10-10",
    "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "sheaf on a topological space of locally constant functions TopCat.Sheaf",
+   "results": "TopCat.Sheaf, TopCat.sheafToType, TopCat.Presheaf.toType_isSheaf (Mathlib.Topology.Sheaves.SheafOfFunctions: sheaf of all functions to T), LightCondSet.LocallyConstant.functor, CompHausLike.LocallyConstant.functor (Mathlib.Condensed.Discrete.LocallyConstant)",
+   "date": "2026-10-10",
+   "verdict": "no match: no sheaf of locally constant maps on the opens of a topological space, nor its maps-out property"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "the presheaf of locally constant functions on open subsets of a topological space is a sheaf, isomorphic to the constant sheaf",
+   "results": "CompHausLike.LocallyConstant.functorToPresheavesIso, functor, functorIso, functor_obj_val (Mathlib.Condensed.Discrete.LocallyConstant), TopCat.Presheaf.toType_isSheaf, Condensed.discrete_obj, TopCat.Presheaf.isSheaf_unit",
+   "date": "2026-10-10",
+   "verdict": "no match: only condensed (CompHausLike, coherent topology) versions"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rn 'LocallyConstant' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/Topology/Sheaves/*.lean; grep -rln LocallyConstant .../Mathlib/{Topology/Sheaves,CategoryTheory/Sites,AlgebraicGeometry}",
+   "results": "nothing in Topology/Sheaves or CategoryTheory/Sites; only AlgebraicGeometry/Morphisms/FlatRank.lean (unrelated). CategoryTheory/Sites/GlobalSections.lean has constantSheafΓAdj (line 69) and ΓHomEquiv for the sheafified constant presheaf",
+   "date": "2026-10-10",
+   "verdict": "no match: Mathlib has the statement for constantSheaf J A (already recorded via lem-weil-pbc-constant-sheaf-maps-global-sections, constantSheafAdj) but not the identification with locally constant maps (Stacks 0081); not a leaf"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "worker",
@@ -57,5 +129,17 @@
   }
  },
  "chapter": "sec-proper-base-change",
- "unit": "sk-thm-p1"
+ "unit": "sk-thm-p1",
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "lem-weil-pbc-constant-sheaf-open-maps-sections",
+  "worker": "stage1",
+  "summary": "Statement kept (checked against Stacks 0H7J, 0081, 006W; tags verified in tags/tags). Proof written in 4 steps directly from the sheaf condition of def-weil-pbc-sites-and-cohomology (route A of the brief): fibres of a locally constant map form an open partition and G(empty) is a point (Step 1), injectivity by naturality and separation (Step 2), surjectivity by gluing over the partition, compatibility with restriction and the value on const_t (Step 3), naturality in G (Step 4). This avoids the route through sheafification (0H7J + 0081), which would need a new unsplit node identifying the sheafified constant presheaf on a space with the sheaf of locally constant maps, whose own proof is this same argument; the Mathlib leaf lem-weil-pbc-constant-sheaf-maps-global-sections (constantSheafAdj) covers only the sheafified form. No new nodes. stmt_deps unchanged. Mathlib re-searched (leansearch, leanfinder, grep): not a leaf. proof_origin agent (Stacks omits the verification of 0081)."
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "result": "accepted",
+  "note": "4 steps (agent proof of Sites 0H7J for the sheaf of locally constant maps on a space, Stacks' 'easy to see' of 0081): fibres of a locally constant map form an open partition and G(empty) is a point; injectivity by naturality and separatedness; surjectivity by gluing psi(t)|_{W_t}; naturality in G. No new nodes."
+ }
 }
