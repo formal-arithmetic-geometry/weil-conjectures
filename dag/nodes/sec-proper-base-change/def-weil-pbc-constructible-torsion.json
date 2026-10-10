@@ -3,7 +3,7 @@
  "blueprint": {
   "is": "def-weil-pbc-constructible-torsion",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "definition",
  "title": "Constructible torsion sheaves on a curve",
@@ -13,14 +13,45 @@
   "place": "node def-weil-pbc-constructible-torsion, order 1095"
  },
  "stmt_deps": [
-  "def-weil-pbc-curve-setting"
+  "def-weil-pbc-curve-setting",
+  "def-weil-pbc-torsion-etale-sheaf",
+  "def-weil-pbc-etale-sheaves"
  ],
  "proof": [],
  "proof_deps": [],
  "proof_origin": null,
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "constructible torsion abelian sheaf on a curve finite partition locally closed finite stalks",
+   "results": "AlgebraicGeometry.exists_of_res_zero_of_qcqs_of_top and related quasi-compact scheme lemmas; no constructible sheaf declaration",
+   "date": "2026-10-11",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Sheaf.IsConstant, Topology.IsConstructible",
+   "results": "no hits",
+   "date": "2026-10-11",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "IsConstructibleSheaf|IsFiniteLocallyConstantSheaf|constructible in Mathlib/CategoryTheory Mathlib/AlgebraicGeometry",
+   "results": "no hits",
+   "date": "2026-10-11",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "constructible torsion sheaf on a curve finite locally constant on finitely many locally closed strata",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-11",
+   "verdict": "unavailable"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [],
  "blueprint_kind": "definition",
@@ -41,5 +72,21 @@
   }
  },
  "chapter": "sec-proper-base-change",
- "unit": "sk-curve-calculations-pbc-for-the-projective-line--remark-1"
+ "unit": "sk-curve-calculations-pbc-for-the-projective-line--remark-1",
+ "split_report": {
+  "date": "2026-10-11",
+  "item": "def-weil-pbc-constructible-torsion",
+  "worker": "stage1",
+  "summary": "Checked the definition against Stacks 03RW(2), 03RU and Lemma 095E(3). No exact sorry-free declaration with the blueprint tag exists in WeilConjectures. The imported statement was retained, its dependencies were made explicit, and its meaning was split into three elementary steps: the finite constructible stratification, inverse-image restriction to each immersed stratum, and finite local constancy. No new node was needed; all component notions already exist in the DAG. Reviewer R-dct2416: the definition is statement-only; its constructibility clause is the constructibility notion of [def-weil-pbc-etale-sheaves] (finite stratification with constructible strata, restriction as inverse image, finite locally constant with finite geometric stalks) for T=C, so that node is cited instead of restating its components, and the three unfolding steps were removed.",
+  "blueprint": "The definition sentence of def-weil-pbc-constructible-torsion (order 1095) is kept word for word; its notion of constructibility is that of def-weil-pbc-etale-sheaves applied to T=C."
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-dct2416",
+  "group": "M1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-dct2416 (reviewer sub-agent of L); spot-checked: Statement matches blueprint md word for word (B3 ok). Definition carried three unfolding proof steps (suspicious for a definition; step 2 had plain-text '->', B4). FIX more, RETURN less: class (b) - the steps restated the constructibility notion of def-weil-pbc-etale-sheaves (stratification, constructible strata, inverse-image restriction, finite locally constant with finite geometric stalks) piecemeal; removed all steps (which removes the B4 arrow), proof_deps [] and proof_origin null, stmt_deps now def-weil-pbc-curve-setting, def-weil-pbc-torsion-etale-sheaf, def-weil-pbc-etale-sheaves (no cycle); split_report updated. Second reading by M1 misdescribes the delivered file.; 1 file(s) fixed by the reviewer"
+ },
+ "lead_note": "2026-10-10 L (R-dct2416): Second reading by M1 is false: it claims the statement was rewritten with immersions and iota_i^{-1}F, blueprint from/same_as set and no proof steps, but the delivered file has the unchanged statement, from null, and three proof steps."
 }
