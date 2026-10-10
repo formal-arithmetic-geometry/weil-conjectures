@@ -1,8 +1,8 @@
 # Work queue
 
-918 items; claim with `tools/claim.py next <group> [--stage N]`.
+916 items; claim with `tools/claim.py next <group> [--stage N]`.
 
-## Stage 1: nodes to split (328)
+## Stage 1: nodes to split (325)
 
 | node | distance to a target | Lean state on the done branch |
 |---|---|---|
@@ -11,7 +11,6 @@
 | `lem-weil-pbc-injective-acyclicity-bounded-below` | 2002 | sorry_here |
 | `lem-weil-pbc-etale-sections-fpqc-descent` | 2006 | none |
 | `lem-weil-pbc-flat-fibres-irreducible` | 2006 | none |
-| `lem-weil-pbc-perfect-reduced-tensor` | 2006 | none |
 | `lem-weil-pbc-tensor-finite-type-limit` | 2006 | none |
 | `lem-weil-pbc-constant-sheaf-set-sections-connected-natural` | 2007 | none |
 | `lem-weil-pbc-etale-geometric-fibre-inverse-image-constant` | 2007 | none |
@@ -33,7 +32,6 @@
 | `lem-weil-pbc-hypercohomology-e1-pullback-functorial` | 3006 | none |
 | `lem-weil-pbc-etale-sheaf-clopen-product` | 3007 | none |
 | `lem-exc-finite-galois-sections-descent` | 3008 | none |
-| `lem-weil-pbc-finite-product-injective-resolutions` | 3008 | none |
 | `lem-weil-pbc-cohomology-over-object-localization` | 3009 | none |
 | `lem-exc-etale-open-subgroup-fixed-field` | 3011 | none |
 | `def-sc-scheme-tangent-space` | 3012 | none |
@@ -47,7 +45,6 @@
 | `lem-sc-rational-point-tangent-derivation-identification` | 3013 | none |
 | `lem-weil-pbc-ringed-site-module-sheafification-exact` | 3013 | none |
 | `lem-pc-field-extension-quasi-compact` | 3014 | none |
-| `lem-pc-field-extension-surjective` | 3014 | none |
 | `lem-pc-noetherian-derived-direct-image-right-adjoint` | 3014 | none |
 | `lem-pc-polynomial-quotient-distinct-linear-crt` | 3014 | none |
 | `lem-pc-proper-derived-direct-image-composition` | 3014 | none |
@@ -335,7 +332,7 @@
 | `lem-pur-rhom-well-defined` | - | none |
 | `lem-zl-noether-normalization-dimension` | - | none |
 
-## Stage 2: nodes to state (590)
+## Stage 2: nodes to state (591)
 
 | node | distance to Mathlib | kind |
 |---|---|---|
@@ -727,6 +724,7 @@
 | `lem-weil-pbc-p-basis-exists` | 1 | state |
 | `lem-weil-pbc-p-independent-differentials-independent` | 1 | state |
 | `lem-weil-pbc-p-independent-extends-to-p-basis` | 1 | state |
+| `lem-weil-pbc-perfect-reduced-tensor` | 1 | state |
 | `lem-weil-pbc-polynomial-ideal-coefficients-monomial` | 1 | state |
 | `lem-weil-pbc-polynomial-quotient-dimension-lower-bound` | 1 | state |
 | `lem-weil-pbc-polynomial-ring-maximal-chain-height-difference` | 1 | state |
@@ -930,7 +928,7 @@
 | `lem-weil-pbc-p1-field-dimension-one` | 4 | state |
 | `lem-weil-pbc-projective-space-zero-isomorphism` | 4 | state |
 
-Not open yet: 345 nodes that wait for stage 1, 1211 nodes that wait for a statement dependency.
+Not open yet: 342 nodes that wait for stage 1, 1212 nodes that wait for a statement dependency.
 
 ## Stage 3: modules to prove (0)
 
