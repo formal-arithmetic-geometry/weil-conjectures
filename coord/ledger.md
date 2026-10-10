@@ -2140,3 +2140,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 17:37 L: merged deliver/F1/lem-sc-tangent-space-vector-space (reviewer FIX; first push; new nodes: 1)
 - 17:37 L: merged deliver/J1/lem-sc-ext-coherent-hom-injective-flasque (reviewer FIX; first push; new nodes: 0)
 - 17:37 L: merged deliver/H1/lem-sc-brauer-algebraic-function-field-zero (reviewer FIX; first push; new nodes: 0)
+- 17:37 L: merged deliver/F1/lem-weil-pbc-etale-sections-equal-open (reviewer FIX; first push; new nodes: 1)

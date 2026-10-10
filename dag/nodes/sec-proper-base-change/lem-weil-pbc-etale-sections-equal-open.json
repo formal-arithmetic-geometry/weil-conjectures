@@ -25,9 +25,55 @@
   "def-weil-pbc-etale-sheaf-of-sets",
   "lem-weil-pbc-sets-etale-inverse-image-composition-units"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "On the etale site of $V$, define a subpresheaf $H$ of the final sheaf by putting $H(U)=\\{\\ast\\}$ when the pullbacks of $s$ and $t$ to $U$ agree and $H(U)=\\varnothing$ otherwise. Restrictions preserve agreement, and the sheaf equalizer axiom for $F$ shows that these local singleton sections glue; hence $H$ is a subsheaf of the final sheaf.",
+   "uses": [
+    "def-weil-pbc-etale-sheaf-of-sets"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Lemma Tag 09XM proof, first paragraph (lines 4947-4951)"
+   }
+  },
+  {
+   "text": "Apply the open-representability statement for subsheaves of the final etale sheaf to $H$. It gives a unique open subscheme $W\\subset V$ such that an etale object $U\\to V$ factors through $W$ exactly when the pullbacks of $s$ and $t$ to $U$ agree. Uniqueness of $W$ with the stated property for all morphisms $a:T\\to V$ follows by testing on the open immersions $W\\to V$ and $W'\\to V$ of two candidates, which gives $W\\subset W'\\subset W$.",
+   "uses": [
+    "lem-weil-pbc-etale-subsheaf-final-open"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Lemma Tag 09XM proof, invoking Lemma Tag 04HV (lines 4950-4951)"
+   }
+  },
+  {
+   "text": "For a geometric point $\\bar{x}\\to V$, the point lies in $W$ exactly when the germs of $s$ and $t$ in the stalk $F_{\\bar{x}}$ agree: the stalk of $H$ is the singleton precisely in that case. For any morphism $a:T\\to V$, the existing stalk-and-germ description of etale inverse images identifies the germ of the restricted section at a geometric point $\\bar{y}\\to T$ with the germ of $s$ (respectively $t$) at $a\\bar{y}$. Thus $s|_T=t|_T$ implies every geometric point of $T$ maps into $W$, so $a$ factors through the open $W$; the converse follows from $s|_W=t|_W$ (Step 2): by the restriction compatibility (0) of the units, $(e^*s)|_{W\\times_ST}=e^*(s|_W)=e^*(t|_W)=(e^*t)|_{W\\times_ST}$, and $(a,\\mathrm{id}_T)$ factors through $W\\times_ST$. The stalks and germs used here are those of [def-weil-pbc-geometric-stalks].",
+   "uses": [
+    "lem-weil-pbc-sets-etale-inverse-image-stalk-germ",
+    "lem-weil-pbc-sets-etale-inverse-image-composition-units",
+    "def-weil-pbc-geometric-stalks"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Lemma Tag 09XM proof, lines 4952-4956, using Lemma Tag 03Q1"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-etale-sheaf-of-sets",
+  "lem-weil-pbc-etale-subsheaf-final-open",
+  "lem-weil-pbc-sets-etale-inverse-image-stalk-germ",
+  "lem-weil-pbc-sets-etale-inverse-image-composition-units",
+  "def-weil-pbc-geometric-stalks"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Lemma Tag 09XM (lemma-where-sections-are-equal), proof"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -59,10 +105,25 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-weil-pbc-etale-sections-fpqc-descent",
   "by": "worker",
   "date": "2026-10-10"
+ },
+ "split_report": {
+  "date": "2026-10-11",
+  "item": "lem-weil-pbc-etale-sections-equal-open",
+  "worker": "stage1",
+  "summary": "Split Tag 09XM into the equalizer subsheaf construction, its representation by an open via Tag 04HV, and the geometric-stalk argument using the existing etale inverse-image stalk/germ statement. The original restriction notation and dependencies were retained.",
+  "blueprint": "Realizes the Tag 09XM largest-agreement-open proof in lemma-weil-pbc-proper-underived-exchange."
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-seo1748",
+  "group": "F1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-seo1748 (reviewer sub-agent of L); spot-checked: Checked steps 1-3 against Tags 09XM/04HV and cited statements (stalk-germ bijection with nbhd (V, a ybar) / (V x_S T,(a ybar, ybar)); unit restriction compatibility (0)). New node 04HV not a duplicate, no Mathlib match. FIX more, RETURN less: (1) B3 new node second clause used germs/stalks without citation: restated as 'H_xbar nonempty' citing def-weil-pbc-geometric-stalks, added to stmt_deps; (2) C1 step 3 converse used unit naturality without citation: spelled out via composition-units (0), cited it and def-weil-pbc-geometric-stalks, proof_deps updated; (3) uniqueness of W was not argued: added the open-immersion test to step 2.; 2 file(s) fixed by the reviewer"
  }
 }
