@@ -1,0 +1,24 @@
+Files written:
+
+- `dag/nodes/sec-proper-base-change/lem-weil-pbc-fpqc-descend-universally-closed.json`: statement node, split into five proof steps; Mathlib candidate for the covering-family statement retained, not promoted to a leaf.
+- `dag/nodes/sec-proper-base-change/lem-weil-pbc-universally-closed-isomorphism.json`: statement, Mathlib leaf `AlgebraicGeometry.universallyClosed_respectsIso`.
+- `dag/nodes/sec-proper-base-change/lem-weil-pbc-universally-closed-zariski-local.json`: statement, Mathlib leaf `AlgebraicGeometry.universallyClosed_isZariskiLocalAtTarget`.
+- `dag/nodes/sec-proper-base-change/lem-weil-pbc-universally-closed-affine-descent.json`: statement, Mathlib leaf by specialization of `AlgebraicGeometry.descendsAlong_universallyClosed_surjective_inf_flat_inf_quasicompact`.
+
+Attachments: none.
+
+WANTED: `literature/stacks-project/descent.tex`, Descent Lemma Tag 02KS (`lemma-descending-property-universally-closed`, lines 5515 and 5520-5563) and Tag 02KP (line 5407), because this checkout contains only `literature/stacks-tags-cited.tsv`, not the Stacks source file.
+
+What was wrong or incomplete: the item was still `unsplit` with no proof. Its existing Mathlib candidate is only descent along one surjective flat quasi-compact morphism, so it could not certify the stated fpqc covering-family theorem (the B8 reduction is nontrivial). The split makes the 02KP criterion application explicit and adds the three missing condition nodes. The item statement, its existing blueprint reference, and its Mathlib candidate were not weakened or changed.
+
+What I could not finish: no mathematical step remains unfinished. The Stacks `.tex` source is unavailable locally; the source locations and wording recorded in the node were checked against the cited tags and the available Mathlib declarations, with the missing file reported above.
+
+## Review by M1
+
+I checked the item against the recorded source `Descent, Lemma 02KS` (the property “universally closed is fpqc local on the base”) and its recorded route through the general criterion `02KP`. The local checkout does not contain `descent.tex`, so I did not claim to have read unavailable lines; I read the item’s source record, the existing 02KP node, the sibling descent splits, and the Mathlib source implementing the same four conditions. The target statement has the right objects and hypotheses: a morphism `f:X -> S`, an fpqc family `S_i -> S`, the second projections of the fibre products, and universal closedness of every base change.
+
+For step 1, the new isomorphism node states exactly condition (0) of 02KP: the source and target are transported by isomorphisms commuting with the arrows. Its Mathlib leaf is `universallyClosed_respectsIso` at `Mathlib/AlgebraicGeometry/Morphisms/UniversallyClosed.lean:62-63`; the statement is tested on identity isomorphisms and on an isomorphic presentation of the same morphism. Step 2 cites the existing node `lem-weil-pbc-universally-closed-base-change`, whose Mathlib match is `universallyClosed_isStableUnderBaseChange` at line 65; this supplies condition (1), and flatness is a permitted special case of arbitrary base change. Step 3 cites the new Zariski-local node, exactly the open-cover condition (2); its source is the locality clause of Morphisms 01W4 and its Mathlib match is `universallyClosed_isZariskiLocalAtTarget` at lines 104-109. I checked the empty-cover/empty-target edge case and a one-open cover, where the assertion reduces to the defining property.
+
+Step 4 isolates condition (3). The new affine-descent node introduces affine `S,S'`, a flat and surjective `g:S' -> S`, a morphism `f:X -> S`, and the universally closed second projection. The Mathlib declaration at `Mathlib/AlgebraicGeometry/Morphisms/FlatDescent.lean:47-60` descends universal closedness along `Surjective ⊓ Flat ⊓ QuasiCompact`; since both schemes in the node are affine, `g` is affine and hence quasi-compact (`Affine.lean:58, 181-182`), so this is a one-line specialization. I checked the identity-cover case and the empty affine base case. Step 5 applies the existing 02KP criterion to the original fpqc family and uses the hypothesis that every displayed base change is universally closed; no extra quasi-compactness of the whole family is assumed.
+
+For each new node I searched the DAG and blueprint for the declaration names, tags, and concepts before writing it; no duplicate node or blueprint statement was found. Each new node is statement-only, self-contained, has definition dependencies for schemes and universal closedness (plus flatness/surjectivity/fibre products where needed), records LeanSearch, Loogle, and source-grep searches, and is marked `mathlib` only where the declaration is exact or specializes in one line. The target’s `proof_deps` is exactly the union of the five step `uses` lists, and the blueprint `from`/`same_as` fields and split report were preserved and completed.

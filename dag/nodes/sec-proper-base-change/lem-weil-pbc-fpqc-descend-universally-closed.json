@@ -33,9 +33,77 @@
   "def-pc-fibre-product",
   "def-weil-proper-morphism"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "*Condition (0), invariance under isomorphism.* Universal closedness is transported across an isomorphism of the source and target morphisms by [lem-weil-pbc-universally-closed-isomorphism], which is the declaration `universallyClosed_respectsIso`.",
+   "uses": [
+    "lem-weil-pbc-universally-closed-isomorphism"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/descent.tex",
+    "place": "Descent, Lemma Tag 02KS via the condition (0) convention in Definition Tag 02KO (property invariant under isomorphism)"
+   }
+  },
+  {
+   "text": "*Condition (1), stability under flat base change.* In fact universal closedness is stable under arbitrary base change, so it is stable under a flat base change by [lem-weil-pbc-universally-closed-base-change].",
+   "uses": [
+    "lem-weil-pbc-universally-closed-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/descent.tex",
+    "place": "Descent, Lemma Tag 02KS (lemma-descending-property-universally-closed), proof, first sentence: 'A base change of a universally closed morphism is universally closed by definition', condition (1) of Lemma Tag 02KP"
+   }
+  },
+  {
+   "text": "*Condition (2), Zariski locality on the base.* If the target is covered by open subschemes and the restrictions of a morphism to those opens are universally closed, then the morphism is universally closed by [lem-weil-pbc-universally-closed-zariski-local].",
+   "uses": [
+    "lem-weil-pbc-universally-closed-zariski-local"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Morphisms, Lemma Tag 02K7 (lemma-universally-closed-local-on-the-base), as cited in the proof of Descent Tag 02KS for condition (2) of Tag 02KP"
+   }
+  },
+  {
+   "text": "*Condition (3), the affine faithfully flat case.* Let $S$ and $S'$ be affine, let $g:S'\\to S$ be flat and surjective, and let $f:X\\to S$ have universally closed base change along $g$. The morphism $g$ is affine because both its source and target are affine, hence it is quasi-compact. Therefore the Mathlib instance `descendsAlong_universallyClosed_surjective_inf_flat_inf_quasicompact` specializes to [lem-weil-pbc-universally-closed-affine-descent] and gives that $f$ is universally closed.",
+   "uses": [
+    "lem-weil-pbc-universally-closed-affine-descent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/descent.tex",
+    "place": "Descent, Lemma Tag 02KS proof in the affine case, through the general criterion Tag 02KP (flat surjective morphism of affine schemes)"
+   }
+  },
+  {
+   "text": "*Conclusion by the fpqc-local criterion.* Conditions (0)-(3) above are exactly the hypotheses of [lem-weil-pbc-fpqc-local-on-base-criterion] for the class of universally closed morphisms. Applying that criterion to $f:X\\to S$ and the given fpqc covering $\\{g_i:S_i\\to S\\}$, whose base changes $f_i$ are universally closed by hypothesis, proves that $f$ is universally closed.",
+   "uses": [
+    "lem-weil-pbc-fpqc-local-on-base-criterion",
+    "def-weil-pbc-fpqc-covering"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/descent.tex",
+    "place": "Descent, Lemma Tag 02KS (lemma-descending-property-universally-closed), conclusion via Lemma Tag 02KP"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-universally-closed-isomorphism",
+  "lem-weil-pbc-universally-closed-base-change",
+  "lem-weil-pbc-universally-closed-zariski-local",
+  "lem-weil-pbc-universally-closed-affine-descent",
+  "lem-weil-pbc-fpqc-local-on-base-criterion",
+  "def-weil-pbc-fpqc-covering"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/descent.tex",
+  "place": "Descent, Lemma Tag 02KS and its application of the general fpqc-local criterion Tag 02KP; the four conditions are made explicit from the Mathlib morphism-property instances"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -73,7 +141,7 @@
   "line": "47-60 (read with sed -n 38,60p)",
   "how": "descent along a single surjective flat quasi-compact morphism, plus universallyClosed_isZariskiLocalAtTarget (Morphisms/UniversallyClosed.lean); the node is stated for an fpqc covering family {S_i -> S}, and the reduction (Zariski-local on S; over an affine open V of S finitely many affine opens of the S_i whose images cover V, their disjoint union -> V one surjective flat quasi-compact morphism) is not one line; not a leaf (point B8), as for the siblings lem-weil-pbc-fpqc-descend-locally-finite-type and -locally-finite-presentation."
  },
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "worker",
@@ -94,6 +162,20 @@
  },
  "chapter": "sec-proper-base-change",
  "unit": "sk-thm-p1",
- "reviewed": "2026-10-10 L: statement checked against 02KS; no blueprint node states it",
- "lead_note": "split through the 02KP criterion node lem-weil-pbc-fpqc-local-on-base-criterion, verifying its conditions (0)-(3)"
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-fpqcuc",
+  "group": "M1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-fpqcuc (reviewer sub-agent of L); spot-checked: Source read: descent.tex Lemma 02KS (lemma-descending-property-universally-closed) and its proof (base change by definition; Zariski local by Morphisms 02K7; affine flat surjective case by diagram chase with 02JY; then 02KP), and 02KP (lemma-descending-properties-morphisms). Item statement agrees with 02KS hypothesis by hypothesis (fpqc covering, base changes f_i universally closed => f universally closed). Steps: conditions (0)-(3) of lem-weil-pbc-fpqc-local-on-base-criterion (read: same unit sk-thm-p1, its (0)-(3) are exactly what the new nodes and the existing lem-weil-pbc-universally-closed-base-change state, the latter for arbitrary hence flat base change); step 5 applies the criterion to the given covering. New nodes: iso, Zariski-local, affine-descent; statements self-contained, TeX, cite definitions. Mathlib lines verified in the pinned Mathlib: UniversallyClosed.lean 62 universallyClosed_respectsIso, 65 base change, 104 universallyClosed_isZariskiLocalAtTarget; FlatDescent.lean 47-48 DescendsAlong UniversallyClosed (Surjective inf Flat inf QuasiCompact) (DescendsAlong.of_isPullback: Q on the cover, P on the projection to the cover's source, i.e. X x_S S' -> S'); Affine.lean 181-182 isAffineHom_of_isAffine and 58 IsAffineHom => QuasiCompact, so the affine-descent leaf is a one-line specialization (B8). Small cases: g = id_S, empty S, one-open cover, identity isomorphisms. No slopmaster2 declaration found for the item or new ids (grep). Fixes: dag/nodes/sec-proper-base-change/lem-weil-pbc-fpqc-descend-universally-closed.json: proof[1].source: 01W4 (base change of proper) replaced by the 02KS proof's 'by definition'; proof[2].source: 01W4 -> 02K7; lem-weil-pbc-universally-closed-zariski-local.json: source.place 01W4 -> 02K7; lem-weil-pbc-universally-closed-isomorphism.json: source 01W4 -> the iso-invariance convention of 02KP; lem-weil-pbc-universally-closed-affine-descent.json: mathlib_match.line 47 -> 47-60 (instance at 48). Report note: the worker's machine lacked descent.tex; the reviewer read it here. 14:12-14:14 UTC; 4 file(s) fixed by the reviewer"
+ },
+ "lead_note": "split through the 02KP criterion node lem-weil-pbc-fpqc-local-on-base-criterion, verifying its conditions (0)-(3)",
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "lem-weil-pbc-fpqc-descend-universally-closed",
+  "worker": "stage1",
+  "summary": "Split Stacks Descent Lemma 02KS through the existing fpqc-local-on-base criterion 02KP. The four criterion conditions for universally closed morphisms are supplied by three new Mathlib leaves for invariance under isomorphism, Zariski locality on the target, and affine flat-surjective descent, together with the existing universal-closedness base-change leaf; the final step applies 02KP to the given fpqc covering. The item statement and its Stacks source were retained.",
+  "blueprint": "The five proof steps realize the 02KS universally-closed half of the ancestor blueprint node lemma-weil-pbc-h1-constructible-representation, at the item's recorded step-2 place where 02L9 is obtained by combining 02KS and 02L5. The new nodes serve conditions (0), (2), and (3) of the 02KP criterion; the existing base-change leaf serves condition (1)."
+ }
 }

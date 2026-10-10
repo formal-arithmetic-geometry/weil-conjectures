@@ -1,0 +1,76 @@
+{
+ "id": "lem-weil-pbc-universally-closed-affine-descent",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lemma-weil-pbc-h1-constructible-representation",
+   "place": "condition (3) in the application of the Stacks 02KP fpqc-local criterion to the property universally closed in the proof of 02KS: descent along a flat surjective morphism of affine schemes",
+   "via": [
+    "lem-weil-pbc-fpqc-descend-integral",
+    "lem-weil-pbc-fpqc-descend-finite",
+    "lem-weil-pbc-finite-locally-free-degree-etale-descent",
+    "lem-weil-pbc-flat-fp-lqf-bounded-stratification",
+    "lem-weil-pbc-flat-fp-qf-stratification",
+    "lem-weil-pbc-etale-separated-stratified-finite",
+    "lem-weil-pbc-etale-stratified-finite",
+    "lem-weil-pbc-etale-free-sheaf-constructible",
+    "lem-weil-pbc-constructible-generation",
+    "lem-weil-pbc-module-sheaf-colimit-constructible"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Universal closedness descends along a flat surjective morphism of affine schemes",
+ "statement": "Let $S$ and $S'$ be affine schemes [def-pc-scheme], let $g:S'\\to S$ be flat and surjective [def-weil-flat-morphism] [def-weil-surjective-morphism], and let $f:X\\to S$ be a morphism. If the second projection $X\\times_SS'\\to S'$ of the fibre product [def-pc-fibre-product] is universally closed [def-weil-proper-morphism], then $f$ is universally closed.",
+ "source": {
+  "document": "literature/stacks-project/descent.tex",
+  "place": "Descent, Lemma Tag 02KS, affine case in the proof (via the general criterion Tag 02KP); Mathlib instance `descendsAlong_universallyClosed_surjective_inf_flat_inf_quasicompact`"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-flat-morphism",
+  "def-weil-surjective-morphism",
+  "def-pc-fibre-product",
+  "def-weil-proper-morphism"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "universally closed morphism descends along a surjective flat quasi-compact morphism of schemes",
+   "results": "AlgebraicGeometry.descendsAlong_universallyClosed_surjective_inf_flat_inf_quasicompact",
+   "date": "2026-10-10",
+   "verdict": "generalization: the declaration is for one surjective flat quasi-compact morphism; a morphism between affine schemes is affine and hence quasi-compact"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.MorphismProperty.DescendsAlong @AlgebraicGeometry.UniversallyClosed",
+   "results": "descendsAlong_universallyClosed_surjective_inf_flat_inf_quasicompact : DescendsAlong @UniversallyClosed (@Surjective ⊓ @Flat ⊓ @QuasiCompact)",
+   "date": "2026-10-10",
+   "verdict": "generalization: specialize the covering morphism to the affine g, whose quasi-compactness is an affine-morphism instance"
+  },
+  {
+   "tool": "grep",
+   "query": "sed -n '47,60p' ~/weil-src-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicGeometry/Morphisms/FlatDescent.lean; grep -n 'isAffineHom_of_isAffine' ~/weil-src-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicGeometry/Morphisms/Affine.lean",
+   "results": "FlatDescent.lean:47-60 gives the @[stacks 02KS] universally-closed DescendsAlong instance; Affine.lean:181-182 gives isAffineHom_of_isAffine and Affine.lean:58 gives QuasiCompact for IsAffineHom",
+   "date": "2026-10-10",
+   "verdict": "generalization specializes in one line after inferring IsAffineHom g and QuasiCompact g"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "AlgebraicGeometry.descendsAlong_universallyClosed_surjective_inf_flat_inf_quasicompact",
+  "file": "Mathlib/AlgebraicGeometry/Morphisms/FlatDescent.lean",
+  "line": "47-60 (attribute @[stacks 02KS] at 47, instance at 48)",
+  "how": "specializes in one line: affine source and target give IsAffineHom g, hence QuasiCompact g, so the displayed flat and surjective g supplies the DescendsAlong hypotheses"
+ },
+ "status": "mathlib",
+ "created": {
+  "item": "lem-weil-pbc-fpqc-descend-universally-closed"
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "split_report": null
+}
