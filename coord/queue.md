@@ -1,8 +1,8 @@
 # Work queue
 
-867 items; claim with `tools/claim.py next <group> [--stage N]`.
+870 items; claim with `tools/claim.py next <group> [--stage N]`.
 
-## Stage 1: nodes to split (319)
+## Stage 1: nodes to split (321)
 
 | node | distance to a target | Lean state on the done branch |
 |---|---|---|
@@ -27,15 +27,17 @@
 | `lem-weil-pbc-finite-geometric-point-coproduct-cohomology` | 3005 | none |
 | `lem-sc-etale-affine-qcoherent` | 3007 | none |
 | `lem-sc-etale-zariski-qcoh-comparison` | 3007 | none |
-| `lem-exc-field-discrete-modules` | 3008 | none |
+| `lem-exc-abelian-sheaves-gmodules` | 3009 | none |
+| `lem-exc-etale-field-gsets` | 3009 | none |
+| `lem-exc-etale-sheaves-gsets-point` | 3009 | none |
 | `lem-sc-generic-vanishing-kernel-colimit` | 3009 | none |
 | `lem-sc-module-abelian-zariski-cohomology` | 3009 | none |
 | `lem-galois-fpqc-refinement-fully-faithful` | 3010 | none |
 | `lem-pc-cartier-divisor-nowhere-dense` | 3010 | none |
 | `lem-pc-nowhere-dense-dim-zero` | 3010 | none |
-| `lem-sc-brauer-zero-all-curves` | 3010 | sorry_here |
 | `lem-sc-curve-base-change-relative-dimension-one` | 3010 | none |
 | `lem-sc-point-tangent-separation-closed-immersion` | 3010 | none |
+| `lem-exc-rg-discrete-modules-functorial-injective-embeddings` | 3011 | none |
 | `lem-pc-algebraic-dim-zero-affine-finite` | 3011 | none |
 | `lem-pc-ample-affine-loci-criterion` | 3011 | none |
 | `lem-pc-base-change-closure-components` | 3011 | none |
@@ -46,7 +48,6 @@
 | `lem-exc-coinduced-functions-open-stabilizer` | 3012 | none |
 | `lem-exc-coinduced-homotopy-continuous` | 3012 | none |
 | `lem-exc-coinduced-homotopy-identity` | 3012 | none |
-| `lem-exc-rg-discrete-modules-functorial-injective-embeddings` | 3012 | none |
 | `lem-pc-grothendieck-edge-cocycle` | 3012 | none |
 | `lem-pc-projective-base-change` | 3012 | none |
 | `lem-sc-coherent-free-stalks-locally-free` | 3012 | none |
@@ -306,6 +307,7 @@
 | `lem-pc-projective-space-coherent-finiteness` | - | sorry_here |
 | `lem-sc-zariski-filtered-cohomology` | - | none |
 | `def-sc-kahler-differentials` | - | none |
+| `lem-kun-03qu-sep-closed` | - | none |
 | `lem-kun-separable-smooth-colimit` | - | none |
 | `lem-kun-stalk-as-pullback` | - | none |
 | `lem-pc-perfect-locus` | - | sorry_here |
@@ -326,7 +328,7 @@
 | `def-exc-jacobian-presentation` | - | none |
 | `lem-zl-noether-normalization-dimension` | - | none |
 
-## Stage 2: nodes to state (548)
+## Stage 2: nodes to state (549)
 
 | node | distance to Mathlib | kind |
 |---|---|---|
@@ -373,6 +375,7 @@
 | `def-weil-pbc-strictly-standard-element` | 1 | state |
 | `def-weil-pbc-symmetric-product-morphism` | 1 | state |
 | `def-weil-pbc-torsion-etale-sheaf` | 1 | state |
+| `etale-proposition-etale-reduced` | 1 | state |
 | `lem-galois-aut-profinite` | 1 | state |
 | `lem-galois-coproduct-copies-morphisms-clopen` | 1 | state |
 | `lem-galois-flat-algebra-descent` | 1 | state |
@@ -879,7 +882,7 @@
 | `lem-weil-pbc-p1-field-dimension-one` | 4 | state |
 | `lem-weil-pbc-projective-space-zero-isomorphism` | 4 | state |
 
-Not open yet: 339 nodes that wait for stage 1, 1037 nodes that wait for a statement dependency.
+Not open yet: 341 nodes that wait for stage 1, 1039 nodes that wait for a statement dependency.
 
 ## Stage 3: modules to prove (0)
 
