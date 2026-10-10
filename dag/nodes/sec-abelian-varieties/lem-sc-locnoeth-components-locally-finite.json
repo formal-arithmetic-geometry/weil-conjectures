@@ -22,9 +22,63 @@
   "pqf-def-locnoeth",
   "def-weil-irreducible-components"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Fix x in X. By the definition of a locally Noetherian scheme [pqf-def-locnoeth], choose an affine open neighbourhood U of x whose ring of sections is Noetherian.",
+   "uses": [
+    "pqf-def-locnoeth"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/topology.tex",
+    "place": "Tag 0052, topology-lemma-Noetherian, applied on an affine Noetherian open neighbourhood"
+   }
+  },
+  {
+   "text": "The underlying topological space of U is Noetherian by the affine Noetherian-space theorem [lem-sc-affine-noetherian-underlying-space]. Therefore it has only finitely many irreducible components [lem-sc-noetherian-finite-irreducible-components].",
+   "uses": [
+    "lem-sc-affine-noetherian-underlying-space",
+    "lem-sc-noetherian-finite-irreducible-components"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/topology.tex",
+    "place": "Tag 0052, topology-lemma-Noetherian"
+   }
+  },
+  {
+   "text": "Every irreducible component C of X that meets U restricts to an irreducible component C intersect U of U, and distinct such components have distinct restrictions, by [lem-sc-components-open-injection]. Hence the irreducible components of X meeting U form a finite set, since they inject into the finite set of irreducible components of U.",
+   "uses": [
+    "lem-sc-components-open-injection",
+    "lem-sc-noetherian-finite-irreducible-components"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/topology.tex",
+    "place": "Tag 0052, topology-lemma-Noetherian, finite-component conclusion"
+   }
+  },
+  {
+   "text": "The same U is an open neighbourhood of x, so only finitely many irreducible components of X meet U. Since x was arbitrary, the family of irreducible components is locally finite.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/topology.tex",
+    "place": "Tag 0052, topology-lemma-Noetherian"
+   }
+  }
+ ],
+ "proof_deps": [
+  "pqf-def-locnoeth",
+  "lem-sc-affine-noetherian-underlying-space",
+  "lem-sc-noetherian-finite-irreducible-components",
+  "lem-sc-components-open-injection"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/topology.tex",
+  "place": "Tag 0052, topology-lemma-Noetherian"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -63,12 +117,28 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-sc-hilbert-nowhere-dense-dimension-drop",
   "by": "worker",
   "date": "2026-10-10"
  },
  "chapter": "sec-abelian-varieties",
- "unit": "sk-def-av-ample-degree"
+ "unit": "sk-def-av-ample-degree",
+ "split_report": {
+  "date": "2026-10-11",
+  "item": "lem-sc-locnoeth-components-locally-finite",
+  "worker": "stage1",
+  "summary": "Checked the imported statement against Stacks Tag 0052 and split its proof into the affine-neighbourhood argument, Noetherian finiteness on the affine open, and the restriction-and-injection of components. Added one statement-only bridge node for component intersections with an open subset and one Mathlib leaf for the Noetherian underlying space of an affine scheme over a Noetherian ring.",
+  "blueprint": "Realizes the ancestor lem-sc-hilbert-polynomial proof place 'proof, induction step: the nowhere-dense support has dimension strictly below dim X' by supplying the local finite-component argument used before that induction."
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-lcf2752",
+  "group": "E1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-lcf2752 (reviewer sub-agent of L); spot-checked: C1/C4: step 1 pqf-def-locnoeth affine Noetherian cover; step 2 leaf noetherianSpace_of_isAffine read at Noetherian.lean:181 (exact) + lem-sc-noetherian-finite-irreducible-components; step 3 new injection node (true: closure argument) + finiteness; statement matches the use in lem-sc-hilbert-nowhere-dense-dimension-drop. D: no cycle. FIX more, RETURN less: B search record: added a grep entry to lem-sc-components-open-injection naming preimage_mem_irreducibleComponents / subset_closure_inter_of_isPreirreducible_of_isOpen, which the delivery's searches (and second reading) missed.; 1 file(s) fixed by the reviewer"
+ },
+ "lead_note": "2026-10-10 L (R-lcf2752): Whole statement is not one Mathlib declaration (no LocallyFinite irreducibleComponents). lem-sc-components-open-injection: clause 1 is preimage_mem_irreducibleComponents (Topology/Irreducible.lean:473), injectivity from subset_closure_inter_of_isPreirreducible_of_isOpen (:325); recorded in its mathlib_searches for the later split."
 }
