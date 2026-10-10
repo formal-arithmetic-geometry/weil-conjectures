@@ -6,6 +6,7 @@ Authors: Claude
 module
 
 public import WeilConjectures.AlgebraicGeometry.AffineSpace.ZeroSection
+public import WeilConjectures.ConstructibleSheaf.DenseOpen
 public import WeilConjectures.EtaleCohomology.Purity.Smooth.KummerClass
 public import WeilConjectures.SixFunctors.Etale.Derived.Composition
 public import WeilConjectures.SixFunctors.Etale.Derived.TensorStructure
@@ -183,6 +184,7 @@ theorem nonempty_iso_rightDerivedUpperShriek_affineLineZero [HasTateTwist.IsNorm
         eqToIso (by rw [mul_one])) ≪≫ (@asIso _ _ _ _ _ hφ).symm) ≪≫
     leftDerivedUpperStarConstantComplexIso Λ e.hom⟩
 
+set_option linter.unusedSectionVars false in
 /-- Blueprint `sk-prop-a1-inv`: Weak `𝔸¹`-invariance
 
 *Uniqueness for lisse sheaf maps on `𝔸¹_Y`.* Two morphisms between finite locally constant
@@ -195,7 +197,9 @@ theorem injective_upperStar_map_of_isFiniteLocallyConstantSheaf
     (L M : Sheaf 𝔸(ULift.{u} (Fin 1); Y).smallEtaleTopology (ModuleCat.{u + 1} Λ))
     [Scheme.IsFiniteLocallyConstantSheaf L] [Scheme.IsFiniteLocallyConstantSheaf M] :
     Function.Injective fun φ : L ⟶ M ↦ ((j)^*[ModuleCat.{u + 1} Λ]).map φ :=
-  sorry
+  upperStar_map_injective_of_isLocallyConstantSheaf j (by
+    rw [hj]
+    exact AffineSpace.dense_compl_range_zeroSection _ _)
 
 /-- Blueprint `sk-prop-a1-inv`: Weak `𝔸¹`-invariance
 
