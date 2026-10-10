@@ -1,0 +1,79 @@
+{
+ "id": "lem-sc-dedekind-intersection-localizations",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-pic-proper-ntorsion",
+   "place": "09N5 proof, the reduction from a semilocal Dedekind domain to the localizations at its maximal ideals",
+   "via": [
+    "lem-sc-semilocal-dedekind-dvr-reduction",
+    "lem-sc-jacobson-denominator-function-field",
+    "lem-sc-find-globally-generated",
+    "lem-sc-integral-dim-one-ample",
+    "lem-sc-reduced-dim-le-one-ample",
+    "lem-sc-dim-one-ample-invertible",
+    "lem-sc-dim-one-quasi-projective"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Intersection and contraction for maximal localizations of a semilocal Dedekind domain",
+ "statement": "Let B be a semilocal Dedekind domain (a Noetherian integrally closed domain of Krull dimension 1 [def-weil-pbc-noetherian-ring] [def-weil-pbc-normal-ring] [def-weil-pbc-krull-dimension-ring]) with fraction field K, and let Max(B) be its finite set of maximal ideals. Inside K one has B = intersection over m in Max(B) of B_m. For each m in Max(B), the contraction to B of the maximal ideal of B_m is m; equivalently, for every b in B, b belongs to m if and only if its image in B_m belongs to the maximal ideal of B_m.",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Algebra Lemma 034X (algebra-lemma-characterize-Dedekind), localization and intersection properties"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-noetherian-ring",
+  "def-weil-pbc-normal-ring",
+  "def-weil-pbc-krull-dimension-ring"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "semilocal Dedekind domain intersection of localizations at maximal ideals and contraction of maximal ideals",
+   "results": "No exact declaration; related MaximalSpectrum.iInf_localization_eq_bot",
+   "date": "2026-10-11",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "MaximalSpectrum.iInf_localization_eq_bot, Localization.AtPrime.comap_maximalIdeal",
+   "results": "No result",
+   "date": "2026-10-11",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "iInf_localization_eq_bot|comap_maximalIdeal",
+   "results": "No theorem stating the semilocal Dedekind intersection/contraction property",
+   "date": "2026-10-11",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "iInf_localization_eq_bot|to_map_mem_maximal_iff in ~/weil-conjectures-slopmaster2/.lake/packages/mathlib (reviewer R-sdd1740)",
+   "results": "MaximalSpectrum.iInf_localization_eq_bot, Mathlib/RingTheory/Spectrum/Maximal/Localization.lean:35; IsLocalization.AtPrime.to_map_mem_maximal_iff, Mathlib/RingTheory/Localization/AtPrime/Basic.lean:165",
+   "date": "2026-10-10",
+   "verdict": "match"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "MaximalSpectrum.iInf_localization_eq_bot",
+  "file": "Mathlib/RingTheory/Spectrum/Maximal/Localization.lean",
+  "line": 35,
+  "how": "one declaration per clause: (1) intersection: MaximalSpectrum.iInf_localization_eq_bot (Localization.lean:35) states that for any domain R with fraction field K, the infimum over maximal ideals of the subalgebras Localization.subalgebra.ofField K (B_m inside K) is the bottom subalgebra, i.e. R; (2) contraction: IsLocalization.AtPrime.to_map_mem_maximal_iff (Mathlib/RingTheory/Localization/AtPrime/Basic.lean:165), algebraMap R S x in maximalIdeal S iff x in I, for S a localization at the prime I = m. Neither clause needs semilocality or the Dedekind hypothesis."
+ },
+ "status": "mathlib",
+ "created": {
+  "item": "lem-sc-semilocal-dedekind-dvr-reduction",
+  "by": "worker",
+  "date": "2026-10-10"
+ },
+ "chapter": "sec-curve-estimates",
+ "unit": "sk-thm-curveestimate"
+}

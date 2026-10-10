@@ -2127,3 +2127,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 17:34 L: merged deliver/J1/lem-pc-separable-polynomial-distinct-roots-alg-closed (reviewer FIX; first push; new nodes: 0)
 - 17:34 L: merged deliver/M1/lem-weil-pbc-fibre-spec-homeomorphism (reviewer PASS; first push; new nodes: 0)
 - 17:34 L: merged deliver/H1/lem-sc-derived-internal-hom-stalk-localization (reviewer FIX+NODE(1); after a return; new nodes: 4)
+- 17:34 L: merged deliver/J1/lem-sc-semilocal-dedekind-dvr-reduction (reviewer FIX; first push; new nodes: 2)
