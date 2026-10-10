@@ -1,0 +1,81 @@
+{
+ "id": "lem-sc-ext-yoneda-composition-derived",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-sc-p1-duality",
+   "place": "proof, Step 2: the pairings are induced by compositions in the derived category",
+   "via": [
+    "lem-sc-p1-ext-yoneda-functoriality"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Yoneda Ext product agrees with derived-category composition",
+ "statement": "Let $\\mathcal A$ be an abelian category [def-sp-abelian] and define $\\operatorname{Ext}^i_{\\mathcal A}(M,N)=\\operatorname{Hom}_{D(\\mathcal A)}(M[0],N[0][i])$ as in [def-pc-ext]. For objects $L,M,N$ and classes $a\\in\\operatorname{Ext}^i_{\\mathcal A}(M,N)$ and $b\\in\\operatorname{Ext}^j_{\\mathcal A}(L,M)$, the Yoneda product $a\\circ b\\in\\operatorname{Ext}^{i+j}_{\\mathcal A}(L,N)$ is the derived-category composite obtained by shifting $a$ by $j$ and composing it with $b$, using the standard shift identification. In degree zero this is ordinary composition, and composing with a degree-zero morphism $u:L\\to M$ or $\\varphi:N\\to N'$ gives respectively $a\\circ u$ or $\\varphi[i]\\circ a$; [lem-sc-p1-ext-yoneda-associativity] supplies the Yoneda operation used here.",
+ "source": {
+  "document": "literature/stacks-project/derived.tex",
+  "place": "Section Tag 06XP (Ext groups as Hom in the derived category; composition of Ext classes)"
+ },
+ "stmt_deps": [
+  "def-sp-abelian",
+  "def-pc-ext",
+  "lem-sc-p1-ext-yoneda-associativity"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Yoneda product of Ext classes equals shifted composition in the derived category",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-11",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Yoneda product of Ext classes equals shifted composition in the derived category",
+   "results": "CategoryTheory.Abelian.Ext.comp_hom, Ext.comp, Ext.precomp, Ext.postcomp; no sheaf Yoneda identification.",
+   "date": "2026-10-11",
+   "verdict": "generalization: abstract Ext composition only"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Abelian.Ext.comp shifted Ext product",
+   "results": "CategoryTheory.Abelian.Ext.comp and Ext.comp_hom provide abstract composition, but no Yoneda-extension identification for sheaf modules.",
+   "date": "2026-10-11",
+   "verdict": "generalization: abstract Ext composition only"
+  },
+  {
+   "tool": "grep",
+   "query": "rg -n 'Yoneda.*Ext|Ext.*Yoneda|comp_hom|Ext.comp' /home/ubuntu/weil-src-slopmaster2/.lake/packages/mathlib/Mathlib/CategoryTheory /home/ubuntu/weil-src-slopmaster2/.lake/packages/mathlib/Mathlib/Algebra/Homology",
+   "results": "Abstract Ext.comp and Ext.comp_hom found; no declaration connecting Yoneda extension splicing to the derived-category product.",
+   "date": "2026-10-11",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Abelian.Ext.hom, CategoryTheory.Abelian.Ext.comp",
+   "results": "CategoryTheory.Abelian.Ext.comp_hom (Ext/Basic.lean:171), Ext.singleFunctor_map_comp_hom (Ext/ExactSequences.lean:183), Ext.hom_comp_singleFunctor_map_shift (Ext/ExactSequences.lean:40)",
+   "date": "2026-10-10",
+   "verdict": "exact: CategoryTheory.Abelian.Ext.comp_hom (degree-zero clauses: singleFunctor_map_comp_hom, hom_comp_singleFunctor_map_shift, mk0_comp_mk0)",
+   "by": "R-eyf1706"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "CategoryTheory.Abelian.Ext.comp_hom",
+  "file": "Mathlib/Algebra/Homology/DerivedCategory/Ext/Basic.lean",
+  "line": 171,
+  "how": "exact: Yoneda composition is Abelian.Ext.comp (Basic.lean:128; the operation of the leaf lem-sc-p1-ext-yoneda-associativity = Ext.comp_assoc), and Ext of [def-pc-ext] is Abelian.Ext via Ext.homAddEquiv (Basic.lean:388). `comp_hom (α : Ext X Y a) (β : Ext Y Z b) (h : a+b=c) : (α.comp β h).hom = α.hom.comp β.hom _` (line 171), where ShiftedHom.comp f g = f ≫ g⟦a⟧' ≫ (shiftFunctorAdd' ..).inv.app _ (CategoryTheory/Shift/ShiftedHom.lean:40): with β=a∈Ext^i(M,N), α=b∈Ext^j(L,M) (Mathlib's order is diagrammatic, b.comp a = a∘b) this is a[j]∘b followed by the shift identification. Degree-zero clauses, one declaration each: ordinary composition Ext.mk₀_comp_mk₀ (Basic.lean:191); a∘u: Ext.singleFunctor_map_comp_hom (Mathlib/Algebra/Homology/DerivedCategory/Ext/ExactSequences.lean:183, Q(u)≫x.hom = ((mk₀ u).comp x _).hom); φ[i]∘a: Ext.hom_comp_singleFunctor_map_shift (ExactSequences.lean:40, x.hom ≫ (Q φ)⟦n⟧' = (x.comp (mk₀ φ) _).hom). Lines read with sed by R-eyf1706."
+ },
+ "status": "mathlib",
+ "created": {
+  "item": "lem-sc-p1-ext-yoneda-functoriality",
+  "by": "worker",
+  "date": "2026-10-10"
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality"
+}

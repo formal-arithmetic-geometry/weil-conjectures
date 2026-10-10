@@ -4,7 +4,7 @@
   "is": null,
   "from": {
    "node": "thm-sc-p1-duality",
-   "place": "proof, Step 2: 'the pairings are induced by compositions in the derived category'",
+   "place": "proof, Step 2: the pairings are induced by compositions in the derived category",
    "via": [
     "lem-sc-p1-duality-pairing-naturality"
    ]
@@ -24,34 +24,84 @@
   "document": "literature/stacks-project/derived.tex",
   "place": "Section Tag 06XP (Ext groups as Hom in D(A); composition of Ext classes), with Cohomology Lemma Tag 0B3A for H^1"
  },
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Read the Ext groups through the corrected derived-category/injective-resolution interpretation of [lem-weil-pbc-ext-via-injective-resolution]. The derived-category definition and its functorial maps are stated in [def-pc-ext]: for $u:\\mathcal F'\\to\\mathcal F$ the map is precomposition by $Q(u[0])$, while for $\\varphi:\\mathcal G\\to\\mathcal G'$ it is postcomposition by $Q(\\varphi[0])[i]$. Therefore a class $e$ has images $e\\circ u$ and $\\varphi[i]\\circ e$.",
+   "uses": [
+    "lem-weil-pbc-ext-via-injective-resolution",
+    "def-pc-ext"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Definition Tag 06XQ and Lemma Tag 06XR"
+   }
+  },
+  {
+   "text": "The Yoneda product agrees with the shifted derived-category composite by [lem-sc-ext-yoneda-composition-derived]. Its degree-zero cases give the two displayed formulas, and the operation is the Yoneda composition named in [lem-sc-p1-ext-yoneda-associativity].",
+   "uses": [
+    "lem-sc-ext-yoneda-composition-derived",
+    "lem-sc-p1-ext-yoneda-associativity"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 06XP, composition of Ext classes"
+   }
+  },
+  {
+   "text": "Specialize [lem-sc-ext-locally-free-second-naturality] to $\\mathcal F=\\mathcal O_X$. Its canonical isomorphism becomes $\\operatorname{Ext}^i_X(\\mathcal O_X,\\mathcal G)=H^i(X,\\mathcal G)$ by [lem-sc-ext-locally-free], and the induced map is $H^i(\\varphi)$ by [def-sc-sheaf-cohomology-functor]. Thus $H^i(\\varphi)(x)=\\varphi[i]\\circ x$.",
+   "uses": [
+    "lem-sc-ext-locally-free-second-naturality",
+    "lem-sc-ext-locally-free",
+    "def-sc-sheaf-cohomology-functor"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/cohomology.tex",
+    "place": "Tag 01DZ, functoriality of cohomology"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-ext-via-injective-resolution",
+  "def-pc-ext",
+  "lem-sc-ext-yoneda-composition-derived",
+  "lem-sc-p1-ext-yoneda-associativity",
+  "lem-sc-ext-locally-free-second-naturality",
+  "lem-sc-ext-locally-free",
+  "def-sc-sheaf-cohomology-functor"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/derived.tex",
+  "place": "Tags 06XP and 06XR, with cohomology.tex Tag 01DZ"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
-   "query": "Ext functoriality equals Yoneda composition with a morphism (mk₀)",
-   "results": "service error (HTTP 500); no result",
-   "date": "2026-10-10",
-   "verdict": "no result; other search kinds checked"
+   "query": "Ext functoriality equals Yoneda composition with a morphism",
+   "results": "No exact sheaf Ext theorem; abstract Ext composition APIs only.",
+   "date": "2026-10-11",
+   "verdict": "no match"
   },
   {
    "tool": "loogle",
    "query": "CategoryTheory.Abelian.Ext.comp, CategoryTheory.Abelian.Ext.mk₀",
-   "results": "CategoryTheory.Abelian.extFunctor_map_app (contravariant functoriality of Ext in an abelian category with HasExt is composition with mk₀), Ext.mk₀_comp_mk₀, Ext.comp_mk₀_id; nothing on sheaf Ext as R^i Hom or on Ext^i(O_X,-)=H^i(X,-)",
-   "date": "2026-10-10",
-   "verdict": "no match (abstract-category analogue only)"
+   "results": "Abstract Ext composition declarations, no sheaf Ext/cohomology identification.",
+   "date": "2026-10-11",
+   "verdict": "generalization: abstract category only"
   },
   {
    "tool": "grep",
-   "query": "grep -rn 'mk₀_comp|comp_mk₀' Mathlib/Algebra/Homology/DerivedCategory/Ext/; grep -rln 'Sheaf.*Ext|sheafCohomology' Mathlib/AlgebraicGeometry Mathlib/CategoryTheory/Sites",
-   "results": "Ext/Basic.lean:191,196,303 abstract composition lemmas; Sites/SheafCohomology/Basic.lean defines sheaf cohomology as Ext from the constant sheaf, not for O_X-modules",
-   "date": "2026-10-10",
+   "query": "rg -n 'mk₀_comp|comp_mk₀|Sheaf.*Ext|sheafCohomology' /home/ubuntu/weil-src-slopmaster2/.lake/packages/mathlib/Mathlib",
+   "results": "Ext/Basic.lean abstract composition only; no sheaf Ext/cohomology naturality.",
+   "date": "2026-10-11",
    "verdict": "no match"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "R-dp2",
@@ -67,5 +117,39 @@
   "slopmaster2": {
    "state": "none"
   }
+ },
+ "split_report": {
+  "date": "2026-10-11",
+  "item": "lem-sc-p1-ext-yoneda-functoriality",
+  "worker": "stage1",
+  "summary": "Split derived Ext functoriality into the categorical composition step, the Yoneda identification, and second-variable naturality of the locally free Ext-cohomology comparison. Added two statement-only supporting nodes after searching the DAG, blueprint, Lean source, and Mathlib.",
+  "blueprint": [
+   "thm-sc-p1-duality proof, Step 2: the pairings are induced by compositions in the derived category",
+   "thm-sc-p1-duality proof, Step 2: naturality of Ext^i(O_X,-)=H^i(X,-)"
+  ],
+  "tool_uses": [
+   {
+    "node": "def-pc-ext",
+    "why": "Generic derived-category Ext definition and pre/postcomposition API from another unit."
+   },
+   {
+    "node": "lem-weil-pbc-ext-via-injective-resolution",
+    "why": "Generic corrected identification of sheaf Ext with derived-category Ext from another unit."
+   }
+  ]
+ },
+ "tool_uses": [
+  "def-pc-ext",
+  "lem-weil-pbc-ext-via-injective-resolution",
+  "def-pc-ext",
+  "lem-weil-pbc-ext-via-injective-resolution"
+ ],
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-eyf1706",
+  "group": "K1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-eyf1706 (reviewer sub-agent of L); spot-checked: Source Stacks 06XP/06XR (derived.tex) and 01DZ: the item's statement is unchanged (only stmt_deps edited). Lead's question: the item cannot be a Mathlib leaf. Clause 1 holds by definition in Mathlib (CategoryTheory.Abelian.extFunctor / extFunctorObj, Ext/Basic.lean:437/421, maps defined as composition with Ext.mk0). Clause 2 is not in Mathlib or slopmaster2: there Scheme.Modules.H is Sheaf.H of the underlying abelian sheaf (Cohomology/Defs.lean:81), not Ext(O_X,-), and the comparison nonempty_ext_addEquiv_H is a sorried Nonempty with no naturality. Step 1 uses the def-pc-ext a^*, b_* formulas; the bridge lem-weil-pbc-ext-via-injective-resolution goes with the known def-sc-ext-sheaf correction (lead_note R-elf). Step 2 uses lem-sc-ext-yoneda-composition-derived. Step 3 uses lem-sc-ext-locally-free-second-naturality with F=O_X, plus O_X^v(x)G=G and functoriality of H^i (C2). The new second-naturality node is true (Hom(F,-)=Gamma(F^v(x)-), and F^v(x)- is exact and keeps injectives) and is sheaf-specific: my grep of Mathlib AlgebraicGeometry/Sites/ModuleCat/Sheaf for Abelian.Ext found nothing. Accepted tool uses def-pc-ext and lem-weil-pbc-ext-via-injective-resolution (generic black boxes). FIXES: dag/nodes/sec-picard-framework/lem-sc-ext-yoneda-composition-derived.json made a Mathlib leaf after my loogle 'CategoryTheory.Abelian.Ext.hom, CategoryTheory.Abelian.Ext.comp': status mathlib, mathlib_match CategoryTheory.Abelian.Ext.comp_hom Ext/Basic.lean:171, with degree-zero clauses Ext.mk0_comp_mk0 Basic.lean:191, Ext.singleFunctor_map_comp_hom ExactSequences.lean:183 and Ext.hom_comp_singleFunctor_map_shift ExactSequences.lean:40, and ShiftedHom.comp at ShiftedHom.lean:40, all read with sed; the search is recorded. Same node, statement: a TeX typo fixed ('a; $[..]$' to 'a$; [..]'). Same node, stmt_deps: added def-sp-abelian and lem-sc-p1-ext-yoneda-associativity, both cited in its statement. dag/nodes/sec-picard-framework/lem-sc-p1-ext-yoneda-functoriality.json: stmt_deps: removed lem-sc-ext-locally-free-second-naturality, which the statement does not cite (it stays in proof_deps). Small cases: i=0 (ordinary composition), u=id, F=O_X. Start Sat Oct 10 05:06:22 PM UTC 2026, end Sat Oct 10 05:08:27 PM UTC 2026; 2 file(s) fixed by the reviewer"
  }
 }

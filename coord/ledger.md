@@ -2093,3 +2093,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 17:08 L: merged deliver/F1/lem-sc-rhom-cohomology-ext-ring (reviewer FIX; first push; new nodes: 0)
 - 17:08 L: merged deliver/E1/lem-weil-pbc-flat-fibres-irreducible (reviewer FIX+NODE(1); first push; new nodes: 3)
 - 17:08 L: merged deliver/C1/lem-sc-global-sections-left-exact (reviewer FIX; first push; new nodes: 0)
+- 17:08 L: merged deliver/K1/lem-sc-p1-ext-yoneda-functoriality (reviewer FIX; first push; new nodes: 2)
