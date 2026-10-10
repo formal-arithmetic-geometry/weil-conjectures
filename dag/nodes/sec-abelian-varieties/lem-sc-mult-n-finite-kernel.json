@@ -3,7 +3,7 @@
  "blueprint": {
   "is": "lem-sc-mult-n-finite-kernel",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "Multiplication by $n$ is finite",
@@ -37,44 +37,90 @@
  ],
  "proof": [
   {
-   "text": "*Reference: Stacks Project, Groupoid Schemes, Proposition\n39.9.11 (3) and (5), [Tag 03RP](https://stacks.math.columbia.edu/tag/03RP), whose proof is Lemma 39.9.8,\n[Tag 0BFG](https://stacks.math.columbia.edu/tag/0BFG).* We give\nthe argument of loc. cit. The map $[n]$ of [def-sc-mult-n] is\na homomorphism of group schemes: the group law of $A$ is commutative\nby [lem-sc-av-commutative], and for a commutative group scheme the\n$n$-fold sum map is a homomorphism by\n[lem-sc-mult-n-homomorphism].",
+   "text": "The multiplication map [n] is a homomorphism of group schemes: A is commutative by [lem-sc-av-commutative], and the n-fold sum map is a homomorphism by [lem-sc-mult-n-homomorphism].",
    "uses": [
     "def-sc-mult-n",
     "lem-sc-av-commutative",
     "lem-sc-mult-n-homomorphism"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-abelian-varieties/sk-prop-av-mult-finite/_section.md",
+    "place": "proof, homomorphism sentence"
+   }
   },
   {
-   "text": "*(i) Finiteness of the kernel.* By\n[lem-sc-abelian-variety-projective] and\n[lem-sc-ample-tensor] there is an ample invertible module\n$\\mathcal N$ on $A$ with $[-1]^*\\mathcal N\\cong\\mathcal N$,\nand by [lem-sc-mult-n-pullback]\n$[n]^*\\mathcal N\\cong\\mathcal N^{\\otimes n^2}$. Since\n[lem-sc-ample-positive-degree] is stated over an algebraically closed\nfield, we first reduce to that case. Let $\\bar k$ be an algebraic\nclosure of $k$. Then $A_{\\bar k}$ is an abelian variety over $\\bar k$\n($A$ is connected with a rational point, hence geometrically\nconnected, Stacks Project, Varieties, Lemma 33.7.14,\n[Tag 04KV](https://stacks.math.columbia.edu/tag/04KV)), $[n]$\nbase-changes to $[n]$ of $A_{\\bar k}$, the isomorphism\n$[n]^*\\mathcal N\\cong\\mathcal N^{\\otimes n^2}$ base-changes, and\n$\\mathcal N_{\\bar k}$ is ample (a closed immersion\n$A\\hookrightarrow\\mathbf P^N_k$ with\n$\\mathcal N^{\\otimes m}\\cong\\mathcal O(1)|_A$ base-changes to one of\n$A_{\\bar k}$). If all fibres of $[n]_{\\bar k}$ are finite, so are those\nof $[n]$: the fibre of $[n]$ over $y\\in A$ is the image of the fibre of\n$[n]_{\\bar k}$ over any point $\\bar y$ above $y$, the latter being the\nbase change of the former along $\\kappa(y)\\subseteq\\kappa(\\bar y)$, and\nsuch a base change is surjective on points. So assume $k$ algebraically\nclosed. As the quasi-finite locus of $[n]$ is open and $A$ is\nJacobson, it suffices to treat the fibres over closed points $y$, which\nare closed subschemes of $A$. If such a fibre\n$[n]^{-1}(y)$ had positive dimension, it would contain a proper\ncurve $C$ (a positive-dimensional scheme of finite type over a\nfield contains an integral closed subscheme of dimension one), and\non $C$ the morphism $[n]$ is constant, so\n$\\mathcal O_C\\cong[n]^*\\mathcal N|_C\\cong\\mathcal N^{\\otimes n^2}|_C$; but the restriction of an ample module to a closed\nsubscheme is ample, and an ample module on a proper curve has\npositive degree ([lem-sc-ample-positive-degree]), in particular it is not trivial – a\ncontradiction. Hence every fibre of $[n]$ is finite. The\nmorphism $[n]$ is proper ($A$ is proper and the target is\nseparated), so $[n]$ is proper and quasi-finite, hence finite\n([thm-pqf-finite-iff-proper-finite-fibres] of the quasi-finite chapter;\n*reference: Stacks Project, Cohomology of Schemes,\n[Tag 02OG](https://stacks.math.columbia.edu/tag/02OG): proper\nand quasi-finite implies finite*). In particular the kernel\n$A[n]=[n]^{-1}(e)$ is finite.",
+   "text": "Let $K$ be an algebraic closure of $k$. The base change $A_K$ is a group scheme over $K$, proper and smooth since these properties are stable under base change, and connected because $A$ is connected with the $k$-rational point $e$, hence geometrically connected (Stacks Tag 04KV); so $A_K$ is an abelian variety over $K$ by [def-sc-abelian-variety], and $[n]_K$ is its multiplication by $n$. By [lem-sc-mult-n-locally-quasi-finite], $[n]_K$ is locally quasi-finite, so its fibres are finite. Since $A_K\\to A$ is surjective and the fibre of $[n]_K$ over a point above $s\\in A$ is the base change of the fibre $[n]^{-1}(s)$ along a field extension, every fibre of $[n]$ is finite; as $[n]$ is of finite type, it is locally quasi-finite, and it is quasi-compact because $A$ is proper over $k$, hence quasi-finite. By [def-sc-abelian-variety], $A$ is proper over $k$ and the target $A$ is separated, so $[n]$ is proper. Therefore [cor-pqf-proper-quasifinite-finite] gives that $[n]$ is finite.",
    "uses": [
-    "lem-sc-abelian-variety-projective",
-    "lem-sc-ample-tensor",
-    "lem-sc-mult-n-pullback",
-    "lem-sc-ample-positive-degree",
-    "thm-pqf-finite-iff-proper-finite-fibres"
+    "def-sc-abelian-variety",
+    "lem-sc-mult-n-locally-quasi-finite",
+    "cor-pqf-proper-quasifinite-finite"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-abelian-varieties/sk-prop-av-mult-finite/_section.md",
+    "place": "proof, algebraically closed reduction and properness conclusion"
+   }
+  },
+  {
+   "text": "By [lem-sc-kernel-subgroup], A[n] is the fibre of [n] over the unit section. It is therefore the pullback of the finite morphism [n] along that section; finite morphisms are stable under pullback, so the pullback is finite. Hence A[n] is a finite group scheme.",
+   "uses": [
+    "def-sc-mult-n",
+    "lem-sc-kernel-subgroup"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-abelian-varieties/sk-prop-av-mult-finite/_section.md",
+    "place": "proof, final sentence: the kernel is the fibre over e"
+   }
   }
  ],
  "proof_deps": [
   "def-sc-mult-n",
   "lem-sc-av-commutative",
   "lem-sc-mult-n-homomorphism",
-  "lem-sc-abelian-variety-projective",
-  "lem-sc-ample-tensor",
-  "lem-sc-mult-n-pullback",
-  "lem-sc-ample-positive-degree",
-  "thm-pqf-finite-iff-proper-finite-fibres"
+  "def-sc-abelian-variety",
+  "lem-sc-mult-n-locally-quasi-finite",
+  "cor-pqf-proper-quasifinite-finite",
+  "lem-sc-kernel-subgroup"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/master/blueprint/sec-abelian-varieties/sk-prop-av-mult-finite/lem-sc-mult-n-finite-kernel.md",
   "place": "## Proof"
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "multiplication by n on an abelian variety is finite and its kernel is finite",
+   "results": "8 unrelated additive-circle and finite-kernel group hits; no abelian-variety theorem",
+   "date": "2026-10-11",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "IsFinite (multiplication by n)",
+   "results": "0 hits; parser rejected the pattern",
+   "date": "2026-10-11",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "grep",
+   "query": "isFinite_npow_id|torsionSubgroupScheme",
+   "results": "no hits in Mathlib source",
+   "date": "2026-10-11",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "finite multiplication map abelian variety kernel",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-11",
+   "verdict": "unavailable"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [
   "proof_cites_literature",
@@ -227,5 +273,20 @@
   }
  },
  "chapter": "sec-abelian-varieties",
- "unit": "sk-prop-av-mult-finite"
+ "unit": "sk-prop-av-mult-finite",
+ "split_report": {
+  "date": "2026-10-11",
+  "item": "lem-sc-mult-n-finite-kernel",
+  "worker": "stage1",
+  "summary": "Split off the substantive algebraically closed locally-quasi-finite theorem and made the finite-map and finite-kernel argument explicit.",
+  "blueprint": "Realizes the homomorphism sentence, the algebraically closed reduction/fibre argument, and the proper-plus-quasi-finite and kernel-fibre conclusions of the unit proof."
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-mfk1910",
+  "group": "F1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-mfk1910 (reviewer sub-agent of L); spot-checked: No cycle/restatement: lem-sc-mult-n-isogeny cites this item, lem-sc-mult-n-finite-flat and lem-sc-isogeny-facts cite isogeny, so this item is the root and cannot cite them. New node lem-sc-mult-n-locally-quasi-finite: true, not a duplicate of the 03RP/0BFG nodes, not in Mathlib (searches recorded), real lemma (curve/ample argument of 0BFG). Steps 1 and 3 checked against cited statements. FIX more, RETURN less: step 2 (E/C4) did not check that A_K is an abelian variety (the new node's hypothesis) and did not pass from locally quasi-finite to quasi-finite for cor-pqf; rewrote it with base-change stability, geometric connectedness via Tag 04KV, and quasi-compactness from properness; dropped the unused citations lem-sc-abelian-variety-projective, lem-sc-ample-tensor, lem-sc-mult-n-pullback from uses/proof_deps (the new node takes no ample-module input).; 1 file(s) fixed by the reviewer"
+ }
 }
