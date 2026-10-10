@@ -1,20 +1,164 @@
 {
  "id": "lem-weil-pbc-analytic-unramified-principal-criterion",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-normal-constant-generic",
+   "place": "step 4 of its split (source: Lemma 59.73.13 (Tag 09Z5), proof of (1))",
+   "via": [
+    "lem-weil-pbc-normal-nagata-monogenic-n1",
+    "lem-weil-pbc-nagata-universally-japanese",
+    "lem-weil-pbc-finite-type-z-domain-normalization-finite",
+    "lem-weil-pbc-smooth-over-normal-ring-normal",
+    "lem-weil-pbc-etale-over-normal-ring-normal",
+    "lem-weil-pbc-etale-colimit-normal-local-domain"
+   ]
+  },
+  "same_as": []
+ },
  "kind": "statement",
  "title": "A principal-quotient criterion for an analytically unramified local domain",
  "statement": "Let $(A,\\mathfrak m)$ be a Noetherian local integral domain [def-weil-pbc-noetherian-ring] and let $0\\ne t\\in\\mathfrak m$. An associated prime of the $A$-module $A/tA$ is a prime ideal equal to the annihilator of a nonzero class in $A/tA$. Suppose $A/tA$ has no embedded associated primes: each associated prime is minimal among primes containing $tA$. Suppose for every associated prime $\\mathfrak p$ of $A/tA$ that the local ring $A_{\\mathfrak p}$ is regular [def-weil-regular-scheme], and that $A/\\mathfrak p$ is analytically unramified [def-weil-pbc-analytically-unramified], i.e. its completion at $\\mathfrak m/\\mathfrak p$ is reduced. Then $A$ is analytically unramified: its $\\mathfrak m$-adic completion is reduced.",
  "source": {
   "document": "literature/stacks-project/algebra.tex",
-  "place": "Algebra, Lemma Tag 0330 (lemma-criterion-analytically-unramified), lines 45917-45962"
+  "place": "Algebra, Lemma Tag 0330 (lemma-criterion-analytically-unramified), lines 45917-45962; tag verified in literature/stacks-project/tags/tags"
  },
  "stmt_deps": [
   "def-weil-pbc-noetherian-ring",
   "def-weil-regular-scheme",
-  "def-weil-pbc-analytically-unramified"
+  "def-weil-pbc-analytically-unramified",
+  "def-weil-pbc-localization-at-prime",
+  "def-weil-pbc-adic-completion"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Let $\\widehat A=\\varprojlim_nA/\\mathfrak m^n$ be the $\\mathfrak m$-adic completion [def-weil-pbc-adic-completion]. It is a Noetherian ring by [lem-weil-pbc-adic-completion-noetherian], and a local ring with maximal ideal $\\mathfrak m\\widehat A$ by [lem-weil-pbc-local-completion-local-ring]; in particular the image of $t\\in\\mathfrak m$ lies in $\\mathfrak m\\widehat A$. The canonical map $A\\to\\widehat A$ is flat by [lem-weil-pbc-noetherian-completion-flat]. Since $A$ is a domain and $t\\neq0$, multiplication by $t$ is an injective $A$-linear map $A\\to A$; tensoring it with the flat $A$-module $\\widehat A$ [def-weil-pbc-flat-ring-map] gives that multiplication by $t$ on $A\\otimes_A\\widehat A=\\widehat A$ is injective, i.e. $t$ is a nonzerodivisor of $\\widehat A$.",
+   "uses": [
+    "def-weil-pbc-adic-completion",
+    "lem-weil-pbc-adic-completion-noetherian",
+    "lem-weil-pbc-local-completion-local-ring",
+    "lem-weil-pbc-noetherian-completion-flat",
+    "def-weil-pbc-flat-ring-map"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra, proof of Lemma Tag 0330 (lemma-criterion-analytically-unramified), lines 45934-45962: 'Since x is a nonzerodivisor (as R -> R^ is flat)', with Lemma 00MB (lemma-completion-flat) and Lemma 0316 (lemma-completion-Noetherian-Noetherian)"
+   }
+  },
+  {
+   "text": "Let $\\mathfrak p$ be an associated prime of $A/tA$, say $\\mathfrak p=\\operatorname{Ann}_A(\\bar z)$. Since $t$ kills $A/tA$, $t\\in\\mathfrak p$, and by the hypothesis of no embedded primes $\\mathfrak p$ is minimal among primes containing $tA$. Height at most one: apply [lem-weil-pbc-noetherian-height-quotient-bound] with one element $f_1=t$, $J=tA$, $\\mathfrak P=\\mathfrak p$: $\\operatorname{ht}(\\mathfrak p)\\le\\operatorname{ht}(\\mathfrak p/tA)+1$, and $\\mathfrak p/tA$ is a minimal prime of $A/tA$ (primes of $A/tA$ are the primes of $A$ containing $tA$), so it has height $0$; thus $\\operatorname{ht}(\\mathfrak p)\\le1$. Height at least one: $A$ is a domain, so $(0)$ is a prime, and $(0)\\subsetneq\\mathfrak p$ since $0\\neq t\\in\\mathfrak p$. Hence $\\operatorname{ht}(\\mathfrak p)=1$, and $\\dim A_{\\mathfrak p}=\\operatorname{ht}(\\mathfrak p)=1$ by [lem-weil-pbc-localization-dimension-chains-below-prime]. The local ring $A_{\\mathfrak p}$ [def-weil-pbc-localization-at-prime] is Noetherian by [lem-weil-pbc-localization-noetherian].",
+   "uses": [
+    "lem-weil-pbc-noetherian-height-quotient-bound",
+    "lem-weil-pbc-localization-dimension-chains-below-prime",
+    "def-weil-pbc-localization-at-prime",
+    "lem-weil-pbc-localization-noetherian"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra, proof of Lemma Tag 0330 (lemma-criterion-analytically-unramified), lines 45934-45962: 'Since R/xR has no embedded primes we see that each p_i has height 1, and is a minimal prime over (x)' (Krull's Hauptidealsatz, Lemma 00KW, lemma-one-equation)"
+   }
+  },
+  {
+   "text": "For such $\\mathfrak p$, $A_{\\mathfrak p}$ is a discrete valuation ring (a Noetherian local domain whose maximal ideal is generated by one nonzero element). By hypothesis $A_{\\mathfrak p}$ is a regular local ring [def-weil-regular-scheme]; by Step 2 it is Noetherian local of dimension $1$. Regularity says that its maximal ideal $\\mathfrak pA_{\\mathfrak p}$ is generated by $\\dim A_{\\mathfrak p}=1$ element $\\pi$, and $\\pi\\neq0$, for otherwise $A_{\\mathfrak p}$ would be a field, of dimension $0$. By [lem-weil-pbc-regular-local-dim-one-iff-normal] the regular one-dimensional Noetherian local ring $A_{\\mathfrak p}$ is a normal domain, in particular an integral domain.",
+   "uses": [
+    "def-weil-regular-scheme",
+    "lem-weil-pbc-regular-local-dim-one-iff-normal"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra, Lemma Tag 032Z (lemma-codimension-1-analytically-unramified), hypothesis (1) 'R_p is a discrete valuation ring', fed in the proof of Lemma 0330 by assumption (3)(a) and height 1; Lemma Tag 00PD (lemma-characterize-dvr), (3) <=> (4) <=> (5)"
+   }
+  },
+  {
+   "text": "For every associated prime $\\mathfrak p$ of $A/tA$ and every associated prime $\\mathfrak q$ of the $\\widehat A$-module $\\widehat A/\\mathfrak p\\widehat A$, the localization $\\widehat A_{\\mathfrak q}$ is a discrete valuation ring, in particular an integral domain: apply [lem-weil-pbc-codimension-one-analytically-unramified] to the Noetherian local ring $(A,\\mathfrak m)$ and the prime $\\mathfrak p$, whose hypotheses are Step 3 ($A_{\\mathfrak p}$ is a DVR) and the hypothesis that $\\mathfrak p$ is analytically unramified [def-weil-pbc-analytically-unramified].",
+   "uses": [
+    "lem-weil-pbc-codimension-one-analytically-unramified",
+    "def-weil-pbc-analytically-unramified"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra, proof of Lemma Tag 0330 (lemma-criterion-analytically-unramified), lines 45934-45962: 'By Lemma lemma-codimension-1-analytically-unramified we see that (R^)_{q_ij} is regular' and 'hence a domain'; Lemma Tag 032Z gives a DVR, which is a domain by definition, so Lemma 00NP (lemma-regular-domain) is not needed"
+   }
+  },
+  {
+   "text": "Every associated prime $\\mathfrak Q$ of the $\\widehat A$-module $\\widehat A/t\\widehat A$ is an associated prime of $\\widehat A/\\mathfrak p\\widehat A$ for some associated prime $\\mathfrak p$ of $A/tA$; hence by Step 4 $\\widehat A_{\\mathfrak Q}$ is an integral domain. Indeed apply the equality case of [lem-weil-pbc-associated-primes-flat-base-change] to the Noetherian ring $A$, the ring map $A\\to S=\\widehat A$, $M=A/tA$ and $N=\\widehat A$, which is $A$-flat by Step 1: $\\operatorname{Ass}_{\\widehat A}((A/tA)\\otimes_A\\widehat A)=\\bigcup_{\\mathfrak p\\in\\operatorname{Ass}_A(A/tA)}\\operatorname{Ass}_{\\widehat A}(\\widehat A/\\mathfrak p\\widehat A)$. Tensoring the exact sequence $A\\xrightarrow{t}A\\to A/tA\\to0$ with $\\widehat A$ (right exactness of $-\\otimes_A\\widehat A$) identifies $(A/tA)\\otimes_A\\widehat A$ with $\\widehat A/t\\widehat A$ as $\\widehat A$-modules, and an isomorphism of modules preserves annihilators of corresponding elements, hence associated primes.",
+   "uses": [
+    "lem-weil-pbc-associated-primes-flat-base-change",
+    "lem-weil-pbc-noetherian-completion-flat"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra, proof of Lemma Tag 0330 (lemma-criterion-analytically-unramified), lines 45934-45962: 'By Lemma lemma-bourbaki we see that Ass(R^/xR^) = union of Ass(R^/pR^) = {q_ij}' (Lemma Tag 0312)"
+   }
+  },
+  {
+   "text": "Let $y\\in\\widehat A$ with $y^2=0$. Then $y=ty'$ for some $y'\\in\\widehat A$ with $y'^2=0$. Proof: for each associated prime $\\mathfrak Q$ of $\\widehat A/t\\widehat A$ the image $y/1$ of $y$ in the domain $\\widehat A_{\\mathfrak Q}$ (Step 5) satisfies $(y/1)^2=0$, so $y/1=0$, i.e. $sy=0$ for some $s\\in\\widehat A\\setminus\\mathfrak Q$ [def-weil-pbc-localization-at-prime]; then also $s\\bar y=0$ for the class $\\bar y$ of $y$ in $\\widehat A/t\\widehat A$, so $\\bar y/1=0$ in $(\\widehat A/t\\widehat A)_{\\mathfrak Q}$ [def-weil-pbc-module-localization]. As $\\widehat A$ is Noetherian (Step 1), [lem-weil-pbc-module-injects-localizations-associated-primes] applied to the $\\widehat A$-module $\\widehat A/t\\widehat A$ gives $\\bar y=0$, i.e. $y=ty'$ with $y'\\in\\widehat A$. Then $t^2y'^2=y^2=0$, and since $t$ is a nonzerodivisor of $\\widehat A$ (Step 1), $y'^2=0$.",
+   "uses": [
+    "def-weil-pbc-localization-at-prime",
+    "def-weil-pbc-module-localization",
+    "lem-weil-pbc-module-injects-localizations-associated-primes",
+    "lem-weil-pbc-adic-completion-noetherian"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra, proof of Lemma Tag 0330 (lemma-criterion-analytically-unramified), lines 45934-45962: 'Let y in R^ with y^2 = 0 ... y maps to zero in (R^)_{q_ij}. Hence y maps to zero in R^/xR^ by Lemma lemma-zero-at-ass-zero. Hence y = xy'. Since x is a nonzerodivisor ... (y')^2 = 0' (Lemma Tag 0311)"
+   }
+  },
+  {
+   "text": "Every $y\\in\\widehat A$ with $y^2=0$ is $0$. By induction on $n\\ge0$ we show the claim $C(n)$: every $y\\in\\widehat A$ with $y^2=0$ lies in $t^n\\widehat A$. $C(0)$ is trivial. Assume $C(n)$ and let $y^2=0$; by Step 6 $y=ty'$ with $y'^2=0$, by $C(n)$ $y'\\in t^n\\widehat A$, so $y\\in t^{n+1}\\widehat A$; this is $C(n+1)$. Hence $y\\in\\bigcap_{n\\ge0}t^n\\widehat A=\\bigcap_{n\\ge0}(t\\widehat A)^n\\widehat A$. The ideal $t\\widehat A$ lies in the maximal ideal $\\mathfrak m\\widehat A$ of the local ring $\\widehat A$ (Step 1), which is its Jacobson radical; $\\widehat A$ is Noetherian and finitely generated as a module over itself. So [lem-weil-pbc-krull-intersection-jacobson] (with $R=M=\\widehat A$, $I=t\\widehat A$) gives $\\bigcap_n(t\\widehat A)^n\\widehat A=0$, and $y=0$.",
+   "uses": [
+    "lem-weil-pbc-krull-intersection-jacobson",
+    "lem-weil-pbc-local-completion-local-ring",
+    "lem-weil-pbc-adic-completion-noetherian"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra, proof of Lemma Tag 0330 (lemma-criterion-analytically-unramified), lines 45934-45962: 'Hence we conclude that y in the intersection of x^n R^ = (0) (Lemma lemma-intersect-powers-ideal-module-zero)' (Krull's intersection theorem, Lemma Tag 00IP; here via its Jacobson-radical form, Lemma Tag 00IQ (2)); the induction behind 'hence' is written out"
+   }
+  },
+  {
+   "text": "$\\widehat A$ is reduced, so $A$ is analytically unramified [def-weil-pbc-analytically-unramified]. Let $z\\in\\widehat A$ be nilpotent and let $n\\ge1$ be least with $z^n=0$. If $n\\ge2$, put $w=z^{n-1}$; then $w^2=z^{2n-2}=0$ because $2n-2\\ge n$, so $w=0$ by Step 7, contradicting the minimality of $n$. Hence $n=1$ and $z=0$.",
+   "uses": [
+    "def-weil-pbc-analytically-unramified"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra, proof of Lemma Tag 0330 (lemma-criterion-analytically-unramified), lines 45934-45962: the proof shows only that square-zero elements vanish; the reduction from nilpotent to square-zero is written out here"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-adic-completion",
+  "lem-weil-pbc-adic-completion-noetherian",
+  "lem-weil-pbc-local-completion-local-ring",
+  "lem-weil-pbc-noetherian-completion-flat",
+  "def-weil-pbc-flat-ring-map",
+  "lem-weil-pbc-noetherian-height-quotient-bound",
+  "lem-weil-pbc-localization-dimension-chains-below-prime",
+  "def-weil-pbc-localization-at-prime",
+  "lem-weil-pbc-localization-noetherian",
+  "def-weil-regular-scheme",
+  "lem-weil-pbc-regular-local-dim-one-iff-normal",
+  "lem-weil-pbc-codimension-one-analytically-unramified",
+  "def-weil-pbc-analytically-unramified",
+  "lem-weil-pbc-associated-primes-flat-base-change",
+  "def-weil-pbc-module-localization",
+  "lem-weil-pbc-module-injects-localizations-associated-primes",
+  "lem-weil-pbc-krull-intersection-jacobson"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Algebra, Lemma Tag 0330 (lemma-criterion-analytically-unramified), proof, lines 45934-45962; tag verified in literature/stacks-project/tags/tags"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -36,10 +180,31 @@
    "results": "no analytically unramified criterion in current-head sparse Mathlib source",
    "date": "2026-10-10",
    "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rn 'analytically\\|AnalyticallyUnramified' and 'IsReduced.*AdicCompletion\\|AdicCompletion.*IsReduced' in ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib",
+   "results": "none",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "completion of Noetherian local domain is reduced if quotient by nonzero element has regular localizations at associated primes",
+   "results": "isReduced_ofLocalizationMaximal, isReduced_localizationPreserves, instIsReducedLocalization (Mathlib.RingTheory.LocalProperties.Reduced), associated-prime localization lemmas (AssociatedPrime.Localization); nothing on completions",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Noetherian local domain is analytically unramified: adic completion at maximal ideal is reduced",
+   "results": "Algebra.FormallyUnramified lemmas (Mathlib.RingTheory.Unramified.*); no reducedness of AdicCompletion",
+   "date": "2026-10-10",
+   "verdict": "no match"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "worker",
@@ -59,5 +224,13 @@
   }
  },
  "chapter": "sec-proper-base-change",
- "unit": "sk-thm-p1"
+ "unit": "sk-thm-p1",
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "lem-weil-pbc-analytic-unramified-principal-criterion",
+  "worker": "stage1",
+  "summary": "Not a Mathlib leaf: Mathlib (slopmaster2 checkout) has no analytically unramified notion and no reducedness result for AdicCompletion (grep, LeanSearch, LeanFinder recorded). Statement checked against Algebra 0330 (lines 45917-45932) hypothesis by hypothesis and kept; stmt_deps gain def-weil-pbc-localization-at-prime and def-weil-pbc-adic-completion (A_p and the completion are named in it). Proof written in 8 steps from the proof of 0330 (lines 45934-45962), following each \\ref: completion Noetherian (0316), local (05GI/05GG), flat (00MB) so t is a nonzerodivisor; associated primes of A/tA have height one by Krull (00KW) so A_p regular of dimension one is a DVR (00PD via lem-weil-pbc-regular-local-dim-one-iff-normal); 032Z (new node) gives DVR localizations of the completion at Ass(A^/pA^); 0312 (Bourbaki, new node) gives Ass(A^/tA^) = union of these; 0311 (new node) gives y = ty' for square-zero y; induction and Krull intersection (00IP, via the existing Jacobson form 00IQ(2) leaf) give y = 0; reduction from nilpotent to square-zero written out. The source's 'regular, hence a domain' (00NP) is replaced by the fact that 032Z already concludes DVR, a domain by definition. Three new unsplit nodes: lem-weil-pbc-codimension-one-analytically-unramified (032Z), lem-weil-pbc-associated-primes-flat-base-change (0312), lem-weil-pbc-module-injects-localizations-associated-primes (0311). All cited nodes are in unit sk-thm-p1 or are definitions.",
+  "blueprint": "the item serves lem-weil-pbc-normal-constant-generic at step 4 of its split (source: Lemma 59.73.13 (Tag 09Z5), proof of (1)) (via 6 created nodes); its steps realize: 0330: heights one, A_p DVR, 032Z and 0312 for the associated primes of A^/tA^, 0311 and Krull intersection for nilpotents (entry written by L at review; the worker predates the rule of 2026-10-10)"
+ },
+ "reviewed": "2026-10-10 L: 8 steps checked against the 0330 proof: completion flat so t regular on A^, associated primes of A/tA of height one (Krull), A_p a DVR (00PD), (A^)_q DVR by 032Z (new), Ass(A^/tA^) from 0312 (new), square-zero y = t y' by 0311 (new), Krull intersection; citer normal-nagata-monogenic-n1 matches"
 }

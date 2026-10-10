@@ -1,0 +1,87 @@
+{
+ "id": "lem-weil-pbc-associated-primes-flat-base-change",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-normal-constant-generic",
+   "place": "step 4 of its split (source: Lemma 59.73.13 (Tag 09Z5), proof of (1))",
+   "via": [
+    "lem-weil-pbc-analytic-unramified-principal-criterion",
+    "lem-weil-pbc-normal-nagata-monogenic-n1",
+    "lem-weil-pbc-nagata-universally-japanese",
+    "lem-weil-pbc-finite-type-z-domain-normalization-finite",
+    "lem-weil-pbc-smooth-over-normal-ring-normal",
+    "lem-weil-pbc-etale-over-normal-ring-normal",
+    "lem-weil-pbc-etale-colimit-normal-local-domain"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Associated primes after a flat base change (Bourbaki)",
+ "statement": "Let $R\\to S$ be a homomorphism of commutative rings, $M$ an $R$-module and $N$ an $S$-module which is flat as an $R$-module [def-weil-pbc-flat-ring-map]. For a ring $T$ and a $T$-module $P$ call a prime ideal $\\mathfrak q\\subset T$ an associated prime of $P$ if $\\mathfrak q=\\operatorname{Ann}_T(z)=\\{a\\in T:az=0\\}$ for some $z\\in P$, and write $\\operatorname{Ass}_T(P)$ for the set of them. Then $$\\operatorname{Ass}_S(M\\otimes_RN)\\supseteq\\bigcup_{\\mathfrak p\\in\\operatorname{Ass}_R(M)}\\operatorname{Ass}_S(N/\\mathfrak pN),$$ where $M\\otimes_RN$ is an $S$-module through $N$; and if $R$ is Noetherian [def-weil-pbc-noetherian-ring], equality holds.",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Algebra, Lemma Tag 0312 (lemma-bourbaki), lines 15774-15830 (statement and proof); tag verified in literature/stacks-project/tags/tags: 0312,algebra-lemma-bourbaki"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-flat-ring-map",
+  "def-weil-pbc-noetherian-ring"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "associated primes of base change of module along flat ring map are associated primes of S/pS for p associated prime",
+   "results": "associatedPrimes, IsAssociatedPrime (Mathlib.RingTheory.Ideal.AssociatedPrime.Basic); Module.associatedPrimes.mem_associatedPrimes_atPrime_of_mem_associatedPrimes, preimage_comap_associatedPrimes_eq_associatedPrimes_of_isLocalizedModule (AssociatedPrime.Localization): localization only, not a general flat base change",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "associated primes of M tensor N for N flat over Noetherian R equal union over associated primes p of M of associated primes of N/pN",
+   "results": "Module.Flat.iff_lift_lsmul_comp_subtype_injective, Module.Flat.iff_rTensor_injective, associatedPrimes.prod, Module.Flat.ker_lTensor_eq; none on associated primes of a tensor product",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "associatedPrimes, TensorProduct",
+   "results": "no results",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rln associatedPrimes in ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib (Lasker.lean, Ideal/AssociatedPrime/{Basic,Localization,Finiteness}.lean, Regular/{LinearMap,IsSMulRegular}.lean), then grep those hits for tensor|Flat|baseChange",
+   "results": "no hit; the declarations of AssociatedPrime/Basic.lean and Localization.lean read: only submodule, product, exact-sequence and localization statements",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-analytic-unramified-principal-criterion",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "reviewed": "2026-10-10 L: statement checked against 0312; no blueprint node states it (searched)"
+}
