@@ -1,8 +1,8 @@
 # Work queue
 
-887 items; claim with `tools/claim.py next <group> [--stage N]`.
+886 items; claim with `tools/claim.py next <group> [--stage N]`.
 
-## Stage 1: nodes to split (328)
+## Stage 1: nodes to split (326)
 
 | node | distance to a target | Lean state on the done branch |
 |---|---|---|
@@ -13,7 +13,6 @@
 | `lem-weil-pbc-etale-fibre-specialization-bound` | 2007 | none |
 | `lem-weil-pbc-sets-etale-inverse-image-restriction` | 2009 | none |
 | `lem-weil-pbc-sets-etale-section-continuity` | 2009 | none |
-| `def-sc-topological-abelian-cohomology` | 2011 | none |
 | `lem-sc-affine-cap-section-open` | 2011 | none |
 | `lem-sc-ample-finite-principal-affine` | 2011 | none |
 | `lem-sc-cohomology-closed-immersion-pushforward` | 2011 | none |
@@ -32,13 +31,13 @@
 | `lem-weil-pbc-etale-cohomology-over-open` | 3008 | none |
 | `lem-exc-etale-field-gsets` | 3009 | none |
 | `lem-exc-field-sections-stalk-invariants` | 3010 | none |
-| `lem-sc-injective-module-abelian-acyclic-zariski` | 3010 | none |
 | `lem-sc-point-tangent-separation-closed-immersion` | 3010 | none |
 | `lem-galois-fpqc-singleton-fully-faithful-0241` | 3011 | none |
 | `lem-pc-affine-nonzerodivisor-complement-dense` | 3011 | none |
 | `lem-pc-base-change-closure-components` | 3011 | none |
 | `lem-pc-quasi-compact-local-on-target` | 3011 | none |
 | `lem-sc-fibre-dimension-after-base-change` | 3011 | none |
+| `lem-weil-pbc-ringed-site-injective-module-cech-acyclic` | 3011 | none |
 | `lem-exc-rg-group-algebra-functorial-injective-embeddings` | 3012 | none |
 | `lem-exc-rg-open-stabilizer-adjoint` | 3012 | none |
 | `lem-pc-affine-finite-type-algebra` | 3012 | none |
@@ -49,7 +48,6 @@
 | `lem-pc-proper-descends-field` | 3012 | none |
 | `lem-sc-coherent-free-stalks-locally-free` | 3012 | none |
 | `lem-sc-dvr-fg-torsionfree-free` | 3012 | none |
-| `lem-sc-exterior-top-direct-sum` | 3012 | none |
 | `lem-sc-irreducible-product-over-field` | 3012 | none |
 | `lem-sc-p1-duality-pairing-naturality` | 3012 | none |
 | `lem-sc-p1-ext-coherent-dim-one-vanishing` | 3012 | none |
@@ -335,7 +333,7 @@
 | `def-exc-jacobian-presentation` | - | none |
 | `lem-zl-noether-normalization-dimension` | - | none |
 
-## Stage 2: nodes to state (559)
+## Stage 2: nodes to state (560)
 
 | node | distance to Mathlib | kind |
 |---|---|---|
@@ -416,6 +414,7 @@
 | `lem-sc-dvr-saturation-line` | 1 | state |
 | `lem-sc-etale-affine-over-curve` | 1 | state |
 | `lem-sc-ext-torsor` | 1 | state |
+| `lem-sc-exterior-top-direct-sum` | 1 | state |
 | `lem-sc-finite-discrete-separated-affine` | 1 | state |
 | `lem-sc-four-lemma` | 1 | state |
 | `lem-sc-glue-component-line-bundles` | 1 | state |
@@ -899,7 +898,7 @@
 | `lem-weil-pbc-p1-field-dimension-one` | 4 | state |
 | `lem-weil-pbc-projective-space-zero-isomorphism` | 4 | state |
 
-Not open yet: 348 nodes that wait for stage 1, 1078 nodes that wait for a statement dependency.
+Not open yet: 346 nodes that wait for stage 1, 1080 nodes that wait for a statement dependency.
 
 ## Stage 3: modules to prove (0)
 
