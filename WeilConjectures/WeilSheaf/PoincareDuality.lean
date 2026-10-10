@@ -7,8 +7,10 @@ module
 
 public import Mathlib.AlgebraicGeometry.Geometrically.Connected
 public import Mathlib.AlgebraicGeometry.Morphisms.Proper
+public import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.Smooth
 public import WeilConjectures.WeilSheaf.Cohomology
 public import WeilConjectures.WeilSheaf.Constant
+public import WeilConjectures.WeilSheaf.Finiteness
 public import WeilConjectures.ZetaLinearAlgebra.TraceCup
 
 /-!
@@ -113,30 +115,61 @@ section Ingredients
 variable (k₀ l) (X : Scheme.{u}) [X.Over (Spec (CommRingCat.of k₀))]
 
 /-- Blueprint `sk-lem-finite` (constant-sheaf clause, `prop-cohomological-finiteness`): the
-cohomology `Hⁱ(X ⊗ k̄, ℚ̄_ℓ)` of a smooth `k₀`-scheme of finite type and pure dimension `d`
-vanishes for `i ∉ [0, 2d]`: the fibrewise cohomological dimension of `X ⊗ k̄` over the
-algebraically closed field `k̄` is `2d`. -/
-theorem subsingleton_cohomology_adicConstant (d : ℕ)
-    [QuasiCompact (X ↘ Spec (CommRingCat.of k₀))] [QuasiSeparated (X ↘ Spec (CommRingCat.of k₀))]
-    [LocallyOfFiniteType (X ↘ Spec (CommRingCat.of k₀))]
+cohomology `Hⁱ(X ⊗ k̄, ℚ̄_ℓ)` of a smooth proper `k₀`-scheme of pure dimension `d` vanishes for
+`i ∉ [0, 2d]`, the geometric fiber `X ⊗ k̄`, smooth of relative dimension `d` over `k̄`, having
+dimension at most `d`. -/
+theorem subsingleton_cohomology_adicConstant (d : ℕ) [IsProper (X ↘ Spec (CommRingCat.of k₀))]
     [SmoothOfRelativeDimension d (X ↘ Spec (CommRingCat.of k₀))] {i : ℤ}
     (hi : i < 0 ∨ 2 * d < i) :
-    Subsingleton ((adicConstant k₀ l X).cohomology i).carrier :=
-  sorry
+    Subsingleton ((adicConstant k₀ l X).cohomology i).carrier := by
+  have : SmoothOfRelativeDimension d
+      (X ↘ Spec (CommRingCat.of k₀)).geometricFiberToAlgebraicClosure :=
+    have := smoothOfRelativeDimension_isStableUnderBaseChange (n := d)
+    MorphismProperty.IsStableUnderBaseChange.of_isPullback
+      (P := @SmoothOfRelativeDimension d) (IsPullback.of_hasPullback _ _) ‹_›
+  exact subsingleton_cohomology_adicConstant_of_isProper k₀ l X d
+    (topologicalKrullDim_le_of_smoothOfRelativeDimension
+      (X ↘ Spec (CommRingCat.of k₀)).geometricFiberToAlgebraicClosure d) i hi
 
-/-- Blueprint `sk-cor-trace`, `sk-thm-derived-duality` (degreewise, with `K = ℚ̄_ℓ`, via
-`sk-thm-transport`) and `sk-thm-frobenius` (a), at the coefficient stage `ℚ̄_ℓ`: for `X`
+/-- Blueprint `thm-pod-proper-poincare-duality` (with `K = ℚ̄_ℓ`, via
+`thm-pod-qbar-coefficient-pairing`), read through `def-weil-poincare-trace-cup`: for `X`
 smooth proper geometrically connected of pure dimension `d` over `k₀`, the cohomology
 `H^• = H^•(X ⊗ k̄, ℚ̄_ℓ)` carries a trace–cup structure — the graded-commutative cup product of
-`sk-def-trace-cup`, compatible with Frobenius, and the trace `tr : H^{2d} ⟶ ℚ̄_ℓ(-d)`, on whose
-target Frobenius acts by `q^d` — whose trace is an isomorphism and whose pairings
-`⟨x, y⟩ = tr (x ⌣ y)` are perfect. -/
+`def-weil-poincare-trace-cup`, compatible with Frobenius, and the trace
+`tr : H^{2d} ⟶ ℚ̄_ℓ(-d)`, on whose target Frobenius acts by `q^d` — whose pairings
+`⟨x, y⟩ = tr (x ⌣ y) : Hⁱ × H^{2d-i} ⟶ ℚ̄_ℓ(-d)` are perfect for `0 ≤ i ≤ 2d`.
+
+Weil complexes have no cup product, trace map or derived tensor product yet: the degreewise
+duality of `AlgebraicGeometry.WeilSheaf.exists_isPerfPair_compactlySupportedCohomology_adicConstant`
+only provides *some* perfect Frobenius-invariant pairings, which need not come from a
+graded-commutative cup product (in the middle degree `i = d` such a pairing must be
+`(-1)^d`-symmetric). -/
+theorem exists_traceCup_isPerfPair_pairing (d : ℕ) [IsProper (X ↘ Spec (CommRingCat.of k₀))]
+    [SmoothOfRelativeDimension d (X ↘ Spec (CommRingCat.of k₀))]
+    [GeometricallyConnected (X ↘ Spec (CommRingCat.of k₀))] :
+    ∃ T : FrobeniusModule.TraceCup.{u + 1} (adicConstant k₀ l X).cohomology (2 * d)
+      ((Nat.card k₀ : PadicAlgCl l) ^ d),
+      ∀ (i j : ℤ) (h : i + j = 2 * d), 0 ≤ i → i ≤ 2 * d → (T.pairing i j h).IsPerfPair :=
+  sorry
+
+/-- Blueprint `thm-weil-poincare-duality` (trace and pairing clauses): for `X` smooth proper
+geometrically connected of pure dimension `d` over `k₀`, the cohomology
+`H^• = H^•(X ⊗ k̄, ℚ̄_ℓ)` carries a trace–cup structure — the graded-commutative cup product of
+`def-weil-poincare-trace-cup`, compatible with Frobenius, and the trace
+`tr : H^{2d} ⟶ ℚ̄_ℓ(-d)`, on whose target Frobenius acts by `q^d` — whose trace is an
+isomorphism and whose pairings `⟨x, y⟩ = tr (x ⌣ y)` are perfect.
+
+Outside `[0, 2d]` both groups vanish, and the trace is an isomorphism since the pairing
+`H^{2d} × H⁰ ⟶ ℚ̄_ℓ(-d)` is perfect and `H⁰ = ℚ̄_ℓ` is a line. -/
 theorem exists_traceCup_isPerfect (d : ℕ) [IsProper (X ↘ Spec (CommRingCat.of k₀))]
     [SmoothOfRelativeDimension d (X ↘ Spec (CommRingCat.of k₀))]
     [GeometricallyConnected (X ↘ Spec (CommRingCat.of k₀))] :
     ∃ T : FrobeniusModule.TraceCup.{u + 1} (adicConstant k₀ l X).cohomology (2 * d)
-      ((Nat.card k₀ : PadicAlgCl l) ^ d), T.IsPerfect :=
-  sorry
+      ((Nat.card k₀ : PadicAlgCl l) ^ d), T.IsPerfect := by
+  obtain ⟨T, hT⟩ := exists_traceCup_isPerfPair_pairing k₀ l X d
+  exact ⟨T, T.isPerfect_of_isPerfPair hT
+    (fun _ hi ↦ subsingleton_cohomology_adicConstant k₀ l X d hi)
+    (finrank_cohomology_zero_adicConstant k₀ l X)⟩
 
 /-- Blueprint `sk-def-weil` (Frobenius-operator convention, `def-weil-frobenius-detailed`): for a
 finite extension `k₀'/k₀` of degree `r`, the cohomology of the base change `X ×_{k₀} k₀'` is

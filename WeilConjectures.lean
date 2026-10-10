@@ -1112,6 +1112,7 @@ public import WeilConjectures.Mathlib.LinearAlgebra.Matrix.GeneralLinearGroup.De
 public import WeilConjectures.Mathlib.LinearAlgebra.Matrix.Rank
 public import WeilConjectures.Mathlib.LinearAlgebra.Matrix.SchurComplement
 public import WeilConjectures.Mathlib.LinearAlgebra.Matrix.ToLin
+public import WeilConjectures.Mathlib.LinearAlgebra.PerfectPairing.Basic
 public import WeilConjectures.Mathlib.LinearAlgebra.TensorProduct.Associator
 public import WeilConjectures.Mathlib.LinearAlgebra.TensorProduct.Basic
 public import WeilConjectures.Mathlib.LinearAlgebra.TensorProduct.Basis

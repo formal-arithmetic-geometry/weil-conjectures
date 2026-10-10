@@ -11,7 +11,7 @@ public import WeilConjectures.WeilSheaf.Cohomology
 public import WeilConjectures.WeilSheaf.Constant
 public import WeilConjectures.WeilSheaf.ConstantTwistCohomology
 public import WeilConjectures.WeilSheaf.LowerStar
-public import WeilConjectures.WeilSheaf.PoincareDuality
+public import Mathlib.AlgebraicGeometry.Morphisms.Proper
 public import WeilConjectures.WeilSheaf.ProperCohomology
 public import WeilConjectures.WeilSheaf.StalkPairing
 
@@ -351,8 +351,8 @@ variable (k₀ l X)
 
 If `X` is proper over `k₀` and the geometric fiber `X ⊗ k̄` has dimension at most `e`, the
 cohomology `Hʳ(X ⊗ k̄, ℚ̄_ℓ)` of the constant Weil sheaf vanishes for `r < 0` and for `r > 2e`.
-For `X` smooth of pure dimension `d` the same vanishing, without properness, is
-`AlgebraicGeometry.WeilSheaf.subsingleton_cohomology_adicConstant`. -/
+For `X` smooth of pure dimension `d` this is
+`AlgebraicGeometry.WeilSheaf.subsingleton_cohomology_adicConstant`, with `e = d`. -/
 theorem subsingleton_cohomology_adicConstant_of_isProper (e : ℕ)
     (he : topologicalKrullDim (X ↘ Spec (CommRingCat.of k₀)).geometricFiber ≤ (e : WithBot ℕ∞))
     (r : ℤ) (hr : r < 0 ∨ 2 * (e : ℤ) < r) :

@@ -5,6 +5,7 @@ Authors: Claude
 -/
 module
 
+public import WeilConjectures.Mathlib.LinearAlgebra.PerfectPairing.Basic
 public import WeilConjectures.ZetaLinearAlgebra.FrobeniusModule
 public import WeilConjectures.ZetaLinearAlgebra.Pairing
 
@@ -159,6 +160,42 @@ theorem roots_charpoly_frobeniusEnd [IsAlgClosed K] (hc : c ≠ 0) (i j : ℤ) (
       (H i).frobeniusEnd.charpoly.roots.map fun α ↦ c / α :=
   LinearMap.charpoly_roots_of_similitude (p := T.pairing i j h) hc
     (T.pairing_frobenius i j h)
+
+
+/-- **The trace from a perfect pairing.** If the trace–cup pairing `H^n × H^0 ⟶ K` is perfect and
+`H^0` is a line, then the trace `tr : H^n ⟶ K` is bijective: `H^n` is then a line too, and the
+trace is nonzero since the pairing `⟨x, y⟩ = tr (x ⌣ y)` is. -/
+theorem bijective_trace_of_isPerfPair (hp : (T.pairing n 0 (add_zero n)).IsPerfPair)
+    (h0 : Module.finrank K (H 0).carrier = 1) : Function.Bijective T.trace := by
+  have hn : Module.finrank K (H n).carrier = Module.finrank K K := by
+    rw [Module.finrank_of_isPerfPair (T.pairing n 0 (add_zero n)), h0, Module.finrank_self]
+  obtain ⟨y, hy⟩ := (Module.finrank_pos_iff_exists_ne_zero (R := K) (M := (H 0).carrier)).1
+    (by rw [h0]; exact Nat.one_pos)
+  have hy' : (T.pairing n 0 (add_zero n)).flip y ≠ 0 := fun h ↦
+    hy ((LinearMap.IsPerfPair.bijective_right (T.pairing n 0 (add_zero n))).1
+      (h.trans (map_zero _).symm))
+  obtain ⟨x, hx⟩ : ∃ x, T.pairing n 0 (add_zero n) x y ≠ 0 := by
+    by_contra! H
+    exact hy' (LinearMap.ext H)
+  have hsurj : Function.Surjective T.trace := fun a ↦
+    ⟨(a / T.pairing n 0 (add_zero n) x y) • T.cup n 0 n (add_zero n) x y, by
+      rw [map_smul, smul_eq_mul, ← pairing_apply, div_mul_cancel₀ _ hx]⟩
+  exact ⟨(LinearMap.injective_iff_surjective_of_finrank_eq_finrank hn).2 hsurj, hsurj⟩
+
+/-- **Perfectness from the complementary range.** If the trace–cup pairings `H^i × H^j ⟶ K` are
+perfect for `0 ≤ i ≤ n`, `H^i` vanishes for `i ∉ [0, n]`, and `H^0` is a line, then the
+trace–cup structure is perfect. -/
+theorem isPerfect_of_isPerfPair
+    (hp : ∀ (i j : ℤ) (h : i + j = n), 0 ≤ i → i ≤ n → (T.pairing i j h).IsPerfPair)
+    (hvan : ∀ i, i < 0 ∨ n < i → Subsingleton (H i).carrier)
+    (h0 : Module.finrank K (H 0).carrier = 1) : T.IsPerfect := by
+  have hp' (i j : ℤ) (h : i + j = n) : (T.pairing i j h).IsPerfPair := by
+    by_cases hi : 0 ≤ i ∧ i ≤ n
+    · exact hp i j h hi.1 hi.2
+    · have := hvan i (by omega)
+      have := hvan j (by omega)
+      exact LinearMap.isPerfPair_of_subsingleton _
+  exact ⟨T.bijective_trace_of_isPerfPair (hp' n 0 (add_zero n)) h0, hp'⟩
 
 end TraceCup
 
