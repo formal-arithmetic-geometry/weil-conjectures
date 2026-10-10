@@ -1,0 +1,83 @@
+{
+ "id": "lem-weil-pbc-h1-injective-differentials-injective-char-p",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-finite-etale-lifting",
+   "place": "step 7 of its split (Lemma 0GS2 essential-surjectivity paragraphs): residue-field differential injection in the Stacks 07NQ formal-smoothness input; within it, the characteristic-p case: passage from injectivity of $H_1(L_{K/k})\\to\\mathfrak m/\\mathfrak m^2$ to injectivity of $\\Omega_{k/\\mathbf F_p}\\otimes_kK\\to\\Omega_{C/\\mathbf F_p}\\otimes_CK$ (Stacks 07E5, 'Equivalence of (3) and (4)', used by 07EL (2) => (5))",
+   "via": [
+    "lem-weil-pbc-fs-adic-field-differentials-injective",
+    "lem-weil-pbc-flat-formally-smooth-closed-fibre-adic",
+    "lem-weil-pbc-fs-adic-lift-from-residue-field",
+    "lem-weil-pbc-fs-adic-lift-over-finite-coefficient-map",
+    "lem-weil-pbc-formally-smooth-complete-local-regular",
+    "lem-weil-pbc-another-helper-g-ring",
+    "lem-weil-pbc-polynomial-complete-local-formal-fibres",
+    "lem-weil-pbc-finite-type-over-g-ring",
+    "lem-weil-pbc-finite-type-z-g-ring",
+    "lem-weil-pbc-finite-etale-lifting-limit-descent",
+    "lem-weil-pbc-finite-etale-lifting-essential-surjectivity"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "In characteristic p, injectivity of H_1(L_{K/k}) -> m/m^2 gives injectivity of Omega_{k/F_p} (x) K -> Omega_{A/F_p} (x) K",
+ "statement": "Let $k$ be a field of characteristic $p>0$ [def-pc-field-characteristic] and $(A,\\mathfrak m,K)$ a Noetherian local $k$-algebra [def-weil-pbc-noetherian-ring] with residue field $K=A/\\mathfrak m$; $k$, $A$, $K$ are $\\mathbf F_p$-algebras. Let $\\Omega$ and $\\mathrm d$ be as in [def-weil-pbc-kahler-differentials]. Let $H_1(L_{K/k})$ and $H_1(L_{K/A})$ be the first homologies of the naive cotangent complexes of the canonical presentations $k[K]\\to K$ and $A[K]\\to K$ [def-weil-pbc-smooth-ring-map]; the inclusion $k[K]\\to A[K]$ is a morphism of presentations over the square $k\\to A$, $\\mathrm{id}_K$, and so induces a $K$-linear map $H_1(L_{K/k})\\to H_1(L_{K/A})$ [lem-weil-pbc-nl-presentation-h1-functoriality]; the canonical map $\\gamma:H_1(L_{K/k})\\to\\mathfrak m/\\mathfrak m^2$ is its composite with the isomorphism $H_1(L_{K/A})\\cong\\mathfrak m/\\mathfrak m^2$ of [lem-weil-pbc-jacobi-zariski-surjection-h1] for the surjection $A\\to K$. Let $\\lambda:\\Omega_{k/\\mathbf F_p}\\otimes_kK\\to\\Omega_{A/\\mathbf F_p}\\otimes_AK$ be the $K$-linear map $\\mathrm da\\otimes x\\mapsto\\mathrm d(a\\cdot1_A)\\otimes x$. If $\\gamma$ is injective, then $\\lambda$ is injective.",
+ "source": {
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "More on Algebra, Proposition Tag 07E5 (proposition-characterization-geometrically-regular, line 8697), proof, paragraph 'Equivalence of (3) and (4)' (lines 8763-8795): the Jacobi-Zariski sequences of F_p -> A -> K and F_p -> k -> K, with H_1(L_{K/A}) = m/m^2 and H_1(L_{K/F_p}) = 0 (Algebra 0322), show that the kernels of H_1(L_{K/k}) -> m/m^2 and of Omega_{k/F_p} (x) K -> Omega_{A/F_p} (x) K have the same dimension; the direction (3) => (4) is stated here, without the regularity of A, which the argument does not use (tag verified in stacks-project/tags/tags: 07E5,more-algebra-proposition-characterization-geometrically-regular)"
+ },
+ "stmt_deps": [
+  "def-pc-field-characteristic",
+  "def-weil-pbc-noetherian-ring",
+  "def-weil-pbc-kahler-differentials",
+  "def-weil-pbc-smooth-ring-map",
+  "lem-weil-pbc-nl-presentation-h1-functoriality",
+  "lem-weil-pbc-jacobi-zariski-surjection-h1"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "regular local ring H1 cotangent of residue field injective implies Kähler differentials of base field injective into differentials of local ring tensor residue field",
+   "results": "KaehlerDifferential.kerCotangentToTensor (Kaehler/Basic); Algebra.FormallySmooth.iff_injective_cotangentComplexBaseChange(_residueField), iff_injective_lTensor_residueField (Smooth/Local); Algebra.Extension.h1Cotangentι_injective; Algebra.FormallySmooth.kerCotangentToTensor_injective_iff (Smooth/Basic)",
+   "date": "2026-10-10",
+   "verdict": "no match (criteria for formal smoothness by presentations; no comparison of H_1(L_{K/k}) with m/m^2 against Omega_k (x) K)"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Noetherian local algebra over field of characteristic p: H_1(L_{K/k}) → m/m^2 injective implies Ω_{k/F_p} ⊗ K → Ω_{A/F_p} ⊗ K injective",
+   "results": "Algebra.FormallySmooth.iff_injective_cotangentComplexBaseChange_residueField, iff_injective_lTensor_residueField (Smooth/Local), kerCotangentToTensor_injective_iff (Smooth/Basic), SubmersivePresentation.cotangentComplex_injective, Generators.CotangentSpace.map_toComp_injective (Kaehler/JacobiZariski)",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rln 'H1Cotangent' Mathlib; grep -rn 'ResidueField' Mathlib/RingTheory/Kaehler/*.lean Mathlib/RingTheory/Extension/Cotangent/*.lean; grep -rln 'GeometricallyRegular' Mathlib",
+   "results": "H1Cotangent only in Kaehler/JacobiZariski, Smooth/*, Etale/*, Extension/*: Jacobi-Zariski sequences, nothing about residue fields of local rings over a field; no ResidueField in Kaehler/ or Extension/Cotangent/; no geometric regularity",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-fs-adic-field-differentials-injective",
+  "date": "2026-10-10"
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ }
+}

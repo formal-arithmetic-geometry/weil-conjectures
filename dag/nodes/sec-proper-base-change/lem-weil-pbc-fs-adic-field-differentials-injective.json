@@ -1,24 +1,187 @@
 {
  "id": "lem-weil-pbc-fs-adic-field-differentials-injective",
- "blueprint": {"is": null, "from": {"node": "thm-weil-pbc-finite-etale-lifting", "place": "step 7 of its split (Lemma 0GS2 essential-surjectivity paragraphs): residue-field differential injection in the Stacks 07NQ formal-smoothness input", "via": ["lem-weil-pbc-flat-formally-smooth-closed-fibre-adic", "lem-weil-pbc-fs-adic-lift-from-residue-field", "lem-weil-pbc-fs-adic-lift-over-finite-coefficient-map", "lem-weil-pbc-formally-smooth-complete-local-regular", "lem-weil-pbc-another-helper-g-ring", "lem-weil-pbc-polynomial-complete-local-formal-fibres", "lem-weil-pbc-finite-type-over-g-ring", "lem-weil-pbc-finite-type-z-g-ring", "lem-weil-pbc-finite-etale-lifting-limit-descent", "lem-weil-pbc-finite-etale-lifting-essential-surjectivity"]}, "same_as": []},
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-finite-etale-lifting",
+   "place": "step 7 of its split (Lemma 0GS2 essential-surjectivity paragraphs): residue-field differential injection in the Stacks 07NQ formal-smoothness input",
+   "via": [
+    "lem-weil-pbc-flat-formally-smooth-closed-fibre-adic",
+    "lem-weil-pbc-fs-adic-lift-from-residue-field",
+    "lem-weil-pbc-fs-adic-lift-over-finite-coefficient-map",
+    "lem-weil-pbc-formally-smooth-complete-local-regular",
+    "lem-weil-pbc-another-helper-g-ring",
+    "lem-weil-pbc-polynomial-complete-local-formal-fibres",
+    "lem-weil-pbc-finite-type-over-g-ring",
+    "lem-weil-pbc-finite-type-z-g-ring",
+    "lem-weil-pbc-finite-etale-lifting-limit-descent",
+    "lem-weil-pbc-finite-etale-lifting-essential-surjectivity"
+   ]
+  },
+  "same_as": []
+ },
  "kind": "statement",
  "title": "Adic formal smoothness over a field makes base-field differentials injective at the residue field",
  "statement": "Let $k$ be a field and $(C,\\mathfrak m,K)$ a Noetherian local $k$-algebra [def-weil-pbc-noetherian-ring] with residue field $K=C/\\mathfrak m$. Assume $C$ is formally smooth over $k$ for its $\\mathfrak m$-adic topology [def-weil-pbc-formally-smooth-adic]. For the modules of Kähler differentials [def-weil-pbc-kahler-differentials], the $K$-linear map $\\Omega_{k/\\mathbf Z}\\otimes_k K\\to\\Omega_{C/\\mathbf Z}\\otimes_C K$ induced by $k\\to C$ is injective. (In characteristic $p$ these modules identify with the differentials relative to $\\mathbf F_p$; in characteristic zero the map remains injective after composing with the map to $\\Omega_{K/\\mathbf Z}$.)",
- "source": {"document": "literature/stacks-project/more-algebra.tex", "place": "More on Algebra, Theorem Tag 07EL (theorem-regular-fs), implication (2) => (5) in characteristic p; proof of Proposition Tag 07NQ (proposition-fs-flat-fibre-fs), final paragraph, for the characteristic-zero case citing Algebra Proposition Tag 0322 (proposition-characterize-separable-field-extensions)"},
- "stmt_deps": ["def-weil-pbc-noetherian-ring", "def-weil-pbc-formally-smooth-adic", "def-weil-pbc-kahler-differentials"],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "source": {
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "More on Algebra, Theorem Tag 07EL (theorem-regular-fs), implication (2) => (5) in characteristic p; proof of Proposition Tag 07NQ (proposition-fs-flat-fibre-fs), final paragraph, for the characteristic-zero case citing Algebra Proposition Tag 0322 (proposition-characterize-separable-field-extensions)"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-noetherian-ring",
+  "def-weil-pbc-formally-smooth-adic",
+  "def-weil-pbc-kahler-differentials"
+ ],
+ "proof": [
+  {
+   "text": "*Characteristic.* $C$ is local, hence nonzero, so the ring map $k\\to C$ is injective ($k$ a field) and $k\\to C\\to K$ makes $K$ a field extension of $k$; thus $\\operatorname{char}K=\\operatorname{char}k$ [def-pc-field-characteristic], which is $0$ or a prime $p$. The map of the statement is $\\lambda=K\\otimes_C u_{C}$, where $u_C:C\\otimes_k\\Omega_{k/\\mathbf Z}\\to\\Omega_{C/\\mathbf Z}$ is the map $u$ of [lem-weil-pbc-kahler-differentials-first-exact-sequence] for $\\mathbf Z\\to k\\to C$, using $K\\otimes_C(C\\otimes_k\\Omega_{k/\\mathbf Z})=K\\otimes_k\\Omega_{k/\\mathbf Z}$; so $\\lambda(\\mathrm da\\otimes x)=\\mathrm d(a\\cdot1_C)\\otimes x$.",
+   "uses": [
+    "def-pc-field-characteristic",
+    "lem-weil-pbc-kahler-differentials-first-exact-sequence",
+    "def-weil-pbc-kahler-differentials"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Theorem 07EL (theorem-regular-fs), statement: the two cases char k = 0 and char k = p > 0"
+   }
+  },
+  {
+   "text": "*Characteristic zero: the residue field extension.* Assume $\\operatorname{char}k=0$. By [lem-weil-pbc-char-zero-field-extension-formally-smooth] the field $K$ is formally smooth over $k$ (lifting property of [def-weil-pbc-formally-smooth-adic] with $\\mathfrak n=0$). Hence by [lem-weil-pbc-formally-smooth-differentials-injective], applied to $\\mathbf Z\\to k\\to K$, the map $u_K:K\\otimes_k\\Omega_{k/\\mathbf Z}\\to\\Omega_{K/\\mathbf Z}$, $x\\otimes\\mathrm da\\mapsto x\\,\\mathrm d\\bar a$, is injective. (This is Algebra, Proposition 0322 (5) in characteristic zero, which Stacks quotes here.)",
+   "uses": [
+    "lem-weil-pbc-char-zero-field-extension-formally-smooth",
+    "def-weil-pbc-formally-smooth-adic",
+    "lem-weil-pbc-formally-smooth-differentials-injective"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Proposition 07NQ (proposition-fs-flat-fibre-fs), proof, last paragraph: 'this is true also in the characteristic zero case as it is even true that Omega_{k/Z} -> Omega_{K/Z} is injective in characteristic zero, see Algebra, Proposition 0322'; Algebra 0322 rests on Lemmas 0321 and 031K (algebra.tex, lemma-fields-are-formally-smooth, lemma-ses-formally-smooth)"
+   }
+  },
+  {
+   "text": "*Characteristic zero: factor through $\\Omega_{C/\\mathbf Z}\\otimes_CK$.* Let $w:K\\otimes_C\\Omega_{C/\\mathbf Z}\\to\\Omega_{K/\\mathbf Z}$, $x\\otimes\\mathrm dc\\mapsto x\\,\\mathrm d\\bar c$, be the map $u$ of [lem-weil-pbc-kahler-differentials-first-exact-sequence] for $\\mathbf Z\\to C\\to K$. On generators $w(\\lambda(\\mathrm da\\otimes x))=w(\\mathrm d(a\\cdot1_C)\\otimes x)=x\\,\\mathrm d(\\bar a)=u_K(x\\otimes\\mathrm da)$, since the image of $a\\cdot1_C$ in $K$ is the image $\\bar a$ of $a$ under $k\\to K$; both sides are $K$-linear, so $w\\circ\\lambda=u_K$. As $u_K$ is injective (step 2), so is $\\lambda$. This proves the statement in characteristic $0$, including its parenthetical remark that $w\\circ\\lambda$ is injective. (Formal smoothness of $C$ is not used in this case.)",
+   "uses": [
+    "lem-weil-pbc-kahler-differentials-first-exact-sequence",
+    "def-weil-pbc-kahler-differentials"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Proposition 07NQ, proof, last paragraph (the parenthetical remark on characteristic zero)"
+   }
+  },
+  {
+   "text": "*Characteristic $p$: geometric regularity.* Assume $\\operatorname{char}k=p>0$. Since $C$ is a Noetherian local $k$-algebra formally smooth over $k$ for its $\\mathfrak m$-adic topology [def-weil-pbc-formally-smooth-adic], [lem-weil-pbc-fs-adic-field-geometrically-regular] shows that $C$ is geometrically regular over $k$ [def-weil-pbc-g-ring]: $k'\\otimes_kC$ is regular for every finite purely inseparable extension $k'/k$. (This is 07EL (2) $\\Rightarrow$ (1): base change of adic formal smoothness to $k'$, Lemma 07EG, and regularity of adically formally smooth local algebras, Lemma 07EI.)",
+   "uses": [
+    "def-weil-pbc-formally-smooth-adic",
+    "lem-weil-pbc-fs-adic-field-geometrically-regular",
+    "def-weil-pbc-g-ring"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Theorem 07EL, proof, second paragraph: 'Assume (2) holds. By Lemma 07EG ... A' is a regular local ring by Lemma 07EI. Thus we see that (1) holds.'"
+   }
+  },
+  {
+   "text": "*Characteristic $p$: the map $H_1(L_{K/k})\\to\\mathfrak m/\\mathfrak m^2$.* By [lem-weil-pbc-geometrically-regular-h1-injective], applied to the Noetherian local $k$-algebra $(C,\\mathfrak m,K)$, geometrically regular over $k$ by step 4, $C$ is a regular local ring and the canonical $K$-linear map $\\gamma:H_1(L_{K/k})\\to\\mathfrak m/\\mathfrak m^2$ (induced by $k[K]\\to C[K]$ and the identification $H_1(L_{K/C})\\cong\\mathfrak m/\\mathfrak m^2$) is injective. (This is 07E5 (1) $\\Rightarrow$ (3), through (2), cited by 07EL for '(1), (3), (4), (5) are equivalent'.)",
+   "uses": [
+    "lem-weil-pbc-geometrically-regular-h1-injective"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Theorem 07EL, proof, second paragraph: 'it follows from Proposition 07E5 that (1), (3), (4), and (5) are equivalent'; 07E5 (1) => (2) => (3)"
+   }
+  },
+  {
+   "text": "*Characteristic $p$: the differentials over $\\mathbf F_p$.* By [lem-weil-pbc-h1-injective-differentials-injective-char-p], applied to $(C,\\mathfrak m,K)$ with $\\gamma$ injective (step 5), the $K$-linear map $\\Omega_{k/\\mathbf F_p}\\otimes_kK\\to\\Omega_{C/\\mathbf F_p}\\otimes_CK$, $\\mathrm da\\otimes x\\mapsto\\mathrm d(a\\cdot1_C)\\otimes x$, is injective. (This is 07E5 (3) $\\Rightarrow$ (4), i.e. 07EL (4) $\\Rightarrow$ (5).)",
+   "uses": [
+    "lem-weil-pbc-h1-injective-differentials-injective-char-p"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Proposition 07E5, proof, paragraph 'Equivalence of (3) and (4)'"
+   }
+  },
+  {
+   "text": "*Characteristic $p$: from $\\mathbf F_p$ to $\\mathbf Z$.* For an $\\mathbf F_p$-algebra $R$ (here $R=k$ and $R=C$), a derivation $D:R\\to M$ over $\\mathbf Z$ is additive, hence kills the image of $\\mathbf Z$, which is the image of $\\mathbf F_p$; so the $\\mathbf Z$-derivations and the $\\mathbf F_p$-derivations of $R$ into any $R$-module coincide, and by the universal property of [def-weil-pbc-kahler-differentials] the identity of $R$ induces an isomorphism $\\Omega_{R/\\mathbf Z}\\cong\\Omega_{R/\\mathbf F_p}$ with $\\mathrm d_{R/\\mathbf Z}a\\mapsto\\mathrm d_{R/\\mathbf F_p}a$. These isomorphisms for $R=k$ and $R=C$, tensored with $K$, commute with the maps $\\mathrm da\\otimes x\\mapsto\\mathrm d(a\\cdot1_C)\\otimes x$ (check on generators), so the map of the statement is identified with the injective map of step 6, and is injective. This is the parenthetical remark of the statement in characteristic $p$.",
+   "uses": [
+    "def-weil-pbc-kahler-differentials"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Theorem 07EL, statement (5), and Proposition 07NQ, proof, last paragraph (where 07EL (5) is quoted with Omega_{-/Z})"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-field-characteristic",
+  "lem-weil-pbc-kahler-differentials-first-exact-sequence",
+  "def-weil-pbc-kahler-differentials",
+  "lem-weil-pbc-char-zero-field-extension-formally-smooth",
+  "def-weil-pbc-formally-smooth-adic",
+  "lem-weil-pbc-formally-smooth-differentials-injective",
+  "lem-weil-pbc-fs-adic-field-geometrically-regular",
+  "def-weil-pbc-g-ring",
+  "lem-weil-pbc-geometrically-regular-h1-injective",
+  "lem-weil-pbc-h1-injective-differentials-injective-char-p"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Theorem Tag 07EL (theorem-regular-fs), proof, second paragraph (2) => (1) and 'by Proposition 07E5 ... (1), (3), (4), (5) are equivalent' [characteristic p]; Proposition Tag 07NQ (proposition-fs-flat-fibre-fs), proof, last paragraph with Algebra Proposition Tag 0322 [characteristic 0]"
+ },
  "mathlib_searches": [
-  {"tool": "leansearch", "query": "formally smooth Noetherian local algebra over a field implies injectivity of base field Kahler differentials after tensoring with the residue field", "results": "Algebra.FormallySmooth.iff_injective_cotangentComplexBaseChange and iff_injective_lTensor_residueField in Smooth/Local: discrete formal smoothness of an algebra presented by a smooth source, not this base-field differential map", "date": "2026-10-10", "verdict": "no match"},
-  {"tool": "leanfinder", "query": "adic formally smooth local field algebra implies Omega base field to Omega algebra is injective at residue field", "results": "Algebra.FormallySmooth.iff_injective_lTensor_residueField and related cotangent criteria in Smooth/Local; no adic counterpart or the base-field differential map", "date": "2026-10-10", "verdict": "no match"},
-  {"tool": "grep", "query": "rg -n 'FormallySmooth|KaehlerDifferential' Mathlib/RingTheory/Smooth/Local.lean Mathlib/RingTheory/Kaehler/Basic.lean in available Mathlib tree", "results": "Smooth/Local.lean:31-79 has discrete presentation criteria; Kaehler/Basic.lean has universal differentials, not 07EL (2)=>(5). Available revision may differ from project pin", "date": "2026-10-10", "verdict": "no match; pin unverified"}
+  {
+   "tool": "leansearch",
+   "query": "formally smooth Noetherian local algebra over a field implies injectivity of base field Kahler differentials after tensoring with the residue field",
+   "results": "Algebra.FormallySmooth.iff_injective_cotangentComplexBaseChange and iff_injective_lTensor_residueField in Smooth/Local: discrete formal smoothness of an algebra presented by a smooth source, not this base-field differential map",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "adic formally smooth local field algebra implies Omega base field to Omega algebra is injective at residue field",
+   "results": "Algebra.FormallySmooth.iff_injective_lTensor_residueField and related cotangent criteria in Smooth/Local; no adic counterpart or the base-field differential map",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "rg -n 'FormallySmooth|KaehlerDifferential' Mathlib/RingTheory/Smooth/Local.lean Mathlib/RingTheory/Kaehler/Basic.lean in available Mathlib tree",
+   "results": "Smooth/Local.lean:31-79 has discrete presentation criteria; Kaehler/Basic.lean has universal differentials, not 07EL (2)=>(5). Available revision may differ from project pin",
+   "date": "2026-10-10",
+   "verdict": "no match; pin unverified"
+  }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
- "created": {"by": "worker", "item": "lem-weil-pbc-flat-formally-smooth-closed-fibre-adic", "date": "2026-10-10"},
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-flat-formally-smooth-closed-fibre-adic",
+  "date": "2026-10-10"
+ },
  "chapter": "sec-proper-base-change",
  "unit": "sk-thm-p1",
- "lean_audit": {"master": {"state": "none"}, "slopmaster2": {"state": "none"}}
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "lem-weil-pbc-fs-adic-field-differentials-injective",
+  "worker": "stage1",
+  "summary": "Read More on Algebra 07EL (theorem-regular-fs) and its proof, 07E5 (proposition-characterization-geometrically-regular) and its proof, 07NQ (proposition-fs-flat-fibre-fs) last paragraph, Algebra 0322, 0321, 031Y and 031K; tags verified in tags/tags. Statement kept. The proof splits by characteristic (step 1). Characteristic 0 (steps 2-3), following the remark in 07NQ: K/k is formally smooth [char-zero node, Mathlib leaf], so K (x)_k Omega_{k/Z} -> Omega_{K/Z} is injective by the new node 031K, and it factors through the item's map; formal smoothness of C is not used. Characteristic p (steps 4-7), following 07EL: (2) => (1) is the existing node lem-weil-pbc-fs-adic-field-geometrically-regular; (1) => (3) of 07E5 is the existing node lem-weil-pbc-geometrically-regular-h1-injective; (3) => (4) of 07E5 is the new node lem-weil-pbc-h1-injective-differentials-injective-char-p (stated without regularity, which its argument does not use); the identification Omega_{-/Z} = Omega_{-/F_p} for F_p-algebras is written out (step 7). No Lean on slopmaster2 for the item or the new nodes (grep of ids, tags 07EL/07E5/031K/0322 and key words). Blueprint search: no blueprint node states the item or the new nodes (tools/blueprint_refs.py search 07EL, 07E5, 0322, 'formally smooth', 'geometrically regular', 'Kahler differentials injective', 'separable field extension differentials').",
+  "blueprint": "The item serves thm-weil-pbc-finite-etale-lifting, at its from.place (step 7 of its split (Lemma 0GS2 essential-surjectivity paragraphs): residue-field differential injection in the Stacks 07NQ formal-smoothness input): it is the injectivity of Omega_{k/Z} (x) K -> Omega_{closed fibre/Z} (x) K used in the 07NQ formal-smoothness argument. Steps 2-3 realize the characteristic-zero parenthesis of that 07NQ paragraph; steps 4-7 realize the citation 'by Theorem 07EL' of the same paragraph (07EL (2) => (5)). No blueprint node states the item (same_as [])."
+ },
+ "reviewed": "2026-10-10 L: 7 steps: characteristic 0 by formal smoothness of K/k and the 031K injectivity (new node), characteristic p by 07EL (2) => (1), 07E5 (1) => (3) and the new node for 07E5 (3) => (4), with Omega over Z = Omega over F_p; 2 new nodes"
 }

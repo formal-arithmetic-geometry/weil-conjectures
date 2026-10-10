@@ -1,0 +1,91 @@
+{
+ "id": "lem-weil-pbc-formally-smooth-differentials-injective",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-finite-etale-lifting",
+   "place": "step 7 of its split (Lemma 0GS2 essential-surjectivity paragraphs): residue-field differential injection in the Stacks 07NQ formal-smoothness input; within it, the characteristic-zero case: injectivity of $K\\otimes_k\\Omega_{k/\\mathbf Z}\\to\\Omega_{K/\\mathbf Z}$ for the formally smooth residue field extension (Stacks 07NQ final paragraph, via Algebra 0322/031Y, which rest on 031K)",
+   "via": [
+    "lem-weil-pbc-fs-adic-field-differentials-injective",
+    "lem-weil-pbc-flat-formally-smooth-closed-fibre-adic",
+    "lem-weil-pbc-fs-adic-lift-from-residue-field",
+    "lem-weil-pbc-fs-adic-lift-over-finite-coefficient-map",
+    "lem-weil-pbc-formally-smooth-complete-local-regular",
+    "lem-weil-pbc-another-helper-g-ring",
+    "lem-weil-pbc-polynomial-complete-local-formal-fibres",
+    "lem-weil-pbc-finite-type-over-g-ring",
+    "lem-weil-pbc-finite-type-z-g-ring",
+    "lem-weil-pbc-finite-etale-lifting-limit-descent",
+    "lem-weil-pbc-finite-etale-lifting-essential-surjectivity"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Formal smoothness of B -> C makes C (x)_B Omega_{B/A} -> Omega_{C/A} injective",
+ "statement": "Let $A\\to B\\to C$ be homomorphisms of commutative rings, $C$ an $A$-algebra through the composite, and assume $C$ is formally smooth over $B$, i.e. formally smooth over $B$ for the $\\mathfrak n$-adic topology with $\\mathfrak n=0$ in the sense of [def-weil-pbc-formally-smooth-adic] (for every ring $D$ with a ring map $B\\to D$, every ideal $J\\subseteq D$ with $J^2=0$ and every $B$-algebra map $g:C\\to D/J$ there is a $B$-algebra map $f:C\\to D$ lifting $g$). Let $\\Omega$ and $\\mathrm d$ be the Kähler differentials and universal derivations of [def-weil-pbc-kahler-differentials]. Then the $C$-linear map $$u:C\\otimes_B\\Omega_{B/A}\\longrightarrow\\Omega_{C/A},\\qquad c\\otimes\\mathrm d_{B/A}b\\longmapsto c\\,\\mathrm d_{C/A}(\\bar b)$$ ($\\bar b$ the image of $b$ in $C$) is injective.",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Algebra, Lemma Tag 031K (lemma-ses-formally-smooth): for A -> B -> C with B -> C formally smooth, 0 -> Omega_{B/A} (x)_B C -> Omega_{C/A} -> Omega_{C/B} -> 0 is split short exact; the injectivity of the first map is the part stated here (tag verified in stacks-project/tags/tags: 031K,algebra-lemma-ses-formally-smooth)"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-formally-smooth-adic",
+  "def-weil-pbc-kahler-differentials"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "formally smooth B → C implies C ⊗ Ω[B/A] → Ω[C/A] injective",
+   "results": "Algebra.FormallySmooth.iff_injective_cotangentComplexBaseChange, iff_injective_lTensor_residueField, iff_injective_cotangentComplexBaseChange_residueField (RingTheory.Smooth.Local); Algebra.FormallySmooth.projective_kaehlerDifferential, iff_split_injection, Algebra.Extension.formallySmooth_iff_split_injection (RingTheory.Smooth.Basic)",
+   "date": "2026-10-10",
+   "verdict": "no single declaration; the components are Mathlib's FormallySmooth class (H1 = 0) and the Jacobi-Zariski exactness, see grep"
+  },
+  {
+   "tool": "loogle",
+   "query": "Function.Injective (KaehlerDifferential.mapBaseChange _ _ _)",
+   "results": "none",
+   "date": "2026-10-10",
+   "verdict": "no direct lemma"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "formally smooth algebra first fundamental exact sequence of Kähler differentials is split short exact (left map injective)",
+   "results": "Algebra.FormallySmooth.iff_split_injection, Algebra.Extension.formallySmooth_iff_split_injection (Smooth/Basic), iff_injective_cotangentComplexBaseChange(_residueField) (Smooth/Local), Algebra.Extension.exact_cotangentComplex_toKaehler",
+   "date": "2026-10-10",
+   "verdict": "no direct lemma"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rn 'Injective (KaehlerDifferential.mapBaseChange\\|mapBaseChange_injective\\|injective_mapBaseChange' Mathlib; grep -n 'exact_δ_mapBaseChange' Mathlib/RingTheory/Kaehler/JacobiZariski.lean; grep -n 'class FormallySmooth\\|iff_comp_surjective' Mathlib/RingTheory/Smooth/Basic.lean",
+   "results": "no injectivity lemma for mapBaseChange; RingTheory/Kaehler/JacobiZariski.lean:556 Algebra.H1Cotangent.exact_δ_mapBaseChange : Function.Exact (δ R S T) (mapBaseChange R S T); RingTheory/Smooth/Basic.lean:70-72 class Algebra.FormallySmooth with field subsingleton_h1Cotangent : Subsingleton (H1Cotangent R A); Smooth/Basic.lean:371 Algebra.FormallySmooth.iff_comp_surjective (lifting property); Kaehler/Basic.lean:719 KaehlerDifferential.mapBaseChange (the map u)",
+   "date": "2026-10-10",
+   "verdict": "candidate: a chain of three Mathlib facts (lifting property -> FormallySmooth by iff_comp_surjective; Subsingleton (H1Cotangent B C) by the class field; exactness at B-side by exact_δ_mapBaseChange gives injectivity); not one declaration, left unsplit with the candidate recorded"
+  }
+ ],
+ "mathlib_match": null,
+ "mathlib_candidate": {
+  "declaration": "Algebra.H1Cotangent.exact_δ_mapBaseChange with Algebra.FormallySmooth.subsingleton_h1Cotangent and Algebra.FormallySmooth.iff_comp_surjective",
+  "file": "Mathlib/RingTheory/Kaehler/JacobiZariski.lean (line 556); Mathlib/RingTheory/Smooth/Basic.lean (lines 70-72, 371); map: Mathlib/RingTheory/Kaehler/Basic.lean line 719 (KaehlerDifferential.mapBaseChange)",
+  "how": "iff_comp_surjective turns the lifting property into Algebra.FormallySmooth B C; its field gives Subsingleton (H1Cotangent B C); Function.Exact (δ A B C) (mapBaseChange A B C) then gives ker(mapBaseChange) = range δ = 0"
+ },
+ "status": "unsplit",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-fs-adic-field-differentials-injective",
+  "date": "2026-10-10"
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ }
+}
