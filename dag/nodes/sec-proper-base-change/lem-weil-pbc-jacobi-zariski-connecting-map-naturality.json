@@ -1,0 +1,65 @@
+{
+ "id": "lem-weil-pbc-jacobi-zariski-connecting-map-naturality",
+ "kind": "statement",
+ "title": "Naturality of the Jacobi-Zariski connecting map for a quotient",
+ "statement": "Let $R\\to S\\to B$ be homomorphisms of commutative rings, $I\\subseteq B$ an ideal and $C=B/I$, an $S$-algebra and an $R$-algebra through $B$. For a ring map $X\\to Y$ let $H_1(L_{Y/X})$ be the first homology of the naive cotangent complex of the canonical presentation $X[Y]\\to Y$ [def-weil-pbc-smooth-ring-map]; let $\\Omega$, $\\mathrm d$ be as in [def-weil-pbc-kahler-differentials]. Let (a) $\\iota:H_1(L_{C/S})\\to H_1(L_{C/B})$ be the map induced by the morphism of presentations $S[C]\\to B[C]$ (coefficients through $S\\to B$, $[c]\\mapsto[c]$) over the square $S\\to B$, $\\mathrm{id}_C$ [lem-weil-pbc-nl-presentation-h1-functoriality]; (b) $\\theta:H_1(L_{C/B})\\xrightarrow{\\sim}I/I^2$ the isomorphism of [lem-weil-pbc-jacobi-zariski-surjection-h1] for the surjection $B\\to C$; (c) $\\partial_S:H_1(L_{C/S})\\to C\\otimes_S\\Omega_{S/R}$ the connecting map of the Jacobi-Zariski sequence of $R\\to S\\to C$ [lem-weil-pbc-jacobi-zariski-homology-sequence]; (d) $c:C\\otimes_S\\Omega_{S/R}\\to C\\otimes_B\\Omega_{B/R}$, $x\\otimes\\mathrm ds\\mapsto x\\otimes\\mathrm d(s\\cdot1_B)$, and $\\delta:I/I^2\\to C\\otimes_B\\Omega_{B/R}$, $f\\bmod I^2\\mapsto1\\otimes\\mathrm df$. Then $$\\delta\\circ\\theta\\circ\\iota=c\\circ\\partial_S .$$ In particular (case $S=B$, where $\\iota$ and $c$ are identities) $\\delta\\circ\\theta=\\partial_B$: under $\\theta$ the connecting map of the Jacobi-Zariski sequence of $R\\to B\\to C$ is $\\delta$.",
+ "source": {
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "More on Algebra, Section Tag 07E4 (section-geometrically-regular, line 8678): 'The Jacobi-Zariski sequence is a canonical exact sequence H_1(L_{K/k}) -> m/m^2 -> Omega_{A/k} (x)_A K -> Omega_{K/k} -> 0 because H_1(L_{K/A}) = m/m^2'; and the commutative diagram in the proof of Proposition 07E5, equivalence of (3) and (4) (line 8752); the maps of Algebra Lemma Tag 00S2 (line 35412), whose proof says 'The precise definition of the maps is omitted'. Tags verified in stacks-project/tags/tags"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-smooth-ring-map",
+  "def-weil-pbc-kahler-differentials",
+  "lem-weil-pbc-nl-presentation-h1-functoriality",
+  "lem-weil-pbc-jacobi-zariski-surjection-h1",
+  "lem-weil-pbc-jacobi-zariski-homology-sequence"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "naturality of the Jacobi-Zariski connecting map H1Cotangent.δ with respect to maps of algebras",
+   "results": "Algebra.Generators.H1Cotangent.δ_map (same R -> S -> T, change of generators only), Algebra.Generators.H1Cotangent.δ, Algebra.Generators.H1Cotangent.δ_eq_δ, Algebra.H1Cotangent.δ, Algebra.Generators.H1Cotangent.δ_eq",
+   "date": "2026-10-10",
+   "verdict": "no match (naturality only in the presentation, not in the middle ring S -> B)"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Jacobi-Zariski connecting homomorphism commutes with map induced by morphism of towers R -> S -> T and R -> S' -> T",
+   "results": "Algebra.Generators.H1Cotangent.δ_map, Algebra.Extension.H1Cotangent.map_comp, Algebra.Generators.H1Cotangent.δAux_ofComp, Algebra.Generators.H1Cotangent.δ_eq, Algebra.Extension.CotangentSpace.map_comp_cotangentComplex",
+   "date": "2026-10-10",
+   "verdict": "no match (δ_C, Kaehler/JacobiZariski.lean:420, gives δ on classes of constants C r, a step towards the S = B case, not the statement)"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -n 'δ_map|map_δ|δ_comp|naturality' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/RingTheory/Kaehler/JacobiZariski.lean; sed -n 330,470p read",
+   "results": "exact_δ_map, exact_map_δ, δ_map (Hom Q' Q of generators of the same T over the same S), δ_comp_equiv, exact_map_δ'",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-geometrically-regular-h1-injective",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1"
+}

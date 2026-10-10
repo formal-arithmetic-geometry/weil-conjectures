@@ -829,3 +829,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 03:36 L: reviewed lem-weil-pbc-formally-smooth-complete-local-regular (9 steps, +7 unsplit: 07NQ, 07EG, 07NS/07NR lift, 07PL, 07PG, 07PH, 09HI; Stacks 07PM cites 07EH for a base change and applies 07PL to a non-local map): accepted.
 - 03:38 L: reviewed lem-weil-pbc-geometrically-regular-over-field-flat (7 steps, +07E2 node): accepted.
 - 03:39 L: reviewed lem-weil-pbc-gabber-strict-henselian-zariski-comparison (statement corrected: no identification epsilon^{-1}epsilon_* F = F; 5 steps, +6: 00X6, 072W-sites, 03Q6 colimit, 03QO, 0733, locally-bijective composed leaf): accepted.
+- 03:42 L: reviewed lem-weil-pbc-geometrically-regular-h1-injective (10 steps, +7: 07DZ, 07E1, 0322 vanishing, connecting-map naturality, purely inseparable base change, p-th root differentials, cotangent-dimension composed leaf; Stacks cites 00OM where 00ON is needed): accepted.

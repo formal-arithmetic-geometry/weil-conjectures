@@ -1,0 +1,63 @@
+{
+ "id": "lem-weil-pbc-purely-inseparable-base-change-local-ring",
+ "kind": "statement",
+ "title": "Base change of a Noetherian local algebra along a finite purely inseparable extension",
+ "statement": "Let $k$ be a field, $k'/k$ a finite purely inseparable field extension [def-weil-pbc-finite-purely-inseparable-extension] and $(A,\\mathfrak m,K)$ a Noetherian local ring [def-weil-pbc-noetherian-ring] which is a $k$-algebra. Put $A'=A\\otimes_kk'$, an $A$-algebra via $a\\mapsto a\\otimes1$. Then: (1) $A'$ is a free $A$-module of rank $[k':k]$, in particular $A\\to A'$ is finite and flat [def-weil-pbc-flat-ring-map], and $A'$ is Noetherian; (2) $A'$ is a local ring, and its maximal ideal $\\mathfrak m'$ is the only prime ideal of $A'$ containing $\\mathfrak mA'$; (3) the residue field $K'=A'/\\mathfrak m'$ is a finite field extension of $K$, and $A'/\\mathfrak mA'\\cong K\\otimes_kk'$ is a finite-dimensional $K$-algebra.",
+ "source": {
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "More on Algebra, proof of Proposition Tag 07E5 (proposition-characterization-geometrically-regular, line 8697), proof of (3) => (1) (lines 8716-8750): 'Set A' = A (x)_k k'. This is a local ring with maximal ideal m' ... since A -> A' is finite flat'; stated there without proof"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-finite-purely-inseparable-extension",
+  "def-weil-pbc-noetherian-ring",
+  "def-weil-pbc-flat-ring-map"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "tensor product of a local ring with a purely inseparable field extension is a local ring",
+   "results": "Algebra.TensorProduct.isField_of_isAlgebraic, PrimeSpectrum.isHomeomorph_comap_of_isPurelyInseparable (Mathlib.RingTheory.Spectrum.Prime.Homeomorph), PrimeSpectrum.isHomeomorph_comap_tensorProductMap_of_isPurelyInseparable, IsPurelyInseparable.exists_pow_mem_range_tensorProduct",
+   "date": "2026-10-10",
+   "verdict": "partial: Spec(R (x)_k K) -> Spec R is a homeomorphism for purely inseparable K/k, which gives clause (2) in a few lines; clauses (1), (3) and the packaging are not stated; no match as a whole"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "base change of a Noetherian local ring along a finite purely inseparable field extension is a local ring, finite free over the original",
+   "results": "Algebra.FormallyUnramified.isField_of_isAlgClosed_of_isLocalRing, RingHom.EssFiniteType.residueFieldMap, IsLocalRing.ResidueField.finite_of_finite",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rn 'IsLocalRing (.*⊗|isLocalRing.*TensorProduct|IsLocalRing (TensorProduct' on ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib",
+   "results": "RingTheory/LocalRing/ResidueField/Fiber.lean:34 (IsLocalRing (ResidueField R ⊗[R] S), other setting); RingTheory/Spectrum/Prime/Homeomorph.lean isHomeomorph_comap_of_isPurelyInseparable",
+   "date": "2026-10-10",
+   "verdict": "no match (candidate for clause (2) recorded)"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-geometrically-regular-h1-injective",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1"
+}
