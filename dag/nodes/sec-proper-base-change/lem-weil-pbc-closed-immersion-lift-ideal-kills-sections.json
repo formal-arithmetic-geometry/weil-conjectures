@@ -1,0 +1,76 @@
+{
+ "id": "lem-weil-pbc-closed-immersion-lift-ideal-kills-sections",
+ "kind": "statement",
+ "title": "A morphism factors through a closed immersion when it kills the ideal sheaf on affine opens",
+ "statement": "Let $X$ and $Y$ be schemes [def-pc-scheme], let $i:Z\\to X$ be a closed immersion [def-weil-closed-immersion] with ideal sheaf $\\mathcal I=\\ker(\\mathcal O_X\\to i_*\\mathcal O_Z)$ [def-sbc-closed-immersion-ideal-sheaf], and let $f:Y\\to X$ be a morphism of schemes. Suppose that for every affine open $U\\subseteq X$ the ring map $f^\\sharp_U:\\mathcal O_X(U)\\to\\mathcal O_Y(f^{-1}(U))$ sends every element of $\\mathcal I(U)$ to $0$. Then there is a morphism of schemes $g:Y\\to Z$ with $f=i\\circ g$.",
+ "source": {
+  "document": "literature/stacks-project/schemes.tex",
+  "place": "Schemes, Lemma 01HP (lemma-characterize-closed-subspace, lines 415-423), the direction 'if f^*I -> O_Y is zero then f factors through Z', for a closed immersion of schemes whose ideal sheaf I is quasi-coherent (Lemma 01IN, lemma-closed-subspace-scheme); the hypothesis on affine opens U of X is the vanishing of I -> f_*O_Y on a basis, equivalent to the vanishing of its adjoint f^*I -> O_Y"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-closed-immersion",
+  "def-sbc-closed-immersion-ideal-sheaf"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "morphism of schemes factors through closed immersion if the ideal sheaf maps to zero",
+   "results": "AlgebraicGeometry.IsClosedImmersion.lift, IsClosedImmersion.lift_fac(_assoc), IsClosedImmersion.of_isPreimmersion, Scheme.IdealSheafData.inclusion (Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion, IdealSheaf.Subscheme)",
+   "date": "2026-10-10",
+   "verdict": "match: IsClosedImmersion.lift with hypothesis i.ker ≤ f.ker"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.IsClosedImmersion.lift",
+   "results": "IsClosedImmersion.lift (f : X ⟶ Z) (g : Y ⟶ Z) [IsClosedImmersion f] (H : f.ker ≤ g.ker) : Y ⟶ X; lift_fac : lift f g H ≫ f = g; lift_fac_assoc; isIso_lift (Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion)",
+   "date": "2026-10-10",
+   "verdict": "match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "reduced scheme morphism range contained in support of ideal sheaf then kernel contains ideal",
+   "results": "Scheme.Hom.ideal_ker_le, Scheme.Hom.range_subset_ker_support, IdealSheafData.ker_subschemeι, Scheme.Hom.ker (Mathlib.AlgebraicGeometry.IdealSheaf.Basic)",
+   "date": "2026-10-10",
+   "verdict": "supporting lemmas: Hom.ker is the largest ideal sheaf inside the kernels of f.app on affine opens"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -n 'def lift\\|lemma lift_fac\\|IsAffineHom' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicGeometry/Morphisms/ClosedImmersion.lean; grep -n 'def Hom.ker\\|lemma Hom.ker_apply\\|lemma le_ofIdeals_iff\\|lemma le_def' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicGeometry/IdealSheaf/Basic.lean",
+   "results": "ClosedImmersion.lean:210 def lift, :215 lemma lift_fac, :151 instance IsAffineHom for closed immersions; IdealSheaf/Basic.lean:90 le_def, :125 le_ofIdeals_iff, :692 def Hom.ker (ofIdeals fun U => RingHom.ker (f.app U)), :702 Hom.ker_apply [QuasiCompact f]",
+   "date": "2026-10-10",
+   "verdict": "match (read with sed -n)"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "AlgebraicGeometry.IsClosedImmersion.lift, AlgebraicGeometry.IsClosedImmersion.lift_fac, AlgebraicGeometry.Scheme.IdealSheafData.le_ofIdeals_iff, AlgebraicGeometry.Scheme.Hom.ker, AlgebraicGeometry.Scheme.Hom.ker_apply",
+  "file": "Mathlib/AlgebraicGeometry/Morphisms/ClosedImmersion.lean",
+  "line": 210,
+  "how": "lines: ClosedImmersion.lean:210, 215, 151; Basic.lean:125, 692, 702. a few Mathlib lemmas, one per clause, in one line: f.ker := ofIdeals (fun U => RingHom.ker (f.app U)) (Basic.lean:692) for any f, so by le_ofIdeals_iff (Basic.lean:125) i.ker ≤ f.ker iff i.ker.ideal U ≤ RingHom.ker (f.app U) for every affine open U; i.ker.ideal U = RingHom.ker (i.app U) = I(U) by Hom.ker_apply (Basic.lean:702; i is quasi-compact, being affine by the instance at ClosedImmersion.lean:151), which is the match of def-sbc-closed-immersion-ideal-sheaf; the hypothesis of the node is therefore H : i.ker ≤ f.ker, and g = IsClosedImmersion.lift i f H (ClosedImmersion.lean:210) satisfies g ≫ i = f by lift_fac (:215). Sources read 2026-10-10 (sed -n)"
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-reduced-source-factors-through-closed-subscheme",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lead_note": "L 2026-10-10: composed Mathlib leaf (lift, lift_fac, le_ofIdeals_iff, Hom.ker, ker_apply); lines 210, 215, 125 verified."
+}

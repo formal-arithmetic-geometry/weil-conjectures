@@ -2,7 +2,7 @@
  "id": "lem-weil-pbc-reduced-source-factors-through-closed-subscheme",
  "kind": "statement",
  "title": "A map from a reduced scheme factors through a closed subscheme exactly set-theoretically",
- "statement": "Let X be a scheme [def-pc-scheme], let i:Z\\to X be a closed immersion [def-weil-closed-immersion], and let Y be a reduced scheme [def-pc-reduced-scheme]. For a morphism f:Y\\to X, f factors through i if and only if the set-theoretic image f(Y) is contained in i(Z). In particular, every morphism Y\\to X factors through the reduction X_red\\to X.",
+ "statement": "Let X be a scheme [def-pc-scheme], let i:Z\\to X be a closed immersion [def-weil-closed-immersion], and let Y be a reduced scheme [def-pc-reduced-scheme]. For a morphism f:Y\\to X, f factors through i if and only if the set-theoretic image f(Y) is contained in i(Z). In particular, every morphism Y\\to X factors through the reduction X_{\\mathrm{red}}\\to X [def-weil-pbc-scheme-reduction].",
  "source": {
   "document": "literature/stacks-project/schemes.tex",
   "place": "Schemes, Lemma 0356 (lemma-map-into-reduction), statement and proof, lines 2268-2289"
@@ -10,7 +10,8 @@
  "stmt_deps": [
   "def-pc-scheme",
   "def-weil-closed-immersion",
-  "def-pc-reduced-scheme"
+  "def-pc-reduced-scheme",
+  "def-weil-pbc-scheme-reduction"
  ],
  "mathlib_searches": [
   {
@@ -33,13 +34,132 @@
    "results": "No declaration for reduced-source factorization through a closed immersion from a set-theoretic image containment was found",
    "date": "2026-10-10",
    "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "morphism from a reduced scheme whose image is contained in a closed subscheme factors through it",
+   "results": "Scheme.IdealSheafData.subschemeMap, IdealSheafData.inclusion, subschemeι, inclusion_subschemeι, specTargetImageFactorization, subschemeι_apply (IdealSheaf.Subscheme, IdealSheaf.Functorial, AffineScheme)",
+   "date": "2026-10-10",
+   "verdict": "no match: all need an inclusion of ideal sheaves, none uses reducedness of the source"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.IsClosedImmersion.lift",
+   "results": "IsClosedImmersion.lift, lift_fac, lift_fac_assoc, isIso_lift (Morphisms.ClosedImmersion): hypothesis f.ker ≤ g.ker",
+   "date": "2026-10-10",
+   "verdict": "no match for the item (used for the new node lem-weil-pbc-closed-immersion-lift-ideal-kills-sections)"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rn 'IsReduced' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicGeometry/Morphisms/ClosedImmersion.lean ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicGeometry/IdealSheaf/*.lean; grep -rn 'IsReduced' --include=*.lean ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicGeometry | grep -i 'ker\\|lift\\|range\\|factor'",
+   "results": "IdealSheaf/Basic.lean:673 nilradical_eq_bot, :676 IdealSheafData.support_eq_top_iff [IsReduced X]; ClosedImmersion.lean:417 isIso_of_isClosedImmersion_of_surjective [IsReduced Y]; nothing on morphisms from a reduced source",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "local_search",
+   "query": "liftReduced (project root ~/weil-conjectures-slopmaster2)",
+   "results": "empty, index: unavailable (not proof of absence)",
+   "date": "2026-10-10",
+   "verdict": "inconclusive; covered by the grep above"
   }
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "*Only if.* If $f=i\\circ g$ for a morphism $g:Y\\to Z$, then on underlying sets $f(Y)=i(g(Y))\\subseteq i(Z)$.",
+   "uses": [
+    "def-pc-scheme"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Schemes, Lemma 0356 (lemma-map-into-reduction), statement lines 2268-2276; this direction is not written in the proof"
+   }
+  },
+  {
+   "text": "*Sections of the ideal vanish at the points of $Y$.* Assume $f(Y)\\subseteq i(Z)$ and let $\\mathcal I=\\ker(\\mathcal O_X\\to i_*\\mathcal O_Z)$ be the ideal sheaf of $i$ [def-sbc-closed-immersion-ideal-sheaf]. Let $U\\subseteq X$ be an affine open, $g\\in\\mathcal I(U)$, and let $V\\subseteq f^{-1}(U)$ be an affine open of $Y$ with $B=\\mathcal O_Y(V)$; put $b=f^\\sharp_U(g)|_V\\in B$. Let $y\\in V$ and $x=f(y)\\in U\\cap i(Z)$. By [lem-weil-pbc-closed-immersion-image-zero-locus], $\\mathcal I(U)\\subseteq\\mathfrak p_x$, so $g\\in\\mathfrak p_x$, hence $g(x)=0$ in $\\kappa(x)$ by [lem-weil-pbc-affine-open-section-vanishing-prime](a), i.e. the germ $g_x$ lies in $\\mathfrak m_x$. A morphism of schemes is a morphism of locally ringed spaces [def-pc-scheme]: the germ of $b$ at $y$ is $f^\\sharp_y(g_x)$, where $f^\\sharp_y:\\mathcal O_{X,x}\\to\\mathcal O_{Y,y}$ is a local homomorphism, so $b_y\\in\\mathfrak m_y$, i.e. $b(y)=0$ in $\\kappa(y)$ [def-weil-residue-field] (it is the image of $g(x)=0$ under $\\kappa(x)\\to\\kappa(y)$).",
+   "uses": [
+    "def-sbc-closed-immersion-ideal-sheaf",
+    "lem-weil-pbc-closed-immersion-image-zero-locus",
+    "lem-weil-pbc-affine-open-section-vanishing-prime",
+    "def-pc-scheme",
+    "def-weil-residue-field"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Schemes, Lemma 0356 (lemma-map-into-reduction), proof, lines 2280-2289"
+   }
+  },
+  {
+   "text": "*The pullback is zero on affine opens of $Y$.* With $b\\in B=\\mathcal O_Y(V)$ as in the previous step, $b(y)=0$ for every $y\\in V$, so $b\\in\\mathfrak p_y$ for every $y\\in V$ by [lem-weil-pbc-affine-open-section-vanishing-prime](a) applied to the affine open $V$ of $Y$. Every prime $\\mathfrak q\\subset B$ is of the form $\\mathfrak p_y$: with $\\iota_V:\\operatorname{Spec}B\\to Y$ the open immersion of [lem-weil-pbc-affine-open-spec-points] and $y=\\iota_V(\\mathfrak q)\\in V$, one has $\\iota_V(\\mathfrak p_y)=y=\\iota_V(\\mathfrak q)$, and $\\iota_V$ is injective, so $\\mathfrak q=\\mathfrak p_y$. Hence $b\\in\\bigcap_{\\mathfrak q}\\mathfrak q=\\sqrt{(0)}$ by [lem-weil-pbc-zero-locus-eq-iff-radical-eq] (with $I=(0)$, $V(0)$ being all primes), so $b$ is nilpotent. Since $Y$ is reduced, $B=\\mathcal O_Y(V)$ is a reduced ring [def-pc-reduced-scheme], so $b=0$.",
+   "uses": [
+    "lem-weil-pbc-affine-open-section-vanishing-prime",
+    "lem-weil-pbc-affine-open-spec-points",
+    "lem-weil-pbc-zero-locus-eq-iff-radical-eq",
+    "def-pc-reduced-scheme"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Schemes, Lemma 0356 (lemma-map-into-reduction), proof, lines 2280-2289"
+   }
+  },
+  {
+   "text": "*The pullback is zero on $f^{-1}(U)$.* The affine opens $V$ of $Y$ contained in the open $f^{-1}(U)$ cover it [lem-weil-pbc-affine-opens-basis], and by the previous step $f^\\sharp_U(g)|_V=0$ for each of them; since $\\mathcal O_Y$ is a sheaf [def-pc-scheme], $f^\\sharp_U(g)=0$ in $\\mathcal O_Y(f^{-1}(U))$. Thus for every affine open $U\\subseteq X$, $f^\\sharp_U$ kills $\\mathcal I(U)$.",
+   "uses": [
+    "lem-weil-pbc-affine-opens-basis",
+    "def-pc-scheme"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Schemes, Lemma 0356 (lemma-map-into-reduction), proof, lines 2280-2289"
+   }
+  },
+  {
+   "text": "*Factorization.* By the previous step the hypothesis of [lem-weil-pbc-closed-immersion-lift-ideal-kills-sections] holds for $i$ and $f$, which gives $g:Y\\to Z$ with $f=i\\circ g$.",
+   "uses": [
+    "lem-weil-pbc-closed-immersion-lift-ideal-kills-sections"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Schemes, Lemma 0356 (lemma-map-into-reduction), proof, lines 2280-2289"
+   }
+  },
+  {
+   "text": "*In particular.* The reduction $i_X:X_{\\mathrm{red}}\\to X$ is a closed immersion which is the identity on underlying sets [def-weil-pbc-scheme-reduction], so $i_X(X_{\\mathrm{red}})=X\\supseteq f(Y)$ for every morphism $f:Y\\to X$, and the equivalence just proved (with $Z=X_{\\mathrm{red}}$, $i=i_X$) gives the factorization $Y\\to X_{\\mathrm{red}}\\to X$.",
+   "uses": [
+    "def-weil-pbc-scheme-reduction"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Schemes, Lemma 0356 (lemma-map-into-reduction), last sentence of the statement, lines 2275-2276"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-scheme",
+  "def-sbc-closed-immersion-ideal-sheaf",
+  "lem-weil-pbc-closed-immersion-image-zero-locus",
+  "lem-weil-pbc-affine-open-section-vanishing-prime",
+  "def-weil-residue-field",
+  "lem-weil-pbc-affine-open-spec-points",
+  "lem-weil-pbc-zero-locus-eq-iff-radical-eq",
+  "def-pc-reduced-scheme",
+  "lem-weil-pbc-affine-opens-basis",
+  "lem-weil-pbc-closed-immersion-lift-ideal-kills-sections",
+  "def-weil-pbc-scheme-reduction"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/schemes.tex",
+  "place": "Schemes, Lemma 0356 (lemma-map-into-reduction), proof, lines 2280-2289"
+ },
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "worker",
@@ -59,5 +179,17 @@
   }
  },
  "chapter": "sec-proper-base-change",
- "unit": "sk-thm-p1"
+ "unit": "sk-thm-p1",
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "lem-weil-pbc-reduced-source-factors-through-closed-subscheme",
+  "worker": "stage1",
+  "summary": "Split along the proof of Stacks Schemes 0356 (schemes.tex 2280-2289) in six steps: the trivial direction; for an affine open U of X, g in I(U) and an affine open V of f^{-1}(U), the pullback b vanishes at every point of V (closed-immersion-image-zero-locus, affine-open-section-vanishing-prime, local homomorphism of stalks); b lies in every prime of O_Y(V), hence is nilpotent (00E0 via zero-locus-eq-iff-radical-eq) and zero since Y is reduced (Lemma 01J1, the sections clause of def-pc-reduced-scheme); the sheaf property on an affine cover of f^{-1}(U); the factorization by Lemma 01HP, a new Mathlib leaf lem-weil-pbc-closed-immersion-lift-ideal-kills-sections (IsClosedImmersion.lift with le_ofIdeals_iff and Hom.ker_apply); and the X_red clause from def-weil-pbc-scheme-reduction (added to the statement's citations and stmt_deps). Statement otherwise unchanged; the item itself has no Mathlib match (searches added)."
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "result": "accepted",
+  "note": "6 steps following Stacks 0356: 'only if'; sections of the ideal sheaf vanish at the points of Y (zero-locus node, section-vanishing node, local stalk maps); the pullback is zero on affine opens of Y since Y is reduced (intersection of primes = nilradical); zero on f^{-1}(U) by the sheaf property; factorization via a new composed leaf for 01HP (IsClosedImmersion.lift / lift_fac with le_ofIdeals_iff; ClosedImmersion.lean:210/215, IdealSheaf/Basic.lean:125 verified by L); the X_red clause. Statement gained the citation of def-weil-pbc-scheme-reduction."
+ }
 }

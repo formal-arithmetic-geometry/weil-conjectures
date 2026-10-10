@@ -871,3 +871,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 04:38 L: reviewed lem-weil-pbc-quotient-local-structure (Mathlib leaf, one declaration per clause; source corrected): accepted.
 - 04:39 L: reviewed lem-weil-pbc-quasi-finite-affine-open-in-finite (5 steps, +00QB node, +01WI leaf; stage 3: integral-closure-zariski-main-away leaf is a B8 demotion candidate): accepted.
 - 04:40 L: reviewed lem-weil-pbc-principal-localization-naive-cotangent (8 steps, +2 leaves): accepted.
+- 04:41 L: reviewed lem-weil-pbc-reduced-source-factors-through-closed-subscheme (6 steps, +01HP leaf): accepted.
