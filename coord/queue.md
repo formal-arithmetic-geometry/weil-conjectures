@@ -2,7 +2,7 @@
 
 911 items; claim with `tools/claim.py next <group> [--stage N]`.
 
-## Stage 1: nodes to split (627)
+## Stage 1: nodes to split (626)
 
 | node | distance to a target | Lean state on the done branch |
 |---|---|---|
@@ -27,7 +27,6 @@
 | `lem-weil-pbc-smooth-localization-conormal-split` | 1012 | none |
 | `lem-weil-pbc-smooth-over-field-dimension-differentials` | 1012 | none |
 | `lem-weil-pbc-cohomology-powers-ideal-application` | 1013 | none |
-| `lem-weil-pbc-colimit-standard-smooth-algebras` | 1013 | none |
 | `lem-weil-pbc-conormal-module-principal-localization` | 1013 | none |
 | `lem-weil-pbc-criterion-flatness-fibre` | 1013 | none |
 | `lem-weil-pbc-degree-p-extension-regular` | 1013 | none |
@@ -634,7 +633,7 @@
 | `lem-pc-linear-pair-graded-finite` | - | none |
 | `def-exc-jacobian-presentation` | - | none |
 
-## Stage 2: nodes to state (284)
+## Stage 2: nodes to state (285)
 
 | node | distance to Mathlib | kind |
 |---|---|---|
@@ -682,6 +681,7 @@
 | `lem-weil-pbc-colimit-etale-ring-map` | 1 | state |
 | `lem-weil-pbc-colimit-finite-ring-map` | 1 | state |
 | `lem-weil-pbc-colimit-rings-flat` | 1 | state |
+| `lem-weil-pbc-colimit-standard-smooth-algebras` | 1 | state |
 | `lem-weil-pbc-colimit-surjective-ring-map` | 1 | state |
 | `lem-weil-pbc-commshift-nattrans-triangle-morphism` | 1 | state |
 | `lem-weil-pbc-complete-local-domain-finite-over-regular` | 1 | state |
@@ -923,7 +923,7 @@
 | `lem-weil-pbc-p1-field-dimension-one` | 4 | state |
 | `lem-weil-pbc-projective-space-zero-isomorphism` | 4 | state |
 
-Not open yet: 639 nodes that wait for stage 1, 559 nodes that wait for a statement dependency.
+Not open yet: 638 nodes that wait for stage 1, 559 nodes that wait for a statement dependency.
 
 ## Stage 3: modules to prove (0)
 
