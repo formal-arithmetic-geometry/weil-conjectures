@@ -2,7 +2,7 @@
 
 861 items; claim with `tools/claim.py next <group> [--stage N]`.
 
-## Stage 1: nodes to split (401)
+## Stage 1: nodes to split (400)
 
 | node | distance to a target | Lean state on the done branch |
 |---|---|---|
@@ -32,13 +32,11 @@
 | `lem-weil-pbc-fpqc-descend-affine` | 1016 | none |
 | `lem-weil-pbc-fpqc-descend-universally-closed` | 1016 | none |
 | `lem-weil-pbc-integral-injective-dimension-equal` | 1016 | none |
-| `lem-weil-pbc-module-injects-localizations-associated-primes` | 1016 | none |
 | `lem-weil-pbc-projective-dimension-ext-characterization` | 1016 | none |
 | `lem-weil-pbc-triangular-change-of-basis` | 1016 | none |
 | `lem-weil-pbc-finite-ring-map-quasi-finite` | 1017 | none |
 | `lem-weil-pbc-regular-sequence-koszul-regular` | 1017 | none |
 | `lem-weil-pbc-scheme-modules-functorial-injective-embeddings` | 1017 | none |
-| `lem-weil-pbc-sheaf-hom-finite-presentation-quasi-coherent` | 1017 | none |
 | `lem-weil-pbc-stalk-internal-hom-finite-presentation` | 1017 | none |
 | `lem-weil-pbc-dim-one-residue-field-extensions-finite` | 1018 | none |
 | `lem-weil-pbc-koszul-differential-square-zero` | 1018 | none |
@@ -48,15 +46,16 @@
 | `lemma-weil-pbc-proper-underived-exchange` | 2003 | sorry_here |
 | `lemma-weil-pbc-etale-degree-zero` | 2004 | sorry_here |
 | `lemma-weil-pbc-finite-refinement-etale-cover` | 2005 | sorry_here |
-| `lemma-weil-pbc-spectral-restriction` | 2005 | sorry_here |
 | `lemma-weil-pbc-stein-connectedness` | 2005 | rests_on_sorry |
 | `lem-sc-pic-proper-ntorsion` | 2006 | none |
+| `lem-weil-pbc-constant-pushforward-restriction` | 2006 | none |
+| `lem-weil-pbc-fg-sheaf-constant-pushforward-embedding` | 2006 | none |
 | `lem-weil-pbc-gabber-zariski-etale-restriction-injective` | 2006 | none |
+| `lem-weil-pbc-locally-constant-zero-locus-clopen` | 2006 | none |
 | `lem-weil-pbc-sets-etale-inverse-image-composition-units` | 2006 | none |
 | `lem-weil-pbc-sets-finite-surjective-descent` | 2006 | none |
 | `thm-weil-pbc-stein-inputs` | 2006 | sorry_here |
 | `def-sp-etale-dictionary` | 3002 | none |
-| `def-weil-pbc-direct-image` | 3002 | none |
 | `def-weil-pbc-inverse-image` | 3002 | none |
 | `def-weil-pbc-kinjective-resolutions` | 3002 | none |
 | `def-weil-pbc-etale-cohomology` | 3003 | none |
@@ -408,7 +407,7 @@
 | `def-exc-jacobian-presentation` | - | none |
 | `lem-zl-noether-normalization-dimension` | - | none |
 
-## Stage 2: nodes to state (460)
+## Stage 2: nodes to state (461)
 
 | node | distance to Mathlib | kind |
 |---|---|---|
@@ -680,6 +679,7 @@
 | `lem-weil-pbc-module-finite-presentation-direct-sum` | 1 | state |
 | `lem-weil-pbc-module-finite-presentation-representatives` | 1 | state |
 | `lem-weil-pbc-module-finite-type-surjective-on-stalk` | 1 | state |
+| `lem-weil-pbc-module-injects-localizations-associated-primes` | 1 | state |
 | `lem-weil-pbc-module-sheaves-colimits-forgetful` | 1 | state |
 | `lem-weil-pbc-module-skyscraper-stalk-adjunction` | 1 | state |
 | `lem-weil-pbc-module-stalk-exact` | 1 | state |
@@ -873,7 +873,7 @@
 | `lem-weil-pbc-p1-field-dimension-one` | 4 | state |
 | `lem-weil-pbc-projective-space-zero-isomorphism` | 4 | state |
 
-Not open yet: 417 nodes that wait for stage 1, 847 nodes that wait for a statement dependency.
+Not open yet: 417 nodes that wait for stage 1, 851 nodes that wait for a statement dependency.
 
 ## Stage 3: modules to prove (0)
 
