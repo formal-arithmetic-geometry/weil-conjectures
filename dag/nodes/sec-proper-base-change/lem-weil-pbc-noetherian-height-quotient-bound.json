@@ -1,0 +1,81 @@
+{
+ "id": "lem-weil-pbc-noetherian-height-quotient-bound",
+ "kind": "statement",
+ "title": "Height drops by at most the number of equations (Krull)",
+ "statement": "Let $R$ be a Noetherian ring [def-weil-pbc-noetherian-ring], $t\\ge0$ an integer, $f_1,\\dots,f_t\\in R$, $J=(f_1,\\dots,f_t)$ the ideal they generate, $\\mathfrak P\\subset R$ a prime ideal with $J\\subseteq\\mathfrak P$, and $\\bar{\\mathfrak P}=\\mathfrak P/J$, a prime ideal of $R/J$. For a prime ideal $\\mathfrak q$ of a commutative ring $A$ let $\\operatorname{ht}(\\mathfrak q)\\in\\{0,1,2,\\dots,\\infty\\}$ be the supremum of the integers $n\\ge0$ for which there is a chain $\\mathfrak q_0\\subsetneq\\mathfrak q_1\\subsetneq\\cdots\\subsetneq\\mathfrak q_n$ of prime ideals of $A$ with $\\mathfrak q_n\\subseteq\\mathfrak q$. Then $\\operatorname{ht}(\\mathfrak P)\\le\\operatorname{ht}(\\bar{\\mathfrak P})+t$, the left side computed in $R$ and $\\operatorname{ht}(\\bar{\\mathfrak P})$ in $R/J$.",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Algebra, Lemma Tag 00KW (lemma-one-equation, line 14694: for a Noetherian local ring R and x in its maximal ideal, dim R <= dim R/xR + 1), applied t times as in the paragraph after Definition Tag 00S9 (definition-lci-field, lines 35834-35849: 'we conclude that dim(S_m) >= n - c by Lemma 00KW'); stated here for heights (Definition Tag 00KF, definition-height, line 14347: ht(p) = dim R_p) so that no localization of a quotient is needed"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-noetherian-ring"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Krull height theorem: height of prime p containing s is at most height of image of p in R/(s) plus the cardinality of s",
+   "results": "Ideal.height_le_card_of_mem_minimalPrimes_span_finset, Ideal.height_le_ringKrullDim_quotient_add_encard, Ideal.height_le_height_add_encard_of_subset, Ideal.height_le_height_add_one_of_mem, ringKrullDim_le_ringKrullDim_quotient_add_encard (all Mathlib.RingTheory.Ideal.KrullsHeightTheorem)",
+   "date": "2026-10-10",
+   "verdict": "match: Ideal.height_le_height_add_encard_of_subset"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Noetherian ring, prime ideal P containing elements f_1..f_t: height P <= height of P/(f_1..f_t) in the quotient ring + t",
+   "results": "Ideal.height_le_height_add_one_of_mem, Ideal.height_le_height_add_encard_of_subset, Ideal.height_le_height_add_spanFinrank_of_le, Ideal.height_le_ringKrullDim_quotient_add_one, Ideal.height_le_ringKrullDim_quotient_add_encard, height_le_ringKrullDim_quotient_add_spanFinrank (Mathlib.RingTheory.Ideal.KrullsHeightTheorem)",
+   "date": "2026-10-10",
+   "verdict": "match: Ideal.height_le_height_add_encard_of_subset"
+  },
+  {
+   "tool": "loogle",
+   "query": "Ideal.height, Ideal.span, Ideal.Quotient.mk",
+   "results": "Ideal.map_height_le_one_of_mem_minimalPrimes, Ideal.height_le_height_add_encard_of_subset, Ideal.height_le_height_add_one_of_mem (Mathlib.RingTheory.Ideal.KrullsHeightTheorem)",
+   "date": "2026-10-10",
+   "verdict": "match: Ideal.height_le_height_add_encard_of_subset"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -n 'theorem\\|lemma' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/RingTheory/Ideal/KrullsHeightTheorem.lean; sed -n 329,412p of that file; sed -n 30,46p RingTheory/Ideal/Height.lean; sed -n 80,88p Order/KrullDimension.lean",
+   "results": "KrullsHeightTheorem.lean:379 Ideal.height_le_height_add_encard_of_subset (variables [CommRing R] [IsNoetherianRing R], line 46); Height.lean:32 Ideal.primeHeight := Order.height ⟨I, hI⟩, :36 Ideal.height, :44 PrimeSpectrum.height_eq_orderHeight; Order/KrullDimension.lean:87 Order.height a := ⨆ (p : LTSeries α) (_ : p.last ≤ a), p.length",
+   "date": "2026-10-10",
+   "verdict": "match"
+  },
+  {
+   "tool": "local_search",
+   "query": "Ideal.height_le_height_add_encard_of_subset (project root ~/weil-conjectures-slopmaster2)",
+   "results": ".lake/packages/mathlib/Mathlib/RingTheory/Ideal/KrullsHeightTheorem.lean (index unavailable; name found)",
+   "date": "2026-10-10",
+   "verdict": "match"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "Ideal.height_le_height_add_encard_of_subset",
+  "file": "Mathlib/RingTheory/Ideal/KrullsHeightTheorem.lean",
+  "how": "specializes in one line: line 379, `[CommRing R] [IsNoetherianRing R] (s : Set R) {p : Ideal R} [p.IsPrime] (hrm : s ⊆ p) : p.height ≤ (p.map (Quotient.mk (span s))).height + s.encard`, with s = {f_1,...,f_t} (so span s = J, p.map (Quotient.mk J) = P/J, and s.encard ≤ t by Set.encard_coe_eq_coe_finsetCard, Mathlib/Data/Set/Card.lean:93, for the finset image of Fin t). The node's ht is Mathlib's height of a prime ideal: PrimeSpectrum.height_eq_orderHeight (Mathlib/RingTheory/Ideal/Height.lean:44) gives p.height = Order.height p, and Order.height (Mathlib/Order/KrullDimension.lean:87) is the supremum of lengths of LTSeries (strict chains) with last ≤ p. Lines read with sed -n on 2026-10-10.",
+  "line": 379
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-global-complete-intersection-equidimensional",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "reviewed": "Reviewed by L 2026-10-10: Mathlib leaf Ideal.height_le_height_add_encard_of_subset (KrullsHeightTheorem.lean line 379, read), one-line specialization with s = {f_1..f_t}."
+}

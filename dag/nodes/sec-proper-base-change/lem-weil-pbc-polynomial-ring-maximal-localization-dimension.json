@@ -1,0 +1,83 @@
+{
+ "id": "lem-weil-pbc-polynomial-ring-maximal-localization-dimension",
+ "kind": "statement",
+ "title": "Localizations of a polynomial ring over a field at maximal ideals have dimension n",
+ "statement": "Let $k$ be a field, $n\\ge0$ an integer, $P=k[x_1,\\dots,x_n]$ the polynomial ring [def-weil-pbc-mv-polynomial-ring] and $\\mathfrak M\\subset P$ a maximal ideal. Then the localization $P_{\\mathfrak M}$ [def-weil-pbc-localization-at-prime] has Krull dimension [def-weil-pbc-krull-dimension-ring] $\\dim(P_{\\mathfrak M})=n$.",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Algebra, Lemma Tag 00OP (lemma-dim-affine-space, line 27660), second sentence ('The dimension of k[x_1, ..., x_n]_m is n'); cited for this in the paragraph after Definition Tag 00S9 (definition-lci-field, line 35836)"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-mv-polynomial-ring",
+  "def-weil-pbc-localization-at-prime",
+  "def-weil-pbc-krull-dimension-ring"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "height of a maximal ideal of a polynomial ring in n variables over a field equals n",
+   "results": "Ideal.primeHeight, Ideal.height (Mathlib.RingTheory.Ideal.Height), Polynomial.height_map_C, MvPolynomial.ringKrullDim_of_isNoetherianRing, Polynomial.height_eq_height_add_one (Mathlib.RingTheory.KrullDimension.Polynomial), IsPrincipalIdealRing.height_eq_one_of_isMaximal, IsLocalRing.maximalIdeal_primeHeight_eq_ringKrullDim",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "every maximal ideal of MvPolynomial (Fin n) k over a field k has height n; localization at a maximal ideal has Krull dimension n",
+   "results": "Polynomial.height_map_C, ringKrullDim_add_natCard_le_ringKrullDim_mvPolynomial, Polynomial.height_eq_height_add_one, MvPolynomial.ringKrullDim_of_isNoetherianRing, Polynomial.ringKrullDim_le, ringKrullDim_succ_le_ringKrullDim_polynomial",
+   "date": "2026-10-10",
+   "verdict": "no match (only the global dimension dim k[x_1..x_n] = n, and the one-variable step P.height = p.height + 1 for P maximal in R[X] over p)"
+  },
+  {
+   "tool": "loogle",
+   "query": "Ideal.height, MvPolynomial",
+   "results": "none",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rn 'MvPolynomial' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/RingTheory/KrullDimension ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/RingTheory/Ideal/Height.lean ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/RingTheory/RegularLocalRing | grep -i 'height\\|ringKrullDim\\|Localization'",
+   "results": "KrullDimension/Polynomial.lean:120 MvPolynomial.ringKrullDim_of_isNoetherianRing (dim R[X_1..X_n] = dim R + n); KrullDimension/NonZeroDivisors.lean:82,97 lower bounds; RegularLocalRing/Polynomial.lean:35 Polynomial.isRegularLocalRing_localization_atPrime_of_comap_eq_maximalIdeal (one variable); no height of an arbitrary maximal ideal of MvPolynomial",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "local_search",
+   "query": "MvPolynomial.height (project root ~/weil-conjectures-slopmaster2)",
+   "results": "MvPolynomial.height_vanishingIdeal_singleton (WeilConjectures/Mathlib/RingTheory/Nullstellensatz.lean:143, source repository, not Mathlib: two k-rational points have ideals of equal height; does not cover non-rational maximal ideals)",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "mathlib_candidate": {
+  "declaration": "MvPolynomial.ringKrullDim_of_isNoetherianRing, Polynomial.height_eq_height_add_one",
+  "file": "Mathlib/RingTheory/KrullDimension/Polynomial.lean",
+  "how": "Not a leaf: line 120 gives only dim k[x_1..x_n] = dim k + n = n globally; line 80 (`Polynomial.height_eq_height_add_one`, [IsNoetherianRing R], P maximal in R[X] lying over p: P.height = p.height + 1) gives the one-variable step, and iterating it over k[x_1..x_{i}] -> k[x_1..x_{i+1}] (with the contraction of a maximal ideal again maximal, by the Nullstellensatz) and translating height to dim P_M (IsLocalization.AtPrime.ringKrullDim_eq_height, Mathlib/RingTheory/Ideal/Height.lean:418) is a proof of several lines, not a specialization. Alternative route: dim P_M = dim P for the domain P by Algebra 00OS (node lem-weil-pbc-finite-type-domain-dimension-local-ring) and dim P = n by line 120."
+ },
+ "status": "unsplit",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-global-complete-intersection-equidimensional",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "reviewed": "Reviewed by L 2026-10-10 (statement): the local form of Algebra 00OP (dim k[x]_M = n at every maximal ideal). Unsplit; Mathlib candidate recorded (global dimension + one-variable height step, B8)."
+}
