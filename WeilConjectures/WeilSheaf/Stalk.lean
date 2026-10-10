@@ -75,8 +75,9 @@ function is computed by the local Frobenius at the closed points,
   function of a Weil complex is finite.
 - `AlgebraicGeometry.WeilSheaf.globalSectionsToStalkObj_frobenius`: restriction of global
   sections to a stalk intertwines the two Frobenii.
-- `AlgebraicGeometry.WeilSheaf.IsPunctuallyPureOfWeight.upperStar`: pullback preserves punctual
-  purity (blueprint: `lem-tw-punctual-rescaling`).
+- `AlgebraicGeometry.WeilSheaf.IsPunctuallyPureOfWeight.upperStar` (in
+  `WeilConjectures.WeilSheaf.StalkUpperStar`): pullback preserves punctual purity (blueprint:
+  `lem-tw-punctual-rescaling`).
 
 ## Implementation notes
 
@@ -263,22 +264,6 @@ theorem IsPunctuallyPureOfWeight.hasWeightsAtMost {ι : PadicAlgCl l →+* ℂ}
 theorem HasWeightsAtMost.mono {ι : PadicAlgCl l →+* ℂ} {F : WeilSheaf k₀ l X} {w w' : ℝ}
     (h : F.HasWeightsAtMost ι w) (hww' : w ≤ w') : F.HasWeightsAtMost ι w' :=
   fun x ↦ (h x).mono (Nat.one_le_pow _ _ Nat.card_pos) hww'
-
--- TODO(adic): needs the stalks of `φ^* F` with their local Frobenius
-/-- **Punctual purity on a closed fibre.** The pullback `φ^* F` of a sheaf punctually `ι`-pure of
-weight `w` along a morphism `φ : X' ⟶ X` of `k₀`-schemes is punctually `ι`-pure of weight `w`:
-at a closed point `z` of `X'` over `x = φ z`, with `r = [κ(z) : κ(x)]`, the local Frobenius of
-`φ^* F` at `z` is `Fₓʳ`, and `q_z = q_xʳ`.
-
-The blueprint states this for the inclusion `X_y ⟶ X` of the fibre of a morphism `X ⟶ Y` over a
-closed point `y`, with purity on `X_y` relative to `κ(y)`; since residue cardinalities do not
-depend on the base field, purity relative to `κ(y)` and relative to `k₀` agree
-(blueprint: `lem-tw-punctual-rescaling`). -/
-theorem IsPunctuallyPureOfWeight.upperStar {ι : PadicAlgCl l →+* ℂ} {F : WeilSheaf k₀ l X}
-    {w : ℝ} (h : F.IsPunctuallyPureOfWeight ι w) {X' : Scheme.{u}}
-    [X'.Over (Spec (CommRingCat.of k₀))] (φ : X' ⟶ X) [φ.IsOver (Spec (CommRingCat.of k₀))] :
-    ((upperStar φ).obj F).IsPunctuallyPureOfWeight ι w :=
-  sorry
 
 /-- `F` is `ι`-*real* if at every closed point `x` the stalk `F_x̄` with its local Frobenius is
 `ι`-real (`FrobeniusModule.IsReal`): the realization under `ι` of the local polynomial
