@@ -2,17 +2,71 @@
  "id": "lem-weil-pbc-spec-surjective-base-change",
  "kind": "statement",
  "title": "Surjectivity on spectra is stable under base change",
- "statement": "Let $R\\to S$ be a ring map whose map $\\operatorname{Spec}S\\to\\operatorname{Spec}R$ is surjective. For every ring map $R\\to R'$, the base-change map $R'\\to R'\\otimes_R S$ induces a surjection $\\operatorname{Spec}(R'\\otimes_R S)\\to\\operatorname{Spec}R'$ [lem-weil-pbc-tensor-cancel-base-change].",
+ "statement": "Let $R\\to S$ be a homomorphism of commutative rings whose induced map $\\operatorname{Spec}S\\to\\operatorname{Spec}R$ [def-weil-affine-spectrum] is surjective. For every homomorphism of commutative rings $R\\to R'$, the base-change map $R'\\to R'\\otimes_R S$, $r'\\mapsto r'\\otimes1$, induces a surjection $\\operatorname{Spec}(R'\\otimes_R S)\\to\\operatorname{Spec}R'$.",
  "source": {
   "document": "literature/stacks-project/algebra.tex",
   "place": "Algebra, Lemma Tag 00FI (lemma-surjective-spec-radical-ideal), line 5822, final base-change assertion"
  },
  "stmt_deps": [
+  "def-weil-affine-spectrum"
+ ],
+ "proof": [
+  {
+   "text": "Reduction to fibre rings. Let $\\mathfrak p'\\subset R'$ be a prime ideal and $\\mathfrak p\\subset R$ its inverse image under $R\\to R'$, a prime ideal of $R$. Put $F=S\\otimes_R\\kappa(\\mathfrak p)$ and $T=(R'\\otimes_RS)\\otimes_{R'}\\kappa(\\mathfrak p')$, the fibre rings of $R\\to S$ at $\\mathfrak p$ and of $R'\\to R'\\otimes_RS$ at $\\mathfrak p'$ [def-weil-pbc-localization-at-prime]. Since $\\operatorname{Spec}S\\to\\operatorname{Spec}R$ is surjective, $\\mathfrak p$ is in its image, so $F\\neq0$ by [lem-weil-pbc-prime-in-image-iff-fibre-ring-nonzero] (direction 'only if') applied to $R\\to S$ and $\\mathfrak p$. By the same lemma (direction 'if') applied to $R'\\to R'\\otimes_RS$ and $\\mathfrak p'$, it suffices to show $T\\neq0$ (Steps 2-4).",
+   "uses": [
+    "lem-weil-pbc-prime-in-image-iff-fibre-ring-nonzero",
+    "def-weil-pbc-localization-at-prime",
+    "def-weil-affine-spectrum"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Lemma Tag 00FI (lemma-surjective-spec-radical-ideal, line 5822), second paragraph of the proof, and Lemma Tag 00E7 (lemma-in-image, line 3500)"
+   }
+  },
+  {
+   "text": "The map of residue fields. The ring map $R\\to R'$ sends $R\\setminus\\mathfrak p$ into $R'\\setminus\\mathfrak p'$ (as $\\mathfrak p$ is the inverse image of $\\mathfrak p'$), so it induces a local homomorphism $R_{\\mathfrak p}\\to R'_{\\mathfrak p'}$, $r/s\\mapsto r/s$, which maps $\\mathfrak pR_{\\mathfrak p}$ into $\\mathfrak p'R'_{\\mathfrak p'}$ and hence a homomorphism of fields $\\kappa(\\mathfrak p)\\to\\kappa(\\mathfrak p')$ [def-weil-pbc-localization-at-prime]. Both composites $R\\to\\kappa(\\mathfrak p)\\to\\kappa(\\mathfrak p')$ and $R\\to R'\\to\\kappa(\\mathfrak p')$ send $r$ to the class of $r/1$, so they agree: the $R$-algebra structure of $\\kappa(\\mathfrak p')$ through $R'$ is the one through $\\kappa(\\mathfrak p)$. Thus $\\kappa(\\mathfrak p')$ is a field extension of $\\kappa(\\mathfrak p)$.",
+   "uses": [
+    "def-weil-pbc-localization-at-prime"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Lemma Tag 00FI (lemma-surjective-spec-radical-ideal, line 5822), second paragraph of the proof: '$\\kappa(\\mathfrak p)\\to\\kappa(\\mathfrak p')$ is an extension of fields'"
+   }
+  },
+  {
+   "text": "Identification of the fibre ring. Using the symmetry $M\\otimes N\\cong N\\otimes M$ of tensor products of algebras, $T\\cong\\kappa(\\mathfrak p')\\otimes_{R'}(R'\\otimes_RS)$, and by [lem-weil-pbc-tensor-cancel-base-change] (with its $R\\to S$, $B$, $A$ taken to be $R\\to R'$, $S$, $\\kappa(\\mathfrak p')$) this is isomorphic as a ring to $\\kappa(\\mathfrak p')\\otimes_RS$. By Step 2 the $R$-algebra $\\kappa(\\mathfrak p')$ is also an algebra over $\\kappa(\\mathfrak p)$ through $R\\to\\kappa(\\mathfrak p)$, so [lem-weil-pbc-tensor-cancel-base-change] again (with its $R\\to S$, $B$, $A$ taken to be $R\\to\\kappa(\\mathfrak p)$, $S$, $\\kappa(\\mathfrak p')$) gives a ring isomorphism $\\kappa(\\mathfrak p')\\otimes_{\\kappa(\\mathfrak p)}(\\kappa(\\mathfrak p)\\otimes_RS)\\cong\\kappa(\\mathfrak p')\\otimes_RS$. With $\\kappa(\\mathfrak p)\\otimes_RS\\cong F$ (symmetry) we get a ring isomorphism $T\\cong\\kappa(\\mathfrak p')\\otimes_{\\kappa(\\mathfrak p)}F$.",
+   "uses": [
+    "lem-weil-pbc-tensor-cancel-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Lemma Tag 00FI (lemma-surjective-spec-radical-ideal, line 5822), second paragraph of the proof: $(R'\\otimes_RS)\\otimes_{R'}\\kappa(\\mathfrak p')=S\\otimes_R\\kappa(\\mathfrak p)\\otimes_{\\kappa(\\mathfrak p)}\\kappa(\\mathfrak p')$"
+   }
+  },
+  {
+   "text": "Nonvanishing. $F$ is a nonzero $\\kappa(\\mathfrak p)$-algebra (Step 1) and $\\kappa(\\mathfrak p)\\subseteq\\kappa(\\mathfrak p')$ a field extension (Step 2). Extend $\\{1\\}$ to a $\\kappa(\\mathfrak p)$-basis of $\\kappa(\\mathfrak p')$ and let $\\lambda:\\kappa(\\mathfrak p')\\to\\kappa(\\mathfrak p)$ be the $\\kappa(\\mathfrak p)$-linear map with $\\lambda(1)=1$ vanishing on the other basis vectors. Then $\\lambda\\otimes\\mathrm{id}_F:\\kappa(\\mathfrak p')\\otimes_{\\kappa(\\mathfrak p)}F\\to\\kappa(\\mathfrak p)\\otimes_{\\kappa(\\mathfrak p)}F\\cong F$ sends $1\\otimes1$ to $1\\neq0$, so $1\\otimes1\\neq0$ and $\\kappa(\\mathfrak p')\\otimes_{\\kappa(\\mathfrak p)}F\\neq0$. By Step 3, $T\\neq0$, and by Step 1 $\\mathfrak p'$ is in the image of $\\operatorname{Spec}(R'\\otimes_RS)\\to\\operatorname{Spec}R'$. As $\\mathfrak p'$ was arbitrary, this map is surjective.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Lemma Tag 00FI (lemma-surjective-spec-radical-ideal, line 5822), second paragraph of the proof: 'which is not zero as $S\\otimes_R\\kappa(\\mathfrak p)$ is not zero by assumption and $\\kappa(\\mathfrak p)\\to\\kappa(\\mathfrak p')$ is an extension of fields'"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-prime-in-image-iff-fibre-ring-nonzero",
+  "def-weil-pbc-localization-at-prime",
+  "def-weil-affine-spectrum",
   "lem-weil-pbc-tensor-cancel-base-change"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Lemma Tag 00FI (lemma-surjective-spec-radical-ideal, line 5822), second paragraph of the proof, with Lemma Tag 00E7 (lemma-in-image, line 3500); the nonvanishing of the tensor product over a field extension (Step 4) and the compatibility of R-structures (Step 2), which the source leaves implicit, written out by the worker"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -34,10 +88,31 @@
    "results": "no matching base-change theorem in Mathlib",
    "date": "2026-10-10",
    "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "if Spec S → Spec R is surjective then PrimeSpectrum.comap (algebraMap R' (R' ⊗[R] S)) is surjective",
+   "results": "PrimeSpectrum.isEmbedding_comap_of_surjective, PrimeSpectrum.comap_surjective_of_faithfullyFlat, AlgebraicGeometry.Spec.map_surjective, IsLocalHom.of_comap_surjective, PrimeSpectrum.isClosed_range_comap_of_surjective; none for base change",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "surjectivity of the induced map on prime spectra is stable under base change by tensor product of rings",
+   "results": "RingHom.surjective_isStableUnderBaseChange (surjective ring maps, not Spec), RingHom.SurjectiveOnStalks.baseChange, Algebra.FiniteType.baseChangeAux_surj, PrimeSpectrum.comap_surjective_of_faithfullyFlat, Module.FaithfullyFlat.surjective_of_tensorProduct",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "rg -n 'comap_surjective|surjective_comap|Surjective.*StableUnderBaseChange|surjective.*baseChange' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib --glob '*.lean'",
+   "results": "ring level: only Algebra.IsIntegral.comap_surjective, RingHom.IsIntegral.comap_surjective (Spectrum/Prime/Topology.lean:1217,1226), PrimeSpectrum.comap_surjective_iff_injective_of_finite (Flat/Rank.lean:57), Module.FaithfullyFlat.of_comap_surjective; scheme level: instance MorphismProperty.IsStableUnderBaseChange @AlgebraicGeometry.Surjective (AlgebraicGeometry/PullbackCarrier.lean:436)",
+   "date": "2026-10-10",
+   "verdict": "generalization, not one line: the scheme instance (PullbackCarrier.lean:436, node lem-weil-pbc-surjective-base-change) gives the statement after identifying Spec(R' ⊗_R S) with the fibre product Spec R' ×_{Spec R} Spec S (pullbackSpecIso) and Spec surjectivity with PrimeSpectrum.comap surjectivity; no ring-level declaration"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "worker",
@@ -57,5 +132,17 @@
   }
  },
  "chapter": "sec-proper-base-change",
- "unit": "sk-thm-p1"
+ "unit": "sk-thm-p1",
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "lem-weil-pbc-spec-surjective-base-change",
+  "worker": "stage1",
+  "summary": "Statement kept in substance; the citation [lem-weil-pbc-tensor-cancel-base-change] was removed from the statement and stmt_deps (the statement does not use it; it is used in the proof, Step 3) and [def-weil-affine-spectrum] added for Spec. Split along the second paragraph of the proof of Stacks 00FI (tag checked in stacks-project/tags/tags): Step 1 reduces to nonvanishing of fibre rings by the new Mathlib leaf lem-weil-pbc-prime-in-image-iff-fibre-ring-nonzero (Stacks 00E7 (1)<=>(2); PrimeSpectrum.nontrivial_iff_mem_rangeComap, RingHom.lean:282, source read); Step 2 the field map kappa(p) -> kappa(p') and compatibility of R-structures (elementary); Step 3 the isomorphism (R' (x)_R S) (x)_{R'} kappa(p') = kappa(p') (x)_{kappa(p)} (S (x)_R kappa(p)) by two applications of the Mathlib leaf lem-weil-pbc-tensor-cancel-base-change; Step 4 nonvanishing via a kappa(p)-linear retraction kappa(p') -> kappa(p) (elementary). Mathlib: no ring-level match; the scheme-level instance IsStableUnderBaseChange @Surjective (PullbackCarrier.lean:436) is a generalization needing pullbackSpecIso, not one line. lean_audit none on both branches."
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "result": "accepted",
+  "note": "4 steps following Stacks 00FI: reduction to fibre rings by the new 00E7 leaf (PrimeSpectrum.nontrivial_iff_mem_rangeComap RingHom.lean:282, verified by L), the field map kappa(p) -> kappa(p'), T = kappa(p') (x)_{kappa(p)} F by two tensor cancellations, nonvanishing by a linear retraction. Statement citations corrected (tensor-cancel moved to the proof)."
+ }
 }

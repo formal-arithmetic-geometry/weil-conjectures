@@ -1,0 +1,74 @@
+{
+ "id": "lem-weil-pbc-prime-in-image-iff-fibre-ring-nonzero",
+ "kind": "statement",
+ "title": "A prime is in the image of Spec iff its fibre ring is nonzero",
+ "statement": "Let $\\varphi:R\\to S$ be a homomorphism of commutative rings and $\\mathfrak p\\subset R$ a prime ideal with residue field $\\kappa(\\mathfrak p)=R_{\\mathfrak p}/\\mathfrak pR_{\\mathfrak p}$ and fibre ring $S\\otimes_R\\kappa(\\mathfrak p)$ [def-weil-pbc-localization-at-prime]. Then $\\mathfrak p$ is in the image of the map $\\operatorname{Spec}S\\to\\operatorname{Spec}R$, $\\mathfrak q\\mapsto\\varphi^{-1}(\\mathfrak q)$ [def-weil-affine-spectrum] (that is, $\\mathfrak p=\\varphi^{-1}(\\mathfrak q)$ for some prime ideal $\\mathfrak q\\subset S$) if and only if $S\\otimes_R\\kappa(\\mathfrak p)\\neq0$.",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Lemma Tag 00E7 (lemma-in-image, line 3500), equivalence of (1) and (2); proved in Remark Tag 00E6 (remark-fundamental-diagram, line 3422)"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-localization-at-prime",
+  "def-weil-affine-spectrum"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "prime p is in the image of Spec S → Spec R iff the fiber ring κ(p) ⊗ S is nonzero",
+   "results": "PrimeSpectrum.nontrivial_iff_mem_rangeComap, PrimeSpectrum.mem_range_comap_iff, range_comap_of_surjective (Mathlib.RingTheory.Spectrum.Prime.RingHom); PrimeSpectrum.preimageEquivFiber (Mathlib.RingTheory.LocalRing.ResidueField.Fiber)",
+   "date": "2026-10-10",
+   "verdict": "match: PrimeSpectrum.nontrivial_iff_mem_rangeComap"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "a prime ideal p of R lies in the image of Spec S → Spec R if and only if the fibre ring S ⊗_R κ(p) is nonzero",
+   "results": "PrimeSpectrum.nontrivial_iff_mem_rangeComap (Mathlib.RingTheory.Spectrum.Prime.RingHom); PrimeSpectrum.preimageEquivFiber, preimageEquivFiber_apply_asIdeal (ResidueField/Fiber); Ideal.comap_fiberIsoOfBijectiveResidueField_apply (Etale/QuasiFinite)",
+   "date": "2026-10-10",
+   "verdict": "match"
+  },
+  {
+   "tool": "loogle",
+   "query": "PrimeSpectrum.nontrivial_iff_mem_rangeComap",
+   "results": "PrimeSpectrum.nontrivial_iff_mem_rangeComap (p : PrimeSpectrum R) : Nontrivial (TensorProduct R p.asIdeal.ResidueField S) ↔ p ∈ Set.range (PrimeSpectrum.comap (algebraMap R S)), Mathlib.RingTheory.Spectrum.Prime.RingHom",
+   "date": "2026-10-10",
+   "verdict": "match"
+  },
+  {
+   "tool": "grep",
+   "query": "rg -n 'comap_surjective|surjective_comap|nontrivial_iff' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/RingTheory/Spectrum/Prime/ ; sed -n 270,300p RingTheory/Spectrum/Prime/RingHom.lean",
+   "results": "RingTheory/Spectrum/Prime/RingHom.lean:282 lemma PrimeSpectrum.nontrivial_iff_mem_rangeComap (docstring line 281 'A prime p is in the range of Spec S → Spec R if the fiber over p is nontrivial'; proof via Ideal.exists_maximal and the map κ(p) ⊗ S → κ(q)); source read",
+   "date": "2026-10-10",
+   "verdict": "match"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "PrimeSpectrum.nontrivial_iff_mem_rangeComap",
+  "file": "Mathlib/RingTheory/Spectrum/Prime/RingHom.lean",
+  "line": 282,
+  "how": "specializes in one line: the lemma states Nontrivial (κ(p) ⊗[R] S) ↔ p ∈ Set.range (PrimeSpectrum.comap (algebraMap R S)), with κ(p) = p.asIdeal.ResidueField = R_p/pR_p; transport along Algebra.TensorProduct.comm R κ(p) S : κ(p) ⊗[R] S ≃ₐ S ⊗[R] κ(p), and Nontrivial ↔ (0 ≠ 1) ↔ the ring is nonzero (nontrivial_iff / subsingleton_iff_zero_eq_one). Source read 2026-10-10."
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-spec-surjective-base-change",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1"
+}
