@@ -2237,3 +2237,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 18:22 L: merged deliver/K1/lem-sc-sheaf-ext-coherent (reviewer FIX; after a return; new nodes: 2)
 - 18:23 L: returned deliver/K1/lem-pc-sigma-k-points (reviewer RETURN: 1. C1/D (reviewer R-skp1822): the statement and step 1 use the definition of Pic_{X/k,sigma} as Ker(sigma_T^*: Pic(X_T) )
 - 18:24 L: merged deliver/F1/lem-pc-zero-scheme-locally-principal (reviewer PASS; first push; new nodes: 2)
+- 18:25 L: merged deliver/M1/lem-sc-boundary-cech-injective-middle (reviewer FIX; after a return; new nodes: 0)

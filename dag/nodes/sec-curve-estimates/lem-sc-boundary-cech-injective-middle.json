@@ -13,7 +13,7 @@
  },
  "kind": "statement",
  "title": "Injective middle term: the Cech local-lift cocycle is the connecting class",
- "statement": "Let X be a scheme [def-pc-scheme], let 0 \\to A \\to I \\to Q \\to 0 be a short exact sequence of sheaves of O_X-modules with I injective in Mod(O_X) [def-weil-sheaf-of-modules-category] [def-sp-injective-resolutions], and let U = {U_i} be an open covering of X. For q in H^0(X,Q), choose lifts x_i in I(U_i) of q|_{U_i}. Then (x_{i_0}|_{U_{i_0} cap U_{i_1}} - x_{i_1}|_{U_{i_0} cap U_{i_1}}) is an A-valued Cech 1-cocycle, and the canonical map c_A from Cech H^1(U,A) to H^1(X,A) sends its class to the connecting class partial(q) for this short exact sequence.",
+ "statement": "Let X be a scheme [def-pc-scheme], let 0 \\to A \\to I \\to Q \\to 0 be a short exact sequence of sheaves of O_X-modules with I injective in Mod(O_X) [def-weil-sheaf-of-modules-category] [def-sp-injective-resolutions], and let U = {U_i} be an open covering of X. For q in H^0(X,Q), choose lifts x_i in I(U_i) of q|_{U_i}. Then (x_{i_1}|_{U_{i_0} cap U_{i_1}} - x_{i_0}|_{U_{i_0} cap U_{i_1}}) is an A-valued Cech 1-cocycle, and the canonical map c_A from Cech H^1(U,A) to H^1(X,A) sends its class to the connecting class partial(q) for this short exact sequence.",
  "source": {
   "document": "literature/stacks-project/cohomology.tex",
   "place": "Cohomology, Lemma 01EQ (cohomology-lemma-cech-cohomology), proof via the double complex and the maps beta followed by alpha^{-1}, together with Lemma 01EP (cohomology-lemma-injective-trivial-cech)"
@@ -24,12 +24,73 @@
   "def-sp-injective-resolutions",
   "pqf-def-cohomology",
   "def-weil-pbc-site-cech-complex",
-  "lem-weil-pbc-module-injective-open-cover-cech-acyclic"
+  "lem-sc-cech-comparison-map-naturality"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "On each overlap U_{i_0} cap U_{i_1}, the image of x_{i_1}-x_{i_0} in Q is q|_{U_{i_0} cap U_{i_1}}-q|_{U_{i_0} cap U_{i_1}}=0, so exactness puts this difference in A. On a triple overlap, the alternating sum (x_{i_2}-x_{i_1})-(x_{i_2}-x_{i_0})+(x_{i_1}-x_{i_0}) is zero by cancellation, hence these differences are a Cech 1-cocycle by the differential in [def-weil-pbc-site-cech-complex].",
+   "uses": [
+    "def-weil-pbc-site-cech-complex"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/cohomology.tex",
+    "place": "Cohomology, Lemma 0B8S (cohomology-lemma-cech-h1), local-lift paragraph"
+   }
+  },
+  {
+   "text": "Use the canonical comparison map described in [lem-sc-cech-comparison-map-naturality]: for an injective resolution A \\to J^bullet, the total complex has maps alpha_A from global sections and beta_A from the Cech complex, with alpha_A a quasi-isomorphism, and c_A is H^1(alpha_A)^{-1} H^1(beta_A) followed by H^1(Gamma(X,J^bullet)) = H^1(X,A). Thus the c_A in the statement is the map used by the total-complex computation.",
+   "uses": [
+    "lem-sc-cech-comparison-map-naturality"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/cohomology.tex",
+    "place": "Cohomology, Lemma 01EQ proof via the double complex, together with Lemma 01EP (lemma-injective-trivial-cech)"
+   }
+  },
+  {
+   "text": "Since I is injective and A \\to I is a monomorphism, choose an injective resolution A \\to J^\\bullet with J^0=I and J^q=0 for q<0 (continue by [lem-weil-pbc-scheme-modules-enough-injectives]). Exactness of J^\\bullet gives Q=I/A \\cong \\mathrm{im}(d^0) \\subset J^1, so s_C: Q \\to J^1, with the complex K^n=J^{n+1} and differential -d, is an injective resolution of Q. Let q~ in J^1(X) be the image of q; then d(x_i)=q~|_{U_i}. Horseshoe: put I_B^n=J^n \\oplus J^{n+1}, d_B(a,b)=(da-b,-db), s_B(x)=(x,dx), \\alpha^n(a)=(a,0), \\beta^n(a,b)=b. Direct checks: d_B^2=0, \\alpha and \\beta are cochain maps, \\alpha^0 s_A=s_B f, \\beta^0 s_B=s_C g, each 0 \\to J^n \\to I_B^n \\to K^n \\to 0 is split exact, and s_B is an injective resolution of I (a cocycle (a,b) of I_B has b=da, so (a,b)=(a,da)=d_B(0,-a) is a coboundary in degrees \\geq 1, and the degree-0 cocycles are \\{(x,dx)\\}=s_B(I)). So (J,I_B,K,\\alpha,\\beta) is a horseshoe resolution of 0 \\to A \\to I \\to Q \\to 0 as in [lem-weil-pbc-horseshoe-delta-functor] (compare [lem-weil-pbc-injective-resolution-ses]), and \\delta^0(q) is computed by the snake: lift q~ in K^0(X) to (0,q~) in I_B^0(X); d_B(0,q~)=(-q~,0)=\\alpha^1(-q~). Hence partial(q)=-[q~] in H^1(\\Gamma(X,J^\\bullet)), transported to H^1(X,A) by the isomorphism \\iota_J of [lem-weil-pbc-derived-functor-map-via-lift]. Total complex: in Tot(Cech(U,J^\\bullet)) with d=d_I+(-1)^p d_{II} [def-sp-double-complex-total] and d_Cech(s)_{i_0i_1}=s_{i_1}-s_{i_0} [def-weil-pbc-site-cech-complex], the 0-cochain (x_i) in Cech^0(U,J^0) has total differential (x_{i_1}-x_{i_0}) + (q~|_{U_i}) = \\beta_A(c)+\\alpha_A(q~), where c=(x_{i_1}-x_{i_0}) is the A-valued cocycle of Step 1. So H^1(\\beta_A)[c]=-H^1(\\alpha_A)[q~], and by Step 2 c_A[c]=-[q~]=partial(q).",
+   "uses": [
+    "lem-weil-pbc-scheme-modules-enough-injectives",
+    "lem-weil-pbc-horseshoe-delta-functor",
+    "lem-weil-pbc-injective-resolution-ses",
+    "lem-weil-pbc-derived-functor-map-via-lift",
+    "lem-sc-cech-comparison-map-naturality",
+    "def-weil-pbc-site-cech-complex",
+    "def-sp-double-complex-total",
+    "def-sp-injective-resolutions"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/cohomology.tex",
+    "place": "Cohomology, Lemma 01EQ proof (maps beta followed by alpha^{-1}) and Lemma 0B8S local-lift description of the connecting class"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-site-cech-complex",
+  "def-sp-double-complex-total",
+  "lem-sc-cech-comparison-map-naturality",
+  "lem-weil-pbc-horseshoe-delta-functor",
+  "lem-weil-pbc-injective-resolution-ses",
+  "lem-weil-pbc-derived-functor-map-via-lift",
+  "def-sp-injective-resolutions",
+  "lem-weil-pbc-scheme-modules-enough-injectives"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Cohomology, Lemma 01EQ (cohomology-lemma-cech-cohomology), proof via the double complex and Lemma 01EP, with the local-lift boundary formula of Lemma 0B8S"
+ },
  "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Cech local lift differences connecting homomorphism injective middle sheaf",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-11",
+   "verdict": "unavailable"
+  },
   {
    "tool": "leanfinder",
    "query": "Cech class of local lift differences equals connecting homomorphism when middle sheaf is injective",
@@ -50,15 +111,89 @@
    "results": "none",
    "date": "2026-10-11",
    "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "connecting homomorphism represented by differences of local lifts in Cech cohomology",
+   "results": "groupCohomology.cocyclesMkOfCompEq, groupCohomology.δ_apply, groupCohomology.δ₁_apply, and unrelated cochain declarations; no sheaf Cech comparison theorem",
+   "date": "2026-10-11",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.GrothendieckTopology.MayerVietorisSquare",
+   "results": "MayerVietorisSquare and shortComplex declarations; no theorem identifying local-lift Cech classes with sheaf connecting maps",
+   "date": "2026-10-11",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "MayerVietoris|cechComplexFunctor|connecting in Mathlib/CategoryTheory/Sites",
+   "results": "MayerVietorisSquare.lean lines 30,88,93,109,123; SheafCohomology/Cech.lean line 65 defines cechComplexFunctor; SheafCohomology/MayerVietoris.lean line 110 has a Mayer-Vietoris connecting map; no local-lift comparison",
+   "date": "2026-10-11",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "connecting map from local Cech lift differences",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-11",
+   "verdict": "unavailable"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-sc-boundary-cech-compatibility",
   "by": "worker",
   "date": "2026-10-10"
  },
  "chapter": "sec-curve-estimates",
- "unit": "sk-thm-curveestimate"
+ "unit": "sk-thm-curveestimate",
+ "split_report": {
+  "date": "2026-10-11",
+  "item": "lem-sc-boundary-cech-injective-middle",
+  "worker": "stage1",
+  "summary": "Split the injective-middle case of the Cech-to-cohomology comparison. The local differences x_{i_1}-x_{i_0} form an A-valued Cech cocycle; c_A is the alpha/beta comparison map; an injective resolution of A starting with I gives an explicit horseshoe, whose snake boundary is -[q~], and the total-complex computation gives c_A of the cocycle as -[q~], hence partial(q).",
+  "blueprint": "Realizes the ancestor lem-sc-pic-proper-ntorsion proof clause 'Cohomology Lemma 0B8S local-lift computation after replacing the middle sheaf by an injective module, using the comparison map of Lemma 01EQ'.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-scheme-modules-enough-injectives",
+    "why": "The injective-resolution construction is a general sheaf-module fact not supplied by the curve-estimate route."
+   },
+   {
+    "node": "lem-weil-pbc-module-injective-open-cover-cech-acyclic",
+    "why": "The double-complex row collapse needs Cech acyclicity for injective modules on arbitrary open covers."
+   },
+   {
+    "node": "thm-sp-double-complex-spectral-sequences",
+    "why": "The comparison of the Cech double complex with global sections uses the general first-quadrant spectral-sequence theorem."
+   },
+   {
+    "node": "lem-weil-pbc-horseshoe-delta-functor",
+    "why": "The explicit sign computation uses the general horseshoe construction of the derived-functor connecting morphism."
+   },
+   {
+    "node": "lem-weil-pbc-injective-resolution-ses",
+    "why": "The horseshoe sign computation uses the existence and degreewise exactness of injective resolutions for a short exact sequence."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-scheme-modules-enough-injectives",
+  "lem-weil-pbc-horseshoe-delta-functor",
+  "lem-weil-pbc-injective-resolution-ses",
+  "lem-weil-pbc-scheme-modules-enough-injectives",
+  "lem-weil-pbc-horseshoe-delta-functor",
+  "lem-weil-pbc-injective-resolution-ses"
+ ],
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-bim1824",
+  "group": "M1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-bim1824 (reviewer sub-agent of L); spot-checked: Earlier return points: E sign repaired by E7 (cocycle now x_i1-x_i0; rechecked Tot differential d(x_i)=beta(c)+alpha(q~), so c_A[c]=-[q~], and horseshoe snake gives partial(q)=-[q~]: correct); C4 repaired (Step 2 cites lem-sc-cech-comparison-map-naturality); arrows fixed. FIX more, RETURN less: C1 Step 3 only asserted the horseshoe gives -[q~]; rewrote Step 3 with J^0=I, explicit horseshoe I_B=J+J[1], d_B(a,b)=(da-b,-db), exactness and snake lift computed, citing lem-weil-pbc-scheme-modules-enough-injectives; dropped unused stmt_dep lem-weil-pbc-module-injective-open-cover-cech-acyclic and unused tool_uses (spectral sequences, cech-acyclic); refreshed stale split_report summary.; 1 file(s) fixed by the reviewer"
+ },
+ "lead_note": "2026-10-10 L (R-bim1824): PARENT SIGN: lem-sc-boundary-cech-compatibility states class of (t_i0 - t_i1) |-> +partial(s); with this child (c_A[(x_i1 - x_i0)] = partial(q), E7) the parent must change to (t_i1 - t_i0) (or -partial(s))."
 }
