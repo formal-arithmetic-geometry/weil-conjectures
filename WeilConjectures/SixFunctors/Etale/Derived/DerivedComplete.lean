@@ -223,6 +223,7 @@ theorem derivedCompleteIntegral_rightDerivedLowerShriek {X Y : Scheme.{u}} (f : 
   derivedComplete_rightDerivedLowerShriek _ (PadicAlgCl.isPrincipal_maximalIdealShrink l E) f K
     hK
 
+attribute [-instance] Shrink.instRing in
 /-- Blueprint `sk-thm-transport`: Transport through the coefficient stages.
 
 **The dual at the integral stage.** For `E` finite over `ℚ_ℓ` and a scheme `X` on which the
@@ -236,12 +237,7 @@ theorem derivedCompleteIntegral_coefficientDual {X : Scheme.{u}}
     DerivedCategory.derivedCompleteIntegral X.smallEtaleTopology l E
       ((DerivedCategory.coefficientDual
         (ModuleCat.{u + 1} (Shrink.{u + 1} (PadicAlgCl.integers l E))) X).obj (op K)) :=
-  -- This is `derivedComplete_coefficientDual _ (PadicAlgCl.isPrincipal_maximalIdealShrink l E)
-  -- hΛ K hK`, which elaborates but times out in the kernel: the statement here carries the ring
-  -- instance `Shrink.instRing`, the instantiated general statement carries
-  -- `CommRing.toRing Shrink.instCommRing`, and the two have to be unfolded against each other
-  -- inside every monoidal and closed structure that `coefficientDual` depends on.
-  sorry
+  derivedComplete_coefficientDual _ (PadicAlgCl.isPrincipal_maximalIdealShrink l E) hΛ K hK
 
 end Integral
 
