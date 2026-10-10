@@ -43,7 +43,7 @@ from node_fields import MAINTAINER, changed_maintainer_fields  # noqa: E402
 ROOT = pathlib.Path(__file__).resolve().parent.parent
 TAG = re.compile(r"(?<![A-Za-z0-9])0[0-9A-Z]{3}(?![A-Za-z0-9])")
 SECTION = re.compile(r"(?<![\d.])\d{1,2}\.\d{1,3}\.\d{1,3}(?![\d.])")
-CITE = re.compile(r"\[([a-z][a-z0-9]*(?:-[a-z0-9]+){2,})\]")   # a node id has at least two hyphens; [n-1] is not a citation
+CITE = re.compile(r"\[([a-z][a-z0-9]*(?:-[a-z][a-z0-9]*)+)\]")   # a node id: hyphen-separated segments each starting with a letter; [n-1] is not a citation
 
 
 def git(*args: str, check: bool = True) -> str:
