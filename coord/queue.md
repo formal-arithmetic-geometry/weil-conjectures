@@ -1,8 +1,8 @@
 # Work queue
 
-855 items; claim with `tools/claim.py next <group> [--stage N]`.
+854 items; claim with `tools/claim.py next <group> [--stage N]`.
 
-## Stage 1: nodes to split (390)
+## Stage 1: nodes to split (389)
 
 | node | distance to a target | Lean state on the done branch |
 |---|---|---|
@@ -49,7 +49,6 @@
 | `lem-sc-pic-proper-ntorsion` | 2006 | none |
 | `lem-weil-pbc-sets-etale-inverse-image-composition-units` | 2006 | none |
 | `lemma-weil-pbc-finite-refinement-etale-cover` | 2006 | sorry_here |
-| `lem-weil-pbc-sets-etale-inverse-image-stalk-germ` | 2007 | none |
 | `lem-weil-pbc-sets-finite-pushforward-stalk` | 2007 | none |
 | `def-sp-etale-dictionary` | 3002 | none |
 | `def-weil-pbc-inverse-image` | 3002 | none |
@@ -74,7 +73,8 @@
 | `thm-weil-pbc-hypercover-cohomology` | 3005 | none |
 | `def-weil-pbc-finite-split-hypercover` | 3006 | none |
 | `lem-galois-aut-profinite` | 3006 | none |
-| `lem-galois-descent` | 3006 | none |
+| `lem-galois-flc-representable` | 3006 | sorry_here |
+| `lem-galois-inverse-image-representable` | 3006 | none |
 | `lem-galois-pi1-finite-etale-image-stabilizer` | 3006 | none |
 | `lem-sc-artin-schreier-dimension` | 3006 | none |
 | `lem-sc-as-sequence` | 3006 | none |
@@ -87,7 +87,6 @@
 | `def-sc-divisor` | 3007 | none |
 | `lem-galois-action-continuous` | 3007 | none |
 | `lem-galois-axioms` | 3007 | none |
-| `lem-galois-glue` | 3007 | none |
 | `lem-galois-object-exists` | 3007 | none |
 | `lem-galois-transitive` | 3007 | none |
 | `lem-sc-ample-complement-affine` | 3007 | sorry_here |
@@ -867,7 +866,7 @@
 | `lem-weil-pbc-p1-field-dimension-one` | 4 | state |
 | `lem-weil-pbc-projective-space-zero-isomorphism` | 4 | state |
 
-Not open yet: 408 nodes that wait for stage 1, 860 nodes that wait for a statement dependency.
+Not open yet: 407 nodes that wait for stage 1, 862 nodes that wait for a statement dependency.
 
 ## Stage 3: modules to prove (0)
 
