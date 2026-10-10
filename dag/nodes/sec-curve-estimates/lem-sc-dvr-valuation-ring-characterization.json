@@ -27,9 +27,27 @@
  "stmt_deps": [
   "def-sc-discrete-valuation-ring"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "By the valuation-ring/value-group-Z characterization in [def-sc-discrete-valuation-ring] (Stacks Definition 00IE), the normalized valuation v has v(b)\\ge0 for every nonzero b\\in B, and a generator t of the maximal ideal (a uniformizer) has v(t)=1. Since v is a group homomorphism K^\\times\\to\\mathbf Z, 0=v(1)=v(t t^{-1})=v(t)+v(t^{-1}), so v(t^{-1})=-1; in particular t^{-1}\\in K^\\times.",
+   "uses": [
+    "def-sc-discrete-valuation-ring"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra Definition 00IE (algebra-definition-value-group), valuation-ring and uniformizer properties"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sc-discrete-valuation-ring"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Algebra Definition 00IE (algebra-definition-value-group), valuation-ring and uniformizer properties"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -61,12 +79,27 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-sc-dvr-tensor-surjective-negative-valuation",
   "by": "worker",
   "date": "2026-10-10"
  },
  "chapter": "sec-curve-estimates",
- "unit": "sk-thm-curveestimate"
+ "unit": "sk-thm-curveestimate",
+ "split_report": {
+  "date": "2026-10-11",
+  "item": "lem-sc-dvr-valuation-ring-characterization",
+  "worker": "stage1",
+  "summary": "Checked that no Lean declaration states this item exactly. The item is a direct one-step unpacking of the valuation-ring/value-group-Z definition of a DVR: elements of the valuation ring have nonnegative normalized valuation, a uniformizer has value one, and the group-homomorphism identity gives value minus one for its inverse. No new child nodes are needed.",
+  "blueprint": "Realizes the parent blueprint proof sentence: 09N5 proof, induction base case, the inverse of a uniformizer has negative valuation while elements of the DVR have nonnegative valuation."
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-dvc1752",
+  "group": "C1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-dvc1752 (reviewer sub-agent of L); spot-checked: Step 1 vs def-sc-discrete-valuation-ring (states the 00IE valuation-ring/value-group-Z characterization and uniformizer = generator of m): v>=0 on B, v(t)=1 under normalization, v(t^{-1})=-1 by homomorphism identity; elementary, no cycle. B8/B10: Mathlib addVal_uniformizer (DiscreteValuationRing/Basic.lean:428) is R-valued in N-infinity, not K^x->Z, and does not cover v(t^{-1}); no slopmaster2 uniformizer theorem (grep), so split rather than leaf is correct. No repairs."
+ }
 }
