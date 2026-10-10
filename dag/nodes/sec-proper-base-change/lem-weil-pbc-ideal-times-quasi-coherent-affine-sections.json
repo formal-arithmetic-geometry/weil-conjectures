@@ -13,9 +13,79 @@
   "def-weil-sheaf-of-modules-category",
   "def-pur-sheaf-tensor-product"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Fix an affine open $U=\\operatorname{Spec}R\\subseteq X$. Restriction to $U$ preserves the relevant colimits, and the affine tilde/global-sections comparison identifies $\\mathcal J|_U$ and $\\mathcal F|_U$ with the tilde sheaves of the $R$-modules $I=\\mathcal J(U)$ and $M=\\mathcal F(U)$. Under these identifications the multiplication map $\\mathcal J\\otimes_{\\mathcal O_X}\\mathcal F\\to\\mathcal F$ restricts to the tilde of the $R$-linear map $I\\otimes_R M\\to M$, $(a\\otimes s)\\mapsto as$.",
+   "uses": [
+    "lem-weil-pbc-module-restriction-open-immersion-colimits",
+    "lem-weil-pbc-affine-tilde-gamma-adjunction",
+    "lem-weil-pbc-spec-module-tilde-sections",
+    "lem-weil-pbc-quasi-coherent-tensor-product-affine-sections",
+    "def-pur-sheaf-tensor-product"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Schemes, Lemma 01I8 (lemma-widetilde-constructions, item (1)) and Lemma 01IC (lemma-kernel-cokernel-quasi-coherent); Modules, Lemma 01CE (lemma-tensor-product-permanence)"
+   }
+  },
+  {
+   "text": "Apply the quasi-coherent cokernel/image calculation to this multiplication map. Its image is $\\mathcal J\\mathcal F$ and is quasi-coherent, its cokernel is $\\mathcal F/\\mathcal J\\mathcal F$ and is quasi-coherent, and on the affine open $U$ the image is the submodule $I M\\subseteq M$. Consequently $\\mathcal F(U)\\to(\\mathcal F/\\mathcal J\\mathcal F)(U)$ is surjective with kernel $I M$, so $(\\mathcal J\\mathcal F)(U)=\\mathcal J(U)\\mathcal F(U)$.",
+   "uses": [
+    "lem-weil-pbc-quasi-coherent-module-cokernel-image",
+    "lem-weil-pbc-quasi-coherent-tensor-product-affine-sections",
+    "def-weil-pbc-coherent-formal-module",
+    "pqf-def-coherent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Schemes, Lemma 01IC (lemma-kernel-cokernel-quasi-coherent, including affine sections), Section 01LA item (5); the product description is the image of the multiplication map in the proof of Cohomology of Schemes, Lemma 087X"
+   }
+  },
+  {
+   "text": "The same argument proves the assertions for all powers by induction. For $n=1$ there is nothing to prove. If $\\mathcal J^n$ is a quasi-coherent sheaf of ideals and $\\mathcal J^n(U)=I^n$, apply the preceding product/image calculation to $\\mathcal J\\otimes\\mathcal J^n\\to\\mathcal J^n$ (viewing $\\mathcal J^n$ as a quasi-coherent submodule of $\\mathcal O_X$). Its image is $\\mathcal J^{n+1}$, hence is quasi-coherent, and on $U$ its sections are $I I^n=I^{n+1}$. Thus every $\\mathcal J^n$ is a quasi-coherent ideal and $\\mathcal J^n(U)=\\mathcal J(U)^n$.",
+   "uses": [
+    "lem-weil-pbc-quasi-coherent-module-cokernel-image",
+    "lem-weil-pbc-quasi-coherent-tensor-product-affine-sections",
+    "def-weil-pbc-coherent-formal-module",
+    "pqf-def-coherent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Schemes, Lemma 01I8 (lemma-widetilde-constructions, item (1)) and Lemma 01IC; the induction is the affine description used in Cohomology of Schemes, Lemma 087X"
+   }
+  },
+  {
+   "text": "For any open $V\\subseteq X$, the restriction of the image sheaf of the multiplication map to $V$ is the image sheaf of the restricted multiplication map: both consist of sections that are locally in the image on open neighbourhoods. Therefore $(\\mathcal J\\mathcal F)|_V=(\\mathcal J|_V)(\\mathcal F|_V)$ as submodules of $\\mathcal F|_V$. The same local description also shows that the quotient map and its kernel restrict compatibly.",
+   "uses": [
+    "lem-weil-pbc-quasi-coherent-module-cokernel-image",
+    "lem-weil-pbc-module-restriction-open-immersion-colimits",
+    "def-pur-sheaf-tensor-product"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/modules.tex",
+    "place": "Modules, Lemma 01AH (lemma-limits-colimits, sheafified presheaf image/cokernel and local-image kernel), together with restriction to an open"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-module-restriction-open-immersion-colimits",
+  "lem-weil-pbc-affine-tilde-gamma-adjunction",
+  "lem-weil-pbc-spec-module-tilde-sections",
+  "lem-weil-pbc-quasi-coherent-tensor-product-affine-sections",
+  "def-pur-sheaf-tensor-product",
+  "lem-weil-pbc-quasi-coherent-module-cokernel-image",
+  "def-weil-pbc-coherent-formal-module",
+  "pqf-def-coherent"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/schemes.tex",
+  "place": "Schemes, Lemmas 01I8 and 01IC; Modules, Lemma 01CE and Lemma 01AH; the powers and restriction clauses are the affine/local expansions used in Cohomology of Schemes, Lemma 087X"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -40,7 +110,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "worker",
@@ -60,5 +130,18 @@
   }
  },
  "chapter": "sec-proper-base-change",
- "unit": "sk-thm-p1"
+ "unit": "sk-thm-p1",
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "lem-weil-pbc-ideal-times-quasi-coherent-affine-sections",
+  "worker": "w_ideal_qc",
+  "summary": "Split the product/cokernel lemma into affine reduction, the image and quotient calculation, induction for ideal powers, and restriction to arbitrary opens. All proof steps cite existing public DAG nodes and Stacks tags 01I8, 01IC, 01CE, and 01AH; no new node was required."
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "group": "E1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed by the lead of E1; spot-checked by L: four steps: affine identification via tilde and the tensor-product-sections node, image/cokernel node for quasi-coherence and sections on affines, induction for powers, restriction commutes with image sheaves; terse but each claim cites a node"
+ }
 }
