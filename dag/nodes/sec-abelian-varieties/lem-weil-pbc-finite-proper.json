@@ -3,7 +3,7 @@
  "blueprint": {
   "is": "lem-weil-pbc-finite-proper",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "Finite morphisms are proper",
@@ -15,28 +15,57 @@
  "stmt_deps": [
   "def-weil-pbc-scheme-conventions"
  ],
- "proof": [
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/blueprint/master/blueprint/sec-abelian-varieties/sk-prop-av-pqf-finite/lem-weil-pbc-finite-proper.md",
+  "place": "node lem-weil-pbc-finite-proper, order 525"
+ },
+ "mathlib_searches": [
   {
-   "text": "A finite morphism is affine, hence separated, since the diagonal of an affine\nmorphism is a closed immersion in the sense of\n[def-weil-pbc-scheme-conventions]; it is of finite type because an\n$A$-algebra that is a finite $A$-module is finitely generated as an\n$A$-algebra. It is universally closed: a finite ring map is integral ([pqf-lem-finite-integral-lft]), hence has going-up, hence\na finite morphism is closed, and finite morphisms are stable under base\nchange, so every base change of a finite morphism is closed. These are\nexactly the defining properties of properness in\n[def-weil-pbc-scheme-conventions].",
-   "uses": [
-    "def-weil-pbc-scheme-conventions",
-    "pqf-lem-finite-integral-lft"
-   ],
-   "elementary": false
+   "tool": "leanfinder",
+   "query": "finite morphism of schemes is proper",
+   "results": "AlgebraicGeometry.IsProper.instOfIsFinite (Mathlib/AlgebraicGeometry/Morphisms/Proper); AlgebraicGeometry.instIsProperOfIsFinite; IsFinite.iff_isProper_and_isAffineHom",
+   "date": "2026-10-11",
+   "verdict": "match"
+  },
+  {
+   "tool": "loogle",
+   "query": "IsFinite, IsProper",
+   "results": "none; loogle reported unknown identifier 'IsFinite'",
+   "date": "2026-10-11",
+   "verdict": "no match (unknown identifier)"
+  },
+  {
+   "tool": "grep",
+   "query": "IsProper.*IsFinite|IsFinite.*IsProper|isProper.*finite [Mathlib/AlgebraicGeometry]",
+   "results": "Mathlib/AlgebraicGeometry/Morphisms/Proper.lean:69 instance (priority := 900) [IsFinite f] : IsProper f",
+   "date": "2026-10-11",
+   "verdict": "match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A finite morphism of schemes is proper",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-11",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "grep",
+   "query": "instOfIsFinite|instIsProperOfIsFinite [Mathlib/AlgebraicGeometry/Morphisms/Proper.lean]",
+   "results": "no textual hit because the instance is anonymous; source declaration is at line 69",
+   "date": "2026-10-11",
+   "verdict": "match verified by source inspection"
   }
  ],
- "proof_deps": [
-  "def-weil-pbc-scheme-conventions",
-  "pqf-lem-finite-integral-lft"
- ],
- "proof_origin": {
-  "by": "agent",
-  "document": "literature/blueprint/master/blueprint/sec-abelian-varieties/sk-prop-av-pqf-finite/lem-weil-pbc-finite-proper.md",
-  "place": "## Proof"
+ "mathlib_match": {
+  "declaration": "AlgebraicGeometry.IsProper.instOfIsFinite",
+  "file": "Mathlib/AlgebraicGeometry/Morphisms/Proper.lean",
+  "line": 69,
+  "how": "exact: the instance `(priority := 900) [IsFinite f] : IsProper f` states that every finite morphism of schemes is proper"
  },
- "mathlib_searches": [],
- "mathlib_match": null,
- "status": "imported",
+ "status": "mathlib",
  "merged_into": null,
  "import_flags": [],
  "blueprint_kind": "lemma",
@@ -59,5 +88,20 @@
   }
  },
  "chapter": "sec-abelian-varieties",
- "unit": "sk-prop-av-pqf-finite"
+ "unit": "sk-prop-av-pqf-finite",
+ "split_report": {
+  "date": "2026-10-11",
+  "item": "lem-weil-pbc-finite-proper",
+  "worker": "stage1",
+  "summary": "Checked the imported statement against the blueprint node and found no project declaration for this item in slopmaster2. Mathlib directly provides the exact assertion through the IsProper instance for every IsFinite scheme morphism, so the item is a Mathlib leaf and its imported proof is removed. The existing statement dependency def-weil-pbc-scheme-conventions remains the terminology used by the project statement.",
+  "blueprint": "The blueprint node's single proof paragraph is realized directly by the exact Mathlib instance; no subordinate nodes are needed."
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-ffp1919",
+  "group": "F1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-ffp1919 (reviewer sub-agent of L); spot-checked: Leaf: read Proper.lean:69 by sed (instance (priority := 900) [IsFinite f] : IsProper f in namespace AlgebraicGeometry.IsProper); #check confirmed name AlgebraicGeometry.IsProper.instOfIsFinite with type forall f [IsFinite f], IsProper f: exact match, one declaration. sorryfree.py: no slopmaster2 declaration (B10 n/a). No new nodes, proof/proof_deps empty. Second reading by F1 correct; no missed fault."
+ }
 }
