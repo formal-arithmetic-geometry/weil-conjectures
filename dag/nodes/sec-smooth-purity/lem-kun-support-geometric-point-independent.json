@@ -3,7 +3,7 @@
  "blueprint": {
   "is": "lem-kun-support-geometric-point-independent",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "The support does not depend on the chosen geometric point",
@@ -15,20 +15,52 @@
  "stmt_deps": [],
  "proof": [
   {
-   "text": "Write $i:\\Spec\\kappa(x)\\to X$ for the canonical point of $x$. Both\n$\\bar x$ and $\\bar x'$ factor through $i$, say\n$\\bar x=a\\circ i$ and $\\bar x'=a'\\circ i$, where $a$ and $a'$\nare the structure maps of the separably closed extensions\n$\\Omega/\\kappa(x)$ and $\\Omega'/\\kappa(x)$. By\n[lem-kun-stalk-as-pullback] the stalks are the inverse images\nalong $\\bar x$ and $\\bar x'$, and inverse images compose\n([def-weil-pbc-inverse-image]), so $F_{\\bar x}=a^{-1}(i^{-1}F)$\nand $F_{\\bar x'}=(a')^{-1}(i^{-1}F)$. By\n[def-weil-pbc-geometric-stalks] both are filtered colimits of the\nsections of $i^{-1}F$ over the pointed etale neighbourhoods of the\nrespective geometric point, that is, over the finite separable\nextensions of $\\kappa(x)$ that embed into $\\Omega$, respectively\ninto $\\Omega'$; and every finite separable extension of $\\kappa(x)$\nembeds into either field, both being separably closed. The two\ncolimits therefore have the same index category up to cofinality and\nvanish simultaneously, which gives the first assertion, and with it the\nindependence, in the sense of [def-kun-support], of the\nsupport of the choice of geometric point.",
+   "text": "Write $\\Omega,\\Omega'$ for the algebraically closed fields of $\\bar x,\\bar x'$ [def-weil-geometric-point], which are extensions of $\\kappa(x)$, and choose a separable closure $\\kappa(x)^s$ [def-pd-separable-closure]. By [lem-exc-etale-embedding-extension-sepclosed], applied with $E=\\kappa(x)^s$, $F=L=\\kappa(x)$ and the given inclusions $\\kappa(x)\\to\\Omega$ and $\\kappa(x)\\to\\Omega'$ (every element of $\\kappa(x)^s$ is algebraic and separable over $\\kappa(x)$, so its minimal polynomial splits in the algebraically closed fields $\\Omega,\\Omega'$), there are $\\kappa(x)$-embeddings $e:\\kappa(x)^s\\to\\Omega$ and $e':\\kappa(x)^s\\to\\Omega'$. Let $s:\\operatorname{Spec}\\kappa(x)^s\\to X$ be the composite of $\\operatorname{Spec}\\kappa(x)^s\\to\\operatorname{Spec}\\kappa(x)$ with the canonical morphism $\\operatorname{Spec}\\kappa(x)\\to X$. Then $\\bar x=s\\circ\\operatorname{Spec}(e)$ and $\\bar x'=s\\circ\\operatorname{Spec}(e')$, and $\\bar y=\\operatorname{Spec}(e)$, $\\bar y'=\\operatorname{Spec}(e')$ are geometric points of $Y=\\operatorname{Spec}\\kappa(x)^s$ (the morphism $s$ itself need not be a geometric point, since $\\kappa(x)^s$ need not be algebraically closed).",
    "uses": [
-    "lem-kun-stalk-as-pullback",
+    "def-weil-geometric-point",
+    "def-pd-separable-closure",
+    "lem-exc-etale-embedding-extension-sepclosed"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-kunneth-ordinary/lem-kun-support-geometric-point-independent.md",
+    "place": "## Proof, first sentence through the displayed inverse-image formulas"
+   }
+  },
+  {
+   "text": "Put $G=s^{-1}F$ on $Y_{\\Et}$ [def-weil-pbc-inverse-image]. By [lem-weil-pbc-inverse-image-stalk-germ] applied to $f=s:Y\\to X$ and the geometric points $\\bar y$, $\\bar y'$ of $Y$, whose image geometric points are $\\bar x$ and $\\bar x'$, there are isomorphisms $G_{\\bar y}\\cong F_{\\bar x}$ and $G_{\\bar y'}\\cong F_{\\bar x'}$. The ring $\\kappa(x)^s$ is a strictly henselian local ring: its maximal ideal is $0$, so idempotents of $B/0B=B$ lift uniquely for every finite algebra $B$, and its residue field $\\kappa(x)^s$ is separably closed [def-weil-pbc-henselian-terminology]. By [lem-weil-pbc-strictly-henselian-sections-stalk] applied to $R=\\kappa(x)^s$, $S=Y$ and the geometric points $\\bar y$, $\\bar y'$ over its closed point, the germ maps $G(Y)\\to G_{\\bar y}$ and $G(Y)\\to G_{\\bar y'}$ are isomorphisms. Hence $F_{\\bar x}\\cong G_{\\bar y}\\cong G(Y)\\cong G_{\\bar y'}\\cong F_{\\bar x'}$.",
+   "uses": [
     "def-weil-pbc-inverse-image",
-    "def-weil-pbc-geometric-stalks",
+    "lem-weil-pbc-inverse-image-stalk-germ",
+    "def-weil-pbc-henselian-terminology",
+    "lem-weil-pbc-strictly-henselian-sections-stalk"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-kunneth-ordinary/lem-kun-support-geometric-point-independent.md",
+    "place": "## Proof, sentence beginning 'By def-weil-pbc-geometric-stalks'"
+   }
+  },
+  {
+   "text": "The isomorphism in Step 2 gives $F_{\\bar x}=0$ if and only if $F_{\\bar x'}=0$. By [def-kun-support], membership of $x$ in the support is defined by nonvanishing of a geometric stalk over $x$, so the support is independent of the chosen geometric point.",
+   "uses": [
     "def-kun-support"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-kunneth-ordinary/lem-kun-support-geometric-point-independent.md",
+    "place": "## Proof, final sentence beginning 'The two colimits therefore have the same index category up to cofinality'"
+   }
   }
  ],
  "proof_deps": [
-  "lem-kun-stalk-as-pullback",
+  "def-weil-geometric-point",
+  "def-pd-separable-closure",
+  "lem-exc-etale-embedding-extension-sepclosed",
   "def-weil-pbc-inverse-image",
-  "def-weil-pbc-geometric-stalks",
+  "lem-weil-pbc-inverse-image-stalk-germ",
+  "def-weil-pbc-henselian-terminology",
+  "lem-weil-pbc-strictly-henselian-sections-stalk",
   "def-kun-support"
  ],
  "proof_origin": {
@@ -36,9 +68,31 @@
   "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-kunneth-ordinary/lem-kun-support-geometric-point-independent.md",
   "place": "## Proof"
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "stalk of an etale sheaf at two geometric points over the same scheme point vanishes simultaneously",
+   "results": "Algebra.mem_etaleLocus_iff; Algebra.basicOpen_subset_etaleLocus_iff; Algebra.etaleLocus; AlgebraicGeometry.IsEtale.instFormallyUnramified; Algebra.etaleLocus_eq_univ_iff; AlgebraicGeometry.spread_out_of_isGermInjective; Algebra.etaleLocus_eq_unramfiedLocus_inter_smoothLocus; AlgebraicGeometry.Scheme.Etale",
+   "date": "2026-10-11",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "Scheme.pointSmallEtale, GrothendieckTopology.Point.sheafFiber, geometric stalk",
+   "results": "unknown identifier Scheme.pointSmallEtale; 0 hits",
+   "date": "2026-10-11",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "pointSmallEtale|sheafFiber|geometric point in Mathlib/AlgebraicGeometry/Sites/EtalePoint.lean",
+   "results": "Mathlib/AlgebraicGeometry/Sites/EtalePoint.lean:64 noncomputable def pointSmallEtale; lines 98, 100, 101, 114 reference its fibre",
+   "date": "2026-10-11",
+   "verdict": "generalization: Mathlib provides the geometric-point fibre, but no independence-of-choice theorem"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [],
  "blueprint_kind": "lemma",
@@ -63,5 +117,32 @@
   }
  },
  "chapter": "sec-smooth-purity",
- "unit": "sk-prop-sf-kunneth-ordinary"
+ "unit": "sk-prop-sf-kunneth-ordinary",
+ "split_report": {
+  "date": "2026-10-11",
+  "item": "lem-kun-support-geometric-point-independent",
+  "worker": "stage1",
+  "summary": "No sorry-free Lean declaration states this item. The imported one-paragraph proof was expanded into three steps: factor geometric points through Spec kappa(x) and express stalks by inverse images; identify both geometric-stalk colimits with the common category of finite separable extensions, using the existing Mathlib leaf for extending embeddings into separably closed fields; then conclude simultaneous vanishing and support independence. No new nodes were needed.",
+  "blueprint": "Realizes the item's proof paragraph from the canonical point factorization through the final cofinality and support-independence conclusion.",
+  "tool_uses": [
+   {
+    "node": "lem-exc-etale-embedding-extension-sepclosed",
+    "why": "Step 2 uses the embedding-extension fact to place every finite separable residue-field extension in either separably closed geometric-point field; no node in this Kunneth unit states that field-theoretic tool."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-exc-etale-embedding-extension-sepclosed",
+  "lem-weil-pbc-inverse-image-stalk-germ",
+  "lem-weil-pbc-strictly-henselian-sections-stalk",
+  "lem-exc-etale-embedding-extension-sepclosed"
+ ],
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-sgp3012",
+  "group": "F1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-sgp3012 (reviewer sub-agent of L); spot-checked: FIX more, RETURN less: C4/E (missed by F1's second reading): Steps 1-2 treated x_s: Spec kappa(x)^s -> X as a geometric point and took the stalk (i^{-1}F)_{x_s}; def-weil-geometric-point requires Omega algebraically closed, so that stalk is undefined and lem-weil-pbc-inverse-image-stalk-germ was misapplied (also i^{-1}F placed on Spec kappa(x)^s, and x = i o Spec(e) ill-typed). Repaired: G = s^{-1}F on Y = Spec kappa(x)^s, stalk-germ lemma at the geometric points Spec(e), Spec(e') of Y gives G_y = F_x, G_y' = F_x'; existing lem-weil-pbc-strictly-henselian-sections-stalk (kappa(x)^s strictly henselian, elementary from def-weil-pbc-henselian-terminology) gives G(Y) = G_y = G_y'. Checked embedding-leaf hypotheses (separable min polys split in alg. closed Omega), def-kun-support uses some-geometric-point stalk definition and only notes this lemma; statement matches citers. uses/proof_deps updated.; 1 file(s) fixed by the reviewer"
+ }
 }
