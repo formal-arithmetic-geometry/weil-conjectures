@@ -1,0 +1,94 @@
+{
+ "id": "lem-weil-pbc-projective-resolution-lift",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-normal-constant-generic",
+   "place": "step 4 of its split (normality of the strict henselization in Stacks 09Z5); Tor symmetry is used by the flat-module injectivity input along this branch; within the proof of Tor symmetry (Stacks 00M3, lemma-tor-left-right): functoriality paragraph: 'By Lemma lemma-compare-resolutions we may choose maps of complexes $\\alpha:F_{1,\\bullet}\\to F_{2,\\bullet}$ and $\\beta:G_{1,\\bullet}\\to G_{2,\\bullet}$ compatible with $\\varphi$ and $\\psi$'",
+   "via": [
+    "lem-weil-pbc-tor-symmetry",
+    "lem-weil-pbc-flat-tor-ideal-criterion",
+    "lem-weil-pbc-flat-mod-injective",
+    "lem-weil-pbc-flat-local-depth-formula",
+    "lem-weil-pbc-serre-sk-goes-up",
+    "lem-weil-pbc-flat-normal-fibres-noetherian-normal",
+    "lem-weil-pbc-smooth-over-normal-ring-normal",
+    "lem-weil-pbc-etale-over-normal-ring-normal",
+    "lem-weil-pbc-etale-colimit-normal-local-domain"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "A module map lifts to a chain map between projective resolutions",
+ "statement": "Let $R$ be a commutative ring and $\\varphi:M\\to M'$ an $R$-linear map. Let $\\cdots\\to P_1\\to P_0\\xrightarrow{\\varepsilon}M\\to0$ and $\\cdots\\to P'_1\\to P'_0\\xrightarrow{\\varepsilon'}M'\\to0$ be projective resolutions: exact sequences of $R$-modules [def-weil-pbc-exact-sequence] with every $P_n$, $P'_n$ projective [def-weil-pbc-projective-module]. Then there are $R$-linear maps $a_n:P_n\\to P'_n$ ($n\\ge0$) forming a morphism of chain complexes $a:P_\\bullet\\to P'_\\bullet$ [def-weil-pbc-module-chain-complex-homology] with $\\varepsilon'\\circ a_0=\\varphi\\circ\\varepsilon$.",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Algebra, Lemma Tag 00LS (lemma-compare-resolutions, line 17500), part (1) and its proof (lines 17525-17535), there for a complex of free modules; the proof uses only that each free module is projective. Cited in the functoriality paragraph of Lemma Tag 00M3 (lines 18591-18598). Tags verified in tags/tags: 00LS,algebra-lemma-compare-resolutions"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-exact-sequence",
+  "def-weil-pbc-projective-module",
+  "def-weil-pbc-module-chain-complex-homology"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "a morphism lifts to a chain map between projective resolutions commuting with augmentations",
+   "results": "CategoryTheory.ProjectiveResolution.lift, lift_commutes, lift_commutes_zero, lift_commutes_zero_assoc (Mathlib.CategoryTheory.Abelian.Projective.Resolution), ProjectiveResolution.Hom.hom",
+   "date": "2026-10-10",
+   "verdict": "match: ProjectiveResolution.lift with lift_commutes_zero"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "lift a module homomorphism to a morphism of projective resolutions compatible with the augmentation",
+   "results": "CategoryTheory.ProjectiveResolution.lift, liftFOne, liftFZero, ProjectiveResolution.Hom, Hom.hom",
+   "date": "2026-10-10",
+   "verdict": "match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.ProjectiveResolution.lift",
+   "results": "ProjectiveResolution.lift, liftIdHomotopy, liftCompHomotopy, lift_commutes, lift_commutes_zero (Mathlib.CategoryTheory.Abelian.Projective.Resolution)",
+   "date": "2026-10-10",
+   "verdict": "match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -n 'def lift\\|lift_commutes' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/CategoryTheory/Abelian/Projective/Resolution.lean; grep -n 'structure ProjectiveResolution' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/CategoryTheory/Preadditive/Projective/Resolution.lean; grep -n 'iff_projective' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/Algebra/Category/ModuleCat/Projective.lean; read with sed",
+   "results": "Abelian/Projective/Resolution.lean 92 def lift, 100 lift_commutes, 106 lift_commutes_zero; Preadditive/Projective/Resolution.lean 41 structure ProjectiveResolution (degreewise Projective, π a quasi-isomorphism = exactness of P_• → M → 0); ModuleCat/Projective.lean 41 IsProjective.iff_projective",
+   "date": "2026-10-10",
+   "verdict": "match"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "CategoryTheory.ProjectiveResolution.lift, CategoryTheory.ProjectiveResolution.lift_commutes_zero, IsProjective.iff_projective",
+  "file": "Mathlib/CategoryTheory/Abelian/Projective/Resolution.lean",
+  "line": 92,
+  "how": "specializes in one line in C = ModuleCat R (abelian): the data P_•, ε (resp. P'_•, ε') is a ProjectiveResolution M (structure at Mathlib/CategoryTheory/Preadditive/Projective/Resolution.lean line 41: π quasi-isomorphism = exactness of P_• → M → 0; categorical Projective = Module.Projective by IsProjective.iff_projective, Mathlib/Algebra/Category/ModuleCat/Projective.lean line 41); a := ProjectiveResolution.lift φ P P' (line 92) is a chain map, and lift_commutes_zero (line 106) is (a.f 0) ≫ P'.π.f 0 = P.π.f 0 ≫ φ, i.e. ε' a_0 = φ ε. Read with sed -n 85,110p on 2026-10-10."
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-tor-symmetry",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1"
+}

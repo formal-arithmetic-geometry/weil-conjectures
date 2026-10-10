@@ -1,0 +1,92 @@
+{
+ "id": "lem-weil-pbc-module-tensor-comm",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-normal-constant-generic",
+   "place": "step 4 of its split (normality of the strict henselization in Stacks 09Z5); Tor symmetry is used by the flat-module injectivity input along this branch; within the proof of Tor symmetry (Stacks 00M3, lemma-tor-left-right): 'the fifth equality uses the isomorphism $V\\otimes W=W\\otimes V$ of the tensor product', and its compatibility with the maps in the functoriality paragraph",
+   "via": [
+    "lem-weil-pbc-tor-symmetry",
+    "lem-weil-pbc-flat-tor-ideal-criterion",
+    "lem-weil-pbc-flat-mod-injective",
+    "lem-weil-pbc-flat-local-depth-formula",
+    "lem-weil-pbc-serre-sk-goes-up",
+    "lem-weil-pbc-flat-normal-fibres-noetherian-normal",
+    "lem-weil-pbc-smooth-over-normal-ring-normal",
+    "lem-weil-pbc-etale-over-normal-ring-normal",
+    "lem-weil-pbc-etale-colimit-normal-local-domain"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Commutativity of the tensor product of modules, natural in both factors",
+ "statement": "Let $R$ be a commutative ring. For $R$-modules $M,N$ there is an $R$-linear isomorphism $\\tau_{M,N}:M\\otimes_RN\\to N\\otimes_RM$ [def-weil-pbc-module-tensor-product] with $\\tau_{M,N}(m\\otimes n)=n\\otimes m$, and it is natural: for $R$-linear maps $f:M\\to M'$ and $g:N\\to N'$, $\\tau_{M',N'}\\circ(f\\otimes g)=(g\\otimes f)\\circ\\tau_{M,N}$.",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Algebra, Lemma Tag 00M3 (lemma-tor-left-right), proof, line 18587-18588: 'the fifth equality uses the isomorphism $V\\otimes W=W\\otimes V$ of the tensor product'; Section Tag 00CV (section-tensor-product) for the tensor product"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-module-tensor-product"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "TensorProduct.map f g composed with TensorProduct.comm equals comm composed with TensorProduct.map g f",
+   "results": "TensorProduct.map_comp_comm_eq, TensorProduct.map_comm (Mathlib.LinearAlgebra.TensorProduct.Map), Algebra.TensorProduct.comm_comp_map, LinearMap.lTensor_comm",
+   "date": "2026-10-10",
+   "verdict": "match: TensorProduct.map_comp_comm_eq"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "tensor product of modules is commutative M ⊗ N ≃ N ⊗ M natural with respect to tensor product of linear maps",
+   "results": "TensorProduct.comm, TensorProduct.comm_tmul, TensorProduct.comm_trans_comm, LinearMap.lTensor_comm, LinearMap.rTensor_comm (Mathlib.LinearAlgebra.TensorProduct.Basic)",
+   "date": "2026-10-10",
+   "verdict": "match: TensorProduct.comm, comm_tmul"
+  },
+  {
+   "tool": "loogle",
+   "query": "TensorProduct.map_comp_comm_eq",
+   "results": "TensorProduct.map_comp_comm_eq : map f g ∘ₛₗ ↑(comm R N M) = ↑(comm R₂ N₂ M₂) ∘ₛₗ map g f (Mathlib.LinearAlgebra.TensorProduct.Map)",
+   "date": "2026-10-10",
+   "verdict": "match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -n 'def comm \\|theorem comm_tmul' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/LinearAlgebra/TensorProduct/Basic.lean; grep -rn 'map_comp_comm_eq' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/LinearAlgebra/TensorProduct/; read with sed -n 260-272 and 64-76",
+   "results": "Basic.lean 265 protected def comm : M ⊗[R] N ≃ₗ[R] N ⊗[R] M; 270 comm_tmul; Map.lean 68 lemma map_comp_comm_eq",
+   "date": "2026-10-10",
+   "verdict": "match"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "TensorProduct.comm, TensorProduct.comm_tmul, TensorProduct.map_comp_comm_eq",
+  "file": "Mathlib/LinearAlgebra/TensorProduct/Basic.lean",
+  "line": 265,
+  "how": "one declaration per clause: tau_{M,N} = TensorProduct.comm R M N (Basic.lean line 265, an R-linear equivalence), tau(m ⊗ n) = n ⊗ m is TensorProduct.comm_tmul (Basic.lean line 270); naturality is TensorProduct.map_comp_comm_eq g f (Mathlib/LinearAlgebra/TensorProduct/Map.lean line 68: map g f ∘ comm R M N = comm R N' M' ∘ map f g, with σ = RingHom.id R). Read with sed -n 260,272p and 64,76p on 2026-10-10."
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-tor-symmetry",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1"
+}

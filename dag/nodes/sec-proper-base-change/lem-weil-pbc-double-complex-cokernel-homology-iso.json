@@ -1,0 +1,102 @@
+{
+ "id": "lem-weil-pbc-double-complex-cokernel-homology-iso",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-normal-constant-generic",
+   "place": "step 4 of its split (normality of the strict henselization in Stacks 09Z5); Tor symmetry is used by the flat-module injectivity input along this branch; within the proof of Tor symmetry (Stacks 00M3, lemma-tor-left-right): 'Hence the double complex satisfies the conditions of Lemma lemma-no-spectral-sequence' and the third equality $H_i(U(A)_\\bullet)=H_i(R(A)_\\bullet)$, with the functoriality paragraph",
+   "via": [
+    "lem-weil-pbc-tor-symmetry",
+    "lem-weil-pbc-flat-tor-ideal-criterion",
+    "lem-weil-pbc-flat-mod-injective",
+    "lem-weil-pbc-flat-local-depth-formula",
+    "lem-weil-pbc-serre-sk-goes-up",
+    "lem-weil-pbc-flat-normal-fibres-noetherian-normal",
+    "lem-weil-pbc-smooth-over-normal-ring-normal",
+    "lem-weil-pbc-etale-over-normal-ring-normal",
+    "lem-weil-pbc-etale-colimit-normal-local-domain"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Double complex with exact rows and columns: the two cokernel complexes have isomorphic homology",
+ "statement": "Let $R$ be a commutative ring. Let $A=(A_{i,j},d,\\delta)_{i,j\\ge0}$ be a homological double complex of $R$-modules: $R$-modules $A_{i,j}$ ($i,j\\ge0$) and $R$-linear maps $d_{i,j}:A_{i,j}\\to A_{i-1,j}$ ($i\\ge1$) and $\\delta_{i,j}:A_{i,j}\\to A_{i,j-1}$ ($j\\ge1$) with $d_{i-1,j}\\circ d_{i,j}=0$, $\\delta_{i,j-1}\\circ\\delta_{i,j}=0$ and $\\delta_{i-1,j}\\circ d_{i,j}=d_{i,j-1}\\circ\\delta_{i,j}$ whenever defined. Put $A^{\\mathrm{rt}}_j=\\operatorname{Coker}(d_{1,j}:A_{1,j}\\to A_{0,j})$ and $A^{\\mathrm{up}}_i=\\operatorname{Coker}(\\delta_{i,1}:A_{i,1}\\to A_{i,0})$; the maps $\\delta_{0,j}$ induce $R$-linear maps $A^{\\mathrm{rt}}_j\\to A^{\\mathrm{rt}}_{j-1}$ and the maps $d_{i,0}$ induce $R$-linear maps $A^{\\mathrm{up}}_i\\to A^{\\mathrm{up}}_{i-1}$, which make $A^{\\mathrm{rt}}_\\bullet$ and $A^{\\mathrm{up}}_\\bullet$ chain complexes of $R$-modules concentrated in degrees $\\ge0$ [def-weil-pbc-module-chain-complex-homology]. Assume (1) every row is exact in positive degrees: for all $j\\ge0$ and $i\\ge1$ the sequence $A_{i+1,j}\\xrightarrow{d}A_{i,j}\\xrightarrow{d}A_{i-1,j}$ is exact [def-weil-pbc-exact-sequence]; (2) every column is exact in positive degrees: for all $i\\ge0$ and $j\\ge1$ the sequence $A_{i,j+1}\\xrightarrow{\\delta}A_{i,j}\\xrightarrow{\\delta}A_{i,j-1}$ is exact. Then for every $n\\ge0$ there is an $R$-linear isomorphism $\\theta^A_n:H_n(A^{\\mathrm{up}}_\\bullet)\\xrightarrow{\\sim}H_n(A^{\\mathrm{rt}}_\\bullet)$. It is functorial: if $B$ is a second double complex satisfying (1) and (2) and $\\Phi:A\\to B$ is a morphism of double complexes ($R$-linear maps $\\Phi_{i,j}:A_{i,j}\\to B_{i,j}$ commuting with $d$ and with $\\delta$), and $\\Phi^{\\mathrm{rt}}:A^{\\mathrm{rt}}_\\bullet\\to B^{\\mathrm{rt}}_\\bullet$, $\\Phi^{\\mathrm{up}}:A^{\\mathrm{up}}_\\bullet\\to B^{\\mathrm{up}}_\\bullet$ are the induced morphisms of complexes, then $H_n(\\Phi^{\\mathrm{rt}})\\circ\\theta^A_n=\\theta^B_n\\circ H_n(\\Phi^{\\mathrm{up}})$ for every $n$.",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Algebra, Lemma Tag 00M1 (lemma-no-spectral-sequence), lines 18397-18413, proof lines 18415-18522 (zig-zag group $\\mathbf H_i(A)$, surjectivity, injectivity, functoriality); the notation $R(A)$, $U(A)$ of lines 18352-18395 is written $A^{\\mathrm{rt}}$, $A^{\\mathrm{up}}$ here. Tag verified in tags/tags: 00M1,algebra-lemma-no-spectral-sequence"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-module-chain-complex-homology",
+  "def-weil-pbc-exact-sequence"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "double complex with exact rows and exact columns: homology of the complex of row cokernels is isomorphic to homology of the complex of column cokernels",
+   "results": "HomologicalComplex.homologyIsCokernel, ShortComplex.HomologyData.ofHasCokernel, ShortComplex.homologyIsoKernelDesc, ShortComplex.homologyIsCokernel, ShortComplex.rightHomologyIso (all about one complex; nothing on double complexes)",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "bicomplex whose rows are resolutions: augmentation from total complex is a quasi-isomorphism",
+   "results": "InjectiveResolution.instQuasiIsoIntι', InjectiveResolution.quasiIso, ProjectiveResolution.quasiIso, ProjectiveResolution.instQuasiIsoIntπ', CochainComplex.cm5b.instQuasiIsoIntP, Abelian.LeftResolution.chainComplexXIso (single resolutions only)",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "double complex of modules: rows and columns exact, homology of cokernel of first column equals homology of cokernel of first row (acyclic assembly / balancing)",
+   "results": "ComposableArrows.Exact.opcyclesIsoCycles(_hom_fac), HomologySequence.composableArrows₃_exact, HomologicalComplex.opcycles_right_exact, ShortExact.homology_exact₂ (one complex or short exact sequences of complexes)",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "HomologicalComplex₂, QuasiIso",
+   "results": "none",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "HomologicalComplex₂, HomologicalComplex.homology",
+   "results": "none",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rln 'HomologicalComplex₂' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib ; grep -rn 'zigzag|zig-zag' and 'rows.*exact|columns.*exact' in Mathlib/Algebra/Homology, Mathlib/CategoryTheory/Abelian; grep quasi in Algebra/Homology/TotalComplex.lean",
+   "results": "HomologicalComplex₂ occurs only in HomologicalBicomplex, ComplexShapeSigns, Bifunctor*, TotalComplex*, (total complex, its shift and symmetry; no quasi-isomorphism or exact-rows statement); the other greps hit snake lemma, four lemma, homology sequences only",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-tor-symmetry",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1"
+}

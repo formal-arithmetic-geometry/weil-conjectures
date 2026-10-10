@@ -1400,3 +1400,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 2026-10-10, delivery of F1: lem-galois-pi1-finite-etale-image-stabilizer merged from deliver/F1/lem-galois-pi1-finite-etale-image-stabilizer (1 commit(s), 1 new node(s), spot-checked by L: L: SGA 1 V 6.13 via the slice FEt(Y') = FEt(Y)/Y': the image of pi_1(Y') is the stabilizer of the point, open and of finite index by transitivity; new node: a connected finite etale scheme is a connected object); claim closed
 - 12:23 L: merged J1 lem-weil-pbc-local-nagata-domain-analytically-unramified (0331, re-delivered) and F1 lem-galois-pi1-finite-etale-image-stabilizer (SGA 1 V 6.13, +1 node).
 - 12:23 L: accepted lem-sc-positive-degree-ample (4 steps along the Lean, 0 new).
+- 12:24 L: accepted lem-weil-pbc-tor-symmetry (00M3, 7 steps; new node 00M1 and two Mathlib leaves).
