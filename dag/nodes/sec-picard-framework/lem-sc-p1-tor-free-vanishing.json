@@ -1,0 +1,62 @@
+{
+ "id": "lem-sc-p1-tor-free-vanishing",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-p1-graded-resolution",
+   "place": "proof, the free term in the minimal presentation has vanishing positive Tor",
+   "via": []
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Positive Tor vanishes for a free module",
+ "statement": "Let R be a commutative ring, let P be a free R-module, let M be an R-module, and let i>0. Then Tor_i^R(P,M)=0, with Tor as in [def-weil-pbc-tor-modules].",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Algebra, Section Tag 00LY: compute Tor from the length-zero free resolution of a free module"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-tor-modules"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "positive Tor of a free module vanishes",
+   "results": "Rep.isZero_Tor_succ_of_projective",
+   "date": "2026-10-11",
+   "verdict": "match: free modules are projective, and the declaration gives vanishing in every positive degree"
+  },
+  {
+   "tool": "loogle",
+   "query": "isZero_Tor_succ_of_projective",
+   "results": "Rep.isZero_Tor_succ_of_projective",
+   "date": "2026-10-11",
+   "verdict": "match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rn 'isZero_Tor_succ_of_projective' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib",
+   "results": "Mathlib/CategoryTheory/Monoidal/Tor.lean: vanishing of Tor successors for projective objects",
+   "date": "2026-10-11",
+   "verdict": "match"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "CategoryTheory.isZero_Tor'_succ_of_projective",
+  "file": "Mathlib/CategoryTheory/Monoidal/Tor.lean",
+  "line": 61,
+  "how": "specializes in one line: with Tor^R_i(P,M) := ((CategoryTheory.Tor' (ModuleCat R) i).obj P).obj M as in [def-weil-pbc-tor-modules] (left-derived in the first variable), the lemma gives IsZero for i=n+1 when P is projective in ModuleCat R; a free R-module is projective. (The worker's Rep.isZero_Tor_succ_of_projective is about Rep k G, and CategoryTheory.isZero_Tor_succ_of_projective at line 56 needs the second variable projective; corrected by reviewer R-mpt.)"
+ },
+ "status": "mathlib",
+ "created": {
+  "item": "lem-sc-p1-minimal-presentation-tor",
+  "by": "worker",
+  "date": "2026-10-10"
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality"
+}

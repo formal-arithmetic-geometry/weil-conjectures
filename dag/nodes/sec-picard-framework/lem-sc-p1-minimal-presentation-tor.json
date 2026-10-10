@@ -20,9 +20,51 @@
   "def-weil-pbc-tor-modules",
   "def-sc-p1-standard"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "The sequence 0 \\to K \\to F \\to N \\to 0 is short exact by the definition of K and the presentation. Apply the low-degree Tor exact sequence [lem-weil-pbc-tor-long-exact-first-variable] with R=S and second variable k. It gives an exact sequence Tor_1^S(F,k) \\to Tor_1^S(N,k) \\to K tensor_S k \\to F tensor_S k \\to N tensor_S k \\to 0, natural in the second variable.",
+   "uses": [
+    "lem-weil-pbc-tor-long-exact-first-variable"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra, Lemma Tag 00M0 (low-degree long exact sequence of Tor)"
+   }
+  },
+  {
+   "text": "The module F is free, so Tor_1^S(F,k)=0 by [lem-sc-p1-tor-free-vanishing]. With k=S/S_+, the isomorphism (S/S_+)\\otimes_S M \\to M/S_+M, \\bar r\\otimes x\\mapsto rx mod S_+M, of [lem-weil-pbc-tensor-over-quotient-ring] (1), composed with the swap M\\otimes_S k\\cong k\\otimes_S M, identifies M\\otimes_S k with M/S_+M for M=K,F,N; by its explicit formula this identification commutes with the maps induced by S-linear maps M\\to M'. Under it the map F\\otimes_S k \\to N\\otimes_S k is the stated isomorphism F/S_+F \\to N/S_+N, so exactness forces the map K\\otimes_S k \\to F\\otimes_S k to be zero and identifies Tor_1^S(N,k) naturally with K\\otimes_S k, hence with K/S_+K.",
+   "uses": [
+    "lem-weil-pbc-tor-long-exact-first-variable",
+    "lem-sc-p1-tor-free-vanishing",
+    "lem-weil-pbc-tensor-over-quotient-ring"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra, Section Tag 00LY and Lemma Tag 00M0, Tor computed from a free resolution and the exact sequence"
+   }
+  },
+  {
+   "text": "Thus Tor_1^S(N,k) is naturally isomorphic to K/S_+K. Any isomorphism carries the zero module to the zero module, so Tor_1^S(N,k)=0 implies K/S_+K=0.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-picard-framework/sk-thm-picard-duality/lem-sc-p1-graded-resolution.md",
+    "place": "proof, graded Nakayama criterion applied to K_2"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-tor-long-exact-first-variable",
+  "lem-sc-p1-tor-free-vanishing",
+  "lem-weil-pbc-tensor-over-quotient-ring"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Algebra, Lemma Tag 00M0 and Section Tag 00LY"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -47,12 +89,41 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-sc-p1-graded-nakayama-free",
   "by": "worker",
   "date": "2026-10-10"
  },
  "chapter": "sec-picard-framework",
- "unit": "sk-thm-picard-duality"
+ "unit": "sk-thm-picard-duality",
+ "split_report": {
+  "date": "2026-10-11",
+  "item": "lem-sc-p1-minimal-presentation-tor",
+  "worker": "stage1",
+  "summary": "Expanded the imported graded Nakayama step into the low-degree Tor exact sequence for 0 -> K -> F -> N -> 0, the vanishing of positive Tor for the free module F, and the quotient-tensor identification K tensor_S S/S_+ = K/S_+K. Added one Mathlib leaf for positive Tor vanishing of free modules; the low-degree Tor sequence is an existing generic tool node.",
+  "blueprint": "Realizes the proof clause 'the kernel of a minimal finite graded free presentation has zero quotient by S_+ when Tor_1 vanishes' in lem-sc-p1-graded-resolution.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-tor-long-exact-first-variable",
+    "why": "Its statement supplies the low-degree exact Tor sequence and naturality used after applying it to 0 -> K -> F -> N -> 0; no node in this Picard unit duplicates that generic homological tool."
+   },
+   {
+    "node": "lem-weil-pbc-tensor-over-quotient-ring",
+    "why": "Generic Mathlib leaf (R/J) tensor_R M = M/JM, used as a black box for the quotient-tensor identifications M tensor_S k = M/S_+M (added by reviewer R-mpt, C1 fix)."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-tor-long-exact-first-variable",
+  "lem-weil-pbc-tensor-over-quotient-ring"
+ ],
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-mpt",
+  "group": "E1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-mpt (reviewer sub-agent of L); spot-checked: Source: Stacks Algebra Section 00LY (algebra-section-tor) and Lemma 00M0 (algebra-lemma-long-exact-sequence-tor); blueprint lem-sc-p1-graded-resolution proof (graded Nakayama on K_2). Item statement unchanged. Step 1: lem-weil-pbc-tor-long-exact-first-variable (R=S commutative, Q=K, Q'=F, Q''=N, second variable k) gives exactly Tor_1(F,k)->Tor_1(N,k)->K(x)k->F(x)k->N(x)k->0; accepted as generic tool (C8). Step 2: Tor_1(F,k)=0 by the new leaf; exactness plus F(x)k->N(x)k iso gives K(x)k->F(x)k zero and Tor_1(N,k)=K(x)k. Step 3 elementary. Small cases: N=0 (F=0,K=0), N=S (F=S,K=0), N=k (F=S, K=S_+, K/S_+K=k^2=Tor_1(k,k)) all agree. Def-weil-pbc-tor-modules is Tor' (resolution of the first variable). FIX more, RETURN less (C1): step 2 used the identification M(x)_S S/S_+ = M/S_+M with no node; cited existing Mathlib leaf lem-weil-pbc-tensor-over-quotient-ring (1) in step 2 uses, proof_deps and split_report.tool_uses (generic tool). FIX: dag/nodes/sec-picard-framework/lem-sc-p1-tor-free-vanishing.json: mathlib_match: declaration Rep.isZero_Tor_succ_of_projective (which is about Rep k G, GroupHomology/Basic.lean 111) replaced by CategoryTheory.isZero_Tor'_succ_of_projective, Mathlib/CategoryTheory/Monoidal/Tor.lean line 61 (verified with sed: [Projective X], IsZero ((Tor' C (n+1)).obj X).obj Y), matching the first-variable Tor of def-weil-pbc-tor-modules; free implies projective in ModuleCat R. Start Sat Oct 10 04:17:34 PM UTC 2026, end Sat Oct 10 04:18:54 PM UTC 2026.; 2 file(s) fixed by the reviewer"
+ }
 }
