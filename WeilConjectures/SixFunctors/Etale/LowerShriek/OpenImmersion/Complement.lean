@@ -59,7 +59,8 @@ The geometric input `AlgebraicGeometry.isEmpty_pullback_of_disjoint_range` lives
 and `CategoryTheory.Sheaf.isInitialOfIsZeroObj` — a sheaf whose sections are all terminal (resp.
 zero) is terminal (resp. zero, hence initial), for an arbitrary site and coefficient category —
 in `WeilConjectures.Mathlib.CategoryTheory.Sites.Sheaf`. Both are shared with the pro-étale
-counterpart `WeilConjectures.SixFunctors.ProEtale.LowerShriek.OpenImmersion.Complement`.
+counterpart
+`WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.LowerShriek.OpenImmersion.Complement`.
 -/
 
 @[expose] public section
