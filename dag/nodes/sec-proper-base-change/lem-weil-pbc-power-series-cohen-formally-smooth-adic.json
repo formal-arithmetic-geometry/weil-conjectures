@@ -25,16 +25,90 @@
  "statement": "Let $n\\ge0$. (1) Let $K$ be a field of characteristic $0$, $C=K[[x_1,\\ldots,x_n]]$ the formal power series ring [def-weil-pbc-multivariate-power-series], regarded as a $\\mathbf Q$-algebra through $\\mathbf Q\\subseteq K\\subseteq C$, and $\\mathfrak m_C=(x_1,\\ldots,x_n)\\subseteq C$. Then $C$ is formally smooth over $\\mathbf Q$ for the $\\mathfrak m_C$-adic topology [def-weil-pbc-formally-smooth-adic]. (2) Let $p$ be a prime, $\\Lambda$ a Cohen ring with residue characteristic $p$ [def-weil-pbc-cohen-ring], $C=\\Lambda[[x_1,\\ldots,x_n]]$ and $\\mathfrak m_C=(p,x_1,\\ldots,x_n)\\subseteq C$. Then $C$ is formally smooth over $\\mathbf Z$ for the $\\mathfrak m_C$-adic topology.",
  "source": {
   "document": "literature/stacks-project/more-algebra.tex",
-  "place": "More on Algebra, Lemma Tag 07NL (lemma-power-series-ring-over-Cohen-fs, line 9704), parts (1) and (3); part (2) (F_p -> L[[x]]) is not stated here. Its proof reduces by the universal property of power series rings to Q -> K formally smooth (Algebra, Proposition 0322) and Z -> Lambda formally smooth for the m_Lambda-adic topology (Algebra, Lemma 0329 cohen-ring-formally-smooth)."
+  "place": "More on Algebra, Lemma Tag 07NL (lemma-power-series-ring-over-Cohen-fs, line 9704), parts (1) and (3); part (2) (F_p -> L[[x]]) is not stated here. Its proof reduces by the universal property of power series rings to Q -> K formally smooth (Algebra, Proposition Tag 0322, proposition-characterize-separable-field-extensions) and Z -> Lambda formally smooth for the m_Lambda-adic topology (Algebra, Lemma Tag 0329, lemma-cohen-ring-formally-smooth)."
  },
  "stmt_deps": [
   "def-weil-pbc-multivariate-power-series",
   "def-weil-pbc-formally-smooth-adic",
   "def-weil-pbc-cohen-ring"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "*The test datum.* In both parts write $\\Lambda_0$ for the coefficient ring ($\\Lambda_0=K$ in (1), $\\Lambda_0=\\Lambda$ in (2)), $R$ for the base ($R=\\mathbf Q$ in (1), $R=\\mathbf Z$ in (2)) and $C=\\Lambda_0[[x_1,\\ldots,x_n]]$ [def-weil-pbc-multivariate-power-series]. By [def-weil-pbc-formally-smooth-adic] we must show: given a commutative ring $D$ with a ring map $R\\to D$, an ideal $J\\subseteq D$ with $J^2=0$, the quotient map $q:D\\to D/J$ [def-weil-pbc-algebra-hom-quotient], and a homomorphism of $R$-algebras $g:C\\to D/J$ with $g(\\mathfrak m_C^k)=0$ for some $k\\ge1$, there is a homomorphism of $R$-algebras $f:C\\to D$ with $q\\circ f=g$. Fix such data. Since $q$ is surjective choose $d_i\\in D$ with $q(d_i)=g(x_i)$, $i=1,\\ldots,n$. As $x_i\\in\\mathfrak m_C$, $q(d_i^k)=g(x_i^k)=0$, so $d_i^k\\in J$ and $d_i^{2k}\\in J^2=0$. In (2) moreover $p\\in\\mathfrak m_C$ gives $q(p^k\\cdot1_D)=g(p^k)=0$, so $p^k\\cdot1_D\\in J$ and $p^{2k}\\cdot1_D=0$; put $d_0=p\\cdot1_D$ in (2) and $d_0=0$ in (1). Let $\\mathfrak a=(d_0,d_1,\\ldots,d_n)\\subseteq D$ and $M=(n+1)(2k-1)+1$. Every product of $M$ of the generators $d_0,\\ldots,d_n$ contains some $d_i$ at least $2k$ times (pigeonhole), hence is $0$; so $\\mathfrak a^M=0$, and likewise $\\bar{\\mathfrak a}^M=q(\\mathfrak a)^M=q(\\mathfrak a^M)=0$ in $D/J$ for $\\bar{\\mathfrak a}=q(\\mathfrak a)$. A ring $T$ with an ideal $\\mathfrak b$, $\\mathfrak b^M=0$, is $\\mathfrak b$-adically complete [def-weil-pbc-adically-complete-ring]: for $m\\ge M$ the quotient $T/\\mathfrak b^m$ is $T$ and the transition maps $T/\\mathfrak b^{m+1}\\to T/\\mathfrak b^m$ are the identity of $T$, so the canonical map $T\\to\\varprojlim_mT/\\mathfrak b^m$ is injective ($\\bigcap_m\\mathfrak b^m=0$) and surjective (a compatible family is determined by its component $a\\in T/\\mathfrak b^M=T$, and is then the image of $a$). Hence $D$ is $\\mathfrak a$-adically complete and $D/J$ is $\\bar{\\mathfrak a}$-adically complete, and $d_i\\in\\mathfrak a$, $g(x_i)=q(d_i)\\in\\bar{\\mathfrak a}$.",
+   "uses": [
+    "def-weil-pbc-multivariate-power-series",
+    "def-weil-pbc-formally-smooth-adic",
+    "def-weil-pbc-algebra-hom-quotient",
+    "def-weil-pbc-adically-complete-ring"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "More on Algebra, Lemma Tag 07NL (lemma-power-series-ring-over-Cohen-fs, line 9704), proof (line 9718): the test diagram of Definition Tag 07EB (definition-formally-smooth, line 9140), and 'some power of $p$ will be zero in $A/J$ and hence some power of $p$ will be zero in $A$'"
+   }
+  },
+  {
+   "text": "*Lifting on the coefficients, part (1).* $K$ is a field of characteristic $0$ containing $\\mathbf Q$, and $D$ is a $\\mathbf Q$-algebra through $R\\to D$. The restriction $g|_K:K\\to D/J$ is a homomorphism of $\\mathbf Q$-algebras (as $g$ is one and $\\mathbf Q\\subseteq K\\subseteq C$). By [lem-weil-pbc-char-zero-field-extension-formally-smooth] for the extension $K/\\mathbf Q$ (formal smoothness of $\\mathbf Q\\to K$, Algebra Proposition 0322), applied to $D$, $J$, $q$ and $g|_K$, there is a homomorphism of $\\mathbf Q$-algebras $h:K\\to D$ with $q\\circ h=g|_K$.",
+   "uses": [
+    "lem-weil-pbc-char-zero-field-extension-formally-smooth"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "More on Algebra, Lemma Tag 07NL (lemma-power-series-ring-over-Cohen-fs, line 9704), proof (line 9718): reduction (1) '$\\mathbf Q\\to K$ is formally smooth', by Algebra, Proposition Tag 0322 (proposition-characterize-separable-field-extensions, algebra.tex line 44475)"
+   }
+  },
+  {
+   "text": "*Lifting on the coefficients, part (2).* Put $N=2k$. By Step 1, $p^N\\cdot1_D=0$, so $D$ is a ring with $p^ND=0$; and $g(p^N)=g(p^k)g(p^k)=0$ (as $p^k\\in\\mathfrak m_C^k$), so the ring homomorphism $g|_\\Lambda:\\Lambda\\to D/J$ kills $p^N\\Lambda$ and factors as $g|_\\Lambda=\\bar g\\circ\\pi$ with $\\pi:\\Lambda\\to\\Lambda/p^N\\Lambda$ the quotient map and $\\bar g:\\Lambda/p^N\\Lambda\\to D/J$ a ring homomorphism. By [lem-weil-pbc-cohen-ring-mod-pn-formally-smooth] for $\\Lambda$ (a Cohen ring with residue characteristic $p$ [def-weil-pbc-cohen-ring]) and $n=N$, applied to $D$, $J$, $q$ and $\\bar g$, there is a ring homomorphism $\\bar f:\\Lambda/p^N\\Lambda\\to D$ with $q\\circ\\bar f=\\bar g$. Then $h=\\bar f\\circ\\pi:\\Lambda\\to D$ is a ring homomorphism with $q\\circ h=g|_\\Lambda$. (This is the formal smoothness of $\\mathbf Z\\to\\Lambda$ for the $p\\Lambda$-adic topology, used by the source, in the instance needed.)",
+   "uses": [
+    "lem-weil-pbc-cohen-ring-mod-pn-formally-smooth",
+    "def-weil-pbc-cohen-ring"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "More on Algebra, Lemma Tag 07NL (lemma-power-series-ring-over-Cohen-fs, line 9704), proof (line 9718): reduction (3) '$\\mathbf Z\\to\\Lambda$ is formally smooth in the $\\mathfrak m_\\Lambda$-adic topology', by Algebra, Lemma Tag 0329 (lemma-cohen-ring-formally-smooth, algebra.tex line 44907) since some power of $p$ is zero in $A$"
+   }
+  },
+  {
+   "text": "*Extension to the power series ring.* In both parts we now have a ring homomorphism $h:\\Lambda_0\\to D$ with $q\\circ h=g|_{\\Lambda_0}$ (Steps 2, 3). Apply [lem-weil-pbc-power-series-universal-property-complete] to $\\Lambda_0$, $T=D$ (which is $\\mathfrak a$-adically complete by Step 1), $\\alpha=h$ and $t_i=d_i\\in\\mathfrak a$: there is a ring homomorphism $f:C\\to D$ with $f|_{\\Lambda_0}=h$ and $f(x_i)=d_i$. Now $q\\circ f$ and $g$ are two ring homomorphisms $C\\to D/J$; they agree on $\\Lambda_0$ ($q\\circ f|_{\\Lambda_0}=q\\circ h=g|_{\\Lambda_0}$) and send $x_i$ to the same element $q(d_i)=g(x_i)\\in\\bar{\\mathfrak a}$. Apply the uniqueness clause of [lem-weil-pbc-power-series-universal-property-complete] to $\\Lambda_0$, $T=D/J$ (which is $\\bar{\\mathfrak a}$-adically complete by Step 1), $\\alpha=g|_{\\Lambda_0}$ and $t_i=g(x_i)$: hence $q\\circ f=g$. Finally $f$ is a homomorphism of $R$-algebras [def-weil-pbc-algebra-hom-quotient]: in (2), $R=\\mathbf Z$ and every ring homomorphism is $\\mathbf Z$-linear; in (1), $f\\circ(\\mathbf Q\\to C)$ and the structure map $\\mathbf Q\\to D$ are ring homomorphisms $\\mathbf Q\\to D$, and there is only one (it is determined on $\\mathbf Z$ and $1/m$ must go to the inverse of $m\\cdot1_D$).",
+   "uses": [
+    "lem-weil-pbc-power-series-universal-property-complete",
+    "def-weil-pbc-algebra-hom-quotient"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "More on Algebra, Lemma Tag 07NL (lemma-power-series-ring-over-Cohen-fs, line 9704), proof (line 9718): 'By the universal property of power series rings it suffices to prove' (line 9719)"
+   }
+  },
+  {
+   "text": "*Conclusion.* For every test datum $(D,J,g,k)$ of [def-weil-pbc-formally-smooth-adic] for $R\\to C$ and the ideal $\\mathfrak m_C$, Steps 1–4 give a homomorphism of $R$-algebras $f:C\\to D$ with $q\\circ f=g$. Hence $C$ is formally smooth over $\\mathbf Q$ for the $\\mathfrak m_C$-adic topology in (1) ($\\mathfrak m_C=(x_1,\\ldots,x_n)$, $d_0=0$), and over $\\mathbf Z$ for the $\\mathfrak m_C$-adic topology in (2) ($\\mathfrak m_C=(p,x_1,\\ldots,x_n)$).",
+   "uses": [
+    "def-weil-pbc-formally-smooth-adic"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "More on Algebra, Lemma Tag 07NL (lemma-power-series-ring-over-Cohen-fs, line 9704), proof (line 9718)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-multivariate-power-series",
+  "def-weil-pbc-formally-smooth-adic",
+  "def-weil-pbc-algebra-hom-quotient",
+  "def-weil-pbc-adically-complete-ring",
+  "lem-weil-pbc-char-zero-field-extension-formally-smooth",
+  "lem-weil-pbc-cohen-ring-mod-pn-formally-smooth",
+  "def-weil-pbc-cohen-ring",
+  "lem-weil-pbc-power-series-universal-property-complete"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "More on Algebra, Lemma Tag 07NL (lemma-power-series-ring-over-Cohen-fs, line 9704), proof (line 9718); Algebra Proposition Tag 0322 and Lemma Tag 0329 (algebra.tex lines 44475, 44907)"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -63,10 +137,17 @@
    "results": "none; Mathlib's Algebra.FormallySmooth (RingTheory/Smooth/Basic.lean) has no adic-topology variant",
    "date": "2026-10-10",
    "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rn 'FormallySmooth' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/RingTheory/MvPowerSeries ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/RingTheory/PowerSeries",
+   "results": "none",
+   "date": "2026-10-10",
+   "verdict": "no match (re-check at split)"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "worker",
@@ -87,5 +168,12 @@
  },
  "chapter": "sec-proper-base-change",
  "unit": "sk-thm-p1",
- "reviewed": "2026-10-10 L: statement checked against 07NL (1),(3); no blueprint node states it (searched)"
+ "reviewed": "2026-10-10 L: 5 steps checked against 07NL (1),(3): the test datum makes D adically complete for the ideal of the chosen lifts (nilpotent), lift on K by 0322 (char 0) or on Lambda by 0329 (Cohen ring mod p^n), extension by the universal property of power series (existence in D, uniqueness in D/J)",
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "lem-weil-pbc-power-series-cohen-formally-smooth-adic",
+  "worker": "stage1",
+  "summary": "Read 07NL (more-algebra.tex line 9704) and its proof, Algebra 0322 (line 44475), 0327, 0329 (line 44907) and its proof, More on Algebra 07EB (line 9140) and 07EC (line 9165); tags verified in tags/tags. Statement kept. The source's one-line reduction 'by the universal property of power series rings it suffices' is written out: Step 1 fixes a test datum, chooses lifts d_i of g(x_i) (and d_0 = p in part (2)), shows they generate a nilpotent ideal (pigeonhole), so D and D/J are adically complete for it; Steps 2 and 3 lift g on the coefficient ring (K via the char-0 formal smoothness node; Lambda via the Cohen mod p^N node, after observing p^{2k}=0 in D, which is the source's remark 'some power of p is zero in A'); Step 4 extends by the existence part of the universal-property node and gets q o f = g by its uniqueness part applied in D/J, and checks R-linearity. No new node: every fact used is an existing node (universal property of power series, char-zero field formally smooth (Mathlib leaf), Cohen ring mod p^n formally smooth). No slopmaster2 Lean for 07NL. Blueprint search (07NL, 'power series formally smooth', 'Cohen ring formally smooth', 'Cohen', 'formally smooth'): no blueprint node states it.",
+  "blueprint": "No blueprint node is the item; its ancestor thm-weil-pbc-finite-etale-lifting (step 7 of its split, Lemma 0GS2 essential-surjectivity paragraphs) uses it through the chain in blueprint.from.via. Steps 1-5 realize the formal-smoothness input of that place for the complete local rings Lambda_0[[x]] (the presentation in lem-weil-pbc-complete-local-flat-presentation); the blueprint proof itself does not spell this out."
+ }
 }
