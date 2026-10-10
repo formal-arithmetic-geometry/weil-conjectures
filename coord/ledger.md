@@ -2788,3 +2788,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 22:12 L: merged deliver/M1/lem-sc-general-theorem-of-cube (reviewer FIX; after a return; new nodes: 4)
 - 22:12 L: merged deliver/E1/lem-pc-rf-base-change-single-complex-criterion (reviewer FIX; after a return; new nodes: 2)
 - 22:12 L: returned deliver/F1/def-sc-zariski-site (reviewer RETURN: Not a fault: the site is Mathlib's Opens.grothendieckTopology on X.carrier (Mathlib/CategoryTheory/Sites/Spaces.lean:48;)
+- 22:12 UTC L matched def-sc-zariski-site to Mathlib Opens.grothendieckTopology (R-zsi2756); F1 delivery returned as unneeded
