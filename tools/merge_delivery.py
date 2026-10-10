@@ -394,7 +394,7 @@ def cmd_merge(o):
             # (decision of the human, 2026-10-10 evening); --drop-tool-uses a,b leaves out the ones the reviewer rejected
             declared = []
             try:
-                dd = json.loads((tree / item_path).read_text())
+                dd = json.loads((ROOT / item_path).read_text())
                 declared = [t.get("node") for t in ((dd.get("split_report") or {}).get("tool_uses") or []) if isinstance(t, dict) and t.get("node")]
             except Exception:  # noqa: BLE001
                 declared = []
