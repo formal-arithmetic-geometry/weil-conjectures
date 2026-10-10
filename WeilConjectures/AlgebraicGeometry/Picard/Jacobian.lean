@@ -2120,7 +2120,8 @@ theorem exists_finiteSubext_isPullback_overTransport {ks : Type u} [Field ks] [A
           z ≫ pullback.fst Js.hom pr₁ := by
       rw [rs.overDescentDatum.transport_left_congr _ rfl
         ((Over.homMk z : Over.mk (z ≫ f₁V) ⟶ Over.mk f₁V) ≫ a₀)
-        ((Over.homMk z : Over.mk (z ≫ f₁V) ⟶ Over.mk f₁V) ≫ a₀) rfl hz rfl, Over.DescentDatum.transport_self]
+        ((Over.homMk z : Over.mk (z ≫ f₁V) ⟶ Over.mk f₁V) ≫ a₀) rfl hz rfl,
+        Over.DescentDatum.transport_self]
       rfl
     have h₁ : z ≫ (rs.overTransport f₁V f₂V hfV a₀).left = z ≫ pullback.fst Js.hom pr₁ :=
       hkey.symm.trans hself
