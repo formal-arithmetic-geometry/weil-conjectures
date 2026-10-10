@@ -1,8 +1,8 @@
 # Work queue
 
-926 items; claim with `tools/claim.py next <group> [--stage N]`.
+927 items; claim with `tools/claim.py next <group> [--stage N]`.
 
-## Stage 1: nodes to split (217)
+## Stage 1: nodes to split (218)
 
 | node | distance to a target | Lean state on the done branch |
 |---|---|---|
@@ -11,8 +11,9 @@
 | `lem-sc-finite-length-global-submodule` | 2018 | none |
 | `lem-pc-derived-functor-truncation-stabilization` | 3013 | none |
 | `lem-pc-derived-limit-milnor-sequence` | 3013 | none |
-| `lem-pc-qcoh-truncation-derived-limit` | 3013 | none |
+| `lem-pc-derived-functor-commutes-derived-limit` | 3014 | none |
 | `lem-pc-ringed-space-module-stalk-tensor` | 3014 | none |
+| `lem-pc-ringed-space-truncation-derived-limit` | 3014 | none |
 | `lem-pc-stalk-direct-sums` | 3014 | none |
 | `lem-pc-derived-qcoh-perfect-generation` | 3016 | none |
 | `lem-pc-perfect-complexes-compact-set` | 3016 | none |
@@ -38,7 +39,6 @@
 | `lem-sc-filtered-colimit-prime-chain-dimension` | 4010 | none |
 | `lem-sc-product-tangent-space-direct-sum` | 4010 | none |
 | `lem-sc-strict-henselization-completion-noetherian` | 4010 | none |
-| `lem-sc-strict-henselization-faithfully-flat` | 4010 | none |
 | `lem-pc-hilb-containment-locus` | 4011 | none |
 | `lem-pc-derived-free-complex-cover` | 4013 | none |
 | `lem-pc-derived-total-resolution-quasi-iso` | 4013 | none |
@@ -48,12 +48,13 @@
 | `lem-sc-generic-rank-leading-degree` | 5010 | none |
 | `lem-pc-flat-sheaf-stalk-flat` | 5012 | none |
 | `lem-pc-kflat-bounded-flat-replacement` | 5012 | none |
-| `lem-pc-noetherian-approximation-data` | 5012 | none |
 | `lem-pc-noetherian-perfect-direct-image` | 5012 | none |
 | `lem-pc-rf-base-change-complex` | 5012 | none |
 | `lem-pc-bounded-above-flat-kflat-site` | 5013 | none |
 | `lem-pc-complex-hocolim-colimit` | 5013 | none |
+| `lem-pc-finite-flat-proper-support-descent` | 5013 | none |
 | `lem-pc-kflat-cone-direct-sum` | 5013 | none |
+| `lem-pc-perfect-complex-descent` | 5013 | none |
 | `lem-pc-sheaf-modules-tensor-closed` | 5013 | none |
 | `lem-sp-cartan-eilenberg-comparison-independence` | 6005 | none |
 | `lem-sp-cartan-eilenberg-exists` | 6005 | none |
@@ -938,7 +939,7 @@
 | `lem-weil-pbc-p1-field-dimension-one` | 4 | state |
 | `lem-weil-pbc-projective-space-zero-isomorphism` | 4 | state |
 
-Not open yet: 1405 nodes that wait for a statement dependency, 253 nodes that wait for stage 1.
+Not open yet: 1408 nodes that wait for a statement dependency, 254 nodes that wait for stage 1.
 
 ## Stage 3: modules to prove (0)
 
