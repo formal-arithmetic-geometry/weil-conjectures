@@ -9,7 +9,7 @@
     "def-pur-derived-internal-hom"
    ]
   },
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "The Hom complex into K-injective complexes respects quasi-isomorphisms",
@@ -24,9 +24,50 @@
   "def-pc-cochain-complex-modules",
   "def-pur-hom-complex"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Fix an object $U$ of $\\mathcal C$ and $n\\in\\mathbf Z$. For any complexes $\\mathcal L^\\bullet,\\mathcal M^\\bullet$ let $\\mathcal L^\\bullet[-n]$ be the shift, $(\\mathcal L[-n])^p=\\mathcal L^{p-n}$, $d_{\\mathcal L[-n]}=(-1)^n d_{\\mathcal L}$. By the formula of [def-pur-hom-complex], $\\mathcal Hom^k(\\mathcal L^\\bullet[-n],\\mathcal M^\\bullet)=\\mathcal Hom^{k+n}(\\mathcal L^\\bullet,\\mathcal M^\\bullet)$ with literally the same differentials in degrees $k=-1,0$ (in degree $k$ both are $f\\mapsto d_{\\mathcal M}f-(-1)^{k+n}f\\,d_{\\mathcal L}$), so $H^n(\\Gamma(U,\\mathcal Hom^\\bullet(\\mathcal L^\\bullet,\\mathcal M^\\bullet)))=H^0(\\Gamma(U,\\mathcal Hom^\\bullet(\\mathcal L^\\bullet[-n],\\mathcal M^\\bullet)))$, compatibly with pre- and postcomposition by morphisms of complexes. Restriction to $\\mathcal C/U$ is exact [lem-weil-pbc-site-restriction-exact], so it commutes with cohomology sheaves and $s|_U$, $t[-n]|_U$ are quasi-isomorphisms [def-pc-quasi-iso-modules]; hence $Q_U(s|_U)$ and $Q_U(t[-n]|_U)$ are isomorphisms in $D(\\mathcal O_U)$ [def-weil-abstract-derived-category]. By [lem-pur-rhom-into-kinjective-local], applied to $(\\mathcal L^\\bullet[-n],(\\mathcal I')^\\bullet)$ and to $((\\mathcal L')^\\bullet[-n],\\mathcal I^\\bullet)$ (both targets K-injective), the map $f\\mapsto s\\circ f\\circ t$ on $H^n(\\Gamma(U,-))$ becomes, since $Q_U$ is a functor and the bijection is $[f]\\mapsto Q_U(f)$, the map $\\varphi\\mapsto Q_U(s|_U)\\circ\\varphi\\circ Q_U(t[-n]|_U)$ between Hom sets of $D(\\mathcal O_U)$, which is bijective. So the displayed morphism induces isomorphisms $H^n(\\Gamma(U,\\mathcal Hom^\\bullet(\\mathcal L^\\bullet,(\\mathcal I')^\\bullet)))\\to H^n(\\Gamma(U,\\mathcal Hom^\\bullet((\\mathcal L')^\\bullet,\\mathcal I^\\bullet)))$ for all $U$ and $n$, compatible with restriction.",
+   "uses": [
+    "lem-pur-rhom-into-kinjective-local",
+    "lem-weil-pbc-site-restriction-exact",
+    "def-pc-quasi-iso-modules",
+    "def-pur-hom-complex",
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Lemma 0A95, using Lemma 0A94"
+   }
+  },
+  {
+   "text": "For a complex $\\mathcal K^\\bullet$ of $\\mathcal O$-modules [def-pc-acyclic-complex-modules], the cohomology sheaf $H^n(\\mathcal K^\\bullet)$ is the sheafification of the presheaf $U\\mapsto H^n(\\Gamma(U,\\mathcal K^\\bullet))$: the presheaf kernel, image and quotient are formed sectionwise, and module sheafification is exact and the identity on sheaves [lem-weil-pbc-ringed-site-module-sheafification-exact], so it carries the presheaf cohomology to $\\operatorname{Ker}d^n/\\operatorname{Im}d^{n-1}$ computed in $\\Mod(\\mathcal O)$, naturally in $\\mathcal K^\\bullet$. By Step 1 the displayed morphism induces an isomorphism of these presheaves for both Hom complexes, hence an isomorphism of their sheafifications $H^n$ for every $n$; i.e. it is a quasi-isomorphism [def-pc-quasi-iso-modules].",
+   "uses": [
+    "lem-weil-pbc-ringed-site-module-sheafification-exact",
+    "def-pc-acyclic-complex-modules",
+    "def-pc-quasi-iso-modules"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Lemma 0A95, using Lemma 0A94"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-pur-rhom-into-kinjective-local",
+  "lem-weil-pbc-site-restriction-exact",
+  "def-pc-quasi-iso-modules",
+  "def-pur-hom-complex",
+  "def-weil-abstract-derived-category",
+  "lem-weil-pbc-ringed-site-module-sheafification-exact",
+  "def-pc-acyclic-complex-modules"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Lemmas 0A94 and 0A95"
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -37,7 +78,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "worker",
@@ -57,5 +98,24 @@
   }
  },
  "chapter": "sec-smooth-purity",
- "unit": "sk-def-sf-operations"
+ "unit": "sk-def-sf-operations",
+ "split_report": {
+  "date": "2026-10-11",
+  "item": "lem-pur-rhom-well-defined",
+  "worker": "stage1",
+  "summary": "Split Lemma 0A95 through the localized derived-category computation of Lemma 0A94, applying it in every degree via shifts and comparing the induced presheaf isomorphisms.",
+  "blueprint": "Realizes the ancestor proof clause stating that Hom sends quasi-isomorphisms in either variable to quasi-isomorphisms, using Lemma 0A94 and Lemma 0A95."
+ },
+ "tool_uses": [
+  "lem-weil-pbc-site-restriction-exact",
+  "lem-weil-pbc-ringed-site-module-sheafification-exact"
+ ],
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-rwd3131",
+  "group": "H1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-rwd3131 (reviewer sub-agent of L); spot-checked: Read packet; checked new node vs lem-sc-kinjective-quasi-iso-comparison, lem-sc-derived-k-injective-restrict-open (ringed spaces only), lem-pur-hom-kflat-into-kinjective, lem-pur-rhom-global-sections: not a duplicate (site-local 0A94); citer def-pur-derived-internal-hom quantifiers match. FIX more, RETURN less: (1) E/C4 step applied the new node to L[n] and I'[n], which cancels and does not give degree n; rewrote with L[-n] (Hom^k(L[-n],M)=Hom^{k+n}(L,M), elementary from def-pur-hom-complex). (2) C4 new node said only 'canonically isomorphic', step needs compatibility with s,t; restated in TeX with the explicit bijection [f] -> Q_U(f) (also B3 prose->TeX). (3) C1 uncited facts: restriction to C/U exact so s|_U,t|_U quasi-isos [lem-weil-pbc-site-restriction-exact], cohomology sheaf = sheafification of sectionwise cohomology via exactness of module sheafification [lem-weil-pbc-ringed-site-module-sheafification-exact]; split into two steps, proof_deps updated, both declared as tool uses.; 2 file(s) fixed by the reviewer"
+ }
 }
