@@ -1,8 +1,8 @@
 # Work queue
 
-860 items; claim with `tools/claim.py next <group> [--stage N]`.
+861 items; claim with `tools/claim.py next <group> [--stage N]`.
 
-## Stage 1: nodes to split (368)
+## Stage 1: nodes to split (369)
 
 | node | distance to a target | Lean state on the done branch |
 |---|---|---|
@@ -24,7 +24,6 @@
 | `lem-weil-pbc-triangular-change-of-basis` | 1016 | none |
 | `lem-weil-pbc-dim-one-residue-field-extensions-finite` | 1018 | none |
 | `def-weil-pbc-double-complex-zigzag-module` | 1019 | none |
-| `lem-weil-pbc-double-complex-row-cycle-lifts-to-zigzag` | 1019 | none |
 | `lem-weil-pbc-double-complex-zigzag-to-row-cokernel-map` | 1019 | none |
 | `lem-weil-pbc-double-complex-zigzag-trivial-if-row-boundary` | 1019 | none |
 | `lem-weil-pbc-injective-acyclicity-bounded-below` | 2002 | sorry_here |
@@ -52,7 +51,6 @@
 | `lem-galois-inverse-image-representable` | 3006 | none |
 | `lem-sc-flat-base-change-coherent` | 3006 | sorry_here |
 | `lem-weil-pbc-hypercover-free-resolution` | 3006 | none |
-| `def-sc-divisor` | 3007 | none |
 | `def-weil-pbc-semi-representable-object` | 3007 | none |
 | `lem-galois-finite-etale-connected-object` | 3007 | none |
 | `lem-galois-transitive` | 3007 | none |
@@ -80,15 +78,18 @@
 | `lem-galois-fpqc-morphisms-descend` | 3008 | none |
 | `lem-pc-curves-are-sc` | 3008 | none |
 | `lem-sc-degree-2g1-very-ample` | 3008 | rests_on_sorry |
+| `lem-sc-divisor-finite-support` | 3008 | none |
 | `lem-sc-divisor-module-local` | 3008 | none |
 | `lem-sc-etale-qcoherent-presheaf-functorial` | 3008 | none |
 | `lem-sc-line-bundle-rational-section` | 3008 | rests_on_sorry |
 | `lem-sc-smooth-connected-curve-local-rings` | 3008 | none |
 | `lem-sc-sylow-module-filtration` | 3008 | none |
 | `lem-sc-zero-generic-acyclic` | 3008 | rests_on_sorry |
+| `lem-weil-pbc-matching-object-coskeleton` | 3008 | none |
 | `lem-weil-pbc-simplicial-hom-object-exists` | 3008 | none |
 | `lem-weil-pbc-simplicial-hom-object-pushout` | 3008 | none |
 | `lem-weil-pbc-simplicial-hom-object-standard-simplex` | 3008 | none |
+| `lem-weil-pbc-simplicial-matching-object` | 3008 | none |
 | `lem-weil-pbc-simplicial-set-glue-simplex` | 3008 | none |
 | `thm-sc-theorem-of-the-base` | 3008 | rests_on_sorry |
 | `def-exc-continuous-cohomology` | 3009 | none |
@@ -872,7 +873,7 @@
 | `lem-weil-pbc-p1-field-dimension-one` | 4 | state |
 | `lem-weil-pbc-projective-space-zero-isomorphism` | 4 | state |
 
-Not open yet: 386 nodes that wait for stage 1, 911 nodes that wait for a statement dependency.
+Not open yet: 387 nodes that wait for stage 1, 913 nodes that wait for a statement dependency.
 
 ## Stage 3: modules to prove (0)
 
