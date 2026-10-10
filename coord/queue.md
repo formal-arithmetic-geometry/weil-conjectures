@@ -1,8 +1,8 @@
 # Work queue
 
-908 items; claim with `tools/claim.py next <group> [--stage N]`.
+906 items; claim with `tools/claim.py next <group> [--stage N]`.
 
-## Stage 1: nodes to split (265)
+## Stage 1: nodes to split (263)
 
 | node | distance to a target | Lean state on the done branch |
 |---|---|---|
@@ -41,7 +41,6 @@
 | `lem-sc-strict-henselization-dvr` | 4008 | none |
 | `lem-weil-pbc-gm-strict-henselization-stalk-formula` | 4008 | none |
 | `prop-av-tate-rank` | 4008 | rests_on_sorry |
-| `prop-pd-picard-degree-decomposition` | 4008 | rests_on_sorry |
 | `cor-pc-sigma-pic-iso` | 4009 | rests_on_sorry |
 | `lem-pc-vanishing-above-dim` | 4009 | rests_on_sorry |
 | `lem-sc-finite-flat-surj-points` | 4009 | none |
@@ -74,7 +73,6 @@
 | `def-sp-convergence` | 6002 | none |
 | `def-sp-exact-couple` | 6002 | none |
 | `def-sp-image-filtration` | 6002 | none |
-| `def-sp-kinjective-bridge` | 6002 | none |
 | `def-sp-truncation-couple` | 6002 | none |
 | `lem-sp-couple-morphism` | 6002 | none |
 | `lem-sp-kinjective-computes` | 6002 | none |
@@ -920,7 +918,7 @@
 | `lem-weil-pbc-p1-field-dimension-one` | 4 | state |
 | `lem-weil-pbc-projective-space-zero-isomorphism` | 4 | state |
 
-Not open yet: 1329 nodes that wait for a statement dependency, 294 nodes that wait for stage 1.
+Not open yet: 1330 nodes that wait for a statement dependency, 293 nodes that wait for stage 1.
 
 ## Stage 3: modules to prove (0)
 
