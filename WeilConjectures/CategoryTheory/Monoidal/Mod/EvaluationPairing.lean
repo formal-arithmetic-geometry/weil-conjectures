@@ -31,6 +31,7 @@ universe w v u
 open CategoryTheory MonoidalCategory Limits Functor.LaxMonoidal
 
 local notation "η[" M "]" => MonObj.one (X := M)
+local notation "μ[" M "]" => MonObj.mul (X := M)
 
 namespace LinearMap
 
@@ -259,6 +260,36 @@ lemma bijective_evaluationPairing_of_iso_biproduct [IsIso (ε Φ ≫ Φ.map η[A
       bijective_evaluationPairing_regular Φ N)
 
 end Biproduct
+
+end CategoryTheory.Mod
+
+namespace CategoryTheory.Mod
+
+variable {C : Type u} [Category.{v} C] [MonoidalCategory C] {A : C} [MonObj A]
+
+/-- A morphism of modules out of the regular module `A` is determined by the image of the unit,
+and every morphism `𝟙 ⟶ M` is the image of the unit of such a morphism: `A` is the free module
+on `𝟙`. -/
+lemma bijective_one_comp_hom (M : Mod C A) :
+    Function.Bijective (fun v : regular A ⟶ M ↦ η[A] ≫ v.hom) := by
+  have key (v : regular A ⟶ M) :
+      v.hom = (ρ_ A).inv ≫ A ◁ (η[A] ≫ v.hom) ≫ act M.X := by
+    have hv : μ[A] ≫ v.hom = A ◁ v.hom ≫ act M.X := act_hom v
+    rw [MonoidalCategory.whiskerLeft_comp_assoc, ← hv, ← Category.assoc (A ◁ η[A]),
+      MonObj.mul_one, Iso.inv_hom_id_assoc]
+  refine ⟨fun v v' h ↦ Mod.hom_ext _ _ ?_, fun g ↦ ?_⟩
+  · rw [key v, key v']
+    exact congrArg (fun g ↦ (ρ_ A).inv ≫ A ◁ g ≫ act M.X) h
+  · let ι : regular A ⟶ (free A).obj (𝟙_ C) :=
+      homMk (M := regular A) (N := (free A).obj (𝟙_ C)) (ρ_ A).inv (by
+        change μ[A] ≫ (ρ_ A).inv = A ◁ (ρ_ A).inv ≫ (α_ A A (𝟙_ C)).inv ≫ μ[A] ▷ 𝟙_ C
+        rw [rightUnitor_inv_naturality]
+        monoidal)
+    refine ⟨ι ≫ freeDesc A g, ?_⟩
+    have h := unit_freeDesc A g
+    change η[A] ≫ (ρ_ A).inv ≫ (freeDesc A g).hom = g
+    rw [rightUnitor_inv_naturality_assoc, ← unitors_inv_equal]
+    exact h
 
 end CategoryTheory.Mod
 
