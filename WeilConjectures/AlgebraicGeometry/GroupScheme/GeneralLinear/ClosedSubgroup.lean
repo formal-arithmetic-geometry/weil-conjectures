@@ -249,17 +249,43 @@ theorem subgroupSchemeHom_refl : subgroupSchemeHom (le_refl I) = 𝟙 (subgroupS
 immersion `V(J) ⟶ V(I)` contains the commutators scheme-theoretically
 (`AlgebraicGeometry.IsMonHom.ContainsCommutators`).
 
-Proof sketch (not formalised): it suffices to factor the universal commutator, that of the two
-projections of `V(I) × V(I)`, through `V(J)`; every other commutator is obtained from it by
-precomposition. The product `V(I) × V(I)` is affine, the spectrum of
-`(k[GL_n] ⧸ I) ⊗[k] (k[GL_n] ⧸ I)`, so its identity is a point of `V(I) × V(I)` with values in this
-algebra, and the hypothesis for this algebra, transported through `zeroLocusMulEquiv`, factors the
-universal commutator. (blueprint: `sk-i-restriction`) -/
+Two points `X ⟶ V(I)` factor through the affine scheme `Spec Γ(X)`, where they are matrices over
+`Γ(X)`; the hypothesis for `R = Γ(X)`, transported through `zeroLocusMulEquiv`, factors their
+commutator through `V(J)`. (blueprint: `sk-i-restriction`) -/
 theorem containsCommutators_subgroupSchemeHom
     (hIJ : ∀ (R : Type u) [CommRing R] [Algebra k R],
       ⁅zeroLocus I R, zeroLocus I R⁆ ≤ zeroLocus J R) :
     IsMonHom.ContainsCommutators (subgroupSchemeHom h) := by
-  sorry
+  refine ⟨fun {X} a b ↦ ?_⟩
+  -- Both points factor through the affine scheme `Spec Γ(X)`, so we may assume `X` affine.
+  let adj := algΓAlgSpecAdjunction (.of k)
+  have hfac {Y : (CommAlgCat k)ᵒᵖ} (f : X ⟶ (algSpec (.of k)).obj Y) :
+      ∃ f' : (algSpec (.of k)).obj ((algΓ (.of k)).obj X) ⟶ (algSpec (.of k)).obj Y,
+        f = adj.unit.app X ≫ f' :=
+    ⟨_, ((adj.homEquiv_unit (f := (adj.homEquiv X Y).symm f)).symm.trans
+      ((adj.homEquiv X Y).apply_symm_apply f)).symm⟩
+  obtain ⟨a, rfl⟩ : ∃ a' : (algSpec (.of k)).obj ((algΓ (.of k)).obj X) ⟶
+      subgroupScheme I, a = (adj.unit.app X : X ⟶ _) ≫ a' :=
+    hfac (Y := .op (.of k (CoordinateRing n k ⧸ I))) a
+  obtain ⟨b, rfl⟩ : ∃ b' : (algSpec (.of k)).obj ((algΓ (.of k)).obj X) ⟶
+      subgroupScheme I, b = (adj.unit.app X : X ⟶ _) ≫ b' :=
+    hfac (Y := .op (.of k (CoordinateRing n k ⧸ I))) b
+  -- For `X = Spec R`, the points are matrices over `R`.
+  let R := ((algΓ (.of k)).obj X).unop
+  obtain ⟨g, rfl⟩ := (zeroLocusMulEquiv I R).surjective a
+  obtain ⟨g', rfl⟩ := (zeroLocusMulEquiv I R).surjective b
+  have hc : (g : GL n R) * g' * (g : GL n R)⁻¹ * (g' : GL n R)⁻¹ ∈ zeroLocus J R :=
+    hIJ R (Subgroup.commutator_mem_commutator g.2 g'.2)
+  refine ⟨(adj.unit.app X : X ⟶ _) ≫ zeroLocusMulEquiv J R ⟨_, hc⟩, ?_⟩
+  rw [← GrpObj.comp_inv, ← GrpObj.comp_inv, ← MonObj.comp_mul, ← MonObj.comp_mul,
+    ← MonObj.comp_mul, Category.assoc]
+  refine congrArg _ ?_
+  apply injective_homMulEquiv_comp I R
+  dsimp only
+  rw [Category.assoc, subgroupSchemeHom_comp_subgroupSchemeι, homMulEquiv_zeroLocusMulEquiv_comp,
+    MonObj.mul_comp, MonObj.mul_comp, MonObj.mul_comp, GrpObj.inv_comp, GrpObj.inv_comp, map_mul,
+    map_mul, map_mul, map_inv, map_inv, homMulEquiv_zeroLocusMulEquiv_comp,
+    homMulEquiv_zeroLocusMulEquiv_comp]
 
 end Inclusion
 
@@ -549,7 +575,8 @@ central scheme-theoretically: its points commute with all points of `G`.
 
 Both points factor through the affine scheme `Spec Γ(X)`, where they are matrices, and these
 commute by `Matrix.GeneralLinearGroup.commute_of_mem_zeroLocus_center`: the commutation equations
-vanish on the rational points of `Z(G) × G`, which are dense in this reduced scheme. (blueprint: `sk-p-comparison`) -/
+vanish on the rational points of `Z(G) × G`, which are dense in this reduced scheme.
+(blueprint: `sk-p-comparison`) -/
 theorem central_subgroupSchemeHom_le_center [IsAlgClosed k] (hI : I.IsRadical)
     {X : Over (Spec (.of k))} (a : X ⟶ subgroupScheme (center I)) (b : X ⟶ subgroupScheme I) :
     (a ≫ subgroupSchemeHom (le_center I)) * b = b * (a ≫ subgroupSchemeHom (le_center I)) := by
