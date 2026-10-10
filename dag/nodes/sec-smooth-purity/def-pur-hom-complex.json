@@ -4,12 +4,12 @@
   "is": null,
   "from": {
    "node": "def-weil-derived-pullback-tensor-hom",
-   "place": "its statement (a notion the statement uses)",
+   "place": "Finite level clause: the third operation is the derived internal Hom, computed with a K-injective resolution of the second variable; this uses the sheaf-valued Hom complex of complexes of modules.",
    "via": [
     "def-pur-derived-internal-hom"
    ]
   },
-  "same_as": null
+  "same_as": []
  },
  "kind": "definition",
  "title": "Hom complex of complexes of sheaves of modules",
@@ -27,6 +27,34 @@
  "proof_deps": [],
  "proof_origin": null,
  "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Hom complex of cochain complexes of sheaves of modules, product over p of sheaf Hom",
+   "results": "CochainComplex.HomComplex_X (Mathlib/Algebra/Homology/HomotopyCategory/HomComplex); SheafOfModules.instAddCommGroupHom (Mathlib/Algebra/Category/ModuleCat/Sheaf); CategoryTheory.sheafHom (Mathlib/CategoryTheory/Sites/SheafHom); none is the sheaf-valued product Hom complex",
+   "date": "2026-10-11",
+   "verdict": "no match: only group-valued Hom complexes and generic sheaf Hom primitives"
+  },
+  {
+   "tool": "loogle",
+   "query": "CochainComplex.internalHomObj, SheafOfModules, internal Hom",
+   "results": "0 hits; loogle reported unknown identifier 'CochainComplex.internalHomObj'",
+   "date": "2026-10-11",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "internalHomObj|HomComplex|sheafHom [Mathlib/Algebra/Homology Mathlib/CategoryTheory/Sites]",
+   "results": "0 hits in the searched Mathlib subdirectories",
+   "date": "2026-10-11",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Define the Hom complex of two cochain complexes of sheaves of modules with product terms and differential",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-11",
+   "verdict": "unavailable"
+  },
   {
    "tool": "grep",
    "query": "grep -n '^def\\|^noncomputable def' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/Algebra/Homology/HomotopyCategory/HomComplex.lean",
@@ -50,7 +78,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "worker",
@@ -70,5 +98,26 @@
   }
  },
  "chapter": "sec-smooth-purity",
- "unit": "sk-def-sf-operations"
+ "unit": "sk-def-sf-operations",
+ "split_report": {
+  "date": "2026-10-11",
+  "item": "def-pur-hom-complex",
+  "worker": "stage1",
+  "summary": "Checked the definition against Stacks sites-cohomology.tex Section 0A8X and the dependent derived-internal-Hom definition. The item already names all notions needed to state it: cochain complexes, the sheaf-of-modules category and sheaf Hom. No strictly smaller mathematical lemma is required for a definition-only split, so no new nodes were created. The generic Lean declaration CochainComplex.internalHomObj is not an exact attachment: it is over an abstract monoidal closed category and does not state the sheaf sectionwise Hom construction. Mathlib searches found only the group-valued Hom complex and generic sheaf Hom primitives; LeanSearch was unavailable.",
+  "blueprint": {
+   "ancestor": "def-weil-derived-pullback-tensor-hom",
+   "places": [
+    "Finite level clause: the third operation is the derived internal Hom, whose construction delegates to this sheaf-valued Hom-complex definition."
+   ]
+  },
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-dhc3038",
+  "group": "F1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-dhc3038 (reviewer sub-agent of L); spot-checked: Statement vs Stacks 0A8X: index change q=-p gives prod_p Hom(L^p,M^{p+n}); sign d(f)=d_M f-(-1)^n f d_L matches Stacks; d^2=0 expansion verified term by term (elementary, inline); stmt_deps cite def-pc-cochain-complex-modules, def-weil-sheaf-of-modules-category, def-pur-sheaf-hom; no smuggled H^n=Hom_K or adjunction claims; no duplicate Hom-complex definition in dag/nodes (grep); citers def-pur-derived-internal-hom and lem-pur-rhom-well-defined use the same terms and sign; Mathlib grep: CochainComplex.HomComplex is group-valued over a preadditive category, no sheaf-valued version, so no attachment. No repairs."
+ }
 }
