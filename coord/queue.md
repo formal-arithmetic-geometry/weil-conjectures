@@ -1,8 +1,8 @@
 # Work queue
 
-936 items; claim with `tools/claim.py next <group> [--stage N]`.
+934 items; claim with `tools/claim.py next <group> [--stage N]`.
 
-## Stage 1: nodes to split (254)
+## Stage 1: nodes to split (251)
 
 | node | distance to a target | Lean state on the done branch |
 |---|---|---|
@@ -10,14 +10,13 @@
 | `lem-weil-pbc-standard-fpqc-quotient-topology` | 2009 | none |
 | `lem-sc-topological-filtered-cohomology` | 2014 | none |
 | `lem-sc-integral-closure-dedekind-surjective-fibres` | 2016 | none |
-| `def-sc-ringed-space-module-cohomology` | 2018 | none |
 | `lem-sc-ringed-space-injective-restriction-surjective` | 2018 | none |
 | `lem-sc-ringed-space-restrict-injective-resolution` | 2018 | none |
 | `lem-sc-ringed-space-module-sheaves-enough-injectives` | 2019 | none |
 | `lem-weil-pbc-horseshoe-morphism-lift-exact-source` | 3008 | none |
+| `lem-pc-unbounded-derived-functor-cohomological-bound` | 3012 | none |
 | `lem-pc-kflat-stalk-criterion` | 3013 | none |
 | `lem-pc-derived-sections-pushforward-comparison` | 3014 | none |
-| `lem-pc-unbounded-derived-functor-cohomological-bound` | 3014 | none |
 | `lem-pc-derived-qcoh-compact-generation` | 3015 | none |
 | `lem-sc-derived-open-restriction-adjunction-exact` | 3015 | none |
 | `lem-sc-finite-affine-derived-equivalence` | 3015 | none |
@@ -50,13 +49,12 @@
 | `lem-sc-positive-ample-hilbert-degree` | 4009 | none |
 | `lem-weil-pbc-gm-pullback-strict-henselization` | 4009 | none |
 | `lem-weil-pbc-unrestricted-strict-henselization-stalk` | 4009 | none |
-| `thm-pc-hilb-curves` | 4009 | rests_on_sorry |
+| `lem-pc-hilb-separated` | 4010 | none |
 | `lem-pc-universal-adjoint-section` | 4010 | rests_on_sorry |
-| `lem-pc-affine-qcoh-derived-equivalence` | 4011 | none |
 | `lem-pc-derived-module-free-generation` | 4011 | none |
-| `lem-pc-projection-locality` | 4011 | none |
 | `lem-pc-zero-scheme-adjunction-base-change` | 4011 | none |
 | `lem-pc-affine-derived-pullback-tensor-tilde` | 4012 | none |
+| `lem-pc-restrict-derived-direct-image-open` | 4012 | none |
 | `lem-pc-flat-base-change-cohom` | 5008 | rests_on_sorry |
 | `lem-pc-fppf-affine-sheafification-restriction` | 5009 | none |
 | `lem-sc-deg-pullback-finite` | 5009 | rests_on_sorry |
@@ -72,11 +70,10 @@
 | `lem-pc-kflat-bounded-flat-replacement` | 5013 | none |
 | `lem-pc-kflat-closure` | 5013 | none |
 | `lem-pc-kflat-hocolim-truncations` | 5013 | none |
-| `lem-sp-kinjective-computes` | 6002 | none |
 | `lem-sp-derived-couple-functoriality` | 6003 | none |
 | `lem-sp-half-plane-graded-canonical` | 6003 | none |
+| `lem-sp-kinjective-comparison-principle` | 6003 | none |
 | `lem-weil-pbc-finite-proper` | 6003 | none |
-| `def-sp-acyclic` | 6004 | none |
 | `lem-sp-derived-well-defined` | 6004 | none |
 | `pqf-lem-finite-integral-lft` | 6004 | none |
 | `pqf-lem-integral-lft-finite` | 6004 | none |
@@ -261,7 +258,7 @@
 | `lem-pur-rhom-well-defined` | - | none |
 | `lem-zl-noether-normalization-dimension` | - | none |
 
-## Stage 2: nodes to state (682)
+## Stage 2: nodes to state (683)
 
 | node | distance to Mathlib | kind |
 |---|---|---|
@@ -287,6 +284,7 @@
 | `def-sc-perfect-closed-immersion` | 1 | state |
 | `def-sc-rational-functions` | 1 | state |
 | `def-sc-zariski-flasque` | 1 | state |
+| `def-sp-acyclic` | 1 | state |
 | `def-sp-exact-couple` | 1 | state |
 | `def-sp-filtration` | 1 | state |
 | `def-weil-pbc-analytically-unramified` | 1 | state |
@@ -948,7 +946,7 @@
 | `lem-weil-pbc-p1-field-dimension-one` | 4 | state |
 | `lem-weil-pbc-projective-space-zero-isomorphism` | 4 | state |
 
-Not open yet: 1327 nodes that wait for a statement dependency, 287 nodes that wait for stage 1.
+Not open yet: 1331 nodes that wait for a statement dependency, 285 nodes that wait for stage 1.
 
 ## Stage 3: modules to prove (0)
 
