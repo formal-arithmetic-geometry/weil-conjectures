@@ -25,9 +25,75 @@
   "def-weil-pbc-etale-site",
   "def-weil-pbc-geometric-stalks"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "For a finite Galois extension $E/L$ with group $Q$, an etale $\\operatorname{Spec}L$-scheme is an etale $\\operatorname{Spec}K$-scheme by composition [lem-weil-pbc-etale-covering-composition]; coverings in $(\\operatorname{Spec}L)_{\\mathrm{et}}$ are coverings in $(\\operatorname{Spec}K)_{\\mathrm{et}}$. Thus $V\\mapsto F(V)$ is a sheaf on $(\\operatorname{Spec}L)_{\\mathrm{et}}$ with the same sections, and [lem-exc-finite-galois-sections-descent] identifies $F(\\operatorname{Spec}L)$ with the $Q$-invariant sections over $E$.",
+   "uses": [
+    "lem-weil-pbc-etale-covering-composition",
+    "lem-exc-finite-galois-sections-descent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 04JM, Lemma lemma-global-sections-point, direct proof after the formal proof"
+   }
+  },
+  {
+   "text": "Passing through the filtered-colimit definition of the geometric stalk [def-weil-pbc-geometric-stalks], shrink an etale neighbourhood to the connected open containing the image of the lift. With $S=\\operatorname{Spec}K$ and $X=U$, [lem-weil-pbc-etale-fibre-discrete-separable-points] says this open is $\\operatorname{Spec}$ of a finite separable extension embedded in $K^{\\rm sep}$; [lem-weil-pbc-finite-galois-receiving-separable-extensions] enlarges it to a finite Galois $E/L$. The germ map $F(\\operatorname{Spec}E)\\to M$ is injective: the index category is cofiltered [lem-weil-pbc-pointed-etale-neighbourhoods-cofiltered], and every morphism of pointed neighbourhoods $(U',\\bar u')\\to(\\operatorname{Spec}E,\\bar e)$ is etale and surjective (the target has one point and $U'$ is nonempty), hence a covering; restriction is injective by the sheaf equalizer condition [def-weil-pbc-etale-sheaf-of-sets]. For $q\\in Q=\\operatorname{Gal}(E/L)$, lift $q$ to $\\tau\\in H_L$; the germ of $q^*t$ at the chosen lift is the germ of $t$ at the lift moved by $\\tau$, namely $\\tau\\cdot m=m$, so $q^*t=t$ by injectivity. Hence an $H_L$-invariant stalk element is represented by a $Q$-invariant section and finite Galois descent gives a unique section over $L$. Conversely, restriction of a section over $L$ is fixed by $H_L$. This proves the bijection with $M^{H_L}$.",
+   "uses": [
+    "def-weil-pbc-geometric-stalks",
+    "lem-weil-pbc-etale-fibre-discrete-separable-points",
+    "lem-weil-pbc-finite-galois-receiving-separable-extensions",
+    "lem-weil-pbc-pointed-etale-neighbourhoods-cofiltered",
+    "def-weil-pbc-etale-sheaf-of-sets",
+    "lem-exc-finite-galois-sections-descent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 04JM, Lemma lemma-global-sections-point, direct proof after the formal proof"
+   }
+  },
+  {
+   "text": "For a $K$-embedding $j:L\\to L'$ and an extension $\\sigma\\in G$ of $j$, pullback of sections is restriction along $\\operatorname{Spec}L'\\to\\operatorname{Spec}L$. The naturality in the representing object from [lem-galois-yoneda-hom-bijection] and the action on geometric stalks from [def-weil-pbc-geometric-stalks] show that the germ of the pulled-back section at the chosen lift of $L'$ is $\\sigma\\cdot m$ when the original germ is $m\\in M^{H_L}$. Since $\\sigma(L)=j(L)\\subseteq L'$, we have $\\sigma^{-1}H_{L'}\\sigma\\subseteq H_L$, so for $h\\in H_{L'}$, $h\\sigma m=\\sigma(\\sigma^{-1}h\\sigma)m=\\sigma m$; hence $\\sigma m\\in M^{H_{L'}}$. The formula is compatible with composition.",
+   "uses": [
+    "lem-galois-yoneda-hom-bijection",
+    "def-weil-pbc-geometric-stalks"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 03QW, section-galois-action-stalks"
+   }
+  },
+  {
+   "text": "If $\\sigma'$ is another extension of $j$, then $\\sigma'^{-1}\\sigma$ fixes $L$, hence belongs to $H_L$; therefore $\\sigma'\\cdot m=\\sigma\\cdot m$ for $m\\in M^{H_L}$. Naturality in a morphism of sheaves follows from the naturality in the presheaf of the Yoneda bijection and functoriality of stalks.",
+   "uses": [
+    "lem-galois-yoneda-hom-bijection",
+    "def-weil-pbc-geometric-stalks"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 03QW, section-galois-action-stalks"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-galois-yoneda-hom-bijection",
+  "lem-weil-pbc-etale-covering-composition",
+  "lem-exc-finite-galois-sections-descent",
+  "def-weil-pbc-geometric-stalks",
+  "lem-weil-pbc-etale-fibre-discrete-separable-points",
+  "lem-weil-pbc-finite-galois-receiving-separable-extensions",
+  "lem-weil-pbc-pointed-etale-neighbourhoods-cofiltered",
+  "def-weil-pbc-etale-sheaf-of-sets"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tags 04JM and 03QW"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -52,12 +118,57 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-exc-etale-sheaves-gsets-point",
   "by": "worker",
   "date": "2026-10-10"
  },
  "chapter": "sec-curve-estimates",
- "unit": "sk-prop-h2"
+ "unit": "sk-prop-h2",
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "lem-exc-field-sections-stalk-invariants",
+  "worker": "stage1",
+  "summary": "Repaired the stalk-invariant identification by removing the unused representable/G-set step, adding the small-etale site restriction, the finite-separable representative and finite-Galois enlargement, the cofiltered germ injectivity argument, and the explicit finite quotient invariance argument. Corrected the conjugation inclusion for embeddings.",
+  "blueprint": [
+   "proof, third paragraph: the identification of sections over L with H-invariants"
+  ],
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-etale-covering-composition",
+    "why": "Site restriction from Spec L to Spec K is a generic etale-composition fact not supplied by this unit."
+   },
+   {
+    "node": "lem-weil-pbc-etale-fibre-discrete-separable-points",
+    "why": "Finite separable connected components of etale neighbourhoods are a generic fibre fact not supplied by this unit."
+   },
+   {
+    "node": "lem-weil-pbc-finite-galois-receiving-separable-extensions",
+    "why": "Enlarging finitely many separable extensions to one finite Galois extension is a generic field fact not supplied by this unit."
+   },
+   {
+    "node": "lem-weil-pbc-pointed-etale-neighbourhoods-cofiltered",
+    "why": "Cofilteredness of pointed etale neighbourhoods is a generic stalk-indexing fact not supplied by this unit."
+   },
+   {
+    "node": "def-weil-pbc-etale-sheaf-of-sets",
+    "why": "The sheaf equalizer condition used for germ injectivity is a generic site definition not supplied by this unit."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-etale-fibre-discrete-separable-points",
+  "lem-weil-pbc-finite-galois-receiving-separable-extensions",
+  "lem-weil-pbc-pointed-etale-neighbourhoods-cofiltered",
+  "def-weil-pbc-etale-sheaf-of-sets"
+ ],
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-fsi2",
+  "group": "M1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-fsi2 (reviewer sub-agent of L); spot-checked: Repaired re-push after the 16:15 return (86d394346); every numbered point checked repaired: (1) step 3 now uses sigma(L)=j(L) subseteq L' giving sigma^{-1}H_{L'}sigma subseteq H_L, correct; (2) step 2 cites lem-weil-pbc-etale-fibre-discrete-separable-points (S=Spec K, X=U: the fibre is U, points open with residue fields finite separable) and lem-weil-pbc-finite-galois-receiving-separable-extensions, declared in split_report.tool_uses (C8, accepted as generic tools); (3) germ injectivity written via lem-weil-pbc-pointed-etale-neighbourhoods-cofiltered and def-weil-pbc-etale-sheaf-of-sets (morphism to one-point Spec E etale surjective, a covering), and the q*t=t argument by lifting q to tau in H_L; (4) step 1 restricts F to (Spec L)_et via lem-weil-pbc-etale-covering-composition before applying lem-exc-finite-galois-sections-descent; (5) the G-set step is deleted with its proof_deps; (6) lem-exc-finite-galois-sections-descent now states finite Galois (def-weil-pbc-separable-algebraic-extension, normal, Q=Aut_L(E)) and the pullback action of Q, with the stmt_deps; it is true (Spec E->Spec L is a covering with Spec E x_L Spec E = disjoint union over Q of Spec E); summary corrected; created by/date is filled by the merge. Source Stacks 04JM (lemma-global-sections-point, etale-cohomology.tex l.8668, direct proof) and 03QW read; item statement unchanged and still covers K algebraically closed, G trivial (L=K=E, Q trivial, step 2 degenerates correctly), as L's split of lem-weil-pbc-geometric-point-cohomology needs. Small cases: L=K gives F(Spec K)=M^G; K separably closed gives F(Spec K)=M. New node: three kinds of Mathlib search with verdicts. FIX: dag/nodes/sec-curve-estimates/lem-exc-field-sections-stalk-invariants.json: proof_deps: removed the duplicate lem-galois-yoneda-hom-bijection (now exactly the union of the uses). Dropped tool use lem-weil-pbc-etale-covering-composition (same unit sk-prop-h2, not off-unit). Start Sat Oct 10 04:33:56 PM UTC 2026, end Sat Oct 10 04:34:36 PM UTC 2026.; 1 file(s) fixed by the reviewer"
+ }
 }
