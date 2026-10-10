@@ -2441,3 +2441,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 19:47 L: merged deliver/G1/lem-pc-left-localization-hom-colimit (reviewer FIX; first push; new nodes: 2)
 - 19:48 L: merged deliver/F1/lem-sc-finite-free-internal-hom-exact (reviewer PASS; first push; new nodes: 0)
 - 19:48 L: merged deliver/E1/lem-sc-qcoh-acyclic-derived-sections-comparison (reviewer FIX; first push; new nodes: 0)
+- 19:48 L: merged deliver/F1/def-weil-tower-transition-endomorphism (reviewer PASS; first push; new nodes: 0)

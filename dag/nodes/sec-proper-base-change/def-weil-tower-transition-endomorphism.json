@@ -4,14 +4,14 @@
   "is": null,
   "from": {
    "node": "def-weil-derived-limit",
-   "place": "its statement (a notion the statement uses)",
+   "place": "the definition clause describing the shift s on the product, the endomorphism 1-s by its projections, and its compatibility with morphisms of inverse systems",
    "via": []
   },
-  "same_as": null
+  "same_as": []
  },
  "kind": "definition",
  "title": "Transition endomorphism 1 − s of the product of an inverse system",
- "statement": "Let $\\mathcal C$ be a preadditive category [def-weil-preadditive-category], let $(K_n,f_n:K_{n+1}\\to K_n)_{n\\geq1}$ be an inverse system of objects of $\\mathcal C$ [def-weil-inverse-system], and assume that the product $\\prod_{n\\geq1}K_n$ with projections $\\mathrm{pr}_n$ exists [def-weil-category-product]. The *shift* $s:\\prod_nK_n\\to\\prod_nK_n$ is the morphism $(f_n\\circ\\mathrm{pr}_{n+1})_{n\\geq1}$, i.e. the unique morphism with $\\mathrm{pr}_n\\circ s=f_n\\circ\\mathrm{pr}_{n+1}$ for all $n$, and the *transition endomorphism* of the system is $1-s=\\mathrm{id}-s$, the unique morphism with $\\mathrm{pr}_n\\circ(1-s)=\\mathrm{pr}_n-f_n\\circ\\mathrm{pr}_{n+1}$; on generalized elements, $(k_n)_n\\mapsto(k_n-f_n(k_{n+1}))_n$. If $(\\varphi_n):(K_n,f_n)\\to(K'_n,f'_n)$ is a morphism of inverse systems and both products exist, then $(1-s')\\circ\\prod_n\\varphi_n=\\prod_n\\varphi_n\\circ(1-s)$ (componentwise this is $f'_n\\varphi_{n+1}=\\varphi_nf_n$).",
+ "statement": "Let $\\mathcal C$ be a preadditive category [def-weil-preadditive-category], let $(K_n,f_n:K_{n+1}\\to K_n)_{n\\geq1}$ be an inverse system of objects of $\\mathcal C$ [def-weil-inverse-system], and assume that the product $P=\\prod_{n\\geq1}K_n$ with projections $\\mathrm{pr}_n:P\\to K_n$ exists [def-weil-category-product]. The *shift* $s:P\\to P$ is the unique morphism with $\\mathrm{pr}_n\\circ s=f_n\\circ\\mathrm{pr}_{n+1}$ for every $n$, and the *transition endomorphism* is $1-s=\\mathrm{id}_P-s$, equivalently the unique morphism satisfying $\\mathrm{pr}_n\\circ(1-s)=\\mathrm{pr}_n-f_n\\circ\\mathrm{pr}_{n+1}$ for every $n$. If $(\\varphi_n):(K_n,f_n)\\to(K'_n,f'_n)$ is a morphism of inverse systems [def-weil-inverse-system] and both products $P=\\prod_nK_n$ and $P'=\\prod_nK'_n$ exist, then $(1-s')\\circ\\prod_n\\varphi_n=\\prod_n\\varphi_n\\circ(1-s)$; after composing with $\\mathrm{pr}'_n$, this equality is exactly $f'_n\\circ\\varphi_{n+1}=\\varphi_n\\circ f_n$ for every $n$.",
  "source": {
   "document": "literature/stacks-project/derived.tex",
   "place": "Stacks Project, Derived Categories, Definition 13.34.1 (Tag 08TC), derived.tex line 10442: \"the map $\\prod K_n\\to\\prod K_n$ is given by $(k_n)\\mapsto(k_n-f_{n+1}(k_{n+1}))$\" (Stacks indexes the transition map $K_{n+1}\\to K_n$ as $f_{n+1}$); Bhatt-Scholze, arXiv:1309.1198v2, Proposition 3.1.10, p. 17 (the map $t-\\mathrm{id}$)"
@@ -34,7 +34,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "worker",
@@ -54,5 +54,21 @@
   }
  },
  "chapter": "sec-proper-base-change",
- "unit": "sk-thm-properbasechange"
+ "unit": "sk-thm-properbasechange",
+ "split_report": {
+  "date": "2026-10-11",
+  "item": "def-weil-tower-transition-endomorphism",
+  "worker": "stage1",
+  "summary": "Reviewed the definition against Stacks Project derived.tex, Definition 13.34.1 (Tag 08TC), and CategoryTheory.Pretriangulated.towerShift in WeilConjectures/CategoryTheory/Triangulated/HomotopyLimit.lean:54-58. The source declaration supplies the shift construction in a functor-indexed formulation, but no sorry-free declaration states this item's full 1-s endomorphism and morphism-of-systems compatibility, so the item is split as a definition with its existing preadditive-category, inverse-system, and product dependencies. Mathlib searches found only generic product/projection APIs; LeanSearch was unavailable.",
+  "blueprint": "The item realizes the definition clause in def-weil-derived-limit describing 1-s by its product projections and component formula; no additional proof nodes are needed for a definition.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-tte2101",
+  "group": "F1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-tte2101 (reviewer sub-agent of L); spot-checked: Statement vs Stacks 08TC (index shift f_{n+1} -> f_n correct: pr_n(1-s)=pr_n-f_n pr_{n+1}); consistent with citing nodes def-weil-derived-limit and lem-weil-derived-limit-morphism (same formula, cone of 1-s); compatibility clause checked componentwise (both sides phi_n pr_n - ... ; equivalence holds since pr_{n+1} is split epi in a preadditive category); grepped dag/nodes for pr_{n+1} / shift: only def-weil-derived-limit restates the formula as a citation, no duplicate (class b none); Mathlib grep recorded. Second reading's claim to have corrected created.item is not reflected in the diff (created.item stays def-weil-derived-limit, which is correct); no fault missed. No repairs."
+ }
 }
