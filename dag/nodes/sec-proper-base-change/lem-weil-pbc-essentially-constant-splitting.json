@@ -1,0 +1,69 @@
+{
+ "id": "lem-weil-pbc-essentially-constant-splitting",
+ "kind": "statement",
+ "title": "Splitting of an essentially constant inverse system into its value and an essentially zero part (Stacks 070C, forward direction)",
+ "statement": "Let $(C_i)_{i\\ge1}$ be an inverse system of abelian groups [def-weil-inverse-system], with composite transition homomorphisms $t_{k,j}:C_k\\to C_j$ for $k\\ge j$ ($t_{j,j}=\\mathrm{id}$, $t_{j,i}\\circ t_{k,j}=t_{k,i}$). Suppose $(C_i)$ is essentially constant [def-weil-pbc-essentially-constant-system], with the data of that definition: an abelian group $X$, homomorphisms $\\pi_i:X\\to C_i$ with $t_{i+1,i}\\circ\\pi_{i+1}=\\pi_i$ for all $i\\ge1$, an index $i_0\\ge1$ and a homomorphism $r:C_{i_0}\\to X$ such that (a) $r\\circ\\pi_{i_0}=\\mathrm{id}_X$ and (b) for every $j\\ge1$ there is $k\\ge\\max(i_0,j)$ with $t_{k,j}=\\pi_j\\circ r\\circ t_{k,i_0}$. For $j\\ge i_0$ put $p_j=r\\circ t_{j,i_0}:C_j\\to X$ and $Z_j=\\ker(p_j)\\subseteq C_j$. Then: (1) $p_j\\circ\\pi_j=\\mathrm{id}_X$ for every $j\\ge i_0$; hence $\\pi_j$ is injective and $C_j=\\pi_j(X)\\oplus Z_j$ (internal direct sum: every $c\\in C_j$ is uniquely $c=\\pi_j(x)+z$ with $x\\in X$, $z\\in Z_j$, namely $x=p_j(c)$); (2) for all $k\\ge j\\ge i_0$: $t_{k,j}\\circ\\pi_k=\\pi_j$ and $p_j\\circ t_{k,j}=p_k$; in particular $t_{k,j}(Z_k)\\subseteq Z_j$, so that $(Z_j)_{j\\ge i_0}$ with the restricted transition maps is an inverse system and $t_{k,j}$ respects the two decompositions; (3) for every $j\\ge i_0$ there is $k\\ge j$ such that $t_{k,j}(Z_k)=0$.",
+ "source": {
+  "document": "literature/stacks-project/homology.tex",
+  "place": "Homology, Lemma Tag 070C (lemma-essentially-constant, homology.tex line 7733), the implication 'essentially constant => decomposition A_j = A (+) Z_j for j >= i, compatible with the transition maps, with Z_{j'} -> Z_j zero for some j' >= j', and its proof lines 7746--7753 (Z_j = Ker(A_j -> A)). Stated here with the cone (X, pi_j) of the definition (Categories 05PU (2)) in place of the limit A = lim A_i and its projections, which the Stacks statement uses (the identification of the value with the limit is Categories 0G2V, not needed here); clause (1) is the splitting A_j = A (+) Z_j, clause (2) is (a), clause (3) is (b) of 070C. Tags verified in tags/tags: 070C,homology-lemma-essentially-constant; 05PU,categories-definition-essentially-constant-diagram; 0G2V,categories-lemma-essentially-constant-is-limit-colimit"
+ },
+ "stmt_deps": [
+  "def-weil-inverse-system",
+  "def-weil-pbc-essentially-constant-system"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "retraction of a split injection gives direct sum decomposition into image and kernel, compatible system of splittings",
+   "results": "CategoryTheory.Retract.splitEpi, CategoryTheory.retraction, Retract.splitMono (Mathlib.CategoryTheory.Retract, EpiMono), ShortComplex.Splitting.ofExactOfRetraction (Mathlib.Algebra.Homology.ShortComplex.Exact), ShortComplex.ShortExact.splittingOfInjective, Splitting.splitMono_f_retraction",
+   "date": "2026-10-10",
+   "verdict": "no match (generic splittings of one short exact sequence; nothing about inverse systems or essentially zero complements)"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "essentially constant inverse system decomposes as constant part plus essentially zero part",
+   "results": "InverseSystem.piSplitLE, piSplitLE_eq, piEquivSucc_self, globalEquiv, piSplitLE_lt, piLTLim (Mathlib.Order.DirectedInverseSystem): products over lower intervals, unrelated",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rn 'IsMittagLeffler\\|EssentiallyConstant\\|essentially constant\\|essentiallyZero\\|EssentiallyZero\\|essentially zero' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/CategoryTheory/ ; grep -rn 'isCompl_of_proj\\|ker_isCompl_range' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/LinearAlgebra",
+   "results": "no essentially-constant or essentially-zero notion in CategoryTheory (only Functor.IsEventuallyConstantTo/From, CategoryTheory/Limits/Constructions/EventuallyConstant.lean lines 38, 44, which is strictly stronger); LinearMap.isCompl_of_proj (Mathlib/LinearAlgebra/Projection.lean line 57, read: a linear map E -> p restricting to the identity on the submodule p gives IsCompl p (ker f)) covers only the direct-sum part of clause (1) for one j",
+   "date": "2026-10-10",
+   "verdict": "no match (clause (1) alone is LinearMap.isCompl_of_proj applied with p = pi_j(X); clauses (2), (3) and the compatibility are not in Mathlib)"
+  },
+  {
+   "tool": "local_search",
+   "query": "IsMittagLeffler / EssentiallyConstant (project root ~/weil-conjectures-slopmaster2)",
+   "results": "Functor.IsMittagLeffler and lemmas (Mathlib/CategoryTheory/CofilteredSystem.lean), IsMittagLeffler.of_natTrans_bijective (proetale package); index state 'unavailable', so not a proof of absence",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-exact-sequence-ml",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1"
+}

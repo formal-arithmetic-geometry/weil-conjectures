@@ -944,3 +944,6 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 06:02 L: reviewed lem-weil-pbc-etale-ring-map-quasi-finite (4 steps, no new node): accepted.
 - 06:03 L: reviewed lem-weil-pbc-criterion-flatness-fibre (11 steps, +limit-tower node, +00R6 node): accepted; HUMAN.md: two gaps in 00R7's proof (equalities that are localizations; stage persistence), closed by the split.
 - 06:04 L: reviewed lem-weil-pbc-etale-splits-off-quasi-finite-part (8 steps, +02LN node): accepted.
+- 06:07 L: reviewed and accepted lem-weil-pbc-exact-sequence-ml (9 steps, +essentially-constant-splitting node from 070C; source's omitted detail written out).
+- 06:07 L: reviewed and accepted lem-weil-pbc-fibre-degree-base-change (8 steps, no new nodes; source 03J5 says dim = n where <= n is meant).
+- 06:07 L: reviewed and accepted lem-weil-pbc-fibre-degree-bound-field-points (6 steps, no new nodes).
