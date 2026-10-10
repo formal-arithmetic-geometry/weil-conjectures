@@ -1,8 +1,8 @@
 # Work queue
 
-818 items; claim with `tools/claim.py next <group> [--stage N]`.
+821 items; claim with `tools/claim.py next <group> [--stage N]`.
 
-## Stage 1: nodes to split (655)
+## Stage 1: nodes to split (656)
 
 | node | distance to a target | Lean state on the done branch |
 |---|---|---|
@@ -13,12 +13,9 @@
 | `lem-weil-pbc-hypersurface-derivation-regular` | 1011 | none |
 | `lem-weil-pbc-idempotent-endomorphism-charpoly-field` | 1011 | none |
 | `lem-weil-pbc-idempotent-endomorphism-image-base-change` | 1011 | none |
-| `lem-weil-pbc-jacobi-zariski-homology-sequence` | 1011 | none |
 | `lem-weil-pbc-lft-over-field-isolated-point-residue-finite` | 1011 | none |
 | `lem-weil-pbc-limit-fibre-products` | 1011 | none |
 | `lem-weil-pbc-limit-flat-modules` | 1011 | none |
-| `lem-weil-pbc-limit-residue-field` | 1011 | none |
-| `lem-weil-pbc-local-completion-quotient` | 1011 | none |
 | `lem-weil-pbc-localization-of-regular-ring` | 1011 | none |
 | `lem-weil-pbc-localization-prime-residue-field-iso` | 1011 | none |
 | `lem-weil-pbc-locally-constant-finite-values-finite-type` | 1011 | none |
@@ -109,6 +106,7 @@
 | `lem-weil-pbc-descend-finite-locally-free` | 1012 | none |
 | `lem-weil-pbc-descend-qc-open-fg-subalgebra` | 1012 | none |
 | `lem-weil-pbc-faithfully-flat-base-change` | 1012 | none |
+| `lem-weil-pbc-finite-free-resolution-noetherian` | 1012 | none |
 | `lem-weil-pbc-finite-length-module-simple-filtration` | 1012 | none |
 | `lem-weil-pbc-finite-module-complete-over-complete-noetherian` | 1012 | none |
 | `lem-weil-pbc-finite-over-complete-local-product` | 1012 | none |
@@ -130,6 +128,7 @@
 | `lem-weil-pbc-kernel-cokernel-annihilated-mod-ideal` | 1012 | none |
 | `lem-weil-pbc-krull-intersection-localization` | 1012 | none |
 | `lem-weil-pbc-localization-colimit-principal-localizations` | 1012 | none |
+| `lem-weil-pbc-mittag-leffler-complex-limit-homology` | 1012 | none |
 | `lem-weil-pbc-module-cohomology-fmap-functorial` | 1012 | none |
 | `lem-weil-pbc-module-finite-presentation-cokernel` | 1012 | none |
 | `lem-weil-pbc-module-finite-presentation-direct-sum` | 1012 | none |
@@ -152,6 +151,8 @@
 | `lem-weil-pbc-spec-local-ring-canonical-morphism` | 1012 | none |
 | `lem-weil-pbc-symmetric-degree-exact` | 1012 | none |
 | `lem-weil-pbc-tensor-field-extension-galois-invariants` | 1012 | none |
+| `lem-weil-pbc-tor-long-exact-first-variable` | 1012 | none |
+| `lem-weil-pbc-tor-strictly-pro-zero` | 1012 | none |
 | `lem-weil-pbc-tower-limit-exact-surjective-kernels` | 1012 | none |
 | `lem-weil-pbc-two-term-complex-kernel-base-change` | 1012 | none |
 | `lem-weil-pbc-zariski-cohomology-locally-zero` | 1012 | none |
@@ -662,7 +663,7 @@
 | `lem-pc-finite-linear-avoidance` | - | none |
 | `lem-pc-linear-pair-graded-finite` | - | none |
 
-## Stage 2: nodes to state (163)
+## Stage 2: nodes to state (165)
 
 | node | distance to Mathlib | kind |
 |---|---|---|
@@ -763,6 +764,7 @@
 | `lem-weil-pbc-inverse-image-closed-pushforward-constant` | 1 | state |
 | `lem-weil-pbc-isolated-fibre-point-base-change` | 1 | state |
 | `lem-weil-pbc-isolated-fibre-point-residue-finite` | 1 | state |
+| `lem-weil-pbc-jacobi-zariski-homology-sequence` | 1 | state |
 | `lem-weil-pbc-jacobi-zariski-left-term-vanishing` | 1 | state |
 | `lem-weil-pbc-jacobi-zariski-quotient-smooth` | 1 | state |
 | `lem-weil-pbc-kahler-differentials-mod-power-ideal` | 1 | state |
@@ -771,6 +773,7 @@
 | `lem-weil-pbc-lift-monic-coprime-factorization-etale` | 1 | state |
 | `lem-weil-pbc-lift-projective-module-etale` | 1 | state |
 | `lem-weil-pbc-linear-equation-localization-polynomial` | 1 | state |
+| `lem-weil-pbc-local-completion-quotient` | 1 | state |
 | `lem-weil-pbc-local-ring-idempotent-zero-one` | 1 | state |
 | `lem-weil-pbc-mate-whisker` | 1 | state |
 | `lem-weil-pbc-module-directed-colimit-underlying-sets` | 1 | state |
@@ -830,7 +833,7 @@
 | `lem-weil-pbc-p1-field-dimension-one` | 4 | state |
 | `lem-weil-pbc-projective-space-zero-isomorphism` | 4 | state |
 
-Not open yet: 667 nodes that wait for stage 1, 450 nodes that wait for a statement dependency.
+Not open yet: 668 nodes that wait for stage 1, 451 nodes that wait for a statement dependency.
 
 ## Stage 3: modules to prove (0)
 
