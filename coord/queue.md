@@ -1,8 +1,8 @@
 # Work queue
 
-859 items; claim with `tools/claim.py next <group> [--stage N]`.
+860 items; claim with `tools/claim.py next <group> [--stage N]`.
 
-## Stage 1: nodes to split (55)
+## Stage 1: nodes to split (56)
 
 | node | distance to a target | Lean state on the done branch |
 |---|---|---|
@@ -17,9 +17,10 @@
 | `lem-pc-kflat-tensor-product` | 3020 | none |
 | `lem-pc-sheaf-rhom-projection-formula` | 3021 | none |
 | `lem-pc-tor-independent-perfect-pullback-comparison` | 3021 | none |
-| `lem-sc-affine-koszul-cech-derived-comparison` | 3021 | none |
+| `lem-sc-affine-koszul-hom-alternating-cech` | 3022 | none |
 | `lem-sc-affine-pseudo-coherent-lift` | 3022 | none |
 | `lem-sc-perfect-ext-bounded-qcoh-vanishing` | 3022 | none |
+| `lem-sc-qcoh-complex-alternating-cech-derived-sections` | 3022 | none |
 | `lem-sc-affine-truncation-kernel-flat` | 3023 | none |
 | `lem-pc-ring-pseudo-coherent-summand` | 3024 | none |
 | `lem-pc-genus-agrees-sc` | 4007 | rests_on_sorry |
@@ -43,8 +44,8 @@
 | `lem-sc-picard-h1-product-injective` | 6013 | none |
 | `lem-sc-picard-locus-closed-valuation-criterion` | 6013 | none |
 | `lem-sc-picard-locus-closed-valuation-triviality` | 6013 | none |
-| `lem-sc-proper-flat-global-sections-criterion` | 6013 | none |
 | `pqf-lem-serre-criterion` | 6013 | none |
+| `lem-sc-perfect-degree-zero-fibre-criterion` | 6014 | none |
 | `lem-sc-base-change-curve` | - | none |
 | `lem-sc-global-functions` | - | rests_on_sorry |
 | `lem-pc-chow-relative-ample` | - | none |
@@ -871,7 +872,7 @@
 | `lem-weil-pbc-projective-space-zero-isomorphism` | 4 | state |
 | `def-nagata-fixed-base-separated-stage` | 6 | state |
 
-Not open yet: 1671 nodes that wait for a statement dependency, 95 nodes that wait for stage 1.
+Not open yet: 1673 nodes that wait for a statement dependency, 96 nodes that wait for stage 1.
 
 ## Stage 3: modules to prove (0)
 
