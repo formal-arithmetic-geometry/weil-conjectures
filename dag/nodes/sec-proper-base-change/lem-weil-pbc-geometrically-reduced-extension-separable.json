@@ -1,0 +1,82 @@
+{
+ "id": "lem-weil-pbc-geometrically-reduced-extension-separable",
+ "kind": "statement",
+ "title": "In characteristic p a geometrically reduced field extension is separable",
+ "statement": "Let $p$ be a prime number, let $k$ be a field of characteristic $p$ and let $K/k$ be a field extension [def-pc-field-extension] such that for every field extension $L/k$ the ring $K\\otimes_kL$ is reduced (has no nonzero nilpotent elements). Then $K$ is separable over $k$ in the sense of [def-weil-pbc-separable-field-extension] (2): every subextension $k\\subset K'\\subset K$ with $K'$ finitely generated as a field over $k$ is separably generated over $k$.",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Algebra, Lemma Tag 030W (lemma-characterize-separable-field-extensions, line 10360), implication (4) => (1), proved in the source as (4) => (3) => (2) => (1) with Lemma Tag 0H71 (lemma-mini-separability, line 10296) for (2) => (1); 'geometrically reduced' (4) is Definition Tag 030S (definition-geometrically-reduced), written out here"
+ },
+ "stmt_deps": [
+  "def-pc-field-extension",
+  "def-weil-pbc-separable-field-extension"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "field extension K/k geometrically reduced implies separable, p-th powers of linearly independent elements are linearly independent",
+   "results": "LinearIndependent.map_pow_expChar_pow_of_isSeparable(') (Mathlib.FieldTheory.PurelyInseparable.PerfectClosure: algebraic separable => p-powers independent, the converse direction); exists_isTranscendenceBasis_and_isSeparable_of_linearIndepOn_pow, ..._of_adjoin_eq_top (Mathlib.FieldTheory.SeparablyGenerated); Algebra.IsGeometricallyReduced (Mathlib.RingTheory.Nilpotent.GeometricallyReduced); IsSeparable",
+   "date": "2026-10-10",
+   "verdict": "no match for (4) => (1); candidate for the last part (2) => (1), see grep"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "characteristic p field extension K/k, K ⊗_k L reduced for all field extensions L implies every finitely generated subextension separably generated",
+   "results": "Algebra.IsGeometricallyReduced.isReduced_algebraicClosure_tensorProduct, instIsReducedTensorProductOfIsAlgebraicOfIsGeometricallyReduced, isGeometricallyReduced_iff (Mathlib.RingTheory.Nilpotent.GeometricallyReduced); Algebra.FormallyUnramified.isSeparable, Algebra.FormallyUnramified.iff_isSeparable (Mathlib.RingTheory.Unramified.Field: algebraic case only); Algebra.TensorProduct.isField_of_isAlgebraic",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "Algebra.IsGeometricallyReduced, IsTranscendenceBasis",
+   "results": "none",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -n 'theorem\\|lemma\\|stacks' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/FieldTheory/SeparablyGenerated.lean ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/RingTheory/Nilpotent/GeometricallyReduced.lean; grep -rn 'linearIndepOn_pow\\|map_pow_expChar_pow' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib",
+   "results": "SeparablyGenerated.lean:288-291 @[stacks 030W \"(2) ⇒ (1) finitely generated case\"] exists_isTranscendenceBasis_and_isSeparable_of_linearIndepOn_pow_of_essFiniteType (read with sed -n 195,330p: for ExpChar k p, p prime, Algebra.EssFiniteType k K and the hypothesis that every finite k-linearly independent s ⊆ K has its p-th powers k-linearly independent, gives a finite transcendence basis s with Algebra.IsSeparable (adjoin k s) K); the header (lines 15-31) lists (3) K ⊗ k^{1/p} reduced and (4) geometrically reduced as aims, not proved; GeometricallyReduced.lean has only the definition (line 54, with the algebraic closure), 030T (line 93) and basic lemmas; PurelyInseparable/PerfectClosure.lean:346 is the converse direction for algebraic extensions",
+   "date": "2026-10-10",
+   "verdict": "no match: Mathlib has (2) => (1) for finitely generated K (mathlib_candidate), not (4) => (2)"
+  },
+  {
+   "tool": "local_search",
+   "query": "exists_isTranscendenceBasis_and_isSeparable",
+   "results": "exists_isTranscendenceBasis_and_isSeparable_of_perfectField, _of_linearIndepOn_pow, _of_linearIndepOn_pow', _of_linearIndepOn_pow_of_adjoin_eq_top, _of_linearIndepOn_pow_of_essFiniteType (all .lake/packages/mathlib/Mathlib/FieldTheory/SeparablyGenerated.lean)",
+   "date": "2026-10-10",
+   "verdict": "candidate for (2) => (1) only"
+  }
+ ],
+ "mathlib_match": null,
+ "mathlib_candidate": {
+  "declaration": "exists_isTranscendenceBasis_and_isSeparable_of_linearIndepOn_pow_of_essFiniteType",
+  "file": "Mathlib/FieldTheory/SeparablyGenerated.lean",
+  "line": 288,
+  "how": "lines 288-291. gives Stacks 030W (2) => (1) for a finitely generated extension: applied to each finitely generated subextension K' (Algebra.EssFiniteType k K' from IntermediateField.essFiniteType_iff, FieldTheory/IntermediateField/Adjoin/Algebra.lean:118), whose p-power linear independence condition is inherited from K. Not a leaf: the passage (4) => (2), K ⊗_k L reduced for all L implies the p-power condition (Stacks' Frobenius argument through K ⊗_k k^{1/p}), is not in Mathlib"
+ },
+ "status": "unsplit",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-separably-generated-separable",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1"
+}

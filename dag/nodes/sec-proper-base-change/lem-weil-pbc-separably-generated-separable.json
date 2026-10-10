@@ -11,9 +11,55 @@
   "def-pc-field-extension",
   "def-weil-pbc-separable-field-extension"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "(Case distinction on the characteristic.) The characteristic of the field $k$ is either $0$ or a prime number $p$. If it is $0$, then by [lem-weil-pbc-char-zero-field-extension-separable] every field extension of $k$, in particular $K$, is separable over $k$ in the sense of [def-weil-pbc-separable-field-extension] (2), and the lemma holds (the hypothesis that $K/k$ is separably generated is not needed in this case). From now on $k$ has characteristic $p>0$.",
+   "uses": [
+    "lem-weil-pbc-char-zero-field-extension-separable",
+    "def-weil-pbc-separable-field-extension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra, proof of Lemma Tag 030X (lemma-separably-generated-separable, line 10410), which combines 030U with Lemma Tag 030W, the latter stated only in characteristic p > 0; the characteristic-zero case is the remark 'In characteristic zero any field extension is separable' in the proof of Lemma Tag 00TX (lemma-characteristic-zero-local-smooth, line 38835)"
+   }
+  },
+  {
+   "text": "(K is geometrically reduced.) Let $L/k$ be any field extension. A field has no nonzero nilpotent elements, so $L$ is a reduced (commutative) $k$-algebra. Since $K/k$ is separably generated in the sense of [def-weil-pbc-separable-field-extension] (1), [lem-weil-pbc-separably-generated-tensor-reduced] applied with $S=L$ shows that $K\\otimes_kL$ is reduced. Thus $K\\otimes_kL$ is reduced for every field extension $L/k$.",
+   "uses": [
+    "lem-weil-pbc-separably-generated-tensor-reduced",
+    "def-weil-pbc-separable-field-extension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra, Lemma Tag 030U (lemma-separable-extension-preserves-reducedness, line 10152), separably generated case, as used in the proof of Lemma Tag 030X; this is condition (4) of Lemma Tag 030W (Definition Tag 030S, definition-geometrically-reduced)"
+   }
+  },
+  {
+   "text": "(Conclusion.) Now $k$ has characteristic $p>0$ and, by step 2, $K\\otimes_kL$ is reduced for every field extension $L/k$. By [lem-weil-pbc-geometrically-reduced-extension-separable] (Stacks 030W, (4) $\\Rightarrow$ (1)), $K$ is separable over $k$ in the sense of [def-weil-pbc-separable-field-extension] (2): every subextension $k\\subset K''\\subset K$ finitely generated over $k$ is separably generated over $k$. Together with step 1 this proves the lemma in every characteristic.",
+   "uses": [
+    "lem-weil-pbc-geometrically-reduced-extension-separable",
+    "def-weil-pbc-separable-field-extension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra, Lemma Tag 030W (lemma-characterize-separable-field-extensions, line 10360), implication (4) => (1), as used in the proof of Lemma Tag 030X (line 10410)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-char-zero-field-extension-separable",
+  "def-weil-pbc-separable-field-extension",
+  "lem-weil-pbc-separably-generated-tensor-reduced",
+  "lem-weil-pbc-geometrically-reduced-extension-separable"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Algebra, Lemma Tag 030X (lemma-separably-generated-separable, line 10410) and its proof (030U + 030W); characteristic-zero case from the remark in the proof of Lemma Tag 00TX (line 38835), which 030X's proof leaves implicit"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -35,10 +81,31 @@
    "results": "no 030X (nor 030U, 030V) tag; SeparablyGenerated.lean only proves 0H71 and 030W (2)=>(1) in the finitely generated case; RingTheory/Nilpotent/GeometricallyReduced.lean has 030T only; RingTheory/Smooth/Field.lean: separably generated => smooth",
    "date": "2026-10-10",
    "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "IsTranscendenceBasis, Algebra.IsSeparable, IntermediateField.FG",
+   "results": "none",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "every finitely generated intermediate field of a separably generated extension has a separating transcendence basis",
+   "results": "exists_isTranscendenceBasis_and_isSeparable_of_linearIndepOn_pow_of_adjoin_eq_top, _of_perfectField, _of_linearIndepOn_pow_of_essFiniteType (Mathlib.FieldTheory.SeparablyGenerated); IntermediateField.FG, IntermediateField.fg_def (Mathlib.FieldTheory.IntermediateField.Adjoin.Defs); le_separableClosure_iff (Mathlib.FieldTheory.SeparableClosure)",
+   "date": "2026-10-10",
+   "verdict": "no match (re-searched by the splitter)"
+  },
+  {
+   "tool": "local_search",
+   "query": "exists_isTranscendenceBasis_and_isSeparable",
+   "results": "the five lemmas of .lake/packages/mathlib/Mathlib/FieldTheory/SeparablyGenerated.lean (perfect field; p-power linear independence => separably generated); none starts from a separating transcendence basis",
+   "date": "2026-10-10",
+   "verdict": "no match"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "worker",
@@ -58,5 +125,17 @@
   }
  },
  "chapter": "sec-proper-base-change",
- "unit": "sk-thm-p1"
+ "unit": "sk-thm-p1",
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "lem-weil-pbc-separably-generated-separable",
+  "worker": "stage1",
+  "summary": "Checked against Stacks Algebra 030X (line 10410), whose proof is 'combine 030U with 030W', and against 030U (line 10152) and 030W (line 10360). Statement unchanged (correct against 030X with 030O (1), (2) as in def-weil-pbc-separable-field-extension). Three steps: (1) characteristic 0 by the existing Mathlib leaf lem-weil-pbc-char-zero-field-extension-separable (030W is stated only in characteristic p, so 030X's 'combine' leaves this case implicit); (2) K ⊗_k L reduced for every field extension L/k, by the new node lem-weil-pbc-separably-generated-tensor-reduced (030U, separably generated case, S = L); (3) the new node lem-weil-pbc-geometrically-reduced-extension-separable (030W (4) => (1), characteristic p) gives separability. Both new nodes are unsplit; the second records Mathlib's exists_isTranscendenceBasis_and_isSeparable_of_linearIndepOn_pow_of_essFiniteType (030W (2) => (1), finitely generated) as mathlib_candidate. No existing node stated 030U or 030W. Item Mathlib searches completed (loogle, leansearch, local_search added): no match."
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "result": "accepted",
+  "note": "3 steps following Stacks 030X: characteristic 0 by the existing leaf (the source leaves this case implicit, 030W being stated for p > 0); in characteristic p, K (x)_k L reduced for every field L/k by a new node for the separably generated case of 030U (L read lines 10150-10160); then a new node for 030W (4) => (1) (L read 10358-10372), with the Mathlib candidate for (2) => (1) recorded (B8). Statement unchanged."
+ }
 }

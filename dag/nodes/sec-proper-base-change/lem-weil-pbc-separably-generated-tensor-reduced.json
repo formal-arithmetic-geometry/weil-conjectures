@@ -1,0 +1,76 @@
+{
+ "id": "lem-weil-pbc-separably-generated-tensor-reduced",
+ "kind": "statement",
+ "title": "Tensor product of a separably generated field extension with a reduced algebra is reduced",
+ "statement": "Let $k$ be a field, let $S$ be a reduced $k$-algebra (a commutative $k$-algebra with no nonzero nilpotent elements), and let $K/k$ be a field extension [def-pc-field-extension] which is separably generated over $k$ in the sense of [def-weil-pbc-separable-field-extension] (1): there is a transcendence basis $(x_i)_{i\\in I}$ of $K/k$ such that $K/k(x_i;i\\in I)$ is separable algebraic. Then the ring $K\\otimes_kS$ is reduced.",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Algebra, Lemma Tag 030U (lemma-separable-extension-preserves-reducedness, line 10152), the case 'K/k separably generated' (second paragraph of its proof, which reduces to the finitely generated separably generated case treated in the first paragraph); the case 'K/k separable' of 030U is not part of this node"
+ },
+ "stmt_deps": [
+  "def-pc-field-extension",
+  "def-weil-pbc-separable-field-extension"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "tensor product of a separably generated field extension with a reduced algebra is reduced",
+   "results": "Algebra.isGeometricallyReduced_iff, IsGeometricallyReduced.isReduced_algebraicClosure_tensorProduct, instIsReducedTensorProductOfIsAlgebraicOfIsGeometricallyReduced, IsGeometricallyReduced.of_forall_fg (Mathlib.RingTheory.Nilpotent.GeometricallyReduced); IsReduced.tensorProduct_of_flat_of_forall_fg (Mathlib.RingTheory.Flat.Basic); Algebra.TensorProduct.isField_of_isAlgebraic (Mathlib.FieldTheory.LinearDisjoint)",
+   "date": "2026-10-10",
+   "verdict": "no match: the geometric reducedness API (030T, reduction to finitely generated subalgebras, algebraic base fields) never derives reducedness from a separating transcendence basis"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "If K is a field extension of k with a separating transcendence basis and A is a reduced k-algebra then K ⊗[k] A is reduced",
+   "results": "Algebra.instIsReducedTensorProductOfIsAlgebraicOfIsGeometricallyReduced, Algebra.IsGeometricallyReduced.isReduced_algebraicClosure_tensorProduct, Algebra.isGeometricallyReduced_iff, Algebra.isReduced_of_isGeometricallyReduced (Mathlib.RingTheory.Nilpotent.GeometricallyReduced); IsReduced.tensorProduct_of_flat_of_forall_fg (Mathlib.RingTheory.Flat.Basic); Algebra.TensorProduct.not_isField_of_transcendental (Mathlib.RingTheory.LinearDisjoint)",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "IsReduced (TensorProduct _ _ _), IsTranscendenceBasis",
+   "results": "none",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rn 'stacks 030[UVWX]\\|stacks 05DS\\|IsGeometricallyReduced' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib ; grep -rln 'IsReduced (.*⊗' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/FieldTheory ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/RingTheory",
+   "results": "only SeparablyGenerated.lean:288 (@[stacks 030W \"(2) ⇒ (1) finitely generated case\"]); IsGeometricallyReduced only in RingTheory/Nilpotent/GeometricallyReduced.lean (030T, algebraic closure form); IsReduced of tensor products in RingTheory/Flat/Basic.lean (tensorProduct_of_flat_of_forall_fg), RingTheory/Unramified/Field.lean (L ⊗[K] L for a field), GeometricallyReduced.lean; none for a separably generated factor",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "local_search",
+   "query": "isReduced_tensorProduct",
+   "results": "Mathlib: none of this form. Source repository (slopmaster2, not Mathlib, sorry-free by local/sorry_map_slopmaster2_full.jsonl): isReduced_tensorProduct_of_forall_residueField (line 47), isReduced_tensorProduct_adjoin_of_algebraicIndependent (line 66: K ⊗ k(v) reduced for v algebraically independent), isReduced_tensorProduct_of_formallyUnramified (line 79), isReduced_tensorProduct_of_essFiniteType (line 94, over a perfect field) in WeilConjectures/Mathlib/RingTheory/Nilpotent/GeometricallyReduced.lean; isReduced_tensorProduct_of_isLocalization (WeilConjectures/Mathlib/RingTheory/LocalProperties/Reduced.lean:26). Index 'unavailable', so the Mathlib absence rests on the grep and the other searches",
+   "date": "2026-10-10",
+   "verdict": "no match in Mathlib; the source repository's lines 64-106 prove the finitely generated separably generated case for a field factor (the perfect-field hypothesis of line 94 is used only to obtain the separating transcendence basis), a usable route for whoever splits this node"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-separably-generated-separable",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1"
+}
