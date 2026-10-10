@@ -203,7 +203,7 @@ theorem _root_.CategoryTheory.Sheaf.IsTorsion.exists_isColimit_nsmul_eq_zero
     hN.functor ⋙ Subobject.underlying
   let α : K ⟶ (Functor.const ℕ).obj G :=
     { app k := (kernelSubobject (k.factorial • 𝟙 G)).arrow
-      naturality k k' f := by simpa [K] using Subobject.underlying_arrow (hN.functor.map f) }
+      naturality k k' f := by simp [K] }
   have : ∀ k, Mono (α.app k) := fun k ↦ inferInstanceAs (Mono (Subobject.arrow _))
   have : Mono α := NatTrans.mono_of_mono_app α
   let cK : Cocone K := { pt := G, ι := α }

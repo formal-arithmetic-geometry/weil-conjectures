@@ -975,6 +975,7 @@ public import WeilConjectures.Mathlib.CategoryTheory.Shift.CommShift
 public import WeilConjectures.Mathlib.CategoryTheory.Shift.CommShiftTwo
 public import WeilConjectures.Mathlib.CategoryTheory.Shift.Localization
 public import WeilConjectures.Mathlib.CategoryTheory.Sites.Abelian
+public import WeilConjectures.Mathlib.CategoryTheory.Sites.Adjunction
 public import WeilConjectures.Mathlib.CategoryTheory.Sites.CompatiblePlus
 public import WeilConjectures.Mathlib.CategoryTheory.Sites.ConstantSheaf
 public import WeilConjectures.Mathlib.CategoryTheory.Sites.ConstantSheafEquivalence
@@ -1400,6 +1401,8 @@ public import WeilConjectures.SixFunctors.Etale.SmoothBaseChange.Vanishing
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.ClosedImmersion
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Coherence
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.CohomologyMap
+public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.CohomologyMapDevissage
+public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.CohomologyMapZero
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.ConstantSheafEnd
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.ConstantSheafMap
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs

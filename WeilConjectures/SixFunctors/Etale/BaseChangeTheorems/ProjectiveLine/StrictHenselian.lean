@@ -17,6 +17,7 @@ public import WeilConjectures.SixFunctors.Etale.BaseChangeTheorems.TorsionSheaf
 public import WeilConjectures.SixFunctors.Etale.SmoothBaseChange.Defs
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Forget
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.CohomologyMapDevissage
+public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.CohomologyMapZero
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.TopologicalInvariance
 
 /-!
@@ -239,15 +240,6 @@ theorem Etale.subsingleton_H_projectiveLine_closedFibre_of_injective (r : ℕ) [
 alias Etale.subsingleton_H_projectiveLine_residueField_of_injective :=
   Etale.subsingleton_H_projectiveLine_closedFibre_of_injective
 
-/-- TEMPORARY bridge. -/
-theorem Etale.bijective_cohomologyMap_zero_of_isIso_globalSectionsUpperStarMap
-    (Λ : Type (u + 1)) [CommRing Λ] {X Y : Scheme.{u}} (f : X ⟶ Y)
-    (F : Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ))
-    (h : IsIso (globalSectionsUpperStarMap (ModuleCat.{u + 1} Λ) f F)) :
-    Function.Bijective (cohomologyMap f
-      ((sheafCompose _ (forget₂ (ModuleCat.{u + 1} Λ) AddCommGrpCat.{u + 1})).obj F) 0) :=
-  sorry
-
 omit [IsSepClosed (IsLocalRing.ResidueField A)] in
 /-- **The comparison for `ℙ¹` in degree zero.** For every étale sheaf `F` of `Λ`-modules on
 `ℙ¹_A`, restriction `Γ(ℙ¹_A, F) ⟶ Γ(ℙ¹_κ, F₀)` is bijective: `ℙ¹_A` is proper over the
@@ -259,7 +251,7 @@ theorem Etale.bijective_cohomologyMap_zero_projectiveLine_residueField
     Function.Bijective (Etale.cohomologyMap
       (ProjectiveSpace.map _ (Spec.map (CommRingCat.ofHom (IsLocalRing.residue A))))
       ((sheafCompose _ (forget₂ (ModuleCat.{u + 1} Λ) AddCommGrpCat.{u + 1})).obj F) 0) :=
-  Etale.bijective_cohomologyMap_zero_of_isIso_globalSectionsUpperStarMap Λ _ F
+  Etale.bijective_cohomologyMap_zero_of_isIso_globalSectionsUpperStarMap _ Λ F
     (Etale.isIso_globalSectionsUpperStarMap_of_henselianRing Λ (IsLocalRing.maximalIdeal A)
       (ProjectiveLine (Spec (.of A)) ↘ Spec (.of A))
       (ProjectiveSpace.map _ (Spec.map (CommRingCat.ofHom (IsLocalRing.residue A))))
