@@ -173,13 +173,13 @@ and computing `(Rj_{U*} K|_U)|_V` on `U ∩ V` by open base change, `C|_V` sits 
 with `K|_V` and the pushforward of `K|_{U ∩ V}`. -/
 theorem finiteLowerStar_of_openCover [IsLocallyNoetherian Y] {U V : Scheme.{u}} (jU : U ⟶ X)
     (jV : V ⟶ X) [IsOpenImmersion jU] [IsOpenImmersion jV]
-    (hcov : ∀ x, x ∈ Set.range jU.base ∨ x ∈ Set.range jV.base)
+    (hcov : ∀ x, x ∈ Set.range jU.base ∨ x ∈ Set.range jV.base) {W : Scheme.{u}}
+    (pU : W ⟶ U) (pV : W ⟶ V) [IsOpenImmersion pU] (hsq : IsPullback pU pV jU jV)
     (K : DerivedCategory (AdicSheaf l X))
     (hU : finiteLowerStar l (jU ≫ f) ((jU)^*ᵃ[l].mapDerivedCategory.obj K))
     (hV : finiteLowerStar l (jV ≫ f) ((jV)^*ᵃ[l].mapDerivedCategory.obj K))
-    (hW : finiteLowerStar l (pullback.fst jV jU ≫ jV ≫ f)
-      ((pullback.snd jV jU)^*ᵃ[l].mapDerivedCategory.obj
-        ((jU)^*ᵃ[l].mapDerivedCategory.obj K))) :
+    (hW : finiteLowerStar l (pV ≫ jV ≫ f)
+      ((pU)^*ᵃ[l].mapDerivedCategory.obj ((jU)^*ᵃ[l].mapDerivedCategory.obj K))) :
     finiteLowerStar l f K := by
   obtain ⟨I, _, ⟨eK⟩⟩ := DerivedCategory.exists_iso_Q_obj_of_isKInjective K
   refine (finiteLowerStar l f).prop_of_iso eK.symm ?_
@@ -203,8 +203,6 @@ theorem finiteLowerStar_of_openCover [IsLocallyNoetherian Y] {U V : Scheme.{u}} 
     (hCU.of_iso ((jU)^*ᵃ[l].mapDerivedCategory.mapIso eC.symm))
   -- the restriction of the triangle to `V`
   have hTV := (jV)^*ᵃ[l].mapDerivedCategory.map_distinguished _ hT
-  have hsq : IsPullback (pullback.fst jV jU) (pullback.snd jV jU) jV jU :=
-    IsPullback.of_hasPullback jV jU
   let J₀ := ((jU)^*ᵃ[l].mapHomologicalComplex (ComplexShape.up ℤ)).obj I
   have h₁V : finiteLowerStar l (jV ≫ f) ((jV)^*ᵃ[l].mapDerivedCategory.obj
       (DerivedCategory.Q.obj I)) :=
@@ -214,11 +212,11 @@ theorem finiteLowerStar_of_openCover [IsLocallyNoetherian Y] {U V : Scheme.{u}} 
     finiteLowerStar_of_iso (jV ≫ f)
       ((jV ≫ f)_*ᵃ[l].rightDerivedFunctor.mapIso
           ((jV)^*ᵃ[l].mapDerivedCategory.mapIso ((jU)_*ᵃ[l].rightDerivedFunctorObjQIso J₀).symm ≪≫
-            (adicDerivedBaseChangeIso l hsq).app _) ≪≫
-        (Functor.rightDerivedFunctorCompIso' (pullback.fst jV jU)_*ᵃ[l] (jV ≫ f)_*ᵃ[l]
-          (adicLowerStarComp l (pullback.fst jV jU) (jV ≫ f))).app _)
-      ((finiteLowerStar l (pullback.fst jV jU ≫ jV ≫ f)).prop_of_iso
-        ((pullback.snd jV jU)^*ᵃ[l].mapDerivedCategory.mapIso
+            (adicDerivedBaseChangeIso l hsq.flip).app _) ≪≫
+        (Functor.rightDerivedFunctorCompIso' (pV)_*ᵃ[l] (jV ≫ f)_*ᵃ[l]
+          (adicLowerStarComp l pV (jV ≫ f))).app _)
+      ((finiteLowerStar l (pV ≫ jV ≫ f)).prop_of_iso
+        ((pU)^*ᵃ[l].mapDerivedCategory.mapIso
           ((jU)^*ᵃ[l].mapDerivedCategory.mapIso eK ≪≫
             ((jU)^*ᵃ[l].mapDerivedCategoryFactors).app I)) hW)
   have h₃V : finiteLowerStar l (jV ≫ f) ((jV)^*ᵃ[l].mapDerivedCategory.obj C) :=
@@ -235,23 +233,231 @@ theorem finiteLowerStar_of_openCover [IsLocallyNoetherian Y] {U V : Scheme.{u}} 
 
 end Devissage
 
+section CoverInduction
+
+variable {l : ℕ} [Fact l.Prime] {Y : Scheme.{u}}
+
+variable (l) in
+/-- The finiteness theorem for `g : T ⟶ Y`: every bounded complex of `ℓ`-adic sheaves on `T` with
+constructible cohomology sheaves has bounded constructible derived pushforward along `g`. -/
+def FiniteFor {T : Scheme.{u}} (g : T ⟶ Y) : Prop :=
+  ∀ K : DerivedCategory (AdicSheaf l T), DerivedCategory.TStructure.t.bounded K →
+    _root_.DerivedCategory.homologyProperty (adicConstructibleSheaf l T) K →
+      finiteLowerStar l g K
+
+/-- The restriction of a bounded complex with constructible cohomology is again one. -/
+lemma bounded_homologyProperty_mapDerivedCategory_adicUpperStar {T T' : Scheme.{u}}
+    (j : T' ⟶ T) {K : DerivedCategory (AdicSheaf l T)}
+    (hb : DerivedCategory.TStructure.t.bounded K)
+    (hc : _root_.DerivedCategory.homologyProperty (adicConstructibleSheaf l T) K) :
+    DerivedCategory.TStructure.t.bounded ((j)^*ᵃ[l].mapDerivedCategory.obj K) ∧
+      _root_.DerivedCategory.homologyProperty (adicConstructibleSheaf l T')
+        ((j)^*ᵃ[l].mapDerivedCategory.obj K) :=
+  ⟨(j)^*ᵃ[l].bounded_mapDerivedCategory_obj hb, fun n ↦
+    ((hc n).upperStar j).of_iso (((j)^*ᵃ[l].mapDerivedCategoryHomologyFunctorIso n).app K)⟩
+
+/-- **Mayer–Vietoris for open subschemes**: the finiteness theorem for the restrictions of `g`
+to two opens and to their intersection gives it on their union. -/
+lemma FiniteFor.sup [IsLocallyNoetherian Y] {T : Scheme.{u}} (g : T ⟶ Y) (O₁ O₂ : T.Opens)
+    (h₁ : FiniteFor l (O₁.ι ≫ g)) (h₂ : FiniteFor l (O₂.ι ≫ g))
+    (h₁₂ : FiniteFor l ((O₁ ⊓ O₂).ι ≫ g)) : FiniteFor l ((O₁ ⊔ O₂).ι ≫ g) := by
+  intro K hb hc
+  refine finiteLowerStar_of_openCover ((O₁ ⊔ O₂).ι ≫ g) (T.homOfLE le_sup_left)
+    (T.homOfLE le_sup_right) (fun x ↦ ?_) (T.homOfLE inf_le_left) (T.homOfLE inf_le_right)
+    (isPullback_opens_inf_le le_sup_left le_sup_right) K ?_ ?_ ?_
+  · obtain ⟨y, hy⟩ := x
+    rcases TopologicalSpace.Opens.mem_sup.1 hy with h | h
+    · exact Or.inl ⟨⟨y, h⟩, Scheme.homOfLE_apply' _ _ _⟩
+    · exact Or.inr ⟨⟨y, h⟩, Scheme.homOfLE_apply' _ _ _⟩
+  · have := bounded_homologyProperty_mapDerivedCategory_adicUpperStar (l := l)
+      (T.homOfLE (le_sup_left : O₁ ≤ O₁ ⊔ O₂)) hb hc
+    rw [Scheme.homOfLE_ι_assoc]
+    exact h₁ _ this.1 this.2
+  · have := bounded_homologyProperty_mapDerivedCategory_adicUpperStar (l := l)
+      (T.homOfLE (le_sup_right : O₂ ≤ O₁ ⊔ O₂)) hb hc
+    rw [Scheme.homOfLE_ι_assoc]
+    exact h₂ _ this.1 this.2
+  · have h := bounded_homologyProperty_mapDerivedCategory_adicUpperStar (l := l)
+      (T.homOfLE (inf_le_left : O₁ ⊓ O₂ ≤ O₁))
+      (bounded_homologyProperty_mapDerivedCategory_adicUpperStar (l := l)
+        (T.homOfLE (le_sup_left : O₁ ≤ O₁ ⊔ O₂)) hb hc).1
+      (bounded_homologyProperty_mapDerivedCategory_adicUpperStar (l := l)
+        (T.homOfLE (le_sup_left : O₁ ≤ O₁ ⊔ O₂)) hb hc).2
+    rw [Scheme.homOfLE_homOfLE_assoc, Scheme.homOfLE_ι_assoc]
+    exact h₁₂ _ h.1 h.2
+
+open ZeroObject in
+variable (l) in
+/-- On an empty scheme every object of the derived category of `ℓ`-adic sheaves vanishes: the
+empty family covers it, so restrictions along it are jointly conservative. -/
+lemma isZero_of_isEmpty {T : Scheme.{u}} [IsEmpty T] (K : DerivedCategory (AdicSheaf l T)) :
+    IsZero K := by
+  have : IsIso (0 : K ⟶ 0) := isIso_of_isIso_mapDerivedCategory_adicUpperStar l
+    (W := (Empty.elim : Empty → Scheme.{u})) (fun i ↦ i.elim) (by
+      exact Scheme.zariskiPrecoverage_le_proetalePrecoverage _
+        ((Scheme.ofArrows_mem_precoverage_iff _).mpr ⟨fun x ↦ isEmptyElim x, fun i ↦ i.elim⟩))
+    _ (fun i ↦ i.elim)
+  exact (isZero_zero _).of_iso (asIso (0 : K ⟶ 0))
+
+/-- The finiteness theorem holds trivially over an empty source. -/
+lemma FiniteFor.of_isEmpty [IsLocallyNoetherian Y] {T : Scheme.{u}} [IsEmpty T] (g : T ⟶ Y) :
+    FiniteFor l g := fun K _ _ ↦
+  (finiteLowerStar l g).prop_of_isZero (isZero_of_isEmpty l K)
+
+lemma FiniteFor.congr_opens {T : Scheme.{u}} (g : T ⟶ Y) {O O' : T.Opens} (h : O = O')
+    (hO : FiniteFor l (O.ι ≫ g)) : FiniteFor l (O'.ι ≫ g) := by
+  subst h
+  exact hO
+
+/-- The finiteness theorem for the restriction of `g` to the open subscheme `⊤` gives it for
+`g`. -/
+lemma FiniteFor.of_top [IsLocallyNoetherian Y] {T : Scheme.{u}} (g : T ⟶ Y)
+    (h : FiniteFor l ((⊤ : T.Opens).ι ≫ g)) : FiniteFor l g := by
+  intro K hb hc
+  have h₁ := bounded_homologyProperty_mapDerivedCategory_adicUpperStar (l := l)
+    (⊤ : T.Opens).ι hb hc
+  have h₂ := bounded_homologyProperty_mapDerivedCategory_adicUpperStar (l := l)
+    (T.homOfLE (inf_le_left : (⊤ : T.Opens) ⊓ ⊤ ≤ ⊤)) h₁.1 h₁.2
+  refine finiteLowerStar_of_openCover g (⊤ : T.Opens).ι (⊤ : T.Opens).ι
+    (fun x ↦ Or.inl (by rw [Scheme.Opens.range_ι]; trivial)) (T.homOfLE inf_le_left)
+    (T.homOfLE inf_le_right) (isPullback_opens_inf ⊤ ⊤) K (h _ h₁.1 h₁.2) (h _ h₁.1 h₁.2) ?_
+  rw [Scheme.homOfLE_ι_assoc]
+  exact FiniteFor.congr_opens g (inf_idem ⊤).symm h _ h₂.1 h₂.2
+
+/-- **Finite unions**: for a class `P` of opens closed under binary intersections, on which the
+finiteness theorem holds, it holds on every finite union of members of `P`. -/
+lemma FiniteFor.finsetSup [IsLocallyNoetherian Y] {T : Scheme.{u}} (g : T ⟶ Y)
+    (P : T.Opens → Prop) (hP : ∀ O O', P O → P O' → P (O ⊓ O'))
+    (h : ∀ O, P O → FiniteFor l (O.ι ≫ g)) (S : Finset T.Opens) (hS : ∀ O ∈ S, P O) :
+    FiniteFor l ((S.sup id).ι ≫ g) := by
+  classical
+  induction hn : S.card using Nat.strong_induction_on generalizing S with
+  | _ n ih =>
+  rcases S.eq_empty_or_nonempty with rfl | ⟨U, hU⟩
+  · have : IsEmpty ((Finset.sup ∅ id : T.Opens) : Scheme.{u}) := ⟨fun x ↦ x.2⟩
+    exact FiniteFor.of_isEmpty _
+  have hS' : S.sup id = U ⊔ (S.erase U).sup id :=
+    (congrArg (fun S' ↦ Finset.sup S' id) (Finset.insert_erase hU)).symm.trans Finset.sup_insert
+  have hlt : (S.erase U).card < n := hn ▸ Finset.card_erase_lt_of_mem hU
+  refine FiniteFor.congr_opens g hS'.symm
+    (FiniteFor.sup g U ((S.erase U).sup id) (h U (hS U hU))
+      (ih _ hlt _ (fun O hO ↦ hS O (Finset.mem_of_mem_erase hO)) rfl) ?_)
+  refine FiniteFor.congr_opens g (by rw [Finset.sup_inf_distrib_left, Finset.sup_image]; rfl)
+    (ih _ (lt_of_le_of_lt Finset.card_image_le hlt) ((S.erase U).image (U ⊓ ·)) ?_ rfl)
+  simp only [Finset.mem_image, Finset.mem_erase]
+  rintro _ ⟨O, ⟨-, hO⟩, rfl⟩
+  exact hP _ _ (hS U hU) (hS O hO)
+
+/-- A quasi-compact scheme is a finite union of affine opens. -/
+lemma exists_finset_isAffineOpen_sup_eq_top (T : Scheme.{u}) [CompactSpace T] :
+    ∃ S : Finset T.Opens, (∀ O ∈ S, IsAffineOpen O) ∧ S.sup id = ⊤ := by
+  classical
+  obtain ⟨s, hs, hsU⟩ := (isCompact_iff_finite_and_eq_biUnion_affineOpens
+    (U := (⊤ : T.Opens))).1 (by simpa using isCompact_univ)
+  refine ⟨hs.toFinset.image Subtype.val, ?_, le_antisymm le_top ?_⟩
+  · simp only [Finset.mem_image, Set.Finite.mem_toFinset]
+    rintro _ ⟨O, -, rfl⟩
+    exact O.2
+  · rw [hsU]
+    exact iSup₂_le fun i hi ↦ Finset.le_sup (f := id)
+      (Finset.mem_image_of_mem _ (hs.mem_toFinset.2 hi))
+
+/-- **The separated case**: on a quasi-compact scheme with affine diagonal, the finiteness
+theorem follows from the case of its affine opens, these being stable under intersections. -/
+lemma FiniteFor.of_isAffineHom_diagonal [IsLocallyNoetherian Y] {T : Scheme.{u}} (g : T ⟶ Y)
+    [CompactSpace T] [IsAffineHom (pullback.diagonal (terminal.from T))]
+    (h : ∀ O : T.Opens, IsAffineOpen O → FiniteFor l (O.ι ≫ g)) : FiniteFor l g := by
+  obtain ⟨S, hSa, hS⟩ := exists_finset_isAffineOpen_sup_eq_top T
+  exact FiniteFor.of_top g (FiniteFor.congr_opens g hS
+    (FiniteFor.finsetSup g IsAffineOpen (fun _ _ hO hO' ↦ hO.inf hO') h S hSa))
+
+/-- **The quasi-separated case**: on a quasi-compact quasi-separated scheme, the finiteness
+theorem follows from the case of affine schemes. The quasi-compact opens contained in an affine
+open are stable under intersections, and have affine diagonal, so the separated case applies to
+them. -/
+lemma FiniteFor.of_quasiSeparatedSpace [IsLocallyNoetherian Y] {T : Scheme.{u}} (g : T ⟶ Y)
+    [CompactSpace T] [QuasiSeparatedSpace T] [LocallyOfFiniteType g]
+    (h : ∀ (T' : Scheme.{u}) [IsAffine T'] (g' : T' ⟶ Y) [LocallyOfFiniteType g'],
+      FiniteFor l g') : FiniteFor l g := by
+  let P : T.Opens → Prop := fun O ↦ IsCompact (O : Set T) ∧ ∃ U, IsAffineOpen U ∧ O ≤ U
+  have hP : ∀ O O', P O → P O' → P (O ⊓ O') := fun O O' ⟨hO, U, hU, hOU⟩ ⟨hO', _⟩ ↦
+    ⟨QuasiSeparatedSpace.inter_isCompact _ _ O.isOpen hO O'.isOpen hO',
+      U, hU, inf_le_left.trans hOU⟩
+  have hPF : ∀ O, P O → FiniteFor l (O.ι ≫ g) := by
+    rintro O ⟨hO, U, hU, hOU⟩
+    have : CompactSpace O.toScheme := isCompact_iff_compactSpace.1 hO
+    have : IsAffine U.toScheme := hU
+    have : IsSeparated (terminal.from O.toScheme) := by
+      rw [show terminal.from O.toScheme = T.homOfLE hOU ≫ terminal.from U.toScheme from
+        terminal.hom_ext _ _]
+      infer_instance
+    refine FiniteFor.of_isAffineHom_diagonal (O.ι ≫ g) fun O' hO' ↦ ?_
+    have : IsAffine O'.toScheme := hO'
+    exact h O'.toScheme (O'.ι ≫ O.ι ≫ g)
+  obtain ⟨S, hSa, hS⟩ := exists_finset_isAffineOpen_sup_eq_top T
+  exact FiniteFor.of_top g (FiniteFor.congr_opens g hS
+    (FiniteFor.finsetSup g P hP hPF S fun O hO ↦ ⟨(hSa O hO).isCompact, O, hSa O hO, le_rfl⟩))
+
+end CoverInduction
+
 section Finiteness
 
 variable {l : ℕ} [Fact l.Prime] {K : Type u} [Field K] [IsAlgClosed K] {X Y : Scheme.{u}}
   (s : Y ⟶ Spec (.of K)) (f : X ⟶ Y)
 
+/-- **Finiteness for the derived pushforward of a constructible `ℓ`-adic sheaf on an affine
+scheme** (SGA 4½, *Th. finitude*): over an algebraically closed field of characteristic `≠ ℓ`,
+the derived pushforward `Rf_* F` of a constructible `ℓ`-adic sheaf on an affine scheme along a
+morphism locally of finite type, with target quasi-compact and locally of finite type, is
+bounded with constructible cohomology sheaves `Rⁿf_* F`. -/
+theorem finiteLowerStar_singleFunctor_of_isAffine (hK : ringChar K ≠ l) [LocallyOfFiniteType s]
+    [QuasiCompact s] {T : Scheme.{u}} [IsAffine T] (g : T ⟶ Y) [LocallyOfFiniteType g]
+    {F : AdicSheaf l T} (hF : IsAdicConstructibleSheaf F) :
+    finiteLowerStar l g ((DerivedCategory.singleFunctor _ 0).obj F) :=
+  sorry
+
+/-- A constructible sheaf placed in degree `0` is bounded with constructible cohomology. -/
+lemma bounded_homologyProperty_singleFunctor {T : Scheme.{u}} {F : AdicSheaf l T}
+    (hF : IsAdicConstructibleSheaf F) :
+    DerivedCategory.TStructure.t.bounded ((DerivedCategory.singleFunctor _ 0).obj F) ∧
+      _root_.DerivedCategory.homologyProperty (adicConstructibleSheaf l T)
+        ((DerivedCategory.singleFunctor _ 0).obj F) := by
+  refine ⟨⟨⟨0, inferInstanceAs (DerivedCategory.IsGE
+      ((DerivedCategory.singleFunctor _ 0).obj F) 0)⟩,
+    ⟨0, inferInstanceAs (DerivedCategory.IsLE
+      ((DerivedCategory.singleFunctor _ 0).obj F) 0)⟩⟩, fun m ↦ ?_⟩
+  obtain hm | rfl | hm := lt_trichotomy m 0
+  · exact (adicConstructibleSheaf l T).prop_of_isZero
+      ((DerivedCategory.isGE_iff ((DerivedCategory.singleFunctor _ 0).obj F) 0).1
+        inferInstance m hm)
+  · exact (adicConstructibleSheaf l T).prop_of_iso
+      ((DerivedCategory.singleFunctorCompHomologyFunctorIso _ 0).app F).symm hF
+  · exact (adicConstructibleSheaf l T).prop_of_isZero
+      ((DerivedCategory.isLE_iff ((DerivedCategory.singleFunctor _ 0).obj F) 0).1
+        inferInstance m hm)
+
 /-- **Finiteness for the derived pushforward of a constructible `ℓ`-adic sheaf** (SGA 4½,
 *Th. finitude*): over an algebraically closed field of characteristic `≠ ℓ`, the derived
 pushforward `Rf_* F` of a constructible `ℓ`-adic sheaf along a quasi-compact quasi-separated
 morphism locally of finite type, with target quasi-compact and locally of finite type, is
-bounded with constructible cohomology sheaves `Rⁿf_* F`. Boundedness above holds since the
-cohomological dimension of `f_*` is at most twice the dimension of the fibres, which is bounded
-on a quasi-compact target. -/
+bounded with constructible cohomology sheaves `Rⁿf_* F`. The source being quasi-compact and
+quasi-separated, this reduces to the case of an affine source
+(`AlgebraicGeometry.ProEtale.finiteLowerStar_singleFunctor_of_isAffine`) by the Čech argument
+of `AlgebraicGeometry.ProEtale.FiniteFor.of_quasiSeparatedSpace`. -/
 theorem finiteLowerStar_singleFunctor (hK : ringChar K ≠ l) [LocallyOfFiniteType s]
     [QuasiCompact s] [QuasiCompact f] [QuasiSeparated f] [LocallyOfFiniteType f]
     {F : AdicSheaf l X} (hF : IsAdicConstructibleSheaf F) :
-    finiteLowerStar l f ((DerivedCategory.singleFunctor _ 0).obj F) :=
-  sorry
+    finiteLowerStar l f ((DerivedCategory.singleFunctor _ 0).obj F) := by
+  have : IsLocallyNoetherian Y := LocallyOfFiniteType.isLocallyNoetherian s
+  have : CompactSpace Y := QuasiCompact.compactSpace_of_compactSpace s
+  have : IsNoetherian Y := ⟨⟩
+  have : CompactSpace X := QuasiCompact.compactSpace_of_compactSpace f
+  have : QuasiSeparatedSpace X := quasiSeparatedSpace_of_quasiSeparated f
+  have h := FiniteFor.of_quasiSeparatedSpace (l := l) f fun T' _ g' _ K hb hc ↦
+    finiteLowerStar_of_bounded g' (fun F hF ↦ finiteLowerStar_singleFunctor_of_isAffine s hK g' hF)
+      K hb hc
+  exact h _ (bounded_homologyProperty_singleFunctor hF).1
+    (bounded_homologyProperty_singleFunctor hF).2
 
 /-- **Constructibility is local on the base**: an `ℓ`-adic sheaf whose restrictions to the
 members of an open cover are constructible is constructible. -/
@@ -335,5 +541,6 @@ theorem bounded_rightDerivedFunctor_lowerStar (hK : ringChar K ≠ l) [LocallyOf
   (finiteLowerStar_singleFunctor s f hK hF).1
 
 end Finiteness
+
 
 end AlgebraicGeometry.ProEtale
