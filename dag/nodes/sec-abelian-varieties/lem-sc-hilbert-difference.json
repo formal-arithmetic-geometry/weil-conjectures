@@ -23,9 +23,75 @@
   "def-sc-invertible-module",
   "def-kun-topological-krull-dimension"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "The assertion is local on X. By clause (1) of [lem-sc-hilbert-denominator-ideal-nowhere-dense], X is covered by affine opens U = Spec(A) on which L is trivial, s is a/b with a and b non-zero-divisors of A, and I(U) = {x in A | x(a/b) in A}. The module of sections M of F is finite, has support all of Spec(A), and has no embedded associated primes. Apply [lem-sc-hilbert-affine-denominator-module] to obtain injective maps I M \\to M and I M \\to M (the latter representing multiplication by s), with cokernels annihilated by I and by s(I). These local maps agree on overlaps, so they glue to the two canonical maps in the statement. [lem-sc-hilbert-denominator-ideal-nowhere-dense] supplies the quasi-coherent denominator ideal and says that V(I) and the support of O_X/s(I) are contained in closed nowhere-dense subsets.",
+   "uses": [
+    "lem-sc-hilbert-affine-denominator-module",
+    "lem-sc-hilbert-denominator-ideal-nowhere-dense"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/divisors.tex",
+    "place": "Tag 02P2 (Lemma 31.25.5), affine reduction and gluing"
+   }
+  },
+  {
+   "text": "On an affine Noetherian open U, the affine auxiliary identifies I(U) with an ideal of the Noetherian ring O_X(U), so it is finitely generated; hence the quasi-coherent ideal I is of finite type and coherent by [pqf-lem-coherent-ft-locnoeth]. The product I F is quasi-coherent and has affine sections I(U) F(U) by [lem-weil-pbc-ideal-times-quasi-coherent-affine-sections]. As a quasi-coherent submodule of the coherent module F, I F is coherent by clause (2) of [lem-weil-pbc-coherent-kernel-cokernel-locnoeth]. The same lemma then makes the cokernels of the maps I F to F and F tensor L coherent; F tensor L is coherent because L is locally free of rank one and tensoring is locally finite free on affine trivializations.",
+   "uses": [
+    "lem-sc-hilbert-affine-denominator-module",
+    "pqf-lem-coherent-ft-locnoeth",
+    "lem-weil-pbc-ideal-times-quasi-coherent-affine-sections",
+    "lem-weil-pbc-coherent-kernel-cokernel-locnoeth",
+    "def-sc-invertible-module"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/coherent.tex",
+    "place": "Tags 01XZ and 01Y0/01Y1, affine coherence and kernel-cokernel closure"
+   }
+  },
+  {
+   "text": "The first cokernel is annihilated by I, so its support is contained in V(I), and the second is annihilated by s(I), so its support is contained in the closed support supplied by [lem-sc-hilbert-denominator-ideal-nowhere-dense]. Both closed sets are nowhere dense. Since X is nonempty, locally Noetherian, and finite-dimensional, [lem-sc-hilbert-nowhere-dense-dimension-drop] gives dimension strictly less than dim X for both supports.",
+   "uses": [
+    "lem-sc-hilbert-denominator-ideal-nowhere-dense",
+    "lem-sc-hilbert-nowhere-dense-dimension-drop"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/divisors.tex",
+    "place": "Tag 02P2, support on the nowhere-dense set T and dimension conclusion"
+   }
+  },
+  {
+   "text": "For every integer n, tensor the short exact sequence 0 \\to I F \\to F \\to Q \\to 0 by L^n, and tensor the short exact sequence 0 \\to I F \\to F tensor L \\to Q' \\to 0 by L^n. Tensoring by the invertible module L^n is exact by [lem-sc-ext-tensor-exact]. Apply [lem-pc-euler-additive] to the two resulting short exact sequences: the common middle term I F tensor L^n cancels, yielding chi(X, F tensor L^(n+1)) - chi(X, F tensor L^n) = chi(X, Q' tensor L^n) - chi(X, Q tensor L^n).",
+   "uses": [
+    "lem-sc-ext-tensor-exact",
+    "lem-pc-euler-additive"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 0BEM, forward-difference identity after Tag 02P2"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sc-hilbert-affine-denominator-module",
+  "lem-sc-hilbert-denominator-ideal-nowhere-dense",
+  "pqf-lem-coherent-ft-locnoeth",
+  "lem-weil-pbc-ideal-times-quasi-coherent-affine-sections",
+  "lem-weil-pbc-coherent-kernel-cokernel-locnoeth",
+  "def-sc-invertible-module",
+  "lem-sc-hilbert-nowhere-dense-dimension-drop",
+  "lem-sc-ext-tensor-exact",
+  "lem-pc-euler-additive"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/divisors.tex",
+  "place": "Tag 02P2 (Lemma 31.25.5), with Tag 02P0 for the denominator ideal; Euler identity from varieties.tex Tag 0BEM"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -50,12 +116,28 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-sc-hilbert-polynomial",
   "by": "worker",
   "date": "2026-10-10"
  },
  "chapter": "sec-abelian-varieties",
- "unit": "sk-def-av-ample-degree"
+ "unit": "sk-def-av-ample-degree",
+ "split_report": {
+  "date": "2026-10-11",
+  "item": "lem-sc-hilbert-difference",
+  "worker": "stage1",
+  "summary": "Split the regular-section difference lemma into the affine denominator-module calculation, the denominator ideal's quasi-coherence and nowhere-dense support, and the finite-dimensional dimension drop; the item proof then assembles these with existing coherence, tensor-exactness, and Euler-additivity nodes.",
+  "blueprint": "Realizes the ancestor lem-sc-hilbert-polynomial proof sentence that regular-section exact sequences identify the forward difference with lower-dimensional Euler characteristics.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-hdf2425",
+  "group": "F1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-hdf2425 (reviewer sub-agent of L); spot-checked: Statement keeps both J1 corrections (regular = K_X->K_X(L) injective; X nonempty). Checked the affine a/b calculation against Tag 02P2 (b,a nonzerodivisors on M since Ass(M)=minimal primes), the Euler sign in step 4 via lem-pc-euler-additive, and the nowhere-dense dimension drop (a chain in Z extends inside a component since components of a locally Noetherian scheme have nonempty interior). The item needs no regular-section-exists or embedded-points citation since it takes s and F without embedded points as hypotheses. FIX more, RETURN less: (1) B3: lem-sc-hilbert-denominator-ideal-nowhere-dense used 'regular meromorphic section' undefined; the K_X / K_X(L)-injective definition is now inline. (2) C1: step 1's local form s=a/b with a,b nonzerodivisors and I(U)={x | x a/b in A} was uncited; added as clause (1) of that node (the content of the Tag 02P0 proof) and step 1 cites it. (3) stmt_deps of the item no longer list the lemma lem-sc-hilbert-denominator-ideal-nowhere-dense (the statement defines I inline). The second reading missed (1) and (2).; 2 file(s) fixed by the reviewer"
+ }
 }
