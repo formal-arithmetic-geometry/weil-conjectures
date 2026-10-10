@@ -1,8 +1,8 @@
 # Work queue
 
-866 items; claim with `tools/claim.py next <group> [--stage N]`.
+864 items; claim with `tools/claim.py next <group> [--stage N]`.
 
-## Stage 1: nodes to split (345)
+## Stage 1: nodes to split (342)
 
 | node | distance to a target | Lean state on the done branch |
 |---|---|---|
@@ -52,9 +52,7 @@
 | `lem-sc-degree-2g1-very-ample` | 3008 | rests_on_sorry |
 | `lem-sc-noetherian-cohomology-above-dimension` | 3008 | sorry_here |
 | `lem-sc-zero-generic-acyclic` | 3008 | rests_on_sorry |
-| `lem-weil-pbc-coskeletal-map-trivial-kan` | 3008 | none |
 | `lem-weil-pbc-free-module-sheaf-sheafify-first` | 3008 | none |
-| `lem-weil-pbc-image-presheaf-sheafification-iso` | 3008 | none |
 | `lem-weil-pbc-set-cech-nerve-free-resolution` | 3008 | none |
 | `lem-weil-pbc-simplicial-hom-object-exists` | 3008 | none |
 | `lem-weil-pbc-trivial-kan-homotopy-equivalence` | 3008 | none |
@@ -68,7 +66,6 @@
 | `lem-pc-chi-zero-dim-support` | 3009 | none |
 | `lem-pc-dimension-affine-open-cover` | 3009 | none |
 | `lem-pc-euler-characteristic-well-defined` | 3009 | none |
-| `lem-pc-finite-extension-alg-closed` | 3009 | none |
 | `lem-pc-scheme-dimension-local-rings` | 3009 | none |
 | `lem-sc-hilb-geometrically-integral` | 3009 | rests_on_sorry |
 | `lem-sc-hilb-to-pic-morphism` | 3009 | none |
@@ -352,7 +349,7 @@
 | `def-exc-jacobian-presentation` | - | none |
 | `lem-zl-noether-normalization-dimension` | - | none |
 
-## Stage 2: nodes to state (521)
+## Stage 2: nodes to state (522)
 
 | node | distance to Mathlib | kind |
 |---|---|---|
@@ -482,6 +479,7 @@
 | `lem-weil-pbc-constructible-in-retrocompact-open` | 1 | state |
 | `lem-weil-pbc-constructible-intersection-in-constructible` | 1 | state |
 | `lem-weil-pbc-constructible-is-retrocompact` | 1 | state |
+| `lem-weil-pbc-coskeletal-map-trivial-kan` | 1 | state |
 | `lem-weil-pbc-coskeleton-free-homology-comparison` | 1 | state |
 | `lem-weil-pbc-cotangent-complex-symmetric-algebra` | 1 | state |
 | `lem-weil-pbc-cover-module-exact` | 1 | state |
@@ -878,7 +876,7 @@
 | `lem-weil-pbc-p1-field-dimension-one` | 4 | state |
 | `lem-weil-pbc-projective-space-zero-isomorphism` | 4 | state |
 
-Not open yet: 365 nodes that wait for stage 1, 949 nodes that wait for a statement dependency.
+Not open yet: 362 nodes that wait for stage 1, 950 nodes that wait for a statement dependency.
 
 ## Stage 3: modules to prove (0)
 
