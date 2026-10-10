@@ -1,8 +1,8 @@
 # Work queue
 
-858 items; claim with `tools/claim.py next <group> [--stage N]`.
+850 items; claim with `tools/claim.py next <group> [--stage N]`.
 
-## Stage 1: nodes to split (397)
+## Stage 1: nodes to split (389)
 
 | node | distance to a target | Lean state on the done branch |
 |---|---|---|
@@ -20,7 +20,6 @@
 | `lem-weil-pbc-normal-ring-integrally-closed-total` | 1015 | none |
 | `lem-weil-pbc-openness-of-flatness` | 1015 | none |
 | `lem-weil-pbc-regular-local-quotient-kernel-parameters` | 1015 | none |
-| `lem-weil-pbc-relative-global-complete-intersection-local-regular-sequence` | 1015 | none |
 | `lem-weil-pbc-relative-global-complete-intersection-noetherian-approximation` | 1015 | none |
 | `lem-weil-pbc-sections-morphism-to-proj-polynomial-ring` | 1015 | none |
 | `lem-weil-pbc-symmetric-projective-presentation-conormal` | 1015 | none |
@@ -42,19 +41,12 @@
 | `lem-weil-pbc-property-implies-acyclicity` | 2003 | none |
 | `lem-weil-pbc-qcqs-higher-direct-image` | 2003 | none |
 | `lemma-weil-pbc-proper-underived-exchange` | 2003 | sorry_here |
-| `lemma-weil-pbc-etale-degree-zero` | 2004 | sorry_here |
-| `lemma-weil-pbc-finite-refinement-etale-cover` | 2005 | sorry_here |
-| `lemma-weil-pbc-stein-connectedness` | 2005 | rests_on_sorry |
 | `lem-sc-pic-proper-ntorsion` | 2006 | none |
-| `lem-weil-pbc-constant-pushforward-restriction` | 2006 | none |
-| `lem-weil-pbc-fg-sheaf-constant-pushforward-embedding` | 2006 | none |
-| `lem-weil-pbc-locally-constant-zero-locus-clopen` | 2006 | none |
 | `lem-weil-pbc-sets-etale-inverse-image-composition-units` | 2006 | none |
 | `lem-weil-pbc-sets-finite-surjective-descent` | 2006 | none |
-| `thm-weil-pbc-stein-inputs` | 2006 | sorry_here |
+| `lemma-weil-pbc-finite-refinement-etale-cover` | 2006 | sorry_here |
 | `def-sp-etale-dictionary` | 3002 | none |
 | `def-weil-pbc-inverse-image` | 3002 | none |
-| `def-weil-pbc-kinjective-resolutions` | 3002 | none |
 | `def-weil-pbc-etale-cohomology` | 3003 | none |
 | `def-weil-pbc-strict-henselization-limit` | 3003 | none |
 | `prop-weil-pbc-strict-henselization-stalk-formula` | 3003 | none |
@@ -870,7 +862,7 @@
 | `lem-weil-pbc-p1-field-dimension-one` | 4 | state |
 | `lem-weil-pbc-projective-space-zero-isomorphism` | 4 | state |
 
-Not open yet: 414 nodes that wait for stage 1, 854 nodes that wait for a statement dependency.
+Not open yet: 406 nodes that wait for stage 1, 852 nodes that wait for a statement dependency.
 
 ## Stage 3: modules to prove (0)
 
