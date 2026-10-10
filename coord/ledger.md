@@ -2357,3 +2357,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 19:15 L: merged deliver/F1/lem-weil-pbc-standard-fpqc-quotient-topology (reviewer FIX; first push; new nodes: 2)
 - 19:15 L: returned deliver/K1/lem-pc-compact-hom-hocolim (reviewer RETURN: Reviewer R-chh1916. 1 (E, hypothesis/typing; point 1 of the 19:01 return NOT repaired): the statement at 770b8ea35 still)
 - 19:15 L: lem-pc-quasi-isomorphisms-multiplicative-system promoted to a Mathlib leaf (Fractions.lean:34,38; reviewer R-pda1912)
+- 19:15 L: merged deliver/C1/lem-sc-qcoh-acyclic-derived-pushforward-cohomology (reviewer FIX; after a return; new nodes: 1)

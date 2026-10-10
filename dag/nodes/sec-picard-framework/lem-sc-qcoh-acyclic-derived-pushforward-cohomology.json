@@ -14,7 +14,7 @@
  },
  "kind": "statement",
  "title": "Cohomology of derived pushforward when quasi-coherent higher direct images vanish",
- "statement": "Let $f:X\\to Y$ be a morphism of schemes [def-pc-scheme] such that $R^pf_*\\mathcal F=0$ for every quasi-coherent $\\mathcal O_X$-module $\\mathcal F$ and every $p>0$, where $R^pf_*$ and $Rf_*:D(\\mathcal O_X)\\to D(\\mathcal O_Y)$ are as in [def-pc-derived-direct-image]. Then for every object $E$ of $D_{\\mathrm{QCoh}}(\\mathcal O_X)$ [def-pc-derived-category], not necessarily bounded, and every integer $i$, there is an isomorphism $H^i(Rf_*E)\\cong f_*H^i(E)$, natural in $E$.",
+ "statement": "Let $f:X\\to Y$ be a quasi-compact and quasi-separated morphism of schemes [def-pc-scheme] such that $R^pf_*\\mathcal F=0$ for every quasi-coherent $\\mathcal O_X$-module $\\mathcal F$ and every $p>0$, where $R^pf_*$ and $Rf_*:D(\\mathcal O_X)\\to D(\\mathcal O_Y)$ are as in [def-pc-derived-direct-image]. Then for every object $E$ of $D_{\\mathrm{QCoh}}(\\mathcal O_X)$ [def-pc-derived-category], not necessarily bounded, and every integer $i$, there is an isomorphism $H^i(Rf_*E)\\cong f_*H^i(E)$, natural in $E$.",
  "source": {
   "document": "literature/stacks-project/perfect.tex",
   "place": "Tag 08D4 (lemma-application-nice-K-injective, perfect.tex line 158), parts (1) and (2) with N=1 applied to $F=\\Gamma(f^{-1}(V),-)$ for affine opens $V\\subseteq Y$, as in the proof of Tag 08D5 (lemma-quasi-coherence-direct-image) and the display $H^i(Rf_*K)=f_*H^i(K)$ in the proof of Tag 0AVW"
@@ -24,8 +24,48 @@
   "def-pc-derived-direct-image",
   "def-pc-derived-category"
  ],
- "proof": [],
- "proof_deps": [],
+ "proof": [
+  {
+   "text": "For every affine open V of Y, the qcqs hypothesis makes f_*F quasi-coherent for every quasi-coherent F (Tags 01XJ and 01XB); Leray gives H^p(f^{-1}(V),F)=H^p(V,f_*F), and affine vanishing gives zero for p>0. Thus the higher derived section functors on f^{-1}(V) vanish on every quasi-coherent sheaf, and sections over f^{-1}(V) commute with countable products, so hypotheses (1) and (2) of Tag 08D4 with N=1 hold. The hypotheses of [lem-sc-qcoh-acyclic-derived-sections-comparison] are exactly those of the item; apply it to obtain a natural isomorphism H^i(RGamma(f^{-1}(V),E)) ~= Gamma(f^{-1}(V),H^i(E)) for all i, compatible with restriction to smaller affine opens.",
+   "uses": [
+    "lem-sc-qcoh-acyclic-derived-sections-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/perfect.tex",
+    "place": "Tags 01XJ, 01XB, 08D4 and 08D5, as used in Tag 0AVW"
+   }
+  },
+  {
+   "text": "Let P^i(V)=H^i(R\\Gamma(f^{-1}(V),E)) on the affine basis. The section-comparison node identifies P^i with V\\mapsto \\Gamma(f^{-1}(V),H^i(E))=\\Gamma(V,f_*H^i(E)), compatibly with restriction. Its sheafification is H^i(Rf_*E) by the final clause of [lem-sc-qcoh-acyclic-derived-sections-comparison], while the comparison presheaf V\\mapsto \\Gamma(V,f_*H^i(E)) is the restriction of the sheaf f_*H^i(E). Thus the two sheaves have canonically isomorphic sheafifications.",
+   "uses": [
+    "lem-sc-qcoh-acyclic-derived-sections-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/perfect.tex",
+    "place": "Tag 0AVW, proof and display H^i(Rf_*K)=f_*H^i(K)"
+   }
+  },
+  {
+   "text": "The target f_*H^i(E) is a sheaf, and the Step 1 identifications are compatible with restriction. By the universal property of sheafification [def-weil-pbc-sheafification], the presheaf isomorphism on the affine basis from Steps 1--2 sheafifies to a unique isomorphism H^i(Rf_*E) ~= f_*H^i(E). Naturality in E follows from the naturality of the section comparison and the functoriality of derived direct image.",
+   "uses": [
+    "lem-sc-qcoh-acyclic-derived-sections-comparison",
+    "def-pc-derived-direct-image",
+    "def-weil-pbc-sheafification"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/perfect.tex",
+    "place": "Tag 0AVW, proof after the display H^i(Rf_*K)=f_*H^i(K)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sc-qcoh-acyclic-derived-sections-comparison",
+  "def-pc-derived-direct-image",
+  "def-weil-pbc-sheafification"
+ ],
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -36,7 +76,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "reviewer",
@@ -44,5 +84,26 @@
   "date": "2026-10-10"
  },
  "chapter": "sec-picard-framework",
- "unit": "sk-thm-picard-duality"
+ "unit": "sk-thm-picard-duality",
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/perfect.tex",
+  "place": "Tags 08D4, 08D5 and 0AVW"
+ },
+ "split_report": {
+  "date": "2026-10-11",
+  "item": "lem-sc-qcoh-acyclic-derived-pushforward-cohomology",
+  "worker": "stage1",
+  "summary": "Split the unbounded derived pushforward comparison into the affine-open section comparison from Tag 08D4, identification of derived-pushforward sections, and restriction-compatible gluing. No sorry-free Lean declaration states the item.",
+  "blueprint": "Realizes the ancestor lem-sc-finite-duality proof passage from the derived right adjoint to cohomology of a degree-zero sheaf, specifically the Tag 08D4 application over affine opens.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-qac1916",
+  "group": "C1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-qac1916 (reviewer sub-agent of L); spot-checked: Both earlier return points repaired: qcqs in item and new node (E7 named); new node now states H^i(RGamma(f^{-1}V,E)) ~= Gamma(f^{-1}V,H^i(E)) (well-typed; 08D4 (1),(2), N=1, a=b=i), Step 2 uses V->Gamma(V,f_*H^i(E)); no H^i(Gamma(f^{-1}V,E)) remains. Steps 2-3 sheafify on affine basis, correct. FIX more, RETURN less: (1) Step 1 had regressed to 'by the definition of higher direct image and restriction' for H^p(f^{-1}V,F)=0, which does not follow by definition; restored the Leray + 01XJ/01XB + affine vanishing justification and source place. (2) Recorded one LeanFinder query (no match) on the new node. New node not a duplicate of lem-pc-unbounded-derived-functor-cohomological-bound (vanishing only) or lem-pc-derived-sections-pushforward-comparison.; 2 file(s) fixed by the reviewer"
+ }
 }
