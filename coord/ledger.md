@@ -1799,3 +1799,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 15:32 L: merged deliver/K1/lem-sc-conductor-ideal-restriction (reviewer FIX; first push; new nodes: 0); claim not held by K1: 
 - 15:32 L: returned deliver/H1/lem-sc-fibre-dimension-after-base-change (reviewer RETURN: 1. D1: step 1 / new node lem-sc-fibre-identification-after-base-change: the node restates the item's own first clause ve)
 - 15:32 L: merged deliver/J1/lem-exc-coinduced-functions-open-stabilizer (reviewer FIX; first push; new nodes: 0)
+- 15:33 L: merged deliver/C1/lem-sc-picard-h1-restriction-compatibility (reviewer FIX+NODE(1); first push; new nodes: 1)
