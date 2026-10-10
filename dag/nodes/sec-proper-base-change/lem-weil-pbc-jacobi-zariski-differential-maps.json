@@ -2,10 +2,10 @@
  "id": "lem-weil-pbc-jacobi-zariski-differential-maps",
  "kind": "statement",
  "title": "Differential maps in the quotient conormal sequence (Stacks Tag 00RU)",
- "statement": "Let $A\\to B$ be a homomorphism of commutative rings, let $\\mathfrak a\\subseteq B$ be an ideal, and put $C=B/\\mathfrak a$. For the Kähler differentials and universal derivations of [def-weil-pbc-kahler-differentials], **Stacks Tag 00RU (lemma-differential-seq)** identifies the canonical maps $$\\mathfrak a/\\mathfrak a^2\\longrightarrow C\\otimes_B\\Omega_{B/A}\\longrightarrow\\Omega_{C/A}$$ by $$a\\bmod\\mathfrak a^2\\longmapsto1\\otimes\\mathrm da,\\qquad c\\otimes\\mathrm db\\longmapsto c\\,\\mathrm d\\bar b,$$ where $\\bar b$ is the class of $b$ in $C$; this sequence is exact at $C\\otimes_B\\Omega_{B/A}$ and surjective onto $\\Omega_{C/A}$.",
+ "statement": "Let $A\\to B$ be a homomorphism of commutative rings, let $\\mathfrak a\\subseteq B$ be an ideal, and put $C=B/\\mathfrak a$, an $A$-algebra via $A\\to B\\to C$; let $\\Omega$ and $\\mathrm d$ be the Kähler differentials and universal derivations of [def-weil-pbc-kahler-differentials]. Then there are well-defined maps $$\\mathfrak a/\\mathfrak a^2\\xrightarrow{\\ \\delta\\ }C\\otimes_B\\Omega_{B/A}\\xrightarrow{\\ w\\ }\\Omega_{C/A}$$ with $\\delta(a\\bmod\\mathfrak a^2)=1\\otimes\\mathrm da$ for $a\\in\\mathfrak a$ ($\\delta$ $B$-linear) and $w(c\\otimes\\mathrm db)=c\\,\\mathrm d\\bar b$ for $c\\in C$, $b\\in B$ ($w$ $C$-linear), where $\\bar b$ is the class of $b$ in $C$; the sequence is exact at $C\\otimes_B\\Omega_{B/A}$ (the kernel of $w$ is the image of $\\delta$) and $w$ is surjective.",
  "source": {
   "document": "literature/stacks-project/algebra.tex",
-  "place": "Algebra, Lemma Tag 00RU (lemma-differential-seq), lines 34103--34118 and proof through line 34154"
+  "place": "Algebra, Lemma Tag 00RU (lemma-differential-seq), lines 34102--34118, proof lines 34120--34154 (tag verified in stacks-project/tags/tags: 00RU,algebra-lemma-differential-seq)"
  },
  "stmt_deps": [
   "def-weil-pbc-kahler-differentials"
@@ -34,10 +34,43 @@
    "results": "Kaehler/Basic.lean:868--878 gives exactness and surjectivity for a surjective algebra map",
    "date": "2026-10-10",
    "verdict": "match for exact tail; explicit quotient formulas require identification"
+  },
+  {
+   "tool": "leansearch",
+   "query": "exact sequence I/I^2 → B ⊗ Ω[A/R] → Ω[B/R] for surjective A → B with kernel I",
+   "results": "Algebra.Extension.exact_cotangentComplex_toKaehler (RingTheory/Extension/Cotangent/Basic), KaehlerDifferential.exact_mapBaseChange_map, KaehlerDifferential.ker_map_of_surjective, KaehlerDifferential.kerToTensor (RingTheory/Kaehler/Basic), KaehlerDifferential.tensorKaehlerEquiv, Ideal.toCotangent_surjective",
+   "date": "2026-10-10",
+   "verdict": "match: the kerCotangentToTensor/mapBaseChange pair of RingTheory/Kaehler/Basic.lean (checked by source below)"
+  },
+  {
+   "tool": "loogle",
+   "query": "Function.Exact (KaehlerDifferential.kerCotangentToTensor _ _ _) _",
+   "results": "KaehlerDifferential.exact_kerCotangentToTensor_mapBaseChange (R A B) (h : Function.Surjective (algebraMap A B)) : Function.Exact (kerCotangentToTensor R A B) (mapBaseChange R A B), Mathlib.RingTheory.Kaehler.Basic",
+   "date": "2026-10-10",
+   "verdict": "match (exactness in the middle)"
+  },
+  {
+   "tool": "local_search",
+   "query": "KaehlerDifferential.mapBaseChange_surjective",
+   "results": "KaehlerDifferential.mapBaseChange_surjective, .lake/packages/mathlib/Mathlib/RingTheory/Kaehler/Basic.lean",
+   "date": "2026-10-10",
+   "verdict": "match (surjectivity of w); name exists"
+  },
+  {
+   "tool": "grep",
+   "query": "sed -n 715-850 Mathlib/RingTheory/Kaehler/Basic.lean; grep -n 'def Cotangent\\|mem_toCotangent_ker' Mathlib/RingTheory/Ideal/Cotangent.lean; grep -n 'theorem mk_ker' Mathlib/RingTheory/Ideal/Quotient/Operations.lean",
+   "results": "mapBaseChange 719, mapBaseChange_tmul 723, kerToTensor 765 (x ↦ 1 ⊗ₜ D x), kerCotangentToTensor 776, kerCotangentToTensor_toCotangent 788, exact_kerCotangentToTensor_mapBaseChange 839, mapBaseChange_surjective 844; Ideal.Cotangent 42, mem_toCotangent_ker 61 (kernel = I^2); Ideal.mk_ker 133",
+   "date": "2026-10-10",
+   "verdict": "match: same maps by the same formulas, exactness and surjectivity, for every surjective algebra map, specialized to B → B/a"
   }
  ],
- "mathlib_match": null,
- "status": "unsplit",
+ "mathlib_match": {
+  "declaration": "KaehlerDifferential.exact_kerCotangentToTensor_mapBaseChange",
+  "file": "Mathlib/RingTheory/Kaehler/Basic.lean",
+  "line": 839,
+  "how": "exact, one Mathlib lemma per clause, with Mathlib's (R, A, B) := (A, B, C) and the surjection algebraMap B C = Ideal.Quotient.mk a, whose kernel is a (Ideal.mk_ker, Mathlib/RingTheory/Ideal/Quotient/Operations.lean:133), so (RingHom.ker (algebraMap B C)).Cotangent is a/a^2 (Ideal.Cotangent I := I ⧸ (I • ⊤), Mathlib/RingTheory/Ideal/Cotangent.lean:42, kernel of toCotangent = I^2 by Ideal.mem_toCotangent_ker, line 61). delta = KaehlerDifferential.kerCotangentToTensor A B C (line 776, B-linear; kerCotangentToTensor_toCotangent, line 788: class of x ↦ 1 ⊗ₜ D x); w = KaehlerDifferential.mapBaseChange A B C : C ⊗[B] Ω[B⁄A] →ₗ[C] Ω[C⁄A] (line 719; mapBaseChange_tmul, line 723: c ⊗ₜ y ↦ c • map y, and map (D b) = D (algebraMap b) by KaehlerDifferential.map_D, line 668). Exactness in the middle: exact_kerCotangentToTensor_mapBaseChange (line 839, hypothesis: Ideal.Quotient.mk_surjective); surjectivity of w: KaehlerDifferential.mapBaseChange_surjective (line 844, same hypothesis). Mathlib's Ω[B⁄A], D is the node def-weil-pbc-kahler-differentials (its own Mathlib match)."
+ },
+ "status": "mathlib",
  "created": {
   "by": "worker",
   "item": "lem-weil-pbc-jacobi-zariski-quotient-smooth",
@@ -56,5 +89,18 @@
   }
  },
  "chapter": "sec-proper-base-change",
- "unit": "sk-thm-p1"
+ "unit": "sk-thm-p1",
+ "merged_into": null,
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "lem-weil-pbc-jacobi-zariski-differential-maps",
+  "worker": "stage1",
+  "summary": "Verified tag 00RU = algebra-lemma-differential-seq and read the statement and proof (algebra.tex 34102-34154). The whole statement is in Mathlib: kerCotangentToTensor (a/a^2 → C ⊗ Ω_{B/A}, class of a ↦ 1 ⊗ da) and mapBaseChange (c ⊗ y ↦ c • map y, map (d b) = d b̄) are the node's two maps, exact_kerCotangentToTensor_mapBaseChange gives exactness at the middle and mapBaseChange_surjective the surjectivity, for any surjective algebra map, here B → B/a with kernel a (Ideal.mk_ker). Set to mathlib leaf with the match checked from source; no proof and no new nodes. Statement reworded to a plain statement (tag moved out of the text into the source field; well-definedness, linearity, exactness and surjectivity stated as clauses), mathematics unchanged."
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "result": "accepted",
+  "note": "Mathlib leaf: exact_kerCotangentToTensor_mapBaseChange (Kaehler/Basic.lean:839) with mapBaseChange_surjective (:844), kerCotangentToTensor (:776, :788), mapBaseChange (:719), map_D (:668), all verified with sed; statement reworded as a plain statement (bold tag reference removed; tag in the source field). Tag 00RU verified."
+ }
 }
