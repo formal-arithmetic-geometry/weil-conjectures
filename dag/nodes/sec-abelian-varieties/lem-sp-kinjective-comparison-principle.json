@@ -21,9 +21,51 @@
   "def-sp-kinjective-bridge",
   "def-weil-abstract-derived-category"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Let Q:K(\\mathcal A)\\to D(\\mathcal A) be the localization. For each complex N, the map Q on morphisms Hom_{K(\\mathcal A)}(N,I)\\to Hom_{D(\\mathcal A)}(QN,QI) is bijective because I is K-injective, by [lem-weil-pbc-kinjective-hom-derived]. Apply this for N=A and N=B.",
+   "uses": [
+    "lem-weil-pbc-kinjective-hom-derived"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "Mathlib/Algebra/Homology/DerivedCategory/KInjective.lean",
+    "place": "CochainComplex.IsKInjective.Qh_map_bijective, lines 41-46"
+   }
+  },
+  {
+   "text": "Since s is a quasi-isomorphism, the localization Q(s):Q(A)\\to Q(B) is an isomorphism in D(\\mathcal A), by the definition of the derived category as the localization at quasi-isomorphisms. Therefore precomposition by Q(s) is a bijection Hom_D(QB,QI)\\to Hom_D(QA,QI), with inverse given by precomposition by Q(s)^{-1}.",
+   "uses": [
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "Mathlib/Algebra/Homology/DerivedCategory/KInjective.lean",
+    "place": "DerivedCategory.isIso_Qh_map_iff and localization property"
+   }
+  },
+  {
+   "text": "The localization functor is functorial, so Q(g\\circ s)=Q(g)\\circ Q(s). The two bijections from step 1 conjugate precomposition by s with precomposition by Q(s); hence precomposition by s is bijective. This is exactly the asserted map s^*:Hom_{K(\\mathcal A)}(B,I)\\to Hom_{K(\\mathcal A)}(A,I).",
+   "uses": [
+    "lem-weil-pbc-kinjective-hom-derived",
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "Mathlib/Algebra/Homology/DerivedCategory/KInjective.lean",
+    "place": "functoriality of Q and lines 41-58"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-kinjective-hom-derived",
+  "def-weil-abstract-derived-category"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "Mathlib/Algebra/Homology/DerivedCategory/KInjective.lean",
+  "place": "CochainComplex.IsKInjective.Qh_map_bijective and localization of quasi-isomorphisms"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -81,12 +123,37 @@
   "how": "These declarations together yield the stated precomposition bijection: Qh_map_bijective identifies maps from the homotopy category with maps in the derived category for a K-injective target, while isIso_Q_map_iff_quasiIso makes Q(s) invertible; nonempty_iso_quotient_obj (KInjective.lean:37-49) records the resulting homotopy equivalence for two K-injective resolutions. The node is not an exact one-declaration Mathlib specialization."
  },
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-sp-kinjective-computes",
   "by": "worker",
   "date": "2026-10-10"
  },
  "chapter": "sec-abelian-varieties",
- "unit": "sk-prop-av-pqf-finite"
+ "unit": "sk-prop-av-pqf-finite",
+ "split_report": {
+  "date": "2026-10-11",
+  "item": "lem-sp-kinjective-comparison-principle",
+  "worker": "stage1",
+  "summary": "Split the comparison principle into the K-injective Hom localization bijections, inversion of the quasi-isomorphism in the derived localization, and the functorial conjugation argument. No new nodes were needed: the first input is the existing Mathlib leaf lem-weil-pbc-kinjective-hom-derived, and the localization definition supplies the second input.",
+  "blueprint": "Realizes the opening comparison principle in lem-sp-kinjective-computes: precomposition by a quasi-isomorphism induces a bijection on morphisms into a K-injective complex.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-kinjective-hom-derived",
+    "why": "Its Mathlib-leaf statement supplies the Hom_K-to-Hom_D bijection for a K-injective target; the abelian-varieties route has no separate node for this generic derived-category fact."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-kinjective-hom-derived",
+  "lem-weil-pbc-kinjective-hom-derived"
+ ],
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-kcp1941",
+  "group": "M1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-kcp1941 (reviewer sub-agent of L); spot-checked: Steps 1-3 against lem-weil-pbc-kinjective-hom-derived (Hom_K(N,I)->Hom_D bijective for K-injective I, any N) and def-weil-abstract-derived-category (Q inverts quasi-isos); conjugation argument correct; K-injective notion of def-sp-kinjective-bridge (Hom complex from acyclic is acyclic) equivalent to hom-derived's (maps from acyclics nullhomotopic, acyclics shift-closed); no new nodes, no class (b) restatement of prop-pur-kinjective-resolutions-exist or lem-weil-pbc-kinjective-*; tool use of the generic Mathlib leaf accepted. No repairs."
+ }
 }
