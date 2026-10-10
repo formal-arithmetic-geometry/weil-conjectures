@@ -1737,3 +1737,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 15:10 L: merged deliver/C1/lem-sc-etale-affine-qcoherent (reviewer FIX; after a return; new nodes: 1)
 - 15:11 L: retired 3 uncited new nodes of M1's lem-exc-field-discrete-modules (lem-exc-pi1-galois-identification, lem-exc-galois-descent-equalizer, lem-exc-etale-site-gset-coverings): no step cites them after the repair (reviewer R-fd4)
 - 15:11 L: merged deliver/E1/lem-sc-conductor-sections (reviewer FIX+NODE(1); first push; new nodes: 2)
+- 15:11 L: merged deliver/H1/lem-weil-pbc-sets-pushforward-stalk-strict-henselization (reviewer FIX+NODE(2); after a return; new nodes: 3)

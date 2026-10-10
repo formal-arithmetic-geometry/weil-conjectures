@@ -31,9 +31,81 @@
   "def-weil-pbc-etale-site",
   "def-weil-pbc-geometric-stalks"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Let $\\mathcal J$ be the small cofiltered representative category used in [def-weil-pbc-strict-henselization-limit], and write $X_V=V\\times_YX$ for $(V,\\bar v)\\in\\mathcal J$. Since $V$ is affine and $f$ is quasi-compact and quasi-separated, [lem-weil-pbc-qcqs-morphism-permanence] gives that $X_V$ is quasi-compact and quasi-separated. The category $\\mathcal J$ need not be a preorder, so apply [lem-weil-pbc-filtered-category-directed-cofinal] to the filtered category $\\mathcal J^{\\mathrm{op}}$: we obtain a nonempty directed set $A$, objects $(V_a,\\bar v_a)$ of $\\mathcal J$ and morphisms $V_b\\to V_a$ of $\\mathcal J$ for $a\\le b$, compatible with composition, such that by its clause (2) the cone $(Y^{\\mathrm{sh}},(c_{V_a})_a)$ obtained from the limit cone of [def-weil-pbc-strict-henselization-limit] is a limit of the inverse system $(V_a)_{a\\in A}$, and by its clause (1) every colimit of a functor $\\mathcal J^{\\mathrm{op}}\\to\\mathbf{Set}$ is the colimit of its restriction to $A$; put $X_a=X_{V_a}$. Each transition $X_b\\to X_a$ is affine by base change of the affine map $V_b\\to V_a$. The limit description [lem-weil-pbc-limit-affine-transition] and the affine Spec colimit-limit identification [lem-weil-pbc-spec-small-colimit-limit], together with the universal property of fibre products, identify $X^{\\mathrm{sh}}=Y^{\\mathrm{sh}}\\times_YX$ with $\\varprojlim_{a\\in A}X_a$ and identify its projection to $X_a$ with $(c_{V_a}\\circ f^{\\mathrm{sh}},p):X^{\\mathrm{sh}}\\to V_a\\times_YX$.",
+   "uses": [
+    "def-weil-pbc-strict-henselization-limit",
+    "def-pc-fibre-product",
+    "lem-weil-pbc-qcqs-morphism-permanence",
+    "lem-weil-pbc-limit-affine-transition",
+    "lem-weil-pbc-spec-small-colimit-limit",
+    "lem-weil-pbc-filtered-category-directed-cofinal"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Theorem Tag 03Q9 proof, passage Spec(O^sh)=lim V and X x_Y Spec(O^sh)=lim (X x_Y V)"
+   }
+  },
+  {
+   "text": "Apply the new continuity node [lem-weil-pbc-sets-etale-section-continuity] to the directed system $X_a=X_{V_a}$, the limit $X^{\\mathrm{sh}}$, the sheaf $G=\\operatorname{pr}_{V_0}^{-1}H$ on $(X_{V_0})_{\\Et}$, and $W_0=X_{V_0}$ with its identity etale morphism. The hypotheses hold because the $X_a$ are qcqs with affine transitions by step 1; the base changes $W_a$ are $X_{V_a}$, and the transition maps are precisely the unit, the composition isomorphism $c$ of [lem-weil-pbc-sets-etale-inverse-image-composition-units], and restriction along the iterated-fibre-product isomorphism. The node gives $\\varinjlim_a(f_{a0}^{-1}G)(X_{V_a})\\xrightarrow{\\sim}(f_0^{-1}G)(X^{\\mathrm{sh}})$. Since $\\operatorname{pr}_{V_0}\\circ f_{a0}=\\operatorname{pr}_{V_a}$ and $\\operatorname{pr}_{V_0}\\circ f_0=p$ (step 1), the isomorphisms $c$ of [lem-weil-pbc-sets-etale-inverse-image-composition-units] identify $f_{a0}^{-1}G$ with $\\operatorname{pr}_{V_a}^{-1}H$ and $f_0^{-1}G$ with $p^{-1}H$, so the node gives $\\varinjlim_a(\\operatorname{pr}_{V_a}^{-1}H)(X_{V_a})\\xrightarrow{\\sim}(p^{-1}H)(X^{\\mathrm{sh}})$. The projection $\\operatorname{pr}_{V_a}:X_{V_a}\\to X$ is etale (base change of the etale $V_a\\to Y$), so [lem-weil-pbc-sets-etale-inverse-image-restriction] gives $\\rho:(\\operatorname{pr}_{V_a}^{-1}H)(X_{V_a})\\xrightarrow{\\sim}H(X_{V_a})$, under which the unit $\\operatorname{pr}_{V_a}^*$ is restriction (its clause (2)); with clauses (0)-(2) of [lem-weil-pbc-sets-etale-inverse-image-composition-units] this turns the transition map $\\rho_{ba}$ into the restriction map $H(X_{V_a})\\to H(X_{V_b})$ of $f_*H$ along $X_{V_b}\\to X_{V_a}$. By clause (1) of [lem-weil-pbc-filtered-category-directed-cofinal] (step 1), $\\varinjlim_{a\\in A}H(X_{V_a})$ is the colimit of $H(X_V)$ over $\\mathcal J^{\\mathrm{op}}$, the affine-neighbourhood colimit.",
+   "uses": [
+    "lem-weil-pbc-sets-etale-section-continuity",
+    "lem-weil-pbc-filtered-category-directed-cofinal",
+    "lem-weil-pbc-sets-etale-inverse-image-composition-units",
+    "lem-weil-pbc-sets-etale-inverse-image-restriction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Theorem Tag 03Q9, degree zero, using Theorem Tag 09YQ (theorem-colimit) and Lemma Tag 09YU (lemma-category-is-colimit)"
+   }
+  },
+  {
+   "text": "Under the identification in steps 1-2, the map from the $V_a$-component of the section colimit is exactly restriction along $\\sigma_{V_a}$ of the unit image $p^*s$: the component of $\\sigma_{V_a}$ over $V_a\\times_YX$ is $c_{V_a}\\circ f^{\\mathrm{sh}}$ and its component over $X^{\\mathrm{sh}}$ is the identity. Clauses (0)-(1) of [lem-weil-pbc-sets-etale-inverse-image-composition-units] identify this restriction with $(p^{-1}H)(\\sigma_{V_a})(p^*s)$, and their composition and unit identities show compatibility for maps of pointed neighbourhoods. Cofinality transports the formula from the $V_a$ to every $V\\in\\mathcal J$. Thus the bijection of step 2 induces the unique map $\\Theta$ with the displayed component formula.",
+   "uses": [
+    "lem-weil-pbc-sets-etale-inverse-image-composition-units",
+    "def-pc-fibre-product"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Theorem Tag 03Q9 proof, identification of the degree-zero colimit map with restriction of the unit section"
+   }
+  },
+  {
+   "text": "By the definition of the geometric stalk as the filtered colimit over all pointed etale neighbourhoods, and the initiality of the affine subcategory [lemma-weil-pbc-affine-neighbourhood-cofinal], the stalk $(f_*H)_{\\bar y}$ is canonically the colimit of the sets $H(V\\times_YX)$ over $V\\in\\mathcal J$. By clause (1) of [lem-weil-pbc-filtered-category-directed-cofinal], the directed family $A$ from step 1 computes the same colimit. The map of step 3 consequently has domain $(f_*H)_{\\bar y}$, proves clause (1) (every germ has an affine representative), and is bijective by step 2, proving clause (2).",
+   "uses": [
+    "def-weil-pbc-geometric-stalks",
+    "lemma-weil-pbc-affine-neighbourhood-cofinal",
+    "lem-weil-pbc-filtered-category-directed-cofinal"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Theorem Tag 03Q9 proof: affine pointed etale neighbourhoods are initial, followed by the degree-zero colimit identification"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-strict-henselization-limit",
+  "def-pc-fibre-product",
+  "def-weil-pbc-geometric-stalks",
+  "lemma-weil-pbc-affine-neighbourhood-cofinal",
+  "lem-weil-pbc-sets-etale-inverse-image-composition-units",
+  "lem-weil-pbc-limit-affine-transition",
+  "lem-weil-pbc-spec-small-colimit-limit",
+  "lem-weil-pbc-qcqs-morphism-permanence",
+  "lem-weil-pbc-filtered-category-directed-cofinal",
+  "lem-weil-pbc-sets-etale-section-continuity",
+  "lem-weil-pbc-sets-etale-inverse-image-restriction"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Theorem Tag 03Q9, case n = 0 for sheaves of sets, with Theorem Tag 09YQ and Lemma Tag 09YU"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -58,7 +130,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "worker",
@@ -74,5 +146,34 @@
   }
  },
  "chapter": "sec-proper-base-change",
- "unit": "sk-thm-iff"
+ "unit": "sk-thm-iff",
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "lem-weil-pbc-sets-pushforward-stalk-strict-henselization",
+  "worker": "stage1",
+  "summary": "Repaired the split: deleted the duplicate sections-colimit node and wrote the Tag 03Q9 degree-zero proof as four steps: (a) the qcqs affine-transition neighbourhood system X_V reindexed by a directed set (Categories 0032) and its fibre-product limit X^sh; (b) the sets-valued section comparison by the new node lem-weil-pbc-sets-etale-section-continuity (Theorem 09YQ in degree 0 for sheaves of sets), with inverse image along the etale projection identified with restriction; (c) identification of the component map with sigma_V restriction of the unit; (d) passage from the affine colimit to the geometric stalk by affine-neighbourhood cofinality. Reviewer R-ps3 (FIX more, RETURN less) added the statement nodes lem-weil-pbc-filtered-category-directed-cofinal (0032 with cofinality for colimits and limits at once) and lem-weil-pbc-sets-etale-inverse-image-restriction (sets version of Tag 03S2) and cited them in place of lem-weil-pbc-cofiltered-limit-directed-reindex.",
+  "blueprint": "Realizes the blueprint proof place invoking Theorem 03Q9 in degree zero: affine pointed neighbourhood replacement, the limit X x_Y Spec(O^sh)=lim(X x_Y V), the Tag 09YQ/09YU section colimit for sheaves of sets, and the displayed unit-restriction formula.",
+  "tool_uses": [
+   {
+    "node": "lemma-weil-pbc-affine-neighbourhood-cofinal",
+    "why": "The stalk definition uses all pointed etale neighbourhoods, while the item's strict-henselization construction and colimit use the affine initial subcategory; this cofinality fact is supplied by the existing curve-estimates node."
+   },
+   {
+    "node": "lem-weil-pbc-limit-affine-transition",
+    "why": "The item's degree-zero route needs the general affine-transition inverse-limit theorem to identify the strict-henselization fibre-product system; the local unit does not restate this limit construction."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lemma-weil-pbc-affine-neighbourhood-cofinal",
+  "lem-weil-pbc-limit-affine-transition"
+ ],
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-ps3",
+  "group": "H1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-ps3 (reviewer sub-agent of L); spot-checked: Re-push after the 14:32 and 14:45 returns (commits 7860b958b, 69c687c63). 14:45 point 1 repaired: the new node lem-weil-pbc-sets-etale-section-continuity is the sets version of Stacks 09YQ in degree 0 as prescribed (directed I, qcqs X_i, affine transitions, G a sheaf of sets on (X_0)_Et, W_0 etale of finite presentation, transitions unit + c + restriction, bijection colim (f_{i0}^{-1}G)(W_i) -> (f_0^{-1}G)(W)); true (Stacks 09YQ/09YU), and step 2 applies it with W_0=X_{V_0}, G=pr_{V_0}^{-1}H, hypotheses checked (X_V qcqs by qcqs-morphism-permanence, affine transitions by base change). Point 2 partly repaired: steps 1, 2, 4 now reindex the cofiltered category J by a directed set, but cite lem-weil-pbc-cofiltered-limit-directed-reindex, which states only the limit property for ONE diagram, while steps 2 and 4 use cofinality of the same A for the colimit of H(X_V) (C4); and the identification (pr_{V_a}^{-1}H)(X_{V_a}) = H(X_{V_a}) asked in point 1 is cited to the units node, which does not state it, and lem-weil-pbc-etale-inverse-image-restriction is for abelian sheaves only (C4/C1). FIX more, RETURN less: (i) added statement node lem-weil-pbc-filtered-category-directed-cofinal (Categories Lemma 0032, clauses (1) colimits and (2) limits, one A for all diagrams; Mathlib candidate IsFiltered.exists_directed Presentable/Directed.lean:544 verified, not recorded as a leaf) and cited it in steps 1, 2, 4 and proof_deps in place of lem-weil-pbc-cofiltered-limit-directed-reindex; (ii) added statement node lem-weil-pbc-sets-etale-inverse-image-restriction (sets version of Tag 03S2/00XZ: j^{-1}G = G|_U for etale j, unit = restriction; Mathlib grep no match) and cited it in step 2 and proof_deps, step 2 now writing out the c-identifications f_{a0}^{-1}G = pr_{V_a}^{-1}H, f_0^{-1}G = p^{-1}H and the transition maps as restrictions of f_*H. Other fixes: lem-weil-pbc-sets-etale-section-continuity.json: stmt_deps: trimmed to the three nodes its statement cites; item: split_report.summary rewritten (it still described the old affine-site route); split_report.tool_uses: dropped the reindex node (no longer cited) and the on-unit new node (not an off-unit tool). Tool uses accepted: lemma-weil-pbc-affine-neighbourhood-cofinal, lem-weil-pbc-limit-affine-transition (generic black boxes). Item statement unchanged (03Q9 n=0 for sets); step 1 limit X^sh = lim X_{V_a} from spec-small-colimit-limit + 0032(2) + fibre products commuting with limits (elementary); step 3 component formula from clauses (0)-(1) of the units node; step 4 from the affine-neighbourhood cofinality. Small case: X = Y, f = id: Theta is the classical stalk H_ybar = (p^{-1}H)(Y^sh), consistent. Start Sat Oct 10 03:08:16 PM UTC 2026, end Sat Oct 10 03:11:36 PM UTC 2026; 4 file(s) fixed by the reviewer; 2 statement node(s) added by the reviewer (FIX more, RETURN less)"
+ }
 }
