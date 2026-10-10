@@ -24,9 +24,77 @@
   "def-pc-derived-direct-image",
   "def-weil-pbc-sheafification"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Fix an affine open V of Y and put U=f^{-1}(V), with v=\\Gamma(U,-):\\mathrm{Mod}(\\mathcal O_X)\\to\\mathrm{Ab} and f_V:U\\to V the induced morphism, again quasi-compact and quasi-separated. Let F be a quasi-coherent O_X-module; then F|_U is quasi-coherent. By [lem-sc-ringed-space-restrict-injective-resolution] an injective resolution F\\to I^\\bullet restricts to an injective resolution of F|_U, so R^p v(F)=H^p(U,F|_U), and by [lem-pc-restrict-derived-direct-image-open] applied to F[0] we have (R^pf_*F)|_V\\cong R^p(f_V)_*(F|_U); the hypothesis therefore gives R^p(f_V)_*(F|_U)=0 for p>0. The higher direct images R^q(f_V)_*(F|_U) are quasi-coherent by [lem-pc-finite-support-hi], and V is affine, so H^p(V,R^q(f_V)_*(F|_U))=0 for p>0 by [lem-pc-affine-vanishing]. The Leray degeneration statement [lem-pc-leray-degenerate-sections] (2) for f_V then identifies H^p(U,F|_U) with \\Gamma(V,R^p(f_V)_*(F|_U))=0 for p>0, so R^p v(F)=0 for p>0 and every quasi-coherent F. Finally v commutes with countable products by the product universal property (a map into a product is exactly a family of maps into its factors).",
+   "uses": [
+    "lem-sc-ringed-space-restrict-injective-resolution",
+    "lem-pc-restrict-derived-direct-image-open",
+    "lem-pc-finite-support-hi",
+    "lem-pc-affine-vanishing",
+    "lem-pc-leray-degenerate-sections",
+    "def-pc-derived-direct-image"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/perfect.tex",
+    "place": "Tag 08D4 hypotheses and Tag 08D5 proof over affine opens; Tags 01E1 and 08FE for restriction to the open U and V; Tags 01XJ and 01XB for quasi-coherence and affine vanishing"
+   }
+  },
+  {
+   "text": "For any integer i, shift E so that it suffices to prove the assertion in degree 0. Apply the cohomological-bound statement [lem-pc-unbounded-derived-functor-cohomological-bound] to v with N=1 and the truncation \\tau_{\\le -1}E: its cohomology vanishes above -1, hence H^j(Rv(\\tau_{\\le -1}E))=0 for every j\\ge0. The triangle \\tau_{\\le -1}E\\to E\\to\\tau_{\\ge0}E\\to therefore gives a natural isomorphism H^0(RvE)\\cong H^0(Rv\\tau_{\\ge0}E).",
+   "uses": [
+    "lem-pc-unbounded-derived-functor-cohomological-bound",
+    "def-pc-derived-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/perfect.tex",
+    "place": "Tag 08D4, part (3), applied to the standard truncation triangle"
+   }
+  },
+  {
+   "text": "The bounded-below complex \\tau_{\\ge0}E has quasi-coherent cohomology, and every positive derived functor R^p v on those cohomology sheaves vanishes by Step 1. Apply the truncation hypercohomology spectral sequence [thm-sp-truncation-e2] to v and \\tau_{\\ge0}E. Its E_2-page is E_2^{p,q}=R^p v(H^q(E)); all entries with p>0 are zero, so the finite filtration in its abutment has only the p=0 graded piece. Consequently H^0(Rv\\tau_{\\ge0}E)\\cong v(H^0(E)) naturally in E. Undoing the shift gives H^i(R\\Gamma(U,E))\\cong\\Gamma(U,H^i(E)). The construction is natural in E and restriction-compatible because all truncation, spectral-sequence, and section maps are functorial.",
+   "uses": [
+    "thm-sp-truncation-e2",
+    "def-pc-derived-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/perfect.tex",
+    "place": "Tag 08D4, parts (1) and (2), and Tag 08D5 derived-category truncation argument"
+   }
+  },
+  {
+   "text": "Represent E by a K-injective complex I^\\bullet of O_X-modules. By the definition of the derived functors [def-pc-derived-direct-image] (computed on K-injective representatives), Rf_*E=f_*I^\\bullet and, for every open V of Y, R\\Gamma(f^{-1}(V),E)=\\Gamma(f^{-1}(V),I^\\bullet)=(f_*I^\\bullet)(V), compatibly with restriction maps. The cohomology sheaf H^i(f_*I^\\bullet)=H^i(Rf_*E) is the quotient sheaf of the kernel sheaf (computed sectionwise) by the image of f_*I^{i-1}; a quotient of sheaves of modules is the sheafification of the presheaf quotient, so H^i(Rf_*E) is the sheafification [def-weil-pbc-sheafification] of V\\mapsto H^i((f_*I^\\bullet)(V))=H^i(R\\Gamma(f^{-1}(V),E)) (Stacks Tag 0D5X); since affine opens form a basis, the same holds for this presheaf on affine opens V. Naturality in E follows from the functoriality of K-injective representatives. (Combined with Step 3, the presheaf is also identified on affines with V\\mapsto\\Gamma(V,f_*H^i(E)).)",
+   "uses": [
+    "def-pc-derived-direct-image",
+    "def-weil-pbc-sheafification"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/perfect.tex",
+    "place": "Cohomology, Lemma 0D5X (cohomology-lemma-unbounded-describe-higher-direct-images); Tag 0AVW use of it"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-finite-support-hi",
+  "lem-pc-affine-vanishing",
+  "lem-pc-leray-degenerate-sections",
+  "def-pc-derived-direct-image",
+  "lem-pc-unbounded-derived-functor-cohomological-bound",
+  "def-pc-derived-category",
+  "thm-sp-truncation-e2",
+  "def-weil-pbc-sheafification",
+  "lem-sc-ringed-space-restrict-injective-resolution",
+  "lem-pc-restrict-derived-direct-image-open"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/perfect.tex",
+  "place": "Tags 08D4, 08D5 and 0AVW"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -65,12 +133,53 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-sc-qcoh-acyclic-derived-pushforward-cohomology",
   "by": "worker",
   "date": "2026-10-10"
  },
  "chapter": "sec-picard-framework",
- "unit": "sk-thm-picard-duality"
+ "unit": "sk-thm-picard-duality",
+ "split_report": {
+  "date": "2026-10-11",
+  "item": "lem-sc-qcoh-acyclic-derived-sections-comparison",
+  "worker": "stage1",
+  "summary": "Split Tag 08D4 into affine-open acyclicity, truncation of the unbounded complex, collapse of the bounded-below hypercohomology spectral sequence, and restriction-compatible sheafification. No new node was needed because all generic ingredients already exist in the DAG.",
+  "blueprint": "Realizes the ancestor lem-sc-finite-duality proof passage from the derived right adjoint to a degree-zero sheaf by applying Tag 08D4 to sections over affine opens.",
+  "tool_uses": [
+   {
+    "node": "thm-sp-truncation-e2",
+    "why": "The generic truncation hypercohomology spectral sequence supplies the E2 page and finite filtration used to collapse the bounded-below comparison."
+   },
+   {
+    "node": "lem-pc-unbounded-derived-functor-cohomological-bound",
+    "why": "The generic Tag 08D4 upper-bound clause removes the negative unbounded tail after truncation."
+   },
+   {
+    "node": "lem-pc-leray-degenerate-sections",
+    "why": "The Leray edge comparison identifies cohomology on the inverse image of an affine with sections of higher direct images."
+   },
+   {
+    "node": "lem-pc-finite-support-hi",
+    "why": "The generic qcqs theorem supplies quasi-coherence of all higher direct images, needed to apply affine vanishing."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sc-ringed-space-restrict-injective-resolution",
+  "lem-pc-restrict-derived-direct-image-open",
+  "thm-sp-truncation-e2",
+  "lem-pc-unbounded-derived-functor-cohomological-bound",
+  "lem-pc-leray-degenerate-sections",
+  "lem-pc-finite-support-hi"
+ ],
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-qad2053",
+  "group": "E1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-qad2053 (reviewer sub-agent of L); spot-checked: Read packet whole; checked Steps 2-3 (08D4 bound with N=1 on tau_{<=-1}E, collapse of thm-sp-truncation-e2 at p=0) and hypotheses; no new nodes; sibling lem-sc-qcoh-acyclic-derived-pushforward-cohomology cites this item, so citing it here would be a cycle (no class b restatement). FIX more, RETURN less: (1) C4/C1 Step 4: def-pc-derived-direct-image does not state that H^i(Rf_*E) is the sheafification of V->H^i(RGamma(f^{-1}V,E)) for unbounded E (lem-weil-pbc-higher-direct-image-presheaf is modules only); rewrote Step 4 with the K-injective computation of Tag 0D5X. (2) C1 Step 1: restriction of R^p f_* to V and R^p v(F)=H^p(U,F|_U) were uncited and the step quantified over qcoh F on U; now cites generic tools lem-sc-ringed-space-restrict-injective-resolution (Tag 01E1) and lem-pc-restrict-derived-direct-image-open (Tag 08FE), F qcoh on X. Second reading by E1 missed both.; 1 file(s) fixed by the reviewer"
+ }
 }
