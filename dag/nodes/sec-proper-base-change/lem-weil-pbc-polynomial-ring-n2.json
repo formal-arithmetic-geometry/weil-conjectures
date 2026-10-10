@@ -1,0 +1,73 @@
+{
+ "id": "lem-weil-pbc-polynomial-ring-n2",
+ "kind": "statement",
+ "title": "The polynomial ring over a Noetherian N-2 domain is N-2",
+ "statement": "Let $R$ be a Noetherian [def-weil-pbc-noetherian-ring] integral domain which is N-2 [def-weil-pbc-japanese-domain], and let $R[x]$ be the polynomial ring in one variable $x$ over $R$ [def-weil-polynomial-ring] (an integral domain). Then $R[x]$ is N-2: for every finite field extension $L$ of the fraction field $K(x)$ of $R[x]$, the integral closure of $R[x]$ in $L$ [def-weil-pbc-integral-closure] is a finitely generated $R[x]$-module [def-weil-finitely-generated-module].",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Algebra, Lemma Tag 032O (lemma-polynomial-ring-N-2, line 45411), second assertion"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-noetherian-ring",
+  "def-weil-pbc-japanese-domain",
+  "def-weil-polynomial-ring",
+  "def-weil-pbc-integral-closure",
+  "def-weil-finitely-generated-module"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "polynomial ring over Noetherian domain with finite integral closure in finite extensions (N-2) is N-2",
+   "results": "instIsIntegralPolynomial (IntegralClosure/IsIntegralClosure/Basic), integralClosure.isIntegrallyClosedOfFiniteExtension, instIsIntegrallyClosedPolynomialOfIsDomain (RingTheory/Polynomial/IsIntegral: R normal domain => R[X] normal), Polynomial.isNoetherianRing; none gives finiteness of integral closure of R[X] in a finite extension",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "if R is a Noetherian domain whose integral closure in every finite extension of its fraction field is finite, then the same holds for the polynomial ring R[X]",
+   "results": "FunctionField.ringOfIntegers ... IsNoetherian (Polynomial Fq) (separable function fields only), integralClosure.isNoetherianRing, IsIntegralClosure.isNoetherianRing, Polynomial.isNoetherianRing, IsIntegralClosure.isNoetherian; none states it for an N-2 base or an inseparable extension",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "Module.Finite (Polynomial ?R) (integralClosure (Polynomial ?R) ?L)",
+   "results": "none",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rn 'Module.Finite.*integralClosure\\|IsNoetherian.*integralClosure' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib; grep -rln integralClosure ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/RingTheory/Polynomial/",
+   "results": "DedekindDomain/IntegralClosure.lean:207 (integralClosure.isNoetherianRing, separable case); Polynomial/IsIntegral.lean, GaussLemma.lean, Eisenstein/IsIntegral.lean (integrality and normality of polynomial rings, no finiteness of integral closure)",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-nagata-universally-japanese",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "reviewed": "Reviewed by L 2026-10-10 (statement): Algebra 032O, second assertion (R Noetherian N-2 domain ⇒ R[x] N-2). Unsplit."
+}
