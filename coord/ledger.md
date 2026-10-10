@@ -1904,3 +1904,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 16:08 L: merged deliver/M1/lem-sc-closed-pushforward-abelian-stalks (reviewer PASS; first push; new nodes: 0)
 - 16:09 L: returned deliver/J1/lem-pc-grothendieck-ss-double-complex-model (reviewer RETURN: 1. D2/C3: step 2 (and hence the first sentence of the item): 'Thus the two spectral sequences agree from E_2 onward, wit)
 - 16:09 L: returned deliver/G1/lem-sc-find-globally-generated (reviewer RETURN: 1. E2: new node lem-sc-separated-affine-function-field-surjective: the statement is false as written, it omits the hypot)
+- 16:09 L: returned deliver/J1/lem-sc-finite-flat-duality-evaluation (reviewer RETURN: 1. B (return point 3 of 15:45 NOT repaired): the three new nodes lem-sc-finite-duality-derived-hom, lem-sc-affine-derive)
