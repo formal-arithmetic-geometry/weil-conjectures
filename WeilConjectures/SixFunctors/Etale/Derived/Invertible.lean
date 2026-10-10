@@ -6,6 +6,7 @@ Authors: Claude
 module
 
 public import WeilConjectures.CategoryTheory.Abelian.Flat.Basic
+public import WeilConjectures.CategoryTheory.DerivedCategory.Monoidal.Unit
 public import WeilConjectures.Mathlib.CategoryTheory.Monoidal.Rigid.Basic
 public import WeilConjectures.SixFunctors.Etale.Derived.TorAmplitude
 public import WeilConjectures.SixFunctors.Etale.Derived.UpperStarMonoidal
@@ -83,10 +84,7 @@ derived monoidal structure is `Qh` of the unit complex `𝟙[0]`. -/
 noncomputable def singleFunctorObjUnitIso :
     (DerivedCategory.singleFunctor (Sheaf X.smallEtaleTopology A) 0).obj (𝟙_ _) ≅
       𝟙_ (DerivedCategory (Sheaf X.smallEtaleTopology A)) :=
-  have : IsIso (Functor.LaxMonoidal.ε
-      (DerivedCategory.Qh (C := Sheaf X.smallEtaleTopology A))) :=
-    inferInstanceAs (IsIso (Functor.LaxMonoidal.ε (toDerivedMonoidal DerivedCategory.Qh
-      (HomotopyCategory.quasiIso (Sheaf X.smallEtaleTopology A) (.up ℤ)))))
+  have := DerivedCategory.isIso_ε_Qh (Sheaf X.smallEtaleTopology A)
   singleFunctorObjIsoQh (𝟙_ _) ≪≫
     DerivedCategory.Qh.mapIso
       ((Functor.Monoidal.εIso (HomotopyCategory.quotient (Sheaf X.smallEtaleTopology A)
