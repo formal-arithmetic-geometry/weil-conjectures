@@ -2,7 +2,7 @@
 
 856 items; claim with `tools/claim.py next <group> [--stage N]`.
 
-## Stage 1: nodes to split (410)
+## Stage 1: nodes to split (409)
 
 | node | distance to a target | Lean state on the done branch |
 |---|---|---|
@@ -47,7 +47,6 @@
 | `lem-weil-pbc-fpqc-descend-universally-closed` | 1016 | none |
 | `lem-weil-pbc-integral-injective-dimension-equal` | 1016 | none |
 | `lem-weil-pbc-module-injects-localizations-associated-primes` | 1016 | none |
-| `lem-weil-pbc-power-series-adic-evaluation` | 1016 | none |
 | `lem-weil-pbc-projective-dimension-ext-characterization` | 1016 | none |
 | `lem-weil-pbc-regular-quotient-ideal-intersection` | 1016 | none |
 | `lem-weil-pbc-sheaf-hom-finite-presentation-quasi-coherent` | 1017 | none |
@@ -417,7 +416,7 @@
 | `lem-exc-etale-jacobian-presentation` | - | none |
 | `def-exc-jacobian-presentation` | - | none |
 
-## Stage 2: nodes to state (446)
+## Stage 2: nodes to state (447)
 
 | node | distance to Mathlib | kind |
 |---|---|---|
@@ -710,6 +709,7 @@
 | `lem-weil-pbc-popescu-lift-once` | 1 | state |
 | `lem-weil-pbc-popescu-lift-twice` | 1 | state |
 | `lem-weil-pbc-popescu-product` | 1 | state |
+| `lem-weil-pbc-power-series-adic-evaluation` | 1 | state |
 | `lem-weil-pbc-power-series-complete-over-complete-base` | 1 | state |
 | `lem-weil-pbc-power-series-field-cohen-regular-complete` | 1 | state |
 | `lem-weil-pbc-power-series-normal-domain` | 1 | state |
@@ -868,7 +868,7 @@
 | `lem-weil-pbc-p1-field-dimension-one` | 4 | state |
 | `lem-weil-pbc-projective-space-zero-isomorphism` | 4 | state |
 
-Not open yet: 426 nodes that wait for stage 1, 830 nodes that wait for a statement dependency.
+Not open yet: 425 nodes that wait for stage 1, 830 nodes that wait for a statement dependency.
 
 ## Stage 3: modules to prove (0)
 
