@@ -1,0 +1,92 @@
+{
+ "id": "lem-weil-pbc-module-finite-type-surjective-on-stalk",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-finite-etale-lifting",
+   "place": "step 7 of its split (source: Lemma 0GS2, proof: the essential-surjectivity paragraphs), through the citation of Cohomology of Schemes Lemma 01Y3 in lem-weil-pbc-coherent-generic-point-ideal-inclusion; this node is the input 'Modules, Lemma 01B8' of the proof of 01Y3, used for its parts (1), (2) and (3)",
+   "via": [
+    "lem-weil-pbc-coherent-local-isomorphism",
+    "lem-weil-pbc-coherent-generic-point-ideal-inclusion",
+    "lem-weil-pbc-coherent-property-devissage-integral-subschemes",
+    "lem-weil-pbc-finite-surjective-affine-target-noetherian",
+    "lem-weil-pbc-finite-surjective-affine-target",
+    "lem-weil-pbc-surjective-universally-closed-affine-target",
+    "lem-weil-pbc-thickening-affine-scheme",
+    "lem-weil-pbc-thickening-integral",
+    "lem-weil-pbc-thickening-finite-cartesian",
+    "lem-weil-pbc-finite-etale-lifting-complete",
+    "lem-weil-pbc-finite-etale-lifting-essential-surjectivity"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "A map onto a finite type module that is surjective on one stalk is surjective near that point",
+ "statement": "Let $(X,\\mathcal O_X)$ be a ringed space, $\\varphi:\\mathcal G\\to\\mathcal F$ a morphism of sheaves of $\\mathcal O_X$-modules [def-weil-sheaf-of-modules-category] and $x\\in X$. Assume $\\mathcal F$ is of finite type [def-weil-pbc-module-finite-type-presentation] (1) and that the induced map on stalks $\\varphi_x:\\mathcal G_x\\to\\mathcal F_x$ [def-weil-pbc-module-stalk] is surjective. Then there is an open neighbourhood $U$ of $x$ such that $\\varphi|_U:\\mathcal G|_U\\to\\mathcal F|_U$ is surjective as a map of sheaves: for every open $W\\subseteq U$ and every $t\\in\\mathcal F(W)$ there are an open covering $W=\\bigcup_iW_i$ and sections $g_i\\in\\mathcal G(W_i)$ with $\\varphi_{W_i}(g_i)=t|_{W_i}$ for all $i$.",
+ "source": {
+  "document": "literature/stacks-project/modules.tex",
+  "place": "Modules, Lemma 01B8 (label lemma-finite-type-surjective-on-stalk, line 876) with its proof (choose generators s_1,...,s_n of F over U; lift each germ (s_i)_x along phi_x and shrink U so that s_i = phi(t_i)). Tag verified in stacks-project/tags/tags: 01B8,modules-lemma-finite-type-surjective-on-stalk"
+ },
+ "stmt_deps": [
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-pbc-module-finite-type-presentation",
+  "def-weil-pbc-module-stalk"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "map of sheaves of modules surjective on stalk at x, target of finite type, then surjective on an open neighbourhood of x",
+   "results": "TopCat.Presheaf.locally_surjective_iff_surjective_on_stalks (Mathlib.Topology.Sheaves.LocallySurjective), TopCat.Presheaf.app_surjective_of_stalkFunctor_map_bijective (Mathlib.Topology.Sheaves.Stalks), AlgebraicGeometry.SurjectiveOnStalks (Morphisms.SurjectiveOnStalks), ModuleCat.Tilde.toOpen_germ_apply, TopCat.Presheaf.stalkToFiber_surjective",
+   "date": "2026-10-10",
+   "verdict": "no match: the stalk criteria need surjectivity at every point; nothing passes from one stalk to a neighbourhood for finite type modules"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "finitely generated sheaf of modules: if a morphism is surjective on the stalk at a point then it is surjective on a neighborhood of that point",
+   "results": "TopCat.Presheaf.locally_surjective_iff_surjective_on_stalks, PresheafOfModules.instIsLocallySurjectiveToSheafify, TopCat.Presheaf.app_surjective_of_injective_of_locally_surjective, PresheafOfModules.IsLocallySurjective, SheafOfModules.IsFiniteType.exists_localGeneratorsData (Mathlib.Algebra.Category.ModuleCat.Sheaf.Generators)",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "SheafOfModules.IsFiniteType",
+   "results": "SheafOfModules.IsFiniteType, IsFiniteType.exists_localGeneratorsData, IsFiniteType.mk (Mathlib.Algebra.Category.ModuleCat.Sheaf.Generators), SheafOfModules.instIsFiniteTypeOfIsFinitePresentation (Sheaf.Quasicoherent)",
+   "date": "2026-10-10",
+   "verdict": "no match: no lemma relating IsFiniteType to stalks"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rn 'IsFiniteType' Mathlib | grep -i 'stalk\\|surject\\|Epi'; grep -rln IsFiniteType Mathlib/Algebra/Category/ModuleCat/Sheaf Mathlib/AlgebraicGeometry (in ~/weil-conjectures-slopmaster2/.lake/packages/mathlib)",
+   "results": "only Generators.lean:100 (GeneratingSections.ofEpi is of finite type) and Quasicoherent.lean:142-143; no stalk statement",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-coherent-local-isomorphism",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "reviewed": "2026-10-10 L: statement checked against 01B8"
+}
