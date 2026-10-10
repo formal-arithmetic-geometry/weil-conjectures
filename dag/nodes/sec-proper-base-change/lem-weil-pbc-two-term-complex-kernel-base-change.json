@@ -10,9 +10,72 @@
  "stmt_deps": [
   "def-weil-pbc-tor-modules"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Put $I=\\operatorname{im}\\delta\\subseteq N_0$, let $j:I\\to N_0$ be the inclusion, $\\delta':N_1\\to I$ the corestriction of $\\delta$ (so $\\delta=j\\circ\\delta'$, $\\delta'$ surjective), $\\iota:H_1=\\ker\\delta\\to N_1$ the inclusion and $p:N_0\\to H_0=N_0/I$ the projection. Then $0\\to H_1\\xrightarrow{\\iota}N_1\\xrightarrow{\\delta'}I\\to0$ and $0\\to I\\xrightarrow{j}N_0\\xrightarrow{p}H_0\\to0$ are short exact sequences of $B$-modules: $\\ker\\delta'=\\ker\\delta$ since $j$ is injective, and $\\operatorname{im}j=I=\\ker p$ by definition of the cokernel.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra, proof of Lemma Tag 00S2 (lemma-exact-sequence-NL), final paragraph, lines 35462--35484 (the source writes $M$ for $I$)"
+   }
+  },
+  {
+   "text": "$I\\otimes_BC\\xrightarrow{j\\otimes1}N_0\\otimes_BC$ is injective. Apply [lem-weil-pbc-tor-long-exact-first-variable] to $0\\to I\\xrightarrow{j}N_0\\xrightarrow{p}H_0\\to0$ and $N=C$: the sequence $\\operatorname{Tor}^B_1(N_0,C)\\to\\operatorname{Tor}^B_1(H_0,C)\\xrightarrow{\\delta_C}I\\otimes_BC\\xrightarrow{j\\otimes1}N_0\\otimes_BC\\xrightarrow{p\\otimes1}H_0\\otimes_BC\\to0$ is exact. Exactness at $I\\otimes_BC$ gives $\\ker(j\\otimes1)=\\operatorname{im}\\delta_C$, which is $0$ because $\\operatorname{Tor}^B_1(H_0,C)=0$ by hypothesis. (This is the exact sequence $0\\to M\\otimes_BC\\to N^0\\otimes_BC\\to H^0\\otimes_BC\\to0$ of the source.)",
+   "uses": [
+    "lem-weil-pbc-tor-long-exact-first-variable",
+    "def-weil-pbc-tor-modules"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra, proof of Lemma Tag 00S2 (lemma-exact-sequence-NL), final paragraph, lines 35462--35484, lines 35470--35475"
+   }
+  },
+  {
+   "text": "$\\operatorname{Tor}^B_1(I,C)=0$. Apply [lem-weil-pbc-tor-dimension-shift-free] with $R=B$, the short exact sequence $0\\to I\\xrightarrow{j}N_0\\xrightarrow{p}H_0\\to0$ (whose middle term $N_0$ is free by hypothesis), $N=C$ and $i=1$: $\\operatorname{Tor}^B_1(I,C)\\cong\\operatorname{Tor}^B_2(H_0,C)$, and the right side is $0$ by hypothesis.",
+   "uses": [
+    "lem-weil-pbc-tor-dimension-shift-free",
+    "def-weil-pbc-tor-modules"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra, proof of Lemma Tag 00S2 (lemma-exact-sequence-NL), final paragraph, lines 35462--35484, lines 35476--35478 ('Since $N^0$ is free, we also see that $\\text{Tor}_2^B(H^0, C) = \\text{Tor}_1^B(M, C)$')"
+   }
+  },
+  {
+   "text": "$\\iota\\otimes1:H_1\\otimes_BC\\to N_1\\otimes_BC$ is injective with image $\\ker(\\delta'\\otimes1)$. Apply [lem-weil-pbc-tor-long-exact-first-variable] to $0\\to H_1\\xrightarrow{\\iota}N_1\\xrightarrow{\\delta'}I\\to0$ (step 1) and $N=C$: the sequence $\\operatorname{Tor}^B_1(N_1,C)\\to\\operatorname{Tor}^B_1(I,C)\\xrightarrow{\\delta_C}H_1\\otimes_BC\\xrightarrow{\\iota\\otimes1}N_1\\otimes_BC\\xrightarrow{\\delta'\\otimes1}I\\otimes_BC\\to0$ is exact. Since $\\operatorname{Tor}^B_1(I,C)=0$ (step 3), exactness at $H_1\\otimes_BC$ gives $\\ker(\\iota\\otimes1)=0$, and exactness at $N_1\\otimes_BC$ gives $\\operatorname{im}(\\iota\\otimes1)=\\ker(\\delta'\\otimes1)$. (This is the exact sequence $0\\to H^{-1}\\otimes_BC\\to N^{-1}\\otimes_BC\\to M\\otimes_BC\\to0$ of the source.)",
+   "uses": [
+    "lem-weil-pbc-tor-long-exact-first-variable",
+    "def-weil-pbc-tor-modules"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra, proof of Lemma Tag 00S2 (lemma-exact-sequence-NL), final paragraph, lines 35462--35484, lines 35478--35482"
+   }
+  },
+  {
+   "text": "Conclusion. Since $\\delta=j\\circ\\delta'$, functoriality of $-\\otimes_BC$ gives $\\delta\\otimes\\mathrm{id}_C=(j\\otimes1)\\circ(\\delta'\\otimes1)$, and as $j\\otimes1$ is injective (step 2), $\\ker(\\delta\\otimes\\mathrm{id}_C)=\\ker(\\delta'\\otimes1)$. The map of the statement is $\\iota\\otimes1$ with its target restricted to $\\ker(\\delta\\otimes\\mathrm{id}_C)$ (on generators $h\\otimes c\\mapsto\\iota(h)\\otimes c$); by step 4 it is injective and its image is $\\ker(\\delta'\\otimes1)=\\ker(\\delta\\otimes\\mathrm{id}_C)$, so it is a bijective $B$-linear map, hence an isomorphism of $B$-modules. If $C$ is a $B$-algebra, $\\iota\\otimes1$ commutes with the $C$-module structures $c'\\cdot(x\\otimes c)=x\\otimes c'c$ on both sides (checked on generators), so the map is $C$-linear.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra, proof of Lemma Tag 00S2 (lemma-exact-sequence-NL), final paragraph, lines 35462--35484, lines 35482--35484 ('Putting everything together ...')"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-tor-long-exact-first-variable",
+  "def-weil-pbc-tor-modules",
+  "lem-weil-pbc-tor-dimension-shift-free"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Algebra, proof of Lemma Tag 00S2 (lemma-exact-sequence-NL), final paragraph, lines 35462--35484"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -41,10 +104,17 @@
    "results": "RingTheory/Flat/CategoryTheory.lean:27 (TODO 'Relate flatness with Tor'); CategoryTheory/Monoidal/Tor.lean (isZero_Tor_succ_of_projective only); no long exact Tor sequence and no Tor-vanishing base-change statement",
    "verdict": "no match",
    "date": "2026-10-10"
+  },
+  {
+   "tool": "leansearch",
+   "query": "if 0 → K → F → M → 0 is exact with F free and Tor_1(M,N) = 0 then K ⊗ N → F ⊗ N is injective; kernel of a map tensored with a module when Tor of cokernel vanishes",
+   "results": "LinearMap.lTensor_injective_of_exact_of_flat, Module.Flat.ker_lTensor_eq (Mathlib.RingTheory.Flat.Equalizer), lTensor_injective_of_exact_of_exact_of_rTensor_injective (Mathlib.RingTheory.LocalRing.Module), IsTensorProduct.map_injective_of_flat_left_right, TensorProduct.map_injective_of_flat_flat' (Mathlib.RingTheory.Flat.Basic), Module.FaithfullyFlat.lTensor_injective_iff_injective; all under flatness hypotheses",
+   "date": "2026-10-10",
+   "verdict": "no match (only the flat case)"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "worker",
@@ -64,5 +134,17 @@
   }
  },
  "chapter": "sec-proper-base-change",
- "unit": "sk-thm-p1"
+ "unit": "sk-thm-p1",
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "lem-weil-pbc-two-term-complex-kernel-base-change",
+  "worker": "stage1",
+  "summary": "Statement kept (checked against the final paragraph of the proof of Stacks 00S2, lines 35462--35484, and against what lem-weil-pbc-jacobi-zariski-homology-sequence step 8 takes from it: the isomorphism and its C-linearity). Proof follows the source: split delta into 0 -> H_1 -> N_1 -> I -> 0 and 0 -> I -> N_0 -> H_0 -> 0 (elementary); injectivity of I(x)C -> N_0(x)C from Tor_1(H_0,C)=0 by the low-degree Tor sequence lem-weil-pbc-tor-long-exact-first-variable; Tor_1(I,C) = Tor_2(H_0,C) = 0 by a new unsplit node lem-weil-pbc-tor-dimension-shift-free (the source's 'since N^0 is free, Tor_2(H^0,C) = Tor_1(M,C)', stated there without proof; no node and no Stacks lemma gives the Tor_2 term, Stacks 00M0 stops at Tor_1); injectivity of H_1(x)C -> N_1(x)C with image ker(delta'(x)1) by the same low-degree sequence; conclusion elementary. Mathlib: Tor exists only categorically (CategoryTheory.Tor, Monoidal/Tor.lean) with vanishing on projectives; no long exact sequence, no dimension shift, no Tor-vanishing kernel base change; searches recorded on both nodes."
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "result": "accepted",
+  "note": "5 steps following the last paragraph of the proof of Algebra 00S2: delta split into two short exact sequences; I (x) C -> N_0 (x) C injective by the Tor long exact sequence node (now split) and Tor_1(H_0, C) = 0; Tor_1(I, C) = Tor_2(H_0, C) = 0 by a new unsplit dimension-shifting node (N_0 free); the first sequence gives H_1 (x) C = ker(delta' (x) 1); conclusion and C-linearity. Statement unchanged."
+ }
 }

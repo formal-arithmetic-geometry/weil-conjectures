@@ -1,0 +1,82 @@
+{
+ "id": "lem-weil-pbc-tor-dimension-shift-free",
+ "kind": "statement",
+ "title": "Dimension shifting for Tor along a free presentation",
+ "statement": "Let $R$ be a commutative ring, $0\\to K\\xrightarrow{j}F\\xrightarrow{p}M\\to0$ a short exact sequence of $R$-modules with $F$ a free $R$-module, and $N$ an $R$-module. Then for every integer $i\\ge1$ there is an isomorphism of $R$-modules $\\operatorname{Tor}^R_{i+1}(M,N)\\cong\\operatorname{Tor}^R_i(K,N)$, with $\\operatorname{Tor}$ as in [def-weil-pbc-tor-modules]. In particular $\\operatorname{Tor}^R_2(M,N)=0$ if and only if $\\operatorname{Tor}^R_1(K,N)=0$.",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Algebra, proof of Lemma Tag 00S2 (lemma-exact-sequence-NL), line 35476: 'Since $N^0$ is free, we also see that $\\text{Tor}_2^B(H^0, C) = \\text{Tor}_1^B(M, C)$' (stated there without proof); the definition used is Algebra, Section Tag 00LY (section-tor, lines 18215--18236) with Lemma Tag 00LZ (lemma-tor-welldefined, line 18239) for the independence of the resolution, which gives the proof by splicing a free resolution of K with F. Tags verified in tags/tags: 00S2,algebra-lemma-exact-sequence-NL; 00LY,algebra-section-tor; 00LZ,algebra-lemma-tor-welldefined"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-tor-modules"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Tor_{n+1}(M, N) isomorphic to Tor_n(K, N) for a short exact sequence 0 → K → F → M → 0 with F projective (dimension shifting)",
+   "results": "CategoryTheory.Tor, CategoryTheory.Tor', CategoryTheory.isZero_Tor_succ_of_projective, CategoryTheory.isZero_Tor'_succ_of_projective, CategoryTheory.Tor_obj, CategoryTheory.Tor'_obj_obj (Mathlib.CategoryTheory.Monoidal.Tor), CategoryTheory.ProjectiveResolution.isoLeftDerivedObj (Mathlib.CategoryTheory.Abelian.LeftDerived), Rep.isZero_Tor_succ_of_projective",
+   "date": "2026-10-10",
+   "verdict": "no match (Tor defined and vanishing on projectives only; no dimension shift)"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "dimension shifting for Tor: syzygy of a projective presentation shifts Tor degree by one",
+   "results": "CategoryTheory.isZero_Tor'_succ_of_projective, CategoryTheory.isZero_Tor_succ_of_projective (Mathlib.CategoryTheory.Monoidal.Tor), Rep.isZero_Tor_succ_of_projective, CategoryTheory.Functor.isZero_leftDerived_obj_projective_succ (Mathlib.CategoryTheory.Abelian.LeftDerived), CochainComplex.isKProjective_shift_iff",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.leftDerived, CategoryTheory.ShortComplex.ShortExact",
+   "results": "none",
+   "date": "2026-10-10",
+   "verdict": "no match (no long exact sequence of left derived functors, hence no dimension shift)"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Tor",
+   "results": "CategoryTheory.Tor, CategoryTheory.isZero_Tor_succ_of_projective, CategoryTheory.Tor_obj, CategoryTheory.Tor_map (Mathlib.CategoryTheory.Monoidal.Tor)",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rn -i 'dimension shift\\|leftDerived.*ShortExact\\|ShortExact.*leftDerived\\|syzygy' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib; sed -n 40,66p ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/CategoryTheory/Monoidal/Tor.lean; sed -n 1,40p ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/Algebra/Category/ModuleCat/Ext/DimensionShifting.lean",
+   "results": "only Algebra/Category/ModuleCat/Ext/DimensionShifting.lean (dimension shifting for Ext: ModuleCat.projectiveShortComplex line 31, shortExact_projectiveShortComplex line 38, precomp/postcomp_extClass_surjective_of_projective_X₂ lines 49, 56); CategoryTheory/Monoidal/Tor.lean has Tor (line 44), Tor' (line 50, derived in the first factor), isZero_Tor_succ_of_projective (line 56), isZero_Tor'_succ_of_projective (line 61) and nothing else",
+   "date": "2026-10-10",
+   "verdict": "no match (Ext analogue only; Tor has vanishing on projectives only)"
+  },
+  {
+   "tool": "local_search",
+   "query": "Tor_succ (project root ~/weil-conjectures-slopmaster2)",
+   "results": "none; index: unavailable (not a proof of absence)",
+   "date": "2026-10-10",
+   "verdict": "inconclusive"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-two-term-complex-kernel-base-change",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1"
+}

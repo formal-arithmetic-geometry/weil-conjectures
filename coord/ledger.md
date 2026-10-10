@@ -915,3 +915,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 05:28 L: reviewed lem-weil-pbc-tor-strictly-pro-zero (5 steps, no new node): accepted.
 - 05:29 L: reviewed lem-weil-pbc-tor-long-exact-first-variable (6 steps, +split-resolutions node, +00LZ composed leaf): accepted.
 - 05:30 L: reviewed lem-weil-pbc-tower-limit-exact-surjective-kernels (6 steps, no new node): accepted.
+- 05:31 L: reviewed lem-weil-pbc-two-term-complex-kernel-base-change (5 steps, +Tor dimension-shift node): accepted.
