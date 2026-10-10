@@ -1,0 +1,81 @@
+{
+ "id": "lem-weil-pbc-formally-unramified-ring-iff-kahler-zero",
+ "kind": "statement",
+ "title": "A ring map is formally unramified iff its module of differentials vanishes",
+ "statement": "Let $\\varphi:R\\to S$ be a homomorphism of commutative rings, $S$ an $R$-algebra via $\\varphi$, and let $\\Omega_{S/R}$ be the module of Kähler differentials of $S$ over $R$ [def-weil-pbc-kahler-differentials]. The following are equivalent: (1) $\\varphi$ is formally unramified, i.e. for every $R$-algebra $A$, every ideal $I\\subseteq A$ with $I^2=0$ (quotient map $q:A\\to A/I$) and every $R$-algebra map $a:S\\to A/I$ there is at most one $R$-algebra map $a':S\\to A$ with $q\\circ a'=a$; (2) $\\Omega_{S/R}=0$.",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Algebra, Lemma 00UO (label lemma-characterize-formally-unramified, line 40814), with Definition 00UN (label definition-formally-unramified, line 40778) for (1). Tags verified in stacks-project/tags/tags: 00UO,algebra-lemma-characterize-formally-unramified; 00UN,algebra-definition-formally-unramified"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-kahler-differentials"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "formally unramified iff module of Kähler differentials is zero (lifts along square zero ideal unique)",
+   "results": "Algebra.formallyUnramified_iff (Mathlib.RingTheory.Unramified.Basic: FormallyUnramified R A ↔ Subsingleton Ω[A⁄R]), Algebra.FormallyUnramified.mk, Algebra.FormallyUnramified.lift_unique (Unramified.Basic), RingHom.FormallyUnramified (Mathlib.RingTheory.RingHom.Unramified), AlgebraicGeometry.FormallyUnramified",
+   "date": "2026-10-10",
+   "verdict": "match (with iff_comp_injective for the lifting side)"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An R-algebra A has Ω[A/R] = 0 if and only if for every square-zero ideal I of an R-algebra B, two algebra maps A → B that agree modulo I are equal",
+   "results": "Algebra.formallyUnramified_iff (Unramified.Basic), Algebra.formallyEtale_iff, Algebra.formallySmooth_iff, Algebra.FormallyEtale.iff_comp_bijective",
+   "date": "2026-10-10",
+   "verdict": "match (formallyUnramified_iff for (2))"
+  },
+  {
+   "tool": "loogle",
+   "query": "Algebra.FormallyUnramified, Function.Injective",
+   "results": "Algebra.FormallyUnramified.comp_injective, Algebra.FormallyUnramified.iff_comp_injective, Algebra.FormallyUnramified.iff_comp_injective_of_small (all Mathlib.RingTheory.Unramified.Basic)",
+   "date": "2026-10-10",
+   "verdict": "match: iff_comp_injective is (1) <-> FormallyUnramified"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -n 'theorem iff_comp_injective|theorem comp_injective|^class FormallyUnramified' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/RingTheory/Unramified/Basic.lean; sed -n 50,135p of the same file",
+   "results": "class FormallyUnramified (line 58, @[mk_iff, stacks 00UM], field subsingleton_kaehlerDifferential : Subsingleton Ω[A⁄R]); comp_injective (line 73); iff_comp_injective_of_small (line 84); iff_comp_injective (line 116)",
+   "date": "2026-10-10",
+   "verdict": "match"
+  },
+  {
+   "tool": "local_search",
+   "query": "Algebra.FormallyUnramified.iff_comp_injective (project root ~/weil-conjectures-slopmaster2)",
+   "results": "Algebra.FormallyUnramified.iff_comp_injective, Algebra.FormallyUnramified.iff_comp_injective_of_small (.lake/packages/mathlib/Mathlib/RingTheory/Unramified/Basic.lean); index: unavailable",
+   "date": "2026-10-10",
+   "verdict": "name exists"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "Algebra.FormallyUnramified.iff_comp_injective, Algebra.formallyUnramified_iff, Algebra.FormallyUnramified.comp_injective",
+  "file": "Mathlib/RingTheory/Unramified/Basic.lean",
+  "line": 116,
+  "how": "exact, one declaration per clause (lines read with sed -n 50,135p on 2026-10-10): (2) is Algebra.FormallyUnramified R S, the class at line 58 whose only field is Subsingleton Ω[S⁄R] (the generated Algebra.formallyUnramified_iff : FormallyUnramified R S ↔ Subsingleton Ω[S⁄R]); (1) => (2) is the right-to-left direction of iff_comp_injective (line 116: FormallyUnramified R A ↔ ∀ B : Type u, CommRing B, Algebra R B, I : Ideal B, I ^ 2 = ⊥ → Function.Injective (Ideal.Quotient.mkₐ R I).comp on A →ₐ[R] B), whose hypothesis is (1) for the algebras B in the universe of S; (2) => (1) for algebras of any universe is comp_injective (line 73). Injectivity of the composition with q is 'at most one lift'."
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-ring-universal-first-order-thickening",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lead_note": "L 2026-10-10: composed Mathlib leaf (Algebra.FormallyUnramified class line 58, comp_injective 73, iff_comp_injective 116 in RingTheory/Unramified/Basic.lean); lines verified."
+}
