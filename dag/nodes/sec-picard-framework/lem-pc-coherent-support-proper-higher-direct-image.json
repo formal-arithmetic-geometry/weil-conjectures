@@ -25,9 +25,61 @@
   "def-weil-pbc-closed-subset-proper-over-base",
   "def-pc-derived-direct-image"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Apply [lem-weil-pbc-module-support-proper-over-base] to F. Since its support is proper over S, it supplies a closed subscheme i:Z\\to X such that Z\\to S is proper and F\\cong i_*G for a finite type quasi-coherent O_Z-module G. Put g=f\\circ i. The proper morphism Z\\to S supplied by the support factorization is this composite g, so g is proper.",
+   "uses": [
+    "lem-weil-pbc-module-support-proper-over-base"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/coherent.tex",
+    "place": "Cohomology of Schemes, Lemma 0CYS (lemma-module-support-proper-over-base), (1) => (2) => (3)"
+   }
+  },
+  {
+   "text": "By [lem-weil-pbc-closed-immersion-integral-separated-uc] (b) the closed immersion i:Z\\to X is affine, and G is quasi-coherent, so [lem-pc-affine-morphism-hi] gives R^q i_*G=0 for q>0; hence Ri_*G\\cong i_*G\\cong F in D(O_X). The composition isomorphism [lem-pc-derived-direct-image-composition] for Z\\xrightarrow{i}X\\xrightarrow{f}S, g=f\\circ i, gives Rg_*G\\cong Rf_*(Ri_*G)\\cong Rf_*F. Taking the p-th cohomology sheaf gives R^p f_*F\\cong R^p g_*G.",
+   "uses": [
+    "lem-weil-pbc-closed-immersion-integral-separated-uc",
+    "lem-pc-affine-morphism-hi",
+    "lem-pc-derived-direct-image-composition",
+    "lem-weil-pbc-module-support-proper-over-base"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/coherent.tex",
+    "place": "Cohomology of Schemes, Lemma 30.11.3 (Tag 08DS) proof: R^q i_*G=0 by Lemma 30.9.9 (Tag 01Y6) and relative Leray (Cohomology, Tag 0D5T)"
+   }
+  },
+  {
+   "text": "The base S is locally Noetherian and g:Z\\to S is proper, hence of finite type [def-weil-proper-morphism], in particular locally of finite type; so Z is locally Noetherian by [pqf-lem-locnoeth-lft]. G is quasi-coherent of finite type on the locally Noetherian scheme Z, hence coherent by [pqf-lem-coherent-ft-locnoeth]. Thus [lem-pc-coherent-hi] applies to the proper morphism g and the coherent module G, making R^p g_*G coherent for every p\\ge0. Via the isomorphism of Step 2, R^p f_*F is coherent for every p\\ge0.",
+   "uses": [
+    "pqf-lem-locnoeth-lft",
+    "pqf-lem-coherent-ft-locnoeth",
+    "lem-pc-coherent-hi",
+    "lem-weil-pbc-module-support-proper-over-base"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/coherent.tex",
+    "place": "Cohomology of Schemes, Proposition 30.19.1 (Tag 02O5), as recorded in node lem-pc-coherent-hi"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-module-support-proper-over-base",
+  "lem-weil-pbc-closed-immersion-integral-separated-uc",
+  "lem-pc-affine-morphism-hi",
+  "lem-pc-derived-direct-image-composition",
+  "pqf-lem-locnoeth-lft",
+  "pqf-lem-coherent-ft-locnoeth",
+  "lem-pc-coherent-hi"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/coherent.tex",
+  "place": "Cohomology of Schemes, Lemma 30.11.3 (Tag 08DS), proof via Lemma 0CYS and Proposition 30.19.1 (Tag 02O5)"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -46,7 +98,7 @@
   {
    "tool": "grep",
    "query": "support proper|higherDirectImage|finitePresentation_higherDirectImage AlgebraicGeometry",
-   "results": "0 hits",
+   "results": "Mathlib/Analysis/Meromorphic/Divisor.lean:82: ## Support Properties; no algebraic-geometry higher-direct-image theorem",
    "date": "2026-10-11",
    "verdict": "no match"
   },
@@ -59,12 +111,73 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-pc-direct-image-bounded-coherent",
   "by": "worker",
   "date": "2026-10-10"
  },
  "chapter": "sec-picard-framework",
- "unit": "sk-thm-picard-duality"
+ "unit": "sk-thm-picard-duality",
+ "split_report": {
+  "date": "2026-10-11",
+  "item": "lem-pc-coherent-support-proper-higher-direct-image",
+  "worker": "stage1",
+  "summary": "Checked the item against Stacks Cohomology of Schemes Lemma 30.11.3 (Tag 08DS), whose support-proper pushforward assertion is reduced to the scheme-theoretic support factorization of Lemma 0CYS (Tag 0CYS) and proper coherence Proposition 30.19.1 (Tag 02O5). No new nodes were needed: the DAG already contains the support factorization, derived direct-image composition, and proper coherence statements. The proof has three steps: factor F through its proper scheme-theoretic support, identify higher direct images by derived composition (using exactness of closed-immersion pushforward), and apply proper coherence. Small cases checked: F=0, i an isomorphism (already proper f), and S=Spec k with Z proper over k.",
+  "blueprint": "The steps realize the imported Tag 08E2/08DS proof clause that each R^p f_*H^q(E) is coherent from the coherent support-proper pushforward lemma.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-module-support-proper-over-base",
+    "why": "The support factorization is a generic scheme-theoretic support tool imported from the proper-base-change unit."
+   },
+   {
+    "node": "lem-pc-derived-direct-image-composition",
+    "why": "Derived direct-image composition is a generic categorical tool imported from the semiconinuity unit."
+   },
+   {
+    "node": "lem-pc-coherent-hi",
+    "why": "Proper coherence of higher direct images is the generic coherence theorem imported from the Picard-coherence unit."
+   },
+   {
+    "node": "lem-weil-pbc-closed-immersion-integral-separated-uc",
+    "why": "Closed immersions are affine: a generic morphism-property tool."
+   },
+   {
+    "node": "lem-pc-affine-morphism-hi",
+    "why": "Vanishing of higher direct images along affine morphisms: a generic cohomology tool."
+   },
+   {
+    "node": "pqf-lem-locnoeth-lft",
+    "why": "Locally finite type over locally Noetherian is locally Noetherian: a generic tool."
+   },
+   {
+    "node": "pqf-lem-coherent-ft-locnoeth",
+    "why": "Coherent equals finite type quasi-coherent on locally Noetherian schemes: a generic tool."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-module-support-proper-over-base",
+  "lem-pc-derived-direct-image-composition",
+  "lem-pc-coherent-hi",
+  "lem-weil-pbc-closed-immersion-integral-separated-uc",
+  "lem-pc-affine-morphism-hi",
+  "pqf-lem-locnoeth-lft",
+  "pqf-lem-coherent-ft-locnoeth",
+  "lem-weil-pbc-module-support-proper-over-base",
+  "lem-pc-derived-direct-image-composition",
+  "lem-pc-coherent-hi",
+  "lem-weil-pbc-closed-immersion-integral-separated-uc",
+  "lem-pc-affine-morphism-hi",
+  "pqf-lem-locnoeth-lft",
+  "pqf-lem-coherent-ft-locnoeth"
+ ],
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-csh2650",
+  "group": "H1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-csh2650 (reviewer sub-agent of L); spot-checked: Statement = Tag 08DS exactly. Step 1 cites lem-weil-pbc-module-support-proper-over-base (Tag 0CYS factorization, not restated); Step 3 lem-pc-coherent-hi (Tag 02O5) hypotheses met. FIX more, RETURN less: (1) C1 Step 2: vanishing R^q i_*G=0 justified only by an untagged and wrong 'restriction of sections' remark; now cited via lem-weil-pbc-closed-immersion-integral-separated-uc(b) + lem-pc-affine-morphism-hi (Tag 01Y6/01XC). (2) Step 2 composition written X->Z->S, corrected to Z->X->S, Rg_*G = Rf_*Ri_*G. (3) C1 Step 3: Z locally Noetherian and G coherent were uncited; now pqf-lem-locnoeth-lft (01T6) and pqf-lem-coherent-ft-locnoeth (01XZ). uses/proof_deps/tool_uses updated. Second reading by H1 missed (1)-(3).; 1 file(s) fixed by the reviewer"
+ }
 }
