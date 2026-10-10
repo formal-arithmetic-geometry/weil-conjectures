@@ -13,9 +13,87 @@
   "def-sp-injective-resolutions",
   "def-weil-pbc-sheafification"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "*The functor $f_*$, an injective resolution, and $R^qf_*\\mathcal F$.* By [def-weil-pbc-sites-and-cohomology] (1), (3), $\\textit{Ab}(\\mathcal C)$ and $\\textit{Ab}(\\mathcal D)$ are abelian categories, $\\textit{Ab}(\\mathcal C)$ has enough injectives [lem-weil-pbc-site-sheaves-enough-injectives], and $f_*=u^s$, $(f_*\\mathcal G)(V)=\\mathcal G(u(V))$, $(f_*\\varphi)_V=\\varphi_{u(V)}$, is a functor $\\textit{Ab}(\\mathcal C)\\to\\textit{Ab}(\\mathcal D)$. It is additive ($(f_*(\\varphi+\\psi))_V=\\varphi_{u(V)}+\\psi_{u(V)}$, and finite products of abelian sheaves are computed sectionwise) and preserves kernels: the kernel of $\\varphi:\\mathcal G\\to\\mathcal G'$ in $\\textit{Ab}(\\mathcal C)$ is the sectionwise kernel, and so is the kernel of $f_*\\varphi$ in $\\textit{Ab}(\\mathcal D)$ [lem-weil-pbc-sheafification-exact] (1), and both have sections $\\ker(\\varphi_{u(V)})$ over $V$. So $f_*$ is left exact additive [def-sp-left-exact-additive]. Choose an injective resolution $s:\\mathcal F\\to\\mathcal I^\\bullet$ with $\\mathcal I^q=0$ for $q<0$ [lem-weil-pbc-left-exact-injective-resolution-degree-zero] (1) [def-sp-injective-resolutions]. By definition [def-sp-left-exact-additive], $R^qf_*\\mathcal F=\\mathcal H^q(\\mathcal K^\\bullet)$, the $q$-th cohomology object in $\\textit{Ab}(\\mathcal D)$ of the complex $\\mathcal K^\\bullet=f_*\\mathcal I^\\bullet$; for this resolution $\\mathcal P^q_{\\mathcal F}(V)=H^q(\\mathcal I^\\bullet(u(V)))$ by [def-weil-pbc-sites-and-cohomology] (2).",
+   "uses": [
+    "def-weil-pbc-sites-and-cohomology",
+    "lem-weil-pbc-site-sheaves-enough-injectives",
+    "lem-weil-pbc-sheafification-exact",
+    "def-sp-left-exact-additive",
+    "lem-weil-pbc-left-exact-injective-resolution-degree-zero",
+    "def-sp-injective-resolutions"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Lemma Tag 072W (lemma-higher-direct-images, line 747), proof, first sentence: 'R^if_*F is by definition the ith cohomology sheaf of the complex f_*I^0 -> f_*I^1 -> ...'"
+   }
+  },
+  {
+   "text": "*The presheaf cohomology of $\\mathcal K^\\bullet$ is $\\mathcal P^q_{\\mathcal F}$.* Let $\\iota:\\textit{Ab}(\\mathcal D)\\to\\textit{PAb}(\\mathcal D)$ be the inclusion into abelian presheaves. $\\textit{PAb}(\\mathcal D)$ is abelian and every evaluation $\\mathrm{ev}_V$ is exact [lem-weil-pbc-abelian-presheaves-evaluation-exact], so by [lem-weil-pbc-exact-functor-complex-cohomology] applied to $\\mathrm{ev}_V$ the $q$-th cohomology presheaf $\\mathcal Q^q=H^q(\\iota\\mathcal K^\\bullet)$ of $\\iota\\mathcal K^\\bullet$ has $\\mathcal Q^q(V)=H^q(\\mathcal K^\\bullet(V))=\\ker(\\mathcal I^q(u(V))\\to\\mathcal I^{q+1}(u(V)))/\\operatorname{im}(\\mathcal I^{q-1}(u(V))\\to\\mathcal I^q(u(V)))$, compatibly with the projections from cycles; for $V'\\to V$ the restriction of $\\mathcal Q^q$ is induced by the restriction of $\\mathcal K^\\bullet$, i.e. by $\\mathcal I^\\bullet(u(V))\\to\\mathcal I^\\bullet(u(V'))$ (naturality of these identifications in $V$). This is exactly the presheaf $\\mathcal P^q_{\\mathcal F}$ of the statement, with the same restriction maps: $\\mathcal Q^q=\\mathcal P^q_{\\mathcal F}$.",
+   "uses": [
+    "lem-weil-pbc-abelian-presheaves-evaluation-exact",
+    "lem-weil-pbc-exact-functor-complex-cohomology"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Lemma Tag 072W (lemma-higher-direct-images, line 747), proof: 'this is obviously equal to Ker(I^i(u(V)) -> I^{i+1}(u(V)))/Im(...) which is equal to H^i(u(V), F)'"
+   }
+  },
+  {
+   "text": "*The canonical map $\\theta$.* Write $Z^q(-)=\\ker d^q$ and $\\pi:Z^q(\\mathcal K^\\bullet)\\to\\mathcal H^q(\\mathcal K^\\bullet)$ for the projection in $\\textit{Ab}(\\mathcal D)$, and $p:Z^q(\\iota\\mathcal K^\\bullet)\\to\\mathcal Q^q$ for the projection in $\\textit{PAb}(\\mathcal D)$. Since $\\iota$ preserves kernels [lem-weil-pbc-sheafification-exact] (1), $Z^q(\\iota\\mathcal K^\\bullet)=\\iota Z^q(\\mathcal K^\\bullet)$. The map $\\iota\\pi$ vanishes on the image of $\\iota\\mathcal K^{q-1}\\to Z^q(\\iota\\mathcal K^\\bullet)$ (it is $\\iota$ of a zero map), so it factors uniquely as $\\iota\\pi=\\theta\\circ p$ with $\\theta:\\mathcal Q^q\\to\\iota\\mathcal H^q(\\mathcal K^\\bullet)=\\iota R^qf_*\\mathcal F$. Sectionwise (step 2) $\\theta_V$ sends the class of a cocycle $s\\in\\mathcal I^q(u(V))=(f_*\\mathcal I^q)(V)$ to $\\pi_V(s)$, the section of the cohomology sheaf it defines: $\\theta$ is the canonical map $\\mathcal P^q_{\\mathcal F}\\to R^qf_*\\mathcal F$ of the statement.",
+   "uses": [
+    "lem-weil-pbc-sheafification-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Lemma Tag 072W (lemma-higher-direct-images, line 747), proof (the map from the presheaf of the proof to the cohomology sheaf, left implicit there)"
+   }
+  },
+  {
+   "text": "*Sheafifying: $\\theta$ induces an isomorphism $(\\mathcal P^q_{\\mathcal F})^\\#\\cong R^qf_*\\mathcal F$.* Let $\\#$ be sheafification, left adjoint to $\\iota$ [def-weil-pbc-sheafification], with counit $\\varepsilon:\\#\\iota\\to\\mathrm{id}$, an isomorphism [lem-weil-pbc-presheaf-finite-limits-objectwise] (3). Let $\\theta^\\flat=\\varepsilon_{\\mathcal H^q(\\mathcal K^\\bullet)}\\circ\\#\\theta:(\\mathcal Q^q)^\\#\\to\\mathcal H^q(\\mathcal K^\\bullet)$ be the adjunct of $\\theta$, i.e. the unique morphism with $\\iota\\theta^\\flat\\circ\\eta=\\theta$ for the unit $\\eta:\\mathcal Q^q\\to\\iota(\\mathcal Q^q)^\\#$. Since $\\#$ is exact [lem-weil-pbc-sheafification-exact] (2), [lem-weil-pbc-exact-functor-complex-cohomology] applied to $\\#$ gives an isomorphism $c:\\mathcal H^q(\\#\\iota\\mathcal K^\\bullet)\\to\\#\\mathcal Q^q$ with $c\\circ\\pi_{\\#\\iota\\mathcal K}=\\#p$ under $Z^q(\\#\\iota\\mathcal K^\\bullet)=\\#Z^q(\\iota\\mathcal K^\\bullet)$, and $\\varepsilon_{\\mathcal K^\\bullet}:\\#\\iota\\mathcal K^\\bullet\\to\\mathcal K^\\bullet$ is an isomorphism of complexes (naturality of $\\varepsilon$), so $\\mathcal H^q(\\varepsilon_{\\mathcal K})\\circ c^{-1}:\\#\\mathcal Q^q\\to\\mathcal H^q(\\mathcal K^\\bullet)$ is an isomorphism. It equals $\\theta^\\flat$: both are determined by their composite with $\\#p$, which is an epimorphism ($p$ is one and $\\#$ is exact). Now $\\theta^\\flat\\circ\\#p=\\varepsilon_{\\mathcal H^q}\\circ\\#(\\iota\\pi)=\\pi\\circ\\varepsilon_{Z^q(\\mathcal K)}$ by step 3 and naturality of $\\varepsilon$; and $\\mathcal H^q(\\varepsilon_{\\mathcal K})\\circ c^{-1}\\circ\\#p=\\mathcal H^q(\\varepsilon_{\\mathcal K})\\circ\\pi_{\\#\\iota\\mathcal K}=\\pi\\circ Z^q(\\varepsilon_{\\mathcal K})=\\pi\\circ\\varepsilon_{Z^q(\\mathcal K)}$, the last equality because the inclusion $Z^q(\\mathcal K)\\to\\mathcal K^q$ is a monomorphism and $\\varepsilon$ is natural with respect to it. Hence $\\theta^\\flat$ is an isomorphism: $\\theta=\\iota\\theta^\\flat\\circ\\eta$ identifies $R^qf_*\\mathcal F$ with $(\\mathcal P^q_{\\mathcal F})^\\#$ (step 2: $\\mathcal Q^q=\\mathcal P^q_{\\mathcal F}$).",
+   "uses": [
+    "def-weil-pbc-sheafification",
+    "lem-weil-pbc-presheaf-finite-limits-objectwise",
+    "lem-weil-pbc-sheafification-exact",
+    "lem-weil-pbc-exact-functor-complex-cohomology"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Lemma Tag 072W (lemma-higher-direct-images, line 747), proof: 'By definition of the abelian category structure on O_D-modules this cohomology sheaf is the sheaf associated to the presheaf V -> Ker(f_*I^i(V) -> f_*I^{i+1}(V))/Im(f_*I^{i-1}(V) -> f_*I^i(V))'"
+   }
+  },
+  {
+   "text": "*Vanishing.* Since $\\theta^\\flat:(\\mathcal P^q_{\\mathcal F})^\\#\\to R^qf_*\\mathcal F$ is an isomorphism (step 4), one of the two objects is zero if and only if the other is.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Lemma Tag 072W (lemma-higher-direct-images, line 747), proof, last sentence ('and we win')"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-sites-and-cohomology",
+  "lem-weil-pbc-site-sheaves-enough-injectives",
+  "lem-weil-pbc-sheafification-exact",
+  "def-sp-left-exact-additive",
+  "lem-weil-pbc-left-exact-injective-resolution-degree-zero",
+  "def-sp-injective-resolutions",
+  "lem-weil-pbc-abelian-presheaves-evaluation-exact",
+  "lem-weil-pbc-exact-functor-complex-cohomology",
+  "def-weil-pbc-sheafification",
+  "lem-weil-pbc-presheaf-finite-limits-objectwise"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Lemma Tag 072W (lemma-higher-direct-images, line 747) and its proof, for O_C = Z, O_D = Z (modules = abelian sheaves); steps 3-4 write out the sentence 'by definition of the abelian category structure ... this cohomology sheaf is the sheaf associated to the presheaf'"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -44,10 +122,45 @@
    "results": "exists (Mathlib/CategoryTheory/Sites/SheafCohomology/Basic.lean:81): the presheaf X -> Ext^n of the sheafified free abelian presheaf on X and F; only the presheaf, without direct images",
    "date": "2026-10-10",
    "verdict": "no match (notion only)"
+  },
+  {
+   "tool": "leansearch",
+   "query": "homology of a complex of sheaves is the sheafification of the homology of the underlying complex of presheaves",
+   "results": "Sheaf.isColimitSheafifyCocone (Sites/Limits), TopCat.Presheaf.sheafify, plusPlusAdjunction, PresheafOfModules.sheafification and its HomEquiv lemmas, toSheafify_plusPlusIsoSheafify_hom_assoc (Sites/LeftExact)",
+   "date": "2026-10-10",
+   "verdict": "no match: no statement identifying the homology of a complex of sheaves with the sheafified presheaf homology"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "right derived functors of pushforward of sheaves along a morphism of sites, higher direct image as sheafification of presheaf of cohomology",
+   "results": "Functor.sheafPushforwardContinuous (Sites/Continuous), sheafPushforwardCocontinuous, pushforwardContinuousSheafificationCompatibility (Sites/CoverLifting), instIsRightAdjoint of sheafPushforwardContinuous (Sites/Pullback), Sheaf.composeAndSheafify",
+   "date": "2026-10-10",
+   "verdict": "no match: the pushforward f_* exists (as a right adjoint) but no right derived functors of it and no comparison with sheafified presheaf cohomology"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.rightDerived, CategoryTheory.Sheaf",
+   "results": "none",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rln 'rightDerived' Mathlib/CategoryTheory/Sites Mathlib/Algebra/Category; grep -rn -i 'homology.*sheafif\\|sheafif.*homology\\|cohomologyPresheaf' Mathlib/CategoryTheory/Sites; ls Mathlib/CategoryTheory/Sites/SheafCohomology/",
+   "results": "no rightDerived in Sites or Algebra/Category; only Sheaf.cohomologyPresheaf (SheafCohomology/Basic.lean:81) and its use in MayerVietoris.lean; SheafCohomology/ has Basic, Cech, MayerVietoris only",
+   "date": "2026-10-10",
+   "verdict": "no match: not a Mathlib leaf (B8)"
+  },
+  {
+   "tool": "local_search",
+   "query": "CategoryTheory.Functor.sheafPushforwardContinuous_rightDerived",
+   "results": "none (index: unavailable, so not a proof of absence; absence established by the grep above)",
+   "date": "2026-10-10",
+   "verdict": "no match"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "worker",
@@ -67,5 +180,12 @@
   }
  },
  "chapter": "sec-proper-base-change",
- "unit": "sk-thm-p1"
+ "unit": "sk-thm-p1",
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "lem-weil-pbc-site-higher-direct-image-sheafified-presheaf",
+  "worker": "stage1",
+  "summary": "Checked the statement against Stacks Cohomology on Sites Lemma 072W (sites-cohomology.tex line 747, tag verified in tags/tags) for O = Z and against the citer lem-weil-pbc-gabber-strict-henselian-zariski-comparison step 1, which uses exactly R^q eps_* F = (P^q)^# and the vanishing clause; statement kept. Not a Mathlib leaf: Mathlib has the pushforward of sheaves and Sheaf.cohomologyPresheaf but no right derived functors of pushforward and no sheafified-homology comparison (LeanSearch, LeanFinder, Loogle, grep recorded). Proof split in five steps following the proof of 072W: (1) f_* left exact additive, injective resolution, R^q f_* F = H^q(f_*I); (2) presheaf cohomology of f_*I is P^q, via sectionwise exactness of evaluation; (3) construction of the canonical map theta from the left exactness of the inclusion iota; (4) sheafification is exact and its counit is an isomorphism, so H^q(f_*I) = (P^q)^# and the adjunct of theta is this isomorphism (written out: the source's 'by definition of the abelian category structure'); (5) vanishing. All cited nodes exist (Mathlib leaves except def-weil-pbc-sites-and-cohomology, same unit); no new nodes."
+ },
+ "reviewed": "pass (L, 2026-10-10): 5 steps follow 072W for abelian sheaves; the canonical map theta is constructed from the cycle projections, and its adjunct is shown to be the isomorphism H^q(f_* I) = (P^q)^# via exactness of sheafification and the counit isomorphism, with the agreement checked on the epimorphism #p. No new nodes. The etale-specific node higher-direct-image-sheafified-presheaf (03Q8) is a special case and stays separate."
 }

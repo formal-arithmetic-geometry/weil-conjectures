@@ -1025,3 +1025,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 07:35 L: accepted lem-weil-pbc-domains-strongly-transcendental-not-quasi-finite (10 steps; new leaves polynomial-ring-normal-domain 030A, going-down-normal-integral 00H8). Source gaps written out: strictness of pR[x] in r, x strongly transcendental over the normalization.
 - 07:37 L: accepted lem-weil-pbc-separably-generated-tensor-reduced (4 steps; new unsplit nodes separating-transcendence-basis-finite-subextension and finite-separable-tensor-field-reduced, the latter with a FormallyUnramified chain as mathlib_candidate).
 - 07:37 L: accepted lem-weil-pbc-serre-sk-goes-up (7 steps; new unsplit node flat-local-depth-formula 0337).
+- 07:38 L: accepted lem-weil-pbc-site-higher-direct-image-sheafified-presheaf (5 steps, no new nodes; the etale node higher-direct-image-sheafified-presheaf 03Q8 is a special case, kept separate).
