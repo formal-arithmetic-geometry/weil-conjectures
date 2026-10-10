@@ -1,0 +1,77 @@
+{
+ "id": "lem-sc-rational-functions-generic-stalks",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "def-sc-function-field",
+   "place": "the statement's clause 'equivalently the ring of rational functions on C', and 'for an integral curve it is a field'",
+   "via": []
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Rational functions are the product of the generic local rings",
+ "statement": "Let $X$ be a scheme [def-pc-scheme] whose underlying topological space has finitely many irreducible components $X_1,\\dots,X_n$ [def-weil-irreducible-components], and let $\\eta_i\\in X_i$ be the generic point of $X_i$ [def-sc-generic-point], unique by [lem-sc-scheme-sober]. Then every dense open subset $U\\subseteq X$ contains $\\eta_1,\\dots,\\eta_n$, and the map $$R(X)\\longrightarrow\\mathcal O_{X,\\eta_1}\\times\\cdots\\times\\mathcal O_{X,\\eta_n},\\qquad [(U,f)]\\longmapsto(f_{\\eta_1},\\dots,f_{\\eta_n}),$$ from the ring of rational functions [def-sc-rational-functions] to the product of the stalks of the structure sheaf [def-weil-pbc-module-stalk], sending a class to the germs of a representative, is well defined and a ring isomorphism. If $X$ is integral [def-pc-integral-scheme], then $n=1$, $X_1=X$, and $R(X)\\cong\\mathcal O_{X,\\eta}$ is a field.",
+ "source": {
+  "document": "literature/stacks-project/morphisms.tex",
+  "place": "Lemma 01RV (label lemma-integral-scheme-rational-functions, line 12705), first and third assertions; its last step cites Algebra Lemma 00EU (label lemma-minimal-prime-reduced-ring)"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-irreducible-components",
+  "def-sc-generic-point",
+  "lem-sc-scheme-sober",
+  "def-sc-rational-functions",
+  "def-weil-pbc-module-stalk",
+  "def-pc-integral-scheme"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "rational functions on a scheme with finitely many irreducible components equal product of local rings at generic points",
+   "results": "RatFunc, RatFunc.mk, AlgebraicGeometry.Scheme.functionField, RatFunc.mk_eq_mk', instIsFractionRingCarrierStalkCommRingCatPresheafFunctionField",
+   "date": "2026-10-10",
+   "verdict": "no match (only the irreducible case Scheme.functionField)"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "function field of a reducible scheme with finitely many irreducible components, product over generic points",
+   "results": "Scheme.functionField, instFieldCarrierFunctionField, germToFunctionField, functionField_isFractionRing_of_affine, instIsFractionRingCarrierStalkCommRingCatPresheafFunctionField (Mathlib.AlgebraicGeometry.FunctionField)",
+   "date": "2026-10-10",
+   "verdict": "no match for the product; integral case: Field instance"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rn 'Pi.*stalk\\|∏.*stalk' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicGeometry; grep -n 'instance \\[IsIntegral X\\] : Field' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicGeometry/FunctionField.lean",
+   "results": "no product of stalks at generic points; FunctionField.lean:51 noncomputable instance [IsIntegral X] : Field X.functionField (X.functionField := stalk at genericPoint X, line 37)",
+   "date": "2026-10-10",
+   "verdict": "no match for the iso; the integral field clause matches FunctionField.lean:51"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "def-sc-function-field",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-abelian-varieties",
+ "unit": "sk-def-av-pic",
+ "mathlib_candidate": {
+  "declaration": "AlgebraicGeometry.Scheme.functionField, AlgebraicGeometry.instFieldCarrierFunctionField",
+  "file": "Mathlib/AlgebraicGeometry/FunctionField.lean",
+  "reason": "Lines 37 and 51 give O_{X,η} and that it is a field for integral X (the last clause); Mathlib has no ring of rational functions, so the isomorphism R(X) ≅ ∏ O_{X,η_i} has no counterpart."
+ }
+}

@@ -1,0 +1,72 @@
+{
+ "id": "lem-sc-scheme-sober",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "def-sc-function-field",
+   "place": "the statement's phrase 'the generic points of the irreducible components of C' (each component has exactly one)",
+   "via": []
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Schemes are sober",
+ "statement": "Let $X$ be a scheme [def-pc-scheme]. Every irreducible closed subset $Z$ of the underlying topological space of $X$ [def-weil-irreducible-components] has exactly one generic point [def-sc-generic-point]: there is a unique $\\xi\\in Z$ with $Z=\\overline{\\{\\xi\\}}$. In particular every irreducible component of $X$ (a closed irreducible subset) has a unique generic point.",
+ "source": {
+  "document": "literature/stacks-project/schemes.tex",
+  "place": "Lemma 01IS (label lemma-scheme-sober, line 1930)"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-irreducible-components",
+  "def-sc-generic-point"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "every irreducible closed subset of a scheme has a unique generic point",
+   "results": "genericPoints, AlgebraicGeometry.instQuasiSoberCarrierCarrierCommRingCat (Mathlib.AlgebraicGeometry.Properties), genericPoints.isGenericPoint, QuasiSober.mk, genericPoint, QuasiSober.sober (Mathlib.Topology.Sober)",
+   "date": "2026-10-10",
+   "verdict": "match: QuasiSober instance for schemes (existence)"
+  },
+  {
+   "tool": "loogle",
+   "query": "IsGenericPoint, T0Space",
+   "results": "IsGenericPoint.eq : [T0Space α] IsGenericPoint x S → IsGenericPoint y S → x = y (Mathlib.Topology.Sober)",
+   "date": "2026-10-10",
+   "verdict": "match: uniqueness"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -n '^instance : T0Space X\\|^instance : QuasiSober X' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicGeometry/Properties.lean; grep -n 'protected theorem eq \\[T0Space' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/Topology/Sober.lean",
+   "results": "Properties.lean:38 instance : T0Space X; Properties.lean:43 instance : QuasiSober X (X : Scheme); Sober.lean:79 IsGenericPoint.eq",
+   "date": "2026-10-10",
+   "verdict": "match (read)"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "AlgebraicGeometry.instQuasiSoberCarrierCarrierCommRingCat, AlgebraicGeometry T0Space instance, IsGenericPoint.eq",
+  "file": "Mathlib/AlgebraicGeometry/Properties.lean",
+  "how": "one declaration per clause: existence is `QuasiSober.sober` (Topology/Sober.lean) for the instance `QuasiSober X` of a scheme X (Properties.lean:43); uniqueness is `IsGenericPoint.eq` (Topology/Sober.lean:79) for the instance `T0Space X` (Properties.lean:38); the components clause is the case Z an irreducible component, closed by `isClosed_of_mem_irreducibleComponents` (Topology/Irreducible.lean:111)"
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "def-sc-function-field",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-abelian-varieties",
+ "unit": "sk-def-av-pic"
+}

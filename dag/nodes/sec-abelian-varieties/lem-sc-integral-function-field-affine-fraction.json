@@ -1,0 +1,73 @@
+{
+ "id": "lem-sc-integral-function-field-affine-fraction",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "def-sc-function-field",
+   "place": "the statement's clause 'for an integral curve it is the field of fractions of O_C(U) for any nonempty affine open U'",
+   "via": []
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Function field of an integral scheme is the fraction field of an affine open",
+ "statement": "Let $X$ be an integral scheme [def-pc-integral-scheme] and $\\eta$ its generic point [def-sc-generic-point], i.e. the unique point with $\\overline{\\{\\eta\\}}=X$ [lem-sc-scheme-sober]. Let $U\\subseteq X$ be a nonempty affine open subset. Then $\\eta\\in U$, the ring $\\mathcal O_X(U)$ is an integral domain, $\\mathcal O_{X,\\eta}$ [def-weil-pbc-module-stalk] is a field, and the germ map $\\mathcal O_X(U)\\to\\mathcal O_{X,\\eta}$, $f\\mapsto f_\\eta$, is injective and makes $\\mathcal O_{X,\\eta}$ a field of fractions of $\\mathcal O_X(U)$: every nonzero $h\\in\\mathcal O_X(U)$ has invertible germ $h_\\eta$, and every element of $\\mathcal O_{X,\\eta}$ is $g_\\eta h_\\eta^{-1}$ for some $g,h\\in\\mathcal O_X(U)$, $h\\neq0$.",
+ "source": {
+  "document": "literature/stacks-project/morphisms.tex",
+  "place": "Lemma 01RV (label lemma-integral-scheme-rational-functions, line 12705), integral case R(X)=O_{X,η}, with Schemes Lemma 01HV (label lemma-spec-sheaves, schemes.tex line 692: the stalk of Spec A at a prime p is A_p) applied to U=Spec A, whose generic point is the prime (0) (Properties Lemma 01ON, label lemma-characterize-integral, properties.tex line 260)"
+ },
+ "stmt_deps": [
+  "def-pc-integral-scheme",
+  "def-sc-generic-point",
+  "lem-sc-scheme-sober",
+  "def-weil-pbc-module-stalk"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "function field of integral scheme is the fraction field of sections over a nonempty affine open",
+   "results": "AlgebraicGeometry.functionField_isFractionRing_of_isAffineOpen, Scheme.germToFunctionField, instIsFractionRingCarrierStalkCommRingCatPresheafFunctionField, Scheme.functionField, IsIntegral.component_integral",
+   "date": "2026-10-10",
+   "verdict": "match: functionField_isFractionRing_of_isAffineOpen"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "ring of rational functions of a scheme as colimit of sections over dense open subsets",
+   "results": "Scheme.germToFunctionField, Scheme.functionField, instFieldCarrierFunctionField, functionField_isFractionRing_of_isAffineOpen (Mathlib.AlgebraicGeometry.FunctionField)",
+   "date": "2026-10-10",
+   "verdict": "match: functionField_isFractionRing_of_isAffineOpen"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -n 'theorem functionField_isFractionRing_of_isAffineOpen\\|abbrev Scheme.functionField' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicGeometry/FunctionField.lean",
+   "results": "FunctionField.lean:37 abbrev Scheme.functionField [IrreducibleSpace X] := X.presheaf.stalk (genericPoint X); :148 theorem functionField_isFractionRing_of_isAffineOpen [IsIntegral X] (U : X.Opens) (hU : IsAffineOpen U) [Nonempty U] : IsFractionRing Γ(X, U) X.functionField",
+   "date": "2026-10-10",
+   "verdict": "match (read)"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "AlgebraicGeometry.functionField_isFractionRing_of_isAffineOpen",
+  "file": "Mathlib/AlgebraicGeometry/FunctionField.lean",
+  "how": "exact: line 148, IsFractionRing Γ(X, U) X.functionField for X integral, U affine open nonempty, with the algebra structure of germToFunctionField (line 41) and X.functionField = stalk at genericPoint X (line 37); IsFractionRing gives injectivity and the form g/h, and the field structure is the instance at line 51; O_X(U) a domain is IsIntegral.component_integral (Mathlib/AlgebraicGeometry/Properties.lean)"
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "def-sc-function-field",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-abelian-varieties",
+ "unit": "sk-def-av-pic"
+}

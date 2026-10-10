@@ -1,0 +1,71 @@
+{
+ "id": "def-sc-generic-point",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "def-sc-function-field",
+   "place": "the statement's phrase 'the generic points of the irreducible components of C'",
+   "via": []
+  },
+  "same_as": []
+ },
+ "kind": "definition",
+ "title": "Generic point of an irreducible closed subset",
+ "statement": "Let $X$ be a topological space and $Z\\subseteq X$ an irreducible closed subset [def-weil-irreducible-components]. A *generic point* of $Z$ is a point $\\xi\\in Z$ such that $Z=\\overline{\\{\\xi\\}}$, the closure of the one-point set $\\{\\xi\\}$ in $X$. For a scheme $X$ [def-pc-scheme] this is applied to its underlying topological space; the generic point of an irreducible component of $X$ (an irreducible closed subset) is a generic point of that component in this sense.",
+ "source": {
+  "document": "literature/stacks-project/topology.tex",
+  "place": "Definition 004X (label definition-generic-point, line 972), part (1)"
+ },
+ "stmt_deps": [
+  "def-weil-irreducible-components",
+  "def-pc-scheme"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "generic point of a closed subset: closure of the point equals the set",
+   "results": "IsGenericPoint, IsGenericPoint.def, QuasiSober.sober, IsGenericPoint.mem_closed_set_iff, genericPoints (Mathlib.Topology.Sober)",
+   "date": "2026-10-10",
+   "verdict": "match: IsGenericPoint"
+  },
+  {
+   "tool": "loogle",
+   "query": "IsGenericPoint, T0Space",
+   "results": "IsGenericPoint.eq (Mathlib.Topology.Sober)",
+   "date": "2026-10-10",
+   "verdict": "match (IsGenericPoint is the notion; uniqueness under T0)"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -n '^def IsGenericPoint' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/Topology/Sober.lean",
+   "results": "Sober.lean:39 def IsGenericPoint (x : α) (S : Set α) : Prop := closure ({x} : Set α) = S, tagged @[stacks 004X \"(1)\"]",
+   "date": "2026-10-10",
+   "verdict": "match (read)"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "IsGenericPoint",
+  "file": "Mathlib/Topology/Sober.lean",
+  "how": "exact: `IsGenericPoint x S := closure {x} = S` (Sober.lean:39, @[stacks 004X \"(1)\"]); Mathlib allows any set S, the node's notion is its restriction to irreducible closed S (closure {x} = S already forces x ∈ S and S irreducible closed)"
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "def-sc-function-field",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-abelian-varieties",
+ "unit": "sk-def-av-pic"
+}

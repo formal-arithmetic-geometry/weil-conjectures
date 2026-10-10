@@ -1,0 +1,78 @@
+{
+ "id": "def-sc-rational-functions",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "def-sc-function-field",
+   "place": "the statement's clause 'equivalently the ring of rational functions on C'",
+   "via": []
+  },
+  "same_as": []
+ },
+ "kind": "definition",
+ "title": "The ring of rational functions of a scheme",
+ "statement": "Let $X$ be a scheme [def-pc-scheme]. If $U,V\\subseteq X$ are dense open subsets, so is $U\\cap V$. A *rational function* on $X$ is an equivalence class of pairs $(U,f)$ with $U\\subseteq X$ a dense open subset and $f\\in\\mathcal O_X(U)$, where $(U,f)\\sim(V,g)$ if $f|_W=g|_W$ for some dense open $W\\subseteq U\\cap V$ (this is an equivalence relation: for transitivity intersect the two dense opens). The *ring of rational functions* $R(X)$ is the set of rational functions with $[(U,f)]+[(V,g)]=[(U\\cap V,f|_{U\\cap V}+g|_{U\\cap V})]$ and $[(U,f)]\\cdot[(V,g)]=[(U\\cap V,f|_{U\\cap V}\\,g|_{U\\cap V})]$; that is, $R(X)=\\varinjlim_{U}\\mathcal O_X(U)$, the colimit of rings over the dense open subsets $U\\subseteq X$ directed by reverse inclusion, with restriction maps. (Stacks defines a rational function as a rational map $X\\dashrightarrow\\mathbf A^1_{\\mathbf Z}$, an equivalence class of morphisms $U\\to\\mathbf A^1_{\\mathbf Z}$ on dense opens under the same relation, and its ring structure through $\\mathbf A^1_{\\mathbf Z}$ as a ring object; through the bijection $\\operatorname{Mor}(U,\\mathbf A^1_{\\mathbf Z})=\\mathcal O_X(U)$ of Stacks Example 01JH this is the ring above, as Stacks itself uses in the proof of Lemma 01RV. The DAG uses the description by sections given here, not the one by rational maps.)",
+ "source": {
+  "document": "literature/stacks-project/morphisms.tex",
+  "place": "Section 29.49 (label section-rational-maps): Definition 01RS (label definition-rational-map, line 12586), Definition 01RT (label definition-rational-function, line 12661), Definition 01RU (label definition-ring-of-rational-functions, line 12695); the description by sections is the first two equalities in the proof of Lemma 01RV (label lemma-integral-scheme-rational-functions, line 12705), using Schemes Example 01JH (label example-global-sections)"
+ },
+ "stmt_deps": [
+  "def-pc-scheme"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "ring of rational functions on a scheme, rational map to the affine line",
+   "results": "RatFunc, RatFunc.instIsFractionRingPolynomial (Mathlib.FieldTheory.RatFunc), AlgebraicGeometry.instIsFractionRingCarrierStalkCommRingCatPresheafFunctionField (Mathlib.AlgebraicGeometry.FunctionField)",
+   "date": "2026-10-10",
+   "verdict": "no match (RatFunc is K(T) of a ring K)"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "ring of rational functions of a scheme as colimit of sections over dense open subsets",
+   "results": "AlgebraicGeometry.Scheme.germToFunctionField, Scheme.functionField, instFieldCarrierFunctionField, functionField_isFractionRing_of_affine, functionField_isFractionRing_of_isAffineOpen (Mathlib.AlgebraicGeometry.FunctionField)",
+   "date": "2026-10-10",
+   "verdict": "no match (function field of an irreducible scheme only)"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Scheme.RationalMap",
+   "results": "Scheme.RationalMap, RationalMap.id, RationalMap.domain, Hom.toRationalMap, PartialMap.toRationalMap, RationalMap.representative, RationalMap.toPartialMap, RationalMap.IsOver, RationalMap.compHom (Mathlib.AlgebraicGeometry.Birational.RationalMap)",
+   "date": "2026-10-10",
+   "verdict": "no match: rational maps exist, no ring of rational functions"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rn -i 'rational function\\|ring of rational' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicGeometry; sed -n 45,55p,370,380p ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicGeometry/Birational/RationalMap.lean",
+   "results": "only EllipticCurve Formula comments; RationalMap.lean:47 structure PartialMap (domain dense open, hom), :374 def RationalMap := Quotient of PartialMap (equal on a dense open); no ring structure on X ⤏ A^1",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "def-sc-function-field",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-abelian-varieties",
+ "unit": "sk-def-av-pic",
+ "mathlib_candidate": {
+  "declaration": "AlgebraicGeometry.Scheme.RationalMap",
+  "file": "Mathlib/AlgebraicGeometry/Birational/RationalMap.lean",
+  "reason": "RationalMap X Y (line 374) is Stacks 01RS (classes of morphisms on dense opens); Mathlib has no ring structure on rational maps to the affine line and no colimit of sections over dense opens."
+ }
+}

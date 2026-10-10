@@ -3,24 +3,63 @@
  "blueprint": {
   "is": "def-sc-function-field",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "definition",
  "title": "The function field of a curve",
- "statement": "Let $C$ be a curve over $k$. The\n*function field* $k(C)$ is the product of the stalks of the\nstructure sheaf at the generic points of the irreducible components\nof $C$; equivalently the ring of rational functions on $C$. For\nan integral curve it is the field of fractions of\n$\\mathcal O_C(U)$ for any nonempty affine open $U\\subseteq C$.",
+ "statement": "Let $C$ be a curve over $k$ [def-sc-curves], let $C_1,\\dots,C_n$ be the irreducible components of $C$ [def-weil-irreducible-components], and let $\\eta_i\\in C_i$ be the generic point of $C_i$ [def-sc-generic-point], which exists and is unique by [lem-sc-scheme-sober]. (There are finitely many components: $\\operatorname{Spec}k$ is a Noetherian scheme, so $C$, of finite type over it, is Noetherian [lem-weil-pbc-finite-type-over-noetherian] and has finitely many irreducible components [lem-weil-pbc-noetherian-finite-components].) The\n*function field* of $C$ is the product of the stalks of the\nstructure sheaf [def-weil-pbc-module-stalk] at these generic points,\n$$k(C):=\\mathcal O_{C,\\eta_1}\\times\\cdots\\times\\mathcal O_{C,\\eta_n}.$$\nEquivalently it is the ring $R(C)$ of rational functions on $C$ [def-sc-rational-functions]: the germ map $R(C)\\to k(C)$, $[(U,f)]\\mapsto(f_{\\eta_1},\\dots,f_{\\eta_n})$, is a ring isomorphism by [lem-sc-rational-functions-generic-stalks], and $k(C)$ is identified with $R(C)$ through it. For\nan integral curve $C$ [def-pc-integral-scheme] there is one component, $C$ itself, with generic point $\\eta$, and $k(C)=\\mathcal O_{C,\\eta}$ is a field [lem-sc-rational-functions-generic-stalks]; for any nonempty affine open $U\\subseteq C$ the germ map $\\mathcal O_C(U)\\to k(C)$ makes $k(C)$ the field of fractions of\n$\\mathcal O_C(U)$ [lem-sc-integral-function-field-affine-fraction]. More generally, for any integral scheme $X$ with generic point $\\eta$ one writes $k(X):=\\mathcal O_{X,\\eta}$, the function field of $X$ (Stacks Definition 01RW), with the same two properties by the same two nodes.",
  "source": {
   "document": "literature/blueprint/master/blueprint/sec-abelian-varieties/sk-def-av-pic/def-sc-function-field.md",
   "place": "node def-sc-function-field, order 441"
  },
  "stmt_deps": [
-  "def-sc-curves"
+  "def-sc-curves",
+  "def-weil-irreducible-components",
+  "def-sc-generic-point",
+  "lem-sc-scheme-sober",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-weil-pbc-noetherian-finite-components",
+  "def-weil-pbc-module-stalk",
+  "def-sc-rational-functions",
+  "lem-sc-rational-functions-generic-stalks",
+  "def-pc-integral-scheme",
+  "lem-sc-integral-function-field-affine-fraction"
  ],
  "proof": [],
  "proof_deps": [],
  "proof_origin": null,
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "function field of a scheme: product of stalks at generic points of irreducible components",
+   "results": "AlgebraicGeometry.Scheme.functionField (Mathlib.AlgebraicGeometry.FunctionField, abbrev, [IrreducibleSpace X]), Scheme.residueField, instFieldCarrierFunctionField, instIsFractionRingCarrierStalkCommRingCatPresheafFunctionField, stalkFunctionFieldAlgebra",
+   "date": "2026-10-10",
+   "verdict": "no match for reducible curves; irreducible case Scheme.functionField"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "function field of a reducible scheme with finitely many irreducible components, product over generic points",
+   "results": "Scheme.functionField, instFieldCarrierFunctionField, germToFunctionField, functionField_isFractionRing_of_affine, instIsFractionRingCarrierStalkCommRingCatPresheafFunctionField (Mathlib.AlgebraicGeometry.FunctionField)",
+   "date": "2026-10-10",
+   "verdict": "no match for the product; irreducible case only"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -n 'abbrev Scheme.functionField' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicGeometry/FunctionField.lean; grep -rn 'functionField\\|RationalFunction\\|rationalFunction' ~/weil-conjectures-slopmaster2/WeilConjectures (definitions only)",
+   "results": "FunctionField.lean:37 abbrev Scheme.functionField [IrreducibleSpace X] : CommRingCat := X.presheaf.stalk (genericPoint X); slopmaster2 defines no function field of its own (functionFieldCone, functionFieldRingHom, functionFieldCoordinates are built on Mathlib's Scheme.functionField); no ring of rational functions anywhere",
+   "date": "2026-10-10",
+   "verdict": "generalization in the other direction: Mathlib covers the irreducible (in particular integral) case only"
+  },
+  {
+   "tool": "local_search",
+   "query": "functionField",
+   "results": "AlgebraicGeometry.Scheme.functionField and the declarations around it in Mathlib.AlgebraicGeometry.FunctionField",
+   "date": "2026-10-10",
+   "verdict": "see grep"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [],
  "blueprint_kind": "definition",
@@ -44,5 +83,23 @@
   }
  },
  "chapter": "sec-abelian-varieties",
- "unit": "sk-def-av-pic"
+ "unit": "sk-def-av-pic",
+ "mathlib_candidate": {
+  "declaration": "AlgebraicGeometry.Scheme.functionField",
+  "file": "Mathlib/AlgebraicGeometry/FunctionField.lean",
+  "reason": "Line 37: the stalk at the generic point of an irreducible scheme. It is this node's k(C) exactly when C is irreducible (n = 1), in particular for the integral curves on which every citer uses k(C); for a reducible curve the node's product has no Mathlib counterpart. Not a rule-0 attachment: it states only the irreducible case."
+ },
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "def-sc-function-field",
+  "worker": "stage1",
+  "summary": "Definition node: every notion it uses is now cited. Curve: def-sc-curves; irreducible components: def-weil-irreducible-components; stalk of the structure sheaf: def-weil-pbc-module-stalk; integral: def-pc-integral-scheme. The DAG had no node for generic points, for the existence and uniqueness of generic points of irreducible closed subsets of a scheme, or for rational functions, so def-sc-generic-point (Topology 004X, Mathlib leaf IsGenericPoint), lem-sc-scheme-sober (Schemes 01IS, Mathlib leaf QuasiSober/T0Space/IsGenericPoint.eq) and def-sc-rational-functions (Morphisms 01RS/01RT/01RU, written by sections over dense opens as Stacks itself does in the proof of 01RV; unsplit, Mathlib has RationalMap but no ring) are new. Two clauses are lemmas, not definitions: 'equivalently the ring of rational functions' is Morphisms Lemma 01RV, now lem-sc-rational-functions-generic-stalks (unsplit), cited together with the finiteness of the components through lem-weil-pbc-finite-type-over-noetherian and lem-weil-pbc-noetherian-finite-components (other units, used as tools); 'for an integral curve it is the field of fractions of O_C(U)' is lem-sc-integral-function-field-affine-fraction, a Mathlib leaf (functionField_isFractionRing_of_isAffineOpen). The definition now fixes k(C) as the product and states the other descriptions with these nodes. The last sentence, k(X) for an arbitrary integral scheme, is added (Stacks 01RW) because citers (def-sc-normalization, lem-sc-finite-constant-length-flat, lem-sc-deg-pullback-finite) use k(X) for integral schemes and varieties that are not curves. No cycle: none of the cited nodes depends on this item. Mathlib's Scheme.functionField covers only irreducible schemes, so it is recorded as mathlib_candidate, not as a match; slopmaster2 has no declaration for this node.",
+  "blueprint": "The blueprint node is a definition without proof; its three clauses are realized as follows: the product of the stalks at the generic points is the definition itself (with def-sc-generic-point, lem-sc-scheme-sober, def-weil-pbc-module-stalk); 'equivalently the ring of rational functions' by def-sc-rational-functions and lem-sc-rational-functions-generic-stalks; 'for an integral curve the field of fractions of O_C(U)' by lem-sc-integral-function-field-affine-fraction."
+ },
+ "reviewed": "2026-10-10 L: definition node checked: k(C) as the product of the stalks at the generic points (existence/uniqueness by the new Mathlib leaf lem-sc-scheme-sober, generic point by def-sc-generic-point, IsGenericPoint verified), finiteness of components by two off-unit split nodes used as tools, the two \"equivalently\" clauses now backed by nodes (lem-sc-rational-functions-generic-stalks, 01RV, unsplit; lem-sc-integral-function-field-affine-fraction, functionField_isFractionRing_of_isAffineOpen line 148 verified). Extension k(X) := O_{X,eta} for integral schemes X (Stacks 01RW) accepted: the citers def-sc-normalization, lem-sc-finite-constant-length-flat, lem-sc-deg-pullback-finite use it. Scheme.functionField recorded as candidate (irreducible case only). Five new nodes accepted (3 Mathlib leaves, 2 unsplit).",
+ "tool_uses": [
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-weil-pbc-noetherian-finite-components"
+ ],
+ "lead_note": "2026-10-10 L: def-sc-curves defines curves over an algebraically closed field only, while the unit sk-def-av-pic and the citers lem-sc-rational-function-morphism, lem-sc-line-bundle-rational-section use curves over any field; the definition works verbatim over any field (noted by the worker; check at def-sc-curves). def-weil-irreducible-components asserts that components are closed without a node."
 }
