@@ -3,25 +3,59 @@
  "blueprint": {
   "is": "def-weil-pbc-etale-sheaves",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "definition",
  "title": "Sheaves of abelian groups and of modules",
- "statement": "For a scheme $T$, let $\\Ab(T_{\\Et})$ be the abelian category of sheaves of\nabelian groups on the small etale site [def-weil-pbc-etale-site] $T_{\\Et}$;\nit is a Grothendieck abelian category. For a commutative ring $R$, let $R_T$\nbe the constant sheaf of rings on $T_{\\Et}$ and write $\\Mod(T_{\\Et},R)$ for\nthe abelian category of sheaves of $R_T$-modules. A sheaf $F\\in\\Ab(T_{\\Et})$\nis *torsion* if every local section of $F$ is locally killed by a positive\ninteger: for $s\\in F(U)$ there are an etale covering $\\{U_i\\to U\\}$ and\nintegers $n_i>0$ with $n_is|_{U_i}=0$. Equivalently every geometric stalk of\n$F$ is torsion. This is weaker than asking every group $F(U)$ to be torsion:\nthe constant sheaf $\\mathbf Q/\\mathbf Z$ is torsion, while its sections over\n$U=\\coprod_{n\\ge1}T$ contain $(1/2^n)_n$, of infinite order. A\nsheaf of sets on $T_{\\Et}$ is *locally constant* if it is locally isomorphic\nto a constant sheaf, and *lisse* if it is locally constant with finite\nstalks. It is *constructible* if $T$ admits a finite partition into locally\nclosed constructible subschemes on each of which it is finite locally\nconstant. A sheaf has *torsion cohomology* if every cohomology sheaf is\ntorsion.",
+ "statement": "For a scheme $T$ [def-weil-pbc-scheme-conventions], let $\\Ab(T_{\\Et})$ be the abelian category of sheaves of abelian groups on the small etale site [def-weil-pbc-etale-site] $T_{\\Et}$; a sheaf of abelian groups is as in [def-weil-pbc-abelian-etale-sheaves], and $\\Ab(T_{\\Et})$ is a Grothendieck abelian category [lem-weil-pbc-abelian-etale-sheaves-grothendieck; def-sp-grothendieck-abelian]. For a commutative ring $R$, let $R_T$ be the constant sheaf of rings on $T_{\\Et}$ [def-weil-pbc-constant-sheaf] and write $\\Mod(T_{\\Et},R)$ for the abelian category of sheaves of $R_T$-modules [def-weil-sheaf-of-modules-category].\n\nA sheaf $F\\in\\Ab(T_{\\Et})$ is *torsion* if every local section is locally killed by a positive integer: for every object $U\\to T$ and $s\\in F(U)$ there are an etale covering $\\{U_i\\to U\\}$ and integers $n_i>0$ with $n_i(s|_{U_i})=0$.\n\nA sheaf of sets on $T_{\\Et}$ means an object of $\\Sh(T_{\\Et})$ as defined in [def-weil-pbc-etale-sheaf-of-sets]. Such a sheaf $F$ is *locally constant* if there is an etale covering $\\{U_i\\to T\\}$ such that, for each $i$, its restriction along the induced functor $(U_i)_{\\Et}\\to T_{\\Et}$ (without further sheafification) is isomorphic to a constant sheaf [def-weil-pbc-constant-sheaf]. It is *finite locally constant* if it is locally constant and every geometric stalk $F_{\\bar t}$ at every geometric point $\\bar t:\\operatorname{Spec}\\Omega\\to T$ [def-weil-geometric-point], with stalks defined in [def-weil-pbc-geometric-stalks], is a finite set; *lisse* means finite locally constant.\n\nA sheaf $F$ is *constructible* if $T$ has a finite stratification by locally closed subschemes $(\\iota_k:Z_k\\to T)_{k<n}$ [def-constructible-stratification] such that each underlying subset is constructible [def-weil-constructible-subset] and, for every $k$, the restriction $\\iota_k^{-1}F$ is finite locally constant. Here $\\iota_k^{-1}F$ denotes the sheafification [def-weil-pbc-sheafification] of the presheaf pullback of $F$ along the base-change functor $T_{\\Et}\\to (Z_k)_{\\Et}$, $V\\mapsto V\\times_T Z_k$ (the presheaf $W\\mapsto\\operatorname{colim}_{W\\to V\\times_TZ_k}F(V)$).\n\nFinally, for an object $K$ of a derived category of sheaves, say that $K$ has *torsion cohomology* if every cohomology sheaf $\\mathcal H^r(K)$, defined by the cohomology-sheaf construction [def-weil-derived-cohomology-sheaves], is a torsion sheaf in the preceding sense.",
  "source": {
   "document": "literature/blueprint/master/blueprint/sec-abelian-varieties/sk-prop-av-finite-etale-points/def-weil-pbc-etale-sheaves.md",
   "place": "node def-weil-pbc-etale-sheaves, order 581"
  },
  "stmt_deps": [
   "def-weil-pbc-etale-site",
-  "def-weil-pbc-scheme-conventions"
+  "def-weil-pbc-scheme-conventions",
+  "def-weil-pbc-abelian-etale-sheaves",
+  "lem-weil-pbc-abelian-etale-sheaves-grothendieck",
+  "def-sp-grothendieck-abelian",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-pbc-constant-sheaf",
+  "def-weil-pbc-etale-sheaf-of-sets",
+  "def-weil-pbc-geometric-stalks",
+  "def-weil-geometric-point",
+  "def-constructible-stratification",
+  "def-weil-constructible-subset",
+  "def-weil-pbc-sheafification",
+  "def-weil-derived-cohomology-sheaves"
  ],
  "proof": [],
  "proof_deps": [],
  "proof_origin": null,
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "sheaves of abelian groups and modules on the small etale site, torsion locally constant lisse constructible",
+   "results": "8 hits, including LightCondMod.LocallyConstantModule.functor and condensed-module sheafification declarations; no small-etale sheaf declaration or torsion/constructible/lisse predicate",
+   "date": "2026-10-11",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Sheaf, SheafOfModules, CategoryTheory.constantSheaf, IsLocallyConstantSheaf, IsConstructibleSheaf",
+   "results": "0 hits; unknown identifier IsLocallyConstantSheaf",
+   "date": "2026-10-11",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "Grothendieck abelian|constantSheaf|IsLocallyConstantSheaf|IsConstructibleSheaf|torsion sheaf in CategoryTheory AlgebraicGeometry",
+   "results": "25 hits for Mathlib constantSheaf and Grothendieck-category documentation; no IsLocallyConstantSheaf, IsConstructibleSheaf, or torsion-sheaf declaration",
+   "date": "2026-10-11",
+   "verdict": "no exact match; existing generic Mathlib pieces are represented by cited DAG leaves"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [],
  "blueprint_kind": "definition",
@@ -46,5 +80,20 @@
   }
  },
  "chapter": "sec-abelian-varieties",
- "unit": "sk-prop-av-finite-etale-points"
+ "unit": "sk-prop-av-finite-etale-points",
+ "split_report": {
+  "date": "2026-10-11",
+  "item": "def-weil-pbc-etale-sheaves",
+  "worker": "stage1",
+  "summary": "Removed the cyclic citations and the unsupported torsion example; defined locally constant, finite locally constant, and lisse inline. Constructible restriction uses sheafification of the presheaf inverse image along etale base change.",
+  "blueprint": "The statement realizes every definition clause of the blueprint node: the abelian and module categories, local-section torsion, locally constant/finite locally constant/lisse, constructible stratification and restriction, and torsion cohomology."
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-des1853",
+  "group": "E1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-des1853 (reviewer sub-agent of L); spot-checked: Return R-des1828 points 1,2,3,5,6 repaired (five cyclic citations gone; locally constant/finite locally constant/lisse inline with sheaf-of-sets, geometric point/stalk citations; constructible cites stratification, constructible-subset, sheafification; torsion cohomology cites def-weil-derived-cohomology-sheaves; stmt_deps deduplicated). C7/C8: cited other-unit nodes (constructible-stratification, constant-sheaf, sp-grothendieck-abelian, scheme-conventions) are generic tools. FIX more, RETURN less: (1) C4/point 4 not done though the second reading claims it: dropped the Q/Z infinite-coproduct remark from the definition; (2) C1/E: constructible restriction still said pullback along (Z_k)_Et -> T_Et, ill-typed for an immersion; replaced by the base-change functor T_Et -> (Z_k)_Et, V -> V x_T Z_k, with the presheaf colimit written out; (3) metadata: def-weil-pbc-scheme-conventions was a stmt_dep never cited; cited it for 'scheme'.; 1 file(s) fixed by the reviewer"
+ }
 }
