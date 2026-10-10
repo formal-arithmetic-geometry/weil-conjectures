@@ -5,12 +5,16 @@ Authors: Claude
 -/
 module
 
+public import Mathlib.Algebra.Category.ModuleCat.Products
+public import Mathlib.LinearAlgebra.DirectSum.Finite
 public import Mathlib.AlgebraicGeometry.Morphisms.UniversallyOpen
 public import Mathlib.CategoryTheory.Generator.Sheaf
 public import Mathlib.CategoryTheory.ObjectProperty.FiniteProducts
 public import WeilConjectures.Algebra.Homology.ResolutionByClass
 public import Mathlib.CategoryTheory.Sites.EpiMono
 public import WeilConjectures.CategoryTheory.Abelian.Flat.Basic
+public import WeilConjectures.AlgebraicGeometry.FundamentalGroup.LocallyTrivial
+public import WeilConjectures.CategoryTheory.ConcreteCategory.FinitelyGenerated
 public import WeilConjectures.ConstructibleSheaf.Monoidal
 public import WeilConjectures.ConstructibleSheaf.OpenClosed
 public import WeilConjectures.Mathlib.AlgebraicGeometry.IdealSheaf.Subscheme
@@ -343,6 +347,90 @@ noncomputable def freeYonedaTrivialCoverIso [Finite S] :
       rw [he, Equiv.apply_symm_apply, Equiv.apply_symm_apply])
 
 end TrivialCover
+
+section FiniteEtale
+
+variable {U : Scheme.{u}}
+
+/-- Free sheaves on isomorphic étale `U`-schemes are isomorphic. -/
+noncomputable def freeYonedaMapIso {A B : U.Etale} (i : A ≅ B) :
+    Sheaf.freeYoneda U.smallEtaleTopology A (ModuleCat.of Λ Λ) ≅
+      Sheaf.freeYoneda U.smallEtaleTopology B (ModuleCat.of Λ Λ) :=
+  let e (G : Sheaf U.smallEtaleTopology (ModuleCat.{u + 1} Λ)) :
+      (Sheaf.freeYoneda U.smallEtaleTopology A (ModuleCat.of Λ Λ) ⟶ G) ≃
+        (Sheaf.freeYoneda U.smallEtaleTopology B (ModuleCat.of Λ Λ) ⟶ G) :=
+    Sheaf.freeYonedaHomEquiv.trans
+      ((Iso.homCongr (Iso.refl _) (G.obj.mapIso i.op).symm).trans Sheaf.freeYonedaHomEquiv.symm)
+  have he {G G' : Sheaf U.smallEtaleTopology (ModuleCat.{u + 1} Λ)} (f : _ ⟶ G) (h : G ⟶ G') :
+      e G' (f ≫ h) = e G f ≫ h := by
+    apply Sheaf.freeYonedaHomEquiv.injective
+    simp only [e, Equiv.trans_apply, Equiv.apply_symm_apply, freeYonedaHomEquiv_comp,
+      Iso.homCongr_apply, Iso.refl_inv, Category.id_comp, Iso.symm_hom, Functor.mapIso_inv,
+      Category.assoc]
+    erw [h.hom.naturality]
+  Coyoneda.ext _ _ (fun f ↦ e _ f) (fun f ↦ (e _).symm f) (fun f ↦ by simp)
+    (fun f ↦ by simp) (fun f h ↦ by
+      apply (e _).injective
+      rw [he, Equiv.apply_symm_apply, Equiv.apply_symm_apply])
+
+/-- The free sheaf on an étale `U`-scheme isomorphic to a trivial cover is constant. -/
+lemma isConstant_freeYoneda_of_iso {S : Type u} [Finite S] {V : U.Etale}
+    (i : V ≅ trivialCover S) :
+    (Sheaf.freeYoneda U.smallEtaleTopology V (ModuleCat.of Λ Λ)).IsConstant
+      U.smallEtaleTopology :=
+  Sheaf.isConstant_of_iso _ (freeYonedaMapIso i ≪≫ freeYonedaTrivialCoverIso Λ)
+
+/-- The base change of an étale `U`-scheme `V` along `g`, when it is a trivial cover, as an
+isomorphism of étale `U'`-schemes. -/
+noncomputable def etaleObjIsoTrivialCover {U' : Scheme.{u}} {g : U' ⟶ U} {V : U.Etale}
+    {S : Type u} {fst : (∐ fun _ : S ↦ U') ⟶ V.left}
+    (h : IsPullback fst (Sigma.desc fun _ ↦ 𝟙 U') V.hom g) :
+    g.Etale.obj V ≅ trivialCover S :=
+  MorphismProperty.Over.isoMk h.isoPullback.symm (by simp; rfl)
+
+variable [Finite Λ] in
+/-- **Free sheaves on finite étale schemes are finite locally constant.** For a finite étale
+`U`-scheme `V`, the free sheaf `Λ[V]` is finite locally constant: étale-locally `V` is a trivial
+cover (`AlgebraicGeometry.Scheme.FiniteEtale.exists_etale_isPullback_sigma`), on which the free
+sheaf is constant, and its stalks are free of finite rank, the geometric fibres of `V` being
+finite. -/
+theorem isFiniteLocallyConstantSheaf_freeYoneda_of_isFinite (V : U.Etale) [IsFinite V.hom] :
+    Scheme.IsFiniteLocallyConstantSheaf
+      (Sheaf.freeYoneda U.smallEtaleTopology V (ModuleCat.of Λ Λ)) := by
+  have : PreservesFilteredColimitsOfSize.{u, u} (CategoryTheory.forget (ModuleCat.{u + 1} Λ)) :=
+    preservesFilteredColimitsOfSize_shrink.{u, u + 1, u, u + 1} _
+  have hloc : Scheme.IsLocallyConstantSheaf
+      (Sheaf.freeYoneda U.smallEtaleTopology V (ModuleCat.of Λ Λ)) := by
+    choose U' g hg S hS fst hy hpb using fun y : U ↦
+      Scheme.FiniteEtale.exists_etale_isPullback_sigma (⟨V, ‹_›⟩ : U.FiniteEtale) y
+    let 𝒰 : Scheme.Cover.{u} Scheme.etalePrecoverage U :=
+      Scheme.Cover.mkOfCovers U U' g (fun y ↦ ⟨y, hy y⟩) hg
+    refine ⟨⟨⟨𝒰, fun y ↦ (Scheme.isConstant_over_iff_upperStar _ _ _).2 ?_⟩⟩⟩
+    have := isConstant_freeYoneda_of_iso (Λ := Λ) (etaleObjIsoTrivialCover (hpb y))
+    exact (Sheaf.isConstant_congr (U' y).smallEtaleTopology (upperStarFreeYonedaIso (Λ := Λ) (g y) V).symm :)
+  have hfin : Scheme.IsFiniteSheaf
+      (Sheaf.freeYoneda U.smallEtaleTopology V (ModuleCat.of Λ Λ)) := ⟨fun Ω _ _ s ↦ by
+    obtain ⟨ι, _, -, ⟨e⟩⟩ := V.hom.exists_overIso_sigma_of_isSepClosed s
+    let i : s.Etale.obj V ≅ trivialCover ι :=
+      MorphismProperty.Over.isoMk ((Over.forget _).mapIso e) (Over.w e.hom)
+    have : Module.Finite Λ ((∐ fun _ : ι ↦ ModuleCat.of.{u + 1} Λ Λ : ModuleCat.{u + 1} Λ)) :=
+      have := Classical.decEq (ULift.{u + 1} ι)
+      have : Finite (ULift.{u + 1} ι) := Finite.of_equiv ι Equiv.ulift.symm
+      (Module.Finite.equiv_iff ((Sigma.whiskerEquiv (f := fun _ : ULift.{u + 1} ι ↦
+        ModuleCat.of.{u + 1} Λ Λ) (g := fun _ : ι ↦ ModuleCat.of.{u + 1} Λ Λ) Equiv.ulift
+        (fun _ ↦ Iso.refl _)).symm ≪≫ ModuleCat.coprodIsoDirectSum.{u + 1, u + 1, u + 1}
+        (fun _ : ULift.{u + 1} ι ↦ ModuleCat.of.{u + 1} Λ Λ)).toLinearEquiv).mpr
+          (Module.Finite.instDirectSum (R := Λ) (fun _ : ULift.{u + 1} ι ↦ Λ))
+    have h := (((ModuleCat.isFinitelyGenerated_iff _).2 this).of_iso
+      ((Scheme.pointSmallEtale (𝟙 (Spec (.of Ω)))).sheafFiberConstantSheafIso _).symm).of_iso
+      ((Scheme.pointSmallEtale (𝟙 _)).sheafFiber.mapIso
+        ((upperStarFreeYonedaIso (Λ := Λ) s V ≪≫ freeYonedaMapIso (Λ := Λ) i ≪≫
+          freeYonedaTrivialCoverIso Λ).symm) ≪≫
+        (Etale.upperStarCompSheafFiberIso _ s (𝟙 _)).app _)
+    rwa [Category.id_comp] at h⟩
+  exact { toIsLocallyConstantSheaf := hloc, toIsFiniteSheaf := hfin }
+
+end FiniteEtale
 
 /-- **Generic local constancy of free sheaves.** Let `Z` be a nonempty scheme with Noetherian
 underlying space and `Λ` finite. The free étale sheaf `Λ[W]` on an affine étale `Z`-scheme `W`
