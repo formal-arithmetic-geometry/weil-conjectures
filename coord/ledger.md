@@ -2750,3 +2750,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 22:00 L: merged deliver/G1/cor-pd-pic0-base-change (reviewer FIX; first push; new nodes: 0)
 - 22:00 L: merged deliver/H1/def-sc-duality-equation-base-change-map (reviewer FIX; first push; new nodes: 0)
 - 22:00 L: returned deliver/E1/def-nagata-scheme-theoretically-dense-open (reviewer RETURN: Not a fault: the definition is Mathlib's class AlgebraicGeometry.IsSchemeTheoreticallyDominant (Mathlib/AlgebraicGeometr)
+- 22:00 UTC L matched def-nagata-scheme-theoretically-dense-open to Mathlib IsSchemeTheoreticallyDominant (R-std2730); E1 delivery returned as unneeded
