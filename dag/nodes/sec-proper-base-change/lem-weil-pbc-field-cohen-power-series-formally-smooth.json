@@ -32,9 +32,84 @@
   "def-weil-pbc-cohen-ring",
   "def-weil-pbc-formally-smooth-adic"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "*The test datum.* Fix $n\\ge0$, $\\Lambda$ and $R=\\Lambda[[X_1,\\ldots,X_n]]$ [def-weil-pbc-multivariate-power-series] with $\\mathfrak m_R$ as in case (i) or (ii). Every commutative ring $D$ is a $\\mathbf Z$-algebra in exactly one way, and a homomorphism of $\\mathbf Z$-algebras is the same as a ring homomorphism [def-weil-pbc-algebra-hom-quotient]. So, by [def-weil-pbc-formally-smooth-adic] for $\\varphi:\\mathbf Z\\to R$ and $\\mathfrak n=\\mathfrak m_R$, the assertion is: for every commutative ring $D$, ideal $J\\subseteq D$ with $J^2=0$, quotient map $q:D\\to D/J$, and ring map $g:R\\to D/J$ with $g(\\mathfrak m_R^r)=0$ for some $r\\ge1$, there is a ring map $h:R\\to D$ with $q\\circ h=g$; and moreover such an $h$ satisfies $h(\\mathfrak m_R^{2r})=0$. Fix such $D,J,q,g,r$.",
+   "uses": [
+    "def-weil-pbc-multivariate-power-series",
+    "def-weil-pbc-formally-smooth-adic",
+    "def-weil-pbc-algebra-hom-quotient"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "More on Algebra, Definition Tag 07EB (definition-formally-smooth) as made explicit in def-weil-pbc-formally-smooth-adic; Lemma Tag 07NL (lemma-power-series-ring-over-Cohen-fs), statement"
+   }
+  },
+  {
+   "text": "*Case (ii).* Here $\\Lambda$ is a Cohen ring with residue characteristic $p$ [def-weil-pbc-cohen-ring], $R=C=\\Lambda[[X_1,\\ldots,X_n]]$ and $\\mathfrak m_R=(p,X_1,\\ldots,X_n)=\\mathfrak m_C$. Part (2) of [lem-weil-pbc-power-series-cohen-formally-smooth-adic] says that $C$ is formally smooth over $\\mathbf Z$ for the $\\mathfrak m_C$-adic topology. Applied to the datum of Step 1 ($D$ with its unique ring map $\\mathbf Z\\to D$, $J$, $q$, $g$, $k=r$; $g$ is a homomorphism of $\\mathbf Z$-algebras by Step 1), it gives a homomorphism of $\\mathbf Z$-algebras, i.e. a ring map, $h:R\\to D$ with $q\\circ h=g$.",
+   "uses": [
+    "lem-weil-pbc-power-series-cohen-formally-smooth-adic",
+    "def-weil-pbc-cohen-ring",
+    "def-weil-pbc-formally-smooth-adic"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "More on Algebra, Lemma Tag 07NL (lemma-power-series-ring-over-Cohen-fs), clause (3)"
+   }
+  },
+  {
+   "text": "*Case (i): $D$ is a $\\mathbf Q$-algebra compatibly with $g$ (the passage from $\\mathbf Z$ to $\\mathbf Q$).* Here $\\Lambda$ is a field of characteristic $0$, so the ring map $\\mathbf Z\\to\\Lambda$ is injective and every nonzero integer is a unit of $\\Lambda$; hence there is a unique ring map $\\iota:\\mathbf Q\\to\\Lambda\\subseteq R$, and $R$ is a $\\mathbf Q$-algebra through $\\iota$ (this is the $\\mathbf Q$-algebra structure of part (1) of [lem-weil-pbc-power-series-cohen-formally-smooth-adic]). The map $\\lambda_0:\\mathbf Z\\to\\mathbf Q$, $a\\mapsto a/1$, is a localization of $\\mathbf Z$ at the multiplicative subset $W=\\mathbf Z\\setminus\\{0\\}$ in the sense of [lem-weil-pbc-localization-square-zero-lifting]: (a) $\\lambda_0(s)=s$ is a unit of $\\mathbf Q$ for $s\\ne0$; (b) every rational number is $a/s=\\lambda_0(a)\\lambda_0(s)^{-1}$ with $a\\in\\mathbf Z$, $s\\in W$; (c) $\\lambda_0(a)=0$ means $a=0$, so $1\\cdot a=0$ with $1\\in W$. The composite $g\\circ\\iota:\\mathbf Q\\to D/J$ is a ring map, hence a homomorphism of $\\mathbf Z$-algebras for the unique $\\mathbf Z$-algebra structures (Step 1). Apply [lem-weil-pbc-localization-square-zero-lifting] with $R=\\mathbf Z$, $W$, $R'=\\mathbf Q$, the $\\mathbf Z$-algebra $D$, $N=J$ (square zero), $q$, and $g\\circ\\iota$: there is a ring map $\\mu:\\mathbf Q\\to D$ with $q\\circ\\mu=g\\circ\\iota$. (This is the formal smoothness half of the formal \\'etaleness of the localization $\\mathbf Z\\to\\mathbf Q$, Algebra Lemma Tag 04EG.) Make $D$ a $\\mathbf Q$-algebra through $\\mu$; then $D/J$ is a $\\mathbf Q$-algebra through $q\\circ\\mu=g\\circ\\iota$ [def-weil-pbc-algebra-hom-quotient], and $g$ is a homomorphism of $\\mathbf Q$-algebras since $g\\circ\\iota$ is exactly the structure map of $D/J$.",
+   "uses": [
+    "lem-weil-pbc-localization-square-zero-lifting",
+    "lem-weil-pbc-power-series-cohen-formally-smooth-adic",
+    "def-weil-pbc-algebra-hom-quotient"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra, Lemma Tag 04EG (lemma-localization-formally-etale): $R\\to S^{-1}R$ is formally \\'etale; used with More on Algebra Lemma Tag 07EF (lemma-compose-formally-smooth, proof omitted in the source: composing $\\mathbf Z\\to\\mathbf Q$ with $\\mathbf Q\\to R$), written out in Steps 3-4"
+   }
+  },
+  {
+   "text": "*Case (i): the lift.* In case (i), $R=\\Lambda[[X_1,\\ldots,X_n]]$ with $\\Lambda$ a field of characteristic $0$ and $\\mathfrak m_R=(X_1,\\ldots,X_n)$, which is $C$ and $\\mathfrak m_C$ of part (1) of [lem-weil-pbc-power-series-cohen-formally-smooth-adic] (with $K=\\Lambda$, $x_i=X_i$): $C$ is formally smooth over $\\mathbf Q$ for the $\\mathfrak m_C$-adic topology [def-weil-pbc-formally-smooth-adic]. Apply this to the $\\mathbf Q$-algebra $D$ of Step 3 (structure map $\\mu$), the ideal $J$ with $J^2=0$, $q$, and the homomorphism of $\\mathbf Q$-algebras $g:R\\to D/J$ (Step 3) with $g(\\mathfrak m_R^r)=0$, $k=r$: there is a homomorphism of $\\mathbf Q$-algebras $h:R\\to D$ with $q\\circ h=g$; in particular $h$ is a ring map.",
+   "uses": [
+    "lem-weil-pbc-power-series-cohen-formally-smooth-adic",
+    "def-weil-pbc-formally-smooth-adic"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "More on Algebra, Lemma Tag 07NL (lemma-power-series-ring-over-Cohen-fs), clause (1), composed with Step 3 as in Lemma Tag 07EF (lemma-compose-formally-smooth)"
+   }
+  },
+  {
+   "text": "*The bound $h(\\mathfrak m_R^{2r})=0$.* In both cases $h:R\\to D$ is a ring map with $q\\circ h=g$. For $a\\in\\mathfrak m_R^r$, $q(h(a))=g(a)=0$, so $h(a)\\in J$. The ideal $\\mathfrak m_R^{2r}=\\mathfrak m_R^r\\mathfrak m_R^r$ [def-weil-pbc-algebra-hom-quotient] consists of finite sums $\\sum_j a_jb_j$ with $a_j,b_j\\in\\mathfrak m_R^r$, and $h(\\sum_ja_jb_j)=\\sum_jh(a_j)h(b_j)\\in J^2=0$. Hence $h(\\mathfrak m_R^{2r})=0$, and by Step 1 $\\mathbf Z\\to R$ is formally smooth for the $\\mathfrak m_R$-adic topology in the explicit form stated.",
+   "uses": [
+    "def-weil-pbc-algebra-hom-quotient",
+    "def-weil-pbc-formally-smooth-adic"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "More on Algebra, Lemma Tag 07NL (lemma-power-series-ring-over-Cohen-fs), clauses (1) and (3); continuity of the lift as in Definition Tag 07EB"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-multivariate-power-series",
+  "def-weil-pbc-formally-smooth-adic",
+  "def-weil-pbc-algebra-hom-quotient",
+  "lem-weil-pbc-power-series-cohen-formally-smooth-adic",
+  "def-weil-pbc-cohen-ring",
+  "lem-weil-pbc-localization-square-zero-lifting"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "More on Algebra, Lemma Tag 07NL (lemma-power-series-ring-over-Cohen-fs), clauses (1) and (3) and proof, through lem-weil-pbc-power-series-cohen-formally-smooth-adic; the passage from Q to Z follows Algebra Lemma Tag 04EG (lemma-localization-formally-etale, algebra.tex) and More on Algebra Lemma Tag 07EF (lemma-compose-formally-smooth, proof omitted in the source, written out here)"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -56,10 +131,17 @@
    "results": "No formal smoothness theorem in either power-series directory and no Cohen ring definition or theorem in Mathlib/RingTheory",
    "date": "2026-10-10",
    "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rln 'FormallySmooth' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/RingTheory/PowerSeries ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/RingTheory/MvPowerSeries; grep -rn 'Cohen' .../Mathlib/RingTheory",
+   "results": "no FormallySmooth in the power-series directories; 'Cohen' only in a reference of RingTheory/Noetherian/OfPrime.lean (I. S. Cohen 1950), no Cohen ring",
+   "date": "2026-10-10",
+   "verdict": "no match (re-run at split with the correct Mathlib path; the earlier grep record named another checkout)"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "worker",
@@ -80,5 +162,13 @@
    "missing": []
   }
  },
- "lead_note": "2026-10-10 L: the same as lem-weil-pbc-power-series-cohen-formally-smooth-adic (07NL, split) except that case (i) is stated over Z instead of Q: a Q-algebra is formally smooth over Z iff over Q (Z -> Q is a localization, formally etale). Its split should cite that node plus this one-line base change, with the explicit lifting form unpacked from def-weil-pbc-formally-smooth-adic."
+ "lead_note": "2026-10-10 L: the same as lem-weil-pbc-power-series-cohen-formally-smooth-adic (07NL, split) except that case (i) is stated over Z instead of Q: a Q-algebra is formally smooth over Z iff over Q (Z -> Q is a localization, formally etale). Its split should cite that node plus this one-line base change, with the explicit lifting form unpacked from def-weil-pbc-formally-smooth-adic.",
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "lem-weil-pbc-field-cohen-power-series-formally-smooth",
+  "worker": "stage1",
+  "summary": "Read 07NL (more-algebra.tex, lemma-power-series-ring-over-Cohen-fs) and its proof, 07EB, 07EF (lemma-compose-formally-smooth, proof omitted) and Algebra 04EG (lemma-localization-formally-etale); tags verified in tags/tags. Statement kept. As the lead_note says, the item is lem-weil-pbc-power-series-cohen-formally-smooth-adic (07NL (1),(3), split and reviewed) except that case (i) is over Z: Step 1 unpacks def-weil-pbc-formally-smooth-adic for Z -> R (Z-algebra maps = ring maps); Step 2 is case (ii) = part (2) of the split node verbatim; Step 3 makes D a Q-algebra compatibly with g by the square-zero lifting for the localization Z -> Q (lem-weil-pbc-localization-square-zero-lifting, Mathlib leaf; 04EG), checking the three localization axioms for Q; Step 4 applies part (1) of the split node over Q (this is the composition 07EF written out); Step 5 proves the extra clause h(m^{2r})=0 of the explicit form (h(m^r) in J, J^2=0). No new node. No slopmaster2 Lean (grep of node ids, 07NL, Cohen, PowerSeries+smooth: none). Blueprint search (07NL, 'power series formally smooth', 'Cohen ring', 'formally smooth adic', 'localization formally etale'): no blueprint node.",
+  "blueprint": "No blueprint node is the item; its ancestor thm-weil-pbc-finite-etale-lifting (step 7, essential surjectivity via complete-local algebraization, Stacks 07NN Cohen presentation) uses it through blueprint.from.via. Steps 1-5 realize the adic formal smoothness of Z -> Lambda[[X]] needed there to lift the Cohen presentation; the blueprint proof does not spell it out."
+ },
+ "reviewed": "2026-10-10 L: 5 steps; case (ii) is the split node lem-weil-pbc-power-series-cohen-formally-smooth-adic (2); case (i) passes from Z to Q through the localization lifting leaf (04EG) and that node (1), the composition 07EF written out; the bound h(m^{2r}) = 0 from J^2 = 0; 0 new nodes"
 }

@@ -1264,3 +1264,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 11:03 L: merged C1 lem-weil-pbc-module-ses-cech-h1-surjective (01EU, 0 new), C1 lem-weil-pbc-p-independent-extends-to-p-basis (07P2, 0 new), E1 lem-weil-pbc-minimal-finite-free-resolution-local (0CXF, +1 node 00MT).
 - 11:04 L: STATE: attachment check done paragraph and row; 5 ordinary workers launched (lem-weil-pbc-free-complex-unit-entry-splits, -cohen-power-series-presentation, -field-cohen-power-series-formally-smooth, -power-series-adic-evaluation, -regular-quotient-ideal-intersection).
 - 11:05 L: accepted lem-weil-pbc-power-series-adic-evaluation (3 steps on the universal-property node, continuity only; 0 new).
+- 11:06 L: accepted lem-weil-pbc-field-cohen-power-series-formally-smooth (5 steps on the 07NL node, Z to Q via 04EG; 0 new).
