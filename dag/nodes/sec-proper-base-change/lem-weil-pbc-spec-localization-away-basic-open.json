@@ -1,0 +1,77 @@
+{
+ "id": "lem-weil-pbc-spec-localization-away-basic-open",
+ "kind": "statement",
+ "title": "Basic opens form a basis of Spec A, and Spec A_f is homeomorphic to the open D(f)",
+ "statement": "Let $A$ be a commutative ring and $\\operatorname{Spec}A$ its set of prime ideals with the Zariski topology [def-weil-affine-spectrum]; for $a\\in A$ let $D(a)=\\{\\mathfrak p\\in\\operatorname{Spec}A: a\\notin\\mathfrak p\\}$. Then (i) every $D(a)$ is open, and the sets $D(a)$, $a\\in A$, form a basis of the topology: for every open $V\\subseteq\\operatorname{Spec}A$ and every $\\mathfrak p\\in V$ there is $a\\in A$ with $\\mathfrak p\\in D(a)\\subseteq V$; (ii) for $f\\in A$, with $A_f$ the localization of $A$ at $\\{1,f,f^2,\\dots\\}$ [def-weil-ring-localization-away] and $\\iota:A\\to A_f$, $a\\mapsto a/1$, the map $\\operatorname{Spec}A_f\\to\\operatorname{Spec}A$, $\\mathfrak P\\mapsto\\iota^{-1}(\\mathfrak P)$, is a homeomorphism of $\\operatorname{Spec}A_f$ onto the open subset $D(f)$ of $\\operatorname{Spec}A$ with its subspace topology [def-kun-subspace-topology].",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Algebra, Lemma Tag 00E0 (lemma-Zariski-topology, line 2987), parts (11) and (14): D(f) is the complement of the closed V(f), and for p not in a closed V(I) there is f with p in D(f) and D(f) disjoint from V(I) (so the D(f) form a basis); Lemma Tag 00E4 (lemma-standard-open, line 3207): Spec(R_f) -> D(f) is a homeomorphism; tags verified in stacks-project/tags/tags (00E0,algebra-lemma-Zariski-topology; 00E4,algebra-lemma-standard-open). Used in the proof of Lemma Tag 00ST (3) (line 36715) to pass from an open neighbourhood of q to S_g"
+ },
+ "stmt_deps": [
+  "def-weil-affine-spectrum",
+  "def-weil-ring-localization-away",
+  "def-kun-subspace-topology"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Spec of the localization away from r is homeomorphic to the basic open set D(r) (open embedding)",
+   "results": "PrimeSpectrum.localization_away_isOpenEmbedding (Mathlib.RingTheory.Spectrum.Prime.Topology), AlgebraicGeometry.Scheme.isOpenImmersion_SpecMap_localizationAway, AlgebraicGeometry.basicOpenIsoSpecAway, PrimeSpectrum.basicOpen",
+   "date": "2026-10-10",
+   "verdict": "match: PrimeSpectrum.localization_away_isOpenEmbedding with localization_away_comap_range"
+  },
+  {
+   "tool": "loogle",
+   "query": "Topology.IsOpenEmbedding (PrimeSpectrum.comap (algebraMap _ _))",
+   "results": "PrimeSpectrum.localization_away_isOpenEmbedding (Mathlib.RingTheory.Spectrum.Prime.Topology)",
+   "date": "2026-10-10",
+   "verdict": "match"
+  },
+  {
+   "tool": "local_search",
+   "query": "localization_away_comap_range (project ~/weil-conjectures-slopmaster2)",
+   "results": "PrimeSpectrum.localization_away_comap_range in .lake/packages/mathlib/Mathlib/RingTheory/Spectrum/Prime/Topology.lean (index unavailable; existence confirmed by grep)",
+   "date": "2026-10-10",
+   "verdict": "match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -n 'theorem localization_away_comap_range|localization_away_isOpenEmbedding|theorem isTopologicalBasis_basic_opens' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/RingTheory/Spectrum/Prime/Topology.lean; sed -n 555,615p of that file",
+   "results": "isTopologicalBasis_basic_opens line 562, localization_away_comap_range line 592, localization_away_isOpenEmbedding line 604 (and isOpen_basicOpen)",
+   "date": "2026-10-10",
+   "verdict": "match: one declaration per clause"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "PrimeSpectrum.isTopologicalBasis_basic_opens; PrimeSpectrum.localization_away_isOpenEmbedding; PrimeSpectrum.localization_away_comap_range",
+  "file": "Mathlib/RingTheory/Spectrum/Prime/Topology.lean",
+  "line": 562,
+  "how": "one declaration per clause: (i) isTopologicalBasis_basic_opens (line 562): IsTopologicalBasis (Set.range fun r => (basicOpen r : Set (PrimeSpectrum R))), basicOpen r being {p | r notin p} (openness of each D(a) is part of being a basis); (ii) localization_away_isOpenEmbedding (line 604): for [IsLocalization.Away r S], IsOpenEmbedding (comap (algebraMap R S)), i.e. a homeomorphism onto its open range, and localization_away_comap_range (line 592): Set.range (comap (algebraMap R S)) = basicOpen r; comap sends P to its inverse image. Lines read with sed -n 555,615p on 2026-10-10."
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-equation-count-localize-relative-global-complete-intersection",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lead_note": "Composed leaf accepted by L (2026-10-10): PrimeSpectrum.isTopologicalBasis_basic_opens (Spectrum/Prime/Topology.lean:562), localization_away_comap_range (:592) and localization_away_isOpenEmbedding (:604), one per clause; checked with sed.",
+ "reviewed": "pass (L, 2026-10-10): leaf, declarations checked by sed."
+}

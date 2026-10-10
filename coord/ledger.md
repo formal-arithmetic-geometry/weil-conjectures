@@ -1064,3 +1064,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 08:18 L: accepted lem-weil-pbc-dimension-supremum-local-dimensions (4 steps; new leaf open-subspace-irreducible-closed-correspondence, IrreducibleCloseds.orderIsoOfIsOpenEmbedding).
 - 08:18 L: accepted lem-weil-pbc-finite-separable-tensor-field-reduced (4 steps; new unsplit node separable-polynomial-quotient-reduced). Stage-3 note: the source repository's WeilConjectures/Mathlib/RingTheory/Nilpotent/GeometricallyReduced.lean has isReduced_tensorProduct_of_formallyUnramified without sorry.
 - 08:20 L: accepted lem-weil-pbc-smooth-over-field-regular-local (8 steps, no new nodes).
+- 08:21 L: accepted lem-weil-pbc-equation-count-localize-relative-global-complete-intersection (7 steps; new unsplit node fibre-dimension-bounded-open-upstairs 00QH, new leaf spec-localization-away-basic-open). The brief's tag 00RJ for lemma-dimension-fibres-bounded-open-upstairs was wrong; it is 00QH.
