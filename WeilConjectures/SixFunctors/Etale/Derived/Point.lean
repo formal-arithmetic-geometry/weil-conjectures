@@ -6,6 +6,7 @@ Authors: Claude
 module
 
 public import Mathlib.Algebra.Homology.DerivedCategory.HomologySequence
+public import WeilConjectures.AlgebraicGeometry.Sites.ConstantSheafSections
 public import WeilConjectures.AlgebraicGeometry.Sites.PointCohomology
 public import WeilConjectures.SixFunctors.Etale.Derived.Coefficients
 public import WeilConjectures.SixFunctors.Etale.Derived.GlobalSections
@@ -164,5 +165,69 @@ theorem nonempty_iso_rightDerivedGlobalSections_coefficientDual
   sorry
 
 end Duality
+
+section ConstantSheaf
+
+variable {Λ : Type (u + 1)} [CommRing Λ]
+
+/-- Over a separably closed field `k`, a morphism of étale sheaves of `Λ`-modules on `Spec k`
+which is bijective on global sections is an isomorphism. -/
+theorem isIso_of_bijective_app_etalePoint
+    {F G : Sheaf (Spec (.of k)).smallEtaleTopology (ModuleCat.{u + 1} Λ)} (f : F ⟶ G)
+    (hf : Function.Bijective (f.hom.app (op (etalePoint k)))) : IsIso f := by
+  have : Mono f := by
+    refine Preadditive.mono_of_isZero_kernel' _ (kernelIsKernel f) ?_
+    refine isZero_of_subsingleton_sections_of_isSepClosed _ ⟨fun x y ↦ ?_⟩
+    have hι : Mono ((sheafToPresheaf _ _).map (kernel.ι f)) := Functor.map_mono _ _
+    have hι' : Function.Injective ((kernel.ι f).hom.app (op (etalePoint k))) :=
+      (ModuleCat.mono_iff_injective _).1 ((NatTrans.mono_iff_mono_app _).1 hι _)
+    have hz : ∀ z, (kernel.ι f).hom.app (op (etalePoint k)) z = 0 := fun z ↦ hf.1 (by
+      rw [← ConcreteCategory.comp_apply, ← NatTrans.comp_app]
+      change ConcreteCategory.hom ((kernel.ι f ≫ f).hom.app _) z = _
+      rw [kernel.condition]
+      simp)
+    exact hι' ((hz x).trans (hz y).symm)
+  have : Epi f := by
+    refine Preadditive.epi_of_isZero_cokernel' _ (cokernelIsCokernel f) ?_
+    refine isZero_of_subsingleton_sections_of_isSepClosed _ ⟨fun x y ↦ ?_⟩
+    have hz : ∀ z : (cokernel f).obj.obj (op (etalePoint k)), z = 0 := fun z ↦ by
+      obtain ⟨w, rfl⟩ := surjective_app_of_epi_of_isSepClosed k (cokernel.π f) z
+      obtain ⟨v, rfl⟩ := hf.2 w
+      rw [← ConcreteCategory.comp_apply, ← NatTrans.comp_app]
+      change ConcreteCategory.hom ((f ≫ cokernel.π f).hom.app _) v = _
+      rw [cokernel.condition]
+      simp
+    exact (hz x).trans (hz y).symm
+  exact isIso_of_mono_of_epi f
+
+/-- Over a separably closed field `k`, the counit `Γ(F)_k ⟶ F` of the adjunction between the
+constant étale sheaf functor on `Spec k` and global sections is an isomorphism: an étale sheaf on
+`Spec k` is the constant sheaf on its global sections. -/
+instance isIso_constantSheafAdj_counit_app_of_isSepClosed
+    (F : Sheaf (Spec (.of k)).smallEtaleTopology (ModuleCat.{u + 1} Λ)) :
+    IsIso ((constantSheafAdj (Spec (.of k)).smallEtaleTopology (ModuleCat.{u + 1} Λ) (isTerminalEtalePoint (k := k))).counit.app
+      F) := by
+  set adj := constantSheafAdj (Spec (.of k)).smallEtaleTopology (ModuleCat.{u + 1} Λ) (isTerminalEtalePoint (k := k))
+  have := Scheme.isIso_constantSheafAdj_unit_app (Spec (.of k)) (isTerminalEtalePoint (k := k))
+    (((sheafSections _ _).obj (op (etalePoint k))).obj F)
+  have h : IsIso (((sheafSections _ _).obj (op (etalePoint k))).map (adj.counit.app F)) := by
+    have h₀ : IsIso (adj.unit.app _ ≫
+        ((sheafSections _ _).obj (op (etalePoint k))).map (adj.counit.app F)) := by
+      rw [adj.right_triangle_components F]; infer_instance
+    exact IsIso.of_isIso_comp_left (adj.unit.app _) _
+  exact isIso_of_bijective_app_etalePoint _
+    (ConcreteCategory.bijective_of_isIso (((sheafSections _ _).obj _).map (adj.counit.app F)))
+
+/-- Over a separably closed field `k`, the constant étale sheaf on `Spec k` at an injective
+`Λ`-module is an injective sheaf: the constant sheaf functor is an equivalence, with inverse the
+global sections. -/
+theorem injective_constantSheaf_of_isSepClosed (M : ModuleCat.{u + 1} Λ) [Injective M] :
+    Injective ((constantSheaf (Spec (.of k)).smallEtaleTopology (ModuleCat.{u + 1} Λ)).obj M) := by
+  have := Scheme.isIso_constantSheafAdj_unit_app (Spec (.of k)) (isTerminalEtalePoint (k := k))
+    (Λ := Λ)
+  exact Injective.injective_of_adjoint
+    ((constantSheafAdj (Spec (.of k)).smallEtaleTopology (ModuleCat.{u + 1} Λ) isTerminalEtalePoint).toEquivalence.symm.toAdjunction) M
+
+end ConstantSheaf
 
 end AlgebraicGeometry.Etale
