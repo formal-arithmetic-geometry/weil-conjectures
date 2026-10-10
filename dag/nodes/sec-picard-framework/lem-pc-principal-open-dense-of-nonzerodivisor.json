@@ -23,9 +23,52 @@
  "stmt_deps": [
   "def-pc-scheme"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "The morphism $\\operatorname{Spec}(A_a)\\to\\operatorname{Spec}(A)$ induced by localization has image the principal open $D(a)$, by [lem-weil-pbc-spec-localization-away-basic-open]. Thus $D(a)$ is the range of the contraction map on prime spectra.",
+   "uses": [
+    "lem-weil-pbc-spec-localization-away-basic-open"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00E4, the affine localization identifies Spec(A_a) with D(a)"
+   }
+  },
+  {
+   "text": "By [lem-pc-dense-range-comap-minimal-primes], this range is dense if every minimal prime ideal $I$ of $A$ is the contraction of a prime ideal of $A_a$.",
+   "uses": [
+    "lem-pc-dense-range-comap-minimal-primes"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "Mathlib/RingTheory/Spectrum/Prime/Topology.lean",
+    "place": "PrimeSpectrum.denseRange_comap_iff_minimalPrimes"
+   }
+  },
+  {
+   "text": "For every minimal prime $I$ of $A$, [lem-pc-minimal-prime-avoids-nonzerodivisor] gives $a\\notin I$, i.e. $I\\in D(a)$. By [lem-weil-pbc-spec-localization-away-basic-open] (ii), $D(a)$ is the image of $\\operatorname{Spec}(A_a)\\to\\operatorname{Spec}(A)$, so $I=\\iota^{-1}(\\mathfrak P)$ for a prime $\\mathfrak P$ of $A_a$. Therefore every minimal prime is in the range, and $D(a)$ is dense.",
+   "uses": [
+    "lem-pc-minimal-prime-avoids-nonzerodivisor",
+    "lem-weil-pbc-spec-localization-away-basic-open"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00E4, primes of A_a correspond to primes of A disjoint from the powers of a"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-spec-localization-away-basic-open",
+  "lem-pc-dense-range-comap-minimal-primes",
+  "lem-pc-minimal-prime-avoids-nonzerodivisor"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "Mathlib/RingTheory/Spectrum/Prime/Topology.lean",
+  "place": "Affine localization image, dense-range/minimal-prime criterion, and minimal-prime nonzerodivisor exclusion"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -50,12 +93,28 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-pc-affine-nonzerodivisor-complement-dense",
   "by": "worker",
   "date": "2026-10-10"
  },
  "chapter": "sec-picard-framework",
- "unit": "sk-thm-picard-rr"
+ "unit": "sk-thm-picard-rr",
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "lem-pc-principal-open-dense-of-nonzerodivisor",
+  "worker": "stage1",
+  "summary": "No sorry-free declaration states the target. The proof identifies D(a) with the range of Spec(A_a) to Spec(A), applies the Mathlib dense-range/minimal-prime criterion, and uses the Mathlib minimal-prime nonzerodivisor exclusion to establish the criterion.",
+  "blueprint": "The steps realize lem-pc-degree-base-change, proof part (2), the affine calculation that the principal open D(a) is topologically dense.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-pod",
+  "group": "F1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-pod (reviewer sub-agent of L); spot-checked: Shape: one commit, the item and two new Mathlib leaves with created.item = the item, report with Review by F1; item statement unchanged (Stacks 07ZU, divisors-lemma-complement-effective-Cartier-divisor, affine case: A commutative, a a non-zero-divisor, D(a) dense). Step 1 carried by lem-weil-pbc-spec-localization-away-basic-open (ii): Spec(A_a)->Spec(A) is a homeomorphism onto D(a), so D(a) is the range of comap. Step 2 by lem-pc-dense-range-comap-minimal-primes (if direction). Step 3 by lem-pc-minimal-prime-avoids-nonzerodivisor plus (ii) of the localization leaf. Mathlib lines verified with sed: PrimeSpectrum.denseRange_comap_iff_minimalPrimes at Topology.lean:948 (statement: DenseRange (comap f) iff every minimal prime is in the range, same as the leaf); Ideal.notMem_nonZeroDivisors_of_mem_mem_minimalPrimes at MinimalPrime/Localization.lean:98 (x in q, q minimal => x not a nonzerodivisor, contrapositive of the leaf). B10: no slopmaster2 declaration states density of D(a) for a nonzerodivisor (Blowup/Density.lean has only the scheme-theoretic dominance of invertible-ideal complements). Small cases: k[t], a=t (D(t) dense, minimal prime 0 avoids t); k[x,y]/(xy), a=x zero divisor, D(x)=V(x)^c not dense, the minimal prime (x) contains a. FIX: dag/nodes/sec-picard-framework/lem-pc-principal-open-dense-of-nonzerodivisor.json: proof[2].text: replaced 'disjoint from the powers of a, so the localization correspondence supplies a prime' by the inference from the cited statement (ii) (I in D(a) = image of Spec(A_a)), mathematics unchanged. Start Sat Oct 10 04:11:54 PM UTC 2026, end Sat Oct 10 04:12:32 PM UTC 2026.; 1 file(s) fixed by the reviewer"
+ }
 }
