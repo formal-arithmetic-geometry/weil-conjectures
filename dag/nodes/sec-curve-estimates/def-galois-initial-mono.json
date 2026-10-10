@@ -1,0 +1,72 @@
+{
+ "id": "def-galois-initial-mono",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "def-galois-category",
+   "place": "clause 2, definition of connected: 'it is not initial and every monomorphism $Y\\to X$ is either an isomorphism or has initial source'",
+   "via": []
+  },
+  "same_as": []
+ },
+ "kind": "definition",
+ "title": "Initial objects and monomorphisms",
+ "statement": "Let $\\mathcal C$ be a category. An object $I$ of $\\mathcal C$ is *initial* if for every object $Y$ of $\\mathcal C$ there is exactly one morphism $I\\to Y$; equivalently, $I$ is a colimit of the empty diagram (the empty coproduct). A morphism $f:X\\to Y$ of $\\mathcal C$ is a *monomorphism* if for every object $W$ and every pair of morphisms $a,b:W\\to X$ with $f\\circ a=f\\circ b$ one has $a=b$.",
+ "source": {
+  "document": "literature/stacks-project/categories.tex",
+  "place": "Categories, Definition 002C (label definition-initial-final), clause (1); Definition 003B (label definition-mono-epi), clause (1); Definition 002J (label definition-coproduct) and the remark after it (empty coproduct is initial)"
+ },
+ "stmt_deps": [],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "initial object; monomorphism left cancellable morphism",
+   "results": "IsInitial.mono_from; InitialMonoClass.isInitial_mono_from; initial.mono_from; initialIsInitial (Mathlib.CategoryTheory.Limits.Shapes.IsTerminal / Terminal)",
+   "date": "2026-10-10",
+   "verdict": "match: CategoryTheory.Limits.IsInitial, CategoryTheory.Mono"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "initial object in a category (colimit of empty diagram) and monomorphism",
+   "results": "InitialMonoClass.of_initial; initial.mono_from; InitialMonoClass.of_isInitial; InitialMonoClass.isInitial_mono_from (Mathlib.CategoryTheory.Limits.Shapes.Terminal, IsTerminal)",
+   "date": "2026-10-10",
+   "verdict": "match (the notions IsInitial and Mono occur in every result)"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -n 'abbrev IsInitial' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/CategoryTheory/Limits/Shapes/IsTerminal.lean; grep -n 'class Mono' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/CategoryTheory/Category/Basic.lean; grep -n 'def IsInitial.ofUnique' IsTerminal.lean",
+   "results": "IsTerminal.lean:63 abbrev IsInitial (X : C) := IsColimit (asEmptyCocone X); :126 IsInitial.ofUnique from ∀ Y, Unique (X ⟶ Y); Category/Basic.lean:328 class Mono (f : X ⟶ Y) : right_cancellation : ∀ {Z} (g h : Z ⟶ X), g ≫ f = h ≫ f → g = h (attribute stacks 003B)",
+   "date": "2026-10-10",
+   "verdict": "match"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "CategoryTheory.Limits.IsInitial; CategoryTheory.Mono",
+  "file": "Mathlib/CategoryTheory/Limits/Shapes/IsTerminal.lean; Mathlib/CategoryTheory/Category/Basic.lean",
+  "lines": [
+   63,
+   328
+  ],
+  "how": "exact: IsInitial X (IsTerminal.lean line 63) is 'the empty cocone at X is a colimit', which is 'exactly one morphism X ⟶ Y for every Y' (IsInitial.ofUnique, line 126, and IsInitial.to/hom_ext); Mono f (Category/Basic.lean line 328, tagged stacks 003B) is left cancellation"
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "def-galois-category",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-curve-estimates",
+ "unit": "sk-prop-h2"
+}

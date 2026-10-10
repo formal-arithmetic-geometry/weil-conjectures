@@ -1,0 +1,83 @@
+{
+ "id": "lem-sc-etale-qcoherent-presheaf-functorial",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "def-sc-etale-qcoherent-module",
+   "place": "statement, clause 'with the usual pullback restrictions': the restriction maps of $U\\mapsto\\Gamma(U,u^*\\mathcal F)$ and the fact that they make it a presheaf (a contravariant functor on the small etale site)",
+   "via": []
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Sections of pullbacks form a presheaf on the small etale site",
+ "statement": "Let $X$ be a scheme [def-pc-scheme] and $\\mathcal F$ a sheaf of $\\mathcal O_X$-modules [def-weil-sheaf-of-modules-category]. For a morphism of schemes $a:A\\to B$ and a sheaf of $\\mathcal O_B$-modules $\\mathcal G$ let $a^*\\mathcal G$ be its pullback [def-pc-module-pullback], let $\\eta^a_{\\mathcal G}:\\mathcal G\\to a_*a^*\\mathcal G$ be the unit of the adjunction $a^*\\dashv a_*$ [lem-pc-module-pullback-adjunction], and for $s\\in\\Gamma(B,\\mathcal G)$ put $a^*s=\\eta^a_{\\mathcal G}(s)\\in\\Gamma(B,a_*a^*\\mathcal G)=\\Gamma(A,a^*\\mathcal G)$. For composable morphisms $a:A\\to B$, $b:B\\to C$ let $c_{a,b}:a^*b^*\\xrightarrow{\\ \\sim\\ }(b\\circ a)^*$ be the natural isomorphism of [lem-pc-module-pullback-identity-composition]. For objects $u:U\\to X$ and $u':U'\\to X$ of the small etale site $X_{\\Et}$ [def-weil-pbc-etale-site] and an $X$-morphism $g:U'\\to U$ (so $u'=u\\circ g$) define\n$$\\rho_g:\\Gamma(U,u^*\\mathcal F)\\longrightarrow\\Gamma(U',u'^*\\mathcal F),\\qquad \\rho_g(s)=c_{g,u}\\bigl(g^*s\\bigr).$$\nThen:\n1. $\\rho_g$ is a homomorphism of abelian groups, and $\\rho_g(as)=g^\\sharp(a)\\,\\rho_g(s)$ for $a\\in\\Gamma(U,\\mathcal O_U)$, $s\\in\\Gamma(U,u^*\\mathcal F)$;\n2. $\\rho_{\\mathrm{id}_U}=\\mathrm{id}$;\n3. for $X$-morphisms $h:U''\\to U'$ and $g:U'\\to U$ of $X_{\\Et}$, $\\rho_{g\\circ h}=\\rho_h\\circ\\rho_g$.\n\nHence $u\\mapsto\\Gamma(U,u^*\\mathcal F)$, $g\\mapsto\\rho_g$, is a presheaf of abelian groups (a contravariant functor from $X_{\\Et}$ to abelian groups).",
+ "source": {
+  "document": "literature/stacks-project/descent.tex",
+  "place": "Descent, Section 35.8 'Quasi-coherent sheaves and topologies, I', Tag 03DR (label section-quasi-coherent-sheaves), equation (35.8.1) (label equation-quasi-coherent-presheaf): 'Consider the functor $(Sch/S)^{opp}\\to Ab$, $(f:T\\to S)\\mapsto\\Gamma(T,f^*\\mathcal F)$', whose functoriality the source takes for granted; restricted to the small etale site as in Definition 03DU (label definition-structure-sheaf), item 4"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-sheaf-of-modules-category",
+  "def-pc-module-pullback",
+  "lem-pc-module-pullback-adjunction",
+  "lem-pc-module-pullback-identity-composition",
+  "def-weil-pbc-etale-site"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "pullback of sections of sheaf of modules along composition of scheme morphisms is compatible, functor of points of a module presheaf on schemes over X",
+   "results": "AlgebraicGeometry.Scheme.Modules.pullbackComp (Mathlib.AlgebraicGeometry.Modules.Sheaf), Scheme.Modules.pseudofunctor_associativity (same), SheafOfModules.sectionsMap_comp, PresheafOfModules.sectionsMap_comp, SheafOfModules.pullbackComp, SheafOfModules.pullback_assoc (Mathlib.Algebra.Category.ModuleCat.Sheaf.PullbackContinuous), PresheafOfModules.pullback_comp_id",
+   "date": "2026-10-10",
+   "verdict": "no match: the coherence data of the pullback pseudofunctor are there, but no presheaf $T\\mapsto\\Gamma(T,f^*\\mathcal F)$ with restrictions $\\rho_g$ and no lemma that these compose"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Scheme.Modules.pseudofunctor",
+   "results": "Scheme.Modules.pseudofunctor : Pseudofunctor (LocallyDiscrete Schemeᵒᵖ) (Adj Cat) and its simp lemmas pseudofunctor_obj_obj, _map_l (= pullback), _map_r (= pushforward), _map_adj, _mapId_hom_τl/τr, _mapId_inv_τl (Mathlib.AlgebraicGeometry.Modules.Sheaf)",
+   "date": "2026-10-10",
+   "verdict": "candidate only: the pseudofunctor of pullbacks (its coherence gives clauses 2 and 3 after an argument with the naturality of the unit), not the statement"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "the presheaf T ↦ Γ(T, f^* F) of sections of the pullback of a quasi-coherent module on schemes over X",
+   "results": "Scheme.Modules.pullback, Scheme.Modules.pushforward, Scheme.Modules.pushforward_obj_obj, Scheme.Hom.toRingCatSheafHom (Mathlib.AlgebraicGeometry.Modules.*), SheafOfModules.pushforwardSections",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rn 'def pseudofunctor\\|def pullbackComp\\|def pullbackId\\|def presheafHom' and grep -rln 'smallEtale' | xargs grep -ln Modules in ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib",
+   "results": "AlgebraicGeometry/Modules/Sheaf.lean:219 pullbackId, :241 pullbackComp, :273 pseudofunctor_associativity, :290 pseudofunctor_left_unitality, :304 pseudofunctor_right_unitality, :328 pseudofunctor; CategoryTheory/Sites/Descent/IsPrestack.lean:125 Pseudofunctor.presheafHom (the presheaf $T\\mapsto\\mathrm{Hom}(p^*M,p^*N)$ on Over S, not $\\Gamma(T,p^*M)$); no Mathlib file mentions both the small etale site and Scheme.Modules",
+   "date": "2026-10-10",
+   "verdict": "no match; candidate Pseudofunctor.presheafHom (Scheme.Modules.pseudofunctor) M:=O_X, N:=F, which is isomorphic, not equal, to the presheaf of the node (Hom(u^*O_X,u^*F) = Γ(U,u^*F) is itself an argument)"
+  }
+ ],
+ "mathlib_match": null,
+ "mathlib_candidate": {
+  "declaration": "CategoryTheory.Pseudofunctor.presheafHom with AlgebraicGeometry.Scheme.Modules.pseudofunctor",
+  "file": "Mathlib/CategoryTheory/Sites/Descent/IsPrestack.lean",
+  "how": "line 125: presheafHom M N on (Over S)ᵒᵖ, T ↦ Hom(p^*M, p^*N), a functor by construction from the coherence of the pseudofunctor (Mathlib/AlgebraicGeometry/Modules/Sheaf.lean:328); with M = O_X it is isomorphic to the node's presheaf via Hom(O_U, G) ≅ Γ(U, G) and u^*O_X ≅ O_U, which is not a one-line specialization"
+ },
+ "status": "unsplit",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "def-sc-etale-qcoherent-module",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-curve-estimates",
+ "unit": "sk-prop-h2"
+}

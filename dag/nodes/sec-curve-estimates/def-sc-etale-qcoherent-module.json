@@ -3,25 +3,69 @@
  "blueprint": {
   "is": "def-sc-etale-qcoherent-module",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "definition",
  "title": "The etale sheaf associated with a quasi-coherent module",
- "statement": "Let $X$ be a scheme and $\\mathcal F$ a quasi-coherent\n$\\mathcal O_X$-module. The associated sheaf $\\mathcal F_{\\mathrm{et}}$\non the small etale site assigns to\n$u:U\\to X$ the group $\\Gamma(U,u^*\\mathcal F)$, with the usual\npullback restrictions. Here $u^*\\mathcal F$ is pullback as a module\non a ringed space. That this presheaf is already a sheaf – so that\nthe assignment defines a sheaf and not merely a presheaf – is the\ndescent property of quasi-coherent modules,\n[lem-sc-etale-qcoherent-descent], and it is not part of the\ndefinition.",
+ "statement": "Let $X$ be a scheme [def-pc-scheme] and $\\mathcal F$ a quasi-coherent\n$\\mathcal O_X$-module [pqf-def-coherent], [def-weil-sheaf-of-modules-category]. The associated sheaf $\\mathcal F_{\\mathrm{et}}$\non the small etale site $X_{\\Et}$ [def-weil-pbc-etale-site] assigns to\n$u:U\\to X$ the group $\\Gamma(U,u^*\\mathcal F)$, with the usual\npullback restrictions. Here $u^*\\mathcal F$ is pullback as a module\non a ringed space [def-pc-module-pullback]. Explicitly, for an $X$-morphism $g:U'\\to U$ between objects $u:U\\to X$, $u'=u\\circ g:U'\\to X$ of $X_{\\Et}$, the restriction is\n$$\\rho_g:\\Gamma(U,u^*\\mathcal F)\\to\\Gamma(U',u'^*\\mathcal F),\\qquad s\\mapsto c_{g,u}(g^*s),$$\nwhere $g^*s\\in\\Gamma(U',g^*u^*\\mathcal F)$ is the image of $s$ under the unit $u^*\\mathcal F\\to g_*g^*u^*\\mathcal F$ of the adjunction $g^*\\dashv g_*$ [lem-pc-module-pullback-adjunction] and $c_{g,u}:g^*u^*\\mathcal F\\xrightarrow{\\sim}(u\\circ g)^*\\mathcal F$ is the composition isomorphism [lem-pc-module-pullback-identity-composition]; that these maps are additive and make $u\\mapsto\\Gamma(U,u^*\\mathcal F)$ a presheaf of abelian groups on $X_{\\Et}$ is [lem-sc-etale-qcoherent-presheaf-functorial]. That this presheaf is already a sheaf of abelian groups on $X_{\\Et}$ [def-weil-pbc-abelian-etale-sheaves] – so that\nthe assignment defines a sheaf and not merely a presheaf – is the\ndescent property of quasi-coherent modules,\n[lem-sc-etale-qcoherent-descent], and it is not part of the\ndefinition.",
  "source": {
   "document": "literature/blueprint/master/blueprint/sec-curve-estimates/sk-prop-h2/def-sc-etale-qcoherent-module.md",
   "place": "node def-sc-etale-qcoherent-module, order 958"
  },
  "stmt_deps": [
+  "def-pc-scheme",
+  "pqf-def-coherent",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-pbc-etale-site",
+  "def-pc-module-pullback",
+  "lem-pc-module-pullback-adjunction",
+  "lem-pc-module-pullback-identity-composition",
+  "lem-sc-etale-qcoherent-presheaf-functorial",
   "lem-sc-etale-qcoherent-descent",
-  "def-weil-pbc-etale-site"
+  "def-weil-pbc-abelian-etale-sheaves"
  ],
  "proof": [],
  "proof_deps": [],
  "proof_origin": null,
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "sheaf on small etale site associated to a quasi-coherent module, sections Gamma(U, u^* F)",
+   "results": "Scheme.smallEtaleTopology (Mathlib.AlgebraicGeometry.Sites.Etale), SheafOfModules.QuasicoherentData (Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent), SheafOfModules.sections, Scheme.Modules (Mathlib.AlgebraicGeometry.Modules.Sheaf), Sheaf.natTransΓRes_app",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Scheme.Modules, AlgebraicGeometry.Scheme.smallEtaleTopology",
+   "results": "none",
+   "date": "2026-10-10",
+   "verdict": "no match: no Mathlib declaration mentions both"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "the presheaf T ↦ Γ(T, f^* F) of sections of the pullback of a quasi-coherent module on schemes over X",
+   "results": "Scheme.Modules.pullback, Scheme.Modules.pushforward, Scheme.Modules.pushforward_obj_obj, Scheme.Hom.toRingCatSheafHom, SheafOfModules.pushforwardSections",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rln 'smallEtale' AlgebraicGeometry | xargs grep -ln 'Modules' in ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib; grep -rn 'def presheafHom' CategoryTheory",
+   "results": "no file; CategoryTheory/Sites/Descent/IsPrestack.lean:125 Pseudofunctor.presheafHom (T ↦ Hom(p^*M, p^*N) on Over S)",
+   "date": "2026-10-10",
+   "verdict": "no match (candidate presheafHom with M = O_X is isomorphic, not equal)"
+  },
+  {
+   "tool": "grep",
+   "query": "slopmaster2 rule 0: grep -rn 'def-sc-etale-qcoherent-module' ~/weil-conjectures-slopmaster2/WeilConjectures ~/weil-conjectures-slopmaster2/Comparator; grep -rln smallEtale WeilConjectures | xargs grep -ln 'Modules|quasi'; grep -rn 'Modules' WeilConjectures | grep -i etale",
+   "results": "id: none. WeilConjectures/AlgebraicGeometry/Sites/EtaleHom.lean:156 Scheme.Modules.etaleHom M N := (toProEt X ⋙ ProEt.forget X).op ⋙ modulesPseudofunctor.presheafHom M N (V ↦ Hom(V^*M, V^*N) on X.Etale), :160 Modules.isSheaf_etaleHom (sheaf for M, N quasi-coherent); Sites/EtaleStructureSheaf.lean:84 isSheaf_etaleStructurePresheaf_aux (the case F = O_X, via End(V^*O_X) ≅ Γ(V,O_V))",
+   "date": "2026-10-10",
+   "verdict": "no exact declaration: etaleHom (unitObj X) F is V ↦ Hom(V^*O_X, V^*F), isomorphic to the node's presheaf, not equal to it; not attached"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [],
  "blueprint_kind": "definition",
@@ -46,5 +90,12 @@
   }
  },
  "chapter": "sec-curve-estimates",
- "unit": "sk-prop-h2"
+ "unit": "sk-prop-h2",
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "def-sc-etale-qcoherent-module",
+  "worker": "stage1",
+  "summary": "Definition split. Rule 0: no slopmaster2 declaration states the node (grep by id and by smallEtale/Modules/quasi): the closest is Scheme.Modules.etaleHom M N (Sites/EtaleHom.lean:156, V ↦ Hom(V^*M,V^*N) on X.Etale, a sheaf by isSheaf_etaleHom:160 for quasi-coherent M, N), which with M = O_X is isomorphic to, not the same as, V ↦ Γ(V,V^*F); not attached (it is the natural Lean candidate for this node and for lem-sc-etale-qcoherent-descent). Checked against Stacks Descent Section 35.8 (Tag 03DR, eq. 35.8.1) and Definition 35.8.2 (Tag 03DU, label definition-structure-sheaf, item 4: the sheaf F^a on S_etale, (f:T→S) ↦ Γ(T,f^*F)), whose sheaf property is Lemma 35.8.1 (Tag 03DT), i.e. the existing node lem-sc-etale-qcoherent-descent (cited, not duplicated; it does not cite this node, so no cycle). Every notion now cites a node: scheme def-pc-scheme, quasi-coherent pqf-def-coherent, module sheaf def-weil-sheaf-of-modules-category, small etale site def-weil-pbc-etale-site, module pullback def-pc-module-pullback, abelian etale sheaves def-weil-pbc-abelian-etale-sheaves (Mathlib leaf). The 'usual pullback restrictions' are now written out: ρ_g(s) = c_{g,u}(g^*s) with the unit of lem-pc-module-pullback-adjunction and the composition iso of lem-pc-module-pullback-identity-composition. The claim hidden in the definition (these maps are additive and compose, so the assignment is a presheaf; Stacks takes it for granted in eq. 35.8.1) is the new unsplit statement lem-sc-etale-qcoherent-presheaf-functorial (Mathlib candidate: Pseudofunctor.presheafHom with Scheme.Modules.pseudofunctor, isomorphic not equal). Statement change: the text 'with the usual pullback restrictions' is made explicit and the notions are cited; nothing else changed. stmt_deps: added def-pc-scheme, pqf-def-coherent, def-weil-sheaf-of-modules-category, def-pc-module-pullback, the two pullback lemmas, the new node and def-weil-pbc-abelian-etale-sheaves.",
+  "blueprint": "the item is itself the blueprint node (a definition, no proof): its clauses 'assigns to u the group Γ(U,u^*F)' (def-pc-module-pullback, def-weil-pbc-etale-site), 'with the usual pullback restrictions' (lem-pc-module-pullback-adjunction, lem-pc-module-pullback-identity-composition, new lem-sc-etale-qcoherent-presheaf-functorial) and 'that this presheaf is already a sheaf ... is the descent property' (lem-sc-etale-qcoherent-descent, def-weil-pbc-abelian-etale-sheaves) are realized by the stmt_deps; blueprint search (tools/blueprint_refs.py search 'quasi-coherent', 'pullback restrictions', 'sections of the pullback', 03DU, 03DT) found no other blueprint node stating it, same_as []"
+ }
 }

@@ -1,0 +1,73 @@
+{
+ "id": "def-galois-aut-topology",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "def-galois-category",
+   "place": "final paragraph: 'For a functor with all $F(X)$ finite, $\\operatorname{Aut}(F)$ is identified with the subgroup of $\\prod_X\\operatorname{Aut}(F(X))$ ... and carries the topology induced from the product of the discrete topologies'",
+   "via": []
+  },
+  "same_as": []
+ },
+ "kind": "definition",
+ "title": "Topology on the automorphism group of a functor to finite sets",
+ "statement": "Let $\\mathcal C$ be a category and $F:\\mathcal C\\to\\mathbf{Sets}$ a functor with $F(X)$ finite for every object $X$. The group $\\operatorname{Aut}(F)$ of natural automorphisms of $F$ maps injectively to $\\prod_{X\\in\\operatorname{Ob}(\\mathcal C)}\\operatorname{Aut}(F(X))$ by $\\gamma\\mapsto(\\gamma_X)_X$, its image being the families compatible with all $F(f)$; $\\operatorname{Aut}(F)$ carries the topology induced by this map from the product of the discrete topologies on the finite groups $\\operatorname{Aut}(F(X))$.",
+ "source": {
+  "document": "literature/stacks-project/pione.tex",
+  "place": "Fundamental Groups of Schemes, Section 0BMQ (label section-galois), the paragraph before Lemma 0BMR (label lemma-aut-inverse-limit), equation (equation-embedding-product)"
+ },
+ "stmt_deps": [],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "topology on automorphism group of a functor to finite sets induced from product of discrete topologies",
+   "results": "PreGaloisCategory.instTopologicalSpaceAutFunctorFintypeCat; instContinuousMulAut…; instContinuousInvAut…; instIsTopologicalGroupAut…; toAutMulEquiv_isHomeomorph (Mathlib.CategoryTheory.Galois.Topology, IsFundamentalgroup)",
+   "date": "2026-10-10",
+   "verdict": "match: instTopologicalSpaceAutFunctorFintypeCat"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "topology on Aut F for functor to finite types, embedding into product of Aut (F.obj X)",
+   "results": "PreGaloisCategory.instTopologicalSpaceAutFunctorFintypeCat; instIsTopologicalGroupAutFunctorFintypeCat; instContinuousMulAutFunctorFintypeCat; instTopologicalSpaceAutFintypeCatObj (Mathlib.CategoryTheory.Galois.Topology)",
+   "date": "2026-10-10",
+   "verdict": "match"
+  },
+  {
+   "tool": "grep",
+   "query": "sed -n 40,80p ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/CategoryTheory/Galois/Topology.lean",
+   "results": "Topology.lean:41 def autEmbedding : Aut F →* ∀ X, Aut (F.obj X) (σ ↦ σ.app X); :49 autEmbedding_injective; :63 scoped instance TopologicalSpace (Aut (F.obj X)) := ⊥; :78 instance : TopologicalSpace (Aut F) := TopologicalSpace.induced (autEmbedding F) inferInstance; :99 autEmbedding_range (compatible families); references Stacks 0BMQ",
+   "date": "2026-10-10",
+   "verdict": "match"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "CategoryTheory.PreGaloisCategory.instTopologicalSpaceAutFunctorFintypeCat; CategoryTheory.PreGaloisCategory.autEmbedding",
+  "file": "Mathlib/CategoryTheory/Galois/Topology.lean",
+  "lines": [
+   41,
+   63,
+   78
+  ],
+  "how": "specializes in one line: a functor to Sets with finite values is a functor F : C ⥤ FintypeCat followed by the inclusion (choose a Fintype structure on each F(X)), with the same natural automorphisms; Mathlib's topology (line 78) is induced by autEmbedding (line 41) from the product of the discrete topologies (line 63)"
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "def-galois-category",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-curve-estimates",
+ "unit": "sk-prop-h2"
+}

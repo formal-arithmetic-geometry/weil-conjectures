@@ -1,0 +1,76 @@
+{
+ "id": "def-galois-exact-functor",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "def-galois-category",
+   "place": "clause 4: '$F$ is exact (it commutes with finite limits and finite colimits)'",
+   "via": []
+  },
+  "same_as": []
+ },
+ "kind": "definition",
+ "title": "Exact functor",
+ "statement": "Let $F:\\mathcal A\\to\\mathcal B$ be a functor. $F$ *commutes with* (preserves) a limit (resp. colimit) of a diagram $M:\\mathcal I\\to\\mathcal A$ if it carries a limit cone (resp. colimit cocone) of $M$ to a limit cone (resp. colimit cocone) of $F\\circ M$. If $\\mathcal A$ has finite limits ([def-galois-finite-limits-colimits]), $F$ is *left exact* if it commutes with all finite limits; if $\\mathcal A$ has finite colimits, $F$ is *right exact* if it commutes with all finite colimits; $F$ is *exact* if it is both left and right exact.",
+ "source": {
+  "document": "literature/stacks-project/categories.tex",
+  "place": "Categories, Definition 0034 (label definition-exact), in Section 0033 (label section-exact-functor)"
+ },
+ "stmt_deps": [
+  "def-galois-finite-limits-colimits"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "functor preserves finite limits and finite colimits (exact functor)",
+   "results": "CategoryTheory.exactFunctor; ExactFunctor.of; ExactFunctor; exactFunctor_iff (exactFunctor C D F ↔ PreservesFiniteLimits F ∧ PreservesFiniteColimits F); Functor.exact_tfae (Mathlib.CategoryTheory.Limits.ExactFunctor)",
+   "date": "2026-10-10",
+   "verdict": "match: PreservesFiniteLimits ∧ PreservesFiniteColimits"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Limits.PreservesFiniteColimits",
+   "results": "PreservesFiniteColimits F : Prop; instPreservesFiniteCoproductsOfPreservesFiniteColimits; PreservesColimits.preservesFiniteColimits (Mathlib.CategoryTheory.Limits.Preserves.Finite)",
+   "date": "2026-10-10",
+   "verdict": "match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -n 'class PreservesFiniteLimits|class PreservesFiniteColimits' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/CategoryTheory/Limits/Preserves/Finite.lean; sed -n 93,100p ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/CategoryTheory/Limits/ExactFunctor.lean",
+   "results": "Finite.lean:44 class PreservesFiniteLimits (F) : ∀ (J : Type) [SmallCategory J] [FinCategory J], PreservesLimitsOfShape J F; :196 class PreservesFiniteColimits (F) likewise; ExactFunctor.lean:93 def exactFunctor, :98 exactFunctor_iff",
+   "date": "2026-10-10",
+   "verdict": "match"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "CategoryTheory.Limits.PreservesFiniteLimits; CategoryTheory.Limits.PreservesFiniteColimits; CategoryTheory.exactFunctor",
+  "file": "Mathlib/CategoryTheory/Limits/Preserves/Finite.lean; Mathlib/CategoryTheory/Limits/ExactFunctor.lean",
+  "lines": [
+   44,
+   196,
+   93,
+   98
+  ],
+  "how": "exact under the existence hypotheses of 0034: left exact = PreservesFiniteLimits F (Finite.lean line 44), right exact = PreservesFiniteColimits F (line 196), exact = both (exactFunctor, ExactFunctor.lean line 93, exactFunctor_iff line 98); Mathlib's 'preserves' (image of a (co)limit cone is a (co)limit cone) is Stacks' 'commutes with' when the (co)limits exist in the source"
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "def-galois-category",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-curve-estimates",
+ "unit": "sk-prop-h2"
+}

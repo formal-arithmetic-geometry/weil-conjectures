@@ -1,0 +1,79 @@
+{
+ "id": "def-galois-finite-limits-colimits",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "def-galois-category",
+   "place": "clause 1: '$\\mathcal C$ has finite limits and finite colimits'",
+   "via": []
+  },
+  "same_as": []
+ },
+ "kind": "definition",
+ "title": "Finite limits and finite colimits",
+ "statement": "A category $\\mathcal I$ is *finite* if it has finitely many objects and finitely many morphisms; a *finite limit* (resp. *finite colimit*) in a category $\\mathcal C$ is a limit (resp. colimit) of a diagram $M:\\mathcal I\\to\\mathcal C$ indexed by a finite category $\\mathcal I$. The category $\\mathcal C$ *has finite limits* (resp. *has finite colimits*) if every diagram $M:\\mathcal I\\to\\mathcal C$ with $\\mathcal I$ finite has a limit (resp. a colimit) in $\\mathcal C$.",
+ "source": {
+  "document": "literature/stacks-project/categories.tex",
+  "place": "Categories, Section 4.18 'Finite limits and colimits', label section-finite-limits, tag 04AS (with Definitions 002E, 002F of limit and colimit)"
+ },
+ "stmt_deps": [],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "category has all finite limits and finite colimits",
+   "results": "CategoryTheory.Limits.FintypeCat.hasFiniteColimits; hasFiniteLimits_of_hasEqualizers_and_finite_products; hasFiniteColimits_of_hasFiniteColimits_of_size; HasFiniteWidePushouts; hasFiniteLimits_of_hasFiniteLimits_of_size (Mathlib.CategoryTheory.Limits.Shapes.FiniteLimits)",
+   "date": "2026-10-10",
+   "verdict": "match: CategoryTheory.Limits.HasFiniteLimits, HasFiniteColimits"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Limits.HasFiniteColimits",
+   "results": "HasFiniteColimits (C) : Prop; hasFiniteColimits_of_hasColimits; hasFiniteColimits_of_hasColimitsOfSize; hasFiniteColimits_of_hasColimitsOfSize₀ (Mathlib.CategoryTheory.Limits.Shapes.FiniteLimits)",
+   "date": "2026-10-10",
+   "verdict": "match: CategoryTheory.Limits.HasFiniteColimits"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "category with all finite limits (finitely complete)",
+   "results": "CategoryTheory.Limits.HasFiniteLimits; HasFiniteWidePullbacks; HasFiniteLimits.out (Mathlib.CategoryTheory.Limits.Shapes.FiniteLimits)",
+   "date": "2026-10-10",
+   "verdict": "match: CategoryTheory.Limits.HasFiniteLimits"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -n 'class HasFiniteLimits|class HasFiniteColimits' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/CategoryTheory/Limits/Shapes/FiniteLimits.lean; sed -n 36,50p and 85,95p",
+   "results": "FiniteLimits.lean:41 class HasFiniteLimits : out (J : Type) [SmallCategory J] [FinCategory J] : HasLimitsOfShape J C; :88 class HasFiniteColimits : out (J : Type) [SmallCategory J] [FinCategory J] : HasColimitsOfShape J C; :46 instance hasLimitsOfShape_of_hasFiniteLimits for FinCategory J in any universe",
+   "date": "2026-10-10",
+   "verdict": "match"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "CategoryTheory.Limits.HasFiniteLimits; CategoryTheory.Limits.HasFiniteColimits",
+  "file": "Mathlib/CategoryTheory/Limits/Shapes/FiniteLimits.lean",
+  "lines": [
+   41,
+   88
+  ],
+  "how": "exact: HasFiniteLimits (line 41) and HasFiniteColimits (line 88) ask for (co)limits of every diagram indexed by a FinCategory J (finitely many objects, finitely many morphisms); J ranges over Type 0, and lines 46-49 give the same for finite J in every universe (FinCategory.equivAsType), which is Stacks' 'finite index category'"
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "def-galois-category",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-curve-estimates",
+ "unit": "sk-prop-h2"
+}

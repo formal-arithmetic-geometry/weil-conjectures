@@ -1,0 +1,81 @@
+{
+ "id": "def-galois-finite-coproduct",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "def-galois-category",
+   "place": "clause 2: 'every object of $\\mathcal C$ is a finite coproduct of *connected* objects'",
+   "via": []
+  },
+  "same_as": []
+ },
+ "kind": "definition",
+ "title": "Finite coproduct decomposition of an object",
+ "statement": "Let $\\mathcal C$ be a category, $I$ a set and $(X_i)_{i\\in I}$ a family of objects of $\\mathcal C$. A *coproduct* of the family is an object $X$ with morphisms $\\iota_i:X_i\\to X$ ($i\\in I$) such that for every object $T$ and every family of morphisms $t_i:X_i\\to T$ there is exactly one morphism $t:X\\to T$ with $t\\circ\\iota_i=t_i$ for all $i$; that is, $X$ is the colimit of the diagram indexed by the discrete category on $I$. An object $X$ *is a finite coproduct of* objects with a property $P$ if there are a finite set $I$ (possibly empty), objects $X_i$ ($i\\in I$) having $P$, and morphisms $\\iota_i:X_i\\to X$ making $X$ a coproduct of $(X_i)_{i\\in I}$. For $I=\\emptyset$ this says that $X$ is initial ([def-galois-initial-mono]).",
+ "source": {
+  "document": "literature/stacks-project/categories.tex",
+  "place": "Categories, Definition 002J (label definition-coproduct) and the remark after it; used in Fundamental Groups of Schemes, Definition 0BMY (label definition-galois-category), item (2) 'finite (possibly empty) coproduct of connected objects'"
+ },
+ "stmt_deps": [
+  "def-galois-initial-mono"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "object is a finite coproduct: colimit cofan over a finite index type",
+   "results": "HasFiniteCoproducts.mk; sigmaObj; SSet.instFiniteSigmaObjOfFinite; FormalCoproduct.isColimitCofan; CompHausLike.finiteCoproduct.isColimit",
+   "date": "2026-10-10",
+   "verdict": "match: CategoryTheory.Limits.Cofan with IsColimit, Finite index"
+  },
+  {
+   "tool": "leansearch",
+   "query": "every object is a finite coproduct of connected objects in a Galois category",
+   "results": "PreGaloisCategory.has_decomp_connected_components (∃ ι f g (_ : IsColimit (Cofan.mk X g)), (∀ i, IsConnected (f i)) ∧ Finite ι); has_decomp_connected_components'; hasFiniteCoproducts (Mathlib.CategoryTheory.Galois.Decomposition, Basic)",
+   "date": "2026-10-10",
+   "verdict": "the Mathlib formulation of 'finite coproduct of connected objects' is Cofan.mk X g with IsColimit and Finite ι"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "cofan of a family of objects which is a colimit: the object is the coproduct of the family",
+   "results": "FormalCoproduct.isColimitCofan; coproductIsCoproduct (IsColimit (Cofan.mk (∐ f) (Sigma.ι f))); coproductIsCoproduct'; Sigma.cocone_pt (Mathlib.CategoryTheory.Limits.Shapes.Products)",
+   "date": "2026-10-10",
+   "verdict": "match: Cofan + IsColimit"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -n 'abbrev Cofan|def Cofan.mk|def Cofan.IsColimit.mk' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/CategoryTheory/Limits/Shapes/Products.lean; sed -n 119,121p ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/CategoryTheory/Galois/Decomposition.lean",
+   "results": "Products.lean:56 abbrev Cofan (f : β → C) := Cocone (Discrete.functor f); :67 Cofan.mk P p; :147 Cofan.IsColimit.mk (desc, fac, uniq); Decomposition.lean:119-121 has_decomp_connected_components uses ∃ (ι : Type) (f : ι → C) (g : (i : ι) → f i ⟶ X) (_ : IsColimit (Cofan.mk X g)), ... ∧ Finite ι",
+   "date": "2026-10-10",
+   "verdict": "match"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "CategoryTheory.Limits.Cofan; CategoryTheory.Limits.Cofan.mk; CategoryTheory.Limits.IsColimit",
+  "file": "Mathlib/CategoryTheory/Limits/Shapes/Products.lean",
+  "lines": [
+   56,
+   67
+  ],
+  "how": "exact: 'X is a finite coproduct of (X_i)' is ∃ (ι : Type) (_ : Finite ι) (f : ι → C) (g : ∀ i, f i ⟶ X), IsColimit (Cofan.mk X g) (Cofan line 56, Cofan.mk line 67; the same pattern as Galois/Decomposition.lean line 120); the universal property is Cofan.IsColimit.mk (line 147)"
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "def-galois-category",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-curve-estimates",
+ "unit": "sk-prop-h2"
+}

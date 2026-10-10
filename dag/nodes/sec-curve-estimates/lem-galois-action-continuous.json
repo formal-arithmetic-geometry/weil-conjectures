@@ -3,7 +3,7 @@
  "blueprint": {
   "is": "lem-galois-action-continuous",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "Continuity of the action of $\\operatorname{Aut}(F)$",
@@ -15,26 +15,38 @@
  "stmt_deps": [
   "def-galois-category"
  ],
- "proof": [
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
   {
-   "text": "By [def-galois-category] the topology on $\\operatorname{Aut}(F)$\nis the initial topology of the evaluation maps\n$\\gamma\\mapsto\\gamma_Y$ into the discrete finite groups\n$\\operatorname{Aut}(F(Y))$. Hence the map\n$\\operatorname{Aut}(F)\\times F(X)\\to\\operatorname{Aut}(F(X))\\times F(X)$,\n$(\\gamma,x)\\mapsto(\\gamma_X,x)$, is continuous, and so is the\nevaluation map\n$\\operatorname{Aut}(F(X))\\times F(X)\\to F(X)$, both factors\n$\\operatorname{Aut}(F(X))$ and $F(X)$ being finite and discrete; the\naction map is the composite of these two.",
-   "uses": [
-    "def-galois-category"
-   ],
-   "elementary": false
+   "tool": "leansearch",
+   "query": "action of automorphism group of a functor to finite types on the fiber is continuous",
+   "results": "CategoryTheory.PreGaloisCategory.continuousSMul_aut_fiber (Mathlib.CategoryTheory.Galois.Topology); autMulFiber, toAut_continuous, mulAction_def, instContinuousMulAutFunctorFintypeCat",
+   "date": "2026-10-10",
+   "verdict": "match: continuousSMul_aut_fiber"
+  },
+  {
+   "tool": "loogle",
+   "query": "ContinuousSMul (CategoryTheory.Aut _) _",
+   "results": "PreGaloisCategory.instContinuousSMulAutFintypeCatObjObjFinite (Aut (F.obj X) on F.obj X), PreGaloisCategory.continuousSMul_aut_fiber (Aut F on F.obj X), PreGaloisCategory.exists_lift_of_continuous",
+   "date": "2026-10-10",
+   "verdict": "match: continuousSMul_aut_fiber"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -n 'ContinuousSMul\\|TopologicalSpace (Aut F)\\|autEmbedding' Mathlib/CategoryTheory/Galois/Topology.lean; grep -n 'MulAction (Aut F)' -r Mathlib/CategoryTheory/Galois/",
+   "results": "Topology.lean:43-44 autEmbedding, :78-79 TopologicalSpace (Aut F) induced by autEmbedding, :58/:64 discrete topologies on F.obj X and Aut (F.obj X), :135-141 instance continuousSMul_aut_fiber; Basic.lean:193-196 MulAction (Aut F) (F.obj X), smul sigma x := sigma.hom.app X x",
+   "date": "2026-10-10",
+   "verdict": "match"
   }
  ],
- "proof_deps": [
-  "def-galois-category"
- ],
- "proof_origin": {
-  "by": "agent",
-  "document": "literature/blueprint/master/blueprint/sec-curve-estimates/sk-prop-h2/lem-galois-action-continuous.md",
-  "place": "## Proof"
+ "mathlib_match": {
+  "declaration": "CategoryTheory.PreGaloisCategory.continuousSMul_aut_fiber",
+  "file": "Mathlib/CategoryTheory/Galois/Topology.lean",
+  "how": "specializes in one line: for F : C ⥤ FintypeCat (a functor to Sets with all F(X) finite) with no Galois hypothesis (section variables at line 39), instance continuousSMul_aut_fiber (X : C) : ContinuousSMul (Aut F) (F.obj X) at lines 135-141. The topology on Aut F is TopologicalSpace.induced (autEmbedding F) of the product topology on ∀ X, Aut (F.obj X) (lines 43-44, 78-79), with Aut (F.obj X) and F.obj X discrete (lines 58, 64), i.e. the topology of [def-galois-category]; the action is σ • x = σ.hom.app X x (Mathlib/CategoryTheory/Galois/Basic.lean 193-196), i.e. (γ,x) ↦ γ_X(x). Read with sed -n."
  },
- "mathlib_searches": [],
- "mathlib_match": null,
- "status": "imported",
+ "status": "mathlib",
  "merged_into": null,
  "import_flags": [],
  "blueprint_kind": "lemma",
@@ -56,5 +68,16 @@
   }
  },
  "chapter": "sec-curve-estimates",
- "unit": "sk-prop-h2"
+ "unit": "sk-prop-h2",
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "lem-galois-action-continuous",
+  "worker": "stage1",
+  "summary": "Rule 0: no slopmaster2 declaration states the node (grep of WeilConjectures and Comparator by id and key words; IsFundamentalgroup.lean:101 only applies Mathlib's continuousSMul_aut_fiber). Mathlib states it exactly: CategoryTheory.PreGaloisCategory.continuousSMul_aut_fiber (Galois/Topology.lean 135-141), for any functor C ⥤ FintypeCat, with Aut F topologized by the topology induced from the product of the discrete Aut(F(X)) (lines 43-44, 58, 64, 78-79) and the action σ•x = σ_X(x) (Galois/Basic.lean 193-196). The only difference is FintypeCat-valued against Sets-valued with finite values, a one-line specialization. Status mathlib; the imported one-step proof (factor through the projection to Aut(F(X)), which is exactly Mathlib's proof) removed as a leaf carries no proof. Statement and stmt_deps unchanged.",
+  "blueprint": {
+   "steps": [],
+   "realizes": "the whole proof of the blueprint node lem-galois-action-continuous (its single paragraph: the action map is the composite of (γ,x)↦(γ_X,x) and the evaluation on the discrete Aut(F(X))×F(X)) is the Mathlib proof of continuousSMul_aut_fiber",
+   "same_as_search": "tools/blueprint_refs.py search 'continuous action Aut fibre functor', 'continuous action automorphism group', 'Aut(F) continuous', 'action continuous discrete topology finite sets', 'induced topology product discrete'; grep -rl dag/nodes for the id and continuousSMul_aut_fiber: only this node, its citer thm-galois-abstract-equivalence, def-galois-category, def-galois-fibre-functor, def-exc-continuous-cohomology (a definition of discrete modules, not this statement), cor-galois-lisse-representations, def-wf-fundamental-representation; none states it."
+  }
+ }
 }

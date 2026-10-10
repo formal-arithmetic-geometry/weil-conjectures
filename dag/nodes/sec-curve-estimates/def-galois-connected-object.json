@@ -1,0 +1,74 @@
+{
+ "id": "def-galois-connected-object",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "def-galois-category",
+   "place": "clause 2: 'where $X$ is connected if it is not initial and every monomorphism $Y\\to X$ is either an isomorphism or has initial source'",
+   "via": []
+  },
+  "same_as": []
+ },
+ "kind": "definition",
+ "title": "Connected object of a category",
+ "statement": "Let $\\mathcal C$ be a category. An object $X$ of $\\mathcal C$ is *connected* if $X$ is not initial and for every monomorphism $i:Y\\to X$ either $Y$ is initial or $i$ is an isomorphism (initial objects and monomorphisms as in [def-galois-initial-mono]).",
+ "source": {
+  "document": "literature/stacks-project/pione.tex",
+  "place": "Fundamental Groups of Schemes, Definition 0BMY (label definition-galois-category), last sentence: 'Here we say X is connected if ...'"
+ },
+ "stmt_deps": [
+  "def-galois-initial-mono"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "connected object: not initial and every monomorphism into it is an isomorphism or has initial source",
+   "results": "PreGaloisCategory.IsConnected.mk; isConnected_of_hasInitial (connected index category, a different notion); IsConnected.rec; IsConnected.casesOn; IsConnected.noTrivialComponent (Mathlib.CategoryTheory.Galois.Basic)",
+   "date": "2026-10-10",
+   "verdict": "match: CategoryTheory.PreGaloisCategory.IsConnected"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.PreGaloisCategory.IsConnected",
+   "results": "IsConnected {C} [Category C] (X : C) : Prop; IsConnected.notInitial; instFiniteAutOfIsConnected; instFiniteHomOfIsConnected (Mathlib.CategoryTheory.Galois.Basic)",
+   "date": "2026-10-10",
+   "verdict": "match"
+  },
+  {
+   "tool": "grep",
+   "query": "sed -n 100,107p ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/CategoryTheory/Galois/Basic.lean",
+   "results": "Basic.lean:102 class IsConnected (X : C) : Prop where notInitial : IsInitial X → False; noTrivialComponent (Y : C) (i : Y ⟶ X) [Mono i] : (IsInitial Y → False) → IsIso i -- only [Category C] is assumed, no PreGaloisCategory",
+   "date": "2026-10-10",
+   "verdict": "match"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "CategoryTheory.PreGaloisCategory.IsConnected",
+  "file": "Mathlib/CategoryTheory/Galois/Basic.lean",
+  "lines": [
+   102,
+   106
+  ],
+  "how": "exact: for any category C, notInitial (line 104) is 'X is not initial' and noTrivialComponent (line 106) is 'a mono i : Y ⟶ X with Y not initial is an iso', which is Stacks' 'Y initial or i an isomorphism' (classical case split)"
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "def-galois-category",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-curve-estimates",
+ "unit": "sk-prop-h2"
+}
