@@ -276,6 +276,20 @@ theorem WeilComplex.IsMixedOfWeightsAtMost.of_distTriang {ι : PadicAlgCl l →+
   fun b ↦ WeilSheaf.IsMixedOfWeightsAtMost.of_exact (WeilComplex.homologySheaf_exact₂ T hT b)
     (h₁ b) (h₃ b)
 
+/-- **Finite pushforward preserves upper weights.** The direct image `Rp₀* = p₀!` along a finite
+morphism `p` carries Weil complexes mixed of weights at most `w` to Weil complexes mixed of
+weights at most `w`: `p₀*` is exact, and at a closed point `y` the geometric Frobenius permutes the
+points over `y`, an orbit of length `e` contributing eigenvalues whose `e`-th powers are those of
+the local Frobenius upstairs, with `q_x = q_yᵉ` (blueprint: `lem-zl-finite-pushforward`). -/
+theorem WeilComplex.IsMixedOfWeightsAtMost.derivedLowerStar_of_isFinite {ι : PadicAlgCl l →+* ℂ}
+    {Y : Scheme.{u}} [Y.Over (Spec (CommRingCat.of k₀))]
+    [LocallyOfFiniteType (Y ↘ Spec (CommRingCat.of k₀))]
+    [QuasiCompact (Y ↘ Spec (CommRingCat.of k₀))] (p : X ⟶ Y) [IsFinite p]
+    [p.IsOver (Spec (CommRingCat.of k₀))] {w : ℝ} {K : WeilComplex k₀ l X}
+    (hK : K.IsMixedOfWeightsAtMost ι w) :
+    ((WeilComplex.derivedLowerStar p).obj K).IsMixedOfWeightsAtMost ι w :=
+  sorry
+
 /-- The direct-image weight assertion of the blueprint theorem `sk-thm-dl-general-sheaf`, for a
 single morphism `f : X ⟶ Y` of `k₀`-schemes: every constructible Weil sheaf `F` on `X` that is
 mixed of weights at most `w` has `Rʳf₀!F` mixed of weights at most `w + r`, for every `r`. The

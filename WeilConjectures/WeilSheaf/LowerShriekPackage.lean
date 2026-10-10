@@ -47,6 +47,13 @@ noncomputable def WeilComplex.derivedLowerShriekCompιIso :
   unfold WeilComplex.derivedLowerShriek
   exact ObjectProperty.liftFullSubcategoryCompιIso _ _ _ _
 
+/-- The higher direct images with compact support are the cohomology sheaves of `Rf₀!` of a
+Weil sheaf placed in degree zero. -/
+noncomputable def WeilSheaf.higherLowerShriekIso (r : ℕ) :
+    WeilSheaf.higherLowerShriek k₀ l f r ≅
+      WeilSheaf.toComplex ⋙ WeilComplex.derivedLowerShriek k₀ l f ⋙ WeilComplex.homologySheaf r :=
+  Iso.refl _
+
 attribute [local instance] Compactification.over in
 /-- The direct image with compact support of a Weil sheaf has no cohomology in negative
 degrees: `Rf₀! = Rḡ_* ∘ ī_!` for a compactification, and `ī_!` is exact while `Rḡ_*` is a right
@@ -72,6 +79,98 @@ theorem WeilSheaf.isZero_homologySheaf_derivedLowerShriek_of_neg (F : WeilSheaf 
     DerivedCategory.TStructure.t.isGE_of_iso e.symm 0
   exact WeilComplex.isZero_homologySheaf_obj (DerivedCategory.isZero_of_isGE _ 0 a ha)
 
+attribute [local instance] Compactification.over in
+/-- **Independence of the compactification.** On Weil complexes, the direct image with compact
+support `Rf₀!` is computed by any compactification `X ⟶[i] Z ⟶[g] Y` of `f`: it is isomorphic to
+`Rḡ_* ∘ ī_!` for every compactification, not only for the chosen one
+(blueprint: `prop-functor-package`, item 2, with the descent to `ℚ̄_ℓ`-Weil complexes of item 1).
+-/
+theorem WeilComplex.nonempty_derivedLowerShriekCompι_iso (c : Compactification f) :
+    Nonempty (WeilComplex.derivedLowerShriek k₀ l f ⋙ (WeilComplex.objectProperty k₀ l Y).ι ≅
+      (WeilComplex.objectProperty k₀ l X).ι ⋙ ProEtaleWeilSheaf.rightDerivedLowerShriek k₀ l f c) :=
+  sorry
+
 end
+
+/-- **Properness law.** For a proper morphism `f`, the direct image with compact support of Weil
+complexes is the derived direct image: `Rf₀! ≅ Rf₀*`
+(blueprint: `prop-functor-package`, item 3). -/
+theorem WeilComplex.nonempty_derivedLowerShriek_iso_derivedLowerStar (f : X ⟶ Y) [IsProper f]
+    [f.IsOver (Spec (CommRingCat.of k₀))] [LocallyOfFiniteType (Y ↘ Spec (CommRingCat.of k₀))]
+    [QuasiCompact (Y ↘ Spec (CommRingCat.of k₀))]
+    [QuasiSeparated (Y ↘ Spec (CommRingCat.of k₀))] :
+    Nonempty (WeilComplex.derivedLowerShriek k₀ l f ≅ WeilComplex.derivedLowerStar (l := l) f) :=
+  sorry
+
+/-- **Composition law.** For composable morphisms `X ⟶[f] Z ⟶[g] Y` of `k₀`-schemes, the direct
+images with compact support of Weil complexes compose: `R(f ≫ g)₀! ≅ Rg₀! ∘ Rf₀!`
+(blueprint: `prop-functor-package`, item 3, used as `lem-zl-shriek-composition`). -/
+theorem WeilComplex.nonempty_derivedLowerShriek_comp_iso {Z : Scheme.{u}}
+    [Z.Over (Spec (CommRingCat.of k₀))] (f : X ⟶ Z) (g : Z ⟶ Y)
+    [f.IsOver (Spec (CommRingCat.of k₀))] [IsSeparated f] [LocallyOfFiniteType f] [QuasiCompact f]
+    [g.IsOver (Spec (CommRingCat.of k₀))] [IsSeparated g] [LocallyOfFiniteType g] [QuasiCompact g]
+    [LocallyOfFiniteType (Z ↘ Spec (CommRingCat.of k₀))]
+    [QuasiCompact (Z ↘ Spec (CommRingCat.of k₀))] [QuasiSeparated (Z ↘ Spec (CommRingCat.of k₀))]
+    [LocallyOfFiniteType (Y ↘ Spec (CommRingCat.of k₀))]
+    [QuasiCompact (Y ↘ Spec (CommRingCat.of k₀))] [QuasiSeparated (Y ↘ Spec (CommRingCat.of k₀))] :
+    Nonempty (WeilComplex.derivedLowerShriek k₀ l (f ≫ g) ≅
+      WeilComplex.derivedLowerShriek k₀ l f ⋙ WeilComplex.derivedLowerShriek k₀ l g) :=
+  sorry
+
+/-- **Compact support base change.** For a pullback square
+```
+X' --- g ---> X
+|             |
+f'            f
+v             v
+Y' --- h ---> Y
+```
+of `k₀`-schemes, `h₀^* ∘ Rf₀! ≅ Rf'₀! ∘ g₀^*` on Weil complexes
+(blueprint: `prop-functor-package`, item 4). -/
+theorem WeilComplex.nonempty_derivedLowerShriek_comp_upperStar_iso {X' Y' : Scheme.{u}}
+    [X'.Over (Spec (CommRingCat.of k₀))] [Y'.Over (Spec (CommRingCat.of k₀))]
+    {f : X ⟶ Y} [f.IsOver (Spec (CommRingCat.of k₀))] [IsSeparated f] [LocallyOfFiniteType f]
+    [QuasiCompact f] [LocallyOfFiniteType (Y ↘ Spec (CommRingCat.of k₀))]
+    [QuasiCompact (Y ↘ Spec (CommRingCat.of k₀))]
+    [QuasiSeparated (Y ↘ Spec (CommRingCat.of k₀))]
+    {f' : X' ⟶ Y'} [f'.IsOver (Spec (CommRingCat.of k₀))] [IsSeparated f']
+    [LocallyOfFiniteType f'] [QuasiCompact f']
+    [LocallyOfFiniteType (Y' ↘ Spec (CommRingCat.of k₀))]
+    [QuasiCompact (Y' ↘ Spec (CommRingCat.of k₀))]
+    [QuasiSeparated (Y' ↘ Spec (CommRingCat.of k₀))]
+    {g : X' ⟶ X} [g.IsOver (Spec (CommRingCat.of k₀))] {h : Y' ⟶ Y}
+    [h.IsOver (Spec (CommRingCat.of k₀))] (hH : IsPullback g f' f h) :
+    Nonempty (WeilComplex.derivedLowerShriek k₀ l f ⋙ WeilComplex.upperStar h ≅
+      WeilComplex.upperStar g ⋙ WeilComplex.derivedLowerShriek k₀ l f') :=
+  sorry
+
+open Pretriangulated in
+/-- **The open–closed triangle.** Let `j : U ⟶ X` be an open immersion whose closed complement is
+`i : Z ⟶ X`. Every Weil complex `K` on `X` sits in a distinguished triangle
+`j₀!j₀^*K ⟶ K ⟶ i₀*i₀^*K ⟶ j₀!j₀^*K[1]`
+(blueprint: `prop-sf-open-closed-triangle-all-stages`). -/
+theorem WeilComplex.exists_distTriang_openClosed {U Z : Scheme.{u}}
+    [U.Over (Spec (CommRingCat.of k₀))] [Z.Over (Spec (CommRingCat.of k₀))]
+    {j : U ⟶ X} [IsOpenImmersion j] [QuasiCompact j] [j.IsOver (Spec (CommRingCat.of k₀))]
+    {i : Z ⟶ X} [IsClosedImmersion i] [i.IsOver (Spec (CommRingCat.of k₀))]
+    [LocallyOfFiniteType (X ↘ Spec (CommRingCat.of k₀))]
+    [QuasiCompact (X ↘ Spec (CommRingCat.of k₀))]
+    [QuasiSeparated (X ↘ Spec (CommRingCat.of k₀))]
+    (hij : IsCompl (Set.range j.base) (Set.range i.base)) (K : WeilComplex k₀ l X) :
+    ∃ T : Triangle (WeilComplex k₀ l X), T ∈ distTriang _ ∧
+      Nonempty (T.obj₁ ≅ (WeilComplex.derivedLowerShriek k₀ l j).obj
+        ((WeilComplex.upperStar j).obj K)) ∧
+      Nonempty (T.obj₂ ≅ K) ∧
+      Nonempty (T.obj₃ ≅ (WeilComplex.derivedLowerStar i).obj ((WeilComplex.upperStar i).obj K)) :=
+  sorry
+
+/-- **Exactness of finite direct images.** For a finite morphism `p`, the higher direct images
+`Rʳp₀*` of Weil sheaves vanish for `r > 0`
+(blueprint: `lemma-weil-pbc-finite-direct-image-exact`). -/
+theorem WeilSheaf.isZero_higherLowerStar_of_isFinite (p : X ⟶ Y) [IsFinite p]
+    [p.IsOver (Spec (CommRingCat.of k₀))] [LocallyOfFiniteType (Y ↘ Spec (CommRingCat.of k₀))]
+    [QuasiCompact (Y ↘ Spec (CommRingCat.of k₀))] (r : ℕ) (hr : 0 < r) (G : WeilSheaf k₀ l X) :
+    IsZero ((WeilSheaf.higherLowerStar p r).obj G) :=
+  sorry
 
 end AlgebraicGeometry

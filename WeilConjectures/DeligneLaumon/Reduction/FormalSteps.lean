@@ -242,7 +242,7 @@ theorem WeilComplex.IsMixedOfWeightsAtMost.derivedLowerStar_of_isClosedImmersion
     [QuasiCompact (X ↘ Spec (CommRingCat.of k₀))] {w : ℝ}
     {K : WeilComplex k₀ l Z} (hK : K.IsMixedOfWeightsAtMost ι w) :
     ((WeilComplex.derivedLowerStar i).obj K).IsMixedOfWeightsAtMost ι w :=
-  sorry
+  hK.derivedLowerStar_of_isFinite i
 
 /-- Let `j : U ⟶ X` be an open immersion whose closed complement is `i : Z ⟶ X`. If the two
 outer terms `j₀!j₀^*K` and `i₀*i₀^*K` of the localization triangle
@@ -265,7 +265,10 @@ theorem WeilComplex.IsMixedOfWeightsAtMost.of_openClosed {U X Z : Scheme.{u}}
     (hZ : ((WeilComplex.derivedLowerStar i).obj
       ((WeilComplex.upperStar i).obj K)).IsMixedOfWeightsAtMost ι w) :
     K.IsMixedOfWeightsAtMost ι w :=
-  sorry
+  by
+  obtain ⟨T, hT, ⟨e₁⟩, ⟨e₂⟩, ⟨e₃⟩⟩ := WeilComplex.exists_distTriang_openClosed (k₀ := k₀) (l := l) hij K
+  exact (WeilComplex.IsMixedOfWeightsAtMost.of_distTriang hT (hU.of_iso e₁.symm)
+    (hZ.of_iso e₃.symm)).of_iso e₂
 
 /-- Let `G` be a Weil sheaf on `X`, let `j : U ⟶ X` be an open immersion whose closed complement
 is `i : Z ⟶ X`, and suppose that `j₀^*G` and `i₀^*G` are mixed of weights at most `w`. Then `G`
@@ -309,7 +312,31 @@ theorem WeilSheaf.exists_exact_higherLowerShriek_of_openClosed {U X Z Y : Scheme
       Nonempty (S.X₂ ≅ (WeilSheaf.higherLowerShriek k₀ l f r).obj F) ∧
       Nonempty (S.X₃ ≅ (WeilSheaf.higherLowerShriek k₀ l (i ≫ f) r).obj
         ((WeilSheaf.upperStar i).obj F)) :=
-  sorry
+  by
+  have := locallyOfFiniteType_over_of_isOver f (S := Spec (CommRingCat.of k₀))
+  have := locallyOfFiniteType_over_of_isOver j (S := Spec (CommRingCat.of k₀))
+  have := locallyOfFiniteType_over_of_isOver i (S := Spec (CommRingCat.of k₀))
+  have : QuasiCompact (X ↘ Spec (CommRingCat.of k₀)) := by
+    rw [← CategoryTheory.comp_over f (Spec (CommRingCat.of k₀))]; infer_instance
+  have : QuasiSeparated (X ↘ Spec (CommRingCat.of k₀)) := by
+    rw [← CategoryTheory.comp_over f (Spec (CommRingCat.of k₀))]; infer_instance
+  obtain ⟨T, hT, ⟨e₁⟩, ⟨e₂⟩, ⟨e₃⟩⟩ :=
+    WeilComplex.exists_distTriang_openClosed (k₀ := k₀) (l := l) hij (WeilSheaf.toComplex.obj F)
+  obtain ⟨c₁⟩ := WeilComplex.nonempty_derivedLowerShriek_comp_iso (k₀ := k₀) (l := l) j f
+  obtain ⟨c₃⟩ := WeilComplex.nonempty_derivedLowerShriek_comp_iso (k₀ := k₀) (l := l) i f
+  obtain ⟨p⟩ := WeilComplex.nonempty_derivedLowerShriek_iso_derivedLowerStar (k₀ := k₀) (l := l) i
+  let Rf := WeilComplex.derivedLowerShriek k₀ l f
+  let H := WeilComplex.homologySheaf (k₀ := k₀) (l := l) (X := Y) r
+  refine ⟨_, WeilComplex.homologySheaf_exact₂ _ (Rf.map_distinguished T hT) r, ⟨?_⟩, ⟨?_⟩, ⟨?_⟩⟩
+  · exact H.mapIso (Rf.mapIso e₁ ≪≫ (c₁.app _).symm ≪≫
+      (WeilComplex.derivedLowerShriek k₀ l (j ≫ f)).mapIso
+        ((WeilSheaf.toComplexCompUpperStarIso j).app F)) ≪≫
+      ((WeilSheaf.higherLowerShriekIso (j ≫ f) r).app _).symm
+  · exact H.mapIso (Rf.mapIso e₂) ≪≫ ((WeilSheaf.higherLowerShriekIso f r).app _).symm
+  · exact H.mapIso (Rf.mapIso (e₃ ≪≫ (p.app _).symm) ≪≫ (c₃.app _).symm ≪≫
+      (WeilComplex.derivedLowerShriek k₀ l (i ≫ f)).mapIso
+        ((WeilSheaf.toComplexCompUpperStarIso i).app F)) ≪≫
+      ((WeilSheaf.higherLowerShriekIso (i ≫ f) r).app _).symm
 
 /-- Compact support base change for the higher direct images: for a pullback square
 ```
@@ -339,7 +366,17 @@ theorem WeilSheaf.nonempty_upperStar_higherLowerShriek_iso {X Y X' Y' : Scheme.{
     (r : ℕ) :
     Nonempty ((WeilSheaf.upperStar h).obj ((WeilSheaf.higherLowerShriek k₀ l f r).obj F) ≅
       (WeilSheaf.higherLowerShriek k₀ l f' r).obj ((WeilSheaf.upperStar g).obj F)) :=
-  sorry
+  by
+  obtain ⟨e⟩ := WeilComplex.nonempty_derivedLowerShriek_comp_upperStar_iso (k₀ := k₀) (l := l) hH
+  have E : WeilSheaf.higherLowerShriek k₀ l f r ⋙ WeilSheaf.upperStar h ≅
+      WeilSheaf.upperStar g ⋙ WeilSheaf.higherLowerShriek k₀ l f' r := by
+    unfold WeilSheaf.higherLowerShriek
+    exact Functor.associator _ _ _ ≪≫ Functor.isoWhiskerLeft _ (Functor.associator _ _ _ ≪≫
+      Functor.isoWhiskerLeft _ (WeilComplex.upperStarCompHomologySheafIso h r).symm ≪≫
+      (Functor.associator _ _ _).symm ≪≫ Functor.isoWhiskerRight e _ ≪≫
+      Functor.associator _ _ _) ≪≫ (Functor.associator _ _ _).symm ≪≫
+      Functor.isoWhiskerRight (WeilSheaf.toComplexCompUpperStarIso g) _ ≪≫ Functor.associator _ _ _
+  exact ⟨E.app F⟩
 
 /-- Compact support base change for the total direct image: for a pullback square
 ```
@@ -372,7 +409,9 @@ theorem WeilComplex.IsMixedOfWeightsAtMost.upperStar_derivedLowerShriek_of_isPul
       ((WeilComplex.upperStar g).obj K)).IsMixedOfWeightsAtMost ι w) :
     ((WeilComplex.upperStar h).obj
       ((WeilComplex.derivedLowerShriek k₀ l f).obj K)).IsMixedOfWeightsAtMost ι w :=
-  sorry
+  by
+  obtain ⟨e⟩ := WeilComplex.nonempty_derivedLowerShriek_comp_upperStar_iso (k₀ := k₀) (l := l) hH
+  exact hK.of_iso (e.app K).symm
 
 /-- Applying `Rʳf₀!` to a short exact sequence `0 ⟶ F' ⟶ F ⟶ F'' ⟶ 0` of Weil sheaves gives an
 exact sequence `Rʳf₀!F' ⟶ Rʳf₀!F ⟶ Rʳf₀!F''`, a piece of the long exact sequence of the
@@ -452,7 +491,27 @@ theorem HasDirectImageComplexWeightBound.of_openClosed {U X Z Y : Scheme.{u}}
     (hU : HasDirectImageComplexWeightBound k₀ ι (j ≫ f))
     (hZ : HasDirectImageComplexWeightBound k₀ ι (i ≫ f)) :
     HasDirectImageComplexWeightBound k₀ ι f :=
-  sorry
+  by
+  have := locallyOfFiniteType_over_of_isOver f (S := Spec (CommRingCat.of k₀))
+  have := locallyOfFiniteType_over_of_isOver j (S := Spec (CommRingCat.of k₀))
+  have := locallyOfFiniteType_over_of_isOver i (S := Spec (CommRingCat.of k₀))
+  have : QuasiCompact (X ↘ Spec (CommRingCat.of k₀)) := by
+    rw [← CategoryTheory.comp_over f (Spec (CommRingCat.of k₀))]; infer_instance
+  have : QuasiSeparated (X ↘ Spec (CommRingCat.of k₀)) := by
+    rw [← CategoryTheory.comp_over f (Spec (CommRingCat.of k₀))]; infer_instance
+  intro w K hK
+  obtain ⟨T, hT, ⟨e₁⟩, ⟨e₂⟩, ⟨e₃⟩⟩ :=
+    WeilComplex.exists_distTriang_openClosed (k₀ := k₀) (l := l) hij K
+  obtain ⟨c₁⟩ := WeilComplex.nonempty_derivedLowerShriek_comp_iso (k₀ := k₀) (l := l) j f
+  obtain ⟨c₃⟩ := WeilComplex.nonempty_derivedLowerShriek_comp_iso (k₀ := k₀) (l := l) i f
+  obtain ⟨p⟩ := WeilComplex.nonempty_derivedLowerShriek_iso_derivedLowerStar (k₀ := k₀) (l := l) i
+  let Rf := WeilComplex.derivedLowerShriek k₀ l f
+  have h₁ : (Rf.obj T.obj₁).IsMixedOfWeightsAtMost ι w :=
+    ((hU w _ (hK.upperStar j)).of_iso (c₁.app _)).of_iso (Rf.mapIso e₁.symm)
+  have h₃ : (Rf.obj T.obj₃).IsMixedOfWeightsAtMost ι w :=
+    ((hZ w _ (hK.upperStar i)).of_iso (c₃.app _)).of_iso (Rf.mapIso (p.app _ ≪≫ e₃.symm))
+  exact (WeilComplex.IsMixedOfWeightsAtMost.of_distTriang (Rf.map_distinguished T hT) h₁ h₃).of_iso
+    (Rf.mapIso e₂)
 
 section Target
 
