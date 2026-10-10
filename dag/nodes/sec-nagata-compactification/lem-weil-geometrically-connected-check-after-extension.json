@@ -4,12 +4,12 @@
   "is": null,
   "from": {
    "node": "def-weil-geometric-hypotheses",
-   "place": "its statement (a notion the statement uses)",
+   "place": "the common-extension and surjective-base-change argument in the proof of the item",
    "via": [
     "lem-weil-geometrically-connected-algebraic-closure"
    ]
   },
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "Geometric connectedness can be checked after a field extension",
@@ -26,25 +26,87 @@
  ],
  "mathlib_searches": [
   {
-   "tool": "grep",
-   "query": "grep -n '^lemma\\|^theorem\\|^instance' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicGeometry/Geometrically/Connected.lean",
-   "results": "instance : IsStableUnderBaseChange @GeometricallyConnected (line 50) and the pullback.fst/pullback.snd instances: these give the direction 'X geometrically connected over k implies X_{k'} geometrically connected over k''; nothing for the converse",
-   "date": "2026-10-09",
-   "verdict": "no match (one direction only)"
+   "tool": "leanfinder",
+   "query": "geometric connectedness is preserved and reflected after arbitrary field extension",
+   "results": "AlgebraicGeometry.isField_of_universallyClosed; Algebra.IsGeometricallyReduced; no geometrically-connected extension criterion",
+   "date": "2026-10-11",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "GeometricallyConnected, ConnectedSpace, Scheme.baseChange",
+   "results": "unknown identifier GeometricallyConnected; no hit",
+   "date": "2026-10-11",
+   "verdict": "no match"
   },
   {
    "tool": "grep",
-   "query": "grep -rn 'DescendsAlong\\|of_pullback\\|of_surjective\\|descend' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicGeometry/Geometrically/",
-   "results": "none",
-   "date": "2026-10-09",
+   "query": "geometrically_connected|ConnectedSpace|baseChange in Mathlib/AlgebraicGeometry",
+   "results": "Mathlib/AlgebraicGeometry/Geometrically/Integral.lean:66; Reduced.lean:51; Irreducible.lean:49; Basic.lean:70; no converse criterion",
+   "date": "2026-10-11",
    "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "geometric connectedness can be checked after a field extension",
+   "results": "service unavailable",
+   "date": "2026-10-11",
+   "verdict": "unavailable"
   }
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Assume $X$ is geometrically connected over $k$. For every field extension $L/k$, the base change $X_L$ is connected by the definition of geometric connectedness. For a field extension $k'/k$, the base change $(X_{k'})_L$ is canonically $X_L$ over $L$, so the same condition holds for $X_{k'}$ over $k'$.",
+   "uses": [
+    "def-pc-geometrically-irreducible",
+    "def-pc-base-change"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Lemma 33.7.3, tag 054N, proof of the forward implication"
+   }
+  },
+  {
+   "text": "Conversely, assume $X_{k'}$ is geometrically connected over $k'$, and let $k''/k$ be arbitrary. By [lem-weil-common-extension-fields] there is a field $k'''$ with embeddings of $k'$ and $k''$ over $k$. The iterated base-change identification gives $X_{k'''}=(X_{k'})_{k'''}$, which is connected because $X_{k'}$ is geometrically connected and $k'''/k'$ is a field extension.",
+   "uses": [
+    "def-pc-geometrically-irreducible",
+    "def-pc-base-change",
+    "lem-weil-common-extension-fields"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Lemma 33.7.3, tag 054N, proof of the converse (common extension)"
+   }
+  },
+  {
+   "text": "The morphism $\\operatorname{Spec}(k''')\\to\\operatorname{Spec}(k'')$ is surjective, both spaces being one point. By the base-change identification $X_{k'''}=X_{k''}\\times_{\\operatorname{Spec}k''}\\operatorname{Spec}k'''$, the projection $X_{k'''}\\to X_{k''}$ is the base change of this surjective morphism, hence is surjective by [lem-weil-pbc-surjective-base-change]. The continuous image of the connected space $X_{k'''}$ is therefore the connected space $X_{k''}$. Since $k''/k$ was arbitrary, $X$ is geometrically connected over $k$.",
+   "uses": [
+    "def-pc-base-change",
+    "lem-weil-pbc-surjective-base-change",
+    "def-pc-geometrically-irreducible"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Lemma 33.7.3, tag 054N, proof of the converse (surjective projection)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-geometrically-irreducible",
+  "def-pc-base-change",
+  "lem-weil-common-extension-fields",
+  "lem-weil-pbc-surjective-base-change"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/varieties.tex",
+  "place": "Lemma 33.7.3, tag 054N, proof"
+ },
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "worker",
@@ -64,5 +126,23 @@
   }
  },
  "chapter": "sec-nagata-compactification",
- "unit": "sk-prop-nagata-sketch-comp-category"
+ "unit": "sk-prop-nagata-sketch-comp-category",
+ "split_report": {
+  "date": "2026-10-11",
+  "item": "lem-weil-geometrically-connected-check-after-extension",
+  "worker": "stage1",
+  "summary": "Split the Stacks 054N proof into the forward base-change argument, the common-overfield construction, and the surjective connected-image descent; added the missing common-extension statement node.",
+  "blueprint": "The three steps realize the common-extension and surjective-projection proof in the ancestor blueprint node def-weil-geometric-hypotheses via lem-weil-geometrically-connected-algebraic-closure."
+ },
+ "tool_uses": [
+  "lem-weil-pbc-surjective-base-change"
+ ],
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-gcc2940",
+  "group": "K1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-gcc2940 (reviewer sub-agent of L); spot-checked: Statement matches tag 054N; def-pc-geometrically-irreducible does define geometric connectedness (resp. clause, C4 ok); Step 1 transitivity is the identification X_{T'}=X_T x_T T' stated in def-pc-base-change; new node lem-weil-common-extension-fields matches 0H7K, no DAG duplicate, real lemma (not class d), one LeanFinder query run (no match: exists_field_of_isDomain needs IsDomain); sibling M1 adds no helper, no duplicate; no cycle (lem-weil-geometrically-connected-algebraic-closure cites the item, not conversely). FIX more, RETURN less: C1 in Step 3 -- surjectivity of a base change of a surjective morphism (Tag 01S1) was marked elementary; now cites existing lem-weil-pbc-surjective-base-change (generic tool from sk-thm-p1, added to tool_uses), step elementary false, proof_deps updated. Second reading by K1 missed this.; 2 file(s) fixed by the reviewer"
+ }
 }
