@@ -1,8 +1,8 @@
 # Work queue
 
-863 items; claim with `tools/claim.py next <group> [--stage N]`.
+858 items; claim with `tools/claim.py next <group> [--stage N]`.
 
-## Stage 1: nodes to split (61)
+## Stage 1: nodes to split (56)
 
 | node | distance to a target | Lean state on the done branch |
 |---|---|---|
@@ -16,11 +16,9 @@
 | `lem-pc-derived-pullback-tensor-product` | 3019 | none |
 | `lem-pc-rhom-strict-perfect-hom` | 3019 | none |
 | `lem-sc-derived-internal-hom-adjunction` | 3019 | none |
-| `lem-pc-dq-coherator-adjunction` | 3020 | none |
 | `lem-pc-qcqs-sheaf-rhom-adjunction` | 3020 | none |
 | `lem-pc-tor-independent-perfect-pullback-comparison` | 3021 | none |
 | `lem-sc-affine-koszul-cech-derived-comparison` | 3021 | none |
-| `lem-sc-affine-perfect-koszul-principal-unit` | 3021 | none |
 | `lem-sc-affine-pseudo-coherent-lift` | 3022 | none |
 | `lem-sc-affine-truncation-kernel-finite-locally-free` | 3022 | none |
 | `lem-sc-perfect-ext-bounded-qcoh-vanishing` | 3022 | none |
@@ -61,10 +59,7 @@
 | `def-wf-lie-algebra-derivation` | - | rests_on_sorry |
 | `lem-pur-derived-change-of-rings` | - | none |
 | `def-wf-lie-algebra` | - | none |
-| `lem-pc-curve-coherent-finiteness` | - | rests_on_sorry |
 | `lem-pc-flf-properties` | - | none |
-| `lem-sc-p1-twist-exists` | - | none |
-| `lem-sc-p1-coherent-finite` | - | rests_on_sorry |
 | `lem-pur-rhom-global-sections` | - | none |
 | `lem-pur-rhom-well-defined` | - | none |
 
@@ -875,7 +870,7 @@
 | `lem-weil-pbc-projective-space-zero-isomorphism` | 4 | state |
 | `def-nagata-fixed-base-separated-stage` | 6 | state |
 
-Not open yet: 1655 nodes that wait for a statement dependency, 100 nodes that wait for stage 1.
+Not open yet: 1660 nodes that wait for a statement dependency, 95 nodes that wait for stage 1.
 
 ## Stage 3: modules to prove (0)
 
