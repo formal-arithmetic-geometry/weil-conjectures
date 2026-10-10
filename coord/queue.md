@@ -1,8 +1,8 @@
 # Work queue
 
-896 items; claim with `tools/claim.py next <group> [--stage N]`.
+898 items; claim with `tools/claim.py next <group> [--stage N]`.
 
-## Stage 1: nodes to split (655)
+## Stage 1: nodes to split (657)
 
 | node | distance to a target | Lean state on the done branch |
 |---|---|---|
@@ -25,7 +25,6 @@
 | `lem-weil-pbc-popescu-artinian-flat-subalgebras` | 1012 | none |
 | `lem-weil-pbc-popescu-delocalize-weak` | 1012 | none |
 | `lem-weil-pbc-popescu-desingularize` | 1012 | none |
-| `lem-weil-pbc-popescu-desingularize-lifting-apply` | 1012 | none |
 | `lem-weil-pbc-popescu-height-zero-auxiliary-algebra-localizations` | 1012 | none |
 | `lem-weil-pbc-popescu-lift-once` | 1012 | none |
 | `lem-weil-pbc-popescu-lift-twice` | 1012 | none |
@@ -84,6 +83,7 @@
 | `def-weil-pbc-nagata-ring` | 1013 | none |
 | `def-weil-pbc-relative-global-complete-intersection` | 1013 | none |
 | `def-weil-pbc-serre-conditions-rk-sk` | 1013 | none |
+| `lem-weil-pbc-artinian-local-essentially-finite-type-residue` | 1013 | none |
 | `lem-weil-pbc-cartier-equality` | 1013 | none |
 | `lem-weil-pbc-cauchy-binet` | 1013 | none |
 | `lem-weil-pbc-clopen-open-cover-section` | 1013 | none |
@@ -100,6 +100,7 @@
 | `lem-weil-pbc-fibre-degree-base-change` | 1013 | none |
 | `lem-weil-pbc-fibre-degree-bound-field-points` | 1013 | none |
 | `lem-weil-pbc-field-char-p-h1-cotangent-vanishing` | 1013 | none |
+| `lem-weil-pbc-field-char-p-nilpotent-lifting` | 1013 | none |
 | `lem-weil-pbc-find-derivation-not-pth-power` | 1013 | none |
 | `lem-weil-pbc-finite-locally-free-degree-etale-descent` | 1013 | none |
 | `lem-weil-pbc-finite-surjective-affine-target-noetherian` | 1013 | none |
@@ -126,6 +127,7 @@
 | `lem-weil-pbc-module-pushforward-injectives-sections-quasi-iso` | 1013 | none |
 | `lem-weil-pbc-module-stalk-exact` | 1013 | none |
 | `lem-weil-pbc-nagata-universally-japanese` | 1013 | none |
+| `lem-weil-pbc-popescu-delocalize-weak-localization-smooth` | 1013 | none |
 | `lem-weil-pbc-presheaf-module-stalk-filtered-colimit` | 1013 | none |
 | `lem-weil-pbc-projective-resolution-kernel-projective` | 1013 | none |
 | `lem-weil-pbc-pth-root-presentation-differentials` | 1013 | none |
@@ -908,7 +910,7 @@
 | `lem-weil-pbc-p1-field-dimension-one` | 4 | state |
 | `lem-weil-pbc-projective-space-zero-isomorphism` | 4 | state |
 
-Not open yet: 667 nodes that wait for stage 1, 529 nodes that wait for a statement dependency.
+Not open yet: 669 nodes that wait for stage 1, 530 nodes that wait for a statement dependency.
 
 ## Stage 3: modules to prove (0)
 
