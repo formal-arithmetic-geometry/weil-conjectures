@@ -1,20 +1,20 @@
 # Work queue
 
-892 items; claim with `tools/claim.py next <group> [--stage N]`.
+891 items; claim with `tools/claim.py next <group> [--stage N]`.
 
-## Stage 1: nodes to split (123)
+## Stage 1: nodes to split (121)
 
 | node | distance to a target | Lean state on the done branch |
 |---|---|---|
 | `lem-weil-derived-limit-existence` | 14 | none |
 | `lem-weil-pbc-injective-acyclicity-bounded-below` | 2002 | sorry_here |
 | `lem-pc-ringed-space-module-stalk-tensor` | 3013 | none |
-| `lem-sc-derived-open-gluing` | 3014 | none |
 | `lem-pc-affine-pseudo-coherent-criterion` | 3015 | none |
 | `lem-pc-affine-tor-amplitude-criterion` | 3015 | none |
 | `lem-pc-derived-mayer-vietoris-triangle` | 3015 | none |
 | `lem-pc-perfect-pseudo-coherent-locally-finite-tor` | 3015 | none |
-| `lem-pc-tower-surjective-lim-acyclic` | 3015 | none |
+| `lem-sc-derived-hom-mayer-vietoris` | 3015 | none |
+| `lem-pc-injective-split-tower-injective` | 3016 | none |
 | `lem-pc-pseudo-coherent-bounded-finite-free-model` | 3016 | none |
 | `lem-pc-supported-open-pushforward` | 3016 | none |
 | `lem-pc-perfect-rhom-tensor-comparison` | 3018 | none |
@@ -48,8 +48,8 @@
 | `lem-pc-sites-module-sheafification-interface` | 5015 | none |
 | `lem-pc-sites-module-sheafification-tensor` | 5015 | none |
 | `lem-pc-fp-module-map-descent-affine` | 5017 | none |
-| `lem-sp-cartan-eilenberg-comparison-homotopy` | 6006 | none |
 | `thm-sp-spectral-object-yields` | 6006 | none |
+| `lem-sp-cartan-eilenberg-double-complex-homotopy` | 6007 | none |
 | `lem-sc-picard-diagonal-locally-closed` | 6012 | none |
 | `lem-sc-picard-locus-closed` | 6012 | none |
 | `lem-sc-picard-product-open` | 6012 | none |
@@ -65,9 +65,7 @@
 | `lem-weil-pbc-pullback-finite-locally-constant` | - | none |
 | `lem-weil-pbc-spread-finite-separable-extension` | - | none |
 | `lem-weil-pbc-spread-purely-inseparable-factors` | - | none |
-| `def-nagata-basechanged-system` | - | none |
 | `def-nagata-morphism-descent` | - | none |
-| `def-nagata-qc-open-descent` | - | none |
 | `lem-fin-normal-generic-constant` | - | none |
 | `lem-pc-finite-support-hi` | - | sorry_here |
 | `lem-pc-projective-coherent-higher-images` | - | sorry_here |
@@ -130,7 +128,7 @@
 | `lem-zl-noether-normalization-dimension` | - | none |
 | `lem-pur-rhom-global-sections` | - | none |
 
-## Stage 2: nodes to state (769)
+## Stage 2: nodes to state (770)
 
 | node | distance to Mathlib | kind |
 |---|---|---|
@@ -138,6 +136,7 @@
 | `cor-pqf-proper-quasifinite-finite` | 1 | state |
 | `def-galois-category` | 1 | state |
 | `def-kun-topological-dimension-at-point` | 1 | state |
+| `def-nagata-basechanged-system` | 1 | state |
 | `def-nagata-dense-compactification` | 1 | state |
 | `def-nagata-directed-finite-upper-bound` | 1 | state |
 | `def-nagata-extended-ideal` | 1 | state |
@@ -904,7 +903,7 @@
 | `lem-weil-pbc-projective-space-zero-isomorphism` | 4 | state |
 | `def-nagata-fixed-base-separated-stage` | 6 | state |
 
-Not open yet: 1582 nodes that wait for a statement dependency, 163 nodes that wait for stage 1.
+Not open yet: 1586 nodes that wait for a statement dependency, 161 nodes that wait for stage 1.
 
 ## Stage 3: modules to prove (0)
 
