@@ -23,9 +23,49 @@
   "def-pc-perfect-complex",
   "def-weil-pbc-koszul-complex"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "For each e, the Koszul complex K^\\bullet(f_1^e,\\ldots,f_r^e) is concentrated in the finite range [-r,0], and its term in degree -j is the finite free A-module \\bigwedge_A^j A^{\\oplus r}. The shifted complex I^\\bullet has the same finite-free terms (with the indicated shift and sign change), so its associated complex on X=Spec(A) is strictly perfect. By the affine characterization in [def-pc-perfect-complex], the object I_e is perfect.",
+   "uses": [
+    "def-pc-perfect-complex",
+    "def-weil-pbc-koszul-complex"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/perfect.tex",
+    "place": "Section section-koszul (definition of K^\\bullet and I^\\bullet); Cohomology of Sheaves, Definition 08CM"
+   }
+  },
+  {
+   "text": "Fix i. Over D(f_i)=Spec(A_{f_i}) the complexes are the localizations at f_i, and f_i^e is a unit of A_{f_i}. Write D for the Koszul differential on the exterior algebra of E=A_{f_i}^{\\oplus r} with \\varphi(e_j)=f_j^e [def-weil-pbc-koszul-complex], and let h be exterior (left) multiplication by f_i^{-e}e_i, which raises the chain degree by one. The defining formula D(v\\wedge x)=\\varphi(v)x-v\\wedge D(x) with v=e_i gives D(e_i\\wedge x)+e_i\\wedge D(x)=f_i^e x, so Dh+hD=\\mathrm{id} (Stacks, More on Algebra, Lemmas 0626 and 0663: multiplication by f_i^e is homotopic to zero). Hence the localized Koszul complex K^\\bullet(f_1^e,\\ldots,f_r^e)_{f_i} is contractible, in particular acyclic. Since this complex is the cone of the augmentation I^\\bullet\\to A (the Koszul triangle), the augmentation u_e restricts to a quasi-isomorphism on D(f_i).",
+   "uses": [
+    "def-weil-pbc-koszul-complex"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Lemmas 0626 (lemma-homotopy-koszul-abstract) and 0663 (lemma-homotopy-koszul); perfect.tex Tag 08CX for the triangle"
+   }
+  },
+  {
+   "text": "The opens D(f_i) cover U by definition. Since the restriction of u_e is a quasi-isomorphism on every member of this cover, it is an isomorphism in D(\\mathcal O_U). For r=0 the cover is empty and the assertion is vacuous; for r=1 the contracting homotopy is the usual two-term homotopy for multiplication by the unit f_1^e.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/perfect.tex",
+    "place": "Tag 08CX and the definition U=D(f_1)\\cup\\cdots\\cup D(f_r)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-perfect-complex",
+  "def-weil-pbc-koszul-complex"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/perfect.tex",
+  "place": "Section section-koszul and Tag 08CX (perfect-section-koszul)"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -50,12 +90,28 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-sc-affine-perfect-open-represent-cohomology",
   "by": "worker",
   "date": "2026-10-10"
  },
  "chapter": "sec-picard-framework",
- "unit": "sk-thm-picard-duality"
+ "unit": "sk-thm-picard-duality",
+ "split_report": {
+  "date": "2026-10-11",
+  "item": "lem-sc-affine-perfect-koszul-principal-unit",
+  "worker": "stage1",
+  "summary": "No exact sorry-free Lean declaration exists. I kept the item as a proof-bearing node without creating child nodes, because its two assertions are proved directly from the finite-free Koszul definition and the principal-open contracting homotopy; extracting either assertion would restate a clause of the item. The proof spells out bounded finite-free perfectness, localization at each f_i, and the cover conclusion, including r=0 and r=1 edge cases.",
+  "blueprint": "Realizes the ancestor lem-sc-finite-duality proof place ‘proper-flat support proof: the Koszul perfect object on powers of the principal-open equations’.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-kpu3058",
+  "group": "G1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-kpu3058 (reviewer sub-agent of L); spot-checked: Statement matches siblings lem-sc-affine-perfect-open-represent-cohomology word for word (I^i=K^{i-1}, i<=0, negated differential, u_e); compatible system over e is defined in that sibling and not needed here; Tag 08CX verified; Step 1 elementary from def-pc-perfect-complex/def-weil-pbc-koszul-complex; Step 3 elementary. FIX more, RETURN less: C4/E Step 2 described the homotopy as contraction with the dual basis vector (wrong direction, lowers degree); replaced by exterior multiplication by f_i^{-e}e_i with Dh+hD=id derived from the node's own D(v^x) formula, citing Stacks 0626/0663 in the step source; missed by the second reading.; 1 file(s) fixed by the reviewer"
+ }
 }

@@ -2947,3 +2947,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 23:16 L: merged deliver/K1/lem-sc-p1-twist-exists (reviewer PASS; first push; new nodes: 0)
 - 23:17 L: merged deliver/F1/lem-pc-dq-coherator-adjunction (reviewer FIX; first push; new nodes: 0)
 - 23:17 L: merged deliver/H1/lem-sc-p1-coherent-finite (reviewer FIX; first push; new nodes: 0)
+- 23:18 L: merged deliver/G1/lem-sc-affine-perfect-koszul-principal-unit (reviewer FIX; first push; new nodes: 0)
