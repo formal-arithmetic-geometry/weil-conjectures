@@ -1,0 +1,73 @@
+{
+ "id": "lem-weil-pbc-finite-presentation-surjection-kernel-fg",
+ "kind": "statement",
+ "title": "The kernel of any presentation of a finitely presented algebra is finitely generated",
+ "statement": "Let $R$ be a commutative ring and $S$ a commutative $R$-algebra of finite presentation [def-weil-pbc-finitely-presented-algebra]. Then for every $n\\ge0$ and every surjective homomorphism of $R$-algebras $\\alpha:R[x_1,\\dots,x_n]\\to S$ from the polynomial ring in $n$ variables, the kernel $\\ker\\alpha$ is a finitely generated ideal of $R[x_1,\\dots,x_n]$.",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Algebra, Lemma Tag 00R2 (lemma-finite-presentation-independent, line 566), with its proof (lines 572-583)"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-finitely-presented-algebra"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "kernel of a surjection from a polynomial ring onto a finitely presented algebra is finitely generated",
+   "results": "Algebra.FinitePresentation.ker_fg_of_mvPolynomial, Algebra.FinitePresentation.out, .mk, .iff_quotient_mvPolynomial' (RingTheory/FinitePresentation), Algebra.Generators.fg_ker_of_finitePresentation, Algebra.Presentation.fg_ker (RingTheory/Extension/Presentation/Basic)",
+   "date": "2026-10-10",
+   "verdict": "match: ker_fg_of_mvPolynomial"
+  },
+  {
+   "tool": "loogle",
+   "query": "Algebra.FinitePresentation.ker_fg_of_mvPolynomial",
+   "results": "Algebra.FinitePresentation.ker_fg_of_mvPolynomial {n : ℕ} (f : MvPolynomial (Fin n) R →ₐ[R] A) (hf : Function.Surjective ⇑f) [Algebra.FinitePresentation R A] : (RingHom.ker f.toRingHom).FG (Mathlib.RingTheory.FinitePresentation)",
+   "date": "2026-10-10",
+   "verdict": "match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "kernel of a surjective algebra homomorphism from a polynomial ring in finitely many variables onto a finitely presented algebra is finitely generated",
+   "results": "Algebra.FinitePresentation.ker_fg_of_mvPolynomial, .iff_quotient_mvPolynomial', .out, .ker_fG_of_surjective (the generalization to any finitely presented source), AlgHom.FinitePresentation.of_surjective (RingTheory/FinitePresentation)",
+   "date": "2026-10-10",
+   "verdict": "match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rn 'ker_fg_of_mvPolynomial\\|ker_fG_of_surjective' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib; sed -n 295,300p RingTheory/FinitePresentation.lean",
+   "results": "RingTheory/FinitePresentation.lean:298-299 ker_fg_of_mvPolynomial; :372-373 ker_fG_of_surjective",
+   "date": "2026-10-10",
+   "verdict": "match"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "Algebra.FinitePresentation.ker_fg_of_mvPolynomial",
+  "file": "Mathlib/RingTheory/FinitePresentation.lean",
+  "how": "exact: lines 298-299, `{n : ℕ} (f : MvPolynomial (Fin n) R →ₐ[R] A) (hf : Function.Surjective f) [FinitePresentation R A] : (RingHom.ker f.toRingHom).FG`, with A := S, f := α (R[x_1,…,x_n] = MvPolynomial (Fin n) R); Mathlib's FinitePresentation is Stacks 00F3 by Algebra.FinitePresentation.iff (line 128). Source read 2026-10-10.",
+  "line": 298
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-popescu-lift-once",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1"
+}

@@ -863,3 +863,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 04:24 L: reviewed lem-weil-pbc-popescu-delocalize-weak (14 steps, +1 unsplit node; 07F9's minimality hypothesis unused): accepted.
 - 04:26 L: reviewed lem-weil-pbc-popescu-desingularize (12 steps, +1 unsplit node from Elkik 07CA): accepted.
 - 04:27 L: reviewed lem-weil-pbc-popescu-lift-twice (7 steps, +00HK leaf): accepted.
+- 04:29 L: reviewed lem-weil-pbc-popescu-lift-once (12 steps, +07CI node, +00F4 (4) and 00R2 leaves): accepted.

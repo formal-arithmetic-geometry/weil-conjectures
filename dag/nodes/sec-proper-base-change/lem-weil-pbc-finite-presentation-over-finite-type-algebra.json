@@ -1,0 +1,74 @@
+{
+ "id": "lem-weil-pbc-finite-presentation-over-finite-type-algebra",
+ "kind": "statement",
+ "title": "Finitely presented algebra over an intermediate algebra of finite type",
+ "statement": "Let $R$ be a commutative ring, $S'$ a commutative $R$-algebra of finite type [def-weil-pbc-finite-type-algebra], $S$ a commutative $R$-algebra of finite presentation [def-weil-pbc-finitely-presented-algebra], and $\\sigma:S'\\to S$ a homomorphism of $R$-algebras. Then $S$, viewed as an $S'$-algebra via $\\sigma$, is of finite presentation over $S'$: there are integers $r,s\\ge0$, polynomials $g_1,\\dots,g_s\\in S'[t_1,\\dots,t_r]$ and a surjective homomorphism of $S'$-algebras $S'[t_1,\\dots,t_r]\\to S$ whose kernel is the ideal $(g_1,\\dots,g_s)$.",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Algebra, Lemma Tag 00F4 (lemma-compose-finite-type, line 540), part (4), with its proof (lines 555-565)"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-finite-type-algebra",
+  "def-weil-pbc-finitely-presented-algebra"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "R → A finite type, R → B finitely presented, A → B algebra map, then B is finitely presented over A",
+   "results": "RingHom.FinitePresentation, AlgHom.FinitePresentation, RingHom.finitePresentation_algebraMap, Algebra.FinitePresentation, Algebra.FinitePresentation.trans, Algebra.FinitePresentation.baseChange (RingTheory/FinitePresentation, FiniteStability)",
+   "date": "2026-10-10",
+   "verdict": "no match among these (see loogle)"
+  },
+  {
+   "tool": "loogle",
+   "query": "Algebra.FinitePresentation, Algebra.FiniteType, IsScalarTower",
+   "results": "Algebra.FinitePresentation.of_restrict_scalars_finitePresentation (Mathlib.RingTheory.FinitePresentation)",
+   "date": "2026-10-10",
+   "verdict": "match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "If B is finitely presented over R and A is of finite type over R with R → A → B, then B is finitely presented over A",
+   "results": "Algebra.FinitePresentation.trans, AlgHom.FinitePresentation.of_comp_finiteType, Algebra.FinitePresentation.of_restrict_scalars_finitePresentation, RingHom.FinitePresentation.of_comp_finiteType, RingHom.finitePresentation_algebraMap (RingTheory/FinitePresentation)",
+   "date": "2026-10-10",
+   "verdict": "match: of_restrict_scalars_finitePresentation"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rn 'of_restrict_scalars_finitePresentation' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib; sed -n 205,215p RingTheory/FinitePresentation.lean",
+   "results": "RingTheory/FinitePresentation.lean:208-211 `@[stacks 0561] theorem of_restrict_scalars_finitePresentation [Algebra A B] [IsScalarTower R A B] [FinitePresentation R B] [FiniteType R A] : FinitePresentation A B`; used at :445 and Etale/Basic.lean:246",
+   "date": "2026-10-10",
+   "verdict": "match"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "Algebra.FinitePresentation.of_restrict_scalars_finitePresentation",
+  "file": "Mathlib/RingTheory/FinitePresentation.lean",
+  "how": "specializes in one line: lines 208-211, `(R A B) [Algebra A B] [IsScalarTower R A B] [FinitePresentation R B] [FiniteType R A] : FinitePresentation A B`, with A := S', B := S, the S'-algebra structure `σ.toRingHom.toAlgebra` (IsScalarTower R S' S holds since σ is R-linear: σ ∘ algebraMap R S' = algebraMap R S). Mathlib's FinitePresentation is Stacks 00F3 by Algebra.FinitePresentation.iff (line 128: A ≅ MvPolynomial (Fin n) R ⧸ I with I.FG), and Mathlib's FiniteType is a surjection from MvPolynomial (Fin n) R by Algebra.FiniteType.iff_quotient_mvPolynomial'' (RingTheory/FiniteType.lean:174). Source read 2026-10-10.",
+  "line": 208
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-popescu-lift-once",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1"
+}
