@@ -2349,3 +2349,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 19:12 L: merged deliver/K1/def-pc-flat-sheaf-modules (reviewer PASS; first push; new nodes: 0)
 - 19:13 L: merged deliver/E1/lem-sc-finite-affine-derived-equivalence (reviewer FIX; after a return; new nodes: 2)
 - 19:13 L: merged deliver/M1/lem-sc-derived-open-restriction-adjunction-exact (reviewer FIX; first push; new nodes: 0)
+- 19:13 L: merged deliver/J1/lem-pc-compact-generators-build-objects (reviewer FIX; first push; new nodes: 0)
