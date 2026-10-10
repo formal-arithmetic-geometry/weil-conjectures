@@ -1,0 +1,74 @@
+{
+ "id": "lem-weil-pbc-char-zero-field-extension-formally-smooth",
+ "kind": "statement",
+ "title": "A field extension in characteristic zero is formally smooth",
+ "statement": "Let $k$ be a field of characteristic $0$ and $K\\supseteq k$ a field extension (with no finiteness condition). Then $K$ is formally smooth over $k$ (Stacks Algebra, Definition 00TI; the case $\\mathfrak n=0$ of [def-weil-pbc-formally-smooth-adic]): for every commutative ring $D$ with a ring map $k\\to D$, every ideal $J\\subseteq D$ with $J^2=0$, with quotient map $q:D\\to D/J$, and every homomorphism of $k$-algebras $g:K\\to D/J$, there is a homomorphism of $k$-algebras $f:K\\to D$ with $q\\circ f=g$.",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Algebra, Proposition Tag 0322 (proposition-characterize-separable-field-extensions, line 44475), characteristic-zero part, item (3) ($K$ is formally smooth over $k$)"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-formally-smooth-adic"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "every field extension of characteristic zero is formally smooth",
+   "results": "Algebra.Smooth.formallySmooth, Algebra.FormallySmooth.iff_comp_surjective, Algebra.FormallySmooth.of_algebraicIndependent_of_isSeparable (Mathlib.RingTheory.Smooth.Field), Algebra.FormallyEtale.instFormallySmooth",
+   "date": "2026-10-10",
+   "verdict": "generalization: of_algebraicIndependent_of_isSeparable (separably generated extensions, no finiteness hypothesis in this Mathlib) specializes in a few lines"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "a field of characteristic zero is a formally smooth algebra over any subfield (separable extension is formally smooth)",
+   "results": "Algebra.FormallySmooth.of_perfectField (needs EssFiniteType), Algebra.FormallySmooth.of_algebraicIndependent_of_isSeparable, Algebra.FormallySmooth.of_algebraicIndependent, Algebra.FormallyEtale.of_isSeparable (Mathlib.RingTheory.Smooth.Field, Mathlib.RingTheory.Etale.Field)",
+   "date": "2026-10-10",
+   "verdict": "generalization: as above"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rn 'FormallySmooth' --include=*.lean ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib | grep -i 'separab|perfect|charzero|field'; sed -n 1,60p ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/RingTheory/Smooth/Field.lean",
+   "results": "RingTheory/Smooth/Field.lean:44 Algebra.FormallySmooth.of_algebraicIndependent_of_isSeparable {v : ι → L} (hb : AlgebraicIndependent K v) [Algebra.IsSeparable (IntermediateField.adjoin K (Set.range v)) L] : Algebra.FormallySmooth K L (no EssFiniteType in this version; the leansearch index shows a newer signature with [Algebra.EssFiniteType K L], which is not the pinned one); :53 of_perfectField needs EssFiniteType; no lemma for CharZero directly",
+   "date": "2026-10-10",
+   "verdict": "generalization (see match)"
+  },
+  {
+   "tool": "local_search",
+   "query": "exists_isTranscendenceBasis, IsTranscendenceBasis.isAlgebraic_field, Algebra.IsAlgebraic.isSeparable_of_perfectField, PerfectField.ofCharZero, Algebra.FormallySmooth.comp_surjective (read by sed in the pinned Mathlib)",
+   "results": "RingTheory/AlgebraicIndependent/TranscendenceBasis.lean:58, :237; FieldTheory/Perfect.lean:338, :306; RingTheory/Smooth/Basic.lean (comp_surjective, exists_lift); Algebra/CharP/IntermediateField.lean:17 (CharZero of subfields via SubsemiringClass.instCharZero)",
+   "date": "2026-10-10",
+   "verdict": "match (chain)"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "Algebra.FormallySmooth.of_algebraicIndependent_of_isSeparable",
+  "file": "Mathlib/RingTheory/Smooth/Field.lean",
+  "line": 44,
+  "how": "specializes in a few lines, one lemma per step: exists_isTranscendenceBasis k K (RingTheory/AlgebraicIndependent/TranscendenceBasis.lean:58) gives a transcendence basis s; IsTranscendenceBasis.isAlgebraic_field (same file :237) gives Algebra.IsAlgebraic (IntermediateField.adjoin k s) K; the intermediate field has characteristic 0 (SubsemiringClass.instCharZero), so it is perfect (PerfectField.ofCharZero, FieldTheory/Perfect.lean:306) and K is separable over it (Algebra.IsAlgebraic.isSeparable_of_perfectField, Perfect.lean:338); of_algebraicIndependent_of_isSeparable (Smooth/Field.lean:44, no finiteness hypothesis in the pinned Mathlib) gives Algebra.FormallySmooth k K, and Algebra.FormallySmooth.comp_surjective / exists_lift (RingTheory/Smooth/Basic.lean) give the square-zero lifting property of the statement. Source read 2026-10-10."
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-cohen-coefficient-ring-exists",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lead_note": "L 2026-10-10: composed match (transcendence basis + separability in characteristic 0 + of_algebraicIndependent_of_isSeparable Field.lean:44, verified by L, + the lifting form); five lemmas, kept as a leaf; stage 3 may demote it to a split node if the chain is judged too long."
+}
