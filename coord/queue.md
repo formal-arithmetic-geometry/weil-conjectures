@@ -1,8 +1,8 @@
 # Work queue
 
-857 items; claim with `tools/claim.py next <group> [--stage N]`.
+856 items; claim with `tools/claim.py next <group> [--stage N]`.
 
-## Stage 1: nodes to split (388)
+## Stage 1: nodes to split (386)
 
 | node | distance to a target | Lean state on the done branch |
 |---|---|---|
@@ -22,7 +22,6 @@
 | `lem-weil-pbc-symmetric-projective-presentation-conormal` | 1015 | none |
 | `lem-weil-pbc-valuation-ring-normal` | 1015 | none |
 | `lem-weil-pbc-complete-local-map-cohen-presentation` | 1016 | none |
-| `lem-weil-pbc-cyclic-extension-flat-descent` | 1016 | none |
 | `lem-weil-pbc-dimension-inequality-quasi-finite` | 1016 | none |
 | `lem-weil-pbc-dimension-preserved-field-extension` | 1016 | none |
 | `lem-weil-pbc-direct-sum-extension-assembly` | 1016 | none |
@@ -37,6 +36,7 @@
 | `lem-weil-pbc-tor-one-surjective-flat-middle` | 1016 | none |
 | `lem-weil-pbc-torsion-hom-flat-comparison` | 1016 | none |
 | `lem-weil-pbc-triangular-change-of-basis` | 1016 | none |
+| `lem-weil-pbc-cyclic-extension-cocycle` | 1017 | none |
 | `lem-weil-pbc-dim-one-residue-field-extensions-finite` | 1018 | none |
 | `lem-weil-pbc-koszul-differential-square-zero` | 1018 | none |
 | `lem-weil-pbc-injective-acyclicity-bounded-below` | 2002 | sorry_here |
@@ -348,7 +348,6 @@
 | `def-nagata-qc-open-descent` | - | none |
 | `def-nagata-relative-finite-affine-presentation` | - | none |
 | `def-sc-zariski-site` | - | none |
-| `lem-kun-sep-closed-finite-extension-sep-closed` | - | none |
 | `lem-sc-affine-constant-second` | - | rests_on_sorry |
 | `lem-weil-l-adic-extension-integers-dvr` | - | none |
 | `lem-weil-pbc-constructible-noetherian-finite-selection` | - | none |
@@ -360,7 +359,6 @@
 | `def-nagata-basechanged-system` | - | none |
 | `def-pc-fppf-site` | - | none |
 | `def-pc-subfunctor` | - | none |
-| `lem-kun-sep-closed-finite-extension-purely-inseparable` | - | none |
 | `lem-pc-finite-support-hi` | - | sorry_here |
 | `lem-weil-geometrically-connected-check-after-extension` | - | none |
 | `lem-weil-pbc-irreducible-lisse-strata` | - | none |
@@ -395,7 +393,7 @@
 | `def-exc-jacobian-presentation` | - | none |
 | `lem-zl-noether-normalization-dimension` | - | none |
 
-## Stage 2: nodes to state (469)
+## Stage 2: nodes to state (470)
 
 | node | distance to Mathlib | kind |
 |---|---|---|
@@ -507,6 +505,7 @@
 | `lem-weil-pbc-cover-module-exact` | 1 | state |
 | `lem-weil-pbc-criterion-flatness-fibre` | 1 | state |
 | `lem-weil-pbc-criterion-flatness-fibre-noetherian` | 1 | state |
+| `lem-weil-pbc-cyclic-extension-flat-descent` | 1 | state |
 | `lem-weil-pbc-degree-p-extension-regular` | 1 | state |
 | `lem-weil-pbc-depth-zero-injective-free-map-unit-minor` | 1 | state |
 | `lem-weil-pbc-derivation-extends` | 1 | state |
@@ -869,7 +868,7 @@
 | `lem-weil-pbc-p1-field-dimension-one` | 4 | state |
 | `lem-weil-pbc-projective-space-zero-isomorphism` | 4 | state |
 
-Not open yet: 406 nodes that wait for stage 1, 868 nodes that wait for a statement dependency.
+Not open yet: 404 nodes that wait for stage 1, 868 nodes that wait for a statement dependency.
 
 ## Stage 3: modules to prove (0)
 
