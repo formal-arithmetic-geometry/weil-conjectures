@@ -4,7 +4,7 @@
   "is": null,
   "from": {
    "node": "lem-sc-function-field-cd-one",
-   "place": "Proof, step 2 (blueprint proof, third paragraph): a central simple algebra over E descends to a finite extension of k(C), where Tsen's theorem splits it.",
+   "place": "Proof, step 2 (blueprint proof, third paragraph): descend a central simple algebra over E to a finite extension of k(C), then split it using Tsen's theorem.",
    "via": []
   },
   "same_as": []
@@ -25,9 +25,50 @@
   "def-weil-pbc-etale-sheaves",
   "def-sc-gm-torsor"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "E is algebraic over k(C): L is algebraic over k(C) and E is finite over L. Let F be a homogeneous form of degree d in N>d variables over E. Its finitely many coefficients generate a subfield K' of E that is finitely generated and algebraic, hence finite, over k(C).",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-curve-estimates/sk-prop-h2/lem-sc-function-field-cd-one.md",
+    "place": "## Proof, third paragraph"
+   }
+  },
+  {
+   "text": "By [lem-sc-tsen], k(C) is a C₁ field, so by [lem-sc-c1-finite-extension] the finite extension K'/k(C) is C₁. Hence F, a form over K', has a nontrivial zero in K'^N ⊆ E^N. Since F was arbitrary, E is a C₁ field.",
+   "uses": [
+    "lem-sc-tsen",
+    "lem-sc-c1-finite-extension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-curve-estimates/sk-prop-h2/lem-sc-function-field-cd-one.md",
+    "place": "## Proof, third paragraph"
+   }
+  },
+  {
+   "text": "By [lem-sc-c1-brauer-trivial] applied to the C₁ field E, Br(E)=H²(Spec(E)_Et, G_m) is zero.",
+   "uses": [
+    "lem-sc-c1-brauer-trivial"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-curve-estimates/sk-prop-h2/lem-sc-function-field-cd-one.md",
+    "place": "## Proof, third paragraph"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sc-tsen",
+  "lem-sc-c1-finite-extension",
+  "lem-sc-c1-brauer-trivial"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/master/blueprint/sec-curve-estimates/sk-prop-h2/lem-sc-function-field-cd-one.md",
+  "place": "## Proof, third paragraph"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -59,12 +100,28 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-sc-function-field-cd-one",
   "by": "worker",
   "date": "2026-10-10"
  },
  "chapter": "sec-curve-estimates",
- "unit": "sk-prop-h2"
+ "unit": "sk-prop-h2",
+ "split_report": {
+  "date": "2026-10-11",
+  "item": "lem-sc-brauer-algebraic-function-field-zero",
+  "worker": "stage1",
+  "summary": "Reviewer FIX: an algebraic extension of the C₁ field k(C) is C₁ (coefficients of a form lie in a finite subextension, which is C₁), so Br(E)=H²(Spec E, G_m)=0 by the C₁ Brauer lemma; the CSA-descent route and its uncited CSA/H² comparison are removed.",
+  "blueprint": "Realizes the third paragraph of the blueprint proof: descend a central simple algebra over E to a finite extension of k(C), then apply Tsen's theorem and scalar extension.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-bff1748",
+  "group": "H1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-bff1748 (reviewer sub-agent of L); spot-checked: Checked lem-sc-tsen, lem-sc-c1-finite-extension, lem-sc-c1-brauer-trivial statements and deps (no cycle; Tsen/C1 cited). FIX more, RETURN less: C1 - step 1 used the uncited identification of CSA classes with H^2(Spec E, G_m); rewrote proof: E algebraic over k(C), a form's coefficients lie in a finite subextension K' which is C1 by lem-sc-c1-finite-extension, so E is C1 and Br(E)=H^2=0 by lem-sc-c1-brauer-trivial; dropped now-unused new node lem-sc-brauer-class-finite-descent; proof_deps = union of uses.; 1 file(s) fixed by the reviewer"
+ }
 }
