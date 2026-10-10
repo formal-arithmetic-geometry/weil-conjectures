@@ -1,0 +1,66 @@
+{
+ "id": "lem-weil-pbc-limit-fibre-products",
+ "kind": "statement",
+ "title": "Fibre products commute with limits along affine transition morphisms",
+ "statement": "Let $I$ be a directed set and let $(X_i\\xrightarrow{f_i}S_i\\xleftarrow{g_i}T_i)_{i\\in I}$ be an inverse system of diagrams of schemes [def-pc-scheme] over $I$: inverse systems $(X_i)$, $(S_i)$, $(T_i)$ whose transition morphisms $X_{i'}\\to X_i$, $S_{i'}\\to S_i$, $T_{i'}\\to T_i$ ($i'\\ge i$) are affine [pqf-def-affine-morphism] and commute with the $f_i,g_i$. Let $X=\\varprojlim X_i$, $S=\\varprojlim S_i$, $T=\\varprojlim T_i$ [lem-weil-pbc-limit-affine-transition] and $f:X\\to S$, $g:T\\to S$ the limit morphisms. Then the induced morphisms $X_{i'}\\times_{S_{i'}}T_{i'}\\to X_i\\times_{S_i}T_i$ of fibre products [def-pc-fibre-product] are affine, so they form an inverse system with affine transition morphisms, and $X\\times_ST$, with the induced morphisms $X\\times_ST\\to X_i\\times_{S_i}T_i$, is its limit in the category of schemes: $X\\times_ST=\\varprojlim_i(X_i\\times_{S_i}T_i)$. In particular, for $s\\in S$ with images $s_i\\in S_i$, the scheme-theoretic fibres [def-pc-scheme-fibre] $X_{s_i}=X_i\\times_{S_i}\\operatorname{Spec}\\kappa(s_i)$ form an inverse system with affine transition morphisms whose limit is $X_s$ (using $\\operatorname{Spec}\\kappa(s)=\\varprojlim\\operatorname{Spec}\\kappa(s_i)$ over the $S_i$ [lem-weil-pbc-limit-residue-field]).",
+ "source": {
+  "document": "literature/stacks-project/perfect.tex",
+  "place": "Derived Categories, proof of Lemma Tag 0G7X (perfect-lemma-proper-idempotent-on-fibre, line 8166: 'X_s = X x_S s = lim X_i x_{S_i} s_i = lim X_{i,s_i} because limits commute with limits'), citing Categories, Lemma Tag 002M (categories-lemma-colimits-commute); affineness of the transition morphisms: Morphisms, Lemmas 01SD (base change) and 01SC (composition) of affine morphisms and 01SG (lemma-affine-permanence: X_{i'} -> X_i x_{S_i} S_{i'} is affine since its composite with the separated morphism X_i x_{S_i} S_{i'} -> X_i is affine) — the source does not spell this out"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "pqf-def-affine-morphism",
+  "lem-weil-pbc-limit-affine-transition",
+  "def-pc-fibre-product",
+  "def-pc-scheme-fibre",
+  "lem-weil-pbc-limit-residue-field"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "pullback (fibre product) of schemes commutes with cofiltered limits of schemes with affine transition morphisms",
+   "results": "Scheme.Pullback.affine_hasPullback, instHasPullbacks, isAffine_of_isAffine_isAffine_isAffine, IsProper.instFstScheme (Mathlib.AlgebraicGeometry.Pullbacks, Morphisms.Proper): existence of pullbacks only",
+   "date": "2026-10-10",
+   "verdict": "no match for the scheme statement; the categorical part (limits commute with limits) is CategoryTheory.Limits.Fubini, but affineness of the transition maps and existence of the limit are not bundled"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "fibre product of cofiltered limits of schemes over a limit of base schemes is the limit of the fibre products",
+   "results": "ExistsHomHomCompEqCompAux.hc', .c', .g, .hc (AffineTransitionLimit, auxiliary), Scheme.Pullback.gluedIsLimit (Pullbacks)",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rnE 'pullback.*IsLimit.*IsCofiltered|isLimit.*pullback' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicGeometry/AffineTransitionLimit.lean ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicGeometry/Limits.lean; grep -rln limitFlipCompLimIsoLimitCompLim ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/CategoryTheory",
+   "results": "only auxiliary pullbacks along open immersions (AffineTransitionLimit.lean:569,604); CategoryTheory/Limits/Fubini.lean (limits commute with limits, abstract)",
+   "date": "2026-10-10",
+   "verdict": "no match (generalization only for the categorical isomorphism, not for the affine transition maps)"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-stein-fibre-idempotent-image",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1"
+}

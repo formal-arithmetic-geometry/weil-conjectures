@@ -1,0 +1,70 @@
+{
+ "id": "lem-weil-pbc-base-change-nilpotent-thickening-idempotents",
+ "kind": "statement",
+ "title": "Idempotents lift uniquely along a base change of a nilpotent thickening",
+ "statement": "Let $A$ be a commutative ring, $J\\subseteq A$ an ideal with $J^N=0$ for some $N\\ge1$, $g:Y\\to\\operatorname{Spec}A$ a morphism of schemes [def-pc-scheme], $Y_0=Y\\times_{\\operatorname{Spec}A}\\operatorname{Spec}(A/J)$ the fibre product [def-pc-fibre-product] and $i:Y_0\\to Y$ the first projection. Then (1) $i$ is a closed immersion whose quasi-coherent ideal sheaf $\\mathcal J$ satisfies $\\mathcal J^N=0$, so $Y$ is a finite order thickening of $Y_0$ and $i$ is a homeomorphism of underlying topological spaces [def-sbc-first-order-thickening]; (2) the ring map $i^\\sharp:\\Gamma(Y,\\mathcal O_Y)\\to\\Gamma(Y_0,\\mathcal O_{Y_0})$ induces a bijection from the set of idempotents of $\\Gamma(Y,\\mathcal O_Y)$ to the set of idempotents of $\\Gamma(Y_0,\\mathcal O_{Y_0})$: every idempotent of $\\Gamma(Y_0,\\mathcal O_{Y_0})$ is $i^\\sharp(e)$ for exactly one idempotent $e\\in\\Gamma(Y,\\mathcal O_Y)$.",
+ "source": {
+  "document": "literature/stacks-project/more-morphisms.tex",
+  "place": "More on Morphisms, Lemma Tag 09ZU (lemma-base-change-thickening, line 209; proof omitted) with Definition Tag 04EX (definition-thickening, line 36) for (1); (2) is the step of Derived Categories, proof of Lemma Tag 0G7X (perfect.tex lines 8137-8146: 'Since the underlying topological space of X_n is equal to that of X_s we obtain ... a nontrivial idempotent e_n'), via idempotents <-> open and closed subsets (Algebra, Lemma Tag 00EE)"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-pc-fibre-product",
+  "def-sbc-first-order-thickening"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "idempotents of a ring lift uniquely modulo a nilpotent ideal; closed immersion defined by nilpotent ideal is a homeomorphism of schemes",
+   "results": "existsUnique_isIdempotentElem_eq_of_ker_isNilpotent, exists_isIdempotentElem_eq_of_ker_isNilpotent, OrthogonalIdempotents.lift_of_isNilpotent_ker (Mathlib.RingTheory.Idempotents): ring-level only; for a non-affine Y the kernel of Gamma(Y,O_Y) -> Gamma(Y_0,O_{Y_0}) need not be nil, so these do not give (2) in one line",
+   "date": "2026-10-10",
+   "verdict": "no match (ring-level analogue only)"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "thickening of schemes: a closed immersion with nilpotent ideal sheaf is a homeomorphism, so idempotent global sections correspond",
+   "results": "IsClosedImmersion.overEquivIdealSheafData, IdealSheafData.glueDataObjCarrierIso, IsClosedImmersion.Spec_iff (Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion, IdealSheaf.Subscheme)",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.IsClosedImmersion, IsNilpotent, IsHomeomorph",
+   "results": "no results",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rniE 'thickening|homeomorph.*nilpotent' and grep -rn 'IsIdempotentElem' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicGeometry",
+   "results": "only FormallyUnramified.lean:189 (docstring 'infinitesimal thickening') and OpenImmersion.lean:38 (ker spanned by an idempotent); no thickening/idempotent lemma for schemes",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-stein-fibre-idempotent-image",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1"
+}

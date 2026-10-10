@@ -1,0 +1,75 @@
+{
+ "id": "lem-weil-pbc-formal-functions-stalk",
+ "kind": "statement",
+ "title": "Theorem on formal functions at a point of the base",
+ "statement": "Let $f:X\\to Y$ be a proper morphism of schemes [def-weil-proper-morphism] with $Y$ locally Noetherian [pqf-def-locnoeth], let $\\mathcal F$ be a coherent $\\mathcal O_X$-module [pqf-def-coherent] and let $y\\in Y$, with local ring $\\mathcal O_{Y,y}$ (a Noetherian local ring) and maximal ideal $\\mathfrak m_y$. For $n\\ge1$ let $c_n:\\operatorname{Spec}(\\mathcal O_{Y,y}/\\mathfrak m_y^n)\\to Y$ be the canonical morphism (induced by $\\mathcal O_{Y,y}\\to\\mathcal O_{Y,y}/\\mathfrak m_y^n$), $X_n=\\operatorname{Spec}(\\mathcal O_{Y,y}/\\mathfrak m_y^n)\\times_YX$ the fibre product [def-pc-fibre-product] (the $n$th infinitesimal neighbourhood of the fibre $X_1=X_y$ [def-pc-scheme-fibre]), $i_n:X_n\\to X$ the projection and $\\mathcal F_n=i_n^*\\mathcal F$ [def-pc-module-pullback]; the closed immersions $X_n\\to X_{n+1}$ (base change of $\\operatorname{Spec}(\\mathcal O_{Y,y}/\\mathfrak m_y^n)\\to\\operatorname{Spec}(\\mathcal O_{Y,y}/\\mathfrak m_y^{n+1})$) induce maps $H^p(X_{n+1},\\mathcal F_{n+1})\\to H^p(X_n,\\mathcal F_n)$ [pqf-def-cohomology], each $H^p(X_n,\\mathcal F_n)$ being an $\\mathcal O_{Y,y}/\\mathfrak m_y^n$-module. Fix $p\\ge0$ and let $M=(R^pf_*\\mathcal F)_y$ be the stalk at $y$ of the higher direct image [pqf-def-cohomology], an $\\mathcal O_{Y,y}$-module, and $M^\\wedge=\\varprojlim_nM/\\mathfrak m_y^nM$ its $\\mathfrak m_y$-adic completion [def-weil-pbc-adic-completion]. Since $R^pf_*\\mathcal F$ is the sheaf associated with $V\\mapsto H^p(f^{-1}(V),\\mathcal F)$, $M=\\varinjlim_{V\\ni y}H^p(f^{-1}(V),\\mathcal F)$; as $X_n\\to X$ factors through $f^{-1}(V)$ for every open $V\\ni y$, pulling back along $X_n\\to f^{-1}(V)$ defines $\\mathcal O_{Y,y}$-linear maps $\\theta_n:M\\to H^p(X_n,\\mathcal F_n)$, compatible with the transition maps and vanishing on $\\mathfrak m_y^nM$. Then the induced map $\\theta:M^\\wedge\\to\\varprojlim_nH^p(X_n,\\mathcal F_n)$ is an isomorphism of $\\mathcal O_{Y,y}$-modules (indeed of $\\mathcal O_{Y,y}^\\wedge$-modules), and its composite with $M\\to M^\\wedge$ is $(\\theta_n)_n$. In particular ($p=0$, $\\mathcal F=\\mathcal O_X$, so $\\mathcal F_n=\\mathcal O_{X_n}$) $(f_*\\mathcal O_X)_y^\\wedge\\cong\\varprojlim_nH^0(X_n,\\mathcal O_{X_n})$ via the maps $(f_*\\mathcal O_X)_y\\to H^0(X_n,\\mathcal O_{X_n})$ sending the germ of $t\\in\\mathcal O_X(f^{-1}(V))$ to its pullback to $X_n$.",
+ "source": {
+  "document": "literature/stacks-project/coherent.tex",
+  "place": "Cohomology of Schemes, Lemma Tag 02OD (lemma-formal-functions-stalk, line 5721) and its proof (flat base change to Spec O_{Y,y}, Lemma 02KH lemma-flat-base-change-cohomology, then Theorem 02OC theorem-formal-functions); the description of the maps theta_n is the one in the proof of Tag 0G7X (perfect.tex, lines 8130-8157), which uses that M^ -> H^0(X_1) is the canonical map"
+ },
+ "stmt_deps": [
+  "def-weil-proper-morphism",
+  "pqf-def-locnoeth",
+  "pqf-def-coherent",
+  "def-pc-fibre-product",
+  "def-pc-scheme-fibre",
+  "def-pc-module-pullback",
+  "pqf-def-cohomology",
+  "def-weil-pbc-adic-completion"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "theorem on formal functions: completion of stalk of higher direct image of coherent sheaf under proper morphism equals inverse limit of cohomology of infinitesimal neighbourhoods of fibre",
+   "results": "Scheme.Modules.restrictStalkNatIso, Scheme.germ_stalkClosedPointTo, PresheafedSpace.restrictStalkIso_inv_eq_ofRestrict (Mathlib.AlgebraicGeometry.Modules.Sheaf, .Stalk, Geometry.RingedSpace.Stalks): stalk bookkeeping only",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "theorem on formal functions for a proper morphism of locally Noetherian schemes: completed stalk of R^p f_* F at y is the limit of H^p of the n-th infinitesimal neighbourhoods of the fibre",
+   "results": "exists_app_map_eq_zero_of_isLimit, exists_appTop_π_eq_of_isLimit (AffineTransitionLimit), spread_out_of_isGermInjective (SpreadingOut): unrelated",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"formalFunction\"",
+   "results": "no results",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rlniE 'formal function|formalFunction|infinitesimal neighbo' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicGeometry",
+   "results": "no file (Mathlib has no sheaf cohomology of O_X-modules on schemes, no higher direct images)",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-stein-fibre-idempotent-image",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1"
+}

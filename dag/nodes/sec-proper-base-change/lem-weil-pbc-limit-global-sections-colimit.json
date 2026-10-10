@@ -1,0 +1,71 @@
+{
+ "id": "lem-weil-pbc-limit-global-sections-colimit",
+ "kind": "statement",
+ "title": "Global functions on a limit of qcqs schemes",
+ "statement": "Let $I$ be a directed set and $(S_i,f_{ii'})$ an inverse system of schemes [def-pc-scheme] over $I$ whose transition morphisms are affine [pqf-def-affine-morphism] and with every $S_i$ quasi-compact and quasi-separated [def-weil-pbc-scheme-conventions]; let $S=\\varprojlim_iS_i$ with projections $f_i:S\\to S_i$ [lem-weil-pbc-limit-affine-transition]. Then the ring maps $f_i^\\sharp:\\Gamma(S_i,\\mathcal O_{S_i})\\to\\Gamma(S,\\mathcal O_S)$ induce an isomorphism $\\varinjlim_i\\Gamma(S_i,\\mathcal O_{S_i})\\xrightarrow{\\sim}\\Gamma(S,\\mathcal O_S)$ [def-weil-pbc-category-colimit]: every $a\\in\\Gamma(S,\\mathcal O_S)$ is $f_i^\\sharp(a_i)$ for some $i$ and some $a_i\\in\\Gamma(S_i,\\mathcal O_{S_i})$, and if $f_i^\\sharp(a_i)=0$ then $f_{i'i}^\\sharp(a_i)=0$ for some $i'\\ge i$.",
+ "source": {
+  "document": "literature/stacks-project/limits.tex",
+  "place": "Limits, Lemma Tag 01Z0 (lemma-descend-section, line 434), in Situation 01YZ-descent (situation-descent), the case F_0 = O_{S_0} (f^*O = O)"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "pqf-def-affine-morphism",
+  "def-weil-pbc-scheme-conventions",
+  "lem-weil-pbc-limit-affine-transition",
+  "def-weil-pbc-category-colimit"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "global sections of structure sheaf of cofiltered limit of quasi-compact quasi-separated schemes with affine transition maps is colimit of global sections",
+   "results": "AlgebraicGeometry.exists_appTop_π_eq_of_isLimit, AlgebraicGeometry.nonempty_isColimit_Γ_mapCocone (Mathlib.AlgebraicGeometry.AffineTransitionLimit)",
+   "date": "2026-10-10",
+   "verdict": "match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "global sections functor sends a cofiltered limit of quasi-compact quasi-separated schemes with affine transition maps to a colimit of rings",
+   "results": "nonempty_isColimit_Γ_mapCocone, the instance PreservesLimit D Scheme.Γ.rightOp, exists_appTop_π_eq_of_isLimit, Scheme.exists_isAffine_of_isLimit (AffineTransitionLimit)",
+   "date": "2026-10-10",
+   "verdict": "match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -n '^lemma\\|^theorem\\|^instance' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicGeometry/AffineTransitionLimit.lean; sed -n 725,975p",
+   "results": "exists_appTop_map_eq_zero_of_isLimit (line 744), exists_appTop_π_eq_of_isLimit (line 842), nonempty_isColimit_Γ_mapCocone (line 961), source read",
+   "date": "2026-10-10",
+   "verdict": "match"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "AlgebraicGeometry.nonempty_isColimit_Γ_mapCocone",
+  "file": "Mathlib/AlgebraicGeometry/AffineTransitionLimit.lean",
+  "how": "specializes in one line: for a cofiltered category I (a directed set, as the opposite of its poset category), a diagram D : I ⥤ Scheme with IsAffineHom (D.map f) for all f and CompactSpace, QuasiSeparatedSpace for every D.obj i, and any limit cone c (hc : IsLimit c), Scheme.Γ.mapCocone c.op is a colimit cocone of rings; the two elementwise clauses are exists_appTop_π_eq_of_isLimit (line 842) and exists_appTop_map_eq_zero_of_isLimit (line 744). Source read 2026-10-10.",
+  "line": 961
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-stein-fibre-idempotent-image",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lead_note": "L 2026-10-10: line field added (nonempty_isColimit_Γ_mapCocone, AffineTransitionLimit.lean:961; elementwise clauses :842 and :744 verified with sed)."
+}
