@@ -2579,3 +2579,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 20:52 L: deleted deliver/F1 and deliver/J1 lem-pc-ringed-space-module-stalk-tensor (item split by L at 19:58); released J1's claim; claim.py next/take now refuse nodes with status split/mathlib/merged regardless of 'reviewed' (launcher's order 20:55)
 - 20:52 L: merged deliver/F1/lem-sc-hilbert-embedded-points (reviewer FIX; first push; new nodes: 3)
 - 20:53 L: merged deliver/J1/def-pur-sheaf-tensor-product (reviewer FIX; first push; new nodes: 1)
+- 20:53 L: returned deliver/G1/lem-sc-intersection-effective-cartier (reviewer RETURN: 1. E (missing hypothesis) / C4: the right-hand side (L_2...L_d . D) is only defined by def-sc-intersection-number when D)
