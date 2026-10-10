@@ -4,7 +4,7 @@
   "is": null,
   "from": {
    "node": "thm-weil-pbc-finite-etale-lifting",
-   "place": "step 7 of its split (source: Lemma 0GS2, proof: the essential-surjectivity paragraphs)",
+   "place": "step 7 of its split (essential surjectivity via 0GS2); this bound on a quasi-finite polynomial-algebra cover supplies the fibre-dimension neighbourhood used by syntomic approximation (Stacks 00QG through 00QH)",
    "via": [
     "lem-weil-pbc-fibre-dimension-bounded-open-upstairs",
     "lem-weil-pbc-equation-count-localize-relative-global-complete-intersection",
@@ -18,7 +18,7 @@
     "lem-weil-pbc-finite-etale-lifting-essential-surjectivity"
    ]
   },
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "A quasi-finite cover of affine n-space has dimension at most n",
@@ -34,9 +34,48 @@
   "def-kun-topological-krull-dimension",
   "def-weil-affine-spectrum"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Let $\\mathfrak q\\subset T$ be any prime and let $\\mathfrak p$ be its contraction to $P=k[t_1,\\ldots,t_n]$. Quasi-finiteness at $\\mathfrak q$ and the finite-type hypothesis allow [lem-weil-pbc-dimension-inequality-quasi-finite] to be applied, giving $\\dim T_{\\mathfrak q}\\le\\dim P_{\\mathfrak p}$. Choose a maximal ideal $\\mathfrak m$ containing $\\mathfrak p$ by [lem-weil-pbc-proper-ideal-contained-in-maximal]. Every prime chain below $\\mathfrak p$ is also below $\\mathfrak m$, so [lem-weil-pbc-localization-dimension-chains-below-prime] gives $\\dim P_{\\mathfrak p}\\le\\dim P_{\\mathfrak m}=n$, the equality being [lem-weil-pbc-polynomial-ring-maximal-localization-dimension]. Thus every local ring of $T$ has dimension at most $n$.",
+   "uses": [
+    "lem-weil-pbc-dimension-inequality-quasi-finite",
+    "lem-weil-pbc-polynomial-ring-maximal-localization-dimension",
+    "lem-weil-pbc-proper-ideal-contained-in-maximal",
+    "lem-weil-pbc-localization-dimension-chains-below-prime"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra, proof of Lemma Tag 00QG (lemma-dimension-quasi-finite-over-polynomial-algebra, lines 31291-31305), via Tags 00QF and 00OP"
+   }
+  },
+  {
+   "text": "A chain of irreducible closed subsets of $\\operatorname{Spec}T$ corresponds, with reversed inclusions, to a chain $\\mathfrak q_0\\subsetneq\\cdots\\subsetneq\\mathfrak q_r$ of primes of $T$ by [lem-weil-pbc-spec-irreducible-closed-subsets-primes]. It ends at $\\mathfrak q_r$, so [lem-weil-pbc-localization-dimension-chains-below-prime] bounds its length $r$ by $\\dim T_{\\mathfrak q_r}\\le n$ from Step 1. Taking the supremum over chains gives $\\dim\\operatorname{Spec}T\\le n$ by [def-kun-topological-krull-dimension]; if the spectrum is empty this dimension is $-\\infty$ by the same definition.",
+   "uses": [
+    "lem-weil-pbc-spec-irreducible-closed-subsets-primes",
+    "lem-weil-pbc-localization-dimension-chains-below-prime",
+    "def-kun-topological-krull-dimension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra, proof of Lemma Tag 00QG (lemma-dimension-quasi-finite-over-polynomial-algebra, lines 31301-31305), with prime-chain interpretation of dimension from Tag 00ES"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-dimension-inequality-quasi-finite",
+  "lem-weil-pbc-polynomial-ring-maximal-localization-dimension",
+  "lem-weil-pbc-proper-ideal-contained-in-maximal",
+  "lem-weil-pbc-localization-dimension-chains-below-prime",
+  "lem-weil-pbc-spec-irreducible-closed-subsets-primes",
+  "def-kun-topological-krull-dimension"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Algebra, proof of Lemma Tag 00QG (lemma-dimension-quasi-finite-over-polynomial-algebra, lines 31291-31305), with the prime-chain interpretation of the local-to-global step expanded"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -61,7 +100,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "worker",
@@ -81,5 +120,24 @@
   }
  },
  "chapter": "sec-proper-base-change",
- "unit": "sk-thm-p1"
+ "unit": "sk-thm-p1",
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "lem-weil-pbc-dimension-quasi-finite-over-polynomial-algebra",
+  "worker": "stage1",
+  "summary": "Split Stacks 00QG into the local dimension inequality 00QF applied at each prime of the target and the prime-chain passage to global dimension. Added the unsplit 00QF node and used the existing 00OP polynomial-localization dimension bound; no Mathlib theorem states the required quasi-finite dimension comparison.",
+  "blueprint": {
+   "steps": [
+    "Finite-etale lifting, step 7: syntomic approximation uses the fibre-dimension neighbourhood (00QH), whose proof calls 00QG",
+    "00QG proof: use 00QF and 00OP to bound each localization, then bound all prime chains of the target"
+   ]
+  }
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "group": "J1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed by the lead of J1; spot-checked by L: L: 00QF/00QG with 00OP checked; the inequality node states 00QF"
+ }
 }
