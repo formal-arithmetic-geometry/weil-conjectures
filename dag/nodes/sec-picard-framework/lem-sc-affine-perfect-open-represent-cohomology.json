@@ -13,7 +13,7 @@
  },
  "kind": "statement",
  "title": "Koszul perfect objects represent cohomology classes on a principal open",
- "statement": "Let X=Spec(A) be an affine scheme [def-pc-scheme], let f_1,\\ldots,f_r\\in A, let U=D(f_1)\\cup\\cdots\\cup D(f_r), and let E be an object of D_QCoh(O_X) [def-pc-derived-category]. For each e\\ge1 let I_e\\in D(O_X) be the object associated with the complex of A-modules I^\\bullet(f_1^e,\\ldots,f_r^e), defined by I^i=K^{i-1}(f_1^e,\\ldots,f_r^e) for i\\le0 and I^i=0 for i>0 (K^\\bullet the cochain Koszul complex), so that there is a distinguished triangle I_e\\to O_X\\to K_e\\to I_e[1] with u_e:I_e\\to O_X the first map; the I_e form an inverse system I_1\\leftarrow I_2\\leftarrow\\cdots compatible with the u_e. Then each I_e is perfect [def-pc-perfect-complex], each u_e|_U is an isomorphism, and the map colim_e Hom_{D(O_X)}(I_e,E)\\to H^0(U,E|_U) sending \\varphi:I_e\\to E to \\varphi|_U\\circ(u_e|_U)^{-1}\\in Hom_{D(O_U)}(O_U,E|_U)=H^0(U,E|_U) is an isomorphism.",
+ "statement": "Let $A$ be a commutative ring, let $X=\\operatorname{Spec}(A)$ [def-pc-scheme], choose $f_1,\\ldots,f_r\\in A$, and put $U=D(f_1)\\cup\\cdots\\cup D(f_r)$. Let $E\\in D_{\\mathrm{QCoh}}(\\mathcal O_X)$ [def-pc-derived-category]. For $e\\ge1$, let $K^\\bullet(f_1^e,\\ldots,f_r^e)$ be the cochain Koszul complex, and define $I^i(f_1^e,\\ldots,f_r^e)=K^{i-1}(f_1^e,\\ldots,f_r^e)$ for $i\\le0$ and $0$ for $i>0$, with differential the negative of the Koszul differential. Let $I_e\\in D(\\mathcal O_X)$ and $K_e\\in D(\\mathcal O_X)$ be the objects associated to these complexes; the canonical triangle is $I_e\\xrightarrow{u_e}\\mathcal O_X\\to K_e\\to I_e[1]$. The canonical comparison maps for powers give $I_1\\leftarrow I_2\\leftarrow\\cdots$, compatible with the $u_e$. Then every $I_e$ is perfect [def-pc-perfect-complex], every $u_e|_U$ is an isomorphism, and the canonical map $\\varinjlim_e\\operatorname{Hom}_{D(\\mathcal O_X)}(I_e,E)\\to H^0(U,E|_U)$, sending $\\varphi$ to $\\varphi|_U\\circ(u_e|_U)^{-1}$ under $\\operatorname{Hom}_{D(\\mathcal O_U)}(\\mathcal O_U,E|_U)=H^0(U,E|_U)$, is an isomorphism.",
  "source": {
   "document": "literature/stacks-project/perfect.tex",
   "place": "Section section-koszul, equation-comparison and Proposition proposition-represent-cohomology-class-on-open"
@@ -23,9 +23,64 @@
   "def-pc-derived-category",
   "def-pc-perfect-complex"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "For each e, the shifted Koszul complex I_e is perfect and its augmentation u_e restricts to an isomorphism on U, by the finite-free Koszul calculation and the contractibility after inverting one of the f_i.",
+   "uses": [
+    "lem-sc-affine-perfect-koszul-principal-unit"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/perfect.tex",
+    "place": "section-koszul, equation-comparison"
+   }
+  },
+  {
+   "text": "The complexes I_e and maps u_e are functorial in e: the map from the complex on (f_1^{e+1},\\ldots,f_r^{e+1}) to that on (f_1^e,\\ldots,f_r^e) multiplies the basis vector [i_0,\\ldots,i_p] by f_{i_0}\\cdots f_{i_p}; the Koszul differential formula verifies that this is a chain map and that the augmentations commute. This gives the displayed inverse system.",
+   "uses": [
+    "def-weil-pbc-koszul-complex"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/perfect.tex",
+    "place": "Tag 08CX, perfect-section-koszul, equation-system"
+   }
+  },
+  {
+   "text": "By the affine derived equivalence [lem-pc-affine-qcoh-derived-equivalence] (essential surjectivity) we may take $E=\\widetilde{M^\\bullet}$ for a complex of $A$-modules $M^\\bullet$; then $\\mathcal F^\\bullet=\\widetilde{M^\\bullet}$ is a complex of quasi-coherent modules representing $E$ with $\\Gamma(X,\\mathcal F^\\bullet)=M^\\bullet$, and $I_e=\\widetilde{I^\\bullet(f_1^e,\\ldots,f_r^e)}$. Apply the Koszul-Cech derived comparison [lem-sc-affine-koszul-cech-derived-comparison]: $\\varinjlim_e\\operatorname{Hom}^\\bullet_A(I^\\bullet(f^e),M^\\bullet)\\to R\\Gamma(U,\\mathcal F^\\bullet)$ is a quasi-isomorphism; take $H^0$, which commutes with the filtered colimit, and note $H^0R\\Gamma(U,\\mathcal F^\\bullet)=H^0(U,E|_U)$. $H^0\\operatorname{Hom}^\\bullet_A(I^\\bullet(f^e),M^\\bullet)=\\operatorname{Hom}_{K(A)}(I^\\bullet(f^e),M^\\bullet)$ by definition of the Hom complex, and this equals $\\operatorname{Hom}_{D(A)}(I^\\bullet(f^e),M^\\bullet)$ because $I^\\bullet(f^e)$ is a bounded complex of finite free (hence projective) modules, so K-projective [lem-sc-bounded-above-projective-kprojective], and Hom out of a K-projective complex in $K(A)$ equals Hom in $D(A)$ (Stacks, Derived Categories, Lemma derived-lemma-K-projective; $M^\\bullet$ may be unbounded). By full faithfulness in [lem-pc-affine-qcoh-derived-equivalence], $\\operatorname{Hom}_{D(A)}(I^\\bullet(f^e),M^\\bullet)=\\operatorname{Hom}_{D(\\mathcal O_X)}(I_e,E)$ ($D_{\\mathrm{QCoh}}$ being a full subcategory). The composite identification is restriction to $U$ followed by $(u_e|_U)^{-1}$, so the canonical map is an isomorphism.",
+   "uses": [
+    "lem-pc-affine-qcoh-derived-equivalence",
+    "lem-sc-affine-koszul-cech-derived-comparison",
+    "lem-sc-bounded-above-projective-kprojective"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/perfect.tex",
+    "place": "Tag 08DD, perfect-proposition-represent-cohomology-class-on-open, proof"
+   }
+  },
+  {
+   "text": "The restriction formula is well-defined on the colimit because the u_e commute with the transition maps. For r=0, U is empty and both sides are zero; for E=0 both sides are zero. These checks also agree with the stated canonical map.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/perfect.tex",
+    "place": "Tag 08DC, perfect-equation-comparison"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sc-affine-perfect-koszul-principal-unit",
+  "def-weil-pbc-koszul-complex",
+  "lem-sc-affine-koszul-cech-derived-comparison",
+  "lem-pc-affine-qcoh-derived-equivalence",
+  "lem-sc-bounded-above-projective-kprojective"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/perfect.tex",
+  "place": "Tags 08CX, 08DC, and 08DD"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -47,15 +102,55 @@
    "results": "0 hits in Mathlib/",
    "date": "2026-10-11",
    "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Koszul derived complex restriction isomorphism on finite principal open cover",
+   "results": "AlgebraicGeometry.Scheme.affineOpenCoverOfSpanRangeEqTop_X_carrier and related basic-open lemmas; no derived Koszul representability",
+   "date": "2026-10-11",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "Scheme.basicOpen Homology",
+   "results": "0 hits; unknown identifier Scheme.basicOpen",
+   "date": "2026-10-11",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "represent cohomology|principal open in Mathlib/AlgebraicGeometry",
+   "results": "0 hits in Mathlib/",
+   "date": "2026-10-11",
+   "verdict": "no match"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-sc-affine-perfect-map-lift",
   "by": "worker",
   "date": "2026-10-10"
  },
  "chapter": "sec-picard-framework",
- "unit": "sk-thm-picard-duality"
+ "unit": "sk-thm-picard-duality",
+ "split_report": {
+  "date": "2026-10-11",
+  "item": "lem-sc-affine-perfect-open-represent-cohomology",
+  "worker": "stage1",
+  "summary": "No sorry-free Lean declaration states the item. I split the argument into the finite-free Koszul/perfectness and principal-open restriction lemma, and the Koszul-Cech Hom-colimit-to-sections lemma, then assembled the inverse-system, compatibility, and degree-zero identification steps. The cited perfect.tex packet is absent locally, so the proof is recorded as an agent reconstruction from the proposition and its named equation-comparison argument.",
+  "blueprint": "Realizes the ancestor lem-sc-finite-duality proof place ‘proper-flat support proof: modify the affine supported perfect complex so its map to E lifts over the affine open’ through the Koszul representability proposition used by lem-sc-affine-perfect-map-lift.",
+  "tool_uses": []
+ },
+ "tool_uses": [
+  "lem-pc-affine-qcoh-derived-equivalence"
+ ],
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-rch2944",
+  "group": "C1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-rch2944 (reviewer sub-agent of L); spot-checked: Item statement vs Tags 08CX/08DC/08DD (H^0 form, E in D_QCoh) matches G1 step 2 use (E=R in D_QCoh) and J1 (applied to E[n]); principal-unit node true (bounded finite free; cone K_e acyclic on each D(f_i)); Koszul-Cech node = 08D1+08D2 combined, not a duplicate of lem-pc-alternating-cech-computes (single sheaf, Cech vs alternating) nor of lem-pc-qcoh-truncation-derived-limit. FIX more, RETURN less: C1 Step 3 used, uncited, (a) representing E by a qcoh complex and Hom_{D(A)}=Hom_{D(O_X)} -> cited lem-pc-affine-qcoh-derived-equivalence (Tag 06Z0, generic affine tool from sk-thm-picard-f-representable, C7 tool use); (b) H^0 Hom^*(I^*,M^*)=Hom_{D(A)} for unbounded M^* -> cited lem-sc-bounded-above-projective-kprojective plus the K-projective Hom fact folded in text (lem-sc-affine-projective-complex-derived-hom not usable: needs M bounded below, C4); proof_deps updated. Second reading by C1 missed this.; 1 file(s) fixed by the reviewer"
+ }
 }
