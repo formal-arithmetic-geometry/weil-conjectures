@@ -1,0 +1,93 @@
+{
+ "id": "lem-weil-pbc-scheme-modules-functorial-injective-embeddings",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-finite-etale-lifting",
+   "place": "step 7 of its split, through the graded cohomology used in the essential-surjectivity argument of Lemma 0GS2; specifically the identification of the graded H^p in Stacks 0897(1); within it, the passage from the finite partial direct sums to the whole direct sum $\\bigoplus_mH^p(X,\\mathcal G_m)$ (Stacks 01FF, the directed-colimit statement); within the proof of Stacks 01FF (cohomology.tex lines 3226-3236): 'By Injectives, Lemma 01DI the category of O_X-modules has functorial injective embeddings. Thus for any system (F_i, phi_ii') there exists a system (I_i, phi_ii') with each I_i an injective O_X-module and a morphism of systems given by injective O_X-module maps F_i -> I_i'",
+   "via": [
+    "lem-weil-pbc-qs-scheme-cohomology-directed-colimit",
+    "lem-weil-pbc-qcqs-cohomology-direct-sum",
+    "lem-weil-pbc-graded-finiteness-cohomology",
+    "lem-weil-pbc-cohomology-powers-ideal-rees-finite",
+    "lem-weil-pbc-cohomology-powers-ideal-application",
+    "lem-weil-pbc-ml-cohomology-powers-ideal",
+    "lem-weil-pbc-theorem-formal-functions",
+    "lem-weil-pbc-formal-systems-push-pull",
+    "prop-weil-pbc-grothendieck-existence",
+    "lem-weil-pbc-algebraize-finite-over-proper",
+    "lem-weil-pbc-finite-etale-lifting-complete",
+    "lem-weil-pbc-finite-etale-lifting-essential-surjectivity"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Sheaves of modules on a scheme have functorial injective embeddings (Stacks 01DI)",
+ "statement": "Let $X$ be a scheme [def-pc-scheme] and $\\Mod(\\mathcal O_X)$ the abelian category of sheaves of $\\mathcal O_X$-modules on the underlying topological space of $X$ [def-weil-sheaf-of-modules-category]. Then $\\Mod(\\mathcal O_X)$ has functorial injective embeddings: there are a functor $J:\\Mod(\\mathcal O_X)\\to\\Mod(\\mathcal O_X)$ and a natural transformation $j:\\mathrm{id}\\to J$ such that for every $\\mathcal O_X$-module $\\mathcal F$ the morphism $j_{\\mathcal F}:\\mathcal F\\to J(\\mathcal F)$ is a monomorphism and $J(\\mathcal F)$ is an injective object of $\\Mod(\\mathcal O_X)$ [def-sp-injective-resolutions]. In particular, if $I$ is a directed set and $(\\mathcal F_i,\\varphi_{i'i}:\\mathcal F_i\\to\\mathcal F_{i'})_{i\\le i'}$ is a system of $\\mathcal O_X$-modules over $I$ ($\\varphi_{ii}=\\mathrm{id}$, $\\varphi_{i''i'}\\varphi_{i'i}=\\varphi_{i''i}$), then $\\mathcal I_i=J(\\mathcal F_i)$ with $\\psi_{i'i}=J(\\varphi_{i'i})$ is a system of injective $\\mathcal O_X$-modules over $I$, and the monomorphisms $j_{\\mathcal F_i}:\\mathcal F_i\\to\\mathcal I_i$ satisfy $\\psi_{i'i}\\circ j_{\\mathcal F_i}=j_{\\mathcal F_{i'}}\\circ\\varphi_{i'i}$ for $i\\le i'$. (Stacks states and proves this for an arbitrary ringed space.)",
+ "source": {
+  "document": "literature/stacks-project/injectives.tex",
+  "place": "Injectives, Lemma 01DI (label lemma-sheaves-modules-space, line 498), the clause 'In fact it has functorial injective embeddings', and its proof (I(U) = prod_{x in U} J_{O_{X,x}}(F_x), with the functorial injective embedding of modules of More on Algebra, Section injectives-modules); cited in Cohomology, proof of Lemma 01FF (cohomology.tex line 3226). Tag verified in tags/tags: 01DI,injectives-lemma-sheaves-modules-space."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-sheaf-of-modules-category",
+  "def-sp-injective-resolutions"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "sheaves of modules over a ringed space have enough injectives, functorial injective embedding",
+   "results": "ModuleCat.enoughInjectives, instEnoughInjectivesModuleCatOfSmall, instEnoughInjectivesModuleCatInt (Mathlib.Algebra.Category.ModuleCat.EnoughInjectives: modules over a ring), Module.injective_object_of_injective_module, CategoryTheory.Sheaf.instHasFunctorialFactorizationLocallySurjectiveLocallyInjective (epi/mono factorization of sheaves, not injective objects); nothing for sheaves of modules",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "category of sheaves of modules over a sheaf of rings on a topological space is a Grothendieck abelian category",
+   "results": "SheafOfModules.instAbelian (Mathlib.Algebra.Category.ModuleCat.Sheaf.Abelian), CategoryTheory.Sheaf.instIsGrothendieckAbelian (Mathlib.CategoryTheory.Abelian.GrothendieckAxioms.Sheaf: sheaves with values in a Grothendieck abelian category A, not modules over a sheaf of rings), AlgebraicGeometry.Scheme.Modules.instAbelian; no Grothendieck or enough-injectives statement for SheafOfModules",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.IsGrothendieckAbelian (SheafOfModules _)",
+   "results": "SheafOfModules.instIsGrothendieckAbelian in module Mathlib.CategoryTheory.Abelian.GrothendieckAxioms.SheafOfModules of the online (newer) Mathlib; that file does not exist in the pinned Mathlib (ls Mathlib/CategoryTheory/Abelian/GrothendieckAxioms/: Basic, Colim, Connected, FunctorCategory, Indization, Sheaf, Types)",
+   "date": "2026-10-10",
+   "verdict": "no match in the pinned Mathlib; candidate in a newer Mathlib (see mathlib_candidate)"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rln 'IsGrothendieckAbelian\\|EnoughInjectives' Mathlib/Algebra/Category/ModuleCat/Sheaf* Mathlib/Algebra/Category/ModuleCat/Presheaf* Mathlib/AlgebraicGeometry/Modules; grep -rn 'IsGrothendieckAbelian' Mathlib | grep -i SheafOfModules",
+   "results": "no hit (Scheme.Modules = SheafOfModules X.ringCatSheaf, Mathlib/AlgebraicGeometry/Modules/Sheaf.lean line 39, has only Abelian, HasLimits, HasColimits instances, lines 50-53)",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "mathlib_candidate": {
+  "declaration": "SheafOfModules.instIsGrothendieckAbelian (newer Mathlib) with CategoryTheory.IsGrothendieckAbelian.instHasFunctorialFactorizationMonomorphismsRlp",
+  "file": "Mathlib/CategoryTheory/Abelian/GrothendieckAxioms/SheafOfModules.lean (not in the pinned Mathlib); Mathlib/CategoryTheory/Abelian/GrothendieckCategory/EnoughInjectives.lean",
+  "reason": "the first instance is absent from the pinned Mathlib; with it, the statement would follow as in the Mathlib leaf lem-weil-pbc-grothendieck-functorial-injective-embedding"
+ },
+ "status": "unsplit",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-qs-scheme-cohomology-directed-colimit",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1"
+}
