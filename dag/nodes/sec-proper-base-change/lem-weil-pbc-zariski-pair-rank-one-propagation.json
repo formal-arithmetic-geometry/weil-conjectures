@@ -2,17 +2,60 @@
  "id": "lem-weil-pbc-zariski-pair-rank-one-propagation",
  "kind": "statement",
  "title": "A finite flat algebra is rank one when it is rank one modulo a Zariski-pair ideal",
- "statement": "Let A be a commutative ring, I an ideal contained in the Jacobson radical of A, and A -> B a ring map with B finite, finitely presented, and flat as an A-module. If the induced map A/I -> B/IB is an isomorphism, then the rankAtStalk function of B is constantly 1 on Spec(A).",
+ "statement": "Let $A$ be a commutative ring and $I\\subseteq A$ an ideal contained in the Jacobson radical of $A$ (the intersection of all maximal ideals of $A$). Let $A\\to B$ be a homomorphism of commutative rings such that $B$, as an $A$-module, is finitely generated [def-weil-finitely-generated-module], finitely presented (there is an exact sequence $A^{\\oplus m}\\to A^{\\oplus n}\\to B\\to0$ of $A$-modules for some $m,n\\ge0$) and flat [def-weil-pbc-flat-ring-map]. If the induced map $A/I\\to B/IB$ is an isomorphism, then $B$ has rank $1$ at every prime of $A$: for every prime ideal $\\mathfrak p\\subset A$ the localization $B_{\\mathfrak p}$ [def-weil-pbc-localization-at-prime] is a free $A_{\\mathfrak p}$-module of rank $1$.",
  "source": {
   "document": "literature/stacks-project/more-algebra.tex",
   "place": "Lemma Tag 0ELZ (lemma-check-isomorphism-zariski), line 2265: finite presentation of B as a module plus flatness makes B finite locally free (Algebra Lemma 00NX); the quotient isomorphism gives rank one on V(I), and local constancy plus I in the Jacobson radical gives rank one everywhere"
  },
  "stmt_deps": [
-  "def-weil-pbc-flat-ring-map"
+  "def-weil-finitely-generated-module",
+  "def-weil-pbc-flat-ring-map",
+  "def-weil-pbc-localization-at-prime"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Since $B$ is a finitely presented and flat $A$-module, it is a finite projective $A$-module [lem-weil-pbc-finitely-presented-flat-module-projective] (Stacks 00NX, (1)$\\Rightarrow$(2)). Hence [lem-weil-pbc-finite-projective-rank-locally-constant] for every prime $\\mathfrak p\\subset A$ the localization $B_{\\mathfrak p}$ is a finite free $A_{\\mathfrak p}$-module, say of rank $r(\\mathfrak p)$, and the function $r:\\operatorname{Spec}A\\to\\mathbf N$ is locally constant for the Zariski topology.",
+   "uses": [
+    "lem-weil-pbc-finitely-presented-flat-module-projective",
+    "lem-weil-pbc-finite-projective-rank-locally-constant"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "proof of Lemma Tag 0ELZ, sentence 'Hence $B$ is a finite locally free $A$-module by Algebra, Lemma 00NX'; rank function of Algebra Lemma 00NX (algebra.tex line 19027)"
+   }
+  },
+  {
+   "text": "Rank $1$ along $V(I)$. Let $\\mathfrak p\\supseteq I$ be a prime and $\\kappa(\\mathfrak p)$ its residue field [def-weil-pbc-localization-at-prime]; since $I\\subseteq\\mathfrak p$, $\\kappa(\\mathfrak p)$ is an $A/I$-algebra. The given isomorphism $A/I\\to B/IB$ is $A$-linear, so $B\\otimes_A\\kappa(\\mathfrak p)\\cong(B/IB)\\otimes_{A/I}\\kappa(\\mathfrak p)\\cong(A/I)\\otimes_{A/I}\\kappa(\\mathfrak p)=\\kappa(\\mathfrak p)$, a $\\kappa(\\mathfrak p)$-vector space of dimension $1$. On the other hand $B\\otimes_A\\kappa(\\mathfrak p)\\cong B_{\\mathfrak p}\\otimes_{A_{\\mathfrak p}}\\kappa(\\mathfrak p)\\cong\\kappa(\\mathfrak p)^{\\oplus r(\\mathfrak p)}$ because $B_{\\mathfrak p}\\cong A_{\\mathfrak p}^{\\oplus r(\\mathfrak p)}$ (step 1). Comparing dimensions, $r(\\mathfrak p)=1$ for every $\\mathfrak p\\in V(I)$.",
+   "uses": [
+    "def-weil-pbc-localization-at-prime"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "proof of Lemma Tag 0ELZ, 'the module $B$ has rank $1$ along $V(I)$' (written out)"
+   }
+  },
+  {
+   "text": "Rank $1$ everywhere. Let $U=\\{\\mathfrak p: r(\\mathfrak p)=1\\}$; since $r$ is locally constant (step 1), every point of $U$ has an open neighbourhood on which $r\\equiv1$, so $U$ is open and $Z=\\operatorname{Spec}A\\setminus U$ is closed, $Z=V(J)$ for an ideal $J\\subseteq A$. If $Z\\neq\\emptyset$ then $J\\neq A$, so $J$ is contained in a maximal ideal $\\mathfrak m$ (Zorn), and $\\mathfrak m\\in V(J)=Z$. But $\\mathfrak m$ contains the Jacobson radical, hence $I\\subseteq\\mathfrak m$, so $\\mathfrak m\\in V(I)\\subseteq U$ by step 2, a contradiction. Hence $Z=\\emptyset$, i.e. $B_{\\mathfrak p}$ is free of rank $1$ over $A_{\\mathfrak p}$ for every prime $\\mathfrak p$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "proof of Lemma Tag 0ELZ, 'as $(A, I)$ is a Zariski pair, we conclude that the rank is $1$ everywhere' (Zariski pair: Definition Tag 0ELY, line 2245; written out)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-finitely-presented-flat-module-projective",
+  "lem-weil-pbc-finite-projective-rank-locally-constant",
+  "def-weil-pbc-localization-at-prime"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "proof of Lemma Tag 0ELZ (lemma-check-isomorphism-zariski), line 2265, with Algebra Lemma Tag 00NX (algebra.tex line 19027)"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -41,10 +84,38 @@
    "results": "Flat/Rank.lean: Module.algebraMap_bijective_iff_rankAtStalk; FreeLocus.lean: Module.isLocallyConstant_rankAtStalk; Jacobson/Ideal.lean: Ideal.mem_jacobson_bot; no quotient-rank propagation theorem",
    "date": "2026-10-10",
    "verdict": "no match; ingredients only"
+  },
+  {
+   "tool": "leansearch",
+   "query": "rankAtStalk equal one on all primes if equal one at maximal ideals containing ideal in Jacobson radical",
+   "results": "Module.rankAtStalk, Ideal.jacobson, Module.rankAtStalk_self, Module.rankAtStalk_eq_zero_iff_notMem_support, IsJacobsonRing.out', Module.rankAtStalk_eq_of_equiv, Ring.jacobson, Ideal.IsLocal.le_jacobson",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "an open subset of the prime spectrum containing all closed points (maximal ideals) is the whole spectrum",
+   "results": "IsLocalRing.closedPoint_mem_iff, IsLocalRing.closed_point_mem_iff (local rings only), PrimeSpectrum.exists_isClosed_singleton_of_isJacobsonRing (Jacobson rings), PrimeSpectrum.isClosed_singleton_iff_isMaximal, PrimeSpectrum.quasiSober",
+   "date": "2026-10-10",
+   "verdict": "no match for the item; only the local-ring case of the topological step"
+  },
+  {
+   "tool": "loogle",
+   "query": "Module.rankAtStalk, Ideal.jacobson",
+   "results": "none",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rln 'rankAtStalk' Mathlib/ | xargs grep -ln 'jacobson\\|IsMaximal'; grep -n 'jacobson' RingTheory/Spectrum/Prime/FreeLocus.lean RingTheory/Flat/Rank.lean RingTheory/LocalProperties/Projective.lean",
+   "results": "only RingTheory/Flat/LocallyFree.lean (Module.bijective_of_surjective_of_rankAtStalk_eq, Module.Free.away_of_finite_of_flat_of_rankAtStalk_constant: rank conditions at maximal ideals); FreeLocus.lean:343 Module.rankAtStalk_eq_of_le_of_finite_of_flat (rank of a finite flat module is constant under specialization p <= q); no jacobson hypothesis anywhere with rankAtStalk",
+   "date": "2026-10-10",
+   "verdict": "no match; ingredients only (rankAtStalk_eq_of_le_of_finite_of_flat would give a shorter Lean proof: every prime lies in a maximal ideal, which contains I)"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "worker",
@@ -64,5 +135,17 @@
   }
  },
  "chapter": "sec-proper-base-change",
- "unit": "sk-thm-p1"
+ "unit": "sk-thm-p1",
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "lem-weil-pbc-zariski-pair-rank-one-propagation",
+  "worker": "stage1",
+  "summary": "Statement rewritten as self-contained TeX: 'rankAtStalk of B is constantly 1' replaced by 'B_p is a free A_p-module of rank 1 for every prime p' (the same as Module.rankAtStalk B = 1 for a finite flat B, as used by the citer lem-weil-pbc-zariski-pair-flat-integral-isomorphism step 3), finitely presented module and Jacobson radical defined inline, stmt_deps now def-weil-finitely-generated-module, def-weil-pbc-flat-ring-map, def-weil-pbc-localization-at-prime. Proof in 3 steps following Stacks 0ELZ: (1) fp+flat => finite projective (new Mathlib leaf lem-weil-pbc-finitely-presented-flat-module-projective, Module.Flat.projective_of_finitePresentation, Stacks 00NX (1)=>(2)) => free stalks with locally constant rank (existing leaf lem-weil-pbc-finite-projective-rank-locally-constant); (2) rank 1 on V(I) by comparing fibres B (x) kappa(p) (elementary, written out); (3) the rank-1 locus is open and contains every maximal ideal since I is in the Jacobson radical, so its closed complement, having no closed point, is empty (elementary, written out). Item re-searched in Mathlib with leansearch, leanfinder, loogle, grep: no match."
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "result": "accepted",
+  "note": "3 steps following Stacks 0ELZ: finitely presented flat => finite projective (new exact Mathlib leaf, EquationalCriterion.lean:287 verified by L) with locally constant rank (existing leaf); rank 1 on V(I) by comparing fibres through A/I = B/IB; the open set {r = 1} contains every maximal ideal (I in the Jacobson radical), so its closed complement is empty. Statement rewritten in TeX with the notions defined inline (no rankAtStalk)."
+ }
 }
