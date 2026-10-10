@@ -1348,3 +1348,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 11:50 L: lem-weil-pbc-integral-injective-dimension-equal finished by ringKrullDim_eq_of_isIntegral (sorry-free, rule 0; attached).
 - 11:51 L: accepted lem-weil-pbc-complete-local-map-cohen-presentation (07NN power-series form, 5 steps, 0 new; the three 07NN nodes could be merged later).
 - 11:51 L: accepted lem-weil-pbc-power-series-field-cohen-fs-adic (07NL, 5 steps, 0 new); a possible gap in K1's lem-weil-pbc-flat-formally-smooth-closed-fibre-adic (formal smoothness over Z vs over F_p in the field case) noted in its lead note for a later check.
+- 11:52 L: accepted lem-galois-flc-representable (03RV, 7 steps; new node: the constant sheaf of sets is representable; 2 tool uses); lem-galois-descent and lem-galois-glue reached again, unflagged; lem-galois-descent's imported proof noted wrong.
