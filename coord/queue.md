@@ -1,8 +1,8 @@
 # Work queue
 
-918 items; claim with `tools/claim.py next <group> [--stage N]`.
+915 items; claim with `tools/claim.py next <group> [--stage N]`.
 
-## Stage 1: nodes to split (189)
+## Stage 1: nodes to split (184)
 
 | node | distance to a target | Lean state on the done branch |
 |---|---|---|
@@ -57,7 +57,6 @@
 | `lem-pc-sites-modules-sheafification-flat` | 5014 | none |
 | `lem-sp-cartan-eilenberg-comparison-independence` | 6005 | none |
 | `thm-sp-spectral-object-yields` | 6006 | none |
-| `pqf-lem-coherent-ft-locnoeth` | 6009 | none |
 | `thm-sc-theorem-of-cube` | 6010 | rests_on_sorry |
 | `lem-pc-monomial-cech-complex-homology` | 6012 | none |
 | `lem-pc-twist-cech-monomial-decomposition` | 6012 | none |
@@ -65,7 +64,6 @@
 | `pqf-lem-finite-type-algebra-finite-spectrum` | 6013 | none |
 | `pqf-lem-serre-criterion` | 6013 | none |
 | `def-weil-t-structure` | - | none |
-| `def-nagata-fixed-base-separated-stage` | - | none |
 | `def-pur-sheaf-tensor-product` | - | none |
 | `def-weil-pbc-constructible-torsion` | - | none |
 | `lem-pc-kbar-pure-insep` | - | none |
@@ -74,10 +72,7 @@
 | `sbc-lem-higher-direct-image-presheaf` | - | none |
 | `thm-pqf-zmt-factorization` | - | none |
 | `def-pc-representable-functor` | - | none |
-| `def-sc-field-extension` | - | none |
 | `def-weil-pbc-C1` | - | none |
-| `def-weil-pbc-C2` | - | none |
-| `def-weil-pbc-C4` | - | none |
 | `def-weil-pbc-C5` | - | none |
 | `def-weil-pbc-C8` | - | none |
 | `lem-fin-dense-normal-open` | - | none |
@@ -196,7 +191,7 @@
 | `lem-pur-rhom-well-defined` | - | none |
 | `lem-zl-noether-normalization-dimension` | - | none |
 
-## Stage 2: nodes to state (729)
+## Stage 2: nodes to state (731)
 
 | node | distance to Mathlib | kind |
 |---|---|---|
@@ -890,6 +885,7 @@
 | `lemma-nagata-scheme-image-ideal-qc` | 1 | state |
 | `lemma-weil-pbc-finite-l-group-filtration` | 1 | state |
 | `pqf-def-coherent` | 1 | state |
+| `pqf-lem-coherent-ft-locnoeth` | 1 | state |
 | `pqf-lem-finite-qf` | 1 | state |
 | `pqf-lem-image-proper` | 1 | state |
 | `pqf-lem-proper-basic` | 1 | state |
@@ -929,8 +925,9 @@
 | `thm-sc-hilbert-90` | 3 | state |
 | `lem-weil-pbc-p1-field-dimension-one` | 4 | state |
 | `lem-weil-pbc-projective-space-zero-isomorphism` | 4 | state |
+| `def-nagata-fixed-base-separated-stage` | 6 | state |
 
-Not open yet: 1455 nodes that wait for a statement dependency, 228 nodes that wait for stage 1.
+Not open yet: 1458 nodes that wait for a statement dependency, 223 nodes that wait for stage 1.
 
 ## Stage 3: modules to prove (0)
 
