@@ -29,37 +29,183 @@
   "pqf-def-coherent",
   "def-pc-ext"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Choose an exact finite-free resolution $\\cdots\\to F_1\\to F_0\\to M\\to0$ by [lem-weil-pbc-finite-free-resolution-noetherian] (Tag 00LP), and put $E^{-i}=\\widetilde{F_i}$ for $i\\ge0$, with all positive terms zero. On each principal open $D(f)$, [lem-weil-pbc-spec-module-tilde-sections] identifies the augmented complex with the localization of the module resolution at $f$. This remains exact by [lem-weil-pbc-localization-module-exact]. At a point $\\mathfrak p$, [lem-weil-pbc-spec-tilde-stalk-localization] identifies the stalk complex with the localization at $A\\setminus\\mathfrak p$, which is exact by the same localization statement; hence [lem-weil-pbc-module-stalk-exact](5) gives a quasi-isomorphism $E^\\bullet\\to\\widetilde M[0]$. Every $E^{-i}$ is finite free over $\\mathcal O_U$ because $F_i$ is finite free over $A$.",
+   "uses": [
+    "lem-weil-pbc-finite-free-resolution-noetherian",
+    "lem-weil-pbc-spec-module-tilde-sections",
+    "lem-weil-pbc-localization-module-exact",
+    "lem-weil-pbc-spec-tilde-stalk-localization",
+    "lem-weil-pbc-module-stalk-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Lemma Tag 00LP (lemma-resolution-by-finite-free), part (2); Perfect Complexes Tag 0A6H (lemma-quasi-coherence-internal-hom), proof of part (3)"
+   }
+  },
+  {
+   "text": "Apply [lem-sc-derived-hom-finite-free-model] to $E^\\bullet\\to\\widetilde M[0]$ and $\\widetilde N[0]$. Thus $R\\mathcal Hom_U(\\widetilde M[0],\\widetilde N[0])$ is represented by $\\mathcal Hom^\\bullet_U(E^\\bullet,\\widetilde N[0])$. For each $i\\ge0$, $F_i\\cong A^{n_i}$, so both $\\mathcal Hom_U(\\widetilde{F_i},\\widetilde N)$ and $\\widetilde{\\operatorname{Hom}_A(F_i,N)}$ are canonically $\\widetilde N^{n_i}$; the identifications commute with the differential induced by each $F_i\\to F_{i-1}$. Hence the representing sheaf complex is termwise the associated-sheaf complex of $\\operatorname{Hom}_A^\\bullet(F^\\bullet,N[0])$, with degree $q$ term $\\widetilde{\\operatorname{Hom}_A(F_q,N)}$ for $q\\ge0$ and zero for $q<0$.",
+   "uses": [
+    "lem-sc-derived-hom-finite-free-model",
+    "lem-weil-pbc-spec-module-tilde-sections"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/perfect.tex",
+    "place": "Lemma Tag 0A6H (lemma-quasi-coherence-internal-hom), proof of part (3), citing Cohomology lemma-Rhom-complex-of-direct-summands-finite-free"
+   }
+  },
+  {
+   "text": "Associated sheaves commute with the cohomology of this complex: at a prime $\\mathfrak p$, [lem-weil-pbc-spec-tilde-stalk-localization] identifies the stalk of every term and differential with localization at $\\mathfrak p$; [lem-weil-pbc-localization-module-exact] identifies the localized kernel, image and quotient with the corresponding cohomology of the localized complex; and [lem-weil-pbc-module-stalk-exact](5) detects the resulting isomorphism of sheaves. Consequently $\\mathcal H^q(R\\mathcal Hom_U(\\widetilde M[0],\\widetilde N[0]))\\cong\\widetilde{H^q(\\operatorname{Hom}_A^\\bullet(F^\\bullet,N[0]))}$ for every integer $q$. In negative degrees the complex of Step 2 is zero, so these sheaves vanish.",
+   "uses": [
+    "lem-weil-pbc-spec-tilde-stalk-localization",
+    "lem-weil-pbc-localization-module-exact",
+    "lem-weil-pbc-module-stalk-exact",
+    "def-weil-derived-cohomology-sheaves"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/perfect.tex",
+    "place": "Lemma Tag 0A6H (lemma-quasi-coherence-internal-hom), part (3), and its proof"
+   }
+  },
+  {
+   "text": "By [lem-sc-derived-hom-projective-resolution], the module Hom complex of Steps 2-3 represents $R\\operatorname{Hom}_A(M[0],N[0])$; by [lem-sc-rhom-cohomology-ext-ring] (Tag 0A64), its degree-$q$ cohomology is canonically $\\operatorname{Ext}^q_A(M,N)$ for $q\\ge0$. Substitute this into Step 3. The isomorphism is canonical because both cited derived-Hom comparisons and the finite-free identifications of Step 2 commute with maps of resolutions. Finally [lem-weil-pbc-spec-module-tilde-sections] says that the associated sheaf of each Ext module is quasi-coherent, giving the claimed quasi-coherence.",
+   "uses": [
+    "lem-sc-derived-hom-projective-resolution",
+    "lem-sc-rhom-cohomology-ext-ring",
+    "lem-weil-pbc-spec-module-tilde-sections"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/perfect.tex",
+    "place": "Lemma Tag 0A6H (lemma-quasi-coherence-internal-hom), part (3), with More on Algebra Tag 0A64 (equation-h0-RHom)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-finite-free-resolution-noetherian",
+  "lem-weil-pbc-spec-module-tilde-sections",
+  "lem-weil-pbc-localization-module-exact",
+  "lem-weil-pbc-module-stalk-exact",
+  "lem-sc-derived-hom-finite-free-model",
+  "lem-weil-pbc-spec-tilde-stalk-localization",
+  "def-weil-derived-cohomology-sheaves",
+  "lem-sc-derived-hom-projective-resolution",
+  "lem-sc-rhom-cohomology-ext-ring"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/perfect.tex",
+  "place": "Lemma Tag 0A6H (lemma-quasi-coherence-internal-hom), part (3), expanded using Algebra Tag 00LP and More on Algebra Tag 0A64"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
-   "query": "quasi-coherence of derived Hom on an affine scheme for a pseudo-coherent complex",
-   "results": "generic sheaf cohomology and abelian-category declarations only; no affine RHom comparison",
+   "query": "derived internal Hom of associated sheaves on affine scheme equals sheafification of module derived Hom for finite modules",
+   "results": "PresheafOfModules.sheafifyHomEquiv and generic sheafification adjunctions; no affine RHom comparison",
    "date": "2026-10-11",
    "verdict": "no match"
   },
   {
    "tool": "loogle",
-   "query": "RHom, QuasiCoherent",
-   "results": "0 hits; unknown identifier RHom",
+   "query": "Scheme, QuasiCoherent, Ext",
+   "results": "0 hits; unknown identifier Scheme",
    "date": "2026-10-11",
    "verdict": "no match"
   },
   {
    "tool": "grep",
-   "query": "grep -rn 'RHom|derived.*Hom|quasi.?coherent' Mathlib/AlgebraicGeometry",
-   "results": "no matches",
+   "query": "derived.*[Hh]om|[Qq]uasi[Cc]oherent.*Ext",
+   "results": "0 hits in Mathlib/AlgebraicGeometry",
+   "date": "2026-10-11",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "affine scheme sheaf Ext equals sheaf of module Ext for finite modules",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-11",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "cohomology sheaf of derived sheaf Hom for coherent modules on affine spectrum is tilde of Ext group",
+   "results": "generic sheaf cohomology and injective-resolution Ext declarations only; no scheme RHom comparison",
+   "date": "2026-10-11",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Ext, AlgebraicGeometry.Scheme.Modules",
+   "results": "0 hits; unknown identifier CategoryTheory.Ext",
+   "date": "2026-10-11",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "RHom|Derived.*Hom|Ext.*Sheaf",
+   "results": "generic CategoryTheory derived-functor and Hom declarations; no affine comparison",
    "date": "2026-10-11",
    "verdict": "no match"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-sc-sheaf-ext-coherent",
   "by": "worker",
   "date": "2026-10-10"
+ },
+ "split_report": {
+  "date": "2026-10-11",
+  "item": "lem-sc-affine-rhom-qcoherent",
+  "worker": "stage1",
+  "summary": "Expanded the affine derived-Hom comparison using the existing finite-free resolution, sheaf and module Hom-model nodes, stalkwise exactness, and the ring Ext comparison. No new node was needed.",
+  "blueprint": "The parenthetical Ext-vanishing proof of thm-sc-p1-duality: affine computation of RHom and its cohomology via finite-free resolutions.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-finite-free-resolution-noetherian",
+    "why": "Step 1 uses the general Noetherian finite-free resolution theorem; no node of the Picard-duality unit supplies it."
+   },
+   {
+    "node": "lem-weil-pbc-spec-module-tilde-sections",
+    "why": "Steps 1, 2 and 4 use the general associated-sheaf construction and its quasi-coherence; no node of this unit defines it."
+   },
+   {
+    "node": "lem-weil-pbc-localization-module-exact",
+    "why": "Steps 1 and 3 use exactness of module localization; this generic algebra fact is not supplied by this unit."
+   },
+   {
+    "node": "lem-weil-pbc-module-stalk-exact",
+    "why": "Steps 1 and 3 use the generic sheaf exactness criterion; this unit has no equivalent statement."
+   },
+   {
+    "node": "lem-weil-pbc-spec-tilde-stalk-localization",
+    "why": "Step 3 identifies stalks of associated sheaves with localized modules; no node of this unit supplies that identification."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-finite-free-resolution-noetherian",
+  "lem-weil-pbc-spec-module-tilde-sections",
+  "lem-weil-pbc-localization-module-exact",
+  "lem-weil-pbc-module-stalk-exact",
+  "lem-weil-pbc-spec-tilde-stalk-localization",
+  "lem-weil-pbc-finite-free-resolution-noetherian",
+  "lem-weil-pbc-spec-module-tilde-sections",
+  "lem-weil-pbc-localization-module-exact",
+  "lem-weil-pbc-module-stalk-exact",
+  "lem-weil-pbc-spec-tilde-stalk-localization"
+ ],
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-arq1842",
+  "group": "G1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-arq1842 (reviewer sub-agent of L); spot-checked: Packet read whole. Step1: 00LP finite-free resolution, tilde on D(f)/stalks = localization, localization exact, stalk criterion (5) give E->M~[0] qis. Step2: finite-free-model hypotheses hold (E bounded above finite free, N[0] bounded below); termwise N~^{n_i} identification with matrix differentials explicit. Step3: stalkwise tilde commutes with cohomology, negative degrees zero. Step4: projective-resolution node + 0A64 ring node give Ext^q, tilde gives qcoh. Cycle check: cited sc-nodes were created from other items (stalk-localization items), none depends on this item or parent lem-sc-sheaf-ext-coherent; local-Ext-via-free-resolution argument carried. Tool uses are generic algebra/sheaf facts: accepted. No fault beyond the Second reading."
  }
 }

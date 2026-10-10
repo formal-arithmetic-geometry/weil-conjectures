@@ -2272,3 +2272,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 18:41 L: merged deliver/F1/lem-pc-zariski-coverings-are-fppf (reviewer FIX; first push; new nodes: 0)
 - 18:41 L: merged deliver/F1/def-pc-derived-pullback (reviewer FIX; first push; new nodes: 0)
 - 18:42 L: merged deliver/C1/lem-pc-projection-formula (reviewer FIX+NODE(1); first push; new nodes: 5)
+- 18:42 L: merged deliver/G1/lem-sc-affine-rhom-qcoherent (reviewer PASS; first push; new nodes: 0)
