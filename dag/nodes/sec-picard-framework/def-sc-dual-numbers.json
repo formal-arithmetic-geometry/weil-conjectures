@@ -1,0 +1,76 @@
+{
+ "id": "def-sc-dual-numbers",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-degree-2g1-very-ample",
+   "place": "proof, third paragraph: the tangent-vector separation argument uses the dual-number description of tangent vectors",
+   "via": []
+  },
+  "same_as": []
+ },
+ "kind": "definition",
+ "title": "Dual numbers over a ring",
+ "statement": "For a commutative ring $R$, the ring of dual numbers $R[\\epsilon]$ is Mathlib's `DualNumber R`, with distinguished element $\\epsilon=\\operatorname{DualNumber.eps}$ satisfying $\\epsilon^2=0$ [def-pc-scheme].",
+ "source": {
+  "document": "literature/stacks-project/varieties.tex",
+  "place": "Tag 0B29, varieties-definition-dual-numbers"
+ },
+ "stmt_deps": [
+  "def-pc-scheme"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "dual numbers R[epsilon] with epsilon squared zero",
+   "results": "LeanSearch service returned HTTP 500; no result could be retrieved",
+   "date": "2026-10-11",
+   "verdict": "no result"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "dual numbers ring with nilpotent epsilon",
+   "results": "DualNumber and DualNumber.eps in Mathlib.Algebra.DualNumber",
+   "date": "2026-10-11",
+   "verdict": "match"
+  },
+  {
+   "tool": "loogle",
+   "query": "DualNumber",
+   "results": "DualNumber : (R : Type) -> Type and DualNumber.eps : DualNumber R in Mathlib.Algebra.DualNumber",
+   "date": "2026-10-11",
+   "verdict": "match"
+  },
+  {
+   "tool": "grep",
+   "query": "rg -n 'abbrev DualNumber|def DualNumber.eps' /home/ubuntu/weil-src-slopmaster2/.lake/packages/mathlib/Mathlib/Algebra/DualNumber.lean",
+   "results": "Mathlib/Algebra/DualNumber.lean:46 abbrev DualNumber (R : Type*) := TrivSqZeroExt R R; line 50 def DualNumber.eps ...",
+   "date": "2026-10-11",
+   "verdict": "match"
+  },
+  {
+   "tool": "loogle",
+   "query": "DualNumber.eps_mul_eps",
+   "results": "DualNumber.eps_mul_eps : DualNumber.eps * DualNumber.eps = 0 (Mathlib.Algebra.DualNumber); DualNumber line 46 and DualNumber.eps line 50 verified with sed by R-tan",
+   "date": "2026-10-10",
+   "verdict": "match"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "DualNumber",
+  "file": "Mathlib/Algebra/DualNumber.lean",
+  "line": 46,
+  "how": "exact: `DualNumber R` is the dual-number type and `DualNumber.eps` is its distinguished epsilon element (Mathlib/Algebra/DualNumber.lean, line 46 and line 50); the TrivSqZeroExt construction gives epsilon squared equal to zero."
+ },
+ "status": "mathlib",
+ "created": {
+  "item": "def-sc-scheme-tangent-space",
+  "by": "worker",
+  "date": "2026-10-10"
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-rr"
+}
