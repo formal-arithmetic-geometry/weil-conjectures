@@ -1671,3 +1671,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 14:49 L: merged deliver/M1/lem-galois-fpqc-singleton-affine-refinement (reviewer PASS; first push; new nodes: 0)
 - 14:50 L: merged deliver/G1/lem-exc-discrete-modules-abelian-injective-embeddings (reviewer FIX; first push; new nodes: 1)
 - 14:50 L: merged deliver/E1/prop-weil-pbc-strict-henselization-stalk-formula (reviewer FIX; first push; new nodes: 1)
+- 14:50 L: merged deliver/K1/lem-sc-torsion-subsheaf-quotient (reviewer FIX; first push; new nodes: 1)
