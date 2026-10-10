@@ -23,9 +23,79 @@
   "def-sp-left-exact-additive",
   "def-sp-filtration"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Let Ab(Z) and Ab(X) denote the abelian categories of abelian sheaves on the two spaces. By the definition of topological sheaf cohomology, these categories have enough injectives, and H^a(X,-) is the right derived functor R^aΓ(X,-) of the left exact additive global-sections functor. The direct image f_* is left exact and additive because it is computed sectionwise by (f_*G)(U)=G(f^{-1}U).",
+   "uses": [
+    "def-sc-topological-abelian-cohomology",
+    "def-sp-left-exact-additive"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/cohomology.tex",
+    "place": "Section 01DZ (cohomology of abelian sheaves on a topological space) and Lemma 01F2 (cohomology-lemma-Leray)"
+   }
+  },
+  {
+   "text": "The new injective-pushforward lemma says that f_* sends injectives to injectives. Applying the general acyclicity clause for derived functors to the left exact additive functor Γ(X,-), every f_*I with I injective is Γ(X,-)-acyclic, so f_* sends injectives to Γ(X,-)-acyclics [def-sp-acyclic]. Moreover Ab(Z) and Ab(X) are Grothendieck abelian: an abelian sheaf on a space is the same as a sheaf of modules over the constant sheaf of rings Z on the small site of open subsets, so the Grothendieck-abelian clause of [prop-pur-kinjective-resolutions-exist] applies. Hence (f_*,Γ(X,-)) is a composable pair [def-sp-composite-acyclicity] with f_* sending injectives to Γ(X,-)-acyclics, which is the hypothesis of the Grothendieck spectral-sequence theorem.",
+   "uses": [
+    "lem-sc-topological-pushforward-injective",
+    "lemma-weil-pbc-leray-acyclicity",
+    "prop-pur-kinjective-resolutions-exist",
+    "def-sp-composite-acyclicity",
+    "def-sp-acyclic"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/cohomology.tex",
+    "place": "Lemma 01F2 (cohomology-lemma-Leray), proof"
+   }
+  },
+  {
+   "text": "The Grothendieck spectral-sequence theorem applied to F=f_* and G=Γ(X,-) gives a functorial first-quadrant cohomological spectral sequence with E_2^{a,b}=R^aΓ(X,R^bf_*F)=H^a(X,R^bf_*F), converging to R^{a+b}(Γ(X,-)∘f_*)F. Since Γ(X,f_*G)=Γ(Z,G) sectionwise, the composite is Γ(Z,-), so its derived functors are H^{a+b}(Z,F).",
+   "uses": [
+    "thm-sp-grothendieck",
+    "def-sc-topological-abelian-cohomology"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/cohomology.tex",
+    "place": "Lemma 01F2 (cohomology-lemma-Leray)"
+   }
+  },
+  {
+   "text": "The construction clause of [thm-sp-grothendieck] identifies the Leray spectral sequence with the second spectral sequence of the double complex Γ(X,I^{•,•}) of [thm-sp-double-complex-spectral-sequences], and the spectral-sequence structure [def-sp-spectral-sequence] identifies the pages and differentials as d_r:E_r^{a,b}\\to E_r^{a+r,b-r+1} with d_r\\circ d_r=0 and E_{r+1}^{a,b}=ker(d_r)/im(d_r), and its first-quadrant convergence gives E_2^{a,b}=0 outside a,b>=0, stabilization E_∞^{a,b}=E_r^{a,b} for all sufficiently large r, and a finite decreasing filtration F^0H^n=H^n⊇...⊇F^{n+1}H^n=0 with F^aH^n/F^{a+1}H^n≅E_∞^{a,n-a}. The construction is functorial in F. The bottom edge is the map R^pΓ(X,f_*F)=H^p(X,f_*F) to the abutment induced by the composite Γ(X,f_*F)=Γ(Z,F), hence is the map induced by f.",
+   "uses": [
+    "thm-sp-double-complex-spectral-sequences",
+    "thm-sp-grothendieck",
+    "def-sp-filtration",
+    "def-sp-spectral-sequence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Lemma 015N (lemma-grothendieck-spectral-sequence), proof and finite-filtration conclusion; Cohomology Lemma 01F2"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sc-topological-abelian-cohomology",
+  "def-sp-left-exact-additive",
+  "lem-sc-topological-pushforward-injective",
+  "lemma-weil-pbc-leray-acyclicity",
+  "thm-sp-grothendieck",
+  "thm-sp-double-complex-spectral-sequences",
+  "def-sp-filtration",
+  "prop-pur-kinjective-resolutions-exist",
+  "def-sp-composite-acyclicity",
+  "def-sp-acyclic",
+  "def-sp-spectral-sequence"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Lemma 01F2 (cohomology-lemma-Leray), using Derived Categories Lemma 015N"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -50,7 +120,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-sc-leray-closed-pushforward-cohomology",
   "by": "worker",
@@ -66,5 +136,36 @@
   "slopmaster2": {
    "state": "none"
   }
+ },
+ "split_report": {
+  "date": "2026-10-11",
+  "item": "lem-sc-topological-leray-spectral-sequence",
+  "worker": "stage1",
+  "summary": "Split the topological Leray spectral sequence into the sectionwise left-exact setup, injective preservation by direct image, application of the abstract Grothendieck spectral sequence, and the explicit double-complex convergence data. Added one statement-only child for injective pushforward after searching the DAG, blueprint, Lean source, and Mathlib.",
+  "blueprint": "Realizes the ancestor proof clause that Cohomology Lemma 02UV applies Lemma 01F4 after higher direct images vanish: the item supplies the underlying Leray spectral sequence and its edge map.",
+  "tool_uses": [
+   {
+    "node": "lemma-weil-pbc-leray-acyclicity",
+    "why": "Its statement supplies the generic fact that injective objects are acyclic for a left exact additive functor, needed after f_* preserves injectives."
+   },
+   {
+    "node": "prop-pur-kinjective-resolutions-exist",
+    "why": "Its first clause supplies the generic fact that sheaves of modules on a small site form a Grothendieck abelian category, needed for the composable-pair hypothesis of thm-sp-grothendieck."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lemma-weil-pbc-leray-acyclicity",
+  "prop-pur-kinjective-resolutions-exist",
+  "lemma-weil-pbc-leray-acyclicity",
+  "prop-pur-kinjective-resolutions-exist"
+ ],
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-tls",
+  "group": "C1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-tls (reviewer sub-agent of L); spot-checked: Source: Stacks cohomology.tex Lemma 01F2 (cohomology-lemma-Leray), proved there as the Grothendieck spectral sequence of Gamma(Y,-) o f_* (Derived 015N); the item statement (unchanged) agrees with it hypothesis by hypothesis (continuous map, abelian sheaf, E_2=H^a(X,R^bf_*F), abutment H^{a+b}(Z,F)) and adds the page/filtration/functoriality/edge clauses, which step 4 takes from thm-sp-grothendieck (incl. its construction clause, L 16:11) and thm-sp-double-complex-spectral-sequences (image filtration F^0=H^n, F^{n+1}H^n=0, stabilization for r>max(p,q+1), functoriality). Step 1: def-sc-topological-abelian-cohomology (Ab of a space, enough injectives, H^p=R^pGamma) and def-sp-left-exact-additive; f_* left exact sectionwise, elementary. Step 2: new child (true: f^{-1} exact left adjoint, so f_* preserves injectives; Stacks route uses 01EX instead, equivalent for the purpose) and lemma-weil-pbc-leray-acyclicity clause 1 (accepted as generic tool). Step 3: Gamma(X,f_*G)=Gamma(Z,G), composite derived functors are H^n(Z,-). Small cases f=id, F=0, n=0 edge map checked. No Mathlib/slopmaster2 match (grep of project Lean for Leray/pushforward injective: only scheme Cech Leray). FIX more, RETURN less: (1) dag/nodes/sec-curve-estimates/lem-sc-topological-leray-spectral-sequence.json: proof[1]: C4, thm-sp-grothendieck needs a composable pair [def-sp-composite-acyclicity] of Grothendieck abelian categories, which no cited node stated; added the sentence that Ab(Z), Ab(X) are Grothendieck abelian by the first clause of prop-pur-kinjective-resolutions-exist (Mod of the constant sheaf Z on the site of opens) and cited def-sp-composite-acyclicity, def-sp-acyclic; prop-pur-kinjective-resolutions-exist declared as tool use (generic). (2) same file proof[3]: named the construction clause of thm-sp-grothendieck explicitly and cited def-sp-spectral-sequence for d_r o d_r=0 and E_{r+1}=H(E_r); proof_deps updated. (3) dag/nodes/sec-curve-estimates/lem-sc-topological-pushforward-injective.json: statement/stmt_deps: B3, f^{-1} on abelian sheaves now cites def-weil-pbc-topological-inverse-image (which defines it and its adjunction with f_*). Start Sat Oct 10 04:35:08 PM UTC 2026, end Sat Oct 10 04:36:42 PM UTC 2026.; 2 file(s) fixed by the reviewer"
  }
 }
