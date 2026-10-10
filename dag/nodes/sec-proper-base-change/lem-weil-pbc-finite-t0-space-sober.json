@@ -1,0 +1,90 @@
+{
+ "id": "lem-weil-pbc-finite-t0-space-sober",
+ "kind": "statement",
+ "title": "A finite T0 space is sober",
+ "statement": "Let $Y$ be a topological space whose underlying set is finite and which is $T_0$: for any two distinct points $y\\ne y'$ of $Y$ there is an open subset of $Y$ containing exactly one of them. Then $Y$ is sober: for every irreducible closed subset $Z\\subseteq Y$ [def-weil-irreducible-components] there is exactly one point $\\eta\\in Z$ whose closure $\\overline{\\{\\eta\\}}$ in $Y$ equals $Z$.",
+ "source": {
+  "document": "literature/stacks-project/topology.tex",
+  "place": "Topology, the claim inside the proof of Lemma Tag 09XX (label lemma-spectral-inverse-limit-finite-sober-spaces, line 4704) that the images X_J (finite subspaces of a finite product of two-point spaces) are finite sober spaces, which Stacks asserts without argument; sober = quasi-sober and Kolmogorov as in the paragraph after Definition label definition-generic-point (line 972, paragraph at line 989)"
+ },
+ "stmt_deps": [
+  "def-weil-irreducible-components"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "a finite T0 topological space is quasi-sober",
+   "results": "QuasiSober, QuasiSober.mk, quasiSober_iff, R1Space.quasiSober, TopologicalSpace.IsOpenCover.quasiSober_iff_forall, irreducibleSetEquivPoints (Mathlib.Topology.Sober), SpectralSpace.toQuasiSober (Mathlib.Topology.Spectral.Basic): no finite-space instance",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Noetherian topological space is quasi-sober, irreducible closed set is closure of a point",
+   "results": "QuasiSober, QuasiSober.sober, quasiSober_iff, AlgebraicGeometry.instQuasiSoberCarrierCarrierCommRingCat, TopologicalSpace.NoetherianSpace: no Noetherian or finite instance",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "every irreducible closed subset of a finite topological space has a generic point",
+   "results": "genericPoints.finite (Mathlib.Topology.Sober: finitely many components give finitely many generic points), quasiSober_iff, QuasiSober.sober, SpectralSpace.toQuasiSober, JacobsonSpace: other statements",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "a finite T0 topological space is sober (quasi-sober): irreducible closed subsets have generic points",
+   "results": "genericPoints.finite, SpectralSpace.toT0Space, SpectralSpace.toQuasiSober, genericPoints_eq_singleton, QuasiSober (Mathlib.Topology.Sober, Mathlib.Topology.Spectral.Basic): other statements",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "[Finite ?α] → QuasiSober ?α",
+   "results": "none",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "local_search",
+   "query": "quasiSober_of (project ~/weil-conjectures-slopmaster2; index unavailable, so not a proof of absence)",
+   "results": "quasiSober_of_open_cover (Mathlib/Topology/Sober.lean) only",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rn 'instance.*QuasiSober|theorem.*quasiSober|lemma.*quasiSober' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib; grep -n 'Finite|finite' Mathlib/Topology/Sober.lean Mathlib/Topology/NoetherianSpace.lean; grep -n isIrreducible_iff_sUnion_isClosed Mathlib/Topology/Irreducible.lean",
+   "results": "QuasiSober instances only for PrimeSpectrum, zeroLocus, schemes, R1 spaces, closed/open embeddings and open covers (Sober.lean:182,192,215,232,237,247); no instance for Finite or NoetherianSpace (Finite.to_noetherianSpace, NoetherianSpace.lean:149, gives Noetherian only); the ingredients isIrreducible_iff_sUnion_isClosed (Irreducible.lean:312, read: an irreducible set covered by a finite family of closed sets lies in one of them) and IsGenericPoint.eq (Sober.lean:79, read: generic points are unique in a T0 space)",
+   "date": "2026-10-10",
+   "verdict": "no match; candidate below"
+  }
+ ],
+ "mathlib_match": null,
+ "mathlib_candidate": "Existence: for Z irreducible closed in the finite space Y, apply isIrreducible_iff_sUnion_isClosed (Mathlib/Topology/Irreducible.lean:312) to the finite family of closures closure {z}, z in Z, which covers Z; Z lies in some closure {z} with z in Z, hence closure {z} = Z (Z closed), i.e. IsGenericPoint z Z, so QuasiSober Y (quasiSober_iff, Mathlib/Topology/Sober.lean). Uniqueness: IsGenericPoint.eq (Mathlib/Topology/Sober.lean:79) under T0Space Y. A few lines of Lean, not one declaration, so the node is unsplit (point B8).",
+ "status": "unsplit",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-spectral-directed-limit-finite-sober",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1"
+}

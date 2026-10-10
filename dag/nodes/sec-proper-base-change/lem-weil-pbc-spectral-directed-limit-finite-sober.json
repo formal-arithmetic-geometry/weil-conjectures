@@ -2,17 +2,84 @@
  "id": "lem-weil-pbc-spectral-directed-limit-finite-sober",
  "kind": "statement",
  "title": "A spectral space is a directed inverse limit of finite sober spaces",
- "statement": "Let $X$ be a spectral space [def-weil-spectral-space]. Then there are a directed set $I$ (nonempty, any two elements have a common upper bound), finite topological spaces $X_i$ ($i\\in I$) which are sober (every irreducible closed subset has a unique generic point), continuous maps $f_{ii'}:X_{i'}\\to X_i$ for $i\\le i'$ with $f_{ii}=\\mathrm{id}$ and $f_{ii'}\\circ f_{i'i''}=f_{ii''}$ for $i\\le i'\\le i''$, and continuous maps $p_i:X\\to X_i$ with $f_{ii'}\\circ p_{i'}=p_i$ for $i\\le i'$, such that $(X,(p_i)_i)$ is a limit of the system $(X_i,f_{ii'})$ in the category of topological spaces: the map $x\\mapsto(p_i(x))_i$ is a bijection of $X$ onto $\\{(x_i)\\in\\prod_iX_i: f_{ii'}(x_{i'})=x_i\\text{ for }i\\le i'\\}$, and the topology of $X$ is the coarsest topology for which all $p_i$ are continuous. (This is the 'only if' half of Stacks 09XX; the converse is Topology Lemma 09XV.)",
+ "statement": "Let $X$ be a spectral space [def-weil-spectral-space]. Then there are a directed set $I$ (nonempty, any two elements have a common upper bound), finite topological spaces $X_i$ ($i\\in I$) which are sober (every irreducible closed subset $Z\\subseteq X_i$ [def-weil-irreducible-components] has exactly one point whose closure in $X_i$ is $Z$), continuous maps $f_{ii'}:X_{i'}\\to X_i$ for $i\\le i'$ with $f_{ii}=\\mathrm{id}$ and $f_{ii'}\\circ f_{i'i''}=f_{ii''}$ for $i\\le i'\\le i''$, and continuous maps $p_i:X\\to X_i$ with $f_{ii'}\\circ p_{i'}=p_i$ for $i\\le i'$, such that $(X,(p_i)_i)$ is a limit of the system $(X_i,f_{ii'})$ in the category of topological spaces: the map $x\\mapsto(p_i(x))_i$ is a bijection of $X$ onto $\\{(x_i)\\in\\prod_iX_i: f_{ii'}(x_{i'})=x_i\\text{ for }i\\le i'\\}$, and the topology of $X$ is the coarsest topology for which all $p_i$ are continuous.",
  "source": {
   "document": "literature/stacks-project/topology.tex",
   "place": "Topology, Lemma Tag 09XX (label lemma-spectral-inverse-limit-finite-sober-spaces, line 4704), direction 'spectral implies limit', with its proof (via Lemma Tag 09XW (lemma-spectral-closed-in-product-two-point-space), embedding X into a product of two-point Sierpinski spaces, and the images X_J in the finite subproducts; 'detail omitted' twice in Stacks)"
  },
  "stmt_deps": [
-  "def-weil-spectral-space"
+  "def-weil-spectral-space",
+  "def-weil-irreducible-components"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "*Step 1 (the system).* Let $W=\\{0,1\\}$ with the topology whose opens are $\\emptyset$, $\\{1\\}$, $W$ (so $0$ is a specialization of $1$). Let $\\mathcal Q$ be the set of quasi-compact open subsets of $X$, and let $I$ be the set of finite subsets $J\\subseteq\\mathcal Q$, ordered by inclusion; $I$ is nonempty ($\\emptyset\\in I$) and directed ($J\\cup J'$ is an upper bound of $J,J'$). For $U\\in\\mathcal Q$ let $\\chi_U:X\\to W$ be $1$ on $U$ and $0$ on $X\\setminus U$; it is continuous, the preimages of $\\emptyset,\\{1\\},W$ being $\\emptyset,U,X$. For $J\\in I$ give $W^J=\\prod_{U\\in J}W$ the product topology, let $f_J=(\\chi_U)_{U\\in J}:X\\to W^J$ (continuous, its coordinates being continuous), let $X_J=f_J(X)\\subseteq W^J$ with the induced topology and let $p_J:X\\to X_J$ be $f_J$ with restricted target (continuous). For $J\\subseteq J'$ the coordinate projection $\\pi_{JJ'}:W^{J'}\\to W^J$ is continuous and $\\pi_{JJ'}\\circ f_{J'}=f_J$, so $\\pi_{JJ'}$ maps $X_{J'}=f_{J'}(X)$ onto $f_J(X)=X_J$; let $f_{JJ'}:X_{J'}\\to X_J$ be its restriction (continuous). Then $f_{JJ}=\\mathrm{id}$, $f_{JJ'}\\circ f_{J'J''}=f_{JJ''}$ for $J\\subseteq J'\\subseteq J''$ (composites of coordinate projections), and $f_{JJ'}\\circ p_{J'}=p_J$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/topology.tex",
+    "place": "Topology, proof of Lemma Tag 09XX (label lemma-spectral-inverse-limit-finite-sober-spaces, line 4704) with Lemma Tag 09XW (label lemma-spectral-closed-in-product-two-point-space, line 4660): the space W, the maps f_U for quasi-compact opens U, the finite subproducts over finite J and the images X_J"
+   }
+  },
+  {
+   "text": "*Step 2 (each $X_J$ is finite and sober).* $X_J\\subseteq W^J$ has at most $2^{|J|}$ points. $W^J$ is $T_0$: if $z\\ne z'$ in $W^J$, they differ in some coordinate $U\\in J$, say $z_U=1$, $z'_U=0$ (or the reverse), and the open $\\{w\\in W^J:w_U=1\\}=\\pi_U^{-1}(\\{1\\})$ contains $z$ and not $z'$. Hence the subspace $X_J$ is $T_0$ (intersect these opens with $X_J$). By [lem-weil-pbc-finite-t0-space-sober] the finite $T_0$ space $X_J$ is sober: every irreducible closed subset of $X_J$ has exactly one point whose closure is that subset.",
+   "uses": [
+    "lem-weil-pbc-finite-t0-space-sober"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/topology.tex",
+    "place": "Topology, proof of Lemma Tag 09XX (label lemma-spectral-inverse-limit-finite-sober-spaces, line 4704): 'For each J, let X_J be the image of X'; the statement that X_J is a finite sober space is asserted there without argument (the lemma's statement)"
+   }
+  },
+  {
+   "text": "*Step 3 (the map $x\\mapsto(p_J(x))_J$ is injective).* Let $x\\ne x'$ in $X$. Then some open subset of $X$ contains exactly one of $x,x'$: otherwise $x\\in\\overline{\\{x'\\}}$ and $x'\\in\\overline{\\{x\\}}$, so $\\overline{\\{x\\}}=\\overline{\\{x'\\}}$; this closed set is irreducible [def-weil-irreducible-components] (if $\\overline{\\{x\\}}=Z_1\\cup Z_2$ with $Z_1,Z_2$ closed, the one containing $x$ contains $\\overline{\\{x\\}}$), and it would have the two distinct points $x,x'$ with closure equal to it, contrary to the sobriety of $X$ [def-weil-spectral-space]. Say $V$ is open with $x\\in V$, $x'\\notin V$ (the other case is symmetric). As the quasi-compact opens form a basis of $X$ [def-weil-spectral-space], there is $U\\in\\mathcal Q$ with $x\\in U\\subseteq V$, so $x'\\notin U$ and $p_{\\{U\\}}(x)=\\chi_U(x)=1\\ne0=\\chi_U(x')=p_{\\{U\\}}(x')$.",
+   "uses": [
+    "def-weil-spectral-space",
+    "def-weil-irreducible-components"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/topology.tex",
+    "place": "Topology, proof of Lemma Tag 09XW (label lemma-spectral-closed-in-product-two-point-space, line 4660): 'If x', x in X are distinct, then since X is sober ... there exists a quasi-compact open U with f_U(x') != f_U(x). Thus f is injective'"
+   }
+  },
+  {
+   "text": "*Step 4 (every compatible family comes from a point of $X$; first omitted detail).* Let $(y_J)_{J\\in I}$ with $y_J\\in X_J$ and $f_{JJ'}(y_{J'})=y_J$ for $J\\subseteq J'$. For $U\\in\\mathcal Q$ let $\\varepsilon_U\\in W$ be the unique coordinate of $y_{\\{U\\}}\\in W^{\\{U\\}}$. For $J\\in I$ and $U\\in J$ we have $\\{U\\}\\subseteq J$, and $f_{\\{U\\}J}$ is the projection to the coordinate $U$, so the $U$-coordinate of $y_J$ is $\\varepsilon_U$: $y_J=(\\varepsilon_U)_{U\\in J}$. Put $C_U=U$ if $\\varepsilon_U=1$ and $C_U=X\\setminus U$ if $\\varepsilon_U=0$. In the constructible topology of $X$ [def-weil-pbc-constructible-topology] both $U$ and $X\\setminus U$ are subbasic open sets, so $C_U$ is closed and its complement $X\\setminus C_U$ (which is $X\\setminus U$ or $U$) is open. For every $J\\in I$, as $y_J\\in X_J=f_J(X)$ there is $x\\in X$ with $\\chi_U(x)=\\varepsilon_U$ for all $U\\in J$, i.e. $x\\in\\bigcap_{U\\in J}C_U$. Suppose $\\bigcap_{U\\in\\mathcal Q}C_U=\\emptyset$. Then the sets $X\\setminus C_U$, $U\\in\\mathcal Q$, cover $X$ and are open in the constructible topology; this topology is quasi-compact because $X$ is spectral [lem-weil-pbc-spectral-constructible-topology-quasi-compact], so finitely many of them, $U\\in J$ for some $J\\in I$, already cover $X$, i.e. $\\bigcap_{U\\in J}C_U=\\emptyset$, a contradiction. Hence there is $x\\in\\bigcap_{U\\in\\mathcal Q}C_U$, i.e. $\\chi_U(x)=\\varepsilon_U$ for every $U\\in\\mathcal Q$, and then $p_J(x)=(\\varepsilon_U)_{U\\in J}=y_J$ for every $J$. (This is the quasi-compactness of $X$ in its constructible topology, on which the closedness of the image of $X$ in the product used by the source rests.)",
+   "uses": [
+    "def-weil-pbc-constructible-topology",
+    "lem-weil-pbc-spectral-constructible-topology-quasi-compact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/topology.tex",
+    "place": "Topology, proof of Lemma Tag 09XX (label lemma-spectral-inverse-limit-finite-sober-spaces, line 4704): 'Then we see that X = lim X_J as sets because X is closed in the product with the constructible topology (detail omitted)'; the closedness comes from Lemma Tag 09XW via Lemma Tag 0A2S (label lemma-fibres-spectral-map-quasi-compact, line 4372), whose proof is the quasi-compactness of the constructible topology, Lemma Tag 0901 (label lemma-constructible-hausdorff-quasi-compact)"
+   }
+  },
+  {
+   "text": "*Step 5 (the topology; second omitted detail; conclusion).* By Steps 3 and 4 the map $x\\mapsto(p_J(x))_J$ is a bijection of $X$ onto $\\{(x_J)\\in\\prod_JX_J:f_{JJ'}(x_{J'})=x_J\\text{ for }J\\subseteq J'\\}$. Let $\\mathcal T'$ be the coarsest topology on $X$ for which all $p_J$ are continuous. Each $p_J$ is continuous for the topology of $X$ (Step 1), so $\\mathcal T'$ is contained in it. Conversely, for $U\\in\\mathcal Q$ the set $\\{z\\in X_{\\{U\\}}:z_U=1\\}$ is open in $X_{\\{U\\}}$ (the trace of the open $\\pi_U^{-1}(\\{1\\})$ of $W^{\\{U\\}}$), and its preimage under $p_{\\{U\\}}$ is $\\chi_U^{-1}(\\{1\\})=U$; so every $U\\in\\mathcal Q$ is in $\\mathcal T'$. Every open subset of $X$ is a union of members of $\\mathcal Q$, these forming a basis [def-weil-spectral-space], hence lies in $\\mathcal T'$. So the topology of $X$ is $\\mathcal T'$. With Steps 1 and 2 ($I$ directed, $X_J$ finite sober, $f_{JJ'}$, $p_J$ continuous and compatible) this is the statement, with $I$ the set of finite subsets of $\\mathcal Q$.",
+   "uses": [
+    "def-weil-spectral-space"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/topology.tex",
+    "place": "Topology, proof of Lemma Tag 09XX (label lemma-spectral-inverse-limit-finite-sober-spaces, line 4704): 'A formal argument (omitted) on limits shows that X = lim X_J as topological spaces'"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-finite-t0-space-sober",
+  "def-weil-spectral-space",
+  "def-weil-irreducible-components",
+  "def-weil-pbc-constructible-topology",
+  "lem-weil-pbc-spectral-constructible-topology-quasi-compact"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/topology.tex",
+  "place": "Topology, Lemma Tag 09XX (label lemma-spectral-inverse-limit-finite-sober-spaces, line 4704), direction 'spectral implies limit', and its proof, with the setup of the proof of Lemma Tag 09XW (line 4660); the two omitted details (X = lim X_J as sets and as spaces) and the sobriety of X_J (asserted, not proved) are written out in Steps 2, 4, 5"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -34,10 +101,24 @@
    "results": "only Topology/Spectral/ConstructibleTopology.lean (finite intersections of compact sets); no presentation of a spectral space as a limit of finite spaces",
    "date": "2026-10-10",
    "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "spectral space embeds into a product of Sierpinski spaces indexed by compact open sets",
+   "results": "SpectralSpace, SpectralSpace.mk, SpectralSpace.casesOn (Mathlib.Topology.Spectral.Basic), PrespectralSpace.of_isTopologicalBasis(') (Mathlib.Topology.Spectral.Prespectral), TopologicalSpace.productOfMemOpens, TopologicalSpace.productOfMemOpens_isEmbedding (Mathlib.Topology.ContinuousMap.T0Sierpinski: a T0 space embeds in Opens X -> Prop, all opens, no closedness, no limit of finite spaces)",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rln 'SpectralSpace|PrespectralSpace' Mathlib; grep -rln 'sierpinski|Sierpinski' Mathlib/Topology; sed -n 1,80p Mathlib/Topology/ContinuousMap/T0Sierpinski.lean",
+   "results": "Spectral spaces in RingTheory/Spectrum/Prime/Topology, AlgebraicGeometry/Properties, Topology/Constructible, Topology/Sets/CompactOpenCovered, Topology/LocallyFinsupp/Pushforward, Topology/Spectral/{Basic,ConstructibleTopology,Prespectral,Hom}; Sierpinski space in Topology/Order, Topology/Order/LowerUpperTopology, Topology/ContinuousMap/T0Sierpinski (productOfMemOpens_isEmbedding, line ~68); no presentation of a spectral space as a limit of finite sober spaces",
+   "date": "2026-10-10",
+   "verdict": "no match"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "worker",
@@ -57,5 +138,17 @@
   }
  },
  "chapter": "sec-proper-base-change",
- "unit": "sk-thm-p1"
+ "unit": "sk-thm-p1",
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "lem-weil-pbc-spectral-directed-limit-finite-sober",
+  "worker": "stage1",
+  "summary": "Split along the proof of Stacks 09XX (direction spectral => limit) with the setup of 09XW, in 5 steps: the system X_J = image of X in the finite products of the two-point space W over finite sets J of quasi-compact opens, directed by inclusion (elementary); X_J finite and T0, hence sober by a new unsplit node lem-weil-pbc-finite-t0-space-sober (Stacks asserts the sobriety without argument); injectivity from sobriety and the basis of quasi-compact opens (as in 09XW, elementary); surjectivity onto compatible families, Stacks' first omitted detail, by the quasi-compactness of the constructible topology (existing Mathlib leaf lem-weil-pbc-spectral-constructible-topology-quasi-compact, i.e. 0901, on which 09XW's closedness of the image via 0A2S rests), so no node for 09XW itself is needed; the topology is the coarsest making all p_J continuous, Stacks' second omitted detail (elementary). Statement: removed the closing sentence referring to tags 09XX/09XV (point B7) and cited def-weil-irreducible-components for 'irreducible'; otherwise unchanged. Lean state none; three kinds of Mathlib search recorded, no match."
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "result": "accepted",
+  "note": "5 steps following Topology 09XX with the setup of 09XW: the system of finite images X_J in Sierpinski products indexed by finite sets of quasi-compact opens; X_J is T_0 hence sober by a new unsplit node (finite T_0 spaces are sober, the claim 09XX asserts without proof); injectivity from sobriety and the basis of quasi-compact opens; surjectivity onto compatible families from the quasi-compactness of the constructible topology (0901 leaf) in place of 09XW, which L accepts (the closedness of 09XW rests on it); the coarsest topology. Statement: the tag sentence removed (B7), sober spelled out."
+ }
 }
