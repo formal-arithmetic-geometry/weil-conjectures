@@ -2,7 +2,7 @@
 
 921 items; claim with `tools/claim.py next <group> [--stage N]`.
 
-## Stage 1: nodes to split (618)
+## Stage 1: nodes to split (617)
 
 | node | distance to a target | Lean state on the done branch |
 |---|---|---|
@@ -26,7 +26,6 @@
 | `lem-weil-pbc-smooth-localization-conormal-split` | 1012 | none |
 | `lem-weil-pbc-smooth-over-field-dimension-differentials` | 1012 | none |
 | `lem-weil-pbc-nagata-universally-japanese` | 1013 | none |
-| `lem-weil-pbc-p-basis-exists` | 1013 | none |
 | `lem-weil-pbc-popescu-delocalize-weak-localization-smooth` | 1013 | none |
 | `lem-weil-pbc-power-series-complete-over-complete-base` | 1013 | none |
 | `lem-weil-pbc-power-series-quotient-variables` | 1013 | none |
@@ -625,7 +624,7 @@
 | `def-exc-jacobian-presentation` | - | none |
 | `def-nagata-rees-algebra` | - | none |
 
-## Stage 2: nodes to state (303)
+## Stage 2: nodes to state (304)
 
 | node | distance to Mathlib | kind |
 |---|---|---|
@@ -827,6 +826,7 @@
 | `lem-weil-pbc-noether-normalization-over-domain` | 1 | state |
 | `lem-weil-pbc-nonvanishing-section-trivializes` | 1 | state |
 | `lem-weil-pbc-ogoma` | 1 | state |
+| `lem-weil-pbc-p-basis-exists` | 1 | state |
 | `lem-weil-pbc-polynomial-ideal-coefficients-monomial` | 1 | state |
 | `lem-weil-pbc-polynomial-ring-origin-regular-local` | 1 | state |
 | `lem-weil-pbc-popescu-artinian-flat-subalgebras` | 1 | state |
@@ -933,7 +933,7 @@
 | `lem-weil-pbc-p1-field-dimension-one` | 4 | state |
 | `lem-weil-pbc-projective-space-zero-isomorphism` | 4 | state |
 
-Not open yet: 630 nodes that wait for stage 1, 589 nodes that wait for a statement dependency.
+Not open yet: 629 nodes that wait for stage 1, 589 nodes that wait for a statement dependency.
 
 ## Stage 3: modules to prove (0)
 
