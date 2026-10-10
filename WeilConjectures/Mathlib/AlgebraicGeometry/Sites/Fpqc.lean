@@ -6,8 +6,10 @@ Authors: Claude
 module
 
 public import Mathlib.AlgebraicGeometry.Morphisms.FlatDescent
+public import Mathlib.AlgebraicGeometry.Sites.Etale
 public import Mathlib.AlgebraicGeometry.Sites.Fpqc
 public import Mathlib.CategoryTheory.Sites.Over
+public import WeilConjectures.Mathlib.AlgebraicGeometry.GammaSpecAdjunction
 
 /-!
 # Points of fppf coverings
@@ -33,13 +35,20 @@ A flat, surjective, quasi-compact morphism over `S` generates an fpqc covering s
 A presheaf on `Over S` whose restriction along `Over.map g` is an fpqc sheaf satisfies the sheaf
 condition for such morphisms between objects over `S'`
 (`AlgebraicGeometry.Scheme.isSheafFor_singleton_of_isSheaf_overMap`).
+
+# The structure sheaf is a sheaf for subcanonical topologies
+
+The étale topology is coarser than the fppf topology, hence subcanonical. For every
+subcanonical topology on `Scheme`, for instance the fpqc, fppf and étale topologies, the global
+sections functor `Γ` is a sheaf (`AlgebraicGeometry.Scheme.isSheaf_Γ`): for a ring `R`, the
+presheaf `U ↦ (R ⟶ Γ(U, 𝒪_U))` is represented by `Spec R`.
 -/
 
 @[expose] public section
 
 universe u
 
-open CategoryTheory Limits
+open CategoryTheory Limits Opposite
 
 namespace AlgebraicGeometry.Scheme
 
@@ -243,5 +252,20 @@ lemma isSheafFor_singleton_of_isSheaf_overMap {S S' : Scheme.{u}} (g : S' ⟶ S)
     rw [hcomp, h₁, ← hcomp, hy', hcomp, Iso.inv_hom_id, op_id, Functor.map_id_apply]
   · have := huniq (G.map eY.hom.op z) (by rw [hcomp, hsq, ← hcomp, hz])
     rw [← this, hcomp, Iso.inv_hom_id, op_id, Functor.map_id_apply]
+
+/-- Étale coverings are fppf coverings. -/
+lemma etaleTopology_le_fppfTopology : etaleTopology.{u} ≤ fppfTopology :=
+  Precoverage.toGrothendieck_mono
+    (precoverage_mono fun _ _ _ _ ↦ ⟨inferInstance, inferInstance⟩)
+
+instance : etaleTopology.{u}.Subcanonical :=
+  .of_le etaleTopology_le_fppfTopology
+
+/-- The global sections functor `Γ` is a sheaf for every subcanonical topology on `Scheme`:
+for a ring `R`, the presheaf `U ↦ (R ⟶ Γ(U, 𝒪_U))` is represented by `Spec R`. -/
+lemma isSheaf_Γ (J : GrothendieckTopology Scheme.{u}) [J.Subcanonical] :
+    Presheaf.IsSheaf J Scheme.Γ := fun R ↦
+  have := (ΓSpec.representableBy R).isRepresentable
+  GrothendieckTopology.Subcanonical.isSheaf_of_isRepresentable _
 
 end AlgebraicGeometry.Scheme
