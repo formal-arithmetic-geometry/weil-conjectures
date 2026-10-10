@@ -1,8 +1,8 @@
 # Work queue
 
-897 items; claim with `tools/claim.py next <group> [--stage N]`.
+894 items; claim with `tools/claim.py next <group> [--stage N]`.
 
-## Stage 1: nodes to split (642)
+## Stage 1: nodes to split (638)
 
 | node | distance to a target | Lean state on the done branch |
 |---|---|---|
@@ -22,10 +22,6 @@
 | `lem-weil-pbc-flat-variant-local-criterion` | 1012 | none |
 | `lem-weil-pbc-formal-systems-graded-vanishing` | 1012 | none |
 | `lem-weil-pbc-formal-systems-kernel-rees-finite` | 1012 | none |
-| `lem-weil-pbc-sheaf-hom-finite-presentation-kernel` | 1012 | none |
-| `lem-weil-pbc-site-covering-morphisms-same-h0-map` | 1012 | none |
-| `lem-weil-pbc-site-plus-injective-separated` | 1012 | none |
-| `lem-weil-pbc-smooth-algebra-filtered-colimit-descent` | 1012 | none |
 | `lem-weil-pbc-smooth-at-generic-point-over-field` | 1012 | none |
 | `lem-weil-pbc-smooth-at-prime-free-conormal-basis` | 1012 | none |
 | `lem-weil-pbc-smooth-fibre-regular-local` | 1012 | none |
@@ -649,7 +645,7 @@
 | `lem-pc-linear-pair-graded-finite` | - | none |
 | `def-exc-jacobian-presentation` | - | none |
 
-## Stage 2: nodes to state (255)
+## Stage 2: nodes to state (256)
 
 | node | distance to Mathlib | kind |
 |---|---|---|
@@ -866,6 +862,7 @@
 | `lem-weil-pbc-sheaf-tensor-closed` | 1 | state |
 | `lem-weil-pbc-sheaves-directed-colimit-sections` | 1 | state |
 | `lem-weil-pbc-skyscraper-constant-on-point-closure` | 1 | state |
+| `lem-weil-pbc-smooth-algebra-filtered-colimit-descent` | 1 | state |
 | `lem-weil-pbc-smooth-conormal-sequence-exact` | 1 | state |
 | `lem-weil-pbc-smooth-over-normal-ring-normal` | 1 | state |
 | `lem-weil-pbc-spec-field-point-residue-field` | 1 | state |
@@ -909,7 +906,7 @@
 | `lem-weil-pbc-p1-field-dimension-one` | 4 | state |
 | `lem-weil-pbc-projective-space-zero-isomorphism` | 4 | state |
 
-Not open yet: 654 nodes that wait for stage 1, 543 nodes that wait for a statement dependency.
+Not open yet: 650 nodes that wait for stage 1, 546 nodes that wait for a statement dependency.
 
 ## Stage 3: modules to prove (0)
 
