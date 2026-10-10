@@ -1,0 +1,92 @@
+{
+ "id": "lem-weil-pbc-fpqc-descend-finite",
+ "kind": "statement",
+ "title": "Being finite descends along fpqc coverings (Stacks 02LA)",
+ "statement": "Let $f:X\\to S$ be a morphism of schemes [def-pc-scheme] and let $\\{g_i:S_i\\to S\\}_{i\\in I}$ be an fpqc covering of $S$ [def-weil-pbc-fpqc-covering]. For $i\\in I$ let $f_i:X\\times_SS_i\\to S_i$ be the base change of $f$ along $g_i$, the second projection of the fibre product [def-pc-fibre-product]. If $f_i$ is finite [def-weil-finite-integral-morphism] for every $i\\in I$, then $f$ is finite.",
+ "source": {
+  "document": "literature/stacks-project/descent.tex",
+  "place": "Descent, Lemma Tag 02LA (lemma-descending-property-finite, line 6102: 'The property P(f) = \"f is finite\" is fpqc local on the base'), the direction 'each base change $X\\times_SS_i\\to S_i$ has the property $\\Rightarrow$ $f$ has it' of 'fpqc local on the base', Descent, Definition Tag 02KO (definition-property-morphisms-local, line 5310)"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-pbc-fpqc-covering",
+  "def-pc-fibre-product",
+  "def-weil-finite-integral-morphism"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "finite morphism of schemes descends along faithfully flat quasi-compact base change",
+   "results": "AlgebraicGeometry.IsFinite, IsFinite.instIsStableUnderBaseChangeScheme (Morphisms.Finite), IsZariskiLocalAtTarget.descendsAlong (Morphisms.Descent), descendsAlong_universallyClosed_surjective_inf_flat_inf_quasicompact (Morphisms.FlatDescent), IsFinite.toIsAffineHom; no descent of IsFinite",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "finite morphism of schemes is fpqc local on the target: if the base change along a faithfully flat quasi-compact morphism is finite then the morphism is finite",
+   "results": "instLocallyQuasiFiniteOfIsFinite, LocallyQuasiFinite.of_comp, the fppf-from-fpqc descent instance (Morphisms.FlatDescent); no descent of IsFinite",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.MorphismProperty.DescendsAlong @AlgebraicGeometry.IsFinite",
+   "results": "none",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.MorphismProperty.DescendsAlong @AlgebraicGeometry.IsAffineHom",
+   "results": "rate-limited; replaced by the grep below, which finds no such instance",
+   "date": "2026-10-10",
+   "verdict": "no match (by grep)"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rn 'DescendsAlong' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicGeometry; grep -rn 'codescendsAlong' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/RingTheory",
+   "results": "Mathlib/RingTheory/Finiteness/Descent.lean:133 RingHom.Finite.codescendsAlong_faithfullyFlat (ring level); Mathlib/AlgebraicGeometry/Morphisms/Descent.lean:193 HasAffineProperty.descendsAlong_of_affineAnd, which needs an instance DescendsAlong @IsAffineHom P' that Mathlib does not have (the only mention is the hypothesis at Descent.lean:194); DescendsAlong instances only for Surjective, UniversallyClosed, UniversallyOpen, UniversallyInjective, isomorphisms, IsOpenImmersion (FlatDescent.lean:41-134) and LocallyOfFiniteType, LocallyOfFinitePresentation, Smooth, FormallyUnramified, Etale (LocalFlatDescent.lean:35-48); none for IsFinite; nothing for fpqc covering families (Sites/Fpqc.lean defines fpqcPrecoverage, :60, and has no descent lemma)",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "local_search",
+   "query": "IsFinite.descendsAlong (project ~/weil-conjectures-slopmaster2)",
+   "results": "AlgebraicGeometry.IsFinite.descendsAlong_surjective_inf_flat_inf_quasicompact in WeilConjectures/Mathlib/AlgebraicGeometry/Morphisms/FlatDescent.lean:101-108 (source repository, not Mathlib; sorry-free); index: unavailable",
+   "date": "2026-10-10",
+   "verdict": "not in Mathlib; the source repository (not Mathlib) has the sorry-free `AlgebraicGeometry.Scheme.of_isPullback_of_ofArrows_mem_fpqcTopology` (WeilConjectures/Mathlib/AlgebraicGeometry/Sites/Fpqc.lean:115-126, read with sed -n; s=false, ts=false in local/sorry_map_slopmaster2_full.jsonl) instantiated with P = IsFinite and this instance states the node for a covering family"
+  }
+ ],
+ "mathlib_match": null,
+ "mathlib_candidate": {
+  "declaration": "RingHom.Finite.codescendsAlong_faithfullyFlat, AlgebraicGeometry.HasAffineProperty.descendsAlong_of_affineAnd",
+  "file": "Mathlib/RingTheory/Finiteness/Descent.lean, Mathlib/AlgebraicGeometry/Morphisms/Descent.lean",
+  "line": "Finiteness/Descent.lean:133-138; Morphisms/Descent.lean:193-196 (read with sed -n)",
+  "how": "Mathlib has the ring-level descent of finiteness along faithfully flat maps and the general reduction for affineAnd-properties, but the latter needs DescendsAlong @IsAffineHom (absent: descent of affineness, Stacks 02L5) and gives descent along one surjective flat quasi-compact morphism, not along an fpqc covering family; not a leaf (point B8)."
+ },
+ "status": "unsplit",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-finite-locally-free-degree-etale-descent",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "reviewed": "Reviewed by L 2026-10-10 (statement): Descent 02LA, descent direction of 'fpqc local on the base' (02KO). Unsplit."
+}

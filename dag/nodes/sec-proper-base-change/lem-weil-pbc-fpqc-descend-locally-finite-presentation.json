@@ -1,0 +1,85 @@
+{
+ "id": "lem-weil-pbc-fpqc-descend-locally-finite-presentation",
+ "kind": "statement",
+ "title": "Being locally of finite presentation descends along fpqc coverings (Stacks 02KY)",
+ "statement": "Let $f:X\\to S$ be a morphism of schemes [def-pc-scheme] and let $\\{g_i:S_i\\to S\\}_{i\\in I}$ be an fpqc covering of $S$ [def-weil-pbc-fpqc-covering]. For $i\\in I$ let $f_i:X\\times_SS_i\\to S_i$ be the base change of $f$ along $g_i$, the second projection of the fibre product [def-pc-fibre-product]. If $f_i$ is locally of finite presentation [def-sbc-locally-finite-presentation] for every $i\\in I$, then $f$ is locally of finite presentation.",
+ "source": {
+  "document": "literature/stacks-project/descent.tex",
+  "place": "Descent, Lemma Tag 02KY (lemma-descending-property-locally-finite-presentation, line 5767, with its proof: Algebra, Lemma algebra-lemma-finite-presentation-descends for R -> R' faithfully flat), the direction 'each base change $X\\times_SS_i\\to S_i$ has the property $\\Rightarrow$ $f$ has it' of 'fpqc local on the base', Descent, Definition Tag 02KO (definition-property-morphisms-local, line 5310)"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-pbc-fpqc-covering",
+  "def-pc-fibre-product",
+  "def-sbc-locally-finite-presentation"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "locally of finite presentation descends along fpqc covering of schemes",
+   "results": "AlgebraicGeometry.LocallyOfFinitePresentation, IsZariskiLocalAtTarget.descendsAlong, IsZariskiLocalAtTarget.descendsAlong_inf_quasiCompact (Morphisms.Descent), LocallyOfFinitePresentation.mk, the instance DescendsAlong P (Surjective ⊓ Flat ⊓ LocallyOfFinitePresentation) (Morphisms.FlatDescent)",
+   "date": "2026-10-10",
+   "verdict": "generalization for a single morphism only"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "locally of finite presentation morphism of schemes descends along surjective flat quasi-compact morphism",
+   "results": "the fppf-from-fpqc descent instance (Morphisms.FlatDescent:178), Flat.surjective_descendsAlong_surjective_inf_flat_inf_quasicompact, descendsAlong_universallyOpen_..., descendsAlong_isomorphisms_..., descendsAlong_isOpenImmersion_... (Morphisms.FlatDescent)",
+   "date": "2026-10-10",
+   "verdict": "no match for a covering family"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.MorphismProperty.DescendsAlong @AlgebraicGeometry.LocallyOfFinitePresentation",
+   "results": "AlgebraicGeometry.instDescendsAlongSchemeLocallyOfFinitePresentationMinMorphismPropertySurjectiveFlatQuasiCompact (Mathlib.AlgebraicGeometry.Morphisms.LocalFlatDescent)",
+   "date": "2026-10-10",
+   "verdict": "descent along one surjective flat quasi-compact morphism"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rn 'DescendsAlong' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicGeometry/Morphisms/LocalFlatDescent.lean ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicGeometry/Sites/Fpqc.lean",
+   "results": "Mathlib/AlgebraicGeometry/Morphisms/LocalFlatDescent.lean:38-39 instance DescendsAlong @LocallyOfFinitePresentation (@Surjective ⊓ @Flat ⊓ @QuasiCompact) via RingHom.FinitePresentation.codescendsAlong_faithfullyFlat (RingTheory/Finiteness/Descent.lean:126); Sites/Fpqc.lean has no descent along covering families",
+   "date": "2026-10-10",
+   "verdict": "no match for a covering family (generalization along one morphism)"
+  },
+  {
+   "tool": "local_search",
+   "query": "Scheme.of_isPullback_of_ofArrows_mem_fpqcTopology (project ~/weil-conjectures-slopmaster2)",
+   "results": "AlgebraicGeometry.Scheme.of_isPullback_of_ofArrows_mem_fpqcTopology in WeilConjectures/Mathlib/AlgebraicGeometry/Sites/Fpqc.lean:115-126 (source repository, sorry-free); index: unavailable",
+   "date": "2026-10-10",
+   "verdict": "not in Mathlib; the source repository (not Mathlib) has the sorry-free `AlgebraicGeometry.Scheme.of_isPullback_of_ofArrows_mem_fpqcTopology` (WeilConjectures/Mathlib/AlgebraicGeometry/Sites/Fpqc.lean:115-126, read with sed -n; s=false, ts=false in local/sorry_map_slopmaster2_full.jsonl) instantiated with P = LocallyOfFinitePresentation and the Mathlib instance states the node for a covering family"
+  }
+ ],
+ "mathlib_match": null,
+ "mathlib_candidate": {
+  "declaration": "AlgebraicGeometry.instDescendsAlongSchemeLocallyOfFinitePresentationMinMorphismPropertySurjectiveFlatQuasiCompact",
+  "file": "Mathlib/AlgebraicGeometry/Morphisms/LocalFlatDescent.lean",
+  "line": "38-39 (read with sed -n)",
+  "how": "descent along a single surjective flat quasi-compact morphism; the node is stated for an fpqc covering family {S_i -> S}, and the reduction (Zariski-local on S, refine over an affine open by finitely many affines, take their disjoint union as one faithfully flat quasi-compact morphism) is not one line; not a leaf (point B8)."
+ },
+ "status": "unsplit",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-finite-locally-free-degree-etale-descent",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "reviewed": "Reviewed by L 2026-10-10 (statement): Descent 02KY, descent direction. Unsplit."
+}

@@ -952,3 +952,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 06:12 L: reviewed and accepted lem-weil-pbc-finite-t0-space-sober (3 elementary steps by agent; no new nodes).
 - 06:15 L: reviewed and accepted lem-weil-pbc-finite-surjective-affine-target-noetherian (8 steps; +01YM devissage, 01YO, 01YP nodes; three gaps of the 01YQ proof written out).
 - 06:15 L: reviewed and accepted lem-weil-pbc-field-char-p-nilpotent-lifting (3 steps; +vector-space-projective composed leaf 09FN; square-zero case via the h1 node and 031J).
+- 06:15 L: reviewed and accepted lem-weil-pbc-finite-locally-free-degree-etale-descent (5 steps; +fpqc-descend-finite/flat/locally-finite-presentation nodes 02LA/02L2/02KY).

@@ -1,0 +1,85 @@
+{
+ "id": "lem-weil-pbc-fpqc-descend-flat",
+ "kind": "statement",
+ "title": "Being flat descends along fpqc coverings (Stacks 02L2)",
+ "statement": "Let $f:X\\to S$ be a morphism of schemes [def-pc-scheme] and let $\\{g_i:S_i\\to S\\}_{i\\in I}$ be an fpqc covering of $S$ [def-weil-pbc-fpqc-covering]. For $i\\in I$ let $f_i:X\\times_SS_i\\to S_i$ be the base change of $f$ along $g_i$, the second projection of the fibre product [def-pc-fibre-product]. If $f_i$ is flat [def-weil-flat-morphism] for every $i\\in I$, then $f$ is flat.",
+ "source": {
+  "document": "literature/stacks-project/descent.tex",
+  "place": "Descent, Lemma Tag 02L2 (lemma-descending-property-flat, line 5833, with its proof: Algebra, Lemma algebra-lemma-flatness-descends for R -> R' faithfully flat), the direction 'each base change $X\\times_SS_i\\to S_i$ has the property $\\Rightarrow$ $f$ has it' of 'fpqc local on the base', Descent, Definition Tag 02KO (definition-property-morphisms-local, line 5310)"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-pbc-fpqc-covering",
+  "def-pc-fibre-product",
+  "def-weil-flat-morphism"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "flat morphism of schemes descends along surjective flat base change: if pullback is flat then the morphism is flat",
+   "results": "RingHom.Flat.isStableUnderBaseChange (RingTheory.RingHom.Flat), IsZariskiLocalAtTarget.descendsAlong (Morphisms.Descent), Module.Flat.isBaseChange, Flat.flat_of_affine_subset, Flat.isStableUnderBaseChange (Morphisms.Flat); no descent of Flat",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "flatness of a morphism of schemes descends along a faithfully flat base change (fpqc local on the base)",
+   "results": "Flat.isStableUnderBaseChange, Flat.instIsMultiplicativeScheme, Flat.instHasRingHomPropertyFlat, flat_and_surjective_SpecMap_iff (Morphisms.Flat); no descent",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.MorphismProperty.DescendsAlong @AlgebraicGeometry.Flat",
+   "results": "none",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rn 'DescendsAlong' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicGeometry; grep -rn 'of_flat_tensorProduct\\|codescendsAlong' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/RingTheory",
+   "results": "Mathlib/RingTheory/Flat/FaithfullyFlat/Basic.lean:588 Module.Flat.of_flat_tensorProduct (module level: M flat over R if S tensor M flat over S, S faithfully flat); no RingHom.Flat.codescendsAlong_faithfullyFlat and no DescendsAlong @Flat instance in Mathlib; Morphisms/FlatDescent.lean:163 HasRingHomProperty.descendsAlong_flat would give it from the missing ring-level CodescendsAlong",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "local_search",
+   "query": "Flat.descendsAlong; RingHom.Flat.codescendsAlong (project ~/weil-conjectures-slopmaster2)",
+   "results": "AlgebraicGeometry.Flat.descendsAlong_surjective_inf_flat_inf_quasicompact (WeilConjectures/Mathlib/AlgebraicGeometry/Morphisms/FlatDescent.lean:35-39) and RingHom.Flat.codescendsAlong_faithfullyFlat (WeilConjectures/Mathlib/RingTheory/Flat/FaithfullyFlat/Descent.lean:23-28), source repository, sorry-free; index: unavailable",
+   "date": "2026-10-10",
+   "verdict": "not in Mathlib; the source repository (not Mathlib) has the sorry-free `AlgebraicGeometry.Scheme.of_isPullback_of_ofArrows_mem_fpqcTopology` (WeilConjectures/Mathlib/AlgebraicGeometry/Sites/Fpqc.lean:115-126, read with sed -n; s=false, ts=false in local/sorry_map_slopmaster2_full.jsonl) instantiated with P = Flat states the node for a covering family"
+  }
+ ],
+ "mathlib_match": null,
+ "mathlib_candidate": {
+  "declaration": "Module.Flat.of_flat_tensorProduct, AlgebraicGeometry.HasRingHomProperty.descendsAlong_flat",
+  "file": "Mathlib/RingTheory/Flat/FaithfullyFlat/Basic.lean, Mathlib/AlgebraicGeometry/Morphisms/FlatDescent.lean",
+  "line": "Basic.lean:588-599; FlatDescent.lean:163-170 (read with sed -n)",
+  "how": "Module.Flat.of_flat_tensorProduct is the algebra lemma the Stacks proof uses; turning it into RingHom.CodescendsAlong RingHom.Flat RingHom.FaithfullyFlat and feeding HasRingHomProperty.descendsAlong_flat gives descent along one surjective flat quasi-compact morphism only, and the passage to an fpqc covering family is a further argument; not a leaf (point B8)."
+ },
+ "status": "unsplit",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-finite-locally-free-degree-etale-descent",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "reviewed": "Reviewed by L 2026-10-10 (statement): Descent 02L2, descent direction. Unsplit."
+}

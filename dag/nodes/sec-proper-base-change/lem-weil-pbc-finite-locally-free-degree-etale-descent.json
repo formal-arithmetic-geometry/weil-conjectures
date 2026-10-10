@@ -13,9 +13,98 @@
   "def-pc-fibre-product",
   "def-pc-finite-locally-free"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "*The family $(\\varphi_i)$ is an fpqc covering of $T$.* Every $\\varphi_i$ is flat, since an etale morphism is flat, locally of finite presentation and unramified [def-weil-etale-morphism]; this is the first condition of [def-weil-pbc-fpqc-covering]. Let $V\\subseteq T$ be an affine open. For each $i$ write the open subscheme $\\varphi_i^{-1}(V)\\subseteq T_i$ as a union $\\bigcup_{j\\in J_i}V_{ij}$ of affine opens $V_{ij}\\subseteq T_i$ (the affine opens of the scheme $T_i$ form a basis of its topology [def-pc-scheme]). Each $\\varphi_i$ is an open map [lem-weil-pbc-etale-morphism-open-map], so every $\\varphi_i(V_{ij})$ is open in $T$, and it lies in $V$. They cover $V$: for $v\\in V$ there are $i$ and $t\\in T_i$ with $\\varphi_i(t)=v$ (the images of the $\\varphi_i$ cover $T$), and then $t\\in\\varphi_i^{-1}(V)$, so $t\\in V_{ij}$ for some $j$ and $v\\in\\varphi_i(V_{ij})$. Thus $V=\\bigcup_{i,j}\\varphi_i(V_{ij})$ is an open covering of $V$; as $V$ is affine it is quasi-compact [lem-weil-pbc-affine-scheme-qcqs], so finitely many $\\varphi_{i_1}(V_{i_1j_1}),\\dots,\\varphi_{i_n}(V_{i_nj_n})$ already cover $V$. This is the second condition of [def-weil-pbc-fpqc-covering], so $\\{\\varphi_i:T_i\\to T\\}_{i\\in I}$ is an fpqc covering of $T$.",
+   "uses": [
+    "def-weil-etale-morphism",
+    "def-weil-pbc-fpqc-covering",
+    "def-pc-scheme",
+    "lem-weil-pbc-etale-morphism-open-map",
+    "lem-weil-pbc-affine-scheme-qcqs"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/topologies.tex",
+    "place": "Topologies, Lemma Tag 022C (lemma-zariski-etale-smooth-syntomic-fppf-fpqc, line 3044) and its proof (the f_i are flat; f_i^{-1}(V) covered by affine opens V_ij; f_i open; V quasi-compact, finite refinement), for an etale covering"
+   }
+  },
+  {
+   "text": "*$h$ is finite.* Write $h_i:Y\\times_TT_i\\to T_i$ for the base change of $h$ along $\\varphi_i$ (second projection of the fibre product [def-pc-fibre-product]). By hypothesis $h_i$ is finite locally free, i.e. finite, flat and locally of finite presentation [def-pc-finite-locally-free]; in particular every $h_i$ is finite. Since $\\{\\varphi_i\\}$ is an fpqc covering (step 1), $h$ is finite by [lem-weil-pbc-fpqc-descend-finite].",
+   "uses": [
+    "def-pc-fibre-product",
+    "def-pc-finite-locally-free",
+    "lem-weil-pbc-fpqc-descend-finite"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/descent.tex",
+    "place": "Descent, proof of Lemma Tag 02VO (lemma-descending-property-finite-locally-free, line 6225): finite locally free = finite, flat, locally of finite presentation (Morphisms 02KB, here the definition), and Lemma Tag 02LA (lemma-descending-property-finite)"
+   }
+  },
+  {
+   "text": "*$h$ is flat.* Every $h_i$ is flat (step 2, [def-pc-finite-locally-free]); since $\\{\\varphi_i\\}$ is an fpqc covering (step 1), $h$ is flat by [lem-weil-pbc-fpqc-descend-flat].",
+   "uses": [
+    "def-pc-finite-locally-free",
+    "lem-weil-pbc-fpqc-descend-flat"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/descent.tex",
+    "place": "Descent, proof of Lemma Tag 02VO, and Lemma Tag 02L2 (lemma-descending-property-flat)"
+   }
+  },
+  {
+   "text": "*$h$ is locally of finite presentation, hence finite locally free.* Every $h_i$ is locally of finite presentation (step 2, [def-pc-finite-locally-free]); since $\\{\\varphi_i\\}$ is an fpqc covering (step 1), $h$ is locally of finite presentation by [lem-weil-pbc-fpqc-descend-locally-finite-presentation]. With steps 2 and 3, $h$ is finite, flat and locally of finite presentation, i.e. finite locally free [def-pc-finite-locally-free].",
+   "uses": [
+    "def-pc-finite-locally-free",
+    "lem-weil-pbc-fpqc-descend-locally-finite-presentation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/descent.tex",
+    "place": "Descent, proof of Lemma Tag 02VO, and Lemma Tag 02KY (lemma-descending-property-locally-finite-presentation)"
+   }
+  },
+  {
+   "text": "*The degree is $d$.* Let $t\\in T$, with residue field $\\kappa(t)$ [def-weil-residue-field] and fibre $Y_t=Y\\times_T\\operatorname{Spec}\\kappa(t)$ [def-pc-scheme-fibre]. Since $h$ is finite (step 2), the projection $Y_t\\to\\operatorname{Spec}\\kappa(t)$, a base change of $h$, is finite [lem-weil-pbc-finite-morphism-permanence] (a); so $Y_t$ is finite over $\\kappa(t)$ in the sense of [def-weil-pbc-fibre-degree-bound], and let $e=\\dim_{\\kappa(t)}\\Gamma(Y_t,\\mathcal O_{Y_t})$ be its degree. As the images of the $\\varphi_i$ cover $T$, choose $i$ and $t_i\\in T_i$ with $\\varphi_i(t_i)=t$. Apply [lem-weil-pbc-fibre-degree-base-change] to $h:Y\\to T$, $g=\\varphi_i:T_i\\to T$ and the point $t_i$ over $t$: the fibre of $h_i:Y\\times_TT_i\\to T_i$ at $t_i$ is finite over $\\kappa(t_i)$ of degree $e$. Since $h_i$ is finite locally free of degree $d$ [def-pc-finite-locally-free], that degree is $d$; hence $e=d$. As $t\\in T$ was arbitrary and $h$ is finite locally free (step 4), $h$ is finite locally free of degree $d$ [def-pc-finite-locally-free].",
+   "uses": [
+    "def-weil-residue-field",
+    "def-pc-scheme-fibre",
+    "lem-weil-pbc-finite-morphism-permanence",
+    "def-weil-pbc-fibre-degree-bound",
+    "lem-weil-pbc-fibre-degree-base-change",
+    "def-pc-finite-locally-free"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/descent.tex",
+    "place": "Descent, proof of Lemma Tag 02VO, last sentence ('If f : Z -> U is finite locally free, and {U_i -> U} is a surjective family of morphisms such that each pullback Z x_U U_i -> U_i has degree d, then Z -> U has degree d, for example because we can read off the degree in a point u in U from the fibre'); the degree is read on the fibre Y_t as in [def-pc-finite-locally-free], and its invariance under base change is Morphisms, Lemma Tag 03J7 via [lem-weil-pbc-fibre-degree-base-change]"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-etale-morphism",
+  "def-weil-pbc-fpqc-covering",
+  "def-pc-scheme",
+  "lem-weil-pbc-etale-morphism-open-map",
+  "lem-weil-pbc-affine-scheme-qcqs",
+  "def-pc-fibre-product",
+  "def-pc-finite-locally-free",
+  "lem-weil-pbc-fpqc-descend-finite",
+  "lem-weil-pbc-fpqc-descend-flat",
+  "lem-weil-pbc-fpqc-descend-locally-finite-presentation",
+  "def-weil-residue-field",
+  "def-pc-scheme-fibre",
+  "lem-weil-pbc-finite-morphism-permanence",
+  "def-weil-pbc-fibre-degree-bound",
+  "lem-weil-pbc-fibre-degree-base-change"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/descent.tex",
+  "place": "Descent, Lemma Tag 02VO (lemma-descending-property-finite-locally-free, line 6225) with its proof, for the fpqc covering given by Topologies, Lemma Tag 022C (literature/stacks-project/topologies.tex, line 3044) and its proof; the last sentence of the proof of 02VO (degree read off on fibres) is written out with the fibre definition of the degree"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -44,10 +133,31 @@
    "results": "DescendsAlong instances along Surjective+Flat+QuasiCompact for Surjective, UniversallyClosed, UniversallyOpen, UniversallyInjective, isomorphisms, IsOpenImmersion (FlatDescent.lean:41-134), LocallyOfFiniteType, LocallyOfFinitePresentation, Smooth, FormallyUnramified, Etale (LocalFlatDescent.lean:35-47); none for IsFinite or Flat or a degree",
    "date": "2026-10-10",
    "verdict": "no match (only the lfp part descends in Mathlib)"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "rank of finite flat morphism of schemes is preserved by base change; degree of finite locally free morphism at a point equals degree of pullback",
+   "results": "Module.rankAtStalk_baseChange, Module.rankAtStalk_tensorProduct_of_isScalarTower (RingTheory.Spectrum.Prime.FreeLocus), IsBaseChange.finrank_eq, Flat.isStableUnderBaseChange; no descent of IsFinite/Flat along coverings",
+   "date": "2026-10-10",
+   "verdict": "no match (degree part only: rank invariance under base change at ring level)"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -n 'finrank_pullback_snd\\|finrank_of_isPullback' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicGeometry/Morphisms/FlatRank.lean; grep -n 'fpqc\\|DescendsAlong' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicGeometry/Sites/Fpqc.lean",
+   "results": "FlatRank.lean:157 Scheme.Hom.finrank_pullback_snd (finrank (pullback.snd f g) y = finrank f (g y)), Hom.finrank_of_isPullback (:166); Sites/Fpqc.lean defines fpqcPrecoverage (:60) and fpqcTopology, no descent of properties of morphisms along covering families",
+   "date": "2026-10-10",
+   "verdict": "no match (Mathlib has the base change of the rank, not the descent of finite locally free)"
+  },
+  {
+   "tool": "local_search",
+   "query": "Scheme.of_isPullback_of_ofArrows_mem_fpqcTopology (project ~/weil-conjectures-slopmaster2)",
+   "results": "AlgebraicGeometry.Scheme.of_isPullback_of_ofArrows_mem_fpqcTopology, WeilConjectures/Mathlib/AlgebraicGeometry/Sites/Fpqc.lean:115-126 (source repository, sorry-free); used with IsFinite, Flat, LocallyOfFinitePresentation and Hom.finrank_of_isPullback inside the proof of isSheaf_fpqc_finiteLocallyFreeSubscheme (WeilConjectures/AlgebraicGeometry/Descent.lean:351-367), which is the argument of this node; index: unavailable",
+   "date": "2026-10-10",
+   "verdict": "not in Mathlib; the source repository has the three descents along fpqc covering families sorry-free"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "worker",
@@ -67,5 +177,12 @@
   }
  },
  "chapter": "sec-proper-base-change",
- "unit": "sk-thm-p1"
+ "unit": "sk-thm-p1",
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "lem-weil-pbc-finite-locally-free-degree-etale-descent",
+  "worker": "stage1",
+  "summary": "Read Descent 02VO (descent.tex 6225) with its proof, the descent lemmas it cites 02LA (6102), 02L2 (5833), 02KY (5767; the source's 'locally finite presentation' lemma, not 02L0), Definition 02KO (5310), Topologies 022C (topologies.tex 3044) with its proof, the definition node def-pc-finite-locally-free (finite + flat + lfp, degree by fibre dimension, so Morphisms 02KB is the definition here), and the citer lem-weil-pbc-flat-fp-lqf-bounded-stratification step 6, which uses exactly the statement. Statement kept. Proof in 5 steps: the etale family is an fpqc covering, following the proof of 022C (etale => flat by definition, open map, affine quasi-compact); finite, flat, lfp descend by three new unsplit nodes lem-weil-pbc-fpqc-descend-finite (02LA), -flat (02L2), -locally-finite-presentation (02KY), stated for fpqc coverings as in Stacks (the descent direction of 'fpqc local on the base'); the degree via the fibre definition: Y_t finite over kappa(t) as a base change of the finite h (lem-weil-pbc-finite-morphism-permanence), and its degree equals the degree d of the fibre of h_i at a preimage t_i (lem-weil-pbc-fibre-degree-base-change). Mathlib: no descent of IsFinite or Flat, lfp only along one surjective flat quasi-compact morphism; candidates recorded on the new nodes. The source repository slopmaster2 has sorry-free Scheme.of_isPullback_of_ofArrows_mem_fpqcTopology (WeilConjectures/Mathlib/AlgebraicGeometry/Sites/Fpqc.lean:115-126) with IsFinite/Flat descent instances (WeilConjectures/Mathlib/AlgebraicGeometry/Morphisms/FlatDescent.lean:35-39, 101-108) that state the three new nodes for covering sieves; left to the lead to attach."
+ },
+ "reviewed": "Reviewed by L 2026-10-10: faithful to Descent 02VO via Topologies 022C (etale family is fpqc, step 1 written out) and the three descent lemmas 02LA, 02L2, 02KY (new unsplit nodes, descent direction only); the degree is checked with lem-weil-pbc-fibre-degree-base-change against def-pc-finite-locally-free. No Mathlib match; candidates recorded on the new nodes. Lean in the source repository (of_isPullback_of_ofArrows_mem_fpqcTopology, sieve form) not attached."
 }
