@@ -232,7 +232,9 @@ theorem sixOperationsPackage [HasTateTwist.IsNormalized Λ] [HasInvertibleExpone
   ctfRightDerivedLowerStar _ hK :=
     have : HasInvertibleExponent Λ Y := HasInvertibleExponent.of_hom aY
     constructibleFiniteTor_rightDerivedLowerStar Λ (f ≫ aY) aY f rfl hK
-  ctfRightDerivedLowerShriek _ hK := constructibleFiniteTor_rightDerivedLowerShriek _ f hK
+  ctfRightDerivedLowerShriek _ hK :=
+    have : HasInvertibleExponent Λ Y := HasInvertibleExponent.of_hom aY
+    constructibleFiniteTor_rightDerivedLowerShriek Λ aY f hK
   ctfRightDerivedUpperShriek _ hK :=
     have : HasInvertibleExponent Λ Y := HasInvertibleExponent.of_hom aY
     constructibleFiniteTor_rightDerivedUpperShriek Λ aY f hK

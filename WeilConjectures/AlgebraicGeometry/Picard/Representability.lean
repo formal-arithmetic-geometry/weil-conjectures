@@ -340,4 +340,132 @@ theorem isRepresentable_of_representable_open_subfunctor
     (fun _ : ι ↦ A) ξ hinj hopen hcov).has_representation
   exact ⟨A', GrpObj.ofRepresentableBy A' G e, ⟨e⟩⟩
 
+/-- **The representing scheme is covered by copies of the open subfunctor.** In the situation of
+`AlgebraicGeometry.isRepresentable_of_representable_open_subfunctor`, let `A` represent `F` and
+let `A'` represent `G`. Then every point of `A'` lies in the image of an open immersion
+`A ⟶ A'` of `k`-schemes: the translate `g'⁻¹ F` of `F` by a suitable `g' ∈ G(k)` is an open
+subfunctor of `G`, represented both by `A` and by an open subscheme of `A'`.
+
+This is what transports local properties of `A` over `k`, such as smoothness, to `A'`. -/
+theorem exists_isOpenImmersion_of_representable_open_subfunctor
+    (G : (Over (Spec (.of k)))ᵒᵖ ⥤ GrpCat.{u + 1})
+    (F : Subfunctor (G ⋙ forget GrpCat.{u + 1})) {A : Over (Spec (.of k))}
+    (eF : F.toFunctor.RepresentableBy A)
+    (hFopen : (IsOpenImmersion.inverseImage (Over.forget (Spec (.of k)))).relative
+      uliftYoneda.{u + 1} F.ι)
+    (hgen : ∀ (K : Type u) [Field K] [Algebra k K]
+      (g : G.obj (.op (Over.mk (Spec.map (CommRingCat.ofHom (algebraMap k K)))))),
+      ∃ g' : G.obj (.op (Over.mk (𝟙 (Spec (.of k))))),
+        (G.map (Over.homMk (Spec.map (CommRingCat.ofHom (algebraMap k K)))
+            (by simp) : Over.mk (Spec.map (CommRingCat.ofHom (algebraMap k K))) ⟶
+              Over.mk (𝟙 (Spec (.of k)))).op).hom g' * g ∈
+          F.obj (.op (Over.mk (Spec.map (CommRingCat.ofHom (algebraMap k K))))))
+    {A' : Over (Spec (.of k))} (e' : (G ⋙ forget GrpCat.{u + 1}).RepresentableBy A')
+    (a : A'.left) :
+    ∃ ψ : A ⟶ A', IsOpenImmersion ψ.left ∧ a ∈ Set.range ψ.left.base := by
+  let P := G ⋙ forget GrpCat.{u + 1}
+  -- restriction of a `k`-point `g ∈ G(k)` to `T`
+  let r (T : Over (Spec (.of k))) (g : G.obj (op (Over.mk (𝟙 (Spec (.of k)))))) :
+      G.obj (op T) :=
+    (G.map (Over.homMk T.hom (by simp) : T ⟶ Over.mk (𝟙 (Spec (.of k)))).op).hom g
+  have hr {T W : Over (Spec (.of k))} (c : W ⟶ T) (g) : (G.map c.op).hom (r T g) = r W g := by
+    simp only [r, ← GrpCat.comp_apply, ← G.map_comp, ← op_comp]
+    congr 4
+    ext
+    simp
+  have hP {T W : Over (Spec (.of k))} (c : W ⟶ T) (y : G.obj (op T)) :
+      P.map c.op y = (G.map c.op).hom y := rfl
+  let ξ₀ : G.obj (op A) := (eF.homEquiv (𝟙 A)).1
+  have he {W : Over (Spec (.of k))} (b : W ⟶ A) : (eF.homEquiv b).1 = (G.map b.op).hom ξ₀ := by
+    rw [← Category.comp_id b, eF.homEquiv_comp]
+    rfl
+  let x : G.obj (op A') := e'.homEquiv (𝟙 A')
+  have he' {W : Over (Spec (.of k))} (c : W ⟶ A') : e'.homEquiv c = (G.map c.op).hom x := by
+    rw [← Category.comp_id c, e'.homEquiv_comp]
+    rfl
+  -- the residue field of `a`, and a class `g' ∈ G(k)` translating `x` into `F` at `a`
+  let K := A'.left.residueField a
+  let φ : CommRingCat.of k ⟶ K := Spec.preimage (A'.left.fromSpecResidueField a ≫ A'.hom)
+  let : Algebra k K := φ.hom.toAlgebra
+  have hK : Spec.map (CommRingCat.ofHom (algebraMap k K)) =
+      A'.left.fromSpecResidueField a ≫ A'.hom := by
+    rw [← Spec.map_preimage (A'.left.fromSpecResidueField a ≫ A'.hom)]
+    rfl
+  let pa : Over.mk (Spec.map (CommRingCat.ofHom (algebraMap k K))) ⟶ A' :=
+    Over.homMk (A'.left.fromSpecResidueField a) hK.symm
+  obtain ⟨g', hg'⟩ := hgen K (P.map pa.op x)
+  -- the open `U ⊆ A'` over which `r g' * x` lies in `F`
+  obtain ⟨U, hU⟩ := exists_opens_of_relative_isOpenImmersion hFopen A' (r A' g' * x)
+  have hUiff {W : Over (Spec (.of k))} (c : W ⟶ A') :
+      r W g' * (G.map c.op).hom x ∈ F.obj (op W) ↔ Set.range c.left ⊆ U := by
+    rw [← hU]
+    simp only [P, hP, map_mul, hr]
+  -- the morphism `ψ : A ⟶ A'` classifying `ξ = r g'⁻¹ * ξ₀`
+  let ξ : G.obj (op A) := (r A g')⁻¹ * ξ₀
+  let ψ : A ⟶ A' := e'.homEquiv.symm ξ
+  have hψ : (G.map ψ.op).hom x = ξ := by
+    rw [← he']
+    exact e'.homEquiv.apply_symm_apply ξ
+  have hξ {W : Over (Spec (.of k))} (b : W ⟶ A) :
+      (G.map b.op).hom ξ = (r W g')⁻¹ * (G.map b.op).hom ξ₀ := by
+    rw [map_mul, map_inv, hr]
+  -- `ψ` is a monomorphism
+  have hmono {W : Over (Spec (.of k))} (b₁ b₂ : W ⟶ A) (h : b₁ ≫ ψ = b₂ ≫ ψ) : b₁ = b₂ := by
+    have h' := congrArg e'.homEquiv h
+    rw [he', he', op_comp, op_comp, Functor.map_comp, Functor.map_comp, GrpCat.comp_apply,
+      GrpCat.comp_apply, hψ, hξ, hξ, mul_right_inj, ← he, ← he] at h'
+    exact eF.homEquiv.injective (Subtype.ext h')
+  -- `ψ` factors through `U`
+  have hψU : Set.range ψ.left ⊆ U := by
+    rw [← hUiff, hψ, mul_inv_cancel_left]
+    exact (eF.homEquiv (𝟙 A)).2
+  -- the inclusion of `U` factors through `ψ`
+  let Uo : Over (Spec (.of k)) := Over.mk (U.ι ≫ A'.hom)
+  let ιU : Uo ⟶ A' := Over.homMk U.ι
+  have hιU : r Uo g' * (G.map ιU.op).hom x ∈ F.obj (op Uo) := by
+    rw [hUiff]
+    change Set.range U.ι ⊆ U
+    rw [U.range_ι]
+  let b : Uo ⟶ A := eF.homEquiv.symm ⟨_, hιU⟩
+  have hb : b ≫ ψ = ιU := by
+    refine e'.homEquiv.injective ?_
+    rw [he', he', op_comp, Functor.map_comp, GrpCat.comp_apply, hψ, hξ, ← he,
+      eF.homEquiv.apply_symm_apply]
+    exact inv_mul_cancel_left _ _
+  have hψU' : Set.range ψ.left ⊆ Set.range U.ι := by
+    rw [U.range_ι]
+    exact hψU
+  let ψ' : A ⟶ Uo := Over.homMk (IsOpenImmersion.lift U.ι ψ.left hψU') (by
+    simp only [Uo, Over.mk_hom]
+    rw [IsOpenImmersion.lift_fac_assoc, Over.w])
+  have hψ' : ψ' ≫ ιU = ψ := by
+    ext
+    exact IsOpenImmersion.lift_fac _ _ _
+  have h₁ : ψ' ≫ b = 𝟙 A := hmono _ _ (by rw [Category.assoc, hb, hψ', Category.id_comp])
+  have h₂ : b ≫ ψ' = 𝟙 Uo := by
+    ext1
+    rw [← cancel_mono U.ι]
+    change (b ≫ ψ' ≫ ιU).left = (𝟙 Uo ≫ ιU).left
+    rw [hψ', hb, Category.id_comp]
+  have : IsIso ψ' := ⟨b, h₁, h₂⟩
+  have : IsIso ψ'.left := (Over.forget _).map_isIso ψ'
+  refine ⟨ψ, ?_, ?_⟩
+  · rw [← hψ', Over.comp_left]
+    change IsOpenImmersion (ψ'.left ≫ U.ι)
+    infer_instance
+  · -- `a` lies in `U`, the image of `ψ`
+    have ha : Set.range pa.left ⊆ U := by
+      rw [← hUiff]
+      exact hg'
+    have : a ∈ Set.range pa.left := by
+      have h := Scheme.range_fromSpecResidueField a
+      exact h.symm ▸ Set.mem_singleton a
+    have haU : a ∈ Set.range U.ι := by
+      rw [U.range_ι]
+      exact ha this
+    obtain ⟨u, hu⟩ := haU
+    refine ⟨b.left u, ?_⟩
+    rw [← Scheme.Hom.comp_apply, ← Over.comp_left, hb]
+    exact hu
+
 end AlgebraicGeometry
