@@ -2,7 +2,7 @@
  "id": "lem-weil-pbc-finite-purely-inseparable-degree-p-intermediate",
  "kind": "statement",
  "title": "A nontrivial finite purely inseparable extension has a degree-p intermediate step",
- "statement": "Let $L/K$ be a finite purely inseparable field extension [def-pc-field-extension] [def-weil-pbc-finite-purely-inseparable-extension] of characteristic $p>0$ with $[L:K]>1$. Then there are an intermediate field $K\\subseteq M\\subseteq L$ and an element $z\\in L$ such that $[M:K]<[L:K]$, $L=M(z)$, $z^p=f$ for some $f\\in M$, and $[L:M]=p$.",
+ "statement": "Let $L/K$ be a finite purely inseparable field extension [def-pc-field-extension] [def-weil-pbc-finite-purely-inseparable-extension] of characteristic $p>0$ with $[L:K]>1$. Then there are an intermediate field $K\\subseteq M\\subseteq L$ and an element $z\\in L$ such that $M/K$ is a finite purely inseparable extension, $[M:K]<[L:K]$, $L=M(z)$, $z^p=f$ for some $f\\in M$, and $[L:M]=p$.",
  "source": {
   "document": "literature/stacks-project/more-algebra.tex",
   "place": "More on Algebra, Lemma Tag 07PR (lemma-helper-G-ring), proof, induction paragraph: choose $K\\subset M\\subset L$ with $L/M$ a degree-$p$ extension obtained by adjoining a $p$th root"
@@ -11,9 +11,51 @@
   "def-pc-field-extension",
   "def-weil-pbc-finite-purely-inseparable-extension"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "(The last step of a $p$th-root tower.) Apply [lem-weil-pbc-purely-inseparable-pth-root-tower] to $F=K$, $E=L$ (a finite purely inseparable extension of a field of characteristic $p$): there are $\\alpha_1,\\dots,\\alpha_n\\in L$ with $L=K(\\alpha_1,\\dots,\\alpha_n)$ such that, with $K_{i}=K(\\alpha_1,\\dots,\\alpha_{i})$ ($K_0=K$), for each $i=1,\\dots,n$ we have $\\alpha_i^p\\in K_{i-1}$ and $[K_{i-1}(\\alpha_i):K_{i-1}]=p$. If $n=0$ then $L=K_0=K$ and $[L:K]=1$, against the hypothesis $[L:K]>1$; so $n\\ge1$. Put $M=K_{n-1}$, $z=\\alpha_n$ and $f=z^p$. Then $K\\subseteq M\\subseteq L$ is an intermediate field, $f=\\alpha_n^p\\in K_{n-1}=M$, $M(z)=K(\\alpha_1,\\dots,\\alpha_{n-1})(\\alpha_n)=K(\\alpha_1,\\dots,\\alpha_n)=L$, and the clause $i=n$ gives $[L:M]=[K_{n-1}(\\alpha_n):K_{n-1}]=p$.",
+   "uses": [
+    "lem-weil-pbc-purely-inseparable-pth-root-tower"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/fields.tex",
+    "place": "Fields, Lemma Tag 09HI (lemma-finite-purely-inseparable), statement; used in More on Algebra Lemma Tag 07PR (lemma-helper-G-ring), proof, 'Let K subset M subset L be a subfield such that L is a degree p extension of M obtained by adjoining a pth root of an element f in M'"
+   }
+  },
+  {
+   "text": "($M/K$ is finite purely inseparable.) $M$ is a $K$-linear subspace of the finite-dimensional $K$-vector space $L$, hence finite-dimensional over $K$. Every $\\beta\\in M$ is an element of $L$, so by the definition [def-weil-pbc-finite-purely-inseparable-extension] applied to $L/K$ there is $n\\ge0$ with $\\beta^{p^n}\\in K$; hence every element of $M$ is purely inseparable over $K$, and $M/K$ is finite purely inseparable by the same definition.",
+   "uses": [
+    "def-weil-pbc-finite-purely-inseparable-extension"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/fields.tex",
+    "place": "Fields, Definition Tag 09HE (definition-purely-inseparable); used in More on Algebra Lemma Tag 07PR, proof ('Since A subset B subset C are finite and L/M/K are purely inseparable')"
+   }
+  },
+  {
+   "text": "($[M:K]<[L:K]$.) The extensions $M/K$ (Step 2) and $L/M$ ($[L:M]=p$, Step 1) are finite, so [lem-weil-pbc-field-degree-multiplicativity] applied to $K\\subseteq M\\subseteq L$ gives $[L:K]=[L:M]\\,[M:K]=p\\,[M:K]$. As $p\\ge2$ and $[M:K]\\ge1$, $[L:K]=p[M:K]\\ge2[M:K]>[M:K]$.",
+   "uses": [
+    "lem-weil-pbc-field-degree-multiplicativity"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/fields.tex",
+    "place": "Fields, Lemma Tag 09G9 (lemma-multiplicativity-degrees)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-purely-inseparable-pth-root-tower",
+  "def-weil-pbc-finite-purely-inseparable-extension",
+  "lem-weil-pbc-field-degree-multiplicativity"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/fields.tex",
+  "place": "Fields, Lemma Tag 09HI (lemma-finite-purely-inseparable), read off at its last step, with Lemma Tag 09G9 (lemma-multiplicativity-degrees); the item is the step 'choose K subset M subset L with L/M of degree p obtained by adjoining a pth root' of More on Algebra Lemma Tag 07PR (lemma-helper-G-ring), proof"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -35,10 +77,45 @@
    "results": "No theorem giving this degree-p induction step",
    "date": "2026-10-10",
    "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "purely inseparable finite extension not trivial exists intermediate field of index p generated by a p-th root",
+   "results": "isPurelyInseparable_iff_fd_isPurelyInseparable, IsPurelyInseparable, IntermediateField.isPurelyInseparable_tower_top, IntermediateField.isPurelyInseparable_bot, le_perfectClosure_iff, IsPurelyInseparable.instOfHasExponent, isPurelyInseparable_self, isPurelyInseparable_iff (Mathlib.FieldTheory.PurelyInseparable.Basic/PerfectClosure/Exponent): no degree-p intermediate field",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "finite purely inseparable extension L/K with L ≠ K: exists intermediate field M and z with L = M(z), z^p ∈ M, finrank M L = p",
+   "results": "isPurelyInseparable_iff_fd_isPurelyInseparable, IsPurelyInseparable, perfectClosure.isPurelyInseparable, IsPurelyInseparable.finrank_eq_pow ([E:F] = q^n), IsPurelyInseparable.hasExponent_of_finiteDimensional, IntermediateField.isPurelyInseparable_tower_bot/top, IntermediateField.isPurelyInseparable_bot: ingredients only (degree is a power of q, tower permanence)",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "IsPurelyInseparable, Module.finrank, IntermediateField.adjoin",
+   "results": "none",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "local_search",
+   "query": "IsPurelyInseparable.exists (project root ~/weil-conjectures-slopmaster2)",
+   "results": "index unavailable (no language server); not a proof of absence",
+   "date": "2026-10-10",
+   "verdict": "inconclusive"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rn 'finrank.*= p\\b|= ringExpChar|finrank.*ringExpChar|X_pow_sub_C_irreducible_of_prime' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/FieldTheory/PurelyInseparable/ KummerExtension.lean",
+   "results": "Exponent.lean:150 (minpoly natDegree = ringExpChar K ^ elemExponent K a), Exponent.lean:187, PerfectClosure.lean:411, Basic.lean:373, 697 (proof-internal lets); KummerPolynomial.lean:99 X_pow_sub_C_irreducible_of_prime, :124 X_pow_sub_C_irreducible_iff_of_prime: irreducibility of X^p - a only, no intermediate-field statement",
+   "date": "2026-10-10",
+   "verdict": "no match (ingredients only)"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "worker",
@@ -58,5 +135,17 @@
   }
  },
  "chapter": "sec-proper-base-change",
- "unit": "sk-thm-p1"
+ "unit": "sk-thm-p1",
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "lem-weil-pbc-finite-purely-inseparable-degree-p-intermediate",
+  "worker": "stage1",
+  "summary": "Checked against More on Algebra 07PR proof (induction paragraph, more-algebra.tex line 12320), which chooses M without argument, and Fields 09HI (fields.tex line 1669), which supplies the tower. The existing unsplit node lem-weil-pbc-purely-inseparable-pth-root-tower (09HI) is cited for the tower; the item is its last step: n>=1 because [L:K]>1, M=K_{n-1}, z=alpha_n, [L:M]=p from clause i=n (step 1). Step 2 proves M/K finite purely inseparable from the definition (09HE); step 3 gets [M:K]<[L:K] from the Mathlib leaf lem-weil-pbc-field-degree-multiplicativity (09G9). Statement strengthened by the conclusion 'M/K is finite purely inseparable', which the citer lem-weil-pbc-helper-g-ring-char-p (step 2) needs for its induction hypothesis P(M) and which 07PR uses ('L/M/K are purely inseparable'). No new node. Mathlib: no match after leansearch, leanfinder, loogle, grep (local_search index unavailable)."
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "result": "accepted",
+  "note": "3 steps: the last step of the p-th-root tower node (09HI, unsplit, created by another item), M/K finite purely inseparable from the definition, [M:K] < [L:K] by the degree-multiplicativity leaf. Statement strengthened by 'M/K finite purely inseparable', which the citer's induction uses. Stage-3 note: the item duplicates the 'in particular' clause of lem-weil-pbc-purely-inseparable-pth-root-tower; the two could be merged."
+ }
 }
