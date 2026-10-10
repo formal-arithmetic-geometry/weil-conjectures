@@ -14,9 +14,76 @@
   "def-weil-residue-field",
   "def-pc-field-extension"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Choose an affine open $U\\subseteq Y$ containing $y$, write $U=\\operatorname{Spec}B$, and let $\\mathfrak p\\in\\operatorname{Spec}B$ correspond to $y$ under the canonical open immersion $\\iota: \\operatorname{Spec}B\\to Y$ [lem-weil-pbc-affine-open-spec-points]. Since $g(Y)$ is the unique point of $\\operatorname{Spec}k$, the pair of affine opens $U\\subseteq Y$ and $\\operatorname{Spec}k\\subseteq\\operatorname{Spec}k$ satisfies the criterion [lem-weil-pbc-lft-affine-pairs]; hence the structure map $k\\to B$ is of finite type. The inverse image of the open singleton $\\{y\\}$ under $\\iota$ is the singleton $\\{\\mathfrak p\\}$, so $\\{\\mathfrak p\\}$ is open in $\\operatorname{Spec}B$.",
+   "uses": [
+    "lem-weil-pbc-affine-open-spec-points",
+    "lem-weil-pbc-lft-affine-pairs",
+    "def-weil-affine-spectrum"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Morphisms, Lemma 01T2 (lemma-locally-finite-type-characterize), (1) => (2), applied to the affine chart U over Spec(k); the affine chart and its point are Schemes, Tag 01IJ and Lemma 01HH"
+   }
+  },
+  {
+   "text": "Apply [lem-weil-pbc-isolated-prime-finite-type-algebra-residue-finite] to $k$, $B$, and $\\mathfrak p$. It gives that $\\kappa(\\mathfrak p)=B_{\\mathfrak p}/\\mathfrak pB_{\\mathfrak p}$ is finite-dimensional over $k$ for the map $k\\to B\\to\\kappa(\\mathfrak p)$.",
+   "uses": [
+    "lem-weil-pbc-isolated-prime-finite-type-algebra-residue-finite",
+    "def-weil-pbc-localization-at-prime",
+    "def-pc-field-extension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra, Lemma 00PJ (algebra-lemma-isolated-point), implication (1) => (6), after restricting to the finite type affine chart"
+   }
+  },
+  {
+   "text": "The affine chart identifies the scheme residue field $\\kappa_{\\operatorname{Spec}B}(\\mathfrak p)$ with $\\kappa(\\mathfrak p)$ by [lem-weil-pbc-spec-residue-field-identification]. The open immersion $\\iota$ identifies $\\kappa_{\\operatorname{Spec}B}(\\mathfrak p)$ with $\\kappa(y)$ by [lem-weil-pbc-residue-field-point-naturality]. Applying [lem-weil-pbc-spec-map-residue-field-naturality] to the structure map $k\\to B$ shows that these identifications carry the map from the residue field of $\\operatorname{Spec}k$ (which is $k$ at its unique point) to the map $k\\to\\kappa(y)$ induced by $g$.",
+   "uses": [
+    "lem-weil-pbc-spec-residue-field-identification",
+    "lem-weil-pbc-residue-field-point-naturality",
+    "lem-weil-pbc-spec-map-residue-field-naturality",
+    "def-weil-residue-field"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Schemes, Lemmas 01HV and 01HY (stalks of affine schemes and maps into an affine scheme), together with the residue-field diagram after Lemma 01J9; the open-immersion residue-field assertion is Lemma 01HH"
+   }
+  },
+  {
+   "text": "Finite-dimensionality over $k$ is invariant under the $k$-linear field isomorphism in step 3. Therefore the residue field $\\kappa(y)$, with the action of $k$ induced by $g$, is a finite extension of $k$ [def-pc-field-extension].",
+   "uses": [
+    "def-pc-field-extension"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra, Lemma 00PJ (algebra-lemma-isolated-point), conclusion (6), with the residue-field identifications from Schemes, Lemma 01HH"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-affine-open-spec-points",
+  "lem-weil-pbc-lft-affine-pairs",
+  "def-weil-affine-spectrum",
+  "lem-weil-pbc-isolated-prime-finite-type-algebra-residue-finite",
+  "def-weil-pbc-localization-at-prime",
+  "def-pc-field-extension",
+  "lem-weil-pbc-spec-residue-field-identification",
+  "lem-weil-pbc-residue-field-point-naturality",
+  "lem-weil-pbc-spec-map-residue-field-naturality",
+  "def-weil-residue-field"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Algebra, Lemma 00PJ (algebra-lemma-isolated-point, line 30106), implication (1) => (6), in an affine open of a scheme locally of finite type over Spec(k); the affine and residue-field translations use Morphisms, Lemma 01T2 and Schemes, Lemmas 01HH, 01HV, 01HY"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -55,7 +122,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "worker",
@@ -75,5 +142,21 @@
   }
  },
  "chapter": "sec-proper-base-change",
- "unit": "sk-thm-p1"
+ "unit": "sk-thm-p1",
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "lem-weil-pbc-lft-over-field-isolated-point-residue-finite",
+  "worker": "stage1",
+  "summary": "Statement checked against Algebra 00PJ (1)=>(6) and Morphisms 01T2. Proof split into four steps: an affine chart around y is Spec B, the locally finite type hypothesis makes k -> B finite type, and isolatedness pulls back to an open singleton prime; the new unsplit ring node lem-weil-pbc-isolated-prime-finite-type-algebra-residue-finite applies the Jacobson and Nullstellensatz argument (00G1, 00G3, 00FV); Spec B residue fields are identified with the scheme residue field at y and the k-actions are compatible (01HV, 01HH, 01HY); finite-dimensionality transports across the resulting k-linear field isomorphism. Mathlib searches found only the ring-level and quasi-finite ingredients, so the ring-level bridge remains unsplit.",
+  "new_nodes": [
+   "lem-weil-pbc-isolated-prime-finite-type-algebra-residue-finite"
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "group": "G1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed by the lead of G1; spot-checked by L: 4 steps: affine chart Spec B with k -> B of finite type (lft-affine-pairs), {p} open in Spec B, the new ring-level node (00PJ (1)=>(6): isolated prime of a finite-type k-algebra has finite residue field), residue-field identifications compatible with the k-action. Correct."
+ }
 }

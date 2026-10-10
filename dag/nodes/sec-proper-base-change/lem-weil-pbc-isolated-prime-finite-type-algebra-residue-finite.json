@@ -1,0 +1,63 @@
+{
+ "id": "lem-weil-pbc-isolated-prime-finite-type-algebra-residue-finite",
+ "kind": "statement",
+ "title": "An isolated prime of a finite type algebra over a field has finite residue field",
+ "statement": "Let $k$ be a field and let $B$ be a finitely generated $k$-algebra. If $\\mathfrak p\\in\\operatorname{Spec}B$ has singleton $\\{\\mathfrak p\\}$ open in $\\operatorname{Spec}B$, then the residue field $\\kappa(\\mathfrak p)=B_{\\mathfrak p}/\\mathfrak pB_{\\mathfrak p}$ [def-weil-pbc-localization-at-prime], with its field extension structure from $k\\to B\\to\\kappa(\\mathfrak p)$ [def-pc-field-extension], is finite over $k$.",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Algebra, Lemma 00PJ (algebra-lemma-isolated-point, line 30106), implication (1) => (6), using Lemmas 00G1 and 00G3 to make an isolated prime maximal and Theorem 00FV (algebra-theorem-nullstellensatz, line 6524) for finiteness of the residue field of a maximal ideal"
+ },
+ "stmt_deps": [
+  "def-weil-affine-spectrum",
+  "def-weil-pbc-localization-at-prime",
+  "def-pc-field-extension"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "finite type algebra over a field, isolated prime of Spec is maximal and its residue field is finite",
+   "results": "AlgebraicGeometry.isClosed_singleton_iff_locallyOfFiniteType, Algebra.FiniteType.isNoetherianRing, Algebra.instFiniteResidueFieldOfQuasiFiniteAt; only separate ring and scheme pieces",
+   "date": "2026-10-10",
+   "verdict": "no match: no single theorem combines isolatedness, the Jacobson argument, and the finite residue-field conclusion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "IsOpen ({p} : Set (PrimeSpectrum B)) -> Module.Finite k (Ideal.ResidueField p)",
+   "results": "none; related Algebra.quasiFiniteAt_iff_isOpen_singleton_fiber and Algebra.QuasiFinite.instFiniteResidueField require a quasi-finite-at-prime hypothesis and do not supply the Jacobson/Nullstellensatz reduction",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "rg -n 'finite_of_finite_type_of_isJacobsonRing|isClosed_singleton_iff_locallyOfFiniteType|quasiFiniteAt_iff_isOpen_singleton' Mathlib/{RingTheory,AlgebraicGeometry,Topology}",
+   "results": "RingTheory/Jacobson/Ring.lean:676 finite_of_finite_type_of_isJacobsonRing; AlgebraicGeometry/Morphisms/Finite.lean:221 isClosed_singleton_iff_locallyOfFiniteType; RingTheory/ZariskisMainTheorem.lean:754 quasiFiniteAt_iff_isOpen_singleton_fiber; no theorem proving this exact scheme statement",
+   "date": "2026-10-10",
+   "verdict": "no match: Mathlib has ingredients only; the Stacks 00G1/00G3/00FV combination remains a separate proof node"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-lft-over-field-isolated-point-residue-finite",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1"
+}
