@@ -1,0 +1,63 @@
+{
+ "id": "lem-pc-open-immersion-smooth-composition",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pc-ample-positive-degree",
+   "place": "proof, part (<=), the assertion that each open-and-closed geometric component remains smooth over the base",
+   "via": []
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "An open immersion into a smooth morphism has smooth composite",
+ "statement": "Let $i:Z\\to Y$ be an open immersion of schemes [def-weil-open-immersion], and let $f:Y\\to S$ be a smooth morphism of schemes [def-sbc-smooth-morphisms]. Then the composite $f\\circ i:Z\\to S$ is smooth over $S$.",
+ "source": {
+  "document": "literature/stacks-project/morphisms.tex",
+  "place": "Morphisms, Lemmas 01VC (an open immersion is smooth) and 01VA (composition of smooth morphisms is smooth)"
+ },
+ "stmt_deps": [
+  "def-weil-open-immersion",
+  "def-sbc-smooth-morphisms"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "if i is an open immersion of schemes and f is smooth, the composite f ∘ i is smooth",
+   "results": "Mathlib.AlgebraicGeometry.Morphisms.Smooth: instance [IsOpenImmersion i] : Smooth i; smooth composition instance [Smooth i] [Smooth f] : Smooth (i ≫ f)",
+   "date": "2026-10-10",
+   "verdict": "match"
+  },
+  {
+   "tool": "loogle",
+   "query": "Smooth (f ≫ g)",
+   "results": "Mathlib.AlgebraicGeometry.Morphisms.Smooth: IsSmooth.comp / IsSmooth.instCompScheme (smooth composition); open immersion instance in the same file",
+   "date": "2026-10-10",
+   "verdict": "match"
+  },
+  {
+   "tool": "grep",
+   "query": "rg -n 'Open immersions are smooth|Smooth.*comp|IsOpenImmersion f.*Smooth' /home/ubuntu/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicGeometry/Morphisms/Smooth.lean",
+   "results": "Smooth.lean:181-184 gives [IsOpenImmersion f] : Smooth f; Smooth.lean:193-196 gives smoothness stable under composition",
+   "date": "2026-10-10",
+   "verdict": "match"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "AlgebraicGeometry.instSmoothOfIsOpenImmersion; AlgebraicGeometry.smooth_comp",
+  "file": "Mathlib/AlgebraicGeometry/Morphisms/Smooth.lean",
+  "line": 183,
+  "how": "one-line specialization (Mathlib writes f∘i as i ≫ f): the instance `[IsOpenImmersion f] : Smooth f` (Smooth.lean:183-184) makes i smooth, and the instance `smooth_comp` `[Smooth f] [Smooth g] : Smooth (f ≫ g)` (Smooth.lean:109-111) makes i ≫ f smooth. Mathlib's Smooth and IsOpenImmersion are identified with [def-sbc-smooth-morphisms] and [def-weil-open-immersion] by the matches recorded on those nodes (Stacks 02H6 for smoothness), as for lem-weil-pbc-smooth-restrict-open-subschemes. Source read with sed -n on 2026-10-10."
+ },
+ "status": "mathlib",
+ "created": {
+  "item": "lem-pc-clopen-smooth-proper-curve",
+  "by": "worker",
+  "date": "2026-10-10"
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-rr"
+}

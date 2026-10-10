@@ -11,7 +11,7 @@
  },
  "kind": "statement",
  "title": "Open and closed pieces of smooth proper schemes",
- "statement": "Let $K$ be a field [def-weil-field] and let $Y$ be a smooth proper scheme over $K$ [def-sbc-smooth-morphisms] [def-weil-proper-morphism]. If $Z\\subseteq Y$ is a nonempty open-and-closed subscheme, then $Z$ is smooth and proper over $K$.",
+ "statement": "Let $K$ be a field [def-weil-field] and let $Y$ be a scheme whose structure morphism $Y\\to\\operatorname{Spec}K$ is smooth and proper [def-sbc-smooth-morphisms] [def-weil-proper-morphism]. Let $Z$ be a nonempty scheme equipped with a morphism $i:Z\\to Y$ that is both an open immersion and a closed immersion [def-weil-open-immersion] [def-weil-closed-immersion]. Then the structure morphism $Z\\to\\operatorname{Spec}K$ is smooth and proper over $K$.",
  "source": {
   "document": "literature/stacks-project/morphisms.tex",
   "place": "Morphisms, Lemmas 01VC (lemma-open-immersion-smooth) and 01VA (lemma-composition-smooth) for smoothness of the open immersion and its composite; 01W5 (lemma-closed-immersion-proper) and 01W3 (lemma-composition-proper) for properness of the closed immersion and its composite"
@@ -19,11 +19,43 @@
  "stmt_deps": [
   "def-weil-field",
   "def-sbc-smooth-morphisms",
-  "def-weil-proper-morphism"
+  "def-weil-proper-morphism",
+  "def-weil-open-immersion",
+  "def-weil-closed-immersion"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "The morphism $i:Z\\to Y$ is an open immersion by hypothesis. Applying [lem-pc-open-immersion-smooth-composition] to $i$ and the smooth structure morphism $Y\\to\\operatorname{Spec}K$ shows that the composite $Z\\to\\operatorname{Spec}K$ is smooth.",
+   "uses": [
+    "lem-pc-open-immersion-smooth-composition"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Morphisms, Lemmas 01VC and 01VA"
+   }
+  },
+  {
+   "text": "The morphism $i:Z\\to Y$ is a closed immersion and the structure morphism $Y\\to\\operatorname{Spec}K$ is proper. Clause (b) of [lem-weil-pbc-closed-immersion-proper] therefore gives that their composite $Z\\to\\operatorname{Spec}K$ is proper.",
+   "uses": [
+    "lem-weil-pbc-closed-immersion-proper"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Morphisms, Lemmas 01W5 (closed immersions are proper) and 01W3 (composition of proper morphisms)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-open-immersion-smooth-composition",
+  "lem-weil-pbc-closed-immersion-proper"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/morphisms.tex",
+  "place": "Lemmas 01VC, 01VA, 01W5 and 01W3"
+ },
  "mathlib_searches": [
   {
    "tool": "local_search",
@@ -55,12 +87,36 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-pc-base-change-closure-components",
   "by": "worker",
   "date": "2026-10-10"
  },
  "chapter": "sec-picard-framework",
- "unit": "sk-thm-picard-rr"
+ "unit": "sk-thm-picard-rr",
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "lem-pc-clopen-smooth-proper-curve",
+  "worker": "stage1",
+  "summary": "Made the clopen hypothesis explicit as an open and closed immersion and split the proof into smoothness by open-immersion composition and properness by closed-immersion composition. Added one Mathlib leaf for the smooth composite and reused the existing closed-immersion/proper-composition leaf.",
+  "blueprint": "Realizes the parent blueprint proof clause asserting that each open-and-closed component remains smooth and proper over the base.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-closed-immersion-proper",
+    "why": "Its statement directly supplies properness of the composite of the closed immersion Z → Y with the proper structure morphism Y → Spec K; the unit route has no more specific proper-composition node."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-closed-immersion-proper"
+ ],
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-csp",
+  "group": "K1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-csp (reviewer sub-agent of L); spot-checked: Source: Stacks Morphisms 01VC (lemma-open-immersion-smooth), 01VA (lemma-composition-smooth), 01W5 (lemma-closed-immersion-proper), 01W3 (lemma-composition-proper), tags verified in tags/tags. Item statement reworded from 'open-and-closed subscheme' to a morphism i:Z->Y that is an open and a closed immersion (E7, named in the report); equivalent, and the only consumer lem-pc-base-change-closure-components (open-and-closed restrictions X_j of X_Omega) supplies exactly this; stmt_deps def-weil-open-immersion/def-weil-closed-immersion exist. Step 1: new leaf lem-pc-open-immersion-smooth-composition (open immersion followed by smooth is smooth) applied to i and Y->Spec K, hypotheses match. Step 2: lem-weil-pbc-closed-immersion-proper clause (b) (closed immersion followed by proper is proper) applied to i and Y->Spec K; off-unit (sk-thm-br) Mathlib leaf used as a generic black box, tool_use accepted (C8). Nonemptiness hypothesis unused, harmless. Small cases: Z=Y; Z a component of Y1 disjoint-union Y2. Checked no existing node states the leaf exactly (lem-weil-pbc-smooth-restrict-open-subschemes is about open-subscheme inclusions, different shape); blueprint_refs search 'open immersion smooth' found nothing. FIX: dag/nodes/sec-picard-framework/lem-pc-open-immersion-smooth-composition.json: mathlib_match: declarations were SmoothOfRelativeDimension.smooth and smoothOfRelativeDimension_comp (Smooth.lean:181/207; the latter is the relative-dimension composite and does not apply to an arbitrary smooth f), replaced by AlgebraicGeometry.instSmoothOfIsOpenImmersion (Smooth.lean:183-184) and AlgebraicGeometry.smooth_comp (Smooth.lean:109-111), both read with sed and names checked in library_names_mathlib; file field made a plain path, line 183. Start Sat Oct 10 04:12:14 PM UTC 2026, end Sat Oct 10 04:13:11 PM UTC 2026.; 1 file(s) fixed by the reviewer"
+ }
 }
