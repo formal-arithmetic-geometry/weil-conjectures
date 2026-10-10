@@ -2410,3 +2410,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 19:35 L: merged deliver/K1/lem-pc-base-change-map-cech (reviewer FIX; after a return; new nodes: 1)
 - 19:36 L: merged deliver/H1/lem-sc-proper-flat-right-adjoint-restriction-open (reviewer FIX; first push; new nodes: 3)
 - 19:37 L: merged deliver/F1/def-pc-derived-category-qcoh-algebra (reviewer PASS; first push; new nodes: 0)
+- 19:37 L: merged deliver/G1/def-pc-derived-rhom-algebra-module (reviewer FIX; first push; new nodes: 0)

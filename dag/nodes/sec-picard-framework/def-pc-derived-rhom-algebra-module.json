@@ -13,7 +13,7 @@
  },
  "kind": "definition",
  "title": "Derived internal Hom as a module over the source algebra",
- "statement": "Let $Y$ be a scheme [def-pc-scheme] and let $B$ be a quasi-coherent $\\mathcal O_Y$-algebra. For an $\\mathcal O_Y$-module $\\mathcal F$ the sheaf $\\mathcal H om_{\\mathcal O_Y}(B,\\mathcal F)$ is a $B$-module via the action of $B$ on the first argument; the derived extension of this functor $\\mathrm{Mod}(\\mathcal O_Y)\\to\\mathrm{Mod}(B)$ is a functor $R\\mathcal H om_{\\mathcal O_Y}(B,-):D(\\mathcal O_Y)\\to D(B)$ [def-pc-derived-category-qcoh-algebra], and for $K\\in D(\\mathcal O_Y)$ the object $R\\mathcal H om_{\\mathcal O_Y}(B,K)$ of $D(B)$ is called the derived internal Hom [def-pur-derived-internal-hom] with its natural $B$-module structure (its image in $D(\\mathcal O_Y)$ is $R\\mathcal H om_{\\mathcal O_Y}(B,K)$).",
+ "statement": "Let $Y$ be a scheme [def-pc-scheme] and let $B$ be a quasi-coherent (commutative) $\\mathcal O_Y$-algebra. For an $\\mathcal O_Y$-module $\\mathcal F$ the sheaf $\\mathcal H om_{\\mathcal O_Y}(B,\\mathcal F)$ is a $B$-module via the action of $B$ on the first argument, giving an additive functor $\\mathcal H om_{\\mathcal O_Y}(B,-):\\mathrm{Mod}(\\mathcal O_Y)\\to\\mathrm{Mod}(B)$. Its derived extension $R\\mathcal H om_{\\mathcal O_Y}(B,-):D(\\mathcal O_Y)\\to D(B)$, with $D(B)$ as in [def-pc-derived-category-qcoh-algebra], is defined as follows: for $K\\in D(\\mathcal O_Y)$ represented by a complex $\\mathcal M^\\bullet$, choose functorially a K-injective resolution $\\mathcal M^\\bullet\\to\\mathcal I^\\bullet(\\mathcal M^\\bullet)$ in $\\mathrm{Mod}(\\mathcal O_Y)$, injective in every degree [prop-pur-kinjective-resolutions-exist] (the open subsets of $Y$ form a small site), and put $R\\mathcal H om_{\\mathcal O_Y}(B,K)=\\mathcal H om_{\\mathcal O_Y}(B,\\mathcal I^\\bullet(\\mathcal M^\\bullet))$, the complex of $B$-modules with terms $\\mathcal H om_{\\mathcal O_Y}(B,\\mathcal I^n)$. A quasi-isomorphism $\\mathcal M^\\bullet\\to(\\mathcal M')^\\bullet$ induces a quasi-isomorphism $\\mathcal I^\\bullet(\\mathcal M^\\bullet)\\to\\mathcal I^\\bullet((\\mathcal M')^\\bullet)$ of K-injective complexes (two-out-of-three), hence a quasi-isomorphism of these complexes [lem-pur-rhom-well-defined] (with $\\mathcal L^\\bullet=(\\mathcal L')^\\bullet=B[0]$); being a quasi-isomorphism depends only on the underlying complexes of abelian sheaves, so the assignment descends to a functor $D(\\mathcal O_Y)\\to D(B)$. The object $R\\mathcal H om_{\\mathcal O_Y}(B,K)$ of $D(B)$ is called the derived internal Hom with its natural $B$-module structure; its image in $D(\\mathcal O_Y)$ is the derived internal Hom $R\\mathcal H om_{\\mathcal O_Y}(B,K)$ of [def-pur-derived-internal-hom] (with $L=B[0]$, computed with the same choice of resolutions).",
  "source": {
   "document": "literature/stacks-project/duality.tex",
   "place": "Section section-duality-finite (Right adjoint of pushforward for finite morphisms), Tags 0BUZ, 0BV0, 0BV1"
@@ -21,7 +21,9 @@
  "stmt_deps": [
   "def-pc-scheme",
   "def-pur-derived-internal-hom",
-  "def-pc-derived-category-qcoh-algebra"
+  "def-pc-derived-category-qcoh-algebra",
+  "prop-pur-kinjective-resolutions-exist",
+  "lem-pur-rhom-well-defined"
  ],
  "proof": [],
  "proof_deps": [],
@@ -29,33 +31,60 @@
  "mathlib_searches": [
   {
    "tool": "leanfinder",
-   "query": "internal Hom of pseudo-coherent sheaf and bounded below quasi-coherent complex",
-   "results": "No exact declaration; generic results only",
+   "query": "derived internal Hom natural algebra module structure",
+   "results": "ModuleCat.instMonoidalClosed, ModuleCat.monoidalClosed_pre_app, ModuleCat.ihom_map_apply, ModuleCat.ihom_ev_app, ModuleCat.monoidalClosedHomEquiv, ModuleCat.monoidalClosed_uncurry, ModuleCat.ihom_coev_app, FGModuleCat.ihom_obj (generic module-category internal Hom)",
    "date": "2026-10-11",
    "verdict": "no match"
   },
   {
    "tool": "loogle",
-   "query": "SheafOfModules.IsQuasicoherent",
-   "results": "No exact declaration; generic results only",
+   "query": "CategoryTheory derived internal Hom module algebra",
+   "results": "Unknown identifier CategoryTheory; 0 hits",
    "date": "2026-10-11",
-   "verdict": "generalization only"
+   "verdict": "no match"
   },
   {
    "tool": "grep",
-   "query": "pseudo.?coherent|RHom|internalHom AlgebraicGeometry",
-   "results": "No exact declaration; generic results only",
+   "query": "RHom|derivedHom|internalHom.*module Mathlib",
+   "results": "0 hits",
    "date": "2026-10-11",
    "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "derived internal Hom functor to modules over an algebra",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-11",
+   "verdict": "unavailable"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-sc-finite-pushforward-derived-hom-qcoherent",
   "by": "worker",
   "date": "2026-10-10"
  },
  "chapter": "sec-picard-framework",
- "unit": "sk-thm-picard-duality"
+ "unit": "sk-thm-picard-duality",
+ "split_report": {
+  "date": "2026-10-11",
+  "item": "def-pc-derived-rhom-algebra-module",
+  "worker": "stage1",
+  "summary": "Checked this definition against Stacks duality.tex, Section section-duality-finite (Tags 0BUZ, 0BV0, 0BV1), and the three existing definition dependencies. No project declaration or blueprint duplicate exists, and Mathlib has only generic module-category internal-Hom results. Since the node introduces the derived functor and its natural B-module structure directly, it has no proof steps or subordinate nodes.",
+  "blueprint": "proof applies derived internal Hom and its natural f_*O_X-module structure"
+ },
+ "tool_uses": [
+  "prop-pur-kinjective-resolutions-exist",
+  "lem-pur-rhom-well-defined",
+  "def-pur-derived-internal-hom"
+ ],
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-dra2014",
+  "group": "G1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-dra2014 (reviewer sub-agent of L); spot-checked: Statement and source tags 0BUZ/0BV0/0BV1 identical to the 19:22 restatement (merge 3f07d4810): B3 corrections kept; D(B) cited from sibling def-pc-derived-category-qcoh-algebra, not restated; def-pur-derived-internal-hom read (L=B[0] gives the underlying object). FIX more, RETURN less: (1) C1 'derived extension' was asserted with no construction and no cited K-injective resolution, which the second reading missed: the statement now defines RHom(B,K)=Hom(B,I(M)) with the functorial K-injective resolution [prop-pur-kinjective-resolutions-exist] (Zariski site of Y small, B commutative) and descends to D(O_Y)->D(B) by [lem-pur-rhom-well-defined] with L=L'=B[0]; both added to stmt_deps and tool_uses as generic tools of sk-def-sf-operations. lem-sp-kinjective-computes not used (bounded below only).; 1 file(s) fixed by the reviewer"
+ }
 }
