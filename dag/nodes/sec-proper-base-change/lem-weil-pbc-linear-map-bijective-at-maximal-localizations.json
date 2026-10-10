@@ -1,0 +1,81 @@
+{
+ "id": "lem-weil-pbc-linear-map-bijective-at-maximal-localizations",
+ "kind": "statement",
+ "title": "A linear map that is bijective at every maximal ideal is bijective",
+ "statement": "Let $A$ be a commutative ring and $\\varphi:M\\to N$ a homomorphism of $A$-modules. For a maximal ideal $\\mathfrak m\\subset A$ let $\\varphi_{\\mathfrak m}:M_{\\mathfrak m}\\to N_{\\mathfrak m}$, $x/s\\mapsto\\varphi(x)/s$, be the localization of $\\varphi$ at the multiplicative subset $A\\setminus\\mathfrak m$ [def-weil-pbc-module-localization]. If $\\varphi_{\\mathfrak m}$ is bijective for every maximal ideal $\\mathfrak m$ of $A$, then $\\varphi$ is bijective.",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Algebra, Lemma Tag 00HN (lemma-characterize-zero-local, line 4051), part (6), implication (c) => (a); tag verified in stacks-project/tags/tags (00HN,algebra-lemma-characterize-zero-local); cited as 'By Lemma 00HN we conclude' in the proof of Lemma 00SV (3), line 36839"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-module-localization"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "a linear map of modules which is bijective after localization at every maximal ideal is bijective",
+   "results": "bijective_of_localized_maximal, bijective_of_isLocalized_maximal, surjective_of_isLocalized_maximal, surjective_of_localized_maximal, bijective_of_isLocalization_isMaximal (Mathlib.RingTheory.LocalProperties.Exactness); IsLocalizedModule.map_bijective_iff_localizedModuleMap_bijective (Mathlib.RingTheory.Localization.Module)",
+   "date": "2026-10-10",
+   "verdict": "match: bijective_of_localized_maximal"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "injectivity and surjectivity of a linear map can be checked after localizing at maximal ideals",
+   "results": "bijective_of_localized_maximal, bijective_of_isLocalized_maximal, injective_of_localized_maximal, injective_of_isLocalized_maximal, surjective_of_isLocalized_maximal (Mathlib.RingTheory.LocalProperties.Exactness)",
+   "date": "2026-10-10",
+   "verdict": "match: bijective_of_localized_maximal"
+  },
+  {
+   "tool": "loogle",
+   "query": "Function.Bijective (LocalizedModule.map _ _), Ideal.IsMaximal",
+   "results": "bijective_of_localized_maximal (Mathlib.RingTheory.LocalProperties.Exactness)",
+   "date": "2026-10-10",
+   "verdict": "match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rn 'bijective_of_localized_maximal\\|injective_of_localized_maximal\\|surjective_of_localized_maximal\\|eq_zero_of_localization_maximal' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/; sed -n 1,120p RingTheory/LocalProperties/Exactness.lean",
+   "results": "RingTheory/LocalProperties/Exactness.lean:103 injective_of_localized_maximal, :108 surjective_of_localized_maximal, :113 bijective_of_localized_maximal; RingTheory/LocalProperties/Submodule.lean:94 Module.eq_zero_of_localization_maximal",
+   "date": "2026-10-10",
+   "verdict": "match: bijective_of_localized_maximal (Exactness.lean line 113)"
+  },
+  {
+   "tool": "local_search",
+   "query": "bijective_of_localized_maximal",
+   "results": "theorem in .lake/packages/mathlib/Mathlib/RingTheory/LocalProperties/Exactness.lean (index: unavailable; existence confirmed by grep and sed above)",
+   "date": "2026-10-10",
+   "verdict": "exists"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "bijective_of_localized_maximal",
+  "file": "Mathlib/RingTheory/LocalProperties/Exactness.lean",
+  "line": 113,
+  "how": "exact (lines 113-117, variables lines 99-101): for [CommSemiring R], R-modules M, N and f : M →ₗ[R] N, `(h : ∀ (J : Ideal R) [J.IsMaximal], Function.Bijective ⇑(LocalizedModule.map J.primeCompl f)) : Function.Bijective ⇑f`; `LocalizedModule.map J.primeCompl f` is the map x/s ↦ f(x)/s of [def-weil-pbc-module-localization] (LocalizedModule, Mathlib/Algebra/Module/LocalizedModule/Basic.lean). A commutative ring is a commutative semiring. Lines read with sed -n on 2026-10-10."
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-relative-global-complete-intersection-conormal-free",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "reviewed": "2026-10-10 L: Mathlib leaf checked: bijective_of_localized_maximal, RingTheory/LocalProperties/Exactness.lean:113 (00HN (6) (c)=>(a))"
+}
