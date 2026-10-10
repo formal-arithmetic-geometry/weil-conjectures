@@ -13,7 +13,10 @@ Usage:
 
 Both write their part into dag/lean_names_upstream.json:
   {"blueprint": {"ref", "commit", "names": {node id: [names]}},
-   "docstring": {"ref", "commit", "names": {node id: [names]}, "tags": n, "matched_declarations": n, "unknown_ids": [...]}}
+   "docstring": {"ref", "commit", "names": {node id: [names]}, "partial": {node id: [{name, text}]}, "tags": n,
+                 "matched_declarations": n, "unknown_ids": [...]}}
+A docstring tag with text beyond the ids ("(blueprint: `lem-x`, the implication (1) ⇒ (2))") says the declaration
+states a part of the node: it goes under `partial`, and lean_status gives such a node at best `closed_part`.
 `tools/lean_status.py --extra <branch>=dag/lean_names_upstream.json` adds these names to the nodes' declarations on that
 branch. Node ids that are not DAG nodes are ignored (listed under unknown_ids for the docstrings).
 """
@@ -91,6 +94,7 @@ def cmd_docstrings(args) -> int:
         v.sort()
     ids = node_ids()
     names, unknown, tags, matched = collections.defaultdict(list), set(), 0, set()
+    partial = collections.defaultdict(list)
     out_grep = subprocess.run(["git", "grep", "-n", "-E", r"\(blueprint:", ref, "--", "*.lean"], cwd=repo,
                               capture_output=True, text=True).stdout
     files: dict[str, list[str]] = {}
@@ -120,6 +124,9 @@ def cmd_docstrings(args) -> int:
         if opener == "doc":
             owner = next((o for l1, l2, o in decls if l1 <= lno <= l2), None) or next((o for l1, l2, o in decls if l1 > lno), None)
         for seg in SEG.findall(text):
+            # text beyond the ids ("the implication (1) ⇒ (2)", "the fibrewise step of ...") qualifies the tag: the
+            # declaration states only a part of the node (`partial`), not the node
+            rest = re.sub(r"[`;,\s]", "", ID.sub("", seg))
             for nid in ID.findall(seg):
                 tags += 1
                 nid2 = nid.replace(":", "-", 1)
@@ -128,14 +135,19 @@ def cmd_docstrings(args) -> int:
                     unknown.add(nid); continue
                 if not owner:
                     unattached += 1; continue
+                if rest:
+                    if owner not in [p["name"] for p in partial[nid]]:
+                        partial[nid].append({"name": owner, "text": seg.strip()})
+                    matched.add(owner); continue
                 if owner not in names[nid]:
                     names[nid].append(owner)
                 matched.add(owner)
     out = load_out()
     out["docstring"] = {"ref": ref, "commit": git(repo, "rev-parse", "--short", ref).strip(), "names": dict(sorted(names.items())),
+                        "partial": dict(sorted(partial.items())),
                         "tags": tags, "matched_declarations": len(matched), "tags_not_in_a_declaration_docstring": unattached, "unknown_ids": sorted(unknown)}
     OUT.write_text(json.dumps(out, ensure_ascii=False, indent=1) + "\n")
-    print(f"docstring tags (ids): {tags}; declarations matched to a node: {len(matched)} for {len(names)} nodes; ids that are no node: {len(unknown)}; node tags outside a declaration docstring: {unattached}")
+    print(f"docstring tags (ids): {tags}; declarations matched to a node: {len(matched)}: exact for {len(names)} nodes, qualified (partial) for {len(partial)} nodes; ids that are no node: {len(unknown)}; node tags outside a declaration docstring: {unattached}")
     return 0
 
 

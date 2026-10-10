@@ -12,7 +12,9 @@ names are all library declarations is a Mathlib leaf and closed.
 
 --extra (decision of the human, 2026-10-10): for that branch the node's declarations also include the names of
 tools/lean_names_upstream.py: the current blueprint's `lean = [...]` list of the node and the declarations whose docstring
-carries `(blueprint: <node id>)`. When the current blueprint has a list for the node, an old `blueprint_lean` name that is not
+carries `(blueprint: <node id>)`. A declaration whose tag is qualified ("the implication (1) ⇒ (2)"; the `partial`
+part of that file) is listed in decls with `partial: <tag text>` and never closes the node: a node with only such
+declarations is at best `closed_part` (an attachment-check item for a worker). When the current blueprint has a list for the node, an old `blueprint_lean` name that is not
 on the branch is recorded under `superseded` (renamed or dropped by the humans) instead of `missing`.
 
 A sorry map is the output of tools/sorry_map.lean for one branch (read plain or gzip-compressed, `.jsonl` or `.jsonl.gz`): every declaration of the project, whether its
@@ -100,7 +102,7 @@ def main():
             u = json.loads(pathlib.Path(f).read_text())
             bp = (u.get("blueprint") or {}).get("names", {})
             ds = (u.get("docstring") or {}).get("names", {})
-            extra_by_branch[b] = {"blueprint": bp, "docstring": ds}
+            extra_by_branch[b] = {"blueprint": bp, "docstring": ds, "partial": (u.get("docstring") or {}).get("partial", {})}
         else:
             argv.append(x)
     paths = {p.read_text() and json.loads(p.read_text())["id"]: p for p in (ROOT / "dag/nodes").rglob("*.json")}
@@ -166,9 +168,13 @@ def main():
             found = [n for n in ns if n in own]
             in_lib = [n for n in ns if n not in own and n in lib]       # a library declaration (Mathlib, core): sorry-free
             missing = [n for n in ns if n not in own and n not in lib]
+            # declarations whose docstring tag says they state a part of the node: listed, never closing the node
+            partial = [p for p in (ex["partial"].get(i, []) if ex else []) if p["name"] in own and p["name"] not in ns]
             a = {"state": "none", "decls": [dict(name=n, module=own[n]["module"], lines=[own[n]["l1"], own[n]["l2"]],
                                                    kind=own[n]["kind"], sorry=own[n]["sorry"]) for n in found]
-                 + [dict(name=n, module=lib[n][0], lines=[0, 0], kind=lib[n][1], sorry=False, library=True) for n in in_lib],
+                 + [dict(name=n, module=lib[n][0], lines=[0, 0], kind=lib[n][1], sorry=False, library=True) for n in in_lib]
+                 + [dict(name=p["name"], module=own[p["name"]]["module"], lines=[own[p["name"]]["l1"], own[p["name"]]["l2"]],
+                         kind=own[p["name"]]["kind"], sorry=own[p["name"]]["sorry"], partial=p["text"]) for p in partial],
                  "missing": missing}
             if superseded:
                 a["superseded"] = superseded
@@ -180,6 +186,14 @@ def main():
                     a["state"] = "rests_on_sorry"
                 elif a["state"] == "none":
                     a["state"] = "closed" if not missing else "closed_part"
+                a["open"] = [dict(name=f, module=own[f]["module"], lines=[own[f]["l1"], own[f]["l2"]], kind=own[f]["kind"],
+                                  nodes=node_of.get(f, []), below=any(x in desc(i) for x in node_of.get(f, []))) for f in fr]
+            elif partial:
+                pf = [p["name"] for p in partial]
+                if any(own[n]["sorry"] for n in pf):
+                    a["state"] = "sorry_here"
+                fr = sorted(frontier([n for n in pf if not own[n]["sorry"]]) - set(pf))
+                a["state"] = "rests_on_sorry" if fr and a["state"] == "none" else ("closed_part" if a["state"] == "none" else a["state"])
                 a["open"] = [dict(name=f, module=own[f]["module"], lines=[own[f]["l1"], own[f]["l2"]], kind=own[f]["kind"],
                                   nodes=node_of.get(f, []), below=any(x in desc(i) for x in node_of.get(f, []))) for f in fr]
             d["lean_audit"][branch] = a
