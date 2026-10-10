@@ -1,0 +1,80 @@
+{
+ "id": "lem-weil-pbc-cohomology-powers-ideal-application",
+ "kind": "statement",
+ "title": "Rees-algebra bounds for the cohomology of the I^nF on a proper scheme",
+ "statement": "Let $A$ be a Noetherian ring [def-weil-pbc-noetherian-ring], $I\\subseteq A$ an ideal, $f:X\\to\\operatorname{Spec}A$ a proper morphism [def-weil-proper-morphism], $\\mathcal I=I\\mathcal O_X\\subseteq\\mathcal O_X$ the image of $f^*\\widetilde I\\to f^*\\mathcal O_{\\operatorname{Spec}A}\\to\\mathcal O_X$ [def-nagata-extended-ideal], and $\\mathcal F$ a coherent $\\mathcal O_X$-module [pqf-def-coherent]. Put $\\mathcal I^0\\mathcal F=\\mathcal F$ and, for $n\\ge1$, let $\\mathcal I^n\\mathcal F\\subseteq\\mathcal F$ be as in [def-weil-pbc-coherent-formal-module] (0), so that $\\mathcal I^k\\mathcal F\\subseteq\\mathcal I^n\\mathcal F$ for $k\\ge n\\ge0$. Fix $q\\ge0$, write $M_n=H^q(X,\\mathcal I^n\\mathcal F)$ for $n\\ge0$ (sheaf cohomology [pqf-def-cohomology]; an $A$-module, $a\\in A$ acting through the image of $a$ in $\\Gamma(X,\\mathcal O_X)$), and for $k\\ge n\\ge0$ let $\\mu_{k,n}:M_k\\to M_n$ be the map induced by the inclusion $\\mathcal I^k\\mathcal F\\subseteq\\mathcal I^n\\mathcal F$. Then there is an integer $c\\ge0$ such that (a) for all $n,m\\ge0$ with $n+m\\ge c$ one has $\\mu_{n+m,n}(M_{n+m})\\subseteq I^{m-e}M_n$, where $e=\\max(0,c-n)$; and (b) for all $n\\ge c$ one has $\\operatorname{Ker}(\\mu_{n,0})=\\operatorname{Ker}(\\mu_{n,n-c})$.",
+ "source": {
+  "document": "literature/stacks-project/coherent.tex",
+  "place": "Cohomology of Schemes, Lemma 02OA (lemma-cohomology-powers-ideal-application, line 5452), parts (2) and (3), with its proof (lines 5491-5546: the graded module M = (+)_n H^p(X, I^n F) is finite over the Rees algebra B = (+)_n I^n by Lemma 02O8, lemma-cohomology-powers-ideal-times-F, line 5379; the kernel K = (+)_n Ker(M_n -> M_0) is a graded B-submodule, finite since B is Noetherian). Stacks writes I^nF for the image of f^*(I^n)~ (x) F -> F; this equals (I O_X)^n F as used here, since the image of f^*(I^n)~ in O_X is (I O_X)^n (on an affine open Spec B of X both are I^nB). Stacks' proof of (3) takes c = max of the degrees of generators of K; one c serves (a) and (b) together because both conclusions remain true when c is enlarged (take the maximum of the two). Tags verified in tags/tags: 02OA, 02O8."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-noetherian-ring",
+  "def-weil-proper-morphism",
+  "def-nagata-extended-ideal",
+  "pqf-def-coherent",
+  "def-weil-pbc-coherent-formal-module",
+  "pqf-def-cohomology"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "cohomology of I^n F on proper scheme is finite graded module over Rees algebra, image of H^p(I^{n+m}F) in H^p(I^n F) contained in I^m H^p",
+   "results": "reesAlgebra, reesAlgebra.monomial_mem, instFiniteType...reesAlgebra (Mathlib.RingTheory.ReesAlgebra), Ideal.exists_pow_inf_eq_pow_smul, Ideal.Filtration.submodule, Ideal.Filtration.antitone, Ideal.Filtration.submodule_fg_iff_stable (Mathlib.RingTheory.Filtration), localCohomology (Mathlib.Algebra.Homology.LocalCohomology): module-level Rees algebra and Artin-Rees only, no sheaf cohomology of coherent modules",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Artin-Rees type bound for sheaf cohomology of powers of an ideal times a coherent sheaf on a proper scheme over a Noetherian ring",
+   "results": "localCohomology.ideal_powers_initial, localCohomology.isoSelfLERadical, localCohomology, localCohomology.ofSelfLERadical (Mathlib.Algebra.Homology.LocalCohomology), Ideal.exists_pow_inf_eq_pow_smul, Ideal.iInf_pow_smul_eq_bot_of_isLocalRing, Ideal.iInf_pow_smul_eq_bot_of_noZeroSMulDivisors, Ideal.iInf_pow_smul_eq_bot_of_isTorsionFree (Mathlib.RingTheory.Filtration): module-level only",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Sheaf.H (and 'CategoryTheory.Sheaf.H, Ideal': no result)",
+   "results": "CategoryTheory.Sheaf.H, H.map, H.equiv0, functorH, subsingleton_H_of_isZero, instance Subsingleton (F.H (n+1)) for injective F (Mathlib.CategoryTheory.Sites.SheafCohomology.Basic): cohomology of abelian sheaves on a site as Ext, no module structure over a ring, no coherent sheaves, no proper morphisms",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "local_search",
+   "query": "reesAlgebra (project root ~/weil-conjectures-slopmaster2)",
+   "results": "reesAlgebra, reesAlgebra.fg, reesAlgebra.monomial_mem (Mathlib/RingTheory/ReesAlgebra.lean), reesAlgebra.finiteType (WeilConjectures/Mathlib/RingTheory/ReesAlgebra.lean); index: unavailable",
+   "date": "2026-10-10",
+   "verdict": "no match (ring-level Rees algebra only)"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rlnE 'reesAlgebra|ReesAlgebra' and 'IsProper|Ideal|Module.Finite' in Mathlib/CategoryTheory/Sites/SheafCohomology; ls Mathlib/AlgebraicGeometry/Modules (~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib)",
+   "results": "Rees: RingTheory/ReesAlgebra.lean, RingTheory/Filtration.lean, AlgebraicGeometry/Modules/Tilde.lean (unrelated use), Sites/SmallAffineZariski, IdealSheaf/Basic; SheafCohomology/{Basic,Cech,MayerVietoris}.lean mention no ideal, properness or finiteness; AlgebraicGeometry/Modules has only Presheaf, Sheaf, Tilde: no cohomology of coherent modules",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-ml-cohomology-powers-ideal",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1"
+}

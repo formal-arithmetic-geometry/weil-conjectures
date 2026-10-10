@@ -846,3 +846,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 03:59 L: reviewed lem-weil-pbc-localization-finite-gl-dim (4 steps, +2 leaves), lem-weil-pbc-lci-conormal-free-rank-codimension (6 steps, +4 unsplit): accepted.
 - 04:02 L: reviewed lem-weil-pbc-lqf-restriction-to-opens (5 steps, +01IT leaf, +2 unsplit; citer lqf-qc-source-bounded-fibres repointed to the 01IT leaf), lem-weil-pbc-matrix-left-inverse-minors (4 steps, +adjugate leaf, +Cauchy-Binet node): accepted.
 - 04:04 L: reviewed lem-weil-pbc-mittag-leffler-complex-limit-homology (7 steps, +4: ML and essentially-constant definitions, 02N1, 070D): accepted.
+- 04:05 L: reviewed lem-weil-pbc-ml-cohomology-powers-ideal (6 steps, +02OA (2),(3) node; Stacks 02OB cites 02OA (4) where (3) is used): accepted.
