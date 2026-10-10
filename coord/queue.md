@@ -2,7 +2,7 @@
 
 858 items; claim with `tools/claim.py next <group> [--stage N]`.
 
-## Stage 1: nodes to split (369)
+## Stage 1: nodes to split (368)
 
 | node | distance to a target | Lean state on the done branch |
 |---|---|---|
@@ -25,7 +25,6 @@
 | `lem-weil-pbc-tor-one-surjective-flat-middle` | 1016 | none |
 | `lem-weil-pbc-triangular-change-of-basis` | 1016 | none |
 | `lem-weil-pbc-dim-one-residue-field-extensions-finite` | 1018 | none |
-| `lem-weil-pbc-double-complex-cokernel-homology-iso` | 1018 | none |
 | `def-weil-pbc-double-complex-zigzag-module` | 1019 | none |
 | `lem-weil-pbc-double-complex-row-cycle-lifts-to-zigzag` | 1019 | none |
 | `lem-weil-pbc-double-complex-zigzag-to-row-cokernel-map` | 1019 | none |
@@ -376,7 +375,7 @@
 | `def-exc-jacobian-presentation` | - | none |
 | `lem-zl-noether-normalization-dimension` | - | none |
 
-## Stage 2: nodes to state (489)
+## Stage 2: nodes to state (490)
 
 | node | distance to Mathlib | kind |
 |---|---|---|
@@ -506,6 +505,7 @@
 | `lem-weil-pbc-differential-zero-iff-pth-power` | 1 | state |
 | `lem-weil-pbc-directed-colimit-base-change-elementwise` | 1 | state |
 | `lem-weil-pbc-directed-union-subrings-flat-module` | 1 | state |
+| `lem-weil-pbc-double-complex-cokernel-homology-iso` | 1 | state |
 | `lem-weil-pbc-elementary-etale-finite-piece-persistence` | 1 | state |
 | `lem-weil-pbc-etale-algebra-filtered-colimit-descent` | 1 | state |
 | `lem-weil-pbc-etale-colimit-normal-local-domain` | 1 | state |
@@ -870,7 +870,7 @@
 | `lem-weil-pbc-p1-field-dimension-one` | 4 | state |
 | `lem-weil-pbc-projective-space-zero-isomorphism` | 4 | state |
 
-Not open yet: 387 nodes that wait for stage 1, 910 nodes that wait for a statement dependency.
+Not open yet: 386 nodes that wait for stage 1, 910 nodes that wait for a statement dependency.
 
 ## Stage 3: modules to prove (0)
 
