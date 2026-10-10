@@ -1,0 +1,71 @@
+{
+ "id": "lem-weil-pbc-isolated-fibre-point-quasi-finite-affine-pairs",
+ "kind": "statement",
+ "title": "A point isolated in its fibre is quasi-finite on every affine pair (Stacks 01TH, (2) implies (4))",
+ "statement": "Let $f:X\\to S$ be a morphism of schemes [def-pc-scheme] which is locally of finite type [def-weil-finite-type-morphism], let $x\\in X$, put $s=f(x)$, and let $X_s=X\\times_S\\operatorname{Spec}\\kappa(s)$ be the fibre of $f$ at $s$ with first projection $p:X_s\\to X$ [def-pc-scheme-fibre]. Assume that the unique point $\\xi\\in X_s$ with $p(\\xi)=x$ is isolated in $X_s$, i.e. $\\{\\xi\\}$ is open in $X_s$. Let $U\\subseteq X$ and $V\\subseteq S$ be open subsets whose open subschemes are affine, $U\\cong\\operatorname{Spec}A$ and $V\\cong\\operatorname{Spec}R$ with $A=\\mathcal O_X(U)$, $R=\\mathcal O_S(V)$ [def-weil-affine-spectrum], such that $x\\in U$ and $f(U)\\subseteq V$; let $\\varphi:R\\to A$ be the ring map induced by $f$ and $\\mathfrak q\\subset A$ the prime ideal corresponding to $x$. Then $\\varphi$ is of finite type and $R\\to A$ is quasi-finite at $\\mathfrak q$ [def-weil-pbc-ring-map-quasi-finite-at-prime].",
+ "source": {
+  "document": "literature/stacks-project/morphisms.tex",
+  "place": "Morphisms, Lemma Tag 01TH (lemma-quasi-finite-at-point-characterize), line 3664, (2) implies (4): last paragraph of the proof, lines 3723-3726; finite type of R -> A by Lemma Tag 01T2 (lemma-locally-finite-type-characterize), line 2673"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-finite-type-morphism",
+  "def-pc-scheme-fibre",
+  "def-weil-affine-spectrum",
+  "def-weil-pbc-ring-map-quasi-finite-at-prime"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "if x is isolated in its fibre and f locally of finite type then the ring map of any affine opens is quasi-finite at the prime of x",
+   "results": "LocallyQuasiFinite.recOn, LocallyQuasiFinite.mk, LocallyQuasiFinite.quasiFinite_appLE (Morphisms.QuasiFinite), Algebra.QuasiFiniteAt (RingTheory.QuasiFinite.Basic), instLocallyQuasiFiniteOfIsFinite",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "point isolated in the fibre of a morphism locally of finite type implies quasi-finite at that point (stalk map quasi-finite)",
+   "results": "LocallyOfFiniteType.stalkMap (Morphisms.FiniteType), instLocallyQuasiFiniteOfIsFinite, LocallyQuasiFinite, instHasRingHomPropertyLocallyQuasiFiniteQuasiFinite, instLocallyQuasiFiniteOfIsImmersion (Morphisms.QuasiFinite), Algebra.QuasiFiniteAt.of_surjectiveOnStalks",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -n 'QuasiFiniteAt' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicGeometry/Morphisms/QuasiFinite.lean; sed -n 336,400p of that file; sed -n 750,758p ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/RingTheory/ZariskisMainTheorem.lean",
+   "results": "QuasiFinite.lean:339 def Scheme.Hom.QuasiFiniteAt (stalk map quasi-finite); :343 Scheme.Hom.QuasiFiniteAt.quasiFiniteAt (for every affine pair V <= f^-1 U containing x, (f.appLE U V _).hom.QuasiFiniteAt at the prime of x); :395 Scheme.Hom.quasiFiniteAt_iff_isOpen_singleton_asFiber ([LocallyOfFiniteType f]: f.QuasiFiniteAt x <-> IsOpen {f.asFiber x}); ZariskisMainTheorem.lean:754 Algebra.quasiFiniteAt_iff_isOpen_singleton_fiber",
+   "date": "2026-10-10",
+   "verdict": "generalization only for Mathlib's notions: the composite of :395 (backwards) and :343 is this statement with Mathlib's Algebra.QuasiFiniteAt (localization quasi-finite) in place of the isolated-point notion of def-weil-pbc-ring-map-quasi-finite-at-prime; the two agree by ZariskisMainTheorem.lean:754 plus the identification of the fibre ring, which is a theorem: not a leaf, candidate recorded"
+  }
+ ],
+ "mathlib_match": null,
+ "mathlib_candidate": {
+  "declaration": "AlgebraicGeometry.Scheme.Hom.quasiFiniteAt_iff_isOpen_singleton_asFiber, AlgebraicGeometry.Scheme.Hom.QuasiFiniteAt.quasiFiniteAt, Algebra.quasiFiniteAt_iff_isOpen_singleton_fiber",
+  "file": "Mathlib/AlgebraicGeometry/Morphisms/QuasiFinite.lean, Mathlib/RingTheory/ZariskisMainTheorem.lean",
+  "line": "QuasiFinite.lean:395, :343; ZariskisMainTheorem.lean:754",
+  "how": "(2)=>Mathlib QuasiFiniteAt by :395, then any affine pair by :343, then the isolated-point form on the ring side by ZariskisMainTheorem.lean:754; finite type of appLE by Scheme.Hom.finiteType_appLE (FiniteType.lean)"
+ },
+ "status": "unsplit",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-lqf-restriction-to-opens",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1"
+}

@@ -12,9 +12,89 @@
   "pqf-def-quasifinite",
   "def-weil-open-immersion"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "*$f$ is locally of finite type.* Since $f$ is locally quasi-finite [pqf-def-quasifinite], it is locally of finite type by [lem-weil-pbc-lqf-locally-finite-type].",
+   "uses": [
+    "pqf-def-quasifinite",
+    "lem-weil-pbc-lqf-locally-finite-type"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Morphisms, remark after Definition Tag 01TD, line 3558"
+   }
+  },
+  {
+   "text": "*A small affine pair around a point.* Let $u\\in U$ and $s=f(u)$; then $s\\in V$ since $f(U)\\subseteq V$. By [lem-weil-pbc-affine-opens-basis] applied to $S$, the open $V$ and the point $s$, there is an open $V'\\subseteq S$ with $s\\in V'\\subseteq V$ whose open subscheme is affine, $V'\\cong\\operatorname{Spec}R'$ with $R'=\\mathcal O_S(V')$. The set $U\\cap f^{-1}(V')$ is open in $X$ ($f$ is continuous) and contains $u$; by [lem-weil-pbc-affine-opens-basis] applied to $X$ there is an open $U'\\subseteq X$ with $u\\in U'\\subseteq U\\cap f^{-1}(V')$ whose open subscheme is affine, $U'\\cong\\operatorname{Spec}A'$ with $A'=\\mathcal O_X(U')$ [def-weil-affine-spectrum]. Then $u\\in U'\\subseteq U$, $V'\\subseteq V$ and $f(U')\\subseteq V'$.",
+   "uses": [
+    "lem-weil-pbc-affine-opens-basis",
+    "def-weil-affine-spectrum",
+    "def-pc-scheme"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Schemes, Lemma Tag 01IT (lemma-basis-affine-opens), line 1952"
+   }
+  },
+  {
+   "text": "*$f$ is quasi-finite at $u$ on the pair $(U',V')$.* By [pqf-def-quasifinite] (2), $f$ is quasi-finite at $u$, and $f$ is locally of finite type (step 1). Let $X_s=X\\times_S\\operatorname{Spec}\\kappa(s)$ be the fibre of $f$ at $s$ with first projection $p$ [def-pc-scheme-fibre]. By [lem-weil-pbc-quasi-finite-at-point-isolated] (Stacks 01TH, (1) implies (2)) the unique point $\\xi\\in X_s$ with $p(\\xi)=u$ is isolated in $X_s$. Apply [lem-weil-pbc-isolated-fibre-point-quasi-finite-affine-pairs] (Stacks 01TH, (2) implies (4)) to $f$, the point $u$ and the affine opens $U'\\ni u$, $V'$ of step 2 with $f(U')\\subseteq V'$: the ring map $\\varphi':R'=\\mathcal O_S(V')\\to A'=\\mathcal O_X(U')$ induced by $f$ is of finite type and quasi-finite at the prime $\\mathfrak q'\\subset A'$ corresponding to $u$ [def-weil-pbc-ring-map-quasi-finite-at-prime].",
+   "uses": [
+    "pqf-def-quasifinite",
+    "def-pc-scheme-fibre",
+    "lem-weil-pbc-quasi-finite-at-point-isolated",
+    "lem-weil-pbc-isolated-fibre-point-quasi-finite-affine-pairs",
+    "def-weil-pbc-ring-map-quasi-finite-at-prime"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Morphisms, Lemma Tag 01TH (lemma-quasi-finite-at-point-characterize), line 3664: proof of (1) implies (2), lines 3684-3690, and of (2) implies (4), lines 3723-3726"
+   }
+  },
+  {
+   "text": "*The same pair for $f|_U$.* The open subscheme structure of $U$ is $\\mathcal O_U=\\mathcal O_X|_U$ and that of $V$ is $\\mathcal O_V=\\mathcal O_S|_V$, and the inclusions $\\iota_U,\\iota_V$ are open immersions [def-weil-open-immersion] inducing the identity on sections over opens contained in $U$, resp. $V$. Hence $U'$, an open subset of $U$, has the same open subscheme $(U',\\mathcal O_X|_{U'})$ whether regarded in $U$ or in $X$, so it is an affine open of $U$ with $\\mathcal O_U(U')=A'$ and $u\\in U'$; likewise $V'$ is an affine open of $V$ with $\\mathcal O_V(V')=R'$ [def-weil-affine-spectrum]. As $\\iota_V\\circ f|_U=f\\circ\\iota_U$, the map $f|_U$ agrees with $f$ on underlying points, so $f|_U(U')=f(U')\\subseteq V'$, and the ring map $\\mathcal O_V(V')\\to\\mathcal O_U(U')$ induced by $f|_U$ equals the map $\\varphi':\\mathcal O_S(V')\\to\\mathcal O_X(U')$ induced by $f$ (compose with the identity maps on sections induced by $\\iota_U$, $\\iota_V$); the prime of $A'$ corresponding to $u$ is $\\mathfrak q'$ in both cases. By step 3, $\\varphi'$ is of finite type and quasi-finite at $\\mathfrak q'$, so the pair $(U',V')$ witnesses that $f|_U:U\\to V$ is quasi-finite at $u$ [pqf-def-quasifinite] (1).",
+   "uses": [
+    "def-weil-open-immersion",
+    "def-weil-affine-spectrum",
+    "pqf-def-quasifinite"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Morphisms, Definition Tag 01TD (definition-quasi-finite) (1), line 3538"
+   }
+  },
+  {
+   "text": "*Conclusion.* Since $u\\in U$ was arbitrary, $f|_U$ is quasi-finite at every point of $U$ (step 4), i.e. locally quasi-finite [pqf-def-quasifinite] (2).",
+   "uses": [
+    "pqf-def-quasifinite"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Morphisms, Definition Tag 01TD (definition-quasi-finite) (2), line 3538"
+   }
+  }
+ ],
+ "proof_deps": [
+  "pqf-def-quasifinite",
+  "lem-weil-pbc-lqf-locally-finite-type",
+  "lem-weil-pbc-affine-opens-basis",
+  "def-weil-affine-spectrum",
+  "def-pc-scheme",
+  "def-pc-scheme-fibre",
+  "lem-weil-pbc-quasi-finite-at-point-isolated",
+  "lem-weil-pbc-isolated-fibre-point-quasi-finite-affine-pairs",
+  "def-weil-pbc-ring-map-quasi-finite-at-prime",
+  "def-weil-open-immersion"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/morphisms.tex",
+  "place": "Morphisms, Lemma Tag 01TH (lemma-quasi-finite-at-point-characterize), line 3664, the chain (1) implies (2) implies (4) of its proof (lines 3684-3690, 3723-3726), applied to a pair of affine opens inside U and V; Definition Tag 01TD, line 3538, with the remark on line 3558; Schemes, Lemma Tag 01IT for the choice of the affine pair. Stacks has no separate lemma for the restriction; the assembly of these steps is written by the worker"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -36,10 +116,17 @@
    "results": "QuasiFinite.lean:133 LocallyQuasiFinite (f.resLE V U e); FiniteType.lean:99 LocallyOfFiniteType (f.resLE V U e)",
    "date": "2026-10-10",
    "verdict": "no match for the Stacks notion (Lean candidate: the conjunction of these two instances once pqf-def-quasifinite is matched to LocallyQuasiFinite and LocallyOfFiniteType)"
+  },
+  {
+   "tool": "grep",
+   "query": "sed -n 125,140p ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicGeometry/Morphisms/QuasiFinite.lean; sed -n 40,75p of the same file",
+   "results": "QuasiFinite.lean:129 instance LocallyQuasiFinite (f ∣_ V); :132-134 instance (U : X.Opens) (V : Y.Opens) (e) [LocallyQuasiFinite f] : LocallyQuasiFinite (f.resLE V U e); :71 class LocallyQuasiFinite (RingHom.QuasiFinite on affine pairs), docstring :57 'does not require ... locally of finite type'",
+   "date": "2026-10-10",
+   "verdict": "no match (re-checked): :132 is this statement for Mathlib's LocallyQuasiFinite; the Stacks notion of pqf-def-quasifinite equals LocallyQuasiFinite together with LocallyOfFiniteType only by a theorem, so the item is not a leaf; Lean candidate for stage 2: QuasiFinite.lean:132 together with the resLE instance of FiniteType.lean:99"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "worker",
@@ -59,5 +146,17 @@
   }
  },
  "chapter": "sec-proper-base-change",
- "unit": "sk-thm-p1"
+ "unit": "sk-thm-p1",
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "lem-weil-pbc-lqf-restriction-to-opens",
+  "worker": "stage1",
+  "summary": "Read pqf-def-quasifinite: it takes the affine-local ring-theoretic definition of Stacks 01TD (1) (an affine pair Spec A ∋ x, Spec R with R -> A of finite type and quasi-finite at the prime of x), so the pair the definition gives need not lie in U, V and the proof must change the pair: that is Stacks 01TH, (1) => (2) => (4). Statement kept (checked against 01TD and 01TH (4)); stmt_deps kept. Proof in five steps: f is locally of finite type (new unsplit node lem-weil-pbc-lqf-locally-finite-type, the 'trivially' remark after 01TD, which rests on 01T2); choice of affine opens u ∈ U' ⊆ U ∩ f^{-1}(V'), s ∈ V' ⊆ V (new Mathlib leaf lem-weil-pbc-affine-opens-basis, Stacks 01IT, Scheme.isBasis_affineOpens); u isolated in X_s by the existing lem-weil-pbc-quasi-finite-at-point-isolated (01TH (1)=>(2)) and then R' -> A' of finite type and quasi-finite at q' by the new unsplit node lem-weil-pbc-isolated-fibre-point-quasi-finite-affine-pairs (01TH (2)=>(4), where 'isolated in X_s stays isolated in U_s' and U_s = Spec(A ⊗ κ(p)) belong); the ring map of f|_U on (U',V') is that of f (open subscheme structure sheaves are restrictions), giving quasi-finiteness of f|_U at u by 01TD (1). This route makes the fibre of f|_U unnecessary (only fibres of f occur). Mathlib: Mathlib's LocallyQuasiFinite (QuasiFinite.lean:71) omits locally of finite type, so the resLE instance (:132) is a candidate only, re-checked by sed. Searched the DAG for 01IT, 01T2, 01TH, 'isolated'/'quasi-finite at', 'locally quasi-finite'+'locally of finite type' before creating the three nodes."
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "result": "accepted",
+  "note": "5 steps from the definition 01TD (1) via Stacks 01TH (1)=>(2)=>(4): locally quasi-finite implies locally of finite type (new unsplit node, remark after 01TD); affine opens inside U and V around the point (new 01IT leaf, AffineScheme.lean:305 verified by L); the point is isolated in its fibre (existing node) and then quasi-finite on any affine pair (new unsplit 01TH (2)=>(4) node, Mathlib candidate recorded since Mathlib's QuasiFiniteAt is defined differently); the pair is the same for f|_U; conclusion. Mathlib's resLE instance for LocallyQuasiFinite is not a leaf because that class omits locally of finite type."
+ }
 }

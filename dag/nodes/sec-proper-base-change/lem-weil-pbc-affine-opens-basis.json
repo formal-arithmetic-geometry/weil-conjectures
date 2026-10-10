@@ -1,0 +1,66 @@
+{
+ "id": "lem-weil-pbc-affine-opens-basis",
+ "kind": "statement",
+ "title": "The affine opens of a scheme form a basis of its topology (Stacks 01IT)",
+ "statement": "Let $X$ be a scheme [def-pc-scheme]. For every open subset $W\\subseteq X$ and every point $x\\in W$ there is an open subset $U\\subseteq X$ with $x\\in U\\subseteq W$ such that the open subscheme $(U,\\mathcal O_X|_U)$ is affine, i.e. isomorphic to $\\operatorname{Spec}A$ for a commutative ring $A$ [def-weil-affine-spectrum]. Equivalently, the affine opens of $X$ form a basis of the topology of $X$.",
+ "source": {
+  "document": "literature/stacks-project/schemes.tex",
+  "place": "Schemes, Lemma Tag 01IT (lemma-basis-affine-opens), line 1952"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-affine-spectrum"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "affine open subsets form a basis of the topology of a scheme",
+   "results": "AlgebraicGeometry.isBasis_affine_open, AlgebraicGeometry.Scheme.isBasis_affineOpens (Mathlib.AlgebraicGeometry.AffineScheme), AlgebraicGeometry.isBasis_basicOpen, AlgebraicGeometry.Scheme.affineBasisCover_is_basis (Mathlib.AlgebraicGeometry.Cover.Open)",
+   "date": "2026-10-10",
+   "verdict": "match: Scheme.isBasis_affineOpens"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Scheme.affineOpens, TopologicalSpace.Opens.IsBasis",
+   "results": "AlgebraicGeometry.Scheme.isBasis_affineOpens (X : Scheme) : Opens.IsBasis X.affineOpens (Mathlib.AlgebraicGeometry.AffineScheme)",
+   "date": "2026-10-10",
+   "verdict": "match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -n 'isBasis_affineOpens\\|def Scheme.affineOpens' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicGeometry/AffineScheme.lean; grep -n 'theorem isBasis_iff_nbhd' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/Topology/Sets/Opens.lean",
+   "results": "AffineScheme.lean:255 def Scheme.affineOpens X := {U : X.Opens | IsAffineOpen U}; AffineScheme.lean:305 theorem Scheme.isBasis_affineOpens (X : Scheme) : Opens.IsBasis X.affineOpens; Topology/Sets/Opens.lean:321 isBasis_iff_nbhd : IsBasis B <-> forall U x, x in U -> exists U' in B, x in U' and U' <= U",
+   "date": "2026-10-10",
+   "verdict": "match (lines read with sed -n 300,312p and 321,325p)"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "AlgebraicGeometry.Scheme.isBasis_affineOpens",
+  "file": "Mathlib/AlgebraicGeometry/AffineScheme.lean",
+  "how": "specializes in one line: Scheme.isBasis_affineOpens (AffineScheme.lean:305) says Opens.IsBasis X.affineOpens, where X.affineOpens (AffineScheme.lean:255) is the set of opens U with IsAffineOpen U (the open subscheme U is affine); the neighbourhood form of the statement is TopologicalSpace.Opens.isBasis_iff_nbhd (Mathlib/Topology/Sets/Opens.lean:321) applied to it"
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-lqf-restriction-to-opens",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1"
+}

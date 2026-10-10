@@ -1,0 +1,63 @@
+{
+ "id": "lem-weil-pbc-lqf-locally-finite-type",
+ "kind": "statement",
+ "title": "A locally quasi-finite morphism is locally of finite type (Stacks, remark after 01TD)",
+ "statement": "Let $f:X\\to S$ be a morphism of schemes [def-pc-scheme] which is locally quasi-finite [pqf-def-quasifinite]: every $x\\in X$ has an affine open neighbourhood $\\operatorname{Spec}A=U\\subseteq X$ and an affine open $\\operatorname{Spec}R=V\\subseteq S$ with $f(U)\\subseteq V$ such that $R\\to A$ is of finite type and quasi-finite at the prime of $A$ corresponding to $x$. Then $f$ is locally of finite type [def-weil-finite-type-morphism].",
+ "source": {
+  "document": "literature/stacks-project/morphisms.tex",
+  "place": "Morphisms, Section Tag 01TC (section-quasi-finite), remark after Definition Tag 01TD, line 3558 ('Trivially, a locally quasi-finite morphism is locally of finite type'); the locality of finite type it rests on is Lemma Tag 01T2 (lemma-locally-finite-type-characterize), line 2673"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "pqf-def-quasifinite",
+  "def-weil-finite-type-morphism"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "locally quasi-finite morphism of schemes is locally of finite type",
+   "results": "LocallyQuasiFinite.recOn, LocallyQuasiFinite.mk, LocallyQuasiFinite (Mathlib.AlgebraicGeometry.Morphisms.QuasiFinite), instLocallyOfFiniteTypeOfLocallyOfFinitePresentation, IsFinite.instLocallyOfFiniteType",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.LocallyQuasiFinite, AlgebraicGeometry.LocallyOfFiniteType",
+   "results": "instLocallyQuasiFiniteOfLocallyOfFiniteTypeOfUniversallyInjective, LocallyQuasiFinite.of_injective, LocallyQuasiFinite.of_finite_preimage_singleton, locallyQuasiFinite_iff_finite_preimage_singleton, locallyQuasiFinite_iff_isDiscrete_preimage_singleton (Morphisms.QuasiFinite), quasiFiniteLocus_eq_top(_iff), instIsOpenImmersionToNormalization... (ZariskisMainTheorem): all take LocallyOfFiniteType as a hypothesis",
+   "date": "2026-10-10",
+   "verdict": "no match: no declaration derives LocallyOfFiniteType from LocallyQuasiFinite"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rln 'LocallyQuasiFinite' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib; grep -n 'does not require' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicGeometry/Morphisms/QuasiFinite.lean",
+   "results": "only Morphisms/QuasiFinite.lean and ZariskisMainTheorem.lean use LocallyQuasiFinite; QuasiFinite.lean:23 and :57 docstrings: 'this does not require f to be quasi-compact nor locally of finite type'",
+   "date": "2026-10-10",
+   "verdict": "no match: Mathlib's LocallyQuasiFinite (QuasiFinite.lean:71, RingHom.QuasiFinite on affine pairs) omits finite type, so the statement is not expressible as a Mathlib fact about LocallyQuasiFinite; with pqf-def-quasifinite matched to LocallyQuasiFinite and LocallyOfFiniteType it would become a projection, but that matching is itself a theorem"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-lqf-restriction-to-opens",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1"
+}

@@ -844,3 +844,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 03:57 L: reviewed lem-weil-pbc-local-artinian-basis-when-flat (6 steps, 0 new): accepted.
 - 03:58 L: reviewed lem-weil-pbc-localization-colimit-principal-localizations (7 steps, 0 new; the worker's write script had not run, L applied it): accepted.
 - 03:59 L: reviewed lem-weil-pbc-localization-finite-gl-dim (4 steps, +2 leaves), lem-weil-pbc-lci-conormal-free-rank-codimension (6 steps, +4 unsplit): accepted.
+- 04:02 L: reviewed lem-weil-pbc-lqf-restriction-to-opens (5 steps, +01IT leaf, +2 unsplit; citer lqf-qc-source-bounded-fibres repointed to the 01IT leaf), lem-weil-pbc-matrix-left-inverse-minors (4 steps, +adjugate leaf, +Cauchy-Binet node): accepted.
