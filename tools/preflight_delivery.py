@@ -28,10 +28,17 @@ Checks (roles/remote-lead.md §4-5, the returns of 2026-10-09):
      carry the `blueprint` field; `from.place` is filled (not "unspecified"); `same_as` is a list
      (the whole blueprint was searched with tools/blueprint_refs.py search); a new node's
      `from.node` is the item's nearest blueprint ancestor; the item's split_report has a
-     `blueprint` entry naming the places of the blueprint proof the steps realize.
+     `blueprint` entry naming the places of the blueprint proof the steps realize;
+  9. fields (decision of the human, 2026-10-10, evening; tools/node_fields.py, tools/README.md "Fields of a
+     node"): the item's node is taken as it is on the base and only the fields a split owns are set; every
+     maintainer's field (lean_audit, lean, blueprint.is, created, reviewed, lead_note, tool_uses, import_flags,
+     ...) must be unchanged against the base, and a new node has blueprint.is null and no maintainer's fields
+     except created.
 """
 from __future__ import annotations
 import json, pathlib, re, subprocess, sys
+sys.path.insert(0, str(pathlib.Path(__file__).resolve().parent))
+from node_fields import MAINTAINER, changed_maintainer_fields  # noqa: E402
 
 ROOT = pathlib.Path(__file__).resolve().parent.parent
 TAG = re.compile(r"(?<![A-Za-z0-9])0[0-9A-Z]{3}(?![A-Za-z0-9])")
@@ -214,6 +221,11 @@ def main() -> int:
         for k in ("kind", "source", "title", "chapter", "unit"):
             if not d.get(k):
                 f(f"new node {nid}: no {k}")
+        if (d.get("blueprint") or {}).get("is") is not None:
+            f(f"new node {nid}: blueprint.is is {(d.get('blueprint') or {}).get('is')!r}; a new node is no blueprint node, `is` is null (the maintainer sets it if the node turns out to be one)")
+        extra = [k for k in MAINTAINER if k in d and k not in ("id", "kind", "title", "chapter", "unit", "source", "created", "lean_audit")]
+        if extra:
+            f(f"new node {nid}: carries the maintainer's field(s) {', '.join(extra)} (tools/README.md, 'Fields of a node'); a new node is delivered without them")
         for c in CITE.findall(stmt):
             if c not in all_ids:
                 f(f"new node {nid}: cites [{c}], which is no node")
@@ -221,6 +233,15 @@ def main() -> int:
 
     # 5. the item
     d = load_at("HEAD", item_path)
+    if item in base_ids:
+        try:
+            b = load_at(base, base_ids[item])
+        except Exception:  # noqa: BLE001
+            b = None
+        if b is not None:
+            ch = changed_maintainer_fields(b, d)
+            if ch:
+                f(f"the item's maintainer's field(s) {', '.join(ch)} differ from {base} (check 9; tools/README.md 'Fields of a node'): take the node as it is on the base and set only the fields a split owns; an attachment goes into lean_candidates and the report, not into lean_audit")
     st = str(d.get("status"))
     is_def = str(d.get("kind", "")).startswith("def") or item.startswith("def-")
     if st == "mathlib" and d.get("mathlib_match"):

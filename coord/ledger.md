@@ -1433,3 +1433,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 12:41 L: merged deliver/G1/lem-weil-pbc-triangular-change-of-basis (4 elementary steps, 00MT)
 - 12:41 L: returned deliver/J1/def-weil-pbc-etale-cohomology (no '## Review by J1'; new node's blueprint.is/from malformed)
 - 12:41 L: accepted thm-sc-jacobian-representability: 8 steps, new node lem-sc-picg-geometrically-integral (sorry_here in Lean), unit sk-prop-jacobian realized, tool_uses cor-pd-pic0-base-change
+- 12:45 L: launcher decision (sandbox per item, one clone per group, fields a split owns): roles/remote-lead.md §2/§4, tools/README.md 'Fields of a node', tools/node_fields.py, preflight check 9 (maintainer's fields unchanged, blueprint.is null on new nodes), roles/maintainer.md notice rule; notice line in all 14 returns files
