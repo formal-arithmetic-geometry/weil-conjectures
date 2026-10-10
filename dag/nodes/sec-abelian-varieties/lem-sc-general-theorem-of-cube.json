@@ -4,7 +4,7 @@
   "is": null,
   "from": {
    "node": "thm-sc-theorem-of-cube",
-   "place": "proof, step 1: the general theorem of the cube (Stacks Tag 0BF4) applied with S = Spec k"
+   "place": "proof: construct the universal locally closed locus over Z, prove it closed and open, then use connectedness and the slice pullback"
   },
   "same_as": []
  },
@@ -27,9 +27,103 @@
   "def-weil-residue-field",
   "def-pc-base-change"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Let $p:X\\times_kY\\times_kZ\\to Z$ be the projection. Properness and finite presentation are stable under products and base change, and flatness over the field $k$ is automatic. By Varieties, Lemmas 038K, 038F and 035Z, after any field extension the product of the geometrically integral base changes of $X$ and $Y$ is geometrically integral; hence $X\\to\\operatorname{Spec}k$, $Y\\to\\operatorname{Spec}k$, $X\\times_kY\\to\\operatorname{Spec}k$ and their base changes to $Z$ (in particular $p$) have geometrically integral fibres, in particular geometrically reduced and connected.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "Stacks Project",
+    "place": "More on Morphisms, Theorem 37.33.8 proof, lines 9684-9689; Varieties product lemmas"
+   }
+  },
+  {
+   "text": "Applying Tag 0E0L to $X\\times_kY\\to\\operatorname{Spec}k$ and then base changing to $Z$ gives $p_*\\mathcal O_{X\\times_kY\\times_kZ}=\\mathcal O_Z$, universally. Likewise Tag 0E0L applied to $X\\to\\operatorname{Spec}k$ and $Y\\to\\operatorname{Spec}k$ shows that $X\\times_kZ\\to Z$ and $Y\\times_kZ\\to Z$ have $\\mathcal O_T\\to(\\cdot)_*\\mathcal O$ an isomorphism after every base change $T\\to Z$.",
+   "uses": [
+    "lem-sc-proper-flat-global-sections"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "Stacks Project",
+    "place": "More on Morphisms, proof of Theorem 37.33.8, Tag 0E0L"
+   }
+  },
+  {
+   "text": "By Tag 0BDP applied to $p$ and $\\mathcal L$, there is a universal locally closed subscheme $Z'\\subset Z$ and an invertible module $\\mathcal N$ on $Z'$ such that the restriction of $\\mathcal L$ to $X\\times_kY\\times_kZ'$ is $p^*\\mathcal N$.",
+   "uses": [
+    "lem-sc-picard-diagonal-locally-closed"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "Stacks Project",
+    "place": "More on Morphisms, proof of Theorem 37.33.8, Tag 0BDP"
+   }
+  },
+  {
+   "text": "The assumed triviality on the fibre over $z$ means that $z$ factors through $Z'$, so $Z'$ is nonempty.",
+   "uses": [
+    "lem-sc-picard-diagonal-locally-closed"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "Stacks Project",
+    "place": "More on Morphisms, proof of Theorem 37.33.8, after Tag 0BDP"
+   }
+  },
+  {
+   "text": "Since the fibres of $p$ are geometrically integral, Tag 0BF0 applied to the same universal locus shows that $Z'$ is closed in $Z$.",
+   "uses": [
+    "lem-sc-picard-locus-closed"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "Stacks Project",
+    "place": "More on Morphisms, Lemma get-a-closed, Tag 0BF0"
+   }
+  },
+  {
+   "text": "Choose a point $z'\\in Z'$. Write $p$ as $(X\\times_k Z)\\times_Z(Y\\times_k Z)\\to Z$, a product of two flat, proper morphisms of finite presentation satisfying the universal pushforward condition (Step 2), with sections $\\sigma:Z\\to X\\times_kZ$ and $\\tau:Z\\to Y\\times_kZ$ induced by $x$ and $y$. The pullbacks $(1\\times\\tau)^*\\mathcal L$ and $(\\sigma\\times1)^*\\mathcal L$ are the pullbacks along $\\mathrm{id}_X\\times y\\times\\mathrm{id}_Z$ and $x\\times\\mathrm{id}_Y\\times\\mathrm{id}_Z$, trivial by hypothesis (1), and the restriction of $\\mathcal L$ to the fibre over $z'$ is trivial because $\\operatorname{Spec}\\kappa(z')\\to Z$ factors through the universal locus $Z'$ and every invertible module on $\\operatorname{Spec}\\kappa(z')$ is free. Tag 0BF3 therefore gives an open neighbourhood $U$ of $z'$ such that $\\mathcal L$ is trivial on $p^{-1}(U)$. By the universal factorization property of $Z'$ (with $\\mathcal N=\\mathcal O_U$), the inclusion $U\\to Z$ factors through $Z'$, so $Z'$ contains an open neighbourhood of each of its points and is open in $Z$.",
+   "uses": [
+    "lem-sc-picard-product-open",
+    "lem-sc-picard-diagonal-locally-closed",
+    "lem-sc-proper-flat-global-sections"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "Stacks Project",
+    "place": "More on Morphisms, proof of Theorem 37.33.8, lines 9704-9711; Tag 0BF3"
+   }
+  },
+  {
+   "text": "Thus the image of $Z'\\to Z$ is nonempty (Step 4), closed (Step 5) and open (Step 6) in the connected scheme $Z$, hence equal to $Z$. The open sets $U$ of Step 6 then cover $Z$ and each inclusion $U\\to Z$ factors through the immersion $Z'\\to Z$, which is a monomorphism; so these factorizations glue and $\\mathrm{id}_Z$ factors through $Z'$, i.e. $Z'=Z$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "Stacks Project",
+    "place": "More on Morphisms, proof of Theorem 37.33.8, connectedness conclusion"
+   }
+  },
+  {
+   "text": "We have $\\mathcal L\\cong p^*\\mathcal N$ on all of $X\\times_kY\\times_kZ$. Pulling back along $x\\times y\\times\\mathrm{id}_Z$ identifies $\\mathcal N$ with the pullback of $\\mathcal L$ along that slice, which is trivial by (1); hence $\\mathcal N\\cong\\mathcal O_Z$ and $\\mathcal L\\cong\\mathcal O_{X\\times_kY\\times_kZ}$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "Stacks Project",
+    "place": "More on Morphisms, proof of Theorem 37.33.8, final paragraph"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sc-proper-flat-global-sections",
+  "lem-sc-picard-diagonal-locally-closed",
+  "lem-sc-picard-locus-closed",
+  "lem-sc-picard-product-open"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "Stacks Project",
+  "place": "More on Morphisms, Theorem 37.33.8, Tag 0BF4"
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -40,7 +134,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "reviewer R-toc2456",
@@ -48,5 +142,21 @@
   "date": "2026-10-10"
  },
  "chapter": "sec-abelian-varieties",
- "unit": "sk-prop-av-cube"
+ "unit": "sk-prop-av-cube",
+ "split_report": {
+  "date": "2026-10-11",
+  "item": "lem-sc-general-theorem-of-cube",
+  "worker": "stage1",
+  "summary": "Replaced the invalid broad-theorem split with the actual Tag 0BF4 proof over a field: product properties, universal Picard locus, closedness, openness, connectedness, and final slice pullback. Added four precise statement-only dependencies for Tags 0E0L, 0BDP, 0BF0, and 0BF3.",
+  "blueprint": "Realizes the proof of thm-sc-theorem-of-cube by following More on Morphisms after line 9682, including the universal locus and its closed/open argument.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-gtc2752",
+  "group": "M1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-gtc2752 (reviewer sub-agent of L); spot-checked: Return point of R-gtc2638 repaired: over-base node gone, statement unchanged, proof follows Stacks 0BF4 (more-morphisms.tex 9682-9716) step by step with tags; new nodes 0E0L/0BDP/0BF0/0BF3 checked against the Stacks texts, no duplicates in dag/nodes (grep of tags, seesaw/rigidity/cube/pushforward nodes; lem-pc-h0-* are over a field only). FIX more, RETURN less: (1) C4/B: lem-sc-picard-product-open restated exactly as Tag 0BF3 (0BDP hypotheses instead of integral fibres; the two slices named as (1 x tau)^*L, (sigma x 1)^*L); step 6 now checks those hypotheses via Tag 0E0L (Step 2 extended, uses + lem-sc-proper-flat-global-sections) and names the slices; (2) B: lem-sc-picard-locus-closed made self-contained (universal pushforward hypothesis written out, not referenced to another node's conclusion, geometric fibre and closed immersion cited); (3) B3: stmt_deps of the four new nodes filled from their cited definitions; also Step 1 names Varieties 038K/038F/035Z and Step 7 makes Z'=Z scheme-theoretic (monomorphism gluing).; 5 file(s) fixed by the reviewer"
+ }
 }
