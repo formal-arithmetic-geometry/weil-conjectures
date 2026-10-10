@@ -1,6 +1,6 @@
 # Work queue
 
-918 items; claim with `tools/claim.py next <group> [--stage N]`.
+919 items; claim with `tools/claim.py next <group> [--stage N]`.
 
 ## Stage 1: nodes to split (625)
 
@@ -8,7 +8,6 @@
 |---|---|---|
 | `lem-weil-pbc-small-etale-representable-presheaf-sheaf` | 1011 | none |
 | `lem-weil-pbc-affine-basic-sets-disjoint-refinement` | 1012 | none |
-| `lem-weil-pbc-artinian-ring-self-finite-length` | 1012 | none |
 | `lem-weil-pbc-closed-immersion-conormal-flat-base-change` | 1012 | none |
 | `lem-weil-pbc-closed-immersion-conormal-functorial` | 1012 | none |
 | `lem-weil-pbc-closed-pushforward-constant-stalks` | 1012 | none |
@@ -26,7 +25,6 @@
 | `lem-weil-pbc-smooth-fibre-regular-local` | 1012 | none |
 | `lem-weil-pbc-smooth-localization-conormal-split` | 1012 | none |
 | `lem-weil-pbc-smooth-over-field-dimension-differentials` | 1012 | none |
-| `lem-weil-pbc-formal-glueing-complex-exact` | 1013 | none |
 | `lem-weil-pbc-formal-glueing-finite-modules` | 1013 | none |
 | `lem-weil-pbc-formal-glueing-isogeny` | 1013 | none |
 | `lem-weil-pbc-free-resolution-ses-split` | 1013 | none |
@@ -118,6 +116,8 @@
 | `lem-weil-pbc-local-ring-spec-limit-affine-neighbourhoods` | 1014 | none |
 | `lem-weil-pbc-nl-presentations-homotopy-equivalent` | 1014 | none |
 | `lem-weil-pbc-p-basis-differentials-basis` | 1014 | none |
+| `lem-weil-pbc-torsion-module-flat-base-change-iso` | 1014 | none |
+| `lem-weil-pbc-torsion-submodule-flat-base-change-iso` | 1014 | none |
 | `lem-weil-pbc-two-term-homotopy-equivalence-direct-sum` | 1014 | none |
 | `lem-weil-pbc-injective-acyclicity-bounded-below` | 2002 | sorry_here |
 | `lem-weil-pbc-property-implies-acyclicity` | 2003 | none |
@@ -632,7 +632,7 @@
 | `def-exc-jacobian-presentation` | - | none |
 | `def-nagata-rees-algebra` | - | none |
 
-## Stage 2: nodes to state (293)
+## Stage 2: nodes to state (294)
 
 | node | distance to Mathlib | kind |
 |---|---|---|
@@ -664,6 +664,7 @@
 | `lem-weil-pbc-algebra-colimit-fp-algebras-over-it` | 1 | state |
 | `lem-weil-pbc-annihilator-element-flat-base-change` | 1 | state |
 | `lem-weil-pbc-annihilator-localization-finite` | 1 | state |
+| `lem-weil-pbc-artinian-ideal-length-one-filtration` | 1 | state |
 | `lem-weil-pbc-artinian-local-essentially-finite-type-residue` | 1 | state |
 | `lem-weil-pbc-basis-sheaf-cofinal-coverings` | 1 | state |
 | `lem-weil-pbc-basis-sheaf-sections-germs` | 1 | state |
@@ -771,6 +772,7 @@
 | `lem-weil-pbc-flat-permanence` | 1 | state |
 | `lem-weil-pbc-flat-ses-kernel-flat` | 1 | state |
 | `lem-weil-pbc-flat-under-regular` | 1 | state |
+| `lem-weil-pbc-formal-glueing-complex-exact` | 1 | state |
 | `lem-weil-pbc-gabber-finite-etale-section` | 1 | state |
 | `lem-weil-pbc-gabber-root-criterion-etale-section-lifting` | 1 | state |
 | `lem-weil-pbc-h0-spectral-closed-restriction` | 1 | state |
@@ -925,7 +927,6 @@
 | `lem-weil-pbc-zariski-pair-flat-integral-isomorphism` | 1 | state |
 | `lem-weil-pbc-zariski-pair-rank-one-propagation` | 1 | state |
 | `lemma-weil-pbc-finite-l-group-filtration` | 1 | state |
-| `lem-weil-pbc-artinian-ideal-length-one-filtration` | 2 | state |
 | `lem-weil-pbc-finite-type-lift-nilpotent` | 2 | state |
 | `lem-weil-pbc-p1-field-dimension-one` | 4 | state |
 | `lem-weil-pbc-projective-space-zero-isomorphism` | 4 | state |
