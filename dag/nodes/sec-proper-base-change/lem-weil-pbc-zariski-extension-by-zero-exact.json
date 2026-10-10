@@ -13,9 +13,89 @@
   "def-weil-pbc-sheafification",
   "def-weil-pbc-exact-sequence"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "*Step 1 (additivity, and $j_!$ on morphisms is sheafification).* By [lem-weil-pbc-zariski-extension-by-zero-adjunction] (1), $\\mathcal F\\mapsto j_!\\mathcal F$, $\\alpha\\mapsto j_!\\alpha$ is an additive functor $\\textit{Ab}(U_{\\rm Zar})\\to\\textit{Ab}(X_{\\rm Zar})$; in particular $j_!0=0$ for zero morphisms. Both categories are abelian [def-weil-pbc-sites-and-cohomology] (1). Write $\\#:\\textit{PAb}(X_{\\rm Zar})\\to\\textit{Ab}(X_{\\rm Zar})$ for sheafification on the site $X_{\\rm Zar}$ [def-weil-pbc-sheafification], with unit $\\theta_{\\mathcal P}:\\mathcal P\\to\\mathcal P^\\#$; for a morphism $\\varphi:\\mathcal P\\to\\mathcal P'$ of presheaves, $\\varphi^\\#$ is by definition the unique morphism of sheaves with $\\varphi^\\#\\circ\\theta_{\\mathcal P}=\\theta_{\\mathcal P'}\\circ\\varphi$ (universal property of $\\theta_{\\mathcal P}$ applied to $\\theta_{\\mathcal P'}\\circ\\varphi$). Since $j_!\\mathcal F=(j_{p!}\\mathcal F)^\\#$ with $\\theta_{\\mathcal F}=\\theta_{j_{p!}\\mathcal F}$, and $j_!\\alpha$ is characterized by the same equation, $j_!\\alpha=(j_{p!}\\alpha)^\\#$.",
+   "uses": [
+    "lem-weil-pbc-zariski-extension-by-zero-adjunction",
+    "def-weil-pbc-sites-and-cohomology",
+    "def-weil-pbc-sheafification"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Modules on Sites, Lemma 03DJ (label lemma-extension-by-zero-exact, line 2160), proof"
+   }
+  },
+  {
+   "text": "*Step 2 (a monomorphism of $\\textit{Ab}(U_{\\rm Zar})$ is injective on every section).* Let $\\alpha:\\mathcal F'\\to\\mathcal F$ be a monomorphism of $\\textit{Ab}(U_{\\rm Zar})$. By [lem-weil-pbc-sheafification-exact] (1) on the site $U_{\\rm Zar}$, a kernel of $\\alpha$ is $k:\\mathcal K\\to\\mathcal F'$ with $\\mathcal K(W)=\\operatorname{Ker}(\\alpha_W)$ ($W\\subseteq U$ open) and $k_W$ the inclusion. Then $\\alpha\\circ k=0=\\alpha\\circ 0$, so $k=0$ because $\\alpha$ is a monomorphism; hence each inclusion $k_W:\\operatorname{Ker}(\\alpha_W)\\to\\mathcal F'(W)$ is zero, i.e. $\\operatorname{Ker}(\\alpha_W)=0$: every $\\alpha_W$ is injective.",
+   "uses": [
+    "lem-weil-pbc-sheafification-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Modules on Sites, Lemma 03DJ (label lemma-extension-by-zero-exact, line 2160), proof"
+   }
+  },
+  {
+   "text": "*Step 3 ($j_!$ carries monomorphisms to monomorphisms).* Let $\\alpha:\\mathcal F'\\to\\mathcal F$ be a monomorphism of $\\textit{Ab}(U_{\\rm Zar})$. By Step 2 and the definition of $j_{p!}$, every component $(j_{p!}\\alpha)_V$ ($V\\subseteq X$ open) is injective: it is $\\alpha_V$ if $V\\subseteq U$ and $0\\to0$ otherwise. Hence the zero presheaf $0$ with the zero map $0\\to j_{p!}\\mathcal F'$ is a kernel of $j_{p!}\\alpha$ in $\\textit{PAb}(X_{\\rm Zar})$: its composite with $j_{p!}\\alpha$ is $0$, and a morphism $t:\\mathcal T\\to j_{p!}\\mathcal F'$ with $j_{p!}\\alpha\\circ t=0$ has $(j_{p!}\\alpha)_V\\circ t_V=0$ for all $V$ (composition and zero morphisms of presheaves are sectionwise, [lem-weil-pbc-abelian-presheaves-evaluation-exact]), so $t_V=0$ by injectivity, i.e. $t=0$, which factors uniquely through $0$. A kernel is a finite limit (of the diagram $j_{p!}\\mathcal F'\\rightrightarrows j_{p!}\\mathcal F$ given by $j_{p!}\\alpha$ and $0$), and so is the zero object (the limit of the empty diagram, a terminal object of the abelian category $\\textit{PAb}(X_{\\rm Zar})$). By [lem-weil-pbc-sheafification-exact] (2) the functor $\\#$ commutes with finite limits; hence $0^\\#$ is a terminal, hence zero, object of the abelian category $\\textit{Ab}(X_{\\rm Zar})$ [def-weil-pbc-sites-and-cohomology] (1), and $0^\\#\\to j_!\\mathcal F'$ is a kernel of $(j_{p!}\\alpha)^\\#=j_!\\alpha$ (Step 1); also $\\#$ carries the zero morphism to the zero morphism, since $0^\\#$ is a zero object and the zero morphism factors through $0$. Now if $\\beta,\\gamma:\\mathcal T\\to j_!\\mathcal F'$ satisfy $j_!\\alpha\\circ\\beta=j_!\\alpha\\circ\\gamma$, then $j_!\\alpha\\circ(\\beta-\\gamma)=0$ (composition is bilinear), so $\\beta-\\gamma$ factors through the zero object $0^\\#$ and is $0$: $\\beta=\\gamma$. So $j_!\\alpha$ is a monomorphism.",
+   "uses": [
+    "lem-weil-pbc-abelian-presheaves-evaluation-exact",
+    "lem-weil-pbc-sheafification-exact",
+    "def-weil-pbc-sites-and-cohomology"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Modules on Sites, Lemma 03DJ (label lemma-extension-by-zero-exact, line 2160), proof"
+   }
+  },
+  {
+   "text": "*Step 4 ($j_!$ carries a cokernel to a cokernel).* Let $0\\to\\mathcal F'\\xrightarrow{\\alpha}\\mathcal F\\xrightarrow{\\beta}\\mathcal F''\\to0$ be a short exact sequence of $\\textit{Ab}(U_{\\rm Zar})$ [def-weil-pbc-exact-sequence]: $\\beta\\circ\\alpha=0$, $\\alpha$ is a monomorphism, $\\beta$ an epimorphism and the complex $\\mathcal F'\\to\\mathcal F\\to\\mathcal F''$ is exact at $\\mathcal F$. By [lem-weil-pbc-abelian-exact-epi-cokernel] (a), $\\beta$ is a cokernel of $\\alpha$. A cokernel of $\\alpha$ is the same as a colimit [def-weil-pbc-category-colimit] of the diagram $D$ on the category $I$ with two objects $a,b$ and two parallel non-identity arrows $a\\rightrightarrows b$, sent to $\\alpha,0:\\mathcal F'\\rightrightarrows\\mathcal F$: a cocone $(\\mathcal M,\\mu_a,\\mu_b)$ on $D$ has $\\mu_a=\\mu_b\\circ\\alpha=\\mu_b\\circ0=0$, so it is the same as a morphism $\\mu_b:\\mathcal F\\to\\mathcal M$ with $\\mu_b\\circ\\alpha=0$, and the colimit property is the universal property of the cokernel; the cocone is $(\\mathcal F'',0,\\beta)$. By [lem-weil-pbc-zariski-extension-by-zero-adjunction] (2), $j_!$ is left adjoint to the restriction functor $\\mathcal G\\mapsto\\mathcal G|_U$, $\\psi\\mapsto\\psi|_U$ (a functor, since its components are those of $\\mathcal G$ and $\\psi$), through bijections natural in both variables. By [lem-weil-pbc-left-adjoint-preserves-colimits], $(j_!\\mathcal F'',j_!0,j_!\\beta)$ is a colimit of $j_!\\circ D$, which is the diagram $j_!\\alpha,j_!0:j_!\\mathcal F'\\rightrightarrows j_!\\mathcal F$; since $j_!0=0$ (Step 1), by the same translation $j_!\\beta$ is a cokernel of $j_!\\alpha$ in $\\textit{Ab}(X_{\\rm Zar})$.",
+   "uses": [
+    "def-weil-pbc-exact-sequence",
+    "lem-weil-pbc-abelian-exact-epi-cokernel",
+    "def-weil-pbc-category-colimit",
+    "lem-weil-pbc-zariski-extension-by-zero-adjunction",
+    "lem-weil-pbc-left-adjoint-preserves-colimits"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Modules on Sites, Lemma 03DJ (label lemma-extension-by-zero-exact, line 2160), proof: right exact as a left adjoint, Categories Lemma 0039 (categories-lemma-exact-adjoint)"
+   }
+  },
+  {
+   "text": "*Step 5 (conclusion).* For a short exact sequence $0\\to\\mathcal F'\\xrightarrow{\\alpha}\\mathcal F\\xrightarrow{\\beta}\\mathcal F''\\to0$ of $\\textit{Ab}(U_{\\rm Zar})$, $j_!\\alpha$ is a monomorphism (Step 3, $\\alpha$ being a monomorphism [def-weil-pbc-exact-sequence]) and $j_!\\beta$ is a cokernel of $j_!\\alpha$ (Step 4). By [lem-weil-pbc-abelian-exact-epi-cokernel] (c) in the abelian category $\\textit{Ab}(X_{\\rm Zar})$ [def-weil-pbc-sites-and-cohomology] (1), $0\\to j_!\\mathcal F'\\xrightarrow{j_!\\alpha}j_!\\mathcal F\\xrightarrow{j_!\\beta}j_!\\mathcal F''\\to0$ is a short exact sequence. With the additivity of Step 1 this is the exactness of $j_!$; the clause on monomorphisms is Step 3.",
+   "uses": [
+    "def-weil-pbc-exact-sequence",
+    "lem-weil-pbc-abelian-exact-epi-cokernel",
+    "def-weil-pbc-sites-and-cohomology"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Modules on Sites, Lemma 03DJ (label lemma-extension-by-zero-exact, line 2160), proof"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-zariski-extension-by-zero-adjunction",
+  "def-weil-pbc-sites-and-cohomology",
+  "def-weil-pbc-sheafification",
+  "lem-weil-pbc-sheafification-exact",
+  "lem-weil-pbc-abelian-presheaves-evaluation-exact",
+  "def-weil-pbc-exact-sequence",
+  "lem-weil-pbc-abelian-exact-epi-cokernel",
+  "def-weil-pbc-category-colimit",
+  "lem-weil-pbc-left-adjoint-preserves-colimits"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Modules on Sites, Lemma 03DJ (label lemma-extension-by-zero-exact, line 2160) and its proof, specialized to the ringed site (X_Zar, Z) and the object U; right exactness via Categories Lemma 0039 (categories-lemma-exact-adjoint), written out as preservation of cokernels by the left adjoint j_!"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -51,10 +131,38 @@
    "results": "ShortComplex.Exact.mono_g_iff, ShortComplex.exact_iff_mono (Algebra.Homology.ShortComplex.Exact), ObjectProperty...IsClosedUnderExtensions, Abelian.Ext.mapExactFunctor_zero, PresheafedSpace.ofRestrict_mono; nothing about extension by zero",
    "date": "2026-10-10",
    "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "exactness of the left adjoint to restriction of sheaves to an open subset (extension by zero, j_!)",
+   "results": "Scheme.Modules.instIsLeftAdjointRestrictFunctor, Scheme.Modules.restrictAdjunction (Mathlib.AlgebraicGeometry.Modules.Sheaf: restriction is the LEFT adjoint, of pushforward), HasSheafify.isLeftExact (Sites.Sheafification), constantSheafΓAdj, stalkSkyscraperSheafAdjunction, sheafPullbackConstruction.sheafAdjunctionContinuous (Sites.Pullback), plusPlusAdjunction; no extension by zero",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "extension by zero j_! of abelian sheaves from an open subset is an exact functor",
+   "results": "Sheaf.hasExactColimitsOfShape and related instances (Mathlib.CategoryTheory.Abelian.GrothendieckAxioms.Sheaf), HasSheafify.isLeftExact, Sheaf.instIsGrothendieckAbelian, MayerVietorisSquare.shortComplex_exact; nothing about extension by zero",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.sheafPullback, CategoryTheory.Limits.PreservesFiniteLimits",
+   "results": "Functor.sheafPullbackConstruction.preservesFiniteLimits (needs PreservesFiniteLimits G.op.lan), SmallCategories.instPreservesFiniteLimitsSheafSheafPullbackOfRepresentablyFlat (needs RepresentablyFlat G), both Mathlib.CategoryTheory.Sites.Pullback",
+   "date": "2026-10-10",
+   "verdict": "no match: for G the inclusion of the opens of U into the opens of X, G is not representably flat (it does not preserve the terminal object when U is not X) and G.op.lan is not left exact, so neither instance applies; and Mathlib does not identify G.sheafPullback with the sheafification of j_{p!}"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rn -i 'extendByZero|extensionByZero|shriek' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib; grep -rn 'sheafAdjunctionContinuous' (same dir); grep -rn 'PreservesFiniteLimits.*leftAdjoint|preservesMonomorphisms_of_preservesLimitsOfShape|instance.*PreservesMonomorphisms' (same dir)",
+   "results": "only Function.ExtendByZero (Algebra/Group/Pi/Lemmas.lean:446, LinearAlgebra/Pi.lean:653; functions); sheafAdjunctionContinuous at CategoryTheory/Sites/Pullback.lean:59,75 and Topology/Sheaves/Functors.lean:105 (pullback along continuous maps); Sites/Sheafification.lean:48,54 (sheafification left exact); Limits/Constructions/EpiMono.lean:40 preservesMonomorphisms_of_preservesLimitsOfShape (generic); no extension by zero of sheaves and no exactness of it",
+   "date": "2026-10-10",
+   "verdict": "no match"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "worker",
@@ -74,5 +182,12 @@
   }
  },
  "chapter": "sec-proper-base-change",
- "unit": "sk-thm-p1"
+ "unit": "sk-thm-p1",
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "lem-weil-pbc-zariski-extension-by-zero-exact",
+  "worker": "stage1",
+  "summary": "Checked the statement against Stacks 03DJ (sites-modules.tex line 2160) for (X_Zar, Z) and U; kept it unchanged. Not a Mathlib leaf (no extension by zero in Mathlib; Functor.sheafPullback along the inclusion of opens is not shown exact and not identified with (j_{p!})^#; searches of all three kinds recorded). Proof follows 03DJ: additivity and adjunction from the sibling lem-weil-pbc-zariski-extension-by-zero-adjunction (1),(2) (cited by statement only); monomorphisms are sectionwise injective (sectionwise kernels, lem-weil-pbc-sheafification-exact (1) on U_Zar), so j_{p!}alpha has zero kernel in PAb(X_Zar), and sheafification preserves finite limits (lem-weil-pbc-sheafification-exact (2)) so j_!alpha = (j_{p!}alpha)^# has zero kernel and is mono; right exactness of 03DJ (Categories 0039) is written out as: beta is a cokernel of alpha (lem-weil-pbc-abelian-exact-epi-cokernel (a)), a cokernel is a colimit of a parallel pair, and the left adjoint j_! preserves it (lem-weil-pbc-left-adjoint-preserves-colimits); then lem-weil-pbc-abelian-exact-epi-cokernel (c) gives the short exact sequence. No new nodes. The citer lem-weil-pbc-zariski-open-restriction-injectives Step 3 uses exactly the exactness (through preservation of monomorphisms in lem-sp-right-adjoint-preserves-injectives), which Steps 3 and 5 give."
+ },
+ "reviewed": "2026-10-10 L: 5 steps checked against 03DJ: j_! additive and j_! alpha = (j_{p!} alpha)^#, monomorphisms are sectionwise injective, j_{p!} alpha has zero kernel and sheafification preserves finite limits, cokernels preserved as colimits by the left adjoint (adjunction node (2)), short exactness by abelian-exact-epi-cokernel (c); citer zariski-open-restriction-injectives step 3 needs only preservation of monomorphisms"
 }
