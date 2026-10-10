@@ -1,8 +1,8 @@
 # Work queue
 
-858 items; claim with `tools/claim.py next <group> [--stage N]`.
+866 items; claim with `tools/claim.py next <group> [--stage N]`.
 
-## Stage 1: nodes to split (312)
+## Stage 1: nodes to split (320)
 
 | node | distance to a target | Lean state on the done branch |
 |---|---|---|
@@ -13,8 +13,16 @@
 | `lemma-weil-pbc-finite-refinement-etale-cover` | 2006 | sorry_here |
 | `lem-weil-pbc-sets-pushforward-stalk-strict-henselization` | 2008 | none |
 | `lem-sc-pic-lift-closed-immersion-dim-le-one` | 2010 | none |
-| `lem-sc-reduced-dim-le-one-ample` | 2010 | none |
+| `lem-sc-affine-cap-section-open` | 2011 | none |
+| `lem-sc-ample-finite-principal-affine` | 2011 | none |
+| `lem-sc-ample-ideal-section` | 2011 | none |
 | `lem-sc-ample-square-zero-thickening` | 2011 | none |
+| `lem-sc-closed-affine-union-affine` | 2011 | none |
+| `lem-sc-component-intersections-finite` | 2011 | none |
+| `lem-sc-conductor-sections` | 2011 | none |
+| `lem-sc-glue-component-line-bundles` | 2011 | none |
+| `lem-sc-integral-dim-one-ample` | 2011 | none |
+| `lem-sc-zero-dim-noetherian-affine` | 2011 | none |
 | `lem-weil-pbc-derived-etale-cohomology-limit` | 3004 | none |
 | `lem-weil-pbc-zero-dimensional-cohomology` | 3004 | none |
 | `lem-sc-etale-affine-qcoherent` | 3007 | none |
@@ -34,7 +42,6 @@
 | `lem-sc-hilb-dominating-power` | 3010 | none |
 | `lem-sc-point-tangent-separation-closed-immersion` | 3010 | none |
 | `thm-sc-serre-duality-curve` | 3010 | rests_on_sorry |
-| `lem-exc-coinduced-continuous-acyclic` | 3011 | none |
 | `lem-exc-coinduced-discrete-embedding` | 3011 | none |
 | `lem-pc-ample-affine-loci-criterion` | 3011 | none |
 | `lem-pc-base-change-closure-components` | 3011 | none |
@@ -43,6 +50,8 @@
 | `lem-sc-finite-duality` | 3011 | rests_on_sorry |
 | `lem-sc-regular-curve-torsionfree-free` | 3011 | none |
 | `thm-sc-p1-duality` | 3011 | sorry_here |
+| `lem-exc-coinduced-homotopy-continuous` | 3012 | none |
+| `lem-exc-coinduced-homotopy-identity` | 3012 | none |
 | `lem-exc-rg-discrete-modules-functorial-injective-embeddings` | 3012 | none |
 | `lem-pc-grothendieck-edge-cocycle` | 3012 | none |
 | `lem-pc-projective-base-change` | 3012 | none |
@@ -53,7 +62,6 @@
 | `lem-sc-p1-graded-syzygy` | 3013 | none |
 | `lem-sc-p1-proj-sheafification-exact` | 3013 | none |
 | `lem-sc-p1-proj-shifted-free-twist` | 3013 | none |
-| `lem-weil-pbc-proper-composition` | 4002 | none |
 | `lem-weil-pbc-proper-to-separated` | 4003 | none |
 | `lem-weil-pbc-closed-immersion-products` | 4004 | none |
 | `lem-sc-brauer-zero` | 4005 | rests_on_sorry |
@@ -870,7 +878,7 @@
 | `lem-weil-pbc-p1-field-dimension-one` | 4 | state |
 | `lem-weil-pbc-projective-space-zero-isomorphism` | 4 | state |
 
-Not open yet: 331 nodes that wait for stage 1, 1020 nodes that wait for a statement dependency.
+Not open yet: 339 nodes that wait for stage 1, 1022 nodes that wait for a statement dependency.
 
 ## Stage 3: modules to prove (0)
 
