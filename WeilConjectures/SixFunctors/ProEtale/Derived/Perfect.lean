@@ -8,7 +8,6 @@ module
 public import Mathlib.AlgebraicGeometry.Noetherian
 public import WeilConjectures.Mathlib.CategoryTheory.Monoidal.Rigid.Braided
 public import WeilConjectures.SixFunctors.ProEtale.Derived.Duality
-public import WeilConjectures.SixFunctors.ProEtale.Derived.UpperLowerStar
 public import WeilConjectures.SixFunctors.ProEtale.Derived.TorAmplitude
 
 /-!
@@ -32,10 +31,6 @@ coefficient ring `Λ`, lies in `Dctf(X, Λ)`.
   `AlgebraicGeometry.ProEtale.derivedDualEval_eq_uncurry` (`rem-ptr-pod-perfect-complex-on-x-5`):
   the coefficient dual and its evaluation `AlgebraicGeometry.ProEtale.derivedDualEval` are
   formed with the derived internal hom.
-- `AlgebraicGeometry.ProEtale.isDualizable_iff_isLocallyPerfect` (`sk-def-perfect`): a complex is
-  perfect (dualizable) if and only if it is locally quasi-isomorphic to a bounded complex of
-  finite projective sheaves (`AlgebraicGeometry.ProEtale.IsLocallyPerfect`). Both directions are
-  still `sorry`.
 - `AlgebraicGeometry.ProEtale.DerivedCategory.constructibleTorAmplitudeIn_single_of_isDualizable`
   (`prop-pod-perfect-local-model`): a finite projective `Λ_X`-module is flat and constructible.
 - `AlgebraicGeometry.ProEtale.DerivedCategory.constructibleFiniteTor_of_isDualizable`
@@ -68,8 +63,6 @@ quasi-compact.
 universe u' u
 
 open CategoryTheory Limits MonoidalCategory Opposite
-
-open scoped CategoryTheory.Functor
 
 namespace AlgebraicGeometry
 
@@ -116,48 +109,7 @@ theorem isDualizable_derivedDual
     _root_.DerivedCategory.nonempty_braidedCategory (Sheaf (Scheme.ProEt.topology X) A)
   exact hK.ihom_unit
 
-/-- Blueprint `def-pod-perfect-complex-on-x`, as used in `sk-def-perfect`: perfectness in the
-local sense.
-
-A complex `K` of pro-étale sheaves on `X` is *locally perfect* if there is a pro-étale covering
-family `g i : W i ⟶ X` such that every derived pullback `Lg_i^* K` is isomorphic to a bounded
-complex of finite projective sheaves, rendered as dualizable sheaves. -/
-def IsLocallyPerfect (K : _root_.DerivedCategory (Sheaf (Scheme.ProEt.topology X) A)) : Prop :=
-  ∃ (ι : Type u) (W : ι → Scheme.{u}) (g : ∀ i, W i ⟶ X) (_ : ∀ i, WeaklyEtale (g i)),
-    Presieve.ofArrows W g ∈ Scheme.proetalePrecoverage X ∧
-      ∀ i, ∃ (P : CochainComplex (Sheaf (Scheme.ProEt.topology (W i)) A) ℤ) (a b : ℤ),
-        P.IsStrictlyGE a ∧ P.IsStrictlyLE b ∧ (∀ n, IsDualizable (P.X n)) ∧
-          Nonempty (L((g i)^*[A]).obj K ≅ _root_.DerivedCategory.Q.obj P)
-
 end Dualizable
-
-section Local
-
-variable (Λ : Type (u + 1)) [CommRing Λ] {X : Scheme.{u}}
-
-/-- Blueprint `sk-def-perfect`: a dualizable complex of pro-étale sheaves is locally perfect. -/
-theorem isLocallyPerfect_of_isDualizable
-    {K : _root_.DerivedCategory (Sheaf (Scheme.ProEt.topology X) (ModuleCat.{u + 1} Λ))}
-    (hK : IsDualizable K) : IsLocallyPerfect K :=
-  sorry
-
-/-- Blueprint `sk-def-perfect`: a locally perfect complex of pro-étale sheaves is dualizable. -/
-theorem isDualizable_of_isLocallyPerfect
-    {K : _root_.DerivedCategory (Sheaf (Scheme.ProEt.topology X) (ModuleCat.{u + 1} Λ))}
-    (hK : IsLocallyPerfect K) : IsDualizable K :=
-  sorry
-
-/-- Blueprint `sk-def-perfect`: perfectness over `Λ_X` is local.
-
-A complex `K` of pro-étale sheaves is dualizable for the derived tensor product if and only if
-it is, locally on the small pro-étale site, quasi-isomorphic to a bounded complex of finite
-projective sheaves (Stacks, Tag 0FPV, for ringed sites). -/
-theorem isDualizable_iff_isLocallyPerfect
-    (K : _root_.DerivedCategory (Sheaf (Scheme.ProEt.topology X) (ModuleCat.{u + 1} Λ))) :
-    IsDualizable K ↔ IsLocallyPerfect K :=
-  ⟨isLocallyPerfect_of_isDualizable Λ, isDualizable_of_isLocallyPerfect Λ⟩
-
-end Local
 
 variable (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ] {X : Scheme.{u}} [IsNoetherian X]
 
