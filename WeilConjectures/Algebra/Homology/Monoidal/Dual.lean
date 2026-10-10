@@ -8,6 +8,7 @@ module
 public import Mathlib.Algebra.BigOperators.Finprod
 public import Mathlib.CategoryTheory.Monoidal.Rigid.Basic
 public import Mathlib.Data.Int.Interval
+public import WeilConjectures.Mathlib.CategoryTheory.Monoidal.Rigid.Basic
 public import WeilConjectures.Mathlib.Algebra.Homology.Monoidal
 
 @[expose] public section
@@ -370,5 +371,25 @@ lemma whiskerLeft_coev_comp :
   · exact (isZero_rightDual_X K n (isZero_X_of_notMem K a b (-n) hn)).eq_of_src _ _
 
 end rightDual
+
+variable (a b : ℤ) [K.IsStrictlyGE a] [K.IsStrictlyLE b]
+
+/-- A bounded complex `K` whose terms have right duals is paired with its termwise right dual
+`K^∨`, `(K^∨)ⁿ = (K⁻ⁿ)ᘁ`. -/
+@[instance_reducible]
+noncomputable def exactPairingRightDual : ExactPairing K K.rightDual where
+  coevaluation' := rightDual.coev K a b
+  evaluation' := rightDual.eval K
+  coevaluation_evaluation' := rightDual.whiskerLeft_coev_comp K a b
+  evaluation_coevaluation' := rightDual.coev_whiskerRight_comp K a b
+
+omit [∀ n, HasRightDual (K.X n)] in
+variable {K} in
+include a b in
+/-- A bounded cochain complex whose terms are dualizable is dualizable. -/
+theorem isDualizable_of_isStrictlyGE_of_isStrictlyLE (hK : ∀ n, IsDualizable (K.X n)) :
+    IsDualizable K := by
+  let _ : ∀ n, HasRightDual (K.X n) := fun n ↦ (hK n).some
+  exact ⟨{ rightDual := K.rightDual, exact := exactPairingRightDual K a b }⟩
 
 end CochainComplex
