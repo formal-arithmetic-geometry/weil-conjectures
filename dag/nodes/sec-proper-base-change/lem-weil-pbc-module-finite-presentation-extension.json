@@ -2,7 +2,7 @@
  "id": "lem-weil-pbc-module-finite-presentation-extension",
  "kind": "statement",
  "title": "Maps from a finite-presentation module extend across a qc open",
- "statement": "Let $X$ be a scheme [def-pc-scheme] which is quasi-compact and quasi-separated [def-weil-pbc-scheme-conventions], let $U\\subseteq X$ be a quasi-compact open subscheme, let $\\mathcal F$ be a quasi-coherent $\\mathcal O_X$-module [pqf-def-coherent], [def-weil-sheaf-of-modules-category], let $\\mathcal G$ be an $\\mathcal O_U$-module of finite presentation (locally the cokernel of a map $\\mathcal O_U^{\\oplus m}\\to\\mathcal O_U^{\\oplus n}$ with $m,n$ finite), and let $\\varphi:\\mathcal G\\to\\mathcal F|_U$ be $\\mathcal O_U$-linear. Then there are a finite-presentation $\\mathcal O_X$-module $\\mathcal G'$ and an $\\mathcal O_X$-linear map $\\varphi':\\mathcal G'\\to\\mathcal F$, together with an isomorphism $\\mathcal G'|_U\\cong\\mathcal G$ under which $\\varphi'|_U$ equals $\\varphi$.",
+ "statement": "Let $X$ be a scheme [def-pc-scheme] which is quasi-compact and quasi-separated [def-weil-pbc-scheme-conventions], let $U\\subseteq X$ be a quasi-compact open subscheme, let $\\mathcal F$ be a quasi-coherent $\\mathcal O_X$-module [pqf-def-coherent], [def-weil-sheaf-of-modules-category], let $\\mathcal G$ be an $\\mathcal O_U$-module of finite presentation [def-weil-pbc-module-finite-type-presentation] (locally the cokernel of a map $\\mathcal O_U^{\\oplus m}\\to\\mathcal O_U^{\\oplus n}$ with $m,n$ finite), and let $\\varphi:\\mathcal G\\to\\mathcal F|_U$ be $\\mathcal O_U$-linear. Then there are a finite-presentation $\\mathcal O_X$-module $\\mathcal G'$ and an $\\mathcal O_X$-linear map $\\varphi':\\mathcal G'\\to\\mathcal F$, together with an isomorphism $\\mathcal G'|_U\\cong\\mathcal G$ under which $\\varphi'|_U$ equals $\\varphi$.",
  "source": {
   "document": "literature/stacks-project/properties.tex",
   "place": "Properties, Lemma 01PI (lemma-extend-finite-presentation), lines 2923-3008 and proof"
@@ -10,14 +10,155 @@
  "stmt_deps": [
   "def-pc-scheme",
   "def-weil-pbc-scheme-conventions",
+  "def-weil-pbc-quasi-compact-scheme",
   "pqf-def-coherent",
   "def-weil-sheaf-of-modules-category",
-  "lem-weil-pbc-module-finite-type-submodule-extension",
-  "lem-weil-pbc-finite-presentation-kernel-surjection-finite-type"
+  "def-weil-pbc-module-finite-type-presentation"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "*Step 1 (a finite affine cover and the opens $W_k$).* By [lem-weil-pbc-affine-opens-basis] every point of $X$ has an affine open neighbourhood; since $X$ is quasi-compact [def-weil-pbc-quasi-compact-scheme], finitely many of these cover $X$. So there are affine opens $U_1,\\dots,U_n\\subseteq X$ with $X=U\\cup U_1\\cup\\dots\\cup U_n$ (Stacks takes $n$ minimal; any such finite family will do). Put $W_0=U$ and $W_k=U\\cup U_1\\cup\\dots\\cup U_k$ for $1\\le k\\le n$, so $W_n=X$. Each $U_i$ is quasi-compact [lem-weil-pbc-affine-scheme-qcqs] and $U$ is quasi-compact by hypothesis, so each $W_k$, a finite union of quasi-compact subsets, is a quasi-compact open of $X$.",
+   "uses": [
+    "lem-weil-pbc-affine-opens-basis",
+    "def-weil-pbc-quasi-compact-scheme",
+    "lem-weil-pbc-affine-scheme-qcqs"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/properties.tex",
+    "place": "Properties, Lemma 01PI proof, first paragraph (lines 2963-2975)"
+   }
+  },
+  {
+   "text": "*Step 2 (the inductive claim).* For $0\\le k\\le n$ let $P(k)$ be the assertion: there are an $\\mathcal O_{W_k}$-module $\\mathcal G_k$ of finite presentation (locally on $W_k$ the cokernel of a map $\\mathcal O^{\\oplus m}\\to\\mathcal O^{\\oplus r}$, $m,r$ finite), an $\\mathcal O_{W_k}$-linear map $\\varphi_k:\\mathcal G_k\\to\\mathcal F|_{W_k}$ and an $\\mathcal O_U$-linear isomorphism $\\alpha_k:\\mathcal G_k|_U\\to\\mathcal G$ with $\\varphi\\circ\\alpha_k=\\varphi_k|_U$. $P(0)$ holds with $\\mathcal G_0=\\mathcal G$, $\\varphi_0=\\varphi$, $\\alpha_0=\\mathrm{id}$. $P(n)$ is the lemma, since $W_n=X$: take $\\mathcal G'=\\mathcal G_n$, $\\varphi'=\\varphi_n$ and the isomorphism $\\alpha_n:\\mathcal G'|_U\\cong\\mathcal G$, under which $\\varphi'|_U$ corresponds to $\\varphi$. Steps 3-9 prove $P(k)\\Rightarrow P(k+1)$ for $0\\le k<n$; this is Stacks' reduction to the case $X=U\\cup V$ with $V$ affine, applied to the pair $(W_k,U_{k+1})$ inside $X$ (so that only quasi-compactness of $W_k$ and quasi-separatedness of $X$ are needed, not quasi-separatedness of $W_{k+1}$).",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/properties.tex",
+    "place": "Properties, Lemma 01PI proof, first and second paragraphs (lines 2963-2989)"
+   }
+  },
+  {
+   "text": "*Step 3 (the affine situation).* Assume $P(k)$, $k<n$, and put $V=U_{k+1}$, an affine open, and $U'=W_k\\cap V$. Since $X$ is quasi-compact and quasi-separated, its underlying space is spectral [lem-weil-pbc-qcqs-scheme-spectral], so the intersection of two quasi-compact open subsets of $X$ is quasi-compact [def-weil-spectral-space]. As $W_k$ and $V$ are quasi-compact opens (Step 1), $U'$ is a quasi-compact open. For every affine open $W\\subseteq V$, $W$ is a quasi-compact open of $X$ [lem-weil-pbc-affine-scheme-qcqs] and $U'\\cap W=W_k\\cap W$ is quasi-compact by the same fact; so the inclusion $U'\\to V$ is quasi-compact. $V$ is quasi-compact and quasi-separated [lem-weil-pbc-affine-scheme-qcqs]. $\\mathcal F|_V$ is a quasi-coherent $\\mathcal O_V$-module [lem-weil-pbc-module-restriction-open-immersion-colimits](2). Put $\\mathcal G''=\\mathcal G_k|_{U'}$ and $\\varphi''=\\varphi_k|_{U'}:\\mathcal G''\\to\\mathcal F|_{U'}$. $\\mathcal G''$ is of finite presentation (the local presentations of $\\mathcal G_k$ restrict to opens of $U'$), hence quasi-coherent [lem-weil-pbc-quasi-coherent-finite-type-affine](0).",
+   "uses": [
+    "lem-weil-pbc-qcqs-scheme-spectral",
+    "def-weil-spectral-space",
+    "lem-weil-pbc-affine-scheme-qcqs",
+    "lem-weil-pbc-module-restriction-open-immersion-colimits",
+    "lem-weil-pbc-quasi-coherent-finite-type-affine"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/properties.tex",
+    "place": "Properties, Lemma 01PI proof, second paragraph (lines 2977-2989): the system $(V,U\\cap V,\\mathcal F|_V,\\mathcal G|_{U\\cap V},\\varphi|_{U\\cap V})$"
+   }
+  },
+  {
+   "text": "*Step 4 (a quasi-coherent extension, Lemma 01PE).* Apply [lem-weil-pbc-quasi-coherent-extension-qc-open] to the scheme $V$, its open $U'$ (with quasi-compact inclusion, Step 3), the quasi-coherent $\\mathcal O_V$-module $\\mathcal F|_V$, the quasi-coherent $\\mathcal O_{U'}$-module $\\mathcal G''$ and $\\varphi''$: there are a quasi-coherent $\\mathcal O_V$-module $\\mathcal H$, an $\\mathcal O_V$-linear $\\psi:\\mathcal H\\to\\mathcal F|_V$ and an isomorphism $\\alpha:\\mathcal H|_{U'}\\to\\mathcal G''$ with $\\varphi''\\circ\\alpha=\\psi|_{U'}$.",
+   "uses": [
+    "lem-weil-pbc-quasi-coherent-extension-qc-open"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/properties.tex",
+    "place": "Properties, Lemma 01PI proof, third paragraph (lines 2991-2995), using Lemma 01PE (3)"
+   }
+  },
+  {
+   "text": "*Step 5 (making $\\mathcal H$ of finite type, Lemma 01PF).* $\\mathcal H|_{U'}\\cong\\mathcal G''$ is of finite presentation, hence of finite type [pqf-def-coherent] (a local presentation $\\mathcal O^{\\oplus m}\\to\\mathcal O^{\\oplus r}\\to\\mathcal H|_{U'}\\to0$ contains a surjection $\\mathcal O^{\\oplus r}\\to\\mathcal H|_{U'}$ on the same open), and it is quasi-coherent [lem-weil-pbc-module-restriction-open-immersion-colimits](2). Apply [lem-weil-pbc-module-finite-type-submodule-extension] to the quasi-compact and quasi-separated scheme $V$ [lem-weil-pbc-affine-scheme-qcqs], its quasi-compact open $U'$, the quasi-coherent $\\mathcal O_V$-module $\\mathcal H$ and the finite type quasi-coherent submodule $\\mathcal H|_{U'}\\subseteq\\mathcal H|_{U'}$: there is a quasi-coherent finite type submodule $\\mathcal H'\\subseteq\\mathcal H$ with $\\mathcal H'|_{U'}=\\mathcal H|_{U'}$. Let $\\psi':\\mathcal H'\\to\\mathcal F|_V$ be the restriction of $\\psi$ to $\\mathcal H'$. Since $\\mathcal H'|_{U'}=\\mathcal H|_{U'}$, still $\\alpha:\\mathcal H'|_{U'}\\to\\mathcal G''$ is an isomorphism with $\\varphi''\\circ\\alpha=\\psi'|_{U'}$.",
+   "uses": [
+    "pqf-def-coherent",
+    "lem-weil-pbc-module-restriction-open-immersion-colimits",
+    "lem-weil-pbc-module-finite-type-submodule-extension",
+    "lem-weil-pbc-affine-scheme-qcqs"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/properties.tex",
+    "place": "Properties, Lemma 01PI proof, third paragraph (lines 2995-3000), using Lemma 01PF"
+   }
+  },
+  {
+   "text": "*Step 6 (a surjection $\\mathcal O_V^{\\oplus m}\\to\\mathcal H'$ and its kernel).* $V$ is affine and $\\mathcal H'$ is quasi-coherent of finite type, so there are finitely many global sections $h_1,\\dots,h_m\\in\\Gamma(V,\\mathcal H')$ which generate $\\mathcal H'$ [lem-weil-pbc-affine-finite-type-generating-sections], i.e. $\\pi:\\mathcal O_V^{\\oplus m}\\to\\mathcal H'$, $(f_j)\\mapsto\\sum_jf_jh_j$, is surjective as a map of sheaves [def-weil-pbc-generating-sections], hence an epimorphism of $\\Mod(\\mathcal O_V)$ [lem-weil-pbc-ringed-space-module-exactness-local-lifting](1). (Stacks: $\\mathcal H'=\\widetilde N$ with $N$ finitely generated; the cited node is this fact, Properties 01PB, in the form needed.) Let $\\mathcal K=\\Ker\\pi$, the sectionwise kernel [def-weil-sheaf-of-modules-category]. $\\mathcal O_V^{\\oplus m}$ is of finite presentation (presentation $0\\to\\mathcal O_V^{\\oplus m}\\xrightarrow{\\mathrm{id}}\\mathcal O_V^{\\oplus m}$), hence quasi-coherent [lem-weil-pbc-quasi-coherent-finite-type-affine](0), so $\\mathcal K$ is quasi-coherent [lem-weil-pbc-quasi-coherent-module-kernel]. This is the short exact sequence $0\\to\\mathcal K\\to\\mathcal O_V^{\\oplus m}\\to\\mathcal H'\\to0$ of the source.",
+   "uses": [
+    "lem-weil-pbc-affine-finite-type-generating-sections",
+    "def-weil-pbc-generating-sections",
+    "lem-weil-pbc-ringed-space-module-exactness-local-lifting",
+    "def-weil-sheaf-of-modules-category",
+    "lem-weil-pbc-quasi-coherent-finite-type-affine",
+    "lem-weil-pbc-quasi-coherent-module-kernel"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/properties.tex",
+    "place": "Properties, Lemma 01PI proof, third paragraph (lines 3000-3008); the source cites Lemma lemma-finite-presentation-module (01PC) here, the fact used is Lemma lemma-finite-type-module (01PB)"
+   }
+  },
+  {
+   "text": "*Step 7 ($\\mathcal K|_{U'}$ is of finite type and extends, Modules 01BP and Lemma 01PF).* Kernels are sectionwise, so $\\Ker(\\pi|_{U'})=\\mathcal K|_{U'}$; and $\\pi|_{U'}:\\mathcal O_{U'}^{\\oplus m}\\to\\mathcal H'|_{U'}$ is surjective as a map of sheaves (the condition of [lem-weil-pbc-ringed-space-module-exactness-local-lifting](1) for opens inside $U'$ is part of that for $\\pi$), hence an epimorphism. Its target $\\mathcal H'|_{U'}=\\mathcal H|_{U'}\\cong\\mathcal G''$ is of finite presentation. By [lem-weil-pbc-finite-presentation-kernel-surjection-finite-type] on the ringed space $(U',\\mathcal O_{U'})$, $\\mathcal K|_{U'}$ is of finite type; it is quasi-coherent [lem-weil-pbc-module-restriction-open-immersion-colimits](2). Apply [lem-weil-pbc-module-finite-type-submodule-extension] to $V$ (quasi-compact and quasi-separated [lem-weil-pbc-affine-scheme-qcqs]), $U'$, the quasi-coherent $\\mathcal K$ and the submodule $\\mathcal K|_{U'}\\subseteq\\mathcal K|_{U'}$: there is a quasi-coherent finite type submodule $\\mathcal K'\\subseteq\\mathcal K$ with $\\mathcal K'|_{U'}=\\mathcal K|_{U'}$.",
+   "uses": [
+    "lem-weil-pbc-ringed-space-module-exactness-local-lifting",
+    "lem-weil-pbc-finite-presentation-kernel-surjection-finite-type",
+    "lem-weil-pbc-module-restriction-open-immersion-colimits",
+    "lem-weil-pbc-module-finite-type-submodule-extension",
+    "lem-weil-pbc-affine-scheme-qcqs"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/properties.tex",
+    "place": "Properties, Lemma 01PI proof, fourth paragraph (lines 3010-3018), using Modules, Lemma 01BP and Lemma 01PF"
+   }
+  },
+  {
+   "text": "*Step 8 (the finitely presented module over $V$ and its map).* Let $q:\\mathcal O_V^{\\oplus m}\\to\\mathcal G'_V$ be the cokernel in $\\Mod(\\mathcal O_V)$ of the inclusion $\\mathcal K'\\to\\mathcal O_V^{\\oplus m}$ [def-weil-sheaf-of-modules-category]. Since $\\mathcal K'$ is of finite type and $\\mathcal O_V^{\\oplus m}$ of finite presentation, $\\mathcal G'_V$ is of finite presentation [lem-weil-pbc-module-finite-presentation-cokernel]. Since $\\mathcal K'\\subseteq\\mathcal K=\\Ker\\pi$, $\\pi$ kills $\\mathcal K'$, so there is a unique $\\rho:\\mathcal G'_V\\to\\mathcal H'$ with $\\rho\\circ q=\\pi$; put $\\varphi'_V=\\psi'\\circ\\rho:\\mathcal G'_V\\to\\mathcal F|_V$ (the composition $\\mathcal O^{\\oplus m}/\\mathcal K'\\to\\mathcal O^{\\oplus m}/\\mathcal K=\\mathcal H'\\xrightarrow{\\psi'}\\mathcal F|_V$ of the source). Restriction to $U'$ preserves cokernels [lem-weil-pbc-module-restriction-open-immersion-colimits](1), so $q|_{U'}$ is a cokernel of $\\mathcal K'|_{U'}=\\mathcal K|_{U'}=\\Ker(\\pi|_{U'})\\to\\mathcal O_{U'}^{\\oplus m}$, and $\\rho|_{U'}$ is the map from this cokernel induced by $\\pi|_{U'}$. As $\\pi|_{U'}$ is an epimorphism (Step 7) and $\\Mod(\\mathcal O_{U'})$ is abelian, an epimorphism is the cokernel of its kernel, so $\\rho|_{U'}$ is an isomorphism. Hence $\\beta=\\alpha\\circ\\rho|_{U'}:\\mathcal G'_V|_{U'}\\to\\mathcal G''=\\mathcal G_k|_{U'}$ is an isomorphism, and $\\varphi_k|_{U'}\\circ\\beta=\\varphi''\\circ\\alpha\\circ\\rho|_{U'}=\\psi'|_{U'}\\circ\\rho|_{U'}=\\varphi'_V|_{U'}$.",
+   "uses": [
+    "def-weil-sheaf-of-modules-category",
+    "lem-weil-pbc-module-finite-presentation-cokernel",
+    "lem-weil-pbc-module-restriction-open-immersion-colimits"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/properties.tex",
+    "place": "Properties, Lemma 01PI proof, last paragraph (lines 3018-3030)"
+   }
+  },
+  {
+   "text": "*Step 9 (glueing over $W_{k+1}=W_k\\cup V$).* $W_{k+1}=W_k\\cup V$ with $W_k\\cap V=U'$. Apply [lem-weil-pbc-glue-sheaves-of-modules](2) to the ringed space $W_{k+1}$ with the covering $\\{W_k,V\\}$, the modules $\\mathcal G_k$ on $W_k$ and $\\mathcal G'_V$ on $V$, and the isomorphisms $\\beta^{-1}:\\mathcal G_k|_{U'}\\to\\mathcal G'_V|_{U'}$, $\\beta$ in the other direction and the identities on $W_k$ and on $V$; the cocycle condition holds since for indices in $\\{W_k,V\\}$ it reduces to $\\beta\\circ\\beta^{-1}=\\mathrm{id}$, $\\beta^{-1}\\circ\\beta=\\mathrm{id}$ or identities. This gives an $\\mathcal O_{W_{k+1}}$-module $\\mathcal G_{k+1}$ and isomorphisms $\\gamma_1:\\mathcal G_{k+1}|_{W_k}\\to\\mathcal G_k$, $\\gamma_2:\\mathcal G_{k+1}|_V\\to\\mathcal G'_V$ with $\\beta^{-1}\\circ\\gamma_1|_{U'}=\\gamma_2|_{U'}$. $\\mathcal G_{k+1}$ is of finite presentation: every point of $W_{k+1}$ lies in $W_k$ or in $V$, where $\\mathcal G_{k+1}$ is isomorphic to the finitely presented $\\mathcal G_k$ resp. $\\mathcal G'_V$ (Step 8), and the local presentations transfer along the isomorphisms. The maps $\\varphi_k\\circ\\gamma_1:\\mathcal G_{k+1}|_{W_k}\\to\\mathcal F|_{W_k}$ and $\\varphi'_V\\circ\\gamma_2:\\mathcal G_{k+1}|_V\\to\\mathcal F|_V$ agree on $U'$: $\\varphi'_V|_{U'}\\circ\\gamma_2|_{U'}=\\varphi_k|_{U'}\\circ\\beta\\circ\\beta^{-1}\\circ\\gamma_1|_{U'}=\\varphi_k|_{U'}\\circ\\gamma_1|_{U'}$ (Step 8). By [lem-weil-pbc-glue-sheaves-of-modules](1) there is a unique $\\mathcal O_{W_{k+1}}$-linear $\\varphi_{k+1}:\\mathcal G_{k+1}\\to\\mathcal F|_{W_{k+1}}$ restricting to these. Put $\\alpha_{k+1}=\\alpha_k\\circ\\gamma_1|_U:\\mathcal G_{k+1}|_U\\to\\mathcal G$ (note $U\\subseteq W_k$); then $\\varphi\\circ\\alpha_{k+1}=\\varphi_k|_U\\circ\\gamma_1|_U=\\varphi_{k+1}|_U$. This is $P(k+1)$, which completes the induction of Step 2.",
+   "uses": [
+    "lem-weil-pbc-glue-sheaves-of-modules"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/properties.tex",
+    "place": "Properties, Lemma 01PI proof, second paragraph (lines 2983-2989): glue $\\mathcal G'$ over $V$ to $\\mathcal G$ over $U$ and $\\varphi'$ to $\\varphi$ along the common value over $U\\cap V$"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-affine-opens-basis",
+  "def-weil-pbc-quasi-compact-scheme",
+  "lem-weil-pbc-affine-scheme-qcqs",
+  "lem-weil-pbc-qcqs-scheme-spectral",
+  "def-weil-spectral-space",
+  "lem-weil-pbc-module-restriction-open-immersion-colimits",
+  "lem-weil-pbc-quasi-coherent-finite-type-affine",
+  "lem-weil-pbc-quasi-coherent-extension-qc-open",
+  "pqf-def-coherent",
+  "lem-weil-pbc-module-finite-type-submodule-extension",
+  "lem-weil-pbc-affine-finite-type-generating-sections",
+  "def-weil-pbc-generating-sections",
+  "lem-weil-pbc-ringed-space-module-exactness-local-lifting",
+  "def-weil-sheaf-of-modules-category",
+  "lem-weil-pbc-quasi-coherent-module-kernel",
+  "lem-weil-pbc-finite-presentation-kernel-surjection-finite-type",
+  "lem-weil-pbc-module-finite-presentation-cokernel",
+  "lem-weil-pbc-glue-sheaves-of-modules"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/properties.tex",
+  "place": "Properties, Lemma 01PI (lemma-extend-finite-presentation), proof, lines 2963-3030"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -39,10 +180,31 @@
    "results": "No extension theorem",
    "date": "2026-10-10",
    "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "extend a morphism from a finitely presented module on a quasi-compact open subscheme to a finitely presented module on the whole scheme",
+   "results": "LocallyOfFinitePresentation.finitePresentation_appLE, instLocallyOfFiniteTypeOfLocallyOfFinitePresentation, Scheme.Hom.finitePresentation_appLE (Mathlib.AlgebraicGeometry.Morphisms.FinitePresentation), SheafOfModules.QuasicoherentData.IsFinitePresentation: none about extending modules",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "finitely presented sheaf of modules on quasi-compact open of qcqs scheme extends to finitely presented module on whole scheme",
+   "results": "SheafOfModules.QuasicoherentData.IsFinitePresentation(.isFinite_presentation), SheafOfModules.IsFinitePresentation.exists_quasicoherentData, SheafOfModules.instIsQuasicoherentOfIsFinitePresentation (Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent): definitions and f.p. => quasi-coherent only",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rn 'extend\\|Extend' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicGeometry/Modules/",
+   "results": "only TopCat.Sheaf.extend_hom_app (Modules/Tilde.lean:304)",
+   "date": "2026-10-10",
+   "verdict": "no match"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "worker",
@@ -62,5 +224,17 @@
   }
  },
  "chapter": "sec-proper-base-change",
- "unit": "sk-thm-p1"
+ "unit": "sk-thm-p1",
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "lem-weil-pbc-module-finite-presentation-extension",
+  "worker": "stage1",
+  "summary": "Read Stacks Properties 01PI (lemma-extend-finite-presentation, properties.tex 2963-3030) with 01PE, 01PF, Modules 01BO/01BP/0H96. Wrote the proof in 9 steps: finite affine cover and opens W_k (1), the inductive claim P(k) with base and conclusion (2), the affine situation V=U_{k+1}, U'=W_k cap V with quasi-compactness of U' and of the inclusion U'->V via the Mathlib leaves lem-weil-pbc-qcqs-scheme-spectral and def-weil-spectral-space (3), quasi-coherent extension by 01PE (4), finite type replacement by 01PF (5), surjection O^m->H' and its quasi-coherent kernel (6), K|_{U'} finite type by 01BP and its extension K' by 01PF (7), G'_V = O^m/K' finitely presented by the cokernel node and the iso on U' (8), glueing modules and maps over W_{k+1} (9). The induction is set up on W_k inside X rather than by Stacks' 'reduce to n=1' on the scheme W_{k+1}, which avoids needing W_{k+1} quasi-separated. Removed the two lemmas from stmt_deps (they are proof tools, now in the steps) and added def-weil-pbc-quasi-compact-scheme. New nodes: lem-weil-pbc-quasi-coherent-extension-qc-open (01PE (3), unsplit) and lem-weil-pbc-affine-scheme-qcqs (Mathlib leaf). Source slip: 01PI cites lemma-finite-presentation-module (01PC) where lemma-finite-type-module (01PB) is meant; it also leaves implicit that a finitely presented G is quasi-coherent (needed for 01PE) and that U cap V -> V is quasi-compact."
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "result": "accepted",
+  "note": "9 steps following Stacks 01PI as an induction on W_k = U cup U_1 cup ... cup U_k inside the qcqs X: finite affine cover; the inductive claim; the affine situation with U' = W_k cap V quasi-compact (spectral-space leaf, new leaf: affine schemes are qcqs, AffineScheme.lean:561 / QuasiSeparated.lean:167 verified by L); quasi-coherent extension (new unsplit 01PE (3) node); finite-type submodule (01PF node); a surjection from O_V^m and its kernel; the kernel over U' is of finite type (01BP node) and extends; the cokernel is finitely presented (today's 0H96 node) and agrees with G_k on U'; gluing. Source: 01PI cites 01PC where 01PB is used, and leaves the quasi-coherence of G and the quasi-compactness of U cap V -> V unstated. The two tool lemmas were removed from stmt_deps (they are proof tools); L added the citation of def-weil-pbc-module-finite-type-presentation."
+ }
 }

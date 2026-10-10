@@ -1,0 +1,77 @@
+{
+ "id": "lem-weil-pbc-affine-scheme-qcqs",
+ "kind": "statement",
+ "title": "Affine schemes are quasi-compact and quasi-separated",
+ "statement": "Let $X$ be an affine scheme, i.e. a scheme [def-pc-scheme] isomorphic to $\\operatorname{Spec}A$ for a commutative ring $A$ [def-weil-affine-spectrum]. Then $X$ is quasi-compact (its underlying topological space is quasi-compact [def-weil-pbc-quasi-compact-scheme]) and quasi-separated ($X\\to\\operatorname{Spec}\\mathbf Z$ is quasi-separated [def-weil-pbc-scheme-conventions]; equivalently the intersection of two quasi-compact open subsets of $X$ is quasi-compact).",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Algebra, Lemma 00E8 (lemma-quasi-compact, algebra.tex line 3252) for quasi-compactness; Schemes, Lemma 01KN (lemma-affine-separated, schemes.tex line 4387: an affine scheme is separated) with Schemes, Lemma 01KO (lemma-characterize-quasi-separated, line 4125) for quasi-separatedness"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-affine-spectrum",
+  "def-weil-pbc-quasi-compact-scheme",
+  "def-weil-pbc-scheme-conventions"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "affine scheme is quasi-separated space",
+   "results": "AlgebraicGeometry.quasiSeparatedSpace_of_isAffine (Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated), Scheme.quasiSeparatedSpace_of_isOpenCover, quasiCompact_affineProperty_iff_quasiSeparatedSpace, PrimeSpectrum.instQuasiSeparatedSpace",
+   "date": "2026-10-10",
+   "verdict": "match: quasiSeparatedSpace_of_isAffine"
+  },
+  {
+   "tool": "loogle",
+   "query": "QuasiSeparatedSpace, AlgebraicGeometry.IsAffine",
+   "results": "AlgebraicGeometry.quasiSeparatedSpace_of_isAffine : (X : Scheme) [IsAffine X] : QuasiSeparatedSpace X; quasiCompact_affineProperty_iff_quasiSeparatedSpace; Scheme.exists_isAffine_of_isLimit",
+   "date": "2026-10-10",
+   "verdict": "match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -n 'compactSpace_of_isAffine' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicGeometry/AffineScheme.lean; grep -n 'quasiSeparatedSpace_of_isAffine\\|theorem quasiSeparatedSpace_iff_quasiSeparated' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicGeometry/Morphisms/QuasiSeparated.lean; grep -n compactSpace_iff_quasiCompact ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicGeometry/Morphisms/QuasiCompact.lean",
+   "results": "AffineScheme.lean:561 instance Scheme.compactSpace_of_isAffine (X) [IsAffine X] : CompactSpace X; QuasiSeparated.lean:167 instance quasiSeparatedSpace_of_isAffine; QuasiSeparated.lean:133 quasiSeparatedSpace_iff_quasiSeparated (X) : QuasiSeparatedSpace X <-> QuasiSeparated (terminal.from X); QuasiCompact.lean:137 compactSpace_iff_quasiCompact",
+   "date": "2026-10-10",
+   "verdict": "match (read with sed -n)"
+  },
+  {
+   "tool": "local_search",
+   "query": "quasiSeparatedSpace_of_isAffine",
+   "results": "AlgebraicGeometry.quasiSeparatedSpace_of_isAffine exists (Mathlib/AlgebraicGeometry/Morphisms/QuasiSeparated.lean:167)",
+   "date": "2026-10-10",
+   "verdict": "match"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "AlgebraicGeometry.Scheme.compactSpace_of_isAffine, AlgebraicGeometry.quasiSeparatedSpace_of_isAffine",
+  "file": "Mathlib/AlgebraicGeometry/AffineScheme.lean",
+  "how": "one Mathlib declaration per clause: quasi-compact = instance Scheme.compactSpace_of_isAffine (Mathlib/AlgebraicGeometry/AffineScheme.lean:561-564: [IsAffine X] -> CompactSpace X); quasi-separated = instance quasiSeparatedSpace_of_isAffine (Mathlib/AlgebraicGeometry/Morphisms/QuasiSeparated.lean:167-168: [IsAffine X] -> QuasiSeparatedSpace X), which is the scheme notion by quasiSeparatedSpace_iff_quasiSeparated (QuasiSeparated.lean:133-135, the identification already used by the leaf def-weil-quasi-separated-morphism); QuasiSeparatedSpace (Topology/QuasiSeparated.lean) is the clause 'the intersection of two quasi-compact opens is quasi-compact'. IsAffine X is 'X is isomorphic to Spec of a ring' (X.isoSpec). Lines read 2026-10-10.",
+  "line": 561
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-module-finite-presentation-extension",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lead_note": "L 2026-10-10: composed Mathlib leaf, one instance per clause; lines 561, 167, 133 verified."
+}
