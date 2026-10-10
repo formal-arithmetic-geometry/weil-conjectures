@@ -2043,3 +2043,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 16:47 L: merged deliver/C1/lem-sc-jacobson-denominator-function-field (reviewer FIX; first push; new nodes: 4)
 - 16:47 L: merged deliver/C1/lem-weil-pbc-field-tensor-irreducible (reviewer FIX; after a return; new nodes: 3)
 - 16:47 L: merged deliver/M1/def-sc-sheaf-cohomology-functor (reviewer FIX; first push; new nodes: 1)
+- 16:48 L: merged deliver/M1/thm-sc-proper-finite-fibre-finite-neighbourhood (reviewer FIX; after a return; new nodes: 1)

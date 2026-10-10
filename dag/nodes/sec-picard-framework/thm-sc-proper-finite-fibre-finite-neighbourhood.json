@@ -22,9 +22,71 @@
   "def-weil-proper-morphism",
   "pqf-def-locnoeth"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Because a proper morphism is of finite type, the finite-fibre hypothesis at $s$ implies that $f$ is quasi-finite at every point of the fibre over $s$, by [pqf-lem-locqf-fibre-discrete] (using [pqf-lem-proper-basic] for finite type).",
+   "uses": [
+    "pqf-lem-proper-basic",
+    "pqf-lem-locqf-fibre-discrete"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/coherent.tex",
+    "place": "Tag 02OH proof, first sentence; Morphisms Tag 02NH"
+   }
+  },
+  {
+   "text": "Let $U\\subseteq X$ be the open locus where $f$ is quasi-finite, supplied by [lem-sc-quasi-finite-points-open]. Since every point of $f^{-1}(\\{s\\})$ lies in this locus, $s$ is not in the image of the closed complement $Z=X\\setminus U$.",
+   "uses": [
+    "lem-sc-quasi-finite-points-open"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/coherent.tex",
+    "place": "Tag 02OH proof, first two sentences"
+   }
+  },
+  {
+   "text": "The image $f(Z)$ is closed because $f$ is proper, hence universally closed by [pqf-lem-proper-basic]. Choose an open neighbourhood $V\\subseteq S$ of $s$ disjoint from $f(Z)$. Then $f^{-1}(V)\\subseteq U$, so the restricted morphism $f^{-1}(V)\\to V$ is locally quasi-finite by [lem-sc-quasi-finite-points-open].",
+   "uses": [
+    "pqf-lem-proper-basic",
+    "lem-sc-quasi-finite-points-open"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/coherent.tex",
+    "place": "Tag 02OH proof, definition of $Z$ through choice of $V$"
+   }
+  },
+  {
+   "text": "The restriction $f^{-1}(V)\\to V$ is proper by [lem-pc-proper-base-change]. Since $V\\to S$ is an open immersion, $X \\times_S V = f^{-1}(V)$ and the projection is $f^{-1}(V)\\to V$; by [lem-pc-proper-base-change] (1) it is proper. It is quasi-finite because it is locally quasi-finite and quasi-compact, using [pqf-lem-qf-locqf-qc] and quasi-compactness from properness; hence it has finite fibres by [pqf-lem-qf-finitefibres]. Applying [thm-pqf-finite-iff-proper-finite-fibres] to this proper morphism over the locally Noetherian scheme $V$ shows that it is finite.",
+   "uses": [
+    "lem-pc-proper-base-change",
+    "pqf-lem-qf-locqf-qc",
+    "pqf-lem-qf-finitefibres",
+    "thm-pqf-finite-iff-proper-finite-fibres"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/coherent.tex",
+    "place": "Tag 02OH proof, final paragraph"
+   }
+  }
+ ],
+ "proof_deps": [
+  "pqf-lem-proper-basic",
+  "pqf-lem-locqf-fibre-discrete",
+  "lem-sc-quasi-finite-points-open",
+  "lem-pc-proper-base-change",
+  "pqf-lem-qf-locqf-qc",
+  "pqf-lem-qf-finitefibres",
+  "thm-pqf-finite-iff-proper-finite-fibres"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/coherent.tex",
+  "place": "Tag 02OH, lemma-proper-finite-fibre-finite-in-neighbourhood"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -49,12 +111,61 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-sc-point-tangent-separation-closed-immersion",
   "by": "worker",
   "date": "2026-10-10"
  },
  "chapter": "sec-picard-framework",
- "unit": "sk-thm-picard-rr"
+ "unit": "sk-thm-picard-rr",
+ "split_report": {
+  "date": "2026-10-11",
+  "item": "thm-sc-proper-finite-fibre-finite-neighbourhood",
+  "worker": "stage1",
+  "summary": "Split Tag 02OH into the quasi-finite-locus, closed-image neighbourhood, and proper quasi-finite finiteness steps; added a statement-only node for Tag 01TI and used lem-pc-proper-base-change (1) for properness of the restriction to an open of the base.",
+  "blueprint": "The steps realize the blueprint ancestor's third-paragraph use of finite fibres to obtain finiteness of the projective morphism.",
+  "tool_uses": [
+   {
+    "node": "pqf-lem-proper-basic",
+    "why": "The route needs the standard proper-morphism properties (finite type, quasi-compactness, and universal closedness), which are generic scheme tools rather than Picard-specific steps."
+   },
+   {
+    "node": "pqf-lem-locqf-fibre-discrete",
+    "why": "The route needs the general finite-fibre to local quasi-finiteness criterion at the chosen base point."
+   },
+   {
+    "node": "pqf-lem-qf-locqf-qc",
+    "why": "The route needs the general equivalence between quasi-finiteness and locally quasi-finite plus quasi-compact."
+   },
+   {
+    "node": "pqf-lem-qf-finitefibres",
+    "why": "The route needs the general implication from quasi-finite morphisms to finite fibres."
+   },
+   {
+    "node": "thm-pqf-finite-iff-proper-finite-fibres",
+    "why": "The final conversion of the restricted proper finite-fibre morphism to a finite morphism is the general characterization theorem."
+   }
+  ]
+ },
+ "tool_uses": [
+  "pqf-lem-proper-basic",
+  "pqf-lem-locqf-fibre-discrete",
+  "pqf-lem-qf-locqf-qc",
+  "pqf-lem-qf-finitefibres",
+  "thm-pqf-finite-iff-proper-finite-fibres",
+  "pqf-lem-proper-basic",
+  "pqf-lem-locqf-fibre-discrete",
+  "pqf-lem-qf-locqf-qc",
+  "pqf-lem-qf-finitefibres",
+  "thm-pqf-finite-iff-proper-finite-fibres"
+ ],
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-pf2",
+  "group": "M1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-pf2 (reviewer sub-agent of L); spot-checked: Re-review of the repaired re-push after the 16:35 return. Point 1 (B9/C5) repaired: lem-sc-proper-open-base-change is deleted from the commit and cited nowhere on the branch; step 4 now cites lem-pc-proper-base-change, whose clause (1) states that the base change of a proper morphism [def-weil-proper-morphism] along any g:S'->S is proper, with the sentence identifying X x_S V = f^{-1}(V) for the open immersion V->S; uses and proof_deps updated. Point 2 (B6/B8) repaired: lem-sc-quasi-finite-points-open grep entry now names Scheme.Hom.isOpen_quasiFiniteAt with verdict candidate-not-exact and a mathlib_candidate field; verified at pinned Mathlib/AlgebraicGeometry/ZariskisMainTheorem.lean lines 292-293 ([LocallyOfFiniteType f] -> IsOpen {x | f.QuasiFiniteAt x}); not exact, node stays unsplit. The citations.json claim is gone from the report. Rest unchanged from the head reviewed at 16:35 (statement agrees with Tag 02OH; steps 1-4 follow the 02OH proof with correct citations); the branch is one commit with only the item's files over sheaf-dag 926b926aa. Tool uses (five pqf generic lemmas) accepted. FIX: dag/nodes/sec-picard-framework/thm-sc-proper-finite-fibre-finite-neighbourhood.json: split_report.summary: no longer claims a new node for open base change (now names lem-pc-proper-base-change (1)). Not fixable by the tool: the report's file list still names lem-sc-proper-open-base-change.json and says 'Mathlib no match' for the quasi-finite node; both stale, the node files are right. Start Sat Oct 10 04:47:41 PM UTC 2026, end Sat Oct 10 04:48:03 PM UTC 2026.; 1 file(s) fixed by the reviewer"
+ }
 }
