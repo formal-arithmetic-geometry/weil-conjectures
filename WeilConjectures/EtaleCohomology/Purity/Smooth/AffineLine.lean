@@ -7,6 +7,7 @@ module
 
 public import WeilConjectures.AlgebraicGeometry.AffineSpace.ZeroSection
 public import WeilConjectures.ConstructibleSheaf.DenseOpen
+public import WeilConjectures.SixFunctors.Etale.Derived.InvertibleRestriction
 public import WeilConjectures.EtaleCohomology.Purity.Smooth.KummerClass
 public import WeilConjectures.SixFunctors.Etale.Derived.Composition
 public import WeilConjectures.SixFunctors.Etale.Derived.TensorStructure
@@ -234,6 +235,7 @@ theorem injective_upperStar_oneSection_map_of_isFiniteLocallyConstantSheaf
   have := congrArg (fun f : Y ⟶ Y ↦ f.base y) hp
   simpa using this
 
+set_option linter.unusedSectionVars false in
 /-- Blueprint `sk-prop-a1-inv`: Weak `𝔸¹`-invariance
 
 *Invariance along the line.* A comparison between an invertible complex `F` on `𝔸¹_Y` and a
@@ -254,8 +256,28 @@ theorem eq_of_leftDerivedUpperStar_oneSection_eq
     (α β : F ≅ (L(((𝔸(ULift.{u} (Fin 1); Y) ↘ Y))^*[ModuleCat.{u + 1} Λ])).obj C)
     (h : (L((AffineSpace.oneSection (ULift.{u} (Fin 1)) Y)^*[ModuleCat.{u + 1} Λ])).map α.hom =
       (L((AffineSpace.oneSection (ULift.{u} (Fin 1)) Y)^*[ModuleCat.{u + 1} Λ])).map β.hom) :
-    α = β :=
-  sorry
+    α = β := by
+  let π := 𝔸(ULift.{u} (Fin 1); Y) ↘ Y
+  let i₁ := AffineSpace.oneSection (ULift.{u} (Fin 1)) Y
+  -- the unit section is a closed immersion, being a section of the separated `𝔸¹_Y ⟶ Y`
+  have hp : i₁ ≫ π = 𝟙 Y := AffineSpace.oneSection_comp_over _ _
+  have : IsClosedImmersion (i₁ ≫ π) := by
+    rw [hp]
+    infer_instance
+  have : IsClosedImmersion i₁ := IsClosedImmersion.of_comp i₁ π
+  -- the fibres of `𝔸¹_Y ⟶ Y` are irreducible and meet the unit section
+  have hi : ∀ x : 𝔸(ULift.{u} (Fin 1); Y), ∃ S : Set 𝔸(ULift.{u} (Fin 1); Y),
+      _root_.IsPreconnected S ∧ x ∈ S ∧ (S ∩ Set.range i₁.base).Nonempty := fun x ↦
+    ⟨π.base ⁻¹' {π.base x}, (π.isIrreducible_preimage
+      (AffineSpace.isOpenMap_over (n := ULift.{u} (Fin 1)) Y)
+      isIrreducible_singleton).isPreirreducible.isPreconnected, rfl, i₁.base (π.base x),
+      by simpa using congrArg (fun f : Y ⟶ Y ↦ f.base (π.base x)) hp, π.base x, rfl⟩
+  have hγ : (L((i₁)^*[ModuleCat.{u + 1} Λ])).map (α.hom ≫ β.inv) = 𝟙 _ := by
+    rw [CategoryTheory.Functor.map_comp, h, ← CategoryTheory.Functor.map_comp, β.hom_inv_id,
+      CategoryTheory.Functor.map_id]
+  have := eq_id_of_leftDerivedUpperStar_map_eq_id_of_isInvertible i₁ hi hF _ hγ
+  exact Iso.ext (by rw [← Category.comp_id α.hom, ← β.inv_hom_id, ← Category.assoc, this,
+    Category.id_comp])
 
 end
 
