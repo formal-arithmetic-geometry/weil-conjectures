@@ -13,7 +13,7 @@
  },
  "kind": "statement",
  "title": "Leading term of a multi-twisted Euler characteristic via top-dimensional components",
- "statement": "Let $k$ be a field [def-weil-field], let $X$ be a proper scheme over $k$ [def-weil-proper-morphism], let $\\mathcal F$ be a nonzero coherent $\\mathcal O_X$-module [pqf-def-coherent], and let $\\mathcal L_1,\\ldots,\\mathcal L_r$ be invertible $\\mathcal O_X$-modules [def-sc-invertible-module]. Let $d=\\dim\\operatorname{Supp}(\\mathcal F)$ [def-kun-topological-krull-dimension], let $Z_1,\\ldots,Z_s$ be the irreducible components of $\\operatorname{Supp}(\\mathcal F)$ of dimension $d$ [def-weil-irreducible-components], each with its reduced induced integral closed-subscheme structure $\\iota_i:Z_i\\hookrightarrow X$ [def-pc-integral-scheme] [def-weil-closed-immersion], let $\\xi_i$ be the generic point of $Z_i$ [def-sc-generic-point], and put $m_i=\\mathrm{length}_{\\mathcal O_{X,\\xi_i}}(\\mathcal F_{\\xi_i})$ [def-weil-pbc-module-length]. Then each $m_i$ is a positive integer, and $(n_1,\\ldots,n_r)\\mapsto\\chi(X,\\mathcal F\\otimes\\mathcal L_1^{\\otimes n_1}\\otimes\\cdots\\otimes\\mathcal L_r^{\\otimes n_r})-\\sum_{i=1}^s m_i\\,\\chi(X,\\iota_{i*}\\mathcal O_{Z_i}\\otimes\\mathcal L_1^{\\otimes n_1}\\otimes\\cdots\\otimes\\mathcal L_r^{\\otimes n_r})$ [def-pc-euler-characteristic] is a numerical polynomial in $n_1,\\ldots,n_r$ of total degree $<d$ (the zero polynomial when $d=0$).",
+ "statement": "Let $k$ be a field [def-weil-field], let $X$ be a proper scheme over $k$ [def-weil-proper-morphism], let $\\mathcal F$ be a coherent $\\mathcal O_X$-module [pqf-def-coherent], and let $\\mathcal L_1,\\ldots,\\mathcal L_r$ be invertible $\\mathcal O_X$-modules [def-sc-invertible-module]. Let $d=\\dim\\operatorname{Supp}(\\mathcal F)$ [def-kun-topological-krull-dimension], let $Z_1,\\ldots,Z_s$ be the irreducible components of $\\operatorname{Supp}(\\mathcal F)$ of dimension $d$ [def-weil-irreducible-components], each with its reduced induced integral closed-subscheme structure $\\iota_i:Z_i\\hookrightarrow X$ [def-pc-integral-scheme] [def-weil-closed-immersion], let $\\xi_i$ be the generic point of $Z_i$ [def-sc-generic-point], and put $m_i=\\mathrm{length}_{\\mathcal O_{X,\\xi_i}}(\\mathcal F_{\\xi_i})$ [def-weil-pbc-module-length]. Then each $m_i$ is a positive integer, and $(n_1,\\ldots,n_r)\\mapsto\\chi(X,\\mathcal F\\otimes\\mathcal L_1^{\\otimes n_1}\\otimes\\cdots\\otimes\\mathcal L_r^{\\otimes n_r})-\\sum_{i=1}^s m_i\\,\\chi(X,\\iota_{i*}\\mathcal O_{Z_i}\\otimes\\mathcal L_1^{\\otimes n_1}\\otimes\\cdots\\otimes\\mathcal L_r^{\\otimes n_r})$ [def-pc-euler-characteristic] is a numerical polynomial in $n_1,\\ldots,n_r$ of total degree $<d$ (the zero polynomial when $d=0$).",
  "source": {
   "document": "literature/stacks-project/varieties.tex",
   "place": "Tag 0BEN (Varieties, label lemma-numerical-polynomial-leading-term, varieties.tex line 10290); the Euler characteristics on $Z_i$ written as Euler characteristics on $X$ of the pushforwards"
@@ -31,8 +31,78 @@
   "def-weil-pbc-module-length",
   "def-pc-euler-characteristic"
  ],
- "proof": [],
- "proof_deps": [],
+ "proof": [
+  {
+   "text": "For every integral closed subscheme $Z\\subset X$ of dimension $d$ with generic point $\\xi$, the finite stalk $\\mathcal F_\\xi$ has support contained in $\\{\\xi\\}$. If this stalk is nonzero, [lem-sc-generic-stalk-finite-length] gives a finite length $m_Z$; if it is zero, set $m_Z=0$. Thus $m_Z=0$ unless $Z$ is one of the top-dimensional irreducible components $Z_i$, and $m_Z$ is positive for each $Z_i$. Define $E(\\mathcal F)$ to be the Euler-characteristic expression in the statement, equivalently summing $m_Z\\,\\chi(Z,\\mathcal L_1^{\\otimes n_1}|_Z\\otimes\\cdots\\otimes\\mathcal L_r^{\\otimes n_r}|_Z)$ over all such $Z$. For a short exact sequence of coherent modules whose supports have dimension at most $d$, [lem-pc-euler-additive] makes the first term additive and [lem-weil-pbc-length-additive-short-exact] makes every generic length additive, so $E$ is additive.",
+   "uses": [
+    "lem-sc-generic-stalk-finite-length",
+    "lem-pc-euler-additive",
+    "lem-weil-pbc-length-additive-short-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 0BEN proof, first two paragraphs: finite generic lengths and additivity of E"
+   }
+  },
+  {
+   "text": "Properness over the field makes $X$ of finite type over the Noetherian scheme $\\operatorname{Spec}(k)$, hence Noetherian by [lem-weil-pbc-finite-type-over-noetherian]. Apply [lem-weil-pbc-coherent-filtration-integral-subschemes] to obtain a coherent filtration whose successive quotients are $(V_j\\to X)_*\\mathcal I_j$ for integral closed subschemes $V_j$ and nonzero coherent ideal sheaves $\\mathcal I_j$. Every $V_j$ lies in $\\operatorname{Supp}(\\mathcal F)$, so $\\dim V_j\\le d$. By additivity from step 1, it suffices to prove the assertion for each such quotient.",
+   "uses": [
+    "lem-weil-pbc-finite-type-over-noetherian",
+    "lem-weil-pbc-coherent-filtration-integral-subschemes"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 0BEN proof, coherent filtration paragraph"
+   }
+  },
+  {
+   "text": "If $\\dim V<d$, then the first Euler-characteristic term for $(V\\to X)_*\\mathcal I$ is a numerical polynomial of degree at most $\\dim V<d$ by [lem-sc-snapper-numerical-polynomial]. Its generic stalk is zero at every integral closed subscheme of dimension $d$, because the support is contained in $V$, so all terms in the defining sum vanish; hence $E((V\\to X)_*\\mathcal I)$ has degree $<d$.",
+   "uses": [
+    "lem-sc-snapper-numerical-polynomial"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 0BEN proof, case dim(V)<d"
+   }
+  },
+  {
+   "text": "Assume $\\dim V=d$. The exact sequence $0\\to\\mathcal I\\to\\mathcal O_V\\to\\mathcal O_V/\\mathcal I\\to0$, pushed forward to $X$ using [lem-sc-closed-immersion-pushforward-exact] and tensored by the invertible twists, is exact. The quotient is supported on a proper closed subset of the integral $d$-dimensional $V$, so its support has dimension $<d$; step 3 applies to it. For $(V\\to X)_*\\mathcal O_V$, the only nonzero generic length is $1$ at $V$, and [lem-pc-projection-formula] together with [lem-sc-cohomology-closed-immersion-pushforward] identifies its twisted cohomology with the cohomology on $V$ of the restricted twists, so its $E$ is identically zero. Additivity of Euler characteristics from [lem-pc-euler-additive] now gives the degree-$<d$ assertion for $(V\\to X)_*\\mathcal I$.",
+   "uses": [
+    "lem-pc-projection-formula",
+    "lem-sc-cohomology-closed-immersion-pushforward",
+    "lem-sc-closed-immersion-pushforward-exact",
+    "lem-pc-euler-additive"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 0BEN proof, dim(V)=d case and projection formula paragraph"
+   }
+  },
+  {
+   "text": "Summing the degree-$<d$ conclusions for the filtration quotients using step 1 proves that the displayed difference is a numerical polynomial of total degree $<d$. The generic stalks at the top-dimensional components are nonzero finite modules, so their lengths $m_i$ are positive integers by step 1.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 0BEN proof, final devissage conclusion"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sc-generic-stalk-finite-length",
+  "lem-pc-euler-additive",
+  "lem-weil-pbc-length-additive-short-exact",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-weil-pbc-coherent-filtration-integral-subschemes",
+  "lem-sc-snapper-numerical-polynomial",
+  "lem-pc-projection-formula",
+  "lem-sc-cohomology-closed-immersion-pushforward",
+  "lem-sc-closed-immersion-pushforward-exact"
+ ],
  "proof_origin": {
   "by": "document",
   "document": "literature/stacks-project/varieties.tex",
@@ -45,15 +115,76 @@
    "results": "AlgebraicGeometry.exists_of_res_zero_of_qcqs_of_top, PrimeSpectrum.ConstructibleSetData.degBound and basic-open annihilation lemmas; nothing on Euler characteristics",
    "date": "2026-10-10",
    "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "Euler characteristic numerical polynomial generic point length",
+   "results": "0 hits; loogle reported Unknown identifier `Euler`",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "numerical.?polynomial|Euler.?characteristic|generic.?point.*length in Mathlib/AlgebraicGeometry",
+   "results": "no hits",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "leading term Euler characteristic coherent sheaf generic point lengths",
+   "results": "unavailable",
+   "date": "2026-10-10",
+   "verdict": "unavailable"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-sc-top-dimensional-reduction-intersection",
   "by": "reviewer R-tdr2356",
   "date": "2026-10-10"
  },
  "chapter": "sec-abelian-varieties",
- "unit": "sk-prop-av-isogeny"
+ "unit": "sk-prop-av-isogeny",
+ "split_report": {
+  "date": "2026-10-11",
+  "item": "lem-sc-numerical-polynomial-leading-term",
+  "worker": "stage1",
+  "summary": "Split Tag 0BEN along its coherent-filtration devissage. Added the statement-only support-point finite-length node required by the first paragraph; the item proof uses existing Euler-additivity, length-additivity, coherent-filtration, Snapper-polynomial, finite-type-Noetherian, and projection-formula nodes. The source expression is written with pushforwards to match the item statement.",
+  "blueprint": "Realizes the proof of Tag 0BEN in the blueprint ancestor lem-sc-mult-n-finite-flat: generic-length/additivity paragraph, coherent filtration paragraph, lower-dimensional quotient case, and integral top-dimensional ideal sequence case.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-coherent-filtration-integral-subschemes",
+    "why": "Step 2 uses the generic coherent-filtration theorem as the imported devissage input; the abelian-varieties unit has no replacement for this general Noetherian-scheme lemma."
+   },
+   {
+    "node": "lem-pc-projection-formula",
+    "why": "Step 4 uses the general projection formula to identify cohomology of a closed-immersion pushforward with cohomology on the component."
+   },
+   {
+    "node": "lem-sc-cohomology-closed-immersion-pushforward",
+    "why": "Step 4 uses the closed-immersion cohomology comparison; this generic cohomology tool is imported because the abelian-varieties unit has no replacement."
+   },
+   {
+    "node": "lem-sc-closed-immersion-pushforward-exact",
+    "why": "Step 4 uses exactness of closed-immersion pushforward for the ideal sequence; this generic cohomology tool is imported because the abelian-varieties unit has no replacement."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-coherent-filtration-integral-subschemes",
+  "lem-pc-projection-formula",
+  "lem-sc-cohomology-closed-immersion-pushforward",
+  "lem-sc-closed-immersion-pushforward-exact"
+ ],
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-npl2601",
+  "group": "F1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-npl2601 (reviewer sub-agent of L); spot-checked: Read packet whole; checked Tag 0BEN steps 1-5 against cited statements, citer lem-sc-top-dimensional-reduction-intersection, Mathlib grep for 00L5 (no match), no duplicate node for 00L5. FIX more, RETURN less: (1) C4/E7: the second reading dropped 'each m_i is a positive integer' from the item statement, but the citer lem-sc-top-dimensional-reduction-intersection step 2 cites exactly that (proof step 5 still proves it); restored it, and restored the d=0 zero-polynomial clause the citer needs when dim Z=0. (2) B3: new node lem-sc-generic-stalk-finite-length cited Tag 00IY (dimension-is-length); corrected source to Tag 00L5 (algebra-lemma-support-point) and recorded a Mathlib grep search.; 2 file(s) fixed by the reviewer"
+ },
+ "lead_note": "2026-10-10 L (R-npl2601): No numerical-polynomial definition node exists; the item (like lem-sc-snapper-numerical-polynomial) uses the term uncited."
 }
