@@ -781,3 +781,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 02:01 L: reviewed lem-weil-pbc-strictly-standard-base-change (5 steps, +2 Mathlib leaves): accepted.
 - 02:02 L: reviewed lem-weil-pbc-standard-smooth-over-field-dimension-at-points (5 steps, +5: two leaves, 00S9 definition, 00T5, 00SC): accepted. Stage 3: the 00TT node must be proved from this item (Stacks' order), not the other way round.
 - 02:04 L: reviewed lem-weil-pbc-surjective-universally-closed-affine-target (8 steps, +01SG leaf, +01ZT Chevalley node; tool_uses pqf-lem-integral-univclosed): accepted. Stage 3: pqf-lem-integral-univclosed is Mathlib's IsIntegralHom.iff_universallyClosed_and_isAffineHom (Integral.lean:135) per the worker.
+- 02:05 L: reviewed lem-weil-pbc-spectral-finite-coequalizer-from-finite-space (8 steps, +7 nodes): accepted.

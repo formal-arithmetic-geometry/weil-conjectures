@@ -1,0 +1,68 @@
+{
+ "id": "lem-weil-pbc-sets-sheaf-colimit-stalks",
+ "kind": "statement",
+ "title": "The stalk of a colimit of sheaves of sets is the colimit of the stalks",
+ "statement": "Let $X$ be a topological space, $I$ a small category and $(\\mathcal F_i)_{i\\in I}$ a diagram of sheaves of sets on $X$ (sheaves on the site of open subsets of $X$ [def-weil-pbc-sites-and-cohomology]) with colimit $(\\mathcal F,(c_i:\\mathcal F_i\\to\\mathcal F)_i)$ in the category of sheaves of sets on $X$ [def-weil-pbc-category-colimit]. For a presheaf of sets $\\mathcal P$ on $X$ and $x\\in X$ let $\\mathcal P_x=\\varinjlim_{U\\ni x}\\mathcal P(U)$ be its stalk (colimit of sets over the open neighbourhoods of $x$ ordered by reverse inclusion, with germs $s\\mapsto s_x$), and for a morphism $\\varphi$ let $\\varphi_x$ be the map with $\\varphi_x(s_x)=(\\varphi_U(s))_x$. Then for every $x\\in X$, $(\\mathcal F_x,((c_i)_x)_i)$ is a colimit of the diagram of sets $(\\mathcal F_{i,x})_{i\\in I}$. In particular the stalk of a coproduct of sheaves of sets is the disjoint union of the stalks, and the stalk of a coequalizer $q:\\mathcal C\\to\\mathcal F$ of $r,s:\\mathcal D\\rightrightarrows\\mathcal C$ is the coequalizer of $r_x,s_x$, so $q_x$ is surjective.",
+ "source": {
+  "document": "literature/stacks-project/sheaves.tex",
+  "place": "Sheaves, Section Tag 009E (label section-limits-sheaves, line 3400), item (5): '(colim_i F_i)_x = colim_i F_{i,x}' ('The proofs are all easy')"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-sites-and-cohomology",
+  "def-weil-pbc-category-colimit"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "stalk functor on sheaves preserves colimits",
+   "results": "TopCat.Presheaf.stalkFunctor (Mathlib.Topology.Sheaves.Stalks), GrothendieckTopology.Point...PreservesColimits (Sites.Point.Basic), TopCat.Presheaf.stalkFunctor_map_germ_apply, TopCat.Presheaf.stalk_mono_of_mono",
+   "date": "2026-10-10",
+   "verdict": "candidate: stalk functor, see grep"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "stalk of a colimit of sheaves of sets on a topological space is the colimit of the stalks",
+   "results": "TopCat.Presheaf.stalkFunctor, stalkFunctor_obj, StalkSkyscraperPresheafAdjunctionAuxs.fromStalk (Mathlib.Topology.Sheaves.Skyscraper), TopCat.Presheaf.stalk",
+   "date": "2026-10-10",
+   "verdict": "match via the stalk-skyscraper adjunction"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rn 'stalkSkyscraperSheafAdjunction\\|IsLeftAdjoint' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/Topology/Sheaves/Skyscraper.lean; grep -n 'lemma leftAdjoint_preservesColimits' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/CategoryTheory/Adjunction/Limits.lean",
+   "results": "Skyscraper.lean:402 stalkSkyscraperSheafAdjunction : Sheaf.forget C X ⋙ Presheaf.stalkFunctor C p₀ ⊣ skyscraperSheafFunctor p₀, Skyscraper.lean:415 IsLeftAdjoint instance; Adjunction/Limits.lean:92 leftAdjoint_preservesColimits",
+   "date": "2026-10-10",
+   "verdict": "match"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "stalkSkyscraperSheafAdjunction, CategoryTheory.Adjunction.leftAdjoint_preservesColimits",
+  "file": "Mathlib/Topology/Sheaves/Skyscraper.lean",
+  "how": "specializes in one line: for X : TopCat.{u} and C = Type u (which has colimits), stalkSkyscraperSheafAdjunction p₀ (Skyscraper.lean:402) makes Sheaf.forget (Type u) X ⋙ Presheaf.stalkFunctor (Type u) p₀ a left adjoint, so it preserves all colimits by Adjunction.leftAdjoint_preservesColimits (Mathlib/CategoryTheory/Adjunction/Limits.lean:92); TopCat.Presheaf.stalk (Stalks.lean:82) is the colimit over the open neighbourhoods and the map on stalks sends germs to germs (stalkFunctor_map_germ). The two special cases are the colimit of a discrete diagram and of a parallel pair in Type, where a coequalizer is a quotient set.",
+  "line": 402
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-spectral-finite-coequalizer-from-finite-space",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lead_note": "L 2026-10-10: composed match (stalkSkyscraperSheafAdjunction Skyscraper.lean:402 with Adjunction.leftAdjoint_preservesColimits Adjunction/Limits.lean:92, C = Type u); lines verified by L; line field set to the first."
+}

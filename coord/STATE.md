@@ -29,7 +29,7 @@ Written by the launcher at the start (`1-dag`), then kept current by the maintai
 - **Imported statement false in general (2026-10-09 15:05):** lem-fet-locally-trivial (sec-curve-estimates, imported, unit of the finite-etale points) asks for one surjective etale Y' → Y and one finite set S trivializing a finite etale P → Y; false for disconnected Y (Y = pt ⊔ pt, P one point over one component), true for connected Y. Found by the worker of lem-weil-pbc-finite-etale-trace-degree, which used Stacks 04HN instead. To be corrected at its own split (add 'Y connected' or allow S to vary with the component).
 - **Gap in a reviewed proof (node level, 2026-10-09 14:45):** prop-weil-pbc-algebraically-closed-extension step 10 feeds step 9 (constructibility in the curve sense, def-weil-pbc-constructible-torsion) into lem-weil-pbc-curve-constructible-reduction, whose hypothesis is constructibility as a sheaf of Z/r-modules (def-weil-pbc-etale-constructible-sheaf); the bridge is the new node lem-weil-pbc-constructible-torsion-modules-agree (unsplit): to be cited at step 10 when that node is split (the lead will add the pointer then). RESOLVED 2026-10-09 15:45: lem-weil-pbc-constructible-torsion-modules-agree split and reviewed; step 10 cites it.
 
-**Remote groups** (`tools/group_stats.py`, updated with each progress row; 2026-10-10 01:55 UTC):
+**Remote groups** (`tools/group_stats.py`, updated with each progress row; 2026-10-10 02:05 UTC):
 | group | merged | returned | abandoned | claims held (age, h) |
 |---|---|---|---|---|
 | C | 19 | 20 | 0 | 0: none |
@@ -37,11 +37,11 @@ Written by the launcher at the start (`1-dag`), then kept current by the maintai
 | D | 2 | 8 | 0 | 0: none |
 | D1 | 3 | 4 | 2 | 0: none |
 | E | 1 | 5 | 0 | 0: none |
-| E1 | 20 | 23 | 0 | 1: lem-weil-pbc-helper-g-ring-char-p (0.4) |
+| E1 | 20 | 23 | 0 | 1: lem-weil-pbc-helper-g-ring-char-p (0.6) |
 | F | 1 | 4 | 0 | 0: none |
-| F1 | 19 | 22 | 1 | 5: lem-weil-pbc-regular-ring-smooth-ascent (0.4), lem-weil-pbc-site-coverings-common-refinement (0.2), lem-weil-pbc-site-module-sheafification-lift-injective (0.2), lem-weil-pbc-site-plus-of-separated-is-sheaf (0.1), lem-weil-pbc-small-etale-representable-presheaf-sheaf (0.1) |
+| F1 | 19 | 22 | 1 | 5: lem-weil-pbc-regular-ring-smooth-ascent (0.5), lem-weil-pbc-site-coverings-common-refinement (0.3), lem-weil-pbc-site-module-sheafification-lift-injective (0.3), lem-weil-pbc-site-plus-of-separated-is-sheaf (0.3), lem-weil-pbc-small-etale-representable-presheaf-sheaf (0.3) |
 | G | 0 | 2 | 0 | 0: none |
-| G1 | 20 | 9 | 0 | 1: lem-weil-pbc-site-plus-construction-functorial (0.1) |
+| G1 | 20 | 9 | 0 | 1: lem-weil-pbc-site-plus-construction-functorial (0.0) |
 
 REMOTE LAUNCHER READY (2026-10-09 16:22: `roles/remote-launcher.md` committed; `AGENTS.md` §1, `roles/remote-lead.md`, `SETUP.md`, `roles/maintainer.md` §7, `tools/README.md` tied in; the tools take any group name `C1`, `C2`, …; the old group `C` keeps its claims until the human says its session is stopped).
 
@@ -120,6 +120,7 @@ REMOTE LAUNCHER READY (2026-10-09 16:22: `roles/remote-launcher.md` committed; `
 | 2026-10-10 01:35 | 840 | 1009 | 608 | 332 | thirteenth account limit ~01:25 (4 workers died, nothing complete; relaunched 01:30); +popescu-solution-modulo (+6; gap in Stacks 07FH noted in HUMAN.md), reduced-noetherian-total-ring-fractions (+3 leaves); merged E1 idempotent image-base-change and charpoly-field (+3 leaves); C1 z-localizations-dvr 3rd push and F1 post-merge re-push pending; 4 workers running |
 | 2026-10-10 01:46 | 849 | 1023 | 613 | 332 | 12 more splits since 01:35 (00NQ, 07NG +2, 0AFS +4, 07DW +2, 07DV +1, 01AF/01AG +1, 037X +1, 01KP, 0CAH +1, 09YJ +4, definition unfolding); linear-disjoint became a Mathlib leaf; merged G1 etale-ring-map-prescribed-residue-field (2nd) and G1 lft-over-field-isolated-point-residue-finite; returned C1 z-localizations-dvr (3rd); 5 workers running |
 | 2026-10-10 01:55 | 846 | 1033 | 616 | 332 | 15 more splits since 01:46 (086K +1 leaf, 0CAI x2 +3, 00W1 +1, 00WB, 0CAL, 01V7 +1 leaf, 07EZ +2, 00ED, 07C5, 00ED); merged G1 etale-ring-map-prescribed-residue-field (2nd, +2) and G1 lft-over-field-isolated-point-residue-finite (+1); 5 workers running |
+| 2026-10-10 02:05 | 859 | 1041 | 628 | 332 | 9 more splits since 01:55 (01HY, 033C +4, 00FI +1, 07CC +2, 02HO +2, 00T7 +5, 05YU +2, 0CAK +7, 00ED); 5 workers running; no new deliveries (C1, E1 helper-g-ring and F1 branches unchanged) |
 
 **Pilot numbers, effort `xhigh` (batches 1–2, 2026-10-09, 05:53–07:20 UTC).** Two accounts hit their 5-hour session limits: the first after about an hour with 10 workers running, the second after 16 minutes (it had been used elsewhere). 11 items were delivered and passed review: 9 with a report, 2 found complete on disk after their worker died; 12 workers died mid-item, 7 of them leaving nothing usable. Per delivered item: 9.5–14 minutes of wall time (563–852 s, median ~720 s) and 119k–268k worker tokens (median ~170k); 0–6 new nodes per item (median 2), about half of them Mathlib leaves. The review rejected nothing mathematically; what it had to correct or note: two workers could not read the PDFs (no `pdftotext`; installed since) and wrote the proof as an agent's; one refused the review script because the brief forbade `git` (brief fixed); one died leaving its item citing nodes it had not written (brief now says new nodes first); one removed a pointer clause from a definition's statement (accepted, the slopmaster2 text has no such clause); claims inside definitions were kept as the source wrote them and reported.
 

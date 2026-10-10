@@ -1,0 +1,61 @@
+{
+ "id": "lem-weil-pbc-spectral-limit-descend-opens",
+ "kind": "statement",
+ "title": "Quasi-compact opens of a directed limit of spectral spaces descend to a finite stage",
+ "statement": "Let $I$ be a directed set (nonempty, any two elements have a common upper bound), let $(X_i)_{i\\in I}$ be spectral spaces [def-weil-spectral-space] and for $i\\le i'$ let $f_{ii'}:X_{i'}\\to X_i$ be spectral maps (continuous, with $f_{ii'}^{-1}(W)$ quasi-compact for every quasi-compact open $W\\subseteq X_i$), with $f_{ii}=\\mathrm{id}$ and $f_{ii'}\\circ f_{i'i''}=f_{ii''}$ for $i\\le i'\\le i''$. Let $X$ be a topological space with continuous maps $p_i:X\\to X_i$, $f_{ii'}\\circ p_{i'}=p_i$, which is a limit of the system in the category of topological spaces (the map $x\\mapsto(p_i(x))_i$ is a bijection of $X$ onto $\\{(x_i)\\in\\prod_iX_i: f_{ii'}(x_{i'})=x_i\\text{ for }i\\le i'\\}$ and the topology of $X$ is the coarsest for which all $p_i$ are continuous). Then: (1) for every quasi-compact open $U\\subseteq X$ there are $i\\in I$ and a quasi-compact open $U_i\\subseteq X_i$ with $p_i^{-1}(U_i)=U$; (2) if $U_i\\subseteq X_i$, $U_j\\subseteq X_j$ are quasi-compact opens with $p_i^{-1}(U_i)\\subseteq p_j^{-1}(U_j)$, there is $k\\in I$ with $k\\ge i,j$ and $f_{ik}^{-1}(U_i)\\subseteq f_{jk}^{-1}(U_j)$; (3) if $U_i,U_{1,i},\\dots,U_{n,i}\\subseteq X_i$ are quasi-compact opens with $p_i^{-1}(U_i)=\\bigcup_lp_i^{-1}(U_{l,i})$, then $f_{ii'}^{-1}(U_i)=\\bigcup_lf_{ii'}^{-1}(U_{l,i})$ for some $i'\\ge i$; (4) the same as (3) with intersections in place of unions.",
+ "source": {
+  "document": "literature/stacks-project/topology.tex",
+  "place": "Topology, Lemma Tag 0A30 (label lemma-descend-opens, line 4969), stated there for a cofiltered index category; a directed set is the special case used here"
+ },
+ "stmt_deps": [
+  "def-weil-spectral-space"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "quasi-compact open subset of a cofiltered limit of spectral spaces is preimage of a quasi-compact open of some stage",
+   "results": "AlgebraicGeometry.exists_preimage_eq (Mathlib.AlgebraicGeometry.AffineTransitionLimit: the same statement for a cofiltered limit of schemes with affine transition maps, not for spectral spaces), AlgebraicGeometry.exists_isAffineOpen_preimage_eq, IsCompact.preimage_of_isOpen, IsSpectralMap.isCompact_preimage_of_isOpen",
+   "date": "2026-10-10",
+   "verdict": "no match (the scheme version AlgebraicGeometry.exists_preimage_eq does not apply to an arbitrary directed system of spectral spaces)"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "compact open of an inverse limit of topological spaces is the preimage of a compact open at some finite stage",
+   "results": "TopologicalSpace.Fiber..., Profinite.indexFunctor, Profinite.indexCone, ProfiniteGrp limit compactness, Profinite.isoindexConeLift: other statements",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rn 'IsLimit\\|limit' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/Topology/Spectral/*.lean; grep -rn 'exists_preimage_eq' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicGeometry/AffineTransitionLimit.lean",
+   "results": "nothing in Topology/Spectral; only the scheme version AlgebraicGeometry.exists_preimage_eq",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-spectral-finite-coequalizer-from-finite-space",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1"
+}

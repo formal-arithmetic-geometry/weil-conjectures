@@ -1,0 +1,61 @@
+{
+ "id": "lem-weil-pbc-sets-inverse-image-composition",
+ "kind": "statement",
+ "title": "Inverse image of sheaves of sets along a composite of continuous maps",
+ "statement": "Let $f:X\\to Y$ and $g:Y\\to Z$ be continuous maps of topological spaces, and for a continuous map $h$ let $h^{-1}$ be the inverse image of sheaves of sets, left adjoint to the direct image $h_*$, with unit $\\eta^h$ given on sections by $\\eta^h_{\\mathcal G,W}:\\mathcal G(W)\\to(h^{-1}\\mathcal G)(h^{-1}W)$, as in [def-weil-pbc-topological-inverse-image] (2), (3) with values in sets. Then for every sheaf of sets $\\mathcal G$ on $Z$ there is exactly one morphism of sheaves of sets $c_{\\mathcal G}:f^{-1}g^{-1}\\mathcal G\\to(g\\circ f)^{-1}\\mathcal G$ on $X$ such that $c_{\\mathcal G,(g\\circ f)^{-1}W}\\bigl(\\eta^f_{g^{-1}\\mathcal G,g^{-1}W}(\\eta^g_{\\mathcal G,W}(s))\\bigr)=\\eta^{g\\circ f}_{\\mathcal G,W}(s)$ for every open $W\\subseteq Z$ and every $s\\in\\mathcal G(W)$; it is an isomorphism, and natural in $\\mathcal G$.",
+ "source": {
+  "document": "literature/stacks-project/sheaves.tex",
+  "place": "Sheaves, Lemma Tag 008I (label lemma-pullback-composition, line 2209): '(g o f)^{-1} and f^{-1} o g^{-1} are canonically isomorphic' (both left adjoint to (g o f)_* = g_* o f_*, Lemma lemma-pushforward-composition); the description by units is that of the isomorphism of left adjoints"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-topological-inverse-image"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "pullback of sheaves along composition of continuous maps is isomorphic to composite of pullbacks",
+   "results": "CategoryTheory.GrothendieckTopology.overMapPullbackComp (Sites.Over), AlgebraicGeometry.Scheme.Modules.pullbackComp, SheafOfModules.pullbackComp, PresheafOfModules.pullback_comp_id, Functor.sheafPushforwardContinuousComp: for sheaves of modules or over-sites, none for TopCat.Sheaf of types",
+   "date": "2026-10-10",
+   "verdict": "no match (generalization only for sheaves of modules)"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "TopCat sheaf pullback along composite of continuous maps isomorphic to composition of pullbacks",
+   "results": "TopCat.Sheaf.pullbackIso, SheafOfModules.pullback_assoc, SheafOfModules.pullbackComp, AlgebraicGeometry.Scheme.Modules.pullbackComp, SheafOfModules.conjugateEquiv_pullbackComp_inv",
+   "date": "2026-10-10",
+   "verdict": "no match: TopCat.Sheaf.pullback has no composition isomorphism; it would be assembled from CategoryTheory.Adjunction.leftAdjointUniq applied to (pullbackPushforwardAdjunction g).comp (pullbackPushforwardAdjunction f) and the composition of pushforwards"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rn 'pushforwardComp\\|pullbackComp\\|leftAdjointUniq' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/Topology/Sheaves/*.lean; grep -n '^def comp' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/Topology/Sheaves/Presheaf.lean",
+   "results": "Presheaf.lean:195 TopCat.Presheaf.Pushforward.comp (pushforward along a composite, presheaves); Presheaf.lean:301,307 leftAdjointUniq used only for homeomorphisms (pullbackHomIsoPushforwardInv); no pullback composition",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-spectral-finite-coequalizer-from-finite-space",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1"
+}

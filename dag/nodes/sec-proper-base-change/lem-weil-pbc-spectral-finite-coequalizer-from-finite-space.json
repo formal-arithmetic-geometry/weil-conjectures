@@ -13,9 +13,133 @@
   "def-weil-pbc-category-colimit",
   "def-weil-pbc-topological-inverse-image"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "*Step 1 (X as a limit of finite sober spaces; Tags 09XX, 0A2Z).* By [lem-weil-pbc-spectral-directed-limit-finite-sober] there are a directed set $I$, finite sober spaces $X_i$, continuous maps $f_{ii'}:X_{i'}\\to X_i$ ($i\\le i'$, $f_{ii}=\\mathrm{id}$, $f_{ii'}f_{i'i''}=f_{ii''}$) and continuous $p_i:X\\to X_i$ with $f_{ii'}p_{i'}=p_i$ such that $(X,(p_i))$ is a limit of the system in topological spaces. Every finite sober space $X_i$ is spectral [def-weil-spectral-space]: it is quasi-compact, every subset of a finite space is quasi-compact, so all opens are quasi-compact, they form a basis and are closed under finite intersections, and it is sober by hypothesis. For the same reason every continuous map between finite spaces is spectral (preimages of opens are open, hence quasi-compact), in particular every $f_{ii'}$. By [lem-weil-pbc-spectral-directed-limit-spectral] every $p_i$ is spectral: $p_i^{-1}(W)$ is quasi-compact for every quasi-compact open $W\\subseteq X_i$, i.e. (all opens of $X_i$ being quasi-compact) for every open $W\\subseteq X_i$.",
+   "uses": [
+    "lem-weil-pbc-spectral-directed-limit-finite-sober",
+    "def-weil-spectral-space",
+    "lem-weil-pbc-spectral-directed-limit-spectral"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/modules.tex",
+    "place": "Modules, proof of Lemma Tag 0CAK (lemma-constructible-comes-from-finite): 'We can write X = lim X_i as a directed limit of finite sober spaces (Topology 09XX). Of course the transition maps are spectral and hence by Topology 0A2Z the maps p_i are spectral'"
+   }
+  },
+  {
+   "text": "*Step 2 (descending the opens; Tag 0A30 (1)).* By [lem-weil-pbc-spectral-limit-descend-opens] (1) (applicable by Step 1) there are, for each $a=1,\\dots,n$, an index $i_a$ and an open $U'_a\\subseteq X_{i_a}$ with $p_{i_a}^{-1}(U'_a)=U_a$, and for each $b=1,\\dots,m$ an index $i'_b$ and an open $V'_b\\subseteq X_{i'_b}$ with $p_{i'_b}^{-1}(V'_b)=V_b$. As $I$ is directed (and nonempty) there is $i_0\\in I$ with $i_0\\ge i_a,i'_b$ for all $a,b$. For $i\\ge i_0$ put $U_{a,i}=f_{i_ai}^{-1}(U'_a)$ and $V_{b,i}=f_{i'_bi}^{-1}(V'_b)$, opens of $X_i$. Then $f_{i_0i}^{-1}(U_{a,i_0})=U_{a,i}$ and $p_i^{-1}(U_{a,i})=(f_{i_ai}p_i)^{-1}(U'_a)=p_{i_a}^{-1}(U'_a)=U_a$, and likewise $f_{i_0i}^{-1}(V_{b,i_0})=V_{b,i}$, $p_i^{-1}(V_{b,i})=V_b$.",
+   "uses": [
+    "lem-weil-pbc-spectral-limit-descend-opens"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/modules.tex",
+    "place": "Modules, proof of Lemma Tag 0CAK (lemma-constructible-comes-from-finite): 'For some i we can find opens U_{a,i} and V_{b,i} of X_i whose inverse images are U_a and V_b, see Topology 0A30'"
+   }
+  },
+  {
+   "text": "*Step 3 (maps out of $j_{W!}\\underline T$ and out of finite coproducts).* For an open $W$ of a space, a set $T$ and a sheaf of sets $\\mathcal K$ on that space let $\\beta_{\\mathcal K}:\\operatorname{Hom}(j_{W!}\\underline T,\\mathcal K)\\to\\operatorname{Map}(T,\\mathcal K(W))$, $\\psi\\mapsto(t\\mapsto\\psi_W(\\theta_W(\\mathrm{const}_t)))$, where $\\theta:j_{W,p!}\\underline T_W\\to j_{W!}\\underline T$ is the sheafification map and $\\mathrm{const}_t\\in\\underline T_W(W)$ the constant map [def-weil-pbc-sets-extension-by-empty]. It is the composite of the bijection $\\psi\\mapsto(\\psi\\circ\\theta)|_W$ of [lem-weil-pbc-sets-extension-by-empty-adjunction] (2) onto $\\operatorname{Hom}(\\underline T_W,\\mathcal K|_W)$ with the bijection $\\varphi\\mapsto(t\\mapsto\\varphi_W(\\mathrm{const}_t))$ of [lem-weil-pbc-constant-sheaf-open-maps-sections] for the sheaf $\\mathcal K|_W$, so it is bijective; and directly from the formula it is natural: $\\beta_{\\mathcal K'}(\\alpha\\circ\\psi)=\\alpha_W\\circ\\beta_{\\mathcal K}(\\psi)$ for $\\alpha:\\mathcal K\\to\\mathcal K'$. By the universal property of a coproduct [def-weil-pbc-category-colimit], a morphism from a coproduct $\\coprod_bj_{W_b!}\\underline{T_b}$ with coprojections $\\varepsilon_b$ to $\\mathcal K$ is the same as the family of its composites with the $\\varepsilon_b$, hence (via $\\beta$) the same as a family of maps $T_b\\to\\mathcal K(W_b)$; two morphisms agreeing after composition with every $\\varepsilon_b$ are equal. (This is Stacks' 'correspond by adjunction to two families of maps of sets'.)",
+   "uses": [
+    "def-weil-pbc-sets-extension-by-empty",
+    "lem-weil-pbc-sets-extension-by-empty-adjunction",
+    "lem-weil-pbc-constant-sheaf-open-maps-sections",
+    "def-weil-pbc-category-colimit"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/modules.tex",
+    "place": "Modules, proof of Lemma Tag 0CAK (lemma-constructible-comes-from-finite): 'The two maps beta, gamma ... correspond by adjunction to two families beta_b, gamma_b : S_b -> Gamma(V_b, coprod j_{U_a!}S_a) of maps of sets' (adjunction of Sheaves Lemma Tag 00A3, lemma-j-shriek)"
+   }
+  },
+  {
+   "text": "*Step 4 (the target coproduct comes from $X_{i_0}$; first omitted detail).* Coproducts of sheaves of sets exist [lem-weil-pbc-sheaves-colimit-sheafification]. Let $H=\\coprod_{a=1}^nj_{U_a!}\\underline{S_a}$ be the coproduct of the statement on $X$, with coprojections $\\iota_a$, and let $H_0=\\coprod_{a=1}^nj_{U_{a,i_0}!}\\underline{S_a}$ on $X_{i_0}$, with coprojections $\\iota^0_a$. By [lem-weil-pbc-sets-inverse-image-extension-by-empty-constant] applied to $p_{i_0}$, the open $U_{a,i_0}$ (with $p_{i_0}^{-1}(U_{a,i_0})=U_a$, Step 2) and $S_a$, there are isomorphisms $\\lambda_a:p_{i_0}^{-1}(j_{U_{a,i_0}!}\\underline{S_a})\\xrightarrow{\\sim}j_{U_a!}\\underline{S_a}$. By [lem-weil-pbc-sets-inverse-image-colimits-finite-products] (a) (inverse image preserves colimits), $(p_{i_0}^{-1}H_0,(p_{i_0}^{-1}\\iota^0_a)_a)$ is a coproduct of the $p_{i_0}^{-1}(j_{U_{a,i_0}!}\\underline{S_a})$; hence the morphism $\\Lambda:p_{i_0}^{-1}H_0\\to H$ with $\\Lambda\\circ p_{i_0}^{-1}\\iota^0_a=\\iota_a\\circ\\lambda_a$ for all $a$ (universal property [def-weil-pbc-category-colimit]) is an isomorphism, its inverse being the morphism with $\\iota_a\\mapsto p_{i_0}^{-1}\\iota^0_a\\circ\\lambda_a^{-1}$ (both composites are the identity on every summand, hence the identity).",
+   "uses": [
+    "lem-weil-pbc-sheaves-colimit-sheafification",
+    "lem-weil-pbc-sets-inverse-image-extension-by-empty-constant",
+    "lem-weil-pbc-sets-inverse-image-colimits-finite-products",
+    "def-weil-pbc-category-colimit"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/modules.tex",
+    "place": "Modules, proof of Lemma Tag 0CAK (lemma-constructible-comes-from-finite): 'Observe that p_i^{-1}(j_{U_{a,i}!}S_a) = j_{U_a!}S_a' and the closing 'We omit some details' (inverse image commutes with coproducts)"
+   }
+  },
+  {
+   "text": "*Step 5 (descending $\\beta$ and $\\gamma$; Tag 0A32).* Let $\\varepsilon_b$ be the coprojections of $D=\\coprod_{b=1}^mj_{V_b!}\\underline{T_b}$ and put $\\tau^\\beta_b=\\beta_H(\\beta\\circ\\varepsilon_b)$, $\\tau^\\gamma_b=\\beta_H(\\gamma\\circ\\varepsilon_b):T_b\\to H(V_b)$ (Step 3). For every $b$ and $t\\in T_b$ the elements $x^\\beta_{b,t}=\\Lambda^{-1}_{V_b}(\\tau^\\beta_b(t))$ and $x^\\gamma_{b,t}=\\Lambda^{-1}_{V_b}(\\tau^\\gamma_b(t))$ lie in $(p_{i_0}^{-1}H_0)(p_{i_0}^{-1}V_{b,i_0})$ (Steps 2, 4). Apply [lem-weil-pbc-spectral-limit-pullback-sections] to the system of Step 1, the index $i_0$, the sheaf $H_0$ and the open $V_{b,i_0}$ (quasi-compact, $X_{i_0}$ being finite): by (b) each of these elements is $\\rho_{i'}(\\sigma)$ for some $i'\\ge i_0$ and $\\sigma\\in(f_{i_0i'}^{-1}H_0)(V_{b,i'})$ (note $f_{i_0i'}^{-1}(V_{b,i_0})=V_{b,i'}$). There are finitely many of them ($m$ and all $T_b$ are finite), so, $I$ being directed, there is one $i_1\\ge i_0$ above all the indices $i'$ that occur, and by (a) ($\\rho_{i_1}\\circ\\rho_{i_1i'}=\\rho_{i'}$) we get elements $\\sigma^\\beta_{b,t},\\sigma^\\gamma_{b,t}\\in E(V_{b,i_1})$, $E:=f_{i_0i_1}^{-1}H_0$, with $\\rho_{i_1}(\\sigma^\\beta_{b,t})=x^\\beta_{b,t}$ and $\\rho_{i_1}(\\sigma^\\gamma_{b,t})=x^\\gamma_{b,t}$; here $\\rho_{i_1}=c_{H_0}\\circ\\eta^{p_{i_1}}_{E,V_{b,i_1}}$ with $c:p_{i_1}^{-1}E\\xrightarrow{\\sim}p_{i_0}^{-1}H_0$ the isomorphism of [lem-weil-pbc-sets-inverse-image-composition] for $p_{i_0}=f_{i_0i_1}\\circ p_{i_1}$. (If there are no such elements, take $i_1=i_0$.)",
+   "uses": [
+    "lem-weil-pbc-spectral-limit-pullback-sections",
+    "lem-weil-pbc-sets-inverse-image-composition"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/modules.tex",
+    "place": "Modules, proof of Lemma Tag 0CAK (lemma-constructible-comes-from-finite): 'It follows from Sheaves, Lemma 0A32 (and using that S_b and B are finite sets) that after increasing i we find maps beta_{b,i}, gamma_{b,i} ... which give rise to the maps beta_b and gamma_b after pulling back by p_i'"
+   }
+  },
+  {
+   "text": "*Step 6 (the sheaf $\\mathcal G$ on $Y=X_{i_1}$).* Put $Y=X_{i_1}$ and $f=p_{i_1}:X\\to Y$; by Step 1, $Y$ is a finite sober space and $f$ is continuous with $f^{-1}(W)$ quasi-compact for every open $W\\subseteq Y$. Let $D_Y=\\coprod_{b=1}^mj_{V_{b,i_1}!}\\underline{T_b}$ on $Y$ with coprojections $\\varepsilon^Y_b$ (it exists [lem-weil-pbc-sheaves-colimit-sheafification]). By Step 3 there are unique morphisms $\\beta_Y,\\gamma_Y:D_Y\\to E$ with $\\beta_E(\\beta_Y\\circ\\varepsilon^Y_b)=(t\\mapsto\\sigma^\\beta_{b,t})$ and $\\beta_E(\\gamma_Y\\circ\\varepsilon^Y_b)=(t\\mapsto\\sigma^\\gamma_{b,t})$ for all $b$. Let $q_Y:E\\to\\mathcal G$ be a coequalizer of $\\beta_Y,\\gamma_Y$ in sheaves of sets on $Y$ (it exists [lem-weil-pbc-sheaves-colimit-sheafification]). (Since $E=f_{i_0i_1}^{-1}H_0\\cong\\coprod_aj_{U_{a,i_1}!}\\underline{S_a}$ by Step 4's argument applied to $f_{i_0i_1}$, this is Stacks' $\\mathcal G$; the identification is not needed below.)",
+   "uses": [
+    "lem-weil-pbc-sheaves-colimit-sheafification",
+    "def-weil-pbc-category-colimit"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/modules.tex",
+    "place": "Modules, proof of Lemma Tag 0CAK (lemma-constructible-comes-from-finite): 'These maps correspond in turn to maps of sheaves beta_i, gamma_i ... on X_i. Then we can take Y = X_i and G = Coequalizer(...)'"
+   }
+  },
+  {
+   "text": "*Step 7 ($f^{-1}\\mathcal G\\cong\\mathcal F$; first omitted detail).* By [lem-weil-pbc-sets-inverse-image-colimits-finite-products] (a), $(f^{-1}\\mathcal G,f^{-1}q_Y)$ is a coequalizer of $f^{-1}\\beta_Y,f^{-1}\\gamma_Y:f^{-1}D_Y\\rightrightarrows f^{-1}E$ and $(f^{-1}D_Y,(f^{-1}\\varepsilon^Y_b)_b)$ is a coproduct. By [lem-weil-pbc-sets-inverse-image-extension-by-empty-constant] for $f$, $V_{b,i_1}$ (with $f^{-1}(V_{b,i_1})=V_b$, Step 2) and $T_b$ there are isomorphisms $\\lambda'_b:f^{-1}(j_{V_{b,i_1}!}\\underline{T_b})\\xrightarrow{\\sim}j_{V_b!}\\underline{T_b}$ with $\\beta_{f^{-1}\\mathcal K}(f^{-1}\\psi\\circ\\lambda'^{-1}_b)=\\eta^f_{\\mathcal K,V_{b,i_1}}\\circ\\beta_{\\mathcal K}(\\psi)$; as in Step 4 they give an isomorphism $M:f^{-1}D_Y\\to D$ with $M\\circ f^{-1}\\varepsilon^Y_b=\\varepsilon_b\\circ\\lambda'_b$. Put $\\Phi=\\Lambda\\circ c_{H_0}:f^{-1}E\\xrightarrow{\\sim}H$ (Steps 4, 5). Claim: $\\Phi\\circ f^{-1}\\beta_Y=\\beta\\circ M$. By Step 3 it suffices to compare $\\beta_H$ of both sides composed with $M^{-1}\\circ\\varepsilon_b=f^{-1}\\varepsilon^Y_b\\circ\\lambda'^{-1}_b$. The right side gives $\\beta_H(\\beta\\circ\\varepsilon_b)=\\tau^\\beta_b$. The left side gives, by naturality of $\\beta$ and the property of $\\lambda'_b$ (with $\\mathcal K=E$, $\\psi=\\beta_Y\\circ\\varepsilon^Y_b$), $\\beta_H(\\Phi\\circ f^{-1}\\psi\\circ\\lambda'^{-1}_b)=\\Phi_{V_b}\\circ\\eta^f_{E,V_{b,i_1}}\\circ\\beta_E(\\psi)=\\bigl(t\\mapsto\\Lambda_{V_b}(c_{H_0}(\\eta^{p_{i_1}}_{E,V_{b,i_1}}(\\sigma^\\beta_{b,t})))\\bigr)=\\bigl(t\\mapsto\\Lambda_{V_b}(\\rho_{i_1}(\\sigma^\\beta_{b,t}))\\bigr)=\\bigl(t\\mapsto\\Lambda_{V_b}(x^\\beta_{b,t})\\bigr)=\\tau^\\beta_b$ (Step 5). Likewise $\\Phi\\circ f^{-1}\\gamma_Y=\\gamma\\circ M$. Since $M$ and $\\Phi$ are isomorphisms, a morphism $u:H\\to\\mathcal M$ satisfies $u\\beta=u\\gamma$ iff $(u\\Phi)f^{-1}\\beta_Y=(u\\Phi)f^{-1}\\gamma_Y$; hence $(f^{-1}\\mathcal G,f^{-1}q_Y\\circ\\Phi^{-1})$ is a coequalizer of $\\beta,\\gamma$. As $(\\mathcal F,q)$ is one too, the uniqueness of colimits up to unique isomorphism [def-weil-pbc-category-colimit] gives an isomorphism of sheaves of sets $f^{-1}\\mathcal G\\xrightarrow{\\sim}\\mathcal F$.",
+   "uses": [
+    "lem-weil-pbc-sets-inverse-image-colimits-finite-products",
+    "lem-weil-pbc-sets-inverse-image-extension-by-empty-constant",
+    "def-weil-pbc-category-colimit"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/modules.tex",
+    "place": "Modules, proof of Lemma Tag 0CAK (lemma-constructible-comes-from-finite): 'which give rise to the maps beta_b and gamma_b after pulling back by p_i ... We omit some details' (detail (i): p_i^{-1} of the coequalizer on X_i is the coequalizer on X)"
+   }
+  },
+  {
+   "text": "*Step 8 (finite stalks; second omitted detail; conclusion).* Let $y\\in Y$ and $z=f_{i_0i_1}(y)\\in X_{i_0}$. By [lem-weil-pbc-sets-sheaf-colimit-stalks], $\\mathcal G_y$ is the coequalizer of $(\\beta_Y)_y,(\\gamma_Y)_y:(D_Y)_y\\rightrightarrows E_y$, so $(q_Y)_y:E_y\\to\\mathcal G_y$ is surjective. By [lem-weil-pbc-sets-inverse-image-stalk], $E_y=(f_{i_0i_1}^{-1}H_0)_y$ is in bijection with $(H_0)_z$, which by [lem-weil-pbc-sets-sheaf-colimit-stalks] is the disjoint union of the stalks $(j_{U_{a,i_0}!}\\underline{S_a})_z$, $a=1,\\dots,n$. By [lem-weil-pbc-sets-extension-by-empty-adjunction] (3), $(j_{U!}\\underline S)_z$ is empty if $z\\notin U$ and in bijection with the stalk $(\\underline S_U)_z$ if $z\\in U$; the map $(\\underline S_U)_z\\to S$, $s_z\\mapsto s(z)$, is well defined and injective, because two locally constant maps with the same value at $z$ agree on a neighbourhood of $z$ (the intersection of neighbourhoods on which each is constant). So each $(j_{U_{a,i_0}!}\\underline{S_a})_z$ has at most $|S_a|$ elements, $(H_0)_z$ and $E_y$ are finite, and $\\mathcal G_y$, the image of a finite set, is finite. Together with Steps 6 and 7: $Y$ is a finite sober space, $f=p_{i_1}$ is continuous with $f^{-1}(W)$ quasi-compact for every open $W\\subseteq Y$, $\\mathcal G$ has finite stalks, and $f^{-1}\\mathcal G\\cong\\mathcal F$.",
+   "uses": [
+    "lem-weil-pbc-sets-sheaf-colimit-stalks",
+    "lem-weil-pbc-sets-inverse-image-stalk",
+    "lem-weil-pbc-sets-extension-by-empty-adjunction",
+    "def-weil-pbc-sets-extension-by-empty"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/modules.tex",
+    "place": "Modules, proof of Lemma Tag 0CAK (lemma-constructible-comes-from-finite): statement 'a sheaf of sets G on Y with finite stalks' (detail (ii), omitted in Stacks; stalks of colimits are colimits of stalks, Sheaves Section Tag 009E (5))"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-spectral-directed-limit-finite-sober",
+  "def-weil-spectral-space",
+  "lem-weil-pbc-spectral-directed-limit-spectral",
+  "lem-weil-pbc-spectral-limit-descend-opens",
+  "def-weil-pbc-sets-extension-by-empty",
+  "lem-weil-pbc-sets-extension-by-empty-adjunction",
+  "lem-weil-pbc-constant-sheaf-open-maps-sections",
+  "def-weil-pbc-category-colimit",
+  "lem-weil-pbc-sheaves-colimit-sheafification",
+  "lem-weil-pbc-sets-inverse-image-extension-by-empty-constant",
+  "lem-weil-pbc-sets-inverse-image-colimits-finite-products",
+  "lem-weil-pbc-spectral-limit-pullback-sections",
+  "lem-weil-pbc-sets-inverse-image-composition",
+  "lem-weil-pbc-sets-sheaf-colimit-stalks",
+  "lem-weil-pbc-sets-inverse-image-stalk"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/modules.tex",
+  "place": "Modules, Lemma Tag 0CAK (label lemma-constructible-comes-from-finite, line 3061) and its proof; the two details Stacks omits (inverse image of the coequalizer, finiteness of the stalks of G) are written out in Steps 4, 7 and 8"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -47,7 +171,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "worker",
@@ -67,5 +191,17 @@
   }
  },
  "chapter": "sec-proper-base-change",
- "unit": "sk-thm-p1"
+ "unit": "sk-thm-p1",
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "lem-weil-pbc-spectral-finite-coequalizer-from-finite-space",
+  "worker": "stage1",
+  "summary": "Split along the proof of Stacks 0CAK in 8 steps: X = lim of finite sober X_i with spectral projections (new unsplit nodes for 09XX and 0A2Z); descent of the opens U_a, V_b (new unsplit node for 0A30); maps out of j_{V!}T as maps of sets (existing adjunction and constant-sheaf nodes); the target coproduct H_0 on X_{i_0} pulls back to the coproduct H (new unsplit node: inverse image of j_{V!}T is j_{g^{-1}V!}T, compatible with units; existing colimit-preservation leaf); descent of beta, gamma via 0A32 (new unsplit node, directed-set version, with the composition isomorphism of inverse images, new unsplit node for 008I); definition of G on Y = X_{i_1} as a coequalizer of maps into f^{-1}H_0 (so no identification of f^{-1}H_0 with a coproduct at stage i_1 is needed); the omitted detail p^{-1}G = F written out (Step 7); finite stalks via stalks of colimits (new Mathlib leaf from the stalk-skyscraper adjunction, Sheaves 009E (5)), the inverse-image stalk leaf and the stalks of j_{U!}S (Step 8). Statement unchanged; stmt_deps kept; Lean state none, existing Mathlib searches kept."
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "result": "accepted",
+  "note": "8 steps following Stacks 0CAK with the two omitted details written out: X = lim of finite sober spaces (new 09XX node) with spectral projections (new 0A2Z node), descent of the finitely many quasi-compact opens (new 0A30 node), maps out of j_{W!}T as maps of sets, the target coproduct comes from stage i_0 (new node: inverse image of j_{V!}T), descent of beta, gamma by 0A32 (new node) with the composition isomorphism of inverse images (new 008I node), G the coequalizer on X_{i_1}, f^{-1}G = F, finite stalks (new 009E (5) leaf, composed; lines verified by L). Tags verified."
+ }
 }

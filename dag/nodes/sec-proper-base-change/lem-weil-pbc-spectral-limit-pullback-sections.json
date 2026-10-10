@@ -1,0 +1,64 @@
+{
+ "id": "lem-weil-pbc-spectral-limit-pullback-sections",
+ "kind": "statement",
+ "title": "Sections of the inverse image to a directed limit of spectral spaces over a quasi-compact open are a colimit",
+ "statement": "Let $I$ be a directed set (nonempty, any two elements have a common upper bound), let $(X_i)_{i\\in I}$ be spectral spaces [def-weil-spectral-space] and for $i\\le i'$ let $f_{ii'}:X_{i'}\\to X_i$ be spectral maps (continuous, with $f_{ii'}^{-1}(W)$ quasi-compact for every quasi-compact open $W\\subseteq X_i$), with $f_{ii}=\\mathrm{id}$ and $f_{ii'}\\circ f_{i'i''}=f_{ii''}$ for $i\\le i'\\le i''$. Let $X$ be a topological space with continuous maps $p_i:X\\to X_i$, $f_{ii'}\\circ p_{i'}=p_i$, which is a limit of the system in the category of topological spaces (the map $x\\mapsto(p_i(x))_i$ is a bijection of $X$ onto $\\{(x_i)\\in\\prod_iX_i: f_{ii'}(x_{i'})=x_i\\text{ for }i\\le i'\\}$ and the topology of $X$ is the coarsest for which all $p_i$ are continuous). For a continuous map $h$ let $h^{-1}$ be the inverse image of sheaves of sets with unit $\\eta^h$ on sections, as in [def-weil-pbc-topological-inverse-image] (2), (3) with values in sets, and for continuous maps $h,h'$ let $c:h'^{-1}h^{-1}\\xrightarrow{\\sim}(h\\circ h')^{-1}$ be the isomorphism of [lem-weil-pbc-sets-inverse-image-composition]. Fix $i\\in I$, a sheaf of sets $\\mathcal G$ on $X_i$ and a quasi-compact open $U_i\\subseteq X_i$. For $i'\\ge i$ put $\\mathcal G_{i'}=f_{ii'}^{-1}\\mathcal G$ and $U_{i'}=f_{ii'}^{-1}(U_i)$ (so $p_{i'}^{-1}(U_{i'})=p_i^{-1}(U_i)$), let $\\rho_{i'}:\\mathcal G_{i'}(U_{i'})\\to(p_i^{-1}\\mathcal G)(p_i^{-1}U_i)$ be $c_{\\mathcal G}\\circ\\eta^{p_{i'}}_{\\mathcal G_{i'},U_{i'}}$ with $c:p_{i'}^{-1}f_{ii'}^{-1}\\mathcal G\\xrightarrow{\\sim}(f_{ii'}\\circ p_{i'})^{-1}\\mathcal G=p_i^{-1}\\mathcal G$, and for $i\\le i'\\le i''$ let $\\rho_{i''i'}:\\mathcal G_{i'}(U_{i'})\\to\\mathcal G_{i''}(U_{i''})$ be $c_{\\mathcal G}\\circ\\eta^{f_{i'i''}}_{\\mathcal G_{i'},U_{i'}}$ with $c:f_{i'i''}^{-1}f_{ii'}^{-1}\\mathcal G\\xrightarrow{\\sim}f_{ii''}^{-1}\\mathcal G$. Then (a) $\\rho_{i''}\\circ\\rho_{i''i'}=\\rho_{i'}$ and $\\rho_{i'''i''}\\circ\\rho_{i''i'}=\\rho_{i'''i'}$ for $i\\le i'\\le i''\\le i'''$; (b) every $s\\in(p_i^{-1}\\mathcal G)(p_i^{-1}U_i)$ equals $\\rho_{i'}(t)$ for some $i'\\ge i$ and some $t\\in\\mathcal G_{i'}(U_{i'})$; (c) if $t,t'\\in\\mathcal G_{i'}(U_{i'})$ and $\\rho_{i'}(t)=\\rho_{i'}(t')$, then $\\rho_{i''i'}(t)=\\rho_{i''i'}(t')$ for some $i''\\ge i'$. In other words $(p_i^{-1}\\mathcal G)(p_i^{-1}U_i)=\\varinjlim_{i'\\ge i}(f_{ii'}^{-1}\\mathcal G)(f_{ii'}^{-1}U_i)$.",
+ "source": {
+  "document": "literature/stacks-project/sheaves.tex",
+  "place": "Sheaves, Lemma Tag 0A32 (label lemma-compute-pullback-to-limit, line 3565) with its proof, stated there for a cofiltered index category; a directed set is the special case used here; the transition maps of the colimit are the pullback maps composed with the canonical isomorphisms of Lemma Tag 008I"
+ },
+ "stmt_deps": [
+  "def-weil-spectral-space",
+  "def-weil-pbc-topological-inverse-image",
+  "lem-weil-pbc-sets-inverse-image-composition",
+  "def-weil-pbc-category-colimit"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "sections of pullback sheaf to a limit of spaces over quasi-compact open is colimit of sections",
+   "results": "AlgebraicGeometry.PresheafedSpace.colimit, PresheafedSpace.ColimitCoconeIsColimit.descCApp, TopCat.Presheaf.germToPullbackStalk, Functor.sheafPullbackConstruction.instPreservesFiniteLimitsSheafSheafPullback, Sheaf.ΓNatIsoLim: other statements",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "sections of inverse image sheaf on limit space equal colimit of sections of inverse images at stages",
+   "results": "TopCat.Presheaf.SheafConditionEqualizerProducts.res_π, TopCat.Sheaf.objSupIsoProdEqLocus and variants: other statements",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rln 'IsCofiltered' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/Topology/Sheaves/; grep -rn 'IsLimit' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/Topology/Spectral/*.lean",
+   "results": "only Topology/Sheaves/SheafCondition/Sites.lean (unrelated); nothing on sheaves over limits of spaces",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-spectral-finite-coequalizer-from-finite-space",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1"
+}
