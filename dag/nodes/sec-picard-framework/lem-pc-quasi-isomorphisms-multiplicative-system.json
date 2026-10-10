@@ -1,43 +1,56 @@
 {
- "id": "lem-pc-quasi-isomorphisms-multiplicative-system",
- "blueprint": {
-  "is": null,
-  "from": {
-   "node": "lem-sc-finite-duality",
-   "place": "the localization Hom-colimit formulas for D(A) and D(B) in the pre-derived adjunction calculation",
-   "via": [
-    "lem-pc-pre-derived-adjoint-functors-general"
-   ]
+  "id": "lem-pc-quasi-isomorphisms-multiplicative-system",
+  "blueprint": {
+    "is": null,
+    "from": {
+      "node": "lem-sc-finite-duality",
+      "place": "the localization Hom-colimit formulas for D(A) and D(B) in the pre-derived adjunction calculation",
+      "via": [
+        "lem-pc-pre-derived-adjoint-functors-general"
+      ]
+    },
+    "same_as": []
   },
-  "same_as": []
- },
- "kind": "statement",
- "title": "Quasi-isomorphisms form a multiplicative system in the homotopy category",
- "statement": "Let $\\mathcal A$ be an abelian category [def-sp-abelian]. In the homotopy category $K(\\mathcal A)$ of cochain complexes of $\\mathcal A$, the class of (homotopy classes of) quasi-isomorphisms [def-weil-abstract-derived-category] is a multiplicative system: it admits both a left and a right calculus of fractions, and $D(\\mathcal A)$ is the corresponding localization of $K(\\mathcal A)$.",
- "source": {
-  "document": "literature/stacks-project/derived.tex",
-  "place": "Derived Categories, Lemma 05RT (lemma-acyclic, line 3670)"
- },
- "stmt_deps": [
-  "def-sp-abelian",
-  "def-weil-abstract-derived-category"
- ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
- "mathlib_searches": [
-  {
-   "tool": "grep",
-   "query": "CalculusOfFractions in Mathlib/Algebra/Homology",
-   "results": "Mathlib/Algebra/Homology/DerivedCategory/Fractions.lean lines 34 and 38: instances (HomotopyCategory.quasiIso C (ComplexShape.up ℤ)).HasLeftCalculusOfFractions and .HasRightCalculusOfFractions",
-   "date": "2026-10-10",
-   "verdict": "match"
-  }
- ],
- "status": "unsplit",
- "created": {
-  "item": "lem-pc-pre-derived-adjoint-functors-general"
- },
- "chapter": "sec-picard-framework",
- "unit": "sk-thm-picard-duality"
+  "kind": "statement",
+  "title": "Quasi-isomorphisms form a multiplicative system in the homotopy category",
+  "statement": "Let $\\mathcal A$ be an abelian category [def-sp-abelian]. In the homotopy category $K(\\mathcal A)$ of cochain complexes of $\\mathcal A$, the class of (homotopy classes of) quasi-isomorphisms [def-weil-abstract-derived-category] is a multiplicative system: it admits both a left and a right calculus of fractions, and $D(\\mathcal A)$ is the corresponding localization of $K(\\mathcal A)$.",
+  "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Derived Categories, Lemma 05RT (lemma-acyclic, line 3670)"
+  },
+  "stmt_deps": [
+    "def-sp-abelian",
+    "def-weil-abstract-derived-category"
+  ],
+  "proof": [],
+  "proof_deps": [],
+  "proof_origin": null,
+  "mathlib_searches": [
+    {
+      "tool": "grep",
+      "query": "CalculusOfFractions in Mathlib/Algebra/Homology",
+      "results": "Mathlib/Algebra/Homology/DerivedCategory/Fractions.lean lines 34 and 38: instances (HomotopyCategory.quasiIso C (ComplexShape.up ℤ)).HasLeftCalculusOfFractions and .HasRightCalculusOfFractions",
+      "date": "2026-10-10",
+      "verdict": "match"
+    },
+    {
+      "tool": "sed",
+      "query": "Mathlib/Algebra/Homology/DerivedCategory/Fractions.lean lines 30-40",
+      "verdict": "exact: HasLeftCalculusOfFractions and HasRightCalculusOfFractions instances for quasiIso on the homotopy category",
+      "date": "2026-10-10"
+    }
+  ],
+  "status": "mathlib",
+  "created": {
+    "item": "lem-pc-pre-derived-adjoint-functors-general"
+  },
+  "chapter": "sec-picard-framework",
+  "unit": "sk-thm-picard-duality",
+  "mathlib_match": {
+    "declaration": "DerivedCategory.instHasLeftCalculusOfFractionsHomotopyCategoryQuasiIsoUpInt",
+    "file": "Mathlib/Algebra/Homology/DerivedCategory/Fractions.lean",
+    "line": 34,
+    "how": "one declaration per clause, lines read with sed by L (19:15 UTC): left calculus of fractions, the instance `(HomotopyCategory.quasiIso C (ComplexShape.up ℤ)).HasLeftCalculusOfFractions` at line 34; right calculus, the instance `.HasRightCalculusOfFractions` at line 38 (both for an abelian C with HasDerivedCategory); D(A) as the localization of K(A) at quasi-isomorphisms is Mathlib's definition DerivedCategory (Mathlib/Algebra/Homology/DerivedCategory/Basic.lean), cited by def-weil-abstract-derived-category. The two calculi are Mathlib's form of 'multiplicative system' (Stacks 05RT)."
+  },
+  "lead_note": " Promoted to a Mathlib leaf by L (19:15 UTC) per reviewer R-pda1912 (the merge tool only accepts reviewer-added nodes as unsplit)."
 }
