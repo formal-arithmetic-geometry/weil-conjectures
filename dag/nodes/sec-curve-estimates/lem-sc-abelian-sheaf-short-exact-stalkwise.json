@@ -1,0 +1,62 @@
+{
+ "id": "lem-sc-abelian-sheaf-short-exact-stalkwise",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-pic-proper-ntorsion",
+   "place": "the proof of Lemma 09NY uses Cohomology Lemma 02UV, whose proof invokes Modules Lemma 01AX; its exactness proof uses the stalkwise criterion of Modules Lemma 01AG",
+   "via": [
+    "lem-sc-closed-immersion-pushforward-exact",
+    "lem-sc-cohomology-closed-immersion-pushforward"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Short exactness of abelian sheaves is detected on stalks",
+ "statement": "Let $X$ be a topological space and let $0\\to F'\\to F\\to F''\\to0$ be a sequence of abelian sheaves on $X$ [def-sc-topological-abelian-cohomology]. Stalks $F_x$, germs and the induced stalk maps $\\varphi_x$ of a morphism $\\varphi$ are those of [def-weil-pbc-module-stalk], an abelian sheaf being a sheaf of modules over the constant presheaf of rings $\\mathbb Z$. The sequence is short exact in $\\operatorname{Ab}(X)$ if and only if, for every $x\\in X$, the sequence of abelian groups $0\\to F'_x\\to F_x\\to F''_x\\to0$ is short exact.",
+ "source": {
+  "document": "literature/stacks-project/modules.tex",
+  "place": "Modules, Lemma 01AG (lemma-abelian), specialized to the constant sheaf of integers; Sheaves, Section 007S (section-exactness-points), for the stalk criterion"
+ },
+ "stmt_deps": [
+  "def-sc-topological-abelian-cohomology",
+  "def-weil-pbc-module-stalk"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "short exact sequence of abelian sheaves on topological space iff stalkwise short exact",
+   "results": "LeanSearch HTTP 500 on two queries on 2026-10-10",
+   "date": "2026-10-10",
+   "verdict": "service unavailable"
+  },
+  {
+   "tool": "loogle",
+   "query": "TopCat.Sheaf.exact_iff_stalkFunctor_map_exact",
+   "results": "TopCat.Sheaf.exact_iff_stalkFunctor_map_exact, Mathlib/Topology/Sheaves/Abelian.lean:103, proves exactness in the middle only",
+   "date": "2026-10-10",
+   "verdict": "partial match only"
+  },
+  {
+   "tool": "grep",
+   "query": "rg 'shortExact_iff.*stalk|mono_iff_stalk_mono|exact_iff_stalkFunctor_map_exact' Mathlib/Topology/Sheaves",
+   "results": "TopCat.Sheaf.exact_iff_stalkFunctor_map_exact, Abelian.lean:103; TopCat.Presheaf.mono_iff_stalk_mono, Stalks.lean:582; no single short-exact criterion",
+   "date": "2026-10-10",
+   "verdict": "no one-line match"
+  }
+ ],
+ "mathlib_match": null,
+ "mathlib_candidate": "TopCat.Sheaf.exact_iff_stalkFunctor_map_exact (Mathlib/Topology/Sheaves/Abelian.lean:103) handles exactness at the middle; endpoints require separate stalk criteria.",
+ "status": "unsplit",
+ "created": {
+  "item": "lem-sc-closed-immersion-pushforward-exact",
+  "by": "worker",
+  "date": "2026-10-10"
+ },
+ "chapter": "sec-curve-estimates",
+ "unit": "sk-thm-curveestimate"
+}

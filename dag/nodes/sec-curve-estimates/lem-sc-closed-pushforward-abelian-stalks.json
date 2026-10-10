@@ -1,0 +1,61 @@
+{
+ "id": "lem-sc-closed-pushforward-abelian-stalks",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-pic-proper-ntorsion",
+   "place": "the proof of Lemma 09NY uses Cohomology Lemma 02UV, whose proof invokes exactness of i_* by the closed-pushforward stalk description in Sheaves Lemma 00AE",
+   "via": [
+    "lem-sc-closed-immersion-pushforward-exact",
+    "lem-sc-cohomology-closed-immersion-pushforward"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Stalks of the direct image of an abelian sheaf on a closed subspace",
+ "statement": "Let $X$ be a topological space, $Z\\subseteq X$ a closed subset with its subspace topology, $i:Z\\to X$ the inclusion, and $F$ an abelian sheaf on $Z$ [def-sc-topological-abelian-cohomology]. Stalks $F_x$, germs and the induced stalk maps $\\varphi_x$ of a morphism $\\varphi$ are those of [def-weil-pbc-module-stalk], an abelian sheaf being a sheaf of modules over the constant presheaf of rings $\\mathbb Z$. Define the abelian sheaf $i_*F$ by $(i_*F)(U)=F(U\\cap Z)$ for open $U\\subseteq X$. Then $(i_*F)_x=0$ for every $x\\in X\\setminus Z$, and for every $z\\in Z$ the canonical germ map $(i_*F)_z\\to F_z$ is a natural isomorphism of abelian groups, compatible with morphisms of abelian sheaves on $Z$.",
+ "source": {
+  "document": "literature/stacks-project/sheaves.tex",
+  "place": "Sheaves, Lemma 00AE (lemma-stalks-closed-pushforward), abelian-sheaf clause"
+ },
+ "stmt_deps": [
+  "def-sc-topological-abelian-cohomology",
+  "def-weil-pbc-module-stalk"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "stalk of pushforward of a sheaf along inclusion of closed subset is zero outside and original inside",
+   "results": "LeanSearch HTTP 500 on two queries on 2026-10-10",
+   "date": "2026-10-10",
+   "verdict": "service unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "stalk of direct image of abelian sheaf along closed embedding",
+   "results": "TopCat.Presheaf.stalkPushforward and stalkPushforward_germ_apply (Mathlib.Topology.Sheaves.Stalks); no off-image vanishing",
+   "date": "2026-10-10",
+   "verdict": "partial match only"
+  },
+  {
+   "tool": "grep",
+   "query": "rg 'stalkPushforward_iso_of_isInducing|closed.*stalk|stalk.*closed' Mathlib/Topology/Sheaves",
+   "results": "TopCat.Presheaf.stalkPushforward_iso_of_isInducing, Mathlib/Topology/Sheaves/Stalks.lean:220, gives the on-image isomorphism only",
+   "date": "2026-10-10",
+   "verdict": "no full match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "created": {
+  "item": "lem-sc-closed-immersion-pushforward-exact",
+  "by": "worker",
+  "date": "2026-10-10"
+ },
+ "chapter": "sec-curve-estimates",
+ "unit": "sk-thm-curveestimate"
+}

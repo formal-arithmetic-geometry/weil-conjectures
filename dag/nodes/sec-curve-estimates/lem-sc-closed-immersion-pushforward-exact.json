@@ -21,9 +21,51 @@
  "stmt_deps": [
   "def-sc-topological-abelian-cohomology"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Take a short exact sequence $0\\to F'\\to F\\to F''\\to0$ in $\\operatorname{Ab}(Z)$. The direct images form a sequence of abelian sheaves on $X$. By [lem-sc-closed-pushforward-abelian-stalks], at every $z\\in Z$ their stalk sequence identifies naturally, including its two maps, with $0\\to F'_z\\to F_z\\to F''_z\\to0$.",
+   "uses": [
+    "lem-sc-closed-pushforward-abelian-stalks"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/modules.tex",
+    "place": "Lemma 01AX (modules-lemma-i-star-exact), proof: Sheaves Lemma 00AE gives the on-image stalk description"
+   }
+  },
+  {
+   "text": "At every $x\\in X\\setminus Z$, [lem-sc-closed-pushforward-abelian-stalks] identifies all three direct-image stalks with zero, so the stalk sequence is $0\\to0\\to0\\to0\\to0$. At $z\\in Z$, the sequence from Step 1 is short exact because the given sequence is short exact and short exactness is detected on stalks by [lem-sc-abelian-sheaf-short-exact-stalkwise], now applied on $Z$.",
+   "uses": [
+    "lem-sc-closed-pushforward-abelian-stalks",
+    "lem-sc-abelian-sheaf-short-exact-stalkwise"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/modules.tex",
+    "place": "Lemma 01AX (modules-lemma-i-star-exact), proof: Sheaves Lemma 00AE and Modules Lemma 01AG"
+   }
+  },
+  {
+   "text": "Every stalk sequence of $0\\to i_*F'\\to i_*F\\to i_*F''\\to0$ is short exact by Step 2. Apply [lem-sc-abelian-sheaf-short-exact-stalkwise] on $X$ to conclude that this is a short exact sequence of abelian sheaves. Since the original sequence was arbitrary, $i_*$ preserves short exact sequences.",
+   "uses": [
+    "lem-sc-abelian-sheaf-short-exact-stalkwise"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/modules.tex",
+    "place": "Lemma 01AX (modules-lemma-i-star-exact), proof: exactness follows from the description of stalks and Lemma 01AG"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sc-closed-pushforward-abelian-stalks",
+  "lem-sc-abelian-sheaf-short-exact-stalkwise"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/modules.tex",
+  "place": "Lemma 01AX (modules-lemma-i-star-exact), proof"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -48,12 +90,29 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-sc-cohomology-closed-immersion-pushforward",
   "by": "worker",
   "date": "2026-10-10"
  },
  "chapter": "sec-curve-estimates",
- "unit": "sk-thm-curveestimate"
+ "unit": "sk-thm-curveestimate",
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "lem-sc-closed-immersion-pushforward-exact",
+  "worker": "stage1",
+  "summary": "Expanded Stacks Modules Lemma 01AX's exactness proof into on-image and off-image stalk calculations followed by stalkwise detection of short exactness. The two cited inputs are stated as separate nodes; no exact Lean declaration was found.",
+  "blueprint": "The proof of lem-sc-pic-proper-ntorsion invokes Cohomology Lemma 02UV; its exactness input is Modules Lemma 01AX. Steps 1-3 realize the stalk calculation and stalkwise exactness invoked in that input.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-cpe",
+  "group": "J1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-cpe (reviewer sub-agent of L); spot-checked: Source: Stacks Modules 01AX (lemma-i-star-exact, modules.tex:557), whose proof is exactly Sheaves 00AE (lemma-stalks-closed-pushforward, sheaves.tex:4936, abelian clause) plus Modules 01AG; the item statement (unchanged) keeps 01AX's hypotheses (arbitrary topological space, closed subset). New node lem-sc-closed-pushforward-abelian-stalks agrees with 00AE's abelian clause hypothesis by hypothesis (stalk 0 off Z, F_z on Z, natural); new node lem-sc-abelian-sheaf-short-exact-stalkwise is 01AG specialized to O=Z, true. Step 1 carried by the on-Z natural-iso clause of the stalk node; step 2 by its off-Z zero clause and the forward direction of the stalkwise node on Z; step 3 by its backward direction on X; no circularity, D1-D4 fine. Existing nodes lem-weil-pbc-closed-pushforward-stalks and lem-weil-pbc-module-stalk-exact are for O_Z-modules on schemes / ringed spaces, so new topological nodes are justified (C5). Mathlib verified: Abelian.lean:103 exact_iff_stalkFunctor_map_exact, Stalks.lean:220 stalkPushforward_iso_of_isInducing (on-image only); no closed-pushforward exactness in Mathlib or slopmaster2 (B10 grep). Small cases: Z empty, Z=X, Z a point. Blueprint search 'closed pushforward exact' found nothing. FIX more, RETURN less: B3, the notion of stalk (and stalk maps) was cited by no node in either new node: dag/nodes/sec-curve-estimates/lem-sc-abelian-sheaf-short-exact-stalkwise.json: statement, stmt_deps: added citation [def-weil-pbc-module-stalk] (abelian sheaf as module over constant Z); dag/nodes/sec-curve-estimates/lem-sc-closed-pushforward-abelian-stalks.json: statement, stmt_deps: same. Report says modules.tex/sheaves.tex absent locally; they are present, harmless. Start Sat Oct 10 03:49:10 PM UTC 2026, end Sat Oct 10 03:50:20 PM UTC 2026.; 2 file(s) fixed by the reviewer"
+ },
+ "lead_note": "2026-10-10 L (R-cpe): lem-sc-abelian-sheaf-short-exact-stalkwise is very likely a Mathlib leaf: TopCat.Sheaf.exact_iff_stalkFunctor_map_exact (Mathlib/Topology/Sheaves/Abelian.lean:103) applied to the three ShortComplexes 0->F'->F, F'->F->F'', F->F''->0 gives the whole short-exactness criterion, not only the middle as the worker recorded."
 }
