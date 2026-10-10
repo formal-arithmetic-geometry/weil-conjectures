@@ -1,8 +1,8 @@
 # Work queue
 
-856 items; claim with `tools/claim.py next <group> [--stage N]`.
+854 items; claim with `tools/claim.py next <group> [--stage N]`.
 
-## Stage 1: nodes to split (325)
+## Stage 1: nodes to split (322)
 
 | node | distance to a target | Lean state on the done branch |
 |---|---|---|
@@ -13,7 +13,6 @@
 | `lem-weil-pbc-pullback-ample-invertible` | 1013 | none |
 | `lem-weil-pbc-finite-type-etale-finite-factor-decomposition` | 1015 | none |
 | `lem-weil-pbc-direct-sum-extension-assembly` | 1016 | none |
-| `lem-weil-pbc-proj-polynomial-twist-chart` | 1016 | none |
 | `lem-weil-pbc-tor-one-surjective-flat-middle` | 1016 | none |
 | `lem-weil-pbc-injective-acyclicity-bounded-below` | 2002 | sorry_here |
 | `lem-weil-pbc-property-implies-acyclicity` | 2003 | none |
@@ -51,7 +50,6 @@
 | `lem-pc-cartier-divisor-finite-over-field` | 3009 | none |
 | `lem-pc-chi-zero-dim-support` | 3009 | none |
 | `lem-sc-hilb-geometrically-integral` | 3009 | rests_on_sorry |
-| `lem-sc-riemann-roch-large-degree` | 3009 | rests_on_sorry |
 | `lem-sc-second-kummer-divisors` | 3009 | none |
 | `lem-sc-very-ample-separation-criterion` | 3009 | none |
 | `lem-exc-cochains-derived-invariants` | 3010 | none |
@@ -66,7 +64,6 @@
 | `lem-sc-curve-base-change-relative-dimension-one` | 3010 | none |
 | `lem-sc-function-field-cd-one` | 3010 | none |
 | `lem-sc-generic-kummer-residues` | 3010 | none |
-| `lem-sc-negative-degree-no-sections` | 3010 | rests_on_sorry |
 | `lem-sc-riemann-roch` | 3010 | rests_on_sorry |
 | `thm-sc-serre-duality-curve` | 3010 | rests_on_sorry |
 | `lem-pc-genus-well-defined` | 3011 | none |
@@ -332,7 +329,7 @@
 | `def-exc-jacobian-presentation` | - | none |
 | `lem-zl-noether-normalization-dimension` | - | none |
 
-## Stage 2: nodes to state (531)
+## Stage 2: nodes to state (532)
 
 | node | distance to Mathlib | kind |
 |---|---|---|
@@ -849,6 +846,7 @@
 | `lem-sc-degree-2g1-very-ample` | 2 | state |
 | `lem-sc-positive-degree-ample` | 2 | state |
 | `lem-sc-regular-dim1-dvr` | 2 | state |
+| `lem-sc-riemann-roch-large-degree` | 2 | state |
 | `lem-sc-smooth-regular` | 2 | state |
 | `lem-weil-pbc-finite-type-lift-nilpotent` | 2 | state |
 | `lem-weil-pbc-integral-closure-finite-fibre-part-localization` | 2 | state |
@@ -868,7 +866,7 @@
 | `lem-weil-pbc-p1-field-dimension-one` | 4 | state |
 | `lem-weil-pbc-projective-space-zero-isomorphism` | 4 | state |
 
-Not open yet: 344 nodes that wait for stage 1, 968 nodes that wait for a statement dependency.
+Not open yet: 341 nodes that wait for stage 1, 969 nodes that wait for a statement dependency.
 
 ## Stage 3: modules to prove (0)
 
