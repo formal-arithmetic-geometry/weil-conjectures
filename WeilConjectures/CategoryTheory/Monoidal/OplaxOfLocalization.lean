@@ -41,7 +41,7 @@ objects in the image of `P`, where they follow from the axioms for `Q, Q'` and `
 
 namespace CategoryTheory
 
-open MonoidalCategory Functor
+open MonoidalCategory _root_.CategoryTheory.Functor
 
 namespace Functor.OplaxMonoidal
 

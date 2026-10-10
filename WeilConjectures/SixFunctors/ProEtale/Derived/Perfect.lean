@@ -165,6 +165,29 @@ theorem isDualizable_of_isLocallyPerfect
 
 end LocallyPerfect
 
+section LocallyPerfectOfDualizable
+
+variable (Λ : Type (u + 1)) [CommRing Λ] [IsNoetherianRing Λ] {X : Scheme.{u}}
+
+/-- Blueprint `sk-def-perfect` (Stacks, Tag 0FPV): a dualizable complex of pro-étale sheaves of
+modules over a Noetherian ring `Λ` is locally perfect.
+
+Unfinished. -/
+theorem isLocallyPerfect_of_isDualizable
+    {K : _root_.DerivedCategory (Sheaf (Scheme.ProEt.topology X) (ModuleCat.{u + 1} Λ))}
+    (hK : IsDualizable K) : IsLocallyPerfect K :=
+  sorry
+
+/-- Blueprint `sk-def-perfect`: over a Noetherian coefficient ring `Λ`, a complex of pro-étale
+sheaves of `Λ`-modules is perfect, that is dualizable for the derived tensor product, if and only
+if it is locally quasi-isomorphic to a bounded complex of finite projective `Λ_X`-modules. -/
+theorem isDualizable_iff_isLocallyPerfect
+    (K : _root_.DerivedCategory (Sheaf (Scheme.ProEt.topology X) (ModuleCat.{u + 1} Λ))) :
+    IsDualizable K ↔ IsLocallyPerfect K :=
+  ⟨isLocallyPerfect_of_isDualizable Λ, isDualizable_of_isLocallyPerfect⟩
+
+end LocallyPerfectOfDualizable
+
 variable (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ] {X : Scheme.{u}} [IsNoetherian X]
 
 namespace DerivedCategory

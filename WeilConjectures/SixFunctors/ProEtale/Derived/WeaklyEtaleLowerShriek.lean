@@ -7,7 +7,7 @@ module
 
 public import WeilConjectures.CategoryTheory.HomotopyCategory.Adjunction
 public import WeilConjectures.Mathlib.Algebra.Homology.Bifunctor
-public import WeilConjectures.Mathlib.CategoryTheory.Monoidal.Closed.Frobenius
+public import WeilConjectures.CategoryTheory.Monoidal.Closed.Frobenius
 public import WeilConjectures.SixFunctors.ProEtale.Derived.UpperStarMonoidalStructure
 public import WeilConjectures.SixFunctors.ProEtale.LowerShriek.WeaklyEtale
 
