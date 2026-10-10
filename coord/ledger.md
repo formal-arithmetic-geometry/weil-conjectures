@@ -2672,3 +2672,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 21:29 L: returned deliver/F1/lem-weil-pbc-flat-lfp-open (reviewer RETURN: Not a fault: the item is the Mathlib declaration AlgebraicGeometry.UniversallyOpen.of_flat (UniversallyOpen.lean:147), f)
 - 21:29 UTC L matched lem-weil-pbc-flat-lfp-open to Mathlib AlgebraicGeometry.UniversallyOpen.of_flat (R-flo2608); F1 delivery returned as unneeded
 - 21:29 L: returned deliver/C1/lem-pc-representable-unique (reviewer RETURN: Not a fault: the item is the Mathlib declaration CategoryTheory.Functor.FullyFaithful.isoEquiv+CategoryTheory.Yoneda.ful)
+- 21:29 UTC L matched lem-pc-representable-unique to Mathlib CategoryTheory.Functor.FullyFaithful.isoEquiv+CategoryTheory.Yoneda.fullyFaithful (R-rpu2606); C1 delivery returned as unneeded
