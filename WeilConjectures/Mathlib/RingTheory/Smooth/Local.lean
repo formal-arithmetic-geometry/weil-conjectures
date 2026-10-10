@@ -5,6 +5,9 @@ Authors: Claude
 -/
 module
 
+public import Mathlib.FieldTheory.IsAlgClosed.Basic
+public import Mathlib.RingTheory.Jacobson.Ring
+public import Mathlib.RingTheory.LocalRing.ResidueField.Ideal
 public import Mathlib.RingTheory.RegularLocalRing.Polynomial
 public import Mathlib.RingTheory.Smooth.Field
 public import Mathlib.RingTheory.Smooth.Local
@@ -27,6 +30,8 @@ perfect field all of whose local rings are regular is smooth (Stacks `00TV`).
   is smooth at a prime with regular local ring and formally smooth residue field.
 - `Algebra.Smooth.of_isRegularLocalRing`: a finitely generated algebra over a perfect field with
   regular local rings is smooth.
+- `Algebra.IsSmoothAt.of_isRegularLocalRing_of_isAlgClosed`: over an algebraically closed field,
+  a finitely generated algebra is smooth at every maximal ideal at which it is regular.
 -/
 
 @[expose] public section
@@ -202,5 +207,31 @@ theorem Algebra.Smooth.of_isRegularLocalRing {k A : Type*} [Field k] [PerfectFie
   have : Algebra.EssFiniteType k (ResidueField (Localization.AtPrime p.asIdeal)) :=
     inferInstanceAs (Algebra.EssFiniteType k (Localization.AtPrime p.asIdeal ⧸ _))
   exact Algebra.FormallySmooth.localization_of_isRegularLocalRing p.asIdeal
+
+
+/-- **A finitely generated algebra over a field is smooth at a regular rational point.** Let `A`
+be a finitely generated `k`-algebra and `q` a prime of `A` with residue field `k` such that `A_q`
+is a regular local ring. Then `A` is smooth over `k` at `q`. -/
+theorem Algebra.IsSmoothAt.of_isRegularLocalRing {k A : Type*} [Field k] [CommRing A]
+    [Algebra k A] [Algebra.FiniteType k A] (q : Ideal A) [q.IsPrime]
+    [IsRegularLocalRing (Localization.AtPrime q)]
+    (hq : Function.Surjective (algebraMap k (ResidueField (Localization.AtPrime q)))) :
+    Algebra.IsSmoothAt k q :=
+  have : Algebra.FormallySmooth k (ResidueField (Localization.AtPrime q)) :=
+    .of_equiv (AlgEquiv.ofBijective (Algebra.ofId k _) ⟨(algebraMap k _).injective, hq⟩)
+  Algebra.FormallySmooth.localization_of_isRegularLocalRing q
+
+/-- A finitely generated algebra over an algebraically closed field `k` is smooth at every
+maximal ideal at which it is regular: the residue field is a finite extension of `k`, hence
+equal to `k`. -/
+theorem Algebra.IsSmoothAt.of_isRegularLocalRing_of_isAlgClosed {k A : Type*} [Field k]
+    [IsAlgClosed k] [CommRing A] [Algebra k A] [Algebra.FiniteType k A] (q : Ideal A)
+    [q.IsMaximal] [IsRegularLocalRing (Localization.AtPrime q)] : Algebra.IsSmoothAt k q := by
+  refine Algebra.IsSmoothAt.of_isRegularLocalRing q ?_
+  have : Algebra.FiniteType k q.ResidueField :=
+    .of_surjective (IsScalarTower.toAlgHom k A q.ResidueField)
+      q.algebraMap_residueField_surjective
+  have : Module.Finite k q.ResidueField := finite_of_finite_type_of_isJacobsonRing k _
+  exact (IsAlgClosed.algebraMap_bijective_of_isIntegral (k := k)).2
 
 end
