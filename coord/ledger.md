@@ -739,3 +739,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 01:09 L: reviewed lem-weil-pbc-popescu-desingularize-strictly-standard (07CT; 7 steps; +07CR node, +07T8 node, +2 leaves): accepted. Merged E1 hypersurface-derivation-regular (+regular-local hypersurface criterion node). F1 re-pushed local-gluing unchanged (notice; HUMAN.md).
 - 01:11 L: reviewed lem-weil-pbc-popescu-enlarge-solution-modulo (07FI; 10 steps; +5 nodes) and lem-weil-pbc-popescu-lift-nilpotent (07CM; 4 steps; +2 nodes): accepted.
 - 01:13 L: reviewed lem-weil-pbc-popescu-lift-solution (07F8; 7 steps; +07F0 node): accepted.
+- 01:14 L: reviewed lem-weil-pbc-popescu-product (07F3; 5 steps; +1 node): accepted.

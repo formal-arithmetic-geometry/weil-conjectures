@@ -11,9 +11,76 @@
   "def-weil-pbc-filtered-colimit-smooth-algebras",
   "def-weil-pbc-smooth-ring-map"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "*Step 1 (the data and the product index category).* By [def-weil-pbc-filtered-colimit-smooth-algebras] there are a small filtered category $I$, a functor $i\\mapsto A_i$ from $I$ to commutative $R_1$-algebras (transition maps $A_a:A_i\\to A_{i'}$ for $a:i\\to i'$) with every $A_i$ smooth over $R_1$, and $R_1$-algebra maps $\\iota_i:A_i\\to\\Lambda_1$ making $(\\Lambda_1,(\\iota_i))$ a colimit in commutative $R_1$-algebras; likewise a small filtered $J$, smooth $R_2$-algebras $B_j$ with transition maps $B_b$, and a colimit cocone $(\\Lambda_2,(\\kappa_j))$ in commutative $R_2$-algebras. The product category $I\\times J$ (objects $(i,j)$, morphisms $(a,b):(i,j)\\to(i',j')$ with componentwise composition) is small and filtered in the sense of Stacks 002V: it has an object $(i_0,j_0)$ as $I$, $J$ are nonempty; for $(i,j)$, $(i',j')$ choose $a:i\\to i''$, $a':i'\\to i''$ in $I$ and $b:j\\to j''$, $b':j'\\to j''$ in $J$, so $(a,b)$, $(a',b')$ go to $(i'',j'')$; for parallel arrows $(a,b),(a',b'):(i,j)\\to(i',j')$ choose $c:i'\\to i''$ with $ca=ca'$ and $d:j'\\to j''$ with $db=db'$, then $(c,d)(a,b)=(c,d)(a',b')$.",
+   "uses": [
+    "def-weil-pbc-filtered-colimit-smooth-algebras",
+    "def-weil-pbc-category-colimit"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/smoothing.tex",
+    "place": "Lemma Tag 07F3 (lemma-product, line 1926), proof 'Omitted. Hint: A product of filtered colimits is a filtered colimit', written out"
+   }
+  },
+  {
+   "text": "*Step 2 (a diagram of smooth $R_1\\times R_2$-algebras).* Put $R=R_1\\times R_2$ and $D(i,j)=A_i\\times B_j$, an $R$-algebra via $(r_1,r_2)\\mapsto(r_1\\cdot1,r_2\\cdot1)$, and $D(a,b)=A_a\\times B_b:(x,y)\\mapsto(A_a(x),B_b(y))$; this is a ring homomorphism compatible with the structure maps (each component is), and $D$ preserves identities and composition because $i\\mapsto A_i$ and $j\\mapsto B_j$ do; so $D$ is a functor from $I\\times J$ to commutative $R$-algebras. Since $R_1\\to A_i$ and $R_2\\to B_j$ are smooth [def-weil-pbc-smooth-ring-map], $R=R_1\\times R_2\\to A_i\\times B_j$ is smooth by [lem-weil-pbc-smooth-over-product-ring].",
+   "uses": [
+    "lem-weil-pbc-smooth-over-product-ring",
+    "def-weil-pbc-smooth-ring-map"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/smoothing.tex",
+    "place": "Lemma Tag 07F3 (lemma-product, line 1926), proof 'Omitted. Hint: A product of filtered colimits is a filtered colimit', written out"
+   }
+  },
+  {
+   "text": "*Step 3 (the cocone).* Make $\\Lambda_1\\times\\Lambda_2$ an $R$-algebra by the product of the structure maps (the algebra structure of the statement). The maps $\\theta_{(i,j)}=\\iota_i\\times\\kappa_j:A_i\\times B_j\\to\\Lambda_1\\times\\Lambda_2$ are $R$-algebra homomorphisms, and for $(a,b):(i,j)\\to(i',j')$ we have $\\theta_{(i',j')}\\circ D(a,b)=(\\iota_{i'}A_a)\\times(\\kappa_{j'}B_b)=\\iota_i\\times\\kappa_j=\\theta_{(i,j)}$, so $(\\Lambda_1\\times\\Lambda_2,(\\theta_{(i,j)}))$ is a cocone on $D$ [def-weil-pbc-category-colimit].",
+   "uses": [
+    "def-weil-pbc-category-colimit"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/smoothing.tex",
+    "place": "Lemma Tag 07F3 (lemma-product, line 1926), proof 'Omitted. Hint: A product of filtered colimits is a filtered colimit', written out"
+   }
+  },
+  {
+   "text": "*Step 4 (it is a colimit).* Let $(M,(\\mu_{(i,j)}))$ be a cocone on $D$ in commutative $R$-algebras [def-weil-pbc-category-colimit]. Let $e_1,e_2\\in M$ be the images of $(1,0),(0,1)\\in R$: $e_1+e_2=1$, $e_1e_2=0$, $e_k^2=e_k$. Then $M_k=e_kM$ is a commutative ring with unit $e_k$, an $R_1$- (resp. $R_2$-) algebra via $r_1\\mapsto$ image of $(r_1,0)$ (resp. $r_2\\mapsto$ image of $(0,r_2)$), and every $m\\in M$ is uniquely $m=e_1m+e_2m$. For $(x,y)\\in A_i\\times B_j$, $(x,0)=(1,0)\\cdot(x,y)$, so $\\mu_{(i,j)}(x,0)=e_1\\mu_{(i,j)}(x,y)\\in M_1$; hence $\\mu^1_{(i,j)}:A_i\\to M_1$, $x\\mapsto\\mu_{(i,j)}(x,0)$, is an $R_1$-algebra homomorphism ($1\\mapsto\\mu_{(i,j)}(1,0)=e_1$), similarly $\\mu^2_{(i,j)}:B_j\\to M_2$, $y\\mapsto\\mu_{(i,j)}(0,y)$, and $\\mu_{(i,j)}(x,y)=\\mu^1_{(i,j)}(x)+\\mu^2_{(i,j)}(y)$. (a) $\\mu^1_{(i,j)}$ does not depend on $j$: for $b:j\\to j''$, compatibility along $(\\mathrm{id}_i,b)$ gives $\\mu_{(i,j'')}(x,B_b(0))=\\mu_{(i,j)}(x,0)$, i.e. $\\mu^1_{(i,j'')}=\\mu^1_{(i,j)}$; any $j,j'$ map to a common $j''$ ($J$ filtered). Write $\\mu^1_i$; likewise $\\mu^2_j$ ($I$ filtered). (b) Compatibility along $(a,\\mathrm{id}_j)$ gives $\\mu^1_{i'}\\circ A_a=\\mu^1_i$ for $a:i\\to i'$ (evaluate at $(x,0)$), so $(M_1,(\\mu^1_i))$ is a cocone on $i\\mapsto A_i$ in $R_1$-algebras ($J\\ne\\emptyset$ supplies some $j$), and there is a unique $R_1$-algebra map $u_1:\\Lambda_1\\to M_1$ with $u_1\\iota_i=\\mu^1_i$; likewise a unique $u_2:\\Lambda_2\\to M_2$ with $u_2\\kappa_j=\\mu^2_j$. (c) Existence: $u(\\lambda_1,\\lambda_2)=u_1(\\lambda_1)+u_2(\\lambda_2)$ is additive, sends $1$ to $e_1+e_2=1$, is multiplicative since $M_1M_2=e_1e_2M=0$, and is $R$-linear; $u\\theta_{(i,j)}(x,y)=\\mu^1_i(x)+\\mu^2_j(y)=\\mu_{(i,j)}(x,y)$. (d) Uniqueness: if $u':\\Lambda_1\\times\\Lambda_2\\to M$ is an $R$-algebra map with $u'\\theta_{(i,j)}=\\mu_{(i,j)}$ for all $(i,j)$, then $\\lambda_1\\mapsto u'(\\lambda_1,0)$ takes values in $M_1$ (as $(\\lambda_1,0)=(1,0)(\\lambda_1,0)$), is an $R_1$-algebra map $\\Lambda_1\\to M_1$ and satisfies $u'(\\iota_i(x),0)=u'\\theta_{(i,j)}(x,0)=\\mu^1_i(x)$, so it equals $u_1$; likewise $u'(0,\\lambda_2)=u_2(\\lambda_2)$, and $u'(\\lambda_1,\\lambda_2)=u'(\\lambda_1,0)+u'(0,\\lambda_2)=u(\\lambda_1,\\lambda_2)$. So $(\\Lambda_1\\times\\Lambda_2,(\\theta_{(i,j)}))$ is a colimit of $D$ in commutative $R$-algebras.",
+   "uses": [
+    "def-weil-pbc-category-colimit"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/smoothing.tex",
+    "place": "Lemma Tag 07F3 (lemma-product, line 1926), proof 'Omitted. Hint: A product of filtered colimits is a filtered colimit', written out"
+   }
+  },
+  {
+   "text": "*Step 5 (conclusion).* $I\\times J$ is a small filtered category (Step 1), $D$ is a functor from it to commutative $R_1\\times R_2$-algebras with every $D(i,j)$ smooth over $R_1\\times R_2$ (Step 2), and $(\\Lambda_1\\times\\Lambda_2,(\\theta_{(i,j)}))$ is a colimit of $D$ in commutative $R_1\\times R_2$-algebras (Steps 3, 4); by [def-weil-pbc-filtered-colimit-smooth-algebras], $\\Lambda_1\\times\\Lambda_2$ is a filtered colimit of smooth $R_1\\times R_2$-algebras.",
+   "uses": [
+    "def-weil-pbc-filtered-colimit-smooth-algebras"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/smoothing.tex",
+    "place": "Lemma Tag 07F3 (lemma-product, line 1926), proof 'Omitted. Hint: A product of filtered colimits is a filtered colimit', written out"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-filtered-colimit-smooth-algebras",
+  "def-weil-pbc-category-colimit",
+  "lem-weil-pbc-smooth-over-product-ring",
+  "def-weil-pbc-smooth-ring-map"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/smoothing.tex",
+  "place": "Lemma Tag 07F3 (lemma-product, line 1926): Stacks omits the proof and gives only the hint 'A product of filtered colimits is a filtered colimit'; the steps write out that hint"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -38,7 +105,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "worker",
@@ -58,5 +125,17 @@
   }
  },
  "chapter": "sec-proper-base-change",
- "unit": "sk-thm-p1"
+ "unit": "sk-thm-p1",
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "lem-weil-pbc-popescu-product",
+  "worker": "stage1",
+  "summary": "Tags verified in tags/tags: 07F3 smoothing-lemma-product, 07F2 smoothing-situation-global, 07C3 algebra-lemma-when-colimit, 0GIF algebra-lemma-product-smooth. The definition def-weil-pbc-filtered-colimit-smooth-algebras is via a filtered diagram of smooth algebras with colimit Lambda (not via the 07C3 factorization criterion), so the proof follows the Stacks hint with the product diagram (A_i x B_j) over I x J: Step 1 I x J is small filtered (elementary, 002V), Step 2 the terms are smooth over R_1 x R_2 by the new node lem-weil-pbc-smooth-over-product-ring, Steps 3-4 the product cocone is a colimit in R_1 x R_2-algebras, written out with the idempotent decomposition M = e_1M x e_2M of an R_1 x R_2-algebra (independence of the second index uses that J is filtered, hence connected and nonempty), Step 5 concludes. Statement and stmt_deps kept (the statement already omits the Noetherian/regular hypotheses of Situation 07F2, which the hint does not use; the citer lem-weil-pbc-popescu-reduce-to-field Step 5 applies it to iterated products K_1 x ... x K_s, which are not fields, so the general form is the one needed). Proof is by agent (Stacks omits it). New node: lem-weil-pbc-smooth-over-product-ring (unsplit, no Mathlib match; Stacks 0GIF states only the product over one base R). The item's own Mathlib searches (three kinds, recorded at creation) stand: no match."
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "result": "accepted",
+  "note": "5 steps (Stacks 07F3 proof omitted; agent proof): product of filtered categories is filtered (002V), the product diagram of smooth algebras (new node: smoothness over a product ring, via 0GIF, 00TD, 00T7), the cocone, the colimit property written out via the idempotents e_1, e_2, conclusion by the definition. Tags 07F3, 07F2, 0GIF, 002V verified."
+ }
 }

@@ -1,0 +1,68 @@
+{
+ "id": "lem-weil-pbc-smooth-over-product-ring",
+ "kind": "statement",
+ "title": "Smoothness over a product ring is checked factorwise",
+ "statement": "Let $\\varphi_1:R_1\\to A_1$ and $\\varphi_2:R_2\\to A_2$ be homomorphisms of commutative rings, and make $A_1\\times A_2$ an $R_1\\times R_2$-algebra via $\\varphi_1\\times\\varphi_2:(r_1,r_2)\\mapsto(\\varphi_1(r_1),\\varphi_2(r_2))$. If $\\varphi_1$ and $\\varphi_2$ are smooth ring maps [def-weil-pbc-smooth-ring-map], then $\\varphi_1\\times\\varphi_2:R_1\\times R_2\\to A_1\\times A_2$ is a smooth ring map.",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "No Stacks lemma states it in this form; Stacks uses it implicitly in Smoothing Ring Maps, Lemma Tag 07F3 (smoothing.tex line 1926). It follows from Algebra, Lemma Tag 0GIF (lemma-product-smooth, line 37613: a product S'xS'' of R-algebras is smooth over R iff both factors are) applied over R = R_1 x R_2, together with Lemma Tag 00TD (lemma-compose-smooth, line 37597) for R_1 x R_2 -> R_k -> A_k, where the projection R_1 x R_2 -> R_1 is the principal localization at the idempotent (1,0) (smooth, e.g. standard smooth R[x]/((1,0)x-1), Lemma Tag 00T7 lemma-standard-smooth)"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-smooth-ring-map"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "product A × B of a smooth R-algebra A and a smooth S-algebra B is smooth over R × S",
+   "results": "Algebra.FormallySmooth.comp, Algebra.Smooth.comp, Algebra.Smooth.baseChange (Mathlib.RingTheory.Smooth.Basic), Prod.algebra (Mathlib.Algebra.Algebra.Prod), Algebra.FormallySmooth.pi_iff, Algebra.FormallySmooth.of_pi (Mathlib.RingTheory.Smooth.Pi: finite products over one base R, formal smoothness only), Pi.instAlgebraForall",
+   "date": "2026-10-10",
+   "verdict": "no match (ingredients only)"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "smoothness over a product ring R × S is checked componentwise: A smooth over R and B smooth over S implies A × B smooth over R × S",
+   "results": "Algebra.FormallySmooth.pi_iff, Algebra.FormallySmooth.instForallOfFinite, Algebra.FormallySmooth.of_pi (Mathlib.RingTheory.Smooth.Pi), Algebra.Smooth.comp, RingHom.Smooth.toAlgebra, RingHom.IsStandardSmooth.smooth, RingHom.smooth_algebraMap, Algebra.instSmoothOfIsStandardSmooth",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "Algebra.Smooth (_ × _) (_ × _)",
+   "results": "none",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rnE 'prodMap|Prod\\.map|× ?[A-Z]' Mathlib/RingTheory/Smooth Mathlib/RingTheory/RingHom/Smooth.lean Mathlib/RingTheory/Etale Mathlib/RingTheory/RingHom/Etale.lean Mathlib/RingTheory/FinitePresentation.lean; grep -rnE 'instance.*(Smooth|FinitePresentation).*×' Mathlib/RingTheory Mathlib/Algebra; sed -n 245,280p Mathlib/RingTheory/Etale/Basic.lean; grep theorem/instance in Mathlib/RingTheory/Smooth/Pi.lean",
+   "results": "only the instances Algebra.Etale (R × S) R and Algebra.Etale (R × S) S via RingHom.fst/snd (Mathlib/RingTheory/Etale/Basic.lean lines 258-276, proved by Etale.of_isLocalizationAway (1,0) / (0,1)) and Algebra.FormallySmooth for finite Pi over one base (Smooth/Pi.lean lines 29, 50, 122); no smoothness statement for a product algebra over a product base, no Algebra.Smooth for products over one base",
+   "date": "2026-10-10",
+   "verdict": "no match; Lean candidates for the proof: Algebra.Etale (R × S) R instance (Etale/Basic.lean:264) + Algebra.Smooth.comp + FormallySmooth.pi_iff + finite presentation of a product"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-popescu-product",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1"
+}
