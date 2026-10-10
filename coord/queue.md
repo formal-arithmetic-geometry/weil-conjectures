@@ -1,8 +1,8 @@
 # Work queue
 
-894 items; claim with `tools/claim.py next <group> [--stage N]`.
+891 items; claim with `tools/claim.py next <group> [--stage N]`.
 
-## Stage 1: nodes to split (126)
+## Stage 1: nodes to split (123)
 
 | node | distance to a target | Lean state on the done branch |
 |---|---|---|
@@ -12,11 +12,11 @@
 | `lem-sc-derived-open-gluing` | 3014 | none |
 | `lem-pc-affine-pseudo-coherent-criterion` | 3015 | none |
 | `lem-pc-affine-tor-amplitude-criterion` | 3015 | none |
+| `lem-pc-derived-mayer-vietoris-triangle` | 3015 | none |
 | `lem-pc-perfect-pseudo-coherent-locally-finite-tor` | 3015 | none |
 | `lem-pc-tower-surjective-lim-acyclic` | 3015 | none |
 | `lem-pc-pseudo-coherent-bounded-finite-free-model` | 3016 | none |
 | `lem-pc-supported-open-pushforward` | 3016 | none |
-| `lem-pc-derived-mayer-vietoris-triangle` | 3017 | none |
 | `lem-pc-perfect-rhom-tensor-comparison` | 3018 | none |
 | `lem-pc-global-hom-adjunction` | 3019 | none |
 | `lem-pc-koszul-affine-detection` | 3019 | none |
@@ -41,9 +41,9 @@
 | `lem-sc-meromorphic-weakass-generic-product` | 5012 | none |
 | `lem-sc-components-open-injection` | 5013 | none |
 | `lem-pc-affine-perfect-colimit-descent` | 5014 | none |
-| `lem-pc-perfect-descend-morphisms` | 5014 | none |
 | `lem-pc-rf-single-complex-inherited-tensor-condition` | 5014 | none |
 | `lem-pc-rf-single-complex-qcqs-induction` | 5014 | none |
+| `lem-pc-affine-perfect-hom-colimit` | 5015 | none |
 | `lem-pc-flat-module-descent` | 5015 | none |
 | `lem-pc-sites-module-sheafification-interface` | 5015 | none |
 | `lem-pc-sites-module-sheafification-tensor` | 5015 | none |
@@ -73,9 +73,6 @@
 | `lem-pc-projective-coherent-higher-images` | - | sorry_here |
 | `lem-sc-affine-constant-second` | - | rests_on_sorry |
 | `lem-weil-l-adic-extension-integers-dvr` | - | none |
-| `lem-weil-pbc-constructible-noetherian-finite-selection` | - | none |
-| `lemma-nagata-affine-fp-descends` | - | none |
-| `lemma-nagata-directed-finite-upper-bound` | - | none |
 | `lemma-nagata-morphism-descends` | - | none |
 | `lemma-nagata-qc-open-descends` | - | none |
 | `pqf-lem-qf-locqf-qc` | - | none |
@@ -906,7 +903,7 @@
 | `lem-weil-pbc-projective-space-zero-isomorphism` | 4 | state |
 | `def-nagata-fixed-base-separated-stage` | 6 | state |
 
-Not open yet: 1577 nodes that wait for a statement dependency, 166 nodes that wait for stage 1.
+Not open yet: 1581 nodes that wait for a statement dependency, 163 nodes that wait for stage 1.
 
 ## Stage 3: modules to prove (0)
 
