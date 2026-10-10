@@ -42,9 +42,13 @@ blueprint `sk-prop-sf-finiteness`) asserts that for a constructible `ℓ`-adic s
   (`AlgebraicGeometry.ProEtale.exists_isLE_rightDerivedFunctor_lowerStar`).
 
 These are the inputs for the finiteness of the pushforward of Weil sheaves and Weil complexes
-(`WeilConjectures.WeilSheaf.LowerStar`). The first is deduced from the second in degree `0`;
-boundedness below holds for any sheaf. The constructibility of the higher direct images and
-the upper bound are stated here with `sorry`. Their proof
+(`WeilConjectures.WeilSheaf.LowerStar`). All of them are deduced from the case of a
+quasi-compact target, `AlgebraicGeometry.ProEtale.finiteLowerStar_singleFunctor`, which is
+stated with `sorry`: the pushforward is the degree `0` case, `f_*` being left exact; boundedness
+below holds for any sheaf; and constructibility is local on `Y`
+(`AlgebraicGeometry.ProEtale.IsAdicConstructibleSheaf.of_openCover`), while the higher direct
+images commute with restriction to an affine open subscheme of `Y`
+(`AlgebraicGeometry.ProEtale.adicDerivedBaseChangeIso`). The proof of the remaining statement
 (blueprint `sk-prop-sf-finiteness`) proceeds by generic constructibility for open immersions
 (Deligne's dévissage), the proper case, and a Čech argument for a finite affine cover of `X`.
 
@@ -55,7 +59,7 @@ with constructible cohomology (`AlgebraicGeometry.ProEtale.finiteLowerStar_of_bo
 
 ## Missing infrastructure
 
-The two statements left with `sorry` need, beyond this dévissage: the recollement for closed
+The statement left with `sorry` needs, beyond this dévissage: the recollement for closed
 immersions on the pro-étale site (exactness of `i_*`, which rests on lifting weakly étale maps
 along henselian pairs), so as to reduce a constructible sheaf to lisse sheaves on strata; and,
 for the lisse case, a comparison of `ℚ̄_ℓ,X`-modules with `ℓ`-adic towers of torsion étale
@@ -187,7 +191,8 @@ theorem isAdicConstructibleSheaf_homology_rightDerivedFunctor_lowerStar (hK : ri
     (hF.upperStar (pullback.fst f j))
   refine ⟨_, j, hj, ⟨v, rfl⟩, (h.2 n).of_iso ?_⟩
   exact (DerivedCategory.homologyFunctor _ n).mapIso
-      ((Functor.mapIso _ (((pullback.fst f j)^*ᵃ[l].mapDerivedCategorySingleFunctor 0).app F)).symm ≪≫
+      ((Functor.mapIso _
+          (((pullback.fst f j)^*ᵃ[l].mapDerivedCategorySingleFunctor 0).app F)).symm ≪≫
         ((adicDerivedBaseChangeIso l hsq).app _).symm) ≪≫
     (((j)^*ᵃ[l].mapDerivedCategoryHomologyFunctorIso n).app _).symm
 

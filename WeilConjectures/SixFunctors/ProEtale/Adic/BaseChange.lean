@@ -57,8 +57,8 @@ noncomputable def adicSquareLowerStarIso (sq : CommSq g' j' j g'') :
 variable [WeaklyEtale j] [WeaklyEtale j']
 
 /-- **The base change map** `g''_* ⋙ j^* ⟶ j'^* ⋙ g'_*` of `ℓ`-adic sheaves, for a commutative
-square with `j` and `j'` weakly étale: the mate of `AlgebraicGeometry.ProEtale.adicSquareLowerStarIso`
-along `j'^* ⊣ j'_*` and `j^* ⊣ j_*`. -/
+square with `j` and `j'` weakly étale: the mate of
+`AlgebraicGeometry.ProEtale.adicSquareLowerStarIso` along `j'^* ⊣ j'_*` and `j^* ⊣ j_*`. -/
 noncomputable def adicBaseChangeMap (sq : CommSq g' j' j g'') :
     (g'')_*ᵃ[l] ⋙ (j)^*ᵃ[l] ⟶ (j')^*ᵃ[l] ⋙ (g')_*ᵃ[l] :=
   ((mateEquiv (adicUpperStarLowerStarAdjunction l j')
@@ -66,6 +66,8 @@ noncomputable def adicBaseChangeMap (sq : CommSq g' j' j g'') :
     (TwoSquare.mk _ _ _ _ (adicSquareLowerStarIso l sq).hom)).natTrans
 
 set_option maxHeartbeats 1600000 in
+-- The kernel needs time to unfold the module structures of the lifted functors.
+omit [WeaklyEtale j] [WeaklyEtale j'] in
 /-- The underlying map of sheaves of `ℚ̄_ℓ`-modules of the base change map of `ℓ`-adic sheaves is
 the base change map of the underlying sheaves. -/
 lemma adicBaseChangeMap_app_hom (sq : CommSq g' j' j g'') (M : AdicSheaf l Z') :
@@ -79,8 +81,7 @@ lemma adicBaseChangeMap_app_hom (sq : CommSq g' j' j g'') (M : AdicSheaf l Z') :
     adicUpperStar_map_hom, adicLowerStar_map_hom, adicUpperStarLowerStarAdjunction,
     Adjunction.modAdjunction_unit_app_hom, Adjunction.modAdjunction_counit_app_hom,
     adicSquareLowerStarIso, ProEtale.squareLowerStarIso, Iso.trans_hom, Iso.symm_hom,
-    adicLowerStarComp_hom_app_hom, adicLowerStarComp_inv_app_hom, adicLowerStarCongr_hom_app_hom,
-    Functor.map_id]
+    adicLowerStarComp_hom_app_hom, adicLowerStarComp_inv_app_hom, adicLowerStarCongr_hom_app_hom]
   rfl
 
 /-- **Weakly étale base change for `ℓ`-adic sheaves**: for a cartesian square the base change
