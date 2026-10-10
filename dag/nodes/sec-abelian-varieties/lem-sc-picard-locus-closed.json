@@ -29,9 +29,64 @@
   "def-weil-geometric-fibre",
   "def-weil-closed-immersion"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "By [lem-sc-picard-diagonal-locally-closed], j is an immersion of finite presentation, hence quasi-compact. To prove its image is closed, apply the valuation criterion [lem-sc-picard-locus-closed-valuation-criterion]: let A be a valuation ring with fraction field K and g:Spec(A)→S whose generic restriction factors through j.",
+   "uses": [
+    "lem-sc-picard-diagonal-locally-closed",
+    "lem-sc-picard-locus-closed-valuation-criterion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-on-morphisms.tex",
+    "place": "More on Morphisms, Tags 02JQ and 01R8"
+   }
+  },
+  {
+   "text": "After base change to A, the morphism X_A→Spec(A) retains flatness, properness, finite presentation, and integral geometric fibres. The universal pushforward hypothesis gives H⁰(X_K,O_{X_K})=K. Since Spec(K)→S factors through Z, the universal property in [lem-sc-picard-diagonal-locally-closed] makes L_K trivial: it is pulled back from Spec(K), whose Picard group is trivial.",
+   "uses": [
+    "lem-sc-picard-diagonal-locally-closed"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-on-morphisms.tex",
+    "place": "More on Morphisms, Lemma 0BF0, proof before the valuative argument"
+   }
+  },
+  {
+   "text": "The valuation-ring triviality lemma [lem-sc-picard-locus-closed-valuation-triviality] therefore applies and gives that L_A is trivial.",
+   "uses": [
+    "lem-sc-picard-locus-closed-valuation-triviality"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-on-morphisms.tex",
+    "place": "More on Morphisms, Lemma 0EX8"
+   }
+  },
+  {
+   "text": "Taking N=O_A in the universal property of [lem-sc-picard-diagonal-locally-closed], the trivialization of L_A makes Spec(A)→S factor through Z. Thus every valuation specialization of a point in j(Z) remains in j(Z), so [lem-sc-picard-locus-closed-valuation-criterion] makes j(Z) closed. Since j is an immersion with closed image, it is a closed immersion.",
+   "uses": [
+    "lem-sc-picard-diagonal-locally-closed",
+    "lem-sc-picard-locus-closed-valuation-criterion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-on-morphisms.tex",
+    "place": "More on Morphisms, Tags 02JQ, 01R8 and 0BF0"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sc-picard-diagonal-locally-closed",
+  "lem-sc-picard-locus-closed-valuation-criterion",
+  "lem-sc-picard-locus-closed-valuation-triviality"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "Stacks Project",
+  "place": "More on Morphisms, Lemma get-a-closed, Tag 0BF0"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -63,12 +118,34 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-sc-general-theorem-of-cube",
   "by": "worker",
   "date": "2026-10-10"
  },
  "chapter": "sec-abelian-varieties",
- "unit": "sk-prop-av-cube"
+ "unit": "sk-prop-av-cube",
+ "split_report": {
+  "date": "2026-10-11",
+  "item": "lem-sc-picard-locus-closed",
+  "worker": "stage1",
+  "summary": "Repaired the circular Tag 0BF0 application by splitting its valuation-ring proof into the Tags 02JQ/01R8 closed-image criterion and Tag 0EX8 generic-fibre triviality, then checked the base-change and universal-property steps.",
+  "blueprint": {
+   "node": "thm-sc-theorem-of-cube",
+   "place": "proof: the universal locus is closed by Tag 0BF0, via its valuation-ring argument",
+   "via": [
+    "lem-sc-general-theorem-of-cube"
+   ]
+  },
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-plc2950",
+  "group": "J1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-plc2950 (reviewer sub-agent of L); spot-checked: Re-push after R-plc2846 D1: circular 0BF0 step replaced by the Stacks 0BF0 proof. New criterion node checked against 02JQ+01R8 (s in closure -> valuation ring Spec K->Z, Spec A->S centred at s; hypothesis gives s in j(Z); immersion with closed image is closed immersion): true. New triviality node matches 0EX8 exactly (valuation ring, flat proper fp, L_eta trivial, X_0 integral, H^0(X_eta,O)=K). Step 2 hypotheses: base change keeps flat/proper/fp, closed fibre integral from geometric integrality, H^0(X_K,O)=K from universal pushforward with T=Spec K, L_K trivial via universal property and Pic(K)=0 (N free, rank 1 as X_K nonempty). Step 4 N=O_A. Item statement unchanged, matches 0BF0 and lem-sc-general-theorem-of-cube step 5 (C4). Mathlib: UniversallyClosed.of_valuativeCriterion [QuasiCompact] is a multi-step generalization of the criterion node (mono lift, closed map, closed image), not an exact match; node kept. No second-reading fault missed."
+ }
 }
