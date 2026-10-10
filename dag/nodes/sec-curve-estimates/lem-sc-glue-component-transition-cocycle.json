@@ -22,9 +22,60 @@
   "def-pc-scheme",
   "def-sc-invertible-module"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "For each index a let $\\mathcal F_a=\\mathcal O_{U_a}$, viewed as the trivial rank-one $\\mathcal O_{U_a}$-module. On $U_{ab}$ define an $\\mathcal O_{U_{ab}}$-linear map $\\varphi_{ab}:\\mathcal F_a|_{U_{ab}}\\to\\mathcal F_b|_{U_{ab}}$ by multiplication by the unit $g_{ab}$; its inverse is multiplication by $g_{ba}=g_{ab}^{-1}$, so it is an isomorphism.",
+   "uses": [
+    "def-sc-invertible-module"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sheaves.tex",
+    "place": "Sheaves Lemma 00AM (lemma-glue-sheaves-structures), setup of the local modules and transition isomorphisms"
+   }
+  },
+  {
+   "text": "The identities $g_{aa}=1$ and $g_{ba}=g_{ab}^{-1}$ give $\\varphi_{aa}=\\mathrm{id}$ and inverse transition maps. On every triple overlap $U_{abc}$, multiplication satisfies $\\varphi_{bc}\\circ\\varphi_{ab}=\\varphi_{ac}$ because $g_{ac}=g_{ab}g_{bc}$; hence the transition maps satisfy the required cocycle condition.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sheaves.tex",
+    "place": "Sheaves Lemma 00AM, cocycle condition for the transition maps"
+   }
+  },
+  {
+   "text": "Apply the gluing theorem for sheaves of modules to the open cover $(U_a)$, the modules $\\mathcal F_a$, and the isomorphisms $\\varphi_{ab}$. It produces an $\\mathcal O_X$-module $\\mathcal L$ and isomorphisms $\\psi_a:\\mathcal L|_{U_a}\\xrightarrow{\\sim}\\mathcal F_a$ satisfying $\\varphi_{ab}\\circ\\psi_a=\\psi_b$ on $U_{ab}$.",
+   "uses": [
+    "lem-weil-pbc-glue-sheaves-of-modules"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sheaves.tex",
+    "place": "Sheaves Lemma 00AM (lemma-glue-sheaves-structures), existence part"
+   }
+  },
+  {
+   "text": "Each $\\mathcal F_a$ is free of rank one, so the displayed isomorphisms make $\\mathcal L$ locally free of rank one; thus $\\mathcal L$ is an invertible $\\mathcal O_X$-module. If $(\\mathcal L',\\psi'_a)$ is another such glued module with the same transition functions, the local maps $\\psi_a^{-1}\\circ\\psi'_a:\\mathcal L'|_{U_a}\\to\\mathcal L|_{U_a}$ agree on overlaps by the compatibility equations, so the uniqueness clause of the gluing theorem gives a unique global isomorphism compatible with all chosen trivializations.",
+   "uses": [
+    "def-sc-invertible-module",
+    "lem-weil-pbc-glue-sheaves-of-modules"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sheaves.tex",
+    "place": "Sheaves Lemma 00AM, conclusion and uniqueness from Lemma 04TN"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sc-invertible-module",
+  "lem-weil-pbc-glue-sheaves-of-modules"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/sheaves.tex",
+  "place": "Sheaves Lemma 00AM (lemma-glue-sheaves-structures), applied to rank-one free modules with multiplication transition maps"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -49,12 +100,36 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-sc-glue-component-line-bundles",
   "by": "worker",
   "date": "2026-10-10"
  },
  "chapter": "sec-curve-estimates",
- "unit": "sk-thm-curveestimate"
+ "unit": "sk-thm-curveestimate",
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "lem-sc-glue-component-transition-cocycle",
+  "worker": "stage1",
+  "summary": "Split the Cech transition-function construction into local free modules and multiplication isomorphisms, the unit and cocycle checks, application of the existing sheaf-of-modules gluing theorem, and the local-freeness and uniqueness conclusion. No new nodes were needed; all non-elementary input is cited from the existing invertible-module definition and module gluing theorem.",
+  "blueprint": "Realizes the ancestor blueprint proof paragraph defining transition functions on the open cover and checking the Cech 2-cocycle that defines the glued invertible sheaf.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-glue-sheaves-of-modules",
+    "why": "Step 3 uses the existing general sheaf-of-modules gluing theorem as the standard gluing tool; the present unit specializes it to rank-one free modules and does not provide a separate gluing construction."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-glue-sheaves-of-modules"
+ ],
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-gtc",
+  "group": "F1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-gtc (reviewer sub-agent of L); spot-checked: Source: Stacks 00AM (sheaves.tex lemma-glue-sheaves-structures, tag verified in tags/tags, with 04TN for uniqueness); the item glues the trivial modules O_{U_a} along multiplication by g_ab, which is exactly 00AM for O-modules. Only split fields changed (proof, proof_deps, proof_origin, status, split_report); one commit, two files, report with Review by F1. Step 1: multiplication by the unit g_ab is an O_{U_ab}-linear iso with inverse g_ba; trivial module is invertible per def-sc-invertible-module. Step 2 elementary: g_aa=1 gives phi_aa=id, and g_ac=g_ab g_bc (commutative) gives phi_ac=phi_bc o phi_ab, the cocycle form required by clause (2) of lem-weil-pbc-glue-sheaves-of-modules (pairs incl. i=j). Step 3: clause (2) of that node gives L and psi_a with phi_ab o psi_a = psi_b. Step 4: L|U_a ~ O_{U_a} so locally free rank one, hence (quasi-coherent) invertible per def-sc-invertible-module; uniqueness: psi_b^{-1}psi'_b = psi_a^{-1}phi_ab^{-1}phi_ab psi'_a on U_ab, so clause (1) (glueing morphisms) gives the unique compatible map, iso by gluing inverses and the 'in particular' clause. Tool use lem-weil-pbc-glue-sheaves-of-modules (unit sk-thm-p1) accepted as generic gluing tool (C8). Small cases: one-open cover gives O_X; g_ab=1 gives trivial bundle. No sorry-free slopmaster2 declaration found stating Zariski gluing of line bundles by cocycles (only DescentCocycle, fpqc descent). Start Sat Oct 10 03:25:35 PM UTC 2026, end Sat Oct 10 03:26:00 PM UTC 2026."
+ }
 }
