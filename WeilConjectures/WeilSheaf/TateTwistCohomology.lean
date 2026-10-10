@@ -17,7 +17,7 @@ The Tate sheaf `ℚ̄_ℓ(m)` is isomorphic, as a Weil sheaf, to the constant We
 internal homs of constant twists of `ℚ̄_ℓ` are constant twists of `ℚ̄_ℓ`, the twists being
 multiplicative in the first variable with exponent `-1` and in the second with exponent `1`.
 Hence `Hʳ(X ⊗ k̄, ℚ̄_ℓ(m))` is `Hʳ(X ⊗ k̄, ℚ̄_ℓ)` with the geometric Frobenius multiplied by
-`q^{-m}` (`AlgebraicGeometry.WeilSheaf.nonempty_equiv_cohomology_tateTwistSheaf'`).
+`q^{-m}` (`AlgebraicGeometry.WeilSheaf.nonempty_equiv_cohomology_tateTwistSheaf`).
 -/
 
 @[expose] public section
@@ -279,9 +279,11 @@ noncomputable def cohomologyEquivOfIso {F G : WeilSheaf k₀ l Y} (e : F ≅ G) 
     ((WeilComplex.derivedLowerStar (Y ↘ Spec (CommRingCat.of k₀))).mapIso (toComplex.mapIso e)))
 
 variable (k₀ l Y) in
-/-- **Cohomology of the Tate sheaves.** `Hʳ(Y ⊗ k̄, ℚ̄_ℓ(m))` is `Hʳ(Y ⊗ k̄, ℚ̄_ℓ)(m)`, the same
-space with the geometric Frobenius multiplied by `q^{-m}`. -/
-theorem nonempty_equiv_cohomology_tateTwistSheaf' (m r : ℤ) :
+/-- **Cohomology of the Tate sheaves** (blueprint `def-weil-frobenius-coefficient-twists`, with
+the twist elimination of `prop-pod-degree-of-the-pairing`): `Hʳ(Y ⊗ k̄, ℚ̄_ℓ(m))` is
+`Hʳ(Y ⊗ k̄, ℚ̄_ℓ)(m)`, the same space with the geometric Frobenius multiplied by `q^{-m}`, since
+geometric Frobenius acts on `ℚ̄_ℓ(m)` by `q^{-m}`. -/
+theorem nonempty_equiv_cohomology_tateTwistSheaf (m r : ℤ) :
     Nonempty (((tateTwistSheaf k₀ l Y m).cohomology r).Equiv
       (((adicConstant k₀ l Y).cohomology r).tateTwist (Nat.card k₀) m)) := by
   obtain ⟨E⟩ := nonempty_equiv_cohomology_constantTwist (adicConstant k₀ l Y)
@@ -292,6 +294,37 @@ theorem nonempty_equiv_cohomology_tateTwistSheaf' (m r : ℤ) :
 
 end Cohomology
 
+
+section CompactSupport
+
+variable {Y : Scheme.{u}} [Y.Over (Spec (CommRingCat.of k₀))]
+  [IsSeparated (Y ↘ Spec (CommRingCat.of k₀))]
+  [LocallyOfFiniteType (Y ↘ Spec (CommRingCat.of k₀))]
+  [QuasiCompact (Y ↘ Spec (CommRingCat.of k₀))]
+
+/-- Isomorphic Weil sheaves have isomorphic compactly supported cohomology, with its
+Frobenius. -/
+noncomputable def compactlySupportedCohomologyEquivOfIso {F G : WeilSheaf k₀ l Y} (e : F ≅ G)
+    (r : ℤ) : (F.compactlySupportedCohomology r).Equiv (G.compactlySupportedCohomology r) :=
+  globalSectionsEquivOfIso ((WeilComplex.homologySheaf r).mapIso
+    ((WeilComplex.derivedLowerShriek k₀ l (Y ↘ Spec (CommRingCat.of k₀))).mapIso
+      (toComplex.mapIso e)))
+
+variable (k₀ l Y) in
+/-- **Compactly supported cohomology of the Tate sheaves** (blueprint
+`def-weil-frobenius-coefficient-twists`, with the twist elimination of
+`prop-pod-degree-of-the-pairing`): `H_cʳ(Y ⊗ k̄, ℚ̄_ℓ(m))` is `H_cʳ(Y ⊗ k̄, ℚ̄_ℓ)(m)`, the same space
+with the geometric Frobenius multiplied by `q^{-m}`. -/
+theorem nonempty_equiv_compactlySupportedCohomology_tateTwistSheaf (m r : ℤ) :
+    Nonempty (((tateTwistSheaf k₀ l Y m).compactlySupportedCohomology r).Equiv
+      (((adicConstant k₀ l Y).compactlySupportedCohomology r).tateTwist (Nat.card k₀) m)) := by
+  obtain ⟨E⟩ := nonempty_equiv_compactlySupportedCohomology_constantTwist (adicConstant k₀ l Y)
+    (cyclotomicUnit k₀ l ^ m) r
+  unfold FrobeniusModule.tateTwist
+  rw [← cyclotomicUnit_zpow_eq]
+  exact ⟨(compactlySupportedCohomologyEquivOfIso (tateTwistSheafIso k₀ l Y m) r).trans E⟩
+
+end CompactSupport
 end WeilSheaf
 
 end AlgebraicGeometry

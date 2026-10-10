@@ -33,6 +33,34 @@ universe u
 
 open CategoryTheory Limits Endofunctor
 
+
+namespace AlgebraicGeometry.ProEtale.AdicSheaf
+
+variable {l : ℕ} [Fact l.Prime] {Z₁ Z₂ : Scheme.{u}}
+
+/-- A left adjoint of a functor commuting with multiplication by scalars commutes with it. -/
+lemma map_smul_of_adjunction {L : AdicSheaf l Z₁ ⥤ AdicSheaf l Z₂}
+    {R : AdicSheaf l Z₂ ⥤ AdicSheaf l Z₁} (adj : L ⊣ R)
+    (hR : ∀ c M, R.map (smul c M) = smul c (R.obj M)) (c : ULift.{u + 1} (PadicAlgCl l))
+    (M : AdicSheaf l Z₁) : L.map (smul c M) = smul c (L.obj M) :=
+  (adj.homEquiv _ _).injective (by
+    rw [Adjunction.homEquiv_unit, Adjunction.homEquiv_unit, adj.unit_naturality, hR]
+    exact smul_comp _ _)
+
+/-- The pullback commutes with multiplication by a scalar. -/
+lemma adicUpperStar_map_smul (g : Z₁ ⟶ Z₂) (c : ULift.{u + 1} (PadicAlgCl l))
+    (M : AdicSheaf l Z₂) : (g)^*ᵃ[l].map (smul c M) = smul c ((g)^*ᵃ[l].obj M) :=
+  map_smul_of_adjunction (adicUpperStarLowerStarAdjunction l g) (adicLowerStar_map_smul g) c M
+
+/-- The extension by zero along an open immersion commutes with multiplication by a scalar. -/
+lemma adicOpenImmersionLowerShriek_map_smul (j : Z₁ ⟶ Z₂) [IsOpenImmersion j]
+    (c : ULift.{u + 1} (PadicAlgCl l)) (M : AdicSheaf l Z₁) :
+    (j)_!ᵃ[l].map (smul c M) = smul c ((j)_!ᵃ[l].obj M) :=
+  map_smul_of_adjunction (adicOpenImmersionLowerShriekAdjunction l j)
+    (adicUpperStar_map_smul j) c M
+
+end AlgebraicGeometry.ProEtale.AdicSheaf
+
 namespace AlgebraicGeometry
 
 open ProEtale
@@ -241,6 +269,62 @@ noncomputable def mapDerivedCategoryConstantTwistCompIso :
     (frobeniusPullbackSmulIso k₀ l X b) (frobeniusPullbackSmulIso k₀ l Y b)
     (smul_comp_hom_app (AdicSheaf.adicLowerStar_map_smul _) _ _)
 
+
+
+variable (k₀ l) in
+/-- A transport of pro-étale Weil sheaves along a functor commuting with multiplication by
+scalars commutes with constant twists. -/
+noncomputable def constantTwistCompMapOfNatIsoIso {U : Scheme.{u}}
+    [U.Over (Spec (CommRingCat.of k₀))]
+    {L : AdicSheaf l (U ↘ Spec (CommRingCat.of k₀)).geometricFiber ⥤
+      AdicSheaf l (X ↘ Spec (CommRingCat.of k₀)).geometricFiber}
+    (hL : ∀ c M, L.map (AdicSheaf.smul c M) = AdicSheaf.smul c (L.obj M))
+    (e : L ⋙ WeilSheaf.frobeniusPullback k₀ l X ≅ WeilSheaf.frobeniusPullback k₀ l U ⋙ L) :
+    constantTwist k₀ l U b ⋙ IsoAlgebra.mapOfNatIso e ≅
+      IsoAlgebra.mapOfNatIso e ⋙ constantTwist k₀ l X b :=
+  IsoAlgebra.twistCompMapOfNatIsoIso e _ _ (smul_comp_hom_app hL e _)
+
+section LowerShriek
+
+variable [Fact (ringChar k₀ ≠ l)] {U : Scheme.{u}} [U.Over (Spec (CommRingCat.of k₀))]
+
+attribute [local instance] Compactification.over
+
+variable (k₀ l) in
+/-- The extension by zero of pro-étale Weil sheaves commutes with constant twists. -/
+noncomputable def constantTwistCompExtensionByZeroIso (j : U ⟶ X) [IsOpenImmersion j]
+    [j.IsOver (Spec (CommRingCat.of k₀))] :
+    constantTwist k₀ l U b ⋙ extensionByZero k₀ l j ≅
+      extensionByZero k₀ l j ⋙ constantTwist k₀ l X b :=
+  -- Passing the transport isomorphism through `constantTwistCompMapOfNatIsoIso` keeps the
+  -- kernel from unfolding it.
+  constantTwistCompMapOfNatIsoIso k₀ l b (AdicSheaf.adicOpenImmersionLowerShriek_map_smul _)
+    (adicOpenImmersionLowerShriekGeometricFiberMapCompFrobeniusIso l j (comp_over j _))
+
+variable (k₀ l) in
+/-- The derived extension by zero of pro-étale Weil sheaves commutes with constant twists. -/
+noncomputable def mapDerivedCategoryConstantTwistCompExtensionByZeroIso (j : U ⟶ X)
+    [IsOpenImmersion j] [j.IsOver (Spec (CommRingCat.of k₀))] :
+    (constantTwist k₀ l U b).mapDerivedCategory ⋙ (extensionByZero k₀ l j).mapDerivedCategory ≅
+      (extensionByZero k₀ l j).mapDerivedCategory ⋙ (constantTwist k₀ l X b).mapDerivedCategory :=
+  (Functor.mapDerivedCategoryCompIso _ _).symm ≪≫
+    Functor.mapDerivedCategoryNatIso (constantTwistCompExtensionByZeroIso k₀ l b j) ≪≫
+    Functor.mapDerivedCategoryCompIso _ _
+
+variable (k₀ l) in
+/-- The direct image with compact support of pro-étale Weil sheaves commutes with constant
+twists. -/
+noncomputable def mapDerivedCategoryConstantTwistCompRightDerivedLowerShriekIso
+    (c : Compactification φ) :
+    (constantTwist k₀ l X b).mapDerivedCategory ⋙ rightDerivedLowerShriek k₀ l φ c ≅
+      rightDerivedLowerShriek k₀ l φ c ⋙ (constantTwist k₀ l Y b).mapDerivedCategory :=
+  (Functor.associator _ _ _).symm ≪≫
+    Functor.isoWhiskerRight (mapDerivedCategoryConstantTwistCompExtensionByZeroIso k₀ l b c.i) _ ≪≫
+    Functor.associator _ _ _ ≪≫
+    Functor.isoWhiskerLeft _ (mapDerivedCategoryConstantTwistCompIso k₀ l c.g b) ≪≫
+    (Functor.associator _ _ _).symm
+
+end LowerShriek
 end ProEtaleWeilSheaf
 
 namespace WeilSheaf
@@ -278,6 +362,47 @@ theorem nonempty_equiv_cohomology_constantTwist (F : WeilSheaf k₀ l Y) (b : (P
   ⟨(globalSectionsEquivOfIso (homologySheafDerivedLowerStarConstantTwistIso F b r)).trans
     (globalSectionsConstantTwistEquiv _ b)⟩
 
+
+section CompactSupport
+
+variable {X : Scheme.{u}} [X.Over (Spec (CommRingCat.of k₀))]
+  [IsSeparated (X ↘ Spec (CommRingCat.of k₀))]
+  [LocallyOfFiniteType (X ↘ Spec (CommRingCat.of k₀))]
+  [QuasiCompact (X ↘ Spec (CommRingCat.of k₀))]
+
+/-- The cohomology sheaves of the direct image with compact support `Ra_!(F ⊗ 𝓑_b)` along the
+structure morphism `a : X ⟶ Spec k₀` are the constant twists of those of `Ra_! F`. -/
+noncomputable def homologySheafDerivedLowerShriekConstantTwistIso (F : WeilSheaf k₀ l X)
+    (b : (PadicAlgCl l)ˣ) (r : ℤ) :
+    (WeilComplex.homologySheaf r).obj ((WeilComplex.derivedLowerShriek k₀ l
+        (X ↘ Spec (CommRingCat.of k₀))).obj (toComplex.obj (F.constantTwist b))) ≅
+      ((WeilComplex.homologySheaf r).obj ((WeilComplex.derivedLowerShriek k₀ l
+        (X ↘ Spec (CommRingCat.of k₀))).obj (toComplex.obj F))).constantTwist b :=
+  ObjectProperty.isoMk _
+    ((_root_.DerivedCategory.homologyFunctor _ r).mapIso
+        ((ProEtaleWeilSheaf.rightDerivedLowerShriek k₀ l (X ↘ Spec (CommRingCat.of k₀))
+            (HasCompactification.compactification _
+              (hf := hasCompactification_of_over (k₀ := k₀) _))).mapIso
+          ((_root_.DerivedCategory.singleFunctor _ 0).mapIso (F.constantTwistObjIso b) ≪≫
+            ((ProEtaleWeilSheaf.constantTwist k₀ l X b).mapDerivedCategorySingleFunctor 0).symm.app
+              F.obj) ≪≫
+          (ProEtaleWeilSheaf.mapDerivedCategoryConstantTwistCompRightDerivedLowerShriekIso k₀ l
+            (X ↘ Spec (CommRingCat.of k₀)) b _).app _) ≪≫
+      ((ProEtaleWeilSheaf.constantTwist k₀ l _ b).mapDerivedCategoryHomologyFunctorIso r).symm.app
+        _ ≪≫
+      (ProEtaleWeilSheaf.mkConstantTwistIso k₀ l _ _ b).symm)
+
+/-- **Compactly supported cohomology of a constant twist.** The compactly supported cohomology
+`H_cʳ(X ⊗ k̄, F ⊗ 𝓑_b)` of the constant Weil twist of `F` by a unit `b ∈ ℚ̄_ℓˣ` is
+`H_cʳ(X ⊗ k̄, F)` with the geometric Frobenius multiplied by `b`. -/
+theorem nonempty_equiv_compactlySupportedCohomology_constantTwist (F : WeilSheaf k₀ l X)
+    (b : (PadicAlgCl l)ˣ) (r : ℤ) :
+    Nonempty (((F.constantTwist b).compactlySupportedCohomology r).Equiv
+      ((F.compactlySupportedCohomology r).rescale b)) :=
+  ⟨(globalSectionsEquivOfIso (homologySheafDerivedLowerShriekConstantTwistIso F b r)).trans
+    (globalSectionsConstantTwistEquiv _ b)⟩
+
+end CompactSupport
 end WeilSheaf
 
 end AlgebraicGeometry
