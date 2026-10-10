@@ -924,3 +924,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 05:37 L: reviewed def-weil-pbc-japanese-domain (definition, no match): accepted.
 - 05:38 L: reviewed def-weil-pbc-nagata-ring (definition, no match): accepted.
 - 05:38 L: reviewed def-weil-pbc-serre-conditions-rk-sk (definition, no match): accepted.
+- 05:39 L: reviewed def-weil-pbc-relative-global-complete-intersection (definition, no match): accepted.

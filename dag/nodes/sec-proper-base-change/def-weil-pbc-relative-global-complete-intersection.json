@@ -2,7 +2,7 @@
  "id": "def-weil-pbc-relative-global-complete-intersection",
  "kind": "definition",
  "title": "Relative global complete intersection",
- "statement": "Let $R$ be a commutative ring, $n,c\\ge0$ integers and $f_1,\\dots,f_c\\in R[x_1,\\dots,x_n]$ [def-weil-pbc-mv-polynomial-ring]; let $T=R[x_1,\\dots,x_n]/(f_1,\\dots,f_c)$, an $R$-algebra. One says that *$T=R[x_1,\\dots,x_n]/(f_1,\\dots,f_c)$ is a relative global complete intersection* (over $R$) if every nonempty fibre of $\\operatorname{Spec}T\\to\\operatorname{Spec}R$ has dimension $n-c$: for every prime ideal $\\mathfrak p\\subset R$ whose fibre ring $T\\otimes_R\\kappa(\\mathfrak p)$ [def-weil-pbc-localization-at-prime] is nonzero, the Krull dimension [def-kun-topological-krull-dimension] of the topological space $\\operatorname{Spec}(T\\otimes_R\\kappa(\\mathfrak p))$ [def-weil-affine-spectrum] (homeomorphic to the fibre of $\\operatorname{Spec}T\\to\\operatorname{Spec}R$ over $\\mathfrak p$) equals $n-c$. A ring map $R\\to S$ is a *relative global complete intersection* if there are such $n,c,f_1,\\dots,f_c$ with $T$ a relative global complete intersection and an isomorphism of $R$-algebras $S\\cong T$.",
+ "statement": "Let $R$ be a commutative ring, $n,c\\ge0$ integers and $f_1,\\dots,f_c\\in R[x_1,\\dots,x_n]$ [def-weil-pbc-mv-polynomial-ring]; let $T=R[x_1,\\dots,x_n]/(f_1,\\dots,f_c)$, an $R$-algebra. One says that *$T=R[x_1,\\dots,x_n]/(f_1,\\dots,f_c)$ is a relative global complete intersection* (over $R$) if every nonempty fibre of $\\operatorname{Spec}T\\to\\operatorname{Spec}R$ has dimension $n-c$: for every prime ideal $\\mathfrak p\\subset R$ whose fibre ring $T\\otimes_R\\kappa(\\mathfrak p)$ [def-weil-pbc-localization-at-prime] is nonzero, the Krull dimension [def-kun-topological-krull-dimension] of the topological space $\\operatorname{Spec}(T\\otimes_R\\kappa(\\mathfrak p))$ [def-weil-affine-spectrum] equals $n-c$. A ring map $R\\to S$ is a *relative global complete intersection* if there are such $n,c,f_1,\\dots,f_c$ with $T$ a relative global complete intersection and an isomorphism of $R$-algebras $S\\cong T$ (equivalently, a surjective $R$-algebra homomorphism $R[x_1,\\dots,x_n]\\to S$ whose kernel is the ideal $(f_1,\\dots,f_c)$: this is what the source calls a presentation $S=R[x_1,\\dots,x_n]/(f_1,\\dots,f_c)$). Remark, not part of the definition: $\\operatorname{Spec}(T\\otimes_R\\kappa(\\mathfrak p))$ is homeomorphic to the fibre of $\\operatorname{Spec}T\\to\\operatorname{Spec}R$ over $\\mathfrak p$, and the fibre ring is nonzero exactly when that fibre is nonempty, so the condition says that every nonempty fibre has dimension $n-c$; if $c>n$ it says that $T=0$.",
  "source": {
   "document": "literature/stacks-project/algebra.tex",
   "place": "Algebra, Definition Tag 00SP (definition-relative-global-complete-intersection, line 36506; tag 00SP = algebra-definition-relative-global-complete-intersection in tags/tags)"
@@ -44,10 +44,73 @@
    "results": "empty, index: unavailable (not proof of absence; the grep above is)",
    "date": "2026-10-10",
    "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rn 'CompleteIntersection\\|RelativeGlobalCompleteIntersection\\|complete intersection' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/; grep -rn -i syntomic ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/; grep -rn 'stacks 00S' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/",
+   "results": "one hit only: the docstring of Algebra.Presentation.dimension (RingTheory/Extension/Presentation/Basic.lean:103, 'you should assume that the presentation is a complete intersection'); no declaration named *CompleteIntersection*, nothing on syntomic maps; @[stacks 00S2] only (Kaehler/JacobiZariski.lean:547-562, naive cotangent complex), no 00SP",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "the fibre-dimension condition: grep -rn 'krullDim' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/ | grep -i 'fiber\\|fibre'; Ideal.Fiber, preimageHomeomorphFiber, topologicalKrullDim_eq_ringKrullDim",
+   "results": "no predicate on the dimension of all fibres of an algebra; building blocks: Ideal.Fiber p S = p.ResidueField ⊗[R] S (RingTheory/LocalRing/ResidueField/Fiber.lean:66), PrimeSpectrum.preimageHomeomorphFiber (same file, line 212), ringKrullDim (RingTheory/KrullDimension/Basic.lean:30), topologicalKrullDim (Topology/KrullDimension.lean:39), PrimeSpectrum.topologicalKrullDim_eq_ringKrullDim (RingTheory/Spectrum/Prime/Topology.lean:1361)",
+   "date": "2026-10-10",
+   "verdict": "no match (building blocks only)"
+  },
+  {
+   "tool": "leansearch",
+   "query": "relative global complete intersection: presentation of an algebra with all nonempty fibres of dimension number of generators minus number of relations",
+   "results": "Algebra.Presentation.naive, Algebra.IsStandardSmoothOfRelativeDimension.mk, Algebra.Presentation.ofBijectiveAlgebraMap, Algebra.SubmersivePresentation.isStandardSmoothOfRelativeDimension, Algebra.Presentation.dimension, Algebra.Presentation, Algebra.Presentation.finitePresentation_of_isFinite (Mathlib.RingTheory.Extension.Presentation.Basic, Mathlib.RingTheory.Smooth.StandardSmooth)",
+   "date": "2026-10-10",
+   "verdict": "no match: presentations and their dimension, no fibre condition"
+  },
+  {
+   "tool": "leansearch",
+   "query": "ringKrullDim of Ideal.Fiber equals relative dimension for every prime",
+   "results": "IsLocalization.AtPrime.ringKrullDim_eq_height, IsLocalRing.maximalIdeal_primeHeight_eq_ringKrullDim, Ideal.primeHeight_le_ringKrullDim, PrimeSpectrum.topologicalKrullDim_eq_ringKrullDim, IsLocalRing.maximalIdeal_height_eq_ringKrullDim, ringKrullDim",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "Algebra.Presentation.dimension",
+   "results": "Algebra.Presentation.id_dimension, Algebra.Presentation.dimension, localizationAway_dimension_zero, dimension_reindex, dimension_mvPolynomial, dimension_ofAlgEquiv, ofBijectiveAlgebraMap_dimension (Mathlib.RingTheory.Extension.Presentation.Basic), PreSubmersivePresentation.dimension_comp_eq_dimension_add_dimension (…Presentation.Submersive)",
+   "date": "2026-10-10",
+   "verdict": "no match: no lemma relating the dimension of a presentation to fibre dimensions"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"CompleteIntersection\"",
+   "results": "none",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "complete intersection presentation R[x_1..x_n]/(f_1..f_c) whose fibres over every prime of R have Krull dimension n - c",
+   "results": "Algebra.IsStandardSmoothOfRelativeDimension.out, Algebra.SubmersivePresentation.isStandardSmoothOfRelativeDimension, Algebra.IsStandardSmoothOfRelativeDimension, Algebra.IsStandardSmooth.relativeDimension, Algebra.IsStandardSmooth.out, RingHom.IsStandardSmoothOfRelativeDimension, Algebra.SubmersivePresentation.isStandardSmooth, Algebra.IsStandardSmoothOfRelativeDimension.isStandardSmooth",
+   "date": "2026-10-10",
+   "verdict": "no match: standard smooth (Jacobian invertible) is a special case, not the fibre-dimension condition"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Krull dimension of the fibre ring S ⊗ κ(p) over a prime p of R, equidimensional fibres of an algebra",
+   "results": "IsLocalization.AtPrime.ringKrullDim_eq_height, Ring.KrullDimLE.of_isLocalization, Ring.krullDimLE_of_isLocalization_maximal, ringKrullDim_quotient, Module.ringKrullDim_quotient_add_one_of_mem_nonZeroDivisors, Ideal.height_eq_height_add_of_liesOver_of_hasGoingDown",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "local_search",
+   "query": "CompleteIntersection (project root ~/weil-conjectures-slopmaster2)",
+   "results": "empty, index: unavailable (not proof of absence; grep and loogle above are)",
+   "date": "2026-10-10",
+   "verdict": "no match"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "worker",
@@ -67,5 +130,22 @@
   }
  },
  "chapter": "sec-proper-base-change",
- "unit": "sk-thm-p1"
+ "unit": "sk-thm-p1",
+ "mathlib_candidate": {
+  "declaration": "Algebra.Presentation, Algebra.Presentation.dimension; with Ideal.Fiber, ringKrullDim / topologicalKrullDim, PrimeSpectrum.preimageHomeomorphFiber",
+  "file": "Mathlib/RingTheory/Extension/Presentation/Basic.lean",
+  "how": "No exact definition: Mathlib has no complete intersections (no declaration named *CompleteIntersection*, nothing syntomic, no @[stacks 00SP]). The data is a finite `Algebra.Presentation R S ι σ` (Basic.lean:58, a family of generators `val : ι → S` (Extension/Generators.lean:64-69) and relations `relation : σ → MvPolynomial ι R` with `Ideal.span (Set.range relation) = ker`, i.e. S ≅ R[x_ι]/(relations)) with `[Finite ι] [Finite σ]`; `P.dimension = Nat.card ι - Nat.card σ` (Basic.lean:96-107, read with sed -n 85,115p) is n − c, but in ℕ (truncated at 0 when c > n), and its docstring says it is meaningful only for complete intersections. Missing: the predicate itself, which would be `∀ (p : Ideal R) [p.IsPrime], Nontrivial (p.Fiber S) → ringKrullDim (p.Fiber S) = (Nat.card ι : ℤ) - Nat.card σ` (as WithBot ℕ∞ after excluding c > n), built from `Ideal.Fiber` (RingTheory/LocalRing/ResidueField/Fiber.lean:66, κ(p) ⊗[R] S, tensor factors in the other order), `ringKrullDim` (RingTheory/KrullDimension/Basic.lean:30) or `topologicalKrullDim (PrimeSpectrum _)` (Topology/KrullDimension.lean:39; equal by PrimeSpectrum.topologicalKrullDim_eq_ringKrullDim, RingTheory/Spectrum/Prime/Topology.lean:1361); the remark's homeomorphism with the fibre is `PrimeSpectrum.preimageHomeomorphFiber` (Fiber.lean:212). Lines read 2026-10-10."
+ },
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "def-weil-pbc-relative-global-complete-intersection",
+  "worker": "stage1",
+  "summary": "Definition node checked against Stacks Algebra Definition 00SP (definition-relative-global-complete-intersection, algebra.tex line 36506; tag verified in tags/tags): 'there exists a presentation S = R[x_1..x_n]/(f_1..f_c) and every nonempty fibre of Spec(S) → Spec(R) has dimension n − c'. The node agrees clause by clause: the presentation is an R-algebra isomorphism S ≅ T (now also spelled out as a surjection R[x] → S with kernel (f)), the fibre is taken through the fibre ring T ⊗_R κ(p) and its spectrum, nonempty = fibre ring nonzero. The parenthetical claim that Spec of the fibre ring is homeomorphic to the fibre (Algebra Remark 00E6) is moved into a remark marked as not part of the definition, together with the case c > n. The cited definition nodes say what is needed: def-weil-pbc-mv-polynomial-ring (R[x_1..x_n]), def-weil-pbc-localization-at-prime (κ(p) and the fibre ring Λ ⊗_R κ(p)), def-kun-topological-krull-dimension (Krull dimension of a space), def-weil-affine-spectrum (Spec as a space); all four are Mathlib leaves. The four citers (lem-…-smooth-jacobian (00TE), lem-…-smooth-retract-… (07CG), lem-…-syntomic-at-prime-… (00SY), lem-…-flat-smooth-fibre-smooth-at-prime (00TF)) use exactly the form 'T = R[x]/(f) is a relative global complete intersection', i.e. the fibre-dimension condition on the fixed presentation; flat-smooth-fibre step uses dim Spec(T ⊗ κ(p)) = n − c directly, which is the definition. Mathlib: no exact definition (three kinds of search recorded); candidate Algebra.Presentation with Algebra.Presentation.dimension plus Ideal.Fiber and ringKrullDim, recorded in mathlib_candidate. Status split with empty proof (reviewed definition without a match)."
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "result": "accepted",
+  "note": "definition checked against Stacks 00SP: fibre-dimension condition as stated; the homeomorphism claim moved to a remark; the ring-map form spelled out as a presentation. No Mathlib notion of complete intersections (candidate: Algebra.Presentation with its dimension and the fibre/Krull-dimension building blocks). Status split."
+ }
 }
