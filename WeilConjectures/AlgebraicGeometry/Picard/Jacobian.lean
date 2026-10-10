@@ -1747,7 +1747,7 @@ lemma specMap_algebraMap_comp_specMap_algebraMap (k K L : Type u) [CommRing k] [
 lemma map_map_eq_map_map_of_comp_eq {D : Type*} [Category D] (P : Dᵒᵖ ⥤ Type*)
     {A B B' E : D} (u : A ⟶ B) (v : B ⟶ E) (u' : A ⟶ B') (v' : B' ⟶ E) (h : u ≫ v = u' ≫ v')
     (x : P.obj (.op E)) : P.map u.op (P.map v.op x) = P.map u'.op (P.map v'.op x) := by
-  rw [← FunctorToTypes.map_comp_apply, ← FunctorToTypes.map_comp_apply, ← op_comp, ← op_comp, h]
+  rw [← Functor.map_comp_apply, ← Functor.map_comp_apply, ← op_comp, ← op_comp, h]
 
 /-- **`Pic^0_{C/k}` is represented at a finite separable level by a descent of `J_s`.** Let `J_s`
 represent the restriction of `Pic^0_{C/k}` to schemes over a separable closure `k_s`. Then there are

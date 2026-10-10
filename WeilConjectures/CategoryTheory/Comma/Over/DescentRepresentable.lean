@@ -61,7 +61,8 @@ noncomputable abbrev descentCoverPr₂ (p : X ⟶ Y) (T : Over Y) :
     rw [pullback.condition_assoc, pullback.condition])
 
 
-variable {V : Over X} (r : ((Over.map p).op ⋙ F).RepresentableBy V) {V₀ : Over Y} (q : V.left ⟶ V₀.left)
+variable {V : Over X} (r : ((Over.map p).op ⋙ F).RepresentableBy V) {V₀ : Over Y}
+  (q : V.left ⟶ V₀.left)
   (hq : IsPullback q V.hom V₀.hom p)
   (hinv : ∀ {T : C} (f₁ f₂ : T ⟶ X) (h : f₁ ≫ p = f₂ ≫ p) (a : Over.mk f₁ ⟶ V),
     (r.overTransport f₁ f₂ h a).left ≫ q = a.left ≫ q)
@@ -82,8 +83,10 @@ lemma descent_iff (T : Over Y) (a : Over.mk (pullback.snd T.hom p) ⟶ V) :
   have h : (fst₂ ≫ s) ≫ p = (snd₂ ≫ s) ≫ p := by
     simp only [Category.assoc]
     rw [← hc, ← Category.assoc, hc₂, Category.assoc]
-  let a₁ : Over.mk (fst₂ ≫ s) ⟶ V := (Over.homMk (U := Over.mk (fst₂ ≫ s)) (V := Over.mk s) fst₂ rfl) ≫ a
-  let a₂ : Over.mk (snd₂ ≫ s) ⟶ V := (Over.homMk (U := Over.mk (snd₂ ≫ s)) (V := Over.mk s) snd₂ rfl) ≫ a
+  let a₁ : Over.mk (fst₂ ≫ s) ⟶ V :=
+    (Over.homMk (U := Over.mk (fst₂ ≫ s)) (V := Over.mk s) fst₂ rfl) ≫ a
+  let a₂ : Over.mk (snd₂ ≫ s) ⟶ V :=
+    (Over.homMk (U := Over.mk (snd₂ ≫ s)) (V := Over.mk s) snd₂ rfl) ≫ a
   have w₁ : 𝟙 _ ≫ (fst₂ ≫ s) ≫ p = fst₂ ≫ π ≫ T.hom := by
     rw [Category.id_comp, Category.assoc, hc]
   have w₂ : 𝟙 _ ≫ (snd₂ ≫ s) ≫ p = fst₂ ≫ π ≫ T.hom := by
@@ -94,9 +97,11 @@ lemma descent_iff (T : Over Y) (a : Over.mk (pullback.snd T.hom p) ⟶ V) :
       rw [Category.id_comp]
       exact (Category.id_comp _).symm.trans w₂ |>.symm), by ext; simp [e₂],
     by ext; simp [e₂]⟩
-  have hPr₁ : descentCoverPr₁ p T = e₁ ≫ (Over.map p).map (Over.homMk (U := Over.mk (fst₂ ≫ s)) (V := Over.mk s) fst₂ rfl) := by
+  have hPr₁ : descentCoverPr₁ p T = e₁ ≫
+      (Over.map p).map (Over.homMk (U := Over.mk (fst₂ ≫ s)) (V := Over.mk s) fst₂ rfl) := by
     ext; simp [e₁, fst₂, π]
-  have hPr₂ : descentCoverPr₂ p T = e₂ ≫ (Over.map p).map (Over.homMk (U := Over.mk (snd₂ ≫ s)) (V := Over.mk s) snd₂ rfl) := by
+  have hPr₂ : descentCoverPr₂ p T = e₂ ≫
+      (Over.map p).map (Over.homMk (U := Over.mk (snd₂ ≫ s)) (V := Over.mk s) snd₂ rfl) := by
     ext; simp [e₂, snd₂, π]
   have he : e₁ = e₂ ≫ overMapHomMkId (fst₂ ≫ s) (snd₂ ≫ s) h := by
     ext; simp [e₁, e₂]
@@ -161,7 +166,8 @@ theorem nonempty_representableBy_of_descent
     let a := toPt T (F.map (descentCoverπ p T).op x)
     have ha : F.map (descentCoverPr₁ p T).op (r.homEquiv a) =
         F.map (descentCoverPr₂ p T).op (r.homEquiv a) := by
-      have hpr : descentCoverPr₁ p T ≫ descentCoverπ p T = descentCoverPr₂ p T ≫ descentCoverπ p T := by
+      have hpr : descentCoverPr₁ p T ≫ descentCoverπ p T =
+          descentCoverPr₂ p T ≫ descentCoverπ p T := by
         ext
         exact pullback.condition
       simp only [a, toPt, Equiv.apply_symm_apply, ← ConcreteCategory.comp_apply, ← Functor.map_comp,
