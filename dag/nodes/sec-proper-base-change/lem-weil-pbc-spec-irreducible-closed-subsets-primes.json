@@ -1,0 +1,68 @@
+{
+ "id": "lem-weil-pbc-spec-irreducible-closed-subsets-primes",
+ "kind": "statement",
+ "title": "Closures of points and irreducible closed subsets of the spectrum of a ring",
+ "statement": "Let $R$ be a commutative ring and $X=\\operatorname{Spec}R$ [def-weil-affine-spectrum] its set of prime ideals with the Zariski topology, whose closed sets are the sets $V(I)=\\{\\mathfrak p\\in X: I\\subseteq\\mathfrak p\\}$ for ideals $I\\subseteq R$. Then: (1) for every prime $\\mathfrak p\\subset R$ the closure of the one-point set $\\{\\mathfrak p\\}$ in $X$ is $V(\\mathfrak p)$; in particular, for primes $\\mathfrak p,\\mathfrak p'$ one has $\\mathfrak p'\\in V(\\mathfrak p)$ iff $\\mathfrak p\\subseteq\\mathfrak p'$, and $V(\\mathfrak p)\\subseteq V(\\mathfrak p')$ iff $\\mathfrak p'\\subseteq\\mathfrak p$; (2) a subset $Z\\subseteq X$ is closed and irreducible [def-weil-irreducible-components] if and only if $Z=V(\\mathfrak p)$ for some prime ideal $\\mathfrak p\\subset R$, and this prime is unique.",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Algebra, Lemma Tag 00ES (label lemma-irreducible, line 4665), parts (1) and (2); the uniqueness and the inclusion criterion follow from (1) since $\\mathfrak p\\in V(\\mathfrak p)$; tag verified in stacks-project/tags/tags"
+ },
+ "stmt_deps": [
+  "def-weil-affine-spectrum",
+  "def-weil-irreducible-components"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "closure of a point in the prime spectrum is the zero locus of the prime; irreducible closed subsets of Spec R correspond to prime ideals",
+   "results": "PrimeSpectrum.quasiSober, PrimeSpectrum.closure_singleton, PrimeSpectrum.zeroLocus, PrimeSpectrum.vanishingIdeal_isClosed_isIrreducible, PrimeSpectrum.zeroLocus_vanishingIdeal_eq_closure, PrimeSpectrum.isClosed_iff_zeroLocus_ideal (Mathlib.RingTheory.Spectrum.Prime.Topology)",
+   "date": "2026-10-10",
+   "verdict": "match: closure_singleton for (1); pointsEquivIrreducibleCloseds / vanishingIdeal_isClosed_isIrreducible for (2)"
+  },
+  {
+   "tool": "loogle",
+   "query": "PrimeSpectrum.pointsEquivIrreducibleCloseds",
+   "results": "PrimeSpectrum.pointsEquivIrreducibleCloseds (R) : PrimeSpectrum R ≃o (TopologicalSpace.IrreducibleCloseds (PrimeSpectrum R))ᵒᵈ (Mathlib.RingTheory.Spectrum.Prime.Topology)",
+   "date": "2026-10-10",
+   "verdict": "match for (2)"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -nE 'theorem closure_singleton|pointsEquivIrreducibleCloseds|isIrreducible_iff_vanishingIdeal|le_iff_mem_closure|le_iff_specializes' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/RingTheory/Spectrum/Prime/Topology.lean",
+   "results": "line 173 closure_singleton; line 258 isIrreducible_iff_vanishingIdeal_isPrime; line 825 le_iff_mem_closure; line 830 le_iff_specializes; line 971 pointsEquivIrreducibleCloseds",
+   "date": "2026-10-10",
+   "verdict": "match"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "PrimeSpectrum.closure_singleton; PrimeSpectrum.pointsEquivIrreducibleCloseds",
+  "file": "Mathlib/RingTheory/Spectrum/Prime/Topology.lean",
+  "line": 173,
+  "how": "one declaration per clause: (1) `theorem closure_singleton (x) : closure ({x} : Set (PrimeSpectrum R)) = zeroLocus x.asIdeal` (line 173), and the inclusion criterion is `le_iff_mem_closure` (line 825); (2) `protected def pointsEquivIrreducibleCloseds : PrimeSpectrum R ≃o (TopologicalSpace.IrreducibleCloseds (PrimeSpectrum R))ᵒᵈ` (line 971), an order isomorphism from primes to irreducible closed subsets (sending p to closure {p} = zeroLocus p), whose bijectivity is existence and uniqueness of p. Mathlib's IsIrreducible is the node's closed-cover notion (def-weil-irreducible-components). Lines read by sed -n 2026-10-10."
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-closed-point-dimension-local-ring",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lead_note": "L 2026-10-10: composed Mathlib leaf (closure_singleton 173, le_iff_mem_closure 825, pointsEquivIrreducibleCloseds 971, Spectrum/Prime/Topology.lean); lines verified."
+}

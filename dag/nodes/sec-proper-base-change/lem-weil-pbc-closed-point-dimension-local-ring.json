@@ -5,7 +5,7 @@
  "statement": "Let $k$ be a field, $S$ a finitely generated $k$-algebra (a quotient of a polynomial ring $k[x_1,\\dots,x_n]$ [def-weil-pbc-mv-polynomial-ring]) and $\\mathfrak m\\subset S$ a maximal ideal, with localization $S_{\\mathfrak m}$ [def-weil-pbc-localization-at-prime]. Then the Krull dimension of the topological space $\\operatorname{Spec}S$ [def-weil-affine-spectrum] at the point $\\mathfrak m$ [def-kun-topological-dimension-at-point] equals the Krull dimension of the ring $S_{\\mathfrak m}$ [def-weil-pbc-krull-dimension-ring].",
  "source": {
   "document": "literature/stacks-project/algebra.tex",
-  "place": "Algebra, Lemma Tag 00OU (lemma-dimension-closed-point-finite-type-field, line 27855); its proof is a special case of Lemma 00OS (lemma-dimension-at-a-point-finite-type-over-field)"
+  "place": "Algebra, Lemma Tag 00OU (label lemma-dimension-closed-point-finite-type-field, line 27855), whose proof is 'a special case of' Lemma Tag 00OT (label lemma-dimension-at-a-point-finite-type-over-field, line 27787, equality of (1) and (3) for p = m); tags verified in stacks-project/tags/tags"
  },
  "stmt_deps": [
   "def-weil-pbc-mv-polynomial-ring",
@@ -14,9 +14,107 @@
   "def-kun-topological-dimension-at-point",
   "def-weil-pbc-krull-dimension-ring"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Write $X=\\operatorname{Spec}S$ [def-weil-affine-spectrum] and $V(I)=\\{\\mathfrak p\\in X:I\\subseteq\\mathfrak p\\}$ for an ideal $I\\subseteq S$; these are the closed subsets of $X$. The field $k$ is a Noetherian ring [def-weil-pbc-noetherian-ring] (its only ideals are $0$ and $k$), so the finite type $k$-algebra $S$ is Noetherian [lem-weil-pbc-finite-type-algebra-noetherian], hence has only finitely many minimal prime ideals $\\mathfrak q_1,\\ldots,\\mathfrak q_r$ [lem-weil-pbc-noetherian-finitely-many-minimal-primes]. Since $\\mathfrak m$ is a prime ideal, $S\\neq0$.",
+   "uses": [
+    "def-weil-affine-spectrum",
+    "def-weil-pbc-noetherian-ring",
+    "lem-weil-pbc-finite-type-algebra-noetherian",
+    "lem-weil-pbc-noetherian-finitely-many-minimal-primes"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra, proof of Lemma 00OT (lemma-dimension-at-a-point-finite-type-over-field, lines 27803-27852), specialized to the maximal ideal p = m as Lemma 00OU says: 'There are finitely many of them (see Lemmas 00FN lemma-obvious-Noetherian and 00FR lemma-Noetherian-topology)'"
+   }
+  },
+  {
+   "text": "Every open subset $W\\subseteq X$ with $\\mathfrak m\\in W$ contains every prime ideal $\\mathfrak p\\subseteq\\mathfrak m$ of $S$: by [lem-weil-pbc-spec-irreducible-closed-subsets-primes] (1), $\\mathfrak m\\in V(\\mathfrak p)=\\overline{\\{\\mathfrak p\\}}$, so the open neighbourhood $W$ of $\\mathfrak m$ meets $\\{\\mathfrak p\\}$, i.e. $\\mathfrak p\\in W$.",
+   "uses": [
+    "lem-weil-pbc-spec-irreducible-closed-subsets-primes"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra, proof of Lemma 00OT (lemma-dimension-at-a-point-finite-type-over-field, lines 27803-27852), specialized to the maximal ideal p = m as Lemma 00OU says: the point x lies in every open W considered there, and the irreducible components of W are the Z_i meeting W"
+   }
+  },
+  {
+   "text": "Lower bound: $\\dim W\\ge\\dim(S_{\\mathfrak m})$ for every open $W\\subseteq X$ with $\\mathfrak m\\in W$, where $\\dim W$ is the Krull dimension of $W$ with the subspace topology [def-kun-topological-krull-dimension]. Let $\\mathfrak p_0\\subsetneq\\cdots\\subsetneq\\mathfrak p_t$ be a chain of primes of $S$ with $\\mathfrak p_t\\subseteq\\mathfrak m$. By step 2 every $\\mathfrak p_j$ lies in $W$. Put $Y_j=V(\\mathfrak p_j)\\cap W$. The closure of $\\{\\mathfrak p_j\\}$ in the subspace $W$ is $\\overline{\\{\\mathfrak p_j\\}}\\cap W=V(\\mathfrak p_j)\\cap W=Y_j$ [lem-weil-pbc-spec-irreducible-closed-subsets-primes] (1); so $Y_j$ is closed in $W$, and irreducible as the closure in $W$ of the irreducible one-point set $\\{\\mathfrak p_j\\}$ [lem-weil-pbc-irreducible-closure]. We have $Y_t\\subseteq\\cdots\\subseteq Y_0$ since $V(\\mathfrak p_{j+1})\\subseteq V(\\mathfrak p_j)$, and the inclusions are strict: $\\mathfrak p_j\\in Y_j$ but $\\mathfrak p_j\\notin V(\\mathfrak p_{j+1})$ because $\\mathfrak p_{j+1}\\not\\subseteq\\mathfrak p_j$. So $Y_t\\subsetneq\\cdots\\subsetneq Y_0$ is a chain of irreducible closed subsets of $W$ of length $t$, and $\\dim W\\ge t$. Taking the supremum over all such chains, $\\dim W\\ge\\dim(S_{\\mathfrak m})$ by [lem-weil-pbc-localization-dimension-chains-below-prime].",
+   "uses": [
+    "def-kun-topological-krull-dimension",
+    "lem-weil-pbc-spec-irreducible-closed-subsets-primes",
+    "lem-weil-pbc-irreducible-closure",
+    "lem-weil-pbc-localization-dimension-chains-below-prime"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra, proof of Lemma 00OT (lemma-dimension-at-a-point-finite-type-over-field, lines 27803-27852), specialized to the maximal ideal p = m as Lemma 00OU says: 'there is a chain of irreducible closed subsets of length equal to dim(Z_i) in the open W_i'; here the point m itself is a closed point of each W_i, so the Jacobson property used there for a general p is not needed, and the chain is taken directly below m"
+   }
+  },
+  {
+   "text": "The neighbourhood $U$. Let $I'=\\{i:\\mathfrak q_i\\subseteq\\mathfrak m\\}$, $T=\\bigcup_{i\\notin I'}V(\\mathfrak q_i)$ and $U=X\\setminus T$. As a finite union of closed sets $T$ is closed, so $U$ is open; and $\\mathfrak m\\notin V(\\mathfrak q_i)$ for $i\\notin I'$ by the definition of $I'$, so $\\mathfrak m\\in U$. Every $V(\\mathfrak q_i)$ with $i\\notin I'$ is contained in $T$, hence disjoint from $U$.",
+   "uses": [
+    "def-weil-affine-spectrum"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra, proof of Lemma 00OT (lemma-dimension-at-a-point-finite-type-over-field, lines 27803-27852), specialized to the maximal ideal p = m as Lemma 00OU says: 'Let I' = {i | x in Z_i}, and let T = union of the Z_i, i not in I'. Then U = X minus T is an open subset of X containing the point x.' (Z_i = V(q_i), Lemma 00ES (3))"
+   }
+  },
+  {
+   "text": "Upper bound: $\\dim U\\le\\dim(S_{\\mathfrak m})$. Let $Y_0\\subsetneq\\cdots\\subsetneq Y_t$ be a chain of irreducible closed subsets of $U$ [def-kun-topological-krull-dimension]. Each $Y_j$ is irreducible also as a subset of $X$ (its subspace topology from $U$ and from $X$ agree), so its closure $\\overline{Y_j}$ in $X$ is irreducible [lem-weil-pbc-irreducible-closure] and closed. Since $Y_j$ is closed in $U$, $Y_j=F\\cap U$ for a closed $F\\subseteq X$, so $\\overline{Y_j}\\subseteq F$ and $\\overline{Y_j}\\cap U=Y_j$; hence $\\overline{Y_0}\\subsetneq\\cdots\\subsetneq\\overline{Y_t}$. By [lem-weil-pbc-spec-irreducible-closed-subsets-primes] (2) there are primes $P_j$ with $\\overline{Y_j}=V(P_j)$, and by its part (1) the strict inclusions give $P_t\\subsetneq\\cdots\\subsetneq P_0$. By [lem-weil-pbc-prime-contains-minimal-prime] (with $I=0$) $P_t$ contains a minimal prime $\\mathfrak q$ of $S$, which is one of $\\mathfrak q_1,\\ldots,\\mathfrak q_r$ (step 1). As $Y_t\\neq\\emptyset$ (irreducible sets are nonempty) and $Y_t\\subseteq V(P_t)\\subseteq V(\\mathfrak q)$, the set $V(\\mathfrak q)$ meets $U$, so by step 4 $\\mathfrak q=\\mathfrak q_i$ with $i\\in I'$, i.e. $\\mathfrak q\\subseteq\\mathfrak m$. Now let $\\bar S=S/\\mathfrak q$: an integral domain ($\\mathfrak q$ is prime), a finite type $k$-algebra (the composite of a surjection $k[x_1,\\dots,x_n]\\to S$ with $S\\to\\bar S$ is surjective) [def-weil-pbc-finite-type-algebra], with the maximal ideal $\\bar{\\mathfrak m}=\\mathfrak m/\\mathfrak q$. The primes of $\\bar S$ are the $P/\\mathfrak q$ for the primes $P\\supseteq\\mathfrak q$ of $S$, with inclusions preserved (correspondence of ideals of a quotient, and $\\bar S/(P/\\mathfrak q)\\cong S/P$). So $P_t/\\mathfrak q\\subsetneq\\cdots\\subsetneq P_0/\\mathfrak q$ is a chain of primes of $\\bar S$ and $t\\le\\dim\\bar S$ [def-weil-pbc-krull-dimension-ring]. By [lem-weil-pbc-finite-type-domain-dimension-local-ring], $\\dim\\bar S=\\dim(\\bar S_{\\bar{\\mathfrak m}})$, and by [lem-weil-pbc-localization-dimension-chains-below-prime] the latter is the supremum of the lengths $s$ of chains $P'_0\\subsetneq\\cdots\\subsetneq P'_s\\subseteq\\bar{\\mathfrak m}$ of primes of $\\bar S$. Each such chain is the image of a chain of primes $\\mathfrak q\\subseteq P''_0\\subsetneq\\cdots\\subsetneq P''_s\\subseteq\\mathfrak m$ of $S$, so $s\\le\\dim(S_{\\mathfrak m})$ by [lem-weil-pbc-localization-dimension-chains-below-prime] applied to $S$ and $\\mathfrak m$. Hence $t\\le\\dim(S_{\\mathfrak m})$ for every chain, i.e. $\\dim U\\le\\dim(S_{\\mathfrak m})$.",
+   "uses": [
+    "def-kun-topological-krull-dimension",
+    "lem-weil-pbc-irreducible-closure",
+    "lem-weil-pbc-spec-irreducible-closed-subsets-primes",
+    "lem-weil-pbc-prime-contains-minimal-prime",
+    "def-weil-pbc-finite-type-algebra",
+    "def-weil-pbc-krull-dimension-ring",
+    "lem-weil-pbc-finite-type-domain-dimension-local-ring",
+    "lem-weil-pbc-localization-dimension-chains-below-prime"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra, proof of Lemma 00OT (lemma-dimension-at-a-point-finite-type-over-field, lines 27803-27852), specialized to the maximal ideal p = m as Lemma 00OU says: 'For any open W in U with x in W the irreducible components of W are the W_i = Z_i cap W for i in I'', 'Since W_i in Z_i we have dim(W_i) <= dim(Z_i)', and 'the dimension of S_m is the maximum of the dimensions of the Z_i passing through x_0' via Lemma 00OS (lemma-dimension-spell-it-out); here x_0 = x = m"
+   }
+  },
+  {
+   "text": "Conclusion. By definition [def-kun-topological-dimension-at-point], $\\dim_{\\mathfrak m}X$ is the minimum of $\\dim W$ over the open $W\\ni\\mathfrak m$. Step 3 gives $\\dim W\\ge\\dim(S_{\\mathfrak m})$ for all of them, and the open $U\\ni\\mathfrak m$ of step 4 has $\\dim U\\le\\dim(S_{\\mathfrak m})$ by step 5. Hence $\\dim_{\\mathfrak m}X=\\dim U=\\dim(S_{\\mathfrak m})$.",
+   "uses": [
+    "def-kun-topological-dimension-at-point"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra, Lemma 00OU (line 27855): 'This is a special case of Lemma 00OT', equality of the numbers (1) and (3) of 00OT for p = m, where the only maximal ideal containing m is m"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-affine-spectrum",
+  "def-weil-pbc-noetherian-ring",
+  "lem-weil-pbc-finite-type-algebra-noetherian",
+  "lem-weil-pbc-noetherian-finitely-many-minimal-primes",
+  "lem-weil-pbc-spec-irreducible-closed-subsets-primes",
+  "def-kun-topological-krull-dimension",
+  "lem-weil-pbc-irreducible-closure",
+  "lem-weil-pbc-localization-dimension-chains-below-prime",
+  "lem-weil-pbc-prime-contains-minimal-prime",
+  "def-weil-pbc-finite-type-algebra",
+  "def-weil-pbc-krull-dimension-ring",
+  "lem-weil-pbc-finite-type-domain-dimension-local-ring",
+  "def-kun-topological-dimension-at-point"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Algebra, Lemma 00OU (line 27855) and the proof of Lemma 00OT (lines 27803-27852) specialized to p = m: the two inequalities dim W >= dim S_m and dim U <= dim S_m of that proof are written out directly for the closed point m (no Jacobson argument needed), using Lemma 00OS for the domains S/q_i"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -38,10 +136,38 @@
    "results": "QuasiFinite/Basic.lean, Jacobson/Artinian.lean (dimension zero statements only); KrullDimension/Polynomial.lean (dim of polynomial rings over Noetherian rings); no notion of dimension of a space at a point",
    "date": "2026-10-10",
    "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "finitely generated algebra over a field which is a domain: Krull dimension equals dimension of localization at any maximal ideal",
+   "results": "Ring.krullDimLE_of_isLocalization_maximal, IsLocalization.AtPrime.ringKrullDim_eq_height, Ideal.primeHeight_eq_ringKrullDim_iff, Module.finite_iff_krullDimLE_zero, IsPrincipalIdealRing.ringKrullDim_eq_one, IsLocalRing.maximalIdeal_primeHeight_eq_ringKrullDim (Mathlib.RingTheory.Ideal.Height)",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Krull dimension of the topological space Spec S at a closed point equals Krull dimension of the local ring, finite type algebra over a field",
+   "results": "Ring.KrullDimLE.of_isLocalization, Ring.krullDimLE_of_isLocalization_maximal, IsLocalization.AtPrime.ringKrullDim_eq_height, PrimeSpectrum.topologicalKrullDim_eq_ringKrullDim (Mathlib.RingTheory.Spectrum.Prime.Topology), IsLocalRing.maximalIdeal_primeHeight_eq_ringKrullDim, ringKrullDim_quotient",
+   "date": "2026-10-10",
+   "verdict": "no match: Mathlib has the global equality dim Spec R = dim R but no dimension of a space at a point"
+  },
+  {
+   "tool": "local_search",
+   "query": "topologicalKrullDim (project ~/weil-conjectures-slopmaster2)",
+   "results": "Mathlib: topologicalKrullDim (Mathlib/Topology/KrullDimension.lean) only; the local dimension topologicalKrullDimAt and IsOpen.topologicalKrullDimAt_eq exist only in the source repository (WeilConjectures/Mathlib/Topology/KrullDimension.lean line 333), not in Mathlib (index: unavailable)",
+   "date": "2026-10-10",
+   "verdict": "no match in Mathlib"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rn 'topologicalKrullDimAt\\|dimAt\\|krullDimAt' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib",
+   "results": "none",
+   "date": "2026-10-10",
+   "verdict": "no match"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "worker",
@@ -61,5 +187,17 @@
   }
  },
  "chapter": "sec-proper-base-change",
- "unit": "sk-thm-p1"
+ "unit": "sk-thm-p1",
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "lem-weil-pbc-closed-point-dimension-local-ring",
+  "worker": "stage1",
+  "summary": "Read Algebra 00OU, 00OT (its proof), 00OS, 00E0, 00ES, 00E3, 00KF in algebra.tex and the citer lem-weil-pbc-smooth-retract-standard-smooth (step 8(b),(c): uses exactly dim_m Spec T = dim T_m for a maximal ideal m of a finite type k-algebra, which the statement gives). Statement kept; source place corrected (00OU's proof refers to 00OT = lemma-dimension-at-a-point-finite-type-over-field; the node said 00OS for that label, but 00OS is lemma-dimension-spell-it-out). Proof written in six steps following 00OT's proof specialized to p = m: finitely many minimal primes; opens through m contain the primes below m; lower bound dim W >= dim S_m through closures of points; the neighbourhood U = X minus the components not through m; upper bound dim U <= dim S_m through the minimal prime below a chain and 00OS for S/q; conclusion. The Jacobson argument of 00OT is not needed since m is closed. New nodes: 00OS (unsplit, absent from Mathlib), and three Mathlib leaves (00E0(4) Ideal.exists_minimalPrimes_le; 00ES(1),(2) PrimeSpectrum.closure_singleton and pointsEquivIrreducibleCloseds; dim R_p = height by IsLocalization.AtPrime.ringKrullDim_eq_height with Order.height)."
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "result": "accepted",
+  "note": "6 steps following the proof of Algebra 00OT specialized to the maximal ideal (as 00OU says): finitely many minimal primes; opens containing m contain the primes below m (new leaf for 00ES: closure_singleton 173, le_iff_mem_closure 825, pointsEquivIrreducibleCloseds 971 in Spectrum/Prime/Topology.lean, verified by L); the lower bound through chains below m (new leaf for the height as dim R_p: ringKrullDim_eq_height, Height.lean:418 verified); the open U avoiding the components not through m; the upper bound through a minimal prime q below m (new leaf exists_minimalPrimes_le, MinimalPrime/Basic.lean:75 verified; distinct from the existing node on existence of minimal primes) and a new unsplit node for 00OS (finite type domain: dim S_m = dim S); conclusion. Statement unchanged; the source field's 00OS/00OT mix-up corrected."
+ }
 }

@@ -1,0 +1,75 @@
+{
+ "id": "lem-weil-pbc-localization-dimension-chains-below-prime",
+ "kind": "statement",
+ "title": "The dimension of the localization at a prime is the length of the longest chain of primes below it",
+ "statement": "Let $R$ be a commutative ring, $\\mathfrak p\\subset R$ a prime ideal and $R_{\\mathfrak p}$ the localization of $R$ at $\\mathfrak p$ [def-weil-pbc-localization-at-prime]. Then the Krull dimension [def-weil-pbc-krull-dimension-ring] of $R_{\\mathfrak p}$ is the supremum, in $\\{0,1,2,\\ldots,\\infty\\}$, of the integers $t\\ge0$ for which there is a chain $\\mathfrak p_0\\subsetneq\\mathfrak p_1\\subsetneq\\cdots\\subsetneq\\mathfrak p_t$ of prime ideals of $R$ with $\\mathfrak p_t\\subseteq\\mathfrak p$ (the height of $\\mathfrak p$).",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Algebra, Definition Tag 00KF (label definition-height, line 14347: the height of p is dim R_p) together with Lemma Tag 00E3 (label lemma-spec-localization, line 3163: the primes of S^{-1}R are the primes of R not meeting S, inclusion-preserving); tags verified in stacks-project/tags/tags"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-localization-at-prime",
+  "def-weil-pbc-krull-dimension-ring"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Krull dimension of localization at prime p equals height of p, supremum of lengths of chains of primes below p",
+   "results": "IsLocalization.AtPrime.ringKrullDim_eq_height, Ideal.primeHeight, Ideal.primeHeight_le_ringKrullDim, IsLocalRing.maximalIdeal_primeHeight_eq_ringKrullDim, ringKrullDim, IsLocalization.primeHeight_comap (Mathlib.RingTheory.Ideal.Height)",
+   "date": "2026-10-10",
+   "verdict": "match: IsLocalization.AtPrime.ringKrullDim_eq_height"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "the Krull dimension of the localization of R at a prime ideal p equals the height of p",
+   "results": "IsLocalization.AtPrime.ringKrullDim_eq_height, Ring.KrullDimLE.of_isLocalization, Ring.krullDimLE_of_isLocalization_maximal, Ideal.primeHeight_le_ringKrullDim, ringKrullDim_le_iff_height_le (Mathlib.RingTheory.Ideal.Height)",
+   "date": "2026-10-10",
+   "verdict": "match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -n 'ringKrullDim_eq_height\\|height_eq_orderHeight\\|def Ideal.height' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/RingTheory/Ideal/Height.lean; grep -n 'def height' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/Order/KrullDimension.lean",
+   "results": "Height.lean line 418 IsLocalization.AtPrime.ringKrullDim_eq_height; line 44 PrimeSpectrum.height_eq_orderHeight; line 36 Ideal.height; Order/KrullDimension.lean line 87 Order.height",
+   "date": "2026-10-10",
+   "verdict": "match"
+  },
+  {
+   "tool": "local_search",
+   "query": "PrimeSpectrum.height_eq_orderHeight (project ~/weil-conjectures-slopmaster2)",
+   "results": "PrimeSpectrum.height_eq_orderHeight in .lake/packages/mathlib/Mathlib/RingTheory/Ideal/Height.lean (index: unavailable, name found)",
+   "date": "2026-10-10",
+   "verdict": "exists"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "IsLocalization.AtPrime.ringKrullDim_eq_height",
+  "file": "Mathlib/RingTheory/Ideal/Height.lean",
+  "line": 418,
+  "how": "specializes in one line: `IsLocalization.AtPrime.ringKrullDim_eq_height (I : Ideal R) [I.IsPrime] (A) [IsLocalization.AtPrime A I] : ringKrullDim A = I.height` (Height.lean line 418), rewritten by `PrimeSpectrum.height_eq_orderHeight : p.asIdeal.height = Order.height p` (Height.lean line 44), where `Order.height a = ⨆ (p : LTSeries α) (_ : p.last ≤ a), p.length` (Mathlib/Order/KrullDimension.lean line 87) is, on PrimeSpectrum R ordered by inclusion, the supremum of the lengths t of chains p_0 < ... < p_t with p_t ≤ p, as in the node. Lines read by sed -n 2026-10-10."
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-closed-point-dimension-local-ring",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lead_note": "L 2026-10-10: Mathlib leaf (IsLocalization.AtPrime.ringKrullDim_eq_height, Ideal/Height.lean:418, with height_eq_orderHeight); line verified."
+}

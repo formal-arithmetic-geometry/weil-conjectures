@@ -1,0 +1,65 @@
+{
+ "id": "lem-weil-pbc-prime-contains-minimal-prime",
+ "kind": "statement",
+ "title": "A prime containing an ideal contains a minimal prime over that ideal",
+ "statement": "Let $R$ be a commutative ring, $I\\subseteq R$ an ideal and $\\mathfrak p\\subset R$ a prime ideal with $I\\subseteq\\mathfrak p$. Then there is a prime ideal $\\mathfrak q$ with $I\\subseteq\\mathfrak q\\subseteq\\mathfrak p$ which is minimal over $I$, i.e. no prime ideal $\\mathfrak q'$ satisfies $I\\subseteq\\mathfrak q'\\subsetneq\\mathfrak q$. For $I=0$: every prime ideal of $R$ contains a minimal prime ideal of $R$ (a prime ideal containing no strictly smaller prime ideal).",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Algebra, Lemma Tag 00E0 (label lemma-Zariski-topology, line 2987), part (4); tag verified in stacks-project/tags/tags"
+ },
+ "stmt_deps": [],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "every prime ideal containing an ideal I contains a minimal prime over I",
+   "results": "Ideal.exists_minimalPrimes_le, Ideal.minimalPrimes_isPrime, Ideal.minimalPrimes, Ring.KrullDimLE.mem_minimalPrimes_iff, Ideal.minimalPrimes_eq_subsingleton_self (Mathlib.RingTheory.Ideal.MinimalPrime.Basic)",
+   "date": "2026-10-10",
+   "verdict": "match: Ideal.exists_minimalPrimes_le"
+  },
+  {
+   "tool": "loogle",
+   "query": "Ideal.minimalPrimes, Ideal.IsPrime, |- ∃ p ∈ _, p ≤ _",
+   "results": "Ideal.exists_minimalPrimes_le (Mathlib.RingTheory.Ideal.MinimalPrime.Basic)",
+   "date": "2026-10-10",
+   "verdict": "match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rn 'exists_minimalPrimes_le\\|minimalPrimes' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/RingTheory/Ideal/MinimalPrime/Basic.lean",
+   "results": "line 75: theorem Ideal.exists_minimalPrimes_le [J.IsPrime] (e : I ≤ J) : ∃ p ∈ I.minimalPrimes, p ≤ J; line 57: Ideal.minimalPrimes (abbrev, primes minimal over I); line 61: minimalPrimes R (minimal primes of R)",
+   "date": "2026-10-10",
+   "verdict": "match"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "Ideal.exists_minimalPrimes_le",
+  "file": "Mathlib/RingTheory/Ideal/MinimalPrime/Basic.lean",
+  "line": 75,
+  "how": "exact: `theorem Ideal.exists_minimalPrimes_le {R} [CommSemiring R] {I J : Ideal R} [J.IsPrime] (e : I ≤ J) : ∃ p ∈ I.minimalPrimes, p ≤ J` (line 75), where `I.minimalPrimes` (line 57) is the set of primes minimal among the primes containing I; the case I = 0 is the minimal primes `minimalPrimes R` (line 61). Lines read by sed -n 2026-10-10."
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-closed-point-dimension-local-ring",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lead_note": "L 2026-10-10: Mathlib leaf (Ideal.exists_minimalPrimes_le, MinimalPrime/Basic.lean:75); line verified."
+}

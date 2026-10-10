@@ -1,0 +1,77 @@
+{
+ "id": "lem-weil-pbc-finite-type-domain-dimension-local-ring",
+ "kind": "statement",
+ "title": "A finite type domain over a field has the dimension of each of its local rings at maximal ideals",
+ "statement": "Let $k$ be a field and $S$ a finite type $k$-algebra [def-weil-pbc-finite-type-algebra] which is an integral domain. Then for every maximal ideal $\\mathfrak m\\subset S$ the Krull dimension [def-weil-pbc-krull-dimension-ring] of the localization $S_{\\mathfrak m}$ [def-weil-pbc-localization-at-prime] equals the Krull dimension of $S$: $\\dim(S_{\\mathfrak m})=\\dim(S)$. Equivalently, every maximal chain of prime ideals of $S$ has length $\\dim(S)$.",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Algebra, Lemma Tag 00OS (label lemma-dimension-spell-it-out, line 27763); its proof uses Proposition 00OQ (proposition-finite-gl-dim-polynomial-ring) and Lemma 00OR (lemma-dimension-height-polynomial-ring); tags verified in stacks-project/tags/tags"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-finite-type-algebra",
+  "def-weil-pbc-localization-at-prime",
+  "def-weil-pbc-krull-dimension-ring"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "dimension of the localization at a maximal ideal of a finitely generated domain over a field equals Krull dimension of the domain (catenary, equicodimensional)",
+   "results": "IsLocalRing.maximalIdeal_height_eq_ringKrullDim, Ring.krullDimLE_of_isLocalization_maximal, IsLocalization.AtPrime.ringKrullDim_eq_height, IsLocalRing.maximalIdeal_primeHeight_eq_ringKrullDim, Ideal.primeHeight_eq_ringKrullDim_iff (Mathlib.RingTheory.Ideal.Height), Ring.DimensionLEOne.localization",
+   "date": "2026-10-10",
+   "verdict": "no match (local rings and heights in general only)"
+  },
+  {
+   "tool": "leansearch",
+   "query": "finitely generated algebra over a field which is a domain: Krull dimension equals dimension of localization at any maximal ideal",
+   "results": "Ring.krullDimLE_of_isLocalization_maximal, IsLocalization.AtPrime.ringKrullDim_eq_height, Ideal.primeHeight_eq_ringKrullDim_iff, Module.finite_iff_krullDimLE_zero, IsPrincipalIdealRing.ringKrullDim_eq_one, IsLocalRing.maximalIdeal_primeHeight_eq_ringKrullDim",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "every maximal ideal of a finitely generated domain over a field has height equal to the Krull dimension",
+   "results": "Ideal.exists_isMaximal_height, Ideal.isMaximal_of_primeHeight_eq_ringKrullDim, Ideal.sup_primeHeight_of_maximal_eq_ringKrullDim, Ideal.primeHeight_eq_ringKrullDim_iff, ringKrullDim_le_iff_isMaximal_height_le, IsLocalRing.maximalIdeal_primeHeight_eq_ringKrullDim, Ideal.sup_height_eq_ringKrullDim (Mathlib.RingTheory.Ideal.Height), ringKrullDim_le_ringKrullDim_add_card (KrullDimension.Regular)",
+   "date": "2026-10-10",
+   "verdict": "no match: only the existence of some maximal ideal of height dim R, not every one"
+  },
+  {
+   "tool": "loogle",
+   "query": "Algebra.FiniteType, IsDomain, Ideal.IsMaximal, ringKrullDim",
+   "results": "none",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rnE 'Catenar|catenar|equidimension|NoetherNormaliz|exists_finite_inj_algHom_of_fg|primeHeight_add|FiniteType.*ringKrullDim|ringKrullDim.*FiniteType' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib --include=*.lean; ls ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/RingTheory/KrullDimension/",
+   "results": "RingTheory/NoetherNormalization.lean (Noether normalization exists_finite_inj_algHom_of_fg, line 289, no dimension statement); Order/KrullDimension.lean (order-theoretic height/coheight); KrullDimension/{Basic,Field,LocalRing,Module,NonZeroDivisors,PID,Polynomial,Regular,Zero}.lean: no catenarity and no dimension of finite type domains",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-closed-point-dimension-local-ring",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1"
+}
