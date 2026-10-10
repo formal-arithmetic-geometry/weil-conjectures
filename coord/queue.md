@@ -1,8 +1,8 @@
 # Work queue
 
-906 items; claim with `tools/claim.py next <group> [--stage N]`.
+905 items; claim with `tools/claim.py next <group> [--stage N]`.
 
-## Stage 1: nodes to split (646)
+## Stage 1: nodes to split (644)
 
 | node | distance to a target | Lean state on the done branch |
 |---|---|---|
@@ -30,8 +30,6 @@
 | `lem-weil-pbc-smooth-fibre-regular-local` | 1012 | none |
 | `lem-weil-pbc-smooth-localization-conormal-split` | 1012 | none |
 | `lem-weil-pbc-smooth-over-field-dimension-differentials` | 1012 | none |
-| `lem-weil-pbc-smooth-retract-standard-smooth` | 1012 | none |
-| `lem-weil-pbc-spec-local-ring-canonical-morphism` | 1012 | none |
 | `lem-weil-pbc-spectral-directed-limit-spectral` | 1012 | none |
 | `lem-weil-pbc-spectral-limit-descend-opens` | 1012 | none |
 | `lem-weil-pbc-spectral-limit-pullback-sections` | 1012 | none |
@@ -653,7 +651,7 @@
 | `lem-pc-linear-pair-graded-finite` | - | none |
 | `def-exc-jacobian-presentation` | - | none |
 
-## Stage 2: nodes to state (260)
+## Stage 2: nodes to state (261)
 
 | node | distance to Mathlib | kind |
 |---|---|---|
@@ -876,6 +874,7 @@
 | `lem-weil-pbc-smooth-conormal-sequence-exact` | 1 | state |
 | `lem-weil-pbc-smooth-over-normal-ring-normal` | 1 | state |
 | `lem-weil-pbc-smooth-over-product-ring` | 1 | state |
+| `lem-weil-pbc-smooth-retract-standard-smooth` | 1 | state |
 | `lem-weil-pbc-spec-field-point-residue-field` | 1 | state |
 | `lem-weil-pbc-spec-finite-product-fields` | 1 | state |
 | `lem-weil-pbc-spec-map-residue-field-naturality` | 1 | state |
@@ -918,7 +917,7 @@
 | `lem-weil-pbc-p1-field-dimension-one` | 4 | state |
 | `lem-weil-pbc-projective-space-zero-isomorphism` | 4 | state |
 
-Not open yet: 658 nodes that wait for stage 1, 548 nodes that wait for a statement dependency.
+Not open yet: 656 nodes that wait for stage 1, 549 nodes that wait for a statement dependency.
 
 ## Stage 3: modules to prove (0)
 
