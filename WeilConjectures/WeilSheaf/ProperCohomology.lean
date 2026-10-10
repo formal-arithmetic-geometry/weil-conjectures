@@ -24,8 +24,6 @@ is its ordinary cohomology, Frobenius-equivariantly.
 
 - `AlgebraicGeometry.WeilComplex.derivedLowerShriekObjIsoOfIsProper`: `Ra_! K ≅ Ra_* K` for `X`
   proper.
-- `AlgebraicGeometry.WeilSheaf.globalSectionsEquivOfIso`: isomorphic Weil sheaves have
-  isomorphic global sections, compatibly with Frobenius.
 -/
 
 @[expose] public section
@@ -68,41 +66,6 @@ instance ProEtaleWeilSheaf.isIso_extensionByZeroToLowerStar (i : U ⟶ X) [IsOpe
     inferInstanceAs (IsIso ((adicOpenImmersionLowerShriekToLowerStar l
       (Scheme.Hom.geometricFiberMap i (comp_over i (Spec (CommRingCat.of k₀))))).app K.carrier))
   exact isIso_of_reflects_iso _ (IsoAlgebra.forget _)
-
-
-namespace WeilSheaf
-
-variable [Fact (ringChar k₀ ≠ l)] [QuasiCompact (X ↘ Spec (CommRingCat.of k₀))]
-  [LocallyOfFiniteType (X ↘ Spec (CommRingCat.of k₀))]
-
-/-- An isomorphism of Weil sheaves induces an isomorphism of their global sections, compatible
-with the Frobenius. -/
-noncomputable def globalSectionsEquivOfIso {F G : WeilSheaf k₀ l X} (e : F ≅ G) :
-    F.globalSections.Equiv G.globalSections where
-  toLinearEquiv := WeilCoefficients.linearEquivOfIso
-    ((ObjectProperty.ι _ ⋙ IsoAlgebra.forget _ ⋙ AdicSheaf.forget _ ⋙
-      Sheaf.Γ _ (WeilCoefficients.{u} l)).mapIso e)
-  map_frobenius x := by
-    have h : ((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.inv)_*[_].map
-        e.hom.hom.hom.f.hom ≫ G.obj.str.hom.hom = F.obj.str.hom.hom ≫ e.hom.hom.hom.f.hom :=
-      congrArg (fun φ ↦ φ.hom) e.hom.hom.hom.h
-    have n := (globalSectionsLowerStarIso (WeilCoefficients.{u} l)
-      (X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.inv).inv.naturality
-        e.hom.hom.hom.f.hom
-    have key : ((globalSectionsLowerStarIso (WeilCoefficients.{u} l)
-          (X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.inv).inv.app F.obj.carrier.X ≫
-        (Sheaf.Γ _ _).map F.obj.str.hom.hom) ≫ (Sheaf.Γ _ _).map e.hom.hom.hom.f.hom =
-        (Sheaf.Γ _ _).map e.hom.hom.hom.f.hom ≫
-          ((globalSectionsLowerStarIso (WeilCoefficients.{u} l)
-            (X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.inv).inv.app
-              G.obj.carrier.X ≫ (Sheaf.Γ _ _).map G.obj.str.hom.hom) := by
-      rw [Category.assoc, ← Functor.map_comp, ← h, Functor.map_comp, ← Category.assoc,
-        ← Category.assoc]
-      congr 1
-      exact n.symm
-    exact congrArg (fun m ↦ ((WeilCoefficients.toModuleCat l).map m).hom x) key
-
-end WeilSheaf
 
 attribute [local instance] Compactification.over
 

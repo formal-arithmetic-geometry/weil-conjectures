@@ -6,10 +6,10 @@ Authors: Claude
 module
 
 public import Mathlib.AlgebraicGeometry.Geometrically.Connected
-public import WeilConjectures.SixFunctors.ProEtale.Adic.GlobalSectionsHom
-public import WeilConjectures.SixFunctors.ProEtale.Adic.TrivialRepresentation
+public import WeilConjectures.SixFunctors.ProEtale.Adic.ConstantGlobalSections
 public import WeilConjectures.WeilSheaf.Cohomology
 public import WeilConjectures.WeilSheaf.Constant
+public import WeilConjectures.WeilSheaf.ConstantTwistCohomology
 public import WeilConjectures.WeilSheaf.LowerStar
 public import WeilConjectures.WeilSheaf.PoincareDuality
 public import WeilConjectures.WeilSheaf.ProperCohomology
@@ -178,71 +178,6 @@ lemma WeilSheaf.IsUnitCompatible.lowerStar {Z : Scheme.{u}} [Z.Over (Spec (CommR
 
 end UnitSection
 
-section ConstantSections
-
-open ProEtale
-
-/-- The global sections of the constant `ℓ`-adic sheaf on a connected scheme form a line: they
-are the locally finite functions, which are constant. -/
-lemma finrank_globalSections_adicConstantSheaf (Z : Scheme.{u}) [ConnectedSpace Z] :
-    Module.finrank (PadicAlgCl l) ((WeilCoefficients.toModuleCat l).obj
-      ((Sheaf.Γ (Scheme.ProEt.topology Z) (WeilCoefficients.{u} l)).obj
-        (adicConstantSheaf l Z))) = 1 := by
-  let e₃ : (WeilCoefficients.toModuleCat l).obj
-      (ModuleCat.of _ (ULift.{u + 1} (PadicAlgCl.locallyFiniteFunctions l Z))) ≃ₗ[PadicAlgCl l]
-      PadicAlgCl.locallyFiniteFunctions l Z :=
-    { toFun x := x.down
-      invFun x := ULift.up x
-      map_add' _ _ := rfl
-      map_smul' _ _ := rfl
-      left_inv _ := rfl
-      right_inv _ := rfl }
-  exact ((WeilCoefficients.linearEquivOfIso ((Sheaf.ΓNatIsoSheafSections _ _
-    (Scheme.ProEt.isTerminalMkId Z)).app (adicConstantSheaf l Z))).trans
-    (e₃.trans (PadicAlgCl.locallyFiniteFunctionsEquiv l Z).toLinearEquiv)).finrank_eq.trans
-    (Module.finrank_self _)
-
-/-- The global section `1` of the constant `ℓ`-adic sheaf on a connected scheme is nonzero. -/
-lemma oneGlobalSection_ne_zero (Z : Scheme.{u}) [ConnectedSpace Z] :
-    oneGlobalSection (l := l) Z ≠ 0 := by
-  intro h
-  have h₁ := finrank_globalSections_adicConstantSheaf (l := l) Z
-  have : Subsingleton ((WeilCoefficients.toModuleCat l).obj
-      ((Sheaf.Γ (Scheme.ProEt.topology Z) (WeilCoefficients.{u} l)).obj
-        (adicConstantSheaf l Z))) := by
-    refine ⟨fun s t ↦ ?_⟩
-    obtain ⟨v, rfl⟩ := (bijective_globalSectionOfModHom (AdicSheaf.unit l Z)).2 s
-    obtain ⟨w, rfl⟩ := (bijective_globalSectionOfModHom (AdicSheaf.unit l Z)).2 t
-    change globalSectionOfModHom v = globalSectionOfModHom w
-    rw [globalSectionOfModHom_eq, globalSectionOfModHom_eq, h, map_zero, map_zero]
-  rw [Module.finrank_zero_of_subsingleton] at h₁
-  exact zero_ne_one h₁
-
-open MonoidalCategory Functor.LaxMonoidal in
-/-- The identification `Γ(W, g_* G) ≅ Γ(Z, G)` carries the global section of the pushforward
-`𝟙 ⟶ g_* 𝟙 ⟶ g_* G` of a unit `f : 𝟙 ⟶ G` to the global section of `f`. -/
-lemma globalSectionsLowerStarIso_hom_app_globalSectionOfHom {Z W : Scheme.{u}} (g : Z ⟶ W)
-    {G : Sheaf (Scheme.ProEt.topology Z) (WeilCoefficients.{u} l)}
-    (f : 𝟙_ (Sheaf (Scheme.ProEt.topology Z) (WeilCoefficients.{u} l)) ⟶ G) :
-    ((globalSectionsLowerStarIso (WeilCoefficients.{u} l) g).hom.app G).hom
-      (globalSectionOfHom (ε (g)_*[WeilCoefficients.{u} l] ≫ (g)_*[_].map f)) =
-      globalSectionOfHom f := by
-  have hε := NatTrans.IsMonoidal.unit
-    (τ := (globalSectionsLowerStarIso (WeilCoefficients.{u} l) g).hom)
-  have n := (globalSectionsLowerStarIso (WeilCoefficients.{u} l) g).hom.naturality f
-  rw [Functor.LaxMonoidal.comp_ε] at hε
-  simp only [Category.assoc] at hε
-  have key : ε (Sheaf.Γ _ (WeilCoefficients.{u} l)) ≫
-      (Sheaf.Γ _ _).map (ε (g)_*[WeilCoefficients.{u} l] ≫ (g)_*[_].map f) ≫
-        (globalSectionsLowerStarIso _ g).hom.app G =
-      ε (Sheaf.Γ _ (WeilCoefficients.{u} l)) ≫ (Sheaf.Γ _ _).map f := by
-    rw [Functor.map_comp, Category.assoc]
-    erw [n]
-    rw [reassoc_of% hε]
-  exact congrArg (fun m ↦ m.hom (1 : ULift.{u + 1} (PadicAlgCl l))) key
-
-end ConstantSections
-
 omit [Finite k₀] in
 /-- The geometric fiber of a geometrically connected `k₀`-scheme is connected. -/
 lemma connectedSpace_geometricFiber {Y : Scheme.{u}} [Y.Over (Spec (CommRingCat.of k₀))]
@@ -332,7 +267,7 @@ theorem finrank_cohomology_zero_adicConstant
       (ProEtale.globalSectionsLowerStarIso _ (Scheme.Hom.geometricFiberMap a (comp_over a _))).app
         (ProEtale.adicConstantSheaf l a.geometricFiber)
   exact (WeilCoefficients.linearEquivOfIso e).finrank_eq.trans
-    (finrank_globalSections_adicConstantSheaf _)
+    (ProEtale.finrank_globalSections_adicConstantSheaf _)
 
 open MonoidalCategory Functor.LaxMonoidal ProEtale in
 /-- Blueprint `prop-cohomological-finiteness`: Compact-support finiteness and Frobenius.

@@ -61,7 +61,17 @@ lemma lowerStarCongr_hom_app_lowerStar_obj_hom_app {Z Y W : Scheme.{u}} (g : W �
 
 omit [Abelian A] [IsGrothendieckAbelian.{u + 1} A] in
 /-- The exchange isomorphisms `p_* ⋙ a₂_* ≅ a₁_* ⋙ p_*` of pushforwards along commutative
-squares `p ≫ a₂ = a₁ ≫ p` are compatible with composition of pushforwards. -/
+squares `p ≫ a₂ = a₁ ≫ p` are compatible with composition of pushforwards. Writing `ex` for
+the exchange isomorphisms of the squares `p ≫ a₂ = a₁ ≫ p`, `q ≫ a₃ = a₂ ≫ q` and
+`(p ≫ q) ≫ a₃ = a₁ ≫ (p ≫ q)`, and `c` for `q_* p_* ≅ (p ≫ q)_*`, the diagram
+```
+a₃_* q_* p_* G ------------c------------> a₃_* (p ≫ q)_* G
+      |                                          |
+      ex                                         ex
+      v                                          v
+q_* a₂_* p_* G --q_* ex--> q_* p_* a₁_* G --c--> (p ≫ q)_* a₁_* G
+```
+commutes. -/
 lemma lowerStarComp_exchange {T₁ T₂ T₃ : Scheme.{u}} (p : T₁ ⟶ T₂) (q : T₂ ⟶ T₃)
     (a₁ : T₁ ⟶ T₁) (a₂ : T₂ ⟶ T₂) (a₃ : T₃ ⟶ T₃) (h₁ : p ≫ a₂ = a₁ ≫ p) (h₂ : q ≫ a₃ = a₂ ≫ q)
     (h₁₂ : (p ≫ q) ≫ a₃ = a₁ ≫ (p ≫ q)) (G : Sheaf (Scheme.ProEt.topology T₁) A) :

@@ -101,7 +101,8 @@ variable {D : Type u'} [Category.{v'} D] [Abelian D] {G : D ⥤ D} [G.Additive] 
 
 omit [Abelian.HasKInjectiveResolutions (IsoAlgebra H)] in
 /-- The derived functor of the exact forgetful functor of algebras reflects isomorphisms:
-a morphism of the derived category is an isomorphism if it is one on all homology objects. -/
+a morphism `f` of the derived category of algebras is an isomorphism if its image under the
+derived forgetful functor is one. -/
 lemma isIso_of_isIso_forget_mapDerivedCategory_map {K K' : DerivedCategory (IsoAlgebra H)}
     (f : K ⟶ K') [IsIso ((forget H).mapDerivedCategory.map f)] : IsIso f := by
   rw [DerivedCategory.isIso_iff]
