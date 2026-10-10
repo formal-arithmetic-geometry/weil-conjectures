@@ -2024,3 +2024,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 16:43 L: returned deliver/H1/lem-sc-smooth-proper-relative-dualizing-general (reviewer RETURN: Return points of 16:13: 1 (false nonproper node deleted) and 2 (split along the proof of Stacks 0BRT) are repaired; poin)
 - 16:43 L: lead note on lem-sc-torsor-h1-functoriality (which comparison isomorphism; reviewer R-cb3); L merged lem-sc-point-tangent-finite-local-cotangent-surjective over a report-only return
 - 16:43 L: merged deliver/H1/lem-sc-invertible-tensor-qcoherent (reviewer PASS; first push; new nodes: 0)
+- 16:43 L: merged deliver/E1/lem-pc-affine-surjective-structure-map-closed-immersion (reviewer FIX; first push; new nodes: 0)
