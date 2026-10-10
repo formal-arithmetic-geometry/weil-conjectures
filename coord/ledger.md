@@ -2802,3 +2802,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 22:16 L: merged deliver/E1/lemma-nagata-affine-fp-descends (reviewer PASS; first push; new nodes: 0)
 - 22:17 L: merged deliver/F1/lem-pc-fp-module-map-descent (reviewer FIX; first push; new nodes: 1)
 - 22:20 UTC L deleted deliver/F1/def-sc-zariski-site (abandoned after the Mathlib match); notice
+- 22:22 L: merged deliver/K1/lem-pod-lisse-tensor-and-scalar-extension (reviewer FIX; first push; new nodes: 1)
