@@ -1,6 +1,6 @@
 # Work queue
 
-911 items; claim with `tools/claim.py next <group> [--stage N]`.
+912 items; claim with `tools/claim.py next <group> [--stage N]`.
 
 ## Stage 1: nodes to split (323)
 
@@ -22,12 +22,11 @@
 | `lem-sc-boundary-cech-compatibility` | 2014 | none |
 | `lem-sc-cech-h1-injective` | 2014 | none |
 | `lem-sc-tensor-generating-sections` | 2014 | none |
-| `lem-sc-zariski-ext-torsor` | 2014 | none |
 | `lem-sc-invert-s-cohomology-mayer-vietoris-diagram` | 2015 | none |
+| `lem-sc-zariski-contracted-power-extension` | 2015 | none |
 | `lem-weil-pbc-hypercohomology-e1-pullback-functorial` | 3006 | none |
 | `lem-weil-pbc-etale-sheaf-clopen-product` | 3007 | none |
 | `lem-exc-finite-galois-sections-descent` | 3008 | none |
-| `lem-weil-pbc-finite-product-complex-cohomology` | 3008 | none |
 | `lem-weil-pbc-finite-product-functor-left-exact` | 3008 | none |
 | `lem-weil-pbc-finite-product-injective-resolutions` | 3008 | none |
 | `lem-weil-pbc-cohomology-over-object-localization` | 3009 | none |
@@ -38,7 +37,6 @@
 | `def-sc-sheaf-cohomology-functor` | 3013 | none |
 | `lem-pc-grothendieck-ss-double-complex-model` | 3013 | none |
 | `lem-pc-proper-geometrically-reduced-global-sections-separable` | 3013 | none |
-| `lem-pc-separable-polynomial-alg-closed-quotient-product` | 3013 | none |
 | `lem-sc-p1-boundary-extension-composition` | 3013 | none |
 | `lem-sc-p1-ext-yoneda-associativity` | 3013 | none |
 | `lem-sc-p1-ext-yoneda-functoriality` | 3013 | none |
@@ -48,7 +46,9 @@
 | `lem-pc-field-extension-quasi-compact` | 3014 | none |
 | `lem-pc-field-extension-surjective` | 3014 | none |
 | `lem-pc-noetherian-derived-direct-image-right-adjoint` | 3014 | none |
+| `lem-pc-polynomial-quotient-distinct-linear-crt` | 3014 | none |
 | `lem-pc-proper-derived-direct-image-composition` | 3014 | none |
+| `lem-pc-separable-polynomial-distinct-roots-alg-closed` | 3014 | none |
 | `lem-sc-acyclic-comparison-natural` | 3014 | none |
 | `lem-sc-affine-derived-concentration` | 3014 | none |
 | `lem-sc-cech-comparison-map-iso-affine` | 3014 | none |
@@ -330,7 +330,7 @@
 | `lem-pur-rhom-well-defined` | - | none |
 | `lem-zl-noether-normalization-dimension` | - | none |
 
-## Stage 2: nodes to state (588)
+## Stage 2: nodes to state (589)
 
 | node | distance to Mathlib | kind |
 |---|---|---|
@@ -409,6 +409,7 @@
 | `lem-pc-projective-curve-linear-pair` | 1 | state |
 | `lem-pc-scheme-connected-iff-idempotents` | 1 | state |
 | `lem-pc-scheme-dimension-local-rings` | 1 | state |
+| `lem-pc-separable-polynomial-alg-closed-quotient-product` | 1 | state |
 | `lem-sc-affine-cap-section-open-algebra` | 1 | state |
 | `lem-sc-affine-finite-module-free-locus` | 1 | state |
 | `lem-sc-affine-open-finite-complement` | 1 | state |
@@ -923,7 +924,7 @@
 | `lem-weil-pbc-p1-field-dimension-one` | 4 | state |
 | `lem-weil-pbc-projective-space-zero-isomorphism` | 4 | state |
 
-Not open yet: 341 nodes that wait for stage 1, 1200 nodes that wait for a statement dependency.
+Not open yet: 341 nodes that wait for stage 1, 1202 nodes that wait for a statement dependency.
 
 ## Stage 3: modules to prove (0)
 
