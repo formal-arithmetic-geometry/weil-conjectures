@@ -1,0 +1,70 @@
+{
+ "id": "lem-weil-pbc-constant-module-sheaf-sections-locally-constant",
+ "kind": "statement",
+ "title": "Sections of the constant sheaf of modules are locally constant",
+ "statement": "Let $T$ be a scheme [def-pc-scheme], $T_{\\Et}$ its small etale site [def-weil-pbc-etale-site], $\\Lambda$ a commutative ring and $M$ a $\\Lambda$-module. Let $\\underline M$ be the constant sheaf of $\\Lambda$-modules with value $M$ on $T_{\\Et}$ [def-weil-pbc-constant-sheaf], [def-weil-pbc-etale-sheaves], i.e. the sheafification in sheaves of $\\Lambda$-modules [def-weil-pbc-sheafification] of the constant presheaf $W\\mapsto M$ (all restriction maps $\\mathrm{id}_M$), and write $\\iota_W:M\\to\\underline M(W)$ for the components of the canonical morphism from the constant presheaf to its sheafification ($\\Lambda$-linear maps, compatible with restriction: $\\iota_W(m)|_{W'}=\\iota_{W'}(m)$ for every morphism $W'\\to W$ of $T_{\\Et}$). Then every section of $\\underline M$ is locally constant: for every object $W$ of $T_{\\Et}$ and every $t\\in\\underline M(W)$ there are a covering $\\{W_l\\to W\\}_{l\\in L}$ of $W$ in $T_{\\Et}$ (a jointly surjective family of etale morphisms) and elements $m_l\\in M$ with $t|_{W_l}=\\iota_{W_l}(m_l)$ for all $l\\in L$. (Module analogue of [lem-weil-pbc-constant-ring-sheaf-sections-locally-constant].)",
+ "source": {
+  "document": "literature/stacks-project/sites.tex",
+  "place": "Sites, Lemma 00WK (lemma-sections-sheafification): every section of the sheafification of a presheaf of sets is locally the image of a section of the presheaf; Sites, Section 00YR (section-sheaves-algebraic-structures): for modules the sheafification is computed on the underlying presheaf of sets, so the same holds for the constant sheaf of modules"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-pbc-etale-site",
+  "def-weil-pbc-etale-sheaves",
+  "def-weil-pbc-sheafification",
+  "def-weil-pbc-constant-sheaf"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "the canonical map from a presheaf to its sheafification is locally surjective",
+   "results": "CategoryTheory.GrothendieckTopology.instIsLocallySurjectiveToSheafify (Sites.LocallyBijective), CategoryTheory.Presheaf.isLocallySurjective_toSheafify and isLocallySurjective_toSheafify' (Sites.LocallySurjective), PresheafOfModules.instIsLocallySurjectiveToSheafify (ModuleCat.Presheaf.Sheafify), GrothendieckTopology.W_toSheafify",
+   "date": "2026-10-10",
+   "verdict": "match: instIsLocallySurjectiveToSheafify with A = ModuleCat Λ"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Presheaf.IsLocallySurjective _ (CategoryTheory.toSheafify _ _)",
+   "results": "CategoryTheory.Presheaf.isLocallySurjective_toSheafify' (Sites.LocallySurjective), CategoryTheory.GrothendieckTopology.instIsLocallySurjectiveToSheafify (Sites.LocallyBijective), WEqualsLocallyBijective.mk'",
+   "date": "2026-10-10",
+   "verdict": "match (same declaration)"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rn 'IsLocallySurjective.*toSheafify' Mathlib/; grep -rln constantSheaf Mathlib/",
+   "results": "Sites/LocallyBijective.lean:136 (the instance), Sites/LocallySurjective.lean:303,313, ModuleCat/Presheaf/Sheafify.lean:356; constantSheaf defined at Sites/ConstantSheaf.lean:66 as Functor.const ⋙ presheafToSheaf",
+   "date": "2026-10-10",
+   "verdict": "match: LocallyBijective.lean:136 read with sed"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "CategoryTheory.GrothendieckTopology.instIsLocallySurjectiveToSheafify",
+  "file": "Mathlib/CategoryTheory/Sites/LocallyBijective.lean",
+  "line": 136,
+  "how": "specializes in one line, plus one lemma for the covering form (as on lem-weil-pbc-constant-ring-sheaf-sections-locally-constant): take J = T.smallEtaleTopology, A = ModuleCat Λ, P = (Functor.const _).obj M, so that (constantSheaf J _).obj M = (presheafToSheaf J _).obj P (ConstantSheaf.lean:66) and ι = toSheafify J P; the instance gives Presheaf.IsLocallySurjective J ι, i.e. the image sieve of every t ∈ M(W) is J-covering; its instance arguments WEqualsLocallyBijective and HasSheafify are AffineEtale.lean:124 and :112, whose hypotheses on A (forget preserves limits and filtered colimits — ModuleCat/FilteredColimits.lean:202 —, reflects isomorphisms, HasLimits, HasColimits) hold for ModuleCat. By smallGrothendieckTopology_eq_toGrothendieck_smallPretopology and mem_toGrothendieck_smallPretopology (Mathlib/AlgebraicGeometry/Sites/Small.lean:203, 234) a covering sieve contains a jointly surjective family of etale arrows, which is the node's form. Not compiled: the AffineEtale instances ask Category.{u} A for schemes in universe u, so the universe of ModuleCat at which the source repository works is to be confirmed in stage 2."
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-locally-constant-finite-values-finite-type",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1"
+}
