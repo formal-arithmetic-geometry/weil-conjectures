@@ -29,9 +29,49 @@
   "def-weil-residue-field",
   "def-kun-dimension"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Since s = g(s'), the morphism Spec \\kappa(s') -> S' -> S factors as Spec \\kappa(s') -> Spec \\kappa(s) -> S through the residue-field map \\kappa(s) -> \\kappa(s') [def-weil-residue-field]. By the definitions of fibre and fibre product [def-pc-scheme-fibre, def-pc-fibre-product], (X')_{s'} = (X x_S S') x_{S'} Spec \\kappa(s') = X x_S Spec \\kappa(s') = (X x_S Spec \\kappa(s)) x_{Spec \\kappa(s)} Spec \\kappa(s') = X_s x_{Spec \\kappa(s)} Spec \\kappa(s'). The middle equality is the transitivity (pasting) of fibre products, supplied by [lem-weil-pbc-cartesian-square-pasting].",
+   "uses": [
+    "def-weil-residue-field",
+    "def-pc-scheme-fibre",
+    "def-pc-fibre-product",
+    "lem-weil-pbc-cartesian-square-pasting"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 02FY (lemma-dimension-fibre-after-base-change), part (1)"
+   }
+  },
+  {
+   "text": "The morphism X_s -> Spec \\kappa(s) is locally of finite type by [lem-weil-pbc-lft-base-change], applied to f and Spec \\kappa(s) -> S. Choose an affine open U = Spec A of X_s containing x, with A a finite type \\kappa(s)-algebra; its inverse image U' = Spec(A \\otimes_{\\kappa(s)} \\kappa(s')) is an open neighbourhood of x' in the residue-field base change. The dimension at a point is computed on any open neighbourhood [def-kun-dimension], and [lem-weil-pbc-dimension-at-point-field-extension] gives dim_{x'} U' = dim_x U because the prime of A \\otimes_{\\kappa(s)} \\kappa(s') at x' lies over the prime of A at x. Hence dim_{x'}((X')_{s'}) = dim_x(X_s).",
+   "uses": [
+    "lem-weil-pbc-lft-base-change",
+    "def-kun-dimension",
+    "lem-weil-pbc-dimension-at-point-field-extension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 02FY (lemma-dimension-fibre-after-base-change), part (1)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-residue-field",
+  "def-pc-scheme-fibre",
+  "def-pc-fibre-product",
+  "lem-weil-pbc-cartesian-square-pasting",
+  "lem-weil-pbc-lft-base-change",
+  "def-kun-dimension",
+  "lem-weil-pbc-dimension-at-point-field-extension"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/morphisms.tex",
+  "place": "Tag 02FY (lemma-dimension-fibre-after-base-change), part (1), whose dimension assertion follows Algebra Lemma 00P4"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -56,12 +96,36 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-sc-curve-base-change-relative-dimension-one",
   "by": "worker",
   "date": "2026-10-10"
  },
  "chapter": "sec-picard-framework",
- "unit": "sk-prop-jacobian"
+ "unit": "sk-prop-jacobian",
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "lem-sc-fibre-dimension-after-base-change",
+  "worker": "stage1",
+  "summary": "Repaired Tag 02FY (1): removed the relabelling helper and the duplicate local-dimension lemma, wrote the fibre-product calculation directly, and routed local dimension through the existing 00P4 node. The proof now cites the existing pasting, finite-type base-change, and dimension nodes.",
+  "blueprint": "Realizes thm-sc-jacobian-representability proof step (4) 'Connectedness', the assertion that the family C_T -> T has fibre dimension one after base change.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-dimension-at-point-field-extension",
+    "why": "Step 2 uses the generic Algebra Lemma 00P4 dimension-at-a-point result, which is not supplied by this unit's fibre calculation."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-dimension-at-point-field-extension"
+ ],
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-fd3b",
+  "group": "H1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-fd3b (reviewer sub-agent of L); spot-checked: Third push after returns 15:32 and 15:46. All three points of the 15:46 return repaired: the commit now touches only the item node and the report (lem-sc-local-dimension-invariant-residue-field-extension gone, so its created field point lapses), and the report no longer mentions citations.json. Source Morphisms Tag 02FY (morphisms.tex line 5425) part (1): fibre product square, f locally of finite type, x' over x, s'=f'(x'), s=g(s')=f(x); the item statement agrees hypothesis by hypothesis (the fibre identification clause is the standard one used in its proof). Step 1: residue-field factorisation from def-weil-residue-field, the fibre and fibre product from def-pc-scheme-fibre and def-pc-fibre-product, the two transitivity isomorphisms from lem-weil-pbc-cartesian-square-pasting (Mathlib leaf IsPullback.paste_vert_iff). Step 2: X_s locally of finite type over kappa(s) from lem-weil-pbc-lft-base-change (Mathlib leaf locallyOfFiniteType_isStableUnderBaseChange), dimension at a point local by def-kun-dimension, affine comparison from lem-weil-pbc-dimension-at-point-field-extension (Tag 00P4, the source's own citation), accepted as a declared generic tool use (C8). Small cases: Spec K and A^1_K under field extension (dims 0 and 1). Start 2026-10-10 Sat Oct 10 03:52:56 PM UTC 2026, end Sat Oct 10 03:53:12 PM UTC 2026."
+ }
 }
