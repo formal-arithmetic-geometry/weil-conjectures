@@ -1,8 +1,8 @@
 # Work queue
 
-860 items; claim with `tools/claim.py next <group> [--stage N]`.
+859 items; claim with `tools/claim.py next <group> [--stage N]`.
 
-## Stage 1: nodes to split (56)
+## Stage 1: nodes to split (55)
 
 | node | distance to a target | Lean state on the done branch |
 |---|---|---|
@@ -19,8 +19,8 @@
 | `lem-pc-tor-independent-perfect-pullback-comparison` | 3021 | none |
 | `lem-sc-affine-koszul-cech-derived-comparison` | 3021 | none |
 | `lem-sc-affine-pseudo-coherent-lift` | 3022 | none |
-| `lem-sc-affine-truncation-kernel-finite-locally-free` | 3022 | none |
 | `lem-sc-perfect-ext-bounded-qcoh-vanishing` | 3022 | none |
+| `lem-sc-affine-truncation-kernel-flat` | 3023 | none |
 | `lem-pc-ring-pseudo-coherent-summand` | 3024 | none |
 | `lem-pc-genus-agrees-sc` | 4007 | rests_on_sorry |
 | `prop-av-tate-rank` | 4008 | rests_on_sorry |
@@ -33,7 +33,6 @@
 | `lem-pc-derived-tensor-transitivity` | 5015 | none |
 | `lem-pc-rf-single-complex-affine-base-change` | 5015 | none |
 | `lem-pc-sites-module-sheafification-bilinear-extension` | 5015 | none |
-| `lem-pc-sites-sheaf-tensor-bilinear-universal` | 5015 | none |
 | `lem-pc-affine-flat-module-descent` | 5016 | none |
 | `lem-pc-rf-mv-triangle-naturality` | 5016 | none |
 | `lem-sp-filtered-complex-ZB-description` | 6007 | none |
@@ -872,7 +871,7 @@
 | `lem-weil-pbc-projective-space-zero-isomorphism` | 4 | state |
 | `def-nagata-fixed-base-separated-stage` | 6 | state |
 
-Not open yet: 1669 nodes that wait for a statement dependency, 96 nodes that wait for stage 1.
+Not open yet: 1671 nodes that wait for a statement dependency, 95 nodes that wait for stage 1.
 
 ## Stage 3: modules to prove (0)
 
