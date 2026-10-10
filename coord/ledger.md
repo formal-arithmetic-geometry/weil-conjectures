@@ -2230,3 +2230,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 18:18 L: merged deliver/M1/def-weil-pbc-finite-torsors (reviewer PASS; first push; new nodes: 0)
 - 18:18 L: merged deliver/M1/lem-sc-topological-flasque-acyclic (reviewer PASS; first push; new nodes: 0)
 - 18:18 L: merged deliver/G1/lem-sc-finite-twisted-inverse-bounded-below (reviewer PASS; first push; new nodes: 1)
+- 18:19 L: returned deliver/H1/lem-sc-mult-n-etale-kernel (reviewer RETURN: Reviewer R-mek1819. 1. D1/C1: no real split. Step 1 proves the etaleness of [d], which is the item's own main claim, by )
