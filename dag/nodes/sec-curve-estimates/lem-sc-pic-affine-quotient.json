@@ -22,9 +22,67 @@
   "thm-sc-jacobian-representability",
   "def-sc-curves"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "The boundary $S$ is nonempty. If $S$ were empty, then $C=\\overline C$ would be both proper and affine over $k$, so [lem-sc-proper-affine-finite] would make it finite over $k$, hence of dimension zero, contradicting that a connected curve has dimension one ([def-sc-curves]).",
+   "uses": [
+    "lem-sc-proper-affine-finite",
+    "def-sc-curves"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-curve-estimates/sk-prop-cd-affine/lem-sc-pic-affine.md",
+    "place": "Proof: first paragraph, nonemptiness of S"
+   }
+  },
+  {
+   "text": "By [lem-sc-divisor-class-curve], for each of the smooth connected curves $C$ and $\\overline C$ the map $D\\mapsto[\\mathcal O(D)]$ identifies $\\operatorname{Cl}$ with $\\operatorname{Pic}$, compatibly with restriction to the open $C\\subseteq\\overline C$. Restriction of divisors $\\operatorname{Div}(\\overline C)\\to\\operatorname{Div}(C)$ (forget the coefficients at the points of $S$) is surjective (extend by coefficient zero on $S$), and its kernel is the free subgroup $\\bigoplus_{P\\in S}\\mathbf Z\\,P$. Since $C$ is dense open in the integral curve $\\overline C$, both have the same function field $K$, and $\\operatorname{div}_{\\overline C}(f)$ restricts to $\\operatorname{div}_C(f)$ for $f\\in K^\\times$; so restriction maps principal divisors onto principal divisors, and a divisor on $\\overline C$ whose restriction is $\\operatorname{div}_C(f)$ differs from $\\operatorname{div}_{\\overline C}(f)$ by a divisor supported on $S$. Hence $\\bigoplus_{P\\in S}\\mathbf Z\\to\\operatorname{Cl}(\\overline C)\\to\\operatorname{Cl}(C)\\to0$ is exact, i.e. $\\operatorname{Pic}(C)\\cong\\operatorname{Pic}(\\overline C)/B$ with $B:=\\langle[P]:P\\in S\\rangle$, $[P]=[\\mathcal O_{\\overline C}(P)]$ (Hartshorne II.6.5).",
+   "uses": [
+    "lem-sc-divisor-class-curve"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-curve-estimates/sk-prop-cd-affine/lem-sc-pic-affine.md",
+    "place": "Proof: first paragraph, restriction and boundary divisors"
+   }
+  },
+  {
+   "text": "By [lem-sc-pic-proper-decomposition], $\\deg:\\operatorname{Pic}(\\overline C)\\to\\mathbf Z$ is surjective with kernel $\\operatorname{Pic}^0(\\overline C)$. Fix $P_0\\in S$ (possible by step 1); $\\deg[P_0]=1$. The map $r:\\operatorname{Pic}(\\overline C)\\to\\operatorname{Pic}^0(\\overline C)$, $x\\mapsto x-\\deg(x)[P_0]$, is a homomorphism that is the identity on $\\operatorname{Pic}^0(\\overline C)$, so it is surjective with kernel $\\mathbf Z[P_0]$. Since $[P]=[P_0]+([P]-[P_0])$ for $P\\in S$, we have $B=\\mathbf Z[P_0]+\\Lambda_0$ with $\\Lambda_0:=\\langle[P]-[P_0]:P\\in S\\rangle\\subseteq\\operatorname{Pic}^0(\\overline C)$, and $r(B)=\\Lambda_0$; as $\\ker r\\subseteq B$, $r$ induces an isomorphism $\\operatorname{Pic}(\\overline C)/B\\cong\\operatorname{Pic}^0(\\overline C)/\\Lambda_0$. With step 2, $\\operatorname{Pic}(C)\\cong\\operatorname{Pic}^0(\\overline C)/\\Lambda_0$.",
+   "uses": [
+    "lem-sc-pic-proper-decomposition"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-curve-estimates/sk-prop-cd-affine/lem-sc-pic-affine.md",
+    "place": "Proof: first paragraph, splitting by P0"
+   }
+  },
+  {
+   "text": "By the canonical identification $J(k)=\\operatorname{Pic}^0(\\overline C)$ of the statement ([def-sc-jacobian], [thm-sc-jacobian-representability]), a group isomorphism, $\\Lambda_0$ corresponds to $\\Lambda=\\langle[P]-[P_0]:P\\in S\\rangle\\subseteq J(k)$, and step 3 becomes the group isomorphism $\\operatorname{Pic}(C)\\cong J(k)/\\Lambda$.",
+   "uses": [
+    "def-sc-jacobian",
+    "thm-sc-jacobian-representability"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-curve-estimates/sk-prop-cd-affine/lem-sc-pic-affine.md",
+    "place": "Proof: first paragraph, Jacobian identification"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sc-proper-affine-finite",
+  "def-sc-curves",
+  "lem-sc-divisor-class-curve",
+  "lem-sc-pic-proper-decomposition",
+  "def-sc-jacobian",
+  "thm-sc-jacobian-representability"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/master/blueprint/sec-curve-estimates/sk-prop-cd-affine/lem-sc-pic-affine.md",
+  "place": "## Proof, quotient presentation paragraph"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -63,12 +121,36 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-sc-pic-affine",
   "by": "worker",
   "date": "2026-10-10"
  },
  "chapter": "sec-curve-estimates",
- "unit": "sk-prop-cd-affine"
+ "unit": "sk-prop-cd-affine",
+ "split_report": {
+  "date": "2026-10-11",
+  "item": "lem-sc-pic-affine-quotient",
+  "worker": "stage1",
+  "summary": "Added four proof steps: nonempty boundary, divisor restriction quotient, degree splitting by a boundary point, and Jacobian identification. No new nodes were needed; existing divisor-class, proper Picard decomposition, curve, proper-affine-finite, Jacobian definition, and representability statements supply the cited facts.",
+  "blueprint": "The steps realize the first proof paragraph of blueprint node lem-sc-pic-affine: boundary nonemptiness, restriction modulo boundary divisors, splitting by P0, and identification Pic^0(C-bar)=J(k).",
+  "tool_uses": [
+   {
+    "node": "thm-sc-jacobian-representability",
+    "why": "Identifies the degree-zero Picard group of the proper compactification with the chosen Jacobian's k-points; this generic representability fact is outside the affine cohomological-dimension unit route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "thm-sc-jacobian-representability"
+ ],
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-paq2750",
+  "group": "G1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-paq2750 (reviewer sub-agent of L); spot-checked: Statement identical to the restated one on sheaf-dag (E7 ok); lem-sc-pic-affine step 1 uses it exactly (C4 ok); no excision/restriction-to-open Pic node exists in dag/nodes, so step 2 stays elementary from lem-sc-divisor-class-curve (Hartshorne II.6.5 argument, same function field). FIX more, RETURN less: (1) C4 in step 3: lem-sc-pic-proper-decomposition only gives an unspecified splitting, not one with [P0]=(1,0); rewrote step 3 with the explicit retraction x -> x - deg(x)[P0] (S nonempty from step 1), elementary; (2) B4: steps 1-4 rewritten in TeX, no plain-text arrows. The Second reading by G1 missed fault (1).; 1 file(s) fixed by the reviewer"
+ }
 }
