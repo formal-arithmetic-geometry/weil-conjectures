@@ -3,11 +3,11 @@
  "blueprint": {
   "is": "thm-pqf-immersion-descent",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "Descent of the immersion to a finite stage",
- "statement": "Let $f:X\\to S$ be a separated morphism of finite type which is\neverywhere quasi-finite, with $S$\nquasi-compact and quasi-separated. Let $\\nu_f:N_f\\to S$ be the\nrelative normalization of $S$ in $X$, with $X\\xrightarrow{\\iota_f} N_f$ a quasi-compact open immersion, and let\n$N_f=\\varprojlim_\\lambda T_\\lambda$ be the presentation of $N_f$ as a\nfiltered limit of finite $S$-schemes, with affine transition maps,\nsupplied by the finite-approximation tail of the preceding proof. Then\nthere are an index $\\lambda_0$ and a factorization\n\n$$\nX\\xrightarrow{\\ j\\ }T\\xrightarrow{\\ i\\ }T_{\\lambda_0}\n$$\n\nwith $j$ a quasi-compact open immersion and $i$ a closed immersion.\nIf moreover $S$ is\nlocally Noetherian — in particular if\n$f$ is locally of finite presentation over a locally Noetherian\n$S$ — the index $\\lambda_0$ may be chosen so that\n$T_{\\lambda_0}$ is finite and of finite presentation over $S$.\n\n(*Stacks Project*: the descent is the step of the proof of the\nZariski main theorem, More on Morphisms, Lemma 37.43.3,\n[Tag 05K0](https://stacks.math.columbia.edu/tag/05K0), that its\nlimit lemma\n[Tag 01ZM](https://stacks.math.columbia.edu/tag/01ZM) does not\nsupply — that lemma descends the open subscheme $\\iota_f(X)$ to an\nopen $U\\subseteq T_{\\lambda_0}$, exhibiting $X$ as the fibre product\n$N_f\\times_{T_{\\lambda_0}}U$, whose projection onto $U$ is the base\nchange of the integral morphism $\\nu_f$, hence finite and surjective of\nthe same degree as $\\nu_f$, and therefore not an immersion as soon as\none fibre of $\\nu_f$ over $U$ has more than one point; what is\nneeded in addition is the spreading out of the *closed* immersion\n$X\\to U$, Limits of Schemes, Lemma 32.4.16,\n[Tag 081B](https://stacks.math.columbia.edu/tag/081B), together with\nthe descent of the quasi-compact open, Limits of Schemes, Lemma 32.4.11,\n[Tag 01Z4](https://stacks.math.columbia.edu/tag/01Z4). The\nfactorization of the immersion is Morphisms of Schemes, Lemma 29.3.2,\n[Tag 01QV](https://stacks.math.columbia.edu/tag/01QV). The\nfinite-presentation refinement of the theorem,\n[Tag 0F2N](https://stacks.math.columbia.edu/tag/0F2N), is a\nstatement about the factorization scheme $T$ and not about a stage of\nthe presentation above: its proof replaces that presentation by an\napproximating directed system of finite finitely presented $S$-schemes,\nLimits of Schemes, Lemma 32.9.8,\n[Tag 09YY](https://stacks.math.columbia.edu/tag/09YY). Hence for\n$f$ locally of finite presentation over a general quasi-compact\nquasi-separated $S$ the clause about a stage of the presentation of the\nfinite-approximation tail is not proved here: Tag 09YY does not apply to\nthat presentation, whose transition maps are affine and dual to the\ninjective algebra maps $\\mathcal A_\\lambda\\hookrightarrow\\mathcal A_\\mu$ rather than closed immersions. The clause holds in the corrected\nform proved in the last section of this\nchapter: Tag 09YY, applied to the finite scheme $T$ of the factorization\nconstructed above, replaces it by a finite and finitely presented\n$S$-scheme containing $X$ as a quasi-compact open subscheme. Over a\nlocally Noetherian $S$ the clause holds for the tail itself, because\nevery finite $S$-scheme is then of finite presentation.)",
+ "statement": "Let $f:X\\to S$ be a separated morphism of finite type [def-weil-pbc-scheme-conventions] which is\neverywhere quasi-finite [pqf-def-quasifinite], with $S$\nquasi-compact and quasi-separated. Let $\\nu_f:N_f\\to S$ be the\nrelative normalization of $S$ in $X$ [lem-weil-pbc-relative-normalization], with $X\\xrightarrow{\\iota_f} N_f$ a quasi-compact open immersion [pqf-lem-normalization-open], and let\n$N_f=\\varprojlim_\\lambda T_\\lambda$, with projections $p_\\lambda:N_f\\to T_\\lambda$, be the presentation of $N_f$ as a\nfiltered limit of finite $S$-schemes, with affine transition maps,\nsupplied by [lem-weil-pbc-integral-morphism-limit-of-finite]. Then\nthere are an index $\\lambda_0$ and a factorization\n\n$$\nX\\xrightarrow{\\ j\\ }T\\xrightarrow{\\ i\\ }T_{\\lambda_0}\n$$\n\nof $p_{\\lambda_0}\\circ\\iota_f$, i.e. $i\\circ j=p_{\\lambda_0}\\circ\\iota_f$, with $j$ a quasi-compact open immersion and $i$ a closed immersion.\nIf moreover $S$ is\nlocally Noetherian [pqf-def-locnoeth] — in particular if\n$f$ is locally of finite presentation over a locally Noetherian\n$S$ — the index $\\lambda_0$ may be chosen so that\n$T_{\\lambda_0}$ is finite and of finite presentation over $S$.\n",
  "source": {
   "document": "literature/blueprint/master/blueprint/sec-nagata-compactification/sk-prop-nagata-sketch-zmt/thm-pqf-immersion-descent.md",
   "place": "node thm-pqf-immersion-descent, order 199",
@@ -46,21 +46,118 @@
    }
   ]
  },
- "stmt_deps": [],
- "proof": [],
- "proof_deps": [
+ "stmt_deps": [
   "def-weil-pbc-scheme-conventions",
   "pqf-def-quasifinite",
+  "pqf-def-locnoeth",
+  "lem-weil-pbc-relative-normalization",
+  "pqf-lem-normalization-open",
+  "lem-weil-pbc-integral-morphism-limit-of-finite"
+ ],
+ "proof": [
+  {
+   "text": "By [lem-weil-pbc-integral-morphism-limit-of-finite], $N_f$ is a filtered limit of finite $S$-schemes $T_\\lambda$ with affine transition maps. A finite morphism is affine, hence quasi-compact and separated (Stacks Tag 01S7), so by [lem-weil-pbc-qcqs-morphism-permanence] (2) each $T_\\lambda$ is quasi-compact and quasi-separated, $S$ being so. By [pqf-lem-normalization-open], $\\iota_f:X\\to N_f$ is an open immersion; $f$ is quasi-compact [def-weil-pbc-scheme-conventions] and $S$ is quasi-compact, so $X$ is quasi-compact by [lem-weil-pbc-qcqs-morphism-permanence] (2), and hence so is its image $V=\\iota_f(X)\\cong X$, a quasi-compact open of $N_f$. Clause (1) of [pqf-lem-limit-qc-open-descends] gives an index $\\lambda_1$ and a quasi-compact open $U_{\\lambda_1}\\subset T_{\\lambda_1}$ with $p_{\\lambda_1}^{-1}(U_{\\lambda_1})=V$. Letting $U_\\lambda$ be its preimage in $T_\\lambda$ for $\\lambda\\ge\\lambda_1$, clause (3) of that lemma identifies $V$ with the filtered limit of the quasi-compact $U_\\lambda$, with affine transition maps.",
+   "uses": [
+    "lem-weil-pbc-integral-morphism-limit-of-finite",
+    "lem-weil-pbc-qcqs-morphism-permanence",
+    "def-weil-pbc-scheme-conventions",
+    "pqf-def-quasifinite",
+    "pqf-lem-normalization-open",
+    "pqf-lem-limit-qc-open-descends"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-nagata-compactification/sk-prop-nagata-sketch-zmt/thm-pqf-immersion-descent.md",
+    "place": "Step 1"
+   }
+  },
+  {
+   "text": "The open immersion $\\iota_f$ induces an isomorphism $X\\to V$, in particular a closed immersion of $S$-schemes into the filtered limit $V=\\varprojlim_{\\lambda\\ge\\lambda_1}U_\\lambda$, whose transition maps are affine and whose stages $U_\\lambda$ are quasi-compact (Step 1). The structure morphism $X\\to S$ is locally of finite type [def-weil-pbc-scheme-conventions]. [pqf-lem-limit-immersion-descends] therefore gives an index $\\lambda_0\\ge\\lambda_1$ for which the composite $X\\to V\\to U_{\\lambda_0}$, the corestriction of $p_{\\lambda_0}\\circ\\iota_f$, is a closed immersion.",
+   "uses": [
+    "def-weil-pbc-scheme-conventions",
+    "pqf-lem-limit-immersion-descends"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-nagata-compactification/sk-prop-nagata-sketch-zmt/thm-pqf-immersion-descent.md",
+    "place": "Step 2"
+   }
+  },
+  {
+   "text": "Let $h=p_{\\lambda_0}\\circ\\iota_f:X\\to U_{\\lambda_0}\\hookrightarrow T_{\\lambda_0}$. It is a closed immersion followed by an open immersion, hence an immersion [def-weil-pbc-scheme-conventions]. Since $X$ is quasi-compact (Step 1) and $T_{\\lambda_0}$ is quasi-separated (Step 1), $h$ is quasi-compact by [lem-weil-pbc-qcqs-morphism-permanence] (1). [lem-pqf-qc-immersion-open-closed-factor] gives $X\\xrightarrow{j}T\\xrightarrow{i}T_{\\lambda_0}$ with $j$ an open immersion, $i$ a closed immersion and $i\\circ j=h=p_{\\lambda_0}\\circ\\iota_f$. A closed immersion is quasi-separated (indeed separated), so $T$ is quasi-separated by [lem-weil-pbc-qcqs-morphism-permanence] (2), $T_{\\lambda_0}$ being so; as $X$ is quasi-compact, $j$ is quasi-compact by [lem-weil-pbc-qcqs-morphism-permanence] (1).",
+   "uses": [
+    "def-weil-pbc-scheme-conventions",
+    "lem-weil-pbc-qcqs-morphism-permanence",
+    "lem-pqf-qc-immersion-open-closed-factor"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-nagata-compactification/sk-prop-nagata-sketch-zmt/thm-pqf-immersion-descent.md",
+    "place": "Step 3"
+   }
+  },
+  {
+   "text": "If $S$ is locally Noetherian [pqf-def-locnoeth], the finite morphism $T_{\\lambda_0}\\to S$ is of finite presentation by [pqf-lem-finite-fp-locnoeth], so the index $\\lambda_0$ of Step 2 satisfies the additional clause.",
+   "uses": [
+    "pqf-def-locnoeth",
+    "pqf-lem-finite-fp-locnoeth"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-nagata-compactification/sk-prop-nagata-sketch-zmt/thm-pqf-immersion-descent.md",
+    "place": "Step 4"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-integral-morphism-limit-of-finite",
+  "lem-weil-pbc-qcqs-morphism-permanence",
+  "def-weil-pbc-scheme-conventions",
+  "pqf-def-quasifinite",
+  "pqf-lem-normalization-open",
   "pqf-lem-limit-qc-open-descends",
   "pqf-lem-limit-immersion-descends",
-  "pqf-lem-qs-intersection-qc",
+  "lem-pqf-qc-immersion-open-closed-factor",
   "pqf-def-locnoeth",
   "pqf-lem-finite-fp-locnoeth"
  ],
- "proof_origin": null,
- "mathlib_searches": [],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/blueprint/master/blueprint/sec-nagata-compactification/sk-prop-nagata-sketch-zmt/thm-pqf-immersion-descent.md",
+  "place": "Steps 1-4"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Immersion factorization at finite stage",
+   "results": "AffineTransitionLimit existence_hom_hom_comp_eq_comp_of_locallyOfFiniteType and exists_preimage_eq; no exact theorem for the full target statement",
+   "date": "2026-10-11",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "IsImmersion, QuasiCompact",
+   "results": "no hit (unknown identifier IsImmersion)",
+   "date": "2026-10-11",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "toNormalization|isImmersion_iff_exists_of_quasiCompact Mathlib/AlgebraicGeometry",
+   "results": "normalization and immersion component declarations only; no exact theorem for the target",
+   "date": "2026-10-11",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Immersion factorization at finite stage",
+   "results": "unavailable",
+   "date": "2026-10-11",
+   "verdict": "unavailable"
+  }
+ ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "import_flags": [
   "undischarged_input",
@@ -126,5 +223,24 @@
   }
  },
  "chapter": "sec-nagata-compactification",
- "unit": "sk-prop-nagata-sketch-zmt"
+ "unit": "sk-prop-nagata-sketch-zmt",
+ "split_report": {
+  "date": "2026-10-11",
+  "item": "thm-pqf-immersion-descent",
+  "worker": "stage1",
+  "summary": "Split the four blueprint proof steps. Added a Stacks statement node for the Tag 02LR quasi-compact open immersion from a quasi-finite morphism to its relative normalization, and attached the Tag 01QV factorization step to an exact Mathlib theorem as a leaf. Checked the hypotheses for finite stages, quasi-compact opens, locally finite type, quasi-separated intersections, and the locally Noetherian finite-presentation refinement.",
+  "blueprint": "Steps 1, 2, 3, and 4 of the blueprint proof text.",
+  "tool_uses": []
+ },
+ "tool_uses": [
+  "lem-weil-pbc-integral-morphism-limit-of-finite"
+ ],
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-pid2644",
+  "group": "G1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-pid2644 (reviewer sub-agent of L); spot-checked: Read packet whole; Mathlib leaf IsImmersion.isImmersion_iff_exists_of_quasiCompact at Immersion.lean:267 exact; no existing Tag 01QV node (no duplicate). FIX more, RETURN less: (1) C5 Step 3: quasi-compactness of j was taken from the construction inside the proof of Tag 01QV (X = T x U base change), not from the cited factorization statement; replaced by X qc + T qs via lem-weil-pbc-qcqs-morphism-permanence (1),(2); h qc likewise (pqf-lem-qs-intersection-qc no longer needed). (2) C4/C1 Step 1: V qc was inferred from iota_f being a qc open immersion (wrong reason); now X qc since f qc over qc S (permanence (2)); stages qcqs via finite=>affine=>qc+separated (Tag 01S7) and permanence (2); the limit presentation now cites lem-weil-pbc-integral-morphism-limit-of-finite (tool use). (3) B3/class b statement: relative normalization, qc open immersion and limit presentation now cite lem-weil-pbc-relative-normalization, pqf-lem-normalization-open, lem-weil-pbc-integral-morphism-limit-of-finite (stmt_deps updated); the compatibility i o j = p_{lambda0} o iota_f, which thm-pqf-zmt-factorization step 3 relies on, made explicit (E7: clarification, proved in Steps 2-3). Second reading by G1 missed (1)-(3).; 1 file(s) fixed by the reviewer"
+ }
 }
