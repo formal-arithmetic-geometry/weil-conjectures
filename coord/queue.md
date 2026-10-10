@@ -1,6 +1,6 @@
 # Work queue
 
-893 items; claim with `tools/claim.py next <group> [--stage N]`.
+894 items; claim with `tools/claim.py next <group> [--stage N]`.
 
 ## Stage 1: nodes to split (126)
 
@@ -24,17 +24,17 @@
 | `lem-pc-tor-independent-perfect-tensor-base-change` | 3020 | none |
 | `lem-sc-affine-perfect-derived-tensor-hom` | 3020 | none |
 | `lem-sc-affine-perfect-open-represent-cohomology` | 3020 | none |
-| `lem-sc-affine-perfect-plus-shift` | 3020 | none |
 | `lem-sc-affine-support-iterated-cones` | 3020 | none |
 | `lem-sc-perfect-derived-tensor-perfect` | 3020 | none |
 | `lem-sc-perfect-into-support-on-T` | 3020 | none |
+| `lem-sc-affine-perfect-plus-locally-free` | 3021 | none |
 | `lem-pc-perfect-summand` | 3022 | none |
 | `lem-pc-genus-agrees-sc` | 4007 | rests_on_sorry |
 | `prop-av-tate-rank` | 4008 | rests_on_sorry |
 | `cor-pc-sigma-pic-iso` | 4009 | rests_on_sorry |
 | `lem-pc-vanishing-above-dim` | 4009 | rests_on_sorry |
 | `lem-sc-finite-flat-surj-points` | 4009 | none |
-| `lem-sc-effective-cartier-dimension-drop` | 4011 | none |
+| `lem-sc-effective-cartier-affine-dimension-drop` | 4012 | none |
 | `lem-sc-etale-local-ring-faithfully-flat-descent` | 4012 | none |
 | `lem-sc-etale-triple-to-sh-completion-flat` | 4012 | none |
 | `lem-sc-ass-weakass-locally-noetherian` | 5012 | none |
@@ -133,7 +133,7 @@
 | `lem-zl-noether-normalization-dimension` | - | none |
 | `lem-pur-rhom-global-sections` | - | none |
 
-## Stage 2: nodes to state (767)
+## Stage 2: nodes to state (768)
 
 | node | distance to Mathlib | kind |
 |---|---|---|
@@ -304,6 +304,7 @@
 | `lem-sc-dvr-saturation-line` | 1 | state |
 | `lem-sc-dvr-tensor-surjective-negative-valuation` | 1 | state |
 | `lem-sc-dvr-valuation-ring-characterization` | 1 | state |
+| `lem-sc-effective-cartier-dimension-drop` | 1 | state |
 | `lem-sc-etale-affine-over-curve` | 1 | state |
 | `lem-sc-etale-coproduct-etale` | 1 | state |
 | `lem-sc-etale-fibre-product-coproduct` | 1 | state |
@@ -905,7 +906,7 @@
 | `lem-weil-pbc-projective-space-zero-isomorphism` | 4 | state |
 | `def-nagata-fixed-base-separated-stage` | 6 | state |
 
-Not open yet: 1576 nodes that wait for a statement dependency, 166 nodes that wait for stage 1.
+Not open yet: 1577 nodes that wait for a statement dependency, 166 nodes that wait for stage 1.
 
 ## Stage 3: modules to prove (0)
 
