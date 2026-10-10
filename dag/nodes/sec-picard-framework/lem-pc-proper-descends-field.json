@@ -19,12 +19,78 @@
  "stmt_deps": [
   "def-pc-field-extension",
   "def-pc-scheme",
+  "def-weil-finite-type-morphism",
   "def-pc-base-change",
   "def-weil-proper-morphism"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "By [lem-pc-field-extension-fpqc-cover], the structure morphism $\\operatorname{Spec}K\\to\\operatorname{Spec}k$ is a flat, surjective, quasi-compact morphism and its singleton family is an fpqc covering. The base change of the structure morphism $X\\to\\operatorname{Spec}k$ along this cover is the structure morphism $X_K\\to\\operatorname{Spec}K$, which is proper by hypothesis.",
+   "uses": [
+    "lem-pc-field-extension-fpqc-cover",
+    "def-pc-base-change",
+    "def-weil-proper-morphism"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/descent.tex",
+    "place": "Descent, Lemma Tag 02L1 (lemma-descending-property-proper), setup and the one-member fpqc covering Spec(K) -> Spec(k)"
+   }
+  },
+  {
+   "text": "Apply [lem-weil-pbc-fpqc-descend-separated] to $X\\to\\operatorname{Spec}k$ and the singleton cover from step 1. Its base change is separated because a proper morphism is separated [def-weil-proper-morphism]. Hence $X\\to\\operatorname{Spec}k$ is separated.",
+   "uses": [
+    "lem-weil-pbc-fpqc-descend-separated",
+    "lem-pc-field-extension-fpqc-cover",
+    "def-weil-proper-morphism"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/descent.tex",
+    "place": "Descent, Lemma Tag 02L1, using the separatedness part of the fpqc-locality criterion"
+   }
+  },
+  {
+   "text": "Apply [lem-weil-pbc-fpqc-descend-universally-closed] to the same morphism and cover. The base change $X_K\\to\\operatorname{Spec}K$ is universally closed because it is proper [def-weil-proper-morphism]. Therefore $X\\to\\operatorname{Spec}k$ is universally closed.",
+   "uses": [
+    "lem-weil-pbc-fpqc-descend-universally-closed",
+    "lem-pc-field-extension-fpqc-cover",
+    "def-weil-proper-morphism"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/descent.tex",
+    "place": "Descent, Lemma Tag 02L1, using the universally-closed part of the fpqc-locality criterion"
+   }
+  },
+  {
+   "text": "The structure morphism $X\\to\\operatorname{Spec}k$ is of finite type by the hypothesis that $X$ is a scheme of finite type over $k$, which by definition [def-weil-finite-type-morphism] means that its structure morphism is of finite type. Combining finite type with separatedness from step 2 and universal closedness from step 3, the definition of proper morphism [def-weil-proper-morphism] gives that $X$ is proper over $k$.",
+   "uses": [
+    "def-pc-scheme",
+    "def-weil-finite-type-morphism",
+    "def-weil-proper-morphism"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/descent.tex",
+    "place": "Descent, Lemma Tag 02L1, final conjunction in the definition of properness"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-field-extension-fpqc-cover",
+  "def-pc-base-change",
+  "def-weil-proper-morphism",
+  "lem-weil-pbc-fpqc-descend-separated",
+  "lem-weil-pbc-fpqc-descend-universally-closed",
+  "def-pc-scheme",
+  "def-weil-finite-type-morphism"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/descent.tex",
+  "place": "Descent, Lemma Tag 02L1 (lemma-descending-property-proper)"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -49,12 +115,43 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-pc-very-ample-descends",
   "by": "worker",
   "date": "2026-10-10"
  },
  "chapter": "sec-picard-framework",
- "unit": "sk-thm-picard-rr"
+ "unit": "sk-thm-picard-rr",
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "lem-pc-proper-descends-field",
+  "worker": "stage1",
+  "summary": "Split properness descent into the fpqc field-spectrum cover, separatedness descent, universally-closed descent, and the defining finite-type conjunction. The existing Stacks fpqc descent nodes supply the two non-elementary property steps; one new node records the field-extension covering fact.",
+  "blueprint": "Realizes lem-pc-very-ample-descends, proof preliminary properness assertion, by spelling out the properness descent used before cohomology base change.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-fpqc-descend-separated",
+    "why": "The item needs fpqc descent of separatedness, which is a generic property lemma not supplied by the Picard-framework route."
+   },
+   {
+    "node": "lem-weil-pbc-fpqc-descend-universally-closed",
+    "why": "The item needs fpqc descent of universal closedness, which is a generic property lemma not supplied by the Picard-framework route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-fpqc-descend-separated",
+  "lem-weil-pbc-fpqc-descend-universally-closed",
+  "lem-weil-pbc-fpqc-descend-separated",
+  "lem-weil-pbc-fpqc-descend-universally-closed"
+ ],
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-pdf",
+  "group": "G1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-pdf (reviewer sub-agent of L); spot-checked: Source: Stacks Descent Tag 02L1 (lemma-descending-property-proper, proper is fpqc local on the base, proved from Lemmas lemma-descending-property-universally-closed / -separated / -finite-type); the item statement (X finite type over k, X_K proper over K => X proper over k) is the special case of the singleton cover Spec K -> Spec k, hypotheses agree. Step 1 carried by the new node lem-pc-field-extension-fpqc-cover (flat, surjective, quasi-compact, singleton fpqc covering) and def-pc-base-change (X_K is the base change); step 2 by lem-weil-pbc-fpqc-descend-separated whose hypotheses flat+surjective+quasi-compact are exactly those of the new node; step 3 by lem-weil-pbc-fpqc-descend-universally-closed whose fpqc-covering hypothesis is the new node's conclusion (def-weil-pbc-fpqc-covering); step 4 by def-weil-proper-morphism (proper = separated + finite type + universally closed). New node checked true: Spec K and Spec k are one-point spaces, so p is surjective and quasi-compact (def-weil-finite-type-morphism defines quasi-compact), K is free hence flat over k, and the only nonempty affine open Spec k is the image of the affine Spec K, so {p} meets def-weil-pbc-fpqc-covering; tested on K=k and K=k(t). Tool uses accepted: the two fpqc descent lemmas of sk-thm-p1 are generic black boxes (C8). No sorry-free slopmaster2 declaration states the item (grep of IsProper in WeilConjectures shows only base-change stability); blueprint_refs search found nothing, same_as [] stands. FIX more, RETURN less: dag/nodes/sec-picard-framework/lem-pc-proper-descends-field.json: proof[3].text/uses and proof_deps: step 4 took finite type of X -> Spec k from def-pc-scheme, which does not define finite type (C4); now cites def-weil-finite-type-morphism ('for a scheme over a field, finite type refers to its structure morphism'). 2026-10-10 Sat Oct 10 03:42:50 PM UTC 2026 - Sat Oct 10 03:43:29 PM UTC 2026; 1 file(s) fixed by the reviewer"
+ }
 }
