@@ -25,7 +25,6 @@
 | `lem-weil-pbc-smooth-fibre-regular-local` | 1012 | none |
 | `lem-weil-pbc-smooth-localization-conormal-split` | 1012 | none |
 | `lem-weil-pbc-smooth-over-field-dimension-differentials` | 1012 | none |
-| `lem-weil-pbc-fs-adic-flat-geometrically-regular-closed-fibre` | 1013 | none |
 | `lem-weil-pbc-fs-adic-lift-derivation` | 1013 | none |
 | `lem-weil-pbc-fs-adic-lift-over-finite-coefficient-map` | 1013 | none |
 | `lem-weil-pbc-geometrically-reduced-extension-separable` | 1013 | none |
@@ -109,6 +108,7 @@
 | `lem-weil-pbc-fpqc-descend-flat` | 1014 | none |
 | `lem-weil-pbc-fpqc-descend-locally-finite-presentation` | 1014 | none |
 | `lem-weil-pbc-fs-adic-field-geometrically-regular` | 1014 | none |
+| `lem-weil-pbc-fs-adic-lift-into-complete` | 1014 | none |
 | `lem-weil-pbc-fs-adic-local-flat` | 1014 | none |
 | `lem-weil-pbc-limit-tower-essentially-finite-presentation` | 1014 | none |
 | `lem-weil-pbc-local-ring-spec-limit-affine-neighbourhoods` | 1014 | none |
@@ -933,7 +933,7 @@
 | `lem-weil-pbc-p1-field-dimension-one` | 4 | state |
 | `lem-weil-pbc-projective-space-zero-isomorphism` | 4 | state |
 
-Not open yet: 636 nodes that wait for stage 1, 570 nodes that wait for a statement dependency.
+Not open yet: 636 nodes that wait for stage 1, 571 nodes that wait for a statement dependency.
 
 ## Stage 3: modules to prove (0)
 
