@@ -1776,3 +1776,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 15:22 L: returned deliver/E1/lem-pc-grothendieck-edge-cocycle (reviewer RETURN: Re-push 9f02e0808 repairs return point 3 (def-sp-left-exact-additive cited in step 1) and the proof_origin of point 4, b)
 - 15:23 L: lem-pc-grothendieck-edge-cocycle source corrected to Derived 015N (maintainer field; return point 4 now concerns only the steps' sources)
 - 15:23 L: merged deliver/G1/lem-sc-geometrically-irreducible-product (reviewer FIX; first push; new nodes: 2)
+- 15:24 L: merged deliver/E1/lem-pc-zero-dimensional-closed-subscheme-finite (reviewer FIX; first push; new nodes: 0)

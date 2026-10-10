@@ -27,9 +27,57 @@
   "def-weil-finite-dimensional-subspace",
   "def-weil-vector-space-dimension"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "The closed immersion $Z\\to X$ is of finite type because every closed immersion is proper, hence of finite type [lem-weil-pbc-closed-immersion-proper]. Since $X\\to\\operatorname{Spec}(k)$ is of finite type by hypothesis, the composite structure morphism $Z\\to\\operatorname{Spec}(k)$ is of finite type by the definition of finite-type morphism.",
+   "uses": [
+    "lem-weil-pbc-closed-immersion-proper",
+    "def-weil-finite-type-morphism"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 06LH (varieties-lemma-algebraic-scheme-dim-0), algebraic case: a closed subscheme of a finite-type k-scheme is again algebraic"
+   }
+  },
+  {
+   "text": "If $Z$ is empty, then $Z=\\operatorname{Spec}(0)$ is affine and $Z\\to\\operatorname{Spec}(k)$ is finite (the zero ring is a finite $k$-module), and step 3 applies. Otherwise $Z$ is nonempty and its underlying topological space has dimension at most zero by hypothesis, so by [lem-pc-scheme-dimension-local-rings] every local ring $\\mathcal O_{Z,z}$ has Krull dimension at most zero, i.e. $\\dim Z\\le0$ in the sense of [def-pc-dimension]. Hence the existing algebraic zero-dimensional finiteness lemma [lem-pc-algebraic-dim-zero-affine-finite] applies to the finite-type $k$-scheme $Z$ (step 1). It gives that $Z$ is affine and that $Z\\to\\operatorname{Spec}(k)$ is finite.",
+   "uses": [
+    "lem-pc-scheme-dimension-local-rings",
+    "def-pc-dimension",
+    "lem-pc-algebraic-dim-zero-affine-finite"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 06LH (varieties-lemma-algebraic-scheme-dim-0), algebraic case"
+   }
+  },
+  {
+   "text": "Applying the finite-over-a-field global-sections lemma [lem-weil-pbc-finite-over-field-affine-finite-dim] to this finite structure morphism identifies $Z$ with $\\operatorname{Spec}\\Gamma(Z,\\mathcal O_Z)$ and shows that $\\Gamma(Z,\\mathcal O_Z)$ is finite-dimensional over $k$.",
+   "uses": [
+    "lem-weil-pbc-finite-over-field-affine-finite-dim"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 03J3 paragraph before 03J4: a scheme finite over a field is the spectrum of a finite-dimensional algebra"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-closed-immersion-proper",
+  "def-weil-finite-type-morphism",
+  "def-pc-dimension",
+  "lem-pc-scheme-dimension-local-rings",
+  "lem-pc-algebraic-dim-zero-affine-finite",
+  "lem-weil-pbc-finite-over-field-affine-finite-dim"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/varieties.tex",
+  "place": "Tag 06LH (varieties-lemma-algebraic-scheme-dim-0), algebraic case"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -54,12 +102,37 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-pc-zero-support-finite-scheme",
   "by": "worker",
   "date": "2026-10-10"
  },
  "chapter": "sec-picard-framework",
- "unit": "sk-thm-picard-rr"
+ "unit": "sk-thm-picard-rr",
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "lem-pc-zero-dimensional-closed-subscheme-finite",
+  "worker": "stage1",
+  "summary": "Split Tag 06LH for a closed subscheme of a finite-type scheme over a field. The closed immersion gives finite type for Z, the existing algebraic zero-dimensional node gives affineness and finiteness, and the existing finite-over-a-field leaf gives the finite-dimensional global-sections conclusion.",
+  "blueprint": "The three steps realize the ancestor blueprint proof of lem-pc-degree-base-change, part (2), paragraph beginning 'The Euler characteristic of the quotient', specifically the assertion that the annihilator closed subscheme of the zero-dimensional support is finite over the field.",
+  "tool_uses": [
+   {
+    "node": "lem-pc-scheme-dimension-local-rings",
+    "why": "generic fact that the topological Krull dimension of a scheme is the supremum of the dimensions of its local rings, used to pass from the item's topological dimension hypothesis to the def-pc-dimension hypothesis of lem-pc-algebraic-dim-zero-affine-finite"
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pc-scheme-dimension-local-rings",
+  "lem-pc-scheme-dimension-local-rings"
+ ],
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-zcs",
+  "group": "E1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-zcs (reviewer sub-agent of L); spot-checked: Source: Stacks Tag 06LH (varieties.tex label lemma-algebraic-scheme-dim-0), algebraic case: algebraic k-scheme of dimension 0 is affine and finite over k; item statement agrees (finite type over k, Z closed subscheme hence algebraic, dim<=0), with the finite-dimensional Gamma clause from the Tag 03J3 paragraph. Step 1: lem-weil-pbc-closed-immersion-proper (a) states closed immersions are proper incl. finite type; composite Z->X->Spec k finite type checked from def-weil-finite-type-morphism in a few lines (finite affine cover of X by f.g. k-algebras, each preimage finitely covered by algebras f.g. over them). Step 2: lem-pc-algebraic-dim-zero-affine-finite (same unit) has hypothesis dim Y<=0 in the sense of def-pc-dimension (sup of local ring dimensions, nonempty X), whereas the item has topological Krull dimension (def-kun-topological-krull-dimension). FIX more, RETURN less (C4): dag/nodes/sec-picard-framework/lem-pc-zero-dimensional-closed-subscheme-finite.json: proof[1].text/uses, proof_deps, split_report.tool_uses: the step now treats empty Z directly (Spec 0, finite) and for nonempty Z cites the existing node lem-pc-scheme-dimension-local-rings (topological dim = sup dim O_{Z,z}) and def-pc-dimension to transfer the hypothesis; lem-pc-scheme-dimension-local-rings declared as a generic off-unit tool use. Step 3: lem-weil-pbc-finite-over-field-affine-finite-dim (mathlib leaf) states T affine, T=Spec Gamma, Gamma finite-dimensional, for T->Spec k finite: exactly the clause used. No new nodes; maintainer fields unchanged. Small cases: Z empty, Z=Spec k, Z=Spec k[e]/(e^2) inside A^1_k: conclusions hold. Report mentions a citations.json not in the delivery (harmless). Start Sat Oct 10 03:23:08 PM UTC 2026, end Sat Oct 10 03:23:57 PM UTC 2026.; 1 file(s) fixed by the reviewer"
+ }
 }
