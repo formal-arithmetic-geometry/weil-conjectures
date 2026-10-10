@@ -7,7 +7,7 @@
    "place": "step 4, 5 of its split (source: Lemma Tag 0DDF (lemma-proper-base-change-stalk) and its proof: 'pulling back by $\\bar y\\to Y$ produces the stalk'; Remark Tag 04JN)",
    "via": []
   },
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "Inverse image to a geometric point is the stalk",
@@ -19,14 +19,113 @@
  "stmt_deps": [
   "def-weil-affine-spectrum",
   "def-weil-pbc-etale-sheaves",
+  "def-weil-sheaf-of-modules-category",
   "def-weil-geometric-point",
   "def-weil-pbc-inverse-image",
   "def-weil-pbc-geometric-stalks"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "For an algebraically closed $\\Omega$, [lem-weil-pbc-spec-algebraically-closed-etale-sheaf-constant] gives, naturally in every sheaf of sets $G$ on $(\\operatorname{Spec}\\Omega)_{\\Et}$, an isomorphism from the constant sheaf with value $\\Gamma(\\operatorname{Spec}\\Omega,G)$ to $G$. Applying this to the underlying sheaf of an abelian sheaf and observing that the canonical map is defined by restriction of sections, hence respects zero and addition, gives a natural isomorphism between the constant abelian-sheaf functor and the identity. The same argument with the scalar-action maps gives the corresponding natural isomorphism for $\\Lambda$-module sheaves.",
+   "uses": [
+    "lem-weil-pbc-spec-algebraically-closed-etale-sheaf-constant",
+    "def-weil-pbc-abelian-etale-sheaves",
+    "def-weil-pbc-etale-sheaves",
+    "def-weil-sheaf-of-modules-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Remark 04JQ (lemma-equivalence-abelian-sheaves-point), using Remark 03P5 (Tag 03P5)"
+   }
+  },
+  {
+   "text": "Since $P=\\operatorname{Spec}\\Omega$ has one point, it is connected [def-weil-connected-scheme], so by [lem-weil-pbc-constant-sheaf-sections-connected] the canonical map $\\iota_P:E\\to\\Gamma(P,\\underline E)$ is an isomorphism for every abelian group $E$, naturally in $E$ (it is the component at $P$ of the canonical map from the constant presheaf, natural in $E$); for $E=\\Lambda$ it is a ring isomorphism $\\Lambda\\cong\\Lambda_P(P)$, and for a $\\Lambda$-module $E$ it is $\\Lambda$-linear. Together with the natural isomorphism $\\underline{\\Gamma(P,-)}\\cong\\mathrm{id}$ of Step 1, the constant-sheaf functor and $\\Gamma(P,-)$ are therefore quasi-inverse equivalences on abelian sheaves, and likewise on $\\Lambda$-module sheaves. Every equivalence of abelian categories is exact, so both global-sections functors in (1) are exact.",
+   "uses": [
+    "lem-weil-pbc-spec-algebraically-closed-etale-sheaf-constant",
+    "lem-weil-pbc-constant-sheaf-sections-connected",
+    "def-weil-connected-scheme",
+    "def-weil-pbc-abelian-etale-sheaves",
+    "def-weil-sheaf-of-modules-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Lemma 04JQ (lemma-equivalence-abelian-sheaves-point), conclusion, with Remark 03P5 (sections of a constant sheaf on a connected scheme)"
+   }
+  },
+  {
+   "text": "Apply the identity-geometric-point clause of [lem-weil-pbc-spec-algebraically-closed-etale-sheaf-constant] to the sheaf $\\bar y^{-1}G$ on $P=\\operatorname{Spec}\\Omega$. It gives a natural isomorphism $\\Gamma(P,\\bar y^{-1}G)\\cong(\\bar y^{-1}G)_{\\mathrm{id}_P}$.",
+   "uses": [
+    "lem-weil-pbc-spec-algebraically-closed-etale-sheaf-constant",
+    "def-weil-pbc-inverse-image",
+    "def-weil-pbc-geometric-stalks"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Remark 04JN (remark-stalk-pullback), with the identity point of Spec \\Omega"
+   }
+  },
+  {
+   "text": "The inverse-image stalk comparison [lem-weil-pbc-inverse-image-stalk-germ], applied to $f=\\bar y$, the point $\\mathrm{id}_P$ of $P$, and $G$, gives a natural isomorphism $(\\bar y^{-1}G)_{\\mathrm{id}_P}\\cong G_{\\bar y}$. Composing it with Step 3 yields the asserted natural isomorphism $\\Gamma(P,\\bar y^{-1}G)\\cong G_{\\bar y}$.",
+   "uses": [
+    "lem-weil-pbc-inverse-image-stalk-germ",
+    "def-weil-geometric-point"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Lemma 03Q1 (lemma-stalk-pullback), assertion (3), and Remark 04JN"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-spec-algebraically-closed-etale-sheaf-constant",
+  "def-weil-pbc-abelian-etale-sheaves",
+  "def-weil-pbc-etale-sheaves",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-pbc-inverse-image",
+  "def-weil-pbc-geometric-stalks",
+  "lem-weil-pbc-inverse-image-stalk-germ",
+  "def-weil-geometric-point",
+  "lem-weil-pbc-constant-sheaf-sections-connected",
+  "def-weil-connected-scheme"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Lemma 04JQ (lemma-equivalence-abelian-sheaves-point) and Remark 04JN (remark-stalk-pullback), using Lemma 03Q1"
+ },
  "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "global sections functor on abelian sheaves on the small etale site of Spec algebraically closed field is an equivalence and inverse image stalk equals stalk",
+   "results": "AlgebraicGeometry.ΓSpecIso_hom_stalkClosedPointIso_inv and related structure-sheaf stalk declarations; no etale-sheaf equivalence or inverse-image stalk theorem",
+   "date": "2026-10-11",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "Sheaf, smallEtaleTopology, sheafFiber, CategoryTheory.Equivalence",
+   "results": "0 hits; unknown identifier Sheaf",
+   "date": "2026-10-11",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rn 'smallEtaleTopology\\|pointSmallEtale\\|sheafFiber' Mathlib/AlgebraicGeometry/Sites Mathlib/CategoryTheory/Sites",
+   "results": "0 hits",
+   "date": "2026-10-11",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "global sections on the small etale site of an algebraically closed point identify inverse image with geometric stalk",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-11",
+   "verdict": "unavailable"
+  },
   {
    "tool": "grep",
    "query": "grep -rn 'isoStalk\\|stalk.*Spec\\|IsSepClosed' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/CategoryTheory/Sites ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicGeometry/Sites",
@@ -43,7 +142,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "worker",
@@ -63,5 +162,26 @@
   }
  },
  "chapter": "sec-proper-base-change",
- "unit": "sk-thm-properbasechange"
+ "unit": "sk-thm-properbasechange",
+ "split_report": {
+  "date": "2026-10-11",
+  "item": "lem-weil-pbc-geometric-point-pullback-stalk",
+  "worker": "stage1",
+  "summary": "Added a four-step proof following Stacks Lemmas 04JQ and 03Q1 and Remark 04JN. The reviewed algebraically closed-field constancy node is lifted to abelian and module sheaves, yielding the exact global-sections equivalences; its identity-point stalk clause is then composed with the reviewed inverse-image stalk comparison. No new nodes were created.",
+  "blueprint": "Realizes cor-weil-pbc-geometric-fiber-finite proof steps 4 and 5: the pullback to a geometric point computes the stalk, and global sections on Spec Omega are exact.",
+  "tool_uses": []
+ },
+ "tool_uses": [
+  "lem-weil-pbc-spec-algebraically-closed-etale-sheaf-constant",
+  "lem-weil-pbc-inverse-image-stalk-germ",
+  "lem-weil-pbc-constant-sheaf-sections-connected"
+ ],
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-gps3122",
+  "group": "H1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-gps3122 (reviewer sub-agent of L); spot-checked: Statement vs 04JN/03Q1(3)/04JQ; Steps 1,3,4 cite constancy node (const∘Γ≅id, Γ≅stalk at id) and inverse-image-stalk-germ with f=ȳ correctly (C4 ok); stalk via def-weil-pbc-geometric-stalks/inverse-image correct; no new nodes, DAG grep 'separably closed'/'disjoint union of copies' finds no duplicate (lem-exc-* are general-field G-set versions). FIX more, RETURN less: C1 Step 2 claimed quasi-inverse equivalence from const∘Γ≅id alone; the other half Γ(P,const E)≅E (needed for full faithfulness/essential surjectivity, and Λ_P(P)=Λ for the module clause) was uncited: now cites lem-weil-pbc-constant-sheaf-sections-connected with P connected [def-weil-connected-scheme], step made non-elementary, proof_deps updated. Cross-unit generic tools declared.; 1 file(s) fixed by the reviewer"
+ }
 }
