@@ -390,6 +390,7 @@ public import WeilConjectures.CategoryTheory.DerivedCategory.Complete.RationalCo
 public import WeilConjectures.CategoryTheory.DerivedCategory.Complete.Rationalization
 public import WeilConjectures.CategoryTheory.DerivedCategory.Constructible
 public import WeilConjectures.CategoryTheory.DerivedCategory.FlatModel
+public import WeilConjectures.CategoryTheory.DerivedCategory.Glue
 public import WeilConjectures.CategoryTheory.DerivedCategory.HasMonoidalDerivedCategory
 public import WeilConjectures.CategoryTheory.DerivedCategory.LeftDerivedFunctor.Defs
 public import WeilConjectures.CategoryTheory.DerivedCategory.LeftDerivedFunctor.MapDerivedCategory
@@ -762,6 +763,7 @@ public import WeilConjectures.Mathlib.Algebra.Homology.HomotopyCategory.Plus
 public import WeilConjectures.Mathlib.Algebra.Homology.HomotopyCategory.Shift
 public import WeilConjectures.Mathlib.Algebra.Homology.Localization
 public import WeilConjectures.Mathlib.Algebra.Homology.Monoidal
+public import WeilConjectures.Mathlib.Algebra.Homology.ShortComplex.Abelian
 public import WeilConjectures.Mathlib.Algebra.Homology.ShortComplex.Exact
 public import WeilConjectures.Mathlib.Algebra.Homology.ShortComplex.HomologicalComplex
 public import WeilConjectures.Mathlib.Algebra.Homology.ShortComplex.ModuleCat
@@ -1470,6 +1472,7 @@ public import WeilConjectures.SixFunctors.ProEtale.Comparison.Defs
 public import WeilConjectures.SixFunctors.ProEtale.Comparison.FullyFaithful
 public import WeilConjectures.SixFunctors.ProEtale.Comparison.LowerStar
 public import WeilConjectures.SixFunctors.ProEtale.Comparison.LowerStarAcyclic
+public import WeilConjectures.SixFunctors.ProEtale.ConstantSheaf
 public import WeilConjectures.SixFunctors.ProEtale.Derived.ClopenIdempotent
 public import WeilConjectures.SixFunctors.ProEtale.Derived.Comparison
 public import WeilConjectures.SixFunctors.ProEtale.Derived.Constructible
@@ -1480,6 +1483,12 @@ public import WeilConjectures.SixFunctors.ProEtale.Derived.ExternalProduct
 public import WeilConjectures.SixFunctors.ProEtale.Derived.Hom
 public import WeilConjectures.SixFunctors.ProEtale.Derived.Local
 public import WeilConjectures.SixFunctors.ProEtale.Derived.LocalCocycle
+public import WeilConjectures.SixFunctors.ProEtale.Derived.Locally
+public import WeilConjectures.SixFunctors.ProEtale.Derived.LocallyPerfect.Defs
+public import WeilConjectures.SixFunctors.ProEtale.Derived.LocallyPerfect.Extend
+public import WeilConjectures.SixFunctors.ProEtale.Derived.LocallyPerfect.Finish
+public import WeilConjectures.SixFunctors.ProEtale.Derived.LocallyPerfect.Retract
+public import WeilConjectures.SixFunctors.ProEtale.Derived.LocallyPerfect.Transport
 public import WeilConjectures.SixFunctors.ProEtale.Derived.LowerShriek
 public import WeilConjectures.SixFunctors.ProEtale.Derived.LowerShriekComparison
 public import WeilConjectures.SixFunctors.ProEtale.Derived.LowerShriekProjection
@@ -1493,8 +1502,7 @@ public import WeilConjectures.SixFunctors.ProEtale.Derived.Tensor
 public import WeilConjectures.SixFunctors.ProEtale.Derived.TorAmplitude
 public import WeilConjectures.SixFunctors.ProEtale.Derived.UpperLowerStar
 public import WeilConjectures.SixFunctors.ProEtale.Derived.UpperShriek
-public import WeilConjectures.SixFunctors.ProEtale.Derived.UpperStarMonoidal
-public import WeilConjectures.SixFunctors.ProEtale.Derived.UpperStarMonoidal
+public import WeilConjectures.SixFunctors.ProEtale.Derived.UpperStarCoevaluation
 public import WeilConjectures.SixFunctors.ProEtale.Derived.UpperStarMonoidal
 public import WeilConjectures.SixFunctors.ProEtale.Derived.UpperStarMonoidal.Comparison
 public import WeilConjectures.SixFunctors.ProEtale.Derived.UpperStarMonoidal.Derived
@@ -1516,6 +1524,7 @@ public import WeilConjectures.SixFunctors.ProEtale.LowerShriek.OpenImmersion.Mon
 public import WeilConjectures.SixFunctors.ProEtale.LowerShriek.OpenImmersion.Projection
 public import WeilConjectures.SixFunctors.ProEtale.LowerShriek.Proper
 public import WeilConjectures.SixFunctors.ProEtale.LowerShriek.WeaklyEtale
+public import WeilConjectures.SixFunctors.ProEtale.SectionTransport
 public import WeilConjectures.SixFunctors.ProEtale.TraceFormula.Adic
 public import WeilConjectures.SixFunctors.ProEtale.TraceFormula.Correspondence
 public import WeilConjectures.SixFunctors.ProEtale.TraceFormula.Curve
