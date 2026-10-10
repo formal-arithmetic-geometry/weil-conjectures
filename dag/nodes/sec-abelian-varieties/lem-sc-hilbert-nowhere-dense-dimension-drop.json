@@ -6,7 +6,8 @@
    "node": "lem-sc-hilbert-polynomial",
    "place": "proof, induction step: the nowhere-dense support has dimension strictly below dim X",
    "via": [
-    "lem-sc-hilbert-difference"
+    "lem-sc-hilbert-difference",
+    "lem-sc-hilbert-nowhere-dense-dimension-drop"
    ]
   },
   "same_as": []
@@ -22,12 +23,54 @@
   "pqf-def-locnoeth",
   "def-kun-topological-krull-dimension"
  ],
- "proof": [],
- "proof_deps": [],
+ "proof": [
+  {
+   "text": "If Z is empty, its Krull dimension is -infinity and the conclusion is immediate. Otherwise, let C be an irreducible component of Z. By [lem-sc-irreducible-components-cover], C is contained in an irreducible component W of X.",
+   "uses": [
+    "lem-sc-irreducible-components-cover",
+    "def-kun-topological-krull-dimension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/divisors.tex",
+    "place": "Tag 02P2, conclusion from the nowhere-dense closed support; irreducible-component containment from Topology Tag 004W"
+   }
+  },
+  {
+   "text": "By [lem-sc-locnoeth-components-locally-finite], the irreducible components of X are locally finite. Hence the union of the components other than W is closed near the generic point of W, and W has a nonempty open subset disjoint from that union. If C=W, this open subset lies in Z, contradicting that Z is nowhere dense. Therefore C is strictly contained in W. Every chain of irreducible closed subsets in C extends by W, so dim C + 1 <= dim W <= d.",
+   "uses": [
+    "lem-sc-locnoeth-components-locally-finite",
+    "lem-sc-irreducible-components-cover",
+    "def-kun-topological-krull-dimension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/divisors.tex",
+    "place": "Tag 02P2, finite-dimensional Noetherian dimension argument from a nowhere-dense closed support"
+   }
+  },
+  {
+   "text": "Taking the supremum over all irreducible components C of Z gives dim Z <= d - 1, hence dim Z < d. The same argument covers d=0: a nonempty C would force a strict chain in X, while the empty case was handled in step 1.",
+   "uses": [
+    "def-kun-topological-krull-dimension"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/divisors.tex",
+    "place": "Tag 02P2, dimension conclusion"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sc-irreducible-components-cover",
+  "def-kun-topological-krull-dimension",
+  "lem-sc-locnoeth-components-locally-finite",
+  "lem-sc-irreducible-components-cover"
+ ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/stacks-project/divisors.tex",
-  "place": "Tag 02P2, support-dimension conclusion"
+  "document": "literature/stacks-project/topology.tex",
+  "place": "Tag 0052 (topology-lemma-Noetherian), with Tag 004W (topology-lemma-irreducible) for the component-cover input"
  },
  "mathlib_searches": [
   {
@@ -60,12 +103,27 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-sc-hilbert-difference",
   "by": "worker",
   "date": "2026-10-10"
  },
  "chapter": "sec-abelian-varieties",
- "unit": "sk-def-av-ample-degree"
+ "unit": "sk-def-av-ample-degree",
+ "split_report": {
+  "date": "2026-10-11",
+  "item": "lem-sc-hilbert-nowhere-dense-dimension-drop",
+  "worker": "stage1",
+  "summary": "No sorry-free Lean declaration states the item. I split the finite-component dimension-drop argument into empty-case/component containment, the nowhere-dense strict-containment argument using a new local-finiteness node and the component-cover lemma, and the supremum conclusion. Existing one-dimensional specialization and the consumer were checked.",
+  "blueprint": "The three steps realize the lem-sc-hilbert-polynomial proof sentence: the nowhere-dense support has dimension strictly below dim X."
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-ndd2553",
+  "group": "G1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-ndd2553 (reviewer sub-agent of L); spot-checked: Math checked: component C of Z lies in component W of X (lem-sc-irreducible-components-cover); local finiteness gives open nbhd of generic point of W inside W, so C=W contradicts nowhere density; chain extension gives dim C+1<=d; empty and d=0 cases fine. C4: consumer lem-sc-hilbert-difference uses def-kun-topological-krull-dimension, same notion as item. No existing node states local finiteness of components (grep dag; same-tag nodes 0052 are global Noetherian/open-subscheme facts), no overlap with the merged denominator nodes; Mathlib grep 0 hits. FIX more, RETURN less: B3 new node lem-sc-locnoeth-components-locally-finite statement made TeX and cites [def-weil-irreducible-components] (was in stmt_deps only); reviewer grep recorded in mathlib_searches.; 1 file(s) fixed by the reviewer"
+ }
 }
