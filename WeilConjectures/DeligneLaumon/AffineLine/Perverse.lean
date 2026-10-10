@@ -154,6 +154,7 @@ theorem isZero_homologySheaf_obj_iff (a : ℤ) (M : WeilComplex k₀ l X) :
   ⟨fun h ↦ (ObjectProperty.ι _).map_isZero h,
     fun h ↦ IsZero.of_full_of_faithful_of_isZero (ObjectProperty.ι _) _ h⟩
 
+/-- A Weil sheaf placed in degree `a` has vanishing cohomology sheaves in degrees `b ≠ a`. -/
 theorem isZero_homologySheaf_singleComplex {a b : ℤ} (h : b ≠ a) (G : WeilSheaf k₀ l X) :
     IsZero ((homologySheaf b).obj (singleComplex a G)) := by
   rw [isZero_homologySheaf_obj_iff]
@@ -177,7 +178,7 @@ variable [SmoothOfRelativeDimension 1 (X ↘ Spec (CommRingCat.of k₀))]
   [IsSeparated (X ↘ Spec (CommRingCat.of k₀))] [QuasiCompact (X ↘ Spec (CommRingCat.of k₀))]
 
 omit [IsSeparated (X ↘ Spec (CommRingCat.of k₀))] [QuasiCompact (X ↘ Spec (CommRingCat.of k₀))] in
-/-- **The perverse t-structure on a smooth curve**, orthogonality: on a smooth separated curve
+/-- **The perverse t-structure on a smooth curve**, orthogonality: on a smooth curve
 `C` of finite type over `k₀`, a Weil complex lies in the lower class `ᵖD^{≥0}` exactly when it
 receives no nonzero morphism from an object of `ᵖD^{≤-1}`. Together with the truncation
 triangles this is the statement that the two curve classes form a t-structure.

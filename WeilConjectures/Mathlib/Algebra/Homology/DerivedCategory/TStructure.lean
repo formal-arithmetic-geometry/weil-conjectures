@@ -230,7 +230,14 @@ lemma homologyFunctor_map_bijective_of_isGE_of_isLE {P Q : DerivedCategory C} (n
 
 /-- For `X ≤ n` and `Y ≥ n` in the derived category, `H^n` induces a bijection between
 morphisms `X ⟶ Y` and morphisms `H^n X ⟶ H^n Y`: every morphism `X ⟶ Y` factors uniquely
-through `τ_{≥ n} X ⟶ τ_{≤ n} Y`, a morphism between objects of the shifted heart. -/
+through `τ_{≥ n} X ⟶ τ_{≤ n} Y`, a morphism between objects of the shifted heart:
+```
+X ──f──▶ Y
+│π       ▲ι
+▼        │
+τ_{≥n}X ─▶ τ_{≤n}Y
+```
+-/
 lemma homologyFunctor_map_bijective_of_isLE_of_isGE {X Y : DerivedCategory C} (n : ℤ)
     [X.IsLE n] [Y.IsGE n] :
     Function.Bijective (fun f : X ⟶ Y ↦ (homologyFunctor C n).map f) := by

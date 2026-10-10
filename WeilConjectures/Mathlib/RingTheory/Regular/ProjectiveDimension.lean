@@ -448,13 +448,8 @@ end IsLocalRing
 
 namespace IsRegularLocalRing
 
-/-- **Serre's theorem.** A noetherian local ring whose residue field has finite projective
-dimension is regular. The proof is by induction on the number of generators of `𝔪`: if every
-element of `𝔪` is a zerodivisor, then some `s ≠ 0` kills `𝔪`, which forces the residue field to be
-free, hence `𝔪 = 0`. Otherwise prime avoidance gives a nonzerodivisor `x ∈ 𝔪 \ 𝔪²`; the residue
-field of `R ⧸ (x)` is a retract of `𝔪 ⧸ x 𝔪`, which has finite projective dimension over
-`R ⧸ (x)` by change of rings, so `R ⧸ (x)` is regular by induction, and so is `R`. -/
-@[stacks 00OC "(1) ⇒ (3)"]
+/-- Auxiliary statement for `of_hasProjectiveDimensionLE_residueField`, by induction on
+`spanFinrank 𝔪`. -/
 theorem of_hasProjectiveDimensionLE_residueField_aux :
     ∀ (e : ℕ) (R : Type u) [CommRing R] [IsLocalRing R] [IsNoetherianRing R],
       (maximalIdeal R).spanFinrank = e → ∀ n : ℕ,
@@ -547,7 +542,11 @@ theorem of_hasProjectiveDimensionLE_residueField_aux :
     _ ≤ ringKrullDim R := h3
 
 /-- **Serre's theorem.** A noetherian local ring whose residue field has finite projective
-dimension is regular. -/
+dimension is regular. The proof is by induction on the number of generators of `𝔪`: if every
+element of `𝔪` is a zerodivisor, then some `s ≠ 0` kills `𝔪`, which forces the residue field to be
+free, hence `𝔪 = 0`. Otherwise prime avoidance gives a nonzerodivisor `x ∈ 𝔪 \ 𝔪²`; the residue
+field of `R ⧸ (x)` is a retract of `𝔪 ⧸ x 𝔪`, which has finite projective dimension over
+`R ⧸ (x)` by change of rings, so `R ⧸ (x)` is regular by induction, and so is `R`. -/
 @[stacks 00OC "(1) ⇒ (3)"]
 theorem of_hasProjectiveDimensionLE_residueField {R : Type u} [CommRing R] [IsLocalRing R]
     [IsNoetherianRing R] (n : ℕ)
