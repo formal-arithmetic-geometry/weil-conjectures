@@ -1328,3 +1328,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 11:42 L: merged K1 lem-weil-pbc-torsion-extension-flat-descent (05EG, +4 nodes).
 - 11:43 L: accepted lem-weil-pbc-sets-etale-inverse-image-stalk-germ (03Q1 (3) for sets, 7 steps; new Mathlib leaf: sheafification keeps geometric stalks of presheaves of sets).
 - 2026-10-10, delivery of C1: def-weil-pbc-curve-setting merged from deliver/C1/def-weil-pbc-curve-setting (1 commit(s), 0 new node(s), spot-checked by L: L: definition checked against the sketch and Curve.lean); claim closed
+- 2026-10-10, delivery of E1: lem-weil-pbc-finite-ring-map-quasi-finite merged from deliver/E1/lem-weil-pbc-finite-ring-map-quasi-finite (1 commit(s), 0 new node(s), spot-checked by L: L: 00PM/0H8X: finite implies finite type and finite fibres, discrete fibre spectrum); claim closed
