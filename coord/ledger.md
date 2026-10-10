@@ -1626,3 +1626,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 14:32 L: lem-sc-regular-local-domain attached to IsRegularLocalRing.isDomain (sorry-free, Defs.lean 216); tag corrected 00NO->00NP
 - 14:32 L: returned deliver/H1/lem-weil-pbc-sets-pushforward-stalk-strict-henselization (reviewer RETURN: 1. D2/D1: new node lem-weil-pbc-sets-strict-henselization-sections-colimit: its statement is the item's clause (2) (comp)
 - 14:33 L: merged deliver/E1/lem-exc-cochains-derived-invariants (reviewer FIX; first push; new nodes: 3)
+- 14:33 L: returned deliver/H1/lemma-weil-pbc-fibre-product-limit (reviewer RETURN: Reviewed head 128db40b3 (reviewer R-fpl). The points of the previous return are repaired: the two ill-typed children are)
