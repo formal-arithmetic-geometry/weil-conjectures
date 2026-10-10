@@ -26,8 +26,54 @@
   "def-sc-invertible-module",
   "def-weil-pbc-module-stalk"
  ],
- "proof": [],
- "proof_deps": [],
+ "proof": [
+  {
+   "text": "The no-embedded-points hypothesis says every associated point of O_X is a generic point of an irreducible component. By [lem-sc-ass-weakass-locally-noetherian], this is also the assertion for weakly associated points. To check the finite-component hypothesis, let U be quasi-compact. Local Noetherianity gives a finite affine open cover of U by Noetherian affine schemes; intersecting each member with U and applying [lem-weil-pbc-noetherian-open-subscheme-noetherian] gives Noetherian opens, and a finite union of Noetherian opens is Noetherian. Therefore U has a Noetherian underlying space and hence finitely many irreducible components by [lem-sc-noetherian-finite-irreducible-components]. Thus the hypotheses of [lem-sc-meromorphic-weakass-generic-product] hold, and it gives the product descriptions of K_X and K_X(L).",
+   "uses": [
+    "lem-sc-ass-weakass-locally-noetherian",
+    "lem-weil-pbc-noetherian-open-subscheme-noetherian",
+    "lem-sc-noetherian-finite-irreducible-components",
+    "lem-sc-meromorphic-weakass-generic-product"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/divisors.tex",
+    "place": "Tag 0EMH (divisors-lemma-quasi-coherent-K), statement and proof of part (1)"
+   }
+  },
+  {
+   "text": "At a generic point eta, the primes of O_{X,eta} are the generalizations of eta, so there is only the maximal prime; hence this local ring has dimension zero and is Artinian. Its maximal ideal is the nilradical, so every non-unit is nilpotent and therefore a zero-divisor. Consequently every non-zero-divisor is a unit, and the multiplicative set used to define K_X at eta consists only of units. The stalk of the sheafified localization is therefore K_{X,eta}=O_{X,eta}, since a stalk of the sheafification is the stalk of the presheaf and localization commutes with the filtered colimit defining the stalk (elementary; compare the proof of Tag 0EMF: in a local ring of dimension zero any nonzerodivisor is a unit). If eta lies in an open U, then j_eta^{-1}(U)=Spec O_{X,eta}, while if eta is not in U it is empty, since eta has no proper generalization. Evaluating the product on U therefore gives the first displayed product, with its map identified with the germ map.",
+   "uses": [
+    "def-weil-pbc-module-stalk"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/divisors.tex",
+    "place": "Tag 0EMF (divisors-lemma-meromorphic-weakass-finite), proof: K_Y = O_Y for local rings of dimension zero"
+   }
+  },
+  {
+   "text": "For an invertible module L, the second product description in [lem-sc-meromorphic-weakass-generic-product] gives K_X(L)(U)=product_{eta in X^0 intersect U} L_eta. Taking stalks commutes with tensor products of O_X-modules, (K_X tensor L)_eta = K_{X,eta} tensor L_eta = O_{X,eta} tensor L_eta = L_eta (elementary, Modules Tag 01CE: both sides are filtered colimits of the section-wise tensor products), and with the module action rule in [def-weil-pbc-module-stalk] this sends a pure tensor f tensor t to f_eta tensor t_eta, which is the germ of ft; by additivity this gives (ft)_eta=f_eta t_eta. The same stalk rule shows these identifications commute with restriction maps.",
+   "uses": [
+    "lem-sc-meromorphic-weakass-generic-product",
+    "def-sc-invertible-module",
+    "def-weil-pbc-module-stalk"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/divisors.tex",
+    "place": "Tag 0EMH, part (2), specialized to the invertible module \\mathcal L"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sc-ass-weakass-locally-noetherian",
+  "lem-weil-pbc-noetherian-open-subscheme-noetherian",
+  "lem-sc-noetherian-finite-irreducible-components",
+  "lem-sc-meromorphic-weakass-generic-product",
+  "def-weil-pbc-module-stalk",
+  "def-sc-invertible-module"
+ ],
  "proof_origin": {
   "by": "document",
   "document": "literature/stacks-project/divisors.tex",
@@ -43,7 +89,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "reviewer",
@@ -51,5 +97,20 @@
   "date": "2026-10-11"
  },
  "chapter": "sec-abelian-varieties",
- "unit": "sk-def-av-ample-degree"
+ "unit": "sk-def-av-ample-degree",
+ "split_report": {
+  "date": "2026-10-11",
+  "item": "lem-sc-meromorphic-sheaf-generic-product",
+  "worker": "stage1",
+  "summary": "Repaired the split to follow Tag 0EMF: added statement-only nodes for the weakly-associated generic-point product theorem and Tag 05AR's Ass=WeakAss comparison, used the existing Noetherian-open and finite-components leaves, and wrote out the Artinian generic-stalk and tensor-stalk arguments.",
+  "blueprint": "Realizes the ancestor proof clause: choose a regular meromorphic section after removing embedded points, using Tag 0EMF/0EMH's description of K_X and K_X(L) at generic points."
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-msg2728",
+  "group": "H1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-msg2728 (reviewer sub-agent of L); spot-checked: All three R-msg2530 points repaired: proof now follows the actual 0EMH proof (special case of 0EMF via 05AR), no-embedded-points hypothesis used in step 1 for 0EMF(a), 0EMF(b) from quasi-compact opens Noetherian + finite components (existing nodes); step 2 writes the dim-0 argument and j_eta^{-1}(U); step 3 derives (ft)_eta via stalk rule. New nodes 0EMF and 05AR: real lemmas, no duplicate in dag (grep 05AR/0EMF/weakly associated), not in Mathlib, statements match divisors.tex; class none. Statement unchanged, matches 0EMH and lem-sc-regular-meromorphic-section-exists use (C4). FIX more, RETURN less: (1) D1/preflight: step 2 cited 0EMH (the item's own tag) for the generic-stalk computation; replaced by the sheafification-stalk/localization argument written out, elementary, pointer to the 0EMF proof line K_Y=O_Y; (2) C1: step 3 used stalks commuting with tensor products, not in def-weil-pbc-module-stalk; folded as elementary with Modules Tag 01CE.; 1 file(s) fixed by the reviewer"
+ }
 }
