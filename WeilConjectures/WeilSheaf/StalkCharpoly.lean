@@ -416,4 +416,82 @@ lemma isIso_globalSectionsTransport_frobeniusPowStr {s s' : Spec (.of (Algebraic
   rw [ProEtale.globalSectionsTransport_eq_of_iso _ g hg]
   infer_instance
 
+omit [Finite k₀] [Fact (ringChar k₀ ≠ l)] in
+private lemma linearEquivOfIso_toLinearMap {M N : WeilCoefficients.{u} l} (e : M ≅ N) :
+    (WeilCoefficients.linearEquivOfIso e).toLinearMap =
+      ((WeilCoefficients.toModuleCat l).map e.hom).hom :=
+  rfl
+
+/-- The Frobenius of the stalk at `s` relative to `𝔽_{qᵐ}`, as a linear map, is the transport of
+global sections along the iterated Weil structure. -/
+lemma frobeniusEnd_stalkAt (m : ℕ)
+    (hs : s ≫ ((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius ^ m).hom =
+      (specGeometricFrobenius k₀ ^ m).hom ≫ s) :
+    (F.stalkAt s m hs).frobeniusEnd = ((WeilCoefficients.toModuleCat l).map
+      (ProEtale.globalSectionsTransport _ hs.symm (F.frobeniusPowStr m))).hom := by
+  have e₁ : (F.stalkAt s m hs).frobenius = WeilCoefficients.linearEquivOfIso
+      ((F.stalkObjSpecFrobeniusPowIso m s).symm ≪≫ eqToIso (congrArg F.stalkObj hs.symm) ≪≫
+        F.stalkObjFrobeniusPowIso m s) := rfl
+  rw [FrobeniusModule.frobeniusEnd, e₁, linearEquivOfIso_toLinearMap,
+    stalkAt_frobenius_hom_eq_globalSectionsTransport F s m hs]
+  rfl
+
+omit [Finite k₀] [Fact (ringChar k₀ ≠ l)] in
+private lemma toModuleCat_map_comp_hom {M N P : WeilCoefficients.{u} l} (f : M ⟶ N)
+    (g : N ⟶ P) :
+    ((WeilCoefficients.toModuleCat l).map (f ≫ g)).hom =
+      ((WeilCoefficients.toModuleCat l).map g).hom ∘ₗ
+        ((WeilCoefficients.toModuleCat l).map f).hom := by
+  rw [Functor.map_comp]
+  rfl
+
+/-- A geometric point fixed by `Frᵐ` up to `σᵐ` is fixed by `Frᵏᵐ` up to `σᵏᵐ`. -/
+lemma comp_geometricGaloisFrobenius_pow_mul {m : ℕ}
+    (hs : s ≫ ((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius ^ m).hom =
+      (specGeometricFrobenius k₀ ^ m).hom ≫ s) (k : ℕ) :
+    s ≫ ((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius ^ (k * m)).hom =
+      (specGeometricFrobenius k₀ ^ (k * m)).hom ≫ s := by
+  induction k with
+  | zero => simp only [zero_mul, pow_zero]; rfl
+  | succ k ih =>
+    rw [Nat.succ_mul, ← CategoryTheory.Aut.pow_hom_comp_pow_hom, ← Category.assoc, hs,
+      Category.assoc, ih, ← Category.assoc, CategoryTheory.Aut.pow_hom_comp_pow_hom]
+
+/-- The Frobenius relative to `𝔽_{qᵏᵐ}` is the `k`-th power of the Frobenius relative to
+`𝔽_{qᵐ}`. -/
+lemma frobeniusEnd_stalkAt_mul {m : ℕ} (hm : 1 ≤ m)
+    (hs : s ≫ ((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius ^ m).hom =
+      (specGeometricFrobenius k₀ ^ m).hom ≫ s) (k : ℕ) :
+    (F.stalkAt s (k * m) (comp_geometricGaloisFrobenius_pow_mul s hs k)).frobeniusEnd =
+      (F.stalkAt s m hs).frobeniusEnd ^ k := by
+  induction k with
+  | zero =>
+    have h₀ : (specGeometricFrobenius k₀ ^ (0 * m)).hom ≫ s =
+        s ≫ ((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius ^ 0).hom := by
+      rw [zero_mul, pow_zero, pow_zero]; rfl
+    rw [frobeniusEnd_stalkAt, pow_zero, globalSectionsTransport_frobeniusPowStr_congr F
+      (zero_mul m) rfl _ h₀, globalSectionsTransport_frobeniusPowStr_zero F
+        (by rw [zero_mul, pow_zero]; rfl)]
+    rfl
+  | succ k ih =>
+    have h : (specGeometricFrobenius k₀ ^ m).hom ≫ (specGeometricFrobenius k₀ ^ (k * m)).hom ≫
+        s = s ≫ ((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius ^ (k * m + m)).hom := by
+      have hk := comp_geometricGaloisFrobenius_pow_mul s hs (k + 1)
+      rw [add_one_mul] at hk
+      rw [← Category.assoc, CategoryTheory.Aut.pow_hom_comp_pow_hom]
+      exact hk.symm
+    have h' : ((specGeometricFrobenius k₀ ^ m).hom ≫ (specGeometricFrobenius k₀ ^ (k * m)).hom) ≫
+        s = s ≫ ((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius ^ (k * m + m)).hom := by
+      rw [Category.assoc]; exact h
+    rw [pow_succ', ← ih, frobeniusEnd_stalkAt, frobeniusEnd_stalkAt, frobeniusEnd_stalkAt]
+    have hτ : (specGeometricFrobenius k₀ ^ ((k + 1) * m)).hom =
+        (specGeometricFrobenius k₀ ^ m).hom ≫ (specGeometricFrobenius k₀ ^ (k * m)).hom := by
+      rw [CategoryTheory.Aut.pow_hom_comp_pow_hom, add_one_mul]
+    have c₁ := globalSectionsTransport_frobeniusPowStr_congr F (add_one_mul k m) hτ
+      (comp_geometricGaloisFrobenius_pow_mul s hs (k + 1)).symm h'
+    have c₂ := globalSectionsTransport_frobeniusPowStr_comp F (k * m) m hm
+      (comp_geometricGaloisFrobenius_pow_mul s hs k).symm hs.symm rfl h'
+    exact (congrArg (fun f ↦ ((WeilCoefficients.toModuleCat l).map f).hom)
+      (c₁.trans c₂.symm)).trans (toModuleCat_map_comp_hom _ _)
+
 end AlgebraicGeometry.WeilSheaf
