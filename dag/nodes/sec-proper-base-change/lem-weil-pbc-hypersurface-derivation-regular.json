@@ -12,9 +12,53 @@
   "def-weil-pbc-noetherian-ring",
   "def-weil-pbc-localization-at-prime"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "If $f$ is a unit then $R/fR=0$, which is regular vacuously. Otherwise let $\\bar{\\mathfrak q}$ be any prime of $R/fR$ and let $\\mathfrak p$ be its inverse image in $R$. By [lem-weil-pbc-localization-at-prime-of-quotient], $(R/fR)_{\\bar{\\mathfrak q}}$ is $R_{\\mathfrak p}/fR_{\\mathfrak p}$. Thus it suffices, for every such $\\mathfrak p$, to prove that this quotient is a regular local ring.",
+   "uses": [
+    "lem-weil-pbc-localization-at-prime-of-quotient"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra, Proposition Tag 00CT (proposition-localize-quotient), applied in the reduction in More on Algebra, Lemma Tag 07PF"
+   }
+  },
+  {
+   "text": "Fix such a prime $\\mathfrak p$. The derivation $D$ extends to $R_{\\mathfrak p}$ by [lem-weil-pbc-derivation-extends]. The hypothesis that $D(f)$ is a unit modulo $f$ remains true after this localization: an inverse relation $aD(f)+bf=1$ localizes. If $f\\notin\\mathfrak p$, the displayed quotient is zero; otherwise $f\\in\\mathfrak pR_{\\mathfrak p}$ and $D_{\\mathfrak p}(f)$ is a unit modulo $f$. If $f$ belonged to $(\\mathfrak pR_{\\mathfrak p})^2$, the Leibniz rule would put $D_{\\mathfrak p}(f)$ in $\\mathfrak pR_{\\mathfrak p}$, contradicting its unit image. Hence $f\\notin(\\mathfrak pR_{\\mathfrak p})^2$, and [lem-weil-pbc-regular-local-hypersurface-criterion] gives that $R_{\\mathfrak p}/fR_{\\mathfrak p}$ is regular local.",
+   "uses": [
+    "lem-weil-pbc-derivation-extends",
+    "lem-weil-pbc-regular-local-hypersurface-criterion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "More on Algebra, Lemma Tag 07PF (lemma-quotient-regular), proof: reduction to a regular local ring, the Leibniz-rule contradiction for $f\\in\\mathfrak m^2$, and use of Algebra Lemma Tag 00NQ"
+   }
+  },
+  {
+   "text": "Since every localization of $R/fR$ at a prime is regular local by Steps 1 and 2, and $R/fR$ is Noetherian as a quotient of the Noetherian ring $R$, the regular-ring local criterion [lem-weil-pbc-regular-ring-local-criterion] shows that $R/fR$ is regular.",
+   "uses": [
+    "lem-weil-pbc-regular-ring-local-criterion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "More on Algebra, Lemma Tag 07PF (lemma-quotient-regular), proof and Algebra, Definition Tag 00OD (definition-regular)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-localization-at-prime-of-quotient",
+  "lem-weil-pbc-derivation-extends",
+  "lem-weil-pbc-regular-local-hypersurface-criterion",
+  "lem-weil-pbc-regular-ring-local-criterion"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "More on Algebra, Lemma Tag 07PF (lemma-quotient-regular)"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -39,7 +83,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "worker",
@@ -59,5 +103,18 @@
   }
  },
  "chapter": "sec-proper-base-change",
- "unit": "sk-thm-p1"
+ "unit": "sk-thm-p1",
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "lem-weil-pbc-hypersurface-derivation-regular",
+  "worker": "stage1",
+  "summary": "Split Stacks More on Algebra Lemma 07PF into localization of the quotient, the local derivation argument, and the regular-ring local criterion; introduced a separately stated local hypersurface criterion from Algebra Lemma 00NQ."
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "group": "E1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed by the lead of E1; spot-checked by L: three steps follow Stacks 07PF: localize at a prime (quotient-localization node), the derivation extends and D(f) a unit forces f not in m^2 by Leibniz, the new 00NU-type criterion node for regular local quotients, then the regular-ring local criterion"
+ }
 }
