@@ -14,9 +14,73 @@
   "pqf-def-cohomology",
   "def-weil-pbc-module-cohomology-fmap"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "(Vanishing of the higher direct images.) Since $h$ is affine [pqf-def-affine-morphism] (a closed immersion is affine, by the same definition node) and $\\mathcal F$ is quasi-coherent, $R^ph_*\\mathcal F=0$ for all $p>0$ by [lem-pc-affine-morphism-hi] (Stacks 01XC: $R^ph_*\\mathcal F$ is the sheaf associated to $V\\mapsto H^p(h^{-1}(V),\\mathcal F)$, and for $V$ affine $h^{-1}(V)$ is affine, where quasi-coherent cohomology vanishes). This is the first assertion.",
+   "uses": [
+    "pqf-def-affine-morphism",
+    "lem-pc-affine-morphism-hi"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/coherent.tex",
+    "place": "Lemma 01XC (lemma-relative-affine-vanishing, line 181) and its proof"
+   }
+  },
+  {
+   "text": "(The direct image of an injective resolution is a $\\Gamma$-acyclic resolution.) Choose an injective resolution $\\mathcal F\\to\\mathcal I^\\bullet$ in the category of $\\mathcal O_X$-modules ($\\mathcal I^q=0$ for $q<0$). By the definition of cohomology and of higher direct images [pqf-def-cohomology], $H^p(X,\\mathcal F)=H^p(\\Gamma(X,\\mathcal I^\\bullet))$ and $R^ph_*\\mathcal F=H^p(h_*\\mathcal I^\\bullet)$, with $R^0h_*\\mathcal F=h_*\\mathcal F$ because $h_*$ is left exact, so $\\alpha:h_*\\mathcal F\\to h_*\\mathcal I^0$ identifies $h_*\\mathcal F$ with $\\ker(h_*\\mathcal I^0\\to h_*\\mathcal I^1)$. Together with step 1 the augmented complex $0\\to h_*\\mathcal F\\xrightarrow{\\alpha}h_*\\mathcal I^0\\to h_*\\mathcal I^1\\to\\cdots$ is exact, i.e. $\\alpha:h_*\\mathcal F\\to h_*\\mathcal I^\\bullet$ ($h_*\\mathcal F$ placed in degree $0$) is a quasi-isomorphism which is a monomorphism in every degree. Each $h_*\\mathcal I^q$ is acyclic for $\\Gamma(S,-)$ on $\\mathcal O_S$-modules [lem-weil-pbc-module-pushforward-injective-acyclic]. So $h_*\\mathcal F\\to h_*\\mathcal I^\\bullet$ is a resolution of $h_*\\mathcal F$ by $\\Gamma(S,-)$-acyclic objects.",
+   "uses": [
+    "pqf-def-cohomology",
+    "lem-weil-pbc-module-pushforward-injective-acyclic"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/cohomology.tex",
+    "place": "Remark 01F0 (remark-elucidate-lemma, line 2147): Rf_*F is represented by f_*I^•, and Gamma(Y, f_*I^•) computes RGamma(Y, Rf_*F) by Lemma 01EX (lemma-pushforward-injective) and Leray's acyclicity lemma"
+   }
+  },
+  {
+   "text": "(The acyclic resolution computes $H^p(S,h_*\\mathcal F)$.) Choose an injective resolution $s:h_*\\mathcal F\\to\\mathcal J^\\bullet$ of $\\mathcal O_S$-modules with $\\mathcal J^q=0$ for $q<0$. Since $\\alpha$ of step 2 is a quasi-isomorphism of bounded below complexes which is a monomorphism in each degree and $\\mathcal J^\\bullet$ is a bounded below complex of injectives, there is a morphism of complexes $\\gamma:h_*\\mathcal I^\\bullet\\to\\mathcal J^\\bullet$ with $\\gamma\\circ\\alpha=s$ [lem-weil-pbc-lift-along-injective-quasi-iso]; $\\gamma$ is a quasi-isomorphism because $\\alpha$ and $s$ are. By Leray's acyclicity lemma [lemma-weil-pbc-leray-acyclicity] (2), applied to the left exact functor $\\Gamma(S,-)$ on $\\mathcal O_S$-modules (an abelian category with enough injectives, [pqf-def-cohomology]), to the resolution $h_*\\mathcal F\\to h_*\\mathcal I^\\bullet$ by $\\Gamma(S,-)$-acyclic objects of step 2 and to the morphism $\\gamma$ over $\\mathrm{id}_{h_*\\mathcal F}$ into the injective resolution $\\mathcal J^\\bullet$, the map $H^p(\\Gamma(S,\\gamma)):H^p(\\Gamma(S,h_*\\mathcal I^\\bullet))\\to H^p(\\Gamma(S,\\mathcal J^\\bullet))=H^p(S,h_*\\mathcal F)$ is an isomorphism for every $p\\ge0$.",
+   "uses": [
+    "lem-weil-pbc-lift-along-injective-quasi-iso",
+    "lemma-weil-pbc-leray-acyclicity",
+    "pqf-def-cohomology"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/cohomology.tex",
+    "place": "Lemma 01F4 (lemma-apply-Leray, line 2255) part (1), proved directly as its proof suggests: Remark 01F0 (remark-elucidate-lemma) with Leray's acyclicity lemma, Derived Categories 015E (derived-lemma-leray-acyclicity)"
+   }
+  },
+  {
+   "text": "(This is the edge map.) By [def-weil-pbc-module-cohomology-fmap] (c), $e_{h,\\mathcal F}=\\varphi^*$ for the $h$-map $\\varphi=\\mathrm{id}_{h_*\\mathcal F}$, $\\mathcal G=h_*\\mathcal F$, and by [lem-weil-pbc-module-cohomology-fmap-functorial] (1) $\\varphi^*$ does not depend on the choices made in its definition. Make these choices: the injective resolution $\\mathcal F\\to\\mathcal I^\\bullet$ of step 2; the injective resolution $s:\\mathcal G\\to\\mathcal J^\\bullet$ of step 3; as resolution of $h_*\\mathcal I^\\bullet$ by a complex of injectives the quasi-isomorphism $\\gamma:h_*\\mathcal I^\\bullet\\to\\mathcal J'^\\bullet:=\\mathcal J^\\bullet$ of step 3; and $\\beta=\\mathrm{id}_{\\mathcal J^\\bullet}$. The compatibility required of $\\beta$ holds: the composite $\\mathcal G\\xrightarrow{\\varphi}h_*\\mathcal F\\xrightarrow{\\alpha}h_*\\mathcal I^\\bullet\\xrightarrow{\\gamma}\\mathcal J'^\\bullet$ is $\\gamma\\circ\\alpha=s=\\beta\\circ s$. The definition then gives $e_{h,\\mathcal F}=H^p(\\Gamma(S,\\gamma))^{-1}\\circ H^p(\\Gamma(S,\\mathrm{id}_{\\mathcal J^\\bullet}))=H^p(\\Gamma(S,\\gamma))^{-1}$ as a map $H^p(S,h_*\\mathcal F)=H^p(\\Gamma(S,\\mathcal J^\\bullet))\\to H^p(\\Gamma(S,h_*\\mathcal I^\\bullet))=H^p(\\Gamma(X,\\mathcal I^\\bullet))=H^p(X,\\mathcal F)$ [pqf-def-cohomology]. By step 3 it is an isomorphism, and it is $\\mathcal O_S(S)$-linear by the definition. Hence $e_{h,\\mathcal F}$ is an isomorphism of $\\mathcal O_S(S)$-modules for every $p\\ge0$.",
+   "uses": [
+    "def-weil-pbc-module-cohomology-fmap",
+    "lem-weil-pbc-module-cohomology-fmap-functorial",
+    "pqf-def-cohomology"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/cohomology.tex",
+    "place": "Section 01F7 (section-functoriality): Equation 01FA (equation-functorial) and Remark 01FB (remark-explain-arrow, line 2391), the arrow being the horizontal map beta followed by the inverse of the vertical quasi-isomorphism"
+   }
+  }
+ ],
+ "proof_deps": [
+  "pqf-def-affine-morphism",
+  "lem-pc-affine-morphism-hi",
+  "pqf-def-cohomology",
+  "lem-weil-pbc-module-pushforward-injective-acyclic",
+  "lem-weil-pbc-lift-along-injective-quasi-iso",
+  "lemma-weil-pbc-leray-acyclicity",
+  "def-weil-pbc-module-cohomology-fmap",
+  "lem-weil-pbc-module-cohomology-fmap-functorial"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/coherent.tex",
+  "place": "Cohomology of Schemes, Lemma 089W (lemma-relative-affine-cohomology) and Lemma 01XC; the Leray step written out directly (as the proof of Cohomology, Lemma 01F4 allows) from cohomology.tex Remark 01F0, Lemma 01EX and Remark 01FB"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -38,10 +102,17 @@
    "results": "no file; SheafCohomology/ has Basic.lean (Sheaf.H F n := Ext of the constant sheaf, Sheaf.H.map for a morphism of sheaves on one site, cohomologyPresheaf), Cech.lean, MayerVietoris.lean: abelian sheaves on a site only, no O_X-modules, no maps along morphisms of schemes, no R^pf_*",
    "date": "2026-10-10",
    "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "higher direct images of a quasi-coherent sheaf vanish for an affine morphism",
+   "results": "IsFinite.toIsAffineHom (Mathlib.AlgebraicGeometry.Morphisms.Finite), IdealSheafData.ideal_map_of_isAffineHom, isAffineHom_of_isAffine, IsAffineHom.mk (Mathlib.AlgebraicGeometry.Morphisms.Affine), IsIntegralHom.toIsAffineHom: no higher direct images, no cohomology",
+   "date": "2026-10-10",
+   "verdict": "no match"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "worker",
@@ -61,5 +132,21 @@
   }
  },
  "chapter": "sec-proper-base-change",
- "unit": "sk-thm-p1"
+ "unit": "sk-thm-p1",
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "lem-weil-pbc-affine-morphism-cohomology-edge",
+  "worker": "stage1",
+  "summary": "Statement and stmt_deps kept (checked against Stacks 089W/01XC and def-weil-pbc-module-cohomology-fmap (c)). Proof in 4 steps following Stacks 089W: (1) R^p h_* F = 0 by the existing 01XC node lem-pc-affine-morphism-hi (unit sk-thm-picard-serre-b, not a leaf: tool use to be recorded by the lead); (2) h_* of an injective resolution I^• of F is a resolution of h_*F by Gamma(S,-)-acyclics (new unsplit node lem-weil-pbc-module-pushforward-injective-acyclic, Stacks 01EX (2)); (3) Leray's acyclicity lemma (lemma-weil-pbc-leray-acyclicity (2), unit sk-thm-acyclicity: tool use) with a lift gamma: h_*I^• -> J^• (lem-weil-pbc-lift-along-injective-quasi-iso) shows H^p(Gamma(S,gamma)) is an isomorphism; (4) choosing J' = J, beta = id in the definition (independence: lem-weil-pbc-module-cohomology-fmap-functorial (1)) shows the edge map is H^p(Gamma(S,gamma))^{-1}. The Leray spectral sequence (01F4) is not used: the direct argument its proof allows is written out. Mathlib: no cohomology of O_X-modules; four searches recorded."
+ },
+ "tool_uses": [
+  "lem-pc-affine-morphism-hi",
+  "lemma-weil-pbc-leray-acyclicity"
+ ],
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "result": "accepted",
+  "note": "4 steps following Stacks 089W with the Leray step by hand: R^p h_* F = 0 (imported 01XC node lem-pc-affine-morphism-hi, tool use), h_* I^bullet a Gamma-acyclic resolution of h_* F (new unsplit 01EX (2) node), a lift gamma to an injective resolution and Leray's acyclicity lemma (imported lemma-weil-pbc-leray-acyclicity, tool use) make H^p(Gamma(S, gamma)) an isomorphism, and the edge map is that isomorphism by independence of choices (fmap-functorial (1))."
+ }
 }
