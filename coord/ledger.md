@@ -2511,3 +2511,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 20:25 L: merged deliver/J1/lem-sc-topological-filtered-injective-cech-acyclic (reviewer FIX; first push; new nodes: 0)
 - 20:25 L: merged deliver/G1/lem-sc-generic-rank-leading-degree (reviewer FIX; after a return; new nodes: 0)
 - 20:25 L: merged deliver/K1/lem-pc-alternating-cech-computes (reviewer FIX; first push; new nodes: 0)
+- 20:26 L: merged deliver/F1/lem-sc-faithfully-flat-local-dimension (reviewer FIX; first push; new nodes: 2)

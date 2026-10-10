@@ -21,11 +21,54 @@
   "place": "Algebra, Lemma Tag 00OH (lemma-dimension-going-up): going down and surjective Spec give dim R <= dim S; flat maps satisfy going down (Tag 00HS) and faithfully flat maps have surjective Spec"
  },
  "stmt_deps": [
-  "def-weil-pbc-krull-dimension-ring"
+  "def-weil-pbc-krull-dimension-ring",
+  "def-weil-pbc-faithfully-flat-ring-map"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "The faithfully flat map is flat, so it has the going-down property by [lem-sc-flat-going-down].",
+   "uses": [
+    "lem-sc-flat-going-down"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra, Lemma Tag 00HS (lemma-flat-going-down)"
+   }
+  },
+  {
+   "text": "Faithful flatness makes $\\operatorname{Spec}B\\to\\operatorname{Spec}A$ surjective by [lem-weil-pbc-faithfully-flat-surjective-spectrum].",
+   "uses": [
+    "lem-weil-pbc-faithfully-flat-surjective-spectrum"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra, Lemma Tag 00HQ (lemma-ff-rings), implication (1) => (2)"
+   }
+  },
+  {
+   "text": "Applying [lem-sc-going-down-surjective-dimension] to the ring map $A\\to B$ gives $\\dim A\\le\\dim B$.",
+   "uses": [
+    "lem-sc-going-down-surjective-dimension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra, Lemma Tag 00OH (lemma-dimension-going-up)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sc-flat-going-down",
+  "lem-weil-pbc-faithfully-flat-surjective-spectrum",
+  "lem-sc-going-down-surjective-dimension"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Algebra, Lemma Tags 00HS, 00HQ, and 00OH"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -57,10 +100,26 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-sc-strict-henselization-dimension",
   "by": "worker",
   "date": "2026-10-10"
+ },
+ "split_report": {
+  "date": "2026-10-11",
+  "item": "lem-sc-faithfully-flat-local-dimension",
+  "worker": "stage1",
+  "summary": "Split the local faithful-flat dimension inequality into the Stacks 00HS flat-going-down fact, the existing faithful-flat spectrum-surjectivity leaf (00HQ), and the strict general going-down plus surjective-spectrum dimension implication (00OH), recorded as a statement-only node. The local hypotheses are sufficient for applying the general implication; no additional use of locality is needed.",
+  "blueprint": "Realizes the lower-bound clause of the blueprint proof of strict henselization dimension: faithful flatness gives going down and surjective spectrum, then Tag 00OH gives the dimension inequality.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-ffd2307",
+  "group": "F1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-ffd2307 (reviewer sub-agent of L); spot-checked: C4: strict-henselization-dimension step 1 uses only dim R <= dim R^sh, which the item states (no fibre-dimension/equality clause needed). C1: going down for flat maps cited via leaf lem-sc-flat-going-down = Algebra.HasGoingDown.of_flat GoingDown.lean:155 (read; Mathlib's strict p<Q.under R form is equivalent, equality case trivial), not reproved; spectrum surjectivity via existing leaf; 00OH as unsplit node, grep found no Mathlib declaration (only Noetherian 00ON). D: three steps prove the item, no cycle. FIX more, RETURN less: B3 lem-sc-going-down-surjective-dimension used 'going-down property' undefined (no DAG def node); spelled out in the statement; added grep search record.; 1 file(s) fixed by the reviewer"
  }
 }
