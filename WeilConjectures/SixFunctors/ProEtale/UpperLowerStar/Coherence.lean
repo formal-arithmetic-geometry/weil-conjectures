@@ -120,6 +120,54 @@ lemma lowerStar_obj_obj_map {Z Y : Scheme.{u}} (g : Z ⟶ Y) (G : Sheaf (ProEt.t
   rfl
 
 omit [Abelian A] [IsGrothendieckAbelian.{u + 1} A] in
+/-- The left unit law for the composition isomorphisms of pushforwards. -/
+lemma lowerStarComp_id_left {S R : Scheme.{u}} (h : S ⟶ R) :
+    lowerStarComp A (𝟙 S) h = Functor.isoWhiskerRight (lowerStarId A S) (h)_*[A] ≪≫
+      (h)_*[A].leftUnitor ≪≫ lowerStarCongr A (Category.id_comp h).symm := by
+  ext M b
+  simp only [Iso.trans_hom, NatTrans.comp_app, Functor.isoWhiskerRight_hom,
+    Functor.whiskerRight_app, Functor.leftUnitor_hom_app,
+    ObjectProperty.FullSubcategory.comp_hom, lowerStarComp_hom_app_hom_app,
+    lowerStarCongr_hom_app_hom_app, lowerStar_map_hom_app']
+  simp only [lowerStarId, Functor.sheafPushforwardContinuousId'_hom_app_hom_app]
+  erw [Category.id_comp (M.obj.map ((MorphismProperty.Over.pullbackCongr _).inv.app (unop b)).op)]
+  rw [← M.obj.map_comp]
+  congr 1
+  apply Quiver.Hom.unop_inj
+  apply MorphismProperty.Over.Hom.ext
+  apply pullback.hom_ext
+  · apply pullback.hom_ext <;> simp [MorphismProperty.Over.pullback, MorphismProperty.Over.mk,
+        MorphismProperty.Over.pullbackComp, MorphismProperty.Over.pullbackCongr,
+        MorphismProperty.Over.pullbackId]
+  · simp [MorphismProperty.Over.pullback, MorphismProperty.Over.mk,
+      MorphismProperty.Over.pullbackComp, MorphismProperty.Over.pullbackCongr]
+
+omit [Abelian A] [IsGrothendieckAbelian.{u + 1} A] in
+/-- The right unit law for the composition isomorphisms of pushforwards. -/
+lemma lowerStarComp_id_right {T S : Scheme.{u}} (h : T ⟶ S) :
+    lowerStarComp A h (𝟙 S) = Functor.isoWhiskerLeft (h)_*[A] (lowerStarId A S) ≪≫
+      (h)_*[A].rightUnitor ≪≫ lowerStarCongr A (Category.comp_id h).symm := by
+  ext M b
+  simp only [Iso.trans_hom, NatTrans.comp_app, Functor.isoWhiskerLeft_hom,
+    Functor.whiskerLeft_app, Functor.rightUnitor_hom_app,
+    ObjectProperty.FullSubcategory.comp_hom, lowerStarComp_hom_app_hom_app,
+    lowerStarCongr_hom_app_hom_app]
+  simp only [lowerStarId, Functor.sheafPushforwardContinuousId'_hom_app_hom_app]
+  rw [lowerStar_obj_obj_map]
+  erw [Category.id_comp (M.obj.map ((MorphismProperty.Over.pullbackCongr _).inv.app (unop b)).op)]
+  rw [← M.obj.map_comp]
+  congr 1
+  apply Quiver.Hom.unop_inj
+  apply MorphismProperty.Over.Hom.ext
+  apply pullback.hom_ext
+  · apply pullback.hom_ext <;> simp [MorphismProperty.Over.pullback, MorphismProperty.Over.mk,
+      MorphismProperty.Over.pullbackComp, MorphismProperty.Over.pullbackCongr,
+      MorphismProperty.Over.pullbackId] <;>
+    simpa using (pullback.condition (f := (unop b).hom) (g := h ≫ 𝟙 S)).symm
+  · simp [MorphismProperty.Over.pullback, MorphismProperty.Over.mk,
+      MorphismProperty.Over.pullbackComp, MorphismProperty.Over.pullbackCongr]
+
+omit [Abelian A] [IsGrothendieckAbelian.{u + 1} A] in
 /-- The unit of `lowerStarEquivalence e` is the composite of identity, congruence and
 composition isomorphisms it is built from: that composite already satisfies the triangle
 identity, so adjointification does not change it. -/
