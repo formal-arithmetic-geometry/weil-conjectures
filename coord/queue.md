@@ -2,15 +2,17 @@
 
 926 items; claim with `tools/claim.py next <group> [--stage N]`.
 
-## Stage 1: nodes to split (208)
+## Stage 1: nodes to split (207)
 
 | node | distance to a target | Lean state on the done branch |
 |---|---|---|
+| `lem-weil-derived-limit-existence` | 14 | none |
 | `lem-weil-pbc-injective-acyclicity-bounded-below` | 2002 | sorry_here |
 | `lem-sc-finite-maximals-over-element` | 2019 | none |
 | `lem-pc-bounded-coherent-finite-tor-proper-pushforward-perfect` | 3013 | none |
-| `lem-pc-derived-limit-milnor-sequence` | 3013 | none |
+| `lem-pc-abelian-groups-exact-products` | 3014 | none |
 | `lem-pc-derived-functor-commutes-derived-limit` | 3014 | none |
+| `lem-pc-derived-limit-roos-abelian-groups` | 3014 | none |
 | `lem-pc-derived-lower-truncation-step-triangle` | 3014 | none |
 | `lem-pc-ringed-space-module-stalk-tensor` | 3014 | none |
 | `lem-pc-ringed-space-truncation-derived-limit` | 3014 | none |
@@ -33,7 +35,6 @@
 | `lem-weil-pbc-gm-pullback-strict-henselization` | 4009 | none |
 | `lem-pc-universal-adjoint-section` | 4010 | rests_on_sorry |
 | `lem-sc-etale-base-change-geometric` | 4010 | none |
-| `lem-sc-etale-local-dimension` | 4010 | none |
 | `lem-sc-intersection-effective-cartier` | 4010 | none |
 | `lem-sc-top-dimensional-reduction-intersection` | 4010 | none |
 | `lem-pc-hilb-containment-locus` | 4011 | none |
@@ -58,7 +59,6 @@
 | `lem-sp-horseshoe-prescribed-resolutions` | 6006 | none |
 | `thm-sp-spectral-object-yields` | 6006 | none |
 | `pqf-lem-coherent-ft-locnoeth` | 6009 | none |
-| `lem-pc-affine-morphism-hi` | 6010 | rests_on_sorry |
 | `thm-sc-theorem-of-cube` | 6010 | rests_on_sorry |
 | `lem-pc-projective-space-twist-cohomology` | 6011 | rests_on_sorry |
 | `lem-sc-ample-positive-degree` | 6011 | rests_on_sorry |
@@ -70,7 +70,6 @@
 | `lem-pc-projective-space-canonical` | 6013 | sorry_here |
 | `pqf-lem-serre-criterion` | 6013 | none |
 | `pqf-lem-going-up` | 6017 | none |
-| `pqf-lem-incomparability` | 6017 | none |
 | `pqf-def-affine-morphism` | - | none |
 | `def-nagata-final-descended-model` | - | none |
 | `def-nagata-finite-type-closed-in-fp` | - | none |
@@ -215,7 +214,7 @@
 | `lem-pur-rhom-well-defined` | - | none |
 | `lem-zl-noether-normalization-dimension` | - | none |
 
-## Stage 2: nodes to state (718)
+## Stage 2: nodes to state (719)
 
 | node | distance to Mathlib | kind |
 |---|---|---|
@@ -362,6 +361,7 @@
 | `lem-sc-etale-affine-over-curve` | 1 | state |
 | `lem-sc-etale-coproduct-etale` | 1 | state |
 | `lem-sc-etale-fibre-product-coproduct` | 1 | state |
+| `lem-sc-etale-local-dimension` | 1 | state |
 | `lem-sc-etale-polynomial-diagonal-kernel-clearance` | 1 | state |
 | `lem-sc-exact-functor-higher-derived-vanishing` | 1 | state |
 | `lem-sc-ext-torsor` | 1 | state |
@@ -938,7 +938,7 @@
 | `lem-weil-pbc-p1-field-dimension-one` | 4 | state |
 | `lem-weil-pbc-projective-space-zero-isomorphism` | 4 | state |
 
-Not open yet: 1430 nodes that wait for a statement dependency, 245 nodes that wait for stage 1.
+Not open yet: 1432 nodes that wait for a statement dependency, 244 nodes that wait for stage 1.
 
 ## Stage 3: modules to prove (0)
 
