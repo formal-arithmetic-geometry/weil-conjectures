@@ -2759,3 +2759,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 22:02 L: merged deliver/H1/lem-sc-affine-generic-second (reviewer FIX; first push; new nodes: 0)
 - 22:02 L: merged deliver/G1/def-nagata-qc-open-equality-stage (reviewer FIX; after a return; new nodes: 0)
 - 22:03 L: merged deliver/M1/lem-weil-pbc-generic-finite-algebra-splitting (reviewer PASS; after a return; new nodes: 3)
+- 22:03 L: returned deliver/C1/pqf-lem-affine-open-locnoeth (reviewer RETURN: Not a fault: the item is Mathlib's isLocallyNoetherian_of_affine_cover (Noetherian.lean:103, covering form in, IsLocally)
