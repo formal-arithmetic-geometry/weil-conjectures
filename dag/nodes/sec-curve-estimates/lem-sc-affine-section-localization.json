@@ -28,9 +28,39 @@
   "def-weil-pbc-ample-invertible-module",
   "def-pur-sheaf-tensor-product"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Since $Y$ is affine, the existing affine-scheme qcqs result [lem-weil-pbc-affine-scheme-qcqs] gives that $Y$ is quasi-compact and quasi-separated, exactly the hypotheses required by the general localization theorem.",
+   "uses": [
+    "lem-weil-pbc-affine-scheme-qcqs"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra, Lemma 00E8 (lemma-quasi-compact), together with Schemes, Lemmas 01KN and 01KO"
+   }
+  },
+  {
+   "text": "Apply [lem-sc-p1-invertible-section-localization] with $X=Y$. Its quasi-compact and quasi-separated hypotheses hold by Step 1, and its invertible module, section, quasi-coherent module, nonvanishing locus, graded module, degree-zero localization, and canonical fraction map specialize verbatim to the objects and map in this item. Therefore the canonical map $H^0_*(Y,\\mathcal L,\\mathcal F)_{(s)}\\to\\Gamma(Y_s,\\mathcal F|_{Y_s})$ sending $\\xi/s^n$ to $s^{-n}\\xi$ is an isomorphism.",
+   "uses": [
+    "lem-sc-p1-invertible-section-localization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/properties.tex",
+    "place": "Properties, Lemma 01PW (lemma-invert-s-sections), part (2), including equation module-invert-s"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-affine-scheme-qcqs",
+  "lem-sc-p1-invertible-section-localization"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/properties.tex",
+  "place": "Properties, Lemma 01PW (lemma-invert-s-sections), specialized to an affine scheme; affine qcqs reduction uses Algebra 00E8 and Schemes 01KN/01KO"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -55,10 +85,36 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-sc-invert-s-cohomology-affine-case",
   "by": "worker",
   "date": "2026-10-10"
- }
+ },
+ "split_report": {
+  "date": "2026-10-11",
+  "item": "lem-sc-affine-section-localization",
+  "worker": "stage1",
+  "summary": "Split the affine localization statement by first obtaining quasi-compactness and quasi-separatedness from the existing affine-scheme qcqs leaf, then specializing the pre-existing general quasi-compact quasi-separated invertible-section localization theorem. No new nodes were needed; both supporting statements were searched and read in full.",
+  "blueprint": "Realizes the blueprint ancestor lem-sc-pic-proper-ntorsion proof's 09MR affine-open p = 0 clause: the section-localization theorem 01PW after the affine qcqs reduction.",
+  "tool_uses": [
+   {
+    "node": "lem-sc-p1-invertible-section-localization",
+    "why": "Step 2 uses its general quasi-compact quasi-separated invertible-section localization isomorphism; the curve-estimate unit has no separate route node for this theorem."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sc-p1-invertible-section-localization",
+  "lem-sc-p1-invertible-section-localization"
+ ],
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-asl",
+  "group": "K1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-asl (reviewer sub-agent of L); spot-checked: Source: Stacks 01PW (properties-lemma-invert-s-sections, part (2), equation module-invert-s), read at properties.tex:2227-2247; the item is its specialization to affine Y, with 09MR (coherent-lemma-invert-s-cohomology) affine case. Item statement agrees hypothesis by hypothesis (affine Y, invertible L, s in Gamma(Y,L), quasi-coherent F, Z-graded H^0_*, degree-zero localization at s, map xi/s^n -> s^{-n} xi). Step 1 carried by mathlib leaf lem-weil-pbc-affine-scheme-qcqs (affine => quasi-compact and quasi-separated; its 'two qc opens meet in a qc open' implies the general node's 'two affine opens' form since affine opens are qc). Step 2 carried by the statement of lem-sc-p1-invertible-section-localization with X=Y: same hypotheses, same N, same N_(s), same map t/s^n -> t|_{X_s} (x) s^{-n}. No new nodes; the delivery cites the existing 01PW node rather than re-proving it (the duplicate flagged at F1's review). Declared tool use lem-sc-p1-invertible-section-localization (unit sk-thm-picard-duality) accepted as a generic black-box statement. Small cases: L=O_Y gives ordinary localization Gamma(Y,F)_s = Gamma(D(s),F); s=0 gives 0=0. Start Sat Oct 10 04:43:29 PM UTC 2026, end Sat Oct 10 04:43:51 PM UTC 2026."
+ },
+ "lead_note": "2026-10-10 L (R-asl): This item is a special case of lem-sc-p1-invertible-section-localization (01PW, unit sk-thm-picard-duality) and is now proved by citing it with X=Y affine (qcqs from lem-weil-pbc-affine-scheme-qcqs); it could alternatively be merged into that node (merged_into) if the lead prefers to remove the duplicate."
 }
