@@ -23,9 +23,60 @@
   "def-weil-finite-type-morphism",
   "def-weil-closed-immersion"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "If $X$ is empty then $Z$ is empty and the conclusion is immediate. Otherwise, the finite-type morphism $X\\to\\operatorname{Spec}k$ makes $X$ a Noetherian scheme by [lem-weil-pbc-finite-type-over-noetherian] (the field spectrum is Noetherian). Thus $X$ has finitely many irreducible components $C_1,\\ldots,C_r$ by [lem-weil-pbc-noetherian-finitely-many-components], and they cover $X$ by [lem-sc-irreducible-components-cover]. For each $C_i$, the complement in $C_i$ of the union of the other components is a nonempty open subset: it is open because there are finitely many components, and nonempty because an irreducible component is not contained in the finite union of the other maximal irreducible closed subsets.",
+   "uses": [
+    "lem-weil-pbc-finite-type-over-noetherian",
+    "lem-weil-pbc-noetherian-finitely-many-components",
+    "lem-sc-irreducible-components-cover"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tags 01T6 and 0BA8, together with Topology Tag 004W, as used in the proof of Varieties Tag 0AYY"
+   }
+  },
+  {
+   "text": "By [lem-pc-scheme-dimension-local-rings] applied to $X$, the underlying space of $X$ has Krull dimension [def-kun-topological-krull-dimension] at most 1. Assume that $Z$ contains a strict chain $W_0\\subsetneq W_1$ of nonempty irreducible closed subsets (with the subspace topology). Since $Z$ is closed in $X$, these are also irreducible closed subsets of $X$. By the component cover, $W_1\\subseteq C_i$ for some $i$. If $W_1$ is strictly contained in $C_i$, then $W_0\\subsetneq W_1\\subsetneq C_i$ is a chain of irreducible closed subsets of $X$ of length 2, contradicting the preceding dimension bound. If $W_1=C_i$, then $C_i\\subseteq Z$, so $Z$ contains $U_i=X\\setminus\\bigcup_{j\\ne i}C_j$, which is open in $X$ because the union is finite and closed, and is nonempty by step 1. This contradicts that the underlying set of $Z$ is nowhere dense in $X$: since $Z$ is closed, its interior would contain the nonempty open set $U_i$. Hence no such chain exists, so the underlying space of $Z$ has topological dimension at most zero. By [lem-pc-scheme-dimension-local-rings], this is the asserted $\\dim Z\\le0$.",
+   "uses": [
+    "lem-sc-irreducible-components-cover",
+    "def-pc-dimension",
+    "def-kun-topological-krull-dimension",
+    "lem-pc-scheme-dimension-local-rings"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 0AYY (varieties, Lemma degree-effective-Cartier-divisor), proof: 'Since D is nowhere dense in X we see that dim(D) <= 0'"
+   }
+  },
+  {
+   "text": "Let $k$ be a field, let $X$ be a scheme of finite type over $k$, and let $Z\\to X$ be a closed immersion with underlying closed subset of dimension at most zero. Applying [lem-sc-dim0-finite] to these explicitly stated hypotheses shows that every point of $Z$ is closed in $Z$ (and also covers the empty case).",
+   "uses": [
+    "lem-sc-dim0-finite"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 06LH (Varieties, Lemma algebraic-scheme-dim-0), applied to the closed finite-type subscheme Z"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-weil-pbc-noetherian-finitely-many-components",
+  "lem-sc-irreducible-components-cover",
+  "def-pc-dimension",
+  "def-kun-topological-krull-dimension",
+  "lem-pc-scheme-dimension-local-rings",
+  "lem-sc-dim0-finite"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/varieties.tex",
+  "place": "Tag 0AYY (varieties, Lemma degree-effective-Cartier-divisor), proof sentence 'Since D is nowhere dense in X we see that dim(D) <= 0'"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -50,12 +101,56 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-pc-cartier-divisor-finite-over-field",
   "by": "worker",
   "date": "2026-10-10"
  },
  "chapter": "sec-picard-framework",
- "unit": "sk-thm-picard-rr"
+ "unit": "sk-thm-picard-rr",
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "lem-pc-nowhere-dense-dim-zero",
+  "worker": "stage1",
+  "summary": "No exact sorry-free Lean declaration states this general dimension-drop lemma. I kept the statement and split the argument into Noetherian finite-component reduction, the contradiction to a length-two irreducible-closed chain using nowhere density, and the closed-point conclusion from the existing zero-dimensional finite-type node. No new nodes were needed; all cited facts were searched in the DAG and checked against their statements.",
+  "blueprint": "The item is the child of lem-pc-degree-base-change via lem-pc-cartier-divisor-finite-over-field. The three steps realize the parent blueprint proof part (2): finite-type component reduction, the inference from nowhere density and dim X <= 1 to dim Z <= 0, and the resulting closed-point conclusion.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-finite-type-over-noetherian",
+    "why": "This generic Noetherianity fact is from another unit and supplies the finite-type-over-a-field reduction needed before component arguments."
+   },
+   {
+    "node": "lem-weil-pbc-noetherian-finitely-many-components",
+    "why": "This generic component-finiteness fact is from another unit; no node in the Picard unit provides it."
+   },
+   {
+    "node": "lem-sc-irreducible-components-cover",
+    "why": "The component-cover theorem is a generic topology tool from another unit, used to place an irreducible closed subset in a component."
+   },
+   {
+    "node": "lem-pc-scheme-dimension-local-rings",
+    "why": "The item uses the DAG's scheme-dimension convention, while the chain argument is topological; this node identifies the two dimensions."
+   },
+   {
+    "node": "lem-sc-dim0-finite",
+    "why": "The existing zero-dimensional finite-type result supplies closedness of every point of Z after the dimension bound."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-weil-pbc-noetherian-finitely-many-components",
+  "lem-sc-irreducible-components-cover",
+  "lem-pc-scheme-dimension-local-rings",
+  "lem-sc-dim0-finite"
+ ],
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-nd2",
+  "group": "H1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-nd2 (reviewer sub-agent of L); spot-checked: Re-push after the 15:06 return (commit 9b39bdd2d): both points repaired, and only step 2 of the proof changed against the returned head f7b39ff9f (plus created.by/date, now the same as sheaf-dag). Point 1 (E3/E5): step 2 now has the two cases. (a) W_1 strictly inside C_i gives a length-2 chain in X. (b) W_1 = C_i gives C_i in Z, so the nonempty open U_i from step 1 lies in the closed set Z, which contradicts nowhere density. Point 2 (C4): step 2 now opens by applying lem-pc-scheme-dimension-local-rings to X, which turns dim X <= 1 in the def-pc-dimension sense into topological Krull dimension <= 1 (def-kun-topological-krull-dimension). The empty X is handled in step 1, so def-pc-dimension's nonempty assumption holds. The source is Stacks Varieties Tag 0AYY, proof sentence 'Since D is nowhere dense in X we see that dim(D) <= 0'. The statement is unchanged from sheaf-dag. Statements of the cited nodes re-read: lem-weil-pbc-finite-type-over-noetherian (finite type over a Noetherian base gives Noetherian), lem-weil-pbc-noetherian-finitely-many-components, lem-sc-irreducible-components-cover (an irreducible subset lies in a component), lem-pc-scheme-dimension-local-rings, and lem-sc-dim0-finite (a closed subset of dim <= 0 is a finite set of closed points of X, hence closed in Z). The topology in step 1 (a component is not contained in the union of the others, by irreducibility and maximality) is elementary. tool_uses accepted as generic black boxes. Only the item's own fields changed against sheaf-dag (proof, proof_deps, proof_origin, split_report, status). Small cases: Spec k[t] with Z=V(t), and Z=C_i a whole component of k[x,y]/(xy), which is not nowhere dense and so is correctly excluded. Start Sat Oct 10 03:14:04 PM UTC 2026, end Sat Oct 10 03:14:29 PM UTC 2026."
+ }
 }
