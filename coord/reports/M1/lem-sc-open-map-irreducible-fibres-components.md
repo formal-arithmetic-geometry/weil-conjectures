@@ -1,0 +1,17 @@
+# Stage-1 delivery: lem-sc-open-map-irreducible-fibres-components
+
+Files written: dag/nodes/sec-picard-framework/lem-sc-open-map-irreducible-fibres-components.json, the item, marked as a Mathlib leaf. No new nodes; one Mathlib leaf. citations.json is empty because a leaf has no proof steps.
+
+Attachments: none. No declaration in the project Lean source states this item; Mathlib already does.
+
+WANTED: none. The local repository does not contain the untracked literature/stacks-project/topology.tex, so I read Stacks Tag 037A at https://stacks.math.columbia.edu/tag/037A and the pinned Mathlib source instead.
+
+The imported node had doubled TeX backslashes and recorded the Mathlib declaration only as an unverified candidate. I corrected the TeX and verified the declaration. Nothing remains unfinished in this item.
+
+## Review by M1
+
+I read Stacks Topology Lemma 037A (lemma-irreducible-fibres-irreducible-components). Its hypotheses are exactly a continuous open map with an irreducible fibre over every point, and its conclusion is a bijection of irreducible components. The item's explicit preimage and image maps agree with Mathlib's irreducibleComponentsEquivOfIsPreirreducibleFiber in Mathlib/Topology/Irreducible.lean:506-520: toFun is preimage, invFun is image, and the structure proves both inverse laws. Its two preceding lemmas at lines 463 and 493 prove the individual component clauses. The source's irreducible fibre includes nonemptiness (Stacks Definition 004V); Mathlib's IsIrreducible is Nonempty together with IsPreirreducible at line 52. Thus each fibre supplies Mathlib's preirreducibility hypothesis and a preimage of its base point, giving surjectivity. There is no extra topological hypothesis.
+
+The sole statement dependency, def-weil-irreducible-components, defines a component as a maximal irreducible subset. I read its statement and Mathlib's irreducibleComponents definition at line 107; they agree. The item's proof has no steps because Mathlib supplies the whole result, so there are no C1 or C4 step citations and citations.json is empty. I searched the DAG for Tag 037A and the component-bijection language, searched the whole blueprint with tools/blueprint_refs.py, and searched the project Lean source by id, declaration name, and concepts. I found no duplicate blueprint node or project declaration. LeanFinder, Loogle, and the pinned Mathlib source identify the exact candidate; LeanSearch returned HTTP 500 twice, which is recorded in the node.
+
+I checked B1-B10 against the node: no new node is introduced, the item states its objects and hypotheses, its definition citation says the notion used, TeX is singly escaped, Tag 037A is the correct source, and the Mathlib leaf records the declaration, file and line. The imported blueprint.from.place identifies the ancestor's connectedness step; whole-blueprint searches found no same statement. For C1-C8 and D1-D5 there are no proof steps to hide facts or move the theorem into another node. For E1-E6, the only conversion is from nonempty irreducible fibres to preirreducible fibres plus surjectivity; this uses the same fibre as the item, including when the base is empty. Small cases checked: the identity on a point gives one component each; the map from a two-point discrete space onto one point fails the irreducible-fibre hypothesis, as it must; the unique map from the empty space to itself gives empty component sets and an empty bijection. I corrected the imported TeX and candidate status; there was no return to repair.

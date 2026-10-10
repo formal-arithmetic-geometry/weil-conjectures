@@ -12,18 +12,48 @@
  },
  "mathlib_searches": [
   {
+   "tool": "leansearch",
+   "query": "continuous open surjective map with irreducible fibers induces equivalence of irreducible components; irreducibleComponentsEquivOfIsPreirreducibleFiber",
+   "results": "LeanSearch returned HTTP 500 for both queries; the candidate was independently found by LeanFinder, Loogle, and the pinned source",
+   "date": "2026-10-11",
+   "verdict": "service unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "continuous open surjection with irreducible fibers gives equivalence on irreducible components",
+   "results": "irreducibleComponentsEquivOfIsPreirreducibleFiber, Mathlib.Topology.Irreducible; image_mem_irreducibleComponents_of_isPreirreducible_fiber and preimage_mem_irreducibleComponents_of_isPreirreducible_fiber in the same module",
+   "date": "2026-10-11",
+   "verdict": "match"
+  },
+  {
+   "tool": "loogle",
+   "query": "irreducibleComponentsEquivOfIsPreirreducibleFiber",
+   "results": "irreducibleComponentsEquivOfIsPreirreducibleFiber : (f : X -> Y) -> Continuous f -> IsOpenMap f -> (forall y, IsPreirreducible (f ⁻¹' {y})) -> Function.Surjective f -> irreducibleComponents Y ≃o irreducibleComponents X, Mathlib.Topology.Irreducible",
+   "date": "2026-10-11",
+   "verdict": "match"
+  },
+  {
    "tool": "grep",
    "query": "grep -rn 'irreducibleComponents' Mathlib/Topology | grep -i 'open\\|equiv'",
    "results": "irreducibleComponentsEquivOfIsPreirreducibleFiber, Mathlib/Topology/Irreducible.lean:506 (@[stacks 037A]): for f continuous, IsOpenMap, preirreducible fibres and surjective, an order isomorphism irreducibleComponents Y = irreducibleComponents X with toFun W = f^{-1}(W) and invFun W = f(W); preimage_mem_irreducibleComponents_of_isPreirreducible_fiber (line 463) and image_mem_irreducibleComponents_of_isPreirreducible_fiber (line 493) give the two membership clauses",
    "date": "2026-10-10",
-   "verdict": "candidate leaf for the splitter to verify: irreducible fibres = preirreducible fibres + surjective; not verified as mathlib_match by the reviewer"
+   "verdict": "match: irreducible fibres supply preirreducibility and surjectivity"
   }
  ],
  "proof": [],
  "proof_deps": [],
- "proof_origin": null,
- "mathlib_match": null,
- "status": "unsplit",
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/topology.tex",
+  "place": "Topology, Lemma 037A (lemma-irreducible-fibres-irreducible-components); realized directly by Mathlib"
+ },
+ "mathlib_match": {
+  "declaration": "irreducibleComponentsEquivOfIsPreirreducibleFiber",
+  "file": "Mathlib/Topology/Irreducible.lean",
+  "line": 506,
+  "how": "Specializes in one line: for each y, IsIrreducible (f ⁻¹' {y}) has IsPreirreducible (f ⁻¹' {y}) as its second conjunct; its nonempty first conjunct gives a preimage of y and hence Function.Surjective f. The order equivalence's toFun and invFun are explicitly preimage and image at lines 508-512, with component membership and inverse laws at lines 508-520."
+ },
+ "status": "mathlib",
  "merged_into": null,
  "created": {
   "by": "R-pic",
@@ -51,5 +81,20 @@
   "slopmaster2": {
    "state": "none"
   }
+ },
+ "split_report": {
+  "date": "2026-10-11",
+  "item": "lem-sc-open-map-irreducible-fibres-components",
+  "worker": "stage1",
+  "summary": "Verified the full statement against Stacks Tag 037A and Mathlib's theorem carrying the same tag. Irreducible fibres are nonempty and preirreducible, so the Mathlib equivalence applies directly; this item is a Mathlib leaf with no new nodes. Corrected doubled TeX backslashes in the imported statement.",
+  "blueprint": "The component correspondence needed in the 'Connectedness' step of thm-sc-jacobian-representability, through lem-sc-irreducible-product-over-field and lem-sc-product-irreducible-components-bijection, is supplied directly by the Mathlib theorem for Stacks Tag 037A."
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-omf",
+  "group": "M1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-omf (reviewer sub-agent of L); spot-checked: Source: Stacks Tag 037A, topology.tex label lemma-irreducible-fibres-irreducible-components (line 1139): continuous f, (a) open, (b) every fibre irreducible, conclusion bijection of irreducible components; the item states exactly these hypotheses and spells the bijection as T -> f^{-1}(T), W -> f(W), which is the source proof's construction. Leaf verified: sed -n 506p Mathlib/Topology/Irreducible.lean is 'def irreducibleComponentsEquivOfIsPreirreducibleFiber' (@[stacks 037A]), hypotheses Continuous f, IsOpenMap f, all fibres IsPreirreducible, Function.Surjective f; toFun = preimage (lines 513-516, via preimage_mem_irreducibleComponents_of_isPreirreducible_fiber at 463), invFun = image (via image_mem_irreducibleComponents_of_isPreirreducible_fiber at 493), left/right inverse laws in the structure. Item's irreducible fibres (nonempty, by def-weil-irreducible-components, whose statement includes nonemptiness and defines components as maximal irreducible subsets = Mathlib line 107 Maximal IsIrreducible) give IsPreirreducible fibres and surjectivity, so the leaf states the item exactly; Mathlib search here is the delivered LeanFinder/Loogle record plus my own sed check of the declaration, no further query needed as the match is exact. No proof steps, no new nodes; proof_origin non-null on a leaf has precedent (15 leaves). Only the item file and report changed, one commit. 2026-10-10 Sat Oct 10 04:55:05 PM UTC 2026 - Sat Oct 10 04:55:18 PM UTC 2026"
  }
 }

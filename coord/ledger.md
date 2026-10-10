@@ -2055,3 +2055,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 16:53 L: returned deliver/E1/lem-pc-proper-derived-direct-image-composition (reviewer RETURN: 1. E1/D1: lem-pc-proper-derived-direct-image-composition, step 1: the argument does not prove the statement. [lem-cat-ri)
 - 16:53 L: merged deliver/F1/lem-weil-pbc-affine-etale-site-base-change (reviewer FIX; first push; new nodes: 1)
 - 16:54 L: merged deliver/M1/def-sc-scheme-tangent-space (reviewer FIX+NODE(2); first push; new nodes: 3)
+- 16:55 L: merged deliver/M1/lem-sc-open-map-irreducible-fibres-components (reviewer PASS; first push; new nodes: 0)
