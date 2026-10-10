@@ -20,9 +20,120 @@
   "def-weil-pbc-module-stalk",
   "def-weil-residue-field"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "(The point and its reduced closure.) A finite morphism is locally of finite type [lem-weil-pbc-finite-iff-integral-lft], so $Y$ is locally Noetherian by [pqf-lem-locnoeth-lft]. Surjectivity gives a point $\\xi'\\in Y$ with $f(\\xi')=\\xi$. Put $T=\\overline{\\{\\xi'\\}}\\subseteq Y$ and give it the reduced induced closed subscheme structure $i':Z'\\to Y$ of [lem-weil-pbc-reduced-induced-closed-subscheme]. The space $T$ is nonempty and irreducible, with generic point $\\xi'$, and $Z'$ is reduced; hence $Z'$ is integral by [def-pc-integral-scheme].",
+   "uses": [
+    "lem-weil-pbc-finite-iff-integral-lft",
+    "pqf-lem-locnoeth-lft",
+    "def-weil-surjective-morphism",
+    "lem-weil-pbc-reduced-induced-closed-subscheme",
+    "def-pc-integral-scheme"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/coherent.tex",
+    "place": "Cohomology of Schemes, Lemma 01YO (lemma-finite-morphism-Noetherian), proof, lines 3490-3496; Schemes, Lemma 01J3 for the reduced induced structure"
+   }
+  },
+  {
+   "text": "(The image and the map to $Z$.) The continuous map underlying $f$ sends $T=\\overline{\\{\\xi'\\}}$ into $\\overline{\\{f(\\xi')\\}}=\\overline{\\{\\xi\\}}=i(Z)$. On the other hand $f(T)$ is closed because $f$ is finite [lem-weil-pbc-finite-closed-map-finite-fibres], and it contains $\\xi$; hence it contains $\\overline{\\{\\xi\\}}=i(Z)$ and therefore $f(T)=i(Z)$. Since $Z'$ is reduced and the image of $f\\circ i'$ lies in the closed subscheme $i:Z\\to X$, [lem-weil-pbc-reduced-source-factors-through-closed-subscheme] gives a unique morphism $f':Z'\\to Z$ with $i\\circ f'=f\\circ i'$; it is surjective on points because its image maps homeomorphically onto $f(T)=i(Z)$ under $i$.",
+   "uses": [
+    "lem-weil-pbc-finite-closed-map-finite-fibres",
+    "lem-weil-pbc-reduced-source-factors-through-closed-subscheme",
+    "def-weil-closed-immersion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/coherent.tex",
+    "place": "Cohomology of Schemes, Lemma 01YO, proof and displayed square, lines 3495-3508; the image equality and factorization are implicit in the displayed square"
+   }
+  },
+  {
+   "text": "(The coherent sheaf.) The closed immersion $i':Z'\\to Y$ is finite [lem-weil-pbc-closed-immersion-finite], hence locally of finite type [lem-weil-pbc-finite-iff-integral-lft]. Since $Y$ is locally Noetherian, [pqf-lem-locnoeth-lft] makes $Z'$ locally Noetherian, and its structure sheaf $\\mathcal O_{Z'}$ is coherent [pqf-lem-coherent-ft-locnoeth]. Thus $\\mathcal F=i'_*\\mathcal O_{Z'}$ is a coherent $\\mathcal O_Y$-module by [lem-weil-pbc-finite-pushforward-coherent]. Functoriality of sectionwise pushforward and $i\\circ f'=f\\circ i'$ give $f_*\\mathcal F=f_*i'_*\\mathcal O_{Z'}=i_*f'_*\\mathcal O_{Z'}$.",
+   "uses": [
+    "lem-weil-pbc-closed-immersion-finite",
+    "lem-weil-pbc-finite-iff-integral-lft",
+    "pqf-lem-locnoeth-lft",
+    "pqf-lem-coherent-ft-locnoeth",
+    "lem-weil-pbc-finite-pushforward-coherent",
+    "def-pc-module-pullback"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/coherent.tex",
+    "place": "Cohomology of Schemes, Lemma 01YO, proof, lines 3495-3510; Lemma 01Y6 supplies coherence"
+   }
+  },
+  {
+   "text": "(The generic stalk.) Choose an affine open $U=\\operatorname{Spec}A\\subseteq X$ containing $\\xi$, write $f^{-1}(U)=\\operatorname{Spec}B$, and let $\\mathfrak p\\subset A$ and $\\mathfrak q\\subset B$ be the primes of $\\xi$ and $\\xi'$. Finiteness says that $B$ is a finite $A$-module, hence integral over $A$ [lem-weil-pbc-finite-algebra-is-integral]. The reduced closure of $\\mathfrak q$ in $\\operatorname{Spec}B$ is $\\operatorname{Spec}(B/\\mathfrak q)$, so the affine description of pushforward and stalks gives $(f_*\\mathcal F)_\\xi\\cong(B/\\mathfrak q)_\\mathfrak p$. A prime of $B/\\mathfrak q$ over $\\mathfrak p$ corresponds to a prime $\\mathfrak r\\supseteq\\mathfrak q$ of $B$ with $\\mathfrak r\\cap A=\\mathfrak p=\\mathfrak q\\cap A$; incomparability for the integral extension [lem-weil-pbc-integral-incomparability] forces $\\mathfrak r=\\mathfrak q$. Thus the domain $(B/\\mathfrak q)_\\mathfrak p$ has only the zero prime, so it is a field, necessarily the fraction field $\\kappa(\\xi')$ of $B/\\mathfrak q$. In particular $(f_*\\mathcal F)_\\xi\\cong\\kappa(\\xi')\\neq0$.",
+   "uses": [
+    "def-weil-finite-integral-morphism",
+    "lem-weil-pbc-finite-algebra-is-integral",
+    "lem-weil-pbc-reduced-induced-closed-subscheme",
+    "def-pc-module-pullback",
+    "def-weil-pbc-module-stalk",
+    "lem-weil-pbc-integral-incomparability",
+    "def-weil-residue-field"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/coherent.tex",
+    "place": "Cohomology of Schemes, Lemma 01YO, proof, lines 3510-3518; Algebra, Lemmas 00GK and 00GT"
+   }
+  },
+  {
+   "text": "(Annihilation at $\\xi$.) Under the isomorphism of step 4, the $\\mathcal O_{X,\\xi}$-module structure on $(f_*\\mathcal F)_\\xi$ is induced by the local homomorphism $\\mathcal O_{X,\\xi}\\to\\mathcal O_{Z',\\xi'}=\\kappa(\\xi')$. Its kernel contains the maximal ideal $\\mathfrak m_\\xi$, because the induced map on residue fields is $\\kappa(\\xi)\\to\\kappa(\\xi')$ [def-weil-residue-field]. Therefore $\\mathfrak m_\\xi(f_*\\mathcal F)_\\xi=0$.",
+   "uses": [
+    "def-weil-residue-field",
+    "def-weil-pbc-module-stalk"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/coherent.tex",
+    "place": "Cohomology of Schemes, Lemma 01YO, proof, lines 3516-3520 ('In particular')"
+   }
+  },
+  {
+   "text": "(Support.) The sheaf $f_*\\mathcal F$ is coherent by [lem-weil-pbc-finite-pushforward-coherent], hence quasi-coherent of finite type and has closed support [lem-weil-pbc-finite-type-module-support-closed]. From $f_*\\mathcal F=i_*f'_*\\mathcal O_{Z'}$ and the closed-pushforward stalk formula [lem-weil-pbc-closed-pushforward-stalks], its support is contained in $i(Z)$. It contains $\\xi$ by step 4. Since $i(Z)=\\overline{\\{\\xi\\}}$, every closed subset of $X$ contained in $i(Z)$ and containing $\\xi$ contains all of $i(Z)$. Consequently $\\operatorname{Supp}(f_*\\mathcal F)=i(Z)$, completing the construction.",
+   "uses": [
+    "lem-weil-pbc-finite-pushforward-coherent",
+    "lem-weil-pbc-finite-type-module-support-closed",
+    "lem-weil-pbc-closed-pushforward-stalks"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/coherent.tex",
+    "place": "Cohomology of Schemes, Lemma 01YO, proof, lines 3507-3521"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-finite-iff-integral-lft",
+  "pqf-lem-locnoeth-lft",
+  "def-weil-surjective-morphism",
+  "lem-weil-pbc-reduced-induced-closed-subscheme",
+  "def-pc-integral-scheme",
+  "lem-weil-pbc-finite-closed-map-finite-fibres",
+  "lem-weil-pbc-reduced-source-factors-through-closed-subscheme",
+  "def-weil-closed-immersion",
+  "lem-weil-pbc-closed-immersion-finite",
+  "pqf-lem-coherent-ft-locnoeth",
+  "lem-weil-pbc-finite-pushforward-coherent",
+  "def-pc-module-pullback",
+  "def-weil-finite-integral-morphism",
+  "lem-weil-pbc-finite-algebra-is-integral",
+  "def-weil-pbc-module-stalk",
+  "lem-weil-pbc-integral-incomparability",
+  "def-weil-residue-field",
+  "lem-weil-pbc-finite-type-module-support-closed",
+  "lem-weil-pbc-closed-pushforward-stalks"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/coherent.tex",
+  "place": "Cohomology of Schemes, Lemma 01YO (label lemma-finite-morphism-Noetherian), proof, coherent.tex lines 3487-3521"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -47,7 +158,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "worker",
@@ -68,5 +179,17 @@
  },
  "chapter": "sec-proper-base-change",
  "unit": "sk-thm-p1",
- "reviewed": "Reviewed by L 2026-10-10 (statement): Cohomology of Schemes 01YO stated in full. Unsplit."
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "lem-weil-pbc-finite-surjective-coherent-generic-support",
+  "worker": "stage1",
+  "summary": "Split Stacks 01YO into six steps: choose a lift of the generic point and its reduced integral closure; identify its closed image with Z and factor through Z; construct the coherent closed pushforward; compute the generic stalk affinely using finiteness, integrality and incomparability; prove maximal-ideal annihilation; and obtain exact support from closedness and the generic point. All non-elementary inputs already have current DAG nodes, so no new node was created. The existing LeanSearch, LeanFinder and Mathlib-source grep all give no match."
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "group": "E1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed by the lead of E1; spot-checked by L: L read the six steps (01YO): reduced closure of a lift of the generic point, image equals Z by closedness of finite maps, i'_* O_Z' coherent, generic stalk kappa(xi') via incomparability, annihilation by m_xi, closed support equals Z."
+ }
 }
