@@ -14,20 +14,120 @@
   "document": "literature/stacks-project/sites-modules.tex",
   "place": "Modules on Sites, Section 18.43 (Tag 093I, sites-modules-section-constant) and Lemma 093R (sites-modules-lemma-pullback-locally-constant), whose omitted proof is this identification; with Sites, Example 0H7J (sites-example-constant-sheaf), the universal property of the constant sheaf, and the adjunction $v^{-1}\\dashv v_*$"
  },
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Apply [lem-galois-constant-sheaf-sets-representable] with $U$ and $E$. It gives an isomorphism $\\underline E_U\\cong h_{U_E}$ carrying each canonical section $\\eta_U(e)$ to the section represented by the coprojection $\\iota_e:U\\to U_E$.",
+   "uses": [
+    "lem-galois-constant-sheaf-sets-representable"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Remark Tag 03P5 and the representability identification used in Lemma Tag 093R"
+   }
+  },
+  {
+   "text": "The codiagonal $\\pi:U_E\\to U$ is etale, so $(U_E,\\pi)$ is an object of $U_{\\Et}$ [def-weil-pbc-etale-site] and each coprojection $\\iota_e:U\\to U_E$, which satisfies $\\pi\\circ\\iota_e=\\mathrm{id}_U$, is a morphism of $U_{\\Et}$: by [lem-weil-pbc-scheme-coproduct-family] the open subschemes $\\iota_e(U)$ cover $U_E$ and $\\iota_e$ is an isomorphism onto $\\iota_e(U)$, so the restriction of $\\pi$ to $\\iota_e(U)$ is the inverse isomorphism, hence etale; and being etale is a condition at each point of the source (Morphisms, Definition in Section Tag 02GH). This is the hypothesis `$V$ an object of $Y_{\\Et}$' needed to apply [lem-galois-inverse-image-representable] to $U_E$ and its naturality to the $\\iota_e$ in the next step.",
+   "uses": [
+    "lem-weil-pbc-scheme-coproduct-family",
+    "def-weil-pbc-etale-site"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Section 29.36 (Tag 02GH), definition of etale morphisms, with Lemma morphisms-lemma-open-immersion-etale"
+   }
+  },
+  {
+   "text": "By [lem-galois-inverse-image-representable] there is a natural isomorphism $v^{-1}h_{U_E}\\cong h_{V\\times_UU_E}$, and it carries the pullback of the section represented by $\\iota_e$ to the section represented by the base-changed morphism $V\\to V\\times_UU_E$.",
+   "uses": [
+    "lem-galois-inverse-image-representable",
+    "lem-weil-pbc-sets-etale-inverse-image-composition-units"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Lemma Tag 03Q1 (4), with Sites Lemma Tag 03CB for the unit-compatible pullback notation"
+   }
+  },
+  {
+   "text": "The new base-change node [lem-weil-pbc-sets-etale-inverse-image-constant-base-change] identifies $V\\times_UU_E$ with $V_E$, compatibly with every coprojection. Composing the isomorphisms of the preceding steps with the inverse of [lem-galois-constant-sheaf-sets-representable] for $V$ therefore defines a morphism $\\gamma_v:v^{-1}\\underline E_U\\to\\underline E_V$ and gives $\\gamma_v(v^*\\eta_U(e))=\\eta_V(e)$ for every $e$.",
+   "uses": [
+    "lem-weil-pbc-sets-etale-inverse-image-constant-base-change",
+    "lem-galois-constant-sheaf-sets-representable"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Lemmas Tags 01JB and 01JC after base change, together with the construction in Lemma Tag 093R"
+   }
+  },
+  {
+   "text": "The morphism is an isomorphism because each factor used to define it is an isomorphism. It is unique with the displayed equations: after the representable identifications, those equations prescribe the images of the canonical coprojection sections, and [lem-galois-constant-sheaf-sets-representable] gives the sheafification universal property, so two such sheaf morphisms agree.",
+   "uses": [
+    "lem-galois-constant-sheaf-sets-representable",
+    "lem-galois-inverse-image-representable",
+    "lem-weil-pbc-sets-etale-inverse-image-composition-units"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Lemma Tag 093R and the universal property of the constant sheaf"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-galois-constant-sheaf-sets-representable",
+  "lem-galois-inverse-image-representable",
+  "lem-weil-pbc-sets-etale-inverse-image-constant-base-change",
+  "lem-weil-pbc-sets-etale-inverse-image-composition-units",
+  "lem-weil-pbc-scheme-coproduct-family",
+  "def-weil-pbc-etale-site"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Section 18.43 (Tag 093I), Lemma 093R, with Sites Lemma 04D3"
+ },
  "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "inverse image of a constant sheaf of sets along a morphism of schemes is the constant sheaf",
+   "results": "CategoryTheory.Sheaf.isConstant_of_forget, isConstant_iff_forget, isConstant_of_iso, constantSheaf; no statement on inverse image of a constant sheaf along a morphism of schemes",
+   "date": "2026-10-11",
+   "verdict": "no match"
+  },
   {
    "tool": "loogle",
    "query": "CategoryTheory.constantSheaf, CategoryTheory.Sheaf.IsConstant",
    "results": "Sheaf.mem_essImage_of_isConstant, IsConstant.mk, isConstant_of_iso, isConstant_of_forget, isConstant_iff_forget, isConstant_of_isIso_counit_app, isConstant_iff_isIso_counit_app (Mathlib.CategoryTheory.Sites.ConstantSheaf): no statement on the inverse image of a constant sheaf along a morphism of sites/schemes",
    "date": "2026-10-10",
    "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "Sheaf.IsConstant, sheafPullback, Scheme",
+   "results": "no declarations (unknown identifier Sheaf.IsConstant)",
+   "date": "2026-10-11",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "constantSheaf|sheafPullback in Mathlib/CategoryTheory/Sites",
+   "results": "no matching declaration returned by the search command",
+   "date": "2026-10-11",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "inverse image of a constant sheaf of sets along a scheme morphism",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-11",
+   "verdict": "unavailable"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "R-css1706",
@@ -40,7 +140,7 @@
   "is": null,
   "from": {
    "node": "lemma-weil-pbc-proper-underived-exchange",
-   "place": "proof, paragraph beginning 'The base Y_(ybar) is strictly henselian local': sections of the constant sheaf on a connected geometric fibre and their naturality under pullback",
+   "place": "proof, paragraph beginning 'The base Y_(ybar) is strictly henselian local': pullback of the constant sheaf and compatibility of its canonical sections",
    "via": [
     "lem-weil-pbc-etale-sections-flat-qc-connected-fibres",
     "lem-weil-pbc-constant-sheaf-set-sections-connected-natural"
@@ -55,5 +155,34 @@
   "slopmaster2": {
    "state": "none"
   }
+ },
+ "split_report": {
+  "date": "2026-10-11",
+  "item": "lem-weil-pbc-sets-etale-inverse-image-constant-sheaf",
+  "worker": "stage1",
+  "summary": "Split the inverse-image statement through the existing representation of a constant sheaf by the coproduct of copies of the base, the existing inverse-image formula for representable etale sheaves, and a new statement-only node distributing an arbitrary indexed coproduct over base change. The canonical-section condition is tracked through the unit and composition compatibilities of etale inverse images; uniqueness follows from the sheafification universal property and the same representable identifications.",
+  "blueprint": "The steps realize the paragraph beginning 'The base Y_(ybar) is strictly henselian local' in lemma-weil-pbc-proper-underived-exchange: pullback of the constant sheaf on the base and naturality of its canonical sections.",
+  "tool_uses": [
+   {
+    "node": "lem-galois-constant-sheaf-sets-representable",
+    "why": "The route needs the representation of a set-valued constant etale sheaf by the coproduct of copies of the base; no node in sk-thm-iff supplies this representability fact."
+   },
+   {
+    "node": "lem-galois-inverse-image-representable",
+    "why": "The route needs the inverse image formula for representable etale sheaves; no node in sk-thm-iff supplies this site-theoretic base-change fact."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-galois-constant-sheaf-sets-representable",
+  "lem-galois-inverse-image-representable"
+ ],
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-ics1750",
+  "group": "J1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-ics1750 (reviewer sub-agent of L); spot-checked: No cycle: transitive deps of the item (171 nodes) exclude the item and its two citers (constant-sheaf-set-sections-connected-natural, etale-geometric-fibre-inverse-image-constant). Steps follow from the cited statements: section compatibility in step 2 via naturality of lem-galois-inverse-image-representable at iota_e plus unit naturality (0) and h_U terminal; uniqueness by the uniqueness clause of the representable lemma for V. New base-change node: not a duplicate (lem-sc-etale-fibre-product-base-change-coproduct is finite I only); Mathlib grep of AlgebraicGeometry gives only finite-coproduct universality (FinitaryPreExtensive, isPullback_inl_inl_coprodMap), no arbitrary-index match; real lemma, kept. FIX more, RETURN less: (1) E/C4: step 2 applies lem-galois-inverse-image-representable to U_E, which requires U_E an object of U_Et, never established (lem-weil-pbc-scheme-coproduct-copies is countable only, lem-sc-etale-coproduct-etale finite only); inserted an elementary step: the codiagonal is an isomorphism on each open summand, etaleness is pointwise on the source (Tag 02GH), so U_E and the iota_e lie in U_Et; added lem-weil-pbc-scheme-coproduct-family and def-weil-pbc-etale-site to proof_deps.; 1 file(s) fixed by the reviewer"
  }
 }
