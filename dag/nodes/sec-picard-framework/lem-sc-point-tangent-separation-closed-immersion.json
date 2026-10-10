@@ -4,7 +4,7 @@
   "is": null,
   "from": {
    "node": "lem-sc-degree-2g1-very-ample",
-   "place": "proof, third paragraph: 'the complete linear system gives a closed immersion' after the second paragraph establishes separation of points and tangent vectors",
+   "place": "proof, third paragraph: the complete linear system gives a closed immersion after point and tangent separation",
    "via": [
     "lem-sc-very-ample-separation-criterion"
    ]
@@ -25,39 +25,198 @@
   "def-pc-projective-space-twist",
   "def-sc-ample"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Because $X$ is proper over $k$ and $\\mathcal L$ is coherent, [lem-pc-coherent-hi] applied to $X\\to\\operatorname{Spec}(k)$ gives that $H^0(X,\\mathcal L)$ is finite-dimensional over $k$. Hence $V$ is finite-dimensional and has a basis.",
+   "uses": [
+    "lem-pc-coherent-hi"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 02O5, Proposition 30.19.1"
+   }
+  },
+  {
+   "text": "Hypothesis (0) says that the evaluation map from $V$ generates $\\mathcal L$. Therefore the basis defines $\\varphi_{\\mathcal L,V}:X\\to\\mathbf P(V^\\vee)$ by [def-weil-pbc-morphism-to-projective-space-by-sections], and the construction identifies $\\varphi_{\\mathcal L,V}^*\\mathcal O(1)$ with $\\mathcal L$ using [def-pc-projective-space-twist].",
+   "uses": [
+    "def-weil-pbc-generating-sections",
+    "def-weil-pbc-morphism-to-projective-space-by-sections",
+    "def-pc-projective-space-twist"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 0E8S, setup and construction"
+   }
+  },
+  {
+   "text": "The morphism $\\varphi_{\\mathcal L,V}$ is proper: its composite with $\\mathbf P(V^\\vee)\\to\\operatorname{Spec}(k)$ is the proper morphism $X\\to\\operatorname{Spec}(k)$, and projective space is separated over $k$, so [lem-weil-pbc-proper-to-separated] applies.",
+   "uses": [
+    "lem-weil-pbc-proper-to-separated"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 01W6"
+   }
+  },
+  {
+   "text": "Condition (1) makes $\\varphi_{\\mathcal L,V}$ injective on closed points: if $x\\ne y$ had the same projective image, every section vanishing at $x$ would vanish at $y$, contradicting (1). The closed-fibre argument is the statement of [lem-sc-point-tangent-closed-fibre-singleton]: for every closed point $p$ the fibre is empty or exactly $\\{x\\}$, with $x$ closed. Its proof uses that a nonempty fibre is closed and therefore has a closed point by [lem-sc-quasi-compact-kolmogorov-closed-point], while any nonclosed point in a finite-type scheme has infinitely many closed specializations by [lem-sc-finite-type-nonclosed-closure-closed-points], contradicting injectivity. Hence every fibre over a closed point is finite.",
+   "uses": [
+    "lem-sc-point-tangent-closed-fibre-singleton",
+    "lem-sc-quasi-compact-kolmogorov-closed-point",
+    "lem-sc-finite-type-nonclosed-closure-closed-points"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 0E8S, proof after condition (1), with Tags 005E and 0478 for the closed-point details"
+   }
+  },
+  {
+   "text": "Apply [thm-sc-proper-finite-fibre-finite-neighbourhood] (Tag 02OH) at each closed point $p$ of $\\mathbf P(V^\\vee)$, using properness from step 3, the finite closed fibre from step 4, and that $\\mathbf P(V^\\vee)$ is locally Noetherian by [pqf-lem-locnoeth-lft], being of finite type over the Noetherian scheme $\\operatorname{Spec}(k)$. This gives an open neighbourhood $U_p$ on which $\\varphi$ is finite. The union of the $U_p$ contains every closed point; its closed complement, if nonempty, would contain a closed point by [lem-sc-quasi-compact-kolmogorov-closed-point], since projective space is quasi-compact and Kolmogorov. Thus the union is all of $\\mathbf P(V^\\vee)$ and $\\varphi$ is finite.",
+   "uses": [
+    "thm-sc-proper-finite-fibre-finite-neighbourhood",
+    "lem-sc-quasi-compact-kolmogorov-closed-point",
+    "pqf-lem-locnoeth-lft"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/coherent.tex",
+    "place": "Tag 02OH, lemma-proper-finite-fibre-finite-in-neighbourhood"
+   }
+  },
+  {
+   "text": "It remains to prove surjectivity of $\\varphi^\\sharp:\\mathcal O_{\\mathbf P(V^\\vee)}\\to\\varphi_*\\mathcal O_X$. Since $\\varphi$ is finite, $\\varphi_*\\mathcal O_X$ is a quasi-coherent $\\mathcal O_{\\mathbf P(V^\\vee)}$-module of finite type [def-weil-finite-integral-morphism], hence so is the cokernel of $\\varphi^\\sharp$; its support is closed by [lem-weil-pbc-finite-type-module-support-closed], and if nonempty it contains a closed point of $\\mathbf P(V^\\vee)$ by [lem-sc-quasi-compact-kolmogorov-closed-point]. So it suffices to check surjectivity on stalks at closed points $p$. If the fibre over $p$ is empty, then $p$ is not in the closed set $\\varphi(X)$ and $(\\varphi_*\\mathcal O_X)_p=0$. For a closed $p$ with fibre $\\{x\\}$, the equality of sets from [lem-sc-point-tangent-closed-fibre-singleton] and the closedness of the proper map $\\varphi$ (step 3) show that the $\\varphi^{-1}(U)$, for $U$ running through the open neighbourhoods of $p$, form a fundamental system of open neighbourhoods of $x$; this identifies $(\\varphi_*\\mathcal O_X)_p$ with $\\mathcal O_{X,x}$, and the stalk map is finite because $\\varphi$ is finite. Both residue fields are $k$ by [lem-weil-pbc-closed-point-residue-field-base], since the source and projective target are of finite type over the algebraically closed field $k$.",
+   "uses": [
+    "lem-sc-point-tangent-closed-fibre-singleton",
+    "lem-weil-pbc-closed-point-residue-field-base",
+    "def-weil-finite-integral-morphism",
+    "lem-weil-pbc-finite-type-module-support-closed",
+    "lem-sc-quasi-compact-kolmogorov-closed-point"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 0E8S, proof, stalk check"
+   }
+  },
+  {
+   "text": "Condition (2) says that $T_{X/k,x}\\to T_{\\mathbf P(V^\\vee)/k,p}$ is injective. By [lem-sc-point-tangent-cotangent-surjective], the induced map $\\mathfrak m_p/\\mathfrak m_p^2\\to\\mathfrak m_x/\\mathfrak m_x^2$ is surjective.",
+   "uses": [
+    "lem-sc-point-tangent-cotangent-surjective"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 0B2E, lemma-tangent-space-rational-point"
+   }
+  },
+  {
+   "text": "The finite local stalk map has equal residue fields and is surjective on cotangent spaces, so [lem-sc-point-tangent-finite-local-cotangent-surjective] gives a surjection $\\mathcal O_{\\mathbf P,p}\\to\\mathcal O_{X,x}$. Hence $\\varphi^\\sharp$ is surjective on all stalks (step 6), so on every affine open $\\operatorname{Spec}R$ of $\\mathbf P(V^\\vee)$, whose inverse image $\\operatorname{Spec}A$ is affine because $\\varphi$ is finite, the ring map $R\\to A$ is surjective; thus $\\varphi$ is a closed immersion by [def-weil-closed-immersion].",
+   "uses": [
+    "lem-sc-point-tangent-finite-local-cotangent-surjective",
+    "def-weil-closed-immersion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 0E8M, lemma-when-surjective-local; Tag 0E8S conclusion (varieties.tex)"
+   }
+  },
+  {
+   "text": "When $V=H^0(X,\\mathcal L)$, this is the complete linear system, and [def-sc-ample] identifies the closed-immersion property and pullback isomorphism with very ampleness.",
+   "uses": [
+    "def-sc-ample"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 0E8S, final conclusion"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-coherent-hi",
+  "def-weil-pbc-generating-sections",
+  "def-weil-pbc-morphism-to-projective-space-by-sections",
+  "def-pc-projective-space-twist",
+  "lem-weil-pbc-proper-to-separated",
+  "lem-sc-point-tangent-closed-fibre-singleton",
+  "lem-sc-quasi-compact-kolmogorov-closed-point",
+  "lem-sc-finite-type-nonclosed-closure-closed-points",
+  "thm-sc-proper-finite-fibre-finite-neighbourhood",
+  "pqf-lem-locnoeth-lft",
+  "lem-weil-pbc-closed-point-residue-field-base",
+  "def-weil-finite-integral-morphism",
+  "lem-weil-pbc-finite-type-module-support-closed",
+  "lem-sc-point-tangent-cotangent-surjective",
+  "lem-sc-point-tangent-finite-local-cotangent-surjective",
+  "def-weil-closed-immersion",
+  "def-sc-ample"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/varieties.tex",
+  "place": "Tag 0E8S proof; Tag 02O5 finite-dimensionality"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
-   "query": "separation of points and tangent vectors by global sections implies invertible sheaf very ample and complete linear system closed immersion",
-   "results": "LeanSearch returned HTTP 500; no result available.",
+   "query": "separation of points and tangent vectors by global sections implies closed immersion",
+   "results": "LeanSearch unavailable (HTTP 500).",
    "date": "2026-10-10",
-   "verdict": "service unavailable; no absence conclusion from this query"
+   "verdict": "service unavailable; no absence conclusion"
   },
   {
    "tool": "loogle",
-   "query": "\"IsVeryAmple\"",
+   "query": "IsVeryAmple separation tangent closed immersion",
    "results": "No declarations returned.",
    "date": "2026-10-10",
    "verdict": "no match"
   },
   {
    "tool": "grep",
-   "query": "rg -n 'IsVeryAmple|isVeryAmple|separat.*tangent|base.?point' /home/ubuntu/weil-src-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicGeometry",
-   "results": "No declarations in Mathlib/AlgebraicGeometry; the project theorem AlgebraicGeometry.Scheme.isVeryAmple_of_finrankH_zero_tensorObj_toModules_ker is outside Mathlib and has a different conclusion type.",
+   "query": "rg -n 'IsVeryAmple|separat.*tangent|base.?point' /home/ubuntu/weil-src-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicGeometry",
+   "results": "No declaration for this criterion.",
    "date": "2026-10-10",
    "verdict": "no match in Mathlib"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-sc-very-ample-separation-criterion",
   "by": "worker",
   "date": "2026-10-10"
  },
  "chapter": "sec-picard-framework",
- "unit": "sk-thm-picard-rr"
+ "unit": "sk-thm-picard-rr",
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "lem-sc-point-tangent-separation-closed-immersion",
+  "worker": "stage1",
+  "summary": "Repaired the returned split by spelling out the closed-fibre singleton argument, replacing the incorrect global finite-fibre criterion with Tag 02OH applied at every closed point, citing the existing closed-point residue-field lemma in the stalk check, and adding statement-only nodes for the finite-type closure fact, the closed-fibre singleton fact, and Tag 02OH. The two tangent/cotangent nodes retain complete created metadata.",
+  "blueprint": "The steps realize the imported blueprint route's morphism construction, proper finite-fibre argument, tangent separation, and closed-immersion conclusion in the third paragraph of lem-sc-degree-2g1-very-ample.",
+  "tool_uses": [
+   {
+    "node": "lem-pc-coherent-hi",
+    "why": "Proper-coherent finite-dimensionality is a generic input for the section space and is not supplied by the point/tangent separation route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "pqf-lem-locnoeth-lft",
+  "lem-weil-pbc-finite-type-module-support-closed",
+  "lem-pc-coherent-hi"
+ ],
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-pt4",
+  "group": "J1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-pt4 (reviewer sub-agent of L); spot-checked: Repaired re-push after returns 15:10 and 15:42; return 15:42 points: 1 repaired (new statement node lem-sc-point-tangent-closed-fibre-singleton, true: fibre over closed p is closed, contains a closed point of X by Jacobson/quasi-compactness, and a nonclosed point would have infinitely many closed specializations by lem-sc-finite-type-nonclosed-closure-closed-points (Tags 0478/0A21, true: closure irreducible of dim >=1, a f.g. k-domain of dim >=1 has infinitely many maximal ideals); cited in steps 4 and 6); 2 repaired (new node thm-sc-proper-finite-fibre-finite-neighbourhood agrees with Tag 02OH coherent.tex lemma-proper-finite-fibre-finite-in-neighbourhood hypothesis by hypothesis: S locally Noetherian, f proper, f^{-1}(s) finite; applied at closed points, complement of the union handled by lem-sc-quasi-compact-kolmogorov-closed-point; thm-pqf-finite-iff-proper-finite-fibres dropped); 3 repaired (lem-weil-pbc-closed-point-residue-field-base cited in step 6); 4 moot (created.by/date is the maintainer's, filled at merge). Source Tag 0E8S varieties.tex lemma-separate-points-tangent-vectors read; statement agrees with it plus the named hypothesis (0) (E7, unchanged). 0B2E (varieties lemma-tangent-space-rational-point, S=Spec k) gives the cotangent node via duality; 0E8M node (algebra lemma-when-surjective-local) drops 'm_B finitely generated', still true (B/m_A B Artinian, n=m_A B+n^2 forces n=m_A B, Nakayama). Small cases: X=Spec k with V=0 excluded by (0); X=P^1, L=O(1), V=H^0 gives the identity. FIX more, RETURN less / FIX: item step 5: text+uses: added the locally Noetherian hypothesis of 02OH for P(V^vee) via [pqf-lem-locnoeth-lft] (C4); item step 6: text+uses: wrote the reduction to closed points (cokernel finite type [def-weil-finite-integral-morphism], support closed [lem-weil-pbc-finite-type-module-support-closed], closed point [lem-sc-quasi-compact-kolmogorov-closed-point]), the empty-fibre case, and the closedness of phi for the stalk identification (C1); item step 8: text+uses: closed immersion from surjectivity on affine opens via [def-weil-closed-immersion] (C1); item steps 7,8: source: document corrected to varieties.tex / algebra.tex; item: proof_deps = union of uses; item: stmt_deps: removed lem-pc-coherent-hi (not cited by the statement); item: split_report.tool_uses: removed thm-sc-proper-finite-fibre-finite-neighbourhood (a new node of the item's own unit, not a tool); thm-sc-proper-finite-fibre-finite-neighbourhood: statement/stmt_deps: locally Noetherian cites [pqf-def-locnoeth], stmt_deps were empty; lem-sc-point-tangent-closed-fibre-singleton: stmt_deps: the definitions the statement cites instead of two lemmas; lem-sc-point-tangent-cotangent-surjective: statement/source: Varieties, varieties.tex; lem-sc-point-tangent-finite-local-cotangent-surjective: statement/stmt_deps/source: local homomorphism cites [def-weil-locally-ringed-space-morphism] instead of the scheme conventions, Algebra/algebra.tex. Report lists a citations.json that is not in the commit (F, noted). Tool uses: lem-pc-coherent-hi, pqf-lem-locnoeth-lft, lem-weil-pbc-finite-type-module-support-closed as generic black boxes. Start Sat Oct 10 04:06:08 PM UTC 2026, end Sat Oct 10 04:09:14 PM UTC 2026.; 5 file(s) fixed by the reviewer"
+ }
 }
