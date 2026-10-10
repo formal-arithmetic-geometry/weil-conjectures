@@ -3,7 +3,7 @@
  "blueprint": {
   "is": "def-exc-etale-algebra-lift",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "definition",
  "title": "Lifting a Jacobian presentation",
@@ -18,9 +18,38 @@
  "proof": [],
  "proof_deps": [],
  "proof_origin": null,
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "lifting a Jacobian presentation by adjoining t with t Delta = 1",
+   "results": "Algebra.SubmersivePresentation.invJacobianOfHasCoeffs and related Jacobian APIs in Mathlib/RingTheory/Extension/Presentation/Core; none states this project-specific construction",
+   "date": "2026-10-11",
+   "verdict": "generalization: related Jacobian inverse APIs, not this definition"
+  },
+  {
+   "tool": "loogle",
+   "query": "Polynomial, Matrix.det, AdjoinRoot, Algebra.Etale",
+   "results": "0 hits",
+   "date": "2026-10-11",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "AdjoinRoot|Matrix.det|Algebra.Etale Mathlib",
+   "results": "0 hits",
+   "date": "2026-10-11",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "define the lift of an etale algebra presentation by adjoining an inverse to the Jacobian determinant",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-11",
+   "verdict": "unavailable"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [],
  "blueprint_kind": "definition",
@@ -41,5 +70,20 @@
   }
  },
  "chapter": "sec-smooth-purity",
- "unit": "sk-prop-sf-open-closed-triangle"
+ "unit": "sk-prop-sf-open-closed-triangle",
+ "split_report": {
+  "date": "2026-10-11",
+  "item": "def-exc-etale-algebra-lift",
+  "worker": "stage1",
+  "summary": "Verified that this is a definition-only node with no project Lean declaration to attach and no proof steps to split. Its construction is fully stated and depends only on the existing square Jacobian presentation definition; no new node is needed.",
+  "blueprint": "Realizes the blueprint node statement: coefficientwise lifts f_i, the Jacobian determinant Delta, and the quotient A[x_1,...,x_m,t]/(f_i,t Delta - 1), together with its reduction map to the given presentation."
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-eal3026",
+  "group": "K1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-eal3026 (reviewer sub-agent of L); spot-checked: Statement byte-identical to sheaf-dag (no E7); matches the construction used by lem-exc-etale-algebra-lift (adjoin t with t*Delta-1, Jacobian Delta^2 is in the lemma, not here); choice of lifts f_i named; localisation at Delta as A[x,t]/(f,t Delta-1) = (A[x]/(f))_Delta, Stacks 00UE/04D1; reduction map well defined since Delta-bar invertible by cited def-exc-jacobian-presentation (attached Algebra.SquareJacobianPresentation, ab952daed); no etaleness or isomorphism smuggled; slopmaster2 grep SquareJacobianPresentation/lift/etaleLift: no lift definition, so no B10 attach. No repairs."
+ }
 }

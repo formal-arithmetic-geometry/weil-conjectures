@@ -2923,3 +2923,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 23:08 L: merged deliver/M1/lem-sc-ass-weakass-fg-stalk (reviewer FIX; first push; new nodes: 1)
 - 23:08 L: returned deliver/F1/lem-pc-rf-single-complex-affine-base-change (reviewer RETURN: 1. E (missing datum/hypothesis): the statement has no given map L(g')^*K -> K' (equivalently a morphism M^\bullet\otimes)
 - 23:09 L: merged deliver/J1/lem-kun-algebraic-separable-smooth (reviewer FIX; first push; new nodes: 0)
+- 23:09 L: merged deliver/K1/def-exc-etale-algebra-lift (reviewer PASS; first push; new nodes: 0)
