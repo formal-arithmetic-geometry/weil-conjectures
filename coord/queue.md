@@ -1,8 +1,8 @@
 # Work queue
 
-921 items; claim with `tools/claim.py next <group> [--stage N]`.
+923 items; claim with `tools/claim.py next <group> [--stage N]`.
 
-## Stage 1: nodes to split (614)
+## Stage 1: nodes to split (616)
 
 | node | distance to a target | Lean state on the done branch |
 |---|---|---|
@@ -25,7 +25,6 @@
 | `lem-weil-pbc-smooth-fibre-regular-local` | 1012 | none |
 | `lem-weil-pbc-smooth-localization-conormal-split` | 1012 | none |
 | `lem-weil-pbc-smooth-over-field-dimension-differentials` | 1012 | none |
-| `lem-weil-pbc-nagata-universally-japanese` | 1013 | none |
 | `lem-weil-pbc-power-series-ring-subfields` | 1013 | none |
 | `lem-weil-pbc-presheaf-module-stalk-filtered-colimit` | 1013 | none |
 | `lem-weil-pbc-projective-dimension-well-defined` | 1013 | none |
@@ -79,6 +78,7 @@
 | `lem-weil-pbc-essentially-constant-splitting` | 1014 | none |
 | `lem-weil-pbc-etale-retraction-finite-type-splitting` | 1014 | none |
 | `lem-weil-pbc-etale-splits-off-isolated-points-technical` | 1014 | none |
+| `lem-weil-pbc-finite-over-nagata-nagata` | 1014 | none |
 | `lem-weil-pbc-finite-surjective-coherent-generic-support` | 1014 | none |
 | `lem-weil-pbc-finite-type-domain-dimension-local-ring` | 1014 | none |
 | `lem-weil-pbc-finitely-generated-field-complete-intersection-model` | 1014 | none |
@@ -99,10 +99,12 @@
 | `lem-weil-pbc-module-extension-by-zero-adjunction` | 1014 | none |
 | `lem-weil-pbc-module-injective-open-cover-cech-acyclic` | 1014 | none |
 | `lem-weil-pbc-nl-presentations-homotopy-equivalent` | 1014 | none |
+| `lem-weil-pbc-normal-nagata-monogenic-n1` | 1014 | none |
 | `lem-weil-pbc-p-basis-differentials-basis` | 1014 | none |
 | `lem-weil-pbc-p-independent-differentials-independent` | 1014 | none |
 | `lem-weil-pbc-polynomial-quotient-dimension-at-point-height-difference` | 1014 | none |
 | `lem-weil-pbc-polynomial-ring-maximal-localization-dimension` | 1014 | none |
+| `lem-weil-pbc-polynomial-ring-n2` | 1014 | none |
 | `lem-weil-pbc-torsion-module-flat-base-change-iso` | 1014 | none |
 | `lem-weil-pbc-torsion-submodule-flat-base-change-iso` | 1014 | none |
 | `lem-weil-pbc-two-term-homotopy-equivalence-direct-sum` | 1014 | none |
@@ -933,7 +935,7 @@
 | `lem-weil-pbc-p1-field-dimension-one` | 4 | state |
 | `lem-weil-pbc-projective-space-zero-isomorphism` | 4 | state |
 
-Not open yet: 626 nodes that wait for stage 1, 589 nodes that wait for a statement dependency.
+Not open yet: 628 nodes that wait for stage 1, 590 nodes that wait for a statement dependency.
 
 ## Stage 3: modules to prove (0)
 
