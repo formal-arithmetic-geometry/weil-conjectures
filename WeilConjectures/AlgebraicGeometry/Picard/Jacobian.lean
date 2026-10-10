@@ -33,6 +33,7 @@ public import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.Smooth
 public import WeilConjectures.Mathlib.CategoryTheory.Adjunction.Basic
 public import WeilConjectures.PointCount
 public import WeilConjectures.AlgebraicGeometry.FieldExtensionLimit
+public import WeilConjectures.Mathlib.CategoryTheory.Types.Basic
 
 /-!
 # The Jacobian of a smooth projective curve
@@ -1845,12 +1846,6 @@ lemma specMap_algebraMap_comp_specMap_algebraMap (k K L : Type u) [CommRing k] [
       Spec.map (CommRingCat.ofHom (algebraMap k L)) := by
   rw [← Spec.map_comp, ← CommRingCat.ofHom_comp, ← IsScalarTower.algebraMap_eq]
 
-/-- Two composites of morphisms which agree induce the same map on sections of a presheaf. -/
-lemma map_map_eq_map_map_of_comp_eq {D : Type*} [Category D] (P : Dᵒᵖ ⥤ Type*)
-    {A B B' E : D} (u : A ⟶ B) (v : B ⟶ E) (u' : A ⟶ B') (v' : B' ⟶ E) (h : u ≫ v = u' ≫ v')
-    (x : P.obj (.op E)) : P.map u.op (P.map v.op x) = P.map u'.op (P.map v'.op x) := by
-  rw [← Functor.map_comp_apply, ← Functor.map_comp_apply, ← op_comp, ← op_comp, h]
-
 omit [Field k] in
 lemma isFinite_specMap_algebraMap (k K : Type u) [Field k] [Field K] [Algebra k K]
     [FiniteDimensional k K] : IsFinite (Spec.map (CommRingCat.ofHom (algebraMap k K))) :=
@@ -2270,7 +2265,7 @@ theorem exists_intermediateField_representableBy {ks : Type u} [Field ks] [Algeb
     apply rs'.homEquiv.injective
     rw [Functor.RepresentableBy.homEquiv_overTransport, hrs']
     erw [hrs' f₁ a, Functor.RepresentableBy.homEquiv_overTransport]
-    exact map_map_eq_map_map_of_comp_eq P
+    exact FunctorToTypes.map_map_eq_map_map_of_comp_eq P
       ((Over.map gL).map (Functor.RepresentableBy.overMapHomMkId f₁ f₂ h)) _ _ _
       (by ext; simp) _
   have := flat_specMap_algebraMap L.1 ks
@@ -2302,7 +2297,8 @@ theorem exists_intermediateField_representableBy {ks : Type u} [Field ks] [Algeb
       Functor.RepresentableBy.descentCoverπ ιL ((Over.map ιL).obj (Over.mk f)) = 𝟙 _ := by
     ext
     exact pullback.lift_fst _ _ _
-  have h := map_map_eq_map_map_of_comp_eq ((Over.map gL).op ⋙ P) ((Over.map ιL).map s)
+  have h := FunctorToTypes.map_map_eq_map_map_of_comp_eq ((Over.map gL).op ⋙ P)
+    ((Over.map ιL).map s)
     (Functor.RepresentableBy.descentCoverπ ιL ((Over.map ιL).obj (Over.mk f))) (𝟙 _) (𝟙 _)
     (by rw [hs, Category.comp_id]) (rK.homEquiv b)
   erw [hrK] at h
@@ -2421,7 +2417,7 @@ theorem exists_intermediateField_descentDatum {ks : Type u} [Field ks] [Algebra 
       erw [hc f₁ a, hc f₂ c]
       simp only [c]
       rw [Functor.RepresentableBy.homEquiv_overTransport]
-      exact map_map_eq_map_map_of_comp_eq _ _ _ _ _ (by ext; simp) _
+      exact FunctorToTypes.map_map_eq_map_map_of_comp_eq _ _ _ _ _ (by ext; simp) _
     exact congrArg (·.left) key
   · exact exists_isAffineOpen_superset_of_isPullback C Js rs K JK q hq
 

@@ -6,7 +6,7 @@ Authors: Claude
 module
 
 public import WeilConjectures.Mathlib.AlgebraicGeometry.AffineTransitionLimit
-public import WeilConjectures.Mathlib.FieldTheory.TensorProductDiagonal
+public import WeilConjectures.FieldTheory.TensorProductDiagonal
 
 /-!
 # Spreading out over an algebraic field extension
