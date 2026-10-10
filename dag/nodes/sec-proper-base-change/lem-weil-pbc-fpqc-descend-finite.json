@@ -13,9 +13,70 @@
   "def-pc-fibre-product",
   "def-weil-finite-integral-morphism"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "*Each $f_i$ is integral and locally of finite type.* For every $i\\in I$ the morphism $f_i:X\\times_SS_i\\to S_i$ is finite by hypothesis, hence integral [def-weil-finite-integral-morphism] and locally of finite type [def-weil-finite-type-morphism] by the direction 'finite $\\Rightarrow$ integral and locally of finite type' of [lem-weil-pbc-finite-iff-integral-lft].",
+   "uses": [
+    "lem-weil-pbc-finite-iff-integral-lft",
+    "def-weil-finite-integral-morphism",
+    "def-weil-finite-type-morphism"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/descent.tex",
+    "place": "Descent, proof of Lemma Tag 02LA (line 6107): 'A finite morphism is the same thing as an integral morphism which is locally of finite type', Morphisms, Lemma Tag 01WJ (morphisms-lemma-finite-integral, morphisms.tex line 11022)"
+   }
+  },
+  {
+   "text": "*$f$ is integral.* The family $\\{g_i:S_i\\to S\\}_{i\\in I}$ is an fpqc covering [def-weil-pbc-fpqc-covering] and every base change $f_i$ of $f$ along $g_i$ [def-pc-fibre-product] is integral (step 1), so $f$ is integral by [lem-weil-pbc-fpqc-descend-integral].",
+   "uses": [
+    "lem-weil-pbc-fpqc-descend-integral",
+    "def-weil-pbc-fpqc-covering",
+    "def-pc-fibre-product"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/descent.tex",
+    "place": "Descent, proof of Lemma Tag 02LA (lines 6110-6112), Lemma Tag 02L9 (lemma-descending-property-integral, line 6087)"
+   }
+  },
+  {
+   "text": "*$f$ is locally of finite type.* Likewise every $f_i$ is locally of finite type (step 1), so $f$ is locally of finite type by [lem-weil-pbc-fpqc-descend-locally-finite-type].",
+   "uses": [
+    "lem-weil-pbc-fpqc-descend-locally-finite-type"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/descent.tex",
+    "place": "Descent, proof of Lemma Tag 02LA (lines 6110-6112), Lemma Tag 02KX (lemma-descending-property-locally-finite-type, line 5737)"
+   }
+  },
+  {
+   "text": "*$f$ is finite.* By steps 2 and 3, $f$ is integral and locally of finite type, hence finite by the direction 'integral and locally of finite type $\\Rightarrow$ finite' of [lem-weil-pbc-finite-iff-integral-lft].",
+   "uses": [
+    "lem-weil-pbc-finite-iff-integral-lft"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/descent.tex",
+    "place": "Descent, proof of Lemma Tag 02LA (lines 6107-6112), Morphisms, Lemma Tag 01WJ (morphisms-lemma-finite-integral)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-finite-iff-integral-lft",
+  "def-weil-finite-integral-morphism",
+  "def-weil-finite-type-morphism",
+  "lem-weil-pbc-fpqc-descend-integral",
+  "def-weil-pbc-fpqc-covering",
+  "def-pc-fibre-product",
+  "lem-weil-pbc-fpqc-descend-locally-finite-type"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/descent.tex",
+  "place": "Descent, Lemma Tag 02LA (lemma-descending-property-finite, line 6102) and its proof"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -58,6 +119,20 @@
    "results": "AlgebraicGeometry.IsFinite.descendsAlong_surjective_inf_flat_inf_quasicompact in WeilConjectures/Mathlib/AlgebraicGeometry/Morphisms/FlatDescent.lean:101-108 (source repository, not Mathlib; sorry-free); index: unavailable",
    "date": "2026-10-10",
    "verdict": "not in Mathlib; the source repository (not Mathlib) has the sorry-free `AlgebraicGeometry.Scheme.of_isPullback_of_ofArrows_mem_fpqcTopology` (WeilConjectures/Mathlib/AlgebraicGeometry/Sites/Fpqc.lean:115-126, read with sed -n; s=false, ts=false in local/sorry_map_slopmaster2_full.jsonl) instantiated with P = IsFinite and this instance states the node for a covering family"
+  },
+  {
+   "tool": "leansearch",
+   "query": "IsFinite morphism of schemes if pullback along surjective flat quasi-compact morphism is finite",
+   "results": "IsFinite, IsFinite.mk, IsFinite.iff_isIntegralHom_and_locallyOfFiniteType, isFinite_iff (Morphisms.Finite), IsFinite.iff_isProper_and_isAffineHom (Morphisms.Proper), IsFinite.instIsStableUnderBaseChangeScheme; no descent of IsFinite",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rn 'IsIntegralHom\\|IsAffineHom\\|IsFinite' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicGeometry/Morphisms/Descent.lean ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicGeometry/Morphisms/FlatDescent.lean ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicGeometry/Morphisms/LocalFlatDescent.lean ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicGeometry/Sites/Fpqc.lean; grep -rln 'ofArrows' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicGeometry | xargs grep -ln 'DescendsAlong'",
+   "results": "no DescendsAlong for IsFinite, IsIntegralHom or IsAffineHom (only the hypothesis at Descent.lean:194 and a local `have` at FlatDescent.lean:110); no Mathlib file states descent along a covering family; point B8: no single Mathlib declaration gives the node up to a one-line specialization with def-weil-pbc-fpqc-covering (Scheme.fpqcPrecoverage)",
+   "date": "2026-10-10",
+   "verdict": "no match; split along the source proof (01WJ + 02L9 + 02KX)"
   }
  ],
  "mathlib_match": null,
@@ -67,7 +142,7 @@
   "line": "Finiteness/Descent.lean:133-138; Morphisms/Descent.lean:193-196 (read with sed -n)",
   "how": "Mathlib has the ring-level descent of finiteness along faithfully flat maps and the general reduction for affineAnd-properties, but the latter needs DescendsAlong @IsAffineHom (absent: descent of affineness, Stacks 02L5) and gives descent along one surjective flat quasi-compact morphism, not along an fpqc covering family; not a leaf (point B8)."
  },
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "worker",
@@ -88,5 +163,11 @@
  },
  "chapter": "sec-proper-base-change",
  "unit": "sk-thm-p1",
- "reviewed": "Reviewed by L 2026-10-10 (statement): Descent 02LA, descent direction of 'fpqc local on the base' (02KO). Unsplit."
+ "reviewed": "pass (L, 2026-10-10): 4 steps follow 02LA: finite = integral + locally of finite type (01WJ leaf), and both descend along fpqc coverings (new unsplit nodes 02L9 and 02KX).",
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "lem-weil-pbc-fpqc-descend-finite",
+  "worker": "stage1",
+  "summary": "Split along the source proof of Descent 02LA (descent.tex 6102-6113), which is not the general criterion 02KP: finite = integral + locally of finite type (Morphisms 01WJ, existing Mathlib leaf lem-weil-pbc-finite-iff-integral-lft, IsFinite.iff_isIntegralHom_and_locallyOfFiniteType), and both properties descend along fpqc coverings (02L9, 02KX: two new unsplit nodes lem-weil-pbc-fpqc-descend-integral and lem-weil-pbc-fpqc-descend-locally-finite-type, stated in the same form as the item and its siblings). Tags 02LA, 02L9, 02KX, 02KO, 01WJ checked in tags/tags. Statement unchanged. Point B8: Mathlib has no DescendsAlong for IsFinite, IsIntegralHom or IsAffineHom and no descent along covering families, so the candidate is not a leaf. The citer lem-weil-pbc-finite-locally-free-degree-etale-descent (step 2) uses exactly this statement."
+ }
 }

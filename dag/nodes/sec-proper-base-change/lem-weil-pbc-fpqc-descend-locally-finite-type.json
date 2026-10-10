@@ -1,0 +1,77 @@
+{
+ "id": "lem-weil-pbc-fpqc-descend-locally-finite-type",
+ "kind": "statement",
+ "title": "Being locally of finite type descends along fpqc coverings (Stacks 02KX)",
+ "statement": "Let $f:X\\to S$ be a morphism of schemes [def-pc-scheme] and let $\\{g_i:S_i\\to S\\}_{i\\in I}$ be an fpqc covering of $S$ [def-weil-pbc-fpqc-covering]. For $i\\in I$ let $f_i:X\\times_SS_i\\to S_i$ be the base change of $f$ along $g_i$, the second projection of the fibre product [def-pc-fibre-product]. If $f_i$ is locally of finite type [def-weil-finite-type-morphism] for every $i\\in I$, then $f$ is locally of finite type.",
+ "source": {
+  "document": "literature/stacks-project/descent.tex",
+  "place": "Descent, Lemma Tag 02KX (lemma-descending-property-locally-finite-type, line 5737: 'The property P(f) = \"f is locally of finite type\" is fpqc local on the base'), the direction 'each base change $X\\times_SS_i\\to S_i$ has the property $\\Rightarrow$ $f$ has it' of 'fpqc local on the base', Descent, Definition Tag 02KO (definition-property-morphisms-local, line 5310)"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-pbc-fpqc-covering",
+  "def-pc-fibre-product",
+  "def-weil-finite-type-morphism"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "locally of finite type morphism descends along fpqc covering family of schemes",
+   "results": "LocallyOfFiniteType (and .mk/.rec), instLocallyOfFiniteTypeOfLocallyOfFinitePresentation, IsProper.toLocallyOfFiniteType, IsFinite.instLocallyOfFiniteType; no descent statement",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.MorphismProperty.DescendsAlong @AlgebraicGeometry.LocallyOfFiniteType",
+   "results": "AlgebraicGeometry.instDescendsAlongSchemeLocallyOfFiniteTypeMinMorphismPropertySurjectiveFlatQuasiCompact (Mathlib.AlgebraicGeometry.Morphisms.LocalFlatDescent)",
+   "date": "2026-10-10",
+   "verdict": "generalization along one surjective flat quasi-compact morphism, not along a covering family"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "property of morphisms of schemes descends along fpqc covering family: if all pullbacks along the covering have P then f has P",
+   "results": "IsZariskiLocalAtTarget.descendsAlong, IsZariskiLocalAtTarget.descendsAlong_inf_quasiCompact (Morphisms.Descent), sourceLocalClosure (Morphisms.LocalClosure); nothing for covering families",
+   "date": "2026-10-10",
+   "verdict": "no match for a covering family"
+  },
+  {
+   "tool": "grep",
+   "query": "sed -n 25,50p ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicGeometry/Morphisms/LocalFlatDescent.lean; grep -rln 'ofArrows' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicGeometry | xargs grep -ln 'DescendsAlong'",
+   "results": "Mathlib/AlgebraicGeometry/Morphisms/LocalFlatDescent.lean:35-36 instance DescendsAlong @LocallyOfFiniteType (@Surjective ⊓ @Flat ⊓ @QuasiCompact) := HasRingHomProperty.descendsAlong_flat RingHom.FiniteType.codescendsAlong_faithfullyFlat (RingTheory/Finiteness/Descent.lean:119); no file combines DescendsAlong with covering families (ofArrows)",
+   "date": "2026-10-10",
+   "verdict": "no match for a covering family (generalization along one morphism)"
+  }
+ ],
+ "mathlib_match": null,
+ "mathlib_candidate": {
+  "declaration": "AlgebraicGeometry.instDescendsAlongSchemeLocallyOfFiniteTypeMinMorphismPropertySurjectiveFlatQuasiCompact",
+  "file": "Mathlib/AlgebraicGeometry/Morphisms/LocalFlatDescent.lean",
+  "line": "35-36 (read with sed -n)",
+  "how": "descent along a single surjective flat quasi-compact morphism; the node is stated for an fpqc covering family {S_i -> S}, and the reduction (Zariski-local on S, over an affine open of S take finitely many affines of the S_i covering it, their disjoint union is one faithfully flat quasi-compact morphism) is not one line; not a leaf (point B8), as for the sibling lem-weil-pbc-fpqc-descend-locally-finite-presentation."
+ },
+ "status": "unsplit",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-fpqc-descend-finite",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1"
+}
