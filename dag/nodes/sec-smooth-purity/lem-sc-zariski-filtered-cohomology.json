@@ -3,11 +3,11 @@
  "blueprint": {
   "is": "lem-sc-zariski-filtered-cohomology",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "Filtered colimits on a Noetherian Zariski site",
- "statement": "Let $X$ be a Noetherian\nscheme and $(F_i)$ a filtered system of abelian sheaves on\n[def-sc-zariski-site]. Then\n\n$$\n\\varinjlim_i H^q(X_{\\rm Zar},F_i)\n\\simeq H^q(X_{\\rm Zar},\\varinjlim_i F_i)\n\\quad(q\\geq0),\n$$\n\nwith cohomology as in [def-sc-zariski-cohomology].",
+ "statement": "Let $X$ be a Noetherian\nscheme and $(F_i)_{i\\in I}$ a filtered (that is, directed: $I$ is a nonempty directed set, any two elements having a common upper bound) system of abelian sheaves on\n[def-sc-zariski-site]. Then\n\n$$\n\\varinjlim_i H^q(X_{\\rm Zar},F_i)\n\\simeq H^q(X_{\\rm Zar},\\varinjlim_i F_i)\n\\quad(q\\geq0),\n$$\n\nwith cohomology as in [def-sc-zariski-cohomology].",
  "source": {
   "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/lem-sc-zariski-filtered-cohomology.md",
   "place": "node lem-sc-zariski-filtered-cohomology, order 1555"
@@ -19,31 +19,67 @@
  ],
  "proof": [
   {
-   "text": "Every open of a Noetherian space is quasi-compact; finite\nintersections of opens are again opens. Hence every covering\nhas a finite subcover. Objectwise filtered colimits of the\nsheaves satisfy the sheaf equalizer axiom, because filtered\ncolimits of abelian groups commute with finite products and\nkernels. Thus their values on each open compute the sheaf\ncolimit.",
-   "uses": [],
-   "elementary": null
+   "text": "The underlying topological space of a Noetherian scheme is Noetherian, by [lem-weil-pbc-noetherian-scheme-closed-subsets-minimal]. In a Noetherian topological space every open subset is quasi-compact; consequently the quasi-compact opens form a basis (every open is itself quasi-compact) and the intersection of two quasi-compact opens is quasi-compact (it is an open subset of a Noetherian space). These are exactly the topological hypotheses required by [lem-sc-topological-filtered-cohomology].",
+   "uses": [
+    "lem-weil-pbc-noetherian-scheme-closed-subsets-minimal",
+    "lem-sc-topological-filtered-cohomology"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/cohomology.tex",
+    "place": "Lemma 01FF hypotheses, together with Properties Lemma 01OZ and Topology Definition 0051"
+   }
   },
   {
-   "text": "Apply the finite-hypercover computation underlying\n[thm-weil-pbc-hypercover-cohomology]. Its proof uses\nlocal effacement of positive cohomology classes and finite\ncover refinements; both apply verbatim to this site.\nExplicitly, to compute degree $q$, refine the covering in\neach degree through $q+1$, successively killing the finitely\nmany obstruction classes. Each such degree is a finite\ndisjoint union of opens, and every matching covering has\na finite refinement. The resulting section complex has\nfinite products in each of the degrees needed to compute\n$H^q$. These commute with the given filtered colimit.\nExactness of filtered colimits then makes the cohomology\ncommute as well. Finally take the colimit over hypercover\nrefinements. This is the same cochain argument as\n[lem-weil-pbc-cohomology-filtered-colimit], with the\nZariski covering basis in place of the etale one.",
+   "text": "Apply [lem-sc-topological-filtered-cohomology] to the underlying topological space of $X$, the system $(F_i)_{i\\in I}$ over the directed set $I$ (exactly the index hypothesis of that theorem), and the quasi-compact open $U=X$. It gives the canonical isomorphism $\\varinjlim_i H^q(X,F_i)\\simeq H^q(X,\\varinjlim_iF_i)$ for every $q\\geq0$. By [def-sc-topological-abelian-cohomology], cohomology on the open site of the underlying space of a scheme is precisely the cohomology $H^q(X_{\\rm Zar},-)$ defined in [def-sc-zariski-cohomology], and the canonical map is the same map induced by the colimit coprojections. This is the asserted isomorphism.",
    "uses": [
-    "thm-weil-pbc-hypercover-cohomology",
-    "lem-weil-pbc-cohomology-filtered-colimit"
+    "lem-sc-topological-filtered-cohomology",
+    "def-sc-topological-abelian-cohomology",
+    "def-sc-zariski-cohomology"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/cohomology.tex",
+    "place": "Lemma 01FF conclusion, specialized to the open site of a Noetherian scheme"
+   }
   }
  ],
  "proof_deps": [
-  "thm-weil-pbc-hypercover-cohomology",
-  "lem-weil-pbc-cohomology-filtered-colimit"
+  "lem-weil-pbc-noetherian-scheme-closed-subsets-minimal",
+  "lem-sc-topological-filtered-cohomology",
+  "def-sc-topological-abelian-cohomology",
+  "def-sc-zariski-cohomology"
  ],
  "proof_origin": {
-  "by": "agent",
-  "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/lem-sc-zariski-filtered-cohomology.md",
-  "place": "## Proof"
+  "by": "document",
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Lemma 01FF (cohomology-lemma-colimit), specialized to the underlying Noetherian topological space of a scheme"
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "filtered colimits commute with Zariski sheaf cohomology on a Noetherian scheme",
+   "results": "AlgebraicGeometry.nonempty_isColimit_Γ_mapCocone; AlgebraicGeometry.Scheme.AffineZariskiSite.isColimitCocone; no filtered-colimit cohomology theorem",
+   "date": "2026-10-11",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "Sheaf.H filtered colimit Zariski",
+   "results": "Unknown identifier Sheaf.H; no match",
+   "date": "2026-10-11",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "filtered.*cohomology|Zariski.*cohomology Mathlib/CategoryTheory/Sites",
+   "results": "No matching declarations",
+   "date": "2026-10-11",
+   "verdict": "no match"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [],
  "blueprint_kind": "lemma",
@@ -72,5 +108,36 @@
   }
  },
  "chapter": "sec-smooth-purity",
- "unit": "sk-prop-sf-cbc"
+ "unit": "sk-prop-sf-cbc",
+ "split_report": {
+  "date": "2026-10-11",
+  "item": "lem-sc-zariski-filtered-cohomology",
+  "worker": "stage1",
+  "summary": "No exact sorry-free Lean declaration states the Zariski result. The imported hypercover argument was replaced by a direct specialization of the existing general topological filtered-colimit theorem lem-sc-topological-filtered-cohomology: a Noetherian scheme has a Noetherian underlying space, hence quasi-compact opens form a basis and are stable under intersections; applying the theorem to U=X and using the existing identification of open-site and Zariski cohomology gives the claimed canonical isomorphism. No new node was needed.",
+  "blueprint": {
+   "node": "lem-sc-zariski-filtered-cohomology",
+   "places": [
+    "Noetherian opens admit finite/quasi-compact refinements",
+    "cohomology commutes with the filtered colimit by the finite-cover cochain argument"
+   ]
+  },
+  "tool_uses": [
+   {
+    "node": "lem-sc-topological-filtered-cohomology",
+    "why": "The generic filtered-colimit theorem for sheaves on a topological space supplies the cohomology isomorphism; this unit only specializes it to a Noetherian scheme's Zariski site."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sc-topological-filtered-cohomology"
+ ],
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-zfc3012",
+  "group": "H1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-zfc3012 (reviewer sub-agent of L); spot-checked: Step 1: Noetherian scheme via lem-weil-pbc-noetherian-scheme-closed-subsets-minimal (as J1's node does), open-subsets-quasi-compact consequences elementary; Step 2: lem-sc-topological-filtered-cohomology (01FF) at U=X, identification via def-sc-topological-abelian-cohomology and def-sc-zariski-cohomology; no new nodes, no tool_uses outside sec-sc; no proof cites the item (dimension-bound lists it only in blueprint_uses). FIX more, RETURN less: C4 the cited theorem requires a directed index set while the item said 'filtered system' unqualified; statement and Step 2 now say the index set I is directed (E7, named in lead note).; 1 file(s) fixed by the reviewer"
+ },
+ "lead_note": "2026-10-10 L (R-zfc3012): Statement made explicit: filtered system = system over a directed set (E7: the cited 01FF node lem-sc-topological-filtered-cohomology is stated for directed sets; the item has no citing proof, only blueprint_uses in lem-sc-zariski-dimension-bound)."
 }
