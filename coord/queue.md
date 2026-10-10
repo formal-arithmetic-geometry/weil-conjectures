@@ -1,6 +1,6 @@
 # Work queue
 
-842 items; claim with `tools/claim.py next <group> [--stage N]`.
+843 items; claim with `tools/claim.py next <group> [--stage N]`.
 
 ## Stage 1: nodes to split (662)
 
@@ -10,7 +10,6 @@
 | `lem-weil-pbc-etale-ring-map-prescribed-residue-field` | 1011 | none |
 | `lem-weil-pbc-helper-g-ring-char-p` | 1011 | none |
 | `lem-weil-pbc-lft-over-field-isolated-point-residue-finite` | 1011 | none |
-| `lem-weil-pbc-regular-local-generators-regular-sequence` | 1011 | none |
 | `lem-weil-pbc-regular-local-localization` | 1011 | none |
 | `lem-weil-pbc-regular-ring-faithfully-flat-descent` | 1011 | none |
 | `lem-weil-pbc-regular-ring-smooth-ascent` | 1011 | none |
@@ -94,6 +93,7 @@
 | `lem-weil-pbc-flat-local-criterion-nonzerodivisor` | 1012 | none |
 | `lem-weil-pbc-flat-ses-kernel-flat` | 1012 | none |
 | `lem-weil-pbc-flat-smooth-fibre-smooth-at-prime` | 1012 | none |
+| `lem-weil-pbc-flat-under-regular` | 1012 | none |
 | `lem-weil-pbc-flat-variant-local-criterion` | 1012 | none |
 | `lem-weil-pbc-formal-systems-graded-vanishing` | 1012 | none |
 | `lem-weil-pbc-formal-systems-kernel-rees-finite` | 1012 | none |
@@ -669,7 +669,7 @@
 | `lem-pc-finite-linear-avoidance` | - | none |
 | `lem-pc-linear-pair-graded-finite` | - | none |
 
-## Stage 2: nodes to state (180)
+## Stage 2: nodes to state (181)
 
 | node | distance to Mathlib | kind |
 |---|---|---|
@@ -804,6 +804,7 @@
 | `lem-weil-pbc-reduced-induced-closed-subscheme` | 1 | state |
 | `lem-weil-pbc-reduced-noetherian-total-ring-fractions` | 1 | state |
 | `lem-weil-pbc-reduction-universal-homeomorphism` | 1 | state |
+| `lem-weil-pbc-regular-local-generators-regular-sequence` | 1 | state |
 | `lem-weil-pbc-regular-ring-local-criterion` | 1 | state |
 | `lem-weil-pbc-root-lifting-etale-retraction` | 1 | state |
 | `lem-weil-pbc-scheme-clopen-idempotent` | 1 | state |
