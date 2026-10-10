@@ -1447,3 +1447,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 12:52 L: accepted lem-pc-proper-base-change: 6 steps (01W4 and formal smoothness under base change), no new nodes; lem-weil-pbc-proper-base-change duplicate noted
 - 12:52 L: accepted lem-pc-curves-are-sc: 5 steps, new Mathlib leaves lem-pc-integral-scheme-irreducible, lem-pc-irreducible-space-connected, new node lem-pc-scheme-dimension-local-rings (04MU)
 - 12:53 L: accepted lem-pc-dim-base-change: 3 steps, new node lem-pc-dimension-affine-open-cover (04MU), tool_uses lem-weil-pbc-dimension-preserved-field-extension; blueprint tag 00HS wrong (00P3)
+- 12:55 L: accepted lem-sc-divisor-module-local: 6 steps, new node lem-sc-function-field-sections-glue closed by Scheme.exists_germToFunctionField_eq (verified)
