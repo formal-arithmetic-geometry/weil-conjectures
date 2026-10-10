@@ -3,11 +3,11 @@
  "blueprint": {
   "is": "pqf-def-affine-morphism",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "definition",
  "title": "Affine morphisms",
- "statement": "A morphism of schemes $f:X\\to S$ is *affine* if for every affine\nopen $V\\subset S$ the preimage $f^{-1}(V)$ is affine, in the sense of\nthe ambient-foundations chapter; any morphism\nbetween affine schemes is affine, and a closed immersion is affine.\n(*Stacks Project, Morphisms of Schemes, Section 29.11, Tag\n[01S8](https://stacks.math.columbia.edu/tag/01S8).*)",
+ "statement": "A morphism of schemes $f:X\\to S$ [def-pc-scheme] is *affine* if for every affine\nopen $V\\subset S$ the preimage $f^{-1}(V)$ is an affine open of $X$ (affine in the sense of [def-pc-scheme]).\n(*Stacks Project, Morphisms of Schemes, Definition 29.11.1, Tag\n[01S6](https://stacks.math.columbia.edu/tag/01S6).*)",
  "source": {
   "document": "literature/blueprint/master/blueprint/sec-nagata-compactification/sk-prop-nagata-sketch-zmt/pqf-def-affine-morphism.md",
   "place": "node pqf-def-affine-morphism, order 190",
@@ -24,9 +24,43 @@
  "proof": [],
  "proof_deps": [],
  "proof_origin": null,
- "mathlib_searches": [],
- "mathlib_match": null,
- "status": "imported",
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "affine morphism of schemes preimage of every affine open is affine",
+   "results": "AlgebraicGeometry.isAffineHom_iff (Mathlib/AlgebraicGeometry/Morphisms/Affine), AlgebraicGeometry.IsAffineOpen.preimage, AlgebraicGeometry.isAffineHom_of_isAffine",
+   "date": "2026-10-11",
+   "verdict": "generalization: isAffineHom_iff gives the defining preimage characterization; isAffineHom_of_isAffine gives affine-to-affine morphisms"
+  },
+  {
+   "tool": "loogle",
+   "query": "IsAffineHom, isAffineHom_of_isAffine, closed immersion",
+   "results": "no hits; service reported unknown identifier 'IsAffineHom'",
+   "date": "2026-10-11",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "IsAffineHom|isAffineHom_of_isAffine in Mathlib/AlgebraicGeometry",
+   "results": "Mathlib/AlgebraicGeometry/Morphisms/Affine.lean:181-182 isAffineHom_of_isAffine; Mathlib/AlgebraicGeometry/Morphisms/ClosedImmersion.lean:317-322 isAffine_surjective_of_isAffine uses isAffine_of_isAffineHom",
+   "date": "2026-10-11",
+   "verdict": "generalization: Mathlib contains the defining affine characterization and affine-source consequences, but no declaration bundling this project definition and all clauses"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -n 'class IsAffineHom' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicGeometry/Morphisms/Affine.lean",
+   "results": "Affine.lean:47 class IsAffineHom {X Y : Scheme} (f : X ⟶ Y) : Prop where isAffine_preimage : ∀ U : Y.Opens, IsAffineOpen U → IsAffineOpen (f ⁻¹ᵁ U)",
+   "date": "2026-10-10",
+   "verdict": "match"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "AlgebraicGeometry.IsAffineHom",
+  "file": "Mathlib/AlgebraicGeometry/Morphisms/Affine.lean",
+  "line": 47,
+  "how": "exact: `class IsAffineHom (f : X ⟶ Y) : Prop where isAffine_preimage : ∀ U : Y.Opens, IsAffineOpen U → IsAffineOpen (f ⁻¹ᵁ U)` (lines 47-48), the preimage of every affine open is an affine open"
+ },
+ "status": "mathlib",
  "merged_into": null,
  "import_flags": [],
  "blueprint_kind": "definition",
@@ -50,5 +84,22 @@
   }
  },
  "chapter": "sec-nagata-compactification",
- "unit": "sk-prop-nagata-sketch-zmt"
+ "unit": "sk-prop-nagata-sketch-zmt",
+ "split_report": {
+  "date": "2026-10-11",
+  "item": "pqf-def-affine-morphism",
+  "worker": "stage1",
+  "summary": "Checked the imported definition against the blueprint node and Stacks Morphisms Tag 01S8. The statement is retained: affine means affine preimages of affine opens, with the standard affine-to-affine and closed-immersion consequences. No project declaration with the blueprint tag or an exact bundled statement exists in slopmaster2, and no new DAG node is needed because this is a definition rather than a proof split. Mathlib searches found the defining characterization and affine-source consequences but no exact bundled declaration.",
+  "blueprint": "The item realizes the blueprint node's definition sentence and its two stated standard consequences.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-pda2326",
+  "group": "E1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-pda2326 (reviewer sub-agent of L); spot-checked: Stacks morphisms.tex 1713-1717 (definition-affine, Tag 01S6, tags file line 2327) against the node; consumers lem-pc-affine-morphism-hi step 1, lem-weil-pbc-morphism-affine-schemes-affine, lem-weil-pbc-descend-closed-immersion, lem-weil-pbc-thickening-integral use only the defining preimage property (C4 ok); no other node defines affine morphisms (def-weil-pbc-scheme-conventions points here; def-nagata-quasi-affine-morphism is a different notion). Mathlib: sed of Affine.lean:47-48 class IsAffineHom is an exact match. FIX more, RETURN less: (B3) source tag 01S8 is lemma-characterize-affine, not the definition; statement and source.external now cite Definition 29.11.1 Tag 01S6 (the Second reading by E1 called 01S8 the definition and missed this); (B3/class b) the clauses 'any morphism between affine schemes is affine, and a closed immersion is affine' are unproved lemma content in a definition node (closed immersion not even in stmt_deps) and duplicate lem-weil-pbc-morphism-affine-schemes-affine and lem-weil-pbc-closed-immersion-integral-separated-uc (b); dropped; 'ambient-foundations chapter' replaced by [def-pc-scheme]; (class c / B8) Mathlib has the definition exactly: status split -> mathlib, mathlib_match AlgebraicGeometry.IsAffineHom, Mathlib/AlgebraicGeometry/Morphisms/Affine.lean line 47, grep search recorded (the recorded loogle 'unknown identifier IsAffineHom' was wrong). Start/end Sat Oct 10 08:33:18 PM UTC 2026; 1 file(s) fixed by the reviewer"
+ },
+ "lead_note": "2026-10-10 L (R-pda2326): Statement changed (E7): the two bundled consequences (affine-to-affine, closed immersion affine) dropped from the definition; they are lemmas, carried by lem-weil-pbc-morphism-affine-schemes-affine and lem-weil-pbc-closed-immersion-integral-separated-uc (b). Node is now a Mathlib leaf (IsAffineHom, Affine.lean:47)."
 }
