@@ -3,7 +3,7 @@
  "blueprint": {
   "is": "lem-sc-p1-coherent-finite",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "Finite coherent cohomology on the projective line",
@@ -13,37 +13,64 @@
   "place": "node lem-sc-p1-coherent-finite, order 641"
  },
  "stmt_deps": [
-  "pqf-def-coherent"
+  "pqf-def-coherent",
+  "def-sc-p1-standard"
  ],
  "proof": [
   {
-   "text": "Use the standard affine opens $U_0,U_1$ of\n[def-sc-p1-standard], namely\n$U_0=\\operatorname{Spec}k[t]$, $U_1=\\operatorname{Spec}k[t^{-1}]$.\nPut $M_i=\\Gamma(U_i,\\mathcal F)$ and\n$M=\\Gamma(U_0\\cap U_1,\\mathcal F)=M_0[t^{-1}]=M_1[t]$.\nThe Cech spectral sequence [lem-sc-cech-spectral] and affine\nvanishing [pqf-lem-affine-vanishing] identify $H^0,H^1$ with\nthe kernel and cokernel of $M_0\\oplus M_1\\to M$.\nChoose generators $a_j$ of $M_0$ over $k[t]$. Since $M=M_1[t]$,\nsome common $N$ has $t^{-N}a_j$ in the image of $M_1$ for every $j$.\nThus the cokernel is spanned by the finitely many $t^ra_j$ with\n$-N<r<0$, proving finiteness of $H^1$.",
+   "text": "Apply [lem-pc-projective-space-coherent-finiteness] with the Noetherian ring $A=k$ and $n=1$. The scheme $\\mathbf P^1_k=\\operatorname{Proj}k[x_0,x_1]$ of [def-sc-p1-standard] is the same scheme $P=\\operatorname{Proj}(A[x_0,x_1])$ as in [def-pc-projective-space-twist], and $\\mathcal F$ is coherent on it [pqf-def-coherent]. Hence each $H^q(\\mathbf P^1_k,\\mathcal F)$ is a finite $k$-module; a finite module over the field $k$ is a finite-dimensional $k$-vector space, which gives the assertions for $q=0$ and $q=1$.",
    "uses": [
+    "lem-pc-projective-space-coherent-finiteness",
     "def-sc-p1-standard",
-    "lem-sc-cech-spectral",
-    "pqf-lem-affine-vanishing"
+    "def-pc-projective-space-twist",
+    "pqf-def-coherent"
    ],
-   "elementary": false
-  },
-  {
-   "text": "For $H^0$, the localization kernels $K_i=\\ker(M_i\\to M)$ are killed\nby powers of $t$ and $t^{-1}$ respectively, hence finite-dimensional.\nModulo the torsion submodule of the finite $R=k[t,t^{-1}]$-module $M$,\nthe elementary structure theorem gives a free module $R^r$; the torsion\nis finite-dimensional over $k$. Images of finite generators of $M_0$\nhave a common lower Laurent exponent bound, and those of $M_1$ a common\nupper bound. Their intersection therefore lies, modulo torsion, in a\nfinite-dimensional span of Laurent monomials between these bounds.\nThe exact sequence with kernel $K_0\\oplus K_1$ now proves finiteness of\n$H^0$.",
-   "uses": [],
-   "elementary": null
+   "elementary": true
   }
  ],
  "proof_deps": [
+  "lem-pc-projective-space-coherent-finiteness",
   "def-sc-p1-standard",
-  "lem-sc-cech-spectral",
-  "pqf-lem-affine-vanishing"
+  "def-pc-projective-space-twist",
+  "pqf-def-coherent"
  ],
  "proof_origin": {
-  "by": "agent",
-  "document": "literature/blueprint/master/blueprint/sec-picard-framework/sk-thm-picard-coherence/lem-sc-p1-coherent-finite.md",
-  "place": "## Proof"
+  "by": "document",
+  "document": "literature/stacks-project/coherent.tex",
+  "place": "Tags 02O5 and 02O6"
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "finite dimensional cohomology of coherent sheaf on projective line over a field",
+   "results": "No scheme-cohomology finiteness declaration",
+   "date": "2026-10-11",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "finiteDimensional_H",
+   "results": "0 hits; unknown identifier",
+   "date": "2026-10-11",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "FiniteDimensional in Mathlib/AlgebraicGeometry",
+   "results": "0 hits",
+   "date": "2026-10-11",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "finite dimensional cohomology of coherent sheaf on projective line over a field",
+   "results": "unavailable",
+   "date": "2026-10-11",
+   "verdict": "unavailable"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [],
  "blueprint_kind": "lemma",
@@ -108,5 +135,21 @@
   }
  },
  "chapter": "sec-picard-framework",
- "unit": "sk-thm-picard-coherence"
+ "unit": "sk-thm-picard-coherence",
+ "split_report": {
+  "date": "2026-10-11",
+  "item": "lem-sc-p1-coherent-finite",
+  "worker": "stage1",
+  "summary": "The imported Cech proof was replaced by the proper-over-a-field finiteness route of Stacks Tags 02O5 and 02O6. The structure morphism of the Proj presentation of P^1 is projective and hence proper; the existing node lem-pc-coherent-hi then gives finite k-modules for every cohomology group, and finite generation over the field k is finite-dimensionality. The Lean declaration finiteDimensional_H was checked but is not an attachment because its proof transitively uses the sorry-backed finite_sections_higherDirectImage. Reviewer R-pcf3054: proof replaced by a direct specialization of lem-pc-projective-space-coherent-finiteness (A=k, n=1); the delivered step asserted projectivity of Proj k[x0,x1] over Spec k in the sense of def-pc-projective-morphism (closed immersion into Spec k x_Z P^1_Z, quasi-compact) without citing the base-change identification.",
+  "blueprint": "Realizes the blueprint proof's finiteness conclusion for H^0 and H^1 by the recorded proper coherent-finiteness input, specializing the affine Noetherian base clause to Spec k.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-pcf3054",
+  "group": "H1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-pcf3054 (reviewer sub-agent of L); spot-checked: Statement matches citers lem-pc-curve-coherent-finiteness and lem-sc-p1-serre-section-module-finite (H^0,H^1 finite-dim over k). FIX more, RETURN less: C4 (missed by the Second reading): step 1 asserted Proj k[x0,x1] -> Spec k projective under def-pc-projective-morphism, which needs a closed immersion into Spec k x_Z Proj Z[T0,T1] (def-nagata-projective-space-base-change) plus quasi-compactness; the base-change identification was uncited. Repair: proof replaced by one elementary specialization of merged lem-pc-projective-space-coherent-finiteness (A=k, n=1), P^1_k of def-sc-p1-standard identified with Proj A[x0,x1] of def-pc-projective-space-twist as in lem-sc-p1-hi-vanishing; coherence via pqf-def-coherent; tool_use lem-pc-coherent-hi dropped (C7). No new nodes; no duplicate of K1 lem-sc-p1-twist-exists.; 1 file(s) fixed by the reviewer"
+ }
 }
