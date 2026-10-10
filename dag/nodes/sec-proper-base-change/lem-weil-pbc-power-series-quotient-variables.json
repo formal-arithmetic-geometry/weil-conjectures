@@ -10,9 +10,82 @@
  "stmt_deps": [
   "def-weil-pbc-multivariate-power-series"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "*Notation; $R_i$ is a subring.* By [def-weil-pbc-multivariate-power-series] an element of $R$ is a family $F=(a_E)_{E\\in\\mathbf N^d}$ of elements of $A$, written $\\sum_Ea_EX^E$, with coefficientwise sum and product $(FG)_H=\\sum_{E+E'=H}a_Eb_{E'}$ for $G=(b_{E'})$; the unit is $X^0$ and $A\\to R$ is $r\\mapsto rX^0$. Let $S=\\{E\\in\\mathbf N^d:e_1=\\cdots=e_i=0\\}$. The map $\\mathbf N^{d-i}\\to S$, $(e_{i+1},\\ldots,e_d)\\mapsto(0,\\ldots,0,e_{i+1},\\ldots,e_d)$, is a bijection compatible with addition, and $R_i\\subseteq R$ is the set of families vanishing outside $S$ (via this bijection). Since exponents are $\\ge0$, for $E,E'\\in\\mathbf N^d$ one has $E+E'\\in S$ if and only if $E\\in S$ and $E'\\in S$. Hence if $F,G$ vanish outside $S$, then $(FG)_H=0$ for $H\\notin S$ (every pair with $E+E'=H$ has $E\\notin S$ or $E'\\notin S$), and for $H\\in S$ the sum $(FG)_H$ runs over pairs in $S\\times S$, which is the product of $A[[X_{i+1},\\ldots,X_d]]$ transported by the bijection. So $R_i$ is a subring of $R$ containing $A$ ($rX^0$, $0\\in S$), and the inclusion $R_i\\subseteq R$ is a homomorphism of $A$-algebras; for $i=d$, $S=\\{0\\}$ and $R_d=A$.",
+   "uses": [
+    "def-weil-pbc-multivariate-power-series"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Remark Tag 032C (remark-Noetherian-complete-local-ring-universally-catenary, line 45023), where the fact is used without statement; the argument is written by an agent from the definition of the power series ring"
+   }
+  },
+  {
+   "text": "*$\\pi_i$ is a homomorphism of $A$-algebras.* By definition $\\pi_i(F)_E=a_E$ for $E\\in S$ and $\\pi_i(F)_E=0$ for $E\\notin S$; its value vanishes outside $S$, so lies in $R_i$ (step 1). It is additive (sums are coefficientwise), and $\\pi_i(X^0)=X^0$ since $0\\in S$. For $r\\in A$, $(rX^0\\cdot F)_E=ra_E$ by the product formula, so $\\pi_i(rF)=r\\pi_i(F)$. Multiplicativity: let $F=(a_E)$, $G=(b_{E'})$ and $H\\in\\mathbf N^d$. If $H\\notin S$, both $\\pi_i(FG)_H$ and $(\\pi_i(F)\\pi_i(G))_H$ are $0$, the second by step 1 because $\\pi_i(F),\\pi_i(G)$ vanish outside $S$. If $H\\in S$, every pair with $E+E'=H$ has $E,E'\\in S$ (step 1), so $\\pi_i(FG)_H=(FG)_H=\\sum_{E+E'=H}a_Eb_{E'}=\\sum_{E+E'=H}\\pi_i(F)_E\\pi_i(G)_{E'}=(\\pi_i(F)\\pi_i(G))_H$. Hence $\\pi_i(FG)=\\pi_i(F)\\pi_i(G)$, and $\\pi_i$ is an $A$-algebra homomorphism $R\\to R_i$.",
+   "uses": [
+    "def-weil-pbc-multivariate-power-series"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Remark Tag 032C (remark-Noetherian-complete-local-ring-universally-catenary, line 45023), where the fact is used without statement; the argument is written by an agent from the definition of the power series ring"
+   }
+  },
+  {
+   "text": "*$\\pi_i$ is the identity on $R_i$ and surjective.* If $F\\in R_i$, i.e. $a_E=0$ for $E\\notin S$, then $\\pi_i(F)_E=a_E$ for every $E$, so $\\pi_i(F)=F$. Hence every element of $R_i$ is its own image, and $\\pi_i:R\\to R_i$ is surjective.",
+   "uses": [
+    "def-weil-pbc-multivariate-power-series"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Remark Tag 032C (remark-Noetherian-complete-local-ring-universally-catenary, line 45023), where the fact is used without statement; the argument is written by an agent from the definition of the power series ring"
+   }
+  },
+  {
+   "text": "*$(X_1,\\ldots,X_i)\\subseteq\\ker\\pi_i$.* For $j\\le i$ the series $X_j$ is the family with coefficient $1$ at the unit vector $\\varepsilon_j$ (whose $j$-th entry is $1$) and $0$ elsewhere; $\\varepsilon_j\\notin S$, so $\\pi_i(X_j)=0$. Since $\\pi_i$ is a ring homomorphism (step 2), $\\pi_i(\\sum_{j\\le i}X_jG_j)=\\sum_j\\pi_i(X_j)\\pi_i(G_j)=0$ for all $G_j\\in R$, i.e. the ideal $(X_1,\\ldots,X_i)$ lies in $\\ker\\pi_i$.",
+   "uses": [
+    "def-weil-pbc-multivariate-power-series"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Remark Tag 032C (remark-Noetherian-complete-local-ring-universally-catenary, line 45023), where the fact is used without statement; the argument is written by an agent from the definition of the power series ring"
+   }
+  },
+  {
+   "text": "*$\\ker\\pi_i\\subseteq(X_1,\\ldots,X_i)$.* Let $F=(a_E)$ with $\\pi_i(F)=0$, i.e. $a_E=0$ for all $E\\in S$. For $1\\le j\\le i$ let $T_j=\\{E\\in\\mathbf N^d:e_1=\\cdots=e_{j-1}=0,\\ e_j\\ge1\\}$; every $E\\notin S$ lies in exactly one $T_j$ ($j$ the least index $\\le i$ with $e_j\\ge1$), so $\\mathbf N^d$ is the disjoint union of $S,T_1,\\ldots,T_i$. Define $G_j=(g^{(j)}_E)\\in R$ by $g^{(j)}_E=a_{E+\\varepsilon_j}$ if $e_1=\\cdots=e_{j-1}=0$ and $g^{(j)}_E=0$ otherwise. By the product formula, for $H\\in\\mathbf N^d$, $(X_jG_j)_H=\\sum_{E'+E=H}(X_j)_{E'}g^{(j)}_E$, and the only nonzero coefficient of $X_j$ is at $E'=\\varepsilon_j$; so $(X_jG_j)_H=g^{(j)}_{H-\\varepsilon_j}$ if $h_j\\ge1$ and $(X_jG_j)_H=0$ if $h_j=0$. Since $H-\\varepsilon_j$ and $H$ agree in the entries $1,\\ldots,j-1$, this gives $(X_jG_j)_H=a_H$ for $H\\in T_j$ and $(X_jG_j)_H=0$ for $H\\notin T_j$. Summing coefficientwise over $j=1,\\ldots,i$ and using the disjoint decomposition, $(\\sum_{j=1}^iX_jG_j)_H=a_H$ for $H\\notin S$ and $=0=a_H$ for $H\\in S$. Hence $F=\\sum_{j=1}^iX_jG_j\\in(X_1,\\ldots,X_i)$ (for $i=0$: $S=\\mathbf N^d$, $F=0$, and the ideal is $0$). With step 4, $\\ker\\pi_i=(X_1,\\ldots,X_i)$.",
+   "uses": [
+    "def-weil-pbc-multivariate-power-series"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Remark Tag 032C (remark-Noetherian-complete-local-ring-universally-catenary, line 45023), where the fact is used without statement; the argument is written by an agent from the definition of the power series ring"
+   }
+  },
+  {
+   "text": "*The quotient and the case $i=d$.* By steps 2, 3 and 5, $\\pi_i$ is a surjective $A$-algebra homomorphism $R\\to R_i$ with kernel $(X_1,\\ldots,X_i)$, so by the first isomorphism theorem for rings it induces an isomorphism of $A$-algebras $R/(X_1,\\ldots,X_i)\\xrightarrow{\\sim}R_i=A[[X_{i+1},\\ldots,X_d]]$, $F\\bmod(X_1,\\ldots,X_i)\\mapsto\\pi_i(F)$. For $i=d$, $S=\\{0\\}$ and $R_d=A$ (identified with the series $rX^0$, step 1), and $\\pi_d(F)=a_0X^0$ is the constant coefficient $F(0)=a_0$; so $F\\mapsto F(0)$, $R\\to A$, is a surjective ring homomorphism with kernel $(X_1,\\ldots,X_d)$.",
+   "uses": [
+    "def-weil-pbc-multivariate-power-series"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Remark Tag 032C (remark-Noetherian-complete-local-ring-universally-catenary, line 45023), where the fact is used without statement; the argument is written by an agent from the definition of the power series ring"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-multivariate-power-series"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Remark Tag 032C (remark-Noetherian-complete-local-ring-universally-catenary, line 45023) uses the fact without statement or proof; the proof is written by an agent from [def-weil-pbc-multivariate-power-series]"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -41,15 +114,50 @@
    "results": "MvPowerSeries/Rename.lean:241 def killCompl (e : σ ↪ τ) : MvPowerSeries τ R →ₐ[R] MvPowerSeries σ R (the map π_i for e the inclusion of {i+1..d}), :249 coeff_killCompl, :276 killCompl_comp_rename (killCompl ∘ rename = id, giving surjectivity); no statement of its kernel",
    "date": "2026-10-10",
    "verdict": "no match: the map and its surjectivity exist, the kernel does not"
+  },
+  {
+   "tool": "leansearch",
+   "query": "kernel of MvPowerSeries.constantCoeff is the ideal spanned by the variables X i",
+   "results": "Polynomial.ker_constantCoeff (Mathlib.RingTheory.Polynomial.Ideal, one variable, polynomials), PowerSeries.ker_coeff_eq_max_ideal (one variable over a field), MvPowerSeries.constantCoeff_X, MvPowerSeries.constantCoeff, PowerSeries.X_dvd_iff, PowerSeries.map_constantCoeff_le_self_of_X_mem",
+   "date": "2026-10-10",
+   "verdict": "no match: no multivariate kernel statement"
+  },
+  {
+   "tool": "loogle",
+   "query": "RingHom.ker MvPowerSeries.constantCoeff",
+   "results": "none",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "multivariate power series with zero constant coefficient lies in the ideal generated by the variables",
+   "results": "PowerSeries.map_constantCoeff_le_self_of_X_mem, PowerSeries.HasSubst.ideal, MvPowerSeries.LinearTopology.mem_basis_iff, MvPowerSeries.X_dvd_iff (Mathlib.RingTheory.MvPowerSeries.Basic:658, divisibility by one variable X_s), MvPowerSeries.X_pow_dvd_iff",
+   "date": "2026-10-10",
+   "verdict": "no match: X_dvd_iff handles one variable, not the ideal (X_1..X_i)"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rn 'ker_constantCoeff\\|ker_killCompl\\|killCompl' and grep -rn 'theorem ker_\\|lemma ker_' over ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/ (RingTheory/MvPowerSeries, RingTheory/PowerSeries)",
+   "results": "Rename.lean:241 killCompl (AlgHom), :249 coeff_killCompl, :265 killCompl_X, :269 killCompl_X_eq_zero, :276 killCompl_comp_rename, :280 killCompl_rename_app (read by sed -n 260,285p); PowerSeries/Inverse.lean:350 ker_coeff_eq_max_ideal (one variable, field); PowerSeries/NoZeroDivisors.lean:53 span {X} = ker constantCoeff inside a proof (one variable); no MvPowerSeries.ker_constantCoeff, no kernel of killCompl",
+   "date": "2026-10-10",
+   "verdict": "no match: map, identity on the subring and X_j |-> 0 exist; the kernel clause does not"
+  },
+  {
+   "tool": "local_search",
+   "query": "MvPowerSeries.ker_constantCoeff; PowerSeries.ker_constantCoeff (project root ~/weil-conjectures-slopmaster2)",
+   "results": "none; index unavailable (not proof of absence)",
+   "date": "2026-10-10",
+   "verdict": "inconclusive; grep above finds neither name"
   }
  ],
  "mathlib_match": null,
  "mathlib_candidate": {
   "declaration": "MvPowerSeries.killCompl",
   "file": "Mathlib/RingTheory/MvPowerSeries/Rename.lean",
-  "how": "π_i is killCompl e for e : Fin (d-i) ↪ Fin d onto {i+1,..,d} (line 241); identity on R_i via killCompl_comp_rename (line 276); the kernel (X_1..X_i) is not in Mathlib"
+  "how": "π_i is killCompl e (line 241) for e : Fin (d-i) ↪ Fin d onto {i+1,..,d}, with R_i ⊆ R via rename e; identity on R_i and surjectivity from killCompl_comp_rename (line 276) / killCompl_rename_app (line 280); X_j ↦ 0 for j ≤ i from killCompl_X_eq_zero (line 269), giving (X_1..X_i) ⊆ ker. The reverse inclusion ker ⊆ (X_1..X_i) (and ker constantCoeff = span (range X) in several variables) is not in Mathlib, so the node is not a leaf"
  },
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "worker",
@@ -69,5 +177,12 @@
   }
  },
  "chapter": "sec-proper-base-change",
- "unit": "sk-thm-p1"
+ "unit": "sk-thm-p1",
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "lem-weil-pbc-power-series-quotient-variables",
+  "worker": "stage1",
+  "summary": "Statement kept (checked against its use in lem-weil-pbc-power-series-field-cohen-regular-complete steps 3, 4, 7: F -> F(0) a ring map with kernel (X_1..X_d), R/(X_1..X_i) = A[[X_{i+1}..X_d]] via pi_i, pi_i(X_{i+1}) = X_{i+1}). Proof written by an agent from def-weil-pbc-multivariate-power-series (families N^d -> A, coefficientwise sum, Cauchy product with finite inner sums), six elementary steps: (1) R_i is a subring, since E+E' lies in S={e_1=..=e_i=0} iff E and E' do; (2) pi_i is A-linear, unital and multiplicative by the same remark; (3) identity on R_i, hence surjective; (4) (X_1..X_i) in ker since pi_i(X_j)=0; (5) ker in (X_1..X_i): F = sum_j X_j G_j by grouping exponents by the least j <= i with e_j >= 1, G_j the shifted coefficients, checked with the product formula; (6) first isomorphism theorem and the case i=d. No new nodes. Mathlib re-searched three ways (leansearch, loogle, leanfinder, grep, local_search): killCompl gives the map, identity on the subring and X_j -> 0, but no kernel statement exists (not even ker constantCoeff in several variables); candidate kept with lines 241, 269, 276, 280."
+ },
+ "reviewed": "Reviewed by L 2026-10-10: proof by agent from the definition of the power series ring (coefficientwise product); the kernel computation groups exponents by the least index with a positive entry (step 5, checked). No new nodes; Mathlib candidate kept (killCompl gives all but the kernel clause, B8)."
 }
