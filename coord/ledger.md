@@ -1921,3 +1921,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 16:12 L: merged deliver/E1/lem-sc-p1-serre-section-module-comparison (reviewer FIX+NODE(1); first push; new nodes: 2)
 - 16:12 L: merged deliver/F1/lem-pc-principal-open-dense-of-nonzerodivisor (reviewer FIX; first push; new nodes: 2)
 - 16:12 L: merged deliver/C1/lem-sc-ample-finite-set-affine (reviewer FIX; first push; new nodes: 2)
+- 16:12 L: merged deliver/M1/lem-pc-fpqc-descend-closed-immersion (reviewer FIX+NODE(1); after a return; new nodes: 2)

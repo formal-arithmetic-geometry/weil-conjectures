@@ -22,39 +22,126 @@
   "def-pc-fibre-product",
   "def-weil-closed-immersion"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Each $f_i$ is a closed immersion, hence affine by clause (b) of [lem-weil-pbc-closed-immersion-integral-separated-uc]. Therefore $f$ is affine by [lem-weil-pbc-fpqc-descend-affine].",
+   "uses": [
+    "lem-weil-pbc-closed-immersion-integral-separated-uc",
+    "lem-weil-pbc-fpqc-descend-affine"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/descent.tex",
+    "place": "Descent, Lemma Tag 02L6, proof lines 5978-5981"
+   }
+  },
+  {
+   "text": "The affine morphism $f$ is quasi-compact and quasi-separated, so [lem-pc-flat-base-change-cohom] applies with $\\mathcal F=\\mathcal O_X$ and $i=0$ to each $g_i$, giving $g_i^*f_*\\mathcal O_X\\cong f_{i,*}\\mathcal O_{X\\times_YY_i}$. Since $f_i$ is a closed immersion, [lem-weil-pbc-closed-immersion-affine-cover-criterion] (1) says that $\\mathcal O_{Y_i}\\to f_{i,*}\\mathcal O_{X\\times_YY_i}$ is surjective. Given $y\\in Y$, choose $i$ and $y_i\\in Y_i$ over $y$. On stalks the base-change isomorphism identifies the tensor of $\\mathcal O_{Y,y}\\to(f_*\\mathcal O_X)_y$ with $\\mathcal O_{Y_i,y_i}\\to(f_{i,*}\\mathcal O_{X\\times_YY_i})_{y_i}$, hence this tensor map is surjective. The map $\\mathcal O_{Y,y}\\to\\mathcal O_{Y_i,y_i}$ is a local homomorphism of local rings, and it is flat because $g_i$ is flat [def-weil-flat-morphism], so the faithful-flat reflection statement [lem-pc-local-flat-faithful-flat-reflects-surjective] makes $\\mathcal O_{Y,y}\\to(f_*\\mathcal O_X)_y$ surjective.",
+   "uses": [
+    "lem-pc-flat-base-change-cohom",
+    "lem-weil-pbc-closed-immersion-affine-cover-criterion",
+    "lem-pc-local-flat-faithful-flat-reflects-surjective",
+    "def-weil-flat-morphism"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/descent.tex",
+    "place": "Descent, Lemma Tag 02L6, proof lines 5982-5998; the base-change input is Cohomology of Schemes, Lemma Tag 02KH"
+   }
+  },
+  {
+   "text": "By step 1 the morphism $f$ is affine, and by step 2 the map $\\mathcal O_{Y,y}\\to(f_*\\mathcal O_X)_y$ induced by $f^\\sharp:\\mathcal O_Y\\to f_*\\mathcal O_X$ is surjective for every $y\\in Y$. Hence $f$ is a closed immersion by [lem-pc-affine-surjective-structure-map-closed-immersion].",
+   "uses": [
+    "lem-pc-affine-surjective-structure-map-closed-immersion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/descent.tex",
+    "place": "Descent, Lemma Tag 02L6, proof lines 5981-5998 ('It remains to show that O_Y -> f_*O_X is surjective'); the criterion is Morphisms, Lemmas Tag 01QO and 01SA"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-closed-immersion-integral-separated-uc",
+  "lem-weil-pbc-fpqc-descend-affine",
+  "lem-pc-flat-base-change-cohom",
+  "lem-weil-pbc-closed-immersion-affine-cover-criterion",
+  "lem-pc-local-flat-faithful-flat-reflects-surjective",
+  "def-weil-flat-morphism",
+  "lem-pc-affine-surjective-structure-map-closed-immersion"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/descent.tex",
+  "place": "Descent, Lemma Tag 02L6, proof of lemma-descending-property-closed-immersion"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
    "query": "closed immersion of schemes descends along faithfully flat quasi compact surjective base change",
-   "results": "LeanSearch returned HTTP 500 for this query and for 'very ample line bundle descends along field extension'.",
+   "results": "No direct descent declaration; affine descent and closed-immersion affine criteria are separate declarations.",
    "date": "2026-10-10",
-   "verdict": "service unavailable; Loogle and source grep checked independently"
+   "verdict": "no match"
   },
   {
    "tool": "loogle",
-   "query": "AlgebraicGeometry.IsClosedImmersion",
-   "results": "AlgebraicGeometry.IsClosedImmersion.isZariskiLocalAtTarget and isStableUnderBaseChange (Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion); no descent theorem among the returned declarations.",
+   "query": "AlgebraicGeometry.IsClosedImmersion DescendsAlong",
+   "results": "IsClosedImmersion.isZariskiLocalAtTarget and isStableUnderBaseChange; no descent theorem.",
    "date": "2026-10-10",
    "verdict": "no match"
   },
   {
    "tool": "grep",
-   "query": "rg 'DescendsAlong @ClosedImmersion|DescendsAlong.*ClosedImmersion|ClosedImmersion.*DescendsAlong|of_isPullback.*ClosedImmersion' Mathlib/AlgebraicGeometry; rg 'DescendsAlong' Mathlib/AlgebraicGeometry/Morphisms/LocalFlatDescent.lean",
-   "results": "No closed-immersion descent declaration; LocalFlatDescent.lean:35-47 supplies descent instances for locally finite type, locally finite presentation, smooth, formally unramified, and etale only. ClosedImmersion.lean has base-change stability, not reflection.",
+   "query": "rg 'DescendsAlong.*ClosedImmersion|ClosedImmersion.*DescendsAlong' Mathlib/AlgebraicGeometry",
+   "results": "No closed-immersion fpqc descent declaration; LocalFlatDescent contains other local properties only.",
    "date": "2026-10-10",
    "verdict": "no match"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-pc-very-ample-descends",
   "by": "worker",
   "date": "2026-10-10"
  },
  "chapter": "sec-picard-framework",
- "unit": "sk-thm-picard-rr"
+ "unit": "sk-thm-picard-rr",
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "lem-pc-fpqc-descend-closed-immersion",
+  "worker": "stage1",
+  "summary": "Repaired the split to follow Tag 02L6 lines 5973-5999: closed immersions are affine and affineness descends fpqc; flat base change identifies the structure-sheaf pushforward after each cover member, and faithful-flat reflection gives stalkwise surjectivity; the affine-cover criterion then gives a closed immersion. Deleted the invalid arbitrary fpqc descent node for immersions and added one statement-only node for the local faithfully-flat reflection fact.",
+  "blueprint": "Realizes the parent blueprint proof sentence beginning 'the descent of the immersion property along a faithfully flat (field) base extension' through the closed-immersion assertion, with the three clauses above.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-fpqc-descend-affine",
+    "why": "Step 1 uses the generic fpqc descent theorem for affineness."
+   },
+   {
+    "node": "lem-pc-flat-base-change-cohom",
+    "why": "Step 2 uses the flat base-change theorem to identify the structure-sheaf pushforward after covering base change."
+   },
+   {
+    "node": "lem-weil-pbc-closed-immersion-affine-cover-criterion",
+    "why": "Steps 2 and 3 use the affine-local characterization of closed immersions."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-fpqc-descend-affine",
+  "lem-pc-flat-base-change-cohom",
+  "lem-weil-pbc-closed-immersion-affine-cover-criterion",
+  "lem-weil-pbc-fpqc-descend-affine",
+  "lem-pc-flat-base-change-cohom",
+  "lem-weil-pbc-closed-immersion-affine-cover-criterion"
+ ],
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-fd2c",
+  "group": "M1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-fd2c (reviewer sub-agent of L); spot-checked: Repaired re-push after the 15:38 return: point 1 done (lem-pc-fpqc-descend-immersion deleted, on neither branch), point 2 done (route now that of Tag 02L6, descent.tex 5967-5998), point 3 done (report names descent.tex 5967-6000 and 6306-6344). Statement agrees with 02L6 (label lemma-descending-property-closed-immersion) hypothesis by hypothesis (f, fpqc covering, base changes closed immersions). Step 1: clause (b) of lem-weil-pbc-closed-immersion-integral-separated-uc and lem-weil-pbc-fpqc-descend-affine (same covering/base-change setup) give f affine. Step 2: affine => qcqs (affine-morphism-permanence (3)), lem-pc-flat-base-change-cohom i=0 with F=O_X, criterion (1) of lem-weil-pbc-closed-immersion-affine-cover-criterion, stalk of pullback is the tensor, new node for faithful-flat reflection; Mathlib checked: FaithfullyFlat/Algebra.lean:60 of_flat_of_isLocalHom, FaithfullyFlat/Basic.lean:392 lTensor_surjective_iff_surjective; small cases (identity, field extension) fine. Tool uses accepted as generic black boxes. FIX more, RETURN less: (C1) step 3 went from stalkwise surjectivity of O_Y->f_*O_X straight to surjectivity of h^sharp_V on affine V (needs quasi-coherence/exactness of sections on affines, no node); created statement-only node lem-pc-affine-surjective-structure-map-closed-immersion (affine f with surjective stalk maps O_{Y,y}->(f_*O_X)_y is a closed immersion; Morphisms 01QO (3)=>(1) with 01SA; Mathlib isClosedImmersion_iff_isAffineHom ClosedImmersion.lean:370 only a candidate) and rewrote step 3 to cite it, dropping lem-weil-pbc-locally-surjective-iff-stalks and pqf-def-affine-morphism; (C1) step 2: flatness of O_{Y,y}->O_{Y_i,y_i} now cites def-weil-flat-morphism; proof_deps recomputed. FIX: dag/nodes/sec-picard-framework/lem-pc-local-flat-faithful-flat-reflects-surjective.json: stmt_deps: added def-weil-pbc-module-tensor-product (cited in the statement); mathlib_searches: nonexistent name lTensor_reflects_surjective corrected to lTensor_surjective_iff_surjective (Basic.lean:392). blueprint_refs search 'affine closed immersion surjective': no same_as. Start 2026-10-10 16:10:39 UTC (date -u: Sat Oct 10 04:10:39 PM UTC 2026), end Sat Oct 10 04:12:40 PM UTC 2026.; 3 file(s) fixed by the reviewer; 1 statement node(s) added by the reviewer (FIX more, RETURN less)"
+ }
 }
