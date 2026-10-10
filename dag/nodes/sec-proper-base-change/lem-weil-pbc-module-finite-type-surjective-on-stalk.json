@@ -33,9 +33,54 @@
   "def-weil-pbc-module-finite-type-presentation",
   "def-weil-pbc-module-stalk"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "*Step 1 (finite local generators).* By finite type [def-weil-pbc-module-finite-type-presentation] (1), choose an open neighbourhood $U_0$ of $x$, an integer $n\\geq0$, and sections $s_1,\\ldots,s_n\\in\\mathcal F(U_0)$ such that the map $q:\\mathcal O_{U_0}^{\\oplus n}\\to\\mathcal F|_{U_0}$ sending its basis sections to the $s_i$ is an epimorphism of $\\mathcal O_{U_0}$-modules. The case $n=0$ is included: then $q:0\\to\\mathcal F|_{U_0}$ is an epimorphism.",
+   "uses": [
+    "def-weil-pbc-module-finite-type-presentation"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/modules.tex",
+    "place": "Modules, proof of Lemma 01B8 (label lemma-finite-type-surjective-on-stalk), first sentence; Definition 01B5 (label definition-finite-type)"
+   }
+  },
+  {
+   "text": "*Step 2 (simultaneous lifts near $x$).* For each $i=1,\\ldots,n$, surjectivity of $\\varphi_x$ gives a germ $\\tau_i\\in\\mathcal G_x$ with $\\varphi_x(\\tau_i)=(s_i)_x$. By [def-weil-pbc-module-stalk], write $\\tau_i=(t_i)_x$ for a section $t_i\\in\\mathcal G(V_i)$ on some open $V_i\\ni x$, and use equality of germs to choose an open $W_i\\ni x$ inside $U_0\\cap V_i$ on which $s_i|_{W_i}=\\varphi_{W_i}(t_i|_{W_i})$. Set $U=U_0\\cap\\bigcap_{i=1}^nW_i$, an open neighbourhood of $x$ (when $n=0$, set $U=U_0$). Put $u_i=t_i|_U\\in\\mathcal G(U)$. Then $\\varphi_U(u_i)=s_i|_U$ for every $i$.",
+   "uses": [
+    "def-weil-pbc-module-stalk"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/modules.tex",
+    "place": "Modules, proof of Lemma 01B8 (label lemma-finite-type-surjective-on-stalk), second sentence: lift each generator germ and shrink U; the finite intersection is made explicit"
+   }
+  },
+  {
+   "text": "*Step 3 (local lifting of every section).* Restrict $q$ from Step 1 to $U$. Its map $q|_U:\\mathcal O_U^{\\oplus n}\\to\\mathcal F|_U$ is still an epimorphism: for an open $W\\subseteq U$, every local lifting supplied for $q$ over $W\\subseteq U_0$ stays inside $U$. By [lem-weil-pbc-ringed-space-module-exactness-local-lifting] (1), for any open $W\\subseteq U$ and $t\\in\\mathcal F(W)$ there is an open covering $W=\\bigcup_jW_j$ and tuples $(a_{1j},\\ldots,a_{nj})\\in\\mathcal O_X(W_j)^n$ such that $t|_{W_j}=\\sum_{i=1}^n a_{ij}s_i|_{W_j}$. On $W_j$ put $g_j=\\sum_{i=1}^n a_{ij}u_i|_{W_j}\\in\\mathcal G(W_j)$. Since $\\varphi$ is $\\mathcal O_X$-linear [def-weil-sheaf-of-modules-category] and $\\varphi_U(u_i)=s_i|_U$ (Step 2), $\\varphi_{W_j}(g_j)=t|_{W_j}$. This includes $n=0$: local lifts of $q:0\\to\\mathcal F|_U$ force $t$ to vanish on the cover, and each $g_j$ is the zero section.",
+   "uses": [
+    "def-weil-pbc-module-finite-type-presentation",
+    "lem-weil-pbc-ringed-space-module-exactness-local-lifting",
+    "def-weil-sheaf-of-modules-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/modules.tex",
+    "place": "Modules, proof of Lemma 01B8 (label lemma-finite-type-surjective-on-stalk), last sentence 'Then U works'; local coefficient lifting through the generating epimorphism is written out using Modules Section 01AF and Lemma 01AG"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-module-finite-type-presentation",
+  "def-weil-pbc-module-stalk",
+  "lem-weil-pbc-ringed-space-module-exactness-local-lifting",
+  "def-weil-sheaf-of-modules-category"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/modules.tex",
+  "place": "Modules, Lemma 01B8 (label lemma-finite-type-surjective-on-stalk) and its proof; the local coefficient lifting in the final sentence is expanded via Modules Section 01AF and Lemma 01AG"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -67,7 +112,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "worker",
@@ -88,5 +133,18 @@
  },
  "chapter": "sec-proper-base-change",
  "unit": "sk-thm-p1",
- "reviewed": "2026-10-10 L: statement checked against 01B8"
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "group": "F1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed by the lead of F1; spot-checked by L: L: 01B8 checked: finite generators near x, lifts of their germs, local lifting of sections, 0 new"
+ },
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "lem-weil-pbc-module-finite-type-surjective-on-stalk",
+  "worker": "F1",
+  "summary": "Three steps following Stacks Modules 01B8: take the finite generating epimorphism near x; lift its finitely many generator germs and shrink once; for an arbitrary section, use the existing local-lifting characterization of an epimorphism of module sheaves to obtain local coefficients, then substitute the lifted generators. The empty-generator case is included. No new nodes.",
+  "blueprint": "The item is an indirect tool for thm-weil-pbc-finite-etale-lifting, proof step 7 (essential surjectivity in Stacks 0GS2), through the 01Y3 coherent-local-isomorphism citation. These three steps realize the Modules 01B8 input to that citation: finite generation, stalk lifts, and local surjectivity. The exact ancestor place is recorded in blueprint.from.place; whole-blueprint searches for 01B8 and surjective-on-stalk found no matching blueprint node."
+ }
 }
