@@ -1847,3 +1847,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 15:43 L: merged deliver/G1/lem-pc-proper-descends-field (reviewer FIX; first push; new nodes: 1)
 - 15:44 L: merged deliver/C1/lem-sc-zariski-module-abelian-cohomology-agree (reviewer FIX; first push; new nodes: 0)
 - 15:44 L: returned deliver/J1/lem-weil-pbc-etale-cohomology-limit-complex-systems (reviewer RETURN: 1. E2/B2: new node lem-weil-pbc-complex-spectral-sequence-comparison: the statement is not well-typed. It names no abeli)
+- 15:44 L: merged deliver/E1/lem-sc-p1-graded-kernel-finite (reviewer PASS; first push; new nodes: 1)
