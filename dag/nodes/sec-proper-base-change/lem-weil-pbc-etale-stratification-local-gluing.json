@@ -43,11 +43,14 @@
    }
   },
   {
-   "text": "Fix an underlying stratum X_i and choose a,b with X_i contained in W_{a,b}. Define Z_i = X_i fibre-product over X with W_{a,b}, with its induced fibre-product scheme structure and projections p_i to X_i and q_i to W_{a,b}. The map p_i is the base change of the immersion W_{a,b} to X, so the composite Z_i to X is an immersion whose image is the intersection of the images, namely X_i; use Z_i as the scheme representative of this stratum. Pull back the finite morphism from U fibre-product over X with W_{a,b} to W_{a,b} along q_i; it is finite by base-change permanence (a) in [lem-weil-pbc-finite-morphism-permanence], and etale by the Mathlib-backed base-change node [lem-weil-pbc-etale-scheme-base-change]. Fibre-product associativity identifies the resulting source with U fibre-product over X with Z_i, so this map is finite etale over the stratum Z_i. Relabeling Z_i as X_i gives the required global partition.",
+   "text": "Fix an underlying stratum X_i and choose a,b with X_i contained in W_{a,b}. Define Z_i = X_i fibre-product over X with W_{a,b}, with its induced fibre-product scheme structure and projections p_i to X_i and q_i to W_{a,b}. The map $p_i$ is the base change of the immersion $W_{a,b}\\to X$ along $X_i\\to X$, hence an immersion [lem-weil-pbc-immersion-base-change-lft] (1); composed with the immersion $X_i\\to X$ it makes $Z_i\\to X$ an immersion [lem-weil-pbc-proper-fp-permanence] (e), whose image is $X_i\\cap W_{a,b}=X_i$ [lem-weil-pbc-base-change-image]; use $Z_i$ as the scheme representative of this stratum (same underlying set, so the $Z_i$ still form a finite partition by constructible locally closed subschemes). Pull back the finite morphism from U fibre-product over X with W_{a,b} to W_{a,b} along q_i; it is finite by base-change permanence (a) in [lem-weil-pbc-finite-morphism-permanence], and etale by the Mathlib-backed base-change node [lem-weil-pbc-etale-scheme-base-change]. Fibre-product associativity identifies the resulting source with U fibre-product over X with Z_i, so this map is finite etale over the stratum Z_i. Relabeling Z_i as X_i gives the required global partition.",
    "uses": [
     "lem-weil-pbc-finite-morphism-permanence",
     "lem-weil-pbc-etale-scheme-base-change",
-    "def-pc-fibre-product"
+    "def-pc-fibre-product",
+    "lem-weil-pbc-immersion-base-change-lft",
+    "lem-weil-pbc-proper-fp-permanence",
+    "lem-weil-pbc-base-change-image"
    ],
    "elementary": false,
    "source": {
@@ -58,18 +61,20 @@
  ],
  "proof_deps": [
   "def-constructible-stratification",
-  "def-weil-open-immersion",
-  "def-weil-closed-immersion",
-  "lem-weil-pbc-closed-subset-closed-subscheme",
-  "lemma-constructible-common-refinement",
-  "lem-weil-pbc-finite-morphism-permanence",
-  "lem-weil-pbc-etale-scheme-base-change",
   "def-pc-fibre-product",
-  "lemma-constructible-common-refinement",
-  "lem-weil-pbc-qcqs-scheme-spectral",
+  "def-weil-closed-immersion",
+  "def-weil-open-immersion",
   "def-weil-spectral-space",
+  "lem-weil-pbc-base-change-image",
+  "lem-weil-pbc-closed-subset-closed-subscheme",
+  "lem-weil-pbc-constructible-in-retrocompact-open",
+  "lem-weil-pbc-etale-scheme-base-change",
+  "lem-weil-pbc-finite-morphism-permanence",
+  "lem-weil-pbc-immersion-base-change-lft",
+  "lem-weil-pbc-proper-fp-permanence",
+  "lem-weil-pbc-qcqs-scheme-spectral",
   "lem-weil-pbc-spectral-open-retrocompact-iff-quasi-compact",
-  "lem-weil-pbc-constructible-in-retrocompact-open"
+  "lemma-constructible-common-refinement"
  ],
  "proof_origin": {
   "by": "document",
@@ -121,7 +126,7 @@
  },
  "chapter": "sec-proper-base-change",
  "unit": "sk-thm-p1",
- "lead_note": "L (2026-10-10): removed the proof-hint sentence (common refinement) from the statement; the split cites the common-refinement node.",
+ "lead_note": "L (2026-10-10): removed the proof-hint sentence (common refinement) from the statement; the split cites the common-refinement node. L 2026-10-10: after the fifth push, L added to step 3 the citations for 'Z_i -> X is an immersion with image X_i' (immersion-base-change-lft (1), proper-fp-permanence (e), base-change-image).",
  "split_report": {
   "date": "2026-10-10",
   "item": "lem-weil-pbc-etale-stratification-local-gluing",
