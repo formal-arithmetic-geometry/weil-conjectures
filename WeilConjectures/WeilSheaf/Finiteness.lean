@@ -11,6 +11,7 @@ public import WeilConjectures.WeilSheaf.Cohomology
 public import WeilConjectures.WeilSheaf.Constant
 public import WeilConjectures.WeilSheaf.LowerStar
 public import WeilConjectures.WeilSheaf.PoincareDuality
+public import WeilConjectures.WeilSheaf.ProperCohomology
 public import WeilConjectures.SixFunctors.ProEtale.Adic.GlobalSectionsHom
 public import WeilConjectures.WeilSheaf.StalkPairing
 
@@ -33,8 +34,7 @@ All of them are blueprint `prop-cohomological-finiteness`.
   `AlgebraicGeometry.WeilComplex.exists_subsingleton_cohomology`: the cohomology vanishes
   outside a finite interval.
 - `AlgebraicGeometry.WeilComplex.nonempty_equiv_compactlySupportedCohomology_cohomology`: for
-  `X` proper, `Hʳ_c(X ⊗ k̄, K) ≅ Hʳ(X ⊗ k̄, K)` compatibly with Frobenius (for some isomorphism,
-  not yet for the canonical one).
+  `X` proper, `Hʳ_c(X ⊗ k̄, K) ≅ Hʳ(X ⊗ k̄, K)` compatibly with Frobenius.
 - `AlgebraicGeometry.WeilSheaf.subsingleton_compactlySupportedCohomology_adicConstant`,
   `AlgebraicGeometry.WeilSheaf.subsingleton_cohomology_adicConstant_of_isProper`: the
   cohomology of the constant Weil sheaf vanishes outside `[0, 2e]`.
@@ -49,11 +49,10 @@ extension `E` of `ℚ_ℓ`; the Weil complexes of the repository have coefficien
 finite dimensionality of the cohomology groups is part of the structure `FrobeniusModule` that
 they are valued in, so it is not restated here.
 
-The blueprint's comparison for proper `X` concerns the canonical isomorphism
-`H_c^r(X ⊗ k̄, K) → Hʳ(X ⊗ k̄, K)` induced by `Ra_! ≅ Ra_*`. That isomorphism is not yet
-constructed for Weil complexes, so
-`AlgebraicGeometry.WeilComplex.nonempty_equiv_compactlySupportedCohomology_cohomology` only
-asserts that some Frobenius-equivariant isomorphism exists.
+For proper `X` the comparison is induced by the isomorphism `Ra_! ≅ Ra_*` of
+`AlgebraicGeometry.WeilComplex.derivedLowerShriekObjIsoOfIsProper`; the statement
+`AlgebraicGeometry.WeilComplex.nonempty_equiv_compactlySupportedCohomology_cohomology` records
+only that a Frobenius-equivariant isomorphism exists.
 -/
 
 @[expose] public section
@@ -397,16 +396,15 @@ namespace WeilComplex
 If `X` is proper over `k₀`, the compactly supported and the ordinary cohomology
 `Hʳ_c(X ⊗ k̄, K)` and `Hʳ(X ⊗ k̄, K)` are isomorphic as Frobenius modules.
 
-This is weaker than the blueprint, which asserts that the *canonical* isomorphism, induced by
-`Ra_! ≅ Ra_*` for the proper `a`, is Frobenius-equivariant. The canonical isomorphism cannot be
-named yet: `Ra_! ≅ Ra_*` is only available for étale sheaves
-(`AlgebraicGeometry.Etale.rightDerivedLowerShriekIsoRightDerivedLowerStar`), not for the
-pro-étale Weil complexes `AlgebraicGeometry.WeilComplex.derivedLowerShriek` and
-`AlgebraicGeometry.WeilComplex.derivedLowerStar`. -/
+The isomorphism is induced by `Ra_! ≅ Ra_*` for the proper `a`
+(`AlgebraicGeometry.WeilComplex.derivedLowerShriekObjIsoOfIsProper`): for the chosen
+compactification `X ⟶[i] Z ⟶[g] Spec k₀` the open immersion `i` is also closed, so that
+`Rg_*(i_! K) ≅ Rg_*(i_* K) ≅ Ra_* K`. -/
 theorem nonempty_equiv_compactlySupportedCohomology_cohomology
     (K : WeilComplex k₀ l X) (r : ℤ) :
     Nonempty ((K.compactlySupportedCohomology r).Equiv (K.cohomology r)) :=
-  sorry
+  ⟨WeilSheaf.globalSectionsEquivOfIso
+    ((homologySheaf r).mapIso (derivedLowerShriekObjIsoOfIsProper K))⟩
 
 end WeilComplex
 
