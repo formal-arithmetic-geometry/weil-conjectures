@@ -1,0 +1,78 @@
+{
+ "id": "def-weil-pbc-representing-object",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-hypercover-refinement",
+   "place": "proof, fourth paragraph: 'Previously chosen faces prescribe compatible boundaries; the matching covers of U lift those boundaries after finite refinement'; the objects Hom(S, K)_0 of compatible face data on a finite simplicial set S (the 'compatible boundaries' and their lifts), which are objects representing the functor of S-families: the notion of an object representing a presheaf of sets with its universal object",
+   "via": [
+    "def-weil-pbc-simplicial-hom-object",
+    "lem-weil-pbc-hypercover-finite-simplex-lifting"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "definition",
+ "title": "Object representing a presheaf of sets, with its universal object",
+ "statement": "Let $\\mathcal C$ be a category and $F:\\mathcal C^{\\mathrm{op}}\\to\\mathrm{Sets}$ a functor, written $F(g):F(V)\\to F(V')$ for a morphism $g:V'\\to V$ of $\\mathcal C$. A pair $(U,\\xi)$ of an object $U$ of $\\mathcal C$ and an element $\\xi\\in F(U)$ *represents* $F$, and $\\xi$ is called the *universal object*, if for every object $V$ of $\\mathcal C$ the map $\\mathrm{Mor}_{\\mathcal C}(V,U)\\to F(V)$, $f\\mapsto F(f)(\\xi)$, is a bijection; $U$ is then called an object *representing* $F$.",
+ "source": {
+  "document": "literature/stacks-project/categories.tex",
+  "place": "Definition 001Q (definition-representable-functor) and the paragraph after it (universal object $\\xi\\in F(U)$, the bijection $\\mathrm{Mor}_{\\mathcal C}(V,U)\\to F(V)$, $f\\mapsto F(f)(\\xi)$)"
+ },
+ "stmt_deps": [],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "presheaf represented by an object with a universal element: every element is the image of the universal element under a unique morphism",
+   "results": "CategoryTheory.Functor.coreprx, Functor.IsRepresentable-related Sheaf.isSheaf_of_isRepresentable, Classifier.representableBy (no direct hit); an earlier query of this item returned CategoryTheory.Functor.IsRepresentedBy.mk (Mathlib.CategoryTheory.RepresentedBy) and Functor.RepresentableBy.mk (Mathlib.CategoryTheory.Yoneda)",
+   "date": "2026-10-10",
+   "verdict": "match (IsRepresentedBy)"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "an object X with an element x of F(X) such that every element of F(Y) is the pullback of x along a unique morphism Y -> X (universal element of a representable presheaf)",
+   "results": "CategoryTheory.Functor.reprX, CategoryTheory.Functor.IsRepresentedBy (Mathlib.CategoryTheory.RepresentedBy), Functor.representableBy, Functor.RepresentableBy (Mathlib.CategoryTheory.Yoneda)",
+   "date": "2026-10-10",
+   "verdict": "match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.IsRepresentedBy",
+   "results": "CategoryTheory.Functor.IsRepresentedBy (F : Cᵒᵖ ⥤ Type w) {X : C} (x : F.obj (op X)) : Prop; IsRepresentedBy.of_isRepresentable, IsRepresentedBy.representableBy, IsRepresentable.iff_exists_isRepresentedBy (Mathlib.CategoryTheory.RepresentedBy)",
+   "date": "2026-10-10",
+   "verdict": "match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -n 'IsRepresentedBy' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/CategoryTheory/RepresentedBy.lean; sed -n 40,55p of it",
+   "results": "RepresentedBy.lean:50 structure IsRepresentedBy (F : Cᵒᵖ ⥤ Type w) {X : C} (x : F.obj (op X)) : Prop where map_bijective {Y : C} : Function.Bijective (fun f : Y ⟶ X ↦ F.map f.op x) (line 51)",
+   "date": "2026-10-10",
+   "verdict": "match"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "CategoryTheory.Functor.IsRepresentedBy",
+  "file": "Mathlib/CategoryTheory/RepresentedBy.lean",
+  "how": "exact: lines 50-51 (read with sed -n 40,55p), structure IsRepresentedBy (F : Cᵒᵖ ⥤ Type w) {X : C} (x : F.obj (op X)) with field map_bijective : for every Y, Function.Bijective (fun f : Y ⟶ X ↦ F.map f.op x); (U, ξ) represents F iff F.IsRepresentedBy ξ"
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "def-weil-pbc-simplicial-hom-object",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-curve-estimates",
+ "unit": "sk-prop-h2"
+}

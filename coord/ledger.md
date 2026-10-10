@@ -1408,3 +1408,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 12:27 L: accepted lem-weil-pbc-semi-representable-covering-permanence (01G4, 4 steps, 0 new).
 - 2026-10-10, delivery of H1: def-weil-pbc-finite-split-hypercover merged from deliver/H1/def-weil-pbc-finite-split-hypercover (1 commit(s), 0 new node(s), spot-checked by L: L: definition split checked against the cited hypercover definitions); claim closed
 - 12:27 L: merged H1 def-weil-pbc-finite-split-hypercover (definition, 0 new).
+- 12:28 L: accepted def-weil-pbc-simplicial-hom-object (definition split; new Mathlib leaf for representing objects).
