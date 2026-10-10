@@ -28,9 +28,67 @@
   "def-weil-pbc-module-localization",
   "def-weil-pbc-japanese-domain"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "The fraction rule in [def-weil-pbc-module-localization] makes the map $S^{-1}R\\to K$, $r/s\\mapsto r/s$, well defined. If its value is zero, then $r=0$ because $s\\ne0$, so the class $r/s$ is zero. Thus this map is injective; $S^{-1}R$ is a subring of the field $K$ containing $1\\ne0$, hence a domain. Every $z\\in K$ is $a/b$ for $a,b\\in R$ with $b\\ne0$, and equals $(a/1)/(b/1)$; therefore $K$ is the fraction field of $S^{-1}R$.",
+   "uses": [
+    "def-weil-pbc-module-localization"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 032G, lemma-localize-N, proof, using Tag 0307, lemma-integral-closure-localize"
+   }
+  },
+  {
+   "text": "For any field $L$ containing $K$, every $s\\in S$ has nonzero image in $L$, hence is invertible. Consequently the localization $S^{-1}L$ is identified with $L$ by $b/s\\mapsto b s^{-1}$, with inverse $b\\mapsto b/1$. Let $C_L$ be the integral closure of $R$ in $L$. Applying [lem-weil-pbc-integral-closure-commutes-localization] to $R\\to L$ identifies the integral closure of $S^{-1}R$ in $L$ with the image of $S^{-1}C_L$.",
+   "uses": [
+    "def-weil-pbc-module-localization",
+    "def-weil-pbc-integral-closure",
+    "lem-weil-pbc-integral-closure-commutes-localization"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 032G, lemma-localize-N, proof, using Tag 0307, lemma-integral-closure-localize"
+   }
+  },
+  {
+   "text": "If $C_L$ is generated as an $R$-module by $c_1,\\ldots,c_n$, write any $c\\in C_L$ as $\\sum_i r_i c_i$. Then $c/s=\\sum_i(r_i/s)(c_i/1)$ in $S^{-1}C_L$. Hence $c_1/1,\\ldots,c_n/1$ generate that localization, and therefore its identified integral closure, as an $S^{-1}R$-module. This follows directly from [def-weil-finitely-generated-module] and the localization operations.",
+   "uses": [
+    "def-weil-finitely-generated-module",
+    "def-weil-pbc-module-localization"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 032G, lemma-localize-N, proof, using Tag 0307, lemma-integral-closure-localize"
+   }
+  },
+  {
+   "text": "If $R$ is N-1, use $L=K$: the definition [def-weil-pbc-japanese-domain] makes $C_K$ finite, so the preceding steps prove N-1 for $S^{-1}R$. If $R$ is N-2, take any finite field extension $L/K$; the same definition makes $C_L$ finite. Since the fraction field remains $K$, these are precisely all the extensions required for N-2 of $S^{-1}R$.",
+   "uses": [
+    "def-weil-pbc-japanese-domain"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 032G, lemma-localize-N, proof, using Tag 0307, lemma-integral-closure-localize"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-finitely-generated-module",
+  "def-weil-pbc-integral-closure",
+  "def-weil-pbc-japanese-domain",
+  "def-weil-pbc-module-localization",
+  "lem-weil-pbc-integral-closure-commutes-localization"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Tag 032G, lemma-localize-N, proof, using Tag 0307, lemma-integral-closure-localize"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -52,10 +110,31 @@
    "results": "only Analysis/SpecialFunctions/JapaneseBracket.lean (unrelated)",
    "date": "2026-10-10",
    "verdict": "no match: Mathlib has no N-1/N-2 domains"
+  },
+  {
+   "tool": "leansearch",
+   "query": "localization of Japanese N-2 integral domain remains Japanese",
+   "results": "IsLocalization.isDomain_localization, IsLocalization.isDomain_of_le_nonZeroDivisors, isIntegrallyClosed_of_isLocalization, isIntegral_localization",
+   "date": "2026-10-10",
+   "verdict": "no match: no N-1/N-2 theorem"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "integral closure commutes with localization and finite modules remain finite after localization",
+   "results": "IsLocalization.integralClosure, IsLocalization.Away.integralClosure, prime-localization finite-module instances",
+   "date": "2026-10-10",
+   "verdict": "ingredients only, no N-1/N-2 theorem"
+  },
+  {
+   "tool": "grep",
+   "query": "rg -n -i Japanese|Nagata|N-2 /tmp/mathlib-f1/Mathlib/RingTheory /tmp/mathlib-f1/Mathlib/Algebra; read Localization/Integral.lean:410-444 and Finiteness.lean:135-178",
+   "results": "Only NoetherNormalization Nagata docstring; IsLocalization.integralClosure and Module.Finite.of_isLocalization read. Actual source snapshot v4.35.0-rc4, not the absent pinned v4.33.1 checkout.",
+   "date": "2026-10-10",
+   "verdict": "no match in searched snapshot; no new leaf asserted"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "worker",
@@ -76,5 +155,18 @@
  },
  "chapter": "sec-proper-base-change",
  "unit": "sk-thm-p1",
- "reviewed": "2026-10-10 L: statement checked against 032G; split via 0307 (lem-weil-pbc-integral-closure-commutes-localization, now a Mathlib leaf)"
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "group": "M1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed by the lead of M1; spot-checked by L: L: 032G steps checked: localization of a domain inside K, integral closure commutes with localization, finite generators localize, N-1/N-2"
+ },
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "lem-weil-pbc-localization-n2-domain",
+  "worker": "stage1",
+  "summary": "Expanded 032G via the existing 0307 Mathlib leaf: explicitly identified the unchanged fraction field and localizations of extension fields, and proved finite generation by the displayed generator calculation. No new nodes, no additional Noetherian or separability hypotheses. Normalized doubled TeX escapes.",
+  "blueprint": "Realizes the N-2 localization ingredient of the Nagata-localization chain below step 4 (normality of the strict henselization) of blueprint lem-weil-pbc-normal-constant-generic, through the existing blueprint.from.via list. Proof follows 032G via 0307. Whole-blueprint searches for 032G and localization N-2 returned no matching imported node; same_as remains []."
+ }
 }
