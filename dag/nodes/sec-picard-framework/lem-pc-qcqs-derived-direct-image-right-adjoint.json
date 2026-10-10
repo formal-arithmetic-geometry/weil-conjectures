@@ -13,7 +13,7 @@
  },
  "kind": "statement",
  "title": "Right adjoint to derived direct image for qcqs morphisms",
- "statement": "Let f:X\\to Y be a quasi-compact and quasi-separated morphism of schemes [def-pc-scheme]. The derived direct image Rf_* preserves D_{\\mathrm{QCoh}} [def-pc-derived-direct-image, def-pc-derived-category], and the restricted functor Rf_*:D_{\\mathrm{QCoh}}(X)\\to D_{\\mathrm{QCoh}}(Y) has a right adjoint.",
+ "statement": "Let X and Y be quasi-compact and quasi-separated schemes, and let f:X\\to Y be a quasi-compact and quasi-separated morphism [def-pc-scheme]. The derived direct image Rf_* preserves D_{\\mathrm{QCoh}} [def-pc-derived-direct-image, def-pc-derived-category], and the restricted functor Rf_*:D_{\\mathrm{QCoh}}(X)\\to D_{\\mathrm{QCoh}}(Y) has a right adjoint.",
  "source": {
   "document": "literature/stacks-project/duality.tex",
   "place": "Tag 0A9E (Lemma 48.3.1, lemma-twisted-inverse-image)"
@@ -23,39 +23,152 @@
   "def-pc-derived-direct-image",
   "def-pc-derived-category"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Because f is quasi-compact and quasi-separated, [lem-pc-derived-direct-image-preserves-qcoh] says that Rf_* sends D_QCoh(O_X) into D_QCoh(O_Y), so the restricted functor in the statement is well defined.",
+   "uses": [
+    "lem-pc-derived-direct-image-preserves-qcoh"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/perfect.tex",
+    "place": "Tag 08D5, part (1)"
+   }
+  },
+  {
+   "text": "The categories D_QCoh(O_X) and D_QCoh(O_Y) have all set-indexed direct sums by [lem-pc-derived-qcoh-direct-sums], applied separately to X and Y.",
+   "uses": [
+    "lem-pc-derived-qcoh-direct-sums"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived-categories-of-schemes.tex",
+    "place": "Lemma perfect-lemma-quasi-coherence-direct-sums"
+   }
+  },
+  {
+   "text": "Since X is a quasi-compact and quasi-separated scheme, [lem-pc-derived-qcoh-compact-generation] gives compact generation of D_QCoh(O_X).",
+   "uses": [
+    "lem-pc-derived-qcoh-compact-generation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived-categories-of-schemes.tex",
+    "place": "Theorem perfect-theorem-bondal-van-den-Bergh"
+   }
+  },
+  {
+   "text": "For a quasi-compact and quasi-separated morphism, [lem-pc-derived-direct-image-preserves-direct-sums] says that the restricted derived direct image Rf_* commutes with all set-indexed direct sums.",
+   "uses": [
+    "lem-pc-derived-direct-image-preserves-direct-sums"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived-categories-of-schemes.tex",
+    "place": "Lemma perfect-lemma-quasi-coherence-pushforward-direct-sums"
+   }
+  },
+  {
+   "text": "By the definitions of the derived category and total derived direct image [def-pc-derived-category, def-pc-derived-direct-image], and the triangulated right-derived-functor statement [lem-pc-right-derived-functor-triangulated], the restricted derived direct image is an exact functor between triangulated derived categories. Applying [lem-pc-brown-representability-right-adjoint] to the restricted functor, using Steps 2 and 3 for coproducts and compact generation and Step 4 for coproduct preservation, supplies a right adjoint.",
+   "uses": [
+    "def-pc-derived-category",
+    "def-pc-derived-direct-image",
+    "lem-pc-right-derived-functor-triangulated",
+    "lem-pc-brown-representability-right-adjoint",
+    "lem-pc-derived-qcoh-direct-sums",
+    "lem-pc-derived-qcoh-compact-generation",
+    "lem-pc-derived-direct-image-preserves-direct-sums"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/duality.tex",
+    "place": "Tag 0A9E, Lemma 48.3.1 proof and Proposition derived-proposition-brown"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-derived-category",
+  "def-pc-derived-direct-image",
+  "lem-pc-derived-direct-image-preserves-qcoh",
+  "lem-pc-derived-qcoh-direct-sums",
+  "lem-pc-derived-qcoh-compact-generation",
+  "lem-pc-derived-direct-image-preserves-direct-sums",
+  "lem-pc-right-derived-functor-triangulated",
+  "lem-pc-brown-representability-right-adjoint"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/duality.tex",
+  "place": "Tag 0A9E, Lemma 48.3.1 and its proof"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
-   "query": "right adjoint derived direct image quasi-compact quasi-separated schemes",
-   "results": "no scheme-level right-adjoint declaration",
+   "query": "right adjoint to derived direct image on quasi-coherent complexes for quasi-compact quasi-separated schemes",
+   "results": "ordinary sheaf pushforward adjunction declarations only; no derived qcqs declaration",
    "date": "2026-10-11",
    "verdict": "no match"
   },
   {
    "tool": "loogle",
-   "query": "derived direct image right adjoint qcqs",
-   "results": "0 hits; generic adjunction only",
+   "query": "right adjoint Rf_* D_QCoh qcqs",
+   "results": "0 hits; query parser treated right as an unknown identifier",
    "date": "2026-10-11",
    "verdict": "no match"
   },
   {
    "tool": "grep",
-   "query": "right.adjoint.*derived.*direct.*image|qcqs.*right.adjoint Mathlib/AlgebraicGeometry",
+   "query": "right.adjoint.*derived.*direct.*image|qcqs.*right.adjoint AlgebraicGeometry",
    "results": "none",
+   "date": "2026-10-11",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "derived pushforward Rf star preserves quasi coherent complexes and has a right adjoint for qcqs schemes",
+   "results": "ordinary sheaf pushforward adjunction declarations only; no derived qcqs declaration",
+   "date": "2026-10-11",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.IsRightAdjoint",
+   "results": "0 hits; unknown identifier",
+   "date": "2026-10-11",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "IsRightAdjoint|rightAdjoint|DerivedCategory AlgebraicGeometry",
+   "results": "Mathlib/AlgebraicGeometry/Modules/Sheaf.lean:69,70,199 and GammaSpecAdjunction.lean:604-607; only ordinary sheaf adjunctions",
    "date": "2026-10-11",
    "verdict": "no match"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-sc-proper-flat-right-adjoint-affine-basechange",
   "by": "worker",
   "date": "2026-10-10"
  },
  "chapter": "sec-picard-framework",
- "unit": "sk-thm-picard-duality"
+ "unit": "sk-thm-picard-duality",
+ "split_report": {
+  "date": "2026-10-11",
+  "item": "lem-pc-qcqs-derived-direct-image-right-adjoint",
+  "worker": "stage1",
+  "summary": "Repaired the returned split by strengthening the statement to assume that both X and Y are quasi-compact and quasi-separated schemes, as required by Tag 0A9E and the compact-generation route. The proof still uses only existing prerequisites: quasi-coherence preservation, coproducts, compact generation of X, direct-sum preservation, and Brown representability. The dependent global-Hom adjunction node was updated with the same scheme hypotheses. Required Mathlib searches found only ordinary sheaf adjunctions.",
+  "blueprint": "The five steps realize Tag 0A9E: preservation of D_QCoh, existence of coproducts and compact generation, preservation of coproducts by Rf_*, and the Brown representability conclusion, with the qcqs scheme hypotheses made explicit.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-qra2758",
+  "group": "J1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-qra2758 (reviewer sub-agent of L); spot-checked: Return 21:56 (E) repaired: statement now assumes X and Y qcqs as in Tag 0A9E, named under E7. Step 3 compact generation (lem-pc-derived-qcoh-compact-generation) applied to qcqs X; Step 1 preserves-qcoh and Step 4 direct-sum preservation with f qcqs; Step 5 Brown (lem-pc-brown-representability-right-adjoint) with coproducts, compact generation, coproduct preservation and exactness all cited. No new nodes, so no duplicate of lem-pc-perfect-generator-exists. Citers: def-sc-duality-equation-base-change-map and lem-sc-flat-precompose-pus use it only for morphisms between qcqs schemes (including Rg_* preserving D_QCoh), satisfied; lem-pc-global-hom-adjunction (unsplit, not merged) still needs the hypothesis, noted for the lead. Second reading: no fault missed."
+ },
+ "lead_note": "2026-10-10 L (R-qra2758): Citer lem-pc-global-hom-adjunction (unsplit, returned 22:05) still assumes only f qcqs; its statement must add X and Y qcqs to use this item."
 }
