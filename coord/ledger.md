@@ -2975,3 +2975,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 23:32 L: merged deliver/H1/lem-pur-rhom-well-defined (reviewer FIX; first push; new nodes: 1)
 - 23:33 L: merged deliver/K1/lem-kun-etale-lfp (reviewer FIX; first push; new nodes: 0)
 - 23:33 L: merged deliver/K1/lem-pc-module-tor-amplitude-flat-model (reviewer FIX; first push; new nodes: 1)
+- 23:34 L: merged deliver/C1/lem-sc-picard-locus-closed-valuation-criterion (reviewer FIX; first push; new nodes: 1)

@@ -23,9 +23,48 @@
  "stmt_deps": [
   "def-weil-scheme-morphism-properties"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Let s be any point of the closure of the range of j. The valuation-probe statement [lem-sc-picard-valuation-probe-closure] supplies a valuation ring A with fraction field K, a map g:Spec(A)→S whose closed point maps to s, and a generic map Spec(K)→Z whose composite with j is the restriction of g.",
+   "uses": [
+    "lem-sc-picard-valuation-probe-closure"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Morphisms, Lemma morphisms-lemma-reach-points-scheme-theoretic-image, Tag 02JQ"
+   }
+  },
+  {
+   "text": "By the assumed valuative property, g factors through j. Therefore its closed point s lies in the range of j. Since every point of the closure of the range lies in the range, the range j(Z) is closed.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Morphisms, Lemma morphisms-lemma-quasi-compact-scheme-theoretic-image, Tag 01R8"
+   }
+  },
+  {
+   "text": "Since j is an immersion with closed image j(Z), the criterion [lem-weil-pbc-immersion-closed-image-closed-immersion] (Tag 01IQ) shows that j is a closed immersion.",
+   "uses": [
+    "lem-weil-pbc-immersion-closed-image-closed-immersion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Schemes, Lemma lemma-immersion-when-closed, Tag 01IQ"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sc-picard-valuation-probe-closure",
+  "lem-weil-pbc-immersion-closed-image-closed-immersion"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/morphisms.tex",
+  "place": "Morphisms, Lemmas morphisms-lemma-reach-points-scheme-theoretic-image (Tag 02JQ) and morphisms-lemma-quasi-compact-scheme-theoretic-image (Tag 01R8)"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -50,10 +89,28 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-sc-picard-locus-closed",
   "by": "worker",
   "date": "2026-10-10"
+ },
+ "split_report": {
+  "date": "2026-10-11",
+  "item": "lem-sc-picard-locus-closed-valuation-criterion",
+  "worker": "stage1",
+  "summary": "No sorry-free project declaration states the item. Added the statement-only Tag 02JQ valuation-probe node and split the proof into obtaining a probe at a closure point, applying the valuative factorization hypothesis to show the range is closed, and using the standard characterization of closed immersions among preimmersions.",
+  "blueprint": "Realizes the parent theorem-of-the-cube proof sentence that Tags 02JQ and 01R8 show the image is closed after testing valuation rings."
+ },
+ "tool_uses": [
+  "lem-weil-pbc-immersion-closed-image-closed-immersion"
+ ],
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-pvc3135",
+  "group": "C1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-pvc3135 (reviewer sub-agent of L); spot-checked: Step 1: probe node is Tag 02JQ+01R8 footnote applied to the qc morphism j (closure of j(Z) = scheme-theoretic image set), hypotheses met; not a duplicate of def/lemma-nagata-dense-valuation-probe (dense source only); no single sorry-free slopmaster2 decl states it (exists_specializes_of_mem_closure_range + ValuativeCommSqWithPt.ofSpecializes together), so unsplit is right. Step 2 elementary, correct. FIX more, RETURN less: class (b) new leaf lem-sc-picard-closed-range-preimmersion duplicates merged lem-weil-pbc-immersion-closed-image-closed-immersion (Tag 01IQ, same Mathlib of_isPreimmersion/iff_isPreimmersion); step 3 now cites the existing node as a generic tool (tool_uses), duplicate dropped.; 1 file(s) fixed by the reviewer"
  }
 }
