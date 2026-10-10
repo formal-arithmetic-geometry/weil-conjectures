@@ -1,8 +1,8 @@
 # Work queue
 
-886 items; claim with `tools/claim.py next <group> [--stage N]`.
+885 items; claim with `tools/claim.py next <group> [--stage N]`.
 
-## Stage 1: nodes to split (104)
+## Stage 1: nodes to split (102)
 
 | node | distance to a target | Lean state on the done branch |
 |---|---|---|
@@ -53,7 +53,6 @@
 | `lem-pod-etale-stalk-tensor-scalar` | - | none |
 | `lem-sc-global-functions` | - | rests_on_sorry |
 | `lem-sc-kummer-base-change-compatibility` | - | none |
-| `lem-sc-proper-or-affine` | - | none |
 | `lem-sc-units-quotient-base-change` | - | none |
 | `lem-weil-pbc-spread-finite-separable-extension` | - | none |
 | `lem-weil-separably-closed-geometrically-connected` | - | none |
@@ -63,7 +62,6 @@
 | `lem-sc-affine-constant-second` | - | rests_on_sorry |
 | `lem-weil-pbc-power-in-base-after-localization` | - | none |
 | `lemma-nagata-morphism-descends` | - | none |
-| `sbc-lem-higher-direct-image-limit` | - | none |
 | `lem-kun-closed-point-field` | - | none |
 | `lem-kun-cp-approximation` | - | none |
 | `lem-pc-projective-coherent-finiteness` | - | sorry_here |
@@ -111,7 +109,7 @@
 | `lem-zl-noether-normalization-dimension` | - | none |
 | `lem-pur-rhom-global-sections` | - | none |
 
-## Stage 2: nodes to state (782)
+## Stage 2: nodes to state (783)
 
 | node | distance to Mathlib | kind |
 |---|---|---|
@@ -349,6 +347,7 @@
 | `lem-sc-principal-ideal-dvr` | 1 | state |
 | `lem-sc-product-irreducible-components-bijection` | 1 | state |
 | `lem-sc-proper-affine-finite` | 1 | state |
+| `lem-sc-proper-or-affine` | 1 | state |
 | `lem-sc-reduced-ideals-zero-intersection` | 1 | state |
 | `lem-sc-regular-connected-integral` | 1 | state |
 | `lem-sc-regular-local-domain` | 1 | state |
@@ -898,7 +897,7 @@
 | `lem-weil-pbc-projective-space-zero-isomorphism` | 4 | state |
 | `def-nagata-fixed-base-separated-stage` | 6 | state |
 
-Not open yet: 1599 nodes that wait for a statement dependency, 144 nodes that wait for stage 1.
+Not open yet: 1600 nodes that wait for a statement dependency, 142 nodes that wait for stage 1.
 
 ## Stage 3: modules to prove (0)
 
