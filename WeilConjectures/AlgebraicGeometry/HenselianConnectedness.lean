@@ -9,6 +9,7 @@ public import Mathlib.AlgebraicGeometry.Morphisms.Finite
 public import Mathlib.AlgebraicGeometry.Morphisms.Proper
 public import Mathlib.RingTheory.Henselian
 public import Mathlib.Topology.Spectral.Basic
+public import WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage
 public import WeilConjectures.Mathlib.AlgebraicGeometry.GammaSpecAdjunction
 
 /-!
@@ -52,12 +53,37 @@ namespace AlgebraicGeometry
 Stein connectedness): for a proper morphism `p : Y ⟶ Spec A` with `A` noetherian, the ring
 `Γ(Y, 𝒪_Y)` is a finite `A`-algebra, i.e. the second map `Spec Γ(Y, 𝒪_Y) ⟶ Spec A` of the Stein
 factorization is finite. For a general affine base this is not proved in the blueprint.
+
+It is the case `q = 0`, `ℱ = 𝒪_Y` of the finiteness of the cohomology of a proper morphism over
+a Noetherian affine base (`AlgebraicGeometry.Scheme.Modules.finite_sections_higherDirectImage`),
+transported along `Γ(Spec A, p_* 𝒪_Y) ≅ H⁰(Y, 𝒪_Y) ≅ Γ(Y, 𝒪_Y)`.
 (blueprint: `thm-weil-pbc-stein-inputs`) -/
 @[stacks 02O5]
 theorem Scheme.Hom.isFinite_steinFactorizationBase {A : Type u} [CommRing A]
     [IsNoetherianRing A] {Y : Scheme.{u}} (p : Y ⟶ Spec (.of A)) [IsProper p] :
-    IsFinite p.steinFactorizationBase :=
-  sorry
+    IsFinite p.steinFactorizationBase := by
+  have := Scheme.Modules.isGrothendieckAbelian Y
+  have : IsNoetherianRing Γ(Spec (.of A), ⊤) :=
+    isNoetherianRing_of_ringEquiv _ (Scheme.ΓSpecIso (.of A)).commRingCatIsoToRingEquiv.symm
+  let O : Y.Modules := SheafOfModules.unit Y.ringCatSheaf
+  have := SheafOfModules.isQuasicoherent_unit (R := Y.ringCatSheaf)
+  have : O.IsFinitePresentation :=
+    SheafOfModules.IsFiniteLocallyFree.isFinitePresentation.{u, u, u} _
+  have := Scheme.Modules.finite_sections_higherDirectImage p O 0
+  obtain ⟨e, he⟩ := Scheme.Modules.exists_bijective_semilinearMap_sections_higherDirectImage_H p O 0
+  let _ := p.appTop.hom.toAlgebra
+  -- `Γ(Spec A, p_* 𝒪_Y) = H⁰(Y, 𝒪_Y) = Γ(Y, 𝒪_Y)`, linearly over `Γ(Spec A, ⊤)`
+  let φ : Γ((Scheme.Modules.higherDirectImage p 0).obj O, ⊤) →ₗ[Γ(Spec (.of A), ⊤)] Γ(Y, ⊤) :=
+    { toFun x := Scheme.Modules.H.zeroLinearEquiv O (e x)
+      map_add' x y := by rw [map_add, map_add]; rfl
+      map_smul' c x := by
+        rw [e.map_smulₛₗ, LinearEquiv.map_smul]
+        rfl }
+  have : Module.Finite Γ(Spec (.of A), ⊤) Γ(Y, ⊤) :=
+    Module.Finite.of_surjective φ ((Scheme.Modules.H.zeroLinearEquiv O).surjective.comp he.2)
+  rw [Scheme.Hom.steinFactorizationBase, IsFinite.SpecMap_iff, CommRingCat.hom_comp]
+  exact (RingHom.finite_algebraMap.2 this).comp (RingHom.Finite.of_surjective _
+    (ConcreteCategory.bijective_of_isIso (Scheme.ΓSpecIso (.of A)).inv).2)
 
 /-- **Connectedness of the closed fibre** (input (ii) of the two classical inputs of Stein
 connectedness): let `(A, I)` be a henselian pair and `p : Y ⟶ Spec A` proper. Every
