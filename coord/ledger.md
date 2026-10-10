@@ -1939,3 +1939,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 16:15 L: returned deliver/M1/lem-exc-field-sections-stalk-invariants (reviewer RETURN: 1. E3: step 3: the sentence 'Since $\sigma H_L\sigma^{-1}=H_{L'}$' is false when $j(L)\neq L'$ (then $\sigma H_L\sigma^{)
 - 16:15 L: merged deliver/K1/lem-weil-pbc-finite-coproduct-cohomology-assembly (reviewer FIX; first push; new nodes: 2)
 - 16:16 L: merged deliver/C1/lem-sc-finite-sections-cover-qc (reviewer FIX; first push; new nodes: 1)
+- 16:16 L: merged deliver/M1/lem-sc-etale-coproduct-etale (reviewer PASS; first push; new nodes: 0)

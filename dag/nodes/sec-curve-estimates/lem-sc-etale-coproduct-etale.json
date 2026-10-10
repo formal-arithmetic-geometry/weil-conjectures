@@ -23,9 +23,29 @@
   "def-weil-etale-morphism",
   "lem-weil-pbc-scheme-coproduct-family"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "By [lem-weil-pbc-scheme-coproduct-family], each coprojection $\\iota_i:U_i\\to V$ is an open immersion, its image is open and closed, the images are pairwise disjoint, and they cover $V$. The restriction of $u$ to the image of $\\iota_i$ is therefore the morphism $u_i$, by the defining equation $u\\circ\\iota_i=u_i$ of the induced coproduct morphism. Since the images form an open cover of $V$, [lem-weil-pbc-etale-local-on-source] applied to $u:V\\to X$ says that $u$ is etale exactly when all these restrictions are etale; they are etale by hypothesis. This also covers the empty family, whose coproduct is empty and whose open-cover condition is vacuous.",
+   "uses": [
+    "lem-weil-pbc-scheme-coproduct-family",
+    "lem-weil-pbc-etale-local-on-source"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Morphisms, Definition Tag 02GI and Lemma Tag 02GJ (lemma-etale-characterize), locality of etaleness on the source, applied to the open-and-closed coproduct summands"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-scheme-coproduct-family",
+  "lem-weil-pbc-etale-local-on-source"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/morphisms.tex",
+  "place": "Morphisms, Lemma Tag 02GJ (lemma-etale-characterize), (1)\\u21d4(3) and its proof"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -50,12 +70,29 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-sc-etale-standard-cover-cech",
   "by": "worker",
   "date": "2026-10-10"
  },
  "chapter": "sec-curve-estimates",
- "unit": "sk-prop-h2"
+ "unit": "sk-prop-h2",
+ "split_report": {
+  "date": "2026-10-11",
+  "item": "lem-sc-etale-coproduct-etale",
+  "worker": "stage1",
+  "summary": "Split the finite-coproduct etaleness lemma into one locality argument. The existing scheme-coproduct-family node supplies the open-and-closed coproduct summands and their covering, while the existing Mathlib leaf lem-weil-pbc-etale-local-on-source supplies the equivalence between etaleness and etaleness on those restrictions. The restriction identity is the coproduct mapping property, and the empty family is vacuous.",
+  "blueprint": "The step realizes the blueprint ancestor lem-sc-etale-affine-qcoherent proof passage from a finite affine etale covering family to its disjoint union, specifically the assertion that the induced coproduct morphism is etale.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-ece2",
+  "group": "M1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-ece2 (reviewer sub-agent of L); spot-checked: Started Sat Oct 10 04:15:52 PM UTC 2026. Source Stacks Morphisms Lemma 02GJ (lemma-etale-characterize), (1)<=>(3): etaleness local on the source; the item statement (finite family of etale u_i:U_i->X, induced u from the coproduct) is the direct application to the open-and-closed coproduct summands, hypotheses agree. Single step: lem-weil-pbc-scheme-coproduct-family (Mathlib leaf, read) carries existence of the coproduct, uniqueness of u with u o iota_i = u_i, iota_i open immersions with disjoint images covering V; lem-weil-pbc-etale-local-on-source (Mathlib leaf, read: IsZariskiLocalAtSource.iff_of_iSup_eq_top) carries the iff for an open cover of the source; identifying the restriction to the open image iota_i(U_i) with u_i via the isomorphism U_i -> iota_i(U_i) is elementary (C2). Both cited nodes are Mathlib leaves of unit sk-thm-p1 used as generic tools (no tool_uses needed). Only the item's node and report changed; split-owned fields only. Small cases: empty family (V empty, vacuous), one member (u = u_1). Mathlib: AlgebraicGeometry.IsZariskiLocalAtSource.sigmaDesc (Morphisms/Basic.lean:305, read) with P := @Etale states this node exactly (for any small index type); the worker's searches missed it, recorded in the lead note. Ended Sat Oct 10 04:16:28 PM UTC 2026."
+ },
+ "lead_note": "2026-10-10 L (R-ece2): Mathlib IsZariskiLocalAtSource.sigmaDesc (Mathlib/AlgebraicGeometry/Morphisms/Basic.lean:305) with P := @AlgebraicGeometry.Etale (IsZariskiLocalAtSource instance RingHomProperties.lean:382) states this node exactly: candidate to become a Mathlib leaf. Stage-3 merge candidate: lem-exc-etale-coproduct-etale (E1, merged 16:12) is the special case u_i = Spec L_i -> Spec K of this node and repeats the same locality argument; it could cite this node instead."
 }
