@@ -67,7 +67,7 @@ REMOTE LAUNCHER READY (2026-10-09 16:22: `roles/remote-launcher.md` committed; `
 
 **REMOTE SEARCHES NOT RUN** (16:54 UTC; finding of the launcher 16:51): the mathlib_searches of nodes created by remote deliveries before 2026-10-10 17:00 UTC were written without any search tool call (215 of 259; LeanSearch is HTTP 500 today, recorded as "no match"). Treated as not done. coord/research-remote-nodes.txt lists the 78 unsplit nodes created by remote deliveries for the remote re-search with the logged command; the leaves come back as ordinary deliveries. Reviewers now run one Loogle or LeanFinder query themselves on a standard-looking new node of a remote delivery (reviewer brief, section "Remote searches before 17:00 UTC were not run"); coord/delivery-errors.md B8 now says that a search not run is not recorded and that a service that is down is recorded as unavailable.
 
-**REVIEW BEHIND 11** (16:54 UTC): 11 unreviewed deliveries wait (2 repaired re-pushes, 9 new) with one reviewer in flight after a burst of five merges; eight reviewers from now until the count is under ten.
+**REVIEW BEHIND 11** (16:54 UTC): 11 unreviewed deliveries wait (2 repaired re-pushes, 9 new) with one reviewer in flight after a burst of five merges; eight reviewers from now until the count is under ten. Cleared 16:57 UTC: 7 unreviewed wait with 5 reviewers in flight; back to five slots.
 
 **Direct delivery** (decision of the human, 2026-10-10 evening; numbers since 13:05 UTC, when L read it; updated 16:48 UTC; content returns = sections C, D, E; the threshold is one content return in four deliveries over an hour, or reviews more than twenty minutes behind):
 
