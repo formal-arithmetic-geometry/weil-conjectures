@@ -2568,3 +2568,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 20:49 L: returned deliver/C1/def-weil-pbc-C2 (reviewer RETURN: Reviewer R-dc22410 (packet review, 20:49 UTC), head 3f1d6620c. B10: nothing to split; the sorry-free declaration Algebra)
 - 20:49 L: attached AlgebraicGeometry.IsCurve.FiniteOfInvertibleOrder to def-weil-pbc-C4 (Assertions.lean:104-109, sorry-free; reviewer R-dc42410)
 - 20:49 L: returned deliver/G1/def-weil-pbc-C4 (reviewer RETURN: Reviewer R-dc42410 (packet review, 20:49 UTC), head d63880e86. B10: nothing to split; the sorry-free declaration Algebra)
+- 20:50 L: returned deliver/E1/lem-sc-open-restriction-support-triangle (reviewer RETURN: 1. E (wrong mathematics), Step 3: 'for an open immersion, direct image is exact: on stalks it is the identity over V and)
