@@ -1,0 +1,69 @@
+{
+ "id": "lem-weil-pbc-ext-long-exact-first-variable",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-finite-etale-lifting",
+   "place": "step 7 of its split, through the proof of Stacks 065S (1): the contravariant Ext sequence 065P",
+   "via": [
+    "lem-weil-pbc-projective-dimension-ses-kernel",
+    "lem-weil-pbc-well-ordered-union-projective-dimension",
+    "lem-weil-pbc-global-dimension-finite-modules-suffice",
+    "lem-weil-pbc-regular-local-finite-gl-dim",
+    "lem-weil-pbc-regular-local-localization",
+    "lem-weil-pbc-complete-local-g-ring",
+    "lem-weil-pbc-g-ring-maximal-ideal-criterion",
+    "lem-weil-pbc-henselization-pair-g-ring",
+    "lem-weil-pbc-finite-etale-lifting-limit-descent",
+    "lem-weil-pbc-finite-etale-lifting-essential-surjectivity"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Long exact Ext sequence in the first variable",
+ "statement": "Let $R$ be a commutative ring, $Y$ an $R$-module, and $0\\to X'\\xrightarrow{u}X\\xrightarrow{v}X''\\to0$ a short exact sequence of $R$-modules [def-weil-pbc-exact-sequence]. With $\\operatorname{Ext}^i_R(-,Y)$ as in [def-pc-ext], there are connecting homomorphisms $\\delta^i:\\operatorname{Ext}^i_R(X',Y)\\to\\operatorname{Ext}^{i+1}_R(X'',Y)$ such that $$0\\to\\operatorname{Hom}_R(X'',Y)\\xrightarrow{v^*}\\operatorname{Hom}_R(X,Y)\\xrightarrow{u^*}\\operatorname{Hom}_R(X',Y)\\xrightarrow{\\delta^0}\\operatorname{Ext}^1_R(X'',Y)\\xrightarrow{v^*}\\operatorname{Ext}^1_R(X,Y)\\xrightarrow{u^*}\\operatorname{Ext}^1_R(X',Y)\\xrightarrow{\\delta^1}\\operatorname{Ext}^2_R(X'',Y)\\to\\cdots$$ is exact. Here $u^*$ and $v^*$ are precomposition with $u$ and $v$; in particular, for each $i\\ge0$, $\\operatorname{Ext}^i_R(X,Y)\\to\\operatorname{Ext}^i_R(X',Y)\\to\\operatorname{Ext}^{i+1}_R(X'',Y)$ is exact at its middle group.",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Algebra, Lemma Tag 065P (lemma-reverse-long-exact-seq-ext, line 17660), tag verified in tags/tags"
+ },
+ "stmt_deps": ["def-weil-pbc-exact-sequence", "def-pc-ext"],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "long exact sequence Ext in first contravariant variable for short exact sequence",
+   "results": "CategoryTheory.Abelian.Ext.contravariantSequence_exact and contravariant_sequence_exact₁'/₂'/₃' (Mathlib.Algebra.Homology.DerivedCategory.Ext.ExactSequences)",
+   "date": "2026-10-10",
+   "verdict": "match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Abelian.Ext.contravariantSequence_exact",
+   "results": "contravariantSequence_exact hS Y n₀ n₁ (1+n₀=n₁) gives exactness of the six-term Ext window",
+   "date": "2026-10-10",
+   "verdict": "match"
+  },
+  {
+   "tool": "grep",
+   "query": "rg 'contravariantSequence_exact|contravariant_sequence_exact' Mathlib/Algebra/Homology/DerivedCategory/Ext/ExactSequences.lean; sed -n '257,273p' of that file",
+   "results": "ExactSequences.lean:257-268 defines contravariantSequence and proves its exactness; :277-295 gives elementwise exactness lemmas; :299 gives the degree-zero injection",
+   "date": "2026-10-10",
+   "verdict": "match, source read"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "CategoryTheory.Abelian.Ext.contravariantSequence_exact; CategoryTheory.Abelian.Ext.precomp_mk₀_injective_of_epi",
+  "file": "Mathlib/Algebra/Homology/DerivedCategory/Ext/ExactSequences.lean",
+  "line": 268,
+  "how": "The six-term sequence for each degree i is contravariantSequence_exact at line 268 (sequence defined lines 257-266), with C = ModuleCat R, S the given short exact sequence, Y the given module, n₀=i and n₁=i+1. The degree-zero initial injection is precomp_mk₀_injective_of_epi at line 299 for v, which is epic by short exactness; both lines were read."
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "created": {"by": "worker", "item": "lem-weil-pbc-projective-dimension-ses-kernel", "date": "2026-10-10"},
+ "lean_audit": {"master": {"state": "none"}, "slopmaster2": {"state": "none"}},
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1"
+}

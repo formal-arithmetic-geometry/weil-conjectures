@@ -17,7 +17,7 @@
     "lem-weil-pbc-finite-etale-lifting-essential-surjectivity"
    ]
   },
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "In a short exact sequence, a bound n on the middle term and n+1 on the quotient bound the submodule by n",
@@ -30,9 +30,52 @@
   "def-weil-pbc-exact-sequence",
   "def-weil-pbc-finite-global-dimension"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Fix an arbitrary $R$-module $N$ and set $i=m+1$. By [lem-weil-pbc-projective-dimension-ext-characterization] (Stacks 065R), the assumed resolution of $M$ of length $\\le m$ makes $\\operatorname{Ext}^{i}_R(M,N)=0$. Applying the same characterization with $n=m+1$ to the assumed resolution of $M''$ gives $\\operatorname{Ext}^{i+1}_R(M'',N)=0$. Here $i\\ge1$, including when $m=0$.",
+   "uses": [
+    "lem-weil-pbc-projective-dimension-ext-characterization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra, Lemma Tag 065S (lemma-exact-sequence-projective-dimension), proof invoking Lemma Tag 065R (lemma-projective-dimension-ext)"
+   }
+  },
+  {
+   "text": "For the given short exact sequence [def-weil-pbc-exact-sequence], [lem-weil-pbc-ext-long-exact-first-variable] (Stacks 065P) gives an exact segment $\\operatorname{Ext}^{i}_R(M,N)\\xrightarrow{u^*}\\operatorname{Ext}^{i}_R(M',N)\\xrightarrow{\\delta^i}\\operatorname{Ext}^{i+1}_R(M'',N)$. Both outer groups vanish by Step 1. Thus $\\ker(\\delta^i)=\\operatorname{Ext}^{i}_R(M',N)=\\operatorname{im}(u^*)=0$; hence $\\operatorname{Ext}^{m+1}_R(M',N)=0$.",
+   "uses": [
+    "def-weil-pbc-exact-sequence",
+    "lem-weil-pbc-ext-long-exact-first-variable"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra, Lemma Tag 065S (lemma-exact-sequence-projective-dimension), proof invoking Lemma Tag 065P (lemma-reverse-long-exact-seq-ext)"
+   }
+  },
+  {
+   "text": "Because $N$ was arbitrary, [lem-weil-pbc-projective-dimension-ext-characterization] (Stacks 065R), now in its Ext-vanishing-to-resolution direction with $X=M'$ and $n=m$, supplies a projective resolution of $M'$ of length $\\le m$, as claimed.",
+   "uses": [
+    "lem-weil-pbc-projective-dimension-ext-characterization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra, Lemma Tag 065S (lemma-exact-sequence-projective-dimension), proof invoking Lemma Tag 065R (lemma-projective-dimension-ext)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-exact-sequence",
+  "lem-weil-pbc-projective-dimension-ext-characterization",
+  "lem-weil-pbc-ext-long-exact-first-variable"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Algebra, Lemma Tag 065S (lemma-exact-sequence-projective-dimension), part (1), proof via Tags 065R and 065P"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -70,7 +113,7 @@
   "line": 213,
   "how": "(hS : S.ShortExact) (n) (h₂ : HasProjectiveDimensionLT S.X₂ n) (h₃ : HasProjectiveDimensionLT S.X₃ (n + 1)) : HasProjectiveDimensionLT S.X₁ n (lines 213-221, read with sed -n), in ModuleCat R with n = m+1. Mathlib's HasProjectiveDimensionLT is defined by vanishing of Ext; that it agrees with 'has a projective resolution of length <= m' (Stacks 065R(1)<=>(3)) is itself a theorem not in Mathlib, so the node is not a leaf (point B8)."
  },
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "worker",
@@ -91,5 +134,18 @@
  },
  "chapter": "sec-proper-base-change",
  "unit": "sk-thm-p1",
- "reviewed": "2026-10-10 L: statement checked against 065S (1); the Mathlib candidate hasProjectiveDimensionLT_X1 uses the Ext-defined dimension, whose agreement with resolutions is a theorem Mathlib lacks"
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "group": "E1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed by the lead of E1; spot-checked by L: L: 065S chain read (065R both directions, 065P segment); Mathlib lines 268 and 299 of Ext/ExactSequences.lean read"
+ },
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "lem-weil-pbc-projective-dimension-ses-kernel",
+  "worker": "stage1",
+  "summary": "Split Stacks 065S(1) into the 065R projective-resolution/Ext-vanishing characterization and the 065P contravariant long exact Ext sequence. The middle Ext group in degree m+1 is zero because the adjacent groups for M and M'' vanish. The 065P node is a Mathlib leaf; 065R remains unsplit because Mathlib defines projective dimension by Ext vanishing and has no bounded-resolution equivalence.",
+  "blueprint": "Searched all blueprint nodes with tools/blueprint_refs.py for 'projective dimension', 'exact sequence projective', '065S', 'Ext groups vanish', 'projective resolution', and 'long exact sequence Ext'. The item and both new nodes are consequences of step 7 of thm-weil-pbc-finite-etale-lifting through the recorded via chain; no blueprint node states the same algebraic lemma, so same_as is []."
+ }
 }

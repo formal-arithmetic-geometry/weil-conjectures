@@ -1,0 +1,64 @@
+{
+ "id": "lem-weil-pbc-projective-dimension-ext-characterization",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-finite-etale-lifting",
+   "place": "step 7 of its split, through the proof of Stacks 065S (1): the projective-dimension/Ext characterization 065R",
+   "via": [
+    "lem-weil-pbc-projective-dimension-ses-kernel",
+    "lem-weil-pbc-well-ordered-union-projective-dimension",
+    "lem-weil-pbc-global-dimension-finite-modules-suffice",
+    "lem-weil-pbc-regular-local-finite-gl-dim",
+    "lem-weil-pbc-regular-local-localization",
+    "lem-weil-pbc-complete-local-g-ring",
+    "lem-weil-pbc-g-ring-maximal-ideal-criterion",
+    "lem-weil-pbc-henselization-pair-g-ring",
+    "lem-weil-pbc-finite-etale-lifting-limit-descent",
+    "lem-weil-pbc-finite-etale-lifting-essential-surjectivity"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "A bounded projective resolution is equivalent to vanishing of one Ext degree",
+ "statement": "Let $R$ be a commutative ring, $X$ an $R$-module, and $n\\ge0$ an integer. The following are equivalent: (1) $X$ has a projective resolution of length $\\le n$ [def-weil-pbc-finite-global-dimension], namely an exact sequence $0\\to P_n\\to\\cdots\\to P_0\\to X\\to0$ with all $P_i$ projective; (2) for every $R$-module $Y$, the group $\\operatorname{Ext}^{n+1}_R(X,Y)$ [def-pc-ext] is zero. Equivalently, in (2) one may require $\\operatorname{Ext}^{i}_R(X,Y)=0$ for every $Y$ and every $i\\ge n+1$.",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Algebra, Lemma Tag 065R (lemma-projective-dimension-ext, line 26725), parts (1)--(3), tag verified in tags/tags"
+ },
+ "stmt_deps": ["def-weil-pbc-finite-global-dimension", "def-pc-ext"],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "projective resolution of length n of module if and only if Ext n+1 vanishes for all modules",
+   "results": "CategoryTheory.hasProjectiveDimensionLT_iff, HasProjectiveDimensionLT.mk, ModuleCat.projectiveResolution (unbounded)",
+   "date": "2026-10-10",
+   "verdict": "no match: Mathlib's projective dimension is itself defined by Ext vanishing, not by a bounded resolution"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "projective dimension at most n characterized by a projective resolution of length n or vanishing of Ext beyond n",
+   "results": "CategoryTheory.hasProjectiveDimensionLT_iff, projectiveDimension_le_iff, instHasProjectiveDimensionLTOfNatNatOfProjective",
+   "date": "2026-10-10",
+   "verdict": "no match: these characterize only Mathlib's Ext-defined dimension"
+  },
+  {
+   "tool": "grep",
+   "query": "rg 'hasProjectiveDimensionLT|HasProjectiveDimensionLE|ProjectiveResolution' Mathlib/CategoryTheory/Abelian/Projective/Dimension.lean and Mathlib/Algebra/Category/ModuleCat/LeftResolution.lean",
+   "results": "Dimension.lean:43-54 defines HasProjectiveDimensionLT/LE by Ext vanishing; :84 hasProjectiveDimensionLT_iff restates that definition; ModuleCat.projectiveResolution is unbounded",
+   "date": "2026-10-10",
+   "verdict": "no match: no bounded-resolution equivalence"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "merged_into": null,
+ "created": {"by": "worker", "item": "lem-weil-pbc-projective-dimension-ses-kernel", "date": "2026-10-10"},
+ "lean_audit": {"master": {"state": "none"}, "slopmaster2": {"state": "none"}},
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1"
+}
