@@ -3,24 +3,38 @@
  "blueprint": {
   "is": "def-sc-field-extension",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "definition",
  "title": "Field extensions, base change, pullback maps",
- "statement": "Let $k\\subseteq k'$ be an extension of algebraically closed fields\nand let $C$ be a curve over $k$. Put\n\n$$\n\\pi_{k'}:C_{k'}:=C\\times_kk'\\longrightarrow C,\n\\qquad\nF_{k'}:=\\pi_{k'}^{-1}F\n$$\n\nfor an etale sheaf $F$ on $C_{\\Et}$, and let\n\n$$\n\\rho^q_{k'/k}(C,F):H^q(C_{\\Et},F)\\longrightarrow\nH^q((C_{k'})_{\\Et},F_{k'})\n$$\n\nbe the pullback map.",
+ "statement": "Let $k\\subseteq k'$ be an extension [def-pc-field-extension] of algebraically closed fields\nand let $C$ be a curve over $k$ [def-sc-curves]. Put\n\n$$\n\\pi_{k'}:C_{k'}:=C\\times_kk'\\longrightarrow C,\n\\qquad\nF_{k'}:=\\pi_{k'}^{-1}F\n$$\n\nfor an etale sheaf $F$ on $C_{\\Et}$ [def-weil-pbc-abelian-etale-sheaves], where $C_{k'}$ is the base change of $C$ along $\\operatorname{Spec}k'\\to\\operatorname{Spec}k$ [def-pc-base-change] and $\\pi_{k'}^{-1}$ is the inverse image [def-weil-pbc-inverse-image], and let\n\n$$\n\\rho^q_{k'/k}(C,F):H^q(C_{\\Et},F)\\longrightarrow\nH^q((C_{k'})_{\\Et},F_{k'})\n$$\n\nbe the pullback map [def-weil-pbc-cohomology-pullback] on etale cohomology [def-weil-pbc-etale-cohomology].",
  "source": {
   "document": "literature/blueprint/master/blueprint/sec-curve-estimates/sk-prop-ext-invariance/def-sc-field-extension.md",
   "place": "node def-sc-field-extension, order 1028"
  },
  "stmt_deps": [
-  "def-sc-curves"
+  "def-sc-curves",
+  "def-pc-field-extension",
+  "def-pc-base-change",
+  "def-weil-pbc-abelian-etale-sheaves",
+  "def-weil-pbc-inverse-image",
+  "def-weil-pbc-cohomology-pullback",
+  "def-weil-pbc-etale-cohomology"
  ],
  "proof": [],
  "proof_deps": [],
  "proof_origin": null,
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "grep -rln 'etaleCohomology\\|EtaleCohomology' Mathlib; ls Mathlib/AlgebraicGeometry/Sites (in ~/weil-conjectures-slopmaster2/.lake/packages/mathlib)",
+   "results": "no etale cohomology in Mathlib; Sites/ has only the small etale site and AffineEtale (sheafEquiv); field extensions are Algebra k K with Field K, base change is Scheme pullback, but no cohomology pullback map",
+   "date": "2026-10-10",
+   "verdict": "no match (composite definition; the field-extension part is def-pc-field-extension, already status mathlib)"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [],
  "blueprint_kind": "definition",
@@ -44,5 +58,21 @@
   }
  },
  "chapter": "sec-curve-estimates",
- "unit": "sk-prop-ext-invariance"
+ "unit": "sk-prop-ext-invariance",
+ "split_report": {
+  "date": "2026-10-11",
+  "item": "def-sc-field-extension",
+  "worker": "stage1",
+  "summary": "Checked the project definition against its blueprint source and the available Lean source. It introduces base change of a curve along an extension of algebraically closed fields, pullback of an etale sheaf, and the induced cohomology pullback map. Its only statement dependency is the existing curve definition def-sc-curves; no proof steps or subordinate nodes are required.",
+  "blueprint": "The definition realizes the complete node statement in the blueprint node def-sc-field-extension; there are no proof steps to realize."
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-dfe2402",
+  "group": "C1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-dfe2402 (reviewer sub-agent of L); spot-checked: Statement vs blueprint (matches, no proof steps); compared with def-pc-field-extension and def-pc-base-change (not class b: different notion, def-pc is the generic one); Mathlib grep for etale cohomology (none, recorded). FIX more, RETURN less: C1 - statement used field extension, base change, etale sheaf, inverse image, etale cohomology and the cohomology pullback map without citing the existing nodes; added [def-pc-field-extension] [def-pc-base-change] [def-weil-pbc-abelian-etale-sheaves] [def-weil-pbc-inverse-image] [def-weil-pbc-etale-cohomology] [def-weil-pbc-cohomology-pullback] to the text and stmt_deps, cited [def-sc-curves] in the text, emptied uses_not_cited, recorded the mathlib search.; 1 file(s) fixed by the reviewer"
+ },
+ "lead_note": "2026-10-10 L (R-dfe2402): def-sc-field-extension is not a duplicate of def-pc-field-extension (that is the generic field-extension notion, status mathlib; this is the curve-level base change C_{k'}, sheaf pullback and cohomology map rho^q for algebraically closed k'/k); the statement now cites def-pc-field-extension as primary for the field-extension notion."
 }
