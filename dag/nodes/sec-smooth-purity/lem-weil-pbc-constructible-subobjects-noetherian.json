@@ -3,7 +3,7 @@
  "blueprint": {
   "is": "lem-weil-pbc-constructible-subobjects-noetherian",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "Subsheaves of a constructible sheaf on a Noetherian scheme",
@@ -32,21 +32,36 @@
  "proof": [
   {
    "text": "Let $G\\subset F$, with $F$ constructible. For a constant finite module sheaf\n$\\underline M$ on an irreducible scheme $W$, and a subsheaf\n$H\\subset\\underline M$, put\n$$\n W_m=\\{w:\\ m\\text{ belongs to }H_{\\bar w}\\subset M\\}\n \\qquad(m\\in M).\n$$\nThis is independent of the choice of geometric point above $w$. It is open.\nIndeed, membership is represented by a section of $H$ on an etale\nneighbourhood whose image in $\\underline M$, after refinement, is the\nconstant section $m$. Its image in $W$ is open because a flat, locally\nfinitely presented morphism is open. Such images cover exactly $W_m$. The\nlocal lifts of $m$ glue uniquely, because $H\\to\\underline M$ is injective.",
-   "uses": [],
-   "elementary": null
+   "uses": [
+    "lem-weil-pbc-flat-lfp-open",
+    "lem-weil-pbc-constant-subsheaf-generic"
+   ],
+   "elementary": false
   },
   {
    "text": "Every nonempty $W_m$ contains the generic point of $W$. The finite\nintersection $W^\\circ$ of the nonempty $W_m$'s is therefore nonempty and\nopen. On it membership in $H$ is the fixed submodule\n$M'=H_{\\bar\\eta}\\subset M$. The glued sections give\n$\\underline{M'}\\to H|_{W^\\circ}$, and this is an isomorphism on all stalks,\nhence an isomorphism by conservativity of geometric stalks.",
-   "uses": [],
-   "elementary": null
+   "uses": [
+    "lem-weil-pbc-constant-subsheaf-generic",
+    "lemma-weil-pbc-geometric-stalk-conservative"
+   ],
+   "elementary": false
   },
   {
-   "text": "We now use Noetherian induction on closed subsets of $T$. Pullback to any\nsuch subset preserves the injection, by exactness of geometric stalks, and\npreserves the finite partition defining constructibility. Reducible closed\nsubsets are handled by their finitely many components, using the\nfinitely-many-components lemma for Noetherian schemes and removing the\npreceding components from each partition. For a reduced irreducible closed\nsubset, choose a nonempty open on which $F$ is lisse, and an etale\ntrivialization near its generic point. Removing the other irreducible\ncomponents of this Noetherian trivializing scheme gives a nonempty\nirreducible open $W$. It still dominates the chosen base open: the image of\na nonempty etale open is open and contains its generic point. The preceding\ncalculation gives $W^\\circ$ on which $G$ is constant. Its image $O$ in the\nbase is nonempty and open; $W^\\circ\\to O$ is an etale cover, so $G|_O$ is\nfinite locally constant. Induction supplies a finite lisse partition on the\nproper closed complement. Adjoin $O$ to obtain a partition of the whole\nsubset. At $T$ this proves the assertion. This is the strong subobject\nassertion of [Stacks Project, Section\n59.74](https://stacks.math.columbia.edu/tag/03RY), with its Noetherian\nhypothesis retained.",
-   "uses": [],
-   "elementary": null
+   "text": "We now use Noetherian induction on closed subsets of $T$. Pullback to any\nsuch subset preserves the injection, by exactness of geometric stalks, and\npreserves the finite partition defining constructibility. Reducible closed\nsubsets are handled by their finitely many components, using the\nfinitely-many-components lemma for Noetherian schemes and removing the\npreceding components from each partition. For a reduced irreducible closed\nsubset, choose a nonempty open on which $F$ is lisse (the stratum of the irreducible lisse partition containing the generic point; a locally closed set containing the generic point is open), and an etale\ntrivialization near its generic point. Removing the other irreducible\ncomponents of this Noetherian trivializing scheme gives a nonempty\nirreducible open $W$. It still dominates the chosen base open: the image of\na nonempty etale open is open and contains its generic point. The preceding\ncalculation gives $W^\\circ$ on which $G$ is constant. Its image $O$ in the\nbase is nonempty and open; $W^\\circ\\to O$ is an etale cover, so $G|_O$ is\nfinite locally constant. Induction supplies a finite lisse partition on the\nproper closed complement. Adjoin $O$ to obtain a partition of the whole\nsubset; its parts are locally closed, hence constructible since $T$ is Noetherian (Stacks, Tag 005L), as the definition requires. At $T$ this proves the assertion. This is the strong subobject\nassertion of [Stacks Project, Section\n59.74](https://stacks.math.columbia.edu/tag/03RY), with its Noetherian\nhypothesis retained.",
+   "uses": [
+    "lem-weil-pbc-irreducible-lisse-strata",
+    "lem-weil-pbc-noetherian-finite-components",
+    "lem-weil-pbc-flat-lfp-open",
+    "prop-weil-pbc-geometric-stalks-exact",
+    "lemma-weil-pbc-geometric-stalk-conservative",
+    "lem-weil-pbc-constant-subsheaf-generic"
+   ],
+   "elementary": false
   }
  ],
  "proof_deps": [
+  "lem-weil-pbc-irreducible-lisse-strata",
+  "lem-weil-pbc-constant-subsheaf-generic",
   "lem-weil-pbc-flat-lfp-open",
   "lem-weil-pbc-noetherian-finite-components",
   "lemma-weil-pbc-geometric-stalk-conservative",
@@ -59,7 +74,7 @@
  },
  "mathlib_searches": [],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [
   "proof_cites_literature",
@@ -104,5 +119,20 @@
   }
  },
  "chapter": "sec-smooth-purity",
- "unit": "sk-prop-sf-cbc"
+ "unit": "sk-prop-sf-cbc",
+ "split_report": {
+  "date": "2026-10-11",
+  "item": "lem-weil-pbc-constructible-subobjects-noetherian",
+  "worker": "stage1",
+  "summary": "Checked the statement against Stacks Tags 03RY and 03RZ and found no sorry-free declaration stating arbitrary constructible subsheaf closure. Added one smaller unsplit lemma for generic constancy of a subsheaf of a constant finite sheaf, searched in Mathlib, and rewrote the three proof steps to cite the existing irreducible-lisse-strata, finite-components, flat-open, stalk-exactness and stalk-conservativity nodes. The final step spells out the Noetherian induction and gluing of the generic open with the inductive partition of its closed complement.",
+  "blueprint": "Realizes the blueprint proof paragraphs: the generic W_m calculation (steps 1-2) and the Noetherian induction over irreducible lisse strata (step 3)."
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-csn2646",
+  "group": "C1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-csn2646 (reviewer sub-agent of L); spot-checked: Checked def-weil-pbc-constructible-complexes (finite partition into locally closed constructible subschemes with lisse restrictions) against the step-3 induction; checked the new generic-constancy node is true (W_m open via flat-lfp images, contains eta, stalks of H on W° equal M') and not a duplicate of the four 03RZ/03RY nodes. FIX more, RETURN less: (1) C1: step 1 cited irreducible-lisse-strata but uses openness of flat lfp images; now cites lem-weil-pbc-flat-lfp-open; step 3 uses the generic lisse open and now cites lem-weil-pbc-irreducible-lisse-strata (missed by the second reading). (2) C1: locally closed parts constructible on Noetherian T (Stacks Tag 005L) folded into step 3 text, required by the definition. (3) B3: new node statement rewritten in TeX, same content.; 2 file(s) fixed by the reviewer"
+ }
 }
