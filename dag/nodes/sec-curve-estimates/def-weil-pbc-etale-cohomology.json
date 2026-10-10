@@ -3,7 +3,7 @@
  "blueprint": {
   "is": "def-weil-pbc-etale-cohomology",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "definition",
  "title": "Etale cohomology of sheaves",
@@ -15,14 +15,45 @@
  "stmt_deps": [
   "def-weil-pbc-etale-site",
   "def-weil-pbc-kinjective-resolutions",
-  "def-weil-pbc-etale-sheaves"
+  "def-weil-pbc-etale-sheaves",
+  "def-weil-pbc-derived-categories",
+  "def-weil-pbc-global-sections-functor"
  ],
  "proof": [],
  "proof_deps": [],
  "proof_origin": null,
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "rg -n 'rightDerivedGlobalSections|noncomputable def cohomology|K-injective.*cohomology' Mathlib/CategoryTheory/Sites Mathlib/Algebra/Homology/DerivedCategory",
+   "results": "Mathlib contains generic Sheaf.Γ and DerivedCategory.homologyFunctor, but no etale K-injective cohomology definition combining these notions.",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "etale cohomology of a sheaf as homology of derived global sections computed by a K-injective resolution",
+   "results": "Generic DerivedCategory.homologyFunctor and sheaf global-sections results; no exact project definition.",
+   "date": "2026-10-10",
+   "verdict": "generalization only"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "derived global sections and cohomology of sheaves on a site via K-injective resolution",
+   "results": "Generic sheaf cohomology and derived-category APIs; no exact small-etale K-injective declaration.",
+   "date": "2026-10-10",
+   "verdict": "generalization only"
+  },
+  {
+   "tool": "loogle",
+   "query": "DerivedCategory.homologyFunctor _ _",
+   "results": "DerivedCategory.homologyFunctor; it provides homology of a derived-category object but not the combined etale cohomology definition.",
+   "date": "2026-10-10",
+   "verdict": "generalization only"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [],
  "blueprint_kind": "definition",
@@ -48,5 +79,20 @@
   }
  },
  "chapter": "sec-curve-estimates",
- "unit": "sk-prop-h2"
+ "unit": "sk-prop-h2",
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "def-weil-pbc-etale-cohomology",
+  "worker": "stage1",
+  "summary": "Checked the imported definition against the slopmaster2 source and the whole DAG/blueprint. No sorry-free declaration or blueprint duplicate states the exact K-injective, bounded-below etale cohomology definition. The source declarations AlgebraicGeometry.Etale.rightDerivedGlobalSections and AlgebraicGeometry.Etale.cohomology are broader categorical constructions and therefore are not attachments. Added the generic global-sections leaf and cited the existing derived-category node for D+, derived homology, and H^q.",
+  "blueprint": "The item is the blueprint definition itself; its statement clauses define H^q(T_Et,F) using a K-injective resolution and define RGamma and H^q for K in D+.",
+  "same_as_search": "python3 tools/blueprint_refs.py search 'derived global sections' and searches for etale cohomology found no other blueprint node stating the same definition."
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "group": "J1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed by the lead of J1; spot-checked by L: L: re-push after return, reviewed in full by a reviewer sub-agent (FIX: K-injective resolution existence cited, inline citations, from.place): return points repaired, Sheaf.Γ line 64 verified"
+ }
 }
