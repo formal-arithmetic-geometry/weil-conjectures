@@ -1,8 +1,8 @@
 # Work queue
 
-879 items; claim with `tools/claim.py next <group> [--stage N]`.
+876 items; claim with `tools/claim.py next <group> [--stage N]`.
 
-## Stage 1: nodes to split (91)
+## Stage 1: nodes to split (88)
 
 | node | distance to a target | Lean state on the done branch |
 |---|---|---|
@@ -17,7 +17,6 @@
 | `lem-pc-qcqs-sheaf-rhom-adjunction` | 3020 | none |
 | `lem-pc-tor-independent-perfect-tensor-base-change` | 3020 | none |
 | `lem-sc-affine-perfect-open-represent-cohomology` | 3020 | none |
-| `lem-sc-perfect-into-support-on-T` | 3020 | none |
 | `lem-sc-affine-perfect-plus-locally-free` | 3021 | none |
 | `lem-sc-derived-internal-hom-adjunction` | 3021 | none |
 | `lem-pc-derived-pullback-tensor-product` | 3022 | none |
@@ -58,7 +57,6 @@
 | `lem-kun-cp-approximation` | - | none |
 | `lem-sc-zariski-flasque-acyclic` | - | none |
 | `lem-weil-geometrically-connected-check-after-extension` | - | none |
-| `lem-weil-pbc-lisse-generic-kernel` | - | none |
 | `lemma-nagata-morphism-eq-eventually` | - | none |
 | `lemma-nagata-qc-open-eq-eventually` | - | none |
 | `prop-pur-kinjective-resolutions-exist` | - | none |
@@ -75,7 +73,6 @@
 | `def-wf-lie-algebra-derivation` | - | rests_on_sorry |
 | `lem-kun-separable-smooth-colimit` | - | none |
 | `lem-kun-stalk-as-pullback` | - | none |
-| `lem-pc-hilb-functorial` | - | none |
 | `lem-pc-perfect-locus` | - | sorry_here |
 | `lem-pur-derived-change-of-rings` | - | none |
 | `lem-sc-p1-hi-vanishing` | - | rests_on_sorry |
@@ -891,7 +888,7 @@
 | `lem-weil-pbc-projective-space-zero-isomorphism` | 4 | state |
 | `def-nagata-fixed-base-separated-stage` | 6 | state |
 
-Not open yet: 1616 nodes that wait for a statement dependency, 129 nodes that wait for stage 1.
+Not open yet: 1619 nodes that wait for a statement dependency, 126 nodes that wait for stage 1.
 
 ## Stage 3: modules to prove (0)
 
