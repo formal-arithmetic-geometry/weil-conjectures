@@ -11,9 +11,51 @@
   "def-weil-pbc-noetherian-ring",
   "def-weil-finitely-generated-module"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Let $A=\\operatorname{Ass}_R(M)$, the associated primes defined by annihilators as in the statement. It is finite by [lem-weil-pbc-noetherian-associated-primes-finite], since $R$ is Noetherian and $M$ is finite. For every $\\mathfrak q\\in A$, the ideal $\\mathfrak q$ is proper, hence $\\mathfrak q\\subseteq\\mathfrak m$ because $R$ is local. By the hypothesis $\\mathfrak q\\ne\\mathfrak m$, so $\\mathfrak m\\not\\subseteq\\mathfrak q$.",
+   "uses": [
+    "lem-weil-pbc-noetherian-associated-primes-finite"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra, Lemma Tag 00LL (lemma-ideal-nonzerodivisor, lines 15471-15494), condition (2) for I = m; Lemma Tag 00LC (lemma-finite-ass, line 15176)"
+   }
+  },
+  {
+   "text": "If $A$ is nonempty, list its distinct members as $\\mathfrak q_1,\\ldots,\\mathfrak q_r$ with $r\\ge1$. Step 1 gives $\\mathfrak m\\not\\subseteq\\mathfrak q_i$ for each $i$, and each $\\mathfrak q_i$ is prime. Prime avoidance [lem-weil-pbc-prime-avoidance], applied to $J=\\mathfrak m$ and the $\\mathfrak q_i$, yields $x\\in\\mathfrak m$ outside every member of $A$. If $A$ is empty, take $x=0\\in\\mathfrak m$, which is also outside every member of $A$.",
+   "uses": [
+    "lem-weil-pbc-prime-avoidance"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra, Lemma Tag 00LL (lemma-ideal-nonzerodivisor, lines 15486-15494), invoking Lemma Tag 00DS (lemma-silly, line 2563)"
+   }
+  },
+  {
+   "text": "The chosen $x$ belongs to no associated prime of $M$. By [lem-weil-pbc-noetherian-module-zerodivisors-union-associated-primes], $x$ is therefore not a zerodivisor on $M$: if $xz=0$, then $z=0$. Thus multiplication by $x$ is injective. This also covers $A=\\varnothing$: then the union of associated primes is empty, so even $x=0$ is regular on $M$ (necessarily $M=0$).",
+   "uses": [
+    "lem-weil-pbc-noetherian-module-zerodivisors-union-associated-primes"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra, Lemma Tag 00LL (lemma-ideal-nonzerodivisor, lines 15486-15494), invoking Lemma Tag 00LD (lemma-ass-zero-divisors, line 15278)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-noetherian-associated-primes-finite",
+  "lem-weil-pbc-prime-avoidance",
+  "lem-weil-pbc-noetherian-module-zerodivisors-union-associated-primes"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Algebra, Lemma Tag 00LL (lemma-ideal-nonzerodivisor, lines 15471-15494), implication (2) => (1) for I = m"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -42,7 +84,7 @@
   "declarations": "biUnion_associatedPrimes_eq_compl_regular (Mathlib/RingTheory/Regular/IsSMulRegular.lean:124), associatedPrimes.finite (Mathlib/RingTheory/Ideal/AssociatedPrime/Finiteness.lean:158), Ideal.subset_union_prime_finite (Mathlib/RingTheory/Ideal/Operations.lean:1217)",
   "why_not_leaf": "three lemmas chained (zerodivisors = union of associated primes, finiteness, prime avoidance), not one per clause"
  },
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "worker",
@@ -62,5 +104,18 @@
   }
  },
  "chapter": "sec-proper-base-change",
- "unit": "sk-thm-p1"
+ "unit": "sk-thm-p1",
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "lem-weil-pbc-nonzerodivisor-if-maximal-not-associated",
+  "worker": "stage1",
+  "summary": "Specialized Stacks 00LL to the maximal ideal: associated primes are finite (existing 00LC leaf), none contains the maximal ideal by the hypothesis, prime avoidance (existing 00DS leaf) supplies an element outside their union, and a new unsplit node for Stacks 00LD makes that element a nonzerodivisor. The new node records Mathlib's union theorem and the separate equivalence of associated-prime notions as candidates. The empty associated-prime case is explicit."
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "group": "F1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed by the lead of F1; spot-checked by L: 00LL for m: Ass finite, prime avoidance against the associated primes, new 00LD module node (the existing lem-weil-pbc-noetherian-zerodivisors-union-associated-primes covers only M = R, so not a duplicate)"
+ }
 }

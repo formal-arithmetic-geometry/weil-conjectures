@@ -1,0 +1,61 @@
+{
+ "id": "lem-weil-pbc-noetherian-module-zerodivisors-union-associated-primes",
+ "kind": "statement",
+ "title": "Zero divisors on a module over a Noetherian ring form the union of its associated primes",
+ "statement": "Let $R$ be a Noetherian ring [def-weil-pbc-noetherian-ring] and $M$ an $R$-module. An *associated prime* of $M$ is a prime ideal $\\mathfrak q\\subset R$ equal to $\\operatorname{Ann}_R(z)=\\{a\\in R:az=0\\}$ for some $z\\in M$; write $\\operatorname{Ass}_R(M)$ for their set. An element $x\\in R$ is a *zerodivisor on $M$* if $xz=0$ for some nonzero $z\\in M$. Then the set of zerodivisors on $M$ equals $\\bigcup_{\\mathfrak q\\in\\operatorname{Ass}_R(M)}\\mathfrak q$.",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Algebra, Lemma Tag 00LD (lemma-ass-zero-divisors, line 15278); associated primes: Definition Tag 00LA (definition-associated, line 15108)"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-noetherian-ring"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "For a module over a Noetherian ring, the set of zero divisors on the module is the union of its associated primes",
+   "results": "biUnion_associatedPrimes_eq_zero_divisors (Mathlib.RingTheory.Ideal.AssociatedPrime.Basic), plus the equivalent biUnion_associatedPrimes_eq_compl_regular",
+   "date": "2026-10-10",
+   "verdict": "candidate: associatedPrimes uses a radical-based definition; its agreement with the stated annihilator notion needs isAssociatedPrime_iff"
+  },
+  {
+   "tool": "loogle",
+   "query": "biUnion_associatedPrimes_eq_zero_divisors",
+   "results": "biUnion_associatedPrimes_eq_zero_divisors (R) (M) [IsNoetherianRing R]: union of associated primes equals the set of scalars killing a nonzero element of M",
+   "date": "2026-10-10",
+   "verdict": "candidate: the declaration uses Mathlib associatedPrimes, whose annihilator interpretation requires another theorem"
+  },
+  {
+   "tool": "grep",
+   "query": "rg -n 'biUnion_associatedPrimes_eq_zero_divisors|isAssociatedPrime_iff' Mathlib/RingTheory/Ideal/AssociatedPrime/Basic.lean in the project's pinned Mathlib checkout",
+   "results": "Basic.lean:227-228 gives the exact union of zero divisors for a Noetherian ring and arbitrary module; Basic.lean:114-116 identifies associated primes with annihilators in a Noetherian ring. Verified against the project's pinned Mathlib source.",
+   "date": "2026-10-10",
+   "verdict": "candidate: the union theorem and the equivalence of associated-prime notions are separate declarations"
+  }
+ ],
+ "mathlib_match": null,
+ "mathlib_candidate": {
+  "declarations": "biUnion_associatedPrimes_eq_zero_divisors (Mathlib/RingTheory/Ideal/AssociatedPrime/Basic.lean:227-228); isAssociatedPrime_iff (same file:114-116)",
+  "why_not_leaf": "The first theorem uses Mathlib's IsAssociatedPrime, defined via a radical of an annihilator; the second theorem is needed to identify it with the stated prime-annihilator notion. This is a separate equivalence theorem, so the match is not exact or a one-line specialization under delivery-errors B8."
+ },
+ "status": "unsplit",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-nonzerodivisor-if-maximal-not-associated",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1"
+}
