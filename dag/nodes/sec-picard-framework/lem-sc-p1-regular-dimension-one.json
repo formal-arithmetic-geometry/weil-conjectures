@@ -25,9 +25,84 @@
   "def-weil-regular-scheme",
   "def-pc-dimension"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Use the standard affine cover $X=U_0\\cup U_1$ with $U_0=\\operatorname{Spec}k[t]$ and $U_1=\\operatorname{Spec}k[s]$ from [def-sc-p1-standard]. Each affine spectrum is quasi-compact by [lem-weil-pbc-spec-basic-opens-unit-ideal-quasi-compact](iii), and a finite union of quasi-compact opens is quasi-compact. The coordinate rings are Noetherian by [lem-sc-p1-polynomial-noetherian], so the definition [pqf-def-locnoeth] gives that $X$ is locally Noetherian and hence Noetherian.",
+   "uses": [
+    "def-sc-p1-standard",
+    "lem-weil-pbc-spec-basic-opens-unit-ideal-quasi-compact",
+    "lem-sc-p1-polynomial-noetherian",
+    "pqf-def-locnoeth"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Example Tag 01JE (schemes-example-projective-line), standard affine cover"
+   }
+  },
+  {
+   "text": "Every point of $X$ lies in one of the two affine charts. On either chart the ring is a polynomial ring in one variable over $k$, hence regular by [lem-sc-p1-polynomial-regular]. Therefore each point has an affine neighbourhood with Noetherian regular coordinate ring, which is exactly the defining condition [def-weil-regular-scheme] for $X$ to be regular.",
+   "uses": [
+    "def-sc-p1-standard",
+    "lem-sc-p1-polynomial-regular",
+    "def-weil-regular-scheme"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Example Tag 01JE (schemes-example-projective-line), regularity from standard charts"
+   }
+  },
+  {
+   "text": "For a point $x$ in a chart $U_i=\\operatorname{Spec}A_i$, the local ring $\\mathcal O_{X,x}$ is a localization $(A_i)_{\\mathfrak p}$ at the corresponding prime by [lem-weil-pbc-affine-open-stalk-localization]. Its dimension is the height of $\\mathfrak p$ by [lem-weil-pbc-localization-dimension-chains-below-prime], and this is at most $\\dim A_i$ by [lem-pc-ring-dimension-supremum-heights]. Since $A_i\\cong k[t]$ or $k[s]$ and [lem-sc-p1-polynomial-dimension-one] gives dimension one, every local ring has dimension at most one. At the point corresponding to the prime $(t)\\subset k[t]$, the strict chain $(0)\\subsetneq(t)$ shows the local ring has dimension at least one, so $\\dim X=1$ by [def-pc-dimension].",
+   "uses": [
+    "def-sc-p1-standard",
+    "lem-weil-pbc-affine-open-stalk-localization",
+    "lem-weil-pbc-localization-dimension-chains-below-prime",
+    "lem-pc-ring-dimension-supremum-heights",
+    "lem-sc-p1-polynomial-dimension-one",
+    "def-pc-dimension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Lemma Tags 00KG and 00OQ, applied to the two standard affine charts"
+   }
+  },
+  {
+   "text": "The conclusions of Steps 1--3 are respectively quasi-compact and locally Noetherian, regular, and dimension exactly one; unfolding the definitions of Noetherian scheme, regular scheme, and [def-pc-dimension] yields all clauses of the statement.",
+   "uses": [
+    "def-weil-pbc-quasi-compact-scheme",
+    "pqf-def-locnoeth",
+    "def-weil-regular-scheme",
+    "def-pc-dimension"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Example Tag 01JE (schemes-example-projective-line)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sc-p1-standard",
+  "lem-weil-pbc-spec-basic-opens-unit-ideal-quasi-compact",
+  "lem-sc-p1-polynomial-noetherian",
+  "pqf-def-locnoeth",
+  "lem-sc-p1-polynomial-regular",
+  "def-weil-regular-scheme",
+  "lem-weil-pbc-affine-open-stalk-localization",
+  "lem-weil-pbc-localization-dimension-chains-below-prime",
+  "lem-pc-ring-dimension-supremum-heights",
+  "lem-sc-p1-polynomial-dimension-one",
+  "def-pc-dimension",
+  "def-weil-pbc-quasi-compact-scheme"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/schemes.tex",
+  "place": "Example Tag 01JE (schemes-example-projective-line), with the standard dimension and regularity assertions"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -52,12 +127,29 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "chapter": "sec-picard-framework",
  "unit": "sk-thm-picard-duality",
  "created": {
   "item": "lem-sc-p1-ext-coherent-dim-one-vanishing",
   "by": "worker",
   "date": "2026-10-10"
- }
+ },
+ "split_report": {
+  "date": "2026-10-11",
+  "item": "lem-sc-p1-regular-dimension-one",
+  "worker": "stage1",
+  "summary": "Repaired the relabelling split by writing the standard two-chart argument directly. The steps use affine-spectrum quasi-compactness, polynomial Noetherianity and regularity, and local-ring dimension via localization heights; the strict chain (0) subsetneq (t) supplies the lower bound.",
+  "blueprint": "Realizes the parenthetical specialization from the regular finite-dimensional scheme statement to P^1_k in blueprint node thm-sc-p1-duality: standard affine cover, chart ring properties, and local-ring dimension computation.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-prd2",
+  "group": "H1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-prd2 (reviewer sub-agent of L); spot-checked: Repaired re-push after the 16:22 return; all three points repaired: (1) the relabelling nodes lem-sc-p1-noetherian / lem-sc-p1-local-regular are gone, steps 1-2 argue from the standard cover of def-sc-p1-standard (U_0=Spec k[t], U_1=Spec k[s]): quasi-compact by lem-weil-pbc-spec-basic-opens-unit-ideal-quasi-compact(iii) plus finite union, locally Noetherian by pqf-def-locnoeth with lem-sc-p1-polynomial-noetherian, regular by the affine-neighbourhood clause of def-weil-regular-scheme with lem-sc-p1-polynomial-regular (whose statement includes Noetherian); (2) the P({0,1}) topological-dimension node is no longer used; step 3 computes def-pc-dimension (sup of dim O_{X,x}) via lem-weil-pbc-affine-open-stalk-localization(c) (O_{X,x} = (A_i)_p), lem-weil-pbc-localization-dimension-chains-below-prime (dim = ht p), lem-pc-ring-dimension-supremum-heights (ht p <= dim A_i) and lem-sc-p1-polynomial-dimension-one, lower bound from the chain (0) subsetneq (t) in k[t] at the point (t); lem-sc-p1-dimension-lower-bound deleted; all off-unit citations are generic Mathlib-status facts or definitions (C8 black-box use); (3) step 4 is the definitional assembly of the item's own clauses (Noetherian = qc + locally Noetherian as stated). Source Stacks 01JE (schemes-example-projective-line), 00OQ (k[x_1..x_n] regular), 00KG. Mathlib leaves verified at the pinned Mathlib: Polynomial.isNoetherianRing RingTheory/Polynomial/Basic.lean:759, Polynomial.isRegularRing_of_isRegularRing RingTheory/RegularLocalRing/Polynomial.lean:78 (with IsRegularRing extends IsNoetherianRing, Defs.lean:92, and the field node lem-weil-pbc-field-regular-ring), IsPrincipalIdealRing.ringKrullDim_eq_one RingTheory/KrullDimension/PID.lean:37 (domain, PID, not a field: k[t]). Small cases: k[t]_(t) has dimension 1, k[t]_(0) dimension 0, chart symmetry t<->s. Start Sat Oct 10 04:48:29 PM UTC 2026, end Sat Oct 10 04:49:15 PM UTC 2026."
+ },
+ "lead_note": "2026-10-10 L (R-prd2): new node lem-sc-p1-polynomial-noetherian: source.place cites Tag 00EN (a glueing section); the Hilbert basis lemma is Tag 00FN (algebra-lemma-Noetherian-permanence). source is a maintainer field, not corrected by the reviewer."
 }
