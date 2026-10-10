@@ -917,6 +917,118 @@ theorem classH1_eq_add_of_equivariant (P P' P'' : Torsor G)
   rw [h₁, h₂, h₃]
   abel
 
+
+omit [J.WEqualsLocallyBijective AddCommGrpCat.{w}] in
+/-- The connecting homomorphism `Γ(Q) → H¹(G)` is natural: for a morphism `(φ, χ, ψ)` from a
+short exact sequence `0 → G → I → Q → 0` to `0 → G' → I' → Q' → 0`, the image of `δ(s)` under
+`φ` is `δ'(ψ(s))`. -/
+lemma map_δ_of_comp_eq {G' I Q I' Q' : Sheaf J AddCommGrpCat.{w}} {ι : G ⟶ I} {d : I ⟶ Q}
+    {w : ι ≫ d = 0} (hS : (ShortComplex.mk ι d w).ShortExact) {ι' : G' ⟶ I'} {d' : I' ⟶ Q'}
+    {w' : ι' ≫ d' = 0} (hS' : (ShortComplex.mk ι' d' w').ShortExact) (φ : G ⟶ G')
+    (χ : I ⟶ I') (ψ : Q ⟶ Q') (h₁ : ι ≫ χ = φ ≫ ι') (h₂ : d ≫ ψ = χ ≫ d')
+    (s : Q.obj.obj (op T)) :
+    H.map φ 1 (H.δ hS hT s) = H.δ hS' hT (ψ.hom.app (op T) s) := by
+  let f : ShortComplex.mk ι d w ⟶ ShortComplex.mk ι' d' w' :=
+    { τ₁ := φ
+      τ₂ := χ
+      τ₃ := ψ
+      comm₁₂ := h₁.symm
+      comm₂₃ := h₂.symm }
+  have hext := ShortComplex.ShortExact.extClass_naturality hS hS' f
+  rw [H.δ_apply, H.δ_apply, ← H.equiv₀_symm_naturality, H.map_apply, H.map_apply,
+    Abelian.Ext.comp_assoc _ _ _ (zero_add 1) (add_zero 1) (by simp),
+    Abelian.Ext.comp_assoc _ _ _ (add_zero 0) (zero_add 1) (zero_add 1)]
+  exact congr_arg (fun e ↦ ((H.equiv₀ _ hT).symm s).comp e (zero_add 1)) hext
+
+/-- **`classH1` is natural.** Let `φ : G ⟶ G'` be a morphism of abelian sheaves, `P` a
+`G`-torsor and `P'` a `G'`-torsor, and let `σ : P ⟶ P'` be a natural map which is equivariant
+along `φ`: `σ(a • x) = φ(a) • σ(x)`. Then the class of `P'` in `H¹(G')` is the image under `φ`
+of the class of `P`: `P'` is the torsor `P ∧^G G'` obtained from `P` by extension of the
+structure group along `φ`. -/
+theorem classH1_eq_map_of_equivariant {G' : Sheaf J AddCommGrpCat.{w}} (φ : G ⟶ G')
+    (P : Torsor G) (P' : Torsor G') (σ : ∀ U, P.sheaf.obj.obj U → P'.sheaf.obj.obj U)
+    (hσ : ∀ ⦃U V : Cᵒᵖ⦄ (f : U ⟶ V) (x : P.sheaf.obj.obj U),
+      P'.sheaf.obj.map f (σ U x) = σ V (P.sheaf.obj.map f x))
+    (hσ₁ : ∀ U (a : G.obj.obj U) x, σ U (P.vadd U a x) = P'.vadd U (φ.hom.app U a) (σ U x)) :
+    classH1 G' hT ⟦P'⟧ = H.map φ 1 (classH1 G hT ⟦P⟧) := by
+  have hS := injectiveSequence_shortExact G
+  have hS' := injectiveSequence_shortExact G'
+  obtain ⟨s, hs⟩ := exists_equiv_lifts hT hS P
+  obtain ⟨s', hs'⟩ := exists_equiv_lifts hT hS' P'
+  let I := (injectiveSequence G).X₂
+  let I' := (injectiveSequence G').X₂
+  let d := (injectiveSequence G).g
+  let d' := (injectiveSequence G').g
+  -- the morphism of injective resolutions over `φ`
+  let χ : I ⟶ I' := Injective.factorThru (φ ≫ Injective.ι G') (Injective.ι G)
+  have h₁ : Injective.ι G ≫ χ = φ ≫ Injective.ι G' := Injective.comp_factorThru _ _
+  let ψ : (injectiveSequence G).X₃ ⟶ (injectiveSequence G').X₃ :=
+    cokernel.desc _ (χ ≫ cokernel.π _) (by
+      rw [← Category.assoc, h₁, Category.assoc, cokernel.condition, comp_zero])
+  have h₂ : d ≫ ψ = χ ≫ d' := cokernel.π_desc _ _ _
+  rw [_root_.Quotient.sound hs, _root_.Quotient.sound hs', classH1_lifts, classH1_lifts,
+    map_δ_of_comp_eq hT hS hS' φ χ ψ h₁ h₂, ← sub_eq_zero, ← map_sub, ← AddMonoidHom.mem_ker,
+    H.ker_δ]
+  obtain ⟨e⟩ := hs
+  obtain ⟨e'⟩ := hs'
+  let b (U : Cᵒᵖ) (x : P.sheaf.obj.obj U) : I.obj.obj U := (e.iso.hom.hom.app U x).1
+  let b' (U : Cᵒᵖ) (x : P'.sheaf.obj.obj U) : I'.obj.obj U := (e'.iso.hom.hom.app U x).1
+  have hb_nat {U V : Cᵒᵖ} (f : U ⟶ V) (x) : I.obj.map f (b U x) = b V (P.sheaf.obj.map f x) :=
+    by
+    have h := ConcreteCategory.congr_hom (e.iso.hom.hom.naturality f) x
+    rw [ConcreteCategory.comp_apply, ConcreteCategory.comp_apply] at h
+    exact (congr_arg Subtype.val h).symm
+  have hb'_nat {U V : Cᵒᵖ} (f : U ⟶ V) (x) :
+      I'.obj.map f (b' U x) = b' V (P'.sheaf.obj.map f x) :=
+    by
+    have h := ConcreteCategory.congr_hom (e'.iso.hom.hom.naturality f) x
+    rw [ConcreteCategory.comp_apply, ConcreteCategory.comp_apply] at h
+    exact (congr_arg Subtype.val h).symm
+  have hb_vadd (U a x) : b U (P.vadd U a x) = b U x + (injectiveSequence G).f.hom.app U a :=
+    congr_arg Subtype.val (e.map_vadd U a x)
+  have hb'_vadd (U a x) :
+      b' U (P'.vadd U a x) = b' U x + (injectiveSequence G').f.hom.app U a :=
+    congr_arg Subtype.val (e'.map_vadd U a x)
+  have hχ_nat {U V : Cᵒᵖ} (f : U ⟶ V) (y : I.obj.obj U) :
+      I'.obj.map f (χ.hom.app U y) = χ.hom.app V (I.obj.map f y) := by
+    rw [← ConcreteCategory.comp_apply, ← χ.hom.naturality, ConcreteCategory.comp_apply]
+  have h₁' (U : Cᵒᵖ) (a : G.obj.obj U) :
+      χ.hom.app U ((injectiveSequence G).f.hom.app U a) =
+        (injectiveSequence G').f.hom.app U (φ.hom.app U a) :=
+    congr_arg (fun f : G ⟶ I' ↦ f.hom.app U a) h₁
+  obtain ⟨c, hc⟩ := exists_section_of_invariant P ((sheafCompose J (forget _)).obj I') hT
+    (fun U x ↦ b' U (σ U x) - χ.hom.app U (b U x))
+    (fun U V f x ↦ by
+      change I'.obj.map f (_ - _) = _
+      rw [map_sub, hb'_nat, hσ, hχ_nat, hb_nat])
+    (fun U a x ↦ by
+      change b' U (σ U (P.vadd U a x)) - χ.hom.app U (b U (P.vadd U a x)) = _
+      rw [hσ₁, hb'_vadd, hb_vadd, map_add, h₁']
+      abel)
+  refine ⟨c, ext_of_nonempty P ((sheafCompose J (forget _)).obj (injectiveSequence G').X₃)
+    fun W f ⟨y⟩ ↦ ?_⟩
+  have hf : f = hT.from W := hT.hom_ext _ _
+  subst hf
+  change (injectiveSequence G').X₃.obj.map (hT.from W).op (d'.hom.app (op T) c) =
+    (injectiveSequence G').X₃.obj.map (hT.from W).op (s' - ψ.hom.app (op T) s)
+  have hd := ConcreteCategory.congr_hom (d'.hom.naturality (hT.from W).op) c
+  rw [ConcreteCategory.comp_apply, ConcreteCategory.comp_apply] at hd
+  rw [← hd]
+  have hcW := hc (op W) y
+  change _ = I'.obj.map (hT.from W).op c at hcW
+  rw [← hcW, map_sub, map_sub]
+  have hψ := ConcreteCategory.congr_hom (ψ.hom.naturality (hT.from W).op) s
+  rw [ConcreteCategory.comp_apply, ConcreteCategory.comp_apply] at hψ
+  rw [← hψ]
+  have h₂' (y : I.obj.obj (op W)) :
+      d'.hom.app (op W) (χ.hom.app (op W) y) = ψ.hom.app (op W) (d.hom.app (op W) y) :=
+    (congr_arg (fun f : I ⟶ (injectiveSequence G').X₃ ↦ f.hom.app (op W) y) h₂).symm
+  have h₃ := lifts_val hT hS' (e'.iso.hom.hom.app (op W) (σ (op W) y))
+  have h₄ := lifts_val hT hS (e.iso.hom.hom.app (op W) y)
+  change d'.hom.app (op W) (b' _ _) = _ at h₃
+  change d.hom.app (op W) (b _ _) = _ at h₄
+  rw [h₂', h₃, h₄]
+
 end Main
 
 end Torsor
