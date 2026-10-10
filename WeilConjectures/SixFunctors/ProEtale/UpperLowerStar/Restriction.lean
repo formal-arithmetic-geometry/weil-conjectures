@@ -61,13 +61,6 @@ lemma globalSectionsLowerStarIso_comp (h₁ : T ⟶ S) (h₂ : S ⟶ R)
     ((MorphismProperty.Over.pullback @WeaklyEtale ⊤ h₁).mapIso (overPullbackObjMkIdIso h₂) ≪≫
       overPullbackObjMkIdIso h₁).symm).hom_ext _ _
 
-omit [Abelian A] [IsGrothendieckAbelian.{u + 1} A] in
-set_option backward.isDefEq.respectTransparency.types false in
-lemma lowerStarId_hom_app_hom_app (G : Sheaf (ProEt.topology R) A) (V : R.ProEtᵒᵖ) :
-    ((lowerStarId A R).hom.app G).hom.app V =
-      G.obj.map ((MorphismProperty.Over.pullbackId @WeaklyEtale ⊤ R).inv.app V.unop).op := by
-  simp [lowerStarId]
-
 set_option backward.isDefEq.respectTransparency.types false in
 /-- The invariance of global sections under pushforward along the identity is the identification
 `(𝟙 R)_* ≅ 𝟭`. -/

@@ -270,6 +270,13 @@ lemma lowerStarComp_trans_lowerStarCongr {a : Z ⟶ X} {b : Z ⟶ Y} {c : Y ⟶ 
 
 omit [Abelian A] [IsGrothendieckAbelian.{u + 1} A] in
 set_option backward.isDefEq.respectTransparency.types false in
+lemma lowerStarId_hom_app_hom_app (G : Sheaf (ProEt.topology X) A) (V : X.ProEtᵒᵖ) :
+    ((lowerStarId A X).hom.app G).hom.app V =
+      G.obj.map ((MorphismProperty.Over.pullbackId @WeaklyEtale ⊤ X).inv.app V.unop).op := by
+  simp [lowerStarId]
+
+omit [Abelian A] [IsGrothendieckAbelian.{u + 1} A] in
+set_option backward.isDefEq.respectTransparency.types false in
 lemma lowerStarId_inv_app_hom_app (G : Sheaf (ProEt.topology X) A) (V : X.ProEtᵒᵖ) :
     ((lowerStarId A X).inv.app G).hom.app V =
       G.obj.map ((MorphismProperty.Over.pullbackId @WeaklyEtale ⊤ X).hom.app V.unop).op := by
@@ -363,6 +370,66 @@ lemma upperStarIsoLowerStarInv_hom_app_trans (e₁ : X ≅ Y) (e₂ : Y ≅ W) (
     reassoc_of% upperStarLowerStarAdjunction_unit_app_comp_map_upperStarIsoLowerStarInv]
 
 end IsoTrans
+
+
+section Misc
+
+variable {X Y Z : Scheme.{u}}
+
+omit [Abelian A] [IsGrothendieckAbelian.{u + 1} A] in
+lemma lowerStarCongr_hom_app_comp_lowerStarComp_inv_app {a : Z ⟶ X} {b : Z ⟶ Y} {c : Y ⟶ X}
+    (h : a = b ≫ c) (M : Sheaf (ProEt.topology Z) A) :
+    (lowerStarCongr A h).hom.app M ≫ (lowerStarComp A b c).inv.app M =
+      (lowerStarFactor A h.symm).inv.app M := by
+  subst h
+  simp only [lowerStarCongr_rfl, Iso.refl_hom, NatTrans.id_app, Category.id_comp]
+  rw [← lowerStarComp_trans_lowerStarCongr, lowerStarCongr_rfl, Iso.trans_refl]
+
+omit [Abelian A] [IsGrothendieckAbelian.{u + 1} A] in
+/-- Pushing forward along `i = 𝟙` and then along `f` is pushing forward along `f`. -/
+lemma lowerStarCongr_hom_app_comp_lowerStarComp_inv_app_comp_map_lowerStarId {i : Z ⟶ Z}
+    {f a : Z ⟶ Y} (h₀ : i = 𝟙 Z) (h₁ : a = i ≫ f) (h : a = f)
+    (M : Sheaf (ProEt.topology Z) A) :
+    (lowerStarCongr A h₁).hom.app M ≫ (lowerStarComp A i f).inv.app M ≫
+        (f)_*[A].map ((lowerStarCongr A h₀).hom.app M ≫ (lowerStarId A Z).hom.app M) =
+      (lowerStarCongr A h).hom.app M := by
+  subst h₀ h₁
+  ext V
+  simp only [lowerStarCongr_rfl, Iso.refl_hom, NatTrans.id_app, Category.id_comp,
+    ObjectProperty.FullSubcategory.comp_hom, ObjectProperty.FullSubcategory.id_hom,
+    NatTrans.comp_app, lowerStarComp_inv_app_hom_app, lowerStar_map_hom_app',
+    lowerStarId_hom_app_hom_app, ← Functor.map_comp, ← op_comp]
+  refine (congrArg M.obj.map ?_).trans (M.obj.map_id _)
+  apply Quiver.Hom.unop_inj
+  apply MorphismProperty.Over.Hom.ext
+  apply pullback.hom_ext <;>
+    simp [MorphismProperty.Over.pullback, MorphismProperty.Over.mk,
+      MorphismProperty.Over.pullbackComp, MorphismProperty.Over.pullbackId] <;> rfl
+
+/-- The identifications `e^* ≅ (e⁻¹)_*` along equal isomorphisms. -/
+lemma upperStarIsoLowerStarInv_hom_app_congr {e e' : X ≅ Y} (p : e = e')
+    (M : Sheaf (ProEt.topology Y) A) :
+    (upperStarIsoLowerStarInv A e).hom.app M ≫
+        (lowerStarCongr A (congrArg Iso.inv p)).hom.app M =
+      (upperStarCongr A (congrArg Iso.hom p)).hom.app M ≫
+        (upperStarIsoLowerStarInv A e').hom.app M := by
+  subst p
+  simp [upperStarCongr]
+
+variable {P : Scheme.{u}}
+
+/-- A factorisation isomorphism followed by a congruence in the first factor. -/
+lemma upperStarFactor_hom_app_comp_upperStarCongr_hom_app {a : P ⟶ Y} {b b' : P ⟶ Z}
+    {c : Z ⟶ Y} (e : b ≫ c = a) (p : b = b') (e' : b' ≫ c = a)
+    (M : Sheaf (ProEt.topology Y) A) :
+    (upperStarFactor A e).hom.app M ≫ (upperStarCongr A p).hom.app ((c)^*[A].obj M) =
+      (upperStarFactor A e').hom.app M := by
+  subst p
+  have : e = e' := rfl
+  subst this
+  simp [upperStarCongr]
+
+end Misc
 
 
 section Congr
