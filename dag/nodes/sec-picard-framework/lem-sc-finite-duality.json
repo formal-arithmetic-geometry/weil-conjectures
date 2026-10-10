@@ -3,7 +3,7 @@
  "blueprint": {
   "is": "lem-sc-finite-duality",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "Duality along a finite flat morphism of smooth curves",
@@ -21,33 +21,45 @@
  "stmt_deps": [
   "def-sc-invertible-module",
   "def-sc-kahler-differentials",
-  "def-sc-curves"
+  "def-sc-curves",
+  "def-sc-p1-standard"
  ],
  "proof": [
   {
-   "text": "For a finite morphism of schemes and quasi-coherent\n$\\mathcal F$ on $C$, $\\mathcal G$ on $\\mathbf P^1_k$, there is\nthe adjunction\n\n$$\n\\operatorname{Hom}_{\\mathcal O_{\\mathbf P^1}}(f_*\\mathcal F,\\mathcal G)\n\\;\\cong\\;\n\\operatorname{Hom}_{\\mathcal O_C}\\bigl(\\mathcal F,\\;\n\\mathcal H om_{\\mathcal O_{\\mathbf P^1}}(f_*\\mathcal O_C,\\mathcal G)\\bigr),\n$$\n\nthe standard adjunction of restriction of scalars: over an affine\n$U=\\operatorname{Spec}R\\subset\\mathbf P^1_k$ with\n$f^{-1}(U)=\\operatorname{Spec}B$ ($B$ a finite $R$-algebra, by\nfiniteness of $f$), both sides become\n$\\operatorname{Hom}_R(M,N)$ and\n$\\operatorname{Hom}_B(M,\\operatorname{Hom}_R(B,N))$ for the\n$B$-module $M$ and the $R$-module $N$, which agree by\n$\\phi\\mapsto(m\\mapsto(b\\mapsto\\phi(bm)))$ – commutative algebra.\nNext, the trace identification: there is a canonical isomorphism\n\n$$\n\\mathcal H om_{\\mathcal O_{\\mathbf P^1}}(f_*\\mathcal O_C,\n\\omega_{\\mathbf P^1})\\;\\cong\\;f_*\\omega_C.\n$$",
+   "text": "For an affine open $U=\\operatorname{Spec}R\\subset\\mathbf P^1_k$, finiteness makes $f^{-1}(U)=\\operatorname{Spec}B$ affine. For the $B$-module $M$ representing $\\mathcal M$ and the $R$-module $N$ representing a target sheaf, restriction of scalars has the explicit adjunction $\\operatorname{Hom}_R(M,N)\\cong\\operatorname{Hom}_B(M,\\operatorname{Hom}_R(B,N))$, carrying $\\phi$ to $m\\mapsto(b\\mapsto\\phi(bm))$. These maps commute with localization, so they give the corresponding sheaf adjunction.",
    "uses": [],
-   "elementary": null
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-picard-framework/sk-thm-picard-duality/lem-sc-finite-duality.md",
+    "place": "## Proof, first paragraph: affine restriction-of-scalars adjunction"
+   }
   },
   {
-   "text": "Both sides are Zariski-local on $\\mathbf P^1_k$, so fix\n$y\\in\\mathbf P^1_k$ and put $R:=\\mathcal O_{\\mathbf P^1,y}$,\n$B:=(f_*\\mathcal O_C)_y$: the ring $R$ and the factors of $B$\nare discrete valuation rings (for a closed point: regular local of\ndimension one, [lem-sc-smooth-regular],\n[lem-sc-regular-dim1-dvr], applied to the smooth curves\n$\\mathbf P^1_k$ and $C$; for the generic point: the fields\n$k(t)\\subseteq k(C)$), and $R\\to B$ is finite flat. For such\n$R\\to B$ the local theorem of the codifferent (commutative\nalgebra, classical) gives the canonical isomorphism\n\n$$\n\\operatorname{Hom}_R\\bigl(B,\\Omega^1_{R/k}\\bigr)\\;\\cong\\;\\Omega^1_{B/k}.\n$$",
+   "text": "Apply [lem-sc-finite-duality-trace] to the finite flat $k$-morphism $f$ from the smooth curve $C$. Its comparison map gives the canonical sheaf isomorphism $f_*\\omega_C\\cong\\mathcal H om_{\\mathcal O_{\\mathbf P^1}}(f_*\\mathcal O_C,\\omega_{\\mathbf P^1})$. The theorem includes the ramified local calculation; no choice of uniformizers or tame-ramification formula is needed here.",
    "uses": [
-    "lem-sc-smooth-regular",
-    "lem-sc-regular-dim1-dvr"
+    "lem-sc-finite-duality-trace"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "WeilConjectures/AlgebraicGeometry/Curve/SerreDuality.lean",
+    "place": "theorem exists_isIso_pushforwardHomObjComparison_unit, lines 527-541"
+   }
   },
   {
-   "text": "The identification is canonical and local: at the generic point it\nis the perfect trace pairing of the finite separable extension\n$k(C)\\supset k(t)$,\n$\\operatorname{Hom}_{k(t)}(k(C),k(t))=k(C)$, together with the\nbase change of the Kähler differentials\n$\\Omega^1_{k(C)/k}=k(C)\\otimes_{k(t)}\\Omega^1_{k(t)/k}$ (the\nKähler sequence, exact on the left since $k(C)/k(t)$ is\nseparable); at a closed point, with uniformizers $u$ of $R$ and\n$x$ of the relevant factor of $B$, and ramification $u=x^{e}$,\nthe $R$-dual of $B$ has the\ndual-basis generator $x^{-(e-1)}/e$, and the two sides of the\nisomorphism become $B\\,du\\cdot x^{-(e-1)}/e$ and $B\\,dx$, which\nagree since $du=ex^{e-1}dx$. Since the resulting isomorphisms are\ncanonical, they glue to the displayed trace identification.\nCombining the adjunction with $\\mathcal F=\\mathcal M$,\n$\\mathcal G=\\omega_{\\mathbf P^1}$, and the trace identification:\n\n$$\n\\begin{gathered}\n\\operatorname{Hom}_{\\mathcal O_{\\mathbf P^1}}(f_*\\mathcal M,\\omega_{\\mathbf P^1})\\\\\n\\cong\n\\operatorname{Hom}_{\\mathcal O_C}\\bigl(\\mathcal M,\\;\n\\mathcal H om_{\\mathcal O_{\\mathbf P^1}}(f_*\\mathcal O_C,\\omega_{\\mathbf P^1})\\bigr)\\\\\n\\cong\n\\operatorname{Hom}_{\\mathcal O_C}(\\mathcal M,f_*\\omega_C)\\\\\n=H^0\\bigl(C,\\mathcal H om_{\\mathcal O_C}(\\mathcal M,\\omega_C)\\bigr).\n\\end{gathered}\n$$\n\nAs $\\mathcal M$ is finite locally free, the natural map\n$\\omega_C\\otimes\\mathcal M^{\\vee}\\to\\mathcal H om_{\\mathcal O_C}(\\mathcal M,\\omega_C)$,\n$w\\otimes\\phi\\mapsto(m\\mapsto\\phi(m)w)$, is an isomorphism\n(it is compatible with restriction to opens, and on an open where\n$\\mathcal M\\cong\\mathcal O_C^{\\oplus r}$ both sides are\n$\\omega_C^{\\oplus r}$ and the map is the identity), and\n$H^0(C,\\ldots)$ is the right hand side of the claim. For invertible\n$\\mathcal M$ one has moreover $\\mathcal M^{\\vee}\\cong\\mathcal M^{-1}$\nby [lem-sc-invertible-dual] (the evaluation\n$\\mathcal M\\otimes\\mathcal M^{\\vee}\\to\\mathcal O_C$ is an\nisomorphism), which gives the particular case. The composite isomorphism is\ncanonical (it does not depend on the choices made in the local\ncomputations).",
+   "text": "Use the affine adjunction of step one with $\\mathcal F=\\mathcal M$ and $\\mathcal G=\\omega_{\\mathbf P^1}$, then the trace comparison of step two. The trace comparison $\\omega\\mapsto(a\\mapsto\\tau(a\\omega))$ is $f_*\\mathcal O_C$-linear, so it passes through the adjunction from step one. Equivalently, on affine opens the $B$-linear map $M\\to\\Omega^1_{B/k}$ is sent to the $R$-linear map $M\\to\\Omega^1_{R/k}$ by composing with the trace, yielding $\\operatorname{Hom}_{\\mathcal O_{\\mathbf P^1}}(f_*\\mathcal M,\\omega_{\\mathbf P^1})\\cong H^0(C,\\mathcal H om_{\\mathcal O_C}(\\mathcal M,\\omega_C))$. Since $\\mathcal M$ is finite locally free, $\\omega_C\\otimes\\mathcal M^{\\vee}\\to\\mathcal H om(\\mathcal M,\\omega_C)$ is an isomorphism: on each open where $\\mathcal M\\cong\\mathcal O_C^{\\oplus r}$ it is the identity on $r$ copies of $\\omega_C$, including $r=0$. Taking global sections proves the displayed isomorphism. For invertible $\\mathcal M$, [lem-sc-invertible-dual] identifies $\\mathcal M^{\\vee}$ with $\\mathcal M^{-1}$.",
    "uses": [
+    "lem-sc-finite-duality-trace",
     "lem-sc-invertible-dual"
    ],
-   "elementary": false
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-picard-framework/sk-thm-picard-duality/lem-sc-finite-duality.md",
+    "place": "## Proof, final paragraph: tensor-Hom identification and invertible-module specialization"
+   }
   }
  ],
  "proof_deps": [
-  "lem-sc-smooth-regular",
-  "lem-sc-regular-dim1-dvr",
+  "lem-sc-finite-duality-trace",
   "lem-sc-invertible-dual"
  ],
  "proof_origin": {
@@ -57,7 +69,7 @@
  },
  "mathlib_searches": [],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [
   "long_proof_few_deps"
@@ -146,5 +158,21 @@
   }
  },
  "chapter": "sec-picard-framework",
- "unit": "sk-thm-picard-duality"
+ "unit": "sk-thm-picard-duality",
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "lem-sc-finite-duality",
+  "worker": "stage1",
+  "summary": "Checked the finite-duality blueprint against the slopmaster2 declarations and created the new trace-comparison node [lem-sc-finite-duality-trace] (no existing node stated it) as the sole non-elementary dependency. The proof records the affine restriction-of-scalars calculation, the trace comparison, and the tensor-Hom and invertible-module identifications; the first calculation is elementary and the latter two cite the trace and invertible-dual nodes.",
+  "blueprint": "The three steps realize the blueprint proof's first paragraph (restriction-of-scalars adjunction), second paragraph (local trace/codifferent comparison), and final paragraph (global Hom identification, tensor-Hom for finite locally free modules, and invertible specialization).",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-fd3",
+  "group": "E1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-fd3 (reviewer sub-agent of L); spot-checked: Re-push after return 14:46 (31155d1da); all four points repaired: (1) B4 lem-sc-finite-duality-trace statement now TeX in $...$/$$...$$ with single backslashes, from.place in TeX/ASCII (the prose word Kahler with umlaut kept, as in 60 committed nodes); (2) hypotheses coherent: k arbitrary field, X smooth of relative dimension one over Spec k, f finite flat over k, Omega^1 defined inline by affine generators/relations, alg.-closed def nodes no longer cited, [def-sc-p1-standard] cited, tau stated as an O_{P^1}-linear morphism, no 'canonical'; checked hypothesis by hypothesis against WeilConjectures/AlgebraicGeometry/Curve/SerreDuality.lean 527-541 exists_isIso_pushforwardHomObjComparison_unit (Over, SmoothOfRelativeDimension 1, IsOver, IsFinite, Flat; exists tau with comparison for M=O_X iso); the declaration is itself sorried (sorryfree.py: SORRY itself) so an unsplit statement node is right, not B10; (3) report has '## Source error' with the char-p e=p counterexample to the division by e; (4) report says the node is new, records the grep/blueprint_refs search, and gives the B1-B7 check against the Lean lines. Item steps: step 1 elementary affine restriction-of-scalars adjunction; step 2 carried by [lem-sc-finite-duality-trace] (applies: a smooth connected curve of def-sc-curves over alg. closed k is smooth of relative dimension one); step 3 composes via f_*O_C-linearity of the comparison, tensor-Hom for finite locally free M (incl. r=0), [lem-sc-invertible-dual] for M^{-1}; proof_deps = union of uses. Statement true: Grothendieck duality for finite flat f gives f^!omega_P1 = omega_X with the trace, also for inseparable f (Frobenius: Cartier trace). Fix: dag/nodes/sec-picard-framework/lem-sc-finite-duality.json: split_report.summary: 'retained the existing trace-comparison split' replaced by 'created the new trace-comparison node [lem-sc-finite-duality-trace] (no existing node stated it)' (the false 'existing' claim of return point 4). Start Sat Oct 10 02:58:21 PM UTC 2026, end Sat Oct 10 02:59:08 PM UTC 2026.; 1 file(s) fixed by the reviewer"
+ }
 }

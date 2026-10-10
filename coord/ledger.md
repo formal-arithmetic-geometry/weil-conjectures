@@ -1701,3 +1701,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 14:57 L: returned deliver/J1/lem-pc-cartier-divisor-nowhere-dense (reviewer RETURN: 1. E7/B7: lem-pc-cartier-divisor-nowhere-dense, statement: the change rests on a misreading. [def-nagata-scheme-theoreti)
 - 14:58 L: merged deliver/E1/lem-sc-determinant-short-exact (reviewer PASS; after a return; new nodes: 2)
 - 14:58 L: returned deliver/C1/lem-sc-curve-base-change-relative-dimension-one (reviewer RETURN: 1. C1/C4: proof step 3 of lem-sc-curve-base-change-relative-dimension-one: the sentence 'Since C is a curve, every local)
+- 14:59 L: merged deliver/E1/lem-sc-finite-duality (reviewer FIX; after a return; new nodes: 1)
