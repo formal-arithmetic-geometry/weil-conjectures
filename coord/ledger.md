@@ -2037,3 +2037,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 16:45 L: G1 push of the closed lem-sc-torsor-h1-zariski-boundary-class deleted, notice
 - 16:45 L: merged deliver/K1/lem-sc-zariski-ext-torsor (reviewer FIX; first push; new nodes: 1)
 - 16:45 L: returned deliver/G1/lem-weil-pbc-etale-sections-fpqc-descent (reviewer RETURN: 1. E1/D1: lem-weil-pbc-etale-sections-fpqc-descent step 2 and new node lem-weil-pbc-etale-sections-generated-sieve: the )
+- 16:46 L: merged deliver/F1/def-constructible-torsor (reviewer PASS; first push; new nodes: 0)
