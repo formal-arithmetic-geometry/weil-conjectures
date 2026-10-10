@@ -1477,3 +1477,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 13:16 L: merged deliver/E1/lem-sc-ga-cohomology (reviewer FIX: 2 wording fixes applied; first push; new node lem-sc-noetherian-cohomology-above-dimension)
 - 2026-10-10, delivery of E1: def-pc-divisor-line-bundle merged from deliver/E1/def-pc-divisor-line-bundle (1 commit(s), 0 new node(s), spot-checked by L: L: re-push after return, reviewed in full by a reviewer sub-agent (PASS): B9/B3/E7 repaired, 01WX(1) agrees, no cycle); claim closed
 - 13:17 L: merged deliver/E1/def-pc-divisor-line-bundle (reviewer PASS, merged after a return)
+- 2026-10-10, delivery of C1: lem-sc-flat-base-change-coherent returned (0ce4f36a8): Reviewed in full (reviewer sub-agent of L). F2/F5: the '## Review by C1' describes a version not delivered: it says a citation of lem-weil-pbc-module-stalk-pull
