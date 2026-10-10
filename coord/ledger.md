@@ -838,3 +838,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 2026-10-10, delivery of F1: lem-weil-pbc-small-etale-representable-presheaf-sheaf returned (36dcb622a): B5: the item's proof_origin.place is 'Lemma 59.15.8 and Remark 59.15.9' (section numbers): write the tags 03O3 and 03O4 with their labels (etale-cohomology-lemm
 - 03:48 L: returned F1 lem-weil-pbc-coherent-formal-modules-local-exactness (C3 kernel construction from the 087X proof, C4 restriction citations and circular lem-sp citation, B5 no label / live page) and F1 lem-weil-pbc-small-etale-representable-presheaf-sheaf (B5 section numbers, B2/B3 vague 022C node, C5 existing fpqc nodes, F).
 - 03:48 L: reviewed lem-weil-pbc-higher-direct-image-presheaf (7 steps, +01E1 node, +composed sheafification leaf), lem-weil-pbc-immersion-fibre-degree-one (5 steps, 0 new): accepted.
+- 03:52 L: reviewed lem-weil-pbc-krull-intersection-localization (5 steps, 0 new): accepted.

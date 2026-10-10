@@ -5,16 +5,91 @@
  "statement": "Let $R$ be a Noetherian ring [def-weil-pbc-noetherian-ring], $I\\subseteq R$ an ideal, $M$ a finitely generated $R$-module [def-weil-finitely-generated-module] and $N=\\bigcap_{n\\ge0}I^nM$. Then for every prime ideal $\\mathfrak p\\subset R$ with $I\\subseteq\\mathfrak p$ there is $f\\in R$, $f\\notin\\mathfrak p$, with $N_f=0$ [def-weil-pbc-module-localization-away], i.e. every element of $N$ is annihilated by some power of $f$. (Part (2) of the source, $N=0$ when $I$ lies in the Jacobson radical, is not stated here.)",
  "source": {
   "document": "literature/stacks-project/algebra.tex",
-  "place": "Algebra, Lemma Tag 00IQ (lemma-intersection-powers-ideal-module, line 12257), part (1); its proof uses Lemma 00FN (lemma-Noetherian-basic) and Lemma 00IP (lemma-intersect-powers-ideal-module-zero)"
+  "place": "Algebra, Lemma Tag 00IQ (lemma-intersection-powers-ideal-module, line 12257), part (1); its proof uses Lemma Tag 00IK (lemma-Noetherian-basic, line 12154) and Lemma Tag 00IP (lemma-intersect-powers-ideal-module-zero, line 12241)"
  },
  "stmt_deps": [
   "def-weil-pbc-noetherian-ring",
   "def-weil-finitely-generated-module",
   "def-weil-pbc-module-localization-away"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "$N$ is finitely generated. $N=\\bigcap_{n\\ge0}I^nM$ is an $R$-submodule of the finitely generated $R$-module $M$ over the Noetherian ring $R$, so by [lem-weil-pbc-noetherian-submodule-finite] $N$ is a finitely generated $R$-module [def-weil-finitely-generated-module].",
+   "uses": [
+    "lem-weil-pbc-noetherian-submodule-finite",
+    "def-weil-finitely-generated-module"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra, proof of Lemma Tag 00IQ (lemma-intersection-powers-ideal-module, line 12257) (1): 'Let $x_1,\\ldots,x_n$ be generators for the module $N$, see Lemma 00IK (lemma-Noetherian-basic, line 12154)'"
+   }
+  },
+  {
+   "text": "Krull's intersection theorem over $R_{\\mathfrak p}$. Fix a prime $\\mathfrak p\\supseteq I$ and put $S=R\\setminus\\mathfrak p$. The localization $R_{\\mathfrak p}=S^{-1}R$ is a local ring with maximal ideal $\\mathfrak pR_{\\mathfrak p}$ [def-weil-pbc-localization-at-prime], so its Jacobson radical (the intersection of all maximal ideals) is $\\mathfrak pR_{\\mathfrak p}$, and $J:=IR_{\\mathfrak p}\\subseteq\\mathfrak pR_{\\mathfrak p}$ since $I\\subseteq\\mathfrak p$. $R_{\\mathfrak p}$ is Noetherian by [lem-weil-pbc-localization-noetherian] (with $R'=S^{-1}R$, $r\\mapsto r/1$). The $R_{\\mathfrak p}$-module $M_{\\mathfrak p}=S^{-1}M$ [def-weil-pbc-module-localization] is finitely generated [def-weil-finitely-generated-module]: if $m_1,\\dots,m_l$ generate $M$ and $m=\\sum_ja_jm_j$, then $m/s=\\sum_j(a_j/s)(m_j/1)$, so the $m_j/1$ generate. By [lem-weil-pbc-krull-intersection-jacobson] applied to $R_{\\mathfrak p}$, $J$ and $M_{\\mathfrak p}$, $\\bigcap_{n\\ge0}J^nM_{\\mathfrak p}=0$. (This is Stacks Lemma 00IP for the Noetherian local ring $R_{\\mathfrak p}$ and the proper ideal $J$.)",
+   "uses": [
+    "def-weil-pbc-localization-at-prime",
+    "lem-weil-pbc-localization-noetherian",
+    "def-weil-pbc-module-localization",
+    "def-weil-finitely-generated-module",
+    "lem-weil-pbc-krull-intersection-jacobson"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra, proof of Lemma Tag 00IQ (lemma-intersection-powers-ideal-module, line 12257) (1): 'the image of $N$ in the localization $M_{\\mathfrak p}$ is zero, by Lemma 00IP' (lemma-intersect-powers-ideal-module-zero, line 12241); $R_{\\mathfrak p}$ Noetherian by Lemma Tag 00FN (lemma-Noetherian-permanence, line 5991), implicit in Stacks"
+   }
+  },
+  {
+   "text": "The image of $N$ in $M_{\\mathfrak p}$ is zero. Let $x\\in N$ and $n\\ge0$. Since $x\\in I^nM$, $x=\\sum_ia_iy_i$ with $a_i\\in I^n$, $y_i\\in M$, and each $a_i$ is a sum of products $b_1\\cdots b_n$ with $b_k\\in I$; hence $x/1=\\sum_i(a_i/1)(y_i/1)$ with $a_i/1=\\sum(b_1/1)\\cdots(b_n/1)\\in J^n$, so $x/1\\in J^nM_{\\mathfrak p}$. Thus $x/1\\in\\bigcap_nJ^nM_{\\mathfrak p}=0$ by step 2, and by the description of the kernel of the localization map in [def-weil-pbc-module-localization] there is $t\\in S$ with $tx=0$.",
+   "uses": [
+    "def-weil-pbc-module-localization"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra, proof of Lemma Tag 00IQ (lemma-intersection-powers-ideal-module, line 12257) (1)"
+   }
+  },
+  {
+   "text": "A single $f\\notin\\mathfrak p$ kills $N$. By step 3 every element of the finitely generated (step 1) $R$-module $N$ is killed by some element of the multiplicative subset $S=R\\setminus\\mathfrak p$, i.e. $S^{-1}N=0$ [def-weil-pbc-module-localization]. By [lem-weil-pbc-finite-module-localization-zero-annihilator] there is $f\\in S$, i.e. $f\\in R$, $f\\notin\\mathfrak p$, with $fN=0$. (Stacks takes $g_i\\notin\\mathfrak p$ killing the generator $x_i$ and $f=g_1\\cdots g_n$; that is the proof of the cited lemma.)",
+   "uses": [
+    "def-weil-pbc-module-localization",
+    "lem-weil-pbc-finite-module-localization-zero-annihilator"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra, proof of Lemma Tag 00IQ (lemma-intersection-powers-ideal-module, line 12257) (1): 'we can find $g_i\\in R$, $g_i\\notin\\mathfrak p$ such that $x_i$ maps to zero in $N_{g_i}$. Thus $N_{g_1g_2\\ldots g_n}=0$'"
+   }
+  },
+  {
+   "text": "$N_f=0$. Every element of $N_f$ is $x/f^e$ with $x\\in N$, $e\\ge0$ [def-weil-pbc-module-localization-away]; since $f\\cdot x=0$, $x/1=0$ (the criterion $f^kx=0$ with $k=1$), and $x/f^e=(1/f^e)(x/1)=0$. Equivalently every element of $N$ is annihilated by a power of $f$, namely $f$ itself.",
+   "uses": [
+    "def-weil-pbc-module-localization-away"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra, proof of Lemma Tag 00IQ (lemma-intersection-powers-ideal-module, line 12257) (1)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-noetherian-submodule-finite",
+  "def-weil-finitely-generated-module",
+  "def-weil-pbc-localization-at-prime",
+  "lem-weil-pbc-localization-noetherian",
+  "def-weil-pbc-module-localization",
+  "lem-weil-pbc-krull-intersection-jacobson",
+  "lem-weil-pbc-finite-module-localization-zero-annihilator",
+  "def-weil-pbc-module-localization-away"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Algebra, proof of Lemma Tag 00IQ (lemma-intersection-powers-ideal-module, line 12257) part (1), with Lemma Tag 00IP (line 12241) and Lemma Tag 00IK (line 12154)"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -46,7 +121,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "worker",
@@ -66,5 +141,17 @@
   }
  },
  "chapter": "sec-proper-base-change",
- "unit": "sk-thm-p1"
+ "unit": "sk-thm-p1",
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "lem-weil-pbc-krull-intersection-localization",
+  "worker": "stage1",
+  "summary": "Read Stacks 00IQ (1) and its proof (algebra.tex 12257), 00IP (12241), 00IK (12154). Five steps following Stacks: N finitely generated (existing leaf lem-weil-pbc-noetherian-submodule-finite, 00IK); Krull's intersection theorem 00IP over the Noetherian local ring R_p realized by the existing Mathlib leaf lem-weil-pbc-krull-intersection-jacobson (Ideal.iInf_pow_smul_eq_bot_of_le_jacobson), since the Jacobson radical of R_p is pR_p which contains IR_p, with R_p Noetherian by lem-weil-pbc-localization-noetherian (00FN, implicit in Stacks) and M_p finite over R_p written out; image of N in M_p zero (elementary, I^nM maps into (IR_p)^nM_p); one f outside p killing N by the existing lem-weil-pbc-finite-module-localization-zero-annihilator (Stacks' product of the g_i); N_f=0 (elementary). No new node: a separate 00IP node would be the one-line specialization of the existing Jacobson leaf (Mathlib's own Ideal.iInf_pow_smul_eq_bot_of_isLocalRing, Filtration.lean:425, is proved exactly so). Source place corrected: Stacks' proof cites lemma-Noetherian-basic, which is tag 00IK, not 00FN (00FN is lemma-Noetherian-permanence). Statement unchanged; stmt_deps unchanged. Mathlib searches of the item kept (no localized form; Ideal.mem_iInf_smul_pow_eq_bot_iff, Filtration.lean:392, would give a non-Stacks route via (1-r)x=0)."
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "result": "accepted",
+  "note": "5 steps following Stacks 00IQ (1): N finitely generated (00IK leaf); Krull intersection over R_p via the existing Jacobson-radical leaf (Filtration.lean:416); the image of N in M_p is zero; one f outside p kills N (today's 076A node); N_f = 0. No new nodes; source tag corrected (00IK, not 00FN)."
+ }
 }
