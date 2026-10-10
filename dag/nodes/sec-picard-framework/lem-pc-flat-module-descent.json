@@ -21,54 +21,105 @@
   "def-pc-morphism-conventions",
   "def-pc-base-change"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Here S_i=\\operatorname{Spec}(R_i) is affine; the Noetherian hypothesis on R_i is not used below. Since X_i\\to S_i is of finite presentation, hence quasi-compact, and S_i is affine, X_i is quasi-compact, so [lem-weil-pbc-qcqs-finite-affine-open-cover] gives finitely many affine opens U_{1,i},\\dots,U_{m,i} covering X_i. Write U_{k,i}=\\operatorname{Spec}(B_{k,i}); by [lem-weil-pbc-lfp-affine-opens-finite-presentation] (with V=S_i) each B_{k,i} is a finitely presented R_i-algebra, and \\mathcal{F}_i|_{U_{k,i}}=\\widetilde{N_{k,i}} with N_{k,i} a finitely presented B_{k,i}-module [def-sc-finitely-presented-module] (Stacks Properties, Tag 01PC). The inverse images of U_{k,i} in X_j and X are \\operatorname{Spec}(R_j\\otimes_{R_i}B_{k,i}) and \\operatorname{Spec}(R\\otimes_{R_i}B_{k,i}) [def-pc-base-change], with pulled-back modules R_j\\otimes_{R_i}N_{k,i} and R\\otimes_{R_i}N_{k,i}. Since the pullback of \\mathcal{F}_i to X is flat over S, the R-module R\\otimes_{R_i}N_{k,i} is flat (Stacks Morphisms, Tag 01U4, (1)\\Rightarrow(2)).",
+   "uses": [
+    "def-pc-scheme",
+    "def-pc-morphism-conventions",
+    "def-pc-base-change",
+    "lem-weil-pbc-qcqs-finite-affine-open-cover",
+    "lem-weil-pbc-lfp-affine-opens-finite-presentation",
+    "def-sc-finitely-presented-module"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/limits.tex",
+    "place": "Lemma 32.10.4, Tag 05LY, affine-local reduction with Y_i=S_i"
+   }
+  },
+  {
+   "text": "For each k apply [lem-pc-affine-flat-module-descent] with A_i=R_i (so A_j=R_j and A=R), B_i=B_{k,i} and N_i=N_{k,i}: there is j_k\\ge i such that R_j\\otimes_{R_i}N_{k,i} is flat over R_j for every j\\ge j_k. As I is directed and there are finitely many k, choose j\\ge j_1,\\dots,j_m.",
+   "uses": [
+    "lem-pc-affine-flat-module-descent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/limits.tex",
+    "place": "Lemma 32.10.4, Tag 05LY, via Algebra Lemma 10.168.1, Tag 02JO (3)"
+   }
+  },
+  {
+   "text": "Let j'\\ge j. The affine opens \\operatorname{Spec}(R_{j'}\\otimes_{R_i}B_{k,i}), k=1,\\dots,m, cover X_{j'}, and on each the pullback of \\mathcal{F}_i is flat over the affine S_{j'}=\\operatorname{Spec}(R_{j'}) by Step 2. Flatness of a quasi-coherent module over a morphism is local on the source (Stacks Morphisms, Tag 01U4, (3)\\Rightarrow(1)), so the pullback of \\mathcal{F}_i to X_{j'} is flat over S_{j'}.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 01U4 (lemma-flat-module-characterize)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-scheme",
+  "def-pc-morphism-conventions",
+  "def-pc-base-change",
+  "lem-weil-pbc-qcqs-finite-affine-open-cover",
+  "lem-weil-pbc-lfp-affine-opens-finite-presentation",
+  "def-sc-finitely-presented-module",
+  "lem-pc-affine-flat-module-descent"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/limits.tex",
+  "place": "Lemma 32.10.4, Tag 05LY"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
-   "query": "descent of a finitely presented flat sheaf module along affine inverse limits",
-   "results": "generic finite-presentation and flat factorization declarations; no geometric eventual-flatness theorem",
+   "query": "eventual flatness of a finitely presented module after filtered colimit of Noetherian rings",
+   "results": "no inverse-limit theorem",
    "date": "2026-10-11",
    "verdict": "no match"
   },
   {
    "tool": "loogle",
-   "query": "Module.Flat, Module.FinitePresentation",
-   "results": "Module.Flat.projective_of_finitePresentation and factorization lemmas; no inverse-limit descent theorem",
+   "query": "Module.Flat, Module.FinitePresentation, IsColimit",
+   "results": "no matching descent theorem",
    "date": "2026-10-11",
    "verdict": "no match"
   },
   {
    "tool": "grep",
-   "query": "flat.*finite.*presentation|eventually.*flat",
-   "results": "no geometric descent match; only flat morphism and local flat descent files",
+   "query": "finite.*presentation.*flat|eventually.*flat in Mathlib/RingTheory",
+   "results": "no matches",
    "date": "2026-10-11",
    "verdict": "no match"
-  },
-  {
-   "tool": "leansearch",
-   "query": "eventual flatness of finitely presented modules in a filtered inverse system of schemes",
-   "results": "service unavailable: Internal Server Error",
-   "date": "2026-10-11",
-   "verdict": "unavailable"
-  },
-  {
-   "tool": "grep",
-   "query": "grep -rniE 'flat' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicGeometry | grep -iE 'limit|colimit|eventually'",
-   "results": "no geometric eventual-flatness-in-limits declaration",
-   "date": "2026-10-10",
-   "verdict": "no match",
-   "by": "R-fbd2519"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-pc-flat-bounded-complex-descent",
   "by": "worker",
   "date": "2026-10-10"
  },
  "chapter": "sec-picard-framework",
- "unit": "sk-thm-picard-semicon"
+ "unit": "sk-thm-picard-semicon",
+ "split_report": {
+  "date": "2026-10-11",
+  "item": "lem-pc-flat-module-descent",
+  "worker": "stage1",
+  "summary": "Split into one affine module descent lemma and an affine-local finite-cover argument following Tag 05LY.",
+  "blueprint": "Realizes the ancestor Noetherian-approximation sentence on eventual flatness (Tag 05LY).",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-fmd2912",
+  "group": "C1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-fmd2912 (reviewer sub-agent of L); spot-checked: FIX more, RETURN less: (1) prior B repaired: lem-pc-affine-flat-module-descent now fixes stage i with A_j,B_j,N_j,A,B,N all tensor base changes from R_i, so 02JO(3)(a) holds by construction ((R_mu(x)A_i)(x)_{R_lam(x)A_i}(R_lam(x)B_i)=R_mu(x)B_i), (b) since a map of fp R_i-algebras is fp; the k[t,x]/(tx), x->0 system is not of this form; true; source 02JO(3); Noetherian dropped; not a duplicate of lem-weil-pbc-colimit-flat-ring-map (that is M=C), no Mathlib eventual-flatness theorem. (2) E7/C4 FIXED: the delivery replaced the item statement by the general 05LY form (Y_i, single stage i') while the report claims it was restored; the only citer lem-pc-flat-bounded-complex-descent uses flatness over S_{j'} for EVERY j'>=j_r, which the delivered statement dropped; restored the merged statement and stmt_deps verbatim and rewrote the proof for Y_i=S_i. (3) C1 FIXED: Step 1 now cites qcqs finite cover (X_i qc), lfp-affine-opens for B_{k,i} fp over R_i, Properties 01PC for fp chart module, Morphisms 01U4 (1)=>(2) for chart flatness over R; Step 2 applies the affine node with A_i=R_i and takes a common stage; Step 3 elementary gluing over the finite affine cover by Morphisms 01U4 (3)=>(1) for every j'>=j; Noetherian hypothesis stated as unused.; 1 file(s) fixed by the reviewer"
+ },
+ "lead_note": "2026-10-10 L (R-fmd2912): Second reading by C1 missed that the item statement was changed (not restored) and lost the 'every later stage' conclusion its citer uses."
 }
