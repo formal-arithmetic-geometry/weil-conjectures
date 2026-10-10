@@ -5,14 +5,87 @@
  "statement": "Let $k\\subseteq M$ be a field extension [def-pc-field-extension] and $G$ a group of $k$-algebra automorphisms of $M$ whose fixed field is $k$: $\\{y\\in M:\\tau(y)=y\\text{ for all }\\tau\\in G\\}=k$. Let $A$ be a $k$-vector space, and for $\\tau\\in G$ let $\\mathrm{id}_A\\otimes\\tau:A\\otimes_kM\\to A\\otimes_kM$ be the $k$-linear map with $a\\otimes y\\mapsto a\\otimes\\tau(y)$. Then the $k$-linear map $\\iota:A\\to A\\otimes_kM$, $a\\mapsto a\\otimes1$, is injective, and its image is exactly the set of invariants $\\{z\\in A\\otimes_kM:(\\mathrm{id}_A\\otimes\\tau)(z)=z\\text{ for all }\\tau\\in G\\}$. (In particular, for a $k$-algebra $A$, $(A\\otimes_kM)^G=A\\otimes1\\cong A$.)",
  "source": {
   "document": "literature/stacks-project/varieties.tex",
-  "place": "Varieties, proof of Lemma 038B (lemma-closed-fixed-by-Galois), lines 917-919: '$(A\\otimes_kk')^G[T]=A[T]$ (by basic Galois theory)'; the argument (choose a $k$-basis $(e_i)$ of $A$, so $A\\otimes_kM=\\bigoplus_ie_i\\otimes M$ and $\\mathrm{id}\\otimes\\tau$ acts coordinatewise) is not written in the source"
+  "place": "Varieties, proof of Lemma 038B (lemma-closed-fixed-by-Galois), lines 924-925: '$(A\\otimes_kk')^G[T]=A[T]$ (by basic Galois theory)'; the argument (choose a $k$-basis $(e_i)$ of $A$, so $A\\otimes_kM=\\bigoplus_ie_i\\otimes M$ and $\\mathrm{id}\\otimes\\tau$ acts coordinatewise) is not written in the source"
  },
  "stmt_deps": [
   "def-pc-field-extension"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "A basis of $A$. By [lem-weil-pbc-vector-space-basis-through-vector] (with $K=k$, $V=A$, $S=\\emptyset$) the $k$-vector space $A$ has a $k$-basis $(e_i)_{i\\in I}$: every $a\\in A$ is $a=\\sum_{i\\in I}c_ie_i$ for a unique family $(c_i)_{i\\in I}$ of elements of $k$, almost all zero.",
+   "uses": [
+    "lem-weil-pbc-vector-space-basis-through-vector"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Varieties, proof of Lemma 038B (lemma-closed-fixed-by-Galois), lines 924-925: '$(A\\otimes_kk')^G[T]=A[T]$ (by basic Galois theory)'; the argument is not written in the source and is written out by the agent"
+   }
+  },
+  {
+   "text": "Coordinates in $A\\otimes_kM$. By [def-weil-vector-space-scalar-extension] (with $K=k$, $L=M$, $V=A$), $A\\otimes_kM$ is an $M$-vector space with $\\lambda\\cdot(a\\otimes\\mu)=a\\otimes\\lambda\\mu$, and since $(e_i)_{i\\in I}$ is a $k$-basis of $A$ (step 1), $(e_i\\otimes1)_{i\\in I}$ is an $M$-basis of $A\\otimes_kM$. Hence every $z\\in A\\otimes_kM$ can be written as $z=\\sum_iy_i\\cdot(e_i\\otimes1)=\\sum_ie_i\\otimes y_i$ for a unique family $(y_i)_{i\\in I}$ of elements of $M$, almost all zero $(*)$.",
+   "uses": [
+    "def-weil-vector-space-scalar-extension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Varieties, proof of Lemma 038B (lemma-closed-fixed-by-Galois), lines 924-925: '$(A\\otimes_kk')^G[T]=A[T]$ (by basic Galois theory)'; the argument is not written in the source and is written out by the agent"
+   }
+  },
+  {
+   "text": "$\\mathrm{id}_A\\otimes\\tau$ acts coordinatewise. Let $\\tau\\in G$. The map $\\mathrm{id}_A\\otimes\\tau$ exists by the universal property of $A\\otimes_kM$ [def-weil-vector-space-scalar-extension], applied to the $k$-bilinear map $(a,y)\\mapsto a\\otimes\\tau(y)$ ($\\tau$ is $k$-linear, being a $k$-algebra map). It is additive and sends $e_i\\otimes y$ to $e_i\\otimes\\tau(y)$, so for $z=\\sum_ie_i\\otimes y_i$ as in $(*)$, $(\\mathrm{id}_A\\otimes\\tau)(z)=\\sum_ie_i\\otimes\\tau(y_i)$, where $(\\tau(y_i))_i$ is again almost all zero ($\\tau(0)=0$); so this is the expression $(*)$ of $(\\mathrm{id}_A\\otimes\\tau)(z)$.",
+   "uses": [
+    "def-weil-vector-space-scalar-extension"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Varieties, proof of Lemma 038B (lemma-closed-fixed-by-Galois), lines 924-925: '$(A\\otimes_kk')^G[T]=A[T]$ (by basic Galois theory)'; the argument is not written in the source and is written out by the agent"
+   }
+  },
+  {
+   "text": "The image of $\\iota$ consists of invariants. $\\iota$ is $k$-linear since $\\otimes$ is $k$-bilinear. For $a\\in A$ and $\\tau\\in G$, $(\\mathrm{id}_A\\otimes\\tau)(a\\otimes1)=a\\otimes\\tau(1)=a\\otimes1$, as $\\tau$ is a ring homomorphism. So $\\iota(A)\\subseteq(A\\otimes_kM)^G$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Varieties, proof of Lemma 038B (lemma-closed-fixed-by-Galois), lines 924-925: '$(A\\otimes_kk')^G[T]=A[T]$ (by basic Galois theory)'; the argument is not written in the source and is written out by the agent"
+   }
+  },
+  {
+   "text": "Every invariant lies in the image of $\\iota$. Let $z\\in A\\otimes_kM$ with $(\\mathrm{id}_A\\otimes\\tau)(z)=z$ for all $\\tau\\in G$, and write $z=\\sum_ie_i\\otimes y_i$ as in $(*)$. By step 3, $\\sum_ie_i\\otimes\\tau(y_i)=\\sum_ie_i\\otimes y_i$, so by the uniqueness in $(*)$ (step 2) $\\tau(y_i)=y_i$ for every $i\\in I$ and every $\\tau\\in G$. By the hypothesis that the fixed field of $G$ is $k$, each $y_i$ lies in $k$ [def-pc-field-extension]: $y_i=c_i\\cdot1$ with $c_i\\in k$, and $c_i=0$ whenever $y_i=0$ (the map $k\\to M$ is injective), so $(c_i)_i$ is almost all zero. By $k$-bilinearity of $\\otimes$, $z=\\sum_ie_i\\otimes c_i1=\\sum_i(c_ie_i)\\otimes1=\\iota\\big(\\sum_ic_ie_i\\big)$. With step 4, the image of $\\iota$ is exactly $(A\\otimes_kM)^G$.",
+   "uses": [
+    "def-pc-field-extension"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Varieties, proof of Lemma 038B (lemma-closed-fixed-by-Galois), lines 924-925: '$(A\\otimes_kk')^G[T]=A[T]$ (by basic Galois theory)'; the argument is not written in the source and is written out by the agent"
+   }
+  },
+  {
+   "text": "$\\iota$ is injective. Let $a\\in A$ with $\\iota(a)=0$ and write $a=\\sum_ic_ie_i$ (step 1). Then $0=\\iota(a)=\\sum_ie_i\\otimes c_i1$, and $0=\\sum_ie_i\\otimes0$ is also an expression as in $(*)$, so by its uniqueness (step 2) $c_i1=0$ in $M$ for every $i$. The ring homomorphism $k\\to M$ is injective [def-pc-field-extension], so $c_i=0$ for all $i$ and $a=0$. The parenthetical clause: for a $k$-algebra $A$, $\\iota$ is then a bijection of $A$ onto $(A\\otimes_kM)^G=\\iota(A)=A\\otimes1$.",
+   "uses": [
+    "def-pc-field-extension"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Varieties, proof of Lemma 038B (lemma-closed-fixed-by-Galois), lines 924-925: '$(A\\otimes_kk')^G[T]=A[T]$ (by basic Galois theory)'; the argument is not written in the source and is written out by the agent"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-vector-space-basis-through-vector",
+  "def-weil-vector-space-scalar-extension",
+  "def-pc-field-extension"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/varieties.tex",
+  "place": "Varieties, proof of Lemma 038B, lines 924-925 ('by basic Galois theory'); the basis argument is written by the agent"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -41,10 +114,66 @@
    "results": "only RepresentationTheory files (Induced, Coinvariants, group homology, Shapiro, FiniteIndex): invariants of representations, no base-change statement; FieldTheory/Galois (Basic, GaloisClosure, Infinite, IsGaloisGroup, NormalBasis, Profinite, Abelian) and RingTheory/Invariant (Basic, Defs, Galois, Profinite) have no invariants of A ⊗_k M",
    "date": "2026-10-10",
    "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "fixed points of id ⊗ σ on V ⊗[K] L for all σ in a group with fixed field K are the image of V",
+   "results": "Representation.invariants_eq_inter, Representation.invariants (Mathlib.RepresentationTheory.Invariants), InfiniteGalois.mem_range_algebraMap_iff_fixed, IsGaloisGroup.fixedPoints, IsGaloisGroup.le_fixedPoints_iff_le_fixingSubgroup, IsGaloisGroup.fixedPoints_eq_bot, IsGaloisGroup.fixedPoints_top, IsGaloisGroup.subgroup: only the field case A = k",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "LinearMap.lTensor fixed points equal range of tensoring with fixed subspace",
+   "results": "LinearMap.lTensor_range, LinearMap.rTensor_range (Mathlib.LinearAlgebra.TensorProduct.RightExactness), LinearMap.lTensor, LinearMap.lTensor_def, Ideal.map_includeRight_eq, LinearMap.tensorEqLocus_coe (Mathlib.RingTheory.Flat.Equalizer)",
+   "date": "2026-10-10",
+   "verdict": "no match; candidate route via RingTheory.Flat.Equalizer (see mathlib_candidate)"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Galois descent for vector spaces: an element of V ⊗_K L invariant under Gal(L/K) acting on L comes from V",
+   "results": "Algebra.isInvariant_of_isGalois', Algebra.isInvariant_of_isGalois (RingTheory.Invariant.Basic), groupCohomology.Hilbert90.aux, groupCohomology.exists_mul_galRestrict_of_norm_eq_one, IsGalois.mem_range_algebraMap_iff_fixed, IsGaloisGroup.isInvariant, IsGaloisGroup, InfiniteGalois.mem_range_algebraMap_iff_fixed",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "the fixed submodule of lTensor of a family of linear maps equals the tensor product of the fixed submodule (invariants commute with tensor product over a field)",
+   "results": "LinearMap.tensorEqLocus_tmul, LinearMap.tensorEqLocus_coe, LinearMap.lTensor_eqLocus_subtype_tensoreqLocusEquiv_symm, LinearMap.tensorEqLocusEquiv_apply, LinearMap.tensorEqLocusBil (Mathlib.RingTheory.Flat.Equalizer); Representation.Coinvariants.mk_tmul_inv, Rep.coinvariantsTensorMk_apply, Representation.Coinvariants.mk_inv_tmul",
+   "date": "2026-10-10",
+   "verdict": "generalization for one pair of maps only: flat base change commutes with the equalizer of two maps (see mathlib_candidate); no version for a family of maps"
+  },
+  {
+   "tool": "loogle",
+   "query": "LinearMap.lTensor, AlgEquiv, Set.range",
+   "results": "none",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "TensorProduct, MulAction.fixedPoints",
+   "results": "none",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rlnE 'fixedPoints|FixedPoints|invariants' Mathlib/LinearAlgebra Mathlib/RingTheory/TensorProduct; grep -rnE 'Galois.*descent|descent.*Galois' Mathlib; grep -nE '^(def|theorem|lemma)' Mathlib/RingTheory/Flat/Equalizer.lean; sed -n 1,175p Mathlib/LinearAlgebra/TensorProduct/Basis.lean",
+   "results": "only LinearAlgebra/Matrix/Permutation.lean (unrelated); no Galois descent; Flat/Equalizer.lean: LinearMap.tensorEqLocusEquiv (line 163, M flat: M ⊗ eqLocus f g ≃ eqLocus (lTensor f) (lTensor g)), tensorKerEquiv (line 140); TensorProduct/Basis.lean: Module.Basis.baseChange (line 64), TensorProduct.equivFinsuppOfBasisLeft (line 130, M ⊗ N ≃ ι →₀ N for a basis of M)",
+   "date": "2026-10-10",
+   "verdict": "no match; the coordinates step is TensorProduct.equivFinsuppOfBasisLeft"
+  },
+  {
+   "tool": "local_search",
+   "query": "TensorProduct.equivFinsuppOfBasisLeft (project ~/weil-conjectures-slopmaster2)",
+   "results": "TensorProduct.equivFinsuppOfBasisLeft, _symm, _apply, _apply_tmul, _symm_apply in Mathlib/LinearAlgebra/TensorProduct/Basis.lean (index: unavailable; existence confirmed by the grep and sed above)",
+   "date": "2026-10-10",
+   "verdict": "exists (used for step 2's form)"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "worker",
@@ -64,5 +193,23 @@
   }
  },
  "chapter": "sec-proper-base-change",
- "unit": "sk-thm-p1"
+ "unit": "sk-thm-p1",
+ "mathlib_candidate": {
+  "declaration": "TensorProduct.equivFinsuppOfBasisLeft, Module.Basis.ofVectorSpace, IsGalois.mem_range_algebraMap_iff_fixed; alternatively LinearMap.tensorEqLocusEquiv",
+  "file": "Mathlib/LinearAlgebra/TensorProduct/Basis.lean, Mathlib/LinearAlgebra/Basis/VectorSpace.lean, Mathlib/FieldTheory/Galois/Basic.lean, Mathlib/RingTheory/Flat/Equalizer.lean",
+  "line": "Basis.lean:130 (equivFinsuppOfBasisLeft), VectorSpace.lean:152 (ofVectorSpace), Galois/Basic.lean:340, Flat/Equalizer.lean:163 (tensorEqLocusEquiv)",
+  "how": "no single declaration states (A ⊗_k M)^G = A ⊗ 1 (point B8). In Lean: take b := Basis.ofVectorSpace k A, transport z through equivFinsuppOfBasisLeft b : A ⊗[k] M ≃ₗ[k] (ι →₀ M), check that lTensor τ becomes Finsupp.mapRange τ, and conclude coordinatewise with the fixed-field hypothesis (IsGalois.mem_range_algebraMap_iff_fixed for finite Galois M/k, the case the citer uses); about ten lines. Alternatively, for G finite, tensorEqLocusEquiv for f = (τ)_τ : M → ∏_τ M and g the diagonal, plus A ⊗ ∏_τ M ≅ ∏_τ (A ⊗ M) for a finite product; also several lines."
+ },
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "lem-weil-pbc-tensor-field-extension-galois-invariants",
+  "worker": "stage1",
+  "summary": "Statement checked against its use in the citer lem-weil-pbc-galois-invariant-closed-subset-descends (step 6: unique a_j with c_j = a_j ⊗ 1 for G = Aut(M/k), M/k finite Galois): kept unchanged. Source place corrected from lines 917-919 to lines 924-925 of varieties.tex (where '(A ⊗_k k')^G[T] = A[T] (by basic Galois theory)' is). The source gives no argument; proof written by the agent in six steps: (1) a k-basis (e_i) of A (existing leaf lem-weil-pbc-vector-space-basis-through-vector); (2) (e_i ⊗ 1) is an M-basis of A ⊗_k M, so unique coordinates z = Σ e_i ⊗ y_i (existing leaf def-weil-vector-space-scalar-extension, whose statement contains the basis clause; used as a Mathlib-leaf tool from unit sk-def-sf-admissible); (3) id ⊗ τ acts coordinatewise; (4) ι(A) is invariant; (5) invariant z has τ(y_i) = y_i, so y_i ∈ k by the fixed-field hypothesis and z = ι(Σ c_i e_i); (6) injectivity of ι from uniqueness of coordinates and injectivity of k → M. No new node. Mathlib: three kinds of search added (leansearch, leanfinder, loogle, grep, local_search); no match, candidate recorded (equivFinsuppOfBasisLeft route; tensorEqLocusEquiv for finite G)."
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "result": "accepted",
+  "note": "6 steps (proof_origin agent; Varieties 038B says 'basic Galois theory'): a k-basis of A (basis leaf), the M-basis e_i (x) 1 of A (x)_k M (scalar-extension definition leaf of sk-def-sf-admissible, a tool), coordinatewise action, invariants have coordinates fixed by G hence in k, injectivity of iota. Statement unchanged; source place corrected."
+ }
 }
