@@ -2570,3 +2570,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 20:49 L: returned deliver/G1/def-weil-pbc-C4 (reviewer RETURN: Reviewer R-dc42410 (packet review, 20:49 UTC), head d63880e86. B10: nothing to split; the sorry-free declaration Algebra)
 - 20:50 L: returned deliver/E1/lem-sc-open-restriction-support-triangle (reviewer RETURN: 1. E (wrong mathematics), Step 3: 'for an open immersion, direct image is exact: on stalks it is the identity over V and)
 - 20:50 L: merged deliver/C1/def-nagata-fixed-base-separated-stage (reviewer FIX; first push; new nodes: 0)
+- 20:50 L: merged deliver/G1/lem-pc-kbar-pure-insep (reviewer PASS; first push; new nodes: 0)

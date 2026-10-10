@@ -3,7 +3,7 @@
  "blueprint": {
   "is": "lem-pc-kbar-pure-insep",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "The algebraic closure over a separably closed field",
@@ -16,26 +16,63 @@
   "def-pc-field-tower",
   "def-pc-separably-closed"
  ],
- "proof": [
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/fields.tex",
+  "place": "Fields, Lemma 9.14.6 (Tag 030K); Mathlib theorem supplies the proof"
+ },
+ "mathlib_searches": [
   {
-   "text": "Let $K=k(\\alpha)$ (finite over $k$). Let $L$ be the separable closure\nof $k$ inside $K$, i.e. the maximal separable subextension (standard:\namong the subextensions $k\\subseteq k'\\subseteq K$ with $k'/k$ finite\nseparable there is a maximal one, obtained by compositum).\nThen $K/L$ is purely inseparable: for a finite extension in\ncharacteristic $p$ this is the standard fact that a finite extension is\nthe compositum of a separable and a purely inseparable subextension\n(the tower $K/k$ decomposes: the separable part $L$, and for\n$\\beta\\in K$ the minimal polynomial over $L$ is $T^{p^f}-c$, a purely\ninseparable polynomial: this is the classical normal-separable\ndevissage; we use it as standard field theory). Let\n$[K:L]=p^e$. For every $\\beta\\in K$, $\\beta^{p^e}\\in L$: indeed the\nminimal polynomial $T^{p^f}-c$ of $\\beta$ over $L$ has $f\\le e$, and\n$\\beta^{p^e}=c^{p^{e-f}}\\in L$.\nApply this to $\\beta=\\alpha$: $\\alpha^{p^e}\\in L$, which is separable\nover $k$; take $n=e$. The last assertion: since $\\bar k$ is\ngenerated over $k$ by its algebraic elements and $\\alpha^{p^n}$ is\nseparable for some $n$, the field $\\bar k$ is the union of its\nsubfields $k(\\alpha)$ with each $\\alpha^{p^n}\\in k^{sep}=k$ (by\n[lem-pc-sepclosed-finite-sep-trivial] the separable elements are\nin $k$): every element of $\\bar k$ lies in $k$ after taking\n$p^n$-th powers, i.e. $\\bar k/k$ is purely inseparable.",
-   "uses": [
-    "lem-pc-sepclosed-finite-sep-trivial"
-   ],
-   "elementary": false
+   "tool": "leanfinder",
+   "query": "for an algebraic extension of a field, every element becomes separable after a p-power",
+   "results": "Algebra.IsAlgebraic.isPurelyInseparable_of_isSepClosed and separableClosure.isPurelyInseparable in Mathlib/FieldTheory/PurelyInseparable/Basic",
+   "date": "2026-10-11",
+   "verdict": "match via isSepClosed_iff_isPurelyInseparable_algebraicClosure"
+  },
+  {
+   "tool": "loogle",
+   "query": "separableClosure.isPurelyInseparable, separableClosure.isSeparable, IsSepClosed.algebraMap_surjective",
+   "results": "0 hits",
+   "date": "2026-10-11",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "separableClosure.*isPurelyInseparable|isPurelyInseparable_iff_pow_mem [Mathlib/FieldTheory]",
+   "results": "0 hits from msearch service",
+   "date": "2026-10-11",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "algebraic closure of a separably closed field is purely inseparable",
+   "results": "service unavailable (HTTP 500)",
+   "date": "2026-10-11",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "grep",
+   "query": "isPurelyInseparable_of_isSepClosed [Mathlib]",
+   "results": "0 hits from msearch service",
+   "date": "2026-10-11",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "algebraic extension of a separably closed field is purely inseparable",
+   "results": "isSepClosed_iff_isPurelyInseparable_algebraicClosure in Mathlib/FieldTheory/PurelyInseparable/Basic",
+   "date": "2026-10-11",
+   "verdict": "match"
   }
  ],
- "proof_deps": [
-  "lem-pc-sepclosed-finite-sep-trivial"
- ],
- "proof_origin": {
-  "by": "agent",
-  "document": "literature/blueprint/master/blueprint/sec-picard-framework/sk-prop-picard-dense-points/lem-pc-kbar-pure-insep.md",
-  "place": "## Proof"
+ "mathlib_match": {
+  "declaration": "isSepClosed_iff_isPurelyInseparable_algebraicClosure; isPurelyInseparable_iff_pow_mem",
+  "file": "Mathlib/FieldTheory/PurelyInseparable/Basic.lean",
+  "how": "For the final clause, specialize the forward implication of isSepClosed_iff_isPurelyInseparable_algebraicClosure (line 558) to the algebraic closure E = k-bar, obtaining IsPurelyInseparable k E. For the first clause, apply isPurelyInseparable_iff_pow_mem (line 211) with exponential characteristic p to obtain n with alpha^(p^n) in the algebraMap range; identify that range element with k, where it is separable over k by the base-field separability instance. This is one specialization per clause; the purely-inseparable definition is Stacks Tag 09HE."
  },
- "mathlib_searches": [],
- "mathlib_match": null,
- "status": "imported",
+ "status": "mathlib",
  "merged_into": null,
  "import_flags": [],
  "blueprint_kind": "lemma",
@@ -63,5 +100,20 @@
   }
  },
  "chapter": "sec-picard-framework",
- "unit": "sk-prop-picard-dense-points"
+ "unit": "sk-prop-picard-dense-points",
+ "split_report": {
+  "date": "2026-10-11",
+  "item": "lem-pc-kbar-pure-insep",
+  "worker": "stage1",
+  "summary": "The item is a Mathlib leaf: Stacks Fields Lemma 9.14.6 (Tag 030K) is the source statement; isSepClosed_iff_isPurelyInseparable_algebraicClosure (Basic.lean:558) gives the extension clause and isPurelyInseparable_iff_pow_mem (Basic.lean:211) gives the p-power clause.",
+  "blueprint": "Realizes the entire blueprint node statement; the imported proof paragraph is replaced by the Mathlib theorem."
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-kpi2413",
+  "group": "G1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-kpi2413 (reviewer sub-agent of L); spot-checked: Read Mathlib Basic.lean:558 isSepClosed_iff_isPurelyInseparable_algebraicClosure (forward implication specialized to k-bar gives the final clause) and :211 isPurelyInseparable_iff_pow_mem (gives n with alpha^(p^n) in k, hence separable): one declaration per clause, B8 ok. Item states only the field clause (no topological-invariance clause), so no universal-homeomorphism node is needed; char 0 / n=0 cases fine. No repairs."
+ }
 }
