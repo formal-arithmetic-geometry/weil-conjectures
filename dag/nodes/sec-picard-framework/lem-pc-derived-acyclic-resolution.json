@@ -21,9 +21,36 @@
   "def-sp-left-exact-additive",
   "def-sp-injective-resolutions"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Extend the finite augmented exact complex by putting $C^i=0$ for $i>n$. It is then a bounded-below resolution $0\\to M\\to C^0\\to C^1\\to\\cdots$ by $v$-acyclic objects, since the zero objects are $v$-acyclic and the original exactness is unchanged.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/derived-categories.tex",
+    "place": "Proposition 13.16.8 (Tag 05TA), setup of a bounded-below acyclic resolution"
+   }
+  },
+  {
+   "text": "Apply the general acyclicity criterion [lemma-weil-pbc-leray-acyclicity], clause 2, to this padded resolution. It gives a canonical isomorphism $\\mathcal H^q(v(C^\\bullet))\\xrightarrow{\\sim}R^qv(M)$ for every $q\\geq0$, induced by a comparison morphism from the acyclic resolution to an injective resolution of $M$. The terms after degree $n$ are zero, so this cohomology is exactly the cohomology of the displayed finite complex $0\\to v(C^0)\\to\\cdots\\to v(C^n)\\to0$.",
+   "uses": [
+    "lemma-weil-pbc-leray-acyclicity"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived-categories.tex",
+    "place": "Proposition 13.16.8 (Tag 05TA), bounded-below complexes of F-acyclic objects compute RF"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lemma-weil-pbc-leray-acyclicity"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/derived-categories.tex",
+  "place": "Proposition 13.16.8 (Tag 05TA)"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -55,12 +82,37 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-pc-cech-resolution",
   "by": "worker",
   "date": "2026-10-10"
  },
  "chapter": "sec-picard-framework",
- "unit": "sk-thm-picard-semicon"
+ "unit": "sk-thm-picard-semicon",
+ "split_report": {
+  "date": "2026-10-11",
+  "item": "lem-pc-derived-acyclic-resolution",
+  "worker": "stage1",
+  "summary": "No new child node was needed: the existing imported lemma-weil-pbc-leray-acyclicity states the more general acyclic-resolution criterion. The finite resolution is padded by zero terms and the criterion is applied, yielding the stated canonical cohomology isomorphism.",
+  "blueprint": "Realizes the parent blueprint step that a finite resolution by acyclic objects computes the right derived functor after applying the functor.",
+  "tool_uses": [
+   {
+    "node": "lemma-weil-pbc-leray-acyclicity",
+    "why": "Its clause 2 is the general bounded-below acyclic-resolution criterion; the present finite statement is its zero-padded special case, and no node in this unit supplies that generic derived-functor theorem."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lemma-weil-pbc-leray-acyclicity",
+  "lemma-weil-pbc-leray-acyclicity"
+ ],
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-dar1930",
+  "group": "J1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-dar1930 (reviewer sub-agent of L); spot-checked: Step 2 against clause 2 of lemma-weil-pbc-leray-acyclicity (exact augmented resolution, v-acyclic terms, enough injectives, comparison map): hypotheses match the zero-padded resolution; step 1 elementary; cited node imported, its proof_deps do not reach the item (no cycle); no new nodes so no class (b) duplicate; tool use accepted as generic derived-functor criterion. FIX more, RETURN less: no repair needed."
+ }
 }

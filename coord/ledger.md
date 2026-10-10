@@ -2369,3 +2369,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 19:21 L: merged deliver/G1/lem-sc-finite-surjective-dimension (reviewer PASS; first push; new nodes: 0)
 - 19:21 L: merged deliver/J1/lem-sc-bounded-below-injective-resolution (reviewer FIX; first push; new nodes: 1)
 - 19:21 L: merged deliver/G1/lem-sc-finite-pushforward-derived-hom-qcoherent (reviewer FIX; after a return; new nodes: 5)
+- 19:22 L: merged deliver/J1/lem-pc-derived-acyclic-resolution (reviewer PASS; first push; new nodes: 0)
