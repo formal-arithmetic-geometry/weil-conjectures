@@ -1,0 +1,83 @@
+{
+ "id": "lem-weil-pbc-limit-module-finite-presentation",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lemma-weil-pbc-h1-constructible-representation",
+   "place": "blueprint proof of lemma-weil-pbc-h1-constructible-representation, first paragraph: 'Constructible approximation therefore supplies a constructible sheaf F, a map alpha:F to I, and lifts ... satisfying the same equations' (the finite-presentation descent below that approximation)",
+   "via": [
+    "lem-weil-pbc-openness-of-flatness",
+    "lem-weil-pbc-colimit-flat-ring-map",
+    "lem-weil-pbc-descend-flat-finite-presentation",
+    "lem-weil-pbc-descend-finite-locally-free",
+    "lem-weil-pbc-flat-fp-qf-stratification",
+    "lem-weil-pbc-etale-separated-stratified-finite",
+    "lem-weil-pbc-etale-stratified-finite",
+    "lem-weil-pbc-etale-free-sheaf-constructible",
+    "lem-weil-pbc-constructible-generation",
+    "lem-weil-pbc-module-sheaf-colimit-constructible"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Noetherian approximation of a finitely presented algebra and module (Stacks 00R1)",
+ "statement": "Let $R\\to S$ be a homomorphism of commutative rings of finite presentation [def-weil-pbc-finitely-presented-algebra], and let $M$ be a finitely presented $S$-module, meaning that $M$ is the cokernel of an $S$-linear map $S^{\\oplus a}\\to S^{\\oplus b}$ for finite $a,b$. Then there are a nonempty directed set $(\\Lambda,\\le)$, ring maps $R_\\lambda\\to S_\\lambda$ and $S_\\lambda$-modules $M_\\lambda$ for $\\lambda\\in\\Lambda$, compatible transition maps and maps to $R,S,M$, such that: (1) $R=\\varinjlim R_\\lambda$, $S=\\varinjlim S_\\lambda$ as rings and $M=\\varinjlim M_\\lambda$ as abelian groups [def-weil-pbc-category-colimit], compatibly with $R\\to S$ and the module actions; (2) each $R_\\lambda$ is of finite type over $\\mathbf Z$ and each $S_\\lambda$ is of finite type over $R_\\lambda$ [def-weil-pbc-finite-type-algebra], while $M_\\lambda$ is finitely generated over $S_\\lambda$ [def-weil-finitely-generated-module]; (3) for every $\\lambda\\le\\mu$, the canonical maps $S_\\lambda\\otimes_{R_\\lambda}R_\\mu\\to S_\\mu$ and $M_\\lambda\\otimes_{S_\\lambda}S_\\mu\\to M_\\mu$ are isomorphisms; (4) for every $\\lambda$, the canonical maps $S_\\lambda\\otimes_{R_\\lambda}R\\to S$ and $M_\\lambda\\otimes_{S_\\lambda}S\\to M$ are isomorphisms, so also $M_\\lambda\\otimes_{R_\\lambda}R\\to M$ is an isomorphism of $R$-modules.",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Algebra, Lemma Tag 00R1 (lemma-limit-module-finite-presentation), lines 32593-32625, including the displayed 'in particular' isomorphisms"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-finitely-presented-algebra",
+  "def-weil-pbc-category-colimit",
+  "def-weil-pbc-finite-type-algebra",
+  "def-weil-finitely-generated-module"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "non-noetherian finitely presented ring map and module descend to finite type Z-algebra directed system with compatible module base change",
+   "results": "RingHom.FinitePresentation, Algebra.FinitePresentation.baseChange, Module.finitePresentation_iff_finite; no complete approximation system",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "directed colimit approximation of finitely presented algebra and module by finite type algebras over integers",
+   "results": "RingHom.EssFiniteType.exists_eq_comp_ι_app_of_isColimit and CommRingCat.isFinitelyPresentable_hom (Algebra/Category/Ring/FinitePresentation.lean) factor maps through colimits but do not supply a system of algebra and module models",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"limit_module_finite_presentation\"",
+   "results": "none",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "rg -n -i 'finite.*presentation.*colimit|colimit.*finite.*presentation|Noetherian.*approximation|approximation.*module.*finite' Mathlib/Algebra/Category Mathlib/RingTheory",
+   "results": "Algebra/Category/Ring/FinitePresentation.lean:81,145,169 has factorization and preservation for a finitely presented ring map; no module-model construction or 00R1 statement",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-openness-of-flatness",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {"state": "none", "decls": [], "missing": []},
+  "slopmaster2": {"state": "none", "decls": [], "missing": []}
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1"
+}
