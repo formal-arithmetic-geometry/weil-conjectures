@@ -14,47 +14,81 @@
  },
  "kind": "statement",
  "title": "Pseudo-coherence in a distinguished triangle",
- "statement": "Let R be a ring and m an integer. Call an object C of D(R) m-pseudo-coherent if there are a bounded complex E^\\bullet of finite free R-modules and a morphism E^\\bullet\\to C in D(R) inducing isomorphisms H^i(E^\\bullet)\\to H^i(C) for i>m and a surjection H^m(E^\\bullet)\\to H^m(C). In a distinguished triangle K \\to L \\to M \\to K[1] in D(R) [def-pc-derived-category], if K is (m+1)-pseudo-coherent and L is m-pseudo-coherent, then M is m-pseudo-coherent.",
+ "statement": "Let R be a ring and m an integer. Call an object C of D(R) m-pseudo-coherent if there are a bounded complex E^\\bullet of finite free R-modules and a morphism E^\\bullet\\to C in D(R) inducing isomorphisms H^i(E^\\bullet)\\to H^i(C) for i>m and a surjection H^m(E^\\bullet)\\to H^m(C). In a distinguished triangle K \\to L \\to M \\to K[1] in D(R) [def-weil-abstract-derived-category], if K is (m+1)-pseudo-coherent and L is m-pseudo-coherent, then M is m-pseudo-coherent.",
  "source": {
   "document": "literature/stacks-project/more-algebra.tex",
   "place": "Tag 064R, label lemma-cone-pseudo-coherent"
  },
  "stmt_deps": [
-  "def-pc-derived-category"
+  "def-weil-abstract-derived-category"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Apply the first clause of the ring-level distinguished-triangle lemma: for a distinguished triangle A \\to B \\to C \\to A[1] in D(R), if A is (m+1)-pseudo-coherent and B is m-pseudo-coherent, then C is m-pseudo-coherent.",
+   "uses": [
+    "lem-pc-ring-pseudo-coherent-distinguished-triangle"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 064R, label lemma-cone-pseudo-coherent"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-ring-pseudo-coherent-distinguished-triangle"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Tag 064R, label lemma-cone-pseudo-coherent"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
    "query": "cone of pseudo-coherent complexes is pseudo-coherent finite cohomology",
-   "results": "Mapping-cone support declarations only; no pseudo-coherent theorem",
+   "results": "CochainComplex.cm5b and mapping-cone support declarations in Mathlib/Algebra/Homology; no pseudo-coherent theorem",
    "date": "2026-10-11",
    "verdict": "no match"
   },
   {
    "tool": "loogle",
    "query": "PseudoCoherent in DerivedCategory",
-   "results": "0 hits; parser rejected unknown identifier",
+   "results": "0 hits; parser rejected unknown identifier 'PseudoCoherent'",
    "date": "2026-10-11",
    "verdict": "no match"
   },
   {
    "tool": "grep",
    "query": "pseudo.?coherent.*cone|finite.*cohomology",
-   "results": "0 hits in Mathlib source",
+   "results": "5 incidental hits in representation-theory cohomology docs; no pseudo-coherent cone theorem",
    "date": "2026-10-11",
    "verdict": "no match"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-sc-affine-pseudo-coherent-lift",
   "by": "worker",
   "date": "2026-10-10"
  },
  "chapter": "sec-picard-framework",
- "unit": "sk-thm-picard-duality"
+ "unit": "sk-thm-picard-duality",
+ "split_report": {
+  "date": "2026-10-11",
+  "item": "lem-sc-cone-pseudo-coherent",
+  "worker": "stage1",
+  "summary": "Split the item by citing the existing broader ring-level triangle lemma, which states all three 064R clauses and therefore contains this item's first clause verbatim. Corrected the imported dependency from the scheme-derived-category definition to def-weil-abstract-derived-category, which is the definition applicable to D(R). No new node was needed.",
+  "blueprint": "The item's proof realizes the ancestor lem-sc-finite-duality place 'Tag 08EE proof: cone induction preserves pseudo-coherence' by applying the existing Tag 064R ring-level triangle lemma.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-cpc3151",
+  "group": "F1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-cpc3151 (reviewer sub-agent of L); spot-checked: Statement vs Tag 064R: exactly clause (1), clauses (2),(3) not claimed; not word-for-word duplicate of lem-pc-ring-pseudo-coherent-distinguished-triangle (that node states all three clauses with A,B,C; item is its clause 1 renamed K,L,M) so cited as broader existing node (created from lem-pc-ring-pseudo-coherent-summand, not from this item: no cycle). Inline m-pseudo-coherence definition identical to the triangle node; summand node's complex-level version reconciled there via Tag 064B. stmt_deps change def-pc-derived-category (sheaves on scheme) -> def-weil-abstract-derived-category correct and named (E7). Citer lem-sc-affine-pseudo-coherent-lift step 3 uses exactly clause 1 (K=F bounded finite free, L=M_{f_j} (n-1)-pc, m=n-1). Report mentions citations.json which is not in the diff: report inaccuracy only. No repairs."
+ }
 }
