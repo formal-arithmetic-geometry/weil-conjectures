@@ -1,6 +1,6 @@
 # Work queue
 
-945 items; claim with `tools/claim.py next <group> [--stage N]`.
+946 items; claim with `tools/claim.py next <group> [--stage N]`.
 
 ## Stage 1: nodes to split (586)
 
@@ -23,7 +23,6 @@
 | `lem-weil-pbc-separable-residue-cotangent-injective` | 1014 | none |
 | `lem-weil-pbc-separably-generated-differentials-dimension` | 1014 | none |
 | `lem-weil-pbc-serre-criterion-reduced` | 1014 | none |
-| `lem-weil-pbc-torsion-submodule-flat-base-change-iso` | 1014 | none |
 | `lem-weil-pbc-two-term-homotopy-equivalence-direct-sum` | 1014 | none |
 | `lem-weil-pbc-well-ordered-union-projective-dimension` | 1014 | none |
 | `lem-weil-pbc-zariski-extension-by-zero-adjunction` | 1014 | none |
@@ -71,6 +70,7 @@
 | `lem-weil-pbc-p-independent-extends-to-p-basis` | 1015 | none |
 | `lem-weil-pbc-polynomial-ring-maximal-chain-height-difference` | 1015 | none |
 | `lem-weil-pbc-quasi-finite-over-polynomial-algebra` | 1015 | none |
+| `lem-weil-pbc-quotient-by-power-torsion-no-torsion` | 1015 | none |
 | `lem-weil-pbc-regular-local-quotient-kernel-parameters` | 1015 | none |
 | `lem-weil-pbc-relative-global-complete-intersection-base-change` | 1015 | none |
 | `lem-weil-pbc-relative-global-complete-intersection-local-regular-sequence` | 1015 | none |
@@ -593,7 +593,7 @@
 | `def-exc-jacobian-presentation` | - | none |
 | `def-nagata-rees-algebra` | - | none |
 
-## Stage 2: nodes to state (359)
+## Stage 2: nodes to state (360)
 
 | node | distance to Mathlib | kind |
 |---|---|---|
@@ -938,6 +938,7 @@
 | `lem-weil-pbc-tor-long-exact-first-variable` | 1 | state |
 | `lem-weil-pbc-tor-strictly-pro-zero` | 1 | state |
 | `lem-weil-pbc-torsion-module-flat-base-change-iso` | 1 | state |
+| `lem-weil-pbc-torsion-submodule-flat-base-change-iso` | 1 | state |
 | `lem-weil-pbc-tower-limit-exact-surjective-kernels` | 1 | state |
 | `lem-weil-pbc-triangle-morphism-extension` | 1 | state |
 | `lem-weil-pbc-truncation-descends` | 1 | state |
