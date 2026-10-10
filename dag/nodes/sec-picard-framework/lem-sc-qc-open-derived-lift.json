@@ -23,9 +23,39 @@
   "def-pc-scheme",
   "def-pc-derived-category"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Let j:U\\hookrightarrow X be the open immersion. It is quasi-compact: if W\\subseteq X is affine open, then j^{-1}(W)=U\\cap W; writing U=U_1\\cup\\dots\\cup U_n with U_i affine (U is quasi-compact), each U_i\\cap W is affine because the affine scheme X is separated, so U\\cap W is quasi-compact. It is quasi-separated, since every open immersion is separated. For E in D_{\\mathrm{QCoh}}(\\mathcal O_U), define E'=Rj_*E. The derived direct-image preservation theorem [lem-pc-derived-direct-image-preserves-qcoh] applied to the quasi-compact quasi-separated morphism j gives E' in D_{\\mathrm{QCoh}}(\\mathcal O_X).",
+   "uses": [
+    "lem-pc-derived-direct-image-preserves-qcoh"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/perfect.tex",
+    "place": "Tag 08EE proof, invocation of Lemma lemma-lift-quasi-coherent; Lemma 08D5(1)"
+   }
+  },
+  {
+   "text": "The restriction-comparison isomorphism [lem-pc-restrict-derived-direct-image-open], applied with f=j and the open V=U\\subseteq X, has j^{-1}(U)=U and induced morphism g=\\mathrm{id}_U, so it gives (Rj_*E)|_U\\cong R(\\mathrm{id}_U)_*(E)=E. Thus E'|_U\\cong E, proving the assertion.",
+   "uses": [
+    "lem-pc-restrict-derived-direct-image-open"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/perfect.tex",
+    "place": "Tag 08EE proof, invocation of Lemma lemma-lift-quasi-coherent; restriction is right inverse to Rj_*"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-derived-direct-image-preserves-qcoh",
+  "lem-pc-restrict-derived-direct-image-open"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/perfect.tex",
+  "place": "Tag 08EE, Lemma 36.13.5 (lemma-lift-quasi-coherent)"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -50,12 +80,38 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-sc-affine-pseudo-coherent-lift",
   "by": "worker",
   "date": "2026-10-10"
  },
  "chapter": "sec-picard-framework",
- "unit": "sk-thm-picard-duality"
+ "unit": "sk-thm-picard-duality",
+ "split_report": {
+  "date": "2026-10-11",
+  "item": "lem-sc-qc-open-derived-lift",
+  "worker": "stage1",
+  "summary": "Split Stacks Tag 08EE's quasi-coherent lifting lemma into the derived direct-image preservation step and the restriction comparison for an open immersion. Both facts already exist as DAG nodes, so no new nodes were created.",
+  "blueprint": "Realizes the Tag 08EE proof clause 'lift a quasi-coherent derived object from the quasi-compact open' by taking Rj_*E and using the restriction right-inverse.",
+  "tool_uses": [
+   {
+    "node": "lem-pc-restrict-derived-direct-image-open",
+    "why": "The restriction comparison for derived direct image is a generic derived-category tool from another unit; it identifies (Rj_*E)|_U with E."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pc-restrict-derived-direct-image-open",
+  "lem-pc-restrict-derived-direct-image-open"
+ ],
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-qol3153",
+  "group": "K1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-qol3153 (reviewer sub-agent of L); spot-checked: Proof is Rj_*E plus restriction; both cited nodes state the facts (C1); citer lem-sc-affine-pseudo-coherent-lift step 1 matches the statement; no new nodes, no lift/extend duplicates. FIX more, RETURN less: (1) C4 step 2 instantiated V=X (wrong; gives (Rj_*E)|_X), corrected to V=U with j^{-1}(U)=U, g=id_U - the second reading claimed this fix but it was not in the file; (2) C4 step 1 asserted j quasi-compact without reason, added elementary argument (U qc, X affine hence separated so U_i cap W affine) and qs from open immersion separated.; 1 file(s) fixed by the reviewer"
+ },
+ "lead_note": "2026-10-10 L (R-qol3153): Second reading by K1 claimed V=X->V=U correction but the delivered file still had V=X; reviewer applied it."
 }
