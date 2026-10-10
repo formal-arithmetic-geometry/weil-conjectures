@@ -1331,8 +1331,140 @@ theorem nonempty_tangentSpaceAt_linearEquiv_H_one [IsSepClosed k]
     [GeometricallyIntegral (X ↘ Spec (.of k))] (J : Over (Spec (.of k))) [GrpObj J]
     (e : (picardFunctorDegree (X ↘ Spec (.of k)) 0).obj.RepresentableBy J)
     (he : IsPicardZeroMul (X ↘ Spec (.of k)) e) :
-    Nonempty (tangentSpaceAt J η[J] ≃ₗ[k] (Modules.unit X).H 1) :=
-  sorry
+    Nonempty (tangentSpaceAt J η[J] ≃ₗ[k] (Modules.unit X).H 1) := by
+  let f := X ↘ Spec (.of k)
+  let Jt := fppfTopology.over (Spec (.of k))
+  let S := picardSubfunctorDegree f 0
+  let Tε := Scheme.dualNumbersOver (Spec (.of k))
+  let T₀ := 𝟙_ (Over (Spec (.of k)))
+  let iε := Scheme.dualNumbersιOver (Spec (.of k))
+  have : Subsingleton (Spec (.of k)).dualNumbers := inferInstanceAs (Subsingleton (Spec (.of k)))
+  have : Subsingleton Tε.left := inferInstanceAs (Subsingleton (Spec (.of k)))
+  have : Subsingleton T₀.left := inferInstanceAs (Subsingleton (Spec (.of k)))
+  obtain ⟨p₀⟩ : Nonempty (Spec (.of k)) := inferInstance
+  -- the points of `J` over `T` are the classes of fibrewise degree zero on `X_T`
+  have hpts (T : Over (Spec (.of k))) [Subsingleton T.left] (t : T.left) :
+      ∃ ψ : picardSubgroupDegreeZero f T ≃* (T ⟶ J), ∀ L,
+        ψ L = e.homEquiv.symm ((toSheafify Jt S.toFunctor).app (.op T) L) := by
+    obtain ⟨ψ, hψ⟩ := exists_mulEquiv_of_isPicardZeroMul f e he (T := T)
+      (G := picardSubgroupDegreeZero f T) Subtype.val (fun _ _ ↦ rfl)
+      (Equiv.ofBijective (fun L : picardSubgroupDegreeZero f T ↦
+        (toSheafify Jt S.toFunctor).app (.op T) L)
+        (bijective_toSheafify_app_picardSubfunctorDegree_zero T t))
+      (fun g ↦ ⟨g.2, rfl⟩)
+    exact ⟨ψ, hψ⟩
+  obtain ⟨ψε, hψε⟩ := hpts Tε p₀
+  obtain ⟨ψ₀, hψ₀⟩ := hpts T₀ p₀
+  -- pulling back classes along a morphism of one-point bases
+  have hnat {T T' : Over (Spec (.of k))} (φ : T' ⟶ T) (L : picardSubgroupDegreeZero f T) :
+      φ ≫ e.homEquiv.symm ((toSheafify Jt S.toFunctor).app (.op T) L) =
+        e.homEquiv.symm ((toSheafify Jt S.toFunctor).app (.op T')
+          ⟨Pic.map (baseChangeMap f φ) L.1, S.map φ.op L.2⟩) := by
+    rw [e.comp_homEquiv_symm]
+    exact congrArg e.homEquiv.symm
+      (NatTrans.naturality_apply (toSheafify Jt S.toFunctor) φ.op L).symm
+  let res : picardSubgroupDegreeZero f Tε →* picardSubgroupDegreeZero f T₀ :=
+    { toFun L := ⟨Pic.map (baseChangeMap f iε) L.1, S.map iε.op L.2⟩
+      map_one' := Subtype.ext (Pic.map_one _)
+      map_mul' L L' := Subtype.ext (Pic.map_mul _ L.1 L'.1) }
+  have hres (L : picardSubgroupDegreeZero f Tε) : iε ≫ ψε L = ψ₀ (res L) := by
+    rw [hψε, hψ₀]
+    exact hnat iε L
+  have hη : η[J] = ψ₀ 1 := by
+    rw [map_one]
+    exact MonObj.one_eq_one (M := J)
+  -- the tangent space is the kernel of `res`
+  let E₁ : tangentSubgroup J ≃* res.ker :=
+    { toFun v := ⟨ψε.symm v.1, by
+        rw [MonoidHom.mem_ker, ← ψ₀.injective.eq_iff, ← hres, MulEquiv.apply_symm_apply,
+          map_one, ← MonObj.one_eq_one]
+        exact v.2⟩
+      invFun K := ⟨ψε K.1, by
+        change iε ≫ ψε K.1 = η[J]
+        rw [hres, K.2, hη]⟩
+      left_inv v := Subtype.ext (ψε.apply_symm_apply v.1)
+      right_inv K := Subtype.ext (ψε.symm_apply_apply K.1)
+      map_mul' v w := Subtype.ext (map_mul ψε.symm v.1 w.1) }
+  -- the base change `X_ε` is the thickening `X[ε]`, and `X_k` is `X`
+  have hpb := Scheme.isPullback_dualNumbersProj f
+  let eD : X.dualNumbers ≅ pullback f Tε.hom := hpb.isoPullback
+  have hDfst : eD.hom ≫ pullback.fst f Tε.hom = X.dualNumbersProj := hpb.isoPullback_hom_fst
+  have hDsnd : eD.hom ≫ pullback.snd f Tε.hom = f.dualNumbers := hpb.isoPullback_hom_snd
+  have : IsIso (pullback.fst f T₀.hom) := by
+    change IsIso (pullback.fst f (𝟙 _))
+    infer_instance
+  let e₀ : X ≅ pullback f T₀.hom := (asIso (pullback.fst f T₀.hom)).symm
+  have hbfst {T T' : Over (Spec (.of k))} (φ : T' ⟶ T) :
+      baseChangeMap f φ ≫ pullback.fst f T.hom = pullback.fst f T'.hom :=
+    pullback.lift_fst _ _ _ |>.trans (Category.comp_id _)
+  have hbsnd {T T' : Over (Spec (.of k))} (φ : T' ⟶ T) :
+      baseChangeMap f φ ≫ pullback.snd f T.hom = pullback.snd f T'.hom ≫ φ.left :=
+    pullback.lift_snd _ _ _
+  have hiε : X.dualNumbersι ≫ eD.hom = e₀.hom ≫ baseChangeMap f iε := by
+    refine pullback.hom_ext ?_ ?_
+    · rw [Category.assoc, Category.assoc, hbfst, hDfst,
+        Scheme.dualNumbersι_comp_proj]
+      exact (asIso (pullback.fst f T₀.hom)).inv_hom_id.symm
+    · rw [Category.assoc, Category.assoc, hbsnd, hDsnd,
+        Scheme.Hom.ι_comp_dualNumbers]
+      have he₀ : e₀.hom ≫ pullback.snd f T₀.hom = f := by
+        change inv (pullback.fst f T₀.hom) ≫ pullback.snd f T₀.hom = f
+        rw [IsIso.inv_comp_eq, pullback.condition]
+        exact (Category.comp_id _).symm
+      rw [← Category.assoc, he₀]
+      rfl
+  have hmapiε (L : (pullback f Tε.hom).Pic) :
+      Pic.map X.dualNumbersι (Pic.map eD.hom L) = Pic.map e₀.hom (Pic.map (baseChangeMap f iε) L) := by
+    rw [← Pic.map_comp, ← Pic.map_comp, hiε]
+  have hmap₀ (L : (pullback f T₀.hom).Pic) : Pic.map e₀.hom L = 1 ↔ L = 1 := by
+    refine ⟨fun h ↦ ?_, fun h ↦ h ▸ Pic.map_one _⟩
+    rw [← Pic.map_id L, ← e₀.inv_hom_id, Pic.map_comp, h, Pic.map_one]
+  let E₂ : res.ker ≃* (Pic.mapHom X.dualNumbersι).ker :=
+    { toFun K := ⟨Pic.map eD.hom K.1.1, by
+        rw [MonoidHom.mem_ker, Pic.mapHom_apply, hmapiε, hmap₀]
+        exact congrArg Subtype.val K.2⟩
+      invFun M := ⟨⟨Pic.map eD.inv M.1, mem_picardSubfunctorDegree_zero_of_map_eq_one iε p₀ _ (by
+          rw [← hmap₀, ← hmapiε]
+          simp only [← Pic.map_comp, Iso.hom_inv_id, Iso.inv_hom_id, Pic.map_id]
+          exact M.2)⟩, by
+          refine Subtype.ext ?_
+          change Pic.map (baseChangeMap f iε) (Pic.map eD.inv M.1) = 1
+          rw [← hmap₀, ← hmapiε]
+          simp only [← Pic.map_comp, Iso.hom_inv_id, Iso.inv_hom_id, Pic.map_id]
+          exact M.2⟩
+      left_inv K := by
+        refine Subtype.ext (Subtype.ext ?_)
+        change Pic.map eD.inv (Pic.map eD.hom K.1.1) = K.1.1
+        simp only [← Pic.map_comp, Iso.hom_inv_id, Iso.inv_hom_id, Pic.map_id]
+      right_inv M := by
+        refine Subtype.ext ?_
+        change Pic.map eD.hom (Pic.map eD.inv M.1) = M.1
+        simp only [← Pic.map_comp, Iso.hom_inv_id, Iso.inv_hom_id, Pic.map_id]
+      map_mul' K K' := Subtype.ext (Pic.map_mul _ K.1.1 K'.1.1) }
+  obtain ⟨Ψ, hΨ⟩ := Scheme.exists_addEquiv_ker_picMap_dualNumbersι X
+  let A : tangentSpaceAt J η[J] ≃+ (Modules.unit X).H 1 :=
+    ((E₁.trans E₂).toAdditive : Additive (tangentSubgroup J) ≃+ _).trans Ψ
+  refine ⟨{ A with map_smul' := fun c v ↦ ?_ }⟩
+  -- rescaling `ε` corresponds to multiplication by `c`
+  let sc := dualNumbersScale k c
+  let c' := Scheme.globalSectionsRingHom k (X := X) c
+  have hsc : X.dualNumbersScale c' ≫ eD.hom = eD.hom ≫ baseChangeMap f sc := by
+    refine pullback.hom_ext ?_ ?_
+    · rw [Category.assoc, Category.assoc, hbfst, hDfst,
+        Scheme.dualNumbersScale_comp_proj]
+    · rw [Category.assoc, Category.assoc, hbsnd, hDsnd, ← Category.assoc,
+        hDsnd]
+      exact Scheme.dualNumbersScale_comp_dualNumbers f _
+  let L := ψε.symm v.1
+  have hscL : ψε.symm (c • v).1 =
+      ⟨Pic.map (baseChangeMap f sc) L.1, S.map sc.op L.2⟩ := by
+    rw [MulEquiv.symm_apply_eq, hψε]
+    change sc ≫ v.1 = _
+    rw [← hnat, ← hψε, MulEquiv.apply_symm_apply]
+  change Ψ (.ofMul (E₂ (E₁ (c • v)))) = c • Ψ (.ofMul (E₂ (E₁ v)))
+  refine (hΨ c' _ _ ?_).trans rfl
+  change Pic.map eD.hom (ψε.symm (c • v).1).1 = Pic.map (X.dualNumbersScale c') (Pic.map eD.hom L.1)
+  rw [hscL, ← Pic.map_comp, ← Pic.map_comp, hsc]
 
 end TangentSpace
 
