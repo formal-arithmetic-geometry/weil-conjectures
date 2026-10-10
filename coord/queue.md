@@ -1,8 +1,8 @@
 # Work queue
 
-909 items; claim with `tools/claim.py next <group> [--stage N]`.
+910 items; claim with `tools/claim.py next <group> [--stage N]`.
 
-## Stage 1: nodes to split (153)
+## Stage 1: nodes to split (152)
 
 | node | distance to a target | Lean state on the done branch |
 |---|---|---|
@@ -17,9 +17,9 @@
 | `lem-pc-ring-pseudo-coherent-finite-tor-perfect` | 3015 | none |
 | `lem-pc-ringed-space-product-kinjective` | 3015 | none |
 | `lem-pc-tor-amplitude-qcoh-test` | 3015 | none |
-| `lem-pc-tower-enough-injectives` | 3015 | none |
 | `lem-pc-tower-surjective-lim-acyclic` | 3015 | none |
 | `lem-pc-ringed-space-rgamma-derived-limit` | 3016 | none |
+| `lem-pc-tower-injective-embedding` | 3016 | none |
 | `lem-pc-derived-mayer-vietoris-triangle` | 3017 | none |
 | `lem-pc-ringed-space-sheafification-cohomology` | 3017 | none |
 | `lem-pc-perfect-generation-koszul-orthogonal` | 3018 | none |
@@ -77,7 +77,6 @@
 | `pqf-lem-qs-intersection-qc` | - | none |
 | `thm-sc-affine-cohomology` | - | rests_on_sorry |
 | `thm-sc-constant-invariance` | - | none |
-| `def-nagata-directed-finite-upper-bound` | - | none |
 | `def-nagata-morphism-equality-stage` | - | none |
 | `def-nagata-qc-open-equality-stage` | - | none |
 | `def-nagata-relative-gluing-datum-descent` | - | none |
@@ -160,7 +159,7 @@
 | `lem-pur-rhom-well-defined` | - | none |
 | `lem-zl-noether-normalization-dimension` | - | none |
 
-## Stage 2: nodes to state (756)
+## Stage 2: nodes to state (758)
 
 | node | distance to Mathlib | kind |
 |---|---|---|
@@ -168,6 +167,7 @@
 | `cor-pqf-proper-quasifinite-finite` | 1 | state |
 | `def-galois-category` | 1 | state |
 | `def-kun-topological-dimension-at-point` | 1 | state |
+| `def-nagata-directed-finite-upper-bound` | 1 | state |
 | `def-nagata-extended-ideal` | 1 | state |
 | `def-nagata-homogeneous-localization-degree-zero` | 1 | state |
 | `def-nagata-rees-algebra` | 1 | state |
@@ -298,6 +298,7 @@
 | `lem-pc-stalk-direct-sums` | 1 | state |
 | `lem-pc-stalk-tensor-complex` | 1 | state |
 | `lem-pc-tensor-mapping-cone-iso` | 1 | state |
+| `lem-pc-tower-enough-injectives` | 1 | state |
 | `lem-pc-tower-limit-left-exact` | 1 | state |
 | `lem-pc-zero-scheme-ideal-local` | 1 | state |
 | `lem-pc-zero-scheme-locally-principal` | 1 | state |
@@ -921,7 +922,7 @@
 | `lem-weil-pbc-projective-space-zero-isomorphism` | 4 | state |
 | `def-nagata-fixed-base-separated-stage` | 6 | state |
 
-Not open yet: 1524 nodes that wait for a statement dependency, 193 nodes that wait for stage 1.
+Not open yet: 1524 nodes that wait for a statement dependency, 192 nodes that wait for stage 1.
 
 ## Stage 3: modules to prove (0)
 
