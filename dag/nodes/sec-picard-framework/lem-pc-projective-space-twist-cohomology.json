@@ -3,11 +3,11 @@
  "blueprint": {
   "is": "lem-pc-projective-space-twist-cohomology",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "Monomial cohomology of twists on projective space",
- "statement": "Let $A$ be a commutative ring, $n\\ge1$, and $d\\in\\mathbf Z$.\nFor the twisting modules\non $P=\\mathbf P^n_A$, one has\n\n$$\nH^q(P,\\mathcal O_P(d))\\cong\n\\begin{cases}\n\\displaystyle\\bigoplus_{\\substack{e_i\\ge0\\\\\\sum e_i=d}} A\\,x^e,&q=0,\\\\\n\\displaystyle\\bigoplus_{\\substack{e_i<0\\\\\\sum e_i=d}} A\\,x^e,&q=n,\\\\\n0,&q\\notin\\{0,n\\}.\n\\end{cases}\n$$\n\nHere $x^e=\\prod_ix_i^{e_i}$, and the class of $x^e$ in degree $n$ is\nthat of the Cech $n$-cochain $x^e$ on $U_0\\cap\\cdots\\cap U_n$.\nIn particular, for $n\\ge1$, all these modules are finite free, and:\n\n1. **(i)** $H^0(P,\\mathcal O_P(d))$ is the degree-$d$ part\n$A[x_0,\\ldots,x_n]_d=S^d_A(V)$, the $d$-th symmetric power of the\nfree module $V=A^{n+1}$ with basis $x_0,\\ldots,x_n$; it is zero\nfor $d<0$;\n1. **(ii)** $H^n(P,\\mathcal O_P(d))=0$ for $d\\ge-n$, and\n$H^n(P,\\mathcal O_P(-n-1))$ is free of rank one with basis the class\nof $x_0^{-1}x_1^{-1}\\cdots x_n^{-1}$;\n1. **(iii)** the groups in positive degree vanish for $d\\ge0$;\nin particular $H^0(P,\\mathcal O_P)=A$ and\n$H^q(P,\\mathcal O_P)=0$ for $q\\neq0$.\n\nFor $n=0$, every twist is free of rank one on\n$\\mathbf P^0_A=\\operatorname{Spec}(A)$ and has no higher cohomology.",
+ "statement": "Let $A$ be a commutative ring, $n\\ge0$, and $d\\in\\mathbf Z$.\nFor the twisting modules\non $P=\\mathbf P^n_A$ with standard opens $U_i=D_+(x_i)$, one has, when $n\\ge1$,\n\n$$\nH^q(P,\\mathcal O_P(d))\\cong\n\\begin{cases}\n\\displaystyle\\bigoplus_{\\substack{e_i\\ge0\\\\\\sum e_i=d}} A\\,x^e,&q=0,\\\\\n\\displaystyle\\bigoplus_{\\substack{e_i<0\\\\\\sum e_i=d}} A\\,x^e,&q=n,\\\\\n0,&q\\notin\\{0,n\\}.\n\\end{cases}\n$$\n\nHere $x^e=\\prod_ix_i^{e_i}$, and the class of $x^e$ in degree $n$ is\nthat of the Cech $n$-cochain $x^e$ on $U_0\\cap\\cdots\\cap U_n$.\nIn particular, for $n\\ge1$, all these modules are finite free, and:\n\n1. **(i)** $H^0(P,\\mathcal O_P(d))$ is the degree-$d$ part\n$A[x_0,\\ldots,x_n]_d=S^d_A(V)$, the $d$-th symmetric power of the\nfree module $V=A^{n+1}$ with basis $x_0,\\ldots,x_n$; it is zero\nfor $d<0$;\n1. **(ii)** $H^n(P,\\mathcal O_P(d))=0$ for $d\\ge-n$, and\n$H^n(P,\\mathcal O_P(-n-1))$ is free of rank one with basis the class\nof $x_0^{-1}x_1^{-1}\\cdots x_n^{-1}$;\n1. **(iii)** the groups in positive degree vanish for $d\\ge0$;\nin particular $H^0(P,\\mathcal O_P)=A$ and\n$H^q(P,\\mathcal O_P)=0$ for $q\\neq0$.\n\nFor $n=0$ (where the cases $q=0$ and $q=n$ coincide), every twist is free of rank one on\n$\\mathbf P^0_A=\\operatorname{Spec}(A)$ and has no higher cohomology.",
  "source": {
   "document": "literature/blueprint/master/blueprint/sec-picard-framework/sk-thm-picard-pn/lem-pc-projective-space-twist-cohomology.md",
   "place": "node lem-pc-projective-space-twist-cohomology, order 618",
@@ -23,32 +23,52 @@
  ],
  "proof": [
   {
-   "text": "The transition rule of [def-pc-projective-space-twist], whose gluing\nis well defined by [lem-pc-twist-cocycle], identifies\nsections on $U_J=\\bigcap_{j\\in J}U_j$ with the degree-$d$ part of\n$A[x_0,\\ldots,x_n,x_j^{-1}:j\\in J]$.\nEvery $U_J$ is affine. By [lem-pc-cech-computes], the alternating\nCech complex on the $n+1$ standard opens computes cohomology.\nIts terms are free $A$-modules on Laurent monomials $x^e$, where\n$\\sum_i e_i=d$ and $e_i\\ge0$ for $i\\notin J$. The differential\npreserves $e$, so the complex is the direct sum, over those exponent\nvectors, of complexes $C_e^\\bullet$.",
+   "text": "The transition rule of [def-pc-projective-space-twist], whose gluing\nis well defined by [lem-pc-twist-cocycle], identifies\nsections on $U_J=\\bigcap_{j\\in J}U_j$ with the degree-$d$ part of\n$A[x_0,\\ldots,x_n,x_j^{-1}:j\\in J]$.\nEvery $U_J$ is affine. By [lem-pc-cech-computes] and [lem-pc-alternating-cech-computes], the alternating\nCech complex on the $n+1$ standard opens (indices in the order $0<\\cdots<n$) computes cohomology.\nIts terms are free $A$-modules on Laurent monomials $x^e$, where\n$\\sum_i e_i=d$ and $e_i\\ge0$ for $i\\notin J$. The differential\npreserves $e$, so the complex is the direct sum, over those exponent\nvectors, of complexes $C_e^\\bullet$.",
    "uses": [
     "def-pc-projective-space-twist",
     "lem-pc-twist-cocycle",
-    "lem-pc-cech-computes"
+    "lem-pc-cech-computes",
+    "lem-pc-alternating-cech-computes",
+    "lem-pc-twist-cech-monomial-decomposition"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/coherent.tex",
+    "place": "Tag 01XS, label lemma-cohomology-projective-space-over-ring, proof"
+   }
   },
   {
    "text": "Put $N_e=\\{i:e_i<0\\}$. The degree-$p$ basis of $C_e^\\bullet$\nconsists of the subsets $J\\supseteq N_e$ of size $p+1$.\nIf $N_e=\\varnothing$, this is the cochain complex of a simplex;\naugmentation by $A$ in degree $-1$ makes it contractible, by\ninserting any fixed vertex. Thus its only cohomology is $A$ in\ndegree zero. If $\\varnothing\\ne N_e\\ne\\{0,\\ldots,n\\}$, choose\n$r\\notin N_e$. Insertion of $r$ gives a contracting homotopy:\nfor a component indexed by $J$ not containing $r$, take the\ncomponent indexed by $J\\cup\\{r\\}$ with sign\n$(-1)^{\\#\\{j\\in J:j<r\\}}$, and set it to zero when $r\\in J$.\nThe terms removing vertices other than $r$ cancel in $dh+hd$;\nthe term removing $r$ is the identity. The condition\n$J\\supseteq N_e$ is preserved. No degree-$-1$ term is needed,\nbecause $N_e$ is nonempty. Finally, if $N_e=\\{0,\\ldots,n\\}$,\nthe complex has just one copy of $A$, in degree $n$.",
-   "uses": [],
-   "elementary": null
+   "uses": [
+    "lem-pc-monomial-cech-complex-homology"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/coherent.tex",
+    "place": "Tag 01XS, label lemma-cohomology-projective-space-over-ring, proof"
+   }
   },
   {
-   "text": "Direct sums of complexes of modules commute with cohomology, so\nthese three cases give the displayed formula. There are only\nfinitely many nonnegative exponent vectors of prescribed sum,\nand only finitely many strictly negative ones.\nFor (i), the monomials $x^e$ with $e_i\\ge0$ and $\\sum e_i=d$ form\nthe standard basis of the degree-$d$ part of the polynomial ring,\nwhich is $S^d_A(V)$ (the symmetric algebra of a free module is the\npolynomial ring on a basis); there are none for $d<0$.\nFor (ii), strictly negative exponents satisfy $e_i\\le-1$, so\n$\\sum e_i\\le-n-1$; hence there are none for $d\\ge-n$, and for\n$d=-n-1$ the only one is $e=(-1,\\ldots,-1)$. For (iii), when\n$d\\ge0$ there are no strictly negative exponent vectors at all, and\nfor $d=0$ the only nonnegative one is $e=0$, giving $H^0=A\\cdot1$. For $n=0$ the single chart trivializes every\ntwist, and [lem-pc-affine-vanishing] proves its assertion.\nThe usual reference for this explicit calculation is\n[Stacks, Section 30.8](https://stacks.math.columbia.edu/tag/01XS).",
+   "text": "Cohomology of a termwise direct sum of complexes of $A$-modules is the direct sum of the cohomologies (kernels, images and quotients of a direct sum of maps of modules are computed summandwise), so\nthese three cases give the displayed formula. There are only\nfinitely many nonnegative exponent vectors of prescribed sum,\nand only finitely many strictly negative ones.\nFor (i), the monomials $x^e$ with $e_i\\ge0$ and $\\sum e_i=d$ form\nthe standard basis of the degree-$d$ part of the polynomial ring,\nwhich is $S^d_A(V)$ (the symmetric algebra of a free module is the\npolynomial ring on a basis); there are none for $d<0$.\nFor (ii), strictly negative exponents satisfy $e_i\\le-1$, so\n$\\sum e_i\\le-n-1$; hence there are none for $d\\ge-n$, and for\n$d=-n-1$ the only one is $e=(-1,\\ldots,-1)$. For (iii), when\n$d\\ge0$ there are no strictly negative exponent vectors at all, and\nfor $d=0$ the only nonnegative one is $e=0$, giving $H^0=A\\cdot1$. For $n=0$ the single chart trivializes every\ntwist, and [lem-pc-affine-vanishing] proves its assertion.\nThe usual reference for this explicit calculation is\n[Stacks, Section 30.8](https://stacks.math.columbia.edu/tag/01XS).",
    "uses": [
-    "lem-pc-affine-vanishing"
+    "lem-pc-affine-vanishing",
+    "lem-pc-monomial-cech-complex-homology"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/coherent.tex",
+    "place": "Tag 01XS, label lemma-cohomology-projective-space-over-ring, proof"
+   }
   }
  ],
  "proof_deps": [
   "def-pc-projective-space-twist",
   "lem-pc-twist-cocycle",
   "lem-pc-cech-computes",
-  "lem-pc-affine-vanishing"
+  "lem-pc-alternating-cech-computes",
+  "lem-pc-affine-vanishing",
+  "lem-pc-twist-cech-monomial-decomposition",
+  "lem-pc-monomial-cech-complex-homology"
  ],
  "proof_origin": {
   "by": "agent",
@@ -57,7 +77,7 @@
  },
  "mathlib_searches": [],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [
   "proof_cites_literature",
@@ -306,5 +326,21 @@
   }
  },
  "chapter": "sec-picard-framework",
- "unit": "sk-thm-picard-pn"
+ "unit": "sk-thm-picard-pn",
+ "split_report": {
+  "date": "2026-10-11",
+  "item": "lem-pc-projective-space-twist-cohomology",
+  "worker": "stage1",
+  "summary": "Split the calculation into the Laurent-monomial Cech decomposition, the exponent-vector subcomplex computation, and direct-sum cohomology. Existing sorry-free Lean declarations are only field-specialized clauses, so none states the full commutative-ring item exactly.",
+  "blueprint": "Step 1 uses lem-pc-cech-computes, lem-pc-alternating-cech-computes and lem-pc-twist-cech-monomial-decomposition; step 2 uses lem-pc-monomial-cech-complex-homology; step 3 uses it again with an elementary direct-sum fact.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-ptc2350",
+  "group": "M1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-ptc2350 (reviewer sub-agent of L); spot-checked: Read the packet; checked step 1 against lem-pc-cech-computes and lem-pc-alternating-cech-computes, step 2 against the homology node (alternating signs), step 3 exponent bounds, and the citers canonical/serre-pairing/serre-vanishing/coherent-finiteness/p1-section-module-finite (they cite clauses (i),(ii),(iii) and the basis [x_0^{-1}...x_n^{-1}]). FIX more, RETURN less: (1) C1: step 1 used the alternating Cech complex citing only lem-pc-cech-computes; added lem-pc-alternating-cech-computes to step 1 (uses, proof_deps) and to the decomposition node's statement/stmt_deps, with the index order 0<...<n named. (2) C4/E7: the delivery rewrote the item statement into plain prose, dropping the labels (i)-(iii), S^d_A(V) and the named basis of H^n(O(-n-1)) that the citers cite; restored the base TeX statement with only the stated n=0 fix (n>=0, display for n>=1, q=0 and q=n coincide for n=0). (3) class (d): lem-pc-direct-sum-cech-cohomology (cohomology of termwise direct sums of module complexes) is elementary; folded into step 3 and dropped. Also rewrote the two remaining new nodes in TeX, self-contained (removed undefined d and the bracket citation from the homology node, wrote its differential explicitly). H^n is in the Stacks monomial form; the A-dual form lives in lem-pc-projective-space-serre-pairing, consistent. Second reading by M1 missed (1) and (2).; 3 file(s) fixed by the reviewer"
+ }
 }
