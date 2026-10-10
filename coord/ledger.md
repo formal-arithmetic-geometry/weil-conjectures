@@ -1619,3 +1619,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 14:28 L: accepted lem-weil-pbc-simplicial-index-finite-initial: 6 steps (017K), 3 new Mathlib leaves (degeneracy factorization, degeneracy injective, initial functor limit 002R)
 - 14:28 L: returned deliver/K1/lem-pc-leray-degenerate-sections (reviewer RETURN: 1. C4: Steps 2 and 3: [pqf-lem-leray] is stated only for a quasi-coherent O_X-module F and only asserts the existence of)
 - 14:29 L: merged deliver/F1/lem-sc-dim-one-quasi-projective (reviewer FIX; first push; new nodes: 1)
+- 14:29 L: accepted lem-sc-zero-generic-acyclic: 6 steps (0F1F), new node lem-sc-dim-one-point-outside-open-closed attached and closed, tool_uses 5
