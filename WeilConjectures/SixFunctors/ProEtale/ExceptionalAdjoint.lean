@@ -84,7 +84,10 @@ definition `ν_X^* ∘ f^× ∘ Rν_{Y,*}` (`AlgebraicGeometry.ProEtale.rightDer
   `Rf_!` is a left adjoint.
 - `HasUniformCohomologicalDimensionLE.isLeftAdjoint_rightDerivedLowerStar`: under `FullCD`, the
   proper part `Rp_*` is a left adjoint (Brown representability). The proof is `sorry`.
-- `AlgebraicGeometry.ProEtale.isZero_homology_rightDerivedLowerStar_comparisonUpperStar`
+- `AlgebraicGeometry.ProEtale.isZero_homology_rightDerivedLowerStar_comparisonUpperStar`: the
+  cohomological-dimension bound on the étale-origin class, deduced through the pro-étale
+  comparison from `AlgebraicGeometry.Etale.isZero_homology_rightDerivedLowerStar_of_isPullback`,
+  its étale counterpart, whose proof is `sorry`.
 -/
 
 @[expose] public section
@@ -214,6 +217,31 @@ structure IsExceptionalAdjointAdmissible (f : X ⟶ Y) [HasCompactification f] :
 
 end Admissibility
 
+end ProEtale
+
+/-- Blueprint `sk-prop-sf-fullcd-etale-origin`, on the small étale site: let `k` be separably
+closed, `p : X' ⟶ Y` a proper morphism of finite-type `k`-schemes with `dim X' ≤ d`, and `Λ` a
+finite coefficient ring whose exponent is invertible on `X'`. Then for every étale sheaf `F` of
+`Λ`-modules on any base change `p' : X'' ⟶ Y''` of `p`, `R^r p'_* F = 0` for `r > 2d`.
+
+By proper base change the stalk of `R^r p'_* F` at a geometric point `ȳ` of `Y''` is
+`H^r(X''_ȳ, F)`, and `X''_ȳ` is a proper scheme of dimension at most `d` over a separably
+closed field, whose étale cohomological dimension on torsion sheaves is at most `2d`. -/
+theorem Etale.isZero_homology_rightDerivedLowerStar_of_isPullback (Λ : Type (u + 1))
+    [CommRing Λ] [Finite Λ] {k : Type u} [Field k] [IsSepClosed k] {X' : Scheme.{u}}
+    (p : X' ⟶ Y) [IsProper p] (aX' : X' ⟶ Spec (.of k)) (aY : Y ⟶ Spec (.of k))
+    [LocallyOfFiniteType aX'] [LocallyOfFiniteType aY] (hp : p ≫ aY = aX')
+    [HasInvertibleExponent Λ X'] (d : ℕ) (hd : topologicalKrullDim X' ≤ (d : WithBot ℕ∞))
+    {X'' Y'' : Scheme.{u}} (g' : X'' ⟶ X') (p' : X'' ⟶ Y'') (g : Y'' ⟶ Y)
+    (sq : IsPullback g' p' p g)
+    (F : Sheaf X''.smallEtaleTopology (ModuleCat.{u + 1} Λ)) (r : ℤ) (hr : (2 * d : ℤ) < r) :
+    IsZero ((_root_.DerivedCategory.Plus.homologyFunctor _ r).obj
+      ((R+(Etale.lowerStar (ModuleCat.{u + 1} Λ) p')).obj
+        ((_root_.DerivedCategory.Plus.singleFunctor _ 0).obj F))) :=
+  sorry
+
+namespace ProEtale
+
 /-- Blueprint `sk-prop-sf-fullcd-etale-origin`: `FullCD` on the étale-origin class
 
 **The cohomological-dimension bound on the étale-origin class.** Let `k` be separably closed,
@@ -240,7 +268,25 @@ theorem isZero_homology_rightDerivedLowerStar_comparisonUpperStar (Λ : Type (u 
     IsZero ((_root_.DerivedCategory.homologyFunctor _ r).obj
       ((R((p')_*[ModuleCat.{u + 1} Λ])).obj ((_root_.DerivedCategory.singleFunctor _ 0).obj
         ((comparisonUpperStar (ModuleCat.{u + 1} Λ) X'').obj F)))) :=
-  sorry
+  by
+  -- transport along the comparison `ν^* ∘ Rp'_{ét,*} ≅ Rp'_{proét,*} ∘ ν^*` to the étale statement
+  have : IsProper p' := MorphismProperty.of_isPullback sq ‹_›
+  obtain ⟨e⟩ := nonempty_iso_comparisonUpperStar_comp_rightDerivedLowerStar
+    (ModuleCat.{u + 1} Λ) p'
+  let ν := comparisonUpperStar (ModuleCat.{u + 1} Λ) X''
+  let ν' := comparisonUpperStar (ModuleCat.{u + 1} Λ) Y''
+  refine IsZero.of_iso ?_ ((_root_.DerivedCategory.homologyFunctor _ r).mapIso
+    (((ProEtale.lowerStar (ModuleCat.{u + 1} Λ) p').rightDerivedFunctorPlusCompatibility.app
+      ((_root_.DerivedCategory.Plus.singleFunctor _ 0).obj (ν.obj F))).symm))
+  change IsZero ((_root_.DerivedCategory.Plus.homologyFunctor _ r).obj _)
+  refine IsZero.of_iso ?_ ((_root_.DerivedCategory.Plus.homologyFunctor _ r).mapIso
+    ((R+((p')_*[ModuleCat.{u + 1} Λ])).mapIso
+      ((ν.mapDerivedCategoryPlusSingleFunctor 0).app F).symm))
+  refine IsZero.of_iso ?_ ((_root_.DerivedCategory.Plus.homologyFunctor _ r).mapIso
+    (e.app ((_root_.DerivedCategory.Plus.singleFunctor _ 0).obj F)).symm)
+  refine IsZero.of_iso ?_ ((ν'.mapDerivedCategoryPlusHomologyFunctorIso r).app _).symm
+  exact ν'.map_isZero (Etale.isZero_homology_rightDerivedLowerStar_of_isPullback Λ p aX' aY hp d hd
+    g' p' g sq F r hr)
 
 end ProEtale
 
