@@ -1979,3 +1979,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 16:28 L: merged deliver/E1/lem-sc-ext-support-cohomology-vanishing (reviewer FIX+NODE(1); first push; new nodes: 2)
 - 16:28 L: merged deliver/F1/lem-sc-invert-s-cohomology-gluing (reviewer FIX; first push; new nodes: 1)
 - 16:28 L: merged deliver/M1/lem-pc-rational-hyp (reviewer FIX; first push; new nodes: 0)
+- 16:29 L: merged deliver/F1/lem-weil-pbc-sets-affine-etale-inverse-image-comparison (reviewer FIX; first push; new nodes: 1)
