@@ -3016,3 +3016,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 23:52 L: merged deliver/G1/lem-sc-associated-localization-fg (reviewer PASS; first push; new nodes: 0)
 - 23:52 L: returned deliver/F1/lem-pur-kinjective-degreewise-existence (reviewer RETURN: Reviewer R-kde3151, head 63d228cc0. Both points of the R-kde3126 return are repaired in substance: the split now follows)
 - 23:52 L: merged deliver/F1/lem-sc-pseudo-coherent-qcoh (reviewer FIX; first push; new nodes: 0)
+- 23:52 UTC L: reviewed under the lock since 23:49: G1 weakass-localization FIX 5f17e65d6 (R-wal3150; false sub-claim removed, Tag 00E3 cited), F1 cone-pseudo-coherent PASS bca89f654 (R-cpc3151; clause (1) of 064R, cites the broader J1 node); returned: M1 left-derived-from-kflat-class 119c494bf (R-ldk3150: the only step cites Tag 06XN, the item itself; the totalLeftDerived leaf assumes HasLeftDerivedFunctor; Tag 05SE has no node). Second readings missed a fault in 2 of 3.
