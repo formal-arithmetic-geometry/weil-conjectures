@@ -10,6 +10,7 @@ public import Mathlib.AlgebraicGeometry.Morphisms.Proper
 public import Mathlib.AlgebraicGeometry.Morphisms.Smooth
 public import Mathlib.LinearAlgebra.PerfectPairing.Basic
 public import WeilConjectures.WeilSheaf.Cohomology
+public import WeilConjectures.WeilSheaf.Finiteness
 public import WeilConjectures.WeilSheaf.TateTwistCohomology
 
 /-!
@@ -51,14 +52,15 @@ on which `F` acts as asserted. The value line `ℚ̄_ℓ(-d)` is `ℚ̄_ℓ` wit
 *Coefficients.* The blueprint states the field-stage results for `E` and `ℚ̄_ℓ`; Weil sheaves
 in the repository have coefficients `ℚ̄_ℓ`, so only the stage `ℚ̄_ℓ` is stated.
 
-*Ingredients.* The inputs from other subsections are stated here, with `sorry`, in the form
-needed: `AlgebraicGeometry.WeilSheaf.exists_linearEquiv_cohomology_zero_adicConstant`
-(`H⁰ ≅ ℚ̄_ℓ` with `F = id`, `prop-cohomological-finiteness`),
+*Ingredients.* The degreewise perfectness of another subsection is stated here, with `sorry`, in
+the form needed:
 `AlgebraicGeometry.WeilSheaf.exists_isPerfPair_compactlySupportedCohomology_adicConstant`
-(degreewise perfectness, `thm-pod-degreewise-perfectness-over-a-field`, with the Frobenius
-invariance of `sk-thm-frobenius`) and
-`AlgebraicGeometry.WeilSheaf.nonempty_equiv_compactlySupportedCohomology_cohomology` (`H_c = H`
-for `X₀` proper, `prop-cohomological-finiteness`). The twist `ℚ̄_ℓ(m)` multiplies `F` by `q^{-m}`
+(`thm-pod-degreewise-perfectness-over-a-field`, with the Frobenius invariance of
+`sk-thm-frobenius`). The other inputs are the clauses of `prop-cohomological-finiteness`
+(`WeilConjectures.WeilSheaf.Finiteness`), put in the form needed:
+`AlgebraicGeometry.WeilSheaf.exists_linearEquiv_cohomology_zero_adicConstant` (`H⁰ ≅ ℚ̄_ℓ` with
+`F = id`) and `AlgebraicGeometry.WeilSheaf.nonempty_equiv_compactlySupportedCohomology_cohomology`
+(`H_c = H` for `X₀` proper). The twist `ℚ̄_ℓ(m)` multiplies `F` by `q^{-m}`
 on cohomology and compactly supported cohomology
 (`AlgebraicGeometry.WeilSheaf.nonempty_equiv_cohomology_tateTwistSheaf` and
 `AlgebraicGeometry.WeilSheaf.nonempty_equiv_compactlySupportedCohomology_tateTwistSheaf`,
@@ -91,7 +93,9 @@ theorem exists_linearEquiv_cohomology_zero_adicConstant
     [GeometricallyConnected (X ↘ Spec (CommRingCat.of k₀))] :
     ∃ e : ((adicConstant k₀ l X).cohomology 0).carrier ≃ₗ[PadicAlgCl l] PadicAlgCl l,
       ∀ z, e (((adicConstant k₀ l X).cohomology 0).frobenius z) = e z :=
-  sorry
+  have h := finrank_cohomology_zero_adicConstant k₀ l X
+  ⟨LinearEquiv.ofFinrankEq _ _ (by rw [h, Module.finrank_self]), fun z ↦ by
+    rw [frobenius_cohomology_zero_adicConstant k₀ l X, LinearEquiv.refl_apply]⟩
 
 /-- Blueprint `thm-pod-degreewise-perfectness-over-a-field` (for `K = ℚ̄_ℓ`, so that
 `K^∨(d) = ℚ̄_ℓ(d)`), with the Frobenius invariance of `sk-thm-frobenius` (a): for `X₀` smooth,
@@ -118,7 +122,7 @@ variable (Y : Scheme.{u}) [Y.Over (Spec (CommRingCat.of k₀))]
 `Ra_! ≅ Ra_*` is Frobenius-equivariant. -/
 theorem nonempty_equiv_compactlySupportedCohomology_cohomology (F : WeilSheaf k₀ l Y) (r : ℤ) :
     Nonempty ((F.compactlySupportedCohomology r).Equiv (F.cohomology r)) :=
-  sorry
+  WeilComplex.nonempty_equiv_compactlySupportedCohomology_cohomology (toComplex.obj F) r
 
 end Proper
 
