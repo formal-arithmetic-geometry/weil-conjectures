@@ -3,7 +3,7 @@
  "blueprint": {
   "is": "thm-pc-semicontinuity-base-change",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "Semicontinuity and base change",
@@ -20,44 +20,48 @@
  ],
  "proof": [
   {
-   "text": "*Local model.* Put $E=Rf_*\\mathcal F$, the\nderived direct image. By\n[lem-pc-rf-perfect-base-change], $E$ is perfect and for every\n$g:T'\\to T$ the canonical map $Lg^*E\\to Rf_{T',*}\\mathcal F_{T'}$ is an\nisomorphism. Fix $t\\in T$. By [def-pc-perfect-complex] there is an\naffine open $U=\\operatorname{Spec}(A)\\ni t$ on which $E|_U$ is\nisomorphic to the complex associated with a bounded complex of finite\nprojective $A$-modules. Each of these finitely many modules is free on\nsome principal open neighbourhood of $t$; the intersection of these\nneighbourhoods is again principal, and localisation of the complex\nrepresents the restriction. Shrinking $U$, we may therefore assume\n\n$$\nE|_U\\cong\\widetilde K,\\qquad\nK:\\;0\\to K^a\\xrightarrow{d^a}K^{a+1}\\to\\cdots\\to K^b\\to0,\\qquad\nK^i\\cong A^{n_i}.\n$$\n\nSince higher direct images commute with restriction to open subsets\nof the base, $R^qf_*\\mathcal F|_U=\\widetilde{H^q(K)}$. For\n$s\\in U$ let $g_s:\\operatorname{Spec}\\kappa(s)\\to T$ be the canonical\nmorphism. The terms of $K$ are free, hence flat, so by\n[lem-pc-flat-complex-derived-pullback] the derived pullback\n$Lg_s^*E$ is represented by $K\\otimes_A\\kappa(s)$. By the base-change\nisomorphism above,\n$K\\otimes_A\\kappa(s)\\cong Rf_{s,*}\\mathcal F_s$, where\n$f_s:X_s\\to\\operatorname{Spec}\\kappa(s)$. The target is a one-point\nspace, on which the $q$-th higher direct image is the $q$-th cohomology\ngroup; hence\n\n$$\nH^q(X_s,\\mathcal F_s)\\cong H^q(K\\otimes_A\\kappa(s)),\n$$\n\na finite dimensional $\\kappa(s)$-vector space.",
+   "text": "*Local model.* Put $E=Rf_*\\mathcal F$, the\nderived direct image. By\n[lem-pc-rf-perfect-base-change], $E$ is perfect and for every\n$g:T'\\to T$ the canonical map $Lg^*E\\to Rf_{T',*}\\mathcal F_{T'}$ is an\nisomorphism. Fix $t\\in T$. By [def-pc-perfect-complex] there is an\naffine open $U=\\operatorname{Spec}(A)\\ni t$ on which $E|_U$ is\nisomorphic to the complex associated with a bounded complex of finite\nprojective $A$-modules. Each of these finitely many modules is free on\nsome principal open neighbourhood of $t$; the intersection of these\nneighbourhoods is again principal, and localisation of the complex\nrepresents the restriction. Shrinking $U$, we may therefore assume\n\n$$\nE|_U\\cong\\widetilde K,\\qquad\nK:\\;0\\to K^a\\xrightarrow{d^a}K^{a+1}\\to\\cdots\\to K^b\\to0,\\qquad\nK^i\\cong A^{n_i}.\n$$\n\nBy [def-pc-derived-direct-image], $R^qf_*\\mathcal F=H^q(E)$; taking\ncohomology sheaves commutes with restriction to $U$, and\n$M\\mapsto\\widetilde M$ is exact, so\n$R^qf_*\\mathcal F|_U\\cong H^q(\\widetilde K)=\\widetilde{H^q(K)}$. For\n$s\\in U$ let $g_s:\\operatorname{Spec}\\kappa(s)\\to T$ be the canonical\nmorphism. The terms of $K$ are free, hence flat, so by\n[lem-pc-flat-complex-derived-pullback] the derived pullback\n$Lg_s^*E$ is represented by $K\\otimes_A\\kappa(s)$. By the base-change\nisomorphism above,\n$K\\otimes_A\\kappa(s)\\cong Rf_{s,*}\\mathcal F_s$, where\n$f_s:X_s\\to\\operatorname{Spec}\\kappa(s)$. Taking $H^q$ and using\n[def-pc-derived-direct-image], $H^q(K\\otimes_A\\kappa(s))\\cong R^qf_{s,*}\\mathcal F_s$.\nThe base $\\operatorname{Spec}\\kappa(s)$ is affine, $f_s$ is proper (so\nquasi-compact and separated) and $\\mathcal F_s$ is quasi-coherent, so\n[lem-pc-cohomology-sections-affine-base] identifies the global sections of\n$R^qf_{s,*}\\mathcal F_s$ with $H^q(X_s,\\mathcal F_s)$; hence\n\n$$\nH^q(X_s,\\mathcal F_s)\\cong H^q(K\\otimes_A\\kappa(s)),\n$$\n\na finite dimensional $\\kappa(s)$-vector space.",
    "uses": [
     "lem-pc-rf-perfect-base-change",
     "def-pc-perfect-complex",
-    "lem-pc-flat-complex-derived-pullback"
+    "def-pc-derived-direct-image",
+    "lem-pc-flat-complex-derived-pullback",
+    "lem-pc-cohomology-sections-affine-base"
    ],
    "elementary": false
   },
   {
-   "text": "*(1).* The map $\\varphi^q(t)$ is the canonical base-change map\n$g_t^*R^qf_*\\mathcal F\\to R^qf_{t,*}\\mathcal F_t$ attached to the\ncartesian square with bottom arrow $g_t$. In the local model it is\nthe evident map\n\n$$\nH^q(K)\\otimes_A\\kappa(s)\\longrightarrow H^q(K\\otimes_A\\kappa(s)),\\qquad\n[z]\\otimes1\\longmapsto[z\\otimes1],\n$$\n\nwhich is well defined because a cycle (resp. boundary) of $K$ maps to\na cycle (resp. boundary) of $K\\otimes_A\\kappa(s)$.",
+   "text": "*(1).* Finite dimensionality was shown in the local model. Define\n$\\varphi^q(t)$ as the composite of the natural map\n$H^q(E)\\otimes_{\\mathcal O_T}\\kappa(t)\\to H^q(Lg_t^*E)$ with the\nisomorphisms $H^q(Lg_t^*E)\\cong H^q(Rf_{t,*}\\mathcal F_t)\\cong\nH^q(X_t,\\mathcal F_t)$ of the local model; this is the canonical\nbase-change map $g_t^*R^qf_*\\mathcal F\\to R^qf_{t,*}\\mathcal F_t$\nattached to the cartesian square with bottom arrow $g_t$. In the local\nmodel ($s\\in U$, $Lg_s^*E$ represented by $K\\otimes_A\\kappa(s)$) it is\nthe evident map\n\n$$\nH^q(K)\\otimes_A\\kappa(s)\\longrightarrow H^q(K\\otimes_A\\kappa(s)),\\qquad\n[z]\\otimes1\\longmapsto[z\\otimes1],\n$$\n\nwhich is well defined because a cycle (resp. boundary) of $K$ maps to\na cycle (resp. boundary) of $K\\otimes_A\\kappa(s)$.",
    "uses": [],
-   "elementary": null
+   "elementary": true
   },
   {
    "text": "*(2).* Write $d^i(s)=d^i\\otimes_A\\kappa(s)$ for the matrix of $d^i$\nwith entries reduced to $\\kappa(s)$, and let\n$\\rho_i(s)=\\operatorname{rank}d^i(s)$. Linear algebra over $\\kappa(s)$\ngives\n\n$$\n\\beta^q(s)=n_q-\\rho_q(s)-\\rho_{q-1}(s)\\qquad(s\\in U).\n$$\n\nFor every integer $r$, the set $\\{s:\\rho_i(s)\\ge r\\}$ is the set of\npoints at which some $r\\times r$ minor of $d^i$ does not vanish, i.e.\nthe complement of the closed set $V(I_r(d^i))$ cut out by the ideal of\n$r\\times r$ minors. Hence each $\\rho_i$ is lower semicontinuous on\n$U$, so $\\beta^q$ is upper semicontinuous on $U$. Such opens $U$ cover\n$T$, and upper semicontinuity is local, which proves (2).",
    "uses": [],
-   "elementary": null
+   "elementary": true
   },
   {
    "text": "*(3).* Now let $T$ be reduced, hence $A$ reduced, and let $\\beta^q$ be\nlocally constant. Shrinking $U$ around $t$ we may assume $\\beta^q$ is\nconstant on $U$, so $\\rho_q+\\rho_{q-1}=c$ is constant. Then\n$\\rho_q=c-\\rho_{q-1}$ is also upper semicontinuous, hence locally\nconstant, and likewise $\\rho_{q-1}$. Shrinking $U$ once more, we may\nassume $\\rho_q\\equiv r$ and $\\rho_{q-1}\\equiv r'$ on $U$.",
    "uses": [],
-   "elementary": null
+   "elementary": true
   },
   {
-   "text": "*Claim.* Let $\\phi:A^m\\to A^n$ be a matrix over a reduced ring $A$\nwhose rank at every point of $\\operatorname{Spec}(A)$ equals $r$. Then\nevery point has a principal open neighbourhood over which, in suitable\nbases, $\\phi=\\begin{pmatrix}I_r&0\\\\0&0\\end{pmatrix}$. Indeed, every\n$(r+1)\\times(r+1)$ minor of $\\phi$ vanishes in every residue field,\nhence lies in every prime ideal, hence is nilpotent, hence is $0$ since\n$A$ is reduced. At a given point some $r\\times r$ minor $\\delta$ is\nnonzero, so $\\delta$ is a unit on $D(\\delta)$. After permuting bases,\n$\\phi=\\begin{pmatrix}D&B\\\\C&F\\end{pmatrix}$ with $D$ invertible over\n$A_\\delta$; invertible row and column operations bring $\\phi$ to\n$\\begin{pmatrix}I_r&0\\\\0&F'\\end{pmatrix}$ with $F'=F-CD^{-1}B$. The\n$(r+1)\\times(r+1)$ minors of the new matrix are\n$A_\\delta$-linear combinations of those of $\\phi$ (Cauchy–Binet), so\nthey vanish; the minor formed by $I_r$ and one entry of $F'$ equals\nthat entry, so $F'=0$.\n\nApply the claim to $d^q$ and to $d^{q-1}$ and shrink $U$ to a principal\nopen neighbourhood of $t$ on which both normal forms hold (the bases\nused for the two maps need not agree). Then\n$Z=\\ker d^q$ is a direct summand of $K^q$, free of rank $n_q-r$, with a\ncomplement $Z'$ mapped by $d^q$ isomorphically onto a direct summand of\n$K^{q+1}$; and $B=\\operatorname{im}d^{q-1}$ is a direct summand of\n$K^q$, free of rank $r'$, with $K^{q-1}\\to B$ a split surjection.\nSince $B\\subseteq Z$, a retraction $K^q\\to B$ restricts to a retraction\n$Z\\to B$, so $B$ is a direct summand of $Z$ and\n\n$$\nH^q(K)=Z/B\n$$\n\nis a finite projective $A$-module of rank $n_q-r-r'=\\beta^q(t)$. Being\nfinite projective, it is locally free on principal opens, so\n$R^qf_*\\mathcal F$ is finite locally free near $t$, in particular flat.\n\nFor $s\\in U$ split injections and split surjections remain so after\n$\\otimes_A\\kappa(s)$. Thus $d^q(s)$ is injective on\n$Z'\\otimes\\kappa(s)$ and zero on $Z\\otimes\\kappa(s)$, giving\n$\\ker d^q(s)=Z\\otimes_A\\kappa(s)$; and\n$\\operatorname{im}d^{q-1}(s)=B\\otimes_A\\kappa(s)$ inside\n$K^q\\otimes_A\\kappa(s)$. The split exact sequence\n$0\\to B\\to Z\\to Z/B\\to0$ stays exact after tensoring, so\n\n$$\nH^q(K\\otimes_A\\kappa(s))\n=\\frac{Z\\otimes_A\\kappa(s)}{B\\otimes_A\\kappa(s)}\n=H^q(K)\\otimes_A\\kappa(s),\n$$\n\nand the identification is exactly the map of (1). Hence $\\varphi^q(s)$\nis an isomorphism for all $s\\in U$. Since $t$ was arbitrary, (3)\nfollows.",
+   "text": "*Claim.* Let $\\phi:A^m\\to A^n$ be a matrix over a reduced ring $A$\nwhose rank at every point of $\\operatorname{Spec}(A)$ equals $r$. Then\nevery point has a principal open neighbourhood over which, in suitable\nbases, $\\phi=\\begin{pmatrix}I_r&0\\0&0\\end{pmatrix}$. Indeed, every\n$(r+1)\\times(r+1)$ minor of $\\phi$ vanishes in every residue field,\nhence lies in every prime ideal, hence is nilpotent, hence is $0$ since\n$A$ is reduced. At a given point some $r\\times r$ minor $\\delta$ is\nnonzero, so $\\delta$ is a unit on $D(\\delta)$. After permuting bases,\n$\\phi=\\begin{pmatrix}D&B\\C&F\\end{pmatrix}$ with $D$ invertible over\n$A_\\delta$; invertible row and column operations bring $\\phi$ to\n$\\begin{pmatrix}I_r&0\\0&F'\\end{pmatrix}$ with $F'=F-CD^{-1}B$. The\n$(r+1)\\times(r+1)$ minors of the new matrix are\n$A_\\delta$-linear combinations of those of $\\phi$ (Cauchy–Binet), so\nthey vanish; the minor formed by $I_r$ and one entry of $F'$ equals\nthat entry, so $F'=0$.\n\nApply the claim to $d^q$ and to $d^{q-1}$ and shrink $U$ to a principal\nopen neighbourhood of $t$ on which both normal forms hold (the bases\nused for the two maps need not agree). Then\n$Z=\\ker d^q$ is a direct summand of $K^q$, free of rank $n_q-r$, with a\ncomplement $Z'$ mapped by $d^q$ isomorphically onto a direct summand of\n$K^{q+1}$; and $B=\\operatorname{im}d^{q-1}$ is a direct summand of\n$K^q$, free of rank $r'$, with $K^{q-1}\\to B$ a split surjection.\nSince $B\\subseteq Z$, a retraction $K^q\\to B$ restricts to a retraction\n$Z\\to B$, so $B$ is a direct summand of $Z$ and\n\n$$\nH^q(K)=Z/B\n$$\n\nis a finite projective $A$-module of rank $n_q-r-r'=\\beta^q(t)$. Being\nfinite projective, it is locally free on principal opens, so\n$R^qf_*\\mathcal F$ is finite locally free near $t$, in particular flat.\n\nFor $s\\in U$ split injections and split surjections remain so after\n$\\otimes_A\\kappa(s)$. Thus $d^q(s)$ is injective on\n$Z'\\otimes\\kappa(s)$ and zero on $Z\\otimes\\kappa(s)$, giving\n$\\ker d^q(s)=Z\\otimes_A\\kappa(s)$; and\n$\\operatorname{im}d^{q-1}(s)=B\\otimes_A\\kappa(s)$ inside\n$K^q\\otimes_A\\kappa(s)$. The split exact sequence\n$0\\to B\\to Z\\to Z/B\\to0$ stays exact after tensoring, so\n\n$$\nH^q(K\\otimes_A\\kappa(s))\n=\\frac{Z\\otimes_A\\kappa(s)}{B\\otimes_A\\kappa(s)}\n=H^q(K)\\otimes_A\\kappa(s),\n$$\n\nand the identification is exactly the map of (1). Hence $\\varphi^q(s)$\nis an isomorphism for all $s\\in U$. Since $t$ was arbitrary, (3)\nfollows.",
    "uses": [],
-   "elementary": null
+   "elementary": true
   },
   {
    "text": "*Why reducedness is needed.* Let $A=k[\\varepsilon]/(\\varepsilon^2)$ and let\n$E_0$ be an elliptic curve over the field $k$. Let $\\mathcal L$ be an invertible\nsheaf on $E_0\\times_k\\operatorname{Spec}A$ that restricts to\n$\\mathcal O_{E_0}$ but is a nontrivial first-order deformation of it\n(these are classified by the nonzero elements of\n$H^1(E_0,\\mathcal O_{E_0})\\cong k$). A global section of $\\mathcal L$\nreduces to a constant on $E_0$. A nonzero constant cannot lift, since\na lift would trivialise $\\mathcal L$. Hence\n$H^0(\\mathcal L)=\\varepsilon H^0(E_0,\\mathcal O_{E_0})\\cong k$, a\nmodule killed by $\\varepsilon$ and so not flat over $A$. The base is a\nsingle point, so $\\beta^0$ is constant.",
    "uses": [],
-   "elementary": null
+   "elementary": true
   }
  ],
  "proof_deps": [
   "lem-pc-rf-perfect-base-change",
   "def-pc-perfect-complex",
-  "lem-pc-flat-complex-derived-pullback"
+  "def-pc-derived-direct-image",
+  "lem-pc-flat-complex-derived-pullback",
+  "lem-pc-cohomology-sections-affine-base"
  ],
  "proof_origin": {
   "by": "agent",
@@ -66,7 +70,7 @@
  },
  "mathlib_searches": [],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [
   "long_proof_few_deps",
@@ -172,5 +176,30 @@
   }
  },
  "chapter": "sec-picard-framework",
- "unit": "sk-thm-picard-semicon"
+ "unit": "sk-thm-picard-semicon",
+ "split_report": {
+  "date": "2026-10-11",
+  "item": "thm-pc-semicontinuity-base-change",
+  "worker": "stage1",
+  "summary": "Split the local-model proof from the imported theorem and attached the two sorried declarations used by the source: the finite-free complex computing higher direct images and the affine global-sections/cohomology equivalence. Existing perfectness and flat-complex nodes cover the derived local model; the remaining rank, reduced-ring normal-form, base-change, and nonreduced counterexample arguments are explicit proof steps.",
+  "blueprint": "Realizes the sole proof paragraph of sk-thm-picard-semicon: local finite-free complex and base change, rank-minor semicontinuity, reduced-base normal form, and the square-zero elliptic-curve counterexample.",
+  "tool_uses": [
+   {
+    "node": "lem-pc-cohomology-sections-affine-base",
+    "why": "The local model needs the affine identification of global sections of a higher direct image with sheaf cohomology, which is a generic cohomology tool supplied by another unit."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pc-cohomology-sections-affine-base",
+  "lem-pc-cohomology-sections-affine-base"
+ ],
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-scb1921",
+  "group": "J1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-scb1921 (reviewer sub-agent of L); spot-checked: Read all steps: rank/minor semicontinuity, reduced-ring normal form, split kernel/image tensor argument, k[e]/e^2 elliptic counterexample all correct; tool use lem-pc-cohomology-sections-affine-base accepted (generic; hypotheses proper=>qc+separated, F_s qcoh, Spec k(s) affine). FIX more, RETURN less: (1) C4 Step 1 applied lem-pc-finite-free-complex-higher-direct-image 'in the identity case' to the complex K from perfectness, but that node only asserts SOME complex P on SOME U, not K; replaced by def-pc-derived-direct-image (H^q(Rf_*)=R^qf_*) plus restriction and exactness of tilde, and made the H^q(X_s,F_s) identification cite def-pc-derived-direct-image and lem-pc-cohomology-sections-affine-base explicitly. (2) class (d): lem-pc-finite-free-complex-higher-direct-image is a few-line consequence of lem-pc-rf-perfect-base-change + def-pc-perfect-complex + lem-pc-flat-complex-derived-pullback + def-pc-derived-direct-image (exactly what Step 1 derives); dropped. (3) C1 Step 2: phi^q(t) was asserted equal to the evident local map without definition; now defined as H^q(E)(x)k(t)->H^q(Lg_t^*E) composed with the base-change isomorphisms, which is the evident map in the local model. proof_deps/uses updated.; 1 file(s) fixed by the reviewer"
+ }
 }
