@@ -50,6 +50,13 @@ module-object six functors need in order to transport ring objects and module ob
   closed). For `g` weakly étale, `g^*` is restriction along the localization functor of the
   pro-étale sites, and the statement is the compatibility of sheafification with restriction
   along a continuous cocontinuous functor.
+* `ProEtale.isMonoidal_lowerStarComp`: the composition isomorphism `f_* ⋙ g_* ≅ (f ≫ g)_*` of
+  `ProEtale.lowerStarComp` is monoidal. Both lax monoidal structures are the sheafification of
+  the objectwise one transported along the base change functors of the sites, and the
+  composition isomorphism is induced by the pullback pasting isomorphism
+  `(V ×_Z Y) ×_Y X ≅ V ×_Z X`, which is compatible with the objectwise tensor products. It is
+  the input making the composition isomorphism of pushforwards of module objects
+  (`ProEtale.ContinuousMapRing.lowerStarComp`) available.
 
 -/
 
@@ -145,5 +152,22 @@ noncomputable instance ProEtale.laxBraided_upperStar : (g)^*[A].LaxBraided where
       Functor.Monoidal.δ_μ, Category.comp_id]
 
 end UpperStar
+
+/-! ### The composition isomorphism of pushforwards is monoidal -/
+
+section LowerStarComp
+
+variable (A : Type u') [Category.{u + 1} A] [Abelian A] [IsGrothendieckAbelian.{u + 1} A]
+  [MonoidalCategory A] [BraidedCategory A] [MonoidalClosed A]
+
+variable {X Y Z : Scheme.{u}} (f : X ⟶ Y) (g : Y ⟶ Z)
+
+/-- The composition isomorphism `f_* ⋙ g_* ≅ (f ≫ g)_*` of pushforwards on pro-étale sheaves is
+a monoidal natural isomorphism, for the composite lax monoidal structure on `f_* ⋙ g_*`. See
+the module docstring. -/
+instance ProEtale.isMonoidal_lowerStarComp :
+    NatTrans.IsMonoidal (ProEtale.lowerStarComp A f g).hom := sorry
+
+end LowerStarComp
 
 end AlgebraicGeometry
