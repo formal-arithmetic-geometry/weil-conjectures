@@ -246,4 +246,149 @@ theorem globalSectionsToStalkObj_frobenius [QuasiCompact (X ↘ Spec (CommRingCa
 end GlobalSections
 
 
+section Transport
+
+variable (F : WeilSheaf k₀ l X)
+
+/-- The iterated Weil structure `φ_m`, as a morphism `(Frᵐ)^* F ⟶ F` of the underlying sheaves,
+through the identification `(Frᵐ)^* ≅ (Fr⁻ᵐ)_*`. -/
+noncomputable def frobeniusPowStr (m : ℕ) :
+    ((((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius ^ m).hom)^*[WeilCoefficients.{u} l]
+      ).obj F.obj.carrier.X ⟶ F.obj.carrier.X :=
+  (ProEtale.upperStarIsoLowerStarInv _ _).hom.app F.obj.carrier.X ≫
+    (ProEtale.AdicSheaf.forget _).map (F.frobeniusPowIso m).hom
+
+/-- The Weil structure `φ`, as a morphism `Fr^* F ⟶ F` of the underlying sheaves. -/
+noncomputable def frobeniusStr :
+    (((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.hom)^*[WeilCoefficients.{u} l]
+      ).obj F.obj.carrier.X ⟶ F.obj.carrier.X :=
+  (ProEtale.upperStarIsoLowerStarInv _ _).hom.app F.obj.carrier.X ≫
+    (ProEtale.AdicSheaf.forget _).map F.obj.str.hom
+
+lemma forget_map_frobeniusPowIso_succ_hom (m : ℕ)
+    (h : ((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius ^ (m + 1)).inv =
+      ((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius ^ m).inv ≫
+        (X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.inv) :
+    (ProEtale.AdicSheaf.forget _).map (F.frobeniusPowIso (m + 1)).hom =
+      (ProEtale.lowerStarCongr _ h).hom.app F.obj.carrier.X ≫
+        (ProEtale.lowerStarComp _
+          ((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius ^ m).inv
+          (X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.inv).inv.app F.obj.carrier.X ≫
+        ((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.inv)_*[_].map
+          ((ProEtale.AdicSheaf.forget _).map (F.frobeniusPowIso m).hom) ≫
+        (ProEtale.AdicSheaf.forget _).map F.obj.str.hom := by
+  simp only [frobeniusPowIso, Iso.trans_hom, Iso.app_hom, Iso.symm_hom, Functor.mapIso_hom,
+    Functor.map_comp, Category.assoc]
+  rfl
+
+/-- The iterated Weil structure satisfies `φ_{m+1} = φ ∘ Fr^* φ_m`, as morphisms of the
+underlying sheaves. -/
+lemma upperStarFactor_hom_app_comp_frobeniusPowStr_succ (m : ℕ)
+    (e : (X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.hom ≫
+      ((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius ^ m).hom =
+        ((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius ^ (m + 1)).hom) :
+    (ProEtale.upperStarFactor _ e).hom.app F.obj.carrier.X ≫
+        ((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.hom)^*[_].map
+          (F.frobeniusPowStr m) ≫ F.frobeniusStr =
+      F.frobeniusPowStr (m + 1) := by
+  have hEi : ((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius ^ m).inv ≫
+      (X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.inv =
+        ((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius ^ (m + 1)).inv := by
+    rw [pow_succ, Aut.Aut_mul_def, Iso.trans_inv]
+  have L := ProEtale.upperStarIsoLowerStarInv_hom_app_trans (WeilCoefficients.{u} l)
+    (X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius
+    ((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius ^ m)
+    ((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius ^ (m + 1)) e hEi F.obj.carrier.X
+  have n := (ProEtale.upperStarIsoLowerStarInv (WeilCoefficients.{u} l)
+    (X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius).hom.naturality
+      ((ProEtale.AdicSheaf.forget _).map (F.frobeniusPowIso m).hom)
+  symm
+  rw [frobeniusPowStr, forget_map_frobeniusPowIso_succ_hom F m hEi.symm,
+    reassoc_of% ProEtale.lowerStarCongr_hom_app_comp_lowerStarComp_inv_app,
+    reassoc_of% L]
+  simp only [frobeniusPowStr, frobeniusStr, Functor.map_comp, Category.assoc]
+  erw [reassoc_of% n]
+  rfl
+
+/-- `φ_n = φ ∘ Fr^* φ_m` for `n = m + 1`. -/
+lemma upperStarFactor_hom_app_comp_frobeniusPowStr_succ' (m n : ℕ) (hmn : m + 1 = n)
+    (e : (X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.hom ≫
+      ((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius ^ m).hom =
+        ((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius ^ n).hom) :
+    (ProEtale.upperStarFactor _ e).hom.app F.obj.carrier.X ≫
+        ((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.hom)^*[_].map
+          (F.frobeniusPowStr m) ≫ F.frobeniusStr =
+      F.frobeniusPowStr n := by
+  subst hmn
+  exact upperStarFactor_hom_app_comp_frobeniusPowStr_succ F m e
+
+/-- The first iterate of the Weil structure is the Weil structure. -/
+lemma frobeniusPowStr_one
+    (p : ((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius ^ 1).hom =
+      (X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.hom) :
+    F.frobeniusPowStr 1 =
+      (ProEtale.upperStarCongr _ p).hom.app F.obj.carrier.X ≫ F.frobeniusStr := by
+  have h₀ : ((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius ^ 0).inv = 𝟙 _ := by
+    rw [pow_zero]; rfl
+  have h₁ : ((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius ^ 1).inv =
+      ((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius ^ 0).inv ≫
+        (X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.inv := by
+    rw [pow_succ, Aut.Aut_mul_def, Iso.trans_inv]
+  have hp : (X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius ^ 1 =
+      (X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius := pow_one _
+  have c := ProEtale.upperStarIsoLowerStarInv_hom_app_congr (WeilCoefficients.{u} l) hp
+    F.obj.carrier.X
+  rw [frobeniusPowStr, frobeniusStr, forget_map_frobeniusPowIso_one_hom F h₀ h₁,
+    reassoc_of% ProEtale.lowerStarCongr_hom_app_comp_lowerStarComp_inv_app_comp_map_lowerStarId
+      (WeilCoefficients.{u} l) h₀ h₁ (congrArg Iso.inv hp), reassoc_of% c]
+
+omit [Finite k₀] [Fact (ringChar k₀ ≠ l)] in
+lemma _root_.CategoryTheory.Aut.pow_hom_comp_pow_hom {C : Type*} [Category C] {Y : C} (g : Aut Y)
+    (a b : ℕ) : (g ^ b).hom ≫ (g ^ a).hom = (g ^ (a + b)).hom := by
+  rw [pow_add, Aut.Aut_mul_def, Iso.trans_hom]
+
+/-- The iterated Weil structures compose: `φ_{a+b} = φ_b ∘ (Frᵇ)^* φ_a`, for `b ≥ 1`. -/
+lemma upperStarFactor_hom_app_comp_frobeniusPowStr_add (a b : ℕ) (hb : 1 ≤ b)
+    (e : ((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius ^ b).hom ≫
+      ((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius ^ a).hom =
+        ((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius ^ (a + b)).hom) :
+    (ProEtale.upperStarFactor _ e).hom.app F.obj.carrier.X ≫
+        (((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius ^ b).hom)^*[_].map
+          (F.frobeniusPowStr a) ≫ F.frobeniusPowStr b =
+      F.frobeniusPowStr (a + b) := by
+  induction b, hb using Nat.le_induction with
+  | base =>
+    have p := congrArg Iso.hom (pow_one (X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius)
+    have n := (ProEtale.upperStarCongr (WeilCoefficients.{u} l) p).hom.naturality
+      (F.frobeniusPowStr a)
+    rw [frobeniusPowStr_one F p]
+    erw [reassoc_of% n]
+    rw [reassoc_of% ProEtale.upperStarFactor_hom_app_comp_upperStarCongr_hom_app _ e p
+      ((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.pow_hom_comp_pow_hom a 1 ▸ by
+        rw [pow_one])]
+    exact upperStarFactor_hom_app_comp_frobeniusPowStr_succ F a _
+  | succ b hb ih =>
+    have f := (X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.pow_hom_comp_pow_hom b 1
+    rw [pow_one] at f
+    have e₁ := (X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.pow_hom_comp_pow_hom
+      (a + b) 1
+    rw [pow_one, Nat.add_assoc] at e₁
+    have e₂ := (X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.pow_hom_comp_pow_hom a b
+    have n := (ProEtale.upperStarFactor (WeilCoefficients.{u} l) f).hom.naturality
+      (F.frobeniusPowStr a)
+    rw [Functor.comp_map] at n
+    have A := ProEtale.upperStarFactor_hom_app_assoc (WeilCoefficients.{u} l) e₂ e₁ f e
+      F.obj.carrier.X
+    rw [← upperStarFactor_hom_app_comp_frobeniusPowStr_succ F b f]
+    erw [reassoc_of% n]
+    rw [← reassoc_of% A, ← Functor.map_comp_assoc, ← Functor.map_comp_assoc]
+    simp only [Category.assoc]
+    refine Eq.trans ?_ (upperStarFactor_hom_app_comp_frobeniusPowStr_succ' F (a + b) _
+      (Nat.add_assoc a b 1) e₁)
+    exact congrArg (fun x ↦ _ ≫
+      ((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.hom)^*[_].map x ≫
+        F.frobeniusStr) (ih e₂)
+
+end Transport
+
 end AlgebraicGeometry.WeilSheaf
