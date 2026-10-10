@@ -1,0 +1,71 @@
+{
+ "id": "lem-weil-pbc-trivial-kan-lifts-monomorphisms",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-hypercover-free-resolution",
+   "place": "proof, first paragraph: 'Exactness is a local assertion about the sheaves ... Thus every cycle is locally a boundary'; the simplicial comparison serving this claim uses the general lifting property of trivial Kan fibrations in Stacks 08NS",
+   "via": [
+    "lem-weil-pbc-trivial-kan-homotopy-equivalence",
+    "lem-weil-pbc-coskeleton-free-homology-comparison"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Trivial Kan fibrations lift against degreewise injections",
+ "statement": "Let $p:X\\to Y$ be a trivial Kan fibration of simplicial sets [def-weil-pbc-trivial-kan-fibration], and let $i:Z\\to W$ be a morphism of simplicial sets [def-weil-pbc-simplicial-set] for which every map $i_n:Z_n\\to W_n$ is injective. For every pair of simplicial maps $a:Z\\to X$ and $b:W\\to Y$ satisfying $p\\circ a=b\\circ i$, there exists a simplicial map $c:W\\to X$ with $c\\circ i=a$ and $p\\circ c=b$.",
+ "source": {
+  "document": "literature/stacks-project/simplicial.tex",
+  "place": "Simplicial, Lemma Tag 08NM (label lemma-trivial-kan, lines 5550-5581)"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-simplicial-set",
+  "def-weil-pbc-trivial-kan-fibration"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "trivial Kan fibration of simplicial sets lifts against all monomorphisms",
+   "results": "LeanSearch service returned HTTP 500 on 2026-10-10",
+   "date": "2026-10-10",
+   "verdict": "service unavailable"
+  },
+  {
+   "tool": "loogle",
+   "query": "SSet.rlp_monomorphisms",
+   "results": "SSet.rlp_monomorphisms, Mathlib.AlgebraicTopology.SimplicialSet.CategoryWithFibrations: (monomorphisms SSet).rlp = I.rlp",
+   "date": "2026-10-10",
+   "verdict": "match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "right lifting property against boundary inclusions of simplicial sets is the same as right lifting property against every monomorphism",
+   "results": "SSet.modelCategoryQuillen.I and fibrations_eq (horn inclusions); no closer declaration than SSet.rlp_monomorphisms found by Loogle",
+   "date": "2026-10-10",
+   "verdict": "match from Loogle and source inspection"
+  },
+  {
+   "tool": "grep",
+   "query": "Mathlib/AlgebraicTopology/SimplicialSet/CategoryWithFibrations.lean:34-39,127-131; Mathlib/AlgebraicTopology/SimplicialSet/Boundary.lean:37,92",
+   "results": "I is all boundary inclusions (line 38); rlp_monomorphisms at lines 127-131 identifies their right lifting property with that against all monomorphisms; boundary_zero identifies the empty degree-zero boundary",
+   "date": "2026-10-10",
+   "verdict": "match"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "SSet.rlp_monomorphisms",
+  "file": "Mathlib/AlgebraicTopology/SimplicialSet/CategoryWithFibrations.lean",
+  "line": 127,
+  "how": "exact after rewriting the definition of trivial Kan fibration as I.rlp: I is the family of all boundary inclusions at line 38, and rlp_monomorphisms at lines 127-131 equates I.rlp with the right lifting property against all monomorphisms; monomorphisms of simplicial sets are degreewise injective"
+ },
+ "status": "mathlib",
+ "created": {
+  "item": "lem-weil-pbc-trivial-kan-homotopy-equivalence"
+ },
+ "chapter": "sec-curve-estimates",
+ "unit": "sk-prop-h2"
+}

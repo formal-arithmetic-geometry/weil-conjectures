@@ -22,9 +22,52 @@
   "def-weil-pbc-simplicial-set",
   "def-weil-pbc-trivial-kan-fibration"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Apply [lem-weil-pbc-trivial-kan-lifts-monomorphisms] to the degreewise injection $\\varnothing\\to Y$, with its unique map $\\varnothing\\to X$ and the identity map $Y\\to Y$. The resulting lift $g:Y\\to X$ satisfies $p\\circ g=\\mathrm{id}_Y$.",
+   "uses": [
+    "lem-weil-pbc-trivial-kan-lifts-monomorphisms"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/simplicial.tex",
+    "place": "Simplicial, Lemma Tag 08NS (lemma-trivial-kan-homotopy), proof, first sentence, applying Lemma Tag 08NM (lemma-trivial-kan)"
+   }
+  },
+  {
+   "text": "The inclusion $j:\\partial\\Delta[1]\\times X\\to\\Delta[1]\\times X$ is degreewise injective. Indeed, $\\partial\\Delta[1]$ consists in each degree of the two constant simplices $c_0,c_1$, so its product with $X$ is the disjoint union of two copies of $X$ and $j$ identifies them with the two endpoint subsets of $\\Delta[1]\\times X$. Define $a:\\partial\\Delta[1]\\times X\\to X$ to be $\\mathrm{id}_X$ on the $c_0$ copy and $g\\circ p$ on the $c_1$ copy, and $b:\\Delta[1]\\times X\\to Y$ by $b=p\\circ\\mathrm{pr}_X$. On the first endpoint $p\\circ a=p$; on the second $p\\circ a=p\\circ g\\circ p=p$ by step 1. Hence $p\\circ a=b\\circ j$.",
+   "uses": [
+    "def-weil-pbc-trivial-kan-fibration",
+    "def-weil-pbc-simplicial-set"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/simplicial.tex",
+    "place": "Simplicial, Lemma Tag 08NS (lemma-trivial-kan-homotopy), proof, displayed square and paragraph describing its maps"
+   }
+  },
+  {
+   "text": "Apply [lem-weil-pbc-trivial-kan-lifts-monomorphisms] to the commutative square of step 2. It gives $h:\\Delta[1]\\times X\\to X$ with $h\\circ j=a$ and $p\\circ h=b$. Restricting $h\\circ j=a$ to the two endpoint copies of $X$ gives $h\\circ i_0=\\mathrm{id}_X$ and $h\\circ i_1=g\\circ p$. By Definition Tag 019K this is a simplicial homotopy from $\\mathrm{id}_X$ to $g\\circ p$. Together with the strict equality $p\\circ g=\\mathrm{id}_Y$ from step 1, $g$ is a homotopy inverse to $p$.",
+   "uses": [
+    "lem-weil-pbc-trivial-kan-lifts-monomorphisms"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/simplicial.tex",
+    "place": "Simplicial, Lemma Tag 08NS (lemma-trivial-kan-homotopy), proof, final sentence; Definition Tag 019K (definition-homotopy)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-trivial-kan-lifts-monomorphisms",
+  "def-weil-pbc-trivial-kan-fibration",
+  "def-weil-pbc-simplicial-set"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/simplicial.tex",
+  "place": "Simplicial, Lemma Tag 08NS (label lemma-trivial-kan-homotopy, lines 5641-5664), invoking Lemma Tag 08NM (label lemma-trivial-kan)"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -56,7 +99,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "worker",
@@ -77,5 +120,19 @@
   "declaration": "SSet.rlp_monomorphisms",
   "file": "Mathlib/AlgebraicTopology/SimplicialSet/CategoryWithFibrations.lean",
   "how": "line 127-128: I.rlp = (monomorphisms).rlp, the lifting property 08NM that the proof applies twice; the homotopy inverse itself is not in Mathlib"
+ },
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "lem-weil-pbc-trivial-kan-homotopy-equivalence",
+  "worker": "E1",
+  "summary": "Read Stacks 08NS and 08NM. The three proof steps obtain a section by lifting along the empty inclusion, form the commutative endpoint-cylinder square explicitly, and lift it to a homotopy. The general lifting property is recorded as a new Mathlib leaf via SSet.rlp_monomorphisms. No matching sorry-free Lean declaration was found by id or concept in the slopmaster2 source.",
+  "blueprint": "The item is a helper for the simplicial comparison behind lem-weil-pbc-hypercover-free-resolution, proof first paragraph, 'Exactness is a local assertion about the sheaves ... Thus every cycle is locally a boundary'; steps 1-3 give the homotopy inverse needed by step 5 of lem-weil-pbc-coskeleton-free-homology-comparison."
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "group": "E1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed by the lead of E1; spot-checked by L: L: reviewed in full by a reviewer sub-agent (FIX: a tag quoted in step 3 replaced by the statement's own homotopy): 08NS/08NM read, 3 steps checked, new leaf SSet.rlp_monomorphisms line 127 verified"
  }
 }
