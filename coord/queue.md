@@ -1,8 +1,8 @@
 # Work queue
 
-876 items; claim with `tools/claim.py next <group> [--stage N]`.
+882 items; claim with `tools/claim.py next <group> [--stage N]`.
 
-## Stage 1: nodes to split (648)
+## Stage 1: nodes to split (654)
 
 | node | distance to a target | Lean state on the done branch |
 |---|---|---|
@@ -22,7 +22,6 @@
 | `lem-weil-pbc-flat-variant-local-criterion` | 1012 | none |
 | `lem-weil-pbc-formal-systems-graded-vanishing` | 1012 | none |
 | `lem-weil-pbc-formal-systems-kernel-rees-finite` | 1012 | none |
-| `lem-weil-pbc-formally-smooth-complete-local-regular` | 1012 | none |
 | `lem-weil-pbc-gabber-strict-henselian-zariski-comparison` | 1012 | none |
 | `lem-weil-pbc-geometrically-regular-h1-injective` | 1012 | none |
 | `lem-weil-pbc-geometrically-regular-over-field-flat` | 1012 | none |
@@ -122,17 +121,24 @@
 | `lem-weil-pbc-cohen-ring-mod-pn-formally-smooth` | 1013 | none |
 | `lem-weil-pbc-cohen-rings-exist` | 1013 | none |
 | `lem-weil-pbc-coherent-finite-type-sub-kernel` | 1013 | none |
+| `lem-weil-pbc-degree-p-extension-regular` | 1013 | none |
 | `lem-weil-pbc-etale-splits-off-quasi-finite-part` | 1013 | none |
 | `lem-weil-pbc-fibre-degree-base-change` | 1013 | none |
 | `lem-weil-pbc-fibre-degree-bound-field-points` | 1013 | none |
+| `lem-weil-pbc-find-derivation-not-pth-power` | 1013 | none |
 | `lem-weil-pbc-finite-locally-free-degree-etale-descent` | 1013 | none |
 | `lem-weil-pbc-finite-surjective-affine-target-noetherian` | 1013 | none |
+| `lem-weil-pbc-fs-adic-base-change` | 1013 | none |
+| `lem-weil-pbc-fs-adic-flat-geometrically-regular-closed-fibre` | 1013 | none |
+| `lem-weil-pbc-fs-adic-lift-derivation` | 1013 | none |
+| `lem-weil-pbc-fs-adic-lift-over-finite-coefficient-map` | 1013 | none |
 | `lem-weil-pbc-lift-to-injective-unique-up-to-homotopy` | 1013 | none |
 | `lem-weil-pbc-module-finite-type-image-extension` | 1013 | none |
 | `lem-weil-pbc-module-pushforward-injective-acyclic` | 1013 | none |
 | `lem-weil-pbc-module-pushforward-injectives-sections-quasi-iso` | 1013 | none |
 | `lem-weil-pbc-nagata-universally-japanese` | 1013 | none |
 | `lem-weil-pbc-projective-resolution-kernel-projective` | 1013 | none |
+| `lem-weil-pbc-purely-inseparable-pth-root-tower` | 1013 | none |
 | `lem-weil-pbc-quasi-finite-at-finite-subalgebra-away` | 1013 | none |
 | `lem-weil-pbc-relative-global-complete-intersection-smooth-jacobian` | 1013 | none |
 | `lem-weil-pbc-residue-field-pd-ge-embedding-dimension` | 1013 | none |
@@ -888,7 +894,7 @@
 | `lem-weil-pbc-p1-field-dimension-one` | 4 | state |
 | `lem-weil-pbc-projective-space-zero-isomorphism` | 4 | state |
 
-Not open yet: 660 nodes that wait for stage 1, 507 nodes that wait for a statement dependency.
+Not open yet: 666 nodes that wait for stage 1, 508 nodes that wait for a statement dependency.
 
 ## Stage 3: modules to prove (0)
 
