@@ -36,6 +36,58 @@ open CategoryTheory Limits
 
 namespace CategoryTheory.Endofunctor.IsoAlgebra
 
+section Map
+
+variable {C : Type u} [Category.{v} C] {D : Type u'} [Category.{v'} D]
+  {E : Type u''} [Category.{v''} E] {F : C ⥤ C} {G : D ⥤ D} {H : E ⥤ E}
+
+/-- An isomorphism `α : L ≅ L'` compatible with commutation isomorphisms `e` and `e'` induces an
+isomorphism `mapOfNatIso e ≅ mapOfNatIso e'` of the transported functors. -/
+@[simps!]
+noncomputable def mapOfNatIsoIsoOfIso {L L' : C ⥤ D} {e : L ⋙ G ≅ F ⋙ L}
+    {e' : L' ⋙ G ≅ F ⋙ L'} (α : L ≅ L')
+    (hα : Functor.whiskerRight α.hom G ≫ e'.hom = e.hom ≫ Functor.whiskerLeft F α.hom) :
+    mapOfNatIso e ≅ mapOfNatIso e' where
+  hom := mapOfNatIsoHom α.hom hα
+  inv := mapOfNatIsoHom α.inv (by
+    ext K
+    have h := congr_app hα K
+    simp only [NatTrans.comp_app, Functor.whiskerRight_app, Functor.whiskerLeft_app] at h ⊢
+    rw [← cancel_epi (G.map (α.hom.app K)), ← Functor.map_comp_assoc, Iso.hom_inv_id_app,
+      Functor.map_id, Category.id_comp, reassoc_of% h]
+    simp)
+  hom_inv_id := by
+    ext K : 2
+    exact ObjectProperty.hom_ext _ (Algebra.Hom.ext (α.hom_inv_id_app K.carrier))
+  inv_hom_id := by
+    ext K : 2
+    exact ObjectProperty.hom_ext _ (Algebra.Hom.ext (α.inv_hom_id_app K.carrier))
+
+/-- The composite of the commutation isomorphisms `e₁ : L₁ ⋙ G ≅ F ⋙ L₁` and
+`e₂ : L₂ ⋙ H ≅ G ⋙ L₂`, a commutation isomorphism for `L₁ ⋙ L₂`. -/
+noncomputable def compCommIso {L₁ : C ⥤ D} {L₂ : D ⥤ E} (e₁ : L₁ ⋙ G ≅ F ⋙ L₁)
+    (e₂ : L₂ ⋙ H ≅ G ⋙ L₂) : (L₁ ⋙ L₂) ⋙ H ≅ F ⋙ (L₁ ⋙ L₂) :=
+  Functor.associator _ _ _ ≪≫ Functor.isoWhiskerLeft L₁ e₂ ≪≫ (Functor.associator _ _ _).symm ≪≫
+    Functor.isoWhiskerRight e₁ L₂ ≪≫ Functor.associator _ _ _
+
+@[simp]
+lemma compCommIso_hom_app {L₁ : C ⥤ D} {L₂ : D ⥤ E} (e₁ : L₁ ⋙ G ≅ F ⋙ L₁)
+    (e₂ : L₂ ⋙ H ≅ G ⋙ L₂) (X : C) :
+    (compCommIso e₁ e₂).hom.app X = e₂.hom.app (L₁.obj X) ≫ L₂.map (e₁.hom.app X) := by
+  simp [compCommIso]
+
+/-- Transporting along two commutation isomorphisms in turn is transporting along their
+composite. -/
+noncomputable def mapOfNatIsoCompIso {L₁ : C ⥤ D} {L₂ : D ⥤ E} (e₁ : L₁ ⋙ G ≅ F ⋙ L₁)
+    (e₂ : L₂ ⋙ H ≅ G ⋙ L₂) :
+    mapOfNatIso e₁ ⋙ mapOfNatIso e₂ ≅ mapOfNatIso (compCommIso e₁ e₂) :=
+  NatIso.ofComponents (fun K ↦ ObjectProperty.isoMk _ (Algebra.isoMk (Iso.refl _) (by
+    simp [mapOfNatIso, Algebra.mapOfNatTrans])))
+    (fun f ↦ ObjectProperty.hom_ext _ (Algebra.Hom.ext (by
+      simp [mapOfNatIso, Algebra.mapOfNatTrans])))
+
+end Map
+
 section Unit
 
 variable {D : Type u'} [Category.{v'} D] [Abelian D] {G : D ⥤ D} [G.Additive] [G.IsEquivalence]
