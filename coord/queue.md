@@ -1,17 +1,17 @@
 # Work queue
 
-892 items; claim with `tools/claim.py next <group> [--stage N]`.
+888 items; claim with `tools/claim.py next <group> [--stage N]`.
 
-## Stage 1: nodes to split (323)
+## Stage 1: nodes to split (319)
 
 | node | distance to a target | Lean state on the done branch |
 |---|---|---|
-| `thm-constructible-serre` | 5 | rests_on_sorry |
+| `lemma-constructible-flc-serre` | 6 | rests_on_sorry |
+| `lemma-constructible-torsor-trivialises` | 7 | none |
 | `lem-weil-pbc-injective-acyclicity-bounded-below` | 2002 | sorry_here |
 | `lem-weil-pbc-sections-base-field-extension` | 2004 | none |
 | `lem-weil-pbc-etale-fibre-specialization-bound` | 2007 | none |
 | `lem-weil-pbc-sets-etale-section-continuity` | 2009 | none |
-| `lem-weil-pbc-sets-adjoint-continuous-restriction-adjunction` | 2010 | none |
 | `lem-sc-affine-cap-section-open-algebra` | 2012 | none |
 | `lem-sc-affine-cap-section-open-dictionary` | 2012 | none |
 | `lem-sc-ample-finite-set-affine` | 2012 | none |
@@ -29,14 +29,12 @@
 | `lem-sc-invert-s-cohomology` | 2013 | none |
 | `lem-weil-pbc-etale-cohomology-limit-complex-systems` | 3005 | none |
 | `lem-weil-pbc-finite-coproduct-cohomology-assembly` | 3006 | none |
-| `lem-weil-pbc-geometric-point-cohomology` | 3006 | none |
 | `lem-exc-field-sections-stalk-invariants` | 3007 | none |
 | `lem-sc-etale-standard-cover-cech` | 3008 | none |
 | `lem-weil-pbc-etale-cohomology-over-open` | 3008 | none |
 | `lem-exc-etale-coproduct-etale` | 3010 | none |
 | `lem-exc-etale-field-galois-classification` | 3010 | none |
 | `lem-sc-point-tangent-separation-closed-immersion` | 3010 | none |
-| `lem-sc-fibre-dimension-after-base-change` | 3011 | none |
 | `lem-weil-pbc-ringed-site-injective-module-cech-acyclic` | 3011 | none |
 | `lem-galois-descent-datum-diagonal-identity` | 3012 | none |
 | `lem-pc-clopen-smooth-proper-curve` | 3012 | none |
@@ -53,7 +51,6 @@
 | `lem-sc-ext-derived-composite-natural` | 3013 | none |
 | `lem-sc-ext-evaluation-first-naturality` | 3013 | none |
 | `lem-sc-finite-flat-duality-evaluation` | 3013 | none |
-| `lem-sc-local-section-quotient-finite-free` | 3013 | none |
 | `lem-sc-product-irreducible-components-bijection` | 3013 | none |
 | `lem-sc-proper-upper-shriek-composition` | 3013 | none |
 | `lem-sc-p1-graded-nakayama-free` | 3014 | none |
@@ -259,7 +256,6 @@
 | `def-nagata-qc-open-equality-stage` | - | none |
 | `def-nagata-relative-gluing-datum-descent` | - | none |
 | `def-nagata-scheme-theoretically-dense-open` | - | none |
-| `lem-kun-03qu-sep-closed` | - | none |
 | `lem-pc-coherent-hi` | - | sorry_here |
 | `lem-sc-affine-generic-second` | - | sorry_here |
 | `lem-sc-genus-invariant` | - | none |
@@ -904,7 +900,7 @@
 | `lem-weil-pbc-p1-field-dimension-one` | 4 | state |
 | `lem-weil-pbc-projective-space-zero-isomorphism` | 4 | state |
 
-Not open yet: 342 nodes that wait for stage 1, 1111 nodes that wait for a statement dependency.
+Not open yet: 337 nodes that wait for stage 1, 1115 nodes that wait for a statement dependency.
 
 ## Stage 3: modules to prove (0)
 
