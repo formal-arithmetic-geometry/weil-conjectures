@@ -1,8 +1,8 @@
 # Work queue
 
-873 items; claim with `tools/claim.py next <group> [--stage N]`.
+870 items; claim with `tools/claim.py next <group> [--stage N]`.
 
-## Stage 1: nodes to split (324)
+## Stage 1: nodes to split (321)
 
 | node | distance to a target | Lean state on the done branch |
 |---|---|---|
@@ -52,7 +52,6 @@
 | `lem-exc-coinduced-homotopy-continuous` | 3012 | none |
 | `lem-exc-coinduced-homotopy-identity` | 3012 | none |
 | `lem-pc-grothendieck-edge-cocycle` | 3012 | none |
-| `lem-pc-projective-base-change` | 3012 | none |
 | `lem-sc-coherent-free-stalks-locally-free` | 3012 | none |
 | `lem-sc-dvr-fg-torsionfree-free` | 3012 | none |
 | `lem-sc-dvr-saturation-line` | 3012 | none |
@@ -64,8 +63,6 @@
 | `lem-sc-p1-coherent-proj-representation` | 3013 | none |
 | `lem-sc-p1-graded-syzygy` | 3013 | none |
 | `lem-sc-p1-proj-sheafification-exact` | 3013 | none |
-| `lem-weil-pbc-proper-to-separated` | 4003 | none |
-| `lem-weil-pbc-closed-immersion-products` | 4004 | none |
 | `lem-sc-brauer-zero` | 4005 | rests_on_sorry |
 | `lem-sc-normalization-properties` | 4005 | none |
 | `lem-sc-affine-open-proper` | 4006 | sorry_here |
@@ -885,7 +882,7 @@
 | `lem-weil-pbc-p1-field-dimension-one` | 4 | state |
 | `lem-weil-pbc-projective-space-zero-isomorphism` | 4 | state |
 
-Not open yet: 344 nodes that wait for stage 1, 1042 nodes that wait for a statement dependency.
+Not open yet: 342 nodes that wait for stage 1, 1043 nodes that wait for a statement dependency.
 
 ## Stage 3: modules to prove (0)
 
