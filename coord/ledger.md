@@ -1203,3 +1203,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 10:02 L: accepted lem-weil-pbc-normal-locus-open (0332, 9 steps, 0 new). The worker's first write was overwritten by L's lean_status run at 10:02 (it rewrites every node file); rewritten by the worker, verified before commit.
 - 10:03 L: accepted lem-weil-pbc-associated-prime-localize-at-prime (0310 (1), 4 steps, 0 new).
 - 10:03 L: accepted lem-weil-pbc-power-series-universal-property-complete (agent proof, 6 steps, 0 new).
+- 10:03 L: accepted lem-weil-pbc-associated-primes-exact-sequence (02M3 any ring, 3 elementary steps).

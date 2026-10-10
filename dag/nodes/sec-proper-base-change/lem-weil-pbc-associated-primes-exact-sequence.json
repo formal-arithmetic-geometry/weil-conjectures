@@ -26,9 +26,41 @@
   "place": "Algebra, Lemma Tag 02M3 (lemma-ass), lines 15130-15150, first two assertions (the third, about direct sums, is not stated here); tag verified in literature/stacks-project/tags/tags: 02M3,algebra-lemma-ass"
  },
  "stmt_deps": [],
- "proof": [],
+ "proof": [
+  {
+   "text": "First inclusion. Let $z'\\in P'$. Since $f$ is $T$-linear and injective, for $a\\in T$ we have $a f(z')=f(az')$, and $f(az')=0$ if and only if $az'=0$. Hence $\\operatorname{Ann}_T(f(z'))=\\operatorname{Ann}_T(z')$. If $\\mathfrak q=\\operatorname{Ann}_T(z')$ is prime, then $\\mathfrak q=\\operatorname{Ann}_T(f(z'))$ with $f(z')\\in P$, so $\\mathfrak q\\in\\operatorname{Ass}_T(P)$. This proves $\\operatorname{Ass}_T(P')\\subseteq\\operatorname{Ass}_T(P)$ and the parenthetical equality of annihilators.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra, Lemma 02M3 (lemma-ass), proof, first two sentences (lines 15138-15141)"
+   }
+  },
+  {
+   "text": "Second inclusion, first case. Let $\\mathfrak q\\in\\operatorname{Ass}_T(P)$, so $\\mathfrak q$ is prime and $\\mathfrak q=\\operatorname{Ann}_T(z)$ for some $z\\in P$. Suppose there is $s\\in T\\setminus\\mathfrak q$ with $sz\\in\\operatorname{im}f=\\ker g$, i.e. $g(sz)=s\\,g(z)=0$; write $sz=f(z')$ with $z'\\in P'$. We claim $\\operatorname{Ann}_T(sz)=\\mathfrak q$. For $a\\in T$: $a(sz)=0\\iff (as)z=0\\iff as\\in\\mathfrak q$. If $a\\in\\mathfrak q$ then $as\\in\\mathfrak q$ since $\\mathfrak q$ is an ideal; conversely if $as\\in\\mathfrak q$ then $a\\in\\mathfrak q$ because $\\mathfrak q$ is prime and $s\\notin\\mathfrak q$. So $\\operatorname{Ann}_T(sz)=\\mathfrak q$. By step 1, $\\operatorname{Ann}_T(z')=\\operatorname{Ann}_T(f(z'))=\\operatorname{Ann}_T(sz)=\\mathfrak q$, hence $\\mathfrak q\\in\\operatorname{Ass}_T(P')$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra, Lemma 02M3 (lemma-ass), proof, sentences 3-4 (lines 15141-15145): 'If there exists a $g\\in R$, $g\\notin\\mathfrak p$ such that $m'=gm\\in M'$ then the annihilator of $m'$ is $\\mathfrak p$'"
+   }
+  },
+  {
+   "text": "Second inclusion, second case. Suppose instead that $sz\\notin\\ker g$, i.e. $s\\,g(z)\\neq0$, for every $s\\in T\\setminus\\mathfrak q$. We claim $\\operatorname{Ann}_T(g(z))=\\mathfrak q$. If $a\\in\\mathfrak q$ then $az=0$, so $a\\,g(z)=g(az)=0$. If $a\\,g(z)=0$, then $a\\in\\mathfrak q$, since otherwise $a$ would be an element of $T\\setminus\\mathfrak q$ with $a\\,g(z)=0$, contrary to the case assumption. Hence $\\mathfrak q=\\operatorname{Ann}_T(g(z))$ with $g(z)\\in P''$, so $\\mathfrak q\\in\\operatorname{Ass}_T(P'')$. The two cases are exhaustive, which proves $\\operatorname{Ass}_T(P)\\subseteq\\operatorname{Ass}_T(P')\\cup\\operatorname{Ass}_T(P'')$. (Surjectivity of $g$ is not used; only injectivity of $f$ and $\\ker g=\\operatorname{im}f$.)",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra, Lemma 02M3 (lemma-ass), proof, sentences 5-6 (lines 15145-15148): 'If there does not exist a $g\\in R$, $g\\notin\\mathfrak p$ such that $gm\\in M'$, then the annihilator of the image $m''\\in M''$ of $m$ is $\\mathfrak p$'"
+   }
+  }
+ ],
  "proof_deps": [],
- "proof_origin": null,
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Algebra, Lemma 02M3 (lemma-ass), proof, lines 15138-15150 (first two assertions; the omitted direct-sum assertion is not part of this node)"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -50,10 +82,17 @@
    "results": "IsAssociatedPrime (line 98) and Submodule.IsAssociatedPrime (line 62) are defined with the RADICAL of the annihilator (I = (colon ⊥ {x}).radical); associatedPrimes.subset_of_injective (line 163) and subset_union_of_exact (line 169) are stated for that notion; isAssociatedPrime_iff (line 114) removes the radical only under IsNoetherianRing",
    "date": "2026-10-10",
    "verdict": "no match: Mathlib's notion agrees with the annihilator notion only for Noetherian rings; for a general ring the annihilator version (here needed over the arbitrary ring S) is absent"
+  },
+  {
+   "tool": "loogle",
+   "query": "associatedPrimes, Function.Exact",
+   "results": "associatedPrimes.subset_union_of_exact (Mathlib.RingTheory.Ideal.AssociatedPrime.Basic), only hit",
+   "date": "2026-10-10",
+   "verdict": "no match (B8): stated for Mathlib's IsAssociatedPrime, which is I prime with I = radical(colon ⊥ {x}) (lines 59-63, 96-98, read with sed -n). Every annihilator-associated prime is radical-associated (a prime equals its radical), but not conversely for non-Noetherian T: in T = k[x_1,x_2,...]/(x_1^2,x_2^2,...), the maximal ideal (x_1,x_2,...) is the radical of Ann(1)=0 but is the annihilator of no element (an element involves finitely many x_i, and x_N for N large does not kill it). So the conclusion of subset_of_injective / subset_union_of_exact for the radical notion does not give the annihilator conclusion, and isAssociatedPrime_iff (line 114) bridges only under IsNoetherianRing: not a one-line specialization; the node is split by its three elementary steps"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "worker",
@@ -74,5 +113,12 @@
  },
  "chapter": "sec-proper-base-change",
  "unit": "sk-thm-p1",
- "reviewed": "2026-10-10 L: statement checked against 02M3 (any ring)"
+ "reviewed": "2026-10-10 L: 3 elementary steps checked against 02M3 (any ring, annihilator notion): Ann(f(z')) = Ann(z'); for q = Ann(z) either some s outside q has sz in the image of f, then Ann(sz) = q, or Ann(g(z)) = q; Mathlib radical notion not a leaf off Noetherian rings (counterexample recorded)",
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "lem-weil-pbc-associated-primes-exact-sequence",
+  "worker": "stage1",
+  "summary": "Read Stacks 02M3 (algebra-lemma-ass, algebra.tex 15130-15150; tag verified in tags/tags line 3430) and its proof. Statement kept (it is the first two assertions of 02M3 for any ring with the annihilator definition 00LA-style 'definition-associated', which the statement writes inline). Proof written completely in three elementary steps following the Stacks proof: annihilators are preserved under the injective f; in the case that some s outside q puts sz into P'=ker g, Ann(sz)=q because q is prime, and its preimage z' has annihilator q; otherwise Ann(g(z))=q. No new node: every step uses only the definitions in the statement. Mathlib: associatedPrimes.subset_of_injective / subset_union_of_exact are tagged 02M3 but use the radical of the annihilator; the notions differ off Noetherian rings (counterexample recorded in mathlib_searches), so the item is not a leaf (B8). No slopmaster2 declaration (grep for the id, 02M3, associatedPrimes/IsAssociatedPrime in WeilConjectures: none). Blueprint search (associated primes exact sequence; 02M3; annihilator; associated): no blueprint node states it, same_as [].",
+  "blueprint": "The steps realize, in lem-weil-pbc-normal-constant-generic (through the via chain, the 0312 node lem-weil-pbc-associated-primes-flat-base-change), the inclusions of associated primes along a short exact sequence used in 0312's first paragraph ('see Lemma 02M3', Ass_S(N/pN) ⊆ Ass_S(M⊗N): steps 1) and in the passage through the filtration of its last paragraph (steps 2-3, Ass(P) ⊆ Ass(P') ∪ Ass(P''))."
+ }
 }
