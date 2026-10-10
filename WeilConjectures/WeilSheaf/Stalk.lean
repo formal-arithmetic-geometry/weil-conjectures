@@ -8,7 +8,7 @@ module
 public import WeilConjectures.AlgebraicGeometry.GeometricFrobenius.Points
 public import WeilConjectures.Mathlib.LinearAlgebra.Charpoly.Basic
 public import WeilConjectures.SixFunctors.ProEtale.Adic.AlgClosedField
-public import WeilConjectures.SixFunctors.ProEtale.UpperLowerStar.GlobalSections
+public import WeilConjectures.SixFunctors.ProEtale.UpperLowerStar.Restriction
 public import WeilConjectures.WeilSheaf.Category
 public import WeilConjectures.ZetaLinearAlgebra.FrobeniusModule
 
@@ -383,31 +383,6 @@ noncomputable def globalSections [QuasiCompact (X ↘ Spec (CommRingCat.of k₀)
       (((ProEtale.globalSectionsLowerStarIso _
         (X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.inv).app F.obj.carrier.X).symm ≪≫
         (Sheaf.Γ _ _).mapIso ((ProEtale.AdicSheaf.forget _).mapIso F.obj.str)) }
-
-/-- The restriction of global sections to the stalk at a geometric point `s` with
-`s ≫ Fr = σ ≫ s`, for instance a point over a `k₀`-rational point, intertwines the Frobenius of
-`Γ(X̄, F)` with the Frobenius of `F_s` relative to `k₀`:
-
-```
-          Fr
-  Γ(X̄, F) ---> Γ(X̄, F)
-     |            |
-     v            v
-    F_s  -----> F_s
-          Fr
-```
--/
-theorem globalSectionsToStalkObj_frobenius [QuasiCompact (X ↘ Spec (CommRingCat.of k₀))]
-    [LocallyOfFiniteType (X ↘ Spec (CommRingCat.of k₀))]
-    (s : Spec (.of (AlgebraicClosure k₀)) ⟶ (X ↘ Spec (CommRingCat.of k₀)).geometricFiber)
-    (hs : s ≫ ((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius ^ 1).hom =
-      (specGeometricFrobenius k₀ ^ 1).hom ≫ s)
-    (a : F.globalSections.carrier) :
-    ((WeilCoefficients.toModuleCat l).map (F.globalSectionsToStalkObj s)).hom
-        (F.globalSections.frobenius a) =
-      (F.stalkAt s 1 hs).frobenius
-        (((WeilCoefficients.toModuleCat l).map (F.globalSectionsToStalkObj s)).hom a) :=
-  sorry
 
 end GlobalSections
 
