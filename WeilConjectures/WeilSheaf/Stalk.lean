@@ -8,6 +8,9 @@ module
 public import WeilConjectures.AlgebraicGeometry.GeometricFrobenius.Points
 public import WeilConjectures.Mathlib.LinearAlgebra.Charpoly.Basic
 public import WeilConjectures.SixFunctors.ProEtale.Adic.AlgClosedField
+public import WeilConjectures.SixFunctors.ProEtale.Adic.ExtensionByZero
+public import WeilConjectures.SixFunctors.ProEtale.Adic.LisseStalk
+public import WeilConjectures.SixFunctors.ProEtale.UpperLowerStar.Detection
 public import WeilConjectures.SixFunctors.ProEtale.UpperLowerStar.Restriction
 public import WeilConjectures.WeilSheaf.Category
 public import WeilConjectures.ZetaLinearAlgebra.FrobeniusModule
@@ -303,8 +306,73 @@ theorem exists_injective_globalSectionsToStalkObj
       (s : Fin n → (Spec (.of (AlgebraicClosure k₀)) ⟶
         (X ↘ Spec (CommRingCat.of k₀)).geometricFiber)),
       Function.Injective fun a ↦ fun i ↦
-        ((WeilCoefficients.toModuleCat l).map (F.globalSectionsToStalkObj (s i))).hom a :=
-  sorry
+        ((WeilCoefficients.toModuleCat l).map (F.globalSectionsToStalkObj (s i))).hom a := by
+  classical
+  set f := X ↘ Spec (CommRingCat.of k₀)
+  have : IsLocallyNoetherian f.geometricFiber :=
+    LocallyOfFiniteType.isLocallyNoetherian f.geometricFiberToAlgebraicClosure
+  have : IsNoetherian f.geometricFiber := {}
+  obtain ⟨κ, hκ, Z, i, hi, -, hcover, hlisse⟩ :=
+    F.isAdicConstructibleSheaf_carrier.isAdicStratifiedLisseSheaf
+  have hZ (k : κ) : TopologicalSpace.NoetherianSpace (Z k) :=
+    (i k).isEmbedding.isInducing.noetherianSpace
+  -- the geometric points: one over a closed point of every irreducible component of every stratum
+  have hpts (k : κ) : ∃ T : Finset (Spec (.of (AlgebraicClosure k₀)) ⟶ Z k), ∀ y : Z k,
+      ∃ η : Z k, ∃ s ∈ T, η ⤳ y ∧ η ⤳ s.base (IsLocalRing.closedPoint _) := by
+    have hfin := TopologicalSpace.NoetherianSpace.finite_irreducibleComponents (α := Z k)
+    have hC (C : Set (Z k)) (hC : C ∈ irreducibleComponents (Z k)) :
+        ∃ s : Spec (.of (AlgebraicClosure k₀)) ⟶ Z k, s.base (IsLocalRing.closedPoint _) ∈ C := by
+      obtain ⟨z, hzC, hz⟩ := (isClosed_of_mem_irreducibleComponents C hC).exists_closed_singleton
+        hC.1.nonempty
+      obtain ⟨s, hs⟩ := (i k ≫ f.geometricFiberToAlgebraicClosure).exists_spec_base_eq_of_isClosed
+        z hz
+      exact ⟨s, hs ▸ hzC⟩
+    choose s hs using hC
+    refine ⟨hfin.toFinset.attach.image fun C ↦ s C.1 (hfin.mem_toFinset.1 C.2), fun y ↦ ?_⟩
+    let C := irreducibleComponent y
+    have hCm : C ∈ irreducibleComponents (Z k) := irreducibleComponent_mem_irreducibleComponents y
+    have hη := hCm.1.isGenericPoint_genericPoint (isClosed_of_mem_irreducibleComponents C hCm)
+    exact ⟨_, s C hCm, Finset.mem_image.2 ⟨⟨C, hfin.mem_toFinset.2 hCm⟩, Finset.mem_attach _ _,
+      rfl⟩, hη.specializes mem_irreducibleComponent, hη.specializes (hs C hCm)⟩
+  choose T hT using hpts
+  have : Fintype κ := Fintype.ofFinite κ
+  let P := Σ k, T k
+  let e := Fintype.equivFin P
+  have hqc (k : κ) : QuasiCompact (i k) := by
+    have := hZ k
+    infer_instance
+  refine ⟨Fintype.card P, fun m ↦ ((e.symm m).2 : Spec (.of (AlgebraicClosure k₀)) ⟶ Z _) ≫
+    i (e.symm m).1, ?_⟩
+  suffices key : ∀ a, (∀ (k : κ) (s : Spec (.of (AlgebraicClosure k₀)) ⟶ Z k), s ∈ T k →
+      ((ProEtale.globalSectionsToUpperStar _ (s ≫ i k)).app F.obj.carrier.X).hom a = 0) →
+      a = 0 by
+    intro a a' h
+    rw [← sub_eq_zero]
+    refine key _ fun k s hs ↦ ?_
+    have := congrFun h (e ⟨k, ⟨s, hs⟩⟩)
+    beta_reduce at this
+    rw [Equiv.symm_apply_apply] at this
+    rw [map_sub, sub_eq_zero]
+    exact this
+  intro a hzero
+  obtain ⟨v, rfl⟩ := (ProEtale.bijective_globalSectionOfModHom F.obj.carrier).2 a
+  have hk (k : κ) : (i k)^*ᵃ[l].map v = 0 := by
+    have hβ := (hlisse k).eq_zero_of_globalSectionsToUpperStar_eq_zero
+      ((ProEtale.adicUpperStarUnitIso l (i k)).inv ≫ (i k)^*ᵃ[l].map v) (AlgebraicClosure k₀)
+      (fun y ↦ ?_)
+    · rw [← cancel_epi (ProEtale.adicUpperStarUnitIso l (i k)).inv, hβ, comp_zero]
+    · obtain ⟨η, s, hs, hηy, hηs⟩ := hT k y
+      refine ⟨η, s, hηy, hηs, ?_⟩
+      rw [← ProEtale.globalSectionsToUpperStar_globalSectionOfModHom]
+      have c := congrArg (fun φ ↦ φ.hom (ProEtale.globalSectionOfModHom v))
+        (ProEtale.globalSectionsToUpperStar_comp _ s (i k) F.obj.carrier.X)
+      simp only [ModuleCat.hom_comp, LinearMap.comp_apply] at c
+      rw [hzero k s hs, map_zero] at c
+      exact c.symm
+  have hv : v.hom = 0 := ProEtale.eq_zero_of_forall_upperStar_map_eq_zero _ i
+    (fun x ↦ (hcover x).exists) v.hom fun k ↦ congrArg (fun φ ↦ φ.hom) (hk k)
+  rw [ProEtale.globalSectionOfModHom_eq, hv, Functor.map_zero]
+  rfl
 
 /-- The global sections of a Weil sheaf on a quasi-compact `k₀`-scheme locally of finite type
 are finite-dimensional: they inject into finitely many geometric stalks
