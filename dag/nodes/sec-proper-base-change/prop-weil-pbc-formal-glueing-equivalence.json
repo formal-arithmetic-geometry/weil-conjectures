@@ -13,9 +13,173 @@
   "def-weil-pbc-module-localization-away",
   "def-weil-pbc-flat-ring-map"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "(Part (1): $c$, $\\sigma$ and the object $\\mathrm{Can}(M)$.) For every $R$-module $P$ and $f,g\\in R$, $\\sigma^P_{f,g}$ is an isomorphism with inverse $\\sigma^P_{g,f}$, given by $(p/f^a)/g^b\\mapsto(p/g^b)/f^a$, and $c^P_f$ is an $S$-linear isomorphism given by $(p\\otimes s)/f^e\\mapsto(p/f^e)\\otimes s$ [lem-weil-pbc-formal-glueing-canonical-maps] (2), (3). Let $M$ be an $R$-module. $M\\otimes_RS$ is an $S$-module [def-weil-module-base-change] and $M_{f_i}$ an $R_{f_i}$-module [def-weil-pbc-module-localization-away], so $\\mathrm{Can}(M)=(M\\otimes_RS,(M_{f_i}),(c^M_{f_i}),(\\sigma^M_{f_i,f_j}))$ has the data required in [def-weil-pbc-formal-glueing-data]. Condition (a) for it reads $(\\sigma^M_{f_i,f_j}\\otimes_RS)\\circ c^{M_{f_i}}_{f_j}\\circ(c^M_{f_i})_{f_j}=c^{M_{f_j}}_{f_i}\\circ(c^M_{f_j})_{f_i}\\circ\\sigma^{M\\otimes S}_{f_i,f_j}$. By the formulas just quoted and the formula $h_f(x/f^e)=h(x)/f^e$ for the localization of a map [def-weil-pbc-module-localization], both sides send $((m\\otimes s)/f_i^a)/f_j^b$ to $((m/f_j^b)/f_i^a)\\otimes s$: the left side via $((m/f_i^a)\\otimes s)/f_j^b$ and $((m/f_i^a)/f_j^b)\\otimes s$, the right side via $((m\\otimes s)/f_j^b)/f_i^a$ and $((m/f_j^b)\\otimes s)/f_i^a$. Every element of $((M\\otimes_RS)_{f_i})_{f_j}$ is a finite sum of such elements ($x/f^e$ with $x$ a sum of pure tensors, and $(\\sum x_k)/f^e=\\sum x_k/f^e$), and both sides are additive, so (a) holds. Condition (b) reads $(\\sigma^M_{f_j,f_k})_{f_i}\\circ\\sigma^{M_{f_j}}_{f_i,f_k}\\circ(\\sigma^M_{f_i,f_j})_{f_k}=\\sigma^{M_{f_k}}_{f_i,f_j}\\circ(\\sigma^M_{f_i,f_k})_{f_j}\\circ\\sigma^{M_{f_i}}_{f_j,f_k}$; every element of $((M_{f_i})_{f_j})_{f_k}$ is $((m/f_i^a)/f_j^b)/f_k^c$, and both sides send it to $((m/f_k^c)/f_j^b)/f_i^a$ (left: via $((m/f_j^b)/f_i^a)/f_k^c$, $((m/f_j^b)/f_k^c)/f_i^a$; right: via $((m/f_i^a)/f_k^c)/f_j^b$, $((m/f_k^c)/f_i^a)/f_j^b$). So $\\mathrm{Can}(M)$ is an object of $\\mathrm{Glue}$.",
+   "uses": [
+    "lem-weil-pbc-formal-glueing-canonical-maps",
+    "def-weil-module-base-change",
+    "def-weil-pbc-module-localization-away",
+    "def-weil-pbc-formal-glueing-data",
+    "def-weil-pbc-module-localization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "More on Algebra, Remark 05EL (remark-glueing-data, line 24641): the functor Can; the canonical isomorphisms can_i, can_ij"
+   }
+  },
+  {
+   "text": "(Part (1): $\\mathrm{Can}$ on maps; functoriality.) Let $u:M\\to N$ be $R$-linear. Then $u\\otimes_RS$ is $S$-linear [def-weil-module-base-change] and $u_{f_i}$ is $R$-linear [def-weil-pbc-module-localization]. The two conditions for $\\mathrm{Can}(u)=(u\\otimes_RS,(u_{f_i}))$ to be a morphism [def-weil-pbc-formal-glueing-data] are $c^N_{f_i}\\circ(u\\otimes_RS)_{f_i}=(u_{f_i}\\otimes_RS)\\circ c^M_{f_i}$ and $\\sigma^N_{f_i,f_j}\\circ(u_{f_i})_{f_j}=(u_{f_j})_{f_i}\\circ\\sigma^M_{f_i,f_j}$. By the formulas of [lem-weil-pbc-formal-glueing-canonical-maps] both sides of the first send $(m\\otimes s)/f_i^e$ to $(u(m)/f_i^e)\\otimes s$, and both sides of the second send $(m/f_i^a)/f_j^b$ to $(u(m)/f_j^b)/f_i^a$; these elements generate the sources additively (step 1), so both hold. Since $(v\\circ u)\\otimes_RS=(v\\otimes_RS)\\circ(u\\otimes_RS)$, $\\mathrm{id}\\otimes_RS=\\mathrm{id}$ [def-weil-module-base-change], $(v\\circ u)_f=v_f\\circ u_f$ and $(\\mathrm{id})_f=\\mathrm{id}$ [lem-weil-pbc-formal-glueing-canonical-maps] (1), and composition and identities in $\\mathrm{Glue}$ are componentwise [def-weil-pbc-formal-glueing-data], $\\mathrm{Can}$ is a functor $\\mathrm{Mod}_R\\to\\mathrm{Glue}$. This proves (1). For later use: for an $R$-linear $u$, $\\mathrm{Can}(u)$ being a morphism is the naturality $c^N_{f}\\circ(u\\otimes_RS)_{f}=(u_{f}\\otimes_RS)\\circ c^M_{f}$, $\\sigma^N_{f,g}\\circ(u_{f})_{g}=(u_{g})_{f}\\circ\\sigma^M_{f,g}$.",
+   "uses": [
+    "def-weil-module-base-change",
+    "def-weil-pbc-module-localization",
+    "def-weil-pbc-formal-glueing-data",
+    "lem-weil-pbc-formal-glueing-canonical-maps"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "More on Algebra, Remark 05EL (remark-glueing-data, line 24641): the functor Can"
+   }
+  },
+  {
+   "text": "(Part (2): from now on $\\varphi$ is flat and $R/I\\to S/IS$ is an isomorphism. The complex.) For an $R$-module $N$ let $\\alpha_N:N\\to(N\\otimes_RS)\\times\\prod_iN_{f_i}$, $n\\mapsto(n\\otimes1,(n/1)_i)$, and $\\beta_N$ be the maps of [lem-weil-pbc-formal-glueing-complex-exact], where $(N\\otimes_RS)_{f_i}$ is identified with $N_{f_i}\\otimes_RS$ by $c^N_{f_i}$ (the identification of that statement is $(x\\otimes s)/f_i^e\\leftrightarrow(x/f_i^e)\\otimes s$, which is $c^N_{f_i}$ by [lem-weil-pbc-formal-glueing-canonical-maps] (3)). By [lem-weil-pbc-formal-glueing-complex-exact], $\\alpha_N$ is injective and $\\operatorname{Ker}\\beta_N=\\operatorname{Im}\\alpha_N$. Concretely, a pair $(n',(n_i)_i)$ lies in $\\operatorname{Ker}\\beta_N$ iff (i) $c^N_{f_i}(n'/1)=n_i\\otimes1$ for all $i$ and (ii) $n_i$ and $n_j$ have the same image in $N_{f_if_j}$ under the canonical maps $N_{f_i}\\to N_{f_if_j}$, $x/f_i^e\\mapsto f_j^ex/(f_if_j)^e$, and $N_{f_j}\\to N_{f_if_j}$ [def-weil-pbc-module-localization-away], for all $i,j$.",
+   "uses": [
+    "lem-weil-pbc-formal-glueing-complex-exact",
+    "lem-weil-pbc-formal-glueing-canonical-maps",
+    "def-weil-pbc-module-localization-away"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "More on Algebra, Lemma 05EM (lemma-H0-inverse, line 24729), a reformulation of Lemma 05EK (lemma-recover-module-from-glueing-data, line 24579); the first sentence of the proof of 05ER"
+   }
+  },
+  {
+   "text": "(Part (2): a lemma on iterated localizations.) Let $N$ be an $R$-module, $f,g\\in R$, $x,y\\in N$, $a,b\\ge0$, and suppose $\\sigma^N_{f,g}((x/f^a)/1)=(y/g^b)/1$ in $(N_g)_f$. Then $x/f^a$ and $y/g^b$ have the same image in $N_{fg}$. Indeed $\\sigma^N_{f,g}((x/f^a)/1)=(x/1)/f^a$ (step 1), so $(x/1)/f^a=(y/g^b)/1$ in $(N_g)_f$: there is $c\\ge0$ with $f^c\\big(x/1-f^a\\cdot y/g^b\\big)=0$ in $N_g$, i.e. $(f^cg^bx-f^{c+a}y)/g^b=0$, so there is $d\\ge0$ with $g^d(f^cg^bx-f^{a+c}y)=0$ in $N$ [def-weil-pbc-module-localization-away]. The images of $x/f^a$ and $y/g^b$ in $N_{fg}$ are $g^ax/(fg)^a$ and $f^by/(fg)^b$ (canonical maps of [def-weil-pbc-module-localization-away]); their difference is $z/(fg)^{a+b}$ with $z=f^bg^{a+b}x-f^{a+b}g^ay=f^bg^a(g^bx-f^ay)$, and $(fg)^{c+d}z=f^{b+d}g^{a+c}\\cdot g^d(f^cg^bx-f^{a+c}y)=0$. Hence the difference is $0$ in $N_{fg}$.",
+   "uses": [
+    "def-weil-pbc-module-localization-away"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "More on Algebra, Remark 05EL (remark-glueing-data, line 24641): the identification of (M_{f_i})_{f_j} with M_{f_if_j} left implicit in the source"
+   }
+  },
+  {
+   "text": "(Part (2): $\\mathrm{Can}$ is faithful.) Let $u,v:M\\to N$ be $R$-linear with $\\mathrm{Can}(u)=\\mathrm{Can}(v)$, i.e. $u\\otimes_RS=v\\otimes_RS$ and $u_{f_i}=v_{f_i}$ for all $i$. For $m\\in M$, $\\alpha_N(u(m))=(u(m)\\otimes1,(u(m)/1)_i)=((u\\otimes_RS)(m\\otimes1),(u_{f_i}(m/1))_i)=\\alpha_N(v(m))$, so $u(m)=v(m)$ by injectivity of $\\alpha_N$ (step 3).",
+   "uses": [
+    "lem-weil-pbc-formal-glueing-complex-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "More on Algebra, Lemma 05EM (lemma-H0-inverse, line 24729), a reformulation of Lemma 05EK (lemma-recover-module-from-glueing-data, line 24579)"
+   }
+  },
+  {
+   "text": "(Part (2): $\\mathrm{Can}$ is full.) Let $(u',(u_i)_i):\\mathrm{Can}(M)\\to\\mathrm{Can}(N)$ be a morphism of $\\mathrm{Glue}$ [def-weil-pbc-formal-glueing-data]: $u'$ is $S$-linear, the $u_i:M_{f_i}\\to N_{f_i}$ are $R$-linear, $c^N_{f_i}\\circ u'_{f_i}=(u_i\\otimes_RS)\\circ c^M_{f_i}$ and $\\sigma^N_{f_i,f_j}\\circ(u_i)_{f_j}=(u_j)_{f_i}\\circ\\sigma^M_{f_i,f_j}$. Let $m\\in M$, $n'=u'(m\\otimes1)$, $n_i=u_i(m/1)$. Applying the first relation to $(m\\otimes1)/1$ gives $c^N_{f_i}(n'/1)=(u_i\\otimes_RS)((m/1)\\otimes1)=n_i\\otimes1$ (formula for $c$, step 1), which is (i) of step 3. Applying the second to $(m/1)/1$ gives $\\sigma^N_{f_i,f_j}(n_i/1)=(u_j)_{f_i}((m/1)/1)=n_j/1$; writing $n_i=x/f_i^a$, $n_j=y/f_j^b$, step 4 shows that $n_i$ and $n_j$ have the same image in $N_{f_if_j}$, which is (ii). So $(n',(n_i))\\in\\operatorname{Ker}\\beta_N=\\operatorname{Im}\\alpha_N$, and by injectivity of $\\alpha_N$ there is exactly one $u(m)\\in N$ with $u(m)\\otimes1=u'(m\\otimes1)$ and $u(m)/1=u_i(m/1)$ for all $i$ (step 3). The map $u$ is $R$-linear: $\\alpha_N(u(m_1)+r\\,u(m_2))$ and $\\alpha_N(u(m_1+rm_2))$ are both $(u'((m_1+rm_2)\\otimes1),(u_i((m_1+rm_2)/1))_i)$, as $u'$, $u_i$, $\\alpha_N$ are $R$-linear. Now $u\\otimes_RS$ and $u'$ are $S$-linear and agree on the elements $m\\otimes1$, which generate $M\\otimes_RS$ over $S$ [def-weil-module-base-change], so $u\\otimes_RS=u'$; and $u_{f_i}$, $u_i$ are $R$-linear maps into $N_{f_i}$, on which $f_i$ acts bijectively [def-weil-pbc-module-localization-away], agreeing on the elements $m/1$, so they agree on $m/f_i^e$ (both send it to the unique $z$ with $f_i^ez=u(m)/1$). Hence $(u',(u_i))=\\mathrm{Can}(u)$; with step 5, $\\mathrm{Can}$ is fully faithful.",
+   "uses": [
+    "def-weil-pbc-formal-glueing-data",
+    "lem-weil-pbc-formal-glueing-complex-exact",
+    "def-weil-pbc-module-localization-away",
+    "def-weil-module-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "More on Algebra, Lemma 05EM (lemma-H0-inverse, line 24729), a reformulation of Lemma 05EK (lemma-recover-module-from-glueing-data, line 24579) (H^0 o Can = id), used in the first sentence of the proof of 05ER"
+   }
+  },
+  {
+   "text": "(Part (2): the module $H^0(\\mathbf M)$ and the morphism $\\Psi$.) Let $\\mathbf M=(M',(M_i),(\\alpha_i),(\\alpha_{ij}))$ be an object of $\\mathrm{Glue}$. Let $H=H^0(\\mathbf M)\\subseteq M'\\times\\prod_iM_i$ be the $R$-module of the families $(m',(m_i))$ with $\\alpha_i(m'/1)=m_i\\otimes1$ and $\\alpha_{ij}(m_i/1)=m_j/1$ for all $i,j$, with projections $p':H\\to M'$ and $p_i:H\\to M_i$ (Remark 05EL). By [lem-weil-pbc-formal-glueing-H0-localization] there is for each $i$ a unique $R$-linear $\\Psi_i:H_{f_i}\\to M_i$ with $\\Psi_i(h/1)=p_i(h)$, and it is bijective; as $f_i$ acts bijectively on $M_i$, $\\Psi_i(h/f_i^e)=f_i^{-e}p_i(h)$. Let $\\Psi':H\\otimes_RS\\to M'$ be the $S$-linear map with $\\Psi'(h\\otimes s)=s\\,p'(h)$ (well defined since $(h,s)\\mapsto s\\,p'(h)$ is $R$-bilinear [def-weil-module-base-change]). Then $\\Psi=(\\Psi',(\\Psi_i)_i):\\mathrm{Can}(H)\\to\\mathbf M$ is a morphism of $\\mathrm{Glue}$ [def-weil-pbc-formal-glueing-data]: (i) $\\alpha_i\\circ\\Psi'_{f_i}=(\\Psi_i\\otimes_RS)\\circ c^H_{f_i}$, since on $(h\\otimes s)/f_i^e$ the left side is $\\alpha_i(s\\,p'(h)/f_i^e)=s f_i^{-e}\\alpha_i(p'(h)/1)=sf_i^{-e}(p_i(h)\\otimes1)$ ($\\alpha_i$ is $S$-linear and $R$-linear) and the right side is $(\\Psi_i\\otimes_RS)((h/f_i^e)\\otimes s)=f_i^{-e}p_i(h)\\otimes s$, the same element; (ii) $\\alpha_{ij}\\circ(\\Psi_i)_{f_j}=(\\Psi_j)_{f_i}\\circ\\sigma^H_{f_i,f_j}$, since on $(h/f_i^a)/f_j^b$ the left side is $\\alpha_{ij}((f_i^{-a}p_i(h))/f_j^b)=f_i^{-a}f_j^{-b}\\alpha_{ij}(p_i(h)/1)=f_i^{-a}f_j^{-b}(p_j(h)/1)$ and the right side is $(\\Psi_j)_{f_i}((h/f_j^b)/f_i^a)=(f_j^{-b}p_j(h))/f_i^a$, the same element ($\\alpha_{ij}$ is $R$-linear between modules on which $f_i,f_j$ act bijectively, so it commutes with their inverses). These elements generate the sources additively (step 1), using the formulas for $c$ and $\\sigma$ [lem-weil-pbc-formal-glueing-canonical-maps].",
+   "uses": [
+    "def-weil-pbc-formal-glueing-data",
+    "lem-weil-pbc-formal-glueing-H0-localization",
+    "def-weil-module-base-change",
+    "def-weil-pbc-module-localization-away",
+    "lem-weil-pbc-formal-glueing-canonical-maps"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "More on Algebra, Proposition 05ER (proposition-equivalence, line 24813), proof, first paragraph (the natural morphism Psi); H^0 from Remark 05EL (line 24641)"
+   }
+  },
+  {
+   "text": "(Part (2): $\\Psi'$ has $I$-power torsion kernel and cokernel.) By (i) of step 7, $\\Psi'_{f_i}=\\alpha_i^{-1}\\circ(\\Psi_i\\otimes_RS)\\circ c^H_{f_i}$, a composite of isomorphisms ($\\alpha_i$ by [def-weil-pbc-formal-glueing-data], $c^H_{f_i}$ by step 1, $\\Psi_i\\otimes_RS$ with inverse $\\Psi_i^{-1}\\otimes_RS$ [def-weil-module-base-change]). Let $K=\\operatorname{Ker}\\Psi'$ and $Q=\\operatorname{Coker}\\Psi'$, $S$-modules. Localizing the exact sequences of $R$-modules $0\\to K\\to H\\otimes_RS\\xrightarrow{\\Psi'}M'$ and $H\\otimes_RS\\xrightarrow{\\Psi'}M'\\to Q\\to0$ at $\\{1,f_i,f_i^2,\\dots\\}$ gives exact sequences [lem-weil-pbc-localization-module-exact] in which $\\Psi'_{f_i}$ is bijective, so $K_{f_i}=0$ and $Q_{f_i}=0$. For $x\\in K$ (or $Q$), $x/1=0$ in $K_{f_i}$ gives $e_i$ with $f_i^{e_i}x=0$ [def-weil-pbc-module-localization-away]; with $e=e_1+\\dots+e_t$ every monomial $f_1^{a_1}\\cdots f_t^{a_t}$ with $\\sum a_k=e$ has some $a_k\\ge e_k$, and these monomials generate $I^e$, so $I^ex=0$. Hence $K$ and $Q$ are $I$-power torsion.",
+   "uses": [
+    "def-weil-pbc-formal-glueing-data",
+    "def-weil-module-base-change",
+    "lem-weil-pbc-localization-module-exact",
+    "def-weil-pbc-module-localization-away"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "More on Algebra, Proposition 05ER (proposition-equivalence, line 24813), proof, second paragraph (kernel and cokernel of Psi are of the form (K,0,0,0), (Q,0,0,0))"
+   }
+  },
+  {
+   "text": "(Part (2): $\\Psi'$ is injective.) Let $y\\in K$. Then $y\\in(H\\otimes_RS)[I^\\infty]$ (step 8), and since $I=(f_1,\\dots,f_t)$ is finitely generated, $\\varphi$ is flat and $R/I\\to S/IS$ is an isomorphism, there is $h\\in H[I^\\infty]$ with $h\\otimes1=y$ [lem-weil-pbc-torsion-submodule-flat-base-change-iso]. Then $p'(h)=\\Psi'(h\\otimes1)=0$. If $I^nh=0$ then $f_i^nh=0$, so $h/1=0$ in $H_{f_i}$ [def-weil-pbc-module-localization-away] and $p_i(h)=\\Psi_i(h/1)=0$ for every $i$. As $h=(p'(h),(p_i(h))_i)$ in $M'\\times\\prod_iM_i$, $h=0$ and $y=0$. So $K=0$. (The source argues with $H^0((K,0,0,0))=K$, left exactness of $H^0$ and bijectivity of $H^0(\\Psi)$; the computation here is that argument written out.)",
+   "uses": [
+    "lem-weil-pbc-torsion-submodule-flat-base-change-iso",
+    "def-weil-pbc-module-localization-away"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "More on Algebra, Proposition 05ER (proposition-equivalence, line 24813), proof, second paragraph (K = 0)"
+   }
+  },
+  {
+   "text": "(Part (2): the extension.) The $S$-module $Q$ is $I$-power torsion as an $R$-module (step 8), so $\\varepsilon:Q\\to Q\\otimes_RS$, $x\\mapsto x\\otimes1$, is bijective [lem-weil-pbc-torsion-module-flat-base-change-iso]. It is $S$-linear: the map $\\mu:Q\\otimes_RS\\to Q$, $x\\otimes s\\mapsto sx$, is well defined and $S$-linear ($(x,s)\\mapsto sx$ is $R$-bilinear [def-weil-module-base-change]), and $\\mu\\circ\\varepsilon=\\mathrm{id}_Q$, so $\\mu=\\varepsilon^{-1}$ and $\\varepsilon=\\mu^{-1}$ is $S$-linear. With $\\rho:M'\\to Q$ the cokernel map, $\\pi=\\varepsilon\\circ\\rho$ gives, by steps 8 and 9, an exact sequence of $S$-modules $0\\to H\\otimes_RS\\xrightarrow{\\Psi'}M'\\xrightarrow{\\pi}Q\\otimes_RS\\to0$ (this is the source's 'we may think of $Q$ as an $R$-module which is $I$-power torsion so that $Q=Q\\otimes_RS$'). By [lem-weil-pbc-torsion-extension-flat-descent] (with $N=H$, $\\iota=\\Psi'$) there are an $R$-module $E$, an exact sequence $0\\to H\\xrightarrow{j}E\\xrightarrow{q}Q\\to0$ of $R$-modules and an $S$-linear isomorphism $\\theta:E\\otimes_RS\\to M'$ with $\\theta\\circ(j\\otimes_RS)=\\Psi'$.",
+   "uses": [
+    "lem-weil-pbc-torsion-module-flat-base-change-iso",
+    "def-weil-module-base-change",
+    "lem-weil-pbc-torsion-extension-flat-descent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "More on Algebra, Proposition 05ER (proposition-equivalence, line 24813), proof, third paragraph (Lemma 05EH, dualizing-lemma-neighbourhood-extensions, gives E)"
+   }
+  },
+  {
+   "text": "(Part (2): $\\mathrm{Can}(E)\\cong\\mathbf M$; essential surjectivity.) Since $Q$ is $I$-power torsion, $Q_{f_i}=0$ (each $x\\in Q$ has $f_i^nx=0$ for some $n$, so $x/f_i^e=0$ [def-weil-pbc-module-localization-away]); localizing $0\\to H\\to E\\to Q\\to0$ [lem-weil-pbc-localization-module-exact] shows that $j_{f_i}:H_{f_i}\\to E_{f_i}$ is bijective, and then so are $(j_{f_i})_{f_k}$ and $(j\\otimes_RS)_{f_i}=(c^E_{f_i})^{-1}\\circ(j_{f_i}\\otimes_RS)\\circ c^H_{f_i}$ (naturality of $c$, step 2). Put $\\Phi_i=\\Psi_i\\circ j_{f_i}^{-1}:E_{f_i}\\to M_i$, an $R$-linear bijection (step 7), and $\\Phi=(\\theta,(\\Phi_i)_i)$. $\\Phi:\\mathrm{Can}(E)\\to\\mathbf M$ is a morphism [def-weil-pbc-formal-glueing-data]: (i) precomposed with the bijection $(j\\otimes_RS)_{f_i}$, $\\alpha_i\\circ\\theta_{f_i}$ becomes $\\alpha_i\\circ(\\theta\\circ(j\\otimes_RS))_{f_i}=\\alpha_i\\circ\\Psi'_{f_i}=(\\Psi_i\\otimes_RS)\\circ c^H_{f_i}$ (step 7) and $(\\Phi_i\\otimes_RS)\\circ c^E_{f_i}$ becomes $(\\Phi_i\\otimes_RS)\\circ(j_{f_i}\\otimes_RS)\\circ c^H_{f_i}=(\\Psi_i\\otimes_RS)\\circ c^H_{f_i}$ (step 2 and functoriality of $-\\otimes_RS$ [def-weil-module-base-change]), so $\\alpha_i\\circ\\theta_{f_i}=(\\Phi_i\\otimes_RS)\\circ c^E_{f_i}$; (ii) precomposed with the bijection $(j_{f_i})_{f_k}$, $\\alpha_{ik}\\circ(\\Phi_i)_{f_k}$ becomes $\\alpha_{ik}\\circ(\\Psi_i)_{f_k}=(\\Psi_k)_{f_i}\\circ\\sigma^H_{f_i,f_k}$ (step 7) and $(\\Phi_k)_{f_i}\\circ\\sigma^E_{f_i,f_k}$ becomes $(\\Phi_k)_{f_i}\\circ(j_{f_k})_{f_i}\\circ\\sigma^H_{f_i,f_k}=(\\Psi_k)_{f_i}\\circ\\sigma^H_{f_i,f_k}$ (step 2; localization respects composition [lem-weil-pbc-formal-glueing-canonical-maps] (1)), so they are equal. All components of $\\Phi$ are bijective, and the family of inverses $(\\theta^{-1},(\\Phi_i^{-1}))$ is a morphism $\\mathbf M\\to\\mathrm{Can}(E)$ (compose the two relations with the inverses on both sides; $(\\Phi_i^{-1})_{f_k}=((\\Phi_i)_{f_k})^{-1}$ and $\\Phi_i^{-1}\\otimes_RS=(\\Phi_i\\otimes_RS)^{-1}$ by functoriality), inverse to $\\Phi$ since composition is componentwise. So $\\mathbf M\\cong\\mathrm{Can}(E)$, and $\\mathrm{Can}$ is essentially surjective. With step 6, $\\mathrm{Can}$ is an equivalence (fully faithful and essentially surjective), which is (2). (A posteriori $Q=0$, as the source remarks; it is not needed.)",
+   "uses": [
+    "def-weil-pbc-module-localization-away",
+    "lem-weil-pbc-localization-module-exact",
+    "def-weil-pbc-formal-glueing-data",
+    "def-weil-module-base-change",
+    "lem-weil-pbc-formal-glueing-canonical-maps"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "More on Algebra, Proposition 05ER (proposition-equivalence, line 24813), proof, third paragraph ('This clearly determines an isomorphism Can(E) -> (M', M_i, alpha_i, alpha_ij)')"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-formal-glueing-canonical-maps",
+  "def-weil-module-base-change",
+  "def-weil-pbc-module-localization-away",
+  "def-weil-pbc-formal-glueing-data",
+  "def-weil-pbc-module-localization",
+  "lem-weil-pbc-formal-glueing-complex-exact",
+  "lem-weil-pbc-formal-glueing-H0-localization",
+  "lem-weil-pbc-localization-module-exact",
+  "lem-weil-pbc-torsion-submodule-flat-base-change-iso",
+  "lem-weil-pbc-torsion-module-flat-base-change-iso",
+  "lem-weil-pbc-torsion-extension-flat-descent"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "More on Algebra, Proposition 05ER (proposition-equivalence, line 24813) and its proof; Remark 05EL (remark-glueing-data, line 24641) for Can and H^0; Lemma 05EM (lemma-H0-inverse, line 24729) = Lemma 05EK (lemma-recover-module-from-glueing-data, line 24579) for full faithfulness; Lemmas 05EQ, 05EP (lines 24792, 24768) through the new node lem-weil-pbc-formal-glueing-H0-localization; Dualizing Complexes Lemma 05EH (dualizing.tex line 1502) through the new node lem-weil-pbc-torsion-extension-flat-descent"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -58,10 +222,17 @@
    "results": "only scheme/space glueing files (CategoryTheory/GlueData.lean, AlgebraicGeometry/Gluing.lean, Topology/Gluing.lean, Geometry/RingedSpace/PresheafedSpace/Gluing.lean); no Beauville-Laszlo",
    "date": "2026-10-10",
    "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rliE 'BeauvilleLaszlo|Beauville|glueing' and grep -rlE 'gluing.*[Mm]odule|[Mm]odule.*gluing' in ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib (repeated by the splitting worker)",
+   "results": "no Beauville-Laszlo or module-glueing-datum file; 'gluing' of modules only in Algebra/Colimit/Module.lean (directed colimits)",
+   "date": "2026-10-10",
+   "verdict": "no match"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "worker",
@@ -82,5 +253,11 @@
  },
  "chapter": "sec-proper-base-change",
  "unit": "sk-thm-p1",
- "reviewed": "Reviewed by L 2026-10-10 (statement): More on Algebra 05ER (Can is an equivalence) with part (1) the functoriality of Can from 05EL; the quasi-inverse H^0 omitted. Unsplit."
+ "reviewed": "2026-10-10 L: 11 steps checked against the 05ER proof: Can well defined via formal-glueing-canonical-maps, faithful/full from the 05EK complex, H^0 and Psi with Psi_i bijective (new node, consequence of 05EP/05EQ), kernel and cokernel of Psi' I-power torsion, K = 0 by 05EC (1), the cokernel extension descended by 05EH (new node), Can(E) = M componentwise; 05EI in the brief is a retired tag; citer formal-glueing-isogeny uses (1), fully faithful and essentially surjective",
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "prop-weil-pbc-formal-glueing-equivalence",
+  "worker": "stage1",
+  "summary": "Read More on Algebra 05EK (with both proofs), Remark 05EL, 0H77, 05EM, 05EN, 05EP, 05EQ, Proposition 05ER and its proof (more-algebra.tex lines 24558-24870), Dualizing 05EH (dualizing.tex 1502), the definition node, the canonical-maps node, the 05EK/05E9/05EC(1) nodes and the citer lem-weil-pbc-formal-glueing-isogeny (steps 2-4 use (1), full faithfulness and essential surjectivity). Statement kept. Proof in 11 steps: (1) c, sigma isomorphisms cited from lem-weil-pbc-formal-glueing-canonical-maps, conditions (a), (b) for Can(M) and functoriality checked on generators; (2) full faithfulness from 05EK (complex-exact node), i.e. the source's H^0 o Can = id (05EM), with the comparison of (N_f)_g with N_{fg} written out; essential surjectivity follows the proof of 05ER: H^0(M) and Psi written out, Psi_i bijective by the new node lem-weil-pbc-formal-glueing-H0-localization (the i-th component of 05EQ+05EP), kernel and cokernel of Psi' I-power torsion, kernel zero via the 05EC(1) node, Q = Q (x) S via the 05E9 node, the extension E from the new node lem-weil-pbc-torsion-extension-flat-descent (05EH for Ext^1 in extension form), and the isomorphism Can(E) -> M checked. 05EI (in the brief) is a retired tag (an equation); 05EN (Glue abelian) is not needed because kernels and cokernels are taken in the S-module component only. Mathlib: no Beauville-Laszlo or module glueing; searches recorded."
+ }
 }

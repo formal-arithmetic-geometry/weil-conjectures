@@ -1,0 +1,87 @@
+{
+ "id": "lem-weil-pbc-formal-glueing-H0-localization",
+ "kind": "statement",
+ "title": "Formal glueing: the module H^0 of a glueing datum localizes to its components",
+ "statement": "Let $\\varphi:R\\to S$ be a flat ring map of commutative rings [def-weil-pbc-flat-ring-map] and $f_1,\\dots,f_t\\in R$. Let $\\mathbf M=(M',(M_i)_i,(\\alpha_i)_i,(\\alpha_{ij})_{i,j})$ be an object of the category $\\mathrm{Glue}(R\\to S,f_1,\\dots,f_t)$ of glueing data [def-weil-pbc-formal-glueing-data]: $M'$ an $S$-module, $M_i$ an $R_{f_i}$-module [def-weil-ring-localization-away], $\\alpha_i:M'_{f_i}\\to M_i\\otimes_RS$ and $\\alpha_{ij}:(M_i)_{f_j}\\to(M_j)_{f_i}$ isomorphisms satisfying conditions (a) and (b) there; here $P_f$ is the localization of an $R$-module $P$ at $f$ with localization map $p\\mapsto p/1$ [def-weil-pbc-module-localization-away] and $P\\otimes_RS$ the base change [def-weil-module-base-change]. Let $H^0(\\mathbf M)$ be the $R$-submodule of $M'\\times\\prod_{i=1}^tM_i$ of the families $(m',(m_i)_i)$ with $\\alpha_i(m'/1)=m_i\\otimes1$ in $M_i\\otimes_RS$ and $\\alpha_{ij}(m_i/1)=m_j/1$ in $(M_j)_{f_i}$ for all $i,j$, and $p_i:H^0(\\mathbf M)\\to M_i$, $(m',(m_k)_k)\\mapsto m_i$, the projection. Fix $i$. Then there is exactly one $R$-linear map $\\pi_i:H^0(\\mathbf M)_{f_i}\\to M_i$ with $\\pi_i(h/1)=p_i(h)$ for all $h\\in H^0(\\mathbf M)$, and $\\pi_i$ is bijective.",
+ "source": {
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "More on Algebra, proof of Proposition 05ER (proposition-equivalence, line 24813), second paragraph: the morphism Psi from Can(H^0(M)) to M becomes an isomorphism after the base change R -> R' = R_{f_i}, by combining Lemma 05EQ (lemma-base-change-glue, line 24792; H^0 commutes with the flat base change R -> R_{f_i}) and Lemma 05EP (lemma-equivalence-I-unit, line 24768; the case (f_1,...,f_t) = R, proved with Algebra Lemma 00EQ, lemma-glue-modules, algebra.tex line 4439). Stated here is the i-th module component of that isomorphism; H^0 is defined in Remark 05EL (remark-glueing-data, line 24641)."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-flat-ring-map",
+  "def-weil-pbc-formal-glueing-data",
+  "def-weil-ring-localization-away",
+  "def-weil-pbc-module-localization-away",
+  "def-weil-module-base-change"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "module glued from localizations M_{f_i} with compatible isomorphisms on overlaps; localization of the glued module at f_i is isomorphic to M_i",
+   "results": "IsLocalizedModule.mk (Algebra.Module.LocalizedModule.Basic), AlgebraicGeometry.LocallyRingedSpace.GlueData (Geometry.RingedSpace.PresheafedSpace.Gluing), ModuleCat.Tilde.stalkIso (AlgebraicGeometry.Modules.Tilde): no glueing of modules",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "kernel of product of localizations: compatible family x_i in M_{f_i} glues to element of M when f_i generate unit ideal",
+   "results": "Localization.existsUnique_algebraMap_eq_of_span_eq_top (RingTheory.Localization.Away.Basic, line 569: elements of the ring R glued from Localization.Away a with span = top; not modules, not a glueing datum with an S-component), IsLocalizedModule.pi, IsLocalizedModule.prodMap (RingTheory.TensorProduct.IsBaseChangePi)",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "kernel of map from product of modules to product of localizations, localized at f, is isomorphic to one component (descent for Zariski cover of modules)",
+   "results": "LinearMap.ker_localizedMap_eq_localized0_ker, LinearMap.ker_localizedMap_eq_localized'_ker, LinearMap.toKerIsLocalized (Algebra.Module.LocalizedModule.Submodule): localization commutes with kernels only",
+   "date": "2026-10-10",
+   "verdict": "no match (a tool for the proof, not the statement)"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"BeauvilleLaszlo\"",
+   "results": "none",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "local_search",
+   "query": "BeauvilleLaszlo (project ~/weil-conjectures-slopmaster2)",
+   "results": "none; index: unavailable (not a proof of absence)",
+   "date": "2026-10-10",
+   "verdict": "no verdict"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rliE 'BeauvilleLaszlo|Beauville|glueing' and grep -rlE 'gluing.*[Mm]odule|[Mm]odule.*gluing' and grep -rn 'existsUnique_algebraMap_eq_of_span_eq_top' in ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib",
+   "results": "no Beauville/glueing file; 'gluing' only in Algebra/Colimit/Module.lean (directed colimits of modules); the span-eq-top glueing exists only for ring elements (RingTheory/Localization/Away/Basic.lean line 569)",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "prop-weil-pbc-formal-glueing-equivalence",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "reviewed": "2026-10-10 L: statement checked (the module component of Psi (x) R_{f_i} iso in the 05ER proof, from 05EP/05EQ and 00EQ)"
+}
