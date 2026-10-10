@@ -18,11 +18,56 @@
  },
  "stmt_deps": [
   "def-sc-group-scheme",
-  "lem-sc-tangent-space-vector-space"
+  "lem-sc-tangent-space-vector-space",
+  "lem-sc-product-tangent-space-direct-sum"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Apply the canonical product tangent-space isomorphism (Tag 0BEB, field case) to X=Y=G and the k-rational points x=y=e. It identifies T_{G x_k G/k,(e,e)} with T_{G/k,e} direct-sum T_{G/k,e}; the two summand inclusions are induced by (1,e) and (e,1).",
+   "uses": [
+    "lem-sc-product-tangent-space-direct-sum"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 0BEB, varieties-lemma-tangent-space-product"
+   }
+  },
+  {
+   "text": "Let i_1=(1,e):G \\to G \\times_k G and i_2=(e,1):G \\to G \\times_k G. Since m composed with i_1 and m composed with i_2 are the identity by the group-scheme unit laws, functoriality of tangent maps gives dm composed with di_1 = id and dm composed with di_2 = id. Under the product identification from step 1, di_1(v)=(v,0) and di_2(w)=(0,w).",
+   "uses": [
+    "def-sc-group-scheme",
+    "lem-sc-product-tangent-space-direct-sum",
+    "lem-sc-tangent-map-linear"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/groupoids.tex",
+    "place": "Groupoid Schemes, lemma-group-scheme-addition-tangent-vectors, proof"
+   }
+  },
+  {
+   "text": "The tangent map dm is k-linear by the tangent-map linearity lemma. Therefore dm(v,w)=dm((v,0)+(0,w))=dm(v,0)+dm(0,w)=v+w, using step 2. This is the asserted formula.",
+   "uses": [
+    "lem-sc-tangent-map-linear"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/groupoids.tex",
+    "place": "Groupoid Schemes, lemma-group-scheme-addition-tangent-vectors, proof"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sc-group-scheme",
+  "lem-sc-product-tangent-space-direct-sum",
+  "lem-sc-tangent-map-linear"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/groupoids.tex",
+  "place": "Groupoid Schemes, lemma-group-scheme-addition-tangent-vectors"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -47,12 +92,36 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-sc-mult-n-etale-kernel",
   "by": "worker",
   "date": "2026-10-10"
  },
  "chapter": "sec-abelian-varieties",
- "unit": "sk-prop-av-ntorsion-etale"
+ "unit": "sk-prop-av-ntorsion-etale",
+ "split_report": {
+  "date": "2026-10-11",
+  "item": "lem-sc-group-addition-tangent-differential",
+  "worker": "stage1",
+  "summary": "Read the Stacks proof of lemma-group-scheme-addition-tangent-vectors. Added the missing Tag 0BEB product tangent-space statement as an unsplit dependency, then split the item's proof into the product identification, the unit-law tangent-map identities for the two summand inclusions, and the linearity calculation yielding dm(v,w)=v+w. No exact sorry-free Lean declaration exists.",
+  "blueprint": "The three steps realize proof step (c) of lem-sc-mult-n-etale-kernel: identify the tangent space of G x G, use the unit laws, and apply linearity of the differential.",
+  "tool_uses": [
+   {
+    "node": "lem-sc-tangent-map-linear",
+    "why": "The Stacks proof invokes the general linearity and functoriality of tangent maps; this generic result is supplied by another unit and is not replaced by a node in the group-scheme torsion route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sc-tangent-map-linear"
+ ],
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-gat1957",
+  "group": "K1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-gat1957 (reviewer sub-agent of L); spot-checked: Re-push after 19:24 return: (1 E) product node now over a field k at k-rational points citing def-sc-scheme-tangent-space, fibre clause dropped - repaired; (2 C4) isomorphism stated k-linear, so Step 3 additivity is covered - repaired; (3) Second reading no longer claims a created.item correction; created.item = this item is right since the node is new in the diff. Steps 1-3 not reopened. No duplicate of Tag 0BEB in dag. FIX more, RETURN less: B3 TeX typo kappa(y) -> \\kappa(y) in the product node; Step 1 text still named the removed base S=Spec k, reworded to the field case at k-rational points x=y=e.; 2 file(s) fixed by the reviewer"
+ }
 }
