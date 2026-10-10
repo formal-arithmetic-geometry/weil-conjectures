@@ -2021,3 +2021,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 16:42 L: merged deliver/H1/lemma-constructible-flc-serre (reviewer PASS; after a return; new nodes: 2)
 - 16:42 L: merged deliver/H1/lem-sc-point-tangent-finite-local-cotangent-surjective (reviewer PASS; after a return; new nodes: 0)
 - 16:42 L: merged deliver/E1/lem-sc-closed-pushforward-boundary-naturality (reviewer FIX; after a return; new nodes: 0)
+- 16:43 L: returned deliver/H1/lem-sc-smooth-proper-relative-dualizing-general (reviewer RETURN: Return points of 16:13: 1 (false nonproper node deleted) and 2 (split along the proof of Stacks 0BRT) are repaired; poin)
