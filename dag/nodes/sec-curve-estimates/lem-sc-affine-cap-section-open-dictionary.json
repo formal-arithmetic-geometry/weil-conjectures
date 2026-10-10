@@ -22,12 +22,64 @@
   "def-weil-affine-spectrum",
   "def-sc-invertible-module",
   "pqf-def-coherent",
-  "lem-weil-pbc-finite-projective-rank-locally-constant",
-  "lem-weil-pbc-affine-tilde-gamma-adjunction"
+  "lem-weil-pbc-affine-tilde-gamma-adjunction",
+  "lem-weil-pbc-finite-projective-rank-locally-constant"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Because M is quasi-coherent on the affine scheme X, the counit of the affine tilde/Gamma adjunction identifies M with the sheaf tilde(Gamma(X,M))=tilde(N).",
+   "uses": [
+    "lem-weil-pbc-affine-tilde-gamma-adjunction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Schemes, Lemmas 01IA and 01IB (quasi-coherent sheaves on affine schemes)"
+   }
+  },
+  {
+   "text": "Since M is locally free of rank one [def-sc-invertible-module], choose for each point of Spec(R) a standard open D(f) on which M is isomorphic to O_X. Quasi-compactness of Spec(R) and the principal-open/unit-ideal criterion [lem-weil-pbc-spec-basic-opens-unit-ideal-quasi-compact] give finitely many f_1,...,f_r generating the unit ideal and covering X. By step 1 and [lem-weil-pbc-spec-module-tilde-sections], N_{f_i}=tilde(N)(D(f_i)) is isomorphic to M(D(f_i)) and hence to R_{f_i}. The finite-standard-open converse of Stacks Tag 00NX [lem-sc-affine-standard-cover-finite-projective] therefore makes N finite projective. For every prime p, choose i with f_i not in p; then N_p is isomorphic to (N_{f_i})_p and hence to R_p, so its rank is one.",
+   "uses": [
+    "def-sc-invertible-module",
+    "lem-weil-pbc-spec-basic-opens-unit-ideal-quasi-compact",
+    "lem-weil-pbc-spec-module-tilde-sections",
+    "lem-sc-affine-standard-cover-finite-projective"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Schemes, Lemmas Tags 01IA and 01IB; literature/stacks-project/algebra.tex, Lemma Tag 00NX (lemma-finite-projective), implication (7) => (3)"
+   }
+  },
+  {
+   "text": "The stalk identification in [lem-weil-pbc-spec-tilde-stalk-localization] identifies M_p with N_p and carries s_p to s/1. Applying [lem-sc-affine-finite-projective-prime-membership] gives s/1 in pN_p if and only if s is in pN. Since the stalk of the structure sheaf at p is the local ring R_p with maximal ideal pR_p, the definition of the nonvanishing locus in [lem-weil-pbc-nonvanishing-section-trivializes] yields exactly the primes p for which s is not in pN.",
+   "uses": [
+    "lem-weil-pbc-spec-tilde-stalk-localization",
+    "lem-sc-affine-finite-projective-prime-membership",
+    "lem-weil-pbc-nonvanishing-section-trivializes"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/modules.tex",
+    "place": "Modules, Lemma Tag 01CY (lemma-s-open), together with Schemes, Lemma Tag 01HV item (7)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-affine-tilde-gamma-adjunction",
+  "def-sc-invertible-module",
+  "lem-weil-pbc-spec-basic-opens-unit-ideal-quasi-compact",
+  "lem-weil-pbc-spec-module-tilde-sections",
+  "lem-sc-affine-standard-cover-finite-projective",
+  "lem-weil-pbc-spec-tilde-stalk-localization",
+  "lem-sc-affine-finite-projective-prime-membership",
+  "lem-weil-pbc-nonvanishing-section-trivializes"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/schemes.tex",
+  "place": "Schemes, Lemmas 01IA and 01IB, together with Modules, Lemma 01CY"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -52,12 +104,37 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-sc-affine-cap-section-open",
   "by": "worker",
   "date": "2026-10-10"
  },
  "chapter": "sec-curve-estimates",
- "unit": "sk-thm-curveestimate"
+ "unit": "sk-thm-curveestimate",
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "lem-sc-affine-cap-section-open-dictionary",
+  "worker": "stage1",
+  "summary": "Repaired the returned split by deleting two child nodes that merely relabelled clauses of this item. The proof now writes the finite standard-open argument for finite projectivity and rank one, and the stalk prime-membership argument is isolated only in the strictly smaller pure-module node lem-sc-affine-finite-projective-prime-membership; the original citation and statement dependency were restored.",
+  "blueprint": "Steps 1--3 realize the affine-section translation used in the blueprint ancestor lem-sc-pic-proper-ntorsion proof's first-sentence route through the affine intersection (Z_1)_{t_1t_2}.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-nonvanishing-section-trivializes",
+    "why": "Step 3 takes the definition of the section nonvanishing locus and its stalk maximal-ideal criterion; this generic tool is not supplied by the curve-estimate unit's affine-cover route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-nonvanishing-section-trivializes",
+  "lem-weil-pbc-nonvanishing-section-trivializes"
+ ],
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-acd2",
+  "group": "J1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-acd2 (reviewer sub-agent of L); spot-checked: Re-push after the 15:58 return (head da5102d15): point 1 (D1) repaired, both relabelling nodes deleted, the argument now in steps 2 and 3; no existing node states 00NX (7)=>(2) (lem-weil-pbc-finite-projective-standard-free-cover is the converse direction), so the new statement-only node lem-sc-affine-standard-cover-finite-projective is justified, checked against algebra.tex lemma-finite-projective (7) finite locally free => (2)/(3), true; the new lem-sc-affine-finite-projective-prime-membership is a pure-module fact strictly smaller than the item, true (N a summand of F=R^n with projection pi: s in pF implies s=pi(s) in pN; for F free coordinates in pR_p cap R = p), tested N=R, s=0, N=R^2. Point 2 (E7) repaired: stmt_deps restored. Point 3 repaired (report names schemes.tex 01IA/01IB, modules.tex 01CY). Point 4 moot: per tools/README.md a delivered node carries created.item only, by/date are filled at merge. Steps: 1 counit iso from lem-weil-pbc-affine-tilde-gamma-adjunction (3) for M quasi-coherent (def-sc-invertible-module); 2 local rank-one trivialisations on standard opens, finite unit-ideal cover by lem-weil-pbc-spec-basic-opens-unit-ideal-quasi-compact, N_{f_i}=tilde N(D(f_i)) by lem-weil-pbc-spec-module-tilde-sections, finite projective by the 00NX node, rank one by localising; 3 M_p=N_p with s_p=s/1 by lem-weil-pbc-spec-tilde-stalk-localization, membership node, m_p=pR_p and X_s by lem-weil-pbc-nonvanishing-section-trivializes (off-unit, accepted as tool use: definition of the nonvanishing locus). FIX: dag/nodes/sec-curve-estimates/lem-sc-affine-cap-section-open-dictionary.json: statement: reverted to the committed text (the re-push had added an unreported citation bracket [lem-weil-pbc-affine-tilde-gamma-adjunction], already in stmt_deps; E7); dag/nodes/sec-curve-estimates/lem-sc-affine-standard-cover-finite-projective.json: stmt_deps: added def-weil-pbc-projective-module, cited in the statement. Start Sat Oct 10 04:23:17 PM UTC 2026, end Sat Oct 10 04:24:12 PM UTC 2026.; 2 file(s) fixed by the reviewer"
+ }
 }

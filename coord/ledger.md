@@ -1965,3 +1965,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 16:23 L: merged deliver/M1/lem-sc-torsor-h1-boundary-representative (reviewer FIX+NODE(1); first push; new nodes: 2)
 - 16:23 L: merged deliver/M1/lem-pc-divisor-line-bundle-agrees-sc (reviewer PASS; first push; new nodes: 0)
 - 16:23 L: lem-sc-torsor-h1: the bijection named in the statement (03AH construction, delta_T(1)); reviewers R-th2/R-tbr
+- 16:24 L: merged deliver/J1/lem-sc-affine-cap-section-open-dictionary (reviewer FIX; after a return; new nodes: 2)
