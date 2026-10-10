@@ -1,8 +1,8 @@
 # Work queue
 
-880 items; claim with `tools/claim.py next <group> [--stage N]`.
+884 items; claim with `tools/claim.py next <group> [--stage N]`.
 
-## Stage 1: nodes to split (329)
+## Stage 1: nodes to split (332)
 
 | node | distance to a target | Lean state on the done branch |
 |---|---|---|
@@ -16,17 +16,21 @@
 | `lem-weil-pbc-filtered-category-directed-cofinal` | 2009 | none |
 | `lem-weil-pbc-sets-etale-inverse-image-restriction` | 2009 | none |
 | `lem-weil-pbc-sets-etale-section-continuity` | 2009 | none |
-| `lem-sc-pic-lift-closed-immersion-dim-le-one` | 2010 | none |
+| `def-sc-topological-abelian-cohomology` | 2011 | none |
 | `lem-sc-affine-cap-section-open` | 2011 | none |
 | `lem-sc-ample-finite-principal-affine` | 2011 | none |
-| `lem-sc-ample-square-zero-thickening` | 2011 | none |
+| `lem-sc-cohomology-closed-immersion-pushforward` | 2011 | none |
 | `lem-sc-integral-dim-one-ample` | 2011 | none |
+| `lem-sc-noetherian-cohomology-vanishing-abelian-dim-one` | 2011 | none |
+| `lem-sc-picard-h1-restriction-compatibility` | 2011 | none |
+| `lem-sc-boundary-derivation-square-zero` | 2012 | none |
 | `lem-sc-conductor-ideal-restriction` | 2012 | none |
 | `lem-sc-conductor-ideal-zero-intersection` | 2012 | none |
 | `lem-sc-finite-discrete-separated-affine` | 2012 | none |
 | `lem-sc-glue-component-reduced-cover-sections` | 2012 | none |
 | `lem-sc-glue-component-transition-cocycle` | 2012 | none |
 | `lem-sc-noetherian-closed-points-finite` | 2012 | none |
+| `lem-sc-section-affine-open-kills-cohomology` | 2012 | none |
 | `lem-sc-zero-dim-noetherian-finite-discrete` | 2012 | none |
 | `lem-weil-pbc-derived-etale-cohomology-limit` | 3004 | none |
 | `lem-weil-pbc-finite-geometric-point-coproduct-cohomology` | 3005 | none |
@@ -57,7 +61,6 @@
 | `lem-pc-proper-descends-field` | 3012 | none |
 | `lem-sc-coherent-free-stalks-locally-free` | 3012 | none |
 | `lem-sc-dvr-fg-torsionfree-free` | 3012 | none |
-| `lem-sc-dvr-saturation-line` | 3012 | none |
 | `lem-sc-exterior-top-direct-sum` | 3012 | none |
 | `lem-sc-finite-duality-trace` | 3012 | none |
 | `lem-sc-p1-duality-pairing-naturality` | 3012 | none |
@@ -336,7 +339,7 @@
 | `def-exc-jacobian-presentation` | - | none |
 | `lem-zl-noether-normalization-dimension` | - | none |
 
-## Stage 2: nodes to state (551)
+## Stage 2: nodes to state (552)
 
 | node | distance to Mathlib | kind |
 |---|---|---|
@@ -413,6 +416,7 @@
 | `lem-sc-dim0-finite` | 1 | state |
 | `lem-sc-divisible-quotient-torsion` | 1 | state |
 | `lem-sc-divisor-finite-support` | 1 | state |
+| `lem-sc-dvr-saturation-line` | 1 | state |
 | `lem-sc-etale-affine-over-curve` | 1 | state |
 | `lem-sc-ext-torsor` | 1 | state |
 | `lem-sc-four-lemma` | 1 | state |
@@ -892,7 +896,7 @@
 | `lem-weil-pbc-p1-field-dimension-one` | 4 | state |
 | `lem-weil-pbc-projective-space-zero-isomorphism` | 4 | state |
 
-Not open yet: 350 nodes that wait for stage 1, 1058 nodes that wait for a statement dependency.
+Not open yet: 353 nodes that wait for stage 1, 1060 nodes that wait for a statement dependency.
 
 ## Stage 3: modules to prove (0)
 
