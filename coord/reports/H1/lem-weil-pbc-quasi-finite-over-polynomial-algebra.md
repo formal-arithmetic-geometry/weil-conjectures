@@ -1,0 +1,15 @@
+# Stage 1 delivery: `lem-weil-pbc-quasi-finite-over-polynomial-algebra`
+
+## Worker report
+
+Split the item in four steps following Stacks Algebra 00QE (`algebra.tex`, lines 31183-31215): shrink the fibre to dimension (n); apply Noether normalization and its dimension clause; lift polynomial coordinates to a localization of (S) by rescaling residue-field denominators; show the resulting fibre at the chosen prime is finite and discrete; then use openness of the quasi-finite locus to shrink once more. The statement is unchanged.
+
+Created `lem-weil-pbc-ring-quasi-finite-locus-open`, an unsplit 00QA statement. The Mathlib candidate `AlgebraicGeometry.Scheme.Hom.isOpen_quasiFiniteAt` (ZariskisMainTheorem.lean:292) is for scheme morphisms; connecting it to the item's ring-theoretic isolated-fibre definition requires a separate comparison. LeanSearch returned no response, Loogle found the scheme theorem, and the available Mathlib source search found no direct ring version. Whole-blueprint searches for `00QE`, `quasi finite over polynomial algebra`, `quasi finite locus`, and `Noether normalization` found no duplicate of the item or child.
+
+The existing `lem-zl-noether-normalization-dimension` supplies the needed equality (d=\dim T). It is a generic tool from unit `sk-i-real-normalization`; the lead must record it in `tool_uses` under delivery-errors C8. `tools/review_split.py` reports only this route issue, twice. `tools/blueprint_refs.py check` reports zero errors. `tools/check_dag.py` finds zero cycles and seven unrelated unreachable nodes.
+
+No Lean attachment. No WANTED source: I read the Stacks TeX from the read-only literature checkout at `/home/ubuntu/weil-conjectures-sheaf-F2/literature/stacks-project/algebra.tex`.
+
+## Review by H1
+
+I read Algebra 00QE, its 00QA openness lemma, and the item and child statements against `algebra.tex`. Step 1 uses the fibre-prime bijection and localization statement to shrink the fibre to dimension $n$; step 2 applies the existing normalization and dimension statements to the nonzero finite-type fibre and clears residue-field denominators without changing the generated polynomial subalgebra; step 3 checks finite type and a finite-dimensional fibre over the contracted prime, then the isolated point required by `def-weil-pbc-ring-map-quasi-finite-at-prime`; step 4 invokes exactly the openness asserted by the new 00QA node and combines the two localizations. The finite-fibre argument also covers dimension zero, and a nonzero fibre is guaranteed by the chosen prime. I checked the cited node statements and searched the DAG and blueprint for 00QA and the item. The new 00QA node is self-contained, unsplit, has its own source and Mathlib searches, and records the scheme-level Mathlib candidate without claiming an exact ring-level match. `lem-zl-noether-normalization-dimension` is a generic normalization tool from another unit, so I recorded it in `tool_uses`; it does not replace the unit's route. I sent nothing back to the worker.

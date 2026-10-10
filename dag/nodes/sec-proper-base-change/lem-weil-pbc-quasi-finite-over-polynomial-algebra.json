@@ -18,7 +18,7 @@
     "lem-weil-pbc-finite-etale-lifting-essential-surjectivity"
    ]
   },
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "A finite type algebra is locally quasi-finite over a polynomial algebra in its fibre dimension",
@@ -36,9 +36,87 @@
   "def-weil-ring-localization-away",
   "def-weil-pbc-ring-map-quasi-finite-at-prime"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Set $k=\\kappa(\\mathfrak p)$ and $F=S\\otimes_Rk$. This is a finite type $k$-algebra: if $x_1,\\ldots,x_N$ generate $S$ over $R$, their images generate $F$ over $k$ [lem-weil-pbc-quasi-finite-four-rings]. The prime $\\mathfrak Q$ exists by [lem-weil-pbc-fibre-ring-primes-bijection], so $F\\ne0$. By the definition of dimension at a point [def-kun-topological-dimension-at-point], choose an open neighbourhood $U$ of $\\mathfrak Q$ in $\\operatorname{Spec}F$ of dimension exactly $n$: dimensions of open neighbourhoods are integers at least $n$, and one attains their infimum $n$. Basic opens form a basis, so take $D(a)$ with $\\mathfrak Q\\in D(a)\\subseteq U$. By [lem-weil-pbc-fibre-ring-localization-quotient], each $a\\in F$ can be written as the image of $s\\in S$ divided by an element of $R\\setminus\\mathfrak p$, which is a unit of $F$; hence $D(a)=D(\\bar s)$. Choose $g_0=s\\notin\\mathfrak q$. The localization $F_{\\bar g_0}=S_{g_0}\\otimes_Rk$ has spectrum $D(\\bar g_0)$, of dimension at most $n$ because it is contained in $U$, and at least $n$ because it is an open neighbourhood of $\\mathfrak Q$. Thus its dimension is exactly $n$.",
+   "uses": [
+    "lem-weil-pbc-quasi-finite-four-rings",
+    "lem-weil-pbc-fibre-ring-primes-bijection",
+    "def-kun-topological-dimension-at-point",
+    "lem-weil-pbc-fibre-ring-localization-quotient",
+    "def-weil-affine-spectrum",
+    "def-weil-ring-localization-away"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Proof of Lemma 00QE, first paragraph, lines 31183-31198; Remark 00E6, label remark-fundamental-diagram"
+   }
+  },
+  {
+   "text": "Put $T=S_{g_0}\\otimes_Rk$; it is nonzero, finite type over $k$ and has Krull dimension $n$ (step 1). Apply [lem-weil-pbc-noether-normalization-field] to get an injective finite $k$-algebra map $k[Y_1,\\ldots,Y_d]\\to T$; [lem-zl-noether-normalization-dimension] gives $d=\\dim T=n$. Let $y_i$ be the image of $Y_i$. Write each $y_i$ as $s_i/g_0^{e_i}\\otimes 1/u_i$ with $s_i\\in S$ and $u_i\\in R\\setminus\\mathfrak p$, using the localization description of $T$ [lem-weil-pbc-fibre-ring-localization-quotient]. Replace $y_i$ by $y_i'=(u_i/1)y_i=s_i/g_0^{e_i}\\otimes1$. Scaling variables by the nonzero scalars $u_i/1\\in k$ is an automorphism of $k[Y_1,\\ldots,Y_n]$ [def-weil-pbc-mv-polynomial-ring], so the subalgebra $k[y_1',\\ldots,y_n']$ equals $k[y_1,\\ldots,y_n]$ and $T$ remains finite over it. The elements $s_i/g_0^{e_i}\\in S_{g_0}$ therefore define an $R$-algebra map $A=R[t_1,\\ldots,t_n]\\to S_{g_0}$ whose base change along $R\\to k$ is finite. The source's stronger choice from the integer polynomial subalgebra is unnecessary for these lifts.",
+   "uses": [
+    "lem-weil-pbc-noether-normalization-field",
+    "lem-zl-noether-normalization-dimension",
+    "lem-weil-pbc-fibre-ring-localization-quotient",
+    "def-weil-pbc-mv-polynomial-ring"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Proof of Lemma 00QE, second paragraph, lines 31200-31210, invoking Noether normalization Lemma 00OY; the scalar-rescaling argument makes its lifting clause explicit"
+   }
+  },
+  {
+   "text": "Let $\\mathfrak q_0=\\mathfrak qS_{g_0}$ and $P=A^{-1}(\\mathfrak q_0)$. The fibre ring of $A\\to S_{g_0}$ at $P$ is $C=S_{g_0}\\otimes_A\\kappa(P)\\cong T\\otimes_{k[t_1,\\ldots,t_n]}\\kappa(P)$: the contraction $P\\cap R=\\mathfrak p$ makes $\\kappa(P)$ a $k[t]$-algebra, and the two tensor products impose the same $R$- and $t_i$-relations. Since $T$ is a finite $k[t]$-module (step 2), $C$ is finite-dimensional over $\\kappa(P)$. By [lem-weil-pbc-finite-dim-algebra-artinian], $C$ is Artinian. Every prime of $C$ is maximal: its quotient is a finite-dimensional domain over a field, so multiplication by each nonzero element is injective and hence surjective, making the quotient a field. Thus $\\dim\\operatorname{Spec}C=0$; [lem-weil-pbc-finite-type-dim-zero-artinian] makes its spectrum discrete. In particular the prime of $C$ corresponding to $\\mathfrak q_0$ is isolated, so $A\\to S_{g_0}$ is quasi-finite at $\\mathfrak q_0$ [def-weil-pbc-ring-map-quasi-finite-at-prime]. It is finite type: the original generators of $S$ over $R$, together with $g_0^{-1}$, generate $S_{g_0}$ over $A$ [def-weil-pbc-finite-type-algebra].",
+   "uses": [
+    "lem-weil-pbc-finite-dim-algebra-artinian",
+    "lem-weil-pbc-finite-type-dim-zero-artinian",
+    "def-weil-pbc-ring-map-quasi-finite-at-prime",
+    "def-weil-pbc-finite-type-algebra"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Proof of Lemma 00QE, second paragraph, lines 31208-31212 ('In particular, S is quasi-finite ... at q'); the finite-fibre and isolated-point argument is written out"
+   }
+  },
+  {
+   "text": "By [lem-weil-pbc-ring-quasi-finite-locus-open] applied to $A\\to S_{g_0}$ and $\\mathfrak q_0$, choose $h\\in S_{g_0}\\setminus\\mathfrak q_0$ such that $A\\to(S_{g_0})_h$ is quasi-finite at every prime. Write $h=b/g_0^m$ with $b\\in S\\setminus\\mathfrak q$ and put $g=g_0b\\notin\\mathfrak q$. There is a canonical $A$-algebra isomorphism $(S_{g_0})_h\\cong S_g$: both localizations invert $g_0$ and $b$, and $g_0b$ is invertible exactly when both factors are. Under this isomorphism the map $A\\to S_g$ is finite type (the old generators and $g^{-1}$ generate it) and quasi-finite at every prime, as required.",
+   "uses": [
+    "lem-weil-pbc-ring-quasi-finite-locus-open",
+    "def-weil-ring-localization-away",
+    "def-weil-pbc-finite-type-algebra",
+    "def-weil-pbc-ring-map-quasi-finite-at-prime"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Proof of Lemma 00QE, final sentence, lines 31211-31215, invoking Lemma 00QA"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-quasi-finite-four-rings",
+  "lem-weil-pbc-fibre-ring-primes-bijection",
+  "def-kun-topological-dimension-at-point",
+  "lem-weil-pbc-fibre-ring-localization-quotient",
+  "def-weil-affine-spectrum",
+  "def-weil-ring-localization-away",
+  "lem-weil-pbc-noether-normalization-field",
+  "lem-zl-noether-normalization-dimension",
+  "def-weil-pbc-mv-polynomial-ring",
+  "lem-weil-pbc-finite-dim-algebra-artinian",
+  "lem-weil-pbc-finite-type-dim-zero-artinian",
+  "def-weil-pbc-ring-map-quasi-finite-at-prime",
+  "def-weil-pbc-finite-type-algebra",
+  "lem-weil-pbc-ring-quasi-finite-locus-open"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Algebra, Lemma Tag 00QE, label lemma-quasi-finite-over-polynomial-algebra, proof lines 31183-31215"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -63,7 +141,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "worker",
@@ -83,5 +161,22 @@
   }
  },
  "chapter": "sec-proper-base-change",
- "unit": "sk-thm-p1"
+ "unit": "sk-thm-p1",
+ "tool_uses": [
+  "lem-zl-noether-normalization-dimension"
+ ],
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "lem-weil-pbc-quasi-finite-over-polynomial-algebra",
+  "worker": "stage1",
+  "summary": "Split Stacks 00QE in four steps: shrink the chosen fibre to dimension n, normalize it over a polynomial ring in n variables using existing Noether-normalization and dimension nodes, lift the variables to the localized algebra by scaling away residue-field denominators, show the resulting map is quasi-finite at the chosen prime by its finite discrete fibre, and use the newly stated 00QA quasi-finite-locus openness to obtain one principal neighbourhood. The dimension node lem-zl-noether-normalization-dimension is a generic tool from another unit and needs lead tool_uses review.",
+  "blueprint": "The essential-surjectivity paragraph of thm-weil-pbc-finite-etale-lifting, through the approximation/Popescu-smoothing/fibre-dimension route represented by this item's blueprint.from.via chain."
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "group": "H1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed by the lead of H1; spot-checked by L: L: 00QE: fibre dimension n, Noether normalization, Artinian fibre, 00QA openness node"
+ }
 }

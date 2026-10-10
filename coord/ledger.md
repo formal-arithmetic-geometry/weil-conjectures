@@ -1266,3 +1266,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 11:05 L: accepted lem-weil-pbc-power-series-adic-evaluation (3 steps on the universal-property node, continuity only; 0 new).
 - 11:06 L: accepted lem-weil-pbc-field-cohen-power-series-formally-smooth (5 steps on the 07NL node, Z to Q via 04EG; 0 new).
 - 2026-10-10, delivery of H1: lem-weil-pbc-graded-finiteness-cohomology merged from deliver/H1/lem-weil-pbc-graded-finiteness-cohomology (1 commit(s), 1 new node(s), spot-checked by L: L: 0897 (1) via base change to Spec B, relative Spec, 02O6 and the direct-sum node 01FF); claim closed
+- 2026-10-10, delivery of H1: lem-weil-pbc-quasi-finite-over-polynomial-algebra merged from deliver/H1/lem-weil-pbc-quasi-finite-over-polynomial-algebra (1 commit(s), 1 new node(s), spot-checked by L: L: 00QE: fibre dimension n, Noether normalization, Artinian fibre, 00QA openness node); claim closed
