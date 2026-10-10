@@ -1,0 +1,72 @@
+{
+ "id": "lem-galois-equivalence-preserves-limits",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-galois-fundamental",
+   "place": "proof, second sentence: 'the compatibility with finite limits and colimits is the exactness of F_ybar' (the equivalence preserves finite limits and colimits)",
+   "via": []
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "An equivalence of categories preserves limits and colimits",
+ "statement": "Let $E:\\mathcal C\\to\\mathcal D$ be a functor which is an equivalence of categories (there are a functor $E':\\mathcal D\\to\\mathcal C$ and natural isomorphisms $E'E\\cong\\mathrm{id}_{\\mathcal C}$, $EE'\\cong\\mathrm{id}_{\\mathcal D}$). Then $E$ preserves all limits and all colimits: for every diagram $K:\\mathcal I\\to\\mathcal C$ and every limit cone (resp. colimit cocone) of $K$, its image under $E$ is a limit cone (resp. colimit cocone) of $E\\circ K$.",
+ "source": {
+  "document": "literature/stacks-project/categories.tex",
+  "place": "Lemma 0038 (categories-lemma-adjoint-exact), applied to E, which is both a left and a right adjoint (of its quasi-inverse)"
+ },
+ "stmt_deps": [],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "equivalence of categories preserves limits and colimits",
+   "results": "Adjunction.hasColimitsOfShape_of_equivalence, Adjunction.hasLimitsOfShape_of_equivalence (Mathlib.CategoryTheory.Adjunction.Limits); Limits.hasLimit_equivalence_comp, hasColimit_equivalence_comp (Mathlib.CategoryTheory.Limits.HasLimits)",
+   "date": "2026-10-10",
+   "verdict": "related; the preservation statements are found by loogle and grep"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.IsEquivalence, CategoryTheory.Limits.PreservesLimitsOfSize",
+   "results": "CategoryTheory.Adjunction.isEquivalencePreservesLimits (Mathlib.CategoryTheory.Adjunction.Limits)",
+   "date": "2026-10-10",
+   "verdict": "match (limits)"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rn 'IsEquivalence' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/CategoryTheory/Adjunction/Limits.lean | grep -i preserves; sed -n 100,115p and 215,228p of that file",
+   "results": "Adjunction.Limits.lean:106-109 instance isEquivalence_preservesColimits (E : C ⥤ D) [E.IsEquivalence] : PreservesColimitsOfSize E; :220-223 instance isEquivalencePreservesLimits (E : D ⥤ C) [E.IsEquivalence] : PreservesLimitsOfSize E",
+   "date": "2026-10-10",
+   "verdict": "match: exact, one declaration per clause"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "CategoryTheory.Adjunction.isEquivalencePreservesLimits; CategoryTheory.Adjunction.isEquivalence_preservesColimits",
+  "file": "Mathlib/CategoryTheory/Adjunction/Limits.lean",
+  "how": "exact, one declaration per clause: limits by isEquivalencePreservesLimits (E : D ⥤ C) [E.IsEquivalence] : PreservesLimitsOfSize E, lines 220-223; colimits by isEquivalence_preservesColimits (E : C ⥤ D) [E.IsEquivalence] : PreservesColimitsOfSize E, lines 106-109"
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "thm-galois-fundamental",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-curve-estimates",
+ "unit": "sk-prop-h2"
+}

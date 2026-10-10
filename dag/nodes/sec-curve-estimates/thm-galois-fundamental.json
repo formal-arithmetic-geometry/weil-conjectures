@@ -3,49 +3,130 @@
  "blueprint": {
   "is": "thm-galois-fundamental",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "The fibre functor is an equivalence",
- "statement": "Let $Y$ be connected with a geometric point $\\bar y\\to Y$. Then the\nfibre functor induces an equivalence\n\n$$\nF_{\\bar y}:\\mathrm{F\\acute Et}(Y)\\xrightarrow{\\ \\sim\\ }\n\\pi_1(Y,\\bar y)\\text{-}\\mathbf{Set},\n$$\n\nand likewise on $\\mathrm{FLC}(Y)$ under the identification of\n[thm-galois-lc-etale], where\n$\\pi_1(Y,\\bar y)=\\operatorname{Aut}(F_{\\bar y})$ carries the profinite\ntopology of [def-galois-fibre-functor]. The equivalence is compatible\nwith finite limits and colimits, and with base change along $Y'\\to Y$ for\n$Y'$ connected, where it corresponds to the passage to the open subgroup\nof the fundamental group.",
+ "statement": "Let $Y$ be connected with a geometric point $\\bar y\\to Y$. Then the\nfibre functor induces an equivalence\n\n$$\nF_{\\bar y}:\\mathrm{F\\acute Et}(Y)\\xrightarrow{\\ \\sim\\ }\n\\pi_1(Y,\\bar y)\\text{-}\\mathbf{Set},\n$$\n\nand likewise on $\\mathrm{FLC}(Y)$ under the identification of\n[thm-galois-lc-etale], where\n$\\pi_1(Y,\\bar y)=\\operatorname{Aut}(F_{\\bar y})$ carries the profinite\ntopology of [def-galois-fibre-functor]; here $\\mathrm{F\\acute Et}(Y)$, $\\mathrm{FLC}(Y)$ and the fibres are those of [def-galois-categories]. The equivalence is compatible\nwith finite limits and colimits. It is compatible with base change: for a morphism $f:Y'\\to Y$ with $Y'$ connected and a geometric point $\\bar y'$ of $Y'$ with $\\bar y=f\\circ\\bar y'$, there is a continuous homomorphism $f_*:\\pi_1(Y',\\bar y')\\to\\pi_1(Y,\\bar y)$ such that $|(P\\times_YY')_{\\bar y'}|\\cong|P_{\\bar y}|$, naturally in $P\\in\\mathrm{F\\acute Et}(Y)$, as $\\pi_1(Y',\\bar y')$-sets, $\\pi_1(Y',\\bar y')$ acting on the right through $f_*$. If moreover $f$ is finite etale, then $f_*$ is injective and its image is the stabilizer of the point $\\bar y'$ of $|Y'_{\\bar y}|$, an open subgroup of $\\pi_1(Y,\\bar y)$ of finite index: base change to $Y'$ corresponds to the passage to this open subgroup.",
  "source": {
   "document": "literature/blueprint/master/blueprint/sec-curve-estimates/sk-prop-h2/thm-galois-fundamental.md",
   "place": "node thm-galois-fundamental, order 976"
  },
  "stmt_deps": [
   "thm-galois-lc-etale",
-  "def-galois-fibre-functor"
+  "def-galois-fibre-functor",
+  "def-galois-categories"
  ],
  "proof": [
   {
-   "text": "By [lem-fet-galois-category] the pair\n$(\\mathrm{F\\acute Et}(Y),F_{\\bar y})$ is a Galois category, so\n[thm-galois-abstract-equivalence] applies with\n$G=\\operatorname{Aut}(F_{\\bar y})=\\pi_1(Y,\\bar y)$ as in\n[def-galois-fibre-functor], which is profinite by\n[lem-galois-aut-profinite]; this is the equivalence. The\nidentification with $\\mathrm{FLC}(Y)$ is [thm-galois-lc-etale], and\nthe compatibility with finite limits and colimits is the exactness of\n$F_{\\bar y}$. For base change: by [lem-galois-transitive] the\nGalois covers pro-represent the fibre functor, so the pullback of the system of Galois\ncovers of $Y$ along $Y'\\to Y$ is a cofinal system for $Y'$, and the\nlimit of the corresponding automorphism groups is the stabilizer of the\nfibre of a cover trivializing a connected cover of $Y'$, an open subgroup\nbecause stabilizers in a finite continuous $\\pi_1$-set are open.",
+   "text": "*The equivalence on $\\mathrm{F\\acute Et}(Y)$.* By [lem-fet-galois-category] the pair $(\\mathrm{F\\acute Et}(Y),F_{\\bar y})$, $F_{\\bar y}(P)=|P_{\\bar y}|$, is a Galois category. By [thm-galois-abstract-equivalence], with $G=\\operatorname{Aut}(F_{\\bar y}|_{\\mathrm{F\\acute Et}(Y)})$, the functor $P\\mapsto|P_{\\bar y}|$ with its $G$-action is an equivalence of $\\mathrm{F\\acute Et}(Y)$ with the finite sets with continuous $G$-action, $G$ being profinite by [lem-galois-aut-profinite]. The group $\\pi_1(Y,\\bar y)$ of [def-galois-fibre-functor] is the automorphism group of the fibre functor on $\\mathrm{FLC}(Y)$; the equivalence $\\Phi:\\mathrm{F\\acute Et}(Y)\\to\\mathrm{FLC}(Y)$ of [thm-galois-lc-etale] comes with an isomorphism $F_{\\bar y}\\circ\\Phi\\cong F_{\\bar y}$, and conjugation by $\\Phi$ and this isomorphism is an isomorphism $\\pi_1(Y,\\bar y)\\cong G$ of groups compatible with the evaluation embeddings into $\\prod\\operatorname{Aut}(F_{\\bar y}(-))$ (the factors indexed by $P$ and by $\\Phi(P)$ are identified, and every object of $\\mathrm{FLC}(Y)$ is isomorphic to some $\\Phi(P)$), hence a homeomorphism. So $F_{\\bar y}:\\mathrm{F\\acute Et}(Y)\\to\\pi_1(Y,\\bar y)\\text{-}\\mathbf{Set}$ is an equivalence.",
    "uses": [
     "lem-fet-galois-category",
     "thm-galois-abstract-equivalence",
-    "def-galois-fibre-functor",
     "lem-galois-aut-profinite",
-    "thm-galois-lc-etale",
-    "lem-galois-transitive"
+    "def-galois-fibre-functor",
+    "thm-galois-lc-etale"
    ],
-   "elementary": false
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/pione.tex",
+    "place": "Theorem 0BND (pione-theorem-fundamental-group) (1), proof: 'Part (1) follows from Lemma 0BNB and Proposition 0BN4'"
+   }
+  },
+  {
+   "text": "*The equivalence on $\\mathrm{FLC}(Y)$.* By [thm-galois-lc-etale] the functor $\\Phi:P\\mapsto\\underline{\\operatorname{Hom}}_Y(-,P)$ is an equivalence $\\mathrm{F\\acute Et}(Y)\\to\\mathrm{FLC}(Y)$ compatible with the fibre functors, $\\Phi(P)_{\\bar y}\\cong|P_{\\bar y}|$ naturally in $P$; by [def-galois-fibre-functor] $\\pi_1(Y,\\bar y)$ acts on $\\mathcal F_{\\bar y}$ by evaluation, and the isomorphism $\\Phi(P)_{\\bar y}\\cong|P_{\\bar y}|$ is $\\pi_1$-equivariant by the definition of the identification in step 1. Hence $\\mathcal F\\mapsto\\mathcal F_{\\bar y}$ on $\\mathrm{FLC}(Y)$ is isomorphic to the composite of a quasi-inverse of $\\Phi$ with the equivalence of step 1, and is an equivalence $\\mathrm{FLC}(Y)\\to\\pi_1(Y,\\bar y)\\text{-}\\mathbf{Set}$.",
+   "uses": [
+    "thm-galois-lc-etale",
+    "def-galois-fibre-functor",
+    "def-galois-categories"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Remark 0DV6 (etale-cohomology-remark-functorial-locally-constant-on-connected): the equivalence for finite locally constant sheaves of sets follows from the diagram of Theorem 0BND"
+   }
+  },
+  {
+   "text": "*Finite limits and colimits.* $\\mathrm{F\\acute Et}(Y)$ has finite limits and finite colimits (axiom 1 of a Galois category, [lem-fet-galois-category]), and so has $\\mathrm{FLC}(Y)$, being equivalent to it. The equivalences of steps 1 and 2 preserve all limits and colimits that exist, by [lem-galois-equivalence-preserves-limits]; in particular a finite limit or colimit of finite etale covers (fibre products, finite coproducts, quotients by finite groups) is sent to the corresponding limit or colimit of finite continuous $\\pi_1(Y,\\bar y)$-sets.",
+   "uses": [
+    "lem-fet-galois-category",
+    "lem-galois-equivalence-preserves-limits"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/sga/SGA1_arXiv-math0206203.pdf",
+    "place": "SGA 1 V §7, p. 115: 'Cette equivalence permet donc d'interpreter les operations courantes de limites projectives et limites inductives finies sur des revetements ... en termes des operations analogues dans C(pi)'"
+   }
+  },
+  {
+   "text": "*Base change.* Let $f:Y'\\to Y$ with $Y'$ connected, $\\bar y'$ a geometric point of $Y'$ and $\\bar y=f\\circ\\bar y'$. By [lem-galois-pi1-functoriality] there is a continuous homomorphism $f_*:\\pi_1(Y',\\bar y')\\to\\pi_1(Y,\\bar y)$ and bijections $\\tau_P:|(P\\times_YY')_{\\bar y'}|\\to|P_{\\bar y}|$, natural in $P$, with $f_*(g)\\tau_P(z)=\\tau_P(gz)$; this is the asserted isomorphism of $\\pi_1(Y',\\bar y')$-sets. (By the same lemma the equivalence of step 1 for $Y'$, composed with base change, is the equivalence of step 1 for $Y$ followed by restriction of the action along $f_*$.)",
+   "uses": [
+    "lem-galois-pi1-functoriality"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/pione.tex",
+    "place": "Theorem 0BND (pione-theorem-fundamental-group) (3) and its proof via Lemma 0BN5 (pione-lemma-functoriality-galois)"
+   }
+  },
+  {
+   "text": "*Finite etale base change: the open subgroup.* Let moreover $f$ be finite etale. Then $f_*$ is injective by [lem-galois-pi1-finite-etale-injective], and its image is the stabilizer $U$ of $\\bar y'\\in|Y'_{\\bar y}|$, an open subgroup of index $\\#|Y'_{\\bar y}|$, finite by [def-galois-categories], by [lem-galois-pi1-finite-etale-image-stabilizer]. Hence $f_*$ is a continuous bijection of the compact group $\\pi_1(Y',\\bar y')$ onto the Hausdorff group $U$, so a homeomorphism (both are profinite by [lem-galois-aut-profinite], for the topologies of [def-galois-fibre-functor]), and by step 4 base change to $Y'$ followed by $F_{\\bar y'}$ is $F_{\\bar y}$ followed by restriction of the action to $U\\cong\\pi_1(Y',\\bar y')$.",
+   "uses": [
+    "lem-galois-pi1-finite-etale-injective",
+    "lem-galois-pi1-finite-etale-image-stabilizer",
+    "def-galois-categories",
+    "def-galois-fibre-functor",
+    "lem-galois-aut-profinite"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/sga/SGA1_arXiv-math0206203.pdf",
+    "place": "SGA 1 V §7, p. 116, last paragraph ('Si en particulier S' est un revetement etale de S, alors l'homomorphisme u est un isomorphisme de pi_1(S',a') sur le sous-groupe ouvert ... stabilisateur U de a' in F_a(S')'), and Proposition V.6.13"
+   }
   }
  ],
  "proof_deps": [
   "lem-fet-galois-category",
   "thm-galois-abstract-equivalence",
-  "def-galois-fibre-functor",
   "lem-galois-aut-profinite",
+  "def-galois-fibre-functor",
   "thm-galois-lc-etale",
-  "lem-galois-transitive"
+  "def-galois-categories",
+  "lem-galois-equivalence-preserves-limits",
+  "lem-galois-pi1-functoriality",
+  "lem-galois-pi1-finite-etale-injective",
+  "lem-galois-pi1-finite-etale-image-stabilizer"
  ],
  "proof_origin": {
-  "by": "agent",
-  "document": "literature/blueprint/master/blueprint/sec-curve-estimates/sk-prop-h2/thm-galois-fundamental.md",
-  "place": "## Proof"
+  "by": "document",
+  "document": "literature/stacks-project/pione.tex",
+  "place": "Theorem 0BND (pione-theorem-fundamental-group) and its proof; for FLC(Y) etale-cohomology.tex Remark 0DV6; for the finite etale case SGA 1 V Prop. 6.13 and §7 (literature/sga/SGA1_arXiv-math0206203.pdf, pp. 114-116)"
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "fibre functor of Galois category induces equivalence with finite continuous Aut(F)-sets",
+   "results": "PreGaloisCategory.instIsEquivalenceContActionFintypeCatAutFunctorFunctorToContAction and instEssSurj... (Mathlib.CategoryTheory.Galois.Equivalence); FiberFunctor, GaloisCategory.hasFiberFunctor, fiberPullbackEquiv (Galois.Basic)",
+   "date": "2026-10-10",
+   "verdict": "generalization for clause (1) through thm-galois-abstract-equivalence: (functorToContAction F).IsEquivalence for any Galois category; Mathlib has no finite etale schemes"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "etale fundamental group of a scheme, finite etale covers equivalent to finite continuous pi_1-sets",
+   "results": "PreGaloisCategory.instIsFundamentalGroupAutFunctorFintypeCat, IsFundamentalGroup (Galois.IsFundamentalgroup); instTotallyDisconnectedSpaceAutFunctorFintypeCat (Galois.Topology); instFiniteAutOfIsConnected, instFiniteHomOfIsConnected (Galois.Basic)",
+   "date": "2026-10-10",
+   "verdict": "no match for schemes"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rln 'FiniteEtale\\|fundamentalGroup' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicGeometry; grep -n 'functorToContAction\\|IsEquivalence' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/CategoryTheory/Galois/Equivalence.lean",
+   "results": "no file in AlgebraicGeometry; Equivalence.lean:40 def functorToContAction, :90 instance (functorToContAction F).IsEquivalence",
+   "date": "2026-10-10",
+   "verdict": "no match in Mathlib for the scheme statement; clause (1) is stated sorry-free in slopmaster2 by AlgebraicGeometry.Scheme.FiniteEtale.equivalenceContAction (WeilConjectures.AlgebraicGeometry.FundamentalGroup.Basic, lines 228-235)"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [],
  "blueprint_kind": "theorem",
@@ -72,5 +153,20 @@
   }
  },
  "chapter": "sec-curve-estimates",
- "unit": "sk-prop-h2"
+ "unit": "sk-prop-h2",
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "thm-galois-fundamental",
+  "worker": "stage1",
+  "summary": "Rule 0: no sorry-free declaration of slopmaster2 states the whole node. AlgebraicGeometry.Scheme.FiniteEtale.equivalenceContAction (WeilConjectures/AlgebraicGeometry/FundamentalGroup/Basic.lean 228-235, sorry-free by the 71d63dcf sorry map, docstring 'Blueprint thm-galois-fundamental') states clause (1), FEt(Y) equivalent to finite continuous G-sets for a fundamental group G of the fibre functor (any such G is isomorphic to Aut(F) by toAutContinuousMulEquiv); the FLC clause, the limits clause and the base-change clause are not in it. Split following Stacks 0BND: (1) by 0BNB + 0BN4 (existing nodes lem-fet-galois-category, thm-galois-abstract-equivalence), (FLC) through thm-galois-lc-etale (Remark 0DV6), (limits) through a Mathlib leaf, (base change) through 0BND (3), a new node closed in slopmaster2 (fundamentalGroupMap etc.), and the finite etale case through SGA 1 V 6.13 / §7: injectivity (new node, closed in slopmaster2: fundamentalGroupMap_injective) and image = stabilizer (new unsplit node). Statement corrected: the blueprint's base-change clause ('compatible with base change along Y'->Y for Y' connected, where it corresponds to the passage to the open subgroup') is false for a general connected Y'->Y (Y'=Spec of an algebraic closure: trivial pi_1, its image is not open when pi_1(Y) is infinite), and the blueprint proof's claim that pullbacks of the Galois covers of Y are cofinal for Y' is false likewise (A^1 over F_p-bar mapped to Spec F_p-bar); the corrected clause gives the continuous homomorphism for every connected Y' and the open subgroup for Y'->Y finite etale, which is what the citers use. lem-galois-transitive is no longer used by the item (it serves the new stabilizer node). stmt_deps gained def-galois-categories (FEt(Y), FLC(Y), fibres).",
+  "blueprint": "Step 1 realizes the proof's first sentence ('By [lem-fet-galois-category] ... [thm-galois-abstract-equivalence] applies with G=Aut(F_ybar) ... profinite by [lem-galois-aut-profinite]; this is the equivalence'); step 2 the second sentence's first clause ('The identification with FLC(Y) is [thm-galois-lc-etale]'); step 3 its second clause ('the compatibility with finite limits and colimits is the exactness of F_ybar'); steps 4-5 replace the last sentence ('For base change: by [lem-galois-transitive] ... an open subgroup because stabilizers in a finite continuous pi_1-set are open'), whose cofinality argument is false for general Y'; step 4 is Stacks 0BND (3), step 5 the finite etale case (SGA 1 V §7)."
+ },
+ "lean_candidates": [
+  {
+   "name": "AlgebraicGeometry.Scheme.FiniteEtale.equivalenceContAction",
+   "module": "WeilConjectures.AlgebraicGeometry.FundamentalGroup.Basic",
+   "note": "sorry-free on 71d63dcf; states clause (1) only (FEt(Y) equivalent to finite continuous G-sets for a fundamental group G of the fibre functor, G = Aut(F) by toAutContinuousMulEquiv); the FLC, limits and base-change clauses are the other steps (L, 2026-10-10)"
+  }
+ ],
+ "reviewed": "2026-10-10 L: 5 steps following 0BND (the Galois-category equivalence on FEt from lem-fet-galois-category, now closed on slopmaster2, and the abstract theorem; FLC by thm-galois-lc-etale; limits by a Mathlib leaf; base change by the new functoriality node, closed; the finite etale case by the injectivity node (closed) and the image-stabilizer node). Statement corrected: the blueprint claimed an open image for every connected base change, false (Spec of an algebraic closure); the open subgroup holds for finite etale Y' -> Y. 4 new nodes"
 }
