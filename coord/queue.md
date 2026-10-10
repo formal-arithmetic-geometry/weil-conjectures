@@ -1,8 +1,8 @@
 # Work queue
 
-914 items; claim with `tools/claim.py next <group> [--stage N]`.
+913 items; claim with `tools/claim.py next <group> [--stage N]`.
 
-## Stage 1: nodes to split (304)
+## Stage 1: nodes to split (303)
 
 | node | distance to a target | Lean state on the done branch |
 |---|---|---|
@@ -27,7 +27,6 @@
 | `lem-sc-p1-pullback-extension-class` | 3014 | none |
 | `lem-sc-sheaf-ext-coherent` | 3014 | none |
 | `lem-sp-cartan-eilenberg-properties` | 3014 | none |
-| `lem-pc-brown-representability-right-adjoint` | 3015 | none |
 | `lem-pc-derived-direct-image-preserves-direct-sums` | 3015 | none |
 | `lem-pc-derived-direct-image-preserves-qcoh` | 3015 | none |
 | `lem-pc-derived-qcoh-compact-generation` | 3015 | none |
@@ -44,10 +43,10 @@
 | `lem-sc-finite-pushforward-derived-hom-qcoherent` | 3015 | none |
 | `lem-sc-finite-sheafhom-affine-adjoint` | 3015 | none |
 | `lem-sc-finite-twisted-inverse-bounded-below` | 3015 | none |
-| `lem-sc-smooth-omega-finite-locally-free` | 3015 | none |
 | `lem-sc-smooth-proper-diagonal-koszul-dual` | 3015 | none |
 | `lem-sc-smooth-proper-diagonal-koszul-regular` | 3015 | none |
 | `lem-sc-smooth-proper-diagonal-tensor-formula` | 3015 | none |
+| `lem-pc-brown-cohomological-representability` | 3016 | none |
 | `lem-sc-affine-derived-cohomology` | 3016 | none |
 | `lem-sc-affine-derived-pushforward-conservative` | 3016 | none |
 | `lem-sc-kahler-differentials-diagonal-ideal` | 3016 | none |
@@ -926,7 +925,7 @@
 | `lem-weil-pbc-p1-field-dimension-one` | 4 | state |
 | `lem-weil-pbc-projective-space-zero-isomorphism` | 4 | state |
 
-Not open yet: 326 nodes that wait for stage 1, 1272 nodes that wait for a statement dependency.
+Not open yet: 325 nodes that wait for stage 1, 1274 nodes that wait for a statement dependency.
 
 ## Stage 3: modules to prove (0)
 
