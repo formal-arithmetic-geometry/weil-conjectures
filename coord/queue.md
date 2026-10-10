@@ -1,6 +1,6 @@
 # Work queue
 
-850 items; claim with `tools/claim.py next <group> [--stage N]`.
+852 items; claim with `tools/claim.py next <group> [--stage N]`.
 
 ## Stage 1: nodes to split (388)
 
@@ -13,7 +13,6 @@
 | `lem-weil-pbc-essentially-finite-presentation-over-intermediate` | 1015 | none |
 | `lem-weil-pbc-finite-product-normal` | 1015 | none |
 | `lem-weil-pbc-finite-type-etale-finite-factor-decomposition` | 1015 | none |
-| `lem-weil-pbc-flat-another-variant-local-criterion` | 1015 | none |
 | `lem-weil-pbc-flat-formally-smooth-closed-fibre-adic` | 1015 | none |
 | `lem-weil-pbc-limit-module-essentially-finite-presentation-over-system` | 1015 | none |
 | `lem-weil-pbc-local-nagata-domain-analytically-unramified` | 1015 | none |
@@ -32,6 +31,9 @@
 | `lem-weil-pbc-fpqc-descend-universally-closed` | 1016 | none |
 | `lem-weil-pbc-integral-injective-dimension-equal` | 1016 | none |
 | `lem-weil-pbc-projective-dimension-ext-characterization` | 1016 | none |
+| `lem-weil-pbc-tor-ideal-kernel-naturality` | 1016 | none |
+| `lem-weil-pbc-tor-one-surjective-change-rings` | 1016 | none |
+| `lem-weil-pbc-tor-one-surjective-flat-middle` | 1016 | none |
 | `lem-weil-pbc-triangular-change-of-basis` | 1016 | none |
 | `lem-weil-pbc-finite-ring-map-quasi-finite` | 1017 | none |
 | `lem-weil-pbc-regular-sequence-koszul-regular` | 1017 | none |
@@ -65,15 +67,13 @@
 | `lem-weil-pbc-hypercover-refinement` | 3005 | none |
 | `lem-weil-pbc-universal-homeomorphism-base-change` | 3005 | none |
 | `lemma-weil-pbc-finite-hypercover-descent` | 3005 | none |
-| `thm-galois-fundamental` | 3005 | none |
 | `thm-galois-lc-etale` | 3005 | rests_on_sorry |
 | `thm-weil-pbc-hypercover-cohomology` | 3005 | none |
 | `thm-weil-pbc-universal-homeomorphism-invariance` | 3005 | none |
 | `def-weil-pbc-finite-split-hypercover` | 3006 | none |
-| `lem-fet-galois-category` | 3006 | none |
 | `lem-galois-aut-profinite` | 3006 | none |
 | `lem-galois-descent` | 3006 | none |
-| `lem-galois-transitive` | 3006 | none |
+| `lem-galois-pi1-finite-etale-image-stabilizer` | 3006 | none |
 | `lem-sc-artin-schreier-dimension` | 3006 | none |
 | `lem-sc-as-sequence` | 3006 | none |
 | `lem-sc-cohomological-dimension` | 3006 | none |
@@ -83,11 +83,11 @@
 | `thm-galois-abstract-equivalence` | 3006 | none |
 | `def-galois-category` | 3007 | none |
 | `def-sc-divisor` | 3007 | none |
-| `lem-fet-finite-limits` | 3007 | none |
 | `lem-galois-action-continuous` | 3007 | none |
 | `lem-galois-axioms` | 3007 | none |
 | `lem-galois-glue` | 3007 | none |
 | `lem-galois-object-exists` | 3007 | none |
+| `lem-galois-transitive` | 3007 | none |
 | `lem-sc-ample-complement-affine` | 3007 | sorry_here |
 | `lem-sc-divisor-class-curve` | 3007 | none |
 | `lem-sc-etale-affine-qcoherent` | 3007 | none |
@@ -395,7 +395,7 @@
 | `def-exc-jacobian-presentation` | - | none |
 | `lem-zl-noether-normalization-dimension` | - | none |
 
-## Stage 2: nodes to state (462)
+## Stage 2: nodes to state (464)
 
 | node | distance to Mathlib | kind |
 |---|---|---|
@@ -577,6 +577,7 @@
 | `lem-weil-pbc-finite-unramified-etale-local` | 1 | state |
 | `lem-weil-pbc-finite-unramified-one-point-closed` | 1 | state |
 | `lem-weil-pbc-finitely-generated-field-complete-intersection-model` | 1 | state |
+| `lem-weil-pbc-flat-another-variant-local-criterion` | 1 | state |
 | `lem-weil-pbc-flat-completion` | 1 | state |
 | `lem-weil-pbc-flat-coproduct` | 1 | state |
 | `lem-weil-pbc-flat-iso-mod-ideal-powers` | 1 | state |
@@ -836,6 +837,7 @@
 | `lemma-nagata-scheme-image-ideal-qc` | 1 | state |
 | `lemma-weil-pbc-finite-l-group-filtration` | 1 | state |
 | `cor-pqf-proper-quasifinite-finite` | 2 | state |
+| `lem-fet-galois-category` | 2 | state |
 | `lem-fet-locally-trivial` | 2 | state |
 | `lem-pc-cartier-criterion` | 2 | state |
 | `lem-pc-hilb-smooth` | 2 | state |
@@ -862,7 +864,7 @@
 | `lem-weil-pbc-p1-field-dimension-one` | 4 | state |
 | `lem-weil-pbc-projective-space-zero-isomorphism` | 4 | state |
 
-Not open yet: 405 nodes that wait for stage 1, 856 nodes that wait for a statement dependency.
+Not open yet: 406 nodes that wait for stage 1, 859 nodes that wait for a statement dependency.
 
 ## Stage 3: modules to prove (0)
 
