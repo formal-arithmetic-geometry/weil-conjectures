@@ -1590,3 +1590,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 14:10 L: merged deliver/J1/lem-weil-pbc-finite-type-etale-finite-factor-decomposition (reviewer PASS; first push; new nodes: 2)
 - 14:10 L: lem-weil-pbc-coskeleton-matching-tuples source.place corrected to 0183 (reviewer of E1's returned delivery)
 - 14:10 L: merged deliver/C1/def-galois-fibre-functor (reviewer FIX; after a return; new nodes: 1)
+- 14:11 L: merged deliver/K1/lem-pc-h0-proper-variety (reviewer FIX; first push; new nodes: 0)
