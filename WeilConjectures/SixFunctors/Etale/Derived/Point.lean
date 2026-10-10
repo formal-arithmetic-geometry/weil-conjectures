@@ -8,6 +8,7 @@ module
 public import Mathlib.Algebra.Homology.DerivedCategory.HomologySequence
 public import WeilConjectures.AlgebraicGeometry.Sites.PointCohomology
 public import WeilConjectures.CategoryTheory.DerivedCategory.FlatModel
+public import WeilConjectures.CategoryTheory.DerivedCategory.Monoidal.Equivalence
 public import WeilConjectures.CategoryTheory.Sites.Point.Flat
 public import WeilConjectures.ConstructibleSheaf.Monoidal
 public import WeilConjectures.SixFunctors.Etale.Derived.Coefficients
@@ -34,7 +35,7 @@ shifts `Λ_s[r]` of the constant complex therefore detect isomorphisms.
 
 @[expose] public section
 
-universe u
+universe u' u
 
 open CategoryTheory Limits MonoidalCategory Opposite
 
@@ -265,6 +266,120 @@ noncomputable def ΓIsoSheafFiberOfIsSepClosed
       ((pointSmallEtale (𝟙 (Spec (.of k)))).toPresheafFiber (etalePoint k) x F.obj).hom
       (bijective_toPresheafFiber_etalePoint_of_isSepClosed F x)).toModuleIso
 
+
+
+/-- The canonical `k`-point of the étale neighbourhood `etalePoint k`. -/
+noncomputable def etalePointFiberPt :
+    (pointSmallEtale (𝟙 (Spec (.of k)))).fiber.obj (etalePoint k) :=
+  Over.homMk (𝟙 _) (by simp [etalePoint])
+
+/-- The geometric point `𝟙 : Spec k ⟶ Spec k` has a single lift to `etalePoint k`, the terminal
+object of the small étale site. -/
+instance subsingleton_fiber_obj_etalePoint :
+    Subsingleton ((pointSmallEtale (𝟙 (Spec (.of k)))).fiber.obj (etalePoint k)) :=
+  (pointSmallEtale (𝟙 (Spec (.of k)))).subsingleton_fiber_obj (𝟙 _) isTerminalEtalePoint
+
+/-- Over a separably closed field `k`, the map from the global sections of an étale sheaf on
+`Spec k` to its stalk at the geometric point `𝟙 : Spec k ⟶ Spec k` is an isomorphism. -/
+lemma isIso_toPresheafFiber_etalePoint_of_isSepClosed
+    (F : Sheaf (Spec (.of k)).smallEtaleTopology (ModuleCat.{u + 1} Λ))
+    (x : (pointSmallEtale (𝟙 (Spec (.of k)))).fiber.obj (etalePoint k)) :
+    IsIso ((pointSmallEtale (𝟙 (Spec (.of k)))).toPresheafFiber (etalePoint k) x F.obj) :=
+  (ConcreteCategory.isIso_iff_bijective _).2
+    (bijective_toPresheafFiber_etalePoint_of_isSepClosed F x)
+
+/-- Over a separably closed field, the counit of the adjunction between the fibre functor at the
+geometric point `𝟙 : Spec k ⟶ Spec k` and the skyscraper sheaf functor is an isomorphism. -/
+instance isIso_skyscraperSheafAdjunction_counit_app_of_isSepClosed (M : ModuleCat.{u + 1} Λ) :
+    IsIso ((pointSmallEtale (𝟙 (Spec (.of k)))).skyscraperSheafAdjunction.counit.app M) := by
+  let Φ := pointSmallEtale (𝟙 (Spec (.of k)))
+  let x := etalePointFiberPt (k := k)
+  have h : Φ.toPresheafFiber (etalePoint k) x (Φ.skyscraperSheaf M).obj ≫
+      Φ.skyscraperSheafAdjunction.counit.app M = Pi.π _ x := by
+    have e : (fullyFaithfulSheafToPresheaf _ _).homEquiv (𝟙 (Φ.skyscraperSheafFunctor.obj M)) =
+        𝟙 (Φ.skyscraperPresheaf M) := (sheafToPresheaf _ _).map_id _
+    simp only [GrothendieckTopology.Point.skyscraperSheafAdjunction,
+      Adjunction.mkOfHomEquiv_counit_app, Equiv.symm_trans_apply, Equiv.symm_symm]
+    refine (Φ.toPresheafFiber_skyscraperPresheafHomEquiv_symm _ _ _).trans ?_
+    erw [e]
+    exact Category.id_comp _
+  have hπ : IsIso (Pi.π (fun _ : Φ.fiber.obj (etalePoint k) ↦ M) x) :=
+    ⟨Pi.lift fun _ ↦ 𝟙 M, by ext y; obtain rfl := Subsingleton.elim x y; simp, by simp⟩
+  have hf := isIso_toPresheafFiber_etalePoint_of_isSepClosed (Φ.skyscraperSheaf M) x
+  have hc : IsIso (Φ.toPresheafFiber (etalePoint k) x (Φ.skyscraperSheaf M).obj ≫
+      Φ.skyscraperSheafAdjunction.counit.app M) := by rw [h]; exact hπ
+  exact @IsIso.of_isIso_comp_left _ _ _ _ _ _ _ hf hc
+
+/-- Over a separably closed field `k`, an étale sheaf of `Λ`-modules on `Spec k` whose stalk at
+the geometric point `𝟙 : Spec k ⟶ Spec k` vanishes is zero. -/
+lemma isZero_of_isZero_sheafFiber_of_isSepClosed
+    (F : Sheaf (Spec (.of k)).smallEtaleTopology (ModuleCat.{u + 1} Λ))
+    (h : IsZero ((pointSmallEtale (𝟙 (Spec (.of k)))).sheafFiber.obj F)) : IsZero F := by
+  have : Subsingleton
+      ↑(((pointSmallEtale (𝟙 (Spec (.of k)))).presheafFiber
+        (A := ModuleCat.{u + 1} Λ)).obj F.obj) :=
+    ModuleCat.subsingleton_of_isZero h
+  exact isZero_of_subsingleton_sections_of_isSepClosed F
+    (injective_toPresheafFiber_etalePoint_of_isSepClosed F _ etalePointFiberPt).subsingleton
+
+/-- Over a separably closed field `k`, the fibre functor at the geometric point
+`𝟙 : Spec k ⟶ Spec k` reflects isomorphisms of étale sheaves of `Λ`-modules on `Spec k`. -/
+lemma isIso_of_isIso_sheafFiber_map_of_isSepClosed
+    {F G : Sheaf (Spec (.of k)).smallEtaleTopology (ModuleCat.{u + 1} Λ)} (φ : F ⟶ G)
+    [IsIso ((pointSmallEtale (𝟙 (Spec (.of k)))).sheafFiber.map φ)] : IsIso φ := by
+  let E := (pointSmallEtale (𝟙 (Spec (.of k)))).sheafFiber (A := ModuleCat.{u + 1} Λ)
+  have hk : IsZero (kernel φ) := isZero_of_isZero_sheafFiber_of_isSepClosed _
+    (IsZero.of_iso (isZero_kernel_of_mono (E.map φ)) (PreservesKernel.iso E φ))
+  have hc : IsZero (cokernel φ) := isZero_of_isZero_sheafFiber_of_isSepClosed _
+    (IsZero.of_iso (isZero_cokernel_of_epi (E.map φ)) (PreservesCokernel.iso E φ))
+  have := Preadditive.mono_of_isZero_kernel φ hk
+  have := Preadditive.epi_of_isZero_cokernel φ hc
+  exact isIso_of_mono_of_epi φ
+
+/-- Over a separably closed field, the unit of the adjunction between the fibre functor at the
+geometric point `𝟙 : Spec k ⟶ Spec k` and the skyscraper sheaf functor is an isomorphism: the
+fibre functor reflects isomorphisms and the counit is an isomorphism. -/
+instance isIso_skyscraperSheafAdjunction_unit_app_of_isSepClosed
+    (F : Sheaf (Spec (.of k)).smallEtaleTopology (ModuleCat.{u + 1} Λ)) :
+    IsIso ((pointSmallEtale (𝟙 (Spec (.of k)))).skyscraperSheafAdjunction.unit.app F) := by
+  let adj := (pointSmallEtale (𝟙 (Spec (.of k)))).skyscraperSheafAdjunction
+    (A := ModuleCat.{u + 1} Λ)
+  have : IsIso ((pointSmallEtale (𝟙 (Spec (.of k)))).sheafFiber.map (adj.unit.app F)) := by
+    have h := adj.left_triangle_components F
+    rw [← IsIso.eq_comp_inv] at h
+    rw [h]
+    infer_instance
+  exact isIso_of_isIso_sheafFiber_map_of_isSepClosed _
+
+/-- Over a separably closed field `k`, the fibre functor at the geometric point
+`𝟙 : Spec k ⟶ Spec k` is an equivalence between étale sheaves of `Λ`-modules on `Spec k` and
+`Λ`-modules, with quasi-inverse the skyscraper sheaf functor. -/
+noncomputable def sheafFiberEquivalenceOfIsSepClosed :
+    Sheaf (Spec (.of k)).smallEtaleTopology (ModuleCat.{u + 1} Λ) ≌ ModuleCat.{u + 1} Λ :=
+  (pointSmallEtale (𝟙 (Spec (.of k)))).skyscraperSheafAdjunction.toEquivalence
+
+
+instance additive_sheafFiberEquivalenceOfIsSepClosed_functor :
+    (sheafFiberEquivalenceOfIsSepClosed (k := k) (Λ := Λ)).functor.Additive :=
+  Functor.additive_of_preserves_binary_products _
+
+instance additive_sheafFiberEquivalenceOfIsSepClosed_inverse :
+    (sheafFiberEquivalenceOfIsSepClosed (k := k) (Λ := Λ)).inverse.Additive :=
+  Functor.additive_of_preserves_binary_products _
+
+/-- Over a separably closed field `k`, the global sections functor on étale sheaves of
+`Λ`-modules on `Spec k` is isomorphic to the fibre functor at the geometric point
+`𝟙 : Spec k ⟶ Spec k`. -/
+noncomputable def ΓIsoSheafFiberOfIsSepClosedNatIso :
+    Sheaf.Γ (Spec (.of k)).smallEtaleTopology (ModuleCat.{u + 1} Λ) ≅
+      (pointSmallEtale (𝟙 (Spec (.of k)))).sheafFiber :=
+  Sheaf.ΓNatIsoSheafSections _ _ isTerminalEtalePoint ≪≫
+    @asIso _ _ _ _ (Functor.whiskerLeft (sheafToPresheaf _ _)
+      ((pointSmallEtale (𝟙 (Spec (.of k)))).toPresheafFiberNatTrans (etalePoint k)
+        etalePointFiberPt))
+      ((NatTrans.isIso_iff_isIso_app _).2 fun F ↦
+        isIso_toPresheafFiber_etalePoint_of_isSepClosed F _)
+
 end GlobalSections
 
 section Flat
@@ -315,10 +430,37 @@ lemma torAmplitudeIn_rightDerivedGlobalSections_of_isSepClosed {a b : ℤ}
 
 end Flat
 
+section MonoidalEquivalence
+
+variable (A : Type u') [Category.{u + 1} A] [Abelian A] [IsGrothendieckAbelian.{u + 1} A]
+  [MonoidalCategory A] [MonoidalPreadditive A] [SymmetricCategory A] [MonoidalClosed A]
+  [Abelian.HasFunctorialFlatResolution A]
+
+/-- A monoidal equivalence `E` between `A`-valued étale sheaves on `X` and a monoidal abelian
+category `A'` carries the coefficient dual `RHom(K, 𝟙)` to the dual in `D(A')`:
+`D(E)(RHom(K, 𝟙)) ≅ RHom(D(E)(K), 𝟙)`. -/
+theorem nonempty_mapDerivedCategory_coefficientDual_iso {X : Scheme.{u}} {A' : Type u'}
+    [Category.{u + 1} A'] [Abelian A'] [IsGrothendieckAbelian.{u + 1} A'] [MonoidalCategory A']
+    [MonoidalPreadditive A'] [MonoidalClosed A'] [BraidedCategory A']
+    [Abelian.HasFunctorialFlatResolution A'] (E : Sheaf X.smallEtaleTopology A ≌ A')
+    [E.functor.Additive] [E.inverse.Additive] [E.functor.Monoidal]
+    (K : DerivedCategory (Sheaf X.smallEtaleTopology A)) :
+    Nonempty (E.functor.mapDerivedCategory.obj
+        ((DerivedCategory.coefficientDual A X).obj (op K)) ≅
+      (ihom (E.functor.mapDerivedCategory.obj K)).obj (𝟙_ _)) :=
+  E.nonempty_mapDerivedCategory_obj_ihom_obj_unit_iso K
+
+end MonoidalEquivalence
+
 section Duality
 
 variable {Λ : Type (u + 1)} [CommRing Λ] [Finite Λ]
 
+noncomputable instance monoidal_sheafFiberEquivalenceOfIsSepClosed_functor :
+    (sheafFiberEquivalenceOfIsSepClosed (k := k) (Λ := Λ)).functor.Monoidal :=
+  inferInstanceAs ((pointSmallEtale (𝟙 (Spec (.of k)))).sheafFiber.Monoidal)
+
+omit [Finite Λ] in
 /-- Blueprint `lem-sf-point`: The point, evaluated (the duality part).
 
 Let `k` be a separably closed field, `s = Spec k` and `Λ` a finite coefficient ring. For every
@@ -330,15 +472,25 @@ is computed after evaluation at the point by the dual over `Λ`:
 
 Evaluation at the geometric point is the derived global sections `RΓ(s, -)`. The blueprint
 takes this identification from the description of the point category in
-`def-weil-finite-coefficient-point`. -/
+`def-weil-finite-coefficient-point`. Here it holds for every `C`: the fibre functor at the
+geometric point is a monoidal equivalence `Sh(s_ét, Λ) ≌ Mod_Λ`
+(`AlgebraicGeometry.Etale.sheafFiberEquivalenceOfIsSepClosed`), isomorphic to `Γ(s, -)`, and the
+induced equivalence of derived categories preserves duals
+(`CategoryTheory.Equivalence.nonempty_mapDerivedCategory_obj_ihom_obj_unit_iso`). -/
 theorem nonempty_iso_rightDerivedGlobalSections_coefficientDual
     {C : DerivedCategoryModule Λ (Spec (.of k))}
-    (hC : DerivedCategory.boundedConstructible (ModuleCat.{u + 1} Λ) (Spec (.of k)) C) :
+    (_hC : DerivedCategory.boundedConstructible (ModuleCat.{u + 1} Λ) (Spec (.of k)) C) :
     Nonempty ((rightDerivedGlobalSections (ModuleCat.{u + 1} Λ) (Spec (.of k))).obj
         ((DerivedCategory.coefficientDual (ModuleCat.{u + 1} Λ) (Spec (.of k))).obj (op C)) ≅
       (ihom ((rightDerivedGlobalSections (ModuleCat.{u + 1} Λ) (Spec (.of k))).obj C)).obj
-        (𝟙_ _)) :=
-  sorry
+        (𝟙_ _)) := by
+  let E := sheafFiberEquivalenceOfIsSepClosed (k := k) (Λ := Λ)
+  obtain ⟨e⟩ := nonempty_mapDerivedCategory_coefficientDual_iso (ModuleCat.{u + 1} Λ) E C
+  let φ : rightDerivedGlobalSections (ModuleCat.{u + 1} Λ) (Spec (.of k)) ≅
+      E.functor.mapDerivedCategory :=
+    Functor.rightDerivedFunctorIsoMapDerivedCategory _ ≪≫
+      Functor.mapDerivedCategoryNatIso ΓIsoSheafFiberOfIsSepClosedNatIso
+  exact ⟨φ.app _ ≪≫ e ≪≫ (MonoidalClosed.internalHom.mapIso (φ.app C).op).app (𝟙_ _)⟩
 
 end Duality
 
