@@ -33,9 +33,54 @@
   "def-weil-module-base-change",
   "def-weil-pbc-exact-sequence"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "For each $j$, let $T_j=T\\mathbin{\\times_{P\\otimes_RS}}(C_j\\otimes_RS)$ be the pullback of the given $S$-extension $0\\to N\\otimes_RS\\to T\\to P\\otimes_RS\\to0$ along $\\iota_j\\otimes_RS$. Thus $T_j$ is an $S$-extension of $C_j\\otimes_RS$ by $N\\otimes_RS$. By the hypothesis, choose an $R$-extension $0\\to N\\to E_j\\to C_j\\to0$ and a fixed-end-term equivalence $[T_j]=[E_j\\otimes_RS]$. Applying the surjectivity of $\\Phi_R$ from [lem-weil-pbc-ext-one-direct-sum] gives an $R$-extension $0\\to N\\to E\\to P\\to0$ whose pullback along every $\\iota_j$ has class $[E_j]$. An equivalence of $R$-extensions base-changes to an equivalence of $S$-extensions, since [def-weil-module-base-change] sends identities to identities and preserves composition.",
+   "uses": [
+    "lem-weil-pbc-ext-one-direct-sum",
+    "def-weil-pbc-exact-sequence",
+    "def-weil-pbc-direct-sum-modules",
+    "def-weil-module-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "proof of Lemma Tag 05EG (lemma-neighbourhood-extensions), lines 24504-24516"
+   }
+  },
+  {
+   "text": "First, [lem-weil-pbc-tensor-commutes-with-colimits] identifies $P\\otimes_RS$ with $\\bigoplus_{j\\in J}(C_j\\otimes_RS)$ and carries each $\\iota_j\\otimes_RS$ to the canonical inclusion. Tensoring $0\\to N\\to E\\to P\\to0$ with the flat module $S$ gives a short exact sequence $0\\to N\\otimes_RS\\to E\\otimes_RS\\to P\\otimes_RS\\to0$ by [lem-weil-pbc-flat-tensor-exact] and [lem-weil-pbc-tensor-right-exact]. For each $j$, $(E\\mathbin{\\times_P}C_j)\\otimes_RS\\cong(E\\otimes_RS)\\mathbin{\\times_{P\\otimes_RS}}(C_j\\otimes_RS)$: the left fibre product is the kernel of $E\\oplus C_j\\to P$, tensor commutes with this finite direct sum, and [lem-weil-pbc-flat-tensor-exact] preserves the kernel. Hence the pullback tuple of $[E\\otimes_RS]$ under $\\Phi_S$ is $([E_j\\otimes_RS])_j=([T_j])_j$, which is the pullback tuple of $[T]$. The injectivity of [lem-weil-pbc-ext-one-direct-sum] for $A=S$ gives $[E\\otimes_RS]=[T]$, i.e. a fixed-end-term equivalence. The base-change equivalences used here are compatible with identities and composition by [def-weil-module-base-change].",
+   "uses": [
+    "lem-weil-pbc-ext-one-direct-sum",
+    "lem-weil-pbc-flat-tensor-exact",
+    "lem-weil-pbc-tensor-right-exact",
+    "lem-weil-pbc-tensor-commutes-with-colimits",
+    "def-weil-pbc-flat-ring-map",
+    "def-weil-module-base-change",
+    "def-weil-pbc-exact-sequence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "proof of Lemma Tag 05EG (lemma-neighbourhood-extensions), lines 24510-24527"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-ext-one-direct-sum",
+  "def-weil-pbc-exact-sequence",
+  "def-weil-pbc-direct-sum-modules",
+  "lem-weil-pbc-flat-tensor-exact",
+  "lem-weil-pbc-tensor-right-exact",
+  "lem-weil-pbc-tensor-commutes-with-colimits",
+  "def-weil-pbc-flat-ring-map",
+  "def-weil-module-base-change"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "proof of Lemma Tag 05EG (lemma-neighbourhood-extensions), lines 24504-24527"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -53,14 +98,14 @@
   },
   {
    "tool": "grep",
-   "query": "rg 'Ext.*biproduct|Ext.*coproduct|Ext.*directSum' Mathlib/Algebra/Homology/DerivedCategory/Ext in /home/ubuntu/Poincare-MorganTian/.work/helpers/codex-m47-line/.lake/packages/mathlib",
-   "results": "Ext.biproductAddEquiv at Ext/Basic.lean:475 has [Fintype J]; no arbitrary coproduct declaration found in this checkout, which may differ from pinned Mathlib",
+   "query": "rg 'Ext.*biproduct|Ext.*coproduct|Ext.*directSum' Mathlib/Algebra/Homology/DerivedCategory/Ext",
+   "results": "Ext.biproductAddEquiv at Ext/Basic.lean:475 has [Fintype J]; no arbitrary coproduct declaration found",
    "date": "2026-10-10",
    "verdict": "no verified match; unsplit"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "worker",
@@ -80,5 +125,21 @@
   }
  },
  "chapter": "sec-proper-base-change",
- "unit": "sk-thm-p1"
+ "unit": "sk-thm-p1",
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "lem-weil-pbc-direct-sum-extension-assembly",
+  "worker": "H1",
+  "summary": "Repaired the split after return: the auxiliary node now defines fixed-endpoint equivalence of short exact extensions, the pullback extension along each canonical inclusion, and the explicit bijection to the product. The item proof now spells out flat tensor exactness, tensor-colimit compatibility identifying the direct-sum quotient after base change, and the kernel description proving pullback commutes with flat base change before applying injectivity over S. The arbitrary-direct-sum Ext compatibility remains an unsplit non-Mathlib node.",
+  "blueprint": "The two steps realize the ancestor blueprint proof's essential-surjectivity torsion-extension descent clause in Proposition 05ER, including the direct-sum compatibility invoked by More on Algebra Lemma 05EG.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-ds3",
+  "group": "H1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-ds3 (reviewer sub-agent of L); spot-checked: Re-review of the repaired push after the 14:35 return (R-dsa, head 84e01c1ab). Return point 1 repaired: step 1 now pulls back the given S-extension T along iota_j(x)S to get T_j, takes E_j from the item hypothesis, builds E by surjectivity of Phi_R of lem-weil-pbc-ext-one-direct-sum, and states that equivalences base-change via def-weil-module-base-change (compatible with composition and identities, checked in its statement); step 2 identifies P(x)S with the direct sum of C_j(x)S via lem-weil-pbc-tensor-commutes-with-colimits, gets exactness of E(x)S from lem-weil-pbc-flat-tensor-exact and lem-weil-pbc-tensor-right-exact, proves (E x_P C_j)(x)S = (E(x)S) x (C_j(x)S) by the kernel of E+C_j->P and flat exactness, and concludes by injectivity of Phi_S; every cited statement read and says what is used. Return point 2 repaired: the new node's via is the item followed by the item's whole via chain, nearest first. Report TeX now single backslashes. Source: More on Algebra 05EG (lemma-neighbourhood-extensions), more-algebra.tex lines 24504-24527, 'compatibility of Ext with direct sums (details omitted)'; the item states it for an arbitrary family with fixed-end-term equivalence, as needed there. New node lem-weil-pbc-ext-one-direct-sum: Yoneda Ext^1 of an arbitrary direct sum is the product, true for any J; checked J empty (one class, the split zero quotient) and J a singleton (identity). Mathlib: only finite Ext.biproductAddEquiv, so unsplit is right; blueprint_refs search 'Ext direct sum extension' found nothing relevant (same_as [] correct). Only the maintainer fields untouched; branch based on a recent sheaf-dag with no conflicting files. Start Sat Oct 10 02:52:48 PM UTC 2026, end Sat Oct 10 02:53:23 PM UTC 2026."
+ }
 }

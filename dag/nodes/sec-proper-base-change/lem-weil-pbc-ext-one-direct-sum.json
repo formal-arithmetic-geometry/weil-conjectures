@@ -1,0 +1,68 @@
+{
+ "id": "lem-weil-pbc-ext-one-direct-sum",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-finite-etale-lifting",
+   "place": "## Proof, step (b) Essential surjectivity: torsion-extension descent used in Proposition 05ER; the direct-sum Ext compatibility invoked in the proof of Lemma 05EG",
+   "via": [
+    "lem-weil-pbc-direct-sum-extension-assembly",
+    "lem-weil-pbc-torsion-extension-flat-descent",
+    "prop-weil-pbc-formal-glueing-equivalence",
+    "lem-weil-pbc-formal-glueing-isogeny",
+    "lem-weil-pbc-grothendieck-existence-easy",
+    "lem-weil-pbc-grothendieck-existence-devissage",
+    "prop-weil-pbc-grothendieck-existence-proper",
+    "prop-weil-pbc-grothendieck-existence",
+    "lem-weil-pbc-algebraize-finite-over-proper",
+    "lem-weil-pbc-finite-etale-lifting-complete",
+    "lem-weil-pbc-finite-etale-lifting-essential-surjectivity"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Ext one of a direct sum is the product of Ext one",
+ "statement": "Let $A$ be a commutative ring, let $N$ be an $A$-module, and let $(C_j)_{j\\in J}$ be a family of $A$-modules. Put $P=\\bigoplus_{j\\in J}C_j$ [def-weil-pbc-direct-sum-modules], with canonical inclusions $\\iota_j:C_j\\to P$. For an $A$-module $Q$, define $\\operatorname{Ext}^{1,\\mathrm{ext}}_A(Q,N)$ to be the set of equivalence classes of short exact sequences $0\\to N\\xrightarrow{u}E\\xrightarrow{v}Q\\to0$ [def-weil-pbc-exact-sequence], where two sequences are equivalent when there is an $A$-module isomorphism $h:E\\xrightarrow{\\sim}E'$ with $h\\circ u=u'$ and $v'\\circ h=v$. For each $j$, pullback along $\\iota_j$ sends the class of $(u,v)$ to the class of $0\\to N\\to E\\mathbin{\\times_P}C_j\\to C_j\\to0$, where $E\\mathbin{\\times_P}C_j=\\{(e,c)\\mid v(e)=\\iota_j(c)\\}$. The resulting map $\\Phi_A: \\operatorname{Ext}^{1,\\mathrm{ext}}_A(P,N)\\to\\prod_{j\\in J}\\operatorname{Ext}^{1,\\mathrm{ext}}_A(C_j,N)$, $[E]\\mapsto([E\\mathbin{\\times_P}C_j])_{j\\in J}$, is a bijection.",
+ "source": {
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "proof of Lemma Tag 05EG (lemma-neighbourhood-extensions), lines 24504-24516: compatibility of Ext with direct sums"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-direct-sum-modules",
+  "def-weil-pbc-exact-sequence"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Ext one of an arbitrary direct sum of modules is the product of Ext one groups",
+   "results": "No arbitrary direct-sum Ext theorem; only finite biproduct Ext equivalences",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "Ext.sum direct sum modules",
+   "results": "CategoryTheory.Abelian.Ext.addEquivBiproduct for finite biproducts only",
+   "date": "2026-10-10",
+   "verdict": "no match for arbitrary family"
+  },
+  {
+   "tool": "grep",
+   "query": "rg 'Ext.*direct sum|Ext.*coproduct|biproductAddEquiv' Mathlib/Algebra/Homology/DerivedCategory/Ext",
+   "results": "Ext/Basic.lean finite biproduct theorem only; no arbitrary coproduct result",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "created": {
+  "item": "lem-weil-pbc-direct-sum-extension-assembly"
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1"
+}
