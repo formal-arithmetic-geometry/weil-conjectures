@@ -1,8 +1,8 @@
 # Work queue
 
-886 items; claim with `tools/claim.py next <group> [--stage N]`.
+885 items; claim with `tools/claim.py next <group> [--stage N]`.
 
-## Stage 1: nodes to split (106)
+## Stage 1: nodes to split (105)
 
 | node | distance to a target | Lean state on the done branch |
 |---|---|---|
@@ -11,7 +11,6 @@
 | `lem-pc-ringed-space-module-stalk-tensor` | 3013 | none |
 | `lem-pc-affine-pseudo-coherent-criterion` | 3015 | none |
 | `lem-pc-affine-tor-amplitude-criterion` | 3015 | none |
-| `lem-pc-derived-mayer-vietoris-triangle` | 3015 | none |
 | `lem-pc-perfect-pseudo-coherent-locally-finite-tor` | 3015 | none |
 | `lem-sc-derived-hom-mayer-vietoris` | 3015 | none |
 | `lem-pc-injective-split-tower-injective` | 3016 | none |
@@ -898,7 +897,7 @@
 | `lem-weil-pbc-projective-space-zero-isomorphism` | 4 | state |
 | `def-nagata-fixed-base-separated-stage` | 6 | state |
 
-Not open yet: 1596 nodes that wait for a statement dependency, 146 nodes that wait for stage 1.
+Not open yet: 1597 nodes that wait for a statement dependency, 145 nodes that wait for stage 1.
 
 ## Stage 3: modules to prove (0)
 
