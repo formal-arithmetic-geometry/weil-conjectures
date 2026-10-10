@@ -28,9 +28,84 @@
   "def-kun-topological-krull-dimension",
   "pqf-def-cohomology"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Fix x in X and write d_x = dim O_{X,x}. The stalk isomorphism [lem-sc-ext-stalk-localization] identifies SheafExt^q(F,G)_x with Ext^q_{O_{X,x}}(F_x,G_x). Regularity of X makes O_{X,x} a regular local ring, and coherence makes F_x finitely generated; therefore [lem-sc-regular-local-ext-vanishing] gives SheafExt^q(F,G)_x = 0 whenever q > d_x.",
+   "uses": [
+    "lem-sc-ext-stalk-localization",
+    "lem-sc-regular-local-ext-vanishing"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/equiv.tex",
+    "place": "Lemma lemma-Ext-0-regular (Tag 0FZ3), proof of (1), local Ext calculation"
+   }
+  },
+  {
+   "text": "Assume q <= d and let S be the support of SheafExt^q(F,G). S is closed in X: SheafExt^q(F,G) is coherent by [lem-sc-sheaf-ext-coherent], hence quasi-coherent of finite type by [pqf-lem-coherent-ft-locnoeth], and its support is closed by [lem-weil-pbc-finite-type-module-support-closed]. Hence an irreducible closed subset of S is an irreducible closed subset of X and its generic point lies in S, so by Step 1 its local ring has dimension d_x >= q. Let Z_0 < Z_1 < ... < Z_k be a chain of irreducible closed subsets of S, and x the generic point of Z_k. By [lem-sc-scheme-stalk-dimension-generalization-chains] there is a chain Z_k = W_0 < W_1 < ... < W_{d_x} of irreducible closed subsets of X (d_x is finite since d_x <= d). Concatenating gives a chain of length k + d_x >= k + q starting at Z_0 = closure of its generic point x_0, so the same node gives dim O_{X,x_0} >= k+q, while dim O_{X,x_0} <= d by [def-pc-dimension]. Thus k <= d-q, i.e. S has topological Krull dimension at most d-q [def-kun-topological-krull-dimension].",
+   "uses": [
+    "lem-sc-ext-stalk-localization",
+    "lem-sc-regular-local-ext-vanishing",
+    "lem-sc-sheaf-ext-coherent",
+    "pqf-lem-coherent-ft-locnoeth",
+    "lem-weil-pbc-finite-type-module-support-closed",
+    "lem-sc-scheme-stalk-dimension-generalization-chains",
+    "def-pc-dimension",
+    "def-kun-topological-krull-dimension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/equiv.tex",
+    "place": "Lemma lemma-Ext-0-regular (Tag 0FZ3), proof of (1), sentences after the local Ext calculation"
+   }
+  },
+  {
+   "text": "X is Noetherian, S is closed of topological Krull dimension at most d-q by Step 2, and the underlying abelian sheaf of SheafExt^q(F,G) has support S (the stalks of the module and of its underlying abelian sheaf are the same colimit [def-weil-pbc-module-stalk]). Applying [lem-sc-support-dimension-cohomology-vanishing] with Z = S and r = d-q gives H^p(X, SheafExt^q(F,G)_ab) = 0 for every p > d-q, the cohomology of [def-sc-topological-abelian-cohomology], which for the Zariski space of X is H^p(X_Zar, -). By [lem-sc-zariski-module-abelian-cohomology-agree] this group is isomorphic to H^p(X, SheafExt^q(F,G)) computed in O_X-modules [pqf-def-cohomology], so the latter vanishes for p > d-q.",
+   "uses": [
+    "lem-sc-support-dimension-cohomology-vanishing",
+    "def-weil-pbc-module-stalk",
+    "def-sc-topological-abelian-cohomology",
+    "lem-sc-zariski-module-abelian-cohomology-agree",
+    "pqf-def-cohomology"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/equiv.tex",
+    "place": "Lemma lemma-Ext-0-regular (Tag 0FZ3), proof of (1), final paragraph; Cohomology Proposition Tag 02UZ"
+   }
+  },
+  {
+   "text": "If q > d, Step 1 makes every stalk zero because d_x <= d, so the sheaf Ext is zero and its cohomology is zero. Thus in all cases H^p(X, SheafExt^q(F,G)) = 0 for p > d-q.",
+   "uses": [
+    "def-pc-dimension"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/equiv.tex",
+    "place": "Lemma lemma-Ext-0-regular (Tag 0FZ3), proof of (1), conclusion after the local calculation"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sc-ext-stalk-localization",
+  "lem-sc-regular-local-ext-vanishing",
+  "lem-sc-sheaf-ext-coherent",
+  "pqf-lem-coherent-ft-locnoeth",
+  "lem-weil-pbc-finite-type-module-support-closed",
+  "lem-sc-scheme-stalk-dimension-generalization-chains",
+  "def-pc-dimension",
+  "def-kun-topological-krull-dimension",
+  "lem-sc-support-dimension-cohomology-vanishing",
+  "def-weil-pbc-module-stalk",
+  "def-sc-topological-abelian-cohomology",
+  "lem-sc-zariski-module-abelian-cohomology-agree",
+  "pqf-def-cohomology"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/equiv.tex",
+  "place": "Lemma lemma-Ext-0-regular (Tag 0FZ3), proof of (1)"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -55,12 +130,43 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "chapter": "sec-picard-framework",
  "unit": "sk-thm-picard-duality",
  "created": {
   "item": "lem-sc-p1-ext-coherent-dim-one-vanishing",
   "by": "worker",
   "date": "2026-10-10"
+ },
+ "split_report": {
+  "date": "2026-10-11",
+  "item": "lem-sc-ext-support-cohomology-vanishing",
+  "worker": "stage1",
+  "summary": "Expanded Tag 0FZ3's support argument into the local Ext stalk calculation, the dimension estimate from chains of generalizations, the closed-support cohomology vanishing input, and the q>d empty-support case. Added one statement-only node for cohomology vanishing above the dimension of a closed support after Mathlib searches found no matching theorem.",
+  "blueprint": "Realizes the parenthetical Ext-vanishing proof in the blueprint ancestor thm-sc-p1-duality: the support dimension sentence and its cohomology vanishing clause.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-finite-type-module-support-closed",
+    "why": "The Ext sheaf is coherent, so its support is closed; this generic finite-type support theorem is the existing statement of that fact and no node in the Picard-duality unit supplies it."
+   },
+   {
+    "node": "lem-sc-zariski-module-abelian-cohomology-agree",
+    "why": "Generic comparison of O_X-module and abelian-sheaf Zariski cohomology, used as a black box to read the abelian-sheaf vanishing of lem-sc-support-dimension-cohomology-vanishing in the O_X-module cohomology of the statement (added by reviewer R-esv)."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sc-zariski-module-abelian-cohomology-agree",
+  "pqf-lem-coherent-ft-locnoeth",
+  "lem-weil-pbc-finite-type-module-support-closed",
+  "lem-sc-zariski-module-abelian-cohomology-agree"
+ ],
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-esv",
+  "group": "E1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-esv (reviewer sub-agent of L); spot-checked: Reviewer R-esv: statement true with the sheaf Ext of def-weil-pbc-sheaf-ext (the item does not cite def-sc-ext-sheaf); fixes: C1 step 3 coherence of SheafExt^q by the added statement node lem-sc-sheaf-ext-coherent (Stacks 0D0C); C4 step 3 cites lem-sc-zariski-module-abelian-cohomology-agree; step 2 reordered (closedness of the support before generic points); the two off-unit citations are generic tools (01XZ coherent = quasi-coherent finite type; module vs abelian cohomology) accepted by L, who reran the merge at 16:28 UTC after the route check refused the reviewer's own citation; 3 file(s) fixed by the reviewer; 1 statement node(s) added by the reviewer (FIX more, RETURN less)"
  }
 }

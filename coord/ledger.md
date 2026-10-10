@@ -1976,3 +1976,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 16:26 L: merged deliver/K1/lem-pc-degree-agrees-sc (reviewer FIX; first push; new nodes: 0)
 - 16:27 L: returned deliver/C1/lem-weil-pbc-field-tensor-irreducible (reviewer RETURN: 1. E2/C4: lem-weil-pbc-p-ring-map-homeomorphism: the statement is false. It drops hypothesis (b) of Algebra 0BRA (Ker(A-)
 - 16:28 L: returned deliver/C1/lem-weil-pbc-cohomology-over-object-localization (reviewer RETURN: 1. D1/D2: lem-weil-pbc-site-restriction-injectives: the new node restates the item's own clause 'Restriction G -> G|_W s)
+- 16:28 L: merged deliver/E1/lem-sc-ext-support-cohomology-vanishing (reviewer FIX+NODE(1); first push; new nodes: 2)
