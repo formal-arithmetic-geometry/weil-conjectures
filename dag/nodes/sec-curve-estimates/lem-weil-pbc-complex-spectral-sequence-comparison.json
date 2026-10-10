@@ -13,7 +13,7 @@
  },
  "kind": "statement",
  "title": "Comparison of uniformly bounded hypercohomology spectral sequences",
- "statement": "Let $I$ be a small directed set [def-weil-pbc-category-colimit]. For each $i\\in I$ let $(E_{r,i}^{p,q})_{r\\geq1}$ be a cohomological spectral sequence of abelian groups [def-sp-spectral-sequence], indexed with $p$ the cohomological degree and $q$ the filtration degree, with $d_1:E_{1,i}^{p,q}\\to E_{1,i}^{p,q+1}$. Let $(E_r^{p,q})_{r\\geq1}$ be another such spectral sequence. Give the first family transition morphisms of spectral sequences $u_{i'i}:E_{\\bullet,i}\\to E_{\\bullet,i'}$ for $i'\\geq i$, satisfying the identity and composition laws, and give compatible morphisms $v_i:E_{\\bullet,i}\\to E_\\bullet$. For every $n$, let $A_i^n$ and $A^n$ be abelian groups with decreasing filtrations $F^qA_i^n$ and $F^qA^n$ [def-sp-filtration]. Give filtered transition homomorphisms $a_{i'i}^n:A_i^n\\to A_{i'}^n$ satisfying the identity and composition laws, and filtered homomorphisms $b_i^n:A_i^n\\to A^n$ with $b_{i'}^n a_{i'i}^n=b_i^n$. Suppose that $u_{i'i}$ and $v_i$ induce $a_{i'i}^n$ and $b_i^n$ on abutments, and that for every $i,p,q$ the convergence isomorphisms $E_{\\infty,i}^{p,q}\\cong\\operatorname{gr}^q A_i^{p+q}$ and $E_\\infty^{p,q}\\cong\\operatorname{gr}^q A^{p+q}$ commute with these morphisms. Assume (i) $\\varinjlim_i E_{1,i}^{p,q}\\to E_1^{p,q}$ induced by $v_i$ is an isomorphism for every $(p,q)$; (ii) one integer $a$ works for all $i$ and for $E$: their $E_1^{p,q}$ vanish if $p<0$ or $q<a$; (iii) all pages stabilize in each bidegree to the displayed $E_\\infty$; and (iv) for every $n$, the filtrations have $F^qA_i^n=A_i^n$ and $F^qA^n=A^n$ for $q\\leq a$, and $F^qA_i^n=F^qA^n=0$ for $q>n$, compatibly for all $i$. Then the homomorphism $\\varinjlim_i A_i^n\\to A^n$ induced by the $b_i^n$ is an isomorphism for every $n$.",
+ "statement": "Let $I$ be a small directed set [def-weil-pbc-category-colimit]. For each $i\\in I$ let $(E_{r,i}^{p,q})_{r\\geq1}$ be a cohomological spectral sequence of abelian groups [def-sp-spectral-sequence], indexed with $p$ the cohomological degree and $q$ the filtration degree, with differentials $d_{r,i}:E_{r,i}^{p,q}\\to E_{r,i}^{p-r+1,q+r}$ for every $r\\geq1$. Let $(E_r^{p,q})_{r\\geq1}$ be another such spectral sequence, with differentials $d_r:E_r^{p,q}\\to E_r^{p-r+1,q+r}$ for every $r\\geq1$. Give the first family transition morphisms of spectral sequences $u_{i'i}:E_{\\bullet,i}\\to E_{\\bullet,i'}$ for $i'\\geq i$, satisfying the identity and composition laws, and give compatible morphisms $v_i:E_{\\bullet,i}\\to E_\\bullet$. For every $n$, let $A_i^n$ and $A^n$ be abelian groups with decreasing filtrations $F^qA_i^n$ and $F^qA^n$ [def-sp-filtration]. Give filtered transition homomorphisms $a_{i'i}^n:A_i^n\\to A_{i'}^n$ satisfying the identity and composition laws, and filtered homomorphisms $b_i^n:A_i^n\\to A^n$ with $b_{i'}^n a_{i'i}^n=b_i^n$. Suppose that $u_{i'i}$ and $v_i$ induce $a_{i'i}^n$ and $b_i^n$ on abutments, and that for every $i,p,q$ the convergence isomorphisms $E_{\\infty,i}^{p,q}\\cong\\operatorname{gr}^q A_i^{p+q}$ and $E_\\infty^{p,q}\\cong\\operatorname{gr}^q A^{p+q}$ commute with these morphisms. Assume (i) $\\varinjlim_i E_{1,i}^{p,q}\\to E_1^{p,q}$ induced by $v_i$ is an isomorphism for every $(p,q)$; (ii) one integer $a$ works for all $i$ and for $E$: their $E_1^{p,q}$ vanish if $p<0$ or $q<a$; (iii) all pages stabilize in each bidegree to the displayed $E_\\infty$; and (iv) for every $n$, the filtrations have $F^qA_i^n=A_i^n$ and $F^qA^n=A^n$ for $q\\leq a$, and $F^qA_i^n=F^qA^n=0$ for $q>n$, compatibly for all $i$. Then the homomorphism $\\varinjlim_i A_i^n\\to A^n$ induced by the $b_i^n$ is an isomorphism for every $n$.",
  "source": {
   "document": "literature/stacks-project/etale-cohomology.tex",
   "place": "Lemma Tag 0EZM (lemma-colimit-variant-complexes), proof, finite-term spectral-sequence comparison after Theorem 09YQ; Homology Definition Tag 0BDU and Lemma Tag 0BDV for boundedness"
@@ -23,9 +23,51 @@
   "def-sp-spectral-sequence",
   "def-sp-filtration"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "For each page r, take the filtered colimit of the page complexes and their differentials. Exactness of filtered colimits in Ab [lem-weil-pbc-filtered-colimit-abelian-groups-exact] identifies the colimit of kernels and images with the kernel and image of the colimit differential. Starting from the assumed E_1 isomorphism and inducting on r, the induced map from the colimit of E_{r,i}^{p,q} to E_r^{p,q} is therefore an isomorphism in every bidegree; the page-to-page homology identifications are those in the definition of a spectral sequence [def-sp-spectral-sequence].",
+   "uses": [
+    "lem-weil-pbc-filtered-colimit-abelian-groups-exact",
+    "def-sp-spectral-sequence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Lemma Tag 0EZM (lemma-colimit-variant-complexes), proof, passage from the E_1 page through successive pages"
+   }
+  },
+  {
+   "text": "The common vanishing region $p<0$ or $q<a$ is preserved on every page by the page-to-page homology identifications. Fix $(p,q)$ in the remaining region. By the bidegree assumed in the statement, the outgoing target of $d_r$ is $(p-r+1,q+r)$ and vanishes for $r>p+1$, while the incoming source is $(p+r-1,q-r)$ and vanishes for $r>q-a$. Thus $R(p,q)=\\max(p+1,q-a)+1$, independent of $i$, has $E_{R,i}^{p,q}=E_{\\infty,i}^{p,q}$ and $E_R^{p,q}=E_\\infty^{p,q}$ via the assumed stabilization. Step 1 at page $R$, followed by the assumed compatibility of the convergence isomorphisms with $u_{i'i}$ and $v_i$, gives $\\varinjlim_i \\operatorname{gr}^q A_i^{p+q}\\cong \\operatorname{gr}^q A^{p+q}$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Lemma Tag 0EZM (lemma-colimit-variant-complexes), proof, boundedness and finite-term spectral-sequence comparison"
+   }
+  },
+  {
+   "text": "Fix $n$. By the filtration bounds, $F^qA_i^n=A_i^n$ and $F^qA^n=A^n$ for $q\\leq a$, while $F^qA_i^n=F^qA^n=0$ for $q>n$; hence only the finite range $a\\leq q\\leq n$ occurs. For $q$ descending from $n$ to $a$, use the short exact sequences $0\\to F^{q+1}A_i^n\\to F^qA_i^n\\to \\operatorname{gr}^qA_i^n\\to0$ and their compatible maps to the corresponding sequence for $A^n$. Filtered-colimit exactness [lem-weil-pbc-filtered-colimit-abelian-groups-exact] preserves these sequences. The induction starts at $q>n$, where all terms vanish, and the graded isomorphism of Step 2 together with the five lemma [lem-weil-pbc-five-lemma] gives an isomorphism at each successive $q$. At $q\\leq a$ this identifies the canonical map $\\varinjlim_iA_i^n\\to A^n$ with an isomorphism. Since $n$ was arbitrary, the result holds for every $n$.",
+   "uses": [
+    "lem-weil-pbc-filtered-colimit-abelian-groups-exact",
+    "lem-weil-pbc-five-lemma"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Lemma Tag 0EZM (lemma-colimit-variant-complexes), proof, finite filtration induction on the abutment"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-filtered-colimit-abelian-groups-exact",
+  "def-sp-spectral-sequence",
+  "lem-weil-pbc-five-lemma"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Lemma Tag 0EZM (lemma-colimit-variant-complexes), proof, finite-term spectral-sequence comparison after Theorem Tag 09YQ"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -50,7 +92,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-weil-pbc-etale-cohomology-limit-complex-systems",
   "by": "worker",
@@ -65,5 +107,21 @@
   "slopmaster2": {
    "state": "none"
   }
+ },
+ "split_report": {
+  "date": "2026-10-11",
+  "item": "lem-weil-pbc-complex-spectral-sequence-comparison",
+  "worker": "stage1",
+  "summary": "Split the finite-term comparison in Stacks Tag 0EZM into pagewise colimit exactness, uniform stabilization in the vanishing region, and finite-filtration induction on the abutments. Corrected the statement to require the bidegree of every differential; an arbitrary later-page complex shape admits a counterexample. No new nodes were required; filtered-colimit exactness, the spectral-sequence definition, and the five lemma are cited.",
+  "blueprint": "Realizes the ancestor prop-weil-pbc-strict-henselization-stalk-formula proof sentence 'On a bounded-below K-injective representative the same argument gives the derived statement', via the finite spectral-sequence comparison input.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-css2",
+  "group": "F1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-css2 (reviewer sub-agent of L); spot-checked: Repaired re-push after the 16:18 return (308c7a98b): all five points repaired. (1) Statement now fixes d_{r,i},d_r:E_r^{p,q}->E_r^{p-r+1,q+r} for every r>=1 for both the E_{.,i} and E (total degree +1, agrees with old d_1), and the report names the change and its reason (E7) with the counterexample; the parent's stupid-filtration hypercohomology spectral sequences have this bidegree and F^qH^n=0 for q>n, F^q=all for q<=a, so the parent is unaffected. (2) Step 2 rewritten in the item's indexing: outgoing target (p-r+1,q+r) zero for r>p+1, incoming source (p+r-1,q-r) zero for r>q-a, R=max(p+1,q-a)+1 independent of i; checked. (3) thm-sp-spectral-object-yields removed from step 2 uses, proof_deps and tool_uses (now []); step 2 uses only hypotheses of the item (bidegree, vanishing region, stabilization, compatible convergence isos). (4) No literal backslash-n in steps 2,3. (5) citations.json line gone from the report. Source: Stacks etale-cohomology.tex Tag 0EZM (lemma-colimit-variant-complexes) proof. Cited statements read: lem-weil-pbc-filtered-colimit-abelian-groups-exact (filtered colimits in Ab exact; carries step 1 commuting colim with ker/im of d_r, and step 3 exactness of 0->F^{q+1}->F^q->gr^q->0 in the colimit), def-sp-spectral-sequence (page homology identifications and morphisms as compatible page maps; step 1 induction on r), lem-weil-pbc-five-lemma (step 3 descending induction from q>n where all vanish to q<=a where F^q is everything). Step 3 checked: only a<=q<=n occurs. Small cases: constant one-object system (identity), zero sequences, the returned counterexample now excluded by the bidegree. Only the item's node and report changed, one commit; only split-owned fields changed (proof, proof_deps, proof_origin, status, split_report, statement with E7). Start Sat Oct 10 04:29:16 PM UTC 2026, end Sat Oct 10 04:29:46 PM UTC 2026."
  }
 }

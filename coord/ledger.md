@@ -1984,3 +1984,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 16:29 L: merged deliver/J1/lem-sc-proj-standard-open-basis (reviewer PASS; first push; new nodes: 0)
 - 16:29 L: merged deliver/K1/lem-sc-global-generation-nonvanishing-cover (reviewer PASS; first push; new nodes: 0)
 - 16:29 L: lem-sc-ext-stalk-localization source tag 08DJ -> 0GM8/08E8/0A64 (reviewer R-es2)
+- 16:29 L: merged deliver/F1/lem-weil-pbc-complex-spectral-sequence-comparison (reviewer PASS; after a return; new nodes: 0)
