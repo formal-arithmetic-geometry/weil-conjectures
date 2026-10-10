@@ -240,15 +240,6 @@ theorem traceFunction_eq_zero_of_isZero (hF : IsZero F) (n : ℕ)
     exact (congrArg _ (Subsingleton.elim _ 0)).trans (map_zero _)
   exact key _ _ _
 
-/-- The trace function at an `𝔽_{qⁿ}`-rational point `y` over a closed point `x` is the trace
-of the `n / e_x`-th power of the local geometric Frobenius `Fₓ`, `e_x = [κ(x) : k₀]`. -/
-theorem traceFunction_eq_trace_frobeniusEnd_stalk_pow (n : ℕ)
-    (y : (X ↘ Spec (CommRingCat.of k₀)).fieldPoints (FiniteField.galoisExtension k₀ n))
-    (x : X.finitePoints) (hx : y.1.base (IsLocalRing.closedPoint _) = x.1) :
-    F.traceFunction n y = LinearMap.trace (PadicAlgCl l) _
-      ((F.stalk x).frobeniusEnd ^ (n / (X ↘ Spec (CommRingCat.of k₀)).degreeOver x.1)) :=
-  sorry
-
 /-- `F` is punctually `ι`-pure of weight `w`: at every closed point `x`, every eigenvalue `α`
 of the local Frobenius `Fₓ` satisfies `|ι α| = q_x ^ (w / 2)`, with `q_x` the residue
 cardinality at `x`. (blueprint: `def-weil-punctual-weights`) -/

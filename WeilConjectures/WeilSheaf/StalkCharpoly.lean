@@ -5,6 +5,7 @@ Authors: Claude
 -/
 module
 
+public import WeilConjectures.Mathlib.LinearAlgebra.Charpoly.ToMatrix
 public import WeilConjectures.WeilSheaf.StalkFrobenius
 
 /-!
@@ -623,5 +624,30 @@ theorem charpoly_frobeniusEnd_stalkAt_of_dvd
       ((Nat.mul_comm c m).symm ▸ hs' :)]
     obtain ⟨e⟩ := F.nonempty_equiv_stalkAt s s' hss' hx (c * m) hs'' _
     exact e.charpoly_frobeniusEnd
+
+/-- The trace function at an `𝔽_{qⁿ}`-rational point `y` over a closed point `x` is the trace
+of the `n / e_x`-th power of the local geometric Frobenius `Fₓ`, `e_x = [κ(x) : k₀]`: the
+geometric points over `x` and over `y` lie over the same point, `e_x ∣ n`, and the
+characteristic polynomial of the Frobenius does not depend on the geometric point
+(`AlgebraicGeometry.WeilSheaf.charpoly_frobeniusEnd_stalkAt_of_dvd`). -/
+theorem traceFunction_eq_trace_frobeniusEnd_stalk_pow (n : ℕ)
+    (y : (X ↘ Spec (CommRingCat.of k₀)).fieldPoints (FiniteField.galoisExtension k₀ n))
+    (x : X.finitePoints) (hx : y.1.base (IsLocalRing.closedPoint _) = x.1) :
+    F.traceFunction n y = LinearMap.trace (PadicAlgCl l) _
+      ((F.stalk x).frobeniusEnd ^ (n / (X ↘ Spec (CommRingCat.of k₀)).degreeOver x.1)) := by
+  have : Finite (FiniteField.galoisExtension k₀ n) := Module.finite_of_finite k₀
+  have hx₁ :=
+    (X ↘ Spec (CommRingCat.of k₀)).geometricFiberPointOfFinitePoint_comp_geometricFiberProj_base x
+  have hdvd := (X ↘ Spec (CommRingCat.of k₀)).degreeOver_dvd_of_fieldPoints n y
+  rw [hx] at hdvd
+  have h := F.charpoly_frobeniusEnd_stalkAt_of_dvd _ _
+    (hx₁.trans ((((X ↘ Spec (CommRingCat.of k₀)).geometricFiberPoint_comp_geometricFiberProj_base
+      IsAlgClosed.lift y.1 y.2).trans hx).symm)) (hx₁ ▸ x.2) hdvd
+    (Scheme.Hom.geometricFiberPointOfFinitePoint_comp_geometricGaloisFrobenius_pow
+      (X ↘ Spec (CommRingCat.of k₀)) x)
+    (Scheme.Hom.geometricFiberPoint_fieldPoints_comp_geometricGaloisFrobenius_pow
+      (X ↘ Spec (CommRingCat.of k₀)) n IsAlgClosed.lift y)
+  rw [traceFunction, stalk, LinearMap.trace_eq_neg_charpoly_nextCoeff,
+    LinearMap.trace_eq_neg_charpoly_nextCoeff, h]
 
 end AlgebraicGeometry.WeilSheaf

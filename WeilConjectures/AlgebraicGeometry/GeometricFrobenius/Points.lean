@@ -216,4 +216,47 @@ theorem exists_iso_comp_eq_comp_geometricGaloisFrobenius_pow [Finite k]
     ext y
     exact (FiniteField.map_geometricFrobeniusAlgEquivOfAlgebraic_pow_apply k _ γ.toRingHom m y)
 
+/-- The geometric point over a point `g : Spec K ⟶ X` with values in a field lies over the image
+point of `g`. -/
+theorem geometricFiberPoint_comp_geometricFiberProj_base {K : Type u} [Field K] [Algebra k K]
+    (ι : K →ₐ[k] AlgebraicClosure k) (g : Spec (.of K) ⟶ X)
+    (hg : g ≫ f = Spec.map (CommRingCat.ofHom (algebraMap k K))) :
+    (f.geometricFiberPoint ι g hg ≫ f.geometricFiberProj).base
+        (IsLocalRing.closedPoint (AlgebraicClosure k)) =
+      g.base (IsLocalRing.closedPoint K) := by
+  rw [geometricFiberPoint_comp_geometricFiberProj]
+  exact congrArg g.base (Subsingleton.elim _ _)
+
+/-- The geometric point over a point `x` with finite residue field lies over `x`. -/
+theorem geometricFiberPointOfFinitePoint_comp_geometricFiberProj_base (x : X.finitePoints) :
+    (f.geometricFiberPointOfFinitePoint x ≫ f.geometricFiberProj).base
+        (IsLocalRing.closedPoint (AlgebraicClosure k)) = x.1 :=
+  let := (f.residueFieldAlgebraMap x.1).toAlgebra
+  have : Finite (X.residueField x.1) := X.mem_finitePoints.1 x.2
+  have : Module.Finite k (X.residueField x.1) := Module.Finite.of_finite
+  (geometricFiberPoint_comp_geometricFiberProj_base (K := X.residueField x.1) f IsAlgClosed.lift _
+    (f.specMap_residueFieldAlgebraMap x.1).symm).trans (X.fromSpecResidueField_apply x.1 _)
+
+/-- A point of `X` with values in a finite field with `#k ^ n` elements, `n ≥ 1`, lies over a
+point whose degree divides `n`: its residue field embeds into the finite field. -/
+theorem degreeOver_dvd_of_fieldPoints [Finite k] (n : ℕ)
+    (y : f.fieldPoints (FiniteField.galoisExtension k n)) :
+    f.degreeOver (y.1.base (IsLocalRing.closedPoint _)) ∣ n := by
+  rcases eq_or_ne n 0 with rfl | hn
+  · exact dvd_zero _
+  have : Finite (FiniteField.galoisExtension k n) := Module.finite_of_finite k
+  set x := y.1.base (IsLocalRing.closedPoint _)
+  let := (f.residueFieldAlgebraMap x).toAlgebra
+  obtain ⟨ι, hι⟩ := Scheme.exists_eq_spec_map_comp_fromSpecResidueField y.1 x rfl
+  have h : ι.hom.comp (f.residueFieldAlgebraMap x) =
+      algebraMap k (FiniteField.galoisExtension k n) := by
+    have h₀ := y.2
+    rw [hι, Category.assoc, ← f.specMap_residueFieldAlgebraMap, ← Spec.map_comp] at h₀
+    exact congrArg CommRingCat.Hom.hom (Spec.map_inj.1 h₀)
+  have : Nonempty (X.residueField x →ₐ[k] FiniteField.galoisExtension k n) :=
+    ⟨{ toRingHom := ι.hom, commutes' := fun c ↦ RingHom.congr_fun h c }⟩
+  rw [FiniteField.nonempty_algHom_iff_finrank_dvd, FiniteField.finrank_galoisExtension k n hn]
+    at this
+  exact this
+
 end AlgebraicGeometry.Scheme.Hom
