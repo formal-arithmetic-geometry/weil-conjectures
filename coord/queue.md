@@ -1,8 +1,8 @@
 # Work queue
 
-887 items; claim with `tools/claim.py next <group> [--stage N]`.
+891 items; claim with `tools/claim.py next <group> [--stage N]`.
 
-## Stage 1: nodes to split (116)
+## Stage 1: nodes to split (113)
 
 | node | distance to a target | Lean state on the done branch |
 |---|---|---|
@@ -21,7 +21,6 @@
 | `lem-pc-tor-independent-perfect-tensor-base-change` | 3020 | none |
 | `lem-sc-affine-perfect-derived-tensor-hom` | 3020 | none |
 | `lem-sc-affine-perfect-open-represent-cohomology` | 3020 | none |
-| `lem-sc-affine-support-iterated-cones` | 3020 | none |
 | `lem-sc-perfect-into-support-on-T` | 3020 | none |
 | `lem-sc-affine-perfect-plus-locally-free` | 3021 | none |
 | `lem-pc-perfect-summand` | 3022 | none |
@@ -31,10 +30,11 @@
 | `lem-pc-vanishing-above-dim` | 4009 | rests_on_sorry |
 | `lem-sc-finite-flat-surj-points` | 4009 | none |
 | `lem-sc-effective-cartier-affine-dimension-drop` | 4012 | none |
-| `lem-sc-etale-local-ring-faithfully-flat-descent` | 4012 | none |
 | `lem-sc-etale-triple-to-sh-completion-flat` | 4012 | none |
-| `lem-sc-ass-weakass-locally-noetherian` | 5012 | none |
+| `lem-sc-etale-at-prime-flat-unramified-criterion` | 4013 | none |
+| `lem-sc-etale-local-ring-stalk-faithfully-flat` | 4013 | none |
 | `lem-sc-meromorphic-weakass-generic-product` | 5012 | none |
+| `lem-sc-ass-weakass-fg-stalk` | 5013 | none |
 | `lem-sc-components-open-injection` | 5013 | none |
 | `lem-pc-rf-single-complex-inherited-tensor-condition` | 5014 | none |
 | `lem-pc-rf-single-complex-qcqs-induction` | 5014 | none |
@@ -57,7 +57,6 @@
 | `lem-sc-proper-or-affine` | - | none |
 | `lem-sc-units-quotient-base-change` | - | none |
 | `lem-weil-pbc-generic-separable-algebra-splitting` | - | none |
-| `lem-weil-pbc-pullback-finite-locally-constant` | - | none |
 | `lem-weil-pbc-spread-finite-separable-extension` | - | none |
 | `lem-weil-pbc-spread-purely-inseparable-factors` | - | none |
 | `lem-weil-separably-closed-geometrically-connected` | - | none |
@@ -72,8 +71,6 @@
 | `pqf-lem-qf-locqf-qc` | - | none |
 | `sbc-lem-higher-direct-image-limit` | - | none |
 | `def-pc-derived-direct-image` | - | none |
-| `def-pc-fppf-site` | - | none |
-| `def-pc-subfunctor` | - | none |
 | `lem-fin-etale-normal-components` | - | none |
 | `lem-kun-closed-point-field` | - | none |
 | `lem-kun-cp-approximation` | - | none |
@@ -123,7 +120,7 @@
 | `lem-zl-noether-normalization-dimension` | - | none |
 | `lem-pur-rhom-global-sections` | - | none |
 
-## Stage 2: nodes to state (771)
+## Stage 2: nodes to state (778)
 
 | node | distance to Mathlib | kind |
 |---|---|---|
@@ -139,11 +136,13 @@
 | `def-nagata-rees-algebra` | 1 | state |
 | `def-nagata-relative-affine-space` | 1 | state |
 | `def-pc-compact-object` | 1 | state |
+| `def-pc-cover` | 1 | state |
 | `def-pc-dimension` | 1 | state |
 | `def-pc-divisor-line-bundle` | 1 | state |
 | `def-pc-field-tower` | 1 | state |
 | `def-pc-generators` | 1 | state |
 | `def-pc-kflat-complex` | 1 | state |
+| `def-pc-open-subfunctor` | 1 | state |
 | `def-pc-projective-morphism` | 1 | state |
 | `def-pc-representable-functor` | 1 | state |
 | `def-pc-standard-graded-algebra` | 1 | state |
@@ -233,6 +232,9 @@
 | `lem-pc-field-extension-fpqc-cover` | 1 | state |
 | `lem-pc-flat-pullback-effective-cartier-ideal` | 1 | state |
 | `lem-pc-flat-tensor-complex-cohom` | 1 | state |
+| `lem-pc-fppf-affine-refinement` | 1 | state |
+| `lem-pc-fppf-affine-sheafification-restriction` | 1 | state |
+| `lem-pc-fppf-affine-site-topos-equivalence` | 1 | state |
 | `lem-pc-fpqc-descend-closed-immersion` | 1 | state |
 | `lem-pc-h0-geom-connected` | 1 | state |
 | `lem-pc-homotopy-limit-map` | 1 | state |
@@ -247,6 +249,7 @@
 | `lem-pc-linear-pair-graded-finite` | 1 | state |
 | `lem-pc-linear-pair-morphism-finite` | 1 | state |
 | `lem-pc-monomial-cech-complex-homology` | 1 | state |
+| `lem-pc-pic-exact` | 1 | state |
 | `lem-pc-pic-of-field` | 1 | state |
 | `lem-pc-polynomial-quotient-distinct-linear-crt` | 1 | state |
 | `lem-pc-pre-derived-adjoint-functors-general` | 1 | state |
@@ -302,6 +305,7 @@
 | `lem-sc-etale-coproduct-etale` | 1 | state |
 | `lem-sc-etale-fibre-product-coproduct` | 1 | state |
 | `lem-sc-etale-local-dimension` | 1 | state |
+| `lem-sc-etale-local-ring-faithfully-flat-descent` | 1 | state |
 | `lem-sc-etale-polynomial-diagonal-kernel-clearance` | 1 | state |
 | `lem-sc-exact-functor-higher-derived-vanishing` | 1 | state |
 | `lem-sc-ext-torsor` | 1 | state |
@@ -899,7 +903,7 @@
 | `lem-weil-pbc-projective-space-zero-isomorphism` | 4 | state |
 | `def-nagata-fixed-base-separated-stage` | 6 | state |
 
-Not open yet: 1592 nodes that wait for a statement dependency, 156 nodes that wait for stage 1.
+Not open yet: 1589 nodes that wait for a statement dependency, 153 nodes that wait for stage 1.
 
 ## Stage 3: modules to prove (0)
 
