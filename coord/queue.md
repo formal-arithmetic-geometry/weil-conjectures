@@ -1,8 +1,8 @@
 # Work queue
 
-913 items; claim with `tools/claim.py next <group> [--stage N]`.
+918 items; claim with `tools/claim.py next <group> [--stage N]`.
 
-## Stage 1: nodes to split (339)
+## Stage 1: nodes to split (340)
 
 | node | distance to a target | Lean state on the done branch |
 |---|---|---|
@@ -13,13 +13,14 @@
 | `lem-weil-pbc-field-tensor-irreducible` | 2005 | none |
 | `lem-weil-pbc-sets-affine-etale-inverse-image-comparison` | 2010 | none |
 | `lem-sc-affine-cap-section-open-dictionary` | 2012 | none |
-| `lem-sc-ample-finite-set-affine` | 2012 | none |
 | `lem-sc-find-globally-generated` | 2012 | none |
 | `lem-sc-noetherian-topological-cohomology-vanishing` | 2012 | none |
+| `lem-sc-ample-proj-open` | 2013 | none |
 | `lem-sc-boundary-cech-local-lifts` | 2013 | none |
 | `lem-sc-cech-h1-map-natural` | 2013 | none |
 | `lem-sc-closed-pushforward-boundary-naturality` | 2013 | none |
 | `lem-sc-finite-sections-cover-qc` | 2013 | none |
+| `lem-sc-proj-standard-open-basis` | 2013 | none |
 | `lem-sc-tensor-globally-generated` | 2013 | none |
 | `lem-sc-topological-leray-spectral-sequence` | 2013 | none |
 | `lem-sc-torsor-h1-boundary-representative` | 2013 | none |
@@ -38,22 +39,20 @@
 | `lem-weil-pbc-cohomology-over-object-localization` | 3009 | none |
 | `lem-weil-pbc-etale-cohomology-invariance-under-site-equivalence` | 3009 | none |
 | `lem-weil-pbc-etale-site-localization-open` | 3009 | none |
-| `lem-exc-etale-coproduct-etale` | 3010 | none |
 | `lem-exc-etale-field-galois-classification` | 3010 | none |
 | `lem-sc-finite-type-nonclosed-closure-closed-points` | 3011 | none |
 | `lem-sc-point-tangent-closed-fibre-singleton` | 3011 | none |
 | `lem-sc-point-tangent-cotangent-surjective` | 3011 | none |
 | `lem-sc-point-tangent-finite-local-cotangent-surjective` | 3011 | none |
 | `thm-sc-proper-finite-fibre-finite-neighbourhood` | 3011 | none |
-| `lem-pc-clopen-smooth-proper-curve` | 3012 | none |
-| `lem-pc-fpqc-descend-closed-immersion` | 3012 | none |
 | `lem-pc-global-sections-separable` | 3012 | none |
-| `lem-pc-principal-open-dense-of-nonzerodivisor` | 3012 | none |
 | `lem-pc-separable-tensor-algebraic-closure` | 3012 | none |
 | `lem-weil-pbc-ringed-site-free-cech-complex-exact` | 3012 | none |
 | `lem-weil-pbc-ringed-site-injective-module-injective-presheaf` | 3012 | none |
 | `def-sc-sheaf-cohomology-functor` | 3013 | none |
+| `lem-pc-affine-surjective-structure-map-closed-immersion` | 3013 | none |
 | `lem-pc-grothendieck-ss-double-complex-model` | 3013 | none |
+| `lem-pc-local-flat-faithful-flat-reflects-surjective` | 3013 | none |
 | `lem-sc-affine-finite-module-free-locus` | 3013 | none |
 | `lem-sc-cech-comparison-natural` | 3013 | none |
 | `lem-sc-ext-derived-composite-natural` | 3013 | none |
@@ -66,7 +65,6 @@
 | `lem-sc-p1-ext-yoneda-associativity` | 3013 | none |
 | `lem-sc-p1-ext-yoneda-functoriality` | 3013 | none |
 | `lem-sc-p1-regular-dimension-one` | 3013 | none |
-| `lem-sc-product-irreducible-components-bijection` | 3013 | none |
 | `lem-sc-regular-local-ext-vanishing` | 3013 | none |
 | `def-pc-upper-shriek-right-adjoint` | 3014 | none |
 | `lem-pc-field-extension-flat` | 3014 | none |
@@ -74,14 +72,17 @@
 | `lem-pc-field-extension-surjective` | 3014 | none |
 | `lem-pc-noetherian-derived-direct-image-right-adjoint` | 3014 | none |
 | `lem-pc-proper-derived-direct-image-composition` | 3014 | none |
-| `lem-sc-p1-serre-section-module-comparison` | 3014 | none |
+| `lem-sc-open-map-irreducible-fibres-components` | 3014 | none |
+| `lem-sc-scheme-over-field-universally-open` | 3014 | none |
 | `lem-sc-smooth-proper-relative-dualizing-general` | 3014 | none |
 | `lem-sc-p1-graded-degree-component-exact` | 3015 | none |
 | `lem-sc-p1-graded-nakayama-generation` | 3015 | none |
 | `lem-sc-p1-graded-submodule-finite` | 3015 | none |
+| `lem-sc-p1-invertible-section-localization` | 3015 | none |
 | `lem-sc-p1-linear-syzygy` | 3015 | none |
 | `lem-sc-p1-minimal-presentation-tor` | 3015 | none |
 | `lem-sc-p1-tor-dimension-shift-natural` | 3015 | none |
+| `lem-sc-p1-twist-multiplication` | 3015 | none |
 | `lem-sc-brauer-zero` | 4005 | rests_on_sorry |
 | `lem-pc-genus-agrees-sc` | 4007 | rests_on_sorry |
 | `prop-pc-xk-integral` | 4007 | rests_on_sorry |
@@ -346,7 +347,7 @@
 | `lem-pur-rhom-well-defined` | - | none |
 | `lem-zl-noether-normalization-dimension` | - | none |
 
-## Stage 2: nodes to state (574)
+## Stage 2: nodes to state (578)
 
 | node | distance to Mathlib | kind |
 |---|---|---|
@@ -395,6 +396,7 @@
 | `def-weil-pbc-torsion-etale-sheaf` | 1 | state |
 | `etale-proposition-etale-reduced` | 1 | state |
 | `lem-exc-coinduced-functions-open-stabilizer` | 1 | state |
+| `lem-exc-etale-coproduct-etale` | 1 | state |
 | `lem-exc-etale-field-gsets` | 1 | state |
 | `lem-galois-aut-profinite` | 1 | state |
 | `lem-galois-coproduct-copies-morphisms-clopen` | 1 | state |
@@ -412,12 +414,14 @@
 | `lem-pc-cech-exact` | 1 | state |
 | `lem-pc-field-extension-fpqc-cover` | 1 | state |
 | `lem-pc-flat-pullback-effective-cartier-ideal` | 1 | state |
+| `lem-pc-fpqc-descend-closed-immersion` | 1 | state |
 | `lem-pc-h0-geom-connected` | 1 | state |
 | `lem-pc-integral-radicial-surjective-universal-homeomorphism` | 1 | state |
 | `lem-pc-linear-pair-graded-finite` | 1 | state |
 | `lem-pc-linear-pair-morphism-finite` | 1 | state |
 | `lem-pc-presheaf-change-of-rings-adjunction` | 1 | state |
 | `lem-pc-presheaf-module-inverse-image-adjunction` | 1 | state |
+| `lem-pc-principal-open-dense-of-nonzerodivisor` | 1 | state |
 | `lem-pc-projective-curve-linear-pair` | 1 | state |
 | `lem-pc-scheme-connected-iff-idempotents` | 1 | state |
 | `lem-pc-scheme-dimension-local-rings` | 1 | state |
@@ -448,6 +452,7 @@
 | `lem-sc-pic-proper-ntorsion` | 1 | state |
 | `lem-sc-point-z-cohomology` | 1 | state |
 | `lem-sc-principal-ideal-dvr` | 1 | state |
+| `lem-sc-product-irreducible-components-bijection` | 1 | state |
 | `lem-sc-reduced-ideals-zero-intersection` | 1 | state |
 | `lem-sc-regular-connected-integral` | 1 | state |
 | `lem-sc-regular-local-domain` | 1 | state |
@@ -925,7 +930,7 @@
 | `lem-weil-pbc-p1-field-dimension-one` | 4 | state |
 | `lem-weil-pbc-projective-space-zero-isomorphism` | 4 | state |
 
-Not open yet: 357 nodes that wait for stage 1, 1144 nodes that wait for a statement dependency.
+Not open yet: 358 nodes that wait for stage 1, 1147 nodes that wait for a statement dependency.
 
 ## Stage 3: modules to prove (0)
 
