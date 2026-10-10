@@ -1,0 +1,75 @@
+{
+ "id": "lem-weil-pbc-smooth-ring-map-locally-standard-smooth",
+ "kind": "statement",
+ "title": "A smooth ring map is standard smooth after inverting an element outside a given prime",
+ "statement": "Let $R\\to A$ be a smooth ring map [def-weil-pbc-smooth-ring-map] and $\\mathfrak q\\subset A$ a prime ideal. Then there is $g\\in A$ with $g\\notin\\mathfrak q$ such that the localization $A_g$ of $A$ at $\\{1,g,g^2,\\dots\\}$, viewed as an $R$-algebra via $R\\to A\\to A_g$, is standard smooth [def-weil-pbc-standard-smooth-algebra].",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Algebra, Lemma 00TA (label lemma-smooth-syntomic, line 37438): Spec(A) is covered by standard opens D(g) with A_g standard smooth over R; the open D(g) of this covering that contains q gives the statement"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-smooth-ring-map",
+  "def-weil-pbc-standard-smooth-algebra"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "smooth algebra is standard smooth after localizing at an element not in a given prime",
+   "results": "Algebra.IsSmoothAt.exists_notMem_isStandardSmooth, Algebra.Smooth.exists_span_eq_top_isStandardSmooth (Mathlib.RingTheory.Smooth.StandardSmoothOfFree); RingHom.isStandardSmooth_holdsForLocalizationAway; RingHom.smooth_iff_locally_isStandardSmooth (Mathlib.RingTheory.RingHom.LocallyStandardSmooth)",
+   "date": "2026-10-10",
+   "verdict": "match: Algebra.IsSmoothAt.exists_notMem_isStandardSmooth"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "If R → S is a smooth ring map and p is a prime of S, there is f not in p such that S_f is standard smooth over R",
+   "results": "Algebra.IsSmoothAt.exists_notMem_isStandardSmooth (Mathlib.RingTheory.Smooth.StandardSmoothOfFree), Algebra.IsSmoothAt.exists_notMem_smooth (Mathlib.RingTheory.Smooth.Locus), Algebra.IsStandardSmooth.localization_away",
+   "date": "2026-10-10",
+   "verdict": "match: Algebra.IsSmoothAt.exists_notMem_isStandardSmooth"
+  },
+  {
+   "tool": "loogle",
+   "query": "Algebra.IsSmoothAt.exists_notMem_isStandardSmooth",
+   "results": "Algebra.IsSmoothAt.exists_notMem_isStandardSmooth (R) [FinitePresentation R S] (p : Ideal S) [p.IsPrime] [IsSmoothAt R p] : ∃ f ∉ p, IsStandardSmooth R (Localization.Away f) (Mathlib.RingTheory.Smooth.StandardSmoothOfFree)",
+   "date": "2026-10-10",
+   "verdict": "match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rn 'exists_notMem_isStandardSmooth\\|smoothLocus_eq_univ\\|class Smooth' Mathlib/RingTheory/Smooth/",
+   "results": "StandardSmoothOfFree.lean:104 IsSmoothAt.exists_notMem_isStandardSmooth; StandardSmoothOfFree.lean:155 Smooth.exists_span_eq_top_isStandardSmooth (covering form = Stacks 00TA, proved from the pointwise one); Locus.lean:107 smoothLocus_eq_univ [Smooth R A]; Basic.lean:540 class Smooth with field finitePresentation",
+   "date": "2026-10-10",
+   "verdict": "match (source read)"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "Algebra.IsSmoothAt.exists_notMem_isStandardSmooth",
+  "file": "Mathlib/RingTheory/Smooth/StandardSmoothOfFree.lean",
+  "how": "specializes in one line: for [Algebra.Smooth R A] (= def-weil-pbc-smooth-ring-map, Basic.lean:540) the instance FinitePresentation R A is the field Smooth.finitePresentation, and IsSmoothAt R q holds because q ∈ smoothLocus R A = Set.univ (Algebra.smoothLocus_eq_univ, Locus.lean:107); the conclusion ∃ f ∉ q, IsStandardSmooth R (Localization.Away f) is the statement, IsStandardSmooth being def-weil-pbc-standard-smooth-algebra (StandardSmooth.lean:62); exactly this specialization is the first line of Smooth.exists_span_eq_top_isStandardSmooth (StandardSmoothOfFree.lean:157)",
+  "line": 104
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-smooth-locally-standard-smooth",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lead_note": "L 2026-10-10: match verified (StandardSmoothOfFree.lean:104 with smoothLocus_eq_univ Locus.lean:107)."
+}

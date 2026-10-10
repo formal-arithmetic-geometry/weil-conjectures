@@ -13,9 +13,97 @@
   "def-weil-affine-spectrum",
   "def-weil-pbc-standard-smooth-algebra"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "(Affine opens $V\\ni f(x)$ and $W'\\ni x$ with $f(W')\\subseteq V$.) Since $S$ and $X$ are schemes [def-pc-scheme], $f(x)$ has an affine open neighbourhood $V\\subseteq S$ and $x$ has an affine open neighbourhood $U\\subseteq X$; $V$ may be any affine open neighbourhood of $f(x)$, as in the source. The set $O=U\\cap f^{-1}(V)$ is open ($f$ is continuous) and contains $x$. Let $B=\\mathcal O_X(U)$ and $\\mathfrak p_x\\subset B$ the prime of $x$ under $U\\cong\\operatorname{Spec}B$ [lem-weil-pbc-affine-open-spec-points], [def-weil-affine-spectrum]. The image of $O$ in $\\operatorname{Spec}B$ is open and contains $\\mathfrak p_x$, so its complement is $V(I)=\\{\\mathfrak p\\supseteq I\\}$ for an ideal $I\\subseteq B$ (definition of the Zariski topology) with $I\\not\\subseteq\\mathfrak p_x$; choose $h\\in I$, $h\\notin\\mathfrak p_x$. Every prime $\\mathfrak p$ with $h\\notin\\mathfrak p$ does not contain $I$, so lies in the image of $O$. By [lem-weil-pbc-affine-open-section-vanishing-prime](a) the open $D(h)\\subseteq U$ corresponds to $\\{\\mathfrak p:h\\notin\\mathfrak p\\}$, hence $x\\in D(h)\\subseteq O$, and by (b) of that lemma $W'=D(h)$ is an affine open of $X$. Thus $x\\in W'$ and $f(W')\\subseteq V$.",
+   "uses": [
+    "def-pc-scheme",
+    "lem-weil-pbc-affine-open-spec-points",
+    "def-weil-affine-spectrum",
+    "lem-weil-pbc-affine-open-section-vanishing-prime"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Morphisms, Lemma 01V7 (lemma-smooth-locally-standard-smooth, line 7191): V an affine open neighbourhood of f(x), U affine open with x in U and f(U) in V; affine opens of a scheme form a basis (Schemes, Lemma 01HR region / standard opens of affine schemes, as in Lemma 01I3 lemma-standard-open-affine)"
+   }
+  },
+  {
+   "text": "($R\\to A'$ is a smooth ring map.) Let $R=\\mathcal O_S(V)$, $A'=\\mathcal O_X(W')$, and $\\varphi':R\\to A'$ the ring map induced by $f$ ($f^\\sharp_V$ followed by the restriction $\\mathcal O_X(f^{-1}(V))\\to\\mathcal O_X(W')$). Let $j_{W'}:W'\\to X$, $j_V:V\\to S$ be the inclusions; by [lem-weil-pbc-morphism-factors-through-open-subscheme] there is a unique $f_{W',V}:W'\\to V$ with $j_V\\circ f_{W',V}=f\\circ j_{W'}$, and it is smooth by [lem-weil-pbc-smooth-restrict-open-subschemes](a) since $f$ is smooth [def-sbc-smooth-morphisms]. Let $\\iota_{W'}=j_{W'}\\circ\\alpha:\\operatorname{Spec}A'\\to X$ and $\\iota_V=j_V\\circ\\beta:\\operatorname{Spec}R\\to S$ be the canonical open immersions of [lem-weil-pbc-affine-open-spec-points] ($\\alpha:\\operatorname{Spec}A'\\to W'$, $\\beta:\\operatorname{Spec}R\\to V$ the isomorphisms inverse to $W'\\cong\\operatorname{Spec}A'$, $V\\cong\\operatorname{Spec}R$). By [lem-weil-pbc-affine-opens-induced-ring-map-spec-square], $\\iota_V\\circ\\operatorname{Spec}\\varphi'=f\\circ\\iota_{W'}$, i.e. $j_V\\circ(\\beta\\circ\\operatorname{Spec}\\varphi')=j_V\\circ(f_{W',V}\\circ\\alpha)$, so $\\beta\\circ\\operatorname{Spec}\\varphi'=f_{W',V}\\circ\\alpha$ by the uniqueness in [lem-weil-pbc-morphism-factors-through-open-subscheme]. By [lem-weil-pbc-smooth-restrict-open-subschemes](c) with the isomorphisms $u=\\alpha$, $v=\\beta$, $\\operatorname{Spec}\\varphi':\\operatorname{Spec}A'\\to\\operatorname{Spec}R$ is smooth [def-sbc-smooth-morphisms], and by [lem-weil-pbc-smooth-ring-map-iff-smooth-affine] $\\varphi'$ is a smooth ring map [def-weil-pbc-smooth-ring-map].",
+   "uses": [
+    "lem-weil-pbc-morphism-factors-through-open-subscheme",
+    "lem-weil-pbc-smooth-restrict-open-subschemes",
+    "def-sbc-smooth-morphisms",
+    "lem-weil-pbc-affine-open-spec-points",
+    "def-weil-affine-spectrum",
+    "lem-weil-pbc-affine-opens-induced-ring-map-spec-square",
+    "lem-weil-pbc-smooth-ring-map-iff-smooth-affine",
+    "def-weil-pbc-smooth-ring-map"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Morphisms, Definition 01V5 (definition-smooth) and Lemma 01V6 (lemma-smooth-characterize, line 7048), (1) => (2); the definition of [def-sbc-smooth-morphisms] is that of 01V5 by More on Morphisms, Lemma 02H6 (lemma-smooth-formally-smooth), carried by lem-weil-pbc-smooth-ring-map-iff-smooth-affine"
+   }
+  },
+  {
+   "text": "(A principal localization of $A'$ at $x$ is standard smooth.) Let $\\mathfrak q\\subset A'$ be the prime of $x$ under $W'\\cong\\operatorname{Spec}A'$ [lem-weil-pbc-affine-open-spec-points]. By step 2 and [lem-weil-pbc-smooth-ring-map-locally-standard-smooth] there is $g\\in A'$, $g\\notin\\mathfrak q$, such that $A'_g$ with $R\\to A'\\to A'_g$ is a standard smooth $R$-algebra [def-weil-pbc-standard-smooth-algebra]: there are $n\\ge c\\ge0$, $f_1,\\dots,f_c\\in R[x_1,\\dots,x_n]$ and an $R$-algebra isomorphism $\\gamma:R[x_1,\\dots,x_n]/(f_1,\\dots,f_c)\\to A'_g$ under which $\\det(\\partial f_j/\\partial x_i)_{1\\le i,j\\le c}$ maps to a unit.",
+   "uses": [
+    "lem-weil-pbc-affine-open-spec-points",
+    "lem-weil-pbc-smooth-ring-map-locally-standard-smooth",
+    "def-weil-pbc-standard-smooth-algebra"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra, Lemma 00TA (lemma-smooth-syntomic, line 37438), cited in the proof of Morphisms Lemma 01V7"
+   }
+  },
+  {
+   "text": "(The affine open $W=D(g)$.) Let $W=D(g)\\subseteq W'$ be the basic open of $g\\in\\mathcal O_X(W')$ [lem-weil-pbc-basic-open-function]. By [lem-weil-pbc-affine-open-section-vanishing-prime](a) applied to the affine open $W'$, $x\\in D(g)$ because $g\\notin\\mathfrak q$; by (b), $W$ is an affine open of $X$ and the restriction $\\rho:A'=\\mathcal O_X(W')\\to A=\\mathcal O_X(W)$ is a localization of $A'$ at $\\{1,g,g^2,\\dots\\}$, so (universal property of localization) there is a unique ring isomorphism $\\lambda:A'_g\\to A$ with $\\lambda(a/1)=\\rho(a)$ for $a\\in A'$. Moreover $x\\in W$ and $f(W)\\subseteq f(W')\\subseteq V$.",
+   "uses": [
+    "lem-weil-pbc-basic-open-function",
+    "lem-weil-pbc-affine-open-section-vanishing-prime"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Schemes, Lemma 01I3 (lemma-standard-open-affine) and Section 01HR (affine schemes: D(g) of Spec A' is Spec A'_g), as used in 'follows from the definitions' in the proof of Morphisms Lemma 01V7"
+   }
+  },
+  {
+   "text": "(Conclusion.) The ring map $\\varphi:R\\to A$ of the statement is $f^\\sharp_V$ followed by the restriction $\\mathcal O_X(f^{-1}(V))\\to\\mathcal O_X(W)$; since $W\\subseteq W'\\subseteq f^{-1}(V)$ and restrictions of the presheaf $\\mathcal O_X$ compose [def-pc-scheme], this restriction is the restriction to $W'$ followed by $\\rho$, so $\\varphi=\\rho\\circ\\varphi'$. Hence $\\lambda$ is an isomorphism of $R$-algebras from $A'_g$ (via $R\\to A'\\to A'_g$) to $A$ (via $\\varphi$): $\\lambda(\\varphi'(r)/1)=\\rho(\\varphi'(r))=\\varphi(r)$. Then $\\lambda\\circ\\gamma:R[x_1,\\dots,x_n]/(f_1,\\dots,f_c)\\to A$ is an $R$-algebra isomorphism under which the determinant maps to the image under the ring isomorphism $\\lambda$ of a unit of $A'_g$, a unit of $A$; this is a standard smooth presentation of $A$ over $R$ [def-weil-pbc-standard-smooth-algebra]. So $V$, $W$ are as required.",
+   "uses": [
+    "def-pc-scheme",
+    "def-weil-pbc-standard-smooth-algebra"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Morphisms, Lemma 01V7 (lemma-smooth-locally-standard-smooth, line 7191), proof ('Follows from the definitions')"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-scheme",
+  "lem-weil-pbc-affine-open-spec-points",
+  "def-weil-affine-spectrum",
+  "lem-weil-pbc-affine-open-section-vanishing-prime",
+  "lem-weil-pbc-morphism-factors-through-open-subscheme",
+  "lem-weil-pbc-smooth-restrict-open-subschemes",
+  "def-sbc-smooth-morphisms",
+  "lem-weil-pbc-affine-opens-induced-ring-map-spec-square",
+  "lem-weil-pbc-smooth-ring-map-iff-smooth-affine",
+  "def-weil-pbc-smooth-ring-map",
+  "lem-weil-pbc-smooth-ring-map-locally-standard-smooth",
+  "def-weil-pbc-standard-smooth-algebra",
+  "lem-weil-pbc-basic-open-function"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/morphisms.tex",
+  "place": "Morphisms, Lemma 01V7 (lemma-smooth-locally-standard-smooth, line 7191) and its proof, with Algebra Lemma 00TA (lemma-smooth-syntomic, line 37438) and Morphisms Lemma 01V6 (lemma-smooth-characterize, line 7048); the bridge from def-sbc-smooth-morphisms to Definition 01V5 is More on Morphisms Lemma 02H6"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -47,7 +135,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "worker",
@@ -67,5 +155,17 @@
   }
  },
  "chapter": "sec-proper-base-change",
- "unit": "sk-thm-p1"
+ "unit": "sk-thm-p1",
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "lem-weil-pbc-smooth-locally-standard-smooth",
+  "worker": "stage1",
+  "summary": "Statement and stmt_deps kept (they agree with Stacks 01V7 (2) for f smooth; the proof shows, as 01V7 does, that V may be any affine open neighbourhood of f(x)). Proof written in 5 steps following 01V7 ('follows from the definitions and Algebra 00T7, 00TA'): affine V and affine W' = D(h) around x inside U ∩ f^{-1}(V); the ring map R -> A' = O(W') is smooth by restriction to open subschemes, the Spec-square of the induced ring map and lem-weil-pbc-smooth-ring-map-iff-smooth-affine (which carries Stacks 01V6/02H6, bridging the formally-smooth definition of def-sbc-smooth-morphisms), the same route as lem-weil-pbc-smooth-zero-differentials-affine-open-etale steps 1-3; the ring-level Algebra 00TA (pointwise form) is the new Mathlib leaf lem-weil-pbc-smooth-ring-map-locally-standard-smooth (Algebra.IsSmoothAt.exists_notMem_isStandardSmooth); W = D(g) affine with O(W) = A'_g by lem-weil-pbc-affine-open-section-vanishing-prime; the standard smooth presentation is transported along the R-algebra isomorphism A'_g = O(W). Algebra 00T7 (standard smooth implies smooth) is not needed for this direction. Tags 01V7, 01V6, 01V5, 02H6, 00T7, 00TA, 01I3, 01HR verified in tags/tags."
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "result": "accepted",
+  "note": "5 steps following Stacks 01V7: affine opens V, W' = D(h) with f(W') in V; R -> O(W') smooth via the open-restriction and ring-map-iff-affine bridge nodes; A'_g standard smooth by the new 00TA leaf (verified by L); W = D(g) affine with O(W) = A'_g; presentation transported. No other-unit tools beyond the basic-open leaf."
+ }
 }

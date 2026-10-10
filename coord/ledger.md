@@ -771,3 +771,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 01:49 L: reviewed lem-weil-pbc-sheaf-finite-relation-truncations (5 steps, +3: finite-subcoproducts leaf, 009F node, constant-sheaf maps node) and lem-weil-pbc-sheaf-finite-truncation-colimit (5 steps, 0 new): accepted. Stage 3: sheaf-directed-colimit-finite-coequalizers should cite the new 009F node.
 - 01:50 L: reviewed lem-weil-pbc-site-plus-of-sheaf-iso (4 steps, 0 new): accepted.
 - 01:52 L: reviewed lem-weil-pbc-skyscraper-constant-on-point-closure (5 steps, 0 new) and lem-weil-pbc-site-plus-construction-presheaf (6 steps, +00W7 node): accepted.
+- 01:54 L: reviewed lem-weil-pbc-smooth-locally-standard-smooth (5 steps, +00TA leaf): accepted.
