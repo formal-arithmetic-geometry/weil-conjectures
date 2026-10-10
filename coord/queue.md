@@ -1,8 +1,8 @@
 # Work queue
 
-859 items; claim with `tools/claim.py next <group> [--stage N]`.
+861 items; claim with `tools/claim.py next <group> [--stage N]`.
 
-## Stage 1: nodes to split (319)
+## Stage 1: nodes to split (321)
 
 | node | distance to a target | Lean state on the done branch |
 |---|---|---|
@@ -16,7 +16,6 @@
 | `lemma-weil-pbc-finite-refinement-etale-cover` | 2006 | sorry_here |
 | `lem-weil-pbc-sets-pushforward-stalk-strict-henselization` | 2008 | none |
 | `lem-weil-pbc-sets-strictly-henselian-open-sections-stalk` | 2008 | none |
-| `lem-sc-dim-one-ample-invertible` | 2009 | none |
 | `lem-sc-ample-on-reduction-noetherian` | 2010 | none |
 | `lem-sc-pic-lift-closed-immersion-dim-le-one` | 2010 | none |
 | `lem-sc-reduced-dim-le-one-ample` | 2010 | none |
@@ -35,11 +34,13 @@
 | `lem-weil-pbc-simplicial-matching-object` | 3007 | none |
 | `lem-exc-field-discrete-modules` | 3008 | none |
 | `lem-sc-noetherian-cohomology-above-dimension` | 3008 | sorry_here |
-| `lem-pc-cartier-divisor-finite-over-field` | 3009 | none |
 | `lem-sc-hilb-geometrically-integral` | 3009 | rests_on_sorry |
 | `lem-galois-fpqc-descend-open-immersion` | 3010 | none |
 | `lem-galois-fpqc-refinement-fully-faithful` | 3010 | none |
 | `lem-galois-fpqc-singleton-affine-refinement` | 3010 | none |
+| `lem-pc-cartier-divisor-nowhere-dense` | 3010 | none |
+| `lem-pc-dim-zero-finite-over-field` | 3010 | none |
+| `lem-pc-nowhere-dense-dim-zero` | 3010 | none |
 | `lem-pc-very-ample-ample` | 3010 | sorry_here |
 | `lem-pc-zero-support-finite-scheme` | 3010 | none |
 | `lem-sc-brauer-zero-all-curves` | 3010 | sorry_here |
@@ -305,6 +306,7 @@
 | `lem-kun-support-geometric-point-independent` | - | none |
 | `lem-pc-flat-rf-open` | - | rests_on_sorry |
 | `lem-pc-projective-space-coherent-finiteness` | - | sorry_here |
+| `def-nagata-scheme-theoretically-dense-open` | - | none |
 | `def-sc-kahler-differentials` | - | none |
 | `lem-kun-separable-smooth-colimit` | - | none |
 | `lem-kun-stalk-as-pullback` | - | none |
@@ -871,7 +873,7 @@
 | `lem-weil-pbc-p1-field-dimension-one` | 4 | state |
 | `lem-weil-pbc-projective-space-zero-isomorphism` | 4 | state |
 
-Not open yet: 339 nodes that wait for stage 1, 993 nodes that wait for a statement dependency.
+Not open yet: 340 nodes that wait for stage 1, 995 nodes that wait for a statement dependency.
 
 ## Stage 3: modules to prove (0)
 
