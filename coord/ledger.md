@@ -1963,3 +1963,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 16:22 L: returned deliver/H1/lem-sc-p1-regular-dimension-one (reviewer RETURN: 1. D1: steps 1 and 2 / lem-sc-p1-noetherian, lem-sc-p1-local-regular: these two new nodes restate the item's first two c)
 - 16:23 L: merged deliver/K1/lem-sc-affine-finite-module-free-locus (reviewer FIX; first push; new nodes: 3)
 - 16:23 L: merged deliver/M1/lem-sc-torsor-h1-boundary-representative (reviewer FIX+NODE(1); first push; new nodes: 2)
+- 16:23 L: merged deliver/M1/lem-pc-divisor-line-bundle-agrees-sc (reviewer PASS; first push; new nodes: 0)
