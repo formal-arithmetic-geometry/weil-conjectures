@@ -1364,3 +1364,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 2026-10-10, delivery of G1: lem-pc-module-pullback-identity-composition merged from deliver/G1/lem-pc-module-pullback-identity-composition (1 commit(s), 0 new node(s), spot-checked by L: L: 0097 via uniqueness of left adjoints of id and of h_* g_* (conjugate isomorphisms); 0 new); claim closed
 - 12:03 L: merged G1 lem-pc-module-pullback-identity-composition (0097, 0 new).
 - 12:04 L: accepted def-galois-category (7 Mathlib-leaf definitions; the Stacks vs SGA1 axioms gap recorded in HUMAN.md).
+- 12:04 L: accepted lem-galois-action-continuous as a Mathlib leaf (continuousSMul_aut_fiber).
