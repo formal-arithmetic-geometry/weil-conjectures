@@ -1,0 +1,80 @@
+{
+ "id": "lem-weil-pbc-module-injective-open-cover-cech-acyclic",
+ "kind": "statement",
+ "title": "An injective module has vanishing higher Cech cohomology for every open covering",
+ "statement": "Let $X$ be a scheme [def-pc-scheme] and let $\\mathcal I$ be an injective object [def-sp-injective-resolutions] of the abelian category $\\Mod(\\mathcal O_X)$ of sheaves of $\\mathcal O_X$-modules on the underlying space of $X$ [def-weil-sheaf-of-modules-category]. Let $U\\subseteq X$ be an open subset and $(U_i)_{i\\in I}$ a family of open subsets of $U$ with $U=\\bigcup_{i\\in I}U_i$ (any index set), and let $\\mathcal U=\\{U_i\\to U\\}_{i\\in I}$ be the corresponding covering of the Zariski site $X_{\\rm Zar}$; here $X_{\\rm Zar}$ is the site of open subschemes of $X$ with inclusions as morphisms and jointly surjective open families as coverings [def-sc-zariski-site]; in it the fibre product $U_{i_0}\\times_U\\cdots\\times_UU_{i_p}$ of opens $U_{i_k}\\subseteq U$ is the intersection $U_{i_0\\ldots i_p}=U_{i_0}\\cap\\cdots\\cap U_{i_p}$ with its inclusions (the category is a preordered set, so this is the only choice), and the projection omitting the $j$-th factor is the inclusion $U_{i_0\\ldots i_{p+1}}\\subseteq U_{i_0\\ldots\\hat{i_j}\\ldots i_{p+1}}$. Let $\\check H^p(\\mathcal U,\\mathcal I)$ be the Cech cohomology [def-weil-pbc-site-cech-complex] of the underlying presheaf of abelian groups $W\\mapsto\\mathcal I(W)$ of $\\mathcal I$ on $X_{\\rm Zar}$ for $\\mathcal U$, i.e. the cohomology of the complex with $\\check{\\mathcal C}^p(\\mathcal U,\\mathcal I)=\\prod_{(i_0,\\ldots,i_p)\\in I^{p+1}}\\mathcal I(U_{i_0\\ldots i_p})$ and $d(s)_{i_0\\ldots i_{p+1}}=\\sum_{j=0}^{p+1}(-1)^j s_{i_0\\ldots\\hat{i_j}\\ldots i_{p+1}}|_{U_{i_0\\ldots i_{p+1}}}$. Then $\\check H^p(\\mathcal U,\\mathcal I)=0$ for every $p>0$. (Stacks states this for any ringed space, together with $\\check H^0(\\mathcal U,\\mathcal I)=\\mathcal I(U)$, which is not needed here. $\\mathcal I$ need not be an injective abelian sheaf, so [lem-weil-pbc-site-injective-cech-acyclic] does not apply directly.)",
+ "source": {
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Cohomology of Sheaves, Lemma 01EP (lemma-injective-trivial-cech, line 1408) and its proof: an injective O_X-module is injective in PMod(O_X) (sheafification is an exact left adjoint of the inclusion, Homology Lemma 015Z), and Lemma 01EN (lemma-cech-cohomology-derived-presheaves) or its proof"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-sp-injective-resolutions",
+  "def-weil-sheaf-of-modules-category",
+  "def-sc-zariski-site",
+  "def-weil-pbc-site-cech-complex"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Cech cohomology of an injective sheaf of modules vanishes in positive degrees for an open covering",
+   "results": "CochainComplex.cm5b.I, CochainComplex.cm5b.instIsStrictlyGEI (Mathlib.Algebra.Homology.Factorizations.CM5b), CategoryTheory.InjectiveResolution.cocomplex_exactAt_succ, InjectiveResolution.self (Mathlib.CategoryTheory.Preadditive.Injective.Resolution): generic injective resolutions, nothing on Cech complexes",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "injective sheaf of modules on a topological space has trivial higher Čech cohomology for every open cover",
+   "results": "Sheaf.isLocallyInjective_iff_injective (Mathlib.CategoryTheory.Sites.LocallyInjective), CochainComplex.cm5b.instInjectiveXIntI, InjectiveResolution.instInjectiveXIntCochainComplex, PresheafOfModules.instIsLocallyInjectiveToSheafify, CochainComplex.isKInjective_of_injective: locally injective morphisms and K-injectives, no Cech vanishing",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"cech\"",
+   "results": "CategoryTheory.cechNerveTerminalFrom, CechNerveTerminalFrom.wideCospan (Mathlib.AlgebraicTopology.CechNerve): the Cech nerve only; no theorem on Cech cohomology of injectives",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rliE 'cech|čech' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib; grep -rn 'Injective' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/CategoryTheory/Sites/SheafCohomology/ ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/Algebra/Category/ModuleCat/Sheaf* ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/Topology/Sheaves",
+   "results": "Cech files: AlgebraicTopology/CechNerve.lean, CategoryTheory/Limits/FormalCoproducts/Cech.lean, CategoryTheory/Sites/SheafCohomology/Cech.lean (only the definition cechComplexFunctor, line 65, for a family of objects in a category with finite products; no vanishing lemma); Injective: only SheafCohomology/Basic.lean:97 (Subsingleton (H F (n+1)) for an injective abelian sheaf F, derived-functor cohomology, not Cech, not modules) and IsLocallyInjective in ModuleCat/Sheaf.lean:208",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "local_search",
+   "query": "cechComplexFunctor (project ~/weil-conjectures-slopmaster2)",
+   "results": "CategoryTheory.cechComplexFunctor (Mathlib/CategoryTheory/Sites/SheafCohomology/Cech.lean); index unavailable, so not a proof of absence of other names",
+   "date": "2026-10-10",
+   "verdict": "no match (definition only)"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-module-pushforward-injective-acyclic",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "reviewed": "Reviewed by L 2026-10-10 (statement): Cohomology 01EP for O_X-modules on the Zariski site of a scheme, Čech complex spelled out. Unsplit."
+}

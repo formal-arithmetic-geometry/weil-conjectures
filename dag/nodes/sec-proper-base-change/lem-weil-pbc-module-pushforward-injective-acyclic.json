@@ -2,19 +2,97 @@
  "id": "lem-weil-pbc-module-pushforward-injective-acyclic",
  "kind": "statement",
  "title": "The direct image of an injective module is acyclic for sections over every open",
- "statement": "Let $h:X\\to S$ be a morphism of schemes [def-pc-scheme] and let $\\mathcal I$ be an injective object of the category of $\\mathcal O_X$-modules. Then for every open $V\\subseteq S$ and every $p>0$ one has $H^p(V,(h_*\\mathcal I)|_V)=0$, where $H^p(V,-)$ is cohomology of $\\mathcal O_V$-modules [pqf-def-cohomology]. In other words, $h_*\\mathcal I$ is acyclic [def-sp-acyclic] for the left exact functor $\\Gamma(V,-)$ from $\\mathcal O_S$-modules to $\\mathcal O_S(V)$-modules, for every open $V\\subseteq S$ (in particular for $V=S$). ($h_*\\mathcal I$ need not be an injective $\\mathcal O_S$-module, since $h^*$ need not be exact.)",
+ "statement": "Let $h:X\\to S$ be a morphism of schemes [def-pc-scheme] and let $\\mathcal I$ be an injective object [def-sp-injective-resolutions] of the abelian category of $\\mathcal O_X$-modules [def-weil-sheaf-of-modules-category]; let $h_*\\mathcal I$ be its direct image, the $\\mathcal O_S$-module $V\\mapsto\\mathcal I(h^{-1}V)$ [def-pc-module-pullback]. Then for every open $V\\subseteq S$ and every $p>0$ one has $H^p(V,(h_*\\mathcal I)|_V)=0$, where $(h_*\\mathcal I)|_V$ is the restricted $\\mathcal O_V$-module $W\\mapsto(h_*\\mathcal I)(W)$ [lem-weil-pbc-module-restriction-open-immersion-colimits] and $H^p(V,-)$ is cohomology of $\\mathcal O_V$-modules [pqf-def-cohomology]. In other words, $h_*\\mathcal I$ is acyclic [def-sp-acyclic] for the left exact functor $\\Gamma(V,-)$ from $\\mathcal O_S$-modules to $\\mathcal O_S(V)$-modules, for every open $V\\subseteq S$ (in particular for $V=S$). ($h_*\\mathcal I$ need not be an injective $\\mathcal O_S$-module, since $h^*$ need not be exact.)",
  "source": {
   "document": "literature/stacks-project/cohomology.tex",
   "place": "Cohomology of Sheaves, Lemma 01EX (lemma-pushforward-injective, line 1779), part (2); its proof uses Cech cohomology of f_*I via the covering f^{-1}(V_j) and Lemma 01EV (lemma-cech-vanish)"
  },
  "stmt_deps": [
   "def-pc-scheme",
+  "def-sp-injective-resolutions",
+  "def-weil-sheaf-of-modules-category",
+  "def-pc-module-pullback",
+  "lem-weil-pbc-module-restriction-open-immersion-colimits",
   "pqf-def-cohomology",
   "def-sp-acyclic"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "**Step 1 (the Cech complex of $h_*\\mathcal I$ is that of $\\mathcal I$).** Let $V\\subseteq S$ be open and $(V_j)_{j\\in J}$ a family of opens with $V=\\bigcup_jV_j$; let $\\mathcal V=\\{V_j\\to V\\}_{j\\in J}$ be the corresponding covering of $S_{\\rm Zar}$ [def-sc-zariski-site]. Since $h$ is continuous, $h^{-1}V$ and the $h^{-1}V_j$ are open in $X$ and $h^{-1}V=\\bigcup_jh^{-1}V_j$, so $\\mathcal U=\\{h^{-1}V_j\\to h^{-1}V\\}_{j\\in J}$ is a covering of $X_{\\rm Zar}$. In both Zariski sites the fibre products are the intersections with their inclusions (the categories are preordered sets), and $h^{-1}(V_{j_0}\\cap\\cdots\\cap V_{j_p})=h^{-1}V_{j_0}\\cap\\cdots\\cap h^{-1}V_{j_p}$. By the definition of the direct image [def-pc-module-pullback], $(h_*\\mathcal I)(W)=\\mathcal I(h^{-1}W)$ for $W\\subseteq S$ open, and the restriction of $h_*\\mathcal I$ along $W'\\subseteq W$ is the restriction of $\\mathcal I$ along $h^{-1}W'\\subseteq h^{-1}W$. Hence, by the definition of the Cech complex [def-weil-pbc-site-cech-complex], $\\check{\\mathcal C}^p(\\mathcal V,h_*\\mathcal I)=\\prod_{(j_0,\\ldots,j_p)}(h_*\\mathcal I)(V_{j_0}\\cap\\cdots\\cap V_{j_p})=\\prod_{(j_0,\\ldots,j_p)}\\mathcal I(h^{-1}V_{j_0}\\cap\\cdots\\cap h^{-1}V_{j_p})=\\check{\\mathcal C}^p(\\mathcal U,\\mathcal I)$ for every $p\\ge0$, and the differentials, alternating sums of the restrictions along the inclusions omitting one index, agree term by term. So $\\check{\\mathcal C}^\\bullet(\\mathcal V,h_*\\mathcal I)=\\check{\\mathcal C}^\\bullet(\\mathcal U,\\mathcal I)$ and $\\check H^p(\\mathcal V,h_*\\mathcal I)=\\check H^p(\\mathcal U,\\mathcal I)$ for all $p$.",
+   "uses": [
+    "def-sc-zariski-site",
+    "def-pc-module-pullback",
+    "def-weil-pbc-site-cech-complex"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/cohomology.tex",
+    "place": "Lemma 01EX, proof, first paragraph (the displayed equalities of Cech complexes)"
+   }
+  },
+  {
+   "text": "**Step 2 (Cech vanishing for $h_*\\mathcal I$).** Apply [lem-weil-pbc-module-injective-open-cover-cech-acyclic] to the scheme $X$, the injective $\\mathcal O_X$-module $\\mathcal I$, the open $h^{-1}V\\subseteq X$ and its covering $\\mathcal U=\\{h^{-1}V_j\\to h^{-1}V\\}_{j\\in J}$ of Step 1: $\\check H^p(\\mathcal U,\\mathcal I)=0$ for $p>0$. By Step 1, $\\check H^p(\\mathcal V,h_*\\mathcal I)=0$ for every $p>0$, every open $V\\subseteq S$ and every open covering $\\mathcal V$ of $V$ (this is part (1) of Stacks 01EX).",
+   "uses": [
+    "lem-weil-pbc-module-injective-open-cover-cech-acyclic"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/cohomology.tex",
+    "place": "Lemma 01EX, proof: 'Thus the first statement of the lemma follows from Lemma 01EP'"
+   }
+  },
+  {
+   "text": "**Step 3 (cohomology vanishes).** $h_*\\mathcal I$ is an $\\mathcal O_S$-module [def-pc-module-pullback], and by Step 2 it satisfies the hypothesis of [lem-weil-pbc-module-cech-vanishing-criterion] on the scheme $S$. That lemma gives $H^p(V,(h_*\\mathcal I)|_V)=0$ for every $p>0$ and every open $V\\subseteq S$ [pqf-def-cohomology], which is the first assertion.",
+   "uses": [
+    "lem-weil-pbc-module-cech-vanishing-criterion",
+    "def-pc-module-pullback",
+    "pqf-def-cohomology"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/cohomology.tex",
+    "place": "Lemma 01EX, proof: 'The second statement follows from the first and Lemma 01EV'"
+   }
+  },
+  {
+   "text": "**Step 4 (the reformulation as $\\Gamma(V,-)$-acyclicity).** Fix an open $V\\subseteq S$. The functor $\\Gamma(V,-):\\Mod(\\mathcal O_S)\\to\\Mod_{\\mathcal O_S(V)}$ is additive and left exact, kernels in $\\Mod(\\mathcal O_S)$ being computed sectionwise [def-weil-sheaf-of-modules-category]; $\\Mod(\\mathcal O_S)$ has enough injectives [lem-weil-pbc-scheme-modules-enough-injectives], so its right derived functors $R^p\\Gamma(V,-)$ are computed by injective resolutions [def-sp-left-exact-additive]. Choose an injective resolution $h_*\\mathcal I\\to\\mathcal J^\\bullet$ in $\\Mod(\\mathcal O_S)$ [def-sp-injective-resolutions]. By the final clause of [lem-weil-pbc-module-open-restriction-injectives] (applied to $S$ and $V$), $(h_*\\mathcal I)|_V\\to\\mathcal J^\\bullet|_V$ is an injective resolution in $\\Mod(\\mathcal O_V)$, so $H^p(V,(h_*\\mathcal I)|_V)=H^p(\\Gamma(V,\\mathcal J^\\bullet|_V))$ [pqf-def-cohomology]. Since $\\Gamma(V,\\mathcal G|_V)=\\mathcal G(V)=\\Gamma(V,\\mathcal G)$ for every $\\mathcal O_S$-module $\\mathcal G$, compatibly with morphisms [lem-weil-pbc-module-restriction-open-immersion-colimits], the complexes $\\Gamma(V,\\mathcal J^\\bullet|_V)$ and $\\Gamma(V,\\mathcal J^\\bullet)$ are equal, hence $R^p\\Gamma(V,-)(h_*\\mathcal I)=H^p(\\Gamma(V,\\mathcal J^\\bullet))=H^p(V,(h_*\\mathcal I)|_V)$, which is $0$ for $p>0$ by Step 3. So $h_*\\mathcal I$ is $\\Gamma(V,-)$-acyclic [def-sp-acyclic]. For $V=S$, $(h_*\\mathcal I)|_S=h_*\\mathcal I$. (Stacks Lemma 01E1 (2).)",
+   "uses": [
+    "def-weil-sheaf-of-modules-category",
+    "lem-weil-pbc-scheme-modules-enough-injectives",
+    "def-sp-left-exact-additive",
+    "def-sp-injective-resolutions",
+    "lem-weil-pbc-module-open-restriction-injectives",
+    "pqf-def-cohomology",
+    "lem-weil-pbc-module-restriction-open-immersion-colimits",
+    "def-sp-acyclic"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/cohomology.tex",
+    "place": "Lemma 01EX, last sentence of the statement ('In other words ...'), with Lemma 01E1 (lemma-cohomology-of-open, line 496) (2) and its proof"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sc-zariski-site",
+  "def-pc-module-pullback",
+  "def-weil-pbc-site-cech-complex",
+  "lem-weil-pbc-module-injective-open-cover-cech-acyclic",
+  "lem-weil-pbc-module-cech-vanishing-criterion",
+  "pqf-def-cohomology",
+  "def-weil-sheaf-of-modules-category",
+  "lem-weil-pbc-scheme-modules-enough-injectives",
+  "def-sp-left-exact-additive",
+  "def-sp-injective-resolutions",
+  "lem-weil-pbc-module-open-restriction-injectives",
+  "lem-weil-pbc-module-restriction-open-immersion-colimits",
+  "def-sp-acyclic"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Lemma 01EX (lemma-pushforward-injective, line 1779), proof; Lemma 01E1 (lemma-cohomology-of-open) (2)"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -36,10 +114,31 @@
    "results": "none; Mathlib has no cohomology of O_X-modules (Sheaf.H in CategoryTheory/Sites/SheafCohomology is for abelian sheaves on a site)",
    "date": "2026-10-10",
    "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "pushforward of an injective sheaf of modules along a morphism of schemes has vanishing higher cohomology",
+   "results": "TopCat.Sheaf.pushforward, TopCat.Sheaf.pushforward_sheaf_of_sheaf (Mathlib.Topology.Sheaves.Functors), SheafOfModules.pushforward, pushforward_map_val, pushforwardComp (Mathlib.Algebra.Category.ModuleCat.Sheaf.PushforwardContinuous), Scheme.Modules.pushforward_map_app (Mathlib.AlgebraicGeometry.Modules.Sheaf): the direct image functor, nothing on injectives or cohomology",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rn 'CategoryTheory.Injective|\\[Injective' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicGeometry ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/Topology/Sheaves ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/Algebra/Category/ModuleCat/Sheaf*",
+   "results": "none (no injective objects of sheaves of modules are treated)",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "local_search",
+   "query": "injective_pushforward (project ~/weil-conjectures-slopmaster2)",
+   "results": "none; index unavailable, so not by itself a proof of absence",
+   "date": "2026-10-10",
+   "verdict": "no match"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "worker",
@@ -59,5 +158,12 @@
   }
  },
  "chapter": "sec-proper-base-change",
- "unit": "sk-thm-p1"
+ "unit": "sk-thm-p1",
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "lem-weil-pbc-module-pushforward-injective-acyclic",
+  "worker": "stage1",
+  "summary": "Statement checked against Stacks Cohomology 01EX (2): kept; made self-contained (injective object, direct image h_* with its sections, the restriction (h_*I)|_V each cite their node; stmt_deps updated). The citer lem-weil-pbc-affine-morphism-cohomology-edge uses only V = S, but the proof gives every V at once (the Cech criterion needs all opens). Proof in four steps following the proof of 01EX: (1) Cech complex of h_*I for an open covering of V equals that of I for the pulled-back covering of h^{-1}V (elementary, from the definitions of h_* and of the Cech complex on the Zariski site, fibre products = intersections); (2) 01EP for injective O_X-modules (new unsplit node lem-weil-pbc-module-injective-open-cover-cech-acyclic); (3) the criterion 01EV for O_X-modules (new unsplit node lem-weil-pbc-module-cech-vanishing-criterion), stated with H^p(U,F|_U) as in pqf-def-cohomology; (4) the 'in other words' clause: R^p Gamma(V,-) on Mod(O_S) equals H^p(V,-|_V) by restricting an injective resolution (01E1 (2), via the statement of lem-weil-pbc-module-open-restriction-injectives and enough injectives). Existing Cech nodes are for abelian sheaves on a site (03AW, 03F9) or the small etale site; an injective O_X-module is not in general an injective abelian sheaf and module cohomology is not abelian cohomology without a comparison, so the module versions 01EP/01EV are new nodes (the site Cech complex def-weil-pbc-site-cech-complex on X_Zar is reused). Mathlib: no Cech vanishing, no Cech criterion, no cohomology of O_X-modules (three kinds of search recorded on each node)."
+ },
+ "reviewed": "Reviewed by L 2026-10-10: faithful to Cohomology 01EX (2): the Čech complex of h_*I is that of I (step 1, written out on the Zariski sites), Čech vanishing for injective modules (01EP, new unsplit node), the Čech vanishing criterion (01EV with 01E1 (2), new unsplit node), and the reformulation as Γ(V,−)-acyclicity via restricted injective resolutions. Statement gained citations only. No Mathlib match (no cohomology of O_X-modules)."
 }

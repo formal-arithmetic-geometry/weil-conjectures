@@ -980,3 +980,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 06:45 L: reviewed and accepted lem-weil-pbc-mittag-leffler-limit-exact (6 steps; +ml-sets-tower-limit-nonempty node 0597).
 - 06:46 L: reviewed and accepted lem-weil-pbc-miracle-flatness (10 steps; +noetherian-local-dim-drop-outside-minimal-primes leaf 0B52, +cm-local-maximal-chain-length 00N9, +cm-local-quotient-nonzerodivisor-cm 02JN nodes).
 - 06:48 L: reviewed and accepted lem-weil-pbc-module-open-restriction-injectives (4 steps; +module-extension-by-zero-adjunction node 00A7; tool_uses lem-sp-right-adjoint-preserves-injectives as for colimit-of-sites-injective-system). Stage 3: lem-sp-right-adjoint-preserves-injectives (imported) is likely the Mathlib leaf Adjunction.map_injective.
+- 06:48 L: reviewed and accepted lem-weil-pbc-module-pushforward-injective-acyclic (4 steps; +module-injective-open-cover-cech-acyclic 01EP, +module-cech-vanishing-criterion 01EV nodes).
