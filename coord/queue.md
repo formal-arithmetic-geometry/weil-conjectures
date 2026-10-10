@@ -1,13 +1,12 @@
 # Work queue
 
-928 items; claim with `tools/claim.py next <group> [--stage N]`.
+927 items; claim with `tools/claim.py next <group> [--stage N]`.
 
-## Stage 1: nodes to split (212)
+## Stage 1: nodes to split (211)
 
 | node | distance to a target | Lean state on the done branch |
 |---|---|---|
 | `lem-weil-pbc-injective-acyclicity-bounded-below` | 2002 | sorry_here |
-| `lem-sc-topological-filtered-injective-cech-acyclic` | 2015 | none |
 | `lem-sc-finite-maximals-over-element` | 2019 | none |
 | `lem-pc-bounded-coherent-finite-tor-proper-pushforward-perfect` | 3013 | none |
 | `lem-pc-derived-limit-milnor-sequence` | 3013 | none |
@@ -940,7 +939,7 @@
 | `lem-weil-pbc-p1-field-dimension-one` | 4 | state |
 | `lem-weil-pbc-projective-space-zero-isomorphism` | 4 | state |
 
-Not open yet: 1425 nodes that wait for a statement dependency, 249 nodes that wait for stage 1.
+Not open yet: 1426 nodes that wait for a statement dependency, 248 nodes that wait for stage 1.
 
 ## Stage 3: modules to prove (0)
 
