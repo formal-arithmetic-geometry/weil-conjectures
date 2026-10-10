@@ -1,8 +1,8 @@
 # Work queue
 
-829 items; claim with `tools/claim.py next <group> [--stage N]`.
+834 items; claim with `tools/claim.py next <group> [--stage N]`.
 
-## Stage 1: nodes to split (659)
+## Stage 1: nodes to split (662)
 
 | node | distance to a target | Lean state on the done branch |
 |---|---|---|
@@ -10,14 +10,10 @@
 | `lem-weil-pbc-z-localizations-dvr` | 1010 | none |
 | `lem-weil-pbc-etale-ring-map-prescribed-residue-field` | 1011 | none |
 | `lem-weil-pbc-helper-g-ring-char-p` | 1011 | none |
-| `lem-weil-pbc-hypersurface-derivation-regular` | 1011 | none |
 | `lem-weil-pbc-idempotent-endomorphism-charpoly-field` | 1011 | none |
 | `lem-weil-pbc-idempotent-endomorphism-image-base-change` | 1011 | none |
 | `lem-weil-pbc-lft-over-field-isolated-point-residue-finite` | 1011 | none |
-| `lem-weil-pbc-popescu-delocalize-height-zero` | 1011 | none |
-| `lem-weil-pbc-popescu-desingularize-strictly-standard` | 1011 | none |
 | `lem-weil-pbc-popescu-enlarge-solution-modulo` | 1011 | none |
-| `lem-weil-pbc-popescu-find-sequence` | 1011 | none |
 | `lem-weil-pbc-popescu-lift-nilpotent` | 1011 | none |
 | `lem-weil-pbc-popescu-lift-solution` | 1011 | none |
 | `lem-weil-pbc-popescu-lifting` | 1011 | none |
@@ -81,6 +77,7 @@
 | `lem-weil-pbc-affine-finite-type-generating-sections` | 1012 | none |
 | `lem-weil-pbc-affine-morphism-cohomology-edge` | 1012 | none |
 | `lem-weil-pbc-ample-scheme-separated` | 1012 | none |
+| `lem-weil-pbc-annihilator-element-flat-base-change` | 1012 | none |
 | `lem-weil-pbc-artinian-ring-self-finite-length` | 1012 | none |
 | `lem-weil-pbc-closed-pushforward-constant-stalks` | 1012 | none |
 | `lem-weil-pbc-cohen-coefficient-ring-exists` | 1012 | none |
@@ -92,6 +89,7 @@
 | `lem-weil-pbc-completion-finite-extension` | 1012 | none |
 | `lem-weil-pbc-composition-fibre-degree-bound` | 1012 | none |
 | `lem-weil-pbc-cotangent-complex-symmetric-algebra` | 1012 | none |
+| `lem-weil-pbc-criterion-flatness-fibre-noetherian` | 1012 | none |
 | `lem-weil-pbc-descend-finite-locally-free` | 1012 | none |
 | `lem-weil-pbc-descend-qc-open-fg-subalgebra` | 1012 | none |
 | `lem-weil-pbc-faithfully-flat-base-change` | 1012 | none |
@@ -114,12 +112,15 @@
 | `lem-weil-pbc-gabber-finite-etale-section` | 1012 | none |
 | `lem-weil-pbc-gabber-strict-henselian-zariski-comparison` | 1012 | none |
 | `lem-weil-pbc-grothendieck-existence-easy` | 1012 | none |
+| `lem-weil-pbc-henselian-finite-etale-equivalence` | 1012 | none |
 | `lem-weil-pbc-higher-direct-image-presheaf` | 1012 | none |
 | `lem-weil-pbc-ideal-module-product-stalk` | 1012 | none |
 | `lem-weil-pbc-immersion-fibre-degree-one` | 1012 | none |
 | `lem-weil-pbc-integral-extension-dimension` | 1012 | none |
 | `lem-weil-pbc-kernel-cokernel-annihilated-mod-ideal` | 1012 | none |
 | `lem-weil-pbc-krull-intersection-localization` | 1012 | none |
+| `lem-weil-pbc-local-artinian-basis-when-flat` | 1012 | none |
+| `lem-weil-pbc-local-dimension-zero-henselian` | 1012 | none |
 | `lem-weil-pbc-localization-colimit-principal-localizations` | 1012 | none |
 | `lem-weil-pbc-lqf-restriction-to-opens` | 1012 | none |
 | `lem-weil-pbc-make-separably-generated` | 1012 | none |
@@ -134,6 +135,7 @@
 | `lem-weil-pbc-module-stalk-filtered-colimit` | 1012 | none |
 | `lem-weil-pbc-polynomial-local-completion-formally-smooth` | 1012 | none |
 | `lem-weil-pbc-popescu-delocalize-weak` | 1012 | none |
+| `lem-weil-pbc-popescu-desingularize` | 1012 | none |
 | `lem-weil-pbc-popescu-height-zero-auxiliary-algebra-localizations` | 1012 | none |
 | `lem-weil-pbc-power-series-field-cohen-regular-complete` | 1012 | none |
 | `lem-weil-pbc-principal-localization-naive-cotangent` | 1012 | none |
@@ -142,6 +144,7 @@
 | `lem-weil-pbc-quotient-henselian-pair` | 1012 | none |
 | `lem-weil-pbc-quotient-local-structure` | 1012 | none |
 | `lem-weil-pbc-reduced-source-factors-through-closed-subscheme` | 1012 | none |
+| `lem-weil-pbc-regular-local-hypersurface-criterion` | 1012 | none |
 | `lem-weil-pbc-ringed-space-colimit-restriction` | 1012 | none |
 | `lem-weil-pbc-separably-generated-separable` | 1012 | none |
 | `lem-weil-pbc-sets-extension-by-empty-adjunction` | 1012 | none |
@@ -666,7 +669,7 @@
 | `lem-pc-finite-linear-avoidance` | - | none |
 | `lem-pc-linear-pair-graded-finite` | - | none |
 
-## Stage 2: nodes to state (170)
+## Stage 2: nodes to state (172)
 
 | node | distance to Mathlib | kind |
 |---|---|---|
@@ -756,6 +759,7 @@
 | `lem-weil-pbc-h0-spectral-closed-restriction` | 1 | state |
 | `lem-weil-pbc-henselian-factorization-locally-nilpotent` | 1 | state |
 | `lem-weil-pbc-henselization-finite-separable-fibres` | 1 | state |
+| `lem-weil-pbc-hypersurface-derivation-regular` | 1 | state |
 | `lem-weil-pbc-idempotent-splitting-monic-factorization` | 1 | state |
 | `lem-weil-pbc-idempotents-determined-modulo-radical` | 1 | state |
 | `lem-weil-pbc-immersion-affine-constructible-pieces` | 1 | state |
@@ -788,6 +792,7 @@
 | `lem-weil-pbc-nonvanishing-section-trivializes` | 1 | state |
 | `lem-weil-pbc-ogoma` | 1 | state |
 | `lem-weil-pbc-polynomial-ring-origin-regular-local` | 1 | state |
+| `lem-weil-pbc-popescu-find-sequence` | 1 | state |
 | `lem-weil-pbc-power-series-onto-completion` | 1 | state |
 | `lem-weil-pbc-power-set-complex-contractible` | 1 | state |
 | `lem-weil-pbc-reduced-induced-closed-subscheme` | 1 | state |
@@ -841,7 +846,7 @@
 | `lem-weil-pbc-p1-field-dimension-one` | 4 | state |
 | `lem-weil-pbc-projective-space-zero-isomorphism` | 4 | state |
 
-Not open yet: 671 nodes that wait for stage 1, 458 nodes that wait for a statement dependency.
+Not open yet: 674 nodes that wait for stage 1, 460 nodes that wait for a statement dependency.
 
 ## Stage 3: modules to prove (0)
 
