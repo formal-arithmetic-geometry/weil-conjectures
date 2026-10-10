@@ -3,7 +3,7 @@
  "blueprint": {
   "is": "pqf-lem-integral-univclosed",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "Integral = affine + universally closed",
@@ -20,14 +20,49 @@
  },
  "stmt_deps": [],
  "proof": [],
- "proof_deps": [
-  "def-weil-pbc-scheme-conventions",
-  "pqf-lem-lying-over"
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/morphisms.tex",
+  "place": "Lemma 29.45.7, Tag 01WM"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "a morphism of schemes is integral if and only if affine and universally closed",
+   "results": "AlgebraicGeometry.IsIntegralHom.iff_universallyClosed_and_isAffineHom in Mathlib/AlgebraicGeometry/Morphisms/Integral; exact equivalence",
+   "date": "2026-10-11",
+   "verdict": "match"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.IsIntegralHom.iff_universallyClosed_and_isAffineHom",
+   "results": "AlgebraicGeometry.IsIntegralHom.iff_universallyClosed_and_isAffineHom : IsIntegralHom f ↔ UniversallyClosed f ∧ IsAffineHom f",
+   "date": "2026-10-11",
+   "verdict": "match"
+  },
+  {
+   "tool": "grep",
+   "query": "iff_universallyClosed_and_isAffineHom in Mathlib/AlgebraicGeometry/Morphisms",
+   "results": "Mathlib/AlgebraicGeometry/Morphisms/Integral.lean:135: lemma iff_universallyClosed_and_isAffineHom {X Y : Scheme.{u}} {f : X ⟶ Y} : IsIntegralHom f ↔ UniversallyClosed f ∧ IsAffineHom f (reviewer R-piu1955 re-ran in slopmaster2 mathlib)",
+   "date": "2026-10-11",
+   "verdict": "match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "integral morphism affine universally closed equivalence",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-11",
+   "verdict": "unavailable"
+  }
  ],
- "proof_origin": null,
- "mathlib_searches": [],
- "mathlib_match": null,
- "status": "unsplit",
+ "mathlib_match": {
+  "declaration": "AlgebraicGeometry.IsIntegralHom.iff_universallyClosed_and_isAffineHom",
+  "file": "Mathlib/AlgebraicGeometry/Morphisms/Integral.lean",
+  "line": 135,
+  "how": "exact: lemma at line 135 states IsIntegralHom f ↔ UniversallyClosed f ∧ IsAffineHom f; IsAffineHom is the affine condition in the node statement."
+ },
+ "status": "mathlib",
  "merged_into": null,
  "import_flags": [
   "undischarged_input",
@@ -63,5 +98,20 @@
   }
  },
  "chapter": "sec-abelian-varieties",
- "unit": "sk-prop-av-pqf-finite"
+ "unit": "sk-prop-av-pqf-finite",
+ "split_report": {
+  "date": "2026-10-11",
+  "item": "pqf-lem-integral-univclosed",
+  "worker": "stage1",
+  "summary": "The project source has no declaration tagged pqf-lem-integral-univclosed. The exact equivalence is already a pinned Mathlib lemma, so this item is a Mathlib leaf with no proof steps or new nodes. Mathlib's IsIntegralHom and IsAffineHom are the scheme-level notions corresponding to integral and affine morphisms, while UniversallyClosed is the universal closedness condition.",
+  "blueprint": "The imported blueprint proof is realized directly by AlgebraicGeometry.IsIntegralHom.iff_universallyClosed_and_isAffineHom, which packages both directions of Tag 01WM."
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-piu1955",
+  "group": "M1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-piu1955 (reviewer sub-agent of L); spot-checked: Read Integral.lean:135 in slopmaster2 mathlib: IsIntegralHom f ↔ UniversallyClosed f ∧ IsAffineHom f for any scheme morphism, exact match of Tag 01WM; not a slopmaster2 project declaration (B10 n/a). FIX more, RETURN less: B3 mathlib_match lacked the line field, added line 135; grep search entry wrongly recorded no hit, re-ran and recorded the match. Second reading by M1 missed the missing line and claims blueprint.from was filled while it is null (null as in sibling leaves, left).; 1 file(s) fixed by the reviewer"
+ }
 }
