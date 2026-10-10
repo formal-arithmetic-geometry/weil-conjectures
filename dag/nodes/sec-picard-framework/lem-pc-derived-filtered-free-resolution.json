@@ -22,9 +22,59 @@
   "def-pc-cochain-complex-modules",
   "def-pc-quasi-iso-modules"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Starting with $M_0^\\bullet=M^\\bullet$, apply [lem-pc-derived-free-complex-cover] to obtain a degreewise surjection $P_0^\\bullet \\to M_0^\\bullet$ which is surjective on cocycles; let $M_1^\\bullet$ be its kernel. Iterating gives exact sequences $0 \\to M_{i+1}^\\bullet \\to P_i^\\bullet \\to M_i^\\bullet \\to 0$ and a resolution $\\cdots \\to P_1^\\bullet \\to P_0^\\bullet \\to M^\\bullet \\to 0$.",
+   "uses": [
+    "lem-pc-derived-free-complex-cover"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/dga.tex",
+    "place": "Differential Graded Algebra, Lemma 15.60.9 (Tag 09KP), proof"
+   }
+  },
+  {
+   "text": "Totalize this resolution with $P^n=\\bigoplus_{a+b=n}P_{-a}^b$ and differential $d(x)=f_{-a}(x)+(-1)^a d_{P_{-a}}(x)$ on $x\\in P_{-a}^b$. The identity $d^2=0$ follows from $d^2=0$ on each $P_i$ and the relation $f_{i-1}f_i=0$, so $P^\\bullet$ is a cochain complex, and the augmentation is induced by $P_0^\\bullet \\to M^\\bullet$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/dga.tex",
+    "place": "Differential Graded Algebra, Lemma 15.60.9 (Tag 09KP), construction of the total complex"
+   }
+  },
+  {
+   "text": "For each $i$, [lem-pc-derived-free-complex-cover] (applied to $M_i^\\bullet$ in Step 1) provides a degreewise split short exact sequence of complexes $0 \\to P_i'^\\bullet \\to P_i^\\bullet \\to P_i''^\\bullet \\to 0$ in which $P_i'^\\bullet$ and $P_i''^\\bullet$ are direct sums of shifts $A[k]$ with zero differential; in particular $d_{P_i}$ vanishes on $P_i'^\\bullet$ and maps $P_i^\\bullet$ into $P_i'^\\bullet$. Set $F_{-1}P^\\bullet=0$, $F_{2i}P^\\bullet=\\bigoplus_{j<i}P_j^\\bullet\\oplus P_i'^\\bullet$ and $F_{2i+1}P^\\bullet=\\bigoplus_{j\\le i}P_j^\\bullet$ inside the total complex of Step 2. Each is a subcomplex: on $x\\in P_i'$ the total differential is $f_i(x)\\pm d_{P_i}(x)=f_i(x)\\in P_{i-1}$, and on $x\\in P_j$ it lies in $P_j\\oplus P_{j-1}$. The quotient $F_{2i}P^\\bullet/F_{2i-1}P^\\bullet$ is $P_i'^\\bullet$ with differential induced by $\\pm d_{P_i}$, which is zero, and $F_{2i+1}P^\\bullet/F_{2i}P^\\bullet$ is $P_i''^\\bullet$ with its zero differential; both are direct sums of shifts $A[k]$ as complexes. The degreewise splittings of $P_i'\\subset P_i$ give termwise split inclusions $F_nP^\\bullet\\to F_{n+1}P^\\bullet$, and every summand $P_i$ lies in $F_{2i+1}P^\\bullet$, so the filtration is increasing and exhaustive.",
+   "uses": [
+    "lem-pc-derived-free-complex-cover"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/dga.tex",
+    "place": "Differential Graded Algebra, Lemma 15.60.9 (Tag 09KP), filtration construction"
+   }
+  },
+  {
+   "text": "The exactness of the resolution and the surjectivity on cocycles at every stage give the hypotheses of [lem-pc-derived-total-resolution-quasi-iso]. Therefore the augmentation $P^\\bullet \\to M^\\bullet$ is a quasi-isomorphism.",
+   "uses": [
+    "lem-pc-derived-total-resolution-quasi-iso"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/dga.tex",
+    "place": "Differential Graded Algebra, Lemma 15.60.9 (Tag 09KP), final sentence invoking Homology, Lemma 09IZ"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-derived-free-complex-cover",
+  "lem-pc-derived-total-resolution-quasi-iso"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/dga.tex",
+  "place": "Differential Graded Algebra, Lemma 15.60.9 (Tag 09KP), proof"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -49,12 +99,28 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-pc-derived-module-free-generation",
   "by": "worker",
   "date": "2026-10-10"
  },
  "chapter": "sec-picard-framework",
- "unit": "sk-thm-picard-f-representable"
+ "unit": "sk-thm-picard-f-representable",
+ "split_report": {
+  "date": "2026-10-11",
+  "item": "lem-pc-derived-filtered-free-resolution",
+  "worker": "stage1",
+  "summary": "Split the Stacks construction into the free two-term cover and the total-resolution quasi-isomorphism, then wrote the totalization and exhaustive split filtration argument explicitly. The source files are absent from this repository, so the local review checkout was used and reported as WANTED.",
+  "blueprint": "Realizes the filtered-resolution construction used in proof step (2) of lem-pc-projection-formula.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-dfr2126",
+  "group": "J1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-dfr2126 (reviewer sub-agent of L); spot-checked: Return 19:52 repaired: (1) lem-pc-derived-free-complex-cover now states Q->M degreewise and cocycle surjective with degreewise split 0->Q'->Q->Q''->0, Q',Q'' sums of shifts A[k] with zero differential; true (Tag 09KN: two-term pieces plus A[k] per cocycle; M=A[0] ok); (2) arrows/Ker in TeX in item and both new nodes; (3) second reading retested on A[0]. Steps 1,2,4 and 09IZ node unchanged from accepted. FIX more, RETURN less: C5 in Step 3, which used 'two-term pieces', 'upper-term shifts' and 'extra shift summands' from the proof of 09KN, not the cited statement; rewrote Step 3 to use the stated split sequence P_i' -> P_i -> P_i'' directly, with explicit F_{2i}, F_{2i+1}, subcomplex check (d vanishes on P_i'), zero-differential quotients, split inclusions, exhaustiveness.; 1 file(s) fixed by the reviewer"
+ }
 }
