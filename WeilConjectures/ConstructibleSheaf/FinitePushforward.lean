@@ -187,7 +187,8 @@ theorem Etale.isIso_unit_constantSheaf_of_isIntegrallyClosed {Y : Scheme.{u}} [I
         IsIso ((upperStarLowerStarAdjunction (ModuleCat.{u + 1} Λ)
           (Z.fromSpecStalk (genericPoint Z))).unit.app
             ((constantSheaf Z.smallEtaleTopology (ModuleCat.{u + 1} Λ)).obj M)) :=
-    sorry
+    -- it suffices to check this on the stalks at the geometric points of `Z`
+    fun Z _ _ ↦ Scheme.isIso_of_isIso_sheafFiber_map _ fun _ ↦ sorry
   -- The open-immersion half follows from the generic-point half.
   exact ⟨hgen Y hY, fun j ↦
     Etale.isIso_unit_constantSheaf_of_isOpenImmersion_of_genericPoint Λ M hgen hY j⟩
