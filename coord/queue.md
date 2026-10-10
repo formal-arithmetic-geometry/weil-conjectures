@@ -1,8 +1,8 @@
 # Work queue
 
-855 items; claim with `tools/claim.py next <group> [--stage N]`.
+856 items; claim with `tools/claim.py next <group> [--stage N]`.
 
-## Stage 1: nodes to split (314)
+## Stage 1: nodes to split (315)
 
 | node | distance to a target | Lean state on the done branch |
 |---|---|---|
@@ -19,7 +19,6 @@
 | `lem-sc-ample-square-zero-thickening` | 2011 | none |
 | `prop-weil-pbc-strict-henselization-stalk-formula` | 3003 | none |
 | `lem-weil-pbc-zero-dimensional-cohomology` | 3004 | none |
-| `lemma-weil-pbc-etale-cohomology-continuity` | 3004 | none |
 | `prop-weil-pbc-kinjective-resolutions-exist` | 3004 | none |
 | `lem-sc-etale-affine-qcoherent` | 3007 | none |
 | `lem-sc-etale-qcoherent-descent` | 3007 | none |
@@ -47,7 +46,6 @@
 | `lem-exc-discrete-modules-abelian-structure` | 3011 | none |
 | `lem-pc-ample-affine-loci-criterion` | 3011 | none |
 | `lem-pc-base-change-closure-components` | 3011 | none |
-| `lem-pc-genus-well-defined` | 3011 | none |
 | `lem-pc-leray-degenerate-sections` | 3011 | none |
 | `lem-pc-very-ample-descends` | 3011 | sorry_here |
 | `lem-sc-determinant-short-exact` | 3011 | none |
@@ -56,9 +54,12 @@
 | `lem-sc-torsion-subsheaf-quotient` | 3011 | none |
 | `lem-sc-vector-bundle-line-subbundle` | 3011 | none |
 | `thm-sc-p1-duality` | 3011 | sorry_here |
+| `lem-pc-projective-base-change` | 3012 | none |
 | `lem-sc-ext-locally-free` | 3012 | sorry_here |
-| `lem-sc-p1-graded-resolution` | 3012 | sorry_here |
-| `lem-weil-pbc-proper-base-change` | 4002 | none |
+| `lem-sc-p1-coherent-proj-representation` | 3013 | none |
+| `lem-sc-p1-graded-syzygy` | 3013 | none |
+| `lem-sc-p1-proj-sheafification-exact` | 3013 | none |
+| `lem-sc-p1-proj-shifted-free-twist` | 3013 | none |
 | `lem-weil-pbc-proper-composition` | 4002 | none |
 | `lem-weil-pbc-proper-to-separated` | 4003 | none |
 | `lem-weil-pbc-closed-immersion-products` | 4004 | none |
@@ -846,6 +847,7 @@
 | `lem-sc-c1-finite-extension` | 2 | state |
 | `lem-sc-degree-2g1-very-ample` | 2 | state |
 | `lem-sc-positive-degree-ample` | 2 | state |
+| `lem-sc-proper-affine-finite` | 2 | state |
 | `lem-sc-regular-dim1-dvr` | 2 | state |
 | `lem-sc-riemann-roch-large-degree` | 2 | state |
 | `lem-sc-smooth-regular` | 2 | state |
@@ -860,14 +862,13 @@
 | `lem-sc-invertible-dual` | 3 | state |
 | `lem-sc-line-bundle-torsor` | 3 | state |
 | `lem-sc-pic-group` | 3 | state |
-| `lem-sc-proper-affine-finite` | 3 | state |
 | `lem-sc-smooth-normal` | 3 | state |
 | `lemma-nagata-affine-finite-type-is-quasi-affine` | 3 | state |
 | `thm-sc-hilbert-90` | 3 | state |
 | `lem-weil-pbc-p1-field-dimension-one` | 4 | state |
 | `lem-weil-pbc-projective-space-zero-isomorphism` | 4 | state |
 
-Not open yet: 333 nodes that wait for stage 1, 1005 nodes that wait for a statement dependency.
+Not open yet: 334 nodes that wait for stage 1, 1008 nodes that wait for a statement dependency.
 
 ## Stage 3: modules to prove (0)
 
