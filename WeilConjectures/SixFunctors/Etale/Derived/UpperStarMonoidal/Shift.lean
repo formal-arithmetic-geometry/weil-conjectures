@@ -81,6 +81,127 @@ lemma commShift_tensorRightCounit
 
 end
 
+
+section Comparison
+
+variable {C₁ C₂ : Type*} [Category.{v} C₁] [Abelian C₁] [IsGrothendieckAbelian.{w} C₁]
+  [HasDerivedCategory.{w} C₁] [MonoidalCategory C₁] [MonoidalClosed C₁] [MonoidalPreadditive C₁]
+  [BraidedCategory C₁] [Abelian.HasFunctorialFlatResolution C₁]
+  [Category.{v} C₂] [Abelian C₂] [IsGrothendieckAbelian.{w} C₂]
+  [HasDerivedCategory.{w} C₂] [MonoidalCategory C₂] [MonoidalClosed C₂] [MonoidalPreadditive C₂]
+  [BraidedCategory C₂] [Abelian.HasFunctorialFlatResolution C₂]
+
+local instance : HasColimitsOfSize.{0, 0} C₁ := hasColimitsOfSizeShrink C₁
+local instance : HasColimitsOfSize.{0, 0} C₂ := hasColimitsOfSizeShrink C₂
+
+variable (F : C₁ ⥤ C₂) [F.Additive] [F.OplaxMonoidal]
+  [∀ j, PreservesColimitsOfShape
+    (Discrete (ComplexShape.π (.up ℤ) (.up ℤ) (.up ℤ) ⁻¹' {j})) F]
+  (LF : DerivedCategory C₁ ⥤ DerivedCategory C₂) [LF.CommShift ℤ]
+  (cL : Qh ⋙ LF ⟶ F.mapHomotopyCategory (.up ℤ) ⋙ Qh) [IsIso cL] [NatTrans.CommShift cL ℤ]
+
+open Functor in
+set_option maxHeartbeats 1000000 in
+/-- A natural transformation `τ : LF(Qh X ⊗ᴸ -) ⟶ LF(Qh X) ⊗ᴸ LF(-)` which is compatible, on
+the homotopy category, with the comparison `F(X ⊗ -) ⟶ F(X) ⊗ F(-)`, commutes with the shifts,
+if `X` and `F(X)` are K-flat. -/
+lemma commShift_of_tensorLeft_fac (X : HomotopyCategory C₁ (.up ℤ))
+    (hX : (HomotopyCategory.quasiIso C₁ (.up ℤ)).kFlat X)
+    (hFX : (HomotopyCategory.quasiIso C₂ (.up ℤ)).kFlat ((F.mapHomotopyCategory (.up ℤ)).obj X))
+    (τ : (curriedTensor (DerivedCategory C₁)).obj (Qh.obj X) ⋙ LF ⟶
+      LF ⋙ (curriedTensor (DerivedCategory C₂)).obj (LF.obj (Qh.obj X)))
+    (hτ : ∀ M, τ.app (Qh.obj M) ≫ cL.app X ▷ LF.obj (Qh.obj M) ≫
+        Qh.obj ((F.mapHomotopyCategory (.up ℤ)).obj X) ◁ cL.app M ≫
+        (tensorLeftCounit ((F.mapHomotopyCategory (.up ℤ)).obj X)).app
+          ((F.mapHomotopyCategory (.up ℤ)).obj M) =
+      LF.map ((tensorLeftCounit X).app M) ≫ cL.app (X ⊗ M) ≫
+        Qh.map (((OplaxMonoidal.mapHomotopyCategoryδNatTrans (.up ℤ) F).app X).app M)) :
+    NatTrans.CommShift τ ℤ := by
+  let G := F.mapHomotopyCategory (.up ℤ)
+  let c₂ : Qh ⋙ ((curriedTensor _).obj (Qh.obj X) ⋙ LF) ⟶
+      ((curriedTensor _).obj X ⋙ G) ⋙ Qh :=
+    (Functor.associator _ _ _).inv ≫ whiskerRight (tensorLeftCounit X) LF ≫
+      (Functor.associator _ _ _).hom ≫ whiskerLeft ((curriedTensor _).obj X) cL ≫
+      (Functor.associator _ _ _).inv
+  let δ₀ : ((curriedTensor _).obj X ⋙ G) ⋙ Qh ⟶ (G ⋙ (curriedTensor _).obj (G.obj X)) ⋙ Qh :=
+    whiskerRight ((OplaxMonoidal.mapHomotopyCategoryδNatTrans (.up ℤ) F).app X) Qh
+  let c₁ : Qh ⋙ (LF ⋙ (curriedTensor _).obj (LF.obj (Qh.obj X))) ⟶
+      (G ⋙ (curriedTensor _).obj (G.obj X)) ⋙ Qh :=
+    (Functor.associator _ _ _).inv ≫
+      whiskerLeft (Qh ⋙ LF) ((curriedTensor _).map (cL.app X)) ≫
+      whiskerRight cL ((curriedTensor _).obj (Qh.obj (G.obj X))) ≫
+      (Functor.associator _ _ _).hom ≫ whiskerLeft G (tensorLeftCounit (G.obj X)) ≫
+      (Functor.associator _ _ _).inv
+  have := isIso_tensorLeftCounit (G.obj X) hFX
+  have : IsIso c₁ := by dsimp only [c₁]; infer_instance
+  have fac : whiskerLeft Qh τ ≫ c₁ = c₂ ≫ δ₀ := by
+    ext M
+    simpa [c₁, c₂, δ₀] using hτ M
+  have := commShift_tensorLeftCounit X hX
+  have := commShift_tensorLeftCounit (G.obj X) hFX
+  have : NatTrans.CommShift c₁ ℤ := by dsimp only [c₁]; infer_instance
+  have : NatTrans.CommShift c₂ ℤ := by dsimp only [c₂]; infer_instance
+  have := OplaxMonoidal.commShift_mapHomotopyCategoryδNatTrans_app F X
+  have : NatTrans.CommShift δ₀ ℤ := by dsimp only [δ₀]; infer_instance
+  have : NatTrans.CommShift (inv c₁) ℤ := NatTrans.CommShift.of_isIso c₁ ℤ
+  have : NatTrans.CommShift (whiskerLeft Qh τ) ℤ := by
+    rw [(IsIso.eq_comp_inv c₁).2 fac]
+    infer_instance
+  exact NatTrans.CommShift.of_whiskerLeft _ Qh
+    (fun M ↦ ⟨Qh.objPreimage M, (Qh.objObjPreimageIso M).inv, inferInstance⟩)
+
+open Functor in
+set_option maxHeartbeats 1000000 in
+/-- A natural transformation `τ : LF(- ⊗ᴸ Qh X) ⟶ LF(-) ⊗ᴸ LF(Qh X)` which is compatible, on
+the homotopy category, with the comparison `F(- ⊗ X) ⟶ F(-) ⊗ F(X)`, commutes with the shifts,
+if `X` and `F(X)` are K-flat. -/
+lemma commShift_of_tensorRight_fac (X : HomotopyCategory C₁ (.up ℤ))
+    (hX : (HomotopyCategory.quasiIso C₁ (.up ℤ)).kFlat X)
+    (hFX : (HomotopyCategory.quasiIso C₂ (.up ℤ)).kFlat ((F.mapHomotopyCategory (.up ℤ)).obj X))
+    (τ : (curriedTensor (DerivedCategory C₁)).flip.obj (Qh.obj X) ⋙ LF ⟶
+      LF ⋙ (curriedTensor (DerivedCategory C₂)).flip.obj (LF.obj (Qh.obj X)))
+    (hτ : ∀ M, τ.app (Qh.obj M) ≫ cL.app M ▷ LF.obj (Qh.obj X) ≫
+        Qh.obj ((F.mapHomotopyCategory (.up ℤ)).obj M) ◁ cL.app X ≫
+        (tensorRightCounit ((F.mapHomotopyCategory (.up ℤ)).obj X)).app
+          ((F.mapHomotopyCategory (.up ℤ)).obj M) =
+      LF.map ((tensorRightCounit X).app M) ≫ cL.app (M ⊗ X) ≫
+        Qh.map (((OplaxMonoidal.mapHomotopyCategoryδNatTrans (.up ℤ) F).app M).app X)) :
+    NatTrans.CommShift τ ℤ := by
+  let G := F.mapHomotopyCategory (.up ℤ)
+  let c₂ : Qh ⋙ ((curriedTensor _).flip.obj (Qh.obj X) ⋙ LF) ⟶
+      ((curriedTensor _).flip.obj X ⋙ G) ⋙ Qh :=
+    (Functor.associator _ _ _).inv ≫ whiskerRight (tensorRightCounit X) LF ≫
+      (Functor.associator _ _ _).hom ≫ whiskerLeft ((curriedTensor _).flip.obj X) cL ≫
+      (Functor.associator _ _ _).inv
+  let δ₀ : ((curriedTensor _).flip.obj X ⋙ G) ⋙ Qh ⟶
+      (G ⋙ (curriedTensor _).flip.obj (G.obj X)) ⋙ Qh :=
+    whiskerRight ((OplaxMonoidal.mapHomotopyCategoryδNatTrans (.up ℤ) F).flipApp X) Qh
+  let c₁ : Qh ⋙ (LF ⋙ (curriedTensor _).flip.obj (LF.obj (Qh.obj X))) ⟶
+      (G ⋙ (curriedTensor _).flip.obj (G.obj X)) ⋙ Qh :=
+    (Functor.associator _ _ _).inv ≫
+      whiskerRight cL ((curriedTensor _).flip.obj (LF.obj (Qh.obj X))) ≫
+      whiskerLeft (G ⋙ Qh) ((curriedTensor _).flip.map (cL.app X)) ≫
+      (Functor.associator _ _ _).hom ≫ whiskerLeft G (tensorRightCounit (G.obj X)) ≫
+      (Functor.associator _ _ _).inv
+  have := isIso_tensorRightCounit (G.obj X) hFX
+  have : IsIso c₁ := by dsimp only [c₁]; infer_instance
+  have fac : whiskerLeft Qh τ ≫ c₁ = c₂ ≫ δ₀ := by
+    ext M
+    simpa [c₁, c₂, δ₀] using hτ M
+  have := commShift_tensorRightCounit X hX
+  have := commShift_tensorRightCounit (G.obj X) hFX
+  have : NatTrans.CommShift c₁ ℤ := by dsimp only [c₁]; infer_instance
+  have : NatTrans.CommShift c₂ ℤ := by dsimp only [c₂]; infer_instance
+  have := OplaxMonoidal.commShift_mapHomotopyCategoryδNatTrans_flipApp F X
+  have : NatTrans.CommShift δ₀ ℤ := by dsimp only [δ₀]; infer_instance
+  have : NatTrans.CommShift (inv c₁) ℤ := NatTrans.CommShift.of_isIso c₁ ℤ
+  have : NatTrans.CommShift (whiskerLeft Qh τ) ℤ := by
+    rw [(IsIso.eq_comp_inv c₁).2 fac]
+    infer_instance
+  exact NatTrans.CommShift.of_whiskerLeft _ Qh
+    (fun M ↦ ⟨Qh.objPreimage M, (Qh.objObjPreimageIso M).inv, inferInstance⟩)
+
+end Comparison
 end DerivedCategory
 
 namespace AlgebraicGeometry
@@ -171,66 +292,16 @@ lemma leftDerivedUpperStarTensorComparison_app_app_fac
     (Functor.postcompose₂MapWhiskeringLeft₂
       (Functor.OplaxMonoidal.mapHomotopyCategoryδNatTrans (.up ℤ) (g)^*[A]) Qh) X M
 
-open Functor in
-set_option maxHeartbeats 1000000 in
 lemma commShift_leftDerivedUpperStarTensorComparisonApp_Qh_obj
     (X : HomotopyCategory (Sheaf Y.smallEtaleTopology A) (.up ℤ))
     (hX : (HomotopyCategory.quasiIso _ (.up ℤ)).kFlat X) (hgX : kFlatUpperStar A g X) :
-    NatTrans.CommShift (leftDerivedUpperStarTensorComparisonApp A g (Qh.obj X)) ℤ := by
-  let G := (g)^*[A].mapHomotopyCategory (.up ℤ)
-  let cL := (g)^*[A].leftDerivedFunctorCounit
-  let c₂ : Qh ⋙ ((-⊗ᴸ-(Y)[A]).obj (Qh.obj X) ⋙ L((g)^*[A])) ⟶
-      ((curriedTensor _).obj X ⋙ G) ⋙ Qh :=
-    (Functor.associator _ _ _).inv ≫ whiskerRight (tensorLeftCounit X) L((g)^*[A]) ≫
-      (Functor.associator _ _ _).hom ≫ whiskerLeft ((curriedTensor _).obj X) cL ≫
-      (Functor.associator _ _ _).inv
-  let δ₀ : ((curriedTensor _).obj X ⋙ G) ⋙ Qh ⟶ (G ⋙ (curriedTensor _).obj (G.obj X)) ⋙ Qh :=
-    whiskerRight ((OplaxMonoidal.mapHomotopyCategoryδNatTrans (.up ℤ) (g)^*[A]).app X) Qh
-  let c₁ : Qh ⋙ (L((g)^*[A]) ⋙ (-⊗ᴸ-(Z)[A]).obj (L((g)^*[A]).obj (Qh.obj X))) ⟶
-      (G ⋙ (curriedTensor _).obj (G.obj X)) ⋙ Qh :=
-    (Functor.associator _ _ _).inv ≫
-      whiskerLeft (Qh ⋙ L((g)^*[A])) ((curriedTensor _).map (cL.app X)) ≫
-      whiskerRight cL ((curriedTensor _).obj (Qh.obj (G.obj X))) ≫
-      (Functor.associator _ _ _).hom ≫ whiskerLeft G (tensorLeftCounit (G.obj X)) ≫
-      (Functor.associator _ _ _).inv
-  have := isIso_tensorLeftCounit (G.obj X) hgX
-  have : IsIso c₁ := by dsimp only [c₁]; infer_instance
-  have fac : whiskerLeft Qh (leftDerivedUpperStarTensorComparisonApp A g (Qh.obj X)) ≫ c₁ =
-      c₂ ≫ δ₀ := by
-    ext M
-    have key := leftDerivedUpperStarTensorComparison_app_app_fac A g X M
-    have e₁ : c₁.app M = ((derivedTensorLeftDerivedUpperStarCounit A g).app X).app M := by
-      simp [c₁, derivedTensorLeftDerivedUpperStarCounit]
-      rfl
-    have e₂ : (c₂ ≫ δ₀).app M = ((leftDerivedUpperStarDerivedTensorCounit A g).app X).app M ≫
-          ((Functor.postcompose₂MapWhiskeringLeft₂
-            (OplaxMonoidal.mapHomotopyCategoryδNatTrans (.up ℤ) (g)^*[A]) Qh).app X).app M := by
-      simp [c₂, δ₀, leftDerivedUpperStarDerivedTensorCounit]
-      rfl
-    rw [NatTrans.comp_app, e₂, Functor.whiskerLeft_app, e₁]
-    exact key
-  have := commShift_tensorLeftCounit X hX
-  have := commShift_tensorLeftCounit (G.obj X) hgX
-  have : NatTrans.CommShift ((curriedTensor (DerivedCategory (Sheaf Z.smallEtaleTopology A))).map
-      (cL.app X)) ℤ := inferInstance
-  have : NatTrans.CommShift (whiskerLeft (Qh ⋙ L((g)^*[A]))
-      ((curriedTensor (DerivedCategory (Sheaf Z.smallEtaleTopology A))).map (cL.app X))) ℤ :=
-    inferInstance
-  have : NatTrans.CommShift (whiskerRight cL ((curriedTensor _).obj (Qh.obj (G.obj X)))) ℤ :=
-    inferInstance
-  have : NatTrans.CommShift (whiskerLeft G (tensorLeftCounit (G.obj X))) ℤ :=
-    inferInstance
-  have : NatTrans.CommShift c₁ ℤ := by dsimp only [c₁]; infer_instance
-  have : NatTrans.CommShift c₂ ℤ := by dsimp only [c₂]; infer_instance
-  have := OplaxMonoidal.commShift_mapHomotopyCategoryδNatTrans_app (g)^*[A] X
-  have : NatTrans.CommShift δ₀ ℤ := by dsimp only [δ₀]; infer_instance
-  have : NatTrans.CommShift (inv c₁) ℤ := NatTrans.CommShift.of_isIso c₁ ℤ
-  have : NatTrans.CommShift
-      (whiskerLeft Qh (leftDerivedUpperStarTensorComparisonApp A g (Qh.obj X))) ℤ := by
-    rw [(IsIso.eq_comp_inv c₁).2 fac]
-    infer_instance
-  exact NatTrans.CommShift.of_whiskerLeft _ Qh
-    (fun M ↦ ⟨Qh.objPreimage M, (Qh.objObjPreimageIso M).inv, inferInstance⟩)
+    NatTrans.CommShift (leftDerivedUpperStarTensorComparisonApp A g (Qh.obj X)) ℤ :=
+  DerivedCategory.commShift_of_tensorLeft_fac (g)^*[A] L((g)^*[A])
+    (g)^*[A].leftDerivedFunctorCounit X hX hgX _ (fun M ↦ by
+      have := leftDerivedUpperStarTensorComparison_app_app_fac A g X M
+      simp [derivedTensorLeftDerivedUpperStarCounit,
+        leftDerivedUpperStarDerivedTensorCounit] at this ⊢
+      exact this)
 
 /-- For a fixed `K`, the tensor comparison `Lg^*(K ⊗ᴸ -) ⟶ Lg^*K ⊗ᴸ Lg^*(-)` commutes with
 the shifts. -/
@@ -249,7 +320,6 @@ instance commShift_leftDerivedUpperStarTensorComparisonApp
       (asIso (DerivedCategory.Q.map (Λ.resolutionNatTrans.app K₀))).symm ≪≫
       (DerivedCategory.quotientCompQhIso _).symm.app R
   exact commShift_leftDerivedUpperStarTensorComparisonApp_of_iso A g e
-
 /-- The tensor comparison `Lg^*(- ⊗ᴸ M) ⟶ Lg^*(-) ⊗ᴸ Lg^*M` for a fixed `M`. -/
 noncomputable abbrev leftDerivedUpperStarTensorComparisonFlipApp
     (M : DerivedCategory (Sheaf Y.smallEtaleTopology A)) :
@@ -277,68 +347,16 @@ lemma commShift_leftDerivedUpperStarTensorComparisonFlipApp_of_iso
   rw [eq]
   infer_instance
 
-open Functor in
-set_option maxHeartbeats 1000000 in
 lemma commShift_leftDerivedUpperStarTensorComparisonFlipApp_Qh_obj
     (X : HomotopyCategory (Sheaf Y.smallEtaleTopology A) (.up ℤ))
     (hX : (HomotopyCategory.quasiIso _ (.up ℤ)).kFlat X) (hgX : kFlatUpperStar A g X) :
-    NatTrans.CommShift (leftDerivedUpperStarTensorComparisonFlipApp A g (Qh.obj X)) ℤ := by
-  let G := (g)^*[A].mapHomotopyCategory (.up ℤ)
-  let cL := (g)^*[A].leftDerivedFunctorCounit
-  let c₂ : Qh ⋙ ((-⊗ᴸ-(Y)[A]).flip.obj (Qh.obj X) ⋙ L((g)^*[A])) ⟶
-      ((curriedTensor _).flip.obj X ⋙ G) ⋙ Qh :=
-    (Functor.associator _ _ _).inv ≫ whiskerRight (tensorRightCounit X) L((g)^*[A]) ≫
-      (Functor.associator _ _ _).hom ≫ whiskerLeft ((curriedTensor _).flip.obj X) cL ≫
-      (Functor.associator _ _ _).inv
-  let δ₀ : ((curriedTensor _).flip.obj X ⋙ G) ⋙ Qh ⟶
-      (G ⋙ (curriedTensor _).flip.obj (G.obj X)) ⋙ Qh :=
-    whiskerRight ((OplaxMonoidal.mapHomotopyCategoryδNatTrans (.up ℤ) (g)^*[A]).flipApp X) Qh
-  let c₁ : Qh ⋙ (L((g)^*[A]) ⋙ (-⊗ᴸ-(Z)[A]).flip.obj (L((g)^*[A]).obj (Qh.obj X))) ⟶
-      (G ⋙ (curriedTensor _).flip.obj (G.obj X)) ⋙ Qh :=
-    (Functor.associator _ _ _).inv ≫
-      whiskerRight cL ((curriedTensor _).flip.obj (L((g)^*[A]).obj (Qh.obj X))) ≫
-      whiskerLeft (G ⋙ Qh) ((curriedTensor _).flip.map (cL.app X)) ≫
-      (Functor.associator _ _ _).hom ≫ whiskerLeft G (tensorRightCounit (G.obj X)) ≫
-      (Functor.associator _ _ _).inv
-  have := isIso_tensorRightCounit (G.obj X) hgX
-  have : IsIso c₁ := by dsimp only [c₁]; infer_instance
-  have fac : whiskerLeft Qh (leftDerivedUpperStarTensorComparisonFlipApp A g (Qh.obj X)) ≫ c₁ =
-      c₂ ≫ δ₀ := by
-    ext M
-    have key := leftDerivedUpperStarTensorComparison_app_app_fac A g M X
-    have e₁ : c₁.app M = ((derivedTensorLeftDerivedUpperStarCounit A g).app M).app X := by
-      simp [c₁, derivedTensorLeftDerivedUpperStarCounit]
-      rfl
-    have e₂ : (c₂ ≫ δ₀).app M = ((leftDerivedUpperStarDerivedTensorCounit A g).app M).app X ≫
-          ((Functor.postcompose₂MapWhiskeringLeft₂
-            (OplaxMonoidal.mapHomotopyCategoryδNatTrans (.up ℤ) (g)^*[A]) Qh).app M).app X := by
-      simp [c₂, δ₀, leftDerivedUpperStarDerivedTensorCounit]
-      rfl
-    rw [NatTrans.comp_app, e₂, Functor.whiskerLeft_app, e₁]
-    exact key
-  have := commShift_tensorRightCounit X hX
-  have := commShift_tensorRightCounit (G.obj X) hgX
-  have : NatTrans.CommShift ((curriedTensor
-      (DerivedCategory (Sheaf Z.smallEtaleTopology A))).flip.map (cL.app X)) ℤ := inferInstance
-  have : NatTrans.CommShift (whiskerLeft (G ⋙ Qh)
-      ((curriedTensor (DerivedCategory (Sheaf Z.smallEtaleTopology A))).flip.map (cL.app X))) ℤ :=
-    inferInstance
-  have : NatTrans.CommShift (whiskerRight cL
-      ((curriedTensor _).flip.obj (L((g)^*[A]).obj (Qh.obj X)))) ℤ :=
-    inferInstance
-  have : NatTrans.CommShift (whiskerLeft G (tensorRightCounit (G.obj X))) ℤ :=
-    inferInstance
-  have : NatTrans.CommShift c₁ ℤ := by dsimp only [c₁]; infer_instance
-  have : NatTrans.CommShift c₂ ℤ := by dsimp only [c₂]; infer_instance
-  have := OplaxMonoidal.commShift_mapHomotopyCategoryδNatTrans_flipApp (g)^*[A] X
-  have : NatTrans.CommShift δ₀ ℤ := by dsimp only [δ₀]; infer_instance
-  have : NatTrans.CommShift (inv c₁) ℤ := NatTrans.CommShift.of_isIso c₁ ℤ
-  have : NatTrans.CommShift
-      (whiskerLeft Qh (leftDerivedUpperStarTensorComparisonFlipApp A g (Qh.obj X))) ℤ := by
-    rw [(IsIso.eq_comp_inv c₁).2 fac]
-    infer_instance
-  exact NatTrans.CommShift.of_whiskerLeft _ Qh
-    (fun M ↦ ⟨Qh.objPreimage M, (Qh.objObjPreimageIso M).inv, inferInstance⟩)
+    NatTrans.CommShift (leftDerivedUpperStarTensorComparisonFlipApp A g (Qh.obj X)) ℤ :=
+  DerivedCategory.commShift_of_tensorRight_fac (g)^*[A] L((g)^*[A])
+    (g)^*[A].leftDerivedFunctorCounit X hX hgX _ (fun M ↦ by
+      have := leftDerivedUpperStarTensorComparison_app_app_fac A g M X
+      simp [derivedTensorLeftDerivedUpperStarCounit,
+        leftDerivedUpperStarDerivedTensorCounit] at this ⊢
+      exact this)
 
 /-- For a fixed `M`, the tensor comparison `Lg^*(- ⊗ᴸ M) ⟶ Lg^*(-) ⊗ᴸ Lg^*M` commutes with
 the shifts. -/
@@ -357,7 +375,6 @@ instance commShift_leftDerivedUpperStarTensorComparisonFlipApp
       (asIso (DerivedCategory.Q.map (Λ.resolutionNatTrans.app M₀))).symm ≪≫
       (DerivedCategory.quotientCompQhIso _).symm.app R
   exact commShift_leftDerivedUpperStarTensorComparisonFlipApp_of_iso A g e
-
 
 end
 
