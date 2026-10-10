@@ -13,17 +13,79 @@
  },
  "kind": "statement",
  "title": "Hom into an essentially constant ind-system value is the colimit of Hom sets",
- "statement": "Let $J$ be a filtered category, $\\mathcal C$ a category, and $F:J\\to\\mathcal C$ a diagram that is essentially constant as an ind-object with value $X$ [def-weil-abstract-derived-category]. For every object $Y$ of $\\mathcal C$, the canonical map $\\varinjlim_{j\\in J}\\operatorname{Hom}_{\\mathcal C}(Y,F(j))\\to\\operatorname{Hom}_{\\mathcal C}(Y,X)$ induced by the essential-constancy isomorphisms is a bijection.",
+ "statement": "Let $J$ be a filtered category, $\\mathcal C$ a category, and $F:J\\to\\mathcal C$ a diagram that is essentially constant as an ind-object with value $X$ [def-pc-essentially-constant-ind-diagram]. For every object $Y$ of $\\mathcal C$, the canonical map $\\varinjlim_{j\\in J}\\operatorname{Hom}_{\\mathcal C}(Y,F(j))\\to\\operatorname{Hom}_{\\mathcal C}(Y,X)$ induced by the cocone maps $p_j:F(j)\\to X$ of the essential constancy is a bijection.",
  "source": {
   "document": "literature/stacks-project/derived.tex",
   "place": "Stacks Tag 0FND, label lemma-pre-derived-adjoint-functors-general, proof line 9515, first equality; Categories Tag 05PY, label categories-lemma-characterize-essentially-constant-ind"
  },
  "stmt_deps": [
-  "def-weil-abstract-derived-category"
+  "def-pc-essentially-constant-ind-diagram"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Write p_j : F(j) \\to X for the natural maps supplied by essential constancy. The canonical map from the filtered colimit sends the class of a morphism f : Y \\to F(j) to p_j composed with f; naturality of the p_j makes this independent of the representative and defines a map into Hom_C(Y,X).",
+   "uses": [
+    "def-pc-essentially-constant-ind-diagram"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/categories.tex",
+    "place": "Tag 05PY, characterization of essentially constant ind-diagrams"
+   }
+  },
+  {
+   "text": "For surjectivity, let g : Y \\to X. The chosen section s : X \\to F(j0) gives the representative s composed with g at j0, and p_{j0} composed with s is the identity of X, so its image is g.",
+   "uses": [
+    "def-pc-essentially-constant-ind-diagram"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 0FND, lemma-pre-derived-adjoint-functors-general, proof line 9515, first equality"
+   }
+  },
+  {
+   "text": "For injectivity, suppose f : Y \\to F(j) and f' : Y \\to F(j') have equal images in Hom_C(Y,X), so p_j composed with f equals p_{j'} composed with f'. Choose, by filteredness, an index k receiving maps from j, j' and j0. Applying filteredness once more if needed lets the factorization clause of the definition be used for both transition maps into one common stage k.",
+   "uses": [
+    "def-pc-essentially-constant-ind-diagram"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/categories.tex",
+    "place": "Tag 05PY, characterization of essentially constant ind-diagrams"
+   }
+  },
+  {
+   "text": "At that common stage, the two transition composites are respectively (F(j0) \\to F(k)) composed with s composed with p_j and (F(j0) \\to F(k)) composed with s composed with p_{j'}. Postcomposing f and f' therefore gives equal arrows because p_j composed with f equals p_{j'} composed with f'. The two representatives agree at a later stage and define the same colimit class, proving injectivity.",
+   "uses": [
+    "def-pc-essentially-constant-ind-diagram"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/categories.tex",
+    "place": "Tag 05PY, characterization of essentially constant ind-diagrams"
+   }
+  },
+  {
+   "text": "The construction is compatible with postcomposition in Y and with morphisms of essentially constant diagrams, so the resulting bijection is the stated canonical one.",
+   "uses": [
+    "def-pc-essentially-constant-ind-diagram"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 0FND, lemma-pre-derived-adjoint-functors-general, proof line 9515"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-essentially-constant-ind-diagram"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/derived.tex",
+  "place": "Tag 0FND, lemma-pre-derived-adjoint-functors-general, proof line 9515; Categories Tag 05PY"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -55,12 +117,28 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-pc-pre-derived-adjoint-functors-general",
   "by": "worker",
   "date": "2026-10-10"
  },
  "chapter": "sec-picard-framework",
- "unit": "sk-thm-picard-duality"
+ "unit": "sk-thm-picard-duality",
+ "split_report": {
+  "date": "2026-10-11",
+  "item": "lem-pc-essentially-constant-ind-hom-colimit",
+  "worker": "stage1",
+  "summary": "Read Stacks Categories Tag 05PY and Derived Tag 0FND. Added a statement-only definition node for the cone, section, and eventual factorization data of an essentially constant filtered ind-diagram. Split the Hom-colimit assertion into the canonical-map, surjectivity, injectivity, and naturality steps; all reductions are direct compositions and filteredness from the cited definition.",
+  "blueprint": "Realizes the ind-system Hom computation in the proof of the pre-derived adjunction: the first equality in the blueprint ancestor's ind-system calculation.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-eci2032",
+  "group": "G1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-eci2032 (reviewer sub-agent of L); spot-checked: New def checked against Categories Def 05PU(1) word for word (cocone, section, retraction, factorization j->k, j0->k); not a duplicate of def-weil-pbc-essentially-constant-system (inverse systems of abelian groups only). Injectivity steps 3-4 verified (common stage via filteredness, coequalizing the two j0->k maps). FIX more, RETURN less: (1) B3/C4 new def statement and stmt_deps still cited the unrelated def-weil-abstract-derived-category although the second reading claims it was removed; citation and stmt_dep dropped; (2) new def source pointed at Lemma 05PY, corrected to Definition 05PU part (1); (3) E7 item statement text still cited [def-weil-abstract-derived-category] while stmt_deps named the new def, and called the cocone maps 'isomorphisms'; citation changed to [def-pc-essentially-constant-ind-diagram] and wording to 'cocone maps p_j' (named change, reason: wrong citation and false wording; mathematics unchanged).; 2 file(s) fixed by the reviewer"
+ }
 }
