@@ -14,7 +14,7 @@
     "lem-weil-pbc-finite-etale-lifting-essential-surjectivity"
    ]
   },
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "Pullback of an ample invertible module",
@@ -30,9 +30,44 @@
   "pqf-def-affine-morphism",
   "def-sc-invertible-module"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "For every $n\\ge1$, pullback and tensor product give $(g^*\\mathcal L)^{\\otimes n}\\cong g^*(\\mathcal L^{\\otimes n})$, and $g^*\\mathcal L$ is invertible [lem-weil-pbc-invertible-pullback-tensor]. If $s\\in\\Gamma(X,\\mathcal L^{\\otimes n})$ and $t=g^*s$, the fibre identification in that lemma gives $t(y)=s(g(y))\\otimes1$. Extension of a one-dimensional vector space from $\\kappa(g(y))$ to $\\kappa(y)$ preserves whether a vector is zero. Hence $Y_t=g^{-1}(X_s)$.",
+   "uses": [
+    "lem-weil-pbc-invertible-pullback-tensor"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Lemma Tag 0892 (lemma-pullback-ample-tensor-relatively-ample), part (2), specialized to an affine morphism; nonvanishing equality follows from Modules Lemma Tag 01CT as recorded in lem-weil-pbc-invertible-pullback-tensor"
+   }
+  },
+  {
+   "text": "By ampleness of $\\mathcal L$ [def-weil-pbc-ample-invertible-module], $X$ is quasi-compact and the affine opens $X_s$, with $s$ ranging over global sections of positive tensor powers of $\\mathcal L$, cover $X$. Choose finitely many of them covering $X$. Their inverse images $g^{-1}(X_s)=Y_{g^*s}$ cover $Y$ by the previous step; each is affine because the restriction $g^{-1}(X_s)\\to X_s$ is affine by base change [lem-weil-pbc-affine-morphism-permanence, clause (1)] and an affine morphism over the affine $X_s$ has affine source [lem-weil-pbc-affine-morphism-permanence, clause (2)]. Thus $Y$ has a finite affine open cover; each affine scheme is quasi-compact [lem-weil-pbc-affine-scheme-qcqs], so $Y$, a finite union of quasi-compact opens, is quasi-compact, and every point lies in an affine nonvanishing locus of a positive power of $g^*\\mathcal L$. By the same ampleness definition, $g^*\\mathcal L$ is ample.",
+   "uses": [
+    "def-weil-pbc-ample-invertible-module",
+    "lem-weil-pbc-affine-morphism-permanence",
+    "lem-weil-pbc-invertible-pullback-tensor",
+    "lem-weil-pbc-affine-scheme-qcqs"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Lemma Tag 0892 (lemma-pullback-ample-tensor-relatively-ample), part (2), affine case; Properties Definition Tag 01PS gives the affine-nonvanishing-locus criterion"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-invertible-pullback-tensor",
+  "def-weil-pbc-ample-invertible-module",
+  "lem-weil-pbc-affine-morphism-permanence",
+  "lem-weil-pbc-affine-scheme-qcqs"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/morphisms.tex",
+  "place": "Lemma Tag 0892, part (2), specialized to affine morphisms and proved directly from Properties Definition Tag 01PS"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -57,7 +92,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "worker",
@@ -77,5 +112,29 @@
   }
  },
  "chapter": "sec-proper-base-change",
- "unit": "sk-thm-p1"
+ "unit": "sk-thm-p1",
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "lem-weil-pbc-pullback-ample-invertible",
+  "worker": "stage1",
+  "summary": "Proved the affine case of Stacks 0892(2) directly from the absolute ampleness criterion 01PS. The pulled-back section has inverse-image nonvanishing locus by the existing invertible-pullback-and-fibre lemma; affineness of its locus follows from the existing affine-morphism permanence lemma. A finite such cover also proves quasi-compactness of the source. No new nodes were needed.",
+  "blueprint": "This created node serves step 7 of the split of thm-weil-pbc-finite-etale-lifting, through formal-systems graded vanishing: the needed clause is preservation of ampleness by an affine pullback. The imported blueprint has no separate proof step for this auxiliary assertion.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-invertible-pullback-tensor",
+    "why": "Its generic pullback, tensor, and fibre-value identities for invertible modules identify the pulled-back nonvanishing locus; no node of sk-thm-p1 gives these identities."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-invertible-pullback-tensor"
+ ],
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-pbamp",
+  "group": "G1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-pbamp (reviewer sub-agent of L); spot-checked: Source: Stacks Morphisms Lemma 0892(2) (label morphisms-lemma-pullback-ample-tensor-relatively-ample; the local morphisms.tex lacks the label, recorded WANTED) with absolute ampleness Properties Definition 01PS; the item's statement (g affine, L ample invertible on X, then g^*L ample) is the affine special case of 0892(2), no hypothesis added or dropped; statement unchanged, only proof fields and same_as=[] changed. Step 1: clauses (1)-(3) of lem-weil-pbc-invertible-pullback-tensor give invertibility of g^*L, the iso g^*(L^n) = (g^*L)^n carrying g^*s to the tensor of pulled-back sections, and (g^*s)(y)=s(g(y)) tensor 1; a nonzero vector in a 1-dim kappa(g(y))-space stays nonzero after field extension, so Y_{g^*s}=g^{-1}(X_s), matching the definition of X_s in def-weil-pbc-ample-invertible-module. Step 2: conditions (1),(2) of def-weil-pbc-ample-invertible-module; lem-weil-pbc-affine-morphism-permanence (1),(2) make g^{-1}(X_s) affine (also direct from pqf-def-affine-morphism); finite affine cover gives quasi-compactness of Y. Tool use lem-weil-pbc-invertible-pullback-tensor (sk-thm-reduction) accepted as a generic black box (C8). Small cases: Y empty (vacuous, quasi-compact), g identity, g an open immersion of an affine open (non-surjective) all consistent. FIX: dag/nodes/sec-proper-base-change/lem-weil-pbc-pullback-ample-invertible.json: proof[1].text, proof[1].uses, proof_deps: added citation of lem-weil-pbc-affine-scheme-qcqs (affine schemes are quasi-compact) for the step 'finite affine open cover implies Y quasi-compact' (C1). 14:28-14:30 UTC (date -u).; 1 file(s) fixed by the reviewer"
+ }
 }
