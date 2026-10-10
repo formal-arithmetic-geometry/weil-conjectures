@@ -27,9 +27,40 @@
   "def-pc-derived-pullback",
   "def-pc-kflat-complex"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Because f is proper between Noetherian schemes, it is quasi-compact and quasi-separated, so the projection-formula isomorphism [lem-pc-projection-formula] applies to E=c(O_Y) and every quasi-coherent complex on Y. Composing this isomorphism with the counit Rf_*c(O_Y) \\to O_Y gives exactly the morphism whose mate under Rf_* dashv c is the comparison morphism in the statement.",
+   "uses": [
+    "lem-pc-projection-formula"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/duality.tex",
+    "place": "Tag 0A9T proof, construction of the comparison morphism"
+   }
+  },
+  {
+   "text": "Let K^vee be the dual of K given by [lem-pc-perfect-tensor-hom-duality]; by the pullback clause of that statement (with g=f), Lf^*K is perfect on X with dual Lf^*K^vee. For every E in D_QCoh(O_X), apply the second tensor-Hom isomorphism of [lem-pc-perfect-tensor-hom-duality] on X to the pair (Lf^*K, Lf^*K^vee) with A=E and B=c(O_Y), then the adjunction Rf_* dashv c, then the projection-formula isomorphism [lem-pc-projection-formula] (with E and K^vee), and finally the second tensor-Hom isomorphism on Y for the pair (K,K^vee) with A=Rf_*E and B=O_Y, to obtain the natural chain Hom_X(E, Lf^*K tensor^L c(O_Y)) = Hom_X(Lf^*K^vee tensor^L E, c(O_Y)) = Hom_Y(Rf_*(Lf^*K^vee tensor^L E), O_Y) = Hom_Y(K^vee tensor^L Rf_*E, O_Y) = Hom_Y(Rf_*E, K) = Hom_X(E, c(K)). Naturality of every identification shows that the map induced by the comparison morphism is the identity: its mate is, by definition, the projection-formula map followed by the counit, which is exactly the middle pair of maps in this chain. Hence Yoneda implies that the comparison morphism is an isomorphism.",
+   "uses": [
+    "lem-pc-perfect-tensor-hom-duality",
+    "lem-pc-projection-formula"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/duality.tex",
+    "place": "Tag 0A9T proof, perfect-complex tensor-Hom argument"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-projection-formula",
+  "lem-pc-perfect-tensor-hom-duality"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/duality.tex",
+  "place": "Tag 0A9T proof"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -54,12 +85,37 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-sc-smooth-proper-diagonal-tensor-formula",
   "by": "worker",
   "date": "2026-10-10"
  },
  "chapter": "sec-picard-framework",
- "unit": "sk-thm-picard-duality"
+ "unit": "sk-thm-picard-duality",
+ "split_report": {
+  "date": "2026-10-11",
+  "item": "lem-sc-smooth-proper-tensor-perfect-case",
+  "worker": "stage1",
+  "summary": "Split Tag 0A9T into construction of the projection-formula mate and the dualizable-perfect-complex Hom calculation. Added the statement-only auxiliary node lem-pc-perfect-tensor-hom-duality because the existing perfect-complex definition does not state dualizability.",
+  "blueprint": "Realizes the comparison-isomorphism-for-perfect-complexes clause of lem-sc-finite-duality through the Tag 0A9T proof.",
+  "tool_uses": [
+   {
+    "node": "lem-pc-projection-formula",
+    "why": "The proof needs the general derived projection formula for the proper morphism; the Picard-duality unit has no more specific replacement for this generic tensor exchange."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pc-projection-formula",
+  "lem-pc-projection-formula"
+ ],
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-spp1953",
+  "group": "E1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-spp1953 (reviewer sub-agent of L); spot-checked: Read packet whole; checked Step 1 against lem-pc-projection-formula (proper Noetherian gives qcqs) and Step 2's Hom chain against Tag 0A9T and the cited statements; no generation/shift argument here, so the sibling direct-sums slip does not recur and the sibling is not used or restated. FIX more, RETURN less: (1) C1: Step 2's first identification needs Lf^*K perfect with dual Lf^*K^vee, which no cited statement gave; added a pullback clause to new node lem-pc-perfect-tensor-hom-duality (Lg^*K perfect, Lg^*(K^vee) a dual; Stacks Cohomology dual-perfect-complex + pullback) and named it in Step 2. (2) C4: last identification used a double dual K^vee^vee=K that the new node does not state; replaced by the node's second isomorphism on Y with A=Rf_*E, B=O_Y directly. New node not class b/c/d (Mathlib searches recorded, no same-tag duplicate). Report's claimed created.item correction was not actually made; left as is (existing node's field). tool_use lem-pc-projection-formula accepted as generic.; 2 file(s) fixed by the reviewer"
+ }
 }
