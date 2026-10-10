@@ -21,7 +21,9 @@ Checks (roles/remote-lead.md §4-5, the returns of 2026-10-09):
   5. the item: status split (or a Mathlib leaf), split_report, proof_origin, every step with
      text and a boolean elementary, cited nodes or elementary, proof_deps = union of uses;
   6. a Stacks tag (0XYZ) or section number (a.b.c) written in a statement or a step is carried
-     by a cited node (or by the node itself); a step that only quotes a tag fails;
+     by a cited node (or by the node itself); a non-elementary step that only quotes a tag fails;
+     a step marked elementary may name a tag for a fact of two or three lines (warning only;
+     the reviewer judges whether it is elementary; rule of 2026-10-10 17:10 UTC);
   7. tools/review_split.py <item> passes and tools/check_dag.py reports no cycle, route or
      dependency error;
   8. blueprint references (stages/1-dag.md §6, rule of 2026-10-10): the item and every new node
@@ -286,8 +288,10 @@ def main() -> int:
                 continue
             if carried(t, d):
                 warns.append(f"step {k}: quotes {t}, carried only by the item itself (fine if it is the item's own source; if it is another lemma used here, cite a node that states it)")
+            elif s.get("elementary") is True:
+                warns.append(f"step {k}: elementary step quotes {t} with no node for it; accepted (rule of 2026-10-10 17:10 UTC: an elementary fact of two or three lines from the cited statements is a step, not a node; the reviewer judges whether it is elementary)")
             else:
-                f(f"step {k}: quotes Stacks tag or lemma number {t}, which no cited node carries; cite a node that states it (create it unsplit if none exists)")
+                f(f"step {k}: quotes Stacks tag or lemma number {t}, which no cited node carries; cite a node that states it, or mark the step elementary if the fact is two or three lines from the cited statements (create a node only for a real lemma)")
     if pf and set(d.get("proof_deps") or []) != set(uses_all):
         f(f"proof_deps differ from the union of the steps' uses: {sorted(set(d.get('proof_deps') or []) ^ set(uses_all))}")
     for nid, nd in [(item, d)] + list(new_nodes.items()):
