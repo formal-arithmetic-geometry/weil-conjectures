@@ -12,9 +12,74 @@
   "pqf-def-coherent",
   "def-weil-pbc-generating-sections"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Reduction and finiteness. Since $U$ is affine [def-pc-scheme], choose an isomorphism of schemes $g:U\\xrightarrow{\\sim}\\operatorname{Spec}A$; transporting $\\mathcal G$ along $g$ preserves quasi-coherence, finite type, global sections (with $g^\\sharp:A\\xrightarrow{\\sim}\\mathcal O_U(U)$) and the property that given sections generate [def-weil-pbc-generating-sections] (surjectivity of a map of sheaves is invariant under homeomorphism with compatible sheaf isomorphisms). So we may assume $U=\\operatorname{Spec}R$ with $R=\\Gamma(U,\\mathcal O_U)$. Put $M=\\Gamma(U,\\mathcal G)$, an $R$-module. Applying [lem-weil-pbc-quasi-coherent-finite-type-affine] (a) to the scheme $X=U$ and its affine open $U$ itself: since $\\mathcal G$ is of finite type [pqf-def-coherent], $M$ is a finitely generated $R$-module. Hence a finite generating family $h_1,\\dots,h_k$ of $M$ exists, and the first assertion follows from the second, which we now prove for an arbitrary such family. Let $\\varphi:\\mathcal O_U^{\\oplus k}\\to\\mathcal G$, $(f_j)\\mapsto\\sum_jf_jh_j$, be the map of [def-weil-pbc-generating-sections]; we must show $\\varphi$ is surjective as a map of sheaves.",
+   "uses": [
+    "def-pc-scheme",
+    "def-weil-pbc-generating-sections",
+    "lem-weil-pbc-quasi-coherent-finite-type-affine",
+    "pqf-def-coherent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/properties.tex",
+    "place": "Properties, Lemma 01PB (lemma-finite-type-module): finite type O_X-module M~ on Spec R iff M finite"
+   }
+  },
+  {
+   "text": "$\\mathcal G\\cong\\widetilde M$ compatibly with sections. Let $\\widetilde M$ with $\\tau_U:M\\to\\Gamma(U,\\widetilde M)$ be as in [lem-weil-pbc-spec-module-tilde-sections]. By [lem-weil-pbc-affine-tilde-gamma-adjunction] (3), since $\\mathcal G$ is quasi-coherent, the counit $\\varepsilon:\\widetilde M\\to\\mathcal G$ (the map corresponding to $\\mathrm{id}_M$ under the adjunction (1), so $\\varepsilon_U\\circ\\tau_U=\\mathrm{id}_M$) is an isomorphism of $\\mathcal O_U$-modules. Hence for every $x\\in U$ the stalk map $\\varepsilon_x:\\widetilde M_x\\to\\mathcal G_x$ is an isomorphism of $\\mathcal O_{U,x}$-modules carrying the germ $\\tau_U(m)_x$ to the germ $m_x$ of the global section $m\\in M=\\mathcal G(U)$.",
+   "uses": [
+    "lem-weil-pbc-spec-module-tilde-sections",
+    "lem-weil-pbc-affine-tilde-gamma-adjunction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Schemes, Lemma 01IA (lemma-quasi-coherent-affine): a quasi-coherent module on Spec R is the sheaf associated to Gamma(X, F); Lemma 01I7 (lemma-compare-constructions) for the mapping property"
+   }
+  },
+  {
+   "text": "Surjectivity on stalks. Let $x\\in U$ correspond to the prime $\\mathfrak p\\subset R$ and $S=R\\setminus\\mathfrak p$; the germ map $\\rho:R\\to\\mathcal O_{U,x}$ is a localization at $S$ [lem-weil-pbc-spec-domain-stalks-function-field] (1), so each $\\rho(s)$, $s\\in S$, is a unit. By [lem-weil-pbc-spec-tilde-stalk-localization], $m\\mapsto\\tau_U(m)_x$ is a localization of $M$ at $S$, so every element of $\\widetilde M_x$ has the form $\\rho(s)^{-1}\\tau_U(m)_x$; by step 2 every element of $\\mathcal G_x$ has the form $\\rho(s)^{-1}m_x$ with $m\\in M$, $s\\in S$. Write $m=\\sum_jr_jh_j$ with $r_j\\in R$ (the $h_j$ generate $M$). The stalk of $\\mathcal O_U^{\\oplus k}$ at $x$ is $\\mathcal O_{U,x}^{\\oplus k}$ and $\\varphi_x(g_1,\\dots,g_k)=\\sum_jg_j(h_j)_x$; since taking germs is compatible with the module structures, $\\rho(s)^{-1}m_x=\\sum_j\\rho(s)^{-1}\\rho(r_j)(h_j)_x=\\varphi_x\\big((\\rho(s)^{-1}\\rho(r_j))_j\\big)$. So $\\varphi_x$ is surjective for every $x\\in U$.",
+   "uses": [
+    "lem-weil-pbc-spec-domain-stalks-function-field",
+    "lem-weil-pbc-spec-tilde-stalk-localization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Schemes, Lemma 01HV (lemma-spec-sheaves) (6),(7): stalks of O_X and of M~ are localizations"
+   }
+  },
+  {
+   "text": "Conclusion. By [lem-weil-pbc-locally-surjective-iff-stalks] (applied to the underlying presheaves of sets of $\\varphi$), a map of sheaves on $U$ that is surjective on all stalks is surjective in the sense of sheaves. Hence $\\varphi$ is surjective, i.e. $h_1,\\dots,h_k$ generate $\\mathcal G$ [def-weil-pbc-generating-sections].",
+   "uses": [
+    "lem-weil-pbc-locally-surjective-iff-stalks",
+    "def-weil-pbc-generating-sections"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sheaves.tex",
+    "place": "Sheaves, Definition 007U (5) and Lemma 0H7H (2): surjective maps of sheaves are those surjective on all stalks"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-scheme",
+  "def-weil-pbc-generating-sections",
+  "lem-weil-pbc-quasi-coherent-finite-type-affine",
+  "pqf-def-coherent",
+  "lem-weil-pbc-spec-module-tilde-sections",
+  "lem-weil-pbc-affine-tilde-gamma-adjunction",
+  "lem-weil-pbc-spec-domain-stalks-function-field",
+  "lem-weil-pbc-spec-tilde-stalk-localization",
+  "lem-weil-pbc-locally-surjective-iff-stalks"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/properties.tex",
+  "place": "Properties, Lemma 01PB (lemma-finite-type-module) with Schemes, Lemmas 01IA (lemma-quasi-coherent-affine) and 01HV (lemma-spec-sheaves); Stacks states no separate lemma that a finite generating family of Gamma(U,G) generates G, the stalk argument assembling these is the agent's"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -43,10 +108,31 @@
    "results": "only Sheaf/Generators.lean, Sheaf/Quasicoherent.lean, Sheaf/LocallyFree.lean; nothing in AlgebraicGeometry/Modules (Tilde.lean has no finiteness/generation lemma)",
    "date": "2026-10-10",
    "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "surjective map of modules induces surjective (epimorphism) map of tilde sheaves on Spec",
+   "results": "CategoryTheory.Sheaf.isLocallySurjective_iff_epi' (Mathlib.CategoryTheory.Sites.EpiMono), PresheafOfModules.epi_of_surjective, IsLocalizedModule.map_surjective, SheafedSpace.epi_of_base_surjective_of_stalk_mono; nothing on tilde / affine schemes",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "quasi-coherent sheaf on affine scheme with finitely generated global sections is globally generated by finitely many sections",
+   "results": "SheafOfModules.GeneratingSections.IsFiniteType, SheafOfModules.IsFiniteType.exists_localGeneratorsData, SheafOfModules.localGeneratorsDataOfIsFiniteType (Mathlib.Algebra.Category.ModuleCat.Sheaf.Generators), QuasicoherentData...IsFinitePresentation (Sheaf.Quasicoherent); general sites only, no affine-scheme statement",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rn 'FiniteType\\|finite_type\\|Module.Finite\\|IsFiniteType' Mathlib/AlgebraicGeometry/Modules/*.lean (Presheaf.lean, Sheaf.lean, Tilde.lean)",
+   "results": "none",
+   "date": "2026-10-10",
+   "verdict": "no match"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "worker",
@@ -66,5 +152,17 @@
   }
  },
  "chapter": "sec-proper-base-change",
- "unit": "sk-thm-p1"
+ "unit": "sk-thm-p1",
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "lem-weil-pbc-affine-finite-type-generating-sections",
+  "worker": "stage1",
+  "summary": "Split into 4 steps following Properties 01PB, Schemes 01IA and 01HV: (1) reduce to U = Spec R and get M = Gamma(U,G) finitely generated from lem-weil-pbc-quasi-coherent-finite-type-affine (a), which carries 01PB; (2) G is isomorphic to M~ by the counit, which is an isomorphism (lem-weil-pbc-affine-tilde-gamma-adjunction (3), carrying 01IA); (3) stalks: G_x = M_p is generated over O_{U,x} by germs of global sections (Mathlib leaves lem-weil-pbc-spec-tilde-stalk-localization and lem-weil-pbc-spec-domain-stalks-function-field), so phi_x is surjective; (4) stalkwise surjective implies surjective (Mathlib leaf lem-weil-pbc-locally-surjective-iff-stalks). This route needs no node for the exactness of M -> M~. Statement and stmt_deps kept. No new nodes. The Mathlib search was repeated (no match)."
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "result": "accepted",
+  "note": "4 steps with existing nodes only: Gamma finitely generated on an affine (01PB node), G = M~ by the tilde-Gamma adjunction, surjectivity on stalks via the stalk-localization leaves, surjective on stalks => surjective (leaf). No new nodes."
+ }
 }
