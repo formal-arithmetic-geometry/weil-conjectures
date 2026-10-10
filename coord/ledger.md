@@ -1208,3 +1208,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 10:06 L: accepted lem-weil-pbc-power-series-n2 (032Q; new 032K N-2 clause and 0BI0 nodes).
 - 10:07 L: accepted lem-weil-pbc-module-tensor-hom-adjunction (01CN; new 00DE leaf). slopmaster2 PresheafOfModules.homObjEquiv is the presheaf-level form, noted for stage 2.
 - 10:09 L: accepted lem-weil-pbc-n2-descends-finite-domain-extension (032K N-2 clause, agent proof, 6 steps, 0 new).
+- 10:10 L: accepted lem-weil-pbc-sections-over-quasi-compact-open (01PQ, 8 steps; new 01PM node). Briefs: the slopmaster2 search is a plain grep (no git), fixed in brief-stage1, 1-dag and delivery-errors B10.

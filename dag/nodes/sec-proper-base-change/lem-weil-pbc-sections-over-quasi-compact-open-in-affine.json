@@ -1,0 +1,89 @@
+{
+ "id": "lem-weil-pbc-sections-over-quasi-compact-open-in-affine",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-finite-etale-lifting",
+   "place": "step 7 of its split (source: Lemma 0GS2, proof: the essential-surjectivity paragraphs), through Cohomology of Schemes Lemma 01YB (lemma-homs-over-open) used by lem-weil-pbc-coherent-generic-point-ideal-inclusion: 'It is injective by Properties, Lemma 01PQ' and 'Hence by Properties, Lemma 01PQ we deduce that the top horizontal arrow ... is a bijection' (first part of the proof of 01YB); refined: the reduction of 01PQ to the affine case, Properties 01PQ proof, first and second paragraphs: 'Restricting the first displayed map of the lemma to $W$ we obtain the first displayed map of Lemma 01PM' and 'The lemma guarantees that we have a bijection ... for any such affine open $W$'",
+   "via": [
+    "lem-weil-pbc-sections-over-quasi-compact-open",
+    "lem-weil-pbc-coherent-homs-over-open",
+    "lem-weil-pbc-coherent-generic-point-ideal-inclusion",
+    "lem-weil-pbc-coherent-property-devissage-integral-subschemes",
+    "lem-weil-pbc-finite-surjective-affine-target-noetherian",
+    "lem-weil-pbc-finite-surjective-affine-target",
+    "lem-weil-pbc-surjective-universally-closed-affine-target",
+    "lem-weil-pbc-thickening-affine-scheme",
+    "lem-weil-pbc-thickening-integral",
+    "lem-weil-pbc-thickening-finite-cartesian",
+    "lem-weil-pbc-finite-etale-lifting-complete",
+    "lem-weil-pbc-finite-etale-lifting-essential-surjectivity"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Sections over the complement of V(I) in Spec A and maps from powers of I",
+ "statement": "Let $A$ be a commutative ring, $I\\subseteq A$ a finitely generated ideal and $M$ an $A$-module. Put $X=\\operatorname{Spec}A$ [def-weil-affine-spectrum] and $D=X\\setminus V(I)=\\{\\mathfrak p\\in X: I\\not\\subseteq\\mathfrak p\\}$, an open subset with $D=\\bigcup_{f\\in I}D(f)$. Let $\\widetilde M$ be the $\\mathcal O_X$-module of [lem-weil-pbc-spec-module-tilde-sections], with $\\tau_W:M\\to\\widetilde M(W)$, and for $f\\in A$ identify $\\widetilde M(D(f))$ with the localization $M_f$ as there ($x/f^k\\leftrightarrow f^{-k}\\tau_{D(f)}(x)$). Let $I^0=A$ and $I^n$ ($n\\ge1$) the $n$-th power of $I$, and $M_n=\\{x\\in M: ax=0\\text{ for all }a\\in I^n\\}$ (so $M_0=0$); then $I^{n+1}\\subseteq I^n$ and $M_n\\subseteq M_{n+1}$. (1) For every $n\\ge0$ and every $A$-linear $\\varphi:I^n\\to M$ there is a unique $c_n(\\varphi)\\in\\widetilde M(D)$ with $c_n(\\varphi)|_{D(f)}=\\varphi(f^n)/f^n\\in M_f$ for every $f\\in I$; one has $c_{n+1}(\\varphi|_{I^{n+1}})=c_n(\\varphi)$, and the induced map $\\varinjlim_n\\operatorname{Hom}_A(I^n,M)\\to\\widetilde M(D)$ (colimit over $n\\ge0$ [def-weil-pbc-category-colimit] with transition maps the restrictions along $I^{n+1}\\subseteq I^n$) is injective. (2) For every $n\\ge0$ and every $A$-linear $\\psi:I^n\\to M/M_n$ there is a unique $c'_n(\\psi)\\in\\widetilde M(D)$ with $c'_n(\\psi)|_{D(f)}=y/f^n\\in M_f$ for every $f\\in I$ and every $y\\in M$ whose class in $M/M_n$ is $\\psi(f^n)$ (the fraction $y/f^n$ does not depend on the choice of $y$, as $f^nM_n=0$); one has $c'_{n+1}(\\bar p_n\\circ\\psi|_{I^{n+1}})=c'_n(\\psi)$, where $\\bar p_n:M/M_n\\to M/M_{n+1}$ is the projection, and the induced map $\\varinjlim_n\\operatorname{Hom}_A(I^n,M/M_n)\\to\\widetilde M(D)$ (transition maps $\\psi\\mapsto\\bar p_n\\circ\\psi|_{I^{n+1}}$) is bijective. (3) If for $x\\in M$, $Ix=0$ implies $x=0$, then $M_n=0$ for all $n$ and the map of (1) is bijective.",
+ "source": {
+  "document": "literature/stacks-project/properties.tex",
+  "place": "Properties, Lemma 01PM (label lemma-sections-over-quasi-compact-open-in-affine, line 3941; tag verified in tags/tags line 2235) and its proof (lines 3962-4089), whose explicit description $\\varphi\\mapsto(\\varphi(f_i^n)/f_i^n)_i$ of the canonical map is used here as its definition; Example 01PN (example-does-not-work-in-general, line 4092) shows the first map need not be surjective"
+ },
+ "stmt_deps": [
+  "def-weil-affine-spectrum",
+  "lem-weil-pbc-spec-module-tilde-sections",
+  "def-weil-pbc-category-colimit"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "colimit of Hom(I^n, M) maps to sections of tilde M over complement of V(I), finitely generated ideal, injective",
+   "results": "localCohomology.ofDiagram, localCohomology.hasColimitDiagram (Mathlib.Algebra.Homology.LocalCohomology), SheafOfModules.Presentation.isColimit, AlgebraicGeometry.preservesColimit_Γ, ModuleCat.Tilde.openToLocalization, ModuleCat.Tilde.res_apply (Mathlib.AlgebraicGeometry.Modules.Tilde)",
+   "date": "2026-10-10",
+   "verdict": "no match (local cohomology as a colimit of Ext(A/I^n, -) only; no map to sections over Spec A minus V(I))"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a finitely generated ideal I of a ring A and an A-module M, the direct limit of Hom_A(I^n, M) injects into the sections of the quasi-coherent sheaf of M over Spec A minus V(I)",
+   "results": "TopCat.Presheaf toTotalQuotientPresheaf mono, AlgebraicGeometry.StructureSheaf.toBasicOpen_injective, Module.DirectLimit.lift_injective (Mathlib.Algebra.Colimit.Module), ModuleCat.Tilde.exists_const, AlgebraicGeometry.injective_germ_basicOpen, injective_of_isLocalized_span",
+   "date": "2026-10-10",
+   "verdict": "no match (only generic injectivity of direct-limit lifts and of R_f -> O(D(f)))"
+  },
+  {
+   "tool": "loogle",
+   "query": "Module.DirectLimit, Ideal, HPow.hPow, LinearMap",
+   "results": "none",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "rg -n 'DirectLimit.*(I \\^|Ideal)|(I \\^ n) →ₗ|↥\\(I \\^ n\\) →ₗ' and rg -ln 'idealTransform|IdealTransform' in ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib",
+   "results": "none",
+   "date": "2026-10-10",
+   "verdict": "no match (no ideal transform, no Hom from powers of an ideal into a module as a direct system)"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-sections-over-quasi-compact-open",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "reviewed": "2026-10-10 L: statement checked against 01PM, with the explicit canonical maps"
+}
