@@ -8,6 +8,7 @@ module
 public import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
 public import Mathlib.AlgebraicGeometry.Morphisms.QuasiFinite
 public import WeilConjectures.DeligneLaumon.Reduction.Weights
+public import WeilConjectures.WeilSheaf.LowerShriekPackage
 
 /-!
 # The formal reductions of the Deligne–Laumon direct-image bound
@@ -196,7 +197,10 @@ theorem WeilSheaf.IsMixedOfWeightsAtMost.upperStar {W X : Scheme.{u}}
     [IsImmersion h] [h.IsOver (Spec (CommRingCat.of k₀))] {w : ℝ} {F : WeilSheaf k₀ l X}
     (hF : F.IsMixedOfWeightsAtMost ι w) :
     ((WeilSheaf.upperStar h).obj F).IsMixedOfWeightsAtMost ι w :=
-  sorry
+  by
+  rw [WeilSheaf.isMixedOfWeightsAtMost_iff_filtrationClosure] at hF ⊢
+  exact ObjectProperty.filtrationClosure_map (WeilSheaf.upperStar h)
+    (fun _ ⟨v, hv, hG⟩ ↦ ⟨v, hv, hG.upperStar h⟩) hF
 
 /-- Pulling back along an immersion `h : W ⟶ X` carries Weil complexes mixed of weights at most
 `w` to Weil complexes mixed of weights at most `w`: `h^*` is exact, so it commutes with taking
@@ -208,7 +212,8 @@ theorem WeilComplex.IsMixedOfWeightsAtMost.upperStar {W X : Scheme.{u}}
     [IsImmersion h] [h.IsOver (Spec (CommRingCat.of k₀))] {w : ℝ} {K : WeilComplex k₀ l X}
     (hK : K.IsMixedOfWeightsAtMost ι w) :
     ((WeilComplex.upperStar h).obj K).IsMixedOfWeightsAtMost ι w :=
-  sorry
+  fun b ↦ ((hK b).upperStar h).of_iso
+    ((WeilComplex.upperStarCompHomologySheafIso h b).app K).symm
 
 /-- Extension by zero `j₀!` along an open immersion `j : U ⟶ X` carries Weil complexes mixed of
 weights at most `w` to Weil complexes mixed of weights at most `w`: it has the same stalks at the
@@ -382,7 +387,9 @@ theorem WeilSheaf.exact_map_higherLowerShriek {X Y : Scheme.{u}}
     [QuasiSeparated (Y ↘ Spec (CommRingCat.of k₀))] {S : ShortComplex (WeilSheaf k₀ l X)}
     (hS : S.ShortExact) (r : ℕ) :
     (S.map (WeilSheaf.higherLowerShriek k₀ l f r)).Exact :=
-  sorry
+  have := locallyOfFiniteType_over_of_isOver f (S := Spec (CommRingCat.of k₀))
+  WeilComplex.homologySheaf_exact₂ _ ((WeilComplex.derivedLowerShriek k₀ l f).map_distinguished _
+    (WeilSheaf.singleTriangle_distinguished hS)) r
 
 /-- Let `j : U ⟶ X` be an open immersion whose closed complement is `i : Z ⟶ X`. If the
 direct-image weight assertion holds for `j ≫ f` and for `i ≫ f`, then it holds for `f`:
@@ -558,7 +565,23 @@ theorem HasDirectImageWeightBound.isMixedOfWeightsAtMost_derivedLowerShriek
     (hf : HasDirectImageWeightBound k₀ ι f) {w : ℝ} {K : WeilComplex k₀ l X}
     (hK : K.IsMixedOfWeightsAtMost ι w) :
     ((WeilComplex.derivedLowerShriek k₀ l f).obj K).IsMixedOfWeightsAtMost ι w :=
-  sorry
+  by
+  have := locallyOfFiniteType_over_of_isOver f (S := Spec (CommRingCat.of k₀))
+  intro n
+  rw [WeilSheaf.isMixedOfWeightsAtMost_iff_filtrationClosure]
+  refine WeilComplex.prop_homologySheaf_obj (WeilComplex.derivedLowerShriek k₀ l f)
+    (fun b ↦ (WeilSheaf.isPunctuallyPureOfWeightLE ι (w + b)).filtrationClosure)
+    (fun n ↦ (WeilSheaf.isPunctuallyPureOfWeightLE ι (w + n)).filtrationClosure)
+    (fun _ _ hG ↦ .of_isZero hG) (fun a b G hG ↦ ?_) K
+    (fun b ↦ WeilSheaf.isMixedOfWeightsAtMost_iff_filtrationClosure.1 (hK b)) n
+  rcases lt_or_ge a 0 with ha | ha
+  · exact .of_isZero (WeilSheaf.isZero_homologySheaf_derivedLowerShriek_of_neg f G ha)
+  · obtain ⟨m, rfl⟩ := Int.eq_ofNat_of_zero_le ha
+    have := hf (w + b) G (WeilSheaf.isMixedOfWeightsAtMost_iff_filtrationClosure.2 hG) m
+    rw [← WeilSheaf.isMixedOfWeightsAtMost_iff_filtrationClosure]
+    refine this.mono_weight (le_of_eq ?_)
+    push_cast
+    ring
 
 section QuasiFinite
 

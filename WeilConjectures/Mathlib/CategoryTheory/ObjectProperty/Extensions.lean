@@ -6,6 +6,7 @@ Authors: Claude
 module
 
 public import Mathlib.CategoryTheory.ObjectProperty.Extensions
+public import Mathlib.CategoryTheory.ObjectProperty.ContainsZero
 public import Mathlib.CategoryTheory.ObjectProperty.EpiMono
 public import Mathlib.CategoryTheory.Abelian.Refinements
 
@@ -125,6 +126,9 @@ private lemma filtrationClosure_X₂ [P.IsClosedUnderIsomorphisms] {Q : C}
       rw [← cancel_mono ι]
       simpa [hi'] using ha
     exact .of_mono ι (ih i' p' w' hS' hA) (P.prop_of_iso (cokernelKernelιIsoOfEpi g).symm hj)
+
+instance : P.filtrationClosure.ContainsZero where
+  exists_zero := ⟨0, isZero_zero C, .of_isZero (isZero_zero C)⟩
 
 instance [P.IsClosedUnderIsomorphisms] : P.filtrationClosure.IsClosedUnderExtensions where
   prop_X₂_of_shortExact {S} hS h₁ h₃ := by

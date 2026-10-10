@@ -8,6 +8,7 @@ module
 public import Mathlib.Analysis.SpecialFunctions.Log.Base
 public import WeilConjectures.Mathlib.CategoryTheory.ObjectProperty.Extensions
 public import WeilConjectures.WeilSheaf.Defs
+public import WeilConjectures.WeilSheaf.HomologySequence
 public import WeilConjectures.WeilSheaf.StalkFunctor
 public import WeilConjectures.WeilSheaf.Tensor
 
@@ -262,6 +263,18 @@ theorem WeilComplex.IsMixedOfWeightsAtMost.of_iso {ι : PadicAlgCl l →+* ℂ}
     {K L : WeilComplex k₀ l X} {w : ℝ} (e : K ≅ L) (h : K.IsMixedOfWeightsAtMost ι w) :
     L.IsMixedOfWeightsAtMost ι w :=
   fun b ↦ (h b).of_iso ((WeilComplex.homologySheaf b).mapIso e)
+
+open Pretriangulated in
+/-- **Extension stability of complex weights.** If the outer terms of a distinguished triangle
+`K₁ ⟶ K₂ ⟶ K₃ ⟶ K₁[1]` of Weil complexes are mixed of weights at most `w`, then so is the
+middle term: the exact sequences `𝓗ᵇK₁ ⟶ 𝓗ᵇK₂ ⟶ 𝓗ᵇK₃` exhibit `𝓗ᵇK₂` as an extension of a
+subobject of `𝓗ᵇK₃` by a quotient of `𝓗ᵇK₁` (blueprint: `lem-zl-complex-extension`). -/
+theorem WeilComplex.IsMixedOfWeightsAtMost.of_distTriang {ι : PadicAlgCl l →+* ℂ}
+    {T : Triangle (WeilComplex k₀ l X)} (hT : T ∈ distTriang _) {w : ℝ}
+    (h₁ : T.obj₁.IsMixedOfWeightsAtMost ι w) (h₃ : T.obj₃.IsMixedOfWeightsAtMost ι w) :
+    T.obj₂.IsMixedOfWeightsAtMost ι w :=
+  fun b ↦ WeilSheaf.IsMixedOfWeightsAtMost.of_exact (WeilComplex.homologySheaf_exact₂ T hT b)
+    (h₁ b) (h₃ b)
 
 /-- The direct-image weight assertion of the blueprint theorem `sk-thm-dl-general-sheaf`, for a
 single morphism `f : X ⟶ Y` of `k₀`-schemes: every constructible Weil sheaf `F` on `X` that is
