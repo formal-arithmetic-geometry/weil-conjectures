@@ -26,9 +26,116 @@
   "def-kun-topological-krull-dimension",
   "def-kun-dimension"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "(Reduction to $X$ integral.) Let $i:X_{\\mathrm{red}}\\to X$ be the reduction of $X$ [def-weil-pbc-scheme-reduction]. By [lem-weil-pbc-reduction-universal-homeomorphism] (with $X'=X$), $X_{\\mathrm{red}}$ is reduced [def-pc-reduced-scheme] and $i$ is a closed immersion [def-weil-closed-immersion] which is a homeomorphism of underlying spaces (indeed the identity on underlying sets). Hence $X_{\\mathrm{red}}$ is irreducible [def-weil-irreducible-components] (being homeomorphic to $X$), so nonempty, reduced and irreducible, i.e. integral [def-pc-integral-scheme]. A closed immersion is an immersion, hence locally of finite type [lem-weil-pbc-immersion-base-change-lft] (2), so the composite $X_{\\mathrm{red}}\\xrightarrow{i}X\\to\\operatorname{Spec}k$ is locally of finite type [def-weil-finite-type-morphism] by [lem-weil-pbc-proper-fp-permanence] (e). Every assertion of the lemma concerns only the topological space of $X$ (the Krull dimensions of open subsets with the subspace topology [def-kun-topological-krull-dimension], [def-kun-subspace-topology], and $\\dim_x$ [def-kun-dimension], defined from them), and $i$ is a homeomorphism carrying nonempty opens to nonempty opens and preserving these dimensions [lem-weil-pbc-homeomorphism-krull-dimension]. Hence it suffices to prove the lemma for $X_{\\mathrm{red}}$; from now on $X$ is integral and locally of finite type over $k$. (This is the source's parenthetical 'strictly speaking you have to replace $X$ by its reduction'.)",
+   "uses": [
+    "def-weil-pbc-scheme-reduction",
+    "lem-weil-pbc-reduction-universal-homeomorphism",
+    "def-pc-reduced-scheme",
+    "def-weil-closed-immersion",
+    "def-weil-irreducible-components",
+    "def-pc-integral-scheme",
+    "lem-weil-pbc-immersion-base-change-lft",
+    "def-weil-finite-type-morphism",
+    "lem-weil-pbc-proper-fp-permanence",
+    "def-kun-topological-krull-dimension",
+    "def-kun-subspace-topology",
+    "def-kun-dimension",
+    "lem-weil-pbc-homeomorphism-krull-dimension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Varieties, Lemma 0A21 (lemma-dimension-locally-algebraic), proof of part (3), last sentence: 'strictly speaking you have to replace X by its reduction before applying the lemma'"
+   }
+  },
+  {
+   "text": "(All nonempty affine opens have one dimension $d$.) Since $X$ is integral it is nonempty; pick $x_0\\in X$ and, by [lem-weil-pbc-affine-opens-basis], an affine open $W_0\\ni x_0$; put $d=\\dim W_0$. By [lem-sc-integral-locally-algebraic-affine-opens-dimension], every nonempty open $W\\subseteq X$ whose open subscheme is affine [def-weil-affine-spectrum] has $\\dim W=\\dim W_0=d$. (The source proves this by choosing a closed point $x\\in W\\cap W_0$, which exists since $X$ is Jacobson (Varieties 0478), and applying Algebra 00OS: $\\dim W=\\dim\\mathcal O_{X,x}=\\dim W_0$; that argument is the content of the cited node, which is closed by the slopmaster2 declaration AlgebraicGeometry.IsAffineOpen.topologicalKrullDim_eq_of_isIntegral.)",
+   "uses": [
+    "lem-weil-pbc-affine-opens-basis",
+    "lem-sc-integral-locally-algebraic-affine-opens-dimension",
+    "def-weil-affine-spectrum"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Varieties, Lemma 0A21 (lemma-dimension-locally-algebraic), proof of part (3), first sentences: 'It suffices to show that any two nonempty affine opens U, U' of X have the same dimension ... Pick a closed point x of X with x in U cap U' ... Then dim(U) = dim(O_{X,x}) = dim(U')'"
+   }
+  },
+  {
+   "text": "($\\dim U\\geq d$.) Let $U\\subseteq X$ be a nonempty open subset and $x\\in U$. By [lem-weil-pbc-affine-opens-basis] there is an affine open $W$ with $x\\in W\\subseteq U$; it is nonempty, so $\\dim W=d$ by step 2. As $W\\subseteq U\\subseteq X$ are open, $\\dim W\\leq\\dim U$ [lem-weil-pbc-open-subspace-dimension-monotone]. Hence $d\\leq\\dim U$.",
+   "uses": [
+    "lem-weil-pbc-affine-opens-basis",
+    "lem-weil-pbc-open-subspace-dimension-monotone"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Varieties, Lemma 0A21 (lemma-dimension-locally-algebraic), proof of part (3), the reduction to affine opens"
+   }
+  },
+  {
+   "text": "($\\dim U\\leq d$; the source's parenthetical 'any finite chain of irreducible subsets meets an affine open'.) Let $U\\subseteq X$ be a nonempty open subset, with the subspace topology [def-kun-subspace-topology]. By [lem-weil-pbc-dimension-supremum-local-dimensions] applied to the space $U$, $\\dim U=\\sup_{x\\in U}\\dim_x(U)$, where $\\dim_x(U)$ is the minimum of $\\dim U'$ over the open neighbourhoods $U'$ of $x$ in $U$ [def-kun-topological-dimension-at-point]. For $x\\in U$ choose by [lem-weil-pbc-affine-opens-basis] an affine open $W$ of $X$ with $x\\in W\\subseteq U$; then $W$ is an open neighbourhood of $x$ in $U$, and its subspace topology from $U$ is its subspace topology from $X$, so $\\dim_x(U)\\leq\\dim W=d$ by step 2. Hence $\\dim U\\leq d$.",
+   "uses": [
+    "def-kun-subspace-topology",
+    "lem-weil-pbc-dimension-supremum-local-dimensions",
+    "def-kun-topological-dimension-at-point",
+    "lem-weil-pbc-affine-opens-basis"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Varieties, Lemma 0A21 (lemma-dimension-locally-algebraic), proof of part (3), parenthetical '(any finite chain of irreducible subsets meets an affine open)'; the argument is that of Topology, Lemma 0B7I (lemma-dimension-supremum-local-dimensions)"
+   }
+  },
+  {
+   "text": "(First assertion.) By steps 3 and 4, $\\dim U=d$ for every nonempty open $U\\subseteq X$; taking $U=X$ (nonempty) gives $\\dim X=d$. Hence $\\dim U=\\dim X$ for every nonempty open $U\\subseteq X$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Varieties, Lemma 0A21 (lemma-dimension-locally-algebraic), proof of part (3)"
+   }
+  },
+  {
+   "text": "(Second assertion.) Let $x\\in X$. By definition [def-kun-dimension], $\\dim_x(X)=\\min\\{\\dim U: x\\in U\\subseteq X\\text{ open}\\}$. Every such $U$ contains $x$, so is nonempty, and has $\\dim U=\\dim X$ by step 5. The set of values is therefore $\\{\\dim X\\}$ and $\\dim_x(X)=\\dim X$.",
+   "uses": [
+    "def-kun-dimension"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Varieties, Lemma 0A21 (lemma-dimension-locally-algebraic), proof of part (3); Topology, Definition 0055 (definition-Krull), item (4)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-scheme-reduction",
+  "lem-weil-pbc-reduction-universal-homeomorphism",
+  "def-pc-reduced-scheme",
+  "def-weil-closed-immersion",
+  "def-weil-irreducible-components",
+  "def-pc-integral-scheme",
+  "lem-weil-pbc-immersion-base-change-lft",
+  "def-weil-finite-type-morphism",
+  "lem-weil-pbc-proper-fp-permanence",
+  "def-kun-topological-krull-dimension",
+  "def-kun-subspace-topology",
+  "def-kun-dimension",
+  "lem-weil-pbc-homeomorphism-krull-dimension",
+  "lem-weil-pbc-affine-opens-basis",
+  "lem-sc-integral-locally-algebraic-affine-opens-dimension",
+  "def-weil-affine-spectrum",
+  "lem-weil-pbc-open-subspace-dimension-monotone",
+  "lem-weil-pbc-dimension-supremum-local-dimensions",
+  "def-kun-topological-dimension-at-point"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/varieties.tex",
+  "place": "Varieties, Lemma 0A21 (lemma-dimension-locally-algebraic), proof of part (3); tags 0A21, 00OS, 0478, 0B7I, 0055 verified in literature/stacks-project/tags/tags"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -53,12 +160,38 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-sc-curve-base-change-relative-dimension-one",
   "by": "worker",
   "date": "2026-10-10"
  },
  "chapter": "sec-picard-framework",
- "unit": "sk-prop-jacobian"
+ "unit": "sk-prop-jacobian",
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "lem-sc-dimension-locally-algebraic",
+  "worker": "stage1",
+  "summary": "Read Varieties 0A21 (varieties.tex line 3783) and the proof of part (3): reduce to X reduced, show any two nonempty affine opens have the same dimension (Jacobson 0478 gives a closed point in their intersection, Algebra 00OS gives dim U = dim O_{X,x} = dim U'), and conclude because any finite chain meets an affine open. Statement kept (it is part (3) verbatim with X irreducible). Steps: (1) replace X by X_red, integral and locally of finite type over k, same topological space; (2) the equal-dimension claim for affine opens, a new node attached to the sorry-free slopmaster2 declaration AlgebraicGeometry.IsAffineOpen.topologicalKrullDim_eq_of_isIntegral (WeilConjectures/Mathlib/AlgebraicGeometry/Morphisms/FiniteType.lean:123-134, checked with the sorry map); (3)-(4) dim U = d for every nonempty open U, via the affine basis, monotonicity on opens and Topology 0B7I (the source's 'any finite chain meets an affine open'); (5)-(6) the two assertions, the second from the definition of dim_x. Lean: slopmaster2 also has the integral form of the first assertion, AlgebraicGeometry.topologicalKrullDim_opens_eq (same file, lines 136-159, sorry-free); it does not state the item exactly (IsIntegral instead of irreducible) and is not attached to the item. Mathlib (pinned) has neither statement.",
+  "blueprint": "The item serves thm-sc-jacobian-representability, proof step (4) Connectedness (dim_y(C)=1 for every point y of the curve C in the fibre-dimension calculation): steps 5 and 6 give dim U = dim X and dim_y = dim X for an irreducible locally algebraic scheme, which with dim C = 1 is that assertion; steps 1-4 realize the Stacks 0A21 (3) argument underneath it.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-reduction-universal-homeomorphism",
+    "why": "step 1 takes from its statement only that X_red is reduced and X_red -> X is a closed immersion and a homeomorphism (Stacks 054M); a generic fact about the reduction of any scheme, no node of sk-prop-jacobian or the units it cites states it, and Mathlib has no lemma that the nilradical subscheme is reduced"
+   },
+   {
+    "node": "lem-weil-pbc-dimension-supremum-local-dimensions",
+    "why": "step 4 takes dim U = sup_x dim_x(U) for a topological space (Topology 0B7I), the generic topology lemma behind the source's 'any finite chain of irreducible subsets meets an affine open'; no node of sk-prop-jacobian or its cited units states it"
+   }
+  ]
+ },
+ "reviewed": {
+  "by": "L",
+  "date": "2026-10-10",
+  "note": "split read in full against 0A21 (3): reduction to X_red (tool use), all affine opens have one dimension (new node, closed by IsAffineOpen.topologicalKrullDim_eq_of_isIntegral, sorry-free, statement checked by L), dim U >= d by monotonicity, dim U <= d by the supremum of local dimensions (tool use), dim_x from the definition; 2 declared tool uses accepted"
+ },
+ "tool_uses": [
+  "lem-weil-pbc-dimension-supremum-local-dimensions",
+  "lem-weil-pbc-reduction-universal-homeomorphism"
+ ]
 }
