@@ -33,7 +33,7 @@
 | `lem-sc-affine-totalquotient-minimal-product` | 5013 | none |
 | `lem-sc-affine-weakass-nonzerodivisors` | 5013 | none |
 | `lem-sc-ass-weakass-fg-stalk` | 5013 | none |
-| `lem-pc-rf-single-complex-inherited-tensor-condition` | 5014 | none |
+| `lem-pc-derived-tensor-transitivity` | 5015 | none |
 | `lem-pc-fp-module-map-descent-affine` | 5015 | none |
 | `lem-pc-rf-single-complex-affine-base-change` | 5015 | none |
 | `lem-pc-rf-single-complex-relative-mayer-vietoris` | 5015 | none |
@@ -54,19 +54,19 @@
 | `lem-sc-units-quotient-base-change` | - | none |
 | `lem-weil-pbc-spread-finite-separable-extension` | - | none |
 | `lem-weil-separably-closed-geometrically-connected` | - | none |
-| `def-nagata-morphism-descent` | - | none |
 | `lem-pc-finite-support-hi` | - | sorry_here |
 | `lem-pc-projective-coherent-higher-images` | - | sorry_here |
 | `lem-sc-affine-constant-second` | - | rests_on_sorry |
 | `lem-weil-pbc-power-in-base-after-localization` | - | none |
 | `lemma-nagata-morphism-descends` | - | none |
-| `lem-kun-closed-point-field` | - | none |
 | `lem-kun-cp-approximation` | - | none |
 | `lem-pc-projective-coherent-finiteness` | - | sorry_here |
 | `lem-sc-zariski-dimension-bound` | - | none |
 | `lem-sc-zariski-flasque-acyclic` | - | none |
 | `lem-weil-geometrically-connected-check-after-extension` | - | none |
 | `lem-weil-pbc-lisse-generic-kernel` | - | none |
+| `lemma-nagata-morphism-eq-eventually` | - | none |
+| `lemma-nagata-qc-open-eq-eventually` | - | none |
 | `prop-pur-kinjective-resolutions-exist` | - | none |
 | `def-pc-derived-category` | - | none |
 | `lem-kun-04ca` | - | none |
@@ -896,7 +896,7 @@
 | `lem-weil-pbc-projective-space-zero-isomorphism` | 4 | state |
 | `def-nagata-fixed-base-separated-stage` | 6 | state |
 
-Not open yet: 1605 nodes that wait for a statement dependency, 139 nodes that wait for stage 1.
+Not open yet: 1608 nodes that wait for a statement dependency, 137 nodes that wait for stage 1.
 
 ## Stage 3: modules to prove (0)
 
