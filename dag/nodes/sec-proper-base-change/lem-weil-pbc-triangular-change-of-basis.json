@@ -1,0 +1,100 @@
+{
+ "id": "lem-weil-pbc-triangular-change-of-basis",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-finite-etale-lifting",
+   "place": "Proof, final sentence: 'Every finite etale $Y_0$-scheme is the restriction of a finite etale $Y$-scheme, the lifting input of the henselian-pair proper-base-change package'; within it, the two changes of basis of Stacks 00MT (normalising the unit entry of a differential to 1 and clearing its column), used in the cancellation of unit entries that makes the bounded finite free resolution of the residue field minimal",
+   "via": [
+    "lem-weil-pbc-free-complex-unit-entry-splits",
+    "lem-weil-pbc-minimal-finite-free-resolution-local",
+    "lem-weil-pbc-residue-field-pd-ge-embedding-dimension",
+    "lem-weil-pbc-finite-gl-dim-regular-local",
+    "lem-weil-pbc-regular-local-localization",
+    "lem-weil-pbc-complete-local-g-ring",
+    "lem-weil-pbc-g-ring-maximal-ideal-criterion",
+    "lem-weil-pbc-henselization-pair-g-ring",
+    "lem-weil-pbc-finite-etale-lifting-limit-descent",
+    "lem-weil-pbc-finite-etale-lifting-essential-surjectivity"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "A triangular change of basis with unit diagonal is a change of basis",
+ "statement": "Let $R$ be a commutative ring, let $m\\ge0$, and let $F$ be a free $R$-module [def-weil-pbc-free-module] with basis $b_1,\\dots,b_m$. Let $v_1,\\dots,v_m\\in F$ and write $v_k=\\sum_{l=1}^m t_{kl}b_l$ with $t_{kl}\\in R$. Suppose that either $t_{kl}=0$ whenever $l<k$, or $t_{kl}=0$ whenever $l>k$, and that every diagonal coefficient $t_{kk}$ ($1\\le k\\le m$) is a unit of $R$. Then $v_1,\\dots,v_m$ is a basis of $F$.",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Algebra, Lemma Tag 00MT (lemma-add-trivial-complex), proof lines 24630--24641: the two changes of basis 'after a change of basis of $R^{n_i}$ and $R^{n_{i-1}}$' and '$e'_j=e_j-a_{j1}e_1$ for $j>1$', used there without proof that the new families are bases"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-free-module"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "replacing a basis vector by a vector whose coefficient on it is a unit gives a basis",
+   "results": "Module.Basis.unitsSMul, Module.Basis.isUnitSMul (Mathlib.LinearAlgebra.Basis.SMul; scaling each basis vector by a unit only), Module.Basis.isUnit_det, Module.Basis.is_basis_iff_det (Mathlib.LinearAlgebra.Determinant)",
+   "date": "2026-10-10",
+   "verdict": "no match; candidate Module.Basis.is_basis_iff_det"
+  },
+  {
+   "tool": "leansearch",
+   "query": "family of vectors whose coordinate matrix with respect to a basis has unit determinant is a basis",
+   "results": "Module.Basis.is_basis_iff_det (Mathlib.LinearAlgebra.Determinant: for a finite basis e, LinearIndependent R v ∧ span R (range v) = ⊤ ↔ IsUnit (e.det v)), Module.Basis.det_self, LinearEquiv.isUnit_det, Module.Basis.det_unitsSMul",
+   "date": "2026-10-10",
+   "verdict": "generalization only through a determinant computation, not a one-line specialization"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "If a family v in a free module has coordinate matrix with respect to a finite basis e that is triangular with unit diagonal, then v is a basis",
+   "results": "basisOfPiSpaceOfLinearIndependent (division rings), Module.Basis.reindexRange, Module.Basis.unitsSMul, Smith normal form bases (Mathlib.LinearAlgebra.FreeModule.PID); nothing on triangular coordinate matrices",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "Module.Basis, Matrix.BlockTriangular",
+   "results": "none",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rn 'theorem is_basis_iff_det\\|det_of_isUpperTriangular\\|det_of_isLowerTriangular\\|unitriangular\\|Unitriangular' /home/ubuntu/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib",
+   "results": "LinearAlgebra/Determinant.lean:634 is_basis_iff_det; LinearAlgebra/Determinant.lean:616 Basis.det_apply (e.det v = Matrix.det (e.toMatrix v)); LinearAlgebra/Matrix/Block.lean:336 Matrix.det_of_isUpperTriangular and :343 det_of_isLowerTriangular (det = product of the diagonal); no unitriangular basis-change lemma",
+   "date": "2026-10-10",
+   "verdict": "no single declaration; the statement follows by combining these"
+  }
+ ],
+ "mathlib_match": null,
+ "mathlib_candidate": {
+  "declaration": "Module.Basis.is_basis_iff_det; Module.Basis.det_apply; Matrix.det_of_isUpperTriangular; Matrix.det_of_isLowerTriangular",
+  "file": "Mathlib/LinearAlgebra/Determinant.lean; Mathlib/LinearAlgebra/Matrix/Block.lean",
+  "how": "Not a leaf: is_basis_iff_det (Determinant.lean:634, read with sed -n 625,645p) reduces the claim to IsUnit (e.det v); det_apply (Determinant.lean:616) identifies e.det v with the determinant of the coordinate matrix e.toMatrix v, which is the transpose of (t_kl); det_of_isUpperTriangular / det_of_isLowerTriangular (Block.lean:336, 343, read with sed -n 330,345p) give the product of the diagonal t_kk, a unit. Four declarations composed, plus the orientation of the triangularity under transpose."
+ },
+ "status": "unsplit",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-free-complex-unit-entry-splits",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1"
+}

@@ -21,17 +21,91 @@
  },
  "kind": "statement",
  "title": "A unit differential entry splits off an identity complex",
- "statement": "Let $R$ be a commutative ring and let $C_\\bullet$ be a chain complex of finite free $R$-modules [def-weil-pbc-free-module], with differential $d_i:C_i\\to C_{i-1}$ and $d_{i-1}d_i=0$ for every $i$. If some matrix coefficient of one $d_i$ in finite bases of $C_i$ and $C_{i-1}$ is a unit, then $C_\\bullet$ is isomorphic as a chain complex to $C'_\\bullet\\oplus T_\\bullet$, where every $C'_j$ is finite free, $C'_i$ and $C'_{i-1}$ have ranks one less than $C_i$ and $C_{i-1}$ respectively, $C'_j$ has the same rank as $C_j$ for every other $j$, and $T_\\bullet$ is zero outside degrees $i$ and $i-1$ and is $R\\xrightarrow{1}R$ in those two degrees.",
+ "statement": "Let $R$ be a commutative ring and let $C_\\bullet$ be a chain complex of finite free $R$-modules [def-weil-pbc-free-module], with differential $d_i:C_i\\to C_{i-1}$ and $d_{i-1}d_i=0$ for every $i\\in\\mathbf Z$. If some matrix coefficient of one $d_i$ in finite bases of $C_i$ and $C_{i-1}$ is a unit, then $C_\\bullet$ is isomorphic as a chain complex to $C'_\\bullet\\oplus T_\\bullet$, where every $C'_j$ is finite free, $C'_i$ and $C'_{i-1}$ have ranks one less than $C_i$ and $C_{i-1}$ respectively, $C'_j$ has the same rank as $C_j$ for every other $j$, and $T_\\bullet$ is zero outside degrees $i$ and $i-1$ and is $R\\xrightarrow{1}R$ in those two degrees. Here $C'_\\bullet\\oplus T_\\bullet$ is the complex with terms the direct sums $C'_j\\oplus T_j$ [def-weil-pbc-direct-sum-modules] and differential $d'_j\\oplus d^T_j$, and an isomorphism of chain complexes is a family of $R$-linear bijections $\\psi_j:C'_j\\oplus T_j\\to C_j$ with $d_j\\psi_j=\\psi_{j-1}(d'_j\\oplus d^T_j)$ for all $j$.",
  "source": {
   "document": "literature/stacks-project/algebra.tex",
   "place": "Algebra, Lemma Tag 00MT (lemma-add-trivial-complex, line 24608), statement and proof, lines 24608--24650"
  },
  "stmt_deps": [
-  "def-weil-pbc-free-module"
+  "def-weil-pbc-free-module",
+  "def-weil-pbc-direct-sum-modules"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "(Normalising the unit entry.) Write $n_j$ for the rank of $C_j$. Choose the finite bases $e_1,\\dots,e_{n_i}$ of $C_i$ and $g_1,\\dots,g_{n_{i-1}}$ of $C_{i-1}$ in which a coefficient of $d_i$ is a unit, and write $d_i(e_j)=\\sum_k a_{jk}g_k$. Renumbering both bases we may assume that $u=a_{11}$ is the unit coefficient (so $n_i,n_{i-1}\\ge1$). Put $f_1=d_i(e_1)=\\sum_k a_{1k}g_k$ and $f_k=g_k$ for $2\\le k\\le n_{i-1}$. The coefficient matrix of $(f_k)$ in the basis $(g_k)$ has first row $(a_{11},a_{12},\\dots)$ and $k$-th row the $k$-th unit row for $k\\ge2$: it vanishes below the diagonal and its diagonal entries $a_{11},1,\\dots,1$ are units. By [lem-weil-pbc-triangular-change-of-basis], $f_1,\\dots,f_{n_{i-1}}$ is a basis of $C_{i-1}$, and $d_i(e_1)=f_1$. This is the source's 'after a change of basis of $R^{n_i}$ and $R^{n_{i-1}}$ the first basis vector of $R^{n_i}$ is mapped to the first basis vector of $R^{n_{i-1}}$'.",
+   "uses": [
+    "lem-weil-pbc-triangular-change-of-basis",
+    "def-weil-pbc-free-module"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra, Lemma Tag 00MT, proof lines 24630--24638"
+   }
+  },
+  {
+   "text": "(Clearing the first column.) Write $d_i(e_j)=\\sum_k b_{jk}f_k$ in the new basis of $C_{i-1}$; by Step 1, $b_{11}=1$ and $b_{1k}=0$ for $k\\ge2$. Put $e'_1=e_1$ and $e'_j=e_j-b_{j1}e_1$ for $2\\le j\\le n_i$. The coefficient matrix of $(e'_j)$ in the basis $(e_j)$ has $-b_{j1}$ in position $(j,1)$ for $j\\ge2$, $1$ on the diagonal and $0$ elsewhere, so it vanishes above the diagonal with unit diagonal, and by [lem-weil-pbc-triangular-change-of-basis] $e'_1,\\dots,e'_{n_i}$ is a basis of $C_i$. By linearity $d_i(e'_j)=d_i(e_j)-b_{j1}f_1=\\sum_{k\\ge2}b_{jk}f_k$ for $j\\ge2$: in the new bases the coefficient of $f_1$ in $d_i(e'_j)$ vanishes for $j>1$ (the source's '$a_{j1}=0$ for $j>1$').",
+   "uses": [
+    "lem-weil-pbc-triangular-change-of-basis"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra, Lemma Tag 00MT, proof lines 24638--24641"
+   }
+  },
+  {
+   "text": "(The two decompositions.) Let $C'_i\\subset C_i$ be the submodule spanned by $e'_2,\\dots,e'_{n_i}$ and $C'_{i-1}\\subset C_{i-1}$ the submodule spanned by $f_2,\\dots,f_{n_{i-1}}$. Since $(e'_j)$ and $(f_k)$ are bases, every $x\\in C_i$ is uniquely $x=r e'_1+y$ with $r\\in R$, $y\\in C'_i$, and every $z\\in C_{i-1}$ is uniquely $z=s f_1+w$ with $s\\in R$, $w\\in C'_{i-1}$; $e'_2,\\dots,e'_{n_i}$ is a basis of $C'_i$ and $f_2,\\dots,f_{n_{i-1}}$ a basis of $C'_{i-1}$ (a subfamily of a basis is a basis of its span), so $C'_i$, $C'_{i-1}$ are free of ranks $n_i-1$, $n_{i-1}-1$. By Steps 1 and 2, $d_i(e'_1)=f_1$ and $d_i(C'_i)\\subset C'_{i-1}$.",
+   "uses": [
+    "def-weil-pbc-free-module"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra, Lemma Tag 00MT, proof lines 24636--24641"
+   }
+  },
+  {
+   "text": "(The incoming differential avoids $e'_1$.) Let $x\\in C_{i+1}$ and write $d_{i+1}(x)=r e'_1+y$ as in Step 3. Then $0=d_id_{i+1}(x)=r f_1+d_i(y)$ with $d_i(y)\\in C'_{i-1}$; by uniqueness of the decomposition of $C_{i-1}$ in Step 3, $r=0$. Hence $d_{i+1}(C_{i+1})\\subset C'_i$ (the source's 'the image of $R^{n_{i+1}}\\to R^{n_i}$ is contained in the subspace spanned by $e_j$, $j>1$').",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra, Lemma Tag 00MT, proof lines 24641--24644"
+   }
+  },
+  {
+   "text": "(The outgoing differential kills $f_1$.) $d_{i-1}(f_1)=d_{i-1}d_i(e'_1)=0$ (the source's '$R^{n_{i-1}}\\to R^{n_{i-2}}$ has to annihilate $f_1$ since it is in the image').",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra, Lemma Tag 00MT, proof lines 24644--24646"
+   }
+  },
+  {
+   "text": "(Assembling the splitting.) Define $C'_\\bullet$ by $C'_j=C_j$ for $j\\notin\\{i,i-1\\}$ and $C'_i$, $C'_{i-1}$ as in Step 3, with differentials $d'_j=d_j$ for $j\\notin\\{i+1,i,i-1\\}$, $d'_{i+1}=d_{i+1}:C_{i+1}\\to C'_i$ (allowed by Step 4), $d'_i=d_i|_{C'_i}:C'_i\\to C'_{i-1}$ (Step 3) and $d'_{i-1}=d_{i-1}|_{C'_{i-1}}:C'_{i-1}\\to C_{i-2}$; each $d'_{j-1}d'_j$ is a restriction of $d_{j-1}d_j=0$, so $C'_\\bullet$ is a chain complex of finite free modules with the stated ranks (Step 3). Let $T_\\bullet$ be $R\\xrightarrow{1}R$ in degrees $i,i-1$ and $0$ elsewhere, and $C'_\\bullet\\oplus T_\\bullet$ the degreewise direct sum [def-weil-pbc-direct-sum-modules] with differential $d'_j\\oplus d^T_j$. Define $\\psi_j:C'_j\\oplus T_j\\to C_j$ by $\\psi_j(y,t)=y$ for $j\\notin\\{i,i-1\\}$, $\\psi_i(y,r)=y+re'_1$ and $\\psi_{i-1}(w,s)=w+sf_1$; each $\\psi_j$ is $R$-linear and bijective (Step 3). Compatibility $d_j\\psi_j=\\psi_{j-1}(d'_j\\oplus d^T_j)$: in degree $i+1$ both sides send $x$ to $d_{i+1}x$ (Step 4, $T_i$-component $0$); in degree $i$, $d_i(y+re'_1)=d_i(y)+rf_1=\\psi_{i-1}(d_iy,r)$ (Step 3); in degree $i-1$, $d_{i-1}(w+sf_1)=d_{i-1}(w)$ by Step 5, which is $\\psi_{i-2}(d'_{i-1}w,0)$; in every other degree both sides are $d_j$. So $\\psi$ is an isomorphism of chain complexes $C'_\\bullet\\oplus T_\\bullet\\cong C_\\bullet$ (the source's 'these conditions and the shape of the matrix imply the lemma').",
+   "uses": [
+    "def-weil-pbc-direct-sum-modules",
+    "def-weil-pbc-free-module"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra, Lemma Tag 00MT, proof lines 24646--24648"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-triangular-change-of-basis",
+  "def-weil-pbc-free-module",
+  "def-weil-pbc-direct-sum-modules"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Algebra, Lemma Tag 00MT (lemma-add-trivial-complex), statement and proof lines 24608--24650"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -48,15 +122,29 @@
    "verdict": "no match"
   },
   {
-   "tool": "grep",
-   "query": "rg -n 'unit.*entry|invertible.*entry|split.*contractible|contractible.*summand|Gaussian elimination|matrix.*unit' Mathlib/Algebra/Homology Mathlib/LinearAlgebra",
-   "results": "No chain-complex unit-entry cancellation in the available Mathlib source checkout at /home/ubuntu/Poincare-MorganTian/.work/helpers/codex-m47-line/.lake/packages/mathlib/Mathlib; matches in LinearAlgebra concern unrelated unit matrices, determinants and minors. The SETUP.md source checkout was unavailable on this machine.",
+   "tool": "leansearch",
+   "query": "chain complex of free modules with an invertible matrix entry in a differential is isomorphic to direct sum with a contractible complex",
+   "results": "CategoryTheory.ShortComplex.quasiIso_of_isIso, HomologicalComplex.Hom.isIso_of_components, Idempotents.karoubiChainComplexEquivalence; nothing on unit entries",
    "date": "2026-10-10",
-   "verdict": "no match in available source checkout"
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "HomologicalComplex, IsUnit",
+   "results": "none",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rn 'IsUnit' and grep -rln 'contractible\\|Contractible' in /home/ubuntu/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/Algebra/Homology",
+   "results": "no IsUnit in Algebra/Homology; 'contractible' only in HomotopyCategory/Pretriangulated.lean (cones), no unit-entry cancellation",
+   "date": "2026-10-10",
+   "verdict": "no match"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "worker",
@@ -76,5 +164,13 @@
   }
  },
  "chapter": "sec-proper-base-change",
- "unit": "sk-thm-p1"
+ "unit": "sk-thm-p1",
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "lem-weil-pbc-free-complex-unit-entry-splits",
+  "worker": "stage1",
+  "summary": "Split following Stacks 00MT line by line. The source's proof cites no lemma; its two changes of basis (normalising the unit entry to 1, clearing the column of $e_1$) are used without proof that the new families are bases, so that fact is the new unsplit node lem-weil-pbc-triangular-change-of-basis (triangular coefficient matrix with unit diagonal gives a basis; Mathlib has it only through Basis.is_basis_iff_det plus triangular determinants, recorded as candidate). The remaining steps (decomposition into spans of subfamilies, image of d_{i+1} avoids e_1 since d_i d_{i+1}=0, d_{i-1}(f_1)=0, and the explicit isomorphism with C' + T, which the source leaves as 'these conditions ... imply the lemma') are written out and are elementary given the definitions. The statement was kept and made self-contained: the direct sum of complexes and the isomorphism of chain complexes are now spelled out, with def-weil-pbc-direct-sum-modules added to stmt_deps. Item Mathlib searches redone in the SETUP checkout (the old grep was of another machine's checkout and was replaced); no match. No slopmaster2 Lean found (grep by id, tag 00MT and key words).",
+  "blueprint": "The item realizes no sentence of thm-weil-pbc-finite-etale-lifting directly: its steps supply the 00MT cancellation used in Step 4-5 of lem-weil-pbc-minimal-finite-free-resolution-local, along the chain (via) to the final sentence 'Every finite etale $Y_0$-scheme is the restriction of a finite etale $Y$-scheme' of that blueprint proof. Blueprint search (unit entry, trivial complex, matrix coefficient, invertible matrix, change of basis, triangular, basis, 00MT, unimodular, split off, chain complex) found no node stating it: same_as []."
+ },
+ "reviewed": "2026-10-10 L: 6 steps following 00MT, the two changes of basis justified by the new node lem-weil-pbc-triangular-change-of-basis (triangular with unit diagonal is a basis; Mathlib candidates recorded), the splitting isomorphism written out; statement completed with the meaning of the direct sum and of a chain isomorphism (accepted); 1 new node"
 }
