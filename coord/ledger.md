@@ -963,3 +963,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 06:24 L: reviewed and accepted lem-weil-pbc-fs-adic-flat-geometrically-regular-closed-fibre (4 steps; +fs-adic-local-flat 07NP, +fs-adic-field-geometrically-regular 07EL nodes).
 - 06:25 L: reviewed and accepted lem-weil-pbc-fs-adic-lift-derivation (6 steps; +fs-adic-lift-into-complete node 07NJ).
 - 06:27 L: reviewed and accepted lem-weil-pbc-geometrically-reduced-extension-separable (5 steps; +p-power-independence-separably-generated Mathlib leaf, 030W (2)=>(1)).
+- 06:28 L: reviewed and accepted lem-weil-pbc-fs-adic-lift-over-finite-coefficient-map (8 steps; +fs-adic-lift-from-residue-field node 07NR; 031D instead of completion).
