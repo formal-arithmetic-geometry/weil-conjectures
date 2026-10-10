@@ -2,7 +2,7 @@
 
 855 items; claim with `tools/claim.py next <group> [--stage N]`.
 
-## Stage 1: nodes to split (316)
+## Stage 1: nodes to split (315)
 
 | node | distance to a target | Lean state on the done branch |
 |---|---|---|
@@ -32,7 +32,6 @@
 | `lem-weil-pbc-simplicial-matching-object` | 3007 | none |
 | `lem-exc-field-discrete-modules` | 3008 | none |
 | `lem-sc-noetherian-cohomology-above-dimension` | 3008 | sorry_here |
-| `lem-weil-pbc-coskeleton-matching-tuples` | 3008 | none |
 | `lem-galois-fpqc-descending-types-morphisms` | 3009 | none |
 | `lem-pc-cartier-divisor-finite-over-field` | 3009 | none |
 | `lem-sc-hilb-geometrically-integral` | 3009 | rests_on_sorry |
@@ -323,7 +322,7 @@
 | `def-exc-jacobian-presentation` | - | none |
 | `lem-zl-noether-normalization-dimension` | - | none |
 
-## Stage 2: nodes to state (539)
+## Stage 2: nodes to state (540)
 
 | node | distance to Mathlib | kind |
 |---|---|---|
@@ -462,6 +461,7 @@
 | `lem-weil-pbc-constructible-is-retrocompact` | 1 | state |
 | `lem-weil-pbc-coskeletal-map-trivial-kan` | 1 | state |
 | `lem-weil-pbc-coskeleton-free-homology-comparison` | 1 | state |
+| `lem-weil-pbc-coskeleton-matching-tuples` | 1 | state |
 | `lem-weil-pbc-cotangent-complex-symmetric-algebra` | 1 | state |
 | `lem-weil-pbc-cover-module-exact` | 1 | state |
 | `lem-weil-pbc-criterion-flatness-fibre` | 1 | state |
@@ -867,7 +867,7 @@
 | `lem-weil-pbc-p1-field-dimension-one` | 4 | state |
 | `lem-weil-pbc-projective-space-zero-isomorphism` | 4 | state |
 
-Not open yet: 336 nodes that wait for stage 1, 991 nodes that wait for a statement dependency.
+Not open yet: 335 nodes that wait for stage 1, 991 nodes that wait for a statement dependency.
 
 ## Stage 3: modules to prove (0)
 
