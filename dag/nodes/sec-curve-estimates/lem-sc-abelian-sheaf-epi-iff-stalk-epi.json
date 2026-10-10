@@ -1,0 +1,67 @@
+{
+ "id": "lem-sc-abelian-sheaf-epi-iff-stalk-epi",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-pic-proper-ntorsion",
+   "place": "the epimorphism endpoint criterion in the stalkwise short-exactness argument",
+   "via": [
+    "lem-sc-abelian-sheaf-short-exact-stalkwise",
+    "lem-sc-closed-immersion-pushforward-exact",
+    "lem-sc-cohomology-closed-immersion-pushforward"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Epimorphisms of abelian sheaves are detected on stalks",
+ "statement": "Let $X$ be a topological space and let $\\varphi:F\\to G$ be a morphism of sheaves of abelian groups on $X$ [def-sc-topological-abelian-cohomology], with stalks and stalk maps as in [def-weil-pbc-module-stalk]. Then $\\varphi$ is an epimorphism if and only if, for every $x\\in X$, the induced stalk map $\\varphi_x:F_x\\to G_x$ is a surjective homomorphism of abelian groups.",
+ "source": {
+  "document": "literature/stacks-project/sheaves.tex",
+  "place": "Sheaves, Lemma 007S (exactness at points), epimorphism clause; the proof is the local lifting argument for sheaves"
+ },
+ "stmt_deps": [
+  "def-sc-topological-abelian-cohomology",
+  "def-weil-pbc-module-stalk"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "epimorphism of sheaves of abelian groups iff surjective on all stalks",
+   "results": "CategoryTheory.Sheaf.isLocallySurjective_iff_epi' and TopCat.Presheaf.locally_surjective_iff_surjective_on_stalks; the exact abelian-group specialization is not packaged in one theorem",
+   "date": "2026-10-10",
+   "verdict": "generalization: combine local-surjectivity/epi with stalk-surjectivity"
+  },
+  {
+   "tool": "loogle",
+   "query": "TopCat.Sheaf.isLocallySurjective_iff_epi; TopCat.Presheaf.locally_surjective_iff_surjective_on_stalks",
+   "results": "TopCat.Sheaf.isLocallySurjective_iff_epi, TopCat.Presheaf.locally_surjective_iff_surjective_on_stalks",
+   "date": "2026-10-10",
+   "verdict": "generalization: underlying sheaf-of-sets local lifting"
+  },
+  {
+   "tool": "grep",
+   "query": "rg 'isLocallySurjective_iff_epi|locally_surjective_iff_surjective_on_stalks' Mathlib/CategoryTheory/Sites Mathlib/Topology/Sheaves",
+   "results": "Mathlib/CategoryTheory/Sites/LocallySurjective.lean:378; Mathlib/Topology/Sheaves/LocallySurjective.lean:80,125",
+   "date": "2026-10-10",
+   "verdict": "generalization: local surjectivity and stalk surjectivity"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "TopCat.Sheaf.isLocallySurjective_iff_epi, TopCat.Presheaf.locally_surjective_iff_surjective_on_stalks",
+  "file": "Mathlib/Topology/Sheaves/LocallySurjective.lean",
+  "line": 125,
+  "how": "two Mathlib lemmas chained, as for lem-weil-pbc-sets-sheaf-epi-iff-stalks: with C = AddCommGrpCat, TopCat.Sheaf.isLocallySurjective_iff_epi (Topology/Sheaves/LocallySurjective.lean:125) gives TopCat.Presheaf.IsLocallySurjective φ.hom ↔ Epi φ in Sheaf AddCommGrpCat X (its instance hypotheses hold for AddCommGrpCat; Mathlib applies it to Sheaf AddCommGrpCat X in Topology/Sheaves/Flasque.lean:129), and TopCat.Presheaf.locally_surjective_iff_surjective_on_stalks (same file, line 80; AddCommGrpCat has colimits and its forgetful functor preserves filtered colimits) turns local surjectivity into surjectivity of every stalk map (stalkFunctor AddCommGrpCat x).map φ.hom."
+ },
+ "status": "mathlib",
+ "created": {
+  "item": "lem-sc-abelian-sheaf-short-exact-stalkwise",
+  "by": "worker",
+  "date": "2026-10-10"
+ },
+ "chapter": "sec-curve-estimates",
+ "unit": "sk-thm-curveestimate"
+}
