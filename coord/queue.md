@@ -1,8 +1,8 @@
 # Work queue
 
-810 items; claim with `tools/claim.py next <group> [--stage N]`.
+808 items; claim with `tools/claim.py next <group> [--stage N]`.
 
-## Stage 1: nodes to split (657)
+## Stage 1: nodes to split (655)
 
 | node | distance to a target | Lean state on the done branch |
 |---|---|---|
@@ -12,9 +12,6 @@
 | `lem-weil-pbc-closed-immersion-residue-field-iso` | 1011 | none |
 | `lem-weil-pbc-closed-subset-proper-over-base-universally-closed-image` | 1011 | none |
 | `lem-weil-pbc-etale-ring-map-prescribed-residue-field` | 1011 | none |
-| `lem-weil-pbc-formal-systems-annihilated-by-power` | 1011 | none |
-| `lem-weil-pbc-formal-systems-surjective` | 1011 | none |
-| `lem-weil-pbc-g-ring-check-pairs-of-primes` | 1011 | none |
 | `lem-weil-pbc-galois-invariant-closed-subset-descends` | 1011 | none |
 | `lem-weil-pbc-geometrically-regular-descent` | 1011 | none |
 | `lem-weil-pbc-grothendieck-existence-devissage` | 1011 | none |
@@ -136,6 +133,7 @@
 | `lem-weil-pbc-gabber-strict-henselian-zariski-comparison` | 1012 | none |
 | `lem-weil-pbc-ideal-module-product-stalk` | 1012 | none |
 | `lem-weil-pbc-integral-extension-dimension` | 1012 | none |
+| `lem-weil-pbc-kernel-cokernel-annihilated-mod-ideal` | 1012 | none |
 | `lem-weil-pbc-krull-intersection-localization` | 1012 | none |
 | `lem-weil-pbc-localization-colimit-principal-localizations` | 1012 | none |
 | `lem-weil-pbc-module-finite-presentation-cokernel` | 1012 | none |
@@ -822,7 +820,7 @@
 | `lem-weil-pbc-p1-field-dimension-one` | 4 | state |
 | `lem-weil-pbc-projective-space-zero-isomorphism` | 4 | state |
 
-Not open yet: 669 nodes that wait for stage 1, 438 nodes that wait for a statement dependency.
+Not open yet: 667 nodes that wait for stage 1, 441 nodes that wait for a statement dependency.
 
 ## Stage 3: modules to prove (0)
 
