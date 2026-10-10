@@ -1,0 +1,75 @@
+{
+ "id": "lem-weil-pbc-coherent-support-union-exact-sequence",
+ "kind": "statement",
+ "title": "A coherent module whose support is a union of two closed subsets is an extension of modules supported on each",
+ "statement": "Let $X$ be a Noetherian scheme [def-pc-scheme], i.e. locally Noetherian [pqf-def-locnoeth] and quasi-compact [def-weil-pbc-scheme-conventions], and let $\\mathcal F$ be a coherent $\\mathcal O_X$-module [pqf-def-coherent]. For an $\\mathcal O_X$-module $\\mathcal G$ [def-weil-sheaf-of-modules-category] let $\\operatorname{Supp}(\\mathcal G)=\\{x\\in X:\\mathcal G_x\\ne0\\}$ [def-weil-pbc-closed-subset-proper-over-base](2), $\\mathcal G_x$ the stalk [def-weil-pbc-module-stalk]. Suppose $\\operatorname{Supp}(\\mathcal F)=Z\\cup Z'$ with $Z,Z'\\subseteq X$ closed subsets. Then there is a coherent sub-$\\mathcal O_X$-module $\\mathcal G'\\subseteq\\mathcal F$ such that $\\operatorname{Supp}(\\mathcal G')\\subseteq Z'$ and $\\operatorname{Supp}(\\mathcal F/\\mathcal G')\\subseteq Z$, where $\\mathcal F/\\mathcal G'$ is the cokernel of the inclusion $\\mathcal G'\\to\\mathcal F$ (a coherent $\\mathcal O_X$-module); that is, a short exact sequence $0\\to\\mathcal G'\\to\\mathcal F\\to\\mathcal G\\to0$ of coherent $\\mathcal O_X$-modules with $\\operatorname{Supp}\\mathcal G'\\subseteq Z'$ and $\\operatorname{Supp}\\mathcal G\\subseteq Z$.",
+ "source": {
+  "document": "literature/stacks-project/coherent.tex",
+  "place": "Cohomology of Schemes, Lemma 01YD (label lemma-prepare-filter-support, coherent.tex line 2944), proof lines 2956-2979 (uses Schemes Lemma 01J3 schemes-lemma-reduced-closed-subscheme and Lemma 01Y9 lemma-power-ideal-kills-sheaf on the Noetherian open X minus Z'). Tags verified in literature/stacks-project/tags/tags: 01YD,coherent-lemma-prepare-filter-support; 01J3; 01Y9"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "pqf-def-locnoeth",
+  "def-weil-pbc-scheme-conventions",
+  "pqf-def-coherent",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-pbc-closed-subset-proper-over-base",
+  "def-weil-pbc-module-stalk"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "coherent sheaf whose support is a union of two closed subsets has a subsheaf supported on one with quotient supported on the other",
+   "results": "Scheme.IdealSheafData.support, IdealSheafData.support_sup, IdealSheafData.isClosed_supportSet (Mathlib.AlgebraicGeometry.IdealSheaf.Basic); IdealSheafData.range_subschemeι (Mathlib.AlgebraicGeometry.IdealSheaf.Subscheme); Module.support_of_exact (Mathlib.RingTheory.Support: support of the middle term of a short exact sequence of modules over a ring is the union); SheafOfModules.IsQuasicoherent (Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent)",
+   "date": "2026-10-10",
+   "verdict": "no match (supports of ideal sheaves and of modules over a ring only; nothing on sheaves of modules)"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "short exact sequence of coherent modules splitting the support of a coherent sheaf on a Noetherian scheme into two closed pieces",
+   "results": "AlgebraicGeometry.exists_of_res_zero_of_qcqs, exists_of_res_zero_of_qcqs_of_top (Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated); Scheme.zero_of_zero_cover (Mathlib.AlgebraicGeometry.Cover.Open); exists_pow_mul_eq_zero_of_res_basicOpen_eq_zero_of_isCompact (Mathlib.AlgebraicGeometry.Morphisms.QuasiCompact); IdealSheafData.range_glueDataObjι_ι_eq_support_inter (Mathlib.AlgebraicGeometry.IdealSheaf.Subscheme)",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Coherent\" (name substring)",
+   "results": "Quot.indepCoherent (Init.Core), Topology.IsCoherentWith (Mathlib.Topology.Defs.Induced), SheafOfModules.IsQuasicoherent, SheafOfModules.QuasicoherentData (Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent): no coherent sheaves",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rniE 'coherent' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicGeometry -l; grep -rn 'support' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicGeometry/Modules/*.lean",
+   "results": "only Modules/Tilde.lean (quasi-coherent tilde sheaves), IdealSheaf/Basic.lean (a comment), Sites/SmallAffineZariski.lean; no support of a sheaf of modules in AlgebraicGeometry/Modules; Mathlib has no coherent sheaves on schemes",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-coherent-filtration-integral-subschemes",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "reviewed": "2026-10-10 L: statement checked against 01YD"
+}
