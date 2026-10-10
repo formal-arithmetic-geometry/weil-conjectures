@@ -19,7 +19,9 @@
  "chapter": "sec-picard-framework",
  "unit": "sk-prop-jacobian",
  "created": {
-  "item": "thm-sc-theorem-of-the-base"
+  "item": "thm-sc-theorem-of-the-base",
+  "by": "worker",
+  "date": "2026-10-10"
  },
  "stmt_deps": [
   "def-sc-group-scheme",
@@ -57,8 +59,74 @@
    "results": "No matching declaration in the available source overlay; no pinned Mathlib source directory under /home/ubuntu/weil-src-slopmaster2/.lake/packages",
    "date": "2026-10-10",
    "verdict": "search incomplete; keep unsplit"
+  },
+  {
+   "tool": "leansearch",
+   "query": "a group scheme over a field is separated; IsSeparated G.hom for a group object G in Over (Spec k)",
+   "results": "LeanSearch returned HTTP 500 for both queries again on 2026-10-10 ~13:59 UTC",
+   "date": "2026-10-10",
+   "verdict": "search unavailable; no match established"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "group object in schemes over Spec of a field has separated structure morphism",
+   "results": "AlgebraicGeometry.Scheme.instIsSeparatedOfIsAffine, IsSeparated.instMap, Scheme.instIsSeparatedOfIsSeparated, Scheme.isSeparated_iff, Scheme.IsSeparated (all Mathlib.AlgebraicGeometry.Morphisms.Separated); none about group objects",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.IsSeparated, CategoryTheory.GrpObj",
+   "results": "no results",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rn 'IsSeparated' and 'GrpObj' in ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicGeometry (Group/Affine.lean, Group/Abelian.lean, Group/Smooth.lean, Pullbacks.lean); grep -rn '047L|047G' Mathlib",
+   "results": "no IsSeparated statement in AlgebraicGeometry/Group/; no stacks tag 047L or 047G in Mathlib; the ingredient isClosedImmersion_of_comp_eq_id is at AlgebraicGeometry/Morphisms/ClosedImmersion.lean:432",
+   "date": "2026-10-10",
+   "verdict": "no match in Mathlib; the statement is AlgebraicGeometry.GrpObj.isSeparated_hom of slopmaster2 (sorry-free), see lean_candidates"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit"
+ "status": "unsplit",
+ "lean_candidates": [
+  {
+   "name": "AlgebraicGeometry.GrpObj.isSeparated_hom",
+   "module": "WeilConjectures.AlgebraicGeometry.GroupScheme.Separated",
+   "lines": [
+    39,
+    57
+   ],
+   "note": "instance (G : Over (Spec (.of k))) [GrpObj G] : IsSeparated G.hom, tagged @[stacks 047L]: a group object of Over (Spec k), k a field, i.e. a group scheme over k (def-sc-group-scheme), has separated structure morphism; exactly the node's statement. Sorry map local/sorry_map_slopmaster2_71d63dcf.jsonl.gz: s=false, ts=false, and its transitive project dependencies CategoryTheory.GrpObj.shearIso, shearIso_hom (WeilConjectures.Mathlib.CategoryTheory.Monoidal.Cartesian.Grp 299-308) are sorry-free. Proof: unit section closed immersion by Mathlib isClosedImmersion_of_comp_eq_id; diagonal = (id, e) composed with the shear automorphism, (id, e) a base change of e."
+  }
+ ],
+ "lean_audit": {
+  "slopmaster2": {
+   "state": "closed",
+   "decls": [
+    {
+     "name": "AlgebraicGeometry.GrpObj.isSeparated_hom",
+     "module": "WeilConjectures.AlgebraicGeometry.GroupScheme.Separated",
+     "lines": [
+      39,
+      57
+     ],
+     "kind": "theorem",
+     "sorry": false
+    }
+   ],
+   "missing": [],
+   "open": []
+  }
+ },
+ "lean": {
+  "branch": "slopmaster2",
+  "declarations": [
+   "AlgebraicGeometry.GrpObj.isSeparated_hom"
+  ],
+  "note": "attached by the lead 2026-10-10 after the worker's attachment check: GrpObj.isSeparated_hom (GroupScheme/Separated.lean 39-57, stacks 047L): a group object over Spec k has separated structure morphism"
+ },
+ "reviewed": "2026-10-10 L: attachment check: finished on slopmaster2 by GrpObj.isSeparated_hom (verified sorry-free; the instance states separatedness of the structure morphism of a group object over Spec k, the node exactly). Not split (rule 0). Stacks route (047G, 01TE, 01LD) noted by the worker, no nodes needed."
 }

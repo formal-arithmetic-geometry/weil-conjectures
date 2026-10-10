@@ -1573,3 +1573,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 13:58 L: notice to all groups: the Stacks and blueprint sources are in the repository, WANTED lines for them are moot
 - 13:59 L: merged deliver/K1/lem-weil-pbc-matching-object-coskeleton (reviewer PASS; after a return; new nodes: 1)
 - 13:59 L: merged deliver/K1/lem-weil-pbc-matching-object-coskeleton (third push; reviewer RETURN on field faults only, merged by L as an exception with the three fields restored and TeX fixed; new node lem-weil-pbc-coskeleton-matching-tuples, 0183 form)
+- 14:00 L: accepted lem-sc-group-scheme-separated-field: attachment GrpObj.isSeparated_hom verified, closed, not split
