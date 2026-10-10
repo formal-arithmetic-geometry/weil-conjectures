@@ -1,8 +1,8 @@
 # Work queue
 
-954 items; claim with `tools/claim.py next <group> [--stage N]`.
+956 items; claim with `tools/claim.py next <group> [--stage N]`.
 
-## Stage 1: nodes to split (579)
+## Stage 1: nodes to split (581)
 
 | node | distance to a target | Lean state on the done branch |
 |---|---|---|
@@ -58,7 +58,6 @@
 | `def-weil-pbc-analytically-unramified` | 1016 | none |
 | `lem-weil-pbc-coherent-homs-over-open` | 1016 | none |
 | `lem-weil-pbc-coherent-stalk-map-extends` | 1016 | none |
-| `lem-weil-pbc-complete-local-nagata` | 1016 | none |
 | `lem-weil-pbc-dimension-preserved-field-extension` | 1016 | none |
 | `lem-weil-pbc-field-injective-matrix-nonzero-maximal-minor` | 1016 | none |
 | `lem-weil-pbc-fpqc-descend-affine` | 1016 | none |
@@ -73,6 +72,9 @@
 | `lem-weil-pbc-associated-prime-localize-at-prime` | 1017 | none |
 | `lem-weil-pbc-associated-primes-exact-sequence` | 1017 | none |
 | `lem-weil-pbc-module-finite-type-surjective-on-stalk` | 1017 | none |
+| `lem-weil-pbc-n2-ascends-finite-domain-extension` | 1017 | none |
+| `lem-weil-pbc-power-series-n2` | 1017 | none |
+| `lem-weil-pbc-tate-n2-complete-principal` | 1017 | none |
 | `lem-weil-pbc-injective-acyclicity-bounded-below` | 2002 | sorry_here |
 | `lem-weil-pbc-property-implies-acyclicity` | 2003 | none |
 | `lem-weil-pbc-qcqs-higher-direct-image` | 2003 | none |
@@ -966,7 +968,7 @@
 | `lem-weil-pbc-p1-field-dimension-one` | 4 | state |
 | `lem-weil-pbc-projective-space-zero-isomorphism` | 4 | state |
 
-Not open yet: 590 nodes that wait for stage 1, 710 nodes that wait for a statement dependency.
+Not open yet: 592 nodes that wait for stage 1, 711 nodes that wait for a statement dependency.
 
 ## Stage 3: modules to prove (0)
 
