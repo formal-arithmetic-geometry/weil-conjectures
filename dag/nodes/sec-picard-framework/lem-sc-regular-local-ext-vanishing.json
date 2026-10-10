@@ -23,9 +23,41 @@
   "def-weil-pbc-krull-dimension-ring",
   "def-pc-ext"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "By [lem-weil-pbc-regular-local-finite-gl-dim] (Stacks Tag 00O7), every $R$-module, in particular $M$, has a projective resolution of length $\\le d$. Here $d$ is finite because a regular local ring is Noetherian and its maximal ideal has a finite set of generators; the cited theorem states the bound with this $d$.",
+   "uses": [
+    "lem-weil-pbc-regular-local-finite-gl-dim"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Proposition proposition-regular-finite-gl-dim (Tag 00O7), final sentence"
+   }
+  },
+  {
+   "text": "Apply [lem-weil-pbc-projective-dimension-ext-characterization] (Stacks Tag 065R) with $X=M$ and $n=d$. Step 1 supplies its projective-resolution hypothesis, so $\\operatorname{Ext}^i_R(M,N)=0$ for every $R$-module $N$ and every $i\\ge d+1$. Since the integer $q>d$ is equivalent to $q\\ge d+1$, taking $i=q$ proves the claim. In particular $q$ is nonnegative, as required by [def-pc-ext].",
+   "uses": [
+    "lem-weil-pbc-projective-dimension-ext-characterization",
+    "def-pc-ext"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Lemma lemma-projective-dimension-ext (Tag 065R), implication (1) to (2); invoked after Proposition Tag 00O7 in equiv.tex, Lemma lemma-Ext-0-regular (Tag 0FZ3), proof of (1)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-regular-local-finite-gl-dim",
+  "lem-weil-pbc-projective-dimension-ext-characterization",
+  "def-pc-ext"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/equiv.tex",
+  "place": "Lemma lemma-Ext-0-regular (Tag 0FZ3), proof of (1), local Ext vanishing via Proposition Tag 00O7 and Lemma Tag 065R"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -50,12 +82,41 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "chapter": "sec-picard-framework",
  "unit": "sk-thm-picard-duality",
  "created": {
   "item": "lem-sc-p1-ext-coherent-dim-one-vanishing",
   "by": "worker",
   "date": "2026-10-10"
+ },
+ "split_report": {
+  "date": "2026-10-11",
+  "item": "lem-sc-regular-local-ext-vanishing",
+  "worker": "stage1",
+  "summary": "The regular-local global-dimension result of Stacks 00O7 and the projective-dimension/Ext equivalence of Stacks 065R already have exact DAG nodes. Their statements give the claimed Ext vanishing in two steps, including the bound for all modules N. No new node is needed. The item has no matching sorry-free Lean declaration in the source checkout.",
+  "blueprint": "The two steps make precise the parenthetical Ext-vanishing argument in thm-sc-p1-duality through lem-sc-p1-ext-coherent-dim-one-vanishing: regularity of the stalk gives global dimension at most its Krull dimension, hence local Ext vanishes above that dimension. The whole-blueprint search for regular-local Ext vanishing found no duplicate.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-regular-local-finite-gl-dim",
+    "why": "Stacks 00O7 supplies the generic regular-local global-dimension bound used as a black box; the Picard-duality unit has no such local algebra result."
+   },
+   {
+    "node": "lem-weil-pbc-projective-dimension-ext-characterization",
+    "why": "Stacks 065R supplies the generic passage from a bounded projective resolution to Ext vanishing; no node of the Picard-duality unit states it."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-regular-local-finite-gl-dim",
+  "lem-weil-pbc-projective-dimension-ext-characterization"
+ ],
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-rlv",
+  "group": "M1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-rlv (reviewer sub-agent of L); spot-checked: Source: Stacks 0FZ3 (equiv lemma-Ext-0-regular, proof of (1): stalk regular so global dimension d_x by 00O7, hence local Ext^q vanishes for q>d_x) and 00O7 (algebra proposition-regular-finite-gl-dim, 'regular local ring has global dimension <= d'); the item statement (regular local R, d=dim R, M finitely generated, N arbitrary, q>d) agrees, with M f.g. a harmless specialisation and d finite (regular local => Noetherian local). Step 1 carried by lem-weil-pbc-regular-local-finite-gl-dim (statement: every R-module has a projective resolution of length <= d, read). Step 2 carried by lem-weil-pbc-projective-dimension-ext-characterization (statement includes Ext^i_R(X,Y)=0 for all Y and all i>=n+1, read), with def-pc-ext for Ext of R-modules, i>=0. No circularity: neither cited node reaches the item (BFS over stmt/proof deps). Tool uses accepted (C8): both are generic commutative-algebra facts used as black boxes, not a step of the Picard-duality route. Mathlib (pinned): RegularLocalRing/ has only Defs.lean and Polynomial.lean, no global-dimension or Ext-vanishing theorem for regular local rings, no globalDimension declaration, so the item is not a leaf; slopmaster2 has no regular-local Ext/projective-dimension declaration stating it (B10 not applicable). Small cases: d=0 (regular local of dim 0 is a field, Ext^q=0 for q>=1), d=1 (DVR, Ext^q=0 for q>=2). Only changed fields: proof, proof_deps, proof_origin, status, split_report. Start Sat Oct 10 04:12:45 PM UTC 2026, end Sat Oct 10 04:13:19 PM UTC 2026."
  }
 }
