@@ -1,0 +1,71 @@
+{
+ "id": "lem-pc-irreducible-space-connected",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pc-curves-are-sc",
+   "place": "proof: 'in particular $X$ is nonempty, connected (being irreducible)': irreducible implies connected",
+   "via": []
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "An irreducible space is connected",
+ "statement": "Let $X$ be a topological space which is irreducible [def-weil-irreducible-components]. Then $X$ is connected [def-weil-connected-scheme].",
+ "source": {
+  "document": "literature/stacks-project/topology.tex",
+  "place": "Topology, the sentence 'An irreducible space is obviously connected.' directly after Definition Tag 004V (label definition-irreducible-components, line 866); tag verified in stacks-project/tags/tags (004V,topology-definition-irreducible-components)"
+ },
+ "stmt_deps": [
+  "def-weil-irreducible-components",
+  "def-weil-connected-scheme"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "irreducible topological space is connected",
+   "results": "IsIrreducible.isConnected, IrreducibleSpace.connectedSpace, IsPreirreducible.isPreconnected, PreirreducibleSpace.preconnectedSpace, irreducibleComponent_subset_connectedComponent (Mathlib.Topology.Connected.Basic)",
+   "date": "2026-10-10",
+   "verdict": "match: IrreducibleSpace.connectedSpace"
+  },
+  {
+   "tool": "loogle",
+   "query": "IrreducibleSpace, ConnectedSpace",
+   "results": "IrreducibleSpace.connectedSpace (Mathlib.Topology.Connected.Basic)",
+   "date": "2026-10-10",
+   "verdict": "match: IrreducibleSpace.connectedSpace"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rn 'IrreducibleSpace.connectedSpace\\|theorem IsIrreducible.isConnected' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/Topology",
+   "results": "Topology/Connected/Basic.lean:67 IsIrreducible.isConnected; :796 instance IrreducibleSpace.connectedSpace (α) [IrreducibleSpace α] : ConnectedSpace α",
+   "date": "2026-10-10",
+   "verdict": "match (read)"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "IrreducibleSpace.connectedSpace",
+  "file": "Mathlib/Topology/Connected/Basic.lean",
+  "how": "exact: `instance IrreducibleSpace.connectedSpace (α) [TopologicalSpace α] [IrreducibleSpace α] : ConnectedSpace α` (Connected/Basic.lean:796); `ConnectedSpace` is def-weil-connected-scheme (its match), `IrreducibleSpace` the irreducible space of def-weil-irreducible-components"
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-pc-curves-are-sc",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-abelian-varieties",
+ "unit": "sk-def-av-jacobian"
+}

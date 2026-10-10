@@ -3,43 +3,146 @@
  "blueprint": {
   "is": "lem-pc-curves-are-sc",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "Curves in the sense of file 06",
- "statement": "Let $k$ be an algebraically closed field and let $X$ be a\nsmooth projective curve over\n$k$. Then $X$ is a smooth *connected curve over $k$* in the sense of\n[def-sc-curves]: $X$ is nonempty, connected, separated, of finite type over\n$k$ and of dimension one, and smooth over $k$.",
+ "statement": "Let $k$ be an algebraically closed field [def-weil-algebraic-closure] and let $X$ be a smooth projective curve over $k$ [def-pc-smooth-projective-curve]. Then $X$ is a smooth *connected curve over $k$* in the sense of [def-sc-curves]: $X$ is nonempty and connected [def-weil-connected-scheme], separated and of finite type over $k$ [def-weil-pbc-scheme-conventions], its underlying topological space has Krull dimension one [def-kun-topological-krull-dimension], and $X\\to\\operatorname{Spec}(k)$ is smooth [def-sbc-smooth-morphisms].",
  "source": {
   "document": "literature/blueprint/master/blueprint/sec-abelian-varieties/sk-def-av-jacobian/lem-pc-curves-are-sc.md",
   "place": "node lem-pc-curves-are-sc, order 455"
  },
  "stmt_deps": [
+  "def-weil-algebraic-closure",
+  "def-pc-smooth-projective-curve",
   "def-sc-curves",
-  "def-pc-dimension"
+  "def-weil-connected-scheme",
+  "def-weil-pbc-scheme-conventions",
+  "def-kun-topological-krull-dimension",
+  "def-sbc-smooth-morphisms"
  ],
  "proof": [
   {
-   "text": "By [def-pc-smooth-projective-curve] $X$ is a\ncurve over $k$, hence a\nvariety: integral, with\n$X\\to\\operatorname{Spec}(k)$ separated and of finite type ([def-pc-curve]); in\nparticular $X$ is nonempty, connected (being irreducible), separated,\nof finite type and, being a\ncurve, of dimension $1$. Its structure morphism is smooth by hypothesis,\nand\n[def-sc-curves] requires exactly: nonempty, connected, separated scheme of\nfinite type of dimension one, smooth over $k$. This proves the\nclaim.",
+   "text": "Unfolding the hypothesis. By [def-pc-smooth-projective-curve], $X$ is a curve over $k$ in the sense of [def-pc-curve] whose structure morphism $X\\to\\operatorname{Spec}(k)$ is smooth and projective. By [def-pc-curve], $X$ is a variety over $k$ of dimension $1$: the scheme $X$ is integral [def-pc-integral-scheme], its structure morphism is separated and of finite type, and $\\dim X=1$ in the sense of [def-pc-dimension], i.e. $\\sup_{x\\in X}\\dim\\mathcal O_{X,x}=1$ (the supremum of the Krull dimensions of the local rings of $X$). Projectivity is not used below.",
    "uses": [
     "def-pc-smooth-projective-curve",
     "def-pc-curve",
-    "def-sc-curves"
+    "def-pc-integral-scheme",
+    "def-pc-dimension"
    ],
-   "elementary": false
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-abelian-varieties/sk-def-av-jacobian/lem-pc-curves-are-sc.md",
+    "place": "## Proof, first sentence: 'By [def-pc-smooth-projective-curve] $X$ is a curve over $k$, hence a variety: integral, with $X\\to\\operatorname{Spec}(k)$ separated and of finite type ([def-pc-curve])'"
+   }
+  },
+  {
+   "text": "$X$ is nonempty and irreducible. An integral scheme is nonempty by the definition [def-pc-integral-scheme], and its underlying topological space is irreducible by [lem-pc-integral-scheme-irreducible] (Stacks 01ON), applied to the integral scheme $X$ of step 1.",
+   "uses": [
+    "def-pc-integral-scheme",
+    "lem-pc-integral-scheme-irreducible",
+    "def-weil-irreducible-components"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/properties.tex",
+    "place": "Properties, Lemma Tag 01ON (lemma-characterize-integral); blueprint proof: 'in particular $X$ is nonempty'"
+   }
+  },
+  {
+   "text": "$X$ is connected. The underlying topological space of $X$ is irreducible (step 2), hence connected by [lem-pc-irreducible-space-connected]; so the scheme $X$ is connected in the sense of [def-weil-connected-scheme] (which includes nonemptiness).",
+   "uses": [
+    "lem-pc-irreducible-space-connected",
+    "def-weil-connected-scheme"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/topology.tex",
+    "place": "Topology, sentence after Definition Tag 004V: 'An irreducible space is obviously connected'; blueprint proof: 'connected (being irreducible)'"
+   }
+  },
+  {
+   "text": "$X$ has dimension one in the sense of [def-sc-curves]. The dimension of a scheme in [def-sc-curves] is the Krull dimension of its underlying topological space [def-kun-topological-krull-dimension] (Stacks, Properties, Definition Tag 04MT). By [lem-pc-scheme-dimension-local-rings] (Stacks 04MU), this Krull dimension equals $\\sup_{x\\in X}\\dim\\mathcal O_{X,x}$, which is $1$ by step 1. Hence the underlying space of $X$ has Krull dimension $1$, in particular at most $1$.",
+   "uses": [
+    "def-sc-curves",
+    "def-kun-topological-krull-dimension",
+    "lem-pc-scheme-dimension-local-rings",
+    "def-pc-dimension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/properties.tex",
+    "place": "Properties, Definition Tag 04MT and Lemma Tag 04MU (lemma-dimension), (1)=(2); blueprint proof: 'being a curve, of dimension $1$'"
+   }
+  },
+  {
+   "text": "Conclusion. The field $k$ is algebraically closed [def-weil-algebraic-closure], as [def-sc-curves] requires. By step 1, $X$ is separated and of finite type over $k$ [def-weil-pbc-scheme-conventions], and by step 4 its dimension is at most one; so $X$ is a curve over $k$ in the sense of [def-sc-curves]. It is nonempty and connected (steps 2 and 3) and of dimension one (step 4), so it is a connected curve; and $X\\to\\operatorname{Spec}(k)$ is smooth [def-sbc-smooth-morphisms] by step 1, so it is smooth in the sense of [def-sc-curves]. This proves the claim.",
+   "uses": [
+    "def-sc-curves",
+    "def-weil-algebraic-closure",
+    "def-weil-pbc-scheme-conventions",
+    "def-sbc-smooth-morphisms"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-abelian-varieties/sk-def-av-jacobian/lem-pc-curves-are-sc.md",
+    "place": "## Proof, last sentences: 'Its structure morphism is smooth by hypothesis, and [def-sc-curves] requires exactly: nonempty, connected, separated scheme of finite type of dimension one, smooth over $k$.'"
+   }
   }
  ],
  "proof_deps": [
   "def-pc-smooth-projective-curve",
   "def-pc-curve",
-  "def-sc-curves"
+  "def-pc-integral-scheme",
+  "def-pc-dimension",
+  "lem-pc-integral-scheme-irreducible",
+  "def-weil-irreducible-components",
+  "lem-pc-irreducible-space-connected",
+  "def-weil-connected-scheme",
+  "def-sc-curves",
+  "def-kun-topological-krull-dimension",
+  "lem-pc-scheme-dimension-local-rings",
+  "def-weil-algebraic-closure",
+  "def-weil-pbc-scheme-conventions",
+  "def-sbc-smooth-morphisms"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/master/blueprint/sec-abelian-varieties/sk-def-av-jacobian/lem-pc-curves-are-sc.md",
-  "place": "## Proof"
+  "place": "## Proof; the facts it uses follow literature/stacks-project/properties.tex Lemma Tag 01ON and Lemma Tag 04MU, and literature/stacks-project/topology.tex after Definition Tag 004V"
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "smooth projective integral curve over a field is connected nonempty separated of finite type of dimension one",
+   "results": "AlgebraicGeometry.IsIntegral.mk, AlgebraicGeometry.IsSmooth, AlgebraicGeometry.IsSeparated (Mathlib.AlgebraicGeometry.*); nothing on curves",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "integral scheme of finite type over a field of dimension one is a connected curve",
+   "results": "AlgebraicGeometry.IsIntegral.nonempty, AlgebraicGeometry.IsIntegral, AlgebraicGeometry.irreducibleSpace_of_isIntegral, AlgebraicGeometry.affine_isIntegral_iff, instIsIntegralSpecOfIsDomainCarrier",
+   "date": "2026-10-10",
+   "verdict": "no match (ingredients only; Mathlib has no notion of curve)"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rln 'IsCurve\\|IsConnectedCurve' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicGeometry",
+   "results": "none (the classes IsCurve, IsConnectedCurve live in slopmaster2's WeilConjectures/AlgebraicGeometry/Curve.lean:68,89, not in Mathlib)",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rn 'IsConnectedCurve' ~/weil-conjectures-slopmaster2/WeilConjectures (instances, theorems, structure literals); grep -rn 'lem-pc-curves-are-sc' ~/weil-conjectures-slopmaster2/WeilConjectures ~/weil-conjectures-slopmaster2/Comparator",
+   "results": "no declaration derives IsConnectedCurve from IsIntegral/projective hypotheses; IsConnectedCurve is built by hand in Curve/Compactification.lean:250, Curve/Affine.lean:106, Curve/CohomologicalDimension.lean:92; AbelianVariety/Jacobian.lean:67 IsJacobian assumes [IsCurve f] [Smooth f] [IsProper f]; the node id does not occur",
+   "date": "2026-10-10",
+   "verdict": "no slopmaster2 declaration states the node (rule 0 does not apply)"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [],
  "blueprint_kind": "lemma",
@@ -67,5 +170,13 @@
   }
  },
  "chapter": "sec-abelian-varieties",
- "unit": "sk-def-av-jacobian"
+ "unit": "sk-def-av-jacobian",
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "lem-pc-curves-are-sc",
+  "worker": "stage1",
+  "summary": "Checked the blueprint proof hypothesis by hypothesis against def-pc-smooth-projective-curve, def-pc-curve and def-sc-curves. The statement now cites def-pc-smooth-projective-curve (it was missing from stmt_deps) and the definition nodes of the notions it lists; def-pc-dimension was removed from stmt_deps (the statement does not use it; the proof does). The dimension in def-sc-curves is read as the Krull dimension of the underlying space (Stacks 04MT, and slopmaster2's IsCurve uses topologicalKrullDim), so the statement says so. The single blueprint step was split into five: unfolding (step 1), integral gives nonempty and irreducible (01ON, new Mathlib leaf lem-pc-integral-scheme-irreducible), irreducible gives connected (after 004V, new Mathlib leaf lem-pc-irreducible-space-connected), dimension of local rings equals topological dimension (04MU, new unsplit node lem-pc-scheme-dimension-local-rings), assembly. Projectivity is not used. No slopmaster2 or Mathlib declaration states the item.",
+  "blueprint": "lem-pc-curves-are-sc's proof: step 1 realizes 'By [def-pc-smooth-projective-curve] X is a curve over k, hence a variety: integral, with X -> Spec(k) separated and of finite type ([def-pc-curve])'; steps 2-3 realize 'in particular X is nonempty, connected (being irreducible)'; step 4 realizes 'separated, of finite type and, being a curve, of dimension 1'; step 5 realizes 'Its structure morphism is smooth by hypothesis, and [def-sc-curves] requires exactly: ... This proves the claim.'"
+ },
+ "reviewed": "2026-10-10 L: 5 steps checked (unfolding the two curve definitions; integral gives nonempty and irreducible; irreducible gives connected; local-ring dimension equals the Krull dimension of the space, 04MU; assembly against def-sc-curves). Statement now cites def-pc-smooth-projective-curve and the definition nodes. New Mathlib leaves lem-pc-integral-scheme-irreducible (irreducibleSpace_of_isIntegral, Properties.lean 264) and lem-pc-irreducible-space-connected (IrreducibleSpace.connectedSpace, Connected/Basic.lean 796) verified; lem-pc-scheme-dimension-local-rings (04MU) unsplit. Worker flags: def-sc-curves cites no definition of dimension or smooth; def-pc-curve does not cite def-pc-integral-scheme; check at their splits."
 }

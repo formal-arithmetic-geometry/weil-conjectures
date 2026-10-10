@@ -1445,3 +1445,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 12:50 L: accepted lem-galois-fpqc-affine-descent-effective: 8 steps (0245), new nodes lem-galois-fpqc-descending-types-morphisms (02W3, unsplit) and lem-galois-flat-algebra-descent (023N, closed by Algebra.DescentDatum.*, verified)
 - 12:51 L: launcher decision (b): the group's review may be written by a separate reviewer agent, never the author; recorded in roles/remote-lead.md (intro, §4) and roles/maintainer.md §7 (content-return rate above ~1 in 5 goes into STATE); packaging tool (a) noted in §4
 - 12:52 L: accepted lem-pc-proper-base-change: 6 steps (01W4 and formal smoothness under base change), no new nodes; lem-weil-pbc-proper-base-change duplicate noted
+- 12:52 L: accepted lem-pc-curves-are-sc: 5 steps, new Mathlib leaves lem-pc-integral-scheme-irreducible, lem-pc-irreducible-space-connected, new node lem-pc-scheme-dimension-local-rings (04MU)
