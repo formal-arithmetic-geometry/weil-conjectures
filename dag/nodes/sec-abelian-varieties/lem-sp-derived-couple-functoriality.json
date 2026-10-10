@@ -20,9 +20,54 @@
   "def-sp-exact-couple",
   "def-sp-convergence"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Write $d=g\\circ f$ and $d'=g'\\circ f'$. The three commutative squares for a morphism of couples give $t_Ed=d't_E$. Hence $t_E$ carries $\\ker d$ into $\\ker d'$ and $\\operatorname{im}d$ into $\\operatorname{im}d'$, so the universal property of the kernel and quotient defines a map from the derived $E$-term of the first couple to the derived $E'$-term of the second. Likewise $t_D\\alpha=\\alpha't_D$ carries $\\operatorname{im}\\alpha$ into $\\operatorname{im}\\alpha'$, defining the map on the derived $D$-terms. The identities with $\\alpha,f,g$ descend to the derived structure maps because the defining maps are restrictions, factorizations, and quotient maps; thus the induced pair is a morphism of derived couples.",
+   "uses": [
+    "def-sp-exact-couple",
+    "lem-sp-derived-couple-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/homology.tex",
+    "place": "Section 12.21, Lemma 12.21.2 (Tag 011R), functoriality in the construction of the derived couple; Definition 12.21.1 (Tag 011Q)"
+   }
+  },
+  {
+   "text": "By the exactness assertion for the derived couple (item 3, and item 4 for the iteration), the preceding construction may be applied to every iterate of both couples: start with $C_2=C=(D,E,\\alpha,f,g)$ and $\\tilde C_2=(D',E',\\alpha',f',g')$ and define $C_{r+1}$, $\\tilde C_{r+1}$ as the derived couples of $C_r$, $\\tilde C_r$ (couples of type $r-2$). Induction on $r$, applying the previous step to the type-$(r-2)$ couples $C_r$ and $\\tilde C_r$, gives morphisms of couples $C_r\\to\\tilde C_r$ for all $r\\ge2$, whose $D$-component is the restriction of $t_D$ to $D_r^{p,q}=\\operatorname{im}(\\alpha^{r-2})\\subseteq D^{p,q}$. On the $E$-terms these are maps $\\varphi_r:E_r\\to\\tilde E_r$ with $\\varphi_2=t_E$; the equality $\\varphi_r d_r=\\tilde d_r\\varphi_r$, where $d_r=g_r\\circ f_r$ and $\\tilde d_r=\\tilde g_r\\circ\\tilde f_r$, follows from the commutation of the $r$-th morphism with $f_r$ and $g_r$. Thus every page map commutes with its differential.",
+   "uses": [
+    "lem-sp-derived-couple-exact",
+    "def-sp-exact-couple"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spectral-sequences.tex",
+    "place": "Definitions 12.21.1, 12.21.3 and Lemmas 12.21.2, 12.21.4 (Tags 011Q, 011S, 011R, 011T)"
+   }
+  },
+  {
+   "text": "The compatible page maps preserve cycles and boundaries in the recursive construction of [def-sp-convergence]. Inductively, $\\varphi_2$ maps each $Z_r$ into $Z_r'$ and each $B_r$ into $B_r'$, and the induced map on $Z_r/B_r$ is $\\varphi_r$; the induction step uses that $\\varphi_r$ commutes with $d_r$. Passing to the intersection and union gives $\\varphi_2(Z_\\infty)\\subseteq Z_\\infty'$ and $\\varphi_2(B_\\infty)\\subseteq B_\\infty'$, so the quotient map $E_\\infty=Z_\\infty/B_\\infty\\to Z_\\infty'/B_\\infty'=E_\\infty'$ is well defined.",
+   "uses": [
+    "def-sp-convergence",
+    "lem-sp-derived-couple-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spectral-sequences.tex",
+    "place": "Definition 12.21.3 (Tag 011S) and the limiting cycle/boundary construction; Lemma 12.21.2 (Tag 011R)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sp-exact-couple",
+  "lem-sp-derived-couple-exact",
+  "def-sp-convergence"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/spectral-sequences.tex",
+  "place": "Definitions 12.21.1, 12.21.3 and Lemmas 12.21.2, 12.21.4 (Tags 011Q, 011S, 011R, 011T)"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -54,12 +99,37 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-sp-couple-morphism",
   "by": "worker",
   "date": "2026-10-10"
  },
  "chapter": "sec-abelian-varieties",
- "unit": "sk-prop-av-pqf-finite"
+ "unit": "sk-prop-av-pqf-finite",
+ "split_report": {
+  "date": "2026-10-11",
+  "item": "lem-sp-derived-couple-functoriality",
+  "worker": "stage1",
+  "summary": "No sorry-free Lean declaration states this item. I kept the imported statement and expanded its proof into the one-step kernel/image quotient construction, induction over derived couples and pages, and passage to the limiting cycle-boundary quotient. No new node was needed; the existing exactness lemma is cited as an off-unit generic tool.",
+  "blueprint": "Realizes the proof clause of lem-sp-couple-morphism stating that derived-couple construction is functorial, iterates to all pages, and induces the E-infinity map.",
+  "tool_uses": [
+   {
+    "node": "lem-sp-derived-couple-exact",
+    "why": "The iteration step needs the theorem that each derived couple is exact, which is filed in the proper-base-change unit and is not supplied by this unit's route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sp-derived-couple-exact",
+  "lem-sp-derived-couple-exact"
+ ],
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-dcf1955",
+  "group": "K1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-dcf1955 (reviewer sub-agent of L); spot-checked: Statement matches Stacks 011Q morphism of couples; Step 1 kernel/image transport and descent of alpha',f',g' checked against def-sp-exact-couple formulas (D'=im alpha from D^{p+1,q-1}, g' bidegree (+1,-1)); Step 2 consistent with lem-sp-derived-couple-exact item 4 (D_r=im alpha^{r-2}, type r-2, d_r bidegree (r,1-r)); Step 3 Z_r/B_r induction against def-sp-convergence. Tool use lem-sp-derived-couple-exact accepted (generic exactness, already accepted 19:26 for F1). FIX more, RETURN less: Step 2 conflated target couple (primed) with derived couple (C_r'=C_{r+1}) and wrote t_E d_r=d_r' t_E; rewritten with target iterates tilde C_r and phi_r d_r = tilde d_r phi_r, D-component = restriction of t_D to im alpha^{r-2}; no mathematical change.; 1 file(s) fixed by the reviewer"
+ }
 }
