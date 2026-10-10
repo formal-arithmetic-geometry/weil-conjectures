@@ -3,7 +3,7 @@
  "blueprint": {
   "is": "def-sp-spectral-sequence",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "definition",
  "title": "Spectral sequences",
@@ -18,9 +18,63 @@
  "proof": [],
  "proof_deps": [],
  "proof_origin": null,
- "mathlib_searches": [],
- "mathlib_match": null,
- "status": "imported",
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "spectral sequence consisting of complexes on each page with homology isomorphisms to next page",
+   "results": "HomologicalComplex.HomologySequence.composableArrows₃ and related homology declarations; no exact spectral-sequence structure",
+   "date": "2026-10-11",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "SpectralSequence, ComplexShape, homology",
+   "results": "0 hits; unknown identifier SpectralSequence",
+   "date": "2026-10-11",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "spectral sequence|SpectralSequence Algebra/Homology",
+   "results": "Mathlib/Algebra/Homology/SpectralSequence/Basic.lean:15,19,37; ComplexShape.lean:11-21; SpectralObject/SpectralSequence.lean:14-18",
+   "date": "2026-10-11",
+   "verdict": "match: CategoryTheory.SpectralSequence at Basic.lean:37"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "category theoretic spectral sequence as pages of homological complexes with homology identified with next page",
+   "results": "HomologicalComplex.HomologySequence.composableArrows₃Functor and HomologicalComplex declarations; no exact match",
+   "date": "2026-10-11",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.SpectralSequence",
+   "results": "CategoryTheory.SpectralSequence, .Hom, .page, .iso and related declarations in Mathlib.Algebra.Homology.SpectralSequence.Basic",
+   "date": "2026-10-11",
+   "verdict": "match"
+  },
+  {
+   "tool": "grep",
+   "query": "structure SpectralSequence|structure.*SpectralSequence Algebra/Homology/SpectralSequence",
+   "results": "Mathlib/Algebra/Homology/SpectralSequence/Basic.lean:37 structure SpectralSequence; Basic.lean:52 structure Hom",
+   "date": "2026-10-11",
+   "verdict": "match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "spectral sequence pages homology isomorphism next page",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-11",
+   "verdict": "unavailable"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "CategoryTheory.SpectralSequence",
+  "file": "Mathlib/Algebra/Homology/SpectralSequence/Basic.lean",
+  "how": "exact: structure declaration at lines 37-47; morphism structure CategoryTheory.SpectralSequence.Hom at lines 52-61"
+ },
+ "status": "mathlib",
  "merged_into": null,
  "import_flags": [],
  "blueprint_kind": "definition",
@@ -41,5 +95,20 @@
   }
  },
  "chapter": "sec-abelian-varieties",
- "unit": "sk-prop-av-pqf-finite"
+ "unit": "sk-prop-av-pqf-finite",
+ "split_report": {
+  "date": "2026-10-11",
+  "item": "def-sp-spectral-sequence",
+  "worker": "stage1",
+  "summary": "The definition is an exact Mathlib match. Mathlib.Algebra.Homology.SpectralSequence.Basic defines CategoryTheory.SpectralSequence with pages HomologicalComplex C (c r) and isomorphisms from page homology to the next page, and CategoryTheory.SpectralSequence.Hom gives the compatible morphisms. No project declaration with the blueprint tag exists in slopmaster2.",
+  "blueprint": "The item realizes the complete definition at blueprint node def-sp-spectral-sequence, order 506."
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-dss1847",
+  "group": "J1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-dss1847 (reviewer sub-agent of L); spot-checked: Read Mathlib/Algebra/Homology/SpectralSequence/Basic.lean 37-57: structure SpectralSequence (page r for r0<=r as HomologicalComplex C (c r), iso (page r).homology pq = (page r').X pq for r+1=r') and Hom (page morphisms commuting with the isos) match the node clause by clause; exact Mathlib leaf, self-contained, stmt_deps only def-sp-abelian, no cycle, no new nodes; no repairs. Second reading by J1 missed no fault."
+ }
 }
