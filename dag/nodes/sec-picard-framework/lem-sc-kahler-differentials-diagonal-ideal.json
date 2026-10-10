@@ -31,20 +31,92 @@
  },
  "mathlib_searches": [
   {
+   "tool": "leanfinder",
+   "query": "canonical isomorphism between Kahler differentials Omega A over R and kernel of multiplication A tensor_R A to A modulo its square",
+   "results": "KaehlerDifferential.quotKerTotalEquiv; KaehlerDifferential.D_apply; KaehlerDifferential.fromIdeal; KaehlerDifferential.ideal; KaehlerDifferential",
+   "date": "2026-10-11",
+   "verdict": "match: KaehlerDifferential and D_apply state the quotient construction and differential formula"
+  },
+  {
+   "tool": "loogle",
+   "query": "KaehlerDifferential, Ideal.Cotangent, KaehlerDifferential.D_apply",
+   "results": "KaehlerDifferential.D_apply (Mathlib.RingTheory.Kaehler.Basic): D s = (KaehlerDifferential.ideal R S).toCotangent ⟨1 ⊗ₜ[R] s - s ⊗ₜ[R] 1, ...⟩",
+   "date": "2026-10-11",
+   "verdict": "match"
+  },
+  {
    "tool": "grep",
-   "query": "grep -n 'def KaehlerDifferential\\b|KaehlerDifferential.ideal|D_apply|linearMapEquivDerivation' Mathlib/RingTheory/Kaehler/Basic.lean in ~/weil-conjectures-slopmaster2/.lake/packages/mathlib",
-   "results": "KaehlerDifferential.ideal (line 64) = ker(TensorProduct.lmul'); KaehlerDifferential := (ideal R S).Cotangent (line 153); KaehlerDifferential.D_apply (line 218, rfl): D s = class of 1 ⊗ s - s ⊗ 1; linearMapEquivDerivation (line 327)",
-   "date": "2026-10-10",
-   "verdict": "candidate leaf for the next stage: Mathlib defines Ω[A⁄R] := (KaehlerDifferential.ideal R A).Cotangent = I/I^2 with I = ker(TensorProduct.lmul' R) (lines 64, 153), and KaehlerDifferential.D_apply (line 218, proved by rfl) states D a = toCotangent ⟨1 ⊗ₜ a - a ⊗ₜ 1, _⟩. Since [def-weil-pbc-kahler-differentials] is matched to (KaehlerDifferential R A, KaehlerDifferential.D R A) with its universal property linearMapEquivDerivation (line 327), the isomorphism is the identity of I.Cotangent and the formula for d is D_apply; the A-module structure on I.Cotangent is the one through (A ⊗ A)/I ≅ A (KaehlerDifferential.module, S acting via includeLeft, equal on I/I^2 to the action via the quotient)."
+   "query": "KaehlerDifferential|Cotangent|D_apply [RingTheory/Kaehler]",
+   "results": "Mathlib/RingTheory/Kaehler/Basic.lean:153 def KaehlerDifferential; :175-176 fromIdeal uses ideal.toCotangent; :190-193 DLinearMap_apply; :218-221 D_apply; Mathlib/RingTheory/Kaehler/Basic.lean:64-65 ideal is ker(TensorProduct.lmul'); Mathlib/RingTheory/Ideal/Cotangent.lean:41-47 Cotangent is I/I² and carries the quotient module structures",
+   "date": "2026-10-11",
+   "verdict": "match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Kahler differentials are canonically isomorphic to the conormal module of the diagonal ideal",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-11",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Omega A over R is I modulo I squared where I is kernel of multiplication A tensor R A",
+   "results": "KaehlerDifferential.D_apply; KaehlerDifferential.fromIdeal; KaehlerDifferential; Ideal.Cotangent",
+   "date": "2026-10-11",
+   "verdict": "match"
+  },
+  {
+   "tool": "loogle",
+   "query": "KaehlerDifferential.D_apply",
+   "results": "KaehlerDifferential.D_apply (Mathlib.RingTheory.Kaehler.Basic)",
+   "date": "2026-10-11",
+   "verdict": "match"
+  },
+  {
+   "tool": "grep",
+   "query": "def ideal|abbrev KaehlerDifferential|D_apply [RingTheory/Kaehler/Basic.lean]",
+   "results": "Mathlib/RingTheory/Kaehler/Basic.lean:64-65 KaehlerDifferential.ideal is the kernel of multiplication; :153-154 KaehlerDifferential is ideal.Cotangent; :218-221 D_apply gives the class of 1 ⊗ₜ s - s ⊗ₜ 1",
+   "date": "2026-10-11",
+   "verdict": "match"
+  },
+  {
+   "tool": "grep",
+   "query": "def KaehlerDifferential|def Cotangent|toCotangent [RingTheory/Kaehler/Basic.lean]",
+   "results": "Mathlib/RingTheory/Kaehler/Basic.lean:153 def KaehlerDifferential; :175-176 fromIdeal = ideal.toCotangent; Mathlib/RingTheory/Ideal/Cotangent.lean:41-47 Cotangent := I ⧸ I² with Module (R ⧸ I) and Module S instances",
+   "date": "2026-10-11",
+   "verdict": "match"
   }
  ],
- "mathlib_match": null,
- "status": "unsplit",
+ "mathlib_match": {
+  "declaration": "KaehlerDifferential.ideal, KaehlerDifferential, Ideal.Cotangent, KaehlerDifferential.D_apply",
+  "file": "Mathlib/RingTheory/Kaehler/Basic.lean (lines 64-65, 153-154, 218-221); Mathlib/RingTheory/Ideal/Cotangent.lean (lines 41-47)",
+  "how": "exact, one declaration per clause: KaehlerDifferential.ideal (Basic.lean:64-65) is ker (TensorProduct.lmul' R), the multiplication map S ⊗[R] S → S; KaehlerDifferential (Basic.lean:153-154) is (KaehlerDifferential.ideal R S).Cotangent; Ideal.Cotangent (Cotangent.lean:41-47) is I/I² with the quotient module structure through (S ⊗[R] S)/I ≅ S; KaehlerDifferential.D_apply (Basic.lean:218-221) sends d s to the class of 1 ⊗ₜ[R] s - s ⊗ₜ[R] 1. Taking S=A gives every clause of the item, with the canonical isomorphism the definitional identification of Ω[A⁄R] with I.Cotangent.",
+  "source_read": "2026-10-11"
+ },
+ "status": "mathlib",
  "created": {
   "item": "lem-sc-smooth-proper-diagonal-conormal-differentials",
   "by": "worker",
   "date": "2026-10-10"
  },
  "chapter": "sec-picard-framework",
- "unit": "sk-thm-picard-duality"
+ "unit": "sk-thm-picard-duality",
+ "split_report": {
+  "date": "2026-10-11",
+  "item": "lem-sc-kahler-differentials-diagonal-ideal",
+  "worker": "stage1",
+  "summary": "This item is a Mathlib leaf. Mathlib defines the diagonal ideal as the kernel of multiplication on A tensor_R A, defines KaehlerDifferential R A as its cotangent quotient I/I^2, and gives the differential formula by KaehlerDifferential.D_apply. Ideal.Cotangent supplies the quotient module structure through the quotient by I, so these declarations give the canonical A-module identification and the stated formula exactly. No new nodes are needed.",
+  "blueprint": {
+   "steps": [],
+   "same_as_search": "Searched the imported DAG and blueprint for 00RW, diagonal conormal, and Kähler differential/conormal formulations; no duplicate blueprint node was found. The item is the imported blueprint node whose proof place is the affine identification Omega_{A/R} = I/I^2."
+  }
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-kdi1807",
+  "group": "M1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-kdi1807 (reviewer sub-agent of L); spot-checked: B8 leaf verified by sed: KaehlerDifferential.ideal = ker(TensorProduct.lmul') (Basic.lean 63-65), KaehlerDifferential := ideal.Cotangent (153-155), Ideal.Cotangent = I/(I•⊤) with Module (R/I) (Cotangent.lean 41-47), D_apply: D s = toCotangent(1⊗s - s⊗1) (218-221, rfl); statement is that definition with d a = 1⊗a - a⊗1, agreeing with Stacks 00RW (a db -> a⊗b - ab⊗1). No new nodes, no proof steps. No repairs needed."
+ }
 }
