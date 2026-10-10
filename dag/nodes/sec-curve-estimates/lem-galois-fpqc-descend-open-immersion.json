@@ -1,0 +1,88 @@
+{
+ "id": "lem-galois-fpqc-descend-open-immersion",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-galois-descent",
+   "place": "lem-galois-descent, proof, Step 3 ('Both properties are Zariski-local on the target and hold after the base change Y_i -> Y'), the property 'etale' (Stacks 02VN), through its unramified part (Descent 02VM): made precise here, the clause of 02VM's proof (descent.tex lines 6199-6204) 'being ... an open immersion is fpqc local on the base (Lemma 02L3)', the direction 'base changes are open immersions => the morphism is', applied to the diagonal X -> X x_S X and the covering {(X x_S X) x_S S_i -> X x_S X}",
+   "via": [
+    "lem-galois-fpqc-descend-unramified",
+    "lem-galois-fpqc-descend-etale"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Being an open immersion descends along fpqc coverings (Stacks 02L3)",
+ "statement": "Let $\\varphi:Y\\to T$ be a morphism of schemes [def-pc-scheme] and let $\\{h_i:T_i\\to T\\}_{i\\in I}$ be an fpqc covering of $T$ [def-weil-pbc-fpqc-covering]. For every $i\\in I$ let $(Y_i,p_i,\\varphi_i)$ be a fibre product of $\\varphi$ and $h_i$ [def-pc-fibre-product], with $p_i:Y_i\\to Y$, $\\varphi_i:Y_i\\to T_i$ and $\\varphi\\circ p_i=h_i\\circ\\varphi_i$. If $\\varphi_i$ is an open immersion [def-weil-open-immersion] for every $i\\in I$, then $\\varphi$ is an open immersion.",
+ "source": {
+  "document": "literature/stacks-project/descent.tex",
+  "place": "Descent, Lemma Tag 02L3 (lemma-descending-property-open-immersion, descent.tex line 5862: 'The property P(f) = \"f is an open immersion\" is fpqc local on the base'), the direction 'each base change has P => f has P' of Definition Tag 02KO (definition-property-morphisms-local, line 5310); proof lines 5866-5912 (stable under base change, Zariski local on the base, and the faithfully flat affine case via 02KT, 02KW and 02L4)"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-pbc-fpqc-covering",
+  "def-pc-fibre-product",
+  "def-weil-open-immersion"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "open immersion descends along fpqc covering of schemes; open immersion descends along faithfully flat quasi-compact morphism",
+   "results": "none: HTTP 500 Internal Server Error on both calls (lean-lsp tool) and on a direct POST to https://leansearch.net/search, 2026-10-10 ~14:40 UTC",
+   "date": "2026-10-10",
+   "verdict": "no result (service error)"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.MorphismProperty.DescendsAlong @AlgebraicGeometry.IsOpenImmersion",
+   "results": "AlgebraicGeometry.descendsAlong_isOpenImmersion_surjective_inf_flat_inf_quasicompact' : IsOpenImmersion.DescendsAlong (@Surjective ⊓ @Flat ⊓ @QuasiCompact) (Mathlib.AlgebraicGeometry.Morphisms.FlatDescent)",
+   "date": "2026-10-10",
+   "verdict": "candidate: descent along one surjective flat quasi-compact morphism; an fpqc covering is a family, not one quasi-compact morphism: no one-line specialization"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "if the base changes of a morphism of schemes along an fpqc covering family are open immersions then the morphism is an open immersion",
+   "results": "IsOpenImmersion.of_openCover_source, UniversallyOpen.instOfIsOpenImmersion, Scheme.instIsJointlySurjectivePreservingIsOpenImmersion, IsOpenImmersion.of_forall_source_exists, Scheme.OpenCover.instIsOpenImmersionTrans",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -n 'IsOpenImmersion\\|stacks' Mathlib/AlgebraicGeometry/Morphisms/FlatDescent.lean; grep -n 'instance' Mathlib/AlgebraicGeometry/Morphisms/OpenImmersion.lean; grep -rn 'IsOpenImmersion' ~/weil-conjectures-slopmaster2/WeilConjectures | grep -i 'descend\\|fpqc'",
+   "results": "FlatDescent.lean:132-134 @[stacks 02L3] instance descendsAlong_isOpenImmersion_surjective_inf_flat_inf_quasicompact' (read with sed -n 125,140p); OpenImmersion.lean:110 isOpenImmersion_isZariskiLocalAtTarget; nothing for fpqc covering families; slopmaster2: no open-immersion descent declaration (only the generic Scheme.of_isPullback_of_ofArrows_mem_fpqcTopology, WeilConjectures/Mathlib/AlgebraicGeometry/Sites/Fpqc.lean:115-126)",
+   "date": "2026-10-10",
+   "verdict": "candidates only (single surjective flat quasi-compact morphism)"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-galois-fpqc-descend-unramified",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-curve-estimates",
+ "unit": "sk-prop-h2",
+ "mathlib_candidate": {
+  "declaration": "AlgebraicGeometry.descendsAlong_isOpenImmersion_surjective_inf_flat_inf_quasicompact'",
+  "file": "Mathlib/AlgebraicGeometry/Morphisms/FlatDescent.lean",
+  "lines": [
+   132,
+   134
+  ],
+  "how": "one-morphism form: IsOpenImmersion descends along a single surjective flat quasi-compact morphism (02L3); with isOpenImmersion_isZariskiLocalAtTarget (Morphisms/OpenImmersion.lean:110), the stability of open immersions under base change, and the slopmaster2 lemma AlgebraicGeometry.Scheme.of_isPullback_of_ofArrows_mem_fpqcTopology (WeilConjectures/Mathlib/AlgebraicGeometry/Sites/Fpqc.lean:115-126, for P = IsOpenImmersion) it gives the node for the family, but not in one line"
+ }
+}
