@@ -124,10 +124,10 @@ theorem exists_iso_Q_obj_of_homologyMap {P M : CochainComplex C ℤ} (α : P ⟶
     let e₁ : Q.obj C' ≅ Q.obj (mappingCone α) := asIso (Q.map ι)
     obtain ⟨e, -, -⟩ := Pretriangulated.exists_iso_of_arrow_iso _ _ hT₁ hT₂
       (Arrow.isoMk e₁ ((Q.commShiftIso (1 : ℤ)).app P) (by
-        simp [e₁, β, Functor.mapTriangle, mappingCocone.triangle, Triangle.rotate]
-        first
-        | rfl
-        | exact ((Q (C := C)).map_comp_assoc ι _ _).symm))
+        simp only [Functor.mapTriangle, mappingCocone.triangle, Int.reduceNeg, Triangle.rotate,
+          Arrow.mk_left, Arrow.mk_right, asIso_hom, Arrow.mk_hom, Triangle.mk_mor₁,
+          Triangle.mk_mor₂, Triangle.mk_mor₃, Functor.map_comp, Iso.app_hom, Category.assoc, β, e₁]
+        rfl))
     let e' : (Q.obj (mappingCocone β))⟦(1 : ℤ)⟧ ≅ (Q.obj M)⟦(1 : ℤ)⟧ := Triangle.π₃.mapIso e
     exact ⟨(shiftFunctorCompIsoId (DerivedCategory C) (1 : ℤ) (-1) (by simp)).symm.app _ ≪≫
       (CategoryTheory.shiftFunctor (DerivedCategory C) (-1 : ℤ)).mapIso e' ≪≫

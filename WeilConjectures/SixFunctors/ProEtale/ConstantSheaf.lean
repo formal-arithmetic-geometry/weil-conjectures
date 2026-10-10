@@ -87,7 +87,8 @@ noncomputable def sectionsLowerStarIso {Y Z : Scheme.{u}} (g : Z ⟶ Y) :
       (g)_*[ModuleCat.{u + 1} Λ] ⋙
         (sheafSections (Scheme.ProEt.topology Y) (ModuleCat.{u + 1} Λ)).obj
           (op (terminalProEt Y)) :=
-  (sheafSections _ _).mapIso (show (_ : Z.ProEt) ≅ terminalProEt Z from overPullbackObjMkIdIso g).op ≪≫
+  (sheafSections _ _).mapIso
+    (show (_ : Z.ProEt) ≅ terminalProEt Z from overPullbackObjMkIdIso g).op ≪≫
     NatIso.ofComponents (fun _ ↦ Iso.refl _)
 
 /-- The pullback of a constant sheaf is the constant sheaf: both `c_Y ⋙ g^*` and `c_Z` are left

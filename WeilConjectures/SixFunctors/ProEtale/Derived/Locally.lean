@@ -35,7 +35,7 @@ open scoped CategoryTheory.Functor
 
 namespace AlgebraicGeometry.ProEtale
 
-open Scheme
+open _root_.AlgebraicGeometry.Scheme
 
 variable (A : Type u') [Category.{u + 1} A] [Abelian A] [IsGrothendieckAbelian.{u + 1} A]
   [MonoidalCategory A] [MonoidalPreadditive A] [SymmetricCategory A] [MonoidalClosed A]
@@ -75,7 +75,7 @@ lemma IsLocally.of_prop (hP : IsClosedUnderIsoms P) {X : Scheme.{u}}
 stable under composition, and derived pullbacks compose. -/
 lemma IsLocally.trans (hP : IsClosedUnderIsoms P) {X : Scheme.{u}}
     {K : DerivedCategory (Sheaf (Scheme.ProEt.topology X) A)}
-    (h : IsLocally A (fun Y K ↦ IsLocally A P K) K) : IsLocally A P K := by
+    (h : IsLocally A (fun _ K ↦ IsLocally A P K) K) : IsLocally A P K := by
   obtain ⟨ι, W, g, hg, hcov, h⟩ := h
   choose σ V f hf hcov' h' using h
   refine ⟨Σ i, σ i, fun p ↦ V p.1 p.2, fun p ↦ f p.1 p.2 ≫ g p.1, fun p ↦ inferInstance,

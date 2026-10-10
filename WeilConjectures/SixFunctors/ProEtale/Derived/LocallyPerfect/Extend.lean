@@ -39,11 +39,12 @@ open scoped CategoryTheory.Functor
 
 namespace AlgebraicGeometry.ProEtale
 
-open Scheme
+open _root_.AlgebraicGeometry.Scheme
 
 variable {Λ : Type (u + 1)} [CommRing Λ]
 
 set_option backward.isDefEq.respectTransparency false in
+-- the mapping cone computations are slow
 set_option maxHeartbeats 1000000 in
 theorem hasPerfectTop_sub_one {Y : Scheme.{u}} [Nonempty Y] {m b : ℤ}
     (M L' : CochainComplex (Sheaf (Scheme.ProEt.topology Y) (ModuleCat.{u + 1} Λ)) ℤ)
@@ -73,7 +74,8 @@ theorem hasPerfectTop_sub_one {Y : Scheme.{u}} [Nonempty Y] {m b : ℤ}
     have := hj (m + 1)
     apply (cancel_mono (j.f (m + 1) : c.obj (E₀.X (m + 1)) ⟶ M.X (m + 1))).1
     rw [zero_comp, Functor.map_comp, Category.assoc]
-    have h₁ : c.map (E₀.d m (m + 1)) ≫ j.f (m + 1) = j.f m ≫ M.d m (m + 1) := (j.comm m (m + 1)).symm
+    have h₁ : c.map (E₀.d m (m + 1)) ≫ j.f (m + 1) = j.f m ≫ M.d m (m + 1) :=
+      (j.comm m (m + 1)).symm
     have h₂ := ι.comm m (m + 1)
     rw [h₁, ← reassoc_of% hA, h₂, ← Category.assoc (L'.d (m - 1) m), L'.d_comp_d,
       zero_comp, comp_zero]
@@ -120,7 +122,7 @@ theorem hasPerfectTop_sub_one {Y : Scheme.{u}} [Nonempty Y] {m b : ℤ}
       change _ = _ ≫ βf p ≫ ι.f p
       rw [hβf]
       simp only [hA]
-      simp [cC, φ₀] <;> rfl
+      (simp [cC, φ₀]; rfl)
     · rw [CochainComplex.HomComplex.Cochain.single_v_eq_zero _ _ _ _ _ hp]
       exact (hS p hp).eq_of_src _ _
   let φS : S ⟶ cC.obj E₀ := cC.map φ₀

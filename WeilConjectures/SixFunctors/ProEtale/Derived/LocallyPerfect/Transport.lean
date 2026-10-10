@@ -108,8 +108,8 @@ lemma δ_upperStar_sectionTransport_tensorSectionMap (V : X.ProEt)
       φ.inv.app F ⊗ₘ φ.inv.app G := by
     rw [← cancel_epi (φ.hom.app F ⊗ₘ φ.hom.app G)]
     erw [← reassoc_of% hT]
-    rw [Iso.hom_inv_id_app_assoc, Functor.Monoidal.μ_δ, tensorHom_comp_tensorHom, Iso.hom_inv_id_app, Iso.hom_inv_id_app,
-      tensorHom_id, id_whiskerRight]
+    rw [Iso.hom_inv_id_app_assoc, Functor.Monoidal.μ_δ, tensorHom_comp_tensorHom,
+      Iso.hom_inv_id_app, Iso.hom_inv_id_app, tensorHom_id, id_whiskerRight]
   have hR := Functor.μ_sheafToPresheaf_app_comp_μ_sheafPushforwardContinuous_app
     (MorphismProperty.Over.map ⊤ V.prop) (ModuleCat.{u + 1} Λ) (Scheme.ProEt.topology V.left)
     (Scheme.ProEt.topology X) F G (op (terminalProEt V.left))
@@ -125,7 +125,8 @@ lemma δ_upperStar_sectionTransport_tensorSectionMap (V : X.ProEt)
 lemma sectionOfUnitHom_upperStar_map (V : X.ProEt)
     {H : Sheaf (Scheme.ProEt.topology X) (ModuleCat.{u + 1} Λ)}
     (f : 𝟙_ (Sheaf (Scheme.ProEt.topology X) (ModuleCat.{u + 1} Λ)) ⟶ H) :
-    sectionOfUnitHom (inv (η (V.hom)^*[ModuleCat.{u + 1} Λ]) ≫ (V.hom)^*[ModuleCat.{u + 1} Λ].map f) =
+    sectionOfUnitHom (inv (η (V.hom)^*[ModuleCat.{u + 1} Λ]) ≫
+      (V.hom)^*[ModuleCat.{u + 1} Λ].map f) =
       (sectionTransport V H).hom
         (H.obj.map ((Scheme.ProEt.isTerminalMkId X).from V).op (sectionOfUnitHom f)) := by
   have h := η_upperStar_sectionTransport_unitSection V (1 : Λ)

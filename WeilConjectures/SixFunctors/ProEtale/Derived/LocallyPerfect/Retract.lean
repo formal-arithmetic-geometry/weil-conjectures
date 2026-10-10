@@ -20,7 +20,8 @@ complex `g^* M` has finitely many global sections `xₖ` such that `Q(g^* M)` is
 (`AlgebraicGeometry.ProEtale.exists_sieve_retract`).
 
 Locally, the coevaluation of `K` is represented by a cocycle of `M ⊗ F` which is a finite sum of
-pure tensors of sections over `V` (`AlgebraicGeometry.ProEtale.exists_sieve_sum_tensorSectionMap_of_Q_map`).
+pure tensors of sections over `V`
+(`AlgebraicGeometry.ProEtale.exists_sieve_sum_tensorSectionMap_of_Q_map`).
 The derived pullback `Lg^*` is monoidal, so it sends the duality data of `K` to duality data of
 `Lg^* K ≅ Q(g^* M)`, whose coevaluation is then represented by the transported cocycle, a sum of
 pure tensors of global sections; we conclude with the zigzag argument
@@ -160,11 +161,12 @@ lemma Qh_map_quotient_map_eq {C : Type*} [Category C] [Abelian C] [HasDerivedCat
   rw [← cancel_mono ((quotientCompQhIso C).hom.app L), quotientCompQhIso_hom_naturality,
     quotientCompQhIso_hom_naturality, h]
 
-open _root_.DerivedCategory in
+-- the elaboration of the chain-level computations on `V.left` is slow
 set_option maxHeartbeats 1000000 in
+open _root_.DerivedCategory in
 /-- **Local retract, after pullback.** Let `K` have a right dual `D` in `D(X_proét)`, with
 `K ≅ Q(M)` and `D ≅ Q(F)` for a complex `F` of flat sheaves whose pullback along `g : V ⟶ X` is
-K-flat, and let the coevaluation followed by `Q(s)` be `Q(φ)`. Suppose that over `V` the
+K-flat, and let the coevaluation be represented by `Q(φ) ≫ Q(s)⁻¹`. Suppose that over `V` the
 cocycle of `φ` is cohomologous to `s(∑ₖ xₖ ⊗ yₖ)` for a cocycle `∑ₖ xₖ ⊗ yₖ` of `M ⊗ F`. Then
 `Q(g^* M)` is a retract of `Q(L')` for every subcomplex `L' ⊆ g^* M` containing the transports of
 the `xₖ`. -/
@@ -172,18 +174,14 @@ theorem exists_retract_upperStar (V : X.ProEt)
     (K D : _root_.DerivedCategory (Sheaf (Scheme.ProEt.topology X) (ModuleCat.{u + 1} Λ)))
     [ExactPairing K D]
     (M F : CochainComplex (Sheaf (Scheme.ProEt.topology X) (ModuleCat.{u + 1} Λ)) ℤ)
-    (e : K ≅ Qh.obj ((HomotopyCategory.quotient _ _).obj M))
-    (eD : D ≅ Qh.obj ((HomotopyCategory.quotient _ _).obj F))
+    (e : K ≅ Q.obj M) (eD : D ≅ Q.obj F)
     (hF : ∀ n, ObjectProperty.flat (F.X n))
     (hF' : (HomologicalComplex.quasiIso _ (.up ℤ)).kFlat
       (((V.hom)^*[ModuleCat.{u + 1} Λ].mapHomologicalComplex (.up ℤ)).obj F))
     (I : CochainComplex (Sheaf (Scheme.ProEt.topology X) (ModuleCat.{u + 1} Λ)) ℤ)
     (s : M ⊗ F ⟶ I) [QuasiIso s]
     (φ : 𝟙_ (CochainComplex (Sheaf (Scheme.ProEt.topology X) (ModuleCat.{u + 1} Λ)) ℤ) ⟶ I)
-    (v : 𝟙_ _ ⟶ Qh.obj ((HomotopyCategory.quotient _ _).obj
-      (𝟙_ (CochainComplex (Sheaf (Scheme.ProEt.topology X) (ModuleCat.{u + 1} Λ)) ℤ))))
-    (hφ : η_ K D ≫ (e.hom ⊗ₘ eD.hom) ≫ μ Qh _ _ ≫ Qh.map ((HomotopyCategory.quotient _ _).map s) =
-      v ≫ Qh.map ((HomotopyCategory.quotient _ _).map φ))
+    (hu : coevaluationQ K D M F e eD = Q.map φ ≫ inv (Q.map s))
     {m : ℕ} (p : Fin m → ℤ) (x : ∀ k, (M.X (p k)).obj.obj (op V))
     (y : ∀ k, (F.X (-p k)).obj.obj (op V)) (w : (I.X (-1)).obj.obj (op V))
     (hd : ((M ⊗ F).d 0 1).hom.app _ (∑ k, (HomologicalComplex.ιTensorObj M F (p k) (-p k) 0
@@ -244,9 +242,10 @@ theorem exists_retract_upperStar (V : X.ProEt)
   obtain ⟨τ, hτ⟩ := exists_comp_whiskerRight_eq_of_singleUnitHomEquiv ι hF'flat p x'
     (fun k ↦ (sectionTransport V _).hom (y k)) (φt ≫ δ GC M F) (by
       rw [singleUnitHomEquiv_comp_coe]
-      simp only [φt, Equiv.apply_symm_apply, t', t, map_sum, hx']
+      erw [Equiv.apply_symm_apply]
+      simp only [t', t, map_sum, hx']
       refine Finset.sum_congr rfl fun k _ ↦ ?_
       exact δ_mapHomologicalComplex_f_sectionTransport V M F (p k) (-p k) 0 (by simp) (x k) (y k))
-  exact exists_retract_of_upperStar V.hom K D M F I e eD s φ v hφ hF' ι φt hφt τ hτ
+  exact exists_retract_of_upperStar_of_coevaluationQ V.hom K D M F I e eD s φ hu hF' ι φt hφt τ hτ
 
 end AlgebraicGeometry.ProEtale

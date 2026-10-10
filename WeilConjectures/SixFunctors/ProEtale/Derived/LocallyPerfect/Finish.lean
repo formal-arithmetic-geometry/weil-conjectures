@@ -38,7 +38,7 @@ open scoped CategoryTheory.Functor
 
 namespace AlgebraicGeometry.ProEtale
 
-open Scheme
+open _root_.AlgebraicGeometry.Scheme
 
 variable {Λ : Type (u + 1)} [CommRing Λ]
 

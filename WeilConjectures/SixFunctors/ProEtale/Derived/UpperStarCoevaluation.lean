@@ -44,6 +44,7 @@ namespace ProEtale
 
 variable {Z Y : Scheme.{u}} (g : Z ⟶ Y) [(g)^*[A].PreservesFlat]
 
+-- the coherence computation in the derived category is slow
 set_option maxHeartbeats 1600000 in
 /-- **Retracts from a pulled back coevaluation.** Let `K ⊣ D` be a duality in `D(Y_proét)`,
 with `K ≅ Q(M)` and `D ≅ Q(F)`, whose coevaluation followed by `Q(s)` is `Q(φ)` for a chain map
@@ -194,6 +195,57 @@ theorem exists_retract_of_upperStar
   rw [Category.assoc, Category.assoc, Category.assoc, ← quotientCompQhIso_hom_naturality]
   erw [reassoc_of% hw0]
   rw [← Category.assoc (G.map e.hom) (cI M).hom, IsIso.inv_hom_id_assoc, Iso.inv_hom_id_app]
+
+
+/-- The coevaluation of a duality `K ⊣ D` of `D(Y_proét)`, transported to a morphism
+`Q(𝟙_[0]) ⟶ Q(M ⊗ F)` along `K ≅ Q(M)` and `D ≅ Q(F)` and the tensor comparison of `Qh`. -/
+noncomputable def coevaluationQ
+    (K D : DerivedCategory (Sheaf (Scheme.ProEt.topology Y) A)) [ExactPairing K D]
+    (M F : CochainComplex (Sheaf (Scheme.ProEt.topology Y) A) ℤ)
+    (e : K ≅ Q.obj M) (eD : D ≅ Q.obj F) :
+    Q.obj (𝟙_ (CochainComplex (Sheaf (Scheme.ProEt.topology Y) A) ℤ)) ⟶ Q.obj (M ⊗ F) :=
+  (singleFunctorObjUnitIso (Sheaf (Scheme.ProEt.topology Y) A)).hom ≫ η_ K D ≫
+    ((e ≪≫ ((quotientCompQhIso _).app M).symm).hom ⊗ₘ
+      (eD ≪≫ ((quotientCompQhIso _).app F).symm).hom) ≫
+    μ Qh ((HomotopyCategory.quotient _ (.up ℤ)).obj M)
+      ((HomotopyCategory.quotient _ (.up ℤ)).obj F) ≫
+      (quotientCompQhIso _).hom.app (M ⊗ F)
+
+/-- `exists_retract_of_upperStar`, with the coevaluation given in the form
+`coevaluationQ K D M F e eD = Q(φ) ≫ Q(s)⁻¹`. -/
+theorem exists_retract_of_upperStar_of_coevaluationQ
+    (K D : DerivedCategory (Sheaf (Scheme.ProEt.topology Y) A)) [ExactPairing K D]
+    (M F I : CochainComplex (Sheaf (Scheme.ProEt.topology Y) A) ℤ)
+    (e : K ≅ Q.obj M) (eD : D ≅ Q.obj F)
+    (s : M ⊗ F ⟶ I) [QuasiIso s]
+    (φ : 𝟙_ (CochainComplex (Sheaf (Scheme.ProEt.topology Y) A) ℤ) ⟶ I)
+    (hu : coevaluationQ K D M F e eD = Q.map φ ≫ inv (Q.map s))
+    (hF : (HomologicalComplex.quasiIso _ (.up ℤ)).kFlat
+      (((g)^*[A].mapHomologicalComplex (.up ℤ)).obj F))
+    {L' : CochainComplex (Sheaf (Scheme.ProEt.topology Z) A) ℤ}
+    (ι : L' ⟶ ((g)^*[A].mapHomologicalComplex (.up ℤ)).obj M)
+    (φt : 𝟙_ (CochainComplex (Sheaf (Scheme.ProEt.topology Z) A) ℤ) ⟶
+      ((g)^*[A].mapHomologicalComplex (.up ℤ)).obj (M ⊗ F))
+    (hφt : Q.map (inv (η ((g)^*[A].mapHomologicalComplex (.up ℤ))) ≫
+      ((g)^*[A].mapHomologicalComplex (.up ℤ)).map φ) =
+        Q.map (φt ≫ ((g)^*[A].mapHomologicalComplex (.up ℤ)).map s))
+    (τ : 𝟙_ (CochainComplex (Sheaf (Scheme.ProEt.topology Z) A) ℤ) ⟶
+      L' ⊗ ((g)^*[A].mapHomologicalComplex (.up ℤ)).obj F)
+    (hτ : τ ≫ ι ▷ ((g)^*[A].mapHomologicalComplex (.up ℤ)).obj F =
+      φt ≫ δ ((g)^*[A].mapHomologicalComplex (.up ℤ)) M F) :
+    ∃ r : Q.obj (((g)^*[A].mapHomologicalComplex (.up ℤ)).obj M) ⟶ Q.obj L',
+      r ≫ Q.map ι = 𝟙 _ := by
+  let qc := quotientCompQhIso (Sheaf (Scheme.ProEt.topology Y) A)
+  let v₀ := singleFunctorObjUnitIso (Sheaf (Scheme.ProEt.topology Y) A)
+  refine exists_retract_of_upperStar g K D M F I (e ≪≫ (qc.app M).symm)
+    (eD ≪≫ (qc.app F).symm) s φ (inv v₀.hom ≫ qc.inv.app _) ?_ hF ι φt hφt τ hτ
+  have hu' := hu =≫ Q.map s
+  simp only [coevaluationQ, Category.assoc, IsIso.inv_hom_id, Category.comp_id] at hu'
+  rw [← cancel_mono (qc.hom.app I), ← cancel_epi v₀.hom]
+  simp only [Category.assoc, IsIso.hom_inv_id_assoc]
+  erw [quotientCompQhIso_hom_naturality s, quotientCompQhIso_hom_naturality φ,
+    Iso.inv_hom_id_app_assoc]
+  exact hu'
 
 end ProEtale
 
