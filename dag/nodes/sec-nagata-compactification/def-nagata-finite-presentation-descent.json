@@ -18,9 +18,59 @@
  "proof": [],
  "proof_deps": [],
  "proof_origin": null,
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "exists_isPullback_of_finitePresentation|pushoutOpensDesc|gluing [Mathlib/AlgebraicGeometry]",
+   "results": "none",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "finite presentation descent gluing valid relative datum",
+   "results": "service unavailable",
+   "date": "2026-10-10",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "finite presentation descent gluing valid relative datum scheme base change comparison isomorphism",
+   "results": "AlgebraicGeometry.Scheme.Pullback.gluing_t; AlgebraicGeometry.Scheme.Pullback.gluing_t'; AlgebraicGeometry.Scheme.Pullback.gluing; AlgebraicGeometry.Scheme.Cover.RelativeGluingData.isPullback_natTrans_ι_toBase; AlgebraicGeometry.Scheme.LocalRepresentability.glueData_t'; AlgebraicGeometry.Scheme.GlueData.Rel; AlgebraicGeometry.Scheme.LocalRepresentability.glueData; AlgebraicGeometry.Scheme.Pullback.gluing_f",
+   "date": "2026-10-10",
+   "verdict": "generalization: Mathlib provides generic gluing data, not this finite-stage construction"
+  },
+  {
+   "tool": "loogle",
+   "query": "Scheme.exists_isPullback_of_finitePresentation, DescendsToStage, pushoutOpensDesc",
+   "results": "none (unknown identifier Scheme.exists_isPullback_of_finitePresentation)",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "GlueData|RelativeGluingData|exists_isPullback_of_finitePresentation [Mathlib/AlgebraicGeometry]",
+   "results": "none",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Scheme.GlueData, AlgebraicGeometry.Scheme.GlueData.glue",
+   "results": "none (unknown identifier AlgebraicGeometry.Scheme.GlueData.glue)",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "finite presentation descent construction X desc gluing base change comparison",
+   "results": "RingHom.EssFiniteType.exists_eq_comp_ι_app_of_isColimit; AlgebraicGeometry.Scheme.Cover.RelativeGluingData.isPullback_natTrans_ι_toBase; AlgebraicGeometry.Scheme.Pullback.gluing_ι; AlgebraicGeometry.Scheme.Cover.glueMorphisms; AlgebraicGeometry.Scheme.Pullback.gluedLift; AlgebraicGeometry.Scheme.LocalRepresentability.glueData_t'; AlgebraicGeometry.Scheme.Pullback.p1; AlgebraicGeometry.Scheme.Cover.RelativeGluingData.toBase",
+   "date": "2026-10-10",
+   "verdict": "generalization: generic gluing and filtered-colimit lemmas only"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [
   "bypassed"
@@ -53,5 +103,22 @@
   }
  },
  "chapter": "sec-nagata-compactification",
- "unit": "sk-prop-nagata-sketch-approximation"
+ "unit": "sk-prop-nagata-sketch-approximation",
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "def-nagata-finite-presentation-descent",
+  "worker": "stage1",
+  "summary": "Checked the imported definition against its blueprint source and the project source. No exact Lean declaration exists: the blueprint explicitly marks this stage-by-stage construction as bypassed, while the formal development uses the separate finite-presentation pullback theorem. The definition is therefore completed with its existing valid-stage dependency and no new auxiliary node.",
+  "blueprint": "node def-nagata-finite-presentation-descent, order 362",
+  "tool_uses": [],
+  "new_nodes": []
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-nfp2402",
+  "group": "H1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-nfp2402 (reviewer sub-agent of L); spot-checked: Definition clauses match Stacks 01ZM (descended scheme X^desc over S_lambda_rel and the base-change comparison epsilon_X; its isomorphy is lemma-nagata-finite-presentation-descends); stmt_deps def-nagata-relative-gluing-valid-stage is the datum cited; no proof steps; dates 2026-10-10; no other node defines X^desc (grep), so no class (b). FIX more, RETURN less: (1) B3 statement reworded ('Given ... [cite]', 'applying the scheme-gluing construction to') and trailing blueprint prose dropped; restored the blueprint text word for word as in merged sibling def-nagata-separated-descent-stage; (2) blueprint.same_as [] restored to null. The second reading by H1 missed both.; 1 file(s) fixed by the reviewer"
+ }
 }
