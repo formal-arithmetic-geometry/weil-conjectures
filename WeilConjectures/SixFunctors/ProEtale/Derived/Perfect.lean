@@ -39,13 +39,18 @@ coefficient ring `Λ`, lies in `Dctf(X, Λ)`.
   formed with the derived internal hom.
 - `AlgebraicGeometry.ProEtale.DerivedCategory.constructibleTorAmplitudeIn_single_of_retract`
   (`prop-pod-perfect-local-model`): a finite projective `Λ_X`-module is flat and constructible.
+- `AlgebraicGeometry.ProEtale.DerivedCategory.constructibleFiniteTor_Q_obj_of_retract`
+  (`prop-pod-perfect-local-model`): a bounded complex of finite projective `Λ_X`-modules lies in
+  `Dctf(X, Λ)`.
 - `AlgebraicGeometry.ProEtale.DerivedCategory.constructibleFiniteTor_of_isDualizable`
-  (`prop-pod-perfect-local-model`): a perfect complex lies in `Dctf(X, Λ)`.
+  (`prop-pod-perfect-local-model`): a perfect complex lies in `Dctf(X, Λ)`. This is still
+  `sorry`: it needs the local description of dualizable objects (Stacks, Tag 0FPV) and the
+  locality of étale origin on the pro-étale site.
 - `AlgebraicGeometry.ProEtale.isDualizable_derivedDual` (`lem-pod-coefficient-dual-perfect`):
   the coefficient dual of a perfect complex is perfect.
 - `AlgebraicGeometry.ProEtale.constructibleFiniteTor_derivedDual`
-  (`lem-pod-coefficient-dual-perfect`): the coefficient dual of a perfect complex lies in
-  `Dctf(X, Λ)`.
+  (`lem-pod-coefficient-dual-perfect`): the coefficient dual of a perfect complex in
+  `Dctf(X, Λ)` lies in `Dctf(X, Λ)`.
 
 ## Implementation notes
 
@@ -60,8 +65,16 @@ The statements about `Dctf(X, Λ)` are made at a finite coefficient ring `Λ`, a
 blueprint's setting: bounded constructibility is étale origin
 (`AlgebraicGeometry.ProEtale.DerivedCategory.boundedConstructible`), which is the right notion
 only at the finite coefficient stages. A finite projective `Λ_X`-module is of étale origin
-since `Λ_Xʳ = ν^* Λ_{X_ét}ʳ` and `ν^*` is full and exact. For perfect complexes `X` is moreover
-taken Noetherian, as boundedness of a perfect complex needs `X` to be quasi-compact.
+since `Λ_Xʳ = ν^* Λ_{X_ét}ʳ` and `ν^*` is full and exact; so is a bounded complex of them, as
+`ν^*` is fully faithful.
+
+As in the blueprint (`def-pod-perfect-complex-on-x`), the coefficient dual is shown to lie in
+`Dctf(X, Λ)` for perfect complexes which already lie in `Dctf(X, Λ)`, in the Poincaré duality
+setting of a scheme of finite type over an algebraically closed field and a coefficient ring
+whose exponent is invertible on `X`. The proof goes through the étale site rather than through
+the local model: `K = ν^* K'` and `K^∨ ≅ ν^* RHom(K', Λ)`
+(`AlgebraicGeometry.ProEtale.DerivedCategory.nonempty_iso_mapDerivedCategory_derivedHom`), which
+only needs `RHom(K', Λ)` to be constructible on `X_ét`.
 
 -/
 
