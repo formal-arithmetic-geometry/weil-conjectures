@@ -23,9 +23,62 @@
   "def-pc-derived-category",
   "def-pc-perfect-complex"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "By perfectness and [lem-pc-perfect-pseudo-coherent-locally-finite-tor], F is pseudo-coherent and each point of U has a neighbourhood with a finite Tor-amplitude interval. Since U is quasi-compact, choose a finite such cover and take the minimum of its lower bounds and the maximum of its upper bounds; locality of derived tensor products then gives one interval [a,b] valid on all of U. Apply [lem-sc-affine-pseudo-coherent-lift] to obtain a bounded-above complex P^\\bullet of finite free \\mathcal O_X-modules whose restriction represents F.",
+   "uses": [
+    "lem-pc-perfect-pseudo-coherent-locally-finite-tor",
+    "lem-sc-affine-pseudo-coherent-lift"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/perfect.tex",
+    "place": "Tag 08ED proof, first paragraph: pseudo-coherence and Lemma 08EE"
+   }
+  },
+  {
+   "text": "Choose r below the lower Tor-amplitude bound a. Put K = Im(P^{r-1} \\to P^r); since H^i(F)=0 for i<a, on U the sheaf \\widetilde K|_U is the kernel of \\widetilde{P^r}|_U \\to \\widetilde{P^{r+1}}|_U. The truncation-kernel statement [lem-sc-affine-truncation-kernel-finite-locally-free] gives that \\widetilde K|_U is finite locally free. The complex Q=(\\widetilde K|_U \\to \\widetilde{P^r}|_U \\to \\widetilde{P^{r+1}}|_U \\to ...), with \\widetilde K|_U in degree r-1, is strictly perfect and represents F, while P=(P^r \\to P^{r+1} \\to ...) is bounded, finite free, and hence perfect on X. The stupid truncation \\sigma_{\\ge r}Q=P|_U gives a distinguished triangle P|_U \\to F \\to (\\widetilde K|_U)[1-r] \\to (P|_U)[1] (Stacks prints the shift as [-r-1]; with \\widetilde K|_U in degree r-1 the correct shift is [1-r]).",
+   "uses": [
+    "lem-sc-affine-truncation-kernel-finite-locally-free"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/perfect.tex",
+    "place": "Tag 08ED proof, truncation at r and the displayed distinguished triangle"
+   }
+  },
+  {
+   "text": "By [lem-sc-perfect-ext-bounded-qcoh-vanishing] applied on the quasi-compact separated scheme U to the perfect object F, there are integers a'\\le b' such that Hom(F,L)=0 for every L in D_QCoh(\\mathcal O_U) with H^i(L)=0 for i in [a',b']. The object (\\widetilde K|_U)[1-r] is a quasi-coherent sheaf placed in degree r-1, so choosing r with r-1<a' (in addition to r<a) gives Hom(F,(\\widetilde K|_U)[1-r])=0. Thus the connecting map F \\to (\\widetilde K|_U)[1-r] in the triangle is zero.",
+   "uses": [
+    "lem-sc-perfect-ext-bounded-qcoh-vanishing"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/perfect.tex",
+    "place": "Tag 08ED proof, final sentence invoking Lemma 09M4"
+   }
+  },
+  {
+   "text": "A distinguished triangle A\\to B\\to C\\to A[1] whose map B\\to C is zero splits: A\\cong B\\oplus C[-1] (the split-triangle lemma, Stacks Derived Categories, Lemma derived-lemma-split). Hence P|_U \\cong (\\widetilde K|_U)[-r] \\oplus F. Therefore the perfect object P of D(\\mathcal O_X) restricts to \\mathcal F[-r]\\oplus F with \\mathcal F=\\widetilde K|_U finite locally free, which is the assertion with this r (Stacks writes [-r-2] here, an inherited shift typo; the conclusion is existential in r).",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/perfect.tex",
+    "place": "Tag 08ED proof, final sentence: apply Derived Categories, Lemma 4.11 (split triangle)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-perfect-pseudo-coherent-locally-finite-tor",
+  "lem-sc-affine-pseudo-coherent-lift",
+  "lem-sc-affine-truncation-kernel-finite-locally-free",
+  "lem-sc-perfect-ext-bounded-qcoh-vanishing"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/perfect.tex",
+  "place": "Tag 08ED (Lemma 36.13.7)"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -50,12 +103,27 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-sc-affine-perfect-plus-shift",
   "by": "worker",
   "date": "2026-10-10"
  },
  "chapter": "sec-picard-framework",
- "unit": "sk-thm-picard-duality"
+ "unit": "sk-thm-picard-duality",
+ "split_report": {
+  "date": "2026-10-11",
+  "item": "lem-sc-affine-perfect-plus-locally-free",
+  "worker": "stage1",
+  "summary": "Split Stacks Tag 08ED into a pseudo-coherent lift from a quasi-compact open, the finite-locally-free lower truncation kernel, and the bounded quasi-coherent Ext-vanishing used to split the truncation triangle. The item proof follows the source construction and then identifies the resulting perfect affine complex and summand.",
+  "blueprint": "Realizes the proper-flat support proof clause of lem-sc-finite-duality: extend a perfect complex on the affine open after adjoining a finite locally free summand."
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-apl3004",
+  "group": "J1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-apl3004 (reviewer sub-agent of L); spot-checked: Statement = Stacks 08ED and matches citer lem-sc-affine-perfect-plus-shift (F[-r] (+) F, locally free summand on U). Steps follow 08ED (08EE lift, last-one-flat kernel, 09M4 vanishing on qcqs U with D_QCoh target, split triangle); no same-tag duplicates; new nodes not elementary. FIX more, RETURN less: (1) E/C4 shift bookkeeping inherited from a Stacks typo: with K in degree r-1 the triangle is P|_U -> F -> K|_U[1-r] and the splitting gives P|_U = K|_U[-r] (+) F, not [-r-1]/[-r-2] with 'replace r by r+2'; steps 2-4 rewritten, step 3 now states both conditions r<a and r-1<a'. (2) B/E new node lem-sc-affine-truncation-kernel-finite-locally-free asserted Ker(P^r->P^{r+1}) = Im(P^{r-1}->P^r) as A-modules, false in general off U; K now defined as the image, equal to the kernel on U; item step 2 aligned. J1's second reading missed both.; 2 file(s) fixed by the reviewer"
+ }
 }
