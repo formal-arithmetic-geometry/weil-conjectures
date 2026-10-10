@@ -2011,3 +2011,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 16:37 L: merged deliver/C1/lem-sc-topological-leray-spectral-sequence (reviewer FIX; first push; new nodes: 1)
 - 16:38 L: merged deliver/E1/def-pc-upper-shriek-right-adjoint (reviewer PASS; first push; new nodes: 0)
 - 16:38 L: merged deliver/K1/prop-pc-xk-integral (reviewer PASS; after a return; new nodes: 0)
+- 16:38 L: def-pc-upper-shriek-right-adjoint source tag 0ATX -> 0A9E (reviewer R-usr)
