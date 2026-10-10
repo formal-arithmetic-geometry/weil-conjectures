@@ -26,6 +26,7 @@ which appears in degree `a` after truncation lies in `T` as a cokernel of a map 
 
 ## Main results
 
+- `CategoryTheory.ObjectProperty.flat_biprod`: a binary biproduct of flat objects is flat.
 - `DerivedCategory.exists_iso_Q_obj_flat_of_torAmplitudeIn_of_liftsAlongEpi`
 -/
 
@@ -34,6 +35,22 @@ which appears in degree `a` after truncation lies in `T` as a cokernel of a map 
 open CategoryTheory Limits MonoidalCategory
 
 universe w v u
+
+namespace CategoryTheory.ObjectProperty
+
+variable {A : Type u} [Category.{v} A] [Abelian A] [IsGrothendieckAbelian.{v} A]
+  [MonoidalCategory A] [BraidedCategory A] [MonoidalClosed A]
+
+/-- A binary biproduct of flat objects is flat. -/
+lemma flat_biprod {X Y : A} (hX : flat X) (hY : flat Y) : flat (X ⊞ Y) := by
+  let f : ULift.{v} WalkingPair → A := fun j ↦ (Limits.pair X Y).obj ⟨j.down⟩
+  refine prop_of_iso _ ?_ (flat_coproduct f (fun ⟨j⟩ ↦ by cases j <;> assumption))
+  let g : WalkingPair → A := fun j ↦ (Limits.pair X Y).obj ⟨j⟩
+  exact (Sigma.whiskerEquiv (f := f) (g := g) Equiv.ulift (fun _ ↦ Iso.refl _)) ≪≫
+    (HasColimit.isoOfNatIso (Discrete.natIso fun _ ↦ Iso.refl _) : ∐ g ≅ X ⨿ Y) ≪≫
+    (biprod.isoCoprod X Y).symm
+
+end CategoryTheory.ObjectProperty
 
 namespace DerivedCategory
 
