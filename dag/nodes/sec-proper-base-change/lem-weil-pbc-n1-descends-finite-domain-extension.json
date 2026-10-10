@@ -14,7 +14,7 @@
     "lem-weil-pbc-etale-colimit-normal-local-domain"
    ]
   },
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "N-1 descends along a finite extension of domains",
@@ -29,9 +29,71 @@
   "def-weil-pbc-japanese-domain",
   "def-weil-pbc-integral-closure"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "*Fraction fields.* Let $K$ be the fraction field of $A$ and $L$ that of $B$, i.e. their localizations at the prime $(0)$ [def-weil-pbc-localization-at-prime]. Since $A\\subseteq B\\subseteq L$ and every nonzero $s\\in A$ is nonzero in the field $L$, the map $\\iota:K\\to L$, $a/s\\mapsto a s^{-1}$, is well defined ($a/s=a'/s'$ means $as'=a's$ in the domain $A$, hence in $L$), a ring homomorphism, and injective as $K$ is a field; it restricts to the inclusion $A\\subseteq B$ on $A$, so it is $A$-linear for the $A$-module structure of $L$ through $A\\subseteq B\\subseteq L$. This is the composite $A\\subseteq K\\to L$ through which the hint compares the two integral closures.",
+   "uses": [
+    "def-weil-pbc-localization-at-prime"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra, Lemma Tag 032K (lemma-finite-extension-N-2), lines 45257-45266, proof ('Omitted. (Hint: Integral closures of $R$ in extension fields are contained in integral closures of $S$ in extension fields.)'), N-1 clause: the comparison of $R$ inside $S$ implicit in the hint"
+   }
+  },
+  {
+   "text": "*$\\iota(A')\\subseteq B'$.* Let $A'\\subseteq K$ be the integral closure of $A$ in $K$ and $B'\\subseteq L$ that of $B$ in $L$ [def-weil-pbc-integral-closure]. If $x\\in A'$, then $x^n+a_{n-1}x^{n-1}+\\dots+a_0=0$ with $a_i\\in A$; applying the ring map $\\iota$, which is the identity on $A$, gives $\\iota(x)^n+a_{n-1}\\iota(x)^{n-1}+\\dots+a_0=0$ in $L$ with $a_i\\in A\\subseteq B$, a monic equation with coefficients in $B$. So $\\iota(x)$ is integral over $B$, i.e. $\\iota(x)\\in B'$. This is the hint of the source for the extension field $K$ of $A$ (contained in $L$).",
+   "uses": [
+    "def-weil-pbc-integral-closure"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra, Lemma Tag 032K (lemma-finite-extension-N-2), lines 45257-45266, proof ('Omitted. (Hint: Integral closures of $R$ in extension fields are contained in integral closures of $S$ in extension fields.)'), N-1 clause: the hint, for the fraction fields"
+   }
+  },
+  {
+   "text": "*$B'$ is a finite $A$-module.* By hypothesis $B$ is N-1 [def-weil-pbc-japanese-domain], so $B'$ is a finitely generated $B$-module [def-weil-finitely-generated-module]; $B$ is a finitely generated $A$-module by hypothesis. By [lem-weil-pbc-finite-module-over-finite-algebra] (with $R=A$, the algebra $B$ and $M=B'$), $B'$ is a finitely generated $A$-module, $A$ acting through $A\\subseteq B$.",
+   "uses": [
+    "def-weil-pbc-japanese-domain",
+    "def-weil-finitely-generated-module",
+    "lem-weil-pbc-finite-module-over-finite-algebra"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra, Lemma Tag 032K (lemma-finite-extension-N-2), lines 45257-45266, proof ('Omitted. (Hint: Integral closures of $R$ in extension fields are contained in integral closures of $S$ in extension fields.)'), N-1 clause: the omitted conclusion from the hint (finiteness of the closure of $S$ passes to $R$ since $S$ is finite over $R$)"
+   }
+  },
+  {
+   "text": "*Conclusion.* $A'$ is an $A$-submodule of $K$ (a subring containing $A$, [def-weil-pbc-integral-closure]), and $\\iota$ is injective and $A$-linear (step 1), so $\\iota$ maps $A'$ isomorphically, as an $A$-module, onto the $A$-submodule $\\iota(A')$, which lies in $B'$ by step 2. Since $A$ is Noetherian [def-weil-pbc-noetherian-ring] and $B'$ is a finitely generated $A$-module (step 3), [lem-weil-pbc-noetherian-submodule-finite] shows that $\\iota(A')\\subseteq B'$ is a finitely generated $A$-module, hence so is $A'\\cong\\iota(A')$. Thus $A$ is N-1 [def-weil-pbc-japanese-domain].",
+   "uses": [
+    "def-weil-pbc-integral-closure",
+    "def-weil-pbc-noetherian-ring",
+    "lem-weil-pbc-noetherian-submodule-finite",
+    "def-weil-pbc-japanese-domain"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra, Lemma Tag 032K (lemma-finite-extension-N-2), lines 45257-45266, proof ('Omitted. (Hint: Integral closures of $R$ in extension fields are contained in integral closures of $S$ in extension fields.)'), N-1 clause: the omitted conclusion, using that $R$ is Noetherian"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-localization-at-prime",
+  "def-weil-pbc-integral-closure",
+  "def-weil-pbc-japanese-domain",
+  "def-weil-finitely-generated-module",
+  "lem-weil-pbc-finite-module-over-finite-algebra",
+  "def-weil-pbc-noetherian-ring",
+  "lem-weil-pbc-noetherian-submodule-finite"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Algebra, Lemma Tag 032K (lemma-finite-extension-N-2): the source's proof is 'Omitted' with a one-sentence hint; the steps write out that hint for the N-1 clause"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -56,7 +118,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "worker",
@@ -76,5 +138,13 @@
   }
  },
  "chapter": "sec-proper-base-change",
- "unit": "sk-thm-p1"
+ "unit": "sk-thm-p1",
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "lem-weil-pbc-n1-descends-finite-domain-extension",
+  "worker": "stage1",
+  "summary": "Read Algebra Lemma 032K (lemma-finite-extension-N-2, algebra.tex 45257-45266; tag verified in tags/tags): proof 'Omitted' with the hint that integral closures of R in extension fields lie in those of S. Wrote the N-1 clause out in four steps: the A-linear embedding K=Frac(A) -> L=Frac(B); the closure A' of A in K maps into the closure B' of B in L (same monic equation); B' is finite over B (N-1) and B finite over A, so B' is a finite A-module (Mathlib leaf Module.Finite.trans); A' is isomorphic to an A-submodule of B', finite as A is Noetherian (Mathlib leaf Submodule.FG.of_le). Statement checked against the source and kept; stmt_deps unchanged. No new node; no blueprint node states the lemma (blueprint_refs search 'N-1 finite extension', '032K', 'Japanese', 'integral closure', 'Nagata'), same_as []. proof_origin agent because the source omits the proof.",
+  "blueprint": "Realizes, through the via chain (lem-weil-pbc-normal-nagata-monogenic-n1, step 8: 'Apply [lem-weil-pbc-n1-descends-finite-domain-extension] to the finite extension S_m ⊆ B'), the place of the blueprint node lem-weil-pbc-normal-constant-generic recorded in from.place: step 4 of its split ('O^sh_{Y,ybar} is a normal domain', Lemma 59.73.13, Tag 09Z5, proof of (1)), which uses lem-weil-pbc-etale-colimit-normal-local-domain; down the via chain this reaches the N-1 property of local rings of the monogenic extension in step 8 of lem-weil-pbc-normal-nagata-monogenic-n1. All four steps serve that one place."
+ },
+ "reviewed": "2026-10-10 L: 4 steps checked (032K N-1 clause, proof omitted in Stacks, written out): K embeds in L, A' maps into B' by the same monic equation, B' finite over A by transitivity, A' an A-submodule of a finite module over Noetherian A"
 }
