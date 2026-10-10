@@ -1,14 +1,14 @@
 # Work queue
 
-927 items; claim with `tools/claim.py next <group> [--stage N]`.
+928 items; claim with `tools/claim.py next <group> [--stage N]`.
 
-## Stage 1: nodes to split (213)
+## Stage 1: nodes to split (212)
 
 | node | distance to a target | Lean state on the done branch |
 |---|---|---|
 | `lem-weil-pbc-injective-acyclicity-bounded-below` | 2002 | sorry_here |
 | `lem-sc-topological-filtered-injective-cech-acyclic` | 2015 | none |
-| `lem-sc-finite-length-global-submodule` | 2018 | none |
+| `lem-sc-finite-maximals-over-element` | 2019 | none |
 | `lem-pc-bounded-coherent-finite-tor-proper-pushforward-perfect` | 3013 | none |
 | `lem-pc-derived-limit-milnor-sequence` | 3013 | none |
 | `lem-pc-derived-functor-commutes-derived-limit` | 3014 | none |
@@ -36,11 +36,10 @@
 | `lem-sc-etale-local-dimension` | 4010 | none |
 | `lem-sc-faithfully-flat-local-dimension` | 4010 | none |
 | `lem-sc-intersection-effective-cartier` | 4010 | none |
-| `lem-sc-strict-henselization-completion-noetherian` | 4010 | none |
 | `lem-sc-top-dimensional-reduction-intersection` | 4010 | none |
 | `lem-pc-hilb-containment-locus` | 4011 | none |
 | `lem-sc-snapper-numerical-polynomial` | 4011 | none |
-| `lem-pc-derived-total-resolution-quasi-iso` | 4013 | none |
+| `lem-sc-strict-henselization-completion-flat` | 4011 | none |
 | `lem-sc-generic-rank-leading-degree` | 5010 | none |
 | `lem-sc-hilbert-difference` | 5010 | none |
 | `lem-sc-hilbert-embedded-points` | 5010 | none |
@@ -220,7 +219,7 @@
 | `lem-pur-rhom-well-defined` | - | none |
 | `lem-zl-noether-normalization-dimension` | - | none |
 
-## Stage 2: nodes to state (714)
+## Stage 2: nodes to state (716)
 
 | node | distance to Mathlib | kind |
 |---|---|---|
@@ -312,6 +311,7 @@
 | `lem-pc-derived-filtered-free-resolution` | 1 | state |
 | `lem-pc-derived-free-complex-cover` | 1 | state |
 | `lem-pc-derived-module-direct-sums` | 1 | state |
+| `lem-pc-derived-total-resolution-quasi-iso` | 1 | state |
 | `lem-pc-field-extension-fpqc-cover` | 1 | state |
 | `lem-pc-flat-pullback-effective-cartier-ideal` | 1 | state |
 | `lem-pc-flat-tensor-complex-cohom` | 1 | state |
@@ -374,6 +374,7 @@
 | `lem-sc-filtered-colimit-prime-chain-dimension` | 1 | state |
 | `lem-sc-finite-discrete-separated-affine` | 1 | state |
 | `lem-sc-finite-integral-conductor` | 1 | state |
+| `lem-sc-finite-length-global-submodule` | 1 | state |
 | `lem-sc-finite-nonempty-point` | 1 | state |
 | `lem-sc-finite-pushforward-locally-free` | 1 | state |
 | `lem-sc-finite-type-nonclosed-closure-closed-points` | 1 | state |
@@ -939,7 +940,7 @@
 | `lem-weil-pbc-p1-field-dimension-one` | 4 | state |
 | `lem-weil-pbc-projective-space-zero-isomorphism` | 4 | state |
 
-Not open yet: 1424 nodes that wait for a statement dependency, 250 nodes that wait for stage 1.
+Not open yet: 1425 nodes that wait for a statement dependency, 249 nodes that wait for stage 1.
 
 ## Stage 3: modules to prove (0)
 
