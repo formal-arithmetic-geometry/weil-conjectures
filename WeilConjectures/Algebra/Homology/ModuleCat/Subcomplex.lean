@@ -225,11 +225,14 @@ lemma range_ιTensorObj_le (p q j : ℤ) (h : p + q = j) :
   | zero => simp
   | add z z' hz hz' => simpa using add_mem hz hz'
   | tmul l f =>
-    refine ⟨SubcomplexFamily.span l, SubcomplexFamily.isFinite_span l,
-      HomologicalComplex.ιTensorObj (subcomplex (SubcomplexFamily.span l)) F p q j h
-        ((⟨l, SubcomplexFamily.mem_span_self l⟩ : (SubcomplexFamily.span l).N p) ⊗ₜ f), ?_⟩
-    rw [← ModuleCat.comp_apply]
-    erw [HomologicalComplex.ι_mapBifunctorMap]
+    let N := SubcomplexFamily.span l
+    let y : ((subcomplex N).X p ⊗ F.X q : ModuleCat.{u} R) :=
+      (show (subcomplex N).X p from ⟨l, SubcomplexFamily.mem_span_self l⟩) ⊗ₜ f
+    refine ⟨N, SubcomplexFamily.isFinite_span l,
+      HomologicalComplex.ιTensorObj (subcomplex N) F p q j h y, ?_⟩
+    refine (ConcreteCategory.congr_hom
+      (HomologicalComplex.ι_mapBifunctorMap (subcomplexι N) (𝟙 F) (curriedTensor _) (.up ℤ)
+        p q j h) y).trans ?_
     rfl
 
 /-- Every element of `(L ⊗ F)ʲ` comes from `(L' ⊗ F)ʲ` for a subcomplex `L'` of `L` with
