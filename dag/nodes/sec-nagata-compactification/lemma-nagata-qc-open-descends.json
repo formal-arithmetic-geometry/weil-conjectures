@@ -3,7 +3,7 @@
  "blueprint": {
   "is": "lemma-nagata-qc-open-descends",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "Property of the descended quasi-compact open",
@@ -17,22 +17,95 @@
  ],
  "proof": [
   {
-   "text": "A finite union of basic opens is quasi-compact. Every lifted defining\nfunction has reached the common stage $\\lambda_W$, and base change sends\n$D(f_{ak,\\lambda_W})$ to $D(f_{ak})$. Taking the finite union therefore\nrecovers precisely the selected basic-open presentation of $W$.",
-   "uses": [],
-   "elementary": null
+   "text": "By the construction in [def-nagata-qc-open-descent], $W_{\\lambda_W}=\\bigcup_{a=1}^m\\bigcup_{k=1}^{r_a}D(f_{ak,\\lambda_W})$ is a finite union, where $D(f_{ak,\\lambda_W})$ is the basic open of $f_{ak,\\lambda_W}$ in $U_{a,\\lambda_W}$. Each $U_{a,\\lambda_W}$ is affine: it is the inverse image of the affine $U_a$ under $Y_{\\lambda_W}\\to Y_{\\lambda_0}$, which is affine as the base change of the affine transition $S_{\\lambda_W}\\to S_{\\lambda_0}$ (Morphisms, Tag 01SD). A basic open $D(h)$ of an affine scheme $\\operatorname{Spec}A$ is quasi-compact (Algebra, Tag 00E8), and a finite union of quasi-compact subspaces is quasi-compact, so $W_{\\lambda_W}$ is quasi-compact.",
+   "uses": [
+    "def-nagata-qc-open-descent"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-nagata-compactification/sk-prop-nagata-sketch-approximation/lemma-nagata-qc-open-descends.md",
+    "place": "## Proof, first sentence"
+   }
+  },
+  {
+   "text": "Let $p:Y\\to Y_{\\lambda_W}$ and $p_\\lambda:Y\\to Y_\\lambda$ be the projections. By [lemma-nagata-directed-finite-upper-bound], $\\lambda_a\\leq\\lambda_W$ for every $a$, so $f_{ak,\\lambda_W}$ is the image of the lift $f_{ak,\\lambda_a}$ under the transition map $\\Gamma(U_{a,\\lambda_a},\\mathcal O)\\to\\Gamma(U_{a,\\lambda_W},\\mathcal O)$. In [def-nagata-qc-open-descent] the lifts are taken for the identification $\\Gamma(U_a^\\infty,\\mathcal O)\\cong\\varinjlim_{\\lambda\\geq\\lambda_0}\\Gamma(U_{a,\\lambda},\\mathcal O)$ of [lem-weil-pbc-limit-global-sections-colimit], whose colimit maps are the pullbacks $p_\\lambda^\\sharp$; hence $p_{\\lambda_a}^\\sharp(f_{ak,\\lambda_a})=f_{ak}$, and since $p_{\\lambda_a}$ factors as $p$ followed by the transition $Y_{\\lambda_W}\\to Y_{\\lambda_a}$, also $p^\\sharp(f_{ak,\\lambda_W})=f_{ak}$ in $\\Gamma(p^{-1}U_{a,\\lambda_W},\\mathcal O)=\\Gamma(U_a^\\infty,\\mathcal O)$. By [lem-weil-pbc-basic-open-pullback] applied to $p$, the open $U_{a,\\lambda_W}$ and $f_{ak,\\lambda_W}$, $p^{-1}(D(f_{ak,\\lambda_W}))=D(f_{ak})$. Inverse images commute with unions, so $p^{-1}(W_{\\lambda_W})=\\bigcup_a\\bigcup_kD(f_{ak})=\\bigcup_a(W\\cap U_a^\\infty)$ by the chosen presentations of [def-nagata-qc-open-descent]. Finally the $U_a$ cover $Y_{\\lambda_0}$, so their inverse images $U_a^\\infty$ cover $Y$, and $\\bigcup_a(W\\cap U_a^\\infty)=W$. Hence $p^{-1}(W_{\\lambda_W})=W$.",
+   "uses": [
+    "def-nagata-qc-open-descent",
+    "lemma-nagata-directed-finite-upper-bound",
+    "lem-weil-pbc-limit-global-sections-colimit",
+    "lem-weil-pbc-basic-open-pullback"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-nagata-compactification/sk-prop-nagata-sketch-approximation/lemma-nagata-qc-open-descends.md",
+    "place": "## Proof, remaining sentences"
+   }
   }
  ],
  "proof_deps": [
-  "lemma-nagata-directed-finite-upper-bound"
+  "def-nagata-qc-open-descent",
+  "lemma-nagata-directed-finite-upper-bound",
+  "lem-weil-pbc-limit-global-sections-colimit",
+  "lem-weil-pbc-basic-open-pullback"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/master/blueprint/sec-nagata-compactification/sk-prop-nagata-sketch-approximation/lemma-nagata-qc-open-descends.md",
   "place": "## Proof"
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "finite union of basic opens is quasi-compact and inverse image of descended basic opens recovers a quasi-compact open",
+   "results": "AlgebraicGeometry.isCompactOpen_iff_eq_basicOpen_union; AlgebraicGeometry.isCompact_and_isOpen_iff_finite_and_eq_biUnion_basicOpen; AlgebraicGeometry.isCompact_basicOpen; no declaration for the custom finite-stage descent equality",
+   "date": "2026-10-11",
+   "verdict": "no exact match; general basic-open compactness results only"
+  },
+  {
+   "tool": "loogle",
+   "query": "QuasiCompact, Scheme, basic open, preimage",
+   "results": "query parser rejected the comma-separated pattern",
+   "date": "2026-10-11",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "grep",
+   "query": "quasi.compact.*basic open|basic open.*quasi.compact [Mathlib/AlgebraicGeometry]",
+   "results": "no matches",
+   "date": "2026-10-11",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "finite union of basic opens is quasi-compact and inverse image of descended basic opens recovers a quasi-compact open",
+   "results": "service unavailable",
+   "date": "2026-10-11",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "loogle",
+   "query": "isCompactOpen_iff_eq_basicOpen_union",
+   "results": "unknown identifier",
+   "date": "2026-10-11",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "isCompactOpen_iff_eq_basicOpen_union|isCompact_basicOpen [Mathlib/AlgebraicGeometry/Morphisms]",
+   "results": "no matches",
+   "date": "2026-10-11",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "pullback of a basic open D(f) along a scheme morphism is D(f)",
+   "results": "AlgebraicGeometry.Scheme.preimage_basicOpen; AlgebraicGeometry.Scheme.Hom.preimage_basicOpen; AlgebraicGeometry.Scheme.preimage_basicOpen_top; AlgebraicGeometry.Scheme.Hom.preimage_basicOpen_top",
+   "date": "2026-10-11",
+   "verdict": "match via existing node lem-weil-pbc-basic-open-pullback"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [
   "bypassed"
@@ -68,5 +141,36 @@
   }
  },
  "chapter": "sec-nagata-compactification",
- "unit": "sk-prop-nagata-sketch-approximation"
+ "unit": "sk-prop-nagata-sketch-approximation",
+ "split_report": {
+  "date": "2026-10-11",
+  "item": "lemma-nagata-qc-open-descends",
+  "worker": "stage1",
+  "summary": "No new nodes were needed. The proof is split into quasi-compactness of the finite basic-open union and recovery of W by pullback along the common stage, citing the imported descent definition, the finite-upper-bound lemma, and the existing basic-open pullback tool lemma.",
+  "blueprint": "Realizes the two sentences of the blueprint proof: finite-union quasi-compactness, then common-stage transport and inverse-image equality.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-basic-open-pullback",
+    "why": "Its statement gives the inverse image of each basic open under the canonical scheme morphism; the Nagata unit has no replacement node for this generic pullback fact."
+   },
+   {
+    "node": "lem-weil-pbc-limit-global-sections-colimit",
+    "why": "Its statement says the colimit maps are the pullbacks f_i^sharp, which identifies the pullback of each lift with f_ak; the descent definition of this unit already cites it."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-basic-open-pullback",
+  "lem-weil-pbc-limit-global-sections-colimit",
+  "lem-weil-pbc-basic-open-pullback",
+  "lem-weil-pbc-limit-global-sections-colimit"
+ ],
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-qod2850",
+  "group": "H1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-qod2850 (reviewer sub-agent of L); spot-checked: Statement matches citers (F1 morphism-equality-stage, K1 gluing-datum-descent: qc + inverse image exactly W). Step 1 uses exactly the merged def-nagata-qc-open-descent. FIX more, RETURN less: (1) C1 step 1: 'each basic open is quasi-compact' made precise: D(f_ak,lW) is a basic open of the affine U_{a,lW} (affine since Y_lW->Y_l0 is a base change of an affine transition, Tag 01SD), basic opens of affines quasi-compact (Tag 00E8). (2) C1 step 2 (missed by the H1 second reading): the step never showed p^sharp(f_ak,lW)=f_ak nor used the finite affine cover; added the colimit identification of lem-weil-pbc-limit-global-sections-colimit (colimit maps are pullbacks, lift property from the def, transport compatibility) and the cover step U_a^inf cover Y so union_a (W cap U_a^inf)=W; uses/proof_deps updated, tool use declared.; 1 file(s) fixed by the reviewer"
+ }
 }
