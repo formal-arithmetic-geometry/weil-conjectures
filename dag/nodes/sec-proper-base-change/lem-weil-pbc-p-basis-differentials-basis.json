@@ -11,9 +11,66 @@
   "def-pc-field-extension",
   "def-weil-pbc-kahler-differentials"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "(The intermediate field and its constants.) Put $B=kK^p\\subseteq K$. Since $K$ has characteristic $p$, Frobenius $a\\mapsto a^p$ is a field homomorphism onto the subfield $K^p$: $(a+b)^p=a^p+b^p$ and $(a^{-1})^p=(a^p)^{-1}$ for $a\\ne0$. The $k$-derivation $\\mathrm d_{K/k}:K\\to\\Omega_{K/k}$ [def-weil-pbc-kahler-differentials] kills $k$ by definition and kills $K^p$, since $\\mathrm d(a^p)=p a^{p-1}\\mathrm da=0$. Its kernel is a subfield: additivity and Leibniz give closure under sums and products, and $0=\\mathrm d(1)=\\mathrm d(aa^{-1})=a\\mathrm d(a^{-1})+a^{-1}\\mathrm da$ gives $\\mathrm d(a^{-1})=-a^{-2}\\mathrm da$. Therefore $\\mathrm d_{K/k}$ kills every $b\\in B$.",
+   "uses": [
+    "def-weil-pbc-kahler-differentials"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "More on Algebra, Definition Tag 07P1 (definition-p-basis), line 11344, and proof of Lemma Tag 07P2 (lemma-p-basis), lines 11383-11384 ('any k-derivation of K annihilates kK^p')"
+   }
+  },
+  {
+   "text": "(The presentation supplied by the $p$-basis.) Form $P=B[X_i:i\\in I]$ [def-weil-pbc-mv-polynomial-ring] and its evaluation map $e:P\\to K$, $X_i\\mapsto t_i$. Let $J=(X_i^p-t_i^p:i\\in I)\\subseteq P$; $t_i^p\\in K^p\\subseteq B$, so $J\\subseteq\\ker e$. Every polynomial involves only finitely many variables. In $P/J$ replace each factor $X_i^{q_ip+r_i}$, $0\\le r_i<p$, by $(t_i^p)^{q_i}X_i^{r_i}$; applying this to each monomial shows that the classes of $X^E=\\prod_iX_i^{e_i}$ for finitely supported $0\\le e_i<p$ span $P/J$ over $B$. Their images $t^E$ form a $B$-basis of $K$ by the hypothesis, so the induced $B$-linear map $P/J\\to K$ is surjective and injective: any relation among the spanning classes maps to a relation among the independent $t^E$, forcing all its coefficients to be zero. Hence $\\ker e=J$ and $K\\cong P/J$ as $B$-algebras, with the class of $X_i$ identified with $t_i$.",
+   "uses": [
+    "def-weil-pbc-mv-polynomial-ring"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "More on Algebra, proof of Lemma Tag 07P2 (lemma-p-basis), lines 11395-11398: '$K\\cong kK^p[X_i]/(X_i^p-x_i^p)$'; the finite-support reduction and injectivity from the $p$-basis are made explicit"
+   }
+  },
+  {
+   "text": "(Differentials over $B$.) By [lem-weil-pbc-polynomial-ring-kahler-basis-any-variables], $\\Omega_{P/B}$ is free over $P$ on $(\\mathrm dX_i)_{i\\in I}$ and $K\\otimes_P\\Omega_{P/B}$ is free over $K$ on $(1\\otimes\\mathrm dX_i)_{i\\in I}$. Apply [lem-weil-pbc-jacobi-zariski-differential-maps] to $B\\to P\\to P/J\\cong K$: its exact sequence is $J/J^2\\xrightarrow{\\delta}K\\otimes_P\\Omega_{P/B}\\xrightarrow{w}\\Omega_{K/B}\\to0$, where $\\delta(f\\bmod J^2)=1\\otimes\\mathrm df$ and $w(1\\otimes\\mathrm dX_i)=\\mathrm dt_i$. For each generator $f_i=X_i^p-t_i^p$ of $J$, $\\mathrm df_i=pX_i^{p-1}\\mathrm dX_i-\\mathrm d_B(t_i^p)=0$, because $p=0$ in $B$ and $t_i^p$ is a constant of $P/B$. For $f=\\sum_{j=1}^nh_jf_{i_j}\\in J$ the Leibniz rule gives $1\\otimes\\mathrm df=\\sum_j e(h_j)\\otimes\\mathrm df_{i_j}+\\sum_j e(f_{i_j})\\otimes\\mathrm dh_j=0$. Thus $\\delta=0$, $w$ is an isomorphism, and $(\\mathrm d_{K/B}t_i)_{i\\in I}$ is a $K$-basis of $\\Omega_{K/B}$.",
+   "uses": [
+    "lem-weil-pbc-polynomial-ring-kahler-basis-any-variables",
+    "lem-weil-pbc-jacobi-zariski-differential-maps",
+    "def-weil-pbc-kahler-differentials"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "More on Algebra, proof of Lemma Tag 07P2 (lemma-p-basis), lines 11395-11398 ('Hence we see that dx_i forms a basis'), expanded using Algebra Lemmas Tag 00RX (lemma-differentials-polynomial-ring) and Tag 00RU (lemma-differential-seq)"
+   }
+  },
+  {
+   "text": "(Return to differentials over $k$.) Apply [lem-weil-pbc-kahler-differentials-first-exact-sequence] to $k\\to B\\to K$. It gives $K\\otimes_B\\Omega_{B/k}\\xrightarrow{u}\\Omega_{K/k}\\xrightarrow{v}\\Omega_{K/B}\\to0$, where $u(c\\otimes\\mathrm d_{B/k}b)=c\\,\\mathrm d_{K/k}b$ and $v(\\mathrm d_{K/k}a)=\\mathrm d_{K/B}a$. Step 1 shows $u=0$ on these generators, hence $u=0$. Exactness says $\\ker v=\\operatorname{im}u=0$ and $v$ is surjective, so $v$ is a $K$-linear isomorphism. It sends each $\\mathrm d_{K/k}t_i$ to $\\mathrm d_{K/B}t_i$, which is a basis by Step 3. Therefore $(\\mathrm d_{K/k}t_i)_{i\\in I}$ is a $K$-basis of $\\Omega_{K/k}$, including the case $I=\\emptyset$.",
+   "uses": [
+    "lem-weil-pbc-kahler-differentials-first-exact-sequence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "More on Algebra, proof of Lemma Tag 07P2 (lemma-p-basis), lines 11395-11398, implication (a) implies (b); the comparison from $kK^p$ to $k$ uses Algebra Lemma Tag 00RS (lemma-exact-sequence-differentials)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-kahler-differentials",
+  "def-weil-pbc-mv-polynomial-ring",
+  "lem-weil-pbc-polynomial-ring-kahler-basis-any-variables",
+  "lem-weil-pbc-jacobi-zariski-differential-maps",
+  "lem-weil-pbc-kahler-differentials-first-exact-sequence"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "More on Algebra, Lemma Tag 07P2 (lemma-p-basis), proof of (a) implies (b), lines 11395-11398; presentation argument expanded through Algebra Lemmas Tag 00RX (lemma-differentials-polynomial-ring), Tag 00RU (lemma-differential-seq), and Tag 00RS (lemma-exact-sequence-differentials)"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -59,7 +116,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "worker",
@@ -79,5 +136,18 @@
   }
  },
  "chapter": "sec-proper-base-change",
- "unit": "sk-thm-p1"
+ "unit": "sk-thm-p1",
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "lem-weil-pbc-p-basis-differentials-basis",
+  "worker": "stage1",
+  "summary": "Checked the statement against More on Algebra Definition 07P1 and Lemma 07P2 (a) implies (b). Four steps: k-derivations kill B=kK^p; monomial reduction and p-basis independence prove K is the quotient B[X_i]/(X_i^p-t_i^p); polynomial differentials and the quotient conormal sequence show Omega_{K/B} is free on dt_i because every relation has zero differential; the first exact sequence identifies Omega_{K/k} with Omega_{K/B} since d_{K/k} kills B. No new nodes: all non-elementary inputs have existing nodes and their public statements were read. The existing searches already cover Mathlib; no direct p-basis result was found. The source's one-line 'hence' was expanded, including arbitrary I and I empty."
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "group": "F1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed by the lead of F1; spot-checked by L: 07P2 (a)=>(b): d kills kK^p, presentation K = B[X_i]/(X_i^p - t_i^p) from the p-basis, Jacobi-Zariski with d(X_i^p - t_i^p) = 0 gives Omega_{K/B} free on dt_i, first exact sequence for k -> B -> K with u = 0"
+ }
 }
