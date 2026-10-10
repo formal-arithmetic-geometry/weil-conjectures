@@ -1,0 +1,76 @@
+{
+ "id": "lem-weil-pbc-sets-etale-stalk-finite-limits",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lemma-weil-pbc-proper-strict-henselian-h0",
+   "place": "proof, Tag 0A0C: the invocation of Tag 09ZF; within 09ZF, last sentence of the proof: 's' comes from a section of F over X by Remark 09Z3'; Remark 09Z3 is proved 'in exactly the same way' as Lemma 09Z2, by checking on stalks that G is the equalizer of f_{0,*}f_0^{-1}G => f_{1,*}f_1^{-1}G; this node lets the equalizer be computed on stalks",
+   "via": [
+    "lem-weil-pbc-sets-finite-surjective-descent",
+    "lem-weil-pbc-gabber-h0-etale-criterion"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Etale stalks of sheaves of sets commute with finite limits",
+ "statement": "Let $S$ be a scheme [def-pc-scheme], $\\bar s:\\operatorname{Spec}\\Omega\\to S$ a geometric point [def-weil-geometric-point], and let $F\\mapsto F_{\\bar s}$ be the stalk functor of [def-weil-pbc-geometric-stalks] on the category $\\Sh(S_{\\Et})$ of sheaves of sets on $S_{\\Et}$ [def-weil-pbc-etale-sheaf-of-sets]. Then this functor commutes with finite limits. In particular, for morphisms $\\delta_1,\\delta_2:A\\to B$ of sheaves of sets on $S_{\\Et}$ with equalizer $\\iota:E\\to A$ in $\\Sh(S_{\\Et})$, the map $\\iota_{\\bar s}:E_{\\bar s}\\to A_{\\bar s}$ is injective and its image is $\\{a\\in A_{\\bar s}:(\\delta_1)_{\\bar s}(a)=(\\delta_2)_{\\bar s}(a)\\}$.",
+ "source": {
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Lemma Tag 03PT (lemma-stalk-exact) (4): the stalk functor Sh(S_etale) -> Sets is exact, i.e. commutes with finite limits and colimits"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-geometric-point",
+  "def-weil-pbc-etale-sheaf-of-sets",
+  "def-weil-pbc-geometric-stalks"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "fiber functor of a point of a site on sheaves preserves finite limits",
+   "results": "CategoryTheory.GrothendieckTopology.Point.instPreservesFiniteLimitsSheafSheafFiberOfLocallySmallOfHasFiniteLimitsOfAB5OfSize, ...PresheafFiber... (Mathlib.CategoryTheory.Sites.Point.Basic), Point.sheafFiber, Functor.sheafPullbackConstruction.preservesFiniteLimits",
+   "date": "2026-10-10",
+   "verdict": "match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.GrothendieckTopology.Point.sheafFiber, CategoryTheory.Limits.PreservesFiniteLimits",
+   "results": "Point.instPreservesFiniteLimitsSheafSheafFiberOfLocallySmallOfHasFiniteLimitsOfAB5OfSize (Mathlib.CategoryTheory.Sites.Point.Basic)",
+   "date": "2026-10-10",
+   "verdict": "match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -n 'PreservesFiniteLimits' Mathlib/CategoryTheory/Sites/Point/Basic.lean; grep -rn 'instance : AB5' Mathlib/CategoryTheory/Abelian/GrothendieckAxioms/Types.lean",
+   "results": "Basic.lean:285-286 (presheafFiber) and 289-290 (sheafFiber) preserve finite limits under [HasFiniteLimits A] [AB5OfSize A]; Types.lean:24 instance AB5 (Type v)",
+   "date": "2026-10-10",
+   "verdict": "match"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "CategoryTheory.GrothendieckTopology.Point.instPreservesFiniteLimitsSheafSheafFiberOfLocallySmallOfHasFiniteLimitsOfAB5OfSize",
+  "file": "Mathlib/CategoryTheory/Sites/Point/Basic.lean",
+  "how": "specializes in one line: the anonymous instance at Basic.lean:289-290 (PreservesFiniteLimits Φ.sheafFiber for A with finite limits and AB5OfSize) with Φ = pointSmallEtale s (Mathlib/AlgebraicGeometry/Sites/EtalePoint.lean:64; the stalk of [def-weil-pbc-geometric-stalks]) and A = Type u, which is AB5 by the instance at Mathlib/CategoryTheory/Abelian/GrothendieckAxioms/Types.lean:24; the equalizer clause is the preservation of the equalizer cone together with the description of equalizers in Type (Types.equalizerLimit)."
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-sets-finite-surjective-descent",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-iff"
+}

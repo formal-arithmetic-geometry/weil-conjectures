@@ -1,0 +1,83 @@
+{
+ "id": "lem-weil-pbc-sets-etale-iso-on-geometric-stalks",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lemma-weil-pbc-proper-strict-henselian-h0",
+   "place": "proof, Tag 0A0C: the invocation of Tag 09ZF; within 09ZF, last sentence of the proof: 's' comes from a section of F over X by Remark 09Z3'; Remark 09Z3 is proved 'in exactly the same way' as Lemma 09Z2, by checking on stalks that G is the equalizer of f_{0,*}f_0^{-1}G => f_{1,*}f_1^{-1}G; this node is the last step of that stalk check: the map from G to the equalizer, bijective on all geometric stalks, is an isomorphism",
+   "via": [
+    "lem-weil-pbc-sets-finite-surjective-descent",
+    "lem-weil-pbc-gabber-h0-etale-criterion"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Geometric stalks detect isomorphisms of etale sheaves of sets",
+ "statement": "Let $S$ be a scheme [def-pc-scheme], let $(\\bar s_i:\\operatorname{Spec}\\Omega_i\\to S)_{i\\in I}$ be a family of geometric points of $S$ [def-weil-geometric-point] whose images cover $S$ (every point of $S$ is the image of the point of some $\\operatorname{Spec}\\Omega_i$), and let $\\varphi:F\\to G$ be a morphism of sheaves of sets on $S_{\\Et}$ [def-weil-pbc-etale-sheaf-of-sets]. If for every $i\\in I$ the induced map of stalks [def-weil-pbc-geometric-stalks] $\\varphi_{\\bar s_i}:F_{\\bar s_i}\\to G_{\\bar s_i}$ is bijective, then $\\varphi$ is an isomorphism of sheaves of sets, i.e. $\\varphi_W:F(W)\\to G(W)$ is bijective for every object $W$ of $S_{\\Et}$.",
+ "source": {
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Theorem Tag 03PU (theorem-exactness-stalks): a map of sheaves of sets on S_etale is injective (resp. surjective) iff it is so on the stalks at all geometric points; a map of sheaves of sets that is injective and surjective is an isomorphism. Its proof only uses, for every point u, some geometric point over u, so a family of geometric points covering S suffices (as recorded for lem-weil-pbc-geometric-stalks-detect-mono)."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-geometric-point",
+  "def-weil-pbc-etale-sheaf-of-sets",
+  "def-weil-pbc-geometric-stalks"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "morphism of etale sheaves of types is an isomorphism if bijective on stalks at geometric points",
+   "results": "TopCat.Presheaf.isIso_iff_stalkFunctor_map_iso, TopCat.Presheaf.isIso_of_stalkFunctor_map_iso (Mathlib.Topology.Sheaves.Stalks; topological spaces only), AlgebraicGeometry.isomorphisms_eq_stalkwise",
+   "date": "2026-10-10",
+   "verdict": "no direct match for the etale site; see loogle"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "geometric points of a scheme form a conservative family of points for the small etale site",
+   "results": "Scheme.etaleTopology, Scheme.smallEtaleTopology, Scheme.smallEtalePretopology (Mathlib.AlgebraicGeometry.Sites.Etale)",
+   "date": "2026-10-10",
+   "verdict": "no match by itself (the version index is older than the pinned Mathlib)"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Scheme.pointSmallEtale",
+   "results": "pointSmallEtale, pointSmallEtale_fiber, isConservative_pointSmallEtale, isConservativeFamilyOfPoints_pointSmallEtale', pointSmallEtaleFiberObjToPreimage(_surjective) (Mathlib.AlgebraicGeometry.Sites.EtalePoint)",
+   "date": "2026-10-10",
+   "verdict": "match: isConservative_pointSmallEtale"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -n 'IsConservativeFamilyOfPoints\\|jointlyReflectIsomorphisms' Mathlib/CategoryTheory/Sites/Point/Conservative.lean Mathlib/AlgebraicGeometry/Sites/EtalePoint.lean",
+   "results": "Conservative.lean:51-54 structure IsConservativeFamilyOfPoints with field jointlyReflectIsomorphisms_type (the sheafFiber functors on Sheaf J (Type w) jointly reflect isomorphisms); EtalePoint.lean:126-131 isConservative_pointSmallEtale",
+   "date": "2026-10-10",
+   "verdict": "match"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "AlgebraicGeometry.Scheme.isConservative_pointSmallEtale, CategoryTheory.ObjectProperty.IsConservativeFamilyOfPoints.jointlyReflectIsomorphisms_type",
+  "file": "Mathlib/AlgebraicGeometry/Sites/EtalePoint.lean",
+  "how": "specializes in one line: for S : Scheme.{u} and Ω i : Type u algebraically closed (hence separably closed, instance IsSepClosed.of_isAlgClosed, Mathlib/FieldTheory/IsSepClosed.lean:70) with ⋃ i, Set.range (s i) = univ, isConservative_pointSmallEtale s hs (EtalePoint.lean:126-131) is IsConservativeFamilyOfPoints of the points pointSmallEtale (s i); its field jointlyReflectIsomorphisms_type (Mathlib/CategoryTheory/Sites/Point/Conservative.lean:51-54) says the functors (pointSmallEtale (s i)).sheafFiber : Sheaf (smallEtaleTopology S) (Type u) ⥤ Type u jointly reflect isomorphisms; an isomorphism in Type is a bijection (isIso_iff_bijective) and an isomorphism of sheaves is bijective on every object. sheafFiber is the colimit over pointed etale neighbourhoods of [def-weil-pbc-geometric-stalks] (that node's match, pointSmallEtale defined at EtalePoint.lean:64). Same pattern as the reviewed leaf lem-weil-pbc-geometric-stalks-detect-mono."
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-sets-finite-surjective-descent",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-iff"
+}

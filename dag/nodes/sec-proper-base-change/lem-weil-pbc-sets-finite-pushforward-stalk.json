@@ -1,0 +1,73 @@
+{
+ "id": "lem-weil-pbc-sets-finite-pushforward-stalk",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lemma-weil-pbc-proper-strict-henselian-h0",
+   "place": "proof, Tag 0A0C: the invocation of Tag 09ZF; within 09ZF, last sentence of the proof: 's' comes from a section of F over X by Remark 09Z3'; Remark 09Z3 is proved 'in exactly the same way' as Lemma 09Z2, by checking on stalks that G is the equalizer of f_{0,*}f_0^{-1}G => f_{1,*}f_1^{-1}G; within the proof of 09Z2 the sentence '(F_n)_ybar = ⊕_{e∈E^{n+1}} F_ybar by Proposition 03QP and Lemma 03Q1', here for sheaves of sets and n = 0, 1",
+   "via": [
+    "lem-weil-pbc-sets-finite-surjective-descent",
+    "lem-weil-pbc-gabber-h0-etale-criterion"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Stalk of a finite direct image of an etale sheaf of sets",
+ "statement": "Let $f:X\\to Y$ be a finite morphism of schemes [def-weil-finite-integral-morphism], $H$ a sheaf of sets on $X_{\\Et}$ [def-weil-pbc-etale-sheaf-of-sets], with direct image $f_*H$, $(f_*H)(V)=H(V\\times_YX)$ for $V$ in $Y_{\\Et}$, and $\\bar y:\\operatorname{Spec}\\Omega\\to Y$ a geometric point [def-weil-geometric-point]. Let $P(\\bar y)$ be the set of geometric points $\\bar x:\\operatorname{Spec}\\Omega\\to X$ with $f\\circ\\bar x=\\bar y$. For $\\bar x\\in P(\\bar y)$ let $r_{\\bar x}:(f_*H)_{\\bar y}\\to H_{\\bar x}$ (stalks of [def-weil-pbc-geometric-stalks]) send the germ at a pointed etale neighbourhood $(V,\\bar v)$ of $\\bar y$ of $s\\in(f_*H)(V)=H(V\\times_YX)$ to the germ of $s$ at the pointed etale neighbourhood $(V\\times_YX,(\\bar v,\\bar x))$ of $\\bar x$ [def-pc-fibre-product]. Then $P(\\bar y)$ is finite and the map\\n$$(r_{\\bar x})_{\\bar x\\in P(\\bar y)}:(f_*H)_{\\bar y}\\longrightarrow\\prod_{\\bar x\\in P(\\bar y)}H_{\\bar x}$$\\nis bijective.",
+ "source": {
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Proposition Tag 03QP (proposition-finite-higher-direct-image-zero) (1), first display (for F in Sh(X_etale)), and its proof (X x_Y Spec O^sh_{Y,ybar} is a finite disjoint union of spectra of strictly henselian local rings, one for each point over ybar; sections over it are the product of the stalks by Lemma Tag 03QO, which is stated for sheaves of sets); the map, implicit in Stacks, is the restriction of germs; sets version of lem-weil-pbc-finite-stalk-formula-restriction"
+ },
+ "stmt_deps": [
+  "def-weil-finite-integral-morphism",
+  "def-weil-pbc-etale-sheaf-of-sets",
+  "def-weil-geometric-point",
+  "def-weil-pbc-geometric-stalks",
+  "def-pc-fibre-product"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "stalk of pushforward along finite morphism is product of stalks over geometric fibre",
+   "results": "TopCat.Presheaf.stalkPushforward, stalkPushforward_germ_apply, stalkPushforward.comp (Mathlib.Topology.Sheaves.Stalks; topological spaces), StructureSheaf.algebraMap_pushforward_stalk",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "stalk of direct image of an etale sheaf under a finite morphism is a finite product of stalks",
+   "results": "LocallyOfFiniteType.stalkMap, IsEtale.of_comp, Scheme.Etale.forget, Algebra.isOpen_etaleLocus",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rln 'IsFinite' Mathlib/AlgebraicGeometry/Sites/ Mathlib/CategoryTheory/Sites/; grep -n 'variable\\|stalkIsoPi' WeilConjectures/SixFunctors/Finite/Stalk.lean (slopmaster2)",
+   "results": "Mathlib: none. slopmaster2: Etale.stalkIsoPi / isIso_piLift_stalkRestrict (SixFunctors/Finite/Stalk.lean:267-282) only for A abelian Grothendieck (line 59); the piece decomposition SplitNbhd.sectionsIsoPi (AlgebraicGeometry/Morphisms/Finite/PieceSections.lean:146) holds for any A with products, but no Type-valued stalk formula",
+   "date": "2026-10-10",
+   "verdict": "no match; no sorry-free Lean declaration states the sets version (rule 0)"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-sets-finite-surjective-descent",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-iff"
+}
