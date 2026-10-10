@@ -1993,3 +1993,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 16:31 L: merged deliver/E1/lem-sc-ext-sheaf-to-global-spectral-sequence (reviewer FIX; first push; new nodes: 1)
 - 16:31 L: merged deliver/F1/lem-sc-invert-s-cohomology-affine-case (reviewer PASS; first push; new nodes: 2)
 - 16:31 L: lem-sc-torsor-h1-zariski-boundary-class attached (classH1_lifts; F1 release); lem-weil-pbc-injective-acyclicity-bounded-below parked again under L (H1's delivery used the false embedding; return withdrawn, branch deleted, notice)
+- 16:32 L: merged deliver/K1/lem-weil-pbc-derived-finite-product (reviewer FIX+NODE(1); first push; new nodes: 3)

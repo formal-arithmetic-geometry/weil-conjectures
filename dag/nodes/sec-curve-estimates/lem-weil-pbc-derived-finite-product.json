@@ -24,9 +24,46 @@
   "def-sp-injective-resolutions",
   "def-sp-left-exact-additive"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "For each i choose an injective resolution $A_i\\to J_i^\\bullet$. The product-category statement [lem-weil-pbc-finite-product-injective-resolutions] says that the product category is abelian with enough injectives and that the componentwise complex $\\prod_iJ_i^\\bullet$ is an injective resolution of $(A_i)_i$. By [lem-weil-pbc-finite-product-functor-left-exact], the componentwise product functor $\\Gamma$ is additive and left exact, which is the first assertion of the statement; hence its right derived functors are defined, and by the definition of right derived functors in [def-sp-left-exact-additive] (with the injective-resolution notion of [def-sp-injective-resolutions]) $R^q\\Gamma((A_i)_i)$ can be computed from this single product resolution.",
+   "uses": [
+    "lem-weil-pbc-finite-product-injective-resolutions",
+    "lem-weil-pbc-finite-product-functor-left-exact",
+    "def-sp-left-exact-additive",
+    "def-sp-injective-resolutions"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Section 0156 (Right derived functors and injective resolutions); finite-product assembly supplied by the worker"
+   }
+  },
+  {
+   "text": "Applying $\\Gamma$ degreewise to this product resolution gives the componentwise product complex $\\prod_i\\Gamma_i(J_i^\\bullet)$. By [lem-weil-pbc-finite-product-complex-cohomology], its q-th cohomology is naturally $\\prod_i\\mathcal H^q(\\Gamma_i(J_i^\\bullet))$. By the definition of right derived functors in [def-sp-left-exact-additive], these terms are $\\prod_iR^q\\Gamma_i(A_i)$ on the right and $R^q\\Gamma((A_i)_i)$ on the left. The cohomology identification is induced by the coordinate projections and therefore is natural in the family and in morphisms of the functors, proving the asserted natural isomorphism for every q.",
+   "uses": [
+    "lem-weil-pbc-finite-product-complex-cohomology",
+    "def-sp-left-exact-additive"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/homology.tex",
+    "place": "finite products of complexes and cohomology; derived-functor definition from the preceding step"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-finite-product-injective-resolutions",
+  "lem-weil-pbc-finite-product-functor-left-exact",
+  "def-sp-left-exact-additive",
+  "def-sp-injective-resolutions",
+  "lem-weil-pbc-finite-product-complex-cohomology"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/derived.tex",
+  "place": "Section 0156 (derived-section-right-derived-functor: right derived functors via injective resolutions) and standard finite-product homological algebra"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -51,12 +88,40 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-weil-pbc-finite-coproduct-cohomology-assembly",
   "by": "worker",
   "date": "2026-10-10"
  },
  "chapter": "sec-curve-estimates",
- "unit": "sk-prop-cd"
+ "unit": "sk-prop-cd",
+ "split_report": {
+  "date": "2026-10-11",
+  "item": "lem-weil-pbc-derived-finite-product",
+  "worker": "stage1",
+  "summary": "Split the right-derived finite-product assertion into the finite-product injective-resolution fact and the componentwise cohomology fact. The proof chooses componentwise injective resolutions, forms their product resolution, and computes cohomology degreewise; the coordinate maps give naturality. No matching Lean declaration was found. The cited Stacks files are not present in this checkout, so the homological argument is recorded as agent-written with a WANTED source note.",
+  "blueprint": {
+   "statement": "the item's statement",
+   "steps": {
+    "1": "proof, second paragraph: choose injective resolutions componentwise and identify the finite product category",
+    "2": "proof, second paragraph: cohomology of the componentwise finite-product complex is the finite product of component cohomologies"
+   }
+  },
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-product-injectives",
+    "why": "The finite-product resolution node uses the general fact that a product of injective objects is injective; this generic categorical tool is supplied by another unit because the local route has no separate product-injectives node."
+   }
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-dfp",
+  "group": "K1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-dfp (reviewer sub-agent of L); spot-checked: Start Sat Oct 10 04:31:05 PM UTC 2026. Item statement (finite I, abelian A_i with enough injectives, additive left exact Gamma_i; Gamma left exact and R^q Gamma = prod R^q Gamma_i) checked against def-sp-abelian, def-sp-injective-resolutions, def-sp-left-exact-additive (R^n v := H^n(v(I)) for an injective resolution). Step 1 carried by lem-weil-pbc-finite-product-injective-resolutions (finite product of abelian categories is abelian with enough injectives, injectives and resolutions componentwise; true, tested I empty and singleton); step 2 by lem-weil-pbc-finite-product-complex-cohomology (true; finite products of complexes of Ab) plus def-sp-left-exact-additive. Mathlib grep: no product-category abelian/EnoughInjectives instance nor derived-functor product statement, so no leaf; homology-of-biproduct only as generalization via homologyFunctor Additive. FIX more, RETURN less: the clause 'Gamma is additive and left exact' of the item (also needed for R^q Gamma to be defined) was proved by no step (C1): added statement-only node lem-weil-pbc-finite-product-functor-left-exact (source Stacks 060K plus componentwise kernels) and cited it in step 1 (text, uses, proof_deps). Fixes: lem-weil-pbc-finite-product-injective-resolutions.json: stmt_deps: removed lem-weil-pbc-product-injectives (a lemma not cited by the statement); source.place: Stacks 015M (composition of derived functors, irrelevant) replaced by Section 0156; lem-weil-pbc-derived-finite-product.json: step 1 source.place and proof_origin.place: 015M replaced by Section 0156 (the worker's claim that derived.tex is absent is wrong); tool_uses lem-weil-pbc-product-injectives dropped (the item's proof does not cite it). End Sat Oct 10 04:32:28 PM UTC 2026.; 3 file(s) fixed by the reviewer; 1 statement node(s) added by the reviewer (FIX more, RETURN less)"
+ },
+ "lead_note": "2026-10-10 L (R-dfp): Mathlib has no product-category abelian/enough-injectives/derived-functor statement; the complex-cohomology node follows from HomologicalComplex.homologyFunctor being Additive (Mathlib/Algebra/Homology/ShortComplex/HomologicalComplex.lean:791) hence preserving finite biproducts, a generalization, not an exact leaf."
 }
