@@ -200,7 +200,10 @@ class Dag:
         return i
 
     def deps(self, i: str, which: str) -> list[str]:
-        return [self.resolve(c) for c in deps_of(self.live[i], which)]
+        d = self.live.get(i)
+        if d is None:   # a cited node whose file is missing: check_dag.py reports it as "deps: ... no such node" (never a crash)
+            return []
+        return [self.resolve(c) for c in deps_of(d, which)]
 
     def stated(self, i: str) -> bool:
         d = self.live.get(i)

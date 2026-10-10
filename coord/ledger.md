@@ -1658,3 +1658,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 14:46 L: returned deliver/E1/lem-sc-finite-duality (reviewer RETURN: 1. B4: lem-sc-finite-duality-trace: the statement is plain text with stray backslashes and no math delimiters ('Omega^1_)
 - 14:46 L: merged deliver/H1/lemma-weil-pbc-etale-cohomology-continuity (reviewer PASS; first push; new nodes: 0)
 - 14:46 L: merged deliver/K1/lem-sc-p1-graded-resolution (reviewer FIX; first push; new nodes: 4)
+- 14:46 L: check_dag KeyError on a missing cited node fixed (dag_queue.Dag.deps); launcher's report; STATE line
