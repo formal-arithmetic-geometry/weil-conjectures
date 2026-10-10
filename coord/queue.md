@@ -1,8 +1,8 @@
 # Work queue
 
-916 items; claim with `tools/claim.py next <group> [--stage N]`.
+917 items; claim with `tools/claim.py next <group> [--stage N]`.
 
-## Stage 1: nodes to split (325)
+## Stage 1: nodes to split (326)
 
 | node | distance to a target | Lean state on the done branch |
 |---|---|---|
@@ -14,8 +14,8 @@
 | `lem-weil-pbc-tensor-finite-type-limit` | 2006 | none |
 | `lem-weil-pbc-constant-sheaf-set-sections-connected-natural` | 2007 | none |
 | `lem-weil-pbc-etale-geometric-fibre-inverse-image-constant` | 2007 | none |
-| `lem-weil-pbc-affine-etale-site-base-change` | 2011 | none |
 | `lem-sc-noetherian-topological-cohomology-vanishing` | 2012 | none |
+| `lem-weil-pbc-sets-etale-inverse-image-exact` | 2012 | none |
 | `lem-sc-affine-finite-projective-prime-membership` | 2013 | none |
 | `lem-sc-separated-affine-function-field-surjective` | 2013 | none |
 | `lem-sc-affine-standard-cover-finite-presentation-flat` | 2014 | none |
@@ -32,9 +32,8 @@
 | `lem-weil-pbc-hypercohomology-e1-pullback-functorial` | 3006 | none |
 | `lem-weil-pbc-etale-sheaf-clopen-product` | 3007 | none |
 | `lem-exc-finite-galois-sections-descent` | 3008 | none |
-| `lem-weil-pbc-cohomology-over-object-localization` | 3009 | none |
+| `lem-weil-pbc-site-restriction-injectives` | 3010 | none |
 | `lem-exc-etale-open-subgroup-fixed-field` | 3011 | none |
-| `def-sc-scheme-tangent-space` | 3012 | none |
 | `lem-sc-positive-dimensional-locally-algebraic-closed-points` | 3012 | none |
 | `lem-sc-quasi-finite-points-open` | 3012 | none |
 | `lem-pc-grothendieck-ss-double-complex-model` | 3013 | none |
@@ -43,6 +42,8 @@
 | `lem-sc-p1-ext-yoneda-associativity` | 3013 | none |
 | `lem-sc-p1-ext-yoneda-functoriality` | 3013 | none |
 | `lem-sc-rational-point-tangent-derivation-identification` | 3013 | none |
+| `lem-sc-tangent-map-linear` | 3013 | none |
+| `lem-sc-tangent-space-vector-space` | 3013 | none |
 | `lem-weil-pbc-ringed-site-module-sheafification-exact` | 3013 | none |
 | `lem-pc-field-extension-quasi-compact` | 3014 | none |
 | `lem-pc-noetherian-derived-direct-image-right-adjoint` | 3014 | none |
@@ -928,7 +929,7 @@
 | `lem-weil-pbc-p1-field-dimension-one` | 4 | state |
 | `lem-weil-pbc-projective-space-zero-isomorphism` | 4 | state |
 
-Not open yet: 342 nodes that wait for stage 1, 1212 nodes that wait for a statement dependency.
+Not open yet: 343 nodes that wait for stage 1, 1215 nodes that wait for a statement dependency.
 
 ## Stage 3: modules to prove (0)
 
