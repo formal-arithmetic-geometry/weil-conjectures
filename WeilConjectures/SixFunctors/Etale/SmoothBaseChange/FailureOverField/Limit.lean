@@ -520,4 +520,377 @@ lemma Etale.homologyFunctor_map_overTargetTransition {X Y Tᵢ Tⱼ : Scheme.{u}
 
 end Conversion
 
+section Abstract
+
+/-- An element of a module which survives at every stage of a cofiltered system survives at the
+limit, when the sources of the comparison maps form a filtered colimit up to surjectivity and the
+targets are a filtered colimit up to injectivity. -/
+lemma Etale.not_mem_range_of_forall_not_mem_range {R : Type*} [Ring R] {I : Type*} [Category I]
+    [IsCofiltered I] (A B : I → ModuleCat R) (Al Bl B₀ : ModuleCat R) (φ : ∀ i, A i ⟶ B i)
+    (φl : Al ⟶ Bl) (tA : ∀ {i j : I}, (j ⟶ i) → (A i ⟶ A j)) (tB : ∀ {i j : I}, (j ⟶ i) → (B i ⟶ B j))
+    (sA : ∀ i, A i ⟶ Al) (sB : ∀ i, B i ⟶ Bl) (τ : ∀ i, B₀ ⟶ B i) (τl : B₀ ⟶ Bl)
+    (hτ : ∀ {i j : I} (f : j ⟶ i), τ i ≫ tB f = τ j) (hτl : ∀ i, τ i ≫ sB i = τl)
+    (hφ : ∀ {i j : I} (f : j ⟶ i), φ i ≫ tB f = tA f ≫ φ j)
+    (hφl : ∀ i, φ i ≫ sB i = sA i ≫ φl) (hsA : ∀ {i j : I} (f : j ⟶ i), tA f ≫ sA j = sA i)
+    (hA : ∀ y : Al, y ∈ ⨆ i, LinearMap.range (sA i).hom)
+    (hB : ∀ (i : I) (b : B i), (sB i).hom b = 0 → ∃ (j : I) (f : j ⟶ i), (tB f).hom b = 0)
+    (ξ : B₀) (hξ : ∀ i, (τ i).hom ξ ∉ Set.range (φ i).hom) :
+    (τl).hom ξ ∉ Set.range φl.hom := by
+  rintro ⟨η, hη⟩
+  have key : ∀ y ∈ ⨆ i, LinearMap.range (sA i).hom, ∃ i y', (sA i).hom y' = y := by
+    intro y hy
+    induction hy using Submodule.iSup_induction' with
+    | mem i y hy => obtain ⟨y', rfl⟩ := hy; exact ⟨i, y', rfl⟩
+    | zero => exact ⟨IsCofiltered.nonempty.some, 0, map_zero _⟩
+    | add y z _ _ hy hz =>
+      obtain ⟨i, y', rfl⟩ := hy
+      obtain ⟨j, z', rfl⟩ := hz
+      refine ⟨IsCofiltered.min i j, (tA (IsCofiltered.minToLeft i j)).hom y' +
+        (tA (IsCofiltered.minToRight i j)).hom z', ?_⟩
+      rw [map_add, ← ModuleCat.comp_apply, ← ModuleCat.comp_apply, hsA, hsA]
+  obtain ⟨i, η', rfl⟩ := key η (hA η)
+  have h0 : (sB i).hom ((φ i).hom η' - (τ i).hom ξ) = 0 := by
+    rw [map_sub, ← ModuleCat.comp_apply, ← ModuleCat.comp_apply, hφl, hτl, ModuleCat.comp_apply,
+      hη, sub_self]
+  obtain ⟨j, f, hf⟩ := hB i _ h0
+  apply hξ j
+  refine ⟨(tA f).hom η', ?_⟩
+  rw [map_sub, sub_eq_zero] at hf
+  rw [← ModuleCat.comp_apply, ← hφ, ModuleCat.comp_apply, hf, ← ModuleCat.comp_apply, hτ]
+
+end Abstract
+
+/-- If a family of morphisms `τᵢ : Mᵢ ⟶ N` of sheaves on `S_ét` is jointly surjective on the
+stalks at all geometric points of `S`, then for `p : X ⟶ S` the pullbacks `p^* τᵢ` are jointly
+surjective on the stalk at every geometric point of `X`, in the sense that every element is a
+sum of elements in their images. -/
+lemma Etale.mem_iSup_range_sheafFiber_map_upperStar {S X : Scheme.{u}} (p : X ⟶ S) (x : X)
+    {I : Type u} (M : I → Sheaf S.smallEtaleTopology (ModuleCat.{u + 1} Λ))
+    {N : Sheaf S.smallEtaleTopology (ModuleCat.{u + 1} Λ)} (τ : ∀ i, M i ⟶ N)
+    (h : ∀ (s : S) (y : ((S.uliftPointSmallEtale s).sheafFiber.obj N : ModuleCat.{u + 1} Λ)),
+      ∃ i y', ((S.uliftPointSmallEtale s).sheafFiber.map (τ i)).hom y' = y)
+    (y : ((X.uliftPointSmallEtale x).sheafFiber.obj (((p)^*[ModuleCat.{u + 1} Λ]).obj N) :
+      ModuleCat.{u + 1} Λ)) :
+    y ∈ ⨆ i, LinearMap.range
+      ((X.uliftPointSmallEtale x).sheafFiber.map (((p)^*[ModuleCat.{u + 1} Λ]).map (τ i))).hom := by
+  have : ∀ Z : Scheme.{u}, LocallySmall.{u + 1} Z.Etale := fun _ ↦ locallySmall_max.{u + 1, u}
+  let σ : ∐ M ⟶ N := Sigma.desc τ
+  -- `σ` is an epimorphism, since it is surjective on all stalks
+  have hepi : ∀ s : S, Epi ((S.uliftPointSmallEtale s).sheafFiber.map σ) := fun s ↦ by
+    rw [ModuleCat.epi_iff_surjective]
+    intro y
+    obtain ⟨i, y', rfl⟩ := h s y
+    refine ⟨((S.uliftPointSmallEtale s).sheafFiber.map (Sigma.ι M i)).hom y', ?_⟩
+    rw [← ModuleCat.comp_apply, ← Functor.map_comp, Sigma.ι_desc]
+  have hQ : IsZero (cokernel σ) := by
+    have : IsIso (0 : cokernel σ ⟶ cokernel σ) := by
+      refine Scheme.isIso_of_isIso_sheafFiber_map _ fun s ↦ ?_
+      have hz : IsZero ((S.uliftPointSmallEtale s).sheafFiber.obj (cokernel σ)) := by
+        refine IsZero.of_epi_eq_zero ((S.uliftPointSmallEtale s).sheafFiber.map (cokernel.π σ)) ?_
+        rw [← cancel_epi ((S.uliftPointSmallEtale s).sheafFiber.map σ), ← Functor.map_comp,
+          cokernel.condition, Functor.map_zero, comp_zero]
+      exact ⟨0, hz.eq_of_src _ _, hz.eq_of_src _ _⟩
+    exact (IsZero.iff_id_eq_zero _).2 (by rw [← IsIso.hom_inv_id (0 : cokernel σ ⟶ cokernel σ), zero_comp])
+  have : Epi σ := Preadditive.epi_of_isZero_cokernel σ hQ
+  have : Epi ((X.uliftPointSmallEtale x).sheafFiber.map (((p)^*[ModuleCat.{u + 1} Λ]).map σ)) :=
+    inferInstance
+  obtain ⟨z, rfl⟩ := (ModuleCat.epi_iff_surjective _).1 this y
+  let G := (p)^*[ModuleCat.{u + 1} Λ] ⋙ (X.uliftPointSmallEtale x).sheafFiber
+  have hc : IsColimit (G.mapCocone (Cofan.mk _ (Sigma.ι M))) :=
+    isColimitOfPreserves G (coproductIsCoproduct M)
+  -- the images of the coprojections span the stalk of the coproduct
+  have hz : z ∈ ⨆ i, LinearMap.range (G.map (Sigma.ι M i)).hom := by
+    let P := ⨆ i, LinearMap.range (G.map (Sigma.ι M i)).hom
+    have hq : ModuleCat.ofHom P.mkQ = 0 := by
+      refine hc.hom_ext fun ⟨i⟩ ↦ ?_
+      ext w
+      simp only [Functor.mapCocone_ι_app, Cofan.mk_ι_app, ModuleCat.hom_comp,
+        ModuleCat.hom_ofHom, LinearMap.coe_comp, Function.comp_apply, Limits.comp_zero,
+        ModuleCat.hom_zero, LinearMap.zero_apply, Submodule.mkQ_apply,
+        Submodule.Quotient.mk_eq_zero]
+      exact (Submodule.Quotient.mk_eq_zero P).2
+        (Submodule.mem_iSup_of_mem i (LinearMap.mem_range_self _ w))
+    have := congrArg (fun f ↦ f.hom z) hq
+    simpa using this
+  refine (?_ : Submodule.map ((X.uliftPointSmallEtale x).sheafFiber.map
+    (((p)^*[ModuleCat.{u + 1} Λ]).map σ)).hom (⨆ i, LinearMap.range (G.map (Sigma.ι M i)).hom) ≤ _)
+    (Submodule.mem_map_of_mem hz)
+  rw [Submodule.map_iSup]
+  refine iSup_mono fun i ↦ ?_
+  rw [← LinearMap.range_comp, ← ModuleCat.hom_comp]
+  change LinearMap.range ((X.uliftPointSmallEtale x).sheafFiber.map
+    (((p)^*[ModuleCat.{u + 1} Λ]).map (Sigma.ι M i)) ≫ _).hom ≤ _
+  rw [← Functor.map_comp, ← Functor.map_comp, Sigma.ι_desc]
+
+section StageFunctor
+
+variable {X S T Y : Scheme.{u}} {p : X ⟶ S} {g : T ⟶ S} {e : Y ⟶ T} {h : Y ⟶ X}
+
+/-- The base change of schemes over `T` to schemes over `Y`, for a Cartesian square `sq` with
+base `g : T ⟶ S`: a scheme `U` over `T` is sent to `U ×_S X`, mapping to `Y = T ×_S X` through
+the Cartesian square. -/
+@[simps]
+noncomputable def Etale.stageFunctor (sq : IsPullback e h g p) : Over T ⥤ Over Y where
+  obj U := Over.mk (sq.lift (pullback.fst (U.hom ≫ g) p ≫ U.hom) (pullback.snd (U.hom ≫ g) p)
+    (by rw [Category.assoc]; exact pullback.condition))
+  map {U V} φ := Over.homMk (pullback.map _ _ _ _ φ.left (𝟙 X) (𝟙 S)
+      (by rw [Category.comp_id, ← Category.assoc, Over.w]) (by simp))
+    (sq.hom_ext (by simp [Over.w φ]) (by simp))
+  map_id U := by ext1; exact pullback.hom_ext (by simp) (by simp)
+  map_comp φ ψ := by ext1; exact pullback.hom_ext (by simp) (by simp)
+
+/-- The square relating the base changes of a morphism `φ : U ⟶ V` of schemes over `T` is
+Cartesian. -/
+lemma Etale.isPullback_stageFunctor_map (sq : IsPullback e h g p) {U V : Over T} (φ : U ⟶ V) :
+    IsPullback ((Etale.stageFunctor sq).map φ).left (pullback.fst (U.hom ≫ g) p)
+      (pullback.fst (V.hom ≫ g) p) φ.left := by
+  refine IsPullback.flip (IsPullback.of_bot ?_ (by simp) (IsPullback.of_hasPullback _ _))
+  have hb : ((Etale.stageFunctor sq).map φ).left ≫ pullback.snd (V.hom ≫ g) p =
+      pullback.snd (U.hom ≫ g) p := by simp
+  rw [hb, ← Category.assoc, Over.w φ]
+  exact IsPullback.of_hasPullback _ _
+
+instance (sq : IsPullback e h g p) {U V : Over T} (φ : U ⟶ V) [IsAffineHom φ.left] :
+    IsAffineHom ((Etale.stageFunctor sq).map φ).left :=
+  MorphismProperty.of_isPullback (P := @IsAffineHom) (Etale.isPullback_stageFunctor_map sq φ).flip
+    inferInstance
+
+/-- The base change of a cofiltered limit of schemes over `T` is a limit. -/
+noncomputable def Etale.isLimitStageFunctorMapCone (sq : IsPullback e h g p) {I : Type*}
+    [Category I] [IsCofiltered I] {D : I ⥤ Over T} (c : Cone D)
+    (hc : IsLimit ((Over.forget T).mapCone c)) :
+    IsLimit ((Over.forget Y).mapCone ((Etale.stageFunctor sq).mapCone c)) :=
+  have : IsConnected I := IsCofiltered.isConnected I
+  isLimitOfIsPullbackOfIsConnected
+    (F := (D ⋙ Etale.stageFunctor sq) ⋙ Over.forget Y) (G := D ⋙ Over.forget T)
+    { app i := pullback.fst ((D.obj i).hom ≫ g) p
+      naturality i j f := by simp }
+    _ ((Over.forget T).mapCone c)
+    { hom := pullback.fst (c.pt.hom ≫ g) p
+      w j := by simp }
+    (fun i ↦ Etale.isPullback_stageFunctor_map sq (c.π.app i)) hc
+
+end StageFunctor
+
+section SourceIso
+
+variable {X S T : Scheme.{u}}
+
+/-- The identification of the degree-`q` homology of `p^* R(W ≫ g)_*(W^*(G[0]))` with the pullback
+along `p` of the higher direct image `R^q(W ≫ g)_*(W^* G)`. -/
+noncomputable def Etale.sourceStageIso (p : X ⟶ S) (g : T ⟶ S)
+    (G : Sheaf T.smallEtaleTopology (ModuleCat.{u + 1} Λ)) (q : ℤ) (W : Over T) :
+    (DerivedCategory.Plus.homologyFunctor _ q).obj (D+((p)^*[ModuleCat.{u + 1} Λ]).obj
+        (R+((W.hom ≫ g)_*[ModuleCat.{u + 1} Λ]).obj (D+((W.hom)^*[ModuleCat.{u + 1} Λ]).obj
+          ((DerivedCategory.Plus.singleFunctor _ 0).obj G)))) ≅
+      ((p)^*[ModuleCat.{u + 1} Λ]).obj
+        (Etale.higherDirectImage Λ (W.hom ≫ g) q (((W.hom)^*[ModuleCat.{u + 1} Λ]).obj G)) :=
+  (DerivedCategory.Plus.homologyFunctor _ q).mapIso (D+((p)^*[ModuleCat.{u + 1} Λ]).mapIso
+      (R+((W.hom ≫ g)_*[ModuleCat.{u + 1} Λ]).mapIso
+        ((((W.hom)^*[ModuleCat.{u + 1} Λ]).mapDerivedCategoryPlusSingleFunctor 0).app G))) ≪≫
+    (((p)^*[ModuleCat.{u + 1} Λ]).mapDerivedCategoryPlusHomologyFunctorIso q).symm.app
+      (R+((W.hom ≫ g)_*[ModuleCat.{u + 1} Λ]).obj ((DerivedCategory.Plus.singleFunctor _ 0).obj
+        (((W.hom)^*[ModuleCat.{u + 1} Λ]).obj G)))
+
+/-- The transition maps `AlgebraicGeometry.Etale.overLowerStarTransition`, pulled back along `p`,
+are in degree `q` the pullbacks of the maps `AlgebraicGeometry.Etale.higherDirectImageOverMap`. -/
+lemma Etale.sourceStageIso_naturality (p : X ⟶ S) (g : T ⟶ S)
+    (G : Sheaf T.smallEtaleTopology (ModuleCat.{u + 1} Λ)) (q : ℤ) {U V : Over T} (φ : U ⟶ V) :
+    (DerivedCategory.Plus.homologyFunctor _ q).map (D+((p)^*[ModuleCat.{u + 1} Λ]).map
+        (Etale.overLowerStarTransition Λ g V.hom U.hom φ.left (Over.w φ)
+          ((DerivedCategory.Plus.singleFunctor _ 0).obj G))) ≫
+      (Etale.sourceStageIso Λ p g G q U).hom =
+    (Etale.sourceStageIso Λ p g G q V).hom ≫
+      ((p)^*[ModuleCat.{u + 1} Λ]).map (Etale.higherDirectImageOverMap Λ g G q φ) := by
+  have E := Etale.homologyFunctor_map_overLowerStarTransition Λ g G q φ
+  have n₁ := natTrans_app_comp_map_map (P₁ := D+((p)^*[ModuleCat.{u + 1} Λ]))
+    (P₂ := DerivedCategory.Plus.homologyFunctor _ q)
+    (Q₁ := DerivedCategory.Plus.homologyFunctor _ q) (Q₂ := (p)^*[ModuleCat.{u + 1} Λ])
+    (((p)^*[ModuleCat.{u + 1} Λ]).mapDerivedCategoryPlusHomologyFunctorIso q).inv
+    (X := R+((V.hom ≫ g)_*[ModuleCat.{u + 1} Λ]).obj (D+((V.hom)^*[ModuleCat.{u + 1} Λ]).obj
+      ((DerivedCategory.Plus.singleFunctor _ 0).obj G)))
+    (Y := R+((U.hom ≫ g)_*[ModuleCat.{u + 1} Λ]).obj ((DerivedCategory.Plus.singleFunctor _ 0).obj
+      (((U.hom)^*[ModuleCat.{u + 1} Λ]).obj G)))
+    (Etale.overLowerStarTransition Λ g V.hom U.hom φ.left (Over.w φ)
+          ((DerivedCategory.Plus.singleFunctor _ 0).obj G) ≫
+      R+((U.hom ≫ g)_*[ModuleCat.{u + 1} Λ]).map
+        ((((U.hom)^*[ModuleCat.{u + 1} Λ]).mapDerivedCategoryPlusSingleFunctor 0).hom.app G))
+  have n₂ := natTrans_app_comp_map_map (P₁ := D+((p)^*[ModuleCat.{u + 1} Λ]))
+    (P₂ := DerivedCategory.Plus.homologyFunctor _ q)
+    (Q₁ := DerivedCategory.Plus.homologyFunctor _ q) (Q₂ := (p)^*[ModuleCat.{u + 1} Λ])
+    (((p)^*[ModuleCat.{u + 1} Λ]).mapDerivedCategoryPlusHomologyFunctorIso q).inv
+    (X := R+((V.hom ≫ g)_*[ModuleCat.{u + 1} Λ]).obj (D+((V.hom)^*[ModuleCat.{u + 1} Λ]).obj
+      ((DerivedCategory.Plus.singleFunctor _ 0).obj G)))
+    (Y := R+((V.hom ≫ g)_*[ModuleCat.{u + 1} Λ]).obj ((DerivedCategory.Plus.singleFunctor _ 0).obj
+      (((V.hom)^*[ModuleCat.{u + 1} Λ]).obj G)))
+    (R+((V.hom ≫ g)_*[ModuleCat.{u + 1} Λ]).map
+        ((((V.hom)^*[ModuleCat.{u + 1} Λ]).mapDerivedCategoryPlusSingleFunctor 0).hom.app G))
+  simp only [Etale.sourceStageIso, Iso.trans_hom, Functor.mapIso_hom, Iso.app_hom, Iso.symm_hom]
+  rw [← Category.assoc, ← Functor.map_comp, ← Functor.map_comp, n₁,
+    Functor.map_comp (DerivedCategory.Plus.homologyFunctor _ q), E, Functor.map_comp, ← Category.assoc, ← n₂]
+
+end SourceIso
+
+/-- The stalk form of `AlgebraicGeometry.Etale.sourceStageIso_naturality`. -/
+lemma Etale.sheafFiber_map_sourceStageIso_naturality {X S T : Scheme.{u}} (p : X ⟶ S) (g : T ⟶ S)
+    (G : Sheaf T.smallEtaleTopology (ModuleCat.{u + 1} Λ)) (q : ℤ) {U V : Over T} (φ : U ⟶ V)
+    (x : X) :
+    (DerivedCategory.Plus.homologyFunctor _ q ⋙ (X.uliftPointSmallEtale x).sheafFiber).map
+        (D+((p)^*[ModuleCat.{u + 1} Λ]).map
+          (Etale.overLowerStarTransition Λ g V.hom U.hom φ.left (Over.w φ)
+            ((DerivedCategory.Plus.singleFunctor _ 0).obj G))) ≫
+      (X.uliftPointSmallEtale x).sheafFiber.map (Etale.sourceStageIso Λ p g G q U).hom =
+    (X.uliftPointSmallEtale x).sheafFiber.map (Etale.sourceStageIso Λ p g G q V).hom ≫
+      (X.uliftPointSmallEtale x).sheafFiber.map
+        (((p)^*[ModuleCat.{u + 1} Λ]).map (Etale.higherDirectImageOverMap Λ g G q φ)) := by
+  rw [Functor.comp_map, ← Functor.map_comp, ← Functor.map_comp,
+    Etale.sourceStageIso_naturality]
+
+/-- The stalk form of `AlgebraicGeometry.Etale.homologyFunctor_map_overTargetTransition`. -/
+lemma Etale.sheafFiber_map_overTargetTransition {X Y T Tᵢ Tⱼ : Scheme.{u}} (e : Y ⟶ T)
+    (h : Y ⟶ X) {U V : Over Y} (φ : U ⟶ V) (eᵢ : V.left ⟶ Tᵢ) (eⱼ : U.left ⟶ Tⱼ)
+    (πᵢ : Tᵢ ⟶ T) (πⱼ : Tⱼ ⟶ T) (ρ : Tⱼ ⟶ Tᵢ) (waᵢ : V.hom ≫ e = eᵢ ≫ πᵢ)
+    (waⱼ : U.hom ≫ e = eⱼ ≫ πⱼ) (wa : φ.left ≫ eᵢ = eⱼ ≫ ρ) (wh : φ.left ≫ V.hom ≫ h = U.hom ≫ h)
+    (hπ : ρ ≫ πᵢ = πⱼ) (F : Sheaf T.smallEtaleTopology (ModuleCat.{u + 1} Λ)) (q : ℤ) (x : X) :
+    (DerivedCategory.Plus.homologyFunctor _ q ⋙ (X.uliftPointSmallEtale x).sheafFiber).map
+        (Etale.overTargetTransition Λ eᵢ (V.hom ≫ h) eⱼ (U.hom ≫ h) πᵢ πⱼ ρ φ.left wa wh hπ
+          ((DerivedCategory.Plus.singleFunctor _ 0).obj F)) ≫
+      (X.uliftPointSmallEtale x).sheafFiber.map ((DerivedCategory.Plus.homologyFunctor _ q).map
+        (R+((U.hom ≫ h)_*[ModuleCat.{u + 1} Λ]).map
+          (Etale.stageSingleIso Λ e U.hom eⱼ πⱼ waⱼ F).hom)) =
+    (X.uliftPointSmallEtale x).sheafFiber.map ((DerivedCategory.Plus.homologyFunctor _ q).map
+        (R+((V.hom ≫ h)_*[ModuleCat.{u + 1} Λ]).map
+          (Etale.stageSingleIso Λ e V.hom eᵢ πᵢ waᵢ F).hom)) ≫
+      (X.uliftPointSmallEtale x).sheafFiber.map
+        (Etale.higherDirectImageOverMap Λ h (((e)^*[ModuleCat.{u + 1} Λ]).obj F) q φ) := by
+  have E := congrArg (X.uliftPointSmallEtale x).sheafFiber.map
+    (Etale.homologyFunctor_map_overTargetTransition Λ e h φ eᵢ eⱼ πᵢ πⱼ ρ waᵢ waⱼ wa hπ F q)
+  rw [Functor.map_comp, Functor.map_comp] at E
+  exact E
+
+omit [CommRing Λ] in
+/-- Transport of membership in a supremum of ranges along compatible isomorphisms. -/
+lemma Etale.mem_iSup_range_of_comm {R : Type*} [Ring R] {ι : Type*} {A B : ι → ModuleCat R}
+    {Al Bl : ModuleCat R} (s : ∀ i, A i ⟶ Al) (t : ∀ i, B i ⟶ Bl) (θ : ∀ i, A i ⟶ B i)
+    [∀ i, IsIso (θ i)] (θl : Al ≅ Bl) (w : ∀ i, s i ≫ θl.hom = θ i ≫ t i) (y : Al)
+    (hy : θl.hom.hom y ∈ ⨆ i, LinearMap.range (t i).hom) :
+    y ∈ ⨆ i, LinearMap.range (s i).hom := by
+  suffices H : ∀ z ∈ ⨆ i, LinearMap.range (t i).hom,
+      θl.inv.hom z ∈ ⨆ i, LinearMap.range (s i).hom by
+    simpa [← ModuleCat.comp_apply] using H _ hy
+  intro z hz
+  induction hz using Submodule.iSup_induction' with
+  | mem i z hz =>
+    obtain ⟨b, rfl⟩ := hz
+    refine Submodule.mem_iSup_of_mem i ⟨(inv (θ i)).hom b, ?_⟩
+    have hc : inv (θ i) ≫ s i = t i ≫ θl.inv := by
+      rw [← cancel_mono θl.hom, Category.assoc, Category.assoc, Iso.inv_hom_id, Category.comp_id, w,
+        IsIso.inv_hom_id_assoc]
+    rw [← ModuleCat.comp_apply, ← ModuleCat.comp_apply, hc]
+  | zero => simp
+  | add z₁ z₂ _ _ h₁ h₂ => simpa using add_mem h₁ h₂
+
+section Survival
+
+variable {X S T Y : Scheme.{u}} {p : X ⟶ S} {g : T ⟶ S} {e : Y ⟶ T} {h : Y ⟶ X}
+
+/-- The form of `AlgebraicGeometry.Etale.sheafFiber_map_overTargetTransition` for the base changes
+along a morphism `ψ` of schemes over `T`. -/
+lemma Etale.sheafFiber_map_stageTargetTransition (sq : IsPullback e h g p)
+    (F : Sheaf T.smallEtaleTopology (ModuleCat.{u + 1} Λ)) (q : ℤ) (x : X) {U V : Over T}
+    (ψ : U ⟶ V) :
+    (DerivedCategory.Plus.homologyFunctor _ q ⋙ (X.uliftPointSmallEtale x).sheafFiber).map
+        (Etale.overTargetTransition Λ (pullback.fst (V.hom ≫ g) p)
+          (((Etale.stageFunctor sq).obj V).hom ≫ h) (pullback.fst (U.hom ≫ g) p)
+          (((Etale.stageFunctor sq).obj U).hom ≫ h) V.hom U.hom ψ.left
+          ((Etale.stageFunctor sq).map ψ).left (by simp) (by rw [← Category.assoc, Over.w])
+          (Over.w ψ) ((DerivedCategory.Plus.singleFunctor _ 0).obj F)) ≫
+      (X.uliftPointSmallEtale x).sheafFiber.map ((DerivedCategory.Plus.homologyFunctor _ q).map
+        (R+((((Etale.stageFunctor sq).obj U).hom ≫ h)_*[ModuleCat.{u + 1} Λ]).map
+          (Etale.stageSingleIso Λ e ((Etale.stageFunctor sq).obj U).hom
+            (pullback.fst (U.hom ≫ g) p) U.hom (sq.lift_fst _ _ _) F).hom)) =
+    (X.uliftPointSmallEtale x).sheafFiber.map ((DerivedCategory.Plus.homologyFunctor _ q).map
+        (R+((((Etale.stageFunctor sq).obj V).hom ≫ h)_*[ModuleCat.{u + 1} Λ]).map
+          (Etale.stageSingleIso Λ e ((Etale.stageFunctor sq).obj V).hom
+            (pullback.fst (V.hom ≫ g) p) V.hom (sq.lift_fst _ _ _) F).hom)) ≫
+      (X.uliftPointSmallEtale x).sheafFiber.map
+        (Etale.higherDirectImageOverMap Λ h (((e)^*[ModuleCat.{u + 1} Λ]).obj F) q
+          ((Etale.stageFunctor sq).map ψ)) :=
+  Etale.sheafFiber_map_overTargetTransition Λ e h ((Etale.stageFunctor sq).map ψ)
+    (pullback.fst (V.hom ≫ g) p) (pullback.fst (U.hom ≫ g) p) V.hom U.hom ψ.left
+    (sq.lift_fst _ _ _) (sq.lift_fst _ _ _) (by simp) (by rw [← Category.assoc, Over.w])
+    (Over.w ψ) F q x
+
+omit [CommRing Λ] in
+private lemma mem_range_iff_of_comm' {R : Type*} [Ring R] {A B C D : ModuleCat R}
+    (f : A ⟶ B) (g : C ⟶ D) (s : A ⟶ C) (t : B ⟶ D) [IsIso s] [IsIso t] (w : f ≫ t = s ≫ g)
+    (y : B) : y ∈ Set.range f.hom ↔ t.hom y ∈ Set.range g.hom := by
+  constructor
+  · rintro ⟨z, rfl⟩
+    exact ⟨s.hom z, by rw [← LinearMap.comp_apply, ← ModuleCat.hom_comp, ← w,
+      ModuleCat.hom_comp, LinearMap.comp_apply]⟩
+  · rintro ⟨z, hz⟩
+    refine ⟨(inv s).hom z, ((ConcreteCategory.isIso_iff_bijective t).1 inferInstance).1 ?_⟩
+    change (f ≫ t).hom _ = _
+    rw [w, ← hz, ModuleCat.hom_comp, LinearMap.comp_apply, ← LinearMap.comp_apply s.hom,
+      ← ModuleCat.hom_comp, IsIso.inv_hom_id, ModuleCat.hom_id, LinearMap.id_apply]
+
+/-- The membership of the transported element in the image of the base-change map does not
+depend on how the second side `h'` of the Cartesian square is written. -/
+lemma Etale.mem_range_baseChangeHomologyMap_congr (q : ℤ)
+    (F : Sheaf T.smallEtaleTopology (ModuleCat.{u + 1} Λ)) (x : X)
+    (ξ : ((X.uliftPointSmallEtale x).sheafFiber.obj
+      ((Etale.baseChangeTargetFunctor Λ e h q).obj F) : ModuleCat.{u + 1} Λ))
+    {T' Y' : Scheme.{u}} (π : T' ⟶ T) (e' : Y' ⟶ T') (h₁ h₂ : Y' ⟶ X)
+    (sq₁ : IsPullback e' h₁ (π ≫ g) p) (sq₂ : IsPullback e' h₂ (π ≫ g) p) (a : Y' ⟶ Y)
+    (wa : a ≫ e = e' ≫ π) (wh₁ : a ≫ h = h₁) (wh₂ : a ≫ h = h₂) :
+    ((X.uliftPointSmallEtale x).sheafFiber.map
+        (Etale.baseChangeTargetTransition Λ e h q π a e' h₁ wa wh₁ F)).hom ξ ∈
+      Set.range ((X.uliftPointSmallEtale x).sheafFiber.map
+        (Etale.baseChangeHomologyMap Λ sq₁ q (((π)^*[ModuleCat.{u + 1} Λ]).obj F))).hom ↔
+    ((X.uliftPointSmallEtale x).sheafFiber.map
+        (Etale.baseChangeTargetTransition Λ e h q π a e' h₂ wa wh₂ F)).hom ξ ∈
+      Set.range ((X.uliftPointSmallEtale x).sheafFiber.map
+        (Etale.baseChangeHomologyMap Λ sq₂ q (((π)^*[ModuleCat.{u + 1} Λ]).obj F))).hom := by
+  subst wh₁ wh₂
+  rfl
+
+/-- The membership of the transported element in the image of the base-change map, in terms
+of the derived maps at the sheaf placed in degree `0`. -/
+lemma Etale.mem_range_baseChangeHomologyMap_iff (q : ℤ)
+    (F : Sheaf T.smallEtaleTopology (ModuleCat.{u + 1} Λ)) (x : X)
+    (ξ : ((X.uliftPointSmallEtale x).sheafFiber.obj
+      ((Etale.baseChangeTargetFunctor Λ e h q).obj F) : ModuleCat.{u + 1} Λ))
+    {T' Y' : Scheme.{u}} (π : T' ⟶ T) (e' : Y' ⟶ T') (h' : Y' ⟶ X)
+    (sq' : IsPullback e' h' (π ≫ g) p) (a : Y' ⟶ Y) (wa : a ≫ e = e' ≫ π) (wh : a ≫ h = h') :
+    ((X.uliftPointSmallEtale x).sheafFiber.map
+        (Etale.baseChangeTargetTransition Λ e h q π a e' h' wa wh F)).hom ξ ∈
+      Set.range ((X.uliftPointSmallEtale x).sheafFiber.map
+        (Etale.baseChangeHomologyMap Λ sq' q (((π)^*[ModuleCat.{u + 1} Λ]).obj F))).hom ↔
+    ((X.uliftPointSmallEtale x).sheafFiber.map ((DerivedCategory.Plus.homologyFunctor _ q).map
+        (Etale.targetTransitionPlus Λ e h π a e' h' wa wh
+          ((DerivedCategory.Plus.singleFunctor _ 0).obj F)))).hom ξ ∈
+      Set.range ((X.uliftPointSmallEtale x).sheafFiber.map
+        ((DerivedCategory.Plus.homologyFunctor _ q).map
+          ((Etale.baseChange (ModuleCat.{u + 1} Λ) sq'.toCommSq).app
+            (D+((π)^*[ModuleCat.{u + 1} Λ]).obj
+              ((DerivedCategory.Plus.singleFunctor _ 0).obj F))))).hom := by
+  have n := natTrans_app_comp_map_map (P₁ := R+((π ≫ g)_*[ModuleCat.{u + 1} Λ]))
+    (P₂ := D+((p)^*[ModuleCat.{u + 1} Λ])) (Q₁ := D+((e')^*[ModuleCat.{u + 1} Λ]))
+    (Q₂ := R+((h')_*[ModuleCat.{u + 1} Λ])) (Etale.baseChange (ModuleCat.{u + 1} Λ) sq'.toCommSq)
+    (X := D+((π)^*[ModuleCat.{u + 1} Λ]).obj ((DerivedCategory.Plus.singleFunctor _ 0).obj F))
+    (Y := (DerivedCategory.Plus.singleFunctor _ 0).obj (((π)^*[ModuleCat.{u + 1} Λ]).obj F))
+    ((((π)^*[ModuleCat.{u + 1} Λ]).mapDerivedCategoryPlusSingleFunctor 0).hom.app F)
+  rw [Etale.baseChangeTargetTransition_eq, Etale.baseChangeHomologyMap_eq_homologyFunctor_map,
+    Functor.map_comp, Functor.map_comp, ModuleCat.hom_comp, LinearMap.comp_apply]
+  symm
+  refine mem_range_iff_of_comm' _ _
+    ((X.uliftPointSmallEtale x).sheafFiber.map ((DerivedCategory.Plus.homologyFunctor _ q).map
+      (D+((p)^*[ModuleCat.{u + 1} Λ]).map (R+((π ≫ g)_*[ModuleCat.{u + 1} Λ]).map
+        ((((π)^*[ModuleCat.{u + 1} Λ]).mapDerivedCategoryPlusSingleFunctor 0).hom.app F)))))
+    _ ?_ _
+  rw [← Functor.map_comp, ← Functor.map_comp, ← Functor.map_comp, ← Functor.map_comp, n]
+
+end Survival
+
 end AlgebraicGeometry
