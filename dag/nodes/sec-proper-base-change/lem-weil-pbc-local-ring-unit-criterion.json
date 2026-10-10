@@ -1,0 +1,80 @@
+{
+ "id": "lem-weil-pbc-local-ring-unit-criterion",
+ "kind": "statement",
+ "title": "Units are the complement of the maximal ideal in a local ring",
+ "statement": "Let $R$ be a commutative local ring [def-weil-pbc-depth], meaning that it has exactly one maximal ideal $\\mathfrak m$. For every $x\\in R$, one has $x\\notin\\mathfrak m$ if and only if $x$ is a unit of $R$ (there exists $y\\in R$ with $xy=1$).",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Tag 00E9, lemma-characterize-local-ring, equivalence (1) and (3)"
+ },
+ "stmt_deps": ["def-weil-pbc-depth"],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "in a local commutative ring an element is a unit if and only if it is outside the maximal ideal",
+   "results": "IsLocalRing.notMem_maximalIdeal, IsLocalRing.mem_maximalIdeal (Mathlib.RingTheory.LocalRing.MaximalIdeal.Basic)",
+   "date": "2026-10-10",
+   "verdict": "match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "IsLocalRing isUnit iff not in maximalIdeal",
+   "results": "IsLocalRing.notMem_maximalIdeal (Mathlib.RingTheory.LocalRing.MaximalIdeal.Basic)",
+   "date": "2026-10-10",
+   "verdict": "match"
+  },
+  {
+   "tool": "grep",
+   "query": "rg -n notMem_maximalIdeal Mathlib/RingTheory/LocalRing/MaximalIdeal/Basic.lean; sed -n 75,88p same file",
+   "results": "line 83: theorem notMem_maximalIdeal {x : R} : x ∉ maximalIdeal R ↔ IsUnit x; read lines 79–84",
+   "date": "2026-10-10",
+   "verdict": "match"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "IsLocalRing.notMem_maximalIdeal",
+  "file": "Mathlib/RingTheory/LocalRing/MaximalIdeal/Basic.lean",
+  "line": 83,
+  "how": "specializes in one line: apply to the commutative local ring R; maximalIdeal R is its unique maximal ideal. Declaration and docstring read at lines 79–84 of Mathlib/RingTheory/LocalRing/MaximalIdeal/Basic.lean; theorem at line 83."
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-local-ring-colimit-essentially-finite-type-over-z",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-finite-etale-lifting",
+   "place": "step 7 of its split (source: Lemma 0GS2, proof: the essential-surjectivity paragraphs)",
+   "via": [
+    "lem-weil-pbc-local-ring-colimit-essentially-finite-type-over-z",
+    "lem-weil-pbc-limit-tower-essentially-finite-presentation",
+    "lem-weil-pbc-criterion-flatness-fibre",
+    "lem-weil-pbc-smooth-retract-standard-smooth",
+    "lem-weil-pbc-popescu-delocalize-base",
+    "lem-weil-pbc-popescu-reduce-to-field",
+    "lem-weil-pbc-popescu-smoothing",
+    "lem-weil-pbc-henselian-pair-approximation",
+    "lem-weil-pbc-finite-etale-lifting-approximation",
+    "lem-weil-pbc-finite-etale-lifting-essential-surjectivity"
+   ]
+  },
+  "same_as": []
+ }
+}
