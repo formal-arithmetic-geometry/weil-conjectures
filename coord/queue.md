@@ -1,8 +1,8 @@
 # Work queue
 
-904 items; claim with `tools/claim.py next <group> [--stage N]`.
+903 items; claim with `tools/claim.py next <group> [--stage N]`.
 
-## Stage 1: nodes to split (261)
+## Stage 1: nodes to split (259)
 
 | node | distance to a target | Lean state on the done branch |
 |---|---|---|
@@ -14,22 +14,22 @@
 | `lem-sc-mayer-vietoris-ringed-space` | 2017 | none |
 | `lem-weil-pbc-cartesian-eilenberg-functorial` | 3007 | none |
 | `lem-pc-kflat-stalk-criterion` | 3013 | none |
+| `lem-pc-derived-sections-pushforward-comparison` | 3014 | none |
+| `lem-pc-unbounded-derived-functor-cohomological-bound` | 3014 | none |
 | `lem-pc-derived-qcoh-compact-generation` | 3015 | none |
+| `lem-sc-derived-open-restriction-adjunction-exact` | 3015 | none |
 | `lem-sc-finite-affine-derived-equivalence` | 3015 | none |
 | `lem-sc-finite-pushforward-derived-hom-qcoherent` | 3015 | none |
 | `lem-sc-p1-ext-connecting-yoneda` | 3015 | none |
 | `lem-sc-smooth-proper-diagonal-tensor-formula` | 3015 | none |
 | `lem-sc-bounded-above-finite-free-hom-acyclic` | 3016 | none |
 | `lem-sc-bounded-below-injective-resolution` | 3016 | none |
-| `lem-sc-koszul-regular-immersion-derived-hom` | 3016 | none |
 | `def-pc-compactly-generated` | 3017 | none |
 | `def-sc-perfect-closed-immersion` | 3017 | none |
 | `lem-pc-compact-generators-build-objects` | 3017 | none |
 | `lem-pc-compact-hom-hocolim` | 3017 | none |
-| `lem-pc-derived-sections-pushforward-comparison` | 3017 | none |
 | `lem-pc-pre-derived-adjoint-functors-general` | 3017 | none |
-| `lem-pc-unbounded-derived-functor-cohomological-bound` | 3017 | none |
-| `lem-sc-derived-open-restriction-adjunction-exact` | 3017 | none |
+| `lem-sc-koszul-regular-sequence-dual-complex` | 3017 | none |
 | `lem-sc-qcoh-acyclic-derived-pushforward-cohomology` | 3017 | none |
 | `lem-sc-standard-smooth-affine-diagonal-generators` | 3017 | none |
 | `lem-sc-standard-smooth-local-relative-dimension` | 3017 | none |
@@ -49,12 +49,11 @@
 | `thm-pc-hilb-curves` | 4009 | rests_on_sorry |
 | `lem-pc-ideal-sheaf-comap-affine-extension` | 4010 | none |
 | `lem-pc-universal-adjoint-section` | 4010 | rests_on_sorry |
-| `lem-pc-zero-scheme-recd` | 4010 | rests_on_sorry |
 | `lem-pc-affine-qcoh-derived-equivalence` | 4011 | none |
-| `lem-pc-derived-direct-image-direct-sums` | 4011 | none |
 | `lem-pc-derived-module-free-generation` | 4011 | none |
 | `lem-pc-derived-pullback-tensor-qcoh` | 4011 | none |
 | `lem-pc-projection-locality` | 4011 | none |
+| `lem-pc-zero-scheme-adjunction-base-change` | 4011 | none |
 | `lem-pc-zero-scheme-pullback-full-local-coefficient` | 4011 | none |
 | `lem-pc-flat-base-change-cohom` | 5008 | rests_on_sorry |
 | `lem-pc-picard-functor-agrees-sc` | 5008 | none |
@@ -71,7 +70,6 @@
 | `lem-pc-kflat-resolution` | 5012 | none |
 | `lem-sp-page-induction` | 6001 | none |
 | `def-sp-convergence` | 6002 | none |
-| `def-sp-exact-couple` | 6002 | none |
 | `lem-sp-couple-morphism` | 6002 | none |
 | `lem-sp-kinjective-computes` | 6002 | none |
 | `pqf-lem-proper-basic` | 6002 | none |
@@ -268,7 +266,7 @@
 | `lem-pur-rhom-well-defined` | - | none |
 | `lem-zl-noether-normalization-dimension` | - | none |
 
-## Stage 2: nodes to state (643)
+## Stage 2: nodes to state (644)
 
 | node | distance to Mathlib | kind |
 |---|---|---|
@@ -361,6 +359,7 @@
 | `lem-pc-separable-polynomial-alg-closed-quotient-product` | 1 | state |
 | `lem-pc-zero-scheme-ideal-local` | 1 | state |
 | `lem-pc-zero-scheme-locally-principal` | 1 | state |
+| `lem-pc-zero-scheme-recd` | 1 | state |
 | `lem-pc-zero-scheme-zero-iff` | 1 | state |
 | `lem-sc-affine-cap-section-open-algebra` | 1 | state |
 | `lem-sc-affine-finite-module-free-locus` | 1 | state |
@@ -916,7 +915,7 @@
 | `lem-weil-pbc-p1-field-dimension-one` | 4 | state |
 | `lem-weil-pbc-projective-space-zero-isomorphism` | 4 | state |
 
-Not open yet: 1338 nodes that wait for a statement dependency, 291 nodes that wait for stage 1.
+Not open yet: 1341 nodes that wait for a statement dependency, 289 nodes that wait for stage 1.
 
 ## Stage 3: modules to prove (0)
 
