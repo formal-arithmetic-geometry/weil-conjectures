@@ -1,8 +1,8 @@
 # Work queue
 
-913 items; claim with `tools/claim.py next <group> [--stage N]`.
+911 items; claim with `tools/claim.py next <group> [--stage N]`.
 
-## Stage 1: nodes to split (315)
+## Stage 1: nodes to split (311)
 
 | node | distance to a target | Lean state on the done branch |
 |---|---|---|
@@ -15,7 +15,6 @@
 | `lem-weil-pbc-sets-etale-inverse-image-constant-sheaf` | 2008 | none |
 | `lem-sc-noetherian-topological-cohomology-vanishing` | 2012 | none |
 | `lem-weil-pbc-sets-etale-inverse-image-exact` | 2012 | none |
-| `lem-sc-ample-finite-affine-cover` | 2014 | none |
 | `lem-sc-ample-proj-local-chart` | 2014 | none |
 | `lem-sc-boundary-cech-compatibility` | 2014 | none |
 | `lem-sc-dvr-valuation-arithmetic` | 2014 | none |
@@ -26,7 +25,6 @@
 | `lem-sc-dvr-nonnegative-valuation-in-ring` | 2015 | none |
 | `lem-sc-dvr-valuation-ring-characterization` | 2015 | none |
 | `lem-sc-zariski-contracted-power-extension` | 2015 | none |
-| `lem-sc-graded-localization-exact` | 2016 | none |
 | `lem-sc-mayer-vietoris-open-cover` | 2016 | none |
 | `lem-weil-pbc-cartesian-eilenberg-functorial` | 3007 | none |
 | `lem-exc-finite-galois-tensor-decomposition` | 3009 | none |
@@ -36,7 +34,6 @@
 | `lem-sc-affine-maximal-points-closed-in-lft-scheme` | 3013 | none |
 | `lem-sc-fg-domain-positive-dimension-infinite-maximals` | 3013 | none |
 | `lem-sc-p1-boundary-extension-composition` | 3013 | none |
-| `lem-sc-p1-ext-yoneda-functoriality` | 3013 | none |
 | `lem-sc-tangent-space-vector-space` | 3013 | none |
 | `lem-pc-finite-extension-tensor-algebraic-closure-reduced-separable` | 3014 | none |
 | `lem-pc-noetherian-derived-direct-image-right-adjoint` | 3014 | none |
@@ -44,9 +41,8 @@
 | `lem-pc-proper-derived-direct-image-composition` | 3014 | none |
 | `lem-pc-separable-polynomial-distinct-roots-alg-closed` | 3014 | none |
 | `lem-sc-derived-internal-hom-stalk-localization` | 3014 | none |
+| `lem-sc-ext-locally-free-second-naturality` | 3014 | none |
 | `lem-sc-finite-duality-derived-hom` | 3014 | none |
-| `lem-sc-finite-pushforward-locally-free` | 3014 | none |
-| `lem-sc-global-sections-left-exact` | 3014 | none |
 | `lem-sc-p1-ext-pushout-postcompose` | 3014 | none |
 | `lem-sc-scheme-over-field-universally-open` | 3014 | none |
 | `lem-sc-sheaf-ext-coherent` | 3014 | none |
@@ -322,7 +318,7 @@
 | `lem-pur-rhom-well-defined` | - | none |
 | `lem-zl-noether-normalization-dimension` | - | none |
 
-## Stage 2: nodes to state (598)
+## Stage 2: nodes to state (600)
 
 | node | distance to Mathlib | kind |
 |---|---|---|
@@ -423,11 +419,13 @@
 | `lem-sc-ext-torsor` | 1 | state |
 | `lem-sc-exterior-top-direct-sum` | 1 | state |
 | `lem-sc-finite-discrete-separated-affine` | 1 | state |
+| `lem-sc-finite-pushforward-locally-free` | 1 | state |
 | `lem-sc-finite-type-nonclosed-closure-closed-points` | 1 | state |
 | `lem-sc-four-lemma` | 1 | state |
 | `lem-sc-glue-component-line-bundles` | 1 | state |
 | `lem-sc-glue-component-reduced-cover-sections` | 1 | state |
 | `lem-sc-glue-component-transition-cocycle` | 1 | state |
+| `lem-sc-graded-localization-exact` | 1 | state |
 | `lem-sc-graded-prime-avoidance` | 1 | state |
 | `lem-sc-integral-locally-algebraic-affine-opens-dimension` | 1 | state |
 | `lem-sc-irreducible-product-over-field` | 1 | state |
@@ -925,7 +923,7 @@
 | `lem-weil-pbc-p1-field-dimension-one` | 4 | state |
 | `lem-weil-pbc-projective-space-zero-isomorphism` | 4 | state |
 
-Not open yet: 332 nodes that wait for stage 1, 1235 nodes that wait for a statement dependency.
+Not open yet: 328 nodes that wait for stage 1, 1238 nodes that wait for a statement dependency.
 
 ## Stage 3: modules to prove (0)
 
