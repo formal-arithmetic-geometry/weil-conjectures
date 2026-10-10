@@ -1,6 +1,6 @@
 # Work queue
 
-914 items; claim with `tools/claim.py next <group> [--stage N]`.
+915 items; claim with `tools/claim.py next <group> [--stage N]`.
 
 ## Stage 1: nodes to split (626)
 
@@ -27,7 +27,6 @@
 | `lem-weil-pbc-smooth-localization-conormal-split` | 1012 | none |
 | `lem-weil-pbc-smooth-over-field-dimension-differentials` | 1012 | none |
 | `lem-weil-pbc-criterion-flatness-fibre` | 1013 | none |
-| `lem-weil-pbc-differential-zero-iff-pth-power` | 1013 | none |
 | `lem-weil-pbc-etale-cohomology-local-ring-colimit` | 1013 | none |
 | `lem-weil-pbc-etale-ring-map-quasi-finite` | 1013 | none |
 | `lem-weil-pbc-etale-splits-off-quasi-finite-part` | 1013 | none |
@@ -119,6 +118,7 @@
 | `lem-weil-pbc-finitely-generated-field-complete-intersection-model` | 1014 | none |
 | `lem-weil-pbc-flat-local-extension-given-residue-field` | 1014 | none |
 | `lem-weil-pbc-nl-presentations-homotopy-equivalent` | 1014 | none |
+| `lem-weil-pbc-p-basis-differentials-basis` | 1014 | none |
 | `lem-weil-pbc-two-term-homotopy-equivalence-direct-sum` | 1014 | none |
 | `lem-weil-pbc-injective-acyclicity-bounded-below` | 2002 | sorry_here |
 | `lem-weil-pbc-property-implies-acyclicity` | 2003 | none |
@@ -633,7 +633,7 @@
 | `def-exc-jacobian-presentation` | - | none |
 | `def-nagata-rees-algebra` | - | none |
 
-## Stage 2: nodes to state (288)
+## Stage 2: nodes to state (289)
 
 | node | distance to Mathlib | kind |
 |---|---|---|
@@ -703,6 +703,7 @@
 | `lem-weil-pbc-derivation-extends` | 1 | state |
 | `lem-weil-pbc-derivation-extends-finite-type-extension` | 1 | state |
 | `lem-weil-pbc-derivation-nonzero-on-non-pth-power` | 1 | state |
+| `lem-weil-pbc-differential-zero-iff-pth-power` | 1 | state |
 | `lem-weil-pbc-directed-colimit-base-change-elementwise` | 1 | state |
 | `lem-weil-pbc-elementary-etale-finite-piece-persistence` | 1 | state |
 | `lem-weil-pbc-etale-algebra-filtered-colimit-descent` | 1 | state |
