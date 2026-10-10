@@ -1,0 +1,70 @@
+{
+ "id": "lem-weil-pbc-noetherian-scheme-closed-subsets-minimal",
+ "kind": "statement",
+ "title": "Closed subsets of a Noetherian scheme satisfy the minimal condition",
+ "statement": "Let $X$ be a Noetherian scheme [def-pc-scheme], i.e. locally Noetherian [pqf-def-locnoeth] and quasi-compact [def-weil-pbc-scheme-conventions]. Then every nonempty set $\\mathcal S$ of closed subsets of the underlying topological space of $X$ has a minimal element for inclusion: there is $T_0\\in\\mathcal S$ such that no $T\\in\\mathcal S$ satisfies $T\\subsetneq T_0$.",
+ "source": {
+  "document": "literature/stacks-project/properties.tex",
+  "place": "Properties, Lemma 01OZ (label lemma-Noetherian-topology, properties.tex line 496: a Noetherian scheme has a Noetherian underlying space), with Topology, Definition 0051 (label definition-noetherian, topology.tex line 1244: the descending chain condition for closed subsets); the minimal-element form is how the proofs of Cohomology of Schemes 01YF and 01YI use it ('because X is Noetherian we can choose a minimal element')"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "pqf-def-locnoeth",
+  "def-weil-pbc-scheme-conventions"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Noetherian scheme every nonempty set of closed subsets has a minimal element",
+   "results": "PrimeSpectrum.instNoetherianSpace (Mathlib.RingTheory.Spectrum.Prime.Noetherian), AlgebraicGeometry.IsNoetherian (Mathlib.AlgebraicGeometry.Noetherian), TopologicalSpace.instWellFoundedLTClosedsOfNoetherianSpace (Mathlib.Topology.NoetherianSpace), TopologicalSpace.NoetherianSpace, IsClosed.exists_minimal_nonempty_closed_subset (Mathlib.Topology.Compactness.Compact)",
+   "date": "2026-10-10",
+   "verdict": "match: instWellFoundedLTClosedsOfNoetherianSpace with IsNoetherian.noetherianSpace"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "underlying topological space of a Noetherian scheme is a Noetherian topological space, closed subsets satisfy the descending chain condition",
+   "results": "AlgebraicGeometry.IsNoetherian.noetherianSpace : [IsNoetherian X] -> NoetherianSpace X (Mathlib.AlgebraicGeometry.Noetherian), IsNoetherian, noetherianSpace_of_isAffine, noetherianSpace_of_isAffineOpen, instNoetherianSpace for Spec of a Noetherian ring",
+   "date": "2026-10-10",
+   "verdict": "match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rn 'noetherianSpace\\b\\|instance.*NoetherianSpace' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicGeometry/Noetherian.lean; grep -n 'WellFoundedLT (Closeds' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/Topology/NoetherianSpace.lean; grep -rn 'theorem has_min' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/Order",
+   "results": "Noetherian.lean:280 class IsNoetherian extends IsLocallyNoetherian X, CompactSpace X; Noetherian.lean:320 instance IsNoetherian.noetherianSpace (@[stacks 01OZ]); Topology/NoetherianSpace.lean:97 instance [NoetherianSpace α] : WellFoundedLT (Closeds α); Order/WellFounded.lean:91 WellFounded.has_min",
+   "date": "2026-10-10",
+   "verdict": "match (read: lines 280, 315-322 of Noetherian.lean, 51-98 of Topology/NoetherianSpace.lean)"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "AlgebraicGeometry.IsNoetherian.noetherianSpace, TopologicalSpace.instWellFoundedLTClosedsOfNoetherianSpace, WellFounded.has_min",
+  "file": "Mathlib/AlgebraicGeometry/Noetherian.lean",
+  "line": 320,
+  "how": "specializes in one line per clause: X Noetherian is `IsNoetherian X` (Noetherian.lean:280, = IsLocallyNoetherian X and CompactSpace X); `IsNoetherian.noetherianSpace` (Noetherian.lean:320) gives `NoetherianSpace X`; the instance `WellFoundedLT (Closeds α)` (Mathlib/Topology/NoetherianSpace.lean:97) and `WellFounded.has_min` (Mathlib/Order/WellFounded.lean:91) applied to the image of S in `Closeds X` give the minimal element"
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-coherent-property-devissage-integral-subschemes",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lead_note": "Composed leaf accepted by L (2026-10-10): IsNoetherian.noetherianSpace (Noetherian.lean:320), the WellFoundedLT (Closeds) instance (Topology/NoetherianSpace.lean:97) and WellFounded.has_min; checked with sed.",
+ "reviewed": "pass (L, 2026-10-10): leaf."
+}

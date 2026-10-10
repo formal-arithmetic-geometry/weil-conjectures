@@ -1,0 +1,68 @@
+{
+ "id": "lem-weil-pbc-coherent-filtration-integral-subschemes",
+ "kind": "statement",
+ "title": "A coherent module on a Noetherian scheme is filtered with quotients pushforwards of ideal sheaves of integral closed subschemes",
+ "statement": "Let $X$ be a Noetherian scheme [def-pc-scheme], i.e. locally Noetherian [pqf-def-locnoeth] and quasi-compact [def-weil-pbc-scheme-conventions], and let $\\mathcal F$ be a coherent $\\mathcal O_X$-module [pqf-def-coherent]. Then there are an integer $m\\ge0$ and a chain $0=\\mathcal F_0\\subseteq\\mathcal F_1\\subseteq\\dots\\subseteq\\mathcal F_m=\\mathcal F$ of coherent sub-$\\mathcal O_X$-modules [def-weil-sheaf-of-modules-category] such that for every $j=1,\\dots,m$ there are a closed immersion $i_j:Z_j\\to X$ [def-weil-closed-immersion] with $Z_j$ an integral scheme [def-pc-integral-scheme] and a nonzero coherent sheaf of ideals $\\mathcal I_j\\subseteq\\mathcal O_{Z_j}$ with an isomorphism of $\\mathcal O_X$-modules $\\mathcal F_j/\\mathcal F_{j-1}\\cong(i_j)_*\\mathcal I_j$, where $\\mathcal F_j/\\mathcal F_{j-1}$ is the cokernel of the inclusion $\\mathcal F_{j-1}\\to\\mathcal F_j$ and $(i_j)_*$ is the pushforward of modules [def-pc-module-pullback].",
+ "source": {
+  "document": "literature/stacks-project/coherent.tex",
+  "place": "Cohomology of Schemes, Lemma 01YF (label lemma-coherent-filter, coherent.tex line 3051); its proof uses Lemmas 01YD (lemma-prepare-filter-support), 01Y9 (lemma-power-ideal-kills-sheaf), 01YE (lemma-prepare-filter-irreducible) and Noetherian induction on the support"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "pqf-def-locnoeth",
+  "def-weil-pbc-scheme-conventions",
+  "pqf-def-coherent",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-closed-immersion",
+  "def-pc-integral-scheme",
+  "def-pc-module-pullback"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "coherent sheaf on Noetherian scheme has a filtration whose quotients are pushforwards of ideal sheaves of integral closed subschemes",
+   "results": "Ideal.Filtration, Ideal.stableFiltration_stable (Mathlib.RingTheory.Filtration); Scheme.IdealSheafData.subscheme (Mathlib.AlgebraicGeometry.IdealSheaf.Subscheme); IdealSheafData.vanishingIdeal, IdealSheafData.support (Mathlib.AlgebraicGeometry.IdealSheaf.Basic)",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "every coherent module on a Noetherian scheme admits a finite filtration with successive quotients isomorphic to pushforwards of ideal sheaves on integral closed subschemes",
+   "results": "IsLocallyNoetherian, IsNoetherian, isNoetherian_iff_of_finite_iSup_eq_top, IsLocallyNoetherian.component_noetherian (Mathlib.AlgebraicGeometry.Noetherian); IsNoetherianRing.induction_on_isQuotientEquivQuotientPrime (Mathlib.RingTheory.Ideal.AssociatedPrime.Finiteness: the ring-level devissage of a finite module over a Noetherian ring with quotients A/p, not a statement on schemes)",
+   "date": "2026-10-10",
+   "verdict": "no match (the ring-level analogue only)"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rlni 'filtration' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicGeometry; grep -rniE 'devissage|coherent.?filt' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib",
+   "results": "no file of AlgebraicGeometry mentions a filtration; devissage only in IsNoetherianRing.induction_on_isQuotientEquivQuotientPrime (RingTheory/Ideal/AssociatedPrime/Finiteness.lean:119); Mathlib has no coherent sheaves on schemes",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-coherent-property-devissage-integral-subschemes",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1"
+}

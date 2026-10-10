@@ -67,3 +67,7 @@ Its last sentence says S = S_lambda (x)_{R_lambda} R and M = M_lambda (x)_{S_lam
 
 ## Source error: Stacks 07P4 (lemma-intersection-subfields) — 2026-10-10 06:37 UTC
 In the proof of part (2), case L = K(theta) with theta^p = t in K, the source writes L^p K_alpha as the direct sum of K_alpha t^j, j < p. This fails when t lies in K_alpha, which can happen (opus worker's example: K = F_p(s,u), K_1 = K^p(s), t = s: then L^p K_1 = K_1 has degree p over K^p, not p^2). The conclusion of the lemma is still true; the split of lem-weil-pbc-intersection-subfields-differentials proves it using the directedness hypothesis (iii) and an alpha_0 with t not in K_{alpha_0}. Also 07P3 needs a nonempty index set (the 'if' direction fails for the empty family); the new node states this and the item derives it. No action needed.
+
+## Source error: Stacks 01YM (lemma-property-higher-rank-cohomological) and 01YL — 2026-10-10 08:07 UTC
+
+The lemmas are false for the zero module as stated. The property "F is nonzero" on X = Spec k satisfies hypotheses (1), (2) and (3) (the sheaf G' of (3) has G'_xi = G_xi nonzero), yet fails at F = 0. The proof breaks at the empty filtration and, in 01YL, at the case I'' = 0. The DAG node lem-weil-pbc-coherent-property-devissage-integral-subschemes adds hypothesis (0) "P holds for the zero module"; its only citer (H^1 = 0 for finite surjective covers of a Noetherian scheme, 01YQ) checks (0) trivially. Found by a stage-1 worker on 2026-10-10.
