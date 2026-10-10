@@ -1,0 +1,76 @@
+{
+ "id": "lem-weil-pbc-h1-cotangent-localization",
+ "kind": "statement",
+ "title": "H_1 of the naive cotangent complex commutes with localization",
+ "statement": "Let $R\\to A$ be a homomorphism of commutative rings, $T\\subseteq A$ a multiplicative subset and $B=T^{-1}A$ the ring of fractions [def-weil-pbc-module-localization], an $R$-algebra through $R\\to A\\to B$, $\\lambda:A\\to B$, $a\\mapsto a/1$. Let $\\gamma_A:R[A]\\to A$ and $\\gamma_B:R[B]\\to B$ be the canonical presentations with kernels $I_A$, $I_B$, and $H_1(L_{A/R})\\subseteq I_A/I_A^2$, $H_1(L_{B/R})\\subseteq I_B/I_B^2$ the first homologies of the naive cotangent complexes [def-weil-pbc-smooth-ring-map]. The $R$-algebra map $\\varphi:R[A]\\to R[B]$, $[a]\\mapsto[\\lambda(a)]$ ($R[\\,\\cdot\\,]$ the polynomial ring [def-weil-pbc-mv-polynomial-ring]) satisfies $\\gamma_B\\circ\\varphi=\\lambda\\circ\\gamma_A$, hence $\\varphi(I_A)\\subseteq I_B$, and $g\\bmod I_A^2\\mapsto\\varphi(g)\\bmod I_B^2$ restricts to an $A$-linear map $h:H_1(L_{A/R})\\to H_1(L_{B/R})$. Then $h$ is a localization of the $A$-module $H_1(L_{A/R})$ at $T$: the $B$-linear map $T^{-1}H_1(L_{A/R})\\to H_1(L_{B/R})$, $x/t\\mapsto(1/t)\\,h(x)$, is an isomorphism of $B$-modules.",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Algebra, Lemma Tag 00S7 (lemma-localize-NL, line 35692; proof lines 35698-35706), the assertion on H_1 of the quasi-isomorphism NL_{A/R} (x)_A S^{-1}A -> NL_{S^{-1}A/R} (S^{-1}A flat over A, so H_1 of the tensored complex is the localization of H_1); tag verified in stacks-project/tags/tags (00S7,algebra-lemma-localize-NL)"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-smooth-ring-map",
+  "def-weil-pbc-module-localization",
+  "def-weil-pbc-mv-polynomial-ring"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "H1 cotangent of localization is localization of H1 cotangent",
+   "results": "Algebra.H1Cotangent.isLocalizedModule (Mathlib.RingTheory.Etale.Kaehler), Algebra.tensorH1CotangentOfIsLocalization (same module), Algebra.Generators.cotangentCompLocalizationAwayEquiv (Mathlib.RingTheory.Extension.Cotangent.LocalizationAway)",
+   "date": "2026-10-10",
+   "verdict": "match: Algebra.H1Cotangent.isLocalizedModule"
+  },
+  {
+   "tool": "loogle",
+   "query": "IsLocalizedModule _ (Algebra.H1Cotangent.map _ _ _ _)",
+   "results": "Algebra.H1Cotangent.isLocalizedModule (Mathlib.RingTheory.Etale.Kaehler): (R) {S} (T) ... [IsScalarTower R S T] (M : Submonoid S) [IsLocalization M T] : IsLocalizedModule M (Algebra.H1Cotangent.map R R S T)",
+   "date": "2026-10-10",
+   "verdict": "match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "first homology of naive cotangent complex commutes with localization: S^{-1} H1(L_{A/R}) = H1(L_{S^{-1}A/R})",
+   "results": "Algebra.tensorH1CotangentOfIsLocalization, Algebra.tensorH1CotangentOfIsLocalization_toLinearMap, Algebra.H1Cotangent.isLocalizedModule (Mathlib.RingTheory.Etale.Kaehler), Algebra.Generators.cotangentCompLocalizationAwayEquiv",
+   "date": "2026-10-10",
+   "verdict": "match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rln H1Cotangent ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib; grep -n 'theorem|lemma|def |instance' RingTheory/Etale/Kaehler.lean; sed -n 270,300p and 340,392p RingTheory/Etale/Kaehler.lean; sed -n 553,566p RingTheory/Extension/Cotangent/Basic.lean",
+   "results": "RingTheory/Etale/Kaehler.lean:281 tensorH1CotangentOfIsLocalization (T ⊗[S] H1Cotangent R S ≃ₗ[T] H1Cotangent R T), :345 tensorH1CotangentOfIsLocalization_toLinearMap (= liftBaseChange of H1Cotangent.map R R S T), :385 instance H1Cotangent.isLocalizedModule; RingTheory/Extension/Cotangent/Basic.lean:561 H1Cotangent R S := (Generators.self R S).toExtension.H1Cotangent, :564 H1Cotangent.map := Extension.H1Cotangent.map (Generators.defaultHom _ _).toExtensionHom",
+   "date": "2026-10-10",
+   "verdict": "match"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "Algebra.H1Cotangent.isLocalizedModule",
+  "file": "Mathlib/RingTheory/Etale/Kaehler.lean",
+  "line": 385,
+  "how": "exact, lines read 2026-10-10 (sed -n 270,300p and 340,392p of RingTheory/Etale/Kaehler.lean; variables at lines 28-29, section variable {S} at 276): with Mathlib's (R, S, T, M) := (R, A, T^{-1}A as Localization M, T as a Submonoid A), the instance (line 385) states IsLocalizedModule M (Algebra.H1Cotangent.map R R S T), i.e. the S-linear map H1Cotangent R S -> H1Cotangent R T is a localization at M, which is the node's assertion (IsLocalizedModule.iso M f : LocalizedModule M _ ≃ₗ _ is the map x/t -> (1/t) h(x)). Algebra.H1Cotangent R S (RingTheory/Extension/Cotangent/Basic.lean:561) is the kernel of I/I^2 -> S ⊗ Ω_{R[S]/R} for the canonical presentation Generators.self R S, i.e. H_1(L_{S/R}) of def-weil-pbc-smooth-ring-map (match recorded there); H1Cotangent.map R R S T (Basic.lean:564) is Extension.H1Cotangent.map of Generators.defaultHom, a morphism of the canonical presentations over the square (id_R, S -> T), which equals the map induced by the node's phi by Extension.H1Cotangent.map_eq (Basic.lean:391, any two morphisms of presentations induce the same map). The B-module form T ⊗_A H_1(L_{A/R}) ≅ H_1(L_{B/R}) is tensorH1CotangentOfIsLocalization (line 281) with tensorH1CotangentOfIsLocalization_toLinearMap (line 345)."
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-cartier-equality",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lead_note": "L 2026-10-10: Mathlib leaf (Algebra.H1Cotangent.isLocalizedModule, Etale/Kaehler.lean:385); line verified."
+}
