@@ -10,6 +10,7 @@ public import Mathlib.FieldTheory.Galois.Profinite
 public import Mathlib.RingTheory.IntegralClosure.IntegrallyClosed
 public import Mathlib.RingTheory.Invariant.Profinite
 public import Mathlib.RingTheory.LocalRing.ResidueField.Ideal
+public import WeilConjectures.Mathlib.FieldTheory.IsSepClosed
 public import WeilConjectures.Mathlib.RingTheory.Etale.QuasiFinite
 
 /-!
@@ -251,24 +252,6 @@ lemma integralClosure.isFractionRing_of_isAlgebraic :
     exact (algebraMap K Ω).injective.comp (IsFractionRing.injective R K)
   exact integralClosure.isFractionRing_of_algebraic fun x hx ↦
     hinj (hx.trans (map_zero _).symm)
-
-/-- A field isomorphic to a separably closed field is separably closed. -/
-lemma IsSepClosed.of_ringEquiv {k k' : Type*} [Field k] [Field k'] [IsSepClosed k]
-    (e : k ≃+* k') : IsSepClosed k' := by
-  refine IsSepClosed.of_exists_root _ fun p hmon hirr hsep ↦ ?_
-  have hdeg : (p.map (e.symm : k' →+* k)).degree ≠ 0 := by
-    rw [Polynomial.degree_map]
-    exact (Polynomial.degree_pos_of_irreducible hirr).ne'
-  obtain ⟨x, hx⟩ := IsSepClosed.exists_root (p.map (e.symm : k' →+* k)) hdeg
-    (hsep.map (f := (e.symm : k' →+* k)))
-  refine ⟨e x, ?_⟩
-  have hp : p = (p.map (e.symm : k' →+* k)).map (e : k →+* k') := by
-    rw [Polynomial.map_map]
-    simp
-  rw [hp, Polynomial.eval_map]
-  change Polynomial.eval₂ (e : k →+* k') ((e : k →+* k') x) _ = 0
-  rw [Polynomial.eval₂_hom, show
-    Polynomial.eval x (p.map (e.symm : k' →+* k)) = 0 from hx, map_zero]
 
 variable (K) in
 include K in
