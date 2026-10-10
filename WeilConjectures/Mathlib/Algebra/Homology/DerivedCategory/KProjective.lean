@@ -10,18 +10,19 @@ public import Mathlib.Algebra.Homology.DerivedCategory.KProjective
 /-!
 # Morphisms out of K-projective complexes in the derived category
 
-A morphism `Q(K) ⟶ Q(L)` in the derived category out of a K-projective complex `K` is the image
-of a morphism of complexes `K ⟶ L` (`CochainComplex.IsKProjective.exists_Q_map_eq`). This is a
-consequence of `CochainComplex.IsKProjective.Qh_map_bijective`.
+A morphism `Q(K) ⟶ Q(L)` in the derived category out of a K-projective complex `K` is the
+image of a morphism of complexes (`CochainComplex.IsKProjective.exists_Q_map_eq`).
 -/
 
 @[expose] public section
+
+universe w v u
 
 open CategoryTheory
 
 namespace CochainComplex
 
-variable {C : Type*} [Category* C] [Abelian C] [HasDerivedCategory C]
+variable {C : Type u} [Category.{v} C] [Abelian C] [HasDerivedCategory.{w} C]
 
 /-- A morphism `Q(K) ⟶ Q(L)` in the derived category out of a K-projective complex `K` is
 the image of a morphism of complexes. -/
