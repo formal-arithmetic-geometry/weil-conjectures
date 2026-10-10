@@ -38,6 +38,11 @@ The conjugacy class of the local Frobenius does not depend on the embedding `ι`
 
 ## Implementation notes
 
+The conjugacy of the local Frobenius operators is proved with the transport isomorphisms
+`AlgebraicGeometry.WeilSheaf.stalkObjTransport` `F_{s'} ≅ F_s` along `s ≫ Frⁿ = σⁿ ≫ s'`, which
+compose additively in `n` (`AlgebraicGeometry.WeilSheaf.stalkObjTransport_trans`); the local
+Frobenius is the transport from `s` to itself, and two embeddings differ by a power of `σ`.
+
 The blueprint defines `K_x̄ := L x̄^* For(K)` and its trace as the alternating sum of the traces
 on the cohomology sheaves. The local alternating trace `Tr(F_x^{(n)} | K_x̄)` of
 `def-weil-local-frobenius-trace` is `AlgebraicGeometry.WeilComplex.traceFunction`
@@ -83,8 +88,11 @@ lemma frobeniusPowIso_zero_hom_hom :
     (F.frobeniusPowIso 0).hom.hom =
       eqToHom (by rw [pow_zero]; rfl) ≫
         (lowerStarId (WeilCoefficients.{u} l) _).hom.app F.obj.carrier.X := by
-  simp only [frobeniusPowIso, Iso.trans_hom, Iso.app_hom, Mod.comp_hom', adicLowerStarCongr_hom_app_hom, lowerStarCongr, eqToIso.hom, eqToHom_app]
-  simp [adicLowerStarId]
+  simp only [frobeniusPowIso, Iso.trans_hom, Iso.app_hom, Mod.comp_hom',
+    adicLowerStarCongr_hom_app_hom, lowerStarCongr, eqToIso.hom, eqToHom_app]
+  simp only [eqToHom_refl, adicLowerStarId, Iso.trans_hom, NatTrans.comp_app, Functor.id_obj,
+    NatIso.ofComponents_hom_app, Mod.comp_hom', Mod.isoMk_hom_hom, Iso.app_hom,
+    Mod.comapId_hom_app_hom, Category.id_comp]
   erw [Category.id_comp, Category.comp_id]
 
 lemma frobeniusPowIso_succ_hom_hom (m : ℕ) :
@@ -105,12 +113,12 @@ theorem frobeniusPowIso_add_hom_hom (x y : ℕ) :
         (F.frobeniusPowIso y).hom.hom := by
   induction y with
   | zero =>
-    show (F.frobeniusPowIso x).hom.hom = _
+    change (F.frobeniusPowIso x).hom.hom = _
     rw [frobeniusPowIso_zero_hom_hom]
     rw [lowerStarComp_inv_app_comp_lowerStarId_hom_app _ _ _ (by rw [pow_zero]; rfl)]
     simp
   | succ y ih =>
-    show (F.frobeniusPowIso ((x + y) + 1)).hom.hom = _
+    change (F.frobeniusPowIso ((x + y) + 1)).hom.hom = _
     rw [frobeniusPowIso_succ_hom_hom, ih, frobeniusPowIso_succ_hom_hom]
     simp only [Functor.map_comp, Category.assoc]
     rw [eqToHom_lowerStarComp_inv_app_assoc_assoc _ _ _ _ ((𝒢) ^ (x + y)).inv
@@ -218,7 +226,8 @@ lemma stalkObjTransport_trans (a b : ℕ)
 lemma stalkAt_frobenius
     (s : Spec (.of (AlgebraicClosure k₀)) ⟶ (X ↘ Spec (CommRingCat.of k₀)).geometricFiber)
     (m : ℕ) (hs : s ≫ ((𝒢) ^ m).hom = (specGeometricFrobenius k₀ ^ m).hom ≫ s) :
-    (F.stalkAt s m hs).frobenius = WeilCoefficients.linearEquivOfIso (F.stalkObjTransport m s s hs) :=
+    (F.stalkAt s m hs).frobenius =
+      WeilCoefficients.linearEquivOfIso (F.stalkObjTransport m s s hs) :=
   rfl
 
 lemma stalkObjTransport_congr {n n' : ℕ} (hn : n = n')
@@ -278,7 +287,8 @@ theorem nonempty_equiv_stalkAtGeometricFiberPoint {K : Type u} [Field K] [Algebr
   set s' := (X ↘ Spec (CommRingCat.of k₀)).geometricFiberPoint ι' g hg
   have hss' : s ≫ ((𝒢) ^ j).hom = (specGeometricFrobenius k₀ ^ j).hom ≫ s' := by
     ext
-    · simp only [s, s', Category.assoc, Scheme.Hom.geometricGaloisFrobenius_pow_hom_comp_geometricFiberProj,
+    · simp only [s, s', Category.assoc,
+        Scheme.Hom.geometricGaloisFrobenius_pow_hom_comp_geometricFiberProj,
         Scheme.Hom.geometricFiberPoint_comp_geometricFiberProj]
       rw [specGeometricFrobenius_pow_hom, ← Spec.map_comp_assoc]
       congr 2
@@ -292,7 +302,8 @@ theorem nonempty_equiv_stalkAtGeometricFiberPoint {K : Type u} [Field K] [Algebr
   have key : (F.stalkObjTransport m s' s' hs').hom ≫ (F.stalkObjTransport j s s' hss').hom =
       (F.stalkObjTransport j s s' hss').hom ≫ (F.stalkObjTransport m s s hs).hom := by
     rw [← Iso.trans_hom, ← Iso.trans_hom,
-      F.stalkObjTransport_trans j m s s' s' hss' hs' (comp_geometricGaloisFrobenius_pow_add hss' hs'),
+      F.stalkObjTransport_trans j m s s' s' hss' hs'
+        (comp_geometricGaloisFrobenius_pow_add hss' hs'),
       F.stalkObjTransport_trans m j s s s' hs hss' (comp_geometricGaloisFrobenius_pow_add hs hss'),
       F.stalkObjTransport_congr (add_comm m j)]
   have key' : (F.stalkObjTransport m s s hs).hom ≫ (F.stalkObjTransport j s s' hss').inv =

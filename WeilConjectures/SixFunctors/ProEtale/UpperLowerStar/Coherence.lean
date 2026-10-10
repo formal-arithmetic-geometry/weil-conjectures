@@ -160,10 +160,14 @@ lemma lowerStarComp_id_right {T S : Scheme.{u}} (h : T ⟶ S) :
   apply Quiver.Hom.unop_inj
   apply MorphismProperty.Over.Hom.ext
   apply pullback.hom_ext
-  · apply pullback.hom_ext <;> simp [MorphismProperty.Over.pullback, MorphismProperty.Over.mk,
-      MorphismProperty.Over.pullbackComp, MorphismProperty.Over.pullbackCongr,
-      MorphismProperty.Over.pullbackId] <;>
-    simpa using (pullback.condition (f := (unop b).hom) (g := h ≫ 𝟙 S)).symm
+  · apply pullback.hom_ext
+    · simp [MorphismProperty.Over.pullback, MorphismProperty.Over.mk,
+        MorphismProperty.Over.pullbackComp, MorphismProperty.Over.pullbackCongr,
+        MorphismProperty.Over.pullbackId]
+    · simpa [MorphismProperty.Over.pullback, MorphismProperty.Over.mk,
+        MorphismProperty.Over.pullbackComp, MorphismProperty.Over.pullbackCongr,
+        MorphismProperty.Over.pullbackId] using
+        (pullback.condition (f := (unop b).hom) (g := h ≫ 𝟙 S)).symm
   · simp [MorphismProperty.Over.pullback, MorphismProperty.Over.mk,
       MorphismProperty.Over.pullbackComp, MorphismProperty.Over.pullbackCongr]
 
@@ -188,6 +192,7 @@ noncomputable def lowerStarInvAdjunction {X Y : Scheme.{u}} (e : X ≅ Y) :
     (e.inv)_*[A] ⊣ (e.hom)_*[A] :=
   (lowerStarEquivalence A e).symm.toAdjunction
 
+set_option linter.flexible false in
 omit [Abelian A] [IsGrothendieckAbelian.{u + 1} A] in
 /-- The composition isomorphism of pushforwards along the inverses of isomorphisms
 `e₁ : X ≅ Y` and `e₂ : Y ≅ Z` is conjugate to the inverse of the composition isomorphism of
@@ -201,19 +206,17 @@ lemma conjugateIsoEquiv_lowerStarComp_inv {X Y Z : Scheme.{u}} (e₁ : X ≅ Y) 
     Adjunction.comp_unit_app,
     Equivalence.toAdjunction_unit, Equivalence.toAdjunction_counit, Equivalence.symm_unit,
     Equivalence.symm_counit, Equivalence.unitInv, Equivalence.counitInv,
-    Equivalence.symm_inverse, Equivalence.symm_functor,
     lowerStarEquivalence_unitIso, lowerStarEquivalence_counitIso, lowerStarEquivalence_functor,
     lowerStarEquivalence_inverse, Iso.trans_hom, Iso.trans_inv, Iso.symm_hom, Iso.symm_inv,
     NatTrans.comp_app, Functor.comp_map, Functor.map_comp,
     ObjectProperty.FullSubcategory.comp_hom, lowerStarComp_hom_app_hom_app,
-    lowerStarComp_inv_app_hom_app, lowerStarCongr_hom_app_hom_app, lowerStar_map_hom_app']
+    lowerStarComp_inv_app_hom_app, lowerStar_map_hom_app']
   simp only [lowerStarId, lowerStarCongr_eq,
     Functor.sheafPushforwardContinuousId'_hom_app_hom_app,
     Functor.sheafPushforwardContinuousId'_inv_app_hom_app,
     Functor.sheafPushforwardContinuousIso_inv, Functor.sheafPushforwardContinuousNatTrans_app_hom,
-    Functor.whiskerRight_app, NatTrans.op_app, Functor.sheafPushforwardContinuous_obj_obj_map,
-    Quiver.Hom.unop_op, Category.assoc]
-  simp only [Functor.comp_obj, lowerStar_obj_obj_map, Quiver.Hom.op_unop, Quiver.Hom.unop_op]
+    Functor.whiskerRight_app, NatTrans.op_app, Category.assoc]
+  simp only [Functor.comp_obj, lowerStar_obj_obj_map, Quiver.Hom.unop_op]
   change M.obj.map _ ≫ M.obj.map _ ≫ M.obj.map _ ≫ M.obj.map _ ≫ M.obj.map _ ≫ M.obj.map _ ≫
     M.obj.map _ ≫ M.obj.map _ ≫ M.obj.map _ ≫ M.obj.map _ = _
   rw [← M.obj.map_comp, ← M.obj.map_comp, ← M.obj.map_comp, ← M.obj.map_comp, ← M.obj.map_comp,
@@ -222,10 +225,12 @@ lemma conjugateIsoEquiv_lowerStarComp_inv {X Y Z : Scheme.{u}} (e₁ : X ≅ Y) 
   apply Quiver.Hom.unop_inj
   simp only [unop_comp, Quiver.Hom.unop_op, Functor.op_map]
   apply MorphismProperty.Over.Hom.ext
-  apply pullback.hom_ext <;>
-    simp [MorphismProperty.Over.pullback, MorphismProperty.Over.mk,
-      MorphismProperty.Over.pullbackComp, MorphismProperty.Over.pullbackCongr] <;>
+  apply pullback.hom_ext
+  · simp [MorphismProperty.Over.pullback, MorphismProperty.Over.mk,
+      MorphismProperty.Over.pullbackComp, MorphismProperty.Over.pullbackCongr]
     exact Category.id_comp _
+  · simp [MorphismProperty.Over.pullback, MorphismProperty.Over.mk,
+      MorphismProperty.Over.pullbackComp, MorphismProperty.Over.pullbackCongr]
 
 /-- The identification `(e.hom)^* ≅ (e.inv)_*` is conjugate to the identity of `(e.hom)_*`. -/
 lemma conjugateIsoEquiv_upperStarIsoLowerStarInv {X Y : Scheme.{u}} (e : X ≅ Y) :
@@ -312,7 +317,10 @@ lemma lowerStarComp_inv_app_comp_lowerStarId_hom_app {T S : Scheme.{u}} (a : T �
       (lowerStarId A S).hom.app N = eqToHom (by rw [hg₀, Category.comp_id]) ≫ f := by
   subst hg₀
   rw [lowerStarComp_id_right]
-  simp [lowerStarCongr]
+  simp only [Functor.id_obj, Functor.comp_obj, lowerStarCongr_rfl, Iso.trans_refl, Iso.trans_inv,
+    Functor.isoWhiskerLeft_inv, NatTrans.comp_app, Functor.rightUnitor_inv_app,
+    Functor.whiskerLeft_app, eqToHom_refl, Category.id_comp, NatTrans.naturality, Functor.id_map,
+    Category.assoc, Iso.inv_hom_id_app_assoc]
   exact Category.id_comp f
 
 omit [Abelian A] [IsGrothendieckAbelian.{u + 1} A] in
@@ -342,9 +350,7 @@ lemma eqToHom_lowerStarComp_inv_app_assoc {T S R Q : Scheme.{u}} (a : T ⟶ S) (
           rw [hd]) ≫ (lowerStarComp A c g).inv.app ((a)_*[A].obj M) := by
   subst hb hd he
   have := congrArg (fun e ↦ e.inv.app M) (lowerStarComp_assoc A a c g)
-  simp [lowerStarCongr] at this
-  simp
-  exact this
+  simpa [lowerStarCongr] using this
 
 /-- Pulling back along `s` the composite `E^* M ≅ (E⁻¹)_* M ⟶ M` of a map `ψ`, for
 `E = e₂ ≫ e₁` and `ψ` the composite of `ψ₁` and `ψ₂`, is the composite of the pullbacks along
@@ -362,14 +368,18 @@ lemma upperStarComp_hom_app_map_comp_of_eq {P Y : Scheme.{u}} (s : P ⟶ Y) (e�
         (s)^*[A].map ((upperStarIsoLowerStarInv A e₂).hom.app M ≫ ψ₂) := by
   subst hE hψ
   have h₁ := congrArg (fun e ↦ e.hom.app M) (upperStarComp_assoc A s e₂.hom e₁.hom)
-  have h₂ := congrArg (fun e ↦ e.hom.app M) (upperStarIsoLowerStarInv_trans A e₂ e₁)
   simp only [Iso.trans_hom, NatTrans.comp_app, Functor.isoWhiskerLeft_hom,
     Functor.whiskerLeft_app, Functor.isoWhiskerRight_hom, Functor.whiskerRight_app,
     Functor.associator_hom_app, upperStarCongr, eqToIso.hom, eqToHom_app, Category.comp_id] at h₁
-  simp [upperStarCongr] at h₂
+  have h₂ : (upperStarIsoLowerStarInv A (e₂ ≪≫ e₁)).hom.app M =
+      (upperStarComp A e₂.hom e₁.hom).hom.app M ≫
+        (upperStarIsoLowerStarInv A e₂).hom.app ((e₁.hom)^*[A].obj M) ≫
+        (e₂.inv)_*[A].map ((upperStarIsoLowerStarInv A e₁).hom.app M) ≫
+        (lowerStarComp A e₁.inv e₂.inv).hom.app M := by
+    simpa using congrArg (fun e ↦ e.hom.app M) (upperStarIsoLowerStarInv_trans A e₂ e₁)
   rw [h₂, (upperStarComp A s e₂.hom).hom.naturality_assoc, reassoc_of% h₁]
   simp only [Functor.comp_map, ← Functor.map_comp, Category.assoc, Iso.hom_inv_id_app_assoc,
-    eqToHom_trans_assoc, eqToHom_refl, Category.id_comp]
+    eqToHom_refl, Category.id_comp]
   rw [(upperStarIsoLowerStarInv A e₂).hom.naturality_assoc]
   simp only [Functor.map_comp, Category.assoc]
   rfl
@@ -447,7 +457,7 @@ lemma globalSections_map_upperStarComp_comm {P Y : Scheme.{u}} (t : P ⟶ Y) (e 
       (upperStarComp A e.hom t).hom.naturality, reassoc_of% h]
     simp
   rw [← hn, ← Functor.map_comp_assoc, ← Functor.map_comp_assoc, key]
-  simp [eqToHom_map]
+  simp
 
 end ProEtale
 
