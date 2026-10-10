@@ -19,11 +19,16 @@
   "place": "Modules on Sites, Lemma 03AC (label lemma-may-sheafify-before-abelianize, lines 399-409: Z_G^# = (Z_{G^#})^#, proof omitted), stated here with coefficients in R; the adjunction it rests on is Lemma 03AB (label lemma-obvious-adjointness-sheaves, lines 370-397)"
  },
  "stmt_deps": [
-  "def-weil-pbc-sheafification"
+  "def-weil-pbc-sheafification",
+  "def-weil-pbc-free-module"
  ],
  "proof": [],
  "proof_deps": [],
- "proof_origin": null,
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Lemma 03AC (lemma-may-sheafify-before-abelianize), whose proof is omitted; the Mathlib leaf follows from the free-module adjunction and the sheafification-localization lemmas"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -52,10 +57,21 @@
    "results": "Algebra/Category/ModuleCat/Presheaf/Free.lean: freeObj (43), freeHomEquiv (87), freeAdjunction (103): free presheaf of modules left adjoint to the forgetful functor to presheaves of sets; nothing about sheafification of it",
    "date": "2026-10-10",
    "verdict": "no match; candidate for the adjunction used"
+  },
+  {
+   "tool": "grep",
+   "query": "rg -n 'W_of_preservesSheafification|preservesSheafification_of_adjunction|W_iff' Mathlib/CategoryTheory/Sites; read PreservesSheafification.lean:55-74, Adjunction.lean:88-107, Localization.lean:74-84, ModuleCat/Adjunctions.lean:40-94",
+   "results": "GrothendieckTopology.W_of_preservesSheafification (PreservesSheafification.lean:66-70) sends a local isomorphism through an objectwise left adjoint; Adjunction.lean:107 supplies PreservesSheafification for ModuleCat.free R (Adjunctions.lean:94); GrothendieckTopology.W_iff (Localization.lean:80-82) identifies local isomorphisms with isomorphisms after sheafification",
+   "date": "2026-10-10",
+   "verdict": "match: take the objectwise free-R-module functor, and use W_iff before and after W_of_preservesSheafification"
   }
  ],
- "mathlib_match": null,
- "status": "unsplit",
+ "mathlib_match": {
+  "declaration": "CategoryTheory.GrothendieckTopology.W_of_preservesSheafification",
+  "file": "Mathlib/CategoryTheory/Sites/PreservesSheafification.lean",
+  "how": "specializes in one line: R[F] is F whiskered with ModuleCat.free R (Adjunctions.lean:40), a left adjoint by ModuleCat.adj (Adjunctions.lean:94), hence it preserves sheafification equivalences by Adjunction.lean:107. Apply W_of_preservesSheafification (PreservesSheafification.lean:66-70) to phi; W_iff (Localization.lean:80-82) identifies both local-isomorphism hypotheses and conclusions with isomorphisms after sheafification. This also covers noncommutative R, so specializes to the stated commutative R."
+ },
+ "status": "mathlib",
  "merged_into": null,
  "created": {
   "by": "worker",
@@ -73,8 +89,22 @@
  "chapter": "sec-curve-estimates",
  "unit": "sk-prop-h2",
  "mathlib_candidate": {
-  "declaration": "PresheafOfModules.freeAdjunction",
-  "file": "Mathlib/Algebra/Category/ModuleCat/Presheaf/Free.lean",
-  "how": "line 103: the free presheaf of modules is left adjoint to the forgetful functor to presheaves of sets; with sheafificationAdjunction this gives the proof, but the statement itself is not in Mathlib"
+  "declaration": "CategoryTheory.GrothendieckTopology.W_of_preservesSheafification",
+  "file": "Mathlib/CategoryTheory/Sites/PreservesSheafification.lean",
+  "how": "lines 66-70, with the left-adjoint instance of Adjunction.lean:107 and W_iff of Localization.lean:80-82; confirmed as the Mathlib match above"
+ },
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "lem-weil-pbc-free-module-sheaf-sheafify-first",
+  "worker": "stage1",
+  "summary": "The item is the same assertion as the existing Mathlib leaf lem-weil-pbc-free-module-sheafification-local-iso. Verified its specialization against Mathlib's free-module adjunction and the Grothendieck-topology localization lemmas, and marked this item a Mathlib leaf. Added the free-module definition as a statement dependency; no proof branch or new node is needed.",
+  "blueprint": "This result supplies the passage from a degreewise set-sheafification isomorphism to an isomorphism of the corresponding free-module sheaves in step 3 of lem-weil-pbc-coskeleton-free-homology-comparison, realizing the first paragraph of the blueprint proof of lem-weil-pbc-hypercover-free-resolution ('every cycle is locally a boundary')."
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "group": "E1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed by the lead of E1; spot-checked by L: L: reviewed in full by a reviewer sub-agent (FIX: mathlib_match line 66 added): 03AB/03AC read, the leaf's declarations verified (W_of_preservesSheafification 66, W_iff 80, Adjunction 107, ModuleCat.free 40/94)"
  }
 }

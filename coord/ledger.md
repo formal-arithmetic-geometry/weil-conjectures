@@ -1535,3 +1535,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 13:47 L: merged deliver/E1/lem-weil-pbc-set-cech-nerve-free-resolution (reviewer FIX label; first push)
 - 13:47 L: accepted lem-sc-hilb-to-pic-morphism: 7 steps (0BA0 (4)), new node lem-sc-curve-base-change-relative-dimension-one
 - 13:47 L: launcher: 21 deliveries waiting, oldest 76 min: all five slots reviewers until fewer than three wait, no claims for L, oldest first, repaired re-pushes first
+- 2026-10-10, delivery of E1: lem-weil-pbc-free-module-sheaf-sheafify-first merged from deliver/E1/lem-weil-pbc-free-module-sheaf-sheafify-first (1 commit(s), 0 new node(s), spot-checked by L: L: reviewed in full by a reviewer sub-agent (FIX: mathlib_match line 66 added): 03AB/03AC read, the leaf's declarations verified (W_of_preservesSheafification 66, W_iff 80, Adjunction 107, ModuleCat.free 40/94)); claim closed
