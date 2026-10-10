@@ -1,8 +1,8 @@
 # Work queue
 
-910 items; claim with `tools/claim.py next <group> [--stage N]`.
+908 items; claim with `tools/claim.py next <group> [--stage N]`.
 
-## Stage 1: nodes to split (152)
+## Stage 1: nodes to split (149)
 
 | node | distance to a target | Lean state on the done branch |
 |---|---|---|
@@ -13,7 +13,6 @@
 | `lem-sc-derived-open-gluing` | 3014 | none |
 | `lem-pc-coherent-support-proper-higher-direct-image` | 3015 | none |
 | `lem-pc-direct-image-qc-support-reduction` | 3015 | none |
-| `lem-pc-pseudo-coherent-distinguished-triangle` | 3015 | none |
 | `lem-pc-ring-pseudo-coherent-finite-tor-perfect` | 3015 | none |
 | `lem-pc-ringed-space-product-kinjective` | 3015 | none |
 | `lem-pc-tor-amplitude-qcoh-test` | 3015 | none |
@@ -63,14 +62,11 @@
 | `thm-sp-spectral-object-yields` | 6006 | none |
 | `lem-sc-general-theorem-of-cube` | 6011 | none |
 | `pqf-lem-serre-criterion` | 6013 | none |
-| `thm-pqf-immersion-descent` | - | none |
 | `lem-pod-adic-limit-finite-modules` | - | none |
 | `lem-pod-lisse-module-sheaves-as-module-objects` | - | none |
 | `lem-pod-lisse-tensor-and-scalar-extension` | - | none |
 | `lem-pur-sheaf-hom-cover-gluing` | - | none |
-| `lem-sc-artin-schreier-k` | - | none |
 | `lem-sc-base-change-curve` | - | none |
-| `lem-weil-pbc-constructible-subobjects-noetherian` | - | none |
 | `lem-weil-pbc-generic-finite-algebra-splitting` | - | none |
 | `lem-weil-pbc-irreducible-lisse-strata` | - | none |
 | `pqf-lem-finite-fp-locnoeth` | - | none |
@@ -87,6 +83,7 @@
 | `lem-sc-genus-invariant` | - | none |
 | `lem-sc-global-functions` | - | rests_on_sorry |
 | `lem-sc-pic-affine-quotient` | - | none |
+| `lem-weil-pbc-constant-subsheaf-generic` | - | none |
 | `lemma-nagata-filtered-colimit-finite-data` | - | none |
 | `pqf-lem-affine-open-locnoeth` | - | none |
 | `cor-pd-pic0-base-change` | - | sorry_here |
@@ -159,7 +156,7 @@
 | `lem-pur-rhom-well-defined` | - | none |
 | `lem-zl-noether-normalization-dimension` | - | none |
 
-## Stage 2: nodes to state (758)
+## Stage 2: nodes to state (759)
 
 | node | distance to Mathlib | kind |
 |---|---|---|
@@ -316,6 +313,7 @@
 | `lem-sc-affine-standard-cover-finite-projective` | 1 | state |
 | `lem-sc-affine-unit-quotient` | 1 | state |
 | `lem-sc-ample-proj-canonical-map` | 1 | state |
+| `lem-sc-artin-schreier-k` | 1 | state |
 | `lem-sc-bounded-below-injective-resolution` | 1 | state |
 | `lem-sc-closed-affine-union-affine` | 1 | state |
 | `lem-sc-determinant-short-exact` | 1 | state |
@@ -922,7 +920,7 @@
 | `lem-weil-pbc-projective-space-zero-isomorphism` | 4 | state |
 | `def-nagata-fixed-base-separated-stage` | 6 | state |
 
-Not open yet: 1524 nodes that wait for a statement dependency, 192 nodes that wait for stage 1.
+Not open yet: 1527 nodes that wait for a statement dependency, 189 nodes that wait for stage 1.
 
 ## Stage 3: modules to prove (0)
 
