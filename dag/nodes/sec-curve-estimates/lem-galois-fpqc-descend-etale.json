@@ -22,9 +22,84 @@
   "def-pc-fibre-product",
   "def-weil-etale-morphism"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "*The base changes are flat, locally of finite presentation and unramified.* For every $i\\in I$ the morphism $f_i:X\\times_SS_i\\to S_i$ is etale, i.e. by [def-weil-etale-morphism] it is locally of finite presentation [def-sbc-locally-finite-presentation], flat [def-weil-flat-morphism] and unramified [def-weil-unramified-morphism]. (This is the decomposition 'etale = flat and G-unramified' of Morphisms, Lemma 02GV used by the source: G-unramified means locally of finite presentation with $\\Omega=0$, i.e., by Morphisms 02GE, locally of finite presentation with open diagonal immersion, i.e. locally of finite presentation and unramified in the sense of [def-weil-unramified-morphism]; in the DAG this is the definition [def-weil-etale-morphism] itself, so no lemma is needed.)",
+   "uses": [
+    "def-weil-etale-morphism",
+    "def-sbc-locally-finite-presentation",
+    "def-weil-flat-morphism",
+    "def-weil-unramified-morphism"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Morphisms, Lemma Tag 02GV (lemma-flat-unramified-etale, line 8405), cited in the proof of Descent 02VN"
+   }
+  },
+  {
+   "text": "*Flatness descends (Descent 02L2).* By step 1 every $f_i$ is flat and $\\{g_i:S_i\\to S\\}_{i\\in I}$ is an fpqc covering [def-weil-pbc-fpqc-covering], so $f$ is flat by [lem-weil-pbc-fpqc-descend-flat] (applied to $f$ and the same covering).",
+   "uses": [
+    "lem-weil-pbc-fpqc-descend-flat",
+    "def-weil-pbc-fpqc-covering"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/descent.tex",
+    "place": "proof of Lemma Tag 02VN (line 6214): 'being flat ... fpqc local on the base (Lemma 02L2)'"
+   }
+  },
+  {
+   "text": "*Local finite presentation descends (Descent 02KY, the 'locally of finite presentation' half of G-unramified in 02VM).* By step 1 every $f_i$ is locally of finite presentation, so $f$ is locally of finite presentation by [lem-weil-pbc-fpqc-descend-locally-finite-presentation] (applied to $f$ and the same fpqc covering [def-weil-pbc-fpqc-covering]).",
+   "uses": [
+    "lem-weil-pbc-fpqc-descend-locally-finite-presentation",
+    "def-weil-pbc-fpqc-covering"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/descent.tex",
+    "place": "proof of Lemma Tag 02VN: 'G-unramified ... fpqc local on the base (Lemma 02VM)', whose proof for G-unramified uses Lemma Tag 02KY (lemma-descending-property-locally-finite-presentation, line 5767)"
+   }
+  },
+  {
+   "text": "*Being unramified descends (Descent 02VM).* By step 1 every $f_i$ is unramified, so $f$ is unramified by [lem-galois-fpqc-descend-unramified] (applied to $f$ and the same fpqc covering [def-weil-pbc-fpqc-covering]).",
+   "uses": [
+    "lem-galois-fpqc-descend-unramified",
+    "def-weil-pbc-fpqc-covering"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/descent.tex",
+    "place": "proof of Lemma Tag 02VN: 'G-unramified ... fpqc local on the base (Lemma 02VM, lemma-descending-property-unramified, line 6187)'"
+   }
+  },
+  {
+   "text": "*Conclusion.* By steps 2, 3 and 4, $f$ is flat, locally of finite presentation and unramified, i.e. etale by [def-weil-etale-morphism] (flat and G-unramified, Morphisms 02GV, read backwards).",
+   "uses": [
+    "def-weil-etale-morphism"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/descent.tex",
+    "place": "proof of Lemma Tag 02VN, last sentence 'Hence the result follows'"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-etale-morphism",
+  "def-sbc-locally-finite-presentation",
+  "def-weil-flat-morphism",
+  "def-weil-unramified-morphism",
+  "lem-weil-pbc-fpqc-descend-flat",
+  "def-weil-pbc-fpqc-covering",
+  "lem-weil-pbc-fpqc-descend-locally-finite-presentation",
+  "lem-galois-fpqc-descend-unramified"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/descent.tex",
+  "place": "Descent, Lemma Tag 02VN (lemma-descending-property-etale, line 6209) and its proof, with Morphisms Lemma Tag 02GV (morphisms.tex line 8405) and Descent Lemmas Tag 02L2, 02VM (02KY for the finite-presentation half of G-unramified)"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -56,7 +131,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "worker",
@@ -85,5 +160,24 @@
    47
   ],
   "how": "the case of a single surjective flat quasi-compact morphism"
- }
+ },
+ "lean_candidates": [
+  {
+   "name": "AlgebraicGeometry.Scheme.of_isPullback_of_ofArrows_mem_fpqcTopology",
+   "module": "WeilConjectures.Mathlib.AlgebraicGeometry.Sites.Fpqc",
+   "note": "sorry-free on 71d63dcf (sorry map: s=false, ts=false; lines 115-126). Generic in P (IsZariskiLocalAtTarget, DescendsAlong (Surjective ⊓ Flat ⊓ QuasiCompact), IsStableUnderBaseChange); with P := @Etale (Mathlib instances: Etale.lean:74, HasRingHomProperty at :56, LocalFlatDescent.lean:47) and the covering hypothesis Sieve.ofArrows _ g ∈ fpqcTopology T obtained from a family in fpqcPrecoverage by Precoverage.generate_mem_toGrothendieck (PrecoverageToGrothendieck.lean:71), and the fibre-product squares IsPullback.of_hasPullback, it gives the node in one line; it does not state the node exactly (generic P; its hypothesis is the sieve generated by the family, weaker than the DAG's fpqc covering), so not attached by the worker: for the lead's attachment check (worker, 2026-10-10)"
+  }
+ ],
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "lem-galois-fpqc-descend-etale",
+  "worker": "stage1",
+  "summary": "Split along Stacks 02VN and its proof, read in descent.tex line 6209 (tags 02VN, 02GV, 02L2, 02VM, 02KY verified in tags/tags). Etale in the DAG (def-weil-etale-morphism) is already 'flat, locally of finite presentation and unramified', i.e. flat and G-unramified (02GV with 02GE), so 02GV needs no node. Step 1 unpacks the definition for the f_i; steps 2-4 descend flatness (existing lem-weil-pbc-fpqc-descend-flat, 02L2), local finite presentation (existing lem-weil-pbc-fpqc-descend-locally-finite-presentation, 02KY, the finite-presentation half of G-unramified in 02VM) and unramifiedness (new unsplit node lem-galois-fpqc-descend-unramified, 02VM first assertion); step 5 reassembles. The two existing nodes are of unit sk-thm-p1 and are used as generic tools. slopmaster2's sorry-free Scheme.of_isPullback_of_ofArrows_mem_fpqcTopology gives the statement with P := Etale after a one-line specialization; recorded under lean_candidates for the lead, not attached (not an exact statement).",
+  "blueprint": "realizes lem-galois-descent, proof, Step 3 ('Both properties are Zariski-local on the target and hold after the base change Y_i -> Y'), for the property 'etale': steps 1-5 are the descent of etaleness along the fpqc covering {Y' -> Y} that Step 3 needs (Stacks 02VN)"
+ },
+ "tool_uses": [
+  "lem-weil-pbc-fpqc-descend-flat",
+  "lem-weil-pbc-fpqc-descend-locally-finite-presentation"
+ ],
+ "reviewed": "2026-10-10 L: 5 steps along 02VN checked (etale = lfp + flat + unramified by the DAG definition; flat and lfp descend by the sk-thm-p1 nodes used as tools, 02L2/02KY; unramified descends by the new node lem-galois-fpqc-descend-unramified, 02VM). tool_uses recorded. Lean candidate Scheme.of_isPullback_of_ofArrows_mem_fpqcTopology (sorry-free, generic in P, hypothesis a covering sieve of Mathlib's fpqcTopology) kept as a candidate, not an attachment: not the node stated exactly (generic P, Mathlib covering notion). Worker note: lem-weil-pbc-fpqc-descend-flat/-locally-finite-presentation/-local-on-base-criterion may be finished by the same Lean lemma; attachment check later."
 }

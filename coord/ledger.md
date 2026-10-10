@@ -1441,3 +1441,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 12:46 L: accepted def-sc-function-field: definition with 5 new nodes (def-sc-generic-point, lem-sc-scheme-sober, lem-sc-integral-function-field-affine-fraction Mathlib leaves; def-sc-rational-functions, lem-sc-rational-functions-generic-stalks unsplit); k(X) for integral X added; tool_uses 2 Noetherian nodes
 - 12:46 L: accepted lem-galois-coproduct-morphism-components: 6 steps from the 0BMY axioms, no new nodes
 - 12:47 L: accepted lem-weil-pbc-matching-object-proper-faces: 7 steps (0186, injective maps), new Mathlib leaves lem-weil-pbc-simplex-face-factorization, lem-weil-pbc-simplex-face-face-identity
+- 12:47 L: accepted lem-galois-fpqc-descend-etale: 5 steps (02VN), new node lem-galois-fpqc-descend-unramified, tool_uses flat/lfp descent

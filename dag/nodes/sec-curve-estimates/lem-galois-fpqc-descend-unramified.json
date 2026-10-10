@@ -1,0 +1,87 @@
+{
+ "id": "lem-galois-fpqc-descend-unramified",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-galois-descent",
+   "place": "lem-galois-descent, proof, Step 3 ('Both properties are Zariski-local on the target and hold after the base change Y_i -> Y'), the property 'etale' (Stacks 02VN for the fpqc covering {Y' -> Y}); this node is the unramified part of 02VN's proof ('flat and G-unramified are fpqc local on the base', Lemma 02VM)",
+   "via": [
+    "lem-galois-fpqc-descend-etale"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Being unramified descends along fpqc coverings (Stacks 02VM)",
+ "statement": "Let $f:X\\to S$ be a morphism of schemes [def-pc-scheme] and let $\\{g_i:S_i\\to S\\}_{i\\in I}$ be an fpqc covering of $S$ [def-weil-pbc-fpqc-covering]. For $i\\in I$ let $f_i:X\\times_SS_i\\to S_i$ be the base change of $f$ along $g_i$, the second projection of the fibre product [def-pc-fibre-product]. If $f_i$ is unramified [def-weil-unramified-morphism] (locally of finite type with diagonal $X\\times_SS_i\\to(X\\times_SS_i)\\times_{S_i}(X\\times_SS_i)$ an open immersion) for every $i\\in I$, then $f$ is unramified.",
+ "source": {
+  "document": "literature/stacks-project/descent.tex",
+  "place": "Descent, Lemma Tag 02VM (lemma-descending-property-unramified, line 6187: 'The property P(f) = \"f is unramified\" is fpqc local on the base'), first assertion, the direction 'each base change has the property => f has it' of Definition Tag 02KO (definition-property-morphisms-local, line 5310); its proof: unramified = locally of finite type with diagonal an open immersion (Morphisms, Lemma Tag 02GE), and locally of finite type and open immersion are fpqc local on the base (Lemmas Tag 02KX, 02L3)"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-pbc-fpqc-covering",
+  "def-pc-fibre-product",
+  "def-weil-unramified-morphism"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "unramified morphism of schemes descends along faithfully flat base change",
+   "results": "Algebra.Unramified.baseChange (RingTheory.Unramified.Basic), IsZariskiLocalAtTarget.descendsAlong (Morphisms.Descent), FormallyUnramified.instIsStableUnderBaseChangeScheme (Morphisms.FormallyUnramified), Algebra.IsUnramifiedAt.of_restrictScalars, Algebra.Unramified.formallyUnramified",
+   "date": "2026-10-10",
+   "verdict": "no match (only base change stability and the general descent criterion)"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.MorphismProperty.DescendsAlong @AlgebraicGeometry.FormallyUnramified",
+   "results": "AlgebraicGeometry.instDescendsAlongSchemeFormallyUnramifiedMinMorphismPropertySurjectiveFlatQuasiCompact (Mathlib.AlgebraicGeometry.Morphisms.LocalFlatDescent): DescendsAlong @FormallyUnramified (@Surjective ⊓ @Flat ⊓ @QuasiCompact)",
+   "date": "2026-10-10",
+   "verdict": "candidate: descent along one surjective flat quasi-compact morphism, for FormallyUnramified (equal to the node's unramified only together with LocallyOfFiniteType, by the instances of Morphisms/FormallyUnramified.lean recorded on def-weil-unramified-morphism); an fpqc covering is a family, not one quasi-compact morphism: no one-line specialization"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "a morphism of schemes is unramified if its base change along an fpqc covering is unramified",
+   "results": "FormallyUnramified.instIsStableUnderBaseChangeScheme, FormallyUnramified.of_comp, FormallyUnramified.instIsMultiplicativeScheme, FormallyUnramified.instIsStableUnderCompositionScheme, FormallyUnramified.instHasRingHomPropertyFormallyUnramified (all Mathlib.AlgebraicGeometry.Morphisms.FormallyUnramified)",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rn 'DescendsAlong' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicGeometry | grep -i 'unramified\\|FiniteType\\|IsOpenImmersion'",
+   "results": "Morphisms/LocalFlatDescent.lean:35 DescendsAlong @LocallyOfFiniteType (@Surjective ⊓ @Flat ⊓ @QuasiCompact); :44 DescendsAlong @FormallyUnramified (same); Morphisms/FlatDescent.lean:133-134 IsOpenImmersion.DescendsAlong (same), @[stacks 02L3] (read with sed -n 130,136p and 44,45p); nothing for fpqc covering families",
+   "date": "2026-10-10",
+   "verdict": "candidates only (single surjective flat quasi-compact morphism)"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-galois-fpqc-descend-etale",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-curve-estimates",
+ "unit": "sk-prop-h2",
+ "mathlib_candidate": {
+  "declaration": "AlgebraicGeometry.instDescendsAlongSchemeFormallyUnramifiedMinMorphismPropertySurjectiveFlatQuasiCompact",
+  "file": "Mathlib/AlgebraicGeometry/Morphisms/LocalFlatDescent.lean",
+  "lines": [
+   44,
+   45
+  ],
+  "how": "the case of a single surjective flat quasi-compact morphism, for FormallyUnramified; with LocalFlatDescent.lean:35 (LocallyOfFiniteType) and the slopmaster2 lemma AlgebraicGeometry.Scheme.of_isPullback_of_ofArrows_mem_fpqcTopology (WeilConjectures/Mathlib/AlgebraicGeometry/Sites/Fpqc.lean:115-126, sorry-free) applied to P = LocallyOfFiniteType and P = FormallyUnramified it gives the node, but not in one line"
+ }
+}
