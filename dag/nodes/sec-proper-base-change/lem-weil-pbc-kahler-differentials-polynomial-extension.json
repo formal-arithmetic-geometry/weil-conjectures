@@ -1,0 +1,61 @@
+{
+ "id": "lem-weil-pbc-kahler-differentials-polynomial-extension",
+ "kind": "statement",
+ "title": "Kähler differentials of a polynomial algebra over an algebra",
+ "statement": "Let $R\\to A$ be a homomorphism of commutative rings, $e\\ge0$ and $B=A[z_1,\\dots,z_e]$ the polynomial ring, an $R$-algebra via $R\\to A\\to B$. Then the $B$-linear map $(B\\otimes_A\\Omega_{A/R})\\oplus B^{e}\\to\\Omega_{B/R}$, $(b\\otimes\\mathrm d\\alpha,(b_1,\\dots,b_e))\\mapsto b\\,\\mathrm d\\alpha+\\sum_jb_j\\,\\mathrm dz_j$ ($\\Omega$ and $\\mathrm d$ as in [def-weil-pbc-kahler-differentials]), is an isomorphism. In particular, if $\\Omega_{A/R}$ is a free $A$-module of rank $d$, then $\\Omega_{B/R}$ is a free $B$-module of rank $d+e$.",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "no single Stacks lemma; follows from Algebra, Lemmas Tag 00RS (lemma-exact-sequence-differentials, line 34057), 00RV (lemma-differentials-base-change, line 34213: B = A (x)_R R[z]) and 00RX (lemma-differentials-polynomial-ring, line 34310); needed for 'relative dimension' in Smoothing 07CP (lines 1568-1576)"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-kahler-differentials"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Kähler differentials of polynomial ring over an algebra A[X] over R isomorphic to Omega_A tensor plus free module on dX",
+   "results": "CommRingCat.KaehlerDifferential, KaehlerDifferential, KaehlerDifferential.polynomialEquiv, KaehlerDifferential.mvPolynomialEquiv (Kaehler.Polynomial), Algebra.Presentation.differentials",
+   "date": "2026-10-10",
+   "verdict": "no match: only Omega of R[X] over R itself"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Kähler differentials of a tensor product of algebras is the direct sum of base changed Kähler differentials",
+   "results": "KaehlerDifferential.tensorKaehlerEquivBase, tensorKaehlerEquiv(_tmul_D, _symm_D_tmul) (Kaehler.TensorProduct: base change S (x)_R Omega_{A/R} = Omega_{B/S} for a pushout), tensorKaehlerQuotKerSqEquiv",
+   "date": "2026-10-10",
+   "verdict": "no match: base change only, not the direct-sum decomposition over R"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -nE '^(def|theorem|lemma|instance)' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/RingTheory/Kaehler/Polynomial.lean ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/RingTheory/Kaehler/TensorProduct.lean; grep -rn 'IsPushout.*MvPolynomial' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/RingTheory",
+   "results": "mvPolynomialEquiv, mvPolynomialBasis (Omega of MvPolynomial sigma R over R), polynomialEquiv, tensorKaehlerEquiv(Base); Algebra.IsPushout R S (MvPolynomial σ R) (MvPolynomial σ S) (TensorProduct/MvPolynomial.lean:178); no decomposition of Omega_{A[z]/R}",
+   "date": "2026-10-10",
+   "verdict": "no match (assembled in a few lines from mvPolynomialBasis, tensorKaehlerEquiv and the Jacobi-Zariski sequence; not one line)"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-popescu-lifting",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1"
+}

@@ -1,0 +1,64 @@
+{
+ "id": "lem-weil-pbc-smooth-at-prime-free-conormal-basis",
+ "kind": "statement",
+ "title": "Near a smooth prime the conormal module is free on some of the given generators",
+ "statement": "Let $R$ be a commutative ring, $n,m\\ge0$, $P=R[x_1,\\dots,x_n]$, $f_1,\\dots,f_m\\in P$, $I=(f_1,\\dots,f_m)\\subseteq P$ and $A=P/I$; the conormal module $I/I^2$ is an $A$-module. Let $\\mathfrak q\\subset A$ be a prime ideal such that $R\\to A$ is smooth at $\\mathfrak q$ [def-weil-pbc-singular-ideal]. Then there are $a\\in P$ whose image $\\bar a\\in A$ does not lie in $\\mathfrak q$ and a subset $V\\subseteq\\{1,\\dots,m\\}$ with $c:=|V|\\le\\min(n,m)$ such that (i) the localization $A_{\\bar a}$ is a smooth $R$-algebra [def-weil-pbc-smooth-ring-map]; (ii) the localization $(I/I^2)_{\\bar a}$ [def-weil-pbc-module-localization-away] is a free $A_{\\bar a}$-module with basis the classes of $f_j$, $j\\in V$; (iii) the module of Kähler differentials $\\Omega_{A_{\\bar a}/R}$ [def-weil-pbc-kahler-differentials] is a free $A_{\\bar a}$-module of rank $n-c$.",
+ "source": {
+  "document": "literature/stacks-project/smoothing.tex",
+  "place": "Smoothing Ring Maps, Lemma Tag 07C6 (lemma-find-strictly-standard, line 142) and its proof (lines 162-181: (I/I^2)_a -> (+) A_a dx_i split injection for some a not in q by Algebra 00S1 (lemma-NL-homotopy), 00S7 (lemma-localize-NL), Definitions 00T2, 00TB; after shrinking, f_1..f_c a basis of (I/I^2)_a and dx_{c+1},..,dx_n a basis of (Omega_{A/R})_a). The statement records what the proof of 07C6 constructs and what Lemma 07CP (lemma-lifting, line 1464, items (1),(2)) takes from it."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-singular-ideal",
+  "def-weil-pbc-smooth-ring-map",
+  "def-weil-pbc-module-localization-away",
+  "def-weil-pbc-kahler-differentials"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "smooth at a prime: there is a localization where the conormal module I/I^2 is free with basis given by some of the generators",
+   "results": "Algebra.IsSmoothAt.exists_notMem_isStandardSmooth (Mathlib.RingTheory.Smooth.StandardSmoothOfFree), Module.mem_freeLocus_of_isLocalization, Module.mem_freeLocus (Spectrum.Prime.FreeLocus), RingHom.Smooth.holdsForLocalizationAway, Algebra.FormallySmooth.of_isLocalization",
+   "date": "2026-10-10",
+   "verdict": "no match: Mathlib gives a standard smooth localization S_f, not a basis of (I/I^2)_a by given generators of a given presentation"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "smooth at a prime q of a presentation R[x]/(f_1..f_m): exists a not in q such that conormal module localized at a is free on a subset of the f_j",
+   "results": "Algebra.Smooth.exists_span_eq_top_isStandardSmooth, Algebra.IsSmoothAt.exists_notMem_isStandardSmooth (StandardSmoothOfFree), Algebra.IsSmoothAt.exists_notMem_smooth (Smooth.Locus), Algebra.IsStandardSmooth",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rn 'cotangent|Cotangent|IsSmoothAt' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/RingTheory/Smooth/StandardSmoothOfFree.lean, Smooth/Locus.lean; file list of ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/RingTheory/Extension/Cotangent/ (Basic, Basis, BaseChange, Free, LocalizationAway)",
+   "results": "Extension/Cotangent/Basis.lean builds presentations from a basis of the cotangent module (Algebra.Presentation-level, tensorCotangentHom), StandardSmoothOfFree uses H1Cotangent; nothing states that for a given presentation some subset of the generators is a basis of (I/I^2)_a near a smooth prime",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-popescu-lifting",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1"
+}
