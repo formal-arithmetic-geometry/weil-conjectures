@@ -2612,3 +2612,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 21:03 L: deleted deliver/C1/def-weil-pbc-C2 after C1's abandonment (item attached by L at 20:51)
 - 21:03 L: merged deliver/M1/lem-pc-monomial-cech-complex-homology (reviewer PASS; first push; new nodes: 0)
 - 21:03 L: merged deliver/H1/lem-pc-bounded-above-flat-tensor-acyclic (reviewer FIX; first push; new nodes: 0)
+- 21:04 L: deleted the second deliver/J1/lem-pc-ringed-space-module-stalk-tensor branch (3254c8202; item split by L, no claim held)
