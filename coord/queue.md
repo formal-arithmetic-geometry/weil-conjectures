@@ -1,8 +1,8 @@
 # Work queue
 
-858 items; claim with `tools/claim.py next <group> [--stage N]`.
+861 items; claim with `tools/claim.py next <group> [--stage N]`.
 
-## Stage 1: nodes to split (55)
+## Stage 1: nodes to split (58)
 
 | node | distance to a target | Lean state on the done branch |
 |---|---|---|
@@ -32,12 +32,13 @@
 | `lem-sc-ass-weakass-fg-prime` | 5014 | none |
 | `lem-pc-derived-tensor-transitivity` | 5015 | none |
 | `lem-pc-rf-single-complex-affine-base-change` | 5015 | none |
+| `lem-pc-sites-module-sheafification-bilinear-extension` | 5015 | none |
+| `lem-pc-sites-sheaf-tensor-bilinear-universal` | 5015 | none |
 | `lem-pc-affine-flat-module-descent` | 5016 | none |
 | `lem-pc-rf-mv-triangle-naturality` | 5016 | none |
-| `lem-pc-sites-module-sheafification-bilinear-extension` | 5016 | none |
-| `lem-pc-sites-sheaf-tensor-bilinear-universal` | 5016 | none |
-| `thm-sp-spectral-object-yields` | 6006 | none |
-| `lem-sp-cartan-eilenberg-double-complex-homotopy` | 6007 | none |
+| `lem-sp-filtered-complex-ZB-description` | 6007 | none |
+| `lem-sp-ce-horizontal-lift` | 6008 | none |
+| `lem-sp-ce-vertical-nullhomotopy` | 6008 | none |
 | `lem-sc-perfect-h0-locally-closed` | 6013 | none |
 | `lem-sc-picard-h1-multiple-locus` | 6013 | none |
 | `lem-sc-picard-h1-product-injective` | 6013 | none |
@@ -46,9 +47,11 @@
 | `lem-sc-proper-flat-global-sections-criterion` | 6013 | none |
 | `pqf-lem-serre-criterion` | 6013 | none |
 | `lem-sc-base-change-curve` | - | none |
-| `lem-pc-coherent-hi` | - | sorry_here |
 | `lem-sc-global-functions` | - | rests_on_sorry |
+| `lem-pc-chow-relative-ample` | - | none |
+| `lem-pc-coherent-property-devissage` | - | none |
 | `lem-pc-finite-support-hi` | - | sorry_here |
+| `lem-pc-relative-kill-by-twisting` | - | none |
 | `lem-sc-affine-unit-divisor-base-change` | - | none |
 | `lem-sc-h1-gm-pic-pullback` | - | none |
 | `lem-sc-pic-affine-base-change-compatibility` | - | none |
@@ -870,7 +873,7 @@
 | `lem-weil-pbc-projective-space-zero-isomorphism` | 4 | state |
 | `def-nagata-fixed-base-separated-stage` | 6 | state |
 
-Not open yet: 1666 nodes that wait for a statement dependency, 94 nodes that wait for stage 1.
+Not open yet: 1668 nodes that wait for a statement dependency, 98 nodes that wait for stage 1.
 
 ## Stage 3: modules to prove (0)
 
