@@ -4,7 +4,7 @@
   "is": null,
   "from": {
    "node": "lem-weil-pbc-hypercover-refinement",
-   "place": "proof, fourth paragraph: 'Previously chosen faces prescribe compatible boundaries; the matching covers of $U$ lift those boundaries after finite refinement'; the matching object M_n(U) of the blueprint is Stacks' (cosk_{n-1} sk_{n-1} U)_n of Definition 01G5",
+   "place": "proof, fourth paragraph: previously chosen faces prescribe compatible boundaries and the matching object is the degree-n term of the coskeleton",
    "via": [
     "def-weil-pbc-semi-representable-object",
     "lem-weil-pbc-hypercover-finite-simplex-lifting"
@@ -14,7 +14,7 @@
  },
  "kind": "statement",
  "title": "The matching object is the degree-n term of the (n-1)-coskeleton",
- "statement": "Let $\\mathcal C$ be a category with finite limits [def-galois-finite-limits-colimits], let $K$ be a simplicial object of $\\mathcal C$ [def-weil-pbc-simplicial-object] and let $n\\geq1$. Let $M_n(K)$, with projections $\\mathrm{pr}_i:M_n(K)\\to K_{n-1}$ ($0\\leq i\\leq n$), and $\\mu_n:K_n\\to M_n(K)$ be the matching object and the matching morphism of [lem-weil-pbc-simplicial-matching-object]. Then the $(n-1)$-coskeleton $L=\\mathrm{cosk}_{n-1}\\mathrm{sk}_{n-1}K$ of $\\mathrm{sk}_{n-1}K$ exists [def-weil-pbc-simplicial-coskeleton], with counit $\\varepsilon:\\mathrm{sk}_{n-1}L\\to\\mathrm{sk}_{n-1}K$ and canonical morphism $c:K\\to L$, and there is a unique morphism $\\theta:L_n\\to M_n(K)$ with $\\mathrm{pr}_i\\circ\\theta=\\varepsilon_{n-1}\\circ d^L_i$ for $0\\leq i\\leq n$ (where $d^L_i:L_n\\to L_{n-1}$ are the face maps of $L$ and $\\varepsilon_{n-1}:L_{n-1}\\to K_{n-1}$ is the degree-$(n-1)$ component of $\\varepsilon$); $\\theta$ is an isomorphism, and $\\theta\\circ c_n=\\mu_n$, where $c_n:K_n\\to L_n$ is the degree-$n$ component of $c$.",
+ "statement": "Let $\\mathcal C$ be a category with finite limits [def-galois-finite-limits-colimits], let $K$ be a simplicial object of $\\mathcal C$ [def-weil-pbc-simplicial-object] and let $n\\geq1$. Let $M_n(K)$, with projections $\\mathrm{pr}_i:M_n(K)\\to K_{n-1}$ ($0\\leq i\\leq n$), and $\\mu_n:K_n\\to M_n(K)$ be the matching object and the matching morphism of [lem-weil-pbc-simplicial-matching-object]. Then the $(n-1)$-coskeleton $L=\\mathrm{cosk}_{n-1}\\mathrm{sk}_{n-1}K$ of $\\mathrm{sk}_{n-1}K$ exists [def-weil-pbc-simplicial-coskeleton], with counit $\\varepsilon:\\mathrm{sk}_{n-1}L\\to\\mathrm{sk}_{n-1}K$ and canonical morphism $c:K\\to L$, and there is a unique morphism $\\theta:L_n\\to M_n(K)$ with $\\mathrm{pr}_i\\circ\\theta=\\varepsilon_{n-1}\\circ d^L_i$ for $0\\leq i\\leq n$; $\\theta$ is an isomorphism, and $\\theta\\circ c_n=\\mu_n$.",
  "source": {
   "document": "literature/stacks-project/simplicial.tex",
   "place": "Lemma 0183 (lemma-existence-cosk: existence of cosk_m and the formula (cosk_m U)_n = lim over (Delta/[n])_{<=m}^{opp} of U(n)) and Lemma 0186 (lemma-formula-limit: that limit, for n = m+1, represents the functor of tuples (f_0,...,f_{m+1}) with d_{j-1} f_i = d_i f_j); used in hypercovering.tex Definition 01G5 (definition-hypercovering), condition (2)"
@@ -25,34 +25,92 @@
   "lem-weil-pbc-simplicial-matching-object",
   "def-weil-pbc-simplicial-coskeleton"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Put $V=\\mathrm{sk}_{n-1}K$. By [lem-weil-pbc-coskeleton-matching-tuples], the $(n-1)$-coskeleton $(L,\\varepsilon)$ exists and, for every $W$, maps $W\\to L_n$ correspond naturally to compatible families $(x_\\alpha:W\\to K_k)_\\alpha$ indexed by all order-preserving $\\alpha:[k]\\to[n]$ with $k\\leq n-1$; the canonical map $c_n$ corresponds to $(K(\\alpha))_\\alpha.",
+   "uses": [
+    "lem-weil-pbc-coskeleton-matching-tuples"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/simplicial.tex",
+    "place": "Lemma 0183, formula for cosk_m, with m=n-1"
+   }
+  },
+  {
+   "text": "Restriction sends an all-\\alpha compatible family to its injective proper-face subfamily. Conversely, factor each proper $\\alpha$ through a missing face using [lem-weil-pbc-simplex-face-factorization]; independence of the missing face follows by factoring through two missing faces and applying [lem-weil-pbc-simplex-face-face-identity], and compatibility follows from contravariance of $K$. Thus all-map families and injective proper-face families are naturally bijective, as in the proof of Stacks Lemma 0186.",
+   "uses": [
+    "lem-weil-pbc-simplex-face-factorization",
+    "lem-weil-pbc-simplex-face-face-identity",
+    "def-weil-pbc-simplicial-object"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/simplicial.tex",
+    "place": "Lemma 0186 proof, factorization through a face and independence of the factorization"
+   }
+  },
+  {
+   "text": "By [lem-weil-pbc-matching-object-proper-faces] (1) and (2), injective proper-face families are represented by $M_n(K)$, with cone projections $\\pi_\\delta$; by its (3), the family represented by $\\mu_n$ is $(K(\\alpha))_\\alpha$ after the extension of Step 2. Hence $L_n$ and $M_n(K)$ represent the same natural functor of all-map compatible families.",
+   "uses": [
+    "lem-weil-pbc-matching-object-proper-faces"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/simplicial.tex",
+    "place": "Lemma 0186 statement and proof, represented compatible families"
+   }
+  },
+  {
+   "text": "The unique comparison morphism $\\theta:L_n\\to M_n(K)$ between the two representations has the stated projection equations. The inverse comparison is obtained in the opposite direction; naturality and injectivity of the representing bijections show both composites are identities, so $\\theta$ is an isomorphism. The canonical map $c_n$ and $\\mu_n$ represent the same family $(K(\\alpha))_\\alpha$, hence $\\theta\\circ c_n=\\mu_n$.",
+   "uses": [
+    "lem-weil-pbc-coskeleton-matching-tuples",
+    "lem-weil-pbc-matching-object-proper-faces"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/simplicial.tex",
+    "place": "Lemma 0183 and Lemma 0186, comparison of representing objects"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-coskeleton-matching-tuples",
+  "lem-weil-pbc-simplex-face-factorization",
+  "lem-weil-pbc-simplex-face-face-identity",
+  "def-weil-pbc-simplicial-object",
+  "lem-weil-pbc-matching-object-proper-faces"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/simplicial.tex",
+  "place": "Lemmas 0183 and 0186"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
-   "query": "matching object of a simplicial object: limit of compatible faces, coskeleton of the truncation in degree n",
-   "results": "SSet.coskAdj, SimplicialObject.Truncated.cosk, SimplicialObject.IsCoskeletal, isCoskeletal_iff_isIso",
+   "query": "matching object of simplicial object and coskeleton degree n",
+   "results": "SimplicialObject.Truncated.cosk, SimplicialObject.coskAdj; no matching formula",
    "date": "2026-10-10",
-   "verdict": "no match: cosk exists only under HasRightKanExtension hypotheses, no formula for its degree-n term"
+   "verdict": "no match"
   },
   {
    "tool": "loogle",
-   "query": "CategoryTheory.SimplicialObject.cosk, CategoryTheory.Limits.HasFiniteLimits",
-   "results": "none",
+   "query": "CategoryTheory.SimplicialObject.cosk matching object",
+   "results": "coskAdj only",
    "date": "2026-10-10",
    "verdict": "no match"
   },
   {
    "tool": "grep",
-   "query": "grep -rn 'HasRightKanExtension\\|HasPointwiseRightKanExtension' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicTopology; grep -rn 'FinCategory (StructuredArrow\\|FinCategory.*Truncated' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib",
-   "results": "only the hypotheses of Truncated.cosk/coskAdj (SimplicialObject/Basic.lean lines 298, 309, 321, 350; Coskeletal.lean line 68); no instance deriving them from HasFiniteLimits and no finiteness instance for the comma categories of the truncated inclusion",
+   "query": "grep Mathlib for matching object and cosk formula",
+   "results": "no matching-object theorem",
    "date": "2026-10-10",
    "verdict": "no match"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "worker",
@@ -68,5 +126,20 @@
   }
  },
  "chapter": "sec-curve-estimates",
- "unit": "sk-prop-h2"
+ "unit": "sk-prop-h2",
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "lem-weil-pbc-matching-object-coskeleton",
+  "worker": "stage1",
+  "summary": "Reworked the split so the helper only states the Stacks 0183 coskeleton limit/family representation. The item proof separately performs the 0186 all-map to injective-face reduction using existing face-factorization and face-face-identity nodes, then invokes the existing proper-faces matching node and compares representing objects.",
+  "blueprint": "The steps realize the fourth paragraph of lem-weil-pbc-hypercover-refinement proof where compatible boundaries and the coskeleton matching object are identified."
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "reviewer",
+  "group": "K1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by reviewer (reviewer sub-agent of L); spot-checked: L: third push, reviewed in full by a reviewer sub-agent: the mathematics is now right (0183 helper, all-alpha families reduced to injective faces via the simplex-face leaves and proper-faces); the field faults (statement and from.place changed, mathlib_searches degraded, TeX) are corrected by the lead at merge as an exception to a fourth round"
+ }
 }

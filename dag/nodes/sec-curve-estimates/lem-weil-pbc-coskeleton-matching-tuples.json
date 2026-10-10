@@ -1,0 +1,60 @@
+{
+ "id": "lem-weil-pbc-coskeleton-matching-tuples",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-hypercover-refinement",
+   "place": "proof, fourth paragraph: 'Previously chosen faces prescribe compatible boundaries; the matching covers of $U$ lift those boundaries after finite refinement'; the matching object is written as the degree-$(n-1)$ coskeleton term in Definition 01G5",
+   "via": [
+    "def-weil-pbc-semi-representable-object",
+    "lem-weil-pbc-hypercover-finite-simplex-lifting"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "The coskeleton term represents compatible truncated simplex families",
+ "statement": "Let $\\mathcal C$ be a category with finite limits [def-galois-finite-limits-colimits], let $K$ be a simplicial object of $\\mathcal C$ [def-weil-pbc-simplicial-object], and let $n\\geq1$. Put $V=\\mathrm{sk}_{n-1}K$. There exists an $(n-1)$-coskeleton $(L,\\varepsilon)$ of $V$, with $\\varepsilon:\\mathrm{sk}_{n-1}L\\to V$ [def-weil-pbc-simplicial-coskeleton]. For every object $W$ of $\\mathcal C$, the map sending $h:W\\to L_n$ to the family $(\\varepsilon_k\\circ h_\\alpha)_\\alpha$, where $h_\\alpha:W\\to L_k$ is the $\\alpha$-component of the degree-$n$ cone and $\\alpha:[k]\\to[n]$ ranges over all maps with $k\\leq n-1$, is a natural bijection from $\\operatorname{Hom}_{\\mathcal C}(W,L_n)$ to compatible families $(x_\\alpha:W\\to K_k)_\\alpha$ satisfying $K(\\psi)\\circ x_\\alpha=x_{\\alpha\\circ\\psi}$ whenever $\\psi:[k']\\to[k]$ and $\\alpha:[k]\\to[n]$. For the canonical morphism $c:K\\to L$, the corresponding family for $c_n$ is $(K(\\alpha))_\\alpha$.",
+ "source": {
+  "document": "literature/stacks-project/simplicial.tex",
+  "place": "Lemma 0183 (lemma-existence-cosk), including its limit formula, and Lemma 0186 (lemma-formula-limit), statement and proof for n=m+1"
+ },
+ "stmt_deps": [
+  "def-galois-finite-limits-colimits",
+  "def-weil-pbc-simplicial-object",
+  "def-weil-pbc-simplicial-coskeleton"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "coskeleton degree n as the limit over the truncated simplex category and compatible tuples of faces",
+   "results": "SimplicialObject.Truncated.cosk, SimplicialObject.coskAdj, SimplicialObject.IsCoskeletal",
+   "date": "2026-10-10",
+   "verdict": "no match: Mathlib supplies the right Kan extension but no formula identifying its degree-n term with matching tuples"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.SimplicialObject.Truncated.cosk; CategoryTheory.SimplicialObject.coskAdj",
+   "results": "SimplicialObject.Truncated.cosk and SimplicialObject.coskAdj in AlgebraicTopology/SimplicialObject/Basic; no matching-tuple theorem",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rn 'Truncated.cosk\\|coskAdj\\|matching object\\|matching tuple' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicTopology ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/CategoryTheory",
+   "results": "Truncated.cosk and coskAdj only (AlgebraicTopology/SimplicialObject/Basic.lean lines 297, 330); no matching-object or compatible-face tuple formula",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "created": {
+  "item": "lem-weil-pbc-matching-object-coskeleton"
+ },
+ "chapter": "sec-curve-estimates",
+ "unit": "sk-prop-h2"
+}
