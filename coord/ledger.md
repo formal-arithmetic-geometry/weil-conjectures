@@ -754,3 +754,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 01:34 L: merged E1 idempotent-endomorphism-image-base-change (3 steps) and E1 idempotent-endomorphism-charpoly-field (4 steps, +3 Mathlib leaves; lines verified).
 - 01:36 L: reviewed lem-weil-pbc-constructible-in-retrocompact-open (3 steps, +4: 09YH, 09YI unsplit; 09YG, 09YD Mathlib leaves): accepted. Split lem-weil-pbc-regular-ring-local-criterion myself (it restates def-weil-regular-scheme; stage-3 merge candidate).
 - 2026-10-10, delivery of C1: lem-weil-pbc-z-localizations-dvr returned (87c9550b3): statement refers to Stacks tags; step 3 prime correspondence and step 4 DVR characterization are facts used without node citations; step 1 integrally closed wit
+- 01:37 L: reviewed lem-weil-pbc-regular-local-generators-regular-sequence (6 steps, 0 new; tool_uses lem-sc-regular-local-domain): accepted.
