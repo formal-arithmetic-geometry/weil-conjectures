@@ -2557,3 +2557,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 20:46 L: returned deliver/K1/lem-sc-pseudo-coherent-support-annihilation (reviewer RETURN: 1. E/B (false new statement): lem-sc-supported-hocolim-compact-factor says K is a hocolim of K_n built from E by FINITE )
 - 20:46 L: merged deliver/H1/lem-sc-top-dimensional-reduction-intersection (reviewer FIX+NODE(1); first push; new nodes: 1)
 - 20:47 L: merged deliver/F1/lem-pc-bounded-coherent-finite-tor-proper-pushforward-perfect (reviewer FIX+NODE(1); first push; new nodes: 4)
+- 20:47 L: returned deliver/J1/def-weil-pbc-C7 (reviewer RETURN: Reviewer R-dc72400 (packet review, 20:47 UTC), head f47bf9651. B10: nothing to split; the sorry-free declaration Algebra)
