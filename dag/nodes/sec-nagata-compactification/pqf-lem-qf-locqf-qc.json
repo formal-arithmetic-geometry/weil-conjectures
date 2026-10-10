@@ -3,7 +3,7 @@
  "blueprint": {
   "is": "pqf-lem-qf-locqf-qc",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "Quasi-finite = locally quasi-finite + quasi-compact",
@@ -15,26 +15,61 @@
  "stmt_deps": [],
  "proof": [
   {
-   "text": "A quasi-finite morphism is of finite type, hence locally of finite type\nand quasi-compact, by [pqf-def-quasifinite] and\n[def-weil-pbc-scheme-conventions], and each of its points is\nisolated in its fibre, which is exactly quasi-finiteness at that point,\nso it is locally quasi-finite. Conversely, if $f$ is locally\nquasi-finite and quasi-compact, then it is locally of finite type by\n[pqf-def-quasifinite] and hence of finite type by\n[def-weil-pbc-scheme-conventions]; the points of $X$ are isolated\nin their fibres because quasi-finiteness at a point is the isolation\ncondition of the definition, so $f$ is quasi-finite.",
+   "text": "Assume first that $f$ is quasi-finite. By [pqf-def-quasifinite], it is of finite type and every point of $X$ is isolated in its fibre. The finite-type convention [def-weil-pbc-scheme-conventions] says that a finite-type morphism is locally of finite type and quasi-compact. For any $x\\in X$, choose affine neighbourhoods $U=\\operatorname{Spec}A$ of $x$ and $V=\\operatorname{Spec}R$ of $f(x)$ with $f(U)\\subseteq V$. The point of the fibre over $f(x)$ lying over $x$ is isolated by the hypothesis, so [lem-weil-pbc-isolated-fibre-point-quasi-finite-affine-pairs] gives that $R\\to A$ is quasi-finite at the prime of $x$; hence $f$ is quasi-finite at $x$ by [pqf-def-quasifinite]. Thus $f$ is locally quasi-finite and quasi-compact. Conversely, assume that $f$ is locally quasi-finite and quasi-compact. By [lem-weil-pbc-lqf-locally-finite-type], local quasi-finiteness gives local finite type, and the convention [def-weil-pbc-scheme-conventions] upgrades local finite type together with quasi-compactness to finite type. For each $x\\in X$, quasi-finiteness at $x$ implies that the point of the fibre over $f(x)$ lying over $x$ is isolated by [lem-weil-pbc-quasi-finite-at-point-isolated]. Hence every point is isolated in its fibre, and [pqf-def-quasifinite] gives that $f$ is quasi-finite.",
    "uses": [
     "pqf-def-quasifinite",
-    "def-weil-pbc-scheme-conventions"
+    "def-weil-pbc-scheme-conventions",
+    "lem-weil-pbc-isolated-fibre-point-quasi-finite-affine-pairs",
+    "lem-weil-pbc-quasi-finite-at-point-isolated",
+    "lem-weil-pbc-lqf-locally-finite-type"
    ],
    "elementary": false
   }
  ],
  "proof_deps": [
   "pqf-def-quasifinite",
-  "def-weil-pbc-scheme-conventions"
+  "def-weil-pbc-scheme-conventions",
+  "lem-weil-pbc-isolated-fibre-point-quasi-finite-affine-pairs",
+  "lem-weil-pbc-quasi-finite-at-point-isolated",
+  "lem-weil-pbc-lqf-locally-finite-type"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/master/blueprint/sec-nagata-compactification/sk-prop-nagata-sketch-zmt/pqf-lem-qf-locqf-qc.md",
-  "place": "## Proof"
+  "document": "literature/blueprint/master/blueprint/sec-nagata-compactification/sk-prop-nagata-sketch-zmt/_section.md",
+  "place": "proof of node pqf-lem-qf-locqf-qc, order 200; Stacks Project Tag 01TJ"
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "scheme morphism quasi-finite if and only if locally quasi-finite and quasi-compact",
+   "results": "AlgebraicGeometry.LocallyQuasiFinite; AlgebraicGeometry.locallyQuasiFinite_iff; AlgebraicGeometry.Scheme.Hom.finite_preimage_singleton; no declaration for the combined equivalence",
+   "date": "2026-10-11",
+   "verdict": "no match: component notions only"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.LocallyQuasiFinite, AlgebraicGeometry.QuasiCompact, quasi-finite",
+   "results": "0 hits; identifier not recognized",
+   "date": "2026-10-11",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "quasiFinite.*iff|LocallyQuasiFinite.*QuasiCompact|quasi-finite.*quasi-compact [Mathlib/AlgebraicGeometry]",
+   "results": "Mathlib/AlgebraicGeometry/Morphisms/QuasiFinite.lean:265 locallyQuasiFinite_iff_isFinite_fiber; Mathlib/AlgebraicGeometry/Morphisms/QuasiFinite.lean:325 locallyQuasiFinite_iff_finite_preimage_singleton; no combined equivalence",
+   "date": "2026-10-11",
+   "verdict": "no match: component lemmas only"
+  },
+  {
+   "tool": "leansearch",
+   "query": "quasi-finite morphism is equivalent to locally quasi-finite and quasi-compact",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-11",
+   "verdict": "unavailable"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [],
  "blueprint_kind": "lemma",
@@ -57,5 +92,46 @@
   }
  },
  "chapter": "sec-nagata-compactification",
- "unit": "sk-prop-nagata-sketch-zmt"
+ "unit": "sk-prop-nagata-sketch-zmt",
+ "split_report": {
+  "date": "2026-10-11",
+  "item": "pqf-lem-qf-locqf-qc",
+  "worker": "stage1",
+  "summary": "Checked the item against the project source and found no declaration carrying its blueprint tag or stating the equivalence. The item is split into one complete proof step following the Stacks Project pointwise criterion (Tag 01TJ): the quasi-finite definition supplies finite type and isolated fibre points, while the scheme conventions identify finite type with locally finite type plus quasi-compactness; conversely, local quasi-finiteness plus quasi-compactness supplies finite type and the same pointwise criterion supplies isolated fibre points. No new child node was needed; all dependencies are existing definitions.",
+  "blueprint": "Realizes the complete proof of node pqf-lem-qf-locqf-qc, order 200, in sk-prop-nagata-sketch-zmt.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-isolated-fibre-point-quasi-finite-affine-pairs",
+    "why": "Tag 01TJ converse: isolated fibre points for a locally finite-type morphism give the affine quasi-finite-at-point witnesses needed for local quasi-finiteness."
+   },
+   {
+    "node": "lem-weil-pbc-quasi-finite-at-point-isolated",
+    "why": "Tag 01TJ forward direction: quasi-finiteness at a point implies that the corresponding fibre point is isolated."
+   },
+   {
+    "node": "lem-weil-pbc-lqf-locally-finite-type",
+    "why": "Reviewer fix: local quasi-finiteness implies locally of finite type (not definitional)."
+   }
+  ],
+  "not_duplicates": [
+   "pqf-lem-qf-locqf-qc vs pqf-def-quasifinite: the existing node is only the definition of quasi-finite and locally quasi-finite, while this item proves their equivalence with quasi-compactness.",
+   "pqf-lem-qf-locqf-qc vs lem-weil-pbc-lqf-locally-finite-type: that node proves only local quasi-finiteness implies locally finite type, while this item also proves the converse characterization and quasi-compactness clause."
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-isolated-fibre-point-quasi-finite-affine-pairs",
+  "lem-weil-pbc-quasi-finite-at-point-isolated",
+  "lem-weil-pbc-lqf-locally-finite-type",
+  "lem-weil-pbc-isolated-fibre-point-quasi-finite-affine-pairs",
+  "lem-weil-pbc-quasi-finite-at-point-isolated",
+  "lem-weil-pbc-lqf-locally-finite-type"
+ ],
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-qlq2846",
+  "group": "K1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-qlq2846 (reviewer sub-agent of L); spot-checked: Mathlib has no scheme-level QuasiFinite class (only LocallyQuasiFinite in Morphisms/QuasiFinite.lean), so no MATHLIB attach. Both directions checked against pqf-def-quasifinite (Tag 01TD) and def-weil-pbc-scheme-conventions (finite type = lft + qc); hypotheses (lft) of the two pbc criterion lemmas met; no cycle through cited nodes. FIX more, RETURN less: C1 - 'local quasi-finiteness gives local finite type' was attributed to pqf-def-quasifinite but is not definitional (the definition gives finite-type ring maps on one affine pair per point, def-weil-finite-type-morphism asks it over every affine V); now cites existing lem-weil-pbc-lqf-locally-finite-type, added to uses, proof_deps and tool_uses.; 1 file(s) fixed by the reviewer"
+ }
 }

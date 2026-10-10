@@ -2829,3 +2829,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 22:29 UTC L deleted deliver/K1/def-pc-subfunctor (abandoned after the Mathlib match); notice
 - 22:29 L: merged deliver/J1/lem-weil-l-adic-extension-integers-dvr (reviewer PASS; first push; new nodes: 2)
 - 22:30 L: merged deliver/F1/lem-fin-normal-generic-constant (reviewer FIX; first push; new nodes: 0)
+- 22:30 L: merged deliver/K1/pqf-lem-qf-locqf-qc (reviewer FIX; first push; new nodes: 0)
