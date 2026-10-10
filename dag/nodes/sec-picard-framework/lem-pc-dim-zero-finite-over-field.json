@@ -24,9 +24,51 @@
   "def-weil-finite-integral-morphism",
   "def-pc-scheme"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Because $Y\\to\\operatorname{Spec}k$ is proper, it is of finite type by [pqf-lem-proper-basic]. Thus $Y$ is an algebraic $k$-scheme in the sense of Tag 06LH.",
+   "uses": [
+    "pqf-lem-proper-basic"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 06LH (Varieties, Lemma algebraic-scheme-dim-0), with the definition of proper morphism providing finite type"
+   }
+  },
+  {
+   "text": "Apply [lem-pc-algebraic-dim-zero-affine-finite] to the finite-type scheme $Y$ and the hypothesis $\\dim Y\\le0$. It gives that $Y$ is affine and that its structure morphism to $\\operatorname{Spec}k$ is finite.",
+   "uses": [
+    "lem-pc-algebraic-dim-zero-affine-finite"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 06LH (Varieties, Lemma algebraic-scheme-dim-0), algebraic case"
+   }
+  },
+  {
+   "text": "For a finite morphism to $\\operatorname{Spec}k$, [lem-weil-pbc-finite-over-field-affine-finite-dim] identifies the source as affine and shows that $\\Gamma(Y,\\mathcal O_Y)$ is finite-dimensional over $k$. This supplies the final assertion.",
+   "uses": [
+    "lem-weil-pbc-finite-over-field-affine-finite-dim"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 03J3 paragraph before 03J4, finite over a field is the spectrum of a finite algebra"
+   }
+  }
+ ],
+ "proof_deps": [
+  "pqf-lem-proper-basic",
+  "lem-pc-algebraic-dim-zero-affine-finite",
+  "lem-weil-pbc-finite-over-field-affine-finite-dim"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/varieties.tex",
+  "place": "Tag 06LH (Varieties, Lemma algebraic-scheme-dim-0), algebraic case"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -51,10 +93,34 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-pc-cartier-divisor-finite-over-field"
  },
  "chapter": "sec-picard-framework",
- "unit": "sk-thm-picard-rr"
+ "unit": "sk-thm-picard-rr",
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "lem-pc-dim-zero-finite-over-field",
+  "worker": "stage1",
+  "summary": "Checked Stacks Tag 06LH: properness over a field first supplies finite type, after which the algebraic zero-dimensional theorem gives affineness and finiteness. The finite-over-field Mathlib leaf supplies finite-dimensional global sections. Created one smaller unsplit node for the 06LH algebraic conclusion; no existing DAG or Lean declaration states it exactly.",
+  "blueprint": "The steps realize the parent blueprint proof of lem-pc-degree-base-change, part (2), sentence 'Hence D is finite over k by Lemma 06LH', with the proper-to-finite-type reduction made explicit.",
+  "tool_uses": [
+   {
+    "node": "pqf-lem-proper-basic",
+    "why": "Its statement gives the generic implication proper implies finite type; no node of the Picard unit states this morphism fact."
+   }
+  ]
+ },
+ "tool_uses": [
+  "pqf-lem-proper-basic"
+ ],
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-dzf",
+  "group": "K1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-dzf (reviewer sub-agent of L); spot-checked: Source: Stacks Tag 06LH (varieties.tex, label lemma-algebraic-scheme-dim-0, line 3736) read in full: an algebraic (finite type) k-scheme of dimension 0 is affine and finite over Spec k; the new node lem-pc-algebraic-dim-zero-affine-finite states exactly this, hypothesis by hypothesis (field k, finite type [def-weil-finite-type-morphism], dim<=0 [def-pc-dimension, sup of local Krull dims = Stacks dimension]; conclusions affine [def-pc-scheme] and finite [def-weil-finite-integral-morphism]); no separatedness needed, as in Stacks. Item steps: step 1 proper => finite type carried by pqf-lem-proper-basic (statement lists 'of finite type'; also immediate from def-weil-proper-morphism), accepted as declared generic tool use (C8); step 2 carried by the new node; step 3 carried by lem-weil-pbc-finite-over-field-affine-finite-dim (finite T->Spec k gives T affine and Gamma finite-dimensional), hypotheses match. Item statement unchanged; only proof, proof_deps, proof_origin, status, split_report changed. Duplicates checked: DAG nodes citing 06LH (lem-pc-chi-zero-dim-support, lem-weil-pbc-zero-dim-integral-point, lem-sc-dim0-finite) state different facts; blueprint_refs search 'dimension zero finite' found nothing equal; grep of slopmaster2 AlgebraicGeometry found no declaration of dim-0 finite type => affine finite (B10 not triggered). Small cases: Spec k, Spec k[e]/(e^2), finite disjoint union of points (affine, finite); A^1_k excluded by dim 1; empty scheme conclusion trivially true. Start Sat Oct 10 02:56:01 PM UTC 2026, end Sat Oct 10 02:56:47 PM UTC 2026."
+ }
 }
