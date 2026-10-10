@@ -1,8 +1,8 @@
 # Work queue
 
-858 items; claim with `tools/claim.py next <group> [--stage N]`.
+859 items; claim with `tools/claim.py next <group> [--stage N]`.
 
-## Stage 1: nodes to split (47)
+## Stage 1: nodes to split (48)
 
 | node | distance to a target | Lean state on the done branch |
 |---|---|---|
@@ -33,15 +33,16 @@
 | `lem-sp-ce-vertical-nullhomotopy` | 6008 | none |
 | `lem-sp-filtered-complex-associated-spectral-sequence-construction` | 6008 | none |
 | `lem-sc-picard-h1-multiple-locus` | 6013 | none |
-| `lem-sc-picard-locus-closed-valuation-triviality` | 6013 | none |
 | `pqf-lem-serre-criterion` | 6013 | none |
 | `lem-sc-perfect-degree-zero-fibre-criterion` | 6014 | none |
 | `lem-sc-perfect-finite-free-residue-model` | 6014 | none |
 | `lem-sc-perfect-jump-loci` | 6014 | none |
 | `lem-sc-picard-kunneth-qcoh` | 6014 | none |
 | `lem-sc-square-injective-free-map-dual-coker-zero` | 6014 | none |
-| `lem-sc-picard-closure-specialization` | 6015 | none |
-| `lem-sc-picard-valuation-probe-specializes` | 6015 | none |
+| `lem-sc-valuation-closed-fibre-section-vanishing` | 6014 | none |
+| `lem-sc-valuation-fp-torsionfree-free` | 6014 | none |
+| `lem-sc-valuation-proper-coherent-sections` | 6014 | none |
+| `lem-sc-valuation-zero-section-relative-cartier` | 6014 | none |
 | `lem-sc-base-change-curve` | - | none |
 | `lem-sc-global-functions` | - | rests_on_sorry |
 | `lem-pc-coherent-property-devissage` | - | none |
@@ -870,7 +871,7 @@
 | `lem-weil-pbc-projective-space-zero-isomorphism` | 4 | state |
 | `def-nagata-fixed-base-separated-stage` | 6 | state |
 
-Not open yet: 1699 nodes that wait for a statement dependency, 88 nodes that wait for stage 1.
+Not open yet: 1702 nodes that wait for a statement dependency, 89 nodes that wait for stage 1.
 
 ## Stage 3: modules to prove (0)
 
