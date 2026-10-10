@@ -26,9 +26,53 @@
   "lem-pc-tower-abelian",
   "def-sp-injective-resolutions"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "For each n apply [lem-weil-pbc-ring-modules-enough-injectives] with R=\\mathbb Z to the abelian group A_n, obtaining an injective abelian group J_n and a monomorphism j_n:A_n\\to J_n.",
+   "uses": [
+    "lem-weil-pbc-ring-modules-enough-injectives"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 07KW, Lemma 15.88.1 proof footnote"
+   }
+  },
+  {
+   "text": "Construct I_n and monomorphisms i_n:A_n\\to I_n recursively. Set I_1=J_1 and i_1=j_1. Having I_n and i_n, set I_{n+1}=I_n\\oplus J_{n+1}, put p_n:I_{n+1}\\to I_n equal to the first projection, and define i_{n+1}(a)=(i_n(f_n(a)),j_{n+1}(a)). A finite direct sum of injective abelian groups is injective because a map into it extends componentwise, so every I_n is injective; p_n is split by the first summand inclusion. The defining formula gives p_n i_{n+1}=i_n f_n, so the i_n form a morphism of towers.",
+   "uses": [
+    "lem-weil-pbc-ring-modules-enough-injectives",
+    "def-weil-inverse-system"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 07KW, Lemma 15.88.1 proof footnote"
+   }
+  },
+  {
+   "text": "Each i_n is injective by its two coordinates: if i_{n+1}(a)=0 then j_{n+1}(a)=0, hence a=0, and i_1=j_1 is injective. A morphism of towers whose level maps are all injective is a monomorphism of towers: if g,h:T\\to A are morphisms of towers with i\\circ g=i\\circ h, then i_n\\circ g_n=i_n\\circ h_n for every n because composition of morphisms of inverse systems is componentwise [def-weil-inverse-system], so g_n=h_n by injectivity of i_n, i.e. g=h. Thus A\\to I is a monomorphism in the abelian category of towers [lem-pc-tower-abelian], while every p_n is a split surjection, proving the claim.",
+   "uses": [
+    "def-weil-inverse-system",
+    "lem-pc-tower-abelian"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 07KW, Lemma 15.88.1 proof footnote"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-ring-modules-enough-injectives",
+  "def-weil-inverse-system",
+  "lem-pc-tower-abelian"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Tag 07KW, Lemma 15.88.1 proof footnote"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -60,10 +104,36 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-pc-tower-enough-injectives",
   "by": "worker",
   "date": "2026-10-10"
- }
+ },
+ "split_report": {
+  "date": "2026-10-11",
+  "item": "lem-pc-tower-injective-embedding",
+  "worker": "stage1",
+  "summary": "Expanded the omitted Tag 07KW footnote construction. Choose injective envelopes J_n levelwise using the existing module-enough-injectives theorem specialized to Z-modules, recursively set I_{n+1}=I_n\\oplus J_{n+1} with projection transitions, and verify levelwise injectivity gives a monomorphism of towers.",
+  "blueprint": "Realizes the cohomology-of-derived-inverse-limit injective-tower clause in blueprint ancestor lem-sc-finite-duality, via lem-pc-derived-limit-roos-abelian-groups.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-ring-modules-enough-injectives",
+    "why": "Its statement supplies an injective envelope for each abelian group viewed as a Z-module; no tower node supplies the levelwise envelope input."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-ring-modules-enough-injectives",
+  "lem-weil-pbc-ring-modules-enough-injectives"
+ ],
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-tie2752",
+  "group": "M1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-tie2752 (reviewer sub-agent of L); spot-checked: Construction is Tag 07KV's (I_n = J_1+...+J_n with projections, i_n = (j_m o f-composites)_m); statement carries the split-surjective transition clause that F1 step 1/2 uses; enough injectives from lem-weil-pbc-ring-modules-enough-injectives (mathlib leaf, R=Z; accepted generic tool; no separate Ab node exists); no duplicate of tower nodes. FIX more, RETURN less: C4 in step 3 - lem-pc-tower-abelian does not state kernels are levelwise; replaced by the elementary argument that a levelwise injective morphism is monic since composition is componentwise [def-weil-inverse-system], uses updated.; 1 file(s) fixed by the reviewer"
+ },
+ "lead_note": "2026-10-10 L (R-tie2752): F1 (lem-pc-tower-enough-injectives) step 2 also says 'kernels in the tower category [lem-pc-tower-abelian] are computed levelwise', which that statement does not say (needed direction: monic => levelwise injective; elementary via the tower Z..Z,0,0.. representing evaluation at level n)."
 }
