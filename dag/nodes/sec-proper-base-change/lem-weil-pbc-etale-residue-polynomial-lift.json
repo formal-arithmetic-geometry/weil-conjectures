@@ -9,11 +9,66 @@
  },
  "stmt_deps": [
   "def-weil-pbc-localization-at-prime",
-  "def-weil-pbc-separable-algebraic-extension"
+  "def-weil-pbc-separable-algebraic-extension",
+  "def-pc-field-extension",
+  "def-weil-polynomial-ring"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Write $\\kappa=\\kappa(\\mathfrak p)$ and $\\pi:R\\to\\kappa$ for the canonical map $r\\mapsto r/1\\bmod\\mathfrak pR_{\\mathfrak p}$; for $r\\in R$ write $r\\alpha$ for $\\pi(r)\\alpha\\in L$. Since $L/\\kappa$ is separable algebraic, $\\alpha$ is algebraic over $\\kappa$ [def-weil-pbc-separable-algebraic-extension], so it has a minimal polynomial $g=P_\\alpha=T^d+a_{d-1}T^{d-1}+\\dots+a_0\\in\\kappa[T]$, monic of degree $d\\geq1$, with $g(\\alpha)=0$, and every nonzero $q\\in\\kappa[T]$ with $q(\\alpha)=0$ has $\\deg q\\geq d$ (definition of $P_\\alpha$ as the monic polynomial of least degree vanishing at $\\alpha$).",
+   "uses": [
+    "def-weil-pbc-separable-algebraic-extension",
+    "def-weil-pbc-localization-at-prime"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra, proof of Lemma 00UD (lemma-make-etale-map-prescribed-residue-field), lines 39819-39835: 'After replacing alpha by c alpha for some c in R, c not in p we may assume all the coefficients of f-bar are in the image of R -> kappa(p) (verification omitted). Thus we can find a monic polynomial f in R[x] which maps to f-bar'"
+   }
+  },
+  {
+   "text": "Common denominator. Every element of $R_{\\mathfrak p}$ is a fraction $r/t$ with $r\\in R$, $t\\in R\\setminus\\mathfrak p$, and $R_{\\mathfrak p}\\to\\kappa$ is surjective [def-weil-pbc-localization-at-prime]; so for each $i=0,\\dots,d-1$ there are $b_i\\in R$, $t_i\\in R\\setminus\\mathfrak p$ with $a_i=\\pi(b_i)\\pi(t_i)^{-1}$ ($t_i/1$ is a unit of $R_{\\mathfrak p}$, so $\\pi(t_i)$ is a unit of $\\kappa$; equivalently $\\pi(t_i)\\neq0$ since $\\ker\\pi=\\mathfrak p$ [lem-weil-pbc-prime-residue-field-algebra](a)). Put $c=t_0t_1\\cdots t_{d-1}\\in R$. As $\\mathfrak p$ is prime and no $t_i$ lies in $\\mathfrak p$, $c\\notin\\mathfrak p$, so $\\gamma:=\\pi(c)\\neq0$ in $\\kappa$. For $0\\le i\\le d-1$ put $r_i=b_i\\,c^{d-i-1}\\prod_{j\\neq i}t_j\\in R$; since $d-i\\geq1$, $\\pi(r_i)=\\pi(b_i)\\pi(t_i)^{-1}\\pi(c)\\,\\pi(c)^{d-i-1}=\\gamma^{d-i}a_i$.",
+   "uses": [
+    "def-weil-pbc-localization-at-prime",
+    "lem-weil-pbc-prime-residue-field-algebra"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra, proof of Lemma 00UD (lemma-make-etale-map-prescribed-residue-field), lines 39819-39835: 'After replacing alpha by c alpha for some c in R, c not in p we may assume all the coefficients of f-bar are in the image of R -> kappa(p) (verification omitted). Thus we can find a monic polynomial f in R[x] which maps to f-bar'"
+   }
+  },
+  {
+   "text": "The minimal polynomial of $\\beta=c\\alpha=\\gamma\\alpha$. Let $h=T^d+\\gamma a_{d-1}T^{d-1}+\\gamma^2a_{d-2}T^{d-2}+\\dots+\\gamma^da_0=\\gamma^dg(T/\\gamma)\\in\\kappa[T]$. It is monic of degree $d$, and $h(\\beta)=\\gamma^dg(\\alpha)=0$. If $q\\in\\kappa[T]$ is nonzero with $q(\\beta)=0$, then $q(\\gamma T)$ has the same degree as $q$ (its leading coefficient is that of $q$ times $\\gamma^{\\deg q}\\neq0$, $\\kappa$ a field) and vanishes at $\\alpha$, so $\\deg q\\geq d$ by step 1. Hence $h$ is a monic polynomial of least degree vanishing at $\\beta$; it is the only one, since the difference of two such is zero or a nonzero polynomial of smaller degree vanishing at $\\beta$. So $h=P_\\beta$ is the minimal polynomial of $\\beta$ over $\\kappa$ [def-weil-pbc-separable-algebraic-extension]. (As $\\gamma\\in\\kappa^\\times$, also $\\kappa(\\beta)=\\kappa(\\alpha)=L$, which the citing proof uses.)",
+   "uses": [
+    "def-weil-pbc-separable-algebraic-extension"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra, proof of Lemma 00UD (lemma-make-etale-map-prescribed-residue-field), lines 39819-39835: 'After replacing alpha by c alpha for some c in R, c not in p we may assume all the coefficients of f-bar are in the image of R -> kappa(p) (verification omitted). Thus we can find a monic polynomial f in R[x] which maps to f-bar'"
+   }
+  },
+  {
+   "text": "Lift. Let $f=T^d+r_{d-1}T^{d-1}+\\dots+r_0\\in R[T]$ with the $r_i$ of step 2; $f$ is monic, and applying $\\pi$ to its coefficients gives $T^d+\\sum_{i<d}\\gamma^{d-i}a_iT^i=h$ by step 2. By step 3 the image of $f$ in $\\kappa(\\mathfrak p)[T]$ is the minimal polynomial of the image of $c\\alpha$, with $c\\in R\\setminus\\mathfrak p$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra, proof of Lemma 00UD (lemma-make-etale-map-prescribed-residue-field), lines 39819-39835: 'After replacing alpha by c alpha for some c in R, c not in p we may assume all the coefficients of f-bar are in the image of R -> kappa(p) (verification omitted). Thus we can find a monic polynomial f in R[x] which maps to f-bar'"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-separable-algebraic-extension",
+  "def-weil-pbc-localization-at-prime",
+  "lem-weil-pbc-prime-residue-field-algebra"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Algebra, proof of Lemma 00UD (lemma-make-etale-map-prescribed-residue-field), lines 39819-39835; the omitted verification written out"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -35,10 +90,31 @@
    "results": "localization and polynomial coefficient APIs found, but no theorem packaging this lift",
    "date": "2026-10-10",
    "verdict": "no exact declaration"
+  },
+  {
+   "tool": "leansearch",
+   "query": "minimal polynomial of r • x over a field equals scaleRoots of the minimal polynomial of x",
+   "results": "IsIntegrallyClosed.minpoly_smul (Mathlib.FieldTheory.Minpoly.IsIntegrallyClosed), Polynomial.roots_scaleRoots, Polynomial.scaleRoots_mul, Polynomial.scaleRoots (Mathlib.RingTheory.Polynomial.ScaleRoots)",
+   "date": "2026-10-10",
+   "verdict": "ingredient for step 3: IsIntegrallyClosed.minpoly_smul (r != 0, s integral) gives minpoly R (r • s) = (minpoly R s).scaleRoots r; with R a field (instance Field.instIsIntegrallyClosed, Mathlib/RingTheory/IntegralClosure/IntegrallyClosed.lean:401) this is step 3; read at Mathlib/FieldTheory/Minpoly/IsIntegrallyClosed.lean:175. Not the item."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "there is a nonzero multiple c of an element algebraic over the residue field such that the minimal polynomial of c x has coefficients in the image of R",
+   "results": "mem_adjoin_of_smul_prime_smul_of_minpoly_isEisensteinAt, minpolyDiv_eq_of_isIntegrallyClosed, coeff_minpolyDiv_mem_adjoin, minpoly.isIntegrallyClosed_eq_field_fractions",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rn 'minpoly.*smul\\|smul.*minpoly\\|minpoly_algebraMap_mul\\|scaleRoots' Mathlib/FieldTheory/Minpoly/*.lean Mathlib/RingTheory/Polynomial/ScaleRoots.lean; grep -rn 'exists_integral_multiple\\|exist_integer_multiples\\|IsFractionRing.*ResidueField\\|lifts_iff_coeff_lifts' Mathlib",
+   "results": "IsIntegrallyClosed.minpoly_smul (FieldTheory/Minpoly/IsIntegrallyClosed.lean:175); Polynomial.coeff_scaleRoots, monic_scaleRoots_iff (RingTheory/Polynomial/ScaleRoots.lean); exists_integral_multiple (RingTheory/Algebraic/Integral.lean:147); IsLocalization.exist_integer_multiples_of_finset (RingTheory/Localization/Integer.lean:109); instance IsFractionRing (R ⧸ I) I.ResidueField (RingTheory/LocalRing/ResidueField/Ideal.lean:108); Polynomial.lifts_iff_coeff_lifts, lifts_and_degree_eq_and_monic (Algebra/Polynomial/Lifts.lean)",
+   "date": "2026-10-10",
+   "verdict": "no single declaration; Lean route: IsFractionRing (R/p) p.ResidueField + exist_integer_multiples_of_finset (common denominator of the coefficients) + IsIntegrallyClosed.minpoly_smul over the field + coeff_scaleRoots + lifts_iff_coeff_lifts and Ideal.Quotient.mk_surjective (lift to R), then a monic lift of the same degree. exists_integral_multiple is NOT a one-line specialization: c·alpha integral over R (or R/p) gives some monic over R vanishing at c·alpha, but its image is in general only a multiple of the minimal polynomial; the image equals the minimal polynomial only when the minimal polynomial's coefficients lie in the image of R, which needs R/p integrally closed or the explicit choice of c made here."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "worker",
@@ -58,5 +134,17 @@
   }
  },
  "chapter": "sec-proper-base-change",
- "unit": "sk-thm-p1"
+ "unit": "sk-thm-p1",
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "lem-weil-pbc-etale-residue-polynomial-lift",
+  "worker": "stage1",
+  "summary": "Wrote the omitted verification of Stacks 00UD (algebra.tex 39819-39835) in four elementary steps: alpha algebraic, minimal polynomial g of degree d [def-weil-pbc-separable-algebraic-extension]; common denominator c of the coefficients of g with c not in p [def-weil-pbc-localization-at-prime, lem-weil-pbc-prime-residue-field-algebra (a)]; the minimal polynomial of c·alpha is c^d g(T/c) (monic, root, degree argument); lift its coefficients c^{d-i}a_i to explicit r_i in R. No new nodes. Statement kept; stmt_deps gained def-pc-field-extension and def-weil-polynomial-ring (the statement uses field extensions and R[T], kappa(p)[T]). The hypothesis that alpha generates L is not used by the proof (it holds for any alpha in L); step 3 notes kappa(c·alpha)=L, which the citer uses. Mathlib: no single declaration; IsIntegrallyClosed.minpoly_smul is step 3 over a field; exists_integral_multiple does not specialize to the item."
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "result": "accepted",
+  "note": "4 elementary steps writing out Stacks 00UD's 'verification omitted': minimal polynomial g of alpha; common denominator c of its coefficients with explicit lifts r_i; gamma^d g(T/gamma) is the minimal polynomial of c alpha; the monic lift f. No new nodes."
+ }
 }
