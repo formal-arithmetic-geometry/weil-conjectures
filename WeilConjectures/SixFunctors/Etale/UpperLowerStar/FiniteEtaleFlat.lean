@@ -65,7 +65,8 @@ lemma lowerStarUnitUpperStar_comp_retraction :
     Functor.whiskerLeft_app, Category.assoc, Iso.inv_hom_id_app_assoc]
   exact congrArg (fun φ ↦ φ.app G) (lowerStarUnit_comp_counit A f)
 
-instance preservesFiniteColimits_lowerStar_of_isFinite_of_etale : PreservesFiniteColimits (f)_*[A] :=
+instance preservesFiniteColimits_lowerStar_of_isFinite_of_etale :
+    PreservesFiniteColimits (f)_*[A] :=
   have : PreservesColimitsOfSize.{0, 0} (f)_*[A] :=
     (lowerStarUpperStarAdjunctionOfIsFinite A f).leftAdjoint_preservesColimits
   PreservesColimitsOfSize.preservesFiniteColimits.{0, 0} _

@@ -134,10 +134,12 @@ noncomputable def Etale.graph (U : X.Etale) : U ⟶ Etale.graphTarget f U :=
   (MorphismProperty.Over.mapPullbackAdj @AlgebraicGeometry.Etale ⊤ f
     ‹AlgebraicGeometry.Etale f› _root_.trivial).unit.app U
 
+omit [IsSeparated f] in
 lemma Etale.graph_left (U : X.Etale) :
     (Etale.graph f U).left = pullback.lift (𝟙 U.left) U.hom (by simp) := rfl
 
 
+omit [IsSeparated f] in
 @[reassoc (attr := simp)]
 lemma Etale.graph_left_snd (U : X.Etale) :
     (Etale.graph f U).left ≫
@@ -145,6 +147,7 @@ lemma Etale.graph_left_snd (U : X.Etale) :
         U.hom := by
   exact pullback.lift_snd _ _ _
 
+omit [IsSeparated f] in
 @[reassoc (attr := simp)]
 lemma Etale.graph_left_fst (U : X.Etale) :
     (Etale.graph f U).left ≫
@@ -183,6 +186,7 @@ lemma Etale.isCompl_range_graph (U : X.Etale) :
   rw [Scheme.Opens.range_ι]
   exact isCompl_compl
 
+omit [IsSeparated f] in
 lemma Etale.graph_comp_map {U U' : X.Etale} (φ : U' ⟶ U) :
     (Etale.graph f U').left ≫
         (f.Etale.map ((MorphismProperty.Over.map ⊤ ‹AlgebraicGeometry.Etale f›).map φ)).left =
@@ -190,6 +194,7 @@ lemma Etale.graph_comp_map {U U' : X.Etale} (φ : U' ⟶ U) :
   (congrArg (fun g ↦ g.left) ((MorphismProperty.Over.mapPullbackAdj @AlgebraicGeometry.Etale ⊤
     f ‹AlgebraicGeometry.Etale f› _root_.trivial).unit.naturality φ)).symm
 
+omit [IsSeparated f] in
 /-- The graphs are compatible with base change: for `φ : U' ⟶ U` the square
 ```
 U' ──graph──→ U' ×_Y X
@@ -227,6 +232,7 @@ noncomputable abbrev Etale.graphTargetMap {U U' : X.Etale} (φ : U' ⟶ U) :
     Etale.graphTarget f U' ⟶ Etale.graphTarget f U :=
   f.Etale.map ((MorphismProperty.Over.map ⊤ ‹AlgebraicGeometry.Etale f›).map φ)
 
+omit [IsSeparated f] in
 lemma Etale.graph_comp_graphTargetMap {U U' : X.Etale} (φ : U' ⟶ U) :
     Etale.graph f U' ≫ Etale.graphTargetMap f φ = φ ≫ Etale.graph f U :=
   MorphismProperty.Over.Hom.ext (Etale.graph_comp_map f φ)
@@ -264,6 +270,7 @@ section Unit
 variable {Y : Scheme.{u}} (f : X ⟶ Y) [AlgebraicGeometry.Etale f] [IsSeparated f]
   [HasZeroMorphisms A] (G : Sheaf X.smallEtaleTopology A)
 
+omit [HasZeroMorphisms A] in
 lemma Etale.graph_hom_ext {U : X.Etale} {a : A} {σ σ' : a ⟶ G.obj.obj (op (Etale.graphTarget f U))}
     (h₁ : σ ≫ G.obj.map (Etale.graph f U).op = σ' ≫ G.obj.map (Etale.graph f U).op)
     (h₂ : σ ≫ G.obj.map (Etale.graphComplι f U).op = σ' ≫ G.obj.map (Etale.graphComplι f U).op) :
@@ -335,16 +342,19 @@ noncomputable def Etale.lowerStarUnit :
     ext U
     exact Scheme.Etale.graphExtend_natural f ψ U.unop
 
+omit [IsGrothendieckAbelian.{u + 1} A] in
 lemma Etale.lowerStarUnit_app_hom_app (G : Sheaf X.smallEtaleTopology A) (U : X.Etaleᵒᵖ) :
     ((Etale.lowerStarUnit A f).app G).hom.app U = Scheme.Etale.graphExtend f G U.unop :=
   rfl
 
+omit [Abelian A] [IsGrothendieckAbelian.{u + 1} A] [IsSeparated f] in
 lemma Etale.localizationRestrictionLowerStarAdjunction_counit_app_hom_app
     (G : Sheaf X.smallEtaleTopology A) (U : X.Etaleᵒᵖ) :
     ((Etale.localizationRestrictionLowerStarAdjunction A f ‹_›).counit.app G).hom.app U =
       G.obj.map (Scheme.Etale.graph f U.unop).op := by
   simp [Etale.localizationRestrictionLowerStarAdjunction, Scheme.Etale.graph]
 
+omit [IsGrothendieckAbelian.{u + 1} A] in
 /-- Extension by zero off the graphs is a section of the counit of `f^* ⊣ f_*`, which is
 restriction to the graphs. -/
 @[reassoc (attr := simp)]
@@ -364,7 +374,8 @@ variable [HasSmallSiteSheafify A] {Ω : Type u} [Field Ω] [IsAlgClosed Ω]
 `t ≫ f`, regarded as an étale `Y`-scheme. -/
 noncomputable def Etale.fiberMapPoint (t : Scheme.Hom.GeometricFiber f y) (U : X.Etale)
     (x : (Scheme.pointSmallEtale t.1).fiber.obj U) :
-    (Scheme.pointSmallEtale y).fiber.obj ((MorphismProperty.Over.map ⊤ ‹AlgebraicGeometry.Etale f›).obj U) :=
+    (Scheme.pointSmallEtale y).fiber.obj
+      ((MorphismProperty.Over.map ⊤ ‹AlgebraicGeometry.Etale f›).obj U) :=
   CategoryTheory.Over.homMk x.left (by
     change x.left ≫ U.hom ≫ f = y
     have hx : x.left ≫ U.hom = t.1 := CategoryTheory.Over.w x
@@ -379,7 +390,8 @@ noncomputable def Etale.sheafFiberToLowerStar (t : Scheme.Hom.GeometricFiber f y
       (Scheme.pointSmallEtale y).sheafFiber.obj ((f)_*[A].obj G) :=
   (Scheme.pointSmallEtale t.1).presheafFiberDesc
     (fun U x ↦ Scheme.Etale.graphExtend f G U ≫
-      (Scheme.pointSmallEtale y).toPresheafFiber _ (Etale.fiberMapPoint f t U x) ((f)_*[A].obj G).obj)
+      (Scheme.pointSmallEtale y).toPresheafFiber _ (Etale.fiberMapPoint f t U x)
+        ((f)_*[A].obj G).obj)
     (fun U V g x ↦ by
       change G.obj.map g.op ≫ _ ≫ _ = _
       rw [Scheme.Etale.graphExtend_naturality_assoc]
@@ -389,15 +401,18 @@ noncomputable def Etale.sheafFiberToLowerStar (t : Scheme.Hom.GeometricFiber f y
             ((f)_*[A].obj G).obj))
 
 
+omit [HasSmallSiteSheafify A] in
 @[reassoc (attr := simp)]
 lemma Etale.toPresheafFiber_sheafFiberToLowerStar (t : Scheme.Hom.GeometricFiber f y)
-    (G : Sheaf X.smallEtaleTopology A) (U : X.Etale) (x : (Scheme.pointSmallEtale t.1).fiber.obj U) :
+    (G : Sheaf X.smallEtaleTopology A) (U : X.Etale)
+    (x : (Scheme.pointSmallEtale t.1).fiber.obj U) :
     (Scheme.pointSmallEtale t.1).toPresheafFiber U x G.obj ≫ Etale.sheafFiberToLowerStar A f t G =
       Scheme.Etale.graphExtend f G U ≫
         (Scheme.pointSmallEtale y).toPresheafFiber _ (Etale.fiberMapPoint f t U x)
           ((f)_*[A].obj G).obj :=
   (Scheme.pointSmallEtale t.1).toPresheafFiber_presheafFiberDesc _ _ U x
 
+omit [IsSeparated f] in
 /-- The point `(u, t')` of `U ×_Y X` attached to a geometric point `u` of `U` over `t` and a
 geometric point `t'` of `X` over `y`. -/
 lemma Etale.basePt_fiberMapPoint (t t' : Scheme.Hom.GeometricFiber f y) (U : X.Etale)
@@ -409,6 +424,7 @@ lemma Etale.basePt_fiberMapPoint (t t' : Scheme.Hom.GeometricFiber f y) (U : X.E
         rw [← Category.assoc, hx, t.2, t'.2]) :=
   rfl
 
+omit [HasSmallSiteSheafify A] in
 /-- Restricting the germ of the extension by zero of a section back to `t` gives the germ of
 the section. -/
 @[reassoc (attr := simp)]
@@ -434,6 +450,7 @@ lemma Etale.sheafFiberToLowerStar_stalkRestrict (t : Scheme.Hom.GeometricFiber f
   rw [← (Scheme.pointSmallEtale t.1).toPresheafFiber_w (Scheme.Etale.graph f U) x G.obj]
   exact Scheme.Etale.graphExtend_graph_assoc f G U _
 
+omit [HasSmallSiteSheafify A] in
 /-- Restricting the germ of the extension by zero of a section to a geometric point `t'` other
 than `t` gives zero: the point `(u, t')` of `U ×_Y X` lies off the graph of `U ⟶ X`. -/
 @[reassoc (attr := simp)]
@@ -497,6 +514,7 @@ noncomputable def Etale.biproductSheafFiberToLowerStar :
       (Scheme.pointSmallEtale y).sheafFiber.obj ((f)_*[A].obj G) :=
   biproduct.desc fun t ↦ Etale.sheafFiberToLowerStar A f t G
 
+omit [HasSmallSiteSheafify A] in
 lemma Etale.biproductSheafFiberToLowerStar_comp_lift_stalkRestrict :
     Etale.biproductSheafFiberToLowerStar A f y G ≫
         biproduct.lift (fun t ↦ Etale.stalkRestrict A f y t G) = 𝟙 _ := by
@@ -526,7 +544,7 @@ instance Etale.isIso_biproductSheafFiberToLowerStar :
   infer_instance
 
 
-omit [IsFinite f] in
+omit [IsFinite f] [HasSmallSiteSheafify A] in
 lemma Etale.lowerStarUnit_comp_map_app_π {M : A}
     (φ : (f)_*[A].obj G ⟶ (Scheme.pointSmallEtale y).skyscraperSheaf M)
     (t : Scheme.Hom.GeometricFiber f y) (U : X.Etale)
@@ -543,7 +561,7 @@ lemma Etale.lowerStarUnit_comp_map_app_π {M : A}
   rw [ObjectProperty.FullSubcategory.comp_hom, NatTrans.comp_app, Category.assoc]
   rfl
 
-omit [IsFinite f] in
+omit [IsFinite f] [HasSmallSiteSheafify A] in
 lemma Etale.skyscraperSheaf_map_π {M : A} {V V' : Y.Etale} (g : V ⟶ V')
     (z : (Scheme.pointSmallEtale y).fiber.obj V) :
     ((Scheme.pointSmallEtale y).skyscraperSheaf M).obj.map g.op ≫ Pi.π _ z =
@@ -551,6 +569,7 @@ lemma Etale.skyscraperSheaf_map_π {M : A} {V V' : Y.Etale} (g : V ⟶ V')
   exact (Pi.map'_comp_π _ _ z).trans (Category.comp_id _)
 
 
+omit [IsSeparated f] [IsFinite f] in
 /-- The geometric point of `U` over `y` underlying a geometric point of `U ⟶ X ⟶ Y`. -/
 lemma Etale.exists_fiberMapPoint_eq {U : X.Etale}
     (p : (Scheme.pointSmallEtale y).fiber.obj
@@ -561,6 +580,7 @@ lemma Etale.exists_fiberMapPoint_eq {U : X.Etale}
   exact ⟨⟨p.left ≫ U.hom, by rw [Category.assoc, hp]⟩, CategoryTheory.Over.homMk p.left rfl,
     CategoryTheory.Over.OverMorphism.ext rfl⟩
 
+omit [HasSmallSiteSheafify A] in
 /-- **Extension by zero off the graphs is the unit of an adjunction `f_* ⊣ f^*`, tested on
 skyscraper sheaves.** For a finite étale `f`, a geometric point `y` of `Y` and `M : A`, every
 morphism `G ⟶ f^* (y_* M)` is `η_G ≫ f^* φ` for a unique `φ : f_* G ⟶ y_* M`. -/
@@ -693,6 +713,8 @@ variable (B : Type*) [Category.{u + 1} B] [Abelian B] [IsGrothendieckAbelian.{u 
   (F : A ⥤ B) [F.PreservesZeroMorphisms] [X.smallEtaleTopology.HasSheafCompose F]
   [Y.smallEtaleTopology.HasSheafCompose F]
 
+omit [IsGrothendieckAbelian.{u + 1} A] [IsGrothendieckAbelian.{u + 1} B]
+  [Y.smallEtaleTopology.HasSheafCompose F] in
 /-- Extension by zero off the graphs commutes with postcomposition by a functor preserving
 zero morphisms. -/
 lemma Etale.sheafCompose_map_lowerStarUnit_app (G : Sheaf X.smallEtaleTopology A) :
@@ -755,6 +777,7 @@ lemma Etale.sheafCompose_map_preadditiveCoyoneda_map_app_hom_app_apply {Z : Sche
     (((sheafCompose_map _ (preadditiveCoyoneda.map g.op)).app P).hom.app U).hom x = g ≫ x :=
   rfl
 
+omit [IsGrothendieckAbelian.{u + 1} A] in
 /-- **Extension by zero off the graphs is the unit of an adjunction `f_* ⊣ f^*`** for a finite
 étale `f` and an arbitrary coefficient category: every morphism `G ⟶ f^* F` is `η_G ≫ f^* φ`
 for a unique `φ : f_* G ⟶ F`. The case of abelian groups is
@@ -796,7 +819,8 @@ lemma Etale.bijective_lowerStarUnit_comp_map (G : Sheaf X.smallEtaleTopology A)
     have hφa (a : A) : e a (φa a) = (h a).map ψ := (e a).apply_symm_apply _
     -- the `φa` are natural in `a`
     have hnat {a a' : A} (g : a ⟶ a') :
-        (f)_*[AddCommGrpCat.{u + 1}].map ((sheafCompose_map _ (preadditiveCoyoneda.map g.op)).app G) ≫
+        (f)_*[AddCommGrpCat.{u + 1}].map
+            ((sheafCompose_map _ (preadditiveCoyoneda.map g.op)).app G) ≫
           φa a = φa a' ≫ (sheafCompose_map _ (preadditiveCoyoneda.map g.op)).app F := by
       apply (hAb ((h a').obj G) ((h' a).obj F)).1
       dsimp only
@@ -860,6 +884,7 @@ noncomputable def Etale.lowerStarLocalizationRestrictionAdjunction :
       homEquiv_naturality_right φ g := by
         simp only [Equiv.ofBijective_apply, Functor.map_comp, Category.assoc] }
 
+omit [IsGrothendieckAbelian.{u + 1} A] in
 lemma Etale.lowerStarLocalizationRestrictionAdjunction_unit :
     (Etale.lowerStarLocalizationRestrictionAdjunction A f).unit = Etale.lowerStarUnit A f := by
   ext G : 2
