@@ -23,9 +23,54 @@
  "stmt_deps": [
   "def-sc-topological-abelian-cohomology"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "The direct image functor for the closed immersion is the direct image for the inclusion of the closed subset i(Z), and it is exact on abelian sheaves by [lem-sc-closed-immersion-pushforward-exact]. Thus every short exact sequence on Z remains short exact after applying i_*.",
+   "uses": [
+    "lem-sc-closed-immersion-pushforward-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/cohomology.tex",
+    "place": "Lemma 02UV proof, first sentence: exactness of i_* from Modules Lemma 01AX"
+   }
+  },
+  {
+   "text": "The categories Ab(Z) and Ab(X) of abelian sheaves (sheaves on the sites of open subsets with open coverings) are abelian with enough injectives [lem-weil-pbc-site-sheaves-enough-injectives], and i_* is additive since (i_*F)(U)=F(i^{-1}U) is additive in F. Apply [lem-sc-exact-functor-higher-derived-vanishing] to the exact additive functor i_*:Ab(Z)\\to Ab(X) from Step 1. Its right derived functors satisfy R^q i_* F=0 for every q>0.",
+   "uses": [
+    "lem-sc-closed-immersion-pushforward-exact",
+    "lem-sc-exact-functor-higher-derived-vanishing",
+    "lem-weil-pbc-site-sheaves-enough-injectives"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/cohomology.tex",
+    "place": "Lemma 02UV proof, first sentence: exactness gives R^p i_*=0"
+   }
+  },
+  {
+   "text": "The Leray comparison [lem-sc-leray-closed-pushforward-cohomology], applied to f=i and the vanishing in Step 2, gives a natural isomorphism H^p(Z,F)\\cong H^p(X,i_*F) for every p>=0. The direct image is the sheaf defined by (i_*F)(U)=F(i^{-1}U), which is the formula in the statement.",
+   "uses": [
+    "lem-sc-leray-closed-pushforward-cohomology"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/cohomology.tex",
+    "place": "Lemma 02UV proof, final sentence: apply Lemma 01F4 (cohomology-lemma-apply-Leray)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sc-closed-immersion-pushforward-exact",
+  "lem-sc-exact-functor-higher-derived-vanishing",
+  "lem-sc-leray-closed-pushforward-cohomology",
+  "lem-weil-pbc-site-sheaves-enough-injectives"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Lemma 02UV (cohomology-lemma-cohomology-and-closed-immersions), proof"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -50,12 +95,28 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-sc-pic-lift-closed-immersion-dim-le-one",
   "by": "worker",
   "date": "2026-10-10"
  },
  "chapter": "sec-curve-estimates",
- "unit": "sk-thm-curveestimate"
+ "unit": "sk-thm-curveestimate",
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "lem-sc-cohomology-closed-immersion-pushforward",
+  "worker": "stage1",
+  "summary": "Expanded Stacks Cohomology Lemma 02UV into three steps: exactness of direct image on a closed subset, vanishing of its higher right derived functors, and the Leray comparison. Added three statement-only child nodes for these inputs, after searches found no Mathlib declarations for the topological sheaf statements.",
+  "blueprint": "Realizes the proof of lem-sc-pic-proper-ntorsion's cited Cohomology Lemma 02UV input: the exactness sentence, the derived-vanishing consequence, and the final Leray application.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-ccp",
+  "group": "E1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-ccp (reviewer sub-agent of L); spot-checked: Source Stacks 02UV (cohomology.tex lemma-cohomology-and-closed-immersions) read: closed immersion of topological spaces, any abelian sheaf, H^p(Z,F)=H^p(X,i_*F); item statement (homeomorphism onto a closed subset) agrees, unchanged. Proof of 02UV followed: step 1 carried by lem-sc-closed-immersion-pushforward-exact (= Modules 01AX exactness clause, closed subset inclusion; the homeomorphism identification is elementary); step 2 by lem-sc-exact-functor-higher-derived-vanishing (= Derived 015F (5), true: v of an injective resolution is exact); step 3 by lem-sc-leray-closed-pushforward-cohomology (= 01F4 (1) for abelian sheaves, true via O=Z). All three new statements checked true, self-contained, notions cited (def-sc-topological-abelian-cohomology, def-sp-abelian, def-sp-injective-resolutions, def-sp-left-exact-additive read). Small cases: p=0 gives F(Z)=(i_*F)(X); Z empty gives 0=0. FIX: dag/nodes/sec-curve-estimates/lem-sc-leray-closed-pushforward-cohomology.json: source.place and blueprint.from.place: tags 0733/0732 are the sites-cohomology lemmas, the cohomology.tex labels cited are 01F4/01F2, corrected; dag/nodes/sec-curve-estimates/lem-sc-cohomology-closed-immersion-pushforward.json: step 3 source.place 0733 -> 01F4; dag/nodes/sec-curve-estimates/lem-sc-exact-functor-higher-derived-vanishing.json: stmt_deps: added def-sp-abelian cited inline. FIX more, RETURN less: lem-sc-cohomology-closed-immersion-pushforward step 2 and proof_deps: the enough-injectives hypothesis of the vanishing node for Ab(Z), Ab(X) was unchecked, now cites [lem-weil-pbc-site-sheaves-enough-injectives] (mathlib leaf) and notes additivity of i_* (C4/C1). Start 'Sat Oct 10 03:39:24 PM UTC 2026', end 'Sat Oct 10 03:40:17 PM UTC 2026'.; 3 file(s) fixed by the reviewer"
+ }
 }

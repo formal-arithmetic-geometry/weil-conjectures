@@ -1833,3 +1833,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 15:39 L: K1 re-pushes of closed items deleted (lem-pc-localization-preserves-nonzerodivisor attached 15:33; lem-sc-conductor-ideal-restriction merged 15:32), notice to K1
 - 15:39 L: merged deliver/G1/lem-sc-p1-finite-homogeneous-generators (reviewer PASS; first push; new nodes: 0)
 - 15:40 L: merged deliver/H1/lem-weil-pbc-sets-etale-inverse-image-restriction (reviewer FIX; first push; new nodes: 1)
+- 15:40 L: merged deliver/E1/lem-sc-cohomology-closed-immersion-pushforward (reviewer FIX; first push; new nodes: 3)
