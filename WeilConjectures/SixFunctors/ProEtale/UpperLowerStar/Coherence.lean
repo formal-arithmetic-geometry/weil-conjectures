@@ -123,6 +123,29 @@ lemma sheafPushforwardContinuous_unit_comp
   erw [Category.comp_id]
   exact h'
 
+set_option backward.isDefEq.respectTransparency.types false in
+/-- Abstract form of the left unit law for the pushforward composition isomorphisms. -/
+lemma sheafPushforwardContinuous_id_left {F K Kc : C₂ ⥤ C₁} {G I : C₁ ⥤ C₁}
+    [F.IsContinuous J₂ J₁] [K.IsContinuous J₂ J₁] [Kc.IsContinuous J₂ J₁]
+    [G.IsContinuous J₁ J₁] [I.IsContinuous J₁ J₁]
+    (e : F ⋙ G ≅ K) (c₁ : Kc ≅ K) (cₐ : G ≅ I) (i : I ≅ 𝟭 C₁) (c_b : Kc ≅ F)
+    (h : ∀ U : C₂, i.inv.app (F.obj U) ≫ cₐ.inv.app (F.obj U) ≫ e.hom.app U ≫ c₁.inv.app U =
+      c_b.inv.app U)
+    (M : Sheaf J₁ A) :
+    (sheafPushforwardContinuousIso c₁ A J₂ J₁).hom.app M ≫
+      (sheafPushforwardContinuousComp' e A J₂ J₁ J₁).inv.app M ≫
+      (F.sheafPushforwardContinuous A J₂ J₁).map
+        ((sheafPushforwardContinuousIso cₐ A J₁ J₁).hom.app M ≫
+          (sheafPushforwardContinuousId' i A J₁).hom.app M) =
+    (sheafPushforwardContinuousIso c_b A J₂ J₁).hom.app M := by
+  ext U
+  have h' := congrArg (fun φ => M.obj.map φ.op) (h U.unop)
+  simp only [op_comp, Functor.map_comp, Category.assoc] at h'
+  simp [sheafPushforwardContinuousComp', sheafPushforwardContinuousId']
+  erw [Category.id_comp, Category.comp_id]
+  exact h'
+
+
 end Unit
 
 end CategoryTheory.Functor
@@ -286,6 +309,19 @@ lemma Over.pullback_unit_comp_app {X Y Z : T} (f₁ : X ⟶ Y) (g₁ : Y ⟶ X) 
     Category.assoc, Functor.map_comp, Over.pullbackCongr_inv_eq] at this
   erw [Functor.map_id, Category.id_comp] at this
   exact this
+
+/-- The left unit law for `MorphismProperty.Over.pullbackComp`, along a morphism equal to the
+identity, in components. -/
+lemma Over.pullback_id_left_app {X Y : T} (a : X ⟶ X) (b c : X ⟶ Y) (ha : a = 𝟙 X)
+    (hc : c = a ≫ b) (hb : c = b) (U : P.Over Q Y) :
+    (Over.pullbackId P Q X).inv.app ((Over.pullback P Q b).obj U) ≫
+      (Over.pullbackCongr ha).inv.app ((Over.pullback P Q b).obj U) ≫
+      (Over.pullbackComp a b).inv.app U ≫ (Over.pullbackCongr hc).inv.app U =
+    (Over.pullbackCongr hb).inv.app U := by
+  subst ha hc
+  rw [Over.pullbackComp_id_left b (𝟙 X ≫ b) rfl]
+  simp
+
 
 end Unit
 
@@ -533,5 +569,26 @@ lemma upperStarIsoLowerStarInv_congr {X Y : Scheme.{u}} {e₁ e₂ : X ≅ Y} (h
   subst h
   ext : 2
   simp [upperStarCongr]
+
+
+omit [Abelian A] [IsGrothendieckAbelian.{u + 1} A] in
+/-- The left unit law for the composition isomorphism of pushforwards, along a morphism `a`
+equal to the identity. -/
+lemma lowerStarComp_id_left_aux {X Y : Scheme.{u}} (a : X ⟶ X) (b c : X ⟶ Y) (ha : a = 𝟙 X)
+    (hc : c = a ≫ b) (hb : c = b) (M : Sheaf (Scheme.ProEt.topology X) A) :
+    (lowerStarCongr A hc).hom.app M ≫ (lowerStarComp A a b).inv.app M ≫
+        (b)_*[A].map ((lowerStarCongr A ha).hom.app M ≫ (lowerStarId A X).hom.app M) =
+      (lowerStarCongr A hb).hom.app M := by
+  have key := @Functor.sheafPushforwardContinuous_id_left A _ _ _ _ _
+    (ProEt.topology X) (ProEt.topology Y) _ _ _ _ _
+    (Scheme.ProEt.isContinuous_overPullback b) (Scheme.ProEt.isContinuous_overPullback (a ≫ b))
+    (Scheme.ProEt.isContinuous_overPullback c) (Scheme.ProEt.isContinuous_overPullback a)
+    (Scheme.ProEt.isContinuous_overPullback (𝟙 X))
+    (MorphismProperty.Over.pullbackComp a b).symm (MorphismProperty.Over.pullbackCongr hc)
+    (MorphismProperty.Over.pullbackCongr ha) (MorphismProperty.Over.pullbackId _ _ X)
+    (MorphismProperty.Over.pullbackCongr hb)
+    (fun U ↦ MorphismProperty.Over.pullback_id_left_app a b c ha hc hb U) M
+  rw [lowerStarCongr_eq, lowerStarCongr_eq, lowerStarCongr_eq]
+  exact key
 
 end AlgebraicGeometry.ProEtale
