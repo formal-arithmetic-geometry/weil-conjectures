@@ -3,40 +3,73 @@
  "blueprint": {
   "is": "lem-weil-pbc-closed-immersion-proper",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "Closed immersions are proper",
- "statement": "A closed immersion [def-weil-pbc-scheme-conventions] is proper, and so is the\ncomposite of a closed immersion followed by a proper morphism; in particular,\na closed subscheme of a proper scheme is proper over the base.",
+ "statement": "Let $i:Z\\to X$ be a closed immersion of schemes [def-weil-closed-immersion] [def-pc-scheme]. Then:\n(a) $i$ is proper (separated, of finite type and universally closed) [def-weil-proper-morphism];\n(b) for every proper morphism of schemes $f:X\\to S$ [def-weil-proper-morphism], the composite $f\\circ i:Z\\to S$ is proper;\n(c) in particular, if $X$ is a scheme proper over a scheme $S$ and $Z\\subseteq X$ is a closed subscheme, i.e. $Z$ comes with a closed immersion $i:Z\\to X$, then $Z$ is proper over $S$ (its structure morphism $Z\\to X\\to S$ is proper).",
  "source": {
   "document": "literature/blueprint/master/blueprint/sec-curve-estimates/sk-thm-br/lem-weil-pbc-closed-immersion-proper.md",
-  "place": "node lem-weil-pbc-closed-immersion-proper, order 908"
+  "place": "node lem-weil-pbc-closed-immersion-proper, order 908; mathematically Stacks Project, Morphisms, Lemma 01W5 (lemma-closed-immersion-proper) for (a) and Lemma 01W3 (lemma-composition-proper) for (b), (c), in literature/stacks-project/morphisms.tex"
  },
  "stmt_deps": [
-  "def-weil-pbc-scheme-conventions"
+  "def-weil-closed-immersion",
+  "def-pc-scheme",
+  "def-weil-proper-morphism"
  ],
- "proof": [
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
   {
-   "text": "A closed immersion is affine, hence separated, is of finite type (a\nsurjective ring homomorphism makes the target a finitely generated algebra\nover the source), and is universally closed, since closed immersions are\nclosed maps and are stable under base change; all these notions are those of\n[def-weil-pbc-scheme-conventions]. Hence a closed immersion is proper, and\nthe composite of a closed immersion followed by a proper morphism is proper\nby [lem-weil-pbc-proper-composition]; in particular a closed subscheme of a\nscheme proper over the base is proper over the base.",
-   "uses": [
-    "def-weil-pbc-scheme-conventions",
-    "lem-weil-pbc-proper-composition"
-   ],
-   "elementary": false
+   "tool": "leansearch",
+   "query": "a closed immersion of schemes is proper; closed immersion is proper morphism of schemes; IsClosedImmersion f → IsProper f",
+   "results": "none: three attempts through mcp lean_leansearch and one direct POST to https://leansearch.net/search all returned HTTP 500 Internal Server Error (service down at 14:35 UTC)",
+   "date": "2026-10-10",
+   "verdict": "no result (service unavailable); covered by the leanfinder, loogle and grep searches below"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "closed immersion followed by a proper morphism of schemes is proper",
+   "results": "AlgebraicGeometry.IsProper.instCompScheme (Morphisms.Proper), IsProper.comp_iff, IsClosedImmersion.of_comp_isClosedImmersion, IsProper.of_comp, IsClosedImmersion.comp_iff",
+   "date": "2026-10-10",
+   "verdict": "match for (b): IsProper.instCompScheme"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "every closed immersion of schemes is a proper morphism",
+   "results": "Scheme.Hom.isProperMap, instUniversallyClosedOfIsClosedImmersion, IsProper.toUniversallyClosed, IsFinite.instOfIsClosedImmersion (Morphisms.Finite), IsClosedImmersion",
+   "date": "2026-10-10",
+   "verdict": "match for (a) through IsFinite.instOfIsClosedImmersion and the instance IsFinite → IsProper"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.IsClosedImmersion, AlgebraicGeometry.IsProper",
+   "results": "AlgebraicGeometry.IsClosedImmersion.iff_isProper_and_mono, AlgebraicGeometry.IsClosedImmersion.eq_proper_inf_monomorphisms (Mathlib.AlgebraicGeometry.ZariskisMainTheorem)",
+   "date": "2026-10-10",
+   "verdict": "match for (a): IsClosedImmersion.iff_isProper_and_mono"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -n 'instance\\|lemma\\|IsFinite' Mathlib/AlgebraicGeometry/Morphisms/Proper.lean; grep -rn 'IsClosedImmersion.*IsProper' Mathlib; grep -n IsClosedImmersion Mathlib/AlgebraicGeometry/Morphisms/Finite.lean",
+   "results": "Proper.lean:67 instance [IsProper f] [IsProper g] : IsProper (f ≫ g); Proper.lean:103 instance [IsFinite f] : IsProper f; Proper.lean:127 IsProper.comp_iff; ZariskisMainTheorem.lean:393 IsClosedImmersion.iff_isProper_and_mono; Finite.lean:144 instance [IsClosedImmersion f] : IsFinite f",
+   "date": "2026-10-10",
+   "verdict": "match: (a) ZariskisMainTheorem.lean:393, (b) Proper.lean:67"
+  },
+  {
+   "tool": "local_search",
+   "query": "AlgebraicGeometry.IsClosedImmersion.iff_isProper_and_mono",
+   "results": "lemma in .lake/packages/mathlib/Mathlib/AlgebraicGeometry/ZariskisMainTheorem.lean",
+   "date": "2026-10-10",
+   "verdict": "exists"
   }
  ],
- "proof_deps": [
-  "def-weil-pbc-scheme-conventions",
-  "lem-weil-pbc-proper-composition"
- ],
- "proof_origin": {
-  "by": "agent",
-  "document": "literature/blueprint/master/blueprint/sec-curve-estimates/sk-thm-br/lem-weil-pbc-closed-immersion-proper.md",
-  "place": "## Proof"
+ "mathlib_match": {
+  "declaration": "AlgebraicGeometry.IsClosedImmersion.iff_isProper_and_mono, AlgebraicGeometry.IsProper.instCompScheme",
+  "file": "Mathlib/AlgebraicGeometry/ZariskisMainTheorem.lean, Mathlib/AlgebraicGeometry/Morphisms/Proper.lean",
+  "how": "one Mathlib declaration per clause (Mathlib writes f∘i as i ≫ f): (a) IsClosedImmersion.iff_isProper_and_mono (ZariskisMainTheorem.lean:393-394, `IsClosedImmersion f ↔ IsProper f ∧ Mono f`, Stacks 04XV), its forward direction's first component; the same also follows from the instances IsFinite.instOfIsClosedImmersion (Morphisms/Finite.lean:144) and `[IsFinite f] : IsProper f` (Morphisms/Proper.lean:103); (b) the instance IsProper.instCompScheme `[IsProper f] [IsProper g] : IsProper (f ≫ g)` (Morphisms/Proper.lean:67) applied with (a) to i ≫ f (equivalently IsProper.comp_iff, Proper.lean:127-129); (c) is (b) for the closed immersion Z → X and the structure morphism X → S. Proper, closed immersion and scheme are Mathlib's IsProper, IsClosedImmersion and Scheme, the matches of def-weil-proper-morphism (IsProper asks LocallyOfFiniteType, which with the quasi-compactness implied by universal closedness is finite type), def-weil-closed-immersion and def-pc-scheme. Source read with sed -n on 2026-10-10."
  },
- "mathlib_searches": [],
- "mathlib_match": null,
- "status": "imported",
+ "status": "mathlib",
  "merged_into": null,
  "import_flags": [],
  "blueprint_kind": "lemma",
@@ -59,5 +92,21 @@
   }
  },
  "chapter": "sec-curve-estimates",
- "unit": "sk-thm-br"
+ "unit": "sk-thm-br",
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "lem-weil-pbc-closed-immersion-proper",
+  "worker": "stage1",
+  "summary": "Rule 0: no slopmaster2 declaration for this node (grep -rn of the id in WeilConjectures and Comparator: none; dag/lean_names_upstream.json: no entry; the WeilConjectures files using IsProper only apply Mathlib's instances). Mathlib states every clause: (a) IsClosedImmersion.iff_isProper_and_mono (ZariskisMainTheorem.lean:393), also the instances Finite.lean:144 and Proper.lean:103; (b) the composition instance IsProper.instCompScheme (Proper.lean:67) with (a); (c) is (b) for Z → X → S. Status mathlib, one declaration per clause; the imported one-step proof (via def-weil-pbc-scheme-conventions and lem-weil-pbc-proper-composition) removed, as a leaf carries no proof. Statement rewritten to introduce its objects and cite the definition nodes def-weil-closed-immersion, def-pc-scheme, def-weil-proper-morphism in place of the collection node def-weil-pbc-scheme-conventions; its content (three clauses) is unchanged. Source tags checked in tags/tags: 01W5 = morphisms-lemma-closed-immersion-proper, 01W3 = morphisms-lemma-composition-proper.",
+  "blueprint": {
+   "steps": [],
+   "realizes": "the whole proof of the blueprint node lem-weil-pbc-closed-immersion-proper (its single paragraph: a closed immersion is separated, of finite type and universally closed, hence proper; composites by lem-weil-pbc-proper-composition) is carried by the Mathlib declarations of the match: IsClosedImmersion.iff_isProper_and_mono for the first sentence, IsProper.instCompScheme for the composite and the closed-subscheme clause",
+   "same_as_search": "tools/blueprint_refs.py search 'closed immersion proper', '01W5', 'closed subscheme proper'; grep -rl 01W5 dag/nodes: lem-kun-projective-implies-proper and lem-pc-projective-proper mention closed immersions being proper only inside a proof of projective ⇒ proper; lem-weil-pbc-closed-immersion-integral-separated-uc states (d) universally closed only; lem-weil-pbc-proper-composition states composition of proper morphisms only; none states this node."
+  }
+ },
+ "reviewed": {
+  "by": "L",
+  "date": "2026-10-10",
+  "note": "Mathlib leaf, one declaration per clause: IsClosedImmersion.iff_isProper_and_mono (ZariskisMainTheorem.lean 393) and IsProper.instCompScheme (Proper.lean 67), both read by L; statement self-contained; LeanSearch down (recorded)"
+ }
 }
