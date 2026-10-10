@@ -15,17 +15,76 @@
  },
  "kind": "statement",
  "title": "A finite algebra over a henselian local ring is a product of henselian local rings",
- "statement": "Let $(R,\\mathfrak m,\\kappa)$ be a henselian local ring [def-weil-pbc-henselian-terminology] and $R\\to B$ a ring map making $B$ a finitely generated $R$-module. Then there are an integer $r\\ge0$, local rings $(B_1,\\mathfrak n_1),\\dots,(B_r,\\mathfrak n_r)$, each an $R$-algebra and a finitely generated $R$-module, and an isomorphism of $R$-algebras $B\\cong B_1\\times\\dots\\times B_r$ ($B=0$ if $r=0$), such that for every $i$: $B_i$ is a henselian local ring, and $R\\to B_i$ is a local homomorphism ($\\mathfrak n_i\\cap R=\\mathfrak m$, the preimage of $\\mathfrak n_i$ in $R$ being $\\mathfrak m$), so that $B_i/\\mathfrak n_i$ is a finite field extension of $\\kappa$.",
+ "statement": "Let $(R,\\mathfrak m,\\kappa)$ be a henselian local ring [def-weil-pbc-henselian-terminology] and $R\\to B$ a ring map making $B$ a finitely generated $R$-module. Then there are an integer $r\\ge0$, local rings $(B_1,\\mathfrak n_1),\\dots,(B_r,\\mathfrak n_r)$, each an $R$-algebra and a finitely generated $R$-module, and an isomorphism of $R$-algebras $B\\cong B_1\\times\\dots\\times B_r$ ($B=0$ if $r=0$), such that for every $i$: $B_i$ is a henselian local ring, and $R\\to B_i$ is a local homomorphism ($\\mathfrak n_i\\cap R=\\mathfrak m$, the preimage of $\\mathfrak n_i$ in $R$ being $\\mathfrak m$), so that $B_i/\\mathfrak n_i$ is a finite field extension of $\\kappa$ [def-pc-field-extension].",
  "source": {
   "document": "literature/stacks-project/algebra.tex",
   "place": "Lemma Tag 04GH (lemma-finite-over-henselian) (1) and (2), and its proof: '(2) implies (1) since S as in (1) is a finite product of its localizations at the primes lying over m by Lemma 04GG (10); (2) also follows from 04GG (10) since any finite S-algebra is also a finite R-algebra (any finite ring map between local rings is local)'"
  },
  "stmt_deps": [
+  "def-weil-pbc-henselian-terminology",
+  "def-pc-field-extension"
+ ],
+ "proof": [
+  {
+   "text": "*Product of local factors.* The henselian hypothesis gives the etale retraction property of [lem-weil-pbc-henselian-etale-retraction]. Applying [lem-weil-pbc-etale-retraction-finite-product-local] to the finite $R$-algebra $B$ therefore gives an $R$-algebra isomorphism $B\\cong B_1\\times\\cdots\\times B_r$ (with the empty product when $B=0$), where every $B_i$ is local. Each factor is a finitely generated $R$-module because it is the image of $B$ under a product projection.",
+   "uses": [
+    "lem-weil-pbc-henselian-etale-retraction",
+    "lem-weil-pbc-etale-retraction-finite-product-local"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Lemma Tag 04GH (lemma-finite-over-henselian), (1), using the proof of Lemma Tag 04GG (8) => (10)"
+   }
+  },
+  {
+   "text": "*The factors are local over $R$ and have finite residue extensions.* For each local factor $(B_i,\\mathfrak n_i)$, [lem-weil-pbc-finite-algebra-local-radical] applied to the finite map $R\\to B_i$ says that the preimage of $\\mathfrak n_i$ is $\\mathfrak m$; hence $R\\to B_i$ is local. Choose finitely many $R$-module generators of $B_i$. Their classes generate $B_i/\\mathfrak n_i$ as a vector space over $\\kappa=R/\\mathfrak m$, because $\\mathfrak mB_i\\subseteq\\mathfrak n_i$. Thus $B_i/\\mathfrak n_i$ is a finite-dimensional $\\kappa$-algebra which is a field (as $B_i$ is local), so it is a finite field extension of $\\kappa$ [def-pc-field-extension].",
+   "uses": [
+    "lem-weil-pbc-finite-algebra-local-radical",
+    "def-pc-field-extension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Lemma Tag 04GH, clauses (1) and (2): each factor is finite over $R$, the map is local, and the residue field is finite over $\\kappa$"
+   }
+  },
+  {
+   "text": "*Each factor is henselian.* Fix $i$ and let $C$ be a finite $B_i$-algebra. By transitivity of finite generation, $C$ is also a finite $R$-algebra. The retraction property from [lem-weil-pbc-henselian-etale-retraction] and [lem-weil-pbc-etale-retraction-finite-product-local] give $C\\cong\\prod_j C_j$ with each $C_j$ local. Every $C_j$ is a finite $B_i$-algebra, being a product projection of the finite $B_i$-algebra $C$. Applying [lem-weil-pbc-finite-algebra-local-radical] to the finite map $B_i\\to C_j$ shows that the preimage in $B_i$ of the maximal ideal of $C_j$ is $\\mathfrak n_i$; consequently $\\mathfrak n_iC_j$ is contained in that maximal ideal and $C_j/\\mathfrak n_iC_j$ is local. A local ring has only the idempotents $0$ and $1$, and idempotents of a finite product are componentwise. Therefore every idempotent of $C/\\mathfrak n_iC\\cong\\prod_j(C_j/\\mathfrak n_iC_j)$ is a $0$-$1$ vector, and it has exactly one lift, the same $0$-$1$ vector in $C\\cong\\prod_jC_j$. This is the idempotent-lifting definition of $B_i$ being henselian [def-weil-pbc-henselian-terminology].",
+   "uses": [
+    "lem-weil-pbc-henselian-etale-retraction",
+    "lem-weil-pbc-etale-retraction-finite-product-local",
+    "lem-weil-pbc-finite-algebra-local-radical",
+    "def-weil-pbc-henselian-terminology"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Lemma Tag 04GH, clause (2) and proof: a finite algebra over a local factor is finite over $R$, and the product-of-local-rings criterion gives the henselian idempotent lifting"
+   }
+  },
+  {
+   "text": "Combining the product isomorphism of Step 1 with Steps 2 and 3 gives all asserted properties of the factors. If $B=0$, take $r=0$ and the empty product; otherwise the displayed finite product has the required nonzero local factors.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Lemma Tag 04GH, conclusion of (1) and (2)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-henselian-etale-retraction",
+  "lem-weil-pbc-etale-retraction-finite-product-local",
+  "lem-weil-pbc-finite-algebra-local-radical",
+  "def-pc-field-extension",
   "def-weil-pbc-henselian-terminology"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Lemma Tag 04GH (lemma-finite-over-henselian), clauses (1) and (2), with the idempotent-lifting verification for each local factor written out"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -50,7 +109,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "worker",
@@ -66,5 +125,30 @@
   }
  },
  "chapter": "sec-proper-base-change",
- "unit": "sk-thm-iff"
+ "unit": "sk-thm-iff",
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "lem-weil-pbc-finite-over-henselian-local-product",
+  "worker": "stage1",
+  "summary": "Split along Stacks Algebra Tag 04GH, clauses (1) and (2). Step 1 uses the reviewed henselian-to-etale-retraction node and the reviewed 04GG (8)=>(10) product decomposition. Step 2 verifies locality and finite residue-field extensions from finite module generators and the finite-algebra Jacobson-radical lemma. Step 3 writes out the source's assertion that a finite algebra over each local factor is finite over the original henselian ring, decomposes it into local factors, and checks idempotents modulo the factor's maximal ideal componentwise, proving each factor henselian. No new nodes were needed; the blueprint ancestor is lemma-weil-pbc-proper-strict-henselian-h0, and the steps realize the 04GH invocation inside Proposition 03QP's proof.",
+  "blueprint": "proof, Tag 0A0C/09ZF/03QP: the use of Lemma 04GH to write the finite algebra as a product of henselian local rings, including the finite residue-field clause",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-henselian-etale-retraction",
+    "why": "Its etale-section criterion is a generic henselian-ring tool used in Step 1 and Step 3; no node of sk-thm-iff gives that criterion."
+   },
+   {
+    "node": "lem-weil-pbc-etale-retraction-finite-product-local",
+    "why": "Its finite-algebra product decomposition is a generic ring-theoretic tool used in Step 1 and Step 3; no node of sk-thm-iff gives this decomposition."
+   }
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-fhlp",
+  "group": "K1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-fhlp (reviewer sub-agent of L); spot-checked: Source: Stacks algebra.tex Tag 04GH (lemma-finite-over-henselian, line 42385) clauses (1),(2) and proof via 04GG(10); the item statement agrees hypothesis by hypothesis (henselian local R, R->B module-finite; finite product of local B_i finite over R, each henselian, R->B_i local, finite residue extension). The only statement change is the added citation [def-pc-field-extension] with stmt_deps, no mathematical change (a citation-only addition a reviewer could make as a fix). Step 1: lem-weil-pbc-henselian-etale-retraction (henselian S, etale S->B, q' over m with trivial residue extension gives retraction sigma with sigma^-1(m)=q') supplies exactly the hypothesis of lem-weil-pbc-etale-retraction-finite-product-local, which gives B = product of local rings; factors finite as projections. Step 2: lem-weil-pbc-finite-algebra-local-radical (mathlib leaf, R local, B finite: max ideals pull back to m) gives locality; residue field finite-dimensional over kappa from generators. Step 3: C finite over B_i is finite over R, decomposes as product of local C_j (B_i-structure transported along the R-iso), the local-radical lemma for B_i->C_j gives n_iC_j inside the maximal ideal, idempotents componentwise 0-1 vectors, unique lift; matches def-weil-pbc-henselian-terminology (idempotent lifting for finite algebras); C=0 trivial. Step 4 elementary. Tool uses accepted (C8): both nodes are generic 04GG ring-theoretic tools of unit sk-thm-p1 used as black boxes, not a replacement of a sk-thm-iff route step. Small cases: B=0 (r=0), B=R x R, B=k[x]/(x^2) over a field k (dim 0 local, henselian). No Lean attachment (none exists; no new nodes). 14:19-14:25 UTC"
+ }
 }
