@@ -857,3 +857,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 04:15 L: reviewed lem-weil-pbc-polynomial-ideal-coefficients-monomial (4 steps, 0 new): accepted.
 - 04:17 L: reviewed lem-weil-pbc-module-finite-type-submodule-extension (7 steps, 0 new; stage 3: lemma-nagata-finite-type-ideal-extension-exists contains it): accepted.
 - 04:18 L: reviewed lem-weil-pbc-module-stalk-filtered-colimit (5 steps, +009D node), lem-weil-pbc-module-pullback-affine-sections (7 steps, 0 new): accepted.
+- 04:19 L: reviewed lem-weil-pbc-polynomial-local-completion-formally-smooth (5 steps, +04EG leaf, +07ED node): accepted.

@@ -1,0 +1,67 @@
+{
+ "id": "lem-weil-pbc-localization-square-zero-lifting",
+ "kind": "statement",
+ "title": "A localization has the square-zero lifting property (is formally smooth)",
+ "statement": "Let $R$ be a commutative ring, $W\\subseteq R$ a multiplicative subset ($1\\in W$, $st\\in W$ for $s,t\\in W$) and $\\lambda:R\\to R'$ a localization of $R$ at $W$: (a) $\\lambda(s)$ is a unit of $R'$ for every $s\\in W$; (b) every element of $R'$ is $\\lambda(r)\\lambda(s)^{-1}$ for some $r\\in R$, $s\\in W$; (c) $\\lambda(r)=0$ implies $sr=0$ for some $s\\in W$ (for instance $R'=W^{-1}R$, the ring of fractions, with $r\\mapsto r/1$); $R'$ is an $R$-algebra via $\\lambda$. Let $D$ be an $R$-algebra, $N\\subseteq D$ an ideal with $N^2=0$ and $q:D\\to D/N$ the quotient map [def-weil-pbc-algebra-hom-quotient]. Then for every homomorphism of $R$-algebras $g:R'\\to D/N$ there is a homomorphism of $R$-algebras $f:R'\\to D$ with $q\\circ f=g$.",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Algebra, Lemma Tag 04EG (lemma-localization-formally-etale, line 41241): R -> S^{-1}R is formally etale, in particular formally smooth in the sense of Definition Tag 00TI (definition-formally-smooth); the proof: A^* is the inverse image of (A/I)^* under A -> A/I"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-algebra-hom-quotient"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "localization R → S⁻¹R is formally smooth: lifts along square-zero ideals",
+   "results": "RingHom.FormallySmooth.holdsForLocalizationAway (Mathlib.RingTheory.RingHom.Smooth), Algebra.Smooth.formallySmooth, Algebra.FormallySmooth.exists_lift, Algebra.FormallySmooth.instLocalization, RingHom.FormallySmooth.localizationPreserves, Algebra.FormallySmooth.of_comp_surjective (Mathlib.RingTheory.Smooth.Basic)",
+   "date": "2026-10-10",
+   "verdict": "match: Algebra.FormallySmooth.of_isLocalization with comp_surjective (see loogle)"
+  },
+  {
+   "tool": "loogle",
+   "query": "Algebra.FormallySmooth, IsLocalization",
+   "results": "Algebra.FormallySmooth.of_isLocalization (M : Submonoid R) [IsLocalization M Rₘ] : Algebra.FormallySmooth R Rₘ; Algebra.FormallySmooth.localization_base; Algebra.FormallySmooth.localization_map; Algebra.FormallySmooth.of_formallySmooth_residueField_tensor (Mathlib.RingTheory.Smooth.Basic / Fiber)",
+   "date": "2026-10-10",
+   "verdict": "match: of_isLocalization"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -n 'of_isLocalization\\|comp_surjective\\|class FormallySmooth' /home/ubuntu/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/RingTheory/Smooth/Basic.lean",
+   "results": "class FormallySmooth (line 70), FormallySmooth.comp_surjective (line 80), of_comp_surjective (346), iff_comp_surjective (371), of_isLocalization (482), instance FormallySmooth R (Localization M) (497); the proof of of_isLocalization (lines 482-495) is the argument of 04EG (IsNilpotent.isUnit_quotient_mk_iff, IsLocalization.lift)",
+   "date": "2026-10-10",
+   "verdict": "match"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "Algebra.FormallySmooth.of_isLocalization",
+  "file": "Mathlib/RingTheory/Smooth/Basic.lean",
+  "how": "specializes in one line, one declaration per step: `Algebra.FormallySmooth.of_isLocalization (M : Submonoid R) [IsLocalization M Rₘ] : FormallySmooth R Rₘ` (line 482; a multiplicative subset is a Submonoid R, and IsLocalization M Rₘ (Mathlib/RingTheory/Localization/Defs.lean) has the fields map_units, surj, exists_of_eq, which are (a), (b), (c)); then `Algebra.FormallySmooth.comp_surjective R Rₘ (I := N) (hI : N ^ 2 = ⊥)` (line 80, any target ring B) says every R-algebra map Rₘ → D ⧸ N is (Ideal.Quotient.mkₐ R N).comp f for some f : Rₘ →ₐ[R] D, which is the node's conclusion. Source read 2026-10-10.",
+  "line": 482
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-polynomial-local-completion-formally-smooth",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lead_note": "L 2026-10-10: composed Mathlib leaf (two declarations); lines 482, 80 verified."
+}
