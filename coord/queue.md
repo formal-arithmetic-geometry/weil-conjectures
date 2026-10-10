@@ -1,19 +1,17 @@
 # Work queue
 
-807 items; claim with `tools/claim.py next <group> [--stage N]`.
+811 items; claim with `tools/claim.py next <group> [--stage N]`.
 
-## Stage 1: nodes to split (656)
+## Stage 1: nodes to split (658)
 
 | node | distance to a target | Lean state on the done branch |
 |---|---|---|
-| `lem-weil-pbc-stein-normalized-fibre-idempotent` | 1009 | none |
 | `lem-weil-pbc-etale-stratification-local-gluing` | 1010 | none |
+| `lem-weil-pbc-stein-fibre-idempotent-image` | 1010 | none |
 | `lem-weil-pbc-z-localizations-dvr` | 1010 | none |
-| `lem-weil-pbc-artinian-ideal-length-one-filtration` | 1011 | none |
 | `lem-weil-pbc-closed-immersion-residue-field-iso` | 1011 | none |
 | `lem-weil-pbc-closed-subset-proper-over-base-universally-closed-image` | 1011 | none |
 | `lem-weil-pbc-etale-ring-map-prescribed-residue-field` | 1011 | none |
-| `lem-weil-pbc-formal-system-support-constant` | 1011 | none |
 | `lem-weil-pbc-formal-systems-annihilated-by-power` | 1011 | none |
 | `lem-weil-pbc-formal-systems-surjective` | 1011 | none |
 | `lem-weil-pbc-g-ring-check-pairs-of-primes` | 1011 | none |
@@ -115,6 +113,7 @@
 | `def-weil-pbc-formally-smooth-adic` | 1012 | none |
 | `lem-weil-pbc-affine-finite-type-generating-sections` | 1012 | none |
 | `lem-weil-pbc-ample-scheme-separated` | 1012 | none |
+| `lem-weil-pbc-artinian-ring-self-finite-length` | 1012 | none |
 | `lem-weil-pbc-cohen-coefficient-ring-exists` | 1012 | none |
 | `lem-weil-pbc-coherent-formal-module-kernel` | 1012 | none |
 | `lem-weil-pbc-coherent-formal-modules-local-exactness` | 1012 | none |
@@ -123,6 +122,8 @@
 | `lem-weil-pbc-completion-dimension` | 1012 | none |
 | `lem-weil-pbc-completion-finite-extension` | 1012 | none |
 | `lem-weil-pbc-descend-finite-locally-free` | 1012 | none |
+| `lem-weil-pbc-descend-qc-open-fg-subalgebra` | 1012 | none |
+| `lem-weil-pbc-finite-length-module-simple-filtration` | 1012 | none |
 | `lem-weil-pbc-finite-module-complete-over-complete-noetherian` | 1012 | none |
 | `lem-weil-pbc-finite-over-complete-local-product` | 1012 | none |
 | `lem-weil-pbc-finite-projective-prime-local-free` | 1012 | none |
@@ -134,6 +135,7 @@
 | `lem-weil-pbc-formally-smooth-complete-local-regular` | 1012 | none |
 | `lem-weil-pbc-gabber-finite-etale-section` | 1012 | none |
 | `lem-weil-pbc-gabber-strict-henselian-zariski-comparison` | 1012 | none |
+| `lem-weil-pbc-ideal-module-product-stalk` | 1012 | none |
 | `lem-weil-pbc-integral-extension-dimension` | 1012 | none |
 | `lem-weil-pbc-krull-intersection-localization` | 1012 | none |
 | `lem-weil-pbc-localization-colimit-principal-localizations` | 1012 | none |
@@ -663,7 +665,7 @@
 | `lem-pc-finite-linear-avoidance` | - | none |
 | `lem-pc-linear-pair-graded-finite` | - | none |
 
-## Stage 2: nodes to state (151)
+## Stage 2: nodes to state (153)
 
 | node | distance to Mathlib | kind |
 |---|---|---|
@@ -797,6 +799,7 @@
 | `lem-weil-pbc-spectral-sheaf-colimit-constant-embeddings` | 1 | state |
 | `lem-weil-pbc-stein-flat-base-change-global-sections` | 1 | state |
 | `lem-weil-pbc-stein-geometric-fibre-etale-criterion` | 1 | state |
+| `lem-weil-pbc-stein-normalized-fibre-idempotent` | 1 | state |
 | `lem-weil-pbc-surjective-universally-closed-separated` | 1 | state |
 | `lem-weil-pbc-symmetric-algebra-base-change` | 1 | state |
 | `lem-weil-pbc-symmetric-algebra-finite-presentation` | 1 | state |
@@ -815,11 +818,12 @@
 | `lem-weil-pbc-zariski-pair-finite-gabber-polynomial` | 1 | state |
 | `lem-weil-pbc-zariski-pair-flat-integral-isomorphism` | 1 | state |
 | `lemma-weil-pbc-finite-l-group-filtration` | 1 | state |
+| `lem-weil-pbc-artinian-ideal-length-one-filtration` | 2 | state |
 | `lem-weil-pbc-finite-type-lift-nilpotent` | 2 | state |
 | `lem-weil-pbc-p1-field-dimension-one` | 4 | state |
 | `lem-weil-pbc-projective-space-zero-isomorphism` | 4 | state |
 
-Not open yet: 668 nodes that wait for stage 1, 436 nodes that wait for a statement dependency.
+Not open yet: 670 nodes that wait for stage 1, 437 nodes that wait for a statement dependency.
 
 ## Stage 3: modules to prove (0)
 
