@@ -2,7 +2,7 @@
 
 821 items; claim with `tools/claim.py next <group> [--stage N]`.
 
-## Stage 1: nodes to split (656)
+## Stage 1: nodes to split (654)
 
 | node | distance to a target | Lean state on the done branch |
 |---|---|---|
@@ -15,8 +15,6 @@
 | `lem-weil-pbc-idempotent-endomorphism-image-base-change` | 1011 | none |
 | `lem-weil-pbc-lft-over-field-isolated-point-residue-finite` | 1011 | none |
 | `lem-weil-pbc-limit-fibre-products` | 1011 | none |
-| `lem-weil-pbc-limit-flat-modules` | 1011 | none |
-| `lem-weil-pbc-localization-of-regular-ring` | 1011 | none |
 | `lem-weil-pbc-localization-prime-residue-field-iso` | 1011 | none |
 | `lem-weil-pbc-locally-constant-finite-values-finite-type` | 1011 | none |
 | `lem-weil-pbc-lqf-qc-source-bounded-fibres` | 1011 | none |
@@ -663,7 +661,7 @@
 | `lem-pc-finite-linear-avoidance` | - | none |
 | `lem-pc-linear-pair-graded-finite` | - | none |
 
-## Stage 2: nodes to state (165)
+## Stage 2: nodes to state (167)
 
 | node | distance to Mathlib | kind |
 |---|---|---|
@@ -772,9 +770,11 @@
 | `lem-weil-pbc-lift-idempotent-upstairs` | 1 | state |
 | `lem-weil-pbc-lift-monic-coprime-factorization-etale` | 1 | state |
 | `lem-weil-pbc-lift-projective-module-etale` | 1 | state |
+| `lem-weil-pbc-limit-flat-modules` | 1 | state |
 | `lem-weil-pbc-linear-equation-localization-polynomial` | 1 | state |
 | `lem-weil-pbc-local-completion-quotient` | 1 | state |
 | `lem-weil-pbc-local-ring-idempotent-zero-one` | 1 | state |
+| `lem-weil-pbc-localization-of-regular-ring` | 1 | state |
 | `lem-weil-pbc-mate-whisker` | 1 | state |
 | `lem-weil-pbc-module-directed-colimit-underlying-sets` | 1 | state |
 | `lem-weil-pbc-module-sheaves-colimits-forgetful` | 1 | state |
@@ -833,7 +833,7 @@
 | `lem-weil-pbc-p1-field-dimension-one` | 4 | state |
 | `lem-weil-pbc-projective-space-zero-isomorphism` | 4 | state |
 
-Not open yet: 668 nodes that wait for stage 1, 451 nodes that wait for a statement dependency.
+Not open yet: 666 nodes that wait for stage 1, 451 nodes that wait for a statement dependency.
 
 ## Stage 3: modules to prove (0)
 
