@@ -1355,3 +1355,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 11:55 L: accepted def-weil-pbc-pointed-etale-neighbourhoods as a Mathlib leaf (Functor.Elements of the etale point's fibre functor).
 - 2026-10-10, delivery of E1: def-sp-etale-dictionary merged from deliver/E1/def-sp-etale-dictionary (1 commit(s), 0 new node(s), spot-checked by L: L: the dictionary of substitutions checked against the unit record); claim closed
 - 2026-10-10, delivery of F1: lem-weil-pbc-universal-homeomorphism-base-change merged from deliver/F1/lem-weil-pbc-universal-homeomorphism-base-change (1 commit(s), 0 new node(s), spot-checked by L: L: Mathlib leaf: 'universally P' is stable under base change (Limits.lean)); claim closed
+- 11:57 L: merged E1 def-sp-etale-dictionary (0 new) and F1 lem-weil-pbc-universal-homeomorphism-base-change (Mathlib leaf).
