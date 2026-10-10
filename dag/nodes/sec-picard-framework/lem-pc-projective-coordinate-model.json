@@ -3,7 +3,7 @@
  "blueprint": {
   "is": "lem-pc-projective-coordinate-model",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "A coordinate ring for an integral projective scheme",
@@ -23,26 +23,93 @@
     "def-pc-proj",
     "def-pc-standard-graded-algebra"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-picard-framework/sk-thm-picard-coherence/lem-pc-projective-coordinate-model.md",
+    "place": "## Proof, first paragraph"
+   }
   },
   {
-   "text": "We check the claimed identification on each standard affine chart of\n$\\mathbf P^n_k$. A nonempty inverse image in $X$ is an affine closed\nsubscheme of that chart and is integral. Its defining ideal is\ntherefore the prime ideal corresponding to its generic point, which\nis $\\eta$. The same prime is obtained from $I$ by homogeneous\nlocalization followed by degree zero. Thus the chart is\n$\\operatorname{Spec}(S_{(x_i)})$. If the inverse image is empty,\n$x_i\\in I$ and the localized quotient is the zero ring, giving the\nsame empty chart. These identifications commute with further\nlocalization on overlaps, so they glue to $X=\\operatorname{Proj}(S)$.",
-   "uses": [],
-   "elementary": null
+   "text": "We compare the two closed subschemes of $\\mathbf P^n_k$ chart by chart. For the standard affine chart $D_+(x_i)=\\operatorname{Spec}(R_i)$, $R_i=k[x_0,\\ldots,x_n]_{(x_i)}$ [def-pc-proj], the inverse image $i^{-1}(D_+(x_i))$ is $\\operatorname{Spec}(R_i/J_i)$ for an ideal $J_i\\subseteq R_i$ by the affine description of closed immersions (Stacks Lemma 01QO) in [def-weil-closed-immersion]. If it is nonempty it is an open subscheme of the integral scheme $X$, hence integral, so $R_i/J_i$ is a domain and $J_i$ is the prime of $R_i$ corresponding to its generic point, which is $\\eta$. By [def-pc-proj] that prime is $I_{(x_i)}$, the degree-zero part of the graded localization of $I$, and since graded localization is exact, $R_i/I_{(x_i)}=S_{(x_i)}$ [def-pc-standard-graded-algebra]. If the inverse image is empty, $\\eta\\notin D_+(x_i)$, so $x_i\\in I$, $S_{(x_i)}=0$ and $J_i=R_i=I_{(x_i)}$. Hence the morphism $\\operatorname{Proj}(S)\\to\\mathbf P^n_k$ induced by $k[x_0,\\ldots,x_n]\\to S$ is, on each chart, $\\operatorname{Spec}(R_i/I_{(x_i)})\\to\\operatorname{Spec}(R_i)$ [def-pc-proj], so it is a closed immersion [def-weil-closed-immersion], and its ideal sheaf [def-sbc-closed-immersion-ideal-sheaf] agrees with that of $i$ on every $D_+(x_i)$, hence everywhere. By [lem-weil-pbc-closed-immersions-equal-ideal-isomorphic] there is a unique isomorphism $X\\cong\\operatorname{Proj}(S)$ over $\\mathbf P^n_k$.",
+   "uses": [
+    "def-pc-proj",
+    "def-pc-standard-graded-algebra",
+    "def-weil-closed-immersion",
+    "def-sbc-closed-immersion-ideal-sheaf",
+    "lem-weil-pbc-closed-immersions-equal-ideal-isomorphic"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-picard-framework/sk-thm-picard-coherence/lem-pc-projective-coordinate-model.md",
+    "place": "## Proof, second paragraph"
+   }
   }
  ],
  "proof_deps": [
   "def-pc-proj",
-  "def-pc-standard-graded-algebra"
+  "def-pc-standard-graded-algebra",
+  "def-weil-closed-immersion",
+  "def-sbc-closed-immersion-ideal-sheaf",
+  "lem-weil-pbc-closed-immersions-equal-ideal-isomorphic"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/master/blueprint/sec-picard-framework/sk-thm-picard-coherence/lem-pc-projective-coordinate-model.md",
   "place": "## Proof"
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "closed integral subscheme of projective space is Proj of quotient by homogeneous prime ideal",
+   "results": "AlgebraicGeometry.Proj; ProjectiveSpectrum.isClosed_iff_zeroLocus; ProjectiveSpectrum.isPrime; ProjectiveSpectrum.zeroLocus; ProjectiveSpectrum.asHomogeneousIdeal (Mathlib/AlgebraicGeometry/ProjectiveSpectrum/{Scheme,Topology})",
+   "date": "2026-10-11",
+   "verdict": "no exact match; only Proj and topology primitives"
+  },
+  {
+   "tool": "loogle",
+   "query": "ProjectiveSpectrum.isClosed_iff_zeroLocus, ProjectiveSpectrum.isPrime",
+   "results": "0 hits (query parser accepted but returned no declarations)",
+   "date": "2026-10-11",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "isClosed_iff_zeroLocus|zeroLocus|isPrime Mathlib/AlgebraicGeometry/ProjectiveSpectrum",
+   "results": "0 hits from msearch grep service",
+   "date": "2026-10-11",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "closed integral subscheme of projective space is Proj of quotient by homogeneous prime ideal",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-11",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "homogeneous quotient graded algebra Proj closed subscheme",
+   "results": "ProjectiveSpectrum.asHomogeneousIdeal; AlgebraicGeometry.Proj; ProjectiveSpectrum.vanishingIdeal and related Proj chart primitives (Mathlib/AlgebraicGeometry/ProjectiveSpectrum)",
+   "date": "2026-10-11",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "ProjectiveSpectrum.isClosed_iff_zeroLocus, ProjectiveSpectrum.isPrime",
+   "results": "0 hits",
+   "date": "2026-10-11",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "isClosed_iff_zeroLocus|zeroLocus|isPrime Mathlib/AlgebraicGeometry/ProjectiveSpectrum",
+   "results": "0 hits from msearch grep service",
+   "date": "2026-10-11",
+   "verdict": "no match"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [],
  "blueprint_kind": "lemma",
@@ -83,5 +150,25 @@
   }
  },
  "chapter": "sec-picard-framework",
- "unit": "sk-thm-picard-coherence"
+ "unit": "sk-thm-picard-coherence",
+ "split_report": {
+  "date": "2026-10-11",
+  "item": "lem-pc-projective-coordinate-model",
+  "worker": "stage1",
+  "summary": "Checked the sorry-bearing declaration AlgebraicGeometry.exists_isStandard_iso_proj against the imported statement and retained the statement unchanged. The proof is split into the generic-point homogeneous-prime quotient construction and the standard-chart verification; both use only the existing Proj and standard-graded definitions, with the chart gluing written out rather than hidden in an uncited theorem. No smaller non-duplicate DAG node was created.",
+  "blueprint": "Realizes proof paragraph 1 (generic point and quotient) and proof paragraph 2 (standard affine charts and gluing)."
+ },
+ "tool_uses": [
+  "def-weil-closed-immersion",
+  "def-sbc-closed-immersion-ideal-sheaf",
+  "lem-weil-pbc-closed-immersions-equal-ideal-isomorphic"
+ ],
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-pcm3034",
+  "group": "E1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-pcm3034 (reviewer sub-agent of L); spot-checked: Step 1 generic-point construction of homogeneous prime I, S_0=k, generation in degree 1 checked; statement matches citer lem-pc-projective-curve-finite-projection (C4 ok). FIX more, RETURN less: C1 in step 2 (missed by the second reading) - the affine form of a closed immersion (Tag 01QO, def-weil-closed-immersion), the ideal sheaf, and the gluing of chartwise-equal closed subschemes into an isomorphism over P^n were used uncited; step 2 rewritten to cite def-weil-closed-immersion, def-sbc-closed-immersion-ideal-sheaf and lem-weil-pbc-closed-immersions-equal-ideal-isomorphic (declared tool_uses, generic tools), with integrality => J_i prime and the empty chart written out; 1 file(s) fixed by the reviewer"
+ }
 }
