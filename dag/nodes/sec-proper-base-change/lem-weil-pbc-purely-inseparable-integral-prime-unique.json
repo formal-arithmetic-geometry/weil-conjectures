@@ -2,7 +2,7 @@
  "id": "lem-weil-pbc-purely-inseparable-integral-prime-unique",
  "kind": "statement",
  "title": "Purely inseparable integral extensions have a unique prime over each prime",
- "statement": "Let $A\\subseteq B$ be a finite integral extension of domains, assume that $A$ is a normal domain [def-weil-pbc-normal-ring], and let the fraction fields $K\\subseteq L$ form a finite purely inseparable extension [def-pc-field-extension] [def-weil-pbc-finite-purely-inseparable-extension]. Then for every prime ideal $\\mathfrak p\\subset A$ there is exactly one prime ideal of $B$ lying over $\\mathfrak p$.",
+ "statement": "Let $A\\subseteq B$ be an extension of integral domains with $B$ finitely generated as an $A$-module, assume that $A$ is a normal domain [def-weil-pbc-normal-ring], and let the fraction fields $K=\\operatorname{Frac}(A)\\subseteq L=\\operatorname{Frac}(B)$ (the inclusion induced by $A\\subseteq B$) form a finite purely inseparable extension [def-pc-field-extension] [def-weil-pbc-finite-purely-inseparable-extension]. Then for every prime ideal $\\mathfrak p\\subset A$ there is exactly one prime ideal $\\mathfrak q\\subset B$ lying over $\\mathfrak p$, that is, with $\\mathfrak q\\cap A=\\mathfrak p$.",
  "source": {
   "document": "literature/stacks-project/more-algebra.tex",
   "place": "More on Algebra, Lemma Tag 07PR, proof, sentence 'Since A subset B subset C are finite and L/M/K are purely inseparable ... there is a unique prime lying over p'; the integral/radicial argument is made explicit"
@@ -12,9 +12,55 @@
   "def-pc-field-extension",
   "def-weil-pbc-finite-purely-inseparable-extension"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "(Some power of every element of $B$ lies in $A$.) Let $e$ be the characteristic exponent of $K$: $e=1$ if $\\operatorname{char}K=0$ and $e=p$ if $\\operatorname{char}K=p>0$; $L$ has the same characteristic as $K$. We show: for every $b\\in B$ there is $n\\ge0$ with $b^{e^n}\\in A$. Regard $b\\in B\\subseteq L$. Since $L/K$ is purely inseparable [def-weil-pbc-finite-purely-inseparable-extension], there is $n\\ge0$ with $c:=b^{e^n}\\in K$ (in characteristic $p$ this is the definition; in characteristic $0$ the definition gives $L=K$, and $n=0$). Now $c\\in B$, and $B$ is a finitely generated $A$-module, so $c$ is integral over $A$ [lem-weil-pbc-finite-algebra-is-integral]: $c^m+a_{m-1}c^{m-1}+\\dots+a_0=0$ in $B$ with $a_i\\in A$ [def-weil-pbc-integral-closure]. This equation holds in $L$, all its terms lie in the subfield $K$ (as $c\\in K$, $a_i\\in A\\subseteq K$), and $K\\to L$ is injective, so it holds in $K$: $c\\in K=\\operatorname{Frac}(A)$ is a root of a monic polynomial with coefficients in $A$. As $A$ is a normal domain, integrally closed in its fraction field [def-weil-pbc-normal-ring], $c\\in A$.",
+   "uses": [
+    "def-weil-pbc-finite-purely-inseparable-extension",
+    "lem-weil-pbc-finite-algebra-is-integral",
+    "def-weil-pbc-integral-closure",
+    "def-weil-pbc-normal-ring"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "More on Algebra, Lemma Tag 07PR (lemma-helper-G-ring, line 12306), proof: 'Since A ⊂ B ⊂ C are finite and L/M/K are purely inseparable we see that for every element of B or C some power of it lies in A'; the use of normality is written out by the worker"
+   }
+  },
+  {
+   "text": "(Existence.) The inclusion $\\varphi:A\\to B$ is injective, and $B$ is integral over $A$ because it is a finitely generated $A$-module [lem-weil-pbc-finite-algebra-is-integral]. By lying over [lem-weil-pbc-integral-injective-lying-over] there is a prime $\\mathfrak q\\subset B$ with $\\varphi^{-1}(\\mathfrak q)=\\mathfrak q\\cap A=\\mathfrak p$.",
+   "uses": [
+    "lem-weil-pbc-finite-algebra-is-integral",
+    "lem-weil-pbc-integral-injective-lying-over"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra, Lemma Tag 0BR8 (lemma-powers, line 10718), proof, first paragraph (injectivity) and the surjectivity via Lemma Tag 00GQ"
+   }
+  },
+  {
+   "text": "(Uniqueness.) Let $\\mathfrak q,\\mathfrak q'\\subset B$ be primes with $\\mathfrak q\\cap A=\\mathfrak p=\\mathfrak q'\\cap A$. Let $x\\in\\mathfrak q$. By Step 1 there is $n\\ge0$ with $x^{e^n}\\in A$; since $\\mathfrak q$ is an ideal, $x^{e^n}\\in\\mathfrak q\\cap A=\\mathfrak p\\subseteq\\mathfrak q'$, and since $\\mathfrak q'$ is prime and $e^n\\ge1$, $x\\in\\mathfrak q'$. Hence $\\mathfrak q\\subseteq\\mathfrak q'$, and exchanging the roles of $\\mathfrak q$ and $\\mathfrak q'$ gives $\\mathfrak q'\\subseteq\\mathfrak q$; so $\\mathfrak q=\\mathfrak q'$. With Step 2, exactly one prime of $B$ lies over $\\mathfrak p$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra, Lemma Tag 0BR8 (lemma-powers, line 10718), proof, first paragraph (injectivity) and the surjectivity via Lemma Tag 00GQ"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-finite-purely-inseparable-extension",
+  "lem-weil-pbc-finite-algebra-is-integral",
+  "def-weil-pbc-integral-closure",
+  "def-weil-pbc-normal-ring",
+  "lem-weil-pbc-integral-injective-lying-over"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "More on Algebra, Lemma Tag 07PR (lemma-helper-G-ring, line 12306), proof, the sentence 'for every element of B or C some power of it lies in A. Hence there is a unique prime ... lying over p'; the 'hence' follows Algebra, Lemma Tag 0BR8 (lemma-powers, line 10718), proof, with Lemma Tag 00GQ for existence; the use of the normality of A (absent in 07PR, where A is regular) is written out by the worker"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -36,10 +82,45 @@
    "results": "No matching prime-uniqueness theorem",
    "date": "2026-10-10",
    "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "integrally closed domain, integral extension with purely inseparable fraction field extension, unique prime lying over each prime",
+   "results": "integralClosure.isIntegrallyClosedOfFiniteExtension, IsIntegrallyClosed.of_isIntegrallyClosedIn (Mathlib.RingTheory.IntegralClosure.IntegrallyClosed), IsPurelyInseparable.isIntegral (Mathlib.FieldTheory.PurelyInseparable.Basic), Ring.instIsIntegrallyClosedNormalClosure",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "integral extension of an integrally closed domain whose fraction field extension is purely inseparable: Spec map is bijective / homeomorphism",
+   "results": "PrimeSpectrum.isHomeomorph_comap_of_isPurelyInseparable, PrimeSpectrum.isHomeomorph_comap_tensorProductMap_of_isPurelyInseparable (Mathlib.RingTheory.Spectrum.Prime.Homeomorph; both for R → R ⊗_k K, not for an integral extension of domains), IsAlgClosed.ringHom_bijective_of_isIntegral",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "IsIntegrallyClosed, IsPurelyInseparable",
+   "results": "none",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -n 'IsIntegrallyClosed' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/FieldTheory/PurelyInseparable/ ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/RingTheory/Spectrum/Prime/; grep -rln IsPurelyInseparable RingTheory/ | xargs grep -ln 'IsIntegrallyClosed\\|primesOver'; sed -n 1,64p RingTheory/Spectrum/Prime/Homeomorph.lean",
+   "results": "none for the first two; Homeomorph.lean:39 PrimeSpectrum.isHomeomorph_comap (f : R →+* S) (H : ∀ x : S, ∃ n > 0, x ^ n ∈ f.range) (hker : RingHom.ker f ≤ nilradical R) : IsHomeomorph (comap f), tagged stacks 0BR8",
+   "date": "2026-10-10",
+   "verdict": "no match for the item; candidate route: Step 1 (powers in A, not in Mathlib) plus PrimeSpectrum.isHomeomorph_comap gives bijectivity in Lean"
+  },
+  {
+   "tool": "local_search",
+   "query": "PrimeSpectrum.isHomeomorph_comap (project ~/weil-conjectures-slopmaster2)",
+   "results": "PrimeSpectrum.isHomeomorph_comap, isHomeomorph_comap_of_isPurelyInseparable, isHomeomorph_comap_tensorProductMap_of_isPurelyInseparable (Spectrum/Prime/Homeomorph.lean), isHomeomorph_comap_of_bijective (Topology.lean); index unavailable",
+   "date": "2026-10-10",
+   "verdict": "tool for Lean, not a match"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "worker",
@@ -59,5 +140,23 @@
   }
  },
  "chapter": "sec-proper-base-change",
- "unit": "sk-thm-p1"
+ "unit": "sk-thm-p1",
+ "mathlib_candidate": {
+  "declaration": "PrimeSpectrum.isHomeomorph_comap",
+  "file": "Mathlib/RingTheory/Spectrum/Prime/Homeomorph.lean",
+  "line": 39,
+  "how": "not a one-line specialization: its hypothesis 'every x : B has a power x^n, n>0, in the image of A' is Step 1 of the proof (normality of A and pure inseparability of L/K), which Mathlib does not state; with Step 1 the lemma (kernel = 0) gives bijectivity of Spec B → Spec A, i.e. Steps 2-3"
+ },
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "lem-weil-pbc-purely-inseparable-integral-prime-unique",
+  "worker": "stage1",
+  "summary": "Statement checked against Stacks 07PR (proof sentence) and made precise, meaning unchanged: 'finite integral extension' is now 'B finitely generated as an A-module' (what the citer lem-weil-pbc-helper-g-ring-char-p provides and integrality follows from), the inclusion K ⊆ L is said to be induced by A ⊆ B, and 'lying over' is written as q ∩ A = p. Proof in 3 steps: (1) every b in B has b^{e^n} in A (e the characteristic exponent), from pure inseparability, integrality of a finite algebra (existing leaf lem-weil-pbc-finite-algebra-is-integral) and normality of A; 07PR asserts this without mentioning normality, which is where it is needed (A regular there); (2) existence by lying over, new Mathlib leaf lem-weil-pbc-integral-injective-lying-over (Stacks 00GQ, RingHom.IsIntegral.comap_surjective, Topology.lean:1226); (3) uniqueness elementary from step 1 as in the proof of Stacks 0BR8: q ⊆ q' and symmetrically, so incomparability (lem-weil-pbc-integral-incomparability) is not needed. Mathlib has no declaration for the item (LeanSearch, LeanFinder, Loogle, grep); PrimeSpectrum.isHomeomorph_comap (0BR8) is recorded as mathlib_candidate since its hypothesis is step 1. The imported pqf-lem-lying-over (unit sk-prop-av-pqf-finite, unsplit) states the same fact as the new leaf; not cited as another unit's non-leaf node."
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "result": "accepted",
+  "note": "3 steps (07PR with the argument of 0BR8): some e^n-th power of every b in B lies in K, is integral over A, hence in A by normality (the gap of 07PR written out); existence by a new lying-over leaf for 00GQ (RingHom.IsIntegral.comap_surjective, Topology.lean:1226 verified by L); uniqueness by the power argument, no incomparability needed. Statement: 'finite integral' made 'finitely generated A-module', lying over written out. Stage-3 note: pqf-lem-lying-over (sk-prop-av-pqf-finite, unsplit) duplicates the new leaf."
+ }
 }

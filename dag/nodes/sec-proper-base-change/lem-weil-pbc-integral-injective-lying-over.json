@@ -1,0 +1,81 @@
+{
+ "id": "lem-weil-pbc-integral-injective-lying-over",
+ "kind": "statement",
+ "title": "Lying over for an injective integral ring map",
+ "statement": "Let $\\varphi:R\\to S$ be an injective homomorphism of commutative rings such that $S$ is integral over $R$ [def-weil-pbc-integral-closure] (every element of $S$ is a root of a monic polynomial with coefficients in $\\varphi(R)$). Then for every prime ideal $\\mathfrak p\\subset R$ there is a prime ideal $\\mathfrak q\\subset S$ with $\\varphi^{-1}(\\mathfrak q)=\\mathfrak p$; that is, the map $\\operatorname{Spec}S\\to\\operatorname{Spec}R$, $\\mathfrak q\\mapsto\\varphi^{-1}(\\mathfrak q)$, is surjective.",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Algebra, Lemma Tag 00GQ (lemma-integral-overring-surjective, line 7735)"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-integral-closure"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "lying over: injective integral ring extension, every prime ideal of R is the comap of a prime ideal of S",
+   "results": "Ideal.exists_ideal_over_prime_of_isIntegral_of_isDomain, Ideal.exists_ideal_over_maximal_of_isIntegral, Ideal.nonempty_primesOver (Mathlib.RingTheory.Ideal.GoingUp); RingHom.IsIntegral.comap_surjective (Mathlib.RingTheory.Spectrum.Prime.Topology); Ideal.exists_isPrime_liesOver_of_faithfullyFlat",
+   "date": "2026-10-10",
+   "verdict": "match: RingHom.IsIntegral.comap_surjective"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "If R ⊆ S is an integral extension then Spec S → Spec R is surjective (lying over theorem)",
+   "results": "RingHom.IsIntegral.specComap_surjective (v4.28 index name), RingHom.IsIntegral.comap_surjective (Mathlib.RingTheory.Spectrum.Prime.Topology), RingHom.isIntegral_of_surjective",
+   "date": "2026-10-10",
+   "verdict": "match"
+  },
+  {
+   "tool": "loogle",
+   "query": "Function.Surjective (PrimeSpectrum.comap _)",
+   "results": "Algebra.IsIntegral.comap_surjective, RingHom.IsIntegral.comap_surjective (Mathlib.RingTheory.Spectrum.Prime.Topology), PrimeSpectrum.comap_surjective_of_faithfullyFlat, IsLocalHom.of_comap_surjective",
+   "date": "2026-10-10",
+   "verdict": "match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -n 'comap_surjective' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/RingTheory/Spectrum/Prime/Topology.lean; sed -n 1214,1231p",
+   "results": "Topology.lean:1217 Algebra.IsIntegral.comap_surjective [Algebra R S] [Algebra.IsIntegral R S] [FaithfulSMul R S] : Function.Surjective (comap (algebraMap R S)) (proof via Ideal.exists_ideal_over_prime_of_isIntegral, GoingUp.lean:327, with I = ⊥); Topology.lean:1226 RingHom.IsIntegral.comap_surjective {f : R →+* S} (hf : f.IsIntegral) (hinj : Function.Injective f) : Function.Surjective (comap f)",
+   "date": "2026-10-10",
+   "verdict": "match"
+  },
+  {
+   "tool": "local_search",
+   "query": "RingHom.IsIntegral.comap_surjective (project ~/weil-conjectures-slopmaster2)",
+   "results": "RingHom.IsIntegral.comap_surjective in .lake/packages/mathlib/Mathlib/RingTheory/Spectrum/Prime/Topology.lean (index: unavailable; existence confirmed by sed)",
+   "date": "2026-10-10",
+   "verdict": "exists"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "RingHom.IsIntegral.comap_surjective",
+  "file": "Mathlib/RingTheory/Spectrum/Prime/Topology.lean",
+  "line": 1226,
+  "how": "exact: `lemma RingHom.IsIntegral.comap_surjective {f : R →+* S} (hf : f.IsIntegral) (hinj : Function.Injective f) : Function.Surjective (PrimeSpectrum.comap f)` (Topology.lean:1226-1230, read with sed -n 1214,1231p, 2026-10-10); `RingHom.IsIntegral` is integrality of every element of S over R via f, and `PrimeSpectrum.comap f q` is the prime f^{-1}(q). Algebra form `Algebra.IsIntegral.comap_surjective` (line 1217); ideal form `Ideal.exists_ideal_over_prime_of_isIntegral` (Mathlib/RingTheory/Ideal/GoingUp.lean:327) with I = ⊥."
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-purely-inseparable-integral-prime-unique",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lead_note": "L 2026-10-10: Mathlib leaf (RingHom.IsIntegral.comap_surjective, Spectrum/Prime/Topology.lean:1226); line verified."
+}
