@@ -1402,3 +1402,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 12:23 L: accepted lem-sc-positive-degree-ample (4 steps along the Lean, 0 new).
 - 12:24 L: accepted lem-weil-pbc-tor-symmetry (00M3, 7 steps; new node 00M1 and two Mathlib leaves).
 - 12:24 L: accepted lem-weil-pbc-hypercover-finite-simplex-lifting (01GN, 4 steps; 8 new nodes: SR(X), simplicial sets (leaf), Hom(S,K)_0 and its existence, add-simplices 018S, one-more-simplex 01GM, covering permanence 01G4, finite limits in SR (leaf)) and lem-pc-presheaf-module-inverse-image-adjunction (008T/008U, 8 steps; +1 leaf).
+- 2026-10-10, delivery of E1: lem-weil-pbc-torsion-hom-flat-comparison merged from deliver/E1/lem-weil-pbc-torsion-hom-flat-comparison (1 commit(s), 0 new node(s), spot-checked by L: L: 05EC: the torsion case by the base-change isomorphism and 05DQ, the general case through the torsion submodule; 0 new); claim closed
