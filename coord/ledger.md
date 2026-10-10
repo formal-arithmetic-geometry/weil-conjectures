@@ -2530,3 +2530,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 20:32 L: merged deliver/E1/pqf-lem-leray (reviewer FIX; first push; new nodes: 0)
 - 20:32 L: merged deliver/M1/lem-pc-projective-space-canonical (reviewer PASS; first push; new nodes: 0)
 - 20:33 L: merged deliver/E1/pqf-def-affine-morphism (reviewer FIX; first push; new nodes: 0)
+- 20:34 L: returned deliver/K1/lem-sc-proper-flat-right-adjoint-affine-basechange (reviewer RETURN: Reviewer R-pfa2326 (head 25557cf09). Return points (2) generator and (4) Tor were repaired; (1) the bundled node is gone)
