@@ -1,0 +1,77 @@
+{
+ "id": "lem-weil-pbc-ringed-space-open-restriction-adjunction",
+ "kind": "statement",
+ "title": "Restriction of modules to an open is left adjoint to the direct image",
+ "statement": "Let $X$ be a topological space and $\\mathcal O_X$ a sheaf of commutative rings on $X$, and let $U\\subseteq X$ be an open subset. Write $\\mathcal O_U=\\mathcal O_X|_U$ for the sheaf of rings $W\\mapsto\\mathcal O_X(W)$ on the open subsets $W\\subseteq U$, and for a sheaf of $\\mathcal O_X$-modules $\\mathcal M$ [def-weil-sheaf-of-modules-category] write $\\mathcal M|_U$ for the $\\mathcal O_U$-module $W\\mapsto\\mathcal M(W)$ ($W\\subseteq U$ open) with the restriction maps and module structures of $\\mathcal M$ [def-weil-pbc-module-finite-type-presentation]; for a morphism $\\alpha:\\mathcal M\\to\\mathcal N$ of $\\mathcal O_X$-modules let $\\alpha|_U$ have the components $\\alpha_W$, $W\\subseteq U$. For a sheaf of $\\mathcal O_U$-modules $\\mathcal G$ let $j_*\\mathcal G$ be the sheaf of $\\mathcal O_X$-modules $V\\mapsto\\mathcal G(V\\cap U)$ ($V\\subseteq X$ open), with the restriction maps of $\\mathcal G$ and with $\\mathcal O_X(V)$ acting on $\\mathcal G(V\\cap U)$ through the restriction $\\mathcal O_X(V)\\to\\mathcal O_X(V\\cap U)=\\mathcal O_U(V\\cap U)$; for a morphism $\\beta:\\mathcal G\\to\\mathcal G'$ of $\\mathcal O_U$-modules let $(j_*\\beta)_V=\\beta_{V\\cap U}$. Then $\\mathcal M\\mapsto\\mathcal M|_U$ and $\\mathcal G\\mapsto j_*\\mathcal G$ are functors $\\Mod(\\mathcal O_X)\\to\\Mod(\\mathcal O_U)$ and $\\Mod(\\mathcal O_U)\\to\\Mod(\\mathcal O_X)$, and the first is left adjoint to the second: for all $\\mathcal M\\in\\Mod(\\mathcal O_X)$ and $\\mathcal G\\in\\Mod(\\mathcal O_U)$ the map $\\Hom_{\\mathcal O_U}(\\mathcal M|_U,\\mathcal G)\\to\\Hom_{\\mathcal O_X}(\\mathcal M,j_*\\mathcal G)$ sending $\\alpha$ to the morphism with components $\\mathcal M(V)\\to\\mathcal G(V\\cap U)$, $s\\mapsto\\alpha_{V\\cap U}(s|_{V\\cap U})$, is a bijection, natural in $\\mathcal M$ and $\\mathcal G$; its inverse sends $\\beta$ to the morphism with components $\\beta_W:\\mathcal M(W)\\to(j_*\\mathcal G)(W)=\\mathcal G(W)$ for $W\\subseteq U$ open.",
+ "source": {
+  "document": "literature/stacks-project/sheaves.tex",
+  "place": "Sheaves, Lemma 0096 (sheaves-lemma-adjoint-pullback-pushforward-modules: f^* is left adjoint to f_* for a morphism of ringed spaces) applied to the inclusion j:(U,O_X|_U)->(X,O_X), with Lemma 00A0 (sheaves-lemma-j-pullback: j^{-1}G is V -> G(V) for V in U, also for sheaves of modules) and Definition 00A1 (sheaves-definition-restriction (3),(4)); for this j, j^*M = O_U (x)_{j^{-1}O_X} j^{-1}M = j^{-1}M = M|_U since j^{-1}O_X = O_U; the pushforward is Definition 0095 (sheaves-definition-pushforward)"
+ },
+ "stmt_deps": [
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-pbc-module-finite-type-presentation"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "restriction of sheaf of modules to open subset is left adjoint to pushforward",
+   "results": "AlgebraicGeometry.Scheme.Modules.restrictAdjunction, restrict, restrict_obj, restrictAdjunction_unit_app_app (Mathlib.AlgebraicGeometry.Modules.Sheaf, schemes and open immersions only); TopCat.Sheaf.pullbackPushforwardAdjunction (Mathlib.Topology.Sheaves.Functors, sheaves of sets/values in A, not modules); SheafOfModules.pullback, SheafOfModules.pullbackPushforwardAdjunction (Mathlib.Algebra.Category.ModuleCat.Sheaf.PullbackContinuous, general pullback, not the restriction)",
+   "date": "2026-10-10",
+   "verdict": "no match: the restriction adjunction is stated for schemes only"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a ringed space X and open U, restricting O_X-modules to U is left adjoint to direct image j_* along the inclusion",
+   "results": "Scheme.Modules.instIsLeftAdjointRestrictFunctor, restrictAdjunction, restrictAdjunction_unit_app_app, restrictAdjunction_counit_app_app, restrictFunctorAdjCounitIso (Mathlib.AlgebraicGeometry.Modules.Sheaf), all for schemes",
+   "date": "2026-10-10",
+   "verdict": "no match for a general ringed space"
+  },
+  {
+   "tool": "loogle",
+   "query": "SheafOfModules.overPushforwardOverAdj; TopologicalSpace.Opens.sheafOfModulesEquivOver",
+   "results": "SheafOfModules.overPushforwardOverAdj (x : C) : pushforward (𝟙 (R.over x)) ⊣ pushforward (pushforwardOver x) (Mathlib.Algebra.Category.ModuleCat.Sheaf.PushforwardContinuous, [HasBinaryProducts C]); TopologicalSpace.Opens.sheafOfModulesEquivOver U R : SheafOfModules (R.over U) ≌ SheafOfModules (U.sheafRestrict.obj R) (Mathlib.Topology.Sheaves.Module), with sheafOfModulesEquivOverUnit/InverseUnit",
+   "date": "2026-10-10",
+   "verdict": "generalization in pieces, not one line: see mathlib_candidate"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rn 'pushforwardPushforwardAdj|overPushforwardOverAdj|IsLeftAdjoint|sheafOfModulesEquivOver|sheafRestrict' Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean Mathlib/Topology/Sheaves/Module.lean Mathlib/Topology/Sheaves/Over.lean Mathlib/Topology/Sheaves/SheafCondition/Sites.lean Mathlib/AlgebraicGeometry/Modules/Sheaf.lean",
+   "results": "PushforwardContinuous.lean:59 overFunctor R X = pushforward (𝟙 _) (restriction to Over X), :274 pushforwardPushforwardAdj, :342 overPushforwardOverAdj, :350 instance IsLeftAdjoint (pushforward (𝟙 (R.over x))); Topology/Sheaves/Module.lean:30 sheafOfModulesEquivOver (no adjunction or restriction functor of its own); SheafCondition/Sites.lean:179 Opens.sheafRestrict (sheaves, not modules); AlgebraicGeometry/Modules/Sheaf.lean:348 restrictFunctor, :425 restrictAdjunction (schemes only). No declaration named for the restriction of modules on a topological space to an open with its right adjoint V -> G(V ∩ U).",
+   "date": "2026-10-10",
+   "verdict": "no exact match; candidate recorded"
+  },
+  {
+   "tool": "local_search",
+   "query": "sheafOfModulesEquivOver (project ~/weil-conjectures-slopmaster2)",
+   "results": "TopologicalSpace.Opens.sheafOfModulesEquivOver, sheafOfModulesEquivOverUnit, sheafOfModulesEquivOverInverseUnit (Mathlib/Topology/Sheaves/Module.lean); index: unavailable",
+   "date": "2026-10-10",
+   "verdict": "names exist"
+  }
+ ],
+ "mathlib_match": null,
+ "mathlib_candidate": "For X : TopCat, R : X.Sheaf RingCat (= O_X on Opens.grothendieckTopology X) and U : Opens X, the restriction of the node is the composite SheafOfModules.overFunctor R U (Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean:59, a left adjoint by SheafOfModules.overPushforwardOverAdj :342 and the instance :350, right adjoint pushforward along Over.star U, sections V -> G(V x U) = G(V ∩ U)) followed by the equivalence (U.sheafOfModulesEquivOver R).functor (Mathlib/Topology/Sheaves/Module.lean:30) onto SheafOfModules (U.sheafRestrict.obj R) (U.sheafRestrict: Mathlib/Topology/Sheaves/SheafCondition/Sites.lean:179, O_X|_U); the composite adjunction is Adjunction.comp. That this composite has sections W -> M(W) and that its right adjoint is the j_* of the node is an unfolding of pushforward along U.overEquivalence and Over.star, not one declaration; so the node is left unsplit with this candidate.",
+ "status": "unsplit",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-ringed-space-colimit-restriction",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1"
+}

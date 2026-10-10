@@ -881,3 +881,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 04:51 L: reviewed lem-weil-pbc-ring-universal-first-order-thickening (7 steps, +00UO composed leaf): accepted.
 - 04:51 L: reviewed lem-weil-pbc-sets-extension-by-empty-adjunction (8 steps, +007Z sets leaf): accepted.
 - 04:52 L: reviewed lem-weil-pbc-separably-generated-separable (3 steps, +030U node, +030W (4)=>(1) node): accepted.
+- 04:54 L: reviewed lem-weil-pbc-ringed-space-colimit-restriction (4 steps, +0096 restriction-adjunction node; statement rewritten): accepted. Stage-3 notes: lem-weil-pbc-sheaf-hom-finite-presentation-colimit's statement points at 01AH (2) for meaning (B7); lem-weil-pbc-sheaves-colimit-sheafification cites def-weil-pbc-sites-and-cohomology for the opens site, which that node does not define.
