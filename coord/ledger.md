@@ -2009,3 +2009,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 16:36 L: merge_delivery.py --drop-nodes a,b (delivered duplicate nodes dropped at merge, citations replaced by the reviewer's fixes); brief-review updated
 - 16:36 L: merged deliver/F1/lem-pc-local-flat-faithful-flat-reflects-surjective (reviewer PASS; first push; new nodes: 0)
 - 16:37 L: merged deliver/C1/lem-sc-topological-leray-spectral-sequence (reviewer FIX; first push; new nodes: 1)
+- 16:38 L: merged deliver/E1/def-pc-upper-shriek-right-adjoint (reviewer PASS; first push; new nodes: 0)
