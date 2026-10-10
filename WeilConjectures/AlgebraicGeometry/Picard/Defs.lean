@@ -186,6 +186,71 @@ i.e. the unit of the fppf sheafification adjunction. -/
 noncomputable abbrev toPicardFunctor (f : X ⟶ S) : picardPresheaf f ⟶ (picardFunctor f).obj :=
   toSheafify (Scheme.fppfTopology.over S) (picardPresheaf f)
 
+section BaseChange
+
+variable {X' S' : Scheme.{u}} {f : X ⟶ S} {g : S' ⟶ S} {f' : X' ⟶ S'} {g' : X' ⟶ X}
+
+/-- For a cartesian square exhibiting `f' : X' ⟶ S'` as the base change of `f : X ⟶ S` along
+`g : S' ⟶ S` and a scheme `T` over `S'`, the fibre products `X' ×_{S'} T` and `X ×_S T` agree. -/
+noncomputable def pullbackIsoOfIsPullback (h : IsPullback g' f' f g) (T : Over S') :
+    Limits.pullback f' T.hom ≅ Limits.pullback f (T.hom ≫ g) :=
+  ((IsPullback.of_hasPullback f' T.hom).paste_horiz h).isoPullback
+
+@[reassoc (attr := simp)]
+lemma pullbackIsoOfIsPullback_hom_fst (h : IsPullback g' f' f g) (T : Over S') :
+    (pullbackIsoOfIsPullback h T).hom ≫ Limits.pullback.fst f (T.hom ≫ g) =
+      Limits.pullback.fst f' T.hom ≫ g' :=
+  IsPullback.isoPullback_hom_fst _
+
+@[reassoc (attr := simp)]
+lemma pullbackIsoOfIsPullback_hom_snd (h : IsPullback g' f' f g) (T : Over S') :
+    (pullbackIsoOfIsPullback h T).hom ≫ Limits.pullback.snd f (T.hom ≫ g) =
+      Limits.pullback.snd f' T.hom :=
+  IsPullback.isoPullback_hom_snd _
+
+@[reassoc]
+lemma pullbackIsoOfIsPullback_hom_comp_baseChangeMap (h : IsPullback g' f' f g)
+    {T T' : Over S'} (φ : T' ⟶ T) :
+    (pullbackIsoOfIsPullback h T').hom ≫ baseChangeMap f ((Over.map g).map φ) =
+      baseChangeMap f' φ ≫ (pullbackIsoOfIsPullback h T).hom := by
+  apply Limits.pullback.hom_ext <;>
+    simp [baseChangeMap]
+
+/-- **The Picard presheaf is compatible with base change.** For a cartesian square exhibiting
+`f' : X' ⟶ S'` as the base change of `f : X ⟶ S` along `g : S' ⟶ S`, the restriction of the
+Picard presheaf of `f` to schemes over `S'` is the Picard presheaf of `f'`, through the
+identifications `X' ×_{S'} T ≅ X ×_S T` (`AlgebraicGeometry.pullbackIsoOfIsPullback`). -/
+noncomputable def picardPresheafIsoOfIsPullback (h : IsPullback g' f' f g) :
+    (Over.map g).op ⋙ picardPresheaf f ≅ picardPresheaf f' :=
+  NatIso.ofComponents (fun T ↦ Equiv.toIso
+    { toFun := Pic.map (pullbackIsoOfIsPullback h T.unop).hom
+      invFun := Pic.map (pullbackIsoOfIsPullback h T.unop).inv
+      left_inv L := by rw [← Pic.map_comp, Iso.inv_hom_id, Pic.map_id]
+      right_inv L := by rw [← Pic.map_comp, Iso.hom_inv_id, Pic.map_id] })
+    fun {T T'} φ ↦ by
+      ext L
+      exact (Pic.map_comp _ _ L).symm.trans ((congrArg (fun m ↦ Pic.map m L)
+        (pullbackIsoOfIsPullback_hom_comp_baseChangeMap h φ.unop)).trans (Pic.map_comp _ _ L))
+
+@[simp]
+lemma picardPresheafIsoOfIsPullback_hom_app (h : IsPullback g' f' f g) (T : (Over S')ᵒᵖ)
+    (L : (picardPresheaf f).obj ((Over.map g).op.obj T)) :
+    (picardPresheafIsoOfIsPullback h).hom.app T L =
+      Pic.map (pullbackIsoOfIsPullback h T.unop).hom L :=
+  rfl
+
+/-- Restricting the fppf sheafification of a presheaf `P` on schemes over `S` to schemes over
+`S'`, along `g : S' ⟶ S`, gives the fppf sheafification of the restriction of `P`: the functor
+`Over.map g` is continuous and cocontinuous for the fppf topologies. -/
+noncomputable def overMapOpCompSheafifyIso (g : S' ⟶ S) (P : (Over S)ᵒᵖ ⥤ Type (u + 1)) :
+    (Over.map g).op ⋙ ((presheafToSheaf (Scheme.fppfTopology.over S) _).obj P).obj ≅
+      ((presheafToSheaf (Scheme.fppfTopology.over S') _).obj ((Over.map g).op ⋙ P)).obj :=
+  (sheafToPresheaf _ _).mapIso
+    (((Over.map g).pushforwardContinuousSheafificationCompatibility (Type (u + 1))
+      (Scheme.fppfTopology.over S') (Scheme.fppfTopology.over S)).app P).symm
+
+end BaseChange
+
 /-- **The Picard functor is compatible with base change.** Let `f : X ⟶ S` be a morphism of
 schemes, let `g : S' ⟶ S` be a morphism and let `f' : X' ⟶ S'` be the base change of `f` along
 `g`. Then the restriction of `Pic_{X/S}` to schemes over `S'` is `Pic_{X'/S'}`.
@@ -202,7 +267,8 @@ isomorphism exists, which is weaker; this suffices for the current applications.
 theorem nonempty_picardFunctor_iso_of_isPullback {X' S' : Scheme.{u}} {f : X ⟶ S} {g : S' ⟶ S}
     {f' : X' ⟶ S'} {g' : X' ⟶ X} (h : IsPullback g' f' f g) :
     Nonempty ((Over.map g).op ⋙ (picardFunctor f).obj ≅ (picardFunctor f').obj) :=
-  sorry
+  ⟨overMapOpCompSheafifyIso g (picardPresheaf f) ≪≫
+    (sheafToPresheaf _ _).mapIso ((presheafToSheaf _ _).mapIso (picardPresheafIsoOfIsPullback h))⟩
 
 /-- The `σ`-normalized relative Picard functor `Pic_{X/S,σ}` of a morphism of schemes
 `f : X ⟶ S` equipped with a section `σ`: the subfunctor of the Picard presheaf `T ↦ Pic (X_T)`

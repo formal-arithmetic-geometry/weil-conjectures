@@ -68,3 +68,10 @@ lemma isCompact_iInter_of_isConstructible [CompactSpace X] [QuasiSober X] [Presp
     exact (hs i).isClopen_constructibleTopology.1
   have := hK.isCompact.image hφ
   rwa [Set.image_preimage_eq _ fun x ↦ ⟨WithTopology.toTopology _ x, rfl⟩] at this
+
+/-- A compact open is closed in the constructible topology. -/
+lemma IsCompact.isClosed_constructibleTopology_of_isOpen {s : Set X}
+    (hs : IsCompact s) (ho : IsOpen s) : IsClosed[constructibleTopology X] s := by
+  rw [← @isOpen_compl_iff]
+  apply TopologicalSpace.isOpen_generateFrom_of_mem
+  simp [constructibleTopologySubbasis, ho, hs]
