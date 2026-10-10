@@ -1,8 +1,8 @@
 # Work queue
 
-859 items; claim with `tools/claim.py next <group> [--stage N]`.
+858 items; claim with `tools/claim.py next <group> [--stage N]`.
 
-## Stage 1: nodes to split (331)
+## Stage 1: nodes to split (328)
 
 | node | distance to a target | Lean state on the done branch |
 |---|---|---|
@@ -12,8 +12,8 @@
 | `lem-weil-pbc-fpqc-descend-universally-closed` | 1010 | none |
 | `lem-weil-pbc-pullback-ample-invertible` | 1013 | none |
 | `lem-weil-pbc-finite-type-etale-finite-factor-decomposition` | 1015 | none |
-| `lem-weil-pbc-sections-morphism-to-proj-polynomial-ring` | 1015 | none |
 | `lem-weil-pbc-direct-sum-extension-assembly` | 1016 | none |
+| `lem-weil-pbc-proj-polynomial-twist-chart` | 1016 | none |
 | `lem-weil-pbc-tor-one-surjective-flat-middle` | 1016 | none |
 | `lem-weil-pbc-injective-acyclicity-bounded-below` | 2002 | sorry_here |
 | `lem-weil-pbc-property-implies-acyclicity` | 2003 | none |
@@ -47,8 +47,6 @@
 | `lem-sc-noetherian-cohomology-above-dimension` | 3008 | sorry_here |
 | `lem-sc-zero-generic-acyclic` | 3008 | rests_on_sorry |
 | `lem-weil-pbc-simplicial-hom-object-exists` | 3008 | none |
-| `lem-weil-pbc-trivial-kan-homotopy-equivalence` | 3008 | none |
-| `lem-weil-pbc-truncated-coskeleton-finite-limits` | 3008 | none |
 | `lem-galois-fpqc-descend-unramified` | 3009 | none |
 | `lem-galois-fpqc-descending-types-morphisms` | 3009 | none |
 | `lem-pc-cartier-divisor-finite-over-field` | 3009 | none |
@@ -56,7 +54,6 @@
 | `lem-pc-scheme-dimension-local-rings` | 3009 | none |
 | `lem-sc-group-scheme-separated-field` | 3009 | none |
 | `lem-sc-hilb-geometrically-integral` | 3009 | rests_on_sorry |
-| `lem-sc-rational-section-order` | 3009 | none |
 | `lem-sc-riemann-roch-large-degree` | 3009 | rests_on_sorry |
 | `lem-sc-second-kummer-divisors` | 3009 | none |
 | `lem-sc-very-ample-separation-criterion` | 3009 | none |
@@ -338,7 +335,7 @@
 | `def-exc-jacobian-presentation` | - | none |
 | `lem-zl-noether-normalization-dimension` | - | none |
 
-## Stage 2: nodes to state (528)
+## Stage 2: nodes to state (530)
 
 | node | distance to Mathlib | kind |
 |---|---|---|
@@ -823,6 +820,8 @@
 | `lem-weil-pbc-tower-limit-exact-surjective-kernels` | 1 | state |
 | `lem-weil-pbc-triangle-morphism-extension` | 1 | state |
 | `lem-weil-pbc-triangular-change-of-basis` | 1 | state |
+| `lem-weil-pbc-trivial-kan-homotopy-equivalence` | 1 | state |
+| `lem-weil-pbc-truncated-coskeleton-finite-limits` | 1 | state |
 | `lem-weil-pbc-truncation-descends` | 1 | state |
 | `lem-weil-pbc-truncation-step-ses` | 1 | state |
 | `lem-weil-pbc-two-term-complex-kernel-base-change` | 1 | state |
@@ -871,7 +870,7 @@
 | `lem-weil-pbc-p1-field-dimension-one` | 4 | state |
 | `lem-weil-pbc-projective-space-zero-isomorphism` | 4 | state |
 
-Not open yet: 350 nodes that wait for stage 1, 963 nodes that wait for a statement dependency.
+Not open yet: 347 nodes that wait for stage 1, 965 nodes that wait for a statement dependency.
 
 ## Stage 3: modules to prove (0)
 
