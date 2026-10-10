@@ -14,6 +14,7 @@ public import WeilConjectures.ConstructibleSheaf.Monoidal
 public import WeilConjectures.SixFunctors.ProEtale.Comparison
 public import WeilConjectures.SixFunctors.ProEtale.Derived.HomComparison
 public import WeilConjectures.SixFunctors.Etale.Derived.Stability
+public import WeilConjectures.CategoryTheory.DerivedCategory.Perfect.Dualizable
 
 /-!
 
@@ -315,18 +316,107 @@ end FiniteProjective
 
 namespace DerivedCategory
 
+section Triangulated
+
+variable (X)
+
+/-- At a finite coefficient ring, the bounded constructible pro-étale complexes form a
+triangulated subcategory of `D(X_proét)`. They are the complexes of étale origin, and `ν^*` is
+triangulated and fully faithful on bounded below complexes
+(`AlgebraicGeometry.ProEtale.bijective_comparisonUpperStar_mapDerivedCategory_map`), so the cone
+of a map between complexes of étale origin is `ν^*` of the cone of a lift of this map. -/
+instance isTriangulated_boundedConstructible :
+    (boundedConstructible (ModuleCat.{u + 1} Λ) X).IsTriangulated := by
+  let F := D(ν^*(X)[ModuleCat.{u + 1} Λ])
+  have : (boundedConstructible (ModuleCat.{u + 1} Λ) X).IsTriangulatedClosed₃ := by
+    refine ObjectProperty.IsTriangulatedClosed₃.mk' fun T hT ⟨A, hA, ⟨e₁⟩⟩ ⟨B, hB, ⟨e₂⟩⟩ ↦ ?_
+    obtain ⟨f, hf⟩ := (bijective_comparisonUpperStar_mapDerivedCategory_map A B hB.1.1).2
+      (e₁.hom ≫ T.mor₁ ≫ e₂.inv)
+    obtain ⟨Z, g, h, hZ⟩ := Pretriangulated.distinguished_cocone_triangle f
+    obtain ⟨e, -, -⟩ := Pretriangulated.exists_iso_of_arrow_iso _ T
+      (F.map_distinguished _ hZ) hT (Arrow.isoMk e₁ e₂ (by
+        have hf' : F.map f = e₁.hom ≫ T.mor₁ ≫ e₂.inv := hf
+        change e₁.hom ≫ T.mor₁ = F.map f ≫ e₂.hom
+        simp [hf']))
+    exact ⟨Z, (Etale.DerivedCategory.boundedConstructible _ X).ext_of_isTriangulatedClosed₃ _
+      hZ hA hB, ⟨Pretriangulated.Triangle.π₃.mapIso e⟩⟩
+  have : (boundedConstructible (ModuleCat.{u + 1} Λ) X).IsStableUnderShift ℤ :=
+    ⟨fun n ↦ ⟨fun K ⟨A, hA, ⟨e⟩⟩ ↦ ⟨A⟦n⟧,
+      (Etale.DerivedCategory.boundedConstructible _ X).le_shift n _ hA,
+      ⟨(F.commShiftIso n).app A ≪≫ (shiftFunctor _ n).mapIso e⟩⟩⟩⟩
+  have : (boundedConstructible (ModuleCat.{u + 1} Λ) X).IsTriangulatedClosed₂ :=
+    ObjectProperty.IsTriangulatedClosed₂.of_isTriangulatedClosed₃
+  obtain ⟨Z, hZ, hZP⟩ := ObjectProperty.ContainsZero.exists_zero
+    (P := Etale.DerivedCategory.boundedConstructible (ModuleCat.{u + 1} Λ) X)
+  exact { exists_zero := ⟨F.obj Z, F.map_isZero hZ,
+    boundedConstructible_comparisonUpperStar_mapDerivedCategory_obj hZP⟩ }
+
+variable {X}
+
+/-- At a finite coefficient ring, a bounded pro-étale complex is bounded constructible as soon as
+each of its cohomology sheaves is `ν^*` of a constructible étale sheaf. -/
+theorem boundedConstructible_of_homology
+    {K : _root_.DerivedCategory (Sheaf (Scheme.ProEt.topology X) (ModuleCat.{u + 1} Λ))}
+    (hK : _root_.DerivedCategory.TStructure.t.bounded K)
+    (hH : ∀ n, ∃ F : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ), IsConstructibleSheaf F ∧
+      Nonempty ((ν^*(X)[ModuleCat.{u + 1} Λ]).obj F ≅
+        (_root_.DerivedCategory.homologyFunctor _ n).obj K)) :
+    boundedConstructible (ModuleCat.{u + 1} Λ) X K := by
+  let P : ObjectProperty (Sheaf (Scheme.ProEt.topology X) (ModuleCat.{u + 1} Λ)) :=
+    fun G ↦ ∃ F : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ), IsConstructibleSheaf F ∧
+      Nonempty ((ν^*(X)[ModuleCat.{u + 1} Λ]).obj F ≅ G)
+  have : P.IsClosedUnderIsomorphisms := ⟨fun e ⟨F, hF, ⟨e'⟩⟩ ↦ ⟨F, hF, ⟨e' ≪≫ e⟩⟩⟩
+  refine _root_.DerivedCategory.prop_of_bounded _ P (fun G ⟨F, hF, ⟨e⟩⟩ ↦ ?_) K hK hH
+  exact ⟨_, Etale.DerivedCategory.boundedConstructible_singleFunctor_obj _ 0,
+    ⟨((ν^*(X)[ModuleCat.{u + 1} Λ]).mapDerivedCategorySingleFunctor 0).app _ ≪≫
+      (_root_.DerivedCategory.singleFunctor _ 0).mapIso e⟩⟩
+
+end Triangulated
+
+variable [IsNoetherian X] in
+/-- A perfect complex of pro-étale `Λ`-sheaves on a Noetherian scheme is bounded, and each of its
+cohomology sheaves is `ν^*` of a constructible étale sheaf.
+
+This is the part of `prop-pod-perfect-local-model` which is not formalised: it needs the local
+description of perfect complexes (`sk-def-perfect`, Stacks, Tag 0FPV), the local constancy of the
+cohomology of a bounded complex of finite projective `Λ_W`-modules, and the comparison between
+pro-étale and étale constructibility (`lem-sf-proetale-constructible-origin`). -/
+theorem bounded_and_homology_of_isDualizable
+    {K : _root_.DerivedCategory (Sheaf (Scheme.ProEt.topology X) (ModuleCat.{u + 1} Λ))}
+    (hK : IsDualizable K) :
+    _root_.DerivedCategory.TStructure.t.bounded K ∧
+      ∀ n, ∃ F : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ), IsConstructibleSheaf F ∧
+        Nonempty ((ν^*(X)[ModuleCat.{u + 1} Λ]).obj F ≅
+          (_root_.DerivedCategory.homologyFunctor _ n).obj K) :=
+  sorry
+
 variable [IsNoetherian X] in
 /-- Blueprint `prop-pod-perfect-local-model`: The local finite projective model.
 
 A perfect complex of pro-étale `Λ`-sheaves, that is a complex locally quasi-isomorphic to a
 bounded complex of finite projective `Λ_X`-modules (rendered as a dualizable object of
 `D(X_proét)`), has bounded constructible cohomology sheaves and finite Tor amplitude: it lies
-in `Dctf(X, Λ)`. -/
+in `Dctf(X, Λ)`.
+
+It is bounded constructible by `bounded_and_homology_of_isDualizable` and
+`boundedConstructible_of_homology`. So is its dual `Kᘁ`, and as both are bounded above `K` has
+finite Tor amplitude (`_root_.DerivedCategory.torAmplitudeIn_of_exactPairing_of_isLE`). -/
 theorem constructibleFiniteTor_of_isDualizable
     {K : _root_.DerivedCategory (Sheaf (Scheme.ProEt.topology X) (ModuleCat.{u + 1} Λ))}
     (hK : IsDualizable K) :
-    constructibleFiniteTor (ModuleCat.{u + 1} Λ) X K :=
-  sorry
+    constructibleFiniteTor (ModuleCat.{u + 1} Λ) X K := by
+  have hbc {L : _root_.DerivedCategory (Sheaf (Scheme.ProEt.topology X) (ModuleCat.{u + 1} Λ))}
+      (hL : IsDualizable L) : boundedConstructible (ModuleCat.{u + 1} Λ) X L :=
+    have h := bounded_and_homology_of_isDualizable Λ hL
+    boundedConstructible_of_homology Λ h.1 h.2
+  refine ⟨hbc hK, ?_⟩
+  obtain ⟨_⟩ := hK
+  obtain ⟨_⟩ := _root_.DerivedCategory.nonempty_braidedCategory
+    (Sheaf (Scheme.ProEt.topology X) (ModuleCat.{u + 1} Λ))
+  let := BraidedCategory.exactPairing_swap K Kᘁ
+  obtain ⟨b, _⟩ := (hbc (L := K) ⟨inferInstance⟩).bounded.2
+  obtain ⟨b', _⟩ := (hbc (L := Kᘁ) ⟨⟨K⟩⟩).bounded.2
+  exact ⟨_, _, _root_.DerivedCategory.torAmplitudeIn_of_exactPairing_of_isLE (L := Kᘁ) b b'⟩
 
 omit [Finite Λ] in
 /-- The coefficient dual of `K ≅ ν^* K'` is of étale origin as soon as
