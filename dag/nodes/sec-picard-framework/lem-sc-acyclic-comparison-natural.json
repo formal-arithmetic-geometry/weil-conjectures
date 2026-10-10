@@ -26,9 +26,73 @@
   "def-sp-injective-resolutions",
   "lemma-weil-pbc-leray-acyclicity"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Choose injective resolutions $s:F\\to J^\\bullet$ and $s':F'\\to J'^\\bullet$ with $J^q=J'^q=0$ for $q<0$. By the injective-resolution lift lemma, choose a morphism of complexes $b:J^\\bullet\\to J'^\\bullet$ with $b^0\\circ s=s'\\circ h$. View $F$ as a complex concentrated in degree $0$; the augmentation $r:F\\to I^\\bullet$ is then a quasi-isomorphism of bounded below complexes which is a monomorphism in every degree (the augmented complex is exact, so $r$ is monic in degree $0$ and $H^n(I^\\bullet)$ is $F$ for $n=0$ and $0$ otherwise), and likewise $r'$. Applying the lifting lemma along an injective quasi-isomorphism to $\\alpha=r$, $\\gamma=s$ (resp. $\\alpha=r'$, $\\gamma=s'$), choose morphisms of complexes $a:I^\\bullet\\to J^\\bullet$ and $a':I'^\\bullet\\to J'^\\bullet$ with $a\\circ r=s$ and $a'\\circ r'=s'$, i.e. over the identities of $F$ and $F'$. The comparison maps $c_I^n$ and $c_{I'}^n$ are the maps on cohomology induced by $a$ and $a'$ followed by the identifications of the injective resolutions with $R^nv(F)$ and $R^nv(F')$.",
+   "uses": [
+    "def-sp-injective-resolutions",
+    "lem-weil-pbc-injective-resolution-lift-exists",
+    "lemma-weil-pbc-leray-acyclicity",
+    "lem-weil-pbc-lift-along-injective-quasi-iso"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 015E, proof of the acyclic-resolution comparison and its naturality"
+   }
+  },
+  {
+   "text": "The two composites $b\\circ a$ and $a'\\circ\\varphi$ are morphisms $I^\\bullet\\to J'^\\bullet$ whose composites with the augmentation $r:F\\to I^\\bullet$ agree: both are $s'\\circ h$. The augmentation $r$ is a quasi-isomorphism and is degreewise monic because the augmented resolution is exact. Applying the lift-uniqueness-up-to-homotopy lemma to $r$, the two composites are chain-homotopic.",
+   "uses": [
+    "def-sp-acyclic",
+    "lem-weil-pbc-lift-to-injective-unique-up-to-homotopy"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 015E, naturality argument: two lifts over the same map are homotopic"
+   }
+  },
+  {
+   "text": "Since $v$ is additive, applying $v$ to this chain homotopy gives a chain homotopy between $v(b\\circ a)$ and $v(a'\\circ\\varphi)$, and therefore the induced maps on cohomology are equal. This uses the fact that homotopic maps of complexes induce the same cohomology map.",
+   "uses": [
+    "def-sp-left-exact-additive",
+    "lem-weil-pbc-homotopic-maps-equal-cohomology"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 015E, passage from homotopic lifts to equal maps on cohomology"
+   }
+  },
+  {
+   "text": "By the injective-resolution formula for the functor $R^nv$, the map induced by $b$ on the cohomology of $v(J^\\bullet)$ and $v(J'^\\bullet)$ is $R^nv(h)$. Rewriting the equality from Step 3 with the comparison maps $c_I^n$ and $c_{I'}^n$ gives $c_{I'}^n\\circ\\mathcal H^n(v(\\varphi))=R^nv(h)\\circ c_I^n$ for every $n\\geq0$.",
+   "uses": [
+    "lem-weil-pbc-derived-functor-map-via-lift"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 015E, naturality of the canonical comparison map"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sp-injective-resolutions",
+  "lem-weil-pbc-injective-resolution-lift-exists",
+  "lemma-weil-pbc-leray-acyclicity",
+  "lem-weil-pbc-lift-along-injective-quasi-iso",
+  "def-sp-acyclic",
+  "lem-weil-pbc-lift-to-injective-unique-up-to-homotopy",
+  "def-sp-left-exact-additive",
+  "lem-weil-pbc-homotopic-maps-equal-cohomology",
+  "lem-weil-pbc-derived-functor-map-via-lift"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/derived.tex",
+  "place": "Tag 015E, naturality of the acyclic-resolution comparison"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -60,12 +124,63 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-sc-ext-derived-composite-natural",
   "by": "worker",
   "date": "2026-10-10"
  },
  "chapter": "sec-picard-framework",
- "unit": "sk-thm-picard-duality"
+ "unit": "sk-thm-picard-duality",
+ "split_report": {
+  "date": "2026-10-11",
+  "item": "lem-sc-acyclic-comparison-natural",
+  "worker": "stage1",
+  "summary": "Split the Stacks 015E naturality argument into the choice of injective comparison lifts, homotopy uniqueness of the two lifts, passage to cohomology under the additive functor, and the derived-functor map formula. All required facts were matched to existing DAG nodes; no new nodes were needed.",
+  "blueprint": [
+   "thm-sc-p1-duality proof, Step 1: naturality of the acyclic-resolution comparison used to prove naturality of the derived-composite isomorphism"
+  ],
+  "tool_uses": [
+   {
+    "node": "lemma-weil-pbc-leray-acyclicity",
+    "why": "Generic acyclic-resolution comparison supplies the comparison isomorphisms c_I and c_I'; no Picard-duality node states this general fact."
+   },
+   {
+    "node": "lem-weil-pbc-injective-resolution-lift-exists",
+    "why": "Generic comparison-lift existence for injective resolutions is required to choose b, a, and a'; no node in this unit supplies it."
+   },
+   {
+    "node": "lem-weil-pbc-lift-to-injective-unique-up-to-homotopy",
+    "why": "Generic homotopy uniqueness of lifts into an injective complex is the key comparison argument and is outside this unit's route."
+   },
+   {
+    "node": "lem-weil-pbc-homotopic-maps-equal-cohomology",
+    "why": "Generic additive-functor homotopy invariance identifies the two induced cohomology maps."
+   },
+   {
+    "node": "lem-weil-pbc-derived-functor-map-via-lift",
+    "why": "Generic formula identifies the cohomology map of an injective-resolution lift with R^n v(h)."
+   },
+   {
+    "node": "lem-weil-pbc-lift-along-injective-quasi-iso",
+    "why": "Generic lifting of a map into a bounded-below injective complex along a degreewise-monic quasi-isomorphism; gives the comparison lifts a and a' from the acyclic resolutions (added by reviewer R-acn1708)."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lemma-weil-pbc-leray-acyclicity",
+  "lem-weil-pbc-injective-resolution-lift-exists",
+  "lem-weil-pbc-lift-to-injective-unique-up-to-homotopy",
+  "lem-weil-pbc-homotopic-maps-equal-cohomology",
+  "lem-weil-pbc-derived-functor-map-via-lift",
+  "lem-weil-pbc-lift-along-injective-quasi-iso"
+ ],
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-acn1708",
+  "group": "H1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-acn1708 (reviewer sub-agent of L); spot-checked: Source: Stacks Tag 015E (derived-lemma-leray-acyclicity, derived.tex line 5717; the file is present locally, contrary to the report's WANTED) and the item's statement as imported, unchanged. Step 1: b from lem-weil-pbc-injective-resolution-lift-exists (both J, J' injective resolutions); c_I, c_I' as in item 2 of lemma-weil-pbc-leray-acyclicity. Step 2: b.a and a'.phi agree after r (both s'.h, using phi^0 r = r' h and a' r' = s'), r: F[0] -> I a quasi-iso, J' bounded-below injective: lem-weil-pbc-lift-to-injective-unique-up-to-homotopy gives the homotopy. Step 3: lem-weil-pbc-homotopic-maps-equal-cohomology (b) for the additive v. Step 4: lem-weil-pbc-derived-functor-map-via-lift gives R^nv(h) = iota_J'^{-1} H^n(vb) iota_J; with c_I = iota_J^{-1} H^n(va) the square follows in two lines. Cases n=0, h=id, phi=id checked. No new nodes, so no Mathlib query needed. FIX more, RETURN less (C4): dag/nodes/sec-picard-framework/lem-sc-acyclic-comparison-natural.json: proof[0].text: the lifts a, a' out of the ACYCLIC resolutions I, I' were attributed to lem-weil-pbc-injective-resolution-lift-exists, whose source must be an injective resolution; now obtained from lem-weil-pbc-lift-along-injective-quasi-iso (mathlib leaf) applied to the degreewise-monic quasi-iso r: F[0] -> I and s, added to proof[0].uses, proof_deps and split_report.tool_uses; also added J^q=J'^q=0 for q<0 needed by the lift and map-via-lift nodes. Tool uses accepted: all are generic homological-algebra facts used as black boxes. Times: start Sat Oct 10 05:02:33 PM UTC 2026, end Sat Oct 10 05:03:32 PM UTC 2026.; 1 file(s) fixed by the reviewer"
+ }
 }

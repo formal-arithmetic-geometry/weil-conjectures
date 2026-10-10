@@ -2082,3 +2082,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 17:02 L: merged deliver/G1/lem-weil-pbc-etale-sections-fpqc-descent (reviewer FIX; after a return; new nodes: 3)
 - 17:02 L: merged deliver/J1/lem-exc-finite-galois-sections-descent (reviewer FIX; first push; new nodes: 1)
 - 17:02 L: returned deliver/M1/lem-sc-zariski-contracted-power-extension (reviewer RETURN: 1. E (false new statement): lem-sc-zariski-contracted-power-torsor: the sentence 'Concatenation induces isomorphisms T^{)
+- 17:03 L: merged deliver/H1/lem-sc-acyclic-comparison-natural (reviewer FIX; first push; new nodes: 0)
