@@ -31,9 +31,59 @@
   "def-sc-invertible-module",
   "def-pur-sheaf-tensor-product"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Work on an affine open $U=\\operatorname{Spec}(A)$ of $Y$. The component closed subschemes $Z_1$ and $Z=Z_2\\cup\\cdots\\cup Z_r$ are cut out on $U$ by ideals $J_1$ and $I$, and their underlying closed sets cover $U$; hence $V(I)\\cup V(J_1)=\\operatorname{Spec}(A)$. The ring $A$ is reduced because $Y$ is reduced.",
+   "uses": [
+    "def-pc-reduced-scheme",
+    "def-weil-closed-immersion",
+    "def-sbc-closed-immersion-ideal-sheaf"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Varieties Remark 09NW, hypotheses $A$ reduced and $V(I)\\cup V(J)=\\operatorname{Spec}(A)$"
+   }
+  },
+  {
+   "text": "Apply [lem-sc-reduced-ideals-zero-intersection] to $A,I,J_1$. It gives $I\\cap J_1=0$ and identifies $I$ with its image $I/(I\\cap J_1)$ in $A/J_1$. Since this calculation holds on every affine open, the sheaf intersection $\\mathcal I\\cap\\mathcal J_1$ is zero, and the restriction morphism of sheaves $\\rho:\\mathcal I\\to i_{1,*}\\mathcal I_1$ (on sections, $\\mathcal I(U)\\to\\mathcal I_1(U\\cap Z_1)$) is bijective on every affine open $U=\\operatorname{Spec}(A)$: there $\\mathcal I_1(U\\cap Z_1)$ is the image $(I+J_1)/J_1=I/(I\\cap J_1)$ of $I$ in $A/J_1$. A morphism of sheaves that is bijective on a basis of opens is an isomorphism of sheaves; hence $\\rho$ is bijective on $\\Gamma(U,-)$ for every open $U\\subseteq Y$ (its kernel there is $(\\mathcal I\\cap\\mathcal J_1)(U)=0$).",
+   "uses": [
+    "lem-sc-reduced-ideals-zero-intersection",
+    "def-sbc-closed-immersion-ideal-sheaf",
+    "def-pc-reduced-scheme"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Varieties Remark 09NW and the displayed conductor equality in Lemma 09NX"
+   }
+  },
+  {
+   "text": "Let $V\\subseteq Y$ be an open on which $\\mathcal M$ is trivial, $\\mathcal M|_V\\cong\\mathcal O_V$ [def-sc-invertible-module]; such $V$ cover $Y$. Then $\\mathcal M^{\\otimes m}|_V\\cong\\mathcal O_V$ and $(\\mathcal M|_{Z_1})^{\\otimes m}|_{V\\cap Z_1}\\cong\\mathcal O_{V\\cap Z_1}$ by the pulled-back trivialization [def-pur-sheaf-tensor-product], and under these identifications the image sheaves $\\mathcal I\\mathcal M^{\\otimes m}|_V$ and $\\mathcal I_1(\\mathcal M|_{Z_1})^{\\otimes m}|_{V\\cap Z_1}$ become $\\mathcal I|_V$ and $\\mathcal I_1|_{V\\cap Z_1}$, compatibly with restriction to $Z_1$. So the restriction morphism $\\mathcal I\\mathcal M^{\\otimes m}\\to i_{1,*}(\\mathcal I_1(\\mathcal M|_{Z_1})^{\\otimes m})$ is, on each such $V$, the isomorphism $\\rho|_V$ of Step 2; being locally an isomorphism, it is an isomorphism of sheaves, and therefore $\\Gamma(U,\\mathcal I\\mathcal M^{\\otimes m})\\to\\Gamma(U\\cap Z_1,\\mathcal I_1(\\mathcal M|_{Z_1})^{\\otimes m})$ is bijective for every open $U$ and every $m\\ge0$ ($m=0$ being Step 2).",
+   "uses": [
+    "def-sc-invertible-module",
+    "def-pur-sheaf-tensor-product"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Varieties Remark 09NW, final sentence $IP=I(P/JP)$ for projective $P$, here for the locally free rank-one $\\mathcal M^{\\otimes m}$"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-reduced-scheme",
+  "def-weil-closed-immersion",
+  "def-sbc-closed-immersion-ideal-sheaf",
+  "lem-sc-reduced-ideals-zero-intersection",
+  "def-sc-invertible-module",
+  "def-pur-sheaf-tensor-product"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/varieties.tex",
+  "place": "Varieties Remark 09NW and Lemma 09NX proof"
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -44,7 +94,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "R-cds",
@@ -60,5 +110,21 @@
   "slopmaster2": {
    "state": "none"
   }
+ },
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "lem-sc-conductor-ideal-zero-intersection",
+  "worker": "stage1",
+  "summary": "Split the conductor zero-intersection statement into affine-local reduction, the reduced-ring conductor calculation, and the sheaf/tensor restriction argument. Added one unsplit supporting node for the reduced-ring ideal intersection fact, after searching the DAG, blueprint and Mathlib.",
+  "blueprint": "The steps realize the conductor equality in lem-sc-pic-proper-ntorsion's proof, first sentence, via Varieties Remark 09NW and the displayed global-sections equality in Lemma 09NX.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-czi",
+  "group": "M1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-czi (reviewer sub-agent of L); spot-checked: Source: Stacks Varieties Remark 09NW (varieties-remark-conductor, varieties.tex l.8070) and its use in Lemma 09NX; the item statement (unchanged, R-cds) agrees with it: A reduced, V(I) u V(J)=Spec A, I cap J=0, I -> IB iso, IP=I(P/JP) specialised to invertible M^m. New node lem-sc-reduced-ideals-zero-intersection states exactly the first two clauses of 09NW with its hypotheses (reduced, V(I) u V(J)=Spec A); true (an element of I cap J lies in every prime, so is nilpotent, so 0); small case A=k[x,y]/(xy), I=(x), J=(y): (x) cap (y)=(xy)=0, checked; Mathlib searches of three kinds recorded, blueprint same_as [] with from copied. Step 1: def-weil-closed-immersion and def-sbc-closed-immersion-ideal-sheaf give I(U)=I, J_1(U)=J_1 on affine U, components cover so V(I) u V(J_1)=Spec A, A reduced by def-pc-reduced-scheme. Step 2: carried by the new node plus the ideal-sheaf node. Step 3: def-sc-invertible-module (locally free rank one) and def-pur-sheaf-tensor-product. Checked r=1 (I=O_Y) and m=0. FIX: dag/nodes/sec-curve-estimates/lem-sc-conductor-ideal-zero-intersection.json: proof[1].text: the passage from affine opens to arbitrary U now goes through the sheaf morphism I -> i_{1,*}I_1 being bijective on affine opens, hence an isomorphism of sheaves (the delivered text inferred surjectivity on arbitrary U from the affine-local identification); proof[2].text: replaced 'tensor the bijection of sections with (M|Z1)^m' (sections do not commute with tensor) by the local-trivialisation argument over opens V with M|_V = O_V, reducing to Step 2 and concluding by isomorphism of sheaves; proof[2].source.place reworded. Same route and same cited nodes; uses and proof_deps unchanged. No tool_uses. Start Sat Oct 10 03:36:27 PM UTC 2026, end Sat Oct 10 03:37:24 PM UTC 2026.; 1 file(s) fixed by the reviewer"
  }
 }
