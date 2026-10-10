@@ -1,64 +1,80 @@
 {
- "id": "lem-pc-representable-unique",
- "blueprint": {
-  "is": "lem-pc-representable-unique",
-  "from": null,
-  "same_as": null
- },
- "kind": "statement",
- "title": "Uniqueness of the representing scheme",
- "statement": "Let $S$ be a scheme and\n$F:(\\mathit{Sch}/S)^{\\mathrm{op}}\\to\\textit{Sets}$ a functor. If $P$ and\n$Q$ are schemes over $S$ with $h_P\\cong F\\cong h_Q$, then there is a\nunique isomorphism $P\\to Q$ over $S$ inducing the composite isomorphism.",
- "source": {
-  "document": "literature/blueprint/master/blueprint/sec-purity-real-sheaves/sk-d-real-jacobian/lem-pc-representable-unique.md",
-  "place": "node lem-pc-representable-unique, order 2608"
- },
- "stmt_deps": [
-  "def-pc-scheme"
- ],
- "proof": [
-  {
-   "text": "By [lem-pc-yoneda] the isomorphisms correspond to elements\n$\\xi\\in F(P)$ and $\\eta\\in F(Q)$; the isomorphism\n$h_P\\cong h_Q$ corresponds under Yoneda to an element of $h_Q(P)$, i.e. a morphism $f:P\\to Q$; from naturality, the assignment\n$\\tau\\mapsto\\tau_P(\\mathrm{id}_P)$ sends the isomorphism to $f$; applying\nYoneda to the inverse isomorphism gives $g:Q\\to P$; the composite\n$g\\circ f\\in h_P(P)$ corresponds to the identity under the composed\nisomorphism, hence $g\\circ f=\\mathrm{id}_P$ (Yoneda's injectivity on\n$h_P(P)$); similarly $f\\circ g=\\mathrm{id}_Q$, so $f$ is an isomorphism; the\nuniqueness is again the injectivity of Yoneda.",
-   "uses": [
-    "lem-pc-yoneda"
-   ],
-   "elementary": false
-  }
- ],
- "proof_deps": [
-  "lem-pc-yoneda"
- ],
- "proof_origin": {
-  "by": "agent",
-  "document": "literature/blueprint/master/blueprint/sec-purity-real-sheaves/sk-d-real-jacobian/lem-pc-representable-unique.md",
-  "place": "## Proof"
- },
- "mathlib_searches": [],
- "mathlib_match": null,
- "status": "imported",
- "merged_into": null,
- "import_flags": [],
- "blueprint_kind": "lemma",
- "blueprint_order": 2608,
- "blueprint_uses": [
-  "def-pc-scheme",
-  "lem-pc-yoneda"
- ],
- "uses_not_cited": [
-  "def-pc-scheme"
- ],
- "proof_split_by": "paragraphs",
- "lean_audit": {
-  "master": {
-   "state": "none",
-   "decls": [],
-   "missing": []
+  "id": "lem-pc-representable-unique",
+  "blueprint": {
+    "is": "lem-pc-representable-unique",
+    "from": null,
+    "same_as": null
   },
-  "slopmaster2": {
-   "state": "none",
-   "decls": [],
-   "missing": []
-  }
- },
- "chapter": "sec-purity-real-sheaves",
- "unit": "sk-d-real-jacobian"
+  "kind": "statement",
+  "title": "Uniqueness of the representing scheme",
+  "statement": "Let $S$ be a scheme and\n$F:(\\mathit{Sch}/S)^{\\mathrm{op}}\\to\\textit{Sets}$ a functor. If $P$ and\n$Q$ are schemes over $S$ with $h_P\\cong F\\cong h_Q$, then there is a\nunique isomorphism $P\\to Q$ over $S$ inducing the composite isomorphism.",
+  "source": {
+    "document": "literature/blueprint/master/blueprint/sec-purity-real-sheaves/sk-d-real-jacobian/lem-pc-representable-unique.md",
+    "place": "node lem-pc-representable-unique, order 2608"
+  },
+  "stmt_deps": [
+    "def-pc-scheme"
+  ],
+  "proof": [
+    {
+      "text": "By [lem-pc-yoneda] the isomorphisms correspond to elements\n$\\xi\\in F(P)$ and $\\eta\\in F(Q)$; the isomorphism\n$h_P\\cong h_Q$ corresponds under Yoneda to an element of $h_Q(P)$, i.e. a morphism $f:P\\to Q$; from naturality, the assignment\n$\\tau\\mapsto\\tau_P(\\mathrm{id}_P)$ sends the isomorphism to $f$; applying\nYoneda to the inverse isomorphism gives $g:Q\\to P$; the composite\n$g\\circ f\\in h_P(P)$ corresponds to the identity under the composed\nisomorphism, hence $g\\circ f=\\mathrm{id}_P$ (Yoneda's injectivity on\n$h_P(P)$); similarly $f\\circ g=\\mathrm{id}_Q$, so $f$ is an isomorphism; the\nuniqueness is again the injectivity of Yoneda.",
+      "uses": [
+        "lem-pc-yoneda"
+      ],
+      "elementary": false
+    }
+  ],
+  "proof_deps": [
+    "lem-pc-yoneda"
+  ],
+  "proof_origin": {
+    "by": "agent",
+    "document": "literature/blueprint/master/blueprint/sec-purity-real-sheaves/sk-d-real-jacobian/lem-pc-representable-unique.md",
+    "place": "## Proof"
+  },
+  "mathlib_searches": [],
+  "mathlib_match": {
+    "declaration": "CategoryTheory.Functor.FullyFaithful.isoEquiv; CategoryTheory.Yoneda.fullyFaithful",
+    "file": "Mathlib/CategoryTheory/Functor/FullyFaithful.lean",
+    "line": 217,
+    "how": "exact as a composite, read with sed by L (21:31 UTC) after reviewer R-rpu2606 (C1 delivery 329242d5e): `isoEquiv : (X ≅ Y) ≃ (F.obj X ≅ F.obj Y)` for a fully faithful F (FullyFaithful.lean:217), applied to `Yoneda.fullyFaithful` (Mathlib/CategoryTheory/Yoneda.lean:134) with C := Over S: a bijection between isomorphisms P ≅ Q over S and isomorphisms h_P ≅ h_Q, so exactly one isomorphism over S induces the given composite h_P ≅ F ≅ h_Q."
+  },
+  "status": "mathlib",
+  "merged_into": null,
+  "import_flags": [],
+  "blueprint_kind": "lemma",
+  "blueprint_order": 2608,
+  "blueprint_uses": [
+    "def-pc-scheme",
+    "lem-pc-yoneda"
+  ],
+  "uses_not_cited": [
+    "def-pc-scheme"
+  ],
+  "proof_split_by": "paragraphs",
+  "lean_audit": {
+    "master": {
+      "state": "none",
+      "decls": [],
+      "missing": []
+    },
+    "slopmaster2": {
+      "state": "none",
+      "decls": [],
+      "missing": []
+    }
+  },
+  "chapter": "sec-purity-real-sheaves",
+  "unit": "sk-d-real-jacobian",
+  "reviewed": {
+    "date": "2026-10-10",
+    "by": "L",
+    "reviewer": "R-rpu2606",
+    "group": "C1",
+    "result": "pass",
+    "note": "Mathlib leaf found by the packet reviewer (the C1 second reading compared only with RepresentableBy.uniqueUpToIso); L read FullyFaithful.lean:215-219 and Yoneda.lean:132-136 with sed; the C1 split (329242d5e) is not merged because nothing remains to split."
+  },
+  "lead_notes": [
+    "2026-10-10 21:31 UTC L: matched to Mathlib on R-rpu2606's finding; the C1 delivery is returned as unneeded, not for a fault."
+  ]
 }
