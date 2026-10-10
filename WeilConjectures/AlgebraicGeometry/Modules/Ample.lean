@@ -11,6 +11,7 @@ public import Mathlib.AlgebraicGeometry.FunctionField
 public import Mathlib.AlgebraicGeometry.Morphisms.Finite
 public import Mathlib.AlgebraicGeometry.Morphisms.FlatRank
 public import Mathlib.AlgebraicGeometry.Morphisms.Proper
+public import Mathlib.AlgebraicGeometry.ZariskisMainTheorem
 public import Mathlib.FieldTheory.IsAlgClosed.Basic
 public import Mathlib.Topology.KrullDimension
 public import WeilConjectures.AlgebraicGeometry.Cohomology.Affine
@@ -22,8 +23,10 @@ public import WeilConjectures.AlgebraicGeometry.Modules.HilbertPolynomial
 public import WeilConjectures.AlgebraicGeometry.Modules.Invertible
 public import WeilConjectures.AlgebraicGeometry.Modules.VeryAmple
 public import WeilConjectures.AlgebraicGeometry.Modules.ProjectionFormula
+public import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.FlatDescent
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.QuasiFinite
 public import WeilConjectures.AlgebraicGeometry.ProjectiveSpace.CoordinateSection
+public import WeilConjectures.AlgebraicGeometry.ProjectiveSpace.LinearCombination
 public import WeilConjectures.AlgebraicGeometry.ProjectiveSpace.SegreTwist
 public import WeilConjectures.Mathlib.Topology.NoetherianSpace
 
@@ -289,6 +292,8 @@ For `M = 𝒪_X` on a curve, this is the finiteness of the genus `dim_k H¹(X, �
 instance finiteDimensional_H [IsProper (X ↘ Spec (.of K))] (M : X.Modules) [M.IsInvertible]
     (q : ℕ) : FiniteDimensional K (M.H q) :=
   have := IsInvertible.sheafOfModules_isInvertible M
+  have := SheafOfModules.IsInvertible.isFiniteLocallyFree M
+  have := SheafOfModules.IsFiniteLocallyFree.isFinitePresentation M
   finiteDimensional_H_of_isProper M q
 
 /-- **The degree is additive over a finite disjoint union.** If a noetherian scheme `X` of
@@ -336,8 +341,100 @@ theorem IsVeryAmple.of_pullback {k : Type u} [Field k] (f : X ⟶ Spec (.of k)) 
     (h : IsVeryAmple (pullback.snd f (Spec.map (CommRingCat.ofHom (algebraMap k K))))
       ((Scheme.Modules.pullback
         (pullback.fst f (Spec.map (CommRingCat.ofHom (algebraMap k K))))).obj M)) :
-    IsVeryAmple f M :=
-  sorry
+    IsVeryAmple f M := by
+  classical
+  set g := Spec.map (CommRingCat.ofHom (algebraMap k K))
+  set φ := pullback.fst f g
+  set p := pullback.snd f g
+  set MK := (Scheme.Modules.pullback φ).obj M
+  obtain ⟨n, i', hn, hi', hi'f, ⟨e⟩⟩ := h
+  have := Fintype.ofFinite n
+  have : CompactSpace X := QuasiCompact.compactSpace_of_compactSpace f
+  have := Scheme.Modules.IsInvertible.sheafOfModules_isInvertible M
+  have hsurj : AlgebraicGeometry.Surjective g := ⟨fun _ ↦ ⟨default, Subsingleton.elim _ _⟩⟩
+  -- the sections `s' l = i'^* T_l` of `M_K` defining `i'`
+  have hle : (⊤ : (Limits.pullback f g).Opens) ≤ i' ⁻¹ᵁ ⊤ := fun _ _ ↦ trivial
+  let s' (l : n) : Γ(MK, ⊤) := MK.presheaf.map (homOfLE hle).op
+    (e.hom.app _ (Scheme.Modules.pullbackSection i' (ProjectiveSpace.twistOneSection n _ l)))
+  have hs' (l : n) : e.hom.app _
+      (Scheme.Modules.pullbackSection i' (ProjectiveSpace.twistOneSection n _ l)) =
+      MK.presheaf.map (homOfLE (le_top : i' ⁻¹ᵁ ⊤ ≤ ⊤)).op (s' l) := by
+    rw [Scheme.Modules.presheaf_map_homOfLE_map_homOfLE, Scheme.Modules.presheaf_map_id_apply]
+  -- they are `K`-linear combinations of pullbacks of sections `u r` of `M`
+  choose N c t ht using fun l ↦
+    Scheme.Modules.exists_eq_sum_smul_pullbackTopSection f (K := K) M (s' l)
+  let m : Type u := Σ l : n, ULift.{u} (Fin (N l))
+  let u : m → Γ(M, ⊤) := fun r ↦ t r.1 r.2.down
+  let C : n → m → Γ(Spec (.of K), ⊤) := fun l r ↦
+    if r.1 = l then (Scheme.ΓSpecIso (.of K)).inv (c r.1 r.2.down) else 0
+  have hv (l : n) : s' l = ∑ r, p.appTop (C l r) • Scheme.Modules.pullbackTopSection φ (u r) := by
+    rw [ht l, Fintype.sum_sigma, Finset.sum_eq_single l]
+    · exact Fintype.sum_equiv Equiv.ulift.symm _ _ fun q ↦ by simp [C, u]; rfl
+    · intro l' _ hl'
+      simp [C, hl']
+    · simp
+  -- the `u r` generate `M`, since the `s' l` generate `M_K`
+  have hU : ⨆ r, Scheme.Modules.generatingLocus (u r) = ⊤ := by
+    refine eq_top_iff.mpr fun x _ ↦ ?_
+    obtain ⟨y, rfl⟩ := φ.surjective x
+    obtain ⟨l, hl⟩ := Opens.mem_iSup.mp
+      ((ProjectiveSpace.iSup_standardOpen n _).ge (Set.mem_univ (i' y)))
+    have hgen : Scheme.Modules.GeneratesAt (s' l) y := by
+      rw [← Scheme.Modules.mem_generatingLocus,
+        ProjectiveSpace.generatingLocus_eq_preimage_standardOpen e.hom hs' l]
+      exact hl
+    rw [hv l] at hgen
+    obtain ⟨r, -, hr⟩ :=
+      Scheme.Modules.exists_generatesAt_of_generatesAt_sum φ Finset.univ _ u hgen
+    exact Opens.mem_iSup.mpr ⟨r, hr⟩
+  -- the morphism `j : X ⟶ ℙ(m; k)` given by the `u r`
+  obtain ⟨j, hj, εj, hεj_iso, hεj⟩ := ProjectiveSpace.exists_hom_twistRestrict u
+    (fun r ↦ Scheme.Modules.generatingLocus (u r))
+    (fun r ↦ Scheme.Modules.isFreeGenerator_generatingLocus (u r)) f hU
+  -- the morphism `ψ : X_K ⟶ ℙ(m; K)` given by the `φ^* u r`
+  have hU' : ⨆ r, Scheme.Modules.generatingLocus
+      (Scheme.Modules.pullbackTopSection φ (u r)) = ⊤ := eq_top_iff.mpr fun y _ ↦ by
+    obtain ⟨r, hr⟩ := Opens.mem_iSup.mp (hU.ge (Set.mem_univ (φ y)))
+    exact Opens.mem_iSup.mpr ⟨r, Scheme.Modules.preimage_generatingLocus_le φ (u r) hr⟩
+  obtain ⟨ψ, hψ, εψ, hεψ_iso, hεψ⟩ := ProjectiveSpace.exists_hom_twistRestrict
+    (fun r ↦ Scheme.Modules.pullbackTopSection φ (u r))
+    (fun r ↦ Scheme.Modules.generatingLocus (Scheme.Modules.pullbackTopSection φ (u r)))
+    (fun r ↦ Scheme.Modules.isFreeGenerator_generatingLocus _) p hU'
+  -- `ψ` is the base change of `j`
+  have hψj : ψ ≫ ProjectiveSpace.map m g = φ ≫ j :=
+    ProjectiveSpace.map_comp_eq_of_pullbackTopSection g φ εj hεj εψ hεψ
+      (by rw [reassoc_of% hψ, hj, pullback.condition])
+  have hpb : IsPullback ψ φ (ProjectiveSpace.map m g) j :=
+    IsPullback.of_right (h₂₂ := ℙ(m; Spec (.of k)) ↘ Spec (.of k))
+      (h₁₂ := ℙ(m; Spec (.of K)) ↘ Spec (.of K)) (v₁₃ := g)
+      (by rw [hψ, hj]; exact (IsPullback.of_hasPullback f g).flip) hψj
+      (ProjectiveSpace.isPullback_map m g).flip
+  -- `ψ` is a monomorphism, since `i'` is, hence a closed immersion
+  have : Mono i' := ((IsClosedImmersion.iff_isFinite_and_mono i').mp hi').2
+  have hmono : Mono ψ := ProjectiveSpace.mono_of_eq_sum_smul εψ hεψ e.hom hs' hψ hv hi'f
+  have : LocallyOfFiniteType (ψ ≫ ℙ(m; Spec (.of K)) ↘ Spec (.of K)) := by
+    rw [hψ]
+    infer_instance
+  have : LocallyOfFiniteType ψ := locallyOfFiniteType_of_comp ψ (ℙ(m; Spec (.of K)) ↘ Spec (.of K))
+  have : IsProper (ψ ≫ ℙ(m; Spec (.of K)) ↘ Spec (.of K)) := by
+    rw [hψ]
+    infer_instance
+  have : IsProper ψ := IsProper.of_comp ψ (ℙ(m; Spec (.of K)) ↘ Spec (.of K))
+  have : IsFinite ψ := IsFinite.of_isProper_of_locallyQuasiFinite ψ
+  have hψci : IsClosedImmersion ψ :=
+    (IsClosedImmersion.iff_isFinite_and_mono ψ).mpr ⟨inferInstance, hmono⟩
+  -- so `j` is a closed immersion by fpqc descent
+  have := IsClosedImmersion.descendsAlong_surjective_inf_flat_inf_quasicompact.{u}
+  have hflat : Flat g := Flat.SpecMap_iff.mpr (RingHom.flat_algebraMap_iff.mpr inferInstance)
+  have hQ : (@AlgebraicGeometry.Surjective ⊓ @Flat ⊓ @QuasiCompact :
+      MorphismProperty Scheme.{u})
+      (ProjectiveSpace.map m g) :=
+    ⟨⟨MorphismProperty.of_isPullback (ProjectiveSpace.isPullback_map m g).flip hsurj,
+      MorphismProperty.of_isPullback (ProjectiveSpace.isPullback_map m g).flip hflat⟩,
+      MorphismProperty.of_isPullback (ProjectiveSpace.isPullback_map m g).flip inferInstance⟩
+  have hjci : IsClosedImmersion j := MorphismProperty.of_isPullback_of_descendsAlong
+    (P := @IsClosedImmersion) hpb hQ hψci
+  exact ⟨m, j, inferInstance, hjci, hj, ⟨asIso εj⟩⟩
 
 open scoped Scheme.Modules in
 /-- **The complement of an ample effective divisor is affine.** Let `X` be proper over a field
@@ -618,16 +715,20 @@ theorem Scheme.Hom.fwdDiff_iter_eulerChar_tensorObj_tensorPow [IsIntegral Y]
   have : SheafOfModules.IsFinitePresentation (R := Y.ringCatSheaf)
       (SheafOfModules.free (R := Y.ringCatSheaf) I) :=
     Scheme.Modules.isFinitePresentation_sigma (fun _ : I ↦ SheafOfModules.unit Y.ringCatSheaf)
+  have := SheafOfModules.instIsQuasicoherentOfIsFinitePresentation
+    (SheafOfModules.free (R := Y.ringCatSheaf) I)
   have := Scheme.Modules.isQuasicoherent_tensorObj E ((M.tensorPow c).tensorPow m)
   have := Scheme.Modules.isFinitePresentation_tensorObj E ((M.tensorPow c).tensorPow m)
-  have := Scheme.Modules.isQuasicoherent_kernel φ
-  have := Scheme.Modules.isFinitePresentation_kernel φ
-  have := Scheme.Modules.isQuasicoherent_cokernel φ
-  have := Scheme.Modules.isFinitePresentation_cokernel φ
-  obtain ⟨PK, hPK, hPK'⟩ := Scheme.Modules.exists_polynomial_eulerChar_tensorObj_tensorPow K
-    hample g V hdim (kernel φ) hK
-  obtain ⟨PC, hPC, hPC'⟩ := Scheme.Modules.exists_polynomial_eulerChar_tensorObj_tensorPow K
-    hample g V hdim (cokernel φ) hC
+  have hKq : SheafOfModules.IsQuasicoherent (R := Y.ringCatSheaf) (kernel φ) :=
+    Scheme.Modules.isQuasicoherent_kernel φ
+  have hKf : SheafOfModules.IsFinitePresentation (R := Y.ringCatSheaf) (kernel φ) :=
+    Scheme.Modules.isFinitePresentation_kernel φ
+  have hCq := Scheme.Modules.isQuasicoherent_cokernel φ
+  have hCf := Scheme.Modules.isFinitePresentation_cokernel φ
+  obtain ⟨PK, hPK, hPK'⟩ := @Scheme.Modules.exists_polynomial_eulerChar_tensorObj_tensorPow _ K _
+    _ _ _ hample g V hdim (kernel φ) hKq hKf hK
+  obtain ⟨PC, hPC, hPC'⟩ := @Scheme.Modules.exists_polynomial_eulerChar_tensorObj_tensorPow _ K _
+    _ _ _ hample g V hdim (cokernel φ) hCq hCf hC
   obtain ⟨PE, hPE, hPE'⟩ := Scheme.Modules.exists_polynomial_eulerChar_tensorObj_tensorPow_of_le K
     hample E (Scheme.Modules.topologicalKrullDim_le_unbotD_toNat K)
   obtain ⟨PO, hPO, hPO'⟩ := f.exists_polynomial_hilbertFunction M hample
