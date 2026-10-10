@@ -1,0 +1,81 @@
+{
+ "id": "lem-weil-pbc-spec-map-global-sections",
+ "kind": "statement",
+ "title": "Spec of a ring map induces that ring map on global sections",
+ "statement": "Let $\\psi:C\\to B$ be a homomorphism of commutative rings and $\\operatorname{Spec}\\psi:\\operatorname{Spec}B\\to\\operatorname{Spec}C$ the induced morphism of schemes [def-weil-affine-spectrum]. Let $\\varepsilon_B:B\\to\\Gamma(\\operatorname{Spec}B,\\mathcal O_{\\operatorname{Spec}B})$ and $\\varepsilon_C:C\\to\\Gamma(\\operatorname{Spec}C,\\mathcal O_{\\operatorname{Spec}C})$ be the canonical isomorphisms of rings, and $(\\operatorname{Spec}\\psi)^\\sharp:\\Gamma(\\operatorname{Spec}C,\\mathcal O_{\\operatorname{Spec}C})\\to\\Gamma(\\operatorname{Spec}B,\\mathcal O_{\\operatorname{Spec}B})$ the ring map induced by $\\operatorname{Spec}\\psi$ on global sections. Then $(\\operatorname{Spec}\\psi)^\\sharp\\circ\\varepsilon_C=\\varepsilon_B\\circ\\psi$; that is, under the identifications of the rings of global sections with $C$ and $B$, the map induced by $\\operatorname{Spec}\\psi$ on global sections is $\\psi$.",
+ "source": {
+  "document": "literature/stacks-project/schemes.tex",
+  "place": "Schemes, Lemma 01I2 (label lemma-category-affine-schemes: the equivalence of affine schemes with rings^op is given by global sections, Spec being its quasi-inverse) with Lemma 01HV (label lemma-spec-sheaves) (1), Gamma(Spec R, O) = R, functorially"
+ },
+ "stmt_deps": [
+  "def-weil-affine-spectrum"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "global sections of Spec.map f is f under the identification Gamma(Spec R) = R",
+   "results": "AlgebraicGeometry.Scheme.ΓSpecIso, AlgebraicGeometry.Scheme.ΓSpecIso_naturality, AlgebraicGeometry.Scheme.ΓSpecIso_inv, AlgebraicGeometry.Scheme.germ_stalkClosedPointTo_Spec, AlgebraicGeometry.StructureSheaf.globalSectionsIso, AlgebraicGeometry.Scheme.SpecΓIdentity (Mathlib.AlgebraicGeometry.Scheme, .Stalk, .StructureSheaf)",
+   "date": "2026-10-10",
+   "verdict": "match: Scheme.ΓSpecIso_naturality"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Scheme.Hom.appTop (AlgebraicGeometry.Spec.map _)",
+   "results": "Scheme.ΓSpecIso_naturality, Scheme.ΓSpecIso_inv_naturality (+ _assoc forms) (Mathlib.AlgebraicGeometry.Scheme); ΓSpecIso_obj_hom (GammaSpecAdjunction); arrowIsoΓSpecOfIsAffine (AffineScheme); Modules.sheafComposePushforwardComp",
+   "date": "2026-10-10",
+   "verdict": "match: Scheme.ΓSpecIso_naturality"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "the morphism Spec(f) induces f on rings of global sections, naturality of Gamma(Spec R) ≅ R",
+   "results": "AlgebraicGeometry.Spec_Γ_naturality (Mathlib.AlgebraicGeometry.Spec, locally ringed space form), Scheme.ΓSpecIso_naturality, Scheme.ΓSpecIso_naturality_assoc, Scheme.ΓSpecIso_inv_naturality_assoc",
+   "date": "2026-10-10",
+   "verdict": "match: Scheme.ΓSpecIso_naturality"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rn 'ΓSpecIso_naturality\\|Spec_Γ_naturality' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicGeometry; sed -n 607,611p Scheme.lean",
+   "results": "Scheme.lean:609 lemma ΓSpecIso_naturality {R S : CommRingCat} (f : R ⟶ S) : (Spec.map f).appTop ≫ (ΓSpecIso S).hom = (ΓSpecIso R).hom ≫ f; Spec.lean:291 Spec_Γ_naturality; uses in Stalk.lean:342, AffineSpace.lean:88, IdealSheaf/Subscheme.lean:79",
+   "date": "2026-10-10",
+   "verdict": "match"
+  },
+  {
+   "tool": "local_search",
+   "query": "AlgebraicGeometry.Scheme.ΓSpecIso_naturality (project ~/weil-conjectures-slopmaster2)",
+   "results": "empty, index: unavailable (no language server running); existence checked by the grep and sed -n above instead",
+   "date": "2026-10-10",
+   "verdict": "not a verdict (index unavailable)"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "AlgebraicGeometry.Scheme.ΓSpecIso_naturality",
+  "file": "Mathlib/AlgebraicGeometry/Scheme.lean",
+  "line": 609,
+  "how": "exact (lines 609-610, read by sed -n): with Mathlib's R, S, f the node's C, B, psi, (Spec.map f).appTop is (Spec psi)^sharp and (ΓSpecIso X).hom : Γ(Spec X, ⊤) ≅ X is the inverse of epsilon_X; the lemma (Spec.map f).appTop ≫ (ΓSpecIso S).hom = (ΓSpecIso R).hom ≫ f reads epsilon_B^{-1} ∘ (Spec psi)^sharp = psi ∘ epsilon_C^{-1}, which is the node's equation (Scheme.ΓSpecIso_inv_naturality, line 615, is the same equation in the inverse form)"
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-universal-thickening-affine-case",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lead_note": "L 2026-10-10: Mathlib leaf (Scheme.GammaSpecIso_naturality, AlgebraicGeometry/Scheme.lean:609); line verified."
+}

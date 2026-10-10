@@ -2,18 +2,129 @@
  "id": "lem-weil-pbc-universal-thickening-affine-case",
  "kind": "statement",
  "title": "Spec of a universal square-zero thickening of rings is a universal first order thickening of affine schemes",
- "statement": "Let $\\varphi:R\\to S$ be a homomorphism of commutative rings, and let $\\pi:S'\\to S$ be a surjective homomorphism of $R$-algebras whose kernel $K$ satisfies $K^2=0$ and which has the following universal property: for every $R$-algebra $A$, every ideal $I\\subseteq A$ with $I^2=0$ (quotient map $q:A\\to A/I$) and every $R$-algebra map $a:S\\to A/I$, there is exactly one $R$-algebra map $a':S'\\to A$ with $q\\circ a'=a\\circ\\pi$. Let $X=\\operatorname{Spec}R$, $Z=\\operatorname{Spec}S$, $Z'=\\operatorname{Spec}S'$ [def-weil-affine-spectrum], $h=\\operatorname{Spec}\\varphi:Z\\to X$, $i=\\operatorname{Spec}\\pi:Z\\to Z'$ and $h'=\\operatorname{Spec}(R\\to S'):Z'\\to X$. Then $i$ is a closed immersion whose ideal sheaf has square zero, $h'\\circ i=h$, and $Z\\subset Z'$ (with $h'$) is a universal first order thickening of $Z$ over $X$ [def-weil-pbc-universal-first-order-thickening]: the universal property holds for all first order thickenings $T\\subset T'$ over $X$, with $T'$ an arbitrary (not necessarily affine) scheme.",
+ "statement": "Let $\\varphi:R\\to S$ be a homomorphism of commutative rings, and let $\\pi:S'\\to S$ be a surjective homomorphism of $R$-algebras whose kernel $K$ satisfies $K^2=0$ and which has the following universal property: for every $R$-algebra $A$, every ideal $I\\subseteq A$ with $I^2=0$ (quotient map $q:A\\to A/I$) and every $R$-algebra map $a:S\\to A/I$, there is exactly one $R$-algebra map $a':S'\\to A$ with $q\\circ a'=a\\circ\\pi$. Let $X=\\operatorname{Spec}R$, $Z=\\operatorname{Spec}S$, $Z'=\\operatorname{Spec}S'$ [def-weil-affine-spectrum], $h=\\operatorname{Spec}\\varphi:Z\\to X$, $i=\\operatorname{Spec}\\pi:Z\\to Z'$ and $h'=\\operatorname{Spec}(R\\to S'):Z'\\to X$. Then $i$ is a closed immersion [def-weil-closed-immersion] whose ideal sheaf [def-sbc-closed-immersion-ideal-sheaf] has square zero [def-sbc-ideal-sheaf-powers], $h'\\circ i=h$, and $Z\\subset Z'$ (with $h'$) is a universal first order thickening of $Z$ over $X$ [def-weil-pbc-universal-first-order-thickening]: the universal property holds for all first order thickenings $T\\subset T'$ over $X$ [def-sbc-first-order-thickening], with $T'$ an arbitrary (not necessarily affine) scheme.",
  "source": {
   "document": "literature/stacks-project/more-morphisms.tex",
   "place": "More on Morphisms, proof of Lemma 04F3 (lemma-universal-thickening), third paragraph ('Before we glue affine pieces ... Thus the lemma holds if X and Z are affine'): the universal property for affine T, T' from Algebra, Lemma 04EB, then for general T' by an affine open covering of T' and glueing of the morphisms"
  },
  "stmt_deps": [
   "def-weil-affine-spectrum",
+  "def-weil-closed-immersion",
+  "def-sbc-closed-immersion-ideal-sheaf",
+  "def-sbc-ideal-sheaf-powers",
+  "def-sbc-first-order-thickening",
   "def-weil-pbc-universal-first-order-thickening"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "*Notation and the dictionary of morphisms into spectra.* Write $\\varphi':R\\to S'$ for the structure map of the $R$-algebra $S'$; $\\pi\\circ\\varphi'=\\varphi$ since $\\pi$ is a homomorphism of $R$-algebras, and $h'=\\operatorname{Spec}\\varphi'$. For a scheme $Y$ write $\\Gamma(Y)=\\mathcal O_Y(Y)$, and for a morphism of schemes $g:Y_1\\to Y_2$ write $g^*:\\Gamma(Y_2)\\to\\Gamma(Y_1)$ for the ring map it induces on global sections; $(g\\circ g')^*=g'^*\\circ g^*$ and $\\mathrm{id}^*=\\mathrm{id}$, since morphisms of schemes compose as morphisms of locally ringed spaces [def-pc-scheme]. For a ring $B$ let $\\varepsilon_B:B\\to\\Gamma(\\operatorname{Spec}B)$ be the canonical isomorphism. By [lem-weil-pbc-morphism-into-affine-scheme], for every scheme $Y$ the map $\\mu_Y:\\operatorname{Mor}(Y,\\operatorname{Spec}B)\\to\\operatorname{Hom}_{\\mathrm{Ring}}(B,\\Gamma(Y))$, $f\\mapsto f^*\\circ\\varepsilon_B$, is bijective. It has two compatibilities: (D1) for $g:Y_1\\to Y_2$ and $f:Y_2\\to\\operatorname{Spec}B$, $\\mu_{Y_1}(f\\circ g)=g^*\\circ f^*\\circ\\varepsilon_B=g^*\\circ\\mu_{Y_2}(f)$; (D2) for a ring map $\\psi:C\\to B$ and $f:Y\\to\\operatorname{Spec}B$, $\\mu_Y(\\operatorname{Spec}\\psi\\circ f)=f^*\\circ(\\operatorname{Spec}\\psi)^*\\circ\\varepsilon_C=f^*\\circ\\varepsilon_B\\circ\\psi=\\mu_Y(f)\\circ\\psi$, by [lem-weil-pbc-spec-map-global-sections] ($(\\operatorname{Spec}\\psi)^*\\circ\\varepsilon_C=\\varepsilon_B\\circ\\psi$) [def-weil-affine-spectrum].",
+   "uses": [
+    "def-pc-scheme",
+    "def-weil-affine-spectrum",
+    "lem-weil-pbc-morphism-into-affine-scheme",
+    "lem-weil-pbc-spec-map-global-sections"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Schemes, Lemma 01I1 (label lemma-morphism-into-affine) and Lemma 01I2 (label lemma-category-affine-schemes); the compatibilities (D1), (D2) written out by the agent"
+   }
+  },
+  {
+   "text": "*$Z\\subset Z'$ is a first order thickening over $X$.* (a) $h'\\circ i=\\operatorname{Spec}\\varphi'\\circ\\operatorname{Spec}\\pi=\\operatorname{Spec}(\\pi\\circ\\varphi')=\\operatorname{Spec}\\varphi=h$ by the functoriality of $\\operatorname{Spec}$ [def-weil-affine-spectrum]. (b) $i$ is a closed immersion: cover $Z'$ by the single affine open $V=Z'$; then $i^{-1}(V)=Z=\\operatorname{Spec}S$ is affine, and the ring map $i^*:\\Gamma(Z')\\to\\Gamma(Z)$ is $\\varepsilon_S\\circ\\pi\\circ\\varepsilon_{S'}^{-1}$ by [lem-weil-pbc-spec-map-global-sections], which is surjective because $\\pi$ is. By [lem-weil-pbc-closed-immersion-affine-cover-criterion] (2), $i$ is a closed immersion [def-weil-closed-immersion]. (c) Its ideal sheaf $\\mathcal I=\\ker(\\mathcal O_{Z'}\\to i_*\\mathcal O_Z)$ [def-sbc-closed-immersion-ideal-sheaf] has $\\mathcal I(Z')=\\ker(i^*)=\\varepsilon_{S'}(K)$. By [def-sbc-ideal-sheaf-powers], on the affine open $U=Z'$ one has $\\mathcal I^2|_{Z'}=(\\mathcal I(Z')\\mathcal I(Z'))^\\sim=(\\varepsilon_{S'}(K^2))^\\sim=0$ since $K^2=0$; as $U$ is all of $Z'$, $\\mathcal I^2=0$. (d) By (b), (c) and [def-sbc-first-order-thickening] (2), $Z'$ is a first order thickening of $Z$ via $i$, and by (a) and [def-sbc-first-order-thickening] (4) it is one over $X$ with structure morphism $h'$, $Z$ being over $X$ through $h=h'\\circ i$ [def-weil-scheme-over-base].",
+   "uses": [
+    "def-weil-affine-spectrum",
+    "lem-weil-pbc-spec-map-global-sections",
+    "lem-weil-pbc-closed-immersion-affine-cover-criterion",
+    "def-weil-closed-immersion",
+    "def-sbc-closed-immersion-ideal-sheaf",
+    "def-sbc-ideal-sheaf-powers",
+    "def-sbc-first-order-thickening",
+    "def-weil-scheme-over-base"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "More on Morphisms, proof of Lemma 04F3 (lemma-universal-thickening), third paragraph ('By Algebra, Lemma 04EB there exists a first order thickening Z ⊂ Z' over X'); the closed immersion via Morphisms, Lemma 01QO (morphisms-lemma-closed-immersion); written out by the agent"
+   }
+  },
+  {
+   "text": "*The universal property when $T'$ is affine.* Let $T\\subset T'$ be a first order thickening over $X$ [def-sbc-first-order-thickening] with closed immersion $i_T:T\\to T'$, ideal sheaf $\\mathcal J$ ($\\mathcal J^2=0$) and structure morphism $b:T'\\to X$, with $T'$ affine, and let $a:T\\to Z$ satisfy $h\\circ a=b\\circ i_T$. We show: there is exactly one $a':T'\\to Z'$ with $h'\\circ a'=b$ and $a'\\circ i_T=i\\circ a$. Put $A=\\Gamma(T')$, $C=\\Gamma(T)$. Since $T'$ is an affine open of itself and $i_T^{-1}(T')=T$, [lem-weil-pbc-closed-immersion-affine-cover-criterion] (1) shows that $i_T^*:A\\to C$ is surjective. Its kernel is $N=\\mathcal J(T')$ [def-sbc-closed-immersion-ideal-sheaf], and $N^2=0$ by [def-sbc-ideal-sheaf-powers] ($\\mathcal J^2=0$ means $\\mathcal J(U)^2=0$ on every affine open $U$; take $U=T'$). Let $q:A\\to A/N$ be the quotient map and $\\bar\\imath:A/N\\to C$ the isomorphism with $\\bar\\imath\\circ q=i_T^*$. Put $\\beta=\\mu_{T'}(b):R\\to A$; this makes $A$ an $R$-algebra, and $A/N$ one via $q\\circ\\beta$. Put $\\alpha=\\mu_T(a):S\\to C$ and $a_0=\\bar\\imath^{-1}\\circ\\alpha:S\\to A/N$. By (D2) and (D1) of the first step, $\\mu_T(h\\circ a)=\\alpha\\circ\\varphi$ and $\\mu_T(b\\circ i_T)=i_T^*\\circ\\beta$, so $h\\circ a=b\\circ i_T$ gives $\\alpha\\circ\\varphi=i_T^*\\circ\\beta$, hence $a_0\\circ\\varphi=\\bar\\imath^{-1}\\circ i_T^*\\circ\\beta=q\\circ\\beta$: $a_0$ is a homomorphism of $R$-algebras. Now let $a':T'\\to Z'$ be any morphism and $\\alpha'=\\mu_{T'}(a'):S'\\to A$. (i) Since $\\mu_{T'}$ is injective, $h'\\circ a'=b$ iff $\\mu_{T'}(h'\\circ a')=\\beta$, i.e. by (D2) iff $\\alpha'\\circ\\varphi'=\\beta$, i.e. iff $\\alpha'$ is a homomorphism of $R$-algebras. (ii) Since $\\mu_T$ is injective, $a'\\circ i_T=i\\circ a$ iff $\\mu_T(a'\\circ i_T)=\\mu_T(i\\circ a)$, i.e. by (D1), (D2) iff $i_T^*\\circ\\alpha'=\\alpha\\circ\\pi$, i.e. (applying the isomorphism $\\bar\\imath^{-1}$) iff $q\\circ\\alpha'=a_0\\circ\\pi$. Since $\\mu_{T'}:\\operatorname{Mor}(T',Z')\\to\\operatorname{Hom}(S',A)$ is bijective, the $a'$ with both properties correspond bijectively to the $R$-algebra maps $\\alpha':S'\\to A$ with $q\\circ\\alpha'=a_0\\circ\\pi$. By the universal property of $\\pi$ in the hypothesis, applied to the $R$-algebra $A$, the ideal $N$ ($N^2=0$) and the $R$-algebra map $a_0:S\\to A/N$, there is exactly one such $\\alpha'$. Hence exactly one $a'$. (Only $T'$ affine is used: $T$ is then affine as well, but this is not needed.)",
+   "uses": [
+    "def-sbc-first-order-thickening",
+    "lem-weil-pbc-closed-immersion-affine-cover-criterion",
+    "def-sbc-closed-immersion-ideal-sheaf",
+    "def-sbc-ideal-sheaf-powers",
+    "lem-weil-pbc-morphism-into-affine-scheme",
+    "def-weil-scheme-over-base"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "More on Morphisms, proof of Lemma 04F3 (lemma-universal-thickening), third paragraph ('which has the universal property of the lemma for diagrams ... where T, T' are affine'), from Algebra, Lemma 04EB (algebra-lemma-universal-thickening, literature/stacks-project/algebra.tex); the translation through Schemes, Lemma 01I1 written out by the agent"
+   }
+  },
+  {
+   "text": "*Restriction to opens.* Keep $T\\subset T'$, $i_T$, $b$, $a$ as in the universal property for an arbitrary scheme $T'$. For an open subscheme $U'\\subseteq T'$ with inclusion $j_{U'}$ [def-weil-open-immersion] let $U=i_T^{-1}(U')$ with inclusion $j_U$ and $i_U:U\\to U'$ the unique morphism with $j_{U'}\\circ i_U=i_T\\circ j_U$ [lem-weil-pbc-morphism-factors-through-open-subscheme]. By [lem-weil-pbc-thickening-open-restriction] (applied with the open $X\\subseteq X$), $U\\subset U'$ via $i_U$ is a first order thickening over $X$ with structure morphism $b\\circ j_{U'}$, and $a\\circ j_U:U\\to Z$ satisfies $h\\circ a\\circ j_U=b\\circ i_T\\circ j_U=(b\\circ j_{U'})\\circ i_U$. Call $P(U')$ the set of morphisms $c:U'\\to Z'$ with $h'\\circ c=b\\circ j_{U'}$ and $c\\circ i_U=i\\circ a\\circ j_U$; $P(T')$ is the set of solutions of the universal property for $(T\\subset T',b,a)$. (R) Let $U''\\subseteq U'$ be opens of $T'$, with $k:U''\\to U'$ the inclusion ($j_{U'}\\circ k=j_{U''}$), $U_0=i_T^{-1}(U'')\\subseteq U=i_T^{-1}(U')$ with inclusion $k_0:U_0\\to U$ ($j_U\\circ k_0=j_{U_0}$), and $i_{U''}:U_0\\to U''$ as above. If $c\\in P(U')$, then $c\\circ k\\in P(U'')$: $h'\\circ c\\circ k=b\\circ j_{U'}\\circ k=b\\circ j_{U''}$, and $c\\circ k\\circ i_{U''}=c\\circ i_U\\circ k_0=i\\circ a\\circ j_U\\circ k_0=i\\circ a\\circ j_{U_0}$, where $k\\circ i_{U''}=i_U\\circ k_0$ because both, composed with the open immersion $j_{U'}$, give $i_T\\circ j_{U_0}$ (uniqueness in [lem-weil-pbc-morphism-factors-through-open-subscheme]). (A) If $U'$ is affine, $P(U')$ has exactly one element, by the previous step applied to $U\\subset U'$, $b\\circ j_{U'}$ and $a\\circ j_U$.",
+   "uses": [
+    "def-weil-open-immersion",
+    "lem-weil-pbc-morphism-factors-through-open-subscheme",
+    "lem-weil-pbc-thickening-open-restriction",
+    "def-sbc-first-order-thickening"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "More on Morphisms, proof of Lemma 04F3 (lemma-universal-thickening), third paragraph ('we obtain morphisms a'_i : T'_i -> Z' over X such that a'_i|_{T_i} = a|_{T_i}'); restriction of thickenings to opens: More on Morphisms, Lemma 09ZU (lemma-base-change-thickening)"
+   }
+  },
+  {
+   "text": "*Arbitrary $T'$: glueing.* By [lem-weil-pbc-affine-opens-basis] choose a covering $T'=\\bigcup_{k\\in K}T'_k$ by affine opens, and let $a'_k$ be the unique element of $P(T'_k)$ (previous step, (A)). For $k,l\\in K$, the open $T'_{kl}=T'_k\\cap T'_l$ is covered by affine opens $W'\\subseteq T'_{kl}$ of $T'$ [lem-weil-pbc-affine-opens-basis]; for each such $W'$ the restrictions of $a'_k$ and $a'_l$ to $W'$ both lie in $P(W')$ by (R), hence are equal by (A). By the uniqueness clause of [lem-weil-pbc-scheme-morphism-gluing] (for the scheme $T'_{kl}$ and its covering by these $W'$), $a'_k|_{T'_{kl}}=a'_l|_{T'_{kl}}$. By its existence clause there is a morphism $a':T'\\to Z'$ with $a'|_{T'_k}=a'_k$ for all $k$. It lies in $P(T')$: $h'\\circ a'$ and $b$ have the same restriction $h'\\circ a'_k=b\\circ j_{T'_k}$ to every $T'_k$, so they are equal [lem-weil-pbc-scheme-morphism-gluing]; and with $T_k=i_T^{-1}(T'_k)$, which form an open covering of $T$, $a'\\circ i_T\\circ j_{T_k}=a'\\circ j_{T'_k}\\circ i_{T_k}=a'_k\\circ i_{T_k}=i\\circ a\\circ j_{T_k}$, so $a'\\circ i_T=i\\circ a$ [lem-weil-pbc-scheme-morphism-gluing]. Uniqueness: if $a''\\in P(T')$, then $a''|_{T'_k}\\in P(T'_k)$ by (R), so $a''|_{T'_k}=a'_k=a'|_{T'_k}$ for every $k$ by (A), and $a''=a'$ [lem-weil-pbc-scheme-morphism-gluing].",
+   "uses": [
+    "lem-weil-pbc-affine-opens-basis",
+    "lem-weil-pbc-scheme-morphism-gluing"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "More on Morphisms, proof of Lemma 04F3 (lemma-universal-thickening), third paragraph ('Given a general diagram we can choose an affine open covering T' = ⋃ T'_i ... By uniqueness we see that a'_i and a'_j agree on any affine open of T'_i ∩ T'_j. Hence the morphisms a'_i glue to a global morphism a' : T' -> Z' over X as desired'); the checks of the two conditions on a' and the global uniqueness written out by the agent"
+   }
+  },
+  {
+   "text": "*Conclusion.* By the second step $Z\\subset Z'$, with closed immersion $i$ and $h'$, is a first order thickening over $X$ with $h'\\circ i=h$, and by the previous step, for every first order thickening $T\\subset T'$ over $X$ with $T'$ an arbitrary scheme and every $a:T\\to Z$ with $h\\circ a=b\\circ i_T$, there is exactly one $a':T'\\to Z'$ with $h'\\circ a'=b$ and $a'\\circ i_T=i\\circ a$. This is the defining property of a universal first order thickening of $Z$ over $X$ [def-weil-pbc-universal-first-order-thickening].",
+   "uses": [
+    "def-weil-pbc-universal-first-order-thickening"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "More on Morphisms, proof of Lemma 04F3 (lemma-universal-thickening), third paragraph, last sentence ('Thus the lemma holds if X and Z are affine'); Section 04F2 (section-universal-thickening) for the definition"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-scheme",
+  "def-sbc-closed-immersion-ideal-sheaf",
+  "def-sbc-first-order-thickening",
+  "def-sbc-ideal-sheaf-powers",
+  "def-weil-affine-spectrum",
+  "def-weil-closed-immersion",
+  "def-weil-open-immersion",
+  "def-weil-pbc-universal-first-order-thickening",
+  "def-weil-scheme-over-base",
+  "lem-weil-pbc-affine-opens-basis",
+  "lem-weil-pbc-closed-immersion-affine-cover-criterion",
+  "lem-weil-pbc-morphism-factors-through-open-subscheme",
+  "lem-weil-pbc-morphism-into-affine-scheme",
+  "lem-weil-pbc-scheme-morphism-gluing",
+  "lem-weil-pbc-spec-map-global-sections",
+  "lem-weil-pbc-thickening-open-restriction"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/more-morphisms.tex",
+  "place": "More on Morphisms, proof of Lemma 04F3 (lemma-universal-thickening), third paragraph, from Algebra, Lemma 04EB; the translation between morphisms into spectra and ring maps (Schemes, Lemmas 01I1, 01I2) and the verifications after the glueing written out by the agent"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -35,10 +146,38 @@
    "results": "only docstrings: Morphisms/FormallyUnramified.lean:189 (hom_ext, at most one lift along an infinitesimal thickening) and RingTheory/Smooth/Basic.lean:329",
    "date": "2026-10-10",
    "verdict": "no match: no universal first order thickening of schemes in Mathlib"
+  },
+  {
+   "tool": "leansearch",
+   "query": "morphisms from a first order thickening into Spec of universal square-zero extension, lift of scheme morphism along square-zero closed immersion",
+   "results": "AlgebraicGeometry.Scheme.Hom.liftQuotient (AffineScheme), AlgebraicGeometry.IsClosedImmersion.lift, lift_fac, lift_fac_assoc (Morphisms.ClosedImmersion), TrivSqZeroExt.lift_apply_inr, TrivSqZeroExt.lift.congr_simp",
+   "date": "2026-10-10",
+   "verdict": "no match: factorizations through closed immersions, not lifts along thickenings"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "universal first order thickening of a formally unramified morphism of schemes; Spec of the universal square-zero extension satisfies the lifting property for all thickenings",
+   "results": "AlgebraicGeometry.FormallyUnramified, FormallyUnramified.instHasRingHomPropertyFormallyUnramified, formallyUnramified_iff, FormallyUnramified.formallyUnramified_appLE, Scheme.Hom.formallyUnramified_appLE (Mathlib.AlgebraicGeometry.Morphisms.FormallyUnramified)",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rn -i -E 'square.?zero|first.order|infinitesimal' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicGeometry; grep -rln -i 'universal.*thickening' ~/weil-conjectures-slopmaster2 --include=*.lean; grep -rn -i thickening ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/RingTheory",
+   "results": "only Morphisms/FormallyUnramified.lean:52, :189 (docstrings: lifting criterion, at most one lift along an infinitesimal thickening) and RingTheory/Smooth/Basic.lean:329 (docstring); nothing in the source repository",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "local_search",
+   "query": "universalThickening (project ~/weil-conjectures-slopmaster2)",
+   "results": "empty, index: unavailable (no language server running)",
+   "date": "2026-10-10",
+   "verdict": "not a verdict (index unavailable)"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "worker",
@@ -58,5 +197,17 @@
   }
  },
  "chapter": "sec-proper-base-change",
- "unit": "sk-thm-p1"
+ "unit": "sk-thm-p1",
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "lem-weil-pbc-universal-thickening-affine-case",
+  "worker": "stage1",
+  "summary": "Statement kept (checked against the third paragraph of the proof of Stacks 04F3 and the statements of def-weil-pbc-universal-first-order-thickening and lem-weil-pbc-ring-universal-first-order-thickening, whose conclusion is this item's hypothesis verbatim); only the definition citations [def-weil-closed-immersion], [def-sbc-closed-immersion-ideal-sheaf], [def-sbc-ideal-sheaf-powers], [def-sbc-first-order-thickening] added in the text and in stmt_deps. Proof in 6 steps following 04F3: the dictionary Mor(Y, Spec B) = Hom(B, Γ(Y)) (01I1, lem-weil-pbc-morphism-into-affine-scheme) with its two compatibilities, the second from the new Mathlib leaf lem-weil-pbc-spec-map-global-sections (Scheme.ΓSpecIso_naturality); i closed immersion via 01QO (lem-weil-pbc-closed-immersion-affine-cover-criterion) and square-zero ideal sheaf from K^2=0 (def-sbc-ideal-sheaf-powers); the affine-T' case reduced exactly to the ring universal property (Stacks says T, T' affine; only T' affine is needed); restriction of the lifting problem to opens (lem-weil-pbc-thickening-open-restriction, lem-weil-pbc-morphism-factors-through-open-subscheme); glueing over an affine cover with agreement on affine opens of the overlaps (lem-weil-pbc-affine-opens-basis, lem-weil-pbc-scheme-morphism-gluing), and the verification of both conditions and global uniqueness, which Stacks leaves out. Mathlib: no match for the item (searches added)."
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "result": "accepted",
+  "note": "6 steps following the third paragraph of the proof of 04F3: the dictionary Mor(Y, Spec B) = Hom(B, Gamma(Y)) (01I1 leaf of sk-thm-reduction, a tool) with its two compatibilities (new leaf for the global sections of Spec psi: GammaSpecIso_naturality, Scheme.lean:609 verified by L); Z in Z' a first order thickening (closed immersion by the affine-cover criterion leaf, ideal sheaf K with square zero); the universal property for affine T' is the ring-level one; restriction of the lifting problem to opens (thickening-open-restriction leaf); gluing over an affine cover (gluing leaf) with the compatibilities and uniqueness written out. Statement: definition citations added (B3)."
+ }
 }
