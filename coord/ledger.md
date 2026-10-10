@@ -1931,3 +1931,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 16:13 L: returned deliver/H1/lemma-constructible-torsor-trivialises (reviewer RETURN: 1. B3/C1: statement and steps 2-3: the notion 'G-torsor' for a sheaf of (possibly non-commutative) groups on X_et has no)
 - 16:14 L: merged deliver/K1/lem-sc-p1-graded-degree-component-exact (reviewer FIX; first push; new nodes: 0)
 - 16:14 L: lem-sc-p1-graded-degree-component-exact source label corrected (reviewer R-gde)
+- 16:14 L: merged deliver/F1/lem-sc-p1-linear-syzygy (reviewer PASS; first push; new nodes: 0)

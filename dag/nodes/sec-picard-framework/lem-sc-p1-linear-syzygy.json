@@ -22,9 +22,47 @@
   "def-sc-p1-standard",
   "def-pc-standard-graded-algebra"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "View S as the polynomial ring k[x_1][x_0]. Write b=b_0+x_0b_1 with b_0,b_1 in k[x_1]. Comparing the constant coefficient in the relation a x_0+b x_1=0 gives b_0x_1=0 in k[x_1], hence b_0=0 because k[x_1] is a polynomial ring over the field k and therefore has no zero divisors. Thus b=x_0b_1.",
+   "uses": [
+    "lem-weil-pbc-polynomial-ring-domain"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-picard-framework/sk-thm-picard-duality/lem-sc-p1-graded-resolution.md",
+    "place": "proof of the Koszul resolution on the regular sequence x_0,x_1: exactness at the middle term"
+   }
+  },
+  {
+   "text": "Substituting b=x_0b_1 into the relation gives x_0(a+b_1x_1)=0 in S. The ring S=k[x_0,x_1] is an integral domain by [lem-weil-pbc-polynomial-ring-domain], so cancellation of the nonzero element x_0 yields a=-b_1x_1.",
+   "uses": [
+    "lem-weil-pbc-polynomial-ring-domain"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-picard-framework/sk-thm-picard-duality/lem-sc-p1-graded-resolution.md",
+    "place": "proof of the Koszul resolution on the regular sequence x_0,x_1: exactness at the middle term"
+   }
+  },
+  {
+   "text": "Set c=-b_1. Then a=c x_1 and b=-c x_0, which is the required description of every syzygy.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-picard-framework/sk-thm-picard-duality/lem-sc-p1-graded-resolution.md",
+    "place": "proof of the Koszul resolution on the regular sequence x_0,x_1: exactness at the middle term"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-polynomial-ring-domain"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/master/blueprint/sec-picard-framework/sk-thm-picard-duality/lem-sc-p1-graded-resolution.md",
+  "place": "proof of the Koszul resolution on the regular sequence x_0,x_1: exactness at the middle term"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -49,12 +87,36 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-sc-p1-koszul-resolution",
   "by": "worker",
   "date": "2026-10-10"
  },
  "chapter": "sec-picard-framework",
- "unit": "sk-thm-picard-duality"
+ "unit": "sk-thm-picard-duality",
+ "split_report": {
+  "date": "2026-10-11",
+  "item": "lem-sc-p1-linear-syzygy",
+  "worker": "stage1",
+  "summary": "Expanded the two-variable syzygy calculation into coefficient comparison in k[x_1][x_0], cancellation in the polynomial-ring domain S, and the final sign substitution. No new nodes were needed; the existing polynomial-ring domain Mathlib leaf supplies the only non-elementary cancellation fact.",
+  "blueprint": "Realizes the exactness-at-the-middle-term clause in the proof of the Koszul resolution on the regular sequence x_0,x_1.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-polynomial-ring-domain",
+    "why": "Its statement supplies that both k[x_1] and S=k[x_0,x_1] are integral domains, used for coefficient cancellation and cancellation by x_0."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-polynomial-ring-domain"
+ ],
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-pls",
+  "group": "F1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-pls (reviewer sub-agent of L); spot-checked: Source: blueprint master lem-sc-p1-graded-resolution.md (read; it states the graded Hilbert syzygy route only, the two-variable syzygy computation is the agent's expansion at the Koszul middle-exactness clause of lem-sc-p1-koszul-resolution, proof_origin by agent, correct). Statement unchanged (k field, S=k[x_0,x_1], a x_0+b x_1=0 => a=c x_1, b=-c x_0). Step 1: S=k[x_1][x_0], b=b_0+x_0 b_1, constant coefficient in x_0 gives b_0 x_1=0 in k[x_1]; k[x_1] domain from lem-weil-pbc-polynomial-ring-domain (D=k, one variable), x_1 nonzero so b_0=0. Step 2: x_0(a+b_1 x_1)=0, S domain by the same node (D=k, I={0,1}), cancel x_0. Step 3 elementary sign. Tool use lem-weil-pbc-polynomial-ring-domain (Mathlib leaf MvPolynomial.instIsDomainOfIsCancelAdd, generic) accepted. Cases: (0,0)->c=0, (x_1,-x_0)->c=1, (x_1^2,-x_0x_1)->c=x_1. Only changed fields are split-owned (proof, proof_deps, proof_origin, status, split_report). Note: report says the blueprint prose file is absent and mentions a citations.json that is not in the commit; the file exists and was read by me; no effect on the split. Start Sat Oct 10 04:14:06 PM UTC 2026, end Sat Oct 10 04:14:21 PM UTC 2026."
+ }
 }
