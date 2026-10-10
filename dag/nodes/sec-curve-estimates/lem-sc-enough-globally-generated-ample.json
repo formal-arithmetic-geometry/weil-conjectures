@@ -28,9 +28,73 @@
   "def-weil-pbc-generating-sections",
   "def-weil-pbc-ample-invertible-module"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "For each point choose a pair $(\\mathcal L_x,s_x)$ as in the hypothesis. The opens $X_{s_x}$ are affine and cover $X$; quasi-compactness of $X$ gives finitely many pairs $(\\mathcal L_i,s_i)$, $i=1,\\ldots,n$, with $X=\\bigcup_i X_{s_i}$.",
+   "uses": [
+    "def-weil-pbc-quasi-compact-scheme"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Varieties Lemma 09NC, proof, first sentence"
+   }
+  },
+  {
+   "text": "For each $i$, the module $\\mathcal L_i$ is globally generated. Applying [lem-sc-finite-sections-cover-qc] to $\\mathcal L_i$ gives finitely many global sections $t_{i,j}$, $j=1,\\ldots,m_i$, such that $X=\\bigcup_j X_{t_{i,j}}$. Set $t_{i,0}=s_i$.",
+   "uses": [
+    "lem-sc-finite-sections-cover-qc",
+    "def-weil-pbc-generating-sections",
+    "def-weil-pbc-ample-invertible-module"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Varieties Lemma 09NC, proof, sentence beginning 'Again because X is quasi-compact'"
+   }
+  },
+  {
+   "text": "Let $\\mathcal L=\\mathcal L_1\\otimes_{\\mathcal O_X}\\cdots\\otimes_{\\mathcal O_X}\\mathcal L_n$, the tensor product [def-pur-sheaf-tensor-product]. By [lem-sc-tensor-globally-generated], this is an invertible (and globally generated) $\\mathcal O_X$-module. For every multi-index $J=(j_1,\\ldots,j_n)$ with $0\\le j_i\\le m_i$ let $\\tau_J=t_{1,j_1}\\otimes\\cdots\\otimes t_{n,j_n}\\in\\Gamma(X,\\mathcal L)$.",
+   "uses": [
+    "lem-sc-tensor-globally-generated",
+    "def-pur-sheaf-tensor-product",
+    "def-sc-invertible-module",
+    "def-weil-pbc-generating-sections"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Varieties Lemma 09NC, proof, displayed tensor-product construction"
+   }
+  },
+  {
+   "text": "If some $j_i=0$, then $X_{t_{i,j_i}}=X_{s_i}$ is affine, so [lem-sc-tensor-section-affine-open] shows $X_{\\tau_J}$ is affine. These opens cover $X$: given $x$, choose for every $i$ a section $t_{i,j_i}$ nonvanishing at $x$ using the covers in step 2; the resulting $\\tau_J$ is nonvanishing at $x$, and if all $j_i\\ne0$ replace one index by $0$ for which $x\\in X_{s_i}$ (step 1), preserving nonvanishing. Hence the invertible module $\\mathcal L$ has a cover by affine opens $X_{\\tau_J}$ with $\\tau_J\\in\\Gamma(X,\\mathcal L^{\\otimes1})$, and $X$ is quasi-compact, which is precisely ampleness by [def-weil-pbc-ample-invertible-module].",
+   "uses": [
+    "lem-sc-tensor-section-affine-open",
+    "def-weil-pbc-ample-invertible-module"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Varieties Lemma 09NC, proof, sentence 'By Properties, Lemma 28.27.4 ... Hence \\mathcal L is ample by definition'"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-quasi-compact-scheme",
+  "lem-sc-finite-sections-cover-qc",
+  "def-weil-pbc-generating-sections",
+  "def-weil-pbc-ample-invertible-module",
+  "lem-sc-tensor-globally-generated",
+  "def-sc-invertible-module",
+  "lem-sc-tensor-section-affine-open",
+  "def-pur-sheaf-tensor-product"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/varieties.tex",
+  "place": "Varieties Lemma 09NC (varieties-lemma-enough-globally-generated-ample), proof"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -55,12 +119,28 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-sc-integral-dim-one-ample",
   "by": "worker",
   "date": "2026-10-10"
  },
  "chapter": "sec-curve-estimates",
- "unit": "sk-thm-curveestimate"
+ "unit": "sk-thm-curveestimate",
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "lem-sc-enough-globally-generated-ample",
+  "worker": "stage1",
+  "summary": "Split Stacks Lemma 09NC into finite global-section covers, tensor global generation, tensor-section affine loci, and the final ample criterion.",
+  "blueprint": "Realizes the ancestor lem-sc-pic-proper-ntorsion proof route through the 09NC proof: finite principal-open cover, finite generators, tensor product, affine tensor opens, and ampleness.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-ega",
+  "group": "K1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-ega (reviewer sub-agent of L); spot-checked: Source: Stacks 09NC (varieties.tex label lemma-enough-globally-generated-ample, read locally at line 7894) with Properties 28.27.4 (lemma-affine-cap-s-open) and Modules lemma-tensor-product-globally-generated; the item's statement agrees with 09NC hypothesis by hypothesis (X quasi-compact; per point a globally generated invertible L and s with x in X_s affine; conclusion an ample invertible sheaf). Step 1: quasi-compactness from def-weil-pbc-quasi-compact-scheme. Step 2: lem-sc-finite-sections-cover-qc (true: a generating section is nonvanishing at x by Nakayama on the rank-one stalk, then quasi-compactness). Step 3: lem-sc-tensor-globally-generated gives L invertible. Step 4: lem-sc-tensor-section-affine-open (true: X_tau is the intersection of the X_{t_i} on fibres of rank one, and affineness follows from Properties 28.27.4, existing node lem-sc-affine-cap-section-open, with U = X_{t_i}), the cover argument checked, and def-weil-pbc-ample-invertible-module with n=1 and X quasi-compact. Small cases: X affine (n=1, one section), X empty, a point in exactly one X_{s_i}. No Mathlib leaf; blueprint search 'globally generated tensor' and 'enough globally generated ample' found 0 nodes; no sorry-free slopmaster2 attachment found. FIX more, RETURN less (B3, C4): dag/nodes/sec-curve-estimates/lem-sc-tensor-globally-generated.json: statement, stmt_deps: tensor product of modules now cites [def-pur-sheaf-tensor-product]; dag/nodes/sec-curve-estimates/lem-sc-tensor-section-affine-open.json: statement, stmt_deps: the same, and tau named as the induced section of the tensor product; dag/nodes/sec-curve-estimates/lem-sc-enough-globally-generated-ample.json: proof step 3 text and uses, proof_deps: cite def-pur-sheaf-tensor-product, and the claim that the tau_J generate L dropped (the cited node needs the t_{i,j} to be a generating family, which step 2 does not establish; the claim was unused), tau_J defined for all J with 0<=j_i<=m_i; step 4 text: 'globally generated' dropped and the ample condition spelled out (affine X_{tau_J}, tau_J a section of L^{otimes 1}, X quasi-compact). Start Sat Oct 10 03:54:55 PM UTC 2026, end Sat Oct 10 03:56:05 PM UTC 2026.; 3 file(s) fixed by the reviewer"
+ }
 }
