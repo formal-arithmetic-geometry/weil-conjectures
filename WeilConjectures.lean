@@ -64,6 +64,14 @@ public import WeilConjectures.AlgebraicGeometry.Cohomology.Affine
 public import WeilConjectures.AlgebraicGeometry.Cohomology.Clopen
 public import WeilConjectures.AlgebraicGeometry.Cohomology.Defs
 public import WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage
+public import WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.AffineMorphism
+public import WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.BaseChange
+public import WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.Basic
+public import WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.FiniteFreeComplex
+public import WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.PerfectLocus
+public import WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.PerfectLocusOfRank
+public import WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.Sections
+public import WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.Semicontinuity
 public import WeilConjectures.AlgebraicGeometry.Cohomology.DualityPairing
 public import WeilConjectures.AlgebraicGeometry.Cohomology.EulerChar
 public import WeilConjectures.AlgebraicGeometry.Cohomology.Exact
