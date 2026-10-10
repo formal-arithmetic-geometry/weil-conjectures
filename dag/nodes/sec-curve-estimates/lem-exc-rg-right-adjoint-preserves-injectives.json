@@ -1,0 +1,86 @@
+{
+ "id": "lem-exc-rg-right-adjoint-preserves-injectives",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "def-exc-continuous-cohomology",
+   "place": "The final Tag 04JF step invokes the adjoint-functorial-injectives lemma to transfer functorial embeddings along v and its right adjoint u: the clause that $u$ applied to an injective object $J(vB)$ of the group-ring module category is injective (Stacks Homology 015Z, (a) implies (c))",
+   "via": [
+    "lem-exc-rg-adjoint-transfer-functorial-injectives",
+    "lem-exc-rg-discrete-modules-functorial-injective-embeddings"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "A right adjoint of a monomorphism-preserving functor preserves injective objects",
+ "statement": "Let $\\mathcal C$ and $\\mathcal D$ be categories and let $F:\\mathcal C\\to\\mathcal D$ and $G:\\mathcal D\\to\\mathcal C$ be functors with $G$ right adjoint to $F$. Assume that $F$ carries monomorphisms to monomorphisms. Here an object $I$ of a category is \\emph{injective} if for every monomorphism $f:X\\to Y$ and every morphism $g:X\\to I$ there is a morphism $h:Y\\to I$ with $h\\circ f=g$ (in an abelian category this is injectivity in the sense of [def-sp-injective-resolutions]). Then for every injective object $I$ of $\\mathcal D$ the object $G(I)$ is an injective object of $\\mathcal C$.",
+ "source": {
+  "document": "literature/stacks-project/homology.tex",
+  "place": "Homology, Lemma 015Z (label lemma-adjoint-preserve-injectives, line 7270; tags/tags line 1526: 015Z,homology-lemma-adjoint-preserve-injectives), implication (a) => (c), whose proof works verbatim in any category"
+ },
+ "stmt_deps": [
+  "def-sp-injective-resolutions"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "right adjoint preserves injective objects when left adjoint preserves monomorphisms",
+   "results": "LeanSearch returned HTTP 500 (Internal Server Error) on three attempts; no result",
+   "date": "2026-10-10",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "If a category has a functor J with a natural monomorphism id -> J into injective objects, then a category with a faithful mono-preserving left adjoint into it also has one",
+   "results": "CategoryTheory.Adjunction.map_injective, CategoryTheory.Injective.injective_of_adjoint (Mathlib.CategoryTheory.Preadditive.Injective.Basic); CategoryTheory.Functor.preservesInjectiveObjects_of_adjunction_of_preservesMonomorphisms (…Injective.Preserves); CategoryTheory.EnoughInjectives.of_adjunction; CategoryTheory.Adjunction.mapInjectivePresentation",
+   "date": "2026-10-10",
+   "verdict": "match: Adjunction.map_injective"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction, CategoryTheory.Injective, CategoryTheory.Functor.PreservesMonomorphisms",
+   "results": "CategoryTheory.Adjunction.map_injective, CategoryTheory.Injective.injective_of_adjoint (Mathlib.CategoryTheory.Preadditive.Injective.Basic)",
+   "date": "2026-10-10",
+   "verdict": "match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rn 'theorem map_injective\\|theorem injective_of_adjoint' Mathlib/CategoryTheory/Preadditive/Injective/Basic.lean (in ~/weil-conjectures-slopmaster2/.lake/packages/mathlib)",
+   "results": "Basic.lean:195 Injective.injective_of_adjoint; Basic.lean:279 Adjunction.map_injective (adj : F ⊣ G) [F.PreservesMonomorphisms] (I : D) (hI : Injective I) : Injective (G.obj I); class Injective at Basic.lean:32 (factors : ∀ g f [Mono f], ∃ h, f ≫ h = g)",
+   "date": "2026-10-10",
+   "verdict": "match (read with sed -n 270,286p and 30,34p)"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "CategoryTheory.Adjunction.map_injective",
+  "file": "Mathlib/CategoryTheory/Preadditive/Injective/Basic.lean",
+  "line": 279,
+  "how": "exact: for adj : F ⊣ G with [F.PreservesMonomorphisms] and I : D, (hI : Injective I) gives Injective (G.obj I); Mathlib's Injective (Basic.lean:32, class Injective, field factors: every g : X ⟶ J extends along every mono f : X ⟶ Y) is the notion in the statement, for an arbitrary category"
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-exc-rg-adjoint-transfer-functorial-injectives",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-curve-estimates",
+ "unit": "sk-prop-h2",
+ "reviewed": {
+  "by": "L",
+  "date": "2026-10-10",
+  "note": "Mathlib leaf: CategoryTheory.Adjunction.map_injective (Preadditive/Injective/Basic.lean 279), read by L"
+ }
+}

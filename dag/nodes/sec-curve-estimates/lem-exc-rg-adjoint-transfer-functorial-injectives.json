@@ -13,17 +13,64 @@
  },
  "kind": "statement",
  "title": "Adjunction transfer of functorial injective embeddings",
- "statement": "Let $v:\\mathcal D\\to\\mathcal M$ be a fully faithful functor between module categories that carries monomorphisms to monomorphisms and has a right adjoint $u:\\mathcal M\\to\\mathcal D$. If $\\mathcal M$ has functorial injective embeddings, then so does $\\mathcal D$: a functorial embedding in $\\mathcal M$ followed by $u$ gives a functor $J:\\mathcal D\\to\\mathcal D$, and the adjunction supplies a natural monomorphism from each object to its image; each image is injective in $\\mathcal D$ [def-sp-injective-resolutions].",
+ "statement": "Let $\\mathcal D$ and $\\mathcal M$ be categories and let $v:\\mathcal D\\to\\mathcal M$ and $u:\\mathcal M\\to\\mathcal D$ be functors with $u$ right adjoint to $v$, with unit $\\eta:\\mathrm{id}_{\\mathcal D}\\to uv$. Assume that $v$ carries monomorphisms to monomorphisms and that $v$ is faithful (for instance $v$ fully faithful). Here an object $I$ of a category is \\emph{injective} if for every monomorphism $f:X\\to Y$ and every morphism $g:X\\to I$ there is a morphism $h:Y\\to I$ with $h\\circ f=g$ (in an abelian category this is injectivity in the sense of [def-sp-injective-resolutions]); and a category $\\mathcal C$ \\emph{has functorial injective embeddings} if there are a functor $J:\\mathcal C\\to\\mathcal C$ and a natural transformation $j:\\mathrm{id}_{\\mathcal C}\\to J$ such that every component $j_A:A\\to J(A)$ is a monomorphism and every $J(A)$ is injective (Stacks' formulation, a functor $\\mathcal C\\to\\mathrm{Arrows}(\\mathcal C)$ whose source is the identity, is the same datum $A\\mapsto(j_A:A\\to J(A))$). If $\\mathcal M$ has functorial injective embeddings $(J,j)$, then $\\mathcal D$ has functorial injective embeddings, namely the functor $J_{\\mathcal D}=u\\circ J\\circ v$ with the natural transformation whose component at $B$ is $(j_{\\mathcal D})_B=u(j_{vB})\\circ\\eta_B:B\\to uJ(vB)$.",
  "source": {
   "document": "literature/stacks-project/homology.tex",
-  "place": "Lemma 0161, label homology-lemma-adjoint-functorial-injectives"
+  "place": "Homology, Lemma 0161 (label lemma-adjoint-functorial-injectives, line 7364; tags/tags line 1528: 0161,homology-lemma-adjoint-functorial-injectives); notion: Homology, Definition 0139 (label definition-functorial-injective-embedding)"
  },
  "stmt_deps": [
   "def-sp-injective-resolutions"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Let $(J,j)$ be functorial injective embeddings of $\\mathcal M$. Put $J_{\\mathcal D}=u\\circ J\\circ v:\\mathcal D\\to\\mathcal D$, a composite of functors, and $(j_{\\mathcal D})_B=u(j_{vB})\\circ\\eta_B:B\\to uJ(vB)$; this is the morphism corresponding to $j_{vB}:vB\\to J(vB)$ under the adjunction bijection $\\mathrm{Hom}_{\\mathcal M}(vB,I)\\cong\\mathrm{Hom}_{\\mathcal D}(B,uI)$, $\\varphi\\mapsto u(\\varphi)\\circ\\eta_B$. It is natural in $B$: for $b:B\\to B'$, $uJv(b)\\circ u(j_{vB})\\circ\\eta_B=u(J(vb)\\circ j_{vB})\\circ\\eta_B=u(j_{vB'})\\circ uv(b)\\circ\\eta_B=u(j_{vB'})\\circ\\eta_{B'}\\circ b$, by naturality of $j$ (at the morphism $vb$) and of $\\eta$ (at $b$).",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/homology.tex",
+    "place": "Homology, Lemma 0161 (label lemma-adjoint-functorial-injectives, line 7364), proof: 'B \\mapsto (B \\to uJ(vB)) is a functorial injective embedding'"
+   }
+  },
+  {
+   "text": "Each $J_{\\mathcal D}(B)=u(J(vB))$ is injective in $\\mathcal D$: $J(vB)$ is injective in $\\mathcal M$, $u$ is right adjoint to $v$ and $v$ carries monomorphisms to monomorphisms, so $u$ sends the injective object $J(vB)$ to an injective object by [lem-exc-rg-right-adjoint-preserves-injectives] (with $F=v$, $G=u$, $I=J(vB)$).",
+   "uses": [
+    "lem-exc-rg-right-adjoint-preserves-injectives"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/homology.tex",
+    "place": "Homology, Lemma 0160 (label lemma-adjoint-enough-injectives), proof: 'According to Lemma 015Z and the assumptions ... uI' (injective object), i.e. Lemma 015Z (label lemma-adjoint-preserve-injectives), (a) implies (c)"
+   }
+  },
+  {
+   "text": "Each $(j_{\\mathcal D})_B$ is a monomorphism. Let $\\varepsilon:vu\\to\\mathrm{id}_{\\mathcal M}$ be the counit. For $g:T\\to B$, by naturality of $\\varepsilon$ at $j_{vB}$ and the triangle identity $\\varepsilon_{vB}\\circ v(\\eta_B)=\\mathrm{id}_{vB}$: $\\varepsilon_{J(vB)}\\circ v\\big((j_{\\mathcal D})_B\\circ g\\big)=\\varepsilon_{J(vB)}\\circ vu(j_{vB})\\circ v(\\eta_B)\\circ v(g)=j_{vB}\\circ\\varepsilon_{vB}\\circ v(\\eta_B)\\circ v(g)=j_{vB}\\circ v(g)$. Hence if $(j_{\\mathcal D})_B\\circ g=(j_{\\mathcal D})_B\\circ g'$ for $g,g':T\\to B$, then $j_{vB}\\circ v(g)=j_{vB}\\circ v(g')$; as $j_{vB}$ is a monomorphism, $v(g)=v(g')$, and as $v$ is faithful, $g=g'$. (Stacks writes this out for abelian categories with a kernel: if $K\\to B$ is the kernel of $B\\to uI$, then $vK\\to vB\\to I$ is zero, $vK\\to vB$ is injective by hypothesis (2), so $vK=0$ and $K=0$ by hypothesis (4); by Homology, Remark 03B9 (label remark-faithfulness-needed), given (1) and (2), hypothesis (4) is equivalent to faithfulness of $v$, the hypothesis used here.)",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/homology.tex",
+    "place": "Homology, Lemma 0160 (label lemma-adjoint-enough-injectives), proof: 'the corresponding map B \\to uI is the injection of B ...', which the source leaves to the reader; Remark 03B9 (label remark-faithfulness-needed)"
+   }
+  },
+  {
+   "text": "By steps 1 to 3, $J_{\\mathcal D}$ is a functor $\\mathcal D\\to\\mathcal D$, $j_{\\mathcal D}:\\mathrm{id}_{\\mathcal D}\\to J_{\\mathcal D}$ is a natural transformation, every component is a monomorphism and every $J_{\\mathcal D}(B)$ is injective: $\\mathcal D$ has functorial injective embeddings.",
+   "uses": [
+    "lem-exc-rg-right-adjoint-preserves-injectives"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/homology.tex",
+    "place": "Homology, Lemma 0161, proof"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-exc-rg-right-adjoint-preserves-injectives"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/homology.tex",
+  "place": "Homology, Lemma 0161 (label lemma-adjoint-functorial-injectives) and its proof, with the proof of Lemma 0160 (label lemma-adjoint-enough-injectives) and Lemma 015Z (label lemma-adjoint-preserve-injectives); the monomorphism argument, left to the reader there, is written out via the triangle identity and faithfulness of v (Remark 03B9)"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -45,15 +92,56 @@
    "results": "No declaration of the functorial transfer lemma.",
    "date": "2026-10-10",
    "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "faithful left adjoint preserving monomorphisms, functorial injective embedding transferred along adjunction",
+   "results": "HTTP 500 (Internal Server Error) on three attempts; no result",
+   "date": "2026-10-10",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "If a category has a functor J with a natural monomorphism id -> J into injective objects, then a category with a faithful mono-preserving left adjoint into it also has one",
+   "results": "Adjunction.map_injective, Injective.injective_of_adjoint, EnoughInjectives.of_adjunction (pointwise: enough injectives, not functorial), Adjunction.mapInjectivePresentation, Functor.preservesInjectiveObjects_of_adjunction_of_preservesMonomorphisms",
+   "date": "2026-10-10",
+   "verdict": "no match for the functorial statement; EnoughInjectives.of_adjunction (Basic.lean:335, needs L.ReflectsMonomorphisms) is the non-functorial analogue (Lemma 0160); the injective clause is the new leaf lem-exc-rg-right-adjoint-preserves-injectives"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"FunctorialInjective\"",
+   "results": "none",
+   "date": "2026-10-10",
+   "verdict": "no match: Mathlib has no notion of functorial injective embeddings"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rln 'unctorial.*njective\\|njective.*unctorial' Mathlib/CategoryTheory; grep -rn 'of_adjunction\\|injectivePresentationOfMap' Mathlib/CategoryTheory/Preadditive/Injective/Basic.lean",
+   "results": "only HasFunctorialSurjectiveInjectiveFactorization (MorphismProperty/Concrete.lean, concrete categories, unrelated); Basic.lean:310 Adjunction.injectivePresentationOfMap, :335 EnoughInjectives.of_adjunction (pointwise)",
+   "date": "2026-10-10",
+   "verdict": "no match"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-exc-rg-discrete-modules-functorial-injective-embeddings",
   "by": "worker",
   "date": "2026-10-10"
  },
  "chapter": "sec-curve-estimates",
- "unit": "sk-prop-h2"
+ "unit": "sk-prop-h2",
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "lem-exc-rg-adjoint-transfer-functorial-injectives",
+  "worker": "stage1",
+  "summary": "Read Stacks Homology Lemma 0161 (tag verified: 0161,homology-lemma-adjoint-functorial-injectives) with Lemma 0160, Lemma 015Z, Remark 03B9 and Definition 0139 (all tags verified in tags/tags). The source works with abelian categories, additive v left adjoint to u, v preserving injective maps, A with enough injectives, and vB=0 => B=0. The old statement said 'module categories' and 'fully faithful'; it is applied (lem-exc-rg-discrete-modules-functorial-injective-embeddings, step 3) with D = R-modules with G-action of open stabilizers, which is not a module category, and no node states it is abelian. Correction: the statement is restated for arbitrary categories with v faithful and mono-preserving and v -| u (fully faithful being the special case the citer has); the argument needs neither abelianness, additivity, enough injectives nor full faithfulness. For abelian categories and additive v, faithfulness is the source's hypothesis (4) by Remark 03B9, and enough injectives follows from functorial embeddings, so the statement contains the source's. Injective objects and functorial injective embeddings are defined in the statement (no node defines the latter; def-sp-injective-resolutions defines injectives only in abelian categories). Steps: the transposed embedding B -> uJ(vB) and its naturality (elementary), injectivity of uJ(vB) by the new Mathlib leaf lem-exc-rg-right-adjoint-preserves-injectives (015Z (a)=>(c), CategoryTheory.Adjunction.map_injective), monomorphy written out via the triangle identity and faithfulness (left to the reader in 0160).",
+  "blueprint": "Realizes the place of def-exc-continuous-cohomology named in from.place (via lem-exc-rg-discrete-modules-functorial-injective-embeddings): 'The final Tag 04JF step invokes the adjoint-functorial-injectives lemma to transfer functorial embeddings along v and its right adjoint u'; step 1 builds the transferred embedding, step 2 the injectivity of u(J(vB)), step 3 the monomorphism, step 4 assembles them. Blueprint search (tools/blueprint_refs.py search 0161, 015Z, 'adjoint injective embedding', 'functorial injective', 'preserves injectives') found no node stating the item; lem-sp-right-adjoint-preserves-injectives states only the abelian, exact-left-adjoint special case of the new leaf."
+ },
+ "reviewed": {
+  "by": "L",
+  "date": "2026-10-10",
+  "note": "split read in full against Stacks 0161/0160/015Z; statement generalized to arbitrary categories with v faithful and mono-preserving (E7, reason: the citer applies it to discrete G-modules, not a module category; in the abelian case faithfulness is Stacks hypothesis (4) by Remark 03B9); steps: transpose of the embedding, u preserves injectives (new Mathlib leaf Adjunction.map_injective, Injective/Basic.lean 279, read by L), unit-composite mono by counit naturality + triangle identity + faithfulness; 1 new node"
+ },
+ "lead_note": "Statement corrected 15:24 UTC (worker, accepted by L): general categories, v faithful; \"functorial injective embeddings\" defined inline, no node defines it (see def-sp-injective-resolutions lead_note)."
 }
