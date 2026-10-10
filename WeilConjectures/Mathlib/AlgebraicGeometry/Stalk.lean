@@ -106,4 +106,28 @@ theorem fromSpecStalk_comap_maximalIdeal {x y : X} (h : x ⤳ y) :
   simp only [Scheme.Hom.comp_apply, fromSpecStalk_closedPoint] at e
   exact e
 
+/-- A point in the image of `Spec 𝒪_{X,y} ⟶ X` generalises `y`. -/
+theorem fromSpecStalk_specializes {y : X} (p : PrimeSpectrum (X.presheaf.stalk y)) :
+    X.fromSpecStalk y p ⤳ y := by
+  have : X.fromSpecStalk y p ∈ Set.range (X.fromSpecStalk y) := Set.mem_range_self p
+  rwa [range_fromSpecStalk] at this
+
+/-- The point of `X` defined by a prime `𝔭` of `𝒪_{X,y}` has local ring the localization at `𝔭`:
+the preimage of its maximal ideal under the specialization map is `𝔭`. -/
+theorem comap_stalkSpecializes_fromSpecStalk {y : X} (p : PrimeSpectrum (X.presheaf.stalk y)) :
+    (maximalIdeal (X.presheaf.stalk (X.fromSpecStalk y p))).comap
+      (X.presheaf.stalkSpecializes (fromSpecStalk_specializes p)).hom = p.asIdeal :=
+  congrArg PrimeSpectrum.asIdeal ((X.fromSpecStalk y).isEmbedding.injective
+    (fromSpecStalk_comap_maximalIdeal (fromSpecStalk_specializes p)))
+
+/-- The local ring at the point of `X` defined by a prime `𝔭` of `𝒪_{X,y}` is the localization of
+`𝒪_{X,y}` at `𝔭`. -/
+theorem isLocalization_stalkSpecializes_fromSpecStalk {y : X}
+    (p : PrimeSpectrum (X.presheaf.stalk y)) :
+    letI := (X.presheaf.stalkSpecializes (fromSpecStalk_specializes p)).hom.toAlgebra
+    IsLocalization.AtPrime (X.presheaf.stalk (X.fromSpecStalk y p)) p.asIdeal := by
+  have h := isLocalization_stalkSpecializes (fromSpecStalk_specializes p)
+  convert h using 2
+  exact (comap_stalkSpecializes_fromSpecStalk p).symm
+
 end AlgebraicGeometry.Scheme
