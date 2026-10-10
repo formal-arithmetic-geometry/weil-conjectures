@@ -36,7 +36,8 @@ open CategoryTheory IsLocalRing
 primes `𝔮 ⊆ 𝔭`, with compatible algebra structures, then `T` is the localization of `S` at the
 preimage of the maximal ideal of `T`. -/
 theorem IsLocalization.AtPrime.isLocalization_comap_maximalIdeal {R S T : Type*} [CommRing R]
-    [CommRing S] [CommRing T] [IsLocalRing T] [Algebra R S] [Algebra R T] [Algebra S T] [IsScalarTower R S T]
+    [CommRing S] [CommRing T] [IsLocalRing T] [Algebra R S] [Algebra R T] [Algebra S T]
+    [IsScalarTower R S T]
     (p q : Ideal R) [p.IsPrime] [q.IsPrime] (hqp : q ≤ p) [IsLocalization.AtPrime S p]
     [IsLocalization.AtPrime T q] :
     IsLocalization.AtPrime T ((maximalIdeal T).comap (algebraMap S T)) := by

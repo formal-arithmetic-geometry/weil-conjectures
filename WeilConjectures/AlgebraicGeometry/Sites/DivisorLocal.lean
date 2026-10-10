@@ -190,6 +190,7 @@ lemma _root_.eq_algebraMap_mul_inv_of_mul_eq {A L : Type*} [CommRing A] [CommRin
 
 variable [IsRegular X]
 
+omit [IsRegular X] in
 /-- The image in the local generic ring at a point `z` of an open `U` of a function on `V`,
 restricted to the generic fibre of `U`. -/
 lemma toLocalGenericRing_map_ofOpensι (V : X.Etale) (U : V.left.Opens) (z : U)
@@ -200,6 +201,7 @@ lemma toLocalGenericRing_map_ofOpensι (V : X.Etale) (U : V.left.Opens) (z : U)
       localGenericRingMap (ofOpensι V U) z (toLocalGenericRing V z.1 f) :=
   (congrArg (fun g ↦ g.hom f) (toLocalGenericRing_comp_localGenericRingMap (ofOpensι V U) z)).symm
 
+omit [IsRegular X] in
 /-- The image in the local generic ring at a point `z` of an open `U` of a section of `𝒪_V` over
 `U`, pulled back to the generic fibre of `U`. -/
 lemma toLocalGenericRing_fst_topIso_inv (V : X.Etale) (U : V.left.Opens) (a : Γ(V.left, U))
@@ -257,6 +259,7 @@ lemma _root_.AlgebraicGeometry.Scheme.coheight_ne_one_of_specializes {S : Scheme
   exact absurd (h₅.trans (h₆.trans h₃)) (by decide)
 
 
+omit [IsIntegral X] in
 /-- **Prime elements of a local ring define points of codimension one.** Let `X` be an integral
 regular scheme and `V` an étale `X`-scheme. For a prime element `p` of the local ring `𝒪_{V,y}`,
 the point of `V` defined by the prime ideal `(p)` lies over a point of `X` of codimension one: its
@@ -317,6 +320,7 @@ lemma exists_eq_of_toLocalGenericRing_eq (V : X.Etale) (y : V.left)
   refine ((toLocalGenericRing_fst_appTop (ofOpens V U) ⟨y, hyU⟩ (U.topIso.inv s)).trans ?_).trans h₁
   exact (congrArg _ h₃).trans (h₂.symm.trans (congrArg _ hr.symm))
 
+omit [IsLocallyNoetherian X] in
 /-- **Local algebraic Hartogs at a point.** Let `X` be an integral regular locally noetherian
 scheme, `V` an étale `X`-scheme and `f` a unit on the generic fibre of `V` whose order vanishes
 at every generalisation of `y`. Then `f` maps to a unit of `𝒪_{V,y}` in the local generic ring
@@ -386,6 +390,492 @@ lemma exists_toLocalGenericRing_eq_of_ord_eq_zero (V : X.Etale) (y : V.left)
   refine ⟨ha.unit * hb.unit⁻¹, ?_⟩
   change _ = stalkToLocalGenericRing V y (a * ↑hb.unit⁻¹)
   rw [map_mul, h₁, mul_assoc, ← map_mul, IsUnit.mul_val_inv, map_one, mul_one]
+
+omit [IsIntegral X] [IsRegular X] [IsLocallyNoetherian X] in
+/-- The generic point of an integral scheme lies in the basic open of every nonzero function. -/
+lemma _root_.AlgebraicGeometry.Scheme.genericPoint_mem_basicOpen {S : Scheme.{u}} [IsIntegral S]
+    {a : Γ(S, ⊤)} (ha : a ≠ 0) : genericPoint S ∈ S.basicOpen a := by
+  have hne : S.basicOpen a ≠ ⊥ := fun h ↦ ha ((basicOpen_eq_bot_iff a).1 h)
+  obtain ⟨w, hw⟩ : (S.basicOpen a : Set S).Nonempty :=
+    Set.nonempty_iff_ne_empty.2 fun h ↦ hne (Opens.ext (h.trans Opens.coe_bot.symm))
+  exact ((genericPoint_spec S).mem_open_set_iff (S.basicOpen a).2).2 ⟨w, Set.mem_univ _, hw⟩
+
+/-- **Local finiteness of divisors.** Let `X` be an integral regular locally noetherian scheme,
+`V` an étale `X`-scheme and `f` a unit on the generic fibre of `V`. Near every point `y` of `V`,
+`f` has nonzero order at only finitely many points. Write the image of `f` in the fraction field
+of `𝒪_{V,y}` as a quotient `a / b`; on an affine irreducible neighbourhood `U` of `y` on which
+`a` and `b` are defined, `f b = a` on the generic fibre
+(`AlgebraicGeometry.Scheme.Etale.injective_toLocalGenericRing`), so the points of `U` at which `f`
+has nonzero order are points of codimension one of the proper closed subset where `a` or `b`
+vanishes, which are generic points of its finitely many irreducible components. -/
+lemma exists_opens_finite_ord_ne_zero (V : X.Etale) (y : V.left)
+    (f : Γ(pullback V.hom X.fromSpecFunctionField, ⊤)ˣ) :
+    ∃ U : V.left.Opens, y ∈ U ∧ {y' | y' ∈ U ∧ ord V y' f ≠ 0}.Finite := by
+  have : IsLocallyNoetherian ((Functor.fromPUnit X).obj V.right) := ‹IsLocallyNoetherian X›
+  have : IsLocallyNoetherian V.left := LocallyOfFiniteType.isLocallyNoetherian V.hom
+  have : IsReduced V.left := isReduced_of_isReduced_stalk _
+  let A := V.left.presheaf.stalk y
+  let : Algebra A (localGenericRing V y) := (stalkToLocalGenericRing V y).hom.toAlgebra
+  have : IsFractionRing A (localGenericRing V y) := isFractionRing_localGenericRing V y
+  obtain ⟨⟨a₀, b₀⟩, hab⟩ := IsLocalization.mk'_surjective (nonZeroDivisors A)
+    (toLocalGenericRing V y f.val)
+  have h₁ : stalkToLocalGenericRing V y a₀ =
+      toLocalGenericRing V y f * stalkToLocalGenericRing V y b₀ :=
+    (IsLocalization.mk'_eq_iff_eq_mul).1 hab
+  let : Field (localGenericRing V y) := IsFractionRing.toField A
+  have ha₀ : a₀ ≠ 0 := by
+    rintro rfl
+    exact mul_ne_zero (f.isUnit.map (toLocalGenericRing V y).hom).ne_zero
+      (IsFractionRing.to_map_ne_zero_of_mem_nonZeroDivisors b₀.2)
+      (h₁.symm.trans (map_zero (stalkToLocalGenericRing V y).hom))
+  have hb₀ : (b₀ : A) ≠ 0 := nonZeroDivisors.ne_zero b₀.2
+  -- an affine irreducible neighbourhood on which `a₀` and `b₀` are defined
+  obtain ⟨W₀, hyW₀, hW₀⟩ := exists_opens_isPreirreducible y
+  obtain ⟨U₁, -, hyU₁, hU₁, a₁, ha₁⟩ := exists_isAffineOpen_germ_eq hyW₀ a₀
+  obtain ⟨U, hU, hyU, hUU₁, b, hb⟩ := exists_isAffineOpen_germ_eq hyU₁ (b₀ : A)
+  let a := V.left.presheaf.map (homOfLE hUU₁).op a₁
+  have ha : V.left.presheaf.germ U y hyU a = a₀ :=
+    (V.left.presheaf.germ_res_apply _ _ _ _).trans ha₁
+  have : IsIntegral (ofOpens V U).left := isIntegral_of_isPreirreducible hyU hW₀ (hUU₁.trans hU₁)
+  have : IsAffine (ofOpens V U).left := hU
+  let g : Γ(pullback (ofOpens V U).hom X.fromSpecFunctionField, ⊤)ˣ :=
+    Units.map ((MorphismProperty.Over.pullback @Etale ⊤ X.fromSpecFunctionField).map
+      (ofOpensι V U)).left.appTop.hom.toMonoidHom f
+  -- `f b = a` on the generic fibre of `U`
+  have heq : g.val * (pullback.fst (ofOpens V U).hom X.fromSpecFunctionField).appTop
+      (U.topIso.inv b) =
+      (pullback.fst (ofOpens V U).hom X.fromSpecFunctionField).appTop (U.topIso.inv a) := by
+    refine injective_toLocalGenericRing (ofOpens V U) ⟨y, hyU⟩ ?_
+    refine (map_mul _ _ _).trans ?_
+    refine (congrArg₂ (· * ·) (toLocalGenericRing_map_ofOpensι V U ⟨y, hyU⟩ f.val)
+      (toLocalGenericRing_fst_topIso_inv V U b ⟨y, hyU⟩)).trans ?_
+    refine (map_mul _ _ _).symm.trans ?_
+    refine Eq.trans ?_ (toLocalGenericRing_fst_topIso_inv V U a ⟨y, hyU⟩).symm
+    refine congrArg (localGenericRingMap (ofOpensι V U) ⟨y, hyU⟩).hom ?_
+    exact (congrArg (_ * ·) (congrArg (stalkToLocalGenericRing V y).hom hb)).trans
+      (h₁.symm.trans (congrArg (stalkToLocalGenericRing V y).hom ha.symm))
+  -- the closed set where `a` or `b` vanishes misses the generic point
+  have hne (s : Γ(V.left, U)) (hs : V.left.presheaf.germ U y hyU s ≠ 0) :
+      genericPoint (ofOpens V U).left ∈ (ofOpens V U).left.basicOpen (U.topIso.inv s) := by
+    refine genericPoint_mem_basicOpen fun h0 ↦ hs ?_
+    have := germ_topIso_inv U s ⟨y, hyU⟩
+    rw [h0, map_zero] at this
+    exact (U.stalkIso ⟨y, hyU⟩).commRingCatIsoToRingEquiv.symm.injective
+      (this.symm.trans (map_zero _).symm)
+  let Z : Set (ofOpens V U).left :=
+    ((ofOpens V U).left.basicOpen (U.topIso.inv a) ⊓
+      (ofOpens V U).left.basicOpen (U.topIso.inv b) : (ofOpens V U).left.Opens)ᶜ
+  have hZ : IsClosed Z := Opens.isOpen _ |>.isClosed_compl
+  have hξ : genericPoint (ofOpens V U).left ∉ Z := fun h ↦
+    h ⟨hne a (ha ▸ ha₀), hne b (hb ▸ hb₀)⟩
+  have : NoetherianSpace (ofOpens V U).left := @noetherianSpace_of_isAffineOpen _ U hU
+    (IsLocallyNoetherian.component_noetherian ⟨U, hU⟩)
+  have hfin := NoetherianSpace.finite_setOf_forall_specializes hZ hξ
+  refine ⟨U, hyU, (hfin.image Subtype.val).subset ?_⟩
+  rintro y' ⟨hy'U, hord⟩
+  have hord' : ord (ofOpens V U) ⟨y', hy'U⟩ g ≠ 0 := fun h ↦
+    hord ((ord_map (ofOpensι V U) ⟨y', hy'U⟩ f).symm.trans h)
+  refine ⟨⟨y', hy'U⟩, ⟨fun hmem ↦ hord' ?_, fun c hc ↦ ?_⟩, rfl⟩
+  · exact ord_eq_zero_of_mul_eq (ofOpens V U) _ g _ _ heq hmem.1 hmem.2
+  · have hcoh : coheight ((ofOpens V U).hom ⟨y', hy'U⟩) = 1 := by
+      by_contra h
+      exact hord' (ord_of_coheight_ne_one _ h _)
+    rw [coheight_hom_apply] at hcoh
+    by_contra hne'
+    push Not at hne'
+    exact coheight_ne_one_of_specializes hc hne'.1 hne'.2 hcoh
+
+omit [IsLocallyNoetherian X] in
+/-- A function on `V` whose germ at a point `z` of codimension one is a uniformiser has order
+`1` at `z`. -/
+lemma ord_fst_appTop_eq_one (W : X.Etale) {z : W.left} (a : Γ(W.left, ⊤))
+    (hirr : Irreducible (W.left.presheaf.germ ⊤ z trivial a)) (hcoh : coheight (W.hom z) = 1) :
+    ord W z ((pullback.fst W.hom X.fromSpecFunctionField).appTop a) = 1 := by
+  rw [ord, if_pos hcoh, toLocalGenericRing_fst_appTop]
+  have := isDiscreteValuationRing_stalk W hcoh
+  let := (stalkToLocalGenericRing W z).hom.toAlgebra
+  have := isFractionRing_localGenericRing W z
+  exact Ring.ordOf_algebraMap_of_irreducible hirr
+
+omit [IsLocallyNoetherian X] [IsIntegral X] in
+/-- **Generalisations of codimension one are defined by prime elements.** Let `z ⤳ y` be a
+generalisation in an étale `X`-scheme `V`, with `z` of codimension one, at which a prime element
+`ρ` of `𝒪_{V,y}` vanishes. Then `z` is the point defined by the prime ideal `(ρ)`: the prime of
+`𝒪_{V,y}` defined by `z` contains `(ρ)` and has height one. -/
+lemma eq_fromSpecStalk_span (V : X.Etale) {z y : V.left} (h : z ⤳ y)
+    {ρ : V.left.presheaf.stalk y} (hρ : Prime ρ)
+    (hmem : V.left.presheaf.stalkSpecializes h ρ ∈ IsLocalRing.maximalIdeal _)
+    (hz : coheight (V.hom z) = 1) :
+    z = V.left.fromSpecStalk y ⟨Ideal.span {ρ}, (Ideal.span_singleton_prime hρ.ne_zero).2 hρ⟩ := by
+  set q := (IsLocalRing.maximalIdeal (V.left.presheaf.stalk z)).comap
+    (V.left.presheaf.stalkSpecializes h).hom
+  have hq : V.left.fromSpecStalk y ⟨q, inferInstance⟩ = z := fromSpecStalk_comap_maximalIdeal h
+  have hle : Ideal.span {ρ} ≤ q := (Ideal.span_singleton_le_iff_mem _).2 hmem
+  let := (V.left.presheaf.stalkSpecializes h).hom.toAlgebra
+  have := isLocalization_stalkSpecializes h
+  have hd := IsLocalization.AtPrime.ringKrullDim_eq_height q (V.left.presheaf.stalk z)
+  rw [ringKrullDim_stalk_eq_coheight, ← coheight_hom_apply, hz] at hd
+  have hq1 : q.height = 1 := by exact_mod_cast hd.symm
+  have : (Ideal.span {ρ}).IsPrime := (Ideal.span_singleton_prime hρ.ne_zero).2 hρ
+  have heq : Ideal.span {ρ} = q := by
+    by_contra hne
+    have h₁ := Ideal.height_add_one_le_of_lt_of_isPrime (lt_of_le_of_ne hle hne)
+    have h₂ := Ideal.one_le_height_span_singleton_of_mem_nonZeroDivisors
+      (mem_nonZeroDivisors_of_ne_zero hρ.ne_zero)
+    rw [hq1] at h₁
+    have : (1 : ℕ∞) + 1 ≤ 1 := (add_le_add_left h₂ 1).trans' (by rw [add_comm]) |>.trans h₁
+    exact absurd this (by decide)
+  rw [← hq]
+  exact congrArg _ (PrimeSpectrum.ext heq.symm)
+
+omit [IsRegular X] [IsLocallyNoetherian X] in
+/-- The order of vanishing of a finite product of powers of units. -/
+lemma ord_prod_zpow (W : X.Etale) (z : W.left) {ι : Type*} (s : Finset ι)
+    (g : ι → Γ(pullback W.hom X.fromSpecFunctionField, ⊤)ˣ) (n : ι → ℤ) :
+    ord W z ↑(∏ i ∈ s, g i ^ n i) = ∑ i ∈ s, n i * ord W z (g i) := by
+  classical
+  induction s using Finset.induction_on with
+  | empty => simpa using ord_one W z
+  | insert i s hi ih => rw [Finset.prod_insert hi, ord_mul, ord_zpow, ih, Finset.sum_insert hi]
+
+omit [IsRegular X] [IsLocallyNoetherian X] in
+/-- A function on an open `U` of `V` which is invertible at the points of `U` over the generic
+point of `X` is invertible on the generic fibre of `U`. -/
+lemma isUnit_fst_appTop_topIso_inv (V : X.Etale) (U : V.left.Opens) (a : Γ(V.left, U))
+    (h : ∀ z : U, V.hom z.1 = genericPoint X → IsUnit (V.left.presheaf.germ U z z.2 a)) :
+    IsUnit ((pullback.fst (ofOpens V U).hom X.fromSpecFunctionField).appTop (U.topIso.inv a)) := by
+  refine isUnit_of_basicOpen_eq_top _ ?_
+  rw [← Scheme.preimage_basicOpen_top, eq_top_iff]
+  intro p _
+  change pullback.fst (ofOpens V U).hom X.fromSpecFunctionField p ∈
+    (ofOpens V U).left.basicOpen (U.topIso.inv a)
+  set z := pullback.fst (ofOpens V U).hom X.fromSpecFunctionField p
+  have hz : V.hom z.1 = genericPoint X := by
+    have e := congrArg (fun g ↦ g p) (pullback.condition (f := (ofOpens V U).hom)
+      (g := X.fromSpecFunctionField))
+    have : Subsingleton (Spec X.functionField) :=
+      inferInstanceAs (Subsingleton (PrimeSpectrum X.functionField))
+    have hp : pullback.snd (ofOpens V U).hom X.fromSpecFunctionField p =
+        IsLocalRing.closedPoint X.functionField := Subsingleton.elim _ _
+    exact e.trans ((congrArg (X.fromSpecStalk (genericPoint X)) hp).trans fromSpecStalk_closedPoint)
+  rw [Scheme.mem_basicOpen_top]
+  have h₁ := (h z hz).map (U.stalkIso z).inv.hom
+  rw [← germ_topIso_inv] at h₁
+  exact h₁
+
+omit [IsLocallyNoetherian X] [IsIntegral X] in
+/-- A generalisation of `y` at which a nonzero element of `𝒪_{V,y}` vanishes is not a maximal
+point: the prime of `𝒪_{V,y}` it defines is nonzero. -/
+lemma coheight_ne_zero_of_mem (V : X.Etale) {g y : V.left} (h : g ⤳ y)
+    {ρ : V.left.presheaf.stalk y} (hρ : ρ ≠ 0)
+    (hmem : V.left.presheaf.stalkSpecializes h ρ ∈ IsLocalRing.maximalIdeal _) :
+    coheight g ≠ 0 := by
+  set q := (IsLocalRing.maximalIdeal (V.left.presheaf.stalk g)).comap
+    (V.left.presheaf.stalkSpecializes h).hom
+  let := (V.left.presheaf.stalkSpecializes h).hom.toAlgebra
+  have := isLocalization_stalkSpecializes h
+  have hd := IsLocalization.AtPrime.ringKrullDim_eq_height q (V.left.presheaf.stalk g)
+  rw [ringKrullDim_stalk_eq_coheight] at hd
+  intro h0
+  rw [h0] at hd
+  have hq : q.height = 0 := by exact_mod_cast hd.symm
+  have h₁ := Ideal.height_mono ((Ideal.span_singleton_le_iff_mem q).2 hmem)
+  have h₂ := Ideal.one_le_height_span_singleton_of_mem_nonZeroDivisors
+    (mem_nonZeroDivisors_of_ne_zero hρ)
+  rw [hq] at h₁
+  exact absurd (h₂.trans h₁) (by decide)
+
+omit [IsLocallyNoetherian X] [IsIntegral X] in
+/-- The germ of a prime element `ρ` of `𝒪_{V,y}` at the point defined by `(ρ)` is a uniformiser
+of the discrete valuation ring `𝒪_{V,w}`, the localization of `𝒪_{V,y}` at `(ρ)`. -/
+lemma irreducible_stalkSpecializes (V : X.Etale) {w y : V.left} (h : w ⤳ y)
+    {ρ : V.left.presheaf.stalk y} (hρ : Prime ρ)
+    (hw : w = V.left.fromSpecStalk y
+      ⟨Ideal.span {ρ}, (Ideal.span_singleton_prime hρ.ne_zero).2 hρ⟩) :
+    Irreducible (V.left.presheaf.stalkSpecializes h ρ) := by
+  subst hw
+  have : (Ideal.span {ρ}).IsPrime := (Ideal.span_singleton_prime hρ.ne_zero).2 hρ
+  have := isDiscreteValuationRing_stalk V (coheight_hom_fromSpecStalk_span V y hρ)
+  let := (V.left.presheaf.stalkSpecializes h).hom.toAlgebra
+  have := isLocalization_stalkSpecializes_fromSpecStalk (X := V.left)
+    ⟨Ideal.span {ρ}, (Ideal.span_singleton_prime hρ.ne_zero).2 hρ⟩
+  rw [IsDiscreteValuationRing.irreducible_iff_uniformizer,
+    ← IsLocalization.AtPrime.map_eq_maximalIdeal (Ideal.span {ρ}), Ideal.map_span,
+    Set.image_singleton]
+  rfl
+
+omit [IsIntegral X] [IsRegular X] [IsLocallyNoetherian X] in
+/-- A point of an open subscheme `U` lies in the basic open of a section over `U`, transported to
+`U`, if and only if it lies in the basic open of the section. -/
+lemma mem_basicOpen_topIso_inv {S : Scheme.{u}} (U : S.Opens) (a : Γ(S, U)) (z : U) :
+    z ∈ U.toScheme.basicOpen (U.topIso.inv a) ↔ z.1 ∈ S.basicOpen a := by
+  rw [← Scheme.Opens.ι_image_basicOpen_topIso_inv U a]
+  exact ⟨fun h ↦ ⟨z, h, rfl⟩, fun ⟨z', hz', e⟩ ↦ by rwa [← Subtype.ext e]⟩
+
+omit [IsLocallyNoetherian X] in
+/-- A section over an open `U` of `V` whose germ at a point `z` of codimension one is a
+uniformiser has order `1` at `z` on the generic fibre of `U`. -/
+lemma ord_fst_topIso_inv_eq_one (V : X.Etale) (U : V.left.Opens) (a : Γ(V.left, U)) (z : U)
+    (hirr : Irreducible (V.left.presheaf.germ U z z.2 a)) (hcoh : coheight (V.hom z.1) = 1) :
+    ord (ofOpens V U) z
+      ((pullback.fst (ofOpens V U).hom X.fromSpecFunctionField).appTop (U.topIso.inv a)) = 1 := by
+  have h := (MulEquiv.irreducible_iff
+    (U.stalkIso z).symm.commRingCatIsoToRingEquiv.toMulEquiv).2 hirr
+  change Irreducible ((U.stalkIso z).inv _) at h
+  rw [← germ_topIso_inv] at h
+  exact ord_fst_appTop_eq_one (ofOpens V U) _ h hcoh
+
+omit [IsRegular X] [IsIntegral X] in
+/-- **Points over `x` near `y` generalise `y`.** For a point `x` of `X`, a point `y` of an étale
+`X`-scheme `V` has an open neighbourhood, inside any given one, all of whose points over `x`
+generalise `y`: remove the irreducible components of the preimage of the closure of `x` not
+containing `y`, and use that the fibres of `V ⟶ X` are discrete. -/
+lemma exists_opens_specializes_of_hom_eq (V : X.Etale) (y : V.left) (x : X) {N : V.left.Opens}
+    (hyN : y ∈ N) :
+    ∃ U : V.left.Opens, y ∈ U ∧ U ≤ N ∧ ∀ z ∈ U, V.hom z = x → z ⤳ y := by
+  have : IsLocallyNoetherian ((Functor.fromPUnit X).obj V.right) := ‹IsLocallyNoetherian X›
+  have : IsLocallyNoetherian V.left := LocallyOfFiniteType.isLocallyNoetherian V.hom
+  obtain ⟨_, ⟨U₀, hU₀, rfl⟩, hyU₀, hU₀N⟩ :=
+    V.left.isBasis_affineOpens.exists_subset_of_mem_open hyN N.2
+  have : NoetherianSpace U₀ := @noetherianSpace_of_isAffineOpen _ U₀ hU₀
+    (IsLocallyNoetherian.component_noetherian ⟨U₀, hU₀⟩)
+  have : QuasiSober U₀ := inferInstanceAs (QuasiSober (Scheme.Opens.toScheme (X := V.left) U₀))
+  let Z : Set U₀ := (fun z : U₀ ↦ V.hom z.1) ⁻¹' closure {x}
+  have hZ : IsClosed Z := isClosed_closure.preimage (V.hom.continuous.comp continuous_subtype_val)
+  obtain ⟨O, hO, hyO, hOZ⟩ := NoetherianSpace.exists_isOpen_forall_exists_specializes hZ
+    (⟨y, hyU₀⟩ : U₀)
+  refine ⟨⟨Subtype.val '' O, U₀.2.isOpenMap_subtype_val O hO⟩, ⟨_, hyO, rfl⟩,
+    fun _ ⟨z, _, hz⟩ ↦ hz ▸ hU₀N z.2, ?_⟩
+  rintro _ ⟨z, hzO, rfl⟩ hzx
+  obtain ⟨g, hgZ, hgz, hgy⟩ := hOZ z hzO (by
+    change V.hom z.1 ∈ closure {x}
+    rw [hzx]
+    exact subset_closure rfl)
+  have hgz' := hgz.map continuous_subtype_val
+  have hg : V.hom g.1 = V.hom z.1 :=
+    ((hgz'.map V.hom.continuous).antisymm (hzx ▸ specializes_iff_mem_closure.2 hgZ)).eq
+  rw [← V.hom.eq_of_specializes_of_apply_eq hgz' hg]
+  exact hgy.map continuous_subtype_val
+
+omit [IsRegular X] [IsIntegral X] in
+/-- **Finiteness of fibres over codimension one points.** On an irreducible affine open `U` of an
+étale `X`-scheme, the points over a point `x` of codimension one are finitely many: they are
+generic points of irreducible components of the preimage of the closure of `x`. -/
+lemma finite_setOf_hom_eq (V : X.Etale) (U : V.left.Opens) (hU : IsAffineOpen U)
+    (hirr : IsPreirreducible (U : Set V.left)) {x : X} (hx : coheight x = 1) :
+    {w | w ∈ U ∧ V.hom w = x}.Finite := by
+  have : IsLocallyNoetherian ((Functor.fromPUnit X).obj V.right) := ‹IsLocallyNoetherian X›
+  have : IsLocallyNoetherian V.left := LocallyOfFiniteType.isLocallyNoetherian V.hom
+  rcases isEmpty_or_nonempty U with hU0 | hU0
+  · exact Set.finite_empty.subset fun w hw ↦ hU0.elim ⟨w, hw.1⟩
+  have : NoetherianSpace (Scheme.Opens.toScheme (X := V.left) U) :=
+    @noetherianSpace_of_isAffineOpen _ U hU
+    (IsLocallyNoetherian.component_noetherian ⟨U, hU⟩)
+  have : IrreducibleSpace (Scheme.Opens.toScheme (X := V.left) U) := Subtype.irreducibleSpace
+    ⟨Set.nonempty_coe_sort.1 hU0, hirr⟩
+  let Z : Set (Scheme.Opens.toScheme (X := V.left) U) := (fun z : U ↦ V.hom z.1) ⁻¹' closure {x}
+  have hZ : IsClosed Z := isClosed_closure.preimage (V.hom.continuous.comp continuous_subtype_val)
+  have hcoh (z : (Scheme.Opens.toScheme (X := V.left) U)) : coheight z = coheight (V.hom z.1) := by
+    rw [coheight_hom_apply, ← coheight_eq_of_isOpenImmersion U.ι]
+    rfl
+  have hξ : genericPoint (Scheme.Opens.toScheme (X := V.left) U) ∉ Z := by
+    intro hξ
+    have hmax : IsMax (V.hom (genericPoint (Scheme.Opens.toScheme (X := V.left) U)).1) := by
+      rw [← Order.coheight_eq_zero, ← hcoh, Order.coheight_eq_zero]
+      intro b _
+      exact le_iff_specializes.2
+        ((genericPoint_spec (Scheme.Opens.toScheme (X := V.left) U)).specializes trivial)
+    have hle : V.hom (genericPoint (Scheme.Opens.toScheme (X := V.left) U)).1 ≤ x :=
+      le_iff_specializes.2 (specializes_iff_mem_closure.2 hξ)
+    have heq : x = V.hom (genericPoint (Scheme.Opens.toScheme (X := V.left) U)).1 :=
+      ((le_iff_specializes.1 (hmax hle)).antisymm (le_iff_specializes.1 hle)).eq.symm
+    rw [heq, Order.coheight_eq_zero.2 hmax] at hx
+    exact absurd hx (by decide)
+  refine ((NoetherianSpace.finite_setOf_forall_specializes hZ hξ).image Subtype.val).subset ?_
+  rintro w ⟨hwU, hwx⟩
+  refine ⟨⟨w, hwU⟩, ⟨?_, fun c hc ↦ ?_⟩, rfl⟩
+  · change V.hom w ∈ closure {x}
+    rw [hwx]
+    exact subset_closure rfl
+  · by_contra hne
+    push Not at hne
+    refine coheight_ne_one_of_specializes hc hne.1 hne.2 ?_
+    rw [hcoh]
+    exact hwx ▸ hx
+
+/-- **Weil divisors supported over a codimension one point are locally principal.** Let `X` be an
+integral regular locally noetherian scheme, `x` a point of `X` of codimension one, `V` an étale
+`X`-scheme and `e` an integer-valued function on the points of `V` vanishing outside the fibre
+over `x`. Near every point `y` of `V` there is a unit on the generic fibre whose order is `e`.
+
+Near `y`, the points over `x` generalise `y` and are finitely many
+(`AlgebraicGeometry.Scheme.Etale.exists_opens_specializes_of_hom_eq`,
+`AlgebraicGeometry.Scheme.Etale.finite_setOf_hom_eq`); each of them is defined by a prime
+element `ρ_w` of the unique factorisation domain `𝒪_{V,y}`, which near `y` vanishes only at the
+specialisations of `w` and is a uniformiser at `w`. The product `∏_w ρ_w ^ e(w)` works. -/
+lemma exists_ord_eq_of_forall_ne (V : X.Etale) (y : V.left) {x : X} (hx : coheight x = 1)
+    (e : V.left → ℤ) (he : ∀ z, V.hom z ≠ x → e z = 0) :
+    ∃ (U : V.left.Opens) (_ : y ∈ U)
+      (f : Γ(pullback (ofOpens V U).hom X.fromSpecFunctionField, ⊤)ˣ),
+      ∀ z : U, ord (ofOpens V U) z f = e z := by
+  classical
+  have : IsLocallyNoetherian ((Functor.fromPUnit X).obj V.right) := ‹IsLocallyNoetherian X›
+  have : IsLocallyNoetherian V.left := LocallyOfFiniteType.isLocallyNoetherian V.hom
+  have : IsRegular V.left := ⟨fun z ↦ inferInstance⟩
+  have : UniqueFactorizationMonoid (V.left.presheaf.stalk y) :=
+    IsRegular.uniqueFactorizationMonoid_stalk y
+  -- `x` does not specialise to the generic point
+  have hxη : ¬ x ⤳ genericPoint X := fun h ↦ by
+    have hmax : IsMax (genericPoint X) := fun b _ ↦
+      le_iff_specializes.2 ((genericPoint_spec X).specializes trivial)
+    have : x = genericPoint X := (h.antisymm ((genericPoint_spec X).specializes trivial)).eq
+    rw [this, Order.coheight_eq_zero.2 hmax] at hx
+    exact absurd hx (by decide)
+  -- near `y`, the points over `x` generalise `y` and are finitely many
+  obtain ⟨W₀, hyW₀, hW₀⟩ := exists_opens_isPreirreducible y
+  obtain ⟨_, ⟨U₀, hU₀, rfl⟩, hyU₀, hU₀W₀⟩ :=
+    V.left.isBasis_affineOpens.exists_subset_of_mem_open hyW₀ W₀.2
+  obtain ⟨U₁, hyU₁, hU₁U₀, hgen⟩ := exists_opens_specializes_of_hom_eq V y x (N := U₀) hyU₀
+  have hF : {w | w ∈ U₁ ∧ V.hom w = x}.Finite :=
+    (finite_setOf_hom_eq V U₀ hU₀ (hW₀.open_subset U₀.2 hU₀W₀) hx).subset
+      fun w hw ↦ ⟨hU₁U₀ hw.1, hw.2⟩
+  set F := hF.toFinset
+  have hFmem {w : V.left} (hw : w ∈ F) : w ∈ U₁ ∧ V.hom w = x := (Set.Finite.mem_toFinset hF).1 hw
+  -- each of them is defined by a prime element of `𝒪_{V,y}`
+  have hρ (w : V.left) (hw : w ∈ F) : ∃ (ρ : V.left.presheaf.stalk y) (hρ : Prime ρ),
+      w = V.left.fromSpecStalk y
+        ⟨Ideal.span {ρ}, (Ideal.span_singleton_prime hρ.ne_zero).2 hρ⟩ := by
+    have hwy := hgen w (hFmem hw).1 (hFmem hw).2
+    have hcoh : coheight (V.hom w) = 1 := (hFmem hw).2 ▸ hx
+    set q := (IsLocalRing.maximalIdeal (V.left.presheaf.stalk w)).comap
+      (V.left.presheaf.stalkSpecializes hwy).hom
+    have hq0 : q ≠ ⊥ := by
+      intro h0
+      let := (V.left.presheaf.stalkSpecializes hwy).hom.toAlgebra
+      have := isLocalization_stalkSpecializes hwy
+      have hd := IsLocalization.AtPrime.ringKrullDim_eq_height q (V.left.presheaf.stalk w)
+      rw [ringKrullDim_stalk_eq_coheight, ← coheight_hom_apply, hcoh] at hd
+      rw [h0, Ideal.height_bot] at hd
+      exact absurd hd (by decide)
+    obtain ⟨ρ, hρq, hρ⟩ := Ideal.IsPrime.exists_mem_prime_of_ne_bot inferInstance hq0
+    exact ⟨ρ, hρ, eq_fromSpecStalk_span V hwy hρ hρq hcoh⟩
+  choose! ρ hρp hρw using hρ
+  -- sections extending the `ρ_w`
+  have hsec (w : V.left) (_ : w ∈ F) : ∃ (Uw : V.left.Opens) (_ : IsAffineOpen Uw) (hyUw : y ∈ Uw)
+      (_ : Uw ≤ U₁) (s : Γ(V.left, Uw)), V.left.presheaf.germ Uw y hyUw s = ρ w :=
+    exists_isAffineOpen_germ_eq hyU₁ (ρ w)
+  choose! Uw hUw hyUw hUwU₁ s hs using hsec
+  have hgerm (w : V.left) (hw : w ∈ F) {g : V.left} (hg : g ∈ Uw w) (hgy : g ⤳ y) :
+      V.left.presheaf.germ (Uw w) g hg (s w) = V.left.presheaf.stalkSpecializes hgy (ρ w) := by
+    rw [← hs w hw]
+    exact (congrArg (fun φ ↦ φ.hom (s w))
+      (V.left.presheaf.germ_stalkSpecializes (hyUw w hw) hgy)).symm
+  -- neighbourhoods on which `ρ_w` vanishes only at specialisations of generalisations of `y`
+  have hnbhd (w : V.left) (hw : w ∈ F) : ∃ O : V.left.Opens, y ∈ O ∧ O ≤ Uw w ∧
+      ∀ z ∈ O, z ∉ V.left.basicOpen (s w) → ∃ g, ∃ (hg : g ∈ Uw w) (hgy : g ⤳ y), g ⤳ z ∧
+        V.left.presheaf.stalkSpecializes hgy (ρ w) ∈ IsLocalRing.maximalIdeal _ := by
+    have : NoetherianSpace (Uw w) := @noetherianSpace_of_isAffineOpen _ _ (hUw w hw)
+      (IsLocallyNoetherian.component_noetherian ⟨_, hUw w hw⟩)
+    have : QuasiSober (Uw w) := inferInstanceAs (QuasiSober (Scheme.Opens.toScheme (X := V.left)
+      (Uw w)))
+    let Z : Set (Uw w) := {z | z.1 ∉ V.left.basicOpen (s w)}
+    have hZ : IsClosed Z :=
+      ((V.left.basicOpen (s w)).2.preimage continuous_subtype_val).isClosed_compl
+    obtain ⟨O, hO, hyO, hOZ⟩ :=
+      NoetherianSpace.exists_isOpen_forall_exists_specializes hZ (⟨y, hyUw w hw⟩ : Uw w)
+    refine ⟨⟨Subtype.val '' O, (Uw w).2.isOpenMap_subtype_val O hO⟩, ⟨_, hyO, rfl⟩,
+      fun _ ⟨z, _, hz⟩ ↦ hz ▸ z.2, ?_⟩
+    rintro _ ⟨z, hzO, rfl⟩ hz
+    obtain ⟨g, hgZ, hgz, hgy⟩ := hOZ z hzO hz
+    have hgy' := hgy.map continuous_subtype_val
+    refine ⟨g.1, g.2, hgy', hgz.map continuous_subtype_val, ?_⟩
+    rw [← hgerm w hw g.2 hgy', IsLocalRing.mem_maximalIdeal, mem_nonunits_iff]
+    exact fun h ↦ hgZ ((V.left.mem_basicOpen _ _ _).2 h)
+  choose! O hyO hOUw hOZ using hnbhd
+  let U : V.left.Opens := U₁ ⊓ F.inf O
+  have hUO (w : V.left) (hw : w ∈ F) : U ≤ O w := fun z hz ↦ by
+    have := hz.2
+    rw [Opens.coe_finset_inf, Finset.inf_set_eq_iInter] at this
+    exact Set.mem_iInter₂.1 this w hw
+  have hyU : y ∈ U := ⟨hyU₁, by
+    rw [Opens.coe_finset_inf, Finset.inf_set_eq_iInter]
+    exact Set.mem_iInter₂.2 fun w hw ↦ hyO w hw⟩
+  have hUUw (w : V.left) (hw : w ∈ F) : U ≤ Uw w := (hUO w hw).trans (hOUw w hw)
+  -- the restrictions of the `ρ_w` to `U`
+  let r (w : V.left) : Γ(V.left, U) :=
+    if hw : w ∈ F then V.left.presheaf.map (homOfLE (hUUw w hw)).op (s w) else 1
+  have hr (w : V.left) (hw : w ∈ F) (z : U) :
+      V.left.presheaf.germ U z z.2 (r w) = V.left.presheaf.germ (Uw w) z (hUUw w hw z.2) (s w) := by
+    simp only [r, dif_pos hw]
+    exact V.left.presheaf.germ_res_apply _ _ _ _
+  -- a point of `U` at which `ρ_w` vanishes is a specialisation of a generalisation `g` of `y`
+  -- at which `ρ_w` vanishes
+  have hvan (w : V.left) (hw : w ∈ F) (z : U)
+      (hz : ¬ IsUnit (V.left.presheaf.germ U z z.2 (r w))) : ∃ g, ∃ (hgy : g ⤳ y), g ⤳ z ∧
+        V.left.presheaf.stalkSpecializes hgy (ρ w) ∈ IsLocalRing.maximalIdeal _ := by
+    rw [hr w hw] at hz
+    obtain ⟨g, -, hgy, hgz, hmem⟩ := hOZ w hw z (hUO w hw z.2)
+      fun h ↦ hz ((V.left.mem_basicOpen _ _ _).1 h)
+    exact ⟨g, hgy, hgz, hmem⟩
+  -- the `ρ_w` are units on the generic fibre of `U`
+  have hunit (w : V.left) :
+      IsUnit ((pullback.fst (ofOpens V U).hom X.fromSpecFunctionField).appTop
+        (U.topIso.inv (r w))) := by
+    by_cases hw : w ∈ F
+    · refine isUnit_fst_appTop_topIso_inv V U _ fun z hzη ↦ ?_
+      by_contra hnu
+      obtain ⟨g, hgy, hgz, hmem⟩ := hvan w hw z hnu
+      have hwg : w ⤳ g := by
+        rw [hρw w hw, ← fromSpecStalk_comap_maximalIdeal hgy]
+        refine ((PrimeSpectrum.le_iff_specializes _ _).1 ?_).map
+          (V.left.fromSpecStalk y).continuous
+        exact (Ideal.span_singleton_le_iff_mem _).2 hmem
+      have := (hwg.map V.hom.continuous).trans (hgz.map V.hom.continuous)
+      rw [(hFmem hw).2, hzη] at this
+      exact hxη this
+    · simp only [r, dif_neg hw, map_one]
+      exact isUnit_one
+  -- the order of `ρ_w` at a point `z` of `U` is `1` if `z = w` and `0` otherwise
+  have hord (w : V.left) (hw : w ∈ F) (z : U) :
+      ord (ofOpens V U) z (hunit w).unit = if z.1 = w then 1 else 0 := by
+    split_ifs with hzw
+    · have hwy := hgen w (hFmem hw).1 (hFmem hw).2
+      have hzy : z.1 ⤳ y := hzw ▸ hwy
+      refine ord_fst_topIso_inv_eq_one V U _ z ?_ (by rw [hzw, (hFmem hw).2]; exact hx)
+      rw [hr w hw, hgerm w hw _ hzy]
+      exact irreducible_stalkSpecializes V hzy (hρp w hw) (hzw.trans (hρw w hw))
+    · by_cases hu : IsUnit (V.left.presheaf.germ U z z.2 (r w))
+      · refine ord_eq_zero_of_mul_eq (ofOpens V U) z _ (U.topIso.inv (r w)) 1 ?_ ?_ ?_
+        · rw [map_one, mul_one, IsUnit.unit_spec]
+        · exact (mem_basicOpen_topIso_inv U (r w) z).2 ((V.left.mem_basicOpen _ _ _).2 hu)
+        · rw [Scheme.basicOpen_one]
+          trivial
+      · by_cases hcoh : coheight (V.hom z.1) = 1
+        · exfalso
+          obtain ⟨g, hgy, hgz, hmem⟩ := hvan w hw z hu
+          have hgz' : g = z.1 := by
+            by_contra hne
+            have hlt : z.1 < g := lt_of_le_not_ge (le_iff_specializes.2 hgz)
+              fun h ↦ hne (hgz.antisymm (le_iff_specializes.1 h)).eq
+            have := coheight_add_one_le hlt
+            rw [show coheight z.1 = 1 from (coheight_hom_apply V z.1).symm.trans hcoh] at this
+            refine coheight_ne_zero_of_mem V hgy (hρp w hw).ne_zero hmem ?_
+            by_contra h0
+            have h1 : 1 ≤ coheight g := Order.one_le_iff_ne_zero.2 h0
+            have : (1 : ℕ∞) + 1 ≤ 1 :=
+              (add_le_add_left h1 1).trans' (by rw [add_comm]) |>.trans this
+            exact absurd this (by decide)
+          subst hgz'
+          exact hzw ((eq_fromSpecStalk_span V hgy (hρp w hw) hmem hcoh).trans (hρw w hw).symm)
+        · exact ord_of_coheight_ne_one (ofOpens V U) (y := z) hcoh _
+  refine ⟨U, hyU, ∏ w ∈ F, (hunit w).unit ^ e w, fun z ↦ ?_⟩
+  rw [ord_prod_zpow, Finset.sum_congr rfl fun w hw ↦ by rw [hord w hw]]
+  simp only [mul_ite, mul_one, mul_zero]
+  rw [Finset.sum_ite_eq]
+  split_ifs with hzF
+  · rfl
+  · exact (he _ fun hzx ↦
+      hzF ((Set.Finite.mem_toFinset hF).2 ⟨(inf_le_left : U ≤ U₁) z.2, hzx⟩)).symm
 
 end Etale
 

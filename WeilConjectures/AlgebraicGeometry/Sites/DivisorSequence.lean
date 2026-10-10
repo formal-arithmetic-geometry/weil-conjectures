@@ -9,6 +9,7 @@ public import Mathlib.AlgebraicGeometry.Noetherian
 public import WeilConjectures.AlgebraicGeometry.Regular
 public import WeilConjectures.AlgebraicGeometry.Sites.CohomologyColimit
 public import WeilConjectures.AlgebraicGeometry.Sites.DivisorMap
+public import WeilConjectures.AlgebraicGeometry.Sites.DivisorLocal
 public import WeilConjectures.AlgebraicGeometry.Sites.StalkwiseCokernel
 public import WeilConjectures.Mathlib.Algebra.Category.Grp.Colimits
 public import WeilConjectures.AlgebraicGeometry.Sites.Gm
@@ -263,7 +264,8 @@ lemma Etale.exists_eq_of_ord_eq_zero [IsLocallyNoetherian X] [IsRegular X] (V : 
       (pullback.fst (Etale.ofOpens V U).hom X.fromSpecFunctionField).appTop u.val =
         ((MorphismProperty.Over.pullback @Etale ⊤ X.fromSpecFunctionField).map
           (Etale.ofOpensι V U)).left.appTop f.val := by
-  sorry
+  obtain ⟨r, hr⟩ := Etale.exists_toLocalGenericRing_eq_of_ord_eq_zero V y f fun w _ ↦ hf w
+  exact Etale.exists_eq_of_toLocalGenericRing_eq V y f.val r hr
 
 /-- **Local finiteness of divisors.** Let `X` be an integral regular locally noetherian scheme,
 `V` an étale `X`-scheme and `f` a unit on the generic fibre of `V`. Near every point of `V`, the
@@ -274,7 +276,10 @@ lemma Etale.exists_finset_of_ord_ne_zero [IsLocallyNoetherian X] [IsRegular X] (
     (y : V.left) (f : Γ(pullback V.hom X.fromSpecFunctionField, ⊤)ˣ) :
     ∃ (U : V.left.Opens) (_ : y ∈ U) (T : Finset X),
       ∀ y' ∈ U, Etale.ord V y' f ≠ 0 → V.hom y' ∈ T := by
-  sorry
+  classical
+  obtain ⟨U, hyU, hfin⟩ := Etale.exists_opens_finite_ord_ne_zero V y f
+  exact ⟨U, hyU, hfin.toFinset.image V.hom, fun y' hy' h ↦
+    Finset.mem_image.2 ⟨y', hfin.mem_toFinset.2 ⟨hy', h⟩, rfl⟩⟩
 
 /-- **Weil divisors are locally principal on an étale neighbourhood.** Let `X` be an integral
 regular locally noetherian scheme, `x` a point of `X` of codimension one, `V` an étale
@@ -291,7 +296,13 @@ lemma Etale.exists_ord_eq_extendByZero [IsLocallyNoetherian X] [IsRegular X] (V 
       ∀ y' : U, ULift.up (Etale.ord (Etale.ofOpens V U) y' f) =
         extendByZero (AddCommGrpCat.of (ULift.{u + 1} ℤ)) (X.fromSpecResidueField x) c
           (U.ι y') := by
-  sorry
+  obtain ⟨U, hyU, f, hf⟩ := Etale.exists_ord_eq_of_forall_ne V y hx
+    (fun z ↦
+      (extendByZero (AddCommGrpCat.of (ULift.{u + 1} ℤ)) (X.fromSpecResidueField x) c z).down)
+    fun z hz ↦ by
+      rw [extendByZero_of_notMem _ (by rwa [range_fromSpecResidueField])]
+      rfl
+  exact ⟨U, hyU, f, fun y' ↦ ULift.ext _ _ (hf y')⟩
 
 omit [IsIntegral X] in
 /-- On geometric stalks, extension by zero `⨁_{i} i_{e(i)*} ℤ ⟶ (V ↦ (V → ℤ))` is injective, for
