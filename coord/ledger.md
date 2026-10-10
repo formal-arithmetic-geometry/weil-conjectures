@@ -2718,3 +2718,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 21:46 L: merged deliver/J1/pqf-lem-finite-fp-locnoeth (reviewer FIX; first push; new nodes: 1)
 - 21:46 L: returned deliver/M1/lem-weil-pbc-generic-finite-algebra-splitting (reviewer RETURN: 1. E (false new statement) lem-weil-pbc-spread-purely-inseparable-factors: with L=K' and A'=A it asserts that for every )
 - 21:46 L: merged deliver/M1/thm-sc-affine-cohomology (reviewer PASS; first push; new nodes: 0)
+- 21:47 L: returned deliver/H1/lem-weil-pbc-complex-ses-connecting-formula (reviewer RETURN: Not a fault: the item is the degreewise-split case of Mathlib's CategoryTheory.ShortComplex.ShortExact.δ_eq (Mathlib/Alg)
