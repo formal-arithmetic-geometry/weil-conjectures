@@ -2,15 +2,48 @@
  "id": "lem-weil-pbc-finite-length-module-simple-filtration",
  "kind": "statement",
  "title": "A finite-length module has a filtration with simple quotients",
- "statement": "Let $R$ be a commutative ring and $M$ an $R$-module. Define the module length as the supremum of the numbers of proper inclusions in strict chains of $R$-submodules (Stacks Tags 02LY and 00IV), and assume this supremum is finite. Then there are an integer $r\\ge0$ and strict inclusions $0=M_0\\subsetneq M_1\\subsetneq\\cdots\\subsetneq M_r=M$ such that each quotient $M_i/M_{i-1}$ is nonzero and has no proper nonzero $R$-submodule.",
+ "statement": "Let $R$ be a commutative ring and $M$ an $R$-module of finite length, i.e. $\\mathrm{length}_R(M)<\\infty$ [def-weil-pbc-module-length]. Then there are an integer $r\\ge0$ and $R$-submodules $0=M_0\\subsetneq M_1\\subsetneq\\cdots\\subsetneq M_r=M$ such that each quotient $M_i/M_{i-1}$ ($1\\le i\\le r$) is simple [def-weil-pbc-simple-module]: it is nonzero and has no $R$-submodule other than $0$ and itself.",
  "source": {
   "document": "literature/stacks-project/algebra.tex",
-  "place": "Algebra, Definition Tag 02LY (definition-length, line 12350; the same definition is indexed as Tag 00IV) and Lemma Tag 00J3 (lemma-simple-pieces, line 12546): a maximal chain in a finite-length module has simple successive quotients"
+  "place": "Algebra, Definition Tag 02LY (definition-length, line 12350), Definition Tag 00J1 (definition-simple-module, line 12508) and Lemma Tag 00J3 (lemma-simple-pieces, line 12546, part (2) and the first sentence of its proof): a maximal chain in a finite-length module has simple successive quotients"
  },
- "stmt_deps": [],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "stmt_deps": [
+  "def-weil-pbc-module-length",
+  "def-weil-pbc-simple-module"
+ ],
+ "proof": [
+  {
+   "text": "Choose a chain of maximal length. Let $\\ell=\\mathrm{length}_R(M)<\\infty$ [def-weil-pbc-module-length]. Let $S$ be the set of integers $n\\ge0$ for which there is a chain of $R$-submodules $0=M_0\\subsetneq M_1\\subsetneq\\cdots\\subsetneq M_n=M$. $S$ is nonempty: if $M=0$ the one-term chain $0=M_0=M$ gives $0\\in S$, and if $M\\ne0$ the chain $0\\subsetneq M$ gives $1\\in S$. Every $n\\in S$ satisfies $n\\le\\ell$ by the definition of $\\ell$ as the supremum. So $S$ is a nonempty set of integers bounded above by $\\ell$ and has a largest element $r$; fix a chain $0=M_0\\subsetneq\\cdots\\subsetneq M_r=M$ realizing it. (Stacks says 'choose any maximal chain'; this step writes out why one exists: a chain of largest length cannot be refined.)",
+   "uses": [
+    "def-weil-pbc-module-length"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Lemma Tag 00J3 (lemma-simple-pieces), statement ('Choose any maximal chain') and proof, line 12546ff."
+   }
+  },
+  {
+   "text": "The quotients are simple. Fix $1\\le i\\le r$ and let $\\pi:M_i\\to M_i/M_{i-1}$ be the projection. Since $M_{i-1}\\ne M_i$, the quotient $M_i/M_{i-1}$ is nonzero. Suppose $\\bar N\\subset M_i/M_{i-1}$ is an $R$-submodule with $\\bar N\\ne0$ and $\\bar N\\ne M_i/M_{i-1}$. Then $N=\\pi^{-1}(\\bar N)$ is an $R$-submodule of $M$ with $M_{i-1}\\subseteq N\\subseteq M_i$ and $\\pi(N)=\\bar N$ ($\\pi$ is surjective); $N\\ne M_{i-1}$ since $\\pi(M_{i-1})=0\\ne\\bar N$, and $N\\ne M_i$ since $\\pi(M_i)=M_i/M_{i-1}\\ne\\bar N$. Inserting $N$ gives a chain $0=M_0\\subsetneq\\cdots\\subsetneq M_{i-1}\\subsetneq N\\subsetneq M_i\\subsetneq\\cdots\\subsetneq M_r=M$ with $r+1$ proper inclusions, so $r+1\\in S$, contradicting the maximality of $r$. Hence every submodule of $M_i/M_{i-1}$ is $0$ or $M_i/M_{i-1}$, and $M_i/M_{i-1}$ is simple [def-weil-pbc-simple-module]. (Stacks 00J3 proof: 'If $M_i/M_{i-1}$ is not simple then we can refine the filtration and the filtration is not maximal.')",
+   "uses": [
+    "def-weil-pbc-simple-module"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Lemma Tag 00J3 (lemma-simple-pieces), statement ('Choose any maximal chain') and proof, line 12546ff."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-module-length",
+  "def-weil-pbc-simple-module"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Lemma Tag 00J3 (lemma-simple-pieces), part (2) and the first sentence of its proof; the existence of a maximal chain (step 1) is written out from Definition Tag 02LY"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -32,10 +65,31 @@
    "results": "FiniteLength.lean:50 and :82 provide composition-series existence criteria",
    "date": "2026-10-10",
    "verdict": "no exact one-line declaration matching the explicit filtration statement"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "if Module.length R M is finite then there is a composition series of submodules from ⊥ to ⊤",
+   "results": "isFiniteLength_of_exists_compositionSeries, isFiniteLength_iff_exists_compositionSeries, IsFiniteLength (Mathlib.RingTheory.FiniteLength); Module.length_compositionSeries, Module.length_ne_top_iff (Mathlib.RingTheory.Length); exists_compositionSeries_of_isNoetherian_isArtinian",
+   "date": "2026-10-10",
+   "verdict": "no single declaration: the statement is the composite of three Mathlib results (see the next record)"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -n 'lemma Module.length_ne_top_iff \\|theorem isFiniteLength_iff_exists_compositionSeries\\|theorem covBy_iff_quot_is_simple\\|abbrev CompositionSeries' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/{RingTheory/Length.lean,RingTheory/FiniteLength.lean,RingTheory/SimpleModule/Basic.lean,Order/JordanHolder.lean}",
+   "results": "RingTheory/Length.lean:94 Module.length_ne_top_iff : Module.length R M ≠ ⊤ ↔ IsFiniteLength R M; RingTheory/FiniteLength.lean:82 isFiniteLength_iff_exists_compositionSeries : IsFiniteLength R M ↔ ∃ s : CompositionSeries (Submodule R M), s.head = ⊥ ∧ s.last = ⊤; Order/JordanHolder.lean:155 CompositionSeries X := RelSeries {(x, y) | IsMaximal x y}; RingTheory/SimpleModule/Basic.lean:122 covBy_iff_quot_is_simple (hAB : A ≤ B) : A ⋖ B ↔ IsSimpleModule R (B ⧸ comap B.subtype A)",
+   "date": "2026-10-10",
+   "verdict": "no one-line match: the item follows from length_ne_top_iff.mp, then isFiniteLength_iff_exists_compositionSeries.mp, then covBy_iff_quot_is_simple on each step of the series (IsMaximal on Submodule being ⋖); three lemmas and an unpacking of RelSeries, so the item is split into elementary steps over the two definition leaves instead"
+  },
+  {
+   "tool": "local_search",
+   "query": "isFiniteLength_iff_exists_compositionSeries (project root ~/weil-conjectures-slopmaster2)",
+   "results": "isFiniteLength_iff_exists_compositionSeries (Mathlib/RingTheory/FiniteLength.lean); index: unavailable",
+   "date": "2026-10-10",
+   "verdict": "exists (ingredient of the Lean route)"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "worker",
@@ -56,5 +110,17 @@
  },
  "chapter": "sec-proper-base-change",
  "unit": "sk-thm-p1",
- "lead_note": "L 2026-10-10: removed the citation [def-weil-pbc-kahler-differentials] (that node defines Kähler differentials, not modules); 'R-module' needs no definition node here."
+ "lead_note": "L 2026-10-10: removed the citation [def-weil-pbc-kahler-differentials] (that node defines Kähler differentials, not modules); 'R-module' needs no definition node here.",
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "lem-weil-pbc-finite-length-module-simple-filtration",
+  "worker": "stage1",
+  "summary": "Checked against Stacks algebra.tex Definition 02LY, Definition 00J1 and Lemma 00J3. The statement defined length inline and had empty stmt_deps; it now cites two new Mathlib-leaf definition nodes, def-weil-pbc-module-length (Module.length, Mathlib/RingTheory/Length.lean:32) and def-weil-pbc-simple-module (IsSimpleModule, Mathlib/RingTheory/SimpleModule/Basic.lean:60); content unchanged. The source place wrongly said Definition 02LY is 'also indexed as Tag 00IV': 00IV is lemma-length-additive (tags file line 693); corrected (the citer lem-weil-pbc-artinian-ring-self-finite-length carries the same wrong tag in its statement, not edited). Proof written in two elementary steps after Stacks 00J3: a chain from 0 to M of largest length exists since the lengths are bounded by length_R(M) (Stacks only says 'choose any maximal chain'), and a non-simple quotient would refine it via the correspondence of submodules of M_i/M_{i-1} with submodules between M_{i-1} and M_i. Not a Mathlib leaf: Mathlib gets it as Module.length_ne_top_iff (Length.lean:94) + isFiniteLength_iff_exists_compositionSeries (FiniteLength.lean:82) + covBy_iff_quot_is_simple (SimpleModule/Basic.lean:122), recorded in mathlib_searches; loogle was rate-limited and not used (LeanSearch, LeanFinder, grep and local_search used)."
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "result": "accepted",
+  "note": "2 elementary steps (Stacks 00J3 (2)): a chain of maximal length exists since lengths are bounded by the finite length; a non-simple quotient would allow inserting a submodule. Statement now cites the two new definition leaves def-weil-pbc-module-length (Module.length, Length.lean:32, with the remark that chains from 0 to M give the same supremum as all strict chains) and def-weil-pbc-simple-module (IsSimpleModule, SimpleModule/Basic.lean:60); both lines verified by L. Not a leaf: Mathlib's route is three lemmas plus unpacking CompositionSeries. Source note '02LY = 00IV' corrected (00IV is length-additive). Stage 3: lem-weil-pbc-artinian-ring-self-finite-length (C1) should cite def-weil-pbc-module-length."
+ }
 }

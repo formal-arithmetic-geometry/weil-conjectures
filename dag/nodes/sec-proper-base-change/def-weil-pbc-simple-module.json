@@ -1,0 +1,65 @@
+{
+ "id": "def-weil-pbc-simple-module",
+ "kind": "definition",
+ "title": "Simple module",
+ "statement": "Let $R$ be a ring and $M$ an $R$-module. $M$ is *simple* if $M\\ne0$ and every $R$-submodule of $M$ is either $0$ or $M$.",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Algebra, Definition Tag 00J1 (definition-simple-module, line 12508)"
+ },
+ "stmt_deps": [],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "simple module: nonzero module whose only submodules are zero and itself",
+   "results": "IsSimpleModule, IsSimpleModule.mk, isSimpleModule_iff_isAtom, isSimpleModule_iff, IsSimpleModule.isAtom (Mathlib.RingTheory.SimpleModule.Basic)",
+   "date": "2026-10-10",
+   "verdict": "match: IsSimpleModule"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "simple module over a ring: submodule lattice has exactly two elements",
+   "results": "isSimpleModule_iff, IsSimpleModule, IsSimpleModule.toIsSimpleOrder, isSimpleModule_iff_isAtom (Mathlib.RingTheory.SimpleModule.Basic)",
+   "date": "2026-10-10",
+   "verdict": "match: IsSimpleModule"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rn 'class IsSimpleModule\\|class IsSimpleOrder' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/",
+   "results": "RingTheory/SimpleModule/Basic.lean:60 class IsSimpleModule extends IsSimpleOrder (Submodule R M); Order/Atoms.lean:733 class IsSimpleOrder extends Nontrivial α with eq_bot_or_eq_top : ∀ a, a = ⊥ ∨ a = ⊤",
+   "date": "2026-10-10",
+   "verdict": "match: IsSimpleModule"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "IsSimpleModule",
+  "file": "Mathlib/RingTheory/SimpleModule/Basic.lean",
+  "line": 60,
+  "how": "exact: IsSimpleModule R M is IsSimpleOrder (Submodule R M), i.e. the submodule lattice is nontrivial (⊥ ≠ ⊤, so M ≠ 0) and every submodule is ⊥ or ⊤. Mathlib allows any ring R."
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-finite-length-module-simple-filtration",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "note": "Not the same notion as def-wf-simple-module (simple modules of an algebraic group, stable subspaces), which is why a separate node is created."
+}

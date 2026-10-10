@@ -1,0 +1,71 @@
+{
+ "id": "def-weil-pbc-module-length",
+ "kind": "definition",
+ "title": "Length of a module",
+ "statement": "Let $R$ be a ring and $M$ an $R$-module. The length $\\mathrm{length}_R(M)\\in\\{0,1,2,\\dots\\}\\cup\\{\\infty\\}$ is the supremum of the integers $n\\ge0$ for which there is a chain of $R$-submodules $0=M_0\\subset M_1\\subset\\cdots\\subset M_n=M$ with $M_{i-1}\\ne M_i$ for $i=1,\\dots,n$. Equivalently, it is the supremum of the numbers $n$ of proper inclusions in all strict chains $N_0\\subsetneq N_1\\subsetneq\\cdots\\subsetneq N_n$ of $R$-submodules of $M$ (a strict chain not starting at $0$ or not ending at $M$ is lengthened by adding $0$ below or $M$ on top, so the two suprema agree). $M$ has *finite length* if $\\mathrm{length}_R(M)<\\infty$.",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Algebra, Definition Tag 02LY (definition-length, line 12350), with the remark after it (supremum of lengths of chains of submodules)"
+ },
+ "stmt_deps": [],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "length of a module as supremum of lengths of chains of submodules",
+   "results": "Module.length, Module.coe_length, Module.length_submodule, Module.length_eq_coheight, Module.length_eq_height, Module.length_compositionSeries (Mathlib.RingTheory.Length)",
+   "date": "2026-10-10",
+   "verdict": "match: Module.length"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "length of a module over a ring, supremum of lengths of strict chains of submodules",
+   "results": "Module.length (def), Module.coe_length, Module.length_submodule, Module.length_eq_height (Mathlib.RingTheory.Length)",
+   "date": "2026-10-10",
+   "verdict": "match: Module.length"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -n 'def Module.length\\|lemma Module.coe_length\\|def krullDim' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/RingTheory/Length.lean ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/Order/KrullDimension.lean",
+   "results": "RingTheory/Length.lean:32 def Module.length : ℕ∞ := (Order.krullDim (Submodule R M)).unbot _; :35 Module.coe_length; Order/KrullDimension.lean:78 krullDim α := ⨆ (p : LTSeries α), p.length",
+   "date": "2026-10-10",
+   "verdict": "match: Module.length (sup of lengths of LTSeries = strict chains in the submodule lattice)"
+  },
+  {
+   "tool": "local_search",
+   "query": "Module.length_ne_top_iff (project root ~/weil-conjectures-slopmaster2)",
+   "results": "Module.length_ne_top_iff, Module.length_ne_top_iff_finiteDimensionalOrder (Mathlib/RingTheory/Length.lean); index: unavailable",
+   "date": "2026-10-10",
+   "verdict": "exists; finite length is Module.length R M ≠ ⊤"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "Module.length",
+  "file": "Mathlib/RingTheory/Length.lean",
+  "line": 32,
+  "how": "exact: Module.length R M : ℕ∞ is Order.krullDim (Submodule R M) (unbot), i.e. the supremum over all strict chains (LTSeries) of submodules of their number of proper inclusions, which is the second form of the statement; Stacks takes chains from 0 to M, the same supremum by the extension remark in the statement. Mathlib allows any (possibly noncommutative) ring R. Finite length is Module.length R M ≠ ⊤ (equivalently IsFiniteLength R M by Module.length_ne_top_iff, line 94)."
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-finite-length-module-simple-filtration",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1"
+}
