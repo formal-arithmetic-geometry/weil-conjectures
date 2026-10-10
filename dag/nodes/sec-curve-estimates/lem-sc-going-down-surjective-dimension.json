@@ -24,16 +24,54 @@
  "stmt_deps": [
   "def-weil-pbc-krull-dimension-ring"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "If $R=0$, then it has no prime ideals and $\\dim R=-\\infty$, so the conclusion is immediate. Otherwise, let $\\mathfrak p_0\\subsetneq\\cdots\\subsetneq\\mathfrak p_n$ be any finite strictly increasing chain of prime ideals of $R$. By surjectivity of $\\operatorname{Spec}S\\to\\operatorname{Spec}R$, choose a prime $\\mathfrak q_n$ of $S$ with $\\varphi^{-1}(\\mathfrak q_n)=\\mathfrak p_n$.",
+   "uses": [
+    "def-weil-pbc-krull-dimension-ring"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra, Lemma Tag 00OH (lemma-dimension-going-up), proof: choose a prime over the final member of a chain"
+   }
+  },
+  {
+   "text": "Apply going down successively to the inclusions $\\mathfrak p_{n-1}\\subsetneq\\mathfrak p_n,\\ldots,\\mathfrak p_0\\subsetneq\\mathfrak p_1$. This produces primes $\\mathfrak q_i\\subseteq\\mathfrak q_{i+1}$ with $\\varphi^{-1}(\\mathfrak q_i)=\\mathfrak p_i$. Each inclusion is strict, because equality would imply equal contractions while $\\mathfrak p_i\\subsetneq\\mathfrak p_{i+1}$. Thus $S$ has a strictly increasing prime chain of length $n$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra, Lemma Tag 00OH (lemma-dimension-going-up), proof: repeated going down and strictness from distinct contractions"
+   }
+  },
+  {
+   "text": "Every finite prime-chain length occurring in $R$ therefore occurs in $S$. Taking suprema of the chain lengths and using the definition of Krull dimension [def-weil-pbc-krull-dimension-ring] gives $\\dim R\\le\\dim S$ (and the same inequality is automatic in the $R=0$ case).",
+   "uses": [
+    "def-weil-pbc-krull-dimension-ring"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra, Lemma Tag 00OH (lemma-dimension-going-up), conclusion"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-krull-dimension-ring"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-tags-cited.tsv",
+  "place": "Algebra Lemma Tag 00OH; proof reconstructed from the cited chain argument because algebra.tex is unavailable locally"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
    "query": "going down and surjective spectrum imply Krull dimension inequality",
-   "results": "ringKrullDim and order-theoretic Krull-dimension declarations; no direct ring-spectrum declaration",
+   "results": "ringKrullDim_le_of_surjective, ringKrullDim_succ_le_of_surjective, PrimeSpectrum.topologicalKrullDim_eq_ringKrullDim, ringKrullDim_le_iff_height_le, ringKrullDim, Ideal.primeHeight_le_ringKrullDim (Mathlib/RingTheory/KrullDimension and related files); no direct going-down plus surjective-spectrum theorem",
    "date": "2026-10-11",
-   "verdict": "generalization: order-theoretic Krull dimension theorem requires strict-comonotonicity"
+   "verdict": "generalization: Krull-dimension and surjective-quotient results, but no going-down plus surjective-spectrum implication"
   },
   {
    "tool": "loogle",
@@ -58,10 +96,26 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-sc-faithfully-flat-local-dimension",
   "by": "worker",
   "date": "2026-10-10"
+ },
+ "split_report": {
+  "date": "2026-10-11",
+  "item": "lem-sc-going-down-surjective-dimension",
+  "worker": "stage1",
+  "summary": "Split Tag 00OH into the finite-chain proof: handle the zero ring, lift the top prime by spectrum surjectivity, recursively lift the chain by going down with strictness forced by distinct contractions, and take suprema using the Krull-dimension definition. No new nodes were needed; all nontrivial input is the item's stated hypotheses and the existing dimension definition.",
+  "blueprint": "Realizes the blueprint clause 'the going-down and surjective-spectrum implication in the lower-bound argument' of lem-sc-brauer-zero.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-gds2354",
+  "group": "H1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-gds2354 (reviewer sub-agent of L); spot-checked: C1: Step 1 uses the statement's Spec-surjectivity hypothesis, Step 2 the going-down property exactly as defined inline (p1⊆p2, q2 over p2 gives q1⊆q2 over p1), strictness from distinct contractions; Step 3 the supremum clause of def-weil-pbc-krull-dimension-ring. C4: consumer lem-sc-faithfully-flat-local-dimension supplies going down (lem-sc-flat-going-down, same wording) and surjectivity, and uses dim A<=dim B; same direction, item is for arbitrary ring maps so the local case is covered. D: matches Stacks 00OH chain argument, no cycle. Class b: no new nodes, nothing restates the consumer. Mathlib grep for going-down Krull-dim theorem: none. Note: second reading says created.item was corrected, but created.item stays lem-sc-faithfully-flat-local-dimension (correct, maintainer field)."
  }
 }

@@ -2550,3 +2550,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 20:43 L: merged deliver/G1/pqf-lem-locqf-fibre-discrete (reviewer FIX; first push; new nodes: 1)
 - 20:43 L: merged deliver/M1/lem-pc-projective-space-twist-cohomology (reviewer FIX; first push; new nodes: 2)
 - 20:43 L: merged deliver/G1/lem-pc-ringed-space-truncation-derived-limit (reviewer FIX+NODE(1); first push; new nodes: 2)
+- 20:44 L: merged deliver/H1/lem-sc-going-down-surjective-dimension (reviewer PASS; first push; new nodes: 0)
