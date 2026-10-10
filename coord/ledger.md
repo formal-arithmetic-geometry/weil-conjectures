@@ -1866,3 +1866,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 15:52 L: merged deliver/G1/lem-exc-etale-field-gsets (reviewer FIX; after a return; new nodes: 2)
 - 15:52 L: thm-constructible-serre accepted (target unit; 6 steps per 03RZ, 1 new Lean-closed node; statement made precise); lemma-constructible-flc-serre audit corrected to rests_on_sorry; def-constructible-stratification lead_note; HUMAN entry
 - 15:52 L: lem-weil-pbc-geometric-point-cohomology accepted (5 steps per 03QU/04JM, 0 new nodes, 2 tool uses copied; statement corrected E7); lem-kun-03qu-sep-closed attached to subsingleton_H_of_isSepClosed
+- 15:52 L: merged deliver/J1/lem-weil-pbc-sets-adjoint-continuous-restriction-adjunction (reviewer FIX; first push; new nodes: 0)

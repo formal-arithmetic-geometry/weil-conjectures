@@ -25,37 +25,60 @@
  ],
  "proof": [],
  "proof_deps": [],
- "proof_origin": null,
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/sites.tex",
+  "place": "Section Tag 00XW and Lemmas Tag 00XX, 09VQ"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
-   "query": "left adjoint induced by precomposition along a functor of sites and right adjoint precomposition along its adjoint",
-   "results": "CategoryTheory.Functor.sheafPullback and Functor.sheafAdjunctionContinuous; no declaration for the stated sheaves-of-sets localization adjunction",
+   "query": "precomposition with continuous functors between sites gives an adjunction on sheaves of sets; uniqueness of left adjoints",
+   "results": "CategoryTheory.Adjunction.sheafPushforwardContinuous; CategoryTheory.Adjunction.leftAdjointUniq and unit_leftAdjointUniq_hom_app",
    "date": "2026-10-10",
-   "verdict": "no match"
+   "verdict": "match: instantiate the coefficient category with Type and the site functors with lambda and beta"
   },
   {
    "tool": "leanfinder",
-   "query": "sheaves of sets precomposition along adjoint continuous functors is an adjunction",
-   "results": "Functor.sheafAdjunctionContinuous (Mathlib/CategoryTheory/Sites/Pullback.lean), only the generic continuous-functor construction; no localization statement with the unit formula",
+   "query": "sheaf-valued precomposition adjunction for an adjunction of continuous site functors",
+   "results": "Functor.sheafPushforwardContinuous and Adjunction.sheafPushforwardContinuous in Mathlib/CategoryTheory/Sites/Continuous.lean; Adjunction.leftAdjointUniq in Mathlib/CategoryTheory/Adjunction/Unique.lean",
    "date": "2026-10-10",
-   "verdict": "no match"
+   "verdict": "match: both clauses are direct specializations"
   },
   {
    "tool": "grep",
-   "query": "rg -n 'sheafAdjunctionContinuous|leftAdjointUniq|precomp.*sheaf' /home/ubuntu/weil-src-slopmaster2/.lake/packages/mathlib/Mathlib/CategoryTheory/Sites /home/ubuntu/weil-src-slopmaster2/.lake/packages/mathlib/Mathlib/Topology/Sheaves",
-   "results": "Generic sheafAdjunctionContinuous and Adjunction.leftAdjointUniq only; no statement for the sheaves-of-sets localization adjunction",
+   "query": "grep -n 'def Adjunction.sheafPushforwardContinuous' Mathlib/CategoryTheory/Sites/Continuous.lean; grep -n 'def leftAdjointUniq or theorem unit_leftAdjointUniq_hom_app' Mathlib/CategoryTheory/Adjunction/Unique.lean",
+   "results": "Continuous.lean:438 sheafPushforwardContinuous; Unique.lean:36 leftAdjointUniq and :53 unit_leftAdjointUniq_hom_app",
    "date": "2026-10-10",
-   "verdict": "no match"
+   "verdict": "match"
   }
  ],
- "mathlib_match": null,
- "status": "unsplit",
+ "mathlib_match": {
+  "declaration": "CategoryTheory.Adjunction.sheafPushforwardContinuous; CategoryTheory.Adjunction.leftAdjointUniq; CategoryTheory.Adjunction.unit_leftAdjointUniq_hom_app; CategoryTheory.Adjunction.homEquiv_unit",
+  "file": "Mathlib/CategoryTheory/Sites/Continuous.lean; Mathlib/CategoryTheory/Adjunction/Unique.lean; Mathlib/CategoryTheory/Adjunction/Basic.lean",
+  "how": "one declaration per clause. Adjunction clause: Adjunction.sheafPushforwardContinuous (Sites/Continuous.lean:438) with coefficient category A = Type, F = lambda, G = beta; the hypotheses that both precompositions preserve sheaves of sets are the instances Functor.IsContinuous (Continuous.lean:197, defined by: precomposition carries every sheaf of types to a sheaf). Its unit at P is (adj.op.whiskerLeft _).unit.app P.obj, whose component at W is P(epsilon_W), the displayed formula. Uniqueness clause: leftAdjointUniq (Adjunction/Unique.lean:36) applied to adj1 = (L -| beta^s), adj2 = (lambda^s -| beta^s) gives rho : L ~ lambda^s, and unit_leftAdjointUniq_hom_app (Unique.lean:53) is eta_G >> beta^s(rho_G) = unit_G, the displayed compatibility; uniqueness of rho because beta^s(rho_G) o eta_G = adj1.homEquiv(rho_G) (Adjunction.homEquiv_unit, Adjunction/Basic.lean:181) and homEquiv is a bijection."
+ },
+ "status": "mathlib",
  "created": {
   "item": "lem-weil-pbc-sets-etale-inverse-image-restriction",
   "by": "worker",
   "date": "2026-10-10"
  },
  "chapter": "sec-proper-base-change",
- "unit": "sk-thm-iff"
+ "unit": "sk-thm-iff",
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "lem-weil-pbc-sets-adjoint-continuous-restriction-adjunction",
+  "worker": "stage1",
+  "summary": "Verified that the sheaves-of-sets statement is a direct Mathlib specialization: sheafPushforwardContinuous gives precomposition lambda^s adjoint to beta^s, its unit is evaluation on the counit epsilon, and leftAdjointUniq with unit_leftAdjointUniq_hom_app gives the unique compatible isomorphism. Marked the node as a Mathlib leaf.",
+  "blueprint": "The item follows the localization argument in the blueprint ancestor lemma-weil-pbc-proper-strict-henselian-h0, specifically the inverse-image/restriction identification used in its localization step."
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-sar2",
+  "group": "J1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-sar2 (reviewer sub-agent of L); spot-checked: Item turned into a Mathlib leaf (no new nodes); source Stacks sites.tex Tags 00XX/09VQ. Statement checked against Mathlib clause by clause: Adjunction.sheafPushforwardContinuous (Sites/Continuous.lean:438) with A = Type gives lambda^s -| beta^s from lambda -| beta; the hypotheses 'precomposition carries sheaves of sets to sheaves' are exactly Functor.IsContinuous (Continuous.lean:197, op_comp_isSheaf_of_types); unit = (adj.op.whiskerLeft _).unit, component at W is G(epsilon_W): G(W) -> G(lambda beta W), variance checked. Uniqueness clause: leftAdjointUniq (Adjunction/Unique.lean:36) with adj1 = L's adjunction, adj2 = lambda^s's gives rho: L ~ lambda^s in the stated direction, unit_leftAdjointUniq_hom_app (Unique.lean:53) is the displayed compatibility; uniqueness from homEquiv_unit (Adjunction/Basic.lean:181) and bijectivity of homEquiv. Small case: identity site, lambda = beta = id, all maps identities. blueprint.from.node = ancestor lemma-weil-pbc-proper-strict-henselian-h0 verified with blueprint_refs ancestor. FIX: dag/nodes/sec-proper-base-change/lem-weil-pbc-sets-adjoint-continuous-restriction-adjunction.json: mathlib_match.how: named the lines read (438, 197, 36, 53) which it lacked (B6), and added the uniqueness clause's declaration homEquiv_unit (Basic.lean:181) to declaration/file/how (B8 one declaration per clause). Start Sat Oct 10 03:51:55 PM UTC 2026, end Sat Oct 10 03:52:33 PM UTC 2026.; 1 file(s) fixed by the reviewer"
+ }
 }
