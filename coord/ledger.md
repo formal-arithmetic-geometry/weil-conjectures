@@ -2014,3 +2014,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 16:38 L: def-pc-upper-shriek-right-adjoint source tag 0ATX -> 0A9E (reviewer R-usr)
 - 16:39 L: returned deliver/J1/lem-pc-grothendieck-ss-double-complex-model (reviewer RETURN: Re-push of 99edcbf15 reviewed by R-gd2. Return points 1 (the identification now cites the construction clause of thm-sp-)
 - 16:39 L: merged deliver/J1/lem-sc-boundary-cech-local-lifts (reviewer PASS; after a return; new nodes: 2)
+- 16:39 L: merged deliver/E1/lem-sc-brauer-zero (reviewer FIX; after a return; new nodes: 1)
