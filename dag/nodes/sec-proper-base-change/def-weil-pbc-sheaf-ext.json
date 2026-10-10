@@ -1,0 +1,76 @@
+{
+ "id": "def-weil-pbc-sheaf-ext",
+ "kind": "definition",
+ "title": "Sheaf Ext of sheaves of modules on a scheme",
+ "statement": "Let $X$ be a scheme [def-pc-scheme] and let $\\Mod(\\mathcal O_X)$ be the abelian category of sheaves of $\\mathcal O_X$-modules on the underlying topological space of $X$ [def-weil-sheaf-of-modules-category] (the site of open subsets of $X$, coverings the open coverings, with the sheaf of commutative rings $\\mathcal O_X$), $D(\\mathcal O_X)=D(\\Mod(\\mathcal O_X))$ its derived category [def-weil-abstract-derived-category], and $R\\mathcal Hom_{\\mathcal O_X}:D(\\mathcal O_X)^{\\mathrm{op}}\\times D(\\mathcal O_X)\\to D(\\mathcal O_X)$ the derived internal Hom [def-pur-derived-internal-hom]: $R\\mathcal Hom_{\\mathcal O_X}(K,L)=\\mathcal Hom^\\bullet(\\mathcal K^\\bullet,\\mathcal I^\\bullet)$ for a complex $\\mathcal K^\\bullet$ representing $K$ and a K-injective complex $\\mathcal I^\\bullet$ quasi-isomorphic to a complex representing $L$. For $K,L\\in D(\\mathcal O_X)$ and an integer $i$, the *$i$-th sheaf Ext* is the $\\mathcal O_X$-module\n\n$$\n\\mathcal Ext^i_{\\mathcal O_X}(K,L)\\;:=\\;\\mathcal H^i\\bigl(R\\mathcal Hom_{\\mathcal O_X}(K,L)\\bigr),\n$$\n\nthe $i$-th cohomology sheaf [def-weil-derived-cohomology-sheaves] of $R\\mathcal Hom_{\\mathcal O_X}(K,L)$. For $\\mathcal O_X$-modules $\\mathcal F,\\mathcal G$ one writes $\\mathcal Ext^i_{\\mathcal O_X}(\\mathcal F,\\mathcal G)=\\mathcal Ext^i_{\\mathcal O_X}(\\mathcal F[0],\\mathcal G[0])$, $\\mathcal F[0]$ the complex with $\\mathcal F$ in degree $0$ and $0$ elsewhere; it is functorial, contravariant in $\\mathcal F$ and covariant in $\\mathcal G$, through the functoriality of $R\\mathcal Hom_{\\mathcal O_X}$ and of $\\mathcal H^i$.",
+ "source": {
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Cohomology of Sheaves, Section Tag 0BQP (cohomology-section-ext, line 10995): $\\SheafExt^n(K,L)=H^n(R\\SheafHom(K,L))$ for $K,L\\in D(\\mathcal O_X)$ on a ringed space; $R\\SheafHom$ from Section Tag 08DH (cohomology-section-internal-hom, line 10543). Blueprint: literature/blueprint/master/blueprint/sec-proper-base-change/sk-thm-p1/def-pc-ext.md, last display ($\\mathcal Ext^i_{\\mathcal O_X}(F,G):=H^i\\mathcal Hom^\\bullet_{\\mathcal O_X}(F,G)$, $\\mathcal Hom^\\bullet$ the derived inner hom)."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-abstract-derived-category",
+  "def-pur-derived-internal-hom",
+  "def-weil-derived-cohomology-sheaves"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "sheaf Ext, cohomology sheaves of derived internal Hom of sheaves of modules",
+   "results": "CategoryTheory.Sheaf.H, Sheaf.cohomologyPresheafFunctor (Mathlib.CategoryTheory.Sites.SheafCohomology.Basic), CategoryTheory.sheafHom, sheafHom' (Mathlib.CategoryTheory.Sites.SheafHom), AlgebraicGeometry.Scheme.Modules.Hom, SheafOfModules.Hom.ext: no sheaf Ext, no derived internal Hom of modules",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "sheaf Ext: the i-th cohomology sheaf of R Hom between two sheaves of O_X-modules on a ringed space",
+   "results": "Sheaf.H, Sheaf.cohomologyPresheaf, cohomologyPresheafFunctor, instAddCommGroupH (SheafCohomology.Basic: global Ext from the constant sheaf, not a sheaf Ext), SheafOfModules.instAbelian, AlgebraicGeometry.Scheme.Modules.instAbelian",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "SheafOfModules, CategoryTheory.Abelian.Ext",
+   "results": "none",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rnE 'sheafExt|SheafExt|extSheaf|ExtSheaf|derivedInternalHom|RHom|internalExt' --include=*.lean ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib; ls Algebra/Category/ModuleCat/Sheaf/",
+   "results": "only Condensed/Discrete/Colimit.lean lanPresheafExt (an isomorphism lemma, unrelated); ModuleCat/Sheaf/ has Abelian, ChangeOfRings, Colimits, Free, Generators, Limits, Localization, LocallyFree, Pullback*, Pushforward*, Quasicoherent: no internal Hom, no derived internal Hom",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "merged_into": null,
+ "import_flags": [
+  "unreachable"
+ ],
+ "created": {
+  "by": "worker",
+  "item": "def-pc-ext",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "reviewed": "2026-10-10 L: definition checked against 0BQP via def-pur-derived-internal-hom; unreachable (no citer uses sheaf Ext)"
+}
