@@ -1943,3 +1943,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 16:16 L: returned deliver/H1/lemma-constructible-flc-serre (reviewer RETURN: 1. E3/E7: lemma-constructible-flc-serre step 2: the claim that the sheaf P of splittings has local sections, i.e. that a)
 - 16:16 L: merged deliver/G1/lem-sc-cech-comparison-natural (reviewer FIX+NODE(1); first push; new nodes: 2)
 - 16:17 L: HUMAN entry: blueprint torsor argument for extensions of finite locally constant sheaves is false for non-semisimple Lambda (reviewer R-fls); lead notes on lemma-constructible-flc-serre and lemma-constructible-torsor-trivialises
+- 16:17 L: merged deliver/C1/lem-sc-p1-graded-nakayama-generation (reviewer FIX; first push; new nodes: 0)
