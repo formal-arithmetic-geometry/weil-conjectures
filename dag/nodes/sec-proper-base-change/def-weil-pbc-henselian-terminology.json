@@ -3,24 +3,52 @@
  "blueprint": {
   "is": "def-weil-pbc-henselian-terminology",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "definition",
  "title": "Henselian terminology",
- "statement": "A pair $(A,I)$ consisting of a commutative ring and an ideal is *henselian*\nif, for every finite $A$-algebra $B$, every idempotent of $B/IB$ lifts\nuniquely to an idempotent of $B$. A local ring is *henselian* when its\nmaximal-ideal pair is henselian, and *strictly henselian* when it is\nhenselian and its residue field is separably closed. For\n$T=\\operatorname{Spec}A$ and an ideal $I$, write\n$T_0=\\operatorname{Spec}(A/I)$ for the closed subscheme.",
+ "statement": "A pair $(A,I)$ consisting of a commutative ring and an ideal is *henselian*\nif, for every finite $A$-algebra $B$, every idempotent of $B/IB$ lifts\nuniquely to an idempotent of $B$. A local ring is *henselian* when its\nmaximal-ideal pair is henselian, and *strictly henselian* when it is\nhenselian and its residue field is separably closed. For\n$T=\\operatorname{Spec}A$ and an ideal $I$, write\n$T_0=\\operatorname{Spec}(A/I)$ [def-weil-affine-spectrum] for the closed subscheme.",
  "source": {
   "document": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-thm-iff/def-weil-pbc-henselian-terminology.md",
-  "place": "node def-weil-pbc-henselian-terminology, order 1072"
+  "place": "node def-weil-pbc-henselian-terminology, order 1072; checked against Stacks more-algebra.tex Lemma Tag 09XI (lemma-characterize-henselian-pair), condition (3), equivalent to Definition Tag 09XE (definition-henselian-pair); algebra.tex Definition Tag 04GF (definition-henselian), strict henselian clause"
  },
  "stmt_deps": [
-  "def-weil-pbc-scheme-conventions"
+  "def-weil-pbc-scheme-conventions",
+  "def-weil-affine-spectrum"
  ],
  "proof": [],
  "proof_deps": [],
  "proof_origin": null,
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Henselian pair finite algebra bijection idempotents quotient ideal",
+   "results": "HenselianLocalRing.TFAE (Mathlib.RingTheory.Henselian) has the simple-root criterion for local rings; existsUnique_isIdempotentElem_eq_of_ker_isNilpotent (Mathlib.RingTheory.Idempotents) assumes a nilpotent kernel, not an arbitrary henselian pair",
+   "date": "2026-10-10",
+   "verdict": "no exact match for this idempotent-lifting definition"
+  },
+  {
+   "tool": "loogle",
+   "query": "HenselianRing",
+   "results": "HenselianRing and HenselianLocalRing in Mathlib.RingTheory.Henselian; HenselianRing.jac and HenselianRing.is_henselian give Jacobson-radical and simple-root conditions",
+   "date": "2026-10-10",
+   "verdict": "candidate only: equivalence with finite-algebra idempotent lifting is Stacks 09XI and is recorded in lem-weil-pbc-henselian-factorization-criterion"
+  },
+  {
+   "tool": "grep",
+   "query": "rg -n 'class HenselianRing|class HenselianLocalRing|idempotent' /home/ubuntu/SHEAF/project-20261007/lean/.lake/packages/mathlib/Mathlib/RingTheory/Henselian.lean and RingTheory/Idempotents.lean",
+   "results": "Mathlib/RingTheory/Henselian.lean:94-101 defines HenselianRing by Jacobson radical plus monic simple-root lifting; :108-111 defines HenselianLocalRing by simple-root lifting; :119-153 gives a local-root TFAE; no pair-level finite-algebra idempotent definition or equivalence found in those files",
+   "date": "2026-10-10",
+   "verdict": "no exact match; source checkout is Mathlib c32e1ec, so the comparison node remains necessary"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "mathlib_candidate": {
+  "declaration": "HenselianRing",
+  "file": "Mathlib/RingTheory/Henselian.lean:94",
+  "reason": "It uses the equivalent simple-root criterion with the Jacobson-radical hypothesis; Stacks 09XI (1) iff (3), already represented by lem-weil-pbc-henselian-factorization-criterion, is required to identify it with this node's definition."
+ },
+ "status": "split",
  "merged_into": null,
  "import_flags": [],
  "blueprint_kind": "definition",
@@ -44,5 +72,19 @@
   }
  },
  "chapter": "sec-proper-base-change",
- "unit": "sk-thm-iff"
+ "unit": "sk-thm-iff",
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "def-weil-pbc-henselian-terminology",
+  "worker": "stage1",
+  "summary": "The imported definition agrees with the master blueprint and the slopmaster2 sketch: its pair clause is Stacks 09XI(3), equivalent to 09XE, and its strict local clause agrees with 04GF. The direct spectrum dependency is now cited. No new node is needed: the pair/root comparison already has a DAG node, while finite algebra, idempotent, local ring and separably closed field are basic Mathlib notions. Mathlib's HenselianRing is a candidate rather than an exact definitional match. The done branch has no standalone sorry-free declaration of this entire definition.",
+  "blueprint": "Master node def-weil-pbc-henselian-terminology, definition's first sentence (pair), second sentence (henselian and strictly henselian local rings), and final sentence (T_0); this definition has no blueprint proof steps."
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "group": "E1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed by the lead of E1; spot-checked by L: L: definition checked against 09XI (3)/09XE/04GF"
+ }
 }
