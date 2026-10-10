@@ -1,0 +1,72 @@
+{
+ "id": "lem-weil-pbc-vector-space-dual-separates",
+ "kind": "statement",
+ "title": "A nonzero vector of a vector space is not killed by some linear form",
+ "statement": "Let $F$ be a field, $V$ an $F$-vector space and $v\\in V$ with $v\\ne0$. Then there is an $F$-linear map $\\varphi:V\\to F$ with $\\varphi(v)\\ne0$.",
+ "source": {
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "used without proof in More on Algebra, proof of Lemma Tag 07PH (lemma-find-D): 'Thus we can choose a K'-derivation D' : L -> L with D'(f) != 0' (a nonzero element of the L-vector space Omega_{L/K'} and the universal property of differentials)"
+ },
+ "stmt_deps": [],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "nonzero vector in a vector space has a linear functional not vanishing on it",
+   "results": "SeparatingDual.exists_ne_zero (topological), Module.exists_dual_forall_apply_ne_zero (Mathlib.Algebra.Module.Submodule.Union, infinite field), Module.Projective.exists_dual_eq_one (Mathlib.LinearAlgebra.Dual.Lemmas)",
+   "date": "2026-10-10",
+   "verdict": "match: Module.Projective.exists_dual_ne_zero / exists_dual_eq_one"
+  },
+  {
+   "tool": "loogle",
+   "query": "Module.Dual, _ ≠ 0 → ∃ f, _ ≠ 0",
+   "results": "Module.Projective.exists_dual_ne_zero (Mathlib.LinearAlgebra.Dual.Lemmas), RootPairing.exists_coroot_ne",
+   "date": "2026-10-10",
+   "verdict": "match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rn 'exists_dual_ne_zero\\|exists_dual_eq_one' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/LinearAlgebra; sed -n 195,216p ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/LinearAlgebra/Dual/Lemmas.lean; grep -n of_divisionRing ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/LinearAlgebra/Basis/VectorSpace.lean; grep -n 'Projective.of_free' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/Algebra/Module/Projective.lean",
+   "results": "Module.Projective.exists_dual_ne_zero (LinearAlgebra/Dual/Lemmas.lean:197-203), Module.forall_dual_apply_eq_zero_iff (205-210), instance Module.Free.of_divisionRing (LinearAlgebra/Basis/VectorSpace.lean:156), instance Module.Projective.of_free (Algebra/Module/Projective.lean:161)",
+   "date": "2026-10-10",
+   "verdict": "match"
+  },
+  {
+   "tool": "local_search",
+   "query": "Module.Projective.exists_dual_ne_zero",
+   "results": "Module.Projective.exists_dual_ne_zero in .lake/packages/mathlib/Mathlib/LinearAlgebra/Dual/Lemmas.lean",
+   "date": "2026-10-10",
+   "verdict": "match"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "Module.Projective.exists_dual_ne_zero",
+  "file": "Mathlib/LinearAlgebra/Dual/Lemmas.lean",
+  "how": "specializes in one line: lines 196-203 state, for a semiring R and a projective R-module V, that x != 0 gives f : Module.Dual R V with f x != 0; take R = F; V is projective by the instances Module.Free.of_divisionRing (Mathlib/LinearAlgebra/Basis/VectorSpace.lean line 156) and Module.Projective.of_free (Mathlib/Algebra/Module/Projective.lean line 161)",
+  "line": 196
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-derivation-nonzero-on-non-pth-power",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lead_note": "L 2026-10-10: Mathlib leaf (Module.Projective.exists_dual_ne_zero, Dual/Lemmas.lean:196-203, with the free/projective instances for vector spaces); lines verified."
+}

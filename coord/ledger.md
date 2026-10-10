@@ -902,3 +902,5 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 05:15 L: reviewed lem-weil-pbc-smooth-retract-standard-smooth (14 steps, +07CG, +00R7, +00R4, +00OU nodes, +07CF leaf): accepted. Stage-3 notes: improve-presentation (07CE) weaker than what the 07CG node's split needs; lem-exc-etale-jacobian-presentation (00U9) overlaps step 13.
 - 05:16 L: reviewed lem-weil-pbc-finite-subalgebra-fraction-field (5 steps, no new node): accepted.
 - 05:17 L: reviewed lem-weil-pbc-purely-inseparable-integral-prime-unique (3 steps, +00GQ lying-over leaf): accepted. Stage-3 note: pqf-lem-lying-over duplicates the new leaf.
+- 05:18 L: reviewed lem-weil-pbc-derivation-nonzero-on-non-pth-power (6 steps, +7 nodes: 07NA, 031W, 07P1/2, 07P5, 07P4, 07PE last sentence, dual-separates leaf): accepted; merged the duplicate lem-weil-pbc-find-derivation-not-pth-power (same statement, 07PH) into it: citer formally-smooth-complete-local-regular repointed, node deleted.
+- 05:18 L: reviewed lem-weil-pbc-radicial-prime-unique-degree-p (5 steps, no new node; lying-over citation repointed to the new 00GQ leaf): accepted.
