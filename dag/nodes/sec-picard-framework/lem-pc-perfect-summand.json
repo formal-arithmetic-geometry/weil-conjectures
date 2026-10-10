@@ -24,9 +24,62 @@
   "def-pc-derived-category",
   "def-pc-perfect-complex"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "By [lem-pc-perfect-pseudo-coherent-locally-finite-tor], the perfect object K is pseudo-coherent and, on a neighbourhood of every point, has Tor amplitude in some interval [a,b].",
+   "uses": [
+    "lem-pc-perfect-pseudo-coherent-locally-finite-tor"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/cohomology.tex",
+    "place": "Tag 08CQ (cohomology-lemma-perfect), implication (1) => (2)"
+   }
+  },
+  {
+   "text": "The direct-summand decomposition and [lem-pc-pseudo-coherent-summand] imply that L (and similarly M) is pseudo-coherent.",
+   "uses": [
+    "lem-pc-pseudo-coherent-summand"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/cohomology.tex",
+    "place": "Tag 08CE (pseudo-coherent complexes are closed under direct summands)"
+   }
+  },
+  {
+   "text": "On each neighbourhood from Step 1, the Tor-amplitude bound for K passes to the direct summand L (and M) by the additivity and direct-summand statement of Tag 08CK: tensoring with any module gives a direct-sum decomposition, so vanishing outside [a,b] is inherited by each summand.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/cohomology.tex",
+    "place": "Tag 08CK (finite Tor dimension is preserved by direct summands)"
+   }
+  },
+  {
+   "text": "On each such neighbourhood, L is pseudo-coherent and has finite Tor dimension, so [lem-pc-pseudo-coherent-finite-tor-perfect] makes L perfect there. Perfectness is local by [def-pc-perfect-complex], hence L is perfect on X; the same argument gives the conclusion for M.",
+   "uses": [
+    "lem-pc-pseudo-coherent-finite-tor-perfect",
+    "def-pc-perfect-complex"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/cohomology.tex",
+    "place": "Tag 08CS (lemma-summands-perfect), proof, using Tag 08CQ"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-perfect-pseudo-coherent-locally-finite-tor",
+  "lem-pc-pseudo-coherent-summand",
+  "lem-pc-pseudo-coherent-finite-tor-perfect",
+  "def-pc-perfect-complex"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Tag 08CS (lemma-summands-perfect)"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -51,12 +104,27 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-pc-perfect-thick-closure",
   "by": "worker",
   "date": "2026-10-10"
  },
  "chapter": "sec-picard-framework",
- "unit": "sk-thm-picard-duality"
+ "unit": "sk-thm-picard-duality",
+ "split_report": {
+  "date": "2026-10-11",
+  "item": "lem-pc-perfect-summand",
+  "worker": "stage1",
+  "summary": "Repaired the invalid degreewise-idempotent argument by following Stacks Tag 08CS through Tag 08CQ: perfectness gives pseudo-coherence and locally finite Tor dimension, pseudo-coherence passes to direct summands by Tag 08CE, Tor amplitude passes to summands by Tag 08CK, and Tag 08CQ recovers local perfectness. Added the statement-only 08CE node.",
+  "blueprint": "Realizes the proper-flat support proof clause of lem-sc-finite-duality concerning the perfect object of the thick closure and the perfect cone."
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-psm2850",
+  "group": "C1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-psm2850 (reviewer sub-agent of L); spot-checked: Return of R-psm2744 repaired along 08CS route: Step1 cites existing lem-pc-perfect-pseudo-coherent-locally-finite-tor (08CQ (1)=>(2), no duplicate added); Step2 new node lem-pc-pseudo-coherent-summand states 08CE pseudo-coherent case exactly (scheme specialization), no other 08CE node on sheaf-dag, not class b/c/d (08CE proof uses cone lemma + induction), searches recorded; Step3 08CK elementary (tensor/H^i additive on the open U), naming its tag is allowed, so preflight note is fine; Step4 hypotheses of lem-pc-pseudo-coherent-finite-tor-perfect with S=U met (pseudo-coherence restricts by local def), locality by def-pc-perfect-complex. Statement matches lem-pc-perfect-thick-closure (2) (C4). No fault missed by the second reading."
+ }
 }
