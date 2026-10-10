@@ -2248,3 +2248,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 18:29 L: merged deliver/G1/lem-pc-derived-direct-image-preserves-qcoh (reviewer FIX+NODE(1); first push; new nodes: 1)
 - 18:30 L: merged deliver/C1/def-weil-pbc-site-extension-by-zero-presheaf (reviewer FIX; first push; new nodes: 0)
 - 18:30 L: returned deliver/E1/def-weil-pbc-etale-sheaves (reviewer RETURN: Reviewer R-des1828 (head 2e4274778). 1. D (cycle, five citations): the statement cites lem-weil-pbc-torsion-sheaf-charac)
+- 18:30 L: returned deliver/C1/lem-sc-qcoh-acyclic-derived-pushforward-cohomology (reviewer RETURN: 1. E (missing hypothesis, item and new node lem-sc-qcoh-acyclic-derived-sections-comparison): Step 1 says R^p f_*F=0 'sa)
