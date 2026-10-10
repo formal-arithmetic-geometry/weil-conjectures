@@ -1,8 +1,8 @@
 # Work queue
 
-852 items; claim with `tools/claim.py next <group> [--stage N]`.
+853 items; claim with `tools/claim.py next <group> [--stage N]`.
 
-## Stage 1: nodes to split (372)
+## Stage 1: nodes to split (370)
 
 | node | distance to a target | Lean state on the done branch |
 |---|---|---|
@@ -25,12 +25,11 @@
 | `lem-weil-pbc-dimension-inequality-quasi-finite` | 1016 | none |
 | `lem-weil-pbc-dimension-preserved-field-extension` | 1016 | none |
 | `lem-weil-pbc-direct-sum-extension-assembly` | 1016 | none |
-| `lem-weil-pbc-flat-tor-ideal-criterion` | 1016 | none |
 | `lem-weil-pbc-projective-dimension-ext-characterization` | 1016 | none |
 | `lem-weil-pbc-tor-one-surjective-flat-middle` | 1016 | none |
 | `lem-weil-pbc-torsion-hom-flat-comparison` | 1016 | none |
 | `lem-weil-pbc-triangular-change-of-basis` | 1016 | none |
-| `lem-weil-pbc-cyclic-extension-cocycle` | 1017 | none |
+| `lem-weil-pbc-tor-symmetry` | 1017 | none |
 | `lem-weil-pbc-dim-one-residue-field-extensions-finite` | 1018 | none |
 | `lem-weil-pbc-injective-acyclicity-bounded-below` | 2002 | sorry_here |
 | `lem-weil-pbc-property-implies-acyclicity` | 2003 | none |
@@ -58,7 +57,6 @@
 | `lem-galois-aut-profinite` | 3006 | none |
 | `lem-galois-inverse-image-representable` | 3006 | none |
 | `lem-galois-pi1-finite-etale-image-stabilizer` | 3006 | none |
-| `lem-pc-presheaf-change-of-rings-adjunction` | 3006 | none |
 | `lem-sc-flat-base-change-coherent` | 3006 | sorry_here |
 | `lem-weil-pbc-hypercover-finite-simplex-lifting` | 3006 | none |
 | `lem-weil-pbc-hypercover-free-resolution` | 3006 | none |
@@ -379,7 +377,7 @@
 | `def-exc-jacobian-presentation` | - | none |
 | `lem-zl-noether-normalization-dimension` | - | none |
 
-## Stage 2: nodes to state (480)
+## Stage 2: nodes to state (483)
 
 | node | distance to Mathlib | kind |
 |---|---|---|
@@ -426,6 +424,7 @@
 | `lem-pc-integral-radicial-surjective-universal-homeomorphism` | 1 | state |
 | `lem-pc-linear-pair-graded-finite` | 1 | state |
 | `lem-pc-linear-pair-morphism-finite` | 1 | state |
+| `lem-pc-presheaf-change-of-rings-adjunction` | 1 | state |
 | `lem-pc-projective-curve-linear-pair` | 1 | state |
 | `lem-sc-affine-open-finite-complement` | 1 | state |
 | `lem-sc-dim0-finite` | 1 | state |
@@ -496,6 +495,7 @@
 | `lem-weil-pbc-cover-module-exact` | 1 | state |
 | `lem-weil-pbc-criterion-flatness-fibre` | 1 | state |
 | `lem-weil-pbc-criterion-flatness-fibre-noetherian` | 1 | state |
+| `lem-weil-pbc-cyclic-extension-cocycle` | 1 | state |
 | `lem-weil-pbc-cyclic-extension-flat-descent` | 1 | state |
 | `lem-weil-pbc-degree-p-extension-regular` | 1 | state |
 | `lem-weil-pbc-depth-zero-injective-free-map-unit-minor` | 1 | state |
@@ -583,6 +583,7 @@
 | `lem-weil-pbc-flat-over-regular-with-regular-fibre` | 1 | state |
 | `lem-weil-pbc-flat-permanence` | 1 | state |
 | `lem-weil-pbc-flat-ses-kernel-flat` | 1 | state |
+| `lem-weil-pbc-flat-tor-ideal-criterion` | 1 | state |
 | `lem-weil-pbc-flat-under-regular` | 1 | state |
 | `lem-weil-pbc-formal-glueing-canonical-maps` | 1 | state |
 | `lem-weil-pbc-formal-glueing-complex-exact` | 1 | state |
@@ -864,7 +865,7 @@
 | `lem-weil-pbc-p1-field-dimension-one` | 4 | state |
 | `lem-weil-pbc-projective-space-zero-isomorphism` | 4 | state |
 
-Not open yet: 390 nodes that wait for stage 1, 899 nodes that wait for a statement dependency.
+Not open yet: 388 nodes that wait for stage 1, 899 nodes that wait for a statement dependency.
 
 ## Stage 3: modules to prove (0)
 
