@@ -3,7 +3,7 @@
  "blueprint": {
   "is": "lem-weil-pbc-noetherian-finite-components",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "Finitely many irreducible components",
@@ -15,10 +15,48 @@
  "stmt_deps": [],
  "proof": [],
  "proof_deps": [],
- "proof_origin": null,
- "mathlib_searches": [],
- "mathlib_match": null,
- "status": "unsplit",
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/properties.tex",
+  "place": "Properties, Lemma 0BA8; Mathlib theorem AlgebraicGeometry.finite_irreducibleComponents_of_isNoetherian"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A Noetherian scheme has finitely many irreducible components.",
+   "results": "AlgebraicGeometry.finite_irreducibleComponents_of_isNoetherian (Mathlib/AlgebraicGeometry/Noetherian); TopologicalSpace.NoetherianSpace.finite_irreducibleComponents (Mathlib/Topology/NoetherianSpace)",
+   "date": "2026-10-11",
+   "verdict": "match"
+  },
+  {
+   "tool": "loogle",
+   "query": "NoetherianSpace.finite_irreducibleComponents, irreducibleComponents",
+   "results": "0 hits; unknown identifier 'NoetherianSpace.finite_irreducibleComponents'",
+   "date": "2026-10-11",
+   "verdict": "no match for that spelling"
+  },
+  {
+   "tool": "grep",
+   "query": "finite_irreducibleComponents [Mathlib]",
+   "results": "0 hits from msearch grep; direct source check: Mathlib/AlgebraicGeometry/Noetherian.lean:364",
+   "date": "2026-10-11",
+   "verdict": "match (direct source check)"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A Noetherian scheme has finitely many irreducible components.",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-11",
+   "verdict": "unavailable"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "AlgebraicGeometry.finite_irreducibleComponents_of_isNoetherian",
+  "file": "Mathlib/AlgebraicGeometry/Noetherian.lean",
+  "line": 364,
+  "how": "exact: for a scheme X with [IsNoetherian X], (irreducibleComponents X).Finite"
+ },
+ "status": "mathlib",
  "merged_into": null,
  "import_flags": [
   "citation_only",
@@ -49,5 +87,20 @@
   }
  },
  "chapter": "sec-smooth-purity",
- "unit": "sk-prop-sf-cbc"
+ "unit": "sk-prop-sf-cbc",
+ "split_report": {
+  "date": "2026-10-11",
+  "item": "lem-weil-pbc-noetherian-finite-components",
+  "worker": "stage1",
+  "summary": "The item is a Mathlib leaf. Mathlib's scheme-level theorem finite_irreducibleComponents_of_isNoetherian states exactly that a Noetherian scheme has finitely many irreducible components; its proof is the topological NoetherianSpace theorem and the required instance. No new nodes were needed.",
+  "blueprint": "Realizes the blueprint sentence 'Omitted; the statement is already in Mathlib.'"
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-nfc2441",
+  "group": "J1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-nfc2441 (reviewer sub-agent of L); spot-checked: Read Mathlib/AlgebraicGeometry/Noetherian.lean:362-365 (slopmaster2 Mathlib): AlgebraicGeometry.finite_irreducibleComponents_of_isNoetherian [IsNoetherian X] : (irreducibleComponents X).Finite, tagged @[stacks 0BA8]; exact leaf, line 364 correct, instance inferred (B8 ok). sorryfree.py: no slopmaster2 declaration (B10 n/a). Stacks 0BA8 matches. No fault found; nothing to repair. Note: second reading claims the source was changed to Stacks 0BA8 but the node at head keeps the imported blueprint path (harmless)."
+ }
 }
