@@ -12,9 +12,113 @@
   "def-weil-pbc-mv-polynomial-ring",
   "def-weil-pbc-relative-global-complete-intersection"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "(The algebra $C_0$ with retraction and a presentation of free conormal module.) By [lem-weil-pbc-improve-presentation-smooth-conormal-free] applied to the smooth $R$-algebra $A$ there are an $A$-algebra $C_0$ with $A\\to C_0$ smooth, an $A$-algebra map $\\rho:C_0\\to A$ with $\\rho\\circ(A\\to C_0)=\\mathrm{id}_A$, and a surjective $R$-algebra map $R[y_1,\\dots,y_m]\\to C_0$ whose kernel $I$ has $I/I^2$ free over $C_0$. Since $R\\to A$ and $A\\to C_0$ are smooth, $R\\to C_0$ is smooth [lem-weil-pbc-smooth-ring-map-base-change-composition](2); in particular $C_0$ is a finitely presented $R$-algebra (condition (i) of [def-weil-pbc-smooth-ring-map]) [def-weil-pbc-finitely-presented-algebra].",
+   "uses": [
+    "lem-weil-pbc-improve-presentation-smooth-conormal-free",
+    "lem-weil-pbc-smooth-ring-map-base-change-composition",
+    "def-weil-pbc-smooth-ring-map",
+    "def-weil-pbc-finitely-presented-algebra"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/smoothing.tex",
+    "place": "Smoothing Ring Maps, proof of Lemma Tag 07CG (lemma-syntomic-complete-intersection), line 578 ('Apply Lemma 07CE to get A -> C') and lines 582-583 (R -> C is a composition of a syntomic and a smooth ring map; here both are smooth)"
+   }
+  },
+  {
+   "text": "(The presentation with conormal basis; clause (2).) By [lem-weil-pbc-conormal-free-presentation-basis] (Stacks 07CF) applied to the finitely presented $R$-algebra $S=C_0$ and the presentation of step 1, there are $n,c\\ge0$, $f_1,\\dots,f_c\\in R[x_1,\\dots,x_n]$ [def-weil-pbc-mv-polynomial-ring] and an isomorphism of $R$-algebras $\\psi:C:=R[x_1,\\dots,x_n]/J\\xrightarrow{\\sim}C_0$, $J=(f_1,\\dots,f_c)$, such that the $C$-module $J/J^2$ is free with basis $f_1\\bmod J^2,\\dots,f_c\\bmod J^2$. This is clause (2). Moreover $R\\to C$ is smooth: it is $R\\to C_0$ followed by the $R$-algebra isomorphism $\\psi^{-1}$, and the three conditions of [def-weil-pbc-smooth-ring-map] (finite presentation, $H_1(L_{C/R})=0$, $\\Omega_{C/R}$ finite projective) are carried by $\\psi$ to the same conditions for $C_0$, since the canonical presentation, the naive cotangent complex and $\\Omega$ of $C$ are mapped isomorphically onto those of $C_0$ by $\\psi$ (they are defined from the $R$-algebra structure alone).",
+   "uses": [
+    "lem-weil-pbc-conormal-free-presentation-basis",
+    "def-weil-pbc-mv-polynomial-ring",
+    "def-weil-pbc-smooth-ring-map"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/smoothing.tex",
+    "place": "Smoothing Ring Maps, proof of Lemma Tag 07CG (lemma-syntomic-complete-intersection), lines 579-580 ('By Algebra, Lemma 07CF we can write C = R[x_1..x_n]/(f_1..f_c) with f_i mapping to a basis of J/J^2'), with Algebra Lemma Tag 07CF (lemma-huber, algebra.tex line 36520)"
+   }
+  },
+  {
+   "text": "(The maps $\\sigma,\\pi$; clause (3).) Put $\\sigma=\\psi^{-1}\\circ(A\\to C_0):A\\to C$ and $\\pi=\\rho\\circ\\psi:C\\to A$, homomorphisms of $R$-algebras (all maps are $R$-algebra maps, $A\\to C_0$ and $\\rho$ being $A$-algebra maps). Then $\\pi\\circ\\sigma=\\rho\\circ\\psi\\circ\\psi^{-1}\\circ(A\\to C_0)=\\rho\\circ(A\\to C_0)=\\mathrm{id}_A$. With $C$ an $A$-algebra via $\\sigma$, $\\psi$ is an isomorphism of $A$-algebras $C\\to C_0$ (since $\\psi\\circ\\sigma=(A\\to C_0)$), so, exactly as in step 2 with $A$ in place of $R$, the smoothness of $A\\to C_0$ (step 1) gives that $C$ is a smooth $A$-algebra via $\\sigma$ [def-weil-pbc-smooth-ring-map]. This is clause (3).",
+   "uses": [
+    "def-weil-pbc-smooth-ring-map"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/smoothing.tex",
+    "place": "Smoothing Ring Maps, Lemma Tag 07CG (lemma-syntomic-complete-intersection), lines 568-570 ('a smooth R-algebra map A -> C with a retraction'), transported along the isomorphism of step 2"
+   }
+  },
+  {
+   "text": "(The rank of $\\Omega_{C/R}$ at every point.) Apply [lem-weil-pbc-smooth-localization-conormal-split] to $P=R[x_1,\\dots,x_n]$, the ideal $J$, $C=P/J$ and $a=1$ ($C_1=C$ is smooth over $R$ by step 2): $J/J^2\\oplus\\Omega_{C/R}\\cong C^{\\oplus n}$ as $C$-modules [def-weil-pbc-kahler-differentials]. By step 2, $J/J^2\\cong C^{\\oplus c}$, so $\\Omega_{C/R}\\oplus C^{\\oplus c}\\cong C^{\\oplus n}$. Let $Q\\subset C$ be a prime ideal with residue field $\\kappa(Q)$ [def-weil-pbc-localization-at-prime]; applying $-\\otimes_C\\kappa(Q)$, which commutes with finite direct sums, gives $(\\Omega_{C/R}\\otimes_C\\kappa(Q))\\oplus\\kappa(Q)^{c}\\cong\\kappa(Q)^{n}$, so $\\Omega_{C/R}\\otimes_C\\kappa(Q)$ is a $\\kappa(Q)$-vector space of dimension $n-c$ (in particular $n\\ge c$ if $C\\neq0$).",
+   "uses": [
+    "lem-weil-pbc-smooth-localization-conormal-split",
+    "def-weil-pbc-kahler-differentials",
+    "def-weil-pbc-localization-at-prime"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/smoothing.tex",
+    "place": "Smoothing Ring Maps, proof of Lemma Tag 07CH (lemma-smooth-standard-smooth), lines 606-617 (the split sequence 0 -> (+) C f_j -> (+) C dx_i -> Omega_{C/R} -> 0 for this C); used here in place of Algebra Lemma 00SC (see proof_origin)"
+   }
+  },
+  {
+   "text": "(Every point of a fibre has local dimension $n-c$.) Let $\\mathfrak p\\subset R$ be a prime, $k=\\kappa(\\mathfrak p)$ [def-weil-pbc-localization-at-prime] and $T=C\\otimes_R k$ the fibre ring, a $k$-algebra via $\\lambda\\mapsto1\\otimes\\lambda$, generated as a $k$-algebra by the finitely many elements $\\bar x_i\\otimes1$ (as $C$ is generated over $R$ by the $\\bar x_i$). (i) $k\\to T$ is smooth by [lem-weil-pbc-smooth-ring-map-base-change-composition](1) (step 2), hence smooth at every prime $\\mathfrak n\\subset T$ (take $g=1$ in [def-weil-pbc-singular-ideal]). (ii) $\\Omega_{T/k}\\cong T\\otimes_C\\Omega_{C/R}$ as $T$-modules [lem-weil-pbc-kahler-differentials-base-change]. For a prime $\\mathfrak n\\subset T$ with inverse image $Q\\subset C$, the map $C\\to T\\to\\kappa(\\mathfrak n)$ factors through $\\kappa(Q)$, so $\\Omega_{T/k}\\otimes_T\\kappa(\\mathfrak n)\\cong\\Omega_{C/R}\\otimes_C\\kappa(\\mathfrak n)\\cong(\\Omega_{C/R}\\otimes_C\\kappa(Q))\\otimes_{\\kappa(Q)}\\kappa(\\mathfrak n)$ has $\\kappa(\\mathfrak n)$-dimension $n-c$ by step 4. (iii) By [lem-weil-pbc-smooth-over-field-dimension-differentials], applied to the finitely generated $k$-algebra $T$ smooth at $\\mathfrak n$, the Krull dimension of $\\operatorname{Spec}T$ at the point $\\mathfrak n$ [def-kun-topological-dimension-at-point] is $\\dim_{\\mathfrak n}(\\operatorname{Spec}T)=n-c$, for every prime $\\mathfrak n$ of $T$.",
+   "uses": [
+    "def-weil-pbc-localization-at-prime",
+    "lem-weil-pbc-smooth-ring-map-base-change-composition",
+    "def-weil-pbc-singular-ideal",
+    "lem-weil-pbc-kahler-differentials-base-change",
+    "lem-weil-pbc-smooth-over-field-dimension-differentials",
+    "def-kun-topological-dimension-at-point"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/smoothing.tex",
+    "place": "Smoothing Ring Maps, proof of Lemma Tag 07CG (lemma-syntomic-complete-intersection), lines 584-586 ('The dimension of the fibres is n - c by Algebra, Lemma 00SC'); for smooth fibres the dimension at a point is the rank of Omega, Algebra Lemma Tag 00TT (lemma-characterize-smooth-over-field)"
+   }
+  },
+  {
+   "text": "(The fibres have dimension $n-c$; clause (1).) Let $\\mathfrak p$, $T$ be as in step 5 with $T\\neq0$, so $\\operatorname{Spec}T$ [def-weil-affine-spectrum] is nonempty. By [lem-weil-pbc-dimension-supremum-local-dimensions] the Krull dimension [def-kun-topological-krull-dimension] of the topological space $\\operatorname{Spec}T$ is $\\sup_{\\mathfrak n}\\dim_{\\mathfrak n}(\\operatorname{Spec}T)$, a supremum of the nonempty family of values all equal to $n-c$ (step 5), hence equals $n-c$. As $T=(R[x_1,\\dots,x_n]/(f_1,\\dots,f_c))\\otimes_R\\kappa(\\mathfrak p)$ is exactly the fibre ring in [def-weil-pbc-relative-global-complete-intersection], $C=R[x_1,\\dots,x_n]/(f_1,\\dots,f_c)$ is a relative global complete intersection over $R$. This is clause (1), and with steps 2 and 3 the lemma is proved.",
+   "uses": [
+    "def-weil-affine-spectrum",
+    "lem-weil-pbc-dimension-supremum-local-dimensions",
+    "def-kun-topological-krull-dimension",
+    "def-weil-pbc-relative-global-complete-intersection"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/smoothing.tex",
+    "place": "Smoothing Ring Maps, proof of Lemma Tag 07CG (lemma-syntomic-complete-intersection), lines 584-586, with Topology Lemma Tag 0B7I (lemma-dimension-supremum-local-dimensions, topology.tex line 1428) and Algebra Definition Tag 00SP (definition-relative-global-complete-intersection, algebra.tex line 36506)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-improve-presentation-smooth-conormal-free",
+  "lem-weil-pbc-smooth-ring-map-base-change-composition",
+  "def-weil-pbc-smooth-ring-map",
+  "def-weil-pbc-finitely-presented-algebra",
+  "lem-weil-pbc-conormal-free-presentation-basis",
+  "def-weil-pbc-mv-polynomial-ring",
+  "lem-weil-pbc-smooth-localization-conormal-split",
+  "def-weil-pbc-kahler-differentials",
+  "def-weil-pbc-localization-at-prime",
+  "def-weil-pbc-singular-ideal",
+  "lem-weil-pbc-kahler-differentials-base-change",
+  "lem-weil-pbc-smooth-over-field-dimension-differentials",
+  "def-kun-topological-dimension-at-point",
+  "def-weil-affine-spectrum",
+  "lem-weil-pbc-dimension-supremum-local-dimensions",
+  "def-kun-topological-krull-dimension",
+  "def-weil-pbc-relative-global-complete-intersection"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/smoothing.tex",
+  "place": "Smoothing Ring Maps, Lemma Tag 07CG (lemma-syntomic-complete-intersection, line 567) and its proof (lines 577-588), smooth case. Steps 1-3 follow the proof (07CE, then 07CF, transported to the retraction). Steps 4-6 prove the fibre dimension n - c; Stacks gets it from Algebra Lemma 00SC (lemma-lci) applied to the lci fibres, which would need the base change of the conormal module J/J^2 to the fibres; for smooth R -> A the fibres are smooth and the rank of Omega (Algebra 00TT) gives the same number with nodes that exist, using the split conormal sequence exactly as the proof of Smoothing Lemma 07CH (lines 606-617) does for this C."
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -36,10 +140,24 @@
    "results": "only a docstring mention in Extension/Presentation/Basic.lean:103 ('is a complete intersection'); no notion of relative global complete intersection in Mathlib; IsStandardSmooth hits are composition and descent lemmas (RingHom/StandardSmooth.lean:94-110, Smooth/NoetherianDescent.lean:277)",
    "date": "2026-10-10",
    "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "Algebra.Smooth, SymmetricAlgebra ; Algebra.Smooth, Ideal.Cotangent, Module.Free",
+   "results": "none (both queries empty)",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "smooth algebra is a retract of a global complete intersection with conormal module free on the generators",
+   "results": "Algebra.Smooth, Algebra.Smooth.mk, Algebra.FormallySmooth.exists_kerProj_comp_eq_id, Algebra.FormallySmooth.iff_split_surjection, Algebra.FormallySmooth.iff_split_injection, Algebra.FormallySmooth.iff_injective_lTensor_residueField, Algebra.IsStandardSmooth: no relative global complete intersection in Mathlib",
+   "date": "2026-10-10",
+   "verdict": "no match: not a Mathlib leaf (B8)"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "worker",
@@ -59,5 +177,12 @@
   }
  },
  "chapter": "sec-proper-base-change",
- "unit": "sk-thm-p1"
+ "unit": "sk-thm-p1",
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "lem-weil-pbc-smooth-retract-relative-global-complete-intersection",
+  "worker": "stage1",
+  "summary": "Not a Mathlib leaf: Mathlib has no relative global complete intersection, and no result giving a smooth A-algebra with a retraction (LeanSearch, LeanFinder, Loogle, grep recorded). Split along Stacks 07CG's proof in the smooth case into six steps: (1) the new node lem-weil-pbc-improve-presentation-smooth-conormal-free (Stacks 07CE clause (1) at a = 1 for smooth A; the existing lem-weil-pbc-improve-presentation states only clause (2), C_a smooth over R with Omega free, and not C smooth over A or the free conormal, so it could not be cited); (2) Huber's lemma 07CF (existing leaf lem-weil-pbc-conormal-free-presentation-basis) gives the presentation with the f_j a basis of J/J^2: clause (2); (3) sigma, pi transported along the isomorphism: clause (3); (4)-(6) fibre dimension n - c: split conormal sequence (existing lem-weil-pbc-smooth-localization-conormal-split, a = 1) gives rank Omega_{C/R} = n - c at every point, base change to the fibre (existing leaves), Algebra 00TT (existing lem-weil-pbc-smooth-over-field-dimension-differentials) gives local dimension n - c, and the new node lem-weil-pbc-dimension-supremum-local-dimensions (Topology 0B7I) gives the dimension of the fibre: clause (1). The source's 00SC route is replaced inside the node by the Omega-rank route (fewer unproved facts; Stacks 00SC needs the conormal base change to the fibres, which no node gives). The three clauses are exactly what step 1 of the citer lem-weil-pbc-smooth-retract-standard-smooth uses. Tags 07CG, 07CE, 07CF, 07D0, 00SC, 00SP, 00TA, 0B7I verified in tags/tags."
+ },
+ "reviewed": "pass (L, 2026-10-10): 6 steps follow 07CG in the smooth case: 07CE clause (1) (new unsplit node) gives C_0 with retraction and free conormal module, Huber 07CF gives the presentation with conormal basis (clause 2), the maps transfer along the isomorphism (clause 3), and the fibre dimension n - c comes from the rank of Omega (split conormal sequence, 00TT) and dim = sup of local dimensions (new unsplit 0B7I node) rather than 00SC."
 }
