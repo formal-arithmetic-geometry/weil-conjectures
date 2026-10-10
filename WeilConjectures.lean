@@ -794,6 +794,7 @@ public import WeilConjectures.Mathlib.AlgebraicGeometry.AlgClosed.Basic
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Birational.RationalMap
 public import WeilConjectures.Mathlib.AlgebraicGeometry.ColimitsOver
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Cover.Open
+public import WeilConjectures.Mathlib.AlgebraicGeometry.Cover.QuasiCompact
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Fiber
 public import WeilConjectures.Mathlib.AlgebraicGeometry.FunctionField
 public import WeilConjectures.Mathlib.AlgebraicGeometry.GammaSpecAdjunction
@@ -1446,6 +1447,7 @@ public import WeilConjectures.SixFunctors.ProEtale.Adic.HomCoherence
 public import WeilConjectures.SixFunctors.ProEtale.Adic.InternalHom
 public import WeilConjectures.SixFunctors.ProEtale.Adic.InternalHomEvaluation
 public import WeilConjectures.SixFunctors.ProEtale.Adic.LisseInternalHom
+public import WeilConjectures.SixFunctors.ProEtale.Adic.LisseStalk
 public import WeilConjectures.SixFunctors.ProEtale.Adic.LowerStar
 public import WeilConjectures.SixFunctors.ProEtale.Adic.LowerStarComp
 public import WeilConjectures.SixFunctors.ProEtale.Adic.MayerVietoris
@@ -1512,6 +1514,7 @@ public import WeilConjectures.SixFunctors.ProEtale.TraceFormula.Pairing
 public import WeilConjectures.SixFunctors.ProEtale.TraceFormula.ProperPushforward
 public import WeilConjectures.SixFunctors.ProEtale.UpperLowerStar.Coherence
 public import WeilConjectures.SixFunctors.ProEtale.UpperLowerStar.Defs
+public import WeilConjectures.SixFunctors.ProEtale.UpperLowerStar.Detection
 public import WeilConjectures.SixFunctors.ProEtale.UpperLowerStar.GlobalSections
 public import WeilConjectures.SixFunctors.ProEtale.UpperLowerStar.GlobalSectionsMonoidal
 public import WeilConjectures.SixFunctors.ProEtale.UpperLowerStar.InternalHom
@@ -1564,6 +1567,7 @@ public import WeilConjectures.WeilSheaf.ProperCohomology
 public import WeilConjectures.WeilSheaf.Realizable
 public import WeilConjectures.WeilSheaf.Stalk
 public import WeilConjectures.WeilSheaf.StalkCharpoly
+public import WeilConjectures.WeilSheaf.StalkConstantTwist
 public import WeilConjectures.WeilSheaf.StalkFrobenius
 public import WeilConjectures.WeilSheaf.StalkFunctor
 public import WeilConjectures.WeilSheaf.StalkMonoidal
