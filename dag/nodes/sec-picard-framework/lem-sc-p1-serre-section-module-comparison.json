@@ -21,9 +21,70 @@
   "pqf-def-coherent",
   "def-weil-pbc-proj-twisting-sheaf"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "The standard opens $U_i=D_+(x_i)$ for $i=0,1$ cover $P$ by the definition of $\\operatorname{Proj}S$ and [def-sc-p1-standard]. On $U_i$, the associated sheaf of a graded module has sections given by degree-zero homogeneous localization: for $N=\\bigoplus_{m\\in\\mathbf Z}\\Gamma(P,\\mathcal G(m))$, [def-weil-pbc-proj-twisting-sheaf] identifies $\\Gamma(U_i,\\widetilde N)$ with $N_{(x_i)}$.",
+   "uses": [
+    "def-sc-p1-standard",
+    "def-weil-pbc-proj-twisting-sheaf"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/constructions.tex",
+    "place": "Definition 01M6 (associated sheaf on Proj), Lemma 01M7 (2),(3), and Section 01ND for the standard cover"
+   }
+  },
+  {
+   "text": "The localization $N_{(x_i)}$ is unchanged if $N$ is replaced by its nonnegative truncation $M_{\\ge0}$. Indeed, a homogeneous fraction $t/x_i^r$ of degree zero with $t\\in\\Gamma(P,\\mathcal G(r))$ already lies in $M_{\\ge0}$; if a representative has negative degree, multiplying numerator and denominator by a sufficiently large power of $x_i$ gives an equal representative with nonnegative numerator degree. Thus $\\widetilde{M_{\\ge0}}|_{U_i}$ has the same sections and restriction maps as $\\widetilde N|_{U_i}$.",
+   "uses": [
+    "def-weil-pbc-proj-twisting-sheaf"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/coherent.tex",
+    "place": "Proposition 0BXD (coherent-proposition-coherent-modules-on-proj), last paragraph of the proof"
+   }
+  },
+  {
+   "text": "Apply [lem-sc-p1-invertible-section-localization] to $X=P$, $\\mathcal L=\\mathcal O_P(1)$, $s=x_i$, and $\\mathcal F=\\mathcal G$. Its hypotheses hold: $P$ is quasi-compact, being the union of the two affine (hence quasi-compact) charts $U_0,U_1$ of [def-sc-p1-standard]; their intersection $U_{01}$ is affine, so by [lem-weil-pbc-quasi-separated-affine-cover-criterion] (2) $P$ is quasi-separated and by (1) of that lemma the intersection of any two affine opens of $P$ is quasi-compact; $\\mathcal O_P(1)$ is invertible and $x_i\\in\\Gamma(P,\\mathcal O_P(1))$ by [lem-sc-p1-twist-multiplication]; and $\\mathcal G$ is quasi-coherent by [pqf-lem-coherent-ft-locnoeth], since $\\mathcal G$ is coherent and $P$ is locally Noetherian (covered by $U_0=\\operatorname{Spec}k[t]$ and $U_1=\\operatorname{Spec}k[s]$). By [lem-sc-p1-twist-multiplication], the non-vanishing locus $P_{x_i}$ is $D_+(x_i)=U_i$, and the isomorphisms $\\mathcal G\\otimes\\mathcal O_P(1)^{\\otimes n}\\cong\\mathcal G(n)$ identify the graded module $\\bigoplus_{n\\in\\mathbf Z}\\Gamma(P,\\mathcal G\\otimes\\mathcal O_P(1)^{\\otimes n})$ of [lem-sc-p1-invertible-section-localization] with $N$, multiplication by $x_i$ corresponding to multiplication by $x_i\\in S_1$. Therefore the canonical degree-zero localization map is an isomorphism $N_{(x_i)}\\cong\\Gamma(U_i,\\mathcal G)$. Under the identification in the preceding step, this is exactly the canonical map $\\Gamma(U_i,\\widetilde{M_{\\ge0}})\\to\\Gamma(U_i,\\mathcal G)$ induced by localization.",
+   "uses": [
+    "lem-sc-p1-invertible-section-localization",
+    "def-sc-p1-standard",
+    "lem-weil-pbc-quasi-separated-affine-cover-criterion",
+    "lem-sc-p1-twist-multiplication",
+    "pqf-lem-coherent-ft-locnoeth"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/properties.tex",
+    "place": "Lemma 01PW (lemma-invert-s-sections), part (2), and coherent.tex Proposition 0BXD proof"
+   }
+  },
+  {
+   "text": "The two local maps agree on $U_0\\cap U_1$: both send a localized homogeneous section to its restriction tensored with the corresponding inverse power of the same section $x_i$, and the localization maps commute with further localization. Hence they glue to the canonical morphism $\\widetilde{M_{\\ge0}}\\to\\mathcal G$ described in the statement. It is an isomorphism because its restriction to each member of the cover $U_0,U_1$ is an isomorphism.",
+   "uses": [
+    "def-weil-pbc-proj-twisting-sheaf"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/coherent.tex",
+    "place": "Proposition 0BXD proof, final paragraph: the canonical map is an isomorphism after restriction to standard opens"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sc-p1-standard",
+  "def-weil-pbc-proj-twisting-sheaf",
+  "lem-sc-p1-invertible-section-localization",
+  "lem-weil-pbc-quasi-separated-affine-cover-criterion",
+  "lem-sc-p1-twist-multiplication",
+  "pqf-lem-coherent-ft-locnoeth"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/coherent.tex",
+  "place": "Proposition 0BXD (coherent-proposition-coherent-modules-on-proj), final paragraph of proof, with localization details from Properties Lemma 01PW"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -48,12 +109,31 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-sc-p1-coherent-proj-representation",
   "by": "worker",
   "date": "2026-10-10"
  },
  "chapter": "sec-picard-framework",
- "unit": "sk-thm-picard-duality"
+ "unit": "sk-thm-picard-duality",
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "lem-sc-p1-serre-section-module-comparison",
+  "worker": "stage1",
+  "summary": "Expanded the Proj comparison into the standard-cover argument: degree-zero localization on each chart, equality of the full graded section module with its nonnegative truncation after localization, the invertible-section localization isomorphism, and gluing across the two charts.",
+  "blueprint": "Realizes the first sentence of lem-sc-p1-graded-resolution and the final paragraph of Proposition 0BXD used by that sentence."
+ },
+ "tool_uses": [
+  "pqf-lem-coherent-ft-locnoeth"
+ ],
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-smc",
+  "group": "E1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-smc (reviewer sub-agent of L); spot-checked: Source: Stacks 0BXD (coherent-proposition-coherent-modules-on-proj) last paragraph, and Properties 01PW (lemma-invert-s-sections) read in properties.tex: the new node lem-sc-p1-invertible-section-localization agrees with 01PW (2) hypothesis by hypothesis (X qcqs, L invertible, s in Gamma(X,L), F quasi-coherent, N over Z, map t/s^n -> t|_{X_s} (x) s^{-n}); item statement unchanged. Step 1 carried by def-weil-pbc-proj-twisting-sheaf (1) (Gamma(D_+(f),M~)=M_(f)) and def-sc-p1-standard (cover); step 2 elementary (multiply by x_i^r), checked on G=O_P and O_P(-1); step 4 elementary gluing. Step 3 used facts no cited node stated. FIX more, RETURN less: (a) C1 step 3: quasi-separatedness of P from the affine cover with affine intersection now cites lem-weil-pbc-quasi-separated-affine-cover-criterion (2) and (1) (mathlib leaf); (b) C1 step 3: G quasi-coherent (01PW needs it, pqf-def-coherent does not give it) now cites pqf-lem-coherent-ft-locnoeth (01XZ, P locally Noetherian), recorded as tool use; (c) C1 step 3: O_P(1) invertible, O_P(1)^{(x)n} (x) G = G(n) compatibly with multiplication by x_i, and P_{x_i}=D_+(x_i) were used with no node: added statement node lem-sc-p1-twist-multiplication (Constructions 01MS, 01MU with W_1=P, 01MV; searches recorded) and cited it; fixed dag/nodes/sec-picard-framework/lem-sc-p1-serre-section-module-comparison.json: proof[2].text/uses, proof_deps. Not fixed, noted for the lead: C5, the delivered node duplicates the p=0 case of lem-sc-invert-s-cohomology (09MR). Lean: slopmaster2 exists_tensorPowSection_eq_restrict (ClearDenominators.lean:262, @[stacks 01PW]) is only the surjectivity half under separatedness, not an exact match (B10 ok). Start Sat Oct 10 04:08:54 PM UTC 2026, end Sat Oct 10 04:12:07 PM UTC 2026.; 2 file(s) fixed by the reviewer; 1 statement node(s) added by the reviewer (FIX more, RETURN less)"
+ },
+ "lead_note": "2026-10-10 L (R-smc): Reviewer R-smc: the delivered new node lem-sc-p1-invertible-section-localization (Stacks 01PW (2)) is the p=0 case of the existing lem-sc-invert-s-cohomology (09MR, unit sk-thm-curveestimate; H^0=Gamma); whoever splits it can close it in one step by citing that node as a tool. Reviewer-added statement node lem-sc-p1-twist-multiplication (01MS/01MU/01MV for Proj k[x_0,x_1])."
 }

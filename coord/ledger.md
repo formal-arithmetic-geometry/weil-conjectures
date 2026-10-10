@@ -1918,3 +1918,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 16:11 L: merged deliver/H1/lem-sc-abelian-sheaf-short-exact-stalkwise (reviewer FIX; first push; new nodes: 3)
 - 16:12 L: merged deliver/M1/lem-sc-product-irreducible-components-bijection (reviewer FIX+NODE(2); first push; new nodes: 2)
 - 16:12 L: merged deliver/E1/lem-exc-etale-coproduct-etale (reviewer FIX; first push; new nodes: 0)
+- 16:12 L: merged deliver/E1/lem-sc-p1-serre-section-module-comparison (reviewer FIX+NODE(1); first push; new nodes: 2)
