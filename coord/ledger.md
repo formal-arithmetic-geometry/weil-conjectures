@@ -997,3 +997,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 07:05 L: reviewed and accepted lem-weil-pbc-pth-root-presentation-differentials (6 steps, no new nodes; uses the explicit connecting map of the 00S2 node; source sign convention noted).
 - 07:05 L: reviewed and accepted lem-weil-pbc-pth-roots-extension-degree (5 steps, no new nodes; 07DZ).
 - 07:06 L: reviewed and accepted lem-weil-pbc-projective-resolution-kernel-projective (9 steps; +schanuel 00O3 node, +projective-direct-sum, +projective-direct-summand, +ses-projective-quotient-splits leaves).
+- 07:07 L: reviewed and accepted lem-weil-pbc-purely-inseparable-base-change-local-ring (6 steps by agent, no new nodes).

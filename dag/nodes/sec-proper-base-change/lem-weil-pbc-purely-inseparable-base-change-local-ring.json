@@ -2,19 +2,115 @@
  "id": "lem-weil-pbc-purely-inseparable-base-change-local-ring",
  "kind": "statement",
  "title": "Base change of a Noetherian local algebra along a finite purely inseparable extension",
- "statement": "Let $k$ be a field, $k'/k$ a finite purely inseparable field extension [def-weil-pbc-finite-purely-inseparable-extension] and $(A,\\mathfrak m,K)$ a Noetherian local ring [def-weil-pbc-noetherian-ring] which is a $k$-algebra. Put $A'=A\\otimes_kk'$, an $A$-algebra via $a\\mapsto a\\otimes1$. Then: (1) $A'$ is a free $A$-module of rank $[k':k]$, in particular $A\\to A'$ is finite and flat [def-weil-pbc-flat-ring-map], and $A'$ is Noetherian; (2) $A'$ is a local ring, and its maximal ideal $\\mathfrak m'$ is the only prime ideal of $A'$ containing $\\mathfrak mA'$; (3) the residue field $K'=A'/\\mathfrak m'$ is a finite field extension of $K$, and $A'/\\mathfrak mA'\\cong K\\otimes_kk'$ is a finite-dimensional $K$-algebra.",
+ "statement": "Let $k$ be a field, $k'/k$ a finite purely inseparable field extension [def-weil-pbc-finite-purely-inseparable-extension] [def-pc-field-extension], of degree $d=[k':k]=\\dim_kk'$, and $(A,\\mathfrak m,K)$ a Noetherian [def-weil-pbc-noetherian-ring] local ring (a commutative ring with exactly one maximal ideal $\\mathfrak m$, residue field $K=A/\\mathfrak m$) which is a $k$-algebra. Put $A'=A\\otimes_kk'$, an $A$-algebra via $a\\mapsto a\\otimes1$. Then: (1) $A'$ is a free $A$-module [def-weil-pbc-free-module] of rank $d$, in particular $A'$ is a finitely generated $A$-module [def-weil-finitely-generated-module] (i.e. $A\\to A'$ is finite) and $A\\to A'$ is flat [def-weil-pbc-flat-ring-map], and $A'$ is Noetherian; (2) $A'$ is a local ring, and its maximal ideal $\\mathfrak m'$ is the only prime ideal of $A'$ containing $\\mathfrak mA'$; (3) the residue field $K'=A'/\\mathfrak m'$ is a finite field extension of $K$ (via $K=A/\\mathfrak m\\to A'/\\mathfrak m'$), and there is an isomorphism of rings $A'/\\mathfrak mA'\\cong K\\otimes_kk'$, $(a\\otimes x)\\bmod\\mathfrak mA'\\mapsto\\bar a\\otimes x$, compatible with the maps from $A$; in particular $A'/\\mathfrak mA'$ is a $K$-algebra of dimension $d$ over $K$.",
  "source": {
   "document": "literature/stacks-project/more-algebra.tex",
   "place": "More on Algebra, proof of Proposition Tag 07E5 (proposition-characterization-geometrically-regular, line 8697), proof of (3) => (1) (lines 8716-8750): 'Set A' = A (x)_k k'. This is a local ring with maximal ideal m' ... since A -> A' is finite flat'; stated there without proof"
  },
  "stmt_deps": [
   "def-weil-pbc-finite-purely-inseparable-extension",
+  "def-pc-field-extension",
   "def-weil-pbc-noetherian-ring",
+  "def-weil-pbc-free-module",
+  "def-weil-finitely-generated-module",
   "def-weil-pbc-flat-ring-map"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "*Clause (1).* Let $b_1,\\dots,b_d$ be a $k$-basis of $k'$ ($k'/k$ finite [def-weil-pbc-finite-purely-inseparable-extension]). Apply [lem-weil-pbc-free-base-change-tower] to the ring maps $k\\xrightarrow{\\mathrm{id}}k\\to A$ and the $k$-module $M=k'$: $k'\\otimes_kk\\cong k'$ is free over $k$ with basis $b_j\\otimes1$, hence $k'\\otimes_kA$ is a free $A$-module with basis $b_1\\otimes1,\\dots,b_d\\otimes1$. The swap $k'\\otimes_kA\\to A\\otimes_kk'$, $x\\otimes a\\mapsto a\\otimes x$, is an $A$-linear isomorphism, so $A'$ is free over $A$ [def-weil-pbc-free-module] with basis $1\\otimes b_1,\\dots,1\\otimes b_d$, of rank $d$. A free module with a finite basis is finitely generated [def-weil-finitely-generated-module], so $A\\to A'$ is finite. A free module is flat [lem-weil-pbc-projective-module-flat], so $A\\to A'$ is flat [def-weil-pbc-flat-ring-map]. As $A$ is Noetherian and $A'$ is a finitely generated $A$-module, $A'$ is Noetherian [lem-weil-pbc-finite-algebra-noetherian]. Finally $A\\ne0$ and $d\\ge1$, so $A'\\ne0$.",
+   "uses": [
+    "def-weil-pbc-finite-purely-inseparable-extension",
+    "lem-weil-pbc-free-base-change-tower",
+    "def-weil-pbc-free-module",
+    "def-weil-finitely-generated-module",
+    "lem-weil-pbc-projective-module-flat",
+    "def-weil-pbc-flat-ring-map",
+    "lem-weil-pbc-finite-algebra-noetherian"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "More on Algebra, proof of Proposition Tag 07E5 (proposition-characterization-geometrically-regular, line 8697), proof of (3) => (1), lines 8716-8750 (the facts are stated there without proof; steps written by the agent)"
+   }
+  },
+  {
+   "text": "*The closed fibre.* By [lem-weil-pbc-tensor-quotient-base-change] for $A\\to A'$ and $I=\\mathfrak m$, $A'/\\mathfrak mA'\\cong A'\\otimes_A(A/\\mathfrak m)=A'\\otimes_AK$ as $A'$-algebras, $b\\bmod\\mathfrak mA'\\mapsto b\\otimes1$. The swap $A'\\otimes_AK\\cong K\\otimes_A(A\\otimes_kk')$ is a ring isomorphism, and [lem-weil-pbc-tensor-cancel-base-change] (with $R=k$, $S=A$, $B=k'$ and the $A$-algebra $K$) gives the $K$-algebra isomorphism $K\\otimes_A(A\\otimes_kk')\\cong K\\otimes_kk'$, $c\\otimes(a\\otimes x)\\mapsto\\bar ac\\otimes x$. The composite $\\psi:A'/\\mathfrak mA'\\to K\\otimes_kk'$ is a ring isomorphism with $(a\\otimes x)\\bmod\\mathfrak mA'\\mapsto\\bar a\\otimes x$; it is compatible with the maps from $A$ ($a\\mapsto\\bar a\\otimes1$ on both sides), so it is $K$-linear for the $K=A/\\mathfrak m$-algebra structure of $A'/\\mathfrak mA'$ induced by $A\\to A'$. Since $K$ is a field and a $k$-algebra, $K/k$ is a field extension [def-pc-field-extension], and by [def-weil-vector-space-scalar-extension] the elements $b_j\\otimes1$ form a $K$-basis of $k'\\otimes_kK\\cong K\\otimes_kk'$; so $\\dim_K(K\\otimes_kk')=d\\ge1$, in particular $K\\otimes_kk'\\ne0$ and the ring map $K\\to K\\otimes_kk'$, $c\\mapsto c\\otimes1$, is injective (its kernel is a proper ideal of the field $K$).",
+   "uses": [
+    "lem-weil-pbc-tensor-quotient-base-change",
+    "lem-weil-pbc-tensor-cancel-base-change",
+    "def-pc-field-extension",
+    "def-weil-vector-space-scalar-extension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "More on Algebra, proof of Proposition Tag 07E5 (proposition-characterization-geometrically-regular, line 8697), proof of (3) => (1), lines 8716-8750 (the facts are stated there without proof; steps written by the agent)"
+   }
+  },
+  {
+   "text": "*Every element of $B=K\\otimes_kk'$ is a unit or nilpotent.* If $k$ has characteristic $0$, then $k'=k$ [def-weil-pbc-finite-purely-inseparable-extension], so $B\\cong K$ is a field and the claim holds. Let $k$ have characteristic $p>0$; then $p\\cdot1=0$ in the $k$-algebras $k'$ and $B$. Let $z=\\sum_{i=1}^nc_i\\otimes x_i\\in B$ ($c_i\\in K$, $x_i\\in k'$). Each $x_i$ has $x_i^{p^{e_i}}\\in k$ for some $e_i\\ge0$ [def-weil-pbc-finite-purely-inseparable-extension]; put $e=\\max_ie_i$, $q=p^e$; then $x_i^q=(x_i^{p^{e_i}})^{p^{e-e_i}}\\in k$. The $e$-fold Frobenius $F_B^e:y\\mapsto y^q$ is a ring endomorphism of $B$ [def-weil-ring-frobenius], so $z^q=\\sum_ic_i^q\\otimes x_i^q=\\sum_ic_i^qx_i^q\\otimes1=c\\otimes1$ with $c=\\sum_ic_i^qx_i^q\\in K$ (moving the scalars $x_i^q\\in k$ across $\\otimes_k$). If $c=0$ then $z^q=0$ and $z$ is nilpotent. If $c\\ne0$, then $c\\otimes1$ is a unit of $B$ with inverse $c^{-1}\\otimes1$, so $z\\cdot(z^{q-1}(c^{-1}\\otimes1))=1$ and $z$ is a unit.",
+   "uses": [
+    "def-weil-pbc-finite-purely-inseparable-extension",
+    "def-weil-ring-frobenius"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "More on Algebra, proof of Proposition Tag 07E5 (proposition-characterization-geometrically-regular, line 8697), proof of (3) => (1), lines 8716-8750 (the facts are stated there without proof; steps written by the agent)"
+   }
+  },
+  {
+   "text": "*$B$ is local with unique prime $N$, the nilradical.* Let $N\\subseteq B$ be the set of nilpotent elements; it is an ideal (if $x^a=0=y^b$ then $(x+y)^{a+b}=0$ by the binomial formula, and $(rx)^a=0$). $B\\ne0$ (step 2), so $1\\notin N$ and $N$ is a proper ideal. By step 3 every element outside $N$ is a unit, so every proper ideal of $B$ (which contains no unit) lies in $N$; hence $N$ is the unique maximal ideal and $B/N$ is a field. Every prime ideal $P$ of $B$ contains $N$ ($x^a=0\\in P$ implies $x\\in P$) and is proper, so $P=N$: $N$ is the only prime ideal of $B$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "More on Algebra, proof of Proposition Tag 07E5 (proposition-characterization-geometrically-regular, line 8697), proof of (3) => (1), lines 8716-8750 (the facts are stated there without proof; steps written by the agent)"
+   }
+  },
+  {
+   "text": "*Clause (2).* Let $\\pi:A'\\to A'/\\mathfrak mA'$ be the quotient map and $\\mathfrak m'=\\pi^{-1}(\\psi^{-1}(N))$ with $\\psi$ of step 2. Prime ideals of $A'$ containing $\\mathfrak mA'$ correspond bijectively, by $P\\mapsto\\psi(\\pi(P))$, to prime ideals of $A'/\\mathfrak mA'\\cong B$ (correspondence theorem for the surjection $\\pi$ and the isomorphism $\\psi$); by step 4 there is exactly one, so $\\mathfrak m'$ is the only prime of $A'$ containing $\\mathfrak mA'$, and $A'/\\mathfrak m'\\cong B/N$ is a field, so $\\mathfrak m'$ is maximal. Conversely, $A'$ is a finitely generated module over the local ring $A$ (step 1), so every maximal ideal $\\mathfrak n$ of $A'$ contains $\\mathfrak mA'$ [lem-weil-pbc-finite-algebra-local-radical]; being prime, $\\mathfrak n=\\mathfrak m'$. Hence $\\mathfrak m'$ is the unique maximal ideal and $A'$ is a local ring.",
+   "uses": [
+    "lem-weil-pbc-finite-algebra-local-radical"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "More on Algebra, proof of Proposition Tag 07E5 (proposition-characterization-geometrically-regular, line 8697), proof of (3) => (1), lines 8716-8750 (the facts are stated there without proof; steps written by the agent)"
+   }
+  },
+  {
+   "text": "*Clause (3).* The isomorphism $A'/\\mathfrak mA'\\cong K\\otimes_kk'$ with $\\dim_K=d$ is step 2. The surjection $A'/\\mathfrak mA'\\to A'/\\mathfrak m'=K'$ (as $\\mathfrak mA'\\subseteq\\mathfrak m'$) is $K$-linear, so $K'$ is spanned over $K$ by the images of $d$ basis vectors and $\\dim_KK'\\le d<\\infty$; $K'$ is a field (step 5) and $K\\to K'$ is a ring map of fields, injective, so $K'/K$ is a finite field extension [def-pc-field-extension].",
+   "uses": [
+    "def-pc-field-extension"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "More on Algebra, proof of Proposition Tag 07E5 (proposition-characterization-geometrically-regular, line 8697), proof of (3) => (1), lines 8716-8750 (the facts are stated there without proof; steps written by the agent)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-finite-purely-inseparable-extension",
+  "lem-weil-pbc-free-base-change-tower",
+  "def-weil-pbc-free-module",
+  "def-weil-finitely-generated-module",
+  "lem-weil-pbc-projective-module-flat",
+  "def-weil-pbc-flat-ring-map",
+  "lem-weil-pbc-finite-algebra-noetherian",
+  "lem-weil-pbc-tensor-quotient-base-change",
+  "lem-weil-pbc-tensor-cancel-base-change",
+  "def-pc-field-extension",
+  "def-weil-vector-space-scalar-extension",
+  "def-weil-ring-frobenius",
+  "lem-weil-pbc-finite-algebra-local-radical"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "More on Algebra, proof of Proposition Tag 07E5, (3) => (1), lines 8716-8750, where the statement is used without proof; the steps are written by the agent"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -36,10 +132,52 @@
    "results": "RingTheory/LocalRing/ResidueField/Fiber.lean:34 (IsLocalRing (ResidueField R ⊗[R] S), other setting); RingTheory/Spectrum/Prime/Homeomorph.lean isHomeomorph_comap_of_isPurelyInseparable",
    "date": "2026-10-10",
    "verdict": "no match (candidate for clause (2) recorded)"
+  },
+  {
+   "tool": "loogle",
+   "query": "IsPurelyInseparable, IsLocalRing",
+   "results": "none",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "IsLocalRing (TensorProduct _ _ _)",
+   "results": "instIsLocalRingTensorProductResidueFieldOfIsLocalHomRingHomAlgebraMap (Mathlib.RingTheory.LocalRing.ResidueField.Fiber): IsLocalRing (ResidueField R ⊗[R] S) for a local hom of local rings",
+   "date": "2026-10-10",
+   "verdict": "no match (other setting)"
+  },
+  {
+   "tool": "leansearch",
+   "query": "every element of R ⊗[k] K is a unit or nilpotent when K/k purely inseparable and R a field",
+   "results": "PrimeSpectrum.isHomeomorph_comap_of_isPurelyInseparable, IsPurelyInseparable.exists_pow_pow_mem_range_tensorProduct_of_expChar, IsPurelyInseparable.exists_pow_mem_range_tensorProduct (Mathlib.FieldTheory.PurelyInseparable.Basic), PrimeSpectrum.isHomeomorph_comap_tensorProductMap_of_isPurelyInseparable",
+   "date": "2026-10-10",
+   "verdict": "partial: exists_pow_mem_range_tensorProduct is step 3's power computation; no local-ring statement"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "tensor product of a field with a purely inseparable extension is a local ring with nilpotent maximal ideal",
+   "results": "Algebra.FormallyUnramified.isField_of_isAlgClosed_of_isLocalRing, IsPurelyInseparable.exists_pow_mem_range_tensorProduct, IsPurelyInseparable.exists_pow_pow_mem_range_tensorProduct_of_expChar, Algebra.TensorProduct.isField_of_isAlgebraic, Algebra.IsGeometricallyReduced.isReduced_algebraicClosure_tensorProduct",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "local_search",
+   "query": "isHomeomorph_comap_of_isPurelyInseparable (project ~/weil-conjectures-slopmaster2)",
+   "results": "PrimeSpectrum.isHomeomorph_comap_of_isPurelyInseparable in .lake/packages/mathlib/Mathlib/RingTheory/Spectrum/Prime/Homeomorph.lean (index unavailable: name lookup only)",
+   "date": "2026-10-10",
+   "verdict": "candidate exists; read with sed -n 55,75p Homeomorph.lean and sed -n 690,712p FieldTheory/PurelyInseparable/Basic.lean"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rn 'exists_pow_mem_range_tensorProduct|IsPurelyInseparable.*IsLocalRing|IsLocalRing.*IsPurelyInseparable' --include=*.lean ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib",
+   "results": "FieldTheory/PurelyInseparable/Basic.lean:695 (exists_pow_mem_range_tensorProduct); RingTheory/Spectrum/Prime/Homeomorph.lean:68 (its use)",
+   "date": "2026-10-10",
+   "verdict": "no match as a whole"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "worker",
@@ -59,5 +197,17 @@
   }
  },
  "chapter": "sec-proper-base-change",
- "unit": "sk-thm-p1"
+ "unit": "sk-thm-p1",
+ "mathlib_candidate": {
+  "declaration": "PrimeSpectrum.isHomeomorph_comap_of_isPurelyInseparable; IsPurelyInseparable.exists_pow_mem_range_tensorProduct; Module.Free / Module.Finite base change (Algebra.TensorProduct.basis), IsNoetherianRing.of_finite, Module.Flat.of_free",
+  "file": "Mathlib/RingTheory/Spectrum/Prime/Homeomorph.lean; Mathlib/FieldTheory/PurelyInseparable/Basic.lean",
+  "how": "No single declaration. isHomeomorph_comap_of_isPurelyInseparable (Homeomorph.lean:65, read with sed -n 55,75p): for k'/k purely inseparable and any k-algebra R, Spec(R ⊗[k] k') -> Spec R is a homeomorphism; with R = A local it gives clause (2) in a few lines (the closed point m has one preimage, maximal ideals map to m by finiteness), but tensor factors are in the order R ⊗ k' and IsLocalRing is not stated. exists_pow_mem_range_tensorProduct (Basic.lean:695, read with sed -n 690,712p) is the power computation of step 3. Clauses (1) and (3) are assembled from the free/finite/flat/Noetherian base-change API. Not a leaf; the split above uses only existing nodes."
+ },
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "lem-weil-pbc-purely-inseparable-base-change-local-ring",
+  "worker": "stage1",
+  "summary": "Proof written in 6 steps (agent-written; Stacks 07E5 (3)=>(1) states the facts without proof): (1) free of rank d by the free base-change tower leaf, flat (free => flat), finite, Noetherian; closed fibre A'/mA' = K (x)_k k' via the tensor-quotient and cancel-base-change leaves, of K-dimension d by scalar extension of a basis; every element of K (x)_k k' is a unit or nilpotent by the q-th power (Frobenius) computation z^q = c (x) 1 (char 0: k' = k); hence it is local with unique prime the nilradical; primes of A' over mA' correspond to it, and every maximal ideal of the finite A-algebra A' contains mA', so A' is local; K' is a quotient of the d-dimensional K-algebra, a finite extension. No new nodes. Statement made precise: inline definition of local ring, the isomorphism A'/mA' = K (x)_k k' given by its formula and compatibility, dimension d; stmt_deps added: def-pc-field-extension, def-weil-pbc-free-module, def-weil-finitely-generated-module. Mathlib: no match as a whole (candidate PrimeSpectrum.isHomeomorph_comap_of_isPurelyInseparable recorded)."
+ },
+ "reviewed": "Reviewed by L 2026-10-10: proof by agent (the source uses the facts without proof): freeness and flatness of A⊗_k k' from existing leaves, the closed fibre K⊗_k k' computed by the cancellation/quotient base-change nodes, every element of K⊗k' a unit or nilpotent by the q-th power trick (step 3, checked), locality and the unique prime over m via the finite-algebra radical leaf. Statement made explicit (local ring defined inline, the fibre isomorphism given by its formula). No new nodes; Mathlib candidates recorded (B8)."
 }
