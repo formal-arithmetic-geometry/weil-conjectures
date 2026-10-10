@@ -1,24 +1,22 @@
 # Work queue
 
-925 items; claim with `tools/claim.py next <group> [--stage N]`.
+922 items; claim with `tools/claim.py next <group> [--stage N]`.
 
-## Stage 1: nodes to split (316)
+## Stage 1: nodes to split (313)
 
 | node | distance to a target | Lean state on the done branch |
 |---|---|---|
 | `lem-weil-pbc-injective-acyclicity-bounded-below` | 2002 | sorry_here |
 | `lem-weil-pbc-etale-subsheaf-final-open` | 2008 | none |
 | `lem-weil-pbc-open-subscheme-fpqc-descent` | 2008 | none |
-| `lem-weil-pbc-sets-etale-inverse-image-constant-sheaf` | 2008 | none |
 | `lem-weil-pbc-spec-algebraically-closed-etale-sheaf-constant` | 2008 | none |
+| `lem-weil-pbc-sets-etale-inverse-image-constant-base-change` | 2009 | none |
 | `lem-sc-irreducible-noetherian-constant-acyclic` | 2013 | none |
 | `lem-sc-noetherian-extension-by-zero-reduction` | 2013 | none |
 | `lem-sc-noetherian-open-closed-cohomology-sequence` | 2013 | none |
 | `lem-sc-semilocal-dim-one-conductor` | 2014 | none |
 | `lem-sc-ample-proj-canonical-map` | 2015 | none |
 | `lem-sc-boundary-cech-injective-middle` | 2015 | none |
-| `lem-sc-dvr-nonnegative-valuation-in-ring` | 2015 | none |
-| `lem-sc-zariski-contracted-power-torsor` | 2016 | none |
 | `lem-sc-mayer-vietoris-ringed-space` | 2017 | none |
 | `lem-weil-pbc-cartesian-eilenberg-functorial` | 3007 | none |
 | `lem-exc-finite-galois-tensor-decomposition` | 3009 | none |
@@ -27,7 +25,6 @@
 | `lem-sc-dual-number-scheme-pushout` | 3014 | none |
 | `lem-sc-ext-locally-free-second-naturality` | 3014 | none |
 | `lem-sc-lft-over-field-jacobson-space` | 3014 | none |
-| `lem-sc-p1-boundary-connecting-naturality` | 3014 | none |
 | `lem-sc-p1-boundary-one-extension-class` | 3014 | none |
 | `lem-sc-p1-pullback-extension-class` | 3014 | none |
 | `lem-sc-sheaf-ext-coherent` | 3014 | none |
@@ -49,7 +46,6 @@
 | `lem-sc-finite-pushforward-derived-hom-qcoherent` | 3015 | none |
 | `lem-sc-finite-sheafhom-affine-adjoint` | 3015 | none |
 | `lem-sc-finite-twisted-inverse-bounded-below` | 3015 | none |
-| `lem-sc-p1-invertible-section-localization` | 3015 | none |
 | `lem-sc-smooth-omega-finite-locally-free` | 3015 | none |
 | `lem-sc-smooth-proper-diagonal-conormal-differentials` | 3015 | none |
 | `lem-sc-smooth-proper-diagonal-koszul-dual` | 3015 | none |
@@ -58,11 +54,12 @@
 | `lem-sc-smooth-proper-diagonal-tensor-formula` | 3015 | none |
 | `lem-sc-affine-derived-cohomology` | 3016 | none |
 | `lem-sc-affine-derived-pushforward-conservative` | 3016 | none |
+| `lem-sc-p1-section-clearing-denominators-qcqs` | 3016 | none |
+| `lem-sc-p1-section-restriction-s-torsion` | 3016 | none |
 | `lem-pc-genus-agrees-sc` | 4007 | rests_on_sorry |
 | `lem-sc-open-curve-boundary-higher-direct-image-vanishing` | 4007 | none |
 | `lem-sc-open-curve-etale-leray-low-degree` | 4007 | none |
 | `lem-pc-zero-scheme-properties` | 4008 | rests_on_sorry |
-| `lem-sc-isogeny-surjective` | 4008 | rests_on_sorry |
 | `lem-sc-mult-n-etale-kernel` | 4008 | rests_on_sorry |
 | `lem-sc-mult-n-finite-flat` | 4008 | rests_on_sorry |
 | `lem-sc-ntorsion-etale` | 4008 | rests_on_sorry |
@@ -937,7 +934,7 @@
 | `lem-weil-pbc-p1-field-dimension-one` | 4 | state |
 | `lem-weil-pbc-projective-space-zero-isomorphism` | 4 | state |
 
-Not open yet: 333 nodes that wait for stage 1, 1264 nodes that wait for a statement dependency.
+Not open yet: 331 nodes that wait for stage 1, 1268 nodes that wait for a statement dependency.
 
 ## Stage 3: modules to prove (0)
 
