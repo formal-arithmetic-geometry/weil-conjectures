@@ -11,9 +11,75 @@
   "def-weil-pbc-sets-extension-by-empty",
   "def-weil-pbc-topological-inverse-image"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "*Step 1 ($\\beta$ is a bijection, natural in $\\mathcal K$).* Let $X$ be one of the spaces $Z$, $Z'$, $W\\subseteq X$ open, $T$ a set and $\\mathcal K$ a sheaf of sets on $X$. By [lem-weil-pbc-sets-extension-by-empty-adjunction] (2), applied to $U=W$ and $\\mathcal G=\\underline T_W$, the map $\\psi\\mapsto(\\psi\\circ\\theta)|_W$, $\\operatorname{Hom}(j_{W!}\\underline T,\\mathcal K)\\to\\operatorname{Hom}(\\underline T_W,\\mathcal K|_W)$, is bijective, where $\\mathcal K|_W$ is a sheaf of sets on $W$ (the statement of that node). By [lem-weil-pbc-constant-sheaf-open-maps-sections], applied to the space $W$, the set $T$ and the sheaf $\\mathcal K|_W$, the map $\\varphi\\mapsto(t\\mapsto\\varphi_W(\\mathrm{const}_t))$, $\\operatorname{Hom}(\\underline T_W,\\mathcal K|_W)\\to\\operatorname{Map}(T,\\mathcal K|_W(W))=\\operatorname{Map}(T,\\mathcal K(W))$, is bijective. The composite sends $\\psi$ to $t\\mapsto((\\psi\\circ\\theta)|_W)_W(\\mathrm{const}_t)=\\psi_W(\\theta_W(\\mathrm{const}_t))$, where $\\mathrm{const}_t\\in\\underline T_W(W)=(j_{W,p!}\\underline T_W)(W)$ [def-weil-pbc-sets-extension-by-empty]; this is $\\beta_{\\mathcal K}(\\psi)$. So $\\beta_{\\mathcal K}$ is bijective. Naturality: for a morphism $\\alpha:\\mathcal K\\to\\mathcal K'$ of sheaves of sets on $X$, $(\\alpha\\circ\\psi)_W=\\alpha_W\\circ\\psi_W$, hence $\\beta_{\\mathcal K'}(\\alpha\\circ\\psi)=\\alpha_W\\circ\\beta_{\\mathcal K}(\\psi)$ $(\\ast)$.",
+   "uses": [
+    "lem-weil-pbc-sets-extension-by-empty-adjunction",
+    "lem-weil-pbc-constant-sheaf-open-maps-sections",
+    "def-weil-pbc-sets-extension-by-empty"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sheaves.tex",
+    "place": "Lemma Tag 00A3 (label lemma-j-shriek, line 4549) for the adjunction of j_{W!} with restriction; maps out of the sheaf of locally constant maps: Example Tag 0081 (label example-sheafify-constant) and literature/stacks-project/sites.tex Example Tag 0H7J (label example-constant-sheaf); as used in literature/stacks-project/modules.tex Lemma Tag 0CAH (label lemma-surjection) and the proof of Lemma Tag 0CAK ('correspond by adjunction to two families ... of maps of sets')"
+   }
+  },
+  {
+   "text": "*Step 2 (the adjunction $g^{-1}\\dashv g_*$ in the form used).* For a sheaf of sets $\\mathcal K$ on $Z'$, $g_*\\mathcal K$ is the sheaf of sets $W\\mapsto\\mathcal K(g^{-1}W)$ on $Z$, and $(g_*k)_W=k_{g^{-1}W}$ for a morphism $k$ [def-weil-pbc-topological-inverse-image] (1) (with values in sets); in particular $(g_*\\mathcal K)(V)=\\mathcal K(V')$ and $(g_*k)_V=k_{V'}$. For a sheaf of sets $\\mathcal G$ on $Z$ let $\\eta^g_{\\mathcal G}:\\mathcal G\\to g_*g^{-1}\\mathcal G$, $\\eta^g_{\\mathcal G,W}=\\theta_{\\mathcal G,g^{-1}W}\\circ\\iota^{g^{-1}W}_W$, be the unit of [def-weil-pbc-topological-inverse-image] (3). By the adjunction $g^{-1}\\dashv g_*$ for sheaves of sets [lem-weil-pbc-sets-inverse-image-colimits-finite-products] (a), with this unit as in [def-weil-pbc-topological-inverse-image] (3) (the composite bijection $\\operatorname{Hom}(g^{-1}\\mathcal G,\\mathcal K)=\\operatorname{Hom}(g_p\\mathcal G,\\mathcal K)=\\operatorname{Hom}(\\mathcal G,g_*\\mathcal K)$ there sends $\\varphi$ to $g_*(\\varphi\\circ\\theta_{\\mathcal G})\\circ i_{\\mathcal G}=g_*\\varphi\\circ\\eta^g_{\\mathcal G}$), the map $a_{\\mathcal G,\\mathcal K}:\\operatorname{Hom}(g^{-1}\\mathcal G,\\mathcal K)\\to\\operatorname{Hom}(\\mathcal G,g_*\\mathcal K)$, $\\varphi\\mapsto g_*\\varphi\\circ\\eta^g_{\\mathcal G}$, is bijective. It is natural in $\\mathcal K$: $a(k\\circ\\varphi)=g_*k\\circ g_*\\varphi\\circ\\eta^g_{\\mathcal G}=g_*k\\circ a(\\varphi)$ for $k:\\mathcal K\\to\\mathcal K'$. The unit is natural: for a morphism $\\psi:\\mathcal G\\to\\mathcal H$ of sheaves of sets on $Z$, $g_*(g^{-1}\\psi)\\circ\\eta^g_{\\mathcal G}=\\eta^g_{\\mathcal H}\\circ\\psi$ $(\\ast\\ast)$; on sections over $W$ this reads $(g^{-1}\\psi)_{g^{-1}W}\\circ\\theta_{\\mathcal G,g^{-1}W}\\circ\\iota^{g^{-1}W}_W=\\theta_{\\mathcal H,g^{-1}W}\\circ(g_p\\psi)_{g^{-1}W}\\circ\\iota^{g^{-1}W}_W=\\theta_{\\mathcal H,g^{-1}W}\\circ\\iota^{g^{-1}W}_W\\circ\\psi_W$, by the defining equations $g^{-1}\\psi\\circ\\theta_{\\mathcal G}=\\theta_{\\mathcal H}\\circ g_p\\psi$ and $(g_p\\psi)_U\\circ\\iota^U_W=\\iota^U_W\\circ\\psi_W$ of [def-weil-pbc-topological-inverse-image] (2), (3).",
+   "uses": [
+    "def-weil-pbc-topological-inverse-image",
+    "lem-weil-pbc-sets-inverse-image-colimits-finite-products"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sheaves.tex",
+    "place": "Lemma Tag 008K (label lemma-f-map, line 2249): bijection between maps G -> f_*F and maps f^{-1}G -> F, functorially in F and G"
+   }
+  },
+  {
+   "text": "*Step 3 (both sheaves corepresent the same functor).* Put $\\mathcal A=g^{-1}(j_{V!}\\underline T)$ and $\\mathcal B=j_{V'!}\\underline T$, sheaves of sets on $Z'$ ($V'=g^{-1}(V)$ is open since $g$ is continuous). Write $\\beta^V$ for $\\beta$ with $W=V$ on $Z$ and $\\beta^{V'}$ for $\\beta$ with $W=V'$ on $Z'$. For every sheaf of sets $\\mathcal K$ on $Z'$ define $\\Phi_{\\mathcal K}:\\operatorname{Hom}(\\mathcal A,\\mathcal K)\\to\\operatorname{Hom}(\\mathcal B,\\mathcal K)$ by $\\Phi_{\\mathcal K}=(\\beta^{V'}_{\\mathcal K})^{-1}\\circ\\beta^V_{g_*\\mathcal K}\\circ a_{j_{V!}\\underline T,\\mathcal K}$; this makes sense since $\\beta^V_{g_*\\mathcal K}$ takes values in $\\operatorname{Map}(T,(g_*\\mathcal K)(V))=\\operatorname{Map}(T,\\mathcal K(V'))$ (Step 2), the target of $\\beta^{V'}_{\\mathcal K}$. It is a composite of bijections (Steps 1, 2), so bijective. Naturality in $\\mathcal K$: for $k:\\mathcal K\\to\\mathcal K'$ and $\\varphi:\\mathcal A\\to\\mathcal K$, by Step 2 and $(\\ast)$ for $g_*k$ on $Z$, $\\beta^V_{g_*\\mathcal K'}(a(k\\circ\\varphi))=\\beta^V_{g_*\\mathcal K'}(g_*k\\circ a(\\varphi))=(g_*k)_V\\circ\\beta^V_{g_*\\mathcal K}(a(\\varphi))=k_{V'}\\circ\\beta^{V'}_{\\mathcal K}(\\Phi_{\\mathcal K}(\\varphi))$, and by $(\\ast)$ for $k$ on $Z'$ the last map is $\\beta^{V'}_{\\mathcal K'}(k\\circ\\Phi_{\\mathcal K}(\\varphi))$. Applying $(\\beta^{V'}_{\\mathcal K'})^{-1}$: $\\Phi_{\\mathcal K'}(k\\circ\\varphi)=k\\circ\\Phi_{\\mathcal K}(\\varphi)$. (In words: $\\operatorname{Hom}(g^{-1}j_{V!}\\underline T,\\mathcal K)=\\operatorname{Hom}(j_{V!}\\underline T,g_*\\mathcal K)=\\operatorname{Map}(T,\\mathcal K(V'))=\\operatorname{Hom}(j_{V'!}\\underline T,\\mathcal K)$, naturally in $\\mathcal K$.)",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/modules.tex",
+    "place": "proof of Lemma Tag 0CAK (label lemma-constructible-comes-from-finite, line 3061): 'Observe that p_i^{-1}(j_{U_{a,i}!}S_a) = j_{U_a!}S_a'; the argument is written by the agent"
+   }
+  },
+  {
+   "text": "*Step 4 (Yoneda: the isomorphism $\\lambda$).* By [lem-weil-pbc-coyoneda-iso-of-natural-hom-bijection] in the category of sheaves of sets on $Z'$, applied to the objects $\\mathcal A,\\mathcal B$ and the bijections $\\Phi_{\\mathcal K}$, natural in $\\mathcal K$ (Step 3), the morphism $\\vartheta=\\Phi_{\\mathcal A}(\\mathrm{id}_{\\mathcal A}):\\mathcal B\\to\\mathcal A$ is an isomorphism and $\\Phi_{\\mathcal K}(\\varphi)=\\varphi\\circ\\vartheta$ for every $\\mathcal K$ and every $\\varphi:\\mathcal A\\to\\mathcal K$. Put $\\lambda=\\vartheta^{-1}:g^{-1}(j_{V!}\\underline T)\\xrightarrow{\\sim}j_{V'!}\\underline T$, an isomorphism of sheaves of sets on $Z'$, with $\\lambda^{-1}=\\vartheta$.",
+   "uses": [
+    "lem-weil-pbc-coyoneda-iso-of-natural-hom-bijection"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/categories.tex",
+    "place": "Lemma Tag 001P (label lemma-yoneda), in the opposite category"
+   }
+  },
+  {
+   "text": "*Step 5 (compatibility with $\\beta$ and $\\eta^g$).* Let $\\mathcal K$ be a sheaf of sets on $Z$ and $\\psi:j_{V!}\\underline T\\to\\mathcal K$. Then $g^{-1}\\psi:\\mathcal A\\to g^{-1}\\mathcal K$, and by Step 4 $g^{-1}\\psi\\circ\\lambda^{-1}=g^{-1}\\psi\\circ\\vartheta=\\Phi_{g^{-1}\\mathcal K}(g^{-1}\\psi)$. By the definition of $\\Phi$ (Step 3), $\\beta^{V'}_{g^{-1}\\mathcal K}(g^{-1}\\psi\\circ\\lambda^{-1})=\\beta^V_{g_*g^{-1}\\mathcal K}(a(g^{-1}\\psi))=\\beta^V_{g_*g^{-1}\\mathcal K}(g_*(g^{-1}\\psi)\\circ\\eta^g_{j_{V!}\\underline T})$. By $(\\ast\\ast)$ of Step 2 (with $\\mathcal G=j_{V!}\\underline T$, $\\mathcal H=\\mathcal K$) this is $\\beta^V_{g_*g^{-1}\\mathcal K}(\\eta^g_{\\mathcal K}\\circ\\psi)$, and by $(\\ast)$ of Step 1 for $\\alpha=\\eta^g_{\\mathcal K}:\\mathcal K\\to g_*g^{-1}\\mathcal K$ on $Z$ it equals $(\\eta^g_{\\mathcal K})_V\\circ\\beta^V_{\\mathcal K}(\\psi)=\\eta^g_{\\mathcal K,V}\\circ\\beta_{\\mathcal K}(\\psi)$, as maps $T\\to(g_*g^{-1}\\mathcal K)(V)=(g^{-1}\\mathcal K)(V')$. This is the asserted identity.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/modules.tex",
+    "place": "proof of Lemma Tag 0CAK (label lemma-constructible-comes-from-finite): the maps beta_b, gamma_b 'which give rise to the maps beta_b and gamma_b after pulling back by p_i'; written by the agent"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-sets-extension-by-empty-adjunction",
+  "lem-weil-pbc-constant-sheaf-open-maps-sections",
+  "def-weil-pbc-sets-extension-by-empty",
+  "def-weil-pbc-topological-inverse-image",
+  "lem-weil-pbc-sets-inverse-image-colimits-finite-products",
+  "lem-weil-pbc-coyoneda-iso-of-natural-hom-bijection"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/modules.tex",
+  "place": "proof of Lemma Tag 0CAK (label lemma-constructible-comes-from-finite, line 3061), which only asserts the identification ('Observe that ...'); the corepresentability argument is written by the agent from Sheaves Lemma Tag 008K (label lemma-f-map), Lemma Tag 00A3 (label lemma-j-shriek), Example Tag 0081 (label example-sheafify-constant) and Categories Lemma Tag 001P (label lemma-yoneda)"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -35,10 +101,59 @@
    "results": "none",
    "date": "2026-10-10",
    "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "pullback of a sheaf along a continuous map commutes with left adjoint of restriction to open subset (extension by empty set)",
+   "results": "TopCat.Sheaf.pullback, TopCat.Presheaf.pullback, TopCat.Presheaf.pushforwardPullbackAdjunction, SheafOfModules.pullback, CategoryTheory.Functor.sheafPullback, Functor.sheafPullbackConstruction.sheafPullback, TopCat.Sheaf.instIsLeftAdjointPullback, SheafOfModules.pullbackPushforwardAdjunction",
+   "date": "2026-10-10",
+   "verdict": "no match: only the inverse image functor and its adjunction (used through lem-weil-pbc-sets-inverse-image-colimits-finite-products); no extension by the empty set"
+  },
+  {
+   "tool": "leansearch",
+   "query": "left adjoints of composite functors are isomorphic if the right adjoints commute up to isomorphism",
+   "results": "CategoryTheory.Adjunction.leftAdjointCompIso (Mathlib/CategoryTheory/Adjunction/CompositionIso.lean:72), leftAdjointCompIso_hom_app, leftAdjointCompIso_id_comp, leftAdjointCompIso_assoc, CategoryTheory.Adjunction.natIsoOfRightAdjointNatIso (Mathlib/CategoryTheory/Adjunction/Opposites.lean:96)",
+   "date": "2026-10-10",
+   "verdict": "no match: abstract tool that would give g^{-1} j_! = j'_! (g|_{V'})^{-1} once j_! is a left adjoint in Mathlib; Mathlib has no explicit j_! nor the identification of the constant sheaf's inverse image, so not a one-line specialization"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "inverse image of sheaf j_! of constant sheaf along continuous map is j'_! of constant sheaf on preimage open",
+   "results": "TopCat.Sheaf.pullbackPushforwardAdjunction, TopCat.Sheaf.pushforward, TopCat.Sheaf.pullback, TopCat.Presheaf.pushforward_obj_obj, TopCat.Presheaf.pullbackObjObjOfImageOpen, TopCat.Presheaf.isSheaf_of_isOpenEmbedding, TopCat.Sheaf.pullbackIso (Mathlib.Topology.Sheaves.Functors / Presheaf / SheafCondition.Sites)",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "TopCat.Sheaf.pullback, IsOpenMap.functor",
+   "results": "none",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction, CategoryTheory.Coyoneda.fullyFaithful",
+   "results": "none",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rln 'IsOpenMap.functor' Mathlib/Topology/Sheaves/; grep -rn 'sheafPullback\\|leftAdjoint\\|lowerShriek\\|extendByEmpty\\|pullbackComp' Mathlib/Topology/Sheaves/*.lean; grep -n 'def pullbackPushforwardAdjunction' Mathlib/Topology/Sheaves/Functors.lean; grep -rn 'isIso_of_coyoneda\\|Coyoneda' Mathlib/CategoryTheory/Yoneda.lean; grep -n 'homEquiv_unit' Mathlib/CategoryTheory/Adjunction/Basic.lean (under ~/weil-conjectures-slopmaster2/.lake/packages/mathlib)",
+   "results": "Functors.lean:91 pullback, :98 pullbackIso, :103 pullbackPushforwardAdjunction, :125/:142 IsOpenEmbedding.sheafPullback(Iso) (restriction only); Presheaf.lean:301-415 pullbackObjIso/pullbackIso for open maps (presheaf restriction); Yoneda.lean:1140 isIso_of_coyoneda_map_bijective; Adjunction/Basic.lean:181 homEquiv_unit; nothing on extension by the empty set or its inverse image",
+   "date": "2026-10-10",
+   "verdict": "no match: the tools of the proof (adjunction, coyoneda) are in Mathlib and are cited through existing leaf nodes; the statement is not"
+  },
+  {
+   "tool": "local_search",
+   "query": "TopCat.Sheaf.pullback (project ~/weil-conjectures-slopmaster2)",
+   "results": "TopCat.Sheaf.pullback, TopCat.Sheaf.pullbackIso, TopCat.Sheaf.pullbackPushforwardAdjunction (Mathlib/Topology/Sheaves/Functors.lean); index: unavailable",
+   "date": "2026-10-10",
+   "verdict": "names exist; no declaration for the item"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "worker",
@@ -58,5 +173,17 @@
   }
  },
  "chapter": "sec-proper-base-change",
- "unit": "sk-thm-p1"
+ "unit": "sk-thm-p1",
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "lem-weil-pbc-sets-inverse-image-extension-by-empty-constant",
+  "worker": "stage1",
+  "summary": "Checked against Stacks modules.tex proof of Lemma 0CAK (lemma-constructible-comes-from-finite), which only asserts p_i^{-1}(j_{U_{a,i}!}S_a) = j_{U_a!}S_a ('Observe'); the proof is written by the agent (proof_origin agent) as a corepresentability argument. Statement kept (checked: V' open, beta well-typed on both sides, (g^{-1}K)(V') = (g_*g^{-1}K)(V)). Five steps: (1) beta is a natural bijection, as the composite of the sheaf adjunction of lem-weil-pbc-sets-extension-by-empty-adjunction (2) (00A3) and lem-weil-pbc-constant-sheaf-open-maps-sections; (2) the adjunction g^{-1} -| g_* for sheaves of sets in the form phi -> g_*phi o eta (lem-weil-pbc-sets-inverse-image-colimits-finite-products (a) with the unit of def-weil-pbc-topological-inverse-image (3), as the accepted split of lem-weil-pbc-inverse-image-closed-pushforward-constant does), and naturality of the unit checked on sections from the definitions; (3) the natural bijection Phi_K: Hom(g^{-1}j_{V!}T, K) -> Hom(j_{V'!}T, K); (4) lambda by lem-weil-pbc-coyoneda-iso-of-natural-hom-bijection; (5) the compatibility with beta and eta by naturality of beta and of the unit. No new nodes: every non-elementary fact is an existing node (all in unit sk-thm-p1 except the definition def-weil-pbc-topological-inverse-image). Mathlib: no match (LeanSearch x2, LeanFinder, Loogle x2, grep of Topology/Sheaves, CategoryTheory/Yoneda.lean, Adjunction, local_search); the abstract route via Adjunction.leftAdjointCompIso needs an explicit j_! that Mathlib lacks."
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "result": "accepted",
+  "note": "5 steps (the source, Modules 0CAK, only asserts the identification; proof_origin agent): beta is the composite of the extension-by-empty adjunction (2) and the constant-sheaf node, natural in K; the adjunction g^{-1} -| g_* for sets with the unit of the (now set-valued) definition, naturality of the unit checked on sections; the natural bijection Phi_K between the two corepresented functors; lambda by the coyoneda leaf; the compatibility identity by chasing Phi, (**) and (*). Statement unchanged."
+ }
 }
