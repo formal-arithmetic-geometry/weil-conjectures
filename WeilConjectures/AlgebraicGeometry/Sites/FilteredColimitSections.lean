@@ -221,4 +221,28 @@ theorem exists_app_eq_of_isColimit (hc : IsColimit c) {W : X.Etale} [CompactSpac
   erw [← hy i]
   exact (NatTrans.naturality_apply (c.ι.app k').hom (g i).op y).symm
 
+/-- **Sections over a quasi-compact quasi-separated `W` commute with filtered colimits** (Stacks
+0738): the image of a colimit cocone of a `u`-small filtered diagram of étale sheaves of
+`Λ`-modules under the sections functor over `W` is a colimit cocone. -/
+noncomputable def isColimitSheafSectionsMapCocone (hc : IsColimit c) (W : X.Etale)
+    [CompactSpace W.left] [QuasiSeparatedSpace W.left] :
+    IsColimit (((sheafSections X.smallEtaleTopology (ModuleCat.{u + 1} Λ)).obj (op W)).mapCocone
+      c) := by
+  have : ReflectsColimit (F ⋙ (sheafSections X.smallEtaleTopology (ModuleCat.{u + 1} Λ)).obj (op W))
+      (CategoryTheory.forget (ModuleCat.{u + 1} Λ)) := reflectsColimit_of_reflectsIsomorphisms _ _
+  refine isColimitOfReflects (CategoryTheory.forget (ModuleCat.{u + 1} Λ)) ?_
+  refine Types.FilteredColimit.isColimitOf' _ _ (fun s ↦ ?_) (fun k t t' h ↦ ?_)
+  · obtain ⟨k, t, ht⟩ := exists_app_eq_of_isColimit hc s
+    exact ⟨k, t, ht.symm⟩
+  · exact exists_map_eq_of_isColimit hc t t' h
+
+/-- The sections functor over a quasi-compact quasi-separated étale `X`-scheme preserves
+colimits of `u`-small filtered diagrams. -/
+instance preservesFilteredColimitsOfSize_sheafSections (W : X.Etale) [CompactSpace W.left]
+    [QuasiSeparatedSpace W.left] :
+    PreservesFilteredColimitsOfSize.{u, u}
+      ((sheafSections X.smallEtaleTopology (ModuleCat.{u + 1} Λ)).obj (op W)) where
+  preserves_filtered_colimits _ _ _ :=
+    ⟨fun {_} ↦ ⟨fun {_} hc ↦ ⟨isColimitSheafSectionsMapCocone hc W⟩⟩⟩
+
 end AlgebraicGeometry.Scheme

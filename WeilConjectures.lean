@@ -1364,6 +1364,7 @@ public import WeilConjectures.SixFunctors.Etale.GeometricFrobenius
 public import WeilConjectures.SixFunctors.Etale.LowerShriek.Comparison
 public import WeilConjectures.SixFunctors.Etale.LowerShriek.Defs
 public import WeilConjectures.SixFunctors.Etale.LowerShriek.EtaleMap
+public import WeilConjectures.SixFunctors.Etale.LowerShriek.FinitelyPresentable
 public import WeilConjectures.SixFunctors.Etale.LowerShriek.OpenImmersion.BaseChange
 public import WeilConjectures.SixFunctors.Etale.LowerShriek.OpenImmersion.BaseChangeSquare
 public import WeilConjectures.SixFunctors.Etale.LowerShriek.OpenImmersion.Comp
