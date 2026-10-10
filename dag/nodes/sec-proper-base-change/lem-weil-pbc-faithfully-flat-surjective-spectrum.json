@@ -1,0 +1,66 @@
+{
+ "id": "lem-weil-pbc-faithfully-flat-surjective-spectrum",
+ "kind": "statement",
+ "title": "A faithfully flat ring map is surjective on spectra",
+ "statement": "Let $\\varphi:R\\to S$ be a faithfully flat homomorphism of commutative rings [def-weil-pbc-faithfully-flat-ring-map]. Then the induced map of prime spectra $\\operatorname{Spec}S\\to\\operatorname{Spec}R$, $\\mathfrak q\\mapsto\\varphi^{-1}(\\mathfrak q)$, is surjective: for every prime ideal $\\mathfrak p\\subset R$ there is a prime ideal $\\mathfrak q\\subset S$ with $\\varphi^{-1}(\\mathfrak q)=\\mathfrak p$.",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Algebra, Lemma Tag 00HQ (lemma-ff-rings, line 9164), implication (1) => (2)"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-faithfully-flat-ring-map"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "faithfully flat algebra induces surjective map on prime spectrum",
+   "results": "PrimeSpectrum.comap_surjective_of_faithfullyFlat, PrimeSpectrum.specComap_surjective_of_faithfullyFlat, Module.FaithfullyFlat.of_comap_surjective (all Mathlib.RingTheory.Flat.FaithfullyFlat.Algebra), RingHom.FaithfullyFlat.iff_flat_and_comap_surjective (Mathlib.RingTheory.RingHom.FaithfullyFlat)",
+   "date": "2026-10-10",
+   "verdict": "match: PrimeSpectrum.comap_surjective_of_faithfullyFlat"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "every prime ideal of A is the contraction of a prime ideal of B when B is a faithfully flat A-algebra",
+   "results": "Ideal.exists_isPrime_liesOver_of_faithfullyFlat (Mathlib.RingTheory.Flat.FaithfullyFlat.Algebra), Algebra.HasGoingDown.of_flat, Module.FaithfullyFlat.of_specComap_surjective, RingHom.FaithfullyFlat.iff_flat_and_comap_surjective",
+   "date": "2026-10-10",
+   "verdict": "match: Ideal.exists_isPrime_liesOver_of_faithfullyFlat (prime form)"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rn 'comap_surjective_of_faithfullyFlat' /home/ubuntu/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/",
+   "results": "RingTheory/Flat/FaithfullyFlat/Algebra.lean:146 lemma PrimeSpectrum.comap_surjective_of_faithfullyFlat [Module.FaithfullyFlat A B] : Function.Surjective (comap (algebraMap A B)); :127 Ideal.comap_surjective_of_faithfullyFlat; used in RingHom/FaithfullyFlat.lean:45 (iff_flat_and_comap_surjective) and Ideal/GoingDown.lean:164",
+   "date": "2026-10-10",
+   "verdict": "match"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "PrimeSpectrum.comap_surjective_of_faithfullyFlat",
+  "file": "Mathlib/RingTheory/Flat/FaithfullyFlat/Algebra.lean",
+  "line": 146,
+  "how": "exact: `lemma PrimeSpectrum.comap_surjective_of_faithfullyFlat [Module.FaithfullyFlat A B] : Function.Surjective (comap (algebraMap A B))` (Algebra.lean:146-149, docstring 'If B is a faithfully flat A-algebra, the induced map on the prime spectrum is surjective'), with phi.toAlgebra; PrimeSpectrum.comap phi sends q to phi^{-1}(q). For a bare ring map: direction -> of RingHom.FaithfullyFlat.iff_flat_and_comap_surjective (Mathlib/RingTheory/RingHom/FaithfullyFlat.lean:41). Prime-ideal form: Ideal.exists_isPrime_liesOver_of_faithfullyFlat (Algebra.lean:138). Source read with sed -n 2026-10-10."
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-regular-ring-faithfully-flat-descent",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1"
+}

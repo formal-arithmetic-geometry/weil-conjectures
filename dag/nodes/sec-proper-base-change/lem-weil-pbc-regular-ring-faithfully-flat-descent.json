@@ -11,9 +11,81 @@
   "def-weil-pbc-faithfully-flat-ring-map",
   "def-weil-regular-scheme"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "($R$ is Noetherian.) A regular ring is Noetherian by definition [def-weil-regular-scheme], so $S$ is Noetherian. Since $\\varphi$ is faithfully flat, $R$ is Noetherian by [lem-weil-pbc-faithfully-flat-descent-noetherian] (Stacks Lemma 033E: an ascending chain $I_0\\subseteq I_1\\subseteq\\dots$ of ideals of $R$ gives a chain $I_nS$ that stabilizes, and $I=\\varphi^{-1}(IS)$ for every ideal $I$ of $R$).",
+   "uses": [
+    "def-weil-regular-scheme",
+    "lem-weil-pbc-faithfully-flat-descent-noetherian"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra, proof of Lemma Tag 07NG (lemma-descent-regular, line 46715), first sentence; Lemma Tag 033E (lemma-descent-Noetherian, line 46647)"
+   }
+  },
+  {
+   "text": "(A prime of $S$ over a given prime of $R$.) Let $\\mathfrak p\\subset R$ be a prime ideal. Since $\\varphi$ is faithfully flat, the map $\\operatorname{Spec}S\\to\\operatorname{Spec}R$ is surjective [lem-weil-pbc-faithfully-flat-surjective-spectrum], so there is a prime ideal $\\mathfrak q\\subset S$ with $\\varphi^{-1}(\\mathfrak q)=\\mathfrak p$.",
+   "uses": [
+    "lem-weil-pbc-faithfully-flat-surjective-spectrum"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra, proof of Lemma Tag 07NG (lemma-descent-regular, line 46715), second sentence ('Choose a prime q of S lying over p'); Lemma Tag 00HQ (lemma-ff-rings, line 9164)"
+   }
+  },
+  {
+   "text": "($R_{\\mathfrak p}\\to S_{\\mathfrak q}$ is a flat local homomorphism of Noetherian local rings.) A faithfully flat ring map is flat [def-weil-pbc-faithfully-flat-ring-map]. Hence, by [lem-weil-pbc-flat-local-ring-maps] applied to the flat map $\\varphi$, the prime $\\mathfrak q$ and $\\mathfrak p=\\varphi^{-1}(\\mathfrak q)$, the induced map of localizations [def-weil-pbc-localization-at-prime] $\\varphi_{\\mathfrak q}:R_{\\mathfrak p}\\to S_{\\mathfrak q}$, $r/s\\mapsto\\varphi(r)/\\varphi(s)$, is a flat local homomorphism of local rings; as $R$ (Step 1) and $S$ are Noetherian, $R_{\\mathfrak p}$ and $S_{\\mathfrak q}$ are Noetherian local rings (same node).",
+   "uses": [
+    "def-weil-pbc-faithfully-flat-ring-map",
+    "lem-weil-pbc-flat-local-ring-maps",
+    "def-weil-pbc-localization-at-prime"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra, proof of Lemma Tag 07NG (lemma-descent-regular, line 46715), third sentence ('Lemma 00OF applies to R_p -> S_q'): the hypotheses of 00OF; Lemma Tag 00HT (lemma-flat-localization, line 9196)"
+   }
+  },
+  {
+   "text": "($R_{\\mathfrak p}$ is regular.) Since $S$ is a regular ring, its localization $S_{\\mathfrak q}$ at the prime $\\mathfrak q$ is a regular local ring [def-weil-regular-scheme]. By Step 3, $\\varphi_{\\mathfrak q}:R_{\\mathfrak p}\\to S_{\\mathfrak q}$ is a flat local homomorphism of Noetherian local rings with regular target, so $R_{\\mathfrak p}$ is a regular local ring by [lem-weil-pbc-flat-under-regular].",
+   "uses": [
+    "def-weil-regular-scheme",
+    "lem-weil-pbc-flat-under-regular"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra, proof of Lemma Tag 07NG (lemma-descent-regular, line 46715), third sentence; Lemma Tag 00OF (lemma-flat-under-regular, line 27188)"
+   }
+  },
+  {
+   "text": "(Conclusion.) $R$ is Noetherian (Step 1) and, $\\mathfrak p$ being an arbitrary prime of $R$, every localization $R_{\\mathfrak p}$ is a regular local ring (Step 4); this is the definition of a regular ring [def-weil-regular-scheme].",
+   "uses": [
+    "def-weil-regular-scheme"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra, proof of Lemma Tag 07NG (lemma-descent-regular, line 46715), last sentence; Definition Tag 00OD (definition-regular)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-regular-scheme",
+  "lem-weil-pbc-faithfully-flat-descent-noetherian",
+  "lem-weil-pbc-faithfully-flat-surjective-spectrum",
+  "def-weil-pbc-faithfully-flat-ring-map",
+  "lem-weil-pbc-flat-local-ring-maps",
+  "def-weil-pbc-localization-at-prime",
+  "lem-weil-pbc-flat-under-regular"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Algebra, Lemma Tag 07NG (lemma-descent-regular, line 46715) and its proof"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -45,7 +117,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "worker",
@@ -65,5 +137,17 @@
   }
  },
  "chapter": "sec-proper-base-change",
- "unit": "sk-thm-p1"
+ "unit": "sk-thm-p1",
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "lem-weil-pbc-regular-ring-faithfully-flat-descent",
+  "worker": "stage1",
+  "summary": "Statement kept (it is Stacks 07NG; the 'in particular Noetherian' clause is part of the definition of regular ring and is Step 1). Proof written in five steps from the proof of 07NG: Noetherian descent 033E (existing Mathlib leaf lem-weil-pbc-faithfully-flat-descent-noetherian), a prime over p by 00HQ (new Mathlib leaf lem-weil-pbc-faithfully-flat-surjective-spectrum, PrimeSpectrum.comap_surjective_of_faithfullyFlat; the existing lem-weil-pbc-flat-surjective-spectrum-faithfully-flat is only the converse direction), R_p -> S_q flat local of Noetherian local rings (existing Mathlib leaf lem-weil-pbc-flat-local-ring-maps), 00OF (new unsplit node lem-weil-pbc-flat-under-regular; its proof goes through Serre's finite-global-dimension theorems 00O7/00OC, absent from Mathlib), and the definition 00OD. stmt_deps unchanged. The item's own Mathlib searches (four kinds, 2026-10-10) were confirmed: Mathlib has IsRegularRing but no descent result."
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "result": "accepted",
+  "note": "5 steps following Stacks 07NG: Noetherian descent (033E leaf), surjectivity on Spec (new 00HQ leaf, PrimeSpectrum.comap_surjective_of_faithfullyFlat Algebra.lean:146 verified by L), flat local map R_p -> S_q (00HT leaf), regularity descends along a flat local map of Noetherian local rings (new unsplit 00OF node), definition. Tags verified."
+ }
 }
