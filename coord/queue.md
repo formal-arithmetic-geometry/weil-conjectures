@@ -2,7 +2,7 @@
 
 894 items; claim with `tools/claim.py next <group> [--stage N]`.
 
-## Stage 1: nodes to split (666)
+## Stage 1: nodes to split (665)
 
 | node | distance to a target | Lean state on the done branch |
 |---|---|---|
@@ -26,7 +26,6 @@
 | `lem-weil-pbc-isolated-prime-finite-type-algebra-residue-finite` | 1012 | none |
 | `lem-weil-pbc-kahler-differentials-polynomial-extension` | 1012 | none |
 | `lem-weil-pbc-kernel-cokernel-annihilated-mod-ideal` | 1012 | none |
-| `lem-weil-pbc-krull-intersection-localization` | 1012 | none |
 | `lem-weil-pbc-lci-conormal-free-rank-codimension` | 1012 | none |
 | `lem-weil-pbc-local-artinian-basis-when-flat` | 1012 | none |
 | `lem-weil-pbc-local-dimension-zero-henselian` | 1012 | none |
@@ -673,7 +672,7 @@
 | `lem-pc-linear-pair-graded-finite` | - | none |
 | `def-exc-jacobian-presentation` | - | none |
 
-## Stage 2: nodes to state (228)
+## Stage 2: nodes to state (229)
 
 | node | distance to Mathlib | kind |
 |---|---|---|
@@ -813,6 +812,7 @@
 | `lem-weil-pbc-jacobi-zariski-left-term-vanishing` | 1 | state |
 | `lem-weil-pbc-jacobi-zariski-quotient-smooth` | 1 | state |
 | `lem-weil-pbc-kahler-differentials-mod-power-ideal` | 1 | state |
+| `lem-weil-pbc-krull-intersection-localization` | 1 | state |
 | `lem-weil-pbc-lft-over-field-isolated-point-residue-finite` | 1 | state |
 | `lem-weil-pbc-lift-coprime-factorization-etale` | 1 | state |
 | `lem-weil-pbc-lift-idempotent-upstairs` | 1 | state |
@@ -906,7 +906,7 @@
 | `lem-weil-pbc-p1-field-dimension-one` | 4 | state |
 | `lem-weil-pbc-projective-space-zero-isomorphism` | 4 | state |
 
-Not open yet: 678 nodes that wait for stage 1, 516 nodes that wait for a statement dependency.
+Not open yet: 677 nodes that wait for stage 1, 516 nodes that wait for a statement dependency.
 
 ## Stage 3: modules to prove (0)
 
