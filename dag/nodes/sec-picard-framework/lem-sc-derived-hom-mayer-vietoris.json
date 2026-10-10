@@ -14,19 +14,54 @@
  },
  "kind": "statement",
  "title": "Mayer–Vietoris sequence for derived Hom on a two-open cover",
- "statement": "Let X be a ringed space covered by open subspaces U and V. For any two objects E and F of its derived category [def-pc-derived-category], there is an exact sequence from global Hom(E,F) to the direct sum of Hom between their restrictions to U and V, then to Hom between their restrictions to the intersection; the second map is the difference of restrictions, and this is the beginning of the Mayer–Vietoris long exact sequence with a preceding negative Ext term.",
+ "statement": "Let (X, O_X) be a ringed space [def-weil-locally-ringed-space-morphism] covered by open subspaces U and V, and let D(O_X) be the derived category of sheaves of O_X-modules [def-weil-sheaf-of-modules-category, def-weil-abstract-derived-category], and likewise for the opens. For any two objects E and F of D(O_X), there is an exact sequence from global Hom(E,F) to the direct sum of Hom between their restrictions to U and V, then to Hom between their restrictions to the intersection; the second map is the difference of restrictions, and this is the beginning of the Mayer–Vietoris long exact sequence with a preceding negative Ext term.",
  "source": {
   "document": "literature/stacks-project/cohomology.tex",
   "place": "Tag 08BW (Cohomology, Lemma 20.33.3, lemma-mayer-vietoris-hom)"
  },
  "stmt_deps": [
-  "def-pc-derived-category"
+  "def-weil-locally-ringed-space-morphism",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-abstract-derived-category"
  ],
  "chapter": "sec-picard-framework",
  "unit": "sk-thm-picard-duality",
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Apply the distinguished Mayer–Vietoris triangle [lem-sc-derived-mayer-vietoris-triangle] to E. Applying the contravariant representable Hom(-,F) gives a long exact sequence by [lem-weil-pbc-hom-out-of-triangle-exact], with the terms Hom_X(E,F), Hom_X(j_{U,!}E|_U) direct-sum Hom_X(j_{V,!}E|_V), and Hom_X(j_{UV,!}E|_{U intersection V},F). The connecting term immediately preceding Hom_X(E,F) is the negative Ext group on U intersection V.",
+   "uses": [
+    "lem-sc-derived-mayer-vietoris-triangle",
+    "lem-weil-pbc-hom-out-of-triangle-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/cohomology.tex",
+    "place": "Tag 08BW (cohomology-lemma-mayer-vietoris-hom), proof using Tag 08BU and Derived Categories Lemma 0149"
+   }
+  },
+  {
+   "text": "Use the derived extension-by-zero/restriction adjunction [lem-sc-derived-open-shriek-derived-adjunction] on each of the three open inclusions. It identifies the middle terms with Hom_U(E|_U,F|_U) direct-sum Hom_V(E|_V,F|_V), identifies the last term with Hom_{U intersection V}(E|_{U intersection V},F|_{U intersection V}), and identifies the first term with Hom_X(E,F). Under these identifications the map from the direct sum is the difference of the two restriction maps, because the first arrow of the triangle is the difference of the two extension-by-zero maps. This is exactly the asserted beginning of the Mayer–Vietoris long exact sequence.",
+   "uses": [
+    "lem-sc-derived-open-shriek-derived-adjunction",
+    "lem-sc-derived-mayer-vietoris-triangle"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/cohomology.tex",
+    "place": "Tag 08BW (cohomology-lemma-mayer-vietoris-hom), proof; Tag 08BT adjunction"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sc-derived-mayer-vietoris-triangle",
+  "lem-weil-pbc-hom-out-of-triangle-exact",
+  "lem-sc-derived-open-shriek-derived-adjunction"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Tag 08BW (Cohomology, Lemma 20.33.3, lemma-mayer-vietoris-hom)"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -51,10 +86,36 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-sc-derived-open-gluing",
   "by": "worker",
   "date": "2026-10-10"
- }
+ },
+ "split_report": {
+  "date": "2026-10-11",
+  "item": "lem-sc-derived-hom-mayer-vietoris",
+  "worker": "stage1",
+  "summary": "Split Tag 08BW into the distinguished Mayer–Vietoris triangle, the derived extension-by-zero/restriction adjunction, and the resulting Hom exactness and restriction-map identification. Added two statement-only children; generic Hom-out-of-triangle exactness is cited from its existing Mathlib leaf.",
+  "blueprint": "Realizes the proper-flat support proof clause of lem-sc-finite-duality: use the Mayer–Vietoris sequence for Hom to glue compatible maps.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-hom-out-of-triangle-exact",
+    "why": "Its statement supplies exactness of the contravariant Hom(-,W) on a distinguished triangle, a generic triangulated-category tool not otherwise stated in this unit."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-hom-out-of-triangle-exact",
+  "lem-weil-pbc-hom-out-of-triangle-exact"
+ ],
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-dhm3038",
+  "group": "E1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-dhm3038 (reviewer sub-agent of L); spot-checked: Checked both steps against Tag 08BW: clause (ii) of lem-weil-pbc-hom-out-of-triangle-exact (Triangle.yoneda_exact3) gives exactness at Hom(E,F) with the Ext^-1 term, clause (i) at the middle; adjunction node gives the three identifications; both citers (lem-sc-perfect-into-support-on-T, lem-sc-derived-open-gluing) use exactly these two exactness points. Triangle node is Tag 08BU (lower-shriek), not a duplicate of the qcqs j_* lem-pc-derived-mayer-vietoris-triangle; adjunction node kept (Tag 08BT, not two lines from lem-sc-derived-adjunction-from-underived). FIX more, RETURN less: (1) E7/C4 item statement and stmt_deps cited the scheme-only def-pc-derived-category for a ringed space, replaced by def-weil-locally-ringed-space-morphism, def-weil-sheaf-of-modules-category, def-weil-abstract-derived-category (the second reading claimed this fix but had not made it); (2) C7 declared tool_uses named the unused lem-weil-pbc-hom-into-triangle-exact, replaced by the actually cited lem-weil-pbc-hom-out-of-triangle-exact; (3) B3 triangle node and step 1 source said Tag 08BV (the j_* triangle) for lemma-exact-sequence-lower-shriek, corrected to Tag 08BU.; 2 file(s) fixed by the reviewer"
+ },
+ "lead_note": "2026-10-10 L (R-dhm3038): Item statement generalized in its deps from scheme-only def-pc-derived-category to ringed-space D(O_X) (E7: the item is for an arbitrary ringed space; both citers use it on schemes, a special case)."
 }
