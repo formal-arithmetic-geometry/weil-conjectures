@@ -1008,3 +1008,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 07:15 L: reviewed and accepted lem-weil-pbc-quasi-finite-ring-map-integral-closure-open (10 steps; +open-immersion-injective-local-source leaf; 00QB's omitted details written out).
 - 07:16 L: reviewed and accepted lem-weil-pbc-regular-sequence-conormal-free (5 elementary steps, no new nodes; quasi-regularity 00LN (1) proved in full).
 - 07:17 L: reviewed and accepted lem-weil-pbc-regular-local-mcm-free (7 steps; +cm-module-good-element-nonzerodivisor 00N5 node, +support-dimension-quotient-element-bound 0B52, +free-mod-nonzerodivisor 00NS, +vector-space-free 09FN leaves).
+- 07:18 L: reviewed and accepted lem-weil-pbc-regular-local-separable-residue-smooth (7 steps; +separable-residue-cotangent-injective 00TU, +separably-generated-differentials-dimension, +dimension-at-point-local-ring-trdeg 00P1, +differentials-dimension-bound-smooth-at-prime 00TT nodes).

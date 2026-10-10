@@ -1,0 +1,74 @@
+{
+ "id": "lem-weil-pbc-separably-generated-differentials-dimension",
+ "kind": "statement",
+ "title": "Differentials of a separably generated field extension: dimension equals transcendence degree",
+ "statement": "Let $K/k$ be a field extension [def-pc-field-extension] which is finitely generated ($K=k(a_1,\\dots,a_n)$ for finitely many $a_i\\in K$) and separable [def-weil-pbc-separable-field-extension]. Let $x_1,\\dots,x_r\\in K$ be a transcendence basis of $K/k$ [def-weil-pbc-transcendence-basis] such that $K$ is separable algebraic over $k(x_1,\\dots,x_r)$ [def-weil-pbc-separable-algebraic-extension] (one exists, $K$ being separably generated over $k$ by the definition). Let $\\Omega_{K/k}$, $\\mathrm d$ be the module of Kähler differentials and the universal derivation [def-weil-pbc-kahler-differentials]. Then $\\mathrm dx_1,\\dots,\\mathrm dx_r$ is a basis of the $K$-vector space $\\Omega_{K/k}$. In particular $\\Omega_{K/k}$ is finite dimensional and $\\dim_K\\Omega_{K/k}=\\operatorname{trdeg}_k(K)$ [def-kun-transcendence-degree].",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Algebra, proof of Lemma Tag 031W (lemma-derivative-zero-pth-power, algebra.tex lines 44188-44208: 'Omega_{K/k} = oplus K dx_i since k(x_1,...,x_r) subset K is finite separable (computation omitted)'), the fact used without reference in the proof of Lemma Tag 00TV (lemma-separable-smooth, line 38765: 'since kappa is separable over k we have dim Omega_{kappa/k} = trdeg_k(kappa)'); tags verified in stacks-project/tags/tags"
+ },
+ "stmt_deps": [
+  "def-pc-field-extension",
+  "def-weil-pbc-separable-field-extension",
+  "def-weil-pbc-transcendence-basis",
+  "def-weil-pbc-separable-algebraic-extension",
+  "def-weil-pbc-kahler-differentials",
+  "def-kun-transcendence-degree"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "separably generated finitely generated field extension, Kähler differentials have dimension equal to transcendence degree",
+   "results": "Field.Algebra.IsSeparable.finSepDegree_eq, Field.finSepDegree_eq_finrank_iff (Mathlib.FieldTheory.SeparableDegree), Field.sepDegree, exists_isTranscendenceBasis_and_isSeparable_of_perfectField (Mathlib.FieldTheory.SeparablyGenerated)",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "rank of Kähler differentials of a separable field extension equals transcendence degree",
+   "results": "Algebra.SubmersivePresentation.rank_kaehlerDifferential, Algebra.IsStandardSmoothOfRelativeDimension.rank_kaehlerDifferential (Mathlib.RingTheory.Smooth.StandardSmoothCotangent), Field.sepDegree_mul_insepDegree, Algebra.IsSeparable.sepDegree_eq",
+   "date": "2026-10-10",
+   "verdict": "no match (ranks for standard smooth algebras, not field extensions)"
+  },
+  {
+   "tool": "loogle",
+   "query": "KaehlerDifferential, IsTranscendenceBasis",
+   "results": "none",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "rg -n 'trdeg|transcendenceDegree|IsTranscendenceBasis' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib | grep -i 'kaehler|Omega|Ω'; rg -ln KaehlerDifferential | xargs rg -ln 'IsTranscendenceBasis|trdeg|AlgebraicIndependent'; read ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/RingTheory/Smooth/Field.lean lines 1-60",
+   "results": "none; Smooth/Field.lean proves formal smoothness of separably generated extensions (of_algebraicIndependent_of_isSeparable, line 44) but nothing about the rank of Ω",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-regular-local-separable-residue-smooth",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "reviewed": "Reviewed by L 2026-10-10 (statement): the differentials of a separating transcendence basis form a basis of Ω_{K/k} (proof of Algebra 031W, 'computation omitted'). Unsplit."
+}

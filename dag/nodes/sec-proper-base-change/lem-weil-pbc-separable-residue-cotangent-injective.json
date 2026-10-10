@@ -1,0 +1,77 @@
+{
+ "id": "lem-weil-pbc-separable-residue-cotangent-injective",
+ "kind": "statement",
+ "title": "Separable residue field: the cotangent space injects into the differentials",
+ "statement": "Let $k$ be a field and $(R,\\mathfrak m,\\kappa)$ a Noetherian local ring [def-weil-pbc-noetherian-ring] which is a $k$-algebra, with residue field $\\kappa=R/\\mathfrak m$, a field extension of $k$ via $k\\to R\\to\\kappa$ [def-pc-field-extension]. Assume $\\kappa$ is finitely generated as a field over $k$ ($\\kappa=k(a_1,\\dots,a_n)$ for finitely many $a_i\\in\\kappa$) and separable over $k$ [def-weil-pbc-separable-field-extension]. Let $\\Omega_{R/k}$ and $\\mathrm d:R\\to\\Omega_{R/k}$ be the module of Kähler differentials and the universal derivation [def-weil-pbc-kahler-differentials]. Then the $\\kappa$-linear map $$\\mathfrak m/\\mathfrak m^2\\longrightarrow\\Omega_{R/k}\\otimes_R\\kappa,\\qquad a\\bmod\\mathfrak m^2\\longmapsto\\mathrm da\\otimes1\\quad(a\\in\\mathfrak m),$$ is injective.",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Algebra, Lemma Tag 00TU (lemma-computation-differential, line 38687), proof lines 38702-38737; tag verified in stacks-project/tags/tags (00TU,algebra-lemma-computation-differential)"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-noetherian-ring",
+  "def-pc-field-extension",
+  "def-weil-pbc-separable-field-extension",
+  "def-weil-pbc-kahler-differentials"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Noetherian local ring containing a field k with separable residue field: the map m/m^2 to Omega_{R/k} tensor residue field is injective",
+   "results": "Algebra.FormallySmooth.iff_injective_lTensor_residueField and Algebra.FormallySmooth.iff_injective_cotangentComplexBaseChange (Mathlib.RingTheory.Smooth.Local), IsLocalRing.finrank_cotangentSpace_eq_zero_iff (Mathlib.RingTheory.Ideal.Cotangent), Algebra.SubmersivePresentation.cotangentComplex_injective, IsLocalRing.split_injective_iff_lTensor_residueField_injective",
+   "date": "2026-10-10",
+   "verdict": "no match: these characterize formal smoothness of S by injectivity for a presentation P -> S with P formally smooth; here R itself is the source ring and is not assumed formally smooth"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a Noetherian local k-algebra whose residue field is separable over k, the cotangent space m/m^2 injects into the Kähler differentials tensored with the residue field",
+   "results": "Algebra.FormallySmooth.iff_injective_cotangentComplexBaseChange_residueField, Algebra.FormallySmooth.iff_injective_lTensor_residueField (Mathlib.RingTheory.Smooth.Local), Algebra.FormallySmooth.kerCotangentToTensor_injective_iff (Mathlib.RingTheory.Smooth.Basic)",
+   "date": "2026-10-10",
+   "verdict": "no match (same reason)"
+  },
+  {
+   "tool": "loogle",
+   "query": "IsLocalRing.CotangentSpace, KaehlerDifferential",
+   "results": "none",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "rg -l CotangentSpace ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib | xargs rg -l 'KaehlerDifferential|Ω\\['; read ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/RingTheory/Smooth/Basic.lean lines 255-300 (kerCotangentToTensor_injective_iff, iff_split_injection, Stacks 031I) and Smooth/Local.lean lines 20-90",
+   "results": "Smooth/Kaehler.lean, Etale/Kaehler.lean, Smooth/StandardSmoothCotangent.lean, Kaehler/JacobiZariski.lean, Extension/Cotangent/*.lean: all about the Extension cotangent space of a presentation, none about IsLocalRing.CotangentSpace of a local k-algebra",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "mathlib_candidate": {
+  "declaration": "Algebra.FormallySmooth.of_algebraicIndependent_of_isSeparable together with KaehlerDifferential.kerCotangentToTensor and Algebra.FormallySmooth.iff_split_injection",
+  "file": "Mathlib/RingTheory/Smooth/Field.lean (line 44), Mathlib/RingTheory/Smooth/Basic.lean (lines 276-300)",
+  "how": "not a one-line specialization: kappa is formally smooth over k (Field.lean:44 for a separating transcendence basis); for the surjection R -> kappa the ker-cotangent map is then split injective by the 'only if' half of the lifting argument, which Basic.lean states only for a formally smooth source P; a composition, recorded as candidate"
+ },
+ "status": "unsplit",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-regular-local-separable-residue-smooth",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "reviewed": "Reviewed by L 2026-10-10 (statement): Algebra 00TU (m/m² → Ω_{R/k}⊗κ injective for separable finitely generated residue field). Unsplit; Mathlib candidate recorded (B8)."
+}

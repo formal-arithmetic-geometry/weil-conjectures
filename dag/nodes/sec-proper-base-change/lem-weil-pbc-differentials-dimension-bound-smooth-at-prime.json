@@ -1,0 +1,68 @@
+{
+ "id": "lem-weil-pbc-differentials-dimension-bound-smooth-at-prime",
+ "kind": "statement",
+ "title": "Over a field, few differentials at a point imply smoothness there",
+ "statement": "Let $k$ be a field, $S$ a finite type $k$-algebra [def-weil-pbc-finite-type-algebra] and $\\mathfrak q\\subset S$ a prime ideal with residue field $\\kappa(\\mathfrak q)$ [def-weil-pbc-localization-at-prime]. Let $\\Omega_{S/k}$ be the module of Kähler differentials [def-weil-pbc-kahler-differentials] and $\\dim_{\\mathfrak q}(\\operatorname{Spec}S)$ the Krull dimension of the topological space $\\operatorname{Spec}S$ [def-weil-affine-spectrum] at the point $\\mathfrak q$ [def-kun-topological-dimension-at-point]. If $$\\dim_{\\kappa(\\mathfrak q)}\\Omega_{S/k}\\otimes_S\\kappa(\\mathfrak q)\\le\\dim_{\\mathfrak q}(\\operatorname{Spec}S),$$ then $k\\to S$ is smooth at $\\mathfrak q$ [def-weil-pbc-singular-ideal]: there is $g\\in S\\setminus\\mathfrak q$ such that $S_g$ is a smooth $k$-algebra [def-weil-pbc-smooth-ring-map].",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Algebra, Lemma Tag 00TT (lemma-characterize-smooth-over-field, line 38609), implication (2) => (1), proof lines 38641-38681; tag verified in stacks-project/tags/tags (00TT,algebra-lemma-characterize-smooth-over-field)"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-finite-type-algebra",
+  "def-weil-pbc-localization-at-prime",
+  "def-weil-pbc-kahler-differentials",
+  "def-weil-affine-spectrum",
+  "def-kun-topological-dimension-at-point",
+  "def-weil-pbc-singular-ideal",
+  "def-weil-pbc-smooth-ring-map"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "finite type algebra over a field is smooth at a prime if dimension of Kähler differentials at the residue field is at most the local dimension",
+   "results": "Algebra.IsStandardSmooth.iff_exists_basis_kaehlerDifferential, Algebra.IsStandardSmooth.of_basis_kaehlerDifferential (Mathlib.RingTheory.Smooth.StandardSmoothOfFree), Algebra.IsStandardSmoothOfRelativeDimension.iff_of_isStandardSmooth, Algebra.IsSmoothAt (Mathlib.RingTheory.Smooth.Locus), RingHom.Smooth, Algebra.FormallySmooth.iff_subsingleton_and_projective",
+   "date": "2026-10-10",
+   "verdict": "no match (these need H_1 = 0 or a basis of Ω, not a dimension bound at a point)"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Jacobian-type criterion: algebra of finite type over a field is smooth at a prime iff dimension of differentials at that prime equals local dimension",
+   "results": "Algebra.IsStandardSmoothOfRelativeDimension, Algebra.IsSmoothAt, Algebra.IsStandardSmooth.relativeDimension, Algebra.IsStandardSmoothOfRelativeDimension.iff_of_isStandardSmooth",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "rg -n IsSmoothAt ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib -g '*.lean' | grep -i 'rank|dim'; read ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/RingTheory/Smooth/Locus.lean around lines 46 and 150",
+   "results": "none; Locus.lean defines Algebra.IsSmoothAt and proves exists_notMem_smooth, no dimension criterion",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-regular-local-separable-residue-smooth",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "reviewed": "Reviewed by L 2026-10-10 (statement): Algebra 00TT (2)=>(1). Unsplit."
+}
