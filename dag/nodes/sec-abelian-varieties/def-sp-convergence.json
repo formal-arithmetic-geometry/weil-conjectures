@@ -3,11 +3,11 @@
  "blueprint": {
   "is": "def-sp-convergence",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "definition",
  "title": "Convergence of a couple",
- "statement": "In the situation of [def-sp-exact-couple], regard all cycle and boundary\nobjects as subobjects of the initial page $E_2$. Set $Z_2=E_2$, $B_2=0$.\nGiven $E_r=Z_r/B_r$, define $Z_{r+1}\\subseteq Z_r$ as the inverse image of\n$\\ker d_r$, and $B_{r+1}\\subseteq Z_r$ as the inverse image of\n$\\operatorname{im}d_r$ under $Z_r\\twoheadrightarrow E_r$, component by\ncomponent. Thus $E_{r+1}=Z_{r+1}/B_{r+1}$, the $Z_r$ decrease, and the $B_r$\nincrease inside $E_2$. When these limits exist, put\n$Z_\\infty=\\bigcap_rZ_r$, $B_\\infty=\\bigcup_rB_r$, and\n$E_\\infty=Z_\\infty/B_\\infty$. The couple is *regular* if each\n$B_r^{p,q}\\subseteq E_2^{p,q}$ is eventually constant. It is *complete* if\nthe subobjects $\\operatorname{im}(\\alpha^r:D^{p+r,q-r}\\to D^{p,q})$ have zero\nintersection for every $(p,q)$. It *converges to the filtration\n[def-sp-filtration] of an object $A$* if\n\n$$\n E_\\infty^{p,q}\\cong\\operatorname{gr}^pA^{p+q}\n$$\n\ncompatibly with the structure maps (the *abutment*).",
+ "statement": "In the situation of [def-sp-exact-couple], regard all cycle and boundary\nobjects as subobjects of the initial page $E_2$. Set $Z_2=E_2$, $B_2=0$.\nGiven $E_r=Z_r/B_r$, define $Z_{r+1}\\subseteq Z_r$ as the inverse image of\n$\\ker d_r$, and $B_{r+1}\\subseteq Z_r$ as the inverse image of\n$\\operatorname{im}d_r$ under $Z_r\\twoheadrightarrow E_r$, component by\ncomponent. Thus $E_{r+1}=Z_{r+1}/B_{r+1}$, the $Z_r$ decrease, and the $B_r$\nincrease inside $E_2$. When these limits exist, put\n$Z_\\infty=\\bigcap_rZ_r$, $B_\\infty=\\bigcup_rB_r$, and\n$E_\\infty=Z_\\infty/B_\\infty$. The couple is *regular* if each\n$Z_r^{p,q}\\subseteq E_2^{p,q}$ is eventually constant. It is *complete* if\nthe subobjects $\\operatorname{im}(\\alpha^r:D^{p+r,q-r}\\to D^{p,q})$ have zero\nintersection for every $(p,q)$. It is *bounded* if, for every total degree\n$n$, only finitely many pairs $(p,q)$ with $p+q=n$ satisfy $E_2^{p,q}\\ne0$.\nAssume that for every $n$ the colimit\n$A^n:=\\operatorname{colim}_{p\\to-\\infty}D^{p,n-p}$ along $\\alpha$ exists in\n$\\mathcal A$. Define $F^pA^n$ to be the image of the canonical map\n$D^{p,n-p}\\to A^n$; since $D^{p+1,n-p-1}\\to A^n$ factors through $\\alpha$, one has\n$F^{p+1}A^n\\subseteq F^pA^n$, so this is a decreasing filtration in the sense of\n[def-sp-filtration]. The exact-couple map $g:D^{p,q}\\to E_2^{p,q}$ lands in\n$Z_\\infty^{p,q}$ and therefore gives a canonical map\n$D^{p,q}\\to E_\\infty^{p,q}$. The filtration map gives a canonical map\n$D^{p,q}\\to\\operatorname{gr}^pA^{p+q}$. The couple *weakly converges\nto* the filtered objects $(A^n,F)$ if these two maps are both onto and have\nthe same kernel, so they induce canonical isomorphisms\n$E_\\infty^{p,q}\\cong\\operatorname{gr}^pA^{p+q}$. It *abuts to* $(A,F)$ if it\nweakly converges and $\\bigcap_pF^pA^n=0$ and $\\bigcup_pF^pA^n=A^n$ for\nevery $n$. It *converges to* $(A,F)$ if it is regular, abuts to $(A,F)$,\nand $A^n\\cong\\varprojlim_p A^n/F^pA^n$ for every $n$ (the abutment);\nthese are the convergence conventions of Stacks Tag 012U.",
  "source": {
   "document": "literature/blueprint/master/blueprint/sec-abelian-varieties/sk-prop-av-pqf-finite/def-sp-convergence.md",
   "place": "node def-sp-convergence, order 510"
@@ -19,9 +19,59 @@
  "proof": [],
  "proof_deps": [],
  "proof_origin": null,
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "definition of convergence of an exact couple with Z_r B_r, regular complete and abutment filtration",
+   "results": "Unrelated homology and exactness declarations; no exact-couple convergence definition",
+   "date": "2026-10-11",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "SpectralSequence.AbutsTo, SpectralSequence.pageInfinity, exact couple convergence",
+   "results": "0 hits; unknown identifier SpectralSequence.AbutsTo",
+   "date": "2026-10-11",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "Z_\\\\infty|B_\\\\infty|regular.*complete|AbutsTo Mathlib/Algebra/Homology",
+   "results": "0 hits",
+   "date": "2026-10-11",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "spectral sequence convergence as intersection of cycles and union of boundaries in an exact couple",
+   "results": "HomologicalComplex exactness declarations; no exact-couple convergence definition",
+   "date": "2026-10-11",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.SpectralSequence.AbutsTo",
+   "results": "0 hits; unknown identifier CategoryTheory.SpectralSequence.AbutsTo",
+   "date": "2026-10-11",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "structure SpectralSequence.Abutment|def SpectralSequence.AbutsTo|pageInfinity Mathlib/Algebra/Homology/SpectralSequence",
+   "results": "0 hits in Mathlib source; related project extension is WeilConjectures/Mathlib/Algebra/Homology/SpectralSequence/Basic.lean",
+   "date": "2026-10-11",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "exact couple regular complete convergence filtration associated graded",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-11",
+   "verdict": "unavailable"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [],
  "blueprint_kind": "definition",
@@ -43,5 +93,20 @@
   }
  },
  "chapter": "sec-abelian-varieties",
- "unit": "sk-prop-av-pqf-finite"
+ "unit": "sk-prop-av-pqf-finite",
+ "split_report": {
+  "date": "2026-10-11",
+  "item": "def-sp-convergence",
+  "worker": "stage1",
+  "summary": "Repaired the abutment definition: the limit object is the alpha-colimit A^n, the filtration is its image filtration, and weak convergence, abutting, and convergence are stated with their separated, exhaustive, regularity, and inverse-limit clauses. Added the bounded terminology required by consumers. No child nodes are needed.",
+  "blueprint": "The item realizes the blueprint definition through the Z_r/B_r recursion, regularity, completeness, boundedness, the alpha-colimit limit object and image filtration, and the weakly-convergent/abutting/convergent associated-graded comparison (Stacks Tags 011N, 012U)."
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-dsc1905",
+  "group": "E1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-dsc1905 (reviewer sub-agent of L); spot-checked: Return of 18:47 repaired: (1) A^n=colim_{p->-inf}D^{p,n-p} along alpha with existence hypothesis, F^p=im(D^{p,n-p}->A^n), g lands in Z_inf, canonical maps D->E_inf and D->gr^p, weak convergence = both onto with same kernel giving E_inf=gr; (2) bounded, weakly converges, abuts, converges (regular+abuts+complete limit, Stacks 012U) defined; (3) E7 change named in report. Regular now Z_r-stabilization (Stacks regular, outgoing d_r vanish), named in second reading. Consistent with merged def-sp-exact-couple (alpha bidegree (-1,+1) so colimit p->-inf and decreasing image filtration correct; C_2=C type-0 couple, g bidegree (0,0) into E_2; g(D) permanent cycles via g'(alpha x)), def-sp-filtration (separated/exhaustive/gr), lem-sp-page-induction (Z_inf/B_inf uses only pages and d_r); no cycle (exact-couple, filtration do not depend on this node). FIX more, RETURN less: wording 'induced filtration of [def-sp-filtration]' was wrong (induced = intersection with a subobject there), replaced by the inclusion F^{p+1}subseteq F^p and 'decreasing filtration in the sense of'; dropped the stray Tag 0130 parenthetical from the statement and split_report.blueprint.; 1 file(s) fixed by the reviewer"
+ }
 }
