@@ -23,9 +23,68 @@
   "def-pc-derived-category",
   "def-pc-derived-direct-image"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Choose a K-injective representative I of K. Restriction to V preserves K-injectivity by [lem-sc-derived-k-injective-restrict-open], so Lj^*K is represented by j^{-1}I. By [def-pc-ringed-spaces-derived-direct-image], Rj_*Lj^*K is represented by j_*j^{-1}I. The derived direct-image preservation theorem [lem-pc-derived-direct-image-preserves-qcoh] applies because j is quasi-compact (V is quasi-compact) and Y is quasi-separated, and j^{-1} preserves quasi-coherence on an open subscheme. The adjunction unit is represented by I \\to j_*j^{-1}I. Complete it to its mapping-cone triangle; by [def-weil-abstract-derived-category] this gives K \\to Rj_*Lj^*K \\to Q \\to K[1]. The cone cohomology sheaves are quasi-coherent: the long exact cohomology sequence expresses each as an extension of a kernel and a cokernel, and quasi-coherent modules are closed under these operations by [lem-weil-pbc-quasi-coherent-module-kernel], [lem-weil-pbc-quasi-coherent-module-cokernel-image], and [lem-pc-quasi-coherent-extension]. Thus Q is in D_QCoh(Y).",
+   "uses": [
+    "lem-sc-derived-k-injective-restrict-open",
+    "def-pc-ringed-spaces-derived-direct-image",
+    "lem-pc-derived-direct-image-preserves-qcoh",
+    "def-weil-abstract-derived-category",
+    "lem-weil-pbc-quasi-coherent-module-kernel",
+    "lem-weil-pbc-quasi-coherent-module-cokernel-image",
+    "lem-pc-quasi-coherent-extension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/duality.tex",
+    "place": "Tag 0E4G (Lemma 48.4.3), proof, first paragraph; Derived Categories of Schemes, Lemma 36.4.1"
+   }
+  },
+  {
+   "text": "Applying Lj^* to this triangle gives Lj^*K \\to Lj^*Rj_*Lj^*K \\to Lj^*Q \\to Lj^*K[1]. Exactness of underived restriction, supplied by [lem-sc-derived-open-restriction-adjunction-exact], identifies Lj^* with termwise j^{-1}, so this is the image of the cone triangle of j^{-1}I \\to j^{-1}j_*j^{-1}I. The open restriction compatibility [lem-pc-restrict-derived-direct-image-open], applied to f=j, U=V, and g=\\operatorname{id}_V, identifies Lj^*Rj_*Lj^*K with Lj^*K. Concretely, on the representatives the first arrow is an isomorphism already at the level of complexes: for an open W\\subseteq V one has (j_*j^{-1}I)(W)=I(j^{-1}W)=I(W), so j^{-1}j_*j^{-1}I=j^{-1}I and the restricted unit j^{-1}I\\to j^{-1}j_*j^{-1}I is the identity (Stacks Tag 01LH). Hence Lj^*Q, the cone of an isomorphism, is 0. The cohomology long exact sequence gives j^{-1}H^n(Q)=0 for every n, which is exactly that every cohomology sheaf of Q is supported on the closed complement Y\\setminus V.",
+   "uses": [
+    "lem-sc-derived-open-restriction-adjunction-exact",
+    "lem-pc-restrict-derived-direct-image-open"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/duality.tex",
+    "place": "Tag 0E4G (Lemma 48.4.3), proof; Derived Categories of Schemes, Definition 36.6.1"
+   }
+  },
+  {
+   "text": "If K is in D_QCoh^+(Y), with H^n(K)=0 for n<a, replace K by its truncation \\tau_{\\ge a}K, a quasi-isomorphic complex with terms zero below a. The category of \\mathcal O_Y-modules has enough injectives (Stacks Tag 01DH), so [lem-sc-bounded-below-injective-resolution-existence] gives a quasi-isomorphism to a bounded-below complex I of injective \\mathcal O_Y-modules with I^n=0 for n<a; such I is K-injective by [lem-weil-pbc-bounded-below-injectives-kinjective], so it may serve as the representative I of Step 1. Then j^{-1}I is termwise zero below a and K-injective (Step 1), and [def-pc-ringed-spaces-derived-direct-image] represents Rj_*Lj^*K by j_*j^{-1}I, which is zero in every degree below a because direct image is applied termwise. The mapping cone of I \\to j_*j^{-1}I from Step 1 has terms (j_*j^{-1}I)^n\\oplus I^{n+1}, zero for n<a-1, so H^n(Q)=0 for n<a-1. Thus Q belongs to D_QCoh^+(Y).",
+   "uses": [
+    "lem-sc-bounded-below-injective-resolution-existence",
+    "lem-weil-pbc-bounded-below-injectives-kinjective",
+    "def-pc-ringed-spaces-derived-direct-image"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/duality.tex",
+    "place": "Tag 0E4G (Lemma 48.4.3), proof; Derived Categories of Schemes, Lemma 36.4.1"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sc-derived-k-injective-restrict-open",
+  "def-pc-ringed-spaces-derived-direct-image",
+  "lem-pc-derived-direct-image-preserves-qcoh",
+  "def-weil-abstract-derived-category",
+  "lem-weil-pbc-quasi-coherent-module-kernel",
+  "lem-weil-pbc-quasi-coherent-module-cokernel-image",
+  "lem-pc-quasi-coherent-extension",
+  "lem-sc-derived-open-restriction-adjunction-exact",
+  "lem-pc-restrict-derived-direct-image-open",
+  "lem-weil-pbc-bounded-below-injectives-kinjective",
+  "lem-sc-bounded-below-injective-resolution-existence"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/duality.tex",
+  "place": "Tag 0E4G (Lemma 48.4.3), proof; Derived Categories of Schemes, Lemmas 36.4.1 and Definition 36.6.1"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -57,12 +116,43 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-sc-right-adjoint-open-support-criterion",
   "by": "worker",
   "date": "2026-10-10"
  },
  "chapter": "sec-picard-framework",
- "unit": "sk-thm-picard-duality"
+ "unit": "sk-thm-picard-duality",
+ "split_report": {
+  "date": "2026-10-11",
+  "item": "lem-sc-open-restriction-support-triangle",
+  "worker": "stage1",
+  "summary": "Split the open-restriction support triangle into the K-injective unit/cone construction, vanishing after restriction and support on the complement, and bounded-below preservation. Reused the existing K-injective restriction and exact open restriction statements; no new child node was needed.",
+  "blueprint": "The steps realize the ancestor blueprint's support-triangle argument in the restriction-compatibility reduction: the unit cone, its vanishing on V, and the bounded-below clause.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-quasi-coherent-module-cokernel-image",
+    "why": "Step 1 uses the general quasi-coherent cokernel/image fact to keep the cone in D_QCoh; the sk-thm-picard-duality route has no unit-specific replacement."
+   },
+   {
+    "node": "lem-pc-restrict-derived-direct-image-open",
+    "why": "Step 2 uses the general open restriction compatibility to identify the derived counit; the sk-thm-picard-duality route has no unit-specific replacement."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-quasi-coherent-module-cokernel-image",
+  "lem-pc-restrict-derived-direct-image-open",
+  "lem-weil-pbc-quasi-coherent-module-cokernel-image",
+  "lem-pc-restrict-derived-direct-image-open"
+ ],
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-ors2514",
+  "group": "E1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-ors2514 (reviewer sub-agent of L); spot-checked: All four points of the 20:56 return repaired: Step 3 no longer claims j_* exact/stalks zero (bounded-below injective representative + termwise direct image); Step 1 cites lem-pc-derived-direct-image-preserves-qcoh (j qcqs), QCoh closure via kernel/cokernel/extension nodes; Step 1 cites def-pc-ringed-spaces-derived-direct-image for j_*j^{-1}I; Step 1 text and uses agree on def-weil-abstract-derived-category; Step 2 cites lem-pc-restrict-derived-direct-image-open. FIX more, RETURN less: (1) C4 Step 2: the cited lemma gives an abstract iso, not that the restricted unit is it; added the elementary complex-level fact j^{-1}j_*j^{-1}I=j^{-1}I with the restricted unit the identity (Stacks 01LH). (2) C1 Step 3: existence of the bounded-below injective representative was uncited; added truncation, enough injectives in Mod(O_Y) (Stacks 01DH) and lem-sc-bounded-below-injective-resolution-existence (same unit), dropped the irrelevant exactness cite, made the cone degree bound explicit. Tool uses accepted (general QCoh cokernel and open restriction compatibility).; 1 file(s) fixed by the reviewer"
+ }
 }
