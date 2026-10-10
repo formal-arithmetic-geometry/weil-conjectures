@@ -3,11 +3,11 @@
  "blueprint": {
   "is": "pqf-def-quasifinite",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "definition",
  "title": "Quasi-finite morphisms and finite fibres",
- "statement": "Let $f:X\\to S$ be a morphism of schemes.\n\n1. $f$ is *quasi-finite at a point $x\\in X$* if there exist an\naffine neighbourhood $\\operatorname{Spec}A=U\\subset X$ of $x$ and\nan affine open $\\operatorname{Spec}R=V\\subset S$ with\n$f(U)\\subset V$ such that the ring map $R\\to A$ is of finite type\nand quasi-finite at the prime of $A$ corresponding to $x$.\n1. $f$ is *locally quasi-finite* if it is quasi-finite at every\npoint of $X$.\n1. $f$ is *quasi-finite* if it is of finite type and every point\nof $X$ is an isolated point of its fibre.\n\nThis is Stacks Project, Morphisms of Schemes, Definition 29.21.1, Tag\n[01TD](https://stacks.math.columbia.edu/tag/01TD). We say that\n$f$ *has finite fibres* if for every $s\\in S$ the set\n$f^{-1}(\\{s\\})$ is finite; the *fibre* of $f$ at $s$ is the scheme\n$X_s=X\\times_S\\operatorname{Spec}\\kappa(s)$.",
+ "statement": "Let $f:X\\to S$ be a morphism of schemes.\n\n1. $f$ is *quasi-finite at a point $x\\in X$* if there exist an\naffine neighbourhood $\\operatorname{Spec}A=U\\subset X$ of $x$ and\nan affine open $\\operatorname{Spec}R=V\\subset S$ with\n$f(U)\\subset V$ such that the ring map $R\\to A$ is of finite type\nand quasi-finite at the prime of $A$ corresponding to $x$.\n1. $f$ is *locally quasi-finite* if it is quasi-finite at every\npoint of $X$.\n1. $f$ is *quasi-finite* if it is of finite type and every point\nof $X$ is an isolated point of its fibre.\n\nThis is Stacks Project, Morphisms of Schemes, Tag\n[01TD](https://stacks.math.columbia.edu/tag/01TD). We say that\n$f$ *has finite fibres* if for every $s\\in S$ the set\n$f^{-1}(\\{s\\})$ is finite; the *fibre* of $f$ at $s$ is the scheme\n$X_s=X\\times_S\\operatorname{Spec}\\kappa(s)$.",
  "source": {
   "document": "literature/blueprint/master/blueprint/sec-nagata-compactification/sk-prop-nagata-sketch-zmt/pqf-def-quasifinite.md",
   "place": "node pqf-def-quasifinite, order 191",
@@ -24,9 +24,38 @@
  "proof": [],
  "proof_deps": [],
  "proof_origin": null,
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "scheme morphism quasi-finite at a point locally quasi-finite finite fibres definition",
+   "results": "AlgebraicGeometry.LocallyQuasiFinite (Mathlib/AlgebraicGeometry/Morphisms/QuasiFinite); AlgebraicGeometry.locallyQuasiFinite_iff (same module); AlgebraicGeometry.Scheme.Hom.finite_preimage_singleton (same module); AlgebraicGeometry.LocallyOfFiniteType (Mathlib/AlgebraicGeometry/Morphisms/FiniteType); no single declaration for the combined Stacks definition",
+   "date": "2026-10-11",
+   "verdict": "no single match: Mathlib provides component notions and results"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.LocallyQuasiFinite, AlgebraicGeometry.Scheme.Hom.finite_preimage_singleton, Algebra.QuasiFiniteAt",
+   "results": "0 hits; identifier not recognized",
+   "date": "2026-10-11",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "class LocallyQuasiFinite|QuasiFiniteAt|finite_preimage_singleton in AlgebraicGeometry",
+   "results": "Mathlib/AlgebraicGeometry/Morphisms/QuasiFinite.lean:71 class LocallyQuasiFinite; Mathlib/AlgebraicGeometry/Morphisms/QuasiFinite.lean:174 Scheme.Hom.finite_preimage_singleton; Mathlib/AlgebraicGeometry/ZariskisMainTheorem.lean:50 Scheme.Hom.exists_etale_isCompl_of_quasiFiniteAt; ring-level QuasiFiniteAt declarations in Mathlib/RingTheory/QuasiFinite/Basic.lean",
+   "date": "2026-10-11",
+   "verdict": "no single match: component declarations only"
+  },
+  {
+   "tool": "leansearch",
+   "query": "definition of quasi-finite morphism at a point and finite fibres",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-11",
+   "verdict": "unavailable"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [],
  "blueprint_kind": "definition",
@@ -50,5 +79,20 @@
   }
  },
  "chapter": "sec-nagata-compactification",
- "unit": "sk-prop-nagata-sketch-zmt"
+ "unit": "sk-prop-nagata-sketch-zmt",
+ "split_report": {
+  "date": "2026-10-11",
+  "item": "pqf-def-quasifinite",
+  "worker": "stage1",
+  "summary": "Checked the Stacks Tag 01TD definition against the project source and Mathlib. Mathlib has component notions for locally quasi-finite morphisms and ring-level quasi-finiteness, but no single declaration matching the item’s combined definition of quasi-finite at a point, locally quasi-finite, quasi-finite, and finite fibres. No child node or proof step is needed for this definition node.",
+  "blueprint": "Realizes the complete definition at node pqf-def-quasifinite, order 191, sourced from Stacks Tag 01TD."
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-pdq2516",
+  "group": "K1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-pdq2516 (reviewer sub-agent of L); spot-checked: Statement clauses 1-3 identical to before and to Stacks 01TD (only the 'Definition 29.21.1' number dropped, no mathematical change), so citers pqf-lem-finite-qf, pqf-lem-qf-finitefibres, pqf-lem-locqf-fibre-discrete, pqf-lem-proper-lqf-finite keep the clauses they rely on (quasi-finite = finite type + isolated points; locally quasi-finite includes ring-level finite type); no proof steps; mathlib_match null: Mathlib LocallyQuasiFinite (QuasiFinite.lean:71, docstring: not locally of finite type) correctly not recorded as a match for clause 2; second reading by K1 missed no fault."
+ }
 }
