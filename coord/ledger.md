@@ -2070,3 +2070,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 16:58 L: merged deliver/K1/lem-sc-cech-comparison-map-iso-affine (reviewer FIX; first push; new nodes: 0)
 - 16:58 L: merged deliver/K1/lem-sc-cech-comparison-map-naturality (reviewer FIX; first push; new nodes: 0)
 - 16:58 L: merged deliver/G1/lem-weil-pbc-etale-sheaf-clopen-product (reviewer FIX; after a return; new nodes: 0)
+- 16:59 L: merged deliver/G1/lem-sc-invert-s-cohomology-mayer-vietoris-diagram (reviewer FIX; first push; new nodes: 2)

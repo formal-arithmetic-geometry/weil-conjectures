@@ -30,9 +30,54 @@
   "def-weil-pbc-quasi-compact-scheme",
   "def-weil-pbc-scheme-conventions"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "For each integer n, apply the Mayer–Vietoris open-cover node to the quasi-coherent module F|_{U\\cup V}\\otimes\\mathcal L^{\\otimes n} and the cover U\\cup V=U\\cup V. Taking the direct sum over n gives a long exact sequence of the graded groups H^p_*(-,\\mathcal L,\\mathcal F) with degree-preserving maps. The maps are \\Gamma_*(Y,\\mathcal L)-linear: multiplication by t\\in\\Gamma(Y,\\mathcal L^{\\otimes m}) is induced by the module map \\mathcal F\\otimes\\mathcal L^{\\otimes n}\\to\\mathcal F\\otimes\\mathcal L^{\\otimes(n+m)}, x\\mapsto x\\otimes t, and the node's naturality in F says that the Mayer–Vietoris maps, connecting maps included, commute with it. The principal-open identities U_s\\cap V_s=(U\\cap V)_s and U_s\\cup V_s=(U\\cup V)_s are immediate since W_s=W\\cap Y_s.",
+   "uses": [
+    "lem-sc-mayer-vietoris-open-cover"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/coherent.tex",
+    "place": "Cohomology of Schemes, Lemma 09MR proof, Mayer–Vietoris paragraph; Lemma 01EB"
+   }
+  },
+  {
+   "text": "The sequence of step 1 is an exact sequence of graded \\Gamma_*(Y,\\mathcal L)-modules with degree-preserving maps, and s is homogeneous of degree 1. By the graded-localization exactness node (its last sentence, applied to this infinite exact sequence) it stays exact after localizing at s and taking the degree-zero part. Thus the upper row in the statement is exact.",
+   "uses": [
+    "lem-sc-graded-localization-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/coherent.tex",
+    "place": "Cohomology of Schemes, Lemma 09MR proof, Mayer–Vietoris paragraph"
+   }
+  },
+  {
+   "text": "Apply the Mayer–Vietoris open-cover node to F|_{(U\\cup V)_s} and the cover (U\\cup V)_s=U_s\\cup V_s, with U_s\\cap V_s=(U\\cap V)_s (step 1): this is the lower exact row. Commutativity of the squares: for W\\in\\{U,V,U\\cap V,U\\cup V\\} and \\xi\\in H^p(W,\\mathcal F\\otimes\\mathcal L^{\\otimes n}), c^p_W(\\xi/s^n) is the restriction of \\xi to W_s followed by the map induced by the isomorphism \\mathcal F\\otimes\\mathcal L^{\\otimes n}|_{W_s}\\to\\mathcal F|_{W_s}, x\\mapsto s^{-n}x. The restriction maps form a morphism of Mayer–Vietoris sequences (naturality of the node under the inclusion of the cover (U\\cup V)_s=U_s\\cup V_s into U\\cup V=U\\cup V, with (U\\cup V)_s\\cap U=U_s and so on), and the isomorphism induces a morphism of Mayer–Vietoris sequences on (U\\cup V)_s (naturality of the node in F; the connecting maps of the derived-functor long exact sequences commute with morphisms of short exact sequences [lem-weil-pbc-right-derived-universal-delta-functor], [pqf-def-cohomology]). Composing, each square commutes on every element \\xi/s^n; hence the maps c^p_W form the displayed morphism of exact long sequences.",
+   "uses": [
+    "lem-sc-mayer-vietoris-open-cover",
+    "pqf-def-cohomology",
+    "lem-weil-pbc-right-derived-universal-delta-functor"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/coherent.tex",
+    "place": "Cohomology of Schemes, Lemma 09MR proof, Mayer–Vietoris paragraph; naturality of the long exact sequence"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sc-mayer-vietoris-open-cover",
+  "lem-sc-graded-localization-exact",
+  "pqf-def-cohomology",
+  "lem-weil-pbc-right-derived-universal-delta-functor"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/coherent.tex",
+  "place": "Cohomology of Schemes, Lemma 09MR proof, Mayer–Vietoris paragraph"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -57,10 +102,34 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-sc-invert-s-cohomology-gluing",
   "by": "worker",
   "date": "2026-10-10"
+ },
+ "split_report": {
+  "date": "2026-10-11",
+  "item": "lem-sc-invert-s-cohomology-mayer-vietoris-diagram",
+  "worker": "stage1",
+  "summary": "Split the diagram into the Mayer–Vietoris sequence for each graded twist, exactness after homogeneous localization and degree-zero extraction, and the lower localized Mayer–Vietoris sequence with commutativity from naturality of derived cohomology.",
+  "blueprint": "Realizes the ancestor lem-sc-pic-proper-ntorsion 09MR Mayer–Vietoris paragraph: localization maps form a commutative map of long exact sequences, principal-open identities identify the lower cover, and exactness is preserved before the five-lemma.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-right-derived-universal-delta-functor",
+    "why": "The commutation of connecting morphisms is a generic derived-functor naturality fact not supplied by this unit's route nodes."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-right-derived-universal-delta-functor"
+ ],
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-mvd",
+  "group": "G1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-mvd (reviewer sub-agent of L); spot-checked: Source read: Stacks 09MR (coherent.tex, lemma-invert-s-cohomology) proof, Mayer-Vietoris paragraph, and 01EB (cohomology.tex, lemma-mayer-vietoris, any O_X-module on a ringed space, functorial in F). Item statement unchanged; it matches the 09MR ladder (rows, principal-open identities, c^p maps xi/s^n -> s^{-n}xi). Split (3 steps) is a real split: step 1 MV per twist from lem-sc-mayer-vietoris-open-cover, step 2 exactness after localization/degree zero from lem-sc-graded-localization-exact, step 3 lower row and commutativity from MV naturality (restriction and F) plus lem-weil-pbc-right-derived-universal-delta-functor (declared tool use, generic delta-functor naturality, accepted). Duplicates checked: no Zariski/O_X-module MV node in the DAG (only etale lem-weil-pbc-etale-mayer-vietoris); graded node is a combination of lem-sc-p1-localization-short-exact and lem-sc-p1-graded-degree-component-exact, kept. My Mathlib queries (remote records pre-17:00 not trusted): grep MayerVietoris -> CategoryTheory/Sites/SheafCohomology/MayerVietoris.lean (Ext cohomology of abelian sheaves on a site, generalization, not a leaf); LeanFinder graded degree-zero localization exactness -> only ungraded LocalizedModule.map_exact; recorded in both nodes. Small cases: P^1=U cup V, F=O(-2): cokernel of k[t]+t^2k[t^-1]... gives H^1=k as MV predicts; s=0 makes both rows zero. FIX more, RETURN less: (1) lem-sc-graded-localization-exact: statement: cited def-pc-standard-graded-algebra (standard graded k-algebra, S_0=k, wrong notion for Gamma_*) (B3) -> rewritten self-contained Z-graded ring/module notions, localization cited to def-weil-pbc-module-localization-away, stmt_deps updated; stated for exact M'->M->M'' and arbitrary exact sequences since step 2 applies it to a long exact sequence (C4). (2) lem-sc-mayer-vietoris-open-cover: statement: removed proof hint (short Cech sequence), named the maps, cited [pqf-def-cohomology], made 'natural in inclusions of open covers' explicit as compatibility with restriction to an open W' (used by step 3, C4; true by 01EB proof since injectives restrict to injectives); source: document coherent.tex -> cohomology.tex. (3) item step 1: added Gamma_*-linearity of the MV maps from naturality in F (needed for step 2, C2); step 2 text: refers to the infinite-sequence clause; step 3: commutativity spelled out, def-sc-topological-abelian-cohomology (abelian-sheaf cohomology, not the O_X-module cohomology of the statement, C4) replaced by pqf-def-cohomology in uses and proof_deps. Start 2026-10-10 Sat Oct 10 04:56:33 PM UTC 2026, end Sat Oct 10 04:59:13 PM UTC 2026.; 3 file(s) fixed by the reviewer"
  }
 }
