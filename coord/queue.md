@@ -2,7 +2,7 @@
 
 958 items; claim with `tools/claim.py next <group> [--stage N]`.
 
-## Stage 1: nodes to split (583)
+## Stage 1: nodes to split (582)
 
 | node | distance to a target | Lean state on the done branch |
 |---|---|---|
@@ -63,7 +63,6 @@
 | `lem-weil-pbc-fpqc-descend-universally-closed` | 1016 | none |
 | `lem-weil-pbc-localization-n2-domain` | 1016 | none |
 | `lem-weil-pbc-module-injects-localizations-associated-primes` | 1016 | none |
-| `lem-weil-pbc-normal-extension-purely-inseparable-then-galois` | 1016 | none |
 | `lem-weil-pbc-normal-locus-open` | 1016 | none |
 | `lem-weil-pbc-power-series-universal-property-complete` | 1016 | none |
 | `lem-weil-pbc-sections-annihilated-by-ideal` | 1016 | none |
@@ -590,7 +589,7 @@
 | `def-exc-jacobian-presentation` | - | none |
 | `def-nagata-rees-algebra` | - | none |
 
-## Stage 2: nodes to state (375)
+## Stage 2: nodes to state (376)
 
 | node | distance to Mathlib | kind |
 |---|---|---|
@@ -827,6 +826,7 @@
 | `lem-weil-pbc-noether-normalization-over-domain` | 1 | state |
 | `lem-weil-pbc-nonvanishing-section-trivializes` | 1 | state |
 | `lem-weil-pbc-nonzerodivisor-if-maximal-not-associated` | 1 | state |
+| `lem-weil-pbc-normal-extension-purely-inseparable-then-galois` | 1 | state |
 | `lem-weil-pbc-ogoma` | 1 | state |
 | `lem-weil-pbc-p-basis-differentials-basis` | 1 | state |
 | `lem-weil-pbc-p-basis-exists` | 1 | state |
@@ -970,7 +970,7 @@
 | `lem-weil-pbc-p1-field-dimension-one` | 4 | state |
 | `lem-weil-pbc-projective-space-zero-isomorphism` | 4 | state |
 
-Not open yet: 594 nodes that wait for stage 1, 713 nodes that wait for a statement dependency.
+Not open yet: 593 nodes that wait for stage 1, 713 nodes that wait for a statement dependency.
 
 ## Stage 3: modules to prove (0)
 
