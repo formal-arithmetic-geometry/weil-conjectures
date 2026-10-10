@@ -3,7 +3,7 @@
  "blueprint": {
   "is": "lem-sc-etale-affine-qcoherent",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "Etale acyclicity of a quasi-coherent module on an affine",
@@ -17,33 +17,99 @@
  ],
  "proof": [
   {
-   "text": "We induct on $q$, simultaneously for all affine schemes and all\nquasi-coherent modules. A class in positive sheaf cohomology\nvanishes on some covering: using an injective resolution, represent\nit by a cocycle; exactness of that resolution as a complex of sheaves\nmeans this cocycle is locally a boundary. Refine the resulting\netale covering by affine opens. Since etale maps are open and $X$\nis quasi-compact, finitely many such affine opens cover $X$.\nTheir disjoint union $V=\\operatorname{Spec}(B)$ gives a faithfully\nflat etale map to $X=\\operatorname{Spec}(A)$.",
-   "uses": [],
-   "elementary": null
+   "text": "Fix $X=\\operatorname{Spec}(A)$ and let $\\mathcal B$ be the affine objects of the small etale site $X_{\\mathrm{et}}$. Let $\\mathrm{Cov}$ consist of finite jointly surjective families of etale maps from affine schemes to an affine object $U\\in\\mathcal B$. For a family in $\\mathrm{Cov}$, every iterated fibre product is affine by [lem-weil-pbc-fibre-product-affine-spectra]. Thus $U$, its members, and all iterated fibre products lie in $\\mathcal B$, verifying condition (1) of [lem-weil-pbc-cech-vanishing-criterion]. Every etale covering of an affine $U$ has a refinement in $\\mathrm{Cov}$ by [lem-weil-pbc-etale-covering-affine-refinement], so condition (2), cofinality, holds.",
+   "uses": [
+    "lem-weil-pbc-cech-vanishing-criterion",
+    "lem-weil-pbc-fibre-product-affine-spectra",
+    "lem-weil-pbc-etale-covering-affine-refinement"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Lemma Tag 03F9 (label lemma-cech-vanish-collection), hypotheses (1) and (2); Schemes Lemmas Tags 01I4/01JQ and Topologies Lemma Tag 0218"
+   }
   },
   {
-   "text": "All iterated fibre products $V\\times_X\\cdots\\times_XV$ are affine.\nTheir sections of the sheaf of [def-sc-etale-qcoherent-module]\nare $M\\otimes_A B^{\\otimes_A(p+1)}$, where $\\mathcal F=\\widetilde M$.\nThe associated Cech complex is exact in positive degrees by\n[lem-pc-cech-exact]. For $q=1$, the Cech-to-cohomology\nspectral sequence of [lem-sc-cech-spectral] identifies the\nkernel of restriction to $V$ with a quotient of this zero Cech\ncohomology group. Hence the class is zero.\nFor $q>1$, the induction hypothesis kills every row of that\nspectral sequence with cohomology degree strictly between $0$ and\n$q$. Our class restricts to zero on $V$, so its only possible\nfiltration piece comes from the degree-$q$ Cech cohomology in row\nzero. That group is again zero. This proves the induction.",
+   "text": "For a family $\\mathcal U=(U_j\\to U)$ in $\\mathrm{Cov}$, with $u:U\\to X$ the structure map, set $V=\\coprod_jU_j$. The pullback $u^*\\mathcal F$ is a quasi-coherent $\\mathcal O_U$-module by [lem-weil-pbc-module-pullback-quasi-coherent], so $(u^*\\mathcal F)_{\\mathrm{et}}$ is an abelian sheaf on $U_{\\mathrm{et}}$ by [def-sc-etale-qcoherent-module] and [lem-sc-etale-qcoherent-descent]. For an object $g:W\\to U$ of $U_{\\mathrm{et}}$ (an object $u\\circ g$ of $X_{\\mathrm{et}}$), the composition isomorphism $c_{g,u}:g^*u^*\\mathcal F\\cong(u\\circ g)^*\\mathcal F$ of [lem-pc-module-pullback-identity-composition] gives $\\Gamma(W,g^*u^*\\mathcal F)\\cong\\Gamma(W,(u\\circ g)^*\\mathcal F)=\\mathcal F_{\\mathrm{et}}(W)$, compatibly with the restrictions $\\rho$ of [def-sc-etale-qcoherent-module] (the maps $\\rho_g$ are defined through these $c$'s); since fibre products over $U$ are the same in $U_{\\mathrm{et}}$ and $X_{\\mathrm{et}}$ [def-weil-pbc-etale-site], the Cech complex of $\\mathcal U$ for $\\mathcal F_{\\mathrm{et}}$ in $X_{\\mathrm{et}}$ is that of $\\mathcal U$ for $(u^*\\mathcal F)_{\\mathrm{et}}$ in $U_{\\mathrm{et}}$. The standard-cover comparison [lem-sc-etale-standard-cover-cech], applied to the affine scheme $U$ and the sheaf $(u^*\\mathcal F)_{\\mathrm{et}}$, identifies this Cech complex with the one-map Cech complex of $V\\to U$ and gives that $A\\to B$ is faithfully flat, where $U=\\operatorname{Spec}(A)$, $V=\\operatorname{Spec}(B)$. With $M=\\Gamma(U,u^*\\mathcal F)$, [lem-weil-pbc-fibre-product-affine-spectra] and [lem-weil-pbc-module-pullback-affine-sections] (applied to the quasi-coherent $u^*\\mathcal F$ on the affine $U$) identify the terms on $V^{p+1}_U$ with $M\\otimes_A B^{\\otimes_A(p+1)}$. The pullback identity and composition [lem-pc-module-pullback-identity-composition], together with the definition [def-sc-etale-qcoherent-module], identify all face maps with the Amitsur differentials. Therefore [lem-pc-cech-exact] gives $\\check H^p(\\mathcal U,\\mathcal F_{\\mathrm{et}})=0$ for every $p>0$, verifying condition (3) of [lem-weil-pbc-cech-vanishing-criterion].",
    "uses": [
+    "lem-weil-pbc-cech-vanishing-criterion",
+    "lem-weil-pbc-module-pullback-quasi-coherent",
+    "lem-sc-etale-qcoherent-descent",
+    "def-weil-pbc-etale-site",
+    "lem-sc-etale-standard-cover-cech",
+    "lem-weil-pbc-fibre-product-affine-spectra",
+    "lem-weil-pbc-module-pullback-affine-sections",
+    "lem-pc-module-pullback-identity-composition",
     "def-sc-etale-qcoherent-module",
-    "lem-pc-cech-exact",
-    "lem-sc-cech-spectral"
+    "lem-pc-cech-exact"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Theorem Tag 03P2 (label theorem-zariski-fpqc-quasi-coherent), affine case, Cech/Amitsur calculation; Lemma Tag 03OZ (label lemma-cech-complex)"
+   }
+  },
+  {
+   "text": "Apply [lem-weil-pbc-cech-vanishing-criterion] with $\\mathcal F=\\mathcal F_{\\mathrm{et}}$ and $U=X$ (an affine object of $X_{\\mathrm{et}}$, so in $\\mathcal B$). It yields $H^q(X,\\mathcal F_{\\mathrm{et}})=0$ for $q>0$, where $H^q(X,-)$ is the $q$-th right derived functor, computed by an injective resolution $\\mathcal F_{\\mathrm{et}}\\to I^\\bullet$ in $\\Ab(X_{\\mathrm{et}})$, of evaluation at the final object $X$, which is the global-sections functor $\\Gamma(X,-)$ [def-weil-pbc-global-sections-functor]. The injective resolution $I^\\bullet$ is a bounded-below complex of injective objects, hence K-injective, so $\\mathcal F_{\\mathrm{et}}\\to I^\\bullet$ is a K-injective resolution [prop-weil-pbc-kinjective-resolutions-exist]. By [def-weil-pbc-etale-cohomology], $H^q(X_{\\mathrm{et}},\\mathcal F_{\\mathrm{et}})=\\mathcal H^q(\\Gamma(X,I^\\bullet))=H^q(X,\\mathcal F_{\\mathrm{et}})$. Hence $H^q(X_{\\mathrm{et}},\\mathcal F_{\\mathrm{et}})=0$ for every $q>0$.",
+   "uses": [
+    "lem-weil-pbc-cech-vanishing-criterion",
+    "def-weil-pbc-global-sections-functor",
+    "prop-weil-pbc-kinjective-resolutions-exist",
+    "def-weil-pbc-etale-cohomology"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Lemma Tag 03F9 conclusion; Etale Cohomology Theorem Tag 03P2 (label theorem-zariski-fpqc-quasi-coherent), affine case"
+   }
   }
  ],
  "proof_deps": [
+  "lem-weil-pbc-cech-vanishing-criterion",
+  "lem-weil-pbc-fibre-product-affine-spectra",
+  "lem-weil-pbc-etale-covering-affine-refinement",
+  "lem-weil-pbc-module-pullback-quasi-coherent",
+  "lem-sc-etale-qcoherent-descent",
+  "def-weil-pbc-etale-site",
+  "lem-sc-etale-standard-cover-cech",
+  "lem-weil-pbc-module-pullback-affine-sections",
+  "lem-pc-module-pullback-identity-composition",
   "def-sc-etale-qcoherent-module",
   "lem-pc-cech-exact",
-  "lem-sc-cech-spectral"
+  "def-weil-pbc-global-sections-functor",
+  "prop-weil-pbc-kinjective-resolutions-exist",
+  "def-weil-pbc-etale-cohomology"
  ],
  "proof_origin": {
-  "by": "agent",
-  "document": "literature/blueprint/master/blueprint/sec-curve-estimates/sk-prop-h2/lem-sc-etale-affine-qcoherent.md",
-  "place": "## Proof"
+  "by": "document",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Lemma Tag 03F9 proof, specialized to the affine small etale site; Theorem Tag 03P2 affine case"
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "etale sheaf cohomology of a quasi coherent module on an affine scheme vanishes",
+   "results": "no etale cohomology vanishing theorem",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "higher etale cohomology quasi-coherent sheaf affine scheme vanishes",
+   "results": "no exact result",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "rg -n 'quasicoherent.*cohomology|etale.*quasicoherent' Mathlib",
+   "results": "no exact result",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [],
  "blueprint_kind": "lemma",
@@ -67,5 +133,51 @@
   }
  },
  "chapter": "sec-curve-estimates",
- "unit": "sk-prop-h2"
+ "unit": "sk-prop-h2",
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "lem-sc-etale-affine-qcoherent",
+  "worker": "stage1",
+  "summary": "Rebuilt the proof using the reviewed generic Cech vanishing criterion (Stacks 03F9). The obsolete spectral-sequence route and its locality child were removed. The three steps verify the criterion's affine fibre-product closure, cofinal finite affine etale refinements, and Amitsur Cech exactness via the standard-cover comparison, then identify evaluation at X with etale cohomology.",
+  "blueprint": "The steps realize the blueprint's two proof paragraphs by replacing the unsupported spectral-sequence edge argument with the generic 03F9 criterion, while retaining the disjoint-union and Amitsur calculation.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-cech-vanishing-criterion",
+    "why": "Step 1 and Step 3 use the generic 03F9 site criterion; it is a reviewed tool from sk-thm-p1 and the repaired route has no replacement within sk-prop-h2."
+   },
+   {
+    "node": "lem-weil-pbc-module-pullback-affine-sections",
+    "why": "Step 2 uses the affine sections/tensor-product calculation for pulled-back quasi-coherent modules."
+   },
+   {
+    "node": "lem-pc-module-pullback-identity-composition",
+    "why": "Step 2 uses pullback coherence to identify the face maps."
+   },
+   {
+    "node": "lem-weil-pbc-module-pullback-quasi-coherent",
+    "why": "Step 2 (reviewer fix): pullback of a quasi-coherent module is quasi-coherent, generic scheme fact."
+   },
+   {
+    "node": "prop-weil-pbc-kinjective-resolutions-exist",
+    "why": "Step 3 (reviewer fix): a bounded-below complex of injectives is K-injective, identifying derived evaluation at X with etale cohomology."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-module-pullback-quasi-coherent",
+  "prop-weil-pbc-kinjective-resolutions-exist",
+  "lem-weil-pbc-cech-vanishing-criterion",
+  "lem-weil-pbc-module-pullback-affine-sections",
+  "lem-pc-module-pullback-identity-composition",
+  "lem-weil-pbc-module-pullback-quasi-coherent",
+  "prop-weil-pbc-kinjective-resolutions-exist"
+ ],
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-ea2",
+  "group": "C1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-ea2 (reviewer sub-agent of L); spot-checked: Repaired re-push of the 14:51 return checked point by point: (1) the spectral-sequence route is replaced by the preferred 03F9 route: step 1 verifies (1) of lem-weil-pbc-cech-vanishing-criterion by lem-weil-pbc-fibre-product-affine-spectra (fibre products of affines over an affine are affine; fibre products in X_et are scheme fibre products) and (2) by lem-weil-pbc-etale-covering-affine-refinement at T=U; step 2 verifies (3) by lem-sc-etale-standard-cover-cech (03OZ, faithfully flat from etale+jointly surjective) + affine sections + Amitsur exactness lem-pc-cech-exact; step 3 applies the criterion at U=X; lem-sc-cech-spectral and lem-weil-pbc-cohomology-pullback-functorial dropped. (2) the 03P1 child is deleted. Item statement unchanged = affine case of 03P2, no added hypothesis; q=1 covered by the criterion; empty cover/zero module checked. FIX more, RETURN less: dag/nodes/sec-curve-estimates/lem-sc-etale-affine-qcoherent.json: proof[1] text/uses: C1/C4, the step applied the 03OZ node (stated for coverings of the base X) and the affine-sections lemma to coverings of an affine object u:U->X with M=Gamma(U,u^*F) without saying u^*F is quasi-coherent; added lem-weil-pbc-module-pullback-quasi-coherent (named in the return's recipe), lem-sc-etale-qcoherent-descent and def-weil-pbc-etale-site, and the sentence transferring the Cech complex of F_et in X_et to that of (u^*F)_et in U_et via c_{g,u}; proof[2] text/uses: C1, derived evaluation at X (injective resolutions, def-sp-left-exact-additive) was equated with H^q(X_et,-) (K-injective resolutions) with no node: cite prop-weil-pbc-kinjective-resolutions-exist (bounded-below complex of injectives is K-injective) and def-weil-pbc-global-sections-functor (Gamma = evaluation at the terminal object); proof_deps = union of uses; split_report.tool_uses: added the two off-unit generic nodes. Tool uses accepted as generic: lem-weil-pbc-cech-vanishing-criterion, lem-weil-pbc-module-pullback-affine-sections, lem-pc-module-pullback-identity-composition, lem-weil-pbc-module-pullback-quasi-coherent, prop-weil-pbc-kinjective-resolutions-exist. Start Sat Oct 10 03:08:56 PM UTC 2026, end Sat Oct 10 03:10:47 PM UTC 2026.; 1 file(s) fixed by the reviewer"
+ }
 }

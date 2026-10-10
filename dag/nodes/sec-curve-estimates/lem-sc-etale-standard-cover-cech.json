@@ -1,0 +1,63 @@
+{
+ "id": "lem-sc-etale-standard-cover-cech",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-etale-affine-qcoherent",
+   "place": "Proof, passage from a finite affine etale covering family to its disjoint union and its Cech complex",
+   "via": []
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Cech complex of a finite affine etale covering and its disjoint union",
+ "statement": "Let $X=\\operatorname{Spec}A$ be an affine scheme [def-weil-affine-spectrum], let $(u_i:U_i\\to X)_{i\\in I}$ be a finite jointly surjective family of etale morphisms [def-weil-etale-morphism], [def-weil-pbc-etale-site] with every $U_i$ affine, and let $F$ be an abelian sheaf on $X_{\\mathrm{et}}$ [def-weil-pbc-abelian-etale-sheaves]. Set $V=\\coprod_{i\\in I}U_i$ and $u:V\\to X$. Then $V$ is affine, $u$ is surjective, etale, and the corresponding ring map $A\\to\\Gamma(V,\\mathcal O_V)$ is faithfully flat [def-weil-pbc-faithfully-flat-ring-map]. For every $p\\ge0$ the sheaf property identifies $F(V\\times_X\\cdots\\times_XV)$ (with $p+1$ factors) with $\\prod_{(i_0,\\ldots,i_p)\\in I^{p+1}}F(U_{i_0}\\times_X\\cdots\\times_XU_{i_p})$ [def-pc-fibre-product]. These isomorphisms commute with all face restrictions and therefore identify the Cech complexes [def-weil-pbc-site-cech-complex] of the one-map cover $\\{V\\to X\\}$ and the family $(u_i)$.",
+ "source": {
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Lemma Tag 03OZ (label lemma-cech-complex), for a standard etale covering; proof including equation label equation-sheaf-coprod"
+ },
+ "stmt_deps": [
+  "def-weil-affine-spectrum",
+  "def-weil-etale-morphism",
+  "def-weil-pbc-etale-site",
+  "def-weil-pbc-abelian-etale-sheaves",
+  "def-weil-pbc-faithfully-flat-ring-map",
+  "def-pc-fibre-product",
+  "def-weil-pbc-site-cech-complex"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Cech complex of a finite covering by affine schemes equals Cech complex of disjoint union cover",
+   "results": "Scheme.openCover_affineOpenCover (Cover/Open); IsAffineOpen.iSup_of_disjoint and instIsAffineSigmaObjScheme (AlgebraicGeometry/Limits); no Cech comparison",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Cech complex disjoint union of finite covering schemes is isomorphic to family Cech complex",
+   "results": "Scheme.coprodPresheafObjIso (AlgebraicGeometry/Limits) concerns the structure sheaf only; no Cech complex comparison for an arbitrary abelian etale sheaf",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "rg -n 'cech.*(coprod|sigma)|coprod.*cech|Cech.*coprod' Mathlib/{CategoryTheory/Sites,AlgebraicGeometry}; inspect Mathlib/CategoryTheory/Sites/SheafCohomology/Cech.lean:60-66 and Mathlib/AlgebraicGeometry/Limits.lean:480-505",
+   "results": "no comparison; Cech.lean:65 defines cechComplexFunctor, Limits.lean:480 gives the structure presheaf on a binary coproduct",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "created": {
+  "item": "lem-sc-etale-affine-qcoherent",
+  "by": "worker",
+  "date": "2026-10-10"
+ },
+ "chapter": "sec-curve-estimates",
+ "unit": "sk-prop-h2"
+}
