@@ -3,7 +3,7 @@
  "blueprint": {
   "is": "thm-sc-jacobian-representability",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "The Jacobian over a separably closed field",
@@ -26,86 +26,162 @@
   "def-pc-genus",
   "def-sc-jacobian",
   "def-sc-pic0",
+  "def-sc-picard-functor",
+  "def-sc-abelian-variety",
   "def-pc-geometrically-irreducible",
   "def-pc-smooth-projective-curve"
  ],
  "proof": [
   {
-   "text": "[thm-pc-picard-representable] of the Picard chapter – the Picard functor\nof a smooth projective curve over a separably closed field is\nrepresentable, with the full decomposition carried out there (*reference: Stacks Project, Picard Schemes of Curves, Proposition 44.6.6, [Tag 0B9Z](https://stacks.math.columbia.edu/tag/0B9Z)*); cf. Mumford, Abelian Varieties; Milne, Abelian Varieties, Ch. 12. We outline the\nclassical construction; the existence and property statements are\ntheorems of the sources above.",
+   "text": "*(1) The Jacobian as a representing object.* By [thm-pc-picard-representable] the Picard functor $\\operatorname{Pic}_{C/k}$ of [def-pc-picard-functor] is represented by a scheme $\\underline{\\operatorname{Pic}}_{C/k}$ which is a group scheme over $k$, its group law being the one induced by the group-valued functor $\\operatorname{Pic}_{C/k}$ (tensor product of invertible modules) through the Yoneda lemma; on affine $k$-schemes $\\operatorname{Pic}_{C/k}$ is the functor of [def-sc-picard-functor] by [lem-pc-picard-functor-agrees-sc]. Fix a $k$-rational point $P$ of $C$ (see step (6)). By [prop-pd-picard-degree-decomposition] (2) and (3), the subfunctor $\\operatorname{Pic}^0_{C/k}$ of classes of fibrewise degree $0$ is represented by the open and closed subgroup scheme $J:=\\underline{\\operatorname{Pic}}^0_{C/k}$ of $\\underline{\\operatorname{Pic}}_{C/k}$; write $\\varphi:\\operatorname{Pic}^0_{C/k}\\xrightarrow{\\sim}h_J$ for the representing isomorphism. Since the group law of $J$ is the restriction of that of $\\underline{\\operatorname{Pic}}_{C/k}$ and $\\operatorname{Pic}^0_{C/k}\\subseteq\\operatorname{Pic}_{C/k}$ is a subgroup functor ([prop-pd-picard-degree-decomposition] (1)), $\\varphi$ is an isomorphism of group-valued functors.",
    "uses": [
-    "thm-pc-picard-representable"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "*(1) The Picard functor.* $\\operatorname{Pic}_{C/k}$ and\n$\\operatorname{Pic}^0_{C/k}\\subseteq\\operatorname{Pic}_{C/k}$ are\nas in [def-sc-picard-functor]; for $k$ algebraically closed, $C$ is a\nsmooth connected curve in the sense of [def-sc-pic0] by\n[lem-pc-curves-are-sc], and\n$\\operatorname{Pic}^0_{C/k}(k)=\\operatorname{Pic}^0(C)$ of\n[def-sc-pic0].",
-   "uses": [
-    "def-sc-picard-functor",
-    "def-sc-pic0",
-    "lem-pc-curves-are-sc"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "*(2) Representability.* The theorem of Grothendieck states\nthat $\\operatorname{Pic}_{C/k}$ (which is the functor of [def-pc-picard-functor] by [lem-pc-picard-functor-agrees-sc]) is represented by a group scheme\nlocally of finite type over $k$ ([thm-pc-picard-representable] of the Picard chapter; *reference: Stacks Project, Picard Schemes of Curves, Proposition 44.6.6, [Tag 0B9Z](https://stacks.math.columbia.edu/tag/0B9Z)*). The\nsubfunctor $\\operatorname{Pic}^0_{C/k}$ is represented by an open\nand closed subgroup scheme ([prop-pd-picard-degree-decomposition],\nparts (2) and (3)).",
-   "uses": [
-    "def-pc-picard-functor",
-    "lem-pc-picard-functor-agrees-sc",
     "thm-pc-picard-representable",
+    "def-pc-picard-functor",
+    "def-sc-picard-functor",
+    "lem-pc-picard-functor-agrees-sc",
     "prop-pd-picard-degree-decomposition"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/pic.tex",
+    "place": "Tag 0BA0 (lemma-picard-pieces), proof, first paragraph (decomposition Pic_{X/k,sigma} = coprod Pic^d, the scheme exists by Proposition 0B9Z) and clause (3)"
+   }
   },
   {
-   "text": "*(3) Smoothness and the tangent space.* By\n[lem-sc-pic-tangent-space], the tangent space of\n$\\operatorname{Pic}_{C/k}$ at the identity is\n$H^1(C,\\mathcal O_C)$, of dimension $g$ ([def-pc-genus]);\nby [thm-sc-theorem-of-the-base],\n$\\operatorname{Pic}_{C/k}$ is a disjoint union of smooth\nvarieties of dimension $g$.",
+   "text": "*(2) Commutativity.* For every $k$-scheme $T$ the group $\\operatorname{Pic}(C_T)$ is abelian (the tensor product of invertible modules is commutative up to canonical isomorphism), so the degree-zero subgroups, the presheaf they form and its fppf sheafification $\\operatorname{Pic}^0_{C/k}$ ([prop-pd-picard-degree-decomposition] (1)) are abelian group-valued. Through the group isomorphism $\\varphi$ of step (1) the group $J(T)=\\operatorname{Hom}_k(T,J)$ is abelian for every $T$; taking $T=J\\times_kJ$ and the point $(\\mathrm{pr}_1,\\mathrm{pr}_2)$ gives $m\\circ s=m$ for the swap $s$, i.e. $J$ is a commutative group scheme [def-sc-group-scheme].",
    "uses": [
-    "lem-sc-pic-tangent-space",
-    "def-pc-genus",
-    "thm-sc-theorem-of-the-base"
+    "prop-pd-picard-degree-decomposition",
+    "def-sc-group-scheme"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-picard-framework/sk-prop-jacobian/_section.md",
+    "place": "proof, paragraph 'Connected and commutative': 'The group law is the tensor product of invertible modules (Yoneda), which is commutative'"
+   }
   },
   {
-   "text": "*(4) Properness.* $\\operatorname{Pic}^0_{C/k}$ is proper by\n[thm-sc-theorem-of-the-base] (the ``theorem of the base'').",
+   "text": "*(3) Proper and smooth of dimension $g$.* By the theorem of the base [thm-sc-theorem-of-the-base], $\\underline{\\operatorname{Pic}}^0_{C/k}=J$ is proper over $k$ and smooth over $k$ of dimension $g=\\dim_kH^1(C,\\mathcal O_C)$ [def-pc-genus].",
    "uses": [
-    "thm-sc-theorem-of-the-base"
+    "thm-sc-theorem-of-the-base",
+    "def-pc-genus"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/pic.tex",
+    "place": "Tag 0BA0 (lemma-picard-pieces), clause (1) and its proof (smoothness of dimension g from Hilb^g; properness from the surjectivity of gamma_d for d >= g and translation)"
+   }
   },
   {
-   "text": "*(5) Abelian variety and base change.* By (2)–(4),\n$J_C:=\\operatorname{Pic}^0_{C/k}$ is a proper smooth connected\ngroup scheme, i.e. an abelian variety\n([def-sc-abelian-variety]), of dimension $g$. For\n$k$ algebraically closed, $J_C(k)=\\operatorname{Pic}^0(C)$\n([def-sc-picard-functor], [def-sc-pic0]) by\nrepresentability, and base change\ncompatibility $J_{C_{k'}}\\cong(J_C)_{k'}$ holds because the Picard\nfunctor commutes with base change. Finally, $J_C$ is projective\nby [lem-sc-abelian-variety-projective].\n\nThe hypothesis that $k$ is separably closed enters this proof exactly as in\nthe Picard chapter: it is what produces a $k$-rational point of $C$, from\nwhich the representability theorem [thm-pc-picard-representable] of that\nchapter deduces the fppf sheaf property of the naive Picard presheaf and hence\nrepresentability. For a curve over a general ground field the conclusion is\nnot asserted in this blueprint; see [rem-sc-jacobian-scope].",
+   "text": "*(4) Connectedness.* By [lem-sc-picg-geometrically-integral] the scheme $\\underline{\\operatorname{Pic}}^g_{C/k}$ representing the degree-$g$ part $\\operatorname{Pic}^g_{C/k}$ (which exists by [prop-pd-picard-degree-decomposition] (2)) is geometrically integral over $k$. By [prop-pd-picard-degree-decomposition] (4), translation by the $k$-point $[\\mathcal O_C(gP)]$ is an isomorphism of $k$-schemes $J=\\underline{\\operatorname{Pic}}^0_{C/k}\\xrightarrow{\\sim}\\underline{\\operatorname{Pic}}^g_{C/k}$; it base changes to isomorphisms $J_{k'}\\cong(\\underline{\\operatorname{Pic}}^g_{C/k})_{k'}$ for every field extension $k'/k$, so $J$ is geometrically integral over $k$ [def-pc-geometrically-irreducible]. In particular $J$ is integral, hence irreducible, and it is nonempty (it contains the unit $e$, the class of $\\mathcal O_C$); an irreducible space is connected, so $J$ is connected.",
+   "uses": [
+    "lem-sc-picg-geometrically-integral",
+    "prop-pd-picard-degree-decomposition",
+    "def-pc-geometrically-irreducible"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-picard-framework/sk-prop-jacobian/_section.md",
+    "place": "proof, paragraph 'Connected and commutative' ('Hilb^g is an irreducible variety, so its image Pic^g under alpha is irreducible') together with the second paragraph ('Pic^0 is isomorphic to Pic^g (translation by O_C(gP)), so it suffices to prove the geometric properties for Pic^g'); Stacks Tag 0BA0 clause (1) ('varieties')"
+   }
+  },
+  {
+   "text": "*(5) $J$ is a Jacobian.* By steps (1)–(4), $J$ is a group scheme over $k$ which is proper, smooth and connected, i.e. an abelian variety over $k$ [def-sc-abelian-variety], commutative, of dimension $g$; together with the isomorphism of group-valued functors $\\varphi:\\operatorname{Pic}^0_{C/k}\\xrightarrow{\\sim}h_J$ of step (1) the pair $(J,\\varphi)$ is a Jacobian of $C$ in the sense of [def-sc-jacobian]. Put $J_C:=J$.",
    "uses": [
     "def-sc-abelian-variety",
-    "def-sc-picard-functor",
-    "def-sc-pic0",
-    "lem-sc-abelian-variety-projective",
-    "thm-pc-picard-representable"
+    "def-sc-jacobian"
    ],
-   "elementary": false
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-picard-framework/sk-prop-jacobian/_section.md",
+    "place": "proof, first paragraph 'Why this is the Jacobian'"
+   }
+  },
+  {
+   "text": "*(6) The $k$-points.* $C$ is nonempty and smooth over the separably closed field $k$, so it has a $k$-rational point $P$ [lem-pc-rational-points-dense]. By [lem-pc-rational-hyp], $f:C\\to\\operatorname{Spec}k$ with the section $P$ satisfies the hypotheses of [thm-pc-pic-split]; applied with $T=\\operatorname{Spec}k$ (so $C_T=C$), the sequence $0\\to\\operatorname{Pic}(\\operatorname{Spec}k)\\to\\operatorname{Pic}(C)\\to\\operatorname{Pic}_{C/k}(\\operatorname{Spec}k)\\to0$ is exact, and $\\operatorname{Pic}(\\operatorname{Spec}k)=0$ because an invertible module on the spectrum of a field is free of rank one. So the map $\\operatorname{Pic}(C)\\to\\operatorname{Pic}_{C/k}(k)$, $\\mathcal L\\mapsto$ the class of $\\mathcal L$, is a group isomorphism. The only point of $\\operatorname{Spec}k$ has residue field $k$, so the fibrewise degree [def-pd-fibrewise-degree] of $\\mathcal L$ is $\\deg_C(\\mathcal L)=\\chi(C,\\mathcal L)-\\chi(C,\\mathcal O_C)$ [def-pc-degree-line-bundle], and on every geometric fibre $C_{\\bar K}$ it is $\\deg_{C_{\\bar K}}(\\mathcal L_{\\bar K})=\\deg_C(\\mathcal L)$ by [lem-pc-degree-base-change] (1). Hence $\\operatorname{Pic}^0_{C/k}(k)$ corresponds to the subgroup $\\{\\mathcal L\\in\\operatorname{Pic}(C):\\deg_C\\mathcal L=0\\}$, the invertible modules of degree $0$, and composing with $\\varphi$ gives a group isomorphism $\\{\\mathcal L\\in\\operatorname{Pic}(C):\\deg_C\\mathcal L=0\\}\\cong J(k)$ (a group isomorphism because $\\varphi$ is one of group-valued functors and $\\operatorname{Pic}(C)\\to\\operatorname{Pic}_{C/k}(k)$ is a homomorphism).",
+   "uses": [
+    "lem-pc-rational-points-dense",
+    "lem-pc-rational-hyp",
+    "thm-pc-pic-split",
+    "def-pd-fibrewise-degree",
+    "def-pc-degree-line-bundle",
+    "lem-pc-degree-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-picard-framework/sk-prop-jacobian/_section.md",
+    "place": "proof, paragraph 'Points and base change': 'By [sk-prop-picard-pic-split] with T=Spec k and Pic(Spec k)=0, Pic_{C/k}(k)=Pic(C), and J(C)(k) is its degree-zero part'; Stacks Tag 0BA0 clause (2)"
+   }
+  },
+  {
+   "text": "*(7) Comparison with $\\operatorname{Pic}^0(C)$ for algebraically closed $k$.* Let $k$ be algebraically closed. By [lem-pc-curves-are-sc], $C$ is a smooth connected curve in the sense of [def-sc-curves], so $\\operatorname{Pic}^0(C)=\\ker(\\deg)$ of [def-sc-pic0] is defined: there $\\deg$ is defined on $\\operatorname{Pic}(C)$ by transporting the divisor degree across the identification $\\operatorname{Cl}(C)\\cong\\operatorname{Pic}(C)$, $D\\mapsto[\\mathcal O_C(D)]$, which that definition fixes. Let $\\mathcal L\\in\\operatorname{Pic}(C)$ and let $D$ be the divisor class corresponding to $[\\mathcal L]$ under this identification, so that $\\mathcal L\\cong\\mathcal O_C(D)$ and, by the definition, $\\deg[\\mathcal L]=\\deg D$; and writing $D=D_1-D_2$ with $D_1,D_2$ effective, $\\mathcal O_C(D)\\otimes\\mathcal O_C(D_2)\\cong\\mathcal O_C(D_1)$. By [lem-pc-degree-base-change] (2) (tensor with an effective divisor) $\\deg_C\\mathcal O_C(D_1)=\\deg_C\\mathcal O_C(D)+\\deg_C\\mathcal O_C(D_2)$, and by [lem-pc-degree-agrees-sc] $\\deg_C\\mathcal O_C(D_i)=\\deg D_i$ for the effective $D_i$. Hence $\\deg_C\\mathcal L=\\deg D_1-\\deg D_2=\\deg D=\\deg[\\mathcal L]$: the degree of step (6) agrees with that of [def-sc-pic0], and the subgroup of step (6) is $\\operatorname{Pic}^0(C)$. So $\\operatorname{Pic}^0_{C/k}(k)=\\operatorname{Pic}^0(C)=J_C(k)$ canonically.",
+   "uses": [
+    "lem-pc-curves-are-sc",
+    "def-sc-curves",
+    "def-sc-pic0",
+    "lem-pc-degree-base-change",
+    "lem-pc-degree-agrees-sc"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-picard-framework/sk-prop-jacobian/thm-sc-jacobian-representability.md",
+    "place": "## Proof, step (1) 'The Picard functor': 'for k algebraically closed, C is a smooth connected curve in the sense of [def-sc-pic0] by [lem-pc-curves-are-sc], and Pic^0_{C/k}(k)=Pic^0(C)'"
+   }
+  },
+  {
+   "text": "*(8) Base change.* Let $k\\subseteq k'$ be an extension of separably closed fields. By [prop-pc-xk-integral] (2) (with the rational point $P$ of step (6)) $C_{k'}$ is a smooth projective curve over $k'$ with $\\dim_{k'}H^1(C_{k'},\\mathcal O_{C_{k'}})=g$, and it is geometrically integral over $k'$ because $(C_{k'})_{k''}=C_{k''}$ for every extension $k''/k'$ [def-pc-geometrically-irreducible]; so the Jacobian $J_{C_{k'}}$ exists by steps (1)–(5) over $k'$. The base change $J_{k'}$ is a commutative group scheme over $k'$ (base change of $m,i,e$), proper and smooth over $k'$ [lem-pc-proper-base-change], of dimension $\\dim J=g$ (cover $J$, which is of finite type over $k$, by finitely many affine opens $\\operatorname{Spec}A_i$; then $J_{k'}$ is covered by the $\\operatorname{Spec}(A_i\\otimes_kk')$, and $\\dim(A_i\\otimes_kk')=\\dim A_i$ by [lem-pc-dim-base-change]), and connected, being integral by step (4); so it is an abelian variety of dimension $g$ over $k'$. For a $k'$-scheme $T$, $h_{J_{k'}}(T)=\\operatorname{Hom}_{k'}(T,J_{k'})=\\operatorname{Hom}_k(T,J)\\cong\\operatorname{Pic}^0_{C/k}(T)$ by $\\varphi$, naturally in $T$ and compatibly with the group laws, and $\\operatorname{Pic}^0_{C/k}$ restricted to $k'$-schemes is $\\operatorname{Pic}^0_{C_{k'}/k'}$ by [cor-pd-pic0-base-change]. So $J_{k'}$ with the composite isomorphism $\\operatorname{Pic}^0_{C_{k'}/k'}\\cong h_{J_{k'}}$ is a Jacobian of $C_{k'}$ [def-sc-jacobian], and by the uniqueness of Jacobians [lem-sc-jacobian-unique] $J_{C_{k'}}\\cong(J_C)_{k'}$.",
+   "uses": [
+    "prop-pc-xk-integral",
+    "def-pc-geometrically-irreducible",
+    "lem-pc-proper-base-change",
+    "lem-pc-dim-base-change",
+    "cor-pd-pic0-base-change",
+    "def-sc-jacobian",
+    "lem-sc-jacobian-unique"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-picard-framework/sk-prop-jacobian/_section.md",
+    "place": "proof, paragraph 'Points and base change': 'The Picard functor, its normalization along P and the degree commute with base change along k -> k', so Pic_{C/k} x_k k' represents Pic_{C_{k'}/k'} and its degree-zero part is J(C_{k'})'"
+   }
   }
  ],
  "proof_deps": [
   "thm-pc-picard-representable",
-  "def-sc-picard-functor",
-  "def-sc-pic0",
-  "lem-pc-curves-are-sc",
   "def-pc-picard-functor",
+  "def-sc-picard-functor",
   "lem-pc-picard-functor-agrees-sc",
   "prop-pd-picard-degree-decomposition",
-  "lem-sc-pic-tangent-space",
-  "def-pc-genus",
+  "def-sc-group-scheme",
   "thm-sc-theorem-of-the-base",
+  "def-pc-genus",
+  "lem-sc-picg-geometrically-integral",
+  "def-pc-geometrically-irreducible",
   "def-sc-abelian-variety",
-  "lem-sc-abelian-variety-projective"
+  "def-sc-jacobian",
+  "lem-pc-rational-points-dense",
+  "lem-pc-rational-hyp",
+  "thm-pc-pic-split",
+  "def-pd-fibrewise-degree",
+  "def-pc-degree-line-bundle",
+  "lem-pc-degree-base-change",
+  "lem-pc-curves-are-sc",
+  "def-sc-curves",
+  "def-sc-pic0",
+  "lem-pc-degree-agrees-sc",
+  "prop-pc-xk-integral",
+  "lem-pc-proper-base-change",
+  "lem-pc-dim-base-change",
+  "cor-pd-pic0-base-change",
+  "lem-sc-jacobian-unique"
  ],
  "proof_origin": {
-  "by": "agent",
-  "document": "literature/blueprint/master/blueprint/sec-picard-framework/sk-prop-jacobian/thm-sc-jacobian-representability.md",
-  "place": "## Proof"
+  "by": "document",
+  "document": "literature/stacks-project/pic.tex",
+  "place": "Tag 0BA0 (lemma-picard-pieces) and its proof, with Tag 0B9Z (proposition-pic-curve) for representability; the arrangement (Jacobian = Pic^0, connectedness through Pic^g, points, base change) follows the unit sk-prop-jacobian (literature/blueprint/master/blueprint/sec-picard-framework/sk-prop-jacobian/_section.md, agent-written) and the Lean AlgebraicGeometry.exists_jacobian (slopmaster2, Picard/Jacobian.lean 953-991)"
  },
  "mathlib_searches": [],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [
   "cites_outside_uses",
@@ -429,5 +505,16 @@
   }
  },
  "chapter": "sec-picard-framework",
- "unit": "sk-prop-jacobian"
+ "unit": "sk-prop-jacobian",
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "thm-sc-jacobian-representability",
+  "worker": "stage1",
+  "summary": "Split along the Lean AlgebraicGeometry.exists_jacobian (rests_on_sorry): J := Pic^0 represented by the open-closed subgroup scheme of prop-pd-picard-degree-decomposition over thm-pc-picard-representable (Lean isRepresentable_picardFunctor, exists_decomposition_picardFunctor, exists_commGrpObj_isPicardZeroMul); commutative by Yoneda; proper and smooth of dimension g by thm-sc-theorem-of-the-base (Lean isProper_/smoothOfRelativeDimension_of_representableBy_picardFunctorDegree); connected through the new node lem-sc-picg-geometrically-integral (Lean geometricallyIntegral_of_representableBy_picardFunctorDegree_genus, sorry) and the translation Pic^0 = Pic^g of prop-pd-picard-degree-decomposition (4) (Lean nonempty_iso_of_representableBy, sorry, belongs to that node); k-points through thm-pc-pic-split with T = Spec k (Lean exists_picardZero_equiv_picardFunctorDegree_zero, exists_mulEquiv_of_isPicardZeroMul), and comparison with def-sc-pic0 for algebraically closed k written out (degree of O(D) via effective parts); base change along separably closed k'/k (omitted in the Lean) through cor-pd-pic0-base-change and lem-sc-jacobian-unique. Dropped from the imported proof: lem-sc-abelian-variety-projective (projectivity is not in the statement) and lem-sc-pic-tangent-space (the tangent space is not in the item's statement; it realizes the unit's tangent clause on its own). The imported step 0 (a pure reference to 0B9Z) is absorbed into step (1). Tool uses outside the unit route: lem-pc-rational-points-dense (Lean closed), lem-sc-jacobian-unique (Lean closed), cor-pd-pic0-base-change (sk-prop-jacobian-descent).",
+  "blueprint": "Step (1) realizes the blueprint proof's steps (1) 'The Picard functor' and (2) 'Representability' and its opening reference to [thm-pc-picard-representable]; step (3) realizes (3) 'Smoothness and the tangent space' (the smoothness part) and (4) 'Properness'; steps (2), (4), (5) realize (5) 'Abelian variety', supplying the connectedness and commutativity the blueprint asserts without argument; steps (6)-(7) realize (5) 'For k algebraically closed, J_C(k)=Pic^0(C) by representability' and the last sentence of (1); step (8) realizes (5) 'base change compatibility holds because the Picard functor commutes with base change'. The tangent-space sentence of (3) and the projectivity sentence of (5) are not used by the statement and are not realized here."
+ },
+ "tool_uses": [
+  "cor-pd-pic0-base-change"
+ ],
+ "reviewed": "2026-10-10 L: 8 steps checked (representing object and group law; commutativity by Yoneda; proper and smooth of dimension g by the theorem of the base; connectedness via the new node lem-sc-picg-geometrically-integral and the translation isomorphism; Jacobian; k-points via thm-pc-pic-split; comparison with def-sc-pic0 for algebraically closed k; base change via cor-pd-pic0-base-change and uniqueness). tool_uses: cor-pd-pic0-base-change (unit sk-prop-jacobian-descent) used as a tool for the base-change clause, which the Lean exists_jacobian omits. New node lem-sc-picg-geometrically-integral unsplit, Lean geometricallyIntegral_of_representableBy_picardFunctorDegree_genus sorry_here (its split follows that Lean). Unit sk-prop-jacobian realized. Worker note: thm-sc-theorem-of-the-base says \"varieties\" which in Stacks already includes integrality; check overlap at its split."
 }

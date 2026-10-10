@@ -1,0 +1,88 @@
+{
+ "id": "lem-sc-picg-geometrically-integral",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-sc-jacobian-representability",
+   "place": "proof, step (5) 'Abel variety and base change': 'J_C:=Pic^0_{C/k} is a proper smooth connected group scheme' -- the connectedness of Pic^0_{C/k}, which the blueprint proof asserts without an argument (steps (2)-(4) give only representability, smoothness and properness); unit sk-prop-jacobian step 5 'Connected and commutative': Pic^g is irreducible as the image of Hilb^g",
+   "via": []
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "The degree-$g$ part of the Picard scheme is geometrically integral",
+ "statement": "Let $k$ be a separably closed field and let $C$ be a smooth projective curve over $k$ [def-pc-smooth-projective-curve] which is geometrically integral [def-pc-geometrically-irreducible], of genus $g=\\dim_kH^1(C,\\mathcal O_C)$ [def-pc-genus]. Let $\\operatorname{Pic}^g_{C/k}$ be the subfunctor of the Picard functor $\\operatorname{Pic}_{C/k}$ [def-pc-picard-functor] on $(\\mathit{Sch}/k)_{fppf}$ consisting of the classes whose fibrewise degree [def-pd-fibrewise-degree] is identically $g$ (equivalently, the fppf sheafification of the subpresheaf $T\\mapsto\\{\\mathcal L\\in\\operatorname{Pic}(C_T):\\deg_T(\\mathcal L)(t)=g\\text{ for all }t\\in T\\}$ of the Picard presheaf). Let $P$ be a scheme over $k$ representing $\\operatorname{Pic}^g_{C/k}$. Then $P$ is geometrically integral over $k$: for every field extension $k'/k$ the base change $P_{k'}=P\\times_{\\operatorname{Spec}k}\\operatorname{Spec}k'$ is an integral scheme.",
+ "source": {
+  "document": "literature/stacks-project/pic.tex",
+  "place": "Tag 0BA0 (lemma-picard-pieces), clause (1) 'a disjoint union of g-dimensional smooth proper varieties Pic^d_{X/k}' for d=g, and its proof: the image of gamma_g: Hilb^g_{X/k} -> Pic^g_{X/k} is a proper variety (Morphisms 03GN applied to the irreducible Hilb^g), gamma_d is surjective for d >= g (chi(L)=d+1-g>0 gives a nonzero section, L = O(D)); Lean: WeilConjectures.AlgebraicGeometry.Picard.Jacobian, AlgebraicGeometry.geometricallyIntegral_of_representableBy_picardFunctorDegree_genus, lines 659-669 (slopmaster2 71d63dcf), docstring: 'it is the image of the geometrically integral Hilb^g_{X/k} under D -> O_X(D), so geometrically irreducible, and it is smooth, hence geometrically reduced'",
+  "module": "WeilConjectures.AlgebraicGeometry.Picard.Jacobian",
+  "lines": [
+   659,
+   669
+  ]
+ },
+ "stmt_deps": [
+  "def-pc-smooth-projective-curve",
+  "def-pc-geometrically-irreducible",
+  "def-pc-genus",
+  "def-pc-picard-functor",
+  "def-pd-fibrewise-degree"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Picard scheme of a curve is geometrically integral",
+   "results": "AlgebraicGeometry.isIntegral_of_irreducibleSpace_of_isReduced, AlgebraicGeometry.IsIntegral, affine_isIntegral_iff, isIntegral_of_isAffine_of_isDomain, irreducibleSpace_of_isIntegral, isIntegral_of_isOpenImmersion (all Mathlib.AlgebraicGeometry.Properties): generic integrality facts, nothing on Picard schemes",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "the degree g component of the Picard scheme of a smooth projective curve of genus g is a geometrically integral variety",
+   "results": "AlgebraicGeometry.AffineSpace.not_isIntegralHom, WeierstrassCurve.IsIntegral, AffineSpace.isIntegralHom_over_iff_isEmpty, WeierstrassCurve.integralModel, WeierstrassCurve.exists_isIntegral: unrelated",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rli 'picard' and grep -rn 'GeometricallyIntegral' in ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicGeometry",
+   "results": "no Picard functor or Picard scheme in Mathlib (only a Weierstrass-curve file mentions the word); GeometricallyIntegral occurs in Geometrically/Integral.lean (the definition), AffineSpace.lean:435 (affine space), Group/Abelian.lean:134 (hypothesis on a group scheme)",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "thm-sc-jacobian-representability",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "sorry_here",
+   "decls": [
+    {
+     "name": "AlgebraicGeometry.geometricallyIntegral_of_representableBy_picardFunctorDegree_genus",
+     "module": "WeilConjectures.AlgebraicGeometry.Picard.Jacobian",
+     "lines": [
+      659,
+      669
+     ],
+     "kind": "theorem",
+     "nodes": [],
+     "below": false
+    }
+   ]
+  }
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-prop-jacobian"
+}
