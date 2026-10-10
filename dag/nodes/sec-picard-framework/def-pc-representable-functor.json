@@ -3,7 +3,7 @@
  "blueprint": {
   "is": "def-pc-representable-functor",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "definition",
  "title": "Representable functors",
@@ -20,14 +20,44 @@
  },
  "stmt_deps": [
   "lem-pc-representable-unique",
-  "def-pc-scheme"
+  "def-pc-scheme",
+  "lem-pc-yoneda"
  ],
  "proof": [],
  "proof_deps": [],
  "proof_origin": null,
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "functor of points representable by an object scheme Hom over base",
+   "results": "AlgebraicGeometry.Scheme.LocalRepresentability.representableBy (Mathlib/AlgebraicGeometry/Sites/Representability); CategoryTheory.Functor.IsRepresentedBy.representableBy (Mathlib/CategoryTheory/RepresentedBy); CategoryTheory.Functor.RepresentableBy.isRepresentable (Mathlib/CategoryTheory/Yoneda); CategoryTheory.Functor.IsRepresentable.has_representation (Mathlib/CategoryTheory/Yoneda)",
+   "date": "2026-10-11",
+   "verdict": "generalization: generic categorical representability and a scheme-site local representability theorem, but no exact project definition"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.RepresentableBy CategoryTheory.Functor.IsRepresentable",
+   "results": "0 hits; application type mismatch reported by Loogle",
+   "date": "2026-10-11",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -n \"class IsRepresentable\\|^structure RepresentableBy\" Mathlib/CategoryTheory/Yoneda.lean (slopmaster2 mathlib)",
+   "results": "CategoryTheory.Functor.RepresentableBy (Mathlib/CategoryTheory/Yoneda.lean:284); CategoryTheory.Functor.IsRepresentable (Mathlib/CategoryTheory/Yoneda.lean:520)",
+   "date": "2026-10-11",
+   "verdict": "generalization: generic representability for any category; the scheme-over-S packaging with h_X notation is a project definition, no exact match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "functor F from schemes over S to sets is representable by scheme if naturally isomorphic to Hom over S",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-11",
+   "verdict": "unavailable"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [
   "cites_outside_uses"
@@ -53,5 +83,21 @@
   }
  },
  "chapter": "sec-picard-framework",
- "unit": "sk-the-hilbert-functor--definition-1"
+ "unit": "sk-the-hilbert-functor--definition-1",
+ "split_report": {
+  "date": "2026-10-11",
+  "item": "def-pc-representable-functor",
+  "worker": "stage1",
+  "summary": "Checked the imported definition against its blueprint statement (including Categories Lemma 4.3.5 and Tag 001P). It is a project-level packaging of the functor of points and representability over schemes; its notions are supplied by the existing Mathlib representability declarations only in generic form. Kept the existing statement dependencies on def-pc-scheme, lem-pc-representable-unique, and lem-pc-yoneda, added the required searches, and introduced no redundant nodes.",
+  "blueprint": "Realizes the complete definition in the blueprint node statement: h_X = Hom_S(-, X), representability by a scheme, and notation/uniqueness reference.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-drf2430",
+  "group": "M1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-drf2430 (reviewer sub-agent of L); spot-checked: Statement vs Stacks schemes.tex 2757ff (Section 26.15, Def 26.15.1 Tag 01JG): h_X and representability clauses agree; base-S version as used by def-pc-hilb-functor citer. Deps: lem-pc-yoneda (Tag 001P), lem-pc-representable-unique, def-pc-scheme say what is cited. Definition, no proof steps. No duplicate definition node (def-sc-group-scheme only mentions functor of points). Mathlib RepresentableBy Yoneda.lean:284 / IsRepresentable :520 are generic, no exact match, mathlib_match null correct. FIX more, RETURN less: (1) B3 search record: grep entry falsely said no hits, corrected with file:line; (2) source metadata: Second reading claimed Tag 01JG added to source.external but the file lacked it, added.; 1 file(s) fixed by the reviewer"
+ }
 }
