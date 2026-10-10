@@ -2510,3 +2510,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 20:24 L: returned deliver/J1/pqf-lem-serre-criterion (reviewer RETURN: 1. D1 (no real split; delivery-errors C list 2, a step marked elementary that carries the whole conclusion): the only st)
 - 20:25 L: merged deliver/J1/lem-sc-topological-filtered-injective-cech-acyclic (reviewer FIX; first push; new nodes: 0)
 - 20:25 L: merged deliver/G1/lem-sc-generic-rank-leading-degree (reviewer FIX; after a return; new nodes: 0)
+- 20:25 L: merged deliver/K1/lem-pc-alternating-cech-computes (reviewer FIX; first push; new nodes: 0)

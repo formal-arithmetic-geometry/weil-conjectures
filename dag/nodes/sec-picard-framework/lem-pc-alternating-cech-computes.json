@@ -21,9 +21,47 @@
   "def-sc-zariski-site",
   "def-weil-pbc-site-cech-complex"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "For a tuple $(i_0,\\ldots,i_p)$, permuting the indices only permutes the factors in the intersection, and the corresponding restriction maps agree because the Zariski site is a poset of open subschemes. Thus restriction to strictly increasing tuples commutes with the alternating sum of face restrictions, so it is a cochain map (Stacks Tag 01FK).",
+   "uses": [
+    "def-weil-pbc-site-cech-complex",
+    "def-sc-zariski-site"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/cohomology.tex",
+    "place": "Section 20.23, Lemma 20.23.5 (Tag 01FK)"
+   }
+  },
+  {
+   "text": "Let $D^\\bullet$ be the full ordered complex and let $A^\\bullet$ be the strictly increasing (alternating) subcomplex. Every ordered tuple has a unique permutation of a strictly increasing tuple together with a pattern of repeated indices. Extend a cochain on $A^p$ to tuples with distinct indices by the sign of this permutation, and put it equal to zero on tuples with repetitions. This gives a cochain map $A^\\bullet\\to D^\\bullet$ whose composite with restriction is the identity on $A^\\bullet$; the sign rule is compatible with every face map because deleting one entry changes the permutation sign by the corresponding face sign (Stacks Tags 01FJ, 01FK).",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/cohomology.tex",
+    "place": "Section 20.23, Lemmas 20.23.3 and 20.23.5 (Tags 01FJ, 01FK)"
+   }
+  },
+  {
+   "text": "For completeness, use the explicit homotopies of Stacks Tag 01FM (Lemma 20.23.6). For a tuple $(i_0,\\ldots,i_p)$, let $\\sigma^{i_0\\ldots i_p}$ be the unique permutation that puts the entries in nondecreasing order, preserving the original order inside equal blocks, and let $\\sigma_a$ sort the tail beginning at position $a$. Define $h:D^{p+1}\\to D^p$ by $h(s)_{i_0\\ldots i_p}=\\sum_{a=0}^p(-1)^a\\operatorname{sgn}(\\sigma_a)s_{i_{\\sigma(0)}\\ldots i_{\\sigma(a)}i_{\\sigma_a(a)}\\ldots i_{\\sigma_a(p)}}$. Direct cancellation of adjacent terms gives $(dh+hd)(s)_{i_0\\ldots i_p}=s_{i_0\\ldots i_p}-\\operatorname{sgn}(\\sigma)s_{i_{\\sigma(0)}\\ldots i_{\\sigma(p)}}$, so $D^\\bullet$ retracts up to homotopy onto the semialternating subcomplex. On that subcomplex, the projection to nondecreasing tuples has inverse given by the sign rule; the inclusion of strictly increasing tuples into nondecreasing tuples has the homotopy that is zero on strictly increasing tuples and, when $i_a=i_{a+1}$ is the first equality, inserts the repeated entry with coefficient $(-1)^a$. The same adjacent-term cancellation gives, on the semi-ordered complex, $(dh+hd)(s)_{i_0\\ldots i_p}=0$ if $i_0<\\dots<i_p$ and $=s_{i_0\\ldots i_p}$ otherwise, so the projection to strictly increasing tuples followed by extension by zero is homotopic to the identity. Thus restriction $D^\\bullet\\to A^\\bullet$ is a homotopy equivalence and induces the asserted cohomology isomorphisms.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/cohomology.tex",
+    "place": "Section 20.23, Lemma 20.23.6 (Tag 01FM), first and second homotopies"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-site-cech-complex",
+  "def-sc-zariski-site"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Section 20.23 (Cech cohomology: the alternating and ordered Cech complexes)"
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -31,10 +69,31 @@
    "results": "0 hits for the first; 'cech' occurs only in Stone-Cech compactification files",
    "date": "2026-10-10",
    "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "ordered Cech complex alternating strictly increasing tuples cohomology isomorphism",
+   "results": "AlgebraicTopology.alternatingFaceMapComplexConst; Rep.standardComplex.compForgetAugmentedIso; no site Cech comparison theorem",
+   "date": "2026-10-11",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "NormalizedMooreComplex, alternating Cech",
+   "results": "unknown identifier NormalizedMooreComplex; no hits",
+   "date": "2026-10-11",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "alternating ordered Cech complex computes same cohomology",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-11",
+   "verdict": "unavailable"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "reviewer",
@@ -50,5 +109,21 @@
   "slopmaster2": {
    "state": "none"
   }
+ },
+ "split_report": {
+  "date": "2026-10-11",
+  "item": "lem-pc-alternating-cech-computes",
+  "worker": "stage1",
+  "summary": "Checked the ordered-to-alternating Cech comparison against Stacks Section 20.23 and supplied the cochain-map, signed extension, and repeated-index contracting-homotopy steps.",
+  "blueprint": "Realizes the parent proof passage from full Cech cohomology on all index tuples to the alternating complex indexed by strictly increasing subsets.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-acc2303",
+  "group": "K1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-acc2303 (reviewer sub-agent of L); spot-checked: Read cohomology.tex Section 20.23 (01FG-01FM). Statement agrees with def-weil-pbc-site-cech-complex conventions (Zariski site is a poset, so chosen U_t are the intersections; covering of U=X); proof restates neither lem-pc-cech-computes nor lem-sc-cech-spectral; homotopy equivalence constructed explicitly (c, pi, first and second homotopies of 01FM). FIX more, RETURN less: (1) C1 step 3 named Tag 01FK for the homotopies, which is Lemma 01FM (01FK is only the projection lemma) -> retagged 01FM, steps 1/2 tagged 01FK/01FJ; (2) source/proof_origin document sites-cohomology.tex -> cohomology.tex (Section 20.23 is in Cohomology of Sheaves); (3) step 3 second-homotopy identity stated exactly as in 01FM (0 on strictly increasing, s otherwise) instead of 'dh+hd=1 on the quotient'. Second reading by K1 missed (1) and (2).; 1 file(s) fixed by the reviewer"
  }
 }
