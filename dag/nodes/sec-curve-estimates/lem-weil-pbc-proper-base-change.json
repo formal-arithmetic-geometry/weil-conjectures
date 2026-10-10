@@ -3,7 +3,7 @@
  "blueprint": {
   "is": "lem-weil-pbc-proper-base-change",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "Properness is stable under base change",
@@ -15,26 +15,49 @@
  "stmt_deps": [
   "def-weil-pbc-scheme-conventions"
  ],
- "proof": [
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/morphisms.tex",
+  "place": "Morphisms, Lemma Tag 01W4 (base-change-proper)"
+ },
+ "mathlib_searches": [
   {
-   "text": "For $f$ separated or of finite type, the base change $f'$ has the same\nproperty by the corresponding stability of closed diagonals and of finite\ngeneration under base change, in the sense of\n[def-weil-pbc-scheme-conventions]; and $f'$ is universally closed because\nevery base change of $f'$ is a base change of $f$, which is a closed map by\nthe universal closedness of $f$. Hence $f'$ is proper by\n[def-weil-pbc-scheme-conventions].",
-   "uses": [
-    "def-weil-pbc-scheme-conventions"
-   ],
-   "elementary": false
+   "tool": "leansearch",
+   "query": "proper morphism of schemes is preserved by arbitrary base change, pullback projection",
+   "results": "AlgebraicGeometry.IsProper.isStableUnderBaseChange; AlgebraicGeometry.IsProper instance for Limits.pullback.snd",
+   "date": "2026-10-10",
+   "verdict": "match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "if f : X ⟶ Y is proper and g : Y' ⟶ Y arbitrary, then pullback.snd f g is proper",
+   "results": "AlgebraicGeometry.IsProper instance (f : X ⟶ S) (g : Y ⟶ S) [IsProper f] : IsProper (Limits.pullback.snd f g)",
+   "date": "2026-10-10",
+   "verdict": "match: exact pullback projection"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -n 'isStableUnderBaseChange\\|pullback.snd' Mathlib/AlgebraicGeometry/Morphisms/Proper.lean; sed -n '65,86p'",
+   "results": "Proper.lean:72 instance IsProper.isStableUnderBaseChange; Proper.lean:83 instance (f : X ⟶ S) (g : Y ⟶ S) [IsProper f] : IsProper (Limits.pullback.snd f g)",
+   "date": "2026-10-10",
+   "verdict": "match"
+  },
+  {
+   "tool": "local_search",
+   "query": "AlgebraicGeometry.IsProper.isStableUnderBaseChange",
+   "results": "found in Mathlib/AlgebraicGeometry/Morphisms/Proper.lean; declaration exists",
+   "date": "2026-10-10",
+   "verdict": "match exists"
   }
  ],
- "proof_deps": [
-  "def-weil-pbc-scheme-conventions"
- ],
- "proof_origin": {
-  "by": "agent",
-  "document": "literature/blueprint/master/blueprint/sec-curve-estimates/sk-thm-br/lem-weil-pbc-proper-base-change.md",
-  "place": "## Proof"
+ "mathlib_match": {
+  "declaration": "AlgebraicGeometry.IsProper (pullback.snd instance)",
+  "file": "Mathlib/AlgebraicGeometry/Morphisms/Proper.lean",
+  "how": "exact: instance at lines 83-84, `(f : X ⟶ S) (g : Y ⟶ S) [IsProper f] : IsProper (Limits.pullback.snd f g)`; this is the base change f ×_S Y → Y. The general stability instance is at lines 72-75."
  },
- "mathlib_searches": [],
- "mathlib_match": null,
- "status": "imported",
+ "status": "mathlib",
  "merged_into": null,
  "import_flags": [],
  "blueprint_kind": "lemma",
@@ -56,5 +79,20 @@
   }
  },
  "chapter": "sec-curve-estimates",
- "unit": "sk-thm-br"
+ "unit": "sk-thm-br",
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "lem-weil-pbc-proper-base-change",
+  "worker": "stage1",
+  "summary": "Checked the imported statement against the scheme-morphism convention and Mathlib. The exact base-change projection is an IsProper instance in Mathlib, so this item is a Mathlib leaf and needs no new DAG nodes or proof steps. The existing DAG leaf lem-weil-pbc-proper-fp-permanence also contains this clause, but the direct Mathlib declaration is recorded here.",
+  "blueprint": "The imported proof paragraph: base change preserves separatedness and finite type, and universal closedness is inherited because every base change of the pullback is a base change of f."
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-pbc",
+  "group": "F1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-pbc (reviewer sub-agent of L); spot-checked: Source: Stacks Morphisms Lemma 01W4 (morphisms-lemma-base-change-proper, morphisms.tex:9918), 'the base change of a proper morphism is proper'; the item statement (unchanged from sheaf-dag) agrees: f:X->Y proper, g:Y'->Y arbitrary, f':X x_Y Y'->Y' proper, no further hypothesis. Item converted from imported to a Mathlib leaf with no steps and no new nodes; only split-owned fields changed (node_fields.changed_maintainer_fields = []), same_as=[] and split_report.blueprint present. Mathlib verified in the pinned checkout: Proper.lean:83 'instance (f : X ⟶ S) (g : Y ⟶ S) [IsProper f] : IsProper (Limits.pullback.snd f g)' is exactly the statement with S:=Y, Y:=Y' (pullback.snd : X x_S Y -> Y); Proper.lean:72 isStableUnderBaseChange. Notion check: Proper.lean:42 IsProper extends IsSeparated, UniversallyClosed, LocallyOfFiniteType, and UniversallyClosed.lean:167 gives QuasiCompact from UniversallyClosed, so Mathlib's proper = separated + finite type (lft + qc) + universally closed = def-weil-proper-morphism via def-weil-pbc-scheme-conventions. Searches: leansearch, leanfinder, grep, local_search recorded. B10: no slopmaster2 declaration names this node (grep of WeilConjectures/Comparator). Small case: g = id gives f itself. 14:45-14:46 UTC"
+ }
 }
