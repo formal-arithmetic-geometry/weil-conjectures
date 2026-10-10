@@ -23,7 +23,8 @@ import collections, gzip, json, pathlib, re, subprocess, sys, tomllib
 ROOT = pathlib.Path(__file__).resolve().parent.parent
 OUT = ROOT / "dag" / "lean_names_upstream.json"
 REPO = pathlib.Path.home() / "weil-conjectures-slopmaster2"
-TAG = re.compile(r"\(blueprint:\s*([A-Za-z0-9][A-Za-z0-9:_.-]*)\s*\)")
+SEG = re.compile(r"\(blueprint:([^)]*)")           # the text after "(blueprint:" up to ")" (or the end of the line)
+ID = re.compile(r"`?([a-z][a-z0-9]*(?:[-:][a-z0-9.]+)+)`?")
 
 
 def git(repo, *a) -> str:
@@ -90,31 +91,51 @@ def cmd_docstrings(args) -> int:
         v.sort()
     ids = node_ids()
     names, unknown, tags, matched = collections.defaultdict(list), set(), 0, set()
-    out_grep = subprocess.run(["git", "grep", "-n", "-E", r"\(blueprint: *[A-Za-z0-9]", ref, "--", "*.lean"], cwd=repo,
+    out_grep = subprocess.run(["git", "grep", "-n", "-E", r"\(blueprint:", ref, "--", "*.lean"], cwd=repo,
                               capture_output=True, text=True).stdout
+    files: dict[str, list[str]] = {}
+    unattached = 0
     for line in out_grep.splitlines():
-        _, path, lno, text = line.split(":", 3) if line.count(":") >= 3 else (None, None, None, None)
-        if path is None:
+        parts = line.split(":", 3)
+        if len(parts) < 4:
             continue
+        _, path, lno, text = parts
+        lno = int(lno)
+        if path not in files:
+            files[path] = git(repo, "show", f"{ref}:{path}").splitlines()
+        src = files[path]
+        # the tag belongs to a declaration only if it sits in a `/--` docstring (not a `/-!` module or section docstring)
+        k, opener = lno - 1, None
+        while k >= 0:
+            t = src[k]
+            j1, j2 = t.rfind("/--"), t.rfind("/-!")
+            if j1 >= 0 or j2 >= 0:
+                opener = "doc" if j1 > j2 else "mod"; break
+            if "-/" in t and k != lno - 1:
+                break
+            k -= 1
         module = path[:-5].replace("/", ".")
         decls = by_module.get(module, [])
-        lno = int(lno)
-        for nid in TAG.findall(text):
-            tags += 1
-            nid = nid.replace(":", "-", 1) if nid not in ids and nid.replace(":", "-", 1) in ids else nid
-            if nid not in ids:
-                unknown.add(nid); continue
-            # the declaration the docstring belongs to: the one whose range contains the line, else the next one after it
+        owner = None
+        if opener == "doc":
             owner = next((o for l1, l2, o in decls if l1 <= lno <= l2), None) or next((o for l1, l2, o in decls if l1 > lno), None)
-            if owner:
+        for seg in SEG.findall(text):
+            for nid in ID.findall(seg):
+                tags += 1
+                nid2 = nid.replace(":", "-", 1)
+                nid = nid if nid in ids else (nid2 if nid2 in ids else nid)
+                if nid not in ids:
+                    unknown.add(nid); continue
+                if not owner:
+                    unattached += 1; continue
                 if owner not in names[nid]:
                     names[nid].append(owner)
                 matched.add(owner)
     out = load_out()
     out["docstring"] = {"ref": ref, "commit": git(repo, "rev-parse", "--short", ref).strip(), "names": dict(sorted(names.items())),
-                        "tags": tags, "matched_declarations": len(matched), "unknown_ids": sorted(unknown)}
+                        "tags": tags, "matched_declarations": len(matched), "tags_not_in_a_declaration_docstring": unattached, "unknown_ids": sorted(unknown)}
     OUT.write_text(json.dumps(out, ensure_ascii=False, indent=1) + "\n")
-    print(f"docstring tags: {tags}; declarations matched to a node: {len(matched)} for {len(names)} nodes; unknown ids: {len(unknown)}")
+    print(f"docstring tags (ids): {tags}; declarations matched to a node: {len(matched)} for {len(names)} nodes; ids that are no node: {len(unknown)}; node tags outside a declaration docstring: {unattached}")
     return 0
 
 

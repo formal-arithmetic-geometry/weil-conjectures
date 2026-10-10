@@ -29,22 +29,22 @@ Written by the launcher at the start (`1-dag`), then kept current by the maintai
 - **Imported statement false in general (2026-10-09 15:05):** lem-fet-locally-trivial (sec-curve-estimates, imported, unit of the finite-etale points) asks for one surjective etale Y' → Y and one finite set S trivializing a finite etale P → Y; false for disconnected Y (Y = pt ⊔ pt, P one point over one component), true for connected Y. Found by the worker of lem-weil-pbc-finite-etale-trace-degree, which used Stacks 04HN instead. To be corrected at its own split (add 'Y connected' or allow S to vary with the component).
 - **Gap in a reviewed proof (node level, 2026-10-09 14:45):** prop-weil-pbc-algebraically-closed-extension step 10 feeds step 9 (constructibility in the curve sense, def-weil-pbc-constructible-torsion) into lem-weil-pbc-curve-constructible-reduction, whose hypothesis is constructibility as a sheaf of Z/r-modules (def-weil-pbc-etale-constructible-sheaf); the bridge is the new node lem-weil-pbc-constructible-torsion-modules-agree (unsplit): to be cited at step 10 when that node is split (the lead will add the pointer then). RESOLVED 2026-10-09 15:45: lem-weil-pbc-constructible-torsion-modules-agree split and reviewed; step 10 cites it.
 
-**Remote groups** (`tools/group_stats.py`, updated with each progress row; 2026-10-10 09:44 UTC):
+**Remote groups** (`tools/group_stats.py`, updated with each progress row; 2026-10-10 09:52 UTC):
 | group | merged | returned | abandoned | claims held (age, h) |
 |---|---|---|---|---|
 | C | 19 | 20 | 0 | 0: none |
-| C1 | 27 | 24 | 1 | 7: lem-weil-pbc-complete-local-map-regular-presentation (0.3), lem-weil-pbc-conormal-intersection-regular-quotient (0.3), lem-weil-pbc-depth-drops-by-one (0.3), lem-weil-pbc-depth-ext (0.3), lem-weil-pbc-depth-over-quotient-ring (0.3), lem-weil-pbc-local-ring-colimit-essentially-finite-type-over-z (0.0), lem-weil-pbc-module-ses-cech-h1-surjective (0.0) |
+| C1 | 27 | 24 | 1 | 10: lem-weil-pbc-complete-local-map-regular-presentation (0.4), lem-weil-pbc-conormal-intersection-regular-quotient (0.4), lem-weil-pbc-depth-drops-by-one (0.4), lem-weil-pbc-depth-ext (0.4), lem-weil-pbc-depth-over-quotient-ring (0.4), lem-weil-pbc-local-ring-colimit-essentially-finite-type-over-z (0.2), lem-weil-pbc-module-ses-cech-h1-surjective (0.2), lem-weil-pbc-normal-domain-fractional-principal-quotient-ass (0.1), lem-weil-pbc-openness-of-flatness (0.1), lem-weil-pbc-p-independent-extends-to-p-basis (0.1) |
 | D | 2 | 8 | 0 | 0: none |
 | D1 | 3 | 4 | 2 | 0: none |
 | E | 1 | 5 | 0 | 0: none |
-| E1 | 38 | 24 | 1 | 4: lem-weil-pbc-minimal-finite-free-resolution-local (0.9), lem-weil-pbc-quasi-coherent-module-direct-sum (0.7), lem-weil-pbc-reduced-normal-iff-integrally-closed-total-fractions (0.7), lem-weil-pbc-regular-local-dim-one-iff-normal (0.7) |
+| E1 | 38 | 24 | 1 | 5: lem-weil-pbc-minimal-finite-free-resolution-local (1.1), lem-weil-pbc-projective-dimension-ses-kernel (0.1), lem-weil-pbc-quasi-coherent-module-direct-sum (0.9), lem-weil-pbc-reduced-normal-iff-integrally-closed-total-fractions (0.9), lem-weil-pbc-regular-local-dim-one-iff-normal (0.9) |
 | F | 1 | 4 | 0 | 0: none |
-| F1 | 36 | 25 | 9 | 2: lem-weil-pbc-colimit-category-fp-algebras (0.3), lem-weil-pbc-flat-module-pullback-exact-pushforward-injective (0.8) |
+| F1 | 36 | 25 | 9 | 2: lem-weil-pbc-colimit-category-fp-algebras (0.5), lem-weil-pbc-flat-module-pullback-exact-pushforward-injective (1.0) |
 | G | 0 | 2 | 0 | 0: none |
-| G1 | 30 | 9 | 0 | 3: lem-weil-pbc-descend-qc-open-fg-subalgebra (1.4), lem-weil-pbc-flat-variant-local-criterion (1.4), lem-weil-pbc-pullback-ample-invertible (1.1) |
-| H1 | 0 | 0 | 0 | 5: lem-weil-pbc-fs-adic-field-regular-local (0.1), lem-weil-pbc-graded-finiteness-cohomology (0.1), lem-weil-pbc-grothendieck-regular-sequence-flat (0.1), lem-weil-pbc-integral-scheme-ideal-generic-stalk (0.1), lem-weil-pbc-limit-finite-presentation (0.1) |
-| J1 | 0 | 0 | 0 | 8: lem-weil-pbc-dimension-quasi-finite-over-polynomial-algebra (0.2), lem-weil-pbc-directed-union-subrings-flat-module (0.2), lem-weil-pbc-essentially-finite-presentation-over-intermediate (0.2), lem-weil-pbc-fibre-ring-local-ring-natural-iso (0.2), lem-weil-pbc-finite-type-domain-dimension-trdeg (0.2), lem-weil-pbc-finite-type-etale-finite-factor-decomposition (0.0), lem-weil-pbc-limit-module-essentially-finite-presentation-over-system (0.0), lem-weil-pbc-local-nagata-domain-analytically-unramified (0.0) |
-| K1 | 0 | 0 | 0 | 5: lem-weil-pbc-flat-another-variant-local-criterion (0.1), lem-weil-pbc-flat-formally-smooth-closed-fibre-adic (0.1), lem-weil-pbc-flat-mod-injective (0.1), lem-weil-pbc-formal-glueing-H0-localization (0.1), lem-weil-pbc-formal-glueing-canonical-maps (0.1) |
+| G1 | 30 | 9 | 0 | 5: lem-weil-pbc-descend-qc-open-fg-subalgebra (1.5), lem-weil-pbc-flat-variant-local-criterion (1.5), lem-weil-pbc-pullback-ample-invertible (1.3), lem-weil-pbc-smooth-at-maximal-ideal-alg-closed-differentials-bound (0.1), lem-weil-pbc-smooth-at-prime-field-extension-descent (0.1) |
+| H1 | 0 | 0 | 0 | 9: def-weil-pbc-analytically-unramified (0.1), lem-weil-pbc-fs-adic-field-regular-local (0.2), lem-weil-pbc-graded-finiteness-cohomology (0.2), lem-weil-pbc-grothendieck-regular-sequence-flat (0.2), lem-weil-pbc-integral-scheme-ideal-generic-stalk (0.2), lem-weil-pbc-limit-finite-presentation (0.2), lem-weil-pbc-quasi-finite-over-polynomial-algebra (0.1), lem-weil-pbc-quotient-by-power-torsion-no-torsion (0.1), lem-weil-pbc-separable-polynomial-quotient-reduced (0.1) |
+| J1 | 0 | 0 | 0 | 10: lem-weil-pbc-dimension-quasi-finite-over-polynomial-algebra (0.3), lem-weil-pbc-directed-union-subrings-flat-module (0.3), lem-weil-pbc-essentially-finite-presentation-over-intermediate (0.3), lem-weil-pbc-fibre-ring-local-ring-natural-iso (0.3), lem-weil-pbc-finite-type-domain-dimension-trdeg (0.3), lem-weil-pbc-finite-type-etale-finite-factor-decomposition (0.2), lem-weil-pbc-limit-module-essentially-finite-presentation-over-system (0.2), lem-weil-pbc-local-nagata-domain-analytically-unramified (0.2), lem-weil-pbc-regular-local-quotient-kernel-parameters (0.1), lem-weil-pbc-symmetric-projective-presentation-conormal (0.1) |
+| K1 | 0 | 0 | 0 | 9: lem-weil-pbc-flat-another-variant-local-criterion (0.2), lem-weil-pbc-flat-formally-smooth-closed-fibre-adic (0.2), lem-weil-pbc-flat-mod-injective (0.2), lem-weil-pbc-formal-glueing-H0-localization (0.2), lem-weil-pbc-formal-glueing-canonical-maps (0.2), lem-weil-pbc-relative-global-complete-intersection-local-regular-sequence (0.1), lem-weil-pbc-relative-global-complete-intersection-noetherian-approximation (0.1), lem-weil-pbc-sections-morphism-to-proj-polynomial-ring (0.1), lem-weil-pbc-torsion-extension-flat-descent (0.1) |
 
 REMOTE LAUNCHER READY (2026-10-09 16:22: `roles/remote-launcher.md` committed; `AGENTS.md` §1, `roles/remote-lead.md`, `SETUP.md`, `roles/maintainer.md` §7, `tools/README.md` tied in; the tools take any group name `C1`, `C2`, …; the old group `C` keeps its claims until the human says its session is stopped).
 
@@ -188,6 +188,7 @@ REMOTE LAUNCHER READY (2026-10-09 16:22: `roles/remote-launcher.md` committed; `
 | 2026-10-10 09:29 | 943 | 1513 | 814 | 338 | 178 |
 | 2026-10-10 09:39 | 958 | 1521 | 816 | 338 | 178 |
 | 2026-10-10 09:44 | 957 | 1530 | 821 | 338 | 178 |
+| 2026-10-10 09:52 | 955 | 1540 | 825 | 338 | 178 |
 
 **BLUEPRINT REFS READY** (2026-10-10 09:37 UTC; points 1–4 of the human's decision of 09:31, commit 28935e1a0b). Every node carries `blueprint` = {is, from, same_as} (`stages/1-dag.md` §6); reverse index `coord/blueprint-index.tsv`, regenerated with the queue.
 
@@ -198,6 +199,7 @@ REMOTE LAUNCHER READY (2026-10-09 16:22: `roles/remote-launcher.md` committed; `
 | 2026-10-10 09:37 | 60 of 767 | 0 |
 | 2026-10-10 09:39 | 60 of 767 | 0 |
 | 2026-10-10 09:44 | 60 of 767 | 0 |
+| 2026-10-10 09:52 | 60 of 767 | 1 |
 
 Review lag: no delivery is waiting; the lead's own reviews are within a few minutes of the reports.
 
