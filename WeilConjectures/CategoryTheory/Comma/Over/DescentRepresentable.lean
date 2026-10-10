@@ -273,4 +273,39 @@ theorem nonempty_representableBy_of_descent
     Nonempty (F.RepresentableBy V₀) :=
   ⟨(exists_representableBy_of_descent r q hq hinv hepi hV₀ hF).choose⟩
 
+
+omit [HasPullbacks C] in
+/-- **The sheaf condition for a single morphism transfers along `Over.map g`.** If `P` satisfies the
+sheaf condition for the image of `π : T' ⟶ T` under `Over.map g`, then `(Over.map g).op ⋙ P`
+satisfies it for `π`: an object over `X'` with a morphism to `(Over.map g).obj T'` is an
+object over `X`. -/
+lemma isSheafFor_singleton_overMap {X' : C} (g : X ⟶ X') {G : (Over X')ᵒᵖ ⥤ Type w}
+    {T T' : Over X} (π : T' ⟶ T)
+    (h : Presieve.IsSheafFor G (.singleton ((Over.map g).map π))) :
+    Presieve.IsSheafFor ((Over.map g).op ⋙ G) (.singleton π) := by
+  rw [Presieve.isSheafFor_singleton] at h ⊢
+  intro y hy
+  -- an object `Z'` over `X'` with a morphism `a` to `T'` is an object over `X`
+  let lift {Z' : Over X'} (a : Z' ⟶ (Over.map g).obj T') : Over X := Over.mk (a.left ≫ T'.hom)
+  let e {Z' : Over X'} (a : Z' ⟶ (Over.map g).obj T') : Z' ⟶ (Over.map g).obj (lift a) :=
+    Over.homMk (𝟙 _) (by simp [lift, ← Over.w a])
+  obtain ⟨x, hx, hxu⟩ := h y fun {Z'} p₁ p₂ hp ↦ by
+    have hl : p₂.left ≫ T'.hom = p₁.left ≫ T'.hom := by
+      rw [← Over.w π]
+      simpa using congrArg (fun φ ↦ φ.left ≫ T.hom) hp.symm
+    let q₁ : lift p₁ ⟶ T' := Over.homMk p₁.left rfl
+    let q₂ : lift p₁ ⟶ T' := Over.homMk p₂.left hl
+    have hq : q₁ ≫ π = q₂ ≫ π := by
+      ext
+      simpa [q₁, q₂] using congrArg CommaMorphism.left hp
+    have h₁ : p₁ = e p₁ ≫ (Over.map g).map q₁ := by
+      ext
+      simp [e, q₁]
+    have h₂ : p₂ = e p₁ ≫ (Over.map g).map q₂ := by
+      ext
+      simp [e, q₂]
+    rw [h₁, h₂, op_comp, op_comp, Functor.map_comp_apply, Functor.map_comp_apply]
+    exact congrArg (G.map (e p₁).op) (hy q₁ q₂ hq)
+  exact ⟨x, hx, fun x' hx' ↦ hxu x' hx'⟩
+
 end CategoryTheory.Functor.RepresentableBy
