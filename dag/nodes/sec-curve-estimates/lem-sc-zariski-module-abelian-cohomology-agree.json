@@ -25,9 +25,41 @@
   "pqf-def-cohomology",
   "def-sc-zariski-cohomology"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "The reviewed comparison node [lem-sc-module-abelian-zariski-cohomology] states that for a scheme with its small Zariski site and any sheaf of $\\mathcal O_X$-modules, the module-derived and underlying-abelian derived global sections are canonically isomorphic in every degree and naturally in the module sheaf. Applied to the present $X$ and $\\mathcal M$, it gives the canonical isomorphisms $H^q(X,\\mathcal M)\\cong H^q(X_{\\rm Zar},\\mathcal M_{ab})$, natural in $\\mathcal M$, which we take as the isomorphisms of the statement for $q\\geq1$.",
+   "uses": [
+    "lem-sc-module-abelian-zariski-cohomology"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Lemma Tag 03FD (lemma-cohomology-modules-abelian-agree), statement and proof"
+   }
+  },
+  {
+   "text": "For $q=0$, both zeroth right-derived functors of a left exact functor are that functor: the module side is $H^0(X,\\mathcal M)=\\Gamma(X,\\mathcal M)$ by [pqf-def-cohomology], and the abelian-sheaf side is $H^0(X_{\\rm Zar},\\mathcal M_{ab})=\\mathcal M_{ab}(X)=\\Gamma(X,\\mathcal M)$ by [def-sc-zariski-cohomology] and the definition of the underlying sheaf. In degree zero we take as the isomorphism of the statement the identity of $\\Gamma(X,\\mathcal M)$ under these two identifications (the statement of [lem-sc-module-abelian-zariski-cohomology] does not say what its comparison is in degree zero, so it is not used there). The identity is canonical and natural in $\\mathcal M$, since a morphism of $\\mathcal O_X$-modules acts on both sides by the same map on global sections. Together with step 1 this gives the canonical natural isomorphisms in every degree, the identity in degree zero.",
+   "uses": [
+    "pqf-def-cohomology",
+    "def-sc-zariski-cohomology"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Lemma Tag 03FD (lemma-cohomology-modules-abelian-agree), degree-zero clause"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sc-module-abelian-zariski-cohomology",
+  "pqf-def-cohomology",
+  "def-sc-zariski-cohomology"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Lemma Tag 03FD (lemma-cohomology-modules-abelian-agree), statement and proof"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -52,12 +84,28 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-sc-etale-zariski-qcoh-comparison",
   "by": "worker",
   "date": "2026-10-10"
  },
  "chapter": "sec-curve-estimates",
- "unit": "sk-prop-cd"
+ "unit": "sk-prop-cd",
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "lem-sc-zariski-module-abelian-cohomology-agree",
+  "worker": "stage1",
+  "summary": "Split the item into the existing reviewed Stacks 03FD comparison statement and the elementary degree-zero identification. No new node was needed: lem-sc-module-abelian-zariski-cohomology already states the canonical natural comparison for the same small Zariski module setting, while pqf-def-cohomology and def-sc-zariski-cohomology identify both degree-zero functors with the same section group.",
+  "blueprint": "Step 1 realizes the blueprint clause identifying module cohomology with underlying-abelian cohomology; step 2 realizes the degree-zero identity clause in the item statement.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-zca",
+  "group": "C1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-zca (reviewer sub-agent of L); spot-checked: Source Stacks Tag 03FD (lemma-cohomology-modules-abelian-agree, sites-cohomology.tex l.1862): H^i in Ab(C) equals H^i in Mod(O) for any ringed site; the item specializes it to (X_Zar, O_X) with naturality and adds a degree-zero clause, hypotheses agree (any scheme, any O_X-module). Delivery: one commit, only the item node and report; no new nodes; split_report.tool_uses empty; the only off-node citation lem-sc-module-abelian-zariski-cohomology is in the same unit sk-prop-cd (no C7). Step 1 carried by the statement of lem-sc-module-abelian-zariski-cohomology (canonical iso in every degree, natural in F, same definitions pqf-def-cohomology / def-sc-zariski-cohomology) - checked. Step 2 (degree zero) carried by pqf-def-cohomology and def-sc-zariski-cohomology (R^0 of a left exact functor is the functor). FIX more, RETURN less: dag/nodes/sec-curve-estimates/lem-sc-zariski-module-abelian-cohomology-agree.json: proof[1].text: the step asserted that the comparison of lem-sc-module-abelian-zariski-cohomology is the identity in degree zero, which that node's statement does not say (C4; it is only in its proof, C3/C5); rewritten to take the identity of Gamma(X,M) as the degree-zero isomorphism (natural, canonical) and the cited comparison for q>=1; proof[0].text adjusted to say it is used for q>=1. uses/proof_deps unchanged. Small cases: X empty (both sides 0), X one point (both = the module's group, higher cohomology 0 on both sides). No Mathlib leaf. Report mentions a citations.json not in the commit (harmless). Start Sat Oct 10 03:43:22 PM UTC 2026, end Sat Oct 10 03:44:07 PM UTC 2026.; 1 file(s) fixed by the reviewer"
+ }
 }
