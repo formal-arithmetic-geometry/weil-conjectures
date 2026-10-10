@@ -1,8 +1,8 @@
 # Work queue
 
-917 items; claim with `tools/claim.py next <group> [--stage N]`.
+914 items; claim with `tools/claim.py next <group> [--stage N]`.
 
-## Stage 1: nodes to split (627)
+## Stage 1: nodes to split (624)
 
 | node | distance to a target | Lean state on the done branch |
 |---|---|---|
@@ -26,10 +26,6 @@
 | `lem-weil-pbc-smooth-fibre-regular-local` | 1012 | none |
 | `lem-weil-pbc-smooth-localization-conormal-split` | 1012 | none |
 | `lem-weil-pbc-smooth-over-field-dimension-differentials` | 1012 | none |
-| `lem-weil-pbc-etale-cohomology-local-ring-colimit` | 1013 | none |
-| `lem-weil-pbc-exact-sequence-ml` | 1013 | none |
-| `lem-weil-pbc-fibre-degree-base-change` | 1013 | none |
-| `lem-weil-pbc-fibre-degree-bound-field-points` | 1013 | none |
 | `lem-weil-pbc-field-char-p-h1-cotangent-vanishing` | 1013 | none |
 | `lem-weil-pbc-field-char-p-nilpotent-lifting` | 1013 | none |
 | `lem-weil-pbc-finite-locally-free-degree-etale-descent` | 1013 | none |
@@ -118,6 +114,7 @@
 | `lem-weil-pbc-finitely-generated-field-complete-intersection-model` | 1014 | none |
 | `lem-weil-pbc-flat-local-extension-given-residue-field` | 1014 | none |
 | `lem-weil-pbc-limit-tower-essentially-finite-presentation` | 1014 | none |
+| `lem-weil-pbc-local-ring-spec-limit-affine-neighbourhoods` | 1014 | none |
 | `lem-weil-pbc-nl-presentations-homotopy-equivalent` | 1014 | none |
 | `lem-weil-pbc-p-basis-differentials-basis` | 1014 | none |
 | `lem-weil-pbc-two-term-homotopy-equivalence-direct-sum` | 1014 | none |
@@ -929,7 +926,7 @@
 | `lem-weil-pbc-p1-field-dimension-one` | 4 | state |
 | `lem-weil-pbc-projective-space-zero-isomorphism` | 4 | state |
 
-Not open yet: 639 nodes that wait for stage 1, 562 nodes that wait for a statement dependency.
+Not open yet: 636 nodes that wait for stage 1, 566 nodes that wait for a statement dependency.
 
 ## Stage 3: modules to prove (0)
 
