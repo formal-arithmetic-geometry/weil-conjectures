@@ -706,4 +706,174 @@ theorem eulerChar_tensorObj_eq_add (J : X.IdealSheafData) (N : X.Modules) [N.IsI
 
 end Polynomial
 
+section LowerBound
+
+variable (K : Type u) [Field K]
+
+/-- A morphism `σ : 𝒪_X ⟶ N` sending `1` to `0` is zero. -/
+lemma eq_zero_of_app_top_one {Y : Scheme.{u}} {N : Y.Modules} (σ : 𝟙_ Y.Modules ⟶ N)
+    (h : σ.app ⊤ (unitSectionsEquiv ⊤ 1) = 0) : σ = 0 := by
+  refine hom_ext _ _ fun U ↦ ?_
+  ext r
+  obtain ⟨a, rfl⟩ := ((isFreeGenerator_one (X := Y) ⊤).map (le_top : U ≤ ⊤)).exists_smul_eq r
+  rw [Hom.app_smul]
+  erw [Hom.app_presheaf_map σ (homOfLE (le_top : U ≤ ⊤)) (1 : Γ(Y, ⊤))]
+  erw [h]
+  simp
+
+/-- **The Hilbert polynomial of an integral scheme has degree at least its dimension.** Let `Y`
+be an integral scheme proper over `K` and `ℒ` ample. If `P` is the Hilbert polynomial of `ℒ`
+and `d ≤ dim Y`, then `d ≤ deg P`.
+
+By induction on `d`. For `d = 0`, a section of `ℒ^{⊗ n}` not vanishing at the generic point
+gives `χ(ℒ^{⊗ n}) = h⁰(ℒ^{⊗ n}) > 0` for `n ≫ 0`. For `d + 1`, choose a specialization `w` of
+the generic point with `dim {w}⁻ ≥ d`, let `W` be the integral closed subscheme `{w}⁻` with
+ideal `J`, and choose a section `σ` of `J ⊗ ℒ^{⊗ a}` whose image `s` in `ℒ^{⊗ a}` does not
+vanish at the generic point; `s` and hence `σ` are injective as `Y` is integral. Then
+`χ(ℒ^{⊗ (n + a)}) - χ(ℒ^{⊗ n}) = χ(coker σ ⊗ ℒ^{⊗ n}) + χ(W, ℒ|_W^{⊗ (n + a)})`, a sum of two
+eventually nonnegative polynomials, the second of degree `≥ d` by induction. -/
+theorem le_degree_of_isIntegral (d : ℕ) (Y : Scheme.{u}) [Y.Over (Spec (.of K))]
+    [IsProper (Y ↘ Spec (.of K))] [IsIntegral Y] (ℒ : Y.Modules)
+    (hℒ : IsAmple (Y ↘ Spec (.of K)) ℒ) (hd : (d : WithBot ℕ∞) ≤ topologicalKrullDim Y)
+    (P : Polynomial ℚ) (hP : ∀ n : ℕ, P.eval (n : ℚ) = (𝟙_ Y.Modules ⊗ ℒ.tensorPow n).eulerChar K) :
+    (d : WithBot ℕ) ≤ P.degree := by
+  induction d generalizing Y ℒ P with
+  | zero =>
+    have := hℒ.isInvertible
+    have := isNoetherian_of_isProper K (X := Y)
+    have := SheafOfModules.isQuasicoherent_unit (R := Y.ringCatSheaf)
+    have := IsInvertible.sheafOfModules_isInvertible (𝟙_ Y.Modules)
+    obtain ⟨n₁, hn₁⟩ := exists_forall_mem_compl_support_zeroLocus (Y ↘ Spec (.of K)) hℒ
+      {genericPoint Y} (by simp)
+    obtain ⟨n₂, hn₂⟩ := exists_forall_eulerChar_eq_finrankH_zero K hℒ (𝟙_ Y.Modules)
+    obtain ⟨s, hs⟩ := hn₁ (max n₁ n₂) (le_max_left _ _)
+    have : SheafOfModules.IsInvertible.{u, u, u} (ℒ.tensorPow (max n₁ n₂)) :=
+      IsInvertible.sheafOfModules_isInvertible _
+    have hs₁ : s.app ⊤ (unitSectionsEquiv ⊤ 1) ≠ 0 := fun h ↦ by
+      have := hs _ (Finset.mem_singleton_self _)
+      rw [eq_zero_of_app_top_one s h, (Hom.zeroLocus_eq_bot_iff 0).mpr rfl] at this
+      exact this trivial
+    set M := 𝟙_ Y.Modules ⊗ ℒ.tensorPow (max n₁ n₂)
+    have := isQuasicoherent_tensorObj (𝟙_ Y.Modules) (ℒ.tensorPow (max n₁ n₂))
+    have := isFinitePresentation_tensorObj (𝟙_ Y.Modules) (ℒ.tensorPow (max n₁ n₂))
+    have hx : Hom.app (λ_ (ℒ.tensorPow (max n₁ n₂))).inv ⊤ (s.app ⊤ (unitSectionsEquiv ⊤ 1)) ≠
+        (0 : Γ(M, ⊤)) := fun h ↦
+      hs₁ ((bijective_app_of_iso (λ_ (ℒ.tensorPow (max n₁ n₂))).symm ⊤).1
+        (h.trans (map_zero _).symm))
+    have : FiniteDimensional K (M.H 0) := finiteDimensional_H_of_isProper M 0
+    have hpos : 0 < M.finrankH K 0 := Module.finrank_pos_iff_exists_ne_zero.mpr
+      ⟨(H.zeroLinearEquiv M).symm _, fun h ↦ hx (by simpa using congrArg (H.zeroLinearEquiv M) h)⟩
+    have hP₀ : P ≠ 0 := by
+      rintro rfl
+      have := hP (max n₁ n₂)
+      rw [hn₂ _ (le_max_right _ _), Polynomial.eval_zero] at this
+      exact hpos.ne' (by exact_mod_cast this.symm)
+    exact_mod_cast Polynomial.zero_le_degree_iff.mpr hP₀
+  | succ d ih =>
+    have := hℒ.isInvertible
+    have := isNoetherian_of_isProper K (X := Y)
+    have := SheafOfModules.isQuasicoherent_unit (R := Y.ringCatSheaf)
+    have := IsInvertible.sheafOfModules_isInvertible (𝟙_ Y.Modules)
+    set η := genericPoint Y
+    have hη : closure {η} = Set.univ := (genericPoint_spec Y).def
+    obtain ⟨w, hηw, hwη, hdw⟩ := exists_specializes_ne_le_topologicalKrullDim_closure hη hd
+    let J := IdealSheafData.vanishingIdeal ⟨closure {w}, isClosed_closure⟩
+    have hηJ : η ∉ (J.support : Set Y) := fun h ↦ by
+      simp only [J, IdealSheafData.coe_support_vanishingIdeal] at h
+      exact hwη (hηw.antisymm (specializes_iff_mem_closure.mpr h)).eq.symm
+    obtain ⟨a, ha⟩ := exists_mem_compl_support_zeroLocus_comp_toModulesι (Y ↘ Spec (.of K)) hℒ J
+      hηJ
+    obtain ⟨σ, hσ⟩ := ha a le_rfl
+    have : SheafOfModules.IsInvertible.{u, u, u} (ℒ.tensorPow a) :=
+      IsInvertible.sheafOfModules_isInvertible _
+    set s := σ ≫ J.toModulesι ▷ ℒ.tensorPow a ≫ (λ_ _).hom
+    have := isIso_restrictFunctor_map_of_le s
+      (U := (Hom.zeroLocus s).support.compl) le_rfl
+    have hs : IsZero (kernel s) := isZero_kernel_of_isIntegral s ⟨η, hσ⟩
+    have : Mono s := Preadditive.mono_of_kernel_zero (hs.eq_of_src _ _)
+    have : Mono σ := mono_of_mono σ (J.toModulesι ▷ ℒ.tensorPow a ≫ (λ_ _).hom)
+    -- the integral closed subscheme `W`
+    let Y' := J.subscheme
+    let j := J.subschemeι
+    let : Y'.Over (Spec (.of K)) := ⟨j ≫ Y ↘ Spec (.of K)⟩
+    have : IsProper (Y' ↘ Spec (.of K)) := inferInstanceAs (IsProper (j ≫ Y ↘ Spec (.of K)))
+    have : IsIntegral Y' := IdealSheafData.isIntegral_subscheme_vanishingIdeal_closure w
+    have hdY' : (d : WithBot ℕ∞) ≤ topologicalKrullDim Y' := by
+      rw [IdealSheafData.topologicalKrullDim_subscheme_vanishingIdeal_closure]
+      exact hdw
+    have hℒ' : IsAmple (Y' ↘ Spec (.of K)) ((pullback j).obj ℒ) := hℒ.pullback j
+    have := SheafOfModules.isQuasicoherent_unit (R := Y'.ringCatSheaf)
+    have := IsInvertible.sheafOfModules_isInvertible (𝟙_ Y'.Modules)
+    obtain ⟨P', -, hP'⟩ := exists_polynomial_eulerChar_tensorObj_tensorPow_of_le K hℒ'
+      (𝟙_ Y'.Modules) (topologicalKrullDim_le_unbotD_toNat K)
+    have hdP' := ih Y' _ hℒ' hdY' P' hP'
+    -- the cokernel of `σ`
+    have := isQuasicoherent_toModules J
+    have := isFinitePresentation_toModules J
+    have := isQuasicoherent_tensorObj J.toModules (ℒ.tensorPow a)
+    have := isFinitePresentation_tensorObj J.toModules (ℒ.tensorPow a)
+    have := isQuasicoherent_cokernel σ
+    have := isFinitePresentation_cokernel σ
+    obtain ⟨Q, -, hQ⟩ := exists_polynomial_eulerChar_tensorObj_tensorPow_of_le K hℒ
+      (cokernel σ) (topologicalKrullDim_le_unbotD_toNat K)
+    have key (n : ℕ) : ((𝟙_ Y.Modules ⊗ ℒ.tensorPow (n + a)).eulerChar K : ℚ) -
+        (𝟙_ Y.Modules ⊗ ℒ.tensorPow n).eulerChar K =
+        (cokernel σ ⊗ ℒ.tensorPow n).eulerChar K +
+          (𝟙_ Y'.Modules ⊗ ((pullback j).obj ℒ).tensorPow (n + a)).eulerChar K := by
+      have h₁ := eulerChar_tensorObj_sub_eulerChar_tensorObj_eq K σ (ℒ.tensorPow n)
+      have := isEquivalence_tensorRight (ℒ.tensorPow n)
+      have h₀ : (kernel σ ⊗ ℒ.tensorPow n).eulerChar K = 0 :=
+        eulerChar_eq_zero_of_isZero K ((tensorRight _).map_isZero (isZero_kernel_of_mono σ))
+      rw [h₀, sub_zero] at h₁
+      have e : (J.toModules ⊗ ℒ.tensorPow a) ⊗ ℒ.tensorPow n ≅
+          J.toModules ⊗ ℒ.tensorPow (n + a) :=
+        α_ _ _ _ ≪≫ (Iso.refl _ ⊗ᵢ ((ℒ.tensorPowAddIso a n).symm ≪≫
+          eqToIso (congrArg ℒ.tensorPow (Nat.add_comm a n))))
+      rw [eulerChar_congr K e] at h₁
+      have h₂ := eulerChar_tensorObj_eq_add K J (ℒ.tensorPow (n + a))
+      obtain ⟨e'⟩ := nonempty_pullback_tensorPow_iso j ℒ (n + a)
+      have h₃ : ((pullback j).obj (ℒ.tensorPow (n + a))).eulerChar K =
+          (𝟙_ Y'.Modules ⊗ ((pullback j).obj ℒ).tensorPow (n + a)).eulerChar K :=
+        eulerChar_congr K (e' ≪≫ (λ_ _).symm)
+      rw [h₃] at h₂
+      have hZ : (𝟙_ Y.Modules ⊗ ℒ.tensorPow (n + a)).eulerChar K -
+          (𝟙_ Y.Modules ⊗ ℒ.tensorPow n).eulerChar K =
+          (cokernel σ ⊗ ℒ.tensorPow n).eulerChar K +
+            (𝟙_ Y'.Modules ⊗ ((pullback j).obj ℒ).tensorPow (n + a)).eulerChar K := by
+        linarith
+      exact_mod_cast hZ
+    -- compare polynomials
+    have hpoly : P.comp (Polynomial.X + Polynomial.C (a : ℚ)) - P =
+        Q + P'.comp (Polynomial.X + Polynomial.C (a : ℚ)) := by
+      refine Polynomial.eq_of_infinite_eval_eq _ _
+        (Set.infinite_range_of_injective Nat.cast_injective |>.mono ?_)
+      rintro _ ⟨n, rfl⟩
+      simp only [Set.mem_setOf_eq, Polynomial.eval_sub, Polynomial.eval_add,
+        Polynomial.eval_comp, Polynomial.eval_X, Polynomial.eval_C]
+      have := key n
+      rw [← hP, ← hP, ← hQ, ← hP'] at this
+      push_cast at this
+      linarith
+    obtain ⟨n₁, hn₁⟩ := exists_forall_eulerChar_nonneg K hℒ (cokernel σ)
+    obtain ⟨n₂, hn₂⟩ := exists_forall_eulerChar_nonneg K hℒ' (𝟙_ Y'.Modules)
+    have hQ₀ : ∃ N : ℕ, ∀ n ≥ N, 0 ≤ Q.eval (n : ℚ) :=
+      ⟨n₁, fun n hn ↦ by rw [hQ]; exact_mod_cast hn₁ n hn⟩
+    have hP'₀ : ∃ N : ℕ, ∀ n ≥ N, 0 ≤ (P'.comp (Polynomial.X + Polynomial.C (a : ℚ))).eval
+        (n : ℚ) :=
+      ⟨n₂, fun n hn ↦ by
+        simp only [Polynomial.eval_comp, Polynomial.eval_add, Polynomial.eval_X,
+          Polynomial.eval_C]
+        have := hP' (n + a)
+        push_cast at this
+        rw [this]
+        exact_mod_cast hn₂ (n + a) (by omega)⟩
+    have hdeg : P'.degree = (P'.comp (Polynomial.X + Polynomial.C (a : ℚ))).degree := by
+      rw [← Polynomial.taylor_apply, Polynomial.degree_taylor]
+    refine Polynomial.degree_add_one_le_of_le_degree_comp_sub (a := a) ?_
+    rw [hpoly, add_comm]
+    exact (hdP'.trans hdeg.le).trans (Polynomial.degree_le_degree_add_of_eventually_nonneg
+      hP'₀ hQ₀)
+
+end LowerBound
+
 end AlgebraicGeometry.Scheme.Modules
