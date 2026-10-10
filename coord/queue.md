@@ -66,10 +66,10 @@
 | `lem-weil-pbc-sections-annihilated-by-ideal` | 1016 | none |
 | `lem-weil-pbc-coherent-artin-rees` | 1017 | none |
 | `lem-weil-pbc-module-finite-type-surjective-on-stalk` | 1017 | none |
-| `lem-weil-pbc-sections-over-quasi-compact-open` | 1017 | none |
 | `lem-weil-pbc-sheaf-hom-finite-presentation-quasi-coherent` | 1017 | none |
 | `lem-weil-pbc-tate-n2-complete-principal` | 1017 | none |
 | `lem-weil-pbc-power-series-normal-domain` | 1018 | none |
+| `lem-weil-pbc-sections-over-quasi-compact-open-in-affine` | 1018 | none |
 | `lem-weil-pbc-injective-acyclicity-bounded-below` | 2002 | sorry_here |
 | `lem-weil-pbc-property-implies-acyclicity` | 2003 | none |
 | `lem-weil-pbc-qcqs-higher-direct-image` | 2003 | none |
@@ -968,7 +968,7 @@
 | `lem-weil-pbc-p1-field-dimension-one` | 4 | state |
 | `lem-weil-pbc-projective-space-zero-isomorphism` | 4 | state |
 
-Not open yet: 587 nodes that wait for stage 1, 717 nodes that wait for a statement dependency.
+Not open yet: 587 nodes that wait for stage 1, 718 nodes that wait for a statement dependency.
 
 ## Stage 3: modules to prove (0)
 
