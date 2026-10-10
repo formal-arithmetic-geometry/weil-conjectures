@@ -313,7 +313,7 @@ lemma injective_toLocalGenericRing_appTop (W : C.Etale) [PreirreducibleSpace W.l
   have : IsDiscreteValuationRing (W.left.presheaf.stalk y) :=
     Scheme.Etale.isDiscreteValuationRing_stalk W hy
   let := (Scheme.Etale.stalkToLocalGenericRing W y).hom.toAlgebra
-  have := Scheme.Etale.isFractionRing_localGenericRing W hy
+  have := Scheme.Etale.isFractionRing_localGenericRing W y
   have hP : Nonempty P := by
     by_contra hP
     rw [not_nonempty_iff] at hP
@@ -418,7 +418,7 @@ lemma exists_eq_of_ord_eq_zero (hC : topologicalKrullDim C = 1) {S : Set C} (hS 
   have : IsDiscreteValuationRing (V.left.presheaf.stalk y) :=
     Scheme.Etale.isDiscreteValuationRing_stalk V hcoh
   let := (Scheme.Etale.stalkToLocalGenericRing V y).hom.toAlgebra
-  have := Scheme.Etale.isFractionRing_localGenericRing V hcoh
+  have := Scheme.Etale.isFractionRing_localGenericRing V y
   let genV : Γ(pullback V.hom j, ⊤) ⟶ Γ(pullback V.hom C.fromSpecFunctionField, ⊤) :=
     (pullback.map V.hom C.fromSpecFunctionField V.hom j (𝟙 _) iU (𝟙 _) (by simp)
       (by simp [hiU])).appTop
@@ -617,7 +617,7 @@ lemma exists_ord_eq_extendByZero (hC : topologicalKrullDim C = 1) {S : Set C}
     · rw [Scheme.Etale.ord, if_pos hy'c, Scheme.Etale.toLocalGenericRing_fst_appTop]
       have := Scheme.Etale.isDiscreteValuationRing_stalk W' hy'c
       let := (Scheme.Etale.stalkToLocalGenericRing W' ⟨y', hy'W⟩).hom.toAlgebra
-      have := Scheme.Etale.isFractionRing_localGenericRing W' hy'c
+      have := Scheme.Etale.isFractionRing_localGenericRing W' ⟨y', hy'W⟩
       split_ifs with hy'
       · change y' = y at hy'
         subst hy'
