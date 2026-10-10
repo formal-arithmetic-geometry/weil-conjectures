@@ -35,11 +35,8 @@ local Frobenius of `F`.
 - `AlgebraicGeometry.WeilSheaf.constantTwistInvIso`: twisting by `b` and then by `b⁻¹` gives
   back `F`.
 
-## Main statements
-
-- `AlgebraicGeometry.WeilSheaf.nonempty_higherLowerShriek_constantTwist_iso`: the projection
-  formula `Rⁱf₀!(F ⊗ 𝓑_b) ≅ Rⁱf₀!F ⊗ 𝓑_b` for a constant twist
-  (blueprint: `lem-wf-constant-twist-cohomology`).
+The stalks and the cohomology of constant twists are computed in
+`WeilConjectures.WeilSheaf.StalkConstantTwist` and `WeilConjectures.WeilSheaf.ConstantTwistCohomology`.
 -/
 
 @[expose] public section
@@ -113,21 +110,6 @@ noncomputable def constantTwistInvIso (F : WeilSheaf k₀ l X) (b : (PadicAlgCl 
     exact (congrArg (· ≫ _) ((frobeniusPullback k₀ l X).map_id _)).trans
       (Category.id_comp _))))
 
--- TODO(adic): needs the projection formula for `Rf₀!` and constant Weil sheaves
-/-- The projection formula for a constant twist: for a morphism `f : X ⟶ Y` of `k₀`-schemes as
-in `AlgebraicGeometry.WeilSheaf.higherLowerShriek` and a unit `b ∈ ℚ̄_ℓˣ`,
-`Rⁱf₀!(F ⊗ 𝓑_b) ≅ Rⁱf₀!F ⊗ 𝓑_b`: the constant Weil line `𝓑_b` is pulled back from `Y`, so it
-comes out of the direct image (blueprint: `lem-wf-constant-twist-cohomology`). -/
-theorem nonempty_higherLowerShriek_constantTwist_iso {Y : Scheme.{u}}
-    [Y.Over (Spec (CommRingCat.of k₀))] (f : X ⟶ Y) [f.IsOver (Spec (CommRingCat.of k₀))]
-    [IsSeparated f] [LocallyOfFiniteType f] [QuasiCompact f]
-    [LocallyOfFiniteType (Y ↘ Spec (CommRingCat.of k₀))]
-    [QuasiCompact (Y ↘ Spec (CommRingCat.of k₀))]
-    [QuasiSeparated (Y ↘ Spec (CommRingCat.of k₀))] (F : WeilSheaf k₀ l X)
-    (b : (PadicAlgCl l)ˣ) (i : ℕ) :
-    Nonempty ((higherLowerShriek k₀ l f i).obj (F.constantTwist b) ≅
-      ((higherLowerShriek k₀ l f i).obj F).constantTwist b) :=
-  sorry
 
 end WeilSheaf
 
