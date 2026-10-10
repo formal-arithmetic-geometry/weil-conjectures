@@ -1,8 +1,8 @@
 # Work queue
 
-898 items; claim with `tools/claim.py next <group> [--stage N]`.
+900 items; claim with `tools/claim.py next <group> [--stage N]`.
 
-## Stage 1: nodes to split (329)
+## Stage 1: nodes to split (330)
 
 | node | distance to a target | Lean state on the done branch |
 |---|---|---|
@@ -12,24 +12,25 @@
 | `lem-weil-pbc-injective-acyclicity-bounded-below` | 2002 | sorry_here |
 | `lem-weil-pbc-etale-sections-flat-qc-connected-fibres` | 2005 | none |
 | `lem-weil-pbc-field-tensor-irreducible` | 2005 | none |
-| `lem-weil-pbc-sets-etale-section-continuity` | 2009 | none |
-| `lem-sc-affine-cap-section-open-algebra` | 2012 | none |
+| `lem-weil-pbc-sets-affine-etale-inverse-image-comparison` | 2010 | none |
 | `lem-sc-affine-cap-section-open-dictionary` | 2012 | none |
 | `lem-sc-ample-finite-set-affine` | 2012 | none |
-| `lem-sc-closed-subset-qc-ideal` | 2012 | none |
 | `lem-sc-find-globally-generated` | 2012 | none |
 | `lem-sc-graded-prime-avoidance` | 2012 | none |
 | `lem-sc-leray-closed-pushforward-cohomology` | 2012 | none |
 | `lem-sc-noetherian-topological-cohomology-vanishing` | 2012 | none |
-| `lem-sc-torsor-h1-functoriality` | 2012 | none |
 | `lem-sc-abelian-sheaf-short-exact-stalkwise` | 2013 | none |
 | `lem-sc-boundary-cech-local-lifts` | 2013 | none |
 | `lem-sc-cech-h1-map-natural` | 2013 | none |
 | `lem-sc-closed-pushforward-abelian-stalks` | 2013 | none |
+| `lem-sc-closed-pushforward-boundary-naturality` | 2013 | none |
 | `lem-sc-finite-sections-cover-qc` | 2013 | none |
 | `lem-sc-invert-s-cohomology` | 2013 | none |
 | `lem-sc-tensor-globally-generated` | 2013 | none |
 | `lem-sc-tensor-section-affine-open` | 2013 | none |
+| `lem-sc-torsor-h1-boundary-representative` | 2013 | none |
+| `lem-sc-torsor-h1-ext-pushforward` | 2013 | none |
+| `lem-sc-torsor-h1-ext-pushout` | 2013 | none |
 | `lem-weil-pbc-complex-spectral-sequence-comparison` | 3006 | none |
 | `lem-weil-pbc-finite-coproduct-cohomology-assembly` | 3006 | none |
 | `lem-weil-pbc-hypercohomology-e1-pullback-functorial` | 3006 | none |
@@ -336,7 +337,7 @@
 | `lem-pur-rhom-well-defined` | - | none |
 | `lem-zl-noether-normalization-dimension` | - | none |
 
-## Stage 2: nodes to state (569)
+## Stage 2: nodes to state (570)
 
 | node | distance to Mathlib | kind |
 |---|---|---|
@@ -410,6 +411,7 @@
 | `lem-pc-projective-curve-linear-pair` | 1 | state |
 | `lem-pc-scheme-connected-iff-idempotents` | 1 | state |
 | `lem-pc-scheme-dimension-local-rings` | 1 | state |
+| `lem-sc-affine-cap-section-open-algebra` | 1 | state |
 | `lem-sc-affine-open-finite-complement` | 1 | state |
 | `lem-sc-closed-affine-union-affine` | 1 | state |
 | `lem-sc-determinant-short-exact` | 1 | state |
@@ -910,7 +912,7 @@
 | `lem-weil-pbc-p1-field-dimension-one` | 4 | state |
 | `lem-weil-pbc-projective-space-zero-isomorphism` | 4 | state |
 
-Not open yet: 347 nodes that wait for stage 1, 1129 nodes that wait for a statement dependency.
+Not open yet: 348 nodes that wait for stage 1, 1132 nodes that wait for a statement dependency.
 
 ## Stage 3: modules to prove (0)
 
