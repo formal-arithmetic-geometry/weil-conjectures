@@ -2675,3 +2675,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 21:29 UTC L matched lem-pc-representable-unique to Mathlib CategoryTheory.Functor.FullyFaithful.isoEquiv+CategoryTheory.Yoneda.fullyFaithful (R-rpu2606); C1 delivery returned as unneeded
 - 21:29 L: merged deliver/M1/lem-sc-hilbert-embedded-points-gluing (reviewer FIX+NODE(1); first push; new nodes: 1)
 - 21:29 L: merged deliver/H1/lem-pqf-finite-spectrum-maximal-primes (reviewer PASS; first push; new nodes: 0)
+- 21:30 UTC L matched lem-sc-affine-inter-principal-both (reviewer-added, R-epg2603) to Mathlib AlgebraicGeometry.exists_basicOpen_le_affine_inter
