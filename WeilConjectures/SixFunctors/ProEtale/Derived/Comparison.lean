@@ -105,19 +105,6 @@ lemma DerivedCategory.plusEtaleOrigin.plus
   exact DerivedCategory.TStructure.t.plus.prop_of_iso e
     ⟨n, (ν^*(X)[A]).isGE_mapDerivedCategory_obj K' n⟩
 
-/-- Blueprint `prop-weil-pbc-site-comparison-finite-level`: Exactness and full faithfulness at
-finite level
-
-*Acyclicity.* For every injective étale sheaf `I` the pro-étale sheaf `ν^* I` is acyclic for
-`ν_*`: `R^q ν_* (ν^* I) = 0` for `q > 0`. The other two clauses of the node, exactness of `ν^*`
-and invertibility of the unit `F ⟶ ν_* ν^* F`, are
-`AlgebraicGeometry.ProEtale.preservesFiniteLimits_comparisonUpperStar`,
-`AlgebraicGeometry.ProEtale.preservesFiniteColimits_comparisonUpperStar` and
-`AlgebraicGeometry.ProEtale.isIso_comparisonAdjunction_unit`. -/
-theorem rightAcyclic_comparisonUpperStar_obj_of_injective (I : Sheaf X.smallEtaleTopology A)
-    [Injective I] : ν_*(X)[A].rightAcyclic (ν^*(X)[A].obj I) :=
-  sorry
-
 section Adjunction
 
 /- The closed symmetric preadditive monoidal structure and the functorial flat resolutions on
