@@ -1,8 +1,8 @@
 # Work queue
 
-927 items; claim with `tools/claim.py next <group> [--stage N]`.
+926 items; claim with `tools/claim.py next <group> [--stage N]`.
 
-## Stage 1: nodes to split (215)
+## Stage 1: nodes to split (213)
 
 | node | distance to a target | Lean state on the done branch |
 |---|---|---|
@@ -36,7 +36,6 @@
 | `lem-sc-etale-base-change-geometric` | 4010 | none |
 | `lem-sc-etale-local-dimension` | 4010 | none |
 | `lem-sc-faithfully-flat-local-dimension` | 4010 | none |
-| `lem-sc-filtered-colimit-prime-chain-dimension` | 4010 | none |
 | `lem-sc-intersection-effective-cartier` | 4010 | none |
 | `lem-sc-strict-henselization-completion-noetherian` | 4010 | none |
 | `lem-sc-top-dimensional-reduction-intersection` | 4010 | none |
@@ -57,7 +56,7 @@
 | `lem-pc-perfect-complex-descent` | 5013 | none |
 | `lem-pc-sheaf-modules-tensor-closed` | 5013 | none |
 | `lem-sp-cartan-eilenberg-comparison-independence` | 6005 | none |
-| `lem-sp-cartan-eilenberg-exists` | 6005 | none |
+| `lem-sp-horseshoe-prescribed-resolutions` | 6006 | none |
 | `thm-sp-spectral-object-yields` | 6006 | none |
 | `pqf-lem-coherent-ft-locnoeth` | 6009 | none |
 | `lem-pc-affine-morphism-hi` | 6010 | rests_on_sorry |
@@ -66,7 +65,6 @@
 | `lem-pc-alternating-cech-computes` | 6011 | none |
 | `lem-pc-projective-space-twist-cohomology` | 6011 | rests_on_sorry |
 | `lem-sc-ample-positive-degree` | 6011 | rests_on_sorry |
-| `pqf-lem-affine-vanishing` | 6011 | none |
 | `pqf-lem-fff-vanishing` | 6011 | none |
 | `pqf-lem-finite-qf` | 6011 | none |
 | `pqf-lem-leray` | 6011 | none |
@@ -222,7 +220,7 @@
 | `lem-pur-rhom-well-defined` | - | none |
 | `lem-zl-noether-normalization-dimension` | - | none |
 
-## Stage 2: nodes to state (712)
+## Stage 2: nodes to state (713)
 
 | node | distance to Mathlib | kind |
 |---|---|---|
@@ -372,6 +370,7 @@
 | `lem-sc-ext-torsor` | 1 | state |
 | `lem-sc-exterior-top-direct-sum` | 1 | state |
 | `lem-sc-fg-domain-positive-dimension-infinite-maximals` | 1 | state |
+| `lem-sc-filtered-colimit-prime-chain-dimension` | 1 | state |
 | `lem-sc-finite-discrete-separated-affine` | 1 | state |
 | `lem-sc-finite-integral-conductor` | 1 | state |
 | `lem-sc-finite-nonempty-point` | 1 | state |
@@ -939,7 +938,7 @@
 | `lem-weil-pbc-p1-field-dimension-one` | 4 | state |
 | `lem-weil-pbc-projective-space-zero-isomorphism` | 4 | state |
 
-Not open yet: 1417 nodes that wait for a statement dependency, 252 nodes that wait for stage 1.
+Not open yet: 1419 nodes that wait for a statement dependency, 250 nodes that wait for stage 1.
 
 ## Stage 3: modules to prove (0)
 
