@@ -29,61 +29,96 @@
  ],
  "proof": [
   {
-   "text": "Write $k=A/\\mathfrak m$ and $Z_0=Z\\times_SS_0$ with $S_0=\\Spec k$, so that\n$Z_0\\subset Z$ is the closed member of the pair $(\\mathfrak m)$. The proof\nhas four steps.",
-   "uses": [],
-   "elementary": null
-  },
-  {
-   "text": "*Step 1: the geometric fiber and the closed fiber agree.* By\n[def-weil-pbc-henselian-terminology] a strictly henselian local ring is\nhenselian local, so $(A,\\mathfrak m)$ is a henselian pair, and its residue\nfield $k$ is separably closed. The closed geometric point $s$ is a geometric\npoint lying over $S_0$; we take it in the standard normalization, $s:\\Spec\nk^{\\mathrm{alg}}\\to S$ with $k^{\\mathrm{alg}}$ the algebraic closure of $k$\n(any other geometric point over the same closed point of $S_0$ with\ntranscendental field of constants would give a different statement for\ngeneral etale sheaves, e.g. for $F=\\mathbf G_m$ on a point, so the comparison\nbelow is the one for the canonical choice; this is the convention of the\nStacks Project comparison, Tag\n[0A0C](https://stacks.math.columbia.edu/tag/0A0C), which is stated for the\nclosed member of the henselian pair, and the geometric-point formulation\nbelow is only the transport of that statement). Since $k$ is separably\nclosed, every element of $k^{\\mathrm{alg}}$ is purely inseparable over $k$\n(the separable closure of $k$ is $k$ itself), so $\\Spec k^{\\mathrm{alg}}\\to\n\\Spec k$ is a universal homeomorphism (it is surjective, integral, and\nradicial); base changes of universal homeomorphisms are universal\nhomeomorphisms ([lem-weil-pbc-universal-homeomorphism-base-change]), hence\n$Z_s=Z\\times_S\\Spec k^{\\mathrm{alg}}\\to Z_0$ is one. By\n[thm-weil-pbc-universal-homeomorphism-invariance] the small etale sites of\n$Z_s$ and $Z_0$ are corresponding, carrying $F|_{Z_0}$ to $F|_{Z_s}$, so\n$\\Gamma(Z_s,F|_{Z_s})=\\Gamma(Z_0,F|_{Z_0})$ canonically. It is therefore\nenough to compute $\\Gamma(Z_0,F|_{Z_0})$.\n\n*Step 2: apply the henselian-pair comparison* (this is Stacks Project, Tag\n[0A0C](https://stacks.math.columbia.edu/tag/0A0C), Lemma 59.91.2). The two\nhypotheses of [lemma-weil-pbc-etale-degree-zero] hold verbatim: $(A,\\mathfrak\nm)$ is a henselian pair by Step 1, and $p:Z\\to S$ is proper by hypothesis.\nIts conclusion: for every etale abelian sheaf $F$ on $Z$ the restriction map\n\n$$\n \\Gamma(Z,F)\\xrightarrow{\\sim}\\Gamma(Z_0,F|_{Z_0})\n$$\n\nis an isomorphism. With the identification of Step 1 this is the asserted\nisomorphism $\\Gamma(Z,F)\\xrightarrow{\\sim}\\Gamma(Z_s,F|_{Z_s})$.",
+   "text": "Put $S_0=\\operatorname{Spec}k$, $Z_0=Z\\times_SS_0$, and $i_0:Z_0\\to Z$. Since $A$ is strictly henselian [def-weil-pbc-henselian-terminology], $(A,\\mathfrak m)$ is a henselian pair and $k$ is separably closed. The proper map $p:Z\\to S$ is quasi-compact and quasi-separated over the affine $S$, so $Z$ is quasi-compact and quasi-separated [lem-weil-pbc-qcqs-over-affine]. For any finite $h:Z'\\to Z$, the composite $p\\circ h:Z'\\to S$ is proper [lem-weil-pbc-finite-morphism-permanence] (c). Its closed fibre is $Z'_0=Z'\\times_SS_0=Z'\\times_ZZ_0$ by associativity of fibre products.",
    "uses": [
     "def-weil-pbc-henselian-terminology",
+    "lem-weil-pbc-qcqs-over-affine",
+    "lem-weil-pbc-finite-morphism-permanence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Lemma Tag 0A0C (lemma-h0-proper-over-henselian-pair), lines 18200-18210; this item specializes I to the maximal ideal and compares the closed fibre with its algebraic-closure geometric fibre"
+   }
+  },
+  {
+   "text": "Apply [lem-weil-pbc-zariski-h0-proper-henselian-pair] to $(A,\\mathfrak m)$ and $p$. For every Zariski sheaf of sets $G$ on $Z$, restriction $\\Gamma(Z,G)\\to\\Gamma(Z_0,i_0^{-1}G)$ is bijective. Apply the same node to each proper composite $p\\circ h$ of Step 1. For every finite $h:Z'\\to Z$ and every Zariski sheaf of sets $G'$ on $Z'$, restriction to $Z'_0=Z'\\times_ZZ_0$ is bijective. These are exactly the two Zariski hypotheses of the finite-cover criterion, for the single closed immersion $i_0$ and all its finite base changes.",
+   "uses": [
+    "lem-weil-pbc-zariski-h0-proper-henselian-pair",
+    "lem-weil-pbc-finite-morphism-permanence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Lemma Tag 0A0C (lemma-h0-proper-over-henselian-pair), lines 18200-18210; this item specializes I to the maximal ideal and compares the closed fibre with its algebraic-closure geometric fibre"
+   }
+  },
+  {
+   "text": "The scheme $Z$ is quasi-compact and quasi-separated by Step 1, and $i_0:Z_0\\to Z$ is a closed immersion because it is the base change of $S_0=\\operatorname{Spec}(A/\\mathfrak m)\\to S$ (as in the statement of [lem-weil-pbc-zariski-h0-proper-henselian-pair]). Thus the hypotheses of [lem-weil-pbc-gabber-h0-etale-criterion] are Step 2, and its conclusion applies to every etale sheaf of sets $F$ on $Z$: $\\Gamma(Z,F)\\to\\Gamma(Z_0,i_{0,\\mathrm{et}}^{-1}F)$ is bijective. This is the closed-fibre comparison of Stacks Tag 0A0C; the criterion is its cited Tag 09ZF.",
+   "uses": [
+    "lem-weil-pbc-qcqs-over-affine",
+    "lem-weil-pbc-zariski-h0-proper-henselian-pair",
+    "lem-weil-pbc-gabber-h0-etale-criterion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Lemma Tag 0A0C (lemma-h0-proper-over-henselian-pair), lines 18200-18210; this item specializes I to the maximal ideal and compares the closed fibre with its algebraic-closure geometric fibre"
+   }
+  },
+  {
+   "text": "Let $K=k^{\\mathrm{alg}}$. The algebraic extension $K/k$ is purely inseparable: [lem-weil-pbc-separable-first-purely-inseparable] says that $K$ is purely inseparable over the relative separable closure of $k$ in $K$, and that closure is $k$ because $k$ is separably closed (Step 1). For every $k$-scheme $T$, [lem-pc-homeo-pure-insep] makes $T_K\\to T$ a homeomorphism. Taking every $T$ proves that $\\operatorname{Spec}K\\to\\operatorname{Spec}k$ is a universal homeomorphism [def-weil-universal-homeomorphism]; its base change $u:Z_s=Z_0\\times_{\\operatorname{Spec}k}\\operatorname{Spec}K\\to Z_0$ is one by [lem-weil-pbc-universal-homeomorphism-base-change]. By [thm-weil-pbc-universal-homeomorphism-invariance], inverse image along $u$ is an equivalence of small etale topoi, so its induced map on sections $\\Gamma(Z_0,i_0^{-1}F)\\to\\Gamma(Z_s,u^{-1}i_0^{-1}F)$ is bijective. Since $u^{-1}i_0^{-1}F=F|_{Z_s}$ by functoriality of inverse image, composing with Step 3 gives the displayed geometric-fibre comparison.",
+   "uses": [
+    "def-weil-pbc-henselian-terminology",
+    "lem-weil-pbc-separable-first-purely-inseparable",
+    "lem-pc-homeo-pure-insep",
+    "def-weil-universal-homeomorphism",
     "lem-weil-pbc-universal-homeomorphism-base-change",
     "thm-weil-pbc-universal-homeomorphism-invariance",
-    "lemma-weil-pbc-etale-degree-zero"
+    "def-weil-pbc-inverse-image"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Lemma Tag 0A0C (lemma-h0-proper-over-henselian-pair), specialized to the maximal ideal; geometric-fibre passage via the purely inseparable extension and topological invariance, Tag 04DY"
+   }
   },
   {
-   "text": "*Step 3: the content of the cited comparison.* It is useful to see where\n[lemma-weil-pbc-etale-degree-zero] gets its statement, since its hypotheses\ncoincide with the present ones. In Stage 1 of its proof, the connectedness\nconclusion of [lemma-weil-pbc-stein-connectedness] (applied to the proper $Z\\to\nS$), together with the spectrality of $Z$ and closedness of $Z_0\\subset Z$\n(as in [def-weil-pbc-scheme-conventions], since $Z$ is proper over the affine\n$S$), is the hypothesis of [lemma-weil-pbc-spectral-restriction], which then\nidentifies sections of every locally constant\n[def-weil-pbc-etale-sheaves] Zariski sheaf on $Z$ with its sections on $Z_0$;\nthe extension of this identification to the constructible sheaf actually used\nis the open item recorded in the status note to\n[lemma-weil-pbc-stein-connectedness]. In Stage 2 the finite refinements of\n[lemma-weil-pbc-finite-refinement-etale-cover], together with\n[lem-weil-pbc-finite-pullback-identities], carry an etale section from a\nneighbourhood of $Z_0$ to the finite covers of $Z$ on which Stage 1 applies,\nproducing an etale section of $F$ with prescribed restriction. Thus the two\nstages constitute exactly the comparison of Step 2, and no other input is\nused.",
+   "text": "Every map in Steps 3 and 4 is the canonical restriction or inverse-image map. For a morphism $F\\to F'$, the two restriction squares commute because inverse image is a functor [def-weil-pbc-inverse-image]. For a finite $h:Z'\\to Z$ over $S$, the square of the two closed-fibre restrictions commutes by the closed-fibre equation in [lem-weil-pbc-finite-pullback-identities]; the geometric-fibre square is its base change to $K$. Both comparison maps are bijections by Steps 1-4 applied also to $Z'$, so their inverse isomorphisms have the same naturality. This proves the final clause.",
    "uses": [
-    "lemma-weil-pbc-etale-degree-zero",
-    "lemma-weil-pbc-stein-connectedness",
-    "def-weil-pbc-scheme-conventions",
-    "lemma-weil-pbc-spectral-restriction",
-    "def-weil-pbc-etale-sheaves",
-    "lemma-weil-pbc-finite-refinement-etale-cover",
-    "lem-weil-pbc-finite-pullback-identities"
+    "def-weil-pbc-inverse-image",
+    "lem-weil-pbc-finite-pullback-identities",
+    "lem-weil-pbc-finite-morphism-permanence"
    ],
-   "elementary": false
-  },
-  {
-   "text": "*Step 4: naturality and finite pullback.* The comparison is natural in $F$:\nthe identification of Step 1 and both stages of Step 3 are functorial in the\nsheaf. It is natural in finite pullback over $S$. Let $h:Z'\\to Z$ be finite.\nThe composite $Z'\\to S$ is proper (the composite of the proper $h$, as finite\nmorphisms are proper, with the proper $p$), so\n[lemma-weil-pbc-etale-degree-zero] applies to $Z'$ as well and gives the\ncomparison for $\\Gamma(Z',h^{-1}F)$; by the naturality in finite pullback\nrecorded in [lemma-weil-pbc-etale-degree-zero] (and transported through the\nidentifications of Step 1), the comparison for $Z$, the comparison for $Z'$,\nand the finite pullbacks form a commutative square. This proves the\nassertion.",
-   "uses": [
-    "lemma-weil-pbc-etale-degree-zero"
-   ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "canonical restriction map of Lemma Tag 0A0C; finite-pullback compatibility made explicit from the inverse-image maps"
+   }
   }
  ],
  "proof_deps": [
   "def-weil-pbc-henselian-terminology",
+  "def-weil-pbc-inverse-image",
+  "def-weil-universal-homeomorphism",
+  "lem-pc-homeo-pure-insep",
+  "lem-weil-pbc-finite-morphism-permanence",
+  "lem-weil-pbc-finite-pullback-identities",
+  "lem-weil-pbc-gabber-h0-etale-criterion",
+  "lem-weil-pbc-qcqs-over-affine",
+  "lem-weil-pbc-separable-first-purely-inseparable",
   "lem-weil-pbc-universal-homeomorphism-base-change",
-  "thm-weil-pbc-universal-homeomorphism-invariance",
-  "lemma-weil-pbc-etale-degree-zero",
-  "lemma-weil-pbc-stein-connectedness",
-  "def-weil-pbc-scheme-conventions",
-  "lemma-weil-pbc-spectral-restriction",
-  "def-weil-pbc-etale-sheaves",
-  "lemma-weil-pbc-finite-refinement-etale-cover",
-  "lem-weil-pbc-finite-pullback-identities"
+  "lem-weil-pbc-zariski-h0-proper-henselian-pair",
+  "thm-weil-pbc-universal-homeomorphism-invariance"
  ],
  "proof_origin": {
-  "by": "agent",
-  "document": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-thm-iff/lemma-weil-pbc-proper-strict-henselian-h0.md",
-  "place": "## Proof"
+  "by": "document",
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Lemma Tag 0A0C (lemma-h0-proper-over-henselian-pair), proof citing Tags 09ZF and 0A0B; the geometric-fibre passage follows topological invariance Tag 04DY"
  },
  "mathlib_searches": [],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [
   "detailed_form",
@@ -150,5 +185,25 @@
   }
  },
  "chapter": "sec-proper-base-change",
- "unit": "sk-thm-iff"
+ "unit": "sk-thm-iff",
+ "tool_uses": [
+  "lem-pc-homeo-pure-insep",
+  "lem-weil-pbc-universal-homeomorphism-base-change",
+  "lem-weil-pbc-zariski-h0-proper-henselian-pair",
+  "thm-weil-pbc-universal-homeomorphism-invariance"
+ ],
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "lemma-weil-pbc-proper-strict-henselian-h0",
+  "worker": "E1",
+  "summary": "Replaced the imported abelian-only shortcut and repeated proof of its dependency with the set-valued Stacks 0A0C route: 0A0B Zariski comparison on Z and finite covers, 09ZF finite-cover criterion for etale sheaves, then purely inseparable algebraic-closure and universal-homeomorphism invariance. The blueprint-tagged Lean theorem is module-valued and rests on a sorry; it is a partial match only.",
+  "blueprint": "The blueprint Proof first paragraph on spectral/Zariski comparison and finite covers is Steps 1-2; its etale-sheaf descent paragraph is Step 3, isolated in the 09ZF criterion node; the closed geometric-fibre and functoriality clauses are Steps 4-5. The imported blueprint sketch's assertion that all Zariski sheaves embed into finite products of constant sheaves is not followed: Stacks 09ZG uses a filtered-colimit reduction and is already split in the 0A0B node."
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "group": "E1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed by the lead of E1; spot-checked by L: L: 0A0C via 0A0B and the new 09ZF node; the algebraic closure step through universal homeomorphism invariance"
+ }
 }
