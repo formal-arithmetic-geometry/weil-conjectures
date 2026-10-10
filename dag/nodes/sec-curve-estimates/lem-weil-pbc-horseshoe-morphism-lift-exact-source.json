@@ -23,9 +23,62 @@
   "def-sp-injective-resolutions",
   "lem-weil-pbc-horseshoe-morphism-lift"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Write the source rows as $0\\to X_A^n\\xrightarrow{i^n}X_B^n\\xrightarrow{p^n}X_C^n\\to0$, with augmentations $s_A,s_B,s_C$ and $f:A\\to B$, $g:B\\to C$. In every degree the target horseshoe row $0\\to I_{A'}'^n\\xrightarrow{\\alpha'^n}I_{B'}'^n\\xrightarrow{\\beta'^n}I_{C'}'^n\\to0$ splits by [lem-weil-pbc-ses-injective-kernel-splits], since $I_{A'}'^n$ is injective; let $\\sigma'^n$ be a section of $\\beta'^n$. Extend $\\varphi_A^n$ along the monomorphism $i^n$ to $t^n:X_B^n\\to I_{A'}'^n$ with $t^n i^n=\\varphi_A^n$, by the defining extension property of injective objects [def-sp-injective-resolutions]. Set $\\chi^n=\\alpha'^n t^n+\\sigma'^n\\varphi_C^n p^n$. Then $\\chi^n i^n=\\alpha'^n\\varphi_A^n$ and $\\beta'^n\\chi^n=\\varphi_C^n p^n$ for every $n$.",
+   "uses": [
+    "lem-weil-pbc-ses-injective-kernel-splits",
+    "def-sp-injective-resolutions"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Lemma Tag 015I, comparison morphism construction; degreewise extension into injective target terms"
+   }
+  },
+  {
+   "text": "Let $D^n=d\\chi^n-\\chi^{n+1}d:X_B^n\\to I_{B'}'^{n+1}$ be the differential defect of $\\chi$. Since $\\varphi_A,\\varphi_C$ are complex maps, $D^n i^n=\\alpha'(d\\varphi_A-\\varphi_A d)=0$ and $\\beta' D^n=(d\\varphi_C-\\varphi_C d)p=0$. As $\\alpha'^{n+1}$ is a kernel of $\\beta'^{n+1}$ and $p^n$ is a cokernel of $i^n$ [def-sp-abelian], there are unique $E^n:X_C^n\\to I_{A'}'^{n+1}$ with $D^n=\\alpha'E^np^n$. From $D=d\\chi-\\chi d$ one gets $dD=-d\\chi d=-Dd$, so $\\alpha'(dE+Ed)p=0$ and hence $dE^n+E^{n+1}d=0$. At degree zero the augmentation defect $w=\\chi^0s_B-s'_{B'}b:B\\to I_{B'}'^0$ satisfies $wf=\\alpha'\\varphi_A^0s_A-\\alpha's'_{A'}a=0$ and $\\beta'w=\\varphi_C^0s_Cg-s'_{C'}g'b=0$, so likewise $w=\\alpha'eg$ for a unique $e:C\\to I_{A'}'^0$. Since $ds_B=0$ we get $dw=D^0s_B$, i.e. $\\alpha'(de)g=\\alpha'E^0s_Cg$, hence $E^0s_C=de$.",
+   "uses": [
+    "def-sp-abelian"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Lemma Tag 015I, comparison morphism construction; defect factorization through the outer source term"
+   }
+  },
+  {
+   "text": "Let $K^\\bullet$ be $X_C^\\bullet$ with $C$ adjoined in degree $-1$ via $s_C$; the exact augmented sequence of the statement says $K^\\bullet$ is acyclic. Let $T^\\bullet$ be the complex with $T^m=I_{A'}'^{m+1}$ and differential $d$; it is zero in degrees below $-1$ and has injective terms. The maps $u^{-1}=e$ and $u^n=(-1)^nE^n$ ($n\\ge0$) form a morphism $u:K^\\bullet\\to T^\\bullet$, by $dE^n=-E^{n+1}d$ and $E^0s_C=de$. By [lem-weil-pbc-acyclic-map-to-injective-nullhomotopy] there are $h^m:K^m\\to T^{m-1}=I_{A'}'^m$ with $u^m=dh^m+h^{m+1}d$; here $h^{-1}=0$. Put $k^n=(-1)^nh^n:X_C^n\\to I_{A'}'^n$. Then $e=k^0s_C$ and $E^n=dk^n-k^{n+1}d$.",
+   "uses": [
+    "lem-weil-pbc-acyclic-map-to-injective-nullhomotopy"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Lemma Tag 013R, applied to the exact augmented source C-row and the shifted target injective complex"
+   }
+  },
+  {
+   "text": "Define $\\varphi_B^n=\\chi^n-\\alpha'k^np^n$. Its differential defect is $D^n-\\alpha'(dk^n-k^{n+1}d)p^n=D^n-\\alpha'E^np^n=0$, so $\\varphi_B$ is a complex map. Since $\\beta'\\alpha'=0$ and $p\\,i=0$, still $\\beta'\\varphi_B=\\varphi_Cp$ and $\\varphi_Bi=\\alpha'\\varphi_A$. Finally $\\varphi_B^0s_B-s'_{B'}b=w-\\alpha'k^0p^0s_B=\\alpha'(e-k^0s_C)g=0$, so $\\varphi_B$ is compatible with the augmentations and with both short exact sequence maps.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Lemma Tag 015I, final correction of the middle map"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-ses-injective-kernel-splits",
+  "def-sp-injective-resolutions",
+  "def-sp-abelian",
+  "lem-weil-pbc-acyclic-map-to-injective-nullhomotopy"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/derived.tex",
+  "place": "Lemma Tags 015I and 013R; explicit defect-correction argument"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -57,12 +110,28 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-weil-pbc-cartesian-eilenberg-functorial",
   "by": "worker",
   "date": "2026-10-10"
  },
  "chapter": "sec-curve-estimates",
- "unit": "sk-prop-h2"
+ "unit": "sk-prop-h2",
+ "split_report": {
+  "date": "2026-10-11",
+  "item": "lem-weil-pbc-horseshoe-morphism-lift-exact-source",
+  "worker": "stage1",
+  "summary": "Split the exact-source horseshoe middle-lift statement into degreewise target splitting and injective extension, defect factorization through the source C-row, null-homotopy of the augmented acyclic row, and the corrected middle-map verification. No new node was needed; all non-elementary inputs are existing DAG statements.",
+  "blueprint": "Realizes the naturality clause of prop-weil-pbc-strict-henselization-stalk-formula: lift the middle map from exact augmented source rows into the target horseshoe, with the final row compatibilities checked explicitly.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-hle1914",
+  "group": "H1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-hle1914 (reviewer sub-agent of L); spot-checked: Checked all four steps by hand: target-row splitting + injective extension (Step 1), defect factorization D=alpha'Ep and augmentation e with E^0 s_C = d e (Step 2), null-homotopy of the augmented acyclic C-row into shifted injective A'-complex with signs (Step 3), correction phi_B = chi - alpha'kp (Step 4). Not a special case of lem-weil-pbc-lift-along-injective-quasi-iso (that gives an extension along a mono quasi-iso with no beta'-compatibility constraint); horseshoe-morphism-lift is the injective-source special case of this item. No cycle: cartesian-eilenberg-functorial cites this item, this item cites only ses-injective-kernel-splits, def-sp-injective-resolutions, def-sp-abelian, acyclic-map-to-injective-nullhomotopy. FIX more, RETURN less: (1) Step 2 sign error 'd D = D d' corrected to dD = -Dd (conclusion dE+Ed=0 was right); (2) Step 3 'signed maps' made explicit (u^{-1}=e, u^n=(-1)^nE^n, k^n=(-1)^nh^n) with the augmentation compatibility checked; (3) preflight B4: all four steps rewritten in TeX (no plain-text arrows).; 1 file(s) fixed by the reviewer"
+ }
 }
