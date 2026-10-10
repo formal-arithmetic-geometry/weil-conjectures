@@ -2,7 +2,7 @@
 
 850 items; claim with `tools/claim.py next <group> [--stage N]`.
 
-## Stage 1: nodes to split (389)
+## Stage 1: nodes to split (388)
 
 | node | distance to a target | Lean state on the done branch |
 |---|---|---|
@@ -62,7 +62,6 @@
 | `lemma-weil-pbc-fibre-product-limit` | 3004 | none |
 | `prop-weil-pbc-kinjective-resolutions-exist` | 3004 | none |
 | `def-galois-fibre-functor` | 3005 | none |
-| `lem-weil-pbc-etale-section-continuity` | 3005 | sorry_here |
 | `lem-weil-pbc-hypercover-refinement` | 3005 | none |
 | `lem-weil-pbc-universal-homeomorphism-base-change` | 3005 | none |
 | `lemma-weil-pbc-finite-hypercover-descent` | 3005 | none |
@@ -396,7 +395,7 @@
 | `def-exc-jacobian-presentation` | - | none |
 | `lem-zl-noether-normalization-dimension` | - | none |
 
-## Stage 2: nodes to state (461)
+## Stage 2: nodes to state (462)
 
 | node | distance to Mathlib | kind |
 |---|---|---|
@@ -439,6 +438,7 @@
 | `lem-pc-affine-cech-complex` | 1 | state |
 | `lem-pc-cech-exact` | 1 | state |
 | `lem-pc-flat-pullback-effective-cartier-ideal` | 1 | state |
+| `lem-pc-integral-radicial-surjective-universal-homeomorphism` | 1 | state |
 | `lem-pc-linear-pair-graded-finite` | 1 | state |
 | `lem-pc-linear-pair-morphism-finite` | 1 | state |
 | `lem-pc-projective-curve-linear-pair` | 1 | state |
@@ -862,7 +862,7 @@
 | `lem-weil-pbc-p1-field-dimension-one` | 4 | state |
 | `lem-weil-pbc-projective-space-zero-isomorphism` | 4 | state |
 
-Not open yet: 406 nodes that wait for stage 1, 852 nodes that wait for a statement dependency.
+Not open yet: 405 nodes that wait for stage 1, 854 nodes that wait for a statement dependency.
 
 ## Stage 3: modules to prove (0)
 
