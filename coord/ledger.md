@@ -2274,3 +2274,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 18:42 L: merged deliver/C1/lem-pc-projection-formula (reviewer FIX+NODE(1); first push; new nodes: 5)
 - 18:42 L: merged deliver/G1/lem-sc-affine-rhom-qcoherent (reviewer PASS; first push; new nodes: 0)
 - 18:42 L: merged deliver/M1/lem-pc-derived-direct-image-uniform-truncation-bound (reviewer FIX; first push; new nodes: 2)
+- 18:43 L: merged deliver/C1/lem-pc-brown-cohomological-representability (reviewer FIX; first push; new nodes: 5)

@@ -13,18 +13,80 @@
  },
  "kind": "statement",
  "title": "Brown representability for cohomological functors",
- "statement": "Let C be a compactly generated triangulated category [def-weil-triangulated-category] with set-indexed coproducts. Every contravariant cohomological functor H:C^{op}\\to Ab [def-sp-abelian] that sends set-indexed coproducts in C to products of abelian groups is representable: there exist an object G of C and natural isomorphisms H(c)\\cong Hom_C(c,G).",
+ "statement": "Let C be a compactly generated triangulated category [def-pc-compactly-generated] with set-indexed coproducts. Every contravariant cohomological functor H:C^{op}\\to Ab [def-sp-abelian; equivalently, a homological functor on C^{op} as in def-sp-homological-functor] that sends set-indexed coproducts in C to products of abelian groups is representable: there exist an object G of C and natural isomorphisms H(c)\\cong Hom_C(c,G).",
  "source": {
   "document": "literature/stacks-project/derived.tex",
   "place": "Tag 0A8F, Lemma lemma-brown"
  },
  "stmt_deps": [
+  "def-pc-compactly-generated",
   "def-weil-triangulated-category",
-  "def-sp-abelian"
+  "def-sp-abelian",
+  "def-sp-homological-functor"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Choose a set of compact generators for C and close it under shifts. For every generator E_i and element a in H(E_i), form the coproduct X_1 of copies of E_i indexed by these pairs. Since H carries coproducts to products, the family (a) defines an element of H(X_1); Yoneda gives a natural transformation Hom_C(-,X_1) to H.",
+   "uses": [
+    "def-weil-triangulated-category",
+    "def-sp-abelian",
+    "lem-galois-yoneda-hom-bijection"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 0A8F, Lemma lemma-brown proof, construction of X_1"
+   }
+  },
+  {
+   "text": "Inductively, for X_n and a transformation Hom_C(-,X_n) to H, apply the same construction to its kernel on the compact generators. The resulting coproduct K_{n+1} maps to X_n by Yoneda. Complete this map to a distinguished triangle K_{n+1} \\to X_n \\to X_{n+1} \\to K_{n+1}[1], and use the long exact Hom sequences and the cohomological exactness of H [def-sp-homological-functor] to extend the transformation to Hom_C(-,X_{n+1}) \\to H while killing the previous kernel.",
+   "uses": [
+    "def-weil-triangulated-category",
+    "def-sp-abelian",
+    "lem-weil-pbc-hom-into-triangle-exact",
+    "def-sp-homological-functor"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 0A8F, Lemma lemma-brown proof, inductive cone construction"
+   }
+  },
+  {
+   "text": "Let X be the homotopy colimit of the X_n, defined by the telescope triangle \\bigoplus_n X_n \\xrightarrow{1-\\mathrm{shift}} \\bigoplus_n X_n \\to X \\to (\\bigoplus_n X_n)[1]. Apply H and its coproduct-to-product property: the compatible elements a_n lift through H(X) to an element a, hence a natural map Hom_C(-,X) \\to H. By [lem-pc-compact-hom-hocolim], Hom_C(E_i,X) is the colimit of Hom_C(E_i,X_n). The map to H(E_i) is surjective because X_1 included every element, and injective because every kernel element at stage n is killed at stage n+1. The objects Y on whose every shift this natural map is an isomorphism form a triangulated subcategory: apply the two cohomological long exact sequences (for Hom_C(-,X) by [lem-weil-pbc-hom-out-of-triangle-exact], for H by [def-sp-homological-functor]) and the five lemma to a triangle with two such objects. It is closed under coproducts because both functors take coproducts to products, hence under homotopy colimits by applying the long exact sequences to their telescope triangles. It contains all shifted generators; [lem-pc-compact-generators-build-objects] expresses every object as a homotopy colimit built from their coproducts and cone triangles, so the subcategory is all of C. The map Hom_C(-,X) \\to H is consequently a natural isomorphism.",
+   "uses": [
+    "def-weil-triangulated-category",
+    "def-sp-abelian",
+    "lem-weil-pbc-hom-into-triangle-exact",
+    "lem-weil-pbc-hom-out-of-triangle-exact",
+    "def-sp-homological-functor",
+    "lem-weil-pbc-five-lemma",
+    "lem-pc-compact-hom-hocolim",
+    "lem-pc-compact-generators-build-objects"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 0A8F, Lemma lemma-brown proof, telescope and compact-generator argument"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-triangulated-category",
+  "def-sp-abelian",
+  "lem-galois-yoneda-hom-bijection",
+  "lem-weil-pbc-hom-into-triangle-exact",
+  "lem-weil-pbc-five-lemma",
+  "lem-pc-compact-hom-hocolim",
+  "lem-pc-compact-generators-build-objects",
+  "lem-weil-pbc-hom-out-of-triangle-exact",
+  "def-sp-homological-functor"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/derived.tex",
+  "place": "Tag 0A8F, Lemma lemma-brown"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -56,12 +118,28 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-pc-brown-representability-right-adjoint",
   "by": "worker",
   "date": "2026-10-10"
  },
  "chapter": "sec-picard-framework",
- "unit": "sk-thm-picard-duality"
+ "unit": "sk-thm-picard-duality",
+ "split_report": {
+  "date": "2026-10-11",
+  "item": "lem-pc-brown-cohomological-representability",
+  "worker": "stage1",
+  "summary": "Expanded the previously statement-only Brown representability dependency into the generator, cone, and telescope proof from Stacks Tag 0A8F. No new node was created because all intermediate constructions are steps of the theorem itself; the only cited project facts are the existing triangulated and abelian definitions.",
+  "blueprint": "The steps realize the Brown representability input used in the proof of lem-pc-brown-representability-right-adjoint: generator construction, inductive kernel killing by distinguished triangles, and the compact-generator telescope conclusion.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-bcr1842",
+  "group": "C1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-bcr1842 (reviewer sub-agent of L); spot-checked: Statement vs Tag 0A8F (compactly generated, set-indexed coproducts, cohomological H sending coproducts to products); no cycle (item does not cite lem-pc-brown-representability-right-adjoint); Neeman argument carried in 3 steps (X_1, kernel-killing cones, telescope hocolim, D' closure + Tag 09SN); new nodes match 07LS/09SQ/09SJ/094A/09SN; Mathlib grep for Brown representability: no match. FIX more, RETURN less: C1/C4 step 3 five-lemma closure needs exactness of contravariant Hom(-,X) on triangles, but only the covariant lem-weil-pbc-hom-into-triangle-exact was cited -> added lem-weil-pbc-hom-out-of-triangle-exact; steps 2-3 use H cohomological -> added def-sp-homological-functor to uses; proof_deps updated.; 1 file(s) fixed by the reviewer"
+ }
 }
