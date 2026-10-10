@@ -14,9 +14,109 @@
   "lem-weil-pbc-module-pullback-structure-sheaf",
   "def-pur-sheaf-tensor-product"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "(Clause (1).) Write $\\iota:\\mathcal I\\to\\mathcal O_X$ for the inclusion and $\\psi:f^*\\mathcal I\\otimes_{\\mathcal O_Y}\\mathcal F\\to\\mathcal F$ for the composite $\\mu\\circ(\\epsilon_f\\otimes\\mathrm{id})\\circ(f^*\\iota\\otimes\\mathrm{id})$ of the statement, where $\\mu:\\mathcal O_Y\\otimes_{\\mathcal O_Y}\\mathcal F\\to\\mathcal F$ is the multiplication; $f^*\\iota$ is $\\mathcal O_Y$-linear because $f^*$ is a functor of modules [def-pc-module-pullback], $\\epsilon_f$ is $\\mathcal O_Y$-linear [lem-weil-pbc-module-pullback-structure-sheaf], and a tensor product $u\\otimes v$ of $\\mathcal O_Y$-linear maps and $\\mu$ are the $\\mathcal O_Y$-linear maps of sheafifications [def-weil-pbc-sheafification] induced by the presheaf maps $x\\otimes s\\mapsto u_U(x)\\otimes v_U(s)$ and $b\\otimes s\\mapsto bs$ on $U\\mapsto\\mathcal G(U)\\otimes_{\\mathcal O_Y(U)}\\mathcal H(U)$ [def-pur-sheaf-tensor-product]. Hence $\\psi$ is a morphism of $\\mathcal O_Y$-modules and $f^{-1}\\mathcal I\\cdot\\mathcal F=\\operatorname{Im}\\psi$. Its source is quasi-coherent: $f^*\\mathcal I$ is quasi-coherent [lem-weil-pbc-module-pullback-quasi-coherent] since $\\mathcal I$ is, and the tensor product of the quasi-coherent modules $f^*\\mathcal I$ and $\\mathcal F$ is quasi-coherent [lem-weil-pbc-quasi-coherent-tensor-product-affine-sections]; its target $\\mathcal F$ is quasi-coherent. So $\\operatorname{Im}\\psi=f^{-1}\\mathcal I\\cdot\\mathcal F$ is a quasi-coherent sub-$\\mathcal O_Y$-module of $\\mathcal F$, with $(f^{-1}\\mathcal I\\cdot\\mathcal F)(U)=\\psi_U\\big((f^*\\mathcal I\\otimes_{\\mathcal O_Y}\\mathcal F)(U)\\big)$ for every affine open $U\\subseteq Y$ [lem-weil-pbc-quasi-coherent-module-cokernel-image] (1)-(3). This is (1).",
+   "uses": [
+    "def-pc-module-pullback",
+    "lem-weil-pbc-module-pullback-structure-sheaf",
+    "def-weil-pbc-sheafification",
+    "def-pur-sheaf-tensor-product",
+    "lem-weil-pbc-module-pullback-quasi-coherent",
+    "lem-weil-pbc-quasi-coherent-tensor-product-affine-sections",
+    "lem-weil-pbc-quasi-coherent-module-cokernel-image"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/coherent.tex",
+    "place": "Cohomology of Schemes, Lemma 01YP (coherent-lemma-affine-morphism-projection-ideal, coherent.tex line 3523), proof, first paragraph: 'it is a quasi-coherent O_Y-submodule of F because it is also the image of a natural map f^*I (x) F -> F'"
+   }
+  },
+  {
+   "text": "(The map $\\psi$ on sections over an affine preimage.) Let $V\\subseteq X$ be an affine open, $A=\\mathcal O_X(V)$. Since $f$ is affine [pqf-def-affine-morphism], $U=f^{-1}(V)$ is an affine open of $Y$; put $B=\\mathcal O_Y(U)$ and $\\rho=f^\\sharp_V:A\\to B$. Let $t_U:(f^*\\mathcal I)(U)\\otimes_B\\mathcal F(U)\\to(f^*\\mathcal I\\otimes_{\\mathcal O_Y}\\mathcal F)(U)$ be the component of the sheafification map, bijective since $U$ is affine and both factors are quasi-coherent (step 1, [lem-weil-pbc-quasi-coherent-tensor-product-affine-sections]), and $c:\\mathcal I(V)\\otimes_AB\\to(f^*\\mathcal I)(U)$, $a\\otimes b\\mapsto b\\cdot\\eta_{\\mathcal I}(a)|_U$, the $B$-linear bijection of [lem-weil-pbc-module-pullback-affine-sections] (with $\\eta$ the unit of $f^*\\dashv f_*$ [def-pc-module-pullback]). Claim: for $a\\in\\mathcal I(V)$, $b\\in B$, $s\\in\\mathcal F(U)$, $\\psi_U\\big(t_U(c(a\\otimes b)\\otimes s)\\big)=b\\,\\rho(a)\\,s$. Indeed, by the description of $u\\otimes v$ and $\\mu$ in step 1 (naturality of the sheafification map [def-weil-pbc-sheafification]), $\\psi_U(t_U(x\\otimes s))=\\big(\\epsilon_{f,U}((f^*\\iota)_U(x))\\big)\\,s$ for $x\\in(f^*\\mathcal I)(U)$. Naturality of the unit gives $(f^*\\iota)(\\eta_{\\mathcal I}(a))=\\eta_{\\mathcal O_X}(\\iota(a))=\\eta_{\\mathcal O_X}(a)$, and $\\epsilon_f(\\eta_{\\mathcal O_X}(a))=f^\\sharp_V(a)=\\rho(a)$ in $\\mathcal O_Y(f^{-1}V)=B$ by the characterization of $\\epsilon_f$ in [lem-weil-pbc-module-pullback-structure-sheaf]. As $(f^*\\iota)_U$ and $\\epsilon_{f,U}$ are $B$-linear, $\\epsilon_{f,U}((f^*\\iota)_U(c(a\\otimes b)))=b\\,\\rho(a)$, which gives the claim.",
+   "uses": [
+    "pqf-def-affine-morphism",
+    "lem-weil-pbc-quasi-coherent-tensor-product-affine-sections",
+    "lem-weil-pbc-module-pullback-affine-sections",
+    "def-pc-module-pullback",
+    "def-weil-pbc-sheafification",
+    "lem-weil-pbc-module-pullback-structure-sheaf"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/coherent.tex",
+    "place": "Cohomology of Schemes, Lemma 01YP (coherent-lemma-affine-morphism-projection-ideal, coherent.tex line 3523), proof, second paragraph (reduction to X = Spec A, Y = Spec B, F = M~, I = I~), with Schemes Lemma 01I9 (schemes-lemma-widetilde-pullback) for f^*I~ = (I (x)_A B)~ and Lemma 01I8 (schemes-lemma-widetilde-constructions) for the tensor product"
+   }
+  },
+  {
+   "text": "(Sections of $f^{-1}\\mathcal I\\cdot\\mathcal F$ over $U=f^{-1}(V)$.) Notation of step 2; regard $M=\\mathcal F(U)$ as an $A$-module through $\\rho$, and let $\\mathcal I(V)M$ be the $A$-submodule generated by the products $a\\cdot s=\\rho(a)s$, $a\\in\\mathcal I(V)$, $s\\in M$. Since $c$ and $t_U$ are surjective and $\\mathcal I(V)\\otimes_AB$, $(f^*\\mathcal I)(U)\\otimes_BM$ are additively generated by pure tensors, the elements $t_U(c(a\\otimes b)\\otimes s)$ additively generate $(f^*\\mathcal I\\otimes_{\\mathcal O_Y}\\mathcal F)(U)$. By step 2, $\\psi_U$ maps them to $b\\rho(a)s=\\rho(a)(bs)\\in\\mathcal I(V)M$, and every generator $\\rho(a)s$ of $\\mathcal I(V)M$ is such an image ($b=1$). Hence, by step 1, $(f^{-1}\\mathcal I\\cdot\\mathcal F)(U)=\\psi_U((f^*\\mathcal I\\otimes\\mathcal F)(U))=\\mathcal I(V)\\,\\mathcal F(U)$ inside $\\mathcal F(U)$. (This is the identity $I(M_A)=((IB)M)_A$ of the source: $(IB)M=IM$.)",
+   "uses": [
+    "lem-weil-pbc-quasi-coherent-module-cokernel-image",
+    "lem-weil-pbc-module-pullback-affine-sections",
+    "lem-weil-pbc-quasi-coherent-tensor-product-affine-sections"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/coherent.tex",
+    "place": "Cohomology of Schemes, Lemma 01YP (coherent-lemma-affine-morphism-projection-ideal, coherent.tex line 3523), proof, second paragraph, the identity I(M_A) = ((IB)M)_A"
+   }
+  },
+  {
+   "text": "(The direct images.) An affine morphism is quasi-compact and quasi-separated [lem-weil-pbc-affine-morphism-permanence] (3), so $f_*\\mathcal F$ is a quasi-coherent $\\mathcal O_X$-module [pqf-lem-pushforward-qcoh]. By the definition of the pushforward [def-pc-module-pullback], $(f_*\\mathcal F)(W)=\\mathcal F(f^{-1}W)$ for opens $W\\subseteq X$, with the restrictions of $\\mathcal F$ and $a\\in\\mathcal O_X(W)$ acting as $f^\\sharp_W(a)$; in particular $(f_*\\mathcal F)(V)$ is $M=\\mathcal F(f^{-1}V)$ with $A$ acting through $\\rho$ (notation of step 2). For the sub-$\\mathcal O_Y$-module $f^{-1}\\mathcal I\\cdot\\mathcal F\\subseteq\\mathcal F$ (step 1), $f_*(f^{-1}\\mathcal I\\cdot\\mathcal F)$ is the sub-$\\mathcal O_X$-module $W\\mapsto(f^{-1}\\mathcal I\\cdot\\mathcal F)(f^{-1}W)$ of $f_*\\mathcal F$ (stable under $f^\\sharp_W(a)$ since it is an $\\mathcal O_Y$-submodule). By step 3, $f_*(f^{-1}\\mathcal I\\cdot\\mathcal F)(V)=\\mathcal I(V)M$ for every affine open $V\\subseteq X$.",
+   "uses": [
+    "lem-weil-pbc-affine-morphism-permanence",
+    "pqf-lem-pushforward-qcoh",
+    "def-pc-module-pullback"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Schemes, Lemma 01LC (schemes-lemma-push-forward-quasi-coherent); Morphisms, Lemma 01S7 for affine morphisms being quasi-compact and separated (through the cited node)"
+   }
+  },
+  {
+   "text": "(Sections of $\\mathcal I\\cdot f_*\\mathcal F$ over an affine open.) $\\mathcal I\\cdot f_*\\mathcal F$ is by definition the image of the multiplication $\\mathcal I\\otimes_{\\mathcal O_X}f_*\\mathcal F\\to f_*\\mathcal F$, i.e. the product of the quasi-coherent ideal $\\mathcal I$ with the quasi-coherent module $f_*\\mathcal F$ (step 4) as in [lem-weil-pbc-ideal-times-quasi-coherent-affine-sections]. By (2) of that node, for every affine open $V\\subseteq X$, $(\\mathcal I\\cdot f_*\\mathcal F)(V)=\\mathcal I(V)\\cdot(f_*\\mathcal F)(V)$, the $A$-submodule of $(f_*\\mathcal F)(V)=M$ generated by the products $as=\\rho(a)s$ (step 4), that is $\\mathcal I(V)M$.",
+   "uses": [
+    "lem-weil-pbc-ideal-times-quasi-coherent-affine-sections"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Schemes, Lemmas 01I8 (schemes-lemma-widetilde-constructions) and 01IC (schemes-lemma-kernel-cokernel-quasi-coherent), through the cited node"
+   }
+  },
+  {
+   "text": "(Clause (2).) By steps 4 and 5, the two sub-$\\mathcal O_X$-modules $\\mathcal S_1=\\mathcal I\\cdot f_*\\mathcal F$ and $\\mathcal S_2=f_*(f^{-1}\\mathcal I\\cdot\\mathcal F)$ of $f_*\\mathcal F$ have the same sections $\\mathcal I(V)\\,\\mathcal F(f^{-1}V)$ over every affine open $V\\subseteq X$. The affine opens form a basis of $X$ [lem-weil-pbc-affine-opens-basis], and subsheaves agreeing on a basis are equal: for an open $W$ and $s\\in\\mathcal S_1(W)$ cover $W$ by affine opens $V_k$; then $s|_{V_k}\\in\\mathcal S_2(V_k)$, these restrictions agree on overlaps in $f_*\\mathcal F$, hence in $\\mathcal S_2$, and glue (as $\\mathcal S_2$ is a sheaf) to $t\\in\\mathcal S_2(W)$ with $t|_{V_k}=s|_{V_k}$ for all $k$, so $t=s$ in $f_*\\mathcal F$ and $s\\in\\mathcal S_2(W)$; symmetrically $\\mathcal S_2(W)\\subseteq\\mathcal S_1(W)$. Hence $\\mathcal I\\cdot f_*\\mathcal F=f_*(f^{-1}\\mathcal I\\cdot\\mathcal F)$.",
+   "uses": [
+    "lem-weil-pbc-affine-opens-basis"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/coherent.tex",
+    "place": "Cohomology of Schemes, Lemma 01YP (coherent-lemma-affine-morphism-projection-ideal, coherent.tex line 3523), proof, second paragraph: 'the question is local and hence we may assume X is affine'"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-module-pullback",
+  "lem-weil-pbc-module-pullback-structure-sheaf",
+  "def-weil-pbc-sheafification",
+  "def-pur-sheaf-tensor-product",
+  "lem-weil-pbc-module-pullback-quasi-coherent",
+  "lem-weil-pbc-quasi-coherent-tensor-product-affine-sections",
+  "lem-weil-pbc-quasi-coherent-module-cokernel-image",
+  "pqf-def-affine-morphism",
+  "lem-weil-pbc-module-pullback-affine-sections",
+  "lem-weil-pbc-affine-morphism-permanence",
+  "pqf-lem-pushforward-qcoh",
+  "lem-weil-pbc-ideal-times-quasi-coherent-affine-sections",
+  "lem-weil-pbc-affine-opens-basis"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/coherent.tex",
+  "place": "Cohomology of Schemes, Lemma 01YP (coherent-lemma-affine-morphism-projection-ideal, line 3523) and its proof; the source's 'question is local' and affine computation written out by the agent through the cited nodes"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -45,10 +145,31 @@
    "results": "no product of an ideal sheaf and a module; Tilde.lean:566-567 records as a TODO that even quasi-coherence of the direct image along an affine morphism is not in Mathlib",
    "date": "2026-10-10",
    "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "[apip] image of ideal sheaf tensor quasi-coherent module along pushforward of affine morphism, submodule of sheaf of modules generated by ideal",
+   "results": "Scheme.IdealSheafData.ideal_map, ideal_map_of_isAffineHom, map_top, comap_map_le, le_map_iff_comap_le, map_bot, map_mono (Mathlib.AlgebraicGeometry.IdealSheaf.Functorial), Scheme.Modules.pushforward (Modules.Sheaf): ideal sheaves only, no product of an ideal sheaf with a module",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "[apip] AlgebraicGeometry.Scheme.Modules, AlgebraicGeometry.Scheme.IdealSheafData",
+   "results": "no results",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "[apip] grep -rln 'IsQuasicoherent' Mathlib/AlgebraicGeometry; grep -n pushforward Mathlib/AlgebraicGeometry/Modules/Tilde.lean",
+   "results": "only Modules/Tilde.lean; line 567 TODO (quasi-coherence of pushforward along affine morphisms), line 587 isQuasicoherent_pushforward_of_isLeftAdjoint for Spec maps; no ideal-times-module construction",
+   "date": "2026-10-10",
+   "verdict": "no match"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "worker",
@@ -69,5 +190,14 @@
  },
  "chapter": "sec-proper-base-change",
  "unit": "sk-thm-p1",
- "reviewed": "Reviewed by L 2026-10-10 (statement): Cohomology of Schemes 01YP; clause (1) (quasi-coherence of f^{-1}I.F) is from the proof of 01YP and is used as a fact by 01YQ, so it is part of the statement. Unsplit."
+ "reviewed": "pass (L, 2026-10-10): 6 steps follow 01YP: f^{-1}I.F is the quasi-coherent image of psi; over an affine preimage psi is computed explicitly, giving sections I(V)F(f^{-1}V); f_*F is quasi-coherent (pqf-lem-pushforward-qcoh, sk-prop-av-pqf-finite, recorded in tool_uses by L); I.f_*F has the same sections over affines; subsheaves agreeing on a basis are equal.",
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "lem-weil-pbc-affine-pushforward-ideal-product",
+  "worker": "stage1",
+  "summary": "Source checked: tag 01YP = coherent-lemma-affine-morphism-projection-ideal (coherent.tex 3523). Statement kept (clause (1) from the proof's first paragraph, clause (2) the lemma); the citer lem-weil-pbc-finite-surjective-affine-target-noetherian uses both clauses exactly in this form. Not a Mathlib leaf (no product of an ideal sheaf with a module; searches recorded). Split in six steps following the proof of 01YP: (1) f^{-1}I.F is the image of a morphism of quasi-coherent modules (pullback, tensor, image nodes); (2) on U = f^{-1}(V), V affine, the composite sends c(a(x)b)(x)s to b f^#(a) s (pullback-affine-sections, unit naturality, the characterization of epsilon_f); (3) hence its sections are I(V)F(U) (the source's I(M_A) = ((IB)M)_A); (4) f_*F quasi-coherent via affine => qcqs and pqf-lem-pushforward-qcoh (01LC, another unit: tool use, as in lem-weil-pbc-affine-morphism-relative-spec) and f_* of a submodule; (5) sections of I.f_*F on affine V by lem-weil-pbc-ideal-times-quasi-coherent-affine-sections (2); (6) subsheaves agreeing on the affine basis are equal. No new nodes."
+ },
+ "tool_uses": [
+  "pqf-lem-pushforward-qcoh"
+ ]
 }
