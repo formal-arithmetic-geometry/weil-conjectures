@@ -1,8 +1,8 @@
 # Work queue
 
-857 items; claim with `tools/claim.py next <group> [--stage N]`.
+862 items; claim with `tools/claim.py next <group> [--stage N]`.
 
-## Stage 1: nodes to split (661)
+## Stage 1: nodes to split (666)
 
 | node | distance to a target | Lean state on the done branch |
 |---|---|---|
@@ -15,7 +15,6 @@
 | `lem-weil-pbc-site-plus-of-separated-is-sheaf` | 1011 | none |
 | `lem-weil-pbc-small-etale-representable-presheaf-sheaf` | 1011 | none |
 | `lem-weil-pbc-universal-first-order-thickening-exists` | 1011 | none |
-| `lem-weil-pbc-universal-thickening-flat-base-change` | 1011 | none |
 | `lem-weil-pbc-universal-thickening-open-restriction` | 1011 | none |
 | `lem-weil-pbc-unramified-quasi-finite-at-points` | 1011 | none |
 | `lem-weil-pbc-vanishing-projective` | 1011 | none |
@@ -34,6 +33,8 @@
 | `lem-weil-pbc-ample-scheme-separated` | 1012 | none |
 | `lem-weil-pbc-annihilator-element-flat-base-change` | 1012 | none |
 | `lem-weil-pbc-artinian-ring-self-finite-length` | 1012 | none |
+| `lem-weil-pbc-closed-immersion-conormal-flat-base-change` | 1012 | none |
+| `lem-weil-pbc-closed-immersion-conormal-functorial` | 1012 | none |
 | `lem-weil-pbc-closed-pushforward-constant-stalks` | 1012 | none |
 | `lem-weil-pbc-cohen-coefficient-ring-exists` | 1012 | none |
 | `lem-weil-pbc-coherent-formal-module-kernel` | 1012 | none |
@@ -64,6 +65,7 @@
 | `lem-weil-pbc-finite-projective-prime-local-free` | 1012 | none |
 | `lem-weil-pbc-finite-surjective-affine-target` | 1012 | none |
 | `lem-weil-pbc-finite-type-z-domain-normalization-finite` | 1012 | none |
+| `lem-weil-pbc-first-order-thickening-base-change` | 1012 | none |
 | `lem-weil-pbc-flat-base-change-map-sections` | 1012 | none |
 | `lem-weil-pbc-flat-fp-lqf-bounded-stratification` | 1012 | none |
 | `lem-weil-pbc-flat-local-criterion-nonzerodivisor` | 1012 | none |
@@ -129,6 +131,7 @@
 | `lem-weil-pbc-regular-ring-normal` | 1012 | none |
 | `lem-weil-pbc-regular-sequence-short-exact-sequence` | 1012 | none |
 | `lem-weil-pbc-regular-sequence-swap-two` | 1012 | none |
+| `lem-weil-pbc-ring-universal-first-order-thickening` | 1012 | none |
 | `lem-weil-pbc-ringed-space-colimit-restriction` | 1012 | none |
 | `lem-weil-pbc-separably-generated-separable` | 1012 | none |
 | `lem-weil-pbc-sets-extension-by-empty-adjunction` | 1012 | none |
@@ -159,6 +162,8 @@
 | `lem-weil-pbc-tor-strictly-pro-zero` | 1012 | none |
 | `lem-weil-pbc-tower-limit-exact-surjective-kernels` | 1012 | none |
 | `lem-weil-pbc-two-term-complex-kernel-base-change` | 1012 | none |
+| `lem-weil-pbc-universal-thickening-affine-case` | 1012 | none |
+| `lem-weil-pbc-universal-thickening-open-pieces` | 1012 | none |
 | `lem-weil-pbc-zariski-cohomology-locally-zero` | 1012 | none |
 | `lem-weil-pbc-injective-acyclicity-bounded-below` | 2002 | sorry_here |
 | `lem-weil-pbc-property-implies-acyclicity` | 2003 | none |
@@ -869,7 +874,7 @@
 | `lem-weil-pbc-p1-field-dimension-one` | 4 | state |
 | `lem-weil-pbc-projective-space-zero-isomorphism` | 4 | state |
 
-Not open yet: 673 nodes that wait for stage 1, 483 nodes that wait for a statement dependency.
+Not open yet: 678 nodes that wait for stage 1, 484 nodes that wait for a statement dependency.
 
 ## Stage 3: modules to prove (0)
 
