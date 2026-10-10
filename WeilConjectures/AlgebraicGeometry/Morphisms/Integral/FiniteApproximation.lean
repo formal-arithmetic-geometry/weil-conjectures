@@ -882,6 +882,98 @@ noncomputable def isColimitApproxRingCocone [CompactSpace S] [QuasiSeparatedSpac
       (hxy.trans (subAlgιApp_apply H _ _ y)))
     rw [this]
 
+
+/-- `Spec_S F` as a cone over the stages. -/
+noncomputable abbrev approxCone : Cone (approxDiagram H) :=
+  ⟨(relativeGluingData H).glued, approxπ H⟩
+
+lemma approxDiagram_map_preimage {j₀ j : ApproxIndex H} (f : j ⟶ j₀) (U : S.AffineZariskiSite) :
+    (approxDiagram H).map f ⁻¹ᵁ approxP H j₀ ⁻¹ᵁ U.1 =
+      (colimit.ι (relativeGluingData (coequifibered_approx H j)).functor U).opensRange := by
+  rw [← Scheme.Hom.comp_preimage, approxDiagram_map_approxP]
+  exact toBase_preimage _ U
+
+lemma approxπ_preimage (j₀ : ApproxIndex H) (U : S.AffineZariskiSite) :
+    (approxπ H).app j₀ ⁻¹ᵁ approxP H j₀ ⁻¹ᵁ U.1 =
+      (colimit.ι (relativeGluingData H).functor U).opensRange := by
+  rw [← Scheme.Hom.comp_preimage, approxπ_approxP]
+  exact toBase_preimage _ U
+
+lemma approx_ι_map {j j' : ApproxIndex H} (f : j ⟶ j') (U : S.AffineZariskiSite) :
+    colimit.ι (relativeGluingData (coequifibered_approx H j)).functor U ≫ (approxDiagram H).map f =
+      Scheme.Spec.map ((approxRingDiagram H U).map f) ≫
+        colimit.ι (relativeGluingData (coequifibered_approx H j')).functor U :=
+  ι_relativeGluingMap _ _ _ U
+
+lemma approx_ι_π (j : ApproxIndex H) (U : S.AffineZariskiSite) :
+    colimit.ι (relativeGluingData H).functor U ≫ (approxπ H).app j =
+      Spec.map ((subAlgι j.unop.1).app (.op U)) ≫
+        colimit.ι (relativeGluingData (coequifibered_approx H j)).functor U :=
+  ι_relativeGluingMap _ _ _ U
+
+lemma approx_ι_π' (j₀ : ApproxIndex H) (j : Over j₀) (U : S.AffineZariskiSite) :
+    colimit.ι (relativeGluingData H).functor U ≫ (approxπ H).app j.left =
+      Scheme.Spec.map ((approxRingCocone H U j₀).ι.app (Opposite.op j)).op ≫
+        colimit.ι (relativeGluingData (coequifibered_approx H j.left)).functor U :=
+  ι_relativeGluingMap _ _ _ U
+
+/-- The restriction of a stage over an affine open `U` is `Spec B_J(U)`. -/
+noncomputable def approxOpensIso (j₀ : ApproxIndex H) (U : S.AffineZariskiSite) (j : Over j₀) :
+    (opensDiagram (approxDiagram H) j₀ (approxP H j₀ ⁻¹ᵁ U.1)).obj j ≅
+      ((Over.forget j₀ ⋙ approxRingDiagram H U) ⋙ Scheme.Spec).obj j :=
+  IsOpenImmersion.isoOfRangeEq (Scheme.Opens.ι _)
+    (colimit.ι (relativeGluingData (coequifibered_approx H j.left)).functor U)
+    ((Scheme.Opens.range_ι _).trans ((congrArg SetLike.coe
+      (approxDiagram_map_preimage H j.hom U)).trans (Scheme.Hom.coe_opensRange _)))
+
+@[reassoc (attr := simp)]
+lemma approxOpensIso_hom_ι (j₀ : ApproxIndex H) (U : S.AffineZariskiSite) (j : Over j₀) :
+    (approxOpensIso H j₀ U j).hom ≫
+      colimit.ι (relativeGluingData (coequifibered_approx H j.left)).functor U =
+      Scheme.Opens.ι _ :=
+  IsOpenImmersion.isoOfRangeEq_hom_fac _ _ _
+
+/-- The restricted diagram of stages over an affine open `U` is the diagram `Spec B_J(U)`. -/
+noncomputable def approxOpensDiagramIso (j₀ : ApproxIndex H) (U : S.AffineZariskiSite) :
+    opensDiagram (approxDiagram H) j₀ (approxP H j₀ ⁻¹ᵁ U.1) ≅
+      (Over.forget j₀ ⋙ approxRingDiagram H U) ⋙ Scheme.Spec :=
+  NatIso.ofComponents (approxOpensIso H j₀ U) fun {j j'} k ↦ by
+    rw [← cancel_mono (colimit.ι (relativeGluingData (coequifibered_approx H j'.left)).functor U),
+      Category.assoc, approxOpensIso_hom_ι, opensDiagram_map_ι]
+    rw [Category.assoc, Functor.comp_map, Functor.comp_map, Over.forget_map, ← approx_ι_map,
+      approxOpensIso_hom_ι_assoc]
+
+/-- The restriction of `Spec_S F` over an affine open `U` is `Spec F(U)`. -/
+noncomputable def approxConeOpensIso (j₀ : ApproxIndex H) (U : S.AffineZariskiSite) :
+    (opensCone (approxDiagram H) (approxCone H) j₀ (approxP H j₀ ⁻¹ᵁ U.1)).pt ≅
+      Spec (F.obj (.op U)) :=
+  IsOpenImmersion.isoOfRangeEq (Scheme.Opens.ι _)
+    (colimit.ι (relativeGluingData H).functor U)
+    ((Scheme.Opens.range_ι _).trans ((congrArg SetLike.coe
+      (approxπ_preimage H j₀ U)).trans (Scheme.Hom.coe_opensRange _)))
+
+lemma approxConeOpensIso_hom_ι (j₀ : ApproxIndex H) (U : S.AffineZariskiSite) :
+    (approxConeOpensIso H j₀ U).hom ≫ colimit.ι (relativeGluingData H).functor U =
+      Scheme.Opens.ι _ :=
+  IsOpenImmersion.isoOfRangeEq_hom_fac _ _ _
+
+/-- The restriction of `Spec_S F` over an affine open `U` is the limit of the restrictions of
+the stages. -/
+noncomputable def isLimitApproxOpensCone [CompactSpace S] [QuasiSeparatedSpace S]
+    (j₀ : ApproxIndex H) (U : S.AffineZariskiSite) :
+    IsLimit (opensCone (approxDiagram H) (approxCone H) j₀ (approxP H j₀ ⁻¹ᵁ U.1)) := by
+  have hS := isLimitOfPreserves Scheme.Spec
+    (isLimitConeOfCoconeLeftOp _ (isColimitApproxRingCocone H U j₀))
+  refine (IsLimit.postcomposeHomEquiv (approxOpensDiagramIso H j₀ U) _)
+    (hS.ofIsoLimit (Cone.ext (approxConeOpensIso H j₀ U).symm fun j ↦ ?_))
+  rw [Iso.symm_hom, Iso.eq_inv_comp]
+  rw [← cancel_mono (colimit.ι (relativeGluingData (coequifibered_approx H j.left)).functor U)]
+  simp only [Functor.mapCone_π_app, coneOfCoconeLeftOp_π_app, Cone.postcompose_obj_π,
+    NatTrans.comp_app, approxOpensDiagramIso, NatIso.ofComponents_hom_app, Category.assoc]
+  rw [← approx_ι_π', ← Category.assoc, approxConeOpensIso_hom_ι]
+  exact (opensCone_π_ι (approxDiagram H) (approxCone H) j₀ _ j).symm.trans
+    (congrArg _ (approxOpensIso_hom_ι H j₀ U j).symm)
+
 end Approximation
 
 end AlgebraicGeometry.Scheme.AffineZariskiSite
