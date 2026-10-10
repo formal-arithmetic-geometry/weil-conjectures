@@ -2175,3 +2175,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 17:52 L: merged deliver/C1/lem-pc-zero-scheme-properties (reviewer FIX; first push; new nodes: 4)
 - 17:53 L: merged deliver/J1/lem-sc-dual-number-scheme-pushout (reviewer PASS; first push; new nodes: 0)
 - 17:53 L: merged deliver/G1/lem-sc-p1-pullback-extension-class (reviewer FIX; first push; new nodes: 0)
+- 17:53 L: accepted def-sc-ext-sheaf (own item, writer W-ext1748; 5 steps, 0 new nodes; E7 correction of the ill-posed blueprint definition; tool uses lem-weil-pbc-scheme-modules-enough-injectives, lem-weil-pbc-derived-functor-long-exact and three Mathlib leaves)
