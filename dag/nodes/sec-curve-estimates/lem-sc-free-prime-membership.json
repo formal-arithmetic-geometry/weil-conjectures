@@ -1,0 +1,69 @@
+{
+ "id": "lem-sc-free-prime-membership",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-pic-proper-ntorsion",
+   "place": "the affine section translation: membership of a section in pN is detected after passage to the stalk at p (free-module coordinate case)",
+   "via": [
+    "lem-sc-affine-finite-projective-prime-membership",
+    "lem-sc-affine-cap-section-open"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Prime membership for a finite free module after localization",
+ "statement": "Let $R$ be a commutative ring, $F=R^{n}$ a finite free $R$-module, $s=(s_1,\\dots,s_n)\\in F$, and $\\mathfrak p\\subset R$ a prime ideal. Put $S=R\\setminus\\mathfrak p$ and $F_{\\mathfrak p}=S^{-1}F$ [def-weil-pbc-module-localization], with canonical map $F\\to F_{\\mathfrak p}$; write $R_{\\mathfrak p}=S^{-1}R$ [def-weil-pbc-localization-at-prime]. Then $s/1\\in\\mathfrak pF_{\\mathfrak p}$ if and only if $s\\in\\mathfrak pF$. Equivalently, for each coordinate, $s_i/1\\in\\mathfrak pR_{\\mathfrak p}$ if and only if $s_i\\in\\mathfrak p$.",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Algebra, Definition Tag 00CO and the localization-at-a-prime construction; the coordinate calculation underlying Lemma Tag 00NX (lemma-finite-projective)"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-localization-at-prime",
+  "def-weil-pbc-module-localization"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "for a finite free module, membership in p after localization at a prime iff coordinate membership in p",
+   "results": "No exact declaration; only general localization membership lemmas",
+   "date": "2026-10-11",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "coordinatewise ideal membership in a localized free module at a prime",
+   "results": "No exact criterion; IsLocalization.mem_map_algebraMap_iff concerns ideal maps but does not state the module-vector result",
+   "date": "2026-10-11",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "rg -n 'mem_map_algebraMap_iff|mk.*mem.*iff|AtPrime.*mem' Mathlib/RingTheory/Localization Mathlib/LinearAlgebra",
+   "results": "General ring ideal localization lemmas in Mathlib/RingTheory/Localization/Ideal.lean; no finite-free module criterion",
+   "date": "2026-10-11",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "element of free module R^n maps into p times localization at prime p iff its coordinates lie in p (localized module, ideal smul submodule)",
+   "results": "Submodule.mem_of_isLocalized_span, Submodule.mem_localized', Submodule.mem_of_localization_maximal, Submodule.mem_localized0, IsLocalization.mem_span_iff: none states the criterion",
+   "date": "2026-10-10",
+   "verdict": "no match",
+   "by": "R-pm2"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "created": {
+  "item": "lem-sc-affine-finite-projective-prime-membership",
+  "by": "worker",
+  "date": "2026-10-10"
+ },
+ "chapter": "sec-curve-estimates",
+ "unit": "sk-thm-curveestimate"
+}
