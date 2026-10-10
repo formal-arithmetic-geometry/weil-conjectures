@@ -2,7 +2,7 @@
 
 931 items; claim with `tools/claim.py next <group> [--stage N]`.
 
-## Stage 1: nodes to split (237)
+## Stage 1: nodes to split (235)
 
 | node | distance to a target | Lean state on the done branch |
 |---|---|---|
@@ -16,8 +16,6 @@
 | `lem-pc-essentially-constant-pro-hom-colimit` | 3013 | none |
 | `lem-pc-left-localization-hom-colimit` | 3013 | none |
 | `lem-pc-qcoh-truncation-derived-limit` | 3013 | none |
-| `lem-pc-right-localization-hom-colimit` | 3013 | none |
-| `lem-pc-skyscraper-complex` | 3013 | none |
 | `lem-pc-stalk-tensor-complex` | 3013 | none |
 | `lem-pc-derived-sections-pushforward-comparison` | 3014 | none |
 | `lem-pc-derived-qcoh-compact-generation` | 3015 | none |
@@ -244,7 +242,7 @@
 | `lem-pur-rhom-well-defined` | - | none |
 | `lem-zl-noether-normalization-dimension` | - | none |
 
-## Stage 2: nodes to state (694)
+## Stage 2: nodes to state (696)
 
 | node | distance to Mathlib | kind |
 |---|---|---|
@@ -349,10 +347,12 @@
 | `lem-pc-presheaf-module-inverse-image-adjunction` | 1 | state |
 | `lem-pc-principal-open-dense-of-nonzerodivisor` | 1 | state |
 | `lem-pc-projective-curve-linear-pair` | 1 | state |
+| `lem-pc-right-localization-hom-colimit` | 1 | state |
 | `lem-pc-scheme-connected-iff-idempotents` | 1 | state |
 | `lem-pc-scheme-dimension-local-rings` | 1 | state |
 | `lem-pc-scheme-modules-grothendieck-abelian` | 1 | state |
 | `lem-pc-separable-polynomial-alg-closed-quotient-product` | 1 | state |
+| `lem-pc-skyscraper-complex` | 1 | state |
 | `lem-pc-zero-scheme-ideal-local` | 1 | state |
 | `lem-pc-zero-scheme-locally-principal` | 1 | state |
 | `lem-pc-zero-scheme-recd` | 1 | state |
@@ -943,7 +943,7 @@
 | `lem-weil-pbc-p1-field-dimension-one` | 4 | state |
 | `lem-weil-pbc-projective-space-zero-isomorphism` | 4 | state |
 
-Not open yet: 1372 nodes that wait for a statement dependency, 273 nodes that wait for stage 1.
+Not open yet: 1372 nodes that wait for a statement dependency, 271 nodes that wait for stage 1.
 
 ## Stage 3: modules to prove (0)
 
