@@ -1,8 +1,8 @@
 # Work queue
 
-865 items; claim with `tools/claim.py next <group> [--stage N]`.
+871 items; claim with `tools/claim.py next <group> [--stage N]`.
 
-## Stage 1: nodes to split (639)
+## Stage 1: nodes to split (645)
 
 | node | distance to a target | Lean state on the done branch |
 |---|---|---|
@@ -19,7 +19,6 @@
 | `lem-weil-pbc-descend-qc-open-fg-subalgebra` | 1012 | none |
 | `lem-weil-pbc-equation-count-fibre-dimension-flat` | 1012 | none |
 | `lem-weil-pbc-flat-base-change-map-sections` | 1012 | none |
-| `lem-weil-pbc-flat-fp-lqf-bounded-stratification` | 1012 | none |
 | `lem-weil-pbc-flat-smooth-fibre-smooth-at-prime` | 1012 | none |
 | `lem-weil-pbc-flat-under-regular` | 1012 | none |
 | `lem-weil-pbc-flat-variant-local-criterion` | 1012 | none |
@@ -120,11 +119,15 @@
 | `lem-weil-pbc-zariski-cohomology-locally-zero` | 1012 | none |
 | `def-weil-pbc-japanese-domain` | 1013 | none |
 | `def-weil-pbc-nagata-ring` | 1013 | none |
+| `def-weil-pbc-relative-global-complete-intersection` | 1013 | none |
 | `def-weil-pbc-serre-conditions-rk-sk` | 1013 | none |
 | `lem-weil-pbc-cohen-ring-mod-pn-formally-smooth` | 1013 | none |
 | `lem-weil-pbc-cohen-rings-exist` | 1013 | none |
 | `lem-weil-pbc-coherent-finite-type-sub-kernel` | 1013 | none |
+| `lem-weil-pbc-etale-splits-off-quasi-finite-part` | 1013 | none |
+| `lem-weil-pbc-fibre-degree-base-change` | 1013 | none |
 | `lem-weil-pbc-fibre-degree-bound-field-points` | 1013 | none |
+| `lem-weil-pbc-finite-locally-free-degree-etale-descent` | 1013 | none |
 | `lem-weil-pbc-finite-surjective-affine-target-noetherian` | 1013 | none |
 | `lem-weil-pbc-lift-to-injective-unique-up-to-homotopy` | 1013 | none |
 | `lem-weil-pbc-module-finite-type-image-extension` | 1013 | none |
@@ -132,11 +135,14 @@
 | `lem-weil-pbc-module-pushforward-injectives-sections-quasi-iso` | 1013 | none |
 | `lem-weil-pbc-nagata-universally-japanese` | 1013 | none |
 | `lem-weil-pbc-quasi-finite-at-finite-subalgebra-away` | 1013 | none |
+| `lem-weil-pbc-relative-global-complete-intersection-smooth-jacobian` | 1013 | none |
 | `lem-weil-pbc-residue-field-pd-ge-embedding-dimension` | 1013 | none |
 | `lem-weil-pbc-residue-field-pd-le-krull-dimension` | 1013 | none |
 | `lem-weil-pbc-scheme-modules-enough-injectives` | 1013 | none |
+| `lem-weil-pbc-separated-lqf-base-change` | 1013 | none |
 | `lem-weil-pbc-serre-criterion-normal` | 1013 | none |
 | `lem-weil-pbc-serre-sk-goes-up` | 1013 | none |
+| `lem-weil-pbc-syntomic-at-prime-relative-global-complete-intersection` | 1013 | none |
 | `def-weil-pbc-depth` | 1014 | none |
 | `lem-weil-pbc-injective-acyclicity-bounded-below` | 2002 | sorry_here |
 | `lem-weil-pbc-property-implies-acyclicity` | 2003 | none |
@@ -877,7 +883,7 @@
 | `lem-weil-pbc-p1-field-dimension-one` | 4 | state |
 | `lem-weil-pbc-projective-space-zero-isomorphism` | 4 | state |
 
-Not open yet: 651 nodes that wait for stage 1, 505 nodes that wait for a statement dependency.
+Not open yet: 657 nodes that wait for stage 1, 506 nodes that wait for a statement dependency.
 
 ## Stage 3: modules to prove (0)
 
