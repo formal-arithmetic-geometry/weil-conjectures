@@ -1,8 +1,8 @@
 # Work queue
 
-884 items; claim with `tools/claim.py next <group> [--stage N]`.
+883 items; claim with `tools/claim.py next <group> [--stage N]`.
 
-## Stage 1: nodes to split (332)
+## Stage 1: nodes to split (331)
 
 | node | distance to a target | Lean state on the done branch |
 |---|---|---|
@@ -32,7 +32,7 @@
 | `lem-sc-noetherian-closed-points-finite` | 2012 | none |
 | `lem-sc-section-affine-open-kills-cohomology` | 2012 | none |
 | `lem-sc-zero-dim-noetherian-finite-discrete` | 2012 | none |
-| `lem-weil-pbc-derived-etale-cohomology-limit` | 3004 | none |
+| `lem-weil-pbc-etale-cohomology-limit-complex-systems` | 3005 | none |
 | `lem-weil-pbc-finite-geometric-point-coproduct-cohomology` | 3005 | none |
 | `lem-sc-etale-zariski-qcoh-comparison` | 3007 | none |
 | `lem-sc-etale-standard-cover-cech` | 3008 | none |
@@ -66,7 +66,6 @@
 | `lem-sc-p1-duality-pairing-naturality` | 3012 | none |
 | `lem-sc-p1-ext-coherent-dim-one-vanishing` | 3012 | none |
 | `lem-sc-p1-ext-locally-free-naturality` | 3012 | none |
-| `lem-sc-torsion-sections-generic` | 3012 | none |
 | `lem-sc-ext-derived-composite` | 3013 | none |
 | `lem-sc-ext-evaluation` | 3013 | none |
 | `lem-sc-ext-tensor-exact` | 3013 | none |
@@ -896,7 +895,7 @@
 | `lem-weil-pbc-p1-field-dimension-one` | 4 | state |
 | `lem-weil-pbc-projective-space-zero-isomorphism` | 4 | state |
 
-Not open yet: 353 nodes that wait for stage 1, 1060 nodes that wait for a statement dependency.
+Not open yet: 352 nodes that wait for stage 1, 1062 nodes that wait for a statement dependency.
 
 ## Stage 3: modules to prove (0)
 
