@@ -26,15 +26,17 @@ subcategories:
 | `Lf^* = L((f)^*⟦ℚ̄_ℓ⟧)` | `boundedConstructibleUpperStar` | `X`, `Y` noetherian |
 | `Rf_* = R((f)_*⟦ℚ̄_ℓ⟧)` | `boundedConstructibleLowerStar` | and `f` of finite type |
 | `Rf_! = R(f)_!⟦ℚ̄_ℓ⟧` | `boundedConstructibleLowerShriek` | and `HasCompactification f` |
+| `j_! = D((j)_!open⟦ℚ̄_ℓ⟧)` | `boundedConstructibleOpenImmersionLowerShriek` | `j` an open immersion |
 | `Rf^! = R(f)^!⟦ℚ̄_ℓ⟧` | `boundedConstructibleUpperShriek` | and `HasCompactification f` |
 | `- ⊗ᴸ -` | `boundedConstructibleTensor` | `X` noetherian |
 | `RHom(-, -)` | `boundedConstructibleHom` | `X` noetherian |
 
 Each restriction is the `ObjectProperty.lift` of the composite of the inclusion with the functor
 on the ambient derived category, so it is compatible with the inclusions by construction
-(`ObjectProperty.liftCompιIso`). The adjunctions `Lf^* ⊣ Rf_*`, `Rf_! ⊣ Rf^!` and
+(`ObjectProperty.liftCompιIso`). The adjunctions `Lf^* ⊣ Rf_*`, `j_! ⊣ j^*`, `Rf_! ⊣ Rf^!` and
 `K ⊗ᴸ - ⊣ RHom(K, -)` restrict along the fully faithful inclusions
-(`Adjunction.restrictFullyFaithful`).
+(`Adjunction.restrictFullyFaithful`), and so does the composition isomorphism
+`L(f ≫ g)^* ≅ Lg^* ⋙ Lf^*` (`boundedConstructibleUpperStarComp`).
 
 Here "noetherian" means that the underlying topological space is noetherian, which is also the
 hypothesis under which `ProEtale.boundedConstructible` is triangulated.
@@ -43,6 +45,7 @@ hypothesis under which `ProEtale.boundedConstructible` is triangulated.
 
 That the six functors preserve bounded constructible complexes is `sorry`ed:
 `boundedConstructible_leftDerivedUpperStar_obj`, `boundedConstructible_rightDerivedLowerStar_obj`,
+`boundedConstructible_openImmersionLowerShriek_obj`,
 `boundedConstructible_rightDerivedLowerShriek_obj`,
 `boundedConstructible_rightDerivedUpperShriek_obj`, `boundedConstructible_derivedTensor_obj` and
 `boundedConstructible_derivedHom_obj`.
@@ -100,6 +103,22 @@ noncomputable def boundedConstructibleUpperStarCompatibility :
       (boundedConstructible _).ι ⋙ L((f)^*⟦ℚ̄_ℓ⟧) :=
   ObjectProperty.liftCompιIso _ _ _
 
+/-- The composition isomorphism `L(f ≫ g)^* ≅ Lg^* ⋙ Lf^*` on bounded constructible complexes:
+the restriction of `ProEtale.PadicAlgClRing.leftDerivedUpperStarComp` along the fully faithful
+inclusions. -/
+noncomputable def boundedConstructibleUpperStarComp {Z : Scheme.{u}} [NoetherianSpace Z]
+    (g : Y ⟶ Z) :
+    boundedConstructibleUpperStar ℓ (f ≫ g) ≅
+      boundedConstructibleUpperStar ℓ g ⋙ boundedConstructibleUpperStar ℓ f :=
+  ((ObjectProperty.fullyFaithfulι _).whiskeringRight _).preimageIso
+    (boundedConstructibleUpperStarCompatibility ℓ (f ≫ g) ≪≫
+      Functor.isoWhiskerLeft _ (leftDerivedUpperStarComp ℓ f g) ≪≫
+      (Functor.associator _ _ _).symm ≪≫
+      Functor.isoWhiskerRight (boundedConstructibleUpperStarCompatibility ℓ g).symm _ ≪≫
+      Functor.associator _ _ _ ≪≫
+      Functor.isoWhiskerLeft _ (boundedConstructibleUpperStarCompatibility ℓ f).symm ≪≫
+      (Functor.associator _ _ _).symm)
+
 variable [LocallyOfFiniteType f] [QuasiCompact f]
 
 /-- The derived pushforward `Rf_*` on module objects over `ℚ̄_ℓ` along a morphism of finite
@@ -134,6 +153,49 @@ noncomputable def boundedConstructibleUpperStarLowerStarAdjunction :
     (boundedConstructibleLowerStarCompatibility ℓ f).symm
 
 end UpperLowerStar
+
+/-! ### The extension by zero along an open immersion -/
+
+section OpenImmersion
+
+variable {U X : Scheme.{u}} (j : U ⟶ X) [IsOpenImmersion j] [NoetherianSpace U]
+  [NoetherianSpace X]
+
+/-- The extension by zero `j_!` along an open immersion, applied levelwise to complexes of
+module objects over `ℚ̄_ℓ`, preserves bounded constructible complexes. -/
+lemma boundedConstructible_openImmersionLowerShriek_obj
+    (K : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology U) Ab.{u + 1}) (padicAlgClSheaf U ℓ)))
+    (hK : boundedConstructible (padicAlgClSheaf U ℓ) K) :
+    boundedConstructible (padicAlgClSheaf X ℓ) ((D((j)_!open⟦ℚ̄_ℓ⟧)).obj K) :=
+  sorry
+
+/-- The extension by zero `j_! : Dᵇc(U)⟦ℚ̄_ℓ⟧ ⥤ Dᵇc(X)⟦ℚ̄_ℓ⟧` along an open immersion on bounded
+constructible complexes: the restriction of the levelwise functor `D((j)_!open⟦ℚ̄_ℓ⟧)`. -/
+noncomputable def boundedConstructibleOpenImmersionLowerShriek :
+    Dᵇc(U)⟦ℚ̄_ℓ⟧ ⥤ Dᵇc(X)⟦ℚ̄_ℓ⟧ :=
+  (boundedConstructible _).lift ((boundedConstructible _).ι ⋙ D((j)_!open⟦ℚ̄_ℓ⟧))
+    fun K ↦ boundedConstructible_openImmersionLowerShriek_obj ℓ j K.obj K.property
+
+/-- The restricted extension by zero is compatible with the inclusions. -/
+noncomputable def boundedConstructibleOpenImmersionLowerShriekCompatibility :
+    boundedConstructibleOpenImmersionLowerShriek ℓ j ⋙ (boundedConstructible _).ι ≅
+      (boundedConstructible _).ι ⋙ D((j)_!open⟦ℚ̄_ℓ⟧) :=
+  ObjectProperty.liftCompιIso _ _ _
+
+/-- The adjunction `j_! ⊣ j^*` along an open immersion on bounded constructible complexes: the
+restriction of `ProEtale.PadicAlgClRing.derivedOpenImmersionLowerShriekUpperStarAdjunction`
+along the fully faithful inclusions, the levelwise `D((j)^*⟦ℚ̄_ℓ⟧)` being identified with the
+derived pullback `L((j)^*⟦ℚ̄_ℓ⟧)` that `boundedConstructibleUpperStar` restricts. -/
+noncomputable def boundedConstructibleOpenImmersionLowerShriekUpperStarAdjunction :
+    boundedConstructibleOpenImmersionLowerShriek ℓ j ⊣ boundedConstructibleUpperStar ℓ j :=
+  Adjunction.restrictFullyFaithful
+    ((derivedOpenImmersionLowerShriekUpperStarAdjunction ℓ j).ofNatIsoRight
+      (leftDerivedUpperStarIsoMapDerivedCategory_of_isOpenImmersion ℓ j).symm)
+    (ObjectProperty.fullyFaithfulι _) (ObjectProperty.fullyFaithfulι _)
+    (boundedConstructibleOpenImmersionLowerShriekCompatibility ℓ j).symm
+    (boundedConstructibleUpperStarCompatibility ℓ j).symm
+
+end OpenImmersion
 
 /-! ### The exceptional functors -/
 
