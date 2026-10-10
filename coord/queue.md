@@ -1,8 +1,8 @@
 # Work queue
 
-903 items; claim with `tools/claim.py next <group> [--stage N]`.
+902 items; claim with `tools/claim.py next <group> [--stage N]`.
 
-## Stage 1: nodes to split (156)
+## Stage 1: nodes to split (154)
 
 | node | distance to a target | Lean state on the done branch |
 |---|---|---|
@@ -17,7 +17,6 @@
 | `lem-pc-ring-pseudo-coherent-finite-tor-perfect` | 3015 | none |
 | `lem-pc-tower-abelian` | 3015 | none |
 | `lem-pc-tower-enough-injectives` | 3015 | none |
-| `lem-pc-tower-limit-left-exact` | 3015 | none |
 | `lem-pc-tower-surjective-lim-acyclic` | 3015 | none |
 | `lem-pc-perfect-complexes-compact-set` | 3016 | none |
 | `lem-pc-ringed-space-derived-limit-stalk-injective` | 3016 | none |
@@ -45,14 +44,13 @@
 | `lem-sc-etale-triple-to-sh-completion-flat` | 4012 | none |
 | `lem-sc-hilbert-embedded-points-affine-removal` | 5011 | none |
 | `lem-sc-hilbert-embedded-points-gluing` | 5011 | none |
-| `lem-sc-hilbert-nowhere-dense-dimension-drop` | 5011 | none |
 | `lem-sc-meromorphic-sheaf-generic-product` | 5011 | none |
+| `lem-sc-locnoeth-components-locally-finite` | 5012 | none |
 | `lem-pc-perfect-complex-descent` | 5013 | none |
 | `lem-pc-rf-base-change-single-complex-criterion` | 5013 | none |
 | `lem-pc-sites-modules-sheafification-flat` | 5014 | none |
 | `lem-pc-flat-module-descent` | 5015 | none |
 | `lem-pc-fp-complex-descent` | 5015 | none |
-| `lem-pc-tensor-mapping-cone-iso` | 5015 | none |
 | `lem-sp-cartan-eilenberg-comparison-homotopy` | 6006 | none |
 | `lem-sp-filtered-homotopy-spectral-sequence` | 6006 | none |
 | `thm-sp-spectral-object-yields` | 6006 | none |
@@ -163,7 +161,7 @@
 | `lem-pur-rhom-well-defined` | - | none |
 | `lem-zl-noether-normalization-dimension` | - | none |
 
-## Stage 2: nodes to state (747)
+## Stage 2: nodes to state (748)
 
 | node | distance to Mathlib | kind |
 |---|---|---|
@@ -297,6 +295,7 @@
 | `lem-pc-skyscraper-complex` | 1 | state |
 | `lem-pc-stalk-direct-sums` | 1 | state |
 | `lem-pc-stalk-tensor-complex` | 1 | state |
+| `lem-pc-tensor-mapping-cone-iso` | 1 | state |
 | `lem-pc-zero-scheme-ideal-local` | 1 | state |
 | `lem-pc-zero-scheme-locally-principal` | 1 | state |
 | `lem-pc-zero-scheme-recd` | 1 | state |
@@ -915,7 +914,7 @@
 | `lem-weil-pbc-projective-space-zero-isomorphism` | 4 | state |
 | `def-nagata-fixed-base-separated-stage` | 6 | state |
 
-Not open yet: 1507 nodes that wait for a statement dependency, 196 nodes that wait for stage 1.
+Not open yet: 1509 nodes that wait for a statement dependency, 194 nodes that wait for stage 1.
 
 ## Stage 3: modules to prove (0)
 
