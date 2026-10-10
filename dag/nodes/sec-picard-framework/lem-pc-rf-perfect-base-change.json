@@ -3,7 +3,7 @@
  "blueprint": {
   "is": "lem-pc-rf-perfect-base-change",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "Perfectness of $Rf_*\\mathcal{G}$ and base change",
@@ -30,15 +30,81 @@
   "def-pc-morphism-conventions",
   "def-pc-perfect-complex"
  ],
- "proof": [],
- "proof_deps": [
-  "lem-pc-rf-base-change-flat-module",
-  "lem-pc-projective-noetherian-rf-perfect"
+ "proof": [
+  {
+   "text": "By [def-weil-proper-morphism], $f$ is separated and of finite type, hence quasi-compact. The finitely presented $\\mathcal O_X$-module $\\mathcal G$ is quasi-coherent and flat over $S$ by hypothesis. Apply [lem-pc-rf-base-change-flat-module] to $f$ and $\\mathcal G$: for every $g:T\\to S$ it identifies the canonical map $Lg^*Rf_*\\mathcal G\\to Rf_{T,*}\\mathcal G_T$ as an isomorphism.",
+   "uses": [
+    "def-weil-proper-morphism",
+    "lem-pc-rf-base-change-flat-module"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/perfect.tex",
+    "place": "Lemma 36.30.4, Tag 0B91, clause (2), base-change conclusion; properness gives the quasi-compact separated hypotheses"
+   }
+  },
+  {
+   "text": "Regard $\\mathcal G$ as a complex concentrated in degree $0$ and take $E=\\mathcal O_X$ in [lem-pc-proper-support-perfect-direct-image]. The structure sheaf is perfect: on each affine open it is a free module of rank one in degree $0$ [def-pc-perfect-complex]. The support of $\\mathcal G$ is closed by [lem-weil-pbc-finite-type-module-support-closed], because finite presentation implies finite type. Since $X\\to S$ is proper, $X$ itself is a closed subset proper over $S$ [def-weil-pbc-closed-subset-proper-over-base]; its closed subset $\\operatorname{Supp}(\\mathcal G)$ is proper over $S$ by [lem-weil-pbc-closed-subset-proper-over-base-properties](2). All hypotheses of the cited tensor theorem now hold, and $E\\otimes^L\\mathcal G\\cong\\mathcal G$, since $E=\\mathcal O_X$ is the tensor unit. Its conclusion gives the required perfectness of $Rf_*\\mathcal G$ (and agrees with the base-change map of step 1). This is the specialization used in the proof of Stacks Tag 0B91, clause (2).",
+   "uses": [
+    "lem-pc-proper-support-perfect-direct-image",
+    "def-pc-perfect-complex",
+    "lem-weil-pbc-finite-type-module-support-closed",
+    "def-weil-pbc-closed-subset-proper-over-base",
+    "lem-weil-pbc-closed-subset-proper-over-base-properties"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/perfect.tex",
+    "place": "Lemma 36.30.4, Tag 0B91, clause (2)"
+   }
+  }
  ],
- "proof_origin": null,
- "mathlib_searches": [],
+ "proof_deps": [
+  "def-weil-proper-morphism",
+  "lem-pc-rf-base-change-flat-module",
+  "lem-pc-proper-support-perfect-direct-image",
+  "def-pc-perfect-complex",
+  "lem-weil-pbc-finite-type-module-support-closed",
+  "def-weil-pbc-closed-subset-proper-over-base",
+  "lem-weil-pbc-closed-subset-proper-over-base-properties"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/perfect.tex",
+  "place": "Lemma 36.30.4, Tag 0B91, proof of clause (2), applying Lemma 36.30.1, Tag 0A1H"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "proper morphism finite presentation pushforward perfect object arbitrary base change flat finite presentation sheaf",
+   "results": "AlgebraicGeometry.locallyOfFinitePresentation_isStableUnderBaseChange; AlgebraicGeometry.IsProper.isStableUnderBaseChange; no derived pushforward perfectness declaration",
+   "date": "2026-10-11",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "Perfect",
+   "results": "Topology Perfect declarations only (Perfect, PerfectSpace.univ_perfect, Perfect.acc, Perfect.closed, etc.); no derived-category perfectness theorem",
+   "date": "2026-10-11",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "perfect Mathlib/AlgebraicGeometry",
+   "results": "no hits",
+   "date": "2026-10-11",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "derived pushforward perfect proper flat finite presentation",
+   "results": "service unavailable (Internal Server Error)",
+   "date": "2026-10-11",
+   "verdict": "unavailable"
+  }
+ ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "import_flags": [
   "undischarged_input",
@@ -89,5 +155,36 @@
   }
  },
  "chapter": "sec-picard-framework",
- "unit": "sk-thm-picard-semicon"
+ "unit": "sk-thm-picard-semicon",
+ "split_report": {
+  "date": "2026-10-11",
+  "item": "lem-pc-rf-perfect-base-change",
+  "worker": "stage1",
+  "summary": "The base-change map follows from the existing relatively flat base-change lemma. For perfectness, specialize the general tensor-and-proper-support theorem of Stacks Tag 0A1H, as the proof of Tag 0B91 does. That general theorem is a new unsplit node; its conclusion is substantially broader than this item. Mathlib has no matching direct-image theorem.",
+  "blueprint": "Step 1 realizes the base-change sentence of the blueprint proof via lem-pc-rf-base-change-flat-module. Step 2 realizes its general perfectness sentence by the explicit E=O_X and degree-zero G specialization of Tag 0A1H, as in the proof of Tag 0B91.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-finite-type-module-support-closed",
+    "why": "Its generic finite-type module theorem supplies closedness of the support; no node of the Picard unit states that fact."
+   },
+   {
+    "node": "lem-weil-pbc-closed-subset-proper-over-base-properties",
+    "why": "Its generic closed-subset theorem passes properness from X to the support; no node of the Picard unit states that fact."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-finite-type-module-support-closed",
+  "lem-weil-pbc-closed-subset-proper-over-base-properties",
+  "lem-weil-pbc-finite-type-module-support-closed",
+  "lem-weil-pbc-closed-subset-proper-over-base-properties"
+ ],
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-rpb1841",
+  "group": "H1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-rpb1841 (reviewer sub-agent of L); spot-checked: Statement = Tag 0B91(2) verbatim. Step 1: proper => separated + finite type (qc), fp module => qcoh; lem-pc-rf-base-change-flat-module hypotheses met. Step 2: new node = Tag 0A1H exact (perfect representation carried by it), E=O_X, G in degree 0; support closed (finite type) and proper over S via properties lemma (1),(2). No cycle: flat-module deps (cech-resolution, flat-complex-derived-pullback, base-change-map-cech, pbc affine sections) do not reach the item; new node unsplit, created from item but strictly broader (0A1H), not a restatement. Cross-unit pbc nodes are generic tools, accepted. No fault missed by the second reading."
+ }
 }
