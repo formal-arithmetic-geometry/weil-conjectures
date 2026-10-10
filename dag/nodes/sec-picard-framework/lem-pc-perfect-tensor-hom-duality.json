@@ -23,12 +23,72 @@
   "def-pc-scheme",
   "def-pc-derived-category",
   "def-pc-perfect-complex",
-  "def-pc-derived-pullback",
-  "def-pc-kflat-complex"
+  "def-pc-derived-pullback"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Define K^\\vee globally as R\\mathcal Hom(K,\\mathcal O_X). By [lem-pc-perfect-rhom-tensor-comparison], K^\\vee lies in D_QCoh(O_X), the global evaluation map \\epsilon:K^\\vee\\otimes^L K\\to\\mathcal O_X and the global coevaluation \\eta:\\mathcal O_X\\to K\\otimes^L K^\\vee (corresponding to \\mathrm{id}_K under K\\otimes^L K^\\vee\\cong R\\mathcal Hom(K,K)) satisfy the zig-zag identities, so (K,K^\\vee,\\epsilon,\\eta) is an exact pairing in D_QCoh(O_X). All these maps are defined globally; no gluing of morphisms in the derived category is used.",
+   "uses": [
+    "lem-pc-perfect-rhom-tensor-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/cohomology.tex",
+    "place": "Tag 08DQ, lemma-dual-perfect-complex; Tag 0FPC, cohomology-example-dual-derived"
+   }
+  },
+  {
+   "text": "Apply the tensor-Hom equivalences for an exact dual pair [lem-pc-dualizable-tensor-hom-equivalences] in the monoidal category D_QCoh(O_X), with the globally defined dual pair (K,K^\\vee). They give naturally Hom(K\\otimes^L A,B) \\cong Hom(A,K^\\vee\\otimes^L B) and Hom(A,K\\otimes^L B) \\cong Hom(K^\\vee\\otimes^L A,B) for all quasi-coherent A and B.",
+   "uses": [
+    "lem-pc-dualizable-tensor-hom-equivalences",
+    "lem-pc-perfect-rhom-tensor-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/cohomology.tex",
+    "place": "Tag 08DQ, lemma-dual-perfect-complex and Tag 0FPC, cohomology-example-dual-derived"
+   }
+  },
+  {
+   "text": "Let g:X'\\to X. Perfectness of Lg^*K is local on X': on the inverse images of an open cover of X on which K is isomorphic to a strictly perfect complex \\mathcal E^\\bullet, [lem-pc-flat-complex-derived-pullback] represents Lg^*K by the termwise pullback g^*\\mathcal E^\\bullet [def-pc-derived-pullback], whose terms are again direct summands of finite free modules (pullback preserves finite free modules and idempotent summands), so Lg^*K is perfect [def-pc-perfect-complex]; only the isomorphism class of a restriction is checked locally. By [lem-pc-derived-pullback-tensor-qcoh], Lg^*K and Lg^*(K^\\vee) lie in D_QCoh(O_{X'}). Applying [lem-pc-perfect-rhom-tensor-comparison] on X' to the perfect complex Lg^*K gives an exact pairing (Lg^*K, R\\mathcal Hom(Lg^*K,\\mathcal O_{X'})) in D_QCoh(O_{X'}), and the same node gives the global base-change isomorphism Lg^*(K^\\vee)\\cong R\\mathcal Hom(Lg^*K,\\mathcal O_{X'}). Transporting the evaluation and coevaluation along this isomorphism makes (Lg^*K,Lg^*(K^\\vee)) an exact pairing, i.e. Lg^*(K^\\vee) is a dual of Lg^*K.",
+   "uses": [
+    "def-pc-perfect-complex",
+    "def-pc-derived-pullback",
+    "lem-pc-flat-complex-derived-pullback",
+    "lem-pc-derived-pullback-tensor-qcoh",
+    "lem-pc-perfect-rhom-tensor-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/cohomology.tex; literature/stacks-project/perfect.tex",
+    "place": "Tag 08DQ, cohomology-lemma-dual-perfect-complex; Tag 0FPC; Tag 0GM7, cohomology-lemma-pullback-internal-hom (1); Tag 09UA, cohomology-lemma-perfect-pullback; Tag 08DW"
+   }
+  },
+  {
+   "text": "Applying the exact-pairing tensor-Hom equivalences of [lem-pc-dualizable-tensor-hom-equivalences] in D_QCoh(O_{X'}) to the exact pairing (Lg^*K,Lg^*(K^\\vee)) of Step 3 gives both displayed isomorphisms on X' for arbitrary quasi-coherent A and B, naturally in A and B.",
+   "uses": [
+    "lem-pc-dualizable-tensor-hom-equivalences"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/cohomology.tex",
+    "place": "Tag 08DQ, lemma-dual-perfect-complex and Tag 0FPC, cohomology-example-dual-derived"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-perfect-rhom-tensor-comparison",
+  "lem-pc-dualizable-tensor-hom-equivalences",
+  "def-pc-derived-pullback",
+  "def-pc-perfect-complex",
+  "lem-pc-flat-complex-derived-pullback",
+  "lem-pc-derived-pullback-tensor-qcoh"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/duality.tex",
+  "place": "Tag 0A9T proof"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -60,12 +120,42 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-sc-smooth-proper-tensor-perfect-case",
   "by": "worker",
   "date": "2026-10-10"
  },
  "chapter": "sec-picard-framework",
- "unit": "sk-thm-picard-duality"
+ "unit": "sk-thm-picard-duality",
+ "split_report": {
+  "date": "2026-10-11",
+  "item": "lem-pc-perfect-tensor-hom-duality",
+  "worker": "stage1",
+  "summary": "Repaired the returned split by defining K^\\vee globally as RHom(K,O_X), using the new perfect-complex derived-Hom comparison for global evaluation and bidual maps, and checking only isomorphism locality. The pullback step uses the existing strong-monoidal derived-pullback statement and the global RHom base-change map; no derived-category morphism is glued from local data.",
+  "blueprint": "Realizes the comparison-isomorphism clause of lem-sc-finite-duality: intrinsic derived-Hom dual, tensor-Hom adjunction, and compatibility after derived pullback.",
+  "tool_uses": [
+   {
+    "node": "lem-pc-flat-complex-derived-pullback",
+    "why": "The pullback step needs the existing termwise computation for bounded flat complexes; the Picard-duality unit does not provide a separate derived-pullback computation lemma."
+   },
+   {
+    "node": "lem-pc-derived-pullback-tensor-qcoh",
+    "why": "The pullback step needs that derived pullback preserves D_QCoh, so that Lg^*K and Lg^*(K^vee) are objects of the monoidal category D_QCoh(O_X'); the Picard-duality unit does not provide this generic functorial tool."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pc-flat-complex-derived-pullback",
+  "lem-pc-derived-pullback-tensor-qcoh"
+ ],
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-pth2428",
+  "group": "H1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-pth2428 (reviewer sub-agent of L); spot-checked: Return points: 1 (Step 1 gluing) repaired by global K^vee=RHom(K,O) and new 08DQ node; 2 (Step 3 gluing) repaired, only isomorphism/perfectness checked locally; 3 not repaired: Step 1 asserted zig-zags not in any cited statement. FIX more, RETURN less: (C1) added Tag 0FPC exact-pairing clause and K^vee perfect in D_QCoh to lem-pc-perfect-rhom-tensor-comparison, dropped its ill-posed pulled-back ev/coev clause; (C4) Step 3 cited lem-pc-derived-pullback-tensor-qcoh for strong monoidality, which it does not state: now used only for D_QCoh preservation, and the dual on X' comes from the node applied to Lg^*K plus the 0GM7 base-change iso; tool_uses why corrected; (orphan) lem-pc-perfect-termwise-dual cited by no step, dropped. Earlier accepted points (pullback clause kept, no class b, Mathlib leaf tensorLeft/RightHomEquiv) not reopened. Grep of Mathlib for ExactPairing in scheme/derived files recorded on the new node.; 2 file(s) fixed by the reviewer"
+ },
+ "lead_note": "2026-10-10 L (R-pth2428): Return of 20:25 repaired for gluing (global RHom maps, isomorphism checked locally); its point 3 (zig-zags) and Step 3's strong-monoidality claim were not, fixed here"
 }
