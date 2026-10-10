@@ -1720,3 +1720,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 15:06 L: merged deliver/C1/lem-sc-generic-vanishing-acyclic (reviewer FIX; first push; new nodes: 1)
 - 15:06 L: returned deliver/H1/lem-pc-nowhere-dense-dim-zero (reviewer RETURN: 1. E3/E5: step 2 of lem-pc-nowhere-dense-dim-zero: the step says the chain W_0 < W_1 <= C_i 'would have length at least )
 - 15:06 L: lem-sc-generic-vanishing-kernel-colimit created.by/date filled (maintainer field; reviewer R-gva's retry without it was fine)
+- 15:07 L: merged deliver/K1/lem-sc-p1-proj-shifted-free-twist (reviewer PASS; first push; new nodes: 0)

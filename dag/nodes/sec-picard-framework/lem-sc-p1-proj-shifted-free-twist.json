@@ -21,9 +21,54 @@
   "lem-sc-p1-twist-exists",
   "def-weil-pbc-proj-twisting-sheaf"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "For each standard chart U_i=D_+(x_i), the definition of the associated sheaf gives Gamma(U_i,~S(d))=(S_{x_i})_d. Multiplication by x_i^{-d} identifies this module with k[x_{1-i}/x_i] and sends the distinguished degree-d element x_i^d to 1; equivalently, x_i^d is a free generator of the restriction of ~S(d) on U_i.",
+   "uses": [
+    "def-weil-pbc-proj-twisting-sheaf",
+    "def-sc-p1-standard"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/constructions.tex",
+    "place": "Definition 01MN (1), Lemma 01M7 (2),(3), specialized to S=k[x_0,x_1] and f=x_i"
+   }
+  },
+  {
+   "text": "On U_{01}, write t=x_1/x_0. Under the chart identifications from the preceding step, the two generators satisfy x_0^d=(x_0/x_1)^d x_1^d=t^{-d}x_1^d. Thus the transition map for ~S(d) is the transition prescribed in the definition of the twisted module O_P(d). By the existence and uniqueness statement for that glued module, these chart identifications glue to an isomorphism ~S(d) ~= O_P(d).",
+   "uses": [
+    "def-weil-pbc-proj-twisting-sheaf",
+    "def-sc-p1-standard",
+    "lem-sc-p1-twist-exists"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/constructions.tex",
+    "place": "Definition 01MN (1) and Lemma 01M7 (2),(3), with the transition relation on D_+(x_0) cap D_+(x_1)"
+   }
+  },
+  {
+   "text": "For a finite direct sum of shifts, localization and taking the degree-d part commute with finite direct sums, so the associated sheaf is the finite direct sum of the associated sheaves of the summands. Applying the isomorphism of the preceding step to each summand gives the corresponding finite direct sum of twists.",
+   "uses": [
+    "def-weil-pbc-proj-twisting-sheaf"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/constructions.tex",
+    "place": "Definition 01M6 (3) and the degree-zero localization formula in Definition 01MN (1)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-proj-twisting-sheaf",
+  "def-sc-p1-standard",
+  "lem-sc-p1-twist-exists"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/constructions.tex",
+  "place": "Definitions 01M6 and 01MN and Lemma 01M7"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -48,10 +93,34 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-sc-p1-graded-resolution"
  },
  "chapter": "sec-picard-framework",
- "unit": "sk-thm-picard-duality"
+ "unit": "sk-thm-picard-duality",
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "lem-sc-p1-proj-shifted-free-twist",
+  "worker": "stage1",
+  "summary": "Split the identification into the two standard-chart computations and the finite-direct-sum consequence. The chart formula comes from Stacks Definitions 01M6 and 01MN and Lemma 01M7; the overlap calculation x_0^d=t^{-d}x_1^d matches the convention in def-sc-p1-standard, and lem-sc-p1-twist-exists supplies uniqueness of the glued module. No new nodes were needed, and the existing Mathlib searches remain recorded as no match.",
+  "blueprint": "Realizes the final clause of the blueprint proof for lem-sc-p1-graded-resolution: identifying each associated sheaf of a shifted free module with the corresponding twist.",
+  "tool_uses": [
+   {
+    "node": "lem-sc-p1-twist-exists",
+    "why": "Its statement supplies existence and uniqueness of the glued rank-one module with the prescribed transition, which is the comparison target in the overlap step."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sc-p1-twist-exists"
+ ],
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-psf",
+  "group": "K1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-psf (reviewer sub-agent of L); spot-checked: Source: blueprint lem-sc-p1-graded-resolution proof final clause (S(d)~ = O(d)) and Stacks constructions 01M6/01MN/01M7; statement unchanged. Step 1: def-weil-pbc-proj-twisting-sheaf (2) gives Gamma(D_+(x_i),~S(d))=(S_{x_i})_d, free over S_(x_i)=k[x_{1-i}/x_i] on x_i^d for every integer d; freeness of the restriction to U_i follows from the same formula on the basis D_+(x_i g) with localization restrictions (C2). Step 2: g_0=x_0^d, g_1=x_1^d, x_0^d=s^d x_1^d=t^{-d}x_1^d, exactly the glueing relation of def-sc-p1-standard (and g_0=x_0,g_1=x_1 at d=1); so ~S(d) is a twisted structure sheaf and lem-sc-p1-twist-exists uniqueness gives the isomorphism. Step 3: M(+)N has (M(+)N)_(f)=M_(f)(+)N_(f) with componentwise restrictions; uniqueness in def-weil-pbc-proj-twisting-sheaf (1) gives the sum decomposition (elementary). Tool use lem-sc-p1-twist-exists accepted as generic (existence/uniqueness of glued O(d)); other cited nodes are definitions already in stmt_deps. Small cases d=0 (g_i=1), d=1, d=-1 (x_0^{-1}=t x_1^{-1}) checked. No new nodes, no Mathlib leaf; slopmaster2 twist is a different construction, no attachment. Only split fields changed. Start Sat Oct 10 03:06:29 PM UTC 2026, end Sat Oct 10 03:07:06 PM UTC 2026."
+ }
 }
