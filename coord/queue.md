@@ -1,8 +1,8 @@
 # Work queue
 
-853 items; claim with `tools/claim.py next <group> [--stage N]`.
+858 items; claim with `tools/claim.py next <group> [--stage N]`.
 
-## Stage 1: nodes to split (369)
+## Stage 1: nodes to split (373)
 
 | node | distance to a target | Lean state on the done branch |
 |---|---|---|
@@ -16,7 +16,6 @@
 | `lem-weil-pbc-finite-product-normal` | 1015 | none |
 | `lem-weil-pbc-finite-type-etale-finite-factor-decomposition` | 1015 | none |
 | `lem-weil-pbc-limit-module-essentially-finite-presentation-over-system` | 1015 | none |
-| `lem-weil-pbc-local-nagata-domain-analytically-unramified` | 1015 | none |
 | `lem-weil-pbc-openness-of-flatness` | 1015 | none |
 | `lem-weil-pbc-regular-local-quotient-kernel-parameters` | 1015 | none |
 | `lem-weil-pbc-sections-morphism-to-proj-polynomial-ring` | 1015 | none |
@@ -54,12 +53,14 @@
 | `def-weil-pbc-finite-split-hypercover` | 3006 | none |
 | `lem-galois-aut-profinite` | 3006 | none |
 | `lem-galois-inverse-image-representable` | 3006 | none |
-| `lem-galois-pi1-finite-etale-image-stabilizer` | 3006 | none |
 | `lem-pc-presheaf-module-inverse-image-adjunction` | 3006 | none |
 | `lem-sc-flat-base-change-coherent` | 3006 | sorry_here |
 | `lem-weil-pbc-hypercover-finite-simplex-lifting` | 3006 | none |
 | `lem-weil-pbc-hypercover-free-resolution` | 3006 | none |
 | `def-sc-divisor` | 3007 | none |
+| `def-weil-pbc-semi-representable-object` | 3007 | none |
+| `def-weil-pbc-simplicial-hom-object` | 3007 | none |
+| `lem-galois-finite-etale-connected-object` | 3007 | none |
 | `lem-galois-transitive` | 3007 | none |
 | `lem-sc-etale-affine-qcoherent` | 3007 | none |
 | `lem-sc-etale-qcoherent-descent` | 3007 | none |
@@ -67,9 +68,11 @@
 | `lem-sc-ga-cohomology` | 3007 | none |
 | `lem-sc-generic-cohomology-comparison` | 3007 | rests_on_sorry |
 | `lem-sc-local-ring-artin-schreier-kernel` | 3007 | none |
-| `lem-sc-positive-degree-ample` | 3007 | rests_on_sorry |
 | `lem-weil-pbc-finite-coproduct-lfp-qcqs` | 3007 | none |
+| `lem-weil-pbc-hypercover-one-more-simplex` | 3007 | none |
 | `lem-weil-pbc-matching-object-fibre-product` | 3007 | none |
+| `lem-weil-pbc-semi-representable-covering-permanence` | 3007 | none |
+| `lem-weil-pbc-simplicial-set-add-simplices` | 3007 | none |
 | `thm-av-final` | 3007 | rests_on_sorry |
 | `thm-sc-jacobian-representability` | 3007 | rests_on_sorry |
 | `def-pc-divisor-line-bundle` | 3008 | none |
@@ -91,6 +94,7 @@
 | `lem-sc-smooth-connected-curve-local-rings` | 3008 | none |
 | `lem-sc-sylow-module-filtration` | 3008 | none |
 | `lem-sc-zero-generic-acyclic` | 3008 | rests_on_sorry |
+| `lem-weil-pbc-simplicial-hom-object-exists` | 3008 | none |
 | `thm-sc-theorem-of-the-base` | 3008 | rests_on_sorry |
 | `def-exc-continuous-cohomology` | 3009 | none |
 | `def-pc-curve` | 3009 | none |
@@ -376,7 +380,7 @@
 | `def-exc-jacobian-presentation` | - | none |
 | `lem-zl-noether-normalization-dimension` | - | none |
 
-## Stage 2: nodes to state (484)
+## Stage 2: nodes to state (485)
 
 | node | distance to Mathlib | kind |
 |---|---|---|
@@ -844,6 +848,7 @@
 | `lem-pc-hilb-smooth` | 2 | state |
 | `lem-sc-c1-brauer-trivial` | 2 | state |
 | `lem-sc-c1-finite-extension` | 2 | state |
+| `lem-sc-positive-degree-ample` | 2 | state |
 | `lem-sc-regular-dim1-dvr` | 2 | state |
 | `lem-sc-smooth-regular` | 2 | state |
 | `lem-weil-pbc-finite-type-lift-nilpotent` | 2 | state |
@@ -865,7 +870,7 @@
 | `lem-weil-pbc-p1-field-dimension-one` | 4 | state |
 | `lem-weil-pbc-projective-space-zero-isomorphism` | 4 | state |
 
-Not open yet: 387 nodes that wait for stage 1, 904 nodes that wait for a statement dependency.
+Not open yet: 391 nodes that wait for stage 1, 906 nodes that wait for a statement dependency.
 
 ## Stage 3: modules to prove (0)
 
