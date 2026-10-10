@@ -2535,3 +2535,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 20:35 L: merged deliver/H1/pqf-lem-qf-finitefibres (reviewer FIX; first push; new nodes: 0)
 - 20:35 L: merged deliver/K1/def-nagata-final-noetherian-base-system (reviewer FIX; first push; new nodes: 0)
 - 20:36 L: returned deliver/F1/lem-pc-derived-lower-truncation-step-triangle (reviewer RETURN: Reviewer R-dlt2336. (1) E / false new statement (lem-pc-derived-lower-truncation-step-ses): with tau_{>=m}K = K^m/Im d^{)
+- 20:36 L: merged deliver/M1/pqf-lem-leray-lowdegree (reviewer PASS; first push; new nodes: 1)

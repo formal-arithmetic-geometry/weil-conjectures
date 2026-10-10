@@ -3,7 +3,7 @@
  "blueprint": {
   "is": "pqf-lem-leray-lowdegree",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "Low degree terms of the Leray spectral sequence",
@@ -17,17 +17,21 @@
  ],
  "proof": [
   {
-   "text": "The spectral sequence of [pqf-lem-leray] is\n$E_2^{p,q}=\\mathrm H^p(Y,R^qf_*\\mathcal F)$; the terms with $p+q=0,1,2$\nare the displayed sequence, exact by the standard edge and connecting\nmaps of a spectral sequence and by the cohomology long exact\nsequences of [pqf-def-cohomology] (the maps\n$E_2^{0,1}\\to E_2^{2,0}$ being the second differential and its\ncomposites). If $R^1f_*\\mathcal F=0$, the middle term vanishes and the\nresulting exact sequence gives the stated isomorphism.",
+   "text": "The spectral sequence of [pqf-lem-leray] has $E_2^{p,q}=\\mathrm H^p(Y,R^qf_*\\mathcal F)$ and abuts to $\\mathrm H^{p+q}(X,\\mathcal F)$. Apply the generic five-term exact-sequence statement [lem-pqf-leray-five-term] to obtain the exact sequence in the item, identifying its edge and transgression maps with the canonical Leray maps via [lem-sp-grothendieck-edge-maps]. The definition of cohomology [pqf-def-cohomology] supplies the identifications of the derived-functor terms with the displayed cohomology groups. If $R^1f_*\\mathcal F=0$, then $\\mathrm H^0(Y,R^1f_*\\mathcal F)=0$, so exactness makes the map $\\mathrm H^1(Y,f_*\\mathcal F)\\to\\mathrm H^1(X,\\mathcal F)$ both injective and surjective, hence an isomorphism.",
    "uses": [
     "pqf-lem-leray",
-    "pqf-def-cohomology"
+    "pqf-def-cohomology",
+    "lem-pqf-leray-five-term",
+    "lem-sp-grothendieck-edge-maps"
    ],
    "elementary": false
   }
  ],
  "proof_deps": [
   "pqf-lem-leray",
-  "pqf-def-cohomology"
+  "pqf-def-cohomology",
+  "lem-pqf-leray-five-term",
+  "lem-sp-grothendieck-edge-maps"
  ],
  "proof_origin": {
   "by": "agent",
@@ -36,7 +40,7 @@
  },
  "mathlib_searches": [],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [],
  "blueprint_kind": "lemma",
@@ -59,5 +63,30 @@
   }
  },
  "chapter": "sec-abelian-varieties",
- "unit": "sk-prop-av-pqf-finite"
+ "unit": "sk-prop-av-pqf-finite",
+ "split_report": {
+  "date": "2026-10-11",
+  "item": "pqf-lem-leray-lowdegree",
+  "worker": "stage1",
+  "summary": "Checked the imported statement against the Leray spectral-sequence route. No sorry-free declaration states the scheme-cohomology five-term sequence. Split out one unsplit generic node for the five-term exact sequence of a first-quadrant cohomological spectral sequence, then made the item instantiate it with the E_2-page and abutment supplied by pqf-lem-leray and pqf-def-cohomology; the existing edge-map node identifies the canonical maps. The R^1-vanishing conclusion is an exactness chase.",
+  "blueprint": "Realizes the sole blueprint proof paragraph: the Leray E_2 identification, the total-degree 0-1-2 five-term exact sequence, and the R^1-vanishing isomorphism.",
+  "tool_uses": [
+   {
+    "node": "lem-sp-grothendieck-edge-maps",
+    "why": "Its statement identifies the canonical bottom and left edge maps of the Grothendieck spectral sequence used to name the Leray maps in the instantiated five-term sequence."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sp-grothendieck-edge-maps",
+  "lem-sp-grothendieck-edge-maps"
+ ],
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-pll2339",
+  "group": "M1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-pll2339 (reviewer sub-agent of L); spot-checked: C1: five-term sequence cited to new node lem-pqf-leray-five-term (no existing low-degree/five-term/transgression node in dag/nodes; not a duplicate of lem-weil-pbc-first-quadrant-row-collapse or lem-sp-edge-collapse, which need row/column vanishing); pqf-lem-leray cited, not restated (no class b); C4: maps are the bottom/left edge maps and d2 per the new node, Leray naming via generic tool lem-sp-grothendieck-edge-maps (accepted); new node statement mathematically correct, unsplit, searches recorded; my grep of Mathlib (Algebra/Homology/SpectralSequence, SpectralObject) finds no five-term/low-degree theorem (verdict: no match); R^1=0 corollary is exactness. Second reading: no fault missed. No repairs."
+ }
 }
