@@ -2269,3 +2269,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 18:39 L: merged deliver/F1/lem-sc-derived-k-injective-restrict-open (reviewer FIX; first push; new nodes: 1)
 - 18:40 L: merged deliver/G1/lem-weil-pbc-fpqc-affine-standard-refinement (reviewer PASS; first push; new nodes: 0)
 - 18:41 L: merged deliver/H1/lem-pc-rf-perfect-base-change (reviewer PASS; first push; new nodes: 1)
+- 18:41 L: merged deliver/F1/lem-pc-zariski-coverings-are-fppf (reviewer FIX; first push; new nodes: 0)

@@ -3,7 +3,7 @@
  "blueprint": {
   "is": "lem-pc-zariski-coverings-are-fppf",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "Zariski coverings are fppf coverings",
@@ -17,22 +17,53 @@
   "def-pc-morphism-conventions",
   "def-pc-scheme"
  ],
- "proof": [
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
   {
-   "text": "Each $U_i\\to T$ is locally of finite presentation (an open immersion\n$U\\to T$ is, on affine patching of $T$ by $\\operatorname{Spec}(A)$ and $U$ by\n$\\operatorname{Spec}(A_f)$, the map $\\operatorname{Spec}(A_f)\\to\\operatorname{Spec}(A)$; $A_f=A[x]/(fx-1)$ is a\nfinitely presented $A$-algebra) and flat (the localization $A\\to A_f$\nis flat: localization is exact). Hence every $U_i\\to T$ is flat and\nlocally of finite presentation, so the family is an fppf covering.",
-   "uses": [],
-   "elementary": null
+   "tool": "leanfinder",
+   "query": "Zariski covering family of open immersions is an fppf covering",
+   "results": "No direct family-level declaration; open-immersion memberwise declarations found",
+   "date": "2026-10-11",
+   "verdict": "no direct match"
+  },
+  {
+   "tool": "loogle",
+   "query": "ZariskiCovering Fppf",
+   "results": "0 hits: unknown identifiers",
+   "date": "2026-10-11",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "Zariski.*Fppf|fppf.*covering Mathlib/AlgebraicGeometry",
+   "results": "0 hits",
+   "date": "2026-10-11",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "open immersion family fppf covering",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-11",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rn -i fppf Mathlib (slopmaster2 .lake/packages/mathlib)",
+   "results": "AlgebraicGeometry.Scheme.zariskiPrecoverage_le_fppfPrecoverage at Mathlib/AlgebraicGeometry/Sites/Fpqc.lean:44",
+   "date": "2026-10-11",
+   "verdict": "match: exact (reviewer R-zcf1841)"
   }
  ],
- "proof_deps": [],
- "proof_origin": {
-  "by": "agent",
-  "document": "literature/blueprint/master/blueprint/sec-picard-framework/sk-def-picard-pic/lem-pc-zariski-coverings-are-fppf.md",
-  "place": "## Proof"
+ "mathlib_match": {
+  "declaration": "AlgebraicGeometry.Scheme.zariskiPrecoverage_le_fppfPrecoverage",
+  "file": "Mathlib/AlgebraicGeometry/Sites/Fpqc.lean",
+  "line": 44,
+  "how": "exact: zariskiPrecoverage ≤ fppfPrecoverage (Fpqc.lean 44-46). zariskiPrecoverage = precoverage @IsOpenImmersion (Sites/MorphismProperty.lean 125) and fppfPrecoverage = precoverage (@Flat ⊓ @LocallyOfFinitePresentation) (Fpqc.lean 40-41), where precoverage P = jointly surjective families of P-morphisms (MorphismProperty.lean 76-79): a Zariski covering of T (open immersions whose images cover T) is an fppf covering of T. Read with sed -n."
  },
- "mathlib_searches": [],
- "mathlib_match": null,
- "status": "imported",
+ "status": "mathlib",
  "merged_into": null,
  "import_flags": [],
  "blueprint_kind": "lemma",
@@ -61,5 +92,21 @@
   }
  },
  "chapter": "sec-picard-framework",
- "unit": "sk-def-picard-pic"
+ "unit": "sk-def-picard-pic",
+ "split_report": {
+  "date": "2026-10-11",
+  "item": "lem-pc-zariski-coverings-are-fppf",
+  "worker": "stage1",
+  "summary": "Reviewer FIX (R-zcf1841): Mathlib states the item exactly as AlgebraicGeometry.Scheme.zariskiPrecoverage_le_fppfPrecoverage (Sites/Fpqc.lean:44); status mathlib, proof removed (a leaf carries no proof), the memberwise node lem-pc-open-immersion-flat-lfp dropped. Statement and stmt_deps unchanged.",
+  "blueprint": "Realizes the proof paragraph: memberwise flatness and local finite presentation, followed by the fppf covering conclusion.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-zcf1841",
+  "group": "F1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-zcf1841 (reviewer sub-agent of L); spot-checked: Read Mathlib with sed: Sites/Fpqc.lean 36-46 (fppfPrecoverage = precoverage (Flat ⊓ LocallyOfFinitePresentation); zariskiPrecoverage_le_fppfPrecoverage at line 44), MorphismProperty.lean 76-79 and 125 (precoverage = jointly surjective P-families; zariskiPrecoverage = precoverage IsOpenImmersion); Flat.lean 59 and FinitePresentation.lean 62 also confirmed. FIX more, RETURN less: B8/(c) the item itself is stated exactly by AlgebraicGeometry.Scheme.zariskiPrecoverage_le_fppfPrecoverage, so the split was unnecessary: item made a Mathlib leaf (status mathlib, mathlib_match, proof and proof_deps emptied, my grep recorded in mathlib_searches); new node lem-pc-open-immersion-flat-lfp dropped (--drop-nodes). Second reading by F1 missed this (its searches did not find the precoverage lemma).; 1 file(s) fixed by the reviewer"
+ }
 }
