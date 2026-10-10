@@ -1785,3 +1785,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 15:25 L: merged deliver/C1/lem-sc-glue-component-reduced-cover-sections (reviewer PASS; first push; new nodes: 0)
 - 15:25 L: merged deliver/E1/lem-pc-algebraic-dim-zero-affine-finite (reviewer FIX; first push; new nodes: 1)
 - 15:26 L: merged deliver/F1/lem-sc-glue-component-transition-cocycle (reviewer PASS; first push; new nodes: 0)
+- 15:26 L: returned deliver/F1/lem-weil-pbc-ext-one-direct-sum (reviewer RETURN: 1. D1: steps 2-3 and the two new nodes: lem-weil-pbc-ext-one-direct-sum-assembly is verbatim the surjectivity of Phi_A a)
