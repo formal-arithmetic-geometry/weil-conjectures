@@ -1,0 +1,80 @@
+{
+ "id": "lem-pc-ring-dimension-supremum-heights",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pc-dim-base-change",
+   "place": "proof, last paragraph: 'X is a curve, covered by affine opens Spec(A_i) ... (and dim X = max_i dim A_i = 1)': the passage from the dimensions of the local rings (A_i)_p of the points of Spec(A_i) to dim A_i, i.e. dim A_i = sup over primes p of A_i of dim (A_i)_p (Stacks 00KG), inside the computation of the dimension of a scheme from an affine open cover",
+   "via": [
+    "lem-pc-dimension-affine-open-cover"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "The Krull dimension of a ring is the supremum of the heights of its primes",
+ "statement": "Let $R$ be a commutative ring. For a prime ideal $\\mathfrak p\\subset R$ let $\\operatorname{ht}\\mathfrak p\\in\\{0,1,2,\\ldots,\\infty\\}$ be the supremum of the integers $t\\ge0$ for which there is a chain $\\mathfrak p_0\\subsetneq\\mathfrak p_1\\subsetneq\\cdots\\subsetneq\\mathfrak p_t$ of prime ideals of $R$ with $\\mathfrak p_t\\subseteq\\mathfrak p$. Then the Krull dimension of $R$ [def-weil-pbc-krull-dimension-ring] is\n$$\n\\dim R=\\sup_{\\mathfrak p\\subset R\\ \\text{prime}}\\operatorname{ht}\\mathfrak p\\in\\{-\\infty,0,1,2,\\ldots,\\infty\\},\n$$\nthe supremum of the empty family being $-\\infty$ (the case $R=0$).",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Algebra, Lemma 00KG (algebra-lemma-dimension-height, algebra.tex line 14353: the Krull dimension of R is the supremum of the heights of its (maximal) primes), with Definition 00KF (definition-height, line 14347: the height of p is dim R_p, which equals the supremum of the chains below p by [lem-weil-pbc-localization-dimension-chains-below-prime]); tags verified in stacks-project/tags/tags"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-krull-dimension-ring"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Krull dimension of a ring is the supremum of the heights of its prime ideals; also 'ringKrullDim equals supremum of heights of primes', 'Krull dimension equals supremum of heights' (MCP tool and direct POST to leansearch.net)",
+   "results": "none: HTTP 500 Internal Server Error on all four attempts (2026-10-10, between 13:35 and 13:38 UTC); the item's own LeanSearch record (same date) for the scheme statement listed Ideal.sup_height_eq_ringKrullDim, Ideal.sup_primeHeight_eq_ringKrullDim, Order.krullDim_eq_iSup_height (Mathlib.RingTheory.Ideal.Height, Mathlib.Order.KrullDimension)",
+   "date": "2026-10-10",
+   "verdict": "service down; the candidates it gave for the item are checked below"
+  },
+  {
+   "tool": "loogle",
+   "query": "Order.krullDim_eq_iSup_height",
+   "results": "Order.krullDim_eq_iSup_height {α} [Preorder α] : Order.krullDim α = ⨆ a, ↑(Order.height a) (Mathlib.Order.KrullDimension)",
+   "date": "2026-10-10",
+   "verdict": "match (specialized to α = PrimeSpectrum R)"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Krull dimension of a commutative ring equals the supremum over prime ideals p of the height of p",
+   "results": "Ideal.sup_primeHeight_eq_ringKrullDim, Ideal.sup_primeHeight_of_maximal_eq_ringKrullDim, ringKrullDim_le_iff_height_le, Ideal.sup_height_eq_ringKrullDim, Ideal.primeHeight_le_ringKrullDim (Mathlib.RingTheory.Ideal.Height), ringKrullDim, PrimeSpectrum.topologicalKrullDim_eq_ringKrullDim",
+   "date": "2026-10-10",
+   "verdict": "match in substance; in this Mathlib Ideal.sup_primeHeight_eq_ringKrullDim is private (Height.lean:522) and Ideal.sup_height_eq_ringKrullDim (Height.lean:489) is over proper ideals and needs Nontrivial R; the exact form is Order.krullDim_eq_iSup_height"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rn 'krullDim_eq_iSup_height\\|sup_primeHeight\\|sup_height_eq_ringKrullDim\\|ringKrullDim_le_iff_height_le' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib",
+   "results": "Order/KrullDimension.lean:849 krullDim_eq_iSup_height, :795 krullDim_eq_iSup_height_of_nonempty; RingTheory/Ideal/Height.lean:364 ringKrullDim_le_iff_height_le, :489 Ideal.sup_height_eq_ringKrullDim, :522 private Ideal.sup_primeHeight_eq_ringKrullDim",
+   "date": "2026-10-10",
+   "verdict": "match: Order.krullDim_eq_iSup_height"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "Order.krullDim_eq_iSup_height",
+  "file": "Mathlib/Order/KrullDimension.lean",
+  "line": 849,
+  "how": "specializes in one line: `lemma krullDim_eq_iSup_height : krullDim α = ⨆ (a : α), ↑(height a)` (Order/KrullDimension.lean:849) for α = PrimeSpectrum R ordered by inclusion, with `ringKrullDim R := krullDim (PrimeSpectrum R)` (RingTheory/KrullDimension/Basic.lean:30) and `Order.height a = ⨆ (p : LTSeries α) (_ : p.last ≤ a), p.length` (Order/KrullDimension.lean:87), which on PrimeSpectrum R is the node's ht p (the supremum of the lengths t of chains p_0 < ... < p_t with p_t ⊆ p; equal to Ideal.height p.asIdeal by PrimeSpectrum.height_eq_orderHeight, RingTheory/Ideal/Height.lean:44); the supremum is in WithBot ℕ∞ = {-∞,0,...,∞}, ⊥ for the empty spectrum. Lines read with sed -n 845,852p, 84,90p (KrullDimension.lean), 26,32p (Basic.lean), 42,47p (Height.lean) on 2026-10-10."
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-pc-dimension-affine-open-cover",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-rr"
+}

@@ -22,9 +22,70 @@
   "def-pc-dimension",
   "def-weil-pbc-krull-dimension-ring"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "(Set-up.) Fix $i$ and put $R_i=\\mathcal O_X(U_i)$. Since $U_i\\cong\\operatorname{Spec}A_i$ as schemes, $U_i$ is an affine open of $X$, and applying global sections to this isomorphism gives a ring isomorphism $R_i=\\Gamma(U_i,\\mathcal O_{U_i})\\cong\\Gamma(\\operatorname{Spec}A_i,\\mathcal O)=A_i$ [def-weil-affine-spectrum]. A ring isomorphism carries chains of prime ideals to chains of prime ideals of the same length, so $\\dim R_i=\\dim A_i$ [def-weil-pbc-krull-dimension-ring]. By [lem-weil-pbc-affine-open-spec-points] there is an open immersion $\\iota_i:\\operatorname{Spec}R_i\\to X$ with image $U_i$, and for $x\\in U_i$ the prime $\\mathfrak p_x\\subset R_i$ with $\\iota_i(\\mathfrak p_x)=x$ is unique ($\\iota_i$ is injective); conversely every prime $\\mathfrak p$ of $R_i$ is $\\mathfrak p_x$ for $x=\\iota_i(\\mathfrak p)\\in U_i$. So $x\\mapsto\\mathfrak p_x$ is a bijection from $U_i$ onto the set of primes of $R_i$.",
+   "uses": [
+    "def-weil-affine-spectrum",
+    "def-weil-pbc-krull-dimension-ring",
+    "lem-weil-pbc-affine-open-spec-points"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Schemes, Lemma 01HV (schemes-lemma-spec-sheaves, schemes.tex line 692), parts (1) and (6)"
+   }
+  },
+  {
+   "text": "(Local rings.) For $x\\in U_i$, [lem-weil-pbc-affine-open-stalk-localization] (c) gives a ring isomorphism $(R_i)_{\\mathfrak p_x}\\cong\\mathcal O_{X,x}$, so $\\dim\\mathcal O_{X,x}=\\dim(R_i)_{\\mathfrak p_x}$ (isomorphic rings have the same chains of primes). By [lem-weil-pbc-localization-dimension-chains-below-prime], $\\dim(R_i)_{\\mathfrak p_x}=\\operatorname{ht}\\mathfrak p_x$, the supremum of the lengths $t$ of chains $\\mathfrak q_0\\subsetneq\\cdots\\subsetneq\\mathfrak q_t\\subseteq\\mathfrak p_x$ of primes of $R_i$. Hence $\\dim\\mathcal O_{X,x}=\\operatorname{ht}\\mathfrak p_x$ for every $x\\in U_i$.",
+   "uses": [
+    "lem-weil-pbc-affine-open-stalk-localization",
+    "lem-weil-pbc-localization-dimension-chains-below-prime",
+    "def-weil-pbc-krull-dimension-ring"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Schemes, Lemma 01HV (schemes-lemma-spec-sheaves, schemes.tex line 692), parts (1) and (6)"
+   }
+  },
+  {
+   "text": "(Supremum over one chart.) By step 1, as $x$ runs over $U_i$ the prime $\\mathfrak p_x$ runs over all primes of $R_i$, each once. By step 2 and [lem-pc-ring-dimension-supremum-heights] applied to $R_i$, $\\sup_{x\\in U_i}\\dim\\mathcal O_{X,x}=\\sup_{\\mathfrak p\\subset R_i\\text{ prime}}\\operatorname{ht}\\mathfrak p=\\dim R_i=\\dim A_i$, in $\\{-\\infty,0,1,\\ldots,\\infty\\}$; for $U_i=\\emptyset$ both sides are $-\\infty$ ($R_i\\cong A_i$ has no prime).",
+   "uses": [
+    "lem-pc-ring-dimension-supremum-heights"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra, Definition 00KF (definition-height, line 14347) and Lemma 00KG (algebra-lemma-dimension-height, line 14353)"
+   }
+  },
+  {
+   "text": "(Conclusion.) Since $X=\\bigcup_iU_i$, the supremum over $x\\in X$ splits as a supremum of suprema: $\\dim X=\\sup_{x\\in X}\\dim\\mathcal O_{X,x}=\\sup_{i\\in I}\\sup_{x\\in U_i}\\dim\\mathcal O_{X,x}$ (every $x$ lies in some $U_i$, and every term on the right is a term on the left) [def-pc-dimension]; by step 3 this is $\\sup_{i\\in I}\\dim A_i$. ($X\\neq\\emptyset$ is only needed for $\\dim X$ to be defined by [def-pc-dimension]; then some $U_i$ is nonempty and the supremum is $\\ge0$.)",
+   "uses": [
+    "def-pc-dimension"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/properties.tex",
+    "place": "Properties, Lemma 04MU (properties-lemma-dimension, line 1233), equality (1)=(2) read with the definition of dim X as the supremum of the dimensions of the local rings"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-affine-spectrum",
+  "def-weil-pbc-krull-dimension-ring",
+  "lem-weil-pbc-affine-open-spec-points",
+  "lem-weil-pbc-affine-open-stalk-localization",
+  "lem-weil-pbc-localization-dimension-chains-below-prime",
+  "lem-pc-ring-dimension-supremum-heights",
+  "def-pc-dimension"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/properties.tex",
+  "place": "Properties, Lemma 04MU (properties-lemma-dimension; dim X = sup of the dimensions of the local rings), with Schemes, Lemma 01HV (6) (schemes.tex: O_{Spec A,p} = A_p), Algebra, Definition 00KF and Lemma 00KG (algebra.tex: height of p = dim R_p; dim R = sup of heights); the regrouping of the supremum over the cover is written out by the worker"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -50,7 +111,7 @@
  ],
  "mathlib_match": null,
  "mathlib_candidate": "AlgebraicGeometry.ringKrullDim_stalk_eq_coheight (Mathlib/AlgebraicGeometry/Properties.lean:376) with AlgebraicGeometry.coheight_eq_of_isOpenImmersion (Properties.lean:362) and Ideal.sup_height_eq_ringKrullDim (Mathlib/RingTheory/Ideal/Height.lean:489): combined over the cover they give the statement in a few lines, not one",
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "worker",
@@ -66,5 +127,13 @@
   }
  },
  "chapter": "sec-picard-framework",
- "unit": "sk-thm-picard-rr"
+ "unit": "sk-thm-picard-rr",
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "lem-pc-dimension-affine-open-cover",
+  "worker": "stage1",
+  "summary": "Split into four steps following Stacks 04MU/01HV/00KF/00KG: (1) U_i affine open with O_X(U_i) ≅ A_i and the bijection U_i ↔ Spec O_X(U_i) (Mathlib leaf lem-weil-pbc-affine-open-spec-points); (2) O_{X,x} ≅ (R_i)_{p_x} (Mathlib leaf lem-weil-pbc-affine-open-stalk-localization (c), the 01HV(6) stalk node) and dim (R_i)_p = ht p (Mathlib leaf lem-weil-pbc-localization-dimension-chains-below-prime, 00KF); (3) sup over the chart = sup of heights = dim A_i by the new Mathlib leaf lem-pc-ring-dimension-supremum-heights (00KG, Order.krullDim_eq_iSup_height); (4) regrouping of the supremum over the cover (elementary, def-pc-dimension). lem-pc-scheme-dimension-local-rings (04MU, topological dim X = sup of local dimensions) was compared and is not used: the item's dim X is def-pc-dimension, already the supremum of the local-ring dimensions, so the topological dimension never enters. lem-sc-scheme-stalk-dimension-generalization-chains (02IZ) is not needed either. No slopmaster2 declaration states the item (grep by id and by KrullDim/affine/iSup key words; IsAffineOpen.topologicalKrullDim_eq and topologicalKrullDim_le_of_iSup_eq_top are about the topological dimension, the latter only one inequality). Statement and stmt_deps unchanged.",
+  "blueprint": "The steps realize the place of lem-pc-dim-base-change's proof recorded in from.place (last paragraph: 'dim X = max_i dim A_i' for the affine cover Spec(A_i) of X and the same computation for X_K with the cover Spec(A_i ⊗_k K)): steps 1-3 compute the contribution of one chart Spec(A_i), step 4 takes the maximum over the cover."
+ },
+ "reviewed": "2026-10-10 L: 4 steps checked (chart rings; local rings are localizations at primes with dimension the height, by existing leaves; supremum over a chart is dim A_i by the new 00KG leaf Order.krullDim_eq_iSup_height, line 849 verified; the supremum splits over the cover). No tool uses. LeanSearch down."
 }

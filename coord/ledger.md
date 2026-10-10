@@ -1515,3 +1515,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 13:34 L: merged deliver/M1/lem-weil-pbc-simplicial-hom-object-standard-simplex (reviewer FIX citation; first push); preflight CITE regex now requires two hyphens ([n-1] no longer read as a citation)
 - 13:36 L: accepted lem-weil-pbc-image-presheaf-sheafification-iso: 6 steps, new Mathlib leaf lem-weil-pbc-site-sheaf-sets-epi-locally-surjective, tool_uses sections-local
 - 13:37 L: accepted lem-weil-pbc-coskeletal-map-trivial-kan (6 steps, 01A6) and lem-pc-finite-extension-alg-closed (Mathlib leaf, duplicate of lem-weil-pbc-alg-closed-finite-extension-trivial noted)
+- 13:38 L: accepted lem-pc-dimension-affine-open-cover: 4 steps (04MU/01HV/00KG), new Mathlib leaf lem-pc-ring-dimension-supremum-heights
