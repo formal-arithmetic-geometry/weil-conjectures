@@ -1,8 +1,8 @@
 # Work queue
 
-866 items; claim with `tools/claim.py next <group> [--stage N]`.
+869 items; claim with `tools/claim.py next <group> [--stage N]`.
 
-## Stage 1: nodes to split (320)
+## Stage 1: nodes to split (322)
 
 | node | distance to a target | Lean state on the done branch |
 |---|---|---|
@@ -33,7 +33,6 @@
 | `lem-sc-module-abelian-zariski-cohomology` | 3009 | none |
 | `lem-galois-fpqc-refinement-fully-faithful` | 3010 | none |
 | `lem-pc-cartier-divisor-nowhere-dense` | 3010 | none |
-| `lem-pc-dim-zero-finite-over-field` | 3010 | none |
 | `lem-pc-nowhere-dense-dim-zero` | 3010 | none |
 | `lem-pc-zero-support-finite-scheme` | 3010 | none |
 | `lem-sc-brauer-zero-all-curves` | 3010 | sorry_here |
@@ -43,10 +42,10 @@
 | `lem-sc-point-tangent-separation-closed-immersion` | 3010 | none |
 | `thm-sc-serre-duality-curve` | 3010 | rests_on_sorry |
 | `lem-exc-coinduced-discrete-embedding` | 3011 | none |
+| `lem-pc-algebraic-dim-zero-affine-finite` | 3011 | none |
 | `lem-pc-ample-affine-loci-criterion` | 3011 | none |
 | `lem-pc-base-change-closure-components` | 3011 | none |
 | `lem-pc-very-ample-descends` | 3011 | sorry_here |
-| `lem-sc-determinant-short-exact` | 3011 | none |
 | `lem-sc-finite-duality` | 3011 | rests_on_sorry |
 | `lem-sc-regular-curve-torsionfree-free` | 3011 | none |
 | `thm-sc-p1-duality` | 3011 | sorry_here |
@@ -57,6 +56,8 @@
 | `lem-pc-projective-base-change` | 3012 | none |
 | `lem-sc-dvr-saturation-line` | 3012 | none |
 | `lem-sc-ext-locally-free` | 3012 | sorry_here |
+| `lem-sc-exterior-top-direct-sum` | 3012 | none |
+| `lem-sc-local-splitting-finite-free` | 3012 | none |
 | `lem-sc-torsion-sections-generic` | 3012 | none |
 | `lem-sc-p1-coherent-proj-representation` | 3013 | none |
 | `lem-sc-p1-graded-syzygy` | 3013 | none |
@@ -312,6 +313,7 @@
 | `lem-pc-perfect-locus` | - | sorry_here |
 | `lem-sc-p1-hi-vanishing` | - | rests_on_sorry |
 | `pqf-lem-qf-locqf-qc` | - | none |
+| `def-amb-finite-locally-free-module` | - | none |
 | `lem-kun-algebraic-separable-smooth` | - | none |
 | `lem-kun-fg-separable-smooth` | - | none |
 | `lem-pc-curve-coherent-finiteness` | - | rests_on_sorry |
@@ -327,7 +329,7 @@
 | `def-exc-jacobian-presentation` | - | none |
 | `lem-zl-noether-normalization-dimension` | - | none |
 
-## Stage 2: nodes to state (546)
+## Stage 2: nodes to state (547)
 
 | node | distance to Mathlib | kind |
 |---|---|---|
@@ -396,6 +398,7 @@
 | `lem-pc-scheme-connected-iff-idempotents` | 1 | state |
 | `lem-pc-scheme-dimension-local-rings` | 1 | state |
 | `lem-sc-affine-open-finite-complement` | 1 | state |
+| `lem-sc-determinant-short-exact` | 1 | state |
 | `lem-sc-dim-one-point-outside-open-closed` | 1 | state |
 | `lem-sc-dim0-finite` | 1 | state |
 | `lem-sc-divisible-quotient-torsion` | 1 | state |
@@ -878,7 +881,7 @@
 | `lem-weil-pbc-p1-field-dimension-one` | 4 | state |
 | `lem-weil-pbc-projective-space-zero-isomorphism` | 4 | state |
 
-Not open yet: 339 nodes that wait for stage 1, 1022 nodes that wait for a statement dependency.
+Not open yet: 341 nodes that wait for stage 1, 1023 nodes that wait for a statement dependency.
 
 ## Stage 3: modules to prove (0)
 
