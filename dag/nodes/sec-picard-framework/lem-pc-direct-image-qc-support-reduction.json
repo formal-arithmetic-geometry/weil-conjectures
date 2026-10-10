@@ -13,7 +13,7 @@
  },
  "kind": "statement",
  "title": "Quasi-compact reduction for a proper-support complex",
- "statement": "Let S be a Noetherian scheme [def-pc-scheme], let f:X\\to S be locally of finite type [def-weil-finite-type-morphism], and let E be bounded with coherent cohomology on X [def-pc-derived-category], with every cohomology sheaf supported on a closed subset proper over S [def-weil-pbc-closed-subset-proper-over-base]. Then there is a quasi-compact open immersion j:X'\\hookrightarrow X containing the union of the supports of all cohomology sheaves of E such that f':=f\\circ j:X'\\to S is quasi-compact and quasi-separated and the canonical map Rf'_*j^*E\\to Rf_*E [def-pc-derived-direct-image] is an isomorphism.",
+ "statement": "Let S be a Noetherian scheme [def-pc-scheme], let f:X\\to S be locally of finite type [def-weil-finite-type-morphism], and let E be bounded with coherent cohomology on X [def-pc-derived-category], with every cohomology sheaf supported on a closed subset proper over S [def-weil-pbc-closed-subset-proper-over-base]. Then there is a quasi-compact open immersion j:X'\\hookrightarrow X containing the union of the supports of all cohomology sheaves of E such that f':=f\\circ j:X'\\to S is quasi-compact and quasi-separated and the canonical map Rf_*E\\to Rf_*Rj_*j^*E\\cong Rf'_*j^*E [def-pc-derived-direct-image] (Rf_* of the adjunction map E\\to Rj_*j^*E, followed by the composition isomorphism Rf_*\\circ Rj_*\\cong Rf'_*) is an isomorphism; in particular Rf'_*j^*E\\cong Rf_*E.",
  "source": {
   "document": "literature/stacks-project/perfect.tex",
   "place": "Derived Categories of Schemes, Tag 08EV; label perfect-lemma-perfect-direct-image, proof: sentences beginning 'Let T be the union...' through 'Thus we may replace X by X''"
@@ -25,9 +25,63 @@
   "def-weil-pbc-closed-subset-proper-over-base",
   "def-pc-derived-direct-image"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Because E is bounded, only finitely many cohomology sheaves are nonzero. The union T of their closed supports is proper over S by [lem-weil-pbc-closed-subset-proper-over-base-union-preimage](1), applied to the locally finite-type morphism f and the given proper supports.",
+   "uses": [
+    "lem-weil-pbc-closed-subset-proper-over-base-union-preimage"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/perfect.tex",
+    "place": "Tag 08EV, proof of lemma-perfect-direct-image, paragraph beginning 'Let T be the union'"
+   }
+  },
+  {
+   "text": "Regard T with its reduced induced closed subscheme structure and use its closed immersion into X. By [def-weil-pbc-closed-subset-proper-over-base](1) the morphism T\\to S is proper [def-weil-proper-morphism], in particular quasi-compact, and S is quasi-compact because it is Noetherian; hence T is quasi-compact by [lem-weil-pbc-qcqs-morphism-permanence](2); [lemma-nagata-immersion-shrink-to-closed-exists] therefore supplies a quasi-compact open immersion j:X'\\hookrightarrow X containing T. The scheme X is locally Noetherian by [pqf-lem-locnoeth-lft], because S is Noetherian (hence locally Noetherian) and f is locally of finite type. Local Noetherianity passes to the open subscheme X' by restriction of affine neighborhoods, so X' is quasi-separated by [lem-weil-pbc-locally-noetherian-quasi-separated]. The Noetherian scheme S is quasi-separated by [lem-weil-pbc-locally-noetherian-quasi-separated]. Thus f'=f\\circ j is quasi-compact and quasi-separated by [lem-weil-pbc-qcqs-morphism-permanence](1): X' is quasi-compact and quasi-separated, and S is quasi-separated.",
+   "uses": [
+    "def-weil-pbc-closed-subset-proper-over-base",
+    "def-weil-proper-morphism",
+    "lemma-nagata-immersion-shrink-to-closed-exists",
+    "pqf-lem-locnoeth-lft",
+    "lem-weil-pbc-locally-noetherian-quasi-separated",
+    "lem-weil-pbc-qcqs-morphism-permanence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/perfect.tex",
+    "place": "Tag 08EV, support reduction through 'there exists a quasi-compact open X'"
+   }
+  },
+  {
+   "text": "All cohomology sheaves of E are supported on T\\subseteq X', so the supported-open pushforward statement [lem-pc-supported-open-pushforward] gives a canonical isomorphism E\\cong Rj_*j^*E. Applying the general composition isomorphism [lem-pc-ringed-spaces-derived-direct-image-composition] to j followed by f' identifies Rf_*E with Rf'_*j^*E. Thus the canonical map Rf_*E\\to Rf_*Rj_*j^*E\\cong Rf'_*j^*E, which is Rf_* of that isomorphism followed by the composition isomorphism, is an isomorphism.",
+   "uses": [
+    "lem-pc-supported-open-pushforward",
+    "lem-pc-ringed-spaces-derived-direct-image-composition"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/perfect.tex",
+    "place": "Tag 08EV, support reduction sentence 'we have Rf_*(E)=Rf'_*(E|_{X'})'"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-closed-subset-proper-over-base-union-preimage",
+  "lemma-nagata-immersion-shrink-to-closed-exists",
+  "pqf-lem-locnoeth-lft",
+  "lem-weil-pbc-locally-noetherian-quasi-separated",
+  "lem-weil-pbc-qcqs-morphism-permanence",
+  "lem-pc-supported-open-pushforward",
+  "lem-pc-ringed-spaces-derived-direct-image-composition",
+  "def-weil-pbc-closed-subset-proper-over-base",
+  "def-weil-proper-morphism"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/perfect.tex",
+  "place": "Derived Categories of Schemes, Tag 08EV, lemma-perfect-direct-image, support-reduction paragraph"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -59,12 +113,51 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-pc-direct-image-bounded-coherent",
   "by": "worker",
   "date": "2026-10-10"
  },
  "chapter": "sec-picard-framework",
- "unit": "sk-thm-picard-duality"
+ "unit": "sk-thm-picard-duality",
+ "split_report": {
+  "date": "2026-10-11",
+  "item": "lem-pc-direct-image-qc-support-reduction",
+  "worker": "stage1",
+  "summary": "Split the Tag 08EV support-reduction paragraph into finite-union properness, construction of a quasi-compact open neighborhood, and the supported-open plus derived-composition identification of direct images. No new nodes were needed; existing statements supply every non-elementary input.",
+  "blueprint": "Realizes the ancestor lem-sc-finite-duality place 'Tag 08E2 proof: the proper union of the supports is contained in a quasi-compact open, so f may be replaced by its quasi-compact restriction without changing Rf_*E'.",
+  "tool_uses": [
+   {
+    "node": "lemma-nagata-immersion-shrink-to-closed-exists",
+    "why": "The support-reduction route needs the generic quasi-compact immersion-neighborhood theorem, which is outside the Picard-duality unit."
+   },
+   {
+    "node": "lem-weil-pbc-closed-subset-proper-over-base-union-preimage",
+    "why": "The route needs finite unions of proper supports to remain proper over the base; no node in this unit supplies that geometric property."
+   },
+   {
+    "node": "lem-weil-pbc-qcqs-morphism-permanence",
+    "why": "The route needs quasi-compact and quasi-separated permanence for a locally finite-type morphism over a Noetherian base."
+   }
+  ],
+  "not_duplicates": []
+ },
+ "tool_uses": [
+  "lemma-nagata-immersion-shrink-to-closed-exists",
+  "lem-weil-pbc-closed-subset-proper-over-base-union-preimage",
+  "lem-weil-pbc-qcqs-morphism-permanence",
+  "lemma-nagata-immersion-shrink-to-closed-exists",
+  "lem-weil-pbc-closed-subset-proper-over-base-union-preimage",
+  "lem-weil-pbc-qcqs-morphism-permanence"
+ ],
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-qsr2726",
+  "group": "F1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-qsr2726 (reviewer sub-agent of L); spot-checked: Read whole packet; statement against Tag 08EV support-reduction paragraph; union via union-preimage(1) (lem-weil-pbc-closed-subset-proper-over-base-properties has no union clause); lem-pc-restrict-derived-direct-image-open restricts over an open of the TARGET, so it does not apply here; supported-open-pushforward (E -> Rj_*j^*E iso) plus ringed-space composition is the right route, neither created from this item; citer H1 step uses only Rf'_*j^*E = Rf_*E. Tool uses accepted (generic geometry). FIX more, RETURN less: (1) E7/C4 statement and step 3: 'canonical map Rf'_*j^*E -> Rf_*E' has no canonical meaning; reoriented to Rf_*E -> Rf_*Rj_*j^*E = Rf'_*j^*E. (2) C1 step 2: quasi-compactness of T was asserted uncited; now T_red -> S proper by def-weil-pbc-closed-subset-proper-over-base(1), S Noetherian so quasi-compact, permanence(2). (3) C1 step 2: S quasi-separated needed for permanence(1) was implicit; now cites lem-weil-pbc-locally-noetherian-quasi-separated. Edge cases: E=0 (T empty, X' empty), f=id.; 1 file(s) fixed by the reviewer"
+ },
+ "lead_note": "2026-10-10 L (R-qsr2726): E7: item statement reoriented: the canonical map runs Rf_*E -> Rf_*Rj_*j^*E = Rf'_*j^*E (there is no canonical map Rf'_*j^*E -> Rf_*E); the citer lem-pc-proper-direct-image-finite-tor uses only the isomorphism, unaffected."
 }

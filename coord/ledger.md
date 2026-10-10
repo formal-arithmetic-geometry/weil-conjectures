@@ -2741,3 +2741,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 21:56 UTC L matched lem-weil-pbc-degreewise-split-derived-triangle to Mathlib distinguished_iff_iso_trianglehOfDegreewiseSplit + Qh triangulated (R-dsd2720); F1 delivery returned as unneeded
 - 21:56 L: returned deliver/J1/lem-pc-qcqs-derived-direct-image-right-adjoint (reviewer RETURN: 1. E (missing hypothesis): Step 3 applies lem-pc-derived-qcoh-compact-generation (stated for a quasi-compact quasi-separ)
 - 21:57 L: returned deliver/C1/lem-pc-global-hom-adjunction (reviewer RETURN: R-gha2726: (1) E/B false new statement: lem-pc-qcqs-sheaf-rhom-adjunction asserts Rf_*RSheafHom(L,a(K)) = RSheafHom(Rf_*)
+- 21:58 L: merged deliver/F1/lem-pc-direct-image-qc-support-reduction (reviewer FIX; first push; new nodes: 0)
