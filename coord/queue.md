@@ -1,8 +1,8 @@
 # Work queue
 
-911 items; claim with `tools/claim.py next <group> [--stage N]`.
+916 items; claim with `tools/claim.py next <group> [--stage N]`.
 
-## Stage 1: nodes to split (311)
+## Stage 1: nodes to split (315)
 
 | node | distance to a target | Lean state on the done branch |
 |---|---|---|
@@ -32,7 +32,6 @@
 | `lem-exc-etale-open-subgroup-fixed-field` | 3011 | none |
 | `lem-sc-quasi-finite-points-open` | 3012 | none |
 | `lem-sc-affine-maximal-points-closed-in-lft-scheme` | 3013 | none |
-| `lem-sc-fg-domain-positive-dimension-infinite-maximals` | 3013 | none |
 | `lem-sc-p1-boundary-extension-composition` | 3013 | none |
 | `lem-sc-tangent-space-vector-space` | 3013 | none |
 | `lem-pc-finite-extension-tensor-algebraic-closure-reduced-separable` | 3014 | none |
@@ -46,7 +45,6 @@
 | `lem-sc-p1-ext-pushout-postcompose` | 3014 | none |
 | `lem-sc-scheme-over-field-universally-open` | 3014 | none |
 | `lem-sc-sheaf-ext-coherent` | 3014 | none |
-| `lem-sc-smooth-proper-relative-dualizing-general` | 3014 | none |
 | `lem-sc-support-dimension-cohomology-vanishing` | 3014 | none |
 | `lem-sp-cartan-eilenberg-properties` | 3014 | none |
 | `lem-sc-affine-derived-pushforward-t-exact` | 3015 | none |
@@ -54,6 +52,12 @@
 | `lem-sc-p1-invertible-section-localization` | 3015 | none |
 | `lem-sc-p1-tor-dimension-shift-natural` | 3015 | none |
 | `lem-sc-p1-twist-multiplication` | 3015 | none |
+| `lem-sc-smooth-omega-finite-locally-free` | 3015 | none |
+| `lem-sc-smooth-proper-diagonal-conormal-differentials` | 3015 | none |
+| `lem-sc-smooth-proper-diagonal-koszul-dual` | 3015 | none |
+| `lem-sc-smooth-proper-diagonal-koszul-regular` | 3015 | none |
+| `lem-sc-smooth-proper-diagonal-pushforward-structure` | 3015 | none |
+| `lem-sc-smooth-proper-diagonal-tensor-formula` | 3015 | none |
 | `lem-sc-open-curve-gm-direct-image-cohomology` | 4006 | none |
 | `lem-pc-genus-agrees-sc` | 4007 | rests_on_sorry |
 | `lem-pc-zero-scheme-properties` | 4008 | rests_on_sorry |
@@ -318,7 +322,7 @@
 | `lem-pur-rhom-well-defined` | - | none |
 | `lem-zl-noether-normalization-dimension` | - | none |
 
-## Stage 2: nodes to state (600)
+## Stage 2: nodes to state (601)
 
 | node | distance to Mathlib | kind |
 |---|---|---|
@@ -418,6 +422,7 @@
 | `lem-sc-etale-fibre-product-coproduct` | 1 | state |
 | `lem-sc-ext-torsor` | 1 | state |
 | `lem-sc-exterior-top-direct-sum` | 1 | state |
+| `lem-sc-fg-domain-positive-dimension-infinite-maximals` | 1 | state |
 | `lem-sc-finite-discrete-separated-affine` | 1 | state |
 | `lem-sc-finite-pushforward-locally-free` | 1 | state |
 | `lem-sc-finite-type-nonclosed-closure-closed-points` | 1 | state |
@@ -923,7 +928,7 @@
 | `lem-weil-pbc-p1-field-dimension-one` | 4 | state |
 | `lem-weil-pbc-projective-space-zero-isomorphism` | 4 | state |
 
-Not open yet: 328 nodes that wait for stage 1, 1238 nodes that wait for a statement dependency.
+Not open yet: 332 nodes that wait for stage 1, 1239 nodes that wait for a statement dependency.
 
 ## Stage 3: modules to prove (0)
 
