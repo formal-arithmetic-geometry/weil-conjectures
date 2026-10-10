@@ -24,9 +24,41 @@
   "def-sbc-locally-finite-presentation",
   "def-pc-scheme"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "By the definition [def-pc-finite-locally-free], $f$ is finite locally free (it is finite, flat and locally of finite presentation). Applying [lem-weil-pbc-finite-locally-free-degree-locally-constant] to $f:X\\to Y$ (with the roles of the letters $X,Y$ there exchanged) gives a decomposition $Y=\\coprod_{d\\ge0}Y_d$ into open and closed subsets $Y_d$ such that, with $X_d=f^{-1}(Y_d)$, the restriction $f_d:X_d\\to Y_d$ is finite locally free of degree $d$.",
+   "uses": [
+    "def-pc-finite-locally-free",
+    "lem-weil-pbc-finite-locally-free-degree-locally-constant"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 04MH, lemma-finite-locally-free"
+   }
+  },
+  {
+   "text": "For each $d$, [lem-pc-flf-properties] applied to $f_d$ shows that $(f_d)_*\\mathcal O_{X_d}$ is a locally free $\\mathcal O_{Y_d}$-module of rank $d$, i.e. $Y_d$ has an open cover on which it is isomorphic to $\\mathcal O^{\\oplus d}$. Since $Y_d$ is open in $Y$ and $X_d=f^{-1}(Y_d)$, the definition of the direct image gives $(f_*\\mathcal O_X)|_{Y_d}=(f_d)_*\\mathcal O_{X_d}$ (both have sections $\\mathcal O_X(f^{-1}(V))$ over $V\\subset Y_d$). The open sets of these covers, over all $d$, cover $Y$, and on each of them $f_*\\mathcal O_X\\cong\\mathcal O_Y^{\\oplus d}$; the rank is constant equal to $d$ on the open and closed piece $Y_d$, hence locally constant on $Y$. (For $d=0$, $Y_0$ is the open and closed set over which $X$ is empty and $f_*\\mathcal O_X|_{Y_0}=0$.)",
+   "uses": [
+    "lem-pc-flf-properties"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 02KB, lemma-finite-flat, and Tag 04MH, lemma-finite-locally-free"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-finite-locally-free",
+  "lem-weil-pbc-finite-locally-free-degree-locally-constant",
+  "lem-pc-flf-properties"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/morphisms.tex",
+  "place": "Tag 04MH (lemma-finite-locally-free: S = coprod S_d with f of degree d over S_d) and Tag 02KB (lemma-finite-flat: f_*O_X finite locally free)"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -51,12 +83,43 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-sc-finite-flat-duality-evaluation",
   "by": "worker",
   "date": "2026-10-10"
  },
  "chapter": "sec-picard-framework",
- "unit": "sk-thm-picard-duality"
+ "unit": "sk-thm-picard-duality",
+ "split_report": {
+  "date": "2026-10-11",
+  "item": "lem-sc-finite-pushforward-locally-free",
+  "worker": "stage1",
+  "summary": "Reviewer fix (R-fpl1708): the item is lem-pc-flf-properties applied on the open and closed pieces of the degree decomposition lem-weil-pbc-finite-locally-free-degree-locally-constant (same tags 02KB/04MH); the delivered affine route and its new node lem-sc-finite-affine-flat-projective are dropped.",
+  "blueprint": "Realizes the finite-flatness sentence in the proof of lem-sc-finite-duality, namely the identification of f_*O_X as finite locally free with locally constant rank.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-finite-locally-free-degree-locally-constant",
+    "why": "generic statement (Stacks 04MH): a finite locally free morphism decomposes the base into open and closed pieces of constant degree; used as a black box"
+   },
+   {
+    "node": "lem-pc-flf-properties",
+    "why": "generic statement: f finite locally free of degree d implies f_*O_X locally free of rank d; used as a black box on each piece"
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-finite-locally-free-degree-locally-constant",
+  "lem-pc-flf-properties",
+  "lem-weil-pbc-finite-locally-free-degree-locally-constant",
+  "lem-pc-flf-properties"
+ ],
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-fpl1708",
+  "group": "K1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-fpl1708 (reviewer sub-agent of L); spot-checked: Start Sat Oct 10 05:07:53 PM UTC 2026. Source Stacks morphisms.tex Tag 04MH (lemma-finite-locally-free, line 12429: S = coprod S_d clopen, f|X_d finite locally free of degree d) and Tag 02KB; item hypotheses (finite, flat, lfp) are exactly def-pc-finite-locally-free. FIX more, RETURN less (per audit coord/audit-new-nodes.md 16:50): the delivered three-step affine route duplicated existing nodes and step 1 hid the fact that a finite algebra of finite presentation is a finitely presented module (C1); new node lem-sc-finite-affine-flat-projective dropped (--drop-nodes) and the proof replaced in dag/nodes/sec-picard-framework/lem-sc-finite-pushforward-locally-free.json: proof, proof_deps, proof_origin, split_report: step 1 cites lem-weil-pbc-finite-locally-free-degree-locally-constant (statement gives the clopen decomposition with f_d finite locally free of degree d, letters X,Y exchanged) and def-pc-finite-locally-free; step 2 cites lem-pc-flf-properties on each piece (f_d)_*O locally free of rank d, with (f_*O_X)|_{Y_d}=(f_d)_*O_{X_d} by definition of direct image, giving the open cover and locally constant rank. Tool uses (C8, generic black boxes, off-unit): lem-weil-pbc-finite-locally-free-degree-locally-constant (sk-thm-p1), lem-pc-flf-properties (sk-the-hilbert-functor--definition-1); worker's declared tool use lem-weil-pbc-finite-projective-standard-free-cover dropped as no longer cited. No cycle (degree lemma depends only on lem-weil-pbc-finite-flat-rank-iso, Mathlib leaf FlatRank.lean:232 isLocallyConstant_finrank verified by sed). Small cases: d=0 piece (empty fibres, pushforward 0), identity (Y=Y_1), disconnected base with two ranks. End Sat Oct 10 05:09:04 PM UTC 2026.; 1 file(s) fixed by the reviewer"
+ }
 }
