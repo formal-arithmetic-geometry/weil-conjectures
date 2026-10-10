@@ -26,7 +26,7 @@ subcategories:
 | `Lf^* = L((f)^*⟦ℚ̄_ℓ⟧)` | `boundedConstructibleUpperStar` | `X`, `Y` noetherian |
 | `Rf_* = R((f)_*⟦ℚ̄_ℓ⟧)` | `boundedConstructibleLowerStar` | and `f` of finite type |
 | `Rf_! = R(f)_!⟦ℚ̄_ℓ⟧` | `boundedConstructibleLowerShriek` | and `HasCompactification f` |
-| `j_! = D((j)_!open⟦ℚ̄_ℓ⟧)` | `boundedConstructibleOpenImmersionLowerShriek` | `j` an open immersion |
+| `j_! = D((j)_!open⟦ℚ̄_ℓ⟧)` | `boundedConstructibleOpenImmersionLowerShriek` | `j` open immersion |
 | `Rf^! = R(f)^!⟦ℚ̄_ℓ⟧` | `boundedConstructibleUpperShriek` | and `HasCompactification f` |
 | `- ⊗ᴸ -` | `boundedConstructibleTensor` | `X` noetherian |
 | `RHom(-, -)` | `boundedConstructibleHom` | `X` noetherian |

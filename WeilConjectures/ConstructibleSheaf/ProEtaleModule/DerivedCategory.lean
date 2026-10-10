@@ -64,6 +64,7 @@ noncomputable def boundedConstructible :
   DerivedCategory.TStructure.t.bounded ⊓ fun K ↦ ∀ n : ℤ,
     IsConstructible R ((DerivedCategory.homologyFunctor _ n).obj K)
 
+omit [IsCommMonObj R] in
 /-- A complex is bounded constructible iff its cohomology sheaves vanish outside a finite
 interval `[a, b]` and are all constructible. -/
 lemma mem_boundedConstructible_iff
