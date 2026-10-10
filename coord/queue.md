@@ -1,8 +1,8 @@
 # Work queue
 
-918 items; claim with `tools/claim.py next <group> [--stage N]`.
+919 items; claim with `tools/claim.py next <group> [--stage N]`.
 
-## Stage 1: nodes to split (333)
+## Stage 1: nodes to split (334)
 
 | node | distance to a target | Lean state on the done branch |
 |---|---|---|
@@ -54,7 +54,6 @@
 | `lem-pc-separable-polynomial-alg-closed-quotient-product` | 3013 | none |
 | `lem-sc-ext-sheaf-to-global-spectral-sequence` | 3013 | none |
 | `lem-sc-ext-stalk-localization` | 3013 | none |
-| `lem-sc-ext-support-cohomology-vanishing` | 3013 | none |
 | `lem-sc-finite-flat-duality-evaluation` | 3013 | none |
 | `lem-sc-p1-boundary-extension-composition` | 3013 | none |
 | `lem-sc-p1-ext-yoneda-associativity` | 3013 | none |
@@ -71,7 +70,9 @@
 | `lem-sc-cech-comparison-map-naturality` | 3014 | none |
 | `lem-sc-open-map-irreducible-fibres-components` | 3014 | none |
 | `lem-sc-scheme-over-field-universally-open` | 3014 | none |
+| `lem-sc-sheaf-ext-coherent` | 3014 | none |
 | `lem-sc-smooth-proper-relative-dualizing-general` | 3014 | none |
+| `lem-sc-support-dimension-cohomology-vanishing` | 3014 | none |
 | `lem-sc-p1-invertible-section-localization` | 3015 | none |
 | `lem-sc-p1-tor-dimension-shift-natural` | 3015 | none |
 | `lem-sc-p1-twist-multiplication` | 3015 | none |
@@ -930,7 +931,7 @@
 | `lem-weil-pbc-p1-field-dimension-one` | 4 | state |
 | `lem-weil-pbc-projective-space-zero-isomorphism` | 4 | state |
 
-Not open yet: 350 nodes that wait for stage 1, 1172 nodes that wait for a statement dependency.
+Not open yet: 351 nodes that wait for stage 1, 1173 nodes that wait for a statement dependency.
 
 ## Stage 3: modules to prove (0)
 
