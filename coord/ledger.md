@@ -2596,3 +2596,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 20:58 L: merged deliver/H1/lem-kun-stalks-commute-colimits (reviewer PASS; first push; new nodes: 0)
 - 20:58 L: merged deliver/J1/lem-sc-perfect-support-map-lift (reviewer FIX; first push; new nodes: 3)
 - 20:58 L: merged deliver/J1/lem-weil-pbc-noetherian-finite-components (reviewer PASS; first push; new nodes: 0)
+- 20:59 L: returned deliver/C1/lem-pc-perfect-complexes-compact-set (reviewer RETURN: 1. E (wrong mathematics), Step 1: the claim that a perfect complex E is 'encoded' by local bounded finite-projective com)
