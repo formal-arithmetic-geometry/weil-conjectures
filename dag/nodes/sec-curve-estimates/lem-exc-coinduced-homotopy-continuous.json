@@ -23,8 +23,33 @@
   "lem-exc-discrete-modules-abelian",
   "lem-exc-coinduced-discrete-embedding"
  ],
- "proof": [],
- "proof_deps": [],
+ "proof": [
+  {
+   "text": "The hypotheses and constructions of [lem-exc-discrete-modules-abelian] and [lem-exc-coinduced-discrete-embedding] give the discrete topology on M and D(M), the pointwise A-module structure, and the right-translation action. Evaluation at 1 in M and substitution in the first G-variable are A-linear, so the displayed formula defines an A-linear map whenever it has values in C^{n-1}(G,D(M)).",
+   "uses": [
+    "lem-exc-discrete-modules-abelian",
+    "lem-exc-coinduced-discrete-embedding"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 0DVG, label section-continuous-group-cohomology, final profinite comparison"
+   }
+  },
+  {
+   "text": "Fix F and a point (g_1,...,g_{n-1}) in G^{n-1}. The map (x,g_1,...,g_{n-1}) -> F(x,g_1,...,g_{n-1})(1) is continuous with values in the discrete space M. For each x, continuity supplies product neighborhoods on which this value is constant; compactness of the profinite group G gives a finite subcover in the x-variable, whose intersection of the corresponding neighborhoods in G^{n-1} is a neighborhood of (g_1,...,g_{n-1}) on which all x-values are unchanged. Thus g -> h_n(F)(g) is locally constant as a map to the discrete space D(M), hence continuous. Therefore h_n(F) is a continuous (n-1)-cochain and the A-linearity from the first step proves the claim.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 0DVG, label section-continuous-group-cohomology, explicit continuity argument for the coinduced contraction"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-exc-discrete-modules-abelian",
+  "lem-exc-coinduced-discrete-embedding"
+ ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/etale-cohomology.tex",
@@ -54,12 +79,28 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-exc-coinduced-continuous-acyclic",
   "by": "worker",
   "date": "2026-10-10"
  },
  "chapter": "sec-curve-estimates",
- "unit": "sk-prop-h2"
+ "unit": "sk-prop-h2",
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "lem-exc-coinduced-homotopy-continuous",
+  "worker": "stage1",
+  "summary": "Split the continuity claim into the pointwise A-linearity/evaluation construction and the compactness argument proving local constancy into the discrete coinduced module. The statement and its two existing notion dependencies were retained; no new node was needed.",
+  "blueprint": "Realizes the final continuous-cochain comparison clause of def-exc-continuous-cohomology: the explicit evaluation contraction preserves continuous cochains.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-chc",
+  "group": "E1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-chc (reviewer sub-agent of L); spot-checked: Source: Stacks Tag 0DVG (etale-cohomology-section-continuous-group-cohomology); the contraction itself is agent-written (proof_origin by agent), and the statement is unchanged from sheaf-dag, matching the clause the parent lem-exc-coinduced-continuous-acyclic cites (h_n(F)(g)(x)=F(x,g)(1) is a continuous (n-1)-cochain). Only the item's node and the report changed; the diff touches only split fields (proof, proof_deps, status, split_report); no new nodes. Step 1 takes the setup (profinite G, discrete M with open stabilizers; D(M)=Cont(G,M) discrete, pointwise A-module, action f(xh)) from the statements of lem-exc-discrete-modules-abelian and lem-exc-coinduced-discrete-embedding, which say exactly that; A-linearity of evaluation at 1 and substitution is elementary. Step 2 checked: (x,g)->F(x,g)(1) is continuous into discrete M (evaluation at 1 is continuous because D(M) is discrete), so each h_n(F)(g) lies in Cont(G,M); the tube-lemma argument (finite subcover of compact G, intersection of the V_{x_i}) gives F(x',g')(1)=F(x_i,g)(1)=F(x',g)(1) for g' near g, so h_n(F) is locally constant into discrete D(M). Small cases: n=1 (G^0 a point, h_1(F)=x->F(x)(1) continuous), G trivial. No Mathlib leaf; no tool_uses. Remark: the report lists a citations.json that is not on the branch (harmless). Start Sat Oct 10 03:13:48 PM UTC 2026, end Sat Oct 10 03:14:05 PM UTC 2026."
+ }
 }

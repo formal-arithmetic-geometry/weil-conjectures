@@ -1746,3 +1746,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 15:13 L: merged deliver/M1/thm-sc-p1-duality (reviewer FIX; after a return; new nodes: 3)
 - 15:13 L: returned deliver/J1/lem-sc-ample-finite-principal-affine (reviewer RETURN: 1. E3: lem-sc-ample-finite-principal-affine, step 3: the claim that Y_s = \bigcap_i Y_{v_{e_i}} contains E is false. v_{)
 - 15:13 L: merged deliver/G1/lem-sc-module-abelian-zariski-cohomology (reviewer FIX; first push; new nodes: 2)
+- 15:14 L: merged deliver/E1/lem-exc-coinduced-homotopy-continuous (reviewer PASS; first push; new nodes: 0)
