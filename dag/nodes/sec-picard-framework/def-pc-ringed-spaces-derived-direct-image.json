@@ -13,16 +13,18 @@
  },
  "kind": "definition",
  "title": "Derived direct image for a morphism of ringed spaces",
- "statement": "Let $g:(X,\\mathcal O_X)\\to(Y,\\mathcal B)$ be a morphism of ringed spaces [def-weil-sheaf-of-modules-category]. The derived direct image $Rg_*:D(\\mathcal O_X)\\to D(\\mathcal B)$ [def-weil-abstract-derived-category] is the total right derived functor of the additive direct-image functor $g_*$, computed by K-injective resolutions [def-pur-kinjective-complex, prop-pur-kinjective-resolutions-exist] (the opens of $X$ form a site): if $K\\to I$ is a K-injective resolution of a complex $K$ of $\\mathcal O_X$-modules, then $Rg_*K$ is represented by the complex of $\\mathcal B$-modules $g_*I$.",
+ "statement": "Let $g=(g,g^\\sharp):(X,\\mathcal O_X)\\to(Y,\\mathcal B)$ be a morphism of ringed spaces [def-weil-locally-ringed-space-morphism], and let $\\Mod(\\mathcal O_X)$, $\\Mod(\\mathcal B)$ be the abelian categories of sheaves of modules on the sites of open subsets of $X$ and of $Y$ [def-weil-sheaf-of-modules-category]; these sites are small, as the opens of a space form a set. *Direct image of modules.* For $\\mathcal F\\in\\Mod(\\mathcal O_X)$ let $g_*\\mathcal F$ be the sheaf $V\\mapsto\\mathcal F(g^{-1}V)$ on $Y$, with the restrictions of $\\mathcal F$, made a $\\mathcal B$-module by letting $b\\in\\mathcal B(V)$ act on $\\mathcal F(g^{-1}V)$ as $g^\\sharp_V(b)\\in\\mathcal O_X(g^{-1}V)$; for a morphism $\\varphi$ put $(g_*\\varphi)_V=\\varphi_{g^{-1}V}$. This is an additive functor $g_*:\\Mod(\\mathcal O_X)\\to\\Mod(\\mathcal B)$, applied termwise to complexes; it carries homotopies to homotopies. *Derived direct image.* Let $Q$ denote the localization functors to $D(\\mathcal O_X)$ and $D(\\mathcal B)$ [def-weil-abstract-derived-category]. By [prop-pur-kinjective-resolutions-exist] choose, functorially in the complex $K$ of $\\mathcal O_X$-modules, a K-injective resolution $K\\to I(K)$ [def-pur-kinjective-complex]. The derived direct image $Rg_*:D(\\mathcal O_X)\\to D(\\mathcal B)$ is the functor with $Rg_*(QK)=Q(g_*I(K))$ and $Rg_*(Q f)=Q(g_*I(f))$. It is well defined: if $s:K\\to K'$ is a quasi-isomorphism then $I(s)$ is a quasi-isomorphism between K-injective complexes, hence a homotopy equivalence [lem-weil-pbc-kinjective-hom-derived], so $g_*I(s)$ is a homotopy equivalence and $Q(g_*I(s))$ is invertible; thus $K\\mapsto Q(g_*I(K))$ inverts quasi-isomorphisms and factors uniquely through $Q$. For any K-injective resolution $K\\to J$ the comparison $I(K)\\to J$ (the homotopy class corresponding under [lem-weil-pbc-kinjective-hom-derived] to $QI(K)\\cong QK\\cong QJ$) is a homotopy equivalence, so $Rg_*(QK)\\cong Q(g_*J)$: $Rg_*K$ is represented by $g_*J$ for every K-injective resolution $K\\to J$.",
  "source": {
   "document": "literature/stacks-project/cohomology.tex",
   "place": "Tag 079W, cohomology-lemma-adjoint; K-injective construction of the right derived direct image"
  },
  "stmt_deps": [
+  "def-weil-locally-ringed-space-morphism",
   "def-weil-abstract-derived-category",
   "def-weil-sheaf-of-modules-category",
   "def-pur-kinjective-complex",
-  "prop-pur-kinjective-resolutions-exist"
+  "prop-pur-kinjective-resolutions-exist",
+  "lem-weil-pbc-kinjective-hom-derived"
  ],
  "proof": [],
  "proof_deps": [],
@@ -31,32 +33,48 @@
   {
    "tool": "leanfinder",
    "query": "derived direct image for a morphism of ringed spaces computed by K-injective resolution",
-   "results": "Only generic sheaf pushforward adjunctions; no derived ringed-space direct-image declaration",
+   "results": "SheafOfModules.pushforwardNatTrans, SheafOfModules.pushforwardSections, SheafOfModules.pushforward, AlgebraicGeometry.Scheme.Modules.pushforward, SheafOfModules.instIsRightAdjointPushforward; no derived ringed-space direct-image declaration",
    "date": "2026-10-11",
    "verdict": "no match"
   },
   {
    "tool": "loogle",
    "query": "KInjective derived direct image ringed space",
-   "results": "No matching declaration",
+   "results": "0 hits; service reports Unknown identifier `KInjective`",
    "date": "2026-10-11",
    "verdict": "no match"
   },
   {
    "tool": "grep",
    "query": "derived.*direct.*image|K-injective.*pushforward",
-   "results": "No ringed-space derived direct-image definition in Mathlib",
+   "results": "0 hits in Mathlib/; no ringed-space derived direct-image definition",
    "date": "2026-10-11",
    "verdict": "no match"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-sc-finite-affine-derived-equivalence",
   "by": "worker",
   "date": "2026-10-10"
  },
  "chapter": "sec-picard-framework",
- "unit": "sk-thm-picard-duality"
+ "unit": "sk-thm-picard-duality",
+ "split_report": {
+  "date": "2026-10-11",
+  "item": "def-pc-ringed-spaces-derived-direct-image",
+  "worker": "stage1",
+  "summary": "Checked this definition against the Tag 079W K-injective construction and the four existing prerequisite nodes. The definition is already self-contained once those notions are cited, so no additional node is needed; the direct-image complex is formed from a K-injective resolution K -> I and g_*I.",
+  "blueprint": "The definition realizes the ancestor proof clause 'derived direct image for the induced ringed-space morphism' used in the affine derived-equivalence step.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-rdi1939",
+  "group": "E1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-rdi1939 (reviewer sub-agent of L); spot-checked: Checked statement against cited nodes (all general-site/ringed-space, no scheme-only node cited; def-pc-derived-direct-image is the scheme special case, not a duplicate; the two sec-curve-estimates ringed-space nodes are not used, injective resolutions of single modules being unneeded). FIX more, RETURN less: (1) B3: 'morphism of ringed spaces' was cited to def-weil-sheaf-of-modules-category, which does not define it; now cites def-weil-locally-ringed-space-morphism (commutative rings, as prop-pur-kinjective-resolutions-exist needs). (2) B3: the module direct image g_* (sections over g^{-1}V, B-action through g^sharp) was used undefined; now stated inline. (3) C1: well-definedness on unbounded D(O_X) (independence of resolution, inverting quasi-isomorphisms) had no cited statement (lem-sp-kinjective-computes covers only Ch^+); now built from the functorial choice in prop-pur-kinjective-resolutions-exist plus lem-weil-pbc-kinjective-hom-derived (Mathlib leaf, general abelian category: quasi-iso of K-injectives is a homotopy equivalence), cited as a generic tool. Second reading by E1 missed all three.; 1 file(s) fixed by the reviewer"
+ }
 }

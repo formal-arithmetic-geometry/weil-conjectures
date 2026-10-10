@@ -2381,3 +2381,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 19:25 L: merged deliver/E1/lem-sp-derived-well-defined (reviewer FIX; first push; new nodes: 0)
 - 19:25 L: merged deliver/M1/lem-sp-kinjective-comparison-principle (reviewer PASS; first push; new nodes: 0)
 - 19:25 L: returned deliver/K1/lem-sc-positive-ample-hilbert-degree (reviewer RETURN: Return points 1 (real split) and 2 (0BEP/Hilbert-degree identification, step 3) of 18:12 are repaired; four fixable faul)
+- 19:26 L: merged deliver/E1/def-pc-ringed-spaces-derived-direct-image (reviewer FIX; first push; new nodes: 0)
