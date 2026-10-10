@@ -1,0 +1,81 @@
+{
+ "id": "lem-weil-pbc-fs-adic-field-geometrically-regular",
+ "kind": "statement",
+ "title": "A Noetherian local algebra over a field, formally smooth for its maximal-ideal-adic topology, is geometrically regular",
+ "statement": "Let $k$ be a field, $(C,\\mathfrak m)$ a Noetherian [def-weil-pbc-noetherian-ring] local ring and $k\\to C$ a ring homomorphism, making $C$ a $k$-algebra. If $C$ is formally smooth over $k$ for the $\\mathfrak m$-adic topology [def-weil-pbc-formally-smooth-adic], then $C$ is geometrically regular over $k$ [def-weil-pbc-g-ring]: for every finite purely inseparable field extension $k'/k$ [def-weil-pbc-finite-purely-inseparable-extension] the ring $k'\\otimes_kC$ [def-weil-module-base-change] is a regular ring [def-weil-regular-scheme].",
+ "source": {
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "More on Algebra, Theorem Tag 07EL (theorem-regular-fs, line 9872), implication (2) => (1) in both characteristics, and its proof (lines 9897-9910): in characteristic p > 0 by Lemma Tag 07EG (lemma-base-change-fs) and Lemma Tag 07EI (lemma-fs-implies-regular, line 9535); in characteristic 0 by Lemma 07EI alone (then k' = k)"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-noetherian-ring",
+  "def-weil-pbc-formally-smooth-adic",
+  "def-weil-pbc-g-ring",
+  "def-weil-pbc-finite-purely-inseparable-extension",
+  "def-weil-module-base-change",
+  "def-weil-regular-scheme"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Noetherian local algebra over a field formally smooth for the maximal ideal adic topology is regular local ring",
+   "results": "RingHom.FormallySmooth, Algebra.IsSmoothAt (Mathlib.RingTheory.Smooth.Locus), Algebra.FormallySmooth.of_isLocalization, Algebra.FormallySmooth.iff_comp_surjective, Algebra.Smooth.formallySmooth (Mathlib.RingTheory.Smooth.Basic), Algebra.FormallySmooth.exists_kerProj_comp_eq_id (Mathlib.RingTheory.Smooth.AdicCompletion), Algebra.Smooth.flat_of_isNoetherianRing: nothing on regularity",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "local ring formally smooth over a field is geometrically regular; regular local ring from formal smoothness",
+   "results": "Algebra.instSmoothOfIsStandardSmooth (Mathlib.RingTheory.Smooth.StandardSmoothCotangent), Algebra.IsSmoothAt, Algebra.smoothLocus_eq_univ_iff (Mathlib.RingTheory.Smooth.Locus), Algebra.Smooth, Algebra.smooth_iff (Mathlib.RingTheory.Smooth.Basic)",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "Algebra.FormallySmooth, IsRegularLocalRing",
+   "results": "none (no declaration mentions both)",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rn -E 'GeometricallyRegular|geometrically regular|IsGeometricallyRegular' /home/ubuntu/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib; grep -rn FormallySmooth /home/ubuntu/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/RingTheory/RegularLocalRing/",
+   "results": "none: Mathlib has no geometrically regular algebras, and RegularLocalRing/ (Defs.lean, Polynomial.lean) never mentions formal smoothness",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "local_search",
+   "query": "IsRegularLocalRing (project ~/weil-conjectures-slopmaster2)",
+   "results": "IsRegularLocalRing (Mathlib/RingTheory/RegularLocalRing/Defs.lean), IsRegularLocalRing.of_isRegularRing_of_isLocalRing (Mathlib), and slopmaster2 lemmas isDomain, isIntegrallyClosed, isDiscreteValuationRing, quotient_span_singleton (WeilConjectures/Mathlib/RingTheory/RegularLocalRing/Defs.lean): no formal smoothness; index unavailable",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-fs-adic-flat-geometrically-regular-closed-fibre",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "reviewed": "Reviewed by L 2026-10-10 (statement): More on Algebra 07EL (2)=>(1) in both characteristics, stated as geometric regularity in the sense of def-weil-pbc-g-ring (in characteristic 0 only k'=k occurs). Unsplit; the splitter must handle locality of C⊗_k k' and the comparison of adic topologies left implicit by the source."
+}
