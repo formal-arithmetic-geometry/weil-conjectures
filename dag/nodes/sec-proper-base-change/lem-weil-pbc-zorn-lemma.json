@@ -1,0 +1,79 @@
+{
+ "id": "lem-weil-pbc-zorn-lemma",
+ "kind": "statement",
+ "title": "Zorn's lemma for families of subsets",
+ "statement": "Let $X$ be a set and $\\mathcal S$ a set of subsets of $X$. Assume that every chain $\\mathcal C\\subseteq\\mathcal S$ (a subset of $\\mathcal S$ any two members of which are comparable for inclusion; the empty chain included) has an upper bound in $\\mathcal S$: a member $U\\in\\mathcal S$ with $C\\subseteq U$ for every $C\\in\\mathcal C$. Then $\\mathcal S$ has a maximal element: a member $M\\in\\mathcal S$ such that every $N\\in\\mathcal S$ with $M\\subseteq N$ satisfies $N=M$.",
+ "source": {
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "used without statement in the proof of More on Algebra, Lemma Tag 07P2 (lemma-p-basis), line 11401-11403 ('An application of Zorn's lemma shows that we can enlarge this to a maximal p-independent subset'); Zorn's lemma (equivalent to the axiom of choice); tag verified in stacks-project/tags/tags"
+ },
+ "stmt_deps": [],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Zorn's lemma for a family of sets ordered by inclusion: if every chain has an upper bound in the family, there is a maximal element",
+   "results": "exists_maximal_of_nonempty_chains_bounded, zorn_subset, exists_maximal_of_chains_bounded, zorn_le, zorn_le₀, zorn_superset (Mathlib.Order.Zorn)",
+   "date": "2026-10-10",
+   "verdict": "match: zorn_subset"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Zorn's lemma: a collection of subsets in which every chain has an upper bound has a maximal element",
+   "results": "zorn_subset_nonempty, zorn_subset, zorn_le₀, zorn_le_nonempty₀, exists_maximal_of_nonempty_chains_bounded (Mathlib.Order.Zorn)",
+   "date": "2026-10-10",
+   "verdict": "match: zorn_subset"
+  },
+  {
+   "tool": "loogle",
+   "query": "zorn_subset",
+   "results": "zorn_subset {α} (S : Set (Set α)) (h : ∀ c ⊆ S, IsChain (· ⊆ ·) c → ∃ ub ∈ S, ∀ s ∈ c, s ⊆ ub) : ∃ m, Maximal (· ∈ S) m (Mathlib.Order.Zorn)",
+   "date": "2026-10-10",
+   "verdict": "match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -n 'theorem zorn_subset\\|theorem zorn_le ' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/Order/Zorn.lean; sed -n 100,155p of that file; sed -n 274,282p ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/Order/Defs/Unbundled.lean (Maximal); sed -n 48,52p ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/Order/Preorder/Chain.lean (IsChain)",
+   "results": "Order/Zorn.lean:103 zorn_le, :106 zorn_le_nonempty, :143 zorn_subset, :147 zorn_subset_nonempty; Order/Defs/Unbundled.lean:277-278 Maximal (dual of Minimal P x := P x ∧ ∀ y, P y → y ≤ x → x ≤ y); Order/Preorder/Chain.lean:50 IsChain",
+   "date": "2026-10-10",
+   "verdict": "match"
+  },
+  {
+   "tool": "local_search",
+   "query": "zorn_subset (project root ~/weil-conjectures-slopmaster2)",
+   "results": "zorn_subset, zorn_subset_nonempty, theorems, .lake/packages/mathlib/Mathlib/Order/Zorn.lean (index: unavailable, names found)",
+   "date": "2026-10-10",
+   "verdict": "match"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "zorn_subset",
+  "file": "Mathlib/Order/Zorn.lean",
+  "how": "exact (lines 143-145, read 2026-10-10): `theorem zorn_subset (S : Set (Set α)) (h : ∀ c ⊆ S, IsChain (· ⊆ ·) c → ∃ ub ∈ S, ∀ s ∈ c, s ⊆ ub) : ∃ m, Maximal (· ∈ S) m`; α is the set X, `IsChain (· ⊆ ·) c` (Mathlib/Order/Preorder/Chain.lean:50) says any two distinct members of c are comparable for inclusion, and `Maximal (· ∈ S) m` (Mathlib/Order/Defs/Unbundled.lean:277-278) is m ∈ S ∧ ∀ N ∈ S, m ⊆ N → N ⊆ m, i.e. N = m",
+  "line": 143
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-p-basis-exists",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "reviewed": "Reviewed by L 2026-10-10: exact Mathlib leaf zorn_subset (Order/Zorn.lean line 143, read)."
+}

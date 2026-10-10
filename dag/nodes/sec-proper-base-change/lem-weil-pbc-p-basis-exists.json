@@ -2,15 +2,88 @@
  "id": "lem-weil-pbc-p-basis-exists",
  "kind": "statement",
  "title": "Every field of characteristic p has a p-basis",
- "statement": "Let $p$ be a prime number, $k$ a field of characteristic $p$, and $k^p=\\{a^p:a\\in k\\}$, a subfield of $k$. Then there is a family $(t_i)_{i\\in I}$ of elements of $k$ (a $p$-basis of $k$) such that the monomials $t^E=\\prod_{i\\in I}t_i^{e_i}$, where $E=(e_i)_{i\\in I}$ runs over the families of integers $0\\le e_i<p$ with $e_i=0$ for all but finitely many $i$, form a basis of $k$ as a vector space over $k^p$.",
+ "statement": "Let $p$ be a prime number, $k$ a field [def-weil-field] of characteristic $p$, and $k^p=\\{a^p:a\\in k\\}$, a subfield of $k$. Then there is a family $(t_i)_{i\\in I}$ of elements of $k$ (a $p$-basis of $k$) such that the monomials $t^E=\\prod_{i\\in I}t_i^{e_i}$, where $E=(e_i)_{i\\in I}$ runs over the families of integers $0\\le e_i<p$ with $e_i=0$ for all but finitely many $i$, form a basis of $k$ as a vector space over $k^p$.",
  "source": {
   "document": "literature/stacks-project/more-algebra.tex",
   "place": "More on Algebra, Definition Tag 07P1 (definition-p-basis, item 2) and Lemma Tag 07P2 (lemma-p-basis), sentence 'In particular, the field K has a p-basis over k', for the extension F_p -> k (then kK^p = k^p), and its proof (Zorn's lemma, the claim on maximal p-independent subsets); tags verified in stacks-project/tags/tags"
  },
- "stmt_deps": [],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "stmt_deps": [
+  "def-weil-field"
+ ],
+ "proof": [
+  {
+   "text": "($k^p$ and $p$-independent subsets.) Since $p=0$ in $k$, the map $F:k\\to k$, $a\\mapsto a^p$, is a ring homomorphism: it is multiplicative, and $(a+b)^p=a^p+b^p$ because the binomial coefficients $\\binom pj$, $0<j<p$, are divisible by the prime $p$. So $k^p=F(k)$ is a subring of $k$, and a subfield since $(a^p)^{-1}=(a^{-1})^p$ for $a\\ne0$. For $c$ in the prime field $\\mathbf F_p\\subseteq k$ we have $c^p=c$, so $\\mathbf F_p\\subseteq k^p$. For a subset $S\\subseteq k$ let $\\mathcal M(S)$ be the set of families $E=(e_s)_{s\\in S}$ of integers $0\\le e_s<p$, almost all $0$, and $s^E=\\prod_{s\\in S}s^{e_s}$. Call $S$ $p$-independent if the family $(s^E)_{E\\in\\mathcal M(S)}$ is linearly independent over $k^p$: whenever $\\sum_{E}a_Es^E=0$ with $a_E\\in k^p$, almost all $0$, all $a_E=0$. For $S'\\subseteq S$, extension by zero identifies $\\mathcal M(S')$ with the $E\\in\\mathcal M(S)$ vanishing outside $S'$, with the same monomials. The lemma asserts that some $S$ is $p$-independent and its monomials span $k$ over $k^p$ (then take $I=S$, $t_i=i$).",
+   "uses": [
+    "def-weil-field"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "More on Algebra, Definition Tag 07P1 (definition-p-basis), lines 11343-11355, for the extension $\\mathbf F_p\\to k$, where $\\mathbf F_pk^p=k^p$"
+   }
+  },
+  {
+   "text": "(A maximal $p$-independent subset, by Zorn's lemma.) Let $\\mathcal P$ be the set of $p$-independent subsets of $k$. Every chain $\\mathcal C\\subseteq\\mathcal P$ has an upper bound in $\\mathcal P$. If $\\mathcal C=\\emptyset$, take $\\emptyset\\in\\mathcal P$: $\\mathcal M(\\emptyset)=\\{0\\}$ and its only monomial $1\\ne0$ is independent over the field $k^p$. If $\\mathcal C\\ne\\emptyset$, let $U=\\bigcup\\mathcal C$, which contains every member of $\\mathcal C$; we show $U\\in\\mathcal P$. Let $\\sum_{E\\in\\mathcal F}a_Eu^E=0$ with $\\mathcal F\\subseteq\\mathcal M(U)$ finite and $a_E\\in k^p$. The union of the supports of the $E\\in\\mathcal F$ is a finite set $\\{u_1,\\dots,u_r\\}\\subseteq U$ with $u_j\\in S_j\\in\\mathcal C$. As any two members of $\\mathcal C$ are comparable for inclusion, by induction on $r$ one of $S_1,\\dots,S_r$ (any member of $\\mathcal C$ if $r=0$), call it $S_0$, contains all the others, hence all $u_j$. So every $E\\in\\mathcal F$ is the extension by zero of an element of $\\mathcal M(S_0)$, distinct $E$ giving distinct elements, with the same monomial, and the relation is a $k^p$-linear relation among monomials of $S_0\\in\\mathcal P$; hence all $a_E=0$, and $U\\in\\mathcal P$. By Zorn's lemma [lem-weil-pbc-zorn-lemma] (with $X=k$, $\\mathcal S=\\mathcal P$) there is a maximal $T\\in\\mathcal P$: $T$ is $p$-independent, and no $p$-independent subset of $k$ strictly contains $T$.",
+   "uses": [
+    "lem-weil-pbc-zorn-lemma"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "More on Algebra, Lemma Tag 07P2 (lemma-p-basis), proof, third paragraph, lines 11401-11409 ('An application of Zorn's lemma shows that we can enlarge this to a maximal p-independent subset'; the chain condition is written out here)"
+   }
+  },
+  {
+   "text": "(The $k^p$-span $L$ of the monomials of $T$ is a subfield of $k$.) Let $L=\\{\\sum_{E\\in\\mathcal M(T)}a_Et^E: a_E\\in k^p,\\ \\text{almost all }0\\}$. It is a $k^p$-subspace of $k$ containing $k^p$ ($E=0$) and $T$ ($E$ the indicator of $t\\in T$). For $E,E'\\in\\mathcal M(T)$, $t^Et^{E'}=\\prod_{t\\in T}t^{e_t+e'_t}$; for each $t$ with $e_t+e'_t\\ge p$ write $t^{e_t+e'_t}=t^p\\cdot t^{e_t+e'_t-p}$ with $t^p\\in k^p$ and $0\\le e_t+e'_t-p<p$. Hence $t^Et^{E'}=c\\,t^{E''}$ with $c\\in k^p$ and $E''\\in\\mathcal M(T)$, and by bilinearity of the product $L$ is closed under multiplication: $L$ is a subring of $k$. For a finite $G\\subseteq T$ let $L_G\\subseteq L$ be the $k^p$-span of the $t^E$ with $E$ vanishing outside $G$; the same computation (with $E''$ vanishing outside $G$) shows that $L_G$ is a subring, and it is spanned over $k^p$ by the at most $p^{|G|}$ monomials, so finite-dimensional. Let $0\\ne y\\in L$; $y$ lies in $L_G$ for $G$ the union of the supports of the finitely many $E$ occurring in $y$. Multiplication by $y$ is a $k^p$-linear map $L_G\\to L_G$, injective since $k$ is a field, hence surjective (rank–nullity in the finite-dimensional $k^p$-space $L_G$), so $yz=1$ for some $z\\in L_G\\subseteq L$. Thus $L$ is a subfield of $k$ with $k^p\\subseteq L$ and $T\\subseteq L$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "More on Algebra, Lemma Tag 07P2 (lemma-p-basis), proof, third paragraph, lines 11401-11409 ('let L be the subfield of K generated by kK^p and the x_i'; that this subfield is the span of the monomials is written out here)"
+   }
+  },
+  {
+   "text": "(An element outside $L$ has degree $p$ over $L$.) Let $t\\in k$ with $t\\notin L$, and $c=t^p\\in k^p\\subseteq L$. Then $t$ is algebraic over $L$ [def-weil-algebraic-element], a root of the nonzero polynomial $X^p-c\\in L[X]$. By [lem-weil-pbc-simple-algebraic-extension-power-basis] for the fields $L\\subseteq k$ and $t$, the subfield $L(t)$ is finite over $L$ and, with $e=[L(t):L]\\ge1$, the elements $1,t,\\dots,t^{e-1}$ form an $L$-basis of $L(t)$. Expressing $t^e$ in this basis gives a monic $m\\in L[X]$ of degree $e$ with $m(t)=0$, and every $g\\in L[X]$ with $g(t)=0$ is divisible by $m$ in $L[X]$ (write $g=qm+r$ with $\\deg r<e$; $r(t)=0$ forces $r=0$ by the independence of $1,\\dots,t^{e-1}$). In particular $m$ divides $X^p-c$, and $X^p-c=X^p-t^p=(X-t)^p$ in $k[X]$ ($p\\mid\\binom pj$ for $0<j<p$). So $m(Y+t)\\,h(Y)=Y^p$ in $k[Y]$ for some $h\\in k[Y]$. Let $a,b$ be the least degrees of a nonzero coefficient of $g(Y):=m(Y+t)$ and of $h$; since $k$ is a domain, the product of the lowest terms is the lowest term of $gh=Y^p$, so $a+b=p$, and likewise $\\deg g+\\deg h=p$. As $a\\le\\deg g$ and $b\\le\\deg h$, $a=\\deg g=e$, so $g$ is a monic monomial, $g=Y^e$, and $m=(X-t)^e$; in particular $e\\le p$. The coefficient of $X^{e-1}$ in $(X-t)^e$ is $-e\\,t$, and it lies in $L$. If $e<p$, then $e\\cdot1$ is a nonzero element of $\\mathbf F_p\\subseteq k^p\\subseteq L$ (Step 1), hence invertible in $L$, and $t\\in L$, a contradiction. So $e=p$: the elements $1,t,\\dots,t^{p-1}$ are linearly independent over $L$.",
+   "uses": [
+    "def-weil-algebraic-element",
+    "lem-weil-pbc-simple-algebraic-extension-power-basis"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "More on Algebra, Lemma Tag 07P2 (lemma-p-basis), proof, third paragraph, lines 11401-11409 ('If x ∈ K but x ∉ L, then x^p ∈ L and L(x) ≅ L[z]/(z^p − x)'; the source's z^p − x is to be read z^p − x^p, and the degree computation is written out here as in the node lem-weil-pbc-intersection-subfields-differentials, Step 5)"
+   }
+  },
+  {
+   "text": "(The maximal $T$ spans: $L=k$.) Suppose $t\\in k$ with $t\\notin L$. Then $t\\notin T$ (as $T\\subseteq L$), and $T'=T\\cup\\{t\\}$ is $p$-independent: $\\mathcal M(T')$ consists of the pairs $(E,j)$ with $E\\in\\mathcal M(T)$ and $0\\le j<p$, with monomial $t^E t^j$. Given $\\sum_{(E,j)}a_{E,j}t^Et^j=0$ with $a_{E,j}\\in k^p$, almost all $0$, put $b_j=\\sum_Ea_{E,j}t^E\\in L$; then $\\sum_{j<p}b_jt^j=0$, so all $b_j=0$ by Step 4, and then all $a_{E,j}=0$ because $T$ is $p$-independent (Step 2). So $T'\\in\\mathcal P$ strictly contains $T$, contradicting the maximality of $T$ (Step 2). Hence every $t\\in k$ lies in $L$, i.e. $L=k$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "More on Algebra, Lemma Tag 07P2 (lemma-p-basis), proof, third paragraph, lines 11401-11409 ('Hence {x_i} ∪ {x} is p-independent over k, a contradiction')"
+   }
+  },
+  {
+   "text": "(Conclusion.) Let $I=T$ and $t_i=i$ for $i\\in T$, so that the families $E$ of the statement are the elements of $\\mathcal M(T)$. The monomials $t^E$, $E\\in\\mathcal M(T)$, are linearly independent over $k^p$ (Step 2: $T$ is $p$-independent) and span $L=k$ over $k^p$ (Steps 3 and 5). Hence they form a basis of $k$ over $k^p$: $(t_i)_{i\\in I}$ is a $p$-basis of $k$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "More on Algebra, Lemma Tag 07P2 (lemma-p-basis), line 11372 ('In particular, the field K has a p-basis over k') and the claim of its proof, lines 11403-11405"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-field",
+  "lem-weil-pbc-zorn-lemma",
+  "def-weil-algebraic-element",
+  "lem-weil-pbc-simple-algebraic-extension-power-basis"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "More on Algebra, Lemma Tag 07P2 (lemma-p-basis), statement line 11372 and proof lines 11401-11409 (Zorn's lemma; a maximal p-independent subset is a p-basis), applied to the extension F_p -> k (F_p k^p = k^p); the chain condition, the field structure of the span of the monomials and the degree computation behind 'L(x) ≅ L[z]/(z^p − x)' are written out by the agent"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -39,10 +112,45 @@
    "results": "only galGroupBasis (FieldTheory/KrullTopology.lean) and basisOfBasisRight (RingTheory/LinearDisjoint.lean), unrelated",
    "date": "2026-10-10",
    "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "p-basis of a field of characteristic p: monomials with exponents less than p form a basis over the subfield of p-th powers",
+   "results": "Polynomial.coe_basisMonomials, Polynomial.degreeLT.basis, Polynomial.basisMonomials, Polynomial.Sequence.basis, PowerBasis.mk, MvPolynomial.coe_basisMonomials, Algebra.adjoin.powerBasisAux, IntermediateField.adjoin.powerBasis",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "maximal p-independent subset of a field of characteristic p generates the field over the p-th powers",
+   "results": "IntermediateField.isPurelyInseparable_adjoin_iff_pow_mem, perfectClosure, IntermediateField.adjoin_eq_adjoin_pow_expChar_pow_of_isSeparable(') , IntermediateField.adjoin_eq_adjoin_pow_expChar_of_isSeparable' (Mathlib.FieldTheory.PurelyInseparable.PerfectClosure)",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"pBasis\"",
+   "results": "Submodule.smithNormalFormTopBasis, galGroupBasis, FreeAddGroupBasis, FreeGroupBasis and instances; nothing on p-bases",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "local_search",
+   "query": "pBasis (project root ~/weil-conjectures-slopmaster2)",
+   "results": "PeriodPair.basis, Pi.basis, Polynomial.Sequence.basis, Polynomial.degreeLT.basis, PowerBasis.basis, ... (index: warming); no p-basis",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rn -i 'pBasis\\|p-basis\\|p_basis\\|pIndependent\\|p-independent\\|p_independent' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib (excluding powerBasis, galGroupBasis, basisOfBasis); listing of FieldTheory files mentioning frobenius/ExpChar, and the declarations of FieldTheory/SeparablyGenerated.lean and FieldTheory/PurelyInseparable/AdjoinPthRoots.lean read",
+   "results": "only atTop_basis/nhds_top_basis false positives in Topology; FieldTheory/PurelyInseparable/AdjoinPthRoots.lean (the field adjoining all p-th roots), SeparablyGenerated.lean (exists_isTranscendenceBasis_and_isSeparable_of_linearIndepOn_pow*, which use linear independence of p-th powers but no p-basis); no p-basis or p-independence notion",
+   "date": "2026-10-10",
+   "verdict": "no match: p-bases are absent from Mathlib"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "worker",
@@ -62,5 +170,12 @@
   }
  },
  "chapter": "sec-proper-base-change",
- "unit": "sk-thm-p1"
+ "unit": "sk-thm-p1",
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "lem-weil-pbc-p-basis-exists",
+  "worker": "stage1",
+  "summary": "Split from More on Algebra Lemma 07P2 (statement line 11372, proof lines 11401-11409) for the extension F_p -> k, read against Definition 07P1 (lines 11343-11355); both tags verified in tags/tags. Six steps: the subfield k^p and p-independent subsets (elementary); a maximal p-independent subset T by Zorn's lemma, the chain condition written out (new Mathlib leaf lem-weil-pbc-zorn-lemma = zorn_subset, Mathlib/Order/Zorn.lean:143); the k^p-span L of the monomials of T is a subfield (elementary, finite-dimensional subrings); an element t outside L has degree p over L (lem-weil-pbc-simple-algebraic-extension-power-basis, the minimal polynomial divides (X-t)^p, coefficient -et; written out because the source's 'L(x) ≅ L[z]/(z^p − x)' is stated without proof and has a misprint, z^p − x for z^p − x^p); T ∪ {t} p-independent contradicts maximality, so L = k (elementary); conclusion. Statement unchanged except that 'field' now cites [def-weil-field] (stmt_deps). The citers (lem-weil-pbc-differential-zero-iff-pth-power Step 3, lem-weil-pbc-derivation-nonzero-on-non-pth-power Step 5, lem-weil-pbc-intersection-subfields-differentials Step 1) use exactly this statement. Mathlib: p-bases absent (LeanSearch, LeanFinder, Loogle, local_search, grep), no candidate close enough for mathlib_candidate."
+ },
+ "reviewed": "Reviewed by L 2026-10-10: faithful to More on Algebra 07P2 (existence of p-bases) with Zorn's lemma (new exact Mathlib leaf), the span of the monomials shown to be a subfield (step 3), and the degree-p claim for an element outside it written out via the power-basis leaf (step 4; the source's L[z]/(z^p − x) is a misprint for z^p − x^p). No Mathlib match (no p-bases)."
 }
