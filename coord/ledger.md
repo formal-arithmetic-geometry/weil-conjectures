@@ -1724,3 +1724,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 15:07 L: merged deliver/J1/lem-exc-coinduced-discrete-embedding (reviewer FIX; after a return; new nodes: 1)
 - 15:07 L: merged deliver/E1/lem-sc-regular-curve-torsionfree-free (reviewer FIX; first push; new nodes: 2)
 - 15:07 L: lem-sc-hilb-dominating-power accepted (6 steps per 0B9I along the Lean route, 2 new nodes: lem-sc-hilb-zero-base closed in Lean, lem-sc-geometrically-irreducible-product)
+- 15:08 L: returned deliver/G1/lem-sc-p1-graded-syzygy (reviewer RETURN: 1. D2/D1: lem-sc-p1-graded-syzygy step 1: the whole content of the item (graded Hilbert syzygy for k[x_0,x_1]) is moved )
