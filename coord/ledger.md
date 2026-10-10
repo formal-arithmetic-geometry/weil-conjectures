@@ -1592,3 +1592,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 14:10 L: merged deliver/C1/def-galois-fibre-functor (reviewer FIX; after a return; new nodes: 1)
 - 14:11 L: merged deliver/K1/lem-pc-h0-proper-variety (reviewer FIX; first push; new nodes: 0)
 - 14:12 L: accepted lem-pc-ample-positive-degree: 9 steps (Lean route, 0B5X), new nodes lem-pc-base-change-closure-components, lem-pc-very-ample-disjoint-union, tool_uses 3; blueprint proof error (geometric connectedness assumed) in HUMAN.md
+- 14:13 L: merged deliver/K1/lem-weil-pbc-simplicial-hom-object-exists (reviewer PASS; after a return; new nodes: 1)

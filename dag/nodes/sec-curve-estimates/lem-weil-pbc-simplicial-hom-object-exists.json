@@ -22,9 +22,56 @@
   "def-weil-pbc-semi-representable-object",
   "def-weil-pbc-simplicial-set"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Put $\\mathcal C=\\mathrm{SR}(X)$, with its simplicial object $K$ as in the statement, and use [def-weil-pbc-simplicial-set] for the simplicial operators of $S$. Define a category $\\mathcal I_S$: its objects are pairs $(n,s)$ with $s\\in S_n$, and a morphism $(m,t)\\to(n,s)$ is an order-preserving $\\varphi:[m]\\to[n]$ with $S(\\varphi)(s)=t$. Define $D:\\mathcal I_S^{\\mathrm{op}}\\to\\mathcal C$ by $D(n,s)=K_n$ and by sending this morphism to $K(\\varphi):K_n\\to K_m$. For an object $W$ of $\\mathcal C$, a cone from $W$ to $D$ is exactly a family of morphisms $f_s:W\\to K_n$ satisfying $K(\\varphi)\\circ f_s=f_{S(\\varphi)(s)}$ for every $\\varphi$ and $s$.",
+   "uses": [
+    "def-weil-pbc-semi-representable-object",
+    "def-weil-pbc-simplicial-set"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/simplicial.tex",
+    "place": "Lemma 017J (lemma-exists-hom-0-from-simplicial-set), proof, first paragraph: description of a morphism by a compatible collection and construction of $\\mathcal U$"
+   }
+  },
+  {
+   "text": "Because $S$ has finitely many nondegenerate simplices, there is $m_0$ such that every simplex in degree $n>m_0$ is degenerate. Apply [lem-weil-pbc-simplicial-index-finite-initial] to $\\mathcal I_S$: the inclusion of the opposite of its finite full subcategory on degrees at most $2m_0$ into $\\mathcal I_S^{\\mathrm{op}}$ is initial. The limit-comparison conclusion of that same node (Categories Lemma 002R) therefore identifies the limit of $D$ over $\\mathcal I_S^{\\mathrm{op}}$ with the limit of its restriction to this finite subcategory.",
+   "uses": [
+    "def-weil-pbc-simplicial-set",
+    "lem-weil-pbc-simplicial-index-finite-initial"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/simplicial.tex",
+    "place": "Lemma 017K (lemma-exists-hom-0-from-simplicial-set-finite), proof, paragraphs defining $m_0$ and proving that $\\mathcal U_{\\leq 2m_0}$ is initial; Categories Lemma 002R"
+   }
+  },
+  {
+   "text": "The finite limit in the preceding step exists in $\\mathcal C=\\mathrm{SR}(X)$ by [lem-weil-pbc-semi-representable-finite-limits], applied to the small etale site of $X$ as in [def-weil-pbc-semi-representable-object]. Let $H$ be this finite limit. By the comparison clause of [lem-weil-pbc-simplicial-index-finite-initial], it also has the universal cone on the full diagram $D$; let $u_s:H\\to K_n$ be that cone's component at $(n,s)$, including in degrees above $2m_0$. The cone equations make $(u_s)$ an $S$-family. For any $W$, the cone correspondence in step 1 sends a morphism $g:W\\to H$ to the family $(u_s\\circ g)_s$, and the universal property of the limit makes this correspondence bijective. Thus $H$ and $(u_s)$ have exactly the universal property asserted in the statement.",
+   "uses": [
+    "lem-weil-pbc-semi-representable-finite-limits",
+    "def-weil-pbc-semi-representable-object",
+    "lem-weil-pbc-simplicial-index-finite-initial"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/simplicial.tex",
+    "place": "Lemma 017K (lemma-exists-hom-0-from-simplicial-set-finite), proof, conclusion after the finite initial subcategory, using Hypercovering Lemma 01G2 (lemma-coprod-prod-SR) for finite limits"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-semi-representable-object",
+  "def-weil-pbc-simplicial-set",
+  "lem-weil-pbc-semi-representable-finite-limits",
+  "lem-weil-pbc-simplicial-index-finite-initial"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/simplicial.tex",
+  "place": "Lemmas 017J and 017K (lemma-exists-hom-0-from-simplicial-set, lemma-exists-hom-0-from-simplicial-set-finite), with Categories Lemma 002R for initial functors and Hypercovering Lemma 01G2 for finite limits in SR(X)"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -49,7 +96,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "worker",
@@ -65,5 +112,20 @@
   }
  },
  "chapter": "sec-curve-estimates",
- "unit": "sk-prop-h2"
+ "unit": "sk-prop-h2",
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "lem-weil-pbc-simplicial-hom-object-exists",
+  "worker": "stage1",
+  "summary": "Split the finite simplicial Hom existence lemma along Stacks 017J/017K into the compatible-family indexing category, a finite initial truncation of its opposite supplied by a new unsplit node, and finite-limit representability using 01G2. Corrected the initiality direction and cited the comparison clause of the new node directly.",
+  "blueprint": "The steps realize the ancestor blueprint proof clause about compatible boundary data and Hom objects from finite simplicial sets: step 1 constructs the indexing category and compatible families, step 2 performs the finite truncation, and step 3 takes the finite limit in SR(X)."
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-homex2",
+  "group": "K1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-homex2 (reviewer sub-agent of L); spot-checked: Re-push after return. Return points repaired: (E2/B7) lem-weil-pbc-simplicial-index-finite-initial now states initiality of I_{S,<=2m_0}^op -> I_S^op with the conditions of categories.tex definition-initial written out and correctly translated to I_S (z->y into the bounded subcategory; zigzag y_0->y_1<-y_2... of bounded objects with compatible maps from z, orientation checked arrow by arrow against the definition's x_0<-x_1->x_2 in the opposite category). Tested m_0=0: S=Delta[0], I_S=Delta, {[0]}: every [n] has the unique map to [0], so (1) holds and (2) is trivial; S constant on two points: I_S = Delta coprod Delta, degree-0 objects, fine. Verified the general statement against the 017K proof: (1) by nondegenerate roots (z=(n,s)->(k,u), k<=m_0); (2) for z->x', z->x'' bounded, go to roots u,u' (deg<=m_0), descend z through a of degree <=2m_0 by the common-repeat argument and injectivity of s_i, zigzag x'->u<-a->u'<-x'' compatible under z. Consequently-clause matches categories.tex Lemma 002R (lemma-initial, 'if either side exists'). (C1) step 2 now takes the comparison from the new node's clause, no uncited tag. (F/E5) WANTED dropped, proof_origin by document citing simplicial.tex 017J/017K, categories 002R, hypercovering 01G2. Full review: item statement vs 017J/017K hypothesis by hypothesis (finite nonempty S_n; finitely many nondegenerate implies degenerate for n>>0; C=SR(X) with finite limits; universal family = representing object of Mor(W x S, K)); step 1 carried by def-weil-pbc-simplicial-set and def-weil-pbc-semi-representable-object (017J construction, cones = compatible families); step 2 by the new node; step 3 by lem-weil-pbc-semi-representable-finite-limits (FC(C) has finite limits, applied to X_et, as in def-weil-pbc-semi-representable-object (1)) and the new node's comparison clause. Only the item's fields owned by a split changed; new node unsplit, created.item correct, same_as list, three Mathlib searches; no slopmaster2 declaration found citing 017K. No Mathlib leaves. Review 14:12-14:20 UTC."
+ }
 }

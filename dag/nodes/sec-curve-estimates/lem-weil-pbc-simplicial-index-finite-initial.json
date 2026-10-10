@@ -1,0 +1,58 @@
+{
+ "id": "lem-weil-pbc-simplicial-index-finite-initial",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-hypercover-refinement",
+   "place": "proof, fourth paragraph: 'Previously chosen faces prescribe compatible boundaries'; the finite initial truncation of the category indexing compatible simplicial boundary data",
+   "via": [
+    "lem-weil-pbc-simplicial-hom-object-exists",
+    "lem-weil-pbc-hypercover-finite-simplex-lifting"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Finite initial truncation of the opposite simplicial indexing category",
+ "statement": "Let $S$ be a simplicial set [def-weil-pbc-simplicial-set] such that every $S_n$ is finite and nonempty and $S$ has finitely many nondegenerate simplices. Define a category $\\mathcal I_S$ whose objects are pairs $(n,s)$ with $s\\in S_n$, and whose morphisms $(m,t)\\to(n,s)$ are order-preserving maps $\\varphi:[m]\\to[n]$ satisfying $S(\\varphi)(s)=t$. Choose $m_0\\geq0$ such that every simplex in degree $n>m_0$ is degenerate, and let $\\mathcal I_{S,\\leq r}$ be the full subcategory on objects $(n,s)$ with $n\\leq r$. Then the finite full subcategory $\\mathcal I_{S,\\leq 2m_0}^{\\mathrm{op}}$ is initial in $\\mathcal I_S^{\\mathrm{op}}$ in these explicit senses: (1) for every object $z$ of $\\mathcal I_S$ there is an object $y$ of $\\mathcal I_{S,\\leq 2m_0}$ and a morphism $z\\to y$ in $\\mathcal I_S$; (2) for any two morphisms $z\\to y$ and $z\\to y'$ with $y,y'$ in $\\mathcal I_{S,\\leq 2m_0}$, there are objects $y=y_0,y_1,\\ldots,y_{2r}=y'$ in $\\mathcal I_{S,\\leq 2m_0}$ and a zigzag $y_0\\to y_1\\leftarrow y_2\\to\\cdots\\leftarrow y_{2r}$ in $\\mathcal I_S$, together with morphisms $z\\to y_i$ extending the two given ones, such that composing $z\\to y_i$ with each adjacent arrow gives $z\\to y_{i+1}$ (or conversely for an arrow pointing left). Consequently, for every category $\\mathcal C$ and diagram $D:\\mathcal I_S^{\\mathrm{op}}\\to\\mathcal C$, Categories Lemma 002R identifies the limit of $D$ over $\\mathcal I_S^{\\mathrm{op}}$ with the limit of its restriction to the finite category $\\mathcal I_{S,\\leq 2m_0}^{\\mathrm{op}}$, whenever either limit exists.",
+ "source": {
+  "document": "literature/stacks-project/simplicial.tex",
+  "place": "Lemma 017K (lemma-exists-hom-0-from-simplicial-set-finite), proof, paragraphs establishing the finite subcategory $\\mathcal U_{\\leq 2m_0}$; Categories Definition definition-initial and Lemma 002R (categories-lemma-initial), applied to the opposite indexing categories"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-simplicial-set"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "finite simplicial set has a finite initial subcategory of the opposite category of simplices after truncating above the nondegenerate dimension",
+   "results": "LeanSearch service returned no result; no declaration for this finite-initial truncation was found",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "finite initial subcategory of the opposite category of simplices of a simplicial set",
+   "results": "SSet.Finite and SSet.instFiniteObjOppositeSimplexCategory (Mathlib.AlgebraicTopology.SimplicialSet.Finite), but no initial truncation theorem",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "rg -n 'initial|cofinal|category of simplices|simplicial.*finite|nonDegenerate' Mathlib/AlgebraicTopology Mathlib/CategoryTheory",
+   "results": "No declaration matching finite initial truncation of a simplicial indexing category; only general initial/cofinal functor APIs and simplicial-set finiteness",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "created": {
+  "item": "lem-weil-pbc-simplicial-hom-object-exists"
+ },
+ "chapter": "sec-curve-estimates",
+ "unit": "sk-prop-h2"
+}
