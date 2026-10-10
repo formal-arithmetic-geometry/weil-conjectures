@@ -428,4 +428,24 @@ noncomputable def globalSectionsEquivOfIso (e : F ≅ G) :
 
 end GlobalSections
 
+/-- The support of a quotient of `F` is contained in the support of `F`: the stalks of the
+quotient are quotients of the stalks of `F`. -/
+theorem support_subset_of_epi (f : F ⟶ G) [Epi f] : G.support ⊆ F.support := fun x hx ↦
+  have : Nontrivial (G.stalk x).carrier := hx
+  Function.Surjective.nontrivial (β := (G.stalk x).carrier) (surjective_stalkAtMap _ _ _ f)
+
+omit [LocallyOfFiniteType (X ↘ Spec (CommRingCat.of k₀))] in
+/-- A zero Weil sheaf has empty support: its stalks are zero. -/
+theorem support_eq_empty_of_isZero (hF : IsZero F) : F.support = ∅ := by
+  refine Set.eq_empty_iff_forall_notMem.2 fun x (hx : Nontrivial (F.stalk x).carrier) ↦ ?_
+  have hz : IsZero ((WeilCoefficients.toModuleCat l).obj ((Sheaf.Γ _ _).obj
+      ((((X ↘ Spec (CommRingCat.of k₀)).geometricFiberPointOfFinitePoint x))^*[_].obj
+        ((ProEtale.AdicSheaf.forget _).obj ((IsoAlgebra.forget _).obj
+          ((ObjectProperty.ι _).obj F)))))) :=
+    (WeilCoefficients.toModuleCat l).map_isZero <| (Sheaf.Γ _ _).map_isZero <|
+      Functor.map_isZero _ <| (ProEtale.AdicSheaf.forget _).map_isZero <|
+        (IsoAlgebra.forget _).map_isZero <| (ObjectProperty.ι _).map_isZero hF
+  have : Subsingleton (F.stalk x).carrier := ModuleCat.subsingleton_of_isZero hz
+  exact not_subsingleton _ this
+
 end AlgebraicGeometry.WeilSheaf

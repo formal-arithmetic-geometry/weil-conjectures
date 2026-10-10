@@ -13,7 +13,7 @@ public import Mathlib.RingTheory.Extension.Presentation.Core
 Let `B` be a finitely presented `A`-algebra together with an `A`-algebra section `s : B → A`.
 We show that `B` and `s` descend to a finitely generated `ℤ`-subalgebra `A₀` of `A`: there is
 a finitely presented `A₀`-algebra `B₀` with `B ≅ A ⊗[A₀] B₀` and an `A₀`-algebra section
-`s₀ : B₀ → A₀` inducing `s` (Stacks, Tags 01ZM and 055P).
+`s₀ : B₀ → A₀` inducing `s` (Stacks, Tags 00R0 and 05N9; used for 01ZM and 055P).
 
 ## Main results
 
@@ -29,8 +29,8 @@ open TensorProduct MvPolynomial
 
 namespace Algebra.FinitePresentation
 
-/-- Noetherian approximation of a finitely presented algebra (Stacks 01ZM): `B` descends to a
-finitely generated `ℤ`-subalgebra `A₀` of `A`. That is, there is a finitely presented
+/-- Noetherian approximation of a finitely presented algebra (Stacks 00R0, 05N9): `B` descends
+to a finitely generated `ℤ`-subalgebra `A₀` of `A`. That is, there is a finitely presented
 `A₀`-algebra `B₀` with `B ≅ A ⊗[A₀] B₀`. -/
 theorem exists_fg_subalgebra_isPushout
     (A B : Type u) [CommRing A] [CommRing B] [Algebra A B] [Algebra.FinitePresentation A B] :
@@ -56,10 +56,10 @@ theorem exists_fg_subalgebra_isPushout
   rw [map_one, one_mul]
   rfl
 
-/-- Noetherian approximation of a finitely presented algebra with a section (Stacks 01ZM, 055P):
-`B` and the section `s` descend to a finitely generated `ℤ`-subalgebra `A₀` of `A`. That is,
-there is a finitely presented `A₀`-algebra `B₀` with `B ≅ A ⊗[A₀] B₀` and an `A₀`-algebra
-section `s₀ : B₀ → A₀` compatible with `s`. -/
+/-- Noetherian approximation of a finitely presented algebra with a section (Stacks 00R0, 05N9;
+used for 055P): `B` and the section `s` descend to a finitely generated `ℤ`-subalgebra `A₀` of
+`A`. That is, there is a finitely presented `A₀`-algebra `B₀` with `B ≅ A ⊗[A₀] B₀` and an
+`A₀`-algebra section `s₀ : B₀ → A₀` compatible with `s`. -/
 theorem exists_fg_subalgebra_with_section
     {A B : Type u} [CommRing A] [CommRing B] [Algebra A B] [Algebra.FinitePresentation A B]
     (s : B →ₐ[A] A) :

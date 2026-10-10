@@ -9,6 +9,8 @@ public import Mathlib.AlgebraicGeometry.Noetherian
 public import WeilConjectures.AlgebraicGeometry.Regular
 public import WeilConjectures.AlgebraicGeometry.Sites.CohomologyColimit
 public import WeilConjectures.AlgebraicGeometry.Sites.DivisorMap
+public import WeilConjectures.AlgebraicGeometry.Sites.DivisorLocal
+public import WeilConjectures.AlgebraicGeometry.Sites.GmGenericPoint
 public import WeilConjectures.AlgebraicGeometry.Sites.StalkwiseCokernel
 public import WeilConjectures.Mathlib.Algebra.Category.Grp.Colimits
 public import WeilConjectures.AlgebraicGeometry.Sites.Gm
@@ -56,11 +58,11 @@ whose target is `H²(Spec k(X)_ét, 𝔾ₘ) = Br(k(X))` by
 ## Main statements
 
 - `AlgebraicGeometry.Scheme.isIso_upperStarGmSheafToGmSheaf_fromSpecFunctionField`: the
-  pullback of `𝔾ₘ` along the generic point is `𝔾ₘ`. The proof is `sorry`.
+  pullback of `𝔾ₘ` along the generic point is `𝔾ₘ`.
 - `AlgebraicGeometry.Scheme.mono_toGenericGm`: the unit `𝔾ₘ ⟶ i_* i^* 𝔾ₘ` is a monomorphism.
 - `AlgebraicGeometry.Scheme.exists_cokernel_toGenericGm_iso_hom_comp_eq`: its cokernel is
   `⨁_{x ∈ X⁽¹⁾} i_{x*} ℤ`, compatibly with the divisor map, from three local statements on
-  étale neighbourhoods whose proofs are `sorry`.
+  étale neighbourhoods.
 - `AlgebraicGeometry.Scheme.shortExact_divisorSequence`: the divisor sequence, with the unit
   and the divisor map, is short exact, from the two previous statements.
 - `AlgebraicGeometry.Scheme.subsingleton_H_one_pointConstantInt`: `H¹(X, i_{x*} ℤ) = 0`.
@@ -113,10 +115,28 @@ noncomputable def toGenericGm : X.gmSheaf ⟶ X.genericGm :=
 /-- The comparison map `i^* 𝔾ₘ ⟶ 𝔾ₘ` along the generic point `i : Spec k(X) ⟶ X` is an
 isomorphism. The morphism `i` is not étale, but both sheaves have stalk `(k(X)ˢᵉᵖ)ˣ` at a
 separable closure of `k(X)`: the strict henselisation of the local ring `𝒪_{X,η} = k(X)` is
-`k(X)ˢᵉᵖ`. The proof is `sorry`. -/
+`k(X)ˢᵉᵖ`. On the stalk at a geometric point of `Spec k(X)` the map is
+`AlgebraicGeometry.Etale.stalkComparison`, which is injective, a local ring of an étale
+`X`-scheme over the generic point being a field
+(`AlgebraicGeometry.Etale.injective_stalkComparison_gmSheafToLowerStarGmSheaf`), and surjective,
+an étale neighbourhood of the generic point being cut out by equations defined over a nonempty
+open of `X` (`AlgebraicGeometry.Etale.surjective_stalkComparison_gmSheafToLowerStarGmSheaf`). -/
 theorem isIso_upperStarGmSheafToGmSheaf_fromSpecFunctionField :
-    IsIso (upperStarGmSheafToGmSheaf X.fromSpecFunctionField) :=
-  sorry
+    IsIso (upperStarGmSheafToGmSheaf X.fromSpecFunctionField) := by
+  refine isIso_of_isIso_sheafFiber_map _ fun t ↦ ?_
+  rw [uliftPointSmallEtale, NatIso.isIso_map_iff
+    ((pointSmallEtale _).uliftSheafFiberIso AddCommGrpCat.{u + 1}) _]
+  have h := Etale.upperStarCompSheafFiberIso_inv_app_comp_sheafFiber_map
+    X.fromSpecFunctionField ((Spec X.functionField).algClosurePoint t)
+    (gmSheafToLowerStarGmSheaf X.fromSpecFunctionField)
+  have : IsIso (Etale.stalkComparison X.fromSpecFunctionField
+      ((Spec X.functionField).algClosurePoint t)
+      (gmSheafToLowerStarGmSheaf X.fromSpecFunctionField)) :=
+    (ConcreteCategory.isIso_iff_bijective _).2
+      ⟨Etale.injective_stalkComparison_gmSheafToLowerStarGmSheaf X _,
+        Etale.surjective_stalkComparison_gmSheafToLowerStarGmSheaf X _⟩
+  rw [← h] at this
+  exact @IsIso.of_isIso_comp_left _ _ _ _ _ _ _ inferInstance this
 
 /-- The sheaf `i_* i^* 𝔾ₘ` is the pushforward of the sheaf `𝔾ₘ` of `Spec k(X)`, because the
 pullback of `𝔾ₘ` along the generic point is `𝔾ₘ`
@@ -254,7 +274,9 @@ whose order vanishes at every point of `V`. Then near every point `y` of `V` the
 is a unit of `𝒪_V`: there is an open neighbourhood `U` of `y` and `u ∈ Γ(U, 𝒪)ˣ` restricting
 to `f` on the generic fibre of `U`. The local rings of `V` are regular, hence unique
 factorisation domains, and a rational function of order zero along every height one prime of
-a unique factorisation domain is a unit. The proof is `sorry`.
+a unique factorisation domain is a unit
+(`AlgebraicGeometry.Scheme.Etale.exists_toLocalGenericRing_eq_of_ord_eq_zero`); such a unit of
+the local ring spreads out (`AlgebraicGeometry.Scheme.Etale.exists_eq_of_toLocalGenericRing_eq`).
 (blueprint: `lem-sc-divisor-sequence-general`, exactness in the middle) -/
 lemma Etale.exists_eq_of_ord_eq_zero [IsLocallyNoetherian X] [IsRegular X] (V : X.Etale)
     (y : V.left) (f : Γ(pullback V.hom X.fromSpecFunctionField, ⊤)ˣ)
@@ -263,25 +285,30 @@ lemma Etale.exists_eq_of_ord_eq_zero [IsLocallyNoetherian X] [IsRegular X] (V : 
       (pullback.fst (Etale.ofOpens V U).hom X.fromSpecFunctionField).appTop u.val =
         ((MorphismProperty.Over.pullback @Etale ⊤ X.fromSpecFunctionField).map
           (Etale.ofOpensι V U)).left.appTop f.val := by
-  sorry
+  obtain ⟨r, hr⟩ := Etale.exists_toLocalGenericRing_eq_of_ord_eq_zero V y f fun w _ ↦ hf w
+  exact Etale.exists_eq_of_toLocalGenericRing_eq V y f.val r hr
 
 /-- **Local finiteness of divisors.** Let `X` be an integral regular locally noetherian scheme,
 `V` an étale `X`-scheme and `f` a unit on the generic fibre of `V`. Near every point of `V`, the
-points at which `f` has nonzero order lie over finitely many points of `X`. The proof is
-`sorry`.
+points at which `f` has nonzero order lie over finitely many points of `X`: they are
+finitely many (`AlgebraicGeometry.Scheme.Etale.exists_opens_finite_ord_ne_zero`).
 (blueprint: `lem-sc-divisor-sequence-general`, the divisor is a finite sum) -/
 lemma Etale.exists_finset_of_ord_ne_zero [IsLocallyNoetherian X] [IsRegular X] (V : X.Etale)
     (y : V.left) (f : Γ(pullback V.hom X.fromSpecFunctionField, ⊤)ˣ) :
     ∃ (U : V.left.Opens) (_ : y ∈ U) (T : Finset X),
       ∀ y' ∈ U, Etale.ord V y' f ≠ 0 → V.hom y' ∈ T := by
-  sorry
+  classical
+  obtain ⟨U, hyU, hfin⟩ := Etale.exists_opens_finite_ord_ne_zero V y f
+  exact ⟨U, hyU, hfin.toFinset.image V.hom, fun y' hy' h ↦
+    Finset.mem_image.2 ⟨y', hfin.mem_toFinset.2 ⟨hy', h⟩, rfl⟩⟩
 
 /-- **Weil divisors are locally principal on an étale neighbourhood.** Let `X` be an integral
 regular locally noetherian scheme, `x` a point of `X` of codimension one, `V` an étale
 `X`-scheme and `c` an integer-valued function on the points of `V` over `x`. Near every point
 `y` of `V` there is a unit on the generic fibre whose order is `c` at the points over `x` and `0`
 elsewhere. The local rings of `V` are regular, hence unique factorisation domains, so the height
-one primes of `𝒪_{V,y}` are principal. The proof is `sorry`.
+one primes of `𝒪_{V,y}` are principal
+(`AlgebraicGeometry.Scheme.Etale.exists_ord_eq_of_forall_ne`).
 (blueprint: `lem-sc-divisor-sequence-general`, surjectivity) -/
 lemma Etale.exists_ord_eq_extendByZero [IsLocallyNoetherian X] [IsRegular X] (V : X.Etale)
     (y : V.left) {x : X} (hx : coheight x = 1)
@@ -291,7 +318,13 @@ lemma Etale.exists_ord_eq_extendByZero [IsLocallyNoetherian X] [IsRegular X] (V 
       ∀ y' : U, ULift.up (Etale.ord (Etale.ofOpens V U) y' f) =
         extendByZero (AddCommGrpCat.of (ULift.{u + 1} ℤ)) (X.fromSpecResidueField x) c
           (U.ι y') := by
-  sorry
+  obtain ⟨U, hyU, f, hf⟩ := Etale.exists_ord_eq_of_forall_ne V y hx
+    (fun z ↦
+      (extendByZero (AddCommGrpCat.of (ULift.{u + 1} ℤ)) (X.fromSpecResidueField x) c z).down)
+    fun z hz ↦ by
+      rw [extendByZero_of_notMem _ (by rwa [range_fromSpecResidueField])]
+      rfl
+  exact ⟨U, hyU, f, fun y' ↦ ULift.ext _ _ (hf y')⟩
 
 omit [IsIntegral X] in
 /-- On geometric stalks, extension by zero `⨁_{i} i_{e(i)*} ℤ ⟶ (V ↦ (V → ℤ))` is injective, for
