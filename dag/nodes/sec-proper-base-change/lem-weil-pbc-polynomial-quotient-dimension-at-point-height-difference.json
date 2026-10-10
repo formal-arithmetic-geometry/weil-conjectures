@@ -1,0 +1,78 @@
+{
+ "id": "lem-weil-pbc-polynomial-quotient-dimension-at-point-height-difference",
+ "kind": "statement",
+ "title": "Dimension at a point of a quotient of a polynomial ring over a field: n minus the difference of heights",
+ "statement": "Let $k$ be a field, $n\\ge0$ an integer, $P=k[x_1,\\dots,x_n]$ the polynomial ring [def-weil-pbc-mv-polynomial-ring], $I\\subseteq P$ an ideal, $S=P/I$ with quotient map $\\pi:P\\to S$, $\\mathfrak q\\subset S$ a prime ideal and $\\mathfrak q'=\\pi^{-1}(\\mathfrak q)$, a prime ideal of $P$ containing $I$. For a prime ideal $\\mathfrak p$ of a commutative ring $A$ let $\\operatorname{ht}(\\mathfrak p)\\in\\{0,1,2,\\dots,\\infty\\}$ be the supremum of the integers $t\\ge0$ for which there is a chain $\\mathfrak p_0\\subsetneq\\mathfrak p_1\\subsetneq\\cdots\\subsetneq\\mathfrak p_t$ of prime ideals of $A$ with $\\mathfrak p_t\\subseteq\\mathfrak p$. Let $\\dim_{\\mathfrak q}(\\operatorname{Spec}S)$ be the Krull dimension of the topological space $\\operatorname{Spec}S$ [def-weil-affine-spectrum] at the point $\\mathfrak q$ [def-kun-topological-dimension-at-point]. Then $\\operatorname{ht}(\\mathfrak q)$ (computed in $S$) and $\\operatorname{ht}(\\mathfrak q')$ (computed in $P$) are integers with $0\\le\\operatorname{ht}(\\mathfrak q)\\le\\operatorname{ht}(\\mathfrak q')\\le n$, and $$\\dim_{\\mathfrak q}(\\operatorname{Spec}S)=n-\\operatorname{ht}(\\mathfrak q')+\\operatorname{ht}(\\mathfrak q).$$",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Algebra, Lemma Tag 00P2 (label lemma-codimension, line 28270: for a surjection S' -> S of finite type k-algebras, dim_{x'} Spec S' - dim_x Spec S = height(p') - height(p)) applied to S' = P = k[x_1,...,x_n], with dim_{x'} Spec P = n (Lemma Tag 00P1, label lemma-dimension-at-a-point-finite-type-field, line 28222, and Lemma Tag 00OP, label lemma-dim-affine-space, line 27660); exactly the identity c = height(q') - height(q), 'in other words dim_q(S) = n - c (see Lemma 00P2)' in the statement of Lemma Tag 00SC (label lemma-lci, line 35909)"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-mv-polynomial-ring",
+  "def-weil-affine-spectrum",
+  "def-kun-topological-dimension-at-point"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "dimension of Spec of a finite type algebra over a field at a point equals n minus height of prime in polynomial ring plus height of prime in quotient",
+   "results": "Ideal.height_le_height_add_of_liesOver, Ideal.height_eq_height_add_of_liesOver_of_hasGoingDown, Ideal.height_le_ringKrullDim_quotient_add_one, Ideal.height_le_ringKrullDim_quotient_add_encard (Mathlib.RingTheory.Ideal.KrullsHeightTheorem), IsLocalization.AtPrime.ringKrullDim_eq_height, Ideal.primeHeight (Mathlib.RingTheory.Ideal.Height), PrimeSpectrum.topologicalKrullDim_eq_ringKrullDim (Mathlib.RingTheory.Spectrum.Prime.Topology)",
+   "date": "2026-10-10",
+   "verdict": "no match: height inequalities and global dimensions only; no local dimension of a space at a point"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "local Krull dimension of the spectrum of a quotient of a polynomial ring at a prime equals number of variables minus codimension (difference of heights)",
+   "results": "Module.ringKrullDim_quotient_add_one_of_mem_nonZeroDivisors, ringKrullDim_le_ringKrullDim_add_card, ringKrullDim_le_ringKrullDim_add_spanFinrank, ringKrullDim_quotient_span_singleton_succ_eq_ringKrullDim (Mathlib.RingTheory.KrullDimension.Regular), ringKrullDim_quotient (KrullDimension.NonZeroDivisors), IsLocalization.AtPrime.ringKrullDim_eq_height, height_le_ringKrullDim_quotient_add_spanFinrank",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "Ideal.height, MvPolynomial, topologicalKrullDim",
+   "results": "none",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rnE 'krullDimAt|localKrullDim|dimAt|codimension' Mathlib --include=*.lean; grep -n '^theorem|^lemma|^def' Mathlib/Topology/KrullDimension.lean; grep -rnE '(height|ringKrullDim).*(MvPolynomial|mvPolynomial)' Mathlib",
+   "results": "no Krull dimension of a space at a point (Topology/KrullDimension.lean has topologicalKrullDim, IsInducing.topologicalKrullDim_le, IsHomeomorph.topologicalKrullDim_eq, topologicalKrullDim_subspace_le only); for polynomial rings only ringKrullDim_mvPolynomial_of_isEmpty and ringKrullDim_add_natCard_le_ringKrullDim_mvPolynomial (RingTheory/KrullDimension/NonZeroDivisors.lean:76,81), not dim k[x_1..x_n] = n nor heights of its primes",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "local_search",
+   "query": "krullDimAt (project ~/weil-conjectures-slopmaster2)",
+   "results": "no items; index: unavailable, so no verdict from it (the grep stands in)",
+   "date": "2026-10-10",
+   "verdict": "no verdict"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-lci-regular-sequence-global-complete-intersection",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "reviewed": "Reviewed by L 2026-10-10 (statement): Algebra 00P2 for S' = k[x_1..x_n] with 00P1/00OP (dim at every point of affine n-space is n). Unsplit."
+}
