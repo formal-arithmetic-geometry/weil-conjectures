@@ -22,9 +22,53 @@
   "def-weil-sheaf-of-modules-category",
   "def-pur-derived-internal-hom"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "View the bounded-above complex $E^\\bullet$ as a complex in the homotopy category of $A$-modules. The Mathlib K-projectivity statement [lem-sc-bounded-above-projective-kprojective] applies to the abelian category of $A$-modules, so applying $\\operatorname{Hom}_A(E^\\bullet,-)$ to an acyclic complex preserves acyclicity. The quasi-isomorphism $E^\\bullet\\to F[0]$ therefore computes the total derived Hom by the ordinary Hom complex in the definition [def-pur-derived-internal-hom], so $\\operatorname{Hom}_A^\\bullet(E^\\bullet,G[0])$ is a representative of $R\\operatorname{Hom}_A(F[0],G[0])$.",
+   "uses": [
+    "def-pur-derived-internal-hom",
+    "lem-sc-bounded-above-projective-kprojective"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived-categories.tex",
+    "place": "Lemma Tag 06XR (derived-lemma-compute-ext-resolutions), projective-resolution construction of derived Hom"
+   }
+  },
+  {
+   "text": "The Hom complex is formed degreewise by the products $\\prod_j\\operatorname{Hom}_A(E^j,G[0]^{j+i})$, with differential induced by the differentials of $E^\\bullet$ and $G[0]$. This is exactly the product totalization specified by [def-pur-derived-internal-hom]; because $G[0]^q=0$ for $q\\ne0$, its degree-$i$ term reduces to $\\operatorname{Hom}_A(E^{-i},G)$, with the induced differential. The comparison is canonical because the derived-Hom functor sends the quasi-isomorphism $E^\\bullet\\to F[0]$ to an isomorphism after K-projective replacement.",
+   "uses": [
+    "def-pur-derived-internal-hom",
+    "lem-sc-bounded-above-projective-kprojective"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived-categories.tex",
+    "place": "Lemma Tag 06XR, construction of the Hom complex from a projective resolution"
+   }
+  },
+  {
+   "text": "Applying the cohomology functor in degree $i$ to the representative from Step 1 gives $H^i(\\operatorname{Hom}_A^\\bullet(E^\\bullet,G[0]))\\cong H^i(R\\operatorname{Hom}_A(F[0],G[0]))$. The isomorphism is canonical because [def-pur-derived-internal-hom] is a functor on the derived category and the K-projective comparison is unique in that category; it is therefore independent of the chosen resolution and natural in $F$ and $G$. It holds for every integer $i$, including negative degrees (where both sides vanish in the module-in-degree-zero situation when appropriate).",
+   "uses": [
+    "def-pur-derived-internal-hom",
+    "lem-sc-bounded-above-projective-kprojective"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived-categories.tex",
+    "place": "Lemma Tag 06XR, conclusion identifying cohomology of the resolution Hom complex with derived Hom"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pur-derived-internal-hom",
+  "lem-sc-bounded-above-projective-kprojective"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/derived-categories.tex",
+  "place": "More on Algebra Tag 0A5W, Section 15.75 construction of RHom, and Derived Categories Tag 06XR, part (2)"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -53,15 +97,59 @@
    "results": "service unavailable: Internal Server Error",
    "date": "2026-10-11",
    "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "bounded-above projective resolution computes derived Hom complex represents RHom",
+   "results": "CategoryTheory.ProjectiveResolution.isoExt; CategoryTheory.ProjectiveResolution.instIsKProjectiveCochainComplex; CategoryTheory.ProjectiveResolution.extEquivCohomologyClass",
+   "date": "2026-10-11",
+   "verdict": "generalization: projective-resolution Ext/K-projective infrastructure, not the exact all-integer RHom statement"
+  },
+  {
+   "tool": "loogle",
+   "query": "ProjectiveResolution.isoExt, CategoryTheory.ProjectiveResolution.instIsKProjectiveCochainComplex",
+   "results": "0 hits; unknown identifier ProjectiveResolution.isoExt",
+   "date": "2026-10-11",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "ProjectiveResolution|isoExt|IsKProjective|derived.*Hom in Mathlib/CategoryTheory",
+   "results": "no matching declaration from this grep query",
+   "date": "2026-10-11",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "a bounded above complex of projective modules computes the derived Hom into a module concentrated in degree zero",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-11",
+   "verdict": "unavailable"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-sc-derived-internal-hom-stalk-localization",
   "by": "worker",
   "date": "2026-10-10"
  },
  "chapter": "sec-picard-framework",
- "unit": "sk-thm-picard-duality"
+ "unit": "sk-thm-picard-duality",
+ "split_report": {
+  "date": "2026-10-11",
+  "item": "lem-sc-derived-hom-projective-resolution",
+  "worker": "stage1",
+  "summary": "Read the item against Stacks Derived Categories Lemma 06XR. No existing project declaration states the item, and Mathlib provides only the more specialized ProjectiveResolution Ext/K-projective infrastructure. The split records the standard proof: a bounded-above projective complex is K-projective, its ordinary Hom complex computes RHom, and taking cohomology gives the canonical identification in every integer degree. No new DAG node was needed; the only dependency is the existing derived internal-Hom definition.",
+  "blueprint": "Realizes the parenthetical Ext-vanishing proof of thm-sc-p1-duality after the stalkwise reduction: compute derived Hom over the local ring from the bounded-above projective resolution.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-dhp1756",
+  "group": "K1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-dhp1756 (reviewer sub-agent of L); spot-checked: Read Mathlib CochainComplex.isKProjective_of_projective at KProjective.lean:113 (IsStrictlyLE d + projective terms -> IsKProjective; Mathlib's nullhomotopy definition equals Hom-complex acyclicity by shifting, as the file's own comment notes): leaf exact (my check: tool grep, query isKProjective_of_projective in slopmaster2 mathlib, verdict exact declaration). Item not itself a leaf: ProjectiveResolution.extEquivCohomologyClass (Projective/Ext.lean) gives Ext^n for n:N as cohomology classes, not the object-level RHom representative in all degrees i in Z. Step 1: Hom(E,G)->Hom(E,I(G)) qis by K-projectivity on the cone, Hom(F,I(G))->Hom(E,I(G)) qis by the qis clause of def-pur-derived-internal-hom: balancing argument (064E) correct; Step 2 degree calculation Hom(E^{-i},G) correct; Step 3 fine. No cycle. Only cosmetic: split_report text still says no new node was needed (stale, not in DAG)."
+ }
 }
