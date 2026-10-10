@@ -25,9 +25,43 @@
   "def-weil-inverse-system",
   "def-sp-left-exact-additive"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Since morphisms of towers are levelwise, for a morphism of towers u:(A_n)→(B_n) the levelwise kernels ker(u_n), with the transition maps induced by those of (A_n), form a tower which is a kernel of u in the category of towers (the universal property is checked level by level). An element of the inverse limit is a compatible tuple. The kernel of the induced map on limits is therefore the subgroup of compatible tuples whose nth component lies in ker(u_n) for every n; this is exactly the inverse limit of the levelwise kernel tower. Thus the inverse-limit functor preserves kernels.",
+   "uses": [
+    "def-weil-inverse-system",
+    "lem-pc-tower-abelian"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 07KW, Lemma 15.88.1 setup and proof of the kernel description"
+   }
+  },
+  {
+   "text": "Finite biproducts and the zero object in the category of towers are computed levelwise (direct check of the universal properties, morphisms being levelwise). Compatible tuples in a finite biproduct of towers are exactly pairs of compatible tuples, and the zero compatible tuple is unique. Componentwise addition therefore identifies the inverse limit of a finite biproduct with the corresponding biproduct of inverse limits and identifies the inverse limit of the zero tower with zero. Hence inverse limit is additive; together with kernel preservation from the preceding argument, it is left exact by the definition of an additive left exact functor.",
+   "uses": [
+    "def-weil-inverse-system",
+    "def-sp-left-exact-additive",
+    "lem-pc-tower-abelian"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 07KW, Lemma 15.88.1 setup for the inverse-limit functor"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-inverse-system",
+  "lem-pc-tower-abelian",
+  "def-sp-left-exact-additive"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Tag 07KW, Lemma 15.88.1 setup for the inverse-limit functor"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -56,13 +90,42 @@
    "results": "service unavailable: Internal Server Error",
    "date": "2026-10-11",
    "verdict": "unavailable"
+  },
+  {
+   "tool": "grep",
+   "query": "lim_preservesLimits in Mathlib/CategoryTheory/Adjunction/Limits.lean",
+   "results": "instance lim_preservesLimits (Mathlib/CategoryTheory/Adjunction/Limits.lean:215): lim : (J ⥤ C) ⥤ C preserves all limits (right adjoint to const); implies kernel and finite-product preservation but not stated for the DAG's tower/additive-left-exact notion as one declaration",
+   "date": "2026-10-11",
+   "verdict": "partial (generic tool; elementary proof kept)"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-pc-derived-limit-roos-abelian-groups",
   "by": "worker",
   "date": "2026-10-10"
+ },
+ "split_report": {
+  "date": "2026-10-11",
+  "item": "lem-pc-tower-limit-left-exact",
+  "worker": "stage1",
+  "summary": "Completed the proof split without creating subordinate nodes. The first step identifies kernels of the inverse-limit map with inverse limits of levelwise kernels by an explicit compatible-tuple argument. The second step identifies finite biproducts and zero under inverse limit, proving additivity; combined with the first step and the definition of left exact additive functors, this proves left exactness.",
+  "blueprint": {
+   "statement": "proof, first step, cohomology of the derived inverse limit",
+   "steps": {
+    "1": "Tag 07KW setup: inverse limit preserves kernels by the compatible-tuple description",
+    "2": "Tag 07KW setup: inverse limit is additive and hence left exact"
+   },
+   "same_as_search": "Searched the imported blueprint across all chapters for inverse-limit functors, towers of abelian groups, and Tag 07KW; no alternate blueprint node states this item."
+  }
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-tle2553",
+  "group": "J1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-tle2553 (reviewer sub-agent of L); spot-checked: Statement vs Tag 07KW setup; cites existing def-weil-inverse-system and lem-pc-tower-abelian (no redefinition); exactness notion = additive + kernel-preserving per def-sp-left-exact-additive, matches citers lem-pc-derived-limit-roos-abelian-groups and lem-pc-tower-surjective-lim-acyclic. Mathlib: lim_preservesLimits (CategoryTheory/Adjunction/Limits.lean:215) is the generic fact, no single declaration for this statement; recorded. FIX more, RETURN less: C4 (missed by second reading) - lem-pc-tower-abelian does not state that kernels/biproducts/zero in towers are levelwise, which steps 1-2 use; folded that elementary universal-property check into both step texts.; 1 file(s) fixed by the reviewer"
  }
 }
