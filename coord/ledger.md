@@ -1325,3 +1325,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 11:40 L: accepted thm-galois-fundamental (0BND, 5 steps; 4 new nodes, 2 closed on slopmaster2; lem-fet-galois-category attached and closed; equivalenceContAction recorded as the Lean of clause (1); blueprint base-change clause false, corrected, HUMAN.md).
 - 11:41 L: accepted thm-weil-pbc-universal-homeomorphism-invariance (03SI/04DZ through the closed site/topos nodes, 5 steps, 0 new; 1 tool use).
 - 2026-10-10, delivery of K1: lem-weil-pbc-torsion-extension-flat-descent merged from deliver/K1/lem-weil-pbc-torsion-extension-flat-descent (1 commit(s), 4 new node(s), spot-checked by L: L: 05EG: cyclic presentation of the torsion module, descent of extensions of cyclic modules and their direct sums, the Hom comparison; 4 new nodes); claim closed
+- 11:42 L: merged K1 lem-weil-pbc-torsion-extension-flat-descent (05EG, +4 nodes).
