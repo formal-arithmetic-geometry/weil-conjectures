@@ -1,0 +1,88 @@
+{
+ "id": "lem-weil-pbc-sets-etale-inverse-image-composition-units",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lemma-weil-pbc-proper-strict-henselian-h0",
+   "place": "proof, Tag 0A0C: the invocation of Tag 09ZF; within 09ZF, third paragraph: the compatibility of the pullback i^{-1}s with pullback by morphisms of X_etale and by finite morphisms X' -> X, 'left to the reader', used in the fourth paragraph for t' and for the two pullbacks of s' to X' x_X X'",
+   "via": [
+    "lem-weil-pbc-gabber-h0-etale-criterion"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Composition isomorphisms of etale inverse images of sheaves of sets, with units",
+ "statement": "For a morphism of schemes $e:T\\to S$ and a sheaf of sets $G$ on $S_{\\Et}$ [def-weil-pbc-etale-sheaf-of-sets], $e^{-1}G$ denotes the etale inverse image of sheaves of sets: the sheafification of the presheaf $e_pG(V)=\\varinjlim_{(U,\\varphi)}G(U)$ on $T_{\\Et}$, the colimit over the pairs of an object $U$ of $S_{\\Et}$ and a $T$-morphism $\\varphi:V\\to U\\times_ST$, i.e. $u_s$ for the functor $u:S_{\\Et}\\to T_{\\Et}$, $U\\mapsto U\\times_ST$ [lem-weil-pbc-etale-base-change-finite-limits] (1), of [lem-weil-pbc-continuous-functor-sheaf-pullback-adjunction] (2) with values in sets (the construction of [def-weil-pbc-inverse-image] with values in sets); it is left adjoint to $e_*$, $(e_*H)(U)=H(U\\times_ST)$. For an object $U$ of $S_{\\Et}$ and $s\\in G(U)$ write $e^*s\\in(e^{-1}G)(U\\times_ST)$ for the image of $s$ under the unit $G\\to e_*e^{-1}G$. Let $f:Y\\to X$ and $g:W\\to Y$ be morphisms of schemes [def-pc-scheme], with small etale sites [def-weil-pbc-etale-site]. Then for every sheaf of sets $F$ on $X_{\\Et}$ there is an isomorphism of sheaves of sets $c_{f,g,F}:g^{-1}f^{-1}F\\xrightarrow{\\sim}(f\\circ g)^{-1}F$ on $W_{\\Et}$, natural in $F$, such that: (0) (units) for every morphism $e:T\\to S$, every sheaf of sets $G$ on $S_{\\Et}$, every morphism $a:U'\\to U$ of $S_{\\Et}$ and $s\\in G(U)$, $e^*(s|_{U'})=(e^*s)|_{U'\\times_ST}$, and for every morphism of sheaves $\\psi:G\\to G'$, $e^*(\\psi_U(s))=(e^{-1}\\psi)(e^*s)$; (1) $c_{f,g,F}(g^*(f^*s))=(f\\circ g)^*s$ for every object $U$ of $X_{\\Et}$ and every $s\\in F(U)$, where $(U\\times_XY)\\times_YW$ is identified with $U\\times_XW$ by the canonical isomorphism [def-pc-fibre-product]; and $c_{f,g,F}$ is the only morphism of sheaves $g^{-1}f^{-1}F\\to(f\\circ g)^{-1}F$ with this property; (2) (associativity) for a further morphism $h:V\\to W$, the two isomorphisms $h^{-1}g^{-1}f^{-1}F\\to(f\\circ g\\circ h)^{-1}F$, namely $c_{f\\circ g,h,F}\\circ h^{-1}(c_{f,g,F})$ and $c_{f,g\\circ h,F}\\circ c_{g,h,f^{-1}F}$, are equal.",
+ "source": {
+  "document": "literature/stacks-project/sites.tex",
+  "place": "Lemma Tag 03CB (lemma-composition-morphisms-sites) and its proof ((u o v)_s = u_s o v_s), applied to the base change functors of small etale sites; used without statement in Etale Cohomology Lemma Tag 09ZF, proof, third paragraph ('compatible with pullback by morphisms in X_etale and by (finite) morphisms X' -> X in a manner which we leave to the reader to clarify'); the unit and associativity clauses are written by an agent"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-pbc-etale-site",
+  "def-weil-pbc-etale-sheaf-of-sets",
+  "def-weil-pbc-inverse-image",
+  "lem-weil-pbc-continuous-functor-sheaf-pullback-adjunction",
+  "lem-weil-pbc-etale-base-change-finite-limits",
+  "def-pc-fibre-product"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "composition of pullback functors of sheaves along continuous functors is isomorphic to pullback along composite",
+   "results": "GrothendieckTopology.overMapPullbackComp (Mathlib.CategoryTheory.Sites.Over), ChosenPullbacksAlong.pullbackComp, Scheme.Modules.pullbackComp, SheafOfModules.pullbackComp; none for sheaves of sets on small etale sites of schemes",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "isomorphism between sheaf pullback along composite of continuous functors and composite of sheaf pullbacks, with associativity",
+   "results": "SheafOfModules.pullback_assoc, SheafOfModules.pullbackComp, GrothendieckTopology.overMapPullbackComp, overMapPullback_assoc_assoc (over categories only)",
+   "date": "2026-10-10",
+   "verdict": "no match: over-category and sheaf-of-modules versions only"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.sheafPullback, CategoryTheory.Functor.comp",
+   "results": "instPreservesFiniteLimitsSheafSheafPullbackOfRepresentablyFlat, Point.sheafFiberComapIso; no composition isomorphism of Functor.sheafPullback",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "rg -n 'pullbackComp|sheafPullback' Mathlib/CategoryTheory/Sites/Pullback.lean Mathlib/CategoryTheory/Sites/*.lean",
+   "results": "Functor.sheafPullback (Pullback.lean:55,70), sheafAdjunctionContinuous (:59,75), sheafPullbackIso (:85); overMapPullbackComp (Over.lean:456); no composition isomorphism for Functor.sheafPullback",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "rg -n 'upperStarComp' ~/weil-conjectures-slopmaster2/WeilConjectures (rule 0)",
+   "results": "AlgebraicGeometry.Etale.upperStarComp (SixFunctors/Etale/UpperLowerStar/Defs.lean:325), Etale.upperStarComp_hom_app_unit_app and Etale.upperStarComp_assoc (Etale/UpperLowerStar/Coherence.lean:163, 265): the same statement for sheaves with values in a Grothendieck abelian category A, not for sheaves of sets",
+   "date": "2026-10-10",
+   "verdict": "no Lean for sheaves of sets (abelian analogue recorded)"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-gabber-h0-etale-criterion",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-iff"
+}

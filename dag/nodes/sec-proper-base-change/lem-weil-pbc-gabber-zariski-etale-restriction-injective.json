@@ -1,0 +1,89 @@
+{
+ "id": "lem-weil-pbc-gabber-zariski-etale-restriction-injective",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lemma-weil-pbc-proper-strict-henselian-h0",
+   "place": "proof, Tag 0A0C: the invocation of Tag 09ZF; within 09ZF, the injectivity of the base change map i^{-1}(F|_{X_Zar}) -> (i^{-1}_small F)|_{Z_Zar} (first paragraph of the proof of 09ZF) and the injectivity of Gamma(X,F) -> Gamma(Z,i^{-1}F) deduced from it (second paragraph)",
+   "via": [
+    "lem-weil-pbc-gabber-h0-etale-criterion"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Zariski inverse image injects into the etale inverse image (sheaves of sets)",
+ "statement": "Let $X$ be a scheme [def-pc-scheme], $i:Z\\to X$ a closed immersion [def-weil-closed-immersion] and $F$ a sheaf of sets on the small etale site $X_{\\Et}$ [def-weil-pbc-etale-sheaf-of-sets]. Let $F_{\\rm Zar}$ be the sheaf of sets $W\\mapsto F(W\\hookrightarrow X)$ on the topological space of $X$ ($W\\subseteq X$ open) [lem-weil-pbc-zariski-etale-inclusion-morphism-of-sites], and let $i^{-1}_{\\rm Zar}F_{\\rm Zar}$ be its topological inverse image on $Z$ with unit $\\eta^{\\rm Zar}_W:F_{\\rm Zar}(W)\\to(i^{-1}_{\\rm Zar}F_{\\rm Zar})(i^{-1}W)$ [def-weil-pbc-topological-inverse-image] (2), (3) with values in sets. Let $i^{-1}F$ be the etale inverse image of $F$, a sheaf of sets on $Z_{\\Et}$ (the sheafification of $V\\mapsto\\varinjlim_{(U,\\varphi)}F(U)$ over pairs of $U$ etale over $X$ and a $Z$-morphism $\\varphi:V\\to U\\times_XZ$ [def-pc-fibre-product], as in [lem-weil-pbc-continuous-functor-sheaf-pullback-adjunction] (2) for the functor $U\\mapsto U\\times_XZ$, i.e. [def-weil-pbc-inverse-image] with values in sets), with unit $i^*:F(U)\\to(i^{-1}F)(U\\times_XZ)$, and let $(i^{-1}F)_{\\rm Zar}$ be the sheaf $V\\mapsto(i^{-1}F)(V\\hookrightarrow Z)$ on the topological space of $Z$. For $W\\subseteq X$ open identify $W\\times_XZ$ with the open subscheme $i^{-1}(W)$ of $Z$. Then there is exactly one morphism of sheaves of sets $\\beta:i^{-1}_{\\rm Zar}F_{\\rm Zar}\\to(i^{-1}F)_{\\rm Zar}$ on $Z$ with $\\beta_{i^{-1}W}(\\eta^{\\rm Zar}_W(s))=i^*s$ for every open $W\\subseteq X$ and every $s\\in F(W)$, and $\\beta_V$ is injective for every open $V\\subseteq Z$. In particular the canonical restriction $\\Gamma(X,F)\\to\\Gamma(Z,i^{-1}F)$, $s\\mapsto i^*s$, is the composite of $\\eta^{\\rm Zar}_X:\\Gamma(X,F_{\\rm Zar})=F(X)\\to\\Gamma(Z,i^{-1}_{\\rm Zar}F_{\\rm Zar})$ with the injective map $\\beta_Z$.",
+ "source": {
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Lemma Tag 09ZF (lemma-gabber-h0), proof, first paragraph ('There is a canonical (base change) map ... we obtain injectivity on stalks') and second paragraph (factorization of the restriction map)"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-closed-immersion",
+  "def-weil-pbc-etale-sheaf-of-sets",
+  "lem-weil-pbc-zariski-etale-inclusion-morphism-of-sites",
+  "def-weil-pbc-topological-inverse-image",
+  "def-pc-fibre-product",
+  "lem-weil-pbc-continuous-functor-sheaf-pullback-adjunction",
+  "def-weil-pbc-inverse-image"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "inverse image of Zariski sheaf maps injectively into restriction of etale inverse image to Zariski site",
+   "results": "Scheme.Hom.toImage_app_injective, Scheme.AffineZariskiSite.toOpens_injective, map_injective_of_isIntegral (Mathlib.AlgebraicGeometry.*); none compares Zariski and etale inverse images",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "morphism of sites from etale site to Zariski site of a scheme, comparison of inverse images along closed immersion",
+   "results": "Scheme.Etale.forget, Scheme.etaleTopology, Scheme.zariskiTopology_le_etaleTopology (Mathlib.AlgebraicGeometry.Sites.Etale); no base change map of inverse images",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Scheme.smallEtaleTopology, AlgebraicGeometry.IsClosedImmersion",
+   "results": "no results",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "rg -n 'zariskiTopology|smallEtaleTopology' Mathlib/AlgebraicGeometry/Sites/ (Etale.lean, SmallAffineZariski.lean, AffineEtale.lean)",
+   "results": "only the topologies and zariskiTopology_le_etaleTopology; no inverse-image comparison",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "rg -n 'zariski|Zariski' ~/weil-conjectures-slopmaster2/WeilConjectures/SixFunctors WeilConjectures/AlgebraicGeometry/Sites (rule 0)",
+   "results": "no declaration stating the comparison map for sheaves of sets",
+   "date": "2026-10-10",
+   "verdict": "no Lean"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-gabber-h0-etale-criterion",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-iff"
+}
