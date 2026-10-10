@@ -2919,3 +2919,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 23:07 L: merged deliver/F1/lem-weil-pbc-injective-acyclicity-bounded-below (reviewer FIX; first push; new nodes: 1)
 - 23:07 L: merged deliver/H1/lem-exc-etale-algebra-lift (reviewer PASS; first push; new nodes: 0)
 - 23:07 L: merged deliver/F1/lem-kun-support-geometric-point-independent (reviewer FIX; first push; new nodes: 0)
+- 23:07 L: merged deliver/M1/lem-kun-fg-separable-smooth (reviewer FIX; first push; new nodes: 0)
