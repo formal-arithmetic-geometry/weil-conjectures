@@ -1893,3 +1893,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 15:59 L: returned deliver/C1/lem-sc-leray-closed-pushforward-cohomology (reviewer RETURN: 1. E: lem-sc-topological-leray-spectral-sequence (new node), last sentence: the edge map is stated in the wrong directio)
 - 16:05 L: REVIEW BEHIND 12 after the 27th limit; eight reviewers until under ten
 - 16:07 L: merged deliver/K1/lem-weil-pbc-sets-etale-section-continuity (reviewer PASS; after a return; new nodes: 1)
+- 16:07 L: lem-pc-genus-agrees-sc NOT attached (F1 release; rests on sorry), notice to F1
