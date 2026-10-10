@@ -815,3 +815,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 03:15 L: reviewed lem-weil-pbc-finite-module-complete-over-complete-noetherian (3 steps, 0 new): accepted.
 - 03:16 L: reviewed lem-weil-pbc-fibre-product-affine-transition (4 steps, +3 leaves), lem-weil-pbc-finite-gl-dim-regular-local (5 steps, +00OA, +00OB): accepted.
 - 03:16 L: reviewed lem-weil-pbc-finite-length-module-simple-filtration (2 steps, +def-weil-pbc-module-length, +def-weil-pbc-simple-module leaves; stage 3: artinian-ring-self-finite-length should cite the length node), lem-weil-pbc-finite-module-localization-zero-annihilator (3 steps): accepted.
+- 03:18 L: reviewed lem-weil-pbc-finite-open-cover-degree-sum (5 steps, 0 new): accepted.

@@ -12,9 +12,81 @@
   "def-weil-affine-spectrum",
   "def-weil-finite-integral-morphism"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "*The pieces.* Fix $i$ and put $B_i=\\Gamma(W_i,\\mathcal O_{W_i})$, a $k$-algebra through the ring map $k=\\Gamma(\\operatorname{Spec}k,\\mathcal O)\\to B_i$ induced by the structure morphism $t_i=t\\circ\\iota_i$ of $W_i$ ($\\iota_i:W_i\\to T$ the inclusion of the open subscheme). Since $t_i$ is finite, [lem-weil-pbc-finite-over-field-affine-finite-dim] shows that $W_i$ is affine, the canonical morphism $W_i\\to\\operatorname{Spec}B_i$ is an isomorphism (in particular a homeomorphism of underlying spaces), and $B_i$ is finite-dimensional over $k$, with $\\dim_kB_i\\le n_i$ by hypothesis. The field $k$ is a local ring whose only prime ideal is $(0)$, and $B_i$ is a finite $k$-algebra, so by [lem-weil-pbc-finite-over-zero-dim-local-discrete-spectrum] $\\operatorname{Spec}B_i$ is a finite discrete space. Hence the underlying space of $W_i$ is finite and discrete: it has finitely many points and every point $w\\in W_i$ has $\\{w\\}$ open in $W_i$.",
+   "uses": [
+    "lem-weil-pbc-finite-over-field-affine-finite-dim",
+    "lem-weil-pbc-finite-over-zero-dim-local-discrete-spectrum"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Morphisms, proof of Lemma Tag 03J6 (lemma-composition-universally-bounded), line 15371 ff.: 'the underlying topological space of $Y_z$ is a finite discrete set' and 'Thus $X_z$ is an affine scheme' (the same argument, used here for $T$)"
+   }
+  },
+  {
+   "text": "*$T$ is finite and discrete.* As a set $T=W_1\\cup\\dots\\cup W_m$ is a finite union of finite sets (step 1), hence finite (empty when $m=0$). Let $x\\in T$; choose $i$ with $x\\in W_i$. By step 1, $\\{x\\}$ is open in the subspace $W_i$, and $W_i$ is open in $T$ (an open subscheme [def-pc-scheme] has an open underlying set carrying the subspace topology), so $\\{x\\}$ is open in $T$. Every subset of $T$ is the union of its points, hence open: $T$ is discrete.",
+   "uses": [
+    "def-pc-scheme"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Morphisms, proof of Lemma Tag 03J6 (lemma-composition-universally-bounded), line 15371 ff.: 'the underlying topological space of $Y_z$ is a finite discrete set' and 'Thus $X_z$ is an affine scheme' (the same argument, used here for $T$)"
+   }
+  },
+  {
+   "text": "*$T$ is affine.* By step 2 and [lem-weil-pbc-finite-discrete-scheme-affine], $T$ is affine: with $A=\\Gamma(T,\\mathcal O_T)$ the canonical morphism $T\\to\\operatorname{Spec}A$ is an isomorphism. Make $A$ a $k$-algebra through the ring map $t^\\sharp:k=\\Gamma(\\operatorname{Spec}k,\\mathcal O)\\to A$ induced by $t$ [def-weil-affine-spectrum].",
+   "uses": [
+    "lem-weil-pbc-finite-discrete-scheme-affine",
+    "def-weil-affine-spectrum"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Morphisms, proof of Lemma Tag 03J6 (lemma-composition-universally-bounded), line 15371 ff.: 'the underlying topological space of $Y_z$ is a finite discrete set' and 'Thus $X_z$ is an affine scheme' (the same argument, used here for $T$)"
+   }
+  },
+  {
+   "text": "*Injection into the product of the pieces.* Let $\\rho_i:A=\\mathcal O_T(T)\\to\\mathcal O_T(W_i)=B_i$ be the restriction map; it is the map induced on global sections by the open immersion $\\iota_i$. Since global sections are functorial, the ring map $k\\to B_i$ induced by $t_i=t\\circ\\iota_i$ is $\\rho_i\\circ t^\\sharp$, so $\\rho_i$ is a homomorphism of $k$-algebras, and $\\rho=(\\rho_1,\\dots,\\rho_m):A\\to\\prod_{i=1}^mB_i$ is $k$-linear. It is injective: if $\\rho(s)=0$, then the section $s$ of the sheaf $\\mathcal O_T$ [def-pc-scheme] restricts to $0$ on every member of the open covering $T=\\bigcup_iW_i$, so $s=0$ by the identity (locality) axiom of a sheaf. (For $m=0$, $T=\\emptyset$ and $A=\\mathcal O_T(\\emptyset)=0$, the empty product.) Hence $\\dim_kA\\le\\dim_k\\prod_iB_i=\\sum_i\\dim_kB_i\\le n_1+\\dots+n_m$; in particular $A$ is a finite-dimensional $k$-vector space, i.e. a finitely generated $k$-module.",
+   "uses": [
+    "def-pc-scheme"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Morphisms, proof of Lemma Tag 03JA (lemma-locally-quasi-finite-qc-source-universally-bounded), lines 15507-15518: 'if $n_i$ works for the morphism $f|_{U_i}$, then $\\sum n_i$ works for $f$' (stated without proof)"
+   }
+  },
+  {
+   "text": "*$T$ is finite over $k$.* Cover $\\operatorname{Spec}k$ by the single affine open $\\operatorname{Spec}k$ itself [def-weil-affine-spectrum]. Its preimage $t^{-1}(\\operatorname{Spec}k)=T$ is affine (step 3), and the ring map $\\Gamma(\\operatorname{Spec}k,\\mathcal O)=k\\to\\Gamma(T,\\mathcal O_T)=A$ induced by $t$ makes $A$ a finitely generated $k$-module (step 4). By [lem-weil-pbc-finite-local-on-target] ((2)$\\Rightarrow$(1)), $t$ is finite [def-weil-finite-integral-morphism], i.e. $T$ is finite over $k$, and by step 4 its degree is $\\dim_k\\Gamma(T,\\mathcal O_T)=\\dim_kA\\le n_1+\\dots+n_m$.",
+   "uses": [
+    "def-weil-affine-spectrum",
+    "lem-weil-pbc-finite-local-on-target",
+    "def-weil-finite-integral-morphism"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Morphisms, proof of Lemma Tag 03JA (lemma-locally-quasi-finite-qc-source-universally-bounded), lines 15507-15518: 'if $n_i$ works for the morphism $f|_{U_i}$, then $\\sum n_i$ works for $f$' (stated without proof)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-finite-over-field-affine-finite-dim",
+  "lem-weil-pbc-finite-over-zero-dim-local-discrete-spectrum",
+  "def-pc-scheme",
+  "lem-weil-pbc-finite-discrete-scheme-affine",
+  "def-weil-affine-spectrum",
+  "lem-weil-pbc-finite-local-on-target",
+  "def-weil-finite-integral-morphism"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/morphisms.tex",
+  "place": "Morphisms, proof of Lemma Tag 03JA, lines 15507-15518 (the claim, stated there without proof); the argument follows the proof of Lemma Tag 03J6 (line 15371: a finite discrete fibre is affine) and the sheaf axiom; written by an agent"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -36,10 +108,24 @@
    "results": "Limits.lean:700 instance [Finite X] [DiscreteTopology X] : IsAffine X (affineness only, no degree count); AffineTransitionLimit.lean:1080 exists_isOpenCover_and_isAffine_of_finite (unrelated)",
    "date": "2026-10-10",
    "verdict": "no match (partial ingredient: Limits.lean:700)"
+  },
+  {
+   "tool": "leansearch",
+   "query": "finrank of global sections of a scheme covered by finitely many opens is at most the sum of finranks of sections over the opens",
+   "results": "isNoetherian_iff_of_finite_iSup_eq_top, isNoetherian_iff_of_finite_affine_openCover, isLocallyArtinian_iff_of_isOpenCover (AlgebraicGeometry.Noetherian/Artinian), Submodule.finrank_add_le_finrank_add_finrank, Module.finrank_pi_fintype (linear algebra only)",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.IsFinite, AlgebraicGeometry.Scheme.OpenCover",
+   "results": "none",
+   "date": "2026-10-10",
+   "verdict": "no match"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "worker",
@@ -59,5 +145,17 @@
   }
  },
  "chapter": "sec-proper-base-change",
- "unit": "sk-thm-p1"
+ "unit": "sk-thm-p1",
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "lem-weil-pbc-finite-open-cover-degree-sum",
+  "worker": "stage1",
+  "summary": "Statement checked against Stacks Morphisms 03JA (morphisms.tex 15507-15518, where it is the parenthetical 'if n_i works for f|_{U_i} then sum n_i works for f', given without proof) and kept; stmt_deps unchanged. Proof written by an agent in 5 steps, following the pattern of the proof of 03J6: each W_i is affine with Gamma finite over k (lem-weil-pbc-finite-over-field-affine-finite-dim) and finite discrete (lem-weil-pbc-finite-over-zero-dim-local-discrete-spectrum); T is finite discrete (elementary); T is affine (lem-weil-pbc-finite-discrete-scheme-affine, Mathlib leaf); the restriction map Gamma(T) -> prod Gamma(W_i) is k-linear and injective by the sheaf identity axiom (elementary, def-pc-scheme), giving dim <= sum n_i; t is finite by lem-weil-pbc-finite-local-on-target (2)=>(1) with Spec k covering itself. Edge case m=0 (T empty) covered. No new nodes: every ingredient was an existing node. Two more Mathlib searches recorded (leansearch, loogle), no match."
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "result": "accepted",
+  "note": "5 steps (agent proof of the unproved parenthesis in Stacks 03JA): each W_i affine, finite-dimensional and finite discrete (existing leaves); T finite discrete; T affine (03J6-style leaf); Gamma(T) -> prod Gamma(W_i) injective by the sheaf axiom, giving the dimension bound; finiteness over k by the local-on-target leaf. No new nodes."
+ }
 }
