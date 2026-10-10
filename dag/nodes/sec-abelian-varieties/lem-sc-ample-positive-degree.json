@@ -3,7 +3,7 @@
  "blueprint": {
   "is": "lem-sc-ample-positive-degree",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "Ample modules on proper curves have positive degree",
@@ -24,16 +24,69 @@
   "def-sc-hilbert-degree",
   "lem-sc-hilbert-polynomial"
  ],
- "proof": [],
+ "proof": [
+  {
+   "text": "Since $\\dim C=1$, $C$ is nonempty, and it is a proper $k$-scheme of dimension $g=1$ with $\\mathcal L$ ample in the sense of [def-sc-ample]. Apply [lem-sc-positive-ample-hilbert-degree] with $X=C$ and $g=1$: the Hilbert degree $\\deg_{\\mathcal L}(C)$ of [def-sc-hilbert-degree] is positive. Its proof treats a possibly disconnected $X$ with lower-dimensional components (it reduces to the integral top-dimensional components), so no decomposition into connected components is needed here.",
+   "uses": [
+    "lem-sc-positive-ample-hilbert-degree",
+    "def-sc-ample",
+    "def-sc-hilbert-degree"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-abelian-varieties/sk-prop-av-ample-positive/_section.md",
+    "place": "connected and general case together, via the positivity of the Hilbert degree"
+   }
+  },
+  {
+   "text": "By [def-sc-hilbert-degree] with $g=1$, $\\deg_{\\mathcal L}(C)=1!\\cdot a_1$, where $a_1$ is the coefficient of $m$ in the Hilbert polynomial $m\\mapsto\\chi(C,\\mathcal L^{\\otimes m})$ of [lem-sc-hilbert-polynomial], which has total degree at most $1$; so this coefficient is positive, i.e. $\\deg\\mathcal L>0$. If $\\mathcal L\\cong\\mathcal O_C$, then $\\chi(C,\\mathcal L^{\\otimes m})=\\chi(C,\\mathcal O_C)$ is constant in $m$ and its coefficient of $m$ is $0$, a contradiction; hence $\\mathcal L$ is not trivial.",
+   "uses": [
+    "def-sc-hilbert-degree",
+    "lem-sc-hilbert-polynomial"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-abelian-varieties/sk-prop-av-ample-positive/_section.md",
+    "place": "general case, final positivity and nontriviality"
+   }
+  }
+ ],
  "proof_deps": [
+  "lem-sc-positive-ample-hilbert-degree",
+  "def-sc-ample",
   "def-sc-hilbert-degree",
-  "def-sc-curves",
   "lem-sc-hilbert-polynomial"
  ],
- "proof_origin": null,
- "mathlib_searches": [],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/master/blueprint/sec-abelian-varieties/sk-prop-av-ample-positive/_section.md",
+  "place": "single proof step"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "ample invertible sheaf on proper curve over algebraically closed field has positive degree",
+   "results": "No declaration about ample line bundles or curve degree; unrelated declarations returned.",
+   "date": "2026-10-11",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "degree_pos_of_isAmple_of_connectedSpace, Scheme.Hom.degree",
+   "results": "0 hits; unknown identifier",
+   "date": "2026-10-11",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "degree_eq_sum_of_pairwise_disjoint|degree_pos_of_isAmple /home/ubuntu/weil-src-slopmaster2/WeilConjectures",
+   "results": "Project declarations in AlgebraicGeometry/Modules/Ample.lean; no Mathlib declaration.",
+   "date": "2026-10-11",
+   "verdict": "no Mathlib match"
+  }
+ ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "import_flags": [
   "undischarged_input",
@@ -153,5 +206,30 @@
   }
  },
  "chapter": "sec-abelian-varieties",
- "unit": "sk-prop-av-ample-positive"
+ "unit": "sk-prop-av-ample-positive",
+ "split_report": {
+  "date": "2026-10-11",
+  "item": "lem-sc-ample-positive-degree",
+  "worker": "stage1",
+  "summary": "Reviewer fix: the proof applies the existing positivity of the Hilbert degree with X=C, g=1, then reads off the coefficient of m and nontriviality.",
+  "blueprint": "The proof realizes the blueprint's single general-case paragraph: component decomposition, restriction of ampleness, zero- and one-dimensional component contributions, and positivity of the resulting coefficient.",
+  "tool_uses": [
+   {
+    "node": "lem-sc-positive-ample-hilbert-degree",
+    "why": "Generic positivity of the Hilbert degree of an ample module on a nonempty proper scheme (Tag 0BEV area); applied with X=C, g=1. Replaces a false clopen-additivity node and a special-case duplicate (reviewer R-apd2318)."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sc-positive-ample-hilbert-degree",
+  "lem-sc-positive-ample-hilbert-degree"
+ ],
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-apd2318",
+  "group": "E1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-apd2318 (reviewer sub-agent of L); spot-checked: C4/C1: degree is def-sc-hilbert-degree with g=1 = coefficient of m, as the consumer lem-sc-mult-n-locally-quasi-finite uses it; lem-sc-positive-ample-hilbert-degree (nonempty proper X, ample L => deg_L(X)>0) has no path back to the item. FIX more, RETURN less: (1) E/B: new node lem-sc-degree-additive-clopen is false as stated (Hilbert degrees of components are taken in each component's own dimension, so a curve plus a point gives sum = a_1 + 1 != a_1; also def-sc-hilbert-degree needs M ample, the node allows any invertible M) and Step 1 used it for coefficients of m (C4) - dropped; (2) class (b): lem-sc-ample-connected-positive is a special case of lem-sc-positive-ample-hilbert-degree - dropped; (3) proof rewritten as two steps: apply lem-sc-positive-ample-hilbert-degree with X=C, g=1 (declared generic tool use), then read off coefficient of m and nontriviality elementarily. Second reading by E1 described this route but the delivered files still carry the false additivity node.; 1 file(s) fixed by the reviewer"
+ }
 }

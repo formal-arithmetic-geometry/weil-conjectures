@@ -2525,3 +2525,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 20:30 L: merged deliver/C1/lem-pc-flat-sheaf-stalk-flat (reviewer PASS; first push; new nodes: 0)
 - 20:30 L: merged deliver/M1/pqf-lem-going-up (reviewer PASS; first push; new nodes: 0)
 - 20:31 L: merged deliver/J1/lem-pc-fppf-affine-refinement (reviewer FIX; first push; new nodes: 0)
+- 20:31 L: merged deliver/E1/lem-sc-ample-positive-degree (reviewer FIX; first push; new nodes: 0)
