@@ -1,0 +1,82 @@
+{
+ "id": "lem-weil-pbc-free-module-sheafification-local-iso",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-hypercover-free-resolution",
+   "place": "proof, first paragraph: 'Choose locally a vertex in U_0, using its covering of X' (the degree-0 Cech-nerve case of the local contraction, used in step 1 of the split of lem-weil-pbc-hypercover-free-resolution); Stacks 01GC proof, the passage from H_0 = Z_{G'} (presheaves) to the lemma's Z_G^# (stated in the lemma, not argued in the proof)",
+   "via": [
+    "lem-weil-pbc-cech-nerve-free-homology"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Free module sheaves only depend on the sheafification of the presheaf of sets",
+ "statement": "Let $\\mathcal C$ be a site [def-weil-pbc-sites-and-cohomology] and $R$ a ring. For a presheaf of sets $P$ on $\\mathcal C$ let $R[P]$ be the presheaf of $R$-modules $U\\mapsto R[P(U)]$, the free $R$-module on the set $P(U)$ [def-weil-pbc-free-module], with restriction along $V\\to U$ the $R$-linear map sending a basis element $[x]$ to $[x|_V]$; a morphism $u:P\\to Q$ of presheaves of sets induces $R[u]:R[P]\\to R[Q]$, $[x]\\mapsto[u(x)]$. Let $u:P\\to Q$ be a morphism of presheaves of sets whose sheafification $u^\\#:P^\\#\\to Q^\\#$ (as presheaves of sets) [def-weil-pbc-sheafification] is an isomorphism. Then the sheafification $R[u]^\\#:R[P]^\\#\\to R[Q]^\\#$ (as presheaves of $R$-modules) is an isomorphism of sheaves of $R$-modules.",
+ "source": {
+  "document": "literature/stacks-project/sites.tex",
+  "place": "Hypercoverings, Section Tag 01GA (label section-acyclicity), lines 545-566: F -> Z_F is left adjoint to the forgetful functor and 'the functor F -> Z_F^# is a left adjoint as well'; Sites, Proposition Tag 00WH (label proposition-sheafification-adjoint); for R-modules the same adjunction F -> R[F]^#; by adjunction Hom(R[P]^#, M) = Hom_PSh(P, M) = Hom_Sh(P^#, M) for every sheaf of R-modules M (whose underlying presheaf of sets is a sheaf), so R[u]^# is an isomorphism by Yoneda. Used implicitly in Hypercoverings, Lemma Tag 01GC (label lemma-compare-cosk0), proof: H_0 = Z_{G'} as presheaves, and the lemma's Z_G^# = Z_{G'}^#"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-sites-and-cohomology",
+  "def-weil-pbc-free-module",
+  "def-weil-pbc-sheafification"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "free module functor preserves sheafification; left adjoint preserves morphisms inverted by sheafification",
+   "results": "leansearch.net returned HTTP 500 (Internal Server Error) to the MCP tool and to a direct POST at https://leansearch.net/search on 2026-10-10, repeated 4 times; no results",
+   "date": "2026-10-10",
+   "verdict": "no result (service down)"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "a left adjoint functor between value categories preserves the class of morphisms of presheaves that become isomorphisms after sheafification",
+   "results": "CategoryTheory.GrothendieckTopology.PreservesSheafification.le, W_iff_isIso_map_of_adjunction, W_eq_inverseImage_isomorphisms_of_adjunction, preservesSheafification_iff_of_adjunctions (Mathlib.CategoryTheory.Sites.PreservesSheafification / Localization)",
+   "date": "2026-10-10",
+   "verdict": "match (with the instance for left adjoints)"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.GrothendieckTopology.W, CategoryTheory.Functor.whiskerRight",
+   "results": "CategoryTheory.GrothendieckTopology.W_of_preservesSheafification (Mathlib.CategoryTheory.Sites.PreservesSheafification)",
+   "date": "2026-10-10",
+   "verdict": "match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rn 'PreservesSheafification' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/CategoryTheory/Sites; grep -n 'def adj\\|def free' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/Algebra/Category/ModuleCat/Adjunctions.lean",
+   "results": "Sites/Adjunction.lean:107 instance [G.IsLeftAdjoint] : J.PreservesSheafification G; Sites/PreservesSheafification.lean:66 lemma W_of_preservesSheafification; Sites/Localization.lean:80 lemma W_iff (J.W f <-> IsIso ((presheafToSheaf J A).map f)); ModuleCat/Adjunctions.lean:40 def free : Type u ⥤ ModuleCat R, :94 def adj : free R ⊣ forget (ModuleCat R)",
+   "date": "2026-10-10",
+   "verdict": "match"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "CategoryTheory.GrothendieckTopology.W_of_preservesSheafification",
+  "file": "Mathlib/CategoryTheory/Sites/PreservesSheafification.lean",
+  "line": 66,
+  "how": "specializes in one line: R[P] = P ⋙ ModuleCat.free R and R[u] = whiskerRight u (ModuleCat.free R) (ModuleCat.free, Mathlib/Algebra/Category/ModuleCat/Adjunctions.lean:40); ModuleCat.free R is a left adjoint (ModuleCat.adj, Adjunctions.lean:94), so J.PreservesSheafification (ModuleCat.free R) by the instance at Mathlib/CategoryTheory/Sites/Adjunction.lean:107; W_of_preservesSheafification (PreservesSheafification.lean:66) gives J.W (whiskerRight u (ModuleCat.free R)) from J.W u, and J.W f <-> IsIso ((presheafToSheaf J A).map f) is W_iff (Mathlib/CategoryTheory/Sites/Localization.lean:80), used for A = Type and A = ModuleCat R"
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-cech-nerve-free-homology",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-curve-estimates",
+ "unit": "sk-prop-h2"
+}

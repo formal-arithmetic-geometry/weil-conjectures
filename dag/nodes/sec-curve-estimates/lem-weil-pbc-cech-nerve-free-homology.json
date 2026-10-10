@@ -11,18 +11,91 @@
  },
  "kind": "statement",
  "title": "Free-sheaf homology of a Cech nerve",
- "statement": "Let $\\mathcal C$ be a site, let $F\\to G$ be a morphism of presheaves of sets which becomes surjective after sheafification [def-weil-pbc-sheafification], and let $K_n=F\\times_G\\cdots\\times_G F$ with $n+1$ factors and the usual face and degeneracy maps, a simplicial presheaf [def-weil-pbc-simplicial-object]. For a commutative ring $R$, let $R[K_n]^\\#$ be the sheafification [def-weil-pbc-sheafification] of the presheaf of free $R$-modules on $K_n$. Then the alternating-face complex has $H_i=0$ for $i>0$, and its augmentation identifies $H_0$ with $R[G]^\\#$.",
+ "statement": "Let $\\mathcal C$ be a site [def-weil-pbc-sites-and-cohomology], let $\\varphi:F\\to G$ be a morphism of presheaves of sets which becomes surjective after sheafification [def-weil-pbc-sheafification] (for every object $U$ and $t\\in G^\\#(U)$ there is a covering $\\{U_i\\to U\\}$ with each $t|_{U_i}$ in the image of $F^\\#(U_i)$), and let $K_n=F\\times_G\\cdots\\times_G F$ with $n+1$ factors and the usual face and degeneracy maps (the $j$-th face omits the $j$-th factor, the $j$-th degeneracy repeats it), a simplicial presheaf [def-weil-pbc-simplicial-object]. For a commutative ring $R$, let $R[K_n]^\\#$ be the sheafification [def-weil-pbc-sheafification] of the presheaf of free $R$-modules [def-weil-pbc-free-module] $U\\mapsto R[K_n(U)]$ on $K_n$. Then the alternating-face complex $\\cdots\\to R[K_1]^\\#\\to R[K_0]^\\#$, with differential $\\sum_j(-1)^jd_j$, has $H_i=0$ for $i>0$, and its augmentation $R[K_0]^\\#=R[F]^\\#\\to R[G]^\\#$ induced by $\\varphi$ identifies $H_0$ with $R[G]^\\#$.",
  "source": {
   "document": "literature/stacks-project/hypercovering.tex",
   "place": "Hypercoverings, Lemma Tag 01GC (label lemma-compare-cosk0), lines 590-660. Proof route: let G' be the presheaf image of F to G. Each fibre of its Cech nerve is the nerve of a nonempty set and contracts after choosing one preimage; the free-R chain complex is homotopy equivalent to the free-R complex on G'. Sheafification is exact for modules and G'^#=G^# by local surjectivity. The free-R variant uses the same simplicial contraction."
  },
  "stmt_deps": [
+  "def-weil-pbc-sites-and-cohomology",
   "def-weil-pbc-sheafification",
-  "def-weil-pbc-simplicial-object"
+  "def-weil-pbc-simplicial-object",
+  "def-weil-pbc-free-module"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Let $G'\\subseteq G$ be the image presheaf of $\\varphi$, $G'(U)=\\varphi_U(F(U))$ with the restriction maps of $G$, and $\\iota:G'\\to G$ the inclusion, so $\\varphi=\\iota\\circ\\psi$ with $\\psi:F\\to G'$ surjective on sections over every object. Since $\\iota_U$ is injective, a tuple $(f_0,\\dots,f_n)\\in F(U)^{n+1}$ has equal images in $G(U)$ if and only if it has equal images in $G'(U)$; so $K_n=F\\times_{G'}\\cdots\\times_{G'}F$ as simplicial presheaves, and the augmentation $R[F]\\to R[G]$ is $R[\\iota]\\circ R[\\psi]$ with $R[\\psi]:R[F]\\to R[G']$, $[f]\\mapsto[\\psi(f)]$.",
+   "uses": [
+    "def-weil-pbc-simplicial-object",
+    "def-weil-pbc-free-module"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/hypercovering.tex",
+    "place": "Hypercoverings, Lemma Tag 01GC (label lemma-compare-cosk0), proof (lines 618-660), first sentences: 'Let G' be the image of F -> G. ... the simplicial set K(U) is equal to the simplicial set with n-simplices A x_B ... x_B A'"
+   }
+  },
+  {
+   "text": "Fix an object $U$ and apply [lem-weil-pbc-set-cech-nerve-free-resolution] to the surjective map of sets $\\psi_U:A=F(U)\\to B=G'(U)$: by step 1, $K_n(U)=A\\times_B\\cdots\\times_BA$ ($n+1$ factors) with the face maps omitting a coordinate, so $R[K_n(U)]$ with $\\sum_j(-1)^jR[d_j]$ is the complex of [lem-weil-pbc-set-cech-nerve-free-resolution] and $R[\\psi_U]$ is its augmentation. Hence $\\cdots\\to R[K_1(U)]\\to R[K_0(U)]\\xrightarrow{R[\\psi_U]}R[G'(U)]\\to0$ is exact: $H_i(R[K_\\bullet(U)])=0$ for $i>0$ and $R[\\psi_U]$ induces $H_0(R[K_\\bullet(U)])\\cong R[G'(U)]$. (This is Stacks' sectionwise step: $K(U)\\to B$ is a trivial Kan fibration (Simplicial, Lemma Tag 01AB), hence a homotopy equivalence (Lemma Tag 08NS), and $s(R[B])$ for the constant simplicial set $B$ has homology $R[B]$ in degree $0$ only (Lemma Tag 0197); [lem-weil-pbc-set-cech-nerve-free-resolution] states the result for the free $R$-module complex, with the contraction given by a chosen preimage in each fibre.)",
+   "uses": [
+    "lem-weil-pbc-set-cech-nerve-free-resolution"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/hypercovering.tex",
+    "place": "Hypercoverings, Lemma Tag 01GC (label lemma-compare-cosk0), proof (lines 618-660), first paragraph: 'By Simplicial, Lemma 01AB the morphism K(U) -> B is a trivial Kan fibration ... Thus we see that H_i(s(Z_K(U))) = 0 for i > 0, and H_0 = ⊕_{b∈B} Z'; the contraction as in Sites and Sheaves, Lemma Tag 03AT (literature/stacks-project/sites-cohomology.tex, label lemma-homology-complex), last paragraph"
+   }
+  },
+  {
+   "text": "The complex $R[K_\\bullet]$ with differential $\\sum_j(-1)^jR[d_j]$ is a complex of presheaves of $R$-modules, and $R[\\psi]:R[K_0]=R[F]\\to R[G']$ is a morphism of presheaves with $R[\\psi]\\circ(R[d_0]-R[d_1])=0$ (because $\\psi d_0=\\psi d_1$ on $K_1$). By [lem-weil-pbc-site-r-module-presheaf-sheafification-exact] (1), kernels, images and homology of complexes of presheaves of $R$-modules are computed sectionwise. So step 2, applied to every object $U$ (its identifications are induced by the presheaf maps $R[\\psi]$ and the differentials, hence compatible with restriction maps), gives $H_i(R[K_\\bullet])=0$ in $\\mathrm{PMod}_R(\\mathcal C)$ for $i>0$ and an isomorphism $H_0(R[K_\\bullet])\\xrightarrow{\\sim}R[G']$ induced by $R[\\psi]$.",
+   "uses": [
+    "lem-weil-pbc-site-r-module-presheaf-sheafification-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/hypercovering.tex",
+    "place": "Hypercoverings, Lemma Tag 01GC (label lemma-compare-cosk0), proof (lines 618-660), 'These identifications are compatible with restriction maps. We conclude that H_i(s(Z_K)) = 0 for i > 0 and H_0(s(Z_K)) = Z_{G'}, where here we compute homology groups in PAb(C)'"
+   }
+  },
+  {
+   "text": "Sheafification $\\#$ of presheaves of $R$-modules [def-weil-pbc-sheafification] is an additive functor, so applying it termwise gives the complex $R[K_\\bullet]^\\#$ with differential $(\\sum_j(-1)^jR[d_j])^\\#$, and $R[\\psi]^\\#:R[F]^\\#\\to R[G']^\\#$. By [lem-weil-pbc-site-r-module-presheaf-sheafification-exact] (2), $\\#$ is exact; an exact functor between abelian categories preserves kernels, images and cokernels, hence homology: $H_i(R[K_\\bullet]^\\#)\\cong H_i(R[K_\\bullet])^\\#$ naturally. By step 3, $H_i(R[K_\\bullet]^\\#)=0$ for $i>0$ and $R[\\psi]^\\#$ induces $H_0(R[K_\\bullet]^\\#)\\cong R[G']^\\#$.",
+   "uses": [
+    "lem-weil-pbc-site-r-module-presheaf-sheafification-exact",
+    "def-weil-pbc-sheafification"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/hypercovering.tex",
+    "place": "Hypercoverings, Lemma Tag 01GC (label lemma-compare-cosk0), proof (lines 618-660), last sentences: 'Since sheafification is an exact functor we deduce the result of the lemma. Namely, the exactness implies that H_0(s(Z_K))^# = H_0(s(Z_K^#)), and similarly for other indices'"
+   }
+  },
+  {
+   "text": "By [lem-weil-pbc-image-presheaf-sheafification-iso] (applied to $\\varphi$, which becomes surjective after sheafification by hypothesis), $\\iota^\\#:G'^\\#\\to G^\\#$ is an isomorphism of sheaves of sets. By [lem-weil-pbc-free-module-sheafification-local-iso] (with $u=\\iota$), $R[\\iota]^\\#:R[G']^\\#\\to R[G]^\\#$ is an isomorphism of sheaves of $R$-modules. Composing with step 4, $H_0(R[K_\\bullet]^\\#)\\cong R[G]^\\#$ via $R[\\iota]^\\#\\circ R[\\psi]^\\#=R[\\varphi]^\\#:R[K_0]^\\#=R[F]^\\#\\to R[G]^\\#$ (step 1), which is the augmentation of the statement; and $H_i=0$ for $i>0$.",
+   "uses": [
+    "lem-weil-pbc-image-presheaf-sheafification-iso",
+    "lem-weil-pbc-free-module-sheafification-local-iso"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/hypercovering.tex",
+    "place": "Hypercoverings, Lemma Tag 01GC (label lemma-compare-cosk0), proof (lines 618-660), statement: 'The isomorphism in degree 0 is given by the morphism H_0(K) -> Z_G^# coming from the map (Z_K^#)_0 = Z_F^# -> Z_G^#' (the replacement of Z_{G'}^# by Z_G^# is left implicit in the proof)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-simplicial-object",
+  "def-weil-pbc-free-module",
+  "lem-weil-pbc-set-cech-nerve-free-resolution",
+  "lem-weil-pbc-site-r-module-presheaf-sheafification-exact",
+  "def-weil-pbc-sheafification",
+  "lem-weil-pbc-image-presheaf-sheafification-iso",
+  "lem-weil-pbc-free-module-sheafification-local-iso"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/hypercovering.tex",
+  "place": "Hypercoverings, Lemma Tag 01GC (label lemma-compare-cosk0), lines 590-660, with R in place of Z; the sectionwise homotopy equivalence (Simplicial 01AB, 08NS, 0197) stated as the node lem-weil-pbc-set-cech-nerve-free-resolution; the identification Z_{G'}^# = Z_G^#, implicit in Stacks, made explicit"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -51,10 +124,31 @@
    "results": "CechNerve.lean and OneHypercover files contain constructors and degree-one sheaf conditions, no arbitrary Cech-nerve free-module homology theorem",
    "date": "2026-10-10",
    "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Cech nerve split epimorphism extra degeneracy; augmented Cech nerve alternating face map complex homotopy equivalent to augmentation",
+   "results": "leansearch.net returned HTTP 500 (Internal Server Error) on 2026-10-10 (MCP tool and direct POST); no results",
+   "date": "2026-10-10",
+   "verdict": "no result (service down)"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.SimplicialObject.Augmented.ExtraDegeneracy, CategoryTheory.Arrow.augmentedCechNerve",
+   "results": "CategoryTheory.Arrow.AugmentedCechNerve.extraDegeneracy (Mathlib.AlgebraicTopology.ExtraDegeneracy); classifyingSpaceUniversalCover.extraDegeneracyAugmentedCechNerve (Mathlib.RepresentationTheory.Homological.Resolution)",
+   "date": "2026-10-10",
+   "verdict": "partial: sectionwise step only (one object U, a set map with a section), not the sheaf statement"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -n 'def\\|instance' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicTopology/ExtraDegeneracy.lean; grep -rln cechNerve Mathlib",
+   "results": "ExtraDegeneracy.lean:96 ExtraDegeneracy.map (along a functor, e.g. ModuleCat.free R), :368 Arrow.AugmentedCechNerve.extraDegeneracy (Cech nerve of a split epi), :415 ExtraDegeneracy.homotopyEquiv (alternating face map complex homotopy equivalent to the augmentation in degree 0); cechNerve appears only in AlgebraicTopology/CechNerve.lean, ExtraDegeneracy.lean, RepresentationTheory/Homological/Resolution.lean, CategoryTheory/Limits/FormalCoproducts/ExtraDegeneracy.lean; no statement over a site",
+   "date": "2026-10-10",
+   "verdict": "no match for the item; the three declarations give step 2 for one object U (alternative to lem-weil-pbc-power-set-complex-contractible)"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-weil-pbc-hypercover-free-resolution",
@@ -73,5 +167,13 @@
   }
  },
  "chapter": "sec-curve-estimates",
- "unit": "sk-prop-h2"
+ "unit": "sk-prop-h2",
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "lem-weil-pbc-cech-nerve-free-homology",
+  "worker": "stage1",
+  "summary": "Split following Stacks 01GC (hypercovering.tex 590-660), R-module version. Step 1 replaces G by the presheaf image G' (K is unchanged). Step 2 is the sectionwise computation, Stacks' route through Simplicial 01AB (trivial Kan fibration), 08NS (homotopy equivalence) and 0197 (homology of a constant simplicial object), stated for the free R-module complex of the Cech nerve of a surjection of sets as the new node lem-weil-pbc-set-cech-nerve-free-resolution (unsplit; Mathlib candidate AugmentedCechNerve.extraDegeneracy + ExtraDegeneracy.map + homotopyEquiv; or fibrewise lem-weil-pbc-power-set-complex-contractible of unit sk-thm-p1, which the item does not cite directly because sk-prop-h2 does not cite sk-thm-p1). Step 3 passes to presheaves (sectionwise homology), step 4 sheafifies (exactness), step 5 replaces R[G']^# by R[G]^#, an identification Stacks leaves implicit (its proof computes Z_{G'} while the lemma states Z_G^#). New nodes: lem-weil-pbc-site-r-module-presheaf-sheafification-exact (Mathlib leaf), lem-weil-pbc-free-module-sheafification-local-iso (Mathlib leaf), lem-weil-pbc-image-presheaf-sheafification-iso (unsplit, Mathlib candidate), lem-weil-pbc-set-cech-nerve-free-resolution (unsplit, Mathlib candidate). Statement kept; made explicit what 'surjective after sheafification', the face maps and the augmentation are, and added stmt_deps def-weil-pbc-sites-and-cohomology and def-weil-pbc-free-module. LeanSearch was down (HTTP 500) during this split; Loogle (HTTP), LeanFinder and grep were run.",
+  "blueprint": "The item realizes, in the blueprint proof of lem-weil-pbc-hypercover-free-resolution, the degree-0 (Cech nerve) case of the first paragraph 'Choose locally a vertex in U_0, using its covering of X ... construct a cone to this vertex ... the alternating-face formula gives dh+hd=1': steps 1-2 are the cone on a chosen local vertex (a preimage in each fibre), steps 3-5 are 'exactness is a local assertion about the sheaves'."
+ },
+ "reviewed": "2026-10-10 L: 5 steps along 01GC checked (image presheaf G'; the set-level Cech-nerve resolution objectwise by the new node; sectionwise homology; exactness of sheafification by the new leaf; R[G']^# = R[G]^# by the two new nodes). Four new nodes: two Mathlib leaves composed of one-line declarations per clause (sheafification exact for R-module presheaves: functorCategoryAbelian 96, evaluation preserves limits/colimits, PreservesFiniteLimits (presheafToSheaf) 76, left adjoint; free-module sheafification of a local isomorphism: W_of_preservesSheafification 66), lines verified; two unsplit (image presheaf after sheafification; set-level Cech nerve free resolution, candidate ExtraDegeneracy). Source tag 0189 corrected to 01AB/08NS/0197 by the worker. LeanSearch down."
 }

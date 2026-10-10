@@ -1503,3 +1503,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 13:30 L: merged deliver/E1/def-pc-dimension (reviewer PASS, first push)
 - 2026-10-10, delivery of E1: def-pc-curve merged from deliver/E1/def-pc-curve (1 commit(s), 0 new node(s), spot-checked by L: L: reviewed in full by a reviewer sub-agent (PASS): 020D/0A23 read, every cited notion checked, no cycle); claim closed
 - 13:30 L: merged deliver/E1/def-pc-curve (reviewer PASS, first push)
+- 13:31 L: accepted lem-weil-pbc-cech-nerve-free-homology: 5 steps (01GC), 4 new nodes (2 leaves: sheafification exact for R-module presheaves, free module of a local iso; 2 unsplit: image presheaf, set-level Cech nerve resolution)

@@ -1,0 +1,81 @@
+{
+ "id": "lem-weil-pbc-site-r-module-presheaf-sheafification-exact",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-hypercover-free-resolution",
+   "place": "proof, first paragraph: 'Choose locally a vertex in U_0, using its covering of X' (the degree-0 Cech-nerve case of the local contraction, used in step 1 of the split of lem-weil-pbc-hypercover-free-resolution); the step 'Since sheafification is an exact functor' of Stacks 01GC",
+   "via": [
+    "lem-weil-pbc-cech-nerve-free-homology"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Presheaves of R-modules on a site: sectionwise kernels and cokernels, and exact sheafification",
+ "statement": "Let $\\mathcal C$ be a site [def-weil-pbc-sites-and-cohomology] and $R$ a ring. Let $\\mathrm{PMod}_R(\\mathcal C)$ be the category of presheaves of $R$-modules on $\\mathcal C$ (functors $\\mathcal C^{\\mathrm{op}}\\to\\mathrm{Mod}_R$, morphisms the natural transformations), $\\mathrm{Mod}_R(\\mathcal C)\\subseteq\\mathrm{PMod}_R(\\mathcal C)$ the full subcategory of sheaves of $R$-modules, and $\\#:\\mathrm{PMod}_R(\\mathcal C)\\to\\mathrm{Mod}_R(\\mathcal C)$, $\\mathcal P\\mapsto\\mathcal P^\\#$, the sheafification [def-weil-pbc-sheafification], left adjoint to the inclusion. Then: (1) $\\mathrm{PMod}_R(\\mathcal C)$ is an abelian category in which finite limits and finite colimits (in particular kernels, cokernels and images) are computed sectionwise: for every object $U$ the evaluation functor $\\mathcal P\\mapsto\\mathcal P(U)$ to $R$-modules is exact; consequently the $i$-th homology presheaf of a complex $\\mathcal K_\\bullet$ of presheaves of $R$-modules is $U\\mapsto H_i(\\mathcal K_\\bullet(U))$ with the induced restriction maps; (2) $\\#$ commutes with finite limits and (as a left adjoint) with all colimits; hence $\\#$ is an exact functor of abelian categories.",
+ "source": {
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Modules on Sites, Lemma Tag 03EI (label lemma-sheafification-exact, line 874: sheafification of presheaves of O-modules is exact; here O the constant presheaf of rings R) and Section Tag 03CS (label section-presheaves-modules: kernels and cokernels of presheaves of modules computed sectionwise); used in Hypercoverings, Lemma Tag 01GC (label lemma-compare-cosk0), last paragraph of the proof: 'Since sheafification is an exact functor we deduce the result'"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-sites-and-cohomology",
+  "def-weil-pbc-sheafification"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "sheafification of presheaves of modules preserves finite limits exact functor",
+   "results": "leansearch.net returned HTTP 500 (Internal Server Error) to the MCP tool and to a direct POST at https://leansearch.net/search on 2026-10-10, repeated 4 times; no results",
+   "date": "2026-10-10",
+   "verdict": "no result (service down)"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "sheafification of presheaves of modules over a ring on a site is an exact functor (preserves finite limits)",
+   "results": "PresheafOfModules.instPreservesFiniteLimitsSheafOfModulesSheafification (Mathlib.Algebra.Category.ModuleCat.Presheaf.Sheafification); SheafOfModules.instAbelian; CategoryTheory.HasSheafify.isLeftExact (Mathlib.CategoryTheory.Sites.Sheafification)",
+   "date": "2026-10-10",
+   "verdict": "match (clause 2)"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Limits.PreservesFiniteLimits, CategoryTheory.presheafToSheaf",
+   "results": "CategoryTheory.instPreservesFiniteLimitsFunctorOppositeSheafPresheafToSheaf (Mathlib.CategoryTheory.Sites.Sheafification)",
+   "date": "2026-10-10",
+   "verdict": "match (clause 2)"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -n 'functorCategoryAbelian\\|evaluation_preservesLimitsOfShape\\|evaluation_preservesColimitsOfShape\\|PreservesFiniteLimits (presheafToSheaf\\|IsLeftAdjoint' in ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/CategoryTheory/Abelian/FunctorCategory.lean, CategoryTheory/Limits/FunctorCategory/Basic.lean, CategoryTheory/Sites/Sheafification.lean, CategoryTheory/Sites/LeftExact.lean",
+   "results": "Abelian/FunctorCategory.lean:96 instance functorCategoryAbelian; Limits/FunctorCategory/Basic.lean:225 evaluation_preservesLimitsOfShape, :319 evaluation_preservesColimitsOfShape; Sites/Sheafification.lean:76 instance [HasSheafify J A] : PreservesFiniteLimits (presheafToSheaf J A), :83 IsLeftAdjoint (presheafToSheaf J A); Sites/LeftExact.lean:308 instance HasSheafify J D for D with limits-preserving forget and finite limits",
+   "date": "2026-10-10",
+   "verdict": "match"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "CategoryTheory.instPreservesFiniteLimitsFunctorOppositeSheafPresheafToSheaf",
+  "file": "Mathlib/CategoryTheory/Sites/Sheafification.lean",
+  "line": 76,
+  "how": "one Mathlib declaration per clause, with A = ModuleCat R and J the Grothendieck topology generated by the coverings: (1) instance CategoryTheory.functorCategoryAbelian (Mathlib/CategoryTheory/Abelian/FunctorCategory.lean:96) makes Cᵒᵖ ⥤ ModuleCat R abelian, and evaluation_preservesLimitsOfShape / evaluation_preservesColimitsOfShape (Mathlib/CategoryTheory/Limits/FunctorCategory/Basic.lean:225, :319) say evaluation at U preserves (finite) limits and colimits, so kernels, cokernels and homology are sectionwise; (2) instance PreservesFiniteLimits (presheafToSheaf J A) under HasSheafify J A (Sheafification.lean:76; HasSheafify J (ModuleCat R) by the instance at Mathlib/CategoryTheory/Sites/LeftExact.lean:308, ModuleCat R having finite limits and a limit-preserving forgetful functor) and IsLeftAdjoint (presheafToSheaf J A) (Sheafification.lean:83), so it preserves colimits"
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-cech-nerve-free-homology",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-curve-estimates",
+ "unit": "sk-prop-h2"
+}

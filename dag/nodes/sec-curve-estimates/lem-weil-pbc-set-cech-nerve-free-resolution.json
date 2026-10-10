@@ -1,0 +1,76 @@
+{
+ "id": "lem-weil-pbc-set-cech-nerve-free-resolution",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-hypercover-free-resolution",
+   "place": "proof, first paragraph: 'Choose locally a vertex in U_0, using its covering of X' (the degree-0 Cech-nerve case of the local contraction, used in step 1 of the split of lem-weil-pbc-hypercover-free-resolution); Stacks 01GC proof, first paragraph (the sectionwise trivial Kan fibration K(U) -> B and the homology of s(Z_B))",
+   "via": [
+    "lem-weil-pbc-cech-nerve-free-homology"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "The free-module complex of the Cech nerve of a surjection of sets resolves the free module on the target",
+ "statement": "Let $f:A\\to B$ be a surjective map of sets and $R$ a ring. For $n\\geq0$ let $A_n=A\\times_B\\cdots\\times_BA$ ($n+1$ factors) $=\\{(a_0,\\dots,a_n)\\in A^{n+1}:f(a_0)=\\cdots=f(a_n)\\}$, with face maps $d_j:A_n\\to A_{n-1}$ omitting the $j$-th coordinate, and let $R[A_n]$ be the free $R$-module on $A_n$ [def-weil-pbc-free-module]. Let $\\partial=\\sum_{j=0}^n(-1)^jR[d_j]:R[A_n]\\to R[A_{n-1}]$ and $\\varepsilon=R[f]:R[A_0]=R[A]\\to R[B]$, $[a]\\mapsto[f(a)]$. Then $\\partial\\circ\\partial=0$, $\\varepsilon\\circ\\partial=0$, and the augmented complex $\\cdots\\to R[A_2]\\to R[A_1]\\to R[A_0]\\xrightarrow{\\varepsilon}R[B]\\to0$ is exact; in particular $H_i(R[A_\\bullet],\\partial)=0$ for $i>0$ and $\\varepsilon$ induces $H_0(R[A_\\bullet])\\cong R[B]$. (Concretely, for a chosen section $\\sigma:B\\to A$ of $f$, the maps $[(a_0,\\dots,a_n)]\\mapsto[(\\sigma f(a_0),a_0,\\dots,a_n)]$ and $[b]\\mapsto[\\sigma(b)]$ form a contracting homotopy of the augmented complex.)",
+ "source": {
+  "document": "literature/stacks-project/hypercovering.tex",
+  "place": "Hypercoverings, Lemma Tag 01GC (label lemma-compare-cosk0), proof, first paragraph: for A = F(U) -> B = G'(U) surjective, K(U) -> B is a trivial Kan fibration (Simplicial, Lemma Tag 01AB, label lemma-cosk-minus-one-equivalence), hence a homotopy equivalence (Simplicial, Lemma Tag 08NS, label lemma-trivial-kan-homotopy), so Z_K(U) -> Z_B is a homotopy equivalence and s(Z_B) has homology Z_B in degree 0 only (Simplicial, Lemma Tag 0197, label lemma-homology-eilenberg-maclane); with R in place of Z. The explicit contraction is that of Sites and Sheaves, Lemma Tag 03AT (sites-cohomology.tex, label lemma-homology-complex), last paragraph, applied fibrewise"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-free-module"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "augmented Cech nerve of a split epimorphism alternating face map complex homotopy equivalent to its augmentation",
+   "results": "leansearch.net returned HTTP 500 (Internal Server Error) to the MCP tool and to a direct POST at https://leansearch.net/search on 2026-10-10, repeated 4 times; no results",
+   "date": "2026-10-10",
+   "verdict": "no result (service down)"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.SimplicialObject.Augmented.ExtraDegeneracy, CategoryTheory.Arrow.augmentedCechNerve",
+   "results": "CategoryTheory.Arrow.AugmentedCechNerve.extraDegeneracy (Mathlib.AlgebraicTopology.ExtraDegeneracy); classifyingSpaceUniversalCover.extraDegeneracyAugmentedCechNerve (Mathlib.RepresentationTheory.Homological.Resolution)",
+   "date": "2026-10-10",
+   "verdict": "candidate (composite, see mathlib_candidate)"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -n 'def\\|instance' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicTopology/ExtraDegeneracy.lean; grep -rln cechNerve ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib",
+   "results": "ExtraDegeneracy.lean:96 ExtraDegeneracy.map, :368 Arrow.AugmentedCechNerve.extraDegeneracy (for f with SplitEpi f.hom), :415 ExtraDegeneracy.homotopyEquiv (augmentation of the alternating face map complex is a homotopy equivalence onto the single complex in degree 0); cechNerve only in AlgebraicTopology/CechNerve.lean, ExtraDegeneracy.lean, RepresentationTheory/Homological/Resolution.lean, CategoryTheory/Limits/FormalCoproducts/ExtraDegeneracy.lean",
+   "date": "2026-10-10",
+   "verdict": "no single declaration; composite candidate"
+  }
+ ],
+ "mathlib_match": null,
+ "mathlib_candidate": {
+  "declarations": [
+   "CategoryTheory.Arrow.AugmentedCechNerve.extraDegeneracy (Mathlib/AlgebraicTopology/ExtraDegeneracy.lean:368)",
+   "CategoryTheory.SimplicialObject.Augmented.ExtraDegeneracy.map (ExtraDegeneracy.lean:96)",
+   "CategoryTheory.SimplicialObject.Augmented.ExtraDegeneracy.homotopyEquiv (ExtraDegeneracy.lean:415)"
+  ],
+  "note": "f : A -> B in Type is a split epi (surjective, choice); its augmented Cech nerve (wide pullbacks in Type = the A_n) has an extra degeneracy (:368); mapping along ModuleCat.free R (:96) and :415 give a homotopy equivalence of the alternating face map complex of R[A_bullet] with R[B] in degree 0, hence the homology. Three declarations plus the identification of the wide pullbacks, so a candidate, not a leaf. Alternatively the DAG node lem-weil-pbc-power-set-complex-contractible (unit sk-thm-p1) applied to each fibre f^{-1}(b) and summed over b."
+ },
+ "status": "unsplit",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-cech-nerve-free-homology",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-curve-estimates",
+ "unit": "sk-prop-h2"
+}

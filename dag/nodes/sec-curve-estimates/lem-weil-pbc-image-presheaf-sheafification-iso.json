@@ -1,0 +1,86 @@
+{
+ "id": "lem-weil-pbc-image-presheaf-sheafification-iso",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-hypercover-free-resolution",
+   "place": "proof, first paragraph: 'Choose locally a vertex in U_0, using its covering of X' (the degree-0 Cech-nerve case of the local contraction, used in step 1 of the split of lem-weil-pbc-hypercover-free-resolution); Stacks 01GC proof, first sentence 'Let G' ⊂ G be the image of the morphism F -> G' and the final identification with Z_G^#",
+   "via": [
+    "lem-weil-pbc-cech-nerve-free-homology"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "The image presheaf of a map that is surjective after sheafification has the same sheafification",
+ "statement": "Let $\\mathcal C$ be a site [def-weil-pbc-sites-and-cohomology] and $\\varphi:F\\to G$ a morphism of presheaves of sets on $\\mathcal C$. Let $G'\\subseteq G$ be its image presheaf, $G'(U)=\\varphi_U(F(U))$ with the restriction maps of $G$, and $\\iota:G'\\to G$ the inclusion, so that $\\varphi=\\iota\\circ\\psi$ with $\\psi:F\\to G'$ surjective on sections over every object. Assume that $\\varphi$ becomes surjective after sheafification [def-weil-pbc-sheafification]: for every object $U$ and every $t\\in G^\\#(U)$ there is a covering $\\{U_i\\to U\\}_{i}$ such that each $t|_{U_i}$ lies in the image of $\\varphi^\\#_{U_i}:F^\\#(U_i)\\to G^\\#(U_i)$. Then (a) $\\varphi$ is locally surjective: for every object $U$ and $g\\in G(U)$ there are a covering $\\{U_i\\to U\\}_i$ and $f_i\\in F(U_i)$ with $\\varphi(f_i)=g|_{U_i}$; and (b) $\\iota^\\#:G'^\\#\\to G^\\#$ is an isomorphism of sheaves of sets.",
+ "source": {
+  "document": "literature/stacks-project/sites.tex",
+  "place": "Sites, Definition Tag 00WM (label definition-sheaves-injective-surjective: surjective map of sheaves = local lifting of sections), Lemma Tag 00WN (label lemma-mono-epi-sheaves: injective = mono, surjective = epi for sheaves of sets) and Lemma Tag 00WJ (label lemma-sheafification-exact: sheafification of presheaves of sets commutes with finite limits and colimits); no Stacks lemma states it, the argument (G' -> G mono stays mono, and is locally surjective hence epi after sheafification) is to be written by an agent; used implicitly in Hypercoverings, Lemma Tag 01GC (label lemma-compare-cosk0), proof, first sentence 'Let G' be the image of F -> G' and last paragraph (the lemma states Z_G^# while the proof computes Z_{G'})"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-sites-and-cohomology",
+  "def-weil-pbc-sheafification"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "inclusion of image subpresheaf of a locally surjective morphism becomes isomorphism after sheafification",
+   "results": "leansearch.net returned HTTP 500 (Internal Server Error) to the MCP tool and to a direct POST at https://leansearch.net/search on 2026-10-10, repeated 4 times; no results",
+   "date": "2026-10-10",
+   "verdict": "no result (service down)"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "image subpresheaf of a locally surjective morphism of presheaves of types; its inclusion is iso after sheafification",
+   "results": "Presheaf.instIsLocallySurjectiveHomObjForgetTypeToRangeSheafify, Presheaf.isLocallySurjective_iff_range_sheafify_eq_top(') (Mathlib.CategoryTheory.Sites.LocallySurjective), Sheaf.isLocallySurjective_iff_isIso (imageι of a map of sheaves), Presheaf.isLocallySurjective_presheafToSheaf_map_iff (Mathlib.CategoryTheory.Sites.LocallyBijective)",
+   "date": "2026-10-10",
+   "verdict": "no single match: the statements concern the sheafified image subfunctor of G or maps of sheaves; (b) follows by combining several, see mathlib_candidate"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Presheaf.IsLocallySurjective, CategoryTheory.Subfunctor.range",
+   "results": "Presheaf.instIsLocallySurjectiveFunToRangeSheafify, Presheaf.isLocallySurjective_iff_range_sheafify_eq_top, isLocallySurjective_iff_range_sheafify_eq_top' (Mathlib.CategoryTheory.Sites.LocallySurjective)",
+   "date": "2026-10-10",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -n '^lemma\\|^theorem\\|^instance' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/CategoryTheory/Sites/LocallySurjective.lean, LocallyInjective.lean, LocallyBijective.lean",
+   "results": "LocallyBijective.lean:179 isLocallySurjective_presheafToSheaf_map_iff, :118 W_of_isLocallyBijective, :160 instance WEqualsLocallyBijective (Type _); LocallyInjective.lean:171 instance IsLocallyInjective J G.ι for a Subfunctor G; LocallySurjective.lean:150 isLocallySurjective_of_isLocallySurjective (f1 ≫ f2 loc. surj. => f2 loc. surj.)",
+   "date": "2026-10-10",
+   "verdict": "no single declaration; composite candidate"
+  }
+ ],
+ "mathlib_match": null,
+ "mathlib_candidate": {
+  "declarations": [
+   "CategoryTheory.Presheaf.isLocallySurjective_presheafToSheaf_map_iff (Mathlib/CategoryTheory/Sites/LocallyBijective.lean:179)",
+   "CategoryTheory.Presheaf.isLocallySurjective_of_isLocallySurjective (Mathlib/CategoryTheory/Sites/LocallySurjective.lean:150)",
+   "instance IsLocallyInjective J (Subfunctor.ι) (Mathlib/CategoryTheory/Sites/LocallyInjective.lean:171)",
+   "CategoryTheory.GrothendieckTopology.W_of_isLocallyBijective (Mathlib/CategoryTheory/Sites/LocallyBijective.lean:118) with the Type instance (:160)",
+   "CategoryTheory.GrothendieckTopology.W_iff (Mathlib/CategoryTheory/Sites/Localization.lean:80)"
+  ],
+  "note": "(a) is :179 with A = Type; (b): φ = ψ ≫ ι locally surjective gives ι locally surjective (:150), ι is locally injective (:171), hence J.W ι (:118, :160), i.e. ι^# iso (W_iff). Five declarations, so recorded as a candidate, not a leaf."
+ },
+ "status": "unsplit",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-cech-nerve-free-homology",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-curve-estimates",
+ "unit": "sk-prop-h2"
+}
