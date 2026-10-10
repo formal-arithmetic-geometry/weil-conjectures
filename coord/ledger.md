@@ -1640,3 +1640,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 14:38 L: returned deliver/H1/lem-weil-pbc-sets-strictly-henselian-open-sections-stalk (reviewer RETURN: 1. E1/E3: step 1: lem-weil-pbc-pointed-etale-neighbourhood-affine-shrink is applied without naming its open W, so Spec A)
 - 14:39 L: merged deliver/F1/lem-weil-pbc-proj-polynomial-twist-chart (reviewer PASS; first push; new nodes: 0)
 - 14:40 L: merged deliver/F1/lem-sc-flat-base-change-coherent (reviewer FIX; first push; new nodes: 0)
+- 14:41 L: merged deliver/K1/lem-exc-continuous-cochains-short-exact (reviewer PASS; first push; new nodes: 0)

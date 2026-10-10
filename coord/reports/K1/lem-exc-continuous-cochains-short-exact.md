@@ -1,0 +1,23 @@
+# lem-exc-continuous-cochains-short-exact
+
+Files written:
+
+- `dag/nodes/sec-curve-estimates/lem-exc-continuous-cochains-short-exact.json`: split statement; no new nodes or Mathlib leaves. The existing Mathlib leaf `lem-weil-pbc-cochain-complexes-degreewise-exact` supplies the final degreewise criterion.
+
+Attachments: none. Search of `/home/ubuntu/weil-src-slopmaster2/WeilConjectures` and `Comparator` by item tag, continuous-cochain terms, and short-exact terms found no declaration stating this item. The item's `lean_audit` has no slopmaster2 declaration.
+
+WANTED: `literature/stacks-project/etale-cohomology.tex`, Tag 0DVG, label `section-continuous-group-cohomology`, for `lem-exc-continuous-cochains-short-exact`. This machine's repository contains citation tables but no local Stacks source checkout. I read the corresponding Stacks page at https://stacks.math.columbia.edu/tag/0DVG; it states the assertion and the differential but omits the proof of exactness. The proof origin is therefore marked `agent`.
+
+The imported item had no proof steps. Its statement agrees with the 0DVG assertion after specializing from discrete modules for a topological group to discrete $A$-modules for a profinite group. The finiteness of $A$ is harmless and unused. I supplied the missing degreewise lifting argument and checked the inhomogeneous differential directly. No part remains unfinished.
+
+## Review by K1
+
+I read Stacks Tag 0DVG, section `section-continuous-group-cohomology`, including its displayed differential and the paragraph beginning "However, a short exact sequence of discrete G-modules". I compared the item with `lem-exc-discrete-modules-abelian`: its statement says exactness in the discrete-action category is underlying $A$-module exactness. I also read the existing node `lem-weil-pbc-cochain-complexes-degreewise-exact` and Mathlib's `HomologicalComplex.shortExact_iff_degreewise_shortExact` in `Mathlib/Algebra/Homology/HomologicalComplexAbelian.lean:70`. There are no new nodes whose source needs separate review.
+
+Step 1 uses the underlying-exactness clause of `lem-exc-discrete-modules-abelian`. Injectivity and the kernel are checked pointwise. Surjectivity uses a set-theoretic section of the surjective module map; it is continuous because both modules have the discrete topology. Its composite with a continuous cochain is therefore a continuous lift. This also covers degree zero since $G^0$ is a singleton. The chosen section need not be $A$-linear or equivariant: the lifted cochain is only required to be a continuous function.
+
+Step 2 uses no cited theorem: it is the direct calculation from the displayed formula. The text gives the continuity check term by term and identifies the cancelling terms in $d^2$. The group-action identity cancels the first-pair terms. In degree zero the formula checks directly. Step 3 uses the equivariance and additivity hypotheses already present in the item's statement to verify that $i$ and $p$ commute with the displayed differential. The existing degreewise-exactness node then applies after extending the nonnegative complexes by zero to integer degrees; its statement covers this case. No cited node is being used for a claim absent from its statement.
+
+For B1-B9, there are no new nodes: the item has a self-contained statement, single-escaped TeX in JSON, `blueprint.from` pointing to the final continuous-cochain clause of `def-exc-continuous-cohomology`, and `same_as: []` after the whole-blueprint search. I searched the DAG for continuous cochains and short exact complexes and used the existing degreewise-exactness node. For C1-C8, the steps cite the exactness and degreewise criterion they use, do not quote an uncited tag as a proof, and introduce no cycle: the item's parent depends on it, while the two cited nodes do not. This is a genuine proof of the item, with no new node restating it (D1-D5).
+
+For E1-E5, the only hypotheses used are underlying surjectivity/exactness, discrete topologies, continuous action, and equivariance/linearity of the maps; all appear in the statement or in `lem-exc-discrete-modules-abelian`. I checked $G=1$ (degree-zero map is the original sequence), $M'=0$ (the section gives surjectivity), and $M''=0$ (the kernel clause gives all cochains). None requires compactness or finiteness, in agreement with Stacks' more general claim. The local Stacks file is absent, so I read the tagged page online and recorded that source limitation rather than claiming a local `.tex` line check. I corrected the initially too terse final step to explain the extension from nonnegative to integer-indexed complexes, and marked the fully written differential calculation elementary after preflight identified the uncited-step form error.

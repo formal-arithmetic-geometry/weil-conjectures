@@ -21,9 +21,49 @@
  "stmt_deps": [
   "lem-exc-discrete-modules-abelian"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Write $i:M'\\to M$ and $p:M\\to M''$. Exactness in [lem-exc-discrete-modules-abelian] is exactness of the underlying $A$-modules. For each $n$, postcomposition with $i$ is injective. If $p\\circ f=0$ for a continuous $f:G^n\\to M$, then every $f(x)$ lies in $i(M')$; the unique pointwise preimage $f':G^n\\to M'$ is continuous because $M'$ and $M$ are discrete and the inverse image of each singleton under $f'$ is an inverse image under $f$ of a singleton in $M$. Thus the image of postcomposition with $i$ is the kernel of postcomposition with $p$. Choose a set-theoretic section $s:M''\\to M$ of the surjection $p$. Both modules are discrete, so $s$ is continuous; for any continuous $h:G^n\\to M''$, the map $s\\circ h$ is a continuous lift. Hence postcomposition with $p$ is surjective. For $n=0$, $G^0$ is a singleton and this is the original exact sequence.",
+   "uses": [
+    "lem-exc-discrete-modules-abelian"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 0DVG, label section-continuous-group-cohomology, paragraph beginning 'However, a short exact sequence of discrete G-modules'; the pointwise lifting argument is supplied here"
+   }
+  },
+  {
+   "text": "The displayed formula defines a continuous $A$-linear differential: each projection, adjacent multiplication map $G^{n+1}\\to G^n$, and the action map $G\\times M\\to M$ is continuous, and finite sums are continuous into the discrete module. The identity $d^{n+1}d^n=0$ follows by expanding the two alternating sums: terms joining disjoint adjacent pairs occur twice with opposite signs, as do the action term paired with joining the first pair and the final omission term paired with joining the last pair; the remaining double-action terms cancel by $(g_1g_2)m=g_1(g_2m)$. In degree zero, the two terms from $d^1(d^0m)$ cancel directly. Thus these are cochain complexes.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 0DVG, label section-continuous-group-cohomology, displayed inhomogeneous differential; the cancellation check is supplied here"
+   }
+  },
+  {
+   "text": "For either equivariant $A$-linear map $u=i,p$, applying $u$ to every term in the formula for $d^nf$ gives the corresponding term of $d^n(u\\circ f)$: $u(gm)=g u(m)$ handles the first term, and additivity handles the alternating sum and last term. The degree-zero formula has the same property. Therefore the degreewise maps of Step 1 are morphisms of the complexes of Step 2 and their composite is zero. Extend these nonnegative complexes by zero in negative degrees. Their degreewise sequences are short exact in every integer degree, so the criterion [lem-weil-pbc-cochain-complexes-degreewise-exact] makes the resulting sequence short exact as complexes; restricting back to nonnegative degrees gives the asserted cochain-complex sequence.",
+   "uses": [
+    "lem-weil-pbc-cochain-complexes-degreewise-exact",
+    "lem-exc-discrete-modules-abelian"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 0DVG, label section-continuous-group-cohomology, displayed differential and paragraph on short exact sequences of discrete G-modules; degreewise criterion is Mathlib's HomologicalComplex.shortExact_iff_degreewise_shortExact"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-exc-discrete-modules-abelian",
+  "lem-weil-pbc-cochain-complexes-degreewise-exact"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tag 0DVG, label section-continuous-group-cohomology: assertion and differential are in the source; the degreewise lifting and cancellation details are supplied by the agent"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -48,10 +88,26 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-exc-cochains-derived-invariants"
  },
  "chapter": "sec-curve-estimates",
- "unit": "sk-prop-h2"
+ "unit": "sk-prop-h2",
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "lem-exc-continuous-cochains-short-exact",
+  "worker": "stage1",
+  "summary": "Expanded the Stacks 0DVG assertion into degreewise exactness via a continuous set-theoretic lift, continuity and square-zero of the inhomogeneous differential, and compatibility with equivariant maps followed by the existing Mathlib degreewise-exactness leaf. The statement was retained and no new nodes were needed.",
+  "blueprint": "Realizes the final continuous-inhomogeneous-cochains clause of def-exc-continuous-cohomology: exactness required by its comparison with derived invariants.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-ccs",
+  "group": "K1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-ccs (reviewer sub-agent of L); spot-checked: Source: Stacks 0DVG (etale-cohomology.tex, section-continuous-group-cohomology, lines 9005-9044): the displayed inhomogeneous differential (n>=1 and n=0 gm-m) agrees term by term and sign by sign with the node's statement, and the paragraph at line 9041 asserts the short exactness of continuous-cochain complexes for discrete G-modules; the node's specialization (profinite G, finite ring A, open stabilizers = continuous action on discrete module) is a special case, finiteness of A unused. Statement unchanged; only proof fields and split_report added. Step 1 rests on the clause of lem-exc-discrete-modules-abelian that exactness is underlying A-module exactness; injectivity, kernel = image (pointwise preimage is continuous because preimages of singletons are preimages under f of singletons) and surjectivity (a set-theoretic section of a map of discrete spaces is continuous) checked. Step 2 elementary: continuity of d^n f (action map GxM->M continuous with open stabilizers and M discrete) and d^2=0 by the standard cancellation, checked. Step 3: equivariance and additivity give chain maps; degreewise short exactness plus lem-weil-pbc-cochain-complexes-degreewise-exact (existing Mathlib leaf, off-unit generic tool, statement read; Mathlib HomologicalComplexAbelian.lean:70 shortExact_iff_degreewise_shortExact verified, valid for any shape) gives short exactness of complexes. Small cases: G trivial (degree 0 = original sequence), M'=0, M''=0. Blueprint search 'continuous cochains short exact' via tools/blueprint_refs.py: 0 matches, same_as [] consistent. 14:40-14:41 UTC"
+ }
 }
