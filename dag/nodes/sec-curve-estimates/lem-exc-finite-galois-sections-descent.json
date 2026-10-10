@@ -23,9 +23,54 @@
   "def-weil-pbc-separable-algebraic-extension",
   "def-pc-field-extension"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Because $E/L$ is finite separable, $\\pi:\\operatorname{Spec}E\\to\\operatorname{Spec}L$ is etale by [lem-weil-pbc-finite-separable-extension-etale]. It is surjective because both spectra have one point, hence $\\{\\pi\\}$ is a covering in the small etale site of $\\operatorname{Spec}L$ [def-weil-pbc-etale-sheaf-of-sets]. Its self-intersection $W=\\operatorname{Spec}E\\times_{\\operatorname{Spec}L}\\operatorname{Spec}E$ is described by [lem-exc-finite-galois-tensor-decomposition]: (1) $E\\otimes_LE\\cong\\prod_{q\\in Q}E$, and (2) there is a bijection $\\beta:F(W)\\to\\prod_{q\\in Q}F(\\operatorname{Spec}E)$ carrying restriction along the first projection $p_1$ to $s\\mapsto(s)_q$ and restriction along the second projection $p_2$ to $s\\mapsto((\\operatorname{Spec}q)^*s)_q$.",
+   "uses": [
+    "lem-weil-pbc-finite-separable-extension-etale",
+    "def-weil-pbc-etale-sheaf-of-sets",
+    "lem-exc-finite-galois-tensor-decomposition"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/pione.tex",
+    "place": "Tag 03SF, finite etale objects under a finite Galois extension"
+   }
+  },
+  {
+   "text": "Apply the sheaf equalizer condition in [def-weil-pbc-etale-sheaf-of-sets] to the one-member covering $\\{\\pi\\}$ of step 1. It identifies $F(\\operatorname{Spec}L)$, via $s\\mapsto s|_\\pi$, with the equalizer of $s\\mapsto s|_{p_1}$ and $s\\mapsto s|_{p_2}$ from $F(\\operatorname{Spec}E)$ to $F(W)$. Since $\\beta$ of [lem-exc-finite-galois-tensor-decomposition] (2) is a bijection, $s|_{p_1}=s|_{p_2}$ iff $\\beta(s|_{p_1})=\\beta(s|_{p_2})$, i.e. iff $(\\operatorname{Spec}q)^*s=s$ for every $q\\in Q$. The automorphisms of $\\operatorname{Spec}E$ over $\\operatorname{Spec}L$ are exactly the $\\operatorname{Spec}q$, $q\\in Q$ (morphisms of affine schemes over $\\operatorname{Spec}L$ correspond to $L$-algebra maps [def-weil-affine-spectrum]), so the equalizer is exactly the set of $Q$-invariant sections.",
+   "uses": [
+    "def-weil-pbc-etale-sheaf-of-sets",
+    "lem-exc-finite-galois-tensor-decomposition",
+    "def-weil-affine-spectrum"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 04JM, Lemma lemma-global-sections-point, finite Galois descent argument"
+   }
+  },
+  {
+   "text": "The equalizer inclusion is the pullback map along $\\operatorname{Spec}E\\to\\operatorname{Spec}L$, so it is injective, and step 2 shows that every $Q$-invariant section is its pullback. Therefore pullback identifies $F(\\operatorname{Spec}L)$ bijectively with the $Q$-invariant subset of $F(\\operatorname{Spec}E)$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 04JM, Lemma lemma-global-sections-point, conclusion of the finite Galois descent argument"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-finite-separable-extension-etale",
+  "lem-exc-finite-galois-tensor-decomposition",
+  "def-weil-pbc-etale-sheaf-of-sets",
+  "def-weil-affine-spectrum"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tag 04JM, Lemma lemma-global-sections-point, finite Galois descent argument"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -50,12 +95,30 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-exc-field-sections-stalk-invariants",
   "by": "worker",
   "date": "2026-10-10"
  },
  "chapter": "sec-curve-estimates",
- "unit": "sk-prop-h2"
+ "unit": "sk-prop-h2",
+ "split_report": {
+  "date": "2026-10-11",
+  "item": "lem-exc-finite-galois-sections-descent",
+  "worker": "stage1",
+  "summary": "Split finite Galois descent into the etale-cover and tensor-decomposition step, the sheaf equalizer step, and the final invariant-subset identification. Added one statement-only node for the finite Galois tensor decomposition after searching the DAG, blueprint, Lean source, and Mathlib.",
+  "blueprint": [
+   "proof, third paragraph: descent of a section from a finite separable field to the H-invariants"
+  ],
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-fgs1704",
+  "group": "J1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-fgs1704 (reviewer sub-agent of L); spot-checked: Source Stacks 04JM (lemma-global-sections-point, finite Galois descent) with the 03SF decomposition E (x)_L E = prod_{q in Q} E; item statement agrees (L field, E/L finite Galois, F sheaf of sets on Spec L_et, F(Spec L) = Q-invariants of F(Spec E)). Step 1: lem-weil-pbc-finite-separable-extension-etale (finite + separable exactly its hypotheses) gives Spec E -> Spec L etale, surjective since one-point spectra, so a covering in def-weil-pbc-etale-sheaf-of-sets. Step 2: equalizer condition of def-weil-pbc-etale-sheaf-of-sets for the one-member covering, plus the new node; checked that under a(x)b -> (a q(b))_q the q-th summand composed with p1 is id and with p2 is Spec q, so the equalizer is the Q-invariants; Aut of Spec E over Spec L = {Spec q} from def-weil-affine-spectrum. Step 3 elementary. Small cases: E=L (Q trivial), E=C over R ((x)-product C x C, a(x)b -> (ab, a bbar)). Mathlib: own LeanFinder query (E (x)_L E = product over Galois group), Loogle 'IsGalois, TensorProduct' (no results), grep of RingTheory/TensorProduct, LinearAlgebra/TensorProduct, RingTheory/Etale for IsGalois/EquivPi: no Mathlib statement (only piScalarRight, A (x) (iota -> R)), so unsplit node accepted; slopmaster2 grep for IsGalois with tensor: none. FIX more, RETURN less: dag/nodes/sec-curve-estimates/lem-exc-finite-galois-tensor-decomposition.json: statement: clause 'the two projections identify the restriction maps on sections with the identity and q^*' named no sheaf (B2) and hid the fibre-product and disjoint-union facts (C4); rewritten as (1) the ring isomorphism and (2) for a sheaf F a bijection beta: F(Spec E x_{Spec L} Spec E) -> prod_q F(Spec E) with beta(s|p1)=(s)_q, beta(s|p2)=((Spec q)^* s)_q; the derived clause 'Consequently Spec E -> Spec L is a finite etale covering' removed (proof content in a statement, B1; step 1 gets it from its own citation); stmt_deps += def-pc-fibre-product, def-weil-pbc-etale-sheaf-of-sets; mathlib_searches += my three queries. dag/nodes/sec-curve-estimates/lem-exc-finite-galois-sections-descent.json: steps 1-2 text rewritten to use clause (2) via beta, step 1 uses += def-weil-pbc-etale-sheaf-of-sets, step 2 uses += def-weil-affine-spectrum (automorphisms of Spec E over Spec L are the Spec q), proof_deps updated. Report mentions a citations.json not in the commit (harmless). Start Sat Oct 10 05:00:55 PM UTC 2026, end Sat Oct 10 05:02:35 PM UTC 2026.; 2 file(s) fixed by the reviewer"
+ }
 }

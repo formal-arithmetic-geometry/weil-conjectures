@@ -1,0 +1,89 @@
+{
+ "id": "lem-exc-finite-galois-tensor-decomposition",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-exc-field-discrete-modules",
+   "place": "proof, third paragraph: the finite Galois descent calculation underlying the identification of sections with invariants",
+   "via": [
+    "lem-exc-etale-sheaves-gsets-point"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Tensor decomposition for a finite Galois field extension",
+ "statement": "Let $L$ be a field [def-pc-field-extension] and let $E/L$ be a finite Galois extension (finite and separable algebraic [def-weil-pbc-separable-algebraic-extension], normal) with group $Q=\\operatorname{Aut}_L(E)$ [def-pc-field-extension]; for $q\\in Q$ write $\\operatorname{Spec}q:\\operatorname{Spec}E\\to\\operatorname{Spec}E$ for the induced morphism [def-weil-affine-spectrum]. (1) The $L$-algebra map $\\varphi:E\\otimes_LE\\to\\prod_{q\\in Q}E$ [lem-weil-pbc-algebra-tensor-pushout-universal-property] with $\\varphi(a\\otimes b)=(a\\,q(b))_{q\\in Q}$ is an isomorphism. (2) Let $\\pi:\\operatorname{Spec}E\\to\\operatorname{Spec}L$ be induced by $L\\subseteq E$, let $W=\\operatorname{Spec}E\\times_{\\operatorname{Spec}L}\\operatorname{Spec}E$ be the fibre product [def-pc-fibre-product] with projections $p_1,p_2:W\\to\\operatorname{Spec}E$, and let $\\mathcal F$ be a sheaf of sets on the small etale site of $\\operatorname{Spec}L$ [def-weil-pbc-etale-sheaf-of-sets] ($\\operatorname{Spec}E$ and $W$ are etale over $\\operatorname{Spec}L$ [def-weil-etale-morphism], and $p_1,p_2$ are morphisms of the site). Then there is a bijection $\\beta:\\mathcal F(W)\\to\\prod_{q\\in Q}\\mathcal F(\\operatorname{Spec}E)$ such that for every $s\\in\\mathcal F(\\operatorname{Spec}E)$ one has $\\beta(s|_{p_1})=(s)_{q\\in Q}$ and $\\beta(s|_{p_2})=\\bigl((\\operatorname{Spec}q)^*s\\bigr)_{q\\in Q}$, where $s|_{p_i}=\\mathcal F(p_i)(s)$ and $(\\operatorname{Spec}q)^*s=\\mathcal F(\\operatorname{Spec}q)(s)$.",
+ "source": {
+  "document": "literature/stacks-project/pione.tex",
+  "place": "Tag 03SF, finite etale objects under a finite Galois extension (the decomposition of the base change into copies indexed by the Galois group)"
+ },
+ "stmt_deps": [
+  "def-pc-field-extension",
+  "def-weil-pbc-separable-algebraic-extension",
+  "lem-weil-pbc-algebra-tensor-pushout-universal-property",
+  "def-weil-affine-spectrum",
+  "def-pc-fibre-product",
+  "def-weil-pbc-etale-sheaf-of-sets",
+  "def-weil-etale-morphism"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "tensor product of a finite Galois extension with itself is a product indexed by the Galois group",
+   "results": "service unavailable; no declaration obtained",
+   "date": "2026-10-11",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "finite Galois extension tensor product decomposition product over automorphisms",
+   "results": "no declaration for the field-theoretic tensor decomposition",
+   "date": "2026-10-11",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "rg -n -i 'tensor.*Galois|Galois.*tensor|aut.*tensor' Mathlib/FieldTheory Mathlib/RingTheory",
+   "results": "no theorem giving E tensor_L E as a product indexed by Aut_L(E)",
+   "date": "2026-10-11",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a finite Galois extension E/L, the tensor product E ⊗[L] E is isomorphic to the product of copies of E indexed by the Galois group",
+   "results": "IsGaloisGroup.mulEquivAlgEquiv, Algebra.isInvariant_of_isGalois', IsGaloisGroup.* (no tensor-product decomposition)",
+   "date": "2026-10-10",
+   "verdict": "no match",
+   "by": "R-fgs1704"
+  },
+  {
+   "tool": "loogle",
+   "query": "IsGalois, TensorProduct",
+   "results": "no results",
+   "date": "2026-10-10",
+   "verdict": "no match",
+   "by": "R-fgs1704"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rn 'IsGalois\\|Gal(' Mathlib/RingTheory/TensorProduct Mathlib/LinearAlgebra/TensorProduct Mathlib/RingTheory/Etale; grep -rn 'tensorProductEquivPi\\|EquivPi' Mathlib",
+   "results": "nothing on E tensor_L E for Galois E/L (only Algebra.TensorProduct.piScalarRight, A tensor (iota -> R))",
+   "date": "2026-10-10",
+   "verdict": "no match",
+   "by": "R-fgs1704"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "created": {
+  "item": "lem-exc-finite-galois-sections-descent",
+  "by": "worker",
+  "date": "2026-10-10"
+ },
+ "chapter": "sec-curve-estimates",
+ "unit": "sk-prop-h2"
+}

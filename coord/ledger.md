@@ -2080,3 +2080,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 17:02 L: merged deliver/K1/lem-weil-pbc-tensor-finite-type-limit (reviewer PASS; first push; new nodes: 0)
 - 17:02 L: merged deliver/J1/lem-sc-ext-coherent-hom-injective-acyclic (reviewer FIX; first push; new nodes: 1)
 - 17:02 L: merged deliver/G1/lem-weil-pbc-etale-sections-fpqc-descent (reviewer FIX; after a return; new nodes: 3)
+- 17:02 L: merged deliver/J1/lem-exc-finite-galois-sections-descent (reviewer FIX; first push; new nodes: 1)
