@@ -3,7 +3,7 @@
  "blueprint": {
   "is": "lemma-nagata-affine-fp-descends",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "Property of affine finite-presentation descent",
@@ -17,20 +17,79 @@
  ],
  "proof": [
   {
-   "text": "The displayed quotient is a finite presentation by construction. Tensoring\nit with $A$ sends every lifted relation to the original $r_j$ and preserves\nthe finite polynomial presentation. Thus the base-changed presentation is\nthe chosen presentation of $B$, with $\\beta_B$ and its generatorwise inverse\nmutually inverse.",
-   "uses": [],
-   "elementary": null
+   "text": "By the construction in [def-nagata-affine-fp-descent], the algebra $B_{\\lambda_B}$ is the quotient of the polynomial algebra $A_{\\lambda_B}[x_1,\\ldots,x_n]$ by the finite list of lifted relations $r_{j,\\lambda_B}$. Hence this displayed quotient is a finite presentation over $A_{\\lambda_B}$.",
+   "uses": [
+    "def-nagata-affine-fp-descent"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-nagata-compactification/sk-prop-nagata-sketch-approximation/lemma-nagata-affine-fp-descends.md",
+    "place": "## Proof"
+   }
+  },
+  {
+   "text": "After tensoring with $A$ over $A_{\\lambda_B}$, each coefficient of $r_{j,\\lambda_B}$ maps to the corresponding coefficient of $r_j$, by the defining compatibility of the chosen lifts. Therefore the resulting quotient is $A[x_1,\\ldots,x_n]/(r_1,\\ldots,r_m)$, namely the chosen presentation of $B$. This identifies the source of $\\beta_B$ with the presentation of $B$.",
+   "uses": [
+    "def-nagata-affine-fp-descent"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-nagata-compactification/sk-prop-nagata-sketch-approximation/lemma-nagata-affine-fp-descends.md",
+    "place": "## Proof"
+   }
+  },
+  {
+   "text": "The map $\\beta_B$ sends each polynomial generator $x_i$ to the generator with the same name in $B$. Under the identification in the preceding step it is the identity on the quotient presentation, so the map sending each generator back is a two-sided inverse. Thus $\\beta_B$ is an isomorphism.",
+   "uses": [
+    "def-nagata-affine-fp-descent"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-nagata-compactification/sk-prop-nagata-sketch-approximation/lemma-nagata-affine-fp-descends.md",
+    "place": "## Proof"
+   }
   }
  ],
- "proof_deps": [],
+ "proof_deps": [
+  "def-nagata-affine-fp-descent"
+ ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/master/blueprint/sec-nagata-compactification/sk-prop-nagata-sketch-approximation/lemma-nagata-affine-fp-descends.md",
   "place": "## Proof"
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "finite presentation of B_lambda over A_lambda and base change comparison map beta_B is an isomorphism",
+   "results": "FinitePresentation.of_isBaseChange; RingHom.finitePresentation_isStableUnderBaseChange; Algebra.FinitePresentation.baseChange; Algebra.Presentation.tensorModelOfHasCoeffsEquiv; no exact descent-data statement",
+   "date": "2026-10-11",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "Algebra.FinitePresentation, TensorProduct, Ideal.map, MvPolynomial",
+   "results": "0 hits; loogle: Unknown identifier quotient",
+   "date": "2026-10-11",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "FinitePresentation|TensorProduct|Ideal.*map|MvPolynomial AlgebraicGeometry",
+   "results": "25 generic hits in Mathlib/AlgebraicGeometry; no theorem stating this descent comparison",
+   "date": "2026-10-11",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "finite presentation descends to finite stage and base change quotient isomorphism",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-11",
+   "verdict": "unavailable"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [
   "bypassed"
@@ -64,5 +123,21 @@
   }
  },
  "chapter": "sec-nagata-compactification",
- "unit": "sk-prop-nagata-sketch-approximation"
+ "unit": "sk-prop-nagata-sketch-approximation",
+ "split_report": {
+  "date": "2026-10-11",
+  "item": "lemma-nagata-affine-fp-descends",
+  "worker": "stage1",
+  "summary": "Expanded the imported proof paragraph into three explicit elementary steps: finite presentation from the finite quotient, identification of the tensor base change with the chosen presentation of B, and the generatorwise two-sided inverse proving beta_B is an isomorphism. All steps use the existing definition node; no new node was needed.",
+  "blueprint": "Realizes the proof paragraph of lemma-nagata-affine-fp-descends: the displayed quotient is finite presentation, tensoring carries lifted relations to r_j, and beta_B has a generatorwise inverse.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-afl2810",
+  "group": "E1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-afl2810 (reviewer sub-agent of L); spot-checked: Statement matches merged def-nagata-affine-fp-descent on sheaf-dag (B_{lambda_B}=A_{lambda_B}[x]/(r_{j,lambda_B}), beta_B the x_i->x_i map on the displayed base-changed presentation); step 1 finite presentation by construction (elementary); step 2 coefficient transport phi_{lambda_B} o phi_{lambda_k lambda_B}=phi_{lambda_k} and the displayed tensor quotient (base change of a presentation, right exactness of tensor, elementary) are in the definition's statement (C4 ok); step 3 identity on presentations so iso; citer def-nagata-relative-gluing-datum-descent uses it only to pick a descent stage, consistent with statement. No repairs. Second reading by E1 accurate; no missed fault found."
+ }
 }
