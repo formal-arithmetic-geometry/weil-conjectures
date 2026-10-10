@@ -1,8 +1,8 @@
 # Work queue
 
-857 items; claim with `tools/claim.py next <group> [--stage N]`.
+858 items; claim with `tools/claim.py next <group> [--stage N]`.
 
-## Stage 1: nodes to split (54)
+## Stage 1: nodes to split (55)
 
 | node | distance to a target | Lean state on the done branch |
 |---|---|---|
@@ -13,9 +13,9 @@
 | `lem-pc-ring-pseudo-coherent-localization-glue` | 3016 | none |
 | `lem-sc-derived-mayer-vietoris-triangle` | 3016 | none |
 | `lem-sc-derived-open-shriek-derived-adjunction` | 3016 | none |
-| `lem-pc-derived-pullback-tensor-product` | 3019 | none |
 | `lem-sc-derived-internal-hom-adjunction` | 3019 | none |
-| `lem-pc-qcqs-sheaf-rhom-adjunction` | 3020 | none |
+| `lem-pc-kflat-tensor-product` | 3020 | none |
+| `lem-pc-sheaf-rhom-projection-formula` | 3021 | none |
 | `lem-pc-tor-independent-perfect-pullback-comparison` | 3021 | none |
 | `lem-sc-affine-koszul-cech-derived-comparison` | 3021 | none |
 | `lem-sc-affine-pseudo-coherent-lift` | 3022 | none |
@@ -48,9 +48,10 @@
 | `lem-sc-base-change-curve` | - | none |
 | `lem-pc-coherent-hi` | - | sorry_here |
 | `lem-sc-global-functions` | - | rests_on_sorry |
-| `lem-sc-kummer-base-change-compatibility` | - | none |
 | `lem-pc-finite-support-hi` | - | sorry_here |
 | `lem-sc-affine-unit-divisor-base-change` | - | none |
+| `lem-sc-h1-gm-pic-pullback` | - | none |
+| `lem-sc-pic-affine-base-change-compatibility` | - | none |
 | `lem-kun-etale-lfp` | - | none |
 | `lem-pur-kinjective-degreewise-existence` | - | none |
 | `lem-pur-ringed-site-grothendieck-abelian` | - | none |
@@ -869,7 +870,7 @@
 | `lem-weil-pbc-projective-space-zero-isomorphism` | 4 | state |
 | `def-nagata-fixed-base-separated-stage` | 6 | state |
 
-Not open yet: 1663 nodes that wait for a statement dependency, 93 nodes that wait for stage 1.
+Not open yet: 1666 nodes that wait for a statement dependency, 94 nodes that wait for stage 1.
 
 ## Stage 3: modules to prove (0)
 
