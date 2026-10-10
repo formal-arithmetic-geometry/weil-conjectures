@@ -10,9 +10,76 @@
  "stmt_deps": [
   "def-weil-pbc-topological-inverse-image"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "*Step 1 (direct images compose on the nose).* Write $\\mathrm{Sh}(T)$ for the category of sheaves of sets on a space $T$. By [def-weil-pbc-topological-inverse-image] (1) (with values in sets), for a sheaf $\\mathcal F$ on $X$ and an open $W\\subseteq Z$ we have $(g_*f_*\\mathcal F)(W)=(f_*\\mathcal F)(g^{-1}W)=\\mathcal F(f^{-1}(g^{-1}W))$ and $((g\\circ f)_*\\mathcal F)(W)=\\mathcal F((g\\circ f)^{-1}W)$, and $f^{-1}(g^{-1}W)=(g\\circ f)^{-1}W$ as subsets of $X$. The restriction maps of both are restriction maps of $\\mathcal F$ between the same opens, and for a morphism $\\varphi:\\mathcal F\\to\\mathcal F'$ both $(g_*f_*\\varphi)_W$ and $((g\\circ f)_*\\varphi)_W$ equal $\\varphi_{(g\\circ f)^{-1}W}$. Hence $g_*\\circ f_*=(g\\circ f)_*$ as functors $\\mathrm{Sh}(X)\\to\\mathrm{Sh}(Z)$; call this functor $R$.",
+   "uses": [
+    "def-weil-pbc-topological-inverse-image"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sheaves.tex",
+    "place": "Sheaves, Lemma Tag 008E (label lemma-pushforward-composition, line 2038) and its proof"
+   }
+  },
+  {
+   "text": "*Step 2 (the composite adjunction).* By [def-weil-pbc-topological-inverse-image] (3) (with values in sets) there are adjunctions $g^{-1}\\dashv g_*$ between $\\mathrm{Sh}(Z)$ and $\\mathrm{Sh}(Y)$ with unit $\\eta^g$, $f^{-1}\\dashv f_*$ between $\\mathrm{Sh}(Y)$ and $\\mathrm{Sh}(X)$ with unit $\\eta^f$, and $(g\\circ f)^{-1}\\dashv(g\\circ f)_*=R$ with unit $\\eta^{g\\circ f}$. Apply [def-weil-pbc-composite-adjunction] with $\\mathcal A=\\mathrm{Sh}(Z)$, $\\mathcal B=\\mathrm{Sh}(Y)$, $\\mathcal C=\\mathrm{Sh}(X)$, $F=g^{-1}$, $G=g_*$, $H=f^{-1}$, $I=f_*$: it gives an adjunction $L_1:=f^{-1}\\circ g^{-1}\\dashv g_*\\circ f_*=R$ (Step 1) with unit $\\eta_{1,\\mathcal G}=g_*(\\eta^f_{g^{-1}\\mathcal G})\\circ\\eta^g_{\\mathcal G}:\\mathcal G\\to R\\,L_1\\mathcal G$ and a counit $\\varepsilon_1$ satisfying the triangle identities. Since $(g_*\\psi)_W=\\psi_{g^{-1}W}$ for a morphism $\\psi$ of sheaves on $Y$ (definition of $g_*$), on sections over an open $W\\subseteq Z$ this unit is $\\eta_{1,\\mathcal G,W}(s)=\\eta^f_{g^{-1}\\mathcal G,g^{-1}W}(\\eta^g_{\\mathcal G,W}(s))\\in(f^{-1}g^{-1}\\mathcal G)(f^{-1}g^{-1}W)$ for $s\\in\\mathcal G(W)$. Put $L_2=(g\\circ f)^{-1}$ and $\\eta_2=\\eta^{g\\circ f}$, also an adjunction $L_2\\dashv R$.",
+   "uses": [
+    "def-weil-pbc-topological-inverse-image",
+    "def-weil-pbc-composite-adjunction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sheaves.tex",
+    "place": "Sheaves, Lemma Tag 008I (label lemma-pullback-composition, line 2209), proof: 'adjoint functors are unique up to unique isomorphism, and Lemma lemma-pushforward-composition'; the composite adjunction is the one implicit there"
+   }
+  },
+  {
+   "text": "*Step 3 (the unit condition as an equation of morphisms).* Let $\\mathcal G$ be a sheaf of sets on $Z$ and $c:L_1\\mathcal G\\to L_2\\mathcal G$ any morphism of sheaves of sets on $X$. By Step 1, $R(c)=g_*f_*(c)$ has components $R(c)_W=c_{f^{-1}g^{-1}W}=c_{(g\\circ f)^{-1}W}$. Two morphisms of sheaves of sets $\\mathcal G\\to RL_2\\mathcal G$ are equal if and only if their components agree on every element of $\\mathcal G(W)$ for every open $W\\subseteq Z$. With the formula of Step 2 for $\\eta_1$, the condition of the statement, $c_{(g\\circ f)^{-1}W}(\\eta^f_{g^{-1}\\mathcal G,g^{-1}W}(\\eta^g_{\\mathcal G,W}(s)))=\\eta^{g\\circ f}_{\\mathcal G,W}(s)$ for all $W$ and $s\\in\\mathcal G(W)$, is therefore equivalent to the equation $(\\ast)$ $R(c)\\circ\\eta_{1,\\mathcal G}=\\eta_{2,\\mathcal G}$ of morphisms $\\mathcal G\\to RL_2\\mathcal G$.",
+   "uses": [
+    "def-weil-pbc-topological-inverse-image"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sheaves.tex",
+    "place": "Sheaves, Section 008C (section-presheaves-functorial): definition of $f_*$ (Lemma 008D, label lemma-pushforward-sheaf) and of morphisms of sheaves"
+   }
+  },
+  {
+   "text": "*Step 4 (existence, isomorphism, naturality).* Apply [lem-weil-pbc-conjugate-iso-unit-equation] to the categories $\\mathrm{Sh}(Z)$, $\\mathrm{Sh}(X)$, the adjunctions $L_1\\dashv R_1:=R$ (unit $\\eta_1$) and $L_2\\dashv R_2:=R$ (unit $\\eta_2$) of Step 2, and $\\delta=\\mathrm{id}_R:R_2\\to R_1$, a natural isomorphism. It gives a natural transformation $c:L_1\\to L_2$, i.e. morphisms $c_{\\mathcal G}:f^{-1}g^{-1}\\mathcal G\\to(g\\circ f)^{-1}\\mathcal G$ natural in $\\mathcal G$, with $R(c_{\\mathcal G})\\circ\\eta_{1,\\mathcal G}=\\eta_{2,\\mathcal G}$ for every $\\mathcal G$, and $c$ is a natural isomorphism, so every $c_{\\mathcal G}$ is an isomorphism of sheaves of sets. By Step 3 each $c_{\\mathcal G}$ satisfies the condition of the statement.",
+   "uses": [
+    "lem-weil-pbc-conjugate-iso-unit-equation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sheaves.tex",
+    "place": "Sheaves, Lemma Tag 008I (label lemma-pullback-composition, line 2209), proof: 'adjoint functors are unique up to unique isomorphism'"
+   }
+  },
+  {
+   "text": "*Step 5 (uniqueness for each $\\mathcal G$ separately).* Let $\\mathcal G$ be a sheaf of sets on $Z$ and $c':L_1\\mathcal G\\to L_2\\mathcal G$ any morphism satisfying the condition of the statement. By Step 3, $R(c')\\circ\\eta_{1,\\mathcal G}=\\eta_{2,\\mathcal G}$, and by Step 4 also $R(c_{\\mathcal G})\\circ\\eta_{1,\\mathcal G}=\\eta_{2,\\mathcal G}$. Apply [lem-weil-pbc-adjunct-counit-identity] to the composite adjunction $L_1\\dashv R$ of Step 2 (unit $\\eta_1$, counit $\\varepsilon_1$, triangle identities by [def-weil-pbc-composite-adjunction]) with $A=\\mathcal G$, $B=L_2\\mathcal G$ and $\\psi=\\eta_{2,\\mathcal G}$: from $\\psi=R(c')\\circ\\eta_{1,\\mathcal G}$ it gives $c'=\\varepsilon_{1,B}\\circ L_1(\\psi)$, and from $\\psi=R(c_{\\mathcal G})\\circ\\eta_{1,\\mathcal G}$ it gives $c_{\\mathcal G}=\\varepsilon_{1,B}\\circ L_1(\\psi)$. Hence $c'=c_{\\mathcal G}$: the morphism of the statement exists and is unique for each $\\mathcal G$, it is $c_{\\mathcal G}$ of Step 4, an isomorphism, and the family $(c_{\\mathcal G})_{\\mathcal G}$ is natural in $\\mathcal G$ by Step 4.",
+   "uses": [
+    "lem-weil-pbc-adjunct-counit-identity",
+    "def-weil-pbc-composite-adjunction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sheaves.tex",
+    "place": "Sheaves, Lemma Tag 008I (label lemma-pullback-composition, line 2209), proof: 'unique up to unique isomorphism', the uniqueness written out object by object"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-topological-inverse-image",
+  "def-weil-pbc-composite-adjunction",
+  "lem-weil-pbc-conjugate-iso-unit-equation",
+  "lem-weil-pbc-adjunct-counit-identity"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/sheaves.tex",
+  "place": "Sheaves, Lemma Tag 008I (label lemma-pullback-composition, line 2209) and its proof, with Lemma Tag 008E (label lemma-pushforward-composition, line 2038); the uniqueness of adjoints compatible with units, which Stacks only names, is written out in Steps 3-5"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -34,10 +101,45 @@
    "results": "Presheaf.lean:195 TopCat.Presheaf.Pushforward.comp (pushforward along a composite, presheaves); Presheaf.lean:301,307 leftAdjointUniq used only for homeomorphisms (pullbackHomIsoPushforwardInv); no pullback composition",
    "date": "2026-10-10",
    "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "pullback of sheaves of types on topological spaces along composition of continuous maps is isomorphic to the composite of pullbacks",
+   "results": "GrothendieckTopology.overMapPullbackComp_hom_app_val_app (Sites.Over), TopCat.Sheaf.pullback (Topology.Sheaves.Functors, definition only), Functor.sheafPushforwardContinuousComp_hom_app_val_app (Sites.Continuous, pushforwards), MorphismProperty.Over.pullbackComp, ChosenPullbacksAlong.pullbackComp, SheafOfModules.conjugateEquiv_pullbackComp_inv: none for inverse images of sheaves of sets on spaces",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "TopCat.Sheaf.pullback",
+   "results": "TopCat.Sheaf.pullback, TopCat.Sheaf.instIsLeftAdjointPullback, TopCat.Sheaf.pullbackPushforwardAdjunction, Topology.IsOpenEmbedding.sheafPullbackIso, TopCat.Sheaf.pullbackIso (all Mathlib.Topology.Sheaves.Functors): no composition isomorphism",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "inverse image sheaf along composite continuous maps (g ∘ f)^{-1} ≅ f^{-1} ∘ g^{-1} compatible with adjunction units",
+   "results": "Functor.sheafPushforwardContinuousComp_inv_app_val_app, Functor.sheafPushforwardContinuousComp' (Sites.Continuous), SheafOfModules.pullbackComp, SheafOfModules.conjugateEquiv_pullbackComp_inv (ModuleCat.Sheaf.PullbackContinuous), TopCat.Presheaf.Pushforward.comp, Pushforward.comp_inv_app (Topology.Sheaves.Presheaf), SheafOfModules.pushforwardComp_inv_app_val_app: pushforward compositions and the module version only",
+   "date": "2026-10-10",
+   "verdict": "no match (the analogue for sheaves of modules, SheafOfModules.pullbackComp, is built by conjugateEquiv as in this split)"
+  },
+  {
+   "tool": "local_search",
+   "query": "TopCat.Sheaf.pullback (project ~/weil-conjectures-slopmaster2)",
+   "results": "TopCat.Sheaf.pullback, TopCat.Sheaf.pullbackIso, TopCat.Sheaf.pullbackPushforwardAdjunction (Topology/Sheaves/Functors.lean); index: unavailable, so not a proof of absence",
+   "date": "2026-10-10",
+   "verdict": "no composition declaration among the names found"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rn 'sheafPullbackComp\\|pullbackComp\\|pullback_comp\\|PullbackComp' Mathlib/Topology/Sheaves/ Mathlib/CategoryTheory/Sites/; grep -n leftAdjointUniq Mathlib/CategoryTheory/Adjunction/Unique.lean",
+   "results": "only Sieve/Cover pullbackComp (Sites/Grothendieck.lean:536, 675) and Plus.lean:135; Adjunction.leftAdjointUniq (Unique.lean:36) with unit_leftAdjointUniq_hom_app (Unique.lean:53); no inverse-image composition for sheaves on spaces",
+   "date": "2026-10-10",
+   "verdict": "no match; general tools only"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "worker",
@@ -57,5 +159,22 @@
   }
  },
  "chapter": "sec-proper-base-change",
- "unit": "sk-thm-p1"
+ "unit": "sk-thm-p1",
+ "mathlib_candidate": {
+  "declaration": "CategoryTheory.Adjunction.leftAdjointUniq, CategoryTheory.Adjunction.comp, TopCat.Presheaf.Pushforward.comp",
+  "file": "Mathlib/CategoryTheory/Adjunction/Unique.lean",
+  "how": "not a leaf: Mathlib has no composition isomorphism for inverse images of sheaves on topological spaces. A formalization assembles it as in the split: Adjunction.comp (Adjunction/Basic.lean:567, unit by comp_unit_app line 575) of the adjunctions of def-weil-pbc-topological-inverse-image for g and f, transported along the pushforward composition (TopCat.Presheaf.Pushforward.comp, Topology/Sheaves/Presheaf.lean, identity components, so not an equality of functors in Lean), then Adjunction.leftAdjointUniq (Unique.lean:36) with unit_leftAdjointUniq_hom_app (Unique.lean:53), or (conjugateIsoEquiv ...).symm with unit_conjugateEquiv_symm (Adjunction/Mates.lean:311) for the transported version; uniqueness per object from Adjunction.eq_unit_comp_map_iff (Basic.lean:301)"
+ },
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "lem-weil-pbc-sets-inverse-image-composition",
+  "worker": "stage1",
+  "summary": "Split along Stacks 008I (proof: adjoints are unique up to unique isomorphism, plus 008E) in 5 steps: (1) g_*f_* = (g o f)_* on the nose from the definition of direct image (elementary, 008E); (2) the composite adjunction f^{-1}g^{-1} -| g_*f_* with unit g_*(eta^f) o eta^g, written on sections (existing leaf def-weil-pbc-composite-adjunction); (3) the unit condition of the statement is the equation R(c) o eta_1 = eta_2 (elementary); (4) existence, isomorphism and naturality from the existing Mathlib leaf lem-weil-pbc-conjugate-iso-unit-equation with delta = id; (5) uniqueness of the morphism for each G separately (the conjugate lemma gives uniqueness only among natural transformations) from the existing leaf lem-weil-pbc-adjunct-counit-identity applied to the composite adjunction. No new node. Statement and stmt_deps unchanged; Lean state none; five new Mathlib searches recorded (no match), assembly recorded in mathlib_candidate."
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "result": "accepted",
+  "note": "5 steps (Sheaves 008I, 008E): g_* f_* = (g o f)_* on the nose; the composite adjunction (leaf of sk-def-exchange) with its unit computed on sections; the unit condition rewritten as R(c) o eta_1 = eta_2; existence, isomorphism and naturality by the conjugate-isomorphism leaf with delta = id; uniqueness for each G alone by the adjunct-counit identity leaf. Statement unchanged. L widened def-weil-pbc-topological-inverse-image to sheaves of sets (B3 concern raised by the worker: the item and 12 other nodes cite it 'with values in sets')."
+ }
 }
