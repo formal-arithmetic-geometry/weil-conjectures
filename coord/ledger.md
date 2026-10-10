@@ -1808,3 +1808,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 15:34 L: retired uncited new node lem-weil-pbc-ringed-site-cech-vanishing-criterion (special case of lem-weil-pbc-site-cech-vanishing-criterion; reviewer R-ima)
 - 15:34 L: merged deliver/M1/def-sc-topological-abelian-cohomology (reviewer FIX; first push; new nodes: 0)
 - 15:35 L: returned deliver/C1/lem-weil-pbc-sections-base-field-extension (reviewer RETURN: 1. E (false new statement): lem-weil-pbc-field-tensor-irreducible: the claim that K tensor_k L is an integral domain for)
+- 15:35 L: returned deliver/K1/lem-weil-pbc-sets-etale-section-continuity (reviewer RETURN: 1. C4/C1: step 1: [lem-weil-pbc-sets-etale-inverse-image-composition-units] is about etale inverse images e^{-1} on the )
