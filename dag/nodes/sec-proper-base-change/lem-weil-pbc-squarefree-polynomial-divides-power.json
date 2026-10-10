@@ -1,0 +1,69 @@
+{
+ "id": "lem-weil-pbc-squarefree-polynomial-divides-power",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-finite-etale-lifting",
+   "place": "proof step 7, essential surjectivity via lem-weil-pbc-finite-etale-lifting-essential-surjectivity; the separable-polynomial reducedness ingredient of Stacks 030U along its finite-separable-tensor-field branch",
+   "via": [
+    "lem-weil-pbc-separable-polynomial-quotient-reduced",
+    "lem-weil-pbc-finite-separable-tensor-field-reduced",
+    "lem-weil-pbc-separably-generated-tensor-reduced",
+    "lem-weil-pbc-separably-generated-separable",
+    "lem-weil-pbc-make-separable",
+    "lem-weil-pbc-geometrically-regular-finitely-generated-extensions",
+    "lem-weil-pbc-geometric-regularity-separable-extension",
+    "lem-weil-pbc-henselization-pair-g-ring",
+    "lem-weil-pbc-finite-etale-lifting-limit-descent",
+    "lem-weil-pbc-finite-etale-lifting-essential-surjectivity"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "A squarefree polynomial divides a power only when it divides its base",
+ "statement": "Let $E$ be a field [def-weil-field], let $E[T]$ be its polynomial ring [def-weil-polynomial-ring], and let $Q,g\\in E[T]$. Suppose $Q$ is squarefree in the explicit sense that for every $H\\in E[T]$, if $H^2$ divides $Q$ then $H$ is a unit of $E[T]$. For every integer $m\\ge1$, if $Q$ divides $g^m$, then $Q$ divides $g$.",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Algebra, proof of Lemma Tag 030U (lemma-separable-extension-preserves-reducedness), line 10182: the squarefree-divisor consequence hidden in 'Since P is separable this is a finite product of fields'; exact Mathlib form is Squarefree.dvd_pow_iff_dvd"
+ },
+ "stmt_deps": ["def-weil-field", "def-weil-polynomial-ring"],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "squarefree polynomial divides power of g implies divides g",
+   "results": "Squarefree.dvd_pow_iff_dvd (Mathlib.Algebra.Squarefree.Basic), Squarefree.pow_dvd_of_pow_dvd, Squarefree.dvd_of_squarefree_of_mul_dvd_mul_left",
+   "date": "2026-10-10",
+   "verdict": "match: Squarefree.dvd_pow_iff_dvd"
+  },
+  {
+   "tool": "loogle",
+   "query": "Squarefree.dvd_pow_iff_dvd",
+   "results": "Squarefree.dvd_pow_iff_dvd : Squarefree x -> n != 0 -> (x | y^n <-> x | y), Mathlib.Algebra.Squarefree.Basic",
+   "date": "2026-10-10",
+   "verdict": "match"
+  },
+  {
+   "tool": "grep",
+   "query": "rg -n 'theorem Squarefree.dvd_pow_iff_dvd|theorem Squarefree.isRadical' Mathlib/Algebra/Squarefree/Basic.lean; read lines 40-45 and 163-170 in an available Mathlib checkout",
+   "results": "Mathlib/Algebra/Squarefree/Basic.lean:43 defines Squarefree as every square divisor having a unit base; :163 Squarefree.isRadical; :168 Squarefree.dvd_pow_iff_dvd. Lines read in an available Mathlib checkout; the pinned checkout is unavailable on this machine.",
+   "date": "2026-10-10",
+   "verdict": "match"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "Squarefree.dvd_pow_iff_dvd",
+  "file": "Mathlib/Algebra/Squarefree/Basic.lean",
+  "line": 168,
+  "how": "specializes in one line: `Squarefree.dvd_pow_iff_dvd` at line 168, with x=Q, y=g, n=m, m>=1 giving m != 0; `Squarefree` is defined at lines 40-45 by the stated square-divisor condition. The required DecompositionMonoid instance for E[T] follows from its field-polynomial GCD domain structure. Lines 40-45 and 163-170 read in an available Mathlib source checkout."
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "created": {"by": "worker", "item": "lem-weil-pbc-separable-polynomial-quotient-reduced", "date": "2026-10-10"},
+ "lean_audit": {"master": {"state": "none"}, "slopmaster2": {"state": "none"}},
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1"
+}

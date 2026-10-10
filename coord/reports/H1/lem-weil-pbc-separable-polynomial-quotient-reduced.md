@@ -1,0 +1,15 @@
+# lem-weil-pbc-separable-polynomial-quotient-reduced
+
+## Worker delivery
+
+- Item: `dag/nodes/sec-proper-base-change/lem-weil-pbc-separable-polynomial-quotient-reduced.json`, split in two steps.
+- New node: `lem-weil-pbc-squarefree-polynomial-divides-power`, statement, Mathlib leaf at `Squarefree.dvd_pow_iff_dvd` (`Mathlib/Algebra/Squarefree/Basic.lean:168`). It states the squarefree condition inline and specializes the theorem in one line; LeanSearch, Loogle, and source grep are recorded.
+- Lean attachments: none; `lean_audit.slopmaster2.state = none`.
+- WANTED: none. I read Algebra Lemma 030U in the Stacks TeX at `/home/ubuntu/weil-conjectures-sheaf-F2/literature/stacks-project/algebra.tex`, lines 10151-10182, and verified tag 030U in the local tag index.
+- The source says that the quotient by a separable polynomial is a finite product of fields. The item asks only for reducedness. Step 1 proves the needed squarefree condition from the Bezout identity and derivative product rule; Step 2 applies the new Mathlib leaf directly to the nilpotence criterion. The zero polynomial is excluded by Bezout; a nonzero constant polynomial is covered.
+- Blueprint: `tools/blueprint_refs.py ancestor` gives `thm-weil-pbc-finite-etale-lifting`, whose proof step 7 invokes essential surjectivity. Searches for `separable polynomial quotient reduced`, `squarefree polynomial quotient`, `separable polynomial`, `squarefree`, and `product of fields` found no blueprint duplicate; both `same_as` lists are empty. The new leaf's `via` prepends the item to its inherited chain.
+- Source/Mathlib limitation: this machine lacks the pinned Mathlib source checkout named in `SETUP.md`. The Mathlib declaration and line 168 were read in another local Mathlib checkout, and confirmed by LeanSearch and Loogle. The parent item's earlier pinned-source search already identifies `Squarefree.isRadical` at line 163, which is the ingredient used by `Squarefree.dvd_pow_iff_dvd` at line 168 in the available checkout. The lead should confirm version agreement if the pinned source is restored.
+
+## Review by H1
+
+I read the separable-polynomial paragraph of Algebra 030U in `algebra.tex`. The item asks for the reducedness that the source obtains from a product of fields. Step 1 derives the explicit squarefree condition from the item's Bezout definition of separability and the derivative product rule; step 2 applies the squarefree divisibility node to the nilpotence criterion for the quotient. The new node is strictly smaller, has a complete field-polynomial statement, no proof steps, a specific source and blueprint ancestor, and searches for an existing node. I read `Squarefree` at lines 40-45 and `Squarefree.dvd_pow_iff_dvd` at line 168 of the available Mathlib `Algebra/Squarefree/Basic.lean`: its condition and conclusion match, with $m\ne0$ supplied by $m\ge1$. The zero polynomial cannot satisfy Bezout; a nonzero constant gives the zero quotient, which is reduced. The pinned checkout is absent here, so the exact pinned line remains for L to confirm. I sent nothing back to the worker.

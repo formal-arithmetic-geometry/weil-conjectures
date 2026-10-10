@@ -17,7 +17,7 @@
     "lem-weil-pbc-finite-etale-lifting-essential-surjectivity"
    ]
   },
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "The quotient of a polynomial ring over a field by a separable polynomial is reduced",
@@ -31,9 +31,42 @@
   "def-weil-polynomial-ring",
   "def-pc-separable-polynomial"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "The Bezout identity in [def-pc-separable-polynomial] implies that $Q$ is squarefree. Indeed, if $H^2$ divides $Q$, write $Q=H^2W$. The product rule for the formal polynomial derivative gives $Q'=2HH'W+H^2W'$, so $H$ divides both $Q$ and $Q'$. If $UQ+VQ'=1$, then $H$ divides $1$; hence $H$ is a unit. This proves precisely the square-divisor condition in [lem-weil-pbc-squarefree-polynomial-divides-power]. The argument also covers a nonzero constant $Q$, for which every divisor is a unit; $Q=0$ is excluded by the Bezout identity.",
+   "uses": [
+    "def-pc-separable-polynomial",
+    "lem-weil-pbc-squarefree-polynomial-divides-power"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra, proof of Lemma Tag 030U (lemma-separable-extension-preserves-reducedness), lines 10175-10182; the source calls the quotient a finite product of fields and omits this squarefree calculation"
+   }
+  },
+  {
+   "text": "Let $g\\in E[T]$ and $m\\ge1$ with $g^m\\in(Q)$. Membership in the principal ideal means exactly $Q\\mid g^m$. Apply [lem-weil-pbc-squarefree-polynomial-divides-power] with the squarefree condition from Step 1 to get $Q\\mid g$, equivalently $g\\in(Q)$. Thus every nilpotent class $g+(Q)$ in $E[T]/(Q)$ is zero: if its $m$-th power is zero, then $g^m\\in(Q)$ and the preceding implication gives $g\\in(Q)$. The quotient is reduced.",
+   "uses": [
+    "lem-weil-pbc-squarefree-polynomial-divides-power",
+    "def-weil-polynomial-ring"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra, proof of Lemma Tag 030U (lemma-separable-extension-preserves-reducedness), line 10182, the reducedness consequence of 'Since P is separable this is a finite product of fields'"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-separable-polynomial",
+  "lem-weil-pbc-squarefree-polynomial-divides-power",
+  "def-weil-polynomial-ring"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Algebra, proof of Lemma Tag 030U (lemma-separable-extension-preserves-reducedness), lines 10175-10182; the squarefree and radical details are written out from its 'finite product of fields' sentence"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -71,7 +104,7 @@
   "line": 17,
   "how": "chain of four declarations, not a one-line specialization: Polynomial.Separable.squarefree (Mathlib/FieldTheory/Separable.lean:176) gives Squarefree Q; Squarefree.isRadical (Mathlib/Algebra/Squarefree/Basic.lean:163; E[X] is a DecompositionMonoid as a GCD domain) gives IsRadical Q; isRadical_iff_span_singleton (Mathlib/RingTheory/Nilpotent/Lemmas.lean:35) turns it into (Ideal.span {Q}).IsRadical; Ideal.isRadical_iff_quotient_reduced (line 17) gives IsReduced (E[X] ⧸ Ideal.span {Q}); the same chain is written inline at Mathlib/LinearAlgebra/Semisimple.lean:289-291"
  },
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "worker",
@@ -91,5 +124,19 @@
   }
  },
  "chapter": "sec-proper-base-change",
- "unit": "sk-thm-p1"
+ "unit": "sk-thm-p1",
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "lem-weil-pbc-separable-polynomial-quotient-reduced",
+  "worker": "H1 worker",
+  "summary": "Two-step proof of the reducedness used in Stacks Algebra 030U. The Bezout identity for Q and Q' rules out a nonunit square divisor of Q by the derivative product rule. The new Mathlib leaf Squarefree.dvd_pow_iff_dvd then turns Q | g^m into Q | g, which is exactly reducedness of E[T]/(Q). This uses one strictly smaller leaf and no duplicated blueprint node; constant Q is covered.",
+  "blueprint": "The item serves proof step 7 of blueprint node thm-weil-pbc-finite-etale-lifting, through the listed via chain and its Stacks 030U reducedness ingredient. Whole-blueprint searches for 'separable polynomial quotient reduced', 'squarefree polynomial quotient', 'separable polynomial', 'squarefree', and 'product of fields' found no blueprint node stating the item or the new leaf."
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "group": "H1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed by the lead of H1; spot-checked by L: L: Bezout implies squarefree, then Squarefree.dvd_pow_iff_dvd (Algebra/Squarefree/Basic.lean:168 read)"
+ }
 }
