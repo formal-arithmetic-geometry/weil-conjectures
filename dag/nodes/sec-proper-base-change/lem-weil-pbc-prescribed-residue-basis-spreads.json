@@ -1,0 +1,55 @@
+{
+ "id": "lem-weil-pbc-prescribed-residue-basis-spreads",
+ "kind": "statement",
+ "title": "A prescribed residue-field basis of a finitely presented module spreads to a basis",
+ "statement": "Let $A$ be a commutative ring, $\\mathfrak p\\subset A$ a prime ideal, and $M$ a finitely presented $A$-module (there is an exact sequence $A^{\\oplus u}\\to A^{\\oplus v}\\to M\\to0$ for some $u,v\\ge0$). Let $m_1,\\dots,m_r\\in M$ be elements whose images form a basis of the $\\kappa(\\mathfrak p)$-vector space $M\\otimes_A\\kappa(\\mathfrak p)$, and suppose $M_{\\mathfrak p}$ [def-weil-pbc-module-localization] is a free $A_{\\mathfrak p}$-module of rank $r$ [def-weil-pbc-localization-at-prime]. Then there is $f\\in A\\setminus\\mathfrak p$ such that the images $m_1/1,\\dots,m_r/1$ form a basis of the localized $A_f$-module $M_f$ [def-weil-pbc-module-localization-away].",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Algebra, proof of Lemma Tag 0GWM (lemma-finitely-presented-localization-free): lift the chosen basis to a map from a finite free module and use Lemma Tag 05GF (lemma-map-between-finitely-presented) and Lemma Tag 00HN (lemma-characterize-zero-local) to make that map an isomorphism after localization; this statement keeps the prescribed lifts"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-module-localization",
+  "def-weil-pbc-localization-at-prime",
+  "def-weil-pbc-module-localization-away"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "finitely presented module prescribed elements basis after localization at prime spread the same basis to localization away",
+   "results": "Module.FinitePresentation.exists_basis_localizedModule_powers, Module.FinitePresentation.exists_free_localizedModule_powers, Module.Basis.ofIsLocalizedModule",
+   "date": "2026-10-10",
+   "verdict": "no exact match: exists_basis_localizedModule_powers produces a basis after shrinking but does not state that prescribed global elements whose residues form a basis are that basis"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "given elements m_i of a finitely presented module whose images form a basis at a prime, there is f outside the prime such that the same m_i form a basis after localizing at f",
+   "results": "Module.FinitePresentation.exists_basis_localizedModule_powers, Module.FinitePresentation.exists_free_localizedModule_powers, Module.basicOpen_subset_freeLocus_iff",
+   "date": "2026-10-10",
+   "verdict": "no exact match; the result follows by spreading the isomorphism A_p^r -> M_p defined by the prescribed elements"
+  },
+  {
+   "tool": "grep",
+   "query": "rg -n 'exists_basis_localizedModule_powers|exists_free_localizedModule_powers|basis.*residue' Mathlib/RingTheory Mathlib/LinearAlgebra",
+   "results": "Mathlib/RingTheory/Localization/Free.lean:41 has exists_basis_localizedModule_powers and line 78 has exists_free_localizedModule_powers; no declaration found whose output basis is required to be a given family of global elements",
+   "date": "2026-10-10",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-smooth-at-prime-free-conormal-basis",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {"state": "none", "decls": [], "missing": []},
+  "slopmaster2": {"state": "none", "decls": [], "missing": []}
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1"
+}
