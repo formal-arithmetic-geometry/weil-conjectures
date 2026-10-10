@@ -33,7 +33,8 @@ variable (C : Type*) [Category.{v} C] [Abelian C] [IsGrothendieckAbelian.{w} C]
   [HasDerivedCategory.{w} C] [MonoidalCategory C] [MonoidalClosed C] [MonoidalPreadditive C]
   [BraidedCategory C] [Abelian.HasFunctorialFlatResolution C]
 
-local instance : HasColimitsOfSize.{0, 0} C := hasColimitsOfSizeShrink C
+local instance hasColimitsOfSize_tensorCounitShift : HasColimitsOfSize.{0, 0} C :=
+  hasColimitsOfSizeShrink C
 
 variable [Qh.HasDerivedMonoidalCategory (HomotopyCategory.quasiIso C (ComplexShape.up ℤ))]
 
@@ -91,8 +92,10 @@ variable {C₁ C₂ : Type*} [Category.{v} C₁] [Abelian C₁] [IsGrothendieckA
   [HasDerivedCategory.{w} C₂] [MonoidalCategory C₂] [MonoidalClosed C₂] [MonoidalPreadditive C₂]
   [BraidedCategory C₂] [Abelian.HasFunctorialFlatResolution C₂]
 
-local instance : HasColimitsOfSize.{0, 0} C₁ := hasColimitsOfSizeShrink C₁
-local instance : HasColimitsOfSize.{0, 0} C₂ := hasColimitsOfSizeShrink C₂
+local instance hasColimitsOfSize_comparisonShift₁ : HasColimitsOfSize.{0, 0} C₁ :=
+  hasColimitsOfSizeShrink C₁
+local instance hasColimitsOfSize_comparisonShift₂ : HasColimitsOfSize.{0, 0} C₂ :=
+  hasColimitsOfSizeShrink C₂
 
 variable (F : C₁ ⥤ C₂) [F.Additive] [F.OplaxMonoidal]
   [∀ j, PreservesColimitsOfShape
@@ -375,6 +378,41 @@ instance commShift_leftDerivedUpperStarTensorComparisonFlipApp
       (asIso (DerivedCategory.Q.map (Λ.resolutionNatTrans.app M₀))).symm ≪≫
       (DerivedCategory.quotientCompQhIso _).symm.app R
   exact commShift_leftDerivedUpperStarTensorComparisonFlipApp_of_iso A g e
+
+/-- The compatibility of the tensor comparison of `Lh^*` with a shift of the second factor,
+in the form needed for pairings of Weil objects: if `Q : A₁ ⊗ᴸ B ⟶ M` intertwines the data
+`ψ_{A₁} ⊗ ψ_B` and `ψ_M`, then `A₁ ⊗ᴸ B[n] ≅ (A₁ ⊗ᴸ B)[n] ⟶ M[n]` intertwines the shifted
+data. -/
+lemma leftDerivedUpperStarTensorIso_shift_right_comm (h : Y ⟶ Y) [(h)^*[A].PreservesFlat]
+    {A₁ B M : DerivedCategory (Sheaf Y.smallEtaleTopology A)}
+    (ψA : L((h)^*[A]).obj A₁ ⟶ A₁) (ψB : L((h)^*[A]).obj B ⟶ B) (ψM : L((h)^*[A]).obj M ⟶ M)
+    (Q : ((-⊗ᴸ-(Y)[A]).obj A₁).obj B ⟶ M)
+    (hQ : L((h)^*[A]).map Q ≫ ψM = ((leftDerivedUpperStarTensorIso A h A₁ B).hom ≫
+      ((-⊗ᴸ-(Y)[A]).map ψA).app _ ≫ ((-⊗ᴸ-(Y)[A]).obj A₁).map ψB) ≫ Q) (n : ℤ) :
+    L((h)^*[A]).map ((((-⊗ᴸ-(Y)[A]).obj A₁).commShiftIso n).hom.app B ≫ Q⟦n⟧') ≫
+        (L((h)^*[A]).commShiftIso n).hom.app M ≫ ψM⟦n⟧' =
+      ((leftDerivedUpperStarTensorIso A h A₁ (B⟦n⟧)).hom ≫
+        ((-⊗ᴸ-(Y)[A]).map ψA).app _ ≫
+        ((-⊗ᴸ-(Y)[A]).obj A₁).map ((L((h)^*[A]).commShiftIso n).hom.app B ≫ ψB⟦n⟧')) ≫
+        (((-⊗ᴸ-(Y)[A]).obj A₁).commShiftIso n).hom.app B ≫ Q⟦n⟧' := by
+  have h₁ : L((h)^*[A]).map ((((-⊗ᴸ-(Y)[A]).obj A₁).commShiftIso n).hom.app B) ≫
+      (L((h)^*[A]).commShiftIso n).hom.app _ ≫ (leftDerivedUpperStarTensorIso A h A₁ B).hom⟦n⟧' =
+      (leftDerivedUpperStarTensorIso A h A₁ (B⟦n⟧)).hom ≫
+        ((-⊗ᴸ-(Y)[A]).obj (L((h)^*[A]).obj A₁)).map ((L((h)^*[A]).commShiftIso n).hom.app B) ≫
+        (((-⊗ᴸ-(Y)[A]).obj (L((h)^*[A]).obj A₁)).commShiftIso n).hom.app _ := by
+    simpa [Functor.commShiftIso_comp_hom_app] using NatTrans.shift_app_comm (leftDerivedUpperStarTensorComparisonApp A h A₁) n B
+  simp only [Category.assoc] at hQ
+  have : NatTrans.CommShift ((-⊗ᴸ-(Y)[A]).map ψA) ℤ :=
+    inferInstanceAs (NatTrans.CommShift ((curriedTensor _).map ψA) ℤ)
+  have h₂ := NatTrans.shift_app_comm ((-⊗ᴸ-(Y)[A]).map ψA) n (L((h)^*[A]).obj B)
+  have h₃ := (((-⊗ᴸ-(Y)[A]).obj A₁).commShiftIso n).hom.naturality ψB
+  dsimp at h₂ h₃
+  rw [Functor.map_comp, Category.assoc, Functor.commShiftIso_hom_naturality_assoc,
+    ← Functor.map_comp, hQ]
+  simp only [Functor.map_comp, Category.assoc]
+  rw [reassoc_of% h₁, ← NatTrans.naturality_assoc, reassoc_of% h₃]
+  dsimp only [Functor.comp_obj]
+  rw [← reassoc_of% h₂]
 
 end
 

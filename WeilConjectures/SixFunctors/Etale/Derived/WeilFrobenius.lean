@@ -11,6 +11,7 @@ public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriekProjection
 public import WeilConjectures.SixFunctors.Etale.Derived.PoincarePairing
 public import WeilConjectures.SixFunctors.Etale.Derived.Shift
 public import WeilConjectures.SixFunctors.Etale.Derived.UpperStarMonoidal
+public import WeilConjectures.SixFunctors.Etale.Derived.UpperStarMonoidal.Shift
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.FlatModuleCat
 
 /-!
@@ -239,13 +240,7 @@ lemma IsWeilPairing.shift_right {A B : DerivedCategoryModule Λ Y}
     {Q : ((derivedTensor _ Y).obj A).obj B ⟶ M} (hQ : IsWeilPairing h ψA ψB ψM Q) (n : ℤ) :
     IsWeilPairing h ψA (shiftWeilDatum h ψB n) (shiftWeilDatum h ψM n)
       ((((derivedTensor _ Y).obj A).commShiftIso n).hom.app B ≫ Q⟦n⟧') :=
-  -- The tensor comparison `Lh^*(A ⊗ᴸ B) ≅ Lh^* A ⊗ᴸ Lh^* B`
-  -- (`AlgebraicGeometry.Etale.leftDerivedUpperStarTensorIso`) is compatible with the shift
-  -- isomorphisms of `Lh^*` and of `A ⊗ᴸ -`; with it, the statement is `hQ` shifted by `n`
-  -- (`AlgebraicGeometry.Etale.IsWeilMorphism.shift`). The compatibility is the derived
-  -- version of the compatibility of `h^*` with the shifts of complexes and the tensor product
-  -- of complexes, which is not formalised yet.
-  sorry
+  leftDerivedUpperStarTensorIso_shift_right_comm _ h ψA ψB ψM Q hQ n
 
 /-- The *degreewise pairing* of a pairing `Q : A ⊗ᴸ B ⟶ C`,
 `Hom(Λ_Y, A[i]) × Hom(Λ_Y, B[j]) ⟶ Hom(Λ_Y, C[i + j])`,
