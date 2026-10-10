@@ -20,11 +20,68 @@
  },
  "stmt_deps": [
   "def-weil-pbc-sites-and-cohomology",
-  "def-sp-abelian"
+  "def-sp-abelian",
+  "lem-weil-pbc-site-restriction-adjunction",
+  "lem-weil-pbc-site-extension-by-zero-exact",
+  "lem-weil-pbc-site-restriction-exact"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "The localized topology on the slice $\\mathcal C/W$ is the topology specified in the statement, and restriction $G\\mapsto G|_W$ is the sheaf obtained by evaluating $G$ on the underlying object of each map $V\\to W$; these are the standard localized-site constructions.",
+   "uses": [
+    "def-weil-pbc-sites-and-cohomology"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Sites, Section 00XZ (section-localize), localized site and restriction"
+   }
+  },
+  {
+   "text": "The left adjoint $j_{W!}$ exists and satisfies the natural adjunction bijection with $j_W^*$ by [lem-weil-pbc-site-restriction-adjunction].",
+   "uses": [
+    "lem-weil-pbc-site-restriction-adjunction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Modules on Sites, Section 03DH (lemma-extension-by-zero)"
+   }
+  },
+  {
+   "text": "The extension-by-zero functor $j_{W!}$ is exact by [lem-weil-pbc-site-extension-by-zero-exact], so it carries every short exact sequence of abelian sheaves on $\\mathcal C/W$ to a short exact sequence on $\\mathcal C$.",
+   "uses": [
+    "lem-weil-pbc-site-extension-by-zero-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Modules on Sites, Lemma 03DJ (lemma-extension-by-zero-exact)"
+   }
+  },
+  {
+   "text": "The restriction functor $j_W^*$ is exact by [lem-weil-pbc-site-restriction-exact], so it carries every short exact sequence of abelian sheaves on $\\mathcal C$ to a short exact sequence on $\\mathcal C/W$.",
+   "uses": [
+    "lem-weil-pbc-site-restriction-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Modules on Sites, Lemma 03DJ (lemma-extension-by-zero-exact), restriction assertion"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-sites-and-cohomology",
+  "lem-weil-pbc-site-restriction-adjunction",
+  "lem-weil-pbc-site-extension-by-zero-exact",
+  "lem-weil-pbc-site-restriction-exact"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Modules on Sites, Section 03DH and Lemma 03DJ"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -57,12 +114,27 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-weil-pbc-cohomology-over-object-localization",
   "by": "worker",
   "date": "2026-10-10"
  },
  "chapter": "sec-curve-estimates",
- "unit": "sk-prop-cd"
+ "unit": "sk-prop-cd",
+ "split_report": {
+  "date": "2026-10-11",
+  "item": "lem-weil-pbc-site-restriction-injectives",
+  "worker": "stage1",
+  "summary": "Split the localized-site assertion into three strictly smaller statement-only nodes: the extension-by-zero adjunction, exactness of extension by zero, and exactness of restriction. The item proof then combines the localized-site construction with these three Stacks results. Existing DAG and blueprint searches found no duplicate statements, and all three Mathlib search families found only generic infrastructure rather than the arbitrary-site theorem.",
+  "blueprint": "Realizes the ancestor blueprint clause 'restriction to the localized site preserves injective resolutions' by isolating the extension-by-zero adjunction and the two exactness assertions used in that clause."
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-sri1730",
+  "group": "K1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-sri1730 (reviewer sub-agent of L); spot-checked: Read packet whole: item is the conjunction (adjunction, j_! exact, j^* exact) of Stacks 03DI/03DJ; steps 2-4 cite three strictly smaller children each stating exactly one conjunct with the same site/slice hypotheses; no cycle (children do not cite the item). Same-tag nodes are Zariski/etale/pro-etale specializations, not duplicates. FIX more, RETURN less: (c) lem-weil-pbc-site-restriction-adjunction is in Mathlib: made a leaf on Functor.sheafPullbackConstruction.sheafAdjunctionContinuous (Sites/Pullback.lean:75) with G = Over.forget W, right adjoint = J.overPullback (Over.lean:288), read with sed; LeanFinder query recorded. restriction-exact needs both adjoints (two declarations), extension-by-zero-exact not in Mathlib: kept unsplit.; 1 file(s) fixed by the reviewer"
+ }
 }
