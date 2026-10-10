@@ -2260,3 +2260,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 18:34 L: merged deliver/J1/cor-picard-degree-g (reviewer FIX; first push; new nodes: 0)
 - 18:35 L: merged deliver/J1/lem-sc-irreducible-constant-sections (reviewer FIX; first push; new nodes: 0)
 - 18:35 L: merged deliver/C1/lem-pc-kflat-pullback-preservation (reviewer PASS; first push; new nodes: 1)
+- 18:36 L: merged deliver/E1/lem-exc-finite-galois-algebra-tensor-decomposition (reviewer FIX; first push; new nodes: 0)

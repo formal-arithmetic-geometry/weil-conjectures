@@ -25,11 +25,32 @@
   "def-weil-pbc-separable-algebraic-extension",
   "def-weil-affine-spectrum",
   "def-pc-fibre-product",
-  "lem-weil-pbc-algebra-tensor-pushout-universal-property"
+  "lem-weil-pbc-algebra-tensor-pushout-universal-property",
+  "lem-weil-pbc-fibre-product-affine-spectra"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Apply [lem-weil-pbc-fibre-product-affine-spectra] with R=L and A=B=E: W is Spec(E tensor_L E), and its projections come from a mapsto a tensor 1 and b mapsto 1 tensor b. The inverse of the given L-algebra isomorphism phi induces W = Spec(E tensor_L E) isomorphic to Spec(product_{q in Q} E). By [lem-weil-pbc-spec-finite-product-fields], the maps $\\operatorname{Spec}E\\to\\operatorname{Spec}(\\prod_{q\\in Q}E)$ induced by the coordinate projections are open immersions with pairwise disjoint images covering the spectrum. Morphisms defined separately on these disjoint open pieces glue uniquely, so they exhibit this spectrum as the coproduct of the Q copies of Spec E. On component q, composing the coordinate projection with phi sends a tensor b to a q(b); in particular a tensor 1 maps to a and 1 tensor b maps to q(b). By contravariance, the restrictions of the two projections of W are respectively id_(Spec E) and Spec q. Since Q contains the identity automorphism, the finite-product statement applies also when E=L (one component).",
+   "uses": [
+    "lem-weil-pbc-fibre-product-affine-spectra",
+    "lem-weil-pbc-spec-finite-product-fields"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/pione.tex",
+    "place": "Tags 01I4 (affine fibre products) and 00ED (spectrum of a product); Tag 03SF is the surrounding Galois-cover context"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-fibre-product-affine-spectra",
+  "lem-weil-pbc-spec-finite-product-fields"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/pione.tex",
+  "place": "Tag 03SF"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -61,10 +82,39 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-exc-finite-galois-tensor-decomposition",
   "by": "worker",
   "date": "2026-10-10"
+ },
+ "split_report": {
+  "date": "2026-10-11",
+  "item": "lem-exc-finite-galois-algebra-tensor-decomposition",
+  "worker": "stage1",
+  "summary": "Derive the affine fibre-product decomposition and both projection labels from the supplied Galois tensor isomorphism, using existing affine fibre-product and finite-product spectrum nodes; no new node was needed.",
+  "blueprint": "Realizes the ancestor proof's third paragraph: the finite Galois tensor decomposition and its affine fibre-product consequence.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-fibre-product-affine-spectra",
+    "why": "The affine fibre-product spectrum identification is a generic scheme-theoretic tool needed to turn the supplied tensor isomorphism into the asserted fibre-product decomposition."
+   },
+   {
+    "node": "lem-weil-pbc-spec-finite-product-fields",
+    "why": "Its open-immersion and covering clauses identify the components of the spectrum of the supplied finite product of fields."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-fibre-product-affine-spectra",
+  "lem-weil-pbc-spec-finite-product-fields"
+ ],
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-gat1836",
+  "group": "E1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-gat1836 (reviewer sub-agent of L); spot-checked: Step 1 checked against lem-weil-pbc-fibre-product-affine-spectra (R=L, A=B=E) and lem-weil-pbc-spec-finite-product-fields (disjoint open immersions covering, glue to coproduct); projection labels a tensor b -> a q(b) correct. No cycle: parent lem-exc-finite-galois-tensor-decomposition cites this node in its part-(2) steps, this node cites neither parent nor descendants. Not a duplicate of parent part (1): parent states only the tensor iso and the sheaf-sections bijection; this node takes the iso as hypothesis and proves the fibre-product coproduct, which the parent does not state, so it is kept (not a citation, not dropped). Mathlib grep for a Galois tensor-product Pi equiv in slopmaster2 mathlib: none. tool_uses accepted (generic scheme facts). FIX more, RETURN less: B4 plain-text arrow in step 1 replaced by TeX \\to. Second reading missed only the arrow.; 1 file(s) fixed by the reviewer"
  }
 }
