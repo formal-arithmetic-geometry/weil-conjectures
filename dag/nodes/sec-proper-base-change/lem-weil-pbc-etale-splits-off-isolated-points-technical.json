@@ -1,0 +1,87 @@
+{
+ "id": "lem-weil-pbc-etale-splits-off-isolated-points-technical",
+ "kind": "statement",
+ "title": "An elementary etale neighbourhood splits off finite pieces through given isolated fibre points of a separated morphism (Stacks 02LN)",
+ "statement": "Let $f:X\\to S$ be a morphism of schemes [def-pc-scheme] which is locally of finite type [def-weil-finite-type-morphism] and separated [def-weil-pbc-scheme-conventions], let $s\\in S$, and let $X_s=X\\times_S\\operatorname{Spec}\\kappa(s)$ be the fibre of $f$ at $s$ [def-pc-scheme-fibre], with first projection $\\iota:X_s\\to X$ (a homeomorphism onto $f^{-1}(s)$). Let $n\\ge0$ and let $x_1,\\dots,x_n\\in X$ be pairwise distinct points with $f(x_i)=s$ such that each $x_i$ is an isolated point of $X_s$: the unique point $\\xi_i\\in X_s$ with $\\iota(\\xi_i)=x_i$ has $\\{\\xi_i\\}$ open in $X_s$. Then there exist a scheme $U$, an etale morphism $\\varphi:U\\to S$ [def-weil-etale-morphism] and a point $u\\in U$ with $\\varphi(u)=s$ such that the map $\\kappa(s)\\to\\kappa(u)$ induced by $\\varphi$ on residue fields [def-weil-residue-field] is an isomorphism (an elementary etale neighbourhood $(U,u)\\to(S,s)$), and, writing $X_U=U\\times_SX$ for the fibre product [def-pc-fibre-product] with projections $p:X_U\\to X$ and $q:X_U\\to U$, open subschemes $W,V_1,\\dots,V_n$ of $X_U$ which are pairwise disjoint and cover $X_U$ (so each of them is also closed in $X_U$: $X_U=W\\amalg V_1\\amalg\\cdots\\amalg V_n$), such that: (i) for each $i$ the composite $V_i\\hookrightarrow X_U\\xrightarrow{q}U$ is finite [def-weil-finite-integral-morphism]; (ii) for each $i$ there is exactly one point $v_i\\in V_i$ with $q(v_i)=u$; (iii) $p(v_i)=x_i$, and the map $\\kappa(x_i)\\to\\kappa(v_i)$ induced by $p$ on residue fields is an isomorphism; (iv) no point $w\\in W$ with $q(w)=u$ satisfies $p(w)\\in\\{x_1,\\dots,x_n\\}$.",
+ "source": {
+  "document": "literature/stacks-project/more-morphisms.tex",
+  "place": "More on Morphisms, Lemma Tag 02LN (lemma-etale-splits-off-quasi-finite-part-technical), statement at lines 12093-12115, proof at lines 12117-12131 (from Lemma 02LL, lemma-etale-makes-quasi-finite-finite-multiple-points; Schemes 01KU separated-permanence; Morphisms 01WN finite-proper; Morphisms 01W6 image-proper-scheme-closed; shrinking U). Stacks writes the points as points of X_s; here they are taken in X through the homeomorphism of X_s onto f^{-1}(s). The case n=0 is allowed (then U=S, u=s, W=X work)."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-finite-type-morphism",
+  "def-weil-pbc-scheme-conventions",
+  "def-pc-scheme-fibre",
+  "def-weil-etale-morphism",
+  "def-weil-residue-field",
+  "def-pc-fibre-product",
+  "def-weil-finite-integral-morphism"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "elementary etale neighbourhood decomposition of base change into finite open closed pieces over isolated points of the fibre, separated locally finite type",
+   "results": "AlgebraicGeometry.instJacobsonSpaceCarrierCarrierCommRingCatFiberOfLocallyOfFiniteType (Mathlib.AlgebraicGeometry.Fiber), AlgebraicGeometry.isClosed_singleton_iff_locallyOfFiniteType (Morphisms.Finite), Algebra.isOpen_etaleLocus, Algebra.exists_etale_of_isEtaleAt (RingTheory.Etale.Locus), IsEtale.of_comp; no splitting statement",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "after an etale base change with trivial residue field extension the fibre product splits off open and closed parts finite over the base, one for each given isolated point of the fibre",
+   "results": "Algebra.exists_etale_isIdempotentElem_forall_liesOver_eq (Mathlib.RingTheory.Etale.QuasiFinite: ring-level, S finite over R, one prime q over p, an etale R' with a prime P over p with trivial residue extension and an idempotent of R' (x)_R S isolating one prime over P), Algebra.exists_etale_bijective_residueFieldMap_and_map_eq_mul_and_isCoprime, Algebra.IsEtaleAt.comp, IsEtale stable under base change; none for schemes, several points, separated f",
+   "date": "2026-10-10",
+   "verdict": "no match (ring-level one-point finite-algebra version only)"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.exists_etale_isCompl_of_quasiFiniteAt",
+   "results": "AlgebraicGeometry.exists_etale_isCompl_of_quasiFiniteAt (Mathlib.AlgebraicGeometry.ZariskisMainTheorem): f lft separated, one point x with f quasi-finite at x over s; an etale g:U->S with s in range g, complementary opens V,W of the pullback, V finite over U, a point of V over x",
+   "date": "2026-10-10",
+   "verdict": "no match: one point, s only in the range (no elementary neighbourhood, no point u with kappa(u)=kappa(s)), no uniqueness of the point of V over u, no statement (iv) on W"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rn '02LN|02LP|exists_etale_isCompl' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicGeometry; sed -n 40,56p ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicGeometry/ZariskisMainTheorem.lean",
+   "results": "ZariskisMainTheorem.lean:47 '-- Note: This is weaker than stacks#02LN but is enough to proof Zariski's main.', line 49 theorem exists_etale_isCompl_of_quasiFiniteAt (read lines 40-56: statement as in the loogle record); nothing else",
+   "date": "2026-10-10",
+   "verdict": "no match (Mathlib itself says its lemma is weaker than 02LN); recorded as mathlib_candidate"
+  },
+  {
+   "tool": "local_search",
+   "query": "exists_etale_isCompl (project ~/weil-conjectures-slopmaster2)",
+   "results": "AlgebraicGeometry.exists_etale_isCompl_of_quasiFiniteAt in .lake/packages/mathlib/Mathlib/AlgebraicGeometry/ZariskisMainTheorem.lean (index: unavailable, so not a proof of absence of other names)",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "mathlib_candidate": {
+  "declaration": "AlgebraicGeometry.exists_etale_isCompl_of_quasiFiniteAt",
+  "file": "Mathlib/AlgebraicGeometry/ZariskisMainTheorem.lean",
+  "how": "lines 47-53 read: one point only, an etale U->S whose range contains s (not an elementary neighbourhood), V finite over U with a point over x; weaker than this node (its own comment says 'weaker than stacks#02LN')"
+ },
+ "status": "unsplit",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-etale-splits-off-quasi-finite-part",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1"
+}

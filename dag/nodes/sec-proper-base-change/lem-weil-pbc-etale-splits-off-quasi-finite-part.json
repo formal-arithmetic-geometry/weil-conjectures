@@ -17,9 +17,122 @@
   "def-pc-fibre-product",
   "def-weil-finite-integral-morphism"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "*Notation and the points.* Let $\\iota:X_s\\to X$ be the first projection; it is a homeomorphism of $X_s$ onto $f^{-1}(s)$ [def-pc-scheme-fibre], in particular injective. By hypothesis the set of isolated points of $X_s$ (points $\\xi$ with $\\{\\xi\\}$ open in $X_s$) is finite; list it without repetition as $\\xi_1,\\dots,\\xi_n$ ($n\\ge0$) and put $x_i=\\iota(\\xi_i)\\in X$. Then $x_1,\\dots,x_n$ are pairwise distinct ($\\iota$ injective), $f(x_i)=s$, and $\\xi_i$ is the unique point of $X_s$ over $x_i$, which is isolated in $X_s$. Moreover, for a point $\\xi\\in X_s$: $\\iota(\\xi)\\in\\{x_1,\\dots,x_n\\}$ if and only if $\\xi$ is isolated in $X_s$.",
+   "uses": [
+    "def-pc-scheme-fibre"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Lemma 02LP, proof (line 12192): 'choosing $x_1,\\ldots,x_n$ the complete set of isolated points of $X_s$'"
+   }
+  },
+  {
+   "text": "*Applying 02LN.* As $f$ is locally of finite type and separated and $x_1,\\dots,x_n$ are pairwise distinct points over $s$ isolated in $X_s$, [lem-weil-pbc-etale-splits-off-isolated-points-technical] gives an elementary etale neighbourhood $\\varphi:(U,u)\\to(S,s)$ ($\\varphi$ etale, $\\varphi(u)=s$, $\\kappa(s)\\to\\kappa(u)$ an isomorphism) and pairwise disjoint open subschemes $W,V_1,\\dots,V_n$ covering $X_U=U\\times_SX$, with projections $p:X_U\\to X$, $q:X_U\\to U$, such that each $V_i\\to U$ is finite, has exactly one point $v_i$ over $u$ with $p(v_i)=x_i$, and (iv) no point $w\\in W$ with $q(w)=u$ has $p(w)\\in\\{x_1,\\dots,x_n\\}$. (For $n=0$ the node allows $U=S$, $u=s$, $W=X_U$.)",
+   "uses": [
+    "lem-weil-pbc-etale-splits-off-isolated-points-technical"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Lemma 02LP, proof (lines 12191-12194), applying Lemma 02LN"
+   }
+  },
+  {
+   "text": "*The decomposition $U\\times_SX=W\\sqcup V$ with $V\\to U$ finite.* Put $V=V_1\\cup\\dots\\cup V_n$, an open subscheme of $X_U$. Since $W,V_1,\\dots,V_n$ are pairwise disjoint and cover $X_U$, $W$ and $V$ are disjoint opens with $W\\cup V=X_U$, so each is the complement of the other and both are open and closed: $X_U=W\\amalg V$. The open subscheme $V$ is the union of the pairwise disjoint opens $V_i$, so it is the coproduct $V_1\\amalg\\dots\\amalg V_n$ of schemes (a morphism out of $V$ is the same as a family of morphisms out of the $V_i$, since morphisms of schemes glue along an open cover and the $V_i$ do not meet), and $q|_V:V\\to U$ is the morphism induced by the finite morphisms $q|_{V_i}$. By [lem-weil-pbc-finite-coproduct] (a coproduct of two finite morphisms to $U$ is finite), applied $n-1$ times by induction on $n$ to $(V_1\\amalg\\dots\\amalg V_{k})\\amalg V_{k+1}$, $q|_V$ is finite when $n\\ge1$. If $n=0$ then $V=\\emptyset$, and $\\emptyset\\to U$ is finite [def-weil-finite-integral-morphism]: it is affine, the preimage of every affine open $\\operatorname{Spec}R$ being $\\emptyset=\\operatorname{Spec}0$, and $0$ is a finite $R$-module.",
+   "uses": [
+    "lem-weil-pbc-finite-coproduct",
+    "def-weil-finite-integral-morphism"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Lemma 02LP, proof (line 12193): 'setting $V=\\bigcup V_i$'"
+   }
+  },
+  {
+   "text": "*The fibre of $X_U$ at $u$ is $X_s$.* Let $(X_U)_u=X_U\\times_U\\operatorname{Spec}\\kappa(u)$ be the fibre of $q$ at $u$, with projections $\\iota':(X_U)_u\\to X_U$ and $\\pi':(X_U)_u\\to\\operatorname{Spec}\\kappa(u)$, and $\\pi:X_s\\to\\operatorname{Spec}\\kappa(s)$ the second projection. Since $q$ is the base change of $f$ along $\\varphi$ (the fibre product [def-pc-fibre-product]), [lem-weil-pbc-fibre-of-base-change] gives a morphism $h:(X_U)_u\\to X_s$ with $\\iota\\circ h=p\\circ\\iota'$ such that $(X_U)_u$ with $h,\\pi'$ is a fibre product $X_s\\times_{\\operatorname{Spec}\\kappa(s)}\\operatorname{Spec}\\kappa(u)$ along $\\operatorname{Spec}(r)$, $r:\\kappa(s)\\to\\kappa(u)$ the map induced by $\\varphi$. As $r$ is an isomorphism, $\\operatorname{Spec}(r)$ is an isomorphism, and the base change $h$ of an isomorphism is an isomorphism (the pair $(\\mathrm{id}_{X_s},\\operatorname{Spec}(r)^{-1}\\circ\\pi)$ also makes the square cartesian, so $h$ is the canonical isomorphism between two fibre products). In particular $h$ is a homeomorphism, and for $w\\in(X_U)_u$: $p(\\iota'(w))=\\iota(h(w))$.",
+   "uses": [
+    "lem-weil-pbc-fibre-of-base-change",
+    "def-pc-fibre-product",
+    "def-weil-affine-spectrum"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Lemma 02LL, proof (line 11998): 'Since $\\kappa(s)=\\kappa(u)$ the fibre $(X_U)_u=X_s$', used implicitly in the proof of Lemma 02LP"
+   }
+  },
+  {
+   "text": "*$W_u$ as an open of $(X_U)_u$; its points.* The fibre $W_u=W\\times_U\\operatorname{Spec}\\kappa(u)$ of $q|_W$ at $u$ is, by pasting cartesian squares [def-pc-fibre-product], $W\\times_{X_U}(X_U)_u$, and since $W\\subseteq X_U$ is an open subscheme, by [lem-weil-pbc-open-preimage-fibre-product] it is the open subscheme $\\iota'^{-1}(W)$ of $(X_U)_u$, with the restriction of $\\iota'$ as its projection to $W$. Key claim: for every $w\\in W_u$, the point $h(w)\\in X_s$ is not isolated in $X_s$. Indeed $\\iota'(w)\\in W$ and $q(\\iota'(w))=u$, so by step 2 (iv) $p(\\iota'(w))\\notin\\{x_1,\\dots,x_n\\}$; as $p(\\iota'(w))=\\iota(h(w))$ (step 4), step 1 shows $h(w)$ is not isolated in $X_s$.",
+   "uses": [
+    "def-pc-fibre-product",
+    "lem-weil-pbc-open-preimage-fibre-product"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Lemma 02LP, proof (line 12191: 'This is clear from Lemma 02LN'); the details are the agent's"
+   }
+  },
+  {
+   "text": "*$W_u$ has no isolated points.* Suppose $w\\in W_u$ with $\\{w\\}$ open in $W_u$. Since $W_u$ is open in $(X_U)_u$ (step 5), $\\{w\\}$ is open in $(X_U)_u$, and since $h$ is a homeomorphism (step 4), $\\{h(w)\\}=h(\\{w\\})$ is open in $X_s$: $h(w)$ is an isolated point of $X_s$, contradicting the key claim of step 5. Hence $W_u$ has no isolated points.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Lemma 02LP, statement (lines 12185-12188) and proof (line 12191)"
+   }
+  },
+  {
+   "text": "*If $f^{-1}(s)$ is finite, every point of $X_s$ is isolated.* Assume $f^{-1}(\\{s\\})$ is a finite set. Then $X_s$ is finite, as $\\iota$ is a bijection onto $f^{-1}(s)$ [def-pc-scheme-fibre]. The projection $\\pi:X_s\\to\\operatorname{Spec}\\kappa(s)$ is the base change of $f$, hence locally of finite type [lem-weil-pbc-lft-base-change]. Let $\\xi\\in X_s$. By the definition of locally of finite type [def-weil-finite-type-morphism] applied to the affine $\\operatorname{Spec}\\kappa(s)$ there is an affine open $\\xi\\in Y=\\operatorname{Spec}B\\subseteq X_s$ [def-weil-affine-spectrum] with $B$ a finitely generated $\\kappa(s)$-algebra [def-weil-pbc-finite-type-algebra]; $Y$ is a finite set. Let $\\mathfrak p\\subset B$ be a prime. By [lem-weil-pbc-finite-type-over-field-prime-intersection-maximal], $\\mathfrak p$ is the intersection of the maximal ideals containing it; there are finitely many, $\\mathfrak m_1,\\dots,\\mathfrak m_r$, and $r\\ge1$ (else the intersection is $B\\ne\\mathfrak p$). Then $\\mathfrak m_1\\cdots\\mathfrak m_r\\subseteq\\mathfrak m_1\\cap\\dots\\cap\\mathfrak m_r=\\mathfrak p$, so the prime $\\mathfrak p$ contains some $\\mathfrak m_j$, and $\\mathfrak p=\\mathfrak m_j$ is maximal. So every point of $Y$ is closed in $Y$ ($V(\\mathfrak m)=\\{\\mathfrak m\\}$), and $Y\\setminus\\{\\xi\\}$, a finite union of closed points, is closed in $Y$; thus $\\{\\xi\\}$ is open in $Y$, hence in $X_s$. (This is the argument of Stacks Morphisms, Lemma 02NG: $X_s$ is a finite Jacobson space, hence discrete.)",
+   "uses": [
+    "def-pc-scheme-fibre",
+    "lem-weil-pbc-lft-base-change",
+    "def-weil-finite-type-morphism",
+    "def-weil-affine-spectrum",
+    "def-weil-pbc-finite-type-algebra",
+    "lem-weil-pbc-finite-type-over-field-prime-intersection-maximal"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Morphisms, Lemma Tag 02NG (lemma-finite-fibre), statement lines 3729-3739 and proof lines 3740-3749 (Jacobson scheme with finitely many points is discrete); the affine-local form through Algebra 00G1 is the agent's"
+   }
+  },
+  {
+   "text": "*In particular: $f^{-1}(s)$ finite implies $W_u=\\emptyset$.* If $f^{-1}(\\{s\\})$ is finite, every point of $X_s$ is isolated (step 7). If $W_u$ had a point $w$, then $h(w)\\in X_s$ would be isolated, contradicting the key claim of step 5. Hence $W_u=\\emptyset$, i.e. no point of $W$ maps to $u$ (a point $w\\in W$ with $q(w)=u$ would give a point of $W_u$ over it, the first projection of the fibre being a bijection onto $q|_W^{-1}(u)$ [def-pc-scheme-fibre]).",
+   "uses": [
+    "def-pc-scheme-fibre"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Lemma 02LP, last sentence of the statement (line 12189)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-scheme-fibre",
+  "lem-weil-pbc-etale-splits-off-isolated-points-technical",
+  "lem-weil-pbc-finite-coproduct",
+  "def-weil-finite-integral-morphism",
+  "lem-weil-pbc-fibre-of-base-change",
+  "def-pc-fibre-product",
+  "def-weil-affine-spectrum",
+  "lem-weil-pbc-open-preimage-fibre-product",
+  "lem-weil-pbc-lft-base-change",
+  "def-weil-finite-type-morphism",
+  "def-weil-pbc-finite-type-algebra",
+  "lem-weil-pbc-finite-type-over-field-prime-intersection-maximal"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/more-morphisms.tex",
+  "place": "More on Morphisms, Lemma Tag 02LP (lemma-etale-splits-off-quasi-finite-part), proof at lines 12190-12194, from Lemma 02LN (lines 12093-12131); the 'in particular' via Morphisms, Lemma 02NG (morphisms.tex lines 3729-3749); the details of the one-line proof (fibre identification, W_u open in the fibre, finiteness of V) written out by the agent"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -41,10 +154,31 @@
    "results": "only AlgebraicGeometry.exists_etale_isCompl_of_quasiFiniteAt (ZariskisMainTheorem.lean:49): for f lft separated quasi-finite at one point x over s, an etale U->S with s in its range and a clopen decomposition of the pullback whose piece V is finite over U and contains a point over x; its comment says 'weaker than stacks#02LN'. It handles one point, gives no elementary neighbourhood (kappa(u)=kappa(s)) and no statement on the fibre of W",
    "date": "2026-10-10",
    "verdict": "no match (weaker one-point version only)"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.exists_etale_isCompl_of_quasiFiniteAt",
+   "results": "AlgebraicGeometry.exists_etale_isCompl_of_quasiFiniteAt (Mathlib.AlgebraicGeometry.ZariskisMainTheorem, line 49 read with sed -n 40,56p): one point x quasi-finite over s, etale g:U->S with s in range g, complementary opens V,W of the pullback, V finite over U with a point over x",
+   "date": "2026-10-10",
+   "verdict": "no match: one point, no elementary neighbourhood, nothing on the fibre of W"
+  },
+  {
+   "tool": "leansearch",
+   "query": "locally finite type scheme over a field with finitely many points is discrete",
+   "results": "JacobsonSpace.discreteTopology (Mathlib.Topology.JacobsonSpace: finitely many closed points in a Jacobson space gives discrete), IsLocallyArtinian.discreteTopology (AlgebraicGeometry.Artinian), PrimeSpectrum.instDiscreteTopology; with instJacobsonSpace...FiberOfLocallyOfFiniteType (AlgebraicGeometry.Fiber) these give the 'in particular' topological fact (step 7), not the item",
+   "date": "2026-10-10",
+   "verdict": "no match for the item; step 7 has Mathlib material (Jacobson fibre + JacobsonSpace.discreteTopology)"
+  },
+  {
+   "tool": "local_search",
+   "query": "exists_etale_isCompl (project ~/weil-conjectures-slopmaster2)",
+   "results": "only AlgebraicGeometry.exists_etale_isCompl_of_quasiFiniteAt (index: unavailable)",
+   "date": "2026-10-10",
+   "verdict": "no match"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "worker",
@@ -64,5 +198,17 @@
   }
  },
  "chapter": "sec-proper-base-change",
- "unit": "sk-thm-p1"
+ "unit": "sk-thm-p1",
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "lem-weil-pbc-etale-splits-off-quasi-finite-part",
+  "worker": "stage1",
+  "summary": "Read Stacks 02LP (more-morphisms.tex 12171-12194) and 02LN (12093-12131), and Morphisms 02NG (morphisms.tex 3729-3749). Statement kept (it agrees with 02LP hypothesis by hypothesis). Proof written in 8 steps: choose the isolated points of X_s and their images in X; apply 02LN, created as the new unsplit node lem-weil-pbc-etale-splits-off-isolated-points-technical (no node existed; 02LL exists as lem-weil-pbc-etale-local-finite-multiple-points-elementary and is what 02LN's proof will use); V = union of the V_i is finite by lem-weil-pbc-finite-coproduct; the fibre (X_U)_u is isomorphic to X_s since kappa(u)=kappa(s) (lem-weil-pbc-fibre-of-base-change); W_u is open in (X_U)_u (lem-weil-pbc-open-preimage-fibre-product), so an isolated point of W_u would be an isolated point of X_s, i.e. some x_i, excluded by 02LN (iv); for the 'in particular', a finite X_s locally of finite type over kappa(s) is discrete (02NG's argument, written affine-locally with the Jacobson leaf lem-weil-pbc-finite-type-over-field-prime-intersection-maximal and lem-weil-pbc-lft-base-change), so W_u is empty. pqf-lem-locqf-fibre-discrete states 02NG but lies in unit sk-prop-av-pqf-finite outside this unit's route, so it is not cited. Mathlib: loogle/leansearch/leanfinder/grep/local_search find only exists_etale_isCompl_of_quasiFiniteAt (weaker one-point version)."
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "result": "accepted",
+  "note": "8 steps following More on Morphisms 02LP with its one-line proof written out: the isolated points x_i; 02LN as a new unsplit node (stated with clauses (i)-(iv)); V = union of the V_i finite by the coproduct leaf; the fibre of X_U at u is X_s (fibre-of-base-change leaf, kappa(u) = kappa(s)); W_u open in it with no point over an isolated point (02LN (iv)); no isolated points; a finite fibre is discrete by the Jacobson leaf (02NG's argument, written since pqf-lem-locqf-fibre-discrete is outside the route); W_u empty. Statement unchanged."
+ }
 }
