@@ -18,7 +18,7 @@
     "lem-weil-pbc-finite-etale-lifting-essential-surjectivity"
    ]
   },
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "A map of stalks of coherent modules comes from a map on a neighbourhood",
@@ -33,9 +33,58 @@
   "def-weil-pbc-module-stalk",
   "def-weil-sheaf-of-modules-category"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Since $X$ is locally Noetherian and $\\mathcal G$ is coherent, $\\mathcal G$ is finitely presented as an $\\mathcal O_X$-module: by [pqf-lem-coherent-ft-locnoeth] it is of finite type, and by coherence [pqf-def-coherent], after shrinking around $x$ a finite set of generating sections gives a surjection $\\mathcal O_U^{\\oplus n}\\to\\mathcal G|_U$ whose kernel is of finite type. Shrink once more and choose finitely many sections generating that kernel. Their map $\\mathcal O_V^{\\oplus m}\\to\\mathcal O_V^{\\oplus n}$ has cokernel $\\mathcal G|_V$, exactly a finite presentation [def-weil-pbc-module-finite-type-presentation].",
+   "uses": [
+    "pqf-lem-coherent-ft-locnoeth",
+    "pqf-def-coherent",
+    "def-weil-pbc-module-finite-type-presentation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/coherent.tex",
+    "place": "Cohomology of Schemes, Lemma Tag 01XZ (lemma-coherent-Noetherian), lines 2225-2270, equivalence of (1) and (3), invoked in proof of Lemma Tag 01Y4 (lemma-map-stalks-local-map), lines 2392-2407; local presentation expanded"
+   }
+  },
+  {
+   "text": "Apply [lem-weil-pbc-stalk-internal-hom-finite-presentation] to the finitely presented source $\\mathcal G$ (step 1) and target $\\mathcal F$. It gives an isomorphism $\\mathcal Hom_{\\mathcal O_X}(\\mathcal G,\\mathcal F)_x\\xrightarrow{\\sim}\\operatorname{Hom}_{\\mathcal O_{X,x}}(\\mathcal G_x,\\mathcal F_x)$, so the given $\\psi$ has a preimage $h$ in the internal-Hom stalk. By [def-pur-sheaf-hom], the sections of internal Hom over an open $U$ are precisely the $\\mathcal O_U$-linear morphisms $\\mathcal G|_U\\to\\mathcal F|_U$, and the stalk is their germs [def-weil-pbc-module-stalk]. Thus $h$ has a representative $(U,\\varphi)$ for some open $x\\in U$, with $\\varphi:\\mathcal G|_U\\to\\mathcal F|_U$.",
+   "uses": [
+    "lem-weil-pbc-stalk-internal-hom-finite-presentation",
+    "def-pur-sheaf-hom",
+    "def-weil-pbc-module-stalk"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/coherent.tex",
+    "place": "Cohomology of Schemes, proof of Lemma Tag 01Y4 (lemma-map-stalks-local-map), lines 2403-2407, using Modules Lemma Tag 01CP (lemma-stalk-internal-hom), lines 3619-3678"
+   }
+  },
+  {
+   "text": "The canonical map of step 2 sends the germ represented by $(U,\\varphi)$ to $\\varphi_x$ [lem-weil-pbc-stalk-internal-hom-finite-presentation]. Since it sends $h$ to $\\psi$ by construction, $\\varphi_x=\\psi$. This $U$ and $\\varphi$ give the required extension.",
+   "uses": [
+    "lem-weil-pbc-stalk-internal-hom-finite-presentation"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/coherent.tex",
+    "place": "Cohomology of Schemes, conclusion of Lemma Tag 01Y4 (lemma-map-stalks-local-map), lines 2392-2407"
+   }
+  }
+ ],
+ "proof_deps": [
+  "pqf-lem-coherent-ft-locnoeth",
+  "pqf-def-coherent",
+  "def-weil-pbc-module-finite-type-presentation",
+  "lem-weil-pbc-stalk-internal-hom-finite-presentation",
+  "def-pur-sheaf-hom",
+  "def-weil-pbc-module-stalk"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/coherent.tex",
+  "place": "Cohomology of Schemes, Lemma Tag 01Y4 (lemma-map-stalks-local-map), lines 2392-2407; uses Tag 01XZ and Modules Tag 01CP"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -60,7 +109,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "worker",
@@ -81,5 +130,18 @@
  },
  "chapter": "sec-proper-base-change",
  "unit": "sk-thm-p1",
- "reviewed": "2026-10-10 L: statement checked against 01Y4; no existing node for 01Y4"
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "group": "H1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed by the lead of H1; spot-checked by L: L: 01Y4 via the stalk of the internal Hom of a finitely presented module (01CP, new node)"
+ },
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "lem-weil-pbc-coherent-stalk-map-extends",
+  "worker": "stage1",
+  "summary": "Read Cohomology of Schemes 01Y4 and 01XZ, and Modules 01CP. Expanded the coherent-to-finite-presentation reduction locally, then applied the new unsplit 01CP node to take a germ of internal Hom representing the stalk map. Its representative is the required morphism on a neighbourhood. Searches of the DAG and whole blueprint found no 01CP node or blueprint duplicate. The item itself has no exact Mathlib match.",
+  "blueprint": "The item supplies the coherent stalk-map extension used by lem-weil-pbc-coherent-generic-point-ideal-inclusion, descended through the recorded via chain from step 7 of thm-weil-pbc-finite-etale-lifting (Stacks 0GS2 essential-surjectivity route). The blueprint has no matching statement for 01Y4 or 01CP."
+ }
 }
