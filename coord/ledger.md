@@ -1059,3 +1059,5 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 08:10 L: accepted lem-weil-pbc-depth-le-support-dimension (5 steps, no new nodes; induction on sequence length).
 - 08:10 L: accepted lem-weil-pbc-depth-in-ses (5 steps; new leaf ext-long-exact-second-variable 00LU, new unsplit node depth-ext 00LW).
 - 08:11 L: accepted lem-weil-pbc-dimension-at-point-field-extension (5 steps, no new nodes).
+- 08:14 L: nineteenth account limit (~08:12); session resumed on another account. Worker on differentials-dimension-bound-smooth-at-prime had finished writing (accepted from disk); workers on smooth-over-field-regular-local, dimension-supremum-local-dimensions, equation-count-localize-rgci, exact-free-complex-last-minors died with nothing; claims kept and relaunched.
+- 08:14 L: accepted lem-weil-pbc-differentials-dimension-bound-smooth-at-prime (6 steps; new unsplit nodes smooth-at-maximal-ideal-alg-closed-differentials-bound and smooth-at-prime-field-extension-descent).
