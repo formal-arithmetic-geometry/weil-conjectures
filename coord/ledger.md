@@ -2734,3 +2734,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 21:54 L: merged deliver/G1/lem-sc-rhom-supported-qcoherent (reviewer FIX; first push; new nodes: 0)
 - 21:54 L: merged deliver/F1/lem-pc-perfect-generator-pullback (reviewer FIX; first push; new nodes: 0)
 - 21:55 L: merged deliver/C1/lem-sc-genus-invariant (reviewer FIX; first push; new nodes: 0)
+- 21:55 L: merged deliver/C1/lem-pc-perfect-generation-koszul-orthogonal (reviewer FIX; first push; new nodes: 1)

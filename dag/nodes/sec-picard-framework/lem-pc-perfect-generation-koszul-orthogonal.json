@@ -24,9 +24,53 @@
   "def-pc-perfect-complex",
   "def-pc-generators"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Let C be the cone of the canonical map E \\to R(U intersection V \\to V)_*(E restricted to U intersection V). The restriction of K to U intersection V is zero (Elementary, Stacks Tag 0663: multiplication by each f_i is homotopic to zero on K, so on each D(f_i), where f_i is a unit, K is acyclic; the D(f_i) cover U intersection V=V minus V(f_1, ..., f_r).), so derived adjunction gives Hom(K[n], R(U intersection V \\to V)_*(E restricted to U intersection V))=0 for every n. Applying Hom(K[n],-) to the distinguished triangle E \\to R(U intersection V \\to V)_*(E restricted to U intersection V) \\to C \\to E[1] therefore shows that Hom(K[n],E)=0 for all n if and only if Hom(K[n],C)=0 for all n. The canonical map is an isomorphism exactly when C=0.",
+   "uses": [
+    "def-pc-derived-category",
+    "lem-pc-ringed-spaces-derived-adjoint-general"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/perfect.tex",
+    "place": "Tag 09IR, proof: distinguished triangle and vanishing after restricting the Koszul complex to U"
+   }
+  },
+  {
+   "text": "The cone C restricts to zero on U intersection V, since the canonical map restricts there to an isomorphism (elementary: restriction to an open is exact and the restriction of R(U intersection V \\to V)_* to U intersection V is computed on an injective resolution as the identity, Stacks Tag 08DF-type compatibility). On the affine V=Spec(A), the closed complement V minus U is V(f_1, ..., f_r). The Koszul multiplication triangles (elementary, Stacks Tag 062C: K(..., f g, ...) is homotopy equivalent to the cone of a map K(..., f, ...)[1] \\to K(..., g, ...), giving a distinguished triangle in D(O_V)) give, for each coordinate i and positive a,b, a distinguished triangle whose three terms are the Koszul complexes with exponents a, b, and a+b in that coordinate (and with the other exponents fixed). Applying Hom(-,C) yields a long exact sequence. Starting with the exponent tuple (1,...,1), induction on the sum of the exponents therefore shows that vanishing of Hom(K[n],C) for all n implies vanishing for every positive power tuple: to increase one exponent from m to m+1, use the triangle with a=m and b=1, whose other two Koszul terms have smaller sums. The auxiliary affine Koszul detection statement [lem-pc-koszul-affine-detection] now applies to C and gives C=0. Hence Hom(K[n],E)=0 for all n implies that the canonical map in (i) is an isomorphism.",
+   "uses": [
+    "lem-pc-koszul-affine-detection"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/perfect.tex",
+    "place": "Tag 09IR, proof using Lemma 36.9.6 and Lemma 36.3.5"
+   }
+  },
+  {
+   "text": "Conversely, if the canonical map E \\to R(U intersection V \\to V)_*(E restricted to U intersection V) is an isomorphism, then E is identified with that derived pushforward. Since K restricts to zero on U intersection V (Step 1, Stacks Tag 0663), derived adjunction gives Hom(K[n],E)=0 for every integer n.",
+   "uses": [
+    "def-pc-derived-category",
+    "lem-pc-ringed-spaces-derived-adjoint-general"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/perfect.tex",
+    "place": "Tag 09IR, proof: the forward implication from E=Rj_*(E|_U)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-derived-category",
+  "lem-pc-ringed-spaces-derived-adjoint-general",
+  "lem-pc-koszul-affine-detection"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/perfect.tex",
+  "place": "Tag 09IR, Lemma orthogonal-koszul-complex, proof"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -58,12 +102,28 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-pc-perfect-generation-open-induction-step",
   "by": "worker",
   "date": "2026-10-10"
  },
  "chapter": "sec-picard-framework",
- "unit": "sk-thm-picard-duality"
+ "unit": "sk-thm-picard-duality",
+ "split_report": {
+  "date": "2026-10-11",
+  "item": "lem-pc-perfect-generation-koszul-orthogonal",
+  "worker": "stage1",
+  "summary": "Split Tag 09IR into the cone reduction, the affine Koszul-power detection input, and the converse adjunction argument. Created one statement-only auxiliary node for the affine supported-object detection lemma; the item itself retains the full open-immersion equivalence.",
+  "blueprint": "Realizes the perfect-generation induction step sentence in the blueprint ancestor lem-sc-finite-duality: the cone of the restriction map is supported on the Koszul complement and is detected by Koszul orthogonality.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-pko2720",
+  "group": "C1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-pko2720 (reviewer sub-agent of L); spot-checked: C4: statement (E in D_QCoh(O_V), canonical map to R(U∩V→V)_* iso iff Hom(K[n],E)=0) is exactly what open-induction-step step 3 and supported-perfect-generator steps 1,5 apply; matches Tag 09IR. No existing Koszul-detection node (grep koszul in sec-picard-framework/sec-sc; 08E3 has no node), so new lem-pc-koszul-affine-detection (08E3+affine-compare-bounded) is a real lemma, kept. FIX more, RETURN less: (1) B4 plain-text arrows in steps 1-3 rewritten as \\to; (2) C1 K|_{U∩V}=0 was unjustified: folded in as elementary with Stacks Tag 0663 (steps 1,3); (3) C1 Koszul multiplication triangles uncited: folded in as elementary with Tag 062C (step 2); (4) C|_{U∩V}=0 justified inline as elementary (restriction of Rj_* to the open itself). Second reading missed (1)-(3); its claimed created.item correction was not made but that field is the maintainer's.; 1 file(s) fixed by the reviewer"
+ }
 }
