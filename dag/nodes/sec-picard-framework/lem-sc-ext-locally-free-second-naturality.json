@@ -22,9 +22,99 @@
   "lem-sc-ext-locally-free",
   "def-sc-sheaf-cohomology-functor"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Write $T=\\mathcal F^\\vee\\otimes_{\\mathcal O_X}-$ on $\\operatorname{Mod}(\\mathcal O_X)$, which has enough injectives by [lem-weil-pbc-scheme-modules-enough-injectives]. By [lem-weil-pbc-ext-via-injective-resolution], $\\operatorname{Ext}^i_X(\\mathcal F,-)$ is the right derived functor of $\\operatorname{Hom}(\\mathcal F,-)$ computed by injective resolutions: for an injective resolution $\\varepsilon:\\mathcal G\\to I^\\bullet$ the class of a cocycle $f:\\mathcal F\\to I^i$ goes to $\\varepsilon[i]^{-1}\\circ f$. The canonical isomorphism of [lem-sc-ext-locally-free] is the composite of this identification with $\\mathcal H^i(\\operatorname{Hom}(\\mathcal F,I^\\bullet))\\cong\\mathcal H^i(\\Gamma(X,T(I^\\bullet)))$ (global sections of the evaluation isomorphism [lem-sc-ext-evaluation], via the global-sections clause of [def-pur-sheaf-hom]) and the derived-composite comparison $c^i:\\mathcal H^i(\\Gamma(X,T(I^\\bullet)))\\xrightarrow{\\sim}R^i\\Gamma(T(\\mathcal G))=H^i(X,\\mathcal F^\\vee\\otimes\\mathcal G)$ of [lem-sc-ext-derived-composite], which is the comparison map of item 2 of [lemma-weil-pbc-leray-acyclicity] for the resolution $T(\\varepsilon):T(\\mathcal G)\\to T(I^\\bullet)$.",
+   "uses": [
+    "lem-weil-pbc-scheme-modules-enough-injectives",
+    "lem-weil-pbc-ext-via-injective-resolution",
+    "lem-sc-ext-locally-free",
+    "lem-sc-ext-evaluation",
+    "def-pur-sheaf-hom",
+    "lem-sc-ext-derived-composite",
+    "lemma-weil-pbc-leray-acyclicity"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Lemma Tag 06XR (derived-lemma-compute-ext-resolutions) with Lemma Tag 015M (derived-lemma-compose-derived-functors)"
+   }
+  },
+  {
+   "text": "Hypotheses for the comparison. $\\mathcal F^\\vee$ is finite locally free (on each $V_a$ with $\\mathcal F|_{V_a}\\cong\\mathcal O_{V_a}^{\\oplus d_a}$, [def-pur-sheaf-hom] gives $\\mathcal F^\\vee|_{V_a}\\cong\\mathcal O_{V_a}^{\\oplus d_a}$), so $T$ is exact by [lem-sc-ext-tensor-exact]. For an injective $\\mathcal O_X$-module $I$, $T(I)\\cong\\mathcal{H}om(\\mathcal F,I)$ by [lem-sc-ext-evaluation]; $\\mathcal{H}om(\\mathcal F,-)$ is right adjoint to $\\mathcal F\\otimes-$ by [lem-weil-pbc-module-tensor-hom-adjunction] and [lem-weil-pbc-module-tensor-comm], and $\\mathcal F\\otimes-$ is exact by [lem-sc-ext-tensor-exact], so $T(I)$ is injective by [lem-sp-right-adjoint-preserves-injectives], hence $\\Gamma(X,-)$-acyclic by item 1 of [lemma-weil-pbc-leray-acyclicity]. Thus for injective resolutions $\\varepsilon:\\mathcal G\\to I^\\bullet$, $\\varepsilon':\\mathcal G'\\to I'^\\bullet$, the maps $T(\\varepsilon)$, $T(\\varepsilon')$ are resolutions by $\\Gamma$-acyclic objects.",
+   "uses": [
+    "def-pur-sheaf-hom",
+    "lem-sc-ext-tensor-exact",
+    "lem-sc-ext-evaluation",
+    "lem-weil-pbc-module-tensor-hom-adjunction",
+    "lem-weil-pbc-module-tensor-comm",
+    "lem-sp-right-adjoint-preserves-injectives",
+    "lemma-weil-pbc-leray-acyclicity"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Lemma Tag 015M (derived-lemma-compose-derived-functors), hypotheses"
+   }
+  },
+  {
+   "text": "Lift $\\varphi$: since the augmented complex of $I^\\bullet$ is exact and the $I'^m$ are injective, there is a morphism of complexes $\\psi:I^\\bullet\\to I'^\\bullet$ with $\\psi^0\\circ\\varepsilon=\\varepsilon'\\circ\\varphi$ (degreewise extension using injectivity). Then $\\psi\\circ\\varepsilon=\\varepsilon'\\circ\\varphi$ as maps $\\mathcal G[0]\\to I'^\\bullet$, so for a cocycle $f:\\mathcal F\\to I^i$ one has $\\varphi[i]\\circ\\varepsilon[i]^{-1}\\circ f=\\varepsilon'[i]^{-1}\\circ\\psi[i]\\circ f$ in $D(\\mathcal O_X)$. By the explicit formula of Step 1, the map $\\operatorname{Ext}^i_X(\\mathcal F,\\varphi)$ (postcomposition with $\\varphi[i]$) corresponds to $\\mathcal H^i(\\operatorname{Hom}(\\mathcal F,\\psi))$.",
+   "uses": [
+    "lem-weil-pbc-ext-via-injective-resolution",
+    "def-sp-injective-resolutions"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Lemma Tag 06XR (derived-lemma-compute-ext-resolutions): morphisms into an injective complex"
+   }
+  },
+  {
+   "text": "By the naturality in the coefficient module of the evaluation isomorphism [lem-sc-ext-evaluation], applied degreewise to $\\psi^m:I^m\\to I'^m$ and followed by global sections ([def-pur-sheaf-hom]), the identification $\\operatorname{Hom}(\\mathcal F,I^\\bullet)\\cong\\Gamma(X,T(I^\\bullet))$ of Step 1 carries $\\operatorname{Hom}(\\mathcal F,\\psi)$ to $\\Gamma(X,T(\\psi))$; hence $\\mathcal H^i(\\operatorname{Hom}(\\mathcal F,\\psi))$ corresponds to $\\mathcal H^i(\\Gamma(X,T(\\psi)))$.",
+   "uses": [
+    "lem-sc-ext-evaluation",
+    "def-pur-sheaf-hom"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-picard-framework/sk-thm-picard-duality/lem-sc-ext-locally-free.md",
+    "place": "Proof, first sentence: evaluation isomorphism, natural in the coefficient module"
+   }
+  },
+  {
+   "text": "Apply [lem-sc-acyclic-comparison-natural] with $v=\\Gamma(X,-)$ on $\\operatorname{Mod}(\\mathcal O_X)$, $F=T(\\mathcal G)$, $F'=T(\\mathcal G')$, the $\\Gamma$-acyclic resolutions $r=T(\\varepsilon)$, $r'=T(\\varepsilon')$ of Step 2, $h=1_{\\mathcal F^\\vee}\\otimes\\varphi=T(\\varphi)$ and the morphism of complexes $T(\\psi)$; its hypothesis $T(\\psi^0)\\circ T(\\varepsilon)=T(\\varepsilon')\\circ T(\\varphi)$ is $T$ applied to the equation of Step 3. Its comparison maps are the maps $c^i$, $c'^i$ of Step 1, and it gives $c'^i\\circ\\mathcal H^i(\\Gamma(X,T(\\psi)))=R^i\\Gamma(1\\otimes\\varphi)\\circ c^i$, where $R^i\\Gamma(1\\otimes\\varphi)=H^i(1_{\\mathcal F^\\vee}\\otimes\\varphi)$ by [def-sc-sheaf-cohomology-functor]. Combined with Steps 1, 3 and 4, the Ext map induced by $\\varphi$ corresponds to the cohomology map induced by $1_{\\mathcal F^\\vee}\\otimes\\varphi$.",
+   "uses": [
+    "lem-sc-acyclic-comparison-natural",
+    "def-sc-sheaf-cohomology-functor"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Lemma Tag 015E (derived-lemma-leray-acyclicity), naturality of the comparison for a morphism of acyclic resolutions; Cohomology Tag 01DZ"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-scheme-modules-enough-injectives",
+  "lem-weil-pbc-ext-via-injective-resolution",
+  "lem-sc-ext-locally-free",
+  "lem-sc-ext-evaluation",
+  "def-pur-sheaf-hom",
+  "lem-sc-ext-derived-composite",
+  "lemma-weil-pbc-leray-acyclicity",
+  "lem-sc-ext-tensor-exact",
+  "lem-weil-pbc-module-tensor-hom-adjunction",
+  "lem-weil-pbc-module-tensor-comm",
+  "lem-sp-right-adjoint-preserves-injectives",
+  "def-sp-injective-resolutions",
+  "lem-sc-acyclic-comparison-natural",
+  "def-sc-sheaf-cohomology-functor"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/derived.tex",
+  "place": "Lemma Tags 06XR, 015M and 015E, with Cohomology Tag 01DZ"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -56,12 +146,34 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-sc-p1-ext-yoneda-functoriality",
   "by": "worker",
   "date": "2026-10-10"
  },
  "chapter": "sec-picard-framework",
- "unit": "sk-thm-picard-duality"
+ "unit": "sk-thm-picard-duality",
+ "split_report": {
+  "date": "2026-10-11",
+  "item": "lem-sc-ext-locally-free-second-naturality",
+  "worker": "stage1",
+  "summary": "Split second-variable naturality into the injective-resolution interpretation of Ext, the coefficient-natural evaluation square, and naturality of the derived-composite comparison. The proof uses only existing DAG statements and the item's previously recorded Mathlib searches; no new node was needed.",
+  "blueprint": [
+   "thm-sc-p1-duality proof, Step 2: naturality of the Ext-to-cohomology identification in the coefficient module"
+  ],
+  "tool_uses": []
+ },
+ "tool_uses": [
+  "lem-weil-pbc-scheme-modules-enough-injectives",
+  "lem-weil-pbc-module-tensor-hom-adjunction"
+ ],
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-eln1753",
+  "group": "E1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-eln1753 (reviewer sub-agent of L); spot-checked: Checked statements of lem-sc-ext-derived-composite-natural, lem-sc-acyclic-comparison-natural, lem-sc-ext-locally-free (and its construction), lem-sc-ext-derived-composite, lem-weil-pbc-ext-via-injective-resolution, lemma-weil-pbc-leray-acyclicity. FIX more, RETURN less: (1) C4 Step 3: lem-sc-ext-derived-composite-natural is naturality in a transformation alpha:T->T' at one fixed object M, so 'T=T', alpha with component 1 tensor phi' is ill-typed (1 tensor phi goes between different objects); replaced by lem-sc-acyclic-comparison-natural with v=Gamma, r=T(eps), r'=T(eps'), h=1 tensor phi, morphism T(psi). (2) C1: the lift psi of phi to injective resolutions and the correspondence Ext(F,phi) <-> H^i Hom(F,psi) were asserted; added as elementary Step 3 from the explicit formula of lem-weil-pbc-ext-via-injective-resolution. (3) C5: Gamma-acyclicity of T(I) and exactness of T were taken from lem-sc-ext-locally-free's proof; now a cited step, and the enough-injectives node the second reading claimed to add (absent at b58fd40e6) is cited in Step 1. Tool uses (generic, C7/C8, both already used by lem-sc-ext-locally-free): lem-weil-pbc-scheme-modules-enough-injectives (Mod(O_X) has enough injectives), lem-weil-pbc-module-tensor-hom-adjunction (tensor-Hom adjunction). proof_deps recomputed.; 1 file(s) fixed by the reviewer"
+ }
 }
