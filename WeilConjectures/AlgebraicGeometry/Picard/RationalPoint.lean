@@ -8,6 +8,8 @@ module
 public import Mathlib.AlgebraicGeometry.Morphisms.Smooth
 public import WeilConjectures.AlgebraicGeometry.GlobalSectionsBijective
 public import WeilConjectures.AlgebraicGeometry.Picard.Defs
+public import WeilConjectures.AlgebraicGeometry.Modules.LocallyFreeAffine
+public import WeilConjectures.AlgebraicGeometry.Modules.FreeGenerator
 
 /-!
 # The Picard functor of a curve with a rational point
@@ -61,8 +63,44 @@ On an affine open `V = Spec A` of `T`, flat base change along the flat map `k �
 (blueprint: `lem-pc-structure-pushforward`) -/
 theorem isIso_pushforwardUnitMap_pullback_snd [IsProper (X ↘ Spec (.of k))]
     [GlobalSectionsBijective k X] (T : Over (Spec (.of k))) :
-    IsIso (pushforwardUnitMap (pullback.snd (X ↘ Spec (.of k)) T.hom)) :=
-  sorry
+    IsIso (pushforwardUnitMap (pullback.snd (X ↘ Spec (.of k)) T.hom)) := by
+  let π := pullback.snd (X ↘ Spec (.of k)) T.hom
+  let φ : Modules.unit T.left ⟶ (Modules.pushforward π).obj (Modules.unit _) :=
+    pushforwardUnitMap π
+  -- `φ` sends `1` to `1`
+  have h1 : Modules.Hom.app φ ⊤ (1 : Γ(T.left, ⊤)) =
+      (1 : Γ(pullback (X ↘ Spec (.of k)) T.hom, ⊤)) := by
+    have h := Modules.pullbackSection_app_one π (𝟙 (Modules.unit T.left))
+    change Modules.Hom.app (Modules.pullbackObjUnitIso π).hom _
+      (Modules.pullbackSection π (Modules.Hom.app (𝟙 _) ⊤ (1 : Γ(T.left, ⊤)))) =
+        (1 : Γ(pullback (X ↘ Spec (.of k)) T.hom, ⊤))
+    rw [h, CategoryTheory.Functor.map_id, Category.comp_id, ← ConcreteCategory.comp_apply,
+      ← Modules.Hom.comp_app,
+      Iso.inv_hom_id]
+    rfl
+  -- on sections over `A`, `φ` is `π^♯`
+  have happ (A : T.left.Opens) (b : Γ(T.left, A)) : Modules.Hom.app φ A b = π.app A b := by
+    have hA : Modules.Hom.app φ A (1 : Γ(T.left, A)) =
+        (1 : Γ(pullback (X ↘ Spec (.of k)) T.hom, π ⁻¹ᵁ A)) := by
+      have hn := Modules.Hom.app_presheaf_map φ (homOfLE le_top : A ⟶ ⊤) (1 : Γ(T.left, ⊤))
+      have e1 : (Modules.unit T.left).presheaf.map (homOfLE le_top : A ⟶ ⊤).op
+          (1 : Γ(T.left, ⊤)) = (1 : Γ(T.left, A)) :=
+        map_one (T.left.presheaf.map (homOfLE le_top : A ⟶ ⊤).op).hom
+      rw [e1, h1] at hn
+      exact hn.trans (map_one ((pullback (X ↘ Spec (.of k)) T.hom).presheaf.map
+        (homOfLE (π.preimage_mono (le_top : A ≤ ⊤))).op).hom)
+    have h2 := Modules.Hom.app_smul φ b (1 : Γ(T.left, A))
+    have h3 : b • (1 : Γ(T.left, A)) = b := by rw [smul_eq_mul, mul_one]
+    rw [h3] at h2
+    rw [h2, hA]
+    exact mul_one (π.app A b)
+  have : CompactSpace X := QuasiCompact.compactSpace_of_compactSpace (X ↘ Spec (.of k))
+  have : QuasiSeparatedSpace X := quasiSeparatedSpace_of_quasiSeparated (X ↘ Spec (.of k))
+  refine Modules.isIso_of_bijective_app_of_isAffineOpen φ fun A hA ↦ ?_
+  have := GlobalSectionsBijective.isIso_app_of_isPullback (k := k) (X := X)
+    (IsPullback.of_hasPullback (X ↘ Spec (.of k)) T.hom) hA
+  rw [show (Modules.Hom.app φ A : Γ(T.left, A) → _) = π.app A from funext (happ A)]
+  exact ConcreteCategory.bijective_of_isIso _
 
 /-- **Smooth projective curves satisfy the hypotheses of the split exact sequence.** Let `X` be
 a smooth projective curve over a field `k`.  Then `𝒪_T ⟶ f_{T,*} 𝒪_{X_T}` is an isomorphism for
