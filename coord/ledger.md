@@ -854,3 +854,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 04:12 L: reviewed lem-weil-pbc-module-cohomology-fmap-functorial (8 steps, +homotopy leaf): accepted.
 - 04:12 L: reviewed lem-weil-pbc-module-finite-presentation-representatives (6 steps, 0 new): accepted.
 - 04:14 L: reviewed lem-weil-pbc-module-finite-presentation-extension (9 steps, +01PE (3) node, +affine-qcqs leaf; Stacks cites 01PC for 01PB): accepted.
+- 04:15 L: reviewed lem-weil-pbc-polynomial-ideal-coefficients-monomial (4 steps, 0 new): accepted.
