@@ -3,7 +3,7 @@
  "blueprint": {
   "is": "lem-sc-artin-schreier-k",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "Artin–Schreier on algebraically closed fields",
@@ -15,12 +15,35 @@
  "stmt_deps": [],
  "proof": [
   {
-   "text": "For $a\\in k$, the polynomial $X^p-X-a$ has derivative $-1$, so\nit is separable, and over the algebraically closed field $k$ it\nhas a root. The kernel is $\\{x\\in k:x^p=x\\}=\\mathbf F_p$.",
-   "uses": [],
-   "elementary": null
+   "text": "Since $k$ has characteristic $p>0$ [def-pc-field-characteristic], $p\\ge2$ (no field has $1_k=0$). Given $a\\in k$, the polynomial $X^p-X-a\\in k[X]$ has degree $p\\ge2$, so it is nonconstant and, $k$ being algebraically closed [def-weil-algebraic-closure], has a root $x\\in k$; then $x^p-x=a$. Hence $\\wp$ is surjective.",
+   "uses": [
+    "def-pc-field-characteristic",
+    "def-weil-algebraic-closure"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-abelian-varieties/sk-prop-av-lang-steinberg/lem-sc-artin-schreier-k.md",
+    "place": "## Proof, first sentence"
+   }
+  },
+  {
+   "text": "Since $k$ is a field of characteristic $p>0$ [def-pc-field-characteristic], $p$ is prime (a factorization $p=mn$ with $1<m,n<p$ would give $(m\\cdot1_k)(n\\cdot1_k)=0$ with both factors nonzero), and $p\\cdot1_k=0$. The kernel condition $x^p-x=0$ is equivalent to $x^p=x$. The field Artin–Schreier kernel node [lem-sc-field-artin-schreier-kernel], applied to $K=k$, identifies exactly these elements with the image of the canonical $\\mathbf F_p=\\mathbf Z/p\\mathbf Z$ in $k$ (the prime subfield), which is the stated kernel $\\mathbf F_p$.",
+   "uses": [
+    "lem-sc-field-artin-schreier-kernel",
+    "def-pc-field-characteristic"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 0A3J, opening Artin–Schreier kernel assertion"
+   }
   }
  ],
- "proof_deps": [],
+ "proof_deps": [
+  "def-pc-field-characteristic",
+  "def-weil-algebraic-closure",
+  "lem-sc-field-artin-schreier-kernel"
+ ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/master/blueprint/sec-abelian-varieties/sk-prop-av-lang-steinberg/lem-sc-artin-schreier-k.md",
@@ -28,7 +51,7 @@
  },
  "mathlib_searches": [],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [],
  "blueprint_kind": "lemma",
@@ -48,5 +71,21 @@
   }
  },
  "chapter": "sec-abelian-varieties",
- "unit": "sk-prop-av-lang-steinberg"
+ "unit": "sk-prop-av-lang-steinberg",
+ "split_report": {
+  "date": "2026-10-11",
+  "item": "lem-sc-artin-schreier-k",
+  "worker": "stage1",
+  "summary": "Split the imported Artin–Schreier statement into the existing field-kernel result and the exact sorry-free project declaration for surjectivity. The item combines those two statements; no mathematical clause was weakened.",
+  "blueprint": "Realizes the sole proof paragraph: the algebraically closed root argument supplies surjectivity, and the fixed-point equation identifies the kernel with the prime field."
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-ask2644",
+  "group": "H1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-ask2644 (reviewer sub-agent of L); spot-checked: Read packet; sed of slopmaster2 IsAlgClosed/Basic.lean:185-197 (surjective_pow_sub_self, sorryfree OK, surjectivity only) and Mathlib IsAlgClosed.exists_root (Basic.lean:78); grep mathlib for ArtinSchreier/artinSchreier/surjective_pow_sub_self: no hits, so no MATHLIB leaf for the whole item. Kernel node lem-sc-field-artin-schreier-kernel (leaf Subfield.mem_bot_iff_pow_eq_self) states the fixed-point clause with p prime, a generic field tool (C7 ok). FIX more, RETURN less: (1) B-class (d)/B10 overreach: new helper lem-sc-artin-schreier-surjective is two lines from the definition of algebraically closed (X^p-X-a nonconstant has a root) and its statement cited [def-weil-field] for 'algebraically closed'; dropped it and folded Step 1 into an elementary step citing def-weil-algebraic-closure and def-pc-field-characteristic. (2) E/C4: Step 2 applied the kernel node, which assumes p prime, without deriving primality from char p>0; added the elementary derivation. proof_deps corrected.; 1 file(s) fixed by the reviewer"
+ },
+ "lead_note": "2026-10-10 L (R-ask2644): slopmaster2 IsAlgClosed.surjective_pow_sub_self (docstring names this item) is sorry-free but states only the surjectivity clause, so it is not an attachment of the item; no single Mathlib declaration states the item (grep ArtinSchreier/artinSchreier/surjective_pow_sub_self in mathlib: 0 hits)."
 }

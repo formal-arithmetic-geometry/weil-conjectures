@@ -2701,3 +2701,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 21:38 L: merged deliver/F1/lem-pc-tower-enough-injectives (reviewer FIX; first push; new nodes: 1)
 - 21:39 UTC L deleted deliver/C1/lem-pc-representable-unique (abandoned after the Mathlib match); notice in C1 returns
 - 21:39 L: merged deliver/C1/def-nagata-directed-finite-upper-bound (reviewer FIX; first push; new nodes: 0)
+- 21:40 L: merged deliver/H1/lem-sc-artin-schreier-k (reviewer FIX; first push; new nodes: 0)
