@@ -24,9 +24,54 @@
   "def-pc-fibre-product",
   "def-weil-irreducible-components"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Let $p:U\\times_{\\operatorname{Spec}K}V\\to V$ be the second projection [def-pc-fibre-product]. (a) $p$ is open: it is the base change of the structure morphism $U\\to\\operatorname{Spec}K$ along $V\\to\\operatorname{Spec}K$ [def-pc-base-change], so [lem-sc-scheme-over-field-universally-open] applied to the $K$-scheme $U$ and $S=V$ says that $p$ is an open map. (b) For $y\\in V$ with residue field $\\kappa(y)$ [def-weil-residue-field], the scheme-theoretic fibre $(U\\times_{\\operatorname{Spec}K}V)\\times_V\\operatorname{Spec}\\kappa(y)$ is, by the universal property of fibre products [def-pc-fibre-product] (pasting of cartesian squares), isomorphic to the base change $U_{\\kappa(y)}=U\\times_{\\operatorname{Spec}K}\\operatorname{Spec}\\kappa(y)$ along the field extension $\\kappa(y)/K$ [def-pc-field-extension], which is irreducible because $U$ is geometrically irreducible [def-pc-geometrically-irreducible]. By [def-pc-scheme-fibre] the first projection of the scheme-theoretic fibre is a homeomorphism onto the set-theoretic fibre $p^{-1}(y)$, so $p^{-1}(y)$ is irreducible [def-weil-irreducible-components] for every $y\\in V$.",
+   "uses": [
+    "lem-sc-scheme-over-field-universally-open",
+    "def-pc-base-change",
+    "def-pc-fibre-product",
+    "def-weil-residue-field",
+    "def-pc-field-extension",
+    "def-pc-geometrically-irreducible",
+    "def-pc-scheme-fibre",
+    "def-weil-irreducible-components"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 038F (lemma-bijection-irreducible-components), proof: fibres irreducible as base changes by field extensions, Schemes Lemma 01K1, Morphisms Lemma 0383"
+   }
+  },
+  {
+   "text": "By step 1 the continuous map $p$ of underlying spaces is open and all of its fibres $p^{-1}(y)$ are irreducible. Hence [lem-sc-open-map-irreducible-fibres-components] applies to $p$: $T\\mapsto p^{-1}(T)$ is a bijection from the irreducible components of $V$ to those of $U\\times_{\\operatorname{Spec}K}V$ [def-weil-irreducible-components], with inverse $W\\mapsto p(W)$. This is the bijection induced by the projection.",
+   "uses": [
+    "lem-sc-open-map-irreducible-fibres-components",
+    "def-weil-irreducible-components"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 038F (lemma-bijection-irreducible-components), proof, last sentence: Topology Lemma 037A"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sc-scheme-over-field-universally-open",
+  "def-pc-base-change",
+  "def-pc-fibre-product",
+  "def-weil-residue-field",
+  "def-pc-field-extension",
+  "def-pc-geometrically-irreducible",
+  "def-pc-scheme-fibre",
+  "def-weil-irreducible-components",
+  "lem-sc-open-map-irreducible-fibres-components"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/varieties.tex",
+  "place": "Varieties, Lemma 038F (lemma-bijection-irreducible-components), proof"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -51,12 +96,28 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-sc-irreducible-product-over-field",
   "by": "worker",
   "date": "2026-10-10"
  },
  "chapter": "sec-picard-framework",
- "unit": "sk-prop-jacobian"
+ "unit": "sk-prop-jacobian",
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "lem-sc-product-irreducible-components-bijection",
+  "worker": "stage1",
+  "summary": "Follows the Stacks proof of Tag 038F: step 1 shows the projection is open (Tag 0383) and has irreducible fibres (base changes of U by field extensions, homeomorphic to the set-theoretic fibres); step 2 applies the topological Tag 037A. (Reviewer R-pic replaced the delivered agent-written steps, which used Tags 0383, 01K1 and 037A without nodes, by this route; see the merge ledger.)",
+  "blueprint": "Realizes thm-sc-jacobian-representability proof step (4) 'Connectedness': the component-bijection input for the product of a geometrically irreducible scheme with an arbitrary scheme.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-pic",
+  "group": "M1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-pic (reviewer sub-agent of L); spot-checked: Source read: Stacks Varieties Lemma 038F (lemma-bijection-irreducible-components, varieties.tex, present in the checkout contrary to the report); the item statement (K field, U geometrically irreducible, V any K-scheme, projection U x_K V -> V bijective on irreducible components) agrees with it hypothesis by hypothesis and is unchanged. The delivered steps were agent-written and used three non-elementary facts with no node (C1): openness of the projection (Morphisms 0383), the set-theoretic fibre being the scheme fibre (Schemes 01K1), and the topological component bijection (Topology 037A); step 1's claim that the closure of the generic fibre is a component and step 2's 'the preceding construction contains W' were unjustified without them. FIX more, RETURN less: dag/nodes/sec-picard-framework/lem-sc-product-irreducible-components-bijection.json: proof, proof_deps, proof_origin, split_report.summary: steps replaced by the Stacks route: step 1 (p open by new node lem-sc-scheme-over-field-universally-open applied with S=V via def-pc-base-change; fibre over y is U_{kappa(y)} by pasting fibre squares [def-pc-fibre-product], irreducible by def-pc-geometrically-irreducible, homeomorphic to p^{-1}(y) by the existing def-pc-scheme-fibre which states 01K1), step 2 (new node lem-sc-open-map-irreducible-fibres-components gives T -> p^{-1}(T) with inverse W -> p(W)); proof_origin now by=document, Varieties 038F proof. NEW NODE lem-sc-scheme-over-field-universally-open (Morphisms 0383, statement-only, Mathlib grep: no direct lemma, only UniversallyOpen.of_flat UniversallyOpen.lean:147). NEW NODE lem-sc-open-map-irreducible-fibres-components (Topology 037A, statement-only; Mathlib irreducibleComponentsEquivOfIsPreirreducibleFiber Topology/Irreducible.lean:506 with @[stacks 037A], recorded as candidate leaf for the splitter, preirreducible fibres + surjective = irreducible fibres). Small cases: U=Spec K (identity), U=A^1 and V two points (two lines, two components), V empty (both sides empty); U nonempty since irreducible, so fibres nonempty and p surjective as 037A needs. Report faults noted, not fixed: it says varieties.tex is unavailable and lists a citations.json that is not in the commit. No tool_uses. Start Sat Oct 10 04:09:48 PM UTC 2026, end Sat Oct 10 04:11:43 PM UTC 2026.; 3 file(s) fixed by the reviewer; 2 statement node(s) added by the reviewer (FIX more, RETURN less)"
+ }
 }

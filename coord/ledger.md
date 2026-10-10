@@ -1916,3 +1916,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 16:11 L: merged deliver/F1/lem-sc-tensor-section-affine-open (reviewer PASS; first push; new nodes: 0)
 - 16:11 L: merged deliver/C1/lem-sc-leray-closed-pushforward-cohomology (reviewer FIX; after a return; new nodes: 1)
 - 16:11 L: merged deliver/H1/lem-sc-abelian-sheaf-short-exact-stalkwise (reviewer FIX; first push; new nodes: 3)
+- 16:12 L: merged deliver/M1/lem-sc-product-irreducible-components-bijection (reviewer FIX+NODE(2); first push; new nodes: 2)
