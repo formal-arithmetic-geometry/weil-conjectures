@@ -3,11 +3,11 @@
  "blueprint": {
   "is": "pqf-def-coherent",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "definition",
  "title": "Coherent and quasi-coherent modules",
- "statement": "Let $X$ be a scheme and $\\mathcal F$ an $\\mathcal O_X$-module.\n\n1. $\\mathcal F$ is *quasi-coherent* if every point of $X$ has an\naffine neighbourhood $\\operatorname{Spec}A=U$ with\n$\\mathcal F|_U=\\widetilde M$ for some $A$-module $M$.\n1. $\\mathcal F$ is *of finite type* if every point has a\nneighbourhood $U$ with a surjection\n$\\mathcal O_U^{\\oplus n}\\twoheadrightarrow\\mathcal F|_U$.\n1. $\\mathcal F$ is *coherent* if it is of finite type and for\nevery open $U$ and every map\n$\\mathcal O_U^{\\oplus n}\\to\\mathcal F|_U$ the kernel is of finite\ntype.\n\n(*Stacks Project, Cohomology of Sheaves, Chapter 20, Tag\n[01DW](https://stacks.math.columbia.edu/tag/01DW).*)",
+ "statement": "Let $X$ be a scheme and $\\mathcal F$ an $\\mathcal O_X$-module.\n\n1. $\\mathcal F$ is *quasi-coherent* if every point of $X$ has an\naffine neighbourhood $\\operatorname{Spec}A=U$ with\n$\\mathcal F|_U=\\widetilde M$ for some $A$-module $M$.\n1. $\\mathcal F$ is *of finite type* if every point has a\nneighbourhood $U$ with a surjection\n$\\mathcal O_U^{\\oplus n}\\twoheadrightarrow\\mathcal F|_U$.\n1. $\\mathcal F$ is *coherent* if it is of finite type and for\nevery open $U$ and every map\n$\\mathcal O_U^{\\oplus n}\\to\\mathcal F|_U$ the kernel is of finite\ntype.\n\n(*Stacks Project, Sheaves of Modules, Tags 01BV (coherent), 01B5 (finite type), 01BE (quasi-coherent); the affine-local form of quasi-coherence is Schemes, Tag 01IA.*)",
  "source": {
   "document": "literature/blueprint/master/blueprint/sec-abelian-varieties/sk-prop-av-pqf-finite/pqf-def-coherent.md",
   "place": "node pqf-def-coherent, order 526",
@@ -18,13 +18,73 @@
    }
   ]
  },
- "stmt_deps": [],
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-sheaf-of-modules-category"
+ ],
  "proof": [],
  "proof_deps": [],
  "proof_origin": null,
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "definition of coherent and quasi-coherent sheaf module finite type kernels",
+   "results": "SheafOfModules.IsFiniteType; SheafOfModules.IsFinitePresentation; SheafOfModules.QuasicoherentData.IsFinitePresentation; no predicate for the Stacks three-clause coherent definition",
+   "date": "2026-10-11",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "Scheme.Modules.isCoherent, SheafOfModules.IsQuasicoherent, SheafOfModules.IsFinitePresentation",
+   "results": "0 hits; unknown identifier Scheme.Modules.isCoherent",
+   "date": "2026-10-11",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "isCoherent|IsQuasicoherent|IsFinitePresentation AlgebraicGeometry/Modules",
+   "results": "Mathlib/AlgebraicGeometry/Modules/Tilde.lean:415,465-469; no exact coherent definition",
+   "date": "2026-10-11",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "coherent O_X-module defined as quasi-coherent and finite presentation",
+   "results": "service unavailable",
+   "date": "2026-10-11",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Stacks coherent sheaf finite type every finite free map kernel finite type on schemes",
+   "results": "SheafOfModules.IsFiniteType; SheafOfModules.instIsFiniteTypeOfIsFinitePresentation; no predicate with the Stacks kernel condition",
+   "date": "2026-10-11",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "SheafOfModules.IsFiniteType, IsFinitePresentation",
+   "results": "0 hits; unknown identifier IsFinitePresentation",
+   "date": "2026-10-11",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "class IsFiniteType|abbrev Scheme.Modules.isCoherent|def isCoherent AlgebraicGeometry/Modules",
+   "results": "no hits",
+   "date": "2026-10-11",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "quasi-coherent module locally affine tilde finite type kernel finite type",
+   "results": "service unavailable",
+   "date": "2026-10-11",
+   "verdict": "unavailable"
+  }
+ ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "import_flags": [],
  "blueprint_kind": "definition",
@@ -43,5 +103,21 @@
   }
  },
  "chapter": "sec-abelian-varieties",
- "unit": "sk-prop-av-pqf-finite"
+ "unit": "sk-prop-av-pqf-finite",
+ "split_report": {
+  "date": "2026-10-11",
+  "item": "pqf-def-coherent",
+  "worker": "stage1",
+  "summary": "Definition split with no new nodes. The ambient scheme and sheaf-of-modules notions are cited; the three defining clauses remain together because clause nodes would duplicate the item. The project declaration Scheme.Modules.isCoherent was checked and rejected as an attachment because it defines the weaker quasi-coherent-plus-finite-presentation predicate.",
+  "blueprint": "The item is itself the blueprint definition node; its three clauses are realized directly by the statement, with no proof steps or helper nodes.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-pdc2105",
+  "group": "F1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-pdc2105 (reviewer sub-agent of L); spot-checked: Clauses checked against literature/stacks-project modules.tex 01BV (coherent: finite type + finite-type kernels of O_U^n->F|_U), 01B5 (finite type), 01BE plus Schemes 01IA (affine tilde form of quasi-coherence): match. No duplicate definition node (grep of definition nodes for coherent/quasi-coherent/finite type). Mathlib: SheafOfModules.IsQuasicoherent/IsFiniteType/IsFinitePresentation exist but no Stacks-coherent class, so no mathlib_match; project isCoherent (qcoh+fp) correctly not attached. FIX more, RETURN less: source.external still read Tag 01DW (wrong tag, the report and second reading claimed it corrected) -> replaced by 01BV, 01B5, 01BE, 01IA; inline citation now names the tags. Note: the Stacks checkout is present, so the report's WANTED is moot.; 1 file(s) fixed by the reviewer"
+ }
 }
