@@ -5,8 +5,8 @@
  "statement": "Let $k\\subseteq K$ and $k\\subseteq L$ be field extensions [def-pc-field-extension] embedded in a common field $\\Omega$. Assume that $K/k$ is separable algebraic [def-weil-pbc-separable-algebraic-extension] and that $L/k$ is purely inseparable [def-weil-pbc-finite-purely-inseparable-extension]. Then the canonical $K$-algebra map $K\\otimes_kL\\to KL\\subseteq\\Omega$, $x\\otimes y\\mapsto xy$, is injective; equivalently, $K$ and $L$ are linearly disjoint over $k$.",
  "source": {
   "document": "literature/stacks-project/fields.tex",
-  "place": "Fields, Lemma Tag 030K (fields-lemma-separable-first) together with the algebraic-extension discussion in Section Tag 037H; the tensor/compositum formulation is the standard linear-disjointness reformulation used in Algebra, Lemma Tag 07QH.",
-  "url": "https://stacks.math.columbia.edu/tag/030K"
+  "place": "Fields, Definition Tag 09IF (fields-definition-linearly-disjoint), in Section Tag 09IC (fields-section-linearly-disjoint), defines linear disjointness as injectivity of K ⊗_k L → KL; the statement itself is not a lemma of the Stacks project (Tag 030K = fields-lemma-separable-first is the decomposition E/E_sep/F of an algebraic extension, and Tag 07QH = algebra-lemma-geometrically-regular-over-separable-algebraic is unrelated). The statement is Mathlib's IntermediateField.linearDisjoint_of_isPurelyInseparable_of_isSeparable (Mathlib/FieldTheory/PurelyInseparable/Tower.lean:99).",
+  "url": "https://stacks.math.columbia.edu/tag/09IF"
  },
  "stmt_deps": [
   "def-pc-field-extension",
@@ -37,10 +37,43 @@
    "results": "PurelyInseparable/Tower.lean:99 contains the tower lemma; FieldTheory/LinearDisjoint.lean contains domain/field consequences, but no theorem with the abstract statement above.",
    "date": "2026-10-10",
    "verdict": "no exact match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "separable extension and purely inseparable extension are linearly disjoint",
+   "results": "IntermediateField.linearDisjoint_of_isPurelyInseparable_of_isSeparable (Mathlib.FieldTheory.PurelyInseparable.Tower): for F ⊆ E ⊆ K with E/F purely inseparable and S an intermediate field of K/F with Algebra.IsSeparable F S, S.LinearDisjoint E; also IntermediateField.LinearDisjoint.of_basis_mul', IntermediateField.LinearDisjoint.iff_inf_eq_bot",
+   "date": "2026-10-10",
+   "verdict": "match: IntermediateField.linearDisjoint_of_isPurelyInseparable_of_isSeparable, read at Tower.lean:96-104; LinearDisjoint unfolds to injectivity of the multiplication map (see mathlib_match)"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "K ⊗_k L → Ω injective when K/k separable algebraic and L/k purely inseparable inside a common field",
+   "results": "IsPurelyInseparable.injective_comp_algebraMap, IsPurelyInseparable.injective_restrictDomain, IsPurelyInseparable.of_injective_comp_algebraMap (Mathlib.FieldTheory.PurelyInseparable.Basic), Subalgebra.LinearDisjoint.exists_field_of_isDomain_of_injective (Mathlib.RingTheory.LinearDisjoint), IsPurelyInseparable.bijective_algebraMap_of_isSeparable",
+   "date": "2026-10-10",
+   "verdict": "no direct hit; the LeanSearch hit is the match"
+  },
+  {
+   "tool": "local_search",
+   "query": "IntermediateField.linearDisjoint_of_isPurelyInseparable_of_isSeparable (project ~/weil-conjectures-slopmaster2)",
+   "results": "theorem in .lake/packages/mathlib/Mathlib/FieldTheory/PurelyInseparable/Tower.lean",
+   "date": "2026-10-10",
+   "verdict": "exists"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -n 'theorem IntermediateField.linearDisjoint_of_isPurelyInseparable_of_isSeparable' Mathlib/FieldTheory/PurelyInseparable/Tower.lean; grep -n 'protected abbrev LinearDisjoint' Mathlib/FieldTheory/LinearDisjoint.lean Mathlib/RingTheory/LinearDisjoint.lean; grep -n 'linearDisjoint_iff_injective' Mathlib/RingTheory/LinearDisjoint.lean",
+   "results": "Tower.lean:99 the theorem; FieldTheory/LinearDisjoint.lean:157 IntermediateField.LinearDisjoint A L := A.toSubalgebra.LinearDisjoint (IsScalarTower.toAlgHom F L E).range; RingTheory/LinearDisjoint.lean:155 Subalgebra.LinearDisjoint = Submodule.LinearDisjoint of the underlying submodules, and :232 Subalgebra.linearDisjoint_iff_injective : A.LinearDisjoint B ↔ Function.Injective (A.mulMap B)",
+   "date": "2026-10-10",
+   "verdict": "match (the earlier grep verdict 'no exact match' is withdrawn: the definition of LinearDisjoint is the injectivity of the tensor map)"
   }
  ],
- "mathlib_match": null,
- "status": "unsplit",
+ "mathlib_match": {
+  "declaration": "IntermediateField.linearDisjoint_of_isPurelyInseparable_of_isSeparable",
+  "file": "Mathlib/FieldTheory/PurelyInseparable/Tower.lean",
+  "line": 99,
+  "how": "specializes in one line: take Mathlib's (F, E, K, S) = (k, L, Ω, K) with K an intermediate field of Ω/k, Algebra.IsSeparable k K (def-weil-pbc-separable-algebraic-extension) and IsPurelyInseparable k L (def-weil-pbc-finite-purely-inseparable-extension, no finiteness needed); the conclusion K.LinearDisjoint L is by definition (FieldTheory/LinearDisjoint.lean:157, RingTheory/LinearDisjoint.lean:155) Subalgebra.LinearDisjoint of K and the image of L, which Subalgebra.linearDisjoint_iff_injective (RingTheory/LinearDisjoint.lean:232) turns into injectivity of Subalgebra.mulMap : K ⊗_k L → Ω, x ⊗ y ↦ xy; injectivity into Ω is injectivity into KL since the image lies in KL"
+ },
+ "status": "mathlib",
  "merged_into": null,
  "created": {
   "by": "worker",
@@ -60,5 +93,17 @@
   }
  },
  "chapter": "sec-proper-base-change",
- "unit": "sk-thm-p1"
+ "unit": "sk-thm-p1",
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "lem-weil-pbc-separable-purely-inseparable-linear-disjoint",
+  "worker": "stage1",
+  "summary": "Checked the cited tags: Fields 030K is fields-lemma-separable-first (separable/purely-inseparable decomposition of an algebraic extension) and Algebra 07QH is about geometric regularity over separable algebraic extensions; neither proves this statement, and the Stacks project contains no lemma that does (fields.tex only defines linear disjointness, Definition 09IF in Section 09IC). Source corrected to 09IF plus the Mathlib declaration. Mathlib states exactly this, for arbitrary (possibly infinite) separable algebraic K/k and purely inseparable L/k inside Ω: IntermediateField.linearDisjoint_of_isPurelyInseparable_of_isSeparable (Tower.lean:99), whose conclusion unfolds to injectivity of K ⊗_k L → Ω. Status set to mathlib with the match; no proof steps and no new nodes. The definition node def-weil-pbc-finite-purely-inseparable-extension defines both purely inseparable and finite purely inseparable extensions, so the statement's general hypothesis is covered; the citer lem-weil-pbc-separable-tensor-purely-inseparable-field uses only the finite case. Statement and stmt_deps kept."
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "result": "accepted",
+  "note": "Mathlib leaf: IntermediateField.linearDisjoint_of_isPurelyInseparable_of_isSeparable (FieldTheory/PurelyInseparable/Tower.lean:99, verified by L); source corrected to Fields Definition 09IF (the earlier tags 030K/07QH were wrong). No finiteness needed."
+ }
 }
