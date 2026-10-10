@@ -3013,3 +3013,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 23:50 L: merged deliver/G1/lem-sc-weakass-localization (reviewer FIX; first push; new nodes: 0)
 - 23:51 L: returned deliver/M1/lem-pur-left-derived-from-kflat-class (reviewer RETURN: 1 (D1/D2, no real split): the only step says 'apply the resolving-class criterion of Stacks Tag 06XN', but 06XN is the i)
 - 23:51 L: merged deliver/F1/lem-sc-cone-pseudo-coherent (reviewer PASS; first push; new nodes: 0)
+- 23:52 L: merged deliver/G1/lem-sc-associated-localization-fg (reviewer PASS; first push; new nodes: 0)

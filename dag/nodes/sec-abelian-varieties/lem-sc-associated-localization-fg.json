@@ -23,9 +23,53 @@
   "def-weil-pbc-localization-at-prime",
   "def-weil-pbc-module-localization"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Let $z=m/s\\in M_p$ have annihilator $pR_p$, with $s\\notin p$, and write $p=(f_1,\\ldots,f_n)$. If $a\\in\\operatorname{Ann}_R(m)$, then $a/1$ annihilates $m/s$, so $a/1\\in pR_p$; hence some $u\\notin p$ has $ua\\in p$, and primality of $p$ gives $a\\in p$. Thus $\\operatorname{Ann}_R(m)\\subseteq p$.",
+   "uses": [
+    "def-weil-pbc-localization-at-prime",
+    "def-weil-pbc-module-localization"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra, Lemma Tag 0310 (lemma-associated-primes-localize), proof of (2), lines 15411-15418"
+   }
+  },
+  {
+   "text": "For each generator $f_i$, the equality $f_i(m/s)=0$ in the localization means that there is $u_i\\notin p$ with $u_i f_i m=0$ in $M$. Put $u=u_1\\cdots u_n$ and $m'=um$. Then every $f_i$ kills $m'$, so $p m'=0$; moreover $u\\notin p$ and $m'\\ne0$, since $m'=0$ would make $u/1$ annihilate $m/s$ while $u/1\\notin pR_p$, contrary to $\\operatorname{Ann}_{R_p}(m/s)=pR_p$.",
+   "uses": [
+    "def-weil-pbc-localization-at-prime",
+    "def-weil-pbc-module-localization"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra, Lemma Tag 0310 (lemma-associated-primes-localize), proof of (2), lines 15411-15418"
+   }
+  },
+  {
+   "text": "Since $p m'=0$, we have $p\\subseteq\\operatorname{Ann}_R(m')$. Conversely, if $a m'=0$, then $au\\,m=0$, so $au\\in\\operatorname{Ann}_R(m)\\subseteq p$ by step 1. As $u\\notin p$ and $p$ is prime, $a\\in p$. Therefore $\\operatorname{Ann}_R(m')=p$, and $p$ is the annihilator of an element of $M$.",
+   "uses": [
+    "def-weil-pbc-localization-at-prime",
+    "def-weil-pbc-module-localization"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra, Lemma Tag 0310 (lemma-associated-primes-localize), proof of (2), lines 15411-15418"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-localization-at-prime",
+  "def-weil-pbc-module-localization"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Algebra, Lemma Tag 0310 (lemma-associated-primes-localize), proof of (2), lines 15411-15418"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -64,12 +108,28 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-sc-ass-weakass-fg-prime",
   "by": "worker",
   "date": "2026-10-10"
  },
  "chapter": "sec-abelian-varieties",
- "unit": "sk-def-av-ample-degree"
+ "unit": "sk-def-av-ample-degree",
+ "split_report": {
+  "date": "2026-10-11",
+  "item": "lem-sc-associated-localization-fg",
+  "worker": "stage1",
+  "summary": "Split Stacks Tag 0310(2) into the denominator containment, finite-generator denominator clearing, and annihilator equality calculations. No new nodes were needed; all nontrivial notions are supplied by the existing localization definitions.",
+  "blueprint": "Realizes lem-sc-hilbert-polynomial proof induction step: descend an associated prime from the localization using finite generation, as in Algebra Lemma 10.66.9.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-alf3152",
+  "group": "G1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-alf3152 (reviewer sub-agent of L); spot-checked: E: steps 1-3 are Stacks 0310(2) proof; finite generation used explicitly in step 2 (product of u_i over generators f_i); step 1 argues the contraction pR_p cap R = p from fraction equality and primality (C1 argued, no cite needed); step 3 exact annihilator equality. Class b: both cited definitions are the ones in the statement. C4: citer lem-sc-ass-weakass-fg-prime step 4 uses exactly this clause (pR_p = Ann of element of M_p, p f.g.). Class d: no new nodes, no duplication of lem-sc-weakass-localization (that is the radical/minimal version). Second reading missed no fault."
+ }
 }
