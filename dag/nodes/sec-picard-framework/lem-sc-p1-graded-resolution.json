@@ -3,7 +3,7 @@
  "blueprint": {
   "is": "lem-sc-p1-graded-resolution",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "Resolutions by twists on $\\mathbf P^1_k$",
@@ -23,30 +23,57 @@
   ]
  },
  "stmt_deps": [
-  "def-sc-p1-standard"
+  "def-sc-p1-standard",
+  "pqf-def-coherent"
  ],
  "proof": [
   {
-   "text": "By the description quoted in the statement (classical: the\ncoherent module $\\mathcal G$ is $\\widetilde M$ for a finitely\ngenerated graded module $M$ over $S=k[x_0,x_1]$), the graded\nHilbert syzygy theorem quoted in the statement gives a graded free\nresolution\n\n$$\n0\\longrightarrow F_2\\longrightarrow F_1\\longrightarrow F_0\n\\longrightarrow M\\longrightarrow0\n$$\n\nwith the $F_i$ finite direct sums of graded free modules\n$S(d)$; sheafifying (the functor $\\widetilde{(-)}$ is exact) and\nusing $\\widetilde{S(d)}=\\mathcal O(d)$, the twisted structure\nsheaf of [def-sc-p1-standard], which exists by\n[lem-sc-p1-twist-exists], gives the displayed exact sequence\nwith $\\mathcal E_i=\\widetilde{F_i}$.",
+   "text": "Apply [lem-sc-p1-coherent-proj-representation] to obtain a finitely generated graded $S=k[x_0,x_1]$-module $M$ and an isomorphism $\\widetilde M\\cong\\mathcal G$. Apply [lem-sc-p1-graded-syzygy] to get an exact graded resolution $0\\to F_2\\to F_1\\to F_0\\to M\\to0$ with each $F_i$ a finite direct sum of shifts $S(d)$. By [lem-sc-p1-proj-sheafification-exact], associated sheafification preserves this exact sequence. Finally [lem-sc-p1-proj-shifted-free-twist] identifies each $\\widetilde{F_i}$ with a finite direct sum of the twists $\\mathcal O(d)$, and the isomorphism $\\widetilde M\\cong\\mathcal G$ identifies the final term, yielding the required exact sequence.",
    "uses": [
-    "def-sc-p1-standard",
-    "lem-sc-p1-twist-exists"
+    "lem-sc-p1-coherent-proj-representation",
+    "lem-sc-p1-graded-syzygy",
+    "lem-sc-p1-proj-sheafification-exact",
+    "lem-sc-p1-proj-shifted-free-twist"
    ],
    "elementary": false
   }
  ],
  "proof_deps": [
-  "def-sc-p1-standard",
-  "lem-sc-p1-twist-exists"
+  "lem-sc-p1-coherent-proj-representation",
+  "lem-sc-p1-graded-syzygy",
+  "lem-sc-p1-proj-sheafification-exact",
+  "lem-sc-p1-proj-shifted-free-twist"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/master/blueprint/sec-picard-framework/sk-thm-picard-duality/lem-sc-p1-graded-resolution.md",
   "place": "## Proof"
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "resolution of coherent sheaf on projective line by finite sums of twists",
+   "results": "HTTP 500; no results returned",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "coherent sheaf projective line graded resolution by twists",
+   "results": "No matching theorem; only Proj structure-sheaf declarations",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "graded free resolution|sheafification exact|Proj shift under Mathlib",
+   "results": "No theorem matching the item",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [],
  "blueprint_kind": "lemma",
@@ -81,5 +108,20 @@
   }
  },
  "chapter": "sec-picard-framework",
- "unit": "sk-thm-picard-duality"
+ "unit": "sk-thm-picard-duality",
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "lem-sc-p1-graded-resolution",
+  "worker": "stage1",
+  "summary": "Expanded the imported one-paragraph argument into four cited lower-level statements: coherent Proj modules arise from finitely generated graded modules, the two-variable graded syzygy bound, exactness of Proj sheafification, and identification of shifted free modules with twists. Added the missing coherent-definition dependency and rewrote the proof as a four-node route.",
+  "blueprint": "Realizes the single proof paragraph beginning 'By the description quoted in the statement' in the blueprint node."
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-pgr",
+  "group": "K1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-pgr (reviewer sub-agent of L); spot-checked: Source: blueprint node lem-sc-p1-graded-resolution (master, sec-picard-framework/sk-thm-picard-duality), proof paragraph 'By the description quoted in the statement'; EGA II 2 / Hartshorne II.5 not local (WANTED). Item statement unchanged (only stmt_deps + pqf-def-coherent, which its 'coherent' needs); status imported->split, same_as [], split_report present; no maintainer field touched. One step citing four new in-unit nodes in the blueprint order: (1) lem-sc-p1-coherent-proj-representation gives f.g. Z-graded M with M~ = G (true: Hartshorne II.5.15, S=k[x0,x1] generated in degree 1, P noetherian); (2) lem-sc-p1-graded-syzygy gives 0->F2->F1->F0->M->0 with F_i finite sums of S(d) (true: graded Hilbert syzygy, gl.dim 2); (3) lem-sc-p1-proj-sheafification-exact is stated for short exact sequences; the 4-term sequence follows by splicing through K=ker(F0->M), elementary (C2); (4) lem-sc-p1-proj-shifted-free-twist: checked the convention against def-sc-p1-standard: the generator x0^d of S(d)_(x0) and x1^d of S(d)_(x1) satisfy x0^d=t^{-d}x1^d with t=x1/x0, i.e. g0=t^{-d}g1, so S(d)~ = O(d) with the node's sign convention (d=0, d=1 checked: g0=x0, g1=x1). No tool uses (all proof_deps in unit). DAG search: def-weil-pbc-proj-twisting-sheaf defines M~ on Proj and S(d); lem-weil-pbc-projective-space-twist-glued-identification is only P^n_Z, d=1, so the twist node is not a duplicate; blueprint_refs search syzygy / graded module Proj / tilde exact found nothing else. Slopmaster2: exists_exact_sigma_twist (Duality.lean 77-94) is sorry; no graded tilde/syzygy declarations, B10 not applicable. Fixes (B3, notion uncited, citation of an existing node): dag/nodes/sec-picard-framework/lem-sc-p1-proj-sheafification-exact.json: statement, stmt_deps: cite [def-weil-pbc-proj-twisting-sheaf] (1) for the associated sheaf M~; lem-sc-p1-proj-shifted-free-twist.json: statement, stmt_deps: cite it for S(d)~; lem-sc-p1-graded-syzygy.json: statement, stmt_deps: cite it (2) for the shift S(d); lem-sc-p1-coherent-proj-representation.json: statement, stmt_deps: cite it for M~ (inline description kept, 'of positive degree' added as in the definition). 14:45-14:46 UTC; 4 file(s) fixed by the reviewer"
+ }
 }
