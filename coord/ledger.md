@@ -1449,3 +1449,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 12:53 L: accepted lem-pc-dim-base-change: 3 steps, new node lem-pc-dimension-affine-open-cover (04MU), tool_uses lem-weil-pbc-dimension-preserved-field-extension; blueprint tag 00HS wrong (00P3)
 - 12:55 L: accepted lem-sc-divisor-module-local: 6 steps, new node lem-sc-function-field-sections-glue closed by Scheme.exists_germToFunctionField_eq (verified)
 - 12:56 L: lem-sc-pic-tangent-space flagged unreachable (dropped by the Jacobian split; unit clause only)
+- 2026-10-10, delivery of C1: lem-galois-fpqc-morphisms-descend merged from deliver/C1/lem-galois-fpqc-morphisms-descend (1 commit(s), 1 new node(s), spot-checked by L: L: 5 steps (base change of the covering, compatible morphism to W, representable descent, over S, base change equals beta) read; new Mathlib leaf for pullback-stability of fpqc coverings); claim closed

@@ -1,0 +1,85 @@
+{
+ "id": "lem-galois-fpqc-covering-base-change",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-galois-descent",
+   "place": "Proof, Step 1 (full faithfulness via faithfully flat descent of a morphism compatible with the descent data): pull the fpqc covering back along the source scheme before applying representable descent",
+   "via": [
+    "lem-galois-fpqc-morphisms-descend"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "An fpqc covering remains an fpqc covering after base change",
+ "statement": "Let $S$ and $U$ be schemes [def-pc-scheme], let $g:U\\to S$ be a morphism, and let $(f_i:X_i\\to S)_{i\\in I}$ be an fpqc covering [def-weil-pbc-fpqc-covering]. Form the fibre products $U\\times_S X_i$ [def-pc-fibre-product] and let $q_i:U\\times_S X_i\\to U$ be their first projections. Then $(q_i)_{i\\in I}$ is an fpqc covering of $U$.",
+ "source": {
+  "document": "literature/stacks-project/topologies.tex",
+  "place": "Topologies, Lemma Tag 022D (lemma-fpqc), part (3), lines 3105-3147"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-pbc-fpqc-covering",
+  "def-pc-fibre-product"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "fpqc covering of schemes remains a covering after base change",
+   "results": "CategoryTheory.Precoverage.IsStableUnderBaseChange and AlgebraicGeometry.Scheme.instIsStableUnderBaseChangePrecoverageOfIsJointlySurjectivePreservingOfIsStableUnderBaseChange; generic framework",
+   "date": "2026-10-10",
+   "verdict": "match via fpqcPrecoverage instance"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Precoverage.IsStableUnderBaseChange",
+   "results": "CategoryTheory.Precoverage.mem_coverings_of_isPullback, Mathlib/CategoryTheory/Sites/Precoverage.lean; applies to fpqcPrecoverage via the derived instance in Fpqc.lean:60-63",
+   "date": "2026-10-10",
+   "verdict": "match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "fpqc covering families are preserved under base change",
+   "results": "CategoryTheory.Precoverage.IsStableUnderBaseChange and scheme precoverage stability instances; generic framework",
+   "date": "2026-10-10",
+   "verdict": "match via fpqcPrecoverage instance"
+  },
+  {
+   "tool": "grep",
+   "query": "rg -n 'fpqcPrecoverage|IsStableUnderBaseChange' Mathlib/AlgebraicGeometry/Sites/Fpqc.lean",
+   "results": "Fpqc.lean:60-63 defines fpqcPrecoverage = propQCPrecoverage @Flat and derives Precoverage.IsStableUnderBaseChange; Precoverage.lean's mem_coverings_of_isPullback gives the stated base-change covering",
+   "date": "2026-10-10",
+   "verdict": "match; Fpqc.lean:56-63 and Precoverage.mem_coverings_of_isPullback read"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "CategoryTheory.Precoverage.mem_coverings_of_isPullback",
+  "file": "Mathlib/CategoryTheory/Sites/Precoverage.lean",
+  "line": 132,
+  "how": "The lemma at Precoverage.lean:132 takes a covering family and returns the displayed pullback family as a covering when `J.IsStableUnderBaseChange`; set J to `AlgebraicGeometry.Scheme.fpqcPrecoverage`, whose stability instance is derived in Mathlib/AlgebraicGeometry/Sites/Fpqc.lean:60-63. The covering notion is [def-weil-pbc-fpqc-covering], whose Mathlib match is `fpqcPrecoverage`."
+ },
+ "status": "mathlib",
+ "created": {
+  "by": "worker",
+  "item": "lem-galois-fpqc-morphisms-descend",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-curve-estimates",
+ "unit": "sk-prop-h2"
+}

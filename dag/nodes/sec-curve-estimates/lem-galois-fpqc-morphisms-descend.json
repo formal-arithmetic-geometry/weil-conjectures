@@ -21,9 +21,57 @@
   "def-weil-pbc-fpqc-covering",
   "def-pc-fibre-product"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Let $q:U_X=U\\times_SX\\to U$ be the first projection. Apply [lem-galois-fpqc-covering-base-change] to the one-member fpqc covering $\\{f:X\\to S\\}$ and the structure map $U\\to S$. Thus $\\{q\\}$ is an fpqc covering of $U$. Its double overlap is canonically $U_X\\times_UU_X\\cong U\\times_S(X\\times_SX)=U\\times_SX_2$ by the universal property of [def-pc-fibre-product]; the two projections to $U_X$ correspond to the pullbacks along $\\mathrm{pr}_0,\\mathrm{pr}_1:X_2\\to X$.",
+   "uses": [
+    "lem-galois-fpqc-covering-base-change",
+    "def-pc-fibre-product"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Take a $\\beta:U_X\\to W_X$ over $X$ satisfying the displayed datum equation, and put $\\gamma:U_X\\xrightarrow{\\beta}W_X\\to W$. Under the overlap identification of Step 1, each $\\mathrm{can}$ is the identity on the $U$ or $W$ component while changing the chosen projection to $X$. Compose $\\mathrm{can}_W\\circ\\mathrm{pr}_0^*\\beta=\\mathrm{pr}_1^*\\beta\\circ\\mathrm{can}_U$ with the projection to $W$: this gives $\\gamma\\circ r_0=\\gamma\\circ r_1$ as morphisms $U_X\\times_UU_X\\to W$, where $r_0,r_1$ are the two projections. This is equality of morphisms, not only of their maps on points.",
+   "uses": [
+    "def-pc-fibre-product"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Apply [lem-weil-pbc-fpqc-representable-descent] to the fpqc covering $\\{q:U_X\\to U\\}$ of Step 1, with target scheme $W$ and compatible morphism $\\gamma$ of Step 2. It gives a unique scheme morphism $\\alpha:U\\to W$ such that $\\alpha\\circ q=\\gamma$.",
+   "uses": [
+    "lem-galois-fpqc-covering-base-change",
+    "lem-weil-pbc-fpqc-representable-descent"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The morphism $\\alpha$ is over $S$. Indeed, writing $p_U:U\\to S$ and $p_W:W\\to S$, the maps $p_W\\circ\\alpha$ and $p_U$ have equal composites with $q$: $p_W\\circ\\alpha\\circ q=p_W\\circ\\gamma=f\\circ(U_X\\to X)=p_U\\circ q$, because $\\beta$ is over $X$ and $U_X$ is the fibre product. Uniqueness in [lem-weil-pbc-fpqc-representable-descent], applied to the same fpqc cover with target $S$, gives $p_W\\circ\\alpha=p_U$.",
+   "uses": [
+    "lem-weil-pbc-fpqc-representable-descent",
+    "def-pc-fibre-product"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Since $\\alpha$ is over $S$, its base change $\\alpha_X$ has projections to $W$ and $X$ equal to $\\alpha\\circ q=\\gamma$ and $U_X\\xrightarrow{\\beta}W_X\\to X=U_X\\to X$, respectively. The universal property of $W_X=W\\times_SX$ in [def-pc-fibre-product] therefore gives $\\alpha_X=\\beta$. Conversely, every $S$-morphism $\\alpha$ has datum-compatible base change: on $U\\times_SX_2$ both sides of the datum equation have the same projections to $W$ (both $\\alpha$ on the $U$ component) and to $X_2$ (the identity), hence agree by the fibre-product universal property. If $\\alpha_X=\\alpha'_X$, their composites to $W$ give $\\alpha\\circ q=\\alpha'\\circ q$; uniqueness in [lem-weil-pbc-fpqc-representable-descent] for the cover $\\{q\\}$ gives $\\alpha=\\alpha'$. This proves the claimed bijection.",
+   "uses": [
+    "def-pc-fibre-product",
+    "lem-weil-pbc-fpqc-representable-descent"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-galois-fpqc-covering-base-change",
+  "def-pc-fibre-product",
+  "lem-weil-pbc-fpqc-representable-descent"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/descent.tex",
+  "place": "Descent, Lemma Tag 02W0 (lemma-refine-coverings-fully-faithful), last sentence, via Tag 0241 (lemma-fully-faithful), specialized to the trivial cover and the fpqc singleton; Tag 023Q supplies the morphism gluing"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -48,7 +96,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "worker",
@@ -68,5 +116,19 @@
   }
  },
  "chapter": "sec-curve-estimates",
- "unit": "sk-prop-h2"
+ "unit": "sk-prop-h2",
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "lem-galois-fpqc-morphisms-descend",
+  "worker": "C1",
+  "summary": "Split the full-faithfulness statement using the existing reviewed Mathlib leaf lem-weil-pbc-fpqc-representable-descent (Stacks 023Q) and the new Mathlib leaf for fpqc base change (Topologies 022D(3)). The five steps pull the cover back to U, translate compatibility with canonical data into an equality over the double overlap, descend the W-valued map, establish it is over S by uniqueness of descent to S, and prove base-change reconstruction plus injectivity using the fibre-product universal property. Checked Descent 02W0, 0241, 023Q and Topologies 022D; source Lean has no declaration tagged to this node. No statement or maintainer metadata changed.",
+  "blueprint": "lem-galois-descent, Proof, Step 1 (full faithfulness: a morphism compatible with the descent data descends). Steps 1-3 pull the covering back to the source, turn compatibility into equality on its overlap, and descend the map; Steps 4-5 establish that the descended map is over the base and reconstruct the original morphism, supplying full faithfulness for Step 1."
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "group": "C1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed by the lead of C1; spot-checked by L: L: 5 steps (base change of the covering, compatible morphism to W, representable descent, over S, base change equals beta) read; new Mathlib leaf for pullback-stability of fpqc coverings"
+ }
 }
