@@ -1864,7 +1864,8 @@ theorem exists_intermediateField_descentDatum {ks : Type u} [Field ks] [Algebra 
     have := geometricallyIntegral_of_representableBy_picardFunctorDegree 0 Js (rs.ofIso e)
     obtain ⟨hJK, -, -⟩ := isProper_smoothOfRelativeDimension_geometricallyIntegral_of_isPullback
       JK.hom Js.hom q hq
-      (arithmeticGenus ks (pullback (C ↘ Spec (.of k)) (Spec.map (CommRingCat.ofHom (algebraMap k ks)))))
+      (arithmeticGenus ks
+        (pullback (C ↘ Spec (.of k)) (Spec.map (CommRingCat.ofHom (algebraMap k ks)))))
     have : UniversallyClosed (i ≫ ℙ(β; Spec (.of K)) ↘ Spec (.of K)) := by
       rw [hif]
       infer_instance
