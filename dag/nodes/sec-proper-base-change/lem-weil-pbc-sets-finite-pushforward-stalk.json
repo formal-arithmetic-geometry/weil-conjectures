@@ -14,7 +14,7 @@
  },
  "kind": "statement",
  "title": "Stalk of a finite direct image of an etale sheaf of sets",
- "statement": "Let $f:X\\to Y$ be a finite morphism of schemes [def-weil-finite-integral-morphism], $H$ a sheaf of sets on $X_{\\Et}$ [def-weil-pbc-etale-sheaf-of-sets], with direct image $f_*H$, $(f_*H)(V)=H(V\\times_YX)$ for $V$ in $Y_{\\Et}$, and $\\bar y:\\operatorname{Spec}\\Omega\\to Y$ a geometric point [def-weil-geometric-point]. Let $P(\\bar y)$ be the set of geometric points $\\bar x:\\operatorname{Spec}\\Omega\\to X$ with $f\\circ\\bar x=\\bar y$. For $\\bar x\\in P(\\bar y)$ let $r_{\\bar x}:(f_*H)_{\\bar y}\\to H_{\\bar x}$ (stalks of [def-weil-pbc-geometric-stalks]) send the germ at a pointed etale neighbourhood $(V,\\bar v)$ of $\\bar y$ of $s\\in(f_*H)(V)=H(V\\times_YX)$ to the germ of $s$ at the pointed etale neighbourhood $(V\\times_YX,(\\bar v,\\bar x))$ of $\\bar x$ [def-pc-fibre-product]. Then $P(\\bar y)$ is finite and the map\\n$$(r_{\\bar x})_{\\bar x\\in P(\\bar y)}:(f_*H)_{\\bar y}\\longrightarrow\\prod_{\\bar x\\in P(\\bar y)}H_{\\bar x}$$\\nis bijective.",
+ "statement": "Let $f:X\\to Y$ be a finite morphism of schemes [def-weil-finite-integral-morphism], $H$ a sheaf of sets on $X_{\\Et}$ [def-weil-pbc-etale-sheaf-of-sets], with direct image $f_*H$, $(f_*H)(V)=H(V\\times_YX)$ for $V$ in $Y_{\\Et}$, and $\\bar y:\\operatorname{Spec}\\Omega\\to Y$ a geometric point [def-weil-geometric-point]. Let $P(\\bar y)$ be the set of geometric points $\\bar x:\\operatorname{Spec}\\Omega\\to X$ with $f\\circ\\bar x=\\bar y$. For $\\bar x\\in P(\\bar y)$ let $r_{\\bar x}:(f_*H)_{\\bar y}\\to H_{\\bar x}$ (stalks of [def-weil-pbc-geometric-stalks]) send the germ at a pointed etale neighbourhood $(V,\\bar v)$ of $\\bar y$ of $s\\in(f_*H)(V)=H(V\\times_YX)$ to the germ of $s$ at the pointed etale neighbourhood $(V\\times_YX,(\\bar v,\\bar x))$ of $\\bar x$ [def-pc-fibre-product]. Then $P(\\bar y)$ is finite and the map\n$$(r_{\\bar x})_{\\bar x\\in P(\\bar y)}:(f_*H)_{\\bar y}\\longrightarrow\\prod_{\\bar x\\in P(\\bar y)}H_{\\bar x}$$\nis bijective.",
  "source": {
   "document": "literature/stacks-project/etale-cohomology.tex",
   "place": "Proposition Tag 03QP (proposition-finite-higher-direct-image-zero) (1), first display (for F in Sh(X_etale)), and its proof (X x_Y Spec O^sh_{Y,ybar} is a finite disjoint union of spectra of strictly henselian local rings, one for each point over ybar; sections over it are the product of the stalks by Lemma Tag 03QO, which is stated for sheaves of sets); the map, implicit in Stacks, is the restriction of germs; sets version of lem-weil-pbc-finite-stalk-formula-restriction"
@@ -26,9 +26,166 @@
   "def-weil-pbc-geometric-stalks",
   "def-pc-fibre-product"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "*The strict henselization at $\\bar y$ and its geometric point.* Let $y\\in Y$ be the image of $\\bar y$ and $\\kappa(\\bar y)\\subset\\Omega$ the separable algebraic closure of $\\kappa(y)$ in $\\Omega$. Put $C=\\mathcal O^{\\mathrm{sh}}_{Y,\\bar y}=\\varinjlim A_V$ over the affine pointed etale neighbourhoods $(V=\\operatorname{Spec}A_V,\\bar v)$ of $\\bar y$, $Y^{\\mathrm{sh}}=\\operatorname{Spec}C$, with $c_V:Y^{\\mathrm{sh}}\\to V$ and $q:Y^{\\mathrm{sh}}\\to Y$ as in [def-weil-pbc-strict-henselization-limit]. By [lem-weil-pbc-strict-henselization-functoriality] (1) (for the scheme $Y$ and $\\bar x=\\bar y$): $C$ is a strictly henselian local ring [def-weil-pbc-henselian-terminology], whose maximal ideal we write $\\mathfrak m_C$; its residue field is identified with $\\kappa(\\bar y)$, which is separably closed; and, writing $\\bar y^{\\mathrm{sh}}:\\operatorname{Spec}\\Omega\\to\\operatorname{Spec}\\kappa(\\bar y)\\to Y^{\\mathrm{sh}}$ (inclusion $\\kappa(\\bar y)\\subset\\Omega$, then the closed point), $c_V\\circ\\bar y^{\\mathrm{sh}}=\\bar v$ for every affine $(V,\\bar v)$ and $q\\circ\\bar y^{\\mathrm{sh}}=\\bar y$. As a ring map, $\\bar y^{\\mathrm{sh}}$ is $\\chi_0:C\\to C/\\mathfrak m_C\\cong\\kappa(\\bar y)\\subset\\Omega$ [def-weil-affine-spectrum]; we regard $\\Omega$ as a $C$-algebra through $\\chi_0$. Let $X^{\\mathrm{sh}}=Y^{\\mathrm{sh}}\\times_YX$ [def-pc-fibre-product], with projections $f^{\\mathrm{sh}}:X^{\\mathrm{sh}}\\to Y^{\\mathrm{sh}}$ and $p:X^{\\mathrm{sh}}\\to X$, and let $G=p^{-1}H$, a sheaf of sets on $X^{\\mathrm{sh}}_{\\Et}$ [lem-weil-pbc-sets-etale-inverse-image-composition-units].",
+   "uses": [
+    "def-weil-pbc-strict-henselization-limit",
+    "lem-weil-pbc-strict-henselization-functoriality",
+    "def-weil-pbc-henselian-terminology",
+    "def-weil-affine-spectrum",
+    "def-pc-fibre-product",
+    "lem-weil-pbc-sets-etale-inverse-image-composition-units"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Proposition Tag 03QP (proposition-finite-higher-direct-image-zero), proof: 'Let X^sh_ybar denote the fiber product X x_Y Spec(O^sh_{Y,ybar})'"
+   }
+  },
+  {
+   "text": "*The stalk is the set of sections over $X^{\\mathrm{sh}}$ (Stacks: 'By Theorem 03Q9 the stalk ... is computed by $H^q(X^{sh}_{\\bar y},\\mathcal F)$', here $q=0$, sheaves of sets).* A finite morphism is affine [def-weil-finite-integral-morphism], hence quasi-compact and quasi-separated [def-weil-pbc-scheme-conventions]. So [lem-weil-pbc-sets-pushforward-stalk-strict-henselization] applies to $f$, $H$, $\\bar y$ (with the objects $C,Y^{\\mathrm{sh}},c_V,q,X^{\\mathrm{sh}},f^{\\mathrm{sh}},p$ of step 1): every element of $(f_*H)_{\\bar y}$ is the germ at an affine pointed etale neighbourhood, and the map $\\Theta:(f_*H)_{\\bar y}\\to G(X^{\\mathrm{sh}})$, $\\Theta(\\text{germ of }s\\text{ at }(V,\\bar v))=G(\\sigma_V)(p^*s)$, with $\\sigma_V=((c_V\\circ f^{\\mathrm{sh}},p),\\mathrm{id}):X^{\\mathrm{sh}}\\to(V\\times_YX)\\times_XX^{\\mathrm{sh}}$, is bijective.",
+   "uses": [
+    "def-weil-finite-integral-morphism",
+    "def-weil-pbc-scheme-conventions",
+    "lem-weil-pbc-sets-pushforward-stalk-strict-henselization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Proposition Tag 03QP (proposition-finite-higher-direct-image-zero), proof: 'By Theorem 03Q9 the stalk of R^qf_*F at ybar is computed by H^q_etale(X^sh_ybar, F)'"
+   }
+  },
+  {
+   "text": "*$X^{\\mathrm{sh}}$ is the spectrum of a finite $C$-algebra (Stacks: 'Since $f$ is finite, $X^{sh}_{\\bar y}$ is finite over $\\operatorname{Spec}(\\mathcal O^{sh}_{Y,\\bar y})$, thus $X^{sh}_{\\bar y}=\\operatorname{Spec}(A)$').* By [lem-weil-pbc-finite-morphism-permanence] (a) the base change $f^{\\mathrm{sh}}$ of the finite $f$ is finite, and by (b), $Y^{\\mathrm{sh}}$ being affine, $X^{\\mathrm{sh}}$ is affine; write $X^{\\mathrm{sh}}=\\operatorname{Spec}B$ [def-weil-affine-spectrum], $f^{\\mathrm{sh}}=\\operatorname{Spec}(\\beta)$ for a ring map $\\beta:C\\to B$. By [def-weil-finite-integral-morphism] (for the affine open $Y^{\\mathrm{sh}}$ itself, with inverse image $X^{\\mathrm{sh}}$) $B$ is a finitely generated $C$-module.",
+   "uses": [
+    "lem-weil-pbc-finite-morphism-permanence",
+    "def-weil-affine-spectrum",
+    "def-weil-finite-integral-morphism"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Proposition Tag 03QP (proposition-finite-higher-direct-image-zero), proof: 'Since f is finite, X^sh_ybar is finite over Spec(O^sh_{Y,ybar}), thus X^sh_ybar = Spec(A) for some ring A finite over O^sh_{Y,ybar}'"
+   }
+  },
+  {
+   "text": "*$B$ is a finite product of strictly henselian local rings (Stacks: 'Lemma 04GH implies that $A$ is a finite product of henselian local rings $A=A_1\\times\\dots\\times A_r$. Since the residue field of $\\mathcal O^{sh}_{Y,\\bar y}$ is separably closed the same is true for each $A_i$. Hence $A_i$ is strictly henselian').* $C$ is henselian (step 1), so by [lem-weil-pbc-finite-over-henselian-local-product] there are $r\\ge0$ and an isomorphism of $C$-algebras $B\\cong B_1\\times\\dots\\times B_r$ with each $(B_i,\\mathfrak n_i)$ a henselian local ring, finite as a $C$-module, $C\\to B_i$ local, and $\\kappa_i=B_i/\\mathfrak n_i$ a finite field extension of $C/\\mathfrak m_C\\cong\\kappa(\\bar y)$. Since $\\kappa(\\bar y)$ is separably closed (step 1), $\\kappa_i$ is separably closed by [lem-kun-sep-closed-finite-extension-sep-closed]; so each $B_i$ is strictly henselian [def-weil-pbc-henselian-terminology].",
+   "uses": [
+    "lem-weil-pbc-finite-over-henselian-local-product",
+    "lem-kun-sep-closed-finite-extension-sep-closed",
+    "def-weil-pbc-henselian-terminology"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Proposition Tag 03QP (proposition-finite-higher-direct-image-zero), proof: 'Lemma 04GH implies ... Hence A_i is strictly henselian'"
+   }
+  },
+  {
+   "text": "*The pieces (Stacks: 'This implies that $X^{sh}_{\\bar y}=\\coprod_{i=1}^r\\operatorname{Spec}(A_i)$').* Let $e_i\\in B$ be the idempotent corresponding to $(0,\\dots,1,\\dots,0)$ (the $1$ in place $i$); $e_ie_j=0$ for $i\\ne j$ and $\\sum_ie_i=1$. Put $U_i=D(e_i)\\subseteq X^{\\mathrm{sh}}$. By [lem-weil-pbc-spec-clopen-idempotent] each $U_i$ is open and closed; the $U_i$ are pairwise disjoint (a prime containing neither $e_i$ nor $e_j$ would not contain $e_ie_j=0$) and cover $X^{\\mathrm{sh}}$ (a prime containing all $e_i$ contains $\\sum e_i=1$). The principal open $U_i=D(e_i)$ is the open subscheme $\\operatorname{Spec}B[1/e_i]$ [def-weil-affine-spectrum], and $B[1/e_i]\\cong B_i$ (the projection $B\\to B_i$ sends $e_i$ to $1$ and has kernel $(1-e_i)B$, and $e_i(1-e_i)=0$). So $U_i\\cong\\operatorname{Spec}B_i$, with $B_i$ strictly henselian local (step 4); let $u_i\\in U_i$ be its closed point (the prime of $B$ that is the preimage of $\\mathfrak n_i$). If $r=0$ then $B=0$ and $X^{\\mathrm{sh}}=\\varnothing$.",
+   "uses": [
+    "lem-weil-pbc-spec-clopen-idempotent",
+    "def-weil-affine-spectrum"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Proposition Tag 03QP (proposition-finite-higher-direct-image-zero), proof: 'This implies that X^sh_ybar = coprod_{i=1}^r Spec(A_i)'"
+   }
+  },
+  {
+   "text": "*The geometric points over $\\bar y$ (the index set of the product in 03QP (1)).* (a) Let $P^{\\mathrm{sh}}$ be the set of $\\bar t:\\operatorname{Spec}\\Omega\\to X^{\\mathrm{sh}}$ with $f^{\\mathrm{sh}}\\circ\\bar t=\\bar y^{\\mathrm{sh}}$. For $\\bar x\\in P(\\bar y)$, $f\\circ\\bar x=\\bar y=q\\circ\\bar y^{\\mathrm{sh}}$ (step 1), so $\\bar x^{\\mathrm{sh}}=(\\bar y^{\\mathrm{sh}},\\bar x)$ is defined [def-pc-fibre-product] and lies in $P^{\\mathrm{sh}}$; conversely for $\\bar t\\in P^{\\mathrm{sh}}$, $f\\circ p\\circ\\bar t=q\\circ f^{\\mathrm{sh}}\\circ\\bar t=q\\circ\\bar y^{\\mathrm{sh}}=\\bar y$, so $p\\circ\\bar t\\in P(\\bar y)$, and $\\bar t=(f^{\\mathrm{sh}}\\bar t,p\\bar t)=(p\\circ\\bar t)^{\\mathrm{sh}}$. So $\\bar x\\mapsto\\bar x^{\\mathrm{sh}}$ is a bijection $P(\\bar y)\\to P^{\\mathrm{sh}}$ with inverse $\\bar t\\mapsto p\\circ\\bar t$. (b) By [def-weil-affine-spectrum] the elements of $P^{\\mathrm{sh}}$ are the $C$-algebra maps $\\chi:B\\to\\Omega$ ($\\Omega$ a $C$-algebra through $\\chi_0$, step 1). For such $\\chi$ the $\\chi(e_i)$ are idempotents of the field $\\Omega$, pairwise orthogonal with sum $1$, so exactly one $i$ has $\\chi(e_i)=1$ and $\\chi$ kills $(1-e_i)B$: $\\chi$ factors through a $C$-algebra map $\\chi_i:B_i\\to\\Omega$. Its image is a domain which is a finite-dimensional vector space over the field $\\chi_0(C)$, hence a field, so $\\ker\\chi_i$ is a maximal ideal of the local ring $B_i$, i.e. $\\ker\\chi_i=\\mathfrak n_i$, and $\\chi_i$ induces a field homomorphism $\\kappa_i\\to\\Omega$ extending $C/\\mathfrak m_C\\cong\\kappa(\\bar y)\\subset\\Omega$. By [lem-weil-pbc-sepclosed-finite-extension-unique-embedding] (with $K=\\kappa(\\bar y)$, separably closed by step 1, $L=\\kappa_i$ finite over $K$ by step 4, and $\\iota$ the inclusion into $\\Omega$) there is exactly one such field homomorphism $\\lambda_i:\\kappa_i\\to\\Omega$. Conversely $B\\to B_i\\to\\kappa_i\\xrightarrow{\\lambda_i}\\Omega$ is a $C$-algebra map. Hence $P^{\\mathrm{sh}}=\\{\\bar t_1,\\dots,\\bar t_r\\}$ with $\\bar t_i$ the geometric point given by $B\\to B_i\\to\\kappa_i\\xrightarrow{\\lambda_i}\\Omega$, these are pairwise distinct, and the image of $\\bar t_i$ is the point $u_i$ of step 5. With (a): $P(\\bar y)=\\{\\bar x_1,\\dots,\\bar x_r\\}$, $\\bar x_i=p\\circ\\bar t_i$, pairwise distinct, so $P(\\bar y)$ is finite and $i\\mapsto\\bar x_i$ is a bijection $\\{1,\\dots,r\\}\\to P(\\bar y)$ with $\\bar x_i^{\\mathrm{sh}}=\\bar t_i$.",
+   "uses": [
+    "def-pc-fibre-product",
+    "def-weil-affine-spectrum",
+    "lem-weil-pbc-sepclosed-finite-extension-unique-embedding"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Proposition Tag 03QP (proposition-finite-higher-direct-image-zero), proof and statement (1): the index set '{xbar : Spec(k) -> X, f(xbar) = ybar}' of the product, matched with the factors A_i"
+   }
+  },
+  {
+   "text": "*Sections over $X^{\\mathrm{sh}}$ are the product of the sections over the pieces.* The open immersions $U_i\\to X^{\\mathrm{sh}}$ are etale [lem-weil-pbc-open-immersion-etale] and jointly surjective (step 5), so $\\{U_i\\to X^{\\mathrm{sh}}\\}_{i=1}^r$ is a covering in $X^{\\mathrm{sh}}_{\\Et}$ [def-weil-pbc-etale-site]. By [lem-weil-pbc-open-fibre-product] $U_i\\times_{X^{\\mathrm{sh}}}U_j$ is the open subscheme $U_i\\cap U_j$ with both projections the inclusions: it is empty for $i\\ne j$, and $U_i$ with both projections $\\mathrm{id}$ for $i=j$. The empty family is a covering of the empty scheme $\\varnothing$ (an object of $X^{\\mathrm{sh}}_{\\Et}$), so the sheaf condition [def-weil-pbc-etale-sheaf-of-sets] makes $G(\\varnothing)\\to\\prod_{\\varnothing}=\\{*\\}$ bijective: $G(\\varnothing)$ has one element. Hence in the sheaf condition for $\\{U_i\\to X^{\\mathrm{sh}}\\}$ the two maps to $\\prod_{i,j}G(U_i\\times U_j)$ agree on every family (components $i\\ne j$ lie in the one-point set $G(\\varnothing)$, components $i=j$ are both $s_i$), so $\\rho:G(X^{\\mathrm{sh}})\\to\\prod_{i=1}^rG(U_i)$, $a\\mapsto(a|_{U_i})_i$, is bijective. (For $r=0$ this is again $G(\\varnothing)=\\{*\\}$.)",
+   "uses": [
+    "lem-weil-pbc-open-immersion-etale",
+    "def-weil-pbc-etale-site",
+    "lem-weil-pbc-open-fibre-product",
+    "def-weil-pbc-etale-sheaf-of-sets"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Proposition Tag 03QP (proposition-finite-higher-direct-image-zero), proof: sections over X^sh_ybar = coprod Spec(A_i) are the product of the sections over the Spec(A_i)"
+   }
+  },
+  {
+   "text": "*Each piece computes a stalk (Stacks: 'Part (1) follows from the corresponding statement of Lemma 03QO').* For each $i$, $U_i\\subseteq X^{\\mathrm{sh}}$ is an open subscheme isomorphic to $\\operatorname{Spec}B_i$ with $B_i$ strictly henselian local (steps 4, 5), and $\\bar t_i$ is a geometric point of $X^{\\mathrm{sh}}$ whose image is the closed point $u_i$ of $U_i$ (step 6). By [lem-weil-pbc-sets-strictly-henselian-open-sections-stalk] (with $T=X^{\\mathrm{sh}}$, $U=U_i$, $\\bar t=\\bar t_i$) the germ map $g_i:G(U_i)\\to G_{\\bar t_i}$ at $(U_i,\\bar t_i)$ is bijective.",
+   "uses": [
+    "lem-weil-pbc-sets-strictly-henselian-open-sections-stalk"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Proposition Tag 03QP (proposition-finite-higher-direct-image-zero), proof: 'Part (1) follows from the corresponding statement of Lemma 03QO'"
+   }
+  },
+  {
+   "text": "*Stalks of the inverse image.* By [lem-weil-pbc-sets-etale-inverse-image-stalk-germ] (with $e=p$, $T=X^{\\mathrm{sh}}$, $S=X$, $\\bar t=\\bar t_i$, so $\\bar s=p\\circ\\bar t_i=\\bar x_i$) there is a bijection $c_i:G_{\\bar t_i}=(p^{-1}H)_{\\bar t_i}\\to H_{\\bar x_i}$ with $c_i(\\text{germ of }p^*a\\text{ at }(W\\times_XX^{\\mathrm{sh}},(\\bar w,\\bar t_i)))=\\text{germ of }a\\text{ at }(W,\\bar w)$ for every pointed etale neighbourhood $(W,\\bar w)$ of $\\bar x_i$ and $a\\in H(W)$.",
+   "uses": [
+    "lem-weil-pbc-sets-etale-inverse-image-stalk-germ"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Proposition Tag 03QP (proposition-finite-higher-direct-image-zero), proof: the identification (F|_{X^sh})_{xbar^sh} = F_xbar, Lemma Tag 03Q1 (lemma-stalk-pullback) for sheaves of sets"
+   }
+  },
+  {
+   "text": "*The composite is $(r_{\\bar x})_{\\bar x}$; conclusion.* Let $\\Phi:(f_*H)_{\\bar y}\\to\\prod_{i=1}^rH_{\\bar x_i}$ be the composite of $\\Theta$ (step 2), $\\rho$ (step 7), $\\prod_ig_i$ (step 8) and $\\prod_ic_i$ (step 9); it is bijective. Let $\\alpha\\in(f_*H)_{\\bar y}$; by step 2 $\\alpha$ is the germ at an affine $(V,\\bar v)$ of some $s\\in(f_*H)(V)=H(V\\times_YX)$. Put $W=V\\times_YX$, an object of $X_{\\Et}$, and $\\theta=G(\\sigma_V)(p^*s)=\\Theta(\\alpha)$. The germ is unchanged by restriction along a morphism of pointed etale neighbourhoods [def-weil-pbc-geometric-stalks], [def-weil-pbc-category-colimit]: the inclusion $(U_i,\\bar t_i)\\to(X^{\\mathrm{sh}},\\bar t_i)$ and $\\sigma_V:(X^{\\mathrm{sh}},\\bar t_i)\\to(W\\times_XX^{\\mathrm{sh}},\\sigma_V\\circ\\bar t_i)$ are such morphisms, so $g_i(\\theta|_{U_i})$ is the germ of $p^*s$ at $(W\\times_XX^{\\mathrm{sh}},\\sigma_V\\circ\\bar t_i)$. Now [def-pc-fibre-product] $\\sigma_V\\circ\\bar t_i=((c_V\\circ f^{\\mathrm{sh}}\\circ\\bar t_i,p\\circ\\bar t_i),\\bar t_i)=((c_V\\circ\\bar y^{\\mathrm{sh}},\\bar x_i),\\bar t_i)=((\\bar v,\\bar x_i),\\bar t_i)$ by steps 1 and 6. By step 9 (with the pointed etale neighbourhood $(W,(\\bar v,\\bar x_i))$ of $\\bar x_i$ and $a=s$), $c_i(g_i(\\theta|_{U_i}))$ is the germ of $s$ at $(V\\times_YX,(\\bar v,\\bar x_i))$, which is $r_{\\bar x_i}(\\alpha)$ by the definition of $r_{\\bar x_i}$ in the statement. Hence $\\Phi=(r_{\\bar x_i})_{i=1}^r$. Since $i\\mapsto\\bar x_i$ is a bijection $\\{1,\\dots,r\\}\\to P(\\bar y)$ (step 6), $P(\\bar y)$ is finite and $(r_{\\bar x})_{\\bar x\\in P(\\bar y)}:(f_*H)_{\\bar y}\\to\\prod_{\\bar x\\in P(\\bar y)}H_{\\bar x}$ is $\\Phi$ up to this reindexing, hence bijective.",
+   "uses": [
+    "def-weil-pbc-geometric-stalks",
+    "def-weil-pbc-category-colimit",
+    "def-pc-fibre-product"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Proposition Tag 03QP (proposition-finite-higher-direct-image-zero), proof, statement (1), first display (F in Sh(X_etale)); the map, implicit in Stacks, is the restriction of germs"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-strict-henselization-limit",
+  "lem-weil-pbc-strict-henselization-functoriality",
+  "def-weil-pbc-henselian-terminology",
+  "def-weil-affine-spectrum",
+  "def-pc-fibre-product",
+  "lem-weil-pbc-sets-etale-inverse-image-composition-units",
+  "def-weil-finite-integral-morphism",
+  "def-weil-pbc-scheme-conventions",
+  "lem-weil-pbc-sets-pushforward-stalk-strict-henselization",
+  "lem-weil-pbc-finite-morphism-permanence",
+  "lem-weil-pbc-finite-over-henselian-local-product",
+  "lem-kun-sep-closed-finite-extension-sep-closed",
+  "lem-weil-pbc-spec-clopen-idempotent",
+  "lem-weil-pbc-sepclosed-finite-extension-unique-embedding",
+  "lem-weil-pbc-open-immersion-etale",
+  "def-weil-pbc-etale-site",
+  "lem-weil-pbc-open-fibre-product",
+  "def-weil-pbc-etale-sheaf-of-sets",
+  "lem-weil-pbc-sets-strictly-henselian-open-sections-stalk",
+  "lem-weil-pbc-sets-etale-inverse-image-stalk-germ",
+  "def-weil-pbc-geometric-stalks",
+  "def-weil-pbc-category-colimit"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Proposition Tag 03QP (proposition-finite-higher-direct-image-zero) (1), first display, and its proof; with Theorem Tag 03Q9 (theorem-higher-direct-images) in degree 0 for sheaves of sets, Algebra Lemma Tag 04GH (lemma-finite-over-henselian) and Lemma Tag 03QO (lemma-vanishing-etale-cohomology-strictly-henselian) for sheaves of sets; Lemma Tag 03Q1 (lemma-stalk-pullback) for the stalks of the inverse image"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -53,7 +210,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "worker",
@@ -73,5 +230,12 @@
   }
  },
  "chapter": "sec-proper-base-change",
- "unit": "sk-thm-iff"
+ "unit": "sk-thm-iff",
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "lem-weil-pbc-sets-finite-pushforward-stalk",
+  "worker": "stage1",
+  "summary": "Proof written in ten steps after the proof of Stacks 03QP (1), first display (sheaves of sets): set up O^sh_{Y,ybar}, Y^sh, the closed geometric point ybar^sh with c_V o ybar^sh = vbar (lem-weil-pbc-strict-henselization-functoriality (1)) and X^sh = Y^sh x_Y X; the stalk (f_*H)_ybar is the set of sections of p^{-1}H over X^sh (new node, 03Q9 in degree 0 for sets, with the explicit map Theta through the sections sigma_V); X^sh = Spec B with B finite over C (finite permanence); B = prod B_i with B_i henselian local (new node 04GH), strictly henselian since the residue fields are finite over the separably closed kappa(ybar) (lem-kun-sep-closed-finite-extension-sep-closed); X^sh is the disjoint union of the clopen U_i = D(e_i) = Spec B_i; the geometric points xbar over ybar correspond bijectively to the factors (fibre product, idempotents, and the new Mathlib leaf: a finite extension of a separably closed field has exactly one embedding into Omega over it), which gives finiteness of P(ybar), a step Stacks leaves implicit; the sheaf condition for the disjoint covering (with G(empty) a point) gives the product; each factor is a stalk by the new sets version of 03QO for a strictly henselian local open of a scheme; the stalk of p^{-1}H at tbar_i is H_{xbar_i} by lem-weil-pbc-sets-etale-inverse-image-stalk-germ; the composite is checked on germs to be (r_xbar). Statement unchanged except that a literal '\\n' (JSON-escaped backslash-n, which rendered as the TeX control sequence \\n) is replaced by a line break. Lean: none on slopmaster2 (rule 0: AlgebraicGeometry.Etale.stalkIsoPi / isIso_piLift_stalkRestrict are for abelian Grothendieck A only and follow another route, split neighbourhoods).",
+  "blueprint": "Realizes, in lemma-weil-pbc-proper-strict-henselian-h0's proof (Tag 0A0C through 09ZF, Remark 09Z3 and the proof of 09Z2), the use of Proposition 03QP in '(F_n)_ybar = (+)_{e in E^{n+1}} F_ybar by Proposition 03QP and Lemma 03Q1', for sheaves of sets and n = 0, 1: steps 1-10 are the proof of 03QP (1) itself (Theorem 03Q9 in degree 0, Lemma 04GH, the decomposition into strictly henselian pieces, Lemma 03QO), with the index set of the product (the geometric points over ybar) matched with the pieces in step 6."
+ }
 }

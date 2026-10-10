@@ -1,0 +1,76 @@
+{
+ "id": "lem-weil-pbc-sets-strictly-henselian-open-sections-stalk",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lemma-weil-pbc-proper-strict-henselian-h0",
+   "place": "proof, Tag 0A0C: the invocation of Tag 09ZF; within 09ZF, last sentence of the proof: 's' comes from a section of F over X by Remark 09Z3'; Remark 09Z3 is proved 'in exactly the same way' as Lemma 09Z2, by checking on stalks that G is the equalizer of f_{0,*}f_0^{-1}G => f_{1,*}f_1^{-1}G; within the proof of 09Z2 the sentence '(F_n)_ybar = ⊕_{e∈E^{n+1}} F_ybar by Proposition 03QP and Lemma 03Q1', here for sheaves of sets and n = 0, 1; within that use of 03QP (1), the proof of 03QP: 'Part (1) follows from the corresponding statement of Lemma 03QO' (Gamma(S, F) = F_sbar for sheaves of sets), applied to each piece Spec(A_i) of X^sh_ybar",
+   "via": [
+    "lem-weil-pbc-sets-finite-pushforward-stalk",
+    "lem-weil-pbc-sets-finite-surjective-descent",
+    "lem-weil-pbc-gabber-h0-etale-criterion"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Sections of an etale sheaf of sets over a strictly henselian local open are its stalk",
+ "statement": "Let $T$ be a scheme [def-pc-scheme], $U\\subseteq T$ an open subscheme with an isomorphism $U\\cong\\operatorname{Spec}R$ [def-weil-affine-spectrum] for a strictly henselian local ring $(R,\\mathfrak m,\\kappa)$ [def-weil-pbc-henselian-terminology], and $\\bar t:\\operatorname{Spec}\\Omega\\to T$ a geometric point [def-weil-geometric-point] whose image is the point $u\\in U$ corresponding to $\\mathfrak m$. The inclusion $j:U\\to T$ is etale, so $(U,\\bar t)$ (with $\\bar t$ regarded as a morphism to $U$) is a pointed etale neighbourhood of $\\bar t$ [def-weil-pbc-pointed-etale-neighbourhoods]. Then for every sheaf of sets $G$ on $T_{\\Et}$ [def-weil-pbc-etale-sheaf-of-sets] the germ map $G(U)\\to G_{\\bar t}$, $a\\mapsto$ the germ of $a$ at $(U,\\bar t)$ (stalk of [def-weil-pbc-geometric-stalks]), is bijective. (For $U=T=\\operatorname{Spec}R$ this is Stacks 03QO for sheaves of sets; its abelian version is lem-weil-pbc-strictly-henselian-sections-stalk.)",
+ "source": {
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Lemma Tag 03QO (lemma-vanishing-etale-cohomology-strictly-henselian), 'In fact we have Gamma(S, F) = F_sbar for any sheaf of sets F', and its proof (an etale neighbourhood (W, wbar) receives a section through Theorem Tag 04GG/Theorem 'theorem-henselian' A = R x A'; hence the identity neighbourhood is cofinal); here run inside T for the open U (the etale neighbourhood W of tbar in T is replaced by W x_T U, an etale neighbourhood of tbar over U)"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-affine-spectrum",
+  "def-weil-pbc-henselian-terminology",
+  "def-weil-geometric-point",
+  "def-weil-pbc-pointed-etale-neighbourhoods",
+  "def-weil-pbc-etale-sheaf-of-sets",
+  "def-weil-pbc-geometric-stalks"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "global sections of etale sheaf on spectrum of strictly henselian local ring equal stalk at closed point",
+   "results": "Scheme.germ_stalkClosedPointTo_Spec, ΓSpecIso_hom_stalkClosedPointIso_inv, germ_stalkClosedPointIso_hom (Mathlib.AlgebraicGeometry.Stalk: structure sheaf only), StructureSheaf.toOpen_Γgerm_apply",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "sections of a sheaf on the small etale site over a strictly henselian local scheme equal the stalk",
+   "results": "AlgebraicGeometry.germ_stalkClosedPointIso_hom, Scheme.stalkClosedPointTo, Scheme.fromSpecStalk_appTop, Scheme.germ_stalkClosedPointTo (Zariski structure sheaf only)",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -n 'theorem\\|def \\|lemma' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicGeometry/Sites/EtalePoint.lean; grep -rn 'StrictlyHenselian' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib",
+   "results": "EtalePoint.lean: exists_fac_of_etale_of_isSepClosed (line 37: etale X -> S with S = Spec of a separably closed field has a section through a point), pointSmallEtale, conservativity; no strictly henselian rings in Mathlib; slopmaster2: no Type-valued version (lem-weil-pbc-strictly-henselian-sections-stalk, abelian, has Lean state none)",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-sets-finite-pushforward-stalk",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-iff"
+}
