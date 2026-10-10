@@ -26,9 +26,45 @@
  "stmt_deps": [
   "def-weil-pbc-normal-ring"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Let $x\\in K$ be integral over $A$. If $x=0$, then $x\\in A$. Otherwise, choose a monic equation $x^n+a_{n-1}x^{n-1}+\\cdots+a_0=0$ with $n\\geq1$ and all $a_i\\in A$. Such an equation exists by the definition of integral, and degree zero is impossible because $K$ is a field.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra, Lemma Tag 00IC (lemma-valuation-ring-normal), statement; elementary argument from the displayed valuation criterion"
+   }
+  },
+  {
+   "text": "The valuation-ring hypothesis gives $x\\in A$ or $y=x^{-1}\\in A$. In the first case there is nothing to prove. In the second, multiply the monic equation by $x^{-(n-1)}$ to obtain $x=-\\sum_{i=0}^{n-1}a_i y^{n-1-i}\\in A$, since every term on the right lies in $A$. This formula also covers $n=1$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra, Lemma Tag 00IC (lemma-valuation-ring-normal), conclusion; direct proof from the equivalent valuation criterion in the node statement"
+   }
+  },
+  {
+   "text": "Thus every element of the fraction field integral over $A$ lies in $A$. Together with the assumed domain property, this is exactly that $A$ is a normal domain [def-weil-pbc-normal-ring].",
+   "uses": [
+    "def-weil-pbc-normal-ring"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra, Lemma Tag 00IC (lemma-valuation-ring-normal), conclusion"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-normal-ring"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Algebra, Lemma Tag 00IC, statement; direct monic-equation proof for the equivalent valuation criterion stated here"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -53,7 +89,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "worker",
@@ -73,5 +109,19 @@
   }
  },
  "chapter": "sec-proper-base-change",
- "unit": "sk-thm-p1"
+ "unit": "sk-thm-p1",
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "lem-weil-pbc-valuation-ring-normal",
+  "worker": "stage1",
+  "summary": "Read Stacks Algebra Lemma 00IC. The node uses the x-or-inverse characterization of a valuation ring rather than the maximal-dominating-ring characterization in the source, so a direct integral-equation proof gives normality in three elementary steps. No new node is needed; the definition of a normal domain is the sole proof dependency. The slopmaster2 source has no exact declaration for this item.",
+  "blueprint": "The normal-domain input under step 4 of lem-weil-pbc-normal-constant-generic: the strict henselization is normal via Stacks 06DI; valuation rings being normal supports the 00PD one-dimensional regular-to-normal branch beneath that input."
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "group": "E1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed by the lead of E1; spot-checked by L: L: 00IC, the monic equation multiplied by x^{-(n-1)}; 0 new"
+ }
 }

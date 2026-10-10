@@ -1410,3 +1410,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 12:27 L: merged H1 def-weil-pbc-finite-split-hypercover (definition, 0 new).
 - 12:28 L: accepted def-weil-pbc-simplicial-hom-object (definition split; new Mathlib leaf for representing objects).
 - 12:29 L: accepted lem-weil-pbc-double-complex-cokernel-homology-iso (00M1, 5 steps; 4 new nodes on zig-zags; source sign slip noted).
+- 2026-10-10, delivery of E1: lem-weil-pbc-valuation-ring-normal merged from deliver/E1/lem-weil-pbc-valuation-ring-normal (1 commit(s), 0 new node(s), spot-checked by L: L: 00IC, the monic equation multiplied by x^{-(n-1)}; 0 new); claim closed
