@@ -1,0 +1,82 @@
+{
+ "id": "lem-weil-pbc-dim-one-submodule-quotient-finite-length",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-normal-constant-generic",
+   "place": "step 4 of its split, through the proof of Tate's lemma 032P: 'By Lemma lemma-finite-extension-residue-fields-dimension-1 we see that κ(q)/κ(p) is a finite field extension'; the first sentence of the proof of that lemma (031F) invokes lemma-finite-length (00PE)",
+   "via": [
+    "lem-weil-pbc-dim-one-residue-field-extensions-finite",
+    "lem-weil-pbc-tate-n2-complete-principal",
+    "lem-weil-pbc-complete-local-nagata",
+    "lem-weil-pbc-analytically-unramified-n1",
+    "lem-weil-pbc-normal-nagata-monogenic-n1",
+    "lem-weil-pbc-nagata-universally-japanese",
+    "lem-weil-pbc-finite-type-z-domain-normalization-finite",
+    "lem-weil-pbc-smooth-over-normal-ring-normal",
+    "lem-weil-pbc-etale-over-normal-ring-normal",
+    "lem-weil-pbc-etale-colimit-normal-local-domain"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Quotient of a submodule of a finite-dimensional fraction-field space has bounded length",
+ "statement": "Let $R$ be a Noetherian [def-weil-pbc-noetherian-ring] local integral domain of Krull dimension one [def-weil-pbc-krull-dimension-ring], let $K$ be its fraction field, let $r$ be a nonnegative integer, and let $M\\subseteq K^{\\oplus r}$ be any $R$-submodule, without a finite-generation assumption. For every nonzero $x\\in R$, the $R$-module $R/xR$ has finite length [def-weil-pbc-module-length], and $M/xM$ has finite length with $\\mathrm{length}_R(M/xM)\\le r\\,\\mathrm{length}_R(R/xR)$.",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Algebra, Lemma Tag 00PE (lemma-finite-length, lines 29171-29235), statement and proof"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-noetherian-ring",
+  "def-weil-pbc-krull-dimension-ring",
+  "def-weil-pbc-module-length"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "one dimensional Noetherian local domain submodule of finite dimensional fraction field vector space quotient by nonzero element has finite length",
+   "results": "isFiniteLength_quotient_span_singleton (Mathlib.RingTheory.OrderOfVanishing.Basic) covers only R/xR; IsFiniteLength.below.of_simple_quotient and Module.length_ne_top_iff_finiteDimensionalOrder do not cover arbitrary M subset K^r",
+   "date": "2026-10-10",
+   "verdict": "no match for arbitrary, possibly infinitely generated M or the uniform bound"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Noetherian local domain of Krull dimension one, M submodule of K^r, x nonzero: M/xM has finite length bounded by r times length of R/xR",
+   "results": "isFiniteLength_quotient_span_singleton (only M=R); Module.length_quotient (identity relating quotient length to coheight); other results require a finite module",
+   "date": "2026-10-10",
+   "verdict": "no match for arbitrary M"
+  },
+  {
+   "tool": "grep",
+   "query": "rg 'isFiniteLength_quotient_span_singleton|submodule|finite.length' Mathlib/RingTheory/OrderOfVanishing/Basic.lean and Mathlib/RingTheory/Length.lean at pinned mathlib rev 0df444a360eaa60ab8c11dca51a86af692955474 (raw source fetched read-only); rg 'finite.length|length.*quotient' local slopmaster2 WeilConjectures/RingTheory",
+   "results": "OrderOfVanishing/Basic.lean:292-294 has isFiniteLength_quotient_span_singleton for R/xR only; Length.lean has Module.length and generic length identities; local source has no theorem for arbitrary M subset K^r",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-dim-one-residue-field-extensions-finite",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1"
+}

@@ -32,9 +32,70 @@
   "def-weil-pbc-krull-dimension-ring",
   "def-weil-pbc-localization-at-prime"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Since a one-dimensional local domain is not a field, its maximal ideal $\\mathfrak m$ contains a nonzero element $x$. The injection of fraction fields identifies $S$ with an $R$-submodule of $L$, and a $K$-basis identifies $L$ with $K^{\\oplus n}$ for $n=[L:K]$. Apply [lem-weil-pbc-dim-one-submodule-quotient-finite-length] to this submodule and $x$; $S/xS$ has finite length as an $R$-module.",
+   "uses": [
+    "lem-weil-pbc-dim-one-submodule-quotient-finite-length",
+    "def-pc-field-extension",
+    "def-weil-pbc-module-length"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra, Lemma Tag 031F (lemma-finite-extension-residue-fields-dimension-1), proof, first two sentences; Lemma Tag 00PE (lemma-finite-length)"
+   }
+  },
+  {
+   "text": "Because $x\\in\\mathfrak m$, $xS\\subseteq\\mathfrak mS$, and the quotient map $q:S/xS\\twoheadrightarrow B=S/\\mathfrak mS$ is surjective. For any strict chain $U_0\\subsetneq\\cdots\\subsetneq U_a$ of $R$-submodules of $B$, the preimages $q^{-1}(U_i)$ are $R$-submodules of $S/xS$ and remain strict: choose an element of $U_{i+1}\\setminus U_i$ and lift it through $q$. Hence $B$ has finite $R$-length [def-weil-pbc-module-length]. The action of $R$ on $B$ factors through the field $k=R/\\mathfrak m$, and its $R$-submodules are exactly its $k$-linear subspaces. If $B$ had arbitrarily large $k$-linearly independent families, their successive spans would give arbitrarily long strict chains, contrary to finite length. Thus $B$ is finite-dimensional over $k$.",
+   "uses": [
+    "def-weil-pbc-module-length"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra, Lemma Tag 031F, proof, sentences 3-5; Lemma Tag 00IY (lemma-dimension-is-length)"
+   }
+  },
+  {
+   "text": "The finite-dimensional $k$-algebra $B$ is Artinian by [lem-weil-pbc-finite-dim-algebra-artinian]. More precisely for the prime conclusions, $k$ is a local ring with the sole prime $(0)$ and $B$ is a finite $k$-algebra, so [lem-weil-pbc-finite-over-zero-dim-local-discrete-spectrum] gives finitely many prime ideals of $B$, all maximal. By [lem-weil-pbc-spec-quotient-homeomorphism-zero-locus] for $S\\to B$, these correspond to the primes $\\mathfrak n$ of $S$ containing $\\mathfrak m S$, equivalently those with inverse image $\\mathfrak m$ under $R\\to S$ (the inverse image is a proper ideal containing the maximal ideal $\\mathfrak m$). A prime $\\mathfrak n$ in this correspondence is maximal because $S/\\mathfrak n\\cong B/\\bar{\\mathfrak n}$ is a field. If $B=0$, there are no such primes. This proves (1) and (2).",
+   "uses": [
+    "lem-weil-pbc-finite-dim-algebra-artinian",
+    "lem-weil-pbc-finite-over-zero-dim-local-discrete-spectrum",
+    "lem-weil-pbc-spec-quotient-homeomorphism-zero-locus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra, Lemma Tag 031F, proof, sentences 5-7; Lemmas Tags 00J6 and 00JB"
+   }
+  },
+  {
+   "text": "For a prime $\\mathfrak n$ from Step 3, the field $S/\\mathfrak n=B/\\bar{\\mathfrak n}$ is a quotient of the finite-dimensional $k$-vector space $B$, hence has finite $k$-dimension. The field map $k\\to S/\\mathfrak n$ is injective, because it sends $1$ to $1$. Since $\\mathfrak n$ is maximal, every $s\\notin\\mathfrak n$ has nonzero image and thus becomes a unit in $S/\\mathfrak n$; the fraction formula $a/s\\mapsto(a\\bmod\\mathfrak n)/(s\\bmod\\mathfrak n)$ therefore gives a map $S_{\\mathfrak n}\\to S/\\mathfrak n$ [def-weil-pbc-localization-at-prime]. It is surjective since $a/1\\mapsto a\\bmod\\mathfrak n$, and its kernel is $\\mathfrak nS_{\\mathfrak n}$ since a fraction maps to zero exactly when its numerator lies in $\\mathfrak n$. Thus $S_{\\mathfrak n}/\\mathfrak nS_{\\mathfrak n}\\cong S/\\mathfrak n$ as $k$-algebras, proving (3).",
+   "uses": [
+    "def-weil-pbc-localization-at-prime"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra, Lemma Tag 031F, proof, final sentence"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-dim-one-submodule-quotient-finite-length",
+  "def-pc-field-extension",
+  "def-weil-pbc-module-length",
+  "lem-weil-pbc-finite-dim-algebra-artinian",
+  "lem-weil-pbc-finite-over-zero-dim-local-discrete-spectrum",
+  "lem-weil-pbc-spec-quotient-homeomorphism-zero-locus",
+  "def-weil-pbc-localization-at-prime"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Algebra, Lemma Tag 031F (lemma-finite-extension-residue-fields-dimension-1), proof; Lemma Tag 00PE for the submodule length bound"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -59,7 +120,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "worker",
@@ -80,5 +141,18 @@
  },
  "chapter": "sec-proper-base-change",
  "unit": "sk-thm-p1",
- "reviewed": "2026-10-10 L: statement checked against 031F"
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "group": "E1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed by the lead of E1; spot-checked by L: L: reviewed in full by a reviewer sub-agent (PASS): 031F and 00PE read, 4 steps and the new node checked hypothesis by hypothesis, small cases tested"
+ },
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "lem-weil-pbc-dim-one-residue-field-extensions-finite",
+  "worker": "stage1",
+  "summary": "Followed Stacks 031F: apply the 00PE finite-length bound to S inside L, pass to the finite-dimensional closed fibre S/mS, use the existing finite-algebra/discrete-spectrum and quotient-spectrum nodes to obtain finitely many maximal primes over m, then identify and bound their residue fields. Added only the smaller unsplit 00PE support node; no exact sorry-free slopmaster2 declaration was found for either statement.",
+  "blueprint": "The item's four steps realize the finite-residue-extension assertion quoted in step 4 of lem-weil-pbc-normal-constant-generic, through Tate's lemma 032P: 'By Lemma lemma-finite-extension-residue-fields-dimension-1 we see that κ(q)/κ(p) is a finite field extension'."
+ }
 }
