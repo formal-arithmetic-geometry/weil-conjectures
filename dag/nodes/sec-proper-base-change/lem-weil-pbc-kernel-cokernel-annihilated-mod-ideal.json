@@ -1,0 +1,68 @@
+{
+ "id": "lem-weil-pbc-kernel-cokernel-annihilated-mod-ideal",
+ "kind": "statement",
+ "title": "Kernel and cokernel killed by K^t: the maps \"fg\" and reduction modulo an ideal",
+ "statement": "Let $A$ be a commutative ring, $\\mathfrak K\\subseteq A$ an ideal, $t\\ge1$ an integer, and $u:M\\to N$ an $A$-linear map of $A$-modules [def-weil-finitely-generated-module] such that $\\mathfrak K^t\\operatorname{Ker}(u)=0$ and $\\mathfrak K^t\\operatorname{Coker}(u)=0$, where $\\operatorname{Coker}(u)=N/u(M)$ (equivalently: there is an exact sequence $0\\to T\\to M\\xrightarrow{u}N\\to Q\\to0$ of $A$-modules with $\\mathfrak K^tT=\\mathfrak K^tQ=0$). (a) For all $f,g\\in\\mathfrak K^t$ and every $y\\in N$ there is $x\\in M$ with $u(x)=fy$, and $gx$ does not depend on the choice of $x$; the resulting map $h_{f,g}=\\text{``}fg\\text{''}:N\\to M$, $y\\mapsto gx$, is $A$-linear and satisfies $h_{f,g}\\circ u=fg\\cdot\\mathrm{id}_M$ and $u\\circ h_{f,g}=fg\\cdot\\mathrm{id}_N$. (b) (Naturality.) If $u':M'\\to N'$ is another $A$-linear map with $\\mathfrak K^t\\operatorname{Ker}(u')=\\mathfrak K^t\\operatorname{Coker}(u')=0$ and $a:M\\to M'$, $b:N\\to N'$ are $A$-linear maps with $u'\\circ a=b\\circ u$, then $a\\circ h_{f,g}=h'_{f,g}\\circ b$ for all $f,g\\in\\mathfrak K^t$, where $h'_{f,g}$ is the map of (a) for $u'$. (c) For every ideal $J\\subseteq A$ the kernel and the cokernel of the induced map $\\bar u:M/JM\\to N/JN$ are annihilated by $\\mathfrak K^{2t}$. (d) (Converse criterion.) Let $v:P\\to R$ be any $A$-linear map of $A$-modules such that for all $f,g\\in\\mathfrak K^t$ there is an $A$-linear map $k:R\\to P$ with $k\\circ v=fg\\cdot\\mathrm{id}_P$ and $v\\circ k=fg\\cdot\\mathrm{id}_R$. Then $\\operatorname{Ker}(v)$ and $\\operatorname{Coker}(v)$ are annihilated by $\\mathfrak K^{2t}$.",
+ "source": {
+  "document": "literature/stacks-project/coherent.tex",
+  "place": "Cohomology of Schemes, Remark 0888 (remark-inverse-systems-kernel-cokernel-annihilated-by, line 6887), the commutative algebra fact of its proof (lines 6915-6928: the maps \"fg\": N -> M and the annihilation by K^{2t} modulo J); the naturality (b) and the converse criterion (d) are the facts the limit argument of the same remark (lines 6930-6936) uses, stated by an agent"
+ },
+ "stmt_deps": [
+  "def-weil-finitely-generated-module"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "linear map whose kernel and cokernel are annihilated by an ideal power; kernel and cokernel of the induced map modulo an ideal are annihilated by the square power",
+   "results": "LinearMap.reduceModIdeal, LinearMap.reduceModIdeal_apply (Mathlib.RingTheory.AdicCompletion.Functoriality: the map M/IM -> N/IN only), LinearMap.ker, Submodule.mapQ_pow, Submodule.factorPow, AlgHom.kerSquareLift, Ideal.powQuotPowSuccLinearEquivMapMkPowSuccPow: nothing on annihilators of kernel/cokernel",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "exact sequence 0 -> T -> M -> N -> Q -> 0 with T and Q annihilated by I^t, then kernel and cokernel of M/JM -> N/JN annihilated by I^{2t}",
+   "results": "AdicCompletion.map_exact (RingTheory.AdicCompletion.Exactness), QuotSMulTop.map_exact, QuotSMulTop.map_first_exact_on_four_term_exact_of_isSMulRegular_last, RingTheory.Sequence.map_first_exact_on_four_term_right_exact_of_isSMulRegular_last, Ideal.exact_mulQuot_quotOfMul, LinearMap.exact_smul_id_smul_top_mkQ, ShortComplex.moduleCat_exact_iff_ker_sub_range: exactness statements only, no annihilation by ideal powers",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "Module.annihilator, LinearMap.ker",
+   "results": "Module.exists_ker_toSpanSingleton_eq_annihilator (Mathlib.Algebra.Module.PID) only; the query 'Module.annihilator, LinearMap.ker, Submodule.map' gives no results",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rnE 'annihilator.*(ker|range|coker)|(ker|range).*annihilator' Mathlib --include=*.lean (theorem/lemma lines); grep reduceModIdeal Mathlib/RingTheory/AdicCompletion/Functoriality.lean",
+   "results": "LinearAlgebra/Dual/Defs.lean ker_dualMap_eq_dualCoannihilator_range, dualCoannihilator_range_eq_ker_flip, BilinearForm/Orthogonal.lean, Algebra/Module/PID.lean exists_ker_toSpanSingleton_eq_annihilator, Polynomial/Module/AEval.lean annihilator_eq_ker_aeval (unrelated notions of annihilator); Functoriality.lean has reduceModIdeal_apply and transitionMap_comp_reduceModIdeal only",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-formal-systems-annihilated-by-power",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1"
+}

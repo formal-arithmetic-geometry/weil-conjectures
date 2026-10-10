@@ -692,3 +692,5 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 00:19 L: merged E1 stein-normalized-fibre-idempotent (3rd delivery; +0G7X node). Merged G1 artinian-ideal-length-one-filtration (2nd delivery; +2 helpers; L removed a stray Kähler-differentials citation). Returned C1 z-localizations-dvr (uncited facts; lem-sc-normal-dim1-dvr of another unit not needed).
 - 00:19 L: reviewed lem-weil-pbc-galois-base-change-qc-open-descends (04KU; 5 steps; +0388 node): accepted.
 - 00:20 L: reviewed lem-weil-pbc-g-ring-check-pairs-of-primes (07PN; 7 steps; no new nodes): accepted. Stage-3 note (worker): lem-weil-pbc-g-ring-maximal-ideal-criterion step 2 uses prime correspondence 'pA prime, pA cap R = p' with only the definition cited.
+- 00:22 L: reviewed lem-weil-pbc-formal-systems-surjective (087Y; 4 steps; +010C leaf; source tag fixed 00MB -> 00DV): accepted.
+- 00:22 L: reviewed lem-weil-pbc-formal-systems-annihilated-by-power (0888; 7 steps; +commutative-algebra node; tool_uses pqf-lem-affine-open-locnoeth): accepted.
