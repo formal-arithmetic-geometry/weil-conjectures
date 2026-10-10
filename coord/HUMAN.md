@@ -46,3 +46,6 @@ The proof picks A from Lemma 07FG and then "lambda_1..lambda_t in Lambda which m
 
 ## Resolved (2026-10-10 01:32 UTC): F1 lem-weil-pbc-etale-stratification-local-gluing
 The fifth push was merged at 173064278 (01:19 UTC). A sixth push (fed55877b) arrived after the merge with the same content rebased, without L's post-merge citations and the reviewed field; it is not merged and the branch can be deleted.
+
+## Open (2026-10-10 02:10 UTC): imported node lem-pc-closed-imm-base-change (sec-picard-framework, unit sk-thm-picard-rr) is false as stated
+It claims that for a closed immersion i: Z -> X with ideal sheaf I_Z and any g: X' -> X, the ideal sheaf of Z x_X X' in X' is the pullback g^* I_Z. Without flatness of g the ideal sheaf is only the image of g^* I_Z -> O_{X'} (Schemes, Lemma 01JU (1)); the Stacks tag 01JY cited there says only that closed immersions are stable under base change. Found by the worker on lem-weil-pbc-universal-thickening-flat-base-change (02:08 UTC), which uses the correct form (new node lem-weil-pbc-first-order-thickening-base-change, Tag 09ZU). L did not edit the node (other unit); its owner should restate it as the image, and check the citers' use of the "canonical identification I_{x_K} = I_x (x) O_{X_K}" (fine when the base change is flat, e.g. a field extension).
