@@ -1,0 +1,76 @@
+{
+ "id": "lem-weil-pbc-module-presheaf-sheafification-exact",
+ "kind": "statement",
+ "title": "Presheaves of O_X-modules form an abelian category with sectionwise kernels and cokernels, and sheafification is exact",
+ "statement": "Let $X$ be a scheme [def-pc-scheme], $\\mathrm{PMod}(\\mathcal O_X)$ the category of presheaves of $\\mathcal O_X$-modules on the open sets of $X$ and $\\#:\\mathrm{PMod}(\\mathcal O_X)\\to\\Mod(\\mathcal O_X)$, $\\mathcal P\\mapsto\\mathcal P^\\#$, the sheafification [def-weil-presheaf-modules-sheafification], left adjoint to the inclusion $\\iota:\\Mod(\\mathcal O_X)\\to\\mathrm{PMod}(\\mathcal O_X)$ [def-weil-sheaf-of-modules-category]. Then: (1) $\\mathrm{PMod}(\\mathcal O_X)$ is an abelian category in which kernels, cokernels and images are computed sectionwise: for every open $U$ the evaluation functor $\\mathcal P\\mapsto\\mathcal P(U)$ to $\\mathcal O_X(U)$-modules is exact; in particular the $q$-th cohomology presheaf of a complex $\\mathcal K^\\bullet$ of presheaves of $\\mathcal O_X$-modules is $U\\mapsto H^q(\\mathcal K^\\bullet(U))$ with the induced restriction maps; (2) $\\#$ is exact (it preserves finite limits, and all colimits as a left adjoint); (3) for every $\\mathcal O_X$-module $\\mathcal G$ the unit $\\iota\\mathcal G\\to(\\iota\\mathcal G)^\\#$ is an isomorphism, so $\\#\\circ\\iota\\cong\\mathrm{id}$ (the counit of $\\#\\dashv\\iota$ is an isomorphism).",
+ "source": {
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Modules on Sites, Lemma 03EI (lemma-sheafification-exact: sheafification of presheaves of O-modules is exact) and Section 03D9 (section-kernels: kernels and cokernels of presheaves of modules sectionwise), Lemma 03CY (lemma-sheafification-presheaf-modules); for ringed spaces Modules, Section 01AF (modules-section-kernels), applied to the site of opens of X"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-presheaf-modules-sheafification",
+  "def-weil-sheaf-of-modules-category"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "sheafification of presheaves of modules is exact and commutes with homology of complexes",
+   "results": "PresheafOfModules.instPreservesFiniteLimitsSheafOfModulesSheafification, PresheafOfModules.instPreservesFiniteLimitsSheafAddCommGrpCatCompSheafOfModulesSheafificationToSheaf (Mathlib.Algebra.Category.ModuleCat.Presheaf.Sheafification), SheafOfModules.instAbelian, CategoryTheory.sheafIsAbelian",
+   "date": "2026-10-10",
+   "verdict": "match (clause (2)), read at Sheafification.lean:157,190"
+  },
+  {
+   "tool": "leansearch",
+   "query": "homology of a complex of sheaves is the sheafification of the presheaf homology",
+   "results": "PresheafOfModules.sheafification, PresheafOfModules.sheafify, TopCat.Presheaf.sheafify, CategoryTheory.Sheaf.cohomologyPresheaf, CategoryTheory.plusPlusAdjunction",
+   "date": "2026-10-10",
+   "verdict": "no single declaration for the homology statement; the pieces (1)-(3) are separate Mathlib declarations, see mathlib_match"
+  },
+  {
+   "tool": "loogle",
+   "query": "PresheafOfModules.sheafification, HomologicalComplex.homology",
+   "results": "none",
+   "date": "2026-10-10",
+   "verdict": "no combined declaration"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -n 'instance' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/Algebra/Category/ModuleCat/Presheaf/{Abelian,Limits,Colimits,Sheafification}.lean; sed -n 55,75p ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicGeometry/Modules/Sheaf.lean",
+   "results": "Abelian (PresheafOfModules R) at Presheaf/Abelian.lean:38; evaluation_preservesFiniteLimits at Presheaf/Limits.lean:153; evaluation_preservesFiniteColimits at Presheaf/Colimits.lean:157; (sheafification α).IsLeftAdjoint at Presheaf/Sheafification.lean:157; IsIso (sheafificationAdjunction α).counit at :161; PreservesFiniteLimits (sheafification α) at :190; Scheme.Modules uses PresheafOfModules.sheafificationAdjunction (𝟙 X.ringCatSheaf.obj) at AlgebraicGeometry/Modules/Sheaf.lean:70",
+   "date": "2026-10-10",
+   "verdict": "match, one declaration per clause"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "PresheafOfModules.instPreservesFiniteLimitsSheafOfModulesSheafification",
+  "file": "Mathlib/Algebra/Category/ModuleCat/Presheaf/Sheafification.lean",
+  "how": "one Mathlib declaration per clause, each specializing in one line to R₀ = X.ringCatSheaf.obj, α = 𝟙 on the opens site of X (as Scheme.Modules does, AlgebraicGeometry/Modules/Sheaf.lean:70): (1) instance Abelian (PresheafOfModules R) (Presheaf/Abelian.lean:38) with evaluation_preservesFiniteLimits (Presheaf/Limits.lean:153) and evaluation_preservesFiniteColimits (Presheaf/Colimits.lean:157); (2) PreservesFiniteLimits (sheafification α) (Sheafification.lean:190) and IsLeftAdjoint (sheafification α) (:157); (3) IsIso (sheafificationAdjunction α).counit (:161)",
+  "line": 190
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-higher-direct-image-presheaf",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lead_note": "L 2026-10-10: composed Mathlib leaf, one declaration per clause; lines verified (Presheaf/Abelian.lean:38, Limits.lean:153, Colimits.lean:157, Sheafification.lean:157, 161, 190)."
+}

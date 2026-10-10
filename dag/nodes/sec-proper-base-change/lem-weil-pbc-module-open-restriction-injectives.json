@@ -1,0 +1,78 @@
+{
+ "id": "lem-weil-pbc-module-open-restriction-injectives",
+ "kind": "statement",
+ "title": "Restriction of modules to an open subscheme is exact and preserves injectives; direct image along the open immersion preserves injectives",
+ "statement": "Let $X$ be a scheme [def-pc-scheme], $U\\subseteq X$ an open subscheme with inclusion $j:U\\to X$, and for an $\\mathcal O_X$-module $\\mathcal G$ [def-weil-sheaf-of-modules-category] let $\\mathcal G|_U$ be the restricted $\\mathcal O_U$-module, $(\\mathcal G|_U)(W)=\\mathcal G(W)$ for $W\\subseteq U$ open [lem-weil-pbc-module-restriction-open-immersion-colimits]; let $j_*:\\Mod(\\mathcal O_U)\\to\\Mod(\\mathcal O_X)$ be the direct image, $(j_*\\mathcal H)(W)=\\mathcal H(W\\cap U)$. Then: (1) the functor $\\Mod(\\mathcal O_X)\\to\\Mod(\\mathcal O_U)$, $\\mathcal G\\mapsto\\mathcal G|_U$, is exact; (2) if $\\mathcal I$ is an injective $\\mathcal O_X$-module [def-sp-injective-resolutions], then $\\mathcal I|_U$ is an injective $\\mathcal O_U$-module; (3) if $\\mathcal J$ is an injective $\\mathcal O_U$-module, then $j_*\\mathcal J$ is an injective $\\mathcal O_X$-module. Consequently, if $\\mathcal F\\to\\mathcal I^\\bullet$ is an injective resolution of an $\\mathcal O_X$-module $\\mathcal F$ in $\\Mod(\\mathcal O_X)$, then $\\mathcal F|_U\\to\\mathcal I^\\bullet|_U$ is an injective resolution of $\\mathcal F|_U$ in $\\Mod(\\mathcal O_U)$.",
+ "source": {
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Cohomology of Sheaves, Lemma 01E1 (lemma-cohomology-of-open, line 495) part (1) and its proof (restriction is right adjoint to the exact extension by zero j_!, Sheaves Lemma 00A7 (sheaves-lemma-j-shriek-modules), so Homology Lemma 015Z (homology-lemma-adjoint-preserve-injectives) applies; 'F|_U -> I^bullet|_U is an injective resolution'); for (3) Cohomology Lemma 02N5 (lemma-pushforward-injective-flat, line 1820: f_* of an injective is injective for flat f, an open immersion being flat), equivalently 015Z for the adjunction (-)|_U -| j_* with (-)|_U exact"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-sheaf-of-modules-category",
+  "lem-weil-pbc-module-restriction-open-immersion-colimits",
+  "def-sp-injective-resolutions"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "restriction of an injective sheaf of modules to an open subset is injective",
+   "results": "AlgebraicGeometry.Scheme.Modules.restrict, restrictFunctor, restrict_obj (Mathlib.AlgebraicGeometry.Modules.Sheaf); unrelated PresheafedSpace.ofRestrict_mono, TopCat.Presheaf.app_injective_iff_stalkFunctor_map_injective",
+   "date": "2026-10-10",
+   "verdict": "no match: the restriction functor exists, nothing on injective objects"
+  },
+  {
+   "tool": "leansearch",
+   "query": "pushforward of an injective sheaf of modules along an open immersion is injective",
+   "results": "AlgebraicGeometry.Scheme.Modules.restrictAdjunction : restrictFunctor f ⊣ pushforward f (Mathlib.AlgebraicGeometry.Modules.Sheaf, line 425), SheafOfModules.pushforward, Scheme.Modules.instFaithfulPushforward",
+   "date": "2026-10-10",
+   "verdict": "partial: the adjunction exists; combined with CategoryTheory.Adjunction.map_injective (Mathlib/CategoryTheory/Preadditive/Injective/Basic.lean:279, needs F.PreservesMonomorphisms) it would give (3), but no instance that restrictFunctor preserves monomorphisms is in Mathlib"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "pushforward along an open immersion preserves injective sheaves of modules",
+   "results": "Scheme.Modules.instFaithfulPushforward, Scheme.Modules.restrictFunctor (Mathlib.AlgebraicGeometry.Modules.Sheaf), PresheafOfModules.instIsLocallyInjectiveToSheafify, Sheaf.isLocallyInjective_sheafToPresheaf_map_iff",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Scheme.Modules.restrictFunctor, CategoryTheory.Injective",
+   "results": "none",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rn 'restrictFunctor' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib (outside Modules/Sheaf.lean); grep -rln 'extensionByZero|ExtensionByZero|lowerShriek|jShriek' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib; grep -n 'Adjunction|PreservesMono|Exact' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicGeometry/Modules/Sheaf.lean",
+   "results": "restrictFunctor used only in Modules/Tilde.lean (quasi-coherence, colimits); no extension by zero j_! for modules; Modules/Sheaf.lean has pullbackPushforwardAdjunction (189), restrictAdjunction (425), restrictFunctorIsoPullback (453), no exactness or mono-preservation of restrictFunctor; Functor.preservesInjectiveObjects_of_adjunction_of_preservesMonomorphisms in CategoryTheory/Preadditive/Injective/Preserves.lean:50",
+   "date": "2026-10-10",
+   "verdict": "no match: (2) needs j_! (absent), (1) and (3) need exactness of restriction (absent); the abstract 015Z is Adjunction.map_injective"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-higher-direct-image-presheaf",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1"
+}
