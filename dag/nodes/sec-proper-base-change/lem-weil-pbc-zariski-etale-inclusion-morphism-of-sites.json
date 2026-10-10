@@ -13,9 +13,118 @@
   "def-weil-pbc-etale-site",
   "def-weil-pbc-sites-and-cohomology"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "*The functor $u$.* For an open subscheme $U\\subseteq X$ the inclusion $U\\hookrightarrow X$ is an open immersion, hence etale, so it is an object of $X_{\\Et}$; for opens $W\\subseteq U\\subseteq X$ the inclusion $W\\hookrightarrow U$ is an $X$-morphism and a morphism of $X_{\\Et}$ [lem-weil-pbc-open-immersion-etale]. The morphisms of $X_{\\rm Zar}$ [def-sc-zariski-site] are the inclusions $W\\subseteq U$, so there is at most one morphism between two objects; $u$ sends $W\\subseteq U$ to the inclusion morphism $W\\hookrightarrow U$. The inclusion of $U$ in itself goes to $\\mathrm{id}_U$ and the composite of the inclusions $V\\subseteq W\\subseteq U$ goes to the composite $V\\hookrightarrow W\\hookrightarrow U$, which is the inclusion $V\\hookrightarrow U$; so $u:X_{\\rm Zar}\\to X_{\\Et}$ [def-weil-pbc-etale-site] is a functor.",
+   "uses": [
+    "lem-weil-pbc-open-immersion-etale",
+    "def-sc-zariski-site",
+    "def-weil-pbc-etale-site"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Lemma Tag 02GP (lemma-open-immersion-etale, line 8236)"
+   }
+  },
+  {
+   "text": "*Finite limits in $X_{\\rm Zar}$.* In $X_{\\rm Zar}$ [def-sc-zariski-site] every open $U$ has exactly one morphism $U\\to X$ (the inclusion $U\\subseteq X$), so $X$ is a final object. For morphisms $V\\subseteq U\\supseteq W$, the open $V\\cap W$ with its inclusions into $V$ and $W$ is a fibre product $V\\times_UW$: an open $T$ admits morphisms $T\\to V$ and $T\\to W$ (necessarily compatible over $U$, since there is at most one morphism $T\\to U$) iff $T\\subseteq V$ and $T\\subseteq W$, iff $T\\subseteq V\\cap W$, and then the morphism $T\\to V\\cap W$ is unique. In particular for $T\\subseteq U$ and $U_i\\subseteq U$ one has $T\\times_UU_i=T\\cap U_i$.",
+   "uses": [
+    "def-sc-zariski-site"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Proposition Tag 00X6 (proposition-get-morphism, line 2827), hypotheses (1) and (2), checked for $\\mathcal C=X_{\\rm Zar}$ (written by an agent: 09AX states no verification)"
+   }
+  },
+  {
+   "text": "*$u$ preserves the final object and fibre products (clause (2)).* By [lem-weil-pbc-etale-base-change-finite-limits] (clause 2, for the base $V=X$) $\\mathrm{id}_X:X\\to X$ is a final object of $X_{\\Et}$, and for morphisms $W_1\\to W\\leftarrow W_2$ of $X_{\\Et}$ the scheme-theoretic fibre product $W_1\\times_WW_2$, with its map to $X$, is a fibre product in $X_{\\Et}$. Hence $u(X)=(X\\xrightarrow{\\mathrm{id}}X)$ is final. Let $V,W\\subseteq U$ be opens of $X$ and $f:V\\to U$ the inclusion. By [lem-weil-pbc-open-preimage-fibre-product], applied to $f$ and the open subscheme $W\\subseteq U$, the open subscheme $f^{-1}(W)=V\\cap W$ of $V$, with its inclusion into $V$ and the restriction $f|_{V\\cap W}:V\\cap W\\to W$ (the inclusion), is a fibre product $V\\times_UW$ of schemes [def-pc-fibre-product]. So the two cones $u(V\\cap W)$ (with the inclusions, which are $u$ of the projections of step 2) and $u(V)\\times_{u(U)}u(W)$ (the chosen scheme fibre product) are both limit cones of the same diagram of schemes, and the canonical morphism $c:u(V\\cap W)\\to u(V)\\times_{u(U)}u(W)$ (the one compatible with the projections) is an isomorphism of schemes by uniqueness of limits up to unique isomorphism. Both cones lie over $X$ through $U\\hookrightarrow X$, so $c$ and $c^{-1}$ are $X$-morphisms, and $c$ is an isomorphism in $X_{\\Et}$, whose morphisms are the $X$-morphisms [def-weil-pbc-etale-site]. Thus $u$ commutes with the fibre products of step 2.",
+   "uses": [
+    "lem-weil-pbc-etale-base-change-finite-limits",
+    "lem-weil-pbc-open-preimage-fibre-product",
+    "def-pc-fibre-product",
+    "def-weil-pbc-etale-site"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Lemma Tag 01JR (lemma-open-fibre-product, line 3197); topologies.tex Lemma Tag 021D (lemma-fibre-products-etale, line 946)"
+   }
+  },
+  {
+   "text": "*$u$ is continuous (clause (1)).* Let $\\{U_i\\subseteq U\\}_{i\\in I}$ be a covering of $X_{\\rm Zar}$, i.e. opens $U_i\\subseteq U$ with $\\bigcup_iU_i=U$ [def-sc-zariski-site]. (a) Each $u(U_i)\\to u(U)$ is the inclusion $U_i\\hookrightarrow U$, a morphism of $X_{\\Et}$ by step 1, i.e. an etale morphism over $X$; the family is jointly surjective onto $U$ because the $U_i$ cover $U$. So $\\{u(U_i)\\to u(U)\\}_{i\\in I}$ is a covering of $X_{\\Et}$ [def-weil-pbc-etale-site]. (b) For a morphism $T\\subseteq U$ of $X_{\\rm Zar}$, $T\\times_UU_i=T\\cap U_i$ (step 2) and the canonical morphism $u(T\\cap U_i)\\to u(T)\\times_{u(U)}u(U_i)$ is an isomorphism by step 3 (with $V=T$, $W=U_i$). These are conditions (a) and (b) of [def-weil-pbc-sites-and-cohomology] (3) (Sites, Definition 00WV), so $u$ is continuous.",
+   "uses": [
+    "def-sc-zariski-site",
+    "def-weil-pbc-etale-site",
+    "def-weil-pbc-sites-and-cohomology"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Definition Tag 00WV (definition-continuous, line 2524)"
+   }
+  },
+  {
+   "text": "*$u_s$ is right exact.* Since $u$ is continuous (step 4), $u^s\\mathcal G=\\mathcal G\\circ u$ is a sheaf of sets on $X_{\\rm Zar}$ for every sheaf of sets $\\mathcal G$ on $X_{\\Et}$ [lem-weil-pbc-site-continuous-pushforward-sheaf], so by [lem-weil-pbc-continuous-functor-sheaf-pullback-adjunction] $u_s=(u_p-)^\\#:\\Sh(X_{\\rm Zar})\\to\\Sh(X_{\\Et})$ is a left adjoint of $u^s$. A left adjoint carries colimit cocones to colimit cocones [lem-weil-pbc-left-adjoint-preserves-colimits]; in particular $u_s$ commutes with finite colimits.",
+   "uses": [
+    "lem-weil-pbc-site-continuous-pushforward-sheaf",
+    "lem-weil-pbc-continuous-functor-sheaf-pullback-adjunction",
+    "lem-weil-pbc-left-adjoint-preserves-colimits"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Lemma Tag 00X5 (lemma-directed-morphism, line 2802), first two sentences of the proof, with categories.tex Lemma Tag 0038 (lemma-adjoint-exact)"
+   }
+  },
+  {
+   "text": "*$u_s$ is left exact.* Write $u_s=\\#\\circ u_p\\circ\\iota$, with $\\iota:\\Sh(X_{\\rm Zar})\\to\\mathrm{PSh}(X_{\\rm Zar})$ the inclusion, $u_p:\\mathrm{PSh}(X_{\\rm Zar})\\to\\mathrm{PSh}(X_{\\Et})$ the presheaf pullback and $\\#:\\mathrm{PSh}(X_{\\Et})\\to\\Sh(X_{\\Et})$ the sheafification, as in [lem-weil-pbc-continuous-functor-sheaf-pullback-adjunction] (2). (i) $\\iota$ commutes with finite limits: a limit of sheaves is the sectionwise limit presheaf, which is also the limit in presheaves [lem-weil-pbc-site-sheaf-sets-limits-sectionwise] (1). (ii) $u_p$ commutes with finite limits by [lem-weil-pbc-presheaf-pullback-sets-left-exact] (2), applied to $b=u$: its hypotheses are that $X_{\\rm Zar}$ has a final object and fibre products (step 2) and that $u$ commutes with them (step 3), and that both categories have a set of objects and morphisms (the opens of $X$ form a set; $X_{\\Et}$ is taken set-sized, inside a chosen big etale site, as in Stacks Topologies Definition 021B and [def-weil-pbc-sites-and-cohomology] (1)); it also shows that the index categories $\\mathcal I_Y^{\\rm op}$ of $u_p$ are filtered (Sites, Lemma 00X3). (iii) $\\#$ commutes with finite limits [lem-weil-pbc-sheafification-sets-exact]. A composite of functors commuting with finite limits commutes with finite limits, so $u_s$ does.",
+   "uses": [
+    "lem-weil-pbc-continuous-functor-sheaf-pullback-adjunction",
+    "lem-weil-pbc-site-sheaf-sets-limits-sectionwise",
+    "lem-weil-pbc-presheaf-pullback-sets-left-exact",
+    "lem-weil-pbc-sheafification-sets-exact",
+    "def-weil-pbc-sites-and-cohomology"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Lemma Tag 00X5 (lemma-directed-morphism, line 2802), proof (u_p commutes with finite limits by Categories Lemma 002W since the I_Y^opp are filtered, Lemma 00X3; sheafification commutes with finite limits, Lemma 00WJ; u_s = # o u_p); Proposition Tag 00X6 (proposition-get-morphism, line 2827), proof"
+   }
+  },
+  {
+   "text": "*Conclusion (clause (3)).* By steps 5 and 6, $u_s$ commutes with finite limits and finite colimits, i.e. it is exact (Categories, Definition 0034). By [def-weil-pbc-sites-and-cohomology] (3) (Sites, Definition 00X1) the continuous functor $u$ (step 4) therefore defines a morphism of sites $\\epsilon:X_{\\Et}\\to X_{\\rm Zar}$ with $\\epsilon_*=u^s$ and $\\epsilon^{-1}=u_s$, $\\epsilon^{-1}\\dashv\\epsilon_*$ (step 5), on sheaves of sets and on abelian sheaves; by the definition of $u^s$, $\\epsilon_*\\mathcal F=\\mathcal F\\circ u$, i.e. $(\\epsilon_*\\mathcal F)(U)=\\mathcal F(u(U))=\\mathcal F(U\\hookrightarrow X)$.",
+   "uses": [
+    "def-weil-pbc-sites-and-cohomology"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Definition Tag 00X1 (definition-morphism-sites, line 2687); Proposition Tag 00X6 (proposition-get-morphism, line 2827), conclusion"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-open-immersion-etale",
+  "def-sc-zariski-site",
+  "def-weil-pbc-etale-site",
+  "lem-weil-pbc-etale-base-change-finite-limits",
+  "lem-weil-pbc-open-preimage-fibre-product",
+  "def-pc-fibre-product",
+  "def-weil-pbc-sites-and-cohomology",
+  "lem-weil-pbc-site-continuous-pushforward-sheaf",
+  "lem-weil-pbc-continuous-functor-sheaf-pullback-adjunction",
+  "lem-weil-pbc-left-adjoint-preserves-colimits",
+  "lem-weil-pbc-site-sheaf-sets-limits-sectionwise",
+  "lem-weil-pbc-presheaf-pullback-sets-left-exact",
+  "lem-weil-pbc-sheafification-sets-exact"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/sites.tex",
+  "place": "Proposition Tag 00X6 (proposition-get-morphism, line 2827) and the proof of Lemma Tag 00X5 (lemma-directed-morphism, line 2802), applied to the inclusion functor of etale-cohomology.tex Lemma Tag 09AX (lemma-local-rings-strictly-henselian, line 14205); the verification of the hypotheses of 00X6 for X_Zar -> X_et (steps 1-4) is not written in the source and was written by an agent from the cited nodes (Morphisms 02GP, Schemes 01JR, Topologies 021D)"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -44,10 +153,38 @@
    "results": "Morphisms/Etale.lean and Morphisms/WeaklyEtale.lean only (restriction of etale morphisms to opens); Sites/Etale.lean defines smallEtaleTopology without a Zariski-to-etale functor",
    "date": "2026-10-10",
    "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "continuous functor between sites preserving finite limits, sheaf pullback preserves finite limits (morphism of sites)",
+   "results": "CategoryTheory.Functor.sheafPullbackConstruction.preservesFiniteLimits (Mathlib.CategoryTheory.Sites.Pullback), sheafPullbackConstruction.instPreservesFiniteLimitsSheafSheafPullback, Functor.sheafPullback, Functor.sheafAdjunctionContinuous, Functor.IsContinuous.mk, Functor.isContinuous_of_coverPreserving (Sites/CoverPreserving.lean), preservesFiniteLimits_presheafToSheaf (Sites/LeftExact.lean)",
+   "date": "2026-10-10",
+   "verdict": "generalization of the clause-(3) argument only (u_s preserves finite limits for a continuous representably flat functor between Grothendieck sites); no functor X_Zar -> X_et, so not a one-line specialization of the item; the steps cite the existing Mathlib-leaf nodes for these ingredients"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Limits.PreservesFiniteLimits (CategoryTheory.Functor.sheafPullback _ _ _ _)",
+   "results": "CategoryTheory.Functor.sheafPullbackConstruction.preservesFiniteLimits; CategoryTheory.Functor.SmallCategories.instPreservesFiniteLimitsSheafSheafPullbackOfRepresentablyFlat (both Mathlib/CategoryTheory/Sites/Pullback.lean:98,120; hypotheses [G.IsContinuous J K], [RepresentablyFlat G] or PreservesFiniteLimits G.op.lan)",
+   "date": "2026-10-10",
+   "verdict": "generalization of step 6 only; combined with flat_of_preservesFiniteLimits (Mathlib/CategoryTheory/Functor/Flat.lean:163) it gives 00X6 for Mathlib's IsContinuous, whose agreement with Stacks' continuity (00WV) is itself a lemma; no match for the item"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "open immersion into a scheme gives an object of the small etale site; functor from opens of X to X.Etale",
+   "results": "Scheme.smallEtaleTopology, Scheme.etaleTopology, Scheme.Etale.forget, Scheme.instCategoryEtale, Scheme.smallEtalePretopology (Mathlib.AlgebraicGeometry.Sites.Etale, Morphisms.Etale)",
+   "date": "2026-10-10",
+   "verdict": "no match: no functor X.Opens -> X.Etale"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rn 'Opens.*⥤ .*\\.Etale\\|X.Opens ⥤\\|Opens ⥤ X.Etale' Mathlib/AlgebraicGeometry; grep instances in Mathlib/CategoryTheory/Sites/Pullback.lean and Functor/Flat.lean",
+   "results": "Scheme.restrictFunctor : X.Opens ⥤ Over X (AlgebraicGeometry/Restrict.lean:353), Hom.opensFunctor (OpenImmersion.lean:88); no functor into X.Etale; Sites/Pullback.lean:93-122 (sheafPullback preserves finite limits), Functor/Flat.lean:163 flat_of_preservesFiniteLimits",
+   "date": "2026-10-10",
+   "verdict": "no match for the item (closest: restrictFunctor into Over X, not into X.Etale, and no site morphism)"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "worker",
@@ -67,5 +204,12 @@
   }
  },
  "chapter": "sec-proper-base-change",
- "unit": "sk-thm-p1"
+ "unit": "sk-thm-p1",
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "lem-weil-pbc-zariski-etale-inclusion-morphism-of-sites",
+  "worker": "stage1",
+  "summary": "Not a Mathlib leaf: Mathlib has no functor from the opens of X to X.Etale; the generic ingredients (sheafPullback preserves finite limits for a representably flat continuous functor) are matched only by the already existing leaf nodes the steps cite. Split into 7 steps following Sites 00X6 and the proof of 00X5: (1) u is a functor (02GP); (2) X_Zar has final object X and fibre products V cap W (elementary, poset of opens); (3) u preserves them: id_X final and scheme fibre products in X_et (021D, node lem-weil-pbc-etale-base-change-finite-limits) and V cap W = V x_U W (01JR, lem-weil-pbc-open-preimage-fibre-product), canonical map an X-isomorphism; (4) continuity (00WV) from (1)-(3); (5) u_s is a left adjoint (00WX node, after 00WW node) hence preserves colimits (0038 node); (6) u_s = # o u_p o iota is left exact (00W2, 00X5/00X3 node lem-weil-pbc-presheaf-pullback-sets-left-exact, 00WJ node); (7) exact, so a morphism of sites with epsilon_* F = F o u (00X1). Checked against the citer's step 0: it uses continuity, the morphism of sites, epsilon_* F = F o u and u(X) = id_X final, all provided. No new nodes; statement unchanged."
+ },
+ "reviewed": "pass (L, 2026-10-10): 7 steps follow 00X6/00X5: u is a functor (open immersions etale), X_Zar has finite limits (intersections), u preserves them (021D, 01JR), hence continuous; u_s is a left adjoint (right exact) and # o u_p o iota is left exact (00W2, 00X5, 00WJ), so u gives a morphism of sites. No new nodes."
 }
