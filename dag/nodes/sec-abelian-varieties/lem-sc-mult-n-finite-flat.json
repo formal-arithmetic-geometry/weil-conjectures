@@ -3,7 +3,7 @@
  "blueprint": {
   "is": "lem-sc-mult-n-finite-flat",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "Multiplication by $d$ is finite flat of degree $d^{2g}$",
@@ -24,14 +24,143 @@
  },
  "stmt_deps": [
   "def-sc-mult-n",
-  "def-sc-abelian-variety"
+  "def-sc-abelian-variety",
+  "def-sc-group-scheme"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
- "mathlib_searches": [],
+ "proof": [
+  {
+   "text": "By [lem-sc-mult-n-isogeny], $[d]:A\\to A$ is a surjective homomorphism with finite kernel $A[d]$. Thus it is an isogeny by [def-sc-isogeny].",
+   "uses": [
+    "lem-sc-mult-n-isogeny",
+    "def-sc-isogeny"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-abelian-varieties/sk-prop-av-isogeny/lem-sc-mult-n-finite-flat.md",
+    "place": "node lem-sc-mult-n-finite-flat, order 560"
+   }
+  },
+  {
+   "text": "Put $r=\\dim_k\\Gamma(A[d],\\mathcal O_{A[d]})$, the order of the finite kernel. Apply [lem-sc-isogeny-degree] to the isogeny of step 1: $[d]$ is finite flat and $[d]_*\\mathcal O_A$ is locally free of rank $r$; its finite-morphism degree is $r$.",
+   "uses": [
+    "lem-sc-isogeny-degree"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/groupoids.tex",
+    "place": "Groupoid Schemes, Lemma Tag 0BFG (label lemma-degree-multiplication-by-d), proof: finite flatness"
+   }
+  },
+  {
+   "text": "By [lem-sc-abelian-variety-projective] choose an ample invertible module $\\mathcal L$ on $A$. The symmetric module $\\mathcal N=\\mathcal L\\otimes[-1]^*\\mathcal L$ is ample by [lem-sc-ample-tensor], and [lem-sc-mult-n-pullback] gives $[d]^*\\mathcal N\\cong\\mathcal N^{\\otimes d^2}$.",
+   "uses": [
+    "lem-sc-abelian-variety-projective",
+    "lem-sc-ample-tensor",
+    "lem-sc-mult-n-pullback"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/groupoids.tex",
+    "place": "Groupoid Schemes, Lemma Tag 0BFG (label lemma-degree-multiplication-by-d), proof: symmetric ample module"
+   }
+  },
+  {
+   "text": "Write $P(m)=\\chi(A,\\mathcal N^{\\otimes m})$. By [lem-sc-hilbert-polynomial] and [def-sc-hilbert-degree], its leading coefficient times $g!$ is $\\deg_{\\mathcal N}(A)$. The Hilbert polynomial for $\\mathcal N^{\\otimes d^2}$ is $P(d^2m)$; substituting $d^2m$ multiplies its degree-$g$ coefficient by $d^{2g}$. Therefore $\\deg_{\\mathcal N^{\\otimes d^2}}(A)=d^{2g}\\deg_{\\mathcal N}(A)$.",
+   "uses": [
+    "lem-sc-hilbert-polynomial",
+    "def-sc-hilbert-degree"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/groupoids.tex",
+    "place": "Groupoid Schemes, Lemma Tag 0BFG (label lemma-degree-multiplication-by-d), final paragraph: Hilbert polynomial substitution"
+   }
+  },
+  {
+   "text": "By [lem-sc-abelian-variety-characterization], $A$ is a proper integral variety, so [lem-sc-deg-pullback-finite] applies to the finite surjective map of steps 1-2: $\\deg_{[d]^*\\mathcal N}(A)=r\\deg_{\\mathcal N}(A)$, using step 2's identification of the finite-morphism degree with $r$. Step 3 identifies its left side with $\\deg_{\\mathcal N^{\\otimes d^2}}(A)$, which step 4 computes as $d^{2g}\\deg_{\\mathcal N}(A)$. Since [lem-sc-positive-ample-hilbert-degree] gives $\\deg_{\\mathcal N}(A)>0$, cancellation yields $r=d^{2g}$. Substitute this value into step 2: $[d]$ has the asserted locally free rank, and its finite kernel has the asserted order.",
+   "uses": [
+    "lem-sc-abelian-variety-characterization",
+    "lem-sc-deg-pullback-finite",
+    "lem-sc-positive-ample-hilbert-degree"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/groupoids.tex",
+    "place": "Groupoid Schemes, Lemma Tag 0BFG (label lemma-degree-multiplication-by-d), final paragraph: degree comparison; Varieties, Lemma Tag 0BEV (label lemma-ample-positive)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sc-mult-n-isogeny",
+  "def-sc-isogeny",
+  "lem-sc-isogeny-degree",
+  "lem-sc-abelian-variety-projective",
+  "lem-sc-ample-tensor",
+  "lem-sc-mult-n-pullback",
+  "lem-sc-hilbert-polynomial",
+  "def-sc-hilbert-degree",
+  "lem-sc-abelian-variety-characterization",
+  "lem-sc-deg-pullback-finite",
+  "lem-sc-positive-ample-hilbert-degree"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/groupoids.tex",
+  "place": "Groupoid Schemes, Lemma Tag 0BFG (label lemma-degree-multiplication-by-d), proof"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "multiplication by n on an abelian variety is finite flat locally free of rank n^(2g)",
+   "results": "Algebra.Smooth.flat; Algebra.Smooth.exists_finiteType; AlgebraicGeometry.AffineSpace.instLocallyOfFinitePresentationOverSchemeInferInstanceOverClassOfFinite; WeierstrassCurve.Affine.Point.instAddCommGroup; WeierstrassCurve.Affine.Point.map; Module.free_of_flat_of_finrank_eq; Algebra.Smooth.exists_subalgebra_finiteType; no abelian-variety multiplication result",
+   "date": "2026-10-11",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "IsFinite, Flat, finrank, IsAbelianVariety",
+   "results": "0 hits; unknown identifier IsFinite",
+   "date": "2026-10-11",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "IsFinite|finrank_npow_id|torsionSubgroupScheme Mathlib/AlgebraicGeometry",
+   "results": "0 hits",
+   "date": "2026-10-11",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "finite locally free multiplication by n on abelian variety rank n^(2g)",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-11",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "kernel of multiplication by n on abelian variety has order n^(2g)",
+   "results": "IsAddCyclic.card_nsmulAddMonoidHom_ker; IsAddCyclic.index_nsmulAddMonoidHom_ker; card_dvd_exponent_nsmul_rank'; ModN.natCard_eq; AddCircle.card_torsion_le_of_isSMulRegular_int; IsAddCyclic.card_nsmulAddMonoidHom_range; card_dvd_exponent_nsmul_rank; IsAddCyclic.card_nsmul_eq_zero_le; no abelian-variety kernel result",
+   "date": "2026-10-11",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "Module.Free, Module.finrank, IsAbelianVariety",
+   "results": "0 hits; unknown identifier IsAbelianVariety",
+   "date": "2026-10-11",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "FlatRank|finrank|IsIsogeny Mathlib/AlgebraicGeometry",
+   "results": "0 hits",
+   "date": "2026-10-11",
+   "verdict": "no match"
+  }
+ ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "import_flags": [
   "undischarged_input",
@@ -212,5 +341,20 @@
   }
  },
  "chapter": "sec-abelian-varieties",
- "unit": "sk-prop-av-isogeny"
+ "unit": "sk-prop-av-isogeny",
+ "split_report": {
+  "date": "2026-10-11",
+  "item": "lem-sc-mult-n-finite-flat",
+  "worker": "stage1",
+  "summary": "The item follows the proof of Stacks Tag 0BFG: isogeny and finite flat rank from existing nodes, then symmetric ample pullback and a Hilbert-degree comparison, with positivity from Tag 0BEV.",
+  "blueprint": "The item proof paragraph names the classical input 0BFG/03RP; steps 1-2 realize the finite flat and kernel clauses, and steps 3-5 write the degree computation omitted by that paragraph."
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-mnf1751",
+  "group": "F1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-mnf1751 (reviewer sub-agent of L); spot-checked: Steps 1-5 against cited statements and Tag 0BFG: hypotheses hold (A proper integral by characterization, [d] finite surjective, rank r = function-field degree for finite locally free map of integral schemes, elementary); coefficient scaling d^{2g} incl. g=0. No cycle/restatement: lem-sc-isogeny-facts (alg. closed k) has this item in its proof_deps, so this more general item correctly does not cite it. New node lem-sc-positive-ample-hilbert-degree = Tag 0BEV with Z=X, true, not a duplicate: lem-sc-ample-positive-degree and lem-pc-ample-positive-degree are curve special cases of it; not in Mathlib (searches recorded). No repairs."
+ }
 }
