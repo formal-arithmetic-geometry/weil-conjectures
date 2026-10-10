@@ -2909,3 +2909,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 23:03 L: merged deliver/E1/lem-sc-affine-totalquotient-minimal-product (reviewer FIX; first push; new nodes: 0)
 - 23:03 L: merged deliver/H1/lem-weil-pbc-spread-finite-separable-extension (reviewer FIX; first push; new nodes: 1)
 - 23:04 L: merged deliver/E1/lem-pc-projective-space-coherent-finiteness (reviewer PASS; first push; new nodes: 0)
+- 23:04 L: returned deliver/K1/lem-sp-cartan-eilenberg-double-complex-homotopy (reviewer RETURN: 1 (E, false new statement) lem-sp-ce-vertical-nullhomotopy has no exactness hypothesis on the source: it never introduce)
