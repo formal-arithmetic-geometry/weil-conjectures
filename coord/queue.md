@@ -1,8 +1,8 @@
 # Work queue
 
-916 items; claim with `tools/claim.py next <group> [--stage N]`.
+918 items; claim with `tools/claim.py next <group> [--stage N]`.
 
-## Stage 1: nodes to split (325)
+## Stage 1: nodes to split (326)
 
 | node | distance to a target | Lean state on the done branch |
 |---|---|---|
@@ -29,15 +29,15 @@
 | `lem-sc-semilocal-dim-one-conductor` | 2014 | none |
 | `lem-sc-invert-s-cohomology-mayer-vietoris-diagram` | 2015 | none |
 | `lem-sc-zariski-contracted-power-extension` | 2015 | none |
-| `lem-weil-pbc-hypercohomology-e1-pullback-functorial` | 3006 | none |
+| `lem-weil-pbc-cartesian-eilenberg-functorial` | 3007 | none |
 | `lem-weil-pbc-etale-sheaf-clopen-product` | 3007 | none |
 | `lem-exc-finite-galois-sections-descent` | 3008 | none |
 | `lem-weil-pbc-site-restriction-injectives` | 3010 | none |
 | `lem-exc-etale-open-subgroup-fixed-field` | 3011 | none |
-| `lem-sc-positive-dimensional-locally-algebraic-closed-points` | 3012 | none |
 | `lem-sc-quasi-finite-points-open` | 3012 | none |
-| `lem-pc-grothendieck-ss-double-complex-model` | 3013 | none |
 | `lem-pc-proper-geometrically-reduced-global-sections-separable` | 3013 | none |
+| `lem-sc-affine-maximal-points-closed-in-lft-scheme` | 3013 | none |
+| `lem-sc-fg-domain-positive-dimension-infinite-maximals` | 3013 | none |
 | `lem-sc-p1-boundary-extension-composition` | 3013 | none |
 | `lem-sc-p1-ext-yoneda-associativity` | 3013 | none |
 | `lem-sc-p1-ext-yoneda-functoriality` | 3013 | none |
@@ -65,6 +65,7 @@
 | `lem-sc-sheaf-ext-coherent` | 3014 | none |
 | `lem-sc-smooth-proper-relative-dualizing-general` | 3014 | none |
 | `lem-sc-support-dimension-cohomology-vanishing` | 3014 | none |
+| `lem-sp-cartan-eilenberg-properties` | 3014 | none |
 | `lem-sc-p1-invertible-section-localization` | 3015 | none |
 | `lem-sc-p1-tor-dimension-shift-natural` | 3015 | none |
 | `lem-sc-p1-twist-multiplication` | 3015 | none |
@@ -332,7 +333,7 @@
 | `lem-pur-rhom-well-defined` | - | none |
 | `lem-zl-noether-normalization-dimension` | - | none |
 
-## Stage 2: nodes to state (591)
+## Stage 2: nodes to state (592)
 
 | node | distance to Mathlib | kind |
 |---|---|---|
@@ -446,6 +447,7 @@
 | `lem-sc-pic-proper-ntorsion` | 1 | state |
 | `lem-sc-point-tangent-finite-local-cotangent-surjective` | 1 | state |
 | `lem-sc-point-z-cohomology` | 1 | state |
+| `lem-sc-positive-dimensional-locally-algebraic-closed-points` | 1 | state |
 | `lem-sc-principal-ideal-dvr` | 1 | state |
 | `lem-sc-product-irreducible-components-bijection` | 1 | state |
 | `lem-sc-reduced-ideals-zero-intersection` | 1 | state |
@@ -928,7 +930,7 @@
 | `lem-weil-pbc-p1-field-dimension-one` | 4 | state |
 | `lem-weil-pbc-projective-space-zero-isomorphism` | 4 | state |
 
-Not open yet: 342 nodes that wait for stage 1, 1215 nodes that wait for a statement dependency.
+Not open yet: 343 nodes that wait for stage 1, 1217 nodes that wait for a statement dependency.
 
 ## Stage 3: modules to prove (0)
 
