@@ -1824,3 +1824,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 15:38 L: lem-pc-complete-linear-system-closed source tag 01KT -> 07RK (3) (reviewer R-cls)
 - 15:38 L: merged deliver/E1/lem-weil-pbc-finite-geometric-point-coproduct-cohomology (reviewer FIX; first push; new nodes: 2)
 - 15:38 L: merged deliver/M1/lem-pc-quasi-compact-local-on-target (reviewer FIX; first push; new nodes: 0)
+- 15:38 L: returned deliver/M1/lem-pc-fpqc-descend-closed-immersion (reviewer RETURN: 1. E2: new node lem-pc-fpqc-descend-immersion: it states that an arbitrary immersion descends along an fpqc covering. St)
