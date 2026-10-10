@@ -3,7 +3,7 @@
  "blueprint": {
   "is": "lem-pc-f-open-subfunctor",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "$F$ is an open subfunctor",
@@ -33,9 +33,9 @@
    "elementary": false
   },
   {
-   "text": "It remains to verify the open-immersion property of\n[def-pc-subfunctor]. Apply [lem-pc-flat-rf-open] with\n$f=f_T:X_T\\to T$, $\\mathcal{F}=\\mathcal{L}$, $i=0$, $r=1$: there is an open $U\\subseteq T$\nsuch that a morphism $u:T'\\to T$ factors through $U$ if and only if\n$Rf_{T',*}\\mathcal{L}_{T'}$ is isomorphic to a finite locally free\n$\\mathcal{O}_{T'}$-module of rank $1$ placed in degree $0$, i.e. if and only if\n$u^*\\mathcal{L}\\in F(T')$ (a finite locally free module of rank $1$ is an\ninvertible module, [def-sc-invertible-module]). Taking $U=U_\\xi$\nfor $\\xi=\\mathcal{L}$ gives exactly the property required.",
+   "text": "It remains to verify that $F\\subseteq\\operatorname{Pic}_{X/k,\\sigma}$ is representable by open immersions\nin the sense of [def-pc-open-subfunctor]. Let $\\xi\\in\\operatorname{Pic}_{X/k,\\sigma}(T)$ be represented by\nthe invertible $\\mathcal{O}_{X_T}$-module $\\mathcal{L}$. Apply [lem-pc-flat-rf-open] with\n$f=f_T:X_T\\to T$ (proper of finite presentation) and $\\mathcal{F}=\\mathcal{L}$ (of finite presentation and flat over $T$, as in the first step), $i=0$, $r=1$: there is an open $U\\subseteq T$\nsuch that a morphism $u:T'\\to T$ factors through $U$ if and only if\n$Rf_{T',*}\\mathcal{L}_{T'}$ is isomorphic to a finite locally free\n$\\mathcal{O}_{T'}$-module of rank $1$ placed in degree $0$, i.e. if and only if\n$u^*\\mathcal{L}\\in F(T')$ (a finite locally free module of rank $1$ is an\ninvertible module, [def-sc-invertible-module]). Taking $U=U_\\xi$\nfor $\\xi=\\mathcal{L}$ gives exactly the property required.",
    "uses": [
-    "def-pc-subfunctor",
+    "def-pc-open-subfunctor",
     "lem-pc-flat-rf-open",
     "def-sc-invertible-module"
    ],
@@ -45,7 +45,7 @@
  "proof_deps": [
   "lem-pc-rf-base-change-flat-module",
   "lem-pc-smooth-flat",
-  "def-pc-subfunctor",
+  "def-pc-open-subfunctor",
   "lem-pc-flat-rf-open",
   "def-sc-invertible-module"
  ],
@@ -56,7 +56,7 @@
  },
  "mathlib_searches": [],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [],
  "blueprint_kind": "lemma",
@@ -183,5 +183,36 @@
   }
  },
  "chapter": "sec-picard-framework",
- "unit": "sk-lem-picard-f-open"
+ "unit": "sk-lem-picard-f-open",
+ "split_report": {
+  "date": "2026-10-11",
+  "item": "lem-pc-f-open-subfunctor",
+  "worker": "stage1",
+  "summary": "Checked the Stacks Tag 0B9V route and the corresponding slopmaster2 declarations. The proof is split into the base-change/subfunctor argument and the open-locus argument; all dependencies are existing DAG nodes, and the Lean theorem remains non-attachable because its transitive proof graph contains sorry declarations.",
+  "blueprint": "Realizes the item's two proof paragraphs: stability under pullback and the open-immersion criterion via the open locus for Rf_*.",
+  "tool_uses": [
+   {
+    "node": "lem-pc-rf-base-change-flat-module",
+    "why": "The unit sketch explicitly requires the derived base-change comparison for the subfunctor argument, and no node in this unit supplies it."
+   },
+   {
+    "node": "lem-pc-flat-rf-open",
+    "why": "The unit sketch explicitly invokes the perfect/open-locus result for the rank-one degree-zero condition, and no node in this unit supplies it."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pc-rf-base-change-flat-module",
+  "lem-pc-flat-rf-open",
+  "lem-pc-rf-base-change-flat-module",
+  "lem-pc-flat-rf-open"
+ ],
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-fos1747",
+  "group": "C1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-fos1747 (reviewer sub-agent of L); spot-checked: Read packet; checked Step 1 against lem-pc-rf-base-change-flat-module (qc separated via proper, flat qcoh) and lem-pc-smooth-flat; Step 2 against lem-pc-flat-rf-open (i=0,r=1) and def-sc-invertible-module; both tool_uses accepted as generic tools. FIX more, RETURN less: (1) C4: Step 2 cited def-pc-subfunctor (Tag 01JI subfunctor only) for the open-immersion property; now cites def-pc-open-subfunctor (representable by open immersions) in text, uses and proof_deps, and names the hypotheses of lem-pc-flat-rf-open and the representative L of xi; (2) E7: unnamed statement change (appended '([def-pc-f-subfunctor])') reverted to the imported statement; def-pc-f-subfunctor stays in stmt_deps. Second reading missed fault (1).; 1 file(s) fixed by the reviewer"
+ }
 }
