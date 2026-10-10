@@ -1,8 +1,8 @@
 # Work queue
 
-865 items; claim with `tools/claim.py next <group> [--stage N]`.
+864 items; claim with `tools/claim.py next <group> [--stage N]`.
 
-## Stage 1: nodes to split (64)
+## Stage 1: nodes to split (63)
 
 | node | distance to a target | Lean state on the done branch |
 |---|---|---|
@@ -13,7 +13,6 @@
 | `lem-pc-module-tor-amplitude-flat-model` | 3016 | none |
 | `lem-pc-ring-pseudo-coherent-localization-glue` | 3016 | none |
 | `lem-pc-derived-pullback-tensor-product` | 3019 | none |
-| `lem-pc-dualizable-evaluation-criterion` | 3019 | none |
 | `lem-pc-rhom-strict-perfect-hom` | 3019 | none |
 | `lem-sc-derived-internal-hom-adjunction` | 3019 | none |
 | `lem-pc-dq-coherator-adjunction` | 3020 | none |
@@ -51,9 +50,9 @@
 | `lem-pc-coherent-hi` | - | sorry_here |
 | `lem-sc-global-functions` | - | rests_on_sorry |
 | `lem-sc-kummer-base-change-compatibility` | - | none |
-| `lem-sc-units-quotient-base-change` | - | none |
 | `lem-pc-finite-support-hi` | - | sorry_here |
 | `lem-sc-affine-constant-second` | - | rests_on_sorry |
+| `lem-sc-affine-unit-divisor-base-change` | - | none |
 | `lem-kun-cp-approximation` | - | none |
 | `lem-sc-zariski-flasque-acyclic` | - | none |
 | `lem-pur-kinjective-degreewise-existence` | - | none |
@@ -877,7 +876,7 @@
 | `lem-weil-pbc-projective-space-zero-isomorphism` | 4 | state |
 | `def-nagata-fixed-base-separated-stage` | 6 | state |
 
-Not open yet: 1646 nodes that wait for a statement dependency, 103 nodes that wait for stage 1.
+Not open yet: 1648 nodes that wait for a statement dependency, 102 nodes that wait for stage 1.
 
 ## Stage 3: modules to prove (0)
 
