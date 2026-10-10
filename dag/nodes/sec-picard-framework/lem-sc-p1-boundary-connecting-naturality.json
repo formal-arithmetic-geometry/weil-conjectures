@@ -22,46 +22,121 @@
   "def-sc-ext-sheaf",
   "lem-sc-ext-locally-free"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Write $p:\\mathcal E\\to\\mathcal C$ and construct $\\mathcal E'=u^*\\mathcal E$ as pairs $(e,c')$ with $p(e)=u(c')$. The first projection $v:\\mathcal E'\\to\\mathcal E$ and $u$ give a morphism of short exact sequences $(\\operatorname{id}_{\\mathcal A},v,u)$: the left square commutes because the inclusion of $\\mathcal A$ in $\\mathcal E'$ is $a\\mapsto(a,0)$, and the right square is $p v=u p'$ by the defining equation. The kernel of $p'$ is $\\mathcal A$, and $p'$ is locally surjective since $p$ is, so the upper row is short exact.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/cohomology.tex",
+    "place": "Section Tag 01DZ, short exact sequences of module sheaves; elementary pullback construction"
+   }
+  },
+  {
+   "text": "By [def-sc-sheaf-cohomology-functor], $H^i(X,-)$ is the right derived functor of the additive left exact global-sections functor on the module category with enough injectives. Apply the naturality clause of [lem-weil-pbc-right-derived-universal-delta-functor] to the morphism $(\\operatorname{id}_{\\mathcal A},v,u)$ from Step 1 in degree zero. Its equation is $H^1(\\operatorname{id}_{\\mathcal A})\\circ\\partial_{u^*\\mathcal E}=\\partial_{\\mathcal E}\\circ H^0(u)$. The left factor is the identity; identifying $H^0(X,\\mathcal C')$ with $\\operatorname{Hom}_X(\\mathcal O_X,\\mathcal C')$, $H^0(u)(t)=u\\circ t$. Evaluate the equation at $t$; both sides lie in the same $H^1(X,\\mathcal A)$, so the identification with $\\operatorname{Ext}^1_X(\\mathcal O_X,\\mathcal A)$ introduces no further comparison.",
+   "uses": [
+    "def-sc-sheaf-cohomology-functor",
+    "lem-weil-pbc-right-derived-universal-delta-functor"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Lemma Tag 05TE, canonical delta-functor structure and naturality of connecting maps; Cohomology Section Tag 01DZ, module sheaf cohomology"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sc-sheaf-cohomology-functor",
+  "lem-weil-pbc-right-derived-universal-delta-functor"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/derived.tex",
+  "place": "Lemma Tag 05TE, applied to sheaf cohomology of Section Tag 01DZ"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
-   "query": "Naturality of the cohomology connecting homomorphism for a morphism of short exact sequences of modules on a scheme",
-   "results": "CategoryTheory.ShortComplex.ShortExact.δ_apply and groupCohomology connecting maps; no sheaf cohomology statement",
+   "query": "naturality of cohomology connecting homomorphism under pullback of short exact sheaf sequences",
+   "results": "HomologicalComplex.HomologySequence.δ_naturality for short exact complexes; no direct sheaf-cohomology specialization",
    "date": "2026-10-11",
    "verdict": "no match"
   },
   {
    "tool": "loogle",
-   "query": "connecting homomorphism naturality short exact sequence",
-   "results": "0 hits; unknown identifier connecting",
+   "query": "ShortComplex.ShortExact.extClass_naturality, Functor.rightDerived",
+   "results": "0 hits; unknown identifier ShortComplex.ShortExact.extClass_naturality",
    "date": "2026-10-11",
    "verdict": "no match"
   },
   {
    "tool": "grep",
-   "query": "connecting.*natural|naturality.*connecting in Mathlib/CategoryTheory Mathlib/AlgebraicGeometry",
-   "results": "No declaration states naturality for scheme sheaf cohomology boundaries",
+   "query": "extClass_naturality|homologySequenceδ_naturality in Algebra/Homology/DerivedCategory",
+   "results": "ShortComplex.ShortExact.extClass_naturality, Mathlib/Algebra/Homology/DerivedCategory/Ext/ExtClass.lean:131; generic extension-class naturality only",
    "date": "2026-10-11",
    "verdict": "no match"
   },
   {
    "tool": "leansearch",
-   "query": "connecting homomorphism naturality for morphisms of short exact sequences",
+   "query": "naturality of connecting map in cohomology long exact sequence for a morphism of short exact sequences",
    "results": "service unavailable: Internal Server Error",
    "date": "2026-10-11",
    "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "derived functor delta functor naturality short exact sequences sheaf modules",
+   "results": "Generic homology and triangle naturality, including HomologicalComplex.HomologySequence.δ_naturality and CategoryTheory.Functor.homologySequenceδ_naturality; no direct sheaf-cohomology theorem",
+   "date": "2026-10-11",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "HomologicalComplex.HomologySequence.δ_naturality",
+   "results": "HomologicalComplex.HomologySequence.δ_naturality, Mathlib.Algebra.Homology.HomologySequenceLemmas, for homological complexes",
+   "date": "2026-10-11",
+   "verdict": "generalization: requires construction and identification of cohomology via resolutions"
+  },
+  {
+   "tool": "grep",
+   "query": "δ_naturality|homologySequenceδ_naturality in Algebra/Homology",
+   "results": "HomologicalComplex.HomologySequence.δ_naturality, Mathlib/Algebra/Homology/HomologySequenceLemmas.lean:58; triangle naturality, Mathlib/Algebra/Homology/DerivedCategory/ShortExact.lean:55",
+   "date": "2026-10-11",
+   "verdict": "no direct match"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-sc-p1-boundary-extension-composition",
   "by": "worker",
   "date": "2026-10-10"
  },
  "chapter": "sec-picard-framework",
- "unit": "sk-thm-picard-duality"
+ "unit": "sk-thm-picard-duality",
+ "split_report": {
+  "date": "2026-10-11",
+  "item": "lem-sc-p1-boundary-connecting-naturality",
+  "worker": "stage1",
+  "summary": "Constructed the pullback morphism of short exact sequences and applied the existing derived-functor delta-functor naturality theorem. Corrected the item's TeX escaping. The inherited source description assigns pullback naturality to Stacks 0B3A, although that tag only identifies the boundary of 1 with an extension class; the proof uses Stacks 05TE and 01DZ instead.",
+  "blueprint": "Proof of thm-sc-p1-duality, Step 2: compatibility of the connecting map with the boundary class, through naturality under pullback.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-right-derived-universal-delta-functor",
+    "why": "Its statement gives naturality of connecting maps for morphisms of short exact sequences of right-derived functors; the Picard unit has no generic homological-algebra replacement."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-right-derived-universal-delta-functor",
+  "lem-weil-pbc-right-derived-universal-delta-functor"
+ ],
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-bcn1753",
+  "group": "M1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-bcn1753 (reviewer sub-agent of L); spot-checked: Step 1 pullback SES (id_A,v,u) elementary and correct; Step 2: def-sc-sheaf-cohomology-functor supplies abelian+enough injectives+left exact Gamma, delta-functor node states naturality G^{n+1}(a)delta=delta'G^n(c) for morphisms of SES, n=0 with a=id gives the item at t (C1/C4/C5 ok, D ok). Tool use of generic delta-functor node accepted (C7). Mathlib: read ExtClass.lean:131 extClass_naturality (Ext-level, S1->S2 with tau1,tau3); item is about H^1 connecting maps under the Ext/H^1 identification, so a leaf would need the boundary=extClass composition plus associativity, not a one-line specialization (B8); split via existing node kept. Source 0B3A mislabel reported by worker, not a fault of the split."
+ }
 }
