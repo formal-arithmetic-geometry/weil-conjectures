@@ -23,9 +23,32 @@
  "stmt_deps": [
   "def-sp-abelian"
  ],
- "proof": [],
+ "proof": [
+  {
+   "text": "For each degree q, the differential of the componentwise product complex is the product of the differentials. Therefore its q-cycles are exactly the tuples of q-cycles, $Z^q(K)=\\prod_{i\\in I}Z^q(K_i)$, and its q-boundaries are exactly the tuples of q-boundaries, $B^q(K)=\\prod_{i\\in I}B^q(K_i)$: membership is checked coordinatewise, and for the reverse inclusion choose a preimage in each coordinate (only finitely many choices are required).",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/homology.tex",
+    "place": "elementary homology of finite products of complexes; formulation supplied by the worker"
+   }
+  },
+  {
+   "text": "The coordinate quotient maps induce a homomorphism $Z^q(K)/B^q(K)\\to\\prod_{i\\in I}(Z^q(K_i)/B^q(K_i))$. It is injective because a tuple of cycles maps to zero exactly when each coordinate is a boundary, hence the tuple is in $\\prod_iB^q(K_i)=B^q(K)$; it is surjective by choosing representatives of each coordinate class and assembling them into one tuple. Thus it is the canonical isomorphism $\\mathcal H^q(K)\\cong\\prod_i\\mathcal H^q(K_i)$. Every construction uses coordinate projections and commutes with a morphism of complexes, so these isomorphisms are natural in the family and in q.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/homology.tex",
+    "place": "elementary homology of finite products of complexes; formulation supplied by the worker"
+   }
+  }
+ ],
  "proof_deps": [],
- "proof_origin": null,
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/homology.tex",
+  "place": "elementary homology of finite products of complexes"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -50,12 +73,33 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-weil-pbc-derived-finite-product",
   "by": "worker",
   "date": "2026-10-10"
  },
  "chapter": "sec-curve-estimates",
- "unit": "sk-prop-cd"
+ "unit": "sk-prop-cd",
+ "split_report": {
+  "date": "2026-10-11",
+  "item": "lem-weil-pbc-finite-product-complex-cohomology",
+  "worker": "stage1",
+  "summary": "Split the finite-product complex cohomology assertion into the coordinatewise identification of cycles and boundaries and the induced canonical quotient isomorphism, including naturality. No existing Lean declaration or DAG node states this assertion, and no Mathlib theorem matched the finite-product cohomology statement.",
+  "blueprint": {
+   "statement": "the item's statement",
+   "steps": {
+    "1": "proof, second paragraph: cohomology of the componentwise finite-product complex is the finite product of component cohomologies",
+    "2": "proof, second paragraph: the cohomology identification is canonical and natural"
+   }
+  }
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-fpc2",
+  "group": "M1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-fpc2 (reviewer sub-agent of L); spot-checked: Shape: one commit, only the item node and the report, report has ## Review by M1. Statement unchanged from sheaf-dag (finite I, cochain complexes of abelian groups [def-sp-abelian], natural H^q(prod K_i) = prod H^q(K_i)); true, indeed for any index set. Step 1: differential of the product complex is the product of differentials, so Z^q and B^q are the products of the coordinate cycles and boundaries (reverse inclusion by choosing one preimage per coordinate) - elementary, checkable in a few lines (C2). Step 2: induced map Z/B -> prod Z_i/B_i injective by step 1's B^q = prod B^q_i, surjective by assembling representatives, natural via coordinate projections - elementary. No citations needed; lem-weil-pbc-derived-finite-product (merged 16:32, K1) cites this item in its step 2, so it cannot be cited here (would be circular). Mathlib: homologyFunctor is Additive (Mathlib/Algebra/Homology/ShortComplex/HomologicalComplex.lean:791) so preserves finite biproducts, but no single declaration states the product isomorphism; the existing 'no match' verdicts stand. Small cases: I empty gives 0 = 0, I singleton gives the identity. Start Sat Oct 10 04:44:20 PM UTC 2026, end Sat Oct 10 04:44:41 PM UTC 2026."
+ }
 }
