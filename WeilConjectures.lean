@@ -145,6 +145,7 @@ public import WeilConjectures.AlgebraicGeometry.InvertibleExponent
 public import WeilConjectures.AlgebraicGeometry.LinearAlgebraicGroup.Monodromy
 public import WeilConjectures.AlgebraicGeometry.LinearAlgebraicGroup.RankOne
 public import WeilConjectures.AlgebraicGeometry.LinearAlgebraicGroup.Weights
+public import WeilConjectures.AlgebraicGeometry.Modules.AffineHom
 public import WeilConjectures.AlgebraicGeometry.Modules.Ample
 public import WeilConjectures.AlgebraicGeometry.Modules.AmpleFamily
 public import WeilConjectures.AlgebraicGeometry.Modules.AmpleReduced
@@ -1045,6 +1046,7 @@ public import WeilConjectures.Mathlib.RingTheory.Spectrum.Prime.Topology
 public import WeilConjectures.Mathlib.RingTheory.TensorProduct.Basic
 public import WeilConjectures.Mathlib.RingTheory.TensorProduct.Maps
 public import WeilConjectures.Mathlib.RingTheory.TotallySplit
+public import WeilConjectures.Mathlib.RingTheory.Trace.Basic
 public import WeilConjectures.Mathlib.RingTheory.UniqueFactorizationDomain.Ideal
 public import WeilConjectures.Mathlib.RingTheory.UniqueFactorizationDomain.Kaplansky
 public import WeilConjectures.Mathlib.RingTheory.Unramified.Finite
