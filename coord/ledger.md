@@ -1817,3 +1817,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 15:36 L: merged deliver/M1/lem-exc-rg-group-algebra-functorial-injective-embeddings (reviewer PASS; first push; new nodes: 0)
 - 15:36 L: merged deliver/F1/lem-sc-noetherian-cohomology-vanishing-abelian-dim-one (reviewer FIX; first push; new nodes: 1)
 - 15:37 L: merged deliver/C1/lem-weil-pbc-closed-immersion-products (reviewer FIX; first push; new nodes: 1)
+- 15:37 L: returned deliver/H1/lem-sc-etale-standard-cover-cech (reviewer RETURN: 1. D1: lem-sc-etale-coproduct-cover-geometry and lem-sc-etale-coproduct-cech-sections: the two new nodes restate the ite)
