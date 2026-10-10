@@ -957,3 +957,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 06:18 L: merged C1 delivery lem-weil-pbc-artinian-ring-self-finite-length (exact leaf isArtinianRing_iff_isFiniteLength; line added by L); reviewed and accepted lem-weil-pbc-formal-glueing-complex-exact (8 steps; +05E9, 05EC(1) nodes, +tensor-finite-product leaf; source misprint in beta noted).
 - 06:19 L: reviewed and accepted lem-weil-pbc-free-resolution-ses-split (3 steps, no new nodes; 065P with the snake lemma leaf).
 - 06:20 L: reviewed and accepted lem-weil-pbc-formal-glueing-finite-modules (7 steps; +faithfully-flat-descent-finite-module leaf 03C4, +finite-product-flat-modules composed leaf; faithful flatness of R -> S x prod R_f written out). Cleared the unreachable flag on finite-locally-constant-module-values (now reached).
+- 06:21 L: reviewed and accepted lem-weil-pbc-fs-adic-base-change (5 steps; +algebra-tensor-pushout-universal-property composed leaf).

@@ -10,11 +10,80 @@
  "stmt_deps": [
   "def-weil-pbc-formally-smooth-adic",
   "def-weil-pbc-algebra-hom-quotient",
-  "def-weil-module-base-change"
+  "def-weil-module-base-change",
+  "lem-weil-pbc-algebra-tensor-pushout-universal-property"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "*Setting up the lifting problem.* Write $\\varphi:R\\to S$, $\\psi:R\\to R'$, $\\iota:S\\to S'$, $s\\mapsto s\\otimes1$, and $j:R'\\to S'$, $r'\\mapsto1\\otimes r'$; by [lem-weil-pbc-algebra-tensor-pushout-universal-property](1) (with $A=S$, $B=R'$) $S'$ is a commutative ring and $\\iota$, $j$ are homomorphisms of $R$-algebras, so $\\iota\\circ\\varphi=j\\circ\\psi$ ($\\varphi(r)\\otimes1=r(1\\otimes1)=1\\otimes\\psi(r)$); $S'$ is an $R'$-algebra through $j$. To verify [def-weil-pbc-formally-smooth-adic] for $R'\\to S'$ and $\\mathfrak n'$, let $D$ be a commutative ring with a ring map $\\rho:R'\\to D$, $J\\subseteq D$ an ideal with $J^2=0$, $q:D\\to D/J$ the quotient map, and $g':S'\\to D/J$ a homomorphism of $R'$-algebras ($D/J$ an $R'$-algebra through $q\\circ\\rho$ [def-weil-pbc-algebra-hom-quotient]) with $g'(\\mathfrak n'^k)=0$ for some $k\\ge1$; we must find a homomorphism of $R'$-algebras $f':S'\\to D$ with $q\\circ f'=g'$. Regard $D$ as an $R$-algebra through $\\rho\\circ\\psi$, so $D/J$ is an $R$-algebra through $q\\circ\\rho\\circ\\psi$, and put $g=g'\\circ\\iota:S\\to D/J$. It is a ring homomorphism and an $R$-algebra homomorphism: $g(\\varphi(r))=g'(j(\\psi(r)))=q(\\rho(\\psi(r)))$, as $g'\\circ j=q\\circ\\rho$ ($g'$ is an $R'$-algebra map). Likewise $\\rho:R'\\to D$ is a homomorphism of $R$-algebras.",
+   "uses": [
+    "lem-weil-pbc-algebra-tensor-pushout-universal-property",
+    "def-weil-pbc-formally-smooth-adic",
+    "def-weil-pbc-algebra-hom-quotient"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "More on Algebra, proof of Lemma Tag 07EG (lemma-base-change-fs, lines 9346-9366): 'Let a solid diagram ... as in Definition 07EB be given'"
+   }
+  },
+  {
+   "text": "*$g$ is continuous.* $\\iota(\\mathfrak n^k)\\subseteq\\mathfrak n'^k$: $\\mathfrak n^k$ is generated as an ideal by the products $x_1\\cdots x_k$ with $x_i\\in\\mathfrak n$ [def-weil-pbc-algebra-hom-quotient], and $\\iota(x_1\\cdots x_k)=\\iota(x_1)\\cdots\\iota(x_k)\\in\\mathfrak n'^k$ since each $\\iota(x_i)\\in\\mathfrak n'=\\mathfrak nS'$; the set $\\{z\\in S:\\iota(z)\\in\\mathfrak n'^k\\}$ contains these generators and is closed under sums and under multiplication by $S$ ($\\iota(sz)=\\iota(s)\\iota(z)$ and $\\mathfrak n'^k$ is an ideal of $S'$), so it contains $\\mathfrak n^k$. Hence $g(\\mathfrak n^k)=g'(\\iota(\\mathfrak n^k))\\subseteq g'(\\mathfrak n'^k)=0$ with the same $k\\ge1$.",
+   "uses": [
+    "def-weil-pbc-algebra-hom-quotient"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "More on Algebra, proof of Lemma Tag 07EG (lemma-base-change-fs, lines 9346-9366): 'Then the composition S → S' → A/J is continuous'"
+   }
+  },
+  {
+   "text": "*The lift over $R$.* By the hypothesis that $S$ is formally smooth over $R$ for the $\\mathfrak n$-adic topology [def-weil-pbc-formally-smooth-adic], applied to the commutative ring $D$ with the ring map $\\rho\\circ\\psi:R\\to D$, the ideal $J$ ($J^2=0$) and the $R$-algebra homomorphism $g:S\\to D/J$ with $g(\\mathfrak n^k)=0$ (Steps 1, 2), there is a homomorphism of $R$-algebras $f:S\\to D$ with $q\\circ f=g$.",
+   "uses": [
+    "def-weil-pbc-formally-smooth-adic"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "More on Algebra, proof of Lemma Tag 07EG (lemma-base-change-fs, lines 9346-9366): 'By assumption the longer dotted arrow exists'"
+   }
+  },
+  {
+   "text": "*Extension to $S'$.* $f:S\\to D$ and $\\rho:R'\\to D$ are homomorphisms of $R$-algebras into the commutative $R$-algebra $D$ (Steps 1, 3), so [lem-weil-pbc-algebra-tensor-pushout-universal-property](2) (with $A=S$, $B=R'$, $C=D$) gives a homomorphism of $R$-algebras $f':S'=S\\otimes_RR'\\to D$ with $f'(s\\otimes r')=f(s)\\rho(r')$, $f'\\circ\\iota=f$ and $f'\\circ j=\\rho$. The last equation says that $f'$ is a homomorphism of $R'$-algebras ($R'$ acting on $S'$ through $j$ and on $D$ through $\\rho$).",
+   "uses": [
+    "lem-weil-pbc-algebra-tensor-pushout-universal-property"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "More on Algebra, proof of Lemma Tag 07EG (lemma-base-change-fs, lines 9346-9366): 'By the universal property of tensor product we obtain the shorter dotted arrow'"
+   }
+  },
+  {
+   "text": "*$f'$ lifts $g'$.* $q\\circ f'$ and $g'$ are homomorphisms of $R$-algebras $S'\\to D/J$ ($D/J$ with structure map $q\\circ\\rho\\circ\\psi$; $q$ is an $R$-algebra map [def-weil-pbc-algebra-hom-quotient]). They agree after $\\iota$: $q\\circ f'\\circ\\iota=q\\circ f=g=g'\\circ\\iota$ (Steps 1, 3, 4); and after $j$: $q\\circ f'\\circ j=q\\circ\\rho=g'\\circ j$ (Steps 4, 1). By [lem-weil-pbc-algebra-tensor-pushout-universal-property](3), $q\\circ f'=g'$. So $f'$ is a homomorphism of $R'$-algebras lifting $g'$; as $D$, $\\rho$, $J$, $g'$ were arbitrary, $S'$ is formally smooth over $R'$ for the $\\mathfrak n'$-adic topology [def-weil-pbc-formally-smooth-adic]. (Stacks leaves this check, the commutativity of the two triangles of the shorter dotted arrow, implicit.)",
+   "uses": [
+    "lem-weil-pbc-algebra-tensor-pushout-universal-property",
+    "def-weil-pbc-algebra-hom-quotient",
+    "def-weil-pbc-formally-smooth-adic"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "More on Algebra, proof of Lemma Tag 07EG (lemma-base-change-fs, lines 9346-9366) (the shorter dotted arrow makes the diagram commute; written out)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-algebra-tensor-pushout-universal-property",
+  "def-weil-pbc-formally-smooth-adic",
+  "def-weil-pbc-algebra-hom-quotient"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "More on Algebra, Lemma Tag 07EG (lemma-base-change-fs, line 9346) and its proof (lines 9355-9366)"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -36,10 +105,38 @@
    "results": "only Mathlib/RingTheory/Smooth/AdicCompletion.lean (lifting for the discrete Algebra.FormallySmooth into adically complete rings: exists_mkₐ_comp_eq_of_isAdicComplete, exists_adicCompletionEvalOneₐ_comp_eq), Smooth/Local.lean, Smooth/Fiber.lean, Smooth/Quotient.lean (discrete formal smoothness); Nilpotent/GeometricallyReduced.lean (geometrically reduced only): no formal smoothness for an adic topology, no geometric regularity",
    "date": "2026-10-10",
    "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "base change of an algebra formally smooth for the adic topology of an ideal is formally smooth for the extended ideal",
+   "results": "RingHom.FormallySmooth.isStableUnderBaseChange, Algebra.Smooth.baseChange, RingHom.isStandardSmooth_isStableUnderBaseChange, Algebra.FormallySmooth.instTensorProduct, RingHom.Smooth.isStableUnderBaseChange, Algebra.FormallySmooth.localization_base, localization_map, exists_lift: discrete notion only",
+   "date": "2026-10-10",
+   "verdict": "no match (discrete analogue only)"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "S formally smooth over R for the n-adic topology implies S ⊗_R R' formally smooth over R' for the nS'-adic topology",
+   "results": "Algebra.FormallySmooth.instTensorProduct, exists_mkₐ_comp_eq_of_isAdicComplete, exists_adicCompletionEvalOneₐ_comp_eq, RingHom.FormallySmooth.isStableUnderBaseChange, Algebra.FormallySmooth.of_restrictScalars, comp, AdicCompletion.ofTensorProduct(_tmul): discrete notion only",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "rg -n -i 'formally ?smooth' Mathlib | rg -i 'adic|topolog|continuous'; rg -ln FormallySmooth Mathlib | xargs rg -ln TensorProduct; rg -n 'instance.*FormallySmooth.*⊗' Mathlib/RingTheory/Smooth/",
+   "results": "only the docstrings of Mathlib/RingTheory/Smooth/AdicCompletion.lean (discrete formal smoothness lifted into adic completions); Smooth/Basic.lean:459 instance [FormallySmooth R A] : FormallySmooth B (B ⊗[R] A) (discrete base change); no adic or topological formal smoothness",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "local_search",
+   "query": "FormallySmoothAdic (project root ~/weil-conjectures-slopmaster2)",
+   "results": "none (index: unavailable, so not a proof of absence by itself)",
+   "date": "2026-10-10",
+   "verdict": "no match"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "worker",
@@ -59,5 +156,13 @@
   }
  },
  "chapter": "sec-proper-base-change",
- "unit": "sk-thm-p1"
+ "unit": "sk-thm-p1",
+ "mathlib_candidate": "Algebra.FormallySmooth.instTensorProduct (Mathlib/RingTheory/Smooth/Basic.lean:459): [FormallySmooth R A] → FormallySmooth B (B ⊗[R] A), the discrete case n = 0 of the node (n^k = 0 for k ≥ 1, so every g is allowed), with the tensor factors in the other order. It is a special case, not a generalization: the adic notion (def-weil-pbc-formally-smooth-adic) is not in Mathlib, so not a leaf (B8).",
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "lem-weil-pbc-fs-adic-base-change",
+  "worker": "stage1",
+  "summary": "Proof written from Stacks More on Algebra 07EG (lemma-base-change-fs, line 9346; tag checked in tags/tags) and its three-sentence proof, against the DAG definition def-weil-pbc-formally-smooth-adic exactly (commutative D with a ring map, J^2 = 0, g(n^k) = 0 for some k ≥ 1). Five steps: (1) the lifting problem over R' and the restricted R-algebra map g = g'∘ι; (2) ι(n^k) ⊆ n'^k, so g kills n^k (elementary); (3) the lift f:S → D from the hypothesis; (4) the R'-algebra map f':S⊗R' → D from f and ρ:R' → D by the pushout property of the tensor product; (5) q∘f' = g' by the uniqueness clause (Stacks leaves this implicit). The existing node lem-weil-pbc-algebra-tensor-base-change-universal-property puts the base ring on the left (S ⊗_R A, S-algebra maps) and would need the swap S⊗R' ≅ R'⊗S; it also gives no ring structure. So one new Mathlib leaf lem-weil-pbc-algebra-tensor-pushout-universal-property (ring structure on A⊗_R B, existence of h(a⊗b)=f(a)g(b), uniqueness; Algebra.TensorProduct.instCommRing/productMap/ext) was created and added to stmt_deps, since the statement's 'S' is a commutative ring and an R'-algebra' uses its clause (1). Statement unchanged. Mathlib: three search kinds re-done; adic formal smoothness absent, discrete analogue recorded in mathlib_candidate."
+ },
+ "reviewed": "Reviewed by L 2026-10-10: faithful to More on Algebra 07EG against the DAG's lifting definition; continuity of the restricted map (step 2) and the two-triangle check (step 5) written out; the tensor-product pushout property is a new composed Mathlib leaf. Mathlib candidate: the discrete instance (B8)."
 }

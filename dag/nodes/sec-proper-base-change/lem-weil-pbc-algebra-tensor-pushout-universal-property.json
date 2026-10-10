@@ -1,0 +1,83 @@
+{
+ "id": "lem-weil-pbc-algebra-tensor-pushout-universal-property",
+ "kind": "statement",
+ "title": "The tensor product of commutative algebras is their pushout",
+ "statement": "Let $R$ be a commutative ring and $A$, $B$ commutative $R$-algebras [def-weil-pbc-algebra-hom-quotient], and let $A\\otimes_RB$ be the tensor product of the $R$-modules $A$ and $B$ [def-weil-module-base-change]. (1) There is a unique multiplication on $A\\otimes_RB$ with $(a\\otimes b)(a'\\otimes b')=aa'\\otimes bb'$ making it a commutative ring with unit $1\\otimes1$; with the structure map $r\\mapsto r\\cdot(1\\otimes1)$ it is an $R$-algebra, and $\\iota_A:A\\to A\\otimes_RB$, $a\\mapsto a\\otimes1$, and $\\iota_B:B\\to A\\otimes_RB$, $b\\mapsto1\\otimes b$, are homomorphisms of $R$-algebras. (2) For every commutative $R$-algebra $C$ and homomorphisms of $R$-algebras $f:A\\to C$, $g:B\\to C$ there is a homomorphism of $R$-algebras $h:A\\otimes_RB\\to C$ with $h(a\\otimes b)=f(a)g(b)$ for all $a\\in A$, $b\\in B$; in particular $h\\circ\\iota_A=f$ and $h\\circ\\iota_B=g$. (3) Two homomorphisms of $R$-algebras $h_1,h_2:A\\otimes_RB\\to C$ with $h_1\\circ\\iota_A=h_2\\circ\\iota_A$ and $h_1\\circ\\iota_B=h_2\\circ\\iota_B$ are equal.",
+ "source": {
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "More on Algebra, proof of Lemma Tag 07EG (lemma-base-change-fs, line 9346: 'by the universal property of tensor product'); used in the same form in Schemes, proof of Lemma Tag 01I4 (lemma-fibre-product-affine-schemes, schemes.tex line 985: Hom(A ⊗_R B, O_X(X)) = Hom(A, O_X(X)) ×_{Hom(R, O_X(X))} Hom(B, O_X(X))). Stacks states no separate lemma for it; Mathlib states it (mathlib_match)."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-algebra-hom-quotient",
+  "def-weil-module-base-change"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "algebra homomorphism from tensor product A ⊗[R] B to commutative algebra C given by two algebra homomorphisms f a * g b",
+   "results": "Algebra.TensorProduct.productLeftAlgHom, Algebra.TensorProduct.lift, Algebra.TensorProduct.lift_tmul, Algebra.TensorProduct.liftEquiv_apply, Algebra.TensorProduct.productMap, Algebra.TensorProduct.algHomOfLinearMapTensorProduct (Mathlib.RingTheory.TensorProduct.Maps)",
+   "date": "2026-10-10",
+   "verdict": "match: Algebra.TensorProduct.productMap"
+  },
+  {
+   "tool": "loogle",
+   "query": "Algebra.TensorProduct.productMap",
+   "results": "Algebra.TensorProduct.productMap (f : A →ₐ[R] S) (g : B →ₐ[R] S) : A ⊗[R] B →ₐ[R] S, productMap_apply_tmul (= f a * g b), productMap_left, productMap_right, productMap_left_apply, productMap_right_apply, productMap_range, productMap_eq_comp_map (Mathlib.RingTheory.TensorProduct.Maps)",
+   "date": "2026-10-10",
+   "verdict": "match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "tensor product of commutative R-algebras is the pushout (coproduct) of commutative R-algebras: unique algebra map A ⊗ B → C extending f and g",
+   "results": "Algebra.pushoutDesc, TensorProduct.isPushout, TensorProduct.isPushout' (Mathlib.RingTheory.IsTensorProduct), CommRingCat.isPushout_tensorProduct, CommRingCat.pushoutCocone (Mathlib.Algebra.Category.Ring.Constructions)",
+   "date": "2026-10-10",
+   "verdict": "match (category-theoretic forms of the same fact; the leaf uses productMap and ext)"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -n 'def productMap|theorem productMap_apply_tmul|theorem productMap_left|theorem productMap_right|^theorem ext |def includeLeft|def includeRight|instance instCommRing|theorem tmul_mul_tmul' Mathlib/RingTheory/TensorProduct/Maps.lean Mathlib/RingTheory/TensorProduct/Basic.lean (under ~/weil-conjectures-slopmaster2/.lake/packages/mathlib)",
+   "results": "Basic.lean:155 tmul_mul_tmul, :311 includeLeft, :323 includeRight, :353 ext, :478 instCommRing; Maps.lean:810 productMap, :816 productMap_apply_tmul, :822 productMap_left, :829 productMap_right (read by sed -n 345,368p and 800,832p)",
+   "date": "2026-10-10",
+   "verdict": "match"
+  },
+  {
+   "tool": "local_search",
+   "query": "Algebra.TensorProduct.productMap (project root ~/weil-conjectures-slopmaster2)",
+   "results": "Algebra.TensorProduct.productMap and its eight lemmas in .lake/packages/mathlib/Mathlib/RingTheory/TensorProduct/Maps.lean (index: unavailable, results from the file scan)",
+   "date": "2026-10-10",
+   "verdict": "match exists"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "Algebra.TensorProduct.instCommRing, Algebra.TensorProduct.tmul_mul_tmul, Algebra.TensorProduct.includeLeft, Algebra.TensorProduct.includeRight, Algebra.TensorProduct.productMap, Algebra.TensorProduct.productMap_apply_tmul, Algebra.TensorProduct.ext",
+  "file": "Mathlib/RingTheory/TensorProduct/Basic.lean, Mathlib/RingTheory/TensorProduct/Maps.lean",
+  "how": "exact, one declaration per clause: (1) instCommRing (Basic.lean:478) with tmul_mul_tmul (Basic.lean:155), the R-algebra structure Algebra.TensorProduct.instAlgebra, includeLeft (Basic.lean:311, with S = R) and includeRight (Basic.lean:323); (2) productMap f g : A ⊗[R] B →ₐ[R] C (Maps.lean:810, C commutative) with productMap_apply_tmul (Maps.lean:816: f a * g b), productMap_left (:822) and productMap_right (:829); (3) Algebra.TensorProduct.ext (Basic.lean:353, with S = R; restrictScalars R is the identity). Lines read 2026-10-10.",
+  "line": 810
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-fs-adic-base-change",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lead_note": "Composed leaf, one declaration per clause: (1) Algebra.TensorProduct.instCommRing (Mathlib/RingTheory/TensorProduct/Basic.lean line 478), tmul_mul_tmul (155), includeLeft (311), includeRight (323); (2) Algebra.TensorProduct.productMap (Mathlib/RingTheory/TensorProduct/Maps.lean line 810) with productMap_apply_tmul (816), productMap_left (822), productMap_right (829); (3) Algebra.TensorProduct.ext (Basic.lean line 353). Lines read by L.",
+ "reviewed": "Reviewed by L 2026-10-10: composed Mathlib leaf; the three clauses are the commutative ring structure, productMap and ext; lines read."
+}
