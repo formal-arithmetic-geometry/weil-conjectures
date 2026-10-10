@@ -4,25 +4,78 @@
   "is": null,
   "from": {
    "node": "def-weil-derived-tensor",
-   "place": "the bounded-above flat-complex clause in the closure argument",
+   "place": "the bounded-above flat-complex clause in the closure argument: filter the tensor total complex by stupid truncations and induct on the upper bound",
    "via": []
   },
   "same_as": []
  },
  "kind": "statement",
  "title": "Bounded-above flat complexes on a ringed site are K-flat",
- "statement": "Let $\\mathcal C$ be a site and $\\mathcal O$ a sheaf of commutative rings on $\\mathcal C$. Every bounded-above complex of flat sheaves of $\\mathcal O$-modules [def-pc-flat-sheaf-modules] is K-flat [def-pc-kflat-complex].",
+ "statement": "Let $\\mathcal C$ be a site and $\\mathcal O$ a sheaf of commutative rings on $\\mathcal C$. A cochain complex $P^\\bullet$ of sheaves of $\\mathcal O$-modules [def-pc-cochain-complex-modules] is bounded above if $P^i=0$ for all $i>b$ for some integer $b$. Every bounded-above complex whose terms are flat [def-pc-flat-sheaf-modules] is K-flat [def-pc-kflat-complex].",
  "source": {
   "document": "literature/stacks-project/sites-cohomology.tex",
   "place": "Lemma 06YS, bounded-above flat complexes are K-flat"
  },
  "stmt_deps": [
+  "def-pc-cochain-complex-modules",
   "def-pc-flat-sheaf-modules",
   "def-pc-kflat-complex"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Let $A^\\bullet$ be an arbitrary acyclic complex. For each integer $m$ let $\\tau_{\\le m}A^\\bullet$ be its canonical (good) truncation, with terms $A^i$ for $i<m$, $\\Ker(d^m)$ in degree $m$ and $0$ above; it is bounded above, and since $H^i(\\tau_{\\le m}A^\\bullet)=H^i(A^\\bullet)=0$ for $i\\le m$ and $H^i(\\tau_{\\le m}A^\\bullet)=0$ for $i>m$, it is acyclic [def-pc-acyclic-complex-modules]. (The brutal truncations $\\sigma_{\\le m}A^\\bullet$ would not do: they are not acyclic in general.) The inclusions $\\tau_{\\le m}A^\\bullet\\to\\tau_{\\le m+1}A^\\bullet$ form a filtered system whose termwise colimit is $A^\\bullet$. By [lem-pc-module-filtered-colimits-tensor], termwise colimits commute with tensoring by $P^\\bullet$ and with totalization, so $\\operatorname{Tot}(A^\\bullet\\otimes_{\\mathcal O}P^\\bullet)=\\varinjlim_m\\operatorname{Tot}(\\tau_{\\le m}A^\\bullet\\otimes_{\\mathcal O}P^\\bullet)$ termwise [def-pc-tensor-complex-sheaves]; and filtered colimits are exact, so they commute with cohomology sheaves and a filtered colimit of acyclic complexes is acyclic. Hence it is enough to prove that $\\operatorname{Tot}(\\tau_{\\le m}A^\\bullet\\otimes_{\\mathcal O}P^\\bullet)$ is acyclic for every $m$, that is, to treat bounded-above acyclic $A^\\bullet$.",
+   "uses": [
+    "def-pc-acyclic-complex-modules",
+    "def-pc-tensor-complex-sheaves",
+    "lem-pc-module-filtered-colimits-tensor"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Lemma 06YS (lemma-bounded-flat-K-flat), reduction to bounded-above acyclic complexes via the good truncations $\\tau_{\\le m}$"
+   }
+  },
+  {
+   "text": "For bounded-above acyclic $A^\\bullet$ (such as $\\tau_{\\le m}A^\\bullet$ of Step 1) and bounded-above $P^\\bullet$ with flat terms, [lem-pc-bounded-above-flat-tensor-acyclic] says that $\\operatorname{Tot}(A^\\bullet\\otimes_{\\mathcal O}P^\\bullet)$ is acyclic. By Step 1 this gives acyclicity of $\\operatorname{Tot}(A^\\bullet\\otimes_{\\mathcal O}P^\\bullet)$ for the original acyclic $A^\\bullet$.",
+   "uses": [
+    "def-pc-flat-sheaf-modules",
+    "def-pc-acyclic-complex-modules",
+    "def-pc-tensor-complex-sheaves",
+    "lem-pc-bounded-above-flat-tensor-acyclic"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Lemma 06YS (lemma-bounded-flat-K-flat), bounded-above case by the spectral sequence"
+   }
+  },
+  {
+   "text": "Because $A^\\bullet$ was arbitrary and Steps 1--2 show that $\\operatorname{Tot}(A^\\bullet\\otimes_{\\mathcal O}P^\\bullet)$ is acyclic for every acyclic $A^\\bullet$, the defining condition in [def-pc-kflat-complex] holds. Thus $P^\\bullet$ is K-flat.",
+   "uses": [
+    "def-pc-kflat-complex",
+    "def-pc-acyclic-complex-modules",
+    "def-pc-tensor-complex-sheaves"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Lemma 06YS (lemma-bounded-flat-K-flat), conclusion by the definition of K-flatness"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-acyclic-complex-modules",
+  "def-pc-tensor-complex-sheaves",
+  "lem-pc-module-filtered-colimits-tensor",
+  "def-pc-flat-sheaf-modules",
+  "lem-pc-bounded-above-flat-tensor-acyclic",
+  "def-pc-kflat-complex"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Lemma 06YS, bounded-above flat complexes are K-flat"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -47,12 +100,28 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-pc-kflat-closure",
   "by": "worker",
   "date": "2026-10-10"
  },
  "chapter": "sec-picard-framework",
- "unit": "sk-thm-picard-semicon"
+ "unit": "sk-thm-picard-semicon",
+ "split_report": {
+  "date": "2026-10-11",
+  "item": "lem-pc-bounded-above-flat-kflat-site",
+  "worker": "stage1",
+  "summary": "The item has no exact sorry-free Lean declaration. I expanded Stacks Tag 06YS into the bounded-above induction: the top one-term flat piece tensors an acyclic complex to an acyclic complex, the stupid-truncation short exact sequence preserves exactness after tensoring, and the cohomology sequence completes descending induction; the defining K-flat condition then gives the conclusion. No child node was added because the induction is the item's proof rather than a separate reusable theorem, and existing ringed-space or one-point-site nodes would either be special cases or create a cycle through the closure item.",
+  "blueprint": "Realizes the bounded-above flat-complex clause in the proof of def-weil-derived-tensor by the stupid-truncation filtration and descending induction described in Lemma 06YS.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-bfs2341",
+  "group": "M1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-bfs2341 (reviewer sub-agent of L); spot-checked: Read packet whole; checked Stacks lemma-bounded-flat-K-flat text. Cycle: lem-pc-kflat-closure step 1 cites this node, and this node does not cite kflat-closure (its new children are unsplit with empty proofs), so no cycle. Tensor/colimit inputs cited via lem-pc-module-filtered-colimits-tensor and lem-pc-bounded-above-flat-tensor-acyclic (C1 ok); both new nodes are real lemmas, no same-tag duplicate. FIX more, RETURN less: (1) C4/E in Step 1, missed by the second reading: the reduction used brutal truncations sigma_{<=m}A, which are not acyclic, so the reduction failed; replaced by the good truncations tau_{<=m}A as in Stacks, with the one-line acyclicity check made explicit and exactness of filtered colimits used for the colimit of acyclic Tot's; Step 2 text tightened accordingly and step source places corrected from the stale stupid-truncation-induction wording. (2) B3: statement cites def-pc-cochain-complex-modules but stmt_deps lacked it; added.; 1 file(s) fixed by the reviewer"
+ }
 }
