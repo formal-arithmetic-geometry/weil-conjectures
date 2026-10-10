@@ -3,7 +3,7 @@
  "blueprint": {
   "is": "lem-pc-rf-base-change-flat-module",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "Derived base change for a relatively flat module",
@@ -20,26 +20,106 @@
  ],
  "proof": [
   {
-   "text": "The claim is local on $S$ and $T$, so write\n$S=\\operatorname{Spec}(A)$ and $T=\\operatorname{Spec}(B)$.\nChoose a finite affine cover of $X$ with affine intersections.\nBy [lem-pc-cech-resolution], its bounded Cech complex $K^\\bullet$\ncomputes $Rf_*\\mathcal G$. Each term is a finite product of modules\n$N_J=\\Gamma(U_J,\\mathcal G)$ flat over $A$: relative flatness can\nbe checked on affine charts and localization at primes.\n$K^\\bullet$ is a bounded complex of flat modules, so by\n[lem-pc-flat-complex-derived-pullback] it computes the derived\npullback, and $K^\\bullet\\otimes_A B$ computes $Lg^*Rf_*\\mathcal G$.\nThe pullback cover of $X_T$ is again affine with affine intersections,\nand $\\Gamma(U_J\\times_S T,\\mathcal G_T)=N_J\\otimes_A B$.\nIts restriction maps are the tensor products of the original maps,\nso this is precisely the same Cech complex $K^\\bullet\\otimes_A B$.\nAnother application of [lem-pc-cech-resolution] proves the\nclaimed isomorphism, induced by the canonical base-change map.",
+   "text": "Write $p:X_T\\to X$ and $f_T:X_T\\to T$ for the projections and $\\theta:Lg^*Rf_*\\mathcal G\\to Rf_{T,*}\\mathcal G_T$ for the base change map of [lem-pc-base-change-map-cech] (adjoint to $Rf_*\\mathcal G\\to Rf_*Rp_*p^*\\mathcal G=Rg_*Rf_{T,*}\\mathcal G_T$). Being an isomorphism in $D(\\mathcal O_T)$ is checked on the cohomology sheaves, hence on affine opens $W\\subseteq g^{-1}(V)$, $V\\subseteq S$ affine; restriction to opens is exact and commutes with $Rf_*$ and $Lg^*$, so $\\theta$ restricts to the base change map for $f^{-1}(V)\\to V$ and $W\\to V$. Thus take $S=\\operatorname{Spec}(A)$, $T=\\operatorname{Spec}(B)$, and choose a finite affine open cover $X=\\bigcup_i U_i$ (quasi-compactness). Since $X\\to S$ is separated, every finite intersection $U_J=\\operatorname{Spec}(C_J)$ is affine. The node [lem-pc-cech-resolution] gives the bounded Cech complex $K^\\bullet$, $K^p=\\prod_{|J|=p+1}\\Gamma(U_J,\\mathcal G)$, whose associated sheaf complex $\\widetilde{K^\\bullet}$ computes $Rf_*\\mathcal G$.",
    "uses": [
     "lem-pc-cech-resolution",
-    "lem-pc-flat-complex-derived-pullback"
+    "lem-pc-base-change-map-cech"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-picard-framework/sk-thm-picard-semicon/lem-pc-rf-base-change-flat-module.md",
+    "place": "Proof, local affine reduction and Cech resolution"
+   }
+  },
+  {
+   "text": "For every intersection $U_J=\\operatorname{Spec}(C_J)$, quasi-coherence identifies $N_J=\\Gamma(U_J,\\mathcal G)$ with the module defining $\\mathcal G|_{U_J}$. Relative flatness of $\\mathcal G$ over $S$ says that each $N_J$ is flat over $A$. A finite product of flat $A$-modules is flat (apply the injectivity criterion for flatness coordinatewise), so every term of the finite Cech complex $K^\\bullet$ is flat over $A$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-picard-framework/sk-thm-picard-semicon/lem-pc-rf-base-change-flat-module.md",
+    "place": "Proof, flatness of the Cech terms"
+   }
+  },
+  {
+   "text": "Each $\\widetilde{K^p}$ is a flat $\\mathcal O_S$-module (its stalks are localizations of the flat $A$-module $K^p$), and $\\widetilde{K^\\bullet}$ is bounded, so [lem-pc-flat-complex-derived-pullback] shows that the canonical map $Lg^*\\widetilde{K^\\bullet}\\to g^*\\widetilde{K^\\bullet}$ is an isomorphism in $D(\\mathcal O_T)$; and $g^*\\widetilde{K^\\bullet}=(K^\\bullet\\otimes_AB)^\\sim$ termwise by [lem-weil-pbc-module-pullback-affine-sections] applied to $g$ with $V=S$, $U=T$.",
+   "uses": [
+    "lem-pc-flat-complex-derived-pullback",
+    "lem-weil-pbc-module-pullback-affine-sections"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-picard-framework/sk-thm-picard-semicon/lem-pc-rf-base-change-flat-module.md",
+    "place": "Proof, derived pullback of the flat Cech complex"
+   }
+  },
+  {
+   "text": "The pullbacks $U_J\\times_ST=p^{-1}(U_J)=\\operatorname{Spec}(C_J\\otimes_AB)$ are affine and form a finite affine cover of $X_T$ with intersections $U_J\\times_ST$; let $K_T^\\bullet$ be its Cech complex for $\\mathcal G_T=p^*\\mathcal G$. Applying [lem-weil-pbc-module-pullback-affine-sections] to $p$ with $V=U_J$, $U=p^{-1}(U_J)$ shows that the map $c_J:N_J\\otimes_{C_J}(C_J\\otimes_AB)=N_J\\otimes_AB\\to\\Gamma(U_J\\times_ST,\\mathcal G_T)$, $s\\otimes b\\mapsto b\\cdot(p^*s)|_{U_J\\times_ST}$, is an isomorphism for every $J$. These are the components of the cochain map $\\gamma:K^\\bullet\\otimes_AB\\to K_T^\\bullet$ of [lem-pc-base-change-map-cech], so $\\gamma$ is an isomorphism of complexes.",
+   "uses": [
+    "lem-weil-pbc-module-pullback-affine-sections",
+    "lem-pc-base-change-map-cech"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-picard-framework/sk-thm-picard-semicon/lem-pc-rf-base-change-flat-module.md",
+    "place": "Proof, pullback cover and tensor identification of sections"
+   }
+  },
+  {
+   "text": "By [lem-pc-base-change-map-cech], $\\theta$ is the composite $Lg^*\\widetilde{K^\\bullet}\\to g^*\\widetilde{K^\\bullet}=(K^\\bullet\\otimes_AB)^\\sim\\xrightarrow{\\tilde\\gamma}\\widetilde{K_T^\\bullet}$, read through the identifications $Rf_*\\mathcal G\\cong\\widetilde{K^\\bullet}$ and $Rf_{T,*}\\mathcal G_T\\cong\\widetilde{K_T^\\bullet}$ of [lem-pc-cech-resolution] (the latter for the pullback cover, $X_T\\to T$ being separated and quasi-compact). The first arrow is an isomorphism by Step 3 and $\\tilde\\gamma$ by Step 4, so $\\theta$ is an isomorphism.",
+   "uses": [
+    "lem-pc-cech-resolution",
+    "lem-pc-base-change-map-cech"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-picard-framework/sk-thm-picard-semicon/lem-pc-rf-base-change-flat-module.md",
+    "place": "Proof, comparison with the pullback Cech resolution"
+   }
   }
  ],
  "proof_deps": [
   "lem-pc-cech-resolution",
-  "lem-pc-flat-complex-derived-pullback"
+  "lem-pc-flat-complex-derived-pullback",
+  "lem-weil-pbc-module-pullback-affine-sections",
+  "lem-pc-base-change-map-cech"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/master/blueprint/sec-picard-framework/sk-thm-picard-semicon/lem-pc-rf-base-change-flat-module.md",
   "place": "## Proof"
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "derived pullback of a bounded flat Cech complex computes base change of a quasi-coherent relatively flat sheaf",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-11",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Cech complex base change tensor sections quasi coherent flat",
+   "results": "SheafOfModules.Presentation.map_π_eq; SheafOfModules.pullbackObjFreeIso; no exact derived base-change declaration",
+   "date": "2026-10-11",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "Module.Flat, TensorProduct",
+   "results": "generic Algebra.TensorProduct and LinearIndependent flatness lemmas; no Cech/base-change statement",
+   "date": "2026-10-11",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "Flat.*Pi|Pi.*Flat|tensor.*sections|Gamma.*tensor in Mathlib/RingTheory Mathlib/AlgebraicGeometry",
+   "results": "no matches",
+   "date": "2026-10-11",
+   "verdict": "no match"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [],
  "blueprint_kind": "lemma",
@@ -72,5 +152,29 @@
   }
  },
  "chapter": "sec-picard-framework",
- "unit": "sk-thm-picard-semicon"
+ "unit": "sk-thm-picard-semicon",
+ "split_report": {
+  "date": "2026-10-11",
+  "item": "lem-pc-rf-base-change-flat-module",
+  "worker": "stage1",
+  "summary": "Checked the imported derived base-change proof against its blueprint text. No Lean declaration states the item. Retained the Cech route, expanded it into five complete steps, cited the existing Cech-resolution, flat-complex pullback, and affine pullback-section nodes, and made the finite-product flatness calculation explicit as an elementary step.",
+  "blueprint": "The five steps realize the blueprint proof's local affine reduction, flatness of Cech terms, derived pullback computation, pullback-section identification, and final comparison.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-module-pullback-affine-sections",
+    "why": "The affine tensor formula for pullback sections is a generic ringed-space fact supplied by another unit; this unit's route has no replacement for it."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-module-pullback-affine-sections"
+ ],
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-rbf1829",
+  "group": "M1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-rbf1829 (reviewer sub-agent of L); spot-checked: Read packet whole; checked no cycle/restatement with lem-pc-flat-base-change-cohom (flat g, R^i), lem-pc-flat-rf-open, lem-pc-coherent-hi (none cite back into the item's proof). Steps 2 and 3 correct. FIX more, RETURN less: (1) C1, Step 5 (and the local-on-base reduction of Step 1): the claim that the canonical base change map Lg^*Rf_*G -> Rf_{T,*}G_T is the identity on the Cech model is cited to no node (lem-pc-cech-resolution says nothing about the base change map), and without a global canonical map the local isomorphisms do not glue; added statement-only node lem-pc-base-change-map-cech (unsplit, created from the item, one LeanFinder search: no match) stating that the base change map equals Lg^*K~ -> g^*K~=(K tensor_A B)~ -> K_T~ via the cochain map of the c_J; Steps 1,4,5 rewritten to cite it, theta defined in Step 1 with the open-restriction reduction spelled out. (2) C4, Step 4: lem-weil-pbc-module-pullback-affine-sections is natural in the module G, not in the open V, so it does not identify restriction maps; compatibility with Cech differentials is now a clause of the new node, and Step 4 applies the cited lemma to p:X_T->X with V=U_J, U=p^{-1}(U_J) to get each c_J an isomorphism. Step 3 also now cites the same affine-sections lemma for g^*K~=(K tensor_A B)~ and says why K~ is termwise flat. proof_deps updated. The Second reading by M1 missed both faults (it read the naturality clause as covering restriction maps and accepted the canonical-map assertion).; 2 file(s) fixed by the reviewer; 1 statement node(s) added by the reviewer (FIX more, RETURN less)"
+ }
 }
