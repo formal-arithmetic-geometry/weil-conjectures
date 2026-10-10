@@ -1,0 +1,89 @@
+{
+ "id": "lem-sc-smooth-connected-curve-local-rings",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-divisor-class-curve",
+   "place": "statement and proof, implicit throughout: 'for $f\\in k(C)^*$, $\\mathcal O_C(\\operatorname{div}f)=f^{-1}\\mathcal O_C$' and 'whence $D=\\operatorname{div}(f)$' presuppose that $C$ is integral with function field $k(C)$ and that the valuations $v_P$ of the local rings at closed points are defined (the proof's standing setting)",
+   "via": []
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Smooth connected curves: integral, local rings at closed points are DVRs",
+ "statement": "Let $k$ be an algebraically closed field and $C$ a smooth connected curve over $k$ [def-sc-curves] (nonempty, connected, of dimension one, separated, of finite type and smooth over $k$). Then:\n\n1. $C$ is a Noetherian integral scheme [def-pc-integral-scheme]; let $\\eta$ be its generic point, so that $k(C)=\\mathcal O_{C,\\eta}$ is a field [def-sc-function-field] and, for every nonempty open $V\\subseteq C$ and every $x\\in C$, the restriction maps $\\mathcal O_C(V)\\to\\mathcal O_{C,x}\\to\\mathcal O_{C,\\eta}=k(C)$ are injective;\n2. every point of $C$ other than $\\eta$ is a closed point, and $C$ has at least one closed point;\n3. for every closed point $P$ of $C$ the local ring $\\mathcal O_{C,P}$ is a discrete valuation ring whose fraction field is $k(C)$ (via the injection of 1.); we write $v_P:k(C)^*\\to\\mathbf Z$ for its normalized valuation.",
+ "source": {
+  "document": "literature/stacks-project/properties.tex",
+  "place": "Properties Lemma 033M (properties-lemma-normal-Noetherian: a Noetherian normal scheme is a finite disjoint union of normal integral schemes) for clause 1; Properties Lemma 02IZ (properties-lemma-codimension-local-ring: $\\dim\\mathcal O_{X,x}$ is the codimension of $\\overline{\\{x\\}}$) with Algebra Lemma 00PD (algebra-lemma-characterize-dvr) for clause 3; these are the standing hypotheses ('$X$ locally Noetherian integral', local rings DVRs) of Stacks Divisors Lemma 0BE9 specialized to a smooth connected curve"
+ },
+ "stmt_deps": [
+  "def-sc-curves",
+  "def-sc-function-field",
+  "def-pc-integral-scheme"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "stalk of a smooth curve over a field at a closed point is a discrete valuation ring",
+   "results": "IsDiscreteValuationRing.mk, of_isDiscreteValuationRing, AlgebraicGeometry.Scheme.instFieldCarrierResidueField, LocallyRingedSpace.isLocalRing; nothing about schemes smooth over a field",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "local ring at a closed point of an integral scheme of finite type over a field of dimension one has Krull dimension one",
+   "results": "Ring.DimensionLEOne, Ring.DimensionLEOne.localization, IsLocalization.AtPrime.ringKrullDim_eq_height, Ring.krullDimLE_of_isLocalization_maximal (Mathlib.RingTheory.*)",
+   "date": "2026-10-10",
+   "verdict": "no match (ring-theoretic tools only)"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Krull dimension of the stalk at a closed point of an integral scheme of finite type over a field equals the dimension of the scheme",
+   "results": "AlgebraicGeometry.Scheme.height_of_isClosed, instIsDomainCarrierStalkCommRingCatPresheafOfIsIntegral, instIsFractionRingCarrierStalkCommRingCatPresheafFunctionField (Mathlib.AlgebraicGeometry.FunctionField: stalks of an integral scheme are domains with fraction field the function field)",
+   "date": "2026-10-10",
+   "verdict": "no match for the whole; the fraction-field part of clause 3 and the injectivity of clause 1 are Mathlib instances for an integral scheme"
+  },
+  {
+   "tool": "loogle",
+   "query": "IsDiscreteValuationRing, AlgebraicGeometry.Scheme",
+   "results": "AlgebraicGeometry.Scheme.ord_add (Mathlib.AlgebraicGeometry.OrderOfVanishing) only",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rn 'IsDiscreteValuationRing\\|ringKrullDim_stalk' Mathlib/AlgebraicGeometry",
+   "results": "Mathlib/AlgebraicGeometry/Properties.lean:376 ringKrullDim_stalk_eq_coheight (Stacks 02IZ: dim O_{X,x} = coheight of x); OrderOfVanishing.lean uses [IsDiscreteValuationRing (X.presheaf.stalk x)] as a hypothesis",
+   "date": "2026-10-10",
+   "verdict": "no match; ringKrullDim_stalk_eq_coheight is a tool for clause 3"
+  },
+  {
+   "tool": "local_search",
+   "query": "slopmaster2 (grep WeilConjectures): IsRegular.isIntegral, isDiscreteValuationRing_stalk_of_isClosed",
+   "results": "AlgebraicGeometry.IsRegular.isIntegral (WeilConjectures/AlgebraicGeometry/Regular.lean:223, sorry-free, node lem-sc-regular-connected-integral); AlgebraicGeometry.Scheme.isDiscreteValuationRing_stalk_of_isClosed (WeilConjectures/AlgebraicGeometry/Curve/SerreDuality.lean:91, sorry-free by the sorry map of 71d63dcf) for X smooth of relative dimension 1 over k",
+   "date": "2026-10-10",
+   "verdict": "Lean of slopmaster2 covers clauses 1 and 3 under SmoothOfRelativeDimension 1, not stated exactly in this form; not attached"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-sc-divisor-class-curve",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-curve-estimates",
+ "unit": "sk-def-pic"
+}
