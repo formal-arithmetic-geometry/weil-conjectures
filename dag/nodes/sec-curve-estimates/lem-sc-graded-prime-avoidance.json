@@ -23,9 +23,59 @@
  "stmt_deps": [
   "def-pc-proj"
  ],
- "proof": [],
+ "proof": [
+  {
+   "text": "By deleting any $\\mathfrak p_j$ that is contained in another $\\mathfrak p_i$, we may assume that no inclusion $\\mathfrak p_i\\subseteq\\mathfrak p_j$ holds for distinct indices: avoiding the larger prime automatically avoids the smaller one, so the conclusion for the reduced list implies the original conclusion.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra Lemma 00JS, proof, first sentence"
+   }
+  },
+  {
+   "text": "We argue by induction on $r$. For $r=1$, choose a nonzero homogeneous component of an element of $I$ that is outside $\\mathfrak p_1$. Such a component exists because $I$ is graded, $\\mathfrak p_1$ is homogeneous, and $I\\not\\subseteq\\mathfrak p_1$; since $I\\subseteq S_+$, the component has positive degree. It lies in $I$ and outside $\\mathfrak p_1$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra Lemma 00JS, proof, the case r=1"
+   }
+  },
+  {
+   "text": "For the induction step, apply the induction hypothesis to obtain a homogeneous $x\\in I$ of positive degree with $x\\notin\\mathfrak p_i$ for $i<r$. If $x\\notin\\mathfrak p_r$, it is the required element. Otherwise $x\\in\\mathfrak p_r$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra Lemma 00JS, proof, induction step"
+   }
+  },
+  {
+   "text": "Assume $x\\in\\mathfrak p_r$. The product ideal $I\\mathfrak p_1\\cdots\\mathfrak p_{r-1}$ is not contained in $\\mathfrak p_r$: if it were, choose for each $i<r$ an element $a_i\\in\\mathfrak p_i\\setminus\\mathfrak p_r$, which is possible because the primes are pairwise non-contained; then for every $z\\in I$, $z a_1\\cdots a_{r-1}\\in\\mathfrak p_r$, and primality of $\\mathfrak p_r$ together with $a_1\\cdots a_{r-1}\\notin\\mathfrak p_r$ forces $z\\in\\mathfrak p_r$, contradicting $I\\not\\subseteq\\mathfrak p_r$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra Lemma 00JS, proof, paragraph beginning \"If I p_1 ... p_{r-1} subset p_r\""
+   }
+  },
+  {
+   "text": "Choose a homogeneous $y\\in I\\mathfrak p_1\\cdots\\mathfrak p_{r-1}$ with $y\\notin\\mathfrak p_r$. The product ideal is graded, so such a $y$ may be chosen homogeneous; because $I\\subseteq S_+$, its degree is positive. Put $z=x^{\\deg(y)}+y^{\\deg(x)}$. Both summands have the same positive degree, so $z$ is homogeneous of positive degree. Since $x\\in I$ and $y\\in I\\mathfrak p_1\\cdots\\mathfrak p_{r-1}\\subseteq I$, $z\\in I$. For $i<r$, $y\\in\\mathfrak p_i$ and $x\\notin\\mathfrak p_i$, so primality gives $x^{\\deg(y)}\\notin\\mathfrak p_i$ and hence $z\\notin\\mathfrak p_i$. For $i=r$, $x\\in\\mathfrak p_r$ and $y\\notin\\mathfrak p_r$, so $y^{\\deg(x)}\\notin\\mathfrak p_r$ and hence $z\\notin\\mathfrak p_r$. Thus $z$ has the required property.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra Lemma 00JS, proof, final paragraph"
+   }
+  }
+ ],
  "proof_deps": [],
- "proof_origin": null,
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Algebra Lemma 00JS (algebra-lemma-graded-silly), proof"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -50,12 +100,28 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-sc-ample-finite-principal-affine",
   "by": "worker",
   "date": "2026-10-10"
  },
  "chapter": "sec-curve-estimates",
- "unit": "sk-thm-curveestimate"
+ "unit": "sk-thm-curveestimate",
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "lem-sc-graded-prime-avoidance",
+  "worker": "stage1",
+  "summary": "Expanded the imported 00JS statement into the source's induction proof, including the no-inclusions reduction, the product-ideal noncontainment argument, and the homogeneous element x^(deg y)+y^(deg x). No new nodes were needed because every auxiliary operation is immediate from the graded-ideal and prime-ideal definitions.",
+  "blueprint": "The steps realize the graded prime avoidance argument used by the ancestor blueprint proof for choosing one homogeneous section outside all point primes.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-gpa2",
+  "group": "F1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-gpa2 (reviewer sub-agent of L); spot-checked: Source Stacks Algebra 00JS (algebra.tex label lemma-graded-silly, l.13630): the item statement (unchanged) agrees hypothesis by hypothesis (graded S, homogeneous primes p_1..p_r, graded I subset S_+, I not in any p_i; homogeneous x in I of positive degree outside all p_i); def-pc-proj supplies the graded-ring/S_+ notation. Delivery changes only proof, proof_deps=[], proof_origin, status, split_report; no new nodes, no tool uses. Steps checked, all elementary from the definitions: (1) removing inclusions; (2) r=1 via a homogeneous component of an element of I outside the homogeneous p_1, positive degree since I in S_+; (3) induction hypothesis; (4) I p_1...p_{r-1} not in p_r using a_i in p_i minus p_r and primality; (5) homogeneous y in the graded product ideal, z=x^{deg y}+y^{deg x} homogeneous of positive degree in I, outside p_i for i<r (y in p_i, x not) and outside p_r (x in p_r, y not). Small case r=2 checked by hand; r=0 trivial (0 in S_1). Mathlib (pinned): no graded prime avoidance (grep avoid/avoidance in RingTheory/GradedAlgebra and ProjectiveSpectrum; only Ideal.subset_union_prime, ungraded), so no leaf. B10: slopmaster2 ProjectiveSpectrum.exists_homogeneous_notMem_of_finset (WeilConjectures/Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Topology.lean:54) is only the special case I=S_+ with relevant primes, not an exact statement, so the split stands. FIX: dag/nodes/sec-curve-estimates/lem-sc-graded-prime-avoidance.json: proof[0..4].text: plain-unicode notation (pi_i for the primes, deg(y), product dots) rewritten in TeX (\\mathfrak p_i, \\deg, \\cdots), wording and mathematics unchanged (B4). Start Sat Oct 10 04:06:24 PM UTC 2026, end Sat Oct 10 04:07:19 PM UTC 2026.; 1 file(s) fixed by the reviewer"
+ }
 }

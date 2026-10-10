@@ -1894,3 +1894,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 16:05 L: REVIEW BEHIND 12 after the 27th limit; eight reviewers until under ten
 - 16:07 L: merged deliver/K1/lem-weil-pbc-sets-etale-section-continuity (reviewer PASS; after a return; new nodes: 1)
 - 16:07 L: lem-pc-genus-agrees-sc NOT attached (F1 release; rests on sorry), notice to F1
+- 16:07 L: merged deliver/F1/lem-sc-graded-prime-avoidance (reviewer FIX; first push; new nodes: 0)
