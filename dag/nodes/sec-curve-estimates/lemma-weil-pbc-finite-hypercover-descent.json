@@ -18,18 +18,47 @@
  ],
  "proof": [
   {
-   "text": "The finite-presentation requirement is part of\n[def-weil-pbc-finite-split-hypercover]; it does not follow just from\ntruncating a simplicial object. There are finitely many nondegenerate terms,\nface maps, and simplicial identities through degree $r$. Apply\n[lem-weil-pbc-etale-finite-data-descent] to these data, including the\nsplitting isomorphisms. Matching schemes are finite limits, so their\nformation commutes with base change. The last assertion of that lemma makes\neach of the finitely many descended matching maps a cover at a common later\nstage. The same finite-data argument descends morphisms and equalities. If a\nfull hypercover is needed at that stage, continue above degree $r$ by taking\nthe matching scheme itself as a new nondegenerate covering term in each\ndegree.",
+   "text": "By [def-weil-pbc-finite-split-hypercover], through degree $r$ there are finitely many nondegenerate etale $X$-schemes $N_m$ of finite presentation; each $U_n$ is a finite coproduct of these schemes indexed by the surjections $[n]\\twoheadrightarrow[m]$. Descend the $N_m$ and all the finitely many face, degeneracy, augmentation, and splitting maps to a common stage using [lem-weil-pbc-etale-finite-data-descent]. At a later common stage, the finitely many inverse-map equations for the splitting isomorphisms and simplicial identities hold, by the equality clause of that lemma. Define each stage-$i$ term as the indicated finite coproduct of its descended nondegenerate terms; the descended maps then make a split augmented simplicial scheme through degree $r$ whose pullback is the given truncation.",
    "uses": [
     "def-weil-pbc-finite-split-hypercover",
     "lem-weil-pbc-etale-finite-data-descent"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-curve-estimates/sk-prop-h2/lemma-weil-pbc-finite-hypercover-descent.md",
+    "place": "Detailed form, Proof, first three sentences; Stacks Project, limits.tex, Lemma 01ZM (lemma-descend-finite-presentation)"
+   }
+  },
+  {
+   "text": "For each $n\\leq r$, the matching scheme $M_n$ is a finite limit of the terms in lower degrees in the small etale site, as defined in [def-weil-pbc-finite-split-hypercover]. Base change preserves those finite limits by [lem-weil-pbc-etale-base-change-finite-limits]; hence the matching scheme of the descended truncation pulls back to $M_n$ of the original truncation. Its descended matching map pulls back to the original etale covering map. Apply the covering clause of [lem-weil-pbc-etale-finite-data-descent] to these finitely many maps and increase the stage once more: all matching maps through degree $r$ are etale covers there.",
+   "uses": [
+    "def-weil-pbc-finite-split-hypercover",
+    "lem-weil-pbc-etale-base-change-finite-limits",
+    "lem-weil-pbc-etale-finite-data-descent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-curve-estimates/sk-prop-h2/lemma-weil-pbc-finite-hypercover-descent.md",
+    "place": "Detailed form, Proof, matching-scheme and cover sentences; Stacks Project, etale-cohomology.tex, Lemma 0EYL (lemma-colimit-affine-sites), and limits.tex, Lemma 01ZM"
+   }
+  },
+  {
+   "text": "A morphism between two such truncated hypercovers consists of finitely many component maps in degrees at most $r$ and finitely many equations expressing compatibility with the face, degeneracy, augmentation, and splitting maps. Descend its component maps by [lem-weil-pbc-etale-finite-data-descent], and then descend their compatibility equations by the equality clause there. The equality of two morphisms is likewise a finite list of equalities of component maps and therefore holds at one later common stage. Passing to a common stage for all the finitely many requirements proves both assertions.",
+   "uses": [
+    "def-weil-pbc-finite-split-hypercover",
+    "lem-weil-pbc-etale-finite-data-descent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-curve-estimates/sk-prop-h2/lemma-weil-pbc-finite-hypercover-descent.md",
+    "place": "Detailed form, Proof, final sentence; Stacks Project, limits.tex, Lemma 01ZM, parts (2) and (3)"
+   }
   }
  ],
  "proof_deps": [
   "def-weil-pbc-finite-split-hypercover",
   "lem-weil-pbc-etale-finite-data-descent",
-  "lemma-weil-pbc-fibre-product-limit"
+  "lem-weil-pbc-etale-base-change-finite-limits"
  ],
  "proof_origin": {
   "by": "agent",
@@ -38,7 +67,7 @@
  },
  "mathlib_searches": [],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [
   "detailed_form",
@@ -56,6 +85,13 @@
   "lemma-weil-pbc-fibre-product-limit"
  ],
  "proof_split_by": "paragraphs",
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "lemma-weil-pbc-finite-hypercover-descent",
+  "worker": "stage1",
+  "summary": "Descended the finite split simplicial diagram and identities, checked matching schemes against finite-limit base change, descended the finitely many covering maps, and treated morphisms and equalities as finite data. Removed a proof dependency on the unrelated strict-henselization fibre-product-limit node.",
+  "blueprint": "The first step realizes the Detailed form Proof's finite-presentation and simplicial-data sentences; the second realizes its matching-scheme and covering sentences; the third realizes its morphism/equality sentence. The original first paragraph's refinement construction is outside this item's Detailed form statement."
+ },
  "blueprint_sketch": [
   {
    "statement": "Let $X_\\infty=\\varprojlim_iX_i$ be as in the continuity lemma below and fix\n$N\\geq0$. Every etale hypercover of $X_\\infty$ admits a refinement whose\n$N$-skeleton is split, has finitely many quasi-compact and quasi-separated\ncomponents in each degree, and is the pullback of an $N$-truncated etale\nhypercover of some $X_j$. A morphism between two such finite skeleta, and\nan equality between two such morphisms, also descends after increasing $j$.",
@@ -76,5 +112,12 @@
   }
  },
  "chapter": "sec-curve-estimates",
- "unit": "sk-prop-h2"
+ "unit": "sk-prop-h2",
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "group": "E1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed by the lead of E1; spot-checked by L: L: 3 steps read (descend the finitely many nondegenerate pieces and faces, matching schemes by base-change finite limits, morphisms and equalities)"
+ }
 }
