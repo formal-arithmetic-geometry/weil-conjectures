@@ -16,9 +16,93 @@
   "pqf-def-cohomology",
   "def-weil-pbc-adic-completion"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "(Module structures and the maps $\\theta_n$.) For an $\\mathcal O_X$-module $\\mathcal G$, $a\\in A$ acts on $H^p(X,\\mathcal G)$ as $H^p$ of multiplication by the image $f^\\sharp(a)\\in\\Gamma(X,\\mathcal O_X)$; since $H^p(X,-)$ is an additive functor [pqf-def-cohomology], every map induced by an $\\mathcal O_X$-linear map is $A$-linear. Put $M_n=H^p(X,\\mathcal F/\\mathcal I^n\\mathcal F)$ ($n\\ge1$), let $\\rho_n:H\\to M_n$ be induced by $\\mathcal F\\to\\mathcal F/\\mathcal I^n\\mathcal F$ and $\\tau_{k,n}:M_k\\to M_n$ ($k\\ge n$) by $\\mathcal F/\\mathcal I^k\\mathcal F\\to\\mathcal F/\\mathcal I^n\\mathcal F$; by functoriality $\\tau_{k,n}\\rho_k=\\rho_n$, $\\tau_{n,n}=1$ and $\\tau_{l,n}=\\tau_{k,n}\\tau_{l,k}$. If $a\\in I^n$, write $a=\\sum_j a_{j1}\\cdots a_{jn}$ with $a_{ji}\\in I$; each $f^\\sharp(a_{ji})$ is a global section of $\\mathcal I$ [def-nagata-extended-ideal], so $f^\\sharp(a)$ is a section of $\\mathcal I^n$ and multiplication by it maps $\\mathcal F$ into $\\mathcal I^n\\mathcal F$ [def-weil-pbc-coherent-formal-module] (0), i.e. is $0$ on $\\mathcal F/\\mathcal I^n\\mathcal F$. Hence $I^nM_n=0$, so $\\rho_n(I^nH)=I^n\\rho_n(H)=0$ and $\\rho_n$ factors through $\\theta_n:H/I^nH\\to M_n$; the $\\theta_n$ are compatible with the transition maps because $\\tau_{k,n}\\rho_k=\\rho_n$.",
+   "uses": [
+    "pqf-def-cohomology",
+    "def-nagata-extended-ideal",
+    "def-weil-pbc-coherent-formal-module"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/coherent.tex",
+    "place": "Cohomology of Schemes, Theorem 02OC (theorem-formal-functions, line 5648), proof (lines 5673-5702)"
+   }
+  },
+  {
+   "text": "(The constant $c$.) By [lem-weil-pbc-ml-cohomology-powers-ideal] for $A,I,f,\\mathcal F,p$ (same hypotheses) there is $c\\ge0$ with (1) $K_n:=\\operatorname{Ker}(\\rho_n)\\subseteq I^{n-c}H$ for $n\\ge\\max(c,1)$, and (2) $\\operatorname{Im}(\\tau_{k,n})=N_n:=\\operatorname{Im}(\\rho_n)$ for $n\\ge1$, $k\\ge n+c$. Note $N_n\\subseteq M_n$ and $\\tau_{k,n}(N_k)=\\tau_{k,n}\\rho_k(H)=\\rho_n(H)=N_n$, so $(N_n)$ is an inverse subsystem of $(M_n)$ with surjective transition maps.",
+   "uses": [
+    "lem-weil-pbc-ml-cohomology-powers-ideal"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/coherent.tex",
+    "place": "Cohomology of Schemes, Theorem 02OC (theorem-formal-functions, line 5648), proof (lines 5673-5702)"
+   }
+  },
+  {
+   "text": "($\\varprojlim N_n=\\varprojlim M_n$; Stacks: 'it follows that $\\lim M_n=\\lim N_n$'.) The inclusion of systems $(N_n)\\subseteq(M_n)$ induces an injective $A$-linear map $\\varprojlim_nN_n\\to\\varprojlim_nM_n$ (both are submodules of $\\prod_nM_n$). It is surjective: if $(x_n)_n\\in\\varprojlim M_n$, then for each $n$, $x_n=\\tau_{n+c,n}(x_{n+c})\\in\\operatorname{Im}(\\tau_{n+c,n})=N_n$ by step 2, so $(x_n)_n\\in\\varprojlim N_n$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/coherent.tex",
+    "place": "Cohomology of Schemes, Theorem 02OC (theorem-formal-functions, line 5648), proof (lines 5673-5702)"
+   }
+  },
+  {
+   "text": "($\\varprojlim N_n=\\varprojlim H/K_n$.) $\\rho_n$ induces $A$-linear isomorphisms $\\bar\\rho_n:H/K_n\\to N_n$; since $\\tau_{k,n}\\rho_k=\\rho_n$ we have $K_k\\subseteq K_n$ for $k\\ge n$, and the $\\bar\\rho_n$ commute with the transition maps $H/K_k\\to H/K_n$ and $\\tau_{k,n}|_{N_k}$. So $\\varprojlim\\bar\\rho_n:\\varprojlim_nH/K_n\\to\\varprojlim_nN_n$ is an isomorphism (inverse $\\varprojlim\\bar\\rho_n^{-1}$).",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/coherent.tex",
+    "place": "Cohomology of Schemes, Theorem 02OC (theorem-formal-functions, line 5648), proof (lines 5673-5702)"
+   }
+  },
+  {
+   "text": "(The two filtrations agree; Stacks: '$K_n\\subset I^{n-c}M$ ... $I^nM\\subset K_n$'.) For $n\\ge1$, $I^nH\\subseteq K_n$ by step 1 ($\\rho_n(I^nH)=0$); for $n\\ge1$, $K_{n+c}\\subseteq I^nH$ by step 2 (1) applied to $n+c\\ge\\max(c,1)$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/coherent.tex",
+    "place": "Cohomology of Schemes, Theorem 02OC (theorem-formal-functions, line 5648), proof (lines 5673-5702)"
+   }
+  },
+  {
+   "text": "($\\varprojlim H/I^nH=\\varprojlim H/K_n$.) By step 5 the quotient maps $\\pi_n:H/I^nH\\to H/K_n$ and $\\sigma_n:H/K_{n+c}\\to H/I^nH$ are defined, $A$-linear, and compatible with the transition maps (all are induced by $\\mathrm{id}_H$). Moreover $\\sigma_n\\pi_{n+c}$ is the transition map $H/I^{n+c}H\\to H/I^nH$ and $\\pi_n\\sigma_n$ is the transition map $H/K_{n+c}\\to H/K_n$. Let $\\pi=\\varprojlim\\pi_n:H^\\wedge\\to\\varprojlim H/K_n$ and $\\sigma:\\varprojlim H/K_n\\to H^\\wedge$, $(y_n)_n\\mapsto(\\sigma_n(y_{n+c}))_n$ (compatible since the $\\sigma_n$ are). For $(x_n)\\in H^\\wedge$, $\\sigma\\pi(x)=(\\sigma_n\\pi_{n+c}(x_{n+c}))_n=(x_n)_n$, and for $(y_n)\\in\\varprojlim H/K_n$, $\\pi\\sigma(y)=(\\pi_n\\sigma_n(y_{n+c}))_n=(y_n)_n$. Hence $\\pi$ is an $A$-linear isomorphism; here $H^\\wedge=\\varprojlim_nH/I^nH$ as in the statement [def-weil-pbc-adic-completion].",
+   "uses": [
+    "def-weil-pbc-adic-completion"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/coherent.tex",
+    "place": "Cohomology of Schemes, Theorem 02OC (theorem-formal-functions, line 5648), proof (lines 5673-5702)"
+   }
+  },
+  {
+   "text": "(Conclusion.) The composite $H^\\wedge\\xrightarrow{\\pi}\\varprojlim H/K_n\\xrightarrow{\\varprojlim\\bar\\rho_n}\\varprojlim N_n\\subseteq\\varprojlim M_n$ is an isomorphism by steps 3, 4 and 6. On components it sends $(x_n\\bmod I^nH)_n$ to $(\\rho_n(x_n))_n=(\\theta_n(x_n\\bmod I^nH))_n$, so it equals $\\varprojlim_n\\theta_n$, which is therefore an isomorphism of $A$-modules. For $p=0$, $H^0(X,-)=\\Gamma(X,-)$ [pqf-def-cohomology], giving the last assertion.",
+   "uses": [
+    "pqf-def-cohomology"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/coherent.tex",
+    "place": "Cohomology of Schemes, Theorem 02OC (theorem-formal-functions, line 5648), proof (lines 5673-5702)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "pqf-def-cohomology",
+  "def-nagata-extended-ideal",
+  "def-weil-pbc-coherent-formal-module",
+  "lem-weil-pbc-ml-cohomology-powers-ideal",
+  "def-weil-pbc-adic-completion"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/coherent.tex",
+  "place": "Cohomology of Schemes, Theorem 02OC (theorem-formal-functions), proof, lines 5673-5702"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -50,7 +134,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "worker",
@@ -70,5 +154,17 @@
   }
  },
  "chapter": "sec-proper-base-change",
- "unit": "sk-thm-p1"
+ "unit": "sk-thm-p1",
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "lem-weil-pbc-theorem-formal-functions",
+  "worker": "stage1",
+  "summary": "Split following the Stacks proof of 02OC (not the exact-sequence plan of the brief, which the Stacks proof does not use): one new node lem-weil-pbc-ml-cohomology-powers-ideal (Stacks 02OB parts (1),(3), unsplit, no Mathlib match) carries all the geometry; the rest (lim of the stable images equals lim M_n, N_n = H/K_n, cofinality of the filtrations I^nH and K_n giving the same completion, identification of the map with lim theta_n) is written out in elementary steps. Statement kept (the 'homeomorphism' clause of 02OC stays omitted, as noted in source). Finiteness of H (02O6) is not needed for the isomorphism of limits and is not cited; 02OA/02O8/0897/02O6 are named in the new node's source for its split. stmt_deps unchanged; the item's existing four Mathlib searches (leansearch, leanfinder, loogle, grep) stand."
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "result": "accepted",
+  "note": "7 steps following Stacks 02OC: the A-module structure and theta_n; the constant c from the new 02OB node (Ker rho_n in I^{n-c}H, Im tau_{k,n} = Im rho_n); lim N_n = lim M_n; lim N_n = lim H/K_n; the two filtrations I^nH and K_n are cofinal; completions agree by explicit inverse maps; the composite is lim theta_n. No ML-exactness node needed."
+ }
 }

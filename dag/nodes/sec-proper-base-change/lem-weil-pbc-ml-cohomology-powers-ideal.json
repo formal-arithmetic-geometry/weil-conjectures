@@ -1,0 +1,66 @@
+{
+ "id": "lem-weil-pbc-ml-cohomology-powers-ideal",
+ "kind": "statement",
+ "title": "Mittag-Leffler and Artin-Rees bounds for the cohomology of F/I^nF",
+ "statement": "Let $A$ be a Noetherian ring [def-weil-pbc-noetherian-ring], $I\\subseteq A$ an ideal, $f:X\\to\\operatorname{Spec}A$ a proper morphism [def-weil-proper-morphism], $\\mathcal I=I\\mathcal O_X\\subseteq\\mathcal O_X$ the image of $f^*\\widetilde I\\to f^*\\mathcal O_{\\operatorname{Spec}A}\\to\\mathcal O_X$ [def-nagata-extended-ideal], and $\\mathcal F$ a coherent $\\mathcal O_X$-module [pqf-def-coherent], with $\\mathcal I^n\\mathcal F\\subseteq\\mathcal F$ as in [def-weil-pbc-coherent-formal-module] (0). Fix $p\\ge0$, put $H=H^p(X,\\mathcal F)$ and $M_n=H^p(X,\\mathcal F/\\mathcal I^n\\mathcal F)$ for $n\\ge1$ (sheaf cohomology [pqf-def-cohomology]; these are $A$-modules, $a\\in A$ acting through the image of $a$ in $\\Gamma(X,\\mathcal O_X)$), let $\\rho_n:H\\to M_n$ be the $A$-linear map induced by the quotient map $\\mathcal F\\to\\mathcal F/\\mathcal I^n\\mathcal F$, and for $k\\ge n$ let $\\tau_{k,n}:M_k\\to M_n$ be the map induced by the quotient map $\\mathcal F/\\mathcal I^k\\mathcal F\\to\\mathcal F/\\mathcal I^n\\mathcal F$ (so $\\tau_{k,n}\\circ\\rho_k=\\rho_n$). Then there is an integer $c\\ge0$ such that (1) $\\operatorname{Ker}(\\rho_n)\\subseteq I^{n-c}H$ for all $n\\ge c$ (with $n\\ge1$); and (2) $\\operatorname{Im}(\\tau_{k,n})=\\operatorname{Im}(\\rho_n)$ for all $n\\ge1$ and all $k\\ge n+c$. (In particular the inverse system $(M_n)_{n\\ge1}$ is Mittag-Leffler.)",
+ "source": {
+  "document": "literature/stacks-project/coherent.tex",
+  "place": "Cohomology of Schemes, Lemma 02OB (lemma-ML-cohomology-powers-ideal, line 5553), parts (1) and (3) (part (2), the Mittag-Leffler condition, is the parenthetical consequence of (3)); its proof (lines 5586-5645) uses Lemma 02OA (lemma-cohomology-powers-ideal-application, line 5452) parts (2) and (4) for H^p and H^{p+1}, which rests on Lemma 02O8 (lemma-cohomology-powers-ideal-times-F, line 5405: the graded module of the H^p(X, I^n F) is finite over the Rees algebra), Lemma 0897 (lemma-graded-finiteness) and Lemma 02O6 (lemma-proper-over-affine-cohomology-finite), plus the long exact sequences of 0 -> I^nF -> F -> F/I^nF -> 0. Stacks writes I^nF for Im(f^*(I^n)~ (x) F -> F); this equals (I O_X)^n F as used here, since the image of f^*(I^n)~ in O_X is (I O_X)^n (on an affine open Spec B of X both are I^nB). Tags verified in tags/tags: 02OB, 02OA, 02O8, 0897, 02O6."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-noetherian-ring",
+  "def-weil-proper-morphism",
+  "def-nagata-extended-ideal",
+  "pqf-def-coherent",
+  "def-weil-pbc-coherent-formal-module",
+  "pqf-def-cohomology"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "kernel of cohomology H^p(X,F) to H^p(X, F/I^n F) contained in I^(n-c) H^p, Mittag-Leffler for cohomology of F/I^nF, proper morphism Noetherian",
+   "results": "localCohomology, localCohomology.ideal_powers_initial, localCohomology.isoSelfLERadical, localCohomology.ofSelfLERadical (Mathlib.Algebra.Homology.LocalCohomology), isNoetherian_of_range_eq_ker (Mathlib.RingTheory.Noetherian.Basic), AlgebraicGeometry.Scheme.Hom.ker (Mathlib.AlgebraicGeometry.IdealSheaf.Basic), Ideal.Cotangent instance, CochainComplex.HomComplex.CohomologyClass.mk: local cohomology of modules only, no sheaf cohomology of coherent sheaves",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "images of H^p(X, F/I^k F) in H^p(X, F/I^n F) stabilize to image of H^p(X,F) for coherent sheaf on proper scheme over Noetherian ring",
+   "results": "localCohomology.isoSelfLERadical, localCohomology, localCohomology.ofSelfLERadical, localCohomology.ofDiagram (Mathlib.Algebra.Homology.LocalCohomology), AlgebraicGeometry.exists_app_map_eq_zero_of_isLimit, exists_appTop_map_eq_zero_of_isLimit, exists_appTop_map_eq_zero_of_isAffine_of_isLimit (Mathlib.AlgebraicGeometry.AffineTransitionLimit), AlgebraicGeometry.exists_of_res_zero_of_qcqs_of_top: unrelated",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rlnE 'MittagLeffler|mittagLeffler|Mittag-Leffler' and grep -rln 'ArtinRees|artin_rees|Artin-Rees' in ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib; ls Mathlib/AlgebraicGeometry/Modules",
+   "results": "Mittag-Leffler: RingTheory/AdicCompletion/Exactness.lean, CategoryTheory/CofilteredSystem.lean (module/category-level ML only), Analysis/.../Cotangent.lean (unrelated); Artin-Rees: RingTheory/ReesAlgebra.lean, RingTheory/Filtration.lean (Ideal.exists_pow_inf_eq_pow_smul, module level); AlgebraicGeometry/Modules has only Presheaf.lean, Sheaf.lean, Tilde.lean: no cohomology of coherent sheaves",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-theorem-formal-functions",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1"
+}
