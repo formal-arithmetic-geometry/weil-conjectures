@@ -2996,3 +2996,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 23:43 L: merged deliver/K1/lem-pc-sheaf-rhom-projection-formula (reviewer PASS; first push; new nodes: 0)
 - 23:43 UTC L: reviewed under the lock since 23:42: K1 h1-gm-pic-pullback FIX 2baeb1add (R-hgp3140; new node lem-sc-etale-torsor-h1-functoriality), J1 affine-unit-divisor-base-change FIX 01e3840d4 (R-udb3141; new node lem-sc-local-dvr-base-change), K1 sheaf-rhom-projection-formula PASS 59ac5bfb5 (R-rpf3142). Second readings missed a fault in 2 of 3.
 - 23:43 L: merged deliver/C1/lem-sc-derived-internal-hom-adjunction (reviewer FIX; after a return; new nodes: 1)
+- 23:44 L: merged deliver/J1/lem-pc-sites-module-sheafification-bilinear-extension (reviewer FIX+NODE(1); first push; new nodes: 1)
