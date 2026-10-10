@@ -23,9 +23,57 @@
   "def-pc-derived-category",
   "def-pc-perfect-complex"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Apply [lem-pc-supported-perfect-generator] to X=Y and T=Y\\setminus V. It gives a perfect complex E whose cohomology is supported on T and which generates the full subcategory of D_QCoh(Y) consisting of complexes supported on T.",
+   "uses": [
+    "lem-pc-supported-perfect-generator"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/duality.tex",
+    "place": "Tag 0E4G, proof of Lemma 48.4.3(3), invocation of Derived Categories of Schemes Lemma 36.15.4"
+   }
+  },
+  {
+   "text": "The supported subcategory is a full triangulated subcategory of D_QCoh(Y): it is closed under shifts, and under cones because in the long exact cohomology sequence of a distinguished triangle a sheaf between two sheaves supported on T is supported on T. It has set-indexed direct sums computed in D_QCoh(Y) [lem-pc-derived-qcoh-direct-sums], and these are the ambient direct sums of D(\\mathcal O_Y), whose cohomology sheaves are the direct sums of the cohomology sheaves [lem-pc-derived-ambient-direct-sums]; so support on T is preserved. The complex E is compact in D_QCoh(Y) by [lem-pc-perfect-object-compact], hence compact in the supported full subcategory because its coproducts are the same ambient coproducts. Since E generates that subcategory in the sense of [def-pc-generators], the singleton family consisting of E is a set of compact objects whose coproduct is a generator there.",
+   "uses": [
+    "lem-pc-perfect-object-compact",
+    "lem-pc-derived-qcoh-direct-sums",
+    "lem-pc-derived-ambient-direct-sums",
+    "def-pc-generators"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/duality.tex",
+    "place": "Tag 0E4G, proof of Lemma 48.4.3(3), closure of the supported subcategory under direct sums"
+   }
+  },
+  {
+   "text": "Apply [lem-pc-compact-generators-build-objects] to the supported subcategory and the singleton compact generating family {E}. For each supported Q it gives a sequence X_1\\to X_2\\to\\cdots whose telescope, formed with coproducts of the supported subcategory and hence also in D_QCoh(Y), is Q, with X_1 a coproduct of shifts of E and each transition cone a coproduct of shifts of E. Set Q_0=0 and Q_{n+1}=X_{n+1}; the cone of Q_0\\to Q_1 is X_1, so the same property holds for every transition. The telescope is unchanged by adjoining the initial zero object, yielding the required sequence 0=Q_0\\to Q_1\\to Q_2\\to\\cdots.",
+   "uses": [
+    "lem-pc-compact-generators-build-objects"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/duality.tex",
+    "place": "Tag 0E4G, proof of Lemma 48.4.3(3), application of Derived Categories Lemma 13.37.3"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-supported-perfect-generator",
+  "lem-pc-perfect-object-compact",
+  "lem-pc-derived-qcoh-direct-sums",
+  "lem-pc-derived-ambient-direct-sums",
+  "def-pc-generators",
+  "lem-pc-compact-generators-build-objects"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/duality.tex",
+  "place": "Tag 0E4G (Lemma 48.4.3), proof of (3), using Tags 0A9A and 09SN"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -57,12 +105,28 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-sc-right-adjoint-open-support-criterion",
   "by": "worker",
   "date": "2026-10-10"
  },
  "chapter": "sec-picard-framework",
- "unit": "sk-thm-picard-duality"
+ "unit": "sk-thm-picard-duality",
+ "split_report": {
+  "date": "2026-10-11",
+  "item": "lem-sc-supported-derived-generated-perfect",
+  "worker": "stage1",
+  "summary": "Split the supported-generation argument into the Stacks supported perfect-generator statement and three steps: obtain the generator, verify compactness and coproduct hypotheses, and apply the existing sequential homotopy-colimit construction, adjoining an initial zero term.",
+  "blueprint": "Realizes the ancestor lem-sc-finite-duality proof place 'the direct-sum extension from bounded-below support to all supported complexes' through the Tag 0E4G invocation of Tags 0A9A and 09SN.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-sdg2434",
+  "group": "J1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-sdg2434 (reviewer sub-agent of L); spot-checked: Read packet whole; checked Step 1 against 0A9A child, Step 3 against 09SN node lem-pc-compact-generators-build-objects (arbitrary set-indexed sums, Q_0=0 prepend OK), no existing 0A9A/09IS duplicate on sheaf-dag (K1 generator node was returned). FIX more, RETURN less: (1) C4 Step 2 attributed 'cohomology of a direct sum is the direct sum of cohomology' to lem-pc-derived-qcoh-direct-sums whose statement only gives existence of sums; now cites lem-pc-derived-ambient-direct-sums (missed by the Second reading); (2) E/C4 hypothesis of 09SN node that the category is triangulated: added the elementary closure-under-cones sentence in Step 2 and telescope agreement in Step 3; (3) B3 child statement used 'generated' undefined: now cites def-pc-generators and def-weil-triangulated-category, stmt_deps updated; proof_deps updated.; 2 file(s) fixed by the reviewer"
+ }
 }
