@@ -2,20 +2,19 @@
 
 926 items; claim with `tools/claim.py next <group> [--stage N]`.
 
-## Stage 1: nodes to split (321)
+## Stage 1: nodes to split (319)
 
 | node | distance to a target | Lean state on the done branch |
 |---|---|---|
 | `lem-weil-pbc-injective-acyclicity-bounded-below` | 2002 | sorry_here |
-| `lem-weil-pbc-etale-open-fpqc-descent` | 2007 | none |
 | `lem-weil-pbc-etale-sections-equal-open` | 2007 | none |
+| `lem-weil-pbc-open-subscheme-fpqc-descent` | 2008 | none |
 | `lem-weil-pbc-sets-etale-inverse-image-constant-sheaf` | 2008 | none |
 | `lem-weil-pbc-spec-algebraically-closed-etale-sheaf-constant` | 2008 | none |
 | `lem-sc-irreducible-noetherian-constant-acyclic` | 2013 | none |
 | `lem-sc-noetherian-extension-by-zero-reduction` | 2013 | none |
 | `lem-sc-noetherian-open-closed-cohomology-sequence` | 2013 | none |
 | `lem-sc-ample-proj-local-chart` | 2014 | none |
-| `lem-sc-free-prime-membership` | 2014 | none |
 | `lem-sc-semilocal-dim-one-conductor` | 2014 | none |
 | `lem-sc-boundary-cech-injective-middle` | 2015 | none |
 | `lem-sc-dvr-nonnegative-valuation-in-ring` | 2015 | none |
@@ -24,11 +23,9 @@
 | `lem-sc-mayer-vietoris-ringed-space` | 2017 | none |
 | `lem-weil-pbc-cartesian-eilenberg-functorial` | 3007 | none |
 | `lem-exc-finite-galois-tensor-decomposition` | 3009 | none |
-| `lem-exc-etale-open-subgroup-fixed-field` | 3011 | none |
 | `lem-weil-pbc-site-extension-by-zero-exact` | 3011 | none |
 | `lem-weil-pbc-site-restriction-exact` | 3011 | none |
 | `lem-sc-tangent-space-vector-space` | 3013 | none |
-| `lem-pc-finite-extension-tensor-algebraic-closure-reduced-separable` | 3014 | none |
 | `lem-pc-polynomial-quotient-distinct-linear-crt` | 3014 | none |
 | `lem-sc-ext-locally-free-second-naturality` | 3014 | none |
 | `lem-sc-lft-over-field-jacobson-space` | 3014 | none |
@@ -43,6 +40,8 @@
 | `lem-pc-derived-direct-image-preserves-qcoh` | 3015 | none |
 | `lem-pc-derived-qcoh-compact-generation` | 3015 | none |
 | `lem-pc-derived-qcoh-direct-sums` | 3015 | none |
+| `lem-pc-finite-inseparable-element` | 3015 | none |
+| `lem-pc-inseparable-tensor-nilpotent` | 3015 | none |
 | `lem-pc-ringed-spaces-derived-adjoint` | 3015 | none |
 | `lem-pc-ringed-spaces-derived-pullback-composition` | 3015 | none |
 | `lem-sc-coherent-affine-free-resolution` | 3015 | none |
@@ -55,7 +54,6 @@
 | `lem-sc-finite-sheafhom-affine-adjoint` | 3015 | none |
 | `lem-sc-finite-twisted-inverse-bounded-below` | 3015 | none |
 | `lem-sc-p1-invertible-section-localization` | 3015 | none |
-| `lem-sc-p1-twist-multiplication` | 3015 | none |
 | `lem-sc-smooth-omega-finite-locally-free` | 3015 | none |
 | `lem-sc-smooth-proper-diagonal-conormal-differentials` | 3015 | none |
 | `lem-sc-smooth-proper-diagonal-koszul-dual` | 3015 | none |
@@ -328,7 +326,7 @@
 | `lem-pur-rhom-well-defined` | - | none |
 | `lem-zl-noether-normalization-dimension` | - | none |
 
-## Stage 2: nodes to state (605)
+## Stage 2: nodes to state (607)
 
 | node | distance to Mathlib | kind |
 |---|---|---|
@@ -434,6 +432,7 @@
 | `lem-sc-finite-pushforward-locally-free` | 1 | state |
 | `lem-sc-finite-type-nonclosed-closure-closed-points` | 1 | state |
 | `lem-sc-four-lemma` | 1 | state |
+| `lem-sc-free-prime-membership` | 1 | state |
 | `lem-sc-glue-component-line-bundles` | 1 | state |
 | `lem-sc-glue-component-reduced-cover-sections` | 1 | state |
 | `lem-sc-glue-component-transition-cocycle` | 1 | state |
@@ -553,6 +552,7 @@
 | `lem-weil-pbc-etale-localize-upstairs` | 1 | state |
 | `lem-weil-pbc-etale-near-prime-naive-cotangent-vanishing` | 1 | state |
 | `lem-weil-pbc-etale-neighbourhood-prescribed-residue-field` | 1 | state |
+| `lem-weil-pbc-etale-open-fpqc-descent` | 1 | state |
 | `lem-weil-pbc-etale-over-normal-ring-normal` | 1 | state |
 | `lem-weil-pbc-etale-residue-polynomial-lift` | 1 | state |
 | `lem-weil-pbc-etale-retraction-finite-product-local` | 1 | state |
@@ -938,7 +938,7 @@
 | `lem-weil-pbc-p1-field-dimension-one` | 4 | state |
 | `lem-weil-pbc-projective-space-zero-isomorphism` | 4 | state |
 
-Not open yet: 338 nodes that wait for stage 1, 1255 nodes that wait for a statement dependency.
+Not open yet: 336 nodes that wait for stage 1, 1258 nodes that wait for a statement dependency.
 
 ## Stage 3: modules to prove (0)
 
