@@ -1,8 +1,8 @@
 # Work queue
 
-862 items; claim with `tools/claim.py next <group> [--stage N]`.
+858 items; claim with `tools/claim.py next <group> [--stage N]`.
 
-## Stage 1: nodes to split (666)
+## Stage 1: nodes to split (662)
 
 | node | distance to a target | Lean state on the done branch |
 |---|---|---|
@@ -14,10 +14,6 @@
 | `lem-weil-pbc-site-plus-construction-functorial` | 1011 | none |
 | `lem-weil-pbc-site-plus-of-separated-is-sheaf` | 1011 | none |
 | `lem-weil-pbc-small-etale-representable-presheaf-sheaf` | 1011 | none |
-| `lem-weil-pbc-universal-first-order-thickening-exists` | 1011 | none |
-| `lem-weil-pbc-universal-thickening-open-restriction` | 1011 | none |
-| `lem-weil-pbc-unramified-quasi-finite-at-points` | 1011 | none |
-| `lem-weil-pbc-vanishing-projective` | 1011 | none |
 | `lem-weil-pbc-zariski-pair-rank-one-propagation` | 1011 | none |
 | `def-weil-pbc-ample-invertible-module` | 1012 | none |
 | `def-weil-pbc-complete-intersection-over-field` | 1012 | none |
@@ -874,7 +870,7 @@
 | `lem-weil-pbc-p1-field-dimension-one` | 4 | state |
 | `lem-weil-pbc-projective-space-zero-isomorphism` | 4 | state |
 
-Not open yet: 678 nodes that wait for stage 1, 484 nodes that wait for a statement dependency.
+Not open yet: 674 nodes that wait for stage 1, 488 nodes that wait for a statement dependency.
 
 ## Stage 3: modules to prove (0)
 
