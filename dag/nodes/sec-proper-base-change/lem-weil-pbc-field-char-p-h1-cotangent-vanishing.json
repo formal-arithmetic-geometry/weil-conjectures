@@ -10,9 +10,67 @@
  "stmt_deps": [
   "def-weil-pbc-smooth-ring-map"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "*Every finitely generated extension of $\\mathbf F_p$ is separable.* Let $E/\\mathbf F_p$ be a finitely generated field extension, $E=\\mathbf F_p(a_1,\\dots,a_n)$. By [lem-weil-pbc-make-separable] there are a field $E''$ with a field homomorphism $\\iota:E\\to E''$ and a subfield $k'\\subseteq E''$ containing the image $P$ of $\\mathbf F_p$ (the prime field of $E''$) such that $k'/P$ and $E''/\\iota(E)$ are finite purely inseparable and $E''$ is separable over $k'$ [def-weil-pbc-separable-field-extension] (2). First, $k'=P$: let $\\alpha\\in k'$; by [def-weil-pbc-finite-purely-inseparable-extension] $c:=\\alpha^{p^m}\\in P$ for some $m\\ge0$; every element of $P\\cong\\mathbf F_p$ satisfies $c^p=c$ (Fermat), so $c^{p^m}=c$ and $(\\alpha-c)^{p^m}=\\alpha^{p^m}-c^{p^m}=c-c=0$ ($x\\mapsto x^p$ is additive in characteristic $p$); $E''$ is a field, so $\\alpha=c\\in P$. Hence $E''$ is separable over $P$. Now let $E'\\subseteq E$ be a subextension finitely generated over $\\mathbf F_p$, $E'=\\mathbf F_p(b_1,\\dots,b_r)$. The field homomorphism $\\iota$ is injective and is the identity on prime fields, so $\\iota(E')=P(\\iota(b_1),\\dots,\\iota(b_r))$ is a finitely generated subextension of $E''/P$ and is therefore separably generated over $P$ (definition (2) for $E''/P$): it has a transcendence basis $(y_j)$ over $P$ with $\\iota(E')/P(y_j)$ separable algebraic. Transporting along the isomorphism of fields $\\iota|_{E'}:E'\\to\\iota(E')$, which is the identity on prime fields, $(\\iota^{-1}(y_j))$ is a transcendence basis of $E'/\\mathbf F_p$ [def-weil-pbc-transcendence-basis] and $E'/\\mathbf F_p(\\iota^{-1}(y_j))$ is separable algebraic [def-weil-pbc-separable-algebraic-extension] (an isomorphism preserves algebraic independence, algebraicity and minimal polynomials). So every finitely generated subextension of $E/\\mathbf F_p$ is separably generated, i.e. $E$ is separable over $\\mathbf F_p$ [def-weil-pbc-separable-field-extension] (2). (This replaces the source's appeal to Definition 030Y / Lemma 030Z, '$\\mathbf F_p$ is perfect, so every extension is separable', by 030R for $k=\\mathbf F_p$, where the purely inseparable $k'$ is forced to be $\\mathbf F_p$.)",
+   "uses": [
+    "lem-weil-pbc-make-separable",
+    "def-weil-pbc-separable-field-extension",
+    "def-weil-pbc-finite-purely-inseparable-extension",
+    "def-weil-pbc-transcendence-basis",
+    "def-weil-pbc-separable-algebraic-extension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra, Lemma Tag 030R (lemma-make-separable, line 10513) with k = F_p, in place of Definition Tag 030Y (definition-perfect, line 10489) and Lemma Tag 030Z (lemma-perfect, line 10495); Definition Tag 030O (definition-separable-field-extension, line 9915)"
+   }
+  },
+  {
+   "text": "*$H_1$ vanishes for finitely generated subextensions.* Let $E\\subseteq K$ be a subfield finitely generated over $\\mathbf F_p$. By step 1, $E/\\mathbf F_p$ is separable, so by [lem-weil-pbc-separable-extension-fraction-field-of-smooth-algebra] there is an $\\mathbf F_p$-subalgebra $B\\subseteq E$ with $\\mathbf F_p\\to B$ smooth and $E$ the fraction field of $B$. By condition (ii) of smoothness [def-weil-pbc-smooth-ring-map], $H_1(L_{B/\\mathbf F_p})=0$. $B$ is a domain, so $T=B\\setminus\\{0\\}$ is multiplicative; by [lem-weil-pbc-h1-cotangent-localization] (with $R=\\mathbf F_p$, $A=B$) $H_1(L_{T^{-1}B/\\mathbf F_p})\\cong T^{-1}H_1(L_{B/\\mathbf F_p})=0$ [def-weil-pbc-module-localization]. The $\\mathbf F_p$-algebra map $\\sigma:T^{-1}B\\to E$, $b/t\\mapsto bt^{-1}$, is well defined ($t\\ne0$ is a unit of $E$), surjective (every element of $E$ is $b/b'$ with $b'\\neq0$) and injective ($bt^{-1}=0$ forces $b=0$), hence an isomorphism. The $\\mathbf F_p$-algebra isomorphism $\\Sigma:\\mathbf F_p[T^{-1}B]\\to\\mathbf F_p[E]$, $[x]\\mapsto[\\sigma(x)]$ (renaming the variables [def-weil-pbc-mv-polynomial-ring]), satisfies $\\gamma_E\\circ\\Sigma=\\sigma\\circ\\gamma_{T^{-1}B}$ for the canonical presentations, so it maps $I_{T^{-1}B}=\\ker\\gamma_{T^{-1}B}$ onto $I_E=\\ker\\gamma_E$ and $I_{T^{-1}B}^2$ onto $I_E^2$; and $\\partial\\Sigma(g)/\\partial[\\sigma(x)]=\\Sigma(\\partial g/\\partial[x])$, so $g\\bmod I^2\\mapsto\\Sigma(g)\\bmod I_E^2$ is a bijection $I_{T^{-1}B}/I_{T^{-1}B}^2\\to I_E/I_E^2$ carrying the kernel of $\\delta$ onto the kernel of $\\delta_E$ (the differentials of [def-weil-pbc-smooth-ring-map]). Hence $H_1(L_{E/\\mathbf F_p})\\cong H_1(L_{T^{-1}B/\\mathbf F_p})=0$.",
+   "uses": [
+    "lem-weil-pbc-separable-extension-fraction-field-of-smooth-algebra",
+    "def-weil-pbc-smooth-ring-map",
+    "lem-weil-pbc-h1-cotangent-localization",
+    "def-weil-pbc-module-localization",
+    "def-weil-pbc-mv-polynomial-ring"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra, Lemma Tag 07BV (lemma-colimit-syntomic, line 44527), second assertion: 'If K/k is separable, then K is a filtered colimit of smooth algebras over k', proved there by Lemma Tag 037X (lemma-localization-smooth-separable, line 44512); Lemma Tag 00S7 (lemma-localize-NL, line 35692) for H_1 of the localization"
+   }
+  },
+  {
+   "text": "*Reduction to finitely generated subextensions.* Let $\\gamma:\\mathbf F_p[K]\\to K$ be the canonical presentation, $I=\\ker\\gamma$, so that $H_1(L_{K/\\mathbf F_p})=\\ker(\\delta:I/I^2\\to\\bigoplus_{s\\in K}K\\,\\mathrm d[s])$ with $\\delta(g\\bmod I^2)=\\sum_s\\gamma(\\partial g/\\partial[s])\\,\\mathrm d[s]$ [def-weil-pbc-smooth-ring-map]. Let $\\xi=g\\bmod I^2\\in H_1(L_{K/\\mathbf F_p})$, $g\\in I$; thus $\\gamma(\\partial g/\\partial[s])=0$ for every $s\\in K$. The polynomial $g$ involves only finitely many variables $[s_1],\\dots,[s_m]$ [def-weil-pbc-mv-polynomial-ring]; let $E=\\mathbf F_p(s_1,\\dots,s_m)\\subseteq K$. The polynomial ring $\\mathbf F_p[E]$ on the variables $[s]$, $s\\in E$, is the subring of $\\mathbf F_p[K]$ of polynomials in these variables, it contains $g$ and is stable under $\\partial/\\partial[s]$ for $s\\in E$, and its canonical presentation $\\gamma_E$ is the restriction of $\\gamma$ (both send $[s]$ to $s$). Hence $\\gamma_E(g)=\\gamma(g)=0$, i.e. $g\\in I_E=\\ker\\gamma_E$, and $\\gamma_E(\\partial g/\\partial[s])=\\gamma(\\partial g/\\partial[s])=0$ in $E\\subseteq K$ for every $s\\in E$; so $g\\bmod I_E^2$ lies in $H_1(L_{E/\\mathbf F_p})$, which is $0$ by step 2. Thus $g\\in I_E^2$, i.e. $g=\\sum_if_ih_i$ with $f_i,h_i\\in I_E\\subseteq I$, so $g\\in I^2$ and $\\xi=0$. Therefore $H_1(L_{K/\\mathbf F_p})=0$.",
+   "uses": [
+    "def-weil-pbc-smooth-ring-map",
+    "def-weil-pbc-mv-polynomial-ring"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra, Lemma Tag 07BQ (lemma-colimits-NL, line 35557) and its proof (R[S] and I are the unions of the R_lambda[S_lambda] and I_lambda), for K the directed union of its finitely generated subfields, as used in the proof of Lemma Tag 0320 (lemma-formally-smooth-extensions-easy, line 44409), part (3)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-make-separable",
+  "def-weil-pbc-separable-field-extension",
+  "def-weil-pbc-finite-purely-inseparable-extension",
+  "def-weil-pbc-transcendence-basis",
+  "def-weil-pbc-separable-algebraic-extension",
+  "lem-weil-pbc-separable-extension-fraction-field-of-smooth-algebra",
+  "def-weil-pbc-smooth-ring-map",
+  "lem-weil-pbc-h1-cotangent-localization",
+  "def-weil-pbc-module-localization",
+  "def-weil-pbc-mv-polynomial-ring"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Algebra, Proposition Tag 0322 (proposition-characterize-separable-field-extensions, line 44475), (1) => (5) for k = F_p, by the route of Lemma Tag 0320 (lemma-formally-smooth-extensions-easy, line 44409) part (3): H_1 of K is the colimit of H_1 of its finitely generated subextensions (Lemma Tag 07BQ, line 35557), each of which is a localization of a smooth algebra (Lemma Tag 07BV, line 44527, via 037X, line 44512, and 00S7, line 35692) instead of formally smooth via 0320 (1), (2), 031H, 031Z; separability of K/F_p (030Y/030Z) obtained from Lemma Tag 030R (line 10513)"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -34,10 +92,59 @@
    "results": "only RingTheory/Smooth/Field.lean:54 of_perfectField (EssFiniteType); sed -n 1,70p read",
    "date": "2026-10-10",
    "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "every field extension of a perfect field is formally smooth; H1Cotangent subsingleton for field extension",
+   "results": "Algebra.FormallySmooth.of_perfectField (Mathlib.RingTheory.Smooth.Field, [PerfectField K] [Algebra.EssFiniteType K L]), Algebra.FormallySmooth.mk, Algebra.formallySmooth_iff / iff_subsingleton_and_projective, Algebra.FormallySmooth.subsingleton_h1Cotangent (Mathlib.RingTheory.Smooth.Basic)",
+   "date": "2026-10-10",
+   "verdict": "no match: only essentially finite type extensions of a perfect field"
+  },
+  {
+   "tool": "loogle",
+   "query": "Subsingleton (Algebra.H1Cotangent _ _)",
+   "results": "Algebra.FormallySmooth.subsingleton_h1Cotangent, Algebra.FormallySmooth.mk, Algebra.formallySmooth_iff, Algebra.Extension.cotangentComplex_injective_iff, Algebra.FormallySmooth.kerCotangentToTensor_injective_iff, Algebra.FormallyEtale.subsingleton_h1Cotangent / mk, Algebra.formallyEtale_iff",
+   "date": "2026-10-10",
+   "verdict": "no match: no vanishing of H1Cotangent for an arbitrary field over ZMod p or a perfect field"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "first homology of the naive cotangent complex of a field over its prime field F_p vanishes (any field of characteristic p is formally smooth over ZMod p)",
+   "results": "Algebra.IsStandardSmooth.subsingleton_h1Cotangent, Algebra.SubmersivePresentation.subsingleton_h1Cotangent (Smooth/StandardSmoothCotangent), Algebra.H1Cotangent (Extension/Cotangent/Basic), Algebra.FormallyEtale.subsingleton_h1Cotangent, Algebra.FormallySmooth.subsingleton_h1Cotangent, Algebra.FormallySmooth.iff_injective_cotangentComplexBaseChange_residueField",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "formal smoothness is preserved by directed unions / filtered colimits of algebras; H1Cotangent commutes with directed colimits",
+   "results": "Algebra.FormallySmooth.comp, Algebra.FormallySmooth.of_pi / instForallOfFinite, RingHom.EssFiniteType.exists_comp_map_eq_of_isColimit, localCohomology.hasColimitDiagram",
+   "date": "2026-10-10",
+   "verdict": "no match: no colimit statement for H1Cotangent or FormallySmooth"
+  },
+  {
+   "tool": "leansearch",
+   "query": "H1Cotangent of a directed union of subalgebras; formally smooth algebra is a filtered colimit",
+   "results": "Algebra.FormallySmooth, Algebra.FormallySmooth.mk, iff_injective_lTensor_residueField, iff_subsingleton_and_projective, subsingleton_h1Cotangent, iff_comp_surjective",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rn 'PerfectField|IsSeparable|Directed|colimit|iSup' on Mathlib/RingTheory/Smooth/*.lean, Extension/Cotangent/*.lean, Kaehler/*.lean; grep -rln H1Cotangent Mathlib (14 files: Smooth/{Locus,Kaehler,StandardSmoothOfFree,StandardSmoothCotangent,Basic}, Etale/{Basic,Locus,Kaehler,Descent}, Extension/Cotangent/{Free,Basic,BaseChange}, Extension/ExtendScalars, Kaehler/JacobiZariski); sed -n 1,70p RingTheory/Smooth/Field.lean",
+   "results": "Smooth/Field.lean:44 Algebra.FormallySmooth.of_algebraicIndependent_of_isSeparable (separably generated extensions, no finiteness), :53 of_perfectField (EssFiniteType); no directed-colimit lemma for H1Cotangent",
+   "date": "2026-10-10",
+   "verdict": "no match; candidate recorded in mathlib_candidate"
+  },
+  {
+   "tool": "local_search",
+   "query": "Algebra.FormallySmooth.of_algebraicIndependent_of_isSeparable (project root ~/weil-conjectures-slopmaster2)",
+   "results": "found in .lake/packages/mathlib/Mathlib/RingTheory/Smooth/Field.lean (index: unavailable)",
+   "date": "2026-10-10",
+   "verdict": "exists; not a match (needs a separating transcendence basis of K itself)"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "worker",
@@ -57,5 +164,18 @@
   }
  },
  "chapter": "sec-proper-base-change",
- "unit": "sk-thm-p1"
+ "unit": "sk-thm-p1",
+ "mathlib_candidate": {
+  "declaration": "Algebra.FormallySmooth.of_algebraicIndependent_of_isSeparable, Algebra.FormallySmooth.of_perfectField, Algebra.FormallySmooth.subsingleton_h1Cotangent",
+  "file": "Mathlib/RingTheory/Smooth/Field.lean, Mathlib/RingTheory/Smooth/Basic.lean",
+  "line": "Field.lean:44-46 and :53-54 (read by sed -n 1,70p)",
+  "how": "Mathlib gives FormallySmooth K L, hence Subsingleton (H1Cotangent K L), for L separably generated over K (a separating transcendence family v with L separable algebraic over K(v)) and for L essentially of finite type over a perfect K. An arbitrary field of characteristic p need not be separably generated over F_p (F_p(t^{1/p^infinity}) is perfect, so it is purely inseparable over every F_p(s), s transcendental), and Mathlib has no statement that H1Cotangent or formal smoothness passes to directed unions of subalgebras; agreement of Algebra.H1Cotangent with the node's H_1 (canonical presentation) is by definition (Extension/Cotangent/Basic.lean:561, abbrev over Generators.self, the kernel of the cotangent complex :339). Not a leaf (B8)."
+ },
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "lem-weil-pbc-field-char-p-h1-cotangent-vanishing",
+  "worker": "stage1",
+  "summary": "Statement unchanged (correct against Stacks 0322 (1) => (5) with k = F_p; the citer lem-weil-pbc-geometrically-regular-h1-injective uses exactly H_1(L_{L/F_p}) = 0 for residue fields L, steps 2, 7, 8 of its proof). Proof read in algebra.tex: 0322 is 'combine 030W, 0321, 031Y, 031X'; (1) => (5) goes through 0320 (3): K = colim of finitely generated K_i, H_1(L_{K_i/k}) = 0, colimit by 07BQ. Three steps, no new node: (1) every finitely generated E/F_p is separable, from the existing split node 030R (lem-weil-pbc-make-separable) with k = F_p, where the finite purely inseparable k' is forced to be F_p (elementary, Fermat), in place of 030Y/030Z (no node exists for 'F_p perfect'); (2) H_1(L_{E/F_p}) = 0 for such E: E = Frac B with B smooth (037X node, as in the proof of 07BV), H_1(L_B) = 0 by the definition, localization by the 00S7 leaf, and invariance of H_1 of the canonical presentation under an F_p-algebra isomorphism written out (renaming variables); (3) the colimit step 07BQ written out for the union of finitely generated subfields: a cycle g involves finitely many variables, so it is a cycle of the canonical presentation of a finitely generated E and dies in I_E^2 subset I^2 (only surjectivity of colim H_1 -> H_1 is needed). All cited nodes are in unit sk-thm-p1. Mathlib: no match for arbitrary K (Smooth/Field.lean has only separably generated and EssFiniteType-over-perfect cases); candidate recorded. Tags 0322, 0320, 07BQ, 07BV, 037X, 00S7, 030R, 030O, 030Y, 030Z verified in tags/tags."
+ },
+ "reviewed": "Reviewed by L 2026-10-10: faithful to Algebra 0320 (3)/0322 (1)=>(5) with k = F_p; 'F_p is perfect' (030Y/030Z) replaced by lem-weil-pbc-make-separable with the purely inseparable k' forced to be F_p (step 1, checked); H_1 = 0 for finitely generated separable E via 037X and the localization node (step 2); the colimit argument 07BQ written out (step 3). No new nodes; Mathlib candidate recorded (FormallySmooth of separably generated / essentially finite type over perfect fields, no directed-union statement; B8)."
 }
