@@ -2626,3 +2626,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 21:11 L: merged deliver/K1/lem-sc-hilbert-denominator-ideal-nowhere-dense (reviewer FIX; first push; new nodes: 0)
 - 21:11 L: merged deliver/J1/lem-sc-hilbert-embedded-points-affine-localization (reviewer FIX; first push; new nodes: 0)
 - 21:11 L: merged deliver/C1/lem-pc-derived-pullback-tor-independent-flat-complex (reviewer FIX; first push; new nodes: 0)
+- 21:12 L: merged deliver/M1/lem-pc-pseudo-coherent-finite-tor-perfect (reviewer FIX; first push; new nodes: 1)

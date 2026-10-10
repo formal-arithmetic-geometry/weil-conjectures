@@ -24,9 +24,57 @@
   "def-pur-pseudo-coherent-complex",
   "def-pc-perfect-complex"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Read the hypothesis as in its citers: there are integers a <= b with H^i(K \\otimes^L_{\\mathcal O_S} \\mathcal F)=0 for every \\mathcal O_S-module \\mathcal F and every i outside [a,b]. Perfectness is local on the scheme by [def-pc-perfect-complex], and by the local definition [def-pur-pseudo-coherent-complex] there is an open cover of S on whose members K is quasi-isomorphic to a bounded-above complex of finite free modules; refine it to a cover by affine opens V = Spec(R), on which the same holds. For an \\mathcal O_V-module G, with j: V -> S the inclusion, part (1) of [lem-pc-affine-derived-pullback-tensor-tilde] gives (K \\otimes^L j_*G)|_V \\cong K|_V \\otimes^L_{\\mathcal O_V} G, so H^i(K|_V \\otimes^L G)=0 for i outside [a,b].",
+   "uses": [
+    "def-pc-perfect-complex",
+    "def-pur-pseudo-coherent-complex",
+    "lem-pc-affine-derived-pullback-tensor-tilde"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/cohomology.tex",
+    "place": "Lemma 20.49.5 (Tag 08CQ), proof: locality on the scheme"
+   }
+  },
+  {
+   "text": "On V = Spec(R) let K|_V \\cong F^\\bullet with F^\\bullet a bounded-above complex of finite free \\mathcal O_V-modules. By [lem-weil-pbc-spec-module-tilde-sections] (with N = R) the global sections of \\mathcal O_V are R, so \\mathcal O_V^n = \\widetilde{R^n} and each differential \\mathcal O_V^{n} -> \\mathcal O_V^{m} is a matrix over R; hence F^\\bullet = \\widetilde{P^\\bullet} for a bounded-above complex P^\\bullet of finite free R-modules. The construction \\widetilde{(-)} is exact (its sections over the basic opens D(r) are localizations, [lem-weil-pbc-spec-module-tilde-sections]) and \\widetilde M = 0 only for M = 0 (global sections recover M). For an R-module M, part (3) of [lem-pc-affine-derived-pullback-tensor-tilde] gives \\widetilde{P^\\bullet} \\otimes^L \\widetilde M \\cong \\widetilde{P^\\bullet \\otimes^L_R M}, so by Step 1 applied to G = \\widetilde M and exactness, H^i(P^\\bullet \\otimes^L_R M) = 0 for i outside [a,b]. Thus C = P^\\bullet satisfies the hypotheses of the ring criterion [lem-pc-ring-pseudo-coherent-finite-tor-perfect], which gives an isomorphism in D(R) between P^\\bullet and a bounded complex E^\\bullet of finitely generated projective R-modules.",
+   "uses": [
+    "lem-weil-pbc-spec-module-tilde-sections",
+    "lem-pc-affine-derived-pullback-tensor-tilde",
+    "lem-pc-ring-pseudo-coherent-finite-tor-perfect"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/cohomology.tex",
+    "place": "Lemma 20.49.5 (Tag 08CQ), proof: reduce to the affine case and apply More on Algebra, Lemma 15.76.2 (Tag 0658)"
+   }
+  },
+  {
+   "text": "Since \\widetilde{(-)} is exact (Step 2) it carries the quasi-isomorphisms of a roof between P^\\bullet and E^\\bullet to quasi-isomorphisms, so K|_V \\cong \\widetilde{P^\\bullet} \\cong \\widetilde{E^\\bullet} in D(\\mathcal O_V). Each E^i is a direct summand of some R^n, so \\widetilde{E^i} is a direct summand of \\mathcal O_V^n and \\widetilde{E^\\bullet} is strictly perfect; hence K|_V is perfect by [def-pc-perfect-complex]. Since this holds on every member of the affine cover, K is perfect on S.",
+   "uses": [
+    "def-pc-perfect-complex"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/cohomology.tex",
+    "place": "Lemma 20.49.5 (Tag 08CQ), conclusion"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-perfect-complex",
+  "def-pur-pseudo-coherent-complex",
+  "lem-pc-affine-derived-pullback-tensor-tilde",
+  "lem-weil-pbc-spec-module-tilde-sections",
+  "lem-pc-ring-pseudo-coherent-finite-tor-perfect"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Lemma 20.49.5 (Tag 08CQ; cohomology-lemma-perfect)"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -58,12 +106,36 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-pc-bounded-coherent-finite-tor-proper-pushforward-perfect",
   "by": "worker",
   "date": "2026-10-10"
  },
  "chapter": "sec-picard-framework",
- "unit": "sk-thm-picard-duality"
+ "unit": "sk-thm-picard-duality",
+ "split_report": {
+  "date": "2026-10-11",
+  "item": "lem-pc-pseudo-coherent-finite-tor-perfect",
+  "worker": "stage1",
+  "summary": "Split Tag 08CQ into the scheme-local reduction, the affine derived-category translation, and the ring criterion of Tag 0658. Added one statement-only algebraic node for the ring criterion; no sorry-free project declaration states the scheme-level item.",
+  "blueprint": "Realizes the ancestor proof clause 'finite Tor dimension together with pseudo-coherence implies perfectness' by its locality and affine reduction.",
+  "tool_uses": [
+   {
+    "node": "lem-pc-affine-qcoh-derived-equivalence",
+    "why": "Step 2 uses the affine D(R) equivalence as a generic derived-category translation; the Picard-duality unit has no replacement for this general affine tool."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pc-affine-derived-pullback-tensor-tilde"
+ ],
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-pft2512",
+  "group": "M1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-pft2512 (reviewer sub-agent of L); spot-checked: Item vs Tag 08CQ and citer lem-pc-bounded-coherent-finite-tor-proper-pushforward-perfect Step 3/4 (global Tor amplitude [a,b] over all O_S-modules: hypotheses match, C4 ok); ring node vs Tag 0658 (real lemma, more general than lem-weil-bounded-finite-tor-perfect, not class b/c/d). FIX more, RETURN less: C1 in Step 2 (missed by the second reading): lem-pc-affine-qcoh-derived-equivalence only gives D(A) ~ D_QCoh and states neither that pseudo-coherent K|U corresponds to a pseudo-coherent R-complex (Tag 08E7) nor that sheaf Tor amplitude equals R-module Tor amplitude (Tag 08EA); repaired by taking K|V = tilde(P) for a bounded-above finite free R-complex P directly from def-pur-pseudo-coherent-complex and lem-weil-pbc-spec-module-tilde-sections, transferring Tor amplitude via lem-pc-affine-derived-pullback-tensor-tilde parts (1) and (3) (generic affine tensor tool, C7, declared as tool use) and exactness of tilde, Step 3 made explicit; dropped the now unused tool use lem-pc-affine-qcoh-derived-equivalence; proof_deps corrected.; 1 file(s) fixed by the reviewer"
+ }
 }
