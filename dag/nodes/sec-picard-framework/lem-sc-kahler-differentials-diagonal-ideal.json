@@ -1,0 +1,50 @@
+{
+ "id": "lem-sc-kahler-differentials-diagonal-ideal",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-finite-duality",
+   "place": "proof, diagonal conormal identification: the conormal sheaf of Delta is Omega_{X/S} (affine step: Omega_{A/R} = I/I^2)",
+   "via": [
+    "lem-sc-smooth-proper-relative-dualizing-general",
+    "lem-sc-smooth-proper-diagonal-conormal-differentials"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Kähler differentials as the conormal module of the diagonal",
+ "statement": "Let $R\\to A$ be a homomorphism of commutative rings and let $I=\\ker(\\mu:A\\otimes_R A\\to A)$ be the kernel of the multiplication map $\\mu(a\\otimes b)=ab$. Regard $I/I^2$ as an $A$-module through $(A\\otimes_R A)/I\\cong A$. Then there is a canonical isomorphism of $A$-modules $\\Omega_{A/R}\\cong I/I^2$ [def-weil-pbc-kahler-differentials] sending $\\mathrm da$ to the class of $1\\otimes a-a\\otimes 1$ for every $a\\in A$.",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Tag 00RW (algebra-lemma-differentials-diagonal)"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-kahler-differentials"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Tag 00RW"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "grep -n 'def KaehlerDifferential\\b|KaehlerDifferential.ideal|D_apply|linearMapEquivDerivation' Mathlib/RingTheory/Kaehler/Basic.lean in ~/weil-conjectures-slopmaster2/.lake/packages/mathlib",
+   "results": "KaehlerDifferential.ideal (line 64) = ker(TensorProduct.lmul'); KaehlerDifferential := (ideal R S).Cotangent (line 153); KaehlerDifferential.D_apply (line 218, rfl): D s = class of 1 ⊗ s - s ⊗ 1; linearMapEquivDerivation (line 327)",
+   "date": "2026-10-10",
+   "verdict": "candidate leaf for the next stage: Mathlib defines Ω[A⁄R] := (KaehlerDifferential.ideal R A).Cotangent = I/I^2 with I = ker(TensorProduct.lmul' R) (lines 64, 153), and KaehlerDifferential.D_apply (line 218, proved by rfl) states D a = toCotangent ⟨1 ⊗ₜ a - a ⊗ₜ 1, _⟩. Since [def-weil-pbc-kahler-differentials] is matched to (KaehlerDifferential R A, KaehlerDifferential.D R A) with its universal property linearMapEquivDerivation (line 327), the isomorphism is the identity of I.Cotangent and the formula for d is D_apply; the A-module structure on I.Cotangent is the one through (A ⊗ A)/I ≅ A (KaehlerDifferential.module, S acting via includeLeft, equal on I/I^2 to the action via the quotient)."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "created": {
+  "item": "lem-sc-smooth-proper-diagonal-conormal-differentials",
+  "by": "worker",
+  "date": "2026-10-10"
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality"
+}

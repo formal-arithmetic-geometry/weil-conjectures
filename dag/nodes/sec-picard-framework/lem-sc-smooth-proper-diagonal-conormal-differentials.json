@@ -13,7 +13,7 @@
  },
  "kind": "statement",
  "title": "Conormal sheaf of the diagonal and relative differentials",
- "statement": "Let f:X\\to S be a morphism of schemes [def-pc-scheme], let \\Delta:X\\to X\\times_S X be its diagonal [def-pc-base-change] with ideal sheaf \\mathcal I [def-sbc-closed-immersion-ideal-sheaf], and let C_\\Delta=\\Delta^*(\\mathcal I/\\mathcal I^2) be the conormal sheaf [def-pc-module-pullback]. Then there is a canonical isomorphism C_\\Delta\\cong\\Omega^1_{X/S} [def-sc-kahler-differentials].",
+ "statement": "Let f:X\\to S be a morphism of schemes [def-pc-scheme], and let \\Delta:X\\to X\\times_S X be its diagonal [def-pc-base-change]. The conormal sheaf C_\\Delta of this immersion is defined locally by choosing an open neighbourhood W of \\Delta(X) in X\\times_S X on which \\Delta is a closed immersion, with ideal sheaf \\mathcal I, and setting C_\\Delta=\\Delta^*(\\mathcal I/\\mathcal I^2) [def-pc-module-pullback]; this is independent of the choice of W. Define the relative Kähler differential sheaf \\Omega^1_{X/S} by requiring that on every affine U=\\operatorname{Spec}(A)\\subseteq X mapping into an affine V=\\operatorname{Spec}(R)\\subseteq S, it is the sheaf associated to the A-module of Kähler differentials \\Omega_{A/R} [def-weil-pbc-kahler-differentials]. Then there is a canonical isomorphism C_\\Delta\\cong\\Omega^1_{X/S}.",
  "source": {
   "document": "literature/stacks-project/morphisms.tex",
   "place": "Tag 08S2 (conormal sheaf of the diagonal is the sheaf of relative differentials)"
@@ -21,13 +21,43 @@
  "stmt_deps": [
   "def-pc-scheme",
   "def-pc-base-change",
-  "def-sbc-closed-immersion-ideal-sheaf",
   "def-pc-module-pullback",
-  "def-sc-kahler-differentials"
+  "def-weil-pbc-kahler-differentials"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Work on affine opens U=\\operatorname{Spec}(A) of X and V=\\operatorname{Spec}(R) of S with f(U)\\subseteq V. As the statement allows any admissible W, take W to be the union of the affine opens U\\times_V U=\\operatorname{Spec}(A\\otimes_R A), in which \\Delta(X) is closed (Stacks 01KJ). Over U\\times_V U the diagonal is the closed immersion \\operatorname{Spec}(A)\\to\\operatorname{Spec}(A\\otimes_R A) induced by the surjective multiplication map, with ideal I=\\ker(A\\otimes_R A\\to A). The affine conormal calculation [lem-weil-pbc-affine-conormal-sections] identifies \\Gamma(U,C_\\Delta) with I/I^2. By [lem-sc-kahler-differentials-diagonal-ideal] there is a canonical A-module isomorphism \\Omega_{A/R}\\cong I/I^2 [def-weil-pbc-kahler-differentials] sending \\mathrm da to the class of 1\\otimes a-a\\otimes 1. Hence C_\\Delta|_U is canonically the sheaf associated to \\Omega_{A/R}, which is the asserted affine description of \\Omega^1_{X/S}.",
+   "uses": [
+    "lem-weil-pbc-affine-conormal-sections",
+    "lem-sc-kahler-differentials-diagonal-ideal",
+    "def-weil-pbc-kahler-differentials"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 08S2, affine calculation of the conormal of the diagonal"
+   }
+  },
+  {
+   "text": "The affine identifications of step 1 are compatible with restriction to smaller affine opens U'\\subseteq U, V'\\subseteq V, because both send \\mathrm da to the class of 1\\otimes a-a\\otimes 1, and such elements generate. Hence they glue to a canonical morphism of \\mathcal O_X-modules C_\\Delta\\to\\Omega^1_{X/S}. It is an isomorphism because it is an isomorphism on the affine basis from step 1 (the sheaf isomorphism criterion).",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 08S2, sheafification and gluing after the affine calculation"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-affine-conormal-sections",
+  "lem-sc-kahler-differentials-diagonal-ideal",
+  "def-weil-pbc-kahler-differentials"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/morphisms.tex",
+  "place": "Tag 08S2"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -52,12 +82,37 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-sc-smooth-proper-relative-dualizing-general",
   "by": "worker",
   "date": "2026-10-10"
  },
  "chapter": "sec-picard-framework",
- "unit": "sk-thm-picard-duality"
+ "unit": "sk-thm-picard-duality",
+ "split_report": {
+  "date": "2026-10-11",
+  "item": "lem-sc-smooth-proper-diagonal-conormal-differentials",
+  "worker": "stage1",
+  "summary": "Split Tag 08S2 into the affine conormal calculation and the elementary sheaf gluing argument; the scheme-level statement is not a Mathlib leaf.",
+  "blueprint": "Realizes the blueprint proof place 'diagonal conormal identification: the conormal sheaf of Delta is Omega_{X/S}' from lem-sc-finite-duality.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-affine-conormal-sections",
+    "why": "The existing affine-conormal lemma supplies the I/I^2 sections used in the affine calculation; no node in this Picard unit states that calculation."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-affine-conormal-sections",
+  "lem-weil-pbc-affine-conormal-sections"
+ ],
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-dcd1745",
+  "group": "H1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-dcd1745 (reviewer sub-agent of L); spot-checked: Statement vs Stacks 08S2 (morphisms lemma-differentials-diagonal): general f, conormal of the diagonal immersion via W, Omega_{X/S} affine-locally Omega_{A/R}; statement change (closed-immersion assumption removed, curve-only def replaced) named with reason (E7 ok). No cycle: item cites only defs, affine-conormal (pbc unit, generic tool accepted) and new node; parent relative-dualizing-general not cited. affine-conormal hypotheses: Delta over U x_V U = Spec(A ox_R A) closed immersion with ideal ker(mu), sections over Z cap U = U. FIX more, RETURN less: (1) C1 step 1: Omega_{A/R} = I/I^2 with da -> 1ox a - a ox1 (Algebra 00RW) was argued inline, not a cited statement; added statement-only node lem-sc-kahler-differentials-diagonal-ideal (unsplit; Mathlib candidate leaf recorded: KaehlerDifferential := (ideal R S).Cotangent, Kaehler/Basic.lean 64/153, D_apply line 218 rfl), cited in step 1 and proof_deps; (2) step 1 now fixes W = union of U x_V U (Stacks 01KJ) so the affine-conormal lemma applies; (3) B4: plain '->' arrows in steps 1 and 2 rewritten as \\to, O_X as \\mathcal O_X; step 2 restriction compatibility stated via generators. Second reading by H1 missed the C1 fault (it called the generator calculation non-elementary but cited no statement for it). Small cases: A=R gives I=0=Omega; R[x]: 1ox x - x ox1 -> dx.; 2 file(s) fixed by the reviewer; 1 statement node(s) added by the reviewer (FIX more, RETURN less)"
+ }
 }
