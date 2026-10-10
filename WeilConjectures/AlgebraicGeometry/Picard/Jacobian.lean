@@ -1784,6 +1784,52 @@ theorem exists_intermediateField_representableBy {ks : Type u} [Field ks] [Algeb
               (rs.homEquiv a) :=
   sorry
 
+/-- A descent `J_K` of the Jacobian `J_s` of `C_{k_s}` to a finite separable level `K` is
+projective over `K`, so every finite set of its points lies in an affine open: `J_s` is a
+proper group scheme, hence quasi-projective, the immersion into projective space descends to
+`J_K`, and it is closed since `J_K` is proper. -/
+lemma exists_isAffineOpen_superset_of_isPullback {ks : Type u} [Field ks] [Algebra k ks]
+    [IsSepClosure k ks] (C : Scheme.{u}) [C.Over (Spec (.of k))]
+    [SmoothOfRelativeDimension 1 (C ↘ Spec (.of k))] [IsProper (C ↘ Spec (.of k))]
+    [GeometricallyIntegral (C ↘ Spec (.of k))] (Js : Over (Spec (.of ks)))
+    (rs : ((Over.map (Spec.map (CommRingCat.ofHom (algebraMap k ks)))).op ⋙
+      (picardFunctorDegree (C ↘ Spec (.of k)) 0).obj).RepresentableBy Js)
+    (K : IntermediateField k ks) (JK : Over (Spec (.of K))) (q : Js.left ⟶ JK.left)
+    (hq : IsPullback q Js.hom JK.hom (Spec.map (CommRingCat.ofHom (algebraMap K ks)))) :
+    ∀ s : Set JK.left, s.Finite → ∃ U : JK.left.Opens, IsAffineOpen U ∧ s ⊆ U := by
+  have : IsSepClosed ks := IsSepClosure.sep_closed k
+  have : SmoothOfRelativeDimension 1 (pullback (C ↘ Spec (.of k))
+      (Spec.map (CommRingCat.ofHom (algebraMap k ks))) ↘ Spec (.of ks)) :=
+    inferInstanceAs (SmoothOfRelativeDimension 1 (pullback.snd _ _))
+  have : IsProper (pullback (C ↘ Spec (.of k))
+      (Spec.map (CommRingCat.ofHom (algebraMap k ks))) ↘ Spec (.of ks)) :=
+    inferInstanceAs (IsProper (pullback.snd _ _))
+  have : GeometricallyIntegral (pullback (C ↘ Spec (.of k))
+      (Spec.map (CommRingCat.ofHom (algebraMap k ks))) ↘ Spec (.of ks)) :=
+    inferInstanceAs (GeometricallyIntegral (pullback.snd _ _))
+  obtain ⟨e⟩ := nonempty_picardFunctorDegree_iso_of_isPullback (K := ks) (C := C)
+    (C' := pullback (C ↘ Spec (.of k)) (Spec.map (CommRingCat.ofHom (algebraMap k ks))))
+    (pullback.fst _ _) (IsPullback.of_hasPullback _ _) 0
+  have hP : IsProper Js.hom := isProper_of_representableBy_picardFunctorDegree 0 Js (rs.ofIso e)
+  obtain ⟨hG, -⟩ := exists_commGrpObj_isPicardZeroMul _ (rs.ofIso e)
+  obtain ⟨α, _, j, hj, hjf⟩ := GrpObj.exists_isImmersion_projectiveSpace Js
+  have : IsImmersion j := hj
+  obtain ⟨β, _, i, hi, hif⟩ := exists_isImmersion_projectiveSpace_of_pullback (k := K) (K := ks)
+    JK.hom (hq.isoPullback.inv ≫ j) (by rw [Category.assoc, hjf, hq.isoPullback_inv_snd])
+  have : IsImmersion i := hi
+  -- `J_K` is proper, so the immersion is closed
+  have := smoothOfRelativeDimension_of_representableBy_picardFunctorDegree 0 Js (rs.ofIso e)
+  have := geometricallyIntegral_of_representableBy_picardFunctorDegree 0 Js (rs.ofIso e)
+  obtain ⟨hJK, -, -⟩ := isProper_smoothOfRelativeDimension_geometricallyIntegral_of_isPullback
+    JK.hom Js.hom q hq
+    (arithmeticGenus ks
+      (pullback (C ↘ Spec (.of k)) (Spec.map (CommRingCat.ofHom (algebraMap k ks)))))
+  have : UniversallyClosed (i ≫ ℙ(β; Spec (.of K)) ↘ Spec (.of K)) := by
+    rw [hif]
+    infer_instance
+  have := IsClosedImmersion.of_comp_of_isSeparated i (ℙ(β; Spec (.of K)) ↘ Spec (.of K))
+  exact fun s hs ↦ exists_isAffineOpen_superset_of_isClosedImmersion i s hs
+
 /-- **The descent datum is defined at a finite separable level.** Let `C` be a smooth projective
 geometrically integral curve over `k`, let `k_s` be a separable closure of `k` and let `J_s`
 represent the restriction of `Pic^0_{C/k}` to schemes over `k_s`, so that `J_s` carries the
@@ -1838,39 +1884,7 @@ theorem exists_intermediateField_descentDatum {ks : Type u} [Field ks] [Algebra 
       rw [Functor.RepresentableBy.homEquiv_overTransport]
       exact map_map_eq_map_map_of_comp_eq _ _ _ _ _ (by ext; simp) _
     exact congrArg (·.left) key
-  · -- `J_K` is quasi-projective, since `J_s` is a group scheme of finite type
-    have : IsSepClosed ks := IsSepClosure.sep_closed k
-    have : SmoothOfRelativeDimension 1 (pullback (C ↘ Spec (.of k))
-        (Spec.map (CommRingCat.ofHom (algebraMap k ks))) ↘ Spec (.of ks)) :=
-      inferInstanceAs (SmoothOfRelativeDimension 1 (pullback.snd _ _))
-    have : IsProper (pullback (C ↘ Spec (.of k))
-        (Spec.map (CommRingCat.ofHom (algebraMap k ks))) ↘ Spec (.of ks)) :=
-      inferInstanceAs (IsProper (pullback.snd _ _))
-    have : GeometricallyIntegral (pullback (C ↘ Spec (.of k))
-        (Spec.map (CommRingCat.ofHom (algebraMap k ks))) ↘ Spec (.of ks)) :=
-      inferInstanceAs (GeometricallyIntegral (pullback.snd _ _))
-    obtain ⟨e⟩ := nonempty_picardFunctorDegree_iso_of_isPullback (K := ks) (C := C)
-      (C' := pullback (C ↘ Spec (.of k)) (Spec.map (CommRingCat.ofHom (algebraMap k ks))))
-      (pullback.fst _ _) (IsPullback.of_hasPullback _ _) 0
-    have hP : IsProper Js.hom := isProper_of_representableBy_picardFunctorDegree 0 Js (rs.ofIso e)
-    obtain ⟨hG, -⟩ := exists_commGrpObj_isPicardZeroMul _ (rs.ofIso e)
-    obtain ⟨α, _, j, hj, hjf⟩ := GrpObj.exists_isImmersion_projectiveSpace Js
-    have : IsImmersion j := hj
-    obtain ⟨β, _, i, hi, hif⟩ := exists_isImmersion_projectiveSpace_of_pullback (k := K) (K := ks)
-      JK.hom (hq.isoPullback.inv ≫ j) (by rw [Category.assoc, hjf, hq.isoPullback_inv_snd])
-    have : IsImmersion i := hi
-    -- `J_K` is proper, so the immersion is closed
-    have := smoothOfRelativeDimension_of_representableBy_picardFunctorDegree 0 Js (rs.ofIso e)
-    have := geometricallyIntegral_of_representableBy_picardFunctorDegree 0 Js (rs.ofIso e)
-    obtain ⟨hJK, -, -⟩ := isProper_smoothOfRelativeDimension_geometricallyIntegral_of_isPullback
-      JK.hom Js.hom q hq
-      (arithmeticGenus ks
-        (pullback (C ↘ Spec (.of k)) (Spec.map (CommRingCat.ofHom (algebraMap k ks)))))
-    have : UniversallyClosed (i ≫ ℙ(β; Spec (.of K)) ↘ Spec (.of K)) := by
-      rw [hif]
-      infer_instance
-    have := IsClosedImmersion.of_comp_of_isSeparated i (ℙ(β; Spec (.of K)) ↘ Spec (.of K))
-    exact fun s hs ↦ exists_isAffineOpen_superset_of_isClosedImmersion i s hs
+  · exact exists_isAffineOpen_superset_of_isPullback C Js rs K JK q hq
 
 open Functor.RepresentableBy in
 /-- **`Pic^0_{C/k}` satisfies descent along a field extension.** Let `K/k` be a field extension and
@@ -2192,6 +2206,32 @@ theorem picardFunctorDegree_zero_descent_of_finiteDimensional {K : Type u} [Fiel
         hy]
     exact ⟨x, hx⟩
 
+/-- **Step 7 at a finite level.** The case of
+`AlgebraicGeometry.nonempty_representableBy_picardFunctorDegree_of_isPullback` where `K/k` is
+finite: then descent of sections of `Pic^0_{C/k}` along `T_K ⟶ T` is the fppf sheaf property
+(`AlgebraicGeometry.picardFunctorDegree_zero_descent_of_finiteDimensional`). -/
+theorem nonempty_representableBy_picardFunctorDegree_of_isPullback_of_finiteDimensional
+    {K : Type u} [Field K] [Algebra k K] [FiniteDimensional k K] (C : Scheme.{u})
+    [C.Over (Spec (.of k))]
+    [SmoothOfRelativeDimension 1 (C ↘ Spec (.of k))] [IsProper (C ↘ Spec (.of k))]
+    [GeometricallyIntegral (C ↘ Spec (.of k))] (JK : Over (Spec (.of K)))
+    (r : ((Over.map (Spec.map (CommRingCat.ofHom (algebraMap k K)))).op ⋙
+      (picardFunctorDegree (C ↘ Spec (.of k)) 0).obj).RepresentableBy JK)
+    (J : Over (Spec (.of k))) (q : JK.left ⟶ J.left)
+    (hq : IsPullback q JK.hom J.hom (Spec.map (CommRingCat.ofHom (algebraMap k K))))
+    (hinv : ∀ {T : Scheme.{u}} (f₁ f₂ : T ⟶ Spec (.of K))
+      (h : f₁ ≫ Spec.map (CommRingCat.ofHom (algebraMap k K)) =
+        f₂ ≫ Spec.map (CommRingCat.ofHom (algebraMap k K))) (a : Over.mk f₁ ⟶ JK),
+      (r.overTransport f₁ f₂ h a).left ≫ q = a.left ≫ q) :
+    Nonempty ((picardFunctorDegree (C ↘ Spec (.of k)) 0).obj.RepresentableBy J) :=
+  Functor.RepresentableBy.nonempty_representableBy_of_descent r q hq hinv
+    (fun T ↦ inferInstance)
+    (fun T a ha ↦ ⟨EffectiveEpi.desc _ a fun g₁ g₂ hg ↦ by
+        simpa using congrArg (pullback.lift g₁ g₂ hg ≫ ·) ha,
+      EffectiveEpi.fac _ _ _⟩)
+    (fun T ↦ (picardFunctorDegree_zero_descent_of_finiteDimensional C T).1)
+    (fun T ↦ (picardFunctorDegree_zero_descent_of_finiteDimensional C T).2)
+
 /-- **The Jacobian over an arbitrary ground field, as a representing object.** Let `C` be a smooth
 projective geometrically integral curve of genus `g` over a field `k`. Then `Pic^0_{C/k}` is
 represented, compatibly with the group laws, by an abelian variety of dimension `g` over `k`. No
@@ -2217,25 +2257,26 @@ theorem exists_commGrpObj_representableBy_picardFunctorDegree (ks : Type u) [Fie
   obtain ⟨e⟩ := nonempty_picardFunctorDegree_iso_of_isPullback (K := ks) (C := C)
     (C' := pullback (C ↘ Spec (.of k)) (Spec.map (CommRingCat.ofHom (algebraMap k ks))))
     (pullback.fst _ _) (IsPullback.of_hasPullback _ _) 0
-  -- Steps 2 and 3: its canonical descent datum is defined at a finite separable level `K`.
-  obtain ⟨K, _, _, JK, q', hq', D, hD, hJK⟩ :=
-    exists_intermediateField_descentDatum C Js (rJs.ofIso e.symm)
+  -- Steps 2 and 3: `J_s` and its canonical descent datum are defined at a finite separable
+  -- level `K`, where a descent `J_K` of `J_s` represents `Pic^0_{C/k}`.
+  obtain ⟨K, _, _, JK, q', hq', rK, -⟩ :=
+    exists_intermediateField_representableBy C Js (rJs.ofIso e.symm)
+  have hJK := exists_isAffineOpen_superset_of_isPullback C Js (rJs.ofIso e.symm) K JK q' hq'
   have := isFinite_specMap_algebraMap k K
   have := flat_specMap_algebraMap k K
   have := locallyOfFinitePresentation_specMap_algebraMap k K
   have := surjective_specMap_algebraMap k K
-  -- Step 4: the descent datum `φ_K` is effective, with descended scheme `J`.
-  obtain ⟨J, q, hq, hinv⟩ := D.isEffective_of_isFinite hJK
-  -- Step 7: `J` represents `Pic^0_{C/k}`, since `J ×_k k_s ≅ J_s` compatibly with the canonical
-  -- descent datum of `J_s`.
+  -- Step 4: the canonical descent datum `φ_K` of `J_K` is effective, with descended scheme `J`.
+  obtain ⟨J, q, hq, hinv⟩ := rK.overDescentDatum.isEffective_of_isFinite hJK
+  -- Step 7, at the finite level `K`: `J` represents `Pic^0_{C/k}`, since `J ×_k K ≅ J_K`
+  -- compatibly with the canonical descent datum of `J_K`.
+  obtain ⟨r⟩ := nonempty_representableBy_picardFunctorDegree_of_isPullback_of_finiteDimensional
+    C JK rK J q hq fun f₁ f₂ h a ↦ by
+      rw [← Functor.RepresentableBy.overDescentDatum_transport]
+      exact hinv f₁ f₂ h a
   have hs := specMap_algebraMap_comp_specMap_algebraMap k K ks
   have hJ : IsPullback (q' ≫ q) Js.hom J.hom (Spec.map (CommRingCat.ofHom (algebraMap k ks))) :=
     hs ▸ hq'.paste_horiz hq
-  obtain ⟨r⟩ := nonempty_representableBy_picardFunctorDegree_of_isPullback C Js
-    (rJs.ofIso e.symm) J (q' ≫ q) hJ fun f₁ f₂ h a ↦ by
-      rw [← Category.assoc, ← Functor.RepresentableBy.overDescentDatum_transport, ← hD f₁ f₂ h a,
-        hinv]
-      simp
   -- Step 6: the geometric properties descend along `k ⊆ k_s`.
   obtain ⟨hP, hS, hG⟩ := isProper_smoothOfRelativeDimension_geometricallyIntegral_of_isPullback
     J.hom Js.hom (q' ≫ q) hJ g
