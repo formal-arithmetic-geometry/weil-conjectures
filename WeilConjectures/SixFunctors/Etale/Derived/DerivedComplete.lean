@@ -78,6 +78,23 @@ local notation "Λ_(" X ", " Λ ")" =>
     (ModuleCat.{u + 1} Λ)) 0).obj
       ((constantSheaf (Scheme.smallEtaleTopology X) (ModuleCat.{u + 1} Λ)).obj (ModuleCat.of Λ Λ))
 
+/-- `Rf_*` preserves the right orthogonal of the objects on which `ϖ` acts invertibly: a map
+`Z ⟶ Rf_* K` is the transpose of a map `Lf^* Z ⟶ K`, and `ϖ` acts invertibly on `Lf^* Z`, the
+derived pullback being `Λ`-linear. -/
+lemma rightOrthogonal_smulInvertible_rightDerivedLowerStar {Λ : Type (u + 1)} [CommRing Λ]
+    (ϖ : Λ) {X Y : Scheme.{u}} (f : X ⟶ Y) (K : 𝐃(X, Λ))
+    (hK : (_root_.DerivedCategory.smulInvertible X.smallEtaleTopology ϖ).rightOrthogonal K) :
+    (_root_.DerivedCategory.smulInvertible Y.smallEtaleTopology ϖ).rightOrthogonal
+      ((R((f)_*[ModuleCat.{u + 1} Λ])).obj K) := by
+  intro Z g (hZ : IsIso (ϖ • 𝟙 Z))
+  let adj := derivedUpperStarLowerStarAdjunction (ModuleCat.{u + 1} Λ) f
+  have hZ' : IsIso (ϖ • 𝟙 ((L((f)^*[ModuleCat.{u + 1} Λ])).obj Z)) := by
+    rw [← CategoryTheory.Functor.map_id, ← Functor.map_smul]
+    infer_instance
+  have h := hK ((adj.homEquiv _ _).symm g) hZ'
+  rw [← (adj.homEquiv _ _).apply_symm_apply g, h, Adjunction.homEquiv_unit,
+    Functor.map_zero, Limits.comp_zero]
+
 section General
 
 variable {Λ : Type (u + 1)} [CommRing Λ] [IsDomain Λ] (I : Ideal Λ) (hI : I.IsPrincipal)
@@ -90,18 +107,17 @@ that are derived complete for `I` to derived complete objects of `D(Y_ét, Λ)`.
 theorem derivedComplete_rightDerivedLowerStar {X Y : Scheme.{u}} (f : X ⟶ Y) (K : 𝐃(X, Λ))
     (hK : DerivedCategory.derivedComplete X.smallEtaleTopology I K) :
     DerivedCategory.derivedComplete Y.smallEtaleTopology I
-      ((R((f)_*[ModuleCat.{u + 1} Λ])).obj K) :=
-  -- Proof sketch: by `derivedComplete_iff`, `hK` says that the cone `K ⟶ K ⊗ᴸ Λ/Iⁿ` is a
-  -- homotopy limit (its Milnor triangle is distinguished). `Rf_*` is triangulated and, being
-  -- right adjoint to `Lf^*`, preserves products, so by `IsHomotopyLimit.map` the image cone
-  -- `Rf_* K ⟶ Rf_*(K ⊗ᴸ Λ/Iⁿ)` is a homotopy limit. Each `Iⁿ` is principal, so
-  -- `nonempty_iso_reductionModIdeal_rightDerivedLowerStar` gives
-  -- `Rf_*(K ⊗ᴸ Λ/Iⁿ) ≅ Rf_* K ⊗ᴸ Λ/Iⁿ`, naturally in `n` (the isomorphisms are built from
-  -- the cones of multiplication by `πⁿ`, which are compatible along the projections
-  -- `Λ/Iⁿ⁺¹ → Λ/Iⁿ`). Transporting the homotopy limit along these isomorphisms gives the cone
-  -- `Rf_* K ⟶ Rf_* K ⊗ᴸ Λ/Iⁿ` (`IsHomotopyLimit.of_iso`), which is therefore a homotopy
-  -- limit.
-  sorry
+      ((R((f)_*[ModuleCat.{u + 1} Λ])).obj K) := by
+  -- For `I = (ϖ)` with `ϖ ≠ 0`, derived completeness is right orthogonality to the objects on
+  -- which `ϖ` acts invertibly (`derivedComplete_iff_rightOrthogonal`), and `Rf_*` preserves it
+  -- by adjunction.
+  obtain ⟨ϖ, hϖI⟩ := hI.principal
+  by_cases h0 : ϖ = 0
+  · -- `I = 0`: every tower `K ⊗ᴸ Λ/Iⁿ` is eventually constant; not yet done
+    sorry
+  have hϖ : ϖ ∈ nonZeroDivisors Λ := mem_nonZeroDivisors_of_ne_zero h0
+  rw [_root_.DerivedCategory.derivedComplete_iff_rightOrthogonal hϖ hϖI] at hK ⊢
+  exact rightOrthogonal_smulInvertible_rightDerivedLowerStar ϖ f K hK
 
 /-- **`Rf_!` preserves derived completeness.** For a principal ideal `I` of a domain `Λ` and
 `f : X ⟶ Y` admitting a compactification, `Rf_!` carries objects of `D(X_ét, Λ)` that are
