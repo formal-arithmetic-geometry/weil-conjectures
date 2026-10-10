@@ -24,9 +24,69 @@
   "def-pc-perfect-complex",
   "def-weil-pbc-closed-subset-proper-over-base"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Since S is Noetherian and f is of finite presentation, hence locally of finite type [def-pc-morphism-conventions] [def-weil-finite-type-morphism], X is locally Noetherian [pqf-def-locnoeth] (Stacks, Morphisms, Lemma 29.15.6, Tag 01T6). So each finitely presented term G^i is quasi-coherent of finite type, hence coherent [pqf-lem-coherent-ft-locnoeth], and coherent modules on a locally Noetherian scheme form an abelian subcategory closed under kernels, cokernels and finite direct sums (Stacks, Cohomology of Schemes, Lemma 30.9.2, Tag 01Y0). Let Z=\\bigcup_i\\operatorname{Supp}(G^i), a closed subset proper over S by the proper-support hypothesis on G^\\bullet [def-weil-pbc-closed-subset-proper-over-base]; as S is Noetherian, hence quasi-compact, Z is quasi-compact. Because E is perfect [def-pc-perfect-complex], finitely many opens U_1,\\dots,U_n cover Z with E|_{U_j} isomorphic to a strictly perfect complex P_j^\\bullet, whose terms are direct summands of finite free modules, hence flat; so on U_j the object E\\otimes^L G^\\bullet is the bounded total complex of P_j^\\bullet\\otimes G^\\bullet, whose terms are direct summands of finite direct sums of the G^i, and on X\\setminus Z it is zero. Hence E\\otimes^L G^\\bullet has coherent cohomology sheaves (coherence is local), nonzero only in the finite range of degrees given by the n complexes P_j^\\bullet\\otimes G^\\bullet.",
+   "uses": [
+    "def-pc-morphism-conventions",
+    "def-weil-finite-type-morphism",
+    "pqf-def-locnoeth",
+    "pqf-lem-coherent-ft-locnoeth",
+    "def-pc-perfect-complex"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/perfect.tex",
+    "place": "Lemma 36.27.2, Tag 0DJQ, proof: coherence of the cohomology of E tensor^L G"
+   }
+  },
+  {
+   "text": "Every cohomology sheaf of E\\otimes^L G^\\bullet is zero on X\\setminus Z (step 1), so its support, closed because the sheaf is coherent, lies in Z. A closed subset of Z is proper over S, since a closed immersion is proper and properness is stable under composition; so each cohomology sheaf has support proper over S [def-weil-pbc-closed-subset-proper-over-base].",
+   "uses": [
+    "def-weil-pbc-closed-subset-proper-over-base"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/perfect.tex",
+    "place": "Lemma 36.27.2, Tag 0DJQ, proof: support of E tensor^L G"
+   }
+  },
+  {
+   "text": "Each G^i is flat over S, i.e. flat as an f^{-1}\\mathcal O_S-module, and so are direct summands of finite direct sums of them. So, viewed in D(f^{-1}\\mathcal O_S), the object E\\otimes^L G^\\bullet is zero on X\\setminus Z and on each U_j of step 1 is represented by a complex of flat modules in the fixed finite range [a,b] of degrees containing those of all P_j^\\bullet\\otimes G^\\bullet. By Stacks, Cohomology, Lemma 20.48.3 (Tag 08CI) its restriction to each of these opens has tor-amplitude in [a,b]; as tor-amplitude is the vanishing of the cohomology sheaves of E\\otimes^L_{f^{-1}\\mathcal O_S}\\mathcal F outside [a,b] (Definition 20.48.1, Tag 08CG), a local condition, E\\otimes^L G^\\bullet has finite Tor dimension as an object of D(f^{-1}\\mathcal O_S).",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/perfect.tex",
+    "place": "Lemma 36.27.2, Tag 0DJQ, proof: 'The hypothesis on the tor dimension also follows as G^i is flat over f^{-1}O_S'"
+   }
+  },
+  {
+   "text": "Since f is locally of finite type (step 1) and S is Noetherian, steps 1 to 3 give the hypotheses of the Noetherian direct-image criterion [lem-pc-bounded-coherent-finite-tor-proper-pushforward-perfect] (Stacks Tag 08EV) for E\\otimes^L G^\\bullet. Its conclusion is exactly that Rf_*(E\\otimes^L G^\\bullet) is perfect on S [def-pc-perfect-complex].",
+   "uses": [
+    "lem-pc-bounded-coherent-finite-tor-proper-pushforward-perfect",
+    "def-pc-perfect-complex"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/perfect.tex",
+    "place": "Lemma 36.27.2, Tag 0DJQ, proof: application of Lemma 36.27.1 (Tag 08EV)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-morphism-conventions",
+  "def-weil-finite-type-morphism",
+  "pqf-def-locnoeth",
+  "pqf-lem-coherent-ft-locnoeth",
+  "def-pc-perfect-complex",
+  "def-weil-pbc-closed-subset-proper-over-base",
+  "lem-pc-bounded-coherent-finite-tor-proper-pushforward-perfect"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/perfect.tex",
+  "place": "Lemma 36.27.2, Tag 0DJQ"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -58,12 +118,32 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-pc-proper-support-perfect-direct-image",
   "by": "worker",
   "date": "2026-10-10"
  },
  "chapter": "sec-picard-framework",
- "unit": "sk-thm-picard-semicon"
+ "unit": "sk-thm-picard-semicon",
+ "split_report": {
+  "date": "2026-10-11",
+  "item": "lem-pc-noetherian-perfect-direct-image",
+  "worker": "stage1",
+  "summary": "Split the Noetherian tensor-perfect direct-image theorem into the verification of bounded coherence, proper support and finite Tor dimension of E tensor^L G, followed by the existing Noetherian direct-image criterion of Stacks Tag 08EV [lem-pc-bounded-coherent-finite-tor-proper-pushforward-perfect].",
+  "blueprint": "The two steps realize the verification and application in the classical-input proof of Tag 0DJQ.",
+  "tool_uses": []
+ },
+ "tool_uses": [
+  "lem-pc-bounded-coherent-finite-tor-proper-pushforward-perfect",
+  "pqf-lem-coherent-ft-locnoeth"
+ ],
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-npd2220",
+  "group": "K1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-npd2220 (reviewer sub-agent of L); spot-checked: Item statement unchanged, hypotheses match 0DJQ (finite presentation over Noetherian S is stronger than locally finite type; finitely presented = coherent here); no restatement of 0B6G/0A1H siblings. FIX more, RETURN less: (1) B class (b): new node lem-pc-noetherian-perfect-direct-image-finite-tor is verbatim Tag 08EV = existing lem-pc-bounded-coherent-finite-tor-proper-pushforward-perfect; cited the existing node (tool use, generic Stacks lemma) and dropped the duplicate (the K1 second reading missed it). (2) C1 coherence: step 1 now cites locally-of-finite-type over Noetherian => locally Noetherian (Tag 01T6, pqf-def-locnoeth), pqf-lem-coherent-ft-locnoeth, coherent abelian (Tag 01Y0); boundedness via quasi-compact Z. (3) C1 tor dimension: separate step via Tag 08CI/08CG over f^{-1}O_S; support step split out as elementary; proof_deps recomputed.; 1 file(s) fixed by the reviewer"
+ }
 }

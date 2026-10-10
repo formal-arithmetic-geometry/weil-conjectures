@@ -2484,3 +2484,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 20:09 L: pqf-lem-proper-lqf-finite promoted to a Mathlib leaf (ZariskisMainTheorem.lean:373; reviewer R-ffp2215)
 - 20:09 L: merged deliver/F1/lem-sc-product-tangent-space-direct-sum (reviewer FIX; first push; new nodes: 0)
 - 20:09 L: merged deliver/F1/lem-pc-serre-vanishing (reviewer PASS; first push; new nodes: 0)
+- 20:10 L: merged deliver/K1/lem-pc-noetherian-perfect-direct-image (reviewer FIX; first push; new nodes: 0)
