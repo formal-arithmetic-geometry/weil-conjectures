@@ -1,8 +1,8 @@
 # Work queue
 
-916 items; claim with `tools/claim.py next <group> [--stage N]`.
+913 items; claim with `tools/claim.py next <group> [--stage N]`.
 
-## Stage 1: nodes to split (342)
+## Stage 1: nodes to split (339)
 
 | node | distance to a target | Lean state on the done branch |
 |---|---|---|
@@ -15,15 +15,13 @@
 | `lem-sc-affine-cap-section-open-dictionary` | 2012 | none |
 | `lem-sc-ample-finite-set-affine` | 2012 | none |
 | `lem-sc-find-globally-generated` | 2012 | none |
-| `lem-sc-leray-closed-pushforward-cohomology` | 2012 | none |
 | `lem-sc-noetherian-topological-cohomology-vanishing` | 2012 | none |
-| `lem-sc-abelian-sheaf-short-exact-stalkwise` | 2013 | none |
 | `lem-sc-boundary-cech-local-lifts` | 2013 | none |
 | `lem-sc-cech-h1-map-natural` | 2013 | none |
 | `lem-sc-closed-pushforward-boundary-naturality` | 2013 | none |
 | `lem-sc-finite-sections-cover-qc` | 2013 | none |
 | `lem-sc-tensor-globally-generated` | 2013 | none |
-| `lem-sc-tensor-section-affine-open` | 2013 | none |
+| `lem-sc-topological-leray-spectral-sequence` | 2013 | none |
 | `lem-sc-torsor-h1-boundary-representative` | 2013 | none |
 | `lem-sc-torsor-h1-ext-pushforward` | 2013 | none |
 | `lem-sc-torsor-h1-ext-pushout` | 2013 | none |
@@ -88,7 +86,6 @@
 | `lem-pc-genus-agrees-sc` | 4007 | rests_on_sorry |
 | `prop-pc-xk-integral` | 4007 | rests_on_sorry |
 | `lem-pc-degree-agrees-sc` | 4008 | rests_on_sorry |
-| `lem-pc-flat-field` | 4008 | none |
 | `lem-pc-rational-hyp` | 4008 | rests_on_sorry |
 | `lem-pc-zero-scheme-properties` | 4008 | rests_on_sorry |
 | `lem-sc-isogeny-surjective` | 4008 | rests_on_sorry |
@@ -928,7 +925,7 @@
 | `lem-weil-pbc-p1-field-dimension-one` | 4 | state |
 | `lem-weil-pbc-projective-space-zero-isomorphism` | 4 | state |
 
-Not open yet: 360 nodes that wait for stage 1, 1141 nodes that wait for a statement dependency.
+Not open yet: 357 nodes that wait for stage 1, 1144 nodes that wait for a statement dependency.
 
 ## Stage 3: modules to prove (0)
 
