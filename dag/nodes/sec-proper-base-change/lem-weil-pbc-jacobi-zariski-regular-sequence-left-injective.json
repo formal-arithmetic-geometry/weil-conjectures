@@ -1,0 +1,70 @@
+{
+ "id": "lem-weil-pbc-jacobi-zariski-regular-sequence-left-injective",
+ "kind": "statement",
+ "title": "Jacobi-Zariski sequence is exact on the left when the last map is a regular-sequence quotient",
+ "statement": "Let $A\\to B\\xrightarrow{\\ \\varphi\\ }C$ be homomorphisms of commutative rings, $C$ an $A$-algebra through the composite. Assume there are integers $m,c\\ge0$, elements $f_1,\\dots,f_c$ of the polynomial ring $B[y_1,\\dots,y_m]$ [def-weil-pbc-mv-polynomial-ring] which form a regular sequence in $B[y_1,\\dots,y_m]$ [def-weil-pbc-regular-sequence], and a surjective homomorphism of $B$-algebras $\\beta:B[y_1,\\dots,y_m]\\to C$ whose kernel is the ideal $(f_1,\\dots,f_c)$. For a ring map $R\\to S$ let $\\mathrm{NL}_{S/R}=\\bigl(I_{S/R}/I_{S/R}^2\\xrightarrow{\\delta_{S/R}}\\bigoplus_{s\\in S}S\\,\\mathrm d[s]\\bigr)$ be the naive cotangent complex of the canonical presentation $R[S]\\to S$, $[s]\\mapsto s$, with kernel $I_{S/R}$, and $H_1(L_{S/R})=\\ker\\delta_{S/R}$ [def-weil-pbc-smooth-ring-map]. Let $H_1(\\mathrm{NL}_{B/A}\\otimes_BC)$ be the kernel of $\\delta_{B/A}\\otimes\\mathrm{id}_C:I_{B/A}/I_{B/A}^2\\otimes_BC\\to\\bigoplus_{b\\in B}C\\,\\mathrm d[b]$, and let $\\varphi_\\sharp:A[B]\\to A[C]$ be the $A$-algebra map $[b]\\mapsto[\\varphi(b)]$. Then the $C$-linear map $I_{B/A}/I_{B/A}^2\\otimes_BC\\to I_{C/A}/I_{C/A}^2$, $(g\\bmod I_{B/A}^2)\\otimes c\\mapsto c\\cdot(\\varphi_\\sharp(g)\\bmod I_{C/A}^2)$, maps $H_1(\\mathrm{NL}_{B/A}\\otimes_BC)$ into $H_1(L_{C/A})$, and its restriction $u:H_1(\\mathrm{NL}_{B/A}\\otimes_BC)\\to H_1(L_{C/A})$ is injective.",
+ "source": {
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "More on Algebra, Lemma Tag 07D4 (lemma-transitive-lci-at-end, line 8459), its 'in particular' clause (the six-term sequence of Algebra Lemma 00S2 completed with a zero on the left), for B -> C presented by a regular sequence: a regular sequence is Koszul-regular (More on Algebra, Lemma Tag 062F, lemma-regular-koszul-regular, line 7265), so B -> C is a local complete intersection in the sense of More on Algebra, Definition Tag 07D0 (definition-local-complete-intersection, line 8338). Proof of 07D4 (lines 8494-8505) uses Lemma Tag 07CX (lemma-conormal-sequence-H1-regular-ideal, line 8235). Tags verified in literature/stacks-project/tags/tags."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-mv-polynomial-ring",
+  "def-weil-pbc-regular-sequence",
+  "def-weil-pbc-smooth-ring-map"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "H1Cotangent base change map injective when the algebra is a quotient of a polynomial ring by a regular sequence (local complete intersection)",
+   "results": "Algebra.Generators.liftBaseChange_injective_of_isLocalizationAway (Mathlib.RingTheory.Extension.Cotangent.LocalizationAway: injectivity for a localization away from one element, on Cotangent, not for regular-sequence quotients), Algebra.Extension.h1Cotangentι_injective, Algebra.SubmersivePresentation.cotangentComplex_injective, Algebra.FormallySmooth.iff_injective_cotangentComplexBaseChange",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "exact sequence 0 -> H_1(L_{B/A}) ⊗ C -> H_1(L_{C/A}) when B -> C is a local complete intersection, Koszul regular ideal, I ∩ J^2 = I J",
+   "results": "Algebra.Generators.H1Cotangent.exact_δ_map, exact_map_δ, exact_map_δ', Algebra.H1Cotangent.exact_δ_mapBaseChange, exact_map_δ, Algebra.Generators.CotangentSpace.exact (Mathlib.RingTheory.Kaehler.JacobiZariski): the sequence from H_1(L_{C/A}) on, no left injectivity",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "RingTheory.Sequence.IsRegular, Algebra.H1Cotangent",
+   "results": "none",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -n 'lemma\\|theorem' Mathlib/RingTheory/Kaehler/JacobiZariski.lean; grep -rn Injective Mathlib/RingTheory/Extension/Cotangent/*.lean Mathlib/RingTheory/Extension/ExtendScalars.lean; grep -rln 'CompleteIntersection\\|Koszul' Mathlib/RingTheory; grep -rn 'stacks 07D4\\|stacks 07CX' Mathlib",
+   "results": "JacobiZariski.lean: exactness lemmas up to H1Cotangent.exact_liftBaseChange_map_of_flat (line 563, exactness at H_1(L_{T/R}) for flat T/S); Cotangent/Basic.lean:368 h1Cotangentι_injective, ExtendScalars.lean:86 (extend scalars), LocalizationAway.lean:129 (localization); no Koszul or complete-intersection notion; no @[stacks 07D4]",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-transitivity-gamma",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1"
+}

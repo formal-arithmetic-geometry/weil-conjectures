@@ -1037,3 +1037,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 07:48 L: accepted lem-weil-pbc-symmetric-algebra-graded (7 steps by agent; new leaf tensor-algebra-graded TensorAlgebra.gradedAlgebra).
 - 07:48 L: accepted lem-weil-pbc-strictly-standard-localization-smooth (6 steps; new leaf presentation-split-conormal-smooth, FormallySmooth.iff_split_injection). Worker: the DAG definition of strictly standard comes from Stacks 07C7; stage-3 note: popescu-desingularize step 7 should cite smooth-ring-map-isomorphism-invariant for the transfer along the isomorphism B_pi.
 - 07:51 L: accepted lem-weil-pbc-zariski-etale-inclusion-morphism-of-sites (7 steps, no new nodes).
+- 07:52 L: accepted lem-weil-pbc-transitivity-gamma (5 steps; new unsplit nodes field-extension-complete-intersection-subalgebras 07BV and jacobi-zariski-regular-sequence-left-injective 07D4 'in particular').

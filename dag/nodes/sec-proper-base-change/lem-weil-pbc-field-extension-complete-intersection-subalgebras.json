@@ -1,0 +1,71 @@
+{
+ "id": "lem-weil-pbc-field-extension-complete-intersection-subalgebras",
+ "kind": "statement",
+ "title": "Every field extension is a directed union of global complete intersection subalgebras",
+ "statement": "Let $k$ be a field [def-weil-field] and $K/k$ a field extension [def-pc-field-extension]. Then for every finite subset $E\\subseteq K$ there are integers $n,c\\ge0$, elements $f_1,\\dots,f_c$ of the polynomial ring $k[X_1,\\dots,X_n]$ [def-weil-pbc-mv-polynomial-ring] which form a regular sequence in $k[X_1,\\dots,X_n]$ [def-weil-pbc-regular-sequence] (for $c=0$ the empty sequence), and an injective homomorphism of $k$-algebras $\\iota:k[X_1,\\dots,X_n]/(f_1,\\dots,f_c)\\to K$ whose image contains $E$. (This is the assertion that $K$ is the filtered colimit, here the directed union, of its $k$-subalgebras that are global complete intersections over $k$.)",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Algebra, Lemma Tag 07BV (lemma-colimit-syntomic, line 44527), first assertion, in the form its proof (lines 44535-44559) reduces it to: for a finite subset E there is a k-subalgebra A of K containing E with A = k[x_1,...,x_d,1/h,Y_1,...,Y_r]/(P_1,...,P_r), P_1,...,P_r a regular sequence; presented as k[x_1,...,x_d,T,Y_1,...,Y_r]/(hT-1,P_1,...,P_r) (hT-1 is a nonzerodivisor of the domain k[x,T,Y] with quotient k[x,1/h,Y]), so n = d+1+r, c = r+1. Tag verified in literature/stacks-project/tags/tags (07BV,algebra-lemma-colimit-syntomic)."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-pc-field-extension",
+  "def-weil-pbc-mv-polynomial-ring",
+  "def-weil-pbc-regular-sequence"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "field extension K/k: for every finite subset there is a subalgebra containing it that is a quotient of a polynomial ring by a regular sequence",
+   "results": "Subalgebra.FG (Mathlib.RingTheory.Adjoin.FG), IntermediateField.finiteDimensional_adjoin, Algebra.EssFiniteType.subalgebra, IntermediateField.adjoin_algebraic_toSubalgebra, IntermediateField.essFiniteType_iff: finiteness notions only, nothing on complete intersections",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "every field extension is a filtered colimit of complete intersection algebras (regular sequence presentation)",
+   "results": "CommRingCat.FilteredColimits.colimit, Field.DirectLimit.field (Mathlib.Algebra.Colimit.Ring), Field.Emb.Cardinal.directed_filtration (Mathlib.FieldTheory.CardinalEmb): general colimits of rings/fields, no complete intersections",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "every finite subset of a field extension K/k is contained in a k-subalgebra which is a global complete intersection k[x_1..x_n]/(f_1..f_c) with f a regular sequence",
+   "results": "exists_finite_inj_algHom_of_fg (Noether normalization, Mathlib.RingTheory.NoetherNormalization), Algebra.IsStandardSmoothOfRelativeDimension.exists_subalgebra_fg, Algebra.SubmersivePresentation, Algebra.EssFiniteType.finset: none states the complete-intersection approximation",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rln 'IsRegular\\|IsWeaklyRegular' Mathlib/RingTheory/Kaehler Mathlib/RingTheory/Extension Mathlib/RingTheory/Smooth Mathlib/FieldTheory; grep -rln 'CompleteIntersection\\|Koszul' Mathlib/RingTheory; grep -rn 'stacks 07BV' Mathlib",
+   "results": "none (regular sequences only in Mathlib/RingTheory/Regular/RegularSequence.lean, never combined with field extensions; no complete-intersection notion; no @[stacks 07BV])",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-transitivity-gamma",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1"
+}
