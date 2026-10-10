@@ -964,3 +964,5 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 06:25 L: reviewed and accepted lem-weil-pbc-fs-adic-lift-derivation (6 steps; +fs-adic-lift-into-complete node 07NJ).
 - 06:27 L: reviewed and accepted lem-weil-pbc-geometrically-reduced-extension-separable (5 steps; +p-power-independence-separably-generated Mathlib leaf, 030W (2)=>(1)).
 - 06:28 L: reviewed and accepted lem-weil-pbc-fs-adic-lift-over-finite-coefficient-map (8 steps; +fs-adic-lift-from-residue-field node 07NR; 031D instead of completion).
+- 06:30 L: reviewed and accepted lem-weil-pbc-global-dimension-finite-modules-suffice (4 steps; +well-ordered-union-projective-dimension 0D1U node, +well-ordering-theorem leaf).
+- 06:30 L: reviewed and accepted lem-weil-pbc-global-complete-intersection-equidimensional (5 steps; +noetherian-height-quotient-bound leaf (Krull), +polynomial-ring-maximal-localization-dimension node 00OP). Note: lean_status rewrites every node file; a worker's write landing between its read and write is lost (one item was reset once and rewritten by the worker).

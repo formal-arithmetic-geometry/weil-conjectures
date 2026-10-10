@@ -1,0 +1,72 @@
+{
+ "id": "lem-weil-pbc-well-ordering-theorem",
+ "kind": "statement",
+ "title": "Well-ordering theorem (Zermelo)",
+ "statement": "Every set $E$ admits a well-ordering: there is a total order $\\le$ on $E$ such that every nonempty subset of $E$ has a least element for $\\le$.",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "used without statement in the proof of Algebra, Lemma Tag 065T (lemma-finite-gl-dim), line 26868 ('Choose a well ordering on $E$'); the well-ordering theorem of Zermelo (equivalent to the axiom of choice)"
+ },
+ "stmt_deps": [],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "well-ordering theorem: every type admits a well-order",
+   "results": "exists_wellOrder (Mathlib.SetTheory.Cardinal.Order), IsWellOrder.subtype_nonempty, IsWellOrder, WellOrderingRel.isWellOrder",
+   "date": "2026-10-10",
+   "verdict": "match: exists_wellFoundedLT (exists_wellOrder is its deprecated alias)"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "well-ordering theorem Zermelo: every set can be well-ordered",
+   "results": "IsWellOrder.subtype_nonempty, exists_wellOrder, WellOrder, WellOrderingRel.isWellOrder (Mathlib.SetTheory.Cardinal.Order), ZFSet.IsOrdinal.isWellOrder",
+   "date": "2026-10-10",
+   "verdict": "match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rn 'theorem exists_wellFoundedLT\\|WellOrderingRel.isWellOrder\\|exists_wellOrder' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib",
+   "results": "Mathlib/SetTheory/Cardinal/Order.lean:540 def WellOrderingRel, :543 instance WellOrderingRel.isWellOrder, :551 theorem exists_wellFoundedLT, :564 deprecated alias exists_wellOrder; lines 549-553 read with sed -n",
+   "date": "2026-10-10",
+   "verdict": "match"
+  },
+  {
+   "tool": "local_search",
+   "query": "exists_wellFoundedLT (project root ~/weil-conjectures-slopmaster2)",
+   "results": "exists_wellFoundedLT, theorem, .lake/packages/mathlib/Mathlib/SetTheory/Cardinal/Order.lean (index: unavailable, name found)",
+   "date": "2026-10-10",
+   "verdict": "match"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "exists_wellFoundedLT",
+  "file": "Mathlib/SetTheory/Cardinal/Order.lean",
+  "how": "exact (lines 549-553): `theorem exists_wellFoundedLT (α) : ∃ (_ : LinearOrder α), WellFoundedLT α`, a linear order whose strict order is well-founded, i.e. every nonempty subset has a least element (`WellFounded.has_min`); the set $E$ is the type α",
+  "line": 551
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-global-dimension-finite-modules-suffice",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "reviewed": "Reviewed by L 2026-10-10: exact Mathlib leaf exists_wellFoundedLT (Cardinal/Order.lean line 551, read)."
+}
