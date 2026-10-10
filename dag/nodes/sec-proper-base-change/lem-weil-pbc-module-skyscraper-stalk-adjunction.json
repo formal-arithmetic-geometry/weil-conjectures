@@ -12,9 +12,64 @@
   "def-weil-sheaf-of-modules-category",
   "def-weil-pbc-module-stalk"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "*Step 1 (the skyscraper is a sheaf of modules).* The restriction maps in the statement respect the action of $\\mathcal O_X$: if both opens contain $x$, $(rs)_x=r_xs_x$ by [def-weil-pbc-module-stalk], and if the smaller open does not contain $x$, both sides restrict to $0$. For an open cover $U=\\bigcup_jU_j$ and compatible sections of $i_{x,*}A$, if $x\\notin U$ every section is $0$ and the unique gluing is $0$ (also for the empty cover of $U=\\emptyset$). If $x\\in U$, choose $j_0$ with $x\\in U_{j_0}$. Any two members of the cover containing $x$ have an intersection containing $x$, where their restrictions are the identity of $A$, so their sections equal the one on $U_{j_0}$; members missing $x$ have the unique zero section. This common element of $A=(i_{x,*}A)(U)$ is the unique gluing. The sectionwise group laws and the germ action thus give a sheaf of $\\mathcal O_X$-modules in the sense of [def-weil-sheaf-of-modules-category]. For an $\\mathcal O_{X,x}$-linear $h:A\\to A'$, the maps $h$ or $0$ commute with these restrictions and actions; identities, composition, and addition of maps are checked on each open, giving the asserted additive functor.",
+   "uses": [
+    "def-weil-pbc-module-stalk",
+    "def-weil-sheaf-of-modules-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sheaves.tex",
+    "place": "Sheaves, Definition Tag 009A (label definition-skyscraper-sheaf), case (4); the sectionwise verification omitted there is written out by the agent"
+   }
+  },
+  {
+   "text": "*Step 2 (the map on stalks).* If $s\\in\\mathcal G(U)$ and $t\\in\\mathcal G(V)$ represent the same germ at $x$, [def-weil-pbc-module-stalk] gives an open $W$ with $x\\in W\\subseteq U\\cap V$ and $s|_W=t|_W$. For a sheaf morphism $\\varphi:\\mathcal G\\to i_{x,*}A$, restriction from either $U$ or $V$ to $W$ acts as the identity on $A$; hence $\\varphi_U(s)=\\varphi_W(s|_W)=\\varphi_W(t|_W)=\\varphi_V(t)$. Thus $\\Phi(\\varphi)(s_x)=\\varphi_U(s)$ is well defined and additive. Given $r_x\\in\\mathcal O_{X,x}$ represented by $r\\in\\mathcal O_X(V)$, restrict $r$ and $s$ to $W\\ni x$ contained in $U\\cap V$. The germ action and $\\mathcal O_X(W)$-linearity of $\\varphi_W$ give $\\Phi(\\varphi)(r_xs_x)=\\varphi_W((r|_W)(s|_W))=r_x\\varphi_W(s|_W)=r_x\\Phi(\\varphi)(s_x)$. Therefore $\\Phi(\\varphi)$ is $\\mathcal O_{X,x}$-linear.",
+   "uses": [
+    "def-weil-pbc-module-stalk",
+    "def-weil-sheaf-of-modules-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sheaves.tex",
+    "place": "Sheaves, Lemma Tag 009C (label lemma-stalk-skyscraper-adjoint), module case; proof omitted, explicit germ calculation by the agent"
+   }
+  },
+  {
+   "text": "*Step 3 (constructing the inverse).* Given an $\\mathcal O_{X,x}$-linear $\\psi:\\mathcal G_x\\to A$, define $\\Psi(\\psi)_U(s)=\\psi(s_x)$ if $x\\in U$, and the unique zero map into $(i_{x,*}A)(U)=0$ otherwise. For $x\\in U$, $\\Psi(\\psi)_U(rs)=\\psi((rs)_x)=\\psi(r_xs_x)=r_x\\psi(s_x)$, so this component is $\\mathcal O_X(U)$-linear; the other components are linear since their targets are zero. For $V\\subseteq U$, if $x\\in V$ then $x\\in U$ and $(s|_V)_x=s_x$, so the maps commute with restriction; if $x\\notin V$, both composites land in zero. These are all cases. Thus $\\Psi(\\psi)$ is a morphism of sheaves of $\\mathcal O_X$-modules. For a germ $s_x$, $\\Phi(\\Psi(\\psi))(s_x)=\\psi(s_x)$. Conversely, if $x\\in U$, then $\\Psi(\\Phi(\\varphi))_U(s)=\\Phi(\\varphi)(s_x)=\\varphi_U(s)$, while for $x\\notin U$ both component maps have zero target. Hence $\\Phi$ and $\\Psi$ are inverse bijections.",
+   "uses": [
+    "def-weil-pbc-module-stalk",
+    "def-weil-sheaf-of-modules-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sheaves.tex",
+    "place": "Sheaves, Lemma Tag 009C (label lemma-stalk-skyscraper-adjoint), module case; proof omitted, inverse and restriction checks by the agent"
+   }
+  },
+  {
+   "text": "*Step 4 (naturality).* For $g:\\mathcal G'\\to\\mathcal G$ and $s'_x$ represented by $s'\\in\\mathcal G'(U)$ with $x\\in U$, [def-weil-pbc-module-stalk] gives $g_x(s'_x)=(g_U(s'))_x$, so $\\Phi(\\varphi\\circ g)(s'_x)=\\varphi_U(g_U(s'))=\\Phi(\\varphi)(g_x(s'_x))$. For $h:A\\to A'$ linear, the component $(i_{x,*}h)_U$ is $h$ on any $U\\ni x$, so $\\Phi(i_{x,*}h\\circ\\varphi)(s_x)=h(\\varphi_U(s))=h(\\Phi(\\varphi)(s_x))$. Germs exhaust the stalk, proving both naturality equations and hence the adjunction.",
+   "uses": [
+    "def-weil-pbc-module-stalk"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sheaves.tex",
+    "place": "Sheaves, Lemma Tag 009C (label lemma-stalk-skyscraper-adjoint); the naturality equations are written out by the agent"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-module-stalk",
+  "def-weil-sheaf-of-modules-category"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sheaves.tex",
+  "place": "Sheaves, Definition Tag 009A (label definition-skyscraper-sheaf), case (4), and Lemma Tag 009C (label lemma-stalk-skyscraper-adjoint), module case; Stacks omits the proof, so the sectionwise argument is written by the agent"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -58,7 +113,7 @@
   "file": "Mathlib/Topology/Sheaves/Skyscraper.lean",
   "how": "line 402: for X : TopCat, p₀ : X and a category C with a terminal object and colimits, (Sheaf.forget C X ⋙ Presheaf.stalkFunctor C p₀) ⊣ skyscraperSheafFunctor p₀, where skyscraperPresheaf p₀ A (line 60) is A on opens containing p₀ and terminal otherwise. With C = AddCommGrpCat this is the abelian-group case; the module case (value an O_{X,x}-module, O_X(U) acting through germs, morphisms O_X-linear) is not covered: transferring it is itself an argument (B8), so not a leaf."
  },
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "worker",
@@ -78,5 +133,18 @@
   }
  },
  "chapter": "sec-proper-base-change",
- "unit": "sk-thm-p1"
+ "unit": "sk-thm-p1",
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "lem-weil-pbc-module-skyscraper-stalk-adjunction",
+  "worker": "stage1",
+  "summary": "Kept the explicit ringed-space module statement of Sheaves 009A(4)/009C, specialized to schemes. The Stacks proof is omitted, so four agent-written steps verify the sectionwise sheaf and additive functor, well-defined O_{X,x}-linear germ map, explicit inverse including all restriction cases, and naturality. Existing definition nodes cover the only cited notions; no new nodes are needed. The non-T1 case is included because the proof only tests whether an open contains x, and the empty open has zero module as required."
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "group": "E1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed by the lead of E1; spot-checked by L: 009A(4)/009C with the proof written out: sheaf condition incl. the empty open, well-definedness and linearity of Phi on germs, inverse Psi with all restriction cases, naturality in both variables"
+ }
 }
