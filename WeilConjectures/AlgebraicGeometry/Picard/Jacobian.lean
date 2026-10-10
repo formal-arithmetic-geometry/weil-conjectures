@@ -2145,7 +2145,30 @@ theorem exists_finiteSubext_isPullback_overTransport {ks : Type u} [Field ks] [A
   obtain ⟨⟨L⟩, f, hL⟩ := Scheme.exists_pullback_fst_comp_eq_of_isLimit
     (isLimitDiagonalSpecCone k ks) (i := .op K') pV pW ψ χ (pullback.lift_snd _ _ _)
     (pullback.lift_snd _ _ _) hdiag
-  sorry
+  have hKL : K' ≤ L := leOfHom f.unop
+  let incl : Spec (.of L.1) ⟶ Spec (.of K'.1) :=
+    Spec.map (CommRingCat.ofHom (IntermediateField.inclusion hKL).toRingHom)
+  let ιL := Spec.map (CommRingCat.ofHom (algebraMap L.1 ks))
+  have hincl : ιL ≫ incl = ι' := by
+    rw [← Spec.map_comp]
+    rfl
+  let JL : Over (Spec (.of L.1)) := Over.mk (pullback.snd p incl)
+  let q : Js.left ⟶ JL.left := pullback.lift q' (Js.hom ≫ ιL) (by
+    rw [hq'.w, Category.assoc, hincl])
+  have hq : IsPullback q Js.hom JL.hom ιL := by
+    refine IsPullback.of_right ?_ (pullback.lift_snd _ _ _) (IsPullback.of_hasPullback p incl)
+    rw [pullback.lift_fst, hincl]
+    exact hq'
+  refine ⟨L, JL, q, hq, fun {T} f₁ f₂ h hL' a ↦ ?_⟩
+  apply pullback.hom_ext
+  · simp only [Category.assoc, q, pullback.lift_fst]
+    sorry
+  · simp only [Category.assoc, q, pullback.lift_snd]
+    have h₁ := Over.w a
+    have h₂ := Over.w (rs.overTransport f₁ f₂ h a)
+    simp only [Over.mk_hom] at h₁ h₂
+    rw [← Category.assoc, h₂, ← Category.assoc, h₁]
+    exact hL'.symm
 
 /-- **`Pic^0_{C/k}` is represented at a finite separable level by a descent of `J_s`.** Let `J_s`
 represent the restriction of `Pic^0_{C/k}` to schemes over a separable closure `k_s`. Then there are
