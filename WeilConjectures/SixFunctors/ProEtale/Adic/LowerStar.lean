@@ -58,7 +58,8 @@ which is stated with `sorry`:
   then in general (`AlgebraicGeometry.ProEtale.FiniteFor.of_quasiSeparatedSpace`);
 - constructibility is local on `Y`
   (`AlgebraicGeometry.ProEtale.IsAdicConstructibleSheaf.of_openCover`), boundedness can be
-  checked on a finite affine cover, and the higher direct images commute with restriction to an open subscheme of `Y` (`AlgebraicGeometry.ProEtale.adicDerivedBaseChangeIso`),
+  checked on a finite affine cover, and the higher direct images commute with restriction to an
+  open subscheme of `Y` (`AlgebraicGeometry.ProEtale.adicDerivedBaseChangeIso`),
   which reduces to an affine target;
 - the pushforward is the degree `0` case, `f_*` being left exact, and boundedness below holds for
   any sheaf.
