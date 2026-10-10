@@ -1,0 +1,65 @@
+{
+ "id": "def-weil-pbc-mv-polynomial-ring",
+ "kind": "definition",
+ "title": "Polynomial ring in a family of variables, and its universal property",
+ "statement": "Let $R$ be a commutative ring and $J$ a set. The *polynomial ring* $R[x_j:j\\in J]$ is the commutative $R$-algebra whose elements are the finite $R$-linear combinations $\\sum_\\alpha c_\\alpha x^\\alpha$ of monomials $x^\\alpha=\\prod_jx_j^{\\alpha_j}$ ($\\alpha:J\\to\\mathbf Z_{\\ge0}$ finitely supported), with coefficientwise addition and the product determined by $x^\\alpha x^\\beta=x^{\\alpha+\\beta}$ and $R$-bilinearity; $R\\to R[x_j:j\\in J]$, $c\\mapsto c\\,x^0$, is its structure map. (For $J=\\{1,\\dots,n\\}$ one writes $R[x_1,\\dots,x_n]$.) Universal property: for every commutative $R$-algebra $C$ and every family $(c_j)_{j\\in J}$ of elements of $C$ there is a unique $R$-algebra homomorphism $R[x_j:j\\in J]\\to C$ with $x_j\\mapsto c_j$ for all $j$ (evaluation, $\\sum c_\\alpha x^\\alpha\\mapsto\\sum c_\\alpha\\prod_jc_j^{\\alpha_j}$); in particular two $R$-algebra homomorphisms out of $R[x_j:j\\in J]$ that agree on every $x_j$ are equal.",
+ "source": {
+  "document": "literature/stacks-project/smoothing.tex",
+  "place": "Smoothing Ring Maps, Lemma Tag 07EU (lemma-final-solve) and its proof: the polynomial ring $A[x_1,\\dots,x_r]$ in $B=A[x_1,\\dots,x_r]/(f_1x_1+\\dots+f_rx_r-1)$ (used without definition; the universal property is the standard one, used throughout Stacks Algebra, e.g. Section 00F2 on finite type)"
+ },
+ "stmt_deps": [],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "universal property of multivariate polynomial ring: algebra hom determined by images of variables",
+   "results": "MvPolynomial.algHom_ext_iff, MvPolynomial.aeval_unique, MvPolynomial.algHom_ext', Algebra.Generators.algebra (Mathlib.Algebra.MvPolynomial.Basic, Mathlib.Algebra.MvPolynomial.Eval)",
+   "date": "2026-10-10",
+   "verdict": "match: MvPolynomial with MvPolynomial.aeval (existence) and MvPolynomial.algHom_ext (uniqueness)"
+  },
+  {
+   "tool": "loogle",
+   "query": "MvPolynomial.aeval ; MvPolynomial.algHom_ext",
+   "results": "MvPolynomial.aeval {R S₁ σ} [CommSemiring R] [CommSemiring S₁] [Algebra R S₁] (f : σ → S₁) : MvPolynomial σ R →ₐ[R] S₁ (Mathlib.Algebra.MvPolynomial.Eval); MvPolynomial.algHom_ext (hf : ∀ i, f (X i) = g (X i)) : f = g for f g : MvPolynomial σ R →ₐ[R] A (Mathlib.Algebra.MvPolynomial.Basic)",
+   "date": "2026-10-10",
+   "verdict": "match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -n 'abbrev MvPolynomial\\|theorem algHom_ext' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/Algebra/MvPolynomial/Basic.lean; grep -n 'def aeval\\|theorem aeval_X \\|theorem aeval_unique' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/Algebra/MvPolynomial/Eval.lean",
+   "results": "Basic.lean:82 abbrev MvPolynomial (σ R) [CommSemiring R] := AddMonoidAlgebra R (σ →₀ ℕ); Basic.lean:436 theorem algHom_ext; Eval.lean:593 def aeval, :611 aeval_X (aeval f (X s) = f s), :621 aeval_unique",
+   "date": "2026-10-10",
+   "verdict": "match"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "MvPolynomial, MvPolynomial.aeval, MvPolynomial.algHom_ext",
+  "file": "Mathlib/Algebra/MvPolynomial/Basic.lean",
+  "how": "exact, one declaration per clause: MvPolynomial σ R (Basic.lean:82, finitely supported functions (σ →₀ ℕ) → R with the monoid-algebra product) is the polynomial ring; existence of the evaluation map is MvPolynomial.aeval (Mathlib/Algebra/MvPolynomial/Eval.lean:593) with aeval_X (Eval.lean:611); uniqueness is MvPolynomial.algHom_ext (Basic.lean:436). Source read 2026-10-10.",
+  "line": 82
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-linear-equation-localization-polynomial",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lead_note": "L 2026-10-10: line field added (MvPolynomial, Algebra/MvPolynomial/Basic.lean:82; aeval and algHom_ext in the same file)."
+}

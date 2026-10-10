@@ -1,0 +1,67 @@
+{
+ "id": "lem-weil-pbc-localization-away-universal-property",
+ "kind": "statement",
+ "title": "Universal property of the localization at the powers of an element",
+ "statement": "Let $R$ be a commutative ring, $f\\in R$, and $R_f$ the localization of $R$ at $\\{1,f,f^2,\\dots\\}$ with its map $R\\to R_f$, $a\\mapsto a/1$ [def-weil-ring-localization-away]. Let $g:R\\to P$ be a homomorphism of commutative rings such that $g(f)$ is a unit of $P$. Then there is a unique ring homomorphism $\\bar g:R_f\\to P$ with $\\bar g(a/1)=g(a)$ for all $a\\in R$; it is given by $\\bar g(a/f^n)=g(a)\\,g(f)^{-n}$. In particular two ring homomorphisms $R_f\\to P$ that agree on all $a/1$, $a\\in R$, are equal.",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Algebra, Proposition Tag 00CP (proposition-universal-property-localization, line 1084), for the multiplicative set $S=\\{1,f,f^2,\\dots\\}$"
+ },
+ "stmt_deps": [
+  "def-weil-ring-localization-away"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "universal property of localization away from an element: ring hom sending f to a unit factors uniquely through R_f",
+   "results": "Localization.awayLift, Localization.awayMap (Mathlib.RingTheory.Localization.Away.Basic), OreLocalization.universalHom, IsLocalizedModule.is_universal, Submonoid.LocalizationMap.lift_spec",
+   "date": "2026-10-10",
+   "verdict": "match: Localization.awayLift / IsLocalization.Away.lift"
+  },
+  {
+   "tool": "loogle",
+   "query": "IsLocalization.Away.lift",
+   "results": "IsLocalization.Away.lift (x : R) [IsLocalization.Away x S] {g : R →+* P} (hg : IsUnit (g x)) : S →+* P; IsLocalization.Away.lift_eq : lift x hg (algebraMap R S a) = g a; IsLocalization.Away.lift_comp; IsLocalization.Away.liftAlgHom (Mathlib.RingTheory.Localization.Away.Basic)",
+   "date": "2026-10-10",
+   "verdict": "match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -n 'noncomputable def lift\\|theorem ringHom_ext\\|theorem lift_eq' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/RingTheory/Localization/Defs.lean ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/RingTheory/Localization/Away/Basic.lean",
+   "results": "Away/Basic.lean:147 def lift (hg : IsUnit (g x)) : S →+* P (docstring: sends z = F y * (F x)^-n to g y * (g x)^-n), :155 lift_eq; Defs.lean:488 IsLocalization.lift, :543 IsLocalization.ringHom_ext (j.comp (algebraMap R S) = k.comp (algebraMap R S) → j = k)",
+   "date": "2026-10-10",
+   "verdict": "match"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "IsLocalization.Away.lift, IsLocalization.Away.lift_eq, IsLocalization.ringHom_ext",
+  "file": "Mathlib/RingTheory/Localization/Away/Basic.lean",
+  "how": "exact, one declaration per clause, for S = Localization.Away f (an IsLocalization.Away f instance): existence IsLocalization.Away.lift f hg (Away/Basic.lean:147) with lift_eq (:155); the formula is its docstring/IsLocalization.lift_mk'; uniqueness IsLocalization.ringHom_ext (Mathlib/RingTheory/Localization/Defs.lean:543). Source read 2026-10-10.",
+  "line": 147
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-linear-equation-localization-polynomial",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lead_note": "L 2026-10-10: line field added (IsLocalization.Away.lift, Localization/Away/Basic.lean:147; lift_eq :155 verified with sed)."
+}
