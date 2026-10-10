@@ -5,7 +5,7 @@
   tools/group_stats.py --json     the same as JSON
 
 Merged: lines "<group> done <item> ... merged by L" of coord/deliveries.log (written by merge_delivery.py).
-Returned: lines "delivery of <group>: <item> returned" of coord/ledger.md (one per return; an item returned
+Returned: lines "delivery of <group>: <item> returned" or "returned deliver/<group>/<item> (" of coord/ledger.md (one per return; an item returned
 twice counts twice). Claims: coord/claims/*.lock whose "who" is the group, with their age in hours.
 A group is any claim holder or delivery group other than L.
 """
@@ -28,10 +28,16 @@ if p.exists():
             g(m.group(1))["merged"].append(m.group(2))
 p = ROOT / "coord" / "ledger.md"
 if p.exists():
-    for line in p.read_text().splitlines():
+    lines = p.read_text().splitlines()
+    for n, line in enumerate(lines):
         m = re.search(r"delivery of (\S+): (\S+) returned", line)
         if m:
             g(m.group(1))["returned"].append(m.group(2))
+        # the line merge_delivery.py return writes since 2026-10-10 evening; the lead wrote the same form by hand next to
+        # the older tool's line, so it is counted only when no such line for the item stands in the 10 lines before
+        for m in re.finditer(r"returned deliver/(\S+?)/(\S+) \(", line):
+            if not any(f"delivery of {m.group(1)}: {m.group(2)} returned" in x for x in lines[max(0, n - 10):n + 1]):
+                g(m.group(1))["returned"].append(m.group(2))
 now = datetime.datetime.now(datetime.UTC)
 for lock in sorted((ROOT / "coord" / "claims").glob("*.lock")):
     try:
