@@ -1,8 +1,8 @@
 # Work queue
 
-858 items; claim with `tools/claim.py next <group> [--stage N]`.
+855 items; claim with `tools/claim.py next <group> [--stage N]`.
 
-## Stage 1: nodes to split (318)
+## Stage 1: nodes to split (315)
 
 | node | distance to a target | Lean state on the done branch |
 |---|---|---|
@@ -11,12 +11,10 @@
 | `lem-weil-pbc-direct-sum-extension-assembly` | 1016 | none |
 | `lem-weil-pbc-finite-type-field-finite-isolated-points` | 1016 | none |
 | `lem-weil-pbc-injective-acyclicity-bounded-below` | 2002 | sorry_here |
-| `lem-weil-pbc-property-implies-acyclicity` | 2003 | none |
 | `lemma-weil-pbc-proper-underived-exchange` | 2003 | sorry_here |
 | `lemma-weil-pbc-finite-refinement-etale-cover` | 2006 | sorry_here |
 | `lem-weil-pbc-sets-pushforward-stalk-strict-henselization` | 2008 | none |
 | `lem-weil-pbc-sets-strictly-henselian-open-sections-stalk` | 2008 | none |
-| `lem-sc-ample-on-reduction-noetherian` | 2010 | none |
 | `lem-sc-pic-lift-closed-immersion-dim-le-one` | 2010 | none |
 | `lem-sc-reduced-dim-le-one-ample` | 2010 | none |
 | `lem-sc-ample-square-zero-thickening` | 2011 | none |
@@ -24,15 +22,13 @@
 | `lem-weil-pbc-zero-dimensional-cohomology` | 3004 | none |
 | `lemma-weil-pbc-etale-cohomology-continuity` | 3004 | none |
 | `prop-weil-pbc-kinjective-resolutions-exist` | 3004 | none |
-| `lem-galois-transitive` | 3007 | none |
 | `lem-sc-etale-affine-qcoherent` | 3007 | none |
 | `lem-sc-etale-qcoherent-descent` | 3007 | none |
 | `lem-sc-etale-zariski-qcoh-comparison` | 3007 | none |
-| `lem-sc-generic-cohomology-comparison` | 3007 | rests_on_sorry |
 | `lem-weil-pbc-simplicial-matching-object` | 3007 | none |
 | `lem-exc-field-discrete-modules` | 3008 | none |
+| `lem-sc-generic-vanishing-acyclic` | 3008 | none |
 | `lem-sc-noetherian-cohomology-above-dimension` | 3008 | sorry_here |
-| `lem-sc-hilb-geometrically-integral` | 3009 | rests_on_sorry |
 | `lem-galois-fpqc-descend-open-immersion` | 3010 | none |
 | `lem-galois-fpqc-refinement-fully-faithful` | 3010 | none |
 | `lem-galois-fpqc-singleton-affine-refinement` | 3010 | none |
@@ -44,6 +40,7 @@
 | `lem-sc-brauer-zero-all-curves` | 3010 | sorry_here |
 | `lem-sc-canonical-degree` | 3010 | rests_on_sorry |
 | `lem-sc-curve-base-change-relative-dimension-one` | 3010 | none |
+| `lem-sc-hilb-dominating-power` | 3010 | none |
 | `lem-sc-point-tangent-separation-closed-immersion` | 3010 | none |
 | `thm-sc-serre-duality-curve` | 3010 | rests_on_sorry |
 | `lem-exc-coinduced-continuous-acyclic` | 3011 | none |
@@ -870,7 +867,7 @@
 | `lem-weil-pbc-p1-field-dimension-one` | 4 | state |
 | `lem-weil-pbc-projective-space-zero-isomorphism` | 4 | state |
 
-Not open yet: 337 nodes that wait for stage 1, 999 nodes that wait for a statement dependency.
+Not open yet: 334 nodes that wait for stage 1, 1004 nodes that wait for a statement dependency.
 
 ## Stage 3: modules to prove (0)
 
