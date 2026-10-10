@@ -2383,3 +2383,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 19:25 L: returned deliver/K1/lem-sc-positive-ample-hilbert-degree (reviewer RETURN: Return points 1 (real split) and 2 (0BEP/Hilbert-degree identification, step 3) of 18:12 are repaired; four fixable faul)
 - 19:26 L: merged deliver/E1/def-pc-ringed-spaces-derived-direct-image (reviewer FIX; first push; new nodes: 0)
 - 19:26 L: merged deliver/F1/lem-sp-half-plane-graded-canonical (reviewer FIX; first push; new nodes: 0)
+- 19:27 L: lemma-weil-pbc-leray-acyclicity step 3: comparison citation moved from the leaf lem-sp-derived-well-defined to the lifting nodes (C5 noted by R-dwd1939)
