@@ -4,7 +4,7 @@
   "is": null,
   "from": {
    "node": "lem-sc-pic-proper-ntorsion",
-   "place": "09N2 proof: Since the fraction fields of B and A are the same, the finite module A/B is supported on the closed points of B, so m_B^n A is contained in B",
+   "place": "Varieties Lemma 09N2 (lemma-semi-local-dimension-one-conductor), proof: Since the fraction fields of B and A are the same, the finite module A/B is supported on the closed points of B, so m_B^n A is contained in B",
    "via": [
     "lem-sc-semilocal-dim-one-conductor",
     "lem-sc-jacobson-denominator-function-field",
@@ -29,9 +29,49 @@
   "def-weil-pbc-krull-dimension-ring",
   "def-weil-pbc-integral-closure"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Let M=A/B be the quotient of the finite B-module A by the image of B. The quotient of a finite module is finite. The inclusion A into K and the equality Frac(A)=Frac(B)=K identify the localization of M at the generic prime (0) with zero: every element of A/B becomes zero after inverting a nonzero element of B.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Varieties Lemma 09N2 (lemma-semi-local-dimension-one-conductor), proof paragraph beginning 'Since the fraction fields of B and A are the same'"
+   }
+  },
+  {
+   "text": "Every prime in the support of M is therefore nonzero. Because B is a one-dimensional domain, every nonzero prime is maximal. By [lem-weil-pbc-finite-module-support-annihilator], the support is the zero locus V(J) of the annihilator J=Ann_B(M), so every prime containing J is a maximal ideal (not every maximal ideal need contain J). By [lem-weil-pbc-zero-locus-eq-iff-radical-eq], the radical of J is the intersection of the primes in V(J) (the whole ring B if V(J) is empty); an intersection of some maximal ideals contains the intersection of all of them, which is the Jacobson radical m_B. Hence m_B is contained in the radical of J. The ideal m_B is finitely generated because B is Noetherian; [lem-weil-pbc-fg-ideal-radical-power] therefore gives n>0 with m_B^n contained in J, equivalently m_B^n M=0.",
+   "uses": [
+    "lem-weil-pbc-finite-module-support-annihilator",
+    "lem-weil-pbc-zero-locus-eq-iff-radical-eq",
+    "lem-weil-pbc-fg-ideal-radical-power"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Varieties Lemma 09N2 (lemma-semi-local-dimension-one-conductor), proof paragraph beginning 'Since the fraction fields of B and A are the same'"
+   }
+  },
+  {
+   "text": "The equality m_B^n M=0 says that the image of every element of m_B^n A in A/B is zero. Thus m_B^n A is contained in B, as required.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Varieties Lemma 09N2 (lemma-semi-local-dimension-one-conductor), proof concluding sentence of the finite-conductor paragraph"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-finite-module-support-annihilator",
+  "lem-weil-pbc-zero-locus-eq-iff-radical-eq",
+  "lem-weil-pbc-fg-ideal-radical-power"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/varieties.tex",
+  "place": "Varieties Lemma 09N2 (lemma-semi-local-dimension-one-conductor), proof paragraph beginning 'Since the fraction fields of B and A are the same'"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -56,12 +96,28 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-sc-semilocal-dim-one-conductor",
   "by": "worker",
   "date": "2026-10-10"
  },
  "chapter": "sec-curve-estimates",
- "unit": "sk-thm-curveestimate"
+ "unit": "sk-thm-curveestimate",
+ "split_report": {
+  "date": "2026-10-11",
+  "item": "lem-sc-finite-integral-conductor",
+  "worker": "stage1",
+  "summary": "Split the finite-conductor argument into the finite quotient A/B, its generic-point vanishing and maximal support, the Jacobson-radical power lemma, and the final quotient reformulation.",
+  "blueprint": "The proof realizes the single finite-module paragraph of Varieties Lemma 09N2.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-fic1826",
+  "group": "E1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-fic1826 (reviewer sub-agent of L); spot-checked: Statement unchanged from sheaf-dag (corrected 17:57 version, dim B = 1 present) and is what the split proves; dim 1 used in Step 2 (nonzero support primes maximal). Mathlib grep: RingTheory/Conductor.lean conductor is the single-element R<x> conductor, no match. FIX more, RETURN less: C1/E Step 2 claimed 'every maximal ideal contains J', false in general (A/B may be supported at only some maximal ideals); rewritten: V(J) consists of maximal ideals, sqrt J = intersection of V(J) by cited lem-weil-pbc-zero-locus-eq-iff-radical-eq, which contains the Jacobson radical; uses/proof_deps updated. Missed by E1 second reading.; 1 file(s) fixed by the reviewer"
+ }
 }
