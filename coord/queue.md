@@ -1,6 +1,6 @@
 # Work queue
 
-898 items; claim with `tools/claim.py next <group> [--stage N]`.
+899 items; claim with `tools/claim.py next <group> [--stage N]`.
 
 ## Stage 1: nodes to split (135)
 
@@ -20,7 +20,6 @@
 | `lem-pc-ringed-space-sheafification-cohomology` | 3017 | none |
 | `lem-pc-perfect-rhom-tensor-comparison` | 3018 | none |
 | `lem-pc-affine-morphism-hom-out-of-perfect` | 3019 | none |
-| `lem-pc-base-change-rhom-perfect` | 3019 | none |
 | `lem-pc-global-hom-adjunction` | 3019 | none |
 | `lem-pc-koszul-affine-detection` | 3019 | none |
 | `def-pc-global-derived-rhom` | 3020 | none |
@@ -60,23 +59,25 @@
 | `lem-pod-adic-limit-finite-modules` | - | none |
 | `lem-pod-lisse-tensor-and-scalar-extension` | - | none |
 | `lem-sc-base-change-curve` | - | none |
-| `lem-weil-pbc-generic-finite-algebra-splitting` | - | none |
 | `thm-sc-constant-invariance` | - | none |
 | `def-nagata-morphism-equality-stage` | - | none |
-| `def-nagata-qc-open-equality-stage` | - | none |
 | `def-nagata-relative-gluing-datum-descent` | - | none |
 | `lem-pc-coherent-hi` | - | sorry_here |
-| `lem-sc-affine-generic-second` | - | sorry_here |
 | `lem-sc-global-functions` | - | rests_on_sorry |
 | `lem-sc-pic-affine-quotient` | - | none |
 | `lem-weil-pbc-constant-subsheaf-generic` | - | none |
+| `lem-weil-pbc-generic-separable-algebra-splitting` | - | none |
 | `lem-weil-pbc-pullback-finite-locally-constant` | - | none |
+| `lem-weil-pbc-spread-finite-separable-extension` | - | none |
+| `lem-weil-pbc-spread-purely-inseparable-factors` | - | none |
 | `lemma-nagata-filtered-colimit-finite-data` | - | none |
+| `def-nagata-basechanged-system` | - | none |
 | `def-nagata-morphism-descent` | - | none |
 | `def-nagata-qc-open-descent` | - | none |
 | `def-nagata-relative-finite-affine-presentation` | - | none |
 | `def-sc-zariski-cohomology` | - | none |
 | `def-sc-zariski-site` | - | none |
+| `lem-fin-normal-generic-constant` | - | none |
 | `lem-pc-finite-support-hi` | - | sorry_here |
 | `lem-pc-projective-coherent-higher-images` | - | sorry_here |
 | `lem-sc-affine-constant-second` | - | rests_on_sorry |
@@ -88,10 +89,10 @@
 | `lemma-nagata-qc-open-descends` | - | none |
 | `pqf-lem-qf-locqf-qc` | - | none |
 | `sbc-lem-higher-direct-image-limit` | - | none |
-| `def-nagata-basechanged-system` | - | none |
 | `def-pc-derived-direct-image` | - | none |
 | `def-pc-fppf-site` | - | none |
 | `def-pc-subfunctor` | - | none |
+| `lem-fin-etale-normal-components` | - | none |
 | `lem-kun-closed-point-field` | - | none |
 | `lem-kun-cp-approximation` | - | none |
 | `lem-pc-projective-coherent-finiteness` | - | sorry_here |
@@ -128,7 +129,6 @@
 | `lem-pc-curve-coherent-finiteness` | - | rests_on_sorry |
 | `lem-pc-flf-properties` | - | none |
 | `lem-sc-p1-twist-exists` | - | none |
-| `pqf-lem-affine-open-locnoeth` | - | none |
 | `def-weil-extension-by-zero-presheaf` | - | none |
 | `lem-exc-etale-algebra-lift` | - | none |
 | `lem-pc-projective-curve-finite-projection` | - | rests_on_sorry |
@@ -142,7 +142,7 @@
 | `lem-zl-noether-normalization-dimension` | - | none |
 | `lem-pur-rhom-global-sections` | - | none |
 
-## Stage 2: nodes to state (763)
+## Stage 2: nodes to state (764)
 
 | node | distance to Mathlib | kind |
 |---|---|---|
@@ -875,6 +875,7 @@
 | `pqf-lem-sheaf-zero-stalks` | 1 | state |
 | `thm-pqf-zmt-factorization` | 1 | state |
 | `def-nagata-glued-limit-comparison` | 2 | state |
+| `lem-fd-finite-pushforward-cohomology` | 2 | state |
 | `lem-fet-galois-category` | 2 | state |
 | `lem-fet-locally-trivial` | 2 | state |
 | `lem-galois-flasque` | 2 | state |
@@ -910,7 +911,7 @@
 | `lem-weil-pbc-projective-space-zero-isomorphism` | 4 | state |
 | `def-nagata-fixed-base-separated-stage` | 6 | state |
 
-Not open yet: 1552 nodes that wait for a statement dependency, 175 nodes that wait for stage 1.
+Not open yet: 1557 nodes that wait for a statement dependency, 175 nodes that wait for stage 1.
 
 ## Stage 3: modules to prove (0)
 
