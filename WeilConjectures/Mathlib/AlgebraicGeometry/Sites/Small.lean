@@ -100,8 +100,6 @@ theorem isContinuous_overPullback (hQP : Q ≤ P) {W U : Scheme.{u}} (g : W ⟶ 
   Functor.isContinuous_of_coverPreserving
     (compatiblePreservingOfFlat _ _) (coverPreserving_overPullback P Q hQP g)
 
-/-! ### The localization functor -/
-
 /-! ### The forgetful functor -/
 
 /-- The forgetful functor from `P`-schemes over `S` to `S`-schemes is continuous for the small
@@ -120,6 +118,8 @@ instance (S : Scheme.{u}) :
     (MorphismProperty.Over.forget P ⊤ S).IsContinuous
       (S.smallGrothendieckTopology P) (S.overGrothendieckTopology P) :=
   isContinuous_overForget P P le_rfl S
+
+/-! ### The localization functor -/
 
 section OverMap
 

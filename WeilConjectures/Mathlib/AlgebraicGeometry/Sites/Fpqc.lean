@@ -8,8 +8,8 @@ module
 public import Mathlib.AlgebraicGeometry.Morphisms.FlatDescent
 public import Mathlib.AlgebraicGeometry.Sites.Etale
 public import Mathlib.AlgebraicGeometry.Sites.Fpqc
-public import WeilConjectures.Mathlib.AlgebraicGeometry.GammaSpecAdjunction
 public import Mathlib.CategoryTheory.Sites.Over
+public import WeilConjectures.Mathlib.AlgebraicGeometry.GammaSpecAdjunction
 
 /-!
 # Points of fppf coverings
@@ -169,6 +169,7 @@ lemma exists_finite_affine_flat_of_mem_fpqcTopology {V : Scheme.{u}} [IsAffine V
   rw [← φ.w₀ j]
   exact S.downward_closed (hle _ _ (h𝒰 _)) _
 
+/-- Étale coverings are fppf coverings. -/
 lemma etaleTopology_le_fppfTopology : etaleTopology.{u} ≤ fppfTopology :=
   Precoverage.toGrothendieck_mono
     (precoverage_mono fun _ _ _ _ ↦ ⟨inferInstance, inferInstance⟩)
