@@ -1873,3 +1873,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 15:53 L: merged deliver/M1/lem-sc-local-section-quotient-finite-free (reviewer PASS; first push; new nodes: 0)
 - 15:54 L: merged deliver/H1/lem-sc-p1-ext-coherent-dim-one-vanishing (reviewer FIX; first push; new nodes: 5)
 - 15:54 L: merged deliver/H1/lem-sc-p1-proj-degreezero-localization-exact (reviewer FIX; first push; new nodes: 2)
+- 15:55 L: merged deliver/C1/lem-weil-pbc-sections-base-field-extension (reviewer FIX; after a return; new nodes: 2)

@@ -21,9 +21,53 @@
   "def-pc-field-extension",
   "def-weil-pbc-etale-site"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "The morphism $\\operatorname{Spec}(K)\\to\\operatorname{Spec}(k)$ is flat, since its only local-ring map is $k\\to K$ and $K$ is a free $k$-module, and quasi-compact, since $\\operatorname{Spec}(K)$ is a single point. The projection $p:S_K\\to S$ is the base change of $\\operatorname{Spec}(K)\\to\\operatorname{Spec}(k)$ along the structure morphism $S\\to\\operatorname{Spec}(k)$, so $p$ is flat by the stability of flat morphisms under base change [lem-weil-pbc-flat-morphism-base-change] and quasi-compact by the stability of quasi-compact morphisms under base change [lem-pc-quasi-compact-base-change].",
+   "uses": [
+    "lem-weil-pbc-flat-morphism-base-change",
+    "lem-pc-quasi-compact-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Etale Cohomology, Lemma 0A3I, proof (first sentence)"
+   }
+  },
+  {
+   "text": "For a geometric point $\\bar s=\\operatorname{Spec}(L)\\to S$, the geometric fibre of $p$ is $\\operatorname{Spec}(K\\otimes_k L)$. The field-tensor irreducibility lemma gives that $K\\otimes_k L$ has a unique minimal prime, so this fibre is irreducible and therefore connected.",
+   "uses": [
+    "lem-weil-pbc-field-tensor-irreducible"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Etale Cohomology, Lemma 0A3I, proof (fibre calculation)"
+   }
+  },
+  {
+   "text": "Applying the flat, quasi-compact, connected-geometric-fibre sections comparison to $p$ and $F$ yields the canonical bijection $\\Gamma(S,F)\\xrightarrow{\\sim}\\Gamma(S_K,p^{-1}F)$.",
+   "uses": [
+    "lem-weil-pbc-etale-sections-flat-qc-connected-fibres"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Etale Cohomology, Lemma 0A3I, proof (application of Lemma 0A3H)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-flat-morphism-base-change",
+  "lem-pc-quasi-compact-base-change",
+  "lem-weil-pbc-field-tensor-irreducible",
+  "lem-weil-pbc-etale-sections-flat-qc-connected-fibres"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Etale Cohomology, Lemma 0A3I and Lemma 0A3H"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -48,7 +92,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lemma-weil-pbc-proper-underived-exchange",
   "by": "worker",
@@ -63,5 +107,20 @@
   "slopmaster2": {
    "state": "none"
   }
+ },
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "lem-weil-pbc-sections-base-field-extension",
+  "worker": "stage1",
+  "summary": "Read the local Stacks proofs of Lemma 0A3I (base-field extension), Lemma 0A3H (sections upstairs), and Algebra Lemma 00I7 (separably closed irreducibility). Split the proof into the projection's flat/quasi-compactness, connectedness of geometric fibres using the unique-minimal-prime tensor lemma, and application of the general sections comparison. Corrected the tensor statement and source label after the returned review; the two supporting nodes remain statement-only unsplit facts.",
+  "blueprint": "The three steps realize the proof of lemma-weil-pbc-proper-underived-exchange at the passage from separable-closure fibres to the common geometric-point field, via the flat connected-fibre sections comparison."
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-sb2",
+  "group": "C1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-sb2 (reviewer sub-agent of L); spot-checked: Repaired re-push after the 15:35 return: all three points repaired (1: lem-weil-pbc-field-tensor-irreducible now states only a unique minimal prime of K tensor_k L, hence Spec irreducible and connected, source Algebra 00I7 algebra-lemma-separably-closed-irreducible, title fixed; 2: item step 2 drops the domain claim and cites the corrected node; 3: 0A3H node label corrected to etale-cohomology-lemma-sections-upstairs). Read etale-cohomology.tex lemma-sections-upstairs (0A3H), lemma-sections-base-field-extension (0A3I) and algebra.tex lemma-separably-closed-irreducible (00I7): the item statement agrees with 0A3I hypothesis by hypothesis (k separably closed, K/k arbitrary, S a k-scheme, F any sheaf on S_et); the 0A3H node agrees with 0A3H (flat, quasi-compact, connected geometric fibres, any etale sheaf); the 00I7 node is the field case of 00I7 (fields have a unique minimal prime; unique minimal prime gives nonempty irreducible hence connected). Step 2: geometric fibre over Spec L (L algebraic closure of kappa(s), def-weil-geometric-fibre) is Spec(K tensor_k L), carried by the 00I7 node; step 3 is 0A3H with f=p. Small cases: k=C, K=C(t), L=C(s) (domain); k separably closed non-perfect with a not a p-th power, K=L=k(a^{1/p}): K tensor L = K[x]/(x-a^{1/p})^p has one prime, consistent with the corrected node; K=k, S=Spec k trivial. Lean: no Mathlib or slopmaster2 declaration states either new node (GenericConnectedness.connectedSpace_tensor_of_section / irreducibleSpace_tensor_quotient are different statements). FIX more, RETURN less: C1: dag/nodes/sec-proper-base-change/lem-weil-pbc-sections-base-field-extension.json: proof[0] text, uses, elementary, proof_deps: step 1 marked elementary used stability of flat and quasi-compact morphisms under base change without a node; now cites the existing mathlib leaves lem-weil-pbc-flat-morphism-base-change and lem-pc-quasi-compact-base-change, with flatness and quasi-compactness of Spec K -> Spec k written out. Report note: section 1 still lists a citations.json that is not in the delivery and section 3 still says the local Stacks checkout lacks the chapter (the review section says it was read); stale text, not a reason to return. Start Sat Oct 10 03:53:04 PM UTC 2026, end Sat Oct 10 03:54:44 PM UTC 2026.; 1 file(s) fixed by the reviewer"
  }
 }
