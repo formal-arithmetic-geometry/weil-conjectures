@@ -1,8 +1,8 @@
 # Work queue
 
-935 items; claim with `tools/claim.py next <group> [--stage N]`.
+936 items; claim with `tools/claim.py next <group> [--stage N]`.
 
-## Stage 1: nodes to split (253)
+## Stage 1: nodes to split (254)
 
 | node | distance to a target | Lean state on the done branch |
 |---|---|---|
@@ -58,22 +58,23 @@
 | `lem-pc-zero-scheme-adjunction-base-change` | 4011 | none |
 | `lem-pc-affine-derived-pullback-tensor-tilde` | 4012 | none |
 | `lem-pc-flat-base-change-cohom` | 5008 | rests_on_sorry |
-| `lem-pc-picard-functor-agrees-sc` | 5008 | none |
+| `lem-pc-fppf-affine-sheafification-restriction` | 5009 | none |
 | `lem-sc-deg-pullback-finite` | 5009 | rests_on_sorry |
 | `lem-sc-hilbert-polynomial` | 5009 | none |
 | `lem-sc-finite-surjective-dimension` | 5010 | none |
-| `lem-sc-mult-n-finite-kernel` | 5010 | rests_on_sorry |
 | `lem-pc-base-change-map-cech` | 5011 | none |
 | `lem-pc-bounded-above-flat-kflat` | 5011 | none |
 | `lem-pc-proper-support-perfect-direct-image` | 5011 | none |
+| `lem-sc-mult-n-locally-quasi-finite` | 5011 | none |
 | `thm-pc-semicontinuity-base-change` | 5011 | sorry_here |
 | `def-pc-flat-sheaf-modules` | 5012 | none |
 | `lem-pc-derived-acyclic-resolution` | 5012 | none |
 | `lem-pc-kflat-bounded-flat-replacement` | 5013 | none |
 | `lem-pc-kflat-closure` | 5013 | none |
 | `lem-pc-kflat-hocolim-truncations` | 5013 | none |
-| `lem-sp-couple-morphism` | 6002 | none |
 | `lem-sp-kinjective-computes` | 6002 | none |
+| `lem-sp-derived-couple-functoriality` | 6003 | none |
+| `lem-sp-half-plane-graded-canonical` | 6003 | none |
 | `lem-weil-pbc-finite-proper` | 6003 | none |
 | `def-sp-acyclic` | 6004 | none |
 | `lem-sp-derived-well-defined` | 6004 | none |
@@ -947,7 +948,7 @@
 | `lem-weil-pbc-p1-field-dimension-one` | 4 | state |
 | `lem-weil-pbc-projective-space-zero-isomorphism` | 4 | state |
 
-Not open yet: 1325 nodes that wait for a statement dependency, 285 nodes that wait for stage 1.
+Not open yet: 1327 nodes that wait for a statement dependency, 287 nodes that wait for stage 1.
 
 ## Stage 3: modules to prove (0)
 
