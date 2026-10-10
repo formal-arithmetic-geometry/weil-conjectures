@@ -170,3 +170,31 @@ lemma bijective_dualLinearMap
     rw [LinearEquiv.apply_symm_apply]
 
 end AlgebraicGeometry.WeilCoefficients
+
+namespace AlgebraicGeometry.WeilCoefficients
+
+variable {l : ℕ} [Fact l.Prime]
+
+lemma linearEquivOfIso_apply {M N : WeilCoefficients.{u} l} (e : M ≅ N) (x : M) :
+    linearEquivOfIso e x = e.hom.hom x :=
+  rfl
+
+end AlgebraicGeometry.WeilCoefficients
+
+namespace AlgebraicGeometry.WeilCoefficients
+
+variable {l : ℕ} [Fact l.Prime]
+
+open MonoidalCategory in
+/-- A pairing `P ⊗ Q ⟶ T ⟶ R` of modules over `ULift ℚ̄_ℓ` intertwining automorphisms of `P`,
+`Q` and `R` whose last one is the identity is invariant under the automorphisms. -/
+lemma pairing_linearEquivOfIso {P Q T R : WeilCoefficients.{u} l} (eP : P ≅ P) (eQ : Q ≅ Q)
+    (eR : R ≅ R) (g₁ : P ⊗ Q ⟶ T) (g₂ : T ⟶ R)
+    (h : (eP.hom ⊗ₘ eQ.hom) ≫ g₁ ≫ g₂ = (g₁ ≫ g₂) ≫ eR.hom)
+    (hR : linearEquivOfIso eR = LinearEquiv.refl _ _) (p : P) (q : Q) :
+    g₂.hom (g₁.hom (linearEquivOfIso eP p ⊗ₜ linearEquivOfIso eQ q)) = g₂.hom (g₁.hom (p ⊗ₜ q)) := by
+  have h₁ := ModuleCat.tmul_eq_of_tensorHom_comp h p q
+  have h₂ := congrArg (fun e ↦ e (g₂.hom (g₁.hom (p ⊗ₜ q)))) hR
+  exact h₁.trans h₂
+
+end AlgebraicGeometry.WeilCoefficients

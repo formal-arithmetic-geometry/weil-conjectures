@@ -261,3 +261,18 @@ lemma bijective_evaluationPairing_of_iso_biproduct [IsIso (ε Φ ≫ Φ.map η[A
 end Biproduct
 
 end CategoryTheory.Mod
+
+namespace ModuleCat
+
+variable {R : Type*} [CommRing R] {P Q T : ModuleCat R}
+
+/-- A morphism `g : P ⊗ Q ⟶ T` intertwining `a ⊗ b` and `c` satisfies
+`g (a p ⊗ b q) = c (g (p ⊗ q))`. -/
+lemma tmul_eq_of_tensorHom_comp {a : P ⟶ P} {b : Q ⟶ Q} {c : T ⟶ T} {g : P ⊗ Q ⟶ T}
+    (h : (a ⊗ₘ b) ≫ g = g ≫ c) (p : P) (q : Q) :
+    g.hom (a.hom p ⊗ₜ b.hom q) = c.hom (g.hom (p ⊗ₜ q)) := by
+  have := congrArg (fun f ↦ f.hom (p ⊗ₜ q)) h
+  simpa only [hom_comp, LinearMap.coe_comp, Function.comp_apply,
+    MonoidalCategory.tensorHom_tmul] using this
+
+end ModuleCat
