@@ -25,9 +25,52 @@
   "def-weil-locally-ringed-space-morphism",
   "lem-weil-pbc-morphism-from-spec-local-ring"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Because $k[\\epsilon]$ has the unique expression $u+v\\epsilon$ with $\\epsilon^2=0$, and the reduction of $\\theta^\\sharp$ modulo $(\\epsilon)$ is the residue map $a\\mapsto\\bar a$ (the composite of $\\theta$ with the closed point $\\operatorname{Spec}k\\to\\operatorname{Spec}k[\\epsilon]$ is the canonical morphism $\\operatorname{Spec}\\kappa(x)\\to X$ by [def-sc-scheme-tangent-space], whose local homomorphism in the correspondence of [lem-weil-pbc-morphism-from-spec-local-ring] is the residue map, and stalk maps of a composite compose by [lem-weil-pbc-scheme-stalk-map-composition]), there is a unique function $D_\\theta$ with $\\theta^\\sharp(a)=\\bar a+D_\\theta(a)\\epsilon$. Additivity of $\\theta^\\sharp$ gives additivity of $D_\\theta$, and multiplicativity gives $D_\\theta(ab)=\\bar aD_\\theta(b)+\\bar bD_\\theta(a)$. Since $\\theta$ is a $k$-morphism, $D_\\theta$ is $k$-linear on the structure-field copy of $k$ (and hence is a derivation relative to the residue map).",
+   "uses": [
+    "def-sc-scheme-tangent-space",
+    "lem-weil-pbc-morphism-from-spec-local-ring",
+    "lem-weil-pbc-scheme-stalk-map-composition"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 0B2D, proof: every element has the form c(a)+D(a) epsilon"
+   }
+  },
+  {
+   "text": "If $a\\in\\mathfrak m_x$, then $\\bar a=0$, so the coefficient $D_\\theta(a)$ depends only on the class of $a$ in $\\mathfrak m_x/\\mathfrak m_x^2$: for a product $ab$ of two elements of $\\mathfrak m_x$, the derivation formula from step 1 gives $D_\\theta(ab)=0$, and additivity handles finite sums. Thus $D_\\theta$ vanishes on $\\mathfrak m_x^2$ and induces $\\ell_\\theta(a\\bmod\\mathfrak m_x^2)=D_\\theta(a)$. The same additivity and scalar calculation show that $\\ell_\\theta$ is $k$-linear.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 0B2E, proof of the tangent-space rational-point identification"
+   }
+  },
+  {
+   "text": "The assignment $\\theta\\mapsto\\ell_\\theta$ is injective because the stalk map $\\theta^\\sharp$ is recovered from its residue part and the coefficients $D_\\theta$ (and a morphism from $\\operatorname{Spec}k[\\epsilon]$ is determined by the corresponding local homomorphism by [lem-weil-pbc-morphism-from-spec-local-ring]). For surjectivity, given a $k$-linear $\\ell:\\mathfrak m_x/\\mathfrak m_x^2\\to k$, write each $a\\in\\mathcal O_{X,x}$ as its structure-field residue $\\bar a$ plus an element of $\\mathfrak m_x$ and define $D(a)$ to be $\\ell$ of the latter class. The identities $D(a+b)=D(a)+D(b)$ and $D(ab)=\\bar aD(b)+\\bar bD(a)$ follow by expanding products into residue-field and maximal-ideal parts; hence $a\\mapsto\\bar a+D(a)\\epsilon$ is a local $k$-algebra map to $k[\\epsilon]$, since it sends $\\mathfrak m_x$ into $(\\epsilon)$. The cited Spec-local-ring correspondence yields a unique tangent vector inducing this map, and its associated functional is $\\ell$. Finally, scaling $\\epsilon\\mapsto\\lambda\\epsilon$ scales all coefficients by $\\lambda$, while the pushout definition of tangent-vector addition adds coefficients, so the bijection is $k$-linear.",
+   "uses": [
+    "def-sc-scheme-tangent-space",
+    "lem-weil-pbc-morphism-from-spec-local-ring"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tags 0B2C and 0B2E, dual-number construction and rational-point tangent-space lemma"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sc-scheme-tangent-space",
+  "lem-weil-pbc-morphism-from-spec-local-ring",
+  "lem-weil-pbc-scheme-stalk-map-composition"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/varieties.tex",
+  "place": "Tags 0B2D and 0B2E (varieties-lemma-tangent-space-cotangent-space, varieties-lemma-tangent-space-rational-point): the agent-written proof argues directly with the dual-number derivation phi(a)=c(a)+D(a)epsilon of the proof of 0B2D, without passing through Omega"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -59,7 +102,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "R-rtd2",
   "item": "lem-sc-rational-tangent-cotangent-duality",
@@ -75,5 +118,21 @@
   "slopmaster2": {
    "state": "none"
   }
+ },
+ "split_report": {
+  "date": "2026-10-11",
+  "item": "lem-sc-rational-point-tangent-derivation-identification",
+  "worker": "stage1",
+  "summary": "No exact Lean declaration or duplicate blueprint node exists. The statement was split into coefficient extraction and the derivation identity, descent of the derivation to the cotangent quotient, and the explicit inverse construction from a cotangent functional, including injectivity and k-linearity. The available source is cited by Stacks tags, but varieties.tex is absent from this checkout, so the proof is recorded as agent-written.",
+  "blueprint": "The three steps realize the tangent-vector separation argument in the third paragraph of lem-sc-degree-2g1-very-ample, specifically the identification of tangent vectors with functionals on m_x/m_x^2.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-rtd1706",
+  "group": "M1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-rtd1706 (reviewer sub-agent of L); spot-checked: Source: Stacks 0B2E (varieties-lemma-tangent-space-rational-point, S=Spec k, so m_s O_{X,x}=0) and the proof of 0B2D (phi(a)=c(a)+D(a)eps); statement agrees hypothesis by hypothesis (kappa(x)=k, dual-number tangent space of def-sc-scheme-tangent-space with kappa=k). No circularity: proof_deps do not include lem-sc-rational-tangent-cotangent-duality (which cites this node). The proof is a direct dual-number argument (agent-written, avoiding Omega), correct: step 1 coefficient extraction and Leibniz rule with D vanishing on k; step 2 D vanishes on m^2 (elementary); step 3 inverse D(a)=l(a-abar), Leibniz via ab-abar bbar=(a-abar)(b-bbar)+abar(b-bbar)+bbar(a-abar), bijection via lem-weil-pbc-morphism-from-spec-local-ring, linearity from eps->lambda eps and the pushout sum of the definition. Small cases: Spec k (both 0), A^1 at 0 (l = coefficient of t). Mathlib: grep of RingTheory/Kaehler and RingTheory/Derivation for CotangentSpace/DualNumber and of AlgebraicGeometry: only ring-level cotangent spaces, no scheme tangent space; slopmaster2 AlgebraicGeometry/TangentSpace.lean has only sheaf-level tangent sheaves, no attachment. FIX more, RETURN less (C1/C4): dag/nodes/sec-picard-framework/lem-sc-rational-point-tangent-derivation-identification.json: proof[0].text/uses and proof_deps: the claim that theta^sharp mod eps is the residue map now cites lem-weil-pbc-morphism-from-spec-local-ring and lem-weil-pbc-scheme-stalk-map-composition (existing nodes) with the closed-point condition of def-sc-scheme-tangent-space; proof_origin.place: removed the false remark that varieties.tex is absent (it is present here) and named the labels. Start Sat Oct 10 05:06:41 PM UTC 2026, end Sat Oct 10 05:07:44 PM UTC 2026.; 1 file(s) fixed by the reviewer"
  }
 }
