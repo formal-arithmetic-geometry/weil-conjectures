@@ -5,16 +5,126 @@
  "statement": "Let $R$ be a commutative ring, $n,c\\ge0$ integers and $f_1,\\dots,f_c\\in R[x_1,\\dots,x_n]$ [def-weil-pbc-mv-polynomial-ring] such that $T=R[x_1,\\dots,x_n]/(f_1,\\dots,f_c)$ is a relative global complete intersection [def-weil-pbc-relative-global-complete-intersection]. Let $h\\in R[x_1,\\dots,x_n]$, let $g\\in T$ be its image, and let $T_g$ be the localization of $T$ at $\\{1,g,g^2,\\dots\\}$ [def-weil-ring-localization-away]. Regard $f_1,\\dots,f_c,h$ as elements of $R[x_1,\\dots,x_{n+1}]$. Then $T'=R[x_1,\\dots,x_{n+1}]/(f_1,\\dots,f_c,hx_{n+1}-1)$ (with $n+1$ variables and $c+1$ equations) is a relative global complete intersection, and the $R$-algebra homomorphism $T'\\to T_g$ with $x_i\\mapsto(x_i\\bmod(f))/1$ for $i\\le n$ and $x_{n+1}\\mapsto1/g$ is an isomorphism of $R$-algebras.",
  "source": {
   "document": "literature/stacks-project/algebra.tex",
-  "place": "Algebra, Lemma Tag 00SS (lemma-base-change-relative-global-complete-intersection, line 36640), part (2), proof line 36665 ('S_g = S[x_{n+1}]/(g x_{n+1} - 1)'), with the base change part (1) and Lemma 00P4 for the fibres; tag verified in stacks-project/tags/tags (00SS,algebra-lemma-base-change-relative-global-complete-intersection)"
+  "place": "Algebra, Lemma Tag 00SS (lemma-base-change-relative-global-complete-intersection, line 36640), part (2), proof line 36665 ('the localization at one element can be described as S_g = S[x_{n+1}]/(g x_{n+1} - 1)'); the fibre dimensions, left implicit there, as in the proof of Lemma Tag 00SA (lemma-localize-lci, line 35852: 'By the remarks following the definition dim(S_g) = n - c') with the remark after Definition Tag 00S9 (definition-lci-field, lines 35834-35849); the definition is Tag 00SP (definition-relative-global-complete-intersection, line 36506); tags verified in stacks-project/tags/tags"
  },
  "stmt_deps": [
   "def-weil-pbc-mv-polynomial-ring",
   "def-weil-pbc-relative-global-complete-intersection",
   "def-weil-ring-localization-away"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "(Part (a): the presentation $T'\\cong T_g$.) Write $P=R[x_1,\\dots,x_n]$ and $P'=R[x_1,\\dots,x_{n+1}]=P[y]$ with $y=x_{n+1}$ [def-weil-pbc-mv-polynomial-ring], $I=(f_1,\\dots,f_c)\\subseteq P$, $\\pi:P\\to T$ the quotient map (so $\\pi(h)=g$), and $I'=(f_1,\\dots,f_c,hy-1)\\subseteq P'$, so $T'=P'/I'$. Let $\\beta:P'\\to T_g$ [def-weil-ring-localization-away] be the $R$-algebra homomorphism with $x_i\\mapsto\\pi(x_i)/1$ ($i\\le n$) and $y\\mapsto1/g$. The coefficientwise map $\\pi[y]:P[y]\\to T[y]$ is surjective with kernel $I\\cdot P[y]=(f_1,\\dots,f_c)P'$ by [lem-weil-pbc-polynomial-coefficient-map-kernel] (with $f=\\pi$, one variable $y$, $\\ker\\pi=I$). By [lem-weil-pbc-localization-away-polynomial-quotient] (ring $T$, $r=g$), the $T$-algebra map $\\lambda:T[y]\\to T_g$, $y\\mapsto1/g$, is surjective with kernel $(gy-1)T[y]$. The $R$-algebra maps $\\beta$ and $\\lambda\\circ\\pi[y]$ agree on $x_1,\\dots,x_n,y$, so $\\beta=\\lambda\\circ\\pi[y]$, and $\\beta$ is surjective. Kernel: $\\pi[y](hy-1)=gy-1$, so $I'\\subseteq\\ker\\beta$. Conversely, if $\\beta(u)=0$ then $\\pi[y](u)=(gy-1)v$ for some $v\\in T[y]$; choose $v'\\in P'$ with $\\pi[y](v')=v$; then $\\pi[y](u-(hy-1)v')=0$, so $u-(hy-1)v'\\in(f_1,\\dots,f_c)P'$ and $u\\in I'$. Hence $\\ker\\beta=I'$ and $\\beta$ induces an isomorphism of $R$-algebras $T'=P'/I'\\xrightarrow{\\sim}T_g$, which is the map of the statement ($x_i\\mapsto(x_i\\bmod(f))/1$, $x_{n+1}\\mapsto1/g$). (Source: proof of 00SS (2), '$S_g\\cong S[x_{n+1}]/(gx_{n+1}-1)$'; the same computation as the last sentence of the proof of 00SA.)",
+   "uses": [
+    "def-weil-pbc-mv-polynomial-ring",
+    "def-weil-ring-localization-away",
+    "lem-weil-pbc-polynomial-coefficient-map-kernel",
+    "lem-weil-pbc-localization-away-polynomial-quotient"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra, Lemma Tag 00SS (lemma-base-change-relative-global-complete-intersection, line 36640), part (2), proof line 36665; Lemma Tag 00SA (lemma-localize-lci, line 35852), proof"
+   }
+  },
+  {
+   "text": "(The fibre of $T$ and its presentation.) Fix a prime $\\mathfrak p\\subset R$, let $k=\\kappa(\\mathfrak p)$ and $F=T\\otimes_Rk$, the fibre ring [def-weil-pbc-localization-at-prime]. Let $\\rho:P\\to k[x_1,\\dots,x_n]$ [def-weil-pbc-mv-polynomial-ring] be the coefficient map along $R\\to k$, $\\bar f_j=\\rho(f_j)$ and $\\bar F=k[x_1,\\dots,x_n]/(\\bar f_1,\\dots,\\bar f_c)$. By [lem-weil-pbc-polynomial-scalar-extension] (with $A=R$, the ring $k$, $J=\\{1,\\dots,n\\}$) $P\\otimes_Rk\\cong k[x_1,\\dots,x_n]$, $a\\otimes\\mu\\mapsto\\mu\\rho(a)$; by associativity of $\\otimes$, $F=(P/I)\\otimes_Rk\\cong(P\\otimes_Rk)\\otimes_P(P/I)\\cong k[x_1,\\dots,x_n]\\otimes_P(P/I)$, and by [lem-weil-pbc-tensor-quotient-base-change] (with $A=P$, $B=k[x_1,\\dots,x_n]$ via $\\rho$, the ideal $I=(f_1,\\dots,f_c)$) the latter is $\\bar F$. So there is an isomorphism of $k$-algebras $\\theta:F\\xrightarrow{\\sim}\\bar F$, $\\pi(a)\\otimes\\mu\\mapsto\\mu\\rho(a)\\bmod(\\bar f)$; in particular $\\theta(g\\otimes1)=e$, the class of $\\rho(h)$ in $\\bar F$. (Source: the proof of 00SS (1), '$R'\\otimes_RR[x_1,\\dots,x_n]/(f_1,\\dots,f_c)=R'[x_1,\\dots,x_n]/(f_1,\\dots,f_c)$', with $R'=k$.)",
+   "uses": [
+    "def-weil-pbc-localization-at-prime",
+    "def-weil-pbc-mv-polynomial-ring",
+    "lem-weil-pbc-polynomial-scalar-extension",
+    "lem-weil-pbc-tensor-quotient-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra, Lemma Tag 00SS (line 36640), proof of (1), lines 36660-36662"
+   }
+  },
+  {
+   "text": "(The fibre of $T'$ is a principal localization of the fibre of $T$.) Keep $\\mathfrak p$, $k$, $F$, $\\bar F$, $\\theta$, $e$ of step 2. Applying $-\\otimes_Rk$ to the $R$-algebra isomorphism $T'\\cong T_g$ of step 1 gives a $k$-algebra isomorphism $T'\\otimes_Rk\\cong T_g\\otimes_Rk$. By [lem-weil-pbc-algebra-localization-away-base-change] (with $A=T$, $B=k$ and the element $g$), $T_g\\otimes_Rk\\cong F_{g\\otimes1}$ as $k$-algebras. The isomorphism $\\theta$ carries $g\\otimes1$ to $e$, hence induces an isomorphism of localizations $F_{g\\otimes1}\\cong\\bar F_e$, $a/(g\\otimes1)^m\\mapsto\\theta(a)/e^m$ [def-weil-ring-localization-away] (it is well defined, bijective and multiplicative because $\\theta$ is a ring isomorphism and the equality of fractions $a/s^m=b/s^l$ is defined by an equation in the ring). Composing, $T'\\otimes_Rk\\cong\\bar F_e$ as rings; a ring isomorphism $\\varphi$ induces a bijection $\\mathfrak P\\mapsto\\varphi(\\mathfrak P)$ of prime ideals preserving the closed sets $V(J)$, so $\\operatorname{Spec}(T'\\otimes_Rk)$ is homeomorphic to $\\operatorname{Spec}\\bar F_e$ [def-weil-affine-spectrum].",
+   "uses": [
+    "lem-weil-pbc-algebra-localization-away-base-change",
+    "def-weil-ring-localization-away",
+    "def-weil-affine-spectrum"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra, Lemma Tag 00SS (lemma-base-change-relative-global-complete-intersection, line 36640), part (2), proof line 36665; Lemma Tag 00SA (line 35852), proof: the fibre of the localization is the localization of the fibre"
+   }
+  },
+  {
+   "text": "(A nonempty fibre of $T'$ lies over a nonempty fibre of $T$; there the fibre of $T$ is equidimensional of dimension $n-c$.) Assume $T'\\otimes_Rk\\neq0$, so $\\bar F_e\\neq0$ by step 3. Then $\\bar F\\neq0$: if $1=0$ in $\\bar F$, then $1/1=0/1$ in $\\bar F_e$ [def-weil-ring-localization-away]. Hence $F\\cong\\bar F$ is nonzero, and since $T=R[x_1,\\dots,x_n]/(f_1,\\dots,f_c)$ is a relative global complete intersection [def-weil-pbc-relative-global-complete-intersection], the Krull dimension of $\\operatorname{Spec}F$ is $n-c$. Since $\\theta$ is a ring isomorphism, $\\operatorname{Spec}F$ and $\\operatorname{Spec}\\bar F$ are homeomorphic (as in step 3) [def-weil-affine-spectrum], so $\\dim\\operatorname{Spec}\\bar F=n-c$ by [lem-weil-pbc-homeomorphism-krull-dimension]. Now [lem-weil-pbc-global-complete-intersection-equidimensional] applies to the field $k$, $m=n$, $t=c$, $Q=k[x_1,\\dots,x_n]$, the polynomials $\\bar f_1,\\dots,\\bar f_c$ and the nonzero ring $\\bar F=Q/(\\bar f_1,\\dots,\\bar f_c)$ with $\\dim\\bar F=n-c$: for every prime $\\mathfrak P$ of $\\bar F$, $\\dim_{\\mathfrak P}(\\operatorname{Spec}\\bar F)=n-c$. (Source: the remark after Definition 00S9, used in the proof of 00SA.)",
+   "uses": [
+    "def-weil-ring-localization-away",
+    "def-weil-pbc-relative-global-complete-intersection",
+    "def-weil-affine-spectrum",
+    "lem-weil-pbc-homeomorphism-krull-dimension",
+    "lem-weil-pbc-global-complete-intersection-equidimensional"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra, the paragraph after Definition Tag 00S9 (definition-lci-field, lines 35834-35849), used in the proof of Lemma Tag 00SA (line 35852)"
+   }
+  },
+  {
+   "text": "(The dimension of the localized fibre.) Keep the assumption $\\bar F_e\\neq0$ and let $X=\\operatorname{Spec}\\bar F_e$ [def-weil-affine-spectrum]. $X$ is nonempty: the nonzero ring $\\bar F_e$ has a maximal ideal by [lem-weil-pbc-proper-ideal-contained-in-maximal], and a maximal ideal is prime. By [lem-weil-pbc-spec-localization-away-basic-open] (ii) (with $A=\\bar F$, $f=e$), $\\mathfrak P\\mapsto\\iota^{-1}(\\mathfrak P)$ is a homeomorphism $u:X\\to D(e)$ onto the open subspace $D(e)\\subseteq\\operatorname{Spec}\\bar F$. Let $x\\in X$ and $y=u(x)$. For every open neighbourhood $V$ of $x$ in $X$, $u(V)$ is an open neighbourhood of $y$ in $D(e)$ and $u$ restricts to a homeomorphism $V\\to u(V)$ of subspaces, so $\\dim V=\\dim u(V)$ by [lem-weil-pbc-homeomorphism-krull-dimension]; every open neighbourhood of $y$ in $D(e)$ is $u(V)$ for $V=u^{-1}$ of it. Taking minima [def-kun-topological-dimension-at-point], $\\dim_xX=\\dim_yD(e)$. By [lem-weil-pbc-dimension-at-point-open-subspace] (with $Y=\\operatorname{Spec}\\bar F$, $O=D(e)$), $\\dim_yD(e)=\\dim_y\\operatorname{Spec}\\bar F$, which is $n-c$ by step 4. So every point of the nonempty space $X$ has local dimension $n-c$, and [lem-weil-pbc-dimension-supremum-local-dimensions] gives $\\dim X=\\sup_{x\\in X}\\dim_xX=n-c$ [def-kun-topological-krull-dimension]. (Source: proof of 00SA, 'By the remarks following the definition $\\dim(S_g)=n-c$'.)",
+   "uses": [
+    "def-weil-affine-spectrum",
+    "lem-weil-pbc-proper-ideal-contained-in-maximal",
+    "lem-weil-pbc-spec-localization-away-basic-open",
+    "lem-weil-pbc-homeomorphism-krull-dimension",
+    "def-kun-topological-dimension-at-point",
+    "lem-weil-pbc-dimension-at-point-open-subspace",
+    "lem-weil-pbc-dimension-supremum-local-dimensions",
+    "def-kun-topological-krull-dimension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra, Lemma Tag 00SA (lemma-localize-lci, line 35852), proof, with the paragraph after Definition Tag 00S9 (lines 35834-35849)"
+   }
+  },
+  {
+   "text": "(Conclusion.) Let $\\mathfrak p\\subset R$ be a prime whose fibre ring $T'\\otimes_R\\kappa(\\mathfrak p)$ is nonzero. By step 3, $\\operatorname{Spec}(T'\\otimes_R\\kappa(\\mathfrak p))$ is homeomorphic to $X=\\operatorname{Spec}\\bar F_e$, so by [lem-weil-pbc-homeomorphism-krull-dimension] and step 5 its Krull dimension is $n-c=(n+1)-(c+1)$. As $T'=R[x_1,\\dots,x_{n+1}]/(f_1,\\dots,f_c,hx_{n+1}-1)$ has $n+1$ variables and $c+1$ equations, this says that $T'$ is a relative global complete intersection [def-weil-pbc-relative-global-complete-intersection]. Together with step 1 this is the statement. (If $c>n$, then $T=0$ by the definition, and steps 3-4 show that no fibre of $T'$ is nonzero: the argument covers this case.)",
+   "uses": [
+    "lem-weil-pbc-homeomorphism-krull-dimension",
+    "def-weil-pbc-relative-global-complete-intersection"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra, Lemma Tag 00SS (lemma-base-change-relative-global-complete-intersection, line 36640), part (2), proof line 36665; Definition Tag 00SP (definition-relative-global-complete-intersection, line 36506)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-mv-polynomial-ring",
+  "def-weil-ring-localization-away",
+  "lem-weil-pbc-polynomial-coefficient-map-kernel",
+  "lem-weil-pbc-localization-away-polynomial-quotient",
+  "def-weil-pbc-localization-at-prime",
+  "lem-weil-pbc-polynomial-scalar-extension",
+  "lem-weil-pbc-tensor-quotient-base-change",
+  "lem-weil-pbc-algebra-localization-away-base-change",
+  "def-weil-affine-spectrum",
+  "def-weil-pbc-relative-global-complete-intersection",
+  "lem-weil-pbc-homeomorphism-krull-dimension",
+  "lem-weil-pbc-global-complete-intersection-equidimensional",
+  "lem-weil-pbc-proper-ideal-contained-in-maximal",
+  "lem-weil-pbc-spec-localization-away-basic-open",
+  "def-kun-topological-dimension-at-point",
+  "lem-weil-pbc-dimension-at-point-open-subspace",
+  "lem-weil-pbc-dimension-supremum-local-dimensions",
+  "def-kun-topological-krull-dimension"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Algebra, Lemma Tag 00SS (line 36640), part (2), proof line 36665; the fibre-dimension part, which the source leaves implicit, follows the proof of Lemma Tag 00SA (line 35852) and the paragraph after Definition Tag 00S9 (lines 35834-35849), with the fibre presentation of the proof of 00SS (1) (lines 36660-36662)"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -46,7 +156,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "worker",
@@ -66,5 +176,12 @@
   }
  },
  "chapter": "sec-proper-base-change",
- "unit": "sk-thm-p1"
+ "unit": "sk-thm-p1",
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "lem-weil-pbc-relative-global-complete-intersection-principal-localization",
+  "worker": "stage1",
+  "summary": "Read 00SS (line 36640) and its proof, 00SA (line 35852) with the remark after 00S9, the definition 00SP (line 36506); tags verified in tags/tags. Statement kept. Corrected source.place: the proof of 00SS cites 00P3 (lemma-dimension-preserved-field-extension), not 00P4, and only for part (1), which part (2) does not need. Six steps: (1) T' = T_g via the coefficient-map kernel and R[x]/(rx-1) = R_r leaves (route of the merged 00SA node, step 3); (2) the fibre F = T (x) k(p) is k[x]/(f-bar) (polynomial scalar extension, tensor-quotient base change); (3) T' (x) k(p) = F_g (algebra localization base change leaf); (4) a nonzero fibre of T' lies over a nonzero fibre of T, which is equidimensional of dimension n-c (equidimensional node); (5) dim of the nonzero principal localization is n-c (open immersion of D(e), dimension at a point on an open subspace, supremum of local dimensions); (6) conclusion with (n+1)-(c+1). No new nodes. Mathlib searches of the item (all three kinds, recorded at creation) suffice: no relative global complete intersection notion in Mathlib, not a leaf."
+ },
+ "reviewed": "2026-10-10 L: 6 steps checked against 00SS (2) with the fibre dimensions written out: T' = T_g via polynomial-coefficient-map-kernel and localization-away-polynomial-quotient, fibres by polynomial-scalar-extension and tensor-quotient-base-change, fibre of T' = principal localization of the fibre of T (algebra-localization-away-base-change), dimension n - c by equidimensionality and the open-subspace/supremum nodes; source place corrected (00SS cites 00P3, not 00P4, and only for part (1)); citer syntomic-at-prime step 10 uses both clauses"
 }
