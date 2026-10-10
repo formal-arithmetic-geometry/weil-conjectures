@@ -102,6 +102,62 @@ theorem IdealSheafData.nonempty_H_cokernel_whiskerRight_linearEquiv (J : X.Ideal
   exact ⟨((Modules.cohomologyFunctor k q).mapIso e).toLinearEquiv ≪≫ₗ
     (e'.app ⟨(Modules.pullback J.subschemeι).obj M, inferInstance⟩).toLinearEquiv.symm⟩
 
+/-- The reduced closed subscheme on the closure of a point is integral. -/
+instance IdealSheafData.isIntegral_subscheme_vanishingIdeal_closure (x : X) :
+    IsIntegral (vanishingIdeal ⟨closure {x}, isClosed_closure⟩).subscheme := by
+  set J := vanishingIdeal ⟨closure {x}, isClosed_closure⟩
+  have hr : Set.range J.subschemeι = closure {x} := by
+    rw [J.range_subschemeι]
+    simp [J]
+  have h := J.subschemeι.isClosedEmbedding.isEmbedding
+  have hirr : IsIrreducible (Set.range J.subschemeι) := hr ▸ isIrreducible_singleton.closure
+  have := Subtype.irreducibleSpace hirr
+  have hu := (IrreducibleSpace.isIrreducible_univ (Set.range J.subschemeι)).image
+    h.toHomeomorph.symm h.toHomeomorph.symm.continuous.continuousOn
+  rw [Set.image_univ, h.toHomeomorph.symm.surjective.range_eq] at hu
+  have := (irreducibleSpace_def _).mpr hu
+  exact isIntegral_of_irreducibleSpace_of_isReduced _
+
+/-- The reduced closed subscheme on the closure of a point has the dimension of that closure. -/
+lemma IdealSheafData.topologicalKrullDim_subscheme_vanishingIdeal_closure (x : X) :
+    topologicalKrullDim (vanishingIdeal ⟨closure {x}, isClosed_closure⟩).subscheme =
+      topologicalKrullDim (closure {x} : Set X) := by
+  set J := vanishingIdeal ⟨closure {x}, isClosed_closure⟩
+  have hr : Set.range J.subschemeι = closure {x} := by
+    rw [J.range_subschemeι]
+    simp [J]
+  rw [← hr]
+  exact J.subschemeι.isClosedEmbedding.isEmbedding.topologicalKrullDim_eq_range
+
+/-- **A section of a module over an integral scheme is injective if it is so generically.** If
+`s : 𝒪_X ⟶ N` is an isomorphism on a nonempty open `V` of an integral scheme, then its kernel
+vanishes: a function on an open `W` vanishing on the nonempty open `W ∩ V` is zero. -/
+lemma Modules.isZero_kernel_of_isIntegral [IsIntegral X] {N : X.Modules} (s : 𝟙_ X.Modules ⟶ N)
+    {V : X.Opens} (hV : (V : Set X).Nonempty) [IsIso ((Modules.restrictFunctor V.ι).map s)] :
+    IsZero (kernel s) := by
+  have hK := (Modules.isZero_restrict_iff _ V).mp (Modules.isZero_restrict_kernel_of_isIso s V)
+  refine (Modules.isZero_iff_forall_subsingleton _).mpr fun W ↦
+    ⟨fun a b ↦ Modules.injective_map_kernelι W s ?_⟩
+  suffices h : ∀ c : Γ(kernel s, W), (kernel.ι s).app W c = 0 by
+    change (kernel.ι s).app W a = (kernel.ι s).app W b
+    rw [h a, h b]
+  intro c
+  by_cases hW : (W : Set X).Nonempty
+  · obtain ⟨z, hzW, hzV⟩ := nonempty_preirreducible_inter W.isOpen V.isOpen hW hV
+    have hc : (kernel s).presheaf.map (homOfLE (inf_le_left : W ⊓ V ≤ W)).op c = 0 :=
+      (hK (W ⊓ V) inf_le_right).elim _ _
+    have h₁ := Modules.Hom.app_presheaf_map (kernel.ι s) (homOfLE (inf_le_left : W ⊓ V ≤ W)) c
+    rw [hc, map_zero] at h₁
+    refine germ_injective_of_isIntegral X z hzW ?_
+    rw [map_zero, ← X.presheaf.germ_res_apply (homOfLE (inf_le_left : W ⊓ V ≤ W)) z ⟨hzW, hzV⟩]
+    erw [← h₁]
+    exact map_zero _
+  · have hW' : W = ⊥ := by
+      ext y
+      simpa using fun hy ↦ hW ⟨y, hy⟩
+    subst hW'
+    exact Subsingleton.elim (α := Γ(X, ⊥)) _ _
+
 end ClosedSubscheme
 
 end AlgebraicGeometry.Scheme
