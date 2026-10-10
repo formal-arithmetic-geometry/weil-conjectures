@@ -1,8 +1,8 @@
 # Work queue
 
-914 items; claim with `tools/claim.py next <group> [--stage N]`.
+915 items; claim with `tools/claim.py next <group> [--stage N]`.
 
-## Stage 1: nodes to split (331)
+## Stage 1: nodes to split (332)
 
 | node | distance to a target | Lean state on the done branch |
 |---|---|---|
@@ -13,8 +13,9 @@
 | `lem-weil-pbc-etale-geometric-fibre-constant-sections` | 2006 | none |
 | `lem-weil-pbc-etale-sections-fpqc-descent` | 2006 | none |
 | `lem-weil-pbc-sets-affine-etale-inverse-image-comparison` | 2010 | none |
-| `lem-sc-affine-cap-section-open-dictionary` | 2012 | none |
 | `lem-sc-noetherian-topological-cohomology-vanishing` | 2012 | none |
+| `lem-sc-affine-finite-projective-prime-membership` | 2013 | none |
+| `lem-sc-affine-standard-cover-finite-projective` | 2013 | none |
 | `lem-sc-ample-proj-open` | 2013 | none |
 | `lem-sc-boundary-cech-local-lifts` | 2013 | none |
 | `lem-sc-closed-pushforward-boundary-naturality` | 2013 | none |
@@ -22,17 +23,17 @@
 | `lem-sc-proj-standard-open-basis` | 2013 | none |
 | `lem-sc-separated-affine-function-field-surjective` | 2013 | none |
 | `lem-sc-topological-leray-spectral-sequence` | 2013 | none |
-| `lem-sc-torsor-h1-boundary-representative` | 2013 | none |
 | `lem-sc-torsor-h1-ext-pushforward` | 2013 | none |
 | `lem-sc-global-generation-nonvanishing-cover` | 2014 | none |
 | `lem-sc-invert-s-cohomology-affine-case` | 2014 | none |
 | `lem-sc-invert-s-cohomology-gluing` | 2014 | none |
 | `lem-sc-tensor-generating-sections` | 2014 | none |
+| `lem-sc-torsor-h1-zariski-boundary-class` | 2014 | none |
+| `lem-sc-zariski-ext-torsor` | 2014 | none |
 | `lem-sc-invert-s-cohomology-separated-induction` | 2015 | none |
 | `lem-weil-pbc-complex-spectral-sequence-comparison` | 3006 | none |
 | `lem-weil-pbc-hypercohomology-e1-pullback-functorial` | 3006 | none |
 | `lem-exc-field-sections-stalk-invariants` | 3007 | none |
-| `lem-pc-divisor-line-bundle-agrees-sc` | 3007 | none |
 | `lem-weil-pbc-derived-finite-product` | 3007 | none |
 | `lem-weil-pbc-etale-sheaf-clopen-product` | 3007 | none |
 | `lem-weil-pbc-cohomology-over-object-localization` | 3009 | none |
@@ -926,7 +927,7 @@
 | `lem-weil-pbc-p1-field-dimension-one` | 4 | state |
 | `lem-weil-pbc-projective-space-zero-isomorphism` | 4 | state |
 
-Not open yet: 349 nodes that wait for stage 1, 1166 nodes that wait for a statement dependency.
+Not open yet: 350 nodes that wait for stage 1, 1169 nodes that wait for a statement dependency.
 
 ## Stage 3: modules to prove (0)
 
