@@ -25,9 +25,53 @@
   "def-sc-gm-torsor",
   "lem-sc-torsor-h1"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Starting with a G-torsor T, form E as the coproduct over $n\\in\\mathbf Z$ of the contracted powers $T^{\\otimes n}$, with $T^{\\otimes 0}=G$ and negative powers formed from the inverse torsor. Concatenation gives E an abelian-sheaf structure, the exponent map $p:E\\to\\mathbf Z_X$ is a surjection, and its kernel is G; hence $0\\to G\\to E\\to\\mathbf Z_X\\to0$ is exact. The fibre over 1 is T by construction.",
+   "uses": [
+    "lem-sc-zariski-ext-torsor"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/cohomology.tex",
+    "place": "Lemma 02FQ, construction of the extension by contracted powers of a torsor"
+   }
+  },
+  {
+   "text": "The long exact sequence of the short exact sequence of Step 1 [def-sc-topological-abelian-cohomology] gives the connecting map $\\delta_E:H^0(X_{\\mathrm{Zar}},\\mathbf Z_X)\\to H^1(X_{\\mathrm{Zar}},G)$. By [lem-sc-torsor-h1-zariski-boundary-class], applied to this sequence, the bijection of [lem-sc-torsor-h1] (Zariski case) sends the class of its fibre over $1$ to $\\delta_E(1)$. That fibre is isomorphic to $T$ by Step 1, so $[T]\\mapsto\\delta_E(1)$.",
+   "uses": [
+    "lem-sc-torsor-h1-zariski-boundary-class",
+    "def-sc-topological-abelian-cohomology"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/cohomology.tex",
+    "place": "Lemma 02FQ, boundary of 1 in the long exact cohomology sequence"
+   }
+  },
+  {
+   "text": "Conversely, let $0\\to G\\to E\\to\\mathbf Z_X\\to0$ be any short exact sequence of abelian sheaves on $X_{\\mathrm{Zar}}$. By [lem-sc-torsor-h1-zariski-boundary-class] its fibre over $1$ is a $G$-torsor and the bijection of [lem-sc-torsor-h1] (Zariski case) sends its class to $\\delta_E(1)$, the boundary of $1$ in the long exact sequence [def-sc-topological-abelian-cohomology]. This is the converse clause.",
+   "uses": [
+    "lem-sc-torsor-h1-zariski-boundary-class",
+    "def-sc-topological-abelian-cohomology"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/cohomology.tex",
+    "place": "Lemma 02FQ, converse from an extension to the fibre torsor"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sc-zariski-ext-torsor",
+  "lem-sc-torsor-h1-zariski-boundary-class",
+  "def-sc-topological-abelian-cohomology"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Lemma 02FQ (cohomology-lemma-torsors-h1)"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -52,12 +96,28 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-sc-torsor-h1-functoriality",
   "by": "worker",
   "date": "2026-10-10"
  },
  "chapter": "sec-curve-estimates",
- "unit": "sk-thm-curveestimate"
+ "unit": "sk-thm-curveestimate",
+ "split_report": {
+  "date": "2026-10-11",
+  "item": "lem-sc-torsor-h1-boundary-representative",
+  "worker": "stage1",
+  "summary": "Split the boundary representative lemma into the contracted-power extension construction, the identification of its boundary of 1 with the torsor class, and the converse fibre-torsor argument. Added one statement-only Zariski-site extension/torsor bridge because the existing extension node is explicitly étale-only.",
+  "blueprint": "Realizes the ancestor lem-sc-pic-proper-ntorsion proof's final representative-level torsor construction used by lem-sc-torsor-h1-functoriality.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-tbr",
+  "group": "M1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-tbr (reviewer sub-agent of L); spot-checked: Source Stacks Cohomology Lemma 02FQ (cohomology-lemma-torsors-h1, cohomology.tex line 268) read: its proof defines the class of a torsor as the boundary of 1 of the pushout extension; the item statement is its Zariski form (scheme, abelian sheaf on X_Zar, extension of Z_X with fibre over 1 = T, class delta_E(1), converse). New node lem-sc-zariski-ext-torsor checked: Zariski analogue of lem-sc-ext-torsor (which is etale-only, so not citable, C4), statement true (fibre over 1 and contracted-power coproduct are inverse), TeX, searches recorded. Step 1 carried by lem-sc-zariski-ext-torsor. FIX more, RETURN less: C3 in steps 2 and 3 (as R-th2 noted): lem-sc-torsor-h1 states only a 'canonical' bijection (its proof goes through Ext^1 and lem-sc-ext-torsor), and the steps took '[T] -> delta_E(1)' from Stacks' proof ('the defining boundary description'); added statement-only node dag/nodes/sec-curve-estimates/lem-sc-torsor-h1-zariski-boundary-class (for any extension 0->G->E->Z_X->0 on X_Zar, its fibre over 1 is a G-torsor and the bijection of lem-sc-torsor-h1, Zariski case, matches its class with delta_E(1); source 02FQ proof), and rewrote steps 2 and 3 of lem-sc-torsor-h1-boundary-representative to cite it with def-sc-topological-abelian-cohomology (uses and proof_deps updated; lem-sc-torsor-h1 stays in stmt_deps). Small case: trivial torsor T=G gives the split extension G+Z_X, delta_E(1)=0, matching 0 <-> trivial torsor in lem-sc-torsor-h1. Mathlib: grep finds no sheaf torsor declaration (only affine AddTorsor). Start Sat Oct 10 04:21:30 PM UTC 2026, end Sat Oct 10 04:23:16 PM UTC 2026.; 2 file(s) fixed by the reviewer; 1 statement node(s) added by the reviewer (FIX more, RETURN less)"
+ }
 }
