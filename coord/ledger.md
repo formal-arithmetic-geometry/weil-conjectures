@@ -2805,3 +2805,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 22:22 L: merged deliver/K1/lem-pod-lisse-tensor-and-scalar-extension (reviewer FIX; first push; new nodes: 1)
 - 22:22 L: merged deliver/J1/def-nagata-qc-open-descent (reviewer PASS; after a return; new nodes: 0)
 - 22:22 L: merged deliver/J1/lem-sp-cartan-eilenberg-comparison-homotopy (reviewer PASS; after a return; new nodes: 1)
+- 22:22 L: merged deliver/C1/def-nagata-basechanged-system (reviewer FIX; first push; new nodes: 0)
