@@ -8,6 +8,8 @@ module
 public import WeilConjectures.AlgebraicGeometry.Morphisms.Finite.PieceRefine
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.Etale
 public import WeilConjectures.Mathlib.RingTheory.Ideal.GoingUp
+public import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.Integral
+public import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.QuasiFinite
 
 /-!
 # Étale coverings of the base change of an integral morphism
@@ -267,6 +269,126 @@ theorem exists_hom_disjoint_cover (c : Nbhd y) (R : Sieve (f.Etale.obj c.1))
   rwa [Sieve.pullback_apply, Category.assoc, ← Functor.map_comp,
     ← CategoryOfElements.comp_val] at this
 
+
 end AlgebraicGeometry.Scheme.Hom.Nbhd
+
+namespace AlgebraicGeometry.Scheme.Hom
+
+variable {X Y : Scheme.{u}} (f : X ⟶ Y) [IsIntegralHom f]
+
+/-- **Étale neighbourhoods over an integral morphism are hit by disjoint pieces.** For an
+integral morphism `f : X ⟶ Y`, an étale `X`-scheme `V` and a point `z` of `V`, there are an
+étale `Y`-scheme `U` and a decomposition of `U ×_Y X` into pairwise disjoint opens `P i`, one of
+which maps to `V` over `X` with `z` in the image.
+
+Let `x` be the image of `z` in `X`, `V₀` an open neighbourhood of `z` meeting the fibre over `x`
+only in `z`, and `U ⊆ Y` the complement of the closed set `f (closure {x} \ V₀)`, which does not
+contain `f x` (`AlgebraicGeometry.Scheme.Hom.eq_of_specializes_of_apply_eq_of_isIntegralHom`).
+Over `U` the étale `X`-schemes factoring through `V₀`, together with those whose image avoids `x`,
+cover `U ×_Y X`; by `AlgebraicGeometry.Scheme.Hom.Nbhd.exists_hom_disjoint_cover` a disjoint
+decomposition refines this covering after shrinking `U`, and the piece containing the point over
+the geometric point at `x` maps to `V₀`, hitting the only point of `V₀` over `x`, which is `z`. -/
+theorem exists_disjoint_cover_hom_mem_range (V : X.Etale) (z : V.left) :
+    ∃ (U : Y.Etale) (ι : Type u) (P : ι → (pullback U.hom f).Opens),
+      (∀ i j, i ≠ j → Disjoint (P i) (P j)) ∧ ⨆ i, P i = ⊤ ∧
+        ∃ (i : ι) (m : Scheme.Etale.mk ((P i).ι ≫ pullback.snd U.hom f) ⟶ V),
+          z ∈ Set.range m.left := by
+  classical
+  set x := V.hom z with hx
+  -- an open neighbourhood `V₀` of `z` meeting the fibre over `x` only in `z`
+  obtain ⟨V₀, hV₀, hV₀z⟩ := isDiscrete_iff_forall_mem_exists_isOpen.mp
+    (V.hom.isDiscrete_preimage_singleton x) z rfl
+  have hzV₀ : z ∈ V₀ := (hV₀z.symm ▸ Set.mem_singleton z : z ∈ V₀ ∩ V.hom ⁻¹' {x}).1
+  -- the closed set `f (closure {x} \ V₀)` does not contain `f x`
+  let C : Set Y := f '' (closure {x} \ V.hom '' V₀)
+  have hC : IsClosed C := f.isClosedMap _ (isClosed_closure.sdiff (V.hom.isOpenMap _ hV₀))
+  have hxC : f x ∉ C := by
+    rintro ⟨w, ⟨hw, hwV⟩, hfw⟩
+    have hxw : x = w := f.eq_of_specializes_of_apply_eq_of_isIntegralHom
+      (specializes_iff_mem_closure.mpr hw) hfw.symm
+    exact hwV ⟨z, hzV₀, hxw⟩
+  -- the geometric point at `x`, and the neighbourhood `U = Y \ C` of its image
+  let xb := X.algClosurePoint x
+  let yb := xb ≫ f
+  let c₀ : Nbhd yb := ⟨Scheme.Etale.mk (𝟙 Y), CategoryTheory.Over.homMk yb (by simp)⟩
+  let U : Y.Opens := ⟨Cᶜ, hC.isOpen_compl⟩
+  have hU : c₀.2.left (default : Spec (.of (AlgebraicClosure (X.residueField x)))) ∈ U := by
+    change yb _ ∉ C
+    rw [Scheme.Hom.comp_apply, algClosurePoint_base]
+    exact hxC
+  let c := c₀.restrict U hU
+  -- the open subscheme `V₀`
+  let V₀' : V.left.Opens := ⟨V₀, hV₀⟩
+  -- the covering sieve of `U ×_Y X`
+  let R : Sieve (f.Etale.obj c.1) :=
+    { arrows W _ := (∃ k : W ⟶ V, Set.range k.left ⊆ V₀) ∨ x ∉ Set.range W.hom
+      downward_closed := by
+        rintro W W' _ (⟨k, hk⟩ | hW) h
+        · exact Or.inl ⟨h ≫ k, by
+            rw [MorphismProperty.Comma.comp_left, Scheme.Hom.comp_base, TopCat.coe_comp,
+              Set.range_comp]
+            exact (Set.image_subset_range _ _).trans hk⟩
+        · refine Or.inr fun ⟨w, hw⟩ ↦ hW ⟨h.left w, ?_⟩
+          change (h.left ≫ W.hom) w = x
+          rw [MorphismProperty.Over.w h]
+          exact hw }
+  have hR : R ∈ X.smallEtaleTopology _ := by
+    rw [mem_smallEtaleTopology_iff]
+    intro w
+    by_cases hw : (pullback.snd c.1.hom f) w ∈ V.hom '' V₀
+    · -- `w` lies over `V₀`
+      obtain ⟨v, hv, hvw⟩ := hw
+      let W := pullback (pullback.snd c.1.hom f) (V₀'.ι ≫ V.hom)
+      obtain ⟨t, ht, -⟩ := Scheme.Pullback.exists_preimage_pullback
+        (f := pullback.snd c.1.hom f) (g := V₀'.ι ≫ V.hom) w ⟨v, hv⟩ hvw.symm
+      refine ⟨Scheme.Etale.mk (pullback.fst _ _ ≫ pullback.snd c.1.hom f),
+        MorphismProperty.Over.homMk (pullback.fst _ _ : W ⟶ _) rfl, Or.inl
+          ⟨MorphismProperty.Over.homMk (pullback.snd _ _ ≫ V₀'.ι) ?_, ?_⟩, t, ht⟩
+      · change (pullback.snd _ _ ≫ V₀'.ι) ≫ V.hom = pullback.fst _ _ ≫ pullback.snd c.1.hom f
+        rw [Category.assoc, ← pullback.condition]
+      · rintro _ ⟨s, rfl⟩
+        exact ((pullback.snd ((pullback.snd c.1.hom f)) (V₀'.ι ≫ V.hom)) s).2
+    · -- `w` lies over a point outside `closure {x}`
+      have hwx : (pullback.snd c.1.hom f) w ∉ closure {x} := by
+        intro hwc
+        have hfw : f ((pullback.snd c.1.hom f) w) ∈ U := by
+          rw [← Scheme.Hom.comp_apply, ← pullback.condition, Scheme.Hom.comp_apply]
+          change (U.ι ≫ 𝟙 Y) _ ∈ U
+          rw [Category.comp_id]
+          exact ((pullback.fst c.1.hom f) w).2
+        exact hfw ⟨_, ⟨hwc, hw⟩, rfl⟩
+      let D := pullback.snd c.1.hom f ⁻¹ᵁ ⟨(closure {x})ᶜ, isClosed_closure.isOpen_compl⟩
+      refine ⟨Scheme.Etale.mk (D.ι ≫ pullback.snd c.1.hom f),
+        MorphismProperty.Over.homMk D.ι rfl, Or.inr ?_, ⟨w, hwx⟩, rfl⟩
+      rintro ⟨d, hd⟩
+      exact d.2 (by
+        have hd' : (D.ι ≫ pullback.snd c.1.hom f) d = x := hd
+        change (pullback.snd c.1.hom f) (D.ι d) ∈ closure {x}
+        rw [← Scheme.Hom.comp_apply, hd']
+        exact subset_closure rfl)
+  obtain ⟨c', g, ι, P, hdisj, hsup, hP⟩ := Nbhd.exists_hom_disjoint_cover f c R hR
+  -- the point of `U' ×_Y X` over the geometric point at `x`
+  let p : Spec (.of (AlgebraicClosure (X.residueField x))) ⟶ pullback c'.1.hom f :=
+    pullback.lift c'.2.left xb (CategoryTheory.Over.w c'.2)
+  let p₀ := p (default : Spec (.of (AlgebraicClosure (X.residueField x))))
+  have hp₀ : (pullback.snd c'.1.hom f) p₀ = x := by
+    rw [← Scheme.Hom.comp_apply, pullback.lift_snd, algClosurePoint_base]
+  obtain ⟨i, hi⟩ := TopologicalSpace.Opens.mem_iSup.mp
+    (hsup.symm ▸ trivial : p₀ ∈ ⨆ i, P i)
+  refine ⟨c'.1, ι, P, hdisj, hsup, i, ?_⟩
+  have hpt : (Nbhd.openObj f c' (P i)).hom ⟨p₀, hi⟩ = x := hp₀
+  rcases hP i with ⟨k, hk⟩ | hx'
+  · refine ⟨k, ⟨p₀, hi⟩, ?_⟩
+    have h₁ : k.left ⟨p₀, hi⟩ ∈ V₀ := hk ⟨_, rfl⟩
+    have h₂ : V.hom (k.left ⟨p₀, hi⟩) = x := by
+      change (k.left ≫ V.hom) _ = x
+      rw [MorphismProperty.Over.w k]
+      exact hpt
+    have : k.left ⟨p₀, hi⟩ ∈ V₀ ∩ V.hom ⁻¹' {x} := ⟨h₁, h₂⟩
+    rw [hV₀z] at this
+    exact this
+  · exact absurd ⟨_, hpt⟩ hx'
+
+end AlgebraicGeometry.Scheme.Hom
 
 end
