@@ -1933,3 +1933,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 16:14 L: lem-sc-p1-graded-degree-component-exact source label corrected (reviewer R-gde)
 - 16:14 L: merged deliver/F1/lem-sc-p1-linear-syzygy (reviewer PASS; first push; new nodes: 0)
 - 16:14 L: merged deliver/F1/lem-pc-global-sections-separable (reviewer PASS; first push; new nodes: 1)
+- 16:14 L: returned deliver/M1/lem-sc-ext-stalk-localization (reviewer RETURN: 1. B3: lem-sc-derived-internal-hom-stalk-localization, statement: three notions have no defining node. 'pseudo-coherent )
