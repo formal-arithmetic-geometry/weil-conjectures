@@ -1,6 +1,6 @@
 # Work queue
 
-898 items; claim with `tools/claim.py next <group> [--stage N]`.
+899 items; claim with `tools/claim.py next <group> [--stage N]`.
 
 ## Stage 1: nodes to split (647)
 
@@ -22,10 +22,7 @@
 | `lem-weil-pbc-flat-variant-local-criterion` | 1012 | none |
 | `lem-weil-pbc-formal-systems-graded-vanishing` | 1012 | none |
 | `lem-weil-pbc-formal-systems-kernel-rees-finite` | 1012 | none |
-| `lem-weil-pbc-ring-universal-first-order-thickening` | 1012 | none |
 | `lem-weil-pbc-ringed-space-colimit-restriction` | 1012 | none |
-| `lem-weil-pbc-separably-generated-separable` | 1012 | none |
-| `lem-weil-pbc-sets-extension-by-empty-adjunction` | 1012 | none |
 | `lem-weil-pbc-sets-inverse-image-composition` | 1012 | none |
 | `lem-weil-pbc-sets-inverse-image-extension-by-empty-constant` | 1012 | none |
 | `lem-weil-pbc-sheaf-hom-finite-presentation-kernel` | 1012 | none |
@@ -96,6 +93,7 @@
 | `lem-weil-pbc-fs-adic-flat-geometrically-regular-closed-fibre` | 1013 | none |
 | `lem-weil-pbc-fs-adic-lift-derivation` | 1013 | none |
 | `lem-weil-pbc-fs-adic-lift-over-finite-coefficient-map` | 1013 | none |
+| `lem-weil-pbc-geometrically-reduced-extension-separable` | 1013 | none |
 | `lem-weil-pbc-global-complete-intersection-equidimensional` | 1013 | none |
 | `lem-weil-pbc-global-complete-intersection-local-regular-sequence` | 1013 | none |
 | `lem-weil-pbc-global-dimension-finite-modules-suffice` | 1013 | none |
@@ -130,8 +128,10 @@
 | `lem-weil-pbc-relative-global-complete-intersection-smooth-jacobian` | 1013 | none |
 | `lem-weil-pbc-residue-field-pd-ge-embedding-dimension` | 1013 | none |
 | `lem-weil-pbc-residue-field-pd-le-krull-dimension` | 1013 | none |
+| `lem-weil-pbc-ringed-space-open-restriction-adjunction` | 1013 | none |
 | `lem-weil-pbc-scheme-modules-enough-injectives` | 1013 | none |
 | `lem-weil-pbc-separable-root-pth-power` | 1013 | none |
+| `lem-weil-pbc-separably-generated-tensor-reduced` | 1013 | none |
 | `lem-weil-pbc-separated-lqf-base-change` | 1013 | none |
 | `lem-weil-pbc-serre-criterion-normal` | 1013 | none |
 | `lem-weil-pbc-serre-sk-goes-up` | 1013 | none |
@@ -654,7 +654,7 @@
 | `lem-pc-linear-pair-graded-finite` | - | none |
 | `def-exc-jacobian-presentation` | - | none |
 
-## Stage 2: nodes to state (251)
+## Stage 2: nodes to state (252)
 
 | node | distance to Mathlib | kind |
 |---|---|---|
@@ -851,6 +851,7 @@
 | `lem-weil-pbc-regular-sequence-powers` | 1 | state |
 | `lem-weil-pbc-regular-sequence-short-exact-sequence` | 1 | state |
 | `lem-weil-pbc-regular-sequence-swap-two` | 1 | state |
+| `lem-weil-pbc-ring-universal-first-order-thickening` | 1 | state |
 | `lem-weil-pbc-ringed-space-module-exactness-local-lifting` | 1 | state |
 | `lem-weil-pbc-root-lifting-etale-retraction` | 1 | state |
 | `lem-weil-pbc-scheme-clopen-idempotent` | 1 | state |
@@ -910,7 +911,7 @@
 | `lem-weil-pbc-p1-field-dimension-one` | 4 | state |
 | `lem-weil-pbc-projective-space-zero-isomorphism` | 4 | state |
 
-Not open yet: 659 nodes that wait for stage 1, 539 nodes that wait for a statement dependency.
+Not open yet: 659 nodes that wait for stage 1, 541 nodes that wait for a statement dependency.
 
 ## Stage 3: modules to prove (0)
 
