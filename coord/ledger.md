@@ -2033,3 +2033,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 16:44 L: merged deliver/J1/lem-pc-field-extension-flat (reviewer FIX; first push; new nodes: 0)
 - 16:44 L: merged deliver/M1/lem-weil-pbc-finite-product-complex-cohomology (reviewer PASS; first push; new nodes: 0)
 - 16:44 L: merged deliver/K1/lem-pc-separable-polynomial-alg-closed-quotient-product (reviewer PASS; first push; new nodes: 2)
+- 16:45 L: returned deliver/F1/lem-pc-proper-geometrically-reduced-global-sections-separable (reviewer RETURN: 1. D2/D1: new node lem-pc-proper-geometrically-reduced-global-sections-product-separable and step 1: the whole content o)
