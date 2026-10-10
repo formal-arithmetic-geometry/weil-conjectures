@@ -12,7 +12,7 @@
 | `lem-weil-pbc-field-tensor-irreducible` | 2005 | none |
 | `lem-weil-pbc-etale-geometric-fibre-constant-sections` | 2006 | none |
 | `lem-weil-pbc-etale-sections-fpqc-descent` | 2006 | none |
-| `lem-weil-pbc-sets-affine-etale-inverse-image-comparison` | 2010 | none |
+| `lem-weil-pbc-affine-etale-site-base-change` | 2011 | none |
 | `lem-sc-noetherian-topological-cohomology-vanishing` | 2012 | none |
 | `lem-sc-affine-finite-projective-prime-membership` | 2013 | none |
 | `lem-sc-affine-standard-cover-finite-projective` | 2013 | none |
@@ -25,10 +25,10 @@
 | `lem-sc-topological-leray-spectral-sequence` | 2013 | none |
 | `lem-sc-global-generation-nonvanishing-cover` | 2014 | none |
 | `lem-sc-invert-s-cohomology-affine-case` | 2014 | none |
-| `lem-sc-invert-s-cohomology-gluing` | 2014 | none |
 | `lem-sc-tensor-generating-sections` | 2014 | none |
 | `lem-sc-torsor-h1-zariski-boundary-class` | 2014 | none |
 | `lem-sc-zariski-ext-torsor` | 2014 | none |
+| `lem-sc-invert-s-cohomology-mayer-vietoris-diagram` | 2015 | none |
 | `lem-sc-invert-s-cohomology-separated-induction` | 2015 | none |
 | `lem-weil-pbc-complex-spectral-sequence-comparison` | 3006 | none |
 | `lem-weil-pbc-hypercohomology-e1-pullback-functorial` | 3006 | none |
@@ -53,7 +53,6 @@
 | `lem-pc-proper-geometrically-reduced-global-sections-separable` | 3013 | none |
 | `lem-pc-separable-polynomial-alg-closed-quotient-product` | 3013 | none |
 | `lem-sc-ext-sheaf-to-global-spectral-sequence` | 3013 | none |
-| `lem-sc-ext-stalk-localization` | 3013 | none |
 | `lem-sc-finite-flat-duality-evaluation` | 3013 | none |
 | `lem-sc-p1-boundary-extension-composition` | 3013 | none |
 | `lem-sc-p1-ext-yoneda-associativity` | 3013 | none |
@@ -68,7 +67,9 @@
 | `lem-sc-acyclic-comparison-natural` | 3014 | none |
 | `lem-sc-cech-comparison-map-iso-affine` | 3014 | none |
 | `lem-sc-cech-comparison-map-naturality` | 3014 | none |
+| `lem-sc-derived-internal-hom-stalk-localization` | 3014 | none |
 | `lem-sc-open-map-irreducible-fibres-components` | 3014 | none |
+| `lem-sc-rhom-cohomology-ext-ring` | 3014 | none |
 | `lem-sc-scheme-over-field-universally-open` | 3014 | none |
 | `lem-sc-sheaf-ext-coherent` | 3014 | none |
 | `lem-sc-smooth-proper-relative-dualizing-general` | 3014 | none |
@@ -79,7 +80,6 @@
 | `lem-sc-brauer-zero` | 4005 | rests_on_sorry |
 | `lem-pc-genus-agrees-sc` | 4007 | rests_on_sorry |
 | `prop-pc-xk-integral` | 4007 | rests_on_sorry |
-| `lem-pc-rational-hyp` | 4008 | rests_on_sorry |
 | `lem-pc-zero-scheme-properties` | 4008 | rests_on_sorry |
 | `lem-sc-isogeny-surjective` | 4008 | rests_on_sorry |
 | `lem-sc-mult-n-etale-kernel` | 4008 | rests_on_sorry |
@@ -931,7 +931,7 @@
 | `lem-weil-pbc-p1-field-dimension-one` | 4 | state |
 | `lem-weil-pbc-projective-space-zero-isomorphism` | 4 | state |
 
-Not open yet: 351 nodes that wait for stage 1, 1173 nodes that wait for a statement dependency.
+Not open yet: 351 nodes that wait for stage 1, 1177 nodes that wait for a statement dependency.
 
 ## Stage 3: modules to prove (0)
 
