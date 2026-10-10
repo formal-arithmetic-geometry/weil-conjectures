@@ -29,20 +29,75 @@
   "def-pc-kflat-complex",
   "lem-pc-kflat-resolution"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Choose K-flat flat-term complexes $\\mathcal P^\\bullet\\to K$ and $\\mathcal L^\\bullet\\to L$ with quasi-isomorphisms by [lem-pc-kflat-resolution]. Their termwise pullbacks are K-flat by [lem-pc-kflat-pullback-preservation] and represent $Lg^*K$ and $Lg^*L$ by [def-pc-derived-pullback]. Then [def-pc-tensor-complex-sheaves] identifies $K\\otimes^{\\mathbf L}_{\\mathcal O_S}L$ with $\\operatorname{Tot}(\\mathcal P^\\bullet\\otimes_{\\mathcal O_S}\\mathcal L^\\bullet)$, and [lem-pc-kflat-tensor-product] makes this total complex K-flat, so it is a valid representative for applying $Lg^*$.",
+   "uses": [
+    "lem-pc-kflat-resolution",
+    "def-pc-derived-pullback",
+    "lem-pc-kflat-pullback-preservation",
+    "def-pc-tensor-complex-sheaves",
+    "lem-pc-kflat-tensor-product"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/cohomology.tex",
+    "place": "Lemma 079U (cohomology-lemma-pullback-tensor-product), line 6411"
+   }
+  },
+  {
+   "text": "For every bidegree $(p,q)$, [lem-weil-pbc-module-pullback-tensor] gives the isomorphism $g^*(\\mathcal P^p\\otimes_{\\mathcal O_S}\\mathcal L^q)\\cong g^*\\mathcal P^p\\otimes_{\\mathcal O_T}g^*\\mathcal L^q$ of $\\mathcal O_T$-modules, natural in both factors and sending $g^*(s\\otimes t)$ to $g^*s\\otimes g^*t$. By this naturality these maps commute with the differentials $d\\otimes1$ and $(-1)^p1\\otimes d$, and pullback commutes with the direct sums in totalization, so they induce an isomorphism of total complexes. The target total complex computes $Lg^*K\\otimes^{\\mathbf L}_{\\mathcal O_T}Lg^*L$ because $g^*\\mathcal P^\\bullet$ is K-flat and represents $Lg^*K$, while $g^*\\mathcal L^\\bullet$ represents $Lg^*L$ by [def-pc-derived-pullback] and [lem-pc-kflat-pullback-preservation]. The construction is canonical and natural in $K$ and $L$ because resolution comparison and tensor associativity maps are natural.",
+   "uses": [
+    "def-pc-derived-pullback",
+    "lem-pc-kflat-pullback-preservation",
+    "def-pc-tensor-complex-sheaves",
+    "lem-weil-pbc-module-pullback-tensor"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/cohomology.tex",
+    "place": "Lemma 079U (cohomology-lemma-pullback-tensor-product), line 6411"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-kflat-resolution",
+  "lem-pc-kflat-pullback-preservation",
+  "def-pc-derived-pullback",
+  "def-pc-tensor-complex-sheaves",
+  "lem-pc-kflat-tensor-product",
+  "lem-weil-pbc-module-pullback-tensor"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Lemma 079U (cohomology-lemma-pullback-tensor-product)"
+ },
  "mathlib_searches": [
   {
+   "tool": "leanfinder",
+   "query": "derived pullback commutes with derived tensor product of sheaf complexes",
+   "results": "SheafOfModules.pullback_assoc, SheafOfModules.pullbackComp, SheafOfModules.pullbackIso; no derived-category tensor comparison",
+   "date": "2026-10-11",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "DerivedCategory tensor pullback",
+   "results": "0 hits; Unknown identifier tensor",
+   "date": "2026-10-11",
+   "verdict": "no match"
+  },
+  {
    "tool": "grep",
-   "query": "grep -rlE 'DerivedCategory' Mathlib | xargs grep -lE 'Monoidal|tensor'; grep -rlE 'SheafOfModules' Mathlib | xargs grep -lE 'DerivedCategory|derived' in ~/weil-conjectures-slopmaster2/.lake/packages/mathlib",
-   "results": "no files: Mathlib has no monoidal structure on derived categories and no derived categories of sheaves of modules",
-   "date": "2026-10-10",
+   "query": "KFlat|kFlat|derived.*tensor|tensor.*pullback in Mathlib/Algebra/Homology",
+   "results": "no matches",
+   "date": "2026-10-11",
    "verdict": "no match"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "reviewer",
@@ -50,5 +105,25 @@
   "date": "2026-10-10"
  },
  "chapter": "sec-picard-framework",
- "unit": "sk-thm-picard-duality"
+ "unit": "sk-thm-picard-duality",
+ "split_report": {
+  "date": "2026-10-11",
+  "item": "lem-pc-derived-pullback-tensor-product",
+  "worker": "stage1",
+  "summary": "Split the Stacks 079U pullback-tensor comparison into a simultaneous K-flat pullback-resolution dependency and an explicit total-complex tensor comparison. Recorded the required Mathlib searches and checked naturality and the hypotheses against the definitions.",
+  "blueprint": "The steps realize the blueprint ancestor's identification of the pullback of the tensor complex with the tensor of pullbacks in its RHom-level use.",
+  "tool_uses": []
+ },
+ "tool_uses": [
+  "lem-weil-pbc-module-pullback-tensor",
+  "lem-pc-kflat-resolution"
+ ],
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-dpt3122",
+  "group": "J1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-dpt3122 (reviewer sub-agent of L); spot-checked: Checked 079U/079R against packet; def-pc-derived-pullback computes Lg^* by K-flat resolutions (C4 ok); lem-pc-kflat-pullback-preservation and new lem-pc-kflat-tensor-product state the K-flat facts; new node not a duplicate (grep of kflat nodes: closure/two-out-of-three/stalk criterion do not state it), real lemma (Tot associativity). FIX more, RETURN less: (1) C1 Step 2 termwise iso g^*(F(x)G)=g^*F(x)g^*G (Tag 01CD) was uncited, now cites lem-weil-pbc-module-pullback-tensor (generic tool use) and its naturality gives differential compatibility; (2) C1 Step 1 existence of K-flat resolutions now cites lem-pc-kflat-resolution (generic tool use, already cited in the statement) instead of def-pc-derived-pullback; (3) stmt_deps restored to the statement's citations (lem-pc-kflat-resolution back, proof-only lem-pc-kflat-pullback-preservation/lem-pc-kflat-tensor-product moved out), proof_deps updated.; 1 file(s) fixed by the reviewer"
+ }
 }
