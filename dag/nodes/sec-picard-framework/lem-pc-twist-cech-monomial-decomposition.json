@@ -20,9 +20,55 @@
   "def-pc-projective-space-twist",
   "lem-pc-alternating-cech-computes"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "On an intersection $U_J=\\bigcap_{j\\in J}D_+(x_j)$, the twisting module is obtained by gluing the chart generators $e_i^{(d)}$ with transition rule $e_i^{(d)}=(x_i/x_j)^d e_j^{(d)}$.  A section written in the chart $U_i$ is therefore a homogeneous degree-zero fraction $(x^e/x_i^d)e_i^{(d)}$, where $\\sum_i e_i=d$ and the only coordinates allowed in denominators are those indexed by $J$.  Equivalently, the section is the Laurent monomial $x^e$ with $e_j\\ge0$ for every $j\\notin J$.  The Laurent monomials are linearly independent over $A$ in the localized polynomial ring, so they form the asserted free $A$-basis.",
+   "uses": [
+    "def-pc-projective-space-twist",
+    "lem-pc-twist-cocycle",
+    "def-pc-proj"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/coherent.tex",
+    "place": "Tag 01XS, label lemma-cohomology-projective-space-over-ring, proof: Cech terms and grading"
+   }
+  },
+  {
+   "text": "If $J\\subseteq J'$, restriction is localization at the additional coordinates in $J'\\setminus J$.  It sends each Laurent monomial $x^e$ to the same monomial and only removes the nonnegativity requirement for the newly inverted coordinates; hence, under the displayed bases, the restriction map is the inclusion of the corresponding monomial basis.",
+   "uses": [
+    "def-pc-proj",
+    "def-pc-projective-space-twist"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/coherent.tex",
+    "place": "Tag 01XS, label lemma-cohomology-projective-space-over-ring, proof: Cech terms and grading"
+   }
+  },
+  {
+   "text": "The alternating Cech complex is indexed by nonempty subsets $J$ (equivalently, strictly increasing index tuples).  Since every restriction preserves the exponent vector $e$, the differential preserves $e$ as well.  Grouping the basis vectors with the same exponent gives the direct sum over all $e\\in\\mathbf Z^{n+1}$ with $\\sum_i e_i=d$; in degree $p$ the summand $C_e^\\bullet$ has basis exactly the subsets $J$ of cardinality $p+1$ containing $N_e=\\{i:e_i<0\\}$.",
+   "uses": [
+    "lem-pc-alternating-cech-computes"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/coherent.tex",
+    "place": "Tag 01XS, label lemma-cohomology-projective-space-over-ring, proof: Cech terms and grading"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-projective-space-twist",
+  "lem-pc-twist-cocycle",
+  "def-pc-proj",
+  "lem-pc-alternating-cech-computes"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/coherent.tex",
+  "place": "Tag 01XS, label lemma-cohomology-projective-space-over-ring, proof: Cech terms and grading"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -47,12 +93,28 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-pc-projective-space-twist-cohomology",
   "by": "worker",
   "date": "2026-10-10"
  },
  "chapter": "sec-picard-framework",
- "unit": "sk-thm-picard-pn"
+ "unit": "sk-thm-picard-pn",
+ "split_report": {
+  "date": "2026-10-11",
+  "item": "lem-pc-twist-cech-monomial-decomposition",
+  "worker": "stage1",
+  "summary": "Filled the item with the Tag 01XS proof: homogeneous localization and the twist transition rule give the Laurent-monomial bases, restrictions are basis inclusions, and the exponent-preserving differential yields the direct-sum Cech decomposition. No new node was needed because these are the item's own clauses.",
+  "blueprint": "Realizes proof step 1 of lem-pc-projective-space-twist-cohomology: sections on standard intersections are Laurent monomials and the Cech complex splits by exponent vector.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-tcm2508",
+  "group": "M1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-tcm2508 (reviewer sub-agent of L); spot-checked: C1: step 1 Gamma(U_J,O(d)) as degree-d part of A[x][x_J^{-1}] follows from def-pc-proj (D_+(x_J)=Spec S_(x_J), restrictions graded localizations; x_J homogeneous of positive degree) plus the gluing in def-pc-projective-space-twist and the cocycle (independence of chart i in J); the Laurent basis of S_(x_J) is an elementary computation. Step 2 elementary from same. Step 3 cites lem-pc-alternating-cech-computes for the complex (strictly increasing tuples = subsets). C4: the inherited differential on C_e (basis inclusions, alternating signs) is exactly the citer lem-pc-monomial-cech-complex-homology's d[J]=sum_{k notin J}(-1)^{#{j in J:j<k}}[J+k], same index set J>=N_e, |J|=p+1, n>=1. No new nodes, nothing restated (class b n/a). Second reading: no missed fault. No repairs."
+ }
 }

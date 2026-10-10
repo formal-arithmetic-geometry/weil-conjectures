@@ -2615,3 +2615,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 21:04 L: deleted the second deliver/J1/lem-pc-ringed-space-module-stalk-tensor branch (3254c8202; item split by L, no claim held)
 - 21:05 L: merged deliver/H1/lem-pc-module-filtered-colimits-tensor (reviewer PASS; first push; new nodes: 0)
 - 21:06 L: returned deliver/G1/lem-sc-etale-faithfully-flat-local (reviewer RETURN: 1 (E1/C4, missing hypothesis): Step 2 applies lem-sc-etale-local-ring-faithfully-flat-descent to 'the finitely presented)
+- 21:08 L: merged deliver/M1/lem-pc-twist-cech-monomial-decomposition (reviewer PASS; first push; new nodes: 0)
