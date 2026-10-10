@@ -1,0 +1,84 @@
+{
+ "id": "lem-weil-pbc-koszul-differential-existence",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-finite-etale-lifting",
+   "place": "step 7 of its split: essential surjectivity via Stacks 0GS2; the regular-sequence conormal argument needed in its approximation and Popescu smoothing chain, made precise by Stacks 0665; the Koszul complex in whose degree-1 homology the hypothesis of Stacks 0665 (H_1-regularity) is stated; refined: the differential of the Koszul complex and its well-definedness (Stacks 0622 (2) and the explicit formula after it: 'well defined derivation on the tensor algebra ... factors through the exterior algebra'); refined further: the existence half of 'well defined derivation on the tensor algebra ... factors through the exterior algebra' (paragraph after Stacks 0622), i.e. that a map with D(1)=0 and D(v wedge x)=phi(v)x - v wedge D(x) exists",
+   "via": [
+    "lem-weil-pbc-koszul-differential",
+    "def-weil-pbc-koszul-complex",
+    "lem-weil-pbc-regular-quotient-ideal-intersection",
+    "lem-weil-pbc-conormal-intersection-regular-quotient",
+    "lem-weil-pbc-jacobi-zariski-regular-sequence-left-injective",
+    "lem-weil-pbc-transitivity-gamma",
+    "lem-weil-pbc-geometrically-regular-over-field-flat",
+    "lem-weil-pbc-popescu-solution-modulo",
+    "lem-weil-pbc-popescu-resolve-char-p",
+    "lem-weil-pbc-popescu-smoothing",
+    "lem-weil-pbc-henselian-pair-approximation",
+    "lem-weil-pbc-finite-etale-lifting-approximation",
+    "lem-weil-pbc-finite-etale-lifting-essential-surjectivity"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Existence of the Koszul differential (left contraction by a linear form)",
+ "statement": "Let $R$ be a commutative ring, $E$ an $R$-module, $\\varphi:E\\to R$ an $R$-linear map, and $\\wedge(E)$ the exterior algebra of $E$ over $R$ [def-weil-pbc-exterior-algebra], with product $\\wedge$ and unit $1$. Then there exists an $R$-linear map $D:\\wedge(E)\\to\\wedge(E)$ such that $D(1)=0$ and $D(v\\wedge x)=\\varphi(v)\\,x-v\\wedge D(x)$ for all $v\\in E$ and $x\\in\\wedge(E)$.",
+ "source": {
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "More on Algebra, Definition Tag 0622 (definition-koszul, line 6566) and the paragraph after it (lines 6579-6590: 'It is straightforward to see that this gives a well defined derivation on the tensor algebra, which annihilates e tensor e and hence factors through the exterior algebra'). Tag verified in tags/tags."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-exterior-algebra"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "linear map on exterior algebra with d(1)=0 and d(ι a * b) = φ a • b - ι a * d b",
+   "results": "Derivation.mk, Derivation.mk' (RingTheory.Derivation.Basic; commutative algebras only, not this), ExteriorAlgebra (LinearAlgebra.ExteriorAlgebra.Basic), ExteriorAlgebra.ιMulti, extDeriv_extDeriv_apply (Analysis.Calculus.DifferentialForm.Basic, not relevant)",
+   "date": "2026-10-10",
+   "verdict": "no direct hit; the match is found by the Loogle and grep searches below"
+  },
+  {
+   "tool": "loogle",
+   "query": "CliffordAlgebra.contractLeft",
+   "results": "CliffordAlgebra.contractLeft : Module.Dual R M →ₗ[R] CliffordAlgebra Q →ₗ[R] CliffordAlgebra Q; contractLeft_one : contractLeft d 1 = 0; contractLeft_ι_mul : contractLeft d (ι Q a * b) = d a • b - ι Q a * contractLeft d b; contractLeft_ι, contractLeft_algebraMap, contractLeft_contractLeft, contractLeft_algebraMap_mul (all Mathlib.LinearAlgebra.CliffordAlgebra.Contraction)",
+   "date": "2026-10-10",
+   "verdict": "match (specialization Q = 0)"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -n 'def contractLeft\\|theorem contractLeft_ι_mul\\|theorem contractLeft_one' LinearAlgebra/CliffordAlgebra/Contraction.lean; grep -n 'abbrev ExteriorAlgebra\\|abbrev ι ' LinearAlgebra/ExteriorAlgebra/Basic.lean; grep -rn 'contract\\|Derivation\\|interior' LinearAlgebra/ExteriorAlgebra LinearAlgebra/ExteriorPower (in ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib)",
+   "results": "Contraction.lean:84 def contractLeft, :125 theorem contractLeft_ι_mul, :178 theorem contractLeft_one; ExteriorAlgebra/Basic.lean:60 abbrev ExteriorAlgebra := CliffordAlgebra (0 : QuadraticForm R M), :69 abbrev ι := CliffordAlgebra.ι _; nothing on contraction in ExteriorAlgebra/ or ExteriorPower/",
+   "date": "2026-10-10",
+   "verdict": "match"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "CliffordAlgebra.contractLeft, CliffordAlgebra.contractLeft_one, CliffordAlgebra.contractLeft_ι_mul",
+  "file": "Mathlib/LinearAlgebra/CliffordAlgebra/Contraction.lean",
+  "how": "specializes in one line: ExteriorAlgebra R E is the abbreviation CliffordAlgebra (0 : QuadraticForm R E) with ExteriorAlgebra.ι = CliffordAlgebra.ι 0 (Mathlib/LinearAlgebra/ExteriorAlgebra/Basic.lean lines 60 and 69); take D = CliffordAlgebra.contractLeft φ (Contraction.lean line 84, R-linear by its type), with D(1)=0 by contractLeft_one (line 178) and D(ι a * b) = φ a • b - ι a * D b by contractLeft_ι_mul (lines 125-126), at Q = 0."
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-koszul-differential",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1"
+}

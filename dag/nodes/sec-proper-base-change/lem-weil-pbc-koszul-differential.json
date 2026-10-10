@@ -32,9 +32,87 @@
  "stmt_deps": [
   "def-weil-pbc-exterior-algebra"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Existence in (i). By [lem-weil-pbc-koszul-differential-existence] there is an $R$-linear map $D:\\wedge(E)\\to\\wedge(E)$ with $D(1)=0$ and $D(v\\wedge x)=\\varphi(v)x-v\\wedge D(x)$ for $v\\in E$, $x\\in\\wedge(E)$. (Stacks obtains it as the derivation of the tensor algebra given by the explicit formula, which kills $e\\otimes e$ and so descends; the cited node is the Mathlib left contraction, which realizes the same map.) Fix this $D$ for the rest of the proof.",
+   "uses": [
+    "lem-weil-pbc-koszul-differential-existence",
+    "def-weil-pbc-exterior-algebra"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Definition Tag 0622 and the paragraph after it (lines 6560-6590): 'well defined derivation on the tensor algebra ... factors through the exterior algebra'"
+   }
+  },
+  {
+   "text": "Uniqueness in (i). Let $D'$ be a second $R$-linear map with $D'(1)=0$ and $D'(v\\wedge x)=\\varphi(v)x-v\\wedge D'(x)$. Then $\\Delta=D-D'$ is $R$-linear with $\\Delta(1)=0$ and $\\Delta(v\\wedge x)=-v\\wedge\\Delta(x)$. By induction on $n\\ge0$, $\\Delta(v_1\\wedge\\dots\\wedge v_n)=0$ for all $v_i\\in E$: for $n=0$ the product is $1$; for $n\\ge1$, $\\Delta(v_1\\wedge(v_2\\wedge\\dots\\wedge v_n))=-v_1\\wedge\\Delta(v_2\\wedge\\dots\\wedge v_n)=0$ by associativity and the induction hypothesis. By [def-weil-pbc-exterior-algebra], $\\wedge(E)=\\bigoplus_n\\wedge^n_R(E)$ and each $\\wedge^n_R(E)$ is spanned over $R$ by such products ($\\wedge^0_R(E)=R\\cdot1$), so $\\Delta=0$ by linearity, i.e. $D'=D$. (This is the induction principle CliffordAlgebra.left_induction, Mathlib/LinearAlgebra/CliffordAlgebra/Fold.lean line 148.)",
+   "uses": [
+    "def-weil-pbc-exterior-algebra"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Definition Tag 0622 and the paragraph after it (lines 6560-6590): 'the unique derivation such that d(e) = phi(e)'"
+   }
+  },
+  {
+   "text": "(ii). For $v\\in E$: $D(v)=D(v\\wedge1)=\\varphi(v)\\cdot1-v\\wedge D(1)=\\varphi(v)\\cdot1$. Degree: we show $D(\\wedge^n_R(E))\\subset\\wedge^{n-1}_R(E)$ by induction on $n$. For $n=0$, $\\wedge^0_R(E)=R\\cdot1$ and $D(r\\cdot1)=rD(1)=0\\in\\wedge^{-1}_R(E)=0$. For $n\\ge1$, $\\wedge^n_R(E)$ is spanned by products $v\\wedge y$ with $v\\in E$ and $y=v_2\\wedge\\dots\\wedge v_n\\in\\wedge^{n-1}_R(E)$ [def-weil-pbc-exterior-algebra]; then $D(v\\wedge y)=\\varphi(v)y-v\\wedge D(y)$, where $\\varphi(v)y\\in\\wedge^{n-1}_R(E)$ and, by the induction hypothesis, $D(y)\\in\\wedge^{n-2}_R(E)$, so $v\\wedge D(y)\\in\\wedge^1_R(E)\\wedge\\wedge^{n-2}_R(E)\\subset\\wedge^{n-1}_R(E)$ (for $n=1$, $D(y)=0$). By $R$-linearity of $D$ the inclusion follows.",
+   "uses": [
+    "lem-weil-pbc-koszul-differential-existence",
+    "def-weil-pbc-exterior-algebra"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Definition Tag 0622 and the paragraph after it (lines 6560-6590): 'd(e) = phi(e)' and the grading of the differential"
+   }
+  },
+  {
+   "text": "(iii). Induction on $n\\ge1$. For $n=1$ this is $D(v_1)=\\varphi(v_1)$, step (ii). For $n\\ge2$ put $w=v_2\\wedge\\dots\\wedge v_n$; in $w$ the factor $v_j$ ($2\\le j\\le n$) sits at position $j-1$, so the induction hypothesis gives $D(w)=\\sum_{j=2}^n(-1)^{j}\\varphi(v_j)\\,v_2\\wedge\\dots\\wedge\\widehat{v_j}\\wedge\\dots\\wedge v_n$. Hence $D(v_1\\wedge w)=\\varphi(v_1)w-v_1\\wedge D(w)=\\varphi(v_1)\\,v_2\\wedge\\dots\\wedge v_n+\\sum_{j=2}^n(-1)^{j+1}\\varphi(v_j)\\,v_1\\wedge\\dots\\wedge\\widehat{v_j}\\wedge\\dots\\wedge v_n$, and the first term is the summand $i=1$ (sign $(-1)^{2}=1$) of the formula.",
+   "uses": [
+    "lem-weil-pbc-koszul-differential-existence",
+    "def-weil-pbc-exterior-algebra"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "paragraph after Definition Tag 0622, lines 6579-6586: the explicit formula for d(e_1 wedge ... wedge e_n)"
+   }
+  },
+  {
+   "text": "(iv), derivation property. Fix $y\\in\\wedge(E)$; we prove $D(x\\wedge y)=D(x)\\wedge y+(-1)^m x\\wedge D(y)$ for $x\\in\\wedge^m_R(E)$ by induction on $m$. Both sides are $R$-linear in $x$, so by [def-weil-pbc-exterior-algebra] it suffices to take $x$ a product of $m$ elements of $E$. For $m=0$, $x=r\\cdot1$: $D(ry)=rD(y)=D(r\\cdot1)\\wedge y+r\\cdot1\\wedge D(y)$ since $D(1)=0$. For $m\\ge1$ write $x=v\\wedge x'$ with $v\\in E$, $x'\\in\\wedge^{m-1}_R(E)$ a product of $m-1$ elements. By associativity, the defining identity of $D$ and the induction hypothesis for $x'$: $D(x\\wedge y)=D(v\\wedge(x'\\wedge y))=\\varphi(v)\\,x'\\wedge y-v\\wedge D(x'\\wedge y)=\\varphi(v)\\,x'\\wedge y-v\\wedge D(x')\\wedge y-(-1)^{m-1}v\\wedge x'\\wedge D(y)=(\\varphi(v)x'-v\\wedge D(x'))\\wedge y+(-1)^m(v\\wedge x')\\wedge D(y)=D(x)\\wedge y+(-1)^m x\\wedge D(y)$. Together with (ii), $D$ is a derivation of degree $-1$ with $D(v)=\\varphi(v)$.",
+   "uses": [
+    "lem-weil-pbc-koszul-differential-existence",
+    "def-weil-pbc-exterior-algebra"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Definition Tag 0622 and the paragraph after it (lines 6560-6590): 'this gives a well defined derivation'"
+   }
+  },
+  {
+   "text": "(iv), uniqueness. Let $D'$ be $R$-linear with $D'(x\\wedge y)=D'(x)\\wedge y+(-1)^mx\\wedge D'(y)$ for $x\\in\\wedge^m_R(E)$, $y\\in\\wedge(E)$, and $D'(v)=\\varphi(v)\\cdot1$ for $v\\in E$. Taking $m=0$, $x=y=1$: $D'(1)=D'(1)\\wedge1+1\\wedge D'(1)=2D'(1)$, so $D'(1)=0$. Taking $m=1$, $x=v\\in E=\\wedge^1_R(E)$: $D'(v\\wedge y)=\\varphi(v)y-v\\wedge D'(y)$. So $D'$ satisfies the two conditions of (i), and $D'=D$ by the uniqueness of step 2.",
+   "uses": [
+    "def-weil-pbc-exterior-algebra"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Definition Tag 0622 and the paragraph after it (lines 6560-6590): 'the unique derivation such that d(e) = phi(e)'"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-koszul-differential-existence",
+  "def-weil-pbc-exterior-algebra"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "More on Algebra, Definition Tag 0622 and the paragraph after it (lines 6560-6590); Stacks calls the existence 'straightforward' via the tensor algebra; here existence is the Mathlib left contraction node and uniqueness, degree, formula and derivation property are written out by inductions on the degree"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -71,7 +149,7 @@
   "file": "Mathlib/LinearAlgebra/CliffordAlgebra/Contraction.lean",
   "how": "on ExteriorAlgebra R E = CliffordAlgebra 0 (ExteriorAlgebra/Basic.lean:60), contractLeft φ (Contraction.lean:84) is an R-linear map with contractLeft_one (:178: D 1 = 0) and contractLeft_ι_mul (:125: D(ι a * b) = φ a • b - ι a * D b), which is existence in (i); uniqueness follows by CliffordAlgebra.left_induction; the degree statement (ii), the formula (iii) and the derivation property (iv) are not in Mathlib and need an induction on n. Not a leaf (rule B8)."
  },
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "worker",
@@ -87,5 +165,13 @@
   }
  },
  "chapter": "sec-proper-base-change",
- "unit": "sk-thm-p1"
+ "unit": "sk-thm-p1",
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "lem-weil-pbc-koszul-differential",
+  "worker": "stage1",
+  "summary": "Lean state none on both branches (no declaration in slopmaster2 for the Koszul differential; grep of WeilConjectures for koszul/contractLeft finds only the P^1 Koszul short complex and tensor contractLeft, unrelated). Split into six steps: existence via a new Mathlib leaf (CliffordAlgebra.contractLeft at Q = 0, with contractLeft_one and contractLeft_ι_mul), uniqueness by induction on products (CliffordAlgebra.left_induction), D(v)=phi(v) and degree -1 by induction on n, the explicit formula (iii) by induction on n, the graded Leibniz rule (iv) by induction on the degree of x, and uniqueness among degree -1 derivations by reduction to the recursion of (i). Statement unchanged; stmt_deps unchanged. Stacks' own existence route (derivation on the tensor algebra killing e tensor e) is replaced by the Mathlib construction, which yields the same map by the uniqueness in step 2.",
+  "blueprint": "No blueprint node states this; the steps realize, in the proof of thm-weil-pbc-finite-etale-lifting (via its chain down to def-weil-pbc-koszul-complex), the place recorded in blueprint.from.place: the well-definedness of the Koszul differential (Stacks 0622 (2) and the explicit formula after it): step 1 the existence ('factors through the exterior algebra'), steps 2 and 6 'the unique derivation such that d(e)=phi(e)', steps 3-4 the explicit formula and degree, step 5 'this gives a well defined derivation'."
+ },
+ "reviewed": "2026-10-10 L: 6 steps: existence from the Mathlib leaf (contractLeft with Q = 0, contractLeft_one, contractLeft_ι_mul: lines read), uniqueness by induction on wedge length, degree and the explicit formula by induction, the Leibniz rule and its uniqueness; 1 new node"
 }
