@@ -672,3 +672,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 23:57 L merged C1 deliver/C1/lem-weil-pbc-z-g-ring (4th distinct delivery; the DVR node now carries the characteristic-zero hypothesis); HUMAN.md item closed.
 - 23:58 L reviewed lem-weil-pbc-finite-type-module-sheaf-stalk-finitely-generated (worker, 7 steps, 1 new leaf; tool_uses lem-weil-pbc-module-sheaves-colimits-forgetful): pass, committed.
 - 23:59 L reviewed lem-weil-pbc-flat-permanence (worker, 4 steps, 1 new leaf): pass, committed.
+- 00:00 L reviewed lem-weil-pbc-flat-fp-qf-stratification (worker, 10 steps, 2 new unsplit: 07RY, 06AC; tool_uses pqf-lem-qf-locqf-qc) and lem-weil-pbc-flat-over-regular (worker, 5 steps, 2 new: local criterion mod a nonzerodivisor unsplit, field-flat leaf): pass, committed.

@@ -1,0 +1,66 @@
+{
+ "id": "lem-weil-pbc-module-over-field-flat",
+ "kind": "statement",
+ "title": "Every module over a field is flat",
+ "statement": "Let $k$ be a field and $M$ a $k$-module (a $k$-vector space). Then $M$ is a flat $k$-module [def-weil-pbc-flat-ring-map]: $M$ has a basis, so it is free, and free modules are flat.",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "used in Algebra, Lemma Tag 07DY (lemma-flat-over-regular): 'S/(x_1,...,x_d)S is flat over R/(x_1,...,x_d) as the latter is a field'; Mathlib cites Stacks Tag 09FN (every vector space is free) for Module.Free.of_divisionRing"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-flat-ring-map"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "every module over a field is flat",
+   "results": "Module.Flat.of_free (Mathlib.RingTheory.Flat.Basic), Module.Flat.of_projective, Module.FaithfullyFlat.toFlat, Module.flat_iff",
+   "date": "2026-10-10",
+   "verdict": "match: Module.Flat.of_free with the instance Module.Free.of_divisionRing"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "every vector space over a field is a flat module",
+   "results": "Module.Flat.of_free, Module.Flat.self (Mathlib.RingTheory.Flat.Basic), Module.FaithfullyFlat.instOfNontrivialOfFree (FaithfullyFlat.Basic)",
+   "date": "2026-10-10",
+   "verdict": "match: Module.Flat.of_free"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rn 'of_divisionRing' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/LinearAlgebra/Basis/ ; grep -rn 'instance of_free' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/RingTheory/Flat/Basic.lean; sed -n 229,232p Flat/Basic.lean; sed -n 154,157p LinearAlgebra/Basis/VectorSpace.lean",
+   "results": "Mathlib/LinearAlgebra/Basis/VectorSpace.lean:156 'instance (priority := 100) _root_.Module.Free.of_divisionRing : Module.Free K V' (@[stacks 09FN]); Mathlib/RingTheory/Flat/Basic.lean:231 'instance of_free [Free R M] : Flat R M'",
+   "date": "2026-10-10",
+   "verdict": "match (lines verified with sed -n)"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "Module.Flat.of_free, Module.Free.of_divisionRing",
+  "file": "Mathlib/RingTheory/Flat/Basic.lean",
+  "line": 231,
+  "how": "specializes in one line: Module.Free.of_divisionRing (Mathlib/LinearAlgebra/Basis/VectorSpace.lean:156) makes every vector space over a field (division ring) free, and the instance Module.Flat.of_free (Mathlib/RingTheory/Flat/Basic.lean:231) makes free modules flat; instance inference gives Module.Flat k M"
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-flat-over-regular",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1"
+}
