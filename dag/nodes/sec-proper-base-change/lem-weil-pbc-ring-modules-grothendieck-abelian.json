@@ -1,0 +1,93 @@
+{
+ "id": "lem-weil-pbc-ring-modules-grothendieck-abelian",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-finite-etale-lifting",
+   "place": "step 7 of its split, through the graded cohomology used in the essential-surjectivity argument of Lemma 0GS2; specifically the identification of the graded H^p in Stacks 0897(1); within it, the passage from the finite partial direct sums to the whole direct sum $\\bigoplus_mH^p(X,\\mathcal G_m)$ (Stacks 01FF, the directed-colimit statement); within the proof of Stacks 01FF (cohomology.tex lines 3226-3236): 'By Injectives, Lemma 01DI the category of O_X-modules has functorial injective embeddings. Thus for any system (F_i, phi_ii') there exists a system (I_i, phi_ii') with each I_i an injective O_X-module and a morphism of systems given by injective O_X-module maps F_i -> I_i'; within the proof of Stacks 01DI (injectives.tex, lemma-sheaves-modules-space), its first sentence 'For any ring R and any R-module M we denote j : M -> J_R(M) the functorial injective embedding constructed in More on Algebra, Section 01D8', applied to the local rings R = O_{X,x}: this node, with lem-weil-pbc-grothendieck-functorial-injective-embedding, supplies that functorial embedding (More on Algebra, Lemma 01DD)",
+   "via": [
+    "lem-weil-pbc-scheme-modules-functorial-injective-embeddings",
+    "lem-weil-pbc-qs-scheme-cohomology-directed-colimit",
+    "lem-weil-pbc-qcqs-cohomology-direct-sum",
+    "lem-weil-pbc-graded-finiteness-cohomology",
+    "lem-weil-pbc-cohomology-powers-ideal-rees-finite",
+    "lem-weil-pbc-cohomology-powers-ideal-application",
+    "lem-weil-pbc-ml-cohomology-powers-ideal",
+    "lem-weil-pbc-theorem-formal-functions",
+    "lem-weil-pbc-formal-systems-push-pull",
+    "prop-weil-pbc-grothendieck-existence",
+    "lem-weil-pbc-algebraize-finite-over-proper",
+    "lem-weil-pbc-finite-etale-lifting-complete",
+    "lem-weil-pbc-finite-etale-lifting-essential-surjectivity"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "The category of modules over a ring is Grothendieck abelian",
+ "statement": "Let $R$ be a ring and $\\Mod(R)$ the category of (left) $R$-modules and $R$-linear maps, an abelian category [def-sp-abelian]. Then $\\Mod(R)$ is a Grothendieck abelian category [def-sp-grothendieck-abelian]: it has all small colimits, filtered colimits in $\\Mod(R)$ are exact (a filtered colimit of short exact sequences of $R$-modules is a short exact sequence), and it has a generator, namely the $R$-module $R$ (for $R$-modules $N\\subsetneq M$, a map $R\\to M$, $1\\mapsto m$ with $m\\in M\\setminus N$, does not factor through $N$).",
+ "source": {
+  "document": "literature/stacks-project/injectives.tex",
+  "place": "Injectives, Definition 079B (label definition-grothendieck-conditions, line 1289: Grothendieck abelian = AB5 and a generator), which Mod_R satisfies: exactness of directed colimits of modules is Algebra, Lemma 00DB (algebra.tex, label lemma-directed-colimit-exact, line 908), and R is a generator. Tags verified in tags/tags: 079B,injectives-definition-grothendieck-conditions; 00DB,algebra-lemma-directed-colimit-exact."
+ },
+ "stmt_deps": [
+  "def-sp-abelian",
+  "def-sp-grothendieck-abelian"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "category of modules over a ring is a Grothendieck abelian category",
+   "results": "instIsGrothendieckAbelianModuleCat (Mathlib.Algebra.Category.ModuleCat.AB: ∀ (R : Type u) [Ring R], IsGrothendieckAbelian.{u, u, u + 1} (ModuleCat R)); LightCondensed.instIsGrothendieckAbelianLightCondMod; CategoryTheory.IsGrothendieckAbelian (the class, Mathlib.CategoryTheory.Abelian.GrothendieckCategory.Basic)",
+   "date": "2026-10-10",
+   "verdict": "match: instIsGrothendieckAbelianModuleCat"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.IsGrothendieckAbelian (ModuleCat _)",
+   "results": "instIsGrothendieckAbelianModuleCat (Mathlib.Algebra.Category.ModuleCat.AB), the only hit",
+   "date": "2026-10-10",
+   "verdict": "match: instIsGrothendieckAbelianModuleCat"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "modules over a ring form a Grothendieck category: exact filtered colimits and a generator",
+   "results": "instIsGrothendieckAbelianModuleCat, instAB5ModuleCat, instAB4ModuleCat, instAB4StarModuleCat (Mathlib.Algebra.Category.ModuleCat.AB); Condensed.instAB5CondensedMod",
+   "date": "2026-10-10",
+   "verdict": "match: instIsGrothendieckAbelianModuleCat"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rn 'IsGrothendieckAbelian' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/Algebra/Category/ModuleCat/",
+   "results": "Algebra/Category/ModuleCat/AB.lean:52: instance : IsGrothendieckAbelian.{u} (ModuleCat.{u} R) where (variable (R : Type u) [Ring R], line 27); class definition CategoryTheory/Abelian/GrothendieckCategory/Basic.lean lines 70-75",
+   "date": "2026-10-10",
+   "verdict": "match"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "instIsGrothendieckAbelianModuleCat",
+  "file": "Mathlib/Algebra/Category/ModuleCat/AB.lean",
+  "how": "exact: the anonymous instance at AB.lean line 52, `instance : IsGrothendieckAbelian.{u} (ModuleCat.{u} R)` for `(R : Type u) [Ring R]` (line 27), read with sed -n. Mathlib's class IsGrothendieckAbelian (Mathlib/CategoryTheory/Abelian/GrothendieckCategory/Basic.lean lines 70-75: locally small, filtered colimits, AB5, a separator) is Stacks' AB5 plus a generator; all small colimits come from IsGrothendieckAbelian.hasColimits (Basic.lean line 99); abelian: ModuleCat.abelian (Mathlib/Algebra/Category/ModuleCat/Abelian.lean line 75). The same reading of Mathlib's class as def-sp-grothendieck-abelian is the one in the reviewed leaf for abelian groups (Grp/AB.lean line 109) used by lem-weil-pbc-module-sheaves-grothendieck-abelian.",
+  "line": 52
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-scheme-modules-functorial-injective-embeddings",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1"
+}
