@@ -250,6 +250,100 @@ noncomputable def upperStarFreeYonedaIso {Y : Scheme.{u}} (g : Y ⟶ X) (W : X.E
       apply (e _).injective
       rw [he, Equiv.apply_symm_apply, Equiv.apply_symm_apply])
 
+section TrivialCover
+
+variable {U : Scheme.{u}} (S : Type u)
+
+instance etale_sigmaDesc_id : AlgebraicGeometry.Etale (Sigma.desc fun _ : S ↦ 𝟙 U) :=
+  IsZariskiLocalAtSource.sigmaDesc fun _ ↦ inferInstance
+
+/-- The trivial finite étale cover `∐_{s ∈ S} U ⟶ U`, as an object of the small étale site. -/
+noncomputable abbrev trivialCover : U.Etale := Scheme.Etale.mk (Sigma.desc fun _ : S ↦ 𝟙 U)
+
+/-- The inclusion of the `s`-th copy of `U` into the trivial cover. -/
+noncomputable def trivialCoverι (s : S) : Scheme.Etale.mk (𝟙 U) ⟶ trivialCover (U := U) S :=
+  MorphismProperty.Over.homMk (Sigma.ι (fun _ : S ↦ U) s) (by simp)
+
+variable {S}
+
+/-- A sheaf on the small étale site of `U` turns the trivial cover `∐_{s ∈ S} U` into the
+product of copies of its global sections: maps into the sections over `∐_{s ∈ S} U` are the
+families of maps into the sections over the copies of `U`, since these cover `∐_{s ∈ S} U` and
+pairwise intersect in the empty scheme. -/
+lemma bijective_comp_map_trivialCoverι {A : Type*} [Category* A]
+    (F : Sheaf U.smallEtaleTopology A) (E : A) :
+    Function.Bijective (fun (x : E ⟶ F.obj.obj (op (trivialCover S))) (s : S) ↦
+      x ≫ F.obj.map (trivialCoverι S s).op) := by
+  have hcov : Sieve.ofArrows _ (trivialCoverι (U := U) S) ∈
+      U.smallEtaleTopology (trivialCover S) := by
+    rw [Scheme.ofArrows_mem_smallEtaleTopology_iff]
+    refine Set.eq_univ_of_forall fun p ↦ Set.mem_iUnion.2 ?_
+    obtain ⟨⟨s, x⟩, rfl⟩ := (sigmaMk fun _ : S ↦ U).surjective p
+    exact ⟨s, x, by rw [sigmaMk_mk]; rfl⟩
+  have h := (Presieve.isSheafFor_arrows_iff _ _).1
+    ((F.property E).isSheafFor (Presieve.ofArrows _ (trivialCoverι S)) hcov)
+  refine ⟨fun x y hxy ↦ ?_, fun z ↦ ?_⟩
+  · obtain ⟨t, -, ht⟩ := h (fun s ↦ x ≫ F.obj.map (trivialCoverι S s).op) (by
+      intro i j Z gi gj hij
+      change (x ≫ F.obj.map _) ≫ F.obj.map gi.op = (x ≫ F.obj.map _) ≫ F.obj.map gj.op
+      simp only [Category.assoc, ← Functor.map_comp, ← op_comp, hij])
+    exact (ht x fun _ ↦ rfl).trans (ht y fun s ↦ (congrFun hxy s).symm).symm
+  · obtain ⟨t, ht, -⟩ := h z (by
+      intro i j Z gi gj hij
+      have hl : gi.left ≫ Sigma.ι (fun _ : S ↦ U) i = gj.left ≫ Sigma.ι (fun _ : S ↦ U) j :=
+        congrArg (fun f ↦ f.left) hij
+      by_cases hij' : i = j
+      · subst hij'
+        have : gi = gj :=
+          MorphismProperty.Over.Hom.ext ((cancel_mono (Sigma.ι (fun _ : S ↦ U) i)).1 hl)
+        rw [this]
+      · have : IsEmpty Z.left := isEmpty_of_commSq_sigmaι_of_ne
+          ⟨hl⟩ hij'
+        refine F.property.hom_ext_ofArrows (I := PEmpty.{1}) (X := fun _ ↦ Z) (fun _ ↦ 𝟙 Z)
+          ((Scheme.ofArrows_mem_smallEtaleTopology_iff _).2
+            (Set.eq_univ_of_forall fun z ↦ isEmptyElim z)) fun i ↦ i.elim)
+    exact ⟨t, funext ht⟩
+
+/-- Maps out of a coproduct are families of maps. -/
+noncomputable def _root_.CategoryTheory.Limits.sigmaDescEquiv {C : Type*} [Category* C] {S : Type*}
+    {A B : C} [HasCoproduct fun _ : S ↦ A] : (S → (A ⟶ B)) ≃ ((∐ fun _ : S ↦ A) ⟶ B) where
+  toFun f := Sigma.desc f
+  invFun g s := Sigma.ι (fun _ : S ↦ A) s ≫ g
+  left_inv f := by simp
+  right_inv g := Sigma.hom_ext _ _ fun s ↦ by simp
+
+variable (Λ) in
+/-- The free sheaf on the trivial cover `∐_{s ∈ S} U` is the constant sheaf with value
+`∐_{s ∈ S} Λ`: both corepresent `G ↦ ∏_{s ∈ S} G(U)`. -/
+noncomputable def freeYonedaTrivialCoverIso [Finite S] :
+    Sheaf.freeYoneda U.smallEtaleTopology (trivialCover S) (ModuleCat.of Λ Λ) ≅
+      (constantSheaf U.smallEtaleTopology (ModuleCat.{u + 1} Λ)).obj
+        (∐ fun _ : S ↦ ModuleCat.of Λ Λ) :=
+  let hT : IsTerminal (Scheme.Etale.mk (𝟙 U)) := MorphismProperty.Over.mkIdTerminal _ _
+  let adj := constantSheafAdj U.smallEtaleTopology (ModuleCat.{u + 1} Λ) hT
+  let e (G : Sheaf U.smallEtaleTopology (ModuleCat.{u + 1} Λ)) :
+      (Sheaf.freeYoneda U.smallEtaleTopology (trivialCover S) (ModuleCat.of Λ Λ) ⟶ G) ≃
+        ((constantSheaf _ _).obj (∐ fun _ : S ↦ ModuleCat.of Λ Λ) ⟶ G) :=
+    Sheaf.freeYonedaHomEquiv.trans ((Equiv.ofBijective _
+      (bijective_comp_map_trivialCoverι G (ModuleCat.of Λ Λ))).trans
+        (sigmaDescEquiv.trans (adj.homEquiv _ _).symm))
+  have he {G G' : Sheaf U.smallEtaleTopology (ModuleCat.{u + 1} Λ)} (f : _ ⟶ G) (h : G ⟶ G') :
+      e G' (f ≫ h) = e G f ≫ h := by
+    apply (adj.homEquiv _ _).injective
+    rw [Adjunction.homEquiv_naturality_right]
+    dsimp only [e, Equiv.trans_apply]
+    erw [Equiv.apply_symm_apply, Equiv.apply_symm_apply]
+    refine Sigma.hom_ext _ _ fun s ↦ ?_
+    simp only [sigmaDescEquiv, Equiv.coe_fn_mk, Sigma.ι_desc, Sigma.ι_desc_assoc,
+      Equiv.ofBijective_apply, freeYonedaHomEquiv_comp, Category.assoc]
+    erw [h.hom.naturality]
+  Coyoneda.ext _ _ (fun f ↦ e _ f) (fun f ↦ (e _).symm f) (fun f ↦ by simp)
+    (fun f ↦ by simp) (fun f h ↦ by
+      apply (e _).injective
+      rw [he, Equiv.apply_symm_apply, Equiv.apply_symm_apply])
+
+end TrivialCover
+
 /-- **Generic local constancy of free sheaves.** Let `Z` be a nonempty scheme with Noetherian
 underlying space and `Λ` finite. The free étale sheaf `Λ[W]` on an affine étale `Z`-scheme `W`
 is finite locally constant on some nonempty open `U ⊆ Z`: over a dense open `U` the morphism
