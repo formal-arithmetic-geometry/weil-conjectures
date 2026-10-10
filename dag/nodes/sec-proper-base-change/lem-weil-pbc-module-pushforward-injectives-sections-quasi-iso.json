@@ -1,0 +1,66 @@
+{
+ "id": "lem-weil-pbc-module-pushforward-injectives-sections-quasi-iso",
+ "kind": "statement",
+ "title": "Global sections of a resolution of the direct image of injectives is a quasi-isomorphism",
+ "statement": "Let $h:X\\to Y$ be a morphism of schemes [def-pc-scheme]. Let $\\mathcal I^\\bullet$ be a cochain complex of injective $\\mathcal O_X$-modules [def-sp-injective-resolutions], [def-pc-cochain-complex-modules] with $\\mathcal I^n=0$ for $n<0$, and $h_*\\mathcal I^\\bullet$ the complex of $\\mathcal O_Y$-modules obtained by applying the direct image $h_*$ [def-pc-module-pullback] termwise, $(h_*\\mathcal I^n)(V)=\\mathcal I^n(h^{-1}V)$. Let $\\mathcal J'^\\bullet$ be a cochain complex of injective $\\mathcal O_Y$-modules with $\\mathcal J'^n=0$ for $n<0$ and $\\lambda:h_*\\mathcal I^\\bullet\\to\\mathcal J'^\\bullet$ a quasi-isomorphism [def-pc-quasi-iso-modules]. Then $\\Gamma(Y,\\lambda):\\Gamma(Y,h_*\\mathcal I^\\bullet)=\\Gamma(X,\\mathcal I^\\bullet)\\to\\Gamma(Y,\\mathcal J'^\\bullet)$ is a quasi-isomorphism of complexes of abelian groups (indeed of $\\mathcal O_Y(Y)$-modules [def-weil-sheaf-of-modules-category]): $H^p(\\Gamma(Y,\\lambda))$ is bijective for every $p$.",
+ "source": {
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Cohomology of Sheaves, Remark 01FB (remark-explain-arrow: 'The vertical arrow is a quasi-isomorphism by Lemma 01EZ'), Lemma 01EZ (lemma-before-Leray) with Remark 01F0 (remark-elucidate-lemma), Lemma 01EX (lemma-pushforward-injective: $h_*\\mathcal I$ is right acyclic for $\\Gamma(V,-)$); literature/stacks-project/derived.tex Lemma 015E (lemma-leray-acyclicity)"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-sp-injective-resolutions",
+  "def-pc-cochain-complex-modules",
+  "def-pc-module-pullback",
+  "def-pc-quasi-iso-modules",
+  "def-weil-sheaf-of-modules-category"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "pushforward of an injective sheaf of modules is acyclic for global sections",
+   "results": "TopCat.Sheaf.pushforward, TopCat.Sheaf.pushforward_sheaf_of_sheaf (Mathlib.Topology.Sheaves.Functors), AlgebraicGeometry.Scheme.Modules.pushforward, SheafOfModules.pushforward, pushforwardComp, pushforwardSections: definitions only",
+   "verdict": "no match",
+   "date": "2026-10-10"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "direct image of an injective sheaf is acyclic for the global sections functor; global sections of a quasi-isomorphism between bounded below complexes of acyclic objects is a quasi-isomorphism",
+   "results": "CochainComplex.isKInjective_of_injective, CochainComplex.IsKInjective, cm5b.instQuasiIsoIntP, InjectiveResolution.instQuasiIsoIntι', isKInjective_iff_rightOrthogonal, InjectiveResolution.instIsKInjectiveCochainComplex",
+   "verdict": "no match",
+   "date": "2026-10-10"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rln 'Flasque\\|flasque' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib; grep -rn 'leray\\|Leray' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/CategoryTheory/Abelian ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/Algebra/Homology; ls ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/CategoryTheory/Sites/SheafCohomology/",
+   "results": "Topology/Sheaves/Flasque.lean only (IsFlasque, pushforward_isFlasque, epi_of_shortExact): no injective-implies-flasque, no flasque-acyclic; no Leray acyclicity lemma; SheafCohomology/ has Basic, Cech, MayerVietoris for abelian sheaves on one site",
+   "verdict": "no match",
+   "date": "2026-10-10"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "def-weil-pbc-module-cohomology-fmap",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1"
+}

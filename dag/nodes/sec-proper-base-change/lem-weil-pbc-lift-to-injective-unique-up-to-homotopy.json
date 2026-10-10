@@ -1,0 +1,63 @@
+{
+ "id": "lem-weil-pbc-lift-to-injective-unique-up-to-homotopy",
+ "kind": "statement",
+ "title": "Lifts along a quasi-isomorphism into a bounded below complex of injectives are unique up to homotopy",
+ "statement": "Let $\\mathcal A$ be an abelian category [def-sp-abelian] and let $K^\\bullet$, $L^\\bullet$, $I^\\bullet$ be cochain complexes of $\\mathcal A$ [def-weil-abstract-derived-category], where $I^\\bullet$ is bounded below ($I^n=0$ for $n\\ll0$) and every $I^n$ is an injective object [def-sp-injective-resolutions]. Let $\\alpha:K^\\bullet\\to L^\\bullet$ be a quasi-isomorphism and $\\beta_1,\\beta_2:L^\\bullet\\to I^\\bullet$ morphisms of complexes such that $\\beta_1\\circ\\alpha$ and $\\beta_2\\circ\\alpha$ are chain-homotopic (for instance equal). Then $\\beta_1$ and $\\beta_2$ are chain-homotopic: there are morphisms $k^n:L^n\\to I^{n-1}$ with $\\beta_1^n-\\beta_2^n=d_I^{n-1}k^n+k^{n+1}d_L^n$ for all $n$.",
+ "source": {
+  "document": "literature/stacks-project/derived.tex",
+  "place": "Derived Categories, Lemma 013S (lemma-morphisms-equal-up-to-homotopy, line 6481)"
+ },
+ "stmt_deps": [
+  "def-sp-abelian",
+  "def-weil-abstract-derived-category",
+  "def-sp-injective-resolutions"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "two lifts along a quasi-isomorphism into a bounded below complex of injectives are homotopic",
+   "results": "CategoryTheory.InjectiveResolution.descHomotopy (Mathlib.CategoryTheory.Abelian.Injective.Resolution: only for alpha the augmentation of an injective resolution of an object and I an injective resolution of an object), ProjectiveResolution.liftHomotopy, InjectiveResolution.homotopyEquiv, HomologicalComplexUpToQuasiIso.isIso_Q_map_iff_mem_quasiIso",
+   "verdict": "no match (descHomotopy is the special case K = single object, I a resolution of an object)",
+   "date": "2026-10-10"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "a morphism from a quasi-isomorphism into a K-injective complex: two morphisms whose composites with a quasi-isomorphism are homotopic are themselves homotopic",
+   "results": "CochainComplex.IsKInjective.homotopyZero, IsKInjective.nonempty_homotopy_zero, HomotopyEquiv.isKInjective (Mathlib.Algebra.Homology.HomotopyCategory.KInjective), InjectiveResolution.descHomotopy, homotopyEquiv",
+   "verdict": "no match; ingredients only",
+   "date": "2026-10-10"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -n '^lemma\\|^theorem\\|^def' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/Algebra/Homology/HomotopyCategory/KInjective.lean ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/Algebra/Homology/DerivedCategory/KInjective.lean",
+   "results": "CochainComplex.isKInjective_of_injective (HomotopyCategory/KInjective.lean:133), IsKInjective.Qh_map_bijective (DerivedCategory/KInjective.lean:41), IsKInjective.quasiIso_iff (:50); no lemma comparing two lifts along a quasi-isomorphism",
+   "verdict": "no match: the statement follows from isKInjective_of_injective, Qh_map_bijective (injectivity of Hom_K(L,I) -> Hom_D(QL,QI)) and the invertibility of Q(alpha), several steps rather than a one-line specialization; left unsplit",
+   "date": "2026-10-10"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "def-weil-pbc-module-cohomology-fmap",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1"
+}

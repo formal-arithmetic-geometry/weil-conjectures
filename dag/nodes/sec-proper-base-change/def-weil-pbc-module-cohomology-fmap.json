@@ -2,19 +2,100 @@
  "id": "def-weil-pbc-module-cohomology-fmap",
  "kind": "definition",
  "title": "Maps on cohomology of modules induced by f-maps (pullback, edge map)",
- "statement": "Let $h:X\\to Y$ be a morphism of schemes [def-pc-scheme], $\\mathcal G$ an $\\mathcal O_Y$-module, $\\mathcal F$ an $\\mathcal O_X$-module and $\\varphi:\\mathcal G\\to h_*\\mathcal F$ a morphism of $\\mathcal O_Y$-modules (an *$h$-map* from $\\mathcal G$ to $\\mathcal F$; equivalently, by the adjunction $h^*\\dashv h_*$ [def-pc-module-pullback], a morphism $h^*\\mathcal G\\to\\mathcal F$). For $p\\ge0$ the map $\\varphi^*:H^p(Y,\\mathcal G)\\to H^p(X,\\mathcal F)$ [pqf-def-cohomology] is defined as follows: choose an injective resolution $\\mathcal F\\to\\mathcal I^\\bullet$ of $\\mathcal O_X$-modules, an injective resolution $\\mathcal G\\to\\mathcal J^\\bullet$ and a resolution $h_*\\mathcal I^\\bullet\\to\\mathcal J'^\\bullet$ by a complex of injective $\\mathcal O_Y$-modules, and a morphism of complexes $\\beta:\\mathcal J^\\bullet\\to\\mathcal J'^\\bullet$ compatible with $\\mathcal G\\to h_*\\mathcal F\\to h_*\\mathcal I^\\bullet\\to\\mathcal J'^\\bullet$ (it exists and is unique up to homotopy); the map $\\Gamma(Y,h_*\\mathcal I^\\bullet)=\\Gamma(X,\\mathcal I^\\bullet)\\to\\Gamma(Y,\\mathcal J'^\\bullet)$ is a quasi-isomorphism, and $\\varphi^*$ is $H^p$ of $\\Gamma(Y,\\beta)$ followed by the inverse of $H^p$ of this quasi-isomorphism. It is $\\mathcal O_Y(Y)$-linear, $\\mathcal O_Y(Y)$ acting on $H^p(X,\\mathcal F)$ through $h^\\sharp:\\mathcal O_Y(Y)\\to\\mathcal O_X(X)$, and in degree $0$ it is $s\\mapsto\\varphi_Y(s)\\in(h_*\\mathcal F)(Y)=\\mathcal F(X)$. Special cases and names: (a) for $h=\\mathrm{id}_Y$ and $\\varphi:\\mathcal G\\to\\mathcal F$ a morphism of $\\mathcal O_Y$-modules, $\\varphi^*=H^p(\\varphi)$ is the map induced by the functor $H^p(Y,-)$; (b) the *pullback* $h^*:H^p(Y,\\mathcal G)\\to H^p(X,h^*\\mathcal G)$ is $\\varphi^*$ for the unit $\\varphi=\\eta_{\\mathcal G}:\\mathcal G\\to h_*h^*\\mathcal G$; for an open $U\\subseteq Y$ and the inclusion $j:U\\to Y$ this is the *restriction* $H^p(Y,\\mathcal G)\\to H^p(U,\\mathcal G|_U)$ (with $j^*\\mathcal G=\\mathcal G|_U$); (c) the *edge map* $e_{h,\\mathcal F}:H^p(Y,h_*\\mathcal F)\\to H^p(X,\\mathcal F)$ is $\\varphi^*$ for $\\varphi=\\mathrm{id}_{h_*\\mathcal F}$.",
+ "statement": "Let $h:X\\to Y$ be a morphism of schemes [def-pc-scheme], $\\mathcal G$ an $\\mathcal O_Y$-module and $\\mathcal F$ an $\\mathcal O_X$-module [def-weil-sheaf-of-modules-category], and $\\varphi:\\mathcal G\\to h_*\\mathcal F$ a morphism of $\\mathcal O_Y$-modules, $h_*$ the direct image, $(h_*\\mathcal F)(V)=\\mathcal F(h^{-1}V)$ (an *$h$-map* from $\\mathcal G$ to $\\mathcal F$; equivalently, by the adjunction $h^*\\dashv h_*$ [def-pc-module-pullback], a morphism $h^*\\mathcal G\\to\\mathcal F$). For $p\\ge0$ the map $\\varphi^*:H^p(Y,\\mathcal G)\\to H^p(X,\\mathcal F)$ between the cohomology groups of [pqf-def-cohomology] is defined as follows. Choose injective resolutions [def-sp-injective-resolutions] $s_{\\mathcal F}:\\mathcal F\\to\\mathcal I^\\bullet$ of $\\mathcal O_X$-modules and $s_{\\mathcal G}:\\mathcal G\\to\\mathcal J^\\bullet$ of $\\mathcal O_Y$-modules, with $\\mathcal I^n=\\mathcal J^n=0$ for $n<0$, so that $H^p(X,\\mathcal F)=H^p(\\Gamma(X,\\mathcal I^\\bullet))$ and $H^p(Y,\\mathcal G)=H^p(\\Gamma(Y,\\mathcal J^\\bullet))$; choose a cochain complex [def-pc-cochain-complex-modules] $\\mathcal J'^\\bullet$ of injective $\\mathcal O_Y$-modules with $\\mathcal J'^n=0$ for $n<0$ and a quasi-isomorphism [def-pc-quasi-iso-modules] $\\lambda:h_*\\mathcal I^\\bullet\\to\\mathcal J'^\\bullet$, $h_*$ applied termwise; and choose a morphism of complexes $\\beta:\\mathcal J^\\bullet\\to\\mathcal J'^\\bullet$ with $\\beta^0\\circ s_{\\mathcal G}=\\lambda^0\\circ h_*(s_{\\mathcal F})\\circ\\varphi:\\mathcal G\\to\\mathcal J'^0$. Since $\\Gamma(Y,h_*\\mathcal I^n)=\\mathcal I^n(h^{-1}Y)=\\Gamma(X,\\mathcal I^n)$, $\\Gamma(Y,\\lambda)$ is a morphism of complexes $\\mu:\\Gamma(X,\\mathcal I^\\bullet)\\to\\Gamma(Y,\\mathcal J'^\\bullet)$, and $\\mu$ is a quasi-isomorphism (proof, Step 4). Then $\\varphi^*=H^p(\\mu)^{-1}\\circ H^p(\\Gamma(Y,\\beta))$. Names: (a) the *pullback* $h^*:H^p(Y,\\mathcal G)\\to H^p(X,h^*\\mathcal G)$ is $\\varphi^*$ for the unit $\\varphi=\\eta_{\\mathcal G}:\\mathcal G\\to h_*h^*\\mathcal G$ of $h^*\\dashv h_*$; (b) for an open $U\\subseteq Y$, with $j:U\\to Y$ the inclusion of the open subscheme and $\\mathcal G|_U$ the restricted $\\mathcal O_U$-module, $(\\mathcal G|_U)(V)=\\mathcal G(V)$ for $V\\subseteq U$ open [lem-weil-pbc-module-restriction-open-immersion-colimits], the *restriction* $\\mathrm{res}^Y_U:H^p(Y,\\mathcal G)\\to H^p(U,\\mathcal G|_U)$ is $\\varphi^*$ for the $j$-map $\\rho_{\\mathcal G}:\\mathcal G\\to j_*(\\mathcal G|_U)$ whose component on an open $V\\subseteq Y$ is the restriction map $\\mathcal G(V)\\to\\mathcal G(V\\cap U)$; (c) the *edge map* $e_{h,\\mathcal F}:H^p(Y,h_*\\mathcal F)\\to H^p(X,\\mathcal F)$ is $\\varphi^*$ for $\\varphi=\\mathrm{id}_{h_*\\mathcal F}$. (That $\\varphi^*$ does not depend on the choices, is $\\mathcal O_Y(Y)$-linear, is $\\varphi_Y$ in degree $0$, is $H^p(\\varphi)$ for $h=\\mathrm{id}_Y$, and that $\\mathrm{res}^Y_U$ is the pullback $j^*$ up to $j^*\\mathcal G\\cong\\mathcal G|_U$, are statements about this definition, recorded in `pointers`.)",
  "source": {
   "document": "literature/stacks-project/cohomology.tex",
   "place": "Cohomology of Sheaves, Section 01F7 (section-functoriality): Lemma 01F8 (lemma-functoriality), Equations 01F9/01FA (equation-functorial-derived, equation-functorial) and Remark 01FB (remark-explain-arrow), with Lemma 01EZ (lemma-before-Leray) for the quasi-isomorphism"
  },
  "stmt_deps": [
   "def-pc-scheme",
+  "def-weil-sheaf-of-modules-category",
   "def-pc-module-pullback",
-  "pqf-def-cohomology"
+  "pqf-def-cohomology",
+  "def-sp-injective-resolutions",
+  "def-pc-cochain-complex-modules",
+  "def-pc-quasi-iso-modules",
+  "lem-weil-pbc-module-restriction-open-immersion-colimits"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "*The choices exist.* $\\Mod(\\mathcal O_X)$ and $\\Mod(\\mathcal O_Y)$ have enough injectives [lem-weil-pbc-scheme-modules-enough-injectives]. Applying [lem-weil-pbc-complex-injective-resolution-mono] with $a=0$ to the complex $\\mathcal F[0]$ ($\\mathcal F$ in degree $0$) gives a complex $\\mathcal I^\\bullet$ of injectives with $\\mathcal I^n=0$ for $n<0$ and a quasi-isomorphism $\\mathcal F[0]\\to\\mathcal I^\\bullet$, i.e. $0\\to\\mathcal F\\to\\mathcal I^0\\to\\mathcal I^1\\to\\cdots$ exact: an injective resolution [def-sp-injective-resolutions]; likewise $\\mathcal G\\to\\mathcal J^\\bullet$. The direct image $h_*$ is an additive functor $\\Mod(\\mathcal O_X)\\to\\Mod(\\mathcal O_Y)$ [def-pc-module-pullback], so $h_*\\mathcal I^\\bullet$ (termwise, $h_*(d)$ as differentials, $h_*(d)h_*(d)=h_*(dd)=0$) is a cochain complex with $h_*\\mathcal I^n=0$ for $n<0$, and [lem-weil-pbc-complex-injective-resolution-mono] with $a=0$ gives $\\lambda:h_*\\mathcal I^\\bullet\\to\\mathcal J'^\\bullet$, a quasi-isomorphism into a complex of injectives vanishing in negative degrees.",
+   "uses": [
+    "lem-weil-pbc-scheme-modules-enough-injectives",
+    "lem-weil-pbc-complex-injective-resolution-mono",
+    "def-sp-injective-resolutions",
+    "def-pc-module-pullback"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/cohomology.tex",
+    "place": "Cohomology of Sheaves, Remark 01FB (remark-explain-arrow): 'Choose a resolution $\\mathcal F\\to\\mathcal I^\\bullet$ by a complex of injective $\\mathcal O_X$-modules. Choose resolutions $\\mathcal G\\to\\mathcal J^\\bullet$ and $f_*\\mathcal I^\\bullet\\to(\\mathcal J')^\\bullet$ by complexes of injective $\\mathcal O_Y$-modules'; existence by Injectives Lemma 01DI and Derived Categories Lemma 013K (3)"
+   }
+  },
+  {
+   "text": "*$\\beta$ exists and is unique up to homotopy.* Let $K^\\bullet=\\mathcal G[0]$ and $\\alpha:K^\\bullet\\to\\mathcal J^\\bullet$ the augmentation ($\\alpha^0=s_{\\mathcal G}$). It is a quasi-isomorphism (the augmented complex is exact) and a monomorphism in every degree ($s_{\\mathcal G}$ is injective by exactness at $\\mathcal G$, and $\\alpha^n:0\\to\\mathcal J^n$ for $n\\ne0$). Let $\\gamma:K^\\bullet\\to\\mathcal J'^\\bullet$ be the morphism of complexes with $\\gamma^0=\\lambda^0\\circ h_*(s_{\\mathcal F})\\circ\\varphi$ (a morphism of complexes since $d_{\\mathcal J'}\\lambda^0h_*(s_{\\mathcal F})=\\lambda^1h_*(d_{\\mathcal I}s_{\\mathcal F})=0$). By [lem-weil-pbc-lift-along-injective-quasi-iso] there is $\\beta:\\mathcal J^\\bullet\\to\\mathcal J'^\\bullet$ with $\\beta\\circ\\alpha=\\gamma$, i.e. $\\beta^0\\circ s_{\\mathcal G}=\\lambda^0\\circ h_*(s_{\\mathcal F})\\circ\\varphi$. Two such $\\beta_1,\\beta_2$ satisfy $\\beta_1\\alpha=\\beta_2\\alpha$, so they are chain-homotopic by [lem-weil-pbc-lift-to-injective-unique-up-to-homotopy] ($\\mathcal J'^\\bullet$ bounded below of injectives); hence $H^p(\\Gamma(Y,\\beta))$ does not depend on the choice of $\\beta$ ($\\Gamma(Y,-)$ is additive and carries homotopies to homotopies).",
+   "uses": [
+    "lem-weil-pbc-lift-along-injective-quasi-iso",
+    "lem-weil-pbc-lift-to-injective-unique-up-to-homotopy"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/cohomology.tex",
+    "place": "Cohomology of Sheaves, Remark 01FB (remark-explain-arrow): 'By Derived Categories, Lemma 013P there exists a map of complexes $\\beta$ such that the diagram (equation-choice) commutes'; uniqueness up to homotopy: literature/stacks-project/derived.tex Lemma 013S (lemma-morphisms-equal-up-to-homotopy)"
+   }
+  },
+  {
+   "text": "*$\\mu$ is a morphism of complexes.* For each $n$, $\\Gamma(Y,h_*\\mathcal I^n)=(h_*\\mathcal I^n)(Y)=\\mathcal I^n(h^{-1}(Y))=\\mathcal I^n(X)=\\Gamma(X,\\mathcal I^n)$ by the definition of the direct image [def-pc-module-pullback], and the differential $\\Gamma(Y,h_*d^n)=(h_*d^n)_Y=d^n_X$ is that of $\\Gamma(X,\\mathcal I^\\bullet)$; so $\\mu^n=\\lambda^n_Y$ defines a morphism of complexes $\\Gamma(X,\\mathcal I^\\bullet)\\to\\Gamma(Y,\\mathcal J'^\\bullet)$, $\\Gamma(Y,-)$ applied to the morphism of complexes $\\lambda$.",
+   "uses": [
+    "def-pc-module-pullback"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/cohomology.tex",
+    "place": "Cohomology of Sheaves, Remark 01FB (remark-explain-arrow): the equality $\\Gamma(Y,f_*\\mathcal I^\\bullet)=\\Gamma(X,\\mathcal I^\\bullet)$ in the second diagram; Remark 01F0 (remark-elucidate-lemma): 'the trivial observation that $\\Gamma(X,\\mathcal I^\\bullet)=\\Gamma(Y,f_*\\mathcal I^\\bullet)$'"
+   }
+  },
+  {
+   "text": "*$\\mu$ is a quasi-isomorphism, so $\\varphi^*$ is defined.* By [lem-weil-pbc-module-pushforward-injectives-sections-quasi-iso] (applied to $\\mathcal I^\\bullet$, $\\mathcal J'^\\bullet$, $\\lambda$) $\\mu=\\Gamma(Y,\\lambda)$ is a quasi-isomorphism, so $H^p(\\mu):H^p(X,\\mathcal F)=H^p(\\Gamma(X,\\mathcal I^\\bullet))\\to H^p(\\Gamma(Y,\\mathcal J'^\\bullet))$ is a bijective homomorphism of abelian groups and has an inverse; with Step 2, $\\varphi^*=H^p(\\mu)^{-1}\\circ H^p(\\Gamma(Y,\\beta))$ is a well-defined homomorphism $H^p(\\Gamma(Y,\\mathcal J^\\bullet))=H^p(Y,\\mathcal G)\\to H^p(X,\\mathcal F)$ for the chosen resolutions $\\mathcal I^\\bullet,\\mathcal J^\\bullet,\\mathcal J'^\\bullet,\\lambda$.",
+   "uses": [
+    "lem-weil-pbc-module-pushforward-injectives-sections-quasi-iso"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/cohomology.tex",
+    "place": "Cohomology of Sheaves, Remark 01FB (remark-explain-arrow): 'The vertical arrow is a quasi-isomorphism by Lemma 01EZ ... The arrow is given by the composition of the horizontal map by the inverse of the vertical map'; Equation 01FA (equation-functorial)"
+   }
+  },
+  {
+   "text": "*The named $h$-maps are morphisms of $\\mathcal O_Y$-modules.* (a) The unit $\\eta_{\\mathcal G}:\\mathcal G\\to h_*h^*\\mathcal G$ of the adjunction $h^*\\dashv h_*$ [def-pc-module-pullback] is a morphism of $\\mathcal O_Y$-modules. (b) For $U\\subseteq Y$ open, $(j_*(\\mathcal G|_U))(V)=(\\mathcal G|_U)(j^{-1}V)=\\mathcal G(V\\cap U)$ [lem-weil-pbc-module-restriction-open-immersion-colimits], [def-pc-module-pullback]; the restriction maps $\\rho_V:\\mathcal G(V)\\to\\mathcal G(V\\cap U)$ are $\\mathcal O_Y(V)$-linear ($\\mathcal O_Y(V)$ acting on $\\mathcal G(V\\cap U)$ through $\\mathcal O_Y(V)\\to\\mathcal O_Y(V\\cap U)$, the module axiom of [def-weil-sheaf-of-modules-category]) and commute with restriction along $V'\\subseteq V$ (both composites are the restriction $\\mathcal G(V)\\to\\mathcal G(V'\\cap U)$), so $\\rho_{\\mathcal G}$ is a morphism of $\\mathcal O_Y$-modules. (c) $\\mathrm{id}_{h_*\\mathcal F}$ is one. So the three names are instances of the construction.",
+   "uses": [
+    "def-pc-module-pullback",
+    "lem-weil-pbc-module-restriction-open-immersion-colimits",
+    "def-weil-sheaf-of-modules-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/cohomology.tex",
+    "place": "Cohomology of Sheaves, Section 01F7 (section-functoriality), the paragraph before Equation 01F9: an $f$-map is a map $\\mathcal G\\to f_*\\mathcal F$ or equivalently $f^*\\mathcal G\\to\\mathcal F$; literature/stacks-project/sheaves.tex Lemma 00A0 (lemma-j-pullback) and Definition 00A1 (definition-restriction) for $\\mathcal G|_U$"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-module-pullback",
+  "def-sp-injective-resolutions",
+  "def-weil-sheaf-of-modules-category",
+  "lem-weil-pbc-complex-injective-resolution-mono",
+  "lem-weil-pbc-lift-along-injective-quasi-iso",
+  "lem-weil-pbc-lift-to-injective-unique-up-to-homotopy",
+  "lem-weil-pbc-module-pushforward-injectives-sections-quasi-iso",
+  "lem-weil-pbc-module-restriction-open-immersion-colimits",
+  "lem-weil-pbc-scheme-modules-enough-injectives"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Cohomology of Sheaves, Section 01F7 (section-functoriality): Lemma 01F8, Equations 01F9/01FA and Remark 01FB (remark-explain-arrow), whose construction the definition and Steps 1-4 follow; Step 5 (the named special cases) written out by the agent"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -36,10 +117,17 @@
    "results": "no file; SheafCohomology/ has Basic.lean (Sheaf.H F n := Ext of the constant sheaf, Sheaf.H.map for a morphism of sheaves on one site, cohomologyPresheaf), Cech.lean, MayerVietoris.lean: abelian sheaves on a site only, no O_X-modules, no maps along morphisms of schemes, no R^pf_*",
    "date": "2026-10-10",
    "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rn 'sheafCohomology\\|H\\^' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/Topology/Sheaves/*.lean; grep -n 'def H\\b\\|H.map\\|H.equiv' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/CategoryTheory/Sites/SheafCohomology/Basic.lean; grep -n 'def pushforward\\|def pullback\\|restrictFunctorIsoPullback' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicGeometry/Modules/Sheaf.lean",
+   "results": "Topology/Sheaves: no sheaf cohomology at all; SheafCohomology/Basic.lean: Sheaf.H F n (Ext from the constant sheaf, abelian sheaves on one site), H.map f n for a morphism of sheaves on that site, H.equiv₀; AlgebraicGeometry/Modules/Sheaf.lean: Scheme.Modules.pushforward (:166), pullback (:183), pullbackPushforwardAdjunction (:189), restrictFunctorIsoPullback: the module functors exist, but no cohomology of O_X-modules and no map on cohomology along an h-map",
+   "date": "2026-10-10",
+   "verdict": "no match: functoriality of cohomology in h-maps (and cohomology of O_X-modules) is absent from Mathlib"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "worker",
@@ -59,5 +147,31 @@
   }
  },
  "chapter": "sec-proper-base-change",
- "unit": "sk-thm-p1"
+ "unit": "sk-thm-p1",
+ "pointers": [
+  {
+   "to": "lem-weil-pbc-module-cohomology-fmap-functorial",
+   "was": [],
+   "reason": "forward pointer, not a dependency: the lemma proves that phi^* is independent of the choices of resolutions and of beta (its clause (1), Stacks Remark 01FB), its compatibility with composition of h-maps and with restriction; it depends on this definition, so citing it would close a cycle",
+   "date": "2026-10-10"
+  },
+  {
+   "to": "lem-weil-pbc-module-cohomology-fmap-basic-properties",
+   "was": [],
+   "reason": "forward pointer, not a dependency: claims moved out of the definition text on its split: O_Y(Y)-linearity, the degree-0 description s -> phi_Y(s), phi^* = H^p(phi) for h = id_Y (former special case (a)), and res^Y_U = H^p(kappa^{-1}) o j^* (former '(with j^*G = G|_U)' in special case (b))",
+   "date": "2026-10-10"
+  }
+ ],
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "def-weil-pbc-module-cohomology-fmap",
+  "worker": "stage1",
+  "summary": "Checked against Stacks Cohomology Section 01F7 (cohomology.tex 2328-2432: Lemma 01F8, Equations 01F9/01FA, Remark 01FB) with Lemma 01EZ, Remark 01F0, Lemma 01EX and Derived 013P/013S/013K/015E; tags verified in tags/tags. The definition keeps the data (choices of I, J, J', lambda, beta and phi^* = H^p(mu)^{-1} H^p(Gamma(beta))) and the three names (pullback, restriction, edge map). Statement made precise: resolutions vanish in negative degrees (needed for 013P), lambda an explicit quasi-isomorphism, the compatibility of beta written as an equation. Changed: the restriction is now defined directly as phi^* of the j-map rho_G: G -> j_*(G|_U) (restriction maps), instead of 'the pullback j^* with j^*G = G|_U', which was a claim; the citers (higher-direct-image-presheaf, functorial (3), formal-functions-stalk) use the restriction only as phi^* of a j-map, which this keeps. Claims moved: existence of the choices (Step 1, new lem-weil-pbc-scheme-modules-enough-injectives, Stacks 01DI, plus the existing Mathlib-backed lem-weil-pbc-complex-injective-resolution-mono); beta exists (existing leaf lem-weil-pbc-lift-along-injective-quasi-iso) and is unique up to homotopy (new lem-weil-pbc-lift-to-injective-unique-up-to-homotopy, Stacks 013S); Gamma(Y,lambda) is a quasi-isomorphism (new lem-weil-pbc-module-pushforward-injectives-sections-quasi-iso, Remark 01FB / Lemma 01EZ / 01EX / 015E); independence of choices: pointer to lem-weil-pbc-module-cohomology-fmap-functorial (1); linearity, degree 0, the identity case (old special case (a)) and restriction = H^p(kappa^{-1}) j^*: new lem-weil-pbc-module-cohomology-fmap-basic-properties (pointer only, flagged unreachable). stmt_deps: added def-weil-sheaf-of-modules-category, def-sp-injective-resolutions, def-pc-cochain-complex-modules, def-pc-quasi-iso-modules, lem-weil-pbc-module-restriction-open-immersion-colimits (G|_U); h_* is taken from def-pc-module-pullback (no separate direct-image node for O_X-modules exists). Five elementary well-definedness steps. Mathlib: re-searched with a grep of Topology/Sheaves, SheafCohomology and AlgebraicGeometry/Modules: no cohomology of O_X-modules, no maps along h-maps; Sheaf.H.map exists only for abelian sheaves on one site."
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "result": "accepted",
+  "note": "Definition node (Stacks 01F7-01FB): data kept (resolutions I, J, J', the quasi-isomorphism lambda, beta, phi^* = H^p(mu)^{-1} H^p(Gamma(beta))), names pullback/restriction/edge map; existence of the choices from enough injectives (new node 01DI) and the resolution lemma; beta from the lift leaf, uniqueness up to homotopy as a new 013S node; the quasi-isomorphism Gamma(Y, lambda) as a new node (01EZ/01EX); independence of choices and the basic properties (linearity, degree 0, h = id, restriction) as pointers (basic-properties new node, made reachable by L through formal-functions-stalk). Five elementary well-formedness steps. Restriction redefined as phi^* of the j-map rho_G (no claim j^* G = G|_U)."
+ }
 }

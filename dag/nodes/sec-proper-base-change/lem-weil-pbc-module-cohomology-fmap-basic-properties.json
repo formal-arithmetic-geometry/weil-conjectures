@@ -1,0 +1,67 @@
+{
+ "id": "lem-weil-pbc-module-cohomology-fmap-basic-properties",
+ "kind": "statement",
+ "title": "Linearity, degree zero, identity and restriction cases of the maps induced by h-maps",
+ "statement": "Let $h:X\\to Y$ be a morphism of schemes [def-pc-scheme], $\\mathcal G$ an $\\mathcal O_Y$-module, $\\mathcal F$ an $\\mathcal O_X$-module and $\\varphi:\\mathcal G\\to h_*\\mathcal F$ a morphism of $\\mathcal O_Y$-modules, with $\\varphi^*:H^p(Y,\\mathcal G)\\to H^p(X,\\mathcal F)$ the map of [def-weil-pbc-module-cohomology-fmap] and $H^p$ the cohomology of [pqf-def-cohomology], an $\\mathcal O_Y(Y)$-module (resp. $\\mathcal O_X(X)$-module) through the action on the global sections of an injective resolution. (1) (Linearity.) $\\varphi^*$ is $\\mathcal O_Y(Y)$-linear, $\\mathcal O_Y(Y)$ acting on $H^p(X,\\mathcal F)$ through $h^\\sharp:\\mathcal O_Y(Y)\\to\\mathcal O_X(X)$. (2) (Degree zero.) Under the identifications $H^0(Y,\\mathcal G)=\\mathcal G(Y)$ and $H^0(X,\\mathcal F)=\\mathcal F(X)$ (a section $s$ goes to the class of its image in the degree-$0$ term of the injective resolution), $\\varphi^*$ in degree $0$ is $s\\mapsto\\varphi_Y(s)\\in(h_*\\mathcal F)(Y)=\\mathcal F(X)$. (3) (Identity.) If $X=Y$, $h=\\mathrm{id}_Y$ and $\\varphi:\\mathcal G\\to\\mathcal F$ is a morphism of $\\mathcal O_Y$-modules, then $\\varphi^*=H^p(\\varphi)$, the map induced by the functor $H^p(Y,-)$ [pqf-def-cohomology]. (4) (Restriction is a pullback.) For an open $U\\subseteq Y$ with inclusion $j:U\\to Y$ of the open subscheme, the restriction $\\mathrm{res}^Y_U:H^p(Y,\\mathcal G)\\to H^p(U,\\mathcal G|_U)$ of [def-weil-pbc-module-cohomology-fmap] (b) equals $H^p(\\kappa^{-1})\\circ j^*$, where $j^*:H^p(Y,\\mathcal G)\\to H^p(U,j^*\\mathcal G)$ is the pullback of [def-weil-pbc-module-cohomology-fmap] (b) and $\\kappa:\\mathcal G|_U\\xrightarrow{\\sim}j^*\\mathcal G$ is the isomorphism of [lem-weil-pbc-open-immersion-module-pullback-restriction] ($\\mathcal G|_U$ as in [lem-weil-pbc-module-restriction-open-immersion-colimits], $j^*\\mathcal G$ as in [def-pc-module-pullback]).",
+ "source": {
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Cohomology of Sheaves, Section 01F7 (section-functoriality): Equation 01F9 (equation-functorial-derived, the arrow lives in $D^+(\\mathcal O_Y(Y))$, which gives (1)), Equation 01FA (equation-functorial), Lemma 01F8 (lemma-functoriality) with $f=\\mathrm{id}$ for (3), Remark 01FB (remark-explain-arrow); (2) and (4) are not stated in Stacks (statement assembled by the agent; for (4) see also literature/stacks-project/sheaves.tex Lemma 00A0, lemma-j-pullback)"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-pbc-module-cohomology-fmap",
+  "pqf-def-cohomology",
+  "lem-weil-pbc-open-immersion-module-pullback-restriction",
+  "lem-weil-pbc-module-restriction-open-immersion-colimits",
+  "def-pc-module-pullback"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "map on sheaf cohomology induced by morphism of sheaves is linear over global sections, degree zero is the map on global sections",
+   "results": "SheafOfModules.sectionsMap, sectionsFunctor_map, sectionsMap_comp (Mathlib.Algebra.Category.ModuleCat.Sheaf), Sheaf.ΓRes_naturality, Scheme.Modules.Hom.mapPresheaf: global sections only",
+   "verdict": "no match",
+   "date": "2026-10-10"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "sheaf cohomology map induced by a morphism of sheaves; H^0 of a sheaf identified with global sections, naturally",
+   "results": "SheafOfModules.sectionsMap, Sheaf.cohomologyPresheaf, Sheaf.cohomologyPresheafFunctor (Mathlib.CategoryTheory.Sites.SheafCohomology.Basic), groupCohomology maps",
+   "verdict": "no match",
+   "date": "2026-10-10"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -n 'def H\\b\\|H.map\\|H.equiv' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/CategoryTheory/Sites/SheafCohomology/Basic.lean",
+   "results": "Sheaf.H F n (Ext from the constant sheaf, line 59), H.equiv₀ : H F 0 ≃+ F(T) (line 105), H.map f n (line 114) with its degree-0 compatibility (lines 118-131): abelian sheaves on one site and morphisms of sheaves there; nothing for O_X-modules, module structures over O(X), or maps along a morphism of schemes",
+   "verdict": "no match: Sheaf.H.map with H.equiv₀ is clauses (2),(3) for abelian sheaves on one site only, not for this definition's phi^* on O-modules",
+   "date": "2026-10-10"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "def-weil-pbc-module-cohomology-fmap",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "import_flags": []
+}
