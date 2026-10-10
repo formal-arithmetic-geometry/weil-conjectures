@@ -19,9 +19,41 @@
  "stmt_deps": [
   "def-weil-pbc-etale-site"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "For each $m\\in M$, let $W_m$ be the set of points $w\\in W$ for which $m$ lies in the geometric stalk $H_{\\bar w}\\subset M$ (the identification with $M$ is the stalk of the constant sheaf). This condition is independent of the chosen geometric point over $w$. The set $W_m$ is open: if $m$ occurs in a stalk, represent it by a section of $H$ on an etale neighbourhood $V\\to W$ of that point; after refining $V$, its image in the constant sheaf is the constant section $m$. The image of $V\\to W$ is open because an etale morphism is flat and locally of finite presentation, so [lem-weil-pbc-flat-lfp-open] applies. These images, as the representing neighbourhood varies, cover exactly $W_m$.",
+   "uses": [
+    "def-weil-pbc-etale-site",
+    "lem-weil-pbc-flat-lfp-open"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 03RZ, Lemma 59.71.6, proof paragraph under lemma-constructible-abelian"
+   }
+  },
+  {
+   "text": "Let $M'=\\{m\\in M:\\eta\\in W_m\\}=H_{\\bar\\eta}$. Since $W$ is irreducible, every nonempty open contains $\\eta$; hence each $W_m$ is either empty or contains $\\eta$. Therefore $W^\\circ:=\\bigcap_{m\\in M'}W_m$ is a nonempty open (the intersection is finite), and for every $w\\in W^\\circ$ the stalk $H_{\\bar w}$ contains exactly the elements of $M'$: elements of $M'$ lie in all the $W_m$, while elements outside $M'$ have $W_m=\\varnothing$. The inclusions of these stalks define the natural morphism of subsheaves $\\underline{M'}|_{W^\\circ}\\to H|_{W^\\circ}$; it is an isomorphism at every geometric stalk, so it is an isomorphism by [lemma-weil-pbc-geometric-stalk-conservative]. Thus $H|_{W^\\circ}=\\underline{M'}$ inside $\\underline M|_{W^\\circ}$.",
+   "uses": [
+    "lemma-weil-pbc-geometric-stalk-conservative"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 03RY, Proposition 59.74.1(3), proof paragraph under proposition-constructible-over-noetherian"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-etale-site",
+  "lem-weil-pbc-flat-lfp-open",
+  "lemma-weil-pbc-geometric-stalk-conservative"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tags 03RY and 03RZ, proof paragraphs under proposition-constructible-over-noetherian and lemma-constructible-abelian"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -39,8 +71,8 @@
   },
   {
    "tool": "grep",
-   "query": "IsConstant|constant.*sheaf",
-   "results": "0 hits from msearch grep (subdirectory Mathlib/CategoryTheory/Sites)",
+   "query": "IsConstant|constant.*sheaf (Mathlib/CategoryTheory/Sites)",
+   "results": "0 hits from msearch grep",
    "date": "2026-10-11",
    "verdict": "no match"
   },
@@ -50,15 +82,52 @@
    "results": "service unavailable: Internal Server Error",
    "date": "2026-10-11",
    "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "finite subsheaf of constant etale sheaf on irreducible scheme becomes constant generically",
+   "results": "AlgebraicGeometry.StructureSheaf.exists_const; AlgebraicGeometry.StructureSheaf.locally_const_basicOpen; ModuleCat.Tilde.exists_const; no sheaf-subobject or generic-constancy declaration",
+   "date": "2026-10-11",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "subsheaf constant sheaf",
+   "results": "0 hits; unknown identifier `subsheaf`",
+   "date": "2026-10-11",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "constant sheaf|locally constant (Mathlib/CategoryTheory/Sites)",
+   "results": "0 hits from msearch grep",
+   "date": "2026-10-11",
+   "verdict": "no match"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-weil-pbc-constructible-subobjects-noetherian",
   "by": "worker",
   "date": "2026-10-10"
  },
  "chapter": "sec-smooth-purity",
- "unit": "sk-prop-sf-cbc"
+ "unit": "sk-prop-sf-cbc",
+ "split_report": {
+  "date": "2026-10-11",
+  "item": "lem-weil-pbc-constant-subsheaf-generic",
+  "worker": "stage1",
+  "summary": "Checked the item against Stacks Tags 03RZ and 03RY and found no sorry-free slopmaster2 declaration stating generic constancy. The proof now has two complete steps: openness of the loci W_m by representing germs on etale neighbourhoods and applying openness of flat locally finitely presented maps, followed by the finite generic-point intersection and stalkwise identification with the constant subsheaf. No new nodes were needed; existing etale-site, flat-open, and geometric-stalk conservativity statements are cited.",
+  "blueprint": "Realizes the parent blueprint proof paragraphs 'the W_m calculation and generic constancy' in Steps 1-2 of lem-weil-pbc-constructible-subobjects-noetherian.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-csg2744",
+  "group": "G1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-csg2744 (reviewer sub-agent of L); spot-checked: Statement matches citer lem-weil-pbc-constructible-subobjects-noetherian Steps 1-2 (nonempty open W°, H|W° = constant M'; C4 ok). Step 1: W_m open via germ represented on etale nbhd refined to constant section m, open image by lem-weil-pbc-flat-lfp-open (etale = lfp+flat+unramified per def-weil-pbc-scheme-conventions). Step 2: nonempty W_m contain eta, finite intersection over M'=H_eta nonempty open, stalks there exactly M'; M' subset H and equality inside underline M by geometric-stalk conservativity (Lambda-modules as abelian sheaves). Open is only a dense open, honestly stated (E ok). No locally-constant-subsheaf fact (095N) or sections-over-connected fact needed; no new nodes. No fault missed by second reading."
+ }
 }
