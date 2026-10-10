@@ -22,9 +22,63 @@
   "def-pc-scheme",
   "def-pc-derived-category"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "By the perfect-generation theorem, the smallest strictly full subcategory of D_{\\mathrm{QCoh}}(\\mathcal O_X) containing all perfect complexes and closed under shifts, cones, retracts, and arbitrary set-indexed direct sums is all of D_{\\mathrm{QCoh}}(\\mathcal O_X).",
+   "uses": [
+    "lem-pc-derived-qcoh-perfect-generation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived-categories-of-schemes.tex",
+    "place": "Theorem perfect-theorem-bondal-van-den-Bergh"
+   }
+  },
+  {
+   "text": "By lem-pc-perfect-object-compact every perfect complex is compact, and by lem-pc-perfect-complexes-compact-set the perfect complexes have a set of representatives up to isomorphism; choose representatives (E_i)_{i\\in I}. Their coproduct E=\\bigoplus_i E_i exists in D_{\\mathrm{QCoh}}(\\mathcal O_X) by lem-pc-derived-qcoh-direct-sums. To see that E is a generator [def-pc-generators], let K be an object with \\operatorname{Hom}(E,K[n])=0 for all n, and let \\mathcal A be the strictly full subcategory of objects A with \\operatorname{Hom}(A[m],K)=0 for all m\\in\\mathbf Z. Since \\operatorname{Hom}(E,K[n])=\\prod_i\\operatorname{Hom}(E_i,K[n]) by the universal property of the coproduct, every E_i, hence every perfect complex (each is isomorphic to some E_i), lies in \\mathcal A. \\mathcal A is closed under shifts (by definition), retracts (Hom of a retract is a retract of Hom), set-indexed direct sums (\\operatorname{Hom}(\\bigoplus_j A_j[m],K)=\\prod_j\\operatorname{Hom}(A_j[m],K)), and cones: for a distinguished triangle A\\to B\\xrightarrow{v} C\\xrightarrow{d} A[1] with A,B\\in\\mathcal A, a map c:C[m]\\to K satisfies c\\circ v[m]=0 since \\operatorname{Hom}(B[m],K)=0, so by lem-weil-pbc-hom-out-of-triangle-exact (ii) it factors through d[m] via a map A[m+1]\\to K, which is zero. By Step 1, \\mathcal A is all of D_{\\mathrm{QCoh}}(\\mathcal O_X), so K\\in\\mathcal A, \\operatorname{id}_K=0 and K=0. Hence every nonzero K admits n and a nonzero map E\\to K[n]: E is a generator.",
+   "uses": [
+    "lem-pc-perfect-object-compact",
+    "lem-pc-perfect-complexes-compact-set",
+    "lem-pc-derived-qcoh-direct-sums",
+    "lem-weil-pbc-hom-out-of-triangle-exact",
+    "def-pc-generators"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived-categories-of-schemes.tex",
+    "place": "Theorem perfect-theorem-bondal-van-den-Bergh, passage from perfect generation to a set of compact generators"
+   }
+  },
+  {
+   "text": "D_{\\mathrm{QCoh}}(\\mathcal O_X) has arbitrary set-indexed coproducts by lem-pc-derived-qcoh-direct-sums. Applying the definition of compactly generated triangulated category, the set-indexed family (E_i) of compact objects of Step 2, whose coproduct is a generator, makes D_{\\mathrm{QCoh}}(\\mathcal O_X) compactly generated.",
+   "uses": [
+    "lem-pc-derived-qcoh-direct-sums",
+    "def-pc-compactly-generated",
+    "def-pc-compact-object",
+    "def-pc-generators"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 09SQ, Definition definition-compactly-generated"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-derived-qcoh-perfect-generation",
+  "lem-pc-perfect-object-compact",
+  "lem-pc-perfect-complexes-compact-set",
+  "def-pc-generators",
+  "def-pc-compactly-generated",
+  "def-pc-compact-object",
+  "lem-pc-derived-qcoh-direct-sums",
+  "lem-weil-pbc-hom-out-of-triangle-exact"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/derived-categories-of-schemes.tex",
+  "place": "Theorem perfect-theorem-bondal-van-den-Bergh"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -49,12 +103,28 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "chapter": "sec-picard-framework",
  "unit": "sk-thm-picard-duality",
  "created": {
   "item": "lem-pc-noetherian-derived-direct-image-right-adjoint",
   "by": "worker",
   "date": "2026-10-10"
+ },
+ "split_report": {
+  "date": "2026-10-11",
+  "item": "lem-pc-derived-qcoh-compact-generation",
+  "worker": "stage1",
+  "summary": "Split the compact-generation conclusion into the existing perfect-generation theorem, a new statement-only prerequisite that perfect complexes are compact and essentially form a set, and the final application of the compact-generation definition. No Lean declaration states the item.",
+  "blueprint": "Realizes the compact-generation input used in the blueprint ancestor's duality argument: perfect complexes generate, are compact, and admit a set of representatives; the final step applies the compactly-generated definition.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-dcg2024",
+  "group": "C1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-dcg2024 (reviewer sub-agent of L); spot-checked: Read packet; checked step 1 against lem-pc-derived-qcoh-perfect-generation, step 2/3 against def-pc-generators, def-pc-compactly-generated, def-pc-compact-object, lem-pc-perfect-object-compact; searched pc nodes for duplicates of new node (none; not restating lem-pc-compact-generators-build-objects or lem-pc-compact-hom-hocolim); new node is a real lemma, statement-only. FIX more, RETURN less: (1) C1 step 2: 'localizing subcategory = all, hence coproduct is a generator by def-pc-generators' is not stated by the definition; wrote out the orthogonal-class argument (closure under shifts, retracts, sums, cones via lem-weil-pbc-hom-out-of-triangle-exact (ii)) and cited it; (2) C4/E step 2-3: existence of set-indexed coproducts in D_QCoh, required by def-pc-compactly-generated and for the coproduct of the E_i, now cites lem-pc-derived-qcoh-direct-sums; proof_deps updated; (3) new node source place corrected to the set-of-representatives input (Second reading claimed it was corrected but it still named compactness). Second reading missed (1) and (2).; 2 file(s) fixed by the reviewer"
  }
 }

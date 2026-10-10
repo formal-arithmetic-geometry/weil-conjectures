@@ -2425,3 +2425,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 19:42 L: returned deliver/J1/lem-sc-hilbert-polynomial (reviewer RETURN: Return points 2 (stronger induction), 4 (support reduction cited), 5 (typed Euler identity, locnoeth in stmt_deps) of 18)
 - 19:42 L: merged deliver/K1/lem-sc-strict-henselization-regular (reviewer PASS; first push; new nodes: 1)
 - 19:43 L: merged deliver/C1/lem-pc-hilb-separated (reviewer FIX; first push; new nodes: 1)
+- 19:43 L: merged deliver/C1/lem-pc-derived-qcoh-compact-generation (reviewer FIX; first push; new nodes: 1)
