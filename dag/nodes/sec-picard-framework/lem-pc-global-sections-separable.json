@@ -22,39 +22,99 @@
   "def-pc-field-extension",
   "def-weil-pbc-separable-field-extension"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Because $X\\to\\operatorname{Spec}(k)$ is projective by [def-pc-smooth-projective-curve], it is proper by [lem-pc-projective-proper]. Because the same morphism is smooth, [sbc-lem-smooth-geometrically-reduced] gives geometrically reduced fibres; since the base is $\\operatorname{Spec}(k)$, this says that $X$ is geometrically reduced over $k$.",
+   "uses": [
+    "def-pc-smooth-projective-curve",
+    "lem-pc-projective-proper",
+    "sbc-lem-smooth-geometrically-reduced"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Lemma 0BUG, hypotheses and clause (4); smoothness gives geometrically reduced fibres and projectivity gives properness"
+   }
+  },
+  {
+   "text": "Apply [lem-pc-proper-geometrically-reduced-global-sections-separable] to this proper geometrically reduced $X$ and to the assumed field extension $k'=\\Gamma(X,\\mathcal O_X)$ over $k$. Its conclusion is exactly that $k'/k$ is separable.",
+   "uses": [
+    "lem-pc-proper-geometrically-reduced-global-sections-separable",
+    "def-pc-field-extension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Lemma 0BUG, clause (4)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-smooth-projective-curve",
+  "lem-pc-projective-proper",
+  "sbc-lem-smooth-geometrically-reduced",
+  "lem-pc-proper-geometrically-reduced-global-sections-separable",
+  "def-pc-field-extension"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/varieties.tex",
+  "place": "Lemma 0BUG, clause (4) and its hypotheses"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
    "query": "separability of the global sections field of a proper geometrically reduced variety over a field",
    "results": "service unavailable (HTTP 500); no result",
-   "date": "2026-10-10",
+   "date": "2026-10-11",
    "verdict": "no match"
   },
   {
    "tool": "loogle",
    "query": "IsSeparable global sections proper scheme",
    "results": "No declaration combining IsSeparable with global sections; only general field separability lemmas",
-   "date": "2026-10-10",
+   "date": "2026-10-11",
    "verdict": "no match"
   },
   {
    "tool": "grep",
-   "query": "rg -n 'IsSeparable|separable.*global|global.*separable' /home/ubuntu/weil-conjectures-sheaf-F1/../weil-src-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicGeometry",
-   "results": "No global-sections separability theorem; IsSeparable occurrences are unrelated morphism facts",
-   "date": "2026-10-10",
+   "query": "rg -n 'IsSeparable|separable.*global|global.*separable' /home/ubuntu/weil-src-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicGeometry",
+   "results": "No global-sections separability theorem",
+   "date": "2026-10-11",
    "verdict": "no match"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-pc-base-change-closure-components",
   "by": "worker",
   "date": "2026-10-10"
  },
  "chapter": "sec-picard-framework",
- "unit": "sk-thm-picard-rr"
+ "unit": "sk-thm-picard-rr",
+ "split_report": {
+  "date": "2026-10-11",
+  "item": "lem-pc-global-sections-separable",
+  "worker": "stage1",
+  "summary": "Split the assertion into properness and geometric reducedness supplied by projectivity and smoothness, followed by the general proper geometrically reduced global-sections separability clause of Stacks Tag 0BUG. Added one statement-only generalized node because no existing DAG or Lean declaration stated that clause.",
+  "blueprint": "The two steps realize the parent blueprint proof's assertion that the global-sections field k' is separable over k in the (<=) part of lem-pc-ample-positive-degree.",
+  "tool_uses": [
+   {
+    "node": "sbc-lem-smooth-geometrically-reduced",
+    "why": "The item route uses the generic smooth-implies-geometrically-reduced-fibres theorem as a tool to discharge the generalized 0BUG hypothesis; no node in sk-thm-picard-rr states this generic fact."
+   }
+  ]
+ },
+ "tool_uses": [
+  "sbc-lem-smooth-geometrically-reduced"
+ ],
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-gss",
+  "group": "F1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-gss (reviewer sub-agent of L); spot-checked: Source: Stacks 0BUG (varieties-lemma-proper-geometrically-reduced-global-sections), read in varieties.tex: X proper over k; (3) reduced gives A a product of finite field extensions k_i, one per connected component; (4) geometrically reduced gives each k_i finite separable. New node lem-pc-proper-geometrically-reduced-global-sections-separable (X proper, geometrically reduced, A=Gamma(X,O_X) a field over k => A/k separable) is the specialization n=1 of (3)+(4) (A a field forces one factor), true; notions cited by existing nodes (def-weil-proper-morphism, def-pc-geometrically-irreducible which defines geometrically reduced, def-pc-field-extension, def-weil-pbc-separable-field-extension; a finite separable algebraic extension is separably generated with empty transcendence basis). Step 1: def-pc-smooth-projective-curve gives X->Spec k smooth and projective; lem-pc-projective-proper states projective => proper; sbc-lem-smooth-geometrically-reduced states smooth => geometrically reduced fibres, and the fibre over the single point of Spec k is X itself (elementary). Step 2: the new node applied with the item's hypothesis that k' is a field extension; conclusion is the item's. proof_deps = union of uses. Declared tool use sbc-lem-smooth-geometrically-reduced (generic smooth => geometrically reduced fibres, black box) accepted (C8). No Mathlib leaf; searches recorded on both nodes with verdict no match. Small case: X = P^1_k, Gamma = k, trivially separable; X = P^1 over a finite separable extension k'/k viewed over k, Gamma = k' separable, consistent. Start Sat Oct 10 04:13:51 PM UTC 2026, end Sat Oct 10 04:14:21 PM UTC 2026."
+ }
 }
