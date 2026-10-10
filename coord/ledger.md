@@ -2521,3 +2521,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 20:29 L: merged deliver/C1/pqf-lem-incomparability (reviewer FIX; first push; new nodes: 0)
 - 20:29 L: lem-pc-abelian-groups-exact-products promoted to a Mathlib leaf (AB4Star AddCommGrpCat, Grp/AB.lean:98; reviewer R-dlm2309)
 - 20:29 L: merged deliver/H1/def-nagata-finite-type-closed-in-fp (reviewer PASS; first push; new nodes: 0)
+- 20:29 L: merged deliver/G1/pqf-lem-sheaf-zero-stalks (reviewer PASS; first push; new nodes: 0)

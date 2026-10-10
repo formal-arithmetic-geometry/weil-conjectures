@@ -13,24 +13,85 @@
   "place": "node pqf-lem-sheaf-zero-stalks, order 545"
  },
  "stmt_deps": [
-  "pqf-def-coherent"
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-pbc-module-stalk"
  ],
  "proof": [
   {
-   "text": "A local section of $\\mathcal F$ is zero in its stalk at every point,\nhence zero in a neighbourhood of every point, hence zero globally by\nthe sheaf axioms and the definition of the stalks.",
-   "uses": [],
-   "elementary": null
+   "text": "Let $U\\subseteq X$ be open and let $s\\in\\mathcal F(U)$. For each $x\\in U$, the hypothesis gives $s_x=0$ in the stalk $\\mathcal F_x$.",
+   "uses": [
+    "def-weil-pbc-module-stalk"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-abelian-varieties/sk-prop-av-pqf-finite/pqf-lem-sheaf-zero-stalks.md",
+    "place": "## Proof, first sentence"
+   }
+  },
+  {
+   "text": "By the germ equality criterion in the stalk definition, for each $x\\in U$ there is an open neighbourhood $V_x$ with $x\\in V_x\\subseteq U$ such that $s|_{V_x}=0$.",
+   "uses": [
+    "def-weil-pbc-module-stalk"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-abelian-varieties/sk-prop-av-pqf-finite/pqf-lem-sheaf-zero-stalks.md",
+    "place": "## Proof, first sentence"
+   }
+  },
+  {
+   "text": "The opens $V_x$ cover $U$, and the restrictions of $s$ to every member of this cover are zero. The separatedness part of the sheaf axiom for the underlying sheaf of abelian groups therefore gives $s=0$. Since this holds for every open $U$ and every section $s$, $\\mathcal F$ is the zero sheaf.",
+   "uses": [
+    "def-weil-sheaf-of-modules-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-abelian-varieties/sk-prop-av-pqf-finite/pqf-lem-sheaf-zero-stalks.md",
+    "place": "## Proof, second sentence"
+   }
   }
  ],
- "proof_deps": [],
+ "proof_deps": [
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-pbc-module-stalk"
+ ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/master/blueprint/sec-abelian-varieties/sk-prop-av-pqf-finite/pqf-lem-sheaf-zero-stalks.md",
   "place": "## Proof"
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "a sheaf of modules on a scheme with vanishing stalks is zero",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-11",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "a sheaf of modules on a scheme with zero stalk at every point is the zero sheaf",
+   "results": "AlgebraicGeometry.Scheme.zero_of_zero_cover; AlgebraicGeometry.RingedSpace.exists_res_eq_zero_of_germ_eq_zero; no exact module-sheaf conservativity theorem",
+   "date": "2026-10-11",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "TopCat.Sheaf.isZero_iff_stalkFunctor_obj_isZero",
+   "results": "TopCat.Sheaf.isZero_iff_stalkFunctor_obj_isZero (Mathlib.Topology.Sheaves.Abelian)",
+   "date": "2026-10-11",
+   "verdict": "generalization: fixed-category abelian sheaves, not ringed module sheaves"
+  },
+  {
+   "tool": "grep",
+   "query": "isZero_iff_stalkFunctor_obj_isZero|zero if and only if its stalks in Mathlib/Topology/Sheaves",
+   "results": "no matching source text",
+   "date": "2026-10-11",
+   "verdict": "no match"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [],
  "blueprint_kind": "lemma",
@@ -55,5 +116,21 @@
   }
  },
  "chapter": "sec-abelian-varieties",
- "unit": "sk-prop-av-pqf-finite"
+ "unit": "sk-prop-av-pqf-finite",
+ "split_report": {
+  "date": "2026-10-11",
+  "item": "pqf-lem-sheaf-zero-stalks",
+  "worker": "stage1",
+  "summary": "Split the imported one-paragraph proof into the local germ, neighbourhood vanishing, and sheaf-separatedness steps. Removed the unused coherence dependency and cited the existing module-sheaf and module-stalk definitions. No new nodes were needed; the closest Mathlib theorem is for sheaves valued in one fixed abelian category and does not directly state the ringed module version.",
+  "blueprint": "Realizes the blueprint proof sentence 'A local section ... is zero in its stalk at every point, hence zero in a neighbourhood of every point' by steps 1-2, and 'hence zero globally by the sheaf axioms' by step 3.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-szs2316",
+  "group": "G1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-szs2316 (reviewer sub-agent of L); spot-checked: Steps 1-3 checked against def-weil-pbc-module-stalk (germ representation and germ equality criterion, applied with the zero section) and def-weil-sheaf-of-modules-category (underlying abelian sheaf, separatedness); proof complete, no circularity, hypotheses uniform in U, x, s. Dropping pqf-def-coherent from stmt_deps correct (unused), statement unchanged. Mathlib: grep found TopCat.Sheaf.isZero_iff_stalkFunctor_obj_isZero (Mathlib/Topology/Sheaves/Abelian.lean:90), only for Sheaf C X with a fixed coefficient category; a ringed-space O_X-module sheaf needs the forgetful step and zero-reflection, so not a one-line leaf (B8); split kept. No new nodes, no tool_uses. No fault found that the second reading missed."
+ }
 }
