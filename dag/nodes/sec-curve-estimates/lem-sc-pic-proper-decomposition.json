@@ -3,7 +3,7 @@
  "blueprint": {
   "is": "lem-sc-pic-proper-decomposition",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "Structure of the Picard group of a proper curve",
@@ -14,28 +14,95 @@
  },
  "stmt_deps": [
   "def-sc-curves",
-  "def-sc-picard-group"
+  "def-sc-picard-group",
+  "def-sc-pic0"
  ],
  "proof": [
   {
-   "text": "The degree map is surjective: a nonempty proper scheme over $k$\nhas a closed point $P$, whose residue field is finite over $k$,\nhence equal to $k$ (Hilbert's Nullstellensatz: *reference:\nStacks Project, Algebra: the Nullstellensatz*), and $\\mathcal O([P])$ is a class of degree $1$\n([def-sc-pic0]). The short exact sequence of abelian groups\nsplits over the free group $\\mathbf Z$, giving the direct-sum\ndecomposition.",
+   "text": "**The degree is surjective, with an explicit preimage of $1$.** Let $C$ be a proper smooth connected curve over the algebraically closed field $k$ ([def-sc-curves]). By [lem-sc-smooth-connected-curve-local-rings] (2), $C$ has a closed point $P$. Since $C$ is of finite type over $k$ and $k$ is algebraically closed, $k\\to\\kappa(P)$ is an isomorphism by [lem-weil-pbc-closed-point-residue-field-base], so $P$ is a $k$-rational point (this is the place where the blueprint invokes the Nullstellensatz; with the degree $\\deg\\sum n_Q[Q]=\\sum n_Q$ of [def-sc-divisor] it is not even needed, and with the weighted degree $\\sum n_Q[\\kappa(Q):k]$ of the unit sketch it gives the same value). The divisor $[P]\\in\\operatorname{Div}(C)$ has $\\deg[P]=1$ by the definition of the degree of a divisor ([def-sc-divisor]). The degree on $\\operatorname{Pic}(C)$ is, by [def-sc-pic0], the degree of divisors transported along the isomorphism of abelian groups $\\operatorname{Cl}(C)\\xrightarrow{\\sim}\\operatorname{Pic}(C)$, $D\\mapsto[\\mathcal O_C(D)]$ of [lem-sc-divisor-class-curve]; it is well defined because principal divisors have degree $0$ ([lem-sc-deg-principal-zero]), and it is a homomorphism of groups, since $D\\mapsto\\deg D=\\sum n_Q$ is additive on $\\operatorname{Div}(C)$ and the identification with $\\operatorname{Pic}(C)$ is a group isomorphism. Put $\\lambda:=[\\mathcal O_C(P)]\\in\\operatorname{Pic}(C)$. Then $\\deg\\lambda=\\deg[P]=1$, and for $n\\in\\mathbf Z$, $\\deg(\\lambda^{\\otimes n})=\\deg[\\mathcal O_C(nP)]=\\deg(n[P])=n$. Hence $\\deg:\\operatorname{Pic}(C)\\to\\mathbf Z$ is surjective, and $s:\\mathbf Z\\to\\operatorname{Pic}(C)$, $n\\mapsto\\lambda^{\\otimes n}=[\\mathcal O_C(nP)]$, is a group homomorphism with $\\deg\\circ s=\\mathrm{id}_{\\mathbf Z}$. (Any closed point $P$ may be used; citers use this freedom to pick $P$.)",
    "uses": [
-    "def-sc-pic0"
+    "def-sc-curves",
+    "lem-sc-smooth-connected-curve-local-rings",
+    "lem-weil-pbc-closed-point-residue-field-base",
+    "def-sc-divisor",
+    "def-sc-pic0",
+    "lem-sc-divisor-class-curve",
+    "lem-sc-deg-principal-zero",
+    "def-sc-picard-group"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-curve-estimates/sk-def-pic/lem-sc-pic-proper-decomposition.md",
+    "place": "## Proof"
+   }
+  },
+  {
+   "text": "**Exactness and the splitting.** Write the group law of $\\operatorname{Pic}(C)$ additively. By definition $\\operatorname{Pic}^0(C)=\\ker(\\deg)$ ([def-sc-pic0]), so $0\\to\\operatorname{Pic}^0(C)\\hookrightarrow\\operatorname{Pic}(C)\\xrightarrow{\\deg}\\mathbf Z$ is exact (injectivity of the inclusion and exactness in the middle are the definition of a kernel), and step 1 gives exactness at $\\mathbf Z$. With the section $s$ of step 1 define\n$$\\Phi:\\operatorname{Pic}(C)\\to\\mathbf Z\\oplus\\operatorname{Pic}^0(C),\\qquad x\\mapsto\\bigl(\\deg x,\\ x-s(\\deg x)\\bigr),$$\nwhich lands in $\\mathbf Z\\oplus\\operatorname{Pic}^0(C)$ because $\\deg(x-s(\\deg x))=\\deg x-\\deg x=0$, and is a homomorphism because $\\deg$ and $s$ are. Its inverse is $\\Psi(n,y)=s(n)+y$: $\\Psi\\Phi(x)=s(\\deg x)+x-s(\\deg x)=x$, and $\\Phi\\Psi(n,y)=(n+\\deg y,\\ s(n)+y-s(n))=(n,y)$ since $\\deg y=0$. So $\\Phi$ is an isomorphism $\\operatorname{Pic}(C)\\cong\\mathbf Z\\oplus\\operatorname{Pic}^0(C)$ whose first component is $\\deg$ and which restricts to the identity on $\\operatorname{Pic}^0(C)$, i.e. the sequence splits. (This is the elementary fact that a short exact sequence of abelian groups ending in the free group $\\mathbf Z$ splits; in Mathlib it is the $R=\\mathbf Z$ case of `Function.Exact.splitSurjectiveEquiv`, Mathlib/Algebra/Exact/Basic.lean line 381, applied to the section $s$.)",
+   "uses": [
+    "def-sc-pic0",
+    "def-sc-picard-group"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-curve-estimates/sk-def-pic/lem-sc-pic-proper-decomposition.md",
+    "place": "## Proof"
+   }
   }
  ],
  "proof_deps": [
-  "def-sc-pic0"
+  "def-sc-curves",
+  "lem-sc-smooth-connected-curve-local-rings",
+  "lem-weil-pbc-closed-point-residue-field-base",
+  "def-sc-divisor",
+  "def-sc-pic0",
+  "lem-sc-divisor-class-curve",
+  "lem-sc-deg-principal-zero",
+  "def-sc-picard-group"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/master/blueprint/sec-curve-estimates/sk-def-pic/lem-sc-pic-proper-decomposition.md",
-  "place": "## Proof"
+  "place": "## Proof (the blueprint is agent-written; the surjectivity of deg is also the last sentence of the unit sketch sk-def-pic/_section.md, (P2): 'it is surjective because C ... has a closed point p, and over algebraically closed k a closed point has [kappa(p):k]=1')"
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "surjective group homomorphism onto integers splits, group isomorphic to product of kernel and Z",
+   "results": "GroupExtension.Splitting, AddGroupExtension.Splitting (Mathlib.GroupTheory.GroupExtension.Defs), QuotientGroup.quotientKerEquivOfSurjective (Mathlib.GroupTheory.QuotientGroup.Basic), IsZGroup.of_surjective; nothing about Picard groups of curves",
+   "date": "2026-10-10",
+   "verdict": "no match for the item (the algebraic splitting is elementary; see the loogle entry)"
+  },
+  {
+   "tool": "loogle",
+   "query": "Function.Exact, Function.Surjective, _ ≃ₗ[_] _ × _",
+   "results": "Function.Exact.splitInjectiveEquiv, Function.Exact.split_tfae, Function.Exact.split_tfae' (Mathlib.Algebra.Exact.Basic); grep also gives Function.Exact.splitSurjectiveEquiv (Mathlib/Algebra/Exact/Basic.lean:381): a section of g gives N ≃ M × P",
+   "date": "2026-10-10",
+   "verdict": "generalization of step 2 only (R = Z, section n ↦ n·[O(P)]); step 2 is kept elementary"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Picard group of a smooth proper curve is isomorphic to Z times the kernel of the degree map",
+   "results": "WeierstrassCurve.Affine.Point.toClass, toClass_apply, toClass_some, CoordinateRing.mk_XYIdeal'_neg_mul (Mathlib.AlgebraicGeometry.EllipticCurve.Affine.Point), FunctionField.classNumber",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rln 'Picard\\b|picardGroup|CommRing.Pic|def Pic\\b' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib; grep -rn degree RingTheory/PicardGroup.lean",
+   "results": "Mathlib/RingTheory/PicardGroup.lean (Picard group of a commutative ring, no degree, no schemes or curves); EllipticCurve/Weierstrass.lean; ODE Picard-Lindelöf files",
+   "date": "2026-10-10",
+   "verdict": "no match: Mathlib has no Picard group of a scheme and no degree on it"
+  },
+  {
+   "tool": "local_search",
+   "query": "exists_mulEquiv_prod_ker_picDegreeHom (slopmaster2 source, by grep of WeilConjectures for the node id)",
+   "results": "AlgebraicGeometry.Scheme.exists_mulEquiv_prod_ker_picDegreeHom, WeilConjectures/AlgebraicGeometry/Curve/Picard.lean lines 214-246 (not Mathlib)",
+   "date": "2026-10-10",
+   "verdict": "not Mathlib; the source repository's Lean of this node, rests on sorry (see split_report)"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [
   "proof_cites_literature"
@@ -65,5 +132,20 @@
   }
  },
  "chapter": "sec-curve-estimates",
- "unit": "sk-def-pic"
+ "unit": "sk-def-pic",
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "lem-sc-pic-proper-decomposition",
+  "worker": "stage1",
+  "summary": "Rule-0 search: grep of ~/weil-conjectures-slopmaster2/WeilConjectures for the id finds AlgebraicGeometry.Scheme.exists_mulEquiv_prod_ker_picDegreeHom (WeilConjectures/AlgebraicGeometry/Curve/Picard.lean 214-246: for nonempty smooth proper C over algebraically closed k, exists e : C.Pic ≃* Multiplicative ℤ × (picDegreeHom k C).ker with (e L).1 = deg L), which states the item exactly (with connected weakened to nonempty). Its own term has no sorry, but walking the 'd' lists of local/sorry_map_slopmaster2_71d63dcf.jsonl.gz reaches three sorried declarations, all through picDegreeHom._proof_2 (the proof that the cohomological degree χ(L)-χ(O) is a homomorphism): Modules.subsingleton_H_of_topologicalKrullDim_lt (Cohomology/EulerChar 64-73), Modules.finite_sections_higherDirectImage (Cohomology/DirectImage 617-632; node lem-pc-coherent-hi), Modules.exists_addEquiv_sections_higherDirectImage_H (Cohomology/DirectImage 307-324). So the Lean rests on sorry and rule 0 does not finish the node; the item is split. The imported single step was replaced by two: (1) surjectivity of deg with the explicit section n ↦ [O(nP)] for a closed point P (existence of P from lem-sc-smooth-connected-curve-local-rings (2), k-rationality from the Mathlib leaf lem-weil-pbc-closed-point-residue-field-base, deg[P]=1 from def-sc-divisor, deg a homomorphism on Pic via def-sc-pic0 + lem-sc-divisor-class-curve + lem-sc-deg-principal-zero, which the imported step left implicit); (2) the splitting written out (elementary; Mathlib's Function.Exact.splitSurjectiveEquiv is the general form). stmt_deps gains def-sc-pic0 (the statement uses Pic^0 and deg). The 'Nullstellensatz' reference of the blueprint step is realized by the Mathlib leaf; with def-sc-divisor's unweighted degree it is not needed for deg[P]=1. No new node.",
+  "blueprint": "Step 1 realizes the first sentence of the blueprint proof ('The degree map is surjective: a nonempty proper scheme over k has a closed point P, whose residue field is finite over k, hence equal to k (Nullstellensatz), and O([P]) is a class of degree 1 ([def-sc-pic0])') and the statement's parenthesis 'the degree map is surjective since a k-rational point gives a degree-one class'; step 2 realizes the last sentence ('The short exact sequence of abelian groups splits over the free group Z, giving the direct-sum decomposition')."
+ },
+ "lean_candidates": [
+  {
+   "name": "AlgebraicGeometry.Scheme.exists_mulEquiv_prod_ker_picDegreeHom",
+   "module": "WeilConjectures.AlgebraicGeometry.Curve.Picard",
+   "note": "states the node (Pic = Z x ker deg, degree first) but rests on sorry on 71d63dcf through picDegreeHom._proof_2 (subsingleton_H_of_topologicalKrullDim_lt, finite_sections_higherDirectImage, exists_addEquiv_sections_higherDirectImage_H) (L, 2026-10-10)"
+  }
+ ],
+ "reviewed": "2026-10-10 L: 2 steps (a closed point of residue field k gives a section of the degree; exactness and the explicit splitting); 0 new nodes; the exact Lean statement rests on sorry through the cohomological degree, recorded as a candidate"
 }

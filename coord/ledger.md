@@ -1395,3 +1395,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 12:19 L: merged C1 lem-weil-pbc-projective-dimension-ext-characterization (065R, +1 Mathlib leaf).
 - 12:20 L: accepted lem-weil-pbc-hypercover-product (01GI, 4 steps; new nodes: matching object of a fibre product 018D, composition of etale coverings as a Mathlib leaf).
 - 12:20 L: J1 lem-weil-pbc-local-nagata-domain-analytically-unramified NOT merged: blueprint.same_as null (review_split fails); returned to J1, like its limit-module item.
+- 12:23 L: accepted lem-sc-pic-proper-decomposition (2 steps, 0 new; the Lean statement rests on sorry, recorded as a candidate).
