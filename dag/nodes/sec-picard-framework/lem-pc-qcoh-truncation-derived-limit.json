@@ -13,7 +13,7 @@
   },
   "same_as": []
  },
- "statement": "Let $X$ be a scheme [def-pc-scheme] and let $E\\in D_{\\mathrm{QCoh}}(\\mathcal O_X)$ [def-pc-derived-category]. For $n\\geq0$ put $E_n=\\tau_{\\geq-n}E$ using the standard truncation [def-sbc-standard-tstructure-derived-category]. Then the canonical map $E\\to R\\varprojlim_nE_n$ is an isomorphism in the derived category, where $R\\varprojlim$ is the derived inverse limit [def-weil-derived-limit]. If $F:\\operatorname{Mod}(\\mathcal O_X)\\to\\operatorname{Ab}$ is additive, commutes with countable products, and has a right derived functor $RF$ [def-sp-left-exact-additive], then the induced map $RF(E)\\to R\\varprojlim_nRF(E_n)$ is an isomorphism.",
+ "statement": "Let $X$ be a scheme [def-pc-scheme] and let $E\\in D_{\\mathrm{QCoh}}(\\mathcal O_X)$ [def-pc-derived-category]. For $n\\geq0$ put $E_n=\\tau_{\\geq-n}E$ using the standard truncation [def-sbc-standard-tstructure-derived-category]. Then the canonical map $E\\to R\\varprojlim_nE_n$ is an isomorphism in $D(\\mathcal O_X)$, where $R\\varprojlim$ is the derived inverse limit [def-weil-derived-limit] taken in $D(\\mathcal O_X)$ (the product $\\prod_nE_n$ being the product in $D(\\mathcal O_X)$, not in $D_{\\mathrm{QCoh}}(\\mathcal O_X)$; cf. Stacks Tag 08D5). If $F:\\operatorname{Mod}(\\mathcal O_X)\\to\\operatorname{Ab}$ is additive, commutes with countable products, and has a right derived functor $RF$ [def-sp-left-exact-additive], then the induced map $RF(E)\\to R\\varprojlim_nRF(E_n)$ is an isomorphism.",
  "source": {
   "document": "literature/stacks-project/perfect.tex",
   "place": "Tag 08D4 (lemma-nice-K-injective, proof) and Tag 08D4 proof of part (2), first paragraph; Tags 08D3 and 08D1"
@@ -25,8 +25,57 @@
   "def-weil-derived-limit",
   "def-sp-left-exact-additive"
  ],
- "proof": [],
- "proof_deps": [],
+ "proof": [
+  {
+   "text": "Let $\\mathcal B$ be the set of affine open subschemes of $X$; it is a basis of the topology. Each cohomology sheaf $H^q(E)$ is quasi-coherent because $E\\in D_{\\mathrm{QCoh}}(\\mathcal O_X)$ [def-pc-derived-category], so affine vanishing [pqf-lem-affine-vanishing] gives $H^p(U,H^q(E))=0$ for all $U\\in\\mathcal B$, all $p>0$ and all $q$. This is the hypothesis, with $d=0$, of the ringed-space truncation-tower lemma [lem-pc-ringed-space-truncation-derived-limit], which states that the canonical map $E\\to R\\varprojlim_nE_n$, $E_n=\\tau_{\\geq-n}E$ [def-sbc-standard-tstructure-derived-category], is an isomorphism in $D(\\mathcal O_X)$, the derived limit [def-weil-derived-limit] being taken in $D(\\mathcal O_X)$. (This is the proof of Stacks Tag 08D3.)",
+   "uses": [
+    "def-pc-derived-category",
+    "pqf-lem-affine-vanishing",
+    "lem-pc-ringed-space-truncation-derived-limit",
+    "def-sbc-standard-tstructure-derived-category",
+    "def-weil-derived-limit"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/perfect.tex",
+    "place": "Tag 08D3 (lemma-nice-K-injective), proof: Tags 01XB and 0D64"
+   }
+  },
+  {
+   "text": "Apply the product-preserving derived-functor comparison [lem-pc-derived-functor-commutes-derived-limit] to the truncation tower (E_n), using Step 1's derived-limit identification E\\simeq R\\varprojlim_nE_n in D(\\mathcal O_X). It gives the canonical map RF(E)\\to R\\varprojlim_nRF(E_n) as an isomorphism. The cited comparison is Stacks Tag 08U1 (Injectives, lemma-RF-commutes-with-Rlim), whose hypotheses are exactly additivity, countable-product preservation, and existence of the right derived functor in the present scheme/module setting (Mod(\\mathcal O_X) is a Grothendieck abelian category and Ab has exact countable products; products are taken in D(\\mathcal O_X) and D(\\mathrm{Ab})).",
+   "uses": [
+    "lem-pc-derived-functor-commutes-derived-limit"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/injectives.tex",
+    "place": "Tag 08U1, label lemma-RF-commutes-with-Rlim"
+   }
+  },
+  {
+   "text": "The constructions are natural in E and in morphisms of towers: the truncation maps, the Roos projections, and the derived-functor comparison maps are all induced by the corresponding universal maps. Hence the two displayed isomorphisms are the canonical ones claimed in the statement.",
+   "uses": [
+    "def-sbc-standard-tstructure-derived-category",
+    "def-weil-derived-limit",
+    "def-sp-left-exact-additive",
+    "lem-pc-derived-functor-commutes-derived-limit"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/perfect.tex",
+    "place": "Tag 08D4 proof of part (2), naturality of the comparison"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sbc-standard-tstructure-derived-category",
+  "def-weil-derived-limit",
+  "def-sp-left-exact-additive",
+  "lem-pc-derived-functor-commutes-derived-limit",
+  "def-pc-derived-category",
+  "pqf-lem-affine-vanishing",
+  "lem-pc-ringed-space-truncation-derived-limit"
+ ],
  "proof_origin": {
   "by": "document",
   "document": "literature/stacks-project/perfect.tex",
@@ -35,20 +84,51 @@
  "mathlib_searches": [
   {
    "tool": "leanfinder",
-   "query": "derived inverse limit truncation scheme quasi coherent complex",
-   "results": "generic limit and truncation declarations only; no derived-limit truncation theorem",
+   "query": "derived inverse limit of truncation tower quasi coherent complex",
+   "results": "CochainComplex.instQuasiIsoIntπTruncGEOfIsGE; CochainComplex.quasiIso_πTruncGE_iff; CochainComplex.instQuasiIsoIntιTruncLEOfIsLE; HomologicalComplex.quasiIsoAt_πTruncGE; CochainComplex.quasiIso_ιTruncLE_iff; HomologicalComplex.quasiIso_πTruncGE_iff_isSupported; HomologicalComplex.instQuasiIsoAtπTruncGEF; CochainComplex.quasiIso_truncLEMap_iff (generic truncation only)",
+   "date": "2026-10-11",
    "verdict": "no match"
   },
   {
    "tool": "loogle",
-   "query": "CategoryTheory.Functor",
-   "results": "generic functor declarations only; no derived-limit theorem",
+   "query": "CategoryTheory.DerivedCategory, R lim, truncation",
+   "results": "0 hits; unknown identifier CategoryTheory.DerivedCategory",
+   "date": "2026-10-11",
    "verdict": "no match"
   },
   {
    "tool": "grep",
-   "query": "Rlim Milnor derived inverse limit cohomology Mathlib",
+   "query": "derived.*limit|truncation Mathlib/Algebra/Homology/DerivedCategory",
    "results": "no hits",
+   "date": "2026-10-11",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "truncation tower reconstructs an unbounded derived category object by derived inverse limit",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-11",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "derived limit of standard truncations in derived category",
+   "results": "HomologicalComplex.truncGE'.isLimitKernelFork; DerivedCategory.Q; HasDerivedCategory.standard; HasDerivedCategory; CategoryTheory.Functor.leftDerived; DerivedCategory; DerivedCategory.exists_iso_Q_obj_of_isGE; CategoryTheory.Functor.rightDerived (generic only)",
+   "date": "2026-10-11",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Limits.limit, HomologicalComplex.truncGE",
+   "results": "0 hits",
+   "date": "2026-10-11",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "R\\s*lim|derived.*inverse|truncGE Mathlib/Algebra/Homology",
+   "results": "no hits",
+   "date": "2026-10-11",
    "verdict": "no match"
   }
  ],
@@ -58,5 +138,23 @@
   "by": "worker",
   "date": "2026-10-10"
  },
- "status": "unsplit"
+ "status": "split",
+ "split_report": {
+  "date": "2026-10-11",
+  "item": "lem-pc-qcoh-truncation-derived-limit",
+  "worker": "stage1",
+  "summary": "Split the item into the standard truncation-tower reconstruction, the compatibility of a product-preserving right derived functor with the Roos derived limit, and naturality of the resulting maps. No new nodes were created because the only possible children would restate the two clauses of the item.",
+  "blueprint": "The steps realize the first-step truncation-tower argument of blueprint ancestor lem-sc-finite-duality, before applying the derived functor."
+ },
+ "tool_uses": [
+  "pqf-lem-affine-vanishing"
+ ],
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-qtd2213",
+  "group": "J1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-qtd2213 (reviewer sub-agent of L); spot-checked: Read packet; Stacks 08D3/08D4/08U1/0D64 text; searched DAG for existing 08D3/0D64/08U1 nodes (none) and the Milnor/ML nodes (not restated; ML step lives in lem-pc-unbounded-derived-functor-cohomological-bound, not here). FIX more, RETURN less: (1) C1/D2 Step 1 proved clause 1 by invoking 'the truncation-tower theorem of Tag 08D3', which is the item's own first clause, with only definitions cited (degreewise eventual constancy does not suffice for unbounded E); replaced by the 08D3 proof: affine vanishing [pqf-lem-affine-vanishing, generic tool from another unit, tool_uses] on the affine basis plus a new statement-only node lem-pc-ringed-space-truncation-derived-limit (Stacks 0D64, d=0, specialized to schemes; grep search recorded). (2) C4/E7 the derived limit and its product were said to live in D_QCoh(O_X), where countable products need not agree with those of D(O_X) (08D5); statement and Steps 1-2 now say R lim is taken in D(O_X) (statement change named here: 'in the derived category' -> 'in D(O_X)', reason C4). (3) C4 new node lem-pc-derived-functor-commutes-derived-limit: made explicit that RF of a Roos triangle in D(O_X) is a Roos triangle in D(Ab) (Mod(O_X) Grothendieck, Ab exact products, per 08U1). Second reading by J1 missed (1) and (2).; 3 file(s) fixed by the reviewer; 1 statement node(s) added by the reviewer (FIX more, RETURN less)"
+ }
 }
