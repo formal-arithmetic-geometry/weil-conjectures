@@ -1,8 +1,8 @@
 # Work queue
 
-909 items; claim with `tools/claim.py next <group> [--stage N]`.
+908 items; claim with `tools/claim.py next <group> [--stage N]`.
 
-## Stage 1: nodes to split (172)
+## Stage 1: nodes to split (171)
 
 | node | distance to a target | Lean state on the done branch |
 |---|---|---|
@@ -61,7 +61,6 @@
 | `lem-sp-filtered-homotopy-spectral-sequence` | 6006 | none |
 | `thm-sp-spectral-object-yields` | 6006 | none |
 | `lem-sc-general-theorem-of-cube` | 6011 | none |
-| `lem-pc-twist-cech-monomial-decomposition` | 6012 | none |
 | `pqf-lem-finite-type-algebra-finite-spectrum` | 6013 | none |
 | `pqf-lem-serre-criterion` | 6013 | none |
 | `sbc-lem-higher-direct-image-presheaf` | - | none |
@@ -921,7 +920,7 @@
 | `lem-weil-pbc-projective-space-zero-isomorphism` | 4 | state |
 | `def-nagata-fixed-base-separated-stage` | 6 | state |
 
-Not open yet: 1483 nodes that wait for a statement dependency, 212 nodes that wait for stage 1.
+Not open yet: 1484 nodes that wait for a statement dependency, 211 nodes that wait for stage 1.
 
 ## Stage 3: modules to prove (0)
 
