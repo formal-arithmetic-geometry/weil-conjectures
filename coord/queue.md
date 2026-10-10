@@ -1,8 +1,8 @@
 # Work queue
 
-908 items; claim with `tools/claim.py next <group> [--stage N]`.
+905 items; claim with `tools/claim.py next <group> [--stage N]`.
 
-## Stage 1: nodes to split (171)
+## Stage 1: nodes to split (167)
 
 | node | distance to a target | Lean state on the done branch |
 |---|---|---|
@@ -15,7 +15,6 @@
 | `lem-pc-proper-direct-image-finite-tor` | 3014 | none |
 | `lem-pc-pseudo-coherent-finite-tor-perfect` | 3014 | none |
 | `lem-pc-derived-lower-truncation-step-ses` | 3015 | none |
-| `lem-pc-ringed-space-derived-products` | 3015 | none |
 | `lem-pc-ringed-space-pointwise-truncation-limit` | 3015 | none |
 | `lem-pc-tower-abelian` | 3015 | none |
 | `lem-pc-tower-enough-injectives` | 3015 | none |
@@ -41,10 +40,9 @@
 | `lem-sc-intersection-effective-cartier` | 4010 | none |
 | `lem-sc-etale-faithfully-flat-local` | 4011 | none |
 | `lem-sc-numerical-polynomial-leading-term` | 4011 | none |
-| `lem-sc-strict-henselization-completion-flat` | 4011 | none |
 | `lem-pc-affine-containment-ideal` | 4012 | none |
+| `lem-sc-etale-triple-to-sh-completion-flat` | 4012 | none |
 | `lem-sc-hilbert-affine-denominator-module` | 5011 | none |
-| `lem-sc-hilbert-denominator-ideal-nowhere-dense` | 5011 | none |
 | `lem-sc-hilbert-embedded-points-affine-localization` | 5011 | none |
 | `lem-sc-hilbert-embedded-points-affine-removal` | 5011 | none |
 | `lem-sc-hilbert-embedded-points-gluing` | 5011 | none |
@@ -65,8 +63,6 @@
 | `pqf-lem-serre-criterion` | 6013 | none |
 | `sbc-lem-higher-direct-image-presheaf` | - | none |
 | `thm-pqf-zmt-factorization` | - | none |
-| `def-weil-pbc-C1` | - | none |
-| `def-weil-pbc-C5` | - | none |
 | `lem-pur-sheaf-hom-is-sheaf` | - | none |
 | `lem-weil-pbc-finite-pushforward-generic-constructible` | - | none |
 | `pqf-def-quasifinite` | - | none |
@@ -178,7 +174,7 @@
 | `lem-pur-rhom-well-defined` | - | none |
 | `lem-zl-noether-normalization-dimension` | - | none |
 
-## Stage 2: nodes to state (737)
+## Stage 2: nodes to state (738)
 
 | node | distance to Mathlib | kind |
 |---|---|---|
@@ -359,6 +355,7 @@
 | `lem-sc-going-down-surjective-dimension` | 1 | state |
 | `lem-sc-graded-localization-exact` | 1 | state |
 | `lem-sc-graded-prime-avoidance` | 1 | state |
+| `lem-sc-hilbert-denominator-ideal-nowhere-dense` | 1 | state |
 | `lem-sc-integral-closure-dedekind-surjective-fibres` | 1 | state |
 | `lem-sc-integral-locally-algebraic-affine-opens-dimension` | 1 | state |
 | `lem-sc-integral-overring-jacobson-power` | 1 | state |
@@ -920,7 +917,7 @@
 | `lem-weil-pbc-projective-space-zero-isomorphism` | 4 | state |
 | `def-nagata-fixed-base-separated-stage` | 6 | state |
 
-Not open yet: 1484 nodes that wait for a statement dependency, 211 nodes that wait for stage 1.
+Not open yet: 1488 nodes that wait for a statement dependency, 207 nodes that wait for stage 1.
 
 ## Stage 3: modules to prove (0)
 
