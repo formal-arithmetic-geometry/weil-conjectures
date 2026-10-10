@@ -21,9 +21,41 @@
  "stmt_deps": [
   "def-sp-injective-resolutions"
  ],
- "proof": [],
+ "proof": [
+  {
+   "text": "The functor $v$ is fully faithful because a morphism in $\\mathcal D_{R,G}$ is, by definition, exactly an $R$-linear map commuting with the $G$-action, hence exactly an $R[G]$-linear map between the underlying modules. Let $f:N\\to N'$ be a monomorphism of $\\mathcal D_{R,G}$ and $K$ the kernel of the underlying $R$-linear map. $K$ is an $R$-submodule of $N$, $G$-stable because $f$ is equivariant, and each of its elements has open stabilizer as an element of $N$; so $K$ with the restricted action is an object of $\\mathcal D_{R,G}$ and the inclusion $i:K\\to N$ is a morphism of $\\mathcal D_{R,G}$. Then $f \\circ i = 0 = f \\circ 0$, so $i = 0$ and $K = 0$: the underlying map of $f$ is injective. An injective $R[G]$-linear map is a monomorphism of $\\mathcal M_{R[G]}$ (if $v(f) \\circ a = v(f) \\circ b$ then $v(f) \\circ (a-b) = 0$, so $a = b$), hence $v(f)$ is a monomorphism.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/injectives.tex",
+    "place": "Tag 04JF, proof of lemma-G-modules, definition of v"
+   }
+  },
+  {
+   "text": "For an $R[G]$-module $M$, the set $u(M)=\\{x\\in M\\mid \\operatorname{Stab}_G(x)\\text{ is open}\\}$ is an $R$-submodule: the stabilizer of $x+y$ contains the intersection of the stabilizers of $x$ and $y$, and the stabilizer of $r x$ contains the stabilizer of $x$ because the action is $R$-linear. It is $G$-stable since $\\operatorname{Stab}_G(gx)=g\\operatorname{Stab}_G(x)g^{-1}$, so it inherits an $R[G]$-action and is an object of $\\mathcal D_{R,G}$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/injectives.tex",
+    "place": "Tag 04JF, proof of lemma-G-modules, verification that u(M) is the open-stabilizer submodule"
+   }
+  },
+  {
+   "text": "For every $N\\in\\mathcal D_{R,G}$ and $M\\in\\mathcal M_{R[G]}$, an $R[G]$-linear map $vN\\to M$ has image in $u(M)$, since each element of $N$ has open stabilizer and equivariance carries that stabilizer into the stabilizer of its image. Thus restriction and inclusion give mutually inverse, natural bijections $\\operatorname{Hom}_{R[G]}(vN,M)\\cong\\operatorname{Hom}_{\\mathcal D_{R,G}}(N,uM)$. These bijections exhibit $u$ as the right adjoint of $v$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/injectives.tex",
+    "place": "Tag 04JF, proof of lemma-G-modules, construction of the adjunction v \\dashv u"
+   }
+  }
+ ],
  "proof_deps": [],
- "proof_origin": null,
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/injectives.tex",
+  "place": "Tag 04JF, proof of lemma-G-modules"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -48,12 +80,41 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-exc-rg-discrete-modules-functorial-injective-embeddings",
   "by": "worker",
   "date": "2026-10-10"
  },
  "chapter": "sec-curve-estimates",
- "unit": "sk-prop-h2"
+ "unit": "sk-prop-h2",
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "lem-exc-rg-open-stabilizer-adjoint",
+  "worker": "stage1",
+  "summary": "Split the Tag 04JF adjunction into the direct verification that the forgetful functor is fully faithful and monomorphism-preserving, the closure and induced action of the open-stabilizer submodule, and the natural Hom-set bijection proving the right adjunction. No child nodes were needed because all three arguments are elementary from the category definitions.",
+  "blueprint": "Realizes the def-exc-continuous-cohomology descendant clause stating that Tag 04JF identifies the right adjoint of the forgetful functor with the open-stabilizer submodule.",
+  "tool_uses": [
+   {
+    "node": "def-sp-injective-resolutions",
+    "why": "The item's final sentence fixes the meaning of injective objects, a generic notion outside this unit's adjunction route."
+   }
+  ],
+  "blueprint_steps": [
+   "the fully faithful, monomorphism-preserving forgetful functor",
+   "the open-stabilizer submodule and induced action",
+   "the natural Hom-set bijection giving the right adjoint"
+  ]
+ },
+ "tool_uses": [
+  "def-sp-injective-resolutions"
+ ],
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-os2",
+  "group": "F1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-os2 (reviewer sub-agent of L); spot-checked: Repaired re-push after the 15:34 return (one point, E3/C2 step 1 monomorphism clause): step 1 now carries the kernel argument verbatim as the return entry wrote it (kernel K of the underlying map is a G-stable R-submodule with open stabilizers, hence an object of D_{R,G}; f o i = f o 0 forces i = 0, K = 0; injective R[G]-map is monic via a-b), uses [] elementary true; nothing else changed; the report's WANTED about injectives.tex is gone and the review says the proof was read there. Source re-read: Stacks 04JF, injectives.tex label lemma-G-modules lines 409-430: v fully faithful, transforms injective maps into injective maps, right adjoint u(M) = open-stabilizer elements; the statement agrees hypothesis by hypothesis (topological group G, ring R, Mod_{R,G}, Mod_{R[G]}). Step 2 (submodule: Stab(x+y) contains Stab(x) cap Stab(y), Stab(rx) contains Stab(x) by R-linearity of the action; G-stable as Stab(gx) = g Stab(x) g^{-1} open, conjugation a homeomorphism) and step 3 (an equivariant map carries Stab(n) into Stab(f(n)), so vN -> M lands in u(M); restriction/inclusion natural bijection) checked elementary. Only the item's fields changed (proof, proof_deps, proof_origin, status, split_report). Tool use def-sp-injective-resolutions (generic definition of injective objects, statement-only reference) accepted as C8 generic tool. Small cases: trivial G (u = id), discrete G (every stabilizer open, u = id), zero module. Start Sat Oct 10 03:45:27 PM UTC 2026, end Sat Oct 10 03:45:44 PM UTC 2026"
+ }
 }

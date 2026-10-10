@@ -1852,3 +1852,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 15:44 L: merged deliver/K1/lem-sc-coherent-free-stalks-locally-free (reviewer FIX; first push; new nodes: 1)
 - 15:44 L: merged deliver/K1/lem-sc-reduced-ideals-zero-intersection (reviewer PASS; first push; new nodes: 0)
 - 15:45 L: returned deliver/J1/lem-sc-finite-flat-duality-evaluation (reviewer RETURN: 1. D1: lem-sc-finite-flat-duality-evaluation, both steps: the split is a relabelling. lem-sc-finite-flat-upper-shriek-ho)
+- 15:45 L: merged deliver/F1/lem-exc-rg-open-stabilizer-adjoint (reviewer PASS; after a return; new nodes: 0)
