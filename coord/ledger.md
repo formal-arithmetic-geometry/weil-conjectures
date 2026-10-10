@@ -1652,3 +1652,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 14:44 L: merged deliver/M1/lem-weil-pbc-property-implies-acyclicity (reviewer FIX; first push; new nodes: 0)
 - 14:45 L: merged deliver/C1/lem-pc-very-ample-ample (reviewer PASS; first push; new nodes: 1)
 - 14:45 L: returned deliver/C1/lem-sc-brauer-zero-all-curves (reviewer RETURN: 1. C1: proof steps 2 and 4 (Step 1 and Step 2): the fact 'a scheme etale over a reduced scheme is reduced' is used twice)
+- 14:45 L: returned deliver/H1/lem-weil-pbc-sets-pushforward-stalk-strict-henselization (reviewer RETURN: Reviewed head e0513848c (reviewer R-ps2). Repaired from the 14:32 return: the duplicate node is deleted and the proof is)
