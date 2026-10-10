@@ -11,6 +11,7 @@ public import WeilConjectures.WeilSheaf.Defs
 public import WeilConjectures.WeilSheaf.HomologySequence
 public import WeilConjectures.WeilSheaf.LowerShriekPackage
 public import WeilConjectures.WeilSheaf.StalkFunctor
+public import WeilConjectures.DeligneLaumon.AffineLine.TraceEnergy
 public import WeilConjectures.WeilSheaf.Tensor
 
 /-!
@@ -206,6 +207,26 @@ theorem IsMixedOfWeightsAtMost.of_exact {S : ShortComplex (WeilSheaf k₀ l X)} 
     (h₃.of_mono (Abelian.factorThruCoimage S.g))
 
 -- TODO(adic): needs exactness of the stalk functor and closed points in the support
+/-- A subobject of a Weil sheaf with weights at most `w` has weights at most `w`: its stalks are
+Frobenius-stable subspaces. -/
+theorem HasWeightsAtMost.of_mono {G : WeilSheaf k₀ l X} (f : G ⟶ F) [Mono f]
+    (h : F.HasWeightsAtMost ι w) : G.HasWeightsAtMost ι w := fun x α hα ↦
+  h x α (FrobeniusModule.hasEigenvalue_of_injective _ (stalkAtMap_frobenius _ _ _ f)
+    (injective_stalkAtMap _ _ _ f) hα)
+
+open scoped AlgebraicGeometry.ProEtale in
+omit [LocallyOfFiniteType (X ↘ Spec (CommRingCat.of k₀))] in
+/-- A zero Weil sheaf is punctually pure of every weight: its stalks vanish. -/
+theorem isPunctuallyPureOfWeight_of_isZero (hF : IsZero F) (w : ℝ) :
+    F.IsPunctuallyPureOfWeight ι w := fun x α hα ↦ by
+  have hz (s) : IsZero ((WeilCoefficients.toModuleCat l).obj (F.stalkObj s)) :=
+    (WeilCoefficients.toModuleCat l).map_isZero ((Sheaf.Γ _ _).map_isZero
+      ((s)^*[WeilCoefficients.{u} l].map_isZero
+        ((ProEtale.AdicSheaf.forget _).map_isZero (isZero_iff_isZero_carrier.mp hF))))
+  have : Subsingleton (F.stalk x).carrier := ModuleCat.subsingleton_of_isZero (hz _)
+  obtain ⟨y, hy⟩ := hα.exists_hasEigenvector
+  exact absurd (Subsingleton.elim y 0) hy.2
+
 /-- **Punctual cutoff for an already mixed sheaf.** Let `G` be a constructible Weil sheaf on a
 separated `k₀`-scheme of finite type, mixed of weights at most some `u`. If every eigenvalue
 `α` of the local Frobenius of `G` at every closed point `y` satisfies `|ι α| ≤ q_y ^ (v / 2)`,
@@ -216,10 +237,75 @@ theorem IsMixedOfWeightsAtMost.of_hasWeightsAtMost
     [IsSeparated (X ↘ Spec (CommRingCat.of k₀))]
     [QuasiCompact (X ↘ Spec (CommRingCat.of k₀))] {u v : ℝ}
     (h : F.IsMixedOfWeightsAtMost ι u) (hv : F.HasWeightsAtMost ι v) :
-    F.IsMixedOfWeightsAtMost ι v :=
-  sorry
+    F.IsMixedOfWeightsAtMost ι v := by
+  rw [isMixedOfWeightsAtMost_iff_filtrationClosure] at h ⊢
+  induction h with
+  | of_isZero hX => exact .of_isZero hX
+  | of_mono i _ hi ih =>
+    refine .of_mono i (ih (hv.of_mono i)) ?_
+    obtain ⟨v', -, hpure⟩ := hi
+    have hQ := hv.of_epi (cokernel.π i)
+    by_cases hz : IsZero (cokernel i)
+    · exact ⟨v, le_rfl, isPunctuallyPureOfWeight_of_isZero hz v⟩
+    obtain ⟨x, hx⟩ := exists_nontrivial_stalk_of_not_isZero _ hz
+    refine ⟨v', ?_, hpure⟩
+    obtain ⟨α, hα⟩ := Module.End.exists_eigenvalue ((cokernel i).stalk x).frobeniusEnd
+    have h₁ := hpure x α hα
+    have h₂ := hQ x α hα
+    rw [h₁] at h₂
+    have hq : 1 < ((X ↘ Spec (CommRingCat.of k₀)).residueCard x.1 : ℝ) := by
+      have hk : 1 < Nat.card k₀ := Finite.one_lt_card
+      have hd := (X ↘ Spec (CommRingCat.of k₀)).degreeOver_ne_zero x.2
+      exact_mod_cast Nat.one_lt_pow hd hk
+    have := (Real.rpow_le_rpow_left_iff hq).1 h₂
+    linarith
 
--- TODO(adic): needs the constant twist as an exact functor and its effect on stalks
+omit [LocallyOfFiniteType (X ↘ Spec (CommRingCat.of k₀))] in
+/-- The constant twist of Weil sheaves by a unit `b ∈ ℚ̄_ℓˣ`, as a functor: the transport of
+pro-étale Weil sheaves along the identity, with the Weil structure multiplied by `b`. -/
+noncomputable def constantTwistFunctor (b : (PadicAlgCl l)ˣ) :
+    WeilSheaf k₀ l X ⥤ WeilSheaf k₀ l X :=
+  (WeilSheaf.objectProperty k₀ l X).liftFullSubcategory (WeilSheaf.objectProperty k₀ l X)
+    (Endofunctor.IsoAlgebra.mapOfNatIso (Functor.leftUnitor _ ≪≫ (Functor.rightUnitor _).symm ≪≫
+      Functor.isoWhiskerLeft (frobeniusPullback k₀ l X)
+        (NatIso.ofComponents (fun M ↦ WeilCoefficients.smulIso b M)
+          (fun f ↦ (ProEtale.AdicSheaf.smul_comp _ f).symm))))
+    fun _ h ↦ h
+
+omit [LocallyOfFiniteType (X ↘ Spec (CommRingCat.of k₀))] in
+/-- The constant twist functor computes the constant twist. -/
+noncomputable def constantTwistIso (F : WeilSheaf k₀ l X) (b : (PadicAlgCl l)ˣ) :
+    F.constantTwist b ≅ (constantTwistFunctor b).obj F :=
+  ObjectProperty.isoMk _ (ObjectProperty.isoMk _ (Endofunctor.Algebra.isoMk (Iso.refl _) (by
+    change (frobeniusPullback k₀ l X).map (𝟙 _) ≫ (𝟙 _ ≫ 𝟙 _ ≫
+        (WeilCoefficients.smulIso b _).hom) ≫ F.obj.str.hom =
+      (F.obj.str.hom ≫ (WeilCoefficients.smulIso b F.obj.carrier).hom) ≫ 𝟙 _
+    rw [CategoryTheory.Functor.map_id, Category.comp_id, Category.id_comp, Category.id_comp,
+      Category.id_comp]
+    exact ProEtale.AdicSheaf.smul_comp _ _)))
+
+instance (b : (PadicAlgCl l)ˣ) : PreservesFiniteLimits (constantTwistFunctor (k₀ := k₀) (l := l)
+    (X := X) b) := by
+  have : PreservesFiniteLimits (constantTwistFunctor (k₀ := k₀) (l := l) (X := X) b ⋙
+      (WeilSheaf.objectProperty k₀ l X).ι) :=
+    preservesFiniteLimits_of_natIso
+      ((WeilSheaf.objectProperty k₀ l X).liftFullSubcategoryCompιIso _ _ _).symm
+  have : ReflectsFiniteLimits (WeilSheaf.objectProperty k₀ l X).ι := ⟨fun _ _ _ ↦ inferInstance⟩
+  exact preservesFiniteLimits_of_reflects_of_preserves _ (WeilSheaf.objectProperty k₀ l X).ι
+
+instance (b : (PadicAlgCl l)ˣ) : PreservesFiniteColimits (constantTwistFunctor (k₀ := k₀)
+    (l := l) (X := X) b) := by
+  have : PreservesFiniteColimits (constantTwistFunctor (k₀ := k₀) (l := l) (X := X) b ⋙
+      (WeilSheaf.objectProperty k₀ l X).ι) :=
+    preservesFiniteColimits_of_natIso
+      ((WeilSheaf.objectProperty k₀ l X).liftFullSubcategoryCompιIso _ _ _).symm
+  have : ReflectsFiniteColimits (WeilSheaf.objectProperty k₀ l X).ι := {}
+  exact preservesFiniteColimits_of_reflects_of_preserves _ (WeilSheaf.objectProperty k₀ l X).ι
+
+instance (b : (PadicAlgCl l)ˣ) :
+    (constantTwistFunctor (k₀ := k₀) (l := l) (X := X) b).Additive :=
+  ObjectProperty.liftFullSubcategory_additive _ _ _ _
+
 /-- The constant twist `G ⊗ 𝓑_b` of a sheaf mixed of weights at most `v` is mixed of weights at
 most `v + c`, where `2 log_q |ι b| = c`: tensoring a mixed filtration with the rank-one sheaf
 `𝓑_b` is exact, and it multiplies the eigenvalues at a closed point of degree `m` by `bᵐ`, so it
@@ -227,7 +313,11 @@ raises every punctual weight by `c` (blueprint: `lem-zl-relative-curve-mixedness
 theorem IsMixedOfWeightsAtMost.constantTwist (h : F.IsMixedOfWeightsAtMost ι w)
     {b : (PadicAlgCl l)ˣ} {c : ℝ} (hb : 2 * Real.logb (Nat.card k₀) ‖ι b‖ = c) :
     (F.constantTwist b).IsMixedOfWeightsAtMost ι (w + c) :=
-  sorry
+  by
+  rw [isMixedOfWeightsAtMost_iff_filtrationClosure] at h ⊢
+  refine ObjectProperty.prop_of_iso _ (constantTwistIso F b).symm
+    (ObjectProperty.filtrationClosure_map (constantTwistFunctor b) (fun G ⟨v, hv, hG⟩ ↦
+      ⟨v + c, by linarith, (hG.constantTwist hb).of_epi (constantTwistIso G b).hom⟩) h)
 
 /-- A sheaf with a finite filtration `0 = G 0 ↪ G 1 ↪ ⋯ ↪ G n ≅ F` whose successive quotients
 `coker φᵢ` are mixed of weights at most `w` is mixed of weights at most `w`: splice the filtrations
