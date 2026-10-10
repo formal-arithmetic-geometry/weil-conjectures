@@ -1497,3 +1497,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 2026-10-10, delivery of C1: lem-galois-inverse-image-representable returned (47f1b5fe0): Reviewed in full (reviewer sub-agent of L). C4: steps 2 and 3 use the general Yoneda lemma Hom(h_A, F) = F(A) for an arbitrary presheaf F, natural in A and F, b
 - 13:28 L: returned deliver/C1/lem-galois-inverse-image-representable (reviewer RETURN: C4 general Yoneda lemma not carried by the cited node, C4 co-Yoneda step)
 - 2026-10-10, delivery of K1: lem-weil-pbc-matching-object-coskeleton returned (5e0c15967): Reviewed in full (reviewer sub-agent of L). D2/D1: the new node lem-weil-pbc-coskeleton-matching-tuples is the item with M_n(K) unfolded into its universal prop
+- 13:29 L: returned deliver/K1/lem-weil-pbc-matching-object-coskeleton (reviewer RETURN: D2/D1 helper node restates the item, C5 proper-faces not used)
