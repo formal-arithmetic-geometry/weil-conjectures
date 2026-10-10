@@ -183,29 +183,22 @@ lemma WStrictLocalization.exists_mem_zeroLocus_comap_eq (p : PrimeSpectrum R) :
   rw [h3, h2, h1, hu, hw]
 
 end ClosedPointsSurjective
-
-section Main
+section General
 
 attribute [local instance] Algebra.TensorProduct.rightAlgebra
 
-variable (R S : Type u) [CommRing R] [CommRing S] [Algebra R S]
+variable {R S C : Type u} [CommRing R] [CommRing S] [CommRing C] [Algebra R S] [Algebra R C]
 
-open WStrictLocalization in
-/-- **Stacks 097Z** (blueprint `thm:weakly-etale-ind-etale`): if `S` is a weakly étale
-`R`-algebra, there exists a faithfully flat, ind-étale `S`-algebra `T` such that `T` is an
-ind-étale `R`-algebra. -/
-theorem Algebra.WeaklyEtale.exists_indEtale [Algebra.WeaklyEtale R S] :
-    ∃ (T : Type u) (_ : CommRing T) (_ : Algebra R T) (_ : Algebra S T) (_ : IsScalarTower R S T),
-      Algebra.IndEtale S T ∧ Module.FaithfullyFlat S T ∧ Algebra.IndEtale R T := by
-  classical
-  -- Step 1: the w-strictly local cover `C` of `R` and the ideal `J` of closed points.
-  set C := WStrictLocalization R with hC
-  set J : Ideal C := (closedIdeal R).map (algebraMap (WLocalization R) C) with hJdef
-  have hJ : zeroLocus (J : Set C) = closedPoints (PrimeSpectrum C) :=
-    zeroLocus_map_eq_closedPoints R
-  -- Step 2: the base change `D' = C ⊗[R] S`.
+/-- The core of Stacks 097Z: let `S` be a weakly étale `R`-algebra and `C` a w-strictly local
+`R`-algebra whose closed points are cut out by the ideal `J`. Then the w-localization `D` of
+`C ⊗[R] S` along `J` is bijective on stalks over `C` (by Olivier's theorem), and `C → D` is a
+w-local map (by Stacks 097A). -/
+theorem Algebra.WeaklyEtale.bijectiveOnStalks_wLocalization [Algebra.WeaklyEtale R S]
+    [IsWStrictlyLocalRing C] (J : Ideal C)
+    (hJ : zeroLocus (J : Set C) = closedPoints (PrimeSpectrum C)) :
+    Algebra.BijectiveOnStalks C (J.map (algebraMap C (C ⊗[R] S))).WLocalization ∧
+      (algebraMap C (J.map (algebraMap C (C ⊗[R] S))).WLocalization).IsWLocal := by
   set D' := C ⊗[R] S with hD'
-  -- Step 3: the w-localization `D` of `D'` along `J`.
   set K : Ideal D' := J.map (algebraMap C D') with hKdef
   set D := K.WLocalization with hDdef
   -- `C → D'` is weakly étale (base change) and induces algebraic residue field extensions.
@@ -240,7 +233,7 @@ theorem Algebra.WeaklyEtale.exists_indEtale [Algebra.WeaklyEtale R S] :
       exact (mem_zeroLocus _ _).mpr hJle
     exact (isClosed_singleton_iff_isMaximal _).mp (mem_closedPoints_iff.mp hmem)
   -- `C → D` is bijective on stalks, by Olivier's theorem.
-  have : Algebra.BijectiveOnStalks C D := by
+  have hbos : Algebra.BijectiveOnStalks C D := by
     apply Algebra.WeaklyEtale.bijectiveOnStalks
     intro q hq
     obtain ⟨n, hn_max, hqn⟩ := q.exists_le_maximal hq.ne_top
@@ -249,11 +242,115 @@ theorem Algebra.WeaklyEtale.exists_indEtale [Algebra.WeaklyEtale R S] :
     have : (n.comap (algebraMap C D)).IsMaximal := hmaxC n
     exact IsWStrictlyLocalRing.isStrictlyHenselianLocalRing_localization _
   -- `Spec D → Spec C` is w-local.
-  have hwloc : (algebraMap C D).IsWLocal := by
-    rw [RingHom.isWLocal_iff_isMaximal_of_isMaximal]
-    intro n hn
-    exact hmaxC n
-  -- Stacks 097F: `C → D` is ind-Zariski, hence `R → D` is ind-étale.
+  refine ⟨hbos, ?_⟩
+  rw [RingHom.isWLocal_iff_isMaximal_of_isMaximal]
+  intro n hn
+  exact hmaxC n
+
+/-- The surjectivity part of Stacks 097Z: let `S` be a weakly étale `R`-algebra and `C` a
+w-local `R`-algebra whose closed points are cut out by the ideal `J`, such that every prime of
+`R` lies under a closed point of `Spec C`. Then `Spec D → Spec S` is surjective, where `D` is
+the w-localization of `C ⊗[R] S` along `J`. -/
+theorem Algebra.WeaklyEtale.comap_surjective_wLocalization [Algebra.WeaklyEtale R S]
+    [IsWLocalRing C] (J : Ideal C)
+    (hJ : zeroLocus (J : Set C) = closedPoints (PrimeSpectrum C))
+    (hC : ∀ p : PrimeSpectrum R, ∃ x ∈ zeroLocus (J : Set C),
+      PrimeSpectrum.comap (algebraMap R C) x = p) :
+    Function.Surjective (PrimeSpectrum.comap
+      ((algebraMap (C ⊗[R] S) (J.map (algebraMap C (C ⊗[R] S))).WLocalization).comp
+        (algebraMap S (C ⊗[R] S)))) := by
+  set D' := C ⊗[R] S with hD'
+  set K : Ideal D' := J.map (algebraMap C D') with hKdef
+  set D := K.WLocalization with hDdef
+  have : Algebra.WeaklyEtale C D' := inferInstance
+  have hres : ∀ (m : Ideal C) (q' : Ideal D') [q'.LiesOver m] [m.IsMaximal] [q'.IsPrime]
+      [Algebra (Localization.AtPrime m) (Localization.AtPrime q')]
+      [Localization.AtPrime.IsLiesOverAlgebra m q'],
+      Algebra.IsAlgebraic m.ResidueField q'.ResidueField := by
+    intro m q' _ hm _ _ _
+    have : m.IsPrime := hm.isPrime
+    exact Algebra.WeaklyEtale.isAlgebraic_residueField_of_liesOver m q'
+  -- `Spec (C ⧸ J) → Spec R` is surjective by assumption.
+  have hC₀ : Function.Surjective (PrimeSpectrum.comap (algebraMap R (C ⧸ J))) := by
+    intro p
+    obtain ⟨x, hx_mem, hx⟩ := hC p
+    have hker : x ∈ Set.range (PrimeSpectrum.comap (Ideal.Quotient.mk J)) := by
+      rw [range_comap_of_surjective _ _ Ideal.Quotient.mk_surjective, Ideal.mk_ker]
+      exact hx_mem
+    obtain ⟨x', hx'⟩ := hker
+    refine ⟨x', ?_⟩
+    have : PrimeSpectrum.comap (algebraMap R (C ⧸ J)) x' =
+        PrimeSpectrum.comap (algebraMap R C)
+          (PrimeSpectrum.comap (algebraMap C (C ⧸ J)) x') := by
+      rw [← PrimeSpectrum.comap_comp_apply, ← IsScalarTower.algebraMap_eq R C (C ⧸ J)]
+    rw [this, show algebraMap C (C ⧸ J) = Ideal.Quotient.mk J from rfl, hx', hx]
+  -- base change: `Spec (S ⊗[R] (C ⧸ J)) → Spec S` is surjective.
+  have hSC₀ := PrimeSpectrum.comap_surjective_tensorProduct_left S hC₀
+  intro q
+  obtain ⟨Q₀, hQ₀⟩ := hSC₀ q
+  -- transport `Q₀` to a prime of `D'` containing `K` and lying over `q`.
+  let π : D' →ₐ[R] (S ⊗[R] (C ⧸ J)) :=
+    (Algebra.TensorProduct.comm R (C ⧸ J) S).toAlgHom.comp
+      (Algebra.TensorProduct.map (Ideal.Quotient.mkₐ R J) (AlgHom.id R S))
+  set Q : PrimeSpectrum D' := PrimeSpectrum.comap π.toRingHom Q₀ with hQdef
+  have hQK : Q ∈ zeroLocus (K : Set D') := by
+    rw [mem_zeroLocus, hKdef, SetLike.coe_subset_coe, Ideal.map_le_iff_le_comap]
+    intro j hj
+    change π (algebraMap C D' j) ∈ Q₀.asIdeal
+    have hπj : π (algebraMap C D' j) = 0 := by
+      change (Algebra.TensorProduct.comm R (C ⧸ J) S)
+          ((Algebra.TensorProduct.map (Ideal.Quotient.mkₐ R J) (AlgHom.id R S))
+            ((j : C) ⊗ₜ[R] (1 : S))) = 0
+      rw [Algebra.TensorProduct.map_tmul, Ideal.Quotient.mkₐ_eq_mk,
+        Ideal.Quotient.eq_zero_iff_mem.mpr hj, TensorProduct.zero_tmul, map_zero]
+    rw [hπj]
+    exact zero_mem _
+  have hQq : PrimeSpectrum.comap (algebraMap S D') Q = q := by
+    have hcomp : π.toRingHom.comp (algebraMap S D') = algebraMap S (S ⊗[R] (C ⧸ J)) := by
+      refine RingHom.ext fun s ↦ ?_
+      change (Algebra.TensorProduct.comm R (C ⧸ J) S)
+          ((Algebra.TensorProduct.map (Ideal.Quotient.mkₐ R J) (AlgHom.id R S))
+            ((1 : C) ⊗ₜ[R] s)) = s ⊗ₜ[R] (1 : C ⧸ J)
+      rw [Algebra.TensorProduct.map_tmul, map_one]
+      simp [Algebra.TensorProduct.comm_tmul]
+    rw [hQdef, ← PrimeSpectrum.comap_comp_apply, hcomp, hQ₀]
+  -- pull `Q` back along the w-localization `D' → D`.
+  have hK_sub : zeroLocus (K : Set D') ⊆ closedPoints (PrimeSpectrum D') := by
+    rw [hKdef]
+    exact zeroLocus_map_algebraMap_subset_closedPoints hres hJ.le
+  obtain ⟨P, hP_mem, hP⟩ := (Ideal.WLocalization.bijOn_zeroLocus_map K hK_sub).surjOn hQK
+  refine ⟨P, ?_⟩
+  rw [PrimeSpectrum.comap_comp_apply, hP, hQq]
+
+end General
+
+section Main
+
+attribute [local instance] Algebra.TensorProduct.rightAlgebra
+
+variable (R S : Type u) [CommRing R] [CommRing S] [Algebra R S]
+
+open WStrictLocalization in
+/-- **Stacks 097Z** (blueprint `thm:weakly-etale-ind-etale`): if `S` is a weakly étale
+`R`-algebra, there exists a faithfully flat, ind-étale `S`-algebra `T` such that `T` is an
+ind-étale `R`-algebra. -/
+theorem Algebra.WeaklyEtale.exists_indEtale [Algebra.WeaklyEtale R S] :
+    ∃ (T : Type u) (_ : CommRing T) (_ : Algebra R T) (_ : Algebra S T) (_ : IsScalarTower R S T),
+      Algebra.IndEtale S T ∧ Module.FaithfullyFlat S T ∧ Algebra.IndEtale R T := by
+  classical
+  -- Step 1: the w-strictly local cover `C` of `R` and the ideal `J` of closed points.
+  set C := WStrictLocalization R with hC
+  set J : Ideal C := (closedIdeal R).map (algebraMap (WLocalization R) C) with hJdef
+  have hJ : zeroLocus (J : Set C) = closedPoints (PrimeSpectrum C) :=
+    zeroLocus_map_eq_closedPoints R
+  -- Step 2: the base change `D' = C ⊗[R] S`.
+  set D' := C ⊗[R] S with hD'
+  -- Step 3: the w-localization `D` of `D'` along `J`.
+  set K : Ideal D' := J.map (algebraMap C D') with hKdef
+  set D := K.WLocalization with hDdef
+  -- Step 4: `C → D` is bijective on stalks and w-local, hence ind-Zariski by Stacks 097F,
+  -- so that `R → D` is ind-étale.
+  obtain ⟨hbos, hwloc⟩ := Algebra.WeaklyEtale.bijectiveOnStalks_wLocalization (R := R) (S := S) J hJ
   have : Algebra.IndZariski C D := Algebra.BijectiveOnStalks.indZariski_of_isWLocal C D hwloc
   let : Algebra R D := Algebra.compHom D (algebraMap R C)
   have : IsScalarTower R C D := IsScalarTower.of_algebraMap_eq' rfl
@@ -278,58 +375,9 @@ theorem Algebra.WeaklyEtale.exists_indEtale [Algebra.WeaklyEtale R S] :
       ← IsScalarTower.algebraMap_apply R C D', ← IsScalarTower.algebraMap_apply R S D']
   -- `S → D` is faithfully flat: flatness is clear, surjectivity on spectra is the content.
   have : Module.Flat S D := Module.Flat.trans S D' D
-  have hsurj : Function.Surjective (PrimeSpectrum.comap (algebraMap S D)) := by
-    -- `Spec (C ⧸ J) → Spec R` is surjective by `exists_mem_zeroLocus_comap_eq`.
-    have hC₀ : Function.Surjective (PrimeSpectrum.comap (algebraMap R (C ⧸ J))) := by
-      intro p
-      obtain ⟨x, hx_mem, hx⟩ := WStrictLocalization.exists_mem_zeroLocus_comap_eq R p
-      have hker : x ∈ Set.range (PrimeSpectrum.comap (Ideal.Quotient.mk J)) := by
-        rw [range_comap_of_surjective _ _ Ideal.Quotient.mk_surjective, Ideal.mk_ker]
-        exact hx_mem
-      obtain ⟨x', hx'⟩ := hker
-      refine ⟨x', ?_⟩
-      have : PrimeSpectrum.comap (algebraMap R (C ⧸ J)) x' =
-          PrimeSpectrum.comap (algebraMap R C)
-            (PrimeSpectrum.comap (algebraMap C (C ⧸ J)) x') := by
-        rw [← PrimeSpectrum.comap_comp_apply, ← IsScalarTower.algebraMap_eq R C (C ⧸ J)]
-      rw [this, show algebraMap C (C ⧸ J) = Ideal.Quotient.mk J from rfl, hx', hx]
-    -- base change: `Spec (S ⊗[R] (C ⧸ J)) → Spec S` is surjective.
-    have hSC₀ := PrimeSpectrum.comap_surjective_tensorProduct_left S hC₀
-    intro q
-    obtain ⟨Q₀, hQ₀⟩ := hSC₀ q
-    -- transport `Q₀` to a prime of `D'` containing `K` and lying over `q`.
-    let π : D' →ₐ[R] (S ⊗[R] (C ⧸ J)) :=
-      (Algebra.TensorProduct.comm R (C ⧸ J) S).toAlgHom.comp
-        (Algebra.TensorProduct.map (Ideal.Quotient.mkₐ R J) (AlgHom.id R S))
-    set Q : PrimeSpectrum D' := PrimeSpectrum.comap π.toRingHom Q₀ with hQdef
-    have hQK : Q ∈ zeroLocus (K : Set D') := by
-      rw [mem_zeroLocus, hKdef, SetLike.coe_subset_coe, Ideal.map_le_iff_le_comap]
-      intro j hj
-      change π (algebraMap C D' j) ∈ Q₀.asIdeal
-      have hπj : π (algebraMap C D' j) = 0 := by
-        change (Algebra.TensorProduct.comm R (C ⧸ J) S)
-            ((Algebra.TensorProduct.map (Ideal.Quotient.mkₐ R J) (AlgHom.id R S))
-              ((j : C) ⊗ₜ[R] (1 : S))) = 0
-        rw [Algebra.TensorProduct.map_tmul, Ideal.Quotient.mkₐ_eq_mk,
-          Ideal.Quotient.eq_zero_iff_mem.mpr hj, TensorProduct.zero_tmul, map_zero]
-      rw [hπj]
-      exact zero_mem _
-    have hQq : PrimeSpectrum.comap (algebraMap S D') Q = q := by
-      have hcomp : π.toRingHom.comp (algebraMap S D') = algebraMap S (S ⊗[R] (C ⧸ J)) := by
-        refine RingHom.ext fun s ↦ ?_
-        change (Algebra.TensorProduct.comm R (C ⧸ J) S)
-            ((Algebra.TensorProduct.map (Ideal.Quotient.mkₐ R J) (AlgHom.id R S))
-              ((1 : C) ⊗ₜ[R] s)) = s ⊗ₜ[R] (1 : C ⧸ J)
-        rw [Algebra.TensorProduct.map_tmul, map_one]
-        simp [Algebra.TensorProduct.comm_tmul]
-      rw [hQdef, ← PrimeSpectrum.comap_comp_apply, hcomp, hQ₀]
-    -- pull `Q` back along the w-localization `D' → D`.
-    have hK_sub : zeroLocus (K : Set D') ⊆ closedPoints (PrimeSpectrum D') := by
-      rw [hKdef]
-      exact zeroLocus_map_algebraMap_subset_closedPoints hres hJ.le
-    obtain ⟨P, hP_mem, hP⟩ := (Ideal.WLocalization.bijOn_zeroLocus_map K hK_sub).surjOn hQK
-    refine ⟨P, ?_⟩
-    rw [IsScalarTower.algebraMap_eq S D' D, PrimeSpectrum.comap_comp_apply, hP, hQq]
+  have hsurj : Function.Surjective (PrimeSpectrum.comap (algebraMap S D)) :=
+    Algebra.WeaklyEtale.comap_surjective_wLocalization J hJ
+      (WStrictLocalization.exists_mem_zeroLocus_comap_eq R)
   have : Module.FaithfullyFlat S D := Module.FaithfullyFlat.of_comap_surjective hsurj
   exact ⟨D, inferInstance, inferInstance, inferInstance, inferInstance,
     inferInstance, inferInstance, inferInstance⟩

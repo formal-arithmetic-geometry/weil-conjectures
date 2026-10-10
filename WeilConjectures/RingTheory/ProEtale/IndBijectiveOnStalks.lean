@@ -37,13 +37,17 @@ open CategoryTheory TopCat PrimeSpectrum WContractification
 variable {R S : Type u} [CommRing R] [CommRing S]
 
 variable (R S) in
-/-- **Stacks 097F**, algebra version: a w-local map of w-local rings that identifies
-local rings is ind-Zariski. -/
+/-- **Stacks 097F**, explicit form: a w-local map of w-local rings that identifies local rings
+is the modification `PullbackProfinite R T i` of the connected components of `Spec R` along the
+map `i : T = π₀(Spec S) → π₀(Spec R)`. -/
 @[stacks 097F]
-lemma Algebra.BijectiveOnStalks.indZariski_of_isWLocal [Algebra R S] [IsWLocalRing R]
-    [IsWLocalRing S] [Algebra.BijectiveOnStalks R S]
+lemma Algebra.BijectiveOnStalks.nonempty_algEquiv_pullbackProfinite [Algebra R S]
+    [IsWLocalRing R] [IsWLocalRing S] [Algebra.BijectiveOnStalks R S]
     (hw : (algebraMap R S).IsWLocal) :
-    Algebra.IndZariski R S := by
+    Nonempty (PullbackProfinite R (_root_.ConnectedComponents (PrimeSpectrum S))
+      ⟨(PrimeSpectrum.continuous_comap (algebraMap R S)).connectedComponentsMap,
+        (PrimeSpectrum.continuous_comap (algebraMap R S)).connectedComponentsMap_continuous⟩
+          ≃ₐ[R] S) := by
   -- The profinite space of connected components of `Spec S` with its map to `π₀(Spec R)`.
   set T := _root_.ConnectedComponents (PrimeSpectrum S) with hT
   let i : C(T, _root_.ConnectedComponents (PrimeSpectrum R)) :=
@@ -118,10 +122,21 @@ lemma Algebra.BijectiveOnStalks.indZariski_of_isWLocal [Algebra R S] [IsWLocalRi
         _ = c₂ := hkey c₂
     · intro d
       exact ⟨L d, hL.injective (hkey (L d))⟩
-  -- Hence `g` is bijective, and `S ≅ A'` is ind-Zariski over `R`.
+  -- Hence `g` is bijective, and `S ≅ A'`.
   have hbij : Function.Bijective g.toRingHom :=
     RingHom.IsWLocal.bijective_of_bijective hgw hgs hb
-  exact Algebra.IndZariski.of_equiv R A' S (AlgEquiv.ofBijective g hbij)
+  exact ⟨AlgEquiv.ofBijective g hbij⟩
+
+variable (R S) in
+/-- **Stacks 097F**, algebra version: a w-local map of w-local rings that identifies
+local rings is ind-Zariski. -/
+@[stacks 097F]
+lemma Algebra.BijectiveOnStalks.indZariski_of_isWLocal [Algebra R S] [IsWLocalRing R]
+    [IsWLocalRing S] [Algebra.BijectiveOnStalks R S]
+    (hw : (algebraMap R S).IsWLocal) :
+    Algebra.IndZariski R S :=
+  Algebra.IndZariski.of_equiv R _ S
+    (Algebra.BijectiveOnStalks.nonempty_algEquiv_pullbackProfinite R S hw).some
 
 /-- **Stacks 097F**: a w-local ring map between w-local rings that is bijective on stalks
 is ind-Zariski. -/
