@@ -23,15 +23,81 @@
   "def-sp-composite-acyclicity",
   "def-sp-injective-resolutions",
   "lem-sp-derived-well-defined",
+  "def-sp-left-exact-additive",
+  "lem-pc-grothendieck-ss-double-complex-model",
   "lem-sp-grothendieck-edge-maps",
   "thm-sp-grothendieck",
   "lem-sp-edge-collapse",
   "def-sp-exact-couple",
   "def-sp-convergence"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Choose the stated injective resolution $X\\to I^\\bullet$. By [def-sp-injective-resolutions], [lem-sp-derived-well-defined], and the definition of right derived functors in [def-sp-left-exact-additive], applying $F$ and then $G$ to this resolution computes $R^n(G\\circ F)(X)$ as $H^n(G(F(I^\\bullet)))$, while $R^nF(X)$ is computed as $H^n(F(I^\\bullet))$. Thus a degree-$n$ class on the source of the left edge can be represented by a cocycle in $G(F(I^n))$.",
+   "uses": [
+    "def-sp-injective-resolutions",
+    "lem-sp-derived-well-defined",
+    "def-sp-left-exact-additive"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Lemma 015N (lemma-grothendieck-spectral-sequence), proof"
+   }
+  },
+  {
+   "text": "Choose a Cartan--Eilenberg resolution $C^{\\bullet,\\bullet}$ of the bounded-below complex $F(I^\\bullet)$ as in [thm-sp-if-e1], and form $D^{p,q}=G(C^{p,q})$. By [lem-pc-grothendieck-ss-double-complex-model], the Grothendieck spectral sequence is the first filtration spectral sequence of this double complex, with abutment identified through $H^n(G(F(I^\\bullet)))$. In the filtration [thm-sp-double-complex-spectral-sequences], $F^0H^n=H^n(\\operatorname{Tot}D)$ and $F^1H^n$ is the first filtration step, so the edge is explicitly $H^n(\\operatorname{Tot}D)\\twoheadrightarrow F^0H^n/F^1H^n=E_\\infty^{0,n}\\hookrightarrow E_2^{0,n}=G(H^n(F(I^\\bullet)))$. On a cocycle represented by $s\\in G(F(I^n))$, the augmentation $G(F(I^q))\\to G(C^{\\bullet,q})$ is a quasi-isomorphism onto each row (the row $C^{\\bullet,q}$ is an injective resolution of $F(I^q)$ by [thm-sp-if-e1]) because $F(I^q)$ is $G$-acyclic; hence this comparison sends $[s]$ to the corresponding total-complex class. Writing $Z^n=\\ker(F(I^n)\\to F(I^{n+1}))$, the $p=0$ column identifies the quotient map with $G$ applied to $Z^n\\to H^n(F(I^\\bullet))$, since left exactness gives $\\ker(GF(I^n)\\to GF(I^{n+1}))=G(Z^n)$. The edge is the left edge by [lem-pc-grothendieck-ss-double-complex-model] (and its abstract direction is [lem-sp-grothendieck-edge-maps]); [lem-sp-derived-well-defined] gives independence of the resolution.",
+   "uses": [
+    "def-sp-composite-acyclicity",
+    "thm-sp-if-e1",
+    "thm-sp-double-complex-spectral-sequences",
+    "lem-pc-grothendieck-ss-double-complex-model",
+    "def-sp-left-exact-additive",
+    "lem-sp-derived-well-defined",
+    "lem-sp-grothendieck-edge-maps"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Lemma 015N (lemma-grothendieck-spectral-sequence), proof"
+   }
+  },
+  {
+   "text": "By [lem-pc-grothendieck-ss-double-complex-model], the Grothendieck spectral sequence is the first filtration spectral sequence of the double complex and has $E_2^{p,q}=R^pG(R^qF(X))$. Its filtration is the finite exhaustive separated filtration of $H^n(\\operatorname{Tot}D)$ supplied by [thm-sp-double-complex-spectral-sequences], and its bigraded exact couple is the one defined in [def-sp-exact-couple], with convergence as in [def-sp-convergence]. If $R^pG(R^qF(X))=0$ for every $p>0$ and $q$, all entries outside the $p=0$ column vanish already on $E_2$. Applying [lem-sp-edge-collapse] to this exact couple gives $E_\\infty=E_2$ and makes the edge map $H^n(\\operatorname{Tot}D)\\to E_2^{0,n}=G(R^nF(X))$ an isomorphism. The model node identifies this edge with the left edge of [lem-sp-grothendieck-edge-maps], and Step 2 identifies it with the displayed cocycle morphism.",
+   "uses": [
+    "thm-sp-grothendieck",
+    "thm-sp-double-complex-spectral-sequences",
+    "lem-pc-grothendieck-ss-double-complex-model",
+    "def-sp-convergence",
+    "lem-sp-edge-collapse",
+    "def-sp-exact-couple"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Lemma 015N (lemma-grothendieck-spectral-sequence), proof"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sp-injective-resolutions",
+  "lem-sp-derived-well-defined",
+  "def-sp-left-exact-additive",
+  "lem-pc-grothendieck-ss-double-complex-model",
+  "def-sp-composite-acyclicity",
+  "thm-sp-grothendieck",
+  "thm-sp-if-e1",
+  "thm-sp-double-complex-spectral-sequences",
+  "def-sp-convergence",
+  "lem-sp-edge-collapse",
+  "def-sp-exact-couple",
+  "lem-sp-grothendieck-edge-maps"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/derived.tex",
+  "place": "Derived Categories Lemma 015N (lemma-grothendieck-spectral-sequence), proof and construction of the two filtered double-complex spectral sequences"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -56,12 +122,56 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-pc-leray-degenerate-sections",
   "by": "worker",
   "date": "2026-10-10"
  },
  "chapter": "sec-picard-framework",
- "unit": "sk-thm-picard-rr"
+ "unit": "sk-thm-picard-rr",
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "lem-pc-grothendieck-edge-cocycle",
+  "worker": "stage1",
+  "summary": "Repaired the split by deriving the cocycle formula from the Cartan--Eilenberg double complex: derived-functor computation is cited to def-sp-left-exact-additive, the two filtered spectral sequences and finite filtration to thm-sp-if-e1 and thm-sp-double-complex-spectral-sequences, the double-complex realization of the Grothendieck spectral sequence and the identification of its left edge with abutment -> E_infinity^{0,n} in E_2^{0,n} to the new statement-only node lem-pc-grothendieck-ss-double-complex-model (lem-sp-grothendieck-edge-maps only for the edge's direction). The collapse is then applied to the explicitly finite filtration. The slopmaster2 source contains only the abstract edge-map definition, so there is no attachment.",
+  "blueprint": "The steps realize the ancestor blueprint proof's first-sentence passage from Leray/Grothendieck degeneration to the cohomology edge, specifically the cocycle identification of the left edge and the vanishing-higher-columns collapse clause.",
+  "tool_uses": [
+   {
+    "node": "lem-sp-derived-well-defined",
+    "why": "The cocycle formula needs the generic resolution-independence and derived-functor computation statement; this unit has no replacement for that homological tool."
+   },
+   {
+    "node": "thm-sp-grothendieck",
+    "why": "The collapse clause needs the generic Grothendieck spectral sequence and its E2-page; this unit's route does not restate that construction."
+   },
+   {
+    "node": "lem-sp-edge-collapse",
+    "why": "The final isomorphism needs the generic exact-couple edge-collapse criterion for a finite filtration; this unit has no replacement."
+   },
+   {
+    "node": "thm-sp-if-e1",
+    "why": "The cocycle identification follows the Cartan--Eilenberg resolution used to construct the Grothendieck spectral sequence; this unit has no replacement."
+   },
+   {
+    "node": "thm-sp-double-complex-spectral-sequences",
+    "why": "The proof needs the two filtrations, common total-complex abutment, and finite filtration; this unit has no replacement."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sp-derived-well-defined",
+  "thm-sp-grothendieck",
+  "lem-sp-edge-collapse",
+  "thm-sp-if-e1",
+  "thm-sp-double-complex-spectral-sequences"
+ ],
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-ge3",
+  "group": "E1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-ge3 (reviewer sub-agent of L); spot-checked: Re-push 077a1caa8 after returns 15:05 and 15:22; every point of the 15:22 return is repaired: (1) step 2 now writes the comparison H^n(G(F(I))) -> H^n(Tot G(C)) through the augmentation (F(I^q) G-acyclic) and computes the edge H^n(Tot)=F^0 -> F^0/F^1=E_inf^{0,n} in E_2^{0,n}=G(H^n F(I)) on a cocycle s in G(F(I^n)) as G(Z^n -> H^n), using G(Z^n)=ker(GF(I^n)->GF(I^{n+1})) by left exactness; (2) new statement-only node lem-pc-grothendieck-ss-double-complex-model (Stacks 015N proof, derived.tex lemma-grothendieck-spectral-sequence: CE resolution of F(I^.), 'second' spectral sequence in Stacks' indexing = first filtration in the convention of thm-sp-if-e1, whose rows C^{.,s} resolve K^s, so 'E_2=H^p_I H^q_II = R^pG(R^qF X), checked) is cited in steps 2, 3 and proof_deps and does not contain the cocycle formula; (3) step 3 takes the left-edge identification from the model node, names the bigraded exact couple of the filtration of thm-sp-double-complex-spectral-sequences (finite F^0=H^n, F^{n+1}=0, convergence) and cites def-sp-exact-couple/def-sp-convergence, so lem-sp-edge-collapse applies with r0=2; (4) all three step sources read derived.tex Lemma 015N proof; item statement unchanged, top-level source L's. Read the statements of thm-sp-grothendieck, thm-sp-if-e1, thm-sp-double-complex-spectral-sequences, lem-sp-grothendieck-edge-maps, lem-sp-edge-collapse, def-sp-exact-couple, def-sp-convergence, def-sp-composite-acyclicity, lem-sp-derived-well-defined, def-sp-left-exact-additive, def-sp-injective-resolutions against each use. Five tool_uses accepted as generic tools (as in the 15:22 return). Small cases: G=id gives the identity of H^n(F(I)); n=0 gives GF(X)=G(F(X)). FIXES: dag/nodes/sec-picard-framework/lem-pc-grothendieck-edge-cocycle.json: proof[1].text: indices transposed to the convention of thm-sp-if-e1 (augmentation G(F(I^q)) -> G(C^{.,q}) onto each row, 'p=0 column' instead of 'q=0 row'), mathematics unchanged; split_report.summary: stale claim that the quotient/inclusion edge construction comes from lem-sp-grothendieck-edge-maps replaced by the model node. dag/nodes/sec-picard-framework/lem-pc-grothendieck-ss-double-complex-model.json: statement: last clause said 'its edge maps ... are the edge maps from the abutment to E_inf^{0,n}', wrong for the bottom edge; restricted to the left edge and written out as H^n=F^0H^n -> F^0/F^1=E_inf^{0,n} in E_2^{0,n} (FIX more, RETURN less, C4 precision; this is what steps 2 and 3 use). Start 15:45:11 UTC, end 15:46:39 UTC.; 2 file(s) fixed by the reviewer"
+ }
 }
