@@ -62,11 +62,11 @@
 | `lem-galois-aut-profinite` | 3006 | none |
 | `lem-galois-inverse-image-representable` | 3006 | none |
 | `lem-galois-pi1-finite-etale-image-stabilizer` | 3006 | none |
+| `lem-pc-presheaf-change-of-rings-adjunction` | 3006 | none |
 | `lem-sc-flat-base-change-coherent` | 3006 | sorry_here |
 | `lem-weil-pbc-hypercover-free-resolution` | 3006 | none |
 | `def-sc-divisor` | 3007 | none |
 | `lem-galois-transitive` | 3007 | none |
-| `lem-sc-affine-curve-h2-vanishing` | 3007 | rests_on_sorry |
 | `lem-sc-ample-complement-affine` | 3007 | sorry_here |
 | `lem-sc-divisor-class-curve` | 3007 | none |
 | `lem-sc-etale-affine-qcoherent` | 3007 | none |
@@ -866,7 +866,7 @@
 | `lem-weil-pbc-p1-field-dimension-one` | 4 | state |
 | `lem-weil-pbc-projective-space-zero-isomorphism` | 4 | state |
 
-Not open yet: 393 nodes that wait for stage 1, 893 nodes that wait for a statement dependency.
+Not open yet: 393 nodes that wait for stage 1, 894 nodes that wait for a statement dependency.
 
 ## Stage 3: modules to prove (0)
 
