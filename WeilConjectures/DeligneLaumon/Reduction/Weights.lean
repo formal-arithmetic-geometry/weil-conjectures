@@ -9,6 +9,7 @@ public import Mathlib.Analysis.SpecialFunctions.Log.Base
 public import WeilConjectures.Mathlib.CategoryTheory.ObjectProperty.Extensions
 public import WeilConjectures.WeilSheaf.Defs
 public import WeilConjectures.WeilSheaf.HomologySequence
+public import WeilConjectures.WeilSheaf.LowerShriekPackage
 public import WeilConjectures.WeilSheaf.StalkFunctor
 public import WeilConjectures.WeilSheaf.Tensor
 
@@ -324,5 +325,72 @@ def HasDirectImageComplexWeightBound (k₀ : Type u) [Field k₀] [Finite k₀] 
     rw [← CategoryTheory.comp_over f (Spec (CommRingCat.of k₀))]; infer_instance
   ∀ (w : ℝ) (K : WeilComplex k₀ l X), K.IsMixedOfWeightsAtMost ι w →
     ((WeilComplex.derivedLowerShriek k₀ l f).obj K).IsMixedOfWeightsAtMost ι w
+
+/-! ### Extension by zero and finite direct images -/
+
+namespace WeilSheaf
+
+variable {ι : PadicAlgCl l →+* ℂ} {w : ℝ}
+
+/-- Extension by zero along a quasi-compact open immersion preserves mixed upper bounds: it is
+exact, so it carries a mixed filtration to a filtration whose quotients are the extensions by
+zero of punctually pure sheaves, which are punctually pure of the same weights
+(blueprint: `lem-zl-morphism-open-closed-reduction`, part 2). -/
+theorem IsMixedOfWeightsAtMost.extensionByZero {U : Scheme.{u}}
+    [U.Over (Spec (CommRingCat.of k₀))] [LocallyOfFiniteType (U ↘ Spec (CommRingCat.of k₀))]
+    (j : U ⟶ X) [IsOpenImmersion j] [QuasiCompact j] [j.IsOver (Spec (CommRingCat.of k₀))]
+    {F : WeilSheaf k₀ l U} (h : F.IsMixedOfWeightsAtMost ι w) :
+    ((WeilSheaf.extensionByZero j).obj F).IsMixedOfWeightsAtMost ι w := by
+  rw [isMixedOfWeightsAtMost_iff_filtrationClosure] at h ⊢
+  exact ObjectProperty.filtrationClosure_map (WeilSheaf.extensionByZero j)
+    (fun _ ⟨v, hv, hG⟩ ↦ ⟨v, hv, hG.extensionByZero j⟩) h
+
+/-- A Weil sheaf mixed of weights at most `w`, placed in degree zero, is a Weil complex mixed of
+weights at most `w`: its only nonzero cohomology sheaf is itself, in degree zero. -/
+theorem IsMixedOfWeightsAtMost.toComplex {F : WeilSheaf k₀ l X}
+    (h : F.IsMixedOfWeightsAtMost ι w) :
+    (WeilSheaf.toComplex.obj F).IsMixedOfWeightsAtMost ι w := by
+  intro b
+  rcases lt_trichotomy b 0 with hb | rfl | hb
+  · have : (((WeilSheaf.objectProperty k₀ l X).ι ⋙
+        DerivedCategory.singleFunctor (ProEtaleWeilSheaf k₀ l X) 0).obj F).IsGE 0 :=
+      inferInstanceAs (((DerivedCategory.singleFunctor _ 0).obj F.obj).IsGE 0)
+    have : (WeilSheaf.toComplex.obj F).obj.IsGE 0 :=
+      DerivedCategory.TStructure.t.isGE_of_iso (WeilSheaf.toComplexCompιIso.app F).symm 0
+    exact isMixedOfWeightsAtMost_of_isZero (WeilComplex.isZero_homologySheaf_obj
+      (DerivedCategory.isZero_of_isGE _ 0 b hb)) _
+  · exact (h.of_iso (WeilSheaf.toComplexCompHomologySheafIso.app F).symm).mono_weight (by simp)
+  · have : (((WeilSheaf.objectProperty k₀ l X).ι ⋙
+        DerivedCategory.singleFunctor (ProEtaleWeilSheaf k₀ l X) 0).obj F).IsLE 0 :=
+      inferInstanceAs (((DerivedCategory.singleFunctor _ 0).obj F.obj).IsLE 0)
+    have : (WeilSheaf.toComplex.obj F).obj.IsLE 0 :=
+      DerivedCategory.TStructure.t.isLE_of_iso (WeilSheaf.toComplexCompιIso.app F).symm 0
+    exact isMixedOfWeightsAtMost_of_isZero (WeilComplex.isZero_homologySheaf_obj
+      (DerivedCategory.isZero_of_isLE _ 0 b hb)) _
+
+variable {Y : Scheme.{u}} [Y.Over (Spec (CommRingCat.of k₀))]
+  [LocallyOfFiniteType (Y ↘ Spec (CommRingCat.of k₀))]
+  [QuasiCompact (Y ↘ Spec (CommRingCat.of k₀))] (p : X ⟶ Y) [IsFinite p]
+  [p.IsOver (Spec (CommRingCat.of k₀))]
+
+/-- The direct image `p₀*` along a finite morphism preserves mixed upper bounds, the case of a
+sheaf of `lem-zl-finite-pushforward`. -/
+theorem IsMixedOfWeightsAtMost.higherLowerStar_zero_of_isFinite {F : WeilSheaf k₀ l X}
+    (h : F.IsMixedOfWeightsAtMost ι w) :
+    ((WeilSheaf.higherLowerStar p 0).obj F).IsMixedOfWeightsAtMost ι w :=
+  ((h.toComplex.derivedLowerStar_of_isFinite p 0).of_iso
+    ((WeilSheaf.higherLowerStarIso p 0).app F).symm).mono_weight (by simp)
+
+/-- The direct image `p₀*` along a finite morphism preserves upper weight bounds: at a closed
+point `y` the geometric Frobenius permutes the points `x` over `y`, and an orbit of length `e`
+contributes eigenvalues `β` whose `e`-th powers are eigenvalues of the local Frobenius at `x`,
+with `q_x = q_yᵉ`, so that `|ι β| ≤ q_y ^ (w / 2)` (blueprint: `lem-zl-finite-pushforward`, the
+stalk computation, and `sk-l-dl-general-quasifinite`). -/
+theorem HasWeightsAtMost.higherLowerStar_zero_of_isFinite {F : WeilSheaf k₀ l X}
+    (h : F.HasWeightsAtMost ι w) :
+    ((WeilSheaf.higherLowerStar p 0).obj F).HasWeightsAtMost ι w :=
+  sorry
+
+end WeilSheaf
 
 end AlgebraicGeometry

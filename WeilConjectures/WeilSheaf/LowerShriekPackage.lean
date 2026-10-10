@@ -5,6 +5,7 @@ Authors: Claude
 -/
 module
 
+public import WeilConjectures.WeilSheaf.ExtensionByZero
 public import WeilConjectures.WeilSheaf.HomologySequence
 public import WeilConjectures.WeilSheaf.LowerShriek
 public import WeilConjectures.WeilSheaf.UpperStarExact
@@ -206,14 +207,6 @@ noncomputable def ProEtaleWeilSheaf.rightDerivedLowerShriekIso (f : X ⟶ Y)
       (ProEtaleWeilSheaf.extensionByZero k₀ l c.i).mapDerivedCategory ⋙
         (ProEtaleWeilSheaf.lowerStar k₀ l c.g).rightDerivedFunctor :=
   Iso.refl _
-
-/-- The extension by zero of Weil sheaves is the extension by zero of pro-étale Weil sheaves. -/
-noncomputable def WeilSheaf.extensionByZeroCompιIso (j : X ⟶ Y) [IsOpenImmersion j]
-    [QuasiCompact j] [j.IsOver (Spec (CommRingCat.of k₀))] :
-    WeilSheaf.extensionByZero (l := l) j ⋙ (WeilSheaf.objectProperty k₀ l Y).ι ≅
-      (WeilSheaf.objectProperty k₀ l X).ι ⋙ ProEtaleWeilSheaf.extensionByZero k₀ l j := by
-  unfold WeilSheaf.extensionByZero
-  exact ObjectProperty.liftFullSubcategoryCompιIso _ _ _ _
 
 open Functor in
 attribute [local instance] Compactification.over in
