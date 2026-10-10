@@ -4,7 +4,7 @@
   "is": null,
   "from": {
    "node": "lem-sc-finite-duality",
-   "place": "Tag 08EE proof: pseudo-coherent objects lie in the quasi-coherent derived category",
+   "place": "Tag 08E5 proof: pseudo-coherent objects lie in the quasi-coherent derived category",
    "via": [
     "lem-sc-affine-perfect-support-extension",
     "lem-sc-affine-perfect-plus-locally-free"
@@ -24,9 +24,37 @@
   "def-pc-derived-category",
   "def-pur-pseudo-coherent-complex"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "By pseudo-coherence [def-pur-pseudo-coherent-complex], every point of Y has an open neighbourhood U on which E|_U is quasi-isomorphic to a bounded-above complex F^\\bullet of finite free O_U-modules, so H^i(E)|_U \\cong H^i(F^\\bullet) for every i. Each term O_U^{\\oplus n} is quasi-coherent [pqf-def-coherent] (on an affine open Spec A it is the module associated with A^{\\oplus n}). H^i(F^\\bullet) is the cokernel of the map F^{i-1} \\to \\ker(d^i), where \\ker(d^i) is quasi-coherent as the kernel of a map of quasi-coherent modules [lem-weil-pbc-quasi-coherent-module-kernel], and this cokernel is quasi-coherent [lem-weil-pbc-quasi-coherent-module-cokernel-image]. Quasi-coherence is local on Y by its definition [pqf-def-coherent], so every H^i(E) is quasi-coherent, i.e. E lies in D_{\\mathrm{QCoh}}(O_Y) [def-pc-derived-category].",
+   "uses": [
+    "def-pur-pseudo-coherent-complex",
+    "pqf-def-coherent",
+    "lem-weil-pbc-quasi-coherent-module-kernel",
+    "lem-weil-pbc-quasi-coherent-module-cokernel-image",
+    "def-pc-derived-category",
+    "def-pc-scheme"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/perfect.tex",
+    "place": "Tag 08E5, proof of Lemma 36.13.5 (lemma-pseudo-coherent), local strictly perfect model and quasi-coherence conclusion"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pur-pseudo-coherent-complex",
+  "pqf-def-coherent",
+  "lem-weil-pbc-quasi-coherent-module-kernel",
+  "lem-weil-pbc-quasi-coherent-module-cokernel-image",
+  "def-pc-derived-category",
+  "def-pc-scheme"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/perfect.tex",
+  "place": "Tag 08E5, proof of Lemma 36.13.5 (lemma-pseudo-coherent)"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -51,12 +79,44 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-sc-affine-pseudo-coherent-lift",
   "by": "worker",
   "date": "2026-10-10"
  },
  "chapter": "sec-picard-framework",
- "unit": "sk-thm-picard-duality"
+ "unit": "sk-thm-picard-duality",
+ "split_report": {
+  "date": "2026-10-11",
+  "item": "lem-sc-pseudo-coherent-qcoh",
+  "worker": "stage1",
+  "summary": "Read Stacks Tag 08E5, Lemma 36.13.5 (label lemma-pseudo-coherent), and checked the item against its local-model proof. No new node was needed: the single proof step expands the elementary argument that local bounded-above finite-free models have quasi-coherent terms and therefore quasi-coherent cohomology, then applies the definition of D_QCoh.",
+  "blueprint": "Realizes the blueprint ancestor lem-sc-finite-duality clause 'pseudo-coherent objects lie in the quasi-coherent derived category' by the local strictly-perfect-model argument from Tag 08E5.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-quasi-coherent-module-kernel",
+    "why": "generic: kernel of a map of quasi-coherent modules on a scheme is quasi-coherent (Tag 01IE)"
+   },
+   {
+    "node": "lem-weil-pbc-quasi-coherent-module-cokernel-image",
+    "why": "generic: cokernel of a map of quasi-coherent modules on a scheme is quasi-coherent (Tag 01IE)"
+   }
+  ]
+ },
+ "tool_uses": [
+  "pqf-def-coherent",
+  "lem-weil-pbc-quasi-coherent-module-kernel",
+  "lem-weil-pbc-quasi-coherent-module-cokernel-image",
+  "lem-weil-pbc-quasi-coherent-module-kernel",
+  "lem-weil-pbc-quasi-coherent-module-cokernel-image"
+ ],
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-pcq3151",
+  "group": "F1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-pcq3151 (reviewer sub-agent of L); spot-checked: Reviewed packet head a71c34b32; new head 3581bde94 is the same delivery rebased on sheaf-dag 59056e5a2 (no change to the item or report). Statement vs Tag 08E5 (lemma-pseudo-coherent): agrees; def-pur-pseudo-coherent-complex is the local bounded-above finite-free model (no m-pseudo-coherent passage needed); D_QCoh per def-pc-derived-category = all cohomology sheaves quasi-coherent (C4 ok); no duplicate among lem-pc-pseudo-coherent-* (bounded-finite-free-model is the ring-level D(R) statement). FIX more, RETURN less: C1 - step called closure of quasi-coherent modules under kernels/cokernels and locality of quasi-coherence elementary while merged nodes state them; now cites lem-weil-pbc-quasi-coherent-module-kernel, lem-weil-pbc-quasi-coherent-module-cokernel-image (generic tools) and pqf-def-coherent (finite free terms quasi-coherent; quasi-coherence local), step rewritten (dropped the irrelevant truncation sentence), elementary false, uses/proof_deps updated. Second reading missed this; it also claims source/created.item were corrected but source.place still names 08EE (accurate as the invocation site, left) and created.item is unchanged (correct provenance, left).; 1 file(s) fixed by the reviewer"
+ }
 }

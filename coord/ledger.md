@@ -3015,3 +3015,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 23:51 L: merged deliver/F1/lem-sc-cone-pseudo-coherent (reviewer PASS; first push; new nodes: 0)
 - 23:52 L: merged deliver/G1/lem-sc-associated-localization-fg (reviewer PASS; first push; new nodes: 0)
 - 23:52 L: returned deliver/F1/lem-pur-kinjective-degreewise-existence (reviewer RETURN: Reviewer R-kde3151, head 63d228cc0. Both points of the R-kde3126 return are repaired in substance: the split now follows)
+- 23:52 L: merged deliver/F1/lem-sc-pseudo-coherent-qcoh (reviewer FIX; first push; new nodes: 0)
