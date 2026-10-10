@@ -1,0 +1,65 @@
+{
+ "id": "lem-weil-pbc-dimension-at-point-components",
+ "kind": "statement",
+ "title": "Dimension at a point of a finite type affine scheme from its irreducible components",
+ "statement": "Let $k$ be a field, let $S$ be a finite type $k$-algebra [def-weil-pbc-finite-type-algebra], let $X=\\operatorname{Spec}S$ [def-weil-affine-spectrum], and let $x\\in X$ correspond to a prime ideal $\\mathfrak p\\subset S$. Then the Krull dimension of $X$ at $x$ [def-kun-topological-dimension-at-point] equals the maximum of the Krull dimensions [def-kun-topological-krull-dimension] of the irreducible components of $X$ which contain $x$. Equivalently, if $\\mathfrak q_1,\\dots,\\mathfrak q_t$ are the minimal prime ideals of $S$ contained in $\\mathfrak p$, then $$\\dim_xX=\\max_{1\\le i\\le t}\\dim(S/\\mathfrak q_i),$$ where the right hand side uses ring Krull dimension [def-weil-pbc-krull-dimension-ring]. It also equals the minimum of $\\dim(S_{\\mathfrak m})$ over maximal ideals $\\mathfrak m\\supseteq\\mathfrak p$ [def-weil-pbc-localization-at-prime].",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Algebra, Lemma Tag 00OT (label lemma-dimension-at-a-point-finite-type-over-field, lines 27787-27848), especially equality of (1) and (2); tag verified in stacks-project/tags/tags (00OT,algebra-lemma-dimension-at-a-point-finite-type-over-field)"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-finite-type-algebra",
+  "def-weil-affine-spectrum",
+  "def-kun-topological-dimension-at-point",
+  "def-kun-topological-krull-dimension",
+  "def-weil-pbc-krull-dimension-ring",
+  "def-weil-pbc-localization-at-prime"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "dimension at a point of an affine scheme equals maximum dimension of irreducible components containing the point",
+   "results": "irreducibleComponent; mem_irreducibleComponent; topologicalKrullDim; irreducibleComponents; IsLocalization.AtPrime.ringKrullDim_eq_height; irreducibleComponent_mem_irreducibleComponents",
+   "date": "2026-10-10",
+   "verdict": "no match: Mathlib has the notions and localization-height equality, but not the asserted local-dimension formula"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "local dimension of a Noetherian topological space at a point is maximum dimension of irreducible components through it",
+   "results": "topologicalKrullDim; topologicalKrullDim_subspace_le; PrimeSpectrum.topologicalKrullDim_eq_ringKrullDim; TopologicalSpace.NoetherianSpace.exists_isOpen_nonempty_subset_irreducibleComponent",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "topologicalKrullDim, irreducibleComponent",
+   "results": "none (0 declarations mentioning both constants)",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "rg -n -i 'irreducible component.*(krull|dimension)|(?:krull|dimension).*irreducible component|topologicalKrullDim.*component|component.*topologicalKrullDim' Mathlib --glob '*.lean'",
+   "results": "none stating the formula; only separate irreducible-component and Krull-dimension APIs",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-dimension-at-point-local-ring-trdeg",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {"state": "none"},
+  "slopmaster2": {"state": "none"}
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1"
+}

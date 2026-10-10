@@ -16,9 +16,73 @@
   "def-weil-pbc-krull-dimension-ring",
   "def-kun-transcendence-degree"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Put $r=\\operatorname{trdeg}_k\\kappa(\\mathfrak p)$. The closed subspace $V(\\mathfrak p)\\subseteq\\operatorname{Spec}S$ is the spectrum of the finite type domain $S/\\mathfrak p$, and its fraction field is $\\kappa(\\mathfrak p)$. Hence [lem-weil-pbc-finite-type-domain-dimension-trdeg] gives $\\dim V(\\mathfrak p)=r<\\infty$. By [lem-weil-pbc-finite-type-domain-dimension-local-ring], every maximal chain of primes of $S/\\mathfrak p$ has length $r$; equivalently, there is a maximal chain $\\mathfrak p\\subsetneq\\mathfrak p_1\\subsetneq\\cdots\\subsetneq\\mathfrak p_r$ in $S$ starting at $\\mathfrak p$.",
+   "uses": [
+    "lem-weil-pbc-finite-type-domain-dimension-trdeg",
+    "lem-weil-pbc-finite-type-domain-dimension-local-ring"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra, proof of Lemma Tag 00P1 (label lemma-dimension-at-a-point-finite-type-field, lines 28238-28244), invoking Tags 00P0 and 00OS"
+   }
+  },
+  {
+   "text": "The finite type $k$-algebra $S$ is Noetherian [lem-weil-pbc-finite-type-algebra-noetherian], so it has finitely many minimal prime ideals [lem-weil-pbc-noetherian-finitely-many-minimal-primes]. Let $\\mathfrak q_1,\\dots,\\mathfrak q_t$ be exactly those minimal primes contained in $\\mathfrak p$; this list is nonempty because every prime contains a minimal prime. Under the order-preserving bijection between primes of $S_{\\mathfrak p}$ and primes of $S$ contained in $\\mathfrak p$ [lem-weil-pbc-localization-prime-residue-field-iso] (1), the $\\mathfrak q_j$ correspond exactly to the minimal primes $\\mathfrak q_jS_{\\mathfrak p}$ of $S_{\\mathfrak p}$.",
+   "uses": [
+    "lem-weil-pbc-finite-type-algebra-noetherian",
+    "lem-weil-pbc-noetherian-finitely-many-minimal-primes",
+    "lem-weil-pbc-prime-contains-minimal-prime",
+    "lem-weil-pbc-localization-prime-residue-field-iso"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra, proof of Lemma Tag 00P1, lines 28245-28248; finiteness and nonemptiness are the Noetherian minimal-prime facts used implicitly there"
+   }
+  },
+  {
+   "text": "For each $j$, choose a maximal chain $\\mathfrak q_j\\subsetneq\\mathfrak p'_{j,1}\\subsetneq\\cdots\\subsetneq\\mathfrak p'_{j,s(j)}=\\mathfrak p$. By [lem-weil-pbc-localization-dimension-chains-below-prime] and the correspondence in Step 2, $$\\dim S_{\\mathfrak p}=\\max_{1\\le j\\le t}s(j).$$ In particular this dimension is finite.",
+   "uses": [
+    "lem-weil-pbc-localization-dimension-chains-below-prime",
+    "lem-weil-pbc-localization-prime-residue-field-iso"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra, proof of Lemma Tag 00P1, lines 28249-28256"
+   }
+  },
+  {
+   "text": "By [lem-weil-pbc-dimension-at-point-components], $$\\dim_{\\mathfrak p}(\\operatorname{Spec}S)=\\max_{1\\le j\\le t}\\dim(S/\\mathfrak q_j).$$ For each $j$, concatenate the chain of Step 3 from $\\mathfrak q_j$ to $\\mathfrak p$ with the chain of Step 1 from $\\mathfrak p$ upward. The result is a maximal chain in the finite type domain $S/\\mathfrak q_j$ of length $s(j)+r$; [lem-weil-pbc-finite-type-domain-dimension-local-ring] therefore gives $\\dim(S/\\mathfrak q_j)=s(j)+r$. Taking maxima and using Step 3 yields $$\\dim_{\\mathfrak p}(\\operatorname{Spec}S)=r+\\max_js(j)=\\operatorname{trdeg}_k\\kappa(\\mathfrak p)+\\dim S_{\\mathfrak p}.$$ All three terms are finite by Steps 1 and 3.",
+   "uses": [
+    "lem-weil-pbc-dimension-at-point-components",
+    "lem-weil-pbc-finite-type-domain-dimension-local-ring"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra, proof of Lemma Tag 00P1, lines 28248-28267, invoking Tags 00OT and 00OS"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-finite-type-domain-dimension-trdeg",
+  "lem-weil-pbc-finite-type-domain-dimension-local-ring",
+  "lem-weil-pbc-finite-type-algebra-noetherian",
+  "lem-weil-pbc-noetherian-finitely-many-minimal-primes",
+  "lem-weil-pbc-prime-contains-minimal-prime",
+  "lem-weil-pbc-localization-prime-residue-field-iso",
+  "lem-weil-pbc-localization-dimension-chains-below-prime",
+  "lem-weil-pbc-dimension-at-point-components"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Algebra, proof of Lemma Tag 00P1 (label lemma-dimension-at-a-point-finite-type-field, lines 28238-28267)"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -50,7 +114,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "worker",
@@ -71,5 +135,17 @@
  },
  "chapter": "sec-proper-base-change",
  "unit": "sk-thm-p1",
- "reviewed": "Reviewed by L 2026-10-10 (statement): Algebra 00P1 (dim_p Spec S = dim S_p + trdeg κ(p)). Unsplit."
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "group": "E1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed by the lead of E1; spot-checked by L: L read the four steps (00P1 via 00P0 and 00OT, both new unsplit nodes, with 00OS for maximal chains); chains concatenated below and above p."
+ },
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "lem-weil-pbc-dimension-at-point-local-ring-trdeg",
+  "worker": "stage1",
+  "summary": "Split the proof exactly along Algebra Tag 00P1: identify the dimension of V(p) with the residue-field transcendence degree by Tag 00P0; enumerate the minimal primes below p and identify them after localization; express the local-ring dimension by maximal chains below p; and concatenate those chains with a maximal chain above p, using Tag 00OT to compute the local topological dimension. Added unsplit nodes for the previously absent Tags 00P0 and 00OT after LeanSearch, LeanFinder/Loogle, and Mathlib-source searches found no match."
+ }
 }
