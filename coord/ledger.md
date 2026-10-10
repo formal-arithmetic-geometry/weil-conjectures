@@ -2445,3 +2445,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 19:49 L: merged deliver/C1/lem-sc-rational-unramified-cotangent-criterion (reviewer FIX; first push; new nodes: 0)
 - 19:51 L: merged deliver/E1/lem-pc-module-bounded-flat-kflat (reviewer PASS; first push; new nodes: 0)
 - 19:51 L: merged deliver/C1/thm-sp-if-e1 (reviewer FIX; first push; new nodes: 0)
+- 19:52 L: merged deliver/M1/lem-pc-kflat-hocolim-truncations (reviewer FIX; first push; new nodes: 1)

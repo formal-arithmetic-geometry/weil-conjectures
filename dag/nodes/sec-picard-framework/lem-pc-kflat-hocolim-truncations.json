@@ -20,9 +20,57 @@
   "def-pc-cochain-complex-modules",
   "def-pc-quasi-iso-modules"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Apply [lem-pc-complex-hocolim-colimit] to the sequence of good truncations $\\tau_{\\le N}\\mathcal G^\\bullet$ with its canonical transition maps. It gives a quasi-isomorphism from $\\operatorname{hocolim}_{N}\\tau_{\\le N}\\mathcal G^\\bullet$ to the termwise filtered colimit $\\varinjlim_N\\tau_{\\le N}\\mathcal G^\\bullet$.",
+   "uses": [
+    "lem-pc-complex-hocolim-colimit"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 06YS, Lemma \\ref{lemma-resolution-by-direct-sums-extensions-by-zero}"
+   }
+  },
+  {
+   "text": "In each degree $i$, the good truncation $(\\tau_{\\le N}\\mathcal G^\\bullet)^i$ equals $\\mathcal G^i$ for every $N\\ge i+1$ (for $N=i$ it is $\\ker d^i$, and for $N<i$ it is $0$), and the transition maps between these terms are then identities; so in each degree the sequence is eventually constant equal to $\\mathcal G^i$ and the colimit in degree $i$ is $\\mathcal G^i$. Thus the canonical map $\\varinjlim_N\\tau_{\\le N}\\mathcal G^\\bullet\\to\\mathcal G^\\bullet$ is an isomorphism of cochain complexes, hence a quasi-isomorphism [def-pc-quasi-iso-modules]. Composing with Step 1 proves the truncation assertion.",
+   "uses": [
+    "def-pc-cochain-complex-modules",
+    "def-pc-quasi-iso-modules"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 06YS, Lemma \\ref{lemma-resolution-by-direct-sums-extensions-by-zero}"
+   }
+  },
+  {
+   "text": "Let $(f_j:E_j^\\bullet\\to F_j^\\bullet)_{j\\in J}$ be a filtered diagram of quasi-isomorphisms. For $\\Mod(\\mathcal O)$ to be abelian the site is small, or essentially so [def-weil-sheaf-of-modules-category]; replacing $\\mathcal C$ by an equivalent small site does not change $\\Mod(\\mathcal O)$, so the hypothesis of [prop-pur-kinjective-resolutions-exist] holds and by it filtered colimits in the sheaf-of-$\\mathcal O$-modules category are exact. Therefore kernels, images, and cohomology of the termwise colimit commute with the filtered colimit, so $H^i(\\varinjlim_jE_j^\\bullet)\\cong\\varinjlim_jH^i(E_j^\\bullet)$ and likewise for $F_j^\\bullet$. The induced map on these groups is the filtered colimit of the isomorphisms $H^i(f_j)$, hence is an isomorphism for every $i$; the induced map of colimit complexes is a quasi-isomorphism.",
+   "uses": [
+    "prop-pur-kinjective-resolutions-exist",
+    "def-pc-cochain-complex-modules",
+    "def-pc-quasi-iso-modules",
+    "def-weil-sheaf-of-modules-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 06YS, Lemma \\ref{lemma-resolution-by-direct-sums-extensions-by-zero}"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-complex-hocolim-colimit",
+  "def-pc-cochain-complex-modules",
+  "def-pc-quasi-iso-modules",
+  "prop-pur-kinjective-resolutions-exist",
+  "def-weil-sheaf-of-modules-category"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Lemma 06YS"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -47,12 +95,37 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-pc-kflat-resolution",
   "by": "worker",
   "date": "2026-10-10"
  },
  "chapter": "sec-picard-framework",
- "unit": "sk-thm-picard-semicon"
+ "unit": "sk-thm-picard-semicon",
+ "split_report": {
+  "date": "2026-10-11",
+  "item": "lem-pc-kflat-hocolim-truncations",
+  "worker": "stage1",
+  "summary": "Split the telescope comparison and filtered-colimit preservation facts into two statement-only child nodes, then proved the truncation comparison by stabilization of cohomology. The source is Stacks Lemma 06YS; its source file is available in the review checkout but is not present under literature in this repository.",
+  "blueprint": "Realizes the final comparison from the homotopy colimit of truncations back to the original complex and the filtered-colimit quasi-isomorphism used in the K-flat resolution proof.",
+  "tool_uses": [
+   {
+    "node": "prop-pur-kinjective-resolutions-exist",
+    "why": "Its statement supplies exact filtered colimits in the module category on an arbitrary ringed site, needed to commute filtered colimits with kernels and images."
+   }
+  ]
+ },
+ "tool_uses": [
+  "prop-pur-kinjective-resolutions-exist",
+  "prop-pur-kinjective-resolutions-exist"
+ ],
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-kht2103",
+  "group": "M1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-kht2103 (reviewer sub-agent of L); spot-checked: Step 1: new telescope node lem-pc-complex-hocolim-colimit true on any ringed site (1-shift injective with cokernel the colimit, cone of a mono qis to its cokernel), not a special case of etale-only lem-kun-complex-colimit-hocolim; d^2=0 automatic for a cone. Step 3 tool use prop-pur-kinjective-resolutions-exist accepted (exact filtered colimits). FIX more, RETURN less: (1) Step 2 false at N=i: (tau_{<=N}G)^N=ker d^N, so terms equal G^i only for N>=i+1; text corrected (E/elementary step repaired). (2) C4: prop-pur-kinjective-resolutions-exist requires a small site, the item says 'a site'; Step 3 now notes the site is small or essentially so as presupposed for Mod(O) abelian [def-weil-sheaf-of-modules-category] and replaces it by an equivalent small site; uses/proof_deps updated. K-flatness is not claimed by this item (it is in lem-pc-kflat-resolution, which cites lem-pc-kflat-closure).; 1 file(s) fixed by the reviewer"
+ }
 }
