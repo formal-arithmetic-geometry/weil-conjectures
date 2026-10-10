@@ -2115,3 +2115,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 17:28 L: merged deliver/H1/lem-sc-dvr-valuation-arithmetic (reviewer FIX; first push; new nodes: 0)
 - 17:28 L: merged deliver/E1/lem-sc-local-domain-dim-one-principal-localization-fraction-field (reviewer FIX; first push; new nodes: 0)
 - 17:29 L: merged deliver/K1/lem-weil-pbc-site-restriction-injectives (reviewer FIX; first push; new nodes: 3)
+- 17:30 L: merged deliver/J1/lem-sc-p1-ext-pushout-postcompose (reviewer FIX; first push; new nodes: 1)
