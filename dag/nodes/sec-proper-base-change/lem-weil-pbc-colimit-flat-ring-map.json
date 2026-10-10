@@ -1,0 +1,84 @@
+{
+ "id": "lem-weil-pbc-colimit-flat-ring-map",
+ "kind": "statement",
+ "title": "Flatness of a finitely presented algebra map descends to a stage of a directed colimit of base rings",
+ "statement": "Let $I$ be a directed set and $(A_i)_{i\\in I}$ a directed system of commutative rings (ring maps $A_i\\to A_{i'}$ for $i\\le i'$, the identity for $i=i'$, compatible with composition), with colimit $A=\\varinjlim_iA_i$ in the category of commutative rings [def-weil-pbc-category-colimit]. Let $0\\in I$, let $B_0$ and $C_0$ be commutative $A_0$-algebras and $\\varphi_0:B_0\\to C_0$ a homomorphism of $A_0$-algebras which is of finite presentation, i.e. $C_0$ is a finitely presented $B_0$-algebra via $\\varphi_0$ [def-weil-pbc-finitely-presented-algebra]. For $i\\ge0$ regard $A_i$ as an $A_0$-algebra via the transition map and $A$ via the coprojection $A_0\\to A$, and put $B_i=A_i\\otimes_{A_0}B_0$, $C_i=A_i\\otimes_{A_0}C_0$, $\\varphi_i=\\mathrm{id}_{A_i}\\otimes\\varphi_0:B_i\\to C_i$, and $B=A\\otimes_{A_0}B_0$, $C=A\\otimes_{A_0}C_0$, $\\varphi=\\mathrm{id}_A\\otimes\\varphi_0:B\\to C$. If $\\varphi$ is a flat ring map [def-weil-pbc-flat-ring-map], then there is $i_0\\in I$ with $i_0\\ge0$ such that $\\varphi_i:B_i\\to C_i$ is a flat ring map for every $i\\ge i_0$.",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex; literature/stacks-project/limits.tex",
+  "place": "Algebra, Lemma Tag 02JO (lemma-flat-finite-presentation-limit-flat, algebra.tex line 47331), part (3), applied to the system $(R_\\lambda\\to S_\\lambda,M_\\lambda)=(B_i\\to C_i,C_i)_{i\\ge0}$; this is the algebra result stated in the proof of Limits, Lemma Tag 04AI (lemma-descend-flat-finite-presentation, limits.tex line 1868), second paragraph"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-category-colimit",
+  "def-weil-pbc-finitely-presented-algebra",
+  "def-weil-pbc-flat-ring-map"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "flatness of a finitely presented algebra over a filtered colimit of rings descends to some stage of the colimit",
+   "results": "Module.Flat.of_flat_tensorProduct (Mathlib.RingTheory.Flat.FaithfullyFlat.Basic; faithfully flat descent, not a colimit), RingHom.EssFiniteType.exists_eq_comp_ι_app_of_isColimit (Mathlib.Algebra.Category.Ring.FinitePresentation; factorization of maps through a stage, no flatness), RingHom.FinitePresentation, Module.Flat.projective_of_finitePresentation, Module.Flat.of_isLocalizedModule",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "If A is a directed colimit of rings A_i and B_0 -> C_0 is a finitely presented algebra map, flatness of A (x) B_0 -> A (x) C_0 implies A_i (x) B_0 -> A_i (x) C_0 flat for some i",
+   "results": "Module.Flat.of_flat_tensorProduct, Module.Flat.iff_flat_tensorProduct, Module.FaithfullyFlat.instTensorProduct (FaithfullyFlat/Basic), Module.Flat.instTensorProduct (Flat/Basic), Module.Flat.iff_rTensor_injective (Flat/Tensor), RingHom.FaithfullyFlat.codescendsAlong_injective; none concerns colimits of the base ring",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "RingHom.Flat, CategoryTheory.Limits.IsColimit",
+   "results": "no declarations",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Flat\", \"colimit\"",
+   "results": "CategoryTheory.preservesFiniteColimits_of_coflat, coflat_of_preservesFiniteColimits, preservesFiniteColimits_iff_coflat (Mathlib.CategoryTheory.Functor.Flat; flat functors, unrelated)",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "rg -n '02JO|04AI|00R6|flat.*IsColimit|IsColimit.*[Ff]lat|Flat.*isColimit' Mathlib/ ; grep -n 'Flat|flat' Mathlib/AlgebraicGeometry/AffineTransitionLimit.lean ; grep -rln IsFiltered Mathlib/RingTheory | xargs grep -ln Flat (slopmaster2 checkout's Mathlib, read only)",
+   "results": "no matches",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "local_search",
+   "query": "exists_flat_of_isColimit (project root ~/weil-conjectures-slopmaster2)",
+   "results": "empty with index: unavailable (no proof of absence; the grep above is the absence check)",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-descend-flat-finite-presentation",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1"
+}
