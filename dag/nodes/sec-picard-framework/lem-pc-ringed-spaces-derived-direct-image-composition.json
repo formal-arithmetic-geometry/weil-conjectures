@@ -24,9 +24,51 @@
   "def-weil-locally-ringed-space-morphism",
   "def-pc-ringed-spaces-derived-direct-image"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "The ringed-space derived adjunction statement [lem-pc-ringed-spaces-derived-adjoint-general] gives adjunctions $Lf^*\\dashv Rf_*$, $Lg^*\\dashv Rg_*$, and $L(g\\circ f)^*\\dashv R(g\\circ f)_*$ on the corresponding derived categories.",
+   "uses": [
+    "lem-pc-ringed-spaces-derived-adjoint-general"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/cohomology.tex",
+    "place": "Tag 079W (cohomology-lemma-adjoint)"
+   }
+  },
+  {
+   "text": "The derived pullback composition statement [lem-pc-ringed-spaces-derived-pullback-composition] supplies a canonical natural isomorphism $Lf^*\\circ Lg^*\\cong L(g\\circ f)^*$, so transporting the last adjunction across this isomorphism makes $R(g\\circ f)_*$ a right adjoint of $Lf^*\\circ Lg^*$.",
+   "uses": [
+    "lem-pc-ringed-spaces-derived-pullback-composition"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/cohomology.tex",
+    "place": "Tag 0D5S (cohomology-lemma-derived-pullback-composition)"
+   }
+  },
+  {
+   "text": "Apply [lem-cat-right-adjoint-composition] with $F=Lg^*$, $G=Lf^*$, $F^!=Rg_*$, $G^!=Rf_*$, and $(G\\circ F)^!=R(g\\circ f)_*$. It gives a canonical natural isomorphism $R(g\\circ f)_*\\cong Rg_*\\circ Rf_*$. Taking its inverse yields the required canonical isomorphism $Rg_*\\circ Rf_*\\cong R(g\\circ f)_*$, natural as an isomorphism of functors $D(\\mathcal O_X)\\to D(\\mathcal O_Z)$.",
+   "uses": [
+    "lem-cat-right-adjoint-composition"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/cohomology.tex",
+    "place": "Tag 0D5T (cohomology-lemma-derived-pushforward-composition)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-ringed-spaces-derived-adjoint-general",
+  "lem-pc-ringed-spaces-derived-pullback-composition",
+  "lem-cat-right-adjoint-composition"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Tag 0D5T, using Tags 079W and 0D5S"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -34,15 +76,59 @@
    "results": "SheafOfModules.pushforwardComp, AlgebraicGeometry.Scheme.Modules.pushforwardComp (underived pushforward only); no derived statement",
    "date": "2026-10-10",
    "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "canonical natural isomorphism between composite right derived functors and right derived functor of a composite for functors with enough injectives",
+   "results": "CategoryTheory.NatTrans.rightDerived_comp_assoc and related generic right-derived natural-transformation lemmas; no direct derived-direct-image composition theorem",
+   "date": "2026-10-11",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "Functor.rightDerivedFunctorCompIso, rightDerivedFunctorPlusCompIso",
+   "results": "0 hits; unknown identifier Functor.rightDerivedFunctorCompIso",
+   "date": "2026-10-11",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "grep",
+   "query": "rightDerivedFunctorCompIso|rightDerivedFunctorPlusCompIso in Mathlib",
+   "results": "0 matches",
+   "date": "2026-10-11",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "canonical natural isomorphism between composite right adjoints Rg_* composed with Rf_* and the right derived direct image of a composite morphism of ringed spaces",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-11",
+   "verdict": "unavailable"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-pc-derived-sections-pushforward-comparison",
   "by": "reviewer",
   "date": "2026-10-10"
  },
  "chapter": "sec-picard-framework",
- "unit": "sk-thm-picard-duality"
+ "unit": "sk-thm-picard-duality",
+ "split_report": {
+  "date": "2026-10-11",
+  "item": "lem-pc-ringed-spaces-derived-direct-image-composition",
+  "worker": "stage1",
+  "summary": "Split the Tag 0D5T composition theorem into three steps: invoke the existing derived adjunctions for ringed spaces, transport the composite derived-direct-image adjunction across the existing derived-pullback composition isomorphism, and apply the existing categorical right-adjoint-composition theorem, then invert its comparison to match the item's orientation. No new nodes were needed.",
+  "blueprint": "Realizes the first proof step of lem-sc-finite-duality: composition of derived direct images in the comparison along V→U→(pt,Z).",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-rdc2209",
+  "group": "E1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-rdc2209 (reviewer sub-agent of L); spot-checked: Short adjoint-uniqueness route as Stacks 0D5T and the scheme node e6a8c4b1e: adjoint-general (079W) gives the three adjunctions, ringed-space pullback-composition (0D5S) transports, lem-cat-right-adjoint-composition with F=Lg^*, G=Lf^* gives (G F)^! = Rg_* Rf_*, orientation checked; no new nodes, nothing restated, scheme node not cited. FIX more, RETURN less: stmt_deps had the three proof lemmas added though the statement cites only the two defs; restored stmt_deps to [def-weil-locally-ringed-space-morphism, def-pc-ringed-spaces-derived-direct-image] (proof_deps unchanged).; 1 file(s) fixed by the reviewer"
+ }
 }
