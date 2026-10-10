@@ -2457,3 +2457,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 19:54 L: merged deliver/F1/lem-sc-topological-filtered-cohomology (reviewer FIX; after a return; new nodes: 1)
 - 19:54 L: merged deliver/M1/lem-sc-strict-henselization-dimension (reviewer FIX; first push; new nodes: 3)
 - 19:55 L: merged deliver/G1/lem-sc-cech-spectral (reviewer FIX; first push; new nodes: 0)
+- 19:56 L: returned deliver/K1/lem-pc-universal-adjoint-section (reviewer RETURN: 1. E7/E: the Second reading says the statement was repaired from H to an open W, but the delivered statement is byte-ide)
