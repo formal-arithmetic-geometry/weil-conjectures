@@ -29,14 +29,44 @@
   "def-weil-pbc-etale-cohomology",
   "def-sc-gm-torsor"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Apply [lem-weil-pbc-unrestricted-strict-henselization-stalk] to the given quasi-compact quasi-separated morphism, the abelian etale sheaf $\\mathbf G_m$, and the geometric point. This gives the canonical isomorphism $(R^qf_*\\mathbf G_m)_{\\bar x}\\cong H^q((X\\times_SS_{(\\bar x)})_{\\mathrm{Et}},p^{-1}\\mathbf G_m)$ for every $q\\geq0$.",
+   "uses": [
+    "lem-weil-pbc-unrestricted-strict-henselization-stalk"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Theorem Tag 03Q9, first assertion"
+   }
+  },
+  {
+   "text": "By [lem-weil-pbc-gm-pullback-strict-henselization], the canonical map $p^{-1}\\mathbf G_{m,X}\\to\\mathbf G_{m,X\\times_SS_{(\\bar x)}}$ is an isomorphism. Replacing $p^{-1}\\mathbf G_m$ by this canonically isomorphic units sheaf in the isomorphism of Step 1 yields the final displayed identification.",
+   "uses": [
+    "lem-weil-pbc-gm-pullback-strict-henselization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Theorem Tag 03Q9 proof, units identification"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-unrestricted-strict-henselization-stalk",
+  "lem-weil-pbc-gm-pullback-strict-henselization"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Theorem Tag 03Q9 (theorem-higher-direct-images), first assertion and proof"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
    "query": "higher direct image stalk equals cohomology over strict henselization for arbitrary etale sheaf",
-   "results": "Only generic stalk and restriction declarations; no higher direct-image strict-henselization formula.",
+   "results": "TopCat.Presheaf.stalkPushforward and generic stalk declarations only; no strict-henselization formula.",
    "date": "2026-10-11",
    "verdict": "no match"
   },
@@ -63,12 +93,28 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-sc-open-curve-boundary-higher-direct-image-vanishing",
   "by": "worker",
   "date": "2026-10-10"
  },
  "chapter": "sec-curve-estimates",
- "unit": "sk-thm-br"
+ "unit": "sk-thm-br",
+ "split_report": {
+  "date": "2026-10-11",
+  "item": "lem-weil-pbc-gm-strict-henselization-stalk-formula",
+  "worker": "stage1",
+  "summary": "Split the multiplicative-sheaf specialization of Stacks Tag 03Q9 into the unrestricted higher-direct-image stalk comparison and the separate identification of the pullback of units on the qcqs strict-henselization limit. The existing torsion-only proposition was checked and is insufficient for G_m.",
+  "blueprint": "Realizes the stalk computation preceding Tag 03RM: first the higher-direct-image stalk formula, then the identification p^{-1}G_m = G_m using continuity of units on the qcqs limit.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-gsh1908",
+  "group": "J1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-gsh1908 (reviewer sub-agent of L); spot-checked: Read packet whole. Step 1 cites unrestricted 03Q9 node (any abelian sheaf; true, Stacks 03Q9 has no torsion hypothesis; existing prop-weil-pbc-strict-henselization-stalk-formula is torsion-only so not a duplicate, it is a special case of the new node). Step 2 cites G_m pullback node; checked true: X x_S S^sh is a limit of etale X x_S V over X, so strict henselizations of stalks agree and p^{-1}G_m -> G_m is iso on geometric stalks. No cycle: new nodes unsplit, referenced only by the item and the parent lem-sc-open-curve-boundary-higher-direct-image-vanishing; item stalk formula cited via the new 03Q9 node. Second reading: no missed fault."
+ }
 }
