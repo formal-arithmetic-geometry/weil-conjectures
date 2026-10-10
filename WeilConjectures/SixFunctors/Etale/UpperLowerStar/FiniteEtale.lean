@@ -10,6 +10,7 @@ public import WeilConjectures.Mathlib.AlgebraicGeometry.PullbackCarrier
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Sites.Etale
 public import WeilConjectures.SixFunctors.Etale.LowerShriek.OpenImmersion.Defs
 public import WeilConjectures.SixFunctors.Finite.Stalk
+public import WeilConjectures.Mathlib.AlgebraicGeometry.Sites.EtalePoint
 
 /-!
 # The direct image along a finite étale morphism is left adjoint to the pullback
@@ -600,5 +601,89 @@ lemma Etale.bijective_lowerStarUnit_comp_map_skyscraperSheaf (M : A) :
     rw [this, Category.assoc, IsIso.hom_inv_id_assoc, biproduct.ι_desc]
     exact (Scheme.pointSmallEtale t.1).toPresheafFiber_presheafFiberDesc _ _ U x
 end Skyscraper
+
+section LowerShriek
+
+/-- The extension by zero `f_!` along an étale `f : X ⟶ Y`: left Kan extension along the
+localization functor `X_ét ⥤ Y_ét` followed by sheafification, left adjoint to the
+restriction `f^*`. -/
+noncomputable def Etale.etaleLowerShriek [HasSmallSiteSheafify A] :
+    Sheaf X.smallEtaleTopology A ⥤ Sheaf Y.smallEtaleTopology A :=
+  Functor.sheafPullbackConstruction.sheafPullback
+    (MorphismProperty.Over.map ⊤ ‹AlgebraicGeometry.Etale f›) A
+    (X.smallGrothendieckTopology @AlgebraicGeometry.Etale)
+    (Y.smallGrothendieckTopology @AlgebraicGeometry.Etale)
+
+/-- The adjunction `f_! ⊣ f^*` for an étale `f`, with `f^*` computed as restriction. -/
+noncomputable def Etale.etaleLowerShriekAdjunction [HasSmallSiteSheafify A] :
+    Etale.etaleLowerShriek A f ⊣ Etale.localizationRestriction A f ‹_› :=
+  Functor.sheafPullbackConstruction.sheafAdjunctionContinuous
+    (MorphismProperty.Over.map ⊤ ‹AlgebraicGeometry.Etale f›) A
+    (X.smallGrothendieckTopology @AlgebraicGeometry.Etale)
+    (Y.smallGrothendieckTopology @AlgebraicGeometry.Etale)
+
+/-- The comparison `f_! G ⟶ f_* G` for a separated étale `f`, adjoint to the extension by
+zero off the graphs. -/
+noncomputable def Etale.etaleLowerShriekToLowerStar [HasSmallSiteSheafify A]
+    (G : Sheaf X.smallEtaleTopology A) :
+    (Etale.etaleLowerShriek A f).obj G ⟶ (f)_*[A].obj G :=
+  ((Etale.etaleLowerShriekAdjunction A f).homEquiv _ _).symm ((Etale.lowerStarUnit A f).app G)
+
+lemma Etale.etaleLowerShriekAdjunction_homEquiv_comp [HasSmallSiteSheafify A]
+    (G : Sheaf X.smallEtaleTopology A) {F : Sheaf Y.smallEtaleTopology A}
+    (φ : (f)_*[A].obj G ⟶ F) :
+    (Etale.etaleLowerShriekAdjunction A f).homEquiv _ _
+        (Etale.etaleLowerShriekToLowerStar A f G ≫ φ) =
+      (Etale.lowerStarUnit A f).app G ≫ (Etale.localizationRestriction A f ‹_›).map φ := by
+  rw [Adjunction.homEquiv_naturality_right, Etale.etaleLowerShriekToLowerStar,
+    Equiv.apply_symm_apply]
+
+
+omit [Abelian A] [IsGrothendieckAbelian.{u + 1} A] in
+/-- A morphism `g : P ⟶ Q` such that precomposition with `g` is bijective on morphisms into
+every object is an isomorphism. -/
+lemma _root_.CategoryTheory.isIso_of_bijective_comp {P Q : A} (g : P ⟶ Q)
+    (h : ∀ M : A, Function.Bijective (fun k : Q ⟶ M ↦ g ≫ k)) : IsIso g := by
+  obtain ⟨k, hk⟩ := (h P).2 (𝟙 P)
+  exact ⟨k, hk, (h Q).1 (by simp only [reassoc_of% hk, Category.comp_id])⟩
+
+section Concrete
+
+variable [HasSmallSiteSheafify A] [IsFinite f]
+  {FC : A → A → Type*} {CC : A → Type (u + 1)} [∀ P Q, FunLike (FC P Q) (CC P) (CC Q)]
+  [ConcreteCategory.{u + 1} A FC] [(CategoryTheory.forget A).ReflectsIsomorphisms]
+  [PreservesFilteredColimitsOfSize.{u + 1, u + 1} (CategoryTheory.forget A)]
+  [Y.smallEtaleTopology.HasSheafCompose (CategoryTheory.forget A)]
+
+/-- For a finite étale `f` and coefficients concrete over `Type (u + 1)` compatibly with
+filtered colimits, the comparison `f_! G ⟶ f_* G` is an isomorphism: on the stalk at a
+geometric point `y`, maps out of it into `M` are the maps `G ⟶ f^* (y_* M)`, by the
+skyscraper adjunction and `f_! ⊣ f^*`, and these are the maps `f_* G ⟶ y_* M`
+(`AlgebraicGeometry.Etale.bijective_lowerStarUnit_comp_map_skyscraperSheaf`). -/
+instance Etale.isIso_etaleLowerShriekToLowerStar (G : Sheaf X.smallEtaleTopology A) :
+    IsIso (Etale.etaleLowerShriekToLowerStar A f G) := by
+  refine Scheme.isIso_of_isIso_sheafFiber_map _ fun s ↦ ?_
+  let y := Y.algClosurePoint s
+  refine (NatIso.isIso_map_iff ((Scheme.pointSmallEtale y).uliftSheafFiberIso A) _).2 ?_
+  refine CategoryTheory.isIso_of_bijective_comp A _ fun M ↦ ?_
+  let adj := (Scheme.pointSmallEtale y).skyscraperSheafAdjunction (A := A)
+  have key : (fun k ↦ (Scheme.pointSmallEtale y).sheafFiber.map
+      (Etale.etaleLowerShriekToLowerStar A f G) ≫ k) =
+      (adj.homEquiv _ M).symm ∘ ((Etale.etaleLowerShriekAdjunction A f).homEquiv _ _).symm ∘
+        (fun φ ↦ (Etale.lowerStarUnit A f).app G ≫
+          (Etale.localizationRestriction A f ‹_›).map φ) ∘ adj.homEquiv _ M := by
+    funext k
+    dsimp only [Function.comp_apply]
+    rw [← Etale.etaleLowerShriekAdjunction_homEquiv_comp]
+    erw [Equiv.symm_apply_apply]
+    rw [Adjunction.homEquiv_naturality_left_symm, Equiv.symm_apply_apply]
+  rw [key]
+  exact (adj.homEquiv _ M).symm.bijective.comp
+    (((Etale.etaleLowerShriekAdjunction A f).homEquiv _ _).symm.bijective.comp
+      ((Etale.bijective_lowerStarUnit_comp_map_skyscraperSheaf A f y G M).comp
+        (adj.homEquiv _ M).bijective))
+
+end Concrete
+end LowerShriek
 
 end AlgebraicGeometry
