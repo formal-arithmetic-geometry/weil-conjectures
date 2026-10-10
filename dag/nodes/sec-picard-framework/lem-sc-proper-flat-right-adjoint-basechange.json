@@ -24,9 +24,39 @@
   "def-pc-derived-category",
   "def-pc-derived-direct-image"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Apply the restriction-compatibility statement [lem-sc-proper-flat-right-adjoint-restriction-open] to f and to its base change f'. It says explicitly that formation of both right adjoints and of the base-change morphism commutes with restriction to quasi-compact affine opens on either Y or Y'. Hence, using affine-open covers and the locality of isomorphisms in D_QCoh, it suffices to prove the assertion when Y'\\to Y is a morphism of affine schemes.",
+   "uses": [
+    "lem-sc-proper-flat-right-adjoint-restriction-open"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/duality.tex",
+    "place": "Tag 0AAB (Lemma 48.12.4), proof, first sentence invoking Tag 0E4J and Remark 48.6.1"
+   }
+  },
+  {
+   "text": "For affine Y'\\to Y, the hypotheses of Tag 0AA8 hold: f is proper, and flatness of f gives Tor independence with every g; finite presentation is the case (1) hypothesis. Thus [lem-sc-proper-flat-right-adjoint-affine-basechange] identifies the canonical map Lg_X^*a(K) \\to a'(Lg^*K) as an isomorphism for every K. The restriction identifications from the preceding step transport this affine isomorphism to the original covers, so the global base-change map is an isomorphism.",
+   "uses": [
+    "lem-sc-proper-flat-right-adjoint-affine-basechange"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/duality.tex",
+    "place": "Tag 0AAB (Lemma 48.12.4), proof, final sentence invoking Tag 0AA8"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sc-proper-flat-right-adjoint-restriction-open",
+  "lem-sc-proper-flat-right-adjoint-affine-basechange"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/duality.tex",
+  "place": "Tag 0AAB (Lemma 48.12.4)"
+ },
  "source": {
   "document": "literature/stacks-project/duality.tex",
   "place": "Tag 0AAB (Lemma 48.12.4), base change for the right adjoint of a proper flat morphism of finite presentation"
@@ -62,12 +92,28 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-sc-smooth-proper-diagonal-basechange-upper-shriek",
   "by": "worker",
   "date": "2026-10-10"
  },
  "chapter": "sec-picard-framework",
- "unit": "sk-thm-picard-duality"
+ "unit": "sk-thm-picard-duality",
+ "split_report": {
+  "date": "2026-10-11",
+  "item": "lem-sc-proper-flat-right-adjoint-basechange",
+  "worker": "stage1",
+  "summary": "Split the Tag 0AAB proof into restriction to affine opens (Tag 0E4J) and the affine Tor-independent base-change theorem (Tag 0AA8). Flatness supplies Tor independence on the affine charts, and locality then gives the global canonical isomorphism.",
+  "blueprint": "The steps realize the proof of lem-sc-finite-duality used through the diagonal counit identity: reduce the base-change formula to affine bases and apply the affine proper-flat base-change lemma.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-pfr1845",
+  "group": "C1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-pfr1845 (reviewer sub-agent of L); spot-checked: Item = Stacks 0AAB verbatim (qcqs Y,Y'; f proper flat f.p.; canonical iso for all K in D_QCoh). Split follows 0AAB proof exactly: step 1 cites restriction-open node (0E4J(2) plus Remark 48.6.1 compatibility of base-change map), step 2 cites affine node (0AA8 case (1); flat f gives Tor independence). The generator/adjunction argument of 0AA8 is carried by the affine node, to be split later. No cycle: item and new nodes do not cite G1's lem-sc-smooth-proper-diagonal-basechange-upper-shriek. No DAG node carries 0E4J/0AA8 (git grep); new nodes are statement-only, self-contained, not in Mathlib (searches recorded). Map direction consistent. No repairs."
+ }
 }
