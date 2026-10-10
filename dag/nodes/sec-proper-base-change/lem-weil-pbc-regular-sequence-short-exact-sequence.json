@@ -10,9 +10,57 @@
  "stmt_deps": [
   "def-weil-pbc-regular-sequence"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Induced maps and cokernels of multiplication. For an ideal $I\\subset R$ one has $\\alpha(IM_1)\\subseteq IM_2$ and $\\beta(IM_2)\\subseteq IM_3$ (as $\\alpha(xm)=x\\alpha(m)$), so $\\alpha,\\beta$ induce $R$-linear maps $\\alpha_I:M_1/IM_1\\to M_2/IM_2$, $\\beta_I:M_2/IM_2\\to M_3/IM_3$ with $\\beta_I\\alpha_I=0$; for $I=I_0=0$ these are $\\alpha,\\beta$. Let $N$ be an $R$-module and $1\\le i\\le r$. Since $I_i=I_{i-1}+Rf_i$, we have $I_iN=I_{i-1}N+f_iN$, whose image in $N/I_{i-1}N$ is $f_i\\cdot(N/I_{i-1}N)$; hence the cokernel of multiplication by $f_i$ on $N/I_{i-1}N$ is $(N/I_{i-1}N)/f_i(N/I_{i-1}N)=N/I_iN$, the quotient map being the projection $N/I_{i-1}N\\to N/I_iN$. Under these identifications for $N=M_1,M_2,M_3$, the maps of cokernels induced by $\\alpha_{I_{i-1}}$ and $\\beta_{I_{i-1}}$ are $\\alpha_{I_i}$ and $\\beta_{I_i}$ (both send the class of $m$ to the class of $\\alpha(m)$, resp. $\\beta(m)$).",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra, Lemma Tag 0F1T (lemma-regular-sequence-short-exact-sequence), proof (the identification of M/f_1M with the cokernel of f_1 on M, implicit in the displayed sequence 0 -> M_1/f_1M_1 -> M_2/f_1M_2 -> M_3/f_1M_3 -> 0 and in 'induction on r')"
+   }
+  },
+  {
+   "text": "The inductive claim. For $0\\le i\\le r$ let $(P_i)$ be: the sequence $0\\to M_1/I_iM_1\\xrightarrow{\\alpha_{I_i}}M_2/I_iM_2\\xrightarrow{\\beta_{I_i}}M_3/I_iM_3\\to0$ is exact, and $f_j$ is a nonzerodivisor on $M_2/I_{j-1}M_2$ for every $1\\le j\\le i$. $(P_0)$ holds: $I_0=0$, so the sequence is the given short exact sequence (Step 1), and the second condition is empty. We show $(P_{i-1})\\Rightarrow(P_i)$ for $1\\le i\\le r$ in Step 3; then $(P_r)$ is part (a).",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra, Lemma Tag 0F1T (lemma-regular-sequence-short-exact-sequence), proof ('The lemma follows from this and induction on r. Some details omitted.'; the induction is set up here)"
+   }
+  },
+  {
+   "text": "The inductive step, by the snake lemma. Assume $(P_{i-1})$, $1\\le i\\le r$, and write $\\bar M_j=M_j/I_{i-1}M_j$. Consider the commutative diagram whose two rows are both the exact sequence $0\\to\\bar M_1\\xrightarrow{\\alpha_{I_{i-1}}}\\bar M_2\\xrightarrow{\\beta_{I_{i-1}}}\\bar M_3\\to0$ of $(P_{i-1})$ and whose three vertical maps are multiplication by $f_i$; it commutes because $\\alpha_{I_{i-1}},\\beta_{I_{i-1}}$ are $R$-linear. The top row has $\\beta_{I_{i-1}}$ surjective and exactness at $\\bar M_2$, the bottom row has $\\alpha_{I_{i-1}}$ injective and exactness at $\\bar M_2$, and moreover the top first map is injective and the bottom last map surjective. By the snake lemma [lem-weil-pbc-snake-lemma-modules] the sequence $\\ker(f_i|\\bar M_1)\\to\\ker(f_i|\\bar M_2)\\to\\ker(f_i|\\bar M_3)\\xrightarrow{\\partial}\\operatorname{coker}(f_i|\\bar M_1)\\to\\operatorname{coker}(f_i|\\bar M_2)\\to\\operatorname{coker}(f_i|\\bar M_3)$ is exact, its first map is injective and its last map surjective. By hypothesis $f_i$ is a nonzerodivisor on $\\bar M_1$ and on $\\bar M_3$, so $\\ker(f_i|\\bar M_1)=0=\\ker(f_i|\\bar M_3)$. Exactness at $\\ker(f_i|\\bar M_2)$ between two zero modules gives $\\ker(f_i|\\bar M_2)=0$: $f_i$ is a nonzerodivisor on $M_2/I_{i-1}M_2$. Exactness at $\\operatorname{coker}(f_i|\\bar M_1)$ with $\\partial$ defined on $0$ gives that $\\operatorname{coker}(f_i|\\bar M_1)\\to\\operatorname{coker}(f_i|\\bar M_2)$ is injective; with exactness at $\\operatorname{coker}(f_i|\\bar M_2)$ and surjectivity of the last map the three cokernels form a short exact sequence. By Step 1 the cokernels are $M_j/I_iM_j$ and the maps are $\\alpha_{I_i},\\beta_{I_i}$, so $0\\to M_1/I_iM_1\\to M_2/I_iM_2\\to M_3/I_iM_3\\to0$ is exact. With $(P_{i-1})$ for $j<i$ this is $(P_i)$.",
+   "uses": [
+    "lem-weil-pbc-snake-lemma-modules"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra, Lemma Tag 0F1T (lemma-regular-sequence-short-exact-sequence), proof ('By Lemma 07JW [lemma-snake], if f_1 : M_1 -> M_1 and f_1 : M_3 -> M_3 are injective, then so is f_1 : M_2 -> M_2 and we obtain a short exact sequence 0 -> M_1/f_1M_1 -> M_2/f_1M_2 -> M_3/f_1M_3 -> 0', applied to the modules M_j/I_{i-1}M_j)"
+   }
+  },
+  {
+   "text": "Part (b). Suppose $f_1,\\dots,f_r$ is $M_1$-regular and $M_3$-regular [def-weil-pbc-regular-sequence]. Condition (1) of the definition for $M_1$ and $M_3$ is the hypothesis of (a), so by (a) (Steps 2 and 3) $f_i$ is a nonzerodivisor on $M_2/I_{i-1}M_2$ for $i=1,\\dots,r$: condition (1) for $M_2$. By (a) $\\beta_{I_r}:M_2/I_rM_2\\to M_3/I_rM_3$ is surjective, and $M_3/I_rM_3\\neq0$ by condition (2) for $M_3$; hence $M_2/I_rM_2\\neq0$, condition (2) for $M_2$. So $f_1,\\dots,f_r$ is $M_2$-regular.",
+   "uses": [
+    "def-weil-pbc-regular-sequence"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra, Lemma Tag 0F1T (lemma-regular-sequence-short-exact-sequence), statement and proof ('Some details omitted': the nonvanishing condition is written out here)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-snake-lemma-modules",
+  "def-weil-pbc-regular-sequence"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Algebra, Lemma Tag 0F1T (lemma-regular-sequence-short-exact-sequence), proof; snake lemma Tag 07JW (lemma-snake)"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -41,10 +89,38 @@
    "results": "no declaration about IsWeaklyRegular/IsRegular of the middle term of a short exact sequence; RegularSequence.lean has only map_first_exact_on_four_term_right_exact_of_isSMulRegular_last (line 550)",
    "date": "2026-10-10",
    "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "if r is a nonzerodivisor on M1 and M3 in a short exact sequence 0 -> M1 -> M2 -> M3 -> 0 then r is a nonzerodivisor on M2",
+   "results": "IsSMulRegular.smulShortComplex_shortExact (Mathlib.RingTheory.Regular.Category), RingTheory.Sequence.IsRegular.cons' (Mathlib.RingTheory.Regular.RegularSequence), ModuleCat.free_shortExact, mem_nonZeroDivisors_of_injective, others unrelated",
+   "date": "2026-10-10",
+   "verdict": "no match for the r-term statement"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "IsSMulRegular on the middle term of a short exact sequence of modules from regularity on the outer terms",
+   "results": "isSMulRegular_of_range_eq_ker (Mathlib/RingTheory/Regular/IsSMulRegular.lean:97: f injective, range f = ker g, r regular on M and M'' => r regular on M'), QuotSMulTop.map_first_exact_on_four_term_exact_of_isSMulRegular_last (IsSMulRegular.lean:173), RingTheory.Sequence.map_first_exact_on_four_term_right_exact_of_isSMulRegular_last (RegularSequence.lean:550), IsSMulRegular.smulShortComplex_shortExact",
+   "date": "2026-10-10",
+   "verdict": "no match: isSMulRegular_of_range_eq_ker is the one-element nonzerodivisor clause only (the case r = 1 of the first assertion of (a)); no declaration states the sequence version or the exactness of 0 -> M_1/I M_1 -> M_2/I M_2 -> M_3/I M_3 -> 0"
+  },
+  {
+   "tool": "loogle",
+   "query": "RingTheory.Sequence.IsWeaklyRegular, Function.Injective",
+   "results": "none",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rn 'theorem\\|lemma' Mathlib/RingTheory/Regular/RegularSequence.lean | grep -i 'exact\\|ses\\|of_\\|iff'; grep -rn exact/injective lemmas in Mathlib/RingTheory/Regular/IsSMulRegular.lean and Category.lean (under ~/weil-conjectures-slopmaster2/.lake/packages/mathlib)",
+   "results": "RegularSequence.lean: isWeaklyRegular_iff_Fin (139), isWeaklyRegular_cons_iff (228), isRegular_cons_iff (247), isWeaklyRegular_append_iff (367), map_first_exact_on_four_term_right_exact_of_isSMulRegular_last (550, read: needs rs weakly regular on a fourth term M_4 and gives only exactness in the middle); IsSMulRegular.lean: isSMulRegular_of_range_eq_ker (97), QuotSMulTop.map_first_exact_on_four_term_exact_of_isSMulRegular_last (173); Category.lean: smulShortComplex_shortExact (51)",
+   "date": "2026-10-10",
+   "verdict": "no match (one-element pieces only; the item is not a leaf)"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "worker",
@@ -64,5 +140,17 @@
   }
  },
  "chapter": "sec-proper-base-change",
- "unit": "sk-thm-p1"
+ "unit": "sk-thm-p1",
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "lem-weil-pbc-regular-sequence-short-exact-sequence",
+  "worker": "stage1",
+  "summary": "Checked the statement against Stacks 0F1T (algebra.tex, lemma-regular-sequence-short-exact-sequence) and its citer lem-weil-pbc-regular-sequence-powers (Step 4 uses part (a) with the weak-regularity hypothesis only, which part (a) gives). Statement kept. Wrote the proof following Stacks' proof, whose 'induction on r ... Some details omitted' is written out: Step 1 (elementary) the induced maps alpha_I, beta_I and the identification of the cokernel of f_i on N/I_{i-1}N with N/I_iN; Step 2 the inductive claim P_i with base P_0; Step 3 the inductive step by the snake lemma for modules [lem-weil-pbc-snake-lemma-modules, a Mathlib leaf of unit sk-thm-p1] applied to multiplication by f_i on the exact row of P_{i-1}; Step 4 (elementary) part (b), including the nonvanishing condition (2) of [def-weil-pbc-regular-sequence], which Stacks leaves among the omitted details, from the surjection M_2/I_rM_2 -> M_3/I_rM_3. No new node. Repeated the Mathlib search with LeanSearch, LeanFinder, Loogle and grep: only one-element pieces exist (isSMulRegular_of_range_eq_ker, QuotSMulTop.map_first_exact_on_four_term_exact_of_isSMulRegular_last), no leaf."
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "result": "accepted",
+  "note": "4 steps filling the 'details omitted' of Stacks 0F1T: the induced maps and the identification of coker(f_i on N/I_{i-1}N) with N/I_iN (elementary); the inductive claim P_i stated with base P_0; the inductive step by the snake lemma leaf (rows exact, f_i nonzerodivisor on the outer terms gives ker = 0 in the middle and a short exact sequence of cokernels, the injectivity/surjectivity clauses of the leaf used); part (b) from (a) and the surjection onto M_3/I_rM_3 != 0. Hypotheses of the snake node checked against step 3. Citer regular-sequence-powers uses only (a)."
+ }
 }
