@@ -24,9 +24,71 @@
   "def-kun-topological-krull-dimension",
   "def-weil-closed-points"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Give $Z$ its reduced induced closed subscheme structure $Z_{\\mathrm{red}}$ [lem-weil-pbc-reduced-induced-closed-subscheme]; composing the closed immersion [def-weil-closed-immersion] with $X\\to\\operatorname{Spec}k$ shows that $Z_{\\mathrm{red}}$ is locally of finite type over $k$, and it is irreducible. Choose an affine open $U=\\operatorname{Spec}R\\subseteq X$ meeting $Z$, and put $V=U\\cap Z$. By part (1) of [lem-weil-pbc-reduced-induced-closed-subscheme], the open subscheme $V$ of $Z_{\\mathrm{red}}$ is $\\operatorname{Spec}A$ with $A=R/I$, where $I$ is the radical ideal with $V(I)=V$; $A$ is a finitely generated $k$-algebra [def-weil-pbc-finite-type-algebra], and since $V$ is irreducible the radical ideal $I$ is prime, so $A$ is a domain. Applying [lem-sc-dimension-locally-algebraic] to $Z_{\\mathrm{red}}$ shows that $V$ has positive dimension, so $A$ has positive Krull dimension [def-weil-pbc-krull-dimension-ring]. The closed points of $V$ correspond to maximal ideals of $A$, whose inverse images in $R$ are maximal ideals.",
+   "uses": [
+    "lem-sc-dimension-locally-algebraic",
+    "def-weil-finite-type-morphism",
+    "def-weil-irreducible-components",
+    "def-weil-affine-spectrum",
+    "def-weil-closed-immersion",
+    "def-kun-topological-krull-dimension",
+    "lem-weil-pbc-reduced-induced-closed-subscheme",
+    "def-weil-pbc-finite-type-algebra",
+    "def-weil-pbc-krull-dimension-ring"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 0A21 (lemma-dimension-locally-algebraic), part (3), reduction to a nonempty affine open of the irreducible locally algebraic closed subset"
+   }
+  },
+  {
+   "text": "By [lem-sc-fg-domain-positive-dimension-infinite-maximals], the positive-dimensional finitely generated domain $A$ has infinitely many maximal ideals. These give infinitely many closed points of $V$, and their inverse images are closed points of the affine open $U$.",
+   "uses": [
+    "lem-sc-fg-domain-positive-dimension-infinite-maximals",
+    "def-weil-affine-spectrum",
+    "def-weil-closed-points"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "the affine positive-dimension argument following Algebra Lemma 00G1"
+   }
+  },
+  {
+   "text": "Each inverse-image point is a closed point of $U$, so it is a closed point of $X$ by [lem-sc-affine-maximal-points-closed-in-lft-scheme]. Since the points lie in $V\\subseteq Z$, they are infinitely many closed points of $X$ contained in $Z$.",
+   "uses": [
+    "lem-sc-affine-maximal-points-closed-in-lft-scheme",
+    "def-weil-closed-points"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 0478 (lemma-locally-finite-type-Jacobson)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sc-dimension-locally-algebraic",
+  "def-weil-finite-type-morphism",
+  "def-weil-irreducible-components",
+  "def-weil-affine-spectrum",
+  "def-weil-closed-immersion",
+  "def-kun-topological-krull-dimension",
+  "lem-sc-fg-domain-positive-dimension-infinite-maximals",
+  "def-weil-closed-points",
+  "lem-sc-affine-maximal-points-closed-in-lft-scheme",
+  "lem-weil-pbc-reduced-induced-closed-subscheme",
+  "def-weil-pbc-finite-type-algebra",
+  "def-weil-pbc-krull-dimension-ring"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/varieties.tex",
+  "place": "Tags 0478 and 0A21, with the affine positive-dimension argument in Algebra"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -51,12 +113,38 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-sc-finite-type-nonclosed-closure-closed-points",
   "by": "worker",
   "date": "2026-10-10"
  },
  "chapter": "sec-picard-framework",
- "unit": "sk-thm-picard-rr"
+ "unit": "sk-thm-picard-rr",
+ "split_report": {
+  "date": "2026-10-11",
+  "item": "lem-sc-positive-dimensional-locally-algebraic-closed-points",
+  "worker": "stage1",
+  "summary": "Split the positive-dimensional closed-subset argument into the affine reduction, the finitely generated-domain infinitude of maximal ideals, and the Jacobson property transferring affine closed points to ambient locally finite-type schemes. Existing dimension and definition nodes were cited after checking their statements; the two new non-Mathlib facts are statement-only nodes.",
+  "blueprint": "lem-sc-degree-2g1-very-ample, proof third paragraph: point-fibre argument after separation of closed points; positive-dimensional closures have infinitely many closed specializations",
+  "tool_uses": [
+   {
+    "node": "lem-sc-dimension-locally-algebraic",
+    "why": "Its statement supplies equality of the dimension of an irreducible locally finite-type scheme with a nonempty affine open, which is the affine reduction used here."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sc-dimension-locally-algebraic",
+  "lem-weil-pbc-reduced-induced-closed-subscheme",
+  "lem-sc-dimension-locally-algebraic"
+ ],
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-pdc2",
+  "group": "M1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-pdc2 (reviewer sub-agent of L); spot-checked: Source: Stacks Tags 0478 (lemma-locally-finite-type-Jacobson) and 0A21 (lemma-dimension-locally-algebraic) with the Algebra finite-type Jacobson argument (00G1); the statement (k field, X locally of finite type, Z irreducible closed of positive topological dimension => infinitely many closed points of X in Z) agrees hypothesis by hypothesis and does not cite the creating item lem-sc-finite-type-nonclosed-closure-closed-points (no cycle; the audit's demand that the split carry the Jacobson argument is met). Step 1: lem-sc-dimension-locally-algebraic gives dim V = dim Z > 0 for the nonempty open V=U cap Z of Z; step 2: lem-sc-fg-domain-positive-dimension-infinite-maximals (true: f.g. domain with finitely many maximals is Jacobson with zero Jacobson radical, so a field) gives infinitely many maximals, lifted through R->R/I; step 3: lem-sc-affine-maximal-points-closed-in-lft-scheme (true, Jacobson; Mathlib: LocallyOfFiniteType.jacobsonSpace FiniteType.lean:117 + IsOpenEmbedding.preimage_closedPoints JacobsonSpace.lean:127, verified by sed, two declarations so kept unsplit). Small cases: k[t] (A^1) and Spec k. tool_uses lem-sc-dimension-locally-algebraic accepted as generic. FIX more, RETURN less: dag/nodes/sec-picard-framework/lem-sc-positive-dimensional-locally-algebraic-closed-points.json: proof[0].text/uses/proof_deps: step 1 called the coordinate ring of V a domain without fixing a scheme structure on Z (C1, a nonreduced structure gives no domain); now gives Z its reduced induced structure citing lem-weil-pbc-reduced-induced-closed-subscheme (off-unit generic tool, added to tool_uses), A=R/I with I radical and prime since V irreducible, finite type via def-weil-pbc-finite-type-algebra, Krull dimension via def-weil-pbc-krull-dimension-ring. Mathlib searches added by reviewer: lem-sc-fg-domain-positive-dimension-infinite-maximals.json: mathlib_searches: LeanFinder query, no match; lem-sc-affine-maximal-points-closed-in-lft-scheme.json: mathlib_searches: grep JacobsonSpace, no single-declaration match. Blueprint search 'infinitely many closed points': nothing relevant. Start 2026-10-10 16:55:01 UTC, end Sat Oct 10 04:56:17 PM UTC 2026.; 3 file(s) fixed by the reviewer"
+ }
 }
