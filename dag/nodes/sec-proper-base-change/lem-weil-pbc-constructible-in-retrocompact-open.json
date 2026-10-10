@@ -1,7 +1,7 @@
 {
  "id": "lem-weil-pbc-constructible-in-retrocompact-open",
  "kind": "statement",
- "title": "Constructibility is local on a retrocompact open",
+ "title": "A constructible subset of a constructible subset is constructible",
  "statement": "Let X be a topological space with a basis consisting of quasi-compact open subsets. Let E be constructible in X and let F be a subset of E that is constructible in the subspace E [def-weil-constructible-subset]. Then F is constructible in X (Topology Tag `09YJ`).",
  "source": {
   "document": "literature/stacks-project/topology.tex",
@@ -10,9 +10,57 @@
  "stmt_deps": [
   "def-weil-constructible-subset"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "*Retrocompact subspaces inherit a basis of quasi-compact opens.* Let $T\\subseteq X$ be retrocompact in $X$ [def-weil-constructible-subset]. Every open subset of the subspace $T$ is $T\\cap O$ with $O\\subseteq X$ open, and $O$ is a union of quasi-compact opens $B\\subseteq X$ by hypothesis; each $T\\cap B$ is open in $T$ and quasi-compact because $T$ is retrocompact. So the quasi-compact opens of $T$ form a basis of its topology. By [lem-weil-pbc-constructible-is-retrocompact] (Stacks 09YH) every constructible subset of $X$ is retrocompact, so this applies to $E$ and to every constructible subset of $X$.",
+   "uses": [
+    "def-weil-constructible-subset",
+    "lem-weil-pbc-constructible-is-retrocompact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/topology.tex",
+    "place": "Topology, Lemma Tag 09YJ (lemma-constructible-in-constructible, line 2763), proof, first paragraph"
+   }
+  },
+  {
+   "text": "*Reduction to $E=U\\cap(X\\setminus V)$.* By [def-weil-constructible-subset] write $E=E_1\\cup\\dots\\cup E_n$ with $E_i=U_i\\cap(X\\setminus V_i)$, where $U_i,V_i\\subseteq X$ are open and retrocompact; each $E_i$ is constructible in $X$. By [lem-weil-pbc-constructible-intersection-in-constructible] (Stacks 09YI) applied in $X$ to $E$ and $E_i$, the set $E_i=E\\cap E_i$ is constructible in the subspace $E$. The space $E$ has a basis of quasi-compact opens (step 1), and $F$, $E_i$ are constructible in $E$; so the same lemma applied in the space $E$ shows that $F\\cap E_i$ is constructible in $E_i$ (the topology $E_i$ inherits from $E$ is the one it inherits from $X$). Since $F=\\bigcup_i(F\\cap E_i)$ and a finite union of constructible subsets of $X$ is constructible ([def-weil-constructible-subset], Stacks 005H), it suffices to prove that each $F\\cap E_i\\subseteq E_i$ is constructible in $X$, i.e. to prove the lemma when $E=U\\cap(X\\setminus V)$ with $U,V\\subseteq X$ retrocompact open.",
+   "uses": [
+    "def-weil-constructible-subset",
+    "lem-weil-pbc-constructible-intersection-in-constructible"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/topology.tex",
+    "place": "Topology, Lemma Tag 09YJ (lemma-constructible-in-constructible, line 2763), proof, second paragraph (reduction)"
+   }
+  },
+  {
+   "text": "*The case $E=U\\cap(X\\setminus V)$.* Factor $E\\subseteq U\\subseteq X$. The set $E=U\\setminus(U\\cap V)$ is closed in the subspace $U$, and its complement $U\\cap V$ in $U$ is retrocompact in $U$: a quasi-compact open $W$ of $U$ is a quasi-compact open of $X$ since $U$ is open, and $(U\\cap V)\\cap W=V\\cap W$ is quasi-compact because $V$ is retrocompact in $X$. Hence by [lem-weil-pbc-constructible-image-closed-retrocompact-complement] (Stacks 09YG, with $Y=U$, $Z=E$, $G=F$) the set $F$ is constructible in $U$. As $U$ is open and retrocompact in $X$, [lem-weil-pbc-constructible-image-retrocompact-open] (Stacks 09YD, with $G=F$) shows that $F$ is constructible in $X$.",
+   "uses": [
+    "def-weil-constructible-subset",
+    "lem-weil-pbc-constructible-image-closed-retrocompact-complement",
+    "lem-weil-pbc-constructible-image-retrocompact-open"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/topology.tex",
+    "place": "Topology, Lemma Tag 09YJ (lemma-constructible-in-constructible, line 2763), proof, last paragraph (composition E -> U -> X)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-constructible-subset",
+  "lem-weil-pbc-constructible-is-retrocompact",
+  "lem-weil-pbc-constructible-intersection-in-constructible",
+  "lem-weil-pbc-constructible-image-closed-retrocompact-complement",
+  "lem-weil-pbc-constructible-image-retrocompact-open"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/topology.tex",
+  "place": "Topology, Lemma Tag 09YJ (Lemma 5.15.12), proof"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -34,10 +82,31 @@
    "results": "The source contains IsRetrocompact and IsConstructible Boolean-subalgebra ingredients, but no locality theorem for an open retrocompact subspace.",
    "date": "2026-10-10",
    "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "E constructible in X, F constructible in the subspace E, then F is constructible in X (space with basis of compact opens)",
+   "results": "Topology.IsConstructible.isLocallyConstructible, PrimeSpectrum.ConstructibleSetData.isConstructible_toSet, Topology.IsConstructible.himp, Topology.IsLocallyConstructible.isConstructible, Topology.IsLocallyConstructible, Topology.IsLocallyConstructible.inter_of_isOpen_isCompact",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "image under Subtype.val of a constructible subset of a constructible subspace is constructible",
+   "results": "AlgebraicGeometry.Scheme.Hom.isConstructible_image, Subtype.range_val_subtype, Subtype.coe_image, Set.mem_image_val_of_mem, AlgebraicGeometry.Scheme.Hom.isLocallyConstructible_image, Set.injOn_subtype_val",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rn 'IsConstructible[^ ]*\\.isRetrocompact\\|09YH\\|09YI\\|09YJ\\|09YF' Mathlib/; reading of Topology/Constructible.lean lines 243-300",
+   "results": "none; only 005I, 005J, 09YE, 09YD, 09YG are present",
+   "date": "2026-10-10",
+   "verdict": "no match"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "worker",
@@ -57,5 +126,17 @@
   }
  },
  "chapter": "sec-proper-base-change",
- "unit": "sk-thm-p1"
+ "unit": "sk-thm-p1",
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "lem-weil-pbc-constructible-in-retrocompact-open",
+  "worker": "stage1",
+  "summary": "Statement checked against Stacks Topology Lemma 09YJ (kept; title corrected from 'Constructibility is local on a retrocompact open', which named another lemma). Proof split in three steps following the Stacks proof: (1) retrocompact, hence constructible (09YH), subsets inherit a basis of quasi-compact opens; (2) reduction to E = U minus V via 09YI applied in X and in E, and finite unions; (3) E closed in U with retrocompact complement U cap V, then 09YG and 09YD. Uses four nodes created for this item by an earlier worker on it (09YH, 09YI unsplit; 09YG, 09YD Mathlib leaves Topology.IsConstructible.image_of_isClosedEmbedding / image_of_isOpenEmbedding), statements and tags verified against topology.tex and tags/tags. Mathlib has no version of 09YJ, 09YI or 09YH (searches recorded)."
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "result": "accepted",
+  "note": "3 steps following Stacks 09YJ: retrocompact subspaces inherit the quasi-compact-open basis (with 09YH), reduction to E = U minus V by 09YI applied in X and in E, then 09YG (closed, retrocompact complement) and 09YD (retrocompact open) leaves. 4 new nodes (two written by the first worker that died, checked by the second): 09YH, 09YI unsplit; 09YG, 09YD Mathlib leaves (Topology/Constructible.lean 276, 264; lines verified by L). Tags verified."
+ }
 }

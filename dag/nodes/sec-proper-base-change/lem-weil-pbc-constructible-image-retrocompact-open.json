@@ -1,0 +1,66 @@
+{
+ "id": "lem-weil-pbc-constructible-image-retrocompact-open",
+ "kind": "statement",
+ "title": "A constructible subset of a retrocompact open is constructible in the ambient space",
+ "statement": "Let $X$ be a topological space, let $U\\subseteq X$ be an open subset that is retrocompact in $X$ [def-weil-constructible-subset] (that is, $U\\cap W$ is quasi-compact for every quasi-compact open $W\\subseteq X$), with the subspace topology, and let $G\\subseteq U$ be a constructible subset of the topological space $U$ [def-weil-constructible-subset]. Then $G$ is a constructible subset of $X$ (Stacks Topology, Lemma 09YD).",
+ "source": {
+  "document": "literature/stacks-project/topology.tex",
+  "place": "Topology, Lemma Tag 09YD (Lemma 5.15.5, lemma-quasi-compact-open-immersion-constructible-image, line 2620)"
+ },
+ "stmt_deps": [
+  "def-weil-constructible-subset"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "image of constructible set under open embedding with retrocompact range is constructible",
+   "results": "Topology.IsConstructible.image_of_isOpenEmbedding, AlgebraicGeometry.Scheme.Hom.isLocallyConstructible_image, Topology.IsConstructible.preimage_of_isOpenEmbedding, IsRetrocompact.isConstructible, AlgebraicGeometry.Scheme.Hom.isConstructible_preimage",
+   "date": "2026-10-10",
+   "verdict": "match: Topology.IsConstructible.image_of_isOpenEmbedding"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "image of a constructible set under an open embedding with retrocompact image is constructible",
+   "results": "Topology.IsConstructible.image_of_isOpenEmbedding, Topology.isConstructible_preimage_iff_of_isOpenEmbedding, Topology.IsConstructible.preimage_of_isOpenEmbedding, Topology.IsLocallyConstructible.preimage_of_isOpenEmbedding (Mathlib.Topology.Constructible)",
+   "date": "2026-10-10",
+   "verdict": "match: Topology.IsConstructible.image_of_isOpenEmbedding"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rn 'stacks 09YD' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib; sed -n 263,273p ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/Topology/Constructible.lean",
+   "results": "Topology/Constructible.lean:263 @[stacks 09YD], line 264 lemma IsConstructible.image_of_isOpenEmbedding (hfopen : IsOpenEmbedding f) (hfcomp : IsRetrocompact (range f)) (hs : IsConstructible s) : IsConstructible (f '' s)",
+   "date": "2026-10-10",
+   "verdict": "match"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "Topology.IsConstructible.image_of_isOpenEmbedding",
+  "file": "Mathlib/Topology/Constructible.lean",
+  "line": 264,
+  "how": "specializes in one line: apply it to f = Subtype.val : U → X, an open embedding by IsOpen.isOpenEmbedding_subtypeVal, whose range U is retrocompact by hypothesis (Subtype.range_coe); f '' G is G regarded as a subset of X. IsRetrocompact (line 52) and IsConstructible (line 178) are the node's notions [def-weil-constructible-subset]. Tagged @[stacks 09YD]. Source read 2026-10-10."
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-constructible-in-retrocompact-open",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1"
+}
