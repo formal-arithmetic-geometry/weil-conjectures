@@ -10,9 +10,59 @@
  "stmt_deps": [
   "def-pc-field-extension"
  ],
- "proof": [],
+ "proof": [
+  {
+   "text": "The forward implication is immediate: if $0\\ne v\\in V\\cap k^{\\oplus n}$, then $v\\in V\\cap K_\\alpha^{\\oplus n}$ for each $\\alpha$, since $k\\subseteq K_\\alpha$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Lemma Tag 07P3 (lemma-intersection-subfields-subspace), proof, forward implication"
+   }
+  },
+  {
+   "text": "For the converse, induct on $n$. If $n=1$, a $K$-subspace $V\\subseteq K$ is either $0$ or $K$: a nonzero $x\\in V$ gives $1=x^{-1}x\\in V$. Since $\\mathcal A$ is nonempty and $V\\cap K_\\alpha\\ne0$ for every $\\alpha$, $V=K$, whence $1\\in V\\cap k$. Now suppose $n\\ge2$ and the converse holds in dimension $n-1$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Lemma Tag 07P3 (lemma-intersection-subfields-subspace), proof, induction and case n = 1"
+   }
+  },
+  {
+   "text": "Identify the tail subspace $W=\\{(x_2,\\ldots,x_n)\\in K^{\\oplus(n-1)}:(0,x_2,\\ldots,x_n)\\in V\\}$. It is $K$-linear. If $W\\cap k^{\\oplus(n-1)}\\ne0$, adjoining a leading zero proves $V\\cap k^{\\oplus n}\\ne0$. Otherwise the induction hypothesis, applied to $W$ and contraposed, gives an $\\alpha\\in\\mathcal A$ for which $W\\cap K_\\alpha^{\\oplus(n-1)}=0$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Lemma Tag 07P3 (lemma-intersection-subfields-subspace), proof, induction applied to the zero-first-coordinate subspace"
+   }
+  },
+  {
+   "text": "Choose $0\\ne w=(w_1,\\ldots,w_n)\\in V\\cap K_\\alpha^{\\oplus n}$. Then $w_1\\ne0$, since otherwise its tail would be a nonzero element of $W\\cap K_\\alpha^{\\oplus(n-1)}$. Dividing by $w_1\\in K_\\alpha$ gives $v=(1,x_2,\\ldots,x_n)\\in V\\cap K_\\alpha^{\\oplus n}$. Every $z=(z_1,\\ldots,z_n)\\in V\\cap K_\\alpha^{\\oplus n}$ satisfies $z-z_1v\\in V\\cap(0\\oplus K_\\alpha^{\\oplus(n-1)})=0$; thus $V\\cap K_\\alpha^{\\oplus n}=K_\\alpha v$. If $K_\\beta\\subseteq K_\\alpha$, choose $0\\ne z\\in V\\cap K_\\beta^{\\oplus n}$. The preceding equality gives $z=z_1v$ with $z_1\\ne0$; hence $v=z_1^{-1}z\\in K_\\beta^{\\oplus n}$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Lemma Tag 07P3 (lemma-intersection-subfields-subspace), proof, normalized vector and one-dimensional intersection"
+   }
+  },
+  {
+   "text": "Each coordinate $x_i$ of $v$ therefore belongs to every $K_\\beta$ contained in $K_\\alpha$. Given any $\\gamma\\in\\mathcal A$, condition (3) supplies $\\delta$ with $K_\\delta\\subseteq K_\\alpha\\cap K_\\gamma$; hence $x_i\\in K_\\delta\\subseteq K_\\gamma$. Condition (2) yields $x_i\\in\\bigcap_\\gamma K_\\gamma=k$. The leading coordinate $1$ lies in $k$ too, so $0\\ne v\\in V\\cap k^{\\oplus n}$, completing the induction.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Lemma Tag 07P3 (lemma-intersection-subfields-subspace), proof, intersection of the cofinal subfamily"
+   }
+  }
+ ],
  "proof_deps": [],
- "proof_origin": null,
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Lemma Tag 07P3 (lemma-intersection-subfields-subspace), proof"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -44,7 +94,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "worker",
@@ -65,5 +115,17 @@
  },
  "chapter": "sec-proper-base-change",
  "unit": "sk-thm-p1",
- "reviewed": "Reviewed by L 2026-10-10 (statement): More on Algebra 07P3 with the index set required nonempty (the source omits this; the 'if' direction fails for an empty family). Unsplit."
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "group": "C1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed by the lead of C1; spot-checked by L: 07P3 induction checked step by step: tail subspace W, contrapositive induction hypothesis, normalization v = w/w_1 with V cap K_alpha^n = K_alpha v, descent to K_beta subset K_alpha, cofinality (3) and intersection (2); nonempty index set used in the n = 1 case"
+ },
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "lem-weil-pbc-intersection-subfields-subspace",
+  "worker": "stage1",
+  "summary": "Checked the statement and induction against Stacks More on Algebra, Lemma Tag 07P3. The nonempty index hypothesis already corrects the source's empty-family edge case. Wrote the forward implication and the converse induction explicitly: the tail subspace, normalized vector, one-dimensional intersection over K_alpha, and cofinal intersection via directedness. No new nodes or proof dependencies are needed."
+ }
 }
