@@ -2,7 +2,7 @@
 
 924 items; claim with `tools/claim.py next <group> [--stage N]`.
 
-## Stage 1: nodes to split (609)
+## Stage 1: nodes to split (608)
 
 | node | distance to a target | Lean state on the done branch |
 |---|---|---|
@@ -24,7 +24,6 @@
 | `lem-weil-pbc-smooth-fibre-regular-local` | 1012 | none |
 | `lem-weil-pbc-smooth-localization-conormal-split` | 1012 | none |
 | `lem-weil-pbc-smooth-over-field-dimension-differentials` | 1012 | none |
-| `lem-weil-pbc-affine-basic-set-difference` | 1013 | none |
 | `lem-weil-pbc-quasi-finite-ring-map-integral-closure-open` | 1013 | none |
 | `lem-weil-pbc-regular-local-mcm-free` | 1013 | none |
 | `lem-weil-pbc-regular-local-separable-residue-smooth` | 1013 | none |
@@ -616,7 +615,7 @@
 | `def-exc-jacobian-presentation` | - | none |
 | `def-nagata-rees-algebra` | - | none |
 
-## Stage 2: nodes to state (315)
+## Stage 2: nodes to state (316)
 
 | node | distance to Mathlib | kind |
 |---|---|---|
@@ -645,6 +644,7 @@
 | `lem-sc-dim0-finite` | 1 | state |
 | `lem-weil-pbc-adic-completion-noetherian` | 1 | state |
 | `lem-weil-pbc-adjunction-lifts-group-ring-objects` | 1 | state |
+| `lem-weil-pbc-affine-basic-set-difference` | 1 | state |
 | `lem-weil-pbc-affine-basic-sets-disjoint-refinement` | 1 | state |
 | `lem-weil-pbc-algebra-colimit-fp-algebras-over-it` | 1 | state |
 | `lem-weil-pbc-annihilator-element-flat-base-change` | 1 | state |
@@ -936,7 +936,7 @@
 | `lem-weil-pbc-p1-field-dimension-one` | 4 | state |
 | `lem-weil-pbc-projective-space-zero-isomorphism` | 4 | state |
 
-Not open yet: 621 nodes that wait for stage 1, 594 nodes that wait for a statement dependency.
+Not open yet: 620 nodes that wait for stage 1, 594 nodes that wait for a statement dependency.
 
 ## Stage 3: modules to prove (0)
 
