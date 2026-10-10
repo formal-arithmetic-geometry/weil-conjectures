@@ -27,9 +27,42 @@
   "def-sc-invertible-module",
   "def-pur-sheaf-tensor-product"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "The zero tensor power is $\\mathcal O_Y$, hence is locally free of rank one and invertible by [def-sc-invertible-module]. The dual $\\mathcal L^\\vee$ is invertible by [lem-pc-tensor-dual-invertible]. For $n>0$, induction on $n$ using the tensor-product clause of that same lemma shows that $\\mathcal L^{\\otimes n}$ is invertible. For $n<0$, apply the same induction to $(\\mathcal L^\\vee)^{\\otimes(-n)}$, which is the specified negative power. Thus every integer tensor power in the statement is invertible.",
+   "uses": [
+    "def-sc-invertible-module",
+    "lem-pc-tensor-dual-invertible"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-picard-framework/sk-thm-picard-hilb-curves/lem-pc-tensor-dual-invertible.md",
+    "place": "lemma lem-pc-tensor-dual-invertible, statement; induction on the tensor exponent"
+   }
+  },
+  {
+   "text": "For each integer $n$, Step 1 makes $\\mathcal L^{\\otimes n}$ invertible, hence quasi-coherent by [def-sc-invertible-module]. Apply the quasi-coherent tensor-product clause of [lem-weil-pbc-quasi-coherent-tensor-product-affine-sections] to $\\mathcal F$ and $\\mathcal L^{\\otimes n}$ on $Y$. Its conclusion is precisely that $\\mathcal F\\otimes_{\\mathcal O_Y}\\mathcal L^{\\otimes n}$ is quasi-coherent.",
+   "uses": [
+    "def-sc-invertible-module",
+    "lem-weil-pbc-quasi-coherent-tensor-product-affine-sections"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/modules.tex",
+    "place": "Modules, Lemma 01CE (lemma-tensor-product-permanence), item (3); Schemes, Section 01LA, item (8)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sc-invertible-module",
+  "lem-pc-tensor-dual-invertible",
+  "lem-weil-pbc-quasi-coherent-tensor-product-affine-sections"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/modules.tex",
+  "place": "Lemma 01CE item (3), assembled with the dual and tensor clauses of lem-pc-tensor-dual-invertible"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -54,10 +87,39 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-sc-invert-s-cohomology-affine-case",
   "by": "worker",
   "date": "2026-10-10"
+ },
+ "split_report": {
+  "date": "2026-10-11",
+  "item": "lem-sc-invertible-tensor-qcoherent",
+  "worker": "stage1",
+  "summary": "Checked the integer-power statement against the affine paragraph of Stacks 09MR and the tensor permanence result 01CE. Dual and tensor closure give invertibility for every power; the existing general quasi-coherent tensor theorem gives the conclusion. No new node is needed.",
+  "blueprint": "Realizes the quasi-coherence needed in the affine-open paragraph of Stacks 09MR, recorded in the blueprint ancestor lem-sc-pic-proper-ntorsion via lem-sc-invert-s-cohomology and its affine case.",
+  "tool_uses": [
+   {
+    "node": "lem-pc-tensor-dual-invertible",
+    "why": "Its dual and tensor closure clauses provide invertibility of every integer tensor power; no node of this unit states those closure facts."
+   },
+   {
+    "node": "lem-weil-pbc-quasi-coherent-tensor-product-affine-sections",
+    "why": "Its quasi-coherent tensor-product clause applies to the power from Step 1 and the given module; no node of this unit states the general tensor theorem."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pc-tensor-dual-invertible",
+  "lem-weil-pbc-quasi-coherent-tensor-product-affine-sections"
+ ],
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-itq",
+  "group": "H1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-itq (reviewer sub-agent of L); spot-checked: Read the whole split (only the item's file and report changed; statement and maintainer fields unchanged, 0 new nodes). Source: Stacks 01CE (modules-lemma-tensor-product-permanence) item (3) read in modules.tex: F, G quasi-coherent on a ringed space gives F tensor G quasi-coherent, no further hypothesis; item statement (scheme, F quasi-coherent, L invertible, n in Z, negative powers via the dual) unchanged. Step 1: def-sc-invertible-module (invertible = quasi-coherent locally free rank one, so O_Y is invertible) and lem-pc-tensor-dual-invertible (dual and tensor product of invertibles invertible, any scheme) carry the induction for n>=0 and for n<0 on L^vee; checked. Step 2: def-sc-invertible-module gives L^n quasi-coherent; lem-weil-pbc-quasi-coherent-tensor-product-affine-sections states F tensor G quasi-coherent for any scheme and quasi-coherent F, G, no finiteness or separation; carries the step. Tool uses accepted as generic black boxes (C8): lem-pc-tensor-dual-invertible, lem-weil-pbc-quasi-coherent-tensor-product-affine-sections; no node of unit sk-thm-curveestimate states either. B10/attachment: pinned Mathlib has no IsQuasicoherent tensor declaration (Mathlib AlgebraicGeometry only Modules/Tilde mentions IsQuasicoherent); slopmaster2 Scheme.Modules.isQuasicoherent_tensorObj (ProjectionFormula.lean:156) treats a single invertible factor and the project has natural tensorPow only, no integer powers, so no exact attachment. Small cases n=0 (F tensor O_Y = F), n=1, n=-1 checked. Start Sat Oct 10 04:43:03 PM UTC 2026, end Sat Oct 10 04:43:24 PM UTC 2026."
  }
 }
